@@ -91,8 +91,7 @@ L.Geocoder = L.Class.extend({
 			if (place.address.state) {
 				return_location.region = place.address.state;
 			}
-			//un jour peut-être…
-			/*
+			/* un jour peut-être...
 			if (place.address.county) {
 				return_location.departement = place.address.county;
 			}
@@ -111,17 +110,15 @@ L.Geocoder = L.Class.extend({
 			}
 			if (place.address.road) {
 				street_components.push(place.address.road);
-			}else if(place.address.pedestrian){
+			} else if (place.address.pedestrian) {
 				street_components.push(place.address.pedestrian);
 			}
 			if (place.address.house_number) {
 				street_components.unshift(place.address.house_number);
 			}
-			
 			if (return_location.street === '' && street_components.length > 0) {
 				return_location.street = street_components.join(' ');
 			}
-			
 			return_location.point = new L.LatLng(place.lat, place.lon);
 		}
 		this._user_callback(return_location);
