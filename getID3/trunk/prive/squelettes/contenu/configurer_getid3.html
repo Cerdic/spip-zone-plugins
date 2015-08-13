@@ -6,20 +6,24 @@
 	#SET{modifs,#VAL{modifs}|_request}
 	<div class="formulaire_spip">
 		<p class="reponse_formulaire reponse_formulaire_ok">[(#GET{modifs}|singulier_ou_pluriel{<:getid3:message_cover_defaut_modifiee:>,<:getid3:message_cover_defaut_modifiees:>})]</p>
+		[(#GET{modifs}|non)
+		<div class="boutons">
+			[(#BOUTON_ACTION{<:getid3:bouton_appliquer_cover_defaut:>,[(#URL_ACTION_AUTEUR{getid3_appliquer_cover_defaut,'',#SELF})],'',<:getid3:message_validation_appliquer_cover:>})]
+		</div>]
 	</div>]
-	[(#GET{modifs}|non)
-	[(#BOUTON_ACTION{<:getid3:bouton_appliquer_cover_defaut:>,[(#URL_ACTION_AUTEUR{getid3_appliquer_cover_defaut,'',#SELF})],'',<:getid3:message_validation_appliquer_cover:>})]]
 ]
 	
 [(#CONFIG{getid3_casse}|=={oui}|oui)
 <div class="formulaire_spip">
-	<p class="reponse_formulaire_erreur"><:getid3:erreur_logiciels_indisponibles:></p>
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:getid3:erreur_logiciels_indisponibles:></p>
 	<p><:getid3:erreur_formats_ecriture_impossible:></p>
 	<ul>
 	[(#CONFIG{getid3_vorbiscomment_casse}|=={oui}|oui)<li>.ogg (<:getid3:erreur_necessite{soft=vorbiscomment}:>)</li>]
 	[(#CONFIG{getid3_metaflac_casse}|=={oui}|oui)<li>.flac (<:getid3:erreur_necessite{soft=metaflac}:>)</li>]
 	</ul>
-	[(#BOUTON_ACTION{<:getid3:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{getid3_verifier_binaires,1,#SELF}})]
+	<div class="boutons">
+		[(#BOUTON_ACTION{<:getid3:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{getid3_verifier_binaires,1,#SELF}})]
+	</div>
 </div>]
 
 <div class="ajax">
