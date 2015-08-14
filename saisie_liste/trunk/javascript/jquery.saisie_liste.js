@@ -56,6 +56,7 @@ $.fn.saisieListe = function( options ) {
             if (typeof(callback === 'function')) {
                 callback.call(self, event, ui);
             }
+            self.trigger('change');
         };
     }
 
