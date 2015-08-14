@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.27.1"
+	version="4.28.0"
 	schema="2.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -20,9 +20,10 @@
 	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
-	<copyright>2011-2014</copyright>
-	<licence>GPL v3</licence>
+	<credit lien="http://wiki.openstreetmap.org/wiki/Nominatim">Nominatim</credit>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
+	<copyright>2011-2015</copyright>
+	<licence>GPL v3</licence>
 
 	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />

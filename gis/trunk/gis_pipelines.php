@@ -91,9 +91,9 @@ function gis_post_edition($flux){
 		AND ($document = sql_fetsel("*","spip_documents","id_document=".intval($flux['args']['id_objet'])))
 		AND (in_array(table_objet_sql('document'), lire_config('gis/gis_objets', array())))
 	) {
-		if(in_array($document['extension'],array('jpg','kml','kmz'))){
+		if (in_array($document['extension'],array('jpg','kml','kmz'))) {
 			$config = @unserialize($GLOBALS['meta']['gis']);
-			if(!is_array($config))
+			if (!is_array($config))
 				$config = array();
 			include_spip('inc/documents');
 			$fichier = get_spip_doc($document['fichier']);
@@ -102,72 +102,63 @@ function gis_post_edition($flux){
 		if ($document['extension'] == 'jpg') {
 			// on recupere les coords definies dans les exif du document s'il y en a
 			if (function_exists('exif_read_data') AND $exifs =  @exif_read_data($fichier,'GPS')) {
-				if(!function_exists('dms_to_dec'))
+				if (!function_exists('dms_to_dec'))
 					include_spip('gis_fonctions');
 				spip_log("GIS EXIFS : Récuperation des coordonnees du fichier $fichier","gis");
 				
 				$LatDeg = explode("/",$exifs["GPSLatitude"][0]);
-				if(is_numeric($LatDeg[1]) > 0)
+				if (is_numeric($LatDeg[1]) > 0)
 					$intLatDeg = $LatDeg[0]/$LatDeg[1];
 
 				$LatMin = explode("/",$exifs["GPSLatitude"][1]);
-				if(is_numeric($LatMin[1]) > 0)
+				if (is_numeric($LatMin[1]) > 0)
 					$intLatMin = $LatMin[0]/$LatMin[1];
 
 				$LatSec = explode("/",$exifs["GPSLatitude"][2]);
-				if(is_numeric($LatSec[1]) > 0)
+				if (is_numeric($LatSec[1]) > 0)
 					$intLatSec = $LatSec[0]/$LatSec[1];
 
 				$LongDeg = explode("/",$exifs["GPSLongitude"][0]);
-				if(is_numeric($LongDeg[1]) > 0)
+				if (is_numeric($LongDeg[1]) > 0)
 					$intLongDeg = $LongDeg[0]/$LongDeg[1];
 
 				$LongMin = explode("/",$exifs["GPSLongitude"][1]);
-				if(is_numeric($LongMin[1]) > 0)
+				if (is_numeric($LongMin[1]) > 0)
 					$intLongMin = $LongMin[0]/$LongMin[1];
 
 				$LongSec = explode("/",$exifs["GPSLongitude"][2]);
-				if(is_numeric($LongSec[1]) > 0)
+				if (is_numeric($LongSec[1]) > 0)
 					$intLongSec = $LongSec[0]/$LongSec[1];
 
 				// round to 5 = approximately 1 meter accuracy
-				if(is_numeric($intLatDeg) && is_numeric($intLatMin) && is_numeric($intLatSec))
+				if (is_numeric($intLatDeg) && is_numeric($intLatMin) && is_numeric($intLatSec))
 					$latitude = round(dms_to_dec($exifs["GPSLatitudeRef"],
 						$intLatDeg,$intLatMin,$intLatSec),5);
 
-				if(is_numeric($intLongDeg) && is_numeric($intLongMin) && is_numeric($intLongSec))
+				if (is_numeric($intLongDeg) && is_numeric($intLongMin) && is_numeric($intLongSec))
 					$longitude =  round(dms_to_dec($exifs["GPSLongitudeRef"],
 						$intLongDeg,$intLongMin,$intLongSec), 5);
-				if($config['geocoder'] == 'on'){
-					include_spip('inc/xml');
-					$url_geocoder = 'http://maps.googleapis.com/maps/api/geocode/xml?latlng='.urlencode($latitude).','.urlencode($longitude).'&sensor=true';
-					$geocoder = spip_xml_load($url_geocoder);
-					spip_xml_match_nodes(',result,',$geocoder,$matches_adress);
-					if(is_array($matches_adress['result'])){
-						foreach($matches_adress['result'] as $component){
-							if(in_array('country',$component['type'])){
-								$pays = $component['address_component'][0]['long_name'][0];
-								$code_pays = $component['address_component'][0]['short_name'][0];
-							}
-							if(in_array('administrative_area_level_1',$component['type'])){
-								$region = $component['address_component'][0]['long_name'][0];
-							}
-							if(in_array('administrative_area_level_2',$component['type'])){
-								$departement = $component['address_component'][0]['long_name'][0];
-							}
-							if(in_array('locality',$component['type'])){
-								$ville = $component['address_component'][0]['long_name'][0];
-							}
-							if(in_array('postal_code',$component['type'])){
-								$code_postal = $component['address_component'][0]['long_name'][0];
-							}
-							if(in_array('route',$component['type'])){
-								$adresse = $component['address_component'][0]['long_name'][0];
-							}
+				if ($config['geocoder'] == 'on') {
+					include_spip('inc/distant');
+					$url_geocoder = 'http://nominatim.openstreetmap.org/reverse/?format=xml&addressdetails=1&accept-language='.urlencode($GLOBALS['meta']['langue_site']).'&lat='.urlencode($latitude).'&lon='.urlencode($longitude);
+					$json = recuperer_page($url_geocoder);
+					$geocoder = json_decode($json,true);
+					if (is_array($geocoder)) {
+						$pays = $geocoder['address']['country'];
+						$code_pays = $geocoder['address']['country_code'];
+						$region = $geocoder['address']['state'];
+						if ($geocoder['address']['city']) {
+							$ville = $geocoder['address']['city'];
+						} else if ($geocoder['address']['town']) {
+							$ville = $geocoder['address']['town'];
+						} else if ($geocoder['address']['village']) {
+							$ville = $geocoder['address']['village'];
 						}
+						$code_postal = $geocoder['address']['postcode'];
+						$adresse = $geocoder['address']['road'];
 					}
 				}
-			}else if(file_exists($fichier)){
+			} else if (file_exists($fichier)) {
 				include_spip("inc/iptc");
 
 				$er = new class_IPTC($fichier);
@@ -175,47 +166,39 @@ function gis_post_edition($flux){
 				$codesiptc = $er->h_codesIptc;
 				$string_recherche = '';
 				
-				if($iptc['city']){
+				if ($iptc['city']) {
 					$string_recherche .= $iptc['city'].', ';
 				}
-				if($iptc['provinceState']){
+				if ($iptc['provinceState']) {
 					$string_recherche .= $iptc['provinceState'].', ';
 				}
-				if($iptc['country']){
+				if ($iptc['country']) {
 					$string_recherche .= $iptc['country'];
 				}
-				if(strlen($string_recherche)){
-					include_spip('inc/xml');
-					$url_geocoder = 'http://maps.googleapis.com/maps/api/geocode/xml?address='.urlencode($string_recherche).'&sensor=true';
-					$geocoder = spip_xml_load($url_geocoder);
-					if(is_array($geocoder)){
-						spip_xml_match_nodes(',location,',$geocoder,$matches);
-						$latitude = $matches['location']['0']['lat']['0'];
-						$longitude = $matches['location']['0']['lng']['0'];
-						if($config['adresse'] == 'on'){
-							spip_xml_match_nodes(',address_component,',$geocoder,$matches_adress);
-							if(is_array($matches_adress['address_component'])){
-								foreach($matches_adress['address_component'] as $component){
-									if(in_array('country',$component['type'])){
-										$pays = $component['long_name'][0];
-										$code_pays = $component['short_name'][0];
-									}
-									if(in_array('administrative_area_level_1',$component['type'])){
-										$region = $component['long_name'][0];
-									}
-									if(in_array('administrative_area_level_2',$component['type'])){
-										$departement = $component['long_name'][0];
-									}
-									if(in_array('locality',$component['type'])){
-										$ville = $component['long_name'][0];
-									}
-								}
+				if (strlen($string_recherche)) {
+					include_spip('inc/distant');
+					$url_geocoder = 'http://nominatim.openstreetmap.org/search/?format=json&addressdetails=1&limit=1&accept-language='.urlencode($GLOBALS['meta']['langue_site']).'&q='.urlencode($string_recherche);
+					$json = recuperer_page($url_geocoder);
+					$geocoder = json_decode($json,true);
+					if (is_array($geocoder[0])) {
+						$latitude = $geocoder[0]['lat'];
+						$longitude = $geocoder[0]['lon'];
+						if ($config['adresse'] == 'on') {
+							$pays = $geocoder[0]['address']['country'];
+							$code_pays = $geocoder[0]['address']['country_code'];
+							$region = $geocoder[0]['address']['state'];
+							if ($geocoder[0]['address']['city']) {
+								$ville = $geocoder[0]['address']['city'];
+							} else if ($geocoder[0]['address']['town']) {
+								$ville = $geocoder[0]['address']['town'];
+							} else if ($geocoder[0]['address']['village']) {
+								$ville = $geocoder[0]['address']['village'];
 							}
 						}
 					}
 				}
 			}
-			if(is_numeric($latitude) && is_numeric($longitude)){
+			if (is_numeric($latitude) && is_numeric($longitude)) {
 				$c = array(
 					'titre' => basename($fichier),
 					'lat'=> $latitude,
@@ -237,12 +220,11 @@ function gis_post_edition($flux){
 				
 				include_spip('action/editer_gis');
 	
-				if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
+				if ($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")) {
 					// Des coordonnées sont déjà définies pour ce document => on les update
 					revisions_gis($id_gis,$c);
 					spip_log("GIS EXIFS : Update des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
-				}
-				else{
+				} else {
 					// Aucune coordonnée n'est définie pour ce document  => on les crées
 					$id_gis = insert_gis();
 					revisions_gis($id_gis,$c);
@@ -250,11 +232,11 @@ function gis_post_edition($flux){
 					spip_log("GIS EXIFS : Création des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
 				}
 			}
-		}elseif(in_array($document['extension'],array('kml','kmz','gpx'))){
+		} elseif (in_array($document['extension'],array('kml','kmz','gpx'))) {
 			$recuperer_info = charger_fonction('kml_infos','inc');
 			$infos = $recuperer_info($document['id_document']);
-			if($infos){
-				if(is_numeric($latitude = $infos['latitude']) && is_numeric($longitude = $infos['longitude'])){
+			if ($infos) {
+				if (is_numeric($latitude = $infos['latitude']) && is_numeric($longitude = $infos['longitude'])) {
 					$c = array(
 						'titre' => $infos['titre'] ? $infos['titre'] : basename($fichier),
 						'descriptif' => $infos['descriptif'],
@@ -265,12 +247,11 @@ function gis_post_edition($flux){
 			
 					include_spip('action/editer_gis');
 		
-					if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
+					if ($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")) {
 						// Des coordonnées sont déjà définies pour ce document => on les update
 						revisions_gis($id_gis,$c);
 						spip_log("GIS EXIFS : Update des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
-					}
-					else{
+					} else {
 						// Aucune coordonnée n'est définie pour ce document  => on les crées
 						$id_gis = insert_gis();
 						revisions_gis($id_gis,$c);
@@ -280,7 +261,7 @@ function gis_post_edition($flux){
 				}
 				unset($infos['longitude']);
 				unset($infos['latitude']);
-				if(count($infos) > 0){
+				if (count($infos) > 0) {
 					include_spip('action/editer_document');
 					document_modifier($id_document, $infos);
 				}
