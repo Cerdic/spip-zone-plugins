@@ -240,8 +240,8 @@ function typoenluminee_pre_typo($texte) {
 	tester_variable('debut_italique', "<i$class_spip>");
 	tester_variable('fin_italique', '</i>');
 	$chercher_raccourcis = array(
-		/* 9 */ 	"/[{]/S",
-		/* 10 */	"/[}]/S",
+		/* 9 */ 	"/(?<![{])[{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+		/* 10 */	"/(?<![}])[}](?![}])/S" // En gros, verification qu'on n'est pas a l'interieur d'un titre
 	);
 	$remplacer_raccourcis = array(
 		/* 9 */ 	$debut_italique,
