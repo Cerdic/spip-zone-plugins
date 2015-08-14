@@ -71,26 +71,29 @@ function clil_declarer_tables_objets_sql($tables) {
 }
 
 function clil_declarer_champs_extras($champs = array()) {
-	
+
 	// étape 1 : récupérer les datas 
 	$datas = array();
-	$res1 = sql_select('id_clil_theme', 'spip_clil_themes', "tag='oui'",'id_secteur','id_clil_theme');
+
+	// Récupérer d'abord les grands thèmes (group by sur id_secteur) pour les optgroups
+	$res1 = sql_select('id_secteur', 'spip_clil_themes', "tag='oui'",'id_secteur','id_clil_theme');
 
 	while ($tab1 = sql_fetch($res1)){
-		$optgroup = $tab1['id_clil_theme'];
+		$optgroup = $tab1['id_secteur'];
 		$libelle_optgroup = sql_getfetsel('libelle', 'spip_clil_themes', "id_clil_theme=$optgroup");
-		$res2 = sql_select('id_clil_theme,libelle', 'spip_clil_themes', "tag='oui' AND id_secteur = $optgroup",'','id_clil_theme');
 
+		// récupérer ensuite les thèmes CLIL sélectionnés
+		$res2 = sql_select('id_clil_theme, id_secteur, libelle', 'spip_clil_themes', "tag='oui' AND id_secteur = $optgroup",'','id_clil_theme');
 		while ($tab2 = sql_fetch($res2)){
-			$id_secteur = $tab2['id_secteur']; 
-			$code = $tab2['id_clil_theme'];
-			$libelle = $tab2['libelle'];
+			$id_clil_theme 	= $tab2['id_clil_theme'];
+			$id_secteur 	= $tab2['id_secteur'];
+			$libelle 		= $tab2['libelle'];
 
 			// un peu de mise en forme
 			if ($id_clil_theme == $id_secteur) 
 				function_exists('mb_strtolower') ? $libelle = ucfirst(mb_strtolower($libelle)) : $libelle = ucfirst(strtolower($libelle));
 
-			$sous_tab[$code] = $libelle;
+			$sous_tab[$id_clil_theme] = $libelle;
 		}
 		$datas[$libelle_optgroup] = $sous_tab;
 		unset($sous_tab);
@@ -112,7 +115,7 @@ function clil_declarer_champs_extras($champs = array()) {
 								  'modifier' => array('auteur' => '0minirezo')), // Seuls les webmestres peuvent modifier
 		),
 	);
-  return $champs;	
+	return $champs;
 }
 
 function clil_affichage_dans_rubriques() {
