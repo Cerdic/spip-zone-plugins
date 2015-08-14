@@ -1,12 +1,12 @@
 <paquet
 	prefix="clil"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.2"
 	etat="experimental"
 	compatibilite="[3.0.18;3.1.*]"
 	logo="prive/themes/spip/images/clil-64.png"
 	documentation=""
-	schema="1.0.2" 
+	schema="1.0.0" 
 >
 	<!--
 		Paquet genere le 2015-07-07 15:59:46
