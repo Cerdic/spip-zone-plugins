@@ -1,8 +1,8 @@
 <paquet
 	prefix="saisie_liste"
 	categorie="outil"
-	version="1.1.0"
-	etat="test"
+	version="1.2.0"
+	etat="stable"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="images/logo_saisie_liste_48.png"
 	documentation="https://github.com/bystrano/saisie_liste"
@@ -11,7 +11,7 @@
 
 	<nom>Saisie liste</nom>
 
-	<auteur>bystrano</auteur>
+	<auteur>Michel Bystranowski</auteur>
 
 	<licence>GNU/GPL</licence>
 
