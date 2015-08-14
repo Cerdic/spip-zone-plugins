@@ -10,7 +10,6 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-defined('_DIR_PLUGINS_AUTO') || define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
 /**
  * Fonction d'installation et de mise à jour du plugin Thèmes CLIL.
@@ -62,16 +61,33 @@ function remplir_table_clil_themes(){
 
 	// sinon....
 	$donnees_clil = find_in_path('data/classification.csv');
+
 	$import_csv = charger_fonction('importer_csv','inc');
 	$csv = $import_csv($donnees_clil);
-	foreach ($csv as $key => $sous_tab) {
+	foreach ($csv as $sous_tab) {
 		for ($i=0; $i < 4; $i++) {
-			if (!empty($sous_tab[0])) $code_parent = $sous_tab[0];
+			if (!empty($sous_tab[0])) {
+				$code_secteur = $sous_tab[0];
+				$code_parent = 0;
+			}
+			if (empty($sous_tab[0]) AND (!empty($sous_tab[1]))) {
+				$code_parent = $code_secteur;
+				$code_tempo = $sous_tab[1];
+			}
+			if (empty($sous_tab[0]) AND (empty($sous_tab[1])) AND (!empty($sous_tab[2])) ) {
+				$code_parent = $code_tempo;
+				$code_tempo2 = $sous_tab[2];
+			}
+			if (empty($sous_tab[0]) AND (empty($sous_tab[1])) AND (empty($sous_tab[2])) ) {
+				$code_parent = $code_tempo2;
+			}
+
 			if (!empty($sous_tab[$i])) {
-				sql_insertq('spip_clil_themes', array('code' => $sous_tab[$i], 'code_parent'=> $code_parent, 'niveau' => $i, 'libelle' =>  $sous_tab[4]));
+				sql_insertq('spip_clil_themes', array('id_clil_theme' => $sous_tab[$i], 'id_parent'=> $code_parent, 'id_secteur' => $code_secteur, 'libelle' =>  $sous_tab[4]));
 			}
 		}
 	}
+	return false;
 }
 
 ?>

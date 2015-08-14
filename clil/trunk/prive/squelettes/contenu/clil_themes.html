@@ -1,8 +1,11 @@
+<h1 class="grostitre"><:clil_theme:titre_clil_themes:></h1>
+
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{configurer_clil}|barre_onglets{configurer_clil_libelles})]
+
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/clil_themes, par=code, env, ajax, sinon=<:clil_theme:info_aucun_clil_theme:>}>
-
-[(#AUTORISER{creer,clil_theme})
-	[(#URL_ECRIRE{clil_theme_edit,new=oui}|icone_verticale{<:clil_theme:icone_creer_clil_theme:>,clil_theme,new,right})]
-]
+<B_themes_par_secteur>
+<BOUCLE_themes_par_secteur(CLIL_THEMES){racine}{par libelle}>
+	<INCLURE{fond=prive/objets/liste/clil_themes, par=id_clil_theme, id_secteur, env, ajax, sinon=<:clil_theme:info_aucun_clil_theme:>}>
+</BOUCLE_themes_par_secteur>

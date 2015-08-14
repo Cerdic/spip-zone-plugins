@@ -1,24 +1,25 @@
 [(#SET{defaut_tri,#ARRAY{
-	id_clil_theme,1,
+	libelle,1,
+	tag,-1,
 	points,-1
 }})]<B_liste_clil_themes>
 #ANCRE_PAGINATION
-<div class="liste-objets clil_themes">
+<div class="liste-objets clil_themes_secteur" id="theme-secteur-#INFO_ID_CLIL_THEME{clil_theme,#ID_SECTEUR}">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{clil_theme:info_1_clil_theme,clil_theme:info_nb_clil_themes}})</strong></caption>]
+	[<caption>[<strong class='caption' style='display:inline-block'>(#INFO_LIBELLE{clil_theme,#ID_SECTEUR})</strong> ] (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{clil_theme:info_1_clil_theme,clil_theme:info_nb_clil_themes}})</caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='' scope='col'>[(#TRI{code,<:clil_theme:champ_code_label:>,ajax})]</th>
-			<th><:clil_theme:champ_libelle_label:></th>
-			<th class='id' scope='col'>[(#TRI{id_clil_theme,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='libelle' scope='col'><:clil_theme:champ_libelle_label:></th>
+			<th class='tag' scope='col'>[(#TRI{tag,<:clil_theme:champ_tag_label:>,ajax})]</th>
+			<th class='code' scope='col'>[(#TRI{id_clil_theme,<:clil_theme:champ_code_label:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_clil_themes(CLIL_THEMES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_clil_themes(CLIL_THEMES){id_secteur}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class=' principale'><a href="[(#ID_CLIL_THEME|generer_url_entite{clil_theme})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CLIL_THEME">[(#CODE)]</a></td>
-			<td>#LIBELLE</td>
-			<td class='id'>[(#AUTORISER{modifier,clil_theme,#ID_CLIL_THEME}|?{
+			<td class='libelle'><a href="[(#URL_ECRIRE{clil_theme,id_clil_theme=#ID_CLIL_THEME})]">#LIBELLE</a></td>
+			<td class='tag'>#TAG</td>
+			<td class='code'>[(#AUTORISER{modifier,clil_theme,#ID_CLIL_THEME}|?{
 				<a href="[(#URL_ECRIRE{clil_theme_edit,id_clil_theme=#ID_CLIL_THEME})]">#ID_CLIL_THEME</a>,
 				#ID_CLIL_THEME
 			})]</td>
@@ -28,6 +29,4 @@
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_clil_themes>[
-<div class="liste-objets clil_themes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_clil_themes>
+</B_liste_clil_themes>

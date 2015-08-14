@@ -8,7 +8,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<p class='explication'>Seuls les thèmes cochés seront affichés dans le selecteur <i>Thème CLIL</i> de vos articles.</p>
+		<p class='explication'>Cocher les thèmes CLIL qui seront affichés dans le selecteur <i>Thème CLIL</i> de vos articles.</p>
 		[(#INCLURE{fond=formulaires/inc-select-themes,env})]
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

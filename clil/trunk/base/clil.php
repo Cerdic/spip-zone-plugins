@@ -45,23 +45,23 @@ function clil_declarer_tables_objets_sql($tables) {
 		'principale' => "oui", 
 		'table_objet_surnoms' => array('cliltheme'), // table_objet('clil_theme') => 'clil_themes' 
 		'field'=> array(
-			"id_clil_theme"      => "bigint(21) NOT NULL",
-			"code"               => "int(11) NOT NULL DEFAULT 0",
-			"code_parent"        => "int(11) NOT NULL DEFAULT 0",
-			"niveau"             => "smallint(6)",
-			"libelle"            => "text NOT NULL DEFAULT ''",
-			"descriptif"         => "text NOT NULL DEFAULT ''",
-			"tag"                => "char(3) NOT NULL DEFAULT 'non'",
-			"maj"                => "TIMESTAMP"
+			"id_clil_theme"	=> "bigint(21) NOT NULL",
+			"id_parent"		=> "int(11) NOT NULL DEFAULT 0",
+			"id_secteur"	=> "int(11) NOT NULL DEFAULT 0",
+			"libelle"		=> "text NOT NULL DEFAULT ''",
+			"descriptif"	=> "text NOT NULL DEFAULT ''",
+			"tag"			=> "char(3) NOT NULL DEFAULT 'non'",
+			"maj"			=> "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_clil_theme",
+			"PRIMARY KEY"	=> "id_clil_theme",
+			"KEY id_parent"	=> "id_parent"
 		),
 		'titre' => "Libelle AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('code', 'niveau', 'libelle', 'descriptif', 'tag'),
+		'champs_editables'  => array('libelle', 'descriptif', 'tag'),
 		'champs_versionnes' => array(),
-		'rechercher_champs' => array("code" => 4, "libelle" => 6),
+		'rechercher_champs' => array("id_clil_theme" => 4, "libelle" => 6),
 		'tables_jointures'  => array(),
 		
 
@@ -72,15 +72,34 @@ function clil_declarer_tables_objets_sql($tables) {
 
 function clil_declarer_champs_extras($champs = array()) {
 	
-	$liste_rub = clil_affichage_dans_rubriques();
+	// étape 1 : récupérer les datas 
 	$datas = array();
-	$r = sql_select('code,libelle', 'spip_clil_themes', "tag='oui'");
+	$res1 = sql_select('id_clil_theme', 'spip_clil_themes', "tag='oui'",'id_secteur','id_clil_theme');
 
-	while ($t = sql_fetch($r)){
-		$code = $t['code'];
-		$datas[$code] = $t['libelle'];
+	while ($tab1 = sql_fetch($res1)){
+		$optgroup = $tab1['id_clil_theme'];
+		$libelle_optgroup = sql_getfetsel('libelle', 'spip_clil_themes', "id_clil_theme=$optgroup");
+		$res2 = sql_select('id_clil_theme,libelle', 'spip_clil_themes', "tag='oui' AND id_secteur = $optgroup",'','id_clil_theme');
+
+		while ($tab2 = sql_fetch($res2)){
+			$id_secteur = $tab2['id_secteur']; 
+			$code = $tab2['id_clil_theme'];
+			$libelle = $tab2['libelle'];
+
+			// un peu de mise en forme
+			if ($id_clil_theme == $id_secteur) 
+				function_exists('mb_strtolower') ? $libelle = ucfirst(mb_strtolower($libelle)) : $libelle = ucfirst(strtolower($libelle));
+
+			$sous_tab[$code] = $libelle;
+		}
+		$datas[$libelle_optgroup] = $sous_tab;
+		unset($sous_tab);
 	}
 
+	// étape 2 : récupérer les restrictions par rubrique
+	$liste_rub = clil_affichage_dans_rubriques();
+
+	// étape 3 : on peut maintenant déclarer le champ extra
 	$champs['spip_articles']['code_clil'] = array(
 		'saisie' => 'selection', //Type du champ (voir plugin Saisies)
 		'options' => array(
@@ -88,9 +107,9 @@ function clil_declarer_champs_extras($champs = array()) {
 			'label' => _T('clil_theme:label_code_clil'), 
 			'sql' => "int(11) NOT NULL DEFAULT '0'",
 			'datas' => $datas,
-			'restrictions'=>array( 	'rubrique' => $liste_rub, 
-									'voir' => array('auteur' => '0minirezo'),//Tout le monde peut voir
-									'modifier' => array('auteur' => '0minirezo')),//Seuls les webmestres peuvent modifier
+			'restrictions'=>array('rubrique' => $liste_rub, 					 // restrictions par rubrique
+								  'voir' 	 => array('auteur' => '0minirezo'),  // Tout le monde peut voir
+								  'modifier' => array('auteur' => '0minirezo')), // Seuls les webmestres peuvent modifier
 		),
 	);
   return $champs;	

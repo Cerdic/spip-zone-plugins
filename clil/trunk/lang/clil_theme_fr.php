@@ -13,16 +13,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_code_label' => 'Code',
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_libelle_label' => 'Libellé',
-	'champ_niveau_label' => 'Niveau',
-	'champ_tag_label' => 'Tag',
+	'champ_tag_label' => 'Sélection',
 
 	// I
 	'icone_creer_clil_theme' => 'Créer un thème CLIL',
 	'icone_modifier_clil_theme' => 'Modifier ce thème CLIL',
+	'icone_voir_tous_themes' => 'Voir tous les thèmes',
 	'info_1_clil_theme' => 'Un clil_theme',
 	'info_aucun_clil_theme' => 'Aucun thème CLIL',
 	'info_clil_themes_auteur' => 'Les thèmes CLIL de cet auteur',
-	'info_nb_clil_themes' => '@nb@ thèmes CLIL',
+	'info_nb_clil_themes' => '(@nb@ sous-thèmes)',
+	'info_1_selection' => '@nb@ sélection',
+	'info_nb_selections' => '@nb@ sélections',
+	
 
 	// L
 	'label_code_clil' => 'Thème CLIL',

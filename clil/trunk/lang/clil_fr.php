@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//O
 	'onglet_clil' => 'Choisir thèmes CLIL',
+	'onglet_clil_libelle' => 'Modifier libellés',
 	'onglet_clil_rubrique' => 'Restreindre par rubriques',
 
 	// T

@@ -1,12 +1,12 @@
 <paquet
 	prefix="clil"
 	categorie="divers"
-	version="1.0.1"
+	version="1.0.0"
 	etat="experimental"
 	compatibilite="[3.0.18;3.1.*]"
 	logo="prive/themes/spip/images/clil-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="1.0.2" 
 >
 	<!--
 		Paquet genere le 2015-07-07 15:59:46
@@ -26,10 +26,11 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/clil.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/clil.php" />
 
-	<menu nom="clil_themes" titre="clil_theme:titre_clil_themes" parent="menu_edition" icone="images/clil_theme-16.png" action="clil_themes" />
-	<menu nom="configurer_clil" titre="clil:clil_titre" parent="menu_configuration" icone="images/clil-16.png" />
-	<onglet nom="configurer_clil" titre="clil:onglet_clil" parent="configurer_clil" icone="images/clil_theme-24.png" />
-	<onglet nom="configurer_clil_rubriques" titre="clil:onglet_clil_rubrique" parent="configurer_clil" icone="images/clil_theme-24.png" />
+	
+	<menu nom="configurer_clil" titre="clil:clil_titre" parent="menu_publication" icone="images/clil-16.png" />
+	<onglet nom="configurer_clil" titre="clil:onglet_clil" parent="configurer_clil" icone="images/add-32.png" />
+	<onglet nom="configurer_clil_libelles" titre="clil:onglet_clil_libelle" parent="configurer_clil" icone="images/edit-24.png" action="clil_themes" />
+	<onglet nom="configurer_clil_rubriques" titre="clil:onglet_clil_rubrique" parent="configurer_clil" icone="images/rubrique-24.png" />
 
 	<spip compatibilite="[3.0.18;3.0.*]">
 		<necessite nom="spip_bonux" compatibilite="[3.2.1;[" />

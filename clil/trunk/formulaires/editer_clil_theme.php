@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Gestion du formulaire de d'édition de clil_theme
  *
@@ -87,7 +87,7 @@ function formulaires_editer_clil_theme_charger_dist($id_clil_theme='new', $retou
  */
 function formulaires_editer_clil_theme_verifier_dist($id_clil_theme='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('clil_theme',$id_clil_theme, array('code', 'niveau', 'libelle'));
+	return formulaires_editer_objet_verifier('clil_theme',$id_clil_theme, array('libelle'));
 
 }
 

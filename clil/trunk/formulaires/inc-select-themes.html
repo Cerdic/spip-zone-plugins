@@ -1,45 +1,28 @@
-<ul class='creneaux'>
-	<BOUCLE_themes_clil(CLIL_THEMES){par id_clil_theme}{niveau=0}>
-	<li class='li_long secteur'>
-		<div class='choix niveau_#NIVEAU'>
-			<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#CODE' [(#TAG|=={oui}|oui)checked='checked'] />
-			<label for='#CODE'>#LIBELLE</label>
-		</div>
-		[(#REM)  <div class='explication align_left'><a class='tout_cocher' href="">Tout cocher</a> / <a class='tout_decocher' href="">Tout décocher</a></div>]
-		
-		<B_enfants>
-		<ul>
-			<li class='li_long'>
-			<BOUCLE_enfants(CLIL_THEMES){code_parent=#CODE_PARENT}{par id_clil_theme}{!niveau=0}>
-				<div class='choix niveau_#NIVEAU'>
-					<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#CODE' [(#TAG|=={oui}|oui)checked='checked'] />
-					<label for='#CODE'>#LIBELLE</label>
-				</div>
-			</BOUCLE_enfants>
-			</li>
-		</ul>
-		</B_enfants>
-	</li>
-	</BOUCLE_themes_clil>
+<ul class='hierarchie'>
+<BOUCLE_themes_clil(CLIL_THEMES){par libelle}{racine}>
+<li class='li_long [(#VAL{#ID_SECTEUR}|clil_themes_nombre_sous_themes|oui)casier]'>
+	<div class='choix secteur [(#VAL{#ID_SECTEUR}|clil_themes_checked|oui)checked]'>
+		<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#ID_CLIL_THEME' [(#TAG|=={oui}|oui)checked='checked'] />
+		<label for='#ID_CLIL_THEME'>#LIBELLE</label><span class='infos'>[ ([ <b>(#VAL{#ID_SECTEUR}|clil_themes_checked|singulier_ou_pluriel{clil_theme:info_1_selection, clil_theme:info_nb_selections})</b> / ] (#VAL{#ID_SECTEUR}|clil_themes_nombre_sous_themes) sous-thèmes   )]</span>
+	</div>
+	<B_enfants><ul style='display:none;'>
+		<BOUCLE_enfants(CLIL_THEMES){id_parent}>
+		<li class='li_long'>
+			<div class='choix'>
+				<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#ID_CLIL_THEME' [(#TAG|=={oui}|oui)checked='checked'] />
+				<label for='#ID_CLIL_THEME'>#LIBELLE</label>
+			</div><BOUCLE_rec(BOUCLE_enfants)/>
+		</li>
+		</BOUCLE_enfants>
+	</ul></B_enfants>
+</li>
+</BOUCLE_themes_clil>
 </ul>
 
 <script type="text/javascript">/*<![CDATA[*/
-
-//Init : n'afficher que les thèmes de niveau 1
-jQuery(".choix.niveau_0 > input:checkbox").not(":checked").parent().next().children().children().find('input:checkbox:not(:checked)').parent().hide();
-
-
-
-// gérer les actions
-jQuery(".choix.niveau_0 > input:checkbox").change(function(){
-	if (jQuery(this).is(":checked")) {
-		jQuery(this).parent().next().show();
-		jQuery(this).parent().next().children().children().find('input:checkbox:not(:checked)').parent().show();
-	} else {
-		if (!jQuery(this).parent().next().children().children().find('input:checkbox').is(':checked'))
-			jQuery(this).parent().next().hide();
-		else jQuery(this).parent().next().children().children().find('input:checkbox:not(:checked)').parent().hide();
+jQuery(".li_long.casier").on('click', function(event) {
+	if (event.target == this) {
+		jQuery(this).toggleClass('open').find('ul').toggle('fast');
 	}
 });
-
 /*]]>*/</script>

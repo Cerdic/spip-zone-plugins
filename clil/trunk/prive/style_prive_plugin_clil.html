@@ -15,13 +15,25 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-.formulaire_spip.formulaire_clil li.li_long { padding-left: 10px; padding-right: 10px; }
-
-.choix.niveau_0 label  { font-weight:bold; }
-.niveau_1 { margin-top:10px; }
-.niveau_2 { margin-left: 20px; }
-.niveau_3 { margin-left: 40px; }
-.explication.align_left { margin-left:10px; margin-right:10px; }
 
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.choix.secteur label  { font-weight:bold; text-transform: capitalize; }
+.casier { padding-left:30px;background: url("#CHEMIN_IMAGE{deplierhaut.gif}") 0 3px no-repeat;}
+.casier.open { background-image: url("#CHEMIN_IMAGE{deplierbas.gif}");}
+.infos { color:#666; }
+
+.formulaire_spip.formulaire_clil li.li_long { padding-left: 20px; padding-right: 10px; }
+
+.formulaire_spip ul.hierarchie {margin:20px 0;padding:0;}
+.formulaire_spip ul.hierarchie ul {margin:0 0 5px 0;padding:0 0 0 10px;}
+.formulaire_spip ul.hierarchie ul ul  {padding:0 0 0 10px;}
+.formulaire_spip ul.hierarchie li {margin:5px 0;margin-#ENV{left}:15px;padding:0;}
+.formulaire_spip ul.hierarchie li li {margin:0; border-#ENV{left}:1px solid #ddd;}
+.formulaire_spip ul.hierarchie div.checked {background:[#(#ENV{claire}|couleur_eclaircir)];}
+.formulaire_spip ul.hierarchie li.checked > .choix label {font-weight:bold;}
+
+.liste-objets.clil_themes_secteur tr > .libelle {width: 70%;}
+.liste-objets.clil_themes_secteur tr > .tag {width: 20%; text-align: center; }
+.liste-objets.clil_themes_secteur tr > .code { width: 10%; text-align: right; }
