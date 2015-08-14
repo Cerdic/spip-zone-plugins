@@ -178,6 +178,8 @@ var geocoder;]
 				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
 					// centrer la carte sur les bounds de l'objet
 					form_map.fitBounds(layer.getBounds());
+					// temp bugfix see https://github.com/Leaflet/Leaflet.draw/issues/364#issuecomment-74184767
+					layer.options.editing || (layer.options.editing = {});
 					// activer l'édition sur l'objet
 					layer.editing.enable();
 					// surveiller les changements sur les points de l'objet
@@ -220,6 +222,8 @@ var geocoder;]
 				if (feature.type == 'Polygon' || feature.type == 'MultiPolygon' || feature.type == 'LineString') {
 					// centrer la carte sur les bounds de l'objet
 					form_map.fitBounds(layer.getBounds());
+					// temp bugfix see https://github.com/Leaflet/Leaflet.draw/issues/364#issuecomment-74184767
+					layer.options.editing || (layer.options.editing = {});
 					// activer l'édition sur l'objet
 					layer.editing.enable();
 					// surveiller les changements sur les points de l'objet
@@ -311,6 +315,8 @@ var geocoder;]
 				var center = layer.getBounds().getCenter();
 				$('#champ_#ENV{champ_lat,lat}').val(center.lat);
 				$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+				// temp bugfix see https://github.com/Leaflet/Leaflet.draw/issues/364#issuecomment-74184767
+				layer.options.editing || (layer.options.editing = {});
 				layer.editing.enable();
 				layer.on("edit", function(e){
 					$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
