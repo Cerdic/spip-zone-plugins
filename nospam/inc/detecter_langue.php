@@ -66,6 +66,13 @@ $GLOBALS["ngrams"]['ve'] = array("ha "," vh","a m","na "," u ","a n","tsh","wa "
 $GLOBALS["ngrams"]['xh'] = array("la "," ku","lo ","nga","a k"," ng","oku"," kw"," uk","a n","uku","ye ","a i","yo ","ela","ele","a u","nye","we ","wa ","ama","e n","ise","aba","ba ","ho ","enz","o n","ngo","kub","nge","ath","fun","o e","lel","ung","uba","ko ","elo","ezi","o k","the","kwa","na ","kwe","ang","e i","le ","ka ","esi","o y"," na","e k","eth","pha"," in","kun","nzi","and","ni ","ban"," ye"," no","lwa","lun"," ok","any","zi ","li "," ne","ulu","a e","eli","gok","o l","ebe","und","isa","seb","ndo"," ez","tho","o i","do ","ben","ing","kwi","ndl","uny","ala","a a","eyo","e u","kan"," ab","thi","i k","i n","o u","o z","elw","sa ","sek","ayo","het","o o","eka"," um","hi ","bo ","so ","isi","wen","lwe","aph","a l","ya ","eko","ana"," yo","kuf","ini","imi","ali","ha ","awu","wan","ent","uth","tha","za ","ula","kho"," ii","ane","e a","iso","uph"," le","ile","zin","nts"," si","eng","nok","ong","hla","zwe"," el","oka","eki","lis","azi"," lo","tsh"," am","ufu","ant","isw","o a","ngu","o s"," ba","int","eni","une","wul","hul","sel","i e","use","lan","ke ","nis","emi"," li"," is","iph"," im","a o","aka","mfu"," zi","ink","mal","ley","man","nya","nek","akh","ume"," ko","alo","tu ","i u","ntu","izw","kel","izi","i i","si ","gan","ase","ind","i a","ndi","nel","alu","sis","ubo","kut","mth","kus","lek","mis","nde"," zo"," we","ani","ga ","iko","siz","no ","phu","e e","hon","ond","ne ","ith","kul","gam","gen","pho"," iz","phe","hat","khu","iin","han","zo ","lu ","ulo","nda","qo ","zik","hel","o m"," lw","zis","dle","uhl","men","olo","mel","del","nza","oko","okw","olu","kuk","nte","swa","law","enk"," ya","i y","gaq","sha","aqo","e l","ikh","nkq","ule"," ka","onk","thu","wo ","bon","kup","qub","a y","kqu","dla"," es","he ","ano","lum","be ","iga"," ze","o w","aku","mga","nke","te "," ol","ze ","kum","emf","esh");
 $GLOBALS["ngrams"]['zu'] = array("oku","la ","nga"," ng","a n"," ku","a k","thi"," uk","ezi","e n","uku","le ","lo ","hi ","wa "," no","a u","ela","we ","a i","ni ","ele","zin","uth","ama","elo","pha","ing","aba","ath","and","enz","eth","esi","ma ","lel"," um"," ka","the","ung","nge","ngo","tho","nye","kwe","eni","izi","ye "," kw","ndl","ho ","a e","na ","zi ","het","kan","e u","e i","und","ise","isi","nda","kha","ba ","i k","nom","fun"," ez"," iz","ke ","ben","o e","isa","zwe","kel","ka ","aka","nzi","o n","e k","oma","kwa"," ne","any","ang","hla","i u","mth","kub","o k","ana","ane","ikh","ebe","kut","ha "," is","azi","ulu","seb","ala","onk","ban","i e","azw","wen"," ab","han","a a","i n","imi","lan","hat","lwa"," na","ini","akh","li ","ngu","nke","nok","ume","eke","elw","yo ","aph","kus"," es"," ok","iph"," im","mel","i i"," lo"," in"," am","kho","za ","gok","sek","lun","kun","lwe","sha","sik","kuf","hak","a y","thu","sa ","o u","khu","ayo","hul","e a","ali","eng","lu ","ne "," ko","eli","uba","dle","e e","ith"," yo","a l","nel","mis"," si","kul","a o","sis","lok","gen","o z","i a","emi","uma","eka","alo","man","isw","tha","o i","lon","so ","uph","uhl","ntu","zim","mal","ind","wez"," ba","o o"," yi"," we","ula","phe","o y","ile","o l","wo ","wel","ga ","tu ","hle","okw","fan"," le","kaz","ase","ani","nde","bo ","ngi","ule"," em","men","iny","amb","mbi","gan","ifu","o s","ant","hel","ika","ona","i l","fut"," fu","ze ","u a","nhl","nin"," zo","end","sig","u k","gab","ufa","ish","ush","kuz","no ","gam","kuh"," ye","nya","nez","zis","dlu","kat","dla","tsh"," se","ike","kuq","gu ","osi","swa","lul"," zi","ima","e l","kup","mo ","nza","asi","ko ","kum","lek","she","umt","uny","yok","wan","wam","ame","ong","lis","mkh","ahl","ale","use","o a","alu","gap","si ","hlo","nje","omt","o w","okh","he ","kom","i s");
 
+/**
+ * Lister les ngrams contenus dans un texte
+ * @param string $string
+ * @param int $ng_number
+ * @param int $ng_max_chars
+ * @return array
+ */
 function createNGrams($string, $ng_number=300, $ng_max_chars=4) {
 
 	// Attention: $string n'est pas un mot, mais le texte complet
@@ -97,6 +104,16 @@ function createNGrams($string, $ng_number=300, $ng_max_chars=4) {
 	return $sub_ng;
 }
 
+
+/**
+ * Trouver la langue la/les langues plausibles en fonction des ngrams trouves dans le texte et des ngrams possibles
+ * @param array $sub_ng
+ *   jeu de Ngrams trouves dans le texte
+ * @param array $lm_ng
+ *   jeu de Ngrams possibles
+ * @param int $max_delta
+ * @return string
+ */
 function compareNGrams($sub_ng, $lm_ng, $max_delta = 140000) {
 	foreach ($lm_ng as $lm_basename => $language) {
 		$delta = 0;
@@ -127,6 +144,12 @@ function compareNGrams($sub_ng, $lm_ng, $max_delta = 140000) {
 	return $result;
 }
 
+/**
+ * Retourne la proportion de texte qui n'est pas dans la plage utf cherchee
+ * @param string $texte
+ * @param string $plage
+ * @return float
+ */
 function tester_plage_utf($texte, $plage) {
 
 	$total = mb_strlen($texte,"UTF-8");
@@ -139,6 +162,11 @@ function tester_plage_utf($texte, $plage) {
 	return ($test / $total);
 }
 
+/**
+ * Reduire le jeu de langue possibles en fonction des plages utf8 utilisees dans le texte
+ * @param string $texte
+ * @return array|bool|string
+ */
 function detecter_plages_utf($texte) {
 
 	if (tester_plage_utf($texte, "[\x{0041}-\x{024F}\x{1E00}-\x{1EFF}]") < 0.5) { 
@@ -177,47 +205,56 @@ function detecter_plages_utf($texte) {
 }
 
 
-// Detecter langue
-
-// Premiere passe: detecter dans quel alphabet le texte est écrit
-// ce qui permet de limiter le nombre de réponse 
-// (par exemple: des caractères «arabes» ne peuvent être que de l'arabe, du farsi, du pachtourne ou du urdu)
-// Deuxieme passe: faire un test classique sur les trigrams (uniquement sur les langues possibles de la première passe)
-
+/**
+ * Detecter langue
+ *
+ * Premiere passe: detecter dans quel alphabet le texte est écrit
+ * ce qui permet de limiter le nombre de réponse
+ * (par exemple: des caractères «arabes» ne peuvent être que de l'arabe, du farsi, du pachtourne ou du urdu)
+ * Deuxieme passe: faire un test classique sur les trigrams (uniquement sur les langues possibles de la première passe)
+ *
+ * @param string $texte
+ * @return bool|string
+ */
 function _detecter_langue($texte) {
 	$texte = strip_tags($texte);
 	$texte = str_replace("’", "'", $texte);
 	$texte = str_replace("\"", " ", $texte);
-	
-	// Si texte trop court, impossible de détecter la langue
-	if (mb_strlen($texte, "utf-8") < 6 ) return false; 
+
+	// Si les fonctions mb_ ne sont pas disponibles
+	// ou si texte trop court, impossible de détecter la langue
+	if (!function_exists('mb_strlen')
+	  OR !function_exists('mb_substr')
+	  OR mb_strlen($texte, "utf-8") < 6){
+		return false;
+	}
 
 	$possibles = detecter_plages_utf($texte);
-	
-	if (!$possibles)
-		return;
+
+	if (!$possibles) {
+		return false;
+	}
 	else if (!is_array($possibles)) {
 		return $possibles;
 	} else {
 		$ngrams = array();
 		foreach($possibles as $lang) {
-			$ngrams["$lang"] = $GLOBALS["ngrams"]["$lang"];
+			$ngrams[$lang] = $GLOBALS["ngrams"][$lang];
 		}
 	}
-	
-	$sub_ng = createNGrams($texte);
 
+	$sub_ng = createNGrams($texte);
 	$result_array = compareNGrams($sub_ng, $ngrams, 140000);
-	
+
 //	print_r($result_array);
 	
-	$resultat = false;
-	if ($result_array) {
-		foreach($result_array as $lang => $val) {
-			if (!$resultat) $resultat = $lang;
+	$lang = false;
+	if (is_array($result_array) AND count($result_array)) {
+		while(!$lang AND $r = each($result_array)){
+			list($lang,$val) = $r;
 		}
 	}
-	return $resultat;
+	return $lang;
 }
 
 ?>
