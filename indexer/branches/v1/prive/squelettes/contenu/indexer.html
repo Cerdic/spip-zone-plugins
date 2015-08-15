@@ -1,0 +1,28 @@
+<h1>Test de l'indexer</h1>
+
+<?php
+
+if (_request('run') || _request('continue')) {
+    include_spip('inc/indexer');
+    
+    // Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
+    $indexer = indexer_indexer();
+	
+	// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
+    $sources = indexer_sources();
+
+    $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
+    $SpipSourcesIndexer->setTablesLiensAuto();
+
+    if (_request('run')) {
+        $SpipSourcesIndexer->resetIndexesStats();
+    }
+    $res = $SpipSourcesIndexer->indexAll();
+
+    if (!$res) {
+        echo "\n<br/><a id='recharger' href='[(#SELF|parametre_url{run,''}|parametre_url{continue,1})]'>Recharger la page pour continuer l'indexation</a>";
+        echo "<script type='text/javascript'>window.location.replace( $('#recharger').attr('href') );</script>";
+    } else {
+        echo "\n<pre>"; print_r($res); echo "</pre>";
+    }
+}
