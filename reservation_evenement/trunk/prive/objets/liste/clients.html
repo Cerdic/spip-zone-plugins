@@ -49,7 +49,7 @@
         <BOUCLE_liste_clients(DATA){source tableau, #GET{clients}}{tri #ENV{par,id_reservation},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
           <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
             <td class='picto'>[(#CHEMIN_IMAGE{client-16.png}|balise_img)]</td>
-            <td class='nom'><a href="#URL_ECRIRE{clients,email=#EMAIL}" title="#NOM">#NOM</a></td>
+            <td class='nom'><a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a></td>
             <td class='email'><a href="mailto:#EMAIL" title="#NOM">#EMAIL</a></td>
           </tr>
         </BOUCLE_liste_clients>

@@ -35,7 +35,7 @@
                    #GET{a}  
                </li>
               <li>[(#ENV{voir}|!={reservations_articles}|oui)#SET{a, </a>}
-                  <a href="#URL_ECRIRE{reservation,voir=reservations_articles&par=titre&sense=1}">]
+                  <a href="#URL_ECRIRE{reservations,voir=reservations_articles&par=titre&sense=1}">]
                       [(#CHEMIN_IMAGE{article-16.png}|balise_img)] <:reservation:par_articles:>
                    #GET{a}  
                </li>             

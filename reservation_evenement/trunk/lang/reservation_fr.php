@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_cacher' => 'Cacher',
 	'icone_creer_reservation' => 'Créer une réservation',
+	'icone_modifier_client' => 'Modifier ce client',
 	'icone_modifier_reservation' => 'Modifier cette réservation',
 	'info_1_client' => 'Un client',
 	'info_1_reservation' => 'Une réservation',
