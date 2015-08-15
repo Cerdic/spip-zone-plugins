@@ -1,0 +1,14 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'menu_anime_description' => '',
+	'menu_anime_nom' => 'Animated dropdown menu',
+	'menu_anime_slogan' => 'Only with css...',
+);
+
+?>
