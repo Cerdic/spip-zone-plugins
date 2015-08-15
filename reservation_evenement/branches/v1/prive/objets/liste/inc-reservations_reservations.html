@@ -28,7 +28,7 @@
         </tr>
     </thead>
     <tbody>
-    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
         <tr>
             <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
             <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
@@ -38,10 +38,10 @@
            </td>
             <td class='auteur'>
                    <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-                    <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a> -
+                    <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> -
                     <a href="mailto:#EMAIL">#EMAIL</a>
                    </BOUCLE_auteur>
-                    #NOM - <a href="mailto:#EMAIL">#EMAIL</a>
+                    <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
                  <//B_auteur>
             </td>
 
