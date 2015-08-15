@@ -97,6 +97,7 @@ function createNGrams($string, $ng_number = 300, $ng_max_chars = 4){
 	arsort($ng_frequency);
 	//use only top frequent ngrams
 	$most_frequent = array_slice($ng_frequency, 0, $ng_number);
+	$sub_ng = array();
 	foreach ($most_frequent as $ng => $number_frequencey){
 		$sub_ng[] = $ng;
 	}
