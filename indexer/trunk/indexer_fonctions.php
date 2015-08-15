@@ -3,6 +3,33 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Lister les jointures de recherche possibles pour un objet
+ * 
+ * On liste les jointures déclarées et on ne garde que celles qui ont une fonction "indexer" dédiée.
+ * 
+ * @param string $objet
+ * 		Type ou table de l'objet voulu
+ * @return array
+ * 		Retourne la liste des jointures possibles
+ **/
+function indexer_lister_jointures($objet) {
+	include_spip('base/objets');
+	
+	$jointures = array();
+	$jointures_declarees = array_keys(objet_info($objet, 'rechercher_jointures'));
+	
+	// On ne garde que celles qui ont une fonction "indexer" dédiée
+	foreach ($jointures_declarees as $jointure) {
+		$table = table_objet($jointure); // article => articles
+		if (charger_fonction('jointure_'.$table, 'indexer', true)) {
+			$jointures[] = $table;
+		}
+	}
+	
+	return $jointures;
+}
+
 function sphinx_get_array2query($api, $limit=''){
 	include_spip('inc/indexer');
 	$sq = new \Sphinx\SphinxQL\QueryApi($api);

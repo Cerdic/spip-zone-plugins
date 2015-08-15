@@ -14,13 +14,36 @@
 	<form action="#ENV{action}" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		
-		<ul>
-			<li class='editer [ (#ENV**{erreurs}|table_valeur{sources_objets}|oui)erreur]'>
+		<ul class="editer-groupe">
+			<li class="editer [ (#ENV**{erreurs/sources_objets}|oui)erreur]">
 				<label><:indexer:configurer_sources_objets_label:></label>
 				#INCLURE{fond=formulaires/inc-choisir-objets,
 					name=sources_objets,
 					selected=#GET{sources}}
 			</li>
+			<li class="editer [ (#ENV**{erreurs/source}|oui)erreur]">
+				<label for="source"><:indexer:configurer_source_label:></label>
+				<input type="text" class="text" name="source" id="source" value="#ENV{source,#URL_SITE_SPIP}" />
+			</li>
+			
+			[(#REM) Pour chaque objet on peut potentiellement configurer des précisions ]
+			<BOUCLE_objets(DATA){source table,#GET{sources}|array_filter}>
+			#SET{objet, #VALEUR|objet_type}
+			
+			[(#REM) S'il y a un squelette dédié pour cet objet sinon squelette générique ]
+			[<li class="fieldset">
+				<input type="hidden" name="#GET{objet}" /> [(#REM) Pour que l'API configurer charge ]
+				<fieldset>
+					<legend>[(#VALEUR|objet_info{texte_objets}|_T)]</legend>
+					<ul class="editer-groupe">
+					(#CHEMIN{formulaires/configurer_indexer/#GET{objet}.html}|?{
+						#INCLURE{fond=formulaires/configurer_indexer/#GET{objet},env},
+						#INCLURE{fond=formulaires/configurer_indexer/objet,objet=#GET{objet},table=#VALEUR,env}
+					})
+					</ul>
+				</fieldset>
+			</li>]
+			</BOUCLE_objets>
 		</ul>
 		
 		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>

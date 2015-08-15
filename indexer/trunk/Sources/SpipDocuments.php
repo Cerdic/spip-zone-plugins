@@ -6,8 +6,6 @@ use \Indexer\Sources\SourceInterface;
 use \Indexer\Sources\Document;
 
 class SpipDocuments implements SourceInterface {
-	/** SPIP récent ? spip_xx_liens ou spip_xx_yy */
-	private $tables_liens = true;
 	/** Type d'objet SPIP */
 	private $objet = null;
 	private $table_objet = null;
@@ -59,7 +57,15 @@ class SpipDocuments implements SourceInterface {
 			$where = array();
 			if ($start) $where[] = "$column >= $start";
 			if ($end)   $where[] = "$column < $end";
-
+			
+			// S'il y a des statuts ignorés… ben on les ignore
+			if (
+				$statuts_ignores = ('indexer/'.$this->objet.'/statuts_ignores')
+				and is_array($statuts_ignores)
+			) {
+				$where[] = sql_in('statut', $statuts_ignores, 'not');
+			}
+			
 			$all = sql_allfetsel(
 				'*',
 				$this->table_objet, // la table de l'objet défini
@@ -86,8 +92,22 @@ class SpipDocuments implements SourceInterface {
 	public function createDocumentObjet($contenu) {
 		include_spip('inc/filtres');
 		include_spip('inc/texte');
+		include_spip('inc/config');
+		include_spip('base/objets');
+		include_spip('indexer_fonctions');
 		
 		$doc = array('properties' => array());		
+		
+		// S'il y a des statuts ignorés et que c'est le cas, on indexe pas
+		// Normalement déjà ignoré dans le SQL, mais si jamais la fonction est appelée autre part…
+		if (
+			$statuts_ignores = lire_config('indexer/'.$this->objet.'/statuts_ignores')
+			and is_array($statuts_ignores)
+			and isset($contenu['statut'])
+			and in_array($contenu['statut'], $statuts_ignores)
+		) {
+			return null;
+		}
 		
 		// On cherche les éléments dont on va avoir besoin
 		$id = $contenu[$this->cle_objet];
@@ -96,7 +116,10 @@ class SpipDocuments implements SourceInterface {
 		$doc['properties']['objet'] = $this->objet;
 		$doc['properties']['id_objet'] = $id;
 		
-		// Pour le titre
+		// Pour la source du site : config explicite sinon l'URL du site
+		$doc['properties']['source'] = lire_config('indexer/source', lire_config('adresse_site'));
+		
+		// Pour le titre (TODO : mieux détecter, mais la déclaration de l'API est faite pour une requête SQL)
 		if (isset($contenu['titre'])) {
 			$doc['title'] = supprimer_numero($contenu['titre']);
 		}
@@ -107,8 +130,19 @@ class SpipDocuments implements SourceInterface {
 			$doc['title'] = '';
 		}
 		
-		// Pour le contenu principal
-		if (isset($contenu['texte'])) {
+		// Pour le contenu principal, on va chercher la liste des champs fulltext déclarés
+		if ($rechercher_champs = array_keys(objet_info($this->objet, 'rechercher_champs'))) {
+			$doc['content'] = '';
+			
+			foreach ($rechercher_champs as $champ) {
+				// On ne remet pas le titre
+				if ($champ != 'titre' and isset($contenu[$champ]) and $contenu[$champ]) {
+					$doc['content'] .= "\n\n".$contenu[$champ];
+				}
+			}
+		}
+		// Sinon on détecte les cas courants
+		elseif (isset($contenu['texte'])) {
 			$doc['content'] = $contenu['texte'];
 		}
 		elseif (isset($contenu['descriptif'])) {
@@ -121,25 +155,23 @@ class SpipDocuments implements SourceInterface {
 			$doc['content'] = '';
 		}
 		
-		// Pour le résumé
-		// (on gère direct le cas particulier des articles qui sont dans le core et qu'on connait bien)
-		if (
-			$this->objet == 'article'
-			and $summary = trim($contenu['surtitre']."\n".$contenu['soustitre']."\n".$article['chapo'])
-		) {
-			$doc['summary'] = $summary;
-		}
-		elseif (isset($contenu['descriptif'])) {
-			$doc['summary'] = couper($contenu['descriptif'], 200);
-		}
-		else {
-			$doc['summary'] = couper($doc['content'], 200);
+		// Pour le résumé, on utilise le filtre d'intro de SPIP
+		// = descriptif s'il existe sinon le contenu principal précédent coupé
+		$descriptif = isset($contenu['descriptif']) ? $contenu['descriptif'] : ''; // on s'assure que le descriptif soit bien une chaine
+		if ($fonction_introduction = chercher_filtre('introduction')) {
+			$doc['summary'] = $fonction_introduction($descriptif, $doc['content'], 400, '');
 		}
 		
 		// Pour la date
+		// S'il y a un champ de date de rédaction et qu'il est utilisé, on prend en priorité à celle de publication
 		if (isset($contenu['date_redac']) and substr($contenu['date_redac'],0,4) != '0000') {
 			$doc['date'] = $contenu['date_redac'];
 		}
+		// Sinon on utilise la date de publication déclarée par l'API
+		elseif ($champ_date = objet_info($this->objet, 'date')) {
+			$doc['date'] = $contenu[$champ_date];
+		}
+		// Sinon le champ "date" tout simplement
 		elseif (isset($contenu['date'])) {
 			$doc['date'] = $contenu['date'];
 		}
@@ -152,15 +184,74 @@ class SpipDocuments implements SourceInterface {
 			$doc['properties']['lang'] = $contenu['lang'];
 		}
 		
-		// Les auteurs
-		if ($authors = $this->getAuthorsProperties($this->objet, $id)) {
-			$doc['properties']['authors'] = $authors;
+		// S'il y a un statut
+		if (isset($contenu['statut'])) {
+			$doc['properties']['statut'] = $contenu['statut'];
 		}
 		
-		// Les mots/tags basiquement
-		if ($tags = $this->getTagsProperties($this->objet, $id)) {
-			$doc['properties']['tags'] = $tags;
+		// On garde en mémoire le parent si on trouve quelque chose
+		if (isset($contenu['id_parent'])) {
+			$doc['properties']['id_parent'] = intval($contenu['id_parent']);
+			$doc['properties']['objet_parent'] = $this->objet;
 		}
+		elseif (isset($contenu['id_rubrique'])) {
+			$doc['properties']['id_rubrique'] = intval($contenu['id_rubrique']);
+			$doc['properties']['id_parent'] = intval($contenu['id_rubrique']);
+			$doc['properties']['objet_parent'] = 'rubrique';
+		}
+		// Pour les événements au moins
+		elseif (isset($contenu['id_article'])) {
+			$doc['properties']['id_article'] = intval($contenu['id_article']);
+			$doc['properties']['id_parent'] = intval($contenu['id_article']);
+			$doc['properties']['objet_parent'] = 'article';
+		}
+		
+		// Et ensuite on tente de trouver une hiérarchie de rubriques
+		if (
+			$this->objet == 'rubrique' and $id_rubrique_enfant = $id
+			or isset($doc['properties']['id_rubrique']) and $id_rubrique_enfant = $doc['properties']['id_rubrique']
+			or isset($doc['properties']['id_article']) and $id_rubrique_enfant = intval(sql_getfetsel('id_rubrique', 'spip_articles', 'id_article ='.$doc['properties']['id_article']))
+		) {
+			// Là normalement on a maintenant la rubrique la plus basse
+			$doc['properties']['parents']['ids'] = array();
+			$doc['properties']['parents']['titres'] = array();
+			while ($f = sql_fetsel(
+				'id_parent, titre',
+				'spip_rubriques',
+				'id_rubrique = '.$id_rubrique_enfant
+			)){
+				$titre_actuel = supprimer_numero($f['titre']);
+				$id_parent = intval($f['id_parent']);
+				$doc['properties']['parents']['ids'][] = $id_rubrique_enfant;
+				$doc['properties']['parents']['titres'][$id_rubrique_enfant] = $titre_actuel;
+				
+				$id_rubrique_enfant = $id_parent;
+			}
+			
+			// On ajoute la branche dans le fulltext
+			$doc['content'] .= "\n\n".join(' | ', $doc['properties']['parents']['titres']);
+		}
+		
+		// On cherche les jointures pour cet objet
+		// Pour chaque, on va déléguer à une fonction dédiée pour plus de lisibilité, et en plus ça permet d'être surchargeable
+		foreach (indexer_lister_jointures($this->objet) as $jointure) {
+			if (
+				lire_config('indexer/'.$this->objet.'/jointure_'.$jointure.'/activer') // indexer/article/jointure_auteurs/activer=oui
+				and $jointure_fonction = charger_fonction( // indexer_jointure_auteurs()
+					'jointure_'.$jointure,
+					'indexer',
+					true
+				)
+			) {
+				$doc = $jointure_fonction($this->objet, $id, $doc);
+			}
+		}
+		
+		// Transformation UTF-8
+		include_spip('inc/charsets');
+		$doc['title'] = unicode_to_utf_8(html2unicode($doc['title']));
+		$doc['content'] = unicode_to_utf_8(html2unicode($doc['content']));
+		$doc['summary'] = unicode_to_utf_8(html2unicode($doc['summary']));
 		
 		// On crée le Document avec les infos
 		$doc = new Document($doc);
@@ -189,46 +280,8 @@ class SpipDocuments implements SourceInterface {
 		return $this->getDocuments();
 	}
 
-	/** @param bool $bool */
-	public function setTablesLiens($bool) {
-		$this->tables_liens = $bool;
-	}
-
 	public function getObjectId($objet, $id_objet){
 		return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
-	}
-
-	public function getAuthorsProperties($objet, $id_objet) {
-		if ($this->tables_liens) {
-			$auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_liens AS al', array(
-				"al.id_objet = " . intval($id_objet),
-				"al.objet    = " . sql_quote($objet),
-				"a.id_auteur = al.id_auteur",
-			));
-		} else {
-			$auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_articles AS al', array(
-				"al.id_article = " . intval($id_objet),
-				"a.id_auteur = al.id_auteur",
-			));
-		}
-		
-		return array_map('array_shift', $auteurs);
-	}
-
-	public function getTagsProperties($objet, $id_objet) {
-		if ($this->tables_liens) {
-			$tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_liens AS ml', array(
-				"ml.id_objet = " . intval($id_objet),
-				"ml.objet    = " . sql_quote($objet),
-				"m.id_mot = ml.id_mot",
-			));
-		} else {
-			$tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_articles AS ml', array(
-				"ml.id_article = " . intval($id_objet),
-				"m.id_mot = ml.id_mot",
-			));
-		}
-		return array_map('array_shift', $tags);
 	}
 
 	public function getBounds($column = '') {

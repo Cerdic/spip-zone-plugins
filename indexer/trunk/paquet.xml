@@ -1,9 +1,9 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="1.4.1"
-	etat="test"
-	compatibilite="[2.1.0;3.1.*]"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
 	documentation="http://contrib.spip.net/Sphinx-Indexer"
 >
