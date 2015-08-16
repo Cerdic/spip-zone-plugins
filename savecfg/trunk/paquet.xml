@@ -3,7 +3,7 @@
 	categorie="maintenance"
 	version="2.6.6"
 	etat="stable"
-	compatibilite="[2.0.10;3.1.*]"
+	compatibilite="[3.0.20;3.1.*]"
 	logo="images/savecfg-32.png"
 	schema="0.2"
 	documentation="http://contrib.spip.net/SaveCFG"
