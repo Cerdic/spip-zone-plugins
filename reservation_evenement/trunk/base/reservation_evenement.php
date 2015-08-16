@@ -208,7 +208,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     );
   }
 
-  //Ajouter le champ action_cloture dans le tables artiles et evenements
+  //Ajouter le champ action_cloture dans le tables articles et evenements
 
   $tables['spip_articles']['champs_editable'][] = "action_cloture";
   $tables['spip_evenements']['champs_editable'][] = "action_cloture";
