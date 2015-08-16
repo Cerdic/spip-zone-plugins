@@ -6,12 +6,49 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<form method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<p class='explication'>Cocher les thèmes CLIL qui seront affichés dans le selecteur <i>Thème CLIL</i> de vos articles.</p>
-		[(#INCLURE{fond=formulaires/inc-select-themes,env})]
-
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-	</div>
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			[(#ENV{recherche}|is_null|non) <div id="recherche_en_cours"></div>]
+			<p class='explication'>Cocher les thèmes CLIL qui seront affichés dans le selecteur <i>Thème CLIL</i> de vos articles.</p>
+			<ul class='hierarchie'>
+			<BOUCLE_themes_clil(CLIL_THEMES){par libelle}{racine}>
+				<li class='li_long [(#VAL{#ID_CLIL_THEME}|clil_themes_nombre_sous_themes{#ENV{recherche}}|?{'casier', 'casier_vide'})]'>
+					<div class='choix secteur [(#VAL{#ID_SECTEUR}|clil_themes_checked|oui)checked]'>
+						<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#ID_CLIL_THEME' [(#TAG|=={oui}|oui)checked='checked'] />
+						<label for='#ID_CLIL_THEME'>#LIBELLE</label><span class='infos'>[ ([ <b>(#VAL{#ID_SECTEUR}|clil_themes_checked|singulier_ou_pluriel{clil_theme:info_1_selection, clil_theme:info_nb_selections})</b> / ] (#VAL{#ID_SECTEUR}|clil_themes_nombre_sous_themes) sous-thèmes   )]</span>
+					</div>
+					<B_enfants><ul style='display:none;'>
+						<BOUCLE_enfants(CLIL_THEMES){id_parent}{par libelle}{recherche?}>
+						<li class='li_long[(#VAL{#ID_CLIL_THEME}|clil_themes_nombre_sous_themes|oui)casier]'>
+							<div class='choix'>
+								<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#ID_CLIL_THEME' [(#TAG|=={oui}|oui)checked='checked'] />
+								<label for='#ID_CLIL_THEME'>#LIBELLE</label>
+							</div><BOUCLE_rec(BOUCLE_enfants)/>
+						</li>
+						</BOUCLE_enfants>
+					</ul></B_enfants>
+				</li>
+			</BOUCLE_themes_clil>
+			</ul>
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
 	</form>
 </div>
+
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(".li_long.casier").on('click', function(event) {
+	if (event.target == this) {
+		jQuery(this).toggleClass('open').find('ul').first().toggle('fast');
+	}
+});
+// traitement spécial si une recherche est faite
+if (jQuery('div#recherche_en_cours').length > 0) {
+	jQuery(".li_long.casier_vide").hide(); // spécial : on cache les thèmes n'ayant pas de sous-thèmes
+	jQuery(".li_long.casier").each(function(event){
+		 if ( !$(this).find('ul').length > 0 ) {
+		 	$(this).hide();
+		 }
+		 else $(this).find('ul').show();
+	});
+}
+/*]]>*/</script>

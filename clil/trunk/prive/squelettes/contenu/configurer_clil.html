@@ -5,6 +5,9 @@
 [(#REM) <!-- Barre d'onglets de premier niveau --> ]
 [(#VAL{configurer_clil}|barre_onglets{configurer_clil})]
 
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
 <div class="ajax">
-	#FORMULAIRE_CONFIGURER_CLIL
+	[(#FORMULAIRE_CONFIGURER_CLIL{#ENV{recherche}})]
 </div>
