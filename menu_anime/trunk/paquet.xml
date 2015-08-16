@@ -1,7 +1,7 @@
 <paquet
 	prefix="menu_anime"
 	categorie="navigation"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.20;3.0.*]"
 	logo="img/menu_anime-64.png"
@@ -10,7 +10,7 @@
 	<nom>Menu animé</nom>
 
 	<auteur mail="louis.possoz@quelfutur.org">Louis Possoz</auteur>
-	<auteur lien="http://red-team-design.com/css3-dropdown-menu/">Catalin Rosu - Red Team Design</auteur>
+	<credit lien="http://red-team-design.com/css3-dropdown-menu/">Catalin Rosu - Red Team Design</credit>
 	<copyright>2011-2015</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
