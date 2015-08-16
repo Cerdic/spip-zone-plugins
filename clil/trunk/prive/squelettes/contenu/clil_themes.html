@@ -5,7 +5,7 @@
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
-<B_themes_par_secteur>
+
 <BOUCLE_themes_par_secteur(CLIL_THEMES){racine}{par libelle}>
 	<INCLURE{fond=prive/objets/liste/clil_themes, par=id_clil_theme, id_secteur, env, ajax, sinon=<:clil_theme:info_aucun_clil_theme:>}>
 </BOUCLE_themes_par_secteur>
