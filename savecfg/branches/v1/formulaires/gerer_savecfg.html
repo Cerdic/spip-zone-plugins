@@ -1,0 +1,34 @@
+#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+<B_savecfg>
+<div class="formulaire_spip formulaire_savecfg">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend"><:savecfg:gerer_restauration:></h3>
+						<ul>
+								<li>
+								<select name="fond_id">
+								<option value="none" selected="selected">&nbsp;</option>
+								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
+									<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
+								</BOUCLE_savecfg>
+								</select>
+								</li>
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_restaurer_" value="<:savecfg:restaurer:>" />
+				<input type="submit" name="_supprimer_" value="Supprimer" />
+			</p>
+		</div>
+	</form>
+</div>
+<br />
+</B_savecfg>
