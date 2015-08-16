@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 Complément du plugin {{Menus}} par exemple.
 
-Voir documentation sur [contrib.spip.net->http://contrib.spip.net/Menu-anime]',
+Voir documentation sur [contrib.spip.net->http://contrib.spip.net/Menu-anime-deroulant]',
 	'menu_anime_nom' => 'Menu animé déroulant',
 	'menu_anime_slogan' => 'Affichage d\'un menu déroulant animé multi-niveaux.',
 );

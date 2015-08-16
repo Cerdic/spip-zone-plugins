@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.20;3.0.*]"
 	logo="img/menu_anime-64.png"
-	documentation="http://contrib.spip.net/Menu-anime"
+	documentation="http://contrib.spip.net/Menu-anime-deroulant"
 >
 	<nom>Menu animé</nom>
 

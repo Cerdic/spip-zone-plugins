@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Nice complement to the {{Menus}} plugin for example.,
 
-See documentation on [contrib.spip.net->http://contrib.spip.net/Menu-anime]',
+See documentation on [contrib.spip.net->http://contrib.spip.net/Menu-anime-deroulant]',
 	'menu_anime_nom' => 'Animated dropdown menu',
 	'menu_anime_slogan' => 'Display of a multi level drop down animated menu.',
 );
