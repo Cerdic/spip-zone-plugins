@@ -50,7 +50,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
   $champs = array();
   // cf autorisations dans inc/instituer_objet
-  if ($s != $statut OR ($d AND $d != $date)) {
+ if ($s != $statut OR ($d AND $d != $date)) {
     if (autoriser('modifier', 'reservation', $id_reservation))
       $statut = $champs['statut'] = $s;
     else
@@ -149,15 +149,17 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
     include_spip('action/editer_reservations_detail');
     $c = array('statut' => $statut);
     $sql = sql_select('id_reservations_detail', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
+    // Eviter l'envoi d'une notification pour chaque détail
+    set_request('envoi_separe_actif', 'non');
     while ($data = sql_fetch($sql)) {
       reservations_detail_instituer($data['id_reservations_detail'], $c);
     }
   }
-  else {
+ else {
     $action = charger_fonction('editer_objet', 'action');
-    $set['evenements'] = $evenements;
+   $set['evenements'] = $evenements;
     set_request('evenements', $evenements);
-  }
+  } 
   //Si on est dans le cas d'une création
   if (is_array($evenements)) {
     // Pour chaque évènement on crée un détail de la réservation
@@ -182,7 +184,6 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
   }
 
   // Notifications
-
   if ((!$statut_ancien OR $statut != $statut_ancien) && (isset($config['activer'])) && (isset($config['quand']) && is_array($config['quand']) && in_array($statut, $config['quand'])) && ($notifications = charger_fonction('notifications', 'inc', true))) {
     //Déterminer la langue pour les notifications
     $lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
