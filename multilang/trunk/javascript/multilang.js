@@ -329,7 +329,7 @@ function multilang_init_field(el,lang,force) {
 			el.multi = true;
 			multilang_match_multi.lastIndex=0;
 			el.field_lang['full'] = el.value;
-			while((langs=multilang_match_multi.exec(m[2]))!=null) {
+			while((langs=multilang_match_multi.exec(m[2]))!=null && langs[0] != "") {
 				var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
 				// Suppression du numero uniquement pour les titres
 				if(multilang_is_title(el) && text!=null) {
