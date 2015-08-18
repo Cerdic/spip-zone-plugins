@@ -13,9 +13,6 @@ class SpipSourcesIndexer {
     /** @var \Indexer\Sources\Sources */
     private $sources = null;
 
-    /** @var bool Tables de liens présentes (spip 3 ?) */
-    private $tables_liens = true;
-
     /** @var string clé de config */
     private $meta_stats = 'indexer/indexing/stats';
 
@@ -29,19 +26,6 @@ class SpipSourcesIndexer {
         $this->indexer = $indexer;
         $this->sources = $sources;
     }
-
-
-    public function setTablesLiensAuto() {
-        include_spip('inc/plugin');
-        $liens = spip_version_compare($GLOBALS['spip_version_branche'], '3.0', '>=');
-        $this->setTablesLiens($liens);
-    }
-
-    public function setTablesLiens($bool) {
-        $this->tables_liens = (bool)$bool;
-    }
-
-
 
     public function isTimeout() {
         static $timeout = null;
@@ -161,9 +145,6 @@ class SpipSourcesIndexer {
 
 
     private function indexSource($source, $skey, &$stats) {
-
-        $source->setTablesLiens($this->tables_liens); // pour SPIP 2.1
-
         echo "<h2>Analyse de $source :</h2>\n";
         spip_timer('source');
 
@@ -197,10 +178,7 @@ class SpipSourcesIndexer {
         echo $this->getNiceTime( $stats['sources'][$skey]['time']['total'] );
     }
 
-
-
     private function indexSourcePart($source, $skey, $part, &$stats) {
-
         spip_timer('documents');
         $documents = $source->getDocuments($part['start'], $part['end']);
         $t = spip_timer('documents', true);
@@ -225,8 +203,6 @@ class SpipSourcesIndexer {
             echo "<br />Enregistrement dans l'index: " . $this->getNiceTime($t) . "\n";
         }
     }
-
-
 
     /** Retourne un temps formaté pour une belle lecture */
     public function getNiceTime($p) {
