@@ -54,7 +54,7 @@ function action_oembed_nettoyer_iframes_dist(){
 							}
 							if (!$url){
 								var_dump($row);
-								var_dump($iframe);
+								var_dump(entites_html($iframe));
 								die('youtube inconnue');
 							}
 						} elseif (strpos($iframe, "dailymotion")!==false) {
@@ -143,9 +143,14 @@ function action_oembed_nettoyer_iframes_dist(){
 								$url = str_replace("/v/", "/watch?v=", $url);
 								echo "$pre Youtube $url<br />";
 							}
+							elseif (strpos($src, "/embed/")!==false){
+								$url = str_replace("?", "&", $src);
+								$url = str_replace("/embed/", "/watch?v=", $url);
+								echo "$pre Youtube $url<br />";
+							}
 							if (!$url){
 								var_dump($row);
-								var_dump($object);
+								var_dump(entites_html($object));
 								die('youtube inconnue');
 							}
 						} elseif (strpos($embed, "dailymotion")!==false) {
@@ -167,6 +172,18 @@ function action_oembed_nettoyer_iframes_dist(){
 								var_dump($row);
 								var_dump($object);
 								die('dailymotion inconnue');
+							}
+						}
+						elseif(strpos($embed,"vimeo.com")!==false){
+							if (strpos($src, "moogaloop")!==false
+							  AND $id = parametre_url($src,"clip_id")){
+								$url = "https://vimeo.com/$id";
+								echo "$pre Vimeo $url<br />";
+							}
+							if (!$url){
+								var_dump($row);
+								var_dump(entites_html($object));
+								die('vimeo inconnue');
 							}
 						}
 						elseif(preg_match(",^https?://,",$u=trim(strip_tags($object)))) {
