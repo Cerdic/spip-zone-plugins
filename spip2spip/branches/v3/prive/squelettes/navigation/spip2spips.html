@@ -1,0 +1,10 @@
+#BOITE_OUVRIR{'','info'}
+<p><:spip2spip:intro_spip2spip:></p>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{'','raccourcis'})]
+	[(#AUTORISER{creer,spip2spip})
+		[(#URL_ECRIRE{spip2spip_edit,new=oui}|icone_horizontale{<:spip2spip:icone_creer_spip2spip:>,spip2spip,new})]
+	]
+#BOITE_FERMER
+

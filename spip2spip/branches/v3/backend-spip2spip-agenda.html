@@ -1,0 +1,67 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>[
+(#REM)
+  Liste tous les articles récents liés aux thématiques du groupe de mots-clés - spip2spip - destinés à être recopiés
+    
+  Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)
+
+]#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}#SET{evenement,oui}
+[(#ENV{evenement}|=={non}|oui)#SET{evenement,non}]
+<!-- backend utilisant SPIP2SPIP   --><spip2spip version="1.8">
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>	
+  <!-- thématiques proposées --><BOUCLE_thema(MOTS){type=- spip2spip -}>
+  [<thema>(#TITRE|texte_backend)</thema>]</BOUCLE_thema>
+  	
+  <!-- derniers articles à synchroniser --><BOUCLE_synchro_article(ARTICLES){type_mot=- spip2spip -}{age<7}>
+		<item>		  
+		  [<surtitre>(#SURTITRE*|liens_absolus|spip2spip_respecte_img|texte_backend)</surtitre>]
+		  <titre>[(#TITRE*|liens_absolus|spip2spip_respecte_img|texte_backend)]</titre>
+		  [<soustitre>(#SOUSTITRE*|liens_absolus|spip2spip_respecte_img|texte_backend)</soustitre>]
+		  [<descriptif>(#DESCRIPTIF*|liens_absolus|spip2spip_respecte_ln|spip2spip_respecte_img|texte_backend)</descriptif>]
+		  [<chapo>(#CHAPO*|liens_absolus|spip2spip_respecte_ln|spip2spip_respecte_img|texte_backend)</chapo>]
+		  [<texte>(#TEXTE*|liens_absolus|spip2spip_respecte_ln|spip2spip_respecte_img|texte_backend)</texte>]
+		  [<ps>(#PS*|liens_absolus|spip2spip_respecte_ln|texte_backend)</ps>]
+		  <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+		  <BOUCLE_trad_dispo(ARTICLES){traduction}{0,1}{exclus}> </BOUCLE_trad_dispo><BOUCLE_trad(ARTICLES){traduction}{origine_traduction}><trad>#URL_SITE_SPIP/#URL_ARTICLE</trad></BOUCLE_trad></B_trad_dispo>
+		  <date>#DATE</date>         
+      <B_datesevent><evenements> 
+       		<BOUCLE_datesevent(EVENEMENTS ?){par date}{id_article}{si #GET{evenement}|=={oui}}><evenement>                    
+                    [<datedeb>(#DATE_DEBUT|texte_backend)</datedeb>]
+                    [<datefin>(#DATE_FIN|texte_backend)</datefin>]
+                    [<titre>(#TITRE|texte_backend)</titre>]
+                    [<desc>(#DESCRIPTIF|spip2spip_respecte_ln|texte_backend)</desc>]
+                    [<lieu>(#LIEU|texte_backend)</lieu>]
+                    [<adresse>(#ADRESSE|spip2spip_respecte_ln|texte_backend)</adresse>]
+                    [<horaire>(#HORAIRE|texte_backend)</horaire>]                    
+                    [(#CONFIG{spip2spip/export_mot_evnt}|oui)
+                        [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_evenement}{type_objet=evt} />]
+                        [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inclure/spip2spip_mot_article_restreint}{id_evenement}{type_objet=evt} />]
+                    ]                    
+           </evenement></BOUCLE_datesevent>
+		  </evenements></B_datesevent> 
+		  <B_doc><documents>
+                <BOUCLE_doc(DOCUMENTS){id_article}>
+                 <document>
+                     <id>#ID_DOCUMENT</id>
+                     <url>#URL_SITE_SPIP/#URL_DOCUMENT</url>
+                     [<titre>(#TITRE*|texte_backend)</titre>]
+                     [<desc>(#DESCRIPTIF*|texte_backend)</desc>]
+                 </document>
+                </BOUCLE_doc>
+      </documents></B_doc>
+            
+     <B_auteurs><auteur><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs> 
+		 <lang>#LANG</lang>
+     [<logo>#URL_SITE_SPIP/(#LOGO_ARTICLE_NORMAL|extraire_attribut{src})</logo>]
+		 [<logosurvol>#URL_SITE_SPIP/(#LOGO_ARTICLE_SURVOL|extraire_attribut{src})</logosurvol>]
+     <BOUCLE_list_mot(MOTS){id_article}{type=- spip2spip -}{0,1}>[<keyword>(#TITRE|texte_backend)</keyword>]</BOUCLE_list_mot>
+     [(#CONFIG{spip2spip/export_mot_article}|oui)
+        [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_article} />]
+        [(#GET{which_groupe}|find{-1}|non)<INCLURE{fond=inclure/spip2spip_mot_article_restreint}{id_article} />]
+     ]
+     <B_licence><licence><BOUCLE_licence(MOTS){id_article}{type=licence}{0,1}>[(#TITRE|texte_backend)]</BOUCLE_licence></licence></B_licence>		
+		</item>
+	</BOUCLE_synchro_article>
+</spip2spip>
+[(#REM)Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)]
