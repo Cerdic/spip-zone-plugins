@@ -12,7 +12,6 @@ if (_request('run') || _request('continue')) {
     $sources = indexer_sources();
 
     $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
-    $SpipSourcesIndexer->setTablesLiensAuto();
 
     if (_request('run')) {
         $SpipSourcesIndexer->resetIndexesStats();
