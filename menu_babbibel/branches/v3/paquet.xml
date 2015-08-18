@@ -1,0 +1,21 @@
+<paquet
+    prefix="babbi"
+    categorie="navigation"
+    version="3.0.1"
+    etat="stable"
+    compatibilite="[1.9.2;3.0.*]"
+    logo="prive/themes/spip/images/logo_menu_50.png"
+    documentation="http://contrib.spip.net/?article3055"
+>       
+	
+    <nom>Menu babbibel</nom>
+    <!-- Un menu déroulant configurable et compatible -->
+
+    <auteur>babbibel</auteur>
+
+    <pipeline nom="insert_head_css" action="insert_head_css" inclure="fonctions_menu.php" />
+    <pipeline nom="insert_head" action="insert_head" inclure="fonctions_menu.php" />
+    <pipeline nom="autoriser" inclure="inc/babbi_autoriser.php" />
+
+    <menu nom="babbibel" titre="babbi:titre_menu_babbibel" parent="bando_squelette" icone="images/logo_menu-27-24.png" action="configurer_babbi" />
+</paquet>

@@ -1,0 +1,17 @@
+<ul class="nav">
+	[(#CONFIG{babbi/accueil}|non) <li>
+		<a href="#URL_SITE_SPIP/" title="[(#NOM_SITE_SPIP|textebrut)]"><:accueil_site:></a>
+	</li>]
+	<BOUCLE_menus_bab(RUBRIQUES){lang}{par num titre, titre} {titre_mot=menu_der}>
+		<li><a href="#URL_RUBRIQUE" [class="(#EXPOSE{babbin,babbout})"]>[(#TITRE|supprimer_numero|couper{80})]</a>
+			<BOUCLE_exclus_art_babbi(ARTICLES) {titre_mot=exclu_menu_der} {doublons exclueB}></BOUCLE_exclus_art_babbi>
+				<B_menu_articles>
+					<ul>
+						<BOUCLE_menu_articles(ARTICLES) {id_rubrique}{lang}{par #CONFIG{babbi/tri}|sinon{date}} {inverse #CONFIG{babbi/inverse}} {0, #CONFIG{babbi/nb_articles}|sinon{100}}{doublons exclueB}>
+							<li><a href="#URL_ARTICLE" [class="(#EXPOSE{babbin,babbout})"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_menu_articles>
+					</ul>									
+				</B_menu_articles>
+		</li>
+	</BOUCLE_menus_bab>
+</ul>

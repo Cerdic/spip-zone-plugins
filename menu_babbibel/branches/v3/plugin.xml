@@ -1,0 +1,56 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Menu Babbibel
+			[en]Babbibel Menu
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Menu d&#233;roulant horizontal en jQuery
+			[en]Horizontal dropdown menu with jQuery
+		</multi>
+	</slogan>
+	
+	<version>3.0.0</version>
+	<prefix>babbi</prefix>
+	<auteur>babbibel</auteur>
+	<licence>(c) 2009 GNU/GPL</licence>
+	<icon>prive/themes/spip/images/logo_menu-27-24.png</icon>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Ce plugin propose un menu d&#233;roulant horizontal s&#233;appuyant sur la librairie jQuery, sans limitation de profondeur et configurable avec CFG. Le code &#233;tant tr&#232;s simple, le menu est facile &#224; personnaliser.
+		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize.
+		</multi>
+	</description>
+	<lien>http://contrib.spip.net/?article3055</lien>
+
+	<bouton id='babbi' parent='configuration'>
+        	<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+		      <titre>babbi:titre_menu_babbibel</titre>
+		      <url>configurer_babbi</url>  
+  </bouton>
+	<bouton id='babbi2' parent='bando_squelette'>
+           <icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+           <titre>babbi:titre_menu_babbibel</titre>
+           <url>configurer_babbi</url>
+  </bouton>
+	
+	<fonctions>fonctions_menu.php</fonctions>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>fonctions_menu.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<action>insert_head_css</action>
+		<inclure>fonctions_menu.php</inclure>
+	</pipeline>
+
+	<categorie>navigation</categorie>
+	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
+</plugin>

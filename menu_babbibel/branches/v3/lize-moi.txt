@@ -1,0 +1,13 @@
+Les articles et rubriques en cours sont exposes. la personnalisation du lien expose se fait via les classes ***babbin*** et ***babbout*** du menu_babbi.css
+
+Le fichier css "menu_babbi.css" personnalisé peut être placé à la racine du dossier squelettes pour ne pas etre ecrase lors des mises à jour.
+
+Depuis la version "menu_babbibel 2.0.9 test", l'id="nav" est devenu class="nav". 
+
+***Important***
+Dans votre css personnalisée 
+			*************************
+			*			*			
+			*  #nav devient .nav  	*
+			*			*
+			*************************
