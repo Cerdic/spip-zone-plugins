@@ -14,7 +14,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		#SET{fl,numero}
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
