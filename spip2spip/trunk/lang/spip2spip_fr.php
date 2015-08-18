@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // E
   'erreur_obligatoire' => 'Champ obligatoire',
   'erreur_flux_inconnu' => 'Impossible de charger ce flux',
+  'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
 
   // F
   'form_s2s_1' => 'Titre du site',
@@ -62,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // I
   'icone_creer_spip2spip' => 'Ajouter un site spip2spip',
   'icone_modifier_spip2spip' => 'Modifier ce site spip2spip',
+  'info_statut_site' => 'Identique',
   'intro_spip2spip' => 'Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.',
   'install_spip2spip' => 'Installation des tables de spip2spip',
   'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
@@ -75,11 +77,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'imported_already' => 'Article d&eacute;j&agrave; import&eacute;',
   'imported_new' => 'Nouvel article',
   'imported_update' => 'Article mis &agrave; jour  ',
-  'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
   'imported_view' => 'Consulter l\'article import&eacute;',
   'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave; rien</p>',
   'info_aucun_spip2spip' => 'Aucun site actuellement enregistré',
   'icone_creer_spip2spipicone_creer_spip2spip' => 'Ajouter un nouveau site Spip2spip',
+  'info_une_rubrique' => 'Une rubrique associée',
+  'info_nb_rubriques' => '@nb@ rubriques associées',
+  'info_aucune_rubrique' => 'Aucune rubrique associée',
 
   // L
   'label_site_titre' => 'Nom du site',
