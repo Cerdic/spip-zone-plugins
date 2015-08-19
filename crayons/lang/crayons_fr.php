@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Upload de documents',
 	'legend_editer_prive' => 'Éditer l’espace privé (expérimental)',
 	'legend_introduction_article' => 'Texte introductif de l’article',
+	'legend_introduction_rubrique' => 'Texte introductif de la rubrique',
 
 	// M
 	'message_image_obligatoire' => 'Il faut choisir une image',
