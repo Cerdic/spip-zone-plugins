@@ -11,8 +11,9 @@ function indexer_jointure_auteurs_dist($objet, $id_objet, $infos) {
 		array('l.objet='.sql_quote($objet), 'l.id_objet='.intval($id_objet))
 	)) {
 		foreach ($auteurs as $auteur) {
-			$infos['properties']['auteurs']['noms'][$auteur['id_auteur']] = $auteur['nom'];
-			$infos['properties']['auteurs']['ids'][] = $auteur['id_auteur'];
+			$id_auteur = intval($auteur['id_auteur']);
+			$infos['properties']['auteurs']['noms'][$id_auteur] = $auteur['nom'];
+			$infos['properties']['auteurs']['ids'][] = $id_auteur;
 			
 			// Peut-être indexer l'email de chaque auteur⋅e ?
 			if ($auteur['email'] and lire_config('indexer/'.$objet.'/jointure_auteurs/indexer_email')) {

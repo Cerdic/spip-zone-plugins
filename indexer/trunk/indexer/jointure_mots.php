@@ -21,8 +21,9 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		$where
 	)) {
 		foreach ($mots as $mot) {
-			$infos['properties']['mots']['titres'][$mot['id_mot']] = supprimer_numero($mot['titre']);
-			$infos['properties']['mots']['ids'][] = $mot['id_mot'];
+			$id_mot = intval($mot['id_mot']);
+			$infos['properties']['mots']['titres'][$id_mot] = supprimer_numero($mot['titre']);
+			$infos['properties']['mots']['ids'][] = $id_mot;
 		}
 		
 		// On ajoute le nom des mots en fulltext à la fin

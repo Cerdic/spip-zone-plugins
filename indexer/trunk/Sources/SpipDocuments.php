@@ -110,7 +110,7 @@ class SpipDocuments implements SourceInterface {
 		}
 		
 		// On cherche les éléments dont on va avoir besoin
-		$id = $contenu[$this->cle_objet];
+		$id = intval($contenu[$this->cle_objet]);
 		$doc['id'] = $this->getObjectId($this->objet, $id);
 		$doc['uri'] = generer_url_entite_absolue($id, $this->objet);
 		$doc['properties']['objet'] = $this->objet;
