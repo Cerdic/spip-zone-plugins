@@ -28,22 +28,20 @@
 	})]
 })]
 
-<ul>
-	<li class="fieldset" [ style="(#ENV{style}); border:none;"]>
-		<h3 class="legend">
-			[(#GET{legend}|sinon{<:crayons:legend_controleur_vignette:>})]
-			[<div style="float:#LANG_RIGHT">(#GET{vignette}|inserer_attribut{src,#GET{url}}
-				|inserer_attribut{style,vertical-align:middle;})</div>]
-		</h3>
-		<ul>
-			<li class="editer_vignette">
-				<div class="choix">
-					<input class="crayon-active file" name="#ENV{name_vignette}" type="file"
-						onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('<:crayons:message_image_obligatoire:>'); this.value=''; }; var q=cQuery('##ENV{name_vignette}_supprimer').parent(); this.value ? q.hide() : q.show();" size="10" />
-				</div>
-				#GET{supprimer}	
-			</li>
-		</ul>
-	</li>
-</ul>
+<fieldset [ style="(#ENV{style}); border:none;"]>
+	<h3 class="legend">
+		[(#GET{legend}|sinon{<:crayons:legend_controleur_vignette:>})]
+		[<div style="float:#LANG_RIGHT">(#GET{vignette}|inserer_attribut{src,#GET{url}}
+			|inserer_attribut{style,vertical-align:middle;})</div>]
+	</h3>
+	<ul class="editer-groupe">
+		<li class="editer_vignette">
+			<div class="choix">
+				<input class="crayon-active file" name="#ENV{name_vignette}" type="file"
+					onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('<:crayons:message_image_obligatoire:>'); this.value=''; }; var q=cQuery('##ENV{name_vignette}_supprimer').parent(); this.value ? q.hide() : q.show();" size="10" />
+			</div>
+			#GET{supprimer}
+		</li>
+	</ul>
+</fieldset>
 </BOUCLE_document>

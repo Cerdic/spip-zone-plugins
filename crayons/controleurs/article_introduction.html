@@ -18,11 +18,11 @@
 ]
 #CACHE{0}
 <BOUCLE_a(ARTICLES){id_article}{statut==.}>
-<ul>
+<ul class="editer-groupe">
 	<li class="fieldset" style="width:#ENV{largeur}px;#ENV{style}">
 		<h3 class="legend"><:crayons:legend_introduction_article:></h3>
 		<p class="explication"><:crayons:explication_introduction_article:></p>
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer_descriptif">
 				<label for="descriptif"><:texte_descriptif_rapide:></label>
 				<textarea class="crayon-active maxheight150" 
