@@ -51,7 +51,6 @@ function clil_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_versions_fragments",    sql_in("objet", array('clil_theme')));
 
 	effacer_meta('clil_rubriques');
-	effacer_meta('derniere_modif_clil_theme');
 	effacer_meta($nom_meta_base_version);
 }
 
