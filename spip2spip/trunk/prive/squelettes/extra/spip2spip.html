@@ -3,14 +3,14 @@
 <B_rss>
 
 <ul class="menu-items">
-<BOUCLE_rss (DATA) {source xml, #SITE_RSS} {cle==^thema}>[(#SET{id_mot,0})]<BOUCLE_mot (MOTS) {titre==#VALEUR{0}}>[(#SET{id_mot,#ID_MOT})]</BOUCLE_mot>
+<BOUCLE_rss (DATA) {source xml, #SITE_RSS} {cle==^thema} {par valeur}>[(#SET{id_mot,0})]<BOUCLE_mot (MOTS) {titre==#VALEUR{0}}>[(#SET{id_mot,#ID_MOT})]</BOUCLE_mot>
 <li class="item">[(#GET{id_mot}|>{0}|?{
     <a href="[(#URL_ECRIRE{'mot'}|parametre_url{'id_mot',#GET{id_mot}})]" title="<:spip2spip:voir_thematique|attribut_html:>">,
     <p>
 })][(#VALEUR{0})][(#GET{id_mot}|>{0}|?{
     </a>,
     </p>
-})] <em><BOUCLE_rubriques (RUBRIQUES) {id_mot=#GET{id_mot}}> </BOUCLE_rubriques>[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:spip2spip:info_une_rubrique:>,<:spip2spip:info_nb_rubriques:>}</B_rubriques><:spip2spip:info_aucune_rubrique:><//B_rubriques></em></li>[(#SET{id_mot,0})]
+})] <BOUCLE_rubriques (RUBRIQUES) {titre_mot=#VALEUR{0}} {tout}> </BOUCLE_rubriques><em class="text_success">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:spip2spip:info_une_rubrique:>,<:spip2spip:info_nb_rubriques:>})]</em></B_rubriques><em class="text_notice"><:spip2spip:info_aucune_rubrique:></em><//B_rubriques></li>[(#SET{id_mot,0})]
 </BOUCLE_rss>
 </ul>
 </B_rss>
