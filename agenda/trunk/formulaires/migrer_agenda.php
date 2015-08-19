@@ -68,6 +68,7 @@ function formulaires_migrer_agenda_verifier_dist(){
 		$message .= sinon(singulier_ou_pluriel($nba,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
 
 		$erreurs['confirmer'] = $message;
+		$erreurs['message_erreur'] = ''; // pas de message automatique
 	}
 
 	return $erreurs;

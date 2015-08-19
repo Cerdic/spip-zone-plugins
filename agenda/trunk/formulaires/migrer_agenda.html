@@ -19,7 +19,7 @@
 				(#VAL|chercher_rubrique{0,#ENV{id_parent},'article',0,0,0,form_simple})
 	    </li>]
 			#SET{name,toute_la_branche}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,oui}
