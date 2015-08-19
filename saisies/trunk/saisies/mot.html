@@ -14,6 +14,7 @@
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   - size : la taille du sélecteur (seulement si multiple)
+  - groupes_exclus : liste d'ids de groupe dont on ne veut pas les mots
   
   Exemple d'appel :
 	[(#SAISIE{mot, en_region,
@@ -39,7 +40,7 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}>[(#ENV{id_groupe,''}|non|et{#GET{groupe}|=={#ID_GROUPE}|non}|oui)
+<BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}{!id_groupe IN #ENV{groupes_exclus}}>[(#ENV{id_groupe,''}|non|et{#GET{groupe}|=={#ID_GROUPE}|non}|oui)
 	[(#GET{groupe}|intval|>{0}|oui)</optgroup>]
 	[<optgroup label="(#TYPE|attribut_html)">][(#SET{groupe,#ID_GROUPE})]]
 	[(#ENV{multiple}|non)<option value="#ID_MOT"[(#ID_MOT|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui)selected="selected"]>#TITRE</option>]
