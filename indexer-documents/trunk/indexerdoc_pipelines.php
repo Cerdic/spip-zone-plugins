@@ -1,22 +1,33 @@
 <?php
 
 /**
- * Ajouter la source de données documents
+ * Modifier la source pour l'objet "document"
  *
- *
- * @param $sources les sources déjà déclarées pour indexer
- * @return Sources Retourne le flux du pipeline complété
+ * @pipeline indexer_document
+ * @param array $flux Tableau du flux du pipeline
+ * @return array Retourne le flux possiblement modifié
  */
-function indexerdoc_indexer_sources($sources) {
-
-    include_spip('Sources/Documents');
-
-    if (is_null($sources)){
-		// On crée la liste des sources
-		$sources = new Indexer\Sources\Sources();
-    }
-    // Par défaut on enregistre les articles du SPIP
-    $sources->register('documents', new Spip\Indexer\Sources\Documents());
-
-    return $sources;
+function indexerdoc_indexer_document($flux) {
+	if ($flux['args']['objet'] == 'document') {
+		$document =& $flux['data'];
+		$extraire = array('contenu' => false);
+		
+        // Extraire le contenu si possible
+        if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
+            include_spip('inc/extraire_document');
+            $extraire = inc_extraire_document($flux['args']['champs']);
+        }
+        
+        // Si le document n'avait pas de titre, on met le nom du fichier
+		if (empty($document->title)) {
+			$document->title = $flux['args']['champs']['fichier'];
+		}
+		
+		// Si on a réussi à extraire le document, on ajoute son contenu
+		if ($extraire['contenu']) {
+			$document->content .= "\n\n" . $extraire['contenu'];
+		}
+	}
+	
+	return $flux;
 }
