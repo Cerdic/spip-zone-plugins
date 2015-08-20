@@ -1,0 +1,32 @@
+<plugin>
+    <nom>Indexer Documents</nom>
+    <slogan>Indexeur de contenus</slogan>
+
+    <auteur>Fil</auteur>
+    <auteur>Rastapopoulos</auteur>
+    <auteur>Marcimat</auteur>
+    <auteur>Azerttyu</auteur>
+
+    <icon></icon>
+
+    <licence>GNU/GPL</licence>
+    <version>0.0.3</version>
+    <etat>dev</etat>
+    <description>Gestion d'indexation de contenus avec SPIP. Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure</description>
+    <prefix>indexerdoc</prefix>
+
+    <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+    <necessite id="indexer" version="[1.1;]" />
+
+    <utilise id="extrairedoc" version="[0.0.4;]" />
+
+    <pipeline>
+        <nom>indexer_sources</nom>
+        <inclure>indexerdoc_pipelines.php</inclure>
+    </pipeline>
+
+    <categorie>navigation</categorie>
+
+    <lien>http://contrib.spip.net/Sphinx-Indexer</lien>
+
+</plugin>
