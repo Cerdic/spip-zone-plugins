@@ -261,7 +261,7 @@ class SpipDocuments implements SourceInterface {
 			'indexer_document',
 			array(
 				'args' => array(
-					'objet ' => $this->objet,
+					'objet' => $this->objet,
 					'id_objet' => $id,
 					'champs' => $contenu,
 				),
