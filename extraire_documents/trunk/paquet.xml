@@ -13,12 +13,10 @@
 	<auteur>Fil</auteur>
 	<auteur>Gael Chareyre</auteur>
 	<auteur>Azerttyu</auteur>
-
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<copyright>2009-2015</copyright>
 
     <lib nom="TCPDF-6.2.6" lien="https://github.com/tecnickcom/TCPDF/archive/6.2.6.zip" />
     <lib nom="pdfparser-0.9.22" lien="https://github.com/smalot/pdfparser/archive/v0.9.22.zip" />
-
-	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 </paquet>
