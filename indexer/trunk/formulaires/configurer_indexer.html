@@ -5,7 +5,6 @@
 
 ][(#ENV{sources_objets}|is_array|?{#SET{sources,#ENV{sources_objets}},#SET{sources,#LISTE{spip_articles}}})]
 
-
 <div class="formulaire_spip formulaire_configurer[ formulaire_(#FORM)]">
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -13,6 +12,14 @@
 	
 	<form action="#ENV{action}" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+		[(#REM) Pour que l'API configurer charge et accepte les sous-config ]
+		<BOUCLE_objets_declaration(DATA){source table,#VAL|lister_tables_objets_sql}>
+		[(#VALEUR{editable}|oui)
+		#SET{objet, #CLE|objet_type}
+		<input type="hidden" name="#GET{objet}" />
+		]
+		</BOUCLE_objets_declaration>
 		
 		<ul class="editer-groupe">
 			<li class="editer [ (#ENV**{erreurs/sources_objets}|oui)erreur]">
@@ -32,7 +39,6 @@
 			
 			[(#REM) S'il y a un squelette dédié pour cet objet sinon squelette générique ]
 			[<li class="fieldset">
-				<input type="hidden" name="#GET{objet}" /> [(#REM) Pour que l'API configurer charge ]
 				<fieldset>
 					<legend>[(#VALEUR|objet_info{texte_objets}|_T)]</legend>
 					<ul class="editer-groupe">

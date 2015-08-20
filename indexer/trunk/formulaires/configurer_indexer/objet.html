@@ -46,11 +46,11 @@
 			<input
 				type="checkbox" class="checkbox"
 				name="#ENV{objet}\[jointure_[(#VALEUR)]\]\[activer\]"
-				id="#ENV{objet}_jointure_#VALEUR_activer"
+				id="#ENV{objet}_jointure_[(#VALEUR)]_activer"
 				[checked="(#ENV{#ENV{objet}/jointure_#VALEUR/activer}|?{checked})"]
 				onchange="jQuery('.editer.#ENV{objet}_jointure_#VALEUR').toggle(500);"
 			/>
-			<label for="#ENV{objet}_jointure_#VALEUR_activer"><:indexer:configurer_jointure_activer_label{jointure=#GET{jointure_humaine}}:></label>
+			<label for="#ENV{objet}_jointure_[(#VALEUR)]_activer"><:indexer:configurer_jointure_activer_label{jointure=#GET{jointure_humaine}}:></label>
 		</div>
 	</li>
 	[(#CHEMIN{formulaires/configurer_indexer/jointure_#VALEUR.html}|oui)
