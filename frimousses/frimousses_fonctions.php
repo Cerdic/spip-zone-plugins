@@ -86,8 +86,8 @@ function frimousses_liste_smileys() {
 				(
 					':-p',
 					':-P',
-					':p',
-					':P'
+					':p ',
+					':P '
 				)
 			,
 			'smiley-cry-16.png' => Array
