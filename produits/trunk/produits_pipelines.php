@@ -25,8 +25,7 @@ function produits_affiche_enfants($flux){
 
 // Compter les produits comme des enfants de rubriques
 function produits_objet_compte_enfants($flux){
-	if ($flux['args']['objet'] == 'rubrique' and ($id_rubrique = intval($flux['args']['id_objet'])) > 0){
-		
+	if ($flux['args']['objet'] == 'rubrique' and ($id_rubrique = intval($flux['args']['id_objet'])) > 0){	
 		$statut = $flux['args']['statut'] ? ' and statut='.sql_quote($flux['args']['statut']) : '';
 		$flux['data']['produits'] = sql_countsel('spip_produits', 'id_rubrique='.$id_rubrique.$statut);
 	}
