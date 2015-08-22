@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION"))
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_reservation_charger_dist($id = array(), $id_article = '', $retour = '') {
-
+function formulaires_reservation_charger_dist($id=array(), $id_article = '', $retour = '') {
+  if(!is_array($id))$id = array();
   include_spip('inc/config');
   include_spip('formulaires/selecteur/generique_fonctions');
 
@@ -43,12 +43,10 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
   //Si pas de zone, on établit les événements à afficher
   if (!is_array($zone)) {
     $where = array('date_fin>NOW() AND inscription=1 AND statut="publie"');
-
     //Si filtré par événement/s
     if ($id) {
-      if (is_array($id))
         $sql = sql_select('id_evenement_source,id_evenement','spip_evenements','id_evenement IN (' . implode(',', $id) . ')');
-      
+ 
       $id = array();
       
       while ($row = sql_fetch($sql)) {
@@ -88,7 +86,6 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
     'articles' => $evenements,
     'lang' => $GLOBALS['spip_lang'],
     'id_evenement' => $id
-    
   );
 
   if (intval($GLOBALS['visiteur_session'])) {
