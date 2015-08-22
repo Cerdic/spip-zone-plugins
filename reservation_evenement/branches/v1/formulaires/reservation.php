@@ -16,6 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_reservation_charger_dist($id = '', $id_article = '', $retour = '') {
+
   include_spip('inc/config');
   include_spip('formulaires/selecteur/generique_fonctions');
 
@@ -24,7 +25,7 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
   $enregistrement_inscrit_obligatoire = isset($config['enregistrement_inscrit_obligatoire']) ? $config['enregistrement_inscrit_obligatoire'] : '';
 
   //Si l'affichage n'est pas déjà définie on établit si une zone s'applique
-  if (!$id_article AND !$id) {
+  if (!$id_article AND !$id) {  
     include_spip('inc/reservation_evenements');
 
     $rubrique_reservation = isset($config['rubrique_reservation']) ? $config['rubrique_reservation'] : '';
@@ -43,19 +44,24 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
   if (!is_array($zone)) {
     $where = array('date_fin>NOW() AND inscription=1 AND statut="publie"');
 
-    //Si filtrer par événement/s
+    //Si filtré par événement/s
     if ($id) {
       if (is_array($id))
         $id = implode(',', $id);
-
-      $id_evenement_source = sql_getfetsel('id_evenement_source','spip_evenements','id_evenement IN (' . $id . ')');
-
-      if ($id_evenement_source == 0)
-        $where[] = 'id_evenement IN (' . $id . ')';
-      else
-        $where[] = 'id_evenement_source IN (' . $id . ')';
+        $sql = sql_select('id_evenement_source,id_evenement','spip_evenements','id_evenement IN (' . $id . ')');
+      
+      $id_source = array();
+      
+      while ($row = sql_fetch($sql)) {
+        if ($row['id_evenement_source'] == 0)
+          $id_source[] = $row['id_evenement'];
+        else
+          $id_source[] = $row['id_evenement_source'];
+      }
+        $where[] = 'id_evenement IN (' . implode(',', $id_source). ')';
     }
-        //Si filtrer par article/s
+    
+    //Si filtré par article/s
     if ($id_article) {
       if (is_array($id_article))
         $id_article= implode(',', $id_article);
@@ -123,7 +129,6 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
   $valeurs['_hidden'] .= '<input type="hidden" name="lang" value="' . $valeurs['lang'] . '"/>';
   if ($enregistrement_inscrit_obligatoire)
     $valeurs['_hidden'] .= '<input type="hidden" name="enregistrer[]" value="1"/>';
-
   return $valeurs;
 }
 
