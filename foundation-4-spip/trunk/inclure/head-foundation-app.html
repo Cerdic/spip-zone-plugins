@@ -1,0 +1,23 @@
+[(#REM) Inclusion de modernizr, car c'est toujours hyper pratique ]
+[<script src="(#CHEMIN{bower_components/modernizr/modernizr.js})" type="text/javascript"></script>]
+
+[(#REM) Inclusion de fastclick ]
+[<script src="(#CHEMIN{bower_components/fastclick/lib/fastclick.js})" type="text/javascript"></script>]
+
+[(#REM) Foundation JS ]
+[(#CONFIG{foundation/javascript}|oui)
+
+[<script src="(#CHEMIN{bower_components/foundation/js/foundation.min.js})" type="text/javascript"></script>]
+
+[(#REM) Rustine pour charger app.js automatiquement ]
+[<script type="text/javascript">
+  $(function () {
+    $.ajax({
+      type: "GET",
+      url: "(#CHEMIN{js/app.js}|texte_script)",
+      dataType: "script",
+      cache: true
+    });
+  });
+</script>]
+]
