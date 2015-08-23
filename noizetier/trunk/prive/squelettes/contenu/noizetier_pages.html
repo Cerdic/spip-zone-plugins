@@ -4,7 +4,7 @@
 <p><:noizetier:editer_noizetier_explication:></p>
 <ul class="liste-items liste-pages noizetier-liste-pages">
 	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
-	<li class="item page" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{page-24.png}|noizetier_chemin_icone));"]>
+	<li class="item page" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{page-24.png}|noizetier_chemin_icone|image_reduire{24}|extraire_attribut{src}));"]>
 		<a href="#URL_ECRIRE{noizetier_page,page=#CLE}">[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</a>
 		[<br />(#VALEUR|table_valeur{description})]
 	</li>

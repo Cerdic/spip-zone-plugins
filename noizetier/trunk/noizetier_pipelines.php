@@ -25,7 +25,7 @@ function noizetier_recuperer_fond($flux){
 		// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
 		if ($composition!='' AND noizetier_page_composition($fond)=='' AND noizetier_page_type($fond)!='page')
 			$fond .= '-'.$composition;
-		
+
 		// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
 		if (isset($GLOBALS['meta']['noizetier_base_version'])) {
 			if ($flux['args']['contexte']['voir']=='noisettes' && !function_exists('autoriser'))
@@ -57,6 +57,40 @@ function noizetier_recuperer_fond($flux){
 }
 
 /**
+ * Personnaliser le fond des formulaires
+ *
+ * Ajout d'un lien vers la page de configuration
+ * dans le formulaire de sélection de composition d'un objet
+ */
+function noizetier_formulaire_fond($flux) {
+	// formulaire d'edition de la composition d'un objet
+	if ($flux['args']['form'] == 'editer_composition_objet') {
+
+		$objet                       = $flux['args']['contexte']['objet'];
+		$composition                 = $flux['args']['contexte']['composition'];
+		$type_page                   = $objet . ($composition ? '-'.$composition : '');
+		$noizetier_compositions_meta = unserialize($GLOBALS['meta']['noizetier_compositions']);
+		$noizetier_compositions_xml  = array_keys(noizetier_lister_pages());
+
+		// On vérifie que cette composition existe
+		if (
+			is_array($noizetier_compositions_meta[$objet][$composition])
+			OR in_array($type_page,$noizetier_compositions_xml)
+		){
+			$balise_img = charger_filtre('balise_img');
+			$lien       = generer_url_ecrire("noizetier_page","page=$type_page");
+			$alt        = _T('noizetier:editer_configurer_page');
+			$cherche    = "/(<span[^>]*class=('|\")toggle_box_link[^>]*>)/is";
+			$icone      = inserer_attribut($balise_img(find_in_path("prive/themes/spip/images/noisette-16.png")),'style','vertical-align:middle;');
+			$remplace   = "$1" . "<a href=\"$lien\" title=\"$alt\">".$icone."</a> ";
+			$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
+		}
+
+	}
+	return $flux;
+}
+
+/**
  * Pipeline compositions_lister_disponibles pour ajouter les compositions du noizetier
  *
  * @param array $flux
@@ -70,7 +104,7 @@ function noizetier_compositions_lister_disponibles($flux){
 	unset($noizetier_compositions['page']);
 	$type = $flux['args']['type'];
 	$informer = $flux['args']['informer'];
-	
+
 	include_spip('inc/texte');
 	foreach($noizetier_compositions as $t => $compos_type)
 		foreach($compos_type as $c => $info_compo) {
@@ -88,7 +122,7 @@ function noizetier_compositions_lister_disponibles($flux){
 			else
 				$noizetier_compositions[$t][$c] = 1;
 			}
-	
+
 	if ($type=='' AND count($noizetier_compositions)>0) {
 		if (!is_array($flux['data']))
 			$flux['data'] = array();
@@ -165,7 +199,7 @@ function noizetier_formulaire_admin($flux) {
 
 function noizetier_affiche_milieu($flux) {
 	$exec = $flux["args"]["exec"];
-	
+
 	if ($exec == "admin_plugin") {
 		include_spip('inc/flock');
 		include_spip('noizetier_fonctions');

@@ -16,6 +16,7 @@
 [(#ENV{page}|noizetier_test_compo_noizetier|oui)
 	[(#URL_ACTION_AUTEUR{supprimer_composition_noizetier,#ENV{page},#URL_ECRIRE{noizetier_pages}}|icone_verticale{<:noizetier:formulaire_supprimer_page:>,page,del,right})]
 ]
+[(#URL_ECRIRE{noizetier_page_edit}|parametre_url{new,oui}|parametre_url{page,#ENV{page}}|icone_verticale{<:noizetier:formulaire_dupliquer_page:>,page,edit,right ajax})]
 
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>

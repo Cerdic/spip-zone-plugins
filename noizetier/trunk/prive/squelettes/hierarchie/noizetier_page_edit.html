@@ -1,2 +1,7 @@
+#SET{action,#ENV{page}|?{#ENV{new}|?{'dupliquer','modifier'},#ENV{new}|?{'creer',''}}}
+#SET{titre_page,#ENV{page}|?{#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom}}}
 <a href="#URL_ECRIRE{noizetier_pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{noizetier_pages}"><:noizetier:liste_pages:></a>
-> <strong class="on"> [(#ENV{page}|oui)[(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom})]][(#ENV{new}|oui)<:noizetier:editer_nouvelle_page:>]</strong>
+> <strong class="on">[
+	(#GET{action}|=={creer}|oui)<:noizetier:editer_nouvelle_page:>][
+	(#GET{action}|=={modifier}|oui)[(#GET{titre_page})]][
+	(#GET{action}|=={dupliquer}|oui)<:noizetier:formulaire_dupliquer_page_titre{page=#GET{titre_page}}:>]</strong>

@@ -1,13 +1,13 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="2.3.3"
+	version="2.4.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"
 	schema="0.4"
 	documentation="http://contrib.spip.net/?article4246"
->	
+>
 
 	<nom>noiZetier</nom>
 	<!-- Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z -->
@@ -35,6 +35,7 @@
 	<pipeline nom="noizetier_config_import" inclure="noizetier_pipelines.php" />
 	<pipeline nom="formulaire_admin" inclure="noizetier_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="noizetier_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="noizetier_pipelines.php" />
 
 	<necessite nom="YAML" compatibilite="[1.4.1;[" />
 	<necessite nom="saisies" compatibilite="[1.20.0;[" />
