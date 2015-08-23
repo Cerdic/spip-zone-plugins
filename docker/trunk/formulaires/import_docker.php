@@ -5,7 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function formulaires_import_docker_charger(){
-	$contexte['id_rubrique'] = _request('id_rubrique');
+	$contexte['id_objet'] = _request('id_objet');
+	$contexte['objet'] = _request('objet');
 	$contexte['nblimite'] = _request('nblimite');
 	return $contexte;
 }
@@ -13,9 +14,9 @@ function formulaires_import_docker_charger(){
 function formulaires_import_docker_verifier(){
 	$erreurs = array();
 	
-	/*if (_request('id_rubrique')) {
-		if (!is_numeric(_request('id_rubrique'))){
-			$erreurs['id_rubrique']=_T('docker:valeur_incorrecte');
+	/*if (_request('id_objet')) {
+		if (!is_numeric(_request('id_objet'))){
+			$erreurs['id_objet']=_T('docker:valeur_incorrecte');
 		}
 	}*/
 	return $erreurs;
@@ -25,29 +26,35 @@ function formulaires_import_docker_verifier(){
 
 function formulaires_import_docker_traiter(){
 	
-	// On commence par chercher la rubrique a traiter 
-	$id_rubrique = _request('id_rubrique');
+	$id_objet = _request('id_objet');
+	$objet = _request('objet');
+	
 	// La limite du nombre à traiter
 	$nblimite = _request('nblimite');
 
-	spip_log("importer les documents de id_rubrique= $id_rubrique","docker");
+	spip_log("importation des documents de objet=$objet id_objet= $id_objet","docker");
 	
-	//On récupère la liste des documents de la rubrique sinon tous	
-	//todo étendre aux articles de cette rubrique
-	$id=$id_rubrique;
-	$type="rubrique";
+	//On récupère la liste des documents de l'objet (article rubrique ou autre) sinon tous
+	//todo tous les documents d'une branche rubrique ou secteur	
 
-	if($id_rubrique>0)
-	$res = sql_select("D.id_document,D.fichier,D.extension", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "distant='oui' AND T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type)." LIMIT 0 , $nblimite");
-	else
-	$res = sql_select("D.id_document,D.fichier,D.extension", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "distant='oui' LIMIT 0 , $nblimite");
+	
+	//On exclue certaines extensions via base spip, sans vérifier la réalité
+	include_spip('inc/config');	
+	$config = lire_config('docker');
+	$extensions_exclues=$config['extensions'];
 
+	if($id_objet>0)
+		$res = sql_select("D.id_document,D.fichier,D.extension", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "distant='oui' AND FIND_IN_SET(D.extension,REPLACE('$extensions_exclues',' ','')) = 0 AND T.id_objet=" . intval($id_objet) . " AND T.objet=" . sql_quote($objet)." LIMIT 0 , $nblimite");
+		else
+		$res = sql_select("D.id_document,D.fichier,D.extension", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "distant='oui' AND FIND_IN_SET(D.extension,'$extensions_exclues') = 0 LIMIT 0 , $nblimite");
 
+	
 	include_spip('inc/distant');
 
+	//fonction de plugins-dist medias
 	$copier_fichier= charger_fonction('copier_local','action');
 	while ($row = sql_fetch($res)){
-		spip_log("document renommé id_document=".$row['id_document'],"docker");
+		spip_log("document à renommer id_document=".$row['id_document']." avec ".$row['extension'],"docker_extension");
 		//On traite les documents en les important
 		$copier_fichier($row['id_document']);
 		//On ajoute le titre après

@@ -20,8 +20,7 @@
 								<label for="titrer"><:docker:titrer_label:></label>
 							</div>
 						</li>
-					</ul>
-					<ul>
+					
 						<li class="editer editer_docker_idem">
 							<p class="explication"><:docker:docker_idem_descriptif:></p>
 							<div class="choix">
@@ -29,14 +28,22 @@
 								<label for="copie_idem"><:docker:copie_idem_label:></label>
 							</div>
 						</li>
-					</ul>
-					<ul>
+					
 						<li class="editer editer_docker_minuscules">
 							<p class="explication"><:docker:docker_minuscules_descriptif:></p>
 							<div class="choix">
 								<input type="checkbox" name="minuscules"[ checked="(#ENV{minuscules}|!={''}|?{'checked'})"] id="minuscules" />
 								<label for="minuscules"><:docker:minuscules_label:></label>
 							</div>
+						</li>
+						
+						<li>
+							<label for="extensions"><:docker:extensions_exclure_label:></label>
+							[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nblimite})</span>]
+							<p class='explication'>
+								<:docker:entrer_extensions_virgule:> <br />
+							</p>
+							<input type="text" name="extensions" class="text" value = "#ENV{extensions}" id="extensions" />
 						</li>
 					</ul>
 				</fieldset>
