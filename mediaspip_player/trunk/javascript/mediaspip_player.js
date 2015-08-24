@@ -93,9 +93,8 @@
 		cookies = (typeof($.cookie) == 'function'),
 		stop_message_timeout = false,
 		error_message = false,
-		browser = $.browser,
-		IS_IE = browser.msie,
 		UA = navigator.userAgent,
+		IS_IE = /MSIE/.test(UA),
 		IS_IPAD = /iPad|MeeGo/.test(UA),
 		IS_IPHONE = /iP(hone|od)/i.test(UA),
 		IS_ANDROID = /Android/.test(UA),
@@ -1055,7 +1054,7 @@
 		ms_test_fallback : function(options){
 			var media = $(this);
 			if(typeof($.fn.ms_fallback_flash) == 'function'){
-				if(jQuery.browser.msie)
+				if(IS_IE)
 					var sources = media.parent().children("source");
 				else
 					var sources = media.children("source");
