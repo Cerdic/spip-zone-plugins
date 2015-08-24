@@ -1,7 +1,7 @@
 <paquet
 	prefix="image_cliquable"
 	categorie="multimedia"
-	version="3.0.2"
+	version="3.0.3"
 	etat="test"
 	compatibilite="[2.1.14;3.1.*]"
 	logo="image_cliquable.png"

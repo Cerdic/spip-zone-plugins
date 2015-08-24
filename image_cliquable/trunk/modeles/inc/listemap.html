@@ -1,4 +1,4 @@
-<B_ListeMap><p>[(#TITRE) ]<i>(liste des zones cliquables)</i>&nbsp;:</p><ul>
+<B_ListeMap><p>[(#TITRE) ]<i>(liste des zones cliquables)</i>&nbsp;:</p><ul class="spip">
 <BOUCLE_ListeMap(DATA){source table, #ENV*{args}}{cle==^alt}{par valeur}>
 [(#SET{indice,[(#CLE|replace{'alt',''})]})]
 [<li><a href="[(#ENV{lien#GET{indice}}|accessibilite_enlien)]">(#ENV{alt#GET{indice}})</a></li>]
