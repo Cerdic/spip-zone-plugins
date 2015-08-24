@@ -35,13 +35,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Une erreur s’est produite pendant la mise à jour de la base de donnée.',
 	'explication_code' => 'ATTENTION : pour utilisateur avancé. Vous pouvez saisir du code Spip (boucles et balises) qui sera interprété comme s’il s’agissait d’un squelette. La noisette aura par ailleurs accès à toutes les variables de l’environnement de la page.',
 	'explication_description_code' => 'À usage interne. Non affichée sur le site public.',
+	'explication_dupliquer_composition_reference' => 'L’identifiant de la page dupliquée est <i>@composition@</i>.
+	Vous pouvez choisir un nouvel identifiant ou suffixer l’identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
+	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'Vous pouvez ajouter une noisette ou les réordonner par simple glisser/déposer.',
 	'explication_heritages_composition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d’éventuelles classes CSS supplémentaires.',
 	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
-	'explication_dupliquer_composition_reference' => 'L\'identifiant de la page dupliquée est <i>@composition@</i>.
-	Vous pouvez choisir un nouvel identifiant ou suffixer l\'identifiant de référence ainsi : <i>@composition@<strong>_suffixe</strong></i>',
-	'explication_dupliquer_composition_suffixer' => '.',
 
 	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
@@ -54,6 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_haut' => 'Déplacer vers le haut',
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'Vous pouvez utilisez les raccourcis SPIP usuels, notamment la balise  &lt;multi&gt;.',
+	'formulaire_dupliquer_page' => 'Dupliquer cette page',
+	'formulaire_dupliquer_page_entete' => 'Dupliquer une page',
+	'formulaire_dupliquer_page_titre' => 'Dupliquer la page « @page@ »',
 	'formulaire_erreur_format_identifiant' => 'L’identifiant ne peut contenir que des minuscules sans accent, des chiffres et le caractère _ (underscore).',
 	'formulaire_icon' => 'Icône',
 	'formulaire_icon_explication' => 'Vous pouvez saisir le chemin relatif vers une icône (par exemple : <i>images/objet-liste-contenus.png</i>).',
@@ -79,9 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_type_explication' => 'Indiquez sur quel objet porte cette composition ou si vous souhaitez créer une page autonome.',
 	'formulaire_type_import' => 'Type d’importation',
 	'formulaire_type_import_explication' => 'Vous pouvez fusionner le fichier de configuration avec votre configuration actuelle (les noisettes de chaque page seront ajoutées à vos noisettes déjà définies) ou bien remplacer votre configuration par celle-ci.',
-	'formulaire_dupliquer_page' => 'Dupliquer cette page',
-	'formulaire_dupliquer_page_entete' => 'Dupliquer une page',
-	'formulaire_dupliquer_page_titre' => 'Dupliquer la page «&nbsp;@page@&nbsp;»',
 
 	// I
 	'icone_introuvable' => 'Icône introuvable !',
