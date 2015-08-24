@@ -143,9 +143,9 @@ function wp_import_import_wordpress()
 
         $tab_document = array();
         include_spip("action/ajouter_documents");
-        $cpt_auteurs=0;
-        $cpt_rubriques=0;
-        $cpt_articles=0;
+        $cpt_auteurs = 0;
+        $cpt_rubriques = 0;
+        $cpt_articles = 0;
 
         foreach ($arbre as $type => $a) {
 
@@ -153,7 +153,7 @@ function wp_import_import_wordpress()
                 // Importation des auteurs
                 case "wp:author":
                     //sortir de suite si l'on n'a pas coché l'importation des auteurs
-                    if (! _request("auteurs"))
+                    if (!_request("auteurs"))
                         break;
                     include_spip('action/editer_auteur');
                     foreach ($a as $auteur) {
@@ -167,7 +167,7 @@ function wp_import_import_wordpress()
                         $id_auteur = auteur_inserer();
                         auteur_modifier($id_auteur, $data_auteur);
                         $tab_auteur[$auteur['wp:author_login'][0]] = $id_auteur;
-                        spip_log("Auteur $id_auteur créé ( ". $auteur['wp:author_login'][0] ." ) ", "wp_import" . _LOG_INFO_IMPORTANTE);
+                        spip_log("Auteur $id_auteur créé ( " . $auteur['wp:author_login'][0] . " ) ", "wp_import" . _LOG_INFO_IMPORTANTE);
                         $cpt_auteurs++;
 
                     }
@@ -180,22 +180,22 @@ function wp_import_import_wordpress()
 
                 case "wp:category":
                     //sortir de suite si l'on n'a pas coché l'importation des rubriques
-                    if (! _request("rubriques"))
+                    if (!_request("rubriques"))
                         break;
                     include_spip('action/editer_rubrique');
-                    $id_parent_rubrique=_request("id_parent");
+                    $id_parent_rubrique = _request("id_parent");
 
                     foreach ($a as &$cat) {
                         $data_rub = array(
                             'titre' => twp($cat['wp:cat_name'][0]),
-                            'id_parent' => "$id_parent_rubrique" ) ;
+                            'id_parent' => "$id_parent_rubrique");
                         $id_rub = rubrique_inserer($id_parent_rubrique);
                         spip_log("Création rubrique $id_rub (id_parent : $id_parent_rubrique) ", "wp_import" . _LOG_INFO_IMPORTANTE);
                         $cat["id"] = $id_rub;
                         $tab_cat[$cat['wp:category_nicename'][0]] = $id_rub;
                         rubrique_modifier($id_rub, $data_rub);
-                       // var_dump ($tab_cat) ;
-                         // die ('plouf') ;
+                        // var_dump ($tab_cat) ;
+                        // die ('plouf') ;
                     }
                     foreach ($a as $cat) {
                         $id_parent = $tab_cat[twp($cat['wp:category_nicename'][0])] + 0;
@@ -210,7 +210,7 @@ function wp_import_import_wordpress()
 
                 case "item":
                     //sortir de suite si l'on n'a pas coché l'importation des articles
-                    if (! _request("documents"))
+                    if (!_request("documents"))
                         break;
                     include_spip('action/editer_article');
                     foreach ($a as $item) {
@@ -262,7 +262,7 @@ function wp_import_import_wordpress()
 
                 case "item":
                     //sortir de suite si l'on n'a pas coché l'importation des articles
-                    if (! _request("articles"))
+                    if (!_request("articles"))
                         break;
                     include_spip('action/editer_article');
                     foreach ($a as $item) {
@@ -270,9 +270,9 @@ function wp_import_import_wordpress()
                             case "page":
                             case 'post':
                                 $statut = 'publie';
-                            if ($item['wp:status'][0] == 'publish') $statut = 'publie';
-                            if ($item['wp:post_id'][0] != 2882)
-                                break;
+                                if ($item['wp:status'][0] == 'publish') $statut = 'publie';
+                                if ($item['wp:post_id'][0] != 2882)
+                                    break;
 
                                 $data_article = array(
                                     'titre' => $item['title'][0],
@@ -302,12 +302,12 @@ function wp_import_import_wordpress()
                                 }
                                 $data_article = array(
                                     'statut' => 'publie',
-                                    'date' => $item['wp:post_date'][0]  );
+                                    'date' => $item['wp:post_date'][0]);
 
                                 sql_updateq('spip_articles', $data_article, $id_article);
 
                                 //Supprimer l'auteur (SPIP) qui a créé l'article
-                                sql_delete('spip_auteurs_liens', 'id_objet='.$id_article.' AND objet="article"');
+                                sql_delete('spip_auteurs_liens', 'id_objet=' . $id_article . ' AND objet="article"');
 
                                 //puis lier l'article SPIP à l'auteur WORDPRESS
                                 auteur_associer($tab_auteur[$item['dc:creator'][0] . ''], array("article" => $id_article));
