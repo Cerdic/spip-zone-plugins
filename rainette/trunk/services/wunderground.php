@@ -15,9 +15,9 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE'))
 if (!defined('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS'))
 	define('_RAINETTE_WUNDERGROUND_JOURS_PREVISIONS', 10);
 if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE'))
-	define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph|celsius:mm:kph');
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_METRIQUE', 'c:mb:km:kph:metric|celsius:mm:kph');
 if (!defined('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD'))
-	define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph|farenheit:in:mph');
+	define('_RAINETTE_WUNDERGROUND_SUFFIXE_STANDARD', 'f:in:mi:mph:in|farenheit:in:mph');
 if (!defined('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT'))
 	define('_RAINETTE_WUNDERGROUND_LANGUE_DEFAUT', 'FR');
 
@@ -350,7 +350,7 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 			: '';
 
 		// Liste des conditions meteo extraites dans le systeme demande
-		list($ut, $up, $ud, $uv) = $suffixes;
+		list($ut, $up, $ud, $uv, $ur) = $suffixes;
 		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees'][0]['text']) : '';
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
@@ -363,6 +363,7 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? floatval($conditions['feelslike_'.$ut][0]['text']) : '';
 
 		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity'][0]['text']) : '';
+		$tableau['precipitation'] = (isset($conditions['precip_today_'.$ur])) ? floatval($conditions['precip_today_'.$ur][0]['text']) : '';
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
 
 		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
@@ -371,6 +372,8 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 					: '';
 
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud][0]['text']) : '';
+
+		$tableau['indice_uv'] = NULL;
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'][0]['text'] : '';
@@ -489,6 +492,7 @@ function json2conditions_wunderground($flux, $tendances, $suffixes) {
 		$tableau['temperature_ressentie'] = (isset($conditions['feelslike_'.$ut])) ? floatval($conditions['feelslike_'.$ut]) : '';
 
 		$tableau['humidite'] = (isset($conditions['relative_humidity'])) ? intval($conditions['relative_humidity']) : '';
+		$tableau['precipitation'] = (isset($conditions['precip_today_'.$ur])) ? floatval($conditions['precip_today_'.$ur]) : '';
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut]) : '';
 
 		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up]) : '';
@@ -497,6 +501,8 @@ function json2conditions_wunderground($flux, $tendances, $suffixes) {
 			: '';
 
 		$tableau['visibilite'] = (isset($conditions['visibility_'.$ud])) ? floatval($conditions['visibility_'.$ud]) : '';
+
+		$tableau['indice_uv'] = NULL;
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['icon'])) ? $conditions['icon'] : '';

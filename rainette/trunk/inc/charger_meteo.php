@@ -48,10 +48,11 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 	// Déterminer le système d'unité utilisé dans le cache et celui requis par la config.
 	// Si ces système d'unité diffèrent il faut renouveler le cache sinon on affichera des données
 	// fausses avec une unité correcte et ce jusqu'à la prochaine échéance du cache.
+	$unite_config = '';
+	$unite_cache = '';
 	if (file_exists($cache) AND ($mode != 'infos')) {
 		include_spip('inc/config');
 		$unite_config = lire_config("rainette/${service}/unite", 'm');
-		$unite_cache = '';
 
 		lire_fichier($cache, $contenu);
 		$tableau = unserialize($contenu);

@@ -18,6 +18,162 @@ if (!defined('_RAINETTE_WWO_SUFFIXE_METRIQUE'))
 if (!defined('_RAINETTE_WWO_SUFFIXE_STANDARD'))
 	define('_RAINETTE_WWO_SUFFIXE_STANDARD', 'f:in:miles');
 
+// Configuration des données fournies par le service wwo pour le mode 'conditions'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_wwo_config']['conditions'] = array(
+    'xml' => array(
+        'base'	=> array('children', 'current_condition', 0, 'children'),
+       	'donnees'	=> array(
+			// Données d'observation
+			'derniere_maj'			=> array('cle' => array('localobsdatetime', 0, 'text'), 'suffixe_unite' => ''),
+			'station'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Températures
+			'temperature_reelle'	=> array('cle' => array('temp_', 0, 'text'), 'suffixe_unite' => array('m' => 'c', 's' => 'f')),
+			'temperature_ressentie'	=> array('cle' => array('feelslike', 0, 'text'), 'suffixe_unite' => array('m' => 'c', 's' => 'f')),
+			// Données anémométriques
+			'vitesse_vent'			=> array('cle' => array('windspeed', 0, 'text'), 'suffixe_unite' => array('m' => 'kmph', 's' => 'miles')),
+			'angle_vent'			=> array('cle' => array('winddirdegree', 0, 'text'), 'suffixe_unite' => ''),
+			'direction_vent'		=> array('cle' => array('winddir16point', 0, 'text'), 'suffixe_unite' => ''),
+			// Données atmosphériques : risque_uv est calculé
+			'precipitation'			=> array('cle' => array('precipmm', 0, 'text'), 'suffixe_unite' => ''),
+			'humidite'				=> array('cle' => array('humidity', 0, 'text'), 'suffixe_unite' => ''),
+			'point_rosee'			=> array('cle' => array(), 'suffixe_unite' => ''),
+			'pression'				=> array('cle' => array('pressure', 0, 'text'), 'suffixe_unite' => ''),
+			'tendance_pression'		=> array('cle' => array(), 'suffixe_unite' => ''),
+			'visibilite'			=> array('cle' => array('visibility', 0, 'text'), 'suffixe_unite' => ''),
+			'indice_uv'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Etats météorologiques natifs
+			'code_meteo'			=> array('cle' => array('weathercode', 0, 'text'), 'suffixe_unite' => ''),
+			'icon_meteo'			=> array('cle' => array('weathericonurl', 0, 'text'), 'suffixe_unite' => ''),
+			'desc_meteo'			=> array('cle' => array('weatherdesc', 0, 'text'), 'suffixe_unite' => ''),
+			// Etats météorologiques calculés : icone, resume, periode sont calculés
+       	),
+    ),
+    'json' => array(
+        'base'	=> array('data', 'current_condition', 0),
+       	'donnees'	=> array(
+			// Données d'observation
+			'derniere_maj'			=> array('cle' => array('localObsDateTime'), 'suffixe_unite' => ''),
+			'station'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Températures
+			'temperature_reelle'	=> array('cle' => array('temp_'), 'suffixe_unite' => array('m' => 'C', 's' => 'F')),
+			'temperature_ressentie'	=> array('cle' => array('FeelsLike'), 'suffixe_unite' => array('m' => 'C', 's' => 'F')),
+			// Données anémométriques
+			'vitesse_vent'			=> array('cle' => array('windspeed'), 'suffixe_unite' => array('m' => 'kmph', 's' => 'miles')),
+			'angle_vent'			=> array('cle' => array('winddirDegree'), 'suffixe_unite' => ''),
+			'direction_vent'		=> array('cle' => array('winddir16Point'), 'suffixe_unite' => ''),
+			// Données atmosphériques : risque_uv est calculé
+			'precipitation'			=> array('cle' => array('precipMM'), 'suffixe_unite' => ''),
+			'humidite'				=> array('cle' => array('humidity'), 'suffixe_unite' => ''),
+			'point_rosee'			=> array('cle' => array(), 'suffixe_unite' => ''),
+			'pression'				=> array('cle' => array('pressure'), 'suffixe_unite' => ''),
+			'tendance_pression'		=> array('cle' => array(), 'suffixe_unite' => ''),
+			'visibilite'			=> array('cle' => array('visibility'), 'suffixe_unite' => ''),
+			'indice_uv'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Etats météorologiques natifs
+			'code_meteo'			=> array('cle' => array('weatherCode'), 'suffixe_unite' => ''),
+			'icon_meteo'			=> array('cle' => array('weatherIconUrl', 0, 'value'), 'suffixe_unite' => ''),
+			'desc_meteo'			=> array('cle' => array('weatherDesc', 0, 'value'), 'suffixe_unite' => ''),
+			// Etats météorologiques calculés : icone, resume, periode sont calculés
+       	),
+    ),
+);
+
+
+// Configuration des données fournies par le service wwo pour le mode 'conditions'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_wwo_config']['previsions'] = array(
+    'xml' => array(
+        'base'	=> array('children', 'weather'),
+       	'donnees'	=> array(
+			// Données d'observation : l'index est calculé
+			'date'					=> array('cle' => array('date', 0, 'text'), 'suffixe_unite' => ''),
+			// Données astronomiques
+			'lever_soleil'			=> array('cle' => array(), 'suffixe_unite' => ''),
+			'coucher_soleil'		=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Températures
+			'temperature_max'		=> array('cle' => array('tempmax', 0, 'text'), 'suffixe_unite' => array('m' => 'c', 's' => 'f')),
+			'temperature_min'		=> array('cle' => array('tempmin', 0, 'text'), 'suffixe_unite' => array('m' => 'c', 's' => 'f')),
+			// Données anémométriques
+			'vitesse_vent'			=> array('cle' => array('windspeed', 0, 'text'), 'suffixe_unite' => array('m' => 'kmph', 's' => 'miles')),
+			'angle_vent'			=> array('cle' => array('winddirdegree', 0, 'text'), 'suffixe_unite' => ''),
+			'direction_vent'		=> array('cle' => array('winddir16point', 0, 'text'), 'suffixe_unite' => ''),
+			// Données atmosphériques : risque_uv est calculé
+			'risque_precipitation'	=> array('cle' => array(), 'suffixe_unite' => ''),
+			'precipitation'			=> array('cle' => array('precipmm', 0, 'text'), 'suffixe_unite' => ''),
+			'humidite'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			'pression'				=> array('cle' => array('pressure', 0, 'text'), 'suffixe_unite' => ''),
+			'indice_uv'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Etats météorologiques natifs
+			'code_meteo'			=> array('cle' => array('weathercode', 0, 'text'), 'suffixe_unite' => ''),
+			'icon_meteo'			=> array('cle' => array('weathericonurl', 0, 'text'), 'suffixe_unite' => ''),
+			'desc_meteo'			=> array('cle' => array('weatherdesc', 0, 'text'), 'suffixe_unite' => ''),
+			// Etats météorologiques calculés : icone, resume, periode sont calculés
+       	),
+    ),
+    'json' => array(
+        'base'	=> array('data', 'current_condition', 0),
+       	'donnees'	=> array(
+			// Données d'observation
+			'derniere_maj'			=> array('cle' => array('localObsDateTime'), 'suffixe_unite' => ''),
+			'station'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Températures
+			'temperature_reelle'	=> array('cle' => array('temp_'), 'suffixe_unite' => array('m' => 'C', 's' => 'F')),
+			'temperature_ressentie'	=> array('cle' => array('FeelsLike'), 'suffixe_unite' => array('m' => 'C', 's' => 'F')),
+			// Données anémométriques
+			'vitesse_vent'			=> array('cle' => array('windspeed'), 'suffixe_unite' => array('m' => 'kmph', 's' => 'miles')),
+			'angle_vent'			=> array('cle' => array('winddirDegree'), 'suffixe_unite' => ''),
+			'direction_vent'		=> array('cle' => array('winddir16Point'), 'suffixe_unite' => ''),
+			// Données atmosphériques : risque_uv est calculé
+			'precipitation'			=> array('cle' => array('precipMM'), 'suffixe_unite' => ''),
+			'humidite'				=> array('cle' => array('humidity'), 'suffixe_unite' => ''),
+			'point_rosee'			=> array('cle' => array(), 'suffixe_unite' => ''),
+			'pression'				=> array('cle' => array('pressure'), 'suffixe_unite' => ''),
+			'tendance_pression'		=> array('cle' => array(), 'suffixe_unite' => ''),
+			'visibilite'			=> array('cle' => array('visibility'), 'suffixe_unite' => ''),
+			'indice_uv'				=> array('cle' => array(), 'suffixe_unite' => ''),
+			// Etats météorologiques natifs
+			'code_meteo'			=> array('cle' => array('weatherCode'), 'suffixe_unite' => ''),
+			'icon_meteo'			=> array('cle' => array('weatherIconUrl', 0, 'value'), 'suffixe_unite' => ''),
+			'desc_meteo'			=> array('cle' => array('weatherDesc', 0, 'value'), 'suffixe_unite' => ''),
+			// Etats météorologiques calculés : icone, resume, periode sont calculés
+       	),
+    ),
+);
+
+// Configuration des données fournies par le service wwo pour le mode 'infos'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_wwo_config']['infos'] = array(
+    'xml' => array(
+        'base'	=> array('children', 'nearest_area', 0, 'children'),
+       	'donnees'	=> array(
+       		// Lieu
+       		'ville'				=> array('cle' => array('areaname+country', 0, 'text'), 'suffixe_unite' => ''),
+       		'region'			=> array('cle' => array('region', 0, 'text'), 'suffixe_unite' => ''),
+       		// Coordonnées
+       		'longitude'			=> array('cle' => array('longitude', 0, 'text'), 'suffixe_unite' => ''),
+       		'latitude'			=> array('cle' => array('latitude', 0, 'text'), 'suffixe_unite' => ''),
+       		// Données démographiques
+       		'population'		=> array('cle' => array('population', 0, 'text'), 'suffixe_unite' => ''),
+       		// Informations complémentaires : aucune configuration car ce sont des données calculées
+       	),
+    ),
+    'json' => array(
+        'base'	=> array('data', 'nearest_area', 0),
+       	'donnees'	=> array(
+       		// Lieu
+            'ville'				=> array('cle' => array('areaName+country', 0, 'value'), 'suffixe_unite' => ''),
+            'region'			=> array('cle' => array('region', 0, 'value'), 'suffixe_unite' => ''),
+            // Coordonnées
+            'longitude'			=> array('cle' => array('longitude'), 'suffixe_unite' => ''),
+            'latitude'			=> array('cle' => array('latitude'), 'suffixe_unite' => ''),
+            // Données démographiques
+            'population'		=> array('cle' => array('population', 0, 'value'), 'suffixe_unite' => ''),
+       		// Informations complémentaires : aucune configuration car ce sont des données calculées
+       	),
+    ),
+);
+
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -30,12 +186,13 @@ if (!defined('_RAINETTE_WWO_SUFFIXE_STANDARD'))
 /**
  * @param string	$lieu
  * @param string	$mode
+ *
  * @return string
  */
 function wwo_service2cache($lieu, $mode) {
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
 	$dir = sous_repertoire($dir, 'wwo');
-	$fichier_cache = $dir . str_replace(array(',', '+', '.'), '-', $lieu) . "_" . $mode . ".txt";
+	$fichier_cache = $dir . str_replace(array(' ', ',', '+', '.'), array('', '-', '-', '-'), $lieu) . "_" . $mode . ".txt";
 
 	return $fichier_cache;
 }
@@ -54,12 +211,12 @@ function wwo_service2url($lieu, $mode) {
 		.  '?key=' . $cle
 		.  '&format=' . $format
 		.  '&extra=localObsTime'
-		.  '&q=' . str_replace(' ', '', trim($lieu));
+		.  '&q=' . str_replace(' ', '', trim($lieu)); //todo : ne faut-il pas remplacer par + ?
 	if ($mode == 'infos') {
 		$url .= '&includeLocation=yes&cc=no&fx=no';
 	}
 	else {
-		$url .= ($mode == 'previsions') ? '&cc=no&fx=yes&num_of_days=' . _RAINETTE_WWO_JOURS_PREVISIONS : '&cc=yes&fx=no';
+		$url .= ($mode == 'previsions') ? '&cc=no&fx=yes&tp=24&num_of_days=' . _RAINETTE_WWO_JOURS_PREVISIONS : '&cc=yes&fx=no';
 	}
 
 	return $url;
@@ -107,7 +264,7 @@ function wwo_flux2previsions($flux, $lieu) {
 	$format = lire_config('rainette/wwo/format', 'xml');
 
 	// Identification des suffixes d'unite pour choisir le bon champ
-	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
+	// -> wwo fournit des valeurs dans les deux systemes d'unites mais pas toutes
 	include_spip('inc/config');
 	$unite = lire_config('rainette/wwo/unite', 'm');
 	if ($unite == 'm')
@@ -163,67 +320,73 @@ function wwo_flux2previsions($flux, $lieu) {
  * @return array
  */
 function wwo_flux2conditions($flux, $lieu) {
+	global $rainette_wwo_config;
+
 	// Identifier le format d'échange des données
 	include_spip('inc/config');
 	$format = lire_config('rainette/wwo/format', 'xml');
 
-	// Construire le tableau standard des conditions météorologiques propres au service
-	$tableau = ($format == 'xml') ? xml2conditions_wwo($flux) : json2conditions_wwo($flux);
+	// Identification des suffixes d'unite pour choisir le bon champ
+	// -> wwo fournit des valeurs dans les deux systemes d'unites mais pas toutes
+	$systeme_unite = lire_config('rainette/wwo/unite', 'm');
 
-	// Convertir les informations exprimées en système métrique dans le systeme US si la
-	// configuration le demande
-	$unite = lire_config('rainette/wwo/unite', 'm');
-	if ($unite == 's') {
-		// Seules la température et la vitesse du vent sont fournies dans les deux systèmes.
-		// On ne les utilise pas et on convertit l'ensemble des données.
-		$tableau['temperature_reelle'] = ($tableau['temperature_reelle'])
-			? celsius2farenheit($tableau['temperature_reelle']) : '';
-		$tableau['temperature_ressentie'] = ($tableau['temperature_ressentie'])
-			? celsius2farenheit($tableau['temperature_ressentie']) : '';
-		$tableau['vitesse_vent'] = ($tableau['vitesse_vent'])
-			? kilometre2mile($tableau['vitesse_vent']) : '';
-		$tableau['visibilite'] = ($tableau['visibilite'])
-			? kilometre2mile($tableau['visibilite']) : '';
-		$tableau['pression'] = ($tableau['pression'])
-			? millibar2inch($tableau['pression']) : '';
-	}
+	// Initialiser le tableau des données météo directement fournies par le service
+	include_spip('inc/normaliser');
+	$tableau = get_donnees_service($rainette_wwo_config, 'conditions', $format, $systeme_unite, $flux);
 
-	// Compléter le tableau standard avec les états météorologiques calculés
-	if ($tableau['code_meteo']
-	AND $tableau['icon_meteo']
-	AND isset($tableau['desc_meteo'])) {
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service aucun indicateur n'est disponible
-		// -> on utilise le nom de l'icone qui contient l'indication "night"
-		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, '_night') === false)
-			$tableau['periode'] = 0; // jour
-		else
-			$tableau['periode'] = 1; // nuit
-
-		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		$condition = lire_config('rainette/wwo/condition', 'wwo');
-		if ($condition == 'wwo') {
-			// On affiche les conditions natives fournies par le service.
-			// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
-			// de le traduire à partir des fichiers de langue SPIP.
-			$tableau['icone']['code'] = $tableau['code_meteo'];
-			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
-			$tableau['resume'] = $tableau['code_meteo'];
+	if ($tableau) {
+		// Convertir les informations exprimées en système métrique dans le systeme US si la
+		// configuration le demande
+		if ($systeme_unite == 's') {
+			include_spip('inc/convertir');
+			// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
+			// les deux systèmes.
+			$tableau['visibilite'] = ($tableau['visibilite'])
+				? kilometre2mile($tableau['visibilite']) : '';
+			$tableau['pression'] = ($tableau['pression'])
+				? millibar2inch($tableau['pression']) : '';
+			$tableau['precipitation'] = ($tableau['precipitation'])
+				? millimetre2inch($tableau['precipitation']) : '';
 		}
-		else {
-			// On affiche les conditions traduites dans le systeme weather.com
-			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
-			$tableau['icone'] = $meteo;
-			$tableau['resume'] = $meteo;
-		}
-	}
 
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+		// Compléter le tableau standard avec les états météorologiques calculés
+		if ($tableau['code_meteo']
+		AND $tableau['icon_meteo']
+		AND isset($tableau['desc_meteo'])) {
+			// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+			// Pour ce service aucun indicateur n'est disponible
+			// -> on utilise le nom de l'icone qui contient l'indication "night"
+			$icone = basename($tableau['icon_meteo']);
+			if (strpos($icone, '_night') === false)
+				$tableau['periode'] = 0; // jour
+			else
+				$tableau['periode'] = 1; // nuit
+
+			// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
+			$condition = lire_config('rainette/wwo/condition', 'wwo');
+			if ($condition == 'wwo') {
+				// On affiche les conditions natives fournies par le service.
+				// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
+				// de le traduire à partir des fichiers de langue SPIP.
+				$tableau['icone']['code'] = $tableau['code_meteo'];
+				$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
+				$tableau['resume'] = $tableau['code_meteo'];
+			}
+			else {
+				// On affiche les conditions traduites dans le systeme weather.com
+				$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);
+				$tableau['icone'] = $meteo;
+				$tableau['resume'] = $meteo;
+			}
+		}
+	} else {
+		// Traitement des erreurs de flux
+		$tableau['erreur'] = 'chargement';
+	}
 
 	return $tableau;
 }
+
 
 /**
  * @param array 	$flux
@@ -231,16 +394,24 @@ function wwo_flux2conditions($flux, $lieu) {
  * @return array
  */
 function wwo_flux2infos($flux, $lieu) {
+	global $rainette_wwo_config;
+
 	// Identifier le format d'échange des données
 	include_spip('inc/config');
 	$format = lire_config('rainette/wwo/format', 'xml');
+	$systeme_unite = lire_config('rainette/wwo/unite', 'm');
 
-	// Construire le tableau standard des informations sur le lieu et ajouter le nombre de jours de prévisions
-	$tableau = ($format == 'xml') ? xml2infos_wwo($flux) : json2infos_wwo($flux);
-	$tableau['max_previsions'] = _RAINETTE_WWO_JOURS_PREVISIONS;
+	// Initialiser le tableau normalisé des informations à partir des données du service
+	include_spip('inc/normaliser');
+	$tableau = get_donnees_service($rainette_wwo_config, 'infos', $format, $systeme_unite, $flux);
 
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
+	if ($tableau) {
+		// Ajouter les informations calculées, à savoir, le nombre de jours de prévisions
+		$tableau['max_previsions'] = _RAINETTE_WWO_JOURS_PREVISIONS;
+	} else {
+		// Traitement des erreurs de flux
+		$tableau['erreur'] = 'chargement';
+	}
 
 	return $tableau;
 }
@@ -284,27 +455,29 @@ function xml2previsions_wwo($flux, $suffixes) {
 						: date('Y-m-d', $maintenant + 24*3600*$_index);
 
 					// Date complete des lever/coucher du soleil
-					$tableau[$_index]['lever_soleil'] = NULL;
-					$tableau[$_index]['coucher_soleil'] = NULL;
+					$tableau[$_index]['lever_soleil'] = (isset($_prevision['astronomy'][0]['children']['sunrise'])) ? $_prevision['astronomy'][0]['children']['sunrise'][0]['text'] : '';
+					$tableau[$_index]['coucher_soleil'] = (isset($_prevision['astronomy'][0]['children']['sunset'])) ? $_prevision['astronomy'][0]['children']['sunset'][0]['text'] : '';
 
 					// Previsions du jour
-					list($ut, $up, $uv) = $suffixes;
-					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["tempmax$ut"])) ? floatval($_prevision["tempmax$ut"][0]['text']) : '';
-					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["tempmin$ut"])) ? floatval($_prevision["tempmin$ut"][0]['text']) : '';
-					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision["windspeed$uv"])) ? floatval($_prevision["windspeed$uv"][0]['text']) : '';
-					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['winddirdegree'])) ? intval($_prevision['winddirdegree'][0]['text']) : '';
-					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddir16point'])) ? $_prevision['winddir16point'][0]['text'] : '';
+					list($ut, $ur, $uv) = $suffixes;
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["maxtemp$ut"])) ? floatval($_prevision["maxtemp$ut"][0]['text']) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["mintemp$ut"])) ? floatval($_prevision["mintemp$ut"][0]['text']) : '';
+					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision['hourly'][0]['children']["windspeed$uv"])) ? floatval($_prevision['hourly'][0]['children']["windspeed$uv"][0]['text']) : '';
+					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['hourly'][0]['children']['winddirdegree'])) ? intval($_prevision['hourly'][0]['children']['winddirdegree'][0]['text']) : '';
+					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['hourly'][0]['children']['winddir16point'])) ? $_prevision['hourly'][0]['children']['winddir16point'][0]['text'] : '';
 
-					$tableau[$_index][0]['risque_precipitation'] = NULL;
+					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['hourly'][0]['children']['chanceofrain'])) ? intval($_prevision['hourly'][0]['children']['chanceofrain'][0]['text']) : '';
 					include_spip('inc/convertir');
-					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipmm'])) ? floatval($_prevision['precipmm'][0]['text']) : '';
-					if (($up == 'in') AND $tableau[$_index][0]['precipitation'])
+					$tableau[$_index][0]['precipitation'] = (isset($_prevision['hourly'][0]['children']['precipmm'])) ? floatval($_prevision['hourly'][0]['children']['precipmm'][0]['text']) : '';
+					if (($ur == 'in') AND $tableau[$_index][0]['precipitation'])
 						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
-					$tableau[$_index][0]['humidite'] = NULL;
+					$tableau[$_index][0]['humidite'] = (isset($_prevision['hourly'][0]['children']['humidity'])) ? intval($_prevision['hourly'][0]['children']['humidity'][0]['text']) : '';
 
-					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['weathercode'])) ? intval($_prevision['weathercode'][0]['text']) : '';
-					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['weathericonurl'])) ? $_prevision['weathericonurl'][0]['text'] : '';
-					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['weatherdesc'])) ? $_prevision['weatherdesc'][0]['text'] : '';
+					$tableau[$_index][0]['indice_uv'] = (isset($_prevision['uvindex'])) ? intval($_prevision['uvindex'][0]['text']) : '';
+
+					$tableau[$_index][0]['code_meteo'] = (isset($_prevision['hourly'][0]['children']['weathercode'])) ? intval($_prevision['hourly'][0]['children']['weathercode'][0]['text']) : '';
+					$tableau[$_index][0]['icon_meteo'] = (isset($_prevision['hourly'][0]['children']['weathericonurl'])) ? $_prevision['hourly'][0]['children']['weathericonurl'][0]['text'] : '';
+					$tableau[$_index][0]['desc_meteo'] = (isset($_prevision['hourly'][0]['children']['weatherdesc'])) ? $_prevision['hourly'][0]['children']['weatherdesc'][0]['text'] : '';
 
 					// Previsions de la nuit si elle existe
 					$tableau[$_index][1] = NULL;
@@ -317,11 +490,10 @@ function xml2previsions_wwo($flux, $suffixes) {
 }
 
 
-function xml2conditions_wwo($flux) {
+function xml2conditions_wwo($flux, $suffixes) {
 	$tableau = array();
 
 	if (isset($flux['children']['current_condition'][0]['children'])) {
-		include_spip('inc/convertir');
 		$conditions = $flux['children']['current_condition'][0]['children'];
 
 		// Date d'observation
@@ -330,21 +502,28 @@ function xml2conditions_wwo($flux) {
 		// Station d'observation
 		$tableau['station'] = NULL;
 
-		// Liste des conditions meteo extraite dans le systeme metrique
-		$tableau['vitesse_vent'] = (isset($conditions['windspeedkmph'])) ? floatval($conditions['windspeedkmph'][0]['text']) : '';
+		// Liste des conditions meteo extraites dans le systeme demandé ou dans le système
+		// metrique si celle-ci ne sont pas retournées dans le système impérial et donc
+		// nécessitent une conversion
+		list($ut, , $uv) = $suffixes;
+
+		$tableau['vitesse_vent'] = (isset($conditions["windspeed$uv"])) ? floatval($conditions["windspeed$uv"][0]['text']) : '';
 		$tableau['angle_vent'] = (isset($conditions['winddirdegree'])) ? intval($conditions['winddirdegree'][0]['text']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16point'])) ? $conditions['winddir16point'][0]['text'] : '';
 
-		$tableau['temperature_reelle'] = (isset($conditions['temp_c'])) ? floatval($conditions['temp_c'][0]['text']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['temp_c'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions["temp_$ut"])) ? floatval($conditions["temp_$ut"][0]['text']) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions["feelslike$ut"])) ? floatval($conditions["feelslike$ut"][0]['text']) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity'][0]['text']) : '';
+		$tableau['precipitation'] = (isset($conditions['precipmm'])) ? floatval($conditions['precipmm'][0]['text']) : '';
 		$tableau['point_rosee'] = NULL;
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure'][0]['text']) : '';
 		$tableau['tendance_pression'] = NULL;
 
 		$tableau['visibilite'] = (isset($conditions['visibility'])) ? floatval($conditions['visibility'][0]['text']) : '';
+
+		$tableau['indice_uv'] = NULL;
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['weathercode'])) ? intval($conditions['weathercode'][0]['text']) : '';
@@ -401,13 +580,13 @@ function json2previsions_wwo($flux, $suffixes) {
 						: date('Y-m-d', $maintenant + 24*3600*$_index);
 
 					// Date complete des lever/coucher du soleil
-					$tableau[$_index]['lever_soleil'] = NULL;
-					$tableau[$_index]['coucher_soleil'] = NULL;
+					$tableau[$_index]['lever_soleil'] = (isset($_prevision['astronomy'][0]['sunrise'])) ? $_prevision['astronomy'][0]['sunrise'] : '';
+					$tableau[$_index]['coucher_soleil'] = (isset($_prevision['astronomy'][0]['sunset'])) ? $_prevision['astronomy'][0]['sunset'] : '';
 
 					// Previsions du jour
-					list($ut, $up, $uv) = array_map('ucfirst', $suffixes);
-					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["tempMax$ut"])) ? floatval($_prevision["tempMax$ut"]) : '';
-					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["tempMin$ut"])) ? floatval($_prevision["tempMin$ut"]) : '';
+					list($ut, $ur, $uv) = array_map('ucfirst', $suffixes);
+					$tableau[$_index][0]['temperature_max'] = (isset($_prevision["maxtemp$ut"])) ? floatval($_prevision["maxtemp$ut"]) : '';
+					$tableau[$_index][0]['temperature_min'] = (isset($_prevision["mintemp$ut"])) ? floatval($_prevision["mintemp$ut"]) : '';
 					$tableau[$_index][0]['vitesse_vent'] = (isset($_prevision["windspeed$uv"])) ? floatval($_prevision["windspeed$uv"]) : '';
 					$tableau[$_index][0]['angle_vent'] = (isset($_prevision['winddirDegree'])) ? intval($_prevision['winddirDegree']) : '';
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddir16Point'])) ? $_prevision['winddir16Point'] : '';
@@ -415,7 +594,7 @@ function json2previsions_wwo($flux, $suffixes) {
 					$tableau[$_index][0]['risque_precipitation'] = NULL;
 					include_spip('inc/convertir');
 					$tableau[$_index][0]['precipitation'] = (isset($_prevision['precipMM'])) ? floatval($_prevision['precipMM']) : '';
-					if (($up == 'in') AND $tableau[$_index][0]['precipitation'])
+					if (($ur == 'in') AND $tableau[$_index][0]['precipitation'])
 						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
 					$tableau[$_index][0]['humidite'] = NULL;
 
@@ -433,7 +612,7 @@ function json2previsions_wwo($flux, $suffixes) {
 	return $tableau;
 }
 
-function json2conditions_wwo($flux) {
+function json2conditions_wwo($flux, $suffixes) {
 	$tableau = array();
 
 	if (isset($flux['data']['current_condition'][0])) {
@@ -446,21 +625,24 @@ function json2conditions_wwo($flux) {
 		$tableau['station'] = NULL;
 
 		// Liste des conditions meteo extraite dans le systeme metrique
-		$tableau['vitesse_vent'] = (isset($conditions['windspeedKmph'])) ? floatval($conditions['windspeedKmph']) : '';
+		list($ut, , $uv) = array_map('ucfirst', $suffixes);
+		$tableau['vitesse_vent'] = (isset($conditions["windspeed$uv"])) ? floatval($conditions["windspeed$uv"]) : '';
 		$tableau['angle_vent'] = (isset($conditions['winddirDegree'])) ? intval($conditions['winddirDegree']) : '';
 		$tableau['direction_vent'] = (isset($conditions['winddir16Point'])) ? $conditions['winddir16Point'] : '';
 
-		include_spip('inc/convertir');
-		$tableau['temperature_reelle'] = (isset($conditions['temp_C'])) ? floatval($conditions['temp_C']) : '';
-		$tableau['temperature_ressentie'] = (isset($conditions['temp_C'])) ? temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']) : '';
+		$tableau['temperature_reelle'] = (isset($conditions["temp_$ut"])) ? floatval($conditions["temp_$ut"]) : '';
+		$tableau['temperature_ressentie'] = (isset($conditions["FeelsLike$ut"])) ? floatval($conditions["FeelsLike$ut"]) : '';
 
 		$tableau['humidite'] = (isset($conditions['humidity'])) ? intval($conditions['humidity']) : '';
+		$tableau['precipitation'] = (isset($conditions['precipMM'])) ? floatval($conditions['precipMM']) : '';
 		$tableau['point_rosee'] = NULL;
 
 		$tableau['pression'] = (isset($conditions['pressure'])) ? floatval($conditions['pressure']) : '';
 		$tableau['tendance_pression'] = NULL;
 
 		$tableau['visibilite'] = (isset($conditions['visibility'])) ? floatval($conditions['visibility']) : '';
+
+		$tableau['indice_uv'] = NULL;
 
 		// Code meteo, resume et icone natifs au service
 		$tableau['code_meteo'] = (isset($conditions['weatherCode'])) ? intval($conditions['weatherCode']) : '';

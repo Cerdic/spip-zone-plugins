@@ -181,7 +181,8 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1, $servi
 						'pourcentage' => 0,
 						'population' => 0,
 						'precipitation' => 1,
-						'vitesse' => 0);
+						'vitesse' => 0,
+						'indice' => 0);
 
 	if (!$service) $service = 'weather';
 	include_spip('inc/config');
