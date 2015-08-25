@@ -238,12 +238,12 @@
 		
 		/* main nav */
 		.menu_anime {
-			margin: 0; padding: 0;
 			position: relative;
 			top: 0;
 			width: 100%;
 			z-index: 1;
 			background-color: #6e0c0c;
+			padding: 10px 0;
 			display: none;
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
@@ -265,14 +265,19 @@
 			visibility: visible;
 			opacity: 1;
 			margin: 0;
+			padding: 0 0 0 20px;
 			background: none;
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
 			box-shadow: none;				
 		}
+		
+	.menu_anime li:hover > ul, .menu_anime li>a:focus + ul {
+			padding: 0 0 0 20px;
+		}
 
 		.menu_anime ul ul {
-			margin: 0 0 0 20px !important;
+			margin: 0;
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
 			box-shadow: none;		
@@ -283,24 +288,24 @@
 			display: block;
 			float: none;
 			border: 0;
-			margin: 5px;
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
 			box-shadow: none;			
 		}
 
 		.menu_anime ul li{
-			margin-left: 20px;
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
 			box-shadow: none;		
 		}
 
-		.menu_anime a{
+		.menu_anime li a{
 			display: block;
 			float: none;
-			padding: 0;
-		}
+			padding: 0 0 0 10px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;		}
 
 		.menu_anime a:hover{
 			color: #ffffff;
@@ -313,7 +318,6 @@
 		}
 
 		.menu_anime ul a{
-			padding: 0;
 			width: auto;		
 		}
 
@@ -321,7 +325,6 @@
 		.menu_anime ul ul li:first-child a:after {
 			border: 0;
 		}		
-
 	}
 
 	@media screen and (min-width: 600px) {
