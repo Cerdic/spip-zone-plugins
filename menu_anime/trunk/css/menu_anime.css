@@ -46,10 +46,12 @@
 		position: relative;
 	}
 	
-	.menu_anime a {
+	.menu_anime li a {
 		float: left;
+		margin: 0;
 		padding: 6px 30px;
-		color: #ffffff;
+		color: #eeeeff;
+		background: none;
 		text-transform: uppercase;
 		font: bold 12px Arial, Helvetica, sans-serif;
 		text-decoration: none;
@@ -84,7 +86,7 @@
 		transition: all .2s ease-in-out;  
 	}
 
-	.menu_anime li:hover > ul {
+	.menu_anime li:hover > ul, .menu_anime li>a:focus + ul {
 		opacity: 1;
 		visibility: visible;
 		margin: 0;
@@ -118,7 +120,10 @@
 		box-shadow: none;    
 	}
 	
-	.menu_anime ul a {    
+	.menu_anime ul a {
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box; 
 		padding: 6px 10px;
 		width: 130px;
 		_height: 10px; /*IE6 only*/
@@ -127,17 +132,14 @@
 		float: none;
 		text-transform: none;
 	}
-	
-	.menu_anime .on > a {
-		background-color: #982d16;
-		background: -moz-linear-gradient(#db4221, #56180b); 
-		background: -webkit-linear-gradient(#db4221, #56180b);	
-		background: -o-linear-gradient(#db4221, #56180b);
-		background: -ms-linear-gradient(#db4221, #56180b);
-		background: linear-gradient(#db4221, #56180b);
+		
+	.menu_anime a:focus, .menu_anime a:active, .menu_anime a:visited {
+		background: none !important;
+		color: #eeeeff;
 	}
 	
 	.menu_anime > li > a:hover, .menu_anime ul a:hover {
+		color: #ffffff;
 		background-color: #b75d45;
 		background: -moz-linear-gradient(#ffa06f, #701b1b); 
 		background: -webkit-linear-gradient(#ffa06f, #701b1b);	
@@ -156,12 +158,12 @@
 	}
 	
 	.menu_anime ul li:first-child > a {
-		-moz-border-top-left-radius: 6px;
-		-webkit-border-top-left-radius: 6px;
-		border-top-left-radius: 6px;
-		-moz-border-top-right-radius: 6px;
-		-webkit-border-top-right-radius: 6px;
-		border-top-right-radius: 6px;
+		-moz-border-top-left-radius: 3px;
+		-webkit-border-top-left-radius: 3px;
+		border-top-left-radius: 3px;
+		-moz-border-top-right-radius: 3px;
+		-webkit-border-top-right-radius: 3px;
+		border-top-right-radius: 3px;
 	}
 	
 	.menu_anime ul li:first-child > a:after {
@@ -214,11 +216,10 @@
 		/* menu icon */
 		.menu_anime-trigger {
 			display: block; /* show menu icon */
-			height: 40px;
-			line-height: 40px;
+			height: 30px;
+			line-height: 30px;
 			cursor: pointer;		
 			padding: 0 0 0 35px;
-			border: 1px solid #222222;
 			color: #ffffff;
 			font-weight: bold;
 			background-color: #6e0c0c;
@@ -237,9 +238,9 @@
 		
 		/* main nav */
 		.menu_anime {
-			margin: 0; padding: 10px;
-			position: absolute;
-			top: 40px;
+			margin: 0; padding: 0;
+			position: relative;
+			top: 0;
 			width: 100%;
 			z-index: 1;
 			background-color: #6e0c0c;
@@ -299,20 +300,21 @@
 			display: block;
 			float: none;
 			padding: 0;
-			color: #d8d8d8;
 		}
 
 		.menu_anime a:hover{
 			color: #ffffff;
-		}	
+			background-color: #b75d45;
+			background: -moz-linear-gradient(#ffa06f, #701b1b); 
+			background: -webkit-linear-gradient(#ffa06f, #701b1b);	
+			background: -o-linear-gradient(#ffa06f, #701b1b);
+			background: -ms-linear-gradient(#ffa06f, #701b1b);
+			background: linear-gradient(#ffa06f, #701b1b);
+		}
 
 		.menu_anime ul a{
 			padding: 0;
 			width: auto;		
-		}
-
-		.menu_anime ul a:hover{
-			background: none;	
 		}
 
 		.menu_anime ul li:first-child a:after,

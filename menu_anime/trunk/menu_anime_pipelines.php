@@ -19,4 +19,11 @@ function menu_anime_insert_head_css($flux){
 	}
 	return $flux;
 }
+
+function menu_anime_insert_head($flux){
+    	$flux .= '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>';
+    
+    	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/menu_anime.js').'"></script>';
+    	return $flux;
+}
 ?>

@@ -1,19 +1,20 @@
 <paquet
 	prefix="menu_anime"
 	categorie="navigation"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
-	compatibilite="[3.0.20;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="img/menu_anime-64.png"
-	documentation="http://contrib.spip.net/Menu-anime-deroulant"
+	documentation="http://contrib.spip.net/Menu-anime"
 >
 	<nom>Menu animé</nom>
 
-	<auteur mail="louis.possoz@quelfutur.org">Louis Possoz</auteur>
+	<auteur lien="http://www.quelfutur.org/archive/louis_possoz.html">Louis Possoz</auteur>
 	<credit lien="http://red-team-design.com/css3-dropdown-menu/">Catalin Rosu - Red Team Design</credit>
 	<copyright>2011-2015</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<pipeline nom="insert_head_css" inclure="menu_anime_pipelines.php" />
+	<pipeline nom="insert_head" inclure="menu_anime_pipelines.php" />
 
 </paquet>
