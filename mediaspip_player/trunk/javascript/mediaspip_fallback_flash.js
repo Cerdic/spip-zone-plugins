@@ -510,7 +510,8 @@
 					allowfullscreen: allowfullscreen,
 					onFail: function() {
 						wrapper.removeClass('loading').addClass('player_error').css({height:''}).find('.controls').detach();
-						wrapper.find('.html5_cover').css('background-color','#ffffff').find('.img').fadeTo('slow', 0.4);
+						if(options.poster)
+							wrapper.find('.html5_cover').css('background-color','#ffffff').find('img').fadeTo('slow', 0.4);
 						wrapper.find('.flowplayer').css('position','relative').html(' ');
 						wrapper.ms_messages('error',IS_MOBILE ? ms_player_lang.flash_error_mobile : ms_player_lang.flash_error);
 					}
