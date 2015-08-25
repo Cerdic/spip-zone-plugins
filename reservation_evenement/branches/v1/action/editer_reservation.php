@@ -56,21 +56,10 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
     else
       spip_log("editer_reservation $id_reservation refus " . join(' ', $c));
 
-    // En cas de publication, fixer la date a "maintenant"
-    // sauf si $c commande autre chose
-    // ou si l'objet est deja date dans le futur
-    // En cas de proposition d'un objet (mais pas depublication), idem
-    if ($champ_date) {
-      if ($champs['statut'] == 'publie' OR ($champs['statut'] == 'prop' AND !in_array($statut_ancien, array(
-        'publie',
-        'prop'
-      ))) OR $d) {
-        if ($d OR strtotime($d = $date) > time())
-          $champs[$champ_date] = $date = $d;
-        else
-          $champs[$champ_date] = $date = date('Y-m-d H:i:s');
-      }
-    }
+    // En cas de paiement, fixer la date_paiement a "maintenant"
+
+      if ($statut == 'accepte' AND $statut_ancien == 'attente_paiement') 
+          $champs['date_paiement'] = date('Y-m-d H:i:s');
   }
 
   //les champs extras auteur

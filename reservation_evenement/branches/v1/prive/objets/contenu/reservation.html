@@ -4,9 +4,9 @@
     	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE)</span>
     </div>]
     
-    [<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
+    [(#DATE_PAIEMENT|!={0000-00-00 00:00:00}|oui)<div class="champ contenu_date_paiement">
     	<label><:reservation:label_date_paiement:></label>
-    	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>(#DATE_PAIEMENT)</span>
+    	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>[(#DATE_PAIEMENT)]</span>
     </div>]
     
     [<div class="champ contenu_type_paiement[ (#TYPE_PAIEMENT*|strlen|?{'',vide})]">
@@ -60,4 +60,5 @@
         <label><:reservation:label_lang:></label>
         <span dir='#LANG_DIR' class='#EDIT{lang} reference'>(#LANG|traduire_nom_langue)</span>
     </div>]
+    <INCLURE{fond=prive/objets/contenu/inc-reservation_montant,id_reservation}/>
 </BOUCLE_reservation>

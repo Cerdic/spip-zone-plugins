@@ -1,18 +1,19 @@
 [(#REM) On peut donner soit un id_reservation, soit un tableau contenant la reservation]
 <BOUCLE_reservation(RESERVATIONS){id_reservation=#ID_RESERVATION}{tout}>
-	[(#REM) Si on trouve une reservation on prend ça comme base ]
-	#SET{details, #ARRAY}
-	#SET{total,0}
-	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
-	[(#SET_PUSH{details, [(#ARRAY{
-		descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
-		quantite, #QUANTITE,
-		prix, #PRIX*,
-		statut,#STATUT
-	})]})]
-	 [(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
-	</BOUCLE_reservation_details>
-	#SET{reservation, #ARRAY{details, #GET{details}}}
+  [(#REM) Si on trouve une reservation on prend ça comme base ]
+  #SET{details, #ARRAY}
+  #SET{total,0}
+  <BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
+    [(#SET_PUSH{details, [(#ARRAY{
+      descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
+      quantite, #QUANTITE,
+      prix, #PRIX*,
+      statut,#STATUT
+      })]
+    })]
+    [(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
+  </BOUCLE_reservation_details>
+    #SET{reservation, #ARRAY{details, #GET{details}}}
 </BOUCLE_reservation>
 #SET{reservation,#ENV{reservation}}
 <//B_reservation>[
@@ -50,6 +51,7 @@
             <tr class="total_ttc">
                <td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ttc:>,<:reservation:total:>})]</td>
                <td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</td>
+               <td> </td>
             </tr>
          </tfoot>]
       </table>

@@ -37,11 +37,12 @@
              </td>
             <td class='reservation'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:label_reference|attribut_html:> #REFERENCE">#REFERENCE</a></td>
             <td class='nom'>
-            <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-              <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" title="#NOM">#NOM</a>
-            </BOUCLE_auteur>
-              #NOM
-            <//B_auteur>
+               <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+                  <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> -
+                  <a href="mailto:#EMAIL">#EMAIL</a>
+               </BOUCLE_auteur>
+                  <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
+                <//B_auteur>
             </td>
             <td class='quantite'>#QUANTITE</td>
             <td class='id'>[(#AUTORISER{modifier,reservations_detail,#ID_RESERVATIONS_DETAIL}|?{ <a href="[(#URL_ECRIRE{reservations_detail_edit,id_reservations_detail=#ID_RESERVATIONS_DETAIL})]">#ID_RESERVATIONS_DETAIL</a>,
