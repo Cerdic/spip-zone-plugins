@@ -1,6 +1,6 @@
 #SET{fond, #SELF|match{(cfg=)(\w+?),2}}
 <B_savecfg>
-<div class="formulaire_spip formulaire_savecfg">
+<div class="formulaire_spip formulaire_savecfg formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
@@ -9,11 +9,11 @@
 			<fieldset>
 				<h3 class="legend"><:savecfg:gerer_restauration:></h3>
 				<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
-					<[(#VAL{li}|saisie_balise_structure_formulaire)]>
+					<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer">
 						<select name="fond_id">
-						<option value="none" selected="selected">&nbsp;</option>
-						<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
-							<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
+							<option value="none"[(#ENV{fond_id}|=={'none'}|oui)selected='selected']>&nbsp;</option>
+						<BOUCLE_savecfg (SAVECFG){fond=#GET{fond}}{par titre}>
+							<option value="#ID_SAVECFG"[(#ENV{fond_id}|=={#ID_SAVECFG}|oui)selected='selected']>[(#TITRE|supprimer_tags)]</option>
 						</BOUCLE_savecfg>
 						</select>
 					</[(#VAL{li}|saisie_balise_structure_formulaire)]>
@@ -26,5 +26,4 @@
 		</div>
 	</form>
 </div>
-<br />
 </B_savecfg>
