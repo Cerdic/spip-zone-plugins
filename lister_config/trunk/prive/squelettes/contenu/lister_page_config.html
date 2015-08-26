@@ -1,0 +1,21 @@
+[(#AUTORISER{configurer,_plugins}|sinon_interdire_acces)]
+
+<div class="nettoyeur"> </div>
+<h1 class="grostitre"><:lister_config:titre_lister_page_config:></h1>
+<p><:lister_config:description_lister_page_config:></p>
+<div class="nettoyeur"></div>
+
+[(#SET{actif, #ARRAY})]
+<BOUCLE_actif (PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_actif>
+
+<B_config>
+<BOUCLE_config (PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+<div class="[(#PREFIXE|strtolower)]" id="plugin_[(#PREFIXE|strtolower)]">
+<hr class="spip" />
+    [(#INCLURE{fond=prive/squelettes/contenu/configurer_[(#PREFIXE|strtolower)], env})]
+    <div class="nettoyeur"></div>
+</div>
+</BOUCLE_config>
+</B_config>

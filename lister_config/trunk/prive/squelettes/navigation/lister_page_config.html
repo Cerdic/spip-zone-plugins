@@ -1,0 +1,16 @@
+[(#SET{actif, #ARRAY})]
+<BOUCLE_actif (PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_actif>
+
+[(#BOITE_OUVRIR)]
+<B_config>
+<div class="navigation">
+    <ul class="liste_items sous_navigation">
+        <BOUCLE_config (PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+        <li class="item[ (#PREFIXE|strtolower)]"><a href="[#plugin_(#PREFIXE|strtolower)]" class="bando2_[(#PREFIXE|strtolower)]">[(#NOM)]</a></li>
+        </BOUCLE_config>
+    </ul>
+</div>
+</B_config>
+[(#BOITE_FERMER)]

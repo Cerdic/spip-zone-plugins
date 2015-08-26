@@ -8,6 +8,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
+
 function lister_config_listermenu($flux)
 {
     $flux['data']['lister_config'] = array(
