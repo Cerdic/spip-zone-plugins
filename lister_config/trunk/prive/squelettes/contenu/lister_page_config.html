@@ -11,7 +11,7 @@
 </BOUCLE_actif>
 
 <B_config>
-<BOUCLE_config (PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+<BOUCLE_config (PAQUETS plugins) {tout} {par paquets.prefixe} {actif=='oui'} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
 <div class="[(#PREFIXE|strtolower)]" id="plugin_[(#PREFIXE|strtolower)]">
 <hr class="spip" />
     [(#INCLURE{fond=prive/squelettes/contenu/configurer_[(#PREFIXE|strtolower)], env})]
