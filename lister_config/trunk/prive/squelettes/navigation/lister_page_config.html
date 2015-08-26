@@ -8,9 +8,10 @@
 <div class="navigation">
     <ul class="liste_items sous_navigation">
         <BOUCLE_config (PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
-        <li class="item[ (#PREFIXE|strtolower)]"><a href="[#plugin_(#PREFIXE|strtolower)]" class="bando2_[(#PREFIXE|strtolower)]">[(#NOM)]</a></li>
+        <li class="item[ (#PREFIXE|strtolower)]"><a href="[#plugin_(#PREFIXE|strtolower)]" class="bando2_[(#PREFIXE|strtolower)]" style="background-image: [(#LOGO|oui)url('[(#CONSTANTE|constant|concat{[(#LOGO|trim|match{^http}|?{[(#LOGO)],[(#SRC_ARCHIVE)]/[(#LOGO)]})]}|image_reduire{16}|extraire_attribut{src})]')];">[(#NOM)]</a></li>
         </BOUCLE_config>
     </ul>
 </div>
 </B_config>
 [(#BOITE_FERMER)]
+
