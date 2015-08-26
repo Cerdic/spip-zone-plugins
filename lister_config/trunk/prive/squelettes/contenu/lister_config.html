@@ -14,7 +14,7 @@
 <div class="liste-plugins">
 	<div class="liste plugins" id="liste_plugins">
 		<ul class="liste-items">
-			<BOUCLE_config(PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+			<BOUCLE_config(PAQUETS plugins) {tout} {par paquets.prefixe} {paquets.prefixe IN #GET{actif}} {fusion paquets.prefixe}>
 			<li class="item" id="[(#PREFIXE|strtolower)]">
 				<div class="resume">
 					[<h3 class="nom">(#NOM)</h3>]
