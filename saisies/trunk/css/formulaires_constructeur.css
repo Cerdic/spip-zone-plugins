@@ -5,22 +5,7 @@
 }
 #deplacable .ui-state-highlight { height: 5em; line-height: 1.2em; }
 #deplacable .ui-sortable {min-height:3em;}
-/*
-.formulaire_construire_formulaire{
-	padding:1em;
-}
-.formulaire_construire_formulaire ul li label{
-	display:block;
-	margin:0;
-	width:auto;
-	float:none;
-	clear:both;
-	line-height:1.7em;
-}
-.formulaire_construire_formulaire input.text, .formulaire_construire_formulaire input.password, .formulaire_construire_formulaire textarea, .formulaire_construire_formulaire select{
-	width:auto;
-}
-*/
+
 .formulaire_construire_formulaire .actions_formulaire{
 	margin:0;
 	padding:1em;
@@ -30,42 +15,14 @@
 .formulaire_construire_formulaire .actions_formulaire img{
 	vertical-align:middle;
 }
-/*
-.formulaire_construire_formulaire li.configurable{
-	position:relative;
-	padding:1em;
-	margin:0.5em 0;
-	background:transparent;
-	border:1px dashed transparent;
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-}
-.formulaire_construire_formulaire li.configurable.hover{
-	border-color:#999;
-}
-*/
+
 .formulaire_construire_formulaire .en_configuration{
 	border:5px solid #999;
 	border-radius:5px;
 	margin:.5em;
 }
 .formulaire_construire_formulaire .fieldset.configurable>fieldset>.editer-groupe {margin-left:30px;}
-/*
-.formulaire_construire_formulaire li.fieldset.configurable{
-	padding:0;
-}
-.formulaire_construire_formulaire li.fieldset h3.legend{
-	margin:0;
-}
-.formulaire_construire_formulaire li.fieldset.configurable > fieldset{
-	border:1px solid #ddd;
-	padding:0;
-}
-.formulaire_construire_formulaire li.fieldset.configurable > fieldset > ul{
-	padding:0 1em;
-}
-*/
+
 .formulaire_construire_formulaire .formulaire_configurer{
 	border-top:3px dashed #999;
 	margin: 1em -8px 0 -138px;
@@ -76,27 +33,6 @@
 	margin: 1em -8px 0;
 }
 
-/*
-.formulaire_construire_formulaire li.fieldset.configurable > .formulaire_configurer{
-	margin:1em 0 0 0;
-}
-.formulaire_construire_formulaire .formulaire_configurer fieldset{
-	border:0;
-	padding:0;
-}
-.formulaire_construire_formulaire .formulaire_configurer-contenus li.editer{
-	border:0;
-	margin:0.5em 0;
-	padding:0.5em 1em;
-}
-.formulaire_construire_formulaire .formulaire_configurer li.formulaire_configurer-contenu{
-	background:white;
-	border-top:1px solid #ddd;
-	border-radius:0 0 5px 5px;
-	-moz-border-radius:0 0 5px 5px;
-	-webkit-border-radius:0 0 5px 5px;
-}
-*/
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets {
 	overflow:auto;
 }
@@ -154,12 +90,6 @@
 }
 .formulaire_construire_formulaire .actions .move {
 	cursor:move;
-}
-
-
-
-.formulaire_construire_formulaire .saisies_disponibles {
-	/*padding:1em;*/
 }
 
 .formulaire_construire_formulaire .ajouter_saisie{
