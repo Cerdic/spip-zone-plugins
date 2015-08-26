@@ -529,6 +529,36 @@ function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt
     return false;
 }
 
+
+/**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test de la présence d'un mot lié
+ *
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Identifiant de l'objet possédant les extras
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des mots sur lesquels s'appliquent les champs
+ * @param bool $recursif
+ *     Inutile, la récursivité est prise en charge par compositions_determiner()
+ * @return bool
+ *     Autorisé ou non
+ */
+function inc_restreindre_extras_objet_sur_mot_dist($objet, $id_objet, $opt, $ids, $recursif) {
+
+	include_spip('action/editer_liens');
+	$liens = objet_trouver_liens(array('mot' => $ids), array($objet => $id_objet));
+
+	if (count($liens)) {
+		return true;
+	}
+
+	return false;
+}
+
 /**
  * Fonction d'autorisation interne à la fonction restreindre_extras()
  * spécifique au test de la présence d'une composition
@@ -559,3 +589,5 @@ function inc_restreindre_extras_objet_sur_composition_dist($objet, $id_objet, $o
 
 	return false;
 }
+
+
