@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // D
     'description_page' => 'Vous pouvez trouver ci-dessous la liste des plugins actifs du site proposant une page de configuration du type <code>?exec=configurer_prefixe-plugin</code>.',
-    'description_lister_page_config' => 'Vous retrouverez sur cette page tous les formulaires de configuration livrés par les plugins.',
+    'description_lister_config_plugins' => 'Vous retrouverez sur cette page tous les formulaires de configuration livrés par les plugins.',
     'description_lister_objets' => 'On va lister ici tous les objets principaux de SPIP ayant un tableau. Vous pourrez trouver en bas de page les objets n\'ayant pas de tableau.',
     'description_lister_plugins' => 'G&eacute;n&eacute;ration du fichier d\'appel des plugins n&eacute;cessaires au site ',
     'description_utiliser_plugins' => 'Vous pourriez utiliser cette trame pour batir un fichier <em>paquet.xml</em>,<br />
@@ -25,12 +25,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'objets_vides' => 'Voici la liste des objets ayant un tableau ne retournant aucun résultat, ou résultat alternatif.',
 
     // T
-    'titre_lister_config' => 'Les pages de configuration',
+    'titre_lister_config' => 'Liste des plugins configurables',
+    'titre_lister_config_plugins' => 'Configurer les plugins',
     'titre_lister_objets' => 'Liste des objets principaux',
     'titre_lister_plugins' => 'Les plugins nécessaires au site',
     'titre_objets_sans_tableaux' => 'Objets sans tableaux',
     'titre_objets_vides' => 'Objets vides',
-    'titre_page' => 'Pages de configuration des plugins actifs du site',
-    'titre_lister_page_config' => 'Les formulaires de configuration des plugins',
+    'titre_page' => 'Liste des plugins configurables',
+    'titre_page_lister_config_plugins' => 'Configurer les plugins actifs',
 
 );
