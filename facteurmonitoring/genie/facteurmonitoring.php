@@ -32,32 +32,45 @@ function genie_facteurmonitoring_dist() {
   // etape 1: verifier la bonne reception de l'email precedent
   ecrire_meta('facteurmonitoring_etat', 'NOTOK');
   
+  spip_log("---","facteurmonitoring");  
+  
   if (isset($GLOBALS['meta']['facteurmonitoring_hash'])) {
     $email_hash = trim($GLOBALS['meta']['facteurmonitoring_hash']);
     
     if ($email_hash) {
-         // on se connecte en IMAP pour rechercher cet email
-        include_spip("lib/PhpImap/MailBox");
-    
+        // on se connecte en IMAP pour rechercher cet email
         $connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
-        $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd);
-        try {
-              $mailsIds = $mailbox->searchMailBox('SUBJECT "'.$email_hash.'"');
-              if($mailsIds) {
-                  // on efface les emails
-                  foreach($mailsIds as $mailsId) 
-                       $mailbox->deleteMail($mailsId);
-                  
-                  ecrire_meta('facteurmonitoring_etat', 'OK'); 
-                  spip_log("[reception] OK, email lu $email_hash","facteurmonitoring");
-                  
-              } else {                  
-                  spip_log("[reception] NOTOK, erreur: email introuvable $email_hash","facteurmonitoring");        
-              }
+        $mbox = @imap_open($connection, $email, $email_pwd);
+          
+        if (FALSE === $mbox) {
+                spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                               
+        } else {
+                // lecture boite                  
+                $info = imap_check($mbox);
+                if (FALSE === $info) {
+                    spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                    
+                }  else {
+                    // to do search msg
+                    $msgs = imap_search($mbox, 'SUBJECT "'.$email_hash.'"', SE_UID);
+                    
+                    if (count($msgs)) {
+                       // on efface les emails
+                       foreach ($msgs as $msg) {
+                            imap_delete($mbox, $msg, FT_UID);
+                            // TODO: apparement la fonction marche mal sous GMAIL
+                       }
+                       imap_expunge($mbox); 
+                       ecrire_meta('facteurmonitoring_etat', 'OK'); 
+                       spip_log("[reception] OK, email lu $email_hash","facteurmonitoring");
+                        
+                    }  else {
+                       spip_log("[reception] NOTOK, erreur: email introuvable $email_hash","facteurmonitoring");
+                    }
+
+                }
+          }
         
-        } catch(Exception $e){
-              spip_log("[reception] NOTOK, erreur: boite inaccessible en lecture","facteurmonitoring"); 
-        }
+
     } else {       
       spip_log("[reception] NOTOK, erreur: email hash vide","facteurmonitoring"); 
     }     

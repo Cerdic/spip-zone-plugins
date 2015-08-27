@@ -10,8 +10,6 @@ function facteurmonitoring_test_imap_exist() {
     } else {
         return _T('facteurmonitoring:test_imap_exist_false'); 
     }
-    
-    
 } 
 
 
@@ -29,26 +27,29 @@ function facteurmonitoring_test_imap($time) {
    $hote_inbox = lire_config('facteurmonitoring/inbox'); 
    
    
-
    if ($hote_imap!="" && function_exists('imap_open')) {
           
-          // on se connecte en IMAP pour tester la connection
-          include_spip("lib/PhpImap/MailBox");
-      
+          // on se connecte en IMAP pour tester la connection        
           $connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
-          $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd);
+          $mbox = @imap_open($connection, $email, $email_pwd, OP_READONLY); 
           
-          try {
-              $mailsIds = $mailbox->searchMailBox('NEW');
-              return _T('facteurmonitoring:test_connection_ok');   
-          } catch(Exception $e){
-              return _T('facteurmonitoring:test_connection_notok');   
+          if (FALSE === $mbox) {
+                return _T('facteurmonitoring:test_connection_notok');                 
+          } else { 
+                // lecture boite                  
+                $info = imap_check($mbox);
+                if (FALSE === $info) {
+                    return _T('facteurmonitoring:test_connection_notok');                     
+                }  else {
+                    return _T('facteurmonitoring:test_connection_ok');
+                }
           }
-
            
    }
    
    return;
 }
+
+
 
 ?>
