@@ -6,8 +6,9 @@
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=en" total="12" traduits="11" relire="0" modifs="0" nouveaux="1" pourcent="91.67">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=en" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=es" total="12" traduits="10" relire="1" modifs="0" nouveaux="1" pourcent="83.33">

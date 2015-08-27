@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_disposition_verticale' => 'Vertical',
 
 	// M
+	'mode_css' => 'Css mode',
 	'mode_debug' => 'Debug mode',
 	'mode_inclure' => 'Inclusion mode',
 	'mode_profile' => 'Profiling mode',
