@@ -27,7 +27,7 @@
 			#BOITE_FERMER
 		]
 
-		<div class='editer-groupe'>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class='editer-groupe'>
 			[(#SAISIE{auteurs, auteur_source,
 				class=chosen,
 				label=<:rao:label_auteur_source:>,
@@ -41,7 +41,7 @@
 			[(#SAISIE{choisir_objets, objets,
 				label=<:rao:label_objets:>,
 				explication=<:rao:label_objets_explication:>})]
-		</div>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		<div class='boutons'>
 			<input type='submit' name='suivant' value='<:bouton_suivant:>' />

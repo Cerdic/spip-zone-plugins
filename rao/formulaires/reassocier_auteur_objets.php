@@ -35,6 +35,9 @@ function formulaires_reassocier_auteur_objets_verifier() {
 	if (!$objets) {
 		$erreurs['objets'] = _T('info_obligatoire');
 	}
+	if ($source and $source == $destination) {
+		$erreurs['auteur_destination'] = _T('rao:erreur_auteurs_identiques');
+	}
 
 	if ($erreurs) {
 		return $erreurs;

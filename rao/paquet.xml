@@ -1,7 +1,7 @@
 <paquet
 	prefix="rao"
 	categorie="auteur"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/rao-64.png"
@@ -18,7 +18,6 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
-	<necessite nom="verifier" compatibilite="[0.1.10;]" />
 	<necessite nom="chosen" compatibilite="[1.0.0;]" />
 
 	<menu nom="rao" titre="rao:rao_titre" parent="menu_publication" icone="images/rao-16.png" />

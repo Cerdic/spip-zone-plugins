@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_confirmer' => 'Confirmer',
 
+	// E
+	'erreur_auteurs_identiques' => 'Veuillez indiquer des auteurs différents !',
+
 	// L
 	'label_auteur_source' => 'Auteur source',
 	'label_auteur_source_explication' => "Quel est l'auteur qui est désassocié ?",
