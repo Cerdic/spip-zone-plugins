@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Televersagiamen de doucumen',
 	'legend_editer_prive' => 'Edità l’espaci privat (esperimental)',
 	'legend_introduction_article' => 'Tèstou introudutiéu de l’article',
+	'legend_introduction_rubrique' => 'Tèstou introudutiéu de la rùbrica',
 
 	// M
 	'message_image_obligatoire' => 'Cau chausì una image',
