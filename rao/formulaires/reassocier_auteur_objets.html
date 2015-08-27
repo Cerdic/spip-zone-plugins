@@ -1,0 +1,57 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+<BOUCLE_ok(CONDITION){si #ENV{message_ok}}>
+	<div class="reponse_formulaire reponse_formulaire_ok">[(#ENV**{message_ok})]
+	<ul class='spip'>
+	<BOUCLE_source(AUTEURS){tout}{id_auteur=#ENV{auteur_source}}{statut?}>
+		<li><:rao:label_auteur_source:> : <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></li>
+	</BOUCLE_source>
+	<BOUCLE_destination(AUTEURS){tout}{id_auteur=#ENV{auteur_destination}}{statut?}>
+		<li><:rao:label_auteur_destination:> : <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></li>
+	</BOUCLE_destination>
+	</ul>
+	</div>
+</BOUCLE_ok>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='[(#ENV{action})]'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#ENV{erreurs/_confirmer}|oui)
+			#BOITE_OUVRIR{'', notice}
+				[(#ENV{erreurs/_confirmer}|propre)]
+			#BOITE_PIED
+				<input type='submit' name='confirmer' value='<:rao:bouton_confirmer:>' />
+			#BOITE_FERMER
+		]
+
+		<div class='editer-groupe'>
+			[(#SAISIE{auteurs, auteur_source,
+				class=chosen,
+				label=<:rao:label_auteur_source:>,
+				explication=<:rao:label_auteur_source_explication:>})]
+
+			[(#SAISIE{auteurs, auteur_destination,
+				class=chosen,
+				label=<:rao:label_auteur_destination:>,
+				explication=<:rao:label_auteur_destination_explication:>})]
+
+			[(#SAISIE{choisir_objets, objets,
+				label=<:rao:label_objets:>,
+				explication=<:rao:label_objets_explication:>})]
+		</div>
+
+		<div class='boutons'>
+			<input type='submit' name='suivant' value='<:bouton_suivant:>' />
+		</div>
+
+	</div></form>
+</BOUCLE_editable>
+</div>
+
+<style type='text/css'>
+/* surcharge pour chosen */
+.formulaire_#FORM .editer { overflow:visible; }
+</style>
