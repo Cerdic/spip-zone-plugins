@@ -1,0 +1,10 @@
+<traduction module="newsletter" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=de" total="52" traduits="51" relire="0" modifs="0" nouveaux="1" pourcent="98.08">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=en" total="52" traduits="47" relire="0" modifs="0" nouveaux="5" pourcent="90.38">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=nl" total="52" traduits="47" relire="0" modifs="0" nouveaux="5" pourcent="90.38">
+	</langue>
+</traduction>
