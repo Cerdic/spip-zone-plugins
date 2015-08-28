@@ -1,7 +1,7 @@
 <paquet
 	prefix="rao"
 	categorie="auteur"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/rao-64.png"
@@ -16,6 +16,8 @@
 	<credit lien="https://www.iconfinder.com/icons/647877/arrow_continue_direction_forward_move_next_right_icon">Gregor Čresnar (logo)</credit>
 
 	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="rao_autoriser.php" />
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
 	<necessite nom="chosen" compatibilite="[1.0.0;]" />
