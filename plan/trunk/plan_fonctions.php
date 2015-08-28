@@ -11,6 +11,16 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Retourne le nombre d'éléments d'une liste d'objet qui fait qu'on
+ * n'affiche pas le contenu par défaut, mais seulement en ajax
+ * après clic…
+ *
+ * @return int nombre
+**/
+function plan_limiter_listes() {
+	return defined('_PLAN_LIMITER_LISTES') ? _PLAN_LIMITER_LISTES : 50;
+}
 
 /**
  * Trouve les objets qui peuvent s'afficher dans le plan de page, dans une rubrique
