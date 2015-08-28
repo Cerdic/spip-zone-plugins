@@ -167,13 +167,13 @@ function cache_dec($key, $value=null, $ttl=null) {
 /* null */
 function cache_lock($key) {
 	global $Memoization;
-	return $Memoization->lock($key, $value, $ttl);
+	return $Memoization->lock($key);
 }
 
 /* null */
 function cache_unlock($key) {
 	global $Memoization;
-	return $Memoization->unlock($key, $value, $ttl);
+	return $Memoization->unlock($key);
 }
 
 /* filtre pour la page de cfg */
