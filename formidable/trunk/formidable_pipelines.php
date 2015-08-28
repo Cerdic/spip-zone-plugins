@@ -68,10 +68,13 @@ function formidable_trouve_liens($texte){
  * @return mixed
  */
 function formidable_post_edition($flux){
-	if ($table = $flux['args']['table']
-	  AND $id_objet = intval($flux['args']['id_objet'])
+	if (
+		isset($flux['args']['table'])
+		AND $table = $flux['args']['table']
+		AND $id_objet = intval($flux['args']['id_objet'])
 		AND $primary = id_table_objet($table)
-	  AND $row = sql_fetsel("*",$table,"$primary=".intval($id_objet))){
+		AND $row = sql_fetsel("*",$table,"$primary=".intval($id_objet)))
+	{
 
 		$objet = objet_type($table);
 		$contenu = implode(' ',$row);
