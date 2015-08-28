@@ -180,8 +180,10 @@ $(document).ready(function(){
 
 	<span class='statut'>
 		Statuts : 
-		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]">Tous</a> | 
-		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]">Publiés uniquement</a> 
+		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]">Tous</a> |
+		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]">publiés</a> | 
+		<a [(#ENV{statut}|=={prop}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prop})]">en attente de validation</a> |
+		<a [(#ENV{statut}|=={prepa}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prepa})]">en cours de rédaction</a> 
 	</span>
 </div>
 
