@@ -36,7 +36,7 @@
 							<input type="text" name="jours" size="4" id="jours" class="texte" value="#ENV{jours}"/>
 						</li>
 						<li class="editer editer_idrub">
-							<label for="id_rub"><:archive:rubriques_archiver:></label>
+							<label for="idrub"><:archive:rubriques_archiver:></label>
 							<select name="idrub[]" id="idrub" multiple="multiple">
 							<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}>
 							<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{idrub,#ARRAY}}|oui)selected="selected"]>#TITRE (#ID_RUBRIQUE)</option>

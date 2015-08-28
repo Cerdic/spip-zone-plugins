@@ -56,7 +56,7 @@ function maj_archives(){
 		foreach($archives as $archive){
 			$id_article = $archive['id_article'];
 			$modifs = array('statut' => 'archive');
-			$modif = article_modifier($id_article,$modifs);
+			article_modifier($id_article,$modifs);
 			if (time() >= _TIME_OUT)
 				return;
 		}
