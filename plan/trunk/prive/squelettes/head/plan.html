@@ -17,20 +17,19 @@ $(document).ready(function(){
 			"plugins" : [ "types", "search", "state" ],
 			"core" : {
 				"data" : function (node, cb) {
-					// on est obliger de tout définir comme étant en ajax
-					// donc on charge 1 fois la racine avec ce qu'on connait dans le html déjà connu
+					// on est obligé de tout charger en ajax (même la racine)
+					// donc on charge 1 fois la racine avec le html qu'on reçoit d'origine
 					if (node.id === '#') {
 						cb($mytree_source.html());
 					}
 
-					// pour ce qu'on ne connait pas, on va faire un appel ajax
-					// sur l'objet et la rubrique (et éventuellement le statut)
+					// et pour ce qu'on ne connait pas (classe css 'jstree-closed' sur un LI, et pas de UL à l'intérieur)
+					// on fait un appel ajax pour obtenir la liste correspondant à l'objet souhaité, lorsque c'est demandé.
 					else {
-						var type = node.data.jstree.type;
 						var id_rubrique = node.parent.split('-')[1];
 						var params = {
 							"id_rubrique": id_rubrique,
-							"objet": type
+							"objet": node.type
 						};
 						if ("#ENV{statut}") {
 							params.statut = "#ENV{statut}";
