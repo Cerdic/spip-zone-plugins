@@ -7,4 +7,7 @@
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=nl" total="81" traduits="65" relire="0" modifs="0" nouveaux="16" pourcent="80.25">
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=pt_br" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
+	</langue>
 </traduction>
