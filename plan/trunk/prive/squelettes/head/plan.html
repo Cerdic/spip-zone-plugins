@@ -34,7 +34,6 @@ $(document).ready(function(){
 						if ("#ENV{statut}") {
 							params.statut = "#ENV{statut}";
 						}
-						console.log(params);
 						$.ajax({
 							url: "[(#VAL{plan}|generer_url_action{"", 1})]",
 							data: params,
@@ -45,10 +44,6 @@ $(document).ready(function(){
 						});
 					}
 				}
-				/*,
-				"themes" : {
-					"variant" : "large"
-				}*/
 			},
 			"search" : {
 				"show_only_matches" : true,
