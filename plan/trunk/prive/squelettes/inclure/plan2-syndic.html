@@ -1,0 +1,18 @@
+<B_sites>
+	<ul class="menu-items sites syndic">
+		<li class="item" data-jstree='{"type": "site"}'>
+			<strong>[(#GRAND_TOTAL|objet_afficher_nb{site})]</strong>
+
+			<ul class="menu-items sites syndic">
+				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{statut==.*}{statut ?}>
+					<li class="item" data-jstree='{"type": "site"}'>
+						<a href="[(#ID_SYNDIC|generer_url_entite{site})]"
+							title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">
+							[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]
+						</a>
+					</li>
+				</BOUCLE_sites>
+			</ul>
+		</li>
+	</ul>
+</B_sites>

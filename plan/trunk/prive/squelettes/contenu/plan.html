@@ -1,0 +1,23 @@
+
+
+
+<div id="mytree_actions">
+	<input id="mytree_search" class="input" type="text" value="" placeholder="<:info_rechercher|attribut_html:>">
+
+	<span class='pliage'>
+		<a href="#" onClick="jQuery('#racine').jstree('open_all'); return false;"><:lien_tout_deplier:></a> | 
+		<a href="#" onClick="jQuery('#racine').jstree('close_all'); return false;"><:lien_tout_replier:></a>
+	</span>
+
+	<span class='statut'>
+		Statuts : 
+		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]">Tous</a> | 
+		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]">Publiés uniquement</a> 
+	</span>
+</div>
+
+#BOITE_OUVRIR{'', simple}
+<div id="racine">
+<INCLURE{fond=prive/squelettes/inclure/plan2-rubriques, id_parent=0, statut}>
+</div>
+#BOITE_FERMER

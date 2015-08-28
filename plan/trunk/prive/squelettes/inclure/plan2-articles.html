@@ -1,0 +1,23 @@
+<B_articles>
+	<ul class="menu-items articles">
+		<li class="item" data-jstree='{"type":"article"}'>
+			<strong>[(#GRAND_TOTAL|objet_afficher_nb{article})]</strong>
+
+			<ul class="menu-items articles">
+				<BOUCLE_articles(ARTICLES)
+					{id_rubrique} {par titre}
+					{statut IN #SESSION{statut}|statuts_articles_visibles}
+					{statut ?}
+					{lang_select=non}>
+					<li class="item" data-jstree='{"type":"article"}'>
+						<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+							[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+							title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">
+							[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
+						</a>
+					</li>
+				</BOUCLE_articles>
+			</ul>
+		</li>
+	</ul>
+</B_articles>
