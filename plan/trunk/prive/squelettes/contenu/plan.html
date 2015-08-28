@@ -183,7 +183,8 @@ $(document).ready(function(){
 		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]">Tous</a> |
 		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]">publiés</a> | 
 		<a [(#ENV{statut}|=={prop}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prop})]">en attente de validation</a> |
-		<a [(#ENV{statut}|=={prepa}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prepa})]">en cours de rédaction</a> 
+		<a [(#ENV{statut}|=={prepa}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prepa})]">en cours de rédaction</a>
+		[(#REM) TODO : faire une boucle pour générer la liste des status, éventuellement remplacer les noms par les puces de couleur (pour gagner de la place) ]
 	</span>
 </div>
 
