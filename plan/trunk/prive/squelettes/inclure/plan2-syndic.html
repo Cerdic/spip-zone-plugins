@@ -8,7 +8,7 @@
 
 [(#ENV{liste}|non)
 	<ul class="menu-items sites syndic">
-		<li class="item[ (#GET{total}|>{#VAL|plan_limiter_listes}|oui)jstree-closed]" data-jstree='{"type":"site"}'>
+		<li id="syndic-rubrique-#ID_RUBRIQUE" class="item[ (#GET{total}|>{#VAL|plan_limiter_listes}|oui)jstree-closed]" data-jstree='{"type":"box_site", "objet": "site"}'>
 			<strong>[(#GET{total}|objet_afficher_nb{site})]</strong>
 ]
 
