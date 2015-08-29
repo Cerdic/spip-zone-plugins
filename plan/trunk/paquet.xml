@@ -1,7 +1,7 @@
 <paquet
 	prefix="plan"
 	categorie="navigation"
-	version="1.0.2"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/plan-64.png"
