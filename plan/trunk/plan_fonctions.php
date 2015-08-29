@@ -23,6 +23,15 @@ function plan_limiter_listes() {
 }
 
 /**
+ * Pour SPIP 3.0, on chargera un jquery plus récent… la loose !
+ *
+ * @return bool
+**/
+function plan_charger_jquery_recent() {
+	return version_compare($GLOBALS['spip_version_branche'], '3.1.0-dev', '<');
+}
+
+/**
  * Trouve les objets qui peuvent s'afficher dans le plan de page, dans une rubrique
  *
  * @return array [table -> chemin du squelette]

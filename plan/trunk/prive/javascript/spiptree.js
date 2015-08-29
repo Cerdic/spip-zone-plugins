@@ -36,8 +36,6 @@ $.fn.spiptree = function(options) {
 		};
 	});
 
-	console.log("spip_tree", options);
-
 	$mytree.jstree({
 		"plugins" : options.plugins,
 		"core" : {
@@ -132,7 +130,6 @@ $.fn.spiptree = function(options) {
 		} else {
 			// un item, sa destination est soit une box (de même type) soit une rubrique
 			var dest = data.parent.split('-'); // articles-rubrique-30 (box) ou rubrique-30
-			console.log(dest, dest.length);
 			var params = {
 				objet: infos[0],
 				id_objet: [ infos[1] ],
@@ -140,8 +137,6 @@ $.fn.spiptree = function(options) {
 				id_rubrique_destination: (dest.length == 3 ? dest[2] : dest[1]),
 			}
 		}
-
-		console.log(params, data);
 
 		$.ajax({
 			url: options.urls.deplacer,

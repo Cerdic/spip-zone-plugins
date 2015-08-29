@@ -1,3 +1,7 @@
+[(#REM)
+	Note : utilise My_jQuery à la place de jQuery :
+	c'est un hack pour SPIP 3.0 et son vieux jQuery 1.7
+]
 
 <script type="text/javascript">
 (function($){
@@ -22,15 +26,15 @@ $(document).ready(function(){
 		]
 	});
 });
-})(jQuery);
+})(My_jQuery);
 </script>
 
 <div id="mytree_actions">
 	<input id="mytree_search" class="input" type="text" value="" placeholder="<:info_rechercher|attribut_html:>">
 
 	<span class='pliage'>
-		<a href="#" onClick="jQuery('#racine').jstree('open_all'); return false;"><:lien_tout_deplier:></a> | 
-		<a href="#" onClick="jQuery('#racine').jstree('close_all'); return false;"><:lien_tout_replier:></a>
+		<a href="#" onClick="My_jQuery('#racine').jstree('open_all'); return false;"><:lien_tout_deplier:></a> | 
+		<a href="#" onClick="My_jQuery('#racine').jstree('close_all'); return false;"><:lien_tout_replier:></a>
 	</span>
 
 	<span class='statut'>
