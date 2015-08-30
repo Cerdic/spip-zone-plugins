@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function genie_archive_cron($t){
+	include_spip('inc/config');
 	// teste si l'archivage automatique est actif
 	if (lire_config("archive/act_archive",'non') == "oui" && ($jours = lire_config("archive/jours",0)) != 0){
 		// s'il est actif, alors il archive les articles
