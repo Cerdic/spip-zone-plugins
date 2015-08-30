@@ -1,0 +1,38 @@
+<BOUCLE_vector(VECTORS){id_vector}>
+
+[(#ID_MAP|oui)<div class="champ contenu_id_map[ (#ID_MAP*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_id_map_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{id_map} id_map'>[(#INFO_TITRE{map,#ID_MAP})]</div>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_titre_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{titre} titre'>(#TITRE)</div>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_descriptif_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
+</div>]
+
+[<div class="champ contenu_code_vector[ (#CODE_VECTOR*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_code_vector_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{code_vector} code_vector'>(#CODE_VECTOR)</div>
+</div>]
+
+[<div class="champ contenu_data[ (#DATA*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_data_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{data} data'>(#DATA)</div>
+</div>]
+
+[<div class="champ contenu_path[ (#PATH*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_path_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{path} path'>(#PATH)</div>
+</div>]
+
+[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_url_site_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'>(#URL_SITE)</div>
+</div>]
+
+</BOUCLE_vector>

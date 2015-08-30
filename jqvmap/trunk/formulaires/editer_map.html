@@ -1,0 +1,90 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_map,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_map' value='#ENV{id_map}' />
+		<ul>
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:map:champ_titre_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:map:champ_descriptif_label:>,
+				li_class=haut, class=inserer_barre_edition, rows=4})]
+
+			[(#SAISIE{input, width, obligatoire=oui,
+				label=<:map:champ_width_label:>})]
+
+			[(#SAISIE{input, height, obligatoire=oui,
+				label=<:map:champ_height_label:>})]
+
+			[(#SAISIE{input, code_map, obligatoire=oui,
+				label=<:map:champ_code_map_label:>})]
+
+			[(#SAISIE{input, background_color,
+				label=<:map:champ_background_color_label:>})]
+
+			[(#SAISIE{input, border_color,
+				label=<:map:champ_border_color_label:>})]
+
+			[(#SAISIE{input, border_opacity,
+				label=<:map:champ_border_opacity_label:>,
+				explication=<:map:champ_border_opacity_explication:>,
+				default=1})]
+
+			[(#SAISIE{input, border_width,
+				label=<:map:champ_border_width_label:>})]
+
+			[(#SAISIE{input, color,
+				label=<:map:champ_color_label:>})]
+
+			[(#SAISIE{selection, enable_zoom,
+				label=<:map:champ_enable_zoom_label:>,
+				explication=<:map:champ_enable_zoom_explication:>,
+				datas=[(#ARRAY{true,<:map:choix_oui:>,false,<:map:choix_non:>})],
+				default=true})]
+
+			[(#SAISIE{input, hover_color,
+				label=<:map:champ_hover_color_label:>,
+				explication=<:map:champ_hover_color_explication:> })]
+
+			[(#SAISIE{input, hover_opacity,
+				label=<:map:champ_hover_opacity_label:>,
+				explication=<:map:champ_hover_opacity_explication:>,
+				default=1})]
+
+			[(#SAISIE{selection, normalize_function,
+				label=<:map:champ_normalize_function_label:>,
+				explication=<:map:champ_normalize_function_explication:> ,
+				datas=[(#ARRAY{linear,<:map:normalize_function_linear:>,polynomial,<:map:normalize_function_polynomial:>})]})]
+
+			[(#SAISIE{input, scale_colors,
+				label=<:map:champ_scale_colors_label:>,
+				explication=<:map:champ_scale_colors_explication:> })]
+
+			[(#SAISIE{input, selected_color,
+				label=<:map:champ_selected_color_label:>,
+				explication=<:map:champ_selected_color_explication:> })]
+
+			[(#SAISIE{input, selected_region,
+				label=<:map:champ_selected_region_label:>,
+				explication=<:map:champ_selected_region_explication:> })]
+
+			[(#SAISIE{selection, show_tooltip,
+				label=<:map:champ_show_tooltip_label:>,
+				datas=[(#ARRAY{true,<:map:choix_oui:>,false,<:map:choix_non:>})],
+				default=true})]
+
+			[(#SAISIE{input, data_name,
+				label=<:map:champ_data_name_label:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,54 @@
+<BOUCLE_principale (MAPS) {id_map}>
+#SET{regex,[[:punct:][:space:]]+}
+[(#SET{width,[(#ENV{width,#WIDTH})]})]
+[(#SET{height,[(#ENV{height}|trim|non|?{
+    [(#HEIGHT|et{#WIDTH}|et{#ENV{width}}|oui)[(#ENV{width}|mult{#HEIGHT}|div{#WIDTH})]],
+    [(#ENV{height})]
+})]})]
+<B_path>
+<script type="text/javascript">
+jQuery.fn.vectorMap('addMap', 'map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},"_",u})]})]', {[
+    "width": (#WIDTH),][
+    "height": (#HEIGHT),]
+    "pathes": {
+        <BOUCLE_path (VECTORS) {id_map}>
+        "[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]": {
+            "path": "[(#PATH)]",
+            "name": "[(#TITRE)]"
+        },</BOUCLE_path>
+    }
+});
+<B_data>
+var [(#DATA_NAME)] =  {<BOUCLE_data (VECTORS) {id_map}{', '} {si #DATA_NAME|strlen|oui}>["(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})"]:["(#DATA|sinon{''})"]</BOUCLE_data>}
+</B_data>
+jQuery(document).ready(function() {
+    jQuery('#map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},"_",u})]})]').vectorMap({
+        map: 'map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},"_",u})]})]',[
+        backgroundColor : (#BACKGROUND_COLOR|jqvmap_format),][
+        borderColor : (#BORDER_COLOR|jqvmap_format),][
+        borderOpacity : (#BORDER_OPACITY),][
+        borderWidth : (#BORDER_WIDTH),][
+        color : (#COLOR|jqvmap_format),][
+        enableZoom : (#ENABLE_ZOOM),][
+        hoverColor : (#HOVER_COLOR|jqvmap_format),][
+        hoverOpacity : (#HOVER_OPACITY),][
+        normalizeFunction : (#NORMALIZE_FUNCTION|jqvmap_format),][
+        scaleColors : \[(#SCALE_COLORS|jqvmap_format)\],][
+        selectedColor : (#SELECTED_COLOR|jqvmap_format),][
+        selectedRegion : (#SELECTED_REGION|jqvmap_format),][
+        showTooltip : (#SHOW_TOOLTIP),]<B_click>
+        onRegionClick: function(element, code, region)
+            {
+                <BOUCLE_click (VECTORS) {id_map} {url_site!=''}>
+                [(#COMPTEUR_BOUCLE|=={1}|?{'if','elseif'})] (code == '[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]')
+                {
+                    window.open('[(#URL_SITE)]','_blank');
+                }</BOUCLE_click>
+            },</B_click>[
+        values: (#DATA_NAME),]
+    });
+});
+</script>
+<div id="map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},'_',u})]})]" class="jqvmap-block" style="[width:(#GET{width}|trim)px;][height:(#GET{height}|trim)px;]"></div>
+</B_path>
+</BOUCLE_principale>

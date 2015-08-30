@@ -1,0 +1,40 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_vector,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_vector' value='#ENV{id_vector}' />
+		<input type='hidden' name='id_map' value='#ENV{id_map}' />
+		<ul>
+
+			[(#SAISIE{maps, id_map, obligatoire=oui,
+				label=<:vector:champ_id_map_label:>})]
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:vector:champ_titre_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:vector:champ_descriptif_label:>,
+				li_class=haut, class=inserer_barre_edition, rows=4})]
+
+			[(#SAISIE{input, code_vector,
+				label=<:vector:champ_code_vector_label:>})]
+
+			[(#SAISIE{input, data,
+				label=<:vector:champ_data_label:>})]
+
+			[(#SAISIE{textarea, path, obligatoire=oui,
+				label=<:vector:champ_path_label:>})]
+
+			[(#SAISIE{input, url_site,
+				label=<:vector:champ_url_site_label:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

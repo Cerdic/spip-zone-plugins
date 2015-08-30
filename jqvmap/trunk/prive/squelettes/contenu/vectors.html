@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/vectors, par=#ENV{par,'titre'}, env, ajax, sinon=<:vector:info_aucun_vector:>}>
+
+[(#AUTORISER{creer,vector})
+	[(#URL_ECRIRE{vector_edit,new=oui}|parametre_url{id_map,#ENV{id_map}}|icone_verticale{<:vector:icone_creer_vector:>,vector,new,right})]
+]

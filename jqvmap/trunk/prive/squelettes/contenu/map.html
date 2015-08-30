@@ -1,0 +1,48 @@
+[(#AUTORISER{voir,map,#ID_MAP}|sinon_interdire_acces)]
+<BOUCLE_map (MAPS) {id_map}{statut==.*}{si #ENV{exec}|=={map}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,map,#ID_MAP})
+		[(#ID_MAP|afficher_qui_edite{map}|non)
+			[(#URL_ECRIRE{map_edit,id_map=#ID_MAP}|icone_verticale{<:map:icone_modifier_map:>,map,edit,right ajax preload})]
+		]
+		[(#ID_MAP|afficher_qui_edite{map}|oui)
+			[(#URL_ECRIRE{map_edit,id_map=#ID_MAP}|icone_verticale{#ID_MAP|afficher_qui_edite{map},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{map-24.png}|balise_img{map,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{map,#ID_MAP}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/map,id=#ID_MAP,id_map=#ID_MAP,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,map,#ID_MAP})
+	[(#ID_MAP|afficher_qui_edite{map}|non)
+		[(#URL_ECRIRE{map_edit,id_map=#ID_MAP}|icone_verticale{<:map:icone_modifier_map:>,map,edit,right ajax preload})]
+	]
+	[(#ID_MAP|afficher_qui_edite{map}|oui)
+		[(#URL_ECRIRE{map_edit,id_map=#ID_MAP}|icone_verticale{#ID_MAP|afficher_qui_edite{map},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+[(#INCLURE{fond=prive/squelettes/inclure/map_js,id=#ID_MAP,id_map=#ID_MAP,width=528})]
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,map,id,#ID_MAP},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+<INCLURE{fond=prive/squelettes/contenu/vectors,id_map=#ID_MAP,par=id_vector,ajax=wysiwyg,wysiwyg=1} />
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_map>
+[(#ENV**{exec}|=={map_edit}|?{#INCLURE{fond=prive/squelettes/contenu/map_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_map>

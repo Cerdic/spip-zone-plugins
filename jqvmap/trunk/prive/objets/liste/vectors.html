@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_vector,1,
+	points,-1
+}})]<B_liste_vectors>
+#ANCRE_PAGINATION
+<div class="liste-objets vectors">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{vector:info_1_vector,vector:info_nb_vectors}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:vector:champ_titre_label:>,ajax})]</th>
+			<th class='id_map' scope='col'>[(#TRI{id_map,<:vector:champ_id_map_label:>,ajax})]</th>
+			<th class='data' scope='col'>[(#TRI{data,<:vector:champ_data_label:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_vector,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_vectors(VECTORS){id_map?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{vector-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_VECTOR|image_reduire{20,26})]<a href="[(#ID_VECTOR|generer_url_entite{vector})]" title="<:info_numero_abbreviation|attribut_html:> #ID_VECTOR">[(#RANG). ]#TITRE</a></td>
+			<td class="id_map secondaire"><a href="[(#URL_ECRIRE{map}|parametre_url{id_map,#ID_MAP})]">[(#INFO_TITRE{map,#ID_MAP})]</a></td>
+			<td class="data secondaire">[(#DATA)]</td>
+			<td class='id'>[(#AUTORISER{modifier,vector,#ID_VECTOR}|?{
+				<a href="[(#URL_ECRIRE{vector_edit,id_vector=#ID_VECTOR})]">#ID_VECTOR</a>,
+				#ID_VECTOR
+			})]</td>
+		</tr>
+	</BOUCLE_liste_vectors>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_vectors>[
+<div class="liste-objets vectors caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_vectors>

@@ -1,0 +1,10 @@
+<h1><:map:titre_maps:></h1>
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/maps, par=titre, env, ajax, sinon=<:map:info_aucun_map:>}>
+
+[(#AUTORISER{creer,map})
+	[(#URL_ECRIRE{map_edit,new=oui}|icone_verticale{<:map:icone_creer_map:>,map,new,right})]
+]

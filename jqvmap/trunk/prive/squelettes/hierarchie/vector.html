@@ -1,0 +1,8 @@
+<!-- hierarchie -->
+<BOUCLE_vector (VECTORS) {id_vector}>
+[<a href="(#URL_ECRIRE{#VAL{map}|objet_info{table_objet}})">[(#VAL{map}|objet_info{texte_objets}|_T)]</a>]<BOUCLE_map (MAPS) {id_map} {tout}>
+    &gt; <a href="#URL_ECRIRE{map}&id_map=#ID_MAP">#TITRE</a>
+    </BOUCLE_map>
+    &gt; <strong class="on">[(#TITRE|couper{80}|sinon{<:ecrire:info_sans_titre:>})]</strong>
+</BOUCLE_vector>
+[(#REM|changer_typo)]

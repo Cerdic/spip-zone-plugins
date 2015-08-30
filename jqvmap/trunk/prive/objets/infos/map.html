@@ -1,0 +1,28 @@
+<BOUCLE_map(MAPS){id_map=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:map:titre_map:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MAP</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{maps,#ID_MAP})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(MAPS){id_map}>
+	[(#VAL{redirect}
+		|generer_url_action{type=maps&id=#ID_MAP}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,maps,#ID_MAP,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=maps&id=#ID_MAP}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_map>

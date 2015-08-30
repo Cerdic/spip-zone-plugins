@@ -1,0 +1,34 @@
+<paquet
+	prefix="jqvmap"
+	categorie="multimedia"
+	version="0.2.0"
+	etat="experimental"
+	compatibilite="[3.0.10;3.0.*]"
+	logo="prive/themes/spip/images/jqvmap-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>jQuery Vector Maps</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<credit lien="http://jqvmap.com/">JQVMap</credit>
+	<credit lien="https://www.iconfinder.com/icons/379367/vector_icon#size=128">Webalys</credit>
+	<credit lien="https://www.iconfinder.com/icons/379552/application_map_icon#size=128">Webalys</credit>
+
+	<lib nom="jqvmap" lien="https://github.com/manifestinteractive/jqvmap/zipball/stable" />
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+
+	<pipeline nom="autoriser" inclure="jqvmap_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/jqvmap.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/jqvmap.php" />
+
+	<pipeline nom="insert_head" inclure="jqvmap_pipelines.php" />
+	<pipeline nom="header_prive" inclure="jqvmap_pipelines.php" />
+
+	<menu nom="maps" titre="map:titre_maps" parent="menu_edition" icone="images/map-16.png" action="maps" />
+	<menu nom="map_creer" titre="map:icone_creer_map" parent="outils_rapides" icone="images/map-new-16.png" action="map_edit" parametres="new=oui" />
+</paquet>
