@@ -38,9 +38,12 @@ $(document).ready(function(){
 	</span>
 
 	<span class='statut'>
-		Statuts : 
-		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]"><:lien_tout_afficher:></a> |
-		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]"><:texte_statut_publie:></a>
+		Statuts :
+		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]"><:plan:lien_tout_afficher:></a> |
+		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]"><:plan:texte_statut_publie:></a> |
+		<a [(#ENV{statut}|=={prop}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prop})]"><:plan:texte_statut_prop:></a> |
+		<a [(#ENV{statut}|=={prepa}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prepa})]"><:plan:texte_statut_prepa:></a>
+		[(#REM) TODO : faire une boucle pour générer la liste des status, éventuellement remplacer les noms par les puces de couleur (pour gagner de la place) ]
 	</span>
 </div>
 
