@@ -1,0 +1,9 @@
+- créer un système d'import de cartes au format xml pour ne plus avoir de cartes à l'activation du plugin. Tout le monde ne désire pas avoir la carte du monde ou l'Europe ou l'Allemagne, etc.
+- pouvoir exporter chaque carte au format xml pour importer dans un autre site internet ;
+- permettre d'avoir de nouvelles cartes sources xml (cf. info_spip : http://zone.spip.org/trac/spip-zone/browser/_plugins_/info_spip/trunk/formulaires/configurer_info_spip.html#L23 ) depuis un répertoire mais aussi à l'upload d'un fichier ;
+- si la carte est déjà présente, on met à jour les données en bdd. Il faudra avoir une alerte à ce sujet et/ou une case à cocher.
+- Pouvoir vérifier la bonne structure du fichier xml (cf. plugonet et/ou core) ;
+- créer les cartes de France régions 2016 (avec les DOM), France départements (DOM compris), et peut-être toutes les cartes présentes dans jVetorMap et jqvmap ;
+- créer les cartes par régions de France avec leurs départements ;
+- voir pour la personnalisation des couleurs (par la priorité pour le moment) ;
+- Hum… Ecrire la documentation ;
