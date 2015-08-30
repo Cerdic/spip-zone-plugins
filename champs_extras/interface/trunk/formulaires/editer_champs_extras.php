@@ -17,7 +17,7 @@ function formulaires_editer_champs_extras_charger_dist($objet, $redirect=''){
 		"modifier_nom"=>true,
 		"nom_unique"=>true,
 	);
-		
+
 	return $valeurs;
 }
 
@@ -32,17 +32,16 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	$retour = array(
 		'redirect' => $redirect
 	);
-	
+
 	$table = table_objet_sql($objet);
-	
+
 	include_spip('inc/iextras');
 	$saisies = iextras_champs_extras_definis( $table );
-	
+
 	$nouvelles_saisies = session_get('constructeur_formulaire_champs_extras_' . $table);
 	$diff = saisies_comparer_par_identifiant($saisies, $nouvelles_saisies);
 
 	$extras = array();
-	
 
 	include_spip('inc/cextras');
 	// supprimer les champs supprimes
@@ -57,7 +56,7 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	}
 	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);	
 
-	
+
 	ecrire_meta("champs_extras_" . $table, serialize($nouvelles_saisies));
 	$retour['message_ok'] = 'Super !';
 	return $retour;

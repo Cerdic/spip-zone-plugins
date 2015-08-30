@@ -23,7 +23,7 @@
 				<li class='item[(#TOTAL_BOUCLE|=={1}|oui)solo]'>
 					<span title="[(#VAL{saisies:saisie_#VALEUR{saisie}_titre}|_T|attribut_html)]">
 						[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}|balise_img{#VALEUR{saisie}}) ]
-						[(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/texte}|couper{30}})]
+						[(#VALEUR*{options/label}|sinon{#VALEUR*{options/label_case}}|sinon{#VALEUR*{options/texte}|_T_ou_typo|couper{30}}|_T_ou_typo)]
 					</span>
 				</li>
 			</BOUCLE_saisies>
