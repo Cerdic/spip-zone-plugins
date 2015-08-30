@@ -196,11 +196,13 @@ function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) 
 	$ok = true;
 	foreach ($saisies_nouvelles as $id => $n) {
 		$n_nom = $n['options']['nom'];
-		$n_sql = $n['options']['sql'];
-		$a_nom = $saisies_anciennes[$id]['options']['nom'];
-		$a_sql = $saisies_anciennes[$id]['options']['sql'];
-		if ($n_nom != $a_nom OR $n_sql != $n_sql) {
-			$ok &= sql_alter("TABLE $table CHANGE COLUMN $a_nom $n_nom $n_sql");
+		if (isset($n['options']['sql'])) {
+			$n_sql = $n['options']['sql'];
+			$a_nom = $saisies_anciennes[$id]['options']['nom'];
+			$a_sql = $saisies_anciennes[$id]['options']['sql'];
+			if ($n_nom != $a_nom OR $n_sql != $n_sql) {
+				$ok &= sql_alter("TABLE $table CHANGE COLUMN $a_nom $n_nom $n_sql");
+			}
 		}
 	}
 	return $ok;
