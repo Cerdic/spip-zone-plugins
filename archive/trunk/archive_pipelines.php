@@ -37,7 +37,7 @@ function archive_taches_generales_cron($taches_generales){
  */
 function archive_post_edition($flux){
 	if($flux['args']['action'] == 'instituer' && $flux['args']['statut_ancien'] != 'archive'  && $flux['args']['statut_nouveau'] == 'archive'){
-		sql_updateq($flux['args']['table'],array('archive_date' => date('Y-m-d H:i:s'),'statut_archive'=>$flux['args']['statut_ancien']),id_table_objet($flux['args']['table'])."=".intval($flux['args']['id_objet']));
+		sql_updateq($flux['args']['table'],array('archive_date' => date('Y-m-d H:i:s'),'archive_statut'=>$flux['args']['statut_ancien']),id_table_objet($flux['args']['table'])."=".intval($flux['args']['id_objet']));
 	}
 	return $flux;
 }
