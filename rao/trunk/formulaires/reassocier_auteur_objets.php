@@ -65,7 +65,8 @@ function formulaires_reassocier_auteur_objets_verifier() {
 
 		// présenter les résultats
 		if (!$liens) {
-			$message = _T("rao:aucune_liaison_trouvee") . "\n";
+			$erreurs['message_erreur'] = _T("rao:aucune_liaison_trouvee");
+			return $erreurs;
 		} else {
 			$message = singulier_ou_pluriel(count($liens), "rao:une_liaison_trouvee", "rao:nb_liaisons_trouvees");
 			foreach ($desc as $objet => $d) {

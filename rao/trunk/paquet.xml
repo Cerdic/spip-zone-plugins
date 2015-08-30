@@ -1,7 +1,7 @@
 <paquet
 	prefix="rao"
 	categorie="auteur"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/rao-64.png"

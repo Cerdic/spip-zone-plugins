@@ -21,10 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_objets' => 'Objets éditoriaux',
 	'label_objets_explication' => "Quels objets éditoriaux seront affectés ?",
 
+	// M
+	'message_confirmation' => "Après confirmation, les objets listés seront réassociés à l'auteur de destination.",
+
 	// N
 	'aucune_liaison_trouvee' => "Aucune liaison trouvée",
-	'une_liaison_trouvee' => "Une liaison trouvée",
-	'nb_liaisons_trouvees' => "@nb@ liaisons trouvées",
+	'une_liaison_trouvee' => "Une liaison trouvée :",
+	'nb_liaisons_trouvees' => "@nb@ liaisons trouvées :",
 
 	// R
 	'rao_explication' => "Cette page vous permet d'affecter les articles (ou autres objets éditoriaux) d'un auteur (source) à un autre (destination). L'auteur source ne sera alors plus auteur des articles ; l'auteur destination le sera à sa place.",
