@@ -34,7 +34,7 @@
 	#SET{init_ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
 ]
 
-<li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+<[(#VAL{li}|saisie_balise_structure_formulaire)] class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 #ENV*{inserer_debut}
 <div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
 <script type="text/javascript">
@@ -390,11 +390,11 @@ var geocoder;]
 /*]]>*/
 </script>
 #ENV*{inserer_fin}
-</li>
+</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 [(#GET{geocoder}|oui)
-<li class="rechercher_adresse editer_[(#ENV{nom})]">
+<[(#VAL{li}|saisie_balise_structure_formulaire)] class="rechercher_adresse editer editer_[(#ENV{nom})]">
 	<label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
 	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
 	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
-</li>]
+</[(#VAL{li}|saisie_balise_structure_formulaire)]>]
 <!--extragis-->
