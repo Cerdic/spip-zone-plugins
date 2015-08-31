@@ -5,10 +5,12 @@
 
 [(#FORMULAIRE_INSTITUER_OBJET{maps,#ID_MAP})]
 
+[(#URL_PAGE{prive/transmettre/map_xml}
+    |parametre_url{id_map,#ID_MAP}
+    |parametre_url{titre,#CODE_MAP}
+    |icone_horizontale{<:map:icone_exporter_map:>,map,export})]
 [(#REM)
-
 	Bouton voir en ligne
-
 ]
 <BOUCLE_publie(MAPS){id_map}>
 	[(#VAL{redirect}

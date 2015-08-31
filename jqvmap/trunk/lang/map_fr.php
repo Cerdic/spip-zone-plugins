@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // I
     'icone_creer_map' => 'Créer une carte',
+    'icone_exporter_map' => 'Exporter cette carte',
     'icone_modifier_map' => 'Modifier cette carte',
     'info_1_map' => 'Une carte',
     'info_aucun_map' => 'Aucune carte',

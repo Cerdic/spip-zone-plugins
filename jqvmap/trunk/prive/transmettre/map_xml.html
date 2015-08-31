@@ -1,0 +1,31 @@
+#HTTP_HEADER{Content-Type: application/xml; charset=#CHARSET}#HTTP_HEADER{Content-Disposition: attachment; filename=#ENV{titre}.xml}<BOUCLE_maps (MAPS) {id_map=#ENV{id_map}} {statut==.*}><map>
+  <titre>#TITRE</titre>
+  <descriptif>#DESCRIPTIF</descriptif>
+  <width>#WIDTH</width>
+  <height>#HEIGHT</height>
+  <code_map>#CODE_MAP</code_map>
+  <background_color>#BACKGROUND_COLOR</background_color>
+  <border_color>#BORDER_COLOR</border_color>
+  <border_opacity>#BORDER_OPACITY</border_opacity>
+  <border_width>#BORDER_WIDTH</border_width>
+  <color>#COLOR</color>
+  <enable_zoom>#ENABLE_ZOOM</enable_zoom>
+  <hover_color>#HOVER_COLOR</hover_color>
+  <hover_opacity>#HOVER_OPACITY</hover_opacity>
+  <normalize_function>#NORMALIZE_FUNCTION</normalize_function>
+  <scale_colors>#SCALE_COLORS</scale_colors>
+  <selected_color>#SELECTED_COLOR</selected_color>
+  <selected_region>#SELECTED_REGION</selected_region>
+  <show_tooltip>#SHOW_TOOLTIP</show_tooltip>
+  <data_name>#DATA_NAME</data_name>
+  <vectors><B_vectors>
+<BOUCLE_vectors (VECTORS) {id_map}>    <vector>
+      <titre>#TITRE</titre>
+      <descriptif>#DESCRIPTIF</descriptif>
+      <code_vector>#CODE_VECTOR</code_vector>
+      <data>#DATA</data>
+      <path>#PATH</path>
+      <url_site>#URL_SITE</url_site>
+    </vector>
+</BOUCLE_vectors></B_vectors>  <vectors>
+</map></BOUCLE_maps>

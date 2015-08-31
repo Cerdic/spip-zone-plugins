@@ -22,3 +22,8 @@ function jqvmap_header_prive($flux)
 
     return $flux;
 }
+
+function jqvmap_affiche_droite($flux)
+{
+    return $flux;
+}
