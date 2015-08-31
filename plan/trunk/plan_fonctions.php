@@ -61,28 +61,30 @@ function plan_lister_objets_rubrique() {
  * @return array
 **/
 function plan_lister_objets_rubrique_statuts() {
-	$objets = plan_lister_objets_rubrique();
-	include_spip('inc/session');
-	include_spip('inc/puce_statut');
-	$liste = array();
-	foreach ($objets as $table => $null) {
-		$desc = lister_tables_objets_sql($table);
-		$statuts = array_keys($desc['statut_textes_instituer']);
-		if ($table == 'spip_articles') {
-			$autorises = statuts_articles_visibles(session_get('statut'));
-			$statuts = array_intersect($statuts, $autorises);
+	static $liste = null;
+	if (is_null($liste)) {
+		$objets = plan_lister_objets_rubrique();
+		include_spip('inc/session');
+		include_spip('inc/puce_statut');
+		$liste = array();
+		foreach ($objets as $table => $null) {
+			$desc = lister_tables_objets_sql($table);
+			$statuts = array_keys($desc['statut_textes_instituer']);
+			if ($table == 'spip_articles') {
+				$autorises = statuts_articles_visibles(session_get('statut'));
+				$statuts = array_intersect($statuts, $autorises);
+			}
+			$objet = $desc['table_objet'];
+			// obtenir titre et image du statut
+			$_statuts = array();
+			foreach ($statuts as $statut) {
+				$_statuts[$statut] = array(
+					'image' => statut_image($objet, $statut),
+					'titre' => statut_titre($objet, $statut),
+				);
+			}
+			$liste[ $objet ] = $_statuts;
 		}
-		$objet = $desc['table_objet'];
-		// obtenir titre et image du statut
-		$_statuts = array();
-		foreach ($statuts as $statut) {
-			$_statuts[$statut] = array(
-				'image' => statut_image($objet, $statut),
-				'titre' => statut_titre($objet, $statut),
-			);
-		}
-		$liste[ $objet ] = $_statuts;
 	}
-
 	return $liste;
 }
