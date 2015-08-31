@@ -332,7 +332,7 @@ function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0, $medias='', 
 
 
 
-function background_responsive($src, $taille=120, $lazy=0) {
+function background_responsive($src, $taille=120, $lazy=0, $align="") {
 
 	if (preg_match("/^<img /i", $src)) {
 		$src = extraire_attribut($src, "src");
@@ -359,15 +359,15 @@ function background_responsive($src, $taille=120, $lazy=0) {
 		$h = hauteur($src);
 	
 		
-		//$img = inserer_attribut($img, "src", $src);
+		$img = $src;
 		
 		if ($l > $h) {
 			$ins = " data-italien-src='$src'";
 			$ins .= " data-italien-l='$l'";
 			$ins .= " data-italien-h='$h'";
 			
+			$srcp = image_proportions($srcp, 3, 4, $align);
 			$srcp = image_reduire($src, 0, 2400);
-			$srcp = image_proportions($srcp, 3, 4);
 			$srcp = extraire_attribut($srcp, "src");
 			$lp = largeur($srcp);
 			$hp = hauteur($srcp);
@@ -387,8 +387,8 @@ function background_responsive($src, $taille=120, $lazy=0) {
 			$ins .= " data-portrait-h='$h'";
 
 
+			$srcp = image_proportions($srcp, 4, 3, $align);
 			$srcp = image_reduire($src, 2400, 0);
-			$srcp = image_proportions($srcp, 4, 3);
 			$srcp = extraire_attribut($srcp, "src");
 			$lp = largeur($srcp);
 			$hp = hauteur($srcp);
@@ -474,10 +474,18 @@ function background_responsive($src, $taille=120, $lazy=0) {
 						."background-image:url(".$f["p"][2].");";
 				}
 			}
+			
+			if ($align) {
+				if ($align == "focus") {
+					$style_align = "background-position: ".(centre_image_x($img)*100)."% ".(centre_image_y($img)*100)."%;";
+				} else {
+					$style_align = "background-position: $align;";
+				}
+			}
 
 		}
 		
-		$ins .= " style='".$links."background-image:url($src)'";
+		$ins .= " style='".$style_align.$links."background-image:url($src)'";
 		
 		return $ins;
 	}
