@@ -1,9 +1,0 @@
-		<BOUCLE_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{recherche ?}{0, #ENV{limit}}{","}>
-		{"type": "Feature",
-		["geometry": (#GEOMETRY|wkt_to_json),]
-		"id":"#ID_GIS",
-		"properties": {
-			"title":[(#VAL{<a href='[(#ID_GIS|generer_url_entite{gis,'','',0})]'>[(#TITRE*|extraire_multi|supprimer_numero|sinon{----})]</a>}|json_encode)],
-			"description":[(#DESCRIPTIF|json_encode)][(#SET{logo_doc,''})][
-			(#LOGO_GIS|gis_icon_properties)]
-		}}</BOUCLE_gis>

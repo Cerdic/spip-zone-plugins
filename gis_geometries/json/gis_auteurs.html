@@ -1,9 +1,0 @@
-		<BOUCLE_auteurs(AUTEURS){gis}{id_article ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}>
-		{"type": "Feature",
-		["geometry": (#GEOMETRY|wkt_to_json),]
-		"id":"#ID_GIS",
-		"properties": {
-			"title":[(#URL_AUTEUR|lien_ou_expose{[(#TITRE_GIS*|sinon{#NOM*}|extraire_multi|supprimer_numero)]}|json_encode)],
-			"description":[(#DESCRIPTIF_GIS|sinon{#BIO}|json_encode)][
-			(#LOGO_GIS|gis_icon_properties)]
-		}}</BOUCLE_auteurs>
