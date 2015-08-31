@@ -37,18 +37,31 @@ $(document).ready(function(){
 		<a href="#" onClick="My_jQuery('#racine').jstree('close_all'); return false;"><:lien_tout_replier:></a>
 	</span>
 
-	<span class='statut'>
-		Statuts :
-		<a [(#ENV{statut}|non)class='on' ]href="[(#SELF|parametre_url{statut,''})]"><:plan:lien_tout_afficher:></a> |
-		<a [(#ENV{statut}|=={publie}|oui)class='on' ]href="[(#SELF|parametre_url{statut,publie})]"><:plan:texte_statut_publie:></a> |
-		<a [(#ENV{statut}|=={prop}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prop})]"><:plan:texte_statut_prop:></a> |
-		<a [(#ENV{statut}|=={prepa}|oui)class='on' ]href="[(#SELF|parametre_url{statut,prepa})]"><:plan:texte_statut_prepa:></a>
-		[(#REM) TODO : faire une boucle pour générer la liste des status, éventuellement remplacer les noms par les puces de couleur (pour gagner de la place) ]
+[(#SET{statut,[(#ENV{statuts}|?{[(#ENV{statuts}|explode{-}|end)],#NULL})]})]
+[(#SET{objet,[(#ENV{statuts}|?{[(#ENV{statuts}|explode{-}|reset)],#NULL})]})]
+
+	<span class='statut #GET{objet}'>
+		<B_objets_statuts>
+			<form method="GET" action="#SELF" onChange="this.submit(); return true;">
+			[(#SELF|parametre_url{statuts,''}|form_hidden)]
+			<select name="statuts" id="selection_statut">
+				<option value=""[(#ENV{statuts}|non) selected="selected"]><:plan:tous_les_statuts:></option>
+		<BOUCLE_objets_statuts(DATA){source table, #REM|plan_lister_objets_rubrique_statuts}>
+				<optgroup label="[(#CLE|objet_info{texte_objets}|_T)]" class="#CLE">
+					<BOUCLE_statuts(DATA){source table, #VALEUR}>
+						[(#SET{class,[(#_objets_statuts:CLE)]-#CLE})]
+						<option class="#GET{class}" value="#GET{class}"[(#ENV{statuts}|=={#GET{class}}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_statuts>
+				</optgroup>
+		</BOUCLE_objets_statuts>
+			</select>
+			</form>
+		</B_objets_statuts>
 	</span>
 </div>
 
 #BOITE_OUVRIR{'', simple}
 <div id="racine">
-<INCLURE{fond=prive/squelettes/inclure/plan2-rubriques, id_parent=0, statut}>
+<INCLURE{fond=prive/squelettes/inclure/plan2-rubriques, id_parent=0, statut=#GET{statut}, objet=#GET{objet}}>
 </div>
 #BOITE_FERMER

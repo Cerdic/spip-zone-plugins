@@ -9,8 +9,10 @@
 						<strong>[(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong>
 				</a>
 
-				<BOUCLE_objets(DATA){source table,#REM|plan_lister_objets_rubrique}>
-					<INCLURE{fond=prive/squelettes/inclure/plan2-#VALEUR,id_rubrique=#_rubriques:ID_RUBRIQUE, env}>
+				<BOUCLE_objets(DATA){source table,#REM|plan_lister_objets_rubrique}{par cle}>
+					[(#ENV{objet}|non|ou{#ENV{objet}|=={#VALEUR}})
+						<INCLURE{fond=prive/squelettes/inclure/plan2-#VALEUR,id_rubrique=#_rubriques:ID_RUBRIQUE, env}>
+					]
 				</BOUCLE_objets>
 				<INCLURE{fond=prive/squelettes/inclure/plan2-rubriques,id_parent=#ID_RUBRIQUE, id_rubrique='',env}>
 			</li>
