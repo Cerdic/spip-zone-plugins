@@ -31,5 +31,5 @@
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<utilise id="cfg" version="[1.15.2]" />	
-	<lib nom="pgn4web" lien="http://test.jack31.org/IMG/zip/pgn4web.zip" />
+	<necessite id="lib:pgn4web" src="http://test.jack31.org/IMG/zip/pgn4web.zip" />
 </plugin>
