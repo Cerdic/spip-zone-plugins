@@ -22,10 +22,10 @@
 	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
 	<form method='post' action='#ENV{action}' name='formulaire_rechercher_gis' id='formulaire_rechercher_gis'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{input,recherche_gis,
 				label=<:gis:label_rechercher_point:>})]
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'>

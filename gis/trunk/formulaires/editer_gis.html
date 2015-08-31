@@ -8,12 +8,12 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{hidden,objet})]
 			[(#SAISIE{hidden,id_objet})]
 			[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
-			<li class="fieldset">
-			<fieldset><ul>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset">
+			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				[(#SAISIE{input,lat,
 					label=<:gis:lat:>,
 					defaut=#ENV{lat,#CONFIG{gis/lat,0}},
@@ -35,10 +35,10 @@
 				[(#SAISIE{textarea,descriptif,
 					label=<:info_descriptif:>,
 					rows=5})]
-			</ul></fieldset>
-			</li>
-			<li class="fieldset adresse"[(#CONFIG{gis/adresse}|=={on}|non) style="display: none;"]>
-			<fieldset><ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset adresse"[(#CONFIG{gis/adresse}|=={on}|non) style="display: none;"]>
+			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				[(#SAISIE{input,adresse,
 					label=<:gis:label_adress:>})]
 				[(#SAISIE{input,code_postal,
@@ -53,9 +53,9 @@
 					label=<:gis:label_pays:>})]
 				[(#SAISIE{input,code_pays,
 					label=<:gis:label_code_pays:>})]
-			</ul></fieldset>
-			</li>
-		</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>

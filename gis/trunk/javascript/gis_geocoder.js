@@ -68,7 +68,7 @@ L.Geocoder = L.Class.extend({
 		var return_location = {};
 		if(this.options.search)
 			return_location.search = this.options.search;
-		if (response instanceof Array && !response.length) {
+		if (((response instanceof Array) && (!response.length)) || ((response instanceof Object) && (response.error))) {
 			return_location.error = 'not found';
 		} else {
 			return_location.street = return_location.postcode = return_location.postcode = 

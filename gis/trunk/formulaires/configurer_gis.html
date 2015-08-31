@@ -7,12 +7,12 @@
 
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		<li class="rechercher_adresse editer_map_config">
+	<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+		<[(#VAL{li}|saisie_balise_structure_formulaire)] class="rechercher_adresse editer editer_map_config">
 			<label for="champ_map_config_geocoder"><:gis:label_rechercher_address:></label>
 			<input type="text" class="text" name="champ_map_config_geocoder" id="champ_map_config_geocoder" value="" />
 			<a id="map_config_rechercher_geocodage"><:info_rechercher:></a>
-		</li>
+		</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 		[(#SAISIE{input,lat,
 			label=<:gis:lat:>,
 			defaut=0,
@@ -82,7 +82,7 @@
 			label=<:gis:cfg_lbl_activer_objets:>,
 			exclus=spip_gis})]
 
-	</ul>
+	</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 
 	<p class="boutons">
