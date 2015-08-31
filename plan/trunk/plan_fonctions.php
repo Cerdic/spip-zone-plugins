@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return int nombre
 **/
 function plan_limiter_listes() {
-	return defined('_PLAN_LIMITER_LISTES') ? _PLAN_LIMITER_LISTES : 10;
+	return defined('_PLAN_LIMITER_LISTES') ? _PLAN_LIMITER_LISTES : 50;
 }
 
 /**
