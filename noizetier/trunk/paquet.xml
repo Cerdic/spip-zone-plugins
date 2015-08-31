@@ -1,7 +1,7 @@
 <paquet
 	prefix="noizetier"
 	categorie="maintenance"
-	version="2.4.0"
+	version="2.4.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/noizetier-32.png"

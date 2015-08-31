@@ -38,7 +38,7 @@ function heritiers($type){
 function formulaires_editer_page_charger_dist($page, $new, $retour=''){
 	$valeurs = array();
 	$valeurs['editable'] = autoriser('configurer','noizetier') ? 'on' : '';
-	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
+	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 
 	// On définit l'action à effectuer en fonction des paramètres
 	// $new :         création d'une nouvelle page
@@ -165,7 +165,7 @@ function formulaires_editer_page_traiter_dist($page, $new, $retour=''){
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
 
 	$res = array();
-	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
+	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) && unserialize($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	$type_page = _request('type_page');
 	$composition = _request('composition');
 	$acte = ($page AND $new) ? 'dupliquer' : ($page ? 'modifier' : ($new ? 'creer' : ''));
