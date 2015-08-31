@@ -3,7 +3,7 @@
 		["geometry": (#GEOMETRY|wkt_to_json),]
 		"id":"#ID_GIS",
 		"properties": {
-			"title":[(#TITRE_GIS*|sinon{#NOM*}|supprimer_numero|json_encode)],
+			"title":[(#URL_AUTEUR|lien_ou_expose{[(#TITRE_GIS*|sinon{#NOM*}|extraire_multi|supprimer_numero)]}|json_encode)],
 			"description":[(#DESCRIPTIF_GIS|sinon{#BIO}|json_encode)][
 			(#LOGO_GIS|gis_icon_properties)]
 		}}</BOUCLE_auteurs>
