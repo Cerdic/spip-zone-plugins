@@ -1,6 +1,6 @@
 		<BOUCLE_doc(DOCUMENTS){gis}{id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{media ?}{0, #ENV{limit}}{","}>
 		{"type": "Feature",
-		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
 		"id":"#ID_GIS",
 		"properties": {
 			"title":[(#URL_DOCUMENT|lien_ou_expose{[(#TITRE_GIS*|sinon{#TITRE*}|extraire_multi|supprimer_numero)]}|json_encode)],
