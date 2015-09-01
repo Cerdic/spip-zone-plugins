@@ -183,8 +183,8 @@ function pages_editer_contenu_objet($flux){
 	if ($args['type'] == 'article' && isset($args['contexte']['modele']) && $args['contexte']['modele'] == 'page'){
 		$erreurs = $args['contexte']['erreurs'];
 		// On cherche et remplace l'édition de la rubrique
-		$cherche = "/<(li|div)[^>]*class=('|\")editer editer_parent.*?<\/\\1>/is";
-		$remplace = '<\\1 class="editer editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
+		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_parent.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
+		$remplace = '<\\2 class="editer editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="modele" value="page" />';
@@ -193,16 +193,16 @@ function pages_editer_contenu_objet($flux){
 			$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
 		$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
 		$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
-		$remplace .= '</\\1>';
-		if (preg_match($cherche,$flux['data'])) {
+		$remplace .= '</\\2>$3';
+		if (preg_match($cherche,$flux['data'],$m)) {
 			$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
 			$flux['data'] = preg_replace($cherche, '', $flux['data']);
 		} else {
-			$cherche = "/(<(li|div)[^>]*class=('|\")editer editer_soustitre.*?<\/\\1>)/is";
+			$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_soustitre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
 			if (preg_match($cherche,$flux['data'])) {
 				$flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
 			} else {
-				$cherche = "/(<(li|div)[^>]*class=('|\")editer editer_titre.*?<\/\\1>)/is";
+				$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_titre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
 				$flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
 			}
 		}
