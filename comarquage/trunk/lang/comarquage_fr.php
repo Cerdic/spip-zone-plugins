@@ -14,8 +14,8 @@ Nous vous remercions de votre compr&eacute;hension",
 
 'cfg_local_refresh'=> 'Periodicit&eacute; de mise &agrave; jour en tache de fonds (secondes) [259200] :',
 'cfg_local_timeout'=> 'Periodicit&eacute; maxi de p&eacute;remption (secondes) [604800] :',
-'cfg_default_xml_file' => 'Fiche XML par d&eacute;faut [Themes.xml] :',
-'cfg_default_xsl_file' => 'Fiche XSL par d&eacute;faut [spThemes.xsl] :',
+'cfg_default_xml_file' => 'Fiche XML par d&eacute;faut [arborescence.xml] :',
+'cfg_default_xsl_file' => 'Fiche XSL par d&eacute;faut [spMainArborescence.xsl] :',
 'cfg_code_insee' => 'Code INSEE de la commune (5 chiffres sans espace ou #INSEE# si non applicable)'
 
 );

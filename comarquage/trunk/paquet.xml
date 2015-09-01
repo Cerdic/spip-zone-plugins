@@ -1,15 +1,16 @@
 <paquet
     prefix="comarquage"
     categorie="divers"
-    version="0.40.3"
+    version="0.50.0"
     etat="test"
     compatibilite="[3.0.0;3.0.*]"
     logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
     documentation="http://contrib.spip.net/?article3659"
 >
-    <nom>Comarquage</nom>
+    <nom>Comarquage Flux v2.3</nom>
     <auteur>IPEOS I-Solutions</auteur>
-    <auteur>Laurent Vergerolle - IPEOS I-Solutions</auteur>
+    <auteur>Mickaël Hippocrate</auteur>
+    <auteur>Laurent Vergerolle</auteur>
     <credit lien="http://www.ipeos.com">IPEOS I-Solutions</credit>
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

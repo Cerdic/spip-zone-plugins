@@ -1,202 +1,330 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" 
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	exclude-result-prefixes="xsl dc">
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    exclude-result-prefixes="xsl dc">
 
-	<xsl:output method="html" encoding="UTF-8" cdata-section-elements="script" indent="yes"/> 
-  	
-  	<xsl:variable name="sepFilDAriane">
-		<xsl:text> > </xsl:text>  	
-  	</xsl:variable>
-  	
+    <xsl:output method="html" encoding="ISO-8859-15" cdata-section-elements="script" indent="yes"/>
 
-	
-   	<xsl:template match="FilDAriane">
-   		<div class="spFilDAriane">
-   			<xsl:choose>
-   				<xsl:when test="$CATEGORIE = 'particuliers'">
-					<xsl:variable name="title">
-						<xsl:text>Vos droits et vos d√©marches en tant que particulier : Liste des th√®mes</xsl:text>
-					</xsl:variable>
-		  			<!--  <div class="entiteImageFloatRight">
-						<xsl:call-template name="imageOfATheme">
-							<xsl:with-param name="id">
-								<xsl:choose>
-									<xsl:when test="//Publication/dc:type = 'Comment faire si'">
-										<xsl:value-of select="//Publication/@ID"/>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="//Publication/FilDAriane/Niveau/@ID"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:with-param>
-						</xsl:call-template>
-		  			</div>
-					-->
-		  			<a>
-						<xsl:attribute name="href"><xsl:value-of select="$REFERER"/></xsl:attribute>
-						<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-						<xsl:text>Liste des th√®mes </xsl:text>
-					</a>
-		   			
-					
-		 	   		<xsl:for-each select="Niveau">
-						<xsl:variable name="titleNiveau">
-							<xsl:text>Vos droits et vos d√©marches en tant que particulier : </xsl:text>
-							<xsl:value-of select="text()"/>
-						</xsl:variable>
-			   			<xsl:value-of select="$sepFilDAriane"/>
-			  			<a>
-							<xsl:attribute name="href"><xsl:value-of select="$REFERER"/>xml=<xsl:value-of select="@ID"/><xsl:text>.xml</xsl:text>&#x26;xsl=spNoeud.xsl</xsl:attribute>
-							<xsl:attribute name="title"><xsl:value-of select="$titleNiveau"/></xsl:attribute>
-							<xsl:value-of select="text()"/>
-						</a>
-		    			<!--  <xsl:call-template name="getPublicationLink">
-		    				<xsl:with-param name="href"><xsl:value-of select="@ID"/></xsl:with-param>
-		    				<xsl:with-param name="title"><xsl:value-of select="$titleNiveau"/></xsl:with-param>
-		    				<xsl:with-param name="text"><xsl:value-of select="text()"/></xsl:with-param>
-						</xsl:call-template>
-						-->
-			   		</xsl:for-each>
-		   			<xsl:value-of select="$sepFilDAriane"/>
-		   			<xsl:value-of select="//Publication/dc:title"/>
-		   		</xsl:when>
-  				<xsl:when test="$CATEGORIE = 'associations'">
-					<xsl:variable name="title">
-						<xsl:text>Vos droits et vos d√©marches en tant qu'association</xsl:text>
-					</xsl:variable>
-		  			<div class="entiteImageFloatRight">
-						<xsl:call-template name="imageOfATheme">
-							<xsl:with-param name="id">
-								<xsl:text>Associations</xsl:text>
-							</xsl:with-param>
-						</xsl:call-template>
-		  			</div>
-		   			<xsl:call-template name="getPublicationLink">
-		   				<xsl:with-param name="href"><xsl:text>Theme</xsl:text></xsl:with-param>
-		   				<xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
-		   				<xsl:with-param name="text"><xsl:text>Liste des th√®mes</xsl:text></xsl:with-param>
-					</xsl:call-template>
-		   			<xsl:value-of select="$sepFilDAriane"/>
-		   			<xsl:value-of select="//Publication/dc:title"/>
-		   		</xsl:when>
- 				<xsl:when test="$CATEGORIE = 'associations'">
- 					<xsl:call-template name="getFilDArianeOfPublicationEntreprise"/>
- 				</xsl:when>
- 		   	</xsl:choose>
-	   	</div>
- 	</xsl:template>
- 	
+    <xsl:variable name="sepFilDAriane">
+        <xsl:text> &#187; </xsl:text>
+    </xsl:variable>
 
+    <!-- Fild'ariane -->
+    <xsl:template match="FilDAriane">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
 
-	
-	<xsl:template name="getFilDArianeOfPublicationEntreprise">
-  		<div class="spFilDAriane">
-			<xsl:variable name="title">
-				<xsl:text>Vos droits et vos d√©marches en tant qu'entreprise : Liste des th√®mes</xsl:text>
-			</xsl:variable>
-  			<div class="entiteImageFloatRight">
-				<xsl:call-template name="imageOfATheme">
-					<xsl:with-param name="id">
-						<xsl:text>Entreprises</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-  			</div>
-  			
-  			<a>
-				<xsl:attribute name="href"><xsl:value-of select="$REFERER"/></xsl:attribute>
-				<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-				<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-				<xsl:text>Accueil</xsl:text>
-			</a>
+            <div class="spFilDAriane">
 
- 	   		<xsl:for-each select="//Publication/FilDAriane/Niveau">
-				<xsl:variable name="titleNiveau">
-					<xsl:text>Vos droits et vos d√©marches en tant qu'entreprise : </xsl:text>
-					<xsl:value-of select="text()"/>
-				</xsl:variable>
-	   			<xsl:value-of select="$sepFilDAriane"/>
-    			<xsl:call-template name="getPublicationLink">
-    				<xsl:with-param name="href"><xsl:value-of select="@ID"/></xsl:with-param>
-    				<xsl:with-param name="title"><xsl:value-of select="$titleNiveau"/></xsl:with-param>
-    				<xsl:with-param name="text"><xsl:value-of select="text()"/></xsl:with-param>
-				</xsl:call-template>
-	   		</xsl:for-each>
-   			<xsl:value-of select="$sepFilDAriane"/>
-   			<xsl:value-of select="//Publication/dc:title"/>
-   		</div>
-	</xsl:template>
-	
-	<xsl:template name="getFilDArianeOfRessource">
-		<xsl:param name="typeRessource" select="$typeRessource"/>
-		<div class="spFilDAriane">
-			<xsl:variable name="title">
-			<xsl:text>Vos droits et vos d√©marches en tant que particulier : Liste des th√®mes</xsl:text>
-			</xsl:variable>
-	   		<a>
-				<xsl:attribute name="href"><xsl:value-of select="$REFERER"/></xsl:attribute>
-				<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-				<xsl:text> Accueil</xsl:text>
-			</a>
+<!--
+                <div class="entiteImageFloatRight">
+                    <xsl:call-template name="imageOfATheme">
+                        <xsl:with-param name="id">
+                            <xsl:choose>
+                                <xsl:when test="//Publication/FilDAriane/Niveau/@ID">
+                                    <xsl:value-of select="//Publication/FilDAriane/Niveau/@ID"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="//Publication/@ID"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </div>
+-->
 
-			<xsl:value-of select="$sepFilDAriane"/>
-		
-			<xsl:choose>
-				<xsl:when test="$typeRessource = 'Teleservice'">
-				 	<xsl:text>T√©l√©service</xsl:text>
-				</xsl:when>
-				<xsl:when test="$typeRessource = 'Centre-de-Contact'">
-				 	<xsl:text>Centre de contact</xsl:text>
-				</xsl:when>
-				<xsl:when test="$typeRessource = 'Formulaire'">
-				 	<xsl:text>Formulaires en ligne</xsl:text>
-				</xsl:when>
-				<xsl:otherwise> 
-					<xsl:variable name="title">
-						<xsl:text>Vos droits et vos d√©marches en tant que particulier : Liste des th√®mes</xsl:text>
-					</xsl:variable>
-			   		<a>
-						<xsl:attribute name="href"><xsl:value-of select="$REFERER"/></xsl:attribute>
-						<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-						<xsl:text> Accueil</xsl:text>
-					</a>
-	
-					<xsl:value-of select="$sepFilDAriane"/>
-					<xsl:text> Glossaire : Toutes les d√©finitions de A √† Z </xsl:text> 
-				</xsl:otherwise>
-			</xsl:choose>
-			
-			<xsl:value-of select="$sepFilDAriane"/>
-			<xsl:value-of select="//ServiceComplementaire/dc:title"/>
-		</div>
-	</xsl:template>
-	
-	<xsl:template name="getFilDArianeOfDossiersaz">
-   		<div class="spFilDAriane">
-			<xsl:variable name="title">
-				<xsl:text>Vos droits et vos d√©marches en tant que particulier : Liste des th√®mes</xsl:text>
-			</xsl:variable>
-	   		<a>
-				<xsl:attribute name="href"><xsl:value-of select="$REFERER"/></xsl:attribute>
-				<xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
-				<xsl:text>Accueil</xsl:text>
-			</a>
-			<xsl:value-of select="$sepFilDAriane"/>
-			<xsl:value-of select="//Publication/dc:title"/>
-		</div>
-	</xsl:template>
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:for-each select="Niveau">
+                    <xsl:variable name="title">
+                        <xsl:text>Guide des droits et des dÈmarches des </xsl:text>
+                        <xsl:value-of select="$CATEGORIE_NOM"/>
+                        <xsl:text> : </xsl:text>
+                        <xsl:value-of select="text()"/>
+                    </xsl:variable>
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getPublicationLink">
+                        <xsl:with-param name="href"><xsl:value-of select="@ID"/></xsl:with-param>
+                        <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+                        <xsl:with-param name="text"><xsl:value-of select="text()"/></xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="//Publication/dc:title"/>
+            </div>
 
-	<xsl:template name="getFilDArianeOfPivotLocal">
-   		<div class="spFilDAriane">
-	   		<xsl:call-template name="getPublicationLink">
-				<xsl:with-param name="href"><xsl:text>Administrations</xsl:text></xsl:with-param>
-				<xsl:with-param name="title"><xsl:text>Guide des administrations, des lieux publics, des artisans et des partenaires de A √† Z</xsl:text></xsl:with-param>
-				<xsl:with-param name="text"><xsl:text>Annuaire</xsl:text></xsl:with-param>
-			</xsl:call-template>
-			<xsl:value-of select="$sepFilDAriane"/>
-			<xsl:value-of select="//PivotLocal/Titre"/>
-		</div>
-	</xsl:template>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- Theme du fil d'ariane -->
+    <xsl:template name="getFilDArianeTheme">
+        <xsl:variable name="title">
+            <xsl:text>Guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <span class="spFilDArianeIci">
+            <xsl:text>Fil d'Ariane du guide :</xsl:text>
+        </span>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>Theme</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Guide des </xsl:text><xsl:value-of select="$CATEGORIE_NOM"/></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Ressources du fil d'ariane -->
+    <xsl:template name="getFilDArianeRessources">
+        <xsl:variable name="title">
+            <xsl:text>Toutes les services du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>Ressources</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Services</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Ressources en ligne du fil d'ariane -->
+    <xsl:template name="getFilDArianeRessourcesEnLigne">
+        <xsl:variable name="title">
+            <xsl:text>Tous les services en ligne du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>RessourcesEnLigne</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Services en ligne</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Dossiers du fil d'ariane -->
+    <xsl:template name="getFilDArianeDossiers">
+        <xsl:variable name="title">
+            <xsl:text>Tous les dossiers de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>Dossiers</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Dossiers</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Glossaire du fil d'ariane -->
+    <xsl:template name="getFilDArianeGlossaire">
+        <xsl:variable name="title">
+            <xsl:text>Le glossaire du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>Glossaire</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Glossaire</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Centre de contacts du fil d'ariane -->
+    <xsl:template name="getFilDArianeCentresDeContact">
+        <xsl:variable name="title">
+            <xsl:text>Les centres de contact du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>CentresDeContact</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Centres de contact</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Pivots du fil d'ariane -->
+    <xsl:template name="getFilDArianePivots">
+        <xsl:variable name="title">
+            <xsl:text>Annuaire du guide des droits et des dÈmarches des </xsl:text>
+            <xsl:value-of select="$CATEGORIE_NOM"/>
+        </xsl:variable>
+        <xsl:call-template name="getPublicationLink">
+            <xsl:with-param name="href"><xsl:text>Annuaire</xsl:text></xsl:with-param>
+            <xsl:with-param name="title"><xsl:value-of select="$title"/></xsl:with-param>
+            <xsl:with-param name="text"><xsl:text>Annuaire</xsl:text></xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane sans champs existant dans la publication -->
+    <xsl:template name="createFilDAriane">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <div class="spFilDAriane">
+<!--
+                <div class="entiteImageFloatRight">
+                    <xsl:call-template name="imageOfATheme">
+                        <xsl:with-param name="id">
+                            <xsl:value-of select="//Publication/@ID"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </div>
+-->
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="//Publication/dc:title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour une ressource -->
+    <xsl:template name="createFilDArianeRessource">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:if test="$AFF_RESSOURCES = 'true'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessources"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'DÈfinition de glossaire'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeGlossaire"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'Centre de contact'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeCentresDeContact"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'Formulaire'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessourcesEnLigne"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'TÈlÈservice'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessourcesEnLigne"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'Module de calcul'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessourcesEnLigne"/>
+                </xsl:if>
+                <xsl:if test="//ServiceComplementaire/dc:type = 'Lettre type'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessourcesEnLigne"/>
+                </xsl:if>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="//ServiceComplementaire/dc:title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour les dossiers -->
+    <xsl:template name="createFilDArianeDossiers">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Tous les dossiers de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour les ressources -->
+    <xsl:template name="createFilDArianeRessources">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Tous les services de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour les ressources en ligne -->
+    <xsl:template name="createFilDArianeRessourcesEnLigne">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Tous les services en ligne de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:if test="$AFF_RESSOURCES = 'true'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessources"/>
+                </xsl:if>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour le glossaire -->
+    <xsl:template name="createFilDArianeGlossaire">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Toutes les dÈfinitions du glossaire de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:if test="$AFF_RESSOURCES = 'true'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessources"/>
+                </xsl:if>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour les centres de contact -->
+    <xsl:template name="createFilDArianeCentresDeContact">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Tous les centres de contact de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:if test="$AFF_RESSOURCES = 'true'">
+                    <xsl:value-of select="$sepFilDAriane"/>
+                    <xsl:call-template name="getFilDArianeRessources"/>
+                </xsl:if>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour les pivots -->
+    <xsl:template name="createFilDArianePivots">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:text>Annuaire de A ‡ Z du guide des droits et des dÈmarches des </xsl:text>
+                <xsl:value-of select="$CATEGORIE_NOM"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- CrÈation d'un fil d'ariane pour un pivot -->
+    <xsl:template name="createFilDArianePivot">
+        <xsl:if test="$AFF_FIL_ARIANE = 'true'">
+            <xsl:variable name="title">
+                <xsl:value-of select="PTA-PL-Titre"/>
+            </xsl:variable>
+            <div class="spFilDAriane">
+                <xsl:call-template name="getFilDArianeTheme"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:call-template name="getFilDArianePivots"/>
+                <xsl:value-of select="$sepFilDAriane"/>
+                <xsl:value-of select="$title"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
 
 </xsl:stylesheet>

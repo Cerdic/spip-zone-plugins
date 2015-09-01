@@ -43,12 +43,12 @@ if (!isset($local_timeout)){
 
 $default_xml_file = lire_config('comarquage/default_xml_file');
 if (!isset($default_xml_file)){
-    ecrire_config('comarquage/default_xml_file','Themes.xml');
+    ecrire_config('comarquage/default_xml_file','arborescence.xml');
 }
 
 $default_xsl_file = lire_config('comarquage/default_xsl_file');
 if (!isset($default_xsl_file)){
-    ecrire_config('comarquage/default_xsl_file','spThemes.xsl');
+    ecrire_config('comarquage/default_xsl_file','spMainArborescence.xsl');
 }
 
 
@@ -74,7 +74,6 @@ function & comarquage_compile_page_xml($parametres,$url_base){
         return -20;
 
     }
-
 
     /*----------------------------------------
      *  definir les parametres xsl
@@ -108,28 +107,39 @@ function & comarquage_compile_page_xml($parametres,$url_base){
     $parametres_xsl['PICTOS'] = $parametres_xsl['SITEURL'].'/'._DIR_PLUGIN_COMARQUAGE_IMAGES; // url des picto (web, téléphone, ...)
     $parametres_xsl['IMAGES'] = $parametres_xsl['SITEURL'].'/'._DIR_PLUGIN_COMARQUAGE_IMAGES.'/'; // URL des images
     $parametres_xsl['PIVOTS'] = 'mairie'; // pivots locaux
-    $parametres_xsl['XMLURL'] = 'http://lecomarquage.service-public.fr/xml2v2/'; // url des données XML du comarquage
+    $parametres_xsl['XMLURL'] = 'http://lecomarquage.service-public.fr/vdd/2.3/part/xml/'; // url des données XML du comarquage
     $parametres_xsl['CATEGORIE'] = $parametres['categorie']; // particuliers, associations ou entreprises
+    $parametres_xsl['DONNEES'] = $parametres_xsl['SITEURL'].'/'._DIR_PLUGIN_COMARQUAGE.'xml';
+    //~ $parametres_xsl['CATEGORIE_NOM'] = $parametres_xsl['CATEGORIE'];
+    $parametres_xsl['HYPERLIEN_PART'] = $parametres_xsl['SITEURL'].'/'.$parametres_xsl['REFERER'];
+    $parametres_xsl['HYPERLIEN_ASSO'] = $parametres_xsl['SITEURL'].'/'.$parametres_xsl['REFERER'];
+    $parametres_xsl['HYPERLIEN_PRO'] = $parametres_xsl['SITEURL'].'/'.$parametres_xsl['REFERER'];
+    $parametres_xsl['HYPERLIEN_COURANT'] = $parametres_xsl['SITEURL'].'/'.$parametres_xsl['REFERER'];
 
     switch ($parametres_xsl['CATEGORIE']) {
         case "particuliers":
-            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/xml2v2/";
+            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/vdd/2.3/part/xml/";
+            $parametres_xsl['CATEGORIE'] ="part";
         break;
 
         case "associations":
-            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/xmlassov2/";
+            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/vdd/2.3/asso/xml/";
+            $parametres_xsl['CATEGORIE'] ="asso";
         break;
 
         case 'entreprises':
-            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/xmlpmev2/";
+            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/vdd/2.3/pro/xml/";
+            $parametres_xsl['CATEGORIE'] ="pro";
         break;
 
         default:
-            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/xml2v2/";
+            $parametres_xsl['XMLURL'] = "http://lecomarquage.service-public.fr/vdd/2.3/part/xml/";
+            $parametres_xsl['CATEGORIE'] ="part";
         break;
     }
 
     $ma_page =& comarquage_transforme_fichier_xml($parametres['xml_full_path'],$parametres['xsl_full_path'], $parametres_xsl);
+
     if ($ma_page === FALSE) {
         comarquage_error("le processeur XSLT a retourné une erreur fatale; l'action ne peut pas continuer");
         return -40;
@@ -137,7 +147,7 @@ function & comarquage_compile_page_xml($parametres,$url_base){
 
     $ma_page = implode("\n", $ma_page)."\n";
     // ecrire le fichier cache pour le prochain coup
-    ecrire_fichier ($parametres['cache_full_path'], $ma_page);
+    ecrire_fichier($parametres['cache_full_path'], $ma_page);
 
     return $ma_page;
 }
@@ -150,6 +160,7 @@ function comarquage_prepare_fichiers_xml($parametres, $profondeur = 2){
 
     $ma_page ="";
     $mise_a_jour = comarquage_lire_xml($parametres, $ma_page);
+
     if ($mise_a_jour == FALSE){
         $parsed[$parametres['xml_full_path']] = FALSE;
         return FALSE;
@@ -206,31 +217,29 @@ function comarquage_extraire_ressources($fichier_xml, $ma_page){
 function & comarquage_transforme_fichier_xml($fichier_xml, $fichier_xsl = NULL, $parametres = NULL){
     static $_executable = 'xsltproc';
 
-
     $params = " --path "._DIR_CACHE._DIR_CACHE_COMARQUAGE_XML."/ ";
+
     if (is_array($parametres))
         foreach ($parametres as $k => $v) {
             $params .= '--stringparam '.escapeshellarg($k).' '.escapeshellarg($v).' ';
         }
 //       spip_log("<br><br>\n\nPAR'AM : $params","comarquage");
 
-
     $fichier_erreur = tempnam(_DIR_TMP_XSLT_COMARQUAGE, 'xsltprocErrors_');
+
+    $charset = $GLOBALS['meta']['charset'];
     $commande = $_executable . $params . ($fichier_xsl ? $fichier_xsl.' ' : '');
     $commande .= $fichier_xml;
-    $commande .=  " 2> $fichier_erreur";
-
+    $commande .=  " 2> $fichier_erreur | iconv --from-code=iso-8859-15 --to-code=$charset";
     // spip_log("commande XSLTPROC : ".$commande,"comarquage");
 
     exec($commande, $retour, $erreur_code);
-
     comarquage_error($commande);
 
     if (filesize($fichier_erreur)) {
         lire_fichier($fichier_erreur,$message);
         comarquage_error("la commande '$_executable $params' a retourné ($erreur_code) : $message");
     }
-
     unlink($fichier_erreur);
     return $erreur_code ? FALSE : $retour;
 }
@@ -275,6 +284,7 @@ function & comarquage_lire_xml($parametres, &$ma_page) {
     $fichier = $parametres['xml_full_path'];
     // on ne recharge pas la page ici du moment qu'elle n'est pas trop vieille
     // la reactualisation des pages est réalisée preferentiellement par tache cron
+
     if (($ok = file_exists($parametres['xml_full_path'])) &&
         time() - filemtime($parametres['xml_full_path']) < $GLOBALS['meta']['comarquage_local_timeout']) {
         $mise_a_jour = 10;
@@ -288,6 +298,7 @@ function & comarquage_lire_xml($parametres, &$ma_page) {
         if ($ok==FALSE) return FALSE;
         $mise_a_jour = 10;
     }
+
     if (lire_fichier ($fichier, $ma_page))
         return $mise_a_jour;
     else
@@ -302,28 +313,41 @@ function comarquage_recuperer_page_xml($parametres){
         // En fonction de la catégorie (particulier / associations / professionnels) l'url cible n'est pas la même
         switch ($parametres['categorie']) {
         case "particuliers":
-            $url = "http://lecomarquage.service-public.fr/xml2v2/";
+            $url = "http://lecomarquage.service-public.fr/vdd/2.3/part/xml/";
         break;
 
         case "associations":
-            $url = "http://lecomarquage.service-public.fr/xmlassov2/";
+            $url = "http://lecomarquage.service-public.fr/vdd/2.3/asso/xml/";
         break;
 
         case 'entreprises':
-            $url = "http://lecomarquage.service-public.fr/xmlpmev2/";
+            $url = "http://lecomarquage.service-public.fr/vdd/2.3/pro/xml/";
         break;
 
         default:
-            $url = "http://lecomarquage.service-public.fr/xml2v2/";
+            $url = "http://lecomarquage.service-public.fr/vdd/2.3/part/xml/";
+            $parametres['categorie'] = "particuliers";
         break;
         }
     //$url = $GLOBALS['meta']['comarquage_xml_server'];
+
+    //get xml 000-PTA-Themes.xml evite les arborescences enormes
+    $default_xml_file = lire_config('comarquage/default_xml_file');
+    if($parametres['categorie'] == "particuliers" and $parametres['xml'] == $default_xml_file){
+        $url =   url_absolue(find_in_path(_DIR_PLUGIN_COMARQUAGE.'xml/part/'));
+        $parametres['xml'] = "000-PTA-Themes.xml";
+    } elseif($parametres['categorie'] == "entreprises" and $parametres['xml'] == $default_xml_file) {
+        $url =   url_absolue(find_in_path(_DIR_PLUGIN_COMARQUAGE.'xml/pro/'));
+        $parametres['xml'] = "000-PTA-Themes.xml";
+    }
 
     $url = $url.$parametres['xml'];
     spip_log("URL du flux : $url","comarquage");
 
     include_spip('inc/distant');
-    $ma_page = recuperer_page($url);
+    $ma_page = recuperer_page($url,false,false,11000000);
+    // TEMPO
+    //~ $ma_page = file_get_contents($parametres['xml_full_path']);
 
     if ($ma_page===FALSE || !strlen($ma_page)) return FALSE;
 
