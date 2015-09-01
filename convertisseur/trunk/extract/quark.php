@@ -83,6 +83,7 @@ function nettoyage_xtag($c) {
 	$c = str_replace('<\\!f>', '~', $c);
 	$c = str_replace('<\\n>', '~', $c);
 	$c = str_replace('<\\!e>', ' ', $c);
+	$c = str_replace('<\\!p>', '~', $c); # NON BREAKING PUNCTUATION SPACE
 
 	// un <parastyle...> = un paragraphe
 	$c = preg_replace ('/<P(ara)?Style:([A-Z]*) [^>]*>/ims', "\n/\\2/", $c);
