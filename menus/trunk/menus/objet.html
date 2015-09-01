@@ -9,6 +9,18 @@
 </BOUCLE_art_orig>
 </BOUCLE_si_art>
 
+<BOUCLE_test_tradrub(CONDITION){si #PLUGIN{tradrub}}>
+<BOUCLE_si_rub(CONDITION){si #ENV{type_objet}|=={rubrique}|et{#ENV{trad}|=={trad}}}>
+<BOUCLE_rub_orig(RUBRIQUES){id_rubrique=#ENV{id_objet}}{origine_traduction}>
+<BOUCLE_rub_lang(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+#SET{id_objet,#ID_RUBRIQUE}
+</BOUCLE_rub_lang>
+#SET{id_objet,#ID_RUBRIQUE}
+<//B_rub_lang>
+</BOUCLE_rub_orig>
+</BOUCLE_si_rub>
+</BOUCLE_test_tradrub>
+
 [(#SET{titre, #ENV*{titre}|typo|sinon{#INFO_TITRE{#ENV{type_objet}, #GET{id_objet}}}|sinon{<:info_sans_titre:>}})]
 
 [(#ENV{trad}|=={trad}|et{#ENV{type_objet}|=={article}}|oui)#SET{info_trad,#VAL{menus:info_traduction_recuperee}|_T}]
