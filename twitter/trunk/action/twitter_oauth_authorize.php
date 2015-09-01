@@ -64,8 +64,17 @@ function action_twitter_oauth_authorize_dist(){
 			}
 			else {
 				spip_log("Erreur '".$connection->http_code."' au retour pour recuperation des tokens dans action_twitter_oauth_callback_dist",'twitter'._LOG_ERREUR);
+				// peut donner une info en plus, genre un message d'erreur a la place des tokens
+				spip_log($access_token,'twitter'._LOG_ERREUR);
 				$redirect = parametre_url($redirect,'erreur_code',$connection->http_code);
-				$redirect = parametre_url($redirect,'erreur','auth_denied','&');
+				if (count($access_token)==1
+				  AND $e = trim(implode(" ",array_keys($access_token))." ".implode(" ",array_values($access_token)))){
+					session_set("oauth_erreur_message","Erreur : $e");
+					$redirect = parametre_url($redirect,'erreur','erreur_oauth','&');
+				}
+				else {
+					$redirect = parametre_url($redirect,'erreur','auth_denied','&');
+				}
 				$GLOBALS['redirect'] = $redirect;
 			}
 		}
