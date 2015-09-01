@@ -4,7 +4,7 @@
 	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<icon>images/webfonts-32.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<etat>test</etat>
 	<description>
 	Les navigateurs modernes permettent l&#8217;utilisation de polices de caract&#232;res enrichies, non disponibles par d&#233;faut sur le poste des utilisateurs. Par un coup de chance, Internet Explorer permet aussi cela (avec quelques diff&#233;rences de syntaxe) ce qui rend la fonctionnalit&#233; utilisable par tous les visiteurs.
@@ -16,7 +16,7 @@ Ce plugin facilite compl&#232;tement l&#8217;utilisation de ces polices, et pren
 	<prefix>webfonts</prefix>
 	<lien>http://contrib.spip.net/Webfonts</lien>
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>webfonts_pipeline.php</inclure>
