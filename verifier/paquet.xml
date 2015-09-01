@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="images/verifier-128.png"
-	documentation="http://contrib.spip.net/Verifier,1505"
+	documentation="http://contrib.spip.net/Verifier"
 >
 
 	<nom>API de v&#233;rification</nom>
