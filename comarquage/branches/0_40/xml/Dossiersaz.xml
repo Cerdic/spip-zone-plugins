@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Publication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" ID="Dossiers-az" type="Dossiers AZ">
+  <dc:title>Tous les dossiers classés par ordre alphabétique</dc:title>
+  <dc:description>Tous les dossiers de A à Z, pour les particuliers, classés par ordre alphabétique</dc:description>
+  <dc:type>Dossiers-az</dc:type>
+</Publication>

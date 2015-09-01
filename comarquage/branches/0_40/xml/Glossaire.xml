@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Publication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" ID="Glossaire" type="Glossaire">
+  <dc:title>Toutes les définitions de A à Z</dc:title>
+  <dc:description>Toutes les définitions de A à Z, pour les particuliers, classés par ordre alphabétique</dc:description>
+  <dc:type>Glossaire</dc:type>
+</Publication>
