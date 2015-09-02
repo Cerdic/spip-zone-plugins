@@ -156,6 +156,9 @@ function saisies_generer_html($champ, $env=array()){
 	else{
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
+		// On récupère la langue de l'objet si existante
+		if(isset($env['langue']))
+			$contexte['langue'] = $env['langue'];
 		// On ajoute toujours le bon self
 		$contexte['self'] = self();
 	}
