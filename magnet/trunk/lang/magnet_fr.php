@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_demagnetize' => 'Enlever',
 	'label_up' => 'Monter',
 	'label_down' => 'Descendre',
+
+	'titre_page_configurer' => 'Configuration de Magnet',
+	'label_activer_magnet_objets' => 'Activer les aimants sur les objets',
 );
 
 ?>

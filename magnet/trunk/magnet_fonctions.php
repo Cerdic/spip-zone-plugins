@@ -3,8 +3,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function magnet_actif_sur_objet($type){
+	static $actifs;
+	if (is_null($actifs)){
+		$actifs = lire_config("magnet/objets",array('spip_articles'));
+		$actifs = array_map('objet_type',$actifs);
+	}
 	$type = objet_type($type);
-	if (in_array($type,array('article'))){
+	if (in_array($type,$actifs)){
 		return true;
 	}
 	return false;
@@ -89,7 +94,7 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 		AND include_spip(\'magnet_fonctions\')) {
 			echo \"<div class=\'boutons spip-admin actions magnets pile-'.$_pile.'\'>\"
 			. magnet_html_boutons_admin('.sql_quote($_objet).',\$id,\'admin-magnet\'$_pile_arg)
-			. \"<style>.bouton_action_post.spip-admin-boutons{display:none;}</style></div>\";
+			. \"<style>.bouton_action_post.spip-admin-boutons.admin-magnet-'.$_objet.'{display:none;}</style></div>\";
 		}
 ?'.'>'";
 
@@ -210,7 +215,7 @@ function magnet_formulaire_admin($flux){
 		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
 	  AND include_spip('inc/autoriser')
 	  AND autoriser('administrermagnet',$objet,$id_objet)){
-		$boutons = magnet_html_boutons_admin($objet, $id_objet,"spip-admin-boutons admin-magnet") . " ";
+		$boutons = magnet_html_boutons_admin($objet, $id_objet,"spip-admin-boutons admin-magnet admin-magnet-$objet") . " ";
 		$p = strpos($flux['data'],"<a");
 		$flux['data'] = substr_replace($flux['data'],$boutons,$p,0);
 	}
