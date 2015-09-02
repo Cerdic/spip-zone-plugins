@@ -41,7 +41,7 @@ $(document).ready(function(){
 			[(#SELF|parametre_url{statuts,''}|form_hidden)]
 			<select name="statuts" id="selection_statut">
 				<option value=""[(#ENV{statuts}|non) selected="selected"]><:plan:tous_les_statuts:></option>
-		<BOUCLE_objets_statuts(DATA){source table, #REM|plan_lister_objets_rubrique_statuts}>
+		<BOUCLE_objets_statuts(DATA){source table, #REM|plan_lister_objets_rubrique_statuts_auteur}>
 				<optgroup label="[(#CLE|objet_info{texte_objets}|_T)]" class="#CLE">
 					<BOUCLE_statuts(DATA){source table, #VALEUR}>
 						[(#SET{class,[(#_objets_statuts:CLE)]-#CLE})]
