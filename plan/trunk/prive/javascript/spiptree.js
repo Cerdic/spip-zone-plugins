@@ -21,6 +21,10 @@ $.fn.spiptree = function(options) {
 		}
 	}
 
+	options.confirm = {
+		move: null
+	};
+
 	$.each(options.objets, function(nom, desc) {
 		options.types.default.valid_children.push(desc.type);
 		options.types.default.valid_children.push("box_" + desc.type);
@@ -40,7 +44,22 @@ $.fn.spiptree = function(options) {
 		"plugins" : options.plugins,
 		"core" : {
 			"animation" : 0,
-			"check_callback" : true,
+			"check_callback" : function (op, node, par, pos, more) {
+				if (op === "move_node") {
+					// à la fin d'un déplacement, demander 1 fois (et 1 seule) 
+					// une confirmation, même si on déplace 5 items d'un coup
+					if (more && more.core) {
+						if (options.confirm.move === null) {
+							options.confirm.move = confirm( options.textes.confirmation.deplacement );
+						}
+						return options.confirm.move;
+					} else {
+						// redemander la confirmation au prochain tour
+						options.confirm.move = null;
+					}
+				}
+				return true;
+			},
 			"data" : function (node, cb) {
 				// on est obligé de tout charger en ajax (même la racine)
 				// donc on charge 1 fois la racine avec le html d'origine

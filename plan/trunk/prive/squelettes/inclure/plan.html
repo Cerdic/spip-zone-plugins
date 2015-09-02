@@ -4,6 +4,11 @@ $(document).ready(function(){
 	$('#racine').spiptree({
 		drag: [(#AUTORISER{configurer}|?{true,false})],
 		statut: "#ENV{statut}",
+		textes: {
+			confirmation: {
+				deplacement: <:plan:confirmer_deplacement|json_encode:>,
+			}
+		},
 		urls: {
 			plan: "[(#VAL{plan}|generer_url_action{"", 1})]",
 			deplacer: "[(#VAL{deplacer_objets}|generer_url_action{"", 1})]"

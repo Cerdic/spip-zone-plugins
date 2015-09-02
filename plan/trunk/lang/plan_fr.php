@@ -5,9 +5,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// T
-	'tous_les_statuts' => 'Tous les statuts',
+	// C
+	'confirmer_deplacement' => 'Êtes-vous sûr de vouloir déplacer ces éléments ?',
 
 	// P
 	'plan_titre' => 'Plan du site dans l’espace privé',
+
+	// T
+	'tous_les_statuts' => 'Tous les statuts',
+
+
 );
