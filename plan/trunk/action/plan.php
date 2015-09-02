@@ -34,7 +34,7 @@ function action_plan_dist() {
 	include_spip('inc/utils');
 	$objet = table_objet(_request('objet'));
 
-	$fond = "prive/squelettes/inclure/plan2-$objet";
+	$fond = "prive/squelettes/inclure/plan-$objet";
 	header("Content-Type: text/html; charset=" . $GLOBALS['meta']['charset']);
 
 	if (trouver_fond($fond)) {

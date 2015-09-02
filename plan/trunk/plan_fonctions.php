@@ -63,7 +63,7 @@ function plan_lister_objets_rubrique() {
 		unset($tables['spip_rubriques']);
 		foreach ($tables as $cle => $desc) {
 			if (isset($desc['field']['id_rubrique'])) {
-				if (trouver_fond('prive/squelettes/inclure/plan2-' . $desc['table_objet'])) {
+				if (trouver_fond('prive/squelettes/inclure/plan-' . $desc['table_objet'])) {
 					$liste[$cle] = $desc['table_objet'];
 				}
 			}
