@@ -22,8 +22,10 @@ function action_plan_dist() {
 
 	$env = array(
 		'id_rubrique' => intval(_request('id_rubrique')),
-		'liste' => true,
+		'lister' => 'tout',
+		'conteneur' => 'non'
 	);
+
 	if ($statut = _request('statut')) {
 		$env['statut'] = $statut;
 	}
