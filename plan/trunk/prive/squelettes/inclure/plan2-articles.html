@@ -15,10 +15,10 @@
 			class="item group[ (#GET{lister}|non)jstree-closed]"
 			data-jstree='{"type":"box_article", "objet":"article"}'>
 			<strong>[(#GET{total}|objet_afficher_nb{article})]</strong>
-			[(#GET{lister}|oui)
-				<ul class="menu-items articles">
-			]
 ]
+
+			<B_items>
+				<ul class="menu-items articles">
 			<BOUCLE_items(ARTICLES)
 				{id_rubrique} {par titre}
 				{statut IN #SESSION{statut}|statuts_articles_visibles}
@@ -34,11 +34,10 @@
 					</a>
 				</li>
 			</BOUCLE_items>
+			</ul>
+			</B_items>
 
 [(#ENV{conteneur}|=={non}|non)
-		[(#GET{lister}|oui)
-			</ul>
-		]
 		</li>
 	</ul>
 ]

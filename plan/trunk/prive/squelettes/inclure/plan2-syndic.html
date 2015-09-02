@@ -13,11 +13,10 @@
 			class="item group[ (#GET{lister}|non)jstree-closed]"
 			data-jstree='{"type":"box_site", "objet":"site"}'>
 			<strong>[(#GET{total}|objet_afficher_nb{site})]</strong>
-			[(#GET{lister}|oui)
-				<ul class="menu-items syndic">
-			]
 ]
 
+			<B_items>
+				<ul class="menu-items syndic">
 			<BOUCLE_items(SITES)
 				{id_rubrique} {par nom_site}
 				{statut==.*}{statut ?}
@@ -30,11 +29,10 @@
 					</a>
 				</li>
 			</BOUCLE_items>
+				</ul>
+			</B_items>
 
 [(#ENV{conteneur}|=={non}|non)
-		[(#GET{lister}|oui)
-			</ul>
-		]
 		</li>
 	</ul>
 ]
