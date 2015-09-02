@@ -10,7 +10,7 @@
 
 [(#ENV{liste}|non)
 	<ul class="menu-items articles">
-		<li id="articles-rubrique-#ID_RUBRIQUE" class="item[ (#GET{total}|>{#VAL|plan_limiter_listes}|oui)jstree-closed]" data-jstree='{"type":"box_article", "objet":"article"}'>
+		<li id="articles-rubrique-#ID_RUBRIQUE" class="item group[ (#GET{total}|>{#VAL|plan_limiter_listes}|oui)jstree-closed]" data-jstree='{"type":"box_article", "objet":"article"}'>
 			<strong>[(#GET{total}|objet_afficher_nb{article})]</strong>
 ]
 

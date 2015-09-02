@@ -9,12 +9,12 @@ $(document).ready(function(){
 			deplacer: "[(#VAL{deplacer_objets}|generer_url_action{"", 1})]"
 		},
 		default: {
-			icon: "[(#VAL{rubrique}|objet_icone{16}|extraire_attribut{src})]"
+			icon: "rubrique"
 		},
 		objets: [
 			<BOUCLE_objets(DATA){source table,#REM|plan_lister_objets_rubrique}{", "}>
 			{
-				icon: "[(#VALEUR|objet_icone{16}|extraire_attribut{src})]",
+				icon: "[(#VALEUR|objet_type)]",
 				type: "[(#VALEUR|objet_type)]"
 			}
 			</BOUCLE_objets>
