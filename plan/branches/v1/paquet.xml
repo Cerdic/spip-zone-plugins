@@ -1,9 +1,9 @@
 <paquet
 	prefix="plan"
 	categorie="navigation"
-	version="2.0.0-dev"
+	version="1.2.1"
 	etat="test"
-	compatibilite="[3.1.0;3.1.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/plan-64.png"
 	documentation="http://contrib.spip.net/4718"
 >

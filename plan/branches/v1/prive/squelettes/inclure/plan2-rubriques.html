@@ -1,0 +1,21 @@
+<B_rubriques>
+	<ul class="menu-items rubriques">
+		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique?} {par num titre,titre}{statut==.*}>
+			<li id="rubrique-#ID_RUBRIQUE" class="item">
+				<a
+					href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+					title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]">
+						<strong>[(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong>
+				</a>
+
+				<BOUCLE_objets(DATA){source table,#REM|plan_lister_objets_rubrique}{par cle}>
+					[(#ENV{objet}|non|ou{#ENV{objet}|=={#VALEUR}})
+						<INCLURE{fond=prive/squelettes/inclure/plan2-#VALEUR,id_rubrique=#_rubriques:ID_RUBRIQUE, env}>
+					]
+				</BOUCLE_objets>
+				<INCLURE{fond=prive/squelettes/inclure/plan2-rubriques,id_parent=#ID_RUBRIQUE, id_rubrique='',env}>
+			</li>
+		</BOUCLE_rubriques>
+	</ul>
+</B_rubriques>
