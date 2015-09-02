@@ -18,4 +18,5 @@
 	<licence>GNU/GPL</licence>
 
 	<utilise nom="sites" />
+	<utilise nom="breves" />
 </paquet>
