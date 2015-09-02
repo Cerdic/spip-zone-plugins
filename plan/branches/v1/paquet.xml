@@ -1,7 +1,7 @@
 <paquet
 	prefix="plan"
 	categorie="navigation"
-	version="1.2.3"
+	version="1.2.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/plan-64.png"
@@ -18,4 +18,5 @@
 	<licence>GNU/GPL</licence>
 
 	<utilise nom="sites" />
+	<utilise nom="breves" />
 </paquet>
