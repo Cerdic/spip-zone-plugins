@@ -47,25 +47,27 @@ function plan_lister_objets_rubrique() {
 }
 
 /**
- * Trouve les objets qui peuvent s'afficher dans le plan de page, dans une rubrique
- * ainsi que leurs statuts utilisables
+ * Trouve les objets qui peuvent s'afficher dans le plan de page,
+ * dans une rubrique ainsi que leurs statuts
  *
+ * @note
+ *     Tous les statuts sont ici retournés, même ceux que ne peuvent pas
+ *     forcément utiliser l'auteur en cours.
+ *
+ * @see plan_lister_objets_rubrique_statuts_auteur()
+ * @uses plan_lister_objets_rubrique()
+ * 
  * @return array
 **/
 function plan_lister_objets_rubrique_statuts() {
 	static $liste = null;
 	if (is_null($liste)) {
 		$objets = plan_lister_objets_rubrique();
-		include_spip('inc/session');
 		include_spip('inc/puce_statut');
 		$liste = array();
 		foreach ($objets as $table => $null) {
 			$desc = lister_tables_objets_sql($table);
 			$statuts = array_keys($desc['statut_textes_instituer']);
-			if ($table == 'spip_articles') {
-				$autorises = statuts_articles_visibles(session_get('statut'));
-				$statuts = array_intersect($statuts, $autorises);
-			}
 			$objet = $desc['table_objet'];
 			// obtenir titre et image du statut
 			$_statuts = array();
@@ -76,6 +78,31 @@ function plan_lister_objets_rubrique_statuts() {
 				);
 			}
 			$liste[ $objet ] = $_statuts;
+		}
+	}
+	return $liste;
+}
+
+
+/**
+ * Trouve les objets qui peuvent s'afficher dans le plan de page,
+ * dans une rubrique ainsi que leurs statuts utilisables pour l'auteur en cours
+ *
+ * @uses plan_lister_objets_rubrique_statuts();
+ * 
+ * @return array
+**/
+function plan_lister_objets_rubrique_statuts_auteur() {
+	static $liste = null;
+	if (is_null($liste)) {
+		$liste = plan_lister_objets_rubrique_statuts();
+		include_spip('inc/session');
+		foreach ($liste as $objet => $statuts) {
+			if ($objet == 'articles') {
+				$autorises = statuts_articles_visibles(session_get('statut'));
+				$statuts = array_intersect_key($statuts, array_flip($autorises));
+				$liste[$objet] = $statuts;
+			}
 		}
 	}
 	return $liste;

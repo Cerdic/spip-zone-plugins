@@ -1,6 +1,7 @@
 <INCLURE{fond=prive/squelettes/head/dist, env}>
 
 [<link rel="stylesheet" href="(#CHEMIN{lib/jstree/dist/themes/default/style.min.css})" />]
+[<link rel="stylesheet" href="(#PRODUIRE{fond=css/plan_prive.css})" type="text/css" />]
 
 [(#REM) HACK pour SPIP 3.0 et son vieux jQuery 1.7 ]
 [<script src="(#CHEMIN{prive/javascript/jquery-1.11.3.min.js})"></script>]
@@ -10,37 +11,3 @@
 <script type="text/javascript">
 var My_jQuery = jQuery.noConflict( true );
 </script>
-
-<style type='text/css'>
-#mytree_actions { margin-bottom:1em; margin-top:1em; }
-#mytree_actions input,
-#mytree_actions .pliage { margin-right:2em; }
-#mytree_actions .statut {
-	padding-left:20px;
-	background: transparent left 5px no-repeat;
-	display:inline-block;
-}
-#mytree_actions .statut form { display:inline; }
-#mytree_actions .statut form optgroup {
-	margin-top:.3em; padding:5px 5px 5px 25px;
-	background: transparent 3px 5px no-repeat;
-}
-#mytree_actions .statut form option {
-	padding:2px 2px 2px 20px;
-	background: transparent 2px center no-repeat;
-}
-<BOUCLE_objets_statuts(DATA){source table, #REM|plan_lister_objets_rubrique_statuts}>
-#mytree_actions .statut.#CLE {
-	background-image: url([(#CLE|objet_icone{16}|extraire_attribut{src})]);
-}
-#mytree_actions .statut form optgroup.#CLE {
-	background-image: url([(#CLE|objet_icone{16}|extraire_attribut{src})]);
-}
-<BOUCLE_statuts(DATA){source table, #VALEUR}>
-[(#SET{class,[(#_objets_statuts:CLE)]-#CLE})]
-#mytree_actions .statut form option.#GET{class} {
-	background-image: url(#CHEMIN_IMAGE{#IMAGE});
-}
-</BOUCLE_statuts>
-</BOUCLE_objets_statuts>
-</style>
