@@ -76,6 +76,10 @@ $.fn.spiptree = function(options) {
 		"types" : options.types
 	});
 
+	if (options.drag) {
+		$mytree.addClass('drag');
+	}
+
 	// un clic d'une feuille amène sur son lien
 	// mais… éviter que le plugin 'state' clique automatiquement lorsqu'il restaure
 	// la sélection précédente !
@@ -84,11 +88,15 @@ $.fn.spiptree = function(options) {
 			data.instance.save_state();
 			var node = data.instance.get_node(data.node, true);
 			if (node) {
-				location.href = node.children('a').attr('href');
+				var lien = node.children('a').attr('href');
+				if (lien && !(options.drag && $(data.event.target).hasClass('jstree-icon'))) {
+					location.href = lien;
+				}
 			}
 		});
 	});
 
+	var recharge_contenu = false;
 	// lorsqu'on déplace un nœud
 	$mytree.on("move_node.jstree", function(event, data) {
 		// si les parents sont identiques : pas de changement,
@@ -145,7 +153,12 @@ $.fn.spiptree = function(options) {
 			cache: false,
 		}).done(function(response) {
 			// console.log('done', response);
-			ajaxReload('contenu');
+			if (recharge_contenu) {
+				clearTimeout(recharge_contenu);
+			}
+			recharge_contenu = setTimeout(function () {
+				ajaxReload('plan');
+			}, 500);
 		});
 
 		return true;

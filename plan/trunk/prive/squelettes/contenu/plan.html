@@ -1,25 +1,6 @@
 <script type="text/javascript">
 (function($){
 $(document).ready(function(){
-	$('body.plan #contenu #racine').spiptree({
-		drag: [(#AUTORISER{configurer}|?{true,false})],
-		statut: "#ENV{statut}",
-		urls: {
-			plan: "[(#VAL{plan}|generer_url_action{"", 1})]",
-			deplacer: "[(#VAL{deplacer_objets}|generer_url_action{"", 1})]"
-		},
-		default: {
-			icon: "rubrique"
-		},
-		objets: [
-			<BOUCLE_objets(DATA){source table,#REM|plan_lister_objets_rubrique}{", "}>
-			{
-				icon: "[(#VALEUR|objet_type)]",
-				type: "[(#VALEUR|objet_type)]"
-			}
-			</BOUCLE_objets>
-		]
-	});
 	$('body.plan #contenu #mytree_actions .pliage').html(
 		"<a href=\"#\" onClick=\"jQuery('#racine').jstree('open_all'); return false;\"><:lien_tout_deplier:></a> | " +
 		"<a href=\"#\" onClick=\"jQuery('#racine').jstree('close_all'); return false;\"><:lien_tout_replier:></a>"
@@ -62,7 +43,5 @@ $(document).ready(function(){
 </div>
 
 #BOITE_OUVRIR{'', simple}
-<div id="racine">
-<INCLURE{fond=prive/squelettes/inclure/plan-rubriques, id_parent=0, statut=#GET{statut}, objet=#GET{objet}, lister}>
-</div>
+<INCLURE{fond=prive/squelettes/inclure/plan, statut=#GET{statut}, objet=#GET{objet}, lister, ajax=plan}>
 #BOITE_FERMER

@@ -42,6 +42,10 @@
 	padding-left:20px;
 	background:url([(#VAL{rubrique}|objet_icone{16}|extraire_attribut{src})]) center left no-repeat;
 }
+.plan .jstree .puce_objet { margin-right:2px; }
+.plan .jstree.drag .item .jstree-icon {
+	cursor: move;
+}
 <BOUCLE_icone_objets(DATA){source table, #REM|plan_lister_objets_rubrique}>
 .plan .jstree-icon.[(#VALEUR|objet_type)] {
 	background:url([(#VALEUR|objet_icone{16}|extraire_attribut{src})]) center center no-repeat;
