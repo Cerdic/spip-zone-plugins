@@ -24,6 +24,33 @@ function plan_limiter_listes() {
 
 
 /**
+ * Compile la balise `#PLAN_AFFICHER_LISTE` qui, dans une boucle listant un objet
+ * permet de savoir si on doit afficher la liste complète.
+ *
+ * Cela dépend de la variable d'environnement 'lister' et du nombre d'éléments dans la liste :
+ * - si lister = tout, retourne vrai
+ * - si le nombre d'élément ne dépasse pas _PLAN_LIMITER_LISTES, retourne vrai,
+ * - sinon retourne faux.
+ *
+ * @param Pile $p
+ * @return Pile
+**/
+function balise_PLAN_AFFICHER_LISTE_dist($p) {
+
+	// #GRAND_TOTAL
+	$grand_total = charger_fonction('GRAND_TOTAL', 'balise');
+	$p = $grand_total($p);
+	$grand_total = $p->code;
+
+	// #ENV{lister}
+	$lister = "(isset(\$Pile[0]['lister']) ? \$Pile[0]['lister'] : '')";
+
+	$p->code = "(($lister == 'tout') OR ($grand_total <= plan_limiter_listes()))";
+
+	return $p;
+}
+
+/**
  * Trouve les objets qui peuvent s'afficher dans le plan de page, dans une rubrique
  *
  * @return array [table -> chemin du squelette]
@@ -36,7 +63,7 @@ function plan_lister_objets_rubrique() {
 		unset($tables['spip_rubriques']);
 		foreach ($tables as $cle => $desc) {
 			if (isset($desc['field']['id_rubrique'])) {
-				if (trouver_fond('prive/squelettes/inclure/plan2-' . $desc['table_objet'])) {
+				if (trouver_fond('prive/squelettes/inclure/plan-' . $desc['table_objet'])) {
 					$liste[$cle] = $desc['table_objet'];
 				}
 			}
