@@ -2,6 +2,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function magnet_actif_sur_objet($type){
+	$type = objet_type($type);
+	if (in_array($type,array('article'))){
+		return true;
+	}
+	return false;
+}
+
 /**
  * Critere {magnet}
  * {magnet} permet de selectionner uniquement les magnet
@@ -12,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function critere_magnet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	if ($boucle->type_requete=='articles'){
+	if (magnet_actif_sur_objet($boucle->type_requete)){
 		$boucle->having[] = array($crit->not?"'='":"'<>'","'magnet'","0");
 	}
 }
@@ -34,7 +42,7 @@ function critere_magnet_pile_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Critere {ignore_magnet} permet de desactiver la magnetisation des articles
+ * Critere {ignore_magnet} permet de desactiver la magnetisation des objets
  * qui retrouvent leur ordre naturel
  * @param string $idb
  * @param array $boucles
@@ -42,7 +50,7 @@ function critere_magnet_pile_dist($idb, &$boucles, $crit) {
  */
 function critere_ignore_magnet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	if ($boucle->type_requete=='articles'){
+	if (magnet_actif_sur_objet($boucle->type_requete)){
 		$boucle->modificateur['ignore_magnet'] = true;
 	}
 }
@@ -61,19 +69,26 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 		$_pile_arg = ",".addslashes($_pile);
 	}
 
-	$_id = champ_sql('id_article', $p);
-	$_objet = "\'article\'";
+	if ($table = $p->type_requete){
+		$type = objet_type($table);
+		$_id = champ_sql(id_table_objet($type), $p);
+		$_objet = "'$type'";
+	}
+	else {
+		$_id = champ_sql('id_objet', $p);
+		$_objet = champ_sql('objet', $p);
+	}
 
 		$p->code = "
 '<'.'?php
 	if (isset(\$GLOBALS[\'visiteur_session\'][\'statut\'])
 	  AND \$GLOBALS[\'visiteur_session\'][\'statut\']==\'0minirezo\'
 		AND (\$id = '.intval($_id).')
-		AND	include_spip(\'inc/autoriser\')
-		AND autoriser(\'administrermagnet\',$_objet,\$id)
+		AND include_spip(\'inc/autoriser\')
+		AND autoriser(\'administrermagnet\','.sql_quote($_objet).',\$id)
 		AND include_spip(\'magnet_fonctions\')) {
 			echo \"<div class=\'boutons spip-admin actions magnets pile-'.$_pile.'\'>\"
-			. magnet_html_boutons_admin($_objet,\$id,\'admin-magnet\'$_pile_arg)
+			. magnet_html_boutons_admin('.sql_quote($_objet).',\$id,\'admin-magnet\'$_pile_arg)
 			. \"<style>.bouton_action_post.spip-admin-boutons{display:none;}</style></div>\";
 		}
 ?'.'>'";
@@ -84,22 +99,22 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 
 
 /**
- * Inserer la clause order : le champ magnet prend 0 pour les articles non magnet et un indice croissant pour les articles magnet
+ * Inserer la clause order : le champ magnet prend 0 pour les objets non magnet et un indice croissant pour les objets magnet
  * le dernier magnetize arrive en premier
- * pour remonter un article magnet en tete il faut le demagnetizer/remagnetizer
+ * pour remonter un objet magnet en tete il faut le demagnetizer/remagnetizer
  * @param $boucle
  * @return mixed
  */
 function magnet_pre_boucle(&$boucle){
 	if (!isset($boucle->modificateur['ignore_magnet'])
 	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
-		if ($boucle->type_requete=='articles'){
+		if (magnet_actif_sur_objet($boucle->type_requete)){
 			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
 			$meta_magnet = "magnet_" .($pile?$pile."_":""). $boucle->type_requete;
 			$_id = $boucle->id_table . "." . $boucle->primary;
 			$magnet = true;
-			// si la boucle a un critere id_article=xx non conditionnel on ne magnet pas (perf issue)
-			if (isset($boucle->modificateur['criteres']['id_article'])){
+			// si la boucle a un critere id_xxx=yy non conditionnel on ne magnet pas (perf issue)
+			if (isset($boucle->modificateur['criteres'][$boucle->primary])){
 				foreach($boucle->where as $where){
 					if (is_array($where)
 						AND $where['0']=="'='"
@@ -183,13 +198,13 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 
 
 /**
- * Ajouter un bouton pour magnetiser/demagnetiser un article
+ * Ajouter un bouton pour magnetiser/demagnetiser un objet
  * @param $flux
  * @return mixed
  */
 function magnet_formulaire_admin($flux){
-	if ($flux['args']['contexte']['objet']=='article'
-	  AND $objet = $flux['args']['contexte']['objet']
+	if (  $objet = $flux['args']['contexte']['objet']
+	  AND magnet_actif_sur_objet($objet)
 	  AND $id_objet = intval($flux['args']['contexte']['id_objet'])
 	  AND isset($GLOBALS['visiteur_session']['statut'])
 		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
@@ -236,9 +251,9 @@ function magnet_count($objet, $pile=''){
 }
 
 function magnet_boite_infos($flux){
-	if ($flux['args']['type']=='article'
-	  AND $id_article = $flux['args']['id']){
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/magnet-admin',array('id_article'=>$id_article));
+	if (magnet_actif_sur_objet($flux['args']['type'])
+	  AND $id = $flux['args']['id']){
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/magnet-admin',array('id_objet'=>$id,'objet'=>$flux['args']['type']));
 	}
 	return $flux;
 }
