@@ -14,7 +14,7 @@ jQuery.fn.vectorMap('addMap', 'map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|
         <BOUCLE_path (VECTORS) {id_map}>
         "[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]": {
             "path": "[(#PATH)]",
-            "name": "[(#TITRE)]"
+            "name": "[(#TITRE**|texte_script)]"
         },</BOUCLE_path>
     }
 });
