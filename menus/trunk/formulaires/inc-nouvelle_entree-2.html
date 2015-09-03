@@ -16,7 +16,7 @@
 	<li class="editer editer_texte[ (#GET{erreurs}|oui)erreur]">
 		<label for="#CLE">[(#VALEUR|table_valeur{label})] [(#VALEUR|table_valeur{obligatoire}|non)&#91;<:menus:formulaire_facultatif:>&#93;]</label>
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
-		<input type="text" class="text[ (#VALEUR|table_valeur{class})]" name="parametres[#CLE]" value="[(#ENV{parametres}|table_valeur{#CLE}|sinon{#ENV{donnees}|table_valeur{#CLE}}|entites_html)]" />
+		<input type="text" class="text[ (#VALEUR|table_valeur{class})]" name="parametres[#CLE]" value="[(#ENV{parametres}|table_valeur{#CLE}|sinon{#ENV{donnees}|table_valeur{#CLE}}|attribut_html)]" />
 	</li>
 	</BOUCLE_parametres>
 </ul>
