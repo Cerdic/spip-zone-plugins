@@ -1,8 +1,8 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="2.0.6"
-	etat="dev"
+	version="2.0.7"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
 	documentation="http://contrib.spip.net/Sphinx-Indexer"

@@ -179,6 +179,14 @@ class SpipDocuments implements SourceInterface {
 			$doc['date'] = '0000-00-00 00:00:00';
 		}
 		
+		// Et la mise-à-jour si elle existe
+		if (isset($contenu['maj']) and $contenu['maj']) {
+			$doc['properties.maj'] = $contenu['maj'];
+		}
+		else {
+			$doc['properties.maj'] = '0000-00-00 00:00:00';
+		}
+		
 		// S'il y a une langue
 		if (isset($contenu['lang'])) {
 			$doc['properties']['lang'] = $contenu['lang'];
