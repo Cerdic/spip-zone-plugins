@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'ajouter_lien_map' => 'Ajouter cette carte',
 
     // C
+    'carte_importee' => 'La carte a été importée avec succès',
+    'carte_maj' => 'La carte a été mise à jour avec succès',
     'champ_background_color_label' => 'Couleur du fond',
     'champ_border_color_label' => 'Couleur des bordures',
     'champ_border_opacity_explication' => 'La valeur à renseigner doit être conprise entre 0 et 1.',
