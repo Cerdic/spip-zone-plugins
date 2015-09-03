@@ -2,6 +2,8 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+.plan #contenu p.removable { cursor:pointer; }
+.plan #contenu p.removable:hover { opacity:.6; }
 #mytree_actions { margin-bottom:1em; margin-top:1em; }
 #mytree_actions input,
 #mytree_actions .pliage { margin-right:2em; }
@@ -41,6 +43,10 @@
 .plan .menu-items.rubriques .item > a {
 	padding-left:20px;
 	background:url([(#VAL{rubrique}|objet_icone{16}|extraire_attribut{src})]) center left no-repeat;
+}
+.plan .jstree .puce_objet { margin-right:2px; }
+.plan .jstree.drag .item .jstree-icon {
+	cursor: move;
 }
 <BOUCLE_icone_objets(DATA){source table, #REM|plan_lister_objets_rubrique}>
 .plan .jstree-icon.[(#VALEUR|objet_type)] {

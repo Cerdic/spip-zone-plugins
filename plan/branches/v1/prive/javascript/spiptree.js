@@ -21,6 +21,10 @@ $.fn.spiptree = function(options) {
 		}
 	}
 
+	options.confirm = {
+		move: null
+	};
+
 	$.each(options.objets, function(nom, desc) {
 		options.types.default.valid_children.push(desc.type);
 		options.types.default.valid_children.push("box_" + desc.type);
@@ -40,7 +44,22 @@ $.fn.spiptree = function(options) {
 		"plugins" : options.plugins,
 		"core" : {
 			"animation" : 0,
-			"check_callback" : true,
+			"check_callback" : function (op, node, par, pos, more) {
+				if (op === "move_node") {
+					// à la fin d'un déplacement, demander 1 fois (et 1 seule) 
+					// une confirmation, même si on déplace 5 items d'un coup
+					if (more && more.core) {
+						if (options.confirm.move === null) {
+							options.confirm.move = confirm( options.textes.deplacement.confirmation );
+						}
+						return options.confirm.move;
+					} else {
+						// redemander la confirmation au prochain tour
+						options.confirm.move = null;
+					}
+				}
+				return true;
+			},
 			"data" : function (node, cb) {
 				// on est obligé de tout charger en ajax (même la racine)
 				// donc on charge 1 fois la racine avec le html d'origine
@@ -76,6 +95,10 @@ $.fn.spiptree = function(options) {
 		"types" : options.types
 	});
 
+	if (options.drag) {
+		$mytree.addClass('drag');
+	}
+
 	// un clic d'une feuille amène sur son lien
 	// mais… éviter que le plugin 'state' clique automatiquement lorsqu'il restaure
 	// la sélection précédente !
@@ -84,17 +107,19 @@ $.fn.spiptree = function(options) {
 			data.instance.save_state();
 			var node = data.instance.get_node(data.node, true);
 			if (node) {
-				location.href = node.children('a').attr('href');
+				var lien = node.children('a').attr('href');
+				if (lien && !(options.drag && $(data.event.target).hasClass('jstree-icon'))) {
+					location.href = lien;
+				}
 			}
 		});
 	});
 
+	var recharge_plan = false;
 	// lorsqu'on déplace un nœud
 	$mytree.on("move_node.jstree", function(event, data) {
 		// si les parents sont identiques : pas de changement,
 		// on ne peut/veut pas gérer ici les positionnements
-
-		// console.log(data);
 
 		if (data.old_parent == data.parent) {
 			// data.instance.refresh();
@@ -144,8 +169,38 @@ $.fn.spiptree = function(options) {
 			dataType: 'json',
 			cache: false,
 		}).done(function(response) {
-			// console.log('done', response);
-			ajaxReload('contenu');
+
+			if (response) {
+				var nb_success = Object.keys(response.success).length;
+				var nb_errors = Object.keys(response.errors).length;
+				if (nb_success) {
+					$("#contenu #mytree_actions").after(
+						"<p class='success removable' onClick='$(this).remove();'>" +
+							((nb_success == 1)
+								? options.textes.deplacement.reussi
+								: options.textes.deplacement.reussis.replace('@nb@', nb_success)) +
+						"</p>"
+					);
+				}
+				if (nb_errors) {
+					var texte = ((nb_errors == 1)
+						? options.textes.deplacement.echec
+						: options.textes.deplacement.echecs.replace('@nb@', nb_errors));
+					$.each(response.errors, function(i, error) {
+						texte += "<br />[ " + i + "] " + error;
+					});
+					$("#contenu #mytree_actions").after(
+						"<p class='error removable' onClick='$(this).remove();'>" + texte + "</p>"
+					);
+				}
+			}
+
+			if (recharge_plan) {
+				clearTimeout(recharge_plan);
+			}
+			recharge_plan = setTimeout(function () {
+				ajaxReload('plan');
+			}, 500);
 		});
 
 		return true;
