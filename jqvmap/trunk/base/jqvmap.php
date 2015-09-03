@@ -48,6 +48,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
     $tables['spip_maps'] = array(
         'type' => 'map',
         'principale' => 'oui',
+        'page' => false,
         'field' => array(
             'id_map' => 'bigint(21) NOT NULL',
             'titre' => "text NOT NULL DEFAULT ''",
@@ -105,6 +106,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
     $tables['spip_vectors'] = array(
         'type' => 'vector',
         'principale' => 'oui',
+        'page' => false,
         'field' => array(
             'id_vector' => 'bigint(21) NOT NULL',
             'id_map' => 'bigint(21) NOT NULL DEFAULT 0',

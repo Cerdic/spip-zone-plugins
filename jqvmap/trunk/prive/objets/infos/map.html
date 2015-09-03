@@ -9,22 +9,5 @@
     |parametre_url{id_map,#ID_MAP}
     |parametre_url{titre,#CODE_MAP}
     |icone_horizontale{<:map:icone_exporter_map:>,map,export})]
-[(#REM)
-	Bouton voir en ligne
-]
-<BOUCLE_publie(MAPS){id_map}>
-	[(#VAL{redirect}
-		|generer_url_action{type=maps&id=#ID_MAP}
-		|parametre_url{var_mode,calcul}
-		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
-</BOUCLE_publie>
-	[(#AUTORISER{previsualiser,maps,#ID_MAP,'',#ARRAY{statut,#STATUT}})
-		[(#VAL{redirect}
-			|generer_url_action{type=maps&id=#ID_MAP}
-			|parametre_url{var_mode,preview}
-			|icone_horizontale{<:previsualiser:>,preview})]
-	]
-<//B_publie>
-
 </div>
 </BOUCLE_map>
