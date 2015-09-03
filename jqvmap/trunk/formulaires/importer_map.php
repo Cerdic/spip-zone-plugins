@@ -118,7 +118,7 @@ function formulaires_importer_map_traiter_dist()
     // Donnée de retour.
     return array(
             'editable' => true,
-            'message_ok' => implode('"\n', $message_ok),
+            'message_ok' => implode("\n", $message_ok),
             'redirect' => generer_url_ecrire('maps'),
     );
 }
