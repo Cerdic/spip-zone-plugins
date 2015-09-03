@@ -17,7 +17,7 @@ function action_deplacer_objets_dist() {
 
 	include_spip('inc/autoriser');
 	if (!autoriser('ecrire')) {
-		return plan_json_erreur("Authorization failed");
+		return plan_json_erreur(_T("plan:erreur_autorisation_insuffisante") . " " . _T("plan:erreur_deplacement_impossible"));
 	}
 
 	include_spip('base/objets');
@@ -31,13 +31,13 @@ function action_deplacer_objets_dist() {
 	$id_rubrique_new = _request('id_rubrique_destination');
 
 	if (!is_array($ids) or !$objet) {
-		return plan_json_erreur("Aucun identifiant");
+		return plan_json_erreur(_T("plan:erreur_aucun_identifiant") . " " . _T("plan:erreur_deplacement_impossible"));
 	}
 	if ($id_rubrique_old == $id_rubrique_new) {
-		return plan_json_erreur("Rubriques parentes incorrectes");
+		return plan_json_erreur(_T("plan:erreur_rubriques_parentes_incorrectes") . " "  . _T("plan:erreur_deplacement_impossible"));
 	}
 	if ($objet != 'rubrique' and !$id_rubrique_new) {
-		return plan_json_erreur("Rubriques parentes incorrectes");
+		return plan_json_erreur(_T("plan:erreur_rubriques_parentes_incorrectes") . " " . _T("plan:erreur_deplacement_impossible"));
 	}
 
 	$ids = array_filter($ids);
@@ -54,20 +54,38 @@ function action_deplacer_objets_dist() {
 
 	include_spip('action/editer_objet');
 
-	$erreurs = array();
+	$errors = $success = array();
 	$modifs = array('id_parent' => $id_rubrique_new);
 
 	foreach ($ids as $id) {
 		if (autoriser('modifier', $objet, $id)) {
 			if ($err = objet_modifier($objet, $id, $modifs)) {
-				$erreurs[] = $err;
+				$errors["$objet-$id"] = $err;
+			} else {
+				$success["$objet-$id"] = true;
+			}
+		} else {
+			$errors["$objet-$id"] = _T("plan:erreur_autorisation_insuffisante") . " " . _T("plan:erreur_deplacement_impossible");
+		}
+	}
+
+	// dans certains cas… on ne reçoit pas d'erreur… et pourtant !
+	if (!$errors) {
+		// on verifie qu'il n'y a plus d'objets à l'ancien emplacement
+		$ids = sql_allfetsel($_id_table, $table, array(sql_in($_id_table, $ids), $champ . '=' . sql_quote($id_rubrique_old)));
+		$ids = array_map('array_shift', $ids);
+		if ($ids) {
+			foreach ($ids as $id) {
+				$errors["$objet-$id"] = _T("plan:erreur_deplacement");
+				unset($success["$objet-$id"]);
 			}
 		}
 	}
 
 	return plan_json_envoi(array(
-		'success' => true,
-		'messages' => $erreurs
+		'done' => true,
+		'success' => $success,
+		'errors'  => $errors,
 	));
 }
 
@@ -77,5 +95,9 @@ function plan_json_envoi($data) {
 }
 
 function plan_json_erreur($msg) {
-	return plan_json_envoi(array('erreur' => $msg));
+	return plan_json_envoi(array(
+		'done' => false,
+		'success' => array(),
+		'errors'  => array($msg)
+	));
 }

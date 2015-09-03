@@ -50,7 +50,7 @@ $.fn.spiptree = function(options) {
 					// une confirmation, même si on déplace 5 items d'un coup
 					if (more && more.core) {
 						if (options.confirm.move === null) {
-							options.confirm.move = confirm( options.textes.confirmation.deplacement );
+							options.confirm.move = confirm( options.textes.deplacement.confirmation );
 						}
 						return options.confirm.move;
 					} else {
@@ -115,13 +115,11 @@ $.fn.spiptree = function(options) {
 		});
 	});
 
-	var recharge_contenu = false;
+	var recharge_plan = false;
 	// lorsqu'on déplace un nœud
 	$mytree.on("move_node.jstree", function(event, data) {
 		// si les parents sont identiques : pas de changement,
 		// on ne peut/veut pas gérer ici les positionnements
-
-		// console.log(data);
 
 		if (data.old_parent == data.parent) {
 			// data.instance.refresh();
@@ -171,11 +169,36 @@ $.fn.spiptree = function(options) {
 			dataType: 'json',
 			cache: false,
 		}).done(function(response) {
-			// console.log('done', response);
-			if (recharge_contenu) {
-				clearTimeout(recharge_contenu);
+
+			if (response) {
+				var nb_success = Object.keys(response.success).length;
+				var nb_errors = Object.keys(response.errors).length;
+				if (nb_success) {
+					$("#contenu #mytree_actions").after(
+						"<p class='success removable' onClick='$(this).remove();'>" +
+							((nb_success == 1)
+								? options.textes.deplacement.reussi
+								: options.textes.deplacement.reussis.replace('@nb@', nb_success)) +
+						"</p>"
+					);
+				}
+				if (nb_errors) {
+					var texte = ((nb_errors == 1)
+						? options.textes.deplacement.echec
+						: options.textes.deplacement.echecs.replace('@nb@', nb_errors));
+					$.each(response.errors, function(i, error) {
+						texte += "<br />[ " + i + "] " + error;
+					});
+					$("#contenu #mytree_actions").after(
+						"<p class='error removable' onClick='$(this).remove();'>" + texte + "</p>"
+					);
+				}
 			}
-			recharge_contenu = setTimeout(function () {
+
+			if (recharge_plan) {
+				clearTimeout(recharge_plan);
+			}
+			recharge_plan = setTimeout(function () {
 				ajaxReload('plan');
 			}, 500);
 		});
