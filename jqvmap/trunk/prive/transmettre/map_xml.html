@@ -1,4 +1,5 @@
-#HTTP_HEADER{Content-Type: application/xml; charset=#CHARSET}#HTTP_HEADER{Content-Disposition: attachment; filename=#ENV{titre}.xml}<BOUCLE_maps (MAPS) {id_map=#ENV{id_map}} {statut==.*}><map>
+#HTTP_HEADER{Content-Type: application/xml; charset=#CHARSET}#HTTP_HEADER{Content-Disposition: attachment; filename=#ENV{titre}.xml}<?xml version="1.0" encoding="#CHARSET"?>
+<BOUCLE_maps (MAPS) {id_map=#ENV{id_map}} {statut==.*}><map>
   <titre>#TITRE</titre>
   <descriptif>#DESCRIPTIF</descriptif>
   <width>#WIDTH</width>

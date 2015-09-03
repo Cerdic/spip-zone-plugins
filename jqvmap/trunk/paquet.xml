@@ -1,7 +1,7 @@
 <paquet
 	prefix="jqvmap"
 	categorie="multimedia"
-	version="0.2.0"
+	version="0.3.0"
 	etat="experimental"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/jqvmap-64.png"
@@ -28,6 +28,7 @@
 
 	<pipeline nom="insert_head" inclure="jqvmap_pipelines.php" />
 	<pipeline nom="header_prive" inclure="jqvmap_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="jqvmap_pipelines.php" />
 
 	<menu nom="maps" titre="map:titre_maps" parent="menu_edition" icone="images/map-16.png" action="maps" />
 	<menu nom="map_creer" titre="map:icone_creer_map" parent="outils_rapides" icone="images/map-new-16.png" action="map_edit" parametres="new=oui" />

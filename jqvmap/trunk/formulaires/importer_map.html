@@ -1,0 +1,33 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">
+    (#ENV*{message_erreur})
+</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+</p>]
+
+    <form action="#ENV{action}" method="post" enctype='multipart/form-data'>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <input type="hidden" value="" name="maps_xml">
+        <ul class="editer-groupe">
+
+            [(#SET{maps_xml,#ARRAY})]
+            <BOUCLE_maps_xml (DATA) {source table, (#REM|lister_maps_xml)}>[(#SET{nom,#VALEUR})]
+            [(#SET{maps_xml,#GET{maps_xml}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
+            </BOUCLE_maps_xml>
+            [(#SAISIE{selection, maps_xml,
+                label=<:map:liste_maps_xml_label:>,
+                explication=<:map:liste_maps_xml_explication:>,
+                datas=#GET{maps_xml}})]
+
+            [(#SAISIE{input, upload_xml,
+                label=<:map:import_maps_xml_label:>,
+                type=file})]
+        </ul>
+
+        <p class="boutons">
+            <input type="submit" class="submit" value="<:pass_ok:>" />
+        </p>
+    </form>
+</div>

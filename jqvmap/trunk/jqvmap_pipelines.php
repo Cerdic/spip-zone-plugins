@@ -25,5 +25,9 @@ function jqvmap_header_prive($flux)
 
 function jqvmap_affiche_droite($flux)
 {
+    if ($flux['args']['exec'] == 'maps') {
+        $flux['data'] .= recuperer_fond('prive/squelettes/inclure/importer_map');
+    }
+
     return $flux;
 }

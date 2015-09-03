@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'erreur_code_map_deja' => 'Ce code unique est déjà utilisé par une carte.',
     'erreur_code_map_forme' => 'Le code unique ne doit contenir que des lettres non accentuées, des chiffres ou le caractère souligné.',
     'erreur_data_name_forme' => 'Le nom de la data ne doit contenir que des lettres non accentuées, des chiffres ou le caractère souligné.',
+    'erreur_upload_xml_type' => 'Veuillez charger un fichier XML avec son extension <em>.xml</em>.',
 
     // I
     'icone_creer_map' => 'Créer une carte',
@@ -55,6 +56,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_aucun_map' => 'Aucune carte',
     'info_maps_auteur' => 'Les cartes de cet auteur',
     'info_nb_maps' => '@nb@ cartes',
+
+    // L
+    'liste_maps_xml_explication' => 'Ces fichiers sont à disposition dans le(s) répertoire(s) "jqvmap_xml"',
+    'liste_maps_xml_label' => 'À partir des templates',
+    'import_maps_xml_explication' => 'Ces fichiers sont à disposition dans le(s) répertoire(s) "jqvmap_xml"',
+    'import_maps_xml_label' => 'Charger un fichier',
 
     // N
     'normalize_function_linear' => 'linear',
@@ -69,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_changer_statut_map' => 'Cette carte est :',
     'texte_creer_associer_map' => 'Créer et associer une carte',
     'texte_definir_comme_traduction_map' => 'Cette carte est une traduction de la carte numéro :',
+    'titre_importer_map' => 'Importer une carte',
     'titre_langue_map' => 'Langue de cette carte',
     'titre_logo_map' => 'Logo de cette carte',
     'titre_map' => 'Carte',

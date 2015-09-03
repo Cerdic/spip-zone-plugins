@@ -26,10 +26,10 @@ function jqvmap_upgrade($nom_meta_base_version, $version_cible)
     $maj = array();
 
     $maj['create'] = array(array('maj_tables', array('spip_maps', 'spip_vectors')));
-    include_spip('base/importer_spip_maps');
-    $maj['create'][] = array('importer_spip_maps');
-    include_spip('base/importer_spip_vectors');
-    $maj['create'][] = array('importer_spip_vectors');
+    // include_spip('base/importer_spip_maps');
+    // $maj['create'][] = array('importer_spip_maps');
+    // include_spip('base/importer_spip_vectors');
+    // $maj['create'][] = array('importer_spip_vectors');
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
