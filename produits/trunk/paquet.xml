@@ -1,7 +1,7 @@
 <paquet
 	prefix="produits"
 	categorie="outil"
-	version="1.1.2"
+	version="1.1.3"
 	etat="test"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="prive/themes/spip/images/produits-64.png"
@@ -21,7 +21,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/produits.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/produits.php" /> 
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/produits.php" /> 
 	<pipeline nom="affiche_milieu" inclure="produits_pipelines.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="produits_pipelines.php" /> 
 	
