@@ -51,6 +51,10 @@ $.fn.spiptree = function(options) {
 					if (more && more.core) {
 						if (options.confirm.move === null) {
 							options.confirm.move = confirm( options.textes.deplacement.confirmation );
+							// enlever les messages de réussite ou d'erreur pour en avoir des tout neufs
+							if (options.confirm.move) {
+								$('#contenu p.success, #contenu div.error').remove();
+							}
 						}
 						return options.confirm.move;
 					} else {
@@ -172,26 +176,31 @@ $.fn.spiptree = function(options) {
 
 			if (response) {
 				var nb_success = Object.keys(response.success).length;
-				var nb_errors = Object.keys(response.errors).length;
+				var nb_errors  = Object.keys(response.errors).length;
 				if (nb_success) {
-					$("#contenu #mytree_actions").after(
-						"<p class='success removable' onClick='$(this).remove();'>" +
-							((nb_success == 1)
-								? options.textes.deplacement.reussi
-								: options.textes.deplacement.reussis.replace('@nb@', nb_success)) +
-						"</p>"
-					);
+					var $box = $("#contenu p.success");
+					if (!$box.length) {
+						$("#contenu #mytree_actions").after("<p class='success removable' onClick='$(this).remove();'><p /></p>");
+						$box = $("#contenu p.success").data('nb', 0);
+					}
+					nb = nb_success + $box.data('nb');
+					$box.data('nb', nb).text(nb == 1
+						? options.textes.deplacement.reussi
+						: options.textes.deplacement.reussis.replace('@nb@', nb));
 				}
 				if (nb_errors) {
-					var texte = ((nb_errors == 1)
+					var $box = $("#contenu div.error");
+					if (!$box.length) {
+						$("#contenu #mytree_actions").after("<div class='error removable' onClick='$(this).remove();'><p /><ul class='spip' /></div>");
+						$box = $("#contenu div.error").data('nb', 0);
+					}
+					nb = nb_errors + $box.data('nb');
+					$box.data('nb', nb).find('p').text(nb == 1
 						? options.textes.deplacement.echec
-						: options.textes.deplacement.echecs.replace('@nb@', nb_errors));
+						: options.textes.deplacement.echecs.replace('@nb@', nb));
 					$.each(response.errors, function(i, error) {
-						texte += "<br />[ " + i + "] " + error;
+						$box.find('ul').append("<li>[ " + i + "] " + error+ "</li>");
 					});
-					$("#contenu #mytree_actions").after(
-						"<p class='error removable' onClick='$(this).remove();'>" + texte + "</p>"
-					);
 				}
 			}
 
