@@ -16,7 +16,7 @@
 				<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}" />
 			</li>
 		<BOUCLE_multiracine(RUBRIQUES){racine}{tous}>
-			<li>
+			<li class="fieldset">
 				<fieldset><legend>#TITRE</legend>
 				<ul>
 					<li class="editer editer_url">
@@ -32,7 +32,7 @@
 					<B_multidomaines>
 					<ul>
 						<BOUCLE_multidomaines(RUBRIQUES) {si #EVAL{_MULTIDOMAINE_RUBRIQUE}|=={1}} {id_parent}{tous}>
-							<li>
+							<li  class="fieldset">
 								<fieldset><legend>#TITRE</legend>
 								<ul>
 									<li class="editer editer_url">
