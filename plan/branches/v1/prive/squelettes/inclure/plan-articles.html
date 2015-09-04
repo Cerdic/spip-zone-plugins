@@ -30,7 +30,7 @@
 					<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">
-						[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
+						[(#STATUT|puce_statut{article}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
 					</a>
 				</li>
 			</BOUCLE_items>
