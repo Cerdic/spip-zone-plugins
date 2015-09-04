@@ -25,7 +25,7 @@
 				<li id="site-#ID_SYNDIC" class="item" data-jstree='{"type":"site"}'>
 					<a href="[(#ID_SYNDIC|generer_url_entite{site})]"
 						title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">
-						[(#STATUT|puce_statut{site,#ID_SYNDIC,#ID_RUBRIQUE}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]
+						[(#STATUT|puce_statut{site}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]
 					</a>
 				</li>
 			</BOUCLE_items>

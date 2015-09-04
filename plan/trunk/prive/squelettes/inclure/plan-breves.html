@@ -27,7 +27,7 @@
 				<li id="breve-#ID_BREVE" class="item" data-jstree='{"type":"breve"}'>
 					<a href="[(#ID_BREVE|generer_url_entite{breve})]"
 						title="[(#VAL{breve}|objet_info{texte_objet}|_T) #ID_BREVE]">
-						[(#STATUT|puce_statut{breve,#ID_BREVE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
+						[(#STATUT|puce_statut{breve}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
 					</a>
 				</li>
 			</BOUCLE_items>
