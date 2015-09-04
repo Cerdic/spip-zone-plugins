@@ -6,12 +6,12 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="editer_url">
+		<ul class="editer-groupe">
+			<li class="editer editer_url">
 				<label for="editer_url"><:multidomaines:label_editer_url:></label>
 				<input type="text" name="editer_url" class="text" id="editer_url" value="#ENV{editer_url}" />
 			</li>
-			<li class="squelette">
+			<li class="editer squelette">
 				<label for="squelette"><:multidomaines:label_squelette:></label>
 				<input type="text" name="squelette" class="text" id="squelette" value="#ENV{squelette}" />
 			</li>
@@ -19,11 +19,11 @@
 			<li>
 				<fieldset><legend>#TITRE</legend>
 				<ul>
-					<li class="editer_url">
+					<li class="editer editer_url">
 						<label for="editer_url"><:multidomaines:label_editer_url_secteur:></label>
 						<input type="text" name="editer_url_#ID_RUBRIQUE" class="text" id="editer_url_#ID_RUBRIQUE" value="#ENV{editer_url_#ID_RUBRIQUE}" />
 					</li>
-					<li class="squelette">
+					<li class="editer squelette">
 						<label for="squelette"><:multidomaines:label_squelette_secteur:></label>
 						<input type="text" name="squelette_#ID_RUBRIQUE" class="text" id="squelette_#ID_RUBRIQUE" value="#ENV{squelette_#ID_RUBRIQUE}" />
 					</li>
@@ -35,11 +35,11 @@
 							<li>
 								<fieldset><legend>#TITRE</legend>
 								<ul>
-									<li class="editer_url">
+									<li class="editer editer_url">
 										<label for="editer_url"><:multidomaines:label_editer_url_rubrique:></label>
 										<input type="text" name="editer_url_#ID_RUBRIQUE" class="text" id="editer_url_#ID_RUBRIQUE" value="#ENV{editer_url_#ID_RUBRIQUE}" />
 									</li>
-									<li class="squelette">
+									<li class="editer squelette">
 										<label for="squelette"><:multidomaines:label_squelette_rubrique:></label>
 										<input type="text" name="squelette_#ID_RUBRIQUE" class="text" id="squelette_#ID_RUBRIQUE" value="#ENV{squelette_#ID_RUBRIQUE}" />
 									</li>
