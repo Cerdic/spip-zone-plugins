@@ -15,7 +15,7 @@ function menu_anime_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
 		$done = true;
-		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/menu_anime.css').'" type="text/css" media="projection, screen, tv" />';
+		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/menu_anime.css').'" type="text/css" media="projection, screen, tv, print" />';
 	}
 	return $flux;
 }
