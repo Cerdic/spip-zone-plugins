@@ -1,0 +1,20 @@
+[(#REM)
+    liste les liens vers les réseaux sociaux
+    
+    on associe les classes de socicon si l'option est activée
+    http://www.socicon.com/how.php
+
+]
+<!-- sociaux -->
+<div class="sociaux">
+  <ul class="sociaux-list">
+      [(#CONFIG{sociaux/facebook}|oui)<li><a href="#CONFIG{sociaux/facebook}" class="facebook">[(#CONFIG{sociaux/css}|oui)<span class="socicon">b</span> ]<span class="name">Facebook</span></a></li>]
+      [(#CONFIG{sociaux/twitter}|oui)<li><a href="#CONFIG{sociaux/twitter}" class="twitter">[(#CONFIG{sociaux/css}|oui)<span class="socicon">a</span> ]<span class="name">Twitter</span></a></li>]
+      [(#CONFIG{sociaux/instagram}|oui)<li><a href="#CONFIG{sociaux/instagram}" class="instagram">[(#CONFIG{sociaux/css}|oui)<span class="socicon">x</span> ]<span class="name">Instagram</span></a></li>]
+      [(#CONFIG{sociaux/google-plus}|oui)<li><a href="#CONFIG{sociaux/google-plus}" class="google-plus">[(#CONFIG{sociaux/css}|oui)<span class="socicon">c</span> ]<span class="name">Google plus</span></a></li>]
+      [(#CONFIG{sociaux/pinterest}|oui)<li><a href="#CONFIG{sociaux/pinterest}" class="pinterest">[(#CONFIG{sociaux/css}|oui)<span class="socicon">d</span>]<span class="name">Pinterest</span></a></li>]
+      [(#CONFIG{sociaux/linkedin}|oui)<li><a href="#CONFIG{sociaux/linkedin}" class="linkedin">[(#CONFIG{sociaux/css}|oui)<span class="socicon">j</span> ]<span class="name">Linkedin</span></a></li>]
+      [(#CONFIG{sociaux/youtube}|oui)<li><a href="#CONFIG{sociaux/youtube}" class="youtube">[(#CONFIG{sociaux/css}|oui)<span class="socicon">r</span> ]<span class="name">Youtube</span></a></li>]           
+  </ul>
+</div>
+<!-- #sociaux -->

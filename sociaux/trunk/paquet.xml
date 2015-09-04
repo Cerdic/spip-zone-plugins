@@ -1,0 +1,17 @@
+<paquet 
+	prefix="sociaux" 
+	categorie="edition" 
+	version="1.0.0" 
+	etat="dev"    
+	compatibilite="[3.0.20;3.0.*]"  
+	logo="prive/themes/spip/images/sociaux-64.png"
+	documentation="http://contrib.spip.net/4720"
+
+>
+  <nom>sociaux</nom>
+  <auteur lien='http://www.erational.org'>erational</auteur>
+  <licence>GNU/GPL</licence>
+  
+  <pipeline nom="insert_head_css" inclure="sociaux_pipelines.php" />
+
+</paquet>
