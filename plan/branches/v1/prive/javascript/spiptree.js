@@ -180,7 +180,7 @@ $.fn.spiptree = function(options) {
 				if (nb_success) {
 					var $box = $("#contenu p.success");
 					if (!$box.length) {
-						$("#contenu #mytree_actions").after("<p class='success removable' onClick='$(this).remove();'><p /></p>");
+						$("#contenu #mytree_actions").after("<p class='success removable' onClick='$(this).remove();'></p>");
 						$box = $("#contenu p.success").data('nb', 0);
 					}
 					nb = nb_success + $box.data('nb');
