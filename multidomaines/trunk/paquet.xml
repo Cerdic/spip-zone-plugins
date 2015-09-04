@@ -1,9 +1,9 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="2.3.2"
+	version="2.3.3"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"
 	documentation="http://contrib.spip.net/?article4182"
 	schema="0.0.2" 
