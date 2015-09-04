@@ -1,7 +1,7 @@
 <paquet
 	prefix="medoc"
 	categorie="edition"
-	version="2.2.2"
+	version="2.2.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="medoc.png"
@@ -13,6 +13,6 @@
 	<auteur lien="http://spip.tetue.net">tetue</auteur>
 	<licence>GPL</licence>
 		
-	<necessite nom="medias" compatibilite="[2.7.58;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
 
 </paquet>
