@@ -260,7 +260,7 @@ $(document).on("ajaxComplete", calculer_top_image_responsive);
 
 
 
-$(window).on("scroll touchmove", charger_image_responsive);
+$(window).on("scroll", charger_image_responsive);
 	
 var didScroll_image_responsive = false
 
