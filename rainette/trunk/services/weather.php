@@ -151,10 +151,18 @@ function weather_flux2conditions($flux, $lieu) {
 		$conditions = reset($conditions['cc']);
 		// recuperer la date de derniere mise a jour des conditions
 		if ($conditions) {
-			// Date d'observation
-			$date_maj = $conditions['lsup'][0];
-			$date_maj = strtotime(preg_replace(',\slocal\s*time\s*,ims','',$date_maj));
-			$tableau['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
+			// Date d'observation : elle est exprimée dans le fuseau horaire du lieu sous la forme 'date time AM/PM fuseau'
+			$date_service = $conditions['lsup'][0];
+			// Certaines abréviations de fuseau ne sont pas reconnues par date_create suivant la configuration du serveur
+			// http. On supprime cette information avant le date_create qui produite un timezone erronné mais qui ne genera
+			// pas le format ensuite.
+			if (!$date_maj = date_create($date_service)) {
+				$elements_date = explode(' ', $date_service);
+				array_pop($elements_date);
+				$date_service = implode(' ', $elements_date);
+				$date_maj = date_create($date_service);
+			}
+			$tableau['derniere_maj'] = date_format($date_maj,'Y-m-d H:i:s');
 			// station d'observation (peut etre differente de la ville)
 			$tableau['station'] = $conditions['obst'][0];
 
