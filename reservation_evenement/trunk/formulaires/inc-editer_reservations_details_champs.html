@@ -15,6 +15,11 @@ objet=article,
 label=<:reservations_detail:label_prix_objet:>})]
 ]
 
+[(#ENV{id_prix_objet}|oui)
+  #SET{devise,#ENV{devise,#INFO_CODE_DEVISE{prix_objet,#ENV{id_prix_objet}}}}
+  [(#SAISIE{hidden,devise,valeur=#GET{devise}})]
+]
+
 [(#SAISIE{input, prix_ht,
 label=<:reservations_detail:label_prix_ht:>})]
 
@@ -25,7 +30,7 @@ label=<:reservations_detail:label_prix_ht:>})]
     var id_reservation = $("select#champ_id_reservation").val();
     var id_article = '#ENV{id_article}';
     var id_evenement = '#ENV{id_evenement}';
-    var id_prix_objet = '';
+    var id_prix_objet = '#ENV{id_prix_objet}';
     var prix_ht = '#ENV{prix_ht}';
     var evenement_anterieurs = '#ENV{evenement_anterieurs}';
 

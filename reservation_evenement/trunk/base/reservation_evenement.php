@@ -140,6 +140,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       "quantite" => "int(11) NOT NULL DEFAULT '1'",
       "prix_ht" => "float NOT NULL DEFAULT '0'",
       "prix" => "float NOT NULL DEFAULT '0'",
+      "devise" => "varchar(3)  DEFAULT '' NOT NULL",
       "taxe" => "decimal(4,3) NOT NULL DEFAULT '0.000'",
       "statut" => "varchar(20)  DEFAULT '0' NOT NULL",
       "maj" => "TIMESTAMP"
@@ -157,7 +158,9 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       'quantite',
       'prix_ht',
       'prix',
-      'taxe'
+      'taxe',
+      'devise',
+      'id_prix_objet'
     ),
     'champs_versionnes' => array(),
     'rechercher_champs' => array(),
@@ -193,20 +196,6 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       )),
     'texte_changer_statut' => 'reservations_detail:texte_changer_statut_reservations_detail',
   );
-  //adaptation de la déclaration si le plugin prix_objets est installé
-  if (test_plugin_actif('prix_objets')) {
-    $tables['spip_reservations_details']['field'] = array_merge($tables['spip_reservations_details']['field'], array('id_prix_objet' => "bigint(21) NOT NULL DEFAULT '0'"));
-    $tables['spip_reservations_details']['champs_editables'] = array(
-      'id_reservation',
-      'id_evenement',
-      'descriptif',
-      'quantite',
-      'prix_ht',
-      'prix',
-      'taxe',
-      'id_prix_objet'
-    );
-  }
 
   //Ajouter le champ action_cloture dans le tables articles et evenements
 
