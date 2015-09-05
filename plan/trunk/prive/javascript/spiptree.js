@@ -74,10 +74,13 @@ $.fn.spiptree = function(options) {
 				// et pour ce qu'on ne connait pas (classe css 'jstree-closed' sur un LI, et pas de UL à l'intérieur)
 				// on fait un appel ajax pour obtenir la liste correspondant à l'objet souhaité, lorsque c'est demandé.
 				else {
-					var id_rubrique = node.parent.split('-')[1];
+					var objet = node.data.jstree.objet;
+					var id_rubrique = (objet == 'rubrique')
+						? node.id.split('-')[1]
+						: node.parent.split('-')[1];
 					var params = {
 						"id_rubrique": id_rubrique,
-						"objet": node.data.jstree.objet
+						"objet": objet
 					};
 					if (options.statut) {
 						params.statut = options.statut;
@@ -88,7 +91,11 @@ $.fn.spiptree = function(options) {
 						dataType: 'html',
 						cache: false,
 					}).done(function(data) {
-						cb(data);
+						if (data !== undefined) {
+							cb(data);
+						} else {
+							cb("");
+						}
 					});
 				}
 			}
