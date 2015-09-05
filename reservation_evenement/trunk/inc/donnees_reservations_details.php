@@ -75,10 +75,8 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
           $set['prix_ht'] = $prix_ht;
           $set['taxe'] = $taxe;
           $set['id_prix_objet'] = $p['id_prix_objet'];
-          spip_log($set['devise'],'teste');
          // Si pas de devise fournit par le contexte, on prend celle de prix_objets
          if(!isset($set['devise'])) $set['devise'] = $p['code_devise'];
-          spip_log($set['devise'],'teste');
         }
       }
 

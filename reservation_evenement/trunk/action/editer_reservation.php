@@ -40,6 +40,10 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
   include_spip('inc/modifier');
   include_spip('inc/config');
   $config = lire_config('reservation_evenement');
+  
+  $statut_calculer_auto = isset($config['statut_calculer_auto']) ? $config['statut_calculer_auto'] : '';
+  
+  if ($statut_calculer_auto == 'on') set_request('statuts_details_reservation',array());
 
   $row = sql_fetsel('statut,date,id_auteur,email,lang', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
   $statut_ancien = $statut = $row['statut'];
@@ -50,7 +54,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
   $champs = array();
   // cf autorisations dans inc/instituer_objet
- if ($s != $statut OR ($d AND $d != $date)) {
+  if ($s != $statut OR ($d AND $d != $date)) {
     if (autoriser('modifier', 'reservation', $id_reservation))
       $statut = $champs['statut'] = $s;
     else
@@ -58,8 +62,78 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
     // En cas de paiement, fixer la date_paiement a "maintenant"
 
-      if ($statut == 'accepte' AND $statut_ancien == 'attente_paiement') 
-          $champs['date_paiement'] = date('Y-m-d H:i:s');
+    if ($statut == 'accepte' AND $statut_ancien == 'attente_paiement')
+      $champs['date_paiement'] = date('Y-m-d H:i:s');
+  }
+  
+  // Gérer les détails des réservations
+  $set = array(
+    'id_reservation' => $id_reservation,
+    'statut' => $statut,
+    'statut_calculer_auto' => $statut_calculer_auto
+  );
+  
+  $evenements = _request('id_evenement');
+
+  // Si les déclinaisons sont actives on récupère les évenements via le prix
+  if (test_plugin_actif('declinaisons')) {
+    $evenements = array();
+    if ($id_prix_objet = _request('id_objet_prix')) {
+      foreach (array_keys($id_prix_objet ) AS $id_evenement) {
+        $evenements[] = $id_evenement;
+      }
+    }
+  }
+  // Si on n'est pas dans le cas d'une création, on récupère les détails attachées à la réservation
+  if (!is_array($evenements) OR (is_array($evenements) AND count($evenements) == 0)) {
+    include_spip('action/editer_reservations_detail');
+    $c = array('statut' => $statut,'statut_calculer_auto' => $statut_calculer_auto);
+    $sql = sql_select('id_reservations_detail', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
+    // Eviter l'envoi d'une notification pour chaque détail
+    set_request('envoi_separe_actif', 'non');
+    while ($data = sql_fetch($sql)) {
+      reservations_detail_instituer($data['id_reservations_detail'], $c);
+    }
+  }
+  else {
+    $action = charger_fonction('editer_objet', 'action');
+    $set['evenements'] = $evenements;
+    set_request('evenements', $evenements);
+  }
+  //Si on est dans le cas d'une création
+  if (is_array($evenements)) {
+    // Pour chaque évènement on crée un détail de la réservation
+    foreach ($evenements AS $id_evenement) {
+      // Si aucun détail n'est attaché à l'évènement, on le crée
+      if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details', 'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
+        $id_reservations_detail = 'new';
+        $set['id_prix_objet'] = $id_prix_objet[$id_evenement];
+      }
+      else {
+        $id_reservations_detail = $reservations_detail['id_reservations_detail'];
+        $set['quantite'] = $reservations_detail['quantite'];
+      }
+
+      // Pour l'enregistrement
+      $set['id_evenement'] = $id_evenement;
+
+      // Eviter l'envoi d'une notification pour chaque détail
+      set_request('envoi_separe_actif', 'non');
+      $detail = $action($id_reservations_detail, 'reservations_detail', $set);
+    }
+  }
+  
+  //Etablir si tous les détails d'événement ont le statut de la réservation
+  if ($statut_calculer_auto  == 'on' AND $champs['statut'] == 'accepte') {
+
+    $statuts_details_reservation = _request('statuts_details_reservation');
+    $statut_modifie=array();
+    
+    foreach ($statuts_details_reservation AS $id_detail_reservation => $data) {
+       $statut_modifie[] = $data['statut_modifie'];
+    }
+    //Sinon lui attibuer lms statut accepté partiellement.
+    if (array_sum( $statut_modifie) > 0) $champs['statut'] = 'accepte_part';
   }
 
   //les champs extras auteur
@@ -115,63 +189,6 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
   ));
 
   // Les traitements spécifiques
-
-  $set = array(
-    'id_reservation' => $id_reservation,
-    'statut' => $statut
-  );
-
-  // Gérer les détails des réservations
-  $evenements = _request('id_evenement');
-
-  // Si les déclinaisons sont actives on récupère les évenements via le prix
-  if (test_plugin_actif('declinaisons')) {
-    $evenements = array();
-    if ($id_prix_objet = _request('id_objet_prix')) {
-      foreach (array_keys($id_prix_objet ) AS $id_evenement) {
-        $evenements[] = $id_evenement;
-      }
-    }
-  }
-  // Si on n'est pas dans le cas d'une création, on récupère les détails attachées à la réservation
-  if (!is_array($evenements) OR (is_array($evenements) AND count($evenements) == 0)) {
-    include_spip('action/editer_reservations_detail');
-    $c = array('statut' => $statut);
-    $sql = sql_select('id_reservations_detail', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
-    // Eviter l'envoi d'une notification pour chaque détail
-    set_request('envoi_separe_actif', 'non');
-    while ($data = sql_fetch($sql)) {
-      reservations_detail_instituer($data['id_reservations_detail'], $c);
-    }
-  }
- else {
-    $action = charger_fonction('editer_objet', 'action');
-   $set['evenements'] = $evenements;
-    set_request('evenements', $evenements);
-  } 
-  //Si on est dans le cas d'une création
-  if (is_array($evenements)) {
-    // Pour chaque évènement on crée un détail de la réservation
-    foreach ($evenements AS $id_evenement) {
-      // Si aucun détail n'est attaché à l'évènement, on le crée
-      if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details', 'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
-        $id_reservations_detail = 'new';
-        $set['id_prix_objet'] = $id_prix_objet[$id_evenement];
-      }
-      else {
-        $id_reservations_detail = $reservations_detail['id_reservations_detail'];
-        $set['quantite'] = $reservations_detail['quantite'];
-      }
-
-      // Pour l'enregistrement
-      $set['id_evenement'] = $id_evenement;
-
-      // Eviter l'envoi d'une notification pour chaque détail
-      set_request('envoi_separe_actif', 'non');
-      $detail = $action($id_reservations_detail, 'reservations_detail', $set);
-    }
-  }
-
   // Notifications
   if ((!$statut_ancien OR $statut != $statut_ancien) && (isset($config['activer'])) && (isset($config['quand']) && is_array($config['quand']) && in_array($statut, $config['quand'])) && ($notifications = charger_fonction('notifications', 'inc', true))) {
     //Déterminer la langue pour les notifications

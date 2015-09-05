@@ -52,6 +52,15 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
           )
         ),
         array(
+          'saisie' => 'oui_non',
+          'options' => array(
+            'nom' => 'statut_calculer_auto',
+            'label' => _T('reservation:label_statut_calculer_auto'),
+            'explication' => _T('reservation:label_statut_calculer_auto_explication'),
+            'defaut' => $config['statut_calculer_auto']
+          )
+        ),
+        array(
           'saisie' => 'selection_multiple',
           'options' => array(
             'nom' => 'statuts_complet',
