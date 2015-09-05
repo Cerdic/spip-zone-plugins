@@ -97,6 +97,12 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
       'TABLE spip_reservations ADD INDEX `id_reservation_source` (`id_reservation_source`)'
     )
   );
+  $maj['1.6.0'] = array(
+    array(
+      'maj_tables',
+      array('spip_reservations_details')
+    ),
+  );
 
   include_spip('base/upgrade');
   maj_plugin($nom_meta_base_version, $version_cible, $maj);

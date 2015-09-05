@@ -40,7 +40,7 @@ function reservations_detail_modifier($id_reservations_detail, $set=null) {
   //On retient le prix original pour le cas ou celui est modifié par la suite
 
   $details=$donnees_reservations_details($id_reservations_detail,$c);
-  $details['prix original']=isset($details['prix_ht'])?$details['prix_ht']:'';
+  $details['prix original'] = isset($details['prix_ht']) ? $details['prix_ht'] : '';
   
   //Pipeline permettant aux plugins de modifier les détails de la réservation
   $c = pipeline('reservation_evenement_donnees_details',array(
@@ -149,7 +149,6 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
   $id_evenement=$row['id_evenement'];
 
   $envoi_separe_actif=_request('envoi_separe_actif');  
-  
   if(!$places=$c[places]){
     $places=sql_getfetsel('places','spip_evenements','id_evenement='.$id_evenement);
     }
@@ -167,7 +166,9 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
    * vers un statut compris dans statuts_complet, 
    * on vérifie si l'événement n'est pas complet
    */
-  if ($s != $statut AND in_array($s,$statuts) AND !in_array($statut,$statuts)) {
+   
+  if ($s != $statut_ancien AND in_array($s,$statuts) AND !in_array($statut_ancien,$statuts)) {
+    
     // Si il y a une limitation de places prévu, on sélectionne les détails de réservation qui ont le statut_complet
     if($places AND $places>0){
       $sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');    
@@ -175,10 +176,27 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
       while($data=sql_fetch($sql)){
         $reservations[]=$data['quantite'];
       }
-      if(array_sum($reservations)>=$places)$champs['statut']='attente';               
+      if(array_sum($reservations)>=$places) $champs['statut']='attente';               
     }
   }
-  
+
+  // Si la config le prévoit, établir si il y eu un changement de statut.
+  if ($c['statut_calculer_auto'] == 'on') {
+    if ($c['statut'] != $champs['statut']) $statut_modifie = 1;
+    else $statut_modifie = 0;
+    
+    set_request('statuts_details_reservation',
+      array_merge(
+        _request('statuts_details_reservation'),
+        array(
+          $id_reservations_detail => array(
+            'statut' => $champs['statut'],
+            'statut_modifie' => $statut_modifie
+          )
+        )
+      )
+    );
+  }
 
   // Envoyer aux plugins
   $champs = pipeline('pre_edition',

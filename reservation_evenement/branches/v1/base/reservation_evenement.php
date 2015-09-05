@@ -100,6 +100,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     'statut_textes_instituer' => array(
       'attente' => 'reservation:texte_statut_attente',
       'attente_paiement' => 'reservation:texte_statut_attente_paiement',
+      'accepte_part' => 'reservation:texte_statut_accepte_part',      
       'accepte' => 'reservation:texte_statut_accepte',
       'cloture' => 'reservation:texte_statut_cloture',
       'encours' => 'reservation:texte_statut_encours',
@@ -110,6 +111,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       'attente' => 'puce-reservation-attente-16.png',
       'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
       'accepte' => 'puce-reservation-accepte-16.png',
+      'accepte_part' => 'puce-reservation-accepte_part-16.png',
       'cloture' => 'puce-reservation-cloture-16.png',
       'encours' => 'puce-reservation-encours-16.png',
       'refuse' => 'puce-reservation-refuse-16.png',
@@ -117,8 +119,8 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     ),
     'statut' => array( array(
         'champ' => 'statut',
-        'publie' => 'accepte,cloture',
-        'previsu' => 'accepte,attente,attente_paiement',
+        'publie' => 'accepte,cloture,accepte_part',
+        'previsu' => 'accepte,attente,attente_paiement,accepte_part',
         'post_date' => 'date',
         'exception' => array(
           'statut',
@@ -140,6 +142,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       "quantite" => "int(11) NOT NULL DEFAULT '1'",
       "prix_ht" => "float NOT NULL DEFAULT '0'",
       "prix" => "float NOT NULL DEFAULT '0'",
+      "devise" => "varchar(3)  DEFAULT '' NOT NULL",
       "taxe" => "decimal(4,3) NOT NULL DEFAULT '0.000'",
       "statut" => "varchar(20)  DEFAULT '0' NOT NULL",
       "maj" => "TIMESTAMP"
@@ -157,7 +160,9 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       'quantite',
       'prix_ht',
       'prix',
-      'taxe'
+      'taxe',
+      'devise',
+      'id_prix_objet'
     ),
     'champs_versionnes' => array(),
     'rechercher_champs' => array(),
@@ -168,6 +173,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     'statut_textes_instituer' => array(
       'attente' => 'reservation:texte_statut_attente',
       'attente_paiement' => 'reservation:texte_statut_attente_paiement',
+      'accepte_part' => 'reservation:texte_statut_accepte_part',
       'accepte' => 'reservation:texte_statut_accepte',
       'cloture' => 'reservation:texte_statut_cloture',
       'refuse' => 'reservation:texte_statut_refuse',
@@ -176,15 +182,17 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     'statut_images' => array(
       'attente' => 'puce-reservation-attente-16.png',
       'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
+      'accepte_part' => 'puce-reservation-accepte_part-16.png',     
       'accepte' => 'puce-reservation-accepte-16.png',
+
       'cloture' => 'puce-reservation-cloture-16.png',
       'refuse' => 'puce-reservation-refuse-16.png',
       'poubelle' => 'puce-reservation-poubelle-16.png',
     ),
     'statut' => array( array(
         'champ' => 'statut',
-        'publie' => 'accepte,cloture',
-        'previsu' => 'accepte,attente,attente_paiement',
+        'publie' => 'accepte,cloture,accepte_part',
+        'previsu' => 'accepte,attente,attente_paiement,accepte_part',
         'post_date' => 'date',
         'exception' => array(
           'statut',
@@ -193,20 +201,6 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       )),
     'texte_changer_statut' => 'reservations_detail:texte_changer_statut_reservations_detail',
   );
-  //adaptation de la déclaration si le plugin prix_objets est installé
-  if (test_plugin_actif('prix_objets')) {
-    $tables['spip_reservations_details']['field'] = array_merge($tables['spip_reservations_details']['field'], array('id_prix_objet' => "bigint(21) NOT NULL DEFAULT '0'"));
-    $tables['spip_reservations_details']['champs_editables'] = array(
-      'id_reservation',
-      'id_evenement',
-      'descriptif',
-      'quantite',
-      'prix_ht',
-      'prix',
-      'taxe',
-      'id_prix_objet'
-    );
-  }
 
   //Ajouter le champ action_cloture dans le tables articles et evenements
 

@@ -57,15 +57,15 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
         /*si le plugin déclinaison produit (http://plugins.spip.net/declinaisons.html) est active il peut y avoir plusieurs prix par évenement*/
         if (test_plugin_actif('declinaisons')) {
           $id_prix = isset($set['id_prix_objet']) ? $set['id_prix_objet'] : $reservations_details['id_prix_objet'];
-          $p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
+          $p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison,code_devise', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
 
-          if ($p['id_declinaison'] > 0)
+         if ($p['id_declinaison'] > 0)
             $set['descriptif'] .= ' - ' . supprimer_numero(sql_getfetsel('titre', 'spip_declinaisons', 'id_declinaison=' . $p['id_declinaison']));
         }
 
         //Sinon on cherche d'abord le prix attaché à l'évenement, puis à l'article de l'évenement
-        elseif (!$p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets', 'objet="evenement" AND id_objet=' . $id_evenement))
-          $p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets', 'objet="article" AND id_objet=' . $evenement['id_article']);
+        elseif (!$p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets,code_devise', 'objet="evenement" AND id_objet=' . $id_evenement))
+          $p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets,code_devise', 'objet="article" AND id_objet=' . $evenement['id_article']);
         if (isset($p)) {
 
           $prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
@@ -75,6 +75,8 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
           $set['prix_ht'] = $prix_ht;
           $set['taxe'] = $taxe;
           $set['id_prix_objet'] = $p['id_prix_objet'];
+         // Si pas de devise fournit par le contexte, on prend celle de prix_objets
+         if(!isset($set['devise'])) $set['devise'] = $p['code_devise'];
         }
       }
 
