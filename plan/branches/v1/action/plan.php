@@ -20,19 +20,20 @@ function action_plan_dist() {
 		return false;
 	}
 
+	include_spip('base/objets');
+	include_spip('inc/utils');
+	$objet = table_objet(_request('objet'));
+
 	$env = array(
 		'id_rubrique' => intval(_request('id_rubrique')),
-		'lister' => 'tout',
+		// pour le dépliement d'une rubrique, ne pas lister le contenu récursivement
+		'lister' => ($objet == 'rubriques') ? 'rubrique' : 'tout',
 		'conteneur' => 'non'
 	);
 
 	if ($statut = _request('statut')) {
 		$env['statut'] = $statut;
 	}
-
-	include_spip('base/objets');
-	include_spip('inc/utils');
-	$objet = table_objet(_request('objet'));
 
 	$fond = "prive/squelettes/inclure/plan-$objet";
 	header("Content-Type: text/html; charset=" . $GLOBALS['meta']['charset']);
