@@ -101,7 +101,7 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
     array(
       'maj_tables',
       array('spip_reservations_details')
-    )
+    ),
   );
 
   include_spip('base/upgrade');
