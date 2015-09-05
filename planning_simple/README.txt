@@ -1,10 +1,14 @@
+Ce plugin permet de créer et imprimer un emploi du temps scolaire.
+
 Le plugin planning simple permet d'afficher dans une table en dur les évènements d'un article sur une durée n'excédant pas une semaine.
-Ce plugin a été codé à l'origine pour pouvoir créer et imprimer un emploi du temps scolaire.
 On peut aussi imaginer l'appliquer à une série d'articles, en ajoutant des flèches suivant/précédent ou pour un festival de 4 jours.
-Ce planning ne peut être divisé que par demie/heure et sur 2 lieux en même temps.
+Une plage horaire de ce planning ne peut être divisé que en deux demie/heure et sur 2 lieux en même temps.
+
 Chaque évènement à une class avec son nom sans accents, ainsi les cases français portent la class .francais, à vous de styler la css perso.css en repérant les class.
 
 Pour tester, vous trouverez une base d'evenements en MySQL à entrer via par exemple PHPmyadmin, Attention de changer auparavant l'id_article 13 par le numéro d'article de votre choix.
+
+Rendez-vous ensuite sur la page example.com/?page=planning_simple&id_article=67 <- article auquel est attaché les évènements.
 
 Vous pouvez ensuite ajouter/modifier les évènements de l'article. 
 Vous pouvez également changer le titre et le lieu avec le crayon.
