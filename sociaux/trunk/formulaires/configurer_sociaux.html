@@ -8,7 +8,6 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-    
 
     <!-- activer l'habillage CSS -->
     <div>
@@ -17,23 +16,18 @@
       		<label for='css'><:sociaux:cfg_label_css:></label>
       	</div>
     </div>
-    
-    
-    
+  
     <!-- les reseaux --> 
     <div style="margin-top:1em;margin-top:1px solid #eee;padding-top:1em;"><:sociaux:cfg_explication:></div>    
     #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,pinterest,linkedin,youtube}}
     
-    <BOUCLE_session(DATA){source tableau,#GET{rezo}}>
+    <BOUCLE_rezo(DATA){source tableau,#GET{rezo}}>
     <!-- #VALEUR -->
     <div style="margin-top:1em;">
     	      <label for="nom">[(#VALEUR|ucfirst)]</label> 						
 						<input type="text" name="#VALEUR" id="#VALEUR" value="[(#ENV{#VALEUR})]"  class="text" />
     </div>
-    </BOUCLE_session>
-
-    
-
+    </BOUCLE_rezo>
 
 		<input type="hidden" name="_meta_casier" value="sociaux" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
