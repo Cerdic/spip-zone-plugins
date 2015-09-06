@@ -196,7 +196,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
     lang_select($lang);
     // Determiner l'expediteur
     $options = array(
-      'statut' => $statut,
+      'statut' => $champs['statut'],
       'lang' => $lang
     );
     if ($config['expediteur'] != "facteur")

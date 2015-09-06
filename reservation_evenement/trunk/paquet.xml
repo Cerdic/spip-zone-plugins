@@ -1,12 +1,12 @@
 <paquet
-prefix="reservation_evenement"
-categorie="date"
-version="1.21.0"
-etat="test"
-compatibilite="[3.0.16;3.1.*]"
-logo="prive/themes/spip/images/reservation_evenement-64.png"
-documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
-schema="1.6.0"
+  prefix="reservation_evenement"
+  categorie="date"
+  version="1.21.1"
+  etat="test"
+  compatibilite="[3.0.16;3.1.*]"
+  logo="prive/themes/spip/images/reservation_evenement-64.png"
+  documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
+  schema="1.6.0"
 >
 
   <nom>Réservation Événements</nom>
@@ -29,7 +29,6 @@ schema="1.6.0"
   <pipeline nom="reservation_evenement_donnees_details" action='' />
 
   <!-- Apelle les pipelines -->
-
   <pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" />
 
   <pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" />
