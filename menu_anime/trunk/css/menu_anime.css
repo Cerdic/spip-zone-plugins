@@ -79,13 +79,16 @@
   text-shadow: 0 1px 0 #000000;
   background: none !important;
 }
+.menu_anime > li:last-child {
+  border-right: 1px solid #f65c3e;
+}
 .menu_anime > li > a {
   float: left;
   padding: 3px 20px;
   text-transform: uppercase;
   border-style: solid;
   border-width: 0 1px 0 1px;
-  border-color: transparent #4a0000 transparent #ffa892;
+  border-color: transparent #6a281a transparent #f65c3e;
 }
 .menu_anime ul a {
   padding: 2px 1px 2px 15px;
@@ -96,7 +99,7 @@
   display: block;
   border-style: solid;
   border-width: 1px 0 1px 0;
-  border-color: #ffa892 transparent #4a0000 transparent;
+  border-color: #e55639 transparent #7b2e1f transparent;
 }
 .menu_anime a:hover {
   color: #fff;
@@ -110,7 +113,7 @@
   background: linear-gradient(top, #fead44 0%, #da943b 50%, #a16d2b 51%, #d6913a 100%) !important;
   border-style: solid;
   border-width: 0 1px 0 1px;
-  border-color: transparent #6e2a00 transparent #fff69f;
+  border-color: transparent #7f5622 transparent #ffca50;
 }
 .menu_anime > li {
   float: left;
@@ -124,7 +127,7 @@
   background: linear-gradient(#fead44, #aa732e) !important;
   border-style: solid;
   border-width: 1px 0 1px 0;
-  border-color: #fff69f transparent #6e2a00 transparent;
+  border-color: #ffbb4a transparent #946528 transparent;
 }
 .menu_anime > li:first-child > a {
   border-left: 0;
