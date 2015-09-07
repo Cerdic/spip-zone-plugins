@@ -83,14 +83,16 @@ function weather_flux2previsions($flux, $lieu) {
 			$date_maj = date_create($date_service);
 		}
 		// On réinitialise la date de prévision à partir juste du jour afin d'avoir un time à 0
-		$date_prevision = date_create($elements_date[0]);
 		foreach($previsions as $day=>$p){
 			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
 				// Index du jour et date du jour
 				$tableau[$index]['index'] = $index;
+
+				// Date du jour
+				$date_prevision = date_create($elements_date[0]);
 				$interval = new DateInterval("P{$regs[1]}D");
-				$date_jour = date_add($date_prevision, $interval);
-				$tableau[$index]['date'] = date_format($date_jour, 'Y-m-d');
+				date_add($date_prevision, $interval);
+				$tableau[$index]['date'] = date_format($date_prevision, 'Y-m-d');
 
 				$p = reset($p);
 
@@ -100,7 +102,8 @@ function weather_flux2previsions($flux, $lieu) {
 				$minute = strval($minute);
 				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
 				$interval = new DateInterval("PT${heure}H${minute}M");
-				$date_soleil = date_add($date_prevision, $interval);
+				$date_soleil = clone $date_prevision;
+				date_add($date_soleil, $interval);
 				$tableau[$index]['lever_soleil'] = date_format($date_soleil, 'Y-m-d H:i:s');
 
 				list($heure,$am_pm) = explode(' ', $p['suns'][0]);
@@ -108,7 +111,8 @@ function weather_flux2previsions($flux, $lieu) {
 				$minute = strval($minute);
 				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
 				$interval = new DateInterval("PT${heure}H${minute}M");
-				$date_soleil = date_add($date_prevision, $interval);
+				$date_soleil = clone $date_prevision;
+				date_add($date_soleil, $interval);
 				$tableau[$index]['coucher_soleil'] = date_format($date_soleil, 'Y-m-d H:i:s');
 
 				// Previsions du jour
