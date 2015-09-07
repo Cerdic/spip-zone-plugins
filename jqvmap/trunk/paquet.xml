@@ -1,12 +1,12 @@
 <paquet
 	prefix="jqvmap"
 	categorie="multimedia"
-	version="0.5.1"
+	version="0.5.2"
 	etat="experimental"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/jqvmap-64.png"
 	documentation=""
-	schema="1.0.0"
+	schema="1.1.0"
 >
 
 	<nom>jQuery Vector Maps</nom>

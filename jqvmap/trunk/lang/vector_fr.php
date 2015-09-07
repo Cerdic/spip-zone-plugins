@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // C
     'champ_code_vector_label' => 'Abbréviation de la zone',
+    'champ_color_label' => 'Couleur de la zone',
     'champ_data_label' => 'Data visualisation',
     'champ_descriptif_label' => 'Descriptif',
     'champ_id_map_label' => 'Carte',

@@ -210,6 +210,11 @@ function map_xml_formater($fichier_xml)
                                     $vector_tmp[$number]['code_vector'] = trim($vector_value[0]);
                                 }
                                 break;
+                            case 'color':
+                                if (!empty(trim($vector_value[0]))) {
+                                    $vector_tmp[$number]['color'] = trim($vector_value[0]);
+                                }
+                                break;
                             case 'data':
                                 if (!empty(trim($vector_value[0]))) {
                                     $vector_tmp[$number]['data'] = trim($vector_value[0]);

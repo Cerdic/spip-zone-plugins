@@ -47,6 +47,10 @@ jQuery(document).ready(function() {
             },</B_click>[
         values: (#DATA_NAME),]
     });
+<B_color>
+jQuery('#map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},"_",u})]})]').vectorMap('set', 'colors', {<BOUCLE_color (VECTORS) {id_map} {', '}>[["(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})"]:"(#COLOR)"]</BOUCLE_color>});
+</B_color>
+
 });
 </script>
 <div id="map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},'_',u})]})]" class="jqvmap-block" style="[width:(#GET{width}|trim)px;][height:(#GET{height}|trim)px;]"></div>
