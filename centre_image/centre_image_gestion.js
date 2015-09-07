@@ -44,7 +44,7 @@ function centre_image_afficher() {
 				var el = $("a[data-href='"+url+"']");
 				var x = data.x * el.find("img:not(.croix_centre_image)").width();
 				var y = data.y * el.find("img:not(.croix_centre_image)").height();
-				console.log(url + " / " + x + " / " + y);
+				// console.log(url + " / " + x + " / " + y);
 				centre_image_croix(el, x, y);
 			}
 		);

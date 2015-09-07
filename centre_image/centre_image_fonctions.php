@@ -13,7 +13,14 @@
  *     - x entre 0 (à gauche) et 1 (à droite)
  *     - y entre 0 (en haut) et 1 (en bas)
 **/
-function centre_image($fichier) {
+
+function centre_image ($fichier) {
+	
+	if (_SPIP_CENTRE_IMAGE == "visage") return centre_image_visage ($fichier);
+	else return centre_image_densite ($fichier);
+}
+
+function centre_image_densite ($fichier) {
 	static $spip_centre_image = array();
 
 	// nettoyer le fichier (qui peut être dans un <img> ou qui peut être daté)
@@ -131,11 +138,16 @@ function centre_image_visage ($fichier) {
 		$cache = sous_repertoire(_DIR_VAR, "cache-centre-image-visage");
 		$cache = sous_repertoire($cache, $l1);
 		$cache = sous_repertoire($cache, $l2);
+		$forcer = sous_repertoire(_DIR_IMG, "cache-centre-image");
 				
 		$fichier_json = "$cache$md5.json";
+		$fichier_forcer = "$forcer$md5.json";
 
 
-		 if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
+		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) > filemtime($fichier)) {
+			$res = json_decode(file_get_contents($fichier_forcer),TRUE);
+		}
+		else if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
 			$res = json_decode(file_get_contents($fichier_json),TRUE);
 		} else {
 		
