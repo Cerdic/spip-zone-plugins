@@ -1,4 +1,4 @@
-<BOUCLE_principale (MAPS) {id_map} {statut==#ENV{statut,.*}}>
+<BOUCLE_principale (MAPS) {id_map?} {code_map?} {statut==#ENV{statut,.*}}>
 #SET{regex,[[:punct:][:space:]]+}
 [(#SET{width,[(#ENV{width,#WIDTH})]})]
 [(#SET{height,[(#ENV{height}|trim|non|?{

@@ -1,4 +1,4 @@
-<BOUCLE_principale (MAPS) {id_map}>
+<BOUCLE_principale (MAPS) {id_map?} {code_map?}>
 #SET{regex,[[:punct:][:space:]]+}
 [(#SET{width,[(#ENV{width,#WIDTH})]})]
 [(#SET{height,[(#ENV{height}|trim|non|?{
@@ -52,3 +52,4 @@ jQuery(document).ready(function() {
 <div id="map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},'_',u})]})]" class="jqvmap-block" style="[width:(#GET{width}|trim)px;][height:(#GET{height}|trim)px;]"></div>
 </B_path>
 </BOUCLE_principale>
+</B_principale>

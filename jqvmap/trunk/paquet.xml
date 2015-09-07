@@ -1,7 +1,7 @@
 <paquet
 	prefix="jqvmap"
 	categorie="multimedia"
-	version="0.4.0"
+	version="0.5.0"
 	etat="experimental"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/jqvmap-64.png"
@@ -18,7 +18,6 @@
 	<credit lien="https://www.iconfinder.com/icons/379367/vector_icon#size=128">Webalys</credit>
 	<credit lien="https://www.iconfinder.com/icons/379552/application_map_icon#size=128">Webalys</credit>
 
-	<lib nom="jqvmap" lien="https://github.com/manifestinteractive/jqvmap/zipball/stable" />
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
 
 	<pipeline nom="autoriser" inclure="jqvmap_autorisations.php" />

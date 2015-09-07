@@ -31,3 +31,13 @@ function jqvmap_affiche_droite($flux)
 
     return $flux;
 }
+
+function jqvmap_insert_head($flux)
+{
+    $css = find_in_path('lib/jqvmap/jqvmap/jqvmap.css');
+    $flux = $flux."\n<link href='$css' media='screen' rel='stylesheet' type='text/css' />\n";
+    $js = find_in_path('lib/jqvmap/jqvmap/jquery.vmap.js');
+    $flux = $flux."\n<script type='text/javascript' src='$js'></script>\n";
+
+    return $flux;
+}
