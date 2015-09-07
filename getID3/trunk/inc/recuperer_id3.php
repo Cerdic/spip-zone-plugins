@@ -38,12 +38,12 @@ function inc_recuperer_id3_dist($fichier,$info=null){
 			foreach($file_info['id3v2']['APIC'] as $cle=>$val){
 				if (isset($file_info['id3v2']['APIC'][$cle]['data']) && isset($file_info['id3v2']['APIC'][$cle]['image_mime']) && isset($file_info['id3v2']['APIC'][$cle]['dataoffset'])) {
 					$imageinfo = array();
-		            $imagechunkcheck = getid3_lib::GetDataImageSize($file_info['id3v2']['APIC'][$cle]['data'],$imageinfo);
-		            $extension = getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
-		            if($extension == 'jpeg')
-		            	$extension = 'jpg';
-		            $tmp_file = 'getid3-'.$file_info['id3v2']['APIC'][$cle]['dataoffset'].'.'.$extension;
-		            $dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
+					$imagechunkcheck = getid3_lib::GetDataImageSize($file_info['id3v2']['APIC'][$cle]['data'],$imageinfo);
+					$extension = getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
+					if($extension == 'jpeg')
+						$extension = 'jpg';
+					$tmp_file = 'getid3-'.$file_info['id3v2']['APIC'][$cle]['dataoffset'].'.'.$extension;
+					$dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
 					$dest = $dest.$tmp_file;
 					if ($ok = ecrire_fichier($dest, $file_info['id3v2']['APIC'][$cle]['data']))
 						$id3['cover'.$cle] = $dest;
@@ -52,11 +52,11 @@ function inc_recuperer_id3_dist($fichier,$info=null){
 		}
 		if(isset($file_info['flac']['APIC'])){
 			if (isset($file_info['flac']['APIC']['data']) && isset($file_info['flac']['APIC']['image_mime'])) {
-	            $extension = strtolower($file_info['flac']['APIC']['extension']);
-	            if($extension == 'jpeg')
-	            	$extension = 'jpg';
-	            $tmp_file = 'getid3-'.md5($file_info['filename'].$file_info['filesize']).'.'.$extension;
-	            $dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
+				$extension = strtolower($file_info['flac']['APIC']['extension']);
+				if($extension == 'jpeg')
+					$extension = 'jpg';
+				$tmp_file = 'getid3-'.md5($file_info['filename'].$file_info['filesize']).'.'.$extension;
+				$dest = sous_repertoire(_DIR_VAR, 'cache-getid3');
 				$dest = $dest.$tmp_file;
 				if ($ok = ecrire_fichier($dest, $file_info['flac']['APIC']['data'])) {
 					$id3['cover'.$cle] = $dest;
