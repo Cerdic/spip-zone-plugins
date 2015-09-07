@@ -106,6 +106,70 @@ function centre_image_y($fichier) {
 }
 
 
+/*
+ * Détection du visage (attention: super-lourd)
+ */
+
+function centre_image_visage ($fichier) {
+	if (preg_match("/src\=/", $fichier)) $fichier = extraire_attribut($fichier, "src");
+	$fichier = preg_replace(",\?[0-9]*$,", "", $fichier);
+
+	// on mémorise le résultat -> don
+	if ($spip_centre_image_visage["$fichier"]) return $spip_centre_image_visage["$fichier"];
+	
+	
+	if (file_exists($fichier)) {
+
+		$md5 = $fichier;
+		if (_DIR_RACINE == "../") {
+			$md5 = preg_replace(",^\.\.\/,", "", $md5);
+		}
+		$md5 = md5($md5);
+		$l1 = substr($md5, 0, 1 );
+		$l2 = substr($md5, 1, 1);
+
+		$cache = sous_repertoire(_DIR_VAR, "cache-centre-image-visage");
+		$cache = sous_repertoire($cache, $l1);
+		$cache = sous_repertoire($cache, $l2);
+				
+		$fichier_json = "$cache$md5.json";
+
+
+		 if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
+			$res = json_decode(file_get_contents($fichier_json),TRUE);
+		} else {
+		
+			include_spip ("inc/FaceDetector");
+			$detector = new svay\FaceDetector('detection.dat');
+			$detector->faceDetect($fichier);
+			$face = $detector->getFace();
+			
+			if ($face) {
+				$l = largeur($fichier);
+				$h = hauteur($fichier);
+			
+				$x = ($face["x"] + ($face["w"] / 2)) / $l ;
+				$y = ($face["y"] + ($face["w"] / 2)) / $h;
+				
+	
+				$res = array("x" => $x, "y" => $y);
+			} else {
+				$res = array("x" => 0.5, "y" => 0.33);
+			}
+				
+			file_put_contents($fichier_json, json_encode($res,TRUE));		
+		}
+
+		$spip_centre_image_visage["$fichier"] = $res;
+
+		return $res;    
+	
+	
+	}
+
+}
+
+
 
 /**
  * Ajoute les scripts nécessaires dans l'espace privé
