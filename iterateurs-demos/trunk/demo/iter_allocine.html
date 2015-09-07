@@ -1,7 +1,9 @@
 <h1>Flux allocine, films et horaires pour un cinema</h1>
 
-[(#REM) P0982 = identifiant allocine de la salle ou  lat/long sachant que le radius elargit la geographie] 
-[(#SET{source_salle,http://api.allocine.fr/rest/v3/showtimelist?partner=YW5kcm9pZC12M3M&theaters=P0982&radius=1&format=json})]
+[(#REM)
+L'api allocine ayant été modifié, il faut se référer à https://github.com/gromez/allocine-api pour creer l'url
+P0982 = identifiant allocine de la salle ou  lat/long sachant que le radius elargit la geographie] 
+[(#SET{source_salle,http://api.allocine.fr/rest/v3/showtimelist?partner=100043982026&format=json&radius=1&theaters=P1347&sed=20150907&sig=%2BVXug9NUvMdzk%2Fetzs0F1psPJwE%3D})]
 [(#SET{xml,http://api.allocine.fr/rest/v3/showtimelist?partner=YW5kcm9pZC12M3M&format=json&lat=47.981649&long=0.24038&radius=10&zip=72000})]
 
 <BOUCLE_allocine(DATA) {source json, #GET{source_salle}}{cle=feed,theaterShowtimes}>
@@ -15,8 +17,7 @@
 		
 			<h3>[(#VALEUR{onShow/movie/title})]</h3>
 			#SET{code,#VALEUR{onShow/movie/code}}
-			[(#SET{source_movie,http://api.allocine.fr/rest/v3/movie?code=#GET{code}&partner=YW5kcm9pZC12M3M&format=json})]
-			<em>Source movie: #GET{source_movie}</em>
+			<em>Movie</em>
 			
 			[(#VALEUR{onShow/movie/poster/href}|image_reduire{150,150})]
 			
