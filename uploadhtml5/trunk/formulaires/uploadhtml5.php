@@ -55,7 +55,7 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
     $contexte = array(
         'ajaxReload' => $ajaxReload,
         'paramName' => 'file',
-        'id' => 'dropzonespip'
+        'id' => 'dropzonespip_'.uniqid()
     );
 
     // Fusionner args avec le contexte
