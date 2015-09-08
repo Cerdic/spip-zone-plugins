@@ -1,26 +1,31 @@
 #HTTP_HEADER{'Content-Type: text/css'}
 
-body{font-size:100%}
+body{font-size:100%;}
 #planning_simple td{vertical-align:middle; width:75px;} /* modifié dans la page en fonction du nb de jours*/
 .planning_simple {text-align:center}
 #planning_simple {font-size:1em; border: 1px solid #FFC0CB; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; width:800px; margin:1em auto; border-collapse:collapse; border-spacing: 0.5rem;}
 #planning_simple caption{text-align:left; font-size:1.2em; padding-bottom:1em}
 #planning_simple .heure td.cellule_pleine{border-top: 2px solid #FFC0CB;}
 #planning_simple td, #planning_simple th {color:#222960; border: 1px solid #FFC0CB; padding: 0; -webkit-print-color-adjust:exact;}
-#planning_simple td.horaires{width:50px}
+#planning_simple td.horaires, #planning_simple th.horaires{width:50px}
 #planning_simple .heure td.horaires{border-top: 2px solid #FFC0CB;}
 #planning_simple .demie .horaires{font-size:0.8em; color:#888}
 #planning_simple td.vide{border-width: 0 1px;}
 #planning_simple div.evenement{padding:0.2em 0.2em 0.2em}
-#planning_simple .anglais{background:#FFFB3F !important;}
-#planning_simple .allemand{background-color:#FFA53F !important;}
-#planning_simple .francais{background-color:#FFA7A5 !important;}
-#planning_simple .maths{background-color:#9BB6FF !important;}
-#planning_simple .s-e-s{background-color:#BEBEBE !important;}
-#planning_simple .h-geo{background-color:#DDBFF2 !important;}
-#planning_simple .svt-labo{background-color:#C1FFB7 !important;}
-#planning_simple .ps-labo{background-color:#85F271 !important;}
-#planning_simple .a-p{background-color:#D68960 !important;}
+.texte_modifier{margin:0 auto; width:700px; text-align:left; color:#FFF}
+.texte_modifier:hover{color:#333}
+
+
+.anglais{background:#FFFB3F !important;}
+.allemand{background-color:#FFA53F !important;}
+.francais{background-color:#FFA7A5 !important;}
+.maths{background-color:#9BB6FF !important;}
+.s-e-s{background-color:#BEBEBE !important;}
+.h-geo{background-color:#DDBFF2 !important;}
+.svt-labo{background-color:#C1FFB7 !important;}
+.ps-labo{background-color:#85F271 !important;}
+.a-p{background-color:#D68960 !important;}
+
 #planning_simple .x {background-color:#fff !important;}
 #planning_simple .lieu{text-align:right}
 .camouflage{color:transparent !important; display:block;} /* camoufler mais conserver le crayon */
@@ -31,4 +36,5 @@ body{font-size:100%}
 	 max-width: 100%;
 	 height: auto;
 	}
-}p
+	.texte_modifier{display:none;}
+}

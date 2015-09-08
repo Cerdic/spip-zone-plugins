@@ -40,6 +40,7 @@
 
 </BOUCLE_donnees>
 
+
 [(#REM) <!-- nombre de jours colonnes --->]
 [(#SET{nb_jours,
 	[(#GET{date_zerook}|duree{#GET{au_finalok},days}|plus{1})]
@@ -115,6 +116,6 @@ entre [(#VAL{date_jour_#GET{jour_debut_numero}|plus{1}}|_T)] et [(#VAL{date_jour
 
 </div>
 
-</B_donnees><:planning_simple:aucune_donnee:><code>/?page=planning_simple&id_article=13</code>
+</B_donnees><:planning_simple:aucune_donnee:><br><code>/?page=planning_simple&id_article=#ENV{id_article}</code>
 <:planning_simple:explication_evenements_dependances:>
 <//B_donnees>

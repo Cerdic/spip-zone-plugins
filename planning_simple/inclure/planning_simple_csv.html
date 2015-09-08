@@ -1,0 +1,180 @@
+[(#REM) exemple de tableau à entrer dans le texte de l'article
+lundi,08:00,10:00,Philo,253
+lundi,10:00,12:00,Hist-Géo,451
+lundi,13:00,14:00,AP,
+lundi,14:00,15:00,SES,,1x par mois,
+Mardi,08:00,10:00,EPS
+Mardi,10:00,12:00,SES,452,
+Mardi,13:30,15:00,Sciences Politiques,453,
+Mardi,15:00,16:00,Anglais,
+etc …
+]
+#SET{heure_max_fin,00}
+#SET{heure_max_debut,24}
+#SET{tds_supprimer,#ARRAY}
+#SET{tds_a_garder,#ARRAY}
+ 
+#SET{nb_jours,0}
+
+<BOUCLE_csv_texte(ARTICLES){id_article}>
+<BOUCLE_data(DATA){source csv,#TEXTE**}>
+	[(#VALEUR{0}|unique{data}|oui)#SET{nb_colonnes,#EVAL{#GET{nb_colonnes}+1}}]
+	[(#REM) <!-- heure max de début --->] 
+		[(#VALEUR{1}|<{#GET{heure_max_debut}}|oui) #SET{heure_max_debut,#VALEUR{1}}]
+	[(#REM) <!-- heure max de fin --->]
+		[(#VALEUR{2}|>{#GET{heure_max_fin}}|oui) #SET{heure_max_fin,#VALEUR{2}}]
+</BOUCLE_data> 
+
+[(#REM) <!-- date_zero debutera en haut à gauche du tableau --->]
+[(#SET{date_zero,[(#EVAL{date("Y-m-d H:i", strtotime("+[(#GET{heure_max_debut}|mult{60}|moins{60}) minutes]","0000-00-00 00:00"))})]})]				
+
+[(#REM) <!-- nombre total de minutes --->]
+[(#SET{max_minutes_jour,
+	[(#EVAL{[(#GET{heure_max_fin}|intval)]-[(#GET{heure_max_debut}|intval)]}|mult{60}|moins{30})]
+})]
+
+#SET{cellules,#ARRAY{0}}
+<BOUCLE_total_lignes(DATA){enum 0,#GET{max_minutes_jour},30}>
+<BOUCLE_total_colonne(DATA){enum 1,#GET{nb_colonnes}}>
+	[(#REM) <!-- calcule la période en minutes a additionner à la cellule zéro (exemple 490 minutes) -->]
+	[(#SET{debute_periode,[(#VALEUR|moins{1}|intval|mult{1440}|plus{#_total_lignes:VALEUR})]})]
+	[(#REM) <-- cree un array multidimensionnel de toutes les cellules avec une cle celluleXX ou chaque cellule est un array periode,rowspan,colspan,titre,lieu,compteur,dejavu --> ]
+	#SET{cellule#GET{debute_periode},#LISTE{#GET{debute_periode},0,2,"","",#COMPTEUR_BOUCLE,non}}
+	#SET{cellules,#GET{cellules}|array_merge{#ARRAY{cellule#GET{debute_periode},#GET{cellule#GET{debute_periode}}}}}
+</BOUCLE_total_colonne>
+</BOUCLE_total_lignes>
+
+[(#REM) <!-- on calcule les cellules à ne pas occuper et les cellules vides -->]
+<BOUCLE_rowspan(DATA){source csv,#TEXTE**}>
+[(#REM) <!-- nombre de jours (colonnes), compte la première colonne des occurences en fusion unique (lundi, mardi etc) --->]
+[(#VALEUR{0}|unique{rowspan}|oui)#SET{nb_jours,#EVAL{#GET{nb_jours}+1}}]
+[(#REM) <!-- compter les demies heures --> ]
+#SET{minutes_debut,#VALEUR{1}|explode{:}}
+#SET{minutes_fin,#VALEUR{2}|explode{:}}
+[(#SET{date_debut,[(#EVAL{date("Y-m-d H:i", strtotime("+[(#GET{nb_jours}|moins{1}) days ][(#VALEUR{1}|mult{60}|moins{60}|plus{#GET{minutes_debut}|table_valeur{1}}) minutes]","0000-00-00 00:00"))})]})]
+[(#SET{date_fin,[(#EVAL{date("Y-m-d H:i", strtotime("+[(#GET{nb_jours}|moins{1}) days ][(#VALEUR{2}|mult{60}|moins{60}|plus{#GET{minutes_fin}|table_valeur{1}}) minutes]","0000-00-00 00:00"))})]})]
+[(#REM) <!-- calcule l'endroit en minutes pour trouver la cellule zéro (exemple 490 minutes) -->]
+[(#SET{debute_mn,[(#GET{date_zero}|duree{#GET{date_debut},minutes}|intval)]})]
+[(#SET{duree_mn,[(#GET{date_debut}|duree{#GET{date_fin},minutes}|intval)]})]
+[(#SET{rowspan,[(#GET{duree_mn}|div{30}|intval)]})]
+
+[(#REM) <!-- verifie l'existence de doublons de même heure -->]
+#SET{dejavu,non}
+#SET{this_dejavu#GET{debute_mn}+#COMPTEUR_BOUCLE,#LISTE{#GET{debute_mn},#GET{rowspan},2,#VALEUR{3},#VALEUR{4},#COMPTEUR_BOUCLE,#GET{dejavu}}}
+[(#GET{debute_mn}|=={0}|oui) #SET{debute_mn,0} ]
+[(#GET{deja_vu#GET{debute_mn}}|=={#GET{debute_mn}}|oui) 
+	#SET{dejavu,oui}
+	#SET{this_dejavu#GET{debute_mn},#LISTE{#GET{debute_mn},#GET{rowspan},2,#VALEUR{3},#VALEUR{4},#COMPTEUR_BOUCLE,#GET{dejavu}}}
+]
+#SET{deja_vu#GET{debute_mn},#GET{debute_mn}}
+
+[(#REM) <!-- cree un array multidimensionnel des cellules à garder avec une cle celluleXX -->]
+#SET{this_td#GET{debute_mn},#LISTE{#GET{debute_mn},#GET{rowspan},2,#VALEUR{3},#VALEUR{4},#COMPTEUR_BOUCLE,#GET{dejavu}}}
+#SET{tds_a_garder, #GET{tds_a_garder}|array_merge{#ARRAY{cellule#GET{debute_mn},#GET{this_td#GET{debute_mn}}}}}
+
+<BOUCLE_ajouter_td(DATA){enum 1,#GET{rowspan}|moins{1}}>
+[(#REM) <!-- cree un array multidimensionnel des cellules à supprimer avec une cle celluleXX -->]
+[(#SET{td_a_virer,[(#GET{debute_mn}|plus{[(#VALEUR|mult{30})]})]})]
+#SET{cellule_a_virer#GET{debute_mn},#LISTE{#GET{td_a_virer},NULL,NULL,"","","",non}}
+#SET{tds_supprimer,#GET{tds_supprimer}|array_merge{#ARRAY{cellule#GET{td_a_virer},#GET{cellule_a_virer#GET{debute_mn}}}}}
+</BOUCLE_ajouter_td>
+
+</BOUCLE_rowspan>
+#SET{result,#ARRAY}
+#SET{result,#GET{cellules}|array_replace{#GET{tds_supprimer},#GET{tds_a_garder}}}
+
+[(#REM) <-- debug-->
+heure_max_debut=#GET{heure_max_debut} * heure_max_fin=#GET{heure_max_fin} * date_zero=#GET{date_zero} * max_minutes_jour=#GET{max_minutes_jour}
+tableau(periode,rowspan,colspan,titre,lieu,compteur,dejavu)=[(#GET{result}|var_dump)]
+]
+
+<div class='planning_simple'>
+[(#REM) <!-- l'emploi du temps en table, la construction tr/td est remplie de cellules de 30 minutes, de 0 pour lundi 8h à 6400… le vendredi 16h -->]
+<table id="planning_simple">
+<caption class="#EDIT{titre}">#TITRE</caption>
+<tbody>
+    <B_th>
+    <tr>
+    <th class="horaires">#GET{heure_max_debut}</th>
+     <BOUCLE_th(DATA){source csv,#TEXTE**}> 
+	     [(#SET{datejour_numero,[date_jour_(#VALEUR{0}|unique{th}|convert_jour)]})]
+	     [<th class="jours" colspan="2">(#GET{datejour_numero}|_T|ucfirst)</th>]
+     </BOUCLE_th> 
+    </tr>
+    </B_th>
+    
+    [(#REM) <!-- compte le nombre de cle -->]
+    #SET{clefs,18}
+    [(#REM) <!-- 1 ligne = 30 minutes -->]	
+    <BOUCLE_30_minutes(DATA){enum 0,#GET{max_minutes_jour},30}>
+	    [(#SET{30_minutes,[(#EVAL{date("H:i", strtotime("+[(#GET{heure_max_debut}|mult{60}|plus{#VALEUR}|moins{30})] minutes","00:00"))})]})]
+	    [(#SET{debut_a,[(#EVAL{date("H:i", strtotime("+[(#GET{heure_max_debut}|mult{60}|plus{#VALEUR}|moins{60})] minutes","00:00"))})]})]
+	    <tr class="#GET{30_minutes} [ (#COMPTEUR_BOUCLE|alterner{demie,heure})]">
+		<td class="horaires">#GET{30_minutes}</td>
+		
+		[(#REM) <!-- 1 colonne par jour -->]
+			<BOUCLE_cellules(DATA){enum 1,#GET{nb_jours}}>
+			[(#SET{datejour_numero,[date_jour_(#COMPTEUR_BOUCLE|plus{1}|convert_jour)]})]
+				
+				[(#REM) <!-- calcule la période depuis la cellule zéro (exemple 1440 pour la cellule 1 du 2em jour) -->]
+				[(#SET{periode,[(#VALEUR|moins{1}|intval|mult{1440}|plus{#_30_minutes:VALEUR})]})]
+
+				
+				<BOUCLE_table(DATA){source table,#GET{result}}{cle=cellule#GET{periode}}>
+				[(#VALEUR{2}|!={NULL}|oui)
+					[(#VALEUR{1}|!={0}|oui)
+						[(#VALEUR{6}|!={oui}|oui)
+							<td class="cellule_pleine[ (#VALEUR{3}|url_nettoyer{200}|strtolower)]" colspan='#VALEUR{2}' rowspan="#VALEUR{1}" title='[(#GET{datejour_numero}|_T|ucfirst)][ (#GET{debut_a}) ][(#VALEUR{3}|textebrut)]'>
+							<div class="evenement">
+								<strong>#VALEUR{3}</strong>
+								<div class="lieu">#VALEUR{4}</div>
+							</div>
+							</td>
+						]
+					]
+					[(#VALEUR{6}|=={oui}|oui)
+						[(#SET{titre_cellule,[(#GET{this_dejavu#GET{periode}+[(#VALEUR{5}|moins{1})]}|table_valeur{3})]})]
+						<td class="cellule_pleine[ (#GET{titre_cellule}|url_nettoyer{200}|strtolower)]" colspan='1' rowspan="#VALEUR{1}" title='[(#GET{datejour_numero}|_T|ucfirst)][ (#GET{debut_a}) ][(#GET{this_dejavu#GET{periode}+[(#VALEUR{5}|moins{1})]}|table_valeur{3}|textebrut)]'>
+						<div class="evenement">
+							<strong>#GET{titre_cellule}</strong>
+							<div class="lieu">[(#GET{this_dejavu#GET{periode}+[(#VALEUR{5}|moins{1})]}|table_valeur{4})]</div>
+						</div>
+						</td>
+						<td class="[(#VALEUR{3}|url_nettoyer{200}|strtolower)]" colspan='1' rowspan="#VALEUR{1}" title='[(#GET{datejour_numero}|_T|ucfirst)][ (#GET{debut_a}) ][(#VALEUR{3}|textebrut)]'>
+						<div class="evenement">
+								<strong>#VALEUR{3}</strong>
+								<div class="lieu">#VALEUR{4}</div>
+						</div>
+						</td>
+
+					]
+					[(#VALEUR{1}|=={0}|oui)
+						<td class="cellule vide" colspan='#VALEUR{2}'><div class="evenement camouflage">x</div></td>
+
+					]
+				]
+				</BOUCLE_table>
+				
+			</BOUCLE_cellules>
+	    </tr>
+    </BOUCLE_30_minutes>
+	
+</tbody>
+</table>
+
+[(#REM) <!-- on modifie avec le plugin crayon ssi connecté --> ]
+[(#SESSION{statut}|oui)
+<div class="#EDIT{texte} texte_modifier">#TEXTE</div>
+]
+
+</BOUCLE_csv_texte>
+
+
+
+<BOUCLE_debug(DATA){source table,#GET{result}}>
+[(#REM)
+<small>#CLE= {r=#VALEUR{1} + c=#VALEUR{2} titre=#VALEUR{3} lieu=#VALEUR{4} count=#VALEUR{5} dejavu=#VALEUR{6}}</small>
+]
+</BOUCLE_debug>
+
+</div> 

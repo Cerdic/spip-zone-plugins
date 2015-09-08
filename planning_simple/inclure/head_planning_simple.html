@@ -14,6 +14,15 @@
 
 [<link rel="stylesheet" href="(#URL_PAGE{planning_simple.css})" type="text/css" />]
 
+[(#REM) 
+Feuille de style personnalisee dans le texte de l'article
+les lignes entrées sont de type
+Lundi,14:00,15:00,SES,1x par mois,#FFA3A3Retour ligne automatique
+Mardi,08:00,10:00,EPS,,#E0E0E0Retour ligne automatique
+Mardi,10:00,12:00,SES,452,Retour ligne automatique
+Mardi,13:30,15:00,Sciences Politiques,453,#F7996ARetour ligne automatique
+]
+[<link rel="stylesheet" href="(#URL_PAGE{planning_simple_csv.css}|parametre_url{id_article,#ENV{id_article}})" type="text/css" />]
 [(#REM) Feuille de style personnalisee pour surcharger les precedentes
 	A noter par defaut cette css n'existe pas
 ]
@@ -24,5 +33,4 @@
 	Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques
 	si l'option est cochee dans Configuration
 ]
-#INSERT_HEAD
-
+#INSERT_HEAD   

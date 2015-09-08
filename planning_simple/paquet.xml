@@ -1,7 +1,7 @@
 <paquet
 	prefix="planning_simple"
 	categorie="outil"
-	version="1.0.3"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="planning_simple.png"
@@ -10,5 +10,6 @@
 	<nom>Planning Simple</nom>
 	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	<necessite nom="agenda" compatibilite="[3.14.3;[" />
+	<utilise nom="agenda" compatibilite="[3.14.3;[" />
+	<utilise nom="crayon" compatibilite="[1.19.2;[" />
 </paquet>

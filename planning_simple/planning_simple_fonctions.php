@@ -7,8 +7,7 @@
 **/
 // pour url_nettoyer
 include_spip('action/editer_url'); 
-
-
+     
 /*
  *
  * [(#DATE_DEBUT|duree{#DATE_FIN,minutes})]
@@ -46,4 +45,27 @@ function duree($date_debut,$date_fin, $formate="minutes"){
         }
         
 	return $duree;
+}
+
+//retourne le jour en anglais d'après un chiffre, ne sert pas, juste pour le fun
+function jddayofweek_perso($num){
+	return date('l', strtotime("Sunday + $num Days"));
+}
+
+//depuis un nom de jour français retourne un chiffre 
+//sinon le jour en chiffre
+function convert_jour($jour_en_lettres){
+	if(is_string($jour_en_lettres)){
+	$jour=mb_strtolower($jour_en_lettres);
+		switch ($jour) {
+			case 'dimanche': return 1;
+			case 'lundi': return 2;
+			case 'mardi': return 3;
+			case 'mercredi':return 4;
+			case 'jeudi':return 5;
+			case 'vendredi':return 6;
+			case 'samedi':return 7;
+		}
+        } 
+        return $jour_en_lettres;
 }

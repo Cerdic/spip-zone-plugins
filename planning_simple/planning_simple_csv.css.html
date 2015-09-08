@@ -1,0 +1,5 @@
+#HTTP_HEADER{'Content-Type: text/css'}
+
+<BOUCLE_data_css(DATA){source csv,#INFO_TEXTE**{article,#ID_ARTICLE}}>
+[#planning_simple .(#VALEUR{3}|unique{data_css}|url_nettoyer{200}|strtolower){[(#VALEUR{5}|!={''}|oui) background:#VALEUR{5} ]!important;}]
+</BOUCLE_data_css> 
