@@ -72,6 +72,11 @@
 .formulaire_construire_formulaire .formulaire_configurer .fieldset {padding-top:0px;}
 .formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>.editer-groupe>.editer:first-child {padding-top:0px;}
 
+/* SPIP 3.0 compat avec li.selecteur_item */
+.formulaire_construire_formulaire ul.editer-groupe > li.selecteur_item { background:transparent; padding-left:140px; }
+.formulaire_construire_formulaire ul.editer-groupe > li.selecteur_item label { margin-left:-130px; }
+.formulaire_construire_formulaire ul.editer-groupe > li.selecteur_item .choix label { margin-left:5px; }
+
 .formulaire_construire_formulaire .editer.hover {background-color:transparent;}
 
 .formulaire_construire_formulaire .actions{
