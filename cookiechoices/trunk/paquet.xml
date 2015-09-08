@@ -1,8 +1,8 @@
 <paquet
 	prefix="cookiechoices"
 	categorie="communication"
-	version="1.0.8"
-	etat="test"
+	version="1.0.9"
+	etat="stable"
 	compatibilite="[3.0.17;3.1.*]"
 	logo="prive/themes/spip/images/cookiechoices-64.png"
 	documentation="http://contrib.spip.net/4559"
@@ -13,4 +13,5 @@
   <licence lien=" http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</licence>
   
   <pipeline nom="affichage_final" inclure="cookiechoices_pipelines.php" />
+  <pipeline nom="ieconfig_metas" inclure="cookiechoices_ieconfig.php" />
 </paquet>
