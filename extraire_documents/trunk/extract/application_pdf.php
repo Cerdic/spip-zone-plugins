@@ -11,7 +11,9 @@ function extraire_application_pdf($fichier) {
     $contenu = "";
 
     // Bespoin de charger composer
-    include_spip('lib/Composer/Autoload/ClassLoader');
+    if (!class_exists('Composer\\Autoload\\ClassLoader')) {
+		include_spip('lib/Composer/Autoload/ClassLoader');
+	}
     include_spip('lib/TCPDF-6.2.6/tcpdf_parser');
 
     $loader = new \Composer\Autoload\ClassLoader();
