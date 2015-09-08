@@ -9,7 +9,7 @@
  */
 function indexerdoc_indexer_document($flux) {
 	if ($flux['args']['objet'] == 'document') {
-		$document =& $flux['data'];
+		$document = &$flux['data'];
 		$extraire = array('contenu' => false);
 		
         // Extraire le contenu si possible
