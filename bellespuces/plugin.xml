@@ -2,7 +2,7 @@
 	<nom>Belles puces</nom>
 	<prefix>bellespuces</prefix>
 	<icon>bellespuces.png</icon>	
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<etat>stable</etat> 	
 	<auteur>[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz]</auteur>
 	<licence>GNU/GPL</licence>
