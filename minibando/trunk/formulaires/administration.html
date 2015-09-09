@@ -2,7 +2,7 @@
 ]<div[ class="(#ENV{divclass,spip-admin-bloc})"] id="spip-admin" dir="#LANG_DIR"><ul id="minibando"[ class="(#CONFIG{minibando/disposition})"]>
 	<BOUCLE_accueil(POUR)
 		{tableau #GET{boutons}}
-		{cle=menu_accueil}><li [class="(#VAL{first}|unique)"]><a 
+		{cle=menu_accueil}><li [class="(#VAL{first}|unique)"]><a
 			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span>&nbsp;</span>
 	<ul>
