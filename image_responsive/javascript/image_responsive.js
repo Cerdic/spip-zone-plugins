@@ -110,6 +110,7 @@ function charger_url_background_responsive(this_img) {
 			var l = this_img.attr("data-portrait-l");
 			var h = this_img.attr("data-portrait-h");
 		}
+		var mtime = this_img.attr("data-mtime");
 
 		
 		if ( (dim_l/dim_h) > (l/h) ) { /* fenetre plus large que l'image */
@@ -181,12 +182,17 @@ function charger_url_background_responsive(this_img) {
 					if (vertical) url_img = url_img + "v";
 					if (dPR) url_img = url_img + "-"+dPR;
 					url_img = url_img + "."+terminaison;
+					if (mtime) url_img = url_img + "?" + mtime;
+
 				} else {
 					var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
 					if (vertical) url_img = url_img + "v";
 					if (dPR) url_img = url_img + "&dpr="+dPR;
+					if (mtime) url_img = url_img + "&mtime="+mtime;
 				}
 			}
+
+
 			if (this_img.attr("data-background-actif") != url_img) {
 				this_img.attr("data-background-actif", url_img);
 				this_img.css("background-image", "url("+url_img+")");

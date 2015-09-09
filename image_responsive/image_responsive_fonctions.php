@@ -354,15 +354,17 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 	if (file_exists($src)) {
 		include_spip("filtres/images_transforme");
 
-
 		$l = largeur($src);
 		$h = hauteur($src);
 	
+		$mtime = filemtime($src);
+		$ins .= " data-mtime='$mtime'";
+		
 		
 		$img = $src;
 		
 		if ($l > $h) {
-			$ins = " data-italien-src='$src'";
+			$ins .= " data-italien-src='$src'";
 			$ins .= " data-italien-l='$l'";
 			$ins .= " data-italien-h='$h'";
 			
@@ -382,7 +384,7 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 			$s_portrait = $srcp;
 		
 		} else {
-			$ins = " data-portrait-src='$src'";
+			$ins .= " data-portrait-src='$src'";
 			$ins .= " data-portrait-l='$l'";
 			$ins .= " data-portrait-h='$h'";
 
@@ -437,12 +439,12 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 					$fichiers[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien);
-						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien);
+						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien)."?$mtime";
+						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien)."?$mtime";
 					}
 					else {
-						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien";
-						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2";
+						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&mtime=$mtime";
+						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2&mtime=$mtime";
 					}
 				}
 
@@ -452,12 +454,12 @@ function background_responsive($src, $taille=120, $lazy=0, $align="") {
 					$fichiers[$t_portrait]["p"][2] = retour_image_responsive($s_portrait, "$t_portrait", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait);
-						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait);
+						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait)."?$mtime";
+						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait)."?$mtime";
 					}
 					else {
-						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait";
-						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2";
+						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&mtime=$mtime";
+						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2&mtime=$mtime";
 					}
 				}
 
