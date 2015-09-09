@@ -71,6 +71,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
             'show_tooltip' => "ENUM('true','false') DEFAULT 'true'",
             'data_name' => "text NOT NULL DEFAULT ''",
             'statut' => "varchar(20)  DEFAULT '0' NOT NULL",
+            'date' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
             'maj' => 'TIMESTAMP',
         ),
         'key' => array(
@@ -78,7 +79,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
             'KEY statut' => 'statut',
         ),
         'titre' => "titre AS titre, '' AS lang",
-         #'date' => "",
+        'date' => 'date',
         'champs_editables' => array('titre', 'descriptif', 'width', 'height', 'code_map', 'background_color', 'border_color', 'border_opacity', 'border_width', 'color', 'enable_zoom', 'hover_color', 'hover_opacity', 'normalize_function', 'scale_colors', 'selected_color', 'selected_region', 'show_tooltip', 'data_name'),
         'champs_versionnes' => array('titre', 'descriptif', 'width', 'height', 'code_map', 'background_color', 'border_color', 'border_opacity', 'border_width', 'color', 'enable_zoom', 'hover_color', 'hover_opacity', 'normalize_function', 'scale_colors', 'selected_color', 'selected_region', 'show_tooltip', 'data_name'),
         'rechercher_champs' => array('titre' => 8, 'descriptif' => 7),

@@ -33,6 +33,9 @@ function jqvmap_upgrade($nom_meta_base_version, $version_cible)
     $maj['1.1.0'] = array(
         array('sql_alter', "TABLE spip_vectors ADD color tinytext NOT NULL DEFAULT '' AFTER code_vector"),
     );
+    $maj['1.1.1'] = array(
+        array('sql_alter', "TABLE spip_maps ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL AFTER statut"),
+    );
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
