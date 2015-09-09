@@ -151,13 +151,13 @@ $(document).ready(function() {
 		#INCLURE{fond=inclure/lien_parent,id_document}
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={article}|oui)
-		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">
+		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE" data-desc="[(#TITRE|ou{#DESCRIPTIF}|oui) <span class='hidedesc' title='<:mediaboxavectexte:masquer_afficher:>'>×</span>][(#TITRE|attribut_html)][ - (#DESCRIPTIF|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={rubrique}|oui)
-		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">
+		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE" data-desc="[(#TITRE|ou{#DESCRIPTIF}|oui) <span class='hidedesc' title='<:mediaboxavectexte:masquer_afficher:>'>×</span>][(#TITRE|attribut_html)][ - (#DESCRIPTIF|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={externe}|oui)
-		<a href="[(#DESCRIPTIF|supprimer_tags)]" data-cycle-title="#TITRE">
+		<a href="[(#DESCRIPTIF|supprimer_tags)]" data-cycle-title="#TITRE" data-desc="[(#TITRE|ou{#DESCRIPTIF}|oui) <span class='hidedesc' title='<:mediaboxavectexte:masquer_afficher:>'>×</span>][(#TITRE|attribut_html)][ - (#DESCRIPTIF|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{id_article_a_lier}|oui)
 		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" data-cycle-title="#GET{titre_article_a_lier}" data-cycle-desc="[(#DESCRIPTIF|textebrut)]">
@@ -168,7 +168,7 @@ $(document).ready(function() {
 						rel="#GET{cssbox}"
 						[(#CONFIG{sjcycle/tooltip}|=={oui}|non) title="[(#TITRE|attribut_html)]"]
 						style="display:block;padding:0px;margin:0px;"
-						data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]">
+						data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]" data-desc="[(#TITRE|ou{#DESCRIPTIF}|oui) <span class='hidedesc' title='<:mediaboxavectexte:masquer_afficher:>'>×</span>][(#TITRE|attribut_html)][ - (#DESCRIPTIF|attribut_html)]">
 		#SET{fermer_a,oui}]
 	
 			<img class="no_image_filtrer no-adapt-img" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
