@@ -1,9 +1,9 @@
 <paquet
 	prefix="griseusicobarre"
 	categorie="theme"
-	version="0.1.1"
+	version="0.1.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/griseusicobarre-256.png"
 	documentation="http://contrib.spip.net/Icones-Griseus-pour-la-barre-d-edition"
 >
