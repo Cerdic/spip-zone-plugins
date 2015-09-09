@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
         onRegionClick: function(element, code, region)
             {
                 <BOUCLE_click (VECTORS) {id_map} {url_site!=''}>
-                [(#COMPTEUR_BOUCLE|=={1}|?{'if','elseif'})] (code == '[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]')
+                [(#COMPTEUR_BOUCLE|=={1}|?{'if','else if'})] (code == '[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]')
                 {
                     window.open('[(#URL_SITE)]','_blank');
                 }</BOUCLE_click>
