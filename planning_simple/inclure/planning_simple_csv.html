@@ -103,8 +103,7 @@ tableau(periode,rowspan,colspan,titre,lieu,compteur,dejavu)=[(#GET{result}|var_d
     </tr>
     </B_th>
     
-    [(#REM) <!-- compte le nombre de cle -->]
-    #SET{clefs,18}
+
     [(#REM) <!-- 1 ligne = 30 minutes -->]	
     <BOUCLE_30_minutes(DATA){enum 0,#GET{max_minutes_jour},30}>
 	    [(#SET{30_minutes,[(#EVAL{date("H:i", strtotime("+[(#GET{heure_max_debut}|mult{60}|plus{#VALEUR}|moins{30})] minutes","00:00"))})]})]
@@ -168,13 +167,4 @@ tableau(periode,rowspan,colspan,titre,lieu,compteur,dejavu)=[(#GET{result}|var_d
 ]
 
 </BOUCLE_csv_texte>
-
-
-
-<BOUCLE_debug(DATA){source table,#GET{result}}>
-[(#REM)
-<small>#CLE= {r=#VALEUR{1} + c=#VALEUR{2} titre=#VALEUR{3} lieu=#VALEUR{4} count=#VALEUR{5} dejavu=#VALEUR{6}}</small>
-]
-</BOUCLE_debug>
-
 </div> 
