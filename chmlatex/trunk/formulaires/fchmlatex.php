@@ -25,8 +25,6 @@ function formulaires_fchmlatex_charger_dist($self)
                 'titre_objet' => _T('public:'.$a['type']).' '.$a['id'].' : '.$a['titre'],
                 'progression' => $avancement)
             );
-            //~ echo _T("chmlatex:generation_$format").'&nbsp;: </br>';
-            //~ echo "<progress id='barre-progression' max=100 value=$avancement></progress> <span id='lbl-avancement'>$avancement&nbsp;%</span>";
 
             echo $code;
 
@@ -42,7 +40,10 @@ function formulaires_fchmlatex_charger_dist($self)
         {
             $sZipFileName = getZipFileName();
             zipDir($sDirExport ,$sZipFileName);
-            return array('message_ok'=>"<a href='$sZipFileName'>"._T("chmlatex:telecharger_$format")."</a>");
+            return array(
+                'message_ok'=>"<a href='$sZipFileName'>"._T("chmlatex:telecharger_$format")."</a>",
+                'format'    => $format,
+                'langue'    => _request('langue'));
         }
     }
     return array();
@@ -70,8 +71,8 @@ function formulaires_fchmlatex_verifier_dist()
  */
 function formulaires_fchmlatex_traiter_dist($self)
 {
-    $format = _request('format');
-    $langue = _request('langue');
+    $format = _request('format_export');
+    $langue = _request('langue_export');
     $secteur = _request('secteur_region');
 
     // Suppression du dossier d'export
@@ -253,6 +254,8 @@ function html_lien($matches)
     $nom = $nomf.'.'.$ext;
     $id = 0;
 
+    spip_log('S: '.$chemin,'html_lien');
+
     if(substr($chemin, 0, strlen('../')) === '../' || substr($chemin, 0, strlen('http')) === 'http')
     {
         if(substr($chemin, 0, strlen($GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')) === $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')
@@ -269,11 +272,15 @@ function html_lien($matches)
             }
             $aId = explode('#',$id); // Traitement des ancres
             $id = $aId[0];
-            $nom = $type.$idd.'.html';
+            $nom = $type.$id.'.html';
             if(isset($aId[1])) $nom .= '#'.$aId[1];
+            spip_log('R: '.$nom,'html_lien');
+            spip_log('M: '.$matches[0],'html_lien');
+
             return str_replace($matches[1],$nom,$matches[0]);
         }
     }
+    spip_log('N: '.$matches[0],'html_lien');
     return $matches[0];
 }
 
@@ -355,7 +362,7 @@ function tex_export($a,$num,$secteur,$langue)
     {
         // Document maître
         $code = recuperer_fond("tex/index", array('id_rubrique' => $secteur,'lang' => $langue,));
-        file_put_contents($sDirExport.'chmlatex.tex',$code);
+        file_put_contents($sDirExport.'chmlatex_'.$langue.'.tex',$code);
 
         // 1ère de couverture
         $code = recuperer_fond("tex/premiere", array('id_rubrique' => $secteur,'lang' => $langue,));

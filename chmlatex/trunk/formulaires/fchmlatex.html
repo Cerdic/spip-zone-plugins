@@ -3,6 +3,10 @@
 [
 [(#BOITE_OUVRIR{<:chmlatex:export_termine:>,success})]
 <h2>(#ENV*{message_ok})</h2>
+[(#CONFIG{chmlatex/compilateur_#ENV*{format},''}|oui)
+    #BOITE_PIED
+    [(#BOUTON_ACTION{<:chmlatex:compiler:>,#URL_ACTION_AUTEUR{chmlatex_compilation,#ENV*{format}_#ENV*{langue},#SELF},ajax})]
+]
 #BOITE_FERMER
 ]
 
@@ -14,19 +18,19 @@
 
 [(#EDITABLE|oui)
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-<h3 class='titrem'>Options de génération de l'export</h3>
+<h3 class='titrem'><:chmlatex:option_export:></h3>
     <form action='[(#ENV{action}|parametre_url{format|num|secteur|lang,''})]' method='post'>
         #ACTION_FORMULAIRE{#ENV{action}}
         <label><:chmlatex:format:>&nbsp;:</label>
         <br />
-        <input id="html" name="format" type="radio" value="html"  CHECKED />
+        <input id="html" name="format_export" type="radio" value="html"  CHECKED />
         <label for="html"><:chmlatex:format_html:></label>
         <br />
-        <input id="tex" name="format" type="radio" value="tex" />
+        <input id="tex" name="format_export" type="radio" value="tex" />
         <label for="tex"><:chmlatex:format_latex:></label>
         <br />
         <br />
-        [(#SAISIE{selecteur_langue,langue,label=<:chmlatex:langue:>})]
+        [(#SAISIE{selecteur_langue,langue_export,label=<:chmlatex:langue:>})]
         <br />
         <br />
         [(#SAISIE{secteur,secteur_region,label=<:chmlatex:secteur:>})]
