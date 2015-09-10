@@ -2,15 +2,13 @@
 
 	Formulaire pour ajouter un ou plusieurs albums à un objet.
 	On peut soit créer et remplir un nouvel album, soit choisir un ou plusieurs albums existants.
-	Dans le premier cas, il s'agit en gros d'un fusion des formulaires «editer_album» et «joindre_document».
-
-][(#REM)
+	Dans le premier cas, il s'agit en gros d'un fusion des formulaires « editer_album » et « joindre_document ».
 
 	Utilise :
 		formulaires/inc-upload_document.html
 
 ]
-#SET{id_unique,#ENV{objet_associer}|concat{#ENV{id_objet_associer}|>{0}|?{#ENV{id_objet_associer},0}}}
+#SET{id_unique,#ENV{objet_associer}|concat{#ENV{id_objet_associer}|intval}}
 #SET{edition,#EVAL{_request('exec')}|match{_edit$}|?{1}}
 <div class='formulaire_spip formulaire_#FORM'>
 	<h3 class='titrem'>[(#CHEMIN_IMAGE{album-24.png}|balise_img{'',cadre-icone})]<:album:icone_ajouter_album:></h3>
@@ -21,7 +19,9 @@
 	<form method='post' action='#ENV{action}' name="formulaire_ajouter_album" id="formulaire_ajouter_album_#GET{id_unique}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#REM) Création d'un nouvel album ]
+		[(#REM)
+			Onglet « Création d'un nouvel album »
+		]
 		<div id="creer-album-#GET{id_unique}">
 
 			<h5 class="menu">
@@ -64,7 +64,9 @@
 
 		</div><!-- #creer-album -->
 
-		[(#REM) Choix d'un album existant ]
+		[(#REM)
+			Onglet « Choix d'un album existant »
+		]
 		<div id="choisir-album-#GET{id_unique}" style="display:none;">
 
 			<h5 class="menu">
@@ -86,10 +88,6 @@
 				</li>
 			</ul>
 
-			<script type="text/javascript">/*<!\[CDATA\[*/
-			function albumselect#GET{id_unique}(id){jQuery.modalboxclose();jQuery("#ids_albums_associer_#GET{id_unique}").attr('value',id).focus();jQuery('#formulaire_ajouter_album_[(#GET{id_unique}) ]input\[name=choisir_album\]').get(0).click();}
-			/*\]\]>*/</script>
-
 			<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
 				<input class="submit" type="submit" name="choisir_album" value="<:bouton_enregistrer:>" />
 			</p>
@@ -99,8 +97,13 @@
 	</div></form>
 	]
 </div>
+[(#REM) Scripts :
+ - la gestion des onglets et intitulé du bouton de validation
+ - poster automatiquement le formulaire aux choix d''un album dans la modalbox
+]
 <script type='text/javascript'>/*<![CDATA[*/
 jQuery(document).ready(function($) {
+	// fn : gestion onglets + intitulés bouton validation
 	function ajouter_album() {
 		var creer = $("#creer-album-[(#GET{id_unique})]");
 		var choisir = $("#choisir-album-[(#GET{id_unique})]");
@@ -124,7 +127,17 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	// init
 	ajouter_album();
-	if (window.jQuery) jQuery(function(){onAjaxLoad(ajouter_album);});
+	// relance en cas de rechargement ajax
+	if (window.jQuery) jQuery(function(){
+		onAjaxLoad(ajouter_album);
+	});
 });
+// fn : validation du formulaire au choix d'un album dans la modalbox
+function albumselect#GET{id_unique}(id){
+	$.modalboxclose();
+	$("#ids_albums_associer_#GET{id_unique}").attr('value',id).focus();
+	$('#formulaire_ajouter_album_[(#GET{id_unique}) ]input\[name=choisir_album\]').get(0).click();
+}
 /*]]>*/</script>

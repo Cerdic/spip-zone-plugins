@@ -148,19 +148,13 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 
 		// traitement des documents si des fichiers ont été choisis
 		include_spip('inc/joindre_document');
-		$files = joindre_trouver_fichier_envoye();
-		if (
-			is_array($files)
-			AND count($files)
-		){
-			$id_temporaire = 0-$GLOBALS['visiteur_session']['id_auteur'];
-			$traiter_joindre_document = charger_fonction('traiter','formulaires/joindre_document');
-			$res_joindre_document = $traiter_joindre_document('new',$id_temporaire,'album','document');
-			$res = array_merge($res, $res_joindre_document);
-			// pas besoin du js ajouté dans le message de retour
-			if (isset($res['message_ok']) AND $res['message_ok']){
-				$res['message_ok'] = preg_replace('/(<script.*<\/script>)/is','',$res['message_ok']);
-			}
+		$id_temporaire = 0-$GLOBALS['visiteur_session']['id_auteur'];
+		$traiter_joindre_document = charger_fonction('traiter','formulaires/joindre_document');
+		$res_joindre_document = $traiter_joindre_document('new',$id_temporaire,'album','document');
+		$res = array_merge($res, $res_joindre_document);
+		// pas besoin du js ajouté dans le message de retour
+		if (isset($res['message_ok']) AND $res['message_ok']){
+			$res['message_ok'] = preg_replace('/(<script.*<\/script>)/is','',$res['message_ok']);
 		}
 
 		// traitement de l'album
