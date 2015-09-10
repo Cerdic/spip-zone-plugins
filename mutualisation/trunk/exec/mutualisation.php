@@ -12,6 +12,8 @@ function exec_mutualisation_dist()
     $timestart = microtime(true);
     $memory_limit = strtolower(ini_get('memory_limit'));
 
+    $plnum = array();
+
     include_spip('inc/minipres');
     include_spip('inc/filtres');
 
@@ -35,28 +37,28 @@ function exec_mutualisation_dist()
         @copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
     }
 
-    $titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version').' '.$GLOBALS['spip_version_base'].')</em>');
+    $titre = _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version').' '.$GLOBALS['spip_version_base'].')</em>');
 
     //$page .= "<div id='trace'></div>" ;
-    $page .= "<table style='clear:both;'>
-	<thead>
-		<tr>
-			<td>Site</td>
-			<td>Nom</td>
-			<td>Admin</td>
-			<td id='IMG'>IMG<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='IMGcalculer' id='IMGcalculer' value='Calculer' onclick='rechercher_tailles(\"IMG\");' /></td>
-			<td id='local'>local<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='localcalculer' id='localcalculer' value='Calculer' onclick='rechercher_tailles(\"local\");' /></td>
-			<td id='cache'>cache<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");' /></td>
-			<td title='Popularit&eacute; totale du site'>Stats</td>
-			<td>Plugins</td>
-			<td>Compression</td>
-			<td>Date</td>
-		</tr>
-	</thead>
-	<tbody>";
+    $page = "<table style='clear:both;'>
+    <thead>
+        <tr>
+            <td>Site</td>
+            <td>Nom</td>
+            <td>Admin</td>
+            <td id='IMG'>IMG<span class='unite'>&nbsp;(Mo)</span><br />
+                <input type='button' name='IMGcalculer' id='IMGcalculer' value='Calculer' onclick='rechercher_tailles(\"IMG\");' /></td>
+            <td id='local'>local<span class='unite'>&nbsp;(Mo)</span><br />
+                <input type='button' name='localcalculer' id='localcalculer' value='Calculer' onclick='rechercher_tailles(\"local\");' /></td>
+            <td id='cache'>cache<span class='unite'>&nbsp;(Mo)</span><br />
+                <input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");' /></td>
+            <td title='Popularit&eacute; totale du site'>Stats</td>
+            <td>Plugins</td>
+            <td>Compression</td>
+            <td>Date</td>
+        </tr>
+    </thead>
+    <tbody>";
 
     $nsite = 1;
 
@@ -75,7 +77,10 @@ function exec_mutualisation_dist()
     include_spip('inc/plugin');
     $liste_plug = liste_plugin_files();
     $liste_plug_compat = liste_plugin_valides($liste_plug);
-    $liste_plug_compat_base = $liste_plug_compat[2];
+    $liste_plug_compat_base = $liste_plug_compat[1];
+    // echo '<pre>';
+    // var_dump($liste_plug_compat_base);
+    // echo '</pre>';
     $liste_plug_compat = $liste_plug_compat[0];
 
     foreach ($sites as $v) {
@@ -128,27 +133,27 @@ function exec_mutualisation_dist()
             $compression = _L('Activer');
         }
         $page .= '<script type="text/javascript">
-		//<![CDATA[
-		tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
-		//]]>
-		</script>
-		';
+        //<![CDATA[
+        tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
+        //]]>
+        </script>
+        ';
 
         $page .= "<tr class='tr".$nsite % 2 ."'"." style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
-			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>\n
-			<td><a href='${url}'>".typo($nom_site)."</a></td>\n
-			<td><a href='${url}ecrire/'>ecrire</a><br />
-				<a href='${url}$url_admin_plugin'>plugins</a><br />
-				<a href='${url}$url_admin_vider'>cache</a></td>
-			<td><div id='IMG$nsite' class='taille loading'></div></td>\n
-			<td><div id='local$nsite' class='taille loading'></div></td>\n
-			<td><div id='cache$nsite' class='taille loading'></div></td>\n
-			<td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>\n
-			<td>$adminplugin<a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>\n
-			<td><a href='${url}$url_compresseur'>$compression</a></td>\n
-			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>\n
-			</tr>\n";
-        $nsite++;
+            <td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>\n
+            <td><a href='${url}'>".typo($nom_site)."</a></td>\n
+            <td><a href='${url}ecrire/'>ecrire</a><br />
+                <a href='${url}$url_admin_plugin'>plugins</a><br />
+                <a href='${url}$url_admin_vider'>cache</a></td>
+            <td><div id='IMG$nsite' class='taille loading'></div></td>\n
+            <td><div id='local$nsite' class='taille loading'></div></td>\n
+            <td><div id='cache$nsite' class='taille loading'></div></td>\n
+            <td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>\n
+            <td>$adminplugin<a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>\n
+            <td><a href='${url}$url_compresseur'>$compression</a></td>\n
+            <td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>\n
+            </tr>\n";
+        ++$nsite;
     }
     $page .= '</tbody></table>';
 
@@ -167,16 +172,16 @@ function exec_mutualisation_dist()
     if ($lsplugs) {
         $nombre_plugins = count($lsplugs);
         $page .= "<br /><br /><table style='clear:both;'>
-	<thead>\n
-		<tr>
-			<td>#</td>
-			<td>Plugins utilis&#233;s ($nombre_plugins) </td>
-			<td>Plugins-dist</td>
-			<td>Version</td>
-			<td>Sites</td>
-		</tr>\n
-	</thead>
-	<tbody>";
+    <thead>\n
+        <tr>
+            <td>#</td>
+            <td>Plugins utilis&#233;s ($nombre_plugins) </td>
+            <td>Plugins-dist</td>
+            <td>Version</td>
+            <td>Sites</td>
+        </tr>\n
+    </thead>
+    <tbody>";
         foreach ($lsplugs as $plugin => $c) {
             $plnum[count($c)] .= "<tr>\n<td>".count($c)."</td>\n<td>$plugin</td>\n".'<td>'.pluginDist($list_dist, $plugin)."</td>\n<td>".$versionplug[$plugin]."</td>\n<td>".implode(', ', ancre_site($c)).'</td>'."\n".'</tr>'."\n";
         }
@@ -284,12 +289,12 @@ function exec_mutualisation_dist()
     $page = minipres($titre, $page);
 
     $page = str_replace('</head>', '
-		<link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
-		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
-		<script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
-		<script src="../mutualisation/mutualisation_toolbar.js" type="text/javascript"></script>
-		</head>
-		', $page);
+        <link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
+        <script src="../prive/javascript/jquery.js" type="text/javascript"></script>
+        <script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
+        <script src="../mutualisation/mutualisation_toolbar.js" type="text/javascript"></script>
+        </head>
+        ', $page);
 
     $uend = memory_get_peak_usage(true);
     $udiff = $uend - $ustart;
@@ -366,13 +371,20 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
     if ($cfg = @unserialize($meta['plugin'])) {
         $plugins = array_keys($cfg);
         ksort($plugins);
+        $repertoires_plugins = array('_DIR_PLUGINS', '_DIR_PLUGINS_DIST', '_DIR_RESTREINT');
         foreach ($plugins as $plugin) {
-            $vplugin_base = $meta[strtolower($plugin).'_base_version'];
-            $nouvelle_version_plugin_base = $liste_plug_compat_base[$liste_plug_compat[$plugin]['dir_type']][$liste_plug_compat[$plugin]['dir']]['version_base'];
-            if ($cfg[$plugin]['version'] != $liste_plug_compat[$plugin]['version'] and !is_null($liste_plug_compat[$plugin]['version']) and ($vplugin_base != $nouvelle_version_plugin_base)) {
+            $vplugin_base = $nouvelle_version_plugin_base = $info_plugin = '';
+            $vplugin_base = (isset($meta[strtolower($plugin).'_base_version'])) ? $meta[strtolower($plugin).'_base_version'] : '0.0.0';
+            foreach ($repertoires_plugins as $repertoire) {
+                if (isset($liste_plug_compat[$repertoire][strtolower($plugin)])) {
+                    $info_plugin = $liste_plug_compat[$repertoire][strtolower($plugin)];
+                }
+            }
+            $nouvelle_version_plugin_base = (isset($info_plugin['schema'])) ? $info_plugin['schema'] : '0.0.0';
+            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and $cfg[$plugin]['version'] != $info_plugin['version'] and !is_null($info_plugin['version']) and ($vplugin_base != $nouvelle_version_plugin_base)) {
                 $secret = $meta['version_installee'].'-'.$meta['popularite_total'];
                 $secret = md5($secret);
-                $vplugin = $vplugin_base.'&rarr;'.$nouvelle_version_plugin_base;
+                $vplugin = $vplugin_base.' &rarr; '.$nouvelle_version_plugin_base;
 
                 return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
@@ -475,7 +487,7 @@ function processConfig(&$cfg, &$lsplugs, $path)
     // echo "<!-- Process: " . $path . $cfg['fn'] . "--> \n";
     $data = file_get_contents($path.$cfg['fn']);
 
-    if (1 === preg_match($cfg['pre'], $data, $r) and !$lsplugs[strtolower(trim($r[1]))]) {
+    if (1 === preg_match($cfg['pre'], $data, $r) and !isset($lsplugs[strtolower(trim($r[1]))])) {
         preg_match($cfg['ver'], $data, $n);
 
         return trim($r[1]).' ('.$n[1].')';
