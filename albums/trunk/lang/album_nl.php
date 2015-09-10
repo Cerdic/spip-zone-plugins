@@ -10,10 +10,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_associer' => 'Voeg dit album toe',
 	'bouton_dissocier' => 'Ontkoppelen',
+	'bouton_dissocier_explication' => 'Het album van het object ontkoppelen',
 	'bouton_editer_texte_album' => 'De tekst aanpassen',
 	'bouton_supprimer' => 'Verwijderen',
+	'bouton_supprimer_explication' => 'Het album definitief verwijderen',
+	'bouton_transvaser' => 'Overhevelen',
+	'bouton_transvaser_explication' => 'Verwijder de documenten van het album en koppel ze aan het object',
 	'bouton_valider_deplacer_documents' => 'De wijzigingen registreren',
 	'bouton_vider' => 'Ledigen',
+	'bouton_vider_explication' => 'Ontkoppel de documenten van het album',
 
 	// C
 	'c_albumotheque_filtres' => 'Met filters pas je bepaal de criteria toe
@@ -81,13 +86,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_meta_dimensions' => 'Afmetingen',
 	'label_modele_meta_extension' => 'Extensie',
 	'label_modele_meta_taille' => 'Grootte',
-	'label_modele_metas' => 'Informatie over dit document:', # MODIF
+	'label_modele_metas' => 'Informatie over dit document:',
 	'label_modele_nom_liste' => 'een album (lijst)',
 	'label_modele_nom_vignettes' => 'een album (iconen)',
+	'label_modele_pagination' => 'Paginatie',
 	'label_modele_parcourir_albums' => 'Albums doorbladeren',
 	'label_modele_placeholder_dimension' => 'Grootte in px, zonder eenheid',
+	'label_modele_ratio' => 'Ratio van de geherkadreerde afbeeldingen',
+	'label_modele_ratio_placeholder' => '16/9, 2.21:1, 4-3 enz.',
 	'label_modele_recadrer_images' => 'Afbeeldingen herkadreren',
-	'label_modele_titre' => 'Aangepaste titel', # MODIF
+	'label_modele_titre' => 'Aangepaste titel',
 	'label_modele_titre_perso' => 'Aangepaste titel',
 	'label_modele_tri_date' => 'Datum',
 	'label_modele_tri_id' => 'Documentnummer',
@@ -105,9 +113,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_album_non_editable' => 'Dit album kan niet worden aangepast: het wordt door een of meerdere objecten gebruikt die je niet mag aapassen.',
 	'message_avertissement_cfg_documents' => 'Opgelet! Er kunnen geen documenten aan de albums worden toegevoegd. Activeer dit voor een goede werking van de albums.',
 	'message_balise_inseree_succes' => 'Het baken is in de tekst opgenomen',
-	'message_id_album_ajoute' => 'Album nr @id_album@ werd toegevoegd.', # MODIF
+	'message_id_album_ajoute' => 'Album nr @id_album@ werd toegevoegd.',
 	'message_nb_albums_ajoutes' => '@nb@ albums zijn toegevoegd.',
-	'message_supprimer' => 'Definitief verwijderen?', # MODIF
+	'message_supprimer' => 'Definitief verwijderen (onomkeerbaar)?',
 	'message_vider' => 'Alle documenten weghalen?',
 
 	// O
