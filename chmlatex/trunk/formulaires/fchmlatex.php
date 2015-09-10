@@ -254,8 +254,6 @@ function html_lien($matches)
     $nom = $nomf.'.'.$ext;
     $id = 0;
 
-    spip_log('S: '.$chemin,'html_lien');
-
     if(substr($chemin, 0, strlen('../')) === '../' || substr($chemin, 0, strlen('http')) === 'http')
     {
         if(substr($chemin, 0, strlen($GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')) === $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')
@@ -274,13 +272,10 @@ function html_lien($matches)
             $id = $aId[0];
             $nom = $type.$id.'.html';
             if(isset($aId[1])) $nom .= '#'.$aId[1];
-            spip_log('R: '.$nom,'html_lien');
-            spip_log('M: '.$matches[0],'html_lien');
 
             return str_replace($matches[1],$nom,$matches[0]);
         }
     }
-    spip_log('N: '.$matches[0],'html_lien');
     return $matches[0];
 }
 
