@@ -21,15 +21,13 @@
 [(#REM) Si la mediatheque est presente ]
 [(#PLUGIN{medias}|oui)
 
-[(#SET{exec,[(#PLUGIN{medias,version}|<{2}|?{'portfolio','popin-choisir_document'})]})]
-[(#SET{zajax,[(#PLUGIN{medias,version}|<{2}|?{'','var_zajax=contenu&'})]})]
-[(#SET{mod_fn,#ENV{_modalbox_retour}|?{'2','1'}})]
+[(#SET{mod_fn,#ENV{_modalbox_retour}|?{2,1}})]
 
 [(#REM) Parcourir les documents de l'article ]
 [(#ENV{id_article}|oui)
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_docs_article:>"
 	onclick="jQuery.modalboxload(
-		'[(#URL_ECRIRE{#GET{exec},#GET{zajax}selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_article=#ENV{id_article}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
+		'[(#URL_ECRIRE{popin-choisir_document,var_zajax=contenu&selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_article=#ENV{id_article}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
 		{autoResize: true}
 	);"
 /></p>
@@ -39,7 +37,7 @@
 [(#ENV{id_rubrique}|oui)
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_docs_rubrique:>"
 	onclick="jQuery.modalboxload(
-		'[(#URL_ECRIRE{#GET{exec},#GET{zajax}selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_rubrique=#ENV{id_rubrique}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
+		'[(#URL_ECRIRE{popin-choisir_document,var_zajax=contenu&selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_rubrique=#ENV{id_rubrique}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
 		{autoResize: true}
 	);"
 /></p>
@@ -49,7 +47,7 @@
 [(#ENV{id_breve}|oui)
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_docs_breve:>"
 	onclick="jQuery.modalboxload(
-		'[(#URL_ECRIRE{#GET{exec},#GET{zajax}selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_breve=#ENV{id_breve}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
+		'[(#URL_ECRIRE{popin-choisir_document,var_zajax=contenu&selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}&id_breve=#ENV{id_breve}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
 		{autoResize: true}
 	);"
 /></p>
@@ -58,7 +56,7 @@
 [(#REM) Parcourir toute la mediatheque ]
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_mediatheque:>"
 	onclick="jQuery.modalboxload(
-		'[(#URL_ECRIRE{#GET{exec},#GET{zajax}selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
+		'[(#URL_ECRIRE{popin-choisir_document,var_zajax=contenu&selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',
 		{autoResize: true}
 	);"
 /></p>
