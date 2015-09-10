@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_notif_mail' => 'Mehrere Adressen müssen mit Komma "," getrennt werden. Diese Adressen ergänzen die des Webmasters der Site.', # MODIF
 	'help_obsolete' => 'Aufbewahrungszeitraum der Sicherungsdateien in Tagen.',
 	'help_prefixe' => 'Präfix des Namens der Backup-Datei.',
+	'help_repertoire' => 'Wenn Sie nicht das SPIP-Backupverzeichnis verwenden wollen, tragen Sie den gewüschen Pfad ab dem Installationsverzeichnis von SPIP (ein / am Ende ist erforderlich)',
 	'help_restauration' => '<strong>Achtung!!!</strong> Diese Backups sind <strong>nicht im SPIP-Format</strong>.
 Sie können nicht mit dem SPIP-Backupsystem genutzt werden.<br /><br />
 Sie müssen für die Wiederherstellung das Interface ihres Servers verwenden. In PHPMyAdmin klicken Sie unter dem Reiter <strong>"SQL"</strong> sie auf die Schaltfläche <strong>"Datei wählen"</strong> suchen die gewünschte Sicherung aus. Falls erforderlich markieren sie die Option "gzip").br /><br />

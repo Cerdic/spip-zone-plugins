@@ -1,7 +1,7 @@
 <traduction module="saveauto" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/trunk/lang/" reference="fr">
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=ca" total="69" traduits="17" relire="0" modifs="17" nouveaux="35" pourcent="24.64">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="69" traduits="59" relire="0" modifs="5" nouveaux="5" pourcent="85.51">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="69" traduits="60" relire="0" modifs="5" nouveaux="4" pourcent="86.96">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=en" total="69" traduits="59" relire="0" modifs="5" nouveaux="5" pourcent="85.51">
