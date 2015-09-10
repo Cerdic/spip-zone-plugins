@@ -58,6 +58,7 @@ Beispiel: 100. (0 = niemals)',
 	'legend_documents' => 'Dokumente hochladen',
 	'legend_editer_prive' => 'Stifte im Redaktionssystem (experimentell)',
 	'legend_introduction_article' => 'Einleitender Text des Artikels',
+	'legend_introduction_rubrique' => 'Einführender Text der Rubrik',
 
 	// M
 	'message_image_obligatoire' => 'Es muß ein Bild gewählt werden.',
