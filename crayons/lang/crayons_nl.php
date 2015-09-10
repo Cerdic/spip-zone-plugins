@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Upload van documenten',
 	'legend_editer_prive' => 'Bewerk het private deel (experimenteel)',
 	'legend_introduction_article' => 'Aanhef van artikel',
+	'legend_introduction_rubrique' => 'Introductietekst van de rubriek',
 
 	// M
 	'message_image_obligatoire' => 'U moet een afbeelding kiezen',
