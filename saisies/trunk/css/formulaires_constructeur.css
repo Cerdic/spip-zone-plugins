@@ -62,6 +62,16 @@
 }
 .formulaire_construire_formulaire .formulaire_configurer .boutons { margin-bottom: -20px; }
 
+.formulaire_construire_formulaire .editer.obligatoire .formulaire_configurer label {
+    color: #666;
+    font-weight: normal;
+}
+.formulaire_construire_formulaire .editer.obligatoire .formulaire_configurer .obligatoire label {
+    color: black;
+    font-weight: bold;
+}
+
+
 .formulaire_configurer-contenus > .fieldset > fieldset:first-child {border-top:0;}
 .formulaire_configurer-contenus > .fieldset > fieldset {padding: 0}
 

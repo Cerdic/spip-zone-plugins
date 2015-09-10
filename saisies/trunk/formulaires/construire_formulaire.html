@@ -54,166 +54,175 @@
 		.modifie .message_reinitialiser,.modifie #reinitialiser {display: block}
 	</style>
 	<script type="text/javascript">
-		jQuery(function(){
-			jQuery('.formulaire_construire_formulaire .configurable')
-				.hover(
-					function(){
-						jQuery(this)
-							.addClass('hover')
-							.find('> .actions')
-								.show()
-							.end()
-							.parents('li.configurable:not(.en_configuration)')
-								.mouseout();
-					},
-					function(){
-						if (!jQuery(this).is('.en_configuration'))
-							jQuery(this)
-								.removeClass('hover')
-								.find('> .actions')
-									.hide()
-								.end()
-								.parents('.configurable').eq('0')
-									.mouseover();
-					}
-				)
-				.filter(':not(.en_configuration)')
-					.find('> .actions')
-						.hide()
-					.end()
-				.end();
-			
-			// On lance la création des onglets
-			formulaire_configurer_onglets();
-			
-			// Gérer la liste des vérifications
-			jQuery('.liste_verifications')
-				.each(function(){
-					var options = jQuery(this).siblings('.options_verifier').hide();
-					var select = jQuery(this).find('select');
-					
-					select
-						.change(function(){
-							var montrer = jQuery(this).val() ? jQuery(this).val() : 'soigfeg';
-							options.hide().filter('.'+montrer).show();
-						})
-						.change();
-				});
-			
-			// On déplie toujours les fieldsets plés par défaut
-			jQuery('.fieldset.plie')
-				.each(function(){
-					jQuery(this)
-						.removeClass('plie')
-						.find('> fieldset > .editer-groupe').show();
-				});
-				
-			[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
-					$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
-						if ($.fn.sortable) {
-							jQuery( "#deplacable, #deplacable .editer-groupe" ).sortable({
-								revert: true,
-								containment: '#deplacable',
-								connectWith: "#deplacable, #deplacable .editer-groupe",
-								placeholder: "ui-state-highlight",
-								handle: '>.actions .deplacer_saisie',
-								start: function(event, ui) {
-									jQuery('.ui-state-highlight')
-										.css('height', ui.item.css('height'))
-										.css('height', '+=20px');
-								},
-								update: function(event, ui) {
-									id = ui.item.data('id');
-									ou = ui.item.next().data('id');
-									// avant le suivant
-									if (!ou) {
-										// sinon dans le parent
-										ou = ui.item.closest('.fieldset').data('id');
-										if (ou) {
-											ou = '\[' + ou + '\]';
-										}
-									}
-									url = "#URL_ECRIRE";
-									$.get(url, {
-										session: '#ENV{_identifiant_session}',
-										action: 'deplacer_saisie',
-										saisie: id,
-										ou: ou
-									}, function() {
-										//jQuery('input.vide').submit();
-										jQuery('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
-									});
-								}
-							});
-						}
-					});
-							/*
-					$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
-						if ($.fn.draggable) {
-							jQuery( "#attrapable" ).draggable({
-								connectToSortable: "#deplacable, #deplacable ul",
-								helper: "clone"
-							});
-						}
-					});
-							*/
-				});});});
-			]
-		});
-		
-		function formulaire_configurer_onglets(){
-			var formulaire_configurer = jQuery('.formulaire_configurer');
-			var onglets = jQuery('<ul class="formulaire_configurer-onglets"></ul>');
-			var contenus = formulaire_configurer.find('> .editer-groupe > .fieldset');
-			
+	(function($){
+
+		function formulaire_configurer_onglets() {
+			var $formulaire_configurer = $('.formulaire_configurer');
+			var $onglets = $('<ul class="formulaire_configurer-onglets"></ul>');
+			var $contenus = $formulaire_configurer.find('> .editer-groupe > .fieldset');
+
 			// On ajoute le conteneur des onglets
-			formulaire_configurer
-				.prepend(onglets);
-			
+			$formulaire_configurer.prepend($onglets);
+
 			// On parcourt les contenus pour générer les onglets
-			contenus
-				.each(function(i){
-					// On ajoute un identifiant et une classe
-					jQuery(this)
-						.attr('id', 'formulaire_configurer-contenu-'+i)
-						.addClass('formulaire_configurer-contenu');
-					// On récupère le titre (en le cachant au passage)
-					var titre = jQuery(this).find('h3').eq(0).hide().text();
-					// On crée un onglet
-					var onglet = jQuery('<li><a href="#formulaire_configurer-contenu-'+i+'">'+titre+'</a></li>');
-					onglet
-						.click(function(){
-							contenus.hide();
-							jQuery(
-								jQuery(this)
-									.siblings()
-										.removeClass('actif')
-									.end()
-									.addClass('actif')
-									.find('a')
-										.attr('href')
-							).show();
-							return false;
-						});
-					
-					// On active le premier onglet au démarrage
-					if (i == 0) onglet.addClass('actif');
-					
-					// S'il y a des erreurs dans cette partie du contenu, on met une classe "erreurs" à l'onglet aussi
-					if (jQuery(this).find('.editer.erreur').length > 0)
-						onglet.addClass('erreur');
-					
-					// On ajoute l'onglet
-					onglets
-						.append(onglet);
-				})
-				.hide()
-				.eq(0)
-					.show();
+			$contenus.each(function(i){
+				// On ajoute un identifiant et une classe
+				$(this)
+					.attr('id', 'formulaire_configurer-contenu-'+i)
+					.addClass('formulaire_configurer-contenu');
+				// On récupère le titre (en le cachant au passage)
+				var titre = $(this).find('h3').eq(0).hide().text();
+				// On crée un onglet
+				var $onglet = $('<li><a href="#formulaire_configurer-contenu-'+i+'">'+titre+'</a></li>');
+				$onglet
+					.click(function(){
+						$contenus.hide();
+						$(
+							$(this)
+								.siblings()
+									.removeClass('actif')
+								.end()
+								.addClass('actif')
+								.find('a')
+									.attr('href')
+						).show();
+						return false;
+					});
+
+				// On active le premier onglet au démarrage
+				if (i == 0) {
+					$onglet.addClass('actif');
+				}
+
+				// S'il y a des erreurs dans cette partie du contenu, on met une classe "erreurs" à l'onglet aussi
+				if ($(this).find('.editer.erreur').length > 0) {
+					$onglet.addClass('erreur');
+				}
+
+				// On ajoute l'onglet
+				$onglets.append($onglet);
+			})
+			.hide()
+			.eq(0)
+				.show();
 		}
+
+		/* enlever les required */
+		console.log($('.formulaire_#FORM .editer.obligatoire'));
+		$('.formulaire_#FORM .editer.obligatoire').find('input, textarea, select').each(function(){
+			console.log($(this));
+			if ($(this).prop('required')) {
+				$(this).prop('required', false);
+			}
+		});
+
+		$('.formulaire_#FORM .configurable')
+			.hover(
+				function(){
+					$(this)
+						.addClass('hover')
+						.find('> .actions')
+							.show()
+						.end()
+						.parents('li.configurable:not(.en_configuration)')
+							.mouseout();
+				},
+				function(){
+					if (!$(this).is('.en_configuration'))
+						$(this)
+							.removeClass('hover')
+							.find('> .actions')
+								.hide()
+							.end()
+							.parents('.configurable').eq('0')
+								.mouseover();
+				}
+			)
+			.filter(':not(.en_configuration)')
+				.find('> .actions')
+					.hide()
+				.end()
+			.end();
+
+		// On lance la création des onglets
+		formulaire_configurer_onglets();
+
+		// Gérer la liste des vérifications
+		$('.liste_verifications').each(function(){
+			var $options = $(this).siblings('.options_verifier').hide();
+			var $select  = $(this).find('select');
+
+			$select
+				.change(function(){
+					var montrer = jQuery(this).val() ? jQuery(this).val() : 'soigfeg';
+					$options.hide().filter('.'+montrer).show();
+				})
+				.change();
+		});
+
+		// On déplie toujours les fieldsets plés par défaut
+		$('.fieldset.plie').each(function(){
+			$(this)
+				.removeClass('plie')
+				.find('> fieldset > .editer-groupe').show();
+		});
+
+		[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
+					if ($.fn.sortable) {
+						$( "#deplacable, #deplacable .editer-groupe" ).sortable({
+							revert: true,
+							containment: '#deplacable',
+							connectWith: "#deplacable, #deplacable .editer-groupe",
+							placeholder: "ui-state-highlight",
+							handle: '>.actions .deplacer_saisie',
+							start: function(event, ui) {
+								$('.ui-state-highlight')
+									.css('height', ui.item.css('height'))
+									.css('height', '+=20px');
+							},
+							update: function(event, ui) {
+								id = ui.item.data('id');
+								ou = ui.item.next().data('id');
+								// avant le suivant
+								if (!ou) {
+									// sinon dans le parent
+									ou = ui.item.closest('.fieldset').data('id');
+									if (ou) {
+										ou = '\[' + ou + '\]';
+									}
+								}
+								url = "#URL_ECRIRE";
+								$.get(url, {
+									session: '#ENV{_identifiant_session}',
+									action: 'deplacer_saisie',
+									saisie: id,
+									ou: ou
+								}, function() {
+									//jQuery('input.vide').submit();
+									$('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
+								});
+							}
+						});
+					}
+				});
+				/*
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
+					if ($.fn.draggable) {
+						$( "#attrapable" ).draggable({
+							connectToSortable: "#deplacable, #deplacable ul",
+							helper: "clone"
+						});
+					}
+				});
+				*/
+			});});});
+		]
+
+	})(jQuery);
 	</script>
 	</BOUCLE_editable>
 </div>
