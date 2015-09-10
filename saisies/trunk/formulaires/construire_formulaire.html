@@ -108,9 +108,7 @@
 		}
 
 		/* enlever les required */
-		console.log($('.formulaire_#FORM .editer.obligatoire'));
 		$('.formulaire_#FORM .editer.obligatoire').find('input, textarea, select').each(function(){
-			console.log($(this));
 			if ($(this).prop('required')) {
 				$(this).prop('required', false);
 			}
