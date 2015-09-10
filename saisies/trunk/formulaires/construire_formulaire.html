@@ -154,7 +154,7 @@
 
 			$select
 				.change(function(){
-					var montrer = jQuery(this).val() ? jQuery(this).val() : 'soigfeg';
+					var montrer = $(this).val() ? $(this).val() : 'soigfeg';
 					$options.hide().filter('.'+montrer).show();
 				})
 				.change();
@@ -202,7 +202,7 @@
 									saisie: id,
 									ou: ou
 								}, function() {
-									//jQuery('input.vide').submit();
+									//$('input.vide').submit();
 									$('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
 								});
 							}
@@ -210,7 +210,7 @@
 					}
 				});
 				/*
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}draggable.js}", function(){
 					if ($.fn.draggable) {
 						$( "#attrapable" ).draggable({
 							connectToSortable: "#deplacable, #deplacable ul",
