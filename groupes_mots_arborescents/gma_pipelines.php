@@ -92,27 +92,65 @@ function gma_formulaire_verifier($flux) {
  * - n'afficher les options techniques que sur la racine
  *
  * @param array $flux
- * 		Données du pipeline
+ *     Données du pipeline
  * @return array
- * 		Données du pipeline complétées
+ *     Données du pipeline complétées
 **/
 function gma_formulaire_fond($flux) {
 	// sur le formulaire d'édition de groupe de mot
 	if ($flux['args']['form'] == 'editer_groupe_mot') {
+		$env = $flux['args']['contexte'];
 
+		// la parenté sur tous : on récupère le sélecteur et on l'ajoute après le titre...
+		$selecteur_parent = recuperer_fond('formulaires/selecteur_groupe_parent', $env);
+
+		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_titre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
+		if (preg_match($cherche, $flux['data'], $m)) {
+			$flux['data'] = preg_replace($cherche, '$1'.$selecteur_parent.'$3', $flux['data'], 1);
+		}
+
+		// les paramètres techniques sont uniquement sur les groupes racines (on enlève le fieldset)
+		if ($env['id_parent']) {
+			$cherche = "/<(li|div)[^>]*class=(?:'|\")fieldset fieldset_config.*?<\/fieldset>\s*<\/\\1>/is";
+			if (preg_match($cherche, $flux['data'], $m)) {
+				$flux['data'] = preg_replace($cherche, '', $flux['data'], 1);
+			}
+		}
+	}
+	return $flux;
+}
+
+
+/**
+ * Modifie les champs du formulaire de groupe de mot
+ * pour :
+ * - ajouter le sélecteur de parenté 
+ * - n'afficher les options techniques que sur la racine
+ *
+ * @note
+ *     Code utilisant querypath (mais non fonctionnels avec libxml version 2.9.2 :/)
+ * 
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline complétées
+**/
+function gma_formulaire_fond_avec_querypath($flux) {
+	// sur le formulaire d'édition de groupe de mot
+	if ($flux['args']['form'] == 'editer_groupe_mot') {
 		$html = $flux['data'];
 		$env = $flux['args']['contexte'];
+
+		// la parenté sur tous : on récupère le sélecteur et on l'ajoute après le titre...
+		$selecteur_parent = recuperer_fond('formulaires/selecteur_groupe_parent', $env);
 
 		// charger QueryPath
 		include_spip('inc/querypath');
 		$qp = spip_query_path($html, 'body');
 
-		// la parenté sur tous
-		// on récupère le sélecteur et on l'ajoute après le titre...
-		$selecteur_parent = recuperer_fond('formulaires/selecteur_groupe_parent', $env);
 		$qp->top('body')->find('.editer_titre')->after($selecteur_parent);
 
-		// les paramètres techniques sont uniquement sur les groupes racine
+		// les paramètres techniques sont uniquement sur les groupes racines
 		if ($env['id_parent']) {
 			$qp->top('body')->find('.fieldset_config')->remove();
 		}
@@ -122,6 +160,7 @@ function gma_formulaire_fond($flux) {
 	}
 	return $flux;
 }
+
 
 
 /**
