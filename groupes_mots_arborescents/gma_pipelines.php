@@ -100,10 +100,9 @@ function gma_formulaire_fond($flux) {
 	// sur le formulaire d'édition de groupe de mot
 	if ($flux['args']['form'] == 'editer_groupe_mot') {
 
-
 		$html = $flux['data'];
 		$env = $flux['args']['contexte'];
-		
+
 		// charger QueryPath
 		include_spip('inc/querypath');
 		$qp = spip_query_path($html, 'body');
@@ -111,11 +110,11 @@ function gma_formulaire_fond($flux) {
 		// la parenté sur tous
 		// on récupère le sélecteur et on l'ajoute après le titre...
 		$selecteur_parent = recuperer_fond('formulaires/selecteur_groupe_parent', $env);
-		$qp->top('body')->find('li.editer_titre')->after($selecteur_parent);
+		$qp->top('body')->find('.editer_titre')->after($selecteur_parent);
 
 		// les paramètres techniques sont uniquement sur les groupes racine
 		if ($env['id_parent']) {
-			$qp->top('body')->find('li.fieldset_config')->remove();
+			$qp->top('body')->find('.fieldset_config')->remove();
 		}
 
 		// retourner le HTML modifie

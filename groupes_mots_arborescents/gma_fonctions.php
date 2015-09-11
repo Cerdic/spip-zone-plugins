@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		gma_definir_heritages();  // recalcule tout
  * 		gma_definir_heritages(3); // recalcule le groupe 3 et ses enfants
  * 
- * @param int $id_parent
+ * @param int $id_groupe
  * 		Identifiant du groupe à modifier
  * 		C'est le seul paramètre éventuellement a passer
  * @param null|array $heritage
