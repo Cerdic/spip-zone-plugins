@@ -42,6 +42,3 @@ function gma_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-
-?>

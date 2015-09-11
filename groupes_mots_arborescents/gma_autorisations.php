@@ -33,6 +33,3 @@ function autoriser_groupemots_supprimer($faire, $type, $id, $qui, $opt) {
 	}
 	return sql_countsel('spip_groupes_mots','id_parent='.intval($id))?false:true;
 }
-
-
-?>

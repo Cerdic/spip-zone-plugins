@@ -255,5 +255,3 @@ function boucle_HIERARCHIE_PARENT_dist($id_boucle, &$boucles, $primary, $table) 
 	return calculer_boucle($id_boucle, $boucles); 
 }
 }
-
-?>

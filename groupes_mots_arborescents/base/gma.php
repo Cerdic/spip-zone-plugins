@@ -37,4 +37,3 @@ function gma_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['hierarchie_groupes_mots']   = 'groupes_mots';
 	return $interfaces;
 }
-?>

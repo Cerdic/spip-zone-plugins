@@ -294,5 +294,3 @@ function gma_post_edition($flux) {
 	}
 	return $flux;
 }
-
-?>
