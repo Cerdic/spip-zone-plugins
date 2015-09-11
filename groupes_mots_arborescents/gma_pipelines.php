@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Ajoute la liste des sous groupes et un bouton de création de
  * sous groupe sur la vue d'un groupe. 
  *
+ * @pipeline afficher_complement_objet
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -34,6 +35,7 @@ function gma_afficher_complement_objet($flux) {
  * Ajoute le parent dans l'environnement d'un nouveau groupe de mot
  * s'il est connu 
  *
+ * @pipeline formulaire_charger
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -58,6 +60,7 @@ function gma_formulaire_charger($flux) {
  * Verifie que le parent d'un groupe de mot
  * n'est pas ce groupe lui-même !
  *
+ * @pipeline formulaire_verifier
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -91,6 +94,7 @@ function gma_formulaire_verifier($flux) {
  * - ajouter le sélecteur de parenté 
  * - n'afficher les options techniques que sur la racine
  *
+ * @pipeline formulaire_fond
  * @param array $flux
  *     Données du pipeline
  * @return array
@@ -128,8 +132,9 @@ function gma_formulaire_fond($flux) {
  * - n'afficher les options techniques que sur la racine
  *
  * @note
- *     Code utilisant querypath (mais non fonctionnels avec libxml version 2.9.2 :/)
- * 
+ *     Code utilisant querypath (mais non fonctionnel avec libxml version 2.9.2 :/)
+ *
+ * @pipeline formulaire_fond
  * @param array $flux
  *     Données du pipeline
  * @return array
@@ -171,7 +176,8 @@ function gma_formulaire_fond_avec_querypath($flux) {
  *
  * Lors de la création d'un mot
  * - Définit l'id_groupe_racine
- * 
+ *
+ * @pipeline pre_insertion
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -210,6 +216,7 @@ function gma_pre_insertion($flux) {
  * Lors de la création d'un groupe de mot :
  * - Ajoute l'id_groupe_racine si le groupe est à la racine
  *
+ * @pipeline post_insertion
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -224,7 +231,7 @@ function gma_post_insertion($flux) {
 		// c'est a dire que 'id_groupe_racine' n'est pas défini ou nul
 		// c'est que nous avons créé un groupe racine. Il faut mettre
 		// id_groupe_racine sur id_groupe, maintenant qu'on le connait. 
-		if (!isset($flux['data']['id_groupe_racine']) OR !$flux['data']['id_groupe_racine']) {
+		if (empty($flux['data']['id_groupe_racine'])) {
 			sql_updateq(
 				'spip_groupes_mots',
 				array('id_groupe_racine' => $id_groupe),
@@ -243,7 +250,8 @@ function gma_post_insertion($flux) {
  *
  * Lors de l'édition d'un mot
  * - Définit l'id_groupe_racine
- * 
+ *
+ * @pipeline pre_edition
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -308,7 +316,8 @@ function gma_pre_edition($flux) {
  * 
  * Modifie les héritages lorsqu'un parent change ou lorsqu'on modifie
  * un groupe racine qui a pu changer des paramètres de config
- * 
+ *
+ * @pipeline post_edition
  * @param array $flux
  * 		Données du pipeline
  * @return array
@@ -320,9 +329,7 @@ function gma_post_edition($flux) {
 	if ($flux['args']['table']  == $table
 	and $flux['args']['action'] == 'modifier'
 	// soit le parent a change, soit le groupe racine est modifie
-	and (_request('gma_definir_heritages')
-	    OR !isset($flux['data']['id_parent'])
-	    OR !$flux['data']['id_parent']))
+	and (_request('gma_definir_heritages') OR empty($flux['data']['id_parent'])))
 	{
 		$id_groupe = $flux['args']['id_objet'];
 		include_spip('gma_fonctions');
