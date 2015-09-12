@@ -169,6 +169,17 @@ function motsar_formulaire_fond($flux) {
 			if (preg_match($cherche, $flux['data'], $m)) {
 				$flux['data'] = preg_replace($cherche, '$1'.$selecteur_parent.'$3', $flux['data'], 1);
 			}
+			// si le mots a des enfants, on ajoute une remarque sur le sélecteur de groupe
+			// car déplacer dans un groupe non arborescent remet tous les mots à plat.
+			if (intval($env['id_mot']) and sql_countsel('spip_mots', 'id_parent=' . intval($env['id_mot']))) {
+				// seulement si au moins un groupe n'est pas arborescent, sinon pas besoin d'affoler
+				if (sql_countsel('spip_groupes_mots', 'mots_arborescents !=' . sql_quote('oui'))) {
+					$cherche = "/(<select name='id_groupe' id='id_groupe'>)/is";
+					if (preg_match($cherche, $flux['data'], $m)) {
+						$flux['data'] = preg_replace($cherche, '<p class="explication">' . _T('motsar:info_modifier_groupe') . "</p>\n" . '$1', $flux['data'], 1);
+					}
+				}
+			}
 		}
 	}
 

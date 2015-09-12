@@ -11,8 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_parent_sur_mot' => 'Le parent du mot ne peut pas être ce mot lui-même !',
 	'erreur_parent_sur_mot_enfant' => 'Le parent du mot ne peut pas être un de ses enfants !',
 
+	// G
+	'groupes_avec_mots_arborescents' => 'Groupes avec mots arborescents',
+	'groupes_autres' => 'Autres groupes',
+
 	// I
 	'icone_creation_mot_enfant' => 'Créer un mot enfant',
+	'info_modifier_groupe' => '<strong>Attention : ce mot clé possède des enfants.</strong><br /> Si vous le déplacez dans un groupe de mot clé qui ne permet pas des arborescences de mots, votre arborescence sera perdue : tous les mots enfants seront placés à la racine du nouveau groupe.',
 
 	// O
 	'option_autoriser_mots_arborescents' => 'Mots arborescents',

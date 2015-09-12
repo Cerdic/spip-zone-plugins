@@ -1,0 +1,25 @@
+<B_groupes>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_groupes(GROUPES_MOTS){par titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}{0,1}>
+
+	#SET{arbos,0}
+	<B_groupes_arbos>
+		<optgroup label="<:motsar:groupes_avec_mots_arborescents|attribut_html:>">
+	<BOUCLE_groupes_arbos(GROUPES_MOTS){par titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}{mots_arborescents=oui}>
+		<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected'] class='mots_arborescents'>[(#TITRE|supprimer_tags|texte_backend)]</option>
+	</BOUCLE_groupes_arbos>
+		</optgroup>
+		#SET{arbos,1}
+	</B_groupes_arbos>
+
+	<B_groupes_plats>
+		[(#GET{arbos}|oui)<optgroup label="<:motsar:groupes_autres|attribut_html:>">]
+	<BOUCLE_groupes_plats(GROUPES_MOTS){par titre}{tables_liees==#VAL{'(^|,)'}|concat{#ENV{table,.*},'($|,)'}}{mots_arborescents!=oui}>
+		<option value='#ID_GROUPE'[(#EXPOSE{' '})selected='selected'] class='mots_plats'>[(#TITRE|supprimer_tags|texte_backend)]</option>
+	</BOUCLE_groupes_plats>
+		[(#GET{arbos}|oui)</optgroup>]
+	</B_groupes_plats>
+
+</BOUCLE_groupes>
+</select>
+</B_groupes>
