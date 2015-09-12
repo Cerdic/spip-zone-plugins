@@ -1,8 +1,8 @@
 <paquet
 	prefix="motsar"
 	categorie="navigation"
-	version="1.0.0-dev"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/motsar-64.png"
 	documentation=""

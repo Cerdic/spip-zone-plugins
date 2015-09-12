@@ -1,0 +1,49 @@
+[(#REM)
+
+	Surcharge de mots/prive/objets/liste/mots_associer-select.html
+
+	Modfie le squelette comme suit :
+	- pour les groupes avec mots à plat, on ne change rien
+	- sinon : afficher les mots de façon arborescente
+	- en grisant les mots déjà utilisés
+
+]#SET{selected,''}
+#SET{profondeur,1}
+<BOUCLE_groupe_plat(GROUPES_MOTS){id_groupe}{mots_arborescents != oui}>
+<B_mots>
+	<select name="ajouter_lien[groupe#ID_GROUPE]" id="ajouter_lien-groupe#ID_GROUPE"
+	  onchange="jQuery(this).siblings('input.submit').css('visibility','visible');"
+	>
+	<option value="x">&nbsp;</option>
+	<BOUCLE_mots(MOTS){id_groupe}{id_mot !IN #ENV{exclus}}{par num titre, multi titre}>
+		#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+		<option value="#GET{value}"[(#GET{value}|=={#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE}}|oui)selected="selected"#SET{selected,' '}]>#TITRE</option>
+	</BOUCLE_mots>
+	</select>
+	<input type="submit" class="submit" name="groupe#ID_GROUPE" value="<:bouton_ajouter:>"[(#GET{selected}|non)style="visibility:hidden;"]/>
+</B_mots>
+</BOUCLE_groupe_plat>
+
+<B_mots_racines>
+	<select name="ajouter_lien[groupe#ID_GROUPE]" id="ajouter_lien-groupe#ID_GROUPE"
+	  onchange="jQuery(this).siblings('input.submit').css('visibility','visible');"
+	>
+	<option value="x">&nbsp;</option>
+	<BOUCLE_mots_racines(MOTS){id_groupe}{racine}{par num titre, multi titre}>
+		#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+		<option value="#GET{value}"[(#ID_MOT|in_any{#ENV{exclus}}|oui) disabled="disabled" ][(#GET{value}|=={#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE}}|oui)selected="selected"#SET{selected,' '}]>#TITRE</option>
+
+		<BOUCLE_enfants(MOTS){id_parent}{id_groupe}{par num titre, multi titre}>
+			#SET{value,mot-#ID_MOT-#OBJET-#ID_OBJET}
+			<option value="#GET{value}"[(#ID_MOT|in_any{#ENV{exclus}}|oui) disabled="disabled" ][(#GET{value}|=={#ENV{ajouter_lien}|table_valeur{groupe#ID_GROUPE}}|oui)selected="selected"#SET{selected,' '}]>[(#PROFONDEUR|mostar_tabulation)]#TITRE</option>
+			#SET{profondeur,#GET{profondeur}|plus{1}}
+			<BOUCLE_recursif(BOUCLE_enfants) />
+			#SET{profondeur,#GET{profondeur}|moins{1}}
+		</BOUCLE_enfants>
+
+	</BOUCLE_mots_racines>
+	</select>
+	<input type="submit" class="submit" name="groupe#ID_GROUPE" value="<:bouton_ajouter:>"[(#GET{selected}|non)style="visibility:hidden;"]/>
+</B_mots_racines>
+
+<//B_groupe_plat>
