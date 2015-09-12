@@ -310,6 +310,7 @@ function motsar_post_insertion($flux) {
  * 
  * Lors de l'édition d'un mot :
  * - Modifie l'id_parent choisi et définit l'id_mot_racine et la profondeur
+ * - Lors du déplacement dans un autre groupe, recalculer les héritages.
  * 
  * Lors de l'édition d'un groupe de mot :
  * - Prend en compte l'option mots_arborescents
@@ -327,15 +328,17 @@ function motsar_pre_edition($flux) {
 	and $flux['args']['action'] == 'modifier')
 	{
 		$id_mot = $flux['args']['id_objet'];
-		$id_parent_ancien  = sql_getfetsel('id_parent', $table, 'id_mot=' . sql_quote($id_mot));
+		$ancien  = sql_fetsel(array('id_groupe', 'id_parent'), $table, 'id_mot=' . sql_quote($id_mot));
+
+		$id_parent_ancien = $ancien['id_parent'];
 		$id_parent_nouveau = _request('id_parent');
 		// uniquement s'ils sont différents
 		if ($id_parent_ancien != $id_parent_nouveau
-		// que le nouveau parent n'est pas notre groupe !
-		and $id_mot != $id_parent_nouveau
-		// et que le groupe parent n'est pas un de nos enfants
-		and include_spip('motsar_fonctions') // calcul_branche_mot_in
-		and !in_array($id_parent_nouveau, explode(',', calcul_branche_mot_in($id_mot)))
+			// que le nouveau parent n'est pas notre groupe !
+			and $id_mot != $id_parent_nouveau
+			// et que le mot parent n'est pas un de nos enfants
+			and include_spip('motsar_fonctions') // calcul_branche_mot_in
+			and !in_array($id_parent_nouveau, explode(',', calcul_branche_mot_in($id_mot)))
 		) {
 			$id_racine = '';
 			$profondeur = 0;
@@ -359,6 +362,14 @@ function motsar_pre_edition($flux) {
 				// qu'il faudra actualiser les mots de la branche
 				set_request('motsar_definir_heritages', true);
 			}
+		}
+
+		$id_groupe_ancien  = $ancien['id_groupe'];
+		$id_groupe_nouveau = _request('id_groupe');
+		if ($id_groupe_ancien != $id_groupe_nouveau) {
+			// pour le pipeline de post_edition. Permet entre autre de savoir
+			// qu'il faudra actualiser tout le groupe
+			set_request('motsar_definir_heritages_groupe', $id_groupe_nouveau);
 		}
 	}
 
@@ -394,15 +405,32 @@ function motsar_pre_edition($flux) {
  *     Données du pipeline complétées
 **/
 function motsar_post_edition($flux) {
+
 	// lors de l'édition d'un mot
-	if ($flux['args']['table']  == 'spip_mots' and $flux['args']['action'] == 'modifier'
-		// soit le parent a change, soit le groupe racine est modifie
-		and (_request('motsar_definir_heritages') OR empty($flux['data']['id_parent'])))
-	{
+	if ($flux['args']['table']  == 'spip_mots' and $flux['args']['action'] == 'modifier') {
 		$id_mot = $flux['args']['id_objet'];
-		include_spip('motsar_fonctions');
-		motsar_definir_heritages_mot($id_mot);
-		propager_les_mots_arborescents();
+
+		// soit le parent a change, soit le mot racine est modifie
+		if (_request('motsar_definir_heritages') OR empty($flux['data']['id_parent'])) {
+			include_spip('motsar_fonctions');
+			motsar_definir_heritages_mot($id_mot);
+			propager_les_mots_arborescents();
+		}
+	}
+
+	// lors de l'institution d'un mot (définition du groupe de mot)
+	elseif ($flux['args']['table']  == 'spip_mots' and $flux['args']['action'] == 'instituer') {
+		// si le groupe de mot d'appartenance a changé
+		if ($id_groupe = _request('motsar_definir_heritages_groupe')) {
+			$id_mot = $flux['args']['id_objet'];
+			include_spip('motsar_fonctions');
+			// redifinir les id_groupe de tous ses enfants
+			motsar_definir_heritages_mot($id_mot);
+			// peut être applatir les enfants, si le groupe n'autorise pas les mots arborescents
+			motsar_definir_heritages($id_groupe);
+			// recalculer les profondeurs et racines…
+			propager_les_mots_arborescents();
+		}
 	}
 
 	// lors de l'édition d'un groupe de mot
