@@ -23,9 +23,7 @@ function gma_afficher_complement_objet($flux) {
 	if ($flux['args']['type'] == 'groupemots') {
 		$id = $flux['args']['id'];
 		// completer la vue avec les informations des sous groupes
-		$flux['data'] .= recuperer_fond(
-			"prive/squelettes/contenu/inc-groupes_mots", array('id_parent' => $id), "ajax"
-		);
+		$flux['data'] .= recuperer_fond("prive/squelettes/contenu/inc-groupes_mots", array('id_parent' => $id), "ajax");
 	}
 	return $flux;
 }

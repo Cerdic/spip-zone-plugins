@@ -13,10 +13,11 @@
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
-	[(#SAISIE{groupe_mots,groupes,
+	[(#SAISIE{groupe_mots_recursifs, groupes,
 		label=<:plugin:secteur_region:>,
 		multiple=oui,
-		table_liaison=articles})] 
+		table_liaison=articles})]
+
 ]#SET{profondeur,1}
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)

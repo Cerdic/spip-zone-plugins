@@ -42,7 +42,7 @@ function gma_definir_heritages($id_groupe = null, $heritage=null, $update_mots=t
 			'unseul', 'obligatoire', 'comite', 'forum', 'minirezo', 'tables_liees'
 		));
 		// ajout des héritages à la liste des champs
-		$champs += $champs_herites;
+		$champs = array_merge($champs, $champs_herites);
 	}
 
 	// pas de groupe spécifique ?
