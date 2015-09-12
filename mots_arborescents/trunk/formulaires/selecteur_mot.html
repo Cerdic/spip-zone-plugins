@@ -1,0 +1,18 @@
+[(#REM)
+	Sélecteur d'un mot dans un groupe :
+	- Liste les mots de façon récursive
+
+]<B_mots>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_mots(MOTS){racine}{par titre}{id_groupe}>
+<option value='#ID_MOT'[(#EXPOSE{' '})selected='selected']>[(#TITRE|supprimer_tags|texte_backend)]</option>
+	#SET{profondeur,1}
+	<BOUCLE_enfants(MOTS){id_parent}{par titre}{id_groupe}>
+		<option value='#ID_MOT'[(#EXPOSE{' '})selected='selected']>[(#VAL{&gt; }|str_repeat{#GET{profondeur}})][(#TITRE|supprimer_tags|texte_backend)]</option>
+		#SET{profondeur,#GET{profondeur}|plus{1}}
+		<BOUCLE_recursif(BOUCLE_enfants) />
+		#SET{profondeur,#GET{profondeur}|moins{1}}
+	</BOUCLE_enfants>
+</BOUCLE_mots>
+</select>
+</B_mots>

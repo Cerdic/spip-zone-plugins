@@ -1,0 +1,7 @@
+<INCLURE{fond=prive/objets/liste/mots-admin, id_parent, id_groupe, ajax, env} />
+
+[(#AUTORISER{creer,mot,'','',#ARRAY{id_groupe, #ID_GROUPE}})
+	[(#URL_ECRIRE{mot_edit,new=oui&id_parent=#ID_PARENT}|parametre_url{redirect,#SELF}
+		|icone_verticale{<:motsar:icone_creation_mot_enfant:>,mot-24.png,new,right})]
+]
+<div class='nettoyeur'></div>

@@ -1,0 +1,40 @@
+<paquet
+	prefix="motsar"
+	categorie="navigation"
+	version="1.0.0-dev"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/motsar-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Mots arborescents</nom>
+	<!-- Parce que certains mots sont plus importants que d'autres ! -->
+
+	<auteur lien='http://www.apsulis.com/'>Matthieu Marcillaud</auteur>
+	<credit lien="https://www.iconfinder.com/icons/290148/label_price_shopping_tag_tags_icon">Umar Irshad (logo)</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies"   compatibilite="[2.5.15;]" />
+	<necessite nom="mots"      compatibilite="[2.4.8;]" />
+	<!-- necessite nom="querypath" compatibilite="[1.1.1;]" / -->
+
+	<pipeline nom="autoriser" inclure="motsar_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/motsar.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/motsar.php" />
+	<pipeline nom="afficher_complement_objet"  inclure="motsar_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet"     inclure="motsar_pipelines.php" />
+	<pipeline nom="formulaire_charger"         inclure="motsar_pipelines.php" />
+	<pipeline nom="formulaire_verifier"        inclure="motsar_pipelines.php" />
+	<pipeline nom="formulaire_fond"            inclure="motsar_pipelines.php" />
+	<pipeline nom="pre_insertion"              inclure="motsar_pipelines.php" />
+	<pipeline nom="post_insertion"             inclure="motsar_pipelines.php" />
+	<pipeline nom="pre_edition"                inclure="motsar_pipelines.php" />
+	<pipeline nom="post_edition"               inclure="motsar_pipelines.php" />
+
+	<pipeline nom="mots_arborescents_heritages" action="" />
+
+</paquet>
