@@ -6,10 +6,11 @@ function sprite ($img, $nom) {
 
 	// Extraire le nom du fichier, soit directement soit dans <img src>
 	if (@file_exists($img)) $src = $img;	
-	else $src = extraire_attribut($img, "src");
-	
-	// Si pas de fichier, ignorer
-	if (!@file_exists($src)) return;
+		else {
+			$src = extraire_attribut($img, "src");
+			// Si pas de fichier, ignorer
+			if (!@file_exists($src)) return;
+		}
 	
 	$GLOBALS["sprites"]["$nom"]["fichiers"][] = $src;
 	
