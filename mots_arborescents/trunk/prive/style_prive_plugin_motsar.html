@@ -7,5 +7,7 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-.editer_groupe_mot select[name=id_groupe] option.mots_arborescents { padding:3px 3px 3px 25px; background:url(#CHEMIN_IMAGE{motsar-16.png}) 4px center no-repeat; }
-.editer_groupe_mot select[name=id_groupe] option.mots_plats {  padding:3px 3px 3px 25px;  background:url(#CHEMIN_IMAGE{mot-16.png}) 4px center no-repeat;}
+.editer_groupe_mot select[name=id_groupe] optgroup { padding:.5em 3px 3px 3px; }
+.editer_groupe_mot select[name=id_groupe] option { padding:3px 3px 3px 25px; }
+.editer_groupe_mot select[name=id_groupe] option.mots_arborescents { background:url(#CHEMIN_IMAGE{motsar-16.png}) 4px center no-repeat; }
+.editer_groupe_mot select[name=id_groupe] option.mots_plats {   background:url(#CHEMIN_IMAGE{mot-16.png}) 4px center no-repeat;}
