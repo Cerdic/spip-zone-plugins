@@ -93,30 +93,39 @@ function motsar_formulaire_charger($flux) {
 
 
 /**
- * Verifie que le parent d'un mot
- * n'est pas ce mot lui-même !
+ * Verifie différentes choses sur le formulaire d'édition d'un mot.
+ *
+ * - vérifie que le parent d'un mot n'est pas ce mot lui-même !
+ * - empêche de pouvoir modifier d'un même coup ET le mot parent ET le groupe parent
  *
  * @pipeline formulaire_verifier
  * @param array $flux
- * 		Données du pipeline
+ *     Données du pipeline
  * @return array
- * 		Données du pipeline complétées
+ *     Données du pipeline complétées
 **/
 function motsar_formulaire_verifier($flux) {
 	// sur le formulaire d'édition de groupe de mot
 	if ($flux['args']['form'] == 'editer_mot') {
+
 		// tester que le parent ne vaut pas le groupe
-		if ($id_parent = _request('id_parent')
-		and $id_mot = _request('id_mot'))
-		{
+		// ça ne devrait pas pouvoir arriver, car la saisie met ces options en disabled
+		if ($id_parent = _request('id_parent') and $id_mot = _request('id_mot')) {
+			include_spip('motsar_fonctions'); // calcul_branche_mot_in
 			if ($id_parent == $id_mot) {
 				$flux['data']['id_parent'] = _T('motsar:erreur_parent_sur_mot');
-			}
-			elseif (
-			  include_spip('motsar_fonctions') // calcul_branche_mot_in
-			  and in_array($id_parent, explode(',', calcul_branche_mot_in($id_mot))))
-			{
+			} elseif (in_array($id_parent, explode(',', calcul_branche_mot_in($id_mot)))) {
 				$flux['data']['id_parent'] = _T('motsar:erreur_parent_sur_mot_enfant');
+			}
+		}
+
+		// tester que le parent appartient au groupe sélectionné
+		if ($id_parent = _request('id_parent') and $id_groupe = _request('id_groupe')) {
+			$id_groupe_parent = sql_getfetsel('id_groupe', 'spip_mots', 'id_mot=' . intval($id_parent));
+			if ($id_groupe_parent != $id_groupe) {
+				set_request('id_groupe', null);
+				$flux['data']['id_parent'] = _T('motsar:erreur_parent_hors_groupe_selectionne');
+				$flux['data']['id_groupe'] = _T('motsar:erreur_groupe_selectionne_annule');
 			}
 		}
 	}
@@ -149,13 +158,17 @@ function motsar_formulaire_fond($flux) {
 	$env = $flux['args']['contexte'];
 
 	// sur le formulaire d'édition de mot
-	if ($flux['args']['form'] == 'editer_mot') {
-		// la parenté sur tous : on récupère le sélecteur et on l'ajoute après le titre...
-		$selecteur_parent = recuperer_fond('formulaires/selecteur_mot_parent', $env);
+	// mais seulement si le groupe de mot choisi permet l'arborescence.
+	if ($flux['args']['form'] == 'editer_mot' and isset($env['id_groupe'])) {
+		$mots_arborescents = sql_getfetsel('mots_arborescents', 'spip_groupes_mots', 'id_groupe=' . intval($env['id_groupe']));
+		if ($mots_arborescents == 'oui') {
+			// la parenté sur tous : on récupère le sélecteur et on l'ajoute après le titre...
+			$selecteur_parent = recuperer_fond('formulaires/selecteur_mot_parent', $env);
 
-		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_titre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
-		if (preg_match($cherche, $flux['data'], $m)) {
-			$flux['data'] = preg_replace($cherche, '$1'.$selecteur_parent.'$3', $flux['data'], 1);
+			$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_titre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
+			if (preg_match($cherche, $flux['data'], $m)) {
+				$flux['data'] = preg_replace($cherche, '$1'.$selecteur_parent.'$3', $flux['data'], 1);
+			}
 		}
 	}
 
@@ -354,7 +367,13 @@ function motsar_pre_edition($flux) {
 	and $flux['args']['action'] == 'modifier')
 	{
 		if ($mots_arborescents = _request('mots_arborescents')) {
+			$mots_arborescents_ancien = sql_getfetsel('mots_arborescents', 'spip_groupes_mots', 'id_groupe=' . sql_quote($flux['args']['id_objet']));
 			$flux['data']['mots_arborescents'] = $mots_arborescents;
+			if ($mots_arborescents_ancien != $mots_arborescents) {
+				// pour le pipeline de post_edition. Permet entre autre de savoir
+				// qu'il faudra actualiser les mots de la branche
+				set_request('motsar_definir_heritages', true);
+			}
 		}
 	}
 	return $flux;
@@ -388,12 +407,13 @@ function motsar_post_edition($flux) {
 
 	// lors de l'édition d'un groupe de mot
 	elseif ($flux['args']['table']  == 'spip_groupes_mots' and $flux['args']['action'] == 'modifier'
-		// soit le parent a change, soit le groupe racine est modifie
-		and ($mots_arborescents = _request('mots_arborescents')))
+		// si la configuration mots_arborescents a été modifiée
+		and _request('motsar_definir_heritages'))
 	{
 		$id_groupe = $flux['args']['id_objet'];
 		include_spip('motsar_fonctions');
 		motsar_definir_heritages($id_groupe);
+		propager_les_mots_arborescents();
 	}
 
 	return $flux;
