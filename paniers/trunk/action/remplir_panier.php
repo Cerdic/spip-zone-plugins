@@ -14,9 +14,13 @@ function action_remplir_panier_dist($arg=null) {
 	}
 	
 	// On récupère les infos de l'argument
-	@list($objet, $id_objet, $quantite) = explode('-', $arg);
+	@list($objet, $id_objet, $quantite, $negatif) = explode('-', $arg);
 	$id_objet = intval($id_objet);
 	$quantite = intval($quantite) ? intval($quantite) : 1;
+	// retirer un objet du panier
+	if(isset($negatif)) $quantite = intval(-$quantite);
+	
+	spip_log("quantite=$quantite et id_objet=$id_objet objet=$objet","panier_test");
 	
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/paniers');
@@ -53,6 +57,8 @@ function action_remplir_panier_dist($arg=null) {
 				'id_objet = '.intval($id_objet)
 			)
 		));
+		
+		spip_log("quantite=$quantite et quantite_deja=$quantite_deja","panier_test");
 		// Si on a déjà une quantité, on fait une mise à jour
 		if ($quantite_deja){
 			sql_updateq(
