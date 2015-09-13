@@ -56,16 +56,22 @@ function action_remplir_panier_dist($arg=null) {
 			)
 		));
 		
+				
 		// Si on a déjà une quantité, on fait une mise à jour
 		if ($quantite_deja){
-			sql_updateq(
+			$cumul_quantite = $quantite_deja + $quantite;
+			//Si le cumul_quantite est 0, on efface
+			if ($cumul_quantite == 0) 
+				sql_delete('spip_paniers_liens','id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet));
+			//Sinon on met à jour
+			else sql_updateq(
 				'spip_paniers_liens',
-				array('quantite' => $quantite_deja + $quantite),
+				array('quantite' => $cumul_quantite),
 				'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
 			);
 		}
 		// Sinon on crée le lien
-		else{
+		else {
 			sql_insertq(
 				'spip_paniers_liens',
 				array(
