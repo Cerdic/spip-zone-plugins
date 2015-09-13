@@ -93,100 +93,101 @@ function map_xml_formater($fichier_xml)
     $chemin_fichier = $chemin_fichier[$fichier_xml];
     $contenu_xml_tmp = spip_xml_load($chemin_fichier);
     foreach ($contenu_xml_tmp['map'][0] as $key => $value) {
+        $resultat = trim($value[0]); // Quand PHP est en mode strict, il n'aime pas avoir un return d'une fonction
         switch ($key) {
             case 'titre':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['titre'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['titre'] = $resultat;
                 }
                 break;
             case 'descriptif':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['descriptif'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['descriptif'] = $resultat;
                 }
                 break;
             case 'width':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['width'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['width'] = $resultat;
                 }
                 break;
             case 'height':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['height'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['height'] = $resultat;
                 }
                 break;
             case 'code_map':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['code_map'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['code_map'] = $resultat;
                 }
                 break;
             case 'background_color':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['background_color'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['background_color'] = $resultat;
                 }
                 break;
             case 'border_color':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['border_color'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['border_color'] = $resultat;
                 }
                 break;
             case 'border_opacity':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['border_opacity'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['border_opacity'] = $resultat;
                 }
                 break;
             case 'border_width':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['border_width'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['border_width'] = $resultat;
                 }
                 break;
             case 'color':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['color'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['color'] = $resultat;
                 }
                 break;
             case 'enable_zoom':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['enable_zoom'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['enable_zoom'] = $resultat;
                 }
                 break;
             case 'hover_color':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['hover_color'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['hover_color'] = $resultat;
                 }
                 break;
             case 'hover_opacity':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['hover_opacity'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['hover_opacity'] = $resultat;
                 }
                 break;
             case 'normalize_function':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['normalize_function'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['normalize_function'] = $resultat;
                 }
                 break;
             case 'scale_colors':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['scale_colors'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['scale_colors'] = $resultat;
                 }
                 break;
             case 'selected_color':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['selected_color'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['selected_color'] = $resultat;
                 }
                 break;
             case 'selected_region':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['selected_region'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['selected_region'] = $resultat;
                 }
                 break;
             case 'show_tooltip':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['show_tooltip'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['show_tooltip'] = $resultat;
                 }
                 break;
             case 'data_name':
-                if (!empty(trim($value[0]))) {
-                    $contenu_xml['map']['data_name'] = trim($value[0]);
+                if (!empty($resultat)) {
+                    $contenu_xml['map']['data_name'] = $resultat;
                 }
                 break;
             case 'vector':
@@ -194,40 +195,41 @@ function map_xml_formater($fichier_xml)
                     $vector_tmp = array();
                     $number = $key;
                     foreach ($vector as $vector_champ => $vector_value) {
+                        $resultat_vector = trim($vector_value[0]);
                         switch ($vector_champ) {
                             case 'titre':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['titre'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['titre'] = $resultat_vector;
                                 }
                                 break;
                             case 'descriptif':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['descriptif'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['descriptif'] = $resultat_vector;
                                 }
                                 break;
                             case 'code_vector':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['code_vector'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['code_vector'] = $resultat_vector;
                                 }
                                 break;
                             case 'color':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['color'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['color'] = $resultat_vector;
                                 }
                                 break;
                             case 'data':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['data'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['data'] = $resultat_vector;
                                 }
                                 break;
                             case 'path':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['path'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['path'] = $resultat_vector;
                                 }
                                 break;
                             case 'url_site':
-                                if (!empty(trim($vector_value[0]))) {
-                                    $vector_tmp[$number]['url_site'] = trim($vector_value[0]);
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['url_site'] = $resultat_vector;
                                 }
                                 break;
                             default:
