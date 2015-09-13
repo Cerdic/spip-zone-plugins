@@ -1,13 +1,13 @@
 <paquet
 	prefix="autorite"
 	categorie="auteur"
-	version="0.10.9"
+	version="0.10.10"
 	etat="stable"
 	compatibilite="[1.9.2;3.1.*]"
 	logo="illuminati-32.png"
-	schema="0.1"
+	schema="0.1.0"
 	documentation="http://contrib.spip.net/Le-plugin-Autorite"
->	
+>
 
 	<nom>Autorit&#233;</nom>
 	<!-- Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !) -->
@@ -17,7 +17,7 @@
 	<auteur>Superyms</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">GNU/LGPL</licence>
-	
+
 	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
 
 </paquet>
