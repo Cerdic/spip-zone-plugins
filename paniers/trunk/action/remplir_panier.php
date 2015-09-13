@@ -19,9 +19,7 @@ function action_remplir_panier_dist($arg=null) {
 	$quantite = intval($quantite) ? intval($quantite) : 1;
 	// retirer un objet du panier
 	if(isset($negatif)) $quantite = intval(-$quantite);
-	
-	spip_log("quantite=$quantite et id_objet=$id_objet objet=$objet","panier_test");
-	
+		
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/paniers');
 	$id_panier_base = 0;
@@ -58,7 +56,6 @@ function action_remplir_panier_dist($arg=null) {
 			)
 		));
 		
-		spip_log("quantite=$quantite et quantite_deja=$quantite_deja","panier_test");
 		// Si on a déjà une quantité, on fait une mise à jour
 		if ($quantite_deja){
 			sql_updateq(
