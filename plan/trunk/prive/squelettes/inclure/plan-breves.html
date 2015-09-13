@@ -12,7 +12,7 @@
 	<ul class="menu-items breves">
 		<li id="breves-rubrique-#ID_RUBRIQUE"
 			class="item group[ (#GET{lister}|non)jstree-closed]"
-			data-jstree='{"type":"box_breve", "objet":"breve"}'>
+			data-jstree='{"type":"box_breve"}' data-objet="breve">
 			<strong>[(#GET{total}|objet_afficher_nb{breve})]</strong>
 ]
 
@@ -24,7 +24,7 @@
 				{statut==.*}{statut ?}
 				{si #GET{lister}}
 				>
-				<li id="breve-#ID_BREVE" class="item" data-jstree='{"type":"breve"}'>
+				<li id="breve-#ID_BREVE" class="item" data-jstree='{"type":"breve"}' data-objet="breve">
 					<a href="[(#ID_BREVE|generer_url_entite{breve})]"
 						title="[(#VAL{breve}|objet_info{texte_objet}|_T) #ID_BREVE]">
 						[(#STATUT|puce_statut{breve}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]

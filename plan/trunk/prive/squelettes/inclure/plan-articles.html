@@ -13,7 +13,7 @@
 	<ul class="menu-items articles">
 		<li id="articles-rubrique-#ID_RUBRIQUE"
 			class="item group[ (#GET{lister}|non)jstree-closed]"
-			data-jstree='{"type":"box_article", "objet":"article"}'>
+			data-jstree='{"type":"box_article"}' data-objet="article">
 			<strong>[(#GET{total}|objet_afficher_nb{article})]</strong>
 ]
 
@@ -26,7 +26,7 @@
 				{lang_select=non}
 				{si #GET{lister}}
 				>
-				<li id="article-#ID_ARTICLE" class="item" data-jstree='{"type":"article"}'>
+				<li id="article-#ID_ARTICLE" class="item" data-jstree='{"type":"article"}' data-objet="article">
 					<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">
