@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produits_plusieurs' => '@nb@ produits',
 	
 	// S
-	'supprimer_du_panier' +> 'Supprimer du panier',
+	'supprimer_du_panier' => 'Supprimer du panier',
 
 	// T
 	'titre_mon_panier' => 'Mon panier',
