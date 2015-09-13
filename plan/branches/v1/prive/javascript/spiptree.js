@@ -74,7 +74,7 @@ $.fn.spiptree = function(options) {
 				// et pour ce qu'on ne connait pas (classe css 'jstree-closed' sur un LI, et pas de UL à l'intérieur)
 				// on fait un appel ajax pour obtenir la liste correspondant à l'objet souhaité, lorsque c'est demandé.
 				else {
-					var objet = node.data.jstree.objet;
+					var objet = node.data.objet;
 					var id_rubrique = (objet == 'rubrique')
 						? node.id.split('-')[1]
 						: node.parent.split('-')[1];
@@ -85,6 +85,7 @@ $.fn.spiptree = function(options) {
 					if (options.statut) {
 						params.statut = options.statut;
 					}
+
 					$.ajax({
 						url: options.urls.plan,
 						data: params,

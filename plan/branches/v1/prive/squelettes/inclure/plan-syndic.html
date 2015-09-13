@@ -11,7 +11,7 @@
 	<ul class="menu-items sites syndic">
 		<li id="syndic-rubrique-#ID_RUBRIQUE"
 			class="item group[ (#GET{lister}|non)jstree-closed]"
-			data-jstree='{"type":"box_site", "objet":"site"}'>
+			data-jstree='{"type":"box_site"}' data-objet="site">
 			<strong>[(#GET{total}|objet_afficher_nb{site})]</strong>
 ]
 
@@ -22,7 +22,7 @@
 				{statut==.*}{statut ?}
 				{si #GET{lister}}
 				>
-				<li id="site-#ID_SYNDIC" class="item" data-jstree='{"type":"site"}'>
+				<li id="site-#ID_SYNDIC" class="item" data-jstree='{"type":"site"}' data-objet="site">
 					<a href="[(#ID_SYNDIC|generer_url_entite{site})]"
 						title="[(#VAL{site}|objet_info{texte_objet}|_T) #ID_SYNDIC]">
 						[(#STATUT|puce_statut{site}) ][(#NOM_SITE|couper{80}|sinon{<:info_sans_titre:>})]
