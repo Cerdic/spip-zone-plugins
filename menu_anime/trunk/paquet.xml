@@ -1,8 +1,8 @@
 <paquet
 	prefix="menu_anime"
 	categorie="navigation"
-	version="1.0.6"
-	etat="test"
+	version="1.0.7"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/menu_anime-64.png"
 	documentation="http://contrib.spip.net/Menu-anime-deroulant"
