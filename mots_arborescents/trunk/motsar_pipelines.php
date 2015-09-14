@@ -417,6 +417,10 @@ function motsar_pre_edition($flux) {
 **/
 function motsar_post_edition($flux) {
 
+	if (empty($flux['args']['table'])) {
+		return $flux;
+	}
+
 	// lors de l'édition d'un mot
 	if ($flux['args']['table']  == 'spip_mots' and $flux['args']['action'] == 'modifier') {
 		$id_mot = $flux['args']['id_objet'];
