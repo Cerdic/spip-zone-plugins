@@ -17,8 +17,8 @@ h2 { border-bottom:2px solid black; }
 	<B_mots>
 		<ul>
 	<BOUCLE_mots(MOTS){racine}{id_groupe}{par num titre, titre}>
-			<li>
-				<strong>#TITRE</strong>
+		<li>
+			<strong>#TITRE</strong>
 			<B_enfants>
 				<ul>
 			<BOUCLE_enfants(MOTS){id_parent}{id_groupe?}{par num titre, titre}>
@@ -31,7 +31,7 @@ h2 { border-bottom:2px solid black; }
 			</B_enfants>
 		</li>
 	</BOUCLE_mots>
-	</ul>
+		</ul>
 	</B_mots>
 
 </BOUCLE_groupes_arbos>
