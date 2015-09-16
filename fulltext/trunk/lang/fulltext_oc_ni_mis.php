@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'id' => 'ID',
 	'il_faut_myisam' => 'cau MyISAM',
-	'incoherence_charset' => 'Una incouerença tra lou charset dóu vouòstre sit e aqueu dei taula de la vouòstra basa de dounada pòu faussà li recercà embé dei caracter achentuat :',
+	'incoherence_charset' => 'Una incouerença tra lou charset dóu vouòstre sit e aqueu dei taula de la vouòstra basa de dounada pòu faussà li recercà embé de caracter achentuat :',
 	'index_regenere' => 'ìndice de la taula regenerat',
 	'index_reinitialise' => 'Lu doucumen en errour soun estat reinicialisat',
 	'index_reinitialise_ptg' => 'Lu doucumen proutegiat soun toui estat reinicialisat',
