@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_mots_cles' => 'Ativà la gestioun per mot clau',
 	'admin_complets' => 'Lu aministratour coumplet',
 	'admin_restreints' => 'Aministratour restrech ?',
-	'admin_tous' => 'Tou lu aministratour (embé lu restrech)',
+	'admin_tous' => 'Toui lu aministratour (emb’ai restrech)',
 	'administrateur' => 'aministratour',
 	'admins' => 'Lu aministratour',
 	'admins_redacs' => 'Aministratour e Redactour',
 	'admins_rubriques' => 'lu aministratour assouciat a dei rùbrica an :',
 	'attention_crayons' => '<small><strong>Mèfi.</strong> Lu reglage aquì souta pouòdon founciounà que s’utilisès un plugin que proupause una interfaça d’edicioun (couma <a href="http://contrib.spip.net/Les-Crayons">lu Creioun</a> per isemple).</small>',
-	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune embé li chausida seguenti :',
+	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune emb’ai chausida seguenti :',
 	'auteur_message_advitam' => 'L’autour dóu message, ad vitam',
 	'auteur_message_heure' => 'L’autour dóu message, d’una oura',
 	'auteur_modifie_article' => '<strong>Autour moudifica article</strong> : cada redatour pòu moudificà lu article publicat que sìgue l’autour.
@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 <a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. doucumentacioun</a>
 ',
-	'details_option_auteur' => '<small><br />Per lou moumen, l’oupcioun « autour » founciouna qu’embé lu autour registrat (fòrou soubre abounamen, per isemple). E, se es ativada, lu aministratour dóu sit an finda la capacità d’édità lu fòrou.
+	'details_option_auteur' => '<small><br />Per lou moumen, l’oupcioun « autour » founciouna que per lu autour registrat (fòrou soubre abounamen, per isemple). E, se es ativada, lu aministratour dóu sit an finda la capacità d’édità lu fòrou.
 	</small>',
 	'droits_des_auteurs' => 'Drech dei autour',
 	'droits_des_redacteurs' => 'Drech dei redatour',
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_menu_config' => 'Autourità',
 	'info_gere_rubriques' => 'Gerà li rùbrica seguenti :',
 	'info_gere_rubriques_2' => 'Geri li rùbrica seguenti :',
-	'infos_selection' => '(poudès seleciounà proun setour embé lou tàstou shift)',
+	'infos_selection' => '(poudès seleciounà proun setour emb’au tàstou shift)',
 	'interdire_admin' => 'Entacàs li casa aquì souta da prouhibì ai aministratour da creà ',
 
 	// M
