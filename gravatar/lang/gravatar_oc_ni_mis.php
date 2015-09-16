@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
 	'gravatar_info' => 'Per afichà lou vouòstre avatar aquì, registras lou denant soubre <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (facil e gràtis).',
-	'gravatar_info_forum' => 'Per afichà lou vouòstre avatar embé lou vouòstre message, registras lou denant soubre <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (facil e gràtis) e noun oublidès d’endicà la vouòstra adressa e-mail aquì.',
+	'gravatar_info_forum' => 'Per afichà lou vouòstre avatar emb’au vouòstre message, registras lou denant soubre <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (facil e gràtis) e noun oublidès d’endicà la vouòstra adressa e-mail aquì.',
 
 	// L
 	'label_image_defaut' => 'Image predefinida',
