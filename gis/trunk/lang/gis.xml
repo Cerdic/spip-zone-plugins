@@ -1,4 +1,7 @@
 <traduction module="gis" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/gis/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/gis?lang_cible=de" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/gis?lang_cible=en" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
