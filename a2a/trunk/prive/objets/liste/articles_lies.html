@@ -31,11 +31,10 @@
 			<td class='rang'>#CHAMP_SQL{RANG}</td>
 			[(#TYPES_LIAISONS|types_liaisons_existent|oui)
 			<td class='type_liaison'>[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui)
-			     <INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_lie,id_article,formulaire,type_liaison}{ajax}>]
-			     [(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|non)
-			         [(#TYPE_LIAISON|a2a_traduire_type_liaisons)]
-		         ]
-			
+				<INCLURE{fond=prive/inclure/a2a_changer_typeliaisons,id_article_lie,id_article,formulaire,type_liaison}{ajax}>]
+				[(#AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|non)
+					[(#TYPE_LIAISON|a2a_traduire_type_liaisons)]
+				]
 			</td>]
 			<td><a href="[(#URL_ECRIRE{article,id_article=#ID_ARTICLE})]">#TITRE (#ID_ARTICLE)</a></td>
 			<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}>
