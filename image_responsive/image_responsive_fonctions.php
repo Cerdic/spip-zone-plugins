@@ -223,7 +223,11 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 					foreach($tailles as $t) {
 						$m = trim($medias[$i]);
 						$i++;
-						
+												
+						if ($vertical) $t = min($t, $h);					
+						else $t = min ($t, $l);
+												
+												
 						$source_tmp = $source;
 						$set =  $fichiers[$t][1]." 1x";
 						$set .=  ",".$fichiers[$t][2]. " 2x";
@@ -231,8 +235,8 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						if (strlen($m) > 0) {
 							$insm = " media='$m'";
 							$sources .= "<source$insm srcset='$set'>";
-						}
-						else {
+						} else {
+						
 							//$sources .= "<source srcset='$set'>";
 							//$set = find_in_path("rien.gif");
 							$srcset[] = $set;
@@ -254,6 +258,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				}
 			}
 		}
+
 
 		// Gérer le srcset
 		if ($sources || $srcset) $classe .= " avec_picturefill";
