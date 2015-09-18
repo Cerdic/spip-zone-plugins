@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_lim_rubriques' => 'Contenus par rubrique',
 
 	// T
-	'titre_page_configurer_lim' => 'Configuration LIM',
+	'titre_page_configurer_lim' => 'LIM : Alléger l\'espace privé',
 );
 
 ?>
