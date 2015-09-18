@@ -20,6 +20,7 @@
 	font-family: sans-serif, Verdana;
 	font-size: smaller;
 	padding: 3px;
+    z-index: 100000;
 }
 .jqvmap-zoomin, .jqvmap-zoomout
 {

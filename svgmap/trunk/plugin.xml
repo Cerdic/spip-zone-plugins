@@ -4,37 +4,31 @@
 	<slogan>Modèles pour insérer une carte SVG des départements ou régions(ancienne et nouvelle) françaises</slogan>
 	<auteur>guillaumew</auteur>
 	<licence>GNU/GPL - (c) 2015</licence>
-	<version>0.8.0</version>
+	<version>0.9.0</version>
 	<etat>dev</etat>
 	<description>
 	    Propose trois modèles pour afficher une carte de France en SVG :
 _ Découpée par départements : &lt;svgmap_departements|lien_base=truc&gt; ou [(#MODELE{departements}{lien_base=truc})];
-_ Découpée par régions (nouvelle 2016) : &lt;svgmap_region|lien_base=truc&gt; ou [(#MODELE{regions}{lien_base=truc})];
-_ Découpée par régions (nouvelle 2015) : &lt;svgmap_region_anncienne|lien_base=truc&gt; ou [(#MODELE{regions_anciennes}{lien_base=truc})];
+_ Découpée par régions  : &lt;svgmap_regions|lien_base=truc&gt; ou [(#MODELE{regions}{lien_base=truc})];
+_ Découpée par super régions (régions francaise à compter du 1er janvier 2016) : &lt;svgmap_super_regions|lien_base=truc&gt; ou [(#MODELE{super_regions}{lien_base=truc})];
 
 
 Toutes ces modeles acceptent les paramètres suivants:
--* |lien_base= : l'url des liens sur les départements (par défaut #SELF donc la page en cours)
--* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
--* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
--* |mono=1 si on souhaite la carte en monoteinte
--* |aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
--* |bullehtml=1 si on préfere l'info-bulle native HTML à celle générée en javascript (non-accessible lors de la navigation au clavier...)
-
-   Découpée par région (ancienne version) : 
-qui accepte les paramètres suivants:
--* |redim= : le facteur de redimensionnement de la carte (par défaut = 1, ce qui correspond à une carte de 479x434 pixels)
--* |lien_base= : l'url des liens sur les départements (par défaut #SELF donc la page en cours)
--* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
--* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
--* |borderColor=#000000 si on souhaite la couleur des bordures des régions
--* |color=#FACC2E si vous souhaitez modifier la couleur des régions
--* |selectedColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
--* |hoverOpacity=0.5 si vous souhaitez modifier la couleur de la région sélectionnée
--* |hoverColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
--* |backgroundColor=transparent si vous souhaitez modifier la couleur de la région sélectionnée
--* |aff_region=1 si on souhaite afficher la région en plus du nom du département dans l'info-bulle au survol
--* |bullehtml=1 si on préfere l'info-bulle native HTML à celle générée en javascript (non-accessible lors de la navigation au clavier...)
+    -* |height=400px : hauteur de la carte
+    -* |width=400px : largeur de la carte
+    -* |lien_base= : l'url des liens sur les départements (par défaut #SELF donc la page en cours)
+    -* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
+    -* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
+    -* |lien_param= : le paramètre de l'url pour passer le numéro de département (par défaut "depart" : ...?depart=...)
+    -* |param=nom : pour passer le nom du département à la place de son numéro comme valeur du paramètre |lien_param
+    -* |borderColor=#000000 si on souhaite la couleur des bordures des régions
+    -* |color=#FACC2E si vous souhaitez modifier la couleur des régions
+    -* |colors=true|{{false}} Applique les couleurs défini dans la variable javacript couleurs
+    -* |selectedColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |hoverOpacity=0.5 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |hoverColor=#EC0000 si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |backgroundColor=transparent si vous souhaitez modifier la couleur de la région sélectionnée
+    -* |enableZoom=false si vous souhaitez activer ou désactiver le zoom
 
 
 
