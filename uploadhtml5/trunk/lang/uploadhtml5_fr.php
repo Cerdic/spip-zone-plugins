@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_max_file' => 'Nombre de maximum de fichiers qui peuvent être uploadés simultanément (0 pour ne pas limiter).',
-	'explication_max_file_size' => 'Taille maximum des fichiers (en MB). Il est conseillé d’utiliser la valeur du serveur.',
+	'explication_max_file_size' => 'Taille maximum des fichiers (en MB). Il est conseillé d’utiliser la valeur du serveur (@uploadmaxsize@).',
 
 	// L
 	'label_charger_public' => 'Script dans l’espace public',

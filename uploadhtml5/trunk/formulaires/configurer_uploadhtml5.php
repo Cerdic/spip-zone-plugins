@@ -3,6 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_uploadhtml5_saisies_dist() {
+	$uploadmaxsize = ini_get('upload_max_filesize');
     $saisies = array(
         array(
             'saisie' => 'case',
@@ -25,7 +26,7 @@ function formulaires_configurer_uploadhtml5_saisies_dist() {
             'options' => array(
                 'nom' => 'max_file_size',
                 'label' => _T('uploadhtml5:max_file_size'),
-                'explication' => _T('uploadhtml5:explication_max_file_size'),
+                'explication' => _T('uploadhtml5:explication_max_file_size',array('uploadmaxsize'=>$uploadmaxsize)),
             )
         ),
         array(
