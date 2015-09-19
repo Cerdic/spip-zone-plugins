@@ -35,10 +35,9 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
         );
 
         // Si on est dans l'espace privé, on ajouter le titre du bloc
-        if (test_espace_prive()
-            and (!isset($args['_header']) and !$args['_header']))
+        if (test_espace_prive() and !isset($args['_header'])) {
             $contexte['_header'] = '<h3 class="titrem">'.titre_cadre_logo($objet, $id_objet).'</h3>';
-
+        }
         // On ajoute le reste du contexte
         // Dans ce cas si, c'est $contexte qui supplante les informations
         // de $args car on force ces options pour les logos
