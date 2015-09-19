@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_max_file' => 'Höchste Zahl der gleichzeitig übertragbaren Dateien (0 = keine Obergrenze).',
-	'explication_max_file_size' => 'Maximale Dateigrössein MB. Es empfiehlt sich, die Einstellungen des Servers zu verwenden.',
+	'explication_max_file_size' => 'Maximale Dateigrössein MB. Es empfiehlt sich, die Einstellungen des Servers zu verwenden.', # MODIF
 
 	// L
 	'label_charger_public' => 'Öffentlich verfügbar',
