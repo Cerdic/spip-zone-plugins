@@ -35,7 +35,7 @@ function lim_verifier_presence_logo($type) {
 		}
 	}
 	
-	if (count($liste_logos) > 0) return true;
+	if (is_array($liste_logos) AND count($liste_logos) > 0) return true;
 	return false;
 }
 
