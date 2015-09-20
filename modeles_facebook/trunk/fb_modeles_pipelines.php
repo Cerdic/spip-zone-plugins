@@ -13,7 +13,7 @@ function fb_modeles_insert_head($flux) {
 	$config = fbmod_config();
 
 	// La feuille de styles du plugin
-	$flux .= "<link rel='stylesheet' href='".find_in_path('fb_modeles.css')."' type='text/css' media=\"projection, screen, tv\" />";
+	$flux .= "<link rel='stylesheet' href='".find_in_path('fb_modeles.css')."' type='text/css' media=\"screen\" />";
 
 	if ($config && $config['include_metas']=='oui') {
 
