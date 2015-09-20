@@ -29,7 +29,7 @@ function lister_dossiers_autoriser(){}
 **/
 function autoriser_listerdossiers_menu_dist($faire, $type, $id, $qui, $opt)
 {
-	return autoriser('voir', $type, $id, $qui, $opt);
+	return in_array($qui['statut'], array('0minirezo')) and $qui['webmestre'] == 'oui';
 }
 
 /**
