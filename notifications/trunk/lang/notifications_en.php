@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 0
+	'0' => '--------------',
+
 	// A
 	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
