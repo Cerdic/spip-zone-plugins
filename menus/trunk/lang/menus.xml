@@ -8,7 +8,8 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/menus?lang_cible=en" total="145" traduits="144" relire="0" modifs="1" nouveaux="0" pourcent="99.31">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/menus?lang_cible=en" total="145" traduits="145" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
