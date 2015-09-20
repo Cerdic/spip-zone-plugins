@@ -8,9 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_explication_nom_obligatoire' => 'Angabe eines Namesn ode Pseudonyms ist obligatorisch. Sie können ebenfalls die Angabe einer Mailadresse vorschreiben.',
+	'cfg_forum_champs_obligatoires' => 'Pflichtfelder',
+	'cfg_forum_format_fil' => 'Liste oder Thread ?',
 	'cfg_forum_longueur' => 'Länge der Nachricht',
 	'cfg_forum_longueur_maxi' => 'Maximale Länge',
 	'cfg_forum_longueur_mini' => 'Minimale Länge',
+	'cfg_forum_permalien' => 'Permalink',
+	'cfg_label_apparence_permalien' => 'Art der Darstellung des Permalinks zum Beitrag',
+	'cfg_label_apparence_permalien_aucun' => 'Kein',
+	'cfg_label_apparence_permalien_compteur' => 'Zähler (1.)',
+	'cfg_label_apparence_permalien_diese' => 'Hashtag (#)',
+	'cfg_label_apparence_permalien_picto' => 'Piktogramm',
+	'cfg_label_email_obligatoire' => 'Angabe einer Mailadresse vorschreiben',
+	'cfg_label_presentation_fil' => 'Darstellung des Diskussionsstrangs',
 	'cfg_label_presentation_fil_liste' => 'Flache Kommentarliste',
 	'cfg_label_presentation_fil_thread' => 'Kommentare als Diskussionsstränge anzeigen (Threads)',
 	'cfg_label_presentation_fil_thread1' => 'Kommentare als gemeinsamen Diskussionsstrang anzeigen.',
