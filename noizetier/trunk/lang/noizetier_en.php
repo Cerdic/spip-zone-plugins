@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'An error occurred while updating the database.',
 	'explication_code' => 'ATTENTION: for advanced users. You can specify Spip code (loops and tags) that will be interpreted as in a skeleton. Thus the nut will have access to all variables of the environment of the page.',
 	'explication_description_code' => 'For internal purpose. Not published on the public site.',
+	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
 	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.',
 	'explication_noizetier_css' => 'You can add some additional CSS classes to the nut.',
