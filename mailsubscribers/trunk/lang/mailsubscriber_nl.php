@@ -9,9 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_importer' => 'importeren',
+	'bouton_invitation' => 'Uitnodigen om voor de nieuwsbrief in te schrijven',
 	'bouton_previsu_importer' => 'Voorbeeld',
 
 	// C
+	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ nodigt je uit je in te schrijven voor de nieuwsbrief van @nom_site_spip@ met e-mailadres @email@.',
+	'confirmsubscribe_invite_texte_email_3' => 'Wanneer het gaat om een fout van ons, kun je deze mail negeren: het verzoek wordt automatisch geannuleerd.',
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] bevestiging van de inschrijving op de nieuwsbrief',
 	'confirmsubscribe_texte_email_1' => 'Je vroeg in te schrijven op de nieuwsbrief @nom_site_spip@ met het adres @e-mail@.',
 	'confirmsubscribe_texte_email_2' => 'Om uw registratie te bevestigen , dank u klikt op de volgende link :
@@ -20,8 +23,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmsubscribe_texte_email_envoye' => 'Een e-mail is verzonden naar dit adres ter bevestiging .',
 	'confirmsubscribe_titre_email' => 'Bevestiging van de inschrijving op de nieuwsbrief',
 
+	// D
+	'defaut_message_invite_email_subscribe' => 'Hallo, ik ben geabonneerd op de nieuwsbrief van @nom_site_spip@ en ik stel je voor je ook in te schrijven.',
+
 	// E
 	'erreur_adresse_existante' => 'Dit e-mailadres is al in de lijst',
+	'erreur_technique_subscribe' => 'Een technische fout maakt inschrijving niet mogelijk.',
+	'explication_to_email' => 'Een voor-inschrijvingsbericht emailen naar de volgende adressen (meerdere adressen, gescheiden door een komma).',
 
 	// I
 	'icone_creer_mailsubscriber' => 'Voeg een abonnement',
@@ -29,6 +37,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse_a_importer' => '1 adres om te importeren',
 	'info_1_mailsubscriber' => '1 ingetekende gebruikersgroepen',
 	'info_aucun_mailsubscriber' => 'Geen abonnees',
+	'info_email_limite_nombre' => 'Uitnodiging beperkt tot 5 personen.',
+	'info_email_obligatoire' => 'E-mailadres verplicht',
+	'info_emails_invalide' => 'Een van de e-mailadressen is ongeldig',
 	'info_nb_adresses_a_importer' => '@nb@ adressen te importeren',
 	'info_nb_mailsubscribers' => '@nb@ ingeschreven gebruikers',
 	'info_statut_poubelle' => 'trash',
@@ -41,13 +52,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_desactiver_notif_1' => 'Disable kennisgeving van de inzendingen voor deze invoer',
 	'label_email' => 'E-mail',
 	'label_file_import' => 'Bestand om te importeren',
+	'label_from_email' => 'Email die uitnodigt',
 	'label_lang' => 'Taal',
 	'label_listes' => 'Lijsten',
+	'label_listes_import_subscribers' => 'In de lijsten inschrijven',
 	'label_mailsubscriber_optin' => 'Ik wil de nieuwsbrief ontvangen',
+	'label_message_invite_email_subscribe' => 'Begeleidende tekst van de verzonden email',
 	'label_nom' => 'Naam',
 	'label_optin' => 'Opt-in',
 	'label_statut' => 'Status',
+	'label_to_email' => 'Email om uit te nodigen',
 	'label_toutes_les_listes' => 'Alle',
+	'label_valid_subscribers_1' => 'Inschrijvingen direct accepteren zonder verzoek om bevestiging',
 	'label_vider_table_1' => 'Verwijder alle adressen in deze database voor het importeren',
 
 	// M
@@ -75,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_pas_encore_inscrit' => 'niet geregistreerd',
 	'texte_statut_refuse' => 'opgeschort',
 	'texte_statut_valide' => 'actieve',
+	'titre_bonjour' => 'Hallo',
 	'titre_export_mailsubscribers' => 'Export geregistreerd',
 	'titre_export_mailsubscribers_all' => 'Exporteer alle adressen',
 	'titre_import_mailsubscribers' => 'Import Adressen',
@@ -87,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'unsubscribe_deja_texte' => 'Het e-mailadres @email@ is niet in onze mailinglijst.',
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Afmelden nieuwsbrief',
+	'unsubscribe_texte_confirmer_email_1' => 'Wil je het uitschrijven van het e-mailadres @email@ bevestigen door op de knop te klikken: ',
 	'unsubscribe_texte_email_1' => 'Het e-mailadres @email@ is verwijderd uit onze mailinglijst.',
 	'unsubscribe_texte_email_2' => 'We hopen u snel te zien op @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In geval van een fout van onze kant, of als u van gedachten verandert, kunt u zich opnieuw inschrijven op elk gewenst moment via de volgende link:
