@@ -188,7 +188,7 @@ function motsar_formulaire_fond($flux) {
 		// l'option oui/non technique pour autoriser les mots_arborescents
 		$option_mots_arborescents = recuperer_fond('formulaires/option_mots_arborescents', $env);
 
-		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_groupe_mots_reglage_avance.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
+		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_groupe_mots_associer.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
 		if (preg_match($cherche, $flux['data'], $m)) {
 			$flux['data'] = preg_replace($cherche, '$1'.$option_mots_arborescents.'$3', $flux['data'], 1);
 		}
