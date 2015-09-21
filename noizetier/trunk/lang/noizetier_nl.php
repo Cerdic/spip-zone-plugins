@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_description_explication' => 'Je kunt de SPIP snelkoppelingen gebruiken en in het bijzonder &lt;multi&gt;.',
 	'formulaire_dupliquer_page' => 'Deze bladzijde dupliceren',
 	'formulaire_dupliquer_page_entete' => 'Een bladzijde dupliceren',
+	'formulaire_dupliquer_page_titre' => 'Bladzijde « @page@ » dupliceren',
 	'formulaire_erreur_format_identifiant' => 'De identificatie mag alleen uit kleine letters zonder accent, cijfers of een _ (underscore) bestaan.',
 	'formulaire_icon' => 'Ikoon',
 	'formulaire_icon_explication' => 'Je mag het relatieve pad naar het ikoon gebruiken (bijvoorbeeld: <i>images/object-lijst-inhoud.png</i>).',
