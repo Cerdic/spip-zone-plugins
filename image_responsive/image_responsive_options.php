@@ -272,6 +272,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 				header("Content-Type: image/".$extension);
 				exit;
 			} else {
+				ob_get_clean();
 				header("Content-Type: image/".$extension);
 				header("Pragma: public");
 				header("Cache-Control: maxage=".$expires);
@@ -280,6 +281,7 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 		
 				header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
 				readfile($dest);
+				ob_end_flush();
 			}
 		} else {
 			return $dest;
