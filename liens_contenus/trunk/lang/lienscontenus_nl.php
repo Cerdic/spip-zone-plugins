@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'alerte_non_publie_mais_lie' => 'Let op. Deze inhoud is niet gepubliceerd, maar gepubliceerde inhoud verwijst ernaar!',
 	'alerte_publie_contenant' => 'Let op, deze inhoud is gepubliceerd, maar bevat links naar niet-gepubliceerde inhoud!',
 	'alerte_publie_contenant_ko' => 'Let op, deze inhoud is gepubliceerd, bevat links naar niet-bestaande inhoud!',
 	'aucun_objets_avec_lien_depuis_courant' => 'Deze inhoud bevat geen enkele link naar ander inhoud.',
