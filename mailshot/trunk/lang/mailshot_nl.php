@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_service_configure' => 'Geen geconfigureerd delivery service . <a Href="@url@"> configureren van een dienst </ a>',
 	'erreur_envoi_mail_bloque_debug' => 'Het verzenden van e-mail geblokkeerd door <tt>_TEST_EMAIL_DEST</tt>',
 	'erreur_envoi_mail_force_debug' => 'Het versturen van de e-mail naar @email@ gedwongen door <tt>_TEST_EMAIL_DEST</tt>',
+	'erreur_generation_newsletter' => 'Een fout is opgetreden bij het aanmaken van de nieuwsbrief',
+	'explication_boost_send' => 'In deze modus worden mails zo snel mogelijk verzonden. Er wordt niet gedoseerd.
+										Deze snelle verzendwijze wordt afgeraden omdat de verzending eerder als SPAM wordt beschouwd.',
 	'explication_rate_limit' => 'Geef het maximum aantal e-mails per dag verstuurd , of laat leeg om geen limiet te stellen',
 
 	// I
@@ -44,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_avancement' => 'Progress',
+	'label_boost_send_oui' => 'Snelle verzending',
 	'label_control_pause' => 'Pauze',
 	'label_control_play' => 'Herstart',
 	'label_control_stop' => 'Afbreken',
@@ -54,8 +58,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_listes' => 'Lijsten',
 	'label_mailer_defaut' => 'Gebruik dezelfde verschepende dienst als andere mails',
 	'label_mailer_defaut_desactive' => 'Mislukt : geen e-mail versturen dienst nog niet geconfigureerd',
+	'label_mailer_mailjet' => 'Mailjet Service',
 	'label_mailer_mandrill' => 'Mandril service',
 	'label_mailer_smtp' => 'SMTP-server',
+	'label_mailjet_api_key' => 'Mailjet API key',
+	'label_mailjet_secret_key' => 'Mailjet geheime sleutel',
 	'label_mandrill_api_key' => 'Mandril API Key',
 	'label_rate_limit' => 'Beperk het verzenden van tarief',
 	'label_sujet' => 'Onderwerp',
