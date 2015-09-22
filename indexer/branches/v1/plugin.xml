@@ -17,6 +17,7 @@
 	<fonctions>indexer_fonctions.php</fonctions>
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="queue" version="[0.5.0;1.0.0]" />
 	<categorie>navigation</categorie>
 
 	<lien>http://contrib.spip.net/Sphinx-Indexer</lien>
