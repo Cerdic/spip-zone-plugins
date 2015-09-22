@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_gravatar' => 'Gravatars',
 
 	// E
-	'explication_image_defaut' => 'Für alle, die kein Gravatar haben:',
+	'explication_image_defaut' => 'Für alle, die keinen Gravatar haben:',
 
 	// G
 	'gravatar_info' => 'Um Ihren Avatar hier anzeigen zu lassen, registrieren Sie sich erst hier <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (kostenlos und einfach).',
@@ -21,11 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_image_defaut' => 'Standardbild',
 	'label_image_defaut_404' => 'Kein Bild',
-	'label_image_defaut_gravatar' => 'Gravatar logo',
-	'label_image_defaut_identicon' => '<i>Identicon</i> (erzeugt von der E-Mail-Adresse)',
-	'label_image_defaut_monsterid' => '<i>MonsterID</i> (erzeugt von der E-Mail-Adresse)',
+	'label_image_defaut_gravatar' => 'Gravatar-Logo',
+	'label_image_defaut_identicon' => '<i>Identicon</i> (von der E-Mail-Adresse abgeleitet)',
+	'label_image_defaut_monsterid' => '<i>MonsterID</i> (von der E-Mail-Adresse abgeleitet)',
 	'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
-	'label_image_defaut_wavatar' => '<i>Wavatar</i> (erzeugt von der E-Mail-Adresse)',
+	'label_image_defaut_retro' => '<i>Retro</i> (von der Mailadresse abgeleitet)',
+	'label_image_defaut_wavatar' => '<i>Wavatar</i> (von der E-Mail-Adresse abgeleitet)',
 	'label_taille' => 'Größe des Gravatars',
 
 	// T
