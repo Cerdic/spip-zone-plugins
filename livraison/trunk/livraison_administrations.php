@@ -33,7 +33,7 @@ function livraison_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	
 	/*preremplir les objets prix en compte par ce plugin si prix objets l'a déjà défini*/
-	$config_livraison=lire_config('shop_livraison',array());	
+	$config_livraison=lire_config('livraison',array());	
 	if(!isset($config_livraison['objets_livraison'])){
 		$config_objets_prix=lire_config('prix_objets/objets_prix','');
 		$config_livraison['objets_livraison']=$config_objets_prix?$config_objets_prix:'';		
@@ -41,9 +41,9 @@ function livraison_upgrade($nom_meta_base_version, $version_cible) {
 	
 
     /*Installation des tables et champs aditionnels*/
-	$maj['create'] = array(array('maj_tables', array('spip_livraison_montants', 'spip_livraison_zones','spip_pays')));
+	$maj['create'] = array(array('maj_tables', array('livraison_montants', 'livraison_zones','spip_pays')));
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_pays')));
-	$maj['1.2.0'] = array( array('ecrire_config', 'shop_livraison', $config_livraison));
+	$maj['1.2.0'] = array( array('ecrire_config', 'livraison', $config_livraison));
 
     /*Installation de champs via le plugin champs extras*/
     include_spip('inc/cextras');
