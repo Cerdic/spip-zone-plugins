@@ -16,7 +16,6 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_reservation_charger_dist($id=array(), $id_article = '', $retour = '') {
-  if(!is_array($id))$id = array();
   include_spip('inc/config');
   include_spip('formulaires/selecteur/generique_fonctions');
 
@@ -45,7 +44,9 @@ function formulaires_reservation_charger_dist($id=array(), $id_article = '', $re
     $where = array('date_fin>NOW() AND inscription=1 AND statut="publie"');
     //Si filtré par événement/s
     if ($id) {
-        $sql = sql_select('id_evenement_source,id_evenement','spip_evenements','id_evenement IN (' . implode(',', $id) . ')');
+      if (is_array($id))
+        $id = implode(',', $id);
+        $sql = sql_select('id_evenement_source,id_evenement','spip_evenements','id_evenement IN (' . $id . ')');
  
       $id = array();
       
