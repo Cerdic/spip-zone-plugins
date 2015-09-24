@@ -509,7 +509,7 @@ class IterateurSPHINX implements Iterator {
 		if (!$desc['phrase'] OR !$desc['champ']) {
 			return false;
 		}
-		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit],html_strip_mode=strip') AS $desc[as]");
+		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit]','html_strip_mode=strip') AS $desc[as]");
 		return true;
 	}
 
