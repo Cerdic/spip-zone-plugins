@@ -63,8 +63,11 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'titre', 'descriptif',
 			'type_defaut','statut'
 		),
+		'champs_versionnes' => array(
+			'titre', 'descriptif', 'type_defaut'
+		),
 		'rechercher_champs' => array(
-		  'titre' => 8, 'descriptif' => 5,
+			'titre' => 8, 'descriptif' => 5,
 		),
 		
 		'statut' => array(
