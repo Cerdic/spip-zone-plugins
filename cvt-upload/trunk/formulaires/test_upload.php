@@ -30,9 +30,7 @@ function formulaires_test_upload_verifier(){
 function formulaires_test_upload_traiter(){
 	$retours = array('message_ok' => 'Il ne se passe rien.');
 	
-	include_spip('inc/session');
-	$hash = cvtupload_hash();
-	$fichiers = session_get($hash.'_fichiers');
+	$fichiers = _request('_fichiers');
 	var_dump($fichiers);
 	
 	return $retours;

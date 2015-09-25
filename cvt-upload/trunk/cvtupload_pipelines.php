@@ -121,7 +121,7 @@ function cvtupload_formulaire_verifier($flux){
 				}
 			}
 		}
-		
+		set_request('_fichiers',$infos_fichiers);
 		// On utilise ces infos pour générer le HTML et le garder pour charger()
 		cvtupload_generer_html($infos_fichiers);
 	}
