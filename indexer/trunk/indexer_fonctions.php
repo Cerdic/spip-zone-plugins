@@ -212,3 +212,49 @@ function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby =
 
 	return $sq->get();
 }
+
+
+/**
+ * Compile la balise `#PROPERTIES`
+ *
+ * Utile dans une boucle SPHINX pour retourner une valeur.
+ * 
+ * @balise
+ * @see table_valeur()
+ * @example
+ *     ```
+ *     #PROPERTIES renvoie le champ properties au format array
+ *     #PROPERTIES{x} renvoie #PROPERTIES|table_valeur{x},
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
+function balise_PROPERTIES_dist($p) {
+	// cle du tableau desiree
+	$_nom = interprete_argument_balise(1,$p);
+	// valeur par defaut
+	$_sinon = interprete_argument_balise(2,$p);
+
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$p->code = index_pile($p->id_boucle, 'properties', $p->boucles, $b);
+	
+	// deserialiser le champ
+	$_prop = 'json_decode('. $p->code . ',true)';
+	
+	if ($p->etoile === '') {
+		$p->code = $_prop;
+	}
+	if ($_nom !== NULL){
+		$p->code = 'table_valeur('. $_prop .', '.$_nom.')';
+	}
+	if ($_sinon !== NULL){
+		$p->code = 'table_valeur('. $_prop .', '.$_nom.', '.$_sinon.')';
+	}
+
+	$p->interdire_scripts = true;
+	return $p;
+}
+
