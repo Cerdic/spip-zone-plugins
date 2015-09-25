@@ -52,6 +52,13 @@ function formulaires_editer_definition_saisies_dist($id_definition='new', $id_di
 			)
 		),
 		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'url_externe',
+				'label' => _T('definition:champ_url_externe_label')
+			)
+		),
+		array(
 			'saisie' => 'textarea',
 			'options' => array(
 				'nom' => 'texte',

@@ -62,7 +62,7 @@ function dictionnaires_lister_definitions($purger=false){
 		
 			// À l'intérieur on récupère toutes les définitions publiées
 			$definitions_publiees = sql_allfetsel(
-				'id_dictionnaire, id_definition, titre, termes, type, casse, texte',
+				'id_dictionnaire, id_definition, titre, termes, type, casse, texte, url_externe',
 				'spip_definitions',
 				array(
 					sql_in('id_dictionnaire', $dicos_actifs),
@@ -170,11 +170,16 @@ function dictionnaires_lister_definitions_par_terme(){
  *     Code HTML de remplacement de la définition
  */
 function dictionnaires_remplacer_defaut_dist($mot, $definition) {
-	if (!isset($definition['url']) OR !$url = $definition['url']) {
+	$class="";
+	if ((!isset($definition['url']) OR !$url = $definition['url']) && (!isset($definition['url_externe']) OR !$url = $definition['url_externe'])) {
 		$url = generer_url_entite($definition['id_definition'],'definition');
+	}else{
+		if(strpos($url,'http') == 0)
+			$class="spip_out";
 	}
+	$class = (strlen($class) > 0) ? " class='$class' " : "";
 	return $mot
-		.'<sup><a href="'.$url.'" title="'._T('definition:titre_definition').': '
+		.'<sup><a href="'.$url.'"'.$class.'title="'._T('definition:titre_definition').': '
 			. couper(trim(attribut_html(supprimer_tags(typo(expanser_liens($definition['texte']))))),80).'">'
 		.'?'
 		.'</a></sup>';

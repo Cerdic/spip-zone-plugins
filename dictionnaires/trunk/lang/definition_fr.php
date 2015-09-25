@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre_label' => 'Titre',
 	'champ_type_label' => 'Abréviation',
 	'champ_type_label_case' => 'Est-ce un sigle, un acronyme ou autre abrévation ?',
+	'champ_url_externe_label' => 'URL externe',
 	'changer_statut' => 'Cette définition est :',
 
 	// I

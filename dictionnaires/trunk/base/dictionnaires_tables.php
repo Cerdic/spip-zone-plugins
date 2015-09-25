@@ -108,6 +108,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'termes' => 'text not null default ""',
 			'type' => 'varchar(255) not null default ""',
 			'casse' => 'tinyint(1) not null default 0',
+			'url_externe' => 'text not null default ""',
 			'statut' => 'varchar(255) not null default "prop"',
 			'lang' => 'varchar(10) not null default ""',
 			'date' => 'datetime default "0000-00-00 00:00:00" not null',
@@ -125,7 +126,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 		'champs_editables' => array(
 			'id_dictionnaire',
 			'titre', 'texte', 'termes',
-			'type', 'casse', 'statut',
+			'type', 'casse', 'url_externe', 'statut',
 			'lang', 'date',
 		),
 		'rechercher_champs' => array(
@@ -152,7 +153,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'refuse' => 'texte_statut_poubelle',
 		),
 		'champs_versionnes' => array(
-			'titre', 'texte', 'termes',
+			'titre', 'texte', 'termes', 'url_externe'
 		),
 	);
 

@@ -46,6 +46,8 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_definitions CHANGE COLUMN id_dictionnaire id_dictionnaire bigint(21) not null default 0')
 	);
 
+	$maj['0.4.2'] = array(array('maj_tables', 'spip_definitions'));
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
