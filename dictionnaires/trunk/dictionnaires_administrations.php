@@ -45,7 +45,7 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.4.1'] = array(
 		array('sql_alter', 'TABLE spip_definitions CHANGE COLUMN id_dictionnaire id_dictionnaire bigint(21) not null default 0')
 	);
-
+	// Ajout du champ url_extense dans la table spip_definitions
 	$maj['0.4.2'] = array(array('maj_tables', 'spip_definitions'));
 
 	include_spip('base/upgrade');
