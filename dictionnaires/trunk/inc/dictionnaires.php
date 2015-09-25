@@ -175,7 +175,7 @@ function dictionnaires_remplacer_defaut_dist($mot, $definition) {
 	}
 	return $mot
 		.'<sup><a href="'.$url.'" title="'._T('definition:titre_definition').': '
-			. couper(trim(attribut_html(supprimer_tags(typo($definition['texte'])))),80).'">'
+			. couper(trim(attribut_html(supprimer_tags(typo(expanser_liens($definition['texte']))))),80).'">'
 		.'?'
 		.'</a></sup>';
 }
