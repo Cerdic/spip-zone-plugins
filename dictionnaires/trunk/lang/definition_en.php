@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_definition' => 'Definition number:',
 
 	// T
-	'titre_definition' => 'Definition',
+	'titre_definition' => 'Definition', # MODIF
 	'titre_definition_creer' => 'Create a new definition',
 	'titre_definitions' => 'Definitions',
 	'titre_logo_definition' => 'Logo of this definition'

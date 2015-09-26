@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_definition' => 'Zenbatgarren definizioa :',
 
 	// T
-	'titre_definition' => 'Definizioa',
+	'titre_definition' => 'Definizioa', # MODIF
 	'titre_definitions' => 'Definizioak',
 	'titre_logo_definition' => 'definizio honen logotipoa'
 );
