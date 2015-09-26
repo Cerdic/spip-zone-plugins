@@ -64,8 +64,8 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
         }
 
         //Sinon on cherche d'abord le prix attaché à l'évenement, puis à l'article de l'évenement
-        elseif (!$p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets,code_devise', 'objet="evenement" AND id_objet=' . $id_evenement))
-          $p = sql_fetsel('prix_ht,id_prix_objet', 'spip_prix_objets,code_devise', 'objet="article" AND id_objet=' . $evenement['id_article']);
+        elseif (!$p = sql_fetsel('prix_ht,id_prix_objet,code_devise', 'spip_prix_objets', 'objet="evenement" AND id_objet=' . $id_evenement))
+          $p = sql_fetsel('prix_ht,id_prix_objet,code_devise', 'spip_prix_objets', 'objet="article" AND id_objet=' . $evenement['id_article']);
         if (isset($p)) {
 
           $prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
