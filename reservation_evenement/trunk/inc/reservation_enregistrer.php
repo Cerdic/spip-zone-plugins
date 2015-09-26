@@ -52,13 +52,17 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
         $valeurs_extras[$value['options']['label']] = _request($value['options']['nom']);
       }
     }
-
+    //mettre les valeurs dans la session pour garder les éventuelles modifications
+    session_set('nom',_request('nom'));
+    session_set('email',_request('email'));
+    
     $valeurs = array_merge(array(
       'nom' => _request('nom'),
       'email' => _request('email')
     ), $valeurs_extras);
     sql_updateq('spip_auteurs', $valeurs, 'id_auteur=' . $id_auteur);
     
+    //Enlever pour ne pas les enregistrer dans la réservation
     set_request('nom', '');
     set_request('email', '');
   }
@@ -69,7 +73,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 
   // On ajoute l'id à la session
   $id_reservation = $id_reservation[0];
-  if (! _request('id_reservation_source')) session_set('id_reservation', $id_reservation);
+  if (!_request('id_reservation_source')) session_set('id_reservation', $id_reservation);
 
   $message = '<p>' . _T('reservation:reservation_enregistre') . '</p>';
   $message .= '<h3>' . _T('reservation:details_reservation') . '</h3>';
