@@ -47,7 +47,7 @@
 	<p><:reservation:remerciement:></p>
 
 </BOUCLE_test_statut>
-	<BOUCLE_detail(RESERVATIONS_DETAILS evenements){id_reservations_detail}>
+	<BOUCLE_detail(RESERVATIONS_DETAILS evenements){id_reservations_detail}{tout}>
 	[(#ENV{qui}|=={client}|oui)
 		<p><:reservation:bonjour:> #GET{nom_client}</p>
 		<p><:reservation:message_evenement_cloture{titre=#TITRE}:></p>

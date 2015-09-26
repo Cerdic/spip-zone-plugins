@@ -4,16 +4,19 @@
   #SET{details, #ARRAY}
   #SET{total,0}
   <BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
-    [(#SET_PUSH{details, [(#ARRAY{
-      descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
-      quantite, #QUANTITE,
-      prix, #PRIX*,
-      statut,#STATUT
-      })]
-    })]
+  #SET{details, 
+    #GET{details}|push{
+      #ARRAY{
+        descriptif, #QUANTITE|>{1}|?{#QUANTITE &times;}|concat{#DESCRIPTIF*|supprimer_numero},
+        quantite, #QUANTITE,
+        prix, #PRIX*,
+        statut,#STATUT
+      }
+    }}
+
     [(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
   </BOUCLE_reservation_details>
-    #SET{reservation, #ARRAY{details, #GET{details}}}
+    #SET{reservation, #ARRAY{details, #GET**{details}}}
 </BOUCLE_reservation>
 #SET{reservation,#ENV{reservation}}
 <//B_reservation>[
@@ -32,7 +35,7 @@
          <thead>
             <tr>
                <th class="description"><:reservation:designation:></th>
-               [(#GET{total}|>{0}|oui)<th class="montant"><:reservation:montant:></th>]
+               [(#GET{total}|floatval|>{0.00}|oui)<th class="montant"><:reservation:montant:></th>]
                <th class="statut"><:reservation:label_statut:></th>
             </tr>
          </thead>
@@ -40,14 +43,14 @@
             <BOUCLE_details(POUR){tableau #GET{reservation}|table_valeur{details}}>
             <tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
                <td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
-               [(#GET{total}|>{0}|oui)<td class="montant">[(#VALEUR|table_valeur{prix}|appliquer_filtre{prix_formater,[(#VALEUR|table_valeur{prix})]})]</td>]
+               [(#GET{total}|floatval|>{0.00}|oui)<td class="montant">[(#VALEUR|table_valeur{prix}|appliquer_filtre{prix_formater,[(#VALEUR|table_valeur{prix})]})]</td>]
                <td class="statut">
                    [(#VAL{reservation:texte_statut[_(#VALEUR{statut}|trim)]}|_T)]
                    </td>
             </tr>
             </BOUCLE_details>
          </tbody>
-         [(#GET{total}|>{0}|oui)<tfoot>
+         [(#GET{total}|floatval|>{0.00}|oui)<tfoot>
             <tr class="total_ttc">
                <td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ttc:>,<:reservation:total:>})]</td>
                <td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</td>
