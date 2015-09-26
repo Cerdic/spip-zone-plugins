@@ -36,7 +36,6 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
       $auteur = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . $id_auteur);
       auth_loger($auteur);
     }
-
   }
   elseif (intval($id_auteur)) {
     //les champs extras auteur
@@ -54,14 +53,14 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
       }
     }
 
-    set_request('nom', '');
-    set_request('email', '');
-    
     $valeurs = array_merge(array(
       'nom' => _request('nom'),
       'email' => _request('email')
     ), $valeurs_extras);
     sql_updateq('spip_auteurs', $valeurs, 'id_auteur=' . $id_auteur);
+    
+    set_request('nom', '');
+    set_request('email', '');
   }
   
   set_request('id_auteur',$id_auteur);
