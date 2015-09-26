@@ -212,7 +212,7 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 
 function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retour = '') {
   if ($retour) {
-    chromerefuser_traiter_formulaire_ajax();
+    refuser_traiter_formulaire_ajax();
   }
   $enregistrer = charger_fonction('reservation_enregistrer', 'inc');
   if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
