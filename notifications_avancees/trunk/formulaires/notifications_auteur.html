@@ -40,9 +40,11 @@
 					<td class="actions">
 
 					[(#AUTORISER{modifier,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
-						<a href="[(#URL_ECRIRE{editer_abonnement_notification}|parametre_url{id_auteur, #ENV{_id_auteur}}|parametre_url{id_notifications_abonnement, #ID_NOTIFICATIONS_ABONNEMENT}|parametre_url{redirect,#SELF})]">
-              <:notifavancees:abonnement_action_editer:>
-            </a>
+						[(#ENV{_modes_disponibles}|count|>{1}|ou{#ENV{_notifications_disponibles}|table_valeur{#QUOI}|table_valeur{preferences}|is_array}|oui)
+							<a href="[(#URL_ECRIRE{editer_abonnement_notification}|parametre_url{id_auteur, #ENV{_id_auteur}}|parametre_url{id_notifications_abonnement, #ID_NOTIFICATIONS_ABONNEMENT}|parametre_url{redirect,#SELF})]">
+								<:notifavancees:abonnement_action_editer:>
+							</a>
+						]
 					]
 
 					[(#AUTORISER{toggle,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
