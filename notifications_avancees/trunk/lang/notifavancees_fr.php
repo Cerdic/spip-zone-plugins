@@ -14,10 +14,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_notifications' => 'Notifications',
 'infos_nb_abonnements' => 'Abonn&eacute; &agrave; @nb@ notification(s)',
 'infos_nb_refus' => '@nb@ notification(s) refusées',
+'label_modes_envoi' => "Mode(s) d'envoi",
+'label_type_notification' => "Type de notification",
 'modes_email_choix' => 'Me pr&eacute;venir par e-mail &agrave; l\'adresse :',
 'modes_email_description' => 'Envoie une notification sur votre adresse e-mail.',
 'modes_email_titre' => 'Courriel',
 'modes_refus' => 'Ne rien envoyer',
+'titre_editer_abo' => "Éditer l'abonnement",
+'titre_nouvel_abo' => "Nouvel abonnement",
 );
 
 ?>

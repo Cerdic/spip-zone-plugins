@@ -38,11 +38,13 @@
 					</td>
 					<td class="statut">[(#ACTIF|?{Activé, Désactivé})]</td>
 					<td class="actions">
-					[(#REM) Pour l'instant on édite rien
+
 					[(#AUTORISER{modifier,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
-						<:notifavancees:abonnement_action_editer:>
+						<a href="[(#URL_ECRIRE{editer_abonnement_notification}|parametre_url{id_auteur, #ENV{_id_auteur}}|parametre_url{id_notifications_abonnement, #ID_NOTIFICATIONS_ABONNEMENT}|parametre_url{redirect,#SELF})]">
+              <:notifavancees:abonnement_action_editer:>
+            </a>
 					]
-					]
+
 					[(#AUTORISER{toggle,notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT}|oui)
 						<a href="#URL_ACTION_AUTEUR{toggle_notifications_abonnement,#ID_NOTIFICATIONS_ABONNEMENT,#SELF}">
 							[(#ACTIF|?{<:notifavancees:abonnement_action_desactiver:>,<:notifavancees:abonnement_action_activer:>})]
@@ -66,6 +68,13 @@
 		
 		<p class="boutons">
 			<span class="image_loading"></span>
+
+			[(#REM|notifications_lister_disponibles|count|>{0}|oui)
+				<a href="[(#URL_ECRIRE{editer_abonnement_notification}|parametre_url{id_auteur, #ENV{_id_auteur}}|parametre_url{id_notifications_abonnement,new}|parametre_url{redirect, #SELF})]">
+					Nouvel abonnement
+				</a>
+			]
+
 			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
 		</p>
 	</div></form>
