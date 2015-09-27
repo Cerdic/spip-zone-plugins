@@ -8,7 +8,9 @@
  */
 function formulaires_editer_notifications_abonnement_saisies_dist ($id_notifications_abonnement='new', $id_auteur=null) {
 
-	if (( ! _request('type_notification')) && ($id_notifications_abonnement === 'new')) {
+	$type = _request('type_notification');
+
+	if (( ! $type) && ($id_notifications_abonnement === 'new')) {
 
 		$saisies = array(
 			array(
@@ -48,6 +50,30 @@ function formulaires_editer_notifications_abonnement_saisies_dist ($id_notificat
 			),
 		);
 
+		if (intval($id_notifications_abonnement) > 0) {
+			include_spip('base/abstract_sql');
+			$type = sql_getfetsel('quoi', 'spip_notifications_abonnements',
+								  'id_notifications_abonnement='.intval($id_notifications_abonnement));
+		}
+
+		$def = notifications_charger_infos($type);
+		$preferences = $def['preferences'];
+		if (is_array($preferences)) {
+			$saisies_preferences = array_map(function ($preference) {
+				return array(
+					'saisie' => $preference['saisie'],
+					'options' => array_merge(
+						$preference['options_saisie'],
+						array(
+							'nom' => 'preferences['.$preference['nom'].']',
+						)),
+				);
+			}, $preferences);
+
+			foreach ($saisies_preferences as $saisie) {
+				$saisies[] = $saisie;
+			}
+		}
 	}
 
 	return $saisies;
@@ -75,6 +101,7 @@ function formulaires_editer_notifications_abonnement_charger_dist ($id_notificat
 		$valeurs = array(
 			'type_notification' => $row['quoi'],
 			'modes_envoi' => unserialize($row['modes']),
+			'preferences' => unserialize($row['preferences']),
 		);
 
 	} else {
