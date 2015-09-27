@@ -19,7 +19,7 @@ function formulaires_editer_notifications_abonnement_saisies_dist ($id_notificat
 					'obligatoire' => 'oui',
 					'datas' => array_map(function ($el) {
 						return $el['titre'];
-					}, notifications_lister_disponibles()),
+					}, notifications_lister_creables()),
 				),
 			),
 		);

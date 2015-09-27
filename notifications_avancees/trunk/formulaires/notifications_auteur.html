@@ -69,7 +69,7 @@
 		<p class="boutons">
 			<span class="image_loading"></span>
 
-			[(#REM|notifications_lister_disponibles|count|>{0}|oui)
+			[(#REM|notifications_lister_creables|count|>{0}|oui)
 				<a href="[(#URL_ECRIRE{editer_abonnement_notification}|parametre_url{id_auteur, #ENV{_id_auteur}}|parametre_url{id_notifications_abonnement,new}|parametre_url{redirect, #SELF})]">
 					Nouvel abonnement
 				</a>

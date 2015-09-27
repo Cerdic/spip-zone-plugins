@@ -240,6 +240,26 @@ function notifications_lister_disponibles(){
 	return $notifications;
 }
 
+/**
+ * Lister les notifications que l'on peut créer via l'interface
+ *
+ * @return array Un tableau listant les notifications et leurs informations
+ */
+function notifications_lister_creables () {
+
+	$creables = array();
+
+	foreach (notifications_lister_disponibles() as $type => $def) {
+		if (isset($def['proposer_creation']) &&
+			($def['proposer_creation'])) {
+
+			$creables[$type] = $def;
+		}
+	}
+
+	return $creables;
+}
+
 /*
  * Charger les informations contenues dans le yaml d'une notification
  *
