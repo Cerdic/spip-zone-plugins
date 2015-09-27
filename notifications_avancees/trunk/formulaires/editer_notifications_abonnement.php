@@ -117,6 +117,9 @@ function formulaires_editer_notifications_abonnement_verifier_dist ($id_notifica
  */
 function formulaires_editer_notifications_abonnement_traiter_dist ($id_notifications_abonnement='new', $id_auteur=null) {
 
+	include_spip('base/abstract_sql');
+	include_spip('inc/session');
+
 	$quoi		 = _request('type_notification');
 	$id			 = _request('id') ? _request('id') : 0;
 	$modes		 = _request('modes_envoi');
@@ -133,7 +136,6 @@ function formulaires_editer_notifications_abonnement_traiter_dist ($id_notificat
 
 	if (intval($id_notifications_abonnement) > 0) {
 
-		include_spip('base/abstract_sql');
 		sql_updateq('spip_notifications_abonnements',
 					array(
 						'quoi' => $quoi,
@@ -142,6 +144,18 @@ function formulaires_editer_notifications_abonnement_traiter_dist ($id_notificat
 						'modes' => serialize($modes),
 					),
 					'id_notifications_abonnement='.intval($id_notifications_abonnement));
+
+	} else if ($id_auteur && (session_get($id_auteur) !== $id_auteur)) {
+
+		sql_insertq(
+			'spip_notifications_abonnements',
+			array(
+				'id_auteur' => $id_auteur,
+				'quoi' => $quoi,
+				'modes' => serialize($modes),
+				'preferences' => serialize($preferences),
+			)
+		);
 
 	} else {
 
