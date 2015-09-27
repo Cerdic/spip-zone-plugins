@@ -8,6 +8,11 @@
 	[(#SET{refus,[(#GET{refus}|plus{1})]})]
 ]
 </BOUCLE_notifications>
+
+[(#GET{abonnement}|>{0}
+	|ou{#GET{refus}|>{0}}
+	|ou{#REM|notifications_lister_disponibles|count|>{0}}|oui)
+
 <div style="" class="cadre cadre-r">
 	[<img width="24" height="24" class="cadre-icone" alt="" src="(#CHEMIN{images/notifications-24.png})">]
 	<h3 class="titrem">[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{<:notifavancees:infos_mes_notifications:>,<:notifavancees:infos_notifications:>})]</h3>
@@ -25,4 +30,4 @@
 		]
 	</div>
 </div>
-</B_notifications>
+]
