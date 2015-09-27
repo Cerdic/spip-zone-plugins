@@ -28,16 +28,58 @@ function formulaires_editer_notifications_abonnement_saisies_dist ($id_notificat
 
 	} else {
 
+		if (intval($id_notifications_abonnement) > 0) {
+			include_spip('base/abstract_sql');
+			$type = sql_getfetsel('quoi', 'spip_notifications_abonnements',
+								  'id_notifications_abonnement='.intval($id_notifications_abonnement));
+		}
+
 		$saisies = array(
 			array(
 				'saisie' => 'hidden',
 				'options' => array(
 					'nom' => 'type_notification',
 					'obligatoire' => 'oui',
-					'defaut' => _request('type_notification'),
+					'defaut' => $type,
 				),
 			),
 		);
+
+		$type_objet = notifications_trouver_objet($type);
+
+		// À la création d'un nouvel abonnement, on propose de
+		// sélectionner un objet associé s'il y a lieu
+		if (($id_notifications_abonnement === 'new') && $type_objet &&
+			( ! _request('id'))) {
+
+			// S'il y a une saisie selecteur_objet, on s'en sert
+			if (find_in_path('selecteur_'.$type_objet.'.html', 'saisies/')) {
+
+				// il faudrait trouver le nom de l'objet dans la
+				// langue du visiteur, mais à ma connaissance il n'y a
+				// pas de mécanisme générique pour ça.
+				$titre_objet = $type_objet;
+
+				$saisies[] = array(
+					'saisie' => 'selecteur_'.$type_objet,
+					'options' => array(
+						'nom' => 'id',
+						'label' => $titre_objet,
+					),
+				);
+			}
+			// Sinon on propose un input, c'est déjà ça…
+			else {
+
+				$saisies[] = array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'id',
+						'label' => $titre_objet,
+					),
+				);
+			}
+		}
 
 		$saisies[] = array(
 			'saisie' => 'checkbox',
@@ -49,12 +91,6 @@ function formulaires_editer_notifications_abonnement_saisies_dist ($id_notificat
 				}, notifications_modes_lister_disponibles()),
 			),
 		);
-
-		if (intval($id_notifications_abonnement) > 0) {
-			include_spip('base/abstract_sql');
-			$type = sql_getfetsel('quoi', 'spip_notifications_abonnements',
-								  'id_notifications_abonnement='.intval($id_notifications_abonnement));
-		}
 
 		$def = notifications_charger_infos($type);
 		$preferences = $def['preferences'];
@@ -100,6 +136,7 @@ function formulaires_editer_notifications_abonnement_charger_dist ($id_notificat
 
 		$valeurs = array(
 			'type_notification' => $row['quoi'],
+			'id' => $row['id'],
 			'modes_envoi' => unserialize($row['modes']),
 			'preferences' => unserialize($row['preferences']),
 		);
@@ -152,6 +189,13 @@ function formulaires_editer_notifications_abonnement_traiter_dist ($id_notificat
 	$modes		 = _request('modes_envoi');
 	$preferences = _request('preferences');
 
+	// si l'id vient d'une saisie selecteur_objet, c'est un tableau
+	// dont on ne veut garder que l'id_objet
+	if (is_array($id)) {
+		$arr = explode('|', $id[0]);
+		$id = intval($arr[1]);
+	}
+
 	/* S'il n'y a pas de mode d'envoi, c'est qu'on en est encore à
 	   choisir le type de notification. On doit alors repasser dans le
 	   formulaire une deuxième fois pour choisir les options */
@@ -179,6 +223,7 @@ function formulaires_editer_notifications_abonnement_traiter_dist ($id_notificat
 			array(
 				'id_auteur' => $id_auteur,
 				'quoi' => $quoi,
+				'id' => $id,
 				'modes' => serialize($modes),
 				'preferences' => serialize($preferences),
 			)

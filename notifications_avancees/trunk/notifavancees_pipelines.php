@@ -390,36 +390,10 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 		);
 		
 		// Pour ajouter des informations utiles on cherche un objet dans le nom de la notif
-		include_spip('base/abstract_sql');
+		$type_objet = notifications_trouver_objet($quoi);
+
 		include_spip('base/objets');
-		$type_objet = explode('_', $quoi);
-		array_pop($type_objet); // on enlève toujours le dernier mot
-		// Si on est en SPIP 3, on fait une meilleure recherche
-		if (function_exists('lister_tables_objets_sql')) {
-			while (!empty($type_objet)) {
-				// Si le nom qui reste fait partie des objets éditoriaux on s'arrête
-				if (in_array(
-					table_objet_sql(join('_', $type_objet)),
-					array_keys(lister_tables_objets_sql())
-				)) {
-					$type_objet = join('_', $type_objet);
-					break;
-				}
-				// Sinon on raccourcit du dernier élément et on continue de chercher
-				else {
-					array_pop($type_objet);
-				}
-			}
-		}
-		// Sinon en SPIP 2, le dernier mot séparé par "_" est considéré comme le vrai nom de notif,
-		// et on garde le reste comme étant un objet
-		elseif (!empty($type_objet)) {
-			$type_objet = join('_', $type_objet);
-		}
-		// Sinon pas d'objet du tout
-		else {
-			$type_objet = false;
-		}
+
 		// On ajoute au contexte si trouvé
 		if ($type_objet) {
 			$cle_objet = id_table_objet($type_objet);
@@ -485,6 +459,60 @@ function notifications_envoyer($destinataire, $mode, $quoi, $id=0, $options=arra
 	}
 	
 	return false;
+}
+
+/**
+ * Trouver l'éventuel nom d'objet dans un nom de notification
+ *
+ * @param String $quoi : Le nom de la notification
+ *
+ * @return String : Le nom de l'objet SPIP correspondant, FALSE s'il
+ *					n'y en a pas
+ */
+function notifications_trouver_objet ($quoi) {
+
+	include_spip('base/abstract_sql');
+	include_spip('base/objets');
+
+	$type_objet = explode('_', $quoi);
+	array_pop($type_objet); // on enlève toujours le dernier mot
+
+	// Si on est en SPIP 3, on fait une meilleure recherche
+	if (function_exists('lister_tables_objets_sql')) {
+		while (!empty($type_objet)) {
+			// Si le nom qui reste fait partie des objets éditoriaux
+			// on s'arrête
+			if (in_array(
+				table_objet_sql(join('_', $type_objet)),
+				array_keys(lister_tables_objets_sql())
+			)) {
+				$type_objet = join('_', $type_objet);
+				break;
+			}
+			// Sinon on raccourcit du dernier élément et on continue
+			// de chercher
+			else {
+				array_pop($type_objet);
+			}
+		}
+	}
+	// Sinon en SPIP 2, le dernier mot séparé par "_" est considéré
+	// comme le vrai nom de notif, et on garde le reste comme étant un
+	// objet
+	elseif (!empty($type_objet)) {
+		$type_objet = join('_', $type_objet);
+		// Si on ne trouve pas de table correspondante on ne retourne
+		// rien
+		if ( ! id_table_objet($type_objet)) {
+			$type_objet = false;
+		}
+	}
+	// Sinon pas d'objet du tout
+	else {
+		$type_objet = false;
+	}
+
+	return $type_objet;
 }
 
 function notifavancees_affiche_droite($flux){
