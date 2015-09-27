@@ -243,9 +243,14 @@ function notifications_lister_disponibles(){
 /**
  * Lister les notifications que l'on peut créer via l'interface
  *
+ * Le paramètre id_auteur permet de prendre en compte l'option
+ * 'unique' des notifications. Un auteur ayant déjà un abonnement pour
+ * un type de notification unique ne peut pas en créer un nouveau.
+ *
+ * @param integer $id_auteur : un éventuel id_auteur auquel se limiter
  * @return array Un tableau listant les notifications et leurs informations
  */
-function notifications_lister_creables () {
+function notifications_lister_creables ($id_auteur=null) {
 
 	$creables = array();
 
@@ -254,6 +259,22 @@ function notifications_lister_creables () {
 			($def['proposer_creation'])) {
 
 			$creables[$type] = $def;
+		}
+	}
+
+	if ($id_auteur) {
+		foreach ($creables as $type => $def) {
+			if ($def['unique']) {
+				include_spip('base/abstract_sql');
+				if (sql_countsel('spip_notifications_abonnements',
+								 array(
+									 'quoi='.sql_quote($type),
+									 'id_auteur='.intval($id_auteur),
+								 ))) {
+
+					unset($creables[$type]);
+				}
+			}
 		}
 	}
 
