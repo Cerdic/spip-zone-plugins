@@ -21,13 +21,13 @@ function linkcheck_en_url($url,$distant) {
 	} else {
 		$retour = ptobr(propre("[$url|"._T('linkcheck:ouvrenouvelonglet')."->$url]"));
 	}
-	return $retour; 
+	return $retour;
 }
 
 
 function balise_LINKCHECK_CHIFFRE($p) {
-    $p->code = "linkcheck_chiffre()";
-    return $p;
+	$p->code = "linkcheck_chiffre()";
+	return $p;
 }
 
 function linkcheck_chiffre()

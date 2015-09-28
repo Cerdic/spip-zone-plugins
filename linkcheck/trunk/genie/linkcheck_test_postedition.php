@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function genie_linkcheck_test_postedition($id, $objet){
 	
 	include_spip('inc/linkcheck_fcts');
@@ -7,7 +10,7 @@ function genie_linkcheck_test_postedition($id, $objet){
 
 	while($res=sql_fetch($sel))
 		linkcheck_maj_etat($res);
-		
+
 	return 1;
 }
 ?>

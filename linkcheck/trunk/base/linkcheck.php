@@ -7,15 +7,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  */
 function linkcheck_declarer_tables_interfaces($interfaces) {
-
 	$interfaces['table_des_tables']['linkchecks'] = 'linkchecks';
 	$interfaces['table_date']['linkchecks']='date';
-
 	return $interfaces;
 }
 

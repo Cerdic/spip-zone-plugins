@@ -42,7 +42,6 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
  * - supprimer les tables et les champs créés par le plugin. 
 **/
 function linkcheck_vider_tables($nom_meta_base_version) {
-	
 	sql_drop_table("spip_linkchecks");
 	sql_drop_table("spip_linkchecks_liens");
 
@@ -53,7 +52,6 @@ function linkcheck_vider_tables($nom_meta_base_version) {
 	effacer_meta('linkcheck_etat_parcours');
 	effacer_meta('linkcheck/notifier_courriel');
 	effacer_meta('linkcheck/afficher_alerte');
-	
 }
 
 ?>

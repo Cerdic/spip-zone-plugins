@@ -1,13 +1,15 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function action_linkcheck_parcours_dist(){
-	
+
 	include_spip('inc/autoriser');
 	include_spip('inc/linkcheck_fcts');
- 
-    $securiser_action = charger_fonction('securiser_action', 'inc');
-    $arg = $securiser_action();
-	
- 	
+
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
 	include_spip('inc/linkcheck_vars');
 	include_spip('inc/linkcheck_fcts');
 	include_spip('inc/autoriser');
@@ -33,13 +35,10 @@ function action_linkcheck_parcours_dist(){
 				ecrire_config('linkcheck_dernier_id_objet', 0);
 				ecrire_config('linkcheck_dernier_objet', 0);
 			}
-			
-			
-			
+
 			//pour chaque tables
 			$tables_a_traiter = linkcheck_tables_a_traiter();
 			foreach($tables_a_traiter as $key_table => $table){
-							 
 				//si on en est bien a cette table
 				if(($do && $do<$key_table) || !$do){
 					
@@ -66,7 +65,6 @@ function action_linkcheck_parcours_dist(){
 						$tab_expreg_mysql = array(
 							'(((https?|ftps?)://)|(((https?|ftps?)://)?[A-Za-z0-9\-]*\.))[A-Za-z0-9\-]+\.[a-zA-Z]{2,4}/?',
 							'->[^\]]\]'	);
-
 
 						$where_reg = array();
 						foreach ($tab_champs_a_traiter as $nom_champs=>$type_champs){
@@ -124,9 +122,9 @@ function action_linkcheck_parcours_dist(){
 		//}
 	}
 	
-	if ($redirect = _request('redirect')) {
+	if ($redirect = _request('redirect')){
 		include_spip('inc/headers');
 		redirige_par_entete($redirect.'&message=parcours_ok');
-    }	
+	}
 }
 ?>

@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'url' => 'URL',
 	'utilise' => 'utilisé dans '
-						
+
 );
 
 ?>

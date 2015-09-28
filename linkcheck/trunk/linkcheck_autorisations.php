@@ -35,7 +35,7 @@ function autoriser_configurer_linkcheck_dist($faire, $type, $id, $qui, $opt) {
 // bouton de menu
 function autoriser_linkchecks_menu_dist($faire, $type, $id, $qui, $opts){
 	return true;
-} 
+}
 
 
 // creer
@@ -63,6 +63,3 @@ function autoriser_linkcheck_supprimer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_associerlinkchecks_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
-
-?>

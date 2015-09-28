@@ -22,26 +22,24 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  */ 
 function linkcheck_post_edition($flux){
-	
+
 	include_spip('inc/linkcheck_fcts');
 	include_spip('inc/linkcheck_vars');
 	include_spip('inc/queue');
-	
+
 	//on verifie que l'on est bien dans un contexte de verification d'objet
 	if($flux['args']['id_objet'] && $flux['args']['type']){
-	
 		$type_objet = $flux['args']['type'];
 		$id_objet = intval($flux['args']['id_objet']);
 		$table_sql = table_objet_sql($type_objet);
-		$champs_a_traiter = linkcheck_champs_a_traiter($table);	
+		$champs_a_traiter = linkcheck_champs_a_traiter($table);
 		$tab_value=array();
 		foreach(array_keys($champs_a_traiter) as $ct)
 			if (isset($flux['data'][$ct]))
 				$tab_value[$ct]=$flux['data'][$ct];
-		
 
 		//on parcours les liens et 
-		$tab_liens = linkcheck_lister_liens($tab_value);	
+		$tab_liens = linkcheck_lister_liens($tab_value);
 
 		//on les insère en base si besoin
 		linkcheck_ajouter_liens($tab_liens,$type_objet,$id_objet);
@@ -84,14 +82,13 @@ function linkcheck_post_edition($flux){
  * @return $taches
  */
 function linkcheck_taches_generales_cron($taches){
-	
 	$taches['linkcheck_tests_ok'] = 2*24*3600; // tous les 2 jours
-	$taches['linkcheck_tests_vide'] = 12*3600; // toutes les 12 heures //on test ceux qui ont pas d'état
+	$taches['linkcheck_tests_vide'] = 12*3600; // toutes les 12 heures //on test ceux qui n'ont pas d'état
 	$taches['linkcheck_tests_mort'] = 7*24*3600; // toutes les semaines
 	$taches['linkcheck_tests_malade'] = 24*3600; // tous les jours
 	$taches['linkcheck_tests_deplace'] = 3.5*24*3600; // 2 fois par semaine
 	$taches['linkcheck_mail'] = 24*3600; // tous les jours
-    return $taches;
+	return $taches;
 }
 
 /**
@@ -102,16 +99,14 @@ function linkcheck_taches_generales_cron($taches){
  * @return array
  */
 function linkcheck_alertes_auteur($flux){
-
 	include_spip('inc/config');
-	include_spip('inc/autoriser');
-	
+
 	if(lire_config('linkcheck/afficher_alerte')){
+		include_spip('inc/autoriser');
 		if (autoriser('webmestre', $flux['args']['id_auteur'])){
 			include_spip('inc/linkcheck_fcts');
 			$res = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat<>\'ok\' AND etat!=\'\'');
 			if($res>0) $flux['data'][] = _T('linkcheck:liens_invalides')." <a href='" . generer_url_ecrire("linkchecks") . "'>"._T('linkcheck:linkcheck')."</a>";
-			
 		}
 	}
 return $flux;
