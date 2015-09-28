@@ -1,7 +1,7 @@
 <paquet
 	prefix="cvtupload"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 >	
@@ -20,4 +20,6 @@
 	<pipeline nom="formulaire_traiter" inclure="cvtupload_pipelines.php" />
 	
 	<utilise nom="saisies" />
+	<utilise nom="verifier" />
+	
 </paquet>
