@@ -106,6 +106,9 @@ function formulaires_editer_page_charger_dist($page, $new, $retour=''){
 		foreach(lister_tables_objets_sql() as $objet)
 			if (isset($objet['page']) && ($obj = $objet['page']) && isset($liste_pages[$obj]))
 				$valeurs['_objets_avec_compos'][] = $obj;
+		// Hack pour les groupes de mots-clés (car ils n'ont pas d'entrée page dans lister_tables_objets_sql()).
+		if (isset($liste_pages['groupe_mots']))
+			$valeurs['_objets_avec_compos'][] = 'groupe_mots';
 	}
 
 	$valeurs['page'] = $page;
