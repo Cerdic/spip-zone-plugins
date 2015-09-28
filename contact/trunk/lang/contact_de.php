@@ -93,6 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Frau',
 	'mademoiselle' => 'Fräulein',
+	'message_erreur_robot' => 'Du bist ein Bot. Böse böse.',
+	'message_erreur_transmission' => 'Ein Übertragungsproblem ist aufgetreten. Bitte wiederholen Sie Ihre Eingabe.',
+	'message_redemander_pass' => 'Ihre Mailadresse "@email@" wurde bereits nach einer Kontaktnachricht eingetragen. Bitte validieren Sie Ihr Konto, indem Sie ein <a href="@url_pass@">neues Passwort beantragen</a> und sich erstmalig einloggen.',
 	'modele_label_auteur' => 'Vorauswahl eines Autors (fakultativ)',
 	'modele_nom_formulaire' => 'Kontaktný formulár',
 	'monsieur' => 'Herr',
@@ -106,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Personalisierter Titel',
 
 	// P
+	'par_qui' => 'Durch : ',
 	'preselection' => 'Alle Einträge in der Empfängerliste abwählen',
 
 	// S
