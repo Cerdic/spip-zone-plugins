@@ -47,11 +47,21 @@ function dictionnaires_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	// Ajout du champ url_extense dans la table spip_definitions
 	$maj['0.4.2'] = array(array('maj_tables', 'spip_definitions'));
+	
+	// Ajout du champ id_trad sur les définitions
+	$maj['0.4.3'] = array(array('maj_tables', 'spip_definitions'));
+	// Ajouter les langues sur les définitions anciennes
+	$maj['0.4.4'] = array(array('definitions_langues'));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+
+function definitions_langues(){
+	sql_updateq('spip_definitions',array('lang'=>$GLOBALS['meta']['langue_site']),'lang = ""');
+	
+}
 /**
  * Migre les acronymes du plugins Forms & Tables (s'il est actif)
  * dans ce plugin.

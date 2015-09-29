@@ -114,6 +114,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'url_externe' => 'text not null default ""',
 			'statut' => 'varchar(255) not null default "prop"',
 			'lang' => 'varchar(10) not null default ""',
+			"id_trad"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			'date' => 'datetime default "0000-00-00 00:00:00" not null',
 			'maj' => 'timestamp',
 		),
@@ -130,10 +131,10 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'id_dictionnaire',
 			'titre', 'texte', 'termes',
 			'type', 'casse', 'url_externe', 'statut',
-			'lang', 'date',
+			'lang', 'date','id_trad'
 		),
 		'rechercher_champs' => array(
-		  'titre' => 8, 'texte' => 4, 'termes' => 6,
+			'titre' => 8, 'texte' => 4, 'termes' => 6,
 		),
 		
 		'statut' => array(
@@ -145,6 +146,8 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'definition:changer_statut',
+		'texte_langue_objet' => 'definition:texte_langue_objet',
+		'texte_definir_comme_traduction_objet' => "definition:texte_definir_comme_traduction_objet",
 		'statut_titres' => array(
 			'prop'=>'info_article_propose',
 			'publie'=>'info_article_publie',

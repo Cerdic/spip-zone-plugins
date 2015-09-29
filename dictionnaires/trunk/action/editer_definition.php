@@ -50,6 +50,23 @@ function action_editer_definition_dist($arg=null) {
  *     Identifiant de la nouvelle définition
  */
 function insert_definition($champs=array()) {
+	$lang = "";
+	// La langue a la creation : si les liens de traduction sont autorises
+	// dans les definitions, on essaie avec la langue de l'auteur
+	if (in_array('spip_definitions',explode(',',$GLOBALS['meta']['multi_objets']))) {
+		lang_select($GLOBALS['visiteur_session']['lang']);
+		if (in_array($GLOBALS['spip_lang'],
+		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+			$lang = $GLOBALS['spip_lang'];
+		}
+	}
+
+	if (!$lang) {
+		$lang = $GLOBALS['meta']['langue_site'];
+	}
+	
+	$champs['lang'] = $lang;
+	
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
 		array(
@@ -61,6 +78,7 @@ function insert_definition($champs=array()) {
 	);
 	// Insérer l'objet
 	$id_definition = sql_insertq('spip_definitions', $champs);
+	
 	// Envoyer aux plugins après insertion
 	pipeline('post_insertion',
 		array(

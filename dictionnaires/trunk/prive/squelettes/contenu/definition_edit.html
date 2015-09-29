@@ -24,7 +24,7 @@
 		#SET{redirect,#GET{retour}}
 		<div class="ajax">
 	]
-	#FORMULAIRE_EDITER_DEFINITION{#ENV{id_definition,oui},#ENV{id_dictionnaire},#GET{redirect}}
+	#FORMULAIRE_EDITER_DEFINITION{#ENV{id_definition,oui},#ENV{id_dictionnaire},#GET{redirect},#ENV{lier_trad}}
 	[(#ENV{retourajax,''}|oui)
 		</div>
 		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>

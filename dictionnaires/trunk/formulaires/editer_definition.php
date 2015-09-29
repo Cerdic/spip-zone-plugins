@@ -24,7 +24,7 @@ include_spip('inc/editer');
  * @return array
  *     Liste de saisies et leurs options
 **/
-function formulaires_editer_definition_saisies_dist($id_definition='new', $id_dictionnaire=0, $retour=''){
+function formulaires_editer_definition_saisies_dist($id_definition='new', $id_dictionnaire=0, $retour='', $lier_trad=0){
 	$saisies = array(
 		array(
 			'saisie' => 'hidden',
@@ -110,8 +110,8 @@ function formulaires_editer_definition_saisies_dist($id_definition='new', $id_di
  * @return array
  *     Environnement du formulaire
 **/
-function formulaires_editer_definition_charger_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
-	$contexte = formulaires_editer_objet_charger('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
+function formulaires_editer_definition_charger_dist($id_definition='new',  $id_dictionnaire=0, $retour='',$lier_trad=0){
+	$contexte = formulaires_editer_objet_charger('definition', $id_definition, $id_dictionnaire, $lier_trad, $retour, '');
 	
 	// Pour une case à cocher on est obligé de faire ça ici car la valeur "defaut" de la saisie ne marche pas
 	if (!($id_definition>0) and $id_dictionnaire>0){
@@ -119,6 +119,15 @@ function formulaires_editer_definition_charger_dist($id_definition='new',  $id_d
 	}
 	
 	return $contexte;
+}
+
+
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_definition_identifier_dist($id_definition='new',  $id_dictionnaire=0, $retour='',$lier_trad=0){
+	return serialize(array(intval($id_definition),$lier_trad));
 }
 
 /**
@@ -135,7 +144,7 @@ function formulaires_editer_definition_charger_dist($id_definition='new',  $id_d
  * @return array
  *     Tableau des erreurs
 **/
-function formulaires_editer_definition_verifier_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
+function formulaires_editer_definition_verifier_dist($id_definition='new',  $id_dictionnaire=0, $retour='',$lier_trad=0){
 	$erreurs = formulaires_editer_objet_verifier('definition', $id_definition);
 	return $erreurs;
 }
@@ -154,12 +163,12 @@ function formulaires_editer_definition_verifier_dist($id_definition='new',  $id_
  * @return array
  *     Retour des traitements
 **/
-function formulaires_editer_definition_traiter_dist($id_definition='new',  $id_dictionnaire=0, $retour=''){
+function formulaires_editer_definition_traiter_dist($id_definition='new',  $id_dictionnaire=0, $retour='',$lier_trad=0){
 
 	if (is_null(_request('type'))){ set_request('type', ''); }
 	if (is_null(_request('casse'))){ set_request('casse', ''); }
 
-	$retours = formulaires_editer_objet_traiter('definition', $id_definition, $id_dictionnaire, 0, $retour, '');
+	$retours = formulaires_editer_objet_traiter('definition', $id_definition, $id_dictionnaire, $lier_trad, $retour, '');
 	return $retours;
 }
 

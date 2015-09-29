@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_definition' => 'Définition ',
 	'titre_definition_creer' => 'Créer une nouvelle définition',
 	'titre_definitions' => 'Définitions',
+	'titre_langue_definition' => 'Langue de la définition',
 	'titre_logo_definition' => 'Logo de cette définition'
 );
 
