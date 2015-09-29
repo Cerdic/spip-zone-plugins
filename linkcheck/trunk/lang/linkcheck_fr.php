@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id' => 'ID',
 	'info_1_linkcheck' => 'Un lien',
 	'info_aucun_linkcheck'=>'Aucun lien détecté',
-	'info_nb_linkchecks' => 'liens',
+	'info_nb_linkchecks' => '@nb@ liens',
 
 	
 	'lien' => 'lien',

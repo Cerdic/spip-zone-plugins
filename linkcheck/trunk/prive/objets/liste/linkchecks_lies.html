@@ -14,7 +14,7 @@ a mis a jour la valeur avec la page reelle]
 
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies linkchecks">
-	#SET{nb_liens,#GRAND_TOTAL|concat{' '}|concat{ #GRAND_TOTAL|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks}}}
+	[(#SET{nb_liens,[(#GRAND_TOTAL|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks})]})]
 <table class='spip liste'>
 	
 [<caption><strong class="caption">(#ENV*{titre, #GET{nb_liens}})</strong></caption>]
