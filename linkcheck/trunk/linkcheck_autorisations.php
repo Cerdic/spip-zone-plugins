@@ -33,11 +33,9 @@ function autoriser_configurer_linkcheck_dist($faire, $type, $id, $qui, $opt) {
 
 
 // bouton de menu
-function autoriser_linkchecks_menu_dist($faire, $type, $id, $qui, $opts){
-	return true;
+function autoriser_linkcheck_menu_dist($faire, $type, $id, $qui, $opts){
+	return autoriser('webmestre');
 }
-
-
 // creer
 function autoriser_linkcheck_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite')); 
