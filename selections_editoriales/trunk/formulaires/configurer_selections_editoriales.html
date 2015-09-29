@@ -6,9 +6,9 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{choisir_objets, objets, label=<:selections_editoriales:configurer_objets_label:>, exclus=#LISTE{spip_selections, spip_selections_contenus}})]
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		<input type="hidden" name="_meta_casier" value="selections_editoriales" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

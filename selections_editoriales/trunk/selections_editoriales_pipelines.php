@@ -106,11 +106,13 @@ function selections_editoriales_boite_infos($flux) {
 		and include_spip('inc/filtres')
 		and include_spip('inc/actions')
 	) {
-		$flux['data'] .= '<span class="icone horizontale s24">'.bouton_action(
-			filtrer('balise_img', chemin_image('selection-del-24'))._T('lien_supprimer'),
+		$flux['data'] .= filtrer('bouton_action_horizontal',
 			generer_action_auteur('supprimer_selection', $id_selection, generer_url_ecrire('selections')),
+			_T('lien_supprimer'),
+			'selection-24.png',
+			'del',
 			'link'
-		).'</span>';
+		);
 	}
 	
 	return $flux;
