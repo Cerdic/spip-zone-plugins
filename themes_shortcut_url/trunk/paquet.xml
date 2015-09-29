@@ -1,0 +1,14 @@
+<paquet
+    prefix="theme_shortcut_url"
+    categorie="squelette"
+    version="1.0.0"
+    etat="dev"
+    logo="img/shortcut_url-24.png"
+    compatibilite="[3.0.0;3.1.*]" 
+>
+    <nom>Theme Shortcut URL</nom>
+    <!-- Theme pour shortcut_url  -->
+    <auteur mail="cyp@rouquin.me">cyp</auteur>
+
+    <necessite nom="Zcore" compatibilite="[2.0.0;]" />
+</paquet>

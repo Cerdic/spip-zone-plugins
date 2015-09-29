@@ -1,0 +1,15 @@
+<body>
+<section role="main">
+	<div class="card">
+		<header>
+			<INCLURE{fond=header/#ENV{type-page},env} />
+		</header>
+	
+		<section class="content" id="content"><INCLURE{fond=content/#ENV{type-page},env} /></section>
+
+		<footer>
+			<INCLURE{fond=footer/#ENV{type-page},env} />
+		</footer>
+	</div>
+</section>
+</body>
