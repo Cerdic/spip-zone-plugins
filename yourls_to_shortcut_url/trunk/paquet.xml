@@ -1,0 +1,22 @@
+<paquet
+	prefix="yourls_to_shortcut_url"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/shortcut_url-24.png"
+	schema="0.0.1"
+>
+
+	<nom>Yourls To Shortcut URL</nom>
+
+	<auteur mail="cyp@rouquin.me">cyp</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<licence>GPL &#169;</licence>
+	<copyright>2015</copyright>
+
+	<necessite nom="shortcut_url" />
+
+</paquet>
+
