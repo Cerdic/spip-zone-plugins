@@ -46,11 +46,11 @@ function linkcheck_tester_presence_lien($url, $id_obj, $type){
  */
 function linkcheck_lister_liens($champs){
 	include_spip('inc/lien');
-	include_spip('inc/linkcheck_vars');
 	$liens = array(); //tableau des liens pour detection des liens supprimés dans l'objet
 
 	if(!is_array($champs))
 		$champs=array("texte" => $champs);
+
 	$classe_alpha='a-zA-Z0-9âäéèëêïîôöùüû²';
 	$tab_expreg = array(
 	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([a-zA-Z0-9\-]*\.)?))([a-zA-Z0-9\-]*\.)+[a-zA-Z0-9]{2,4}(/[".$classe_alpha."=.?&_\-/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
@@ -68,7 +68,7 @@ function linkcheck_lister_liens($champs){
 							$tab_temp[]= $m;
 				}
 			}
-			// Ajout du prefix http:// si nessecaire
+			// Ajout du prefix http:// si necessaire
 			foreach ($tab_temp as &$url_site) {
 				$temp=$url_site;
 				if (preg_match('#^([a-zA-Z0-9\-]*\.)([a-zA-Z0-9\-]*\.)#', $temp)) {
@@ -139,12 +139,13 @@ function linkcheck_tester_lien_externe($url){
 	$ret['code'] = 'no-code';	
 
 	$head = @get_headers($url);
+
 	if(!$head)
 		$head = @linkcheck_get_headers($url);
 
 	if($head){
 		if(preg_match('`[0-9]{3}`', $head[0], $status)){ 
-			$ret['etat'] = $tabStatus[0][$status[0][0]];
+			$ret['etat'] = isset($tabStatus[0][$status[0][0]]) ? $tabStatus[0][$status[0][0]] : 'malade';
 			$ret['code'] = $status[0];
 		}
 	}
@@ -162,7 +163,6 @@ function linkcheck_get_headers($url) {
 		@$fp=fsockopen($url_info['host'], $port, $errno, $errstr, 10);
 	}
 	if($fp) {
-		stream_set_timeout($fp, 10);
 		$head = "HEAD ".@$url_info['path']."?".@$url_info['query'];
 		$head .= " HTTP/1.0\r\nHost: ".@$url_info['host']."\r\n\r\n";
 		fputs($fp, $head);
@@ -216,7 +216,7 @@ function linkcheck_tester_lien_interne($url){
 		if(!empty($statut_objet)){
 		
 			if($type_objet!='auteur') { 
-				$ret['etat'] = $tabStatus[1][$statut_objet]; $ret['code'] = $statut_objet;}
+				$ret['etat'] = isset($tabStatus[1][$statut_objet]) ? $tabStatus[1][$statut_objet]:'malade'; $ret['code'] = $statut_objet;}
 			else { 
 				$ret['etat'] = $tabStatus[1]['publie']; $ret['code'] = 'publie';}
 			
@@ -261,15 +261,15 @@ function linkcheck_tests($cron=false,$etat=null, $id=0){
 	$where .= (is_null($etat)) ? ' AND etat='.sql_quote($etat) : '';
 	$limit = $cron ? 50:10;
 
-	$sql = sql_select( '*','spip_linkchecks',$where,'','etat, id_linkcheck ASC','0,'.$limit);
-	while($res = sql_fetch($sql)){
+	$sql = sql_allfetsel('*','spip_linkchecks',$where,'','etat, id_linkcheck ASC','0,'.$limit);
+	foreach($sql as $res){
 		linkcheck_maj_etat($res);
-		ecrire_meta('linkcheck_dernier_id_lien', $res['id_linkcheck']);
+		ecrire_config('linkcheck_dernier_id_lien', $res['id_linkcheck']);
 		$cpt++;
 		if($cpt>$limit)
 			break;
 	}
-	ecrire_meta('linkcheck_dernier_id_lien', 0);
+	ecrire_config('linkcheck_dernier_id_lien', 0);
 }
 
 
@@ -281,7 +281,7 @@ function linkcheck_tests($cron=false,$etat=null, $id=0){
  */
 function linkcheck_maj_etat($res){
 	//si le champ est inférieur à 6
-	if($res['essais']<6){
+	if(isset($res['essais']) && $res['essais']<6){
 		//on incrémente le champ
 		sql_updateq('spip_linkchecks', array('essais' => $res['essais']++), 'id_linkcheck='.$res['id_linkcheck']);
 		$test = ($res['distant']) ? linkcheck_tester_lien_externe($res['url']) : linkcheck_tester_lien_interne($res['url']);
@@ -291,9 +291,11 @@ function linkcheck_maj_etat($res){
 		$tabStatus = linkcheck_etats_liens();
 		$test['etat'] = $tabStatus[0][1];
 		$test['code'] = '119';
+		sql_updateq('spip_linkchecks', array('essais' => 0), 'id_linkcheck='.$res['id_linkcheck']);
 	}
 	//on met le champ à 0
-	sql_updateq('spip_linkchecks', array('essais' => 0), 'id_linkcheck='.$res['id_linkcheck']);
+	
+	
 	//sinon on le signale comme malade
 	sql_updateq('spip_linkchecks', array('etat' => $test['etat'], 'code' => $test['code'], 'maj' => date('Y-m-d H:i:s')), 'id_linkcheck='.$res['id_linkcheck']);
 }

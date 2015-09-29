@@ -7,18 +7,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 //Champs des objets susceptibles de contenir des liens, soit au sein d'un contenu (type 0) soit un lien unique (type 1)#
 ########################################################################################################################
 
-function linkcheck_champs_a_traiter($table=''){
-	$tab_champs = array(	'bio' 		=> 1,
-							'chapo'		=> 1,
-							'descriptif'=> 1,
-							'message'	=> 1,
-							'ps'		=> 1,
-							'texte'		=> 1,
-							'virtuel'	=> 0,
-							'url_syndic'=> 0,
-							'url_site'	=> 0,
-							'url' 		=> 0 );
-	
+function linkcheck_champs_a_traiter($table){
+	$tab_champs = array();
+	foreach($table['field'] as $nom_champ => $type_champ){
+		if (preg_match(',^(tiny|long|medium)?text\s,i', $type_champ)){
+			if(preg_match('/url/',$nom_champ))
+				$tab_champs[$nom_champ] = 0;
+			else
+				$tab_champs[$nom_champ] = 1;
+		}
+	}
 	return $tab_champs;
 }
 
@@ -29,7 +27,13 @@ function linkcheck_champs_a_traiter($table=''){
 #################################################################################
 
 function linkcheck_tables_a_traiter(){
-	return array('auteur', 'rubrique','article','syndic','breve','mot');
+	$tables_spip = lister_tables_objets_sql();
+	$tables = array();
+	foreach($tables_spip as $key => $table){
+		if($table['principale'] == 'oui' && $key != "spip_syndic_articles")
+			$tables[] = array($key => $table);
+	}
+	return $tables;
 }
 
 ######################################################################################################################
