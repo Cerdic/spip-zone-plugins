@@ -83,7 +83,7 @@ function action_linkcheck_parcours_dist(){
 						//echo(sql_get_select($nom_champ_id.','.$champs_a_traiter, $table_sql, $where,'',$nom_champ_id.' ASC'));
 						//exit();
 						//pour chaque objet
-						$table_objet = table_objet($table_sql);
+						$table_objet = objet_type($table_sql);
 						foreach($sql as $id => $res){
 							//on créé les variables à envoyer
 							$id_objet=$res[$nom_champ_id];
