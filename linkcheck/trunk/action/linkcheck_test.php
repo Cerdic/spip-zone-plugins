@@ -3,7 +3,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_linkcheck_test_dist(){
-
 	include_spip('inc/autoriser');
 	include_spip('inc/linkcheck_fcts');
 

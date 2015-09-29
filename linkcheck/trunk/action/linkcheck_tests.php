@@ -11,7 +11,7 @@ function action_linkcheck_tests_dist(){
 
 	linkcheck_tests();
 
-	if(	defined('_AJAX') && _AJAX) {
+	if(defined('_AJAX') && _AJAX) {
 		include_spip('linkcheck_fonctions');
 		$chiffres=linkcheck_chiffre();
 		echo(json_encode($chiffres));
