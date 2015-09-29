@@ -127,12 +127,18 @@ function linkcheck_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	$tab_type_objets=linkcheck_tables_a_traiter();
-	if (!$e['edition'] AND in_array($e['type'], $tab_type_objets)) {
-		$texte .= recuperer_fond('prive/objets/liste/linkchecks_lies', array(
-			'objet_source' => 'linkcheck',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
-		));
+	if(!$e['edition']){
+		foreach($tab_type_objets as $objet){
+			$_objet = array_shift($objet);
+			if ((isset($_objet['page']) && $e['type'] == $_objet['page']) || $e['type'] == $_objet['type']){
+				$texte .= recuperer_fond('prive/objets/liste/linkchecks_lies', array(
+					'objet_source' => 'linkcheck',
+					'objet' => $e['type'],
+					'id_objet' => $flux['args'][$e['id_table_objet']]
+				));
+				break;
+			}
+		}
 	}
 
 	if ($texte) {
