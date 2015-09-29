@@ -8,32 +8,36 @@
  * @return Sdata un tableau de donnée, si non traité alors false
  */
 function inc_extraire_document($document = array()) {
+	// Pour garder en mémoire les extracteurs déjà trouvés
+	static $extracteurs_ok = array();
+	
+	// On commence par chercher le fichier à travailler
 	if (
 		!isset($document['id_document'])
 		or !is_numeric($document['id_document'])
 	) {
 		return false;
 	}
-
+	
 	if (
 		!isset($document['fichier'])
 		or !is_numeric($document['fichier'])
 	) {
 		$document =  sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$document['id_document']);
 	}
-
+	
 	if (empty($document)) {
 		return false;
 	}
-
+	
 	include_spip('inc/distant');
 	include_spip('inc/documents');
-
+	
 	//Obtenir le fichier pour extraction
 	if (!$fichier = copie_locale(get_spip_doc($document['fichier']), 'test')) {
 		return false;
 	}
-
+	
 	//Déterminer le format MIME pour définir le bon extracteur
 	//Pour PHP < 5.3, il faut installer la PECL http://pecl.php.net/package/Fileinfo
 	//Pour PHP >= 5.3, c'est chargé en natif
@@ -69,19 +73,48 @@ function inc_extraire_document($document = array()) {
 	if ($memory_available < 0) {
 		return false;
 	}
-
-	//Extraire le contenu selon le mimetype
-	include_spip('extract/'.str_replace('/','_',$mime));
-
-	$contenu = false;
-	if (function_exists($extraire = "extraire_".str_replace('/','_',$mime))) {
-		$contenu = $extraire($fichier);
+	
+	// On cherche le bon extracteur de jus de fichier
+	// tous les "extraire/application_pdf/10_superlib.php"
+	// le test n'est fait qu'une seule fois par type MIME, on garde le résultat en mémoire
+	$chemin_mime = str_replace('/','_', $mime);
+	$fonction_extraire = null;
+	if (isset($extracteurs_ok[$chemin_mime])) {
+		$fonction_extraire = $extracteurs_ok[$chemin_mime];
 	}
-
+	elseif ($extracteurs = find_all_in_path("extraire/{$chemin_mime}/", '[.]php$')) {
+		$extracteurs = array_keys($extracteurs);
+		sort($extracteurs); // On trie par nom pour chercher dans un ordre
+		
+		// On teste si ça marche dans l'ordre
+		foreach ($extracteurs as $fonction) {
+			$fonction = substr($fonction, 0, strlen($fonction)-4);
+			if (
+				// extraire_application_pdf_10_superlib_test_dist()
+				$fonction_test = charger_fonction('test', "extraire/{$chemin_mime}/{$fonction}")
+				and $fonction_test()
+			) {
+				// extraire_application_pdf_10_superlib_extraire_dist()
+				$fonction_extraire = charger_fonction('extraire', "extraire/{$chemin_mime}/{$fonction}");
+				$extracteurs_ok[$chemin_mime] = $fonction_extraire;
+				break; // On arrête la recherche, on a trouvé le meilleur extracteur
+			}
+		}
+	}
+	
+	// On cherche le contenu
 	$infos = array(
 		'mime-type' => $mime,
-		'contenu' => $contenu
+		'contenu' => false,
 	);
+	
+	if (
+		$fonction_extraire
+		and $extraction = $fonction_extraire($fichier)
+		and is_array($extraction)
+	) {
+		$infos = array_merge($infos, $extraction);
+	}
 	
 	return $infos;
 }
