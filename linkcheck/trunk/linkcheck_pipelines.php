@@ -127,7 +127,7 @@ function linkcheck_affiche_milieu($flux) {
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	$tab_type_objets=linkcheck_tables_a_traiter();
-	if(!$e['edition']){
+	if(is_array($e) && !$e['edition']){
 		foreach($tab_type_objets as $objet){
 			$_objet = array_shift($objet);
 			if ((isset($_objet['page']) && $e['type'] == $_objet['page']) || $e['type'] == $_objet['type']){
@@ -136,16 +136,13 @@ function linkcheck_affiche_milieu($flux) {
 					'objet' => $e['type'],
 					'id_objet' => $flux['args'][$e['id_table_objet']]
 				));
+				if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+					$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+				else
+					$flux['data'] .= $texte;
 				break;
 			}
 		}
-	}
-
-	if ($texte) {
-		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
-			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-		else
-			$flux['data'] .= $texte;
 	}
 
 	return $flux;
