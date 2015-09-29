@@ -30,8 +30,7 @@ function balise_LINKCHECK_CHIFFRE($p) {
 	return $p;
 }
 
-function linkcheck_chiffre()
-{
+function linkcheck_chiffre(){
 	$tab_chiffre=array();
 	$tab_chiffre['nb_lien']=sql_getfetsel('count(id_linkcheck)','spip_linkchecks');
 	if($tab_chiffre['nb_lien']>0){

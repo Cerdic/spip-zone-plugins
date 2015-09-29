@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_verifies' => 'non-verifiés',
 	'notifier_par_courriel' => 'Notifier par courriel',
 
-
+	'ouvrenouvelonglet' => 'nouvel onglet',
 
 	'parcours_incomplete' => 'Le parcours des liens du site est incomplet ou n\'a pas encore été effectué !',
 	'pas_encore_de_liens' => '<strong>Aucun lien n\'est encore recensé.</strong> Pour lancer la vérification des liens, il vous faut lancer la fonction qui va parcourir le site à la recherche de tous les liens. Suivant la taille de votre site internet, l\'opération de recherche peut durer entre quelques secondes à quelques minutes. Si la page ne reponds pas, recharger simplement cette page.',
