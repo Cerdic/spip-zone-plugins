@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_commentaires' => '@nb@ Beiträge',
 
 	// L
-	'lire_la_suite' => 'Ganzer Text',
+	'lire_la_suite' => 'weiter lesen',
 	'lire_la_suite_de' => ' von ',
 
 	// P
