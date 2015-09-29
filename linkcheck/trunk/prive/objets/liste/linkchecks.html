@@ -1,13 +1,13 @@
 <div class='onglets_simple'>
-<ul class='medias'>
-[<li>(#SELF|parametre_url{etat,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{etat,''}|=={''},ajax})</li>]
-<BOUCLE_etats(DATA){liste mort,malade,deplace,ok}>
-	<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR} />
-	[<li class='#VALEUR'>(#SELF|parametre_url{etat,#VALEUR}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#VAL{linkcheck:etat_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{etat}|=={#VALEUR},ajax})</li>]
-	<//B_comptem>
-</BOUCLE_etats>
-</ul>
-<div class="nettoyeur"></div>
+	<ul class='medias'>
+	[<li>(#SELF|parametre_url{etat,''}|parametre_url{debut_ListeLink,''}|lien_ou_expose{<:linkcheck:tous_les_liens:>,#ENV{etat,''}|=={''},ajax})</li>]
+	<BOUCLE_etats(DATA){liste mort,malade,deplace,ok}>
+		<BOUCLE_comptem(LINKCHECKS){etat=#VALEUR} />
+		[<li class='#VALEUR'>(#SELF|parametre_url{etat,#VALEUR}|parametre_url{debut_ListeLink,''}|lien_ou_expose{#VAL{linkcheck:etat_}|concat{#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{etat}|=={#VALEUR},ajax})</li>]
+		<//B_comptem>
+	</BOUCLE_etats>
+	</ul>
+	<div class="nettoyeur"></div>
 </div>
 <div class="galerie">
 <B_ListeLink>
