@@ -1,0 +1,37 @@
+SPIP shortcut_url
+=======
+
+Créer des liens raccourcis facilement avec SPIP dans la joie, le plaisir et la bonne humeur et partager le dans votre réseau social favoris.
+
+Attention ce plugin supprime des boutons de navigation dans le backoffice de SPIP. Il faut installer une instance de SPIP dédié à cet usage. Seul les boutons pour accéder aux auteurs, les outils de maintenance et la configuration sont accessibles.
+
+Ce plugins permet de stocker le le nombre de click par URL, de consulter la provenance des utilisateurs ...
+
+# Version 1.0.0
+
+## Plugin SPIP
+
+* d3js (https://github.com/magikcypress/spip_d3js) [utilise]
+
+## Fait
+
+- Mettre les liens et form sur exec=accueil
+- Ajouter dans la recherche
+- Faire les révisions
+- Rafraichissement de la page après formulaire $res['redirect'] = self();
+- Essayer de virer le plan du site (bidouille css crade)
+- Edition des urls (titre + url)
+- Gérer la suppression de l'ensemble des stats lots de la suppression du url
+- Autoriser redacteur à créer lien
+- Limiter l'affichage au minimum pour les redacteurs
+- Lier à un auteur les urls
+- Stats globales et par url et par auteur
+- Bug sur les liens raccourcis, erreur 404
+- Ajouter une champs human sur l'URL
+- Vérifier l'insertion de lien depuis le formulaire
+- Partager le lien raccourcis dans les réseaux sociaux
+
+## A faire
+
+- Peaufiner les stats (debugger la carte du monde)
+- Regarder si pas de perte de fonctionnalité par rapport à yourls

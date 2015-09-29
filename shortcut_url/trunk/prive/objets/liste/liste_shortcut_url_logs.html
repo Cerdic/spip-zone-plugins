@@ -1,0 +1,37 @@
+<h1><:shortcut_url:titre_shortcut_url_liste_logs:></h1>
+<B_liste_shortcut_url_logs>
+#ANCRE_PAGINATION
+<div class="liste-objets sites syndic">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url,shortcut_url:info_nb_shortcut_urls}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>id</th>
+			<th class='click_time' scope='col'><:shortcut_url:form_date_connect:></th>
+			<th class='shorturl' scope='col'><:shortcut_url:form_url:></th>
+			<th class='referrer' scope='col'><:shortcut_url:form_referrer:></th>
+			<th class='user_agent' scope='col'><:shortcut_url:form_user_agent:></th>
+			<th class='ip_address' scope='col'><:shortcut_url:form_ip_address:></th>
+			<th class='country_code' scope='col'><:shortcut_url:form_country_code:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_shortcut_url_logs(SHORTCUT_URLS_LOGS){!par date_modif}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url_logs_detail,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URLS_LOG</a></td>
+			<td class='principale'>[(#DATE_MODIF|affdate)] [(#DATE_MODIF|affdate{'H:i:s'})]</td>
+			<td class='principale'><a href="[(#URL_ECRIRE{shortcut_url_logs_detail,id_shortcut_url=#ID_SHORTCUT_URL})]">#SHORTURL</a></td>
+			<td class='principale'>#REFERRER</td>
+			<td class='principale'>[(#USER_AGENT|couper{150})]</td>
+			<td class='principale'>#IP_ADDRESS</td>
+			<td class='principale'>#COUNTRY_CODE</td>
+		</tr>
+	</BOUCLE_liste_shortcut_url_logs>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_shortcut_url_logs>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
+<p><:shortcut_url:pas_de_statistique:></p></div>
+]<//B_liste_shortcut_url_logs>
