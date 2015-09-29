@@ -9,12 +9,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function linkcheck_champs_a_traiter($table){
 	$tab_champs = array();
-	foreach($table['field'] as $nom_champ => $type_champ){
-		if (preg_match(',^(tiny|long|medium)?text\s,i', $type_champ)){
-			if(preg_match('/url/',$nom_champ))
-				$tab_champs[$nom_champ] = 0;
-			else
-				$tab_champs[$nom_champ] = 1;
+	if(isset($table['field']) && is_array($table['field'])){
+		foreach($table['field'] as $nom_champ => $type_champ){
+			if (preg_match(',^(tiny|long|medium)?text\s,i', $type_champ)){
+				if(preg_match('/url/',$nom_champ))
+					$tab_champs[$nom_champ] = 0;
+				else
+					$tab_champs[$nom_champ] = 1;
+			}
 		}
 	}
 	return $tab_champs;
@@ -29,9 +31,11 @@ function linkcheck_champs_a_traiter($table){
 function linkcheck_tables_a_traiter(){
 	$tables_spip = lister_tables_objets_sql();
 	$tables = array();
-	foreach($tables_spip as $key => $table){
-		if($table['principale'] == 'oui' && !in_array($key,array("spip_syndic_articles","spip_paquets")))
-			$tables[] = array($key => $table);
+	if(is_array($tables_spip)){
+		foreach($tables_spip as $key => $table){
+			if($table['principale'] == 'oui' && !in_array($key,array("spip_syndic_articles","spip_paquets")))
+				$tables[] = array($key => $table);
+		}
 	}
 	return $tables;
 }
