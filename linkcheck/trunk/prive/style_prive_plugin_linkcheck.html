@@ -21,7 +21,7 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-.linkchecks .patience_la_fontaine{margin:0.5em 0;padding:0.25em 0.25em 0.25em 25px;background:transparent url( #CHEMIN_IMAGE{sablier.gif} ) no-repeat left center;border:1px #CCC solid;}
+.linkchecks .patience_la_fontaine{margin:0.5em 0;padding:0.25em 0.25em 0.25em 25px;background:transparent url("[(#CHEMIN{prive/themes/spip/images/sablier.gif})]") no-repeat left center;border:1px #CCC solid;}
 
 .linkchecks .progress {
 	background-color: #F7F7F7;
@@ -68,3 +68,8 @@
 }
 
 .linkchecks .stats{margin-bottom:1em;}
+
+.liste-objets.linkchecks .caption {
+	background-image: url("[(#CHEMIN{prive/themes/spip/images/linkcheck-24.png})]");
+	padding-left: 30px;
+}
