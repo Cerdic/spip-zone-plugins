@@ -30,7 +30,7 @@ function linkcheck_tables_a_traiter(){
 	$tables_spip = lister_tables_objets_sql();
 	$tables = array();
 	foreach($tables_spip as $key => $table){
-		if($table['principale'] == 'oui' && $key != "spip_syndic_articles")
+		if($table['principale'] == 'oui' && !in_array($key,array("spip_syndic_articles","spip_paquets")))
 			$tables[] = array($key => $table);
 	}
 	return $tables;
