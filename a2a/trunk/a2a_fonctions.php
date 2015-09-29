@@ -60,10 +60,11 @@ function types_liaisons_existent($array){
 function lister_types_liaisons(){
 	// fournit tout les types de liaisons ita est : define + cfg.
 	include_spip('inc/config');
-	if ($GLOBALS['a2a_types_liaisons'])
+	if (!empty($GLOBALS['a2a_types_liaisons'])) {
 		$types_liaisons = array_merge(lire_config('a2a/types_liaisons'),$GLOBALS['a2a_types_liaisons']);
-	else 
+	} else {
 		$types_liaisons = lire_config('a2a/types_liaisons');
+	}
 	asort($types_liaisons);
 	return $types_liaisons;
 }
