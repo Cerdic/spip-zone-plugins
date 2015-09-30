@@ -33,8 +33,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function dictionnaires_lister_definitions($purger=false){
 	// Le nom du fichier de cache
-	$fichier_cache =  _DIR_CACHE.'definitions.txt';
-	
+	$langue = false;
+	if(in_array('spip_definitions',explode(',',$GLOBALS['meta']['multi_objets']))){
+		$langue = _request('lang') ? _request('lang') : ($GLOBALS['spip_lang'] ? $GLOBALS['spip_lang'] : $GLOBALS['meta']['langue_site']);
+		if(!in_array($langue,explode(',', $GLOBALS['meta']['langues_multilingue'])))
+			$langue = $GLOBALS['meta']['langue_site'];
+		$fichier_cache =  _DIR_CACHE.'definitions_'.$langue.'.txt';
+	}
+	else{
+		$fichier_cache =  _DIR_CACHE.'definitions.txt';
+	}
+
 	// Par défaut rien
 	static $definitions_actives;
 	
@@ -59,15 +68,18 @@ function dictionnaires_lister_definitions($purger=false){
 		$dicos_actifs = sql_allfetsel('id_dictionnaire', 'spip_dictionnaires', 'statut = '. sql_quote('actif'));
 		if ($dicos_actifs and is_array($dicos_actifs)){
 			$dicos_actifs = array_map('reset', $dicos_actifs);
-		
-			// À l'intérieur on récupère toutes les définitions publiées
-			$definitions_publiees = sql_allfetsel(
-				'id_dictionnaire, id_definition, titre, termes, type, casse, texte, url_externe',
-				'spip_definitions',
-				array(
+			$where = array(
 					sql_in('id_dictionnaire', $dicos_actifs),
 					'statut ='.sql_quote('publie')
-				)
+				);
+			if($langue){
+				$where[] = "lang =".sql_quote($langue);
+			}
+			// À l'intérieur on récupère toutes les définitions publiées
+			$definitions_publiees = sql_allfetsel(
+				'id_dictionnaire, id_definition, titre, termes, type, casse, texte, url_externe, lang',
+				'spip_definitions',
+				$where
 			);
 			
 			if ($definitions_publiees and is_array($definitions_publiees)){
@@ -132,7 +144,6 @@ function dictionnaires_lister_definitions($purger=false){
 			ecrire_fichier($fichier_cache, serialize($definitions_actives));
 		}
 	}
-	
 	return $definitions_actives;
 }
 

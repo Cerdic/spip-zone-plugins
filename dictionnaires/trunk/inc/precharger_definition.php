@@ -8,7 +8,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
 include_spip('inc/precharger_objet');
 
 /**
@@ -48,7 +47,5 @@ function inc_precharger_definition_dist($id, $id_dictionnaire=0, $lier_trad=0) {
 function inc_precharger_traduction_definition_dist($id, $id_dictionnaire=0, $lier_trad=0) {
 	return precharger_traduction_objet('definition', $id, $id_dictionnaire, $lier_trad, 'titre');
 }
-
-
 
 ?>
