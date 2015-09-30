@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_definition' => 'Définition numéro :',
 
 	// T
+	'texte_langue_objet' => 'Langue de la définition',
 	'titre_definition' => 'Définition ',
 	'titre_definition_creer' => 'Créer une nouvelle définition',
 	'titre_definitions' => 'Définitions',
