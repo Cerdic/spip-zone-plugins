@@ -12,31 +12,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_explication_obligatoire_xiti' => ' ',
 	'legend_recommande_xiti' => 'Variables optionnelles dépendant de chaque page auditée (utilisation fortement recommandée)',
 	'legend_recommande_xiti_campagne' => 'Variable optionnelle utilisé pour les campagnes emailings',
-	'legend_explication_recommande_xiti' => ' ',
 	'legend_activer_xiti' => 'Choix d\'activer Xiti',
-	'legend_explication_activer_xiti' => ' ',
-
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
 	'item_utiliser_xiti' => 'Activer Xiti',
 	'item_non_utiliser_xiti' => 'Désactiver Xiti',
+	'item_titre_chapitre' => 'Titre par chapitre',
+	'item_titre_seul' => 'Titre par chapitre',
 	'item_xtnv_xiti' => 'Variable xtnv',
 	'item_xtnv_explication_xiti' => '<strong>Obligatoire</strong> - niveau d\'arborescence HTML du site. 
 										Cette variable spécifiant l’emplacement du referrer à récupérer. 
 										Cette variable est renseignée par défaut à "document", elle doit être changée en "parent.document" dans le cas d’une frame/iframe sur le même nom de domaine 
-										(dans le cas de noms de domaines différents, contactez le Service Clients qui faut!).',
+										(dans le cas de noms de domaines différents, contactez le Service Clients qu\'il faut!).',
 	'item_xtsd_xiti' => 'Variable xtsd',
-	'item_xtsd_explication_xiti' => '<strong>Obligatoire</strong> - sous-domaine du collecteur AT Internet. A récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
+	'item_xtsd_explication_xiti' => '<strong>Obligatoire</strong> - sous-domaine du collecteur AT Internet. À récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
 	'item_xtsite_xiti' => 'Variable "xtsite=" ou "s="',
-	'item_xtsite_explication_xiti' => '<strong>Obligatoire</strong> - identifiant numérique du site. A récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
+	'item_xtsite_explication_xiti' => '<strong>Obligatoire</strong> - identifiant numérique du site. À récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
 	'item_xtpage_xiti' => 'Variable "xtpage=" ou "p="',
 	'item_xtpage_explication_xiti' => '<strong>Obligatoire</strong> - création dynamique de chapitres ou simplement le titre des pages',
 	'item_xtn2_xiti' => 'Variable "xtn2" ou "s2="',
-	'item_xtn2_explication_xiti' => 'Identifiant numérique du niveau 2 dans lequel il faut ranger la page auditée. Les niveaux 2 sont à créer via votre interface.',
-	'item_xtdi_xiti' => 'variable xtdi',
-	'item_xtdi_explication_xiti' => 'degré d\'implication. La valeur par défaut est 0 ou vide. Cette variable accepte les valeurs 1, 2, 3, 4 et 5 pour les pages ayant une implication non nulle.',
-	'item_xtor_xiti' => 'variable xtor',
+	'item_xtn2_explication_xiti' => 'Identifiant numérique du niveau 2 dans lequel il faut ranger la page auditée. Les niveaux 2 sont à créer via votre interface XITI.',
+	'item_xtdi_xiti' => 'Variable xtdi',
+	'item_xtdi_explication_xiti' => 'Degré d\'implication. La valeur par défaut est 0 ou vide. Cette variable accepte les valeurs 1, 2, 3, 4 et 5 pour les pages ayant une implication non nulle.',
+	'item_xtor_xiti' => 'Variable xtor',
 	'item_xtor_explication_xiti' => 'La variable xtor doit contenir au minimum un préfixe indiquant le type de campagne, ainsi qu\'un identifiant de campagne.',
 
 	// T
