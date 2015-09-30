@@ -27,7 +27,6 @@ include_spip('inc/precharger_objet');
  *     Couples clés / valeurs des champs du formulaire à charger.
 **/
 function inc_precharger_definition_dist($id, $id_dictionnaire=0, $lier_trad=0) {
-	spip_log('precharger_def','test.'._LOG_ERREUR);
 	return precharger_objet('definition', $id, $id_dictionnaire, $lier_trad, 'titre');
 }
 
