@@ -6,10 +6,10 @@
 
 
 <B_liste_shortcut_url_logs>
-
+#ANCRE_PAGINATION
 <div class="liste-objets sites syndic">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url,shortcut_url:info_nb_shortcut_urls}})</strong></caption>]
+<caption><strong class="caption"><:shortcut_url:titre_url_clicks:></strong></caption>
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>id</th>
@@ -22,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_shortcut_url_logs(SHORTCUT_URLS_LOGS){id_shortcut_url}>
+	<BOUCLE_liste_shortcut_url_logs(SHORTCUT_URLS_LOGS){id_shortcut_url}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>#ID_SHORTCUT_URLS_LOG</td>
 			<td class='principale'>[(#DATE_MODIF|affdate)] [(#DATE_MODIF|affdate{'H:i:s'})]</td>
@@ -35,6 +35,7 @@
 	</BOUCLE_liste_shortcut_url_logs>
 	</tbody>
 </table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_shortcut_url_logs>[
 <div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
@@ -64,6 +65,88 @@
 </div>
 
 <BOUCLE_si_plugins_d3js(CONDITION) {si #PLUGIN{D3JS}}>
+
+<h2><:shortcut_url:titre_shortcut_url_graph_carte:></h2>
+<script type="text/javascript">
+
+$(document).ready(function($) {
+
+	var m_width = $("#map_pays").width(),
+		width = 538,
+		height = 200,
+		country,
+		state;
+
+	var projection = d3.geo.mercator()
+		.scale(100)
+		.translate([width / 2, height / 1.5]);
+
+	var path = d3.geo.path()
+		.projection(projection);
+
+	var svg = d3.select("#map_pays").append("svg")
+		.attr("preserveAspectRatio", "xMidYMid")
+		.attr("viewBox", "0 0 " + width + " " + height)
+		.attr("width", m_width)
+		.attr("height", m_width * height / width);
+
+	var path = d3.geo.path()
+		.projection(projection);
+
+	var g = svg.append("g");
+
+	var tooltip = d3.selectAll(".d3_tooltip");
+
+	var pays_on = ["DZA","AND","AUS","BEN","CAN","CHN","COL","COM","KOR","DJI","CIV","ETH","GAB","GNQ","GRD","MHL","ISL","JPN","JOR","KEN","LIE","MKD","MAR","MEX","MCO","MNE","NOR","NZL","DOM","COD","RUS","SRB","SGP","CHE","TTO","TUN","USA","UE"],
+ 		pays_on_long = {"DZA":"Algérie","AND":"Andorre","AUS":"Australie ","BEN":"Benin","CAN":"Canada","CHN":"Chine","COL":"Colombie","COM":"Comores","KOR":"Corée du Sud","DJI":"Djibouti","CIV":"Cote d&#8217;ivoire","ETH":"Ethiopie","GAB":"Gabon","GNQ":"Guinée Equatoriale","GRD":"Grenade","MHL":"République des Iles Marshall","ISL":"Islande","JPN":"Japon","JOR":"Jordanie","KEN":"Kenya","LIE":"Liechtenstein","MKD":"Macédoine","MAR":"Maroc","MEX":"Mexique","MCO":"Monaco","MNE":"Monténégro","NOR":"Norvège","NZL":"Nouvelle-Zélande","DOM":"République Dominicaine","COD":"République Démocratique du Congo","RUS":"Russie","SRB":"République de Serbie","SGP":"Singapour","CHE":"Suisse","TTO":"Trinidad et Tobaggo","TUN":"Tunisie","USA":"Etats-Unis","UE":"Union Européenne"};
+
+	/**
+ 	* Récupérer le TopoJSON des pays
+ 	*/
+	d3.json('[(#CHEMIN{json/regions.json})]', function(error, borders) {
+		collection = topojson.feature(borders, borders.objects.maedi_pays);
+		g.append("g")
+		.attr("id", "countries")
+		.selectAll("path")
+		.data(collection.features)
+		.enter()
+		.append("path")
+		.attr('class', function(d) {var classe = "pays"; return classe;})
+		.attr("d", path)
+		.on("mouseover", function (d,event) {
+			if(jQuery.inArray(d.properties['ISO'],pays_on) != -1 || d.properties['EUMEMBER'] == 1){
+					if(d.properties['EUMEMBER'] == 1){
+							g.selectAll("path.ue").classed("hover", true);
+							tooltip.html("<h3>"+pays_on_long.UE+"</h3>");
+					}else{
+							tooltip.html("<h3>"+pays_on_long[d.properties['ISO']]+"</h3>");
+					}
+					if(d3.event.clientX && d3.event.clientY)
+							tooltip.style("left", (d3.event.clientX+20) + "px")
+									.style("top",(d3.event.clientY+20)+ "px").style("opacity", "1");
+			}
+		})
+		.on("mousemove", function (d) {
+			if(d3.event.clientX && d3.event.clientY)
+				tooltip.style("left", (d3.event.clientX + 20)+ "px")
+						.style("top",(d3.event.clientY +20) + "px");
+		})
+		.on("mouseout", function (d) {
+			if(d.properties['EUMEMBER'] == 1){
+				g.selectAll("path.ue").classed("hover", false);
+		}
+			return tooltip.style("opacity", "0");
+		});
+	});
+
+});
+</script>
+
+<div class="liste-objets sites syndic">
+	<div id='map_pays'></div>
+</div>
+
+
 <h2><:shortcut_url:titre_shortcut_url_graph_pays:></h2>
 
 <script type="text/javascript">
@@ -87,8 +170,8 @@
 
 		var pie = new d3pie("d3pie_pays", {
 			"size": {
-				"canvasHeight": 260,
-				"canvasWidth": 260
+				"canvasHeight": 560,
+				"canvasWidth": 560
 			},
 			"data": {
 			  "content": json
@@ -104,7 +187,7 @@
 </script>
 
 <div class="liste-objets sites syndic">
-	<div id="d3pie_pays"></div>
+	<div id="d3pie_pays" class="d3pie_pays"></div>
 </div>
 
 <h2><:shortcut_url:titre_shortcut_url_graph_click:></h2>
@@ -115,23 +198,24 @@
 
 			var json = [
 				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
-					{
-					"label": "#DATE_MODIF",
-					"value": "#CLICK",
-					"color": "#2484c1"
-					},
+				<BOUCLE_shortcut_url_click_graph(SHORTCUT_URLS_LOGS){id_shortcut_url}{!par date_modif}>
+					<BOUCLE_shortcut_url_dateclick_graph(SHORTCUT_URLS_LOGS){date_modif=#DATE_MODIF}>
+						{
+							"label": "[(#DATE_MODIF)]",
+							"value": "#TOTAL_BOUCLE"
+						},
+					</BOUCLE_shortcut_url_dateclick_graph>
+				</BOUCLE_shortcut_url_click_graph>
 				</BOUCLE_liste_shortcut_url_click_graph>
 			];
 
 			var title_value = "Clicks";
-			var caption = "Nombre de clics par jour";
-			var summary;
 
 			var margin = {top: 60, right: 60, bottom: 30, left: 60},
-				width = 660 - margin.left - margin.right,
-				height = 300 - margin.top - margin.bottom;
+				width = 800 - margin.left - margin.right,
+				height = 400 - margin.top - margin.bottom;
 
-			var parseDate = d3.time.format("%d-%b-%y %h:%m:%i").parse;
+			var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 			var tooltipDate = d3.time.format("%e %b");
 
 			var x = d3.time.scale()
@@ -159,7 +243,7 @@
 				.attr("class", "tooltip")
 				.style("opacity", 0);
 
-			var svg = d3.select("d3_click").append("svg")
+			var svg = d3.select("#d3_click").append("svg")
 				.attr("width", (width + margin.left + margin.right))
 				.attr("height", height + margin.top + margin.bottom)
 				.append("g")
@@ -193,24 +277,6 @@
 				.attr("class", "line")
 				.attr("d", line);
 
-			svg.append("text")
-				.attr("x", (width / 2))
-				.attr("y", 4 - (margin.top / 1.5))
-				.attr("text-anchor", "middle")
-				.attr("fill", "#333333")
-				.style("font-size", "20px")
-				.style("font-family", "open sans")
-				.text(caption);
-
-			svg.append("text")
-				.attr("x", (width / 2))
-				.attr("y", 1 - (margin.top / 2.8))
-				.attr("text-anchor", "middle")
-				.attr("fill", "#999999") 
-				.style("font-size", "12px") 
-				.style("font-family", "open sans")
-				.text(summary);
-
 			svg.selectAll("dot")
 				.data(json)
 				.enter().append("circle")
@@ -239,110 +305,5 @@
 	<div id="d3_click"></div>
 </div>
 
-<div id='map_pays'></div>
-
-<script type="text/javascript">
-
-var width = $(window).width(),
-        height = $(window).height();
-
-$('#map_pays').width(width).height(height);
-
-// var map = new L.Map("map", {center: [0, 0], zoom: 3});
-// map.scrollWheelZoom.disable();
-// map.doubleClickZoom.disable();
-var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-        g = svg.append("g").attr("class", "leaflet-zoom-hide"),
-        pattern = svg.append('defs')
-                                .append('pattern').attr('id', 'diagonalHatch').attr('patternUnits', 'userSpaceOnUse').attr('width', 4).attr('height', 4).attr('patternTransform','rotate(45)')
-                                .append('rect').attr('width', 3).attr('height', 4).attr('fill', '#fff').attr('transform', 'translate(0,0)').attr('stroke-width', 1);
-var pays_on = [	<BOUCLE_liste_shortcut_url_pays_map(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{id_shortcut_url}>
-			<BOUCLE_liste_pays_map(SHORTCUT_URLS_LOGS){country_code=#COUNTRY_CODE}>#CLICK</BOUCLE_liste_pays_map></BOUCLE_liste_shortcut_url_pays_map>],
-        pays_on_long = {<BOUCLE_pays_long(ARTICLES){soustitre != ""}{','}>"#SOUSTITRE":"#TITRE"</BOUCLE_pays_long>};
-/**
- * Récupérer le TopoJSON des pays
- */
-d3.json('[(#CHEMIN{json/regions.json})]', function(borders) {
-        collection = topojson.feature(borders, borders.objects.maedi_pays);
-        var transform = d3.geo.transform({point: projectPoint}),
-                path = d3.geo.path().projection(transform);
-        
-        var pays = g.selectAll("path").data(collection.features)
-                                .enter().append("path").attr('class', function(d) {
-                                        var classe = "pays";
-                                        return classe;
-                                }).attr("id", function(d) {
-                                        return d.properties['ISO'].toLowerCase();
-                                }).attr('fill',function(d){
-                                        if(d.properties['ISO'] == "ESH")
-                                                return 'url(#diagonalHatch)';
-                                })
-                                .on("click", function(d) {
-                                        if(jQuery.inArray(d.properties['ISO'],pays_on) != -1 || d.properties['EUMEMBER'] == 1){
-                                                if(!d3.select(this).classed('on')){
-                                                        g.selectAll("path.on").classed("on", false);
-                                                        if(d.properties['EUMEMBER'] == 1){
-                                                                $('.info_pays').ajaxReload({args:{soustitre:"UE"}});
-                                                                g.selectAll('path.ue').classed("on",true);
-                                                        }
-                                                        else{
-                                                                d3.select(this).classed("on",true);
-                                                                $('.info_pays').ajaxReload({args:{soustitre:d.properties['ISO']}});
-                                                        }
-                                                }
-                                        }
-                                });
-
-        map.on("viewreset", reset);
-        reset();
-
-        // Reposition the SVG to cover the features.
-        function reset() {
-                var bounds = path.bounds(collection),
-                        topLeft = bounds[0],
-                        bottomRight = bounds[1];
-                var tooltip = d3.selectAll(".d3_tooltip");
-
-                var width = bottomRight[0] - topLeft[0],
-                        height = bottomRight[1] - topLeft[1];
-
-                svg.attr("width", width)
-                        .attr("height", height)
-                        .style("left", topLeft[0] + "px")
-                        .style("top", topLeft[1] + "px");
-
-                g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-
-                pays.attr("d", path).on("mouseover", function (d,event) {
-                                        if(jQuery.inArray(d.properties['ISO'],pays_on) != -1 || d.properties['EUMEMBER'] == 1){
-                                                if(d.properties['EUMEMBER'] == 1){
-                                                        g.selectAll("path.ue").classed("hover", true);
-                                                        tooltip.html("<h3>"+pays_on_long.UE+"</h3>");
-                                                }else{
-                                                        tooltip.html("<h3>"+pays_on_long[d.properties['ISO']]+"</h3>");
-                                                }
-                                                if(d3.event.clientX && d3.event.clientY)
-                                                        tooltip.style("left", (d3.event.clientX+20) + "px")
-                                                                .style("top",(d3.event.clientY+20)+ "px").style("opacity", "1");
-                                        }
-                                }).on("mousemove", function (d) {
-                                        if(d3.event.clientX && d3.event.clientY)
-                                                tooltip.style("left", (d3.event.clientX + 20)+ "px")
-                                                        .style("top",(d3.event.clientY +20) + "px");
-                                }).on("mouseout", function (d) {
-                                        if(d.properties['EUMEMBER'] == 1){
-                                                g.selectAll("path.ue").classed("hover", false);
-                                        }
-                                        return tooltip.style("opacity", "0");
-                                });
-        }
-
-        // Use Leaflet to implement a D3 geometric transformation.
-        function projectPoint(x, y) {
-                var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-                this.stream.point(point.x, point.y);
-        }
-});
-</script>
 </BOUCLE_si_plugins_d3js>
 </BOUCLE_liste_shortcut_url_logs_detail>

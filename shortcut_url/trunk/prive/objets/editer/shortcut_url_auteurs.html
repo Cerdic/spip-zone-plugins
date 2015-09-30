@@ -1,3 +1,4 @@
+<br class="nettoyeur" />
 <div class="box simple fiche_objet">
 
 <B_liste_shortcut_url_auteur>
@@ -17,10 +18,10 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_shortcut_url_auteur(SHORTCUT_URLS auteurs_shortcut_urls auteurs){!par date_modif}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_shortcut_url_auteur(SHORTCUT_URLS auteurs_shortcut_urls auteurs){id_auteur=#ENV{id_auteur}}{!par date_modif}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URL</a></td>
-			<td class='principale'><a href="[(#URL_SITE_SPIP)]/#TITRE">[(#URL_SITE_SPIP)]/#TITRE</a></td>
+			<td class='principale'><a href="[(#URL_SITE_SPIP)]/#TITRE">[(#TITRE)]</a></td>
 			<td class='principale'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#DESCRIPTION</a></td>
 			<td class='principale'>#URL</td>
 			<td class='principale'>#IP_ADDRESS</td>

@@ -15,6 +15,17 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+### 30 Sept 2015
+
+- Pagination dans la page detail des stats
+- Affichage du graph pour le nombre de clicks par jour
+- Ne pas afficher les brèves, les mots, les sites dans le menu édition
+- Correction sur les autorisations de l'affichage des menus d'entrées pour fonctionner sur 3.0
+- Correction sur la liste des URL par auteur
+- Un peu de commentaires sur les fonctions
+
+### 29 Sept 2015
+
 - Mettre les liens et form sur exec=accueil
 - Ajouter dans la recherche
 - Faire les révisions
@@ -34,4 +45,5 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 ## A faire
 
 - Peaufiner les stats (debugger la carte du monde)
+- Gérer le tri des URL
 - Regarder si pas de perte de fonctionnalité par rapport à yourls

@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
-	schema="0.0.1"
+	schema="0.0.2"
 >
 
 	<nom>Shortcut URL</nom>

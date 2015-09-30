@@ -12,10 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Créer les titres pour les liens raccourcis
+ * 
+ * @param string $length taille de la chaîne de caractère 
+ * @return string
+ */
 function generer_chaine_aleatoire($length = 5) {
 	return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 }
 
+/**
+ * Stocker les visites des clicks des utilistateurs
+ * 
+ * @param int $id_shortcut_url id de l'URL raccourcis
+ * @return boolean
+ */
 function shortcut_compteur($id_shortcut_url){
 	
 	$shorturl = sql_fetsel('url,click', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
@@ -50,6 +62,11 @@ function shortcut_compteur($id_shortcut_url){
 	return false;
 }
 
+/**
+ * Récupérer le user agent de l'utilisateur
+ * 
+ * @return string
+ */
 function get_user_agent() {
 		if ( !isset( $_SERVER['HTTP_USER_AGENT'] ) )
 				return '-';
@@ -60,6 +77,12 @@ function get_user_agent() {
 		return $ua;
 }
 
+/**
+ * Récupérer le le code pays de l'utilisateur
+ * 
+ * @param int $ip ip de l'utilisateur
+ * @return string
+ */
 function get_geoip($ip=null){
 	static $gi = null;
 	if (is_null($ip)){

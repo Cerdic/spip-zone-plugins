@@ -19,7 +19,7 @@
 	<BOUCLE_liste_shortcut_url(SHORTCUT_URLS){recherche?}{!par date_modif}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URL</a></td>
-			<td class='principale'><a href="#URL_SHORTCUT_URL">[(#URL_SHORTCUT_URL|url_absolue)]</a></td>
+			<td class='principale'><a href="#URL_SHORTCUT_URL">[(#TITRE)]</a></td>
 			<td class='principale'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#DESCRIPTION</a></td>
 			<td class='principale'>#URL</td>
 			<td class='principale'>#IP_ADDRESS</td>
