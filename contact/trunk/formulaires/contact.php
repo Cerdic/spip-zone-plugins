@@ -325,18 +325,31 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer='',$options=arra
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) \n";
 
-	// Texte a envoyer par mail, sans raccourcis SPIP
-	// On évite de couper les urls 
-	define('_MAX_LONG_URL',100000);
-	define('_MAX_COUPE_URL',100000);
-	$texte_final = propre($texte);
+	// Si le plugin facteur est pas activé, on recupère seulement le
+	// texte brut, on laisse Facteur faire le traitement propre(),
+	// gérer les retours, etc. Autrement, on transforme le texte en
+	// HTML.
+	$texte_final = $texte;
+	if (!defined("_DIR_PLUGIN_FACTEUR")) {
+
+		// Texte a envoyer par mail, sans raccourcis SPIP
+		// On évite de couper les urls
+		define('_MAX_LONG_URL',100000);
+		define('_MAX_COUPE_URL',100000);
+
+		$texte_final = propre($texte);
+	}
+
 	// Eviter que le facteur machouille les apostrophes
 	if ($GLOBALS['meta']['facteur_filtre_iso_8859']){
 		$texte_final = preg_replace(',&#8217;,',"'",$texte_final);
 	}
-	// Sauvegarder un soupcon de liste dans le mail
-	$texte_final = preg_replace (array('/<li>/','/<\/li>/','/<\/ul>/'), array("- ","\n","\n"), $texte_final);
-	$texte_final = supprimer_tags($texte_final);
+
+	if (!defined("_DIR_PLUGIN_FACTEUR")) {
+		// Sauvegarder un soupcon de liste dans le mail
+		$texte_final = preg_replace (array('/<li>/','/<\/li>/','/<\/ul>/'), array("- ","\n","\n"), $texte_final);
+		$texte_final = supprimer_tags($texte_final);
+	}
 
 	// On formate pour les accents
 	// Texte a mettre en base
@@ -451,7 +464,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer='',$options=arra
 
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
 	if ($pj_enregistrees_nomfichier != null) {
-		foreach ($pj_enregistrees_nomfichier as $cle => $nom_pj) {		
+		foreach ($pj_enregistrees_nomfichier as $cle => $nom_pj) {
 			/* Avant de supprimer le fichier demandé, on vérifie qu’il
 			 * est bien situé dans le répertoire temporaire. */
 			$repertoire_temp_pj_complet = realpath(getcwd() . DIRECTORY_SEPARATOR . $repertoire_temp_pj);
