@@ -16,6 +16,7 @@ index spip {
 	rt_attr_string        = content
 
 	rt_attr_timestamp     = date
+	rt_attr_timestamp     = date_indexation
 	rt_attr_string        = uri
 
 	rt_attr_json          = properties

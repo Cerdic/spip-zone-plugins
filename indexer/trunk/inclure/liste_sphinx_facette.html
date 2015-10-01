@@ -33,7 +33,7 @@
 			<li class='item'>
 				<a href="[(#SELF|parametre_url{#ENV{cle},[(#FACETTE|sinon{-})]})]">
 					[(#FACETTE|sinon{<i>#ENV{texte_vide}</i>})]
-				</a> (#NB documents)
+				</a> (#NB [(#NB|=={1}|?{document,documents})])
 			</li>
 </BOUCLE_resultats_facette>
 		</ul>

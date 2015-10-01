@@ -8,6 +8,7 @@ class Document {
 	public $summary = '';
 	public $content = '';
 	public $date = 0;
+	public $date_indexation = time();
 	public $uri = '';
 	public $properties = array();
 
