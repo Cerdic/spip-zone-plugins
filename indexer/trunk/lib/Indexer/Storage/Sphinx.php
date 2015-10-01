@@ -19,7 +19,7 @@ class Sphinx implements StorageInterface {
 	public function replaceDocuments($documents){
 		$query = "
 			REPLACE INTO $this->indexName
-				(id,  title, summary, content, date, uri, properties, signature)
+				(id,  title, summary, content, date, date_indexation, uri, properties, signature)
 			VALUES
 		";
 
@@ -75,6 +75,7 @@ class Sphinx implements StorageInterface {
 			"summary"    => $document->summary,
 			"content"    => $document->content,
 			"date"       => strtotime($document->date),
+			"date_indexation" => intval($document->date_indexation),
 			"uri"        => $document->uri,
 			"properties" => json_encode($document->properties),
 			"signature"  => $this->signer($document),

@@ -8,7 +8,7 @@ class Document {
 	public $summary = '';
 	public $content = '';
 	public $date = 0;
-	public $date_indexation = time();
+	public $date_indexation = 0;
 	public $uri = '';
 	public $properties = array();
 
@@ -17,6 +17,7 @@ class Document {
 	}
 
 	public function setAll($data) {
+		$this->date_indexation = time();
 		foreach ($data as $key => $val) {
 			if (property_exists($this, $key)) {
 				$this->$key = $val;
