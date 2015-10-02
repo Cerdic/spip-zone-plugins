@@ -25,10 +25,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_bloquer' => 'Bloquer le changement de couleur',
 	'label_bloquer_oui' => 'oui',
 	
-	// M
-	'message_couleur_supprimee' => 'La couleur a bien été supprimée !',
-	'message_couleur_enregistree' => 'La couleur a bien été enregistrée !',
-	
 	// S
 	'supprimer_la_couleur' => 'Supprimer la couleur'
 );
