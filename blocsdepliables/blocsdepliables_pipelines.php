@@ -30,7 +30,7 @@ function blocsdepliables_insert_head_css($flux){
 	$js = "var blocs_replier_tout = ".intval(lire_config('blocsdepliables/unique',0)).";
 var blocs_slide = "._q($slide).";
 var blocs_title_sep = /".preg_quote(_BLOC_TITLE_SEP)."/g;
-var blocs_title_def = "._q(_T('couteau:bloc_deplier')._BLOC_TITLE_SEP._T('couteau:bloc_replier')).";
+var blocs_title_def = "._q(_T('blocsdepliables:bloc_deplier')._BLOC_TITLE_SEP._T('blocsdepliables:bloc_replier')).";
 var blocs_js_cookie = '$js_cookie';
 ";
 	$flux =
@@ -50,7 +50,7 @@ var blocs_js_cookie = '$js_cookie';
 
 // depliage/repliage - fonction de personnalisation des title a placer dans mes_fonctions.php
 // function blocs_title($titre='', $corps='', $num='') {
-//	return array(_T('couteau:bloc_deplier'), _T('couteau:bloc_replier'));
+//	return array(_T('blocsdepliables:bloc_deplier'), _T('blocsdepliables:bloc_replier'));
 // }
 
 function blocsdepliables_callback($matches) {
@@ -159,14 +159,14 @@ function blocsdepliables_pre_typo($texte) {
 function blocsdepliables_porte_plume_cs_pre_charger($flux) {
 	$r = array(array(
 		"id" => 'blocs_bloc',
-		"name" => _T('couteau:pp_blocs_bloc'),
+		"name" => _T('blocsdepliables:pp_blocs_bloc'),
 		"className" => 'blocs_bloc',
-		"replaceWith" => "\n<bloc>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</bloc>\n",
+		"replaceWith" => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
 		"display" => true), array(
 		"id" => 'blocs_visible',
-		"name" => _T('couteau:pp_blocs_visible'),
+		"name" => _T('blocsdepliables:pp_blocs_visible'),
 		"className" => 'blocs_visible',
-		"replaceWith" => "\n<visible>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</visible>\n",
+		"replaceWith" => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
 		"display" => true));
 	if(function_exists('cs_pp_liste_barres')){
 		foreach(cs_pp_liste_barres('blocs') as $b) {
