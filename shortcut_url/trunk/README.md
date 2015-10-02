@@ -15,6 +15,10 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+## 2 Oct 2015
+
+- Permettre de changer l'URL lors de la modification d'une URL existante
+
 ## 1 Oct 2015
 
 - Vérifier si l'url raccourcis existe avant de la créer

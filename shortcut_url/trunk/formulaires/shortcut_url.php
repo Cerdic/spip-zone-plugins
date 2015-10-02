@@ -32,7 +32,7 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 			$valeurs["$cle"] = $valeur;
 		}
 	}
-	
+
 	if(_request('id_shortcut_url_existe'))
 		$valeurs['id_shortcut_url_existe'] = _request('id_shortcut_url_existe');
 
@@ -68,7 +68,7 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url,'var_mode','');
 			// Check si l'URL existe deja
-			if ($url = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url))) {
+			if ($url = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)) && $id_shortcut_url=="oui") {
 				set_request('id_shortcut_url_existe',$url);
 				$erreurs['url'] = _T("shortcut_url:erreur_url_exist");
 			}
@@ -117,11 +117,13 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 		$set['id_shortcut_url'] = sql_insertq('spip_shortcut_urls', $set);
 		// Insertion de l'auteur à l'arrache
 		$auteur = sql_insertq('spip_auteurs_liens', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_objet' => $set['id_shortcut_url'], 'objet' => 'shortcut_url'));
+		$res = array('redirect' => self());
 	} else {
 		sql_updateq('spip_shortcut_urls', $set, 'id_shortcut_url=' . intval($id_shortcut_url));
+		$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	}
-	spip_log(_request('url_exist'), 'test.' . _LOG_ERREUR);
-	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>self());
+
+	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>$res);
 
 }
 
