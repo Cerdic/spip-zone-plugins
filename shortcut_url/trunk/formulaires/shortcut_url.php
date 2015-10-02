@@ -17,7 +17,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Chargement du formulaire de configuration du shortcut_urling des sites
+ * Chargement du formulaire de configuration du shortcut_url
  *
  * @return array
  *     Environnement du formulaire
@@ -32,13 +32,23 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 			$valeurs["$cle"] = $valeur;
 		}
 	}
+	
+	if(_request('id_shortcut_url_existe'))
+		$valeurs['id_shortcut_url_existe'] = _request('id_shortcut_url_existe');
+
+	if($url = _request('url')){
+		$valeurs['url'] = $url;
+	}
+	if($titre = _request('titre')){
+		$valeurs['titre'] = $titre;
+	}
 
 	return $valeurs;
 	
 }
 
 /**
- * Vérifications du formulaire de configuration du shortcut_urling des sites
+ * Vérifications du formulaire de configuration du shortcut_url
  *
  * @return array
  *     Tableau des erreurs
@@ -58,10 +68,20 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url,'var_mode','');
 			// Check si l'URL existe deja
-			if (sql_getfetsel('url','spip_shortcut_urls', 'url=' . sql_quote($url))){
+			if ($url = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url))) {
+				set_request('id_shortcut_url_existe',$url);
 				$erreurs['url'] = _T("shortcut_url:erreur_url_exist");
 			}
 		}
+	}
+	// On vérifie que l'URL raccourcis n'existe pas
+	if(_request('titre')) {
+		$titre = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre')));
+		if($titre){
+			set_request('id_shortcut_url_existe',$titre);
+			$erreurs['titre'] = _T("shortcut_url:erreur_url_raccourcis_exist");
+		}
+
 	}
 
 	return $erreurs;
@@ -69,7 +89,7 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 }
 
 /**
- * Traitement du formulaire de configuration du shortcut_urling des sites
+ * Traitement du formulaire de configuration du shortcut_url
  *
  * @return array
  *     Retours du traitement
@@ -100,7 +120,7 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 	} else {
 		sql_updateq('spip_shortcut_urls', $set, 'id_shortcut_url=' . intval($id_shortcut_url));
 	}
-
+	spip_log(_request('url_exist'), 'test.' . _LOG_ERREUR);
 	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>self());
 
 }

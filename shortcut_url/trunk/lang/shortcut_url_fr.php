@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_url_invalide' => 'Veuillez insérer une URL valide',
-	'erreur_url_exist' => 'Cette URL existe déja',
+	'erreur_url_exist' => 'Cette URL existe déjà',
+	'erreur_url_raccourcis_exist' => 'Cette URL raccourcie existe déjà',
 
 	// F
 	'form_country_code' => 'Code pays',
@@ -60,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_pays' => 'Liste des pays',
 	'titre_url_clicks' => 'Liste des connexions',
 	'titre_shortcut_url_auteur' => 'Liste des URL raccourcis par auteur',
+	'titre_shortcut_url_enbase' => 'Informations sur l\'URL déjà insérée : ',
 	'titre_shortcut_url_log_detail' => 'Détails pour l\'URL: ',
 	'titre_shortcut_url_liste' => 'Liste des liens raccourcis',
 	'titre_shortcut_url_liste_log' => 'Statistique URL raccourci',

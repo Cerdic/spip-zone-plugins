@@ -30,6 +30,9 @@
 						<input type="input" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" maxlength="8" /><label for="#GET{name}"><:shortcut_url:item_utiliser_shortcut_title:></label>
 					</div>
 				</li>
+				[(#ENV{id_shortcut_url_existe}|oui) #SET{name,enbase} <li class="editer">
+				<label for="#GET{name}"><:shortcut_url:titre_shortcut_url_enbase:></label>
+				#INCLURE{fond=prive/objets/editer/shortcut_url_verif,id_shortcut_url=#ENV{id_shortcut_url_existe}}</li>]
 			]
 		</ul>
 

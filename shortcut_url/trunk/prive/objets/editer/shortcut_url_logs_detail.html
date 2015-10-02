@@ -1,9 +1,12 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_modif,#ENV{date_sens,-1},
+	country_code,1
+}})
+]
 <BOUCLE_liste_shortcut_url_logs_detail(SHORTCUT_URLS){id_shortcut_url}>
 <h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
 
-
 [<strong>(#ENV*{titre,#CLICK|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url_click,shortcut_url:info_nb_shortcut_url_clicks}})</strong>]
-
 
 <B_liste_shortcut_url_logs>
 #ANCRE_PAGINATION
@@ -13,16 +16,16 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>id</th>
-			<th class='click_time' scope='col'><:shortcut_url:form_date_connect:></th>
+			<th class='click_time' scope='col'>[(#TRI{date_modif,<:shortcut_url:form_date_connect:>,ajax})]</th>
 			<th class='shorturl' scope='col'><:shortcut_url:form_url:></th>
 			<th class='referrer' scope='col'><:shortcut_url:form_referrer:></th>
 			<th class='user_agent' scope='col'><:shortcut_url:form_user_agent:></th>
 			<th class='ip_address' scope='col'><:shortcut_url:form_ip_address:></th>
-			<th class='country_code' scope='col'><:shortcut_url:form_country_code:></th>
+			<th class='country_code' scope='col'>[(#TRI{country_code,<:shortcut_url:form_country_code:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_shortcut_url_logs(SHORTCUT_URLS_LOGS){id_shortcut_url}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_shortcut_url_logs(SHORTCUT_URLS_LOGS){id_shortcut_url}{tri #ENV{par,date_modif},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>#ID_SHORTCUT_URLS_LOG</td>
 			<td class='principale'>[(#DATE_MODIF|affdate)] [(#DATE_MODIF|affdate{'H:i:s'})]</td>
@@ -41,6 +44,7 @@
 <div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong>
 <p><:shortcut_url::></div>
 ]<//B_liste_shortcut_url_logs>
+
 <div class="liste-objets sites syndic">
 <table class='spip liste'>
 <caption><strong class="caption"><:shortcut_url:titre_liste_pays:></strong></caption>
@@ -67,6 +71,7 @@
 <BOUCLE_si_plugins_d3js(CONDITION) {si #PLUGIN{D3JS}}>
 
 <h2><:shortcut_url:titre_shortcut_url_graph_carte:></h2>
+
 <script type="text/javascript">
 
 $(document).ready(function($) {
@@ -100,9 +105,6 @@ $(document).ready(function($) {
 	var pays_on = ["DZA","AND","AUS","BEN","CAN","CHN","COL","COM","KOR","DJI","CIV","ETH","GAB","GNQ","GRD","MHL","ISL","JPN","JOR","KEN","LIE","MKD","MAR","MEX","MCO","MNE","NOR","NZL","DOM","COD","RUS","SRB","SGP","CHE","TTO","TUN","USA","UE"],
  		pays_on_long = {"DZA":"Algérie","AND":"Andorre","AUS":"Australie ","BEN":"Benin","CAN":"Canada","CHN":"Chine","COL":"Colombie","COM":"Comores","KOR":"Corée du Sud","DJI":"Djibouti","CIV":"Cote d&#8217;ivoire","ETH":"Ethiopie","GAB":"Gabon","GNQ":"Guinée Equatoriale","GRD":"Grenade","MHL":"République des Iles Marshall","ISL":"Islande","JPN":"Japon","JOR":"Jordanie","KEN":"Kenya","LIE":"Liechtenstein","MKD":"Macédoine","MAR":"Maroc","MEX":"Mexique","MCO":"Monaco","MNE":"Monténégro","NOR":"Norvège","NZL":"Nouvelle-Zélande","DOM":"République Dominicaine","COD":"République Démocratique du Congo","RUS":"Russie","SRB":"République de Serbie","SGP":"Singapour","CHE":"Suisse","TTO":"Trinidad et Tobaggo","TUN":"Tunisie","USA":"Etats-Unis","UE":"Union Européenne"};
 
-	/**
- 	* Récupérer le TopoJSON des pays
- 	*/
 	d3.json('[(#CHEMIN{json/regions.json})]', function(error, borders) {
 		collection = topojson.feature(borders, borders.objects.maedi_pays);
 		g.append("g")
@@ -114,17 +116,12 @@ $(document).ready(function($) {
 		.attr('class', function(d) {var classe = "pays"; return classe;})
 		.attr("d", path)
 		.on("mouseover", function (d,event) {
-			if(jQuery.inArray(d.properties['ISO'],pays_on) != -1 || d.properties['EUMEMBER'] == 1){
-					if(d.properties['EUMEMBER'] == 1){
-							g.selectAll("path.ue").classed("hover", true);
-							tooltip.html("<h3>"+pays_on_long.UE+"</h3>");
-					}else{
-							tooltip.html("<h3>"+pays_on_long[d.properties['ISO']]+"</h3>");
-					}
-					if(d3.event.clientX && d3.event.clientY)
-							tooltip.style("left", (d3.event.clientX+20) + "px")
-									.style("top",(d3.event.clientY+20)+ "px").style("opacity", "1");
-			}
+				g.selectAll("path").classed("hover", true);
+				tooltip.html("<h3>"+pays_on_long+"</h3>");
+				if(d3.event.clientX && d3.event.clientY)
+					tooltip.style("left", (d3.event.clientX+20) + "px")
+					.style("top",(d3.event.clientY+20)+ "px").style("opacity", "1");
+
 		})
 		.on("mousemove", function (d) {
 			if(d3.event.clientX && d3.event.clientY)
@@ -132,10 +129,7 @@ $(document).ready(function($) {
 						.style("top",(d3.event.clientY +20) + "px");
 		})
 		.on("mouseout", function (d) {
-			if(d.properties['EUMEMBER'] == 1){
 				g.selectAll("path.ue").classed("hover", false);
-		}
-			return tooltip.style("opacity", "0");
 		});
 	});
 
@@ -145,7 +139,6 @@ $(document).ready(function($) {
 <div class="liste-objets sites syndic">
 	<div id='map_pays'></div>
 </div>
-
 
 <h2><:shortcut_url:titre_shortcut_url_graph_pays:></h2>
 

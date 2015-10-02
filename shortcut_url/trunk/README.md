@@ -7,7 +7,7 @@ Attention ce plugin supprime des boutons de navigation dans le backoffice de SPI
 
 Ce plugins permet de stocker le le nombre de click par URL, de consulter la provenance des utilisateurs ...
 
-# Version 1.0.0
+# Version 1.0.1
 
 ## Plugin SPIP
 
@@ -15,12 +15,17 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+## 1 Oct 2015
+
+- Vérifier si l'url raccourcis existe avant de la créer
+- Gérer le tri des URL dans les listes
+- Lors de la vérification, si l'URL existe afficher l'objet présent dans la base
+
 ### 30 Sept 2015
 
 - Pagination dans la page detail des stats
-- Affichage du graph pour le nombre de clicks par jour
 - Ne pas afficher les brèves, les mots, les sites dans le menu édition
-- Correction sur les autorisations de l'affichage des menus d'entrées pour fonctionner sur 3.0
+- Correction sur les autorisation de l'affichage des menu d'entrée pour fonctionner sur 3.0
 - Correction sur la liste des URL par auteur
 - Un peu de commentaires sur les fonctions
 
@@ -44,6 +49,4 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## A faire
 
-- Peaufiner les stats (debugger la carte du monde)
-- Gérer le tri des URL
-- Regarder si pas de perte de fonctionnalité par rapport à yourls
+- Peaufiner les stats (debugger la carte du monde + perf)
