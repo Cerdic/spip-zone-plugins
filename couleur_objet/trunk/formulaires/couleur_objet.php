@@ -28,7 +28,7 @@ function formulaires_couleur_objet_traiter_dist($objet,$id_objet,$couleur_objet)
 		// requête sql dans spip_couleur_objet_liens pour supprimer la ligne où #ID_OBJET = $id_objet et #OBJET = $objet
 		sql_delete("spip_couleur_objet_liens", "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet));
 		$res = array("message_ok"=>_T('couleur_objet:message_couleur_supprimee'));
-		set_request('couleur_objet');
+		set_request('couleur_objet','');
 	}
 	else {
 		$couleur_objet = _request('couleur_objet');

@@ -23,11 +23,11 @@
 		[<input type='hidden' name='objet' value='(#ENV{objet})' />]
 		[<input type='hidden' name='id_objet' value='(#ENV{id_objet})' />]
 		<ul>
-			[(#COULEUR_OBJET|oui)[<li>
+			[<li>
 				<label><:couleur_objet:couleur_actuelle:></label>
 				<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
 				>(#COULEUR_OBJET)</div>
-			</li>]][(#COULEUR_OBJET|non)
+			</li>][(#COULEUR_OBJET|non)
 			<li><:couleur_objet:aucune_couleur_definie:></li>]
 			<li class="editer_couleur_objet[(#ENV**{erreurs}|table_valeur{couleur_objet}|oui)erreur]">
 				<label for="couleur_objet"><:couleur_objet:choisir_une_nouvelle_couleur:></label>[
