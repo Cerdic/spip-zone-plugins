@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Persona</nom>
 	<auteur>Fil</auteur>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>
 	dev
 	</etat>
@@ -17,5 +17,5 @@
 	<categorie>auteur</categorie>
 	<lien>http://contrib.spip.net/4005</lien>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 </plugin>

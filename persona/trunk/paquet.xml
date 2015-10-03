@@ -1,7 +1,7 @@
 <paquet
 	prefix="persona"
 	categorie="auteur"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/persona-32.png"
