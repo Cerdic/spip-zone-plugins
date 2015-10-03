@@ -24,6 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'objets_sans_tableaux' => 'Voici les objets n\'ayant pas de tableau (cf. <em>prive/objets/liste/nom_objet.html</em>)',
     'objets_vides' => 'Voici la liste des objets ayant un tableau ne retournant aucun résultat, ou résultat alternatif.',
 
+    // R
+    'refus_acces' => 'Seuls les webmestres du site (@lister_webmestres@) sont autorisés à consulter cette page.',
+
     // T
     'titre_lister_config' => 'Liste des plugins configurables',
     'titre_lister_config_plugins' => 'Configurer les plugins',
