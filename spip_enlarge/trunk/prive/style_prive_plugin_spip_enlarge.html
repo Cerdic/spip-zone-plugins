@@ -14,13 +14,13 @@
 /*
 
 On recupere les valeurs des define pour ne pas casser la compatibilite
-#SET{mes_options_petit_ecran,#EVAL{_PETIT_ECRAN}}
-#SET{mes_options_grand_ecran,#EVAL{_GRAND_ECRAN}}
-#SET{petit_ecran,#GET{mes_options_petit_ecran,#CONFIG{spip_enlarge/petit_ecran}}} [petit_ecran: (#GET{petit_ecran});]
-#SET{grand_ecran,#GET{mes_options_grand_ecran,#CONFIG{spip_enlarge/grand_ecran}}} [grand_ecran: (#GET{grand_ecran});]
+#SET{config_petit_ecran,#CONFIG{spip_enlarge/petit_ecran}}
+#SET{config_grand_ecran,#CONFIG{spip_enlarge/grand_ecran}}
+#SET{petit_ecran,#GET{config_petit_ecran,#EVAL{_PETIT_ECRAN}}} [petit_ecran: (#GET{petit_ecran});]
+#SET{grand_ecran,#GET{config_grand_ecran,#EVAL{_GRAND_ECRAN}}} [grand_ecran: (#GET{grand_ecran});]
 
 Gestion de la largeur du bandeau, par defaut (pour ne pas casser la compatibilite) il prend la dimension de la largeur de l'ecran
-[(#CONFIG{spip_enlarge/etendre_bandeau}|oui) #SET{largeur_bandeau,div#page}] largeur bandeau : #GET{largeur_bandeau}aa
+[(#CONFIG{spip_enlarge/etendre_bandeau}|oui) #SET{largeur_bandeau,div#page}]
 
 Si on est en pourcentage, on donne une valeur min-width equivalent aux valeurs standards de SPIP
 [(#GET{petit_ecran}|match{'%'}|oui)
