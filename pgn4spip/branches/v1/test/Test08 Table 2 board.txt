@@ -1,0 +1,6 @@
+Before
+|| Alekhine's defence | nil ||
+| {{First position}} | {{Final position}} |
+|[PGN l=v fh=330 fw=200 ss=25         initialHalfmove=2] 1. e4 Nf6 2. e5 Nd5 3. c4 Nb6 [/PGN]
+|[PGN l=v fh=330 fw=200 squareSize=25 ih=6]              1. e4 Nf6 2. e5 Nd5 3. c4 Nb6 [/PGN] |
+After

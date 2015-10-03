@@ -1,0 +1,16 @@
+1. In the article, download and insert two .pgn as attached document doc1 and doc3.
+doc2 has been deleted for the purpose of this demo then re-uploaded as doc3.
+
+2. Use the same numbers of documents as suffix in "pgn" model between < & >
+
+3. For the options, you can use the abbreviation of each name: 
+bd = buttonsDisplay; s = (s)tandard; c = (c)ustom
+See doc\pgn4spip parameters.txt
+
+CAUTION: the settings are reset between consecutive calls!
+
+Before
+<pgn1|option="movesDisplay=puzzle buttonsDisplay=s am=l d=5000">
+[pgn md=p ig=last bd=c eo=t pd=http://localhost/spip/plugins/pgn4spip/pgn4web/tactics.pgn][/pgn]
+<pgn3|option="l=v ss=34 lch=FFCC99 dch=CC9966 bbch=252ACC am=l d=1000">
+After

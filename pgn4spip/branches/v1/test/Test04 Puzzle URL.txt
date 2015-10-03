@@ -1,0 +1,6 @@
+Before
+[pgn movesDisplay=puzzle 
+ extendedoptions=true
+ pgndata=http://localhost/spip/plugins/pgn4spip/pgn4web/tactics.pgn]
+[/pgn]
+After
