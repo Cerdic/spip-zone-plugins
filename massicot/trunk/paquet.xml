@@ -1,0 +1,33 @@
+<paquet
+	prefix="massicot"
+	categorie="multimedia"
+	version="0.1.1"
+	etat="test"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="prive/themes/spip/images/massicot-48.png"
+	documentation=""
+	schema="1.0.0" 
+>
+  <!-- crédit icône : http://ic8.link/1047 -->
+  
+	<nom>Massicot</nom>
+
+	<auteur lien='http://vertige.org'>Michel @ Vertige ASBL</auteur>
+
+	<licence>GNU/GPL</licence>
+
+  <pipeline nom="declarer_tables_interfaces"  inclure="base/massicot.php" />
+  <pipeline nom="declarer_tables_principales" inclure="base/massicot.php" />
+  <pipeline nom="declarer_tables_auxiliaires" inclure="base/massicot.php" />
+
+  <pipeline nom="jquery_plugins"   inclure="massicot_pipelines.php" />
+  <pipeline nom="jqueryui_plugins" inclure="massicot_pipelines.php" />
+  <pipeline nom="header_prive"     inclure="massicot_pipelines.php" />
+  <pipeline nom="document_desc_actions" inclure="massicot_pipelines.php" />
+
+  <!-- <lib nom="jquery.imgareaselect.js" lien="https://github.com/odyniec/imgareaselect/archive/master.zip" /> -->
+
+  <necessite nom="medias" />
+  <necessite nom="saisies" />
+
+</paquet>
