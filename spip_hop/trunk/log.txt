@@ -1,0 +1,65 @@
+------------------------------------------------------------------------
+r92173 | tofulm@gmail.com | 2015-10-03 22:57:49 +0200 (Sam 03 oct 2015) | 5 lignes
+
+On change le sens :
+par defaut : on recupere les valeurs du formulaire de configuration
+sinon on recupere les valeurs des define
+
+
+------------------------------------------------------------------------
+r92160 | tofulm@gmail.com | 2015-10-03 14:41:17 +0200 (Sam 03 oct 2015) | 9 lignes
+
+Nouvelle gestion de la configuration :
+
+* On ajoute un formulaire de configuration dans le plugin avec toujours les 2 possibilites : grand ecran et petit ecran
+* On ajoute une nouvelle fonctionnalite sur la largeur du bandeau (garder la largeur initiale (celle de spip) ou utiliser la nouvelle largeur definie.
+
+ces modifications ne cassent pas la compatibilite.
+
+
+
+------------------------------------------------------------------------
+r91291 | teddy.spip@gmail.com | 2015-08-07 19:37:21 +0200 (Ven 07 aoû 2015) | 1 ligne
+
+Compatibilité avec SPIP 2.1 + up de y
+------------------------------------------------------------------------
+r91244 | teddy.spip@gmail.com | 2015-08-02 23:22:12 +0200 (Dim 02 aoû 2015) | 5 lignes
+
+- Ajout d'un min-width avec les valeurs standard de SPIP. 
+Si la valeur renseignée dans la constante _PETIT_ECRAN est en pixel et est  plus petite que 780px, on prend cette valeur. Sinon, on prend 780px comme largeur minimale pour le body.
+Si la valeur est en pourcentage, on prend 780px comme largeur minimale.
+De même pour _GRAND_ECRAN avec 974px comme référence.
+- Up de z.
+------------------------------------------------------------------------
+r91241 | teddy.spip@gmail.com | 2015-08-01 15:12:11 +0200 (Sam 01 aoû 2015) | 3 lignes
+
+- Ajout du lien de la documentation qui sera en ligne lundi ;
+- On passe en test maintenant que la documentation est publiée ;
+- Up de z pour maj par SVP.
+------------------------------------------------------------------------
+r91159 | teddy.spip@gmail.com | 2015-07-29 13:07:29 +0200 (Mer 29 jul 2015) | 2 lignes
+
+- On agrandi la colonne extra sur les pages éditions. On uniformise la marge entre les colonne ainsi, soit 2%.
+- Up de z
+------------------------------------------------------------------------
+r90993 | teddy.spip@gmail.com | 2015-07-22 23:58:31 +0200 (Mer 22 jul 2015) | 4 lignes
+
+Agrandir ne prend pas 2 'g' ;
+- Ajout d'icones ;
+- Permettre de définir par une constante la largeur du petit écran tout comme la largeur pour le grand écran.
+- Up de y
+------------------------------------------------------------------------
+r90738 | teddy.spip@gmail.com | 2015-07-05 23:34:28 +0200 (Dim 05 jul 2015) | 1 ligne
+
+On réduit la marge de droite et de gauche sur le contenu pour l'aggrandir un peu. Le plugin fonctionne bien sous SPIP 3.0
+------------------------------------------------------------------------
+r90737 | teddy.spip@gmail.com | 2015-07-05 23:10:18 +0200 (Dim 05 jul 2015) | 3 lignes
+
+L'interface de SPIP reste étroite depuis très longtemps. En tout cas, c'est une remarque qui revient souvent. Après un peu de recherche, j'ai trouvé ce ticket : https://core.spip.net/issues/2516 
+Ce plugin n'a pas pour ambition de rendre responsive l'interface de SPIP, mais de voir la possibilité ou les possiblités d'utilise des pourcentages pour indiquer les largeurs de blocs. Je n'ai pas eu grand choses à surcharger en css car, en SPIP 3.1, beaucoup de blocs sont en pourcentage. Il faut que je teste ça sous SPIP 3.0. 
+On pourrait voir aussi par la suite pour créer une constante qui indiquerait la largeur du petit écran et celle du grand écran. Ainsi on pourra personnaliser cela juste par une ligne ou deux dans un fichier mes_options.php si les valeurs par défaut ne 'plaisent' pas
+------------------------------------------------------------------------
+r90736 | teddy.spip@gmail.com | 2015-07-05 22:33:51 +0200 (Dim 05 jul 2015) | 1 ligne
+
+Création d'un plugin qui va aggrandir la largeur de la page dans le back office. Juste un proof of concept.
+------------------------------------------------------------------------
