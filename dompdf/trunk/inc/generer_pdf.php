@@ -23,7 +23,7 @@ function inc_generer_pdf_dist($squelette, $contexte = array(), $filename = 'sort
   $dompdf = new DOMPDF();
 
   // On récupère le html du squelette.
-  $html = dompdf_trouver_html($squelette);
+  $html = dompdf_trouver_html($squelette, $contexte);
 
   // On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
   $dompdf->load_html($html);
