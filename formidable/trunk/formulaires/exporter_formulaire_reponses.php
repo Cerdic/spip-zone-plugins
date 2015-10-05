@@ -23,12 +23,18 @@ function formulaires_exporter_formulaire_reponses_verifier($id_formulaire = 0) {
 
 function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	$retours = array();
+	$statut_reponses  = _request('statut_reponses');
 
 	if (_request('type_export') == 'csv') {
-		exporter_formulaires_reponses($id_formulaire);
+		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses);
 	}
 	else if (_request('type_export') == 'xls') {
-		exporter_formulaires_reponses($id_formulaire, "TAB");
+		$ok = exporter_formulaires_reponses($id_formulaire, 'TAB', $statut_reponses);
+	}
+
+	if(!$ok) {
+		$retours['editable']       = 1;
+		$retours['message_erreur'] = _T('formidable:info_aucune_reponse');
 	}
 
 	return $retours;
@@ -40,14 +46,13 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
  * @param integer $id_formulaire
  * @return unknown_type
  */
-function exporter_formulaires_reponses($id_formulaire, $delim = ",") {
-
+function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_reponses = 'publie') {
+	include_spip('inc/puce_statut');
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
-	$ok = false;
 	if (
 		$id_formulaire > 0
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire)
-		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses', 'id_formulaire = ' . $id_formulaire . ' and statut = ' . sql_quote('publie'))
+		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses', 'id_formulaire = ' . $id_formulaire . ($statut_reponses == 'publie' ? ' and statut = "publie"' : ''))
 	) {
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');
@@ -60,6 +65,9 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ",") {
 			_T('formidable:reponses_auteur'),
 			_T('formidable:reponses_ip')
 		);
+		if($statut_reponses != 'publie'){
+			$titres[] = _T('formidable:reponse_statut');
+		}
 		$saisies = saisies_lister_par_nom(unserialize($formulaire['saisies']), false);
 		foreach ($saisies as $nom => $saisie) {
 			if ($saisie['saisie'] != "explication") {    // on exporte tous les champs sauf explications
@@ -85,8 +93,11 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ",") {
 				$reponse['date'],
 				$nom_auteur,
 				$reponse['ip']
-			);
-
+			); 
+			if($statut_reponses != 'publie'){
+				$reponse_complete[] = statut_texte_instituer('formulaires_reponse', $reponse['statut']);
+			}
+			
 			// Ensuite tous les champs
 			foreach ($saisies as $nom => $saisie) {
 				if ($saisie['saisie'] != "explication") {
@@ -122,7 +133,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ",") {
 			$exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
 			exit();
 		}
+	} else {
+		return false;
 	}
 }
 
-?>
