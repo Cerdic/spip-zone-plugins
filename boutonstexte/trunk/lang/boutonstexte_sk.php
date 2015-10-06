@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'augmenter_police' => 'Podmienky zväčšenia',
+	'augmenter_police' => 'Zväčšiť písmo',
 
 	// B
 	'boutonstexte_nom' => 'Tlačidlá v texte',
 
 	// D
-	'diminuer_police' => 'Podmienky zmenšenia',
+	'diminuer_police' => 'Zmenšiť písmo',
 	'donnees_techniques' => 'Technické dáta sa nemenia',
 
 	// L
