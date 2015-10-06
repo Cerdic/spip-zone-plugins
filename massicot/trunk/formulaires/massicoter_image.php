@@ -86,16 +86,19 @@ function formulaires_massicoter_image_charger_dist ($objet, $id_objet, $redirect
  */
 function formulaires_massicoter_image_traiter_dist ($objet, $id_objet, $redirect) {
 
-    $parametres = array(
-        'zoom' => _request('zoom'),
-        'x1'   => _request('x1'),
-        'x2'   => _request('x2'),
-        'y1'   => _request('y1'),
-        'y2'   => _request('y2'),
-    );
+    if ( ! _request('annuler')) {
 
-    if ($err = massicot_enregistrer($objet, $id_objet, $parametres)) {
-        spip_log($err, 'massicot.'._LOG_ERREUR);
+        $parametres = array(
+            'zoom' => _request('zoom'),
+            'x1'   => _request('x1'),
+            'x2'   => _request('x2'),
+            'y1'   => _request('y1'),
+            'y2'   => _request('y2'),
+        );
+
+        if ($err = massicot_enregistrer($objet, $id_objet, $parametres)) {
+            spip_log($err, 'massicot.'._LOG_ERREUR);
+        }
     }
 
     return array(

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'erreur_parametre_manquant' => "Le paramètre @parametre@ est obligatoire !",
 
     // L
+    'label_annuler' => "Annuler",
     'label_dimensions' => "Taille de l'image recadrée en pixels :&nbsp;",
 
     // M
