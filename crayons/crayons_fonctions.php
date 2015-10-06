@@ -29,6 +29,27 @@ function analyse_droits_rapide_dist() {
 }
 
 /**
+ * Vérifier si un exec du privé est crayonnable
+ *
+ * @param string $exec
+ *
+ * @return bool
+ **/
+function test_exec_crayonnable($exec) {
+	if ($exec_autorise = lire_config('crayons/exec_autorise')) {
+		$execs = explode(',', $exec_autorise);
+		foreach ($execs as $key => $value) {
+			$execs[$key] = trim($value);
+		}
+		if ($exec_autorise == '*' || in_array($exec, $execs)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Ajouter la gestion des crayons dans l'espace privé
  *
  * @pipeline header_prive
@@ -51,8 +72,7 @@ function Crayons_insert_head($head) {
 	if (isset($config_espace_prive['espaceprive'])
 	and $config_espace_prive['espaceprive'] == 'on') {
 		// determine les pages (exec) crayonnables
-		if (($config_espace_prive['exec_autorise'] == '*') ||
-			in_array(_request('exec'), explode(',', $config_espace_prive['exec_autorise']))) {
+		if (test_exec_crayonnable(_request('exec'))) {
 			// Calcul des droits
 			include_spip('inc/crayons');
 			$head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
