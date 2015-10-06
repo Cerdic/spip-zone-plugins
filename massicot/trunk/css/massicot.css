@@ -6,3 +6,12 @@
   margin-top: 1em;
   text-align: right;
 }
+
+.massicoter_image .label_dimensions,
+.massicoter_image .dimensions {
+  float: left;
+}
+
+.massicoter_image .dimensions {
+  font-weight: bold;
+}

@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // E
     'erreur_parametre_manquant' => "Le paramètre @parametre@ est obligatoire !",
 
+    // L
+    'label_dimensions' => "Taille de l'image recadrée en pixels :&nbsp;",
+
     // M
     'massicot_titre' => 'Massicot',
     'massicoter' => "Recadrer l'image",
