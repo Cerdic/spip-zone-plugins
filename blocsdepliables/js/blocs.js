@@ -224,4 +224,14 @@ jQuery(function(){
 blocs_init.apply(document);
 if(typeof onAjaxLoad=='function') onAjaxLoad(blocs_init);
 if(blocs_js_cookie && jQuery('div.cs_blocs').length) jQuery.getScript(blocs_js_cookie, cs_blocs_cookie);
+/* Quand on pointe vers une ancre qui est à l'intérieur d'un bloc, on
+   déplie le bloc */
+var ancre = location.hash.substring(1);
+if (ancre) {
+    $('.cs_blocs').has('[name="' + ancre + '"]')
+        .find('.blocs_titre.blocs_replie').blocs_toggle();
+    $('.cs_blocs').has('#' + ancre)
+        .find('.blocs_titre.blocs_replie').blocs_toggle();
+    location = location;
+}
 });
