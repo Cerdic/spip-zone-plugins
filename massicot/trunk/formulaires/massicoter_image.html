@@ -1,4 +1,4 @@
-<form method="post" action="#ENV{action}" enctype="multipart/form-data">
+<form method="post" id="formulaire_massicoter_image" action="#ENV{action}" enctype="multipart/form-data">
   <div>
     [(#REM) declarer les hidden qui declencheront le service du
             formulaire parametre : url d'action ]
@@ -26,19 +26,11 @@
   </div>
 </form>
 
+<script type="text/javascript" src="#CHEMIN{javascripts/formulaireMassicoterImage.js}"></script>
 <script type="text/javascript">
  $(function () {
-   /* Créer le slider et l'associer à l'input */
-   $('#zoom-slider').slider({
-     /* SPIP ne propose pas de traitement d'image pour agrandir, alors
-        pour l'instant on ne le permet pas… */
-     max: 1,
-     min: .01,
-     value: [(#ENV{zoom}|sinon{1})],
-     step: .01,
-     slide: function ( event, ui ) {
-       $('input#champ_zoom').attr('value', ui.value).trigger('change');
-     }
+   $('#formulaire_massicoter_image').formulaireMassicoterImage({
+     zoom: #ENV{zoom,1}
    });
  });
 </script>
