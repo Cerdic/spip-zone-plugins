@@ -81,6 +81,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
 	'exporter_formulaire_format_label' => 'File format',
+	'exporter_formulaire_statut_label' => 'Answers',
 
 	// F
 	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user’s identity won’t be recorded.',
@@ -141,6 +142,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'reponses_exporter' => 'Export the answers',
 	'reponses_exporter_format_csv' => 'Spreadsheet.CSV',
 	'reponses_exporter_format_xls' => 'Excel .XLS',
+	'reponses_exporter_statut_tout' => 'All',
 	'reponses_exporter_telecharger' => 'Download',
 	'reponses_ip' => 'IP address',
 	'reponses_liste' => 'Answers list',

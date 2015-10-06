@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_yaml' => 'Error durante la importación del archivo YAML',
 	'erreur_inexistant' => 'Este formulario no existe. ',
 	'exporter_formulaire_format_label' => 'Formato de archivo',
+	'exporter_formulaire_statut_label' => 'Respuestas',
 
 	// F
 	'formulaire_anonyme_explication' => 'Este formulario es anónimo; significa que que la identidad del usuario no será guardada. ',
@@ -128,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_anonyme' => 'Anónimo',
 	'reponses_auteur' => 'Usuario',
 	'reponses_exporter' => 'Exportar las respuestas',
+	'reponses_exporter_statut_tout' => 'Todas',
 	'reponses_ip' => 'Dirección IP',
 	'reponses_liste' => 'Lista de respuestas',
 	'reponses_liste_prop' => 'Respuestas pendientes de validación',
