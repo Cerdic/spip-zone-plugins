@@ -330,6 +330,11 @@ function massicoter_largeur ($largeur, $connect = null, $doc = array()) {
 
     $parametres = massicot_get_parametres('document', $doc['id_document']);
 
+    // Si les paramètre de l'image sont vide, on renvoie la largeur directement
+    if (empty($parametres)) {
+        return $largeur;
+    }
+
     return (string) round(($parametres['x2'] - $parametres['x1']) * $parametres['zoom']);
 }
 
@@ -347,6 +352,11 @@ function massicoter_hauteur ($hauteur, $connect = null, $doc = array()) {
     }
 
     $parametres = massicot_get_parametres('document', $doc['id_document']);
+
+    // Si les paramètre de l'image sont vide, on renvoie la hauteur directement
+    if (empty($parametres)) {
+        return $hauteur;
+    }
 
     return (string) round(($parametres['y2'] - $parametres['y1']) * $parametres['zoom']);
 }
