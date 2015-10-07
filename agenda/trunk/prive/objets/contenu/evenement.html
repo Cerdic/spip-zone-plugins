@@ -10,7 +10,7 @@
 <B_repetitions>
 <div class="champ contenu_repetitions">
 	<div class='label'>[(#GRAND_TOTAL|singulier_ou_pluriel{agenda:une_repetition,agenda:nb_repetitions})]</div>
-	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[(#DATE_DEBUT|affdate_court)]</BOUCLE_repetitions>)</div>
+	<div dir='#LANG_DIR' class='repetitions'>(<BOUCLE_repetitions(EVENEMENTS){par date_debut}{id_evenement_source=#ID_EVENEMENT}{', '}{statut==.*}>[<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]">(#DATE_DEBUT|affdate_court)</a>]</BOUCLE_repetitions>)</div>
 </div>
 </B_repetitions>
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
