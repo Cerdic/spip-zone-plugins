@@ -31,7 +31,7 @@ class SphinxQL {
 	 * Exécute une requête
 	**/
 	public function query($query) {
-		spip_log($query, 'sphinx');
+		spip_log($query, 'indexer');
 
 		//Avant de laisser tomber, on retente un coup (se prémunir d'un timeout idiot suite à un long traitement)
 		if ($this->sql->connect_errno) {
