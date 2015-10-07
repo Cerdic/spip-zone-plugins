@@ -32,12 +32,14 @@ class Sphinx implements StorageInterface {
 				$data = array_map(array($this->sphinxql, 'escape_string'), $data);
 				$q = $query . "('" . implode("', '", $data) . "')";
 				if (!$this->sphinxql->query($q)) {
-					echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
-					echo "<pre>".print_r($q, true)."</pre>";
-					exit;
+					spip_log($this->sphinxql->errors(), 'indexer');
+					spip_log($q, 'indexer');
+					return false;
 				}
 			}
 		}
+
+		return true;
 
 		// par lot de 10 entrées
 		/*
@@ -50,8 +52,9 @@ class Sphinx implements StorageInterface {
 			$sep = ',';
 			if (++$n == 10) {
 				if (!$this->sphinxql->query($query . $values)) {
-					echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
-					exit;
+					spip_log($this->sphinxql->errors(), 'indexer');
+					spip_log($q, 'indexer');
+					return false;
 				}
 				$n = 0;
 				$sep = $values = '';
@@ -65,7 +68,7 @@ class Sphinx implements StorageInterface {
 	}
 
 	public function replaceDocument(Document $document){
-		$this->replaceDocuments(array($document));
+		return $this->replaceDocuments(array($document));
 	}
 
 	public function reformatDocument(Document $document) {

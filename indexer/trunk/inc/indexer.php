@@ -112,5 +112,18 @@ function indexer_job_indexer_source($alias_de_sources, $start, $end){
 	// On va chercher les documents à indexer
 	$documents = $source->getDocuments($start, $end);
 	// Et on le remplace (ou ajoute) dans l'indexation
-	$indexer->replaceDocuments($documents);
+	$res = $indexer->replaceDocuments($documents);
+
+	// en cas d'erreur, on se reprogramme pour une autre fois
+	if (!$res) {
+		job_queue_add(
+			'indexer_job_indexer_source',
+			"Replan indexation $alias_de_sources $start $end",
+			array($alias_de_sources, $start, $end, uniqid()),
+			'inc/indexer',
+			false, // duplication possible car ce job-ci n'est pas encore nettoyé
+			time() + 15*60, // attendre 15 minutes
+			-10 // priorite basse
+		);
+	}
 }
