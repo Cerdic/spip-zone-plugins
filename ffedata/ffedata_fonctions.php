@@ -16,11 +16,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function inc_echecs_to_array_dist($u) {
 	$obj = simplexml_load_string($u);
+	
 	// gestion du namespace spécifique au wsdl microsoft :
 	// <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
 	$data = $obj->children('urn:schemas-microsoft-com:xml-diffgram-v1')->children('')->NewDataSet;
+	
 	// transformation de l'objet en array
 	$array = json_decode(json_encode((array)$data), 1);
+
+	// si l'objet ne contient qu'un élément, il faut reconstruire un tableau avec un sous index numérique
+	$rootKeys = array_keys($array);
+	$rootKey = $rootKeys[0];
+	$elementKeys = array_keys($array[$rootKey]);
+	if( !is_numeric($elementKeys[0]) ) {
+		$array = array(
+			$rootKey => array($array[$rootKey])
+		);
+	}
+	
 	// suppression récursive des arrays vides (plus propre)
 	$array = echecs_array_remove_empty($array);
 
