@@ -14,6 +14,14 @@
 					<p class="explication"><:tooltip:explication_selecteur:></p>
 					<input type="text" name="selecteur" class="text" id="selecteur" size="60" value="#ENV*{selecteur}" />
 				</li>
+				<li class="editer editer_showurl[ (#ENV**{erreurs}|table_valeur{showurl}|oui)erreur]">
+					<label for="showurl"><:tooltip:label_showurl:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{showurl})</span>]
+					<div class="choix">
+						<input type="checkbox" name="showurl" id="showurl"[(#ENV*{showurl}|=={on}|oui)checked="checked"] />
+					</div>
+					
+				</li>
 			</ul>
 		</li>
 	</ul>

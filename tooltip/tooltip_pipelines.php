@@ -37,11 +37,13 @@ function tooltip_insert_head($flux) {
 	if (!is_array($config))
 		$config = array();
 	if(isset($config['selecteur']) && strlen($config['selecteur']) > 0){
+		if($config['showurl'] == 'on')
+			$options = '{"showURL":false}';
 		$flux .=
 			'<script type="text/javascript">/* <![CDATA[ */
 				var tooltip_init=function(){
 					if($("'.$config['selecteur'].'").size() > 0)
-						$("'.$config['selecteur'].'").tooltip();
+						$("'.$config['selecteur'].'").tooltip('.$options.');
 				}
 				$(document).ready(function(){
 					tooltip_init();
