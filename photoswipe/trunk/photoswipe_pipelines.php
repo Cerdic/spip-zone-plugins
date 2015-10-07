@@ -2,6 +2,9 @@
 
 function photoswipe_insert_head_css($flux) {
 
+	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("lib/photoswipe/photoswipe.css")."'>\n";
+	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("lib/photoswipe/default-skin/default-skin.css")."'>\n";
+
 	return $flux . "<style type='text/css'>
 	img[data-photo].photoshow { cursor: zoom-in; }
 	</style>
@@ -12,6 +15,8 @@ function photoswipe_insert_head($flux){
 	$flux = photoswipe_insert_head_css($flux); // au cas ou il n'est pas implemente
 
 	$flux .='
+<script src="'.(find_in_path('lib/photoswipe/photoswipe.min.js')).'" type="text/javascript"></script>
+<script src="'.(find_in_path('lib/photoswipe/photoswipe-ui-default.min.js')).'" type="text/javascript"></script>
 <script src="'.(find_in_path('photoswipe_insert.js')).'" type="text/javascript"></script>
 <script type="text/javascript">
 // configuration
@@ -21,16 +26,6 @@ photoswipe = {
   gallery: true, // galerie
   debug: true, // debug
 };
-$(function() {
-    photoswipe_init();
-    if (!!$.fn.on) {
-      $(document).on("mouseover", photoswipe.selector, photoshow_hover);
-      $(document).on("click", photoswipe.selector, photoshow);
-    } else if (!!$.fn.live) {
-      $(photoswipe.selector).live("mouseover", photoshow_hover);
-      $(photoswipe.selector).live("click", photoshow);
-    }
-});
 </script>
 ';
 	return $flux;
