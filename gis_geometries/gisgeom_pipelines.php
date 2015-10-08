@@ -121,6 +121,8 @@ function gisgeom_pre_insertion($flux){
 			find_in_path(_DIR_LIB_GEOPHP.'geoPHP.inc', '', true);
 			$geometry = geoPHP::load($donnees,$infos_doc['extension']);
 			set_request('geojson', $geometry->out('json'));
+			$wkt = $geometry->out('wkt');
+			$flux['data']['geo'] = sql_getfetsel("GeomFromText('$wkt')");
 			// titre et descriptif du gis à partir des infos du fichier si pas de titre posté
 			if (!_request('titre')) {
 				if ($infos_doc['extension'] == 'gpx') {
