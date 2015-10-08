@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_selecteur' => 'Sélecteur',
-	'label_showurl' => 'Ne pas afficher l\'URL dans l\'infobulle',
+	'label_showurl' => 'Ne pas afficher l’URL dans l’infobulle',
 
 	// T
 	'titre_menu_tooltips' => 'Infobulles',
