@@ -2,6 +2,7 @@
 <table class="spip">
 
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueur?Ref=#ENV{Ref}}>
+<BOUCLE_donnees1(DATA){source table,#VALEUR}>
     <thead>  
 <tr><th>Paramètre</th><th>Valeur</th> </tr>
 	</thead>
@@ -24,6 +25,7 @@
 [<tr><td>Code du Club :<td>(#VALEUR{ClubCode})</td></tr>]
 [<tr><td>Nom du club :<td>(#VALEUR{ClubNom})</td></tr>]
 </table>
+</BOUCLE_donnees1>
 </BOUCLE_lecture_wsdl2>
 
 <h3><:ffedata:evolution_elo:></h3>
