@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
+    include_spip("uploadhtml5_fonctions");
 
     // Si l'option logo est activée, on renvoie un contexte figé qui correspond
     if (isset($args['logo']) and $args['logo'] == 'oui') {
