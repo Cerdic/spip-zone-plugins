@@ -31,7 +31,8 @@
 		<site alias="herbier" src="http://herbier.spip.net/" actif="oui" />
 		<site alias="video" src="http://medias.spip.net/" actif="oui" />
 		<site alias="demo" src="http://demo.spip.net/" actif="oui" />
-		<site alias="test" src="http://grml.eu/" actif="oui" />
+        <site alias="test" src="http://grml.eu/" actif="oui" />
+        <site alias="syntaxe" src="http://syntaxe.spip.net/" actif="oui" />
 	</groupe>
 
 	<!-- Sites des actualites SPIP -->
