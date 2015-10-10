@@ -83,7 +83,7 @@ function action_remplir_panier_dist($arg=null) {
 		// Mais dans tous les cas on met la date du panier à jour
 		sql_updateq(
 			'spip_paniers',
-			array('date'=>date('Y-m-d H:i:s')),
+			array('date'=>'NOW()'),
 			'id_panier = '.intval($id_panier)
 		);
 	}
