@@ -37,7 +37,6 @@ function action_remplir_panier_dist($arg=null) {
 	
 	// S'il n'y a pas de panier, on le crée
 	if (!$id_panier OR !$id_panier_base){
-		include_spip('inc/paniers');
 		$id_panier = paniers_creer_panier();
 	}
 	
