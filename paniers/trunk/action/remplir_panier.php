@@ -15,7 +15,7 @@ function action_remplir_panier_dist($arg=null) {
 	
 	// On récupère les infos de l'argument
 	@list($objet, $id_objet, $quantite, $negatif) = explode('-', $arg);
-	$id_objet = intval($id_objet);
+
 	$quantite = intval($quantite) ? intval($quantite) : 1;
 	// retirer un objet du panier
 	if(isset($negatif)) $quantite = intval(-$quantite);
@@ -39,8 +39,6 @@ function action_remplir_panier_dist($arg=null) {
 	if (!$id_panier OR !$id_panier_base){
 		$id_panier = paniers_creer_panier();
 	}
-	
-	$id_panier = intval($id_panier);
 
 	// On ne fait que s'il y a bien un panier existant et un objet valable
 	if ($id_panier > 0 and $objet and $id_objet) {
