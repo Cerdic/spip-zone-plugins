@@ -24,7 +24,7 @@ photoswipe = {
   path: "' . find_in_path('lib/photoswipe/'). '/",
   selector: "img[data-photo],a[type]",
   gallery: true, // galerie
-  debug: true, // debug
+  debug: false, // debug
 };
 </script>
 ';
