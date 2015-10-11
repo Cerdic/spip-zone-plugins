@@ -156,8 +156,12 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 		 * Ces erreurs ne sont pas de réelles erreurs mais seulement
 		 * les valeurs pour la prévisualisation si c'est ce que l'on a validé
 		 */
-		if(count($erreurs) == 0 && _request('tester')){
-			if(in_array($var_filtre,array('image_recadre'))){
+		if(_request('tester') && in_array($var_filtre,array('image_recadre','image_reduire'))){
+			$erreurs = array();
+			$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
+		}
+		else if(count($erreurs) == 0 && _request('tester')){
+			if(in_array($var_filtre,array('image_recadre','image_reduire'))){
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 			}
 			else{
