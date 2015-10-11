@@ -6,7 +6,7 @@
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008-2012 - Distribue sous licence GNU/GPL
+ * © 2008-2015 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -14,7 +14,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function action_images_versions_dist() {
-	include_spip('inc/distant'); # pour copie_locale
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
@@ -55,7 +54,7 @@ function action_images_versions_post($r){
 			$total_delete = sql_count($res2);
 			spip_log("on recherche les versions supérieures à $nextversion: $total_delete","photospip");
 			while($version_delete = sql_fetch($res2)){
-				sql_delete("spip_documents_inters","id_document =$arg AND version = ".$version_delete['version']);
+				sql_delete("spip_documents_inters","id_document =".intval($arg)." AND version = ".$version_delete['version']);
 				spip_log("Pour le doc $arg on delete la version ".$version_delete['version'],"photospip");
 				if($version_delete['version'] > $version){
 					spip_unlink(get_spip_doc($version_delete['fichier']));
@@ -69,19 +68,19 @@ function action_images_versions_post($r){
 		else if($action == "supprimer"){
 			$fichier = sql_getfetsel("fichier", "spip_documents_inters", "id_document=$arg AND version=$version");
 			spip_unlink(get_spip_doc($fichier));
-			sql_delete("spip_documents_inters","id_document=$arg AND version=$version");
+			sql_delete("spip_documents_inters","id_document=".intval($arg)." AND version=$version");
 			
-			$res2 = sql_select("version","spip_documents_inters","id_document=$arg AND version > $version");
-			$total_delete = sql_count($res2);
+			$res2 = sql_allfetsel("version","spip_documents_inters","id_document=".intval($arg)." AND version > $version");
+			$total_delete = count($res2);
 			spip_log("on recherche les versions supérieures à $version: $total_delete","photospip");
-			while($version_delete = sql_fetch($res2)){
+			foreach($res2 as $version_delete){
 				$newversion = ($version_delete['version']-1);
-				sql_updateq("spip_documents_inters",array('version'=> $newversion),"id_document =$arg AND version = ".$version_delete['version']);
+				sql_updateq("spip_documents_inters",array('version'=> $newversion),"id_document =".intval($arg)." AND version = ".$version_delete['version']);
 				spip_log("on descend de version pour l'ancienne version ".$version_delete['version']." qui devient $newversion","photospip");
 			}
 		}
 		else{
-			spip_log("script image_version... pas d'action demandée","photospip");
+			spip_log("script image_versions... pas d'action demandée","photospip");
 		}
 	}
 		
