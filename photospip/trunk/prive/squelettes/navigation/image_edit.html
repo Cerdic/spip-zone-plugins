@@ -2,7 +2,25 @@
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','document','id',#ENV{id_document}}}}
 #BOITE_FERMER
 
-<BOUCLE_doc(DOCUMENTS){si #ENV{mode}|!={vignette}|oui}{id_document}{tout}>
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+
+<BOUCLE_vignette(DOCUMENTS){si #ENV{mode}|=={vignette}|oui}{id_document=#ID_VIGNETTE}{tout}>
+#BOITE_OUVRIR{'','info'}
+<div class="infos">
+	<h3><:photospip:titre_informations_vignette:></h3>
+	<div id="infos_doc_sup">
+		<p><:photospip:id_document:>#ID_DOCUMENT</p>
+		<p><:photospip:type_original:>[(#MIME_TYPE|sinon{inconnu})]</p>
+		<p><:photospip:date_doc:>#DATE</p>
+		<p><:photospip:date_modif_doc:>#MAJ</p>
+		<p><:photospip:taille_fichier:><br />
+		#LARGEUR x #HAUTEUR px[ - (#TAILLE|taille_en_octets)]
+		</p>
+	</div>
+</div>
+#BOITE_FERMER
+</BOUCLE_vignette>
+
 #BOITE_OUVRIR{'','info'}
 <div id="versions">
 	<h3><:photospip:titre_informations_images:></h3>
@@ -24,5 +42,5 @@
 		<INCLURE{fond=inc_histogramme,fichier=#FICHIER}>
 	</div>]]
 </div>
-#BOITE_FERMER{'','info'}
+#BOITE_FERMER
 </BOUCLE_doc>

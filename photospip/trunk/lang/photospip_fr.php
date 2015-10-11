@@ -135,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_fichier' => 'Taille du fichier : ',
 	'title_version' => 'Version #@version@',
 	'titre_informations_images' => 'Informations du document',
+	'titre_informations_vignette' => 'Informations sur la vignette',
 	'titre_page_image_edit' => 'Édition de l’image',
 	'type_original' => 'Type du document : '
 );
