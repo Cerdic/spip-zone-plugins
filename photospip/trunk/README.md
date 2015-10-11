@@ -1,5 +1,6 @@
 #PhotoSPIP
 
+
 ## TODO
 
 Revoir l'installation (normes SPIP >= 3.x) et la suppression (suppression de toutes les images intermédiaires)
@@ -18,12 +19,14 @@ Ajouter la possibilité de l'utiliser dans l'espace public (MediaSPIP ?)
 
 Brancher avec le plugin smush_img pour permettre de réduire la taille des images 
 
-## Done
+### Done
 
-Ne pas utilise les images de la mediathèque mais de photospip
+Ne pas utiliser les icônes de la mediathèque (ancienne par ailleurs) mais de photospip
 
 Ranger les images dans ```prive/themes/spip/images/```
 
 Une fois la vignette réalisée, on ne peut plus la modifier
 
 Sur l'édition d'une vignette, afficher les informations de la vignette
+
+Il manque la hiérarchie dans l'édition d'image et de vignette
