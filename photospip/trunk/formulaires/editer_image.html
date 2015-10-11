@@ -281,7 +281,8 @@
 							console.log('init_box');
 							if((conteneur.parents('#cboxLoadedContent').size()>0)){
 								var container_offset = conteneur.offset().top;
-								jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+								if(jQuery.fn.spinner)
+									jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
 								if(cbox_complete && jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
 									conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
 								}
@@ -350,7 +351,8 @@
 							conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
 						}
 						ratio = largeur/parseFloat(conteneur_img.width());
-						jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+						if(jQuery.fn.spinner)
+							jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
 						jQuery('.cache').hide();
 					}
 					if(typeof(jQuery.fn.scrollTo) == 'function'){
@@ -364,11 +366,13 @@
 					 * On affiche les options du filtre sélectionné
 					 */
 					jQuery('input[name=filtre]:checked').parent().find('.cache').addClass('visible').show();
-					jQuery('form input[type=radio][name=filtre]').unbind().click(function(){
-						if(jQuery(this).parents('li').find('.cache').is(':hidden')){
-					  		jQuery(".visible").slideUp().removeClass('visible');
+					jQuery('form input[type=radio][name=filtre]').off('click').on('click',function(){
+						cache = jQuery(this).parents('.editer').find('.cache');
+						if(!cache.is(':visible')){
+							jQuery(".visible").slideUp().removeClass('visible');
 							jQuery(this).parent().find('.cache').slideDown('fast',function(){
-								jQuery(this).find('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+								if(jQuery.fn.spinner)
+									jQuery(this).find('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
 								jQuery(this).addClass('visible');
 							});
 							if(jQuery(this).attr('id') == 'image_recadre')
@@ -376,8 +380,8 @@
 							else
 								image_crop_close();
 						}
-				  	});
-				  	<BOUCLE_si_image_recadre(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
+					});
+					<BOUCLE_si_image_recadre(CONDITION){si #CONFIG{photospip/image_recadre,on}|oui}>
 						x1 = jQuery('#recadre_x1');
 						y1 = jQuery('#recadre_y1');
 						x2 = jQuery('#recadre_x2');
