@@ -1,4 +1,4 @@
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_document}'>
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_photospip formulaire_#FORM-#ENV{id_document}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -355,15 +355,15 @@
 							jQuery('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
 							$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
 						}
-						jQuery('.cache').hide();
 					}
+					jQuery('.cache').hide();
 					activatesliders();
 					
 					/**
 					 * On affiche les options du filtre sélectionné
 					 */
-					jQuery('input[name=filtre]:checked').parent().find('.cache').addClass('visible').show();
-					jQuery('form input[type=radio][name=filtre]').off('click').on('click',function(){
+					jQuery('input[name=filtre]:selected').parent().find('.cache').addClass('visible').show();
+					jQuery('.formulaire_photospip input[type=radio][name=filtre]').off('click').on('click',function(){
 						cache = jQuery(this).parents('.editer').find('.cache');
 						if(!cache.is(':visible')){
 							jQuery(".visible").slideUp().removeClass('visible');
@@ -391,7 +391,7 @@
 						if(jQuery('#image_recadre').is(':checked'))
 							image_crop();
 						
-						jQuery('#recadre_width,#recadre_height,#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2').change(function(){
+						jQuery('#recadre_width,#recadre_height,#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2').on('change',function(){
 							if(typeof(ias) == 'object'){
 								var ias_selection = ias.getSelection(),
 									ratio_selected = jQuery('input[name=ratio]:checked').val();
@@ -612,7 +612,7 @@
 								ias.update();
 							}
 						});
-						jQuery('.image_recadre input[type=radio][name=ratio]').click(function(){
+						jQuery('.image_recadre input[type=radio][name=ratio]').off('click').on('click',function(){
 							if(typeof(ias) == "object"){
 								if (jQuery(this).val() != ''){
 									/**
