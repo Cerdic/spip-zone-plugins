@@ -21,9 +21,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Le contexte du pipeline modifié
  */
 function photospip_header_prive($flux) {
+	include_spip('inc/plugin'); // pour spip_version_compare
 	$flux .= '
 			<link rel="stylesheet" href="' . direction_css(find_in_path(_DIR_LIB_IMGAREASELECT . 'distfiles/css/imgareaselect-animated.css')) . '" type="text/css" media="all" />';
-	$flux .= '
+	if (spip_version_compare($GLOBALS['spip_version_branche'], '3.1-alpha', '<'))
+		$flux .= '
 			<link rel="stylesheet" href="' . direction_css(find_in_path("javascript/jQuery_ui_spinner/ui.spinner.css")) . '" type="text/css" media="all" />';
 	return $flux;
 }
@@ -35,8 +37,10 @@ function photospip_header_prive($flux) {
  */
 function photospip_jqueryui_plugins($plugins) {
 	if (test_espace_prive()){
+		include_spip('inc/plugin'); // pour spip_version_compare
 		$plugins[] = 'jquery.ui.slider';
-		//$plugins[] = 'jquery.ui.spinner';
+		if (spip_version_compare($GLOBALS['spip_version_branche'], '3.1-alpha', '>='))
+			$plugins[] = 'jquery.ui.spinner';
 	}
 	return $plugins;
 }
@@ -48,10 +52,12 @@ function photospip_jqueryui_plugins($plugins) {
  */
 function photospip_jquery_plugins($plugins) {
 	if (test_espace_prive()){
+		include_spip('inc/plugin'); // pour spip_version_compare
 		$plugins[] = _DIR_LIB_IMGAREASELECT . 'jquery.imgareaselect.dev.js';
 		$plugins[] = find_in_path("js/jquery.scrollto.js");
 		$plugins[] = find_in_path("js/jquery.localscroll.js");
-		//$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
+		if (version_compare($GLOBALS['spip_version_branche'], '3.1-alpha', '<'))
+			$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
 	}
 	return $plugins;
 }
@@ -65,8 +71,7 @@ function photospip_jquery_plugins($plugins) {
  */
 function photospip_document_desc_actions($flux) {
 	$id_document = $flux['args']['id_document'];
-	$infos = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
-	spip_log($infos,'photospip');
+	$infos = sql_fetsel('distant,id_vignette,extension', 'spip_documents', 'id_document=' . intval($id_document));
 	if (($infos['distant'] == 'non') && in_array($infos['extension'], array('jpg', 'png', 'gif'))) {
 		$redirect = self();
 		$url_modif = parametre_url(generer_url_ecrire('image_edit', 'id_document=' . intval($id_document)), 'retour', $redirect);
@@ -118,22 +123,22 @@ function photospip_boite_infos($flux){
 	if ($flux['args']['type']=='document'){
 		$id_document = $flux['args']['id'];
 		include_spip('inc/presentation');
-		if((_request('mode') != 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
+		if((_request('mode') != 'vignette') && ($document = sql_fetsel('extension,id_vignette','spip_documents','id_document='.intval($id_document)))){
 			if(_request('exec') != 'document_edit')
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('document_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), parametre_url(generer_url_ecrire('document_edit','id_document='.$id_document),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
 			if((_request('exec') != 'image_edit') && in_array($document['extension'], array('jpg', 'png', 'gif')))
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
-			if($document['id_vignette'] && $document['id_vignette'] > 0){
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), parametre_url(generer_url_ecrire('image_edit','id_document='.$id_document),'redirect',self()), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
+			if($document['id_vignette'] && intval($document['id_vignette']) > 0){
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$id_document),'mode','vignette'), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
 				$flux['data'] .= icone_horizontale(_T('photospip:bouton_supprimer_vignette_document'), generer_action_auteur('supprimer_document',$document['id_vignette'],parametre_url(self(),'supprimer_vignette','oui')), find_in_path('images/photospip-24.png'), 'supprimer-16.png',false);
 				$flux['data'] .= recuperer_fond('prive/photospip_vignette',array('id_document'=>intval($id_document)));
 			}else if(in_array($document['extension'],array('gif','png','jpg'))){
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$document['id_document']),'mode','vignette'), find_in_path('images/photospip-24.png'), 'new.png',false);
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_creer_vignette'), parametre_url(generer_url_ecrire('image_edit','id_document='.$id_document),'mode','vignette'), find_in_path('images/photospip-24.png'), 'new.png',false);
 			}
-		}elseif((_request('mode') == 'vignette') && ($document = sql_fetsel('*','spip_documents','id_document='.intval($id_document)))){
-			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('document_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
-			if(in_array($document['extension'], array('jpg', 'png', 'gif')))
-				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$document['id_document']), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
+		}elseif((_request('mode') == 'vignette') && ($extension = sql_getfetsel('extension','spip_documents','id_document='.intval($id_document)))){
+			$flux['data'] .= icone_horizontale(_T('photospip:bouton_modifier_document'), generer_url_ecrire('document_edit','id_document='.$id_document), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
+			if(in_array($extension, array('jpg', 'png', 'gif')))
+				$flux['data'] .= icone_horizontale(_T('photospip:bouton_editer_image'), generer_url_ecrire('image_edit','id_document='.$id_document), find_in_path('images/photospip-24.png'), 'edit-16.png',false);
 		}
 	}
 	return $flux;
