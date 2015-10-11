@@ -3,19 +3,21 @@
 
 ## TODO
 
-Revoir l'installation (normes SPIP >= 3.x) et la suppression (suppression de toutes les images intermédiaires)
+[BUG] Avec la rotation paramétrée, l'image est supprimée
 
-Ne plus être dépendant du plugin vérifier
+[Feature] Revoir la suppression du plugin (suppression de toutes les images intermédiaires)
 
-Permettre d'éditer les logos d'objet
+[Feature] Ne plus être dépendant du plugin vérifier
 
-Faire une interface simplifiée (Cacher les inputs de certains filtres pour se baser sur une interface simple comme pour le recadrage par exemple)
+[Feature] Permettre d'éditer les logos d'objet
 
-Permettre aux utilisateurs, dans la configuration de leurs préférences, de choisir les filtres qu'ils utilisent et non pas seulement dans une configuration globale.
+[Feature] Faire une interface simplifiée (Cacher les inputs de certains filtres pour se baser sur une interface simple comme pour le recadrage par exemple)
 
-Ajouter la possibilité de l'utiliser dans l'espace public (MediaSPIP ?)
+[Feature] Permettre aux utilisateurs, dans la configuration de leurs préférences, de choisir les filtres qu'ils utilisent et non pas seulement dans une configuration globale.
 
-Brancher avec le plugin smush_img pour permettre de réduire la taille des images 
+[Feature] Ajouter la possibilité de l'utiliser dans l'espace public (MediaSPIP ?)
+
+[Feature] Brancher avec le plugin smush_img pour permettre de réduire la taille des images
 
 ### Done
 
@@ -32,3 +34,5 @@ Brancher avec le plugin smush_img pour permettre de réduire la taille des image
 [Feature] Afficher le nombre d'utilisations du document dans la colonne de navigation
 
 [Feature] Ne pas utiliser les icônes de la mediathèque (ancienne par ailleurs) mais de photospip
+
+[Feature] Revoir l'installation (normes SPIP >= 3.x)
