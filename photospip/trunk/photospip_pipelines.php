@@ -6,7 +6,7 @@
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008-2012 - Distribue sous licence GNU/GPL
+ * © 2008-2015 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -36,6 +36,7 @@ function photospip_header_prive($flux) {
 function photospip_jqueryui_plugins($plugins) {
 	if (test_espace_prive()){
 		$plugins[] = 'jquery.ui.slider';
+		//$plugins[] = 'jquery.ui.spinner';
 	}
 	return $plugins;
 }
@@ -47,10 +48,10 @@ function photospip_jqueryui_plugins($plugins) {
  */
 function photospip_jquery_plugins($plugins) {
 	if (test_espace_prive()){
-		$plugins[] = _DIR_LIB_IMGAREASELECT . 'scripts/jquery.imgareaselect.js';
+		$plugins[] = _DIR_LIB_IMGAREASELECT . 'jquery.imgareaselect.dev.js';
 		$plugins[] = find_in_path("js/jquery.scrollto.js");
 		$plugins[] = find_in_path("js/jquery.localscroll.js");
-		$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
+		//$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
 	}
 	return $plugins;
 }
