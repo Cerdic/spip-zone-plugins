@@ -54,8 +54,6 @@ function photospip_jquery_plugins($plugins) {
 	if (test_espace_prive()){
 		include_spip('inc/plugin'); // pour spip_version_compare
 		$plugins[] = _DIR_LIB_IMGAREASELECT . 'jquery.imgareaselect.dev.js';
-		$plugins[] = find_in_path("js/jquery.scrollto.js");
-		$plugins[] = find_in_path("js/jquery.localscroll.js");
 		if (version_compare($GLOBALS['spip_version_branche'], '3.1-alpha', '<'))
 			$plugins[] = find_in_path("javascript/jQuery_ui_spinner/ui.spinner.js");
 	}
