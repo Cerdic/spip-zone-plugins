@@ -16,7 +16,8 @@
 	[(#SET{hauteur_image,#HAUTEUR})]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[<div class="reponse_formulaire_notice notice">
-			(#ENV{erreurs}|table_valeur{message})
+			<strong><:previsualisation:></strong><br />
+			(#ENV{message_previsu})
 			<br />
 			<input type="submit" class="submit" name="supprimer_previsu" value="<:photospip:bouton_supprimer_previsu:>" />
 		</div>]
@@ -28,9 +29,9 @@
 		<div id="modifier_image">
 			<div id="image-container">
 				<div id="image_modifier" class="spip_documents spip_documents_center" style="position:relative">
-					[(#ENV{erreurs}|table_valeur{filtre}|oui)
-					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{#GET{largeur_max},0}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
-					[(#ENV{erreurs}|table_valeur{filtre}|non)
+					[(#ENV{filtre_tmp,#ENV{filtre}}|oui)
+					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{filtre_tmp,#ENV{filtre}})],[(#ENV{param1})],[(#ENV{param2})],[(#ENV{param3})],[(#ENV{param})]}|image_reduire{#GET{largeur_max},0}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
+					[(#ENV{filtre_tmp,#ENV{filtre}}|non)
 					[(#_document:FICHIER|image_reduire{#GET{largeur_max},*}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
 				</div>
 			</div>
@@ -267,6 +268,7 @@
 
 			if(typeof($) == 'function' && typeof(jQuery) == 'function'){
 				jQuery(document).ready(function() {
+					console.log($('.visible'));
 					var cbox = '[(#EVAL{_AJAX}|?{oui,non})]',
 						conteneur = jQuery('#image-container'),
 						conteneur_img = jQuery('#image-container img');
@@ -295,7 +297,7 @@
 								 */
 								if(conteneur.size()>0){
 									ratio = largeur/parseFloat(conteneur_img.width());
-									jQuery('.cache').hide();
+									jQuery('.cache').not('.visible').hide();
 									boxoffset = jQuery('#cboxLoadedContent').offset();
 									boxmargins = jQuery('#cboxContent').height() - jQuery('#cboxLoadedContent').height();
 									container_offset = parseInt(conteneur.offset().top)-parseInt(jQuery('#cboxContent').offset().top);
@@ -356,13 +358,12 @@
 							$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
 						}
 					}
-					jQuery('.cache').hide();
+					jQuery('.cache').not('.visible').hide();
 					activatesliders();
 					
 					/**
 					 * On affiche les options du filtre sélectionné
 					 */
-					jQuery('input[name=filtre]:selected').parents('li').find('.cache').addClass('visible').show();
 					jQuery('.formulaire_photospip input[type=radio][name=filtre]').off('click').on('click',function(){
 						cache = jQuery(this).parents('.editer').find('.cache');
 						if(!cache.is(':visible')){

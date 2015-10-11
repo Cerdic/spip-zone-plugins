@@ -96,6 +96,38 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		$valeurs['_hidden'] .= "<input type='hidden' name='modale' value='oui' />";
 		$valeurs['modale'] = true;
 	}
+
+	if(_request('tester') && !in_array(_request('filtre'),array('image_recadre','image_reduire'))){
+		$valeurs['message_previsu'] = _T('photospip:erreur_previsu');
+		if(_request('filtre') == 'tourner'){
+			$valeurs['filtre_tmp'] = 'image_rotation';
+			switch ($angle = _request('params_tourner')) {
+				case 90:
+					$valeurs['param'] = array('90');
+					$valeurs['param1'] = '90';
+					break;
+				case 180:
+					$valeurs['param'] = array('180');
+					$valeurs['param1'] = '180';
+					break;
+				case 270:
+					$valeurs['param'] = array('270');
+					$valeurs['param1'] = '270';
+					break;
+			}
+		}else{
+			list($param1, $param2, $param3,$params) = photospip_recuperer_params_form(_request('filtre'));
+			//$erreurs['filtre'] = $var_filtre;
+			$valeurs['param'] = $params;
+			$valeurs['param1'] = $param1;
+			if($param2){
+				$valeurs['param2'] = $param2;
+			}
+			if($param3){
+				$valeurs['param3'] = $param3;
+			}
+		}
+	}
 	return $valeurs;
 }
 
@@ -164,38 +196,8 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 			if(in_array($var_filtre,array('image_recadre','image_reduire'))){
 				$erreurs['message_erreur'] = _T('photospip:erreur_form_filtre_sstest');
 			}
-			else{
-				$erreurs['message'] = "<strong>"._T('previsualisation')."</strong><br />
-					"._T('photospip:erreur_previsu');
-				if($var_filtre == 'tourner'){
-					$erreurs['filtre'] = 'image_rotation';
-					switch ($angle = _request('params_tourner')) {
-						case 90:
-							$erreurs['param'] = array('90');
-							$erreurs['param1'] = '90';
-							break;
-						case 180:
-							$erreurs['param'] = array('180');
-							$erreurs['param1'] = '180';
-							break;
-						case 270:
-							$erreurs['param'] = array('270');
-							$erreurs['param1'] = '270';
-							break;
-					}
-				}else{
-					list($param1, $param2, $param3,$params) = photospip_recuperer_params_form($var_filtre);
-					$erreurs['filtre'] = $var_filtre;
-					$erreurs['param'] = $params;
-					$erreurs['param1'] = $param1;
-					if($param2){
-						$erreurs['param2'] = $param2;
-					}
-					if($param3){
-						$erreurs['param3'] = $param3;
-					}
-				}
-			}
+			else
+				$erreurs['message_erreur'] = '';
 		}
 	}else if(!_request('supprimer_previsu') && !_request('supprimer_vignette')){
 		if(!_request('version'))

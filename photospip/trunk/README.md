@@ -19,14 +19,16 @@ Brancher avec le plugin smush_img pour permettre de réduire la taille des image
 
 ### Done
 
-Ne pas utiliser les icônes de la mediathèque (ancienne par ailleurs) mais de photospip
+[BUG] Une fois la vignette réalisée, on ne peut plus la modifier
 
-Ranger les images dans ```prive/themes/spip/images/```
+[BUG] La prévisu ne doit pas être considérée comme une erreur (elle est construite dans ```_charger()```)
 
-Une fois la vignette réalisée, on ne peut plus la modifier
+[Feature] Ranger les images dans ```prive/themes/spip/images/```
 
-Sur l'édition d'une vignette, afficher les informations de la vignette
+[Feature] Sur l'édition d'une vignette, afficher les informations de la vignette
 
-Il manque la hiérarchie dans l'édition d'image et de vignette
+[Feature] Il manque la hiérarchie dans l'édition d'image et de vignette
 
-Afficher le nombre d'utilisations du document dans la colonne de navigation
+[Feature] Afficher le nombre d'utilisations du document dans la colonne de navigation
+
+[Feature] Ne pas utiliser les icônes de la mediathèque (ancienne par ailleurs) mais de photospip
