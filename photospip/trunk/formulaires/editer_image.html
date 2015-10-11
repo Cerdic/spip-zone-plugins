@@ -7,13 +7,13 @@
 		Calcul du ratio entre notre image originale et la prévisualisation
 		Utile pour les opération de recadrage notamment
 	]
-	#SET{largeur_max,#ENV{largeur_previsu,#ENV{erreurs}|table_valeur{largeur_previsu}|sinon{450}}}
-	#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}}
-	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|extraire_attribut{width})]})]
-	#SET{ratio,#LARGEUR|div{#GET{largeur_reduit}}}
-	#SET{ratio_image,#LARGEUR|div{#HAUTEUR}}
-	#SET{largeur_image,#LARGEUR}
-	#SET{hauteur_image,#HAUTEUR}
+	[(#SET{largeur_max,#ENV{largeur_previsu,#ENV{erreurs}|table_valeur{largeur_previsu}|sinon{548}}})]
+	[(#SET{hauteur_max,#CONFIG{photospip/hauteur_previsu,#ENV{erreurs}|table_valeur{hauteur_previsu}|sinon{450}}})]
+	[(#SET{largeur_reduit,[(#FICHIER|image_reduire{#GET{largeur_max},0}|extraire_attribut{width})]})]
+	[(#SET{ratio,[(#LARGEUR|div{#GET{largeur_reduit}})]})]
+	[(#SET{ratio_image,[(#LARGEUR|div{#HAUTEUR})]})]
+	[(#SET{largeur_image,#LARGEUR})]
+	[(#SET{hauteur_image,#HAUTEUR})]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[<div class="reponse_formulaire_notice notice">
 			(#ENV{erreurs}|table_valeur{message})
@@ -29,9 +29,9 @@
 			<div id="image-container">
 				<div id="image_modifier" class="spip_documents spip_documents_center" style="position:relative">
 					[(#ENV{erreurs}|table_valeur{filtre}|oui)
-					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
+					[(#_document:FICHIER|photospip_appliquer_filtre{[(#ENV{erreurs}|table_valeur{filtre})],[(#ENV{erreurs}|table_valeur{param1})],[(#ENV{erreurs}|table_valeur{param2})],[(#ENV{erreurs}|table_valeur{param3})],[(#ENV{erreurs}|table_valeur{param})]}|image_reduire{#GET{largeur_max},0}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
 					[(#ENV{erreurs}|table_valeur{filtre}|non)
-					[(#_document:FICHIER|image_reduire{#GET{largeur_max},#GET{hauteur_max}}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
+					[(#_document:FICHIER|image_reduire{#GET{largeur_max},*}|inserer_attribut{alt,' '}|inserer_attribut{width,''}|inserer_attribut{height,''})]]
 				</div>
 			</div>
 		</div>
@@ -278,11 +278,12 @@
 						var boxoffset,
 							boxmargins,container_offset;
 						var init_box = function(cbox_complete){
-							console.log('init_box');
 							if((conteneur.parents('#cboxLoadedContent').size()>0)){
 								var container_offset = conteneur.offset().top;
-								if(jQuery.fn.spinner)
-									jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+								if(jQuery.fn.spinner){
+									jQuery('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+									$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+								}
 								if(cbox_complete && jQuery('#modifier_image img').width() > jQuery('#modifier_image').width()){
 									conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
 								}
@@ -303,7 +304,6 @@
 									
 									if(container_size < parseInt(jQuery('#cboxLoadedContent').height())){
 										jQuery('#cboxLoadedContent').off('scroll').on('scroll',function() {
-											console.log('on scroll');
 											var limite_bas = jQuery('.formulaire_#FORM-#ENV{id_document}').height()-boutons_height-10,
 												limite_image = boxoffset.top,
 												pos_bas = conteneur.offset().top+container_size;
@@ -351,8 +351,10 @@
 							conteneur_img.attr('width','').attr('height','').width('100%').height('auto');
 						}
 						ratio = largeur/parseFloat(conteneur_img.width());
-						if(jQuery.fn.spinner)
-							jQuery('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+						if(jQuery.fn.spinner){
+							jQuery('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+							$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+						}
 						jQuery('.cache').hide();
 					}
 					if(typeof(jQuery.fn.scrollTo) == 'function'){
@@ -371,8 +373,10 @@
 						if(!cache.is(':visible')){
 							jQuery(".visible").slideUp().removeClass('visible');
 							jQuery(this).parent().find('.cache').slideDown('fast',function(){
-								if(jQuery.fn.spinner)
-									jQuery(this).find('input[type=number],input.nombre').spinner('destroy').spinner().parents('li').addClass('has_spinner');
+								if(jQuery.fn.spinner){
+									jQuery(this).find('input[type=number],input.nombre').spinner().parents('li').addClass('has_spinner');
+									$('.ui-spinner-button').unbind('click.change').on('click.change',function(event,ui){$('input.nombre').change();});
+								}
 								jQuery(this).addClass('visible');
 							});
 							if(jQuery(this).attr('id') == 'image_recadre')
@@ -394,8 +398,8 @@
 						
 						jQuery('#recadre_width,#recadre_height,#recadre_x1,#recadre_y1,#recadre_x2,#recadre_y2').change(function(){
 							if(typeof(ias) == 'object'){
-								var ias_selection = ias.getSelection();
-								var ratio_selected = jQuery('input[name=ratio]:checked').val();
+								var ias_selection = ias.getSelection(),
+									ratio_selected = jQuery('input[name=ratio]:checked').val();
 								if(jQuery(this).is('#recadre_width')){
 									if(jQuery(this).val() <= largeur){
 										var width_ratio = parseInt(parseInt(jQuery(this).val())/ratio);
@@ -665,8 +669,8 @@
 												 * On va devoir déplacer l'image 
 												 * pour qu'elle rentre dans le cadre
 												 */
-												var x1 = largeur_image - hauteur_actuelle;
-												var x2 = largeur_image;
+												var x1 = largeur_image - hauteur_actuelle,
+													x2 = largeur_image;
 												jQuery('#recadre_x1').val(x1)
 												jQuery('#recadre_x2').val(x2);
 												ias_selection.x2 = jQuery('#image_modifier img').width();
@@ -684,16 +688,16 @@
 									}
 									else if((jQuery(this).val() == '4:3') || (jQuery(this).val() == '16:9')){
 										if(jQuery(this).val() == '4:3'){
-											var ratio_l = 4;
-											var ratio_h = 3;
+											var ratio_l = 4,
+												ratio_h = 3;
 										}else if(jQuery(this).val() == '16:9'){
-											var ratio_l = 16;
-											var ratio_h = 9;
+											var ratio_l = 16,
+											ratio_h = 9;
 										}
-										var largeur_ratio = largeur_actuelle;
-										var hauteur_ratio = ((largeur_actuelle*ratio_h)/ratio_l);
-										var largeur_cadre_ratio = (ias_selection.x2 - ias_selection.x1);
-										var hauteur_cadre_ratio = (((ias_selection.x2 - ias_selection.x1)*ratio_h)/ratio_l);
+										var largeur_ratio = largeur_actuelle,
+											hauteur_ratio = ((largeur_actuelle*ratio_h)/ratio_l),
+											largeur_cadre_ratio = (ias_selection.x2 - ias_selection.x1),
+											hauteur_cadre_ratio = (((ias_selection.x2 - ias_selection.x1)*ratio_h)/ratio_l);
 										if(parseInt(hauteur_ratio) <= hauteur_image){
 											/**
 											 * On redimentionne la hauteur
@@ -702,8 +706,8 @@
 												/**
 												 * On va devoir remonter l'image pour qu'elle rentre dans le cadre
 												 */
-												var y1 = hauteur_image - hauteur_ratio.toFixed(0);
-												var y2 = hauteur_image.toFixed(0);
+												var y1 = hauteur_image - hauteur_ratio.toFixed(0),
+													y2 = hauteur_image.toFixed(0);
 												jQuery('#recadre_y1').val(y1)
 												jQuery('#recadre_y2').val(y2);
 												ias_selection.y2 = jQuery('#image_modifier img').height();
@@ -726,8 +730,8 @@
 												 * On va devoir déplacer l'image 
 												 * pour qu'elle rentre dans le cadre
 												 */
-												var x1 = largeur_image - hauteur_ratio;
-												var x2 = largeur_image;
+												var x1 = largeur_image - hauteur_ratio,
+													x2 = largeur_image;
 												jQuery('#recadre_x1').val(x1)
 												jQuery('#recadre_x2').val(x2);
 												ias_selection.x2 = jQuery('#image_modifier img').width();
