@@ -69,3 +69,23 @@ body.large.edition #extra,
 .mots_edit.large #extra,
 .breves_edit.large #extra,
 .rubriques_edit.large #extra { width: 16%; }
+
+@media (max-width: [(#GET{grand_ecran})]) {
+	body { min-width: 98%; width: 98%; margin: 0 1%; }
+	body.large { min-width: 98%; width: 98%; margin: 0 1%; }
+	
+	/* ecran large*/
+	[(#GET{largeur_bandeau}) .largeur,][(#GET{largeur_bandeau}|non) .large .largeur,] .ecrire #conteneur, .ecrire #page div table.centered, .ecrire #page .table_page,
+	[(#GET{largeur_bandeau}) ].largeur,  .ecrire #conteneur, .ecrire #page div table.centered, .ecrire #page .table_page { width: 100%; }
+	.large #conteneur,.large .table_page, 
+	#conteneur,.table_page { width: 100%; }
+	.large div.messages-alertes, 
+	div.messages-alertes { width: 95%; }
+	.large #navigation, 
+	#navigation { width: 100%; float: none; }
+	.large #extra, 
+	#extra { width: 100%; loat: none; }
+	.large #contenu, 
+	#contenu { margin-left: 0; width: 100%; }
+
+}

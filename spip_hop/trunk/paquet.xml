@@ -1,7 +1,7 @@
 <paquet
     prefix="spip_hop"
     categorie="theme"
-    version="0.3.0"
+    version="0.3.1"
     etat="test"
     compatibilite="[2.1.0;3.1.*]"
     logo="prive/themes/spip/images/spip_hop-64.png"
