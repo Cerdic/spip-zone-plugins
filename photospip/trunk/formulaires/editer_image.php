@@ -58,7 +58,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		'params_image_niveaux_gris_auto',
 		'type_modification') as $input){
 		if(_request($input))
-			$valeurs[$input] = _request($input);	
+			$valeurs[$input] = _request($input);
 	}
 	
 	$valeurs['largeur_previsu'] = test_espace_prive() ? 548 : lire_config('photospip/largeur_previsu','548');
@@ -164,18 +164,18 @@ function formulaires_editer_image_verifier_dist($id_document='new',$mode=false, 
 				if($var_filtre == 'tourner'){
 					$erreurs['filtre'] = 'image_rotation';
 					switch ($angle = _request('params_tourner')) {
-					    case 90:
-					        $erreurs['param'] = array('90');
+						case 90:
+							$erreurs['param'] = array('90');
 							$erreurs['param1'] = '90';
-					        break;
-					    case 180:
-					        $erreurs['param'] = array('180');
+							break;
+						case 180:
+							$erreurs['param'] = array('180');
 							$erreurs['param1'] = '180';
-					        break;
-					    case 270:
-					        $erreurs['param'] = array('270');
+							break;
+						case 270:
+							$erreurs['param'] = array('270');
 							$erreurs['param1'] = '270';
-					        break;
+							break;
 					}
 				}else{
 					list($param1, $param2, $param3,$params) = photospip_recuperer_params_form($var_filtre);
@@ -275,9 +275,6 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 			$params = photospip_recuperer_params_form($var_filtre);
 			
 			$version = sql_countsel('spip_documents_inters','id_document='.intval($row['id_document']))+1;
-			// on transforme l'image en png non destructif
-			//spip_log("On transforme l'image source en PNG non destructif","photospip");
-			//$src = extraire_attribut(image_alpha($src,0),'src');
 			
 			/**
 			 * L'image créée aura pour nom image_orig-xxxx.ext où xxxx est le md5 de la date
