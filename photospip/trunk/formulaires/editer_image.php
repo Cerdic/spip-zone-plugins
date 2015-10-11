@@ -87,7 +87,7 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		$valeurs['editable'] = false;
 	}
 	else if($GLOBALS['meta']['image_process'] != 'gd2'){
-		$valeurs['message_erreur'] = _T('photospip:erreur_image_process');
+		$valeurs['message_erreur'] = _T('photospip:erreur_image_process',array('url'=>generer_url_ecrire('configurer_avancees')));
 		$valeurs['editable'] = false;
 	}
 	if($modale){

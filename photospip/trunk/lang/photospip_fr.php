@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_form_filtre_sstest' => 'Le filtre que vous avez essayé ne permet pas d’être testé. Vous ne pouvez que l’appliquer.',
 	'erreur_form_filtre_valeur_obligatoire' => 'Vous devez choisir une valeur.',
 	'erreur_form_type_resultat' => 'Vous devez choisir le type de résultat',
-	'erreur_image_process' => 'Le site n’utilise pas GD2 pour gérer les images, veuillez l’utiliser pour leur traitement.',
+	'erreur_image_process' => 'Le site n’utilise pas GD2 pour gérer les images, veuillez <a href="@url@" class="spip_in">le configurer pour leur traitement</a>.',
 	'erreur_nb_versions_atteint' => 'Le nombre de versions différentes de l’image a été atteint (@nb@). Vous ne pouvez que tester et non appliquer les modifications.',
 	'erreur_previsu' => 'Si le résultat vous satisfait vous pouvez le valider en bas du formulaire, sinon vous pouvez tester d’autres filtres.',
 	'erreur_selectionner_au_moins_une_valeur' => 'Vous devez sélectionner au moins une valeur',
