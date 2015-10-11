@@ -1,8 +1,9 @@
 #BOITE_OUVRIR{'','info'}
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','document','id',#ENV{id_document}}}}
 #BOITE_FERMER
-<BOUCLE_mode_pas_vignette(CONDITION){si #ENV{mode}|!={vignette}|oui}>
-<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+
+<BOUCLE_doc(DOCUMENTS){si #ENV{mode}|!={vignette}|oui}{id_document}{tout}>
+#BOITE_OUVRIR{'','info'}
 <div id="versions">
 	<h3><:photospip:titre_informations_images:></h3>
 	<div class="infos">
@@ -23,5 +24,5 @@
 		<INCLURE{fond=inc_histogramme,fichier=#FICHIER}>
 	</div>]]
 </div>
+#BOITE_FERMER{'','info'}
 </BOUCLE_doc>
-</BOUCLE_mode_pas_vignette>
