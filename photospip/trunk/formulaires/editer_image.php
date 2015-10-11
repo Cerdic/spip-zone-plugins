@@ -6,7 +6,7 @@
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008-2012 - Distribue sous licence GNU/GPL
+ * © 2008-2015 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -76,9 +76,11 @@ function formulaires_editer_image_charger_dist($id_document='new',$mode=false, $
 		}
 	}else{
 		$id_vignette = sql_getfetsel('id_vignette','spip_documents','id_document='.intval($id_document));
-		if($id_vignette && ($id_vignette > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette))){
+		if($id_vignette && (intval($id_vignette) > 0) && $id_vignette = sql_getfetsel('id_document','spip_documents','id_document='.intval($id_vignette))){
 			$valeurs['id_document'] = $id_vignette;
 			$valeurs['vignette'] = 'oui';
+			$valeurs['id_vignette'] = $id_vignette;
+			$valeurs['modifiable'] = true;
 		}
 	}
 	
