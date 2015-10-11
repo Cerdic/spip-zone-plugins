@@ -7,8 +7,6 @@ Revoir l'installation (normes SPIP >= 3.x) et la suppression (suppression de tou
 
 Ne plus être dépendant du plugin vérifier
 
-Afficher le nombre d'utilisations du document dans la colonne de navigation
-
 Permettre d'éditer les logos d'objet
 
 Faire une interface simplifiée (Cacher les inputs de certains filtres pour se baser sur une interface simple comme pour le recadrage par exemple)
@@ -30,3 +28,5 @@ Une fois la vignette réalisée, on ne peut plus la modifier
 Sur l'édition d'une vignette, afficher les informations de la vignette
 
 Il manque la hiérarchie dans l'édition d'image et de vignette
+
+Afficher le nombre d'utilisations du document dans la colonne de navigation
