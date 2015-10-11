@@ -6,7 +6,7 @@
  * Auteurs :
  * kent1 (kent1@arscenic.info -  http://www.kent1.info)
  *
- * © 2008-2012 - Distribue sous licence GNU/GPL
+ * © 2008-2015 - Distribue sous licence GNU/GPL
  * Pour plus de details voir le fichier COPYING.txt
  *
  */
@@ -69,34 +69,28 @@ function inc_photospip_appliquer_filtre_dist($src, $dest, $filtre,$params){
 	if(preg_match("/\.(png|gif|jpe?g)$/i", $src, $regs)) {
 		switch($regs[1]) {
 			case 'png':
-			  if (function_exists('ImageCreateFromPNG')) {
-				$src_img=ImageCreateFromPNG($dst_img);
-				spip_log("creation png from $dst_img","photospip");
-				$save = '_image_imagepng';
-			  }
-			  break;
+				if (function_exists('ImageCreateFromPNG')) {
+					$src_img=ImageCreateFromPNG($dst_img);
+					spip_log("creation png from $dst_img","photospip");
+					$save = '_image_imagepng';
+				}
+				break;
 			case 'gif':
-			  if (function_exists('ImageCreateFromGIF')) {
-				$src_img=ImageCreateFromGIF($dst_img);
-				$save = '_image_imagegif';
-			  }
-			  break;
+				if (function_exists('ImageCreateFromGIF')) {
+					$src_img=ImageCreateFromGIF($dst_img);
+					$save = '_image_imagegif';
+				}
+				break;
 			case 'jpeg':
 			case 'jpg':
-			  if (function_exists('ImageCreateFromJPEG')) {
-				$src_img=ImageCreateFromJPEG($dst_img);
-				spip_log("creation jpg from $dst_img","photospip");
-				$save = '_image_imagejpg';
-			  }
-			  break;
+				if (function_exists('ImageCreateFromJPEG')) {
+					$src_img=ImageCreateFromJPEG($dst_img);
+					spip_log("creation jpg from $dst_img","photospip");
+					$save = '_image_imagejpg';
+				}
+				break;
 		}
 	}
-
-	//if (!$src_img) {
-	//	spip_log("photospipfiltre : image non lue, $src","photospip");
-	//	return false;
-	//}
-	//spip_log($src_img,'photospip');
 
 	ImageInterlace($src_img,0);
 
