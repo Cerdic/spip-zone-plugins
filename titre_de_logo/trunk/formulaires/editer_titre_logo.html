@@ -5,7 +5,7 @@
 	<form method='post' action='#ENV{action}'role="form">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<ul class="editer-groupe">
 			[(#SET{inserer_barre,[(#CONFIG{titre_logo/inserer_barre}|sinon{'edition'})]})]
 
 				[(#SAISIE{input,titre_logo,

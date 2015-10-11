@@ -2,10 +2,6 @@
 
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file
 
-// Module: titre_logo
-// Langue: fr
-// Date: 21-05-2014 15:20:06
-
 if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
@@ -39,4 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
     'titre_page_parametrages' => 'Titre de logo',
 );
-?>

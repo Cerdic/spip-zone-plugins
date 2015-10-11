@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Plugin Titre de logo
  *
@@ -57,12 +58,12 @@ function formulaires_editer_titre_logo_charger_dist($objet, $id_objet, $retour =
 
     $valeurs = array(
         'objet' => $objet,
-        'id_objet'=>$id_objet,
+        'id_objet' => $id_objet,
         'titre_logo' => $titre_logo,
         'descriptif_logo' => $descriptif_logo,
         'exec' => $exec,
         'logo_on' => $options['logo_on'],
-        '_options' => $options
+        '_options' => $options,
         );
 
     return $valeurs;
@@ -85,18 +86,18 @@ function formulaires_editer_titre_logo_traiter_dist($objet, $id_objet, $retour =
 
     sql_updateq(
         $table_objet,
-        array('titre_logo' => $titre_logo,'descriptif_logo' => $descriptif_logo),
-        $_id_objet . "=" . $id_objet
+        array('titre_logo' => $titre_logo, 'descriptif_logo' => $descriptif_logo),
+        $_id_objet.'='.$id_objet
     );
     $update_sql = sql_fetsel(
         'titre_logo,descriptif_logo',
         $table_objet,
-        'titre_logo='. sql_quote($titre_logo) . ' AND descriptif_logo=' . sql_quote($descriptif_logo)
+        'titre_logo='.sql_quote($titre_logo).' AND descriptif_logo='.sql_quote($descriptif_logo)
     );
 
     if ($update_sql) {
-        $res['message_ok']  = _T('info_modification_enregistree');
-        $res['redirect']    = $retour;
+        $res['message_ok'] = _T('info_modification_enregistree');
+        $res['redirect'] = $retour;
     } else {
         $res['message_erreur'] = _T('avis_erreur');
     }

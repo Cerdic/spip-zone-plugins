@@ -1,18 +1,21 @@
 <?php
+
 /*
  * Plugin Titre de logo
  *
- * Distribue sous licence GPL
+ * @plugin     Titre de logo
  *
+ * @copyright  2015
+ * @author     Arno*
+ * @licence    GPL 3
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
-
 /**
- * Upgrade des tables
+ * Upgrade des tables.
  *
  * @param string $nom_meta_base_version
  * @param string $version_cible
@@ -35,9 +38,7 @@ function titre_logo_upgrade($nom_meta_base_version, $version_cible)
 /**
  * Une fonction pour verifier que les champs sont bien sur tous les objets,
  * appelee lors de la configuration
- * (cas d'un nouvel objet ajouté apres l'install du plugin)
- *
- * @return void
+ * (cas d'un nouvel objet ajouté apres l'install du plugin).
  */
 function titre_logo_check_upgrade()
 {
@@ -56,7 +57,7 @@ function titre_logo_check_upgrade()
 }
 
 /**
- * Desinstallation
+ * Desinstallation.
  *
  * @param string $nom_meta_base_version
  */

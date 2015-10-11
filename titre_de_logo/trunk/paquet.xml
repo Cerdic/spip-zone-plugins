@@ -1,7 +1,7 @@
 <paquet
 	prefix="titre_logo"
 	categorie="edition"
-	version="2.0.5"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	schema="1.0.0"
@@ -19,7 +19,8 @@
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="titre_logo_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/titre_logo.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/titre_logo.php" />
 	<pipeline nom="autoriser" inclure="titre_logo_autorisations.php" />
 
 	<menu nom="configurer_titre_logo" titre="paquet-titre_logo:titre_logo_nom" parent="menu_configuration" icone="images/image-16.png" />
