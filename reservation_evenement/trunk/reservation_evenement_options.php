@@ -1,6 +1,6 @@
 <?php
 /**
- * Options du plugin Réservation Événementsau chargement
+ * Options du plugin Réservation Événements
  *
  * @plugin     Réservation Événements
  * @copyright  2013
