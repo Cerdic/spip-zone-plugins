@@ -335,6 +335,131 @@ function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0, $medias='', 
 }
 
 
+function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
+	$taille_defaut = -1;
+	
+	if ($taille == -1) {
+		$taille_defaut = 120;
+		$taille = "";	
+	}
+	if (preg_match(",^0$|^0\/,", $taille)) {
+		$taille_defaut = 0;
+		$taille = preg_replace(",^0$|^0\/,", "", $taille);
+	}
+
+
+	$tailles = explode("/", $taille);
+	
+	if ($taille_defaut < 0) {
+		if (count($tailles) > 0) $taille_defaut = $tailles[0];
+		else $taille_defaut = $taille;
+	}
+
+	$type_urls = lire_meta("type_urls");
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+		$htactif = true;
+	}
+
+
+	if (preg_match("/^<img /i", $img)) {
+		$img = extraire_attribut($img, "src");
+	}
+	$img = preg_replace(",\?[0-9]*$,", "", $img);
+
+	$source = $img;
+	
+	$classe = "image_responsive_svg";
+
+
+	if (file_exists($source)) {
+		$l = largeur($source);
+		$h = hauteur($source);
+		if ($vertical == 1) {
+			$classe .= " image_responsive_svg_v";
+			$v = "v";	
+			if ($h < $taille_defaut) $taille_defaut = $h;
+		} else {
+			$v = "";
+			if ($l < $taille_defaut) $taille_defaut = $l;
+		}
+		if ($taille_defaut == 0) {
+			$src = find_in_path("rien.gif");
+		} else {
+			if(_IMAGE_RESPONSIVE_CALCULER) {
+				$src = retour_image_responsive($source, $taille_defaut, 1, 0, "file");
+			} else {
+				if ($htactif) {
+					$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
+				}
+				else {
+					$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
+				}
+			}
+		}
+
+		if ($lazy == 1) $classe .= " lazy";
+
+		if (count($tailles) > 0) {
+			sort($tailles);
+			include_spip("inc/json");
+			
+			$data_tailles =  " data-tailles='".addslashes(json_encode($tailles))."'";
+
+
+			$i = 0;
+
+			foreach($tailles as $t) {
+				$m = trim($medias[$i]);
+				$i++;
+				$source_tmp = $source;
+
+				if (count($p) > 1 && count($p[$i]) > 1) {
+					$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
+					$source_tmp = extraire_attribut($source_tmp,"src");
+				}			
+
+				if ($vertical && $t > $h) $t = $h;
+				else if (!$vertical && $t > $l) $t = $l;
+
+
+				if(_IMAGE_RESPONSIVE_CALCULER) {
+					$fichiers[$t][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
+					$fichiers[$t][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
+				} else {
+					if ($htactif) {
+						$fichiers[$t][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
+						$fichiers[$t][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
+					}
+					else {
+						$fichiers[$t][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
+						$fichiers[$t][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
+					}
+				}
+						
+			}
+			foreach($tailles as $t) {
+				if ($vertical && $t > $h) $t = $h;
+				else if (!$vertical && $t > $l) $t = $l;
+
+
+				$autorisees[$t][1] = $fichiers[$t][1];
+				$autorisees[$t][2] = $fichiers[$t][2];
+			}
+			
+			if ($autorisees) {
+				$data_autorisees = " data-autorisees='".json_encode($autorisees)."'";
+			}
+
+		}
+
+		$ret = "<image class='$classe' width='100%' height='100%' xlink:href='$src' data-src='$source' data-l='$l' data-h='$h'$data_tailles$data_autorisees></image>";
+
+	}
+
+
+
+	return $ret;
+}
 
 
 function background_responsive($src, $taille=120, $lazy=0, $align="") {

@@ -201,6 +201,107 @@ function charger_url_background_responsive(this_img) {
 
 }
 
+function charger_url_image_responsive_svg(this_img) {
+	var dPR = window.devicePixelRatio;
+		var src = this_img.attr("data-src");
+		var l = this_img.attr("data-l");
+		var h = this_img.attr("data-h");
+
+		var cl = this_img.attr("class");
+
+		if (cl.indexOf("image_responsive_svg_v")) {
+			var vertical = true;
+			var dim= parseInt(this_img.parent().height());
+
+
+		} else {
+			var vertical = false;
+			var dim= parseInt(this_img.parent().width());
+		}
+		
+		
+		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
+		if (forcer_zoom) dim = dim * forcer_zoom;
+		
+		var tailles = this_img.attr("data-tailles");
+		
+		if (tailles) {
+			var w_max = 0;
+			var t = $.parseJSON(tailles.replace(/\\"/g, '"'));
+			var changer_w = 1;
+			
+			$.each(t, function (index, value) {
+				value = parseInt(value);
+				//console.log(value + " " + dim + " " + changer_w);
+				if (changer_w == 1) w_max = value;
+				if (value >= dim) changer_w = 0;
+			});
+			 //console.log ("Wmax: "+w_max);
+			if (w_max > 0) dim = w_max;
+		}
+			// console.log ("W: "+dim);
+
+			// console.log ("L: "+l);
+			
+		var autorisees = this_img.attr("data-autorisees");					
+		if (autorisees) {
+			autorisees = $.parseJSON(autorisees.replace(/\\"/g, '"'));		
+		}
+
+
+		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
+		if (vertical && parseInt(dim) > parseInt(h)) {
+			dim = h;
+			dpr = false;
+		} else if (parseInt(dim) > parseInt(l)) {
+			dim = l;
+			dpr = false;
+		}
+
+			//console.log ("Wapres: "+dim);
+		
+				
+		if (dim == 0) {
+		
+		} else {
+		
+				if(dPR && dPR > 1) {
+					// si l'image d'origine n'est pas nettement plus grande que l'image demandée, 
+					// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
+					if (vertical && h < 1.5*dim) dPR = false;
+					else if (l < 1.5*dim) dPR = false;
+					// forcer à 2
+					else dPR = 2;
+					
+				} else {
+					dPR = false;
+				}
+								
+				if (autorisees && autorisees[dim]) {
+					if (dPR < 1.5) url_img = autorisees[dim][1];
+					else url_img = autorisees[dim][2];
+				}
+				else {				
+					if (htactif) {
+						racine = src.substr(0, src.length-4);
+						terminaison = src.substr(src.length-3, 3);
+						var url_img = racine+"-resp"+dim;
+						if (vertical) url_img = url_img + "v";
+						if (dPR) url_img = url_img + "-"+dPR;
+						url_img = url_img + "."+terminaison;
+					} else {
+						var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
+						if (vertical) url_img = url_img + "v";
+						if (dPR) url_img = url_img + "&dpr="+dPR;
+					}
+				}
+				
+			this_img.attr("xlink:href", url_img).height("").width("").removeAttr("data-top");
+		}
+
+
+}
+
 function calculer_top_image_responsive() {
 	// Calculer le "top" des images lazy
 	$(".lazy, [data-lazy]").each(function() {
@@ -237,6 +338,15 @@ function charger_image_lazy() {
 			this_img.attr("src", this_img.attr("data-src-lazy"));
 		}
 	});	
+	$(".image_responsive_svg.lazy[data-top]").each(function() {
+		this_img = $(this);
+		var h = this_img.attr("data-top");
+		if (h <= limite_bas && h >= limite_haut) {
+			charger_url_image_responsive_svg(this_img);
+		} else {// sinon remettre l'image d'origine (rien ou basse def)
+			this_img.attr("src", this_img.attr("data-src-lazy"));
+		}
+	});	
 	$("[data-responsive=background].lazy[data-top]").each(function() {
 		this_img = $(this);
 		var h = this_img.attr("data-top");
@@ -246,17 +356,18 @@ function charger_image_lazy() {
 
 
 function _charger_image_responsive () {
-	
 	// Remplacer les URL non lazy
 	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").each(function() {
 		charger_url_image_responsive($(this));
+	});
+	$(".image_responsive_svg:not('.lazy')").each(function() {
+		charger_url_image_responsive_svg($(this));
 	});
 	charger_image_lazy();
 
 	$("[data-responsive=background]:not('.lazy')").each(function() {
 			charger_url_background_responsive($(this));
 	});
-
 }
 
 $(document).ready(calculer_top_image_responsive);
