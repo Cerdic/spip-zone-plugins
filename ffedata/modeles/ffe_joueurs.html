@@ -1,5 +1,14 @@
+[(#REM)
+	Un modèle pour afficher la liste des joueurs d'un club.
+	Paramètres à saisir au modèle : simplement le numéro du club tel qu'il existe dans la base fédérale.
+	On récupère le numéro du club sur le site echecs.asso.fr. C’est le numéro qui apparait à la fin de l’URL dans la fiche du club : http://echecs.asso.fr/FicheClub.aspx?Ref=2569
+	Ici les joueurs du club numéro 2569, le club de Blagnac.
+	<ffe_joueurs|Ref=2569>
+	]
+
+
 <B_lecture_wsdl2>
-<table class="spip">
+<table class="spip echecs_joueurs">
     <thead>
         <tr>
             <th>Nom</th>
