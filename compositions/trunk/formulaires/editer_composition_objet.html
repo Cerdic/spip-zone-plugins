@@ -8,10 +8,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	]
 	<h4[
-		style="background-image: url((#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{icon}|image_reduire{24,24}|extraire_attribut{src}))"][
-		title="(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{description}|attribut_html)"]>
+		style="background-image: url((#ENV{_compositions/#ENV{composition}/icon}|image_reduire{24,24}|extraire_attribut{src}))"][
+		title="(#ENV{_compositions/#ENV{composition}/description}|attribut_html)"]>
 		<:compositions:composition_utilisee:>
-			<span class="composition_actuelle">[(#ENV{composition}|oui)[(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{nom}|supprimer_numero|sinon{#ENV{composition}})]
+			<span class="composition_actuelle">[(#ENV{composition}|oui)[(#ENV{_compositions/#ENV{composition}/nom}|supprimer_numero|sinon{#ENV{composition}})]
 			][(#ENV{composition}|non)
 				[(#ENV{composition_heritee}|oui)
 					[(#ENV{composition_heritee}|=={'-'}|oui)<:compositions:composition_defaut:>]
@@ -29,13 +29,17 @@
 	]
 	<div class="detail">
 		[(#ENV{composition_verrouillee}|oui)<p><:compositions:composition_verrouillee:></p>]
-		<B_heritages><p><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</p></B_heritages>
+		<B_heritages>
+			<p><:compositions:heritages:>
+		<BOUCLE_heritages(DATA){source tableau, #ENV{_compositions/#ENV{composition}/branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>
+			.</p>
+		</B_heritages>
 	</div>
 
 	[(#ENV{editable})
 	<ul>
 		#SET{fl,compositions}
-		#SET{name,composition}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+		#SET{name,composition}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
 		[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -44,7 +48,7 @@
 		
 		#SET{lock,''}
 		[(#AUTORISER{webmestre}|et{#ENV{verrou_branche}|non}|et{#CONFIG{compositions/tout_verrouiller}|non}|oui)
-			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<label><:compositions:label_composition_explication:></label>
@@ -56,7 +60,7 @@
 				]
 				[(#ENV{_compositions}|is_array|non)<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />]
 				[(#ENV{objet}|=={rubrique}|oui)
-				#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+				#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<div class="choix">
 						<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
