@@ -335,7 +335,7 @@ function massicoter_largeur ($largeur, $connect = null, $doc = array()) {
         return $largeur;
     }
 
-    return (string) round(($parametres['x2'] - $parametres['x1']) * $parametres['zoom']);
+    return (string) round(($parametres['x2'] - $parametres['x1']));
 }
 
 /**
@@ -358,5 +358,5 @@ function massicoter_hauteur ($hauteur, $connect = null, $doc = array()) {
         return $hauteur;
     }
 
-    return (string) round(($parametres['y2'] - $parametres['y1']) * $parametres['zoom']);
+    return (string) round(($parametres['y2'] - $parametres['y1']));
 }
