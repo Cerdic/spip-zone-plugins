@@ -49,13 +49,16 @@ function compositions_charger_infos($nom,$info=""){
 				$composition['description'] = isset($xml['description'])?_T_ou_typo(spip_xml_aplatit($xml['description'])):'';
 				if (isset($xml['icon'])) {
 					$icon = chemin_image(reset($xml['icon']));
-					if (!$icon)
+					if (!$icon) {
 						$icon = find_in_path(reset($xml['icon']));
-				} else
+					}
+				} else {
 					$icon = '';
+				}
+				$composition['image_exemple'] = isset($xml['image_exemple']) ? find_in_path(reset($xml['image_exemple'])) : '';
 				$composition['icon'] = $icon;
-				$composition['class'] = isset($xml['class'])?trim(reset($xml['class'])):'';
-				$composition['configuration'] = isset($xml['configuration'])?spip_xml_aplatit($xml['configuration']):'';
+				$composition['class'] = isset($xml['class']) ? trim(reset($xml['class'])) : '';
+				$composition['configuration'] = isset($xml['configuration']) ? spip_xml_aplatit($xml['configuration']) : '';
 				$composition['branche'] = array();
 				if (spip_xml_match_nodes(',^branche,', $xml, $branches)){
 					foreach (array_keys($branches) as $branche){

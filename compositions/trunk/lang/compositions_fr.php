@@ -41,7 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
 
 	// U
-	'une_utilisation' => '1 utilisation'
+	'une_utilisation' => '1 utilisation',
+
+	// V
+	'voir_image_exemple' => "Voir une image d'exemple",
+
 );
 
 ?>

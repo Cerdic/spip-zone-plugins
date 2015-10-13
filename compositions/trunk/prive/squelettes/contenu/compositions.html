@@ -9,7 +9,11 @@
 		<ul class="liste-items compositions">
 			<BOUCLE_pour(DATA){source tableau, #VALEUR}{par nom}>
 			<li class="item">
-				[(#ICON|sinon{#CHEMIN_IMAGE{composition-24.png}}|image_reduire{24,24}|inserer_attribut{class,logo})]
+				[ [<a href="(#IMAGE_EXEMPLE|balise_img|extraire_attribut{src})" class='mediabox exemple' title="<:compositions:voir_image_exemple|attribut_html:>">]
+					(#ICON|sinon{#CHEMIN_IMAGE{composition-24.png}}|image_reduire{24,24}|inserer_attribut{class,logo})
+					[(#IMAGE_EXEMPLE|oui)</a>]
+				]
+
 				<div class='presentation'>
 					<h4>[(#NOM|supprimer_numero)]</h4>
 					[<div class='descriptif'>(#DESCRIPTION)</div>]
