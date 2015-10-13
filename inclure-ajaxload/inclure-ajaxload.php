@@ -67,7 +67,7 @@ function recuperer_fond_ajax() {
 	// - soit retourner l'url du fichier html {ajaxload=url_html}
 	$methode = $args[1]["ajaxload"];
 	$entete = "<"."?xml version='1.0' encoding='".$GLOBALS['meta']['charset']."'?".">";
-	echo $entete;
+	//echo $entete;
 
 	$ttl = _DUREE_CACHE_AJAXSTATIC;
 	if ($args[1]['ttl_ajaxload']) $ttl = valeur_numerique($args[1]['ttl_ajaxload']);
