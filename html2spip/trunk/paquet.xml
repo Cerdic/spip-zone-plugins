@@ -2,7 +2,7 @@
   prefix="html2spip"
   categorie="outil"
   version="1.0.0"
-  etat="dev"
+  etat="test"
   compatibilite="[3.0.20;3.0.*]"
   logo=""
   documentation=""
