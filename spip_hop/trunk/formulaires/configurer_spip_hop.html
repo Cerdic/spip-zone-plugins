@@ -1,8 +1,9 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
     #SET{spip_ecran,#EVAL{$GLOBALS['spip_ecran']}}
-    [(#GET{spip_ecran}|=={large}|oui)  [(#SET{ecran,<:info_grand_ecran:>})] ]
-    [(#GET{spip_ecran}|=={etroit}|oui) [(#SET{ecran,<:info_petit_ecran:>})] ]
+    [(#SET{ecran,[(#GET{spip_ecran}|=={'large'}|?{<:info_grand_ecran:>,<:info_petit_ecran:>})]})]
+    [(#SET{constante_petit_ecran,#EVAL{_PETIT_ECRAN}})]
+    [(#SET{constante_grand_ecran,#EVAL{_GRAND_ECRAN}})]
     <h3 class="titrem"><:spip_hop:parametres{ecran=#GET{ecran}}:></h3>
 
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,25 +13,24 @@
     <div>
         #ACTION_FORMULAIRE{#ENV{action}}
 
-
-        <input type="hidden" name="_meta_casier" value="spip_hop" />
         <ul class="editer-groupe">
-            <li class="legend">
-                <strong><:spip_hop:attention:></strong>  <:spip_hop:explications:>
+            <li class="legende">
+                <strong><:spip_hop:attention:></strong> <:spip_hop:explications:>
             </li>
             <li class="editer">
-                    <label for="petit_ecran"><:spip_hop:petit_ecran:></label>
-                    <input type="text" name="petit_ecran" value="[(#ENV{petit_ecran})]">
+                <label for="petit_ecran"><:spip_hop:petit_ecran:></label>
+                [(#GET{constante_petit_ecran}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+                <input type="text" name="petit_ecran" value="[(#ENV{petit_ecran,#GET{constante_petit_ecran}})]"[(#GET{constante_petit_ecran}|oui) disabled="disabled"]>
             </li>
             <li class="editer">
-                    <label for="grand_ecran"><:spip_hop:grand_ecran:></label>
-                    <input type="text" name="grand_ecran" value="[(#ENV{grand_ecran})]">
-            </li>
-
-            <li class="legend">
-                <:spip_hop:etendre_selection_bandeau:>
+                <label for="grand_ecran"><:spip_hop:grand_ecran:></label>
+                [(#GET{constante_grand_ecran}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+                <input type="text" name="grand_ecran" value="[(#ENV{grand_ecran,#GET{constante_grand_ecran}})]"[(#GET{constante_grand_ecran}|oui) disabled="disabled"]>
             </li>
             <li class="editer editer_methode">
+                <div class="explication">
+                    <:spip_hop:etendre_selection_bandeau:>
+                </div>
                 <div class="choix">
                     <input type="radio" name="etendre_bandeau" class="radio" id="affichage_oui" [(#ENV{etendre_bandeau}|oui)checked="checked"] value="oui">
                     <label for="affichage_oui"><:spip_hop:affichage_oui:></label>
@@ -42,6 +42,7 @@
             </li>
         </ul>
 
+        <input type="hidden" name="_meta_casier" value="spip_hop" />
         <p class="boutons">
             <span class="image_loading">&nbsp;</span>
             <input type="submit" class="submit" value="<:bouton_enregistrer:>" />

@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'etendre_selection_bandeau' => 'Souhaitez vous garder la largeur initiale pour le bandeau ?',
     'explications' => 'La valeur renseignée doit avoir une unité de mesure : em, rem, px, %, pt.',
 
+    'info_constante_definie' => 'Une valeur a été définie pour ce champ dans un fichier <em>xxx_options.php</em>',
+
     //P
     'parametres' => 'Paramètres (vous êtes en affichage : "@ecran@")',
     'petit_ecran' => 'Petit écran',
