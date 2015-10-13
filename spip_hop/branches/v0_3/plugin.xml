@@ -4,11 +4,12 @@
     <slogan>Elargissez votre champ d'action&nbsp;!</slogan>
     <icon>prive/themes/spip/images/spip_hop-64.png</icon>
     <prefix>spip_hop</prefix>
-    <version>0.3.1</version>
+    <version>0.3.0</version>
     <etat>test</etat>
     <categorie>theme</categorie>
     <lien>http://contrib.spip.net/4704</lien>
 
+    <options>spip_hop_options.php</options>
     <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 
 </plugin>
