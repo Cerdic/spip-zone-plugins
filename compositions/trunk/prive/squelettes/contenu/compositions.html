@@ -9,11 +9,11 @@
 		<ul class="liste-items compositions">
 			<BOUCLE_pour(DATA){source tableau, #VALEUR}{par nom}>
 			<li class="item">
-				[(#ICON|image_reduire{24,24}|inserer_attribut{class,logo})]
-
-				<h4>[(#NOM|supprimer_numero)]</h4>
-
-				[<div class='descriptif'>(#DESCRIPTION)</div>]
+				[(#ICON|sinon{#CHEMIN_IMAGE{composition-24.png}}|image_reduire{24,24}|inserer_attribut{class,logo})]
+				<div class='presentation'>
+					<h4>[(#NOM|supprimer_numero)]</h4>
+					[<div class='descriptif'>(#DESCRIPTION)</div>]
+				</div>
 
 				<B_heritages>
 				[(#BOITE_OUVRIR{<:compositions:label_heritages:>, raccourcis})]
