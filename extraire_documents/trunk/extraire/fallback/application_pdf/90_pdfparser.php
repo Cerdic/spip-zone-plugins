@@ -3,13 +3,11 @@
 /**
  * Tester si cette méthode d'extraction est disponible
  **/
-function extraire_application_pdf_10_tika_server_test_dist() {
-	include_spip('inc/distant');
-	
-	// On cherche si le serveur Tika est bien lancé en local (valeurs peut-être à configurer…)
-	$tika_version = recuperer_page('http://localhost:9998/version');
-	
-	if (strpos($tika_version, 'Apache Tika') !== false) {
+function extraire_fallback_application_pdf_90_pdfparser_test_dist() {
+	if (
+		is_dir(_DIR_RACINE . 'lib/TCPDF-6.2.6')
+		and is_dir(_DIR_RACINE . 'lib/pdfparser-0.9.22/src')
+	) {
 		return true;
 	}
 	else {
@@ -24,7 +22,7 @@ function extraire_application_pdf_10_tika_server_test_dist() {
  * @param $fichier le fichier à traiter
  * @return Scontenu le contenu brut
  **/
-function extraire_application_pdf_10_tika_server_extraire_dist($fichier) {
+function extraire_fallback_application_pdf_90_pdfparser_extraire_dist($fichier) {
     $infos = array('contenu' => false);
     $contenu = '';
 
@@ -32,29 +30,39 @@ function extraire_application_pdf_10_tika_server_extraire_dist($fichier) {
     if (!class_exists('Composer\\Autoload\\ClassLoader')) {
 		include_spip('lib/Composer/Autoload/ClassLoader');
 	}
+    include_spip('lib/TCPDF-6.2.6/tcpdf_parser');
 
     $loader = new \Composer\Autoload\ClassLoader();
 
-    // On définit le bon chemin pour le namespace de la librairie nécessaire
-    $loader->addPsr4('Vaites\\ApacheTika\\', _DIR_PLUGIN_EXTRAIREDOC . 'lib/vaites/php-apache-tika/src');
+    // register classes with namespaces
+    $loader->add('Smalot\PdfParser', _DIR_RACINE . 'lib/pdfparser-0.9.22/src');
     $loader->register();
-	
-	// On récupère le client pour discuter avec Tika
-	$client = \Vaites\ApacheTika\Client::make();
-	
-	// On tente de récupérer le texte brut du fichier
+
+    $parser = new \Smalot\PdfParser\Parser();
+    //Tenter de lire le pdf
     try {
         set_time_limit (0);
-        $contenu = $client->getText(_DIR_RACINE . $fichier);
+        $pdf = $parser->parseFile(_DIR_RACINE . $fichier);
     }
     catch (Exception $e) {
         //Pour toute exception on s'arrete et on retourne un contenu vide
         //Les cas de figure sont entre autre les fichiers mal formés ou signés
         return '';
     }
-   
+
+    // Parcourir les pages et extraire le contenu textuel
+    try {
+        foreach ($pdf->getPages() as $page) {
+            $contenu .= $page->getText();
+        }
+    }
+    catch (Exception $e) {
+        //si on ne peut extraire le texte on passe à la page suivante
+        $contenu .= '';
+    }
+
     //Libérer les ressources
-    unset($client);
+    unset($parser);
     unset($loader);
 	
 	// Si on a trouvé du texte

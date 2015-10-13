@@ -75,29 +75,44 @@ function inc_extraire_document($document = array()) {
 	}
 	
 	// On cherche le bon extracteur de jus de fichier
-	// tous les "extraire/application_pdf/10_superlib.php"
 	// le test n'est fait qu'une seule fois par type MIME, on garde le résultat en mémoire
-	$chemin_mime = str_replace('/','_', $mime);
+	$chemin_mime = preg_replace('/[^\w_]+/','_', $mime); // on accepte seulement chiffre, lettre, et _
 	$fonction_extraire = null;
+	// Si on a déjà un extracteur pour ce type MIME
 	if (isset($extracteurs_ok[$chemin_mime])) {
 		$fonction_extraire = $extracteurs_ok[$chemin_mime];
 	}
-	elseif ($extracteurs = find_all_in_path("extraire/{$chemin_mime}/", '[.]php$')) {
-		$extracteurs = array_keys($extracteurs);
-		sort($extracteurs); // On trie par nom pour chercher dans un ordre
-		
-		// On teste si ça marche dans l'ordre
-		foreach ($extracteurs as $fonction) {
-			$fonction = substr($fonction, 0, strlen($fonction)-4);
-			if (
-				// extraire_application_pdf_10_superlib_test_dist()
-				$fonction_test = charger_fonction('test', "extraire/{$chemin_mime}/{$fonction}")
-				and $fonction_test()
-			) {
-				// extraire_application_pdf_10_superlib_extraire_dist()
-				$fonction_extraire = charger_fonction('extraire', "extraire/{$chemin_mime}/{$fonction}");
-				$extracteurs_ok[$chemin_mime] = $fonction_extraire;
-				break; // On arrête la recherche, on a trouvé le meilleur extracteur
+	else {
+		// On cherche dans l'ordre :
+		// extraire/defaut/application_pdf/10_superlib_pdf.php
+		// extraire/defaut/10_superlib_generic.php
+		// extraire/fallback/application_pdf/10_pourri_pdf.php
+		// extraire/fallback/10_pourri_generic.php
+		foreach (array(
+			"extraire/defaut/{$chemin_mime}/",
+			"extraire/defaut/",
+			"extraire/fallback/{$chemin_mime}/",
+			"extraire/fallback/",
+		) as $dossier) {
+			if ($extracteurs = find_all_in_path($dossier, '[.]php$')) {
+				$extracteurs = array_keys($extracteurs);
+				sort($extracteurs); // On trie par nom pour chercher dans un ordre
+				
+				// On teste si ça marche dans l'ordre
+				foreach ($extracteurs as $fonction) {
+					$fonction = substr($fonction, 0, strlen($fonction)-4);
+					
+					// Si la librairie trouvée existe et que le test dit qu'elle est bien active
+					if (
+						$fonction_test = charger_fonction('test', $dossier.$fonction)
+						and $fonction_test($mime)
+					) {
+						// On cherche la vraie fonction d'extraction et on la garde en mémoire
+						$fonction_extraire = charger_fonction('extraire', $dossier.$fonction);
+						$extracteurs_ok[$chemin_mime] = $fonction_extraire;
+						break 2; // On arrête la recherche, on a trouvé le meilleur extracteur
+					}
+				}
 			}
 		}
 	}
