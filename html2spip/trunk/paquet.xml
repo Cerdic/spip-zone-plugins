@@ -1,0 +1,17 @@
+<paquet
+  prefix="html2spip"
+  categorie="outil"
+  version="1.0.0"
+  etat="dev"
+  compatibilite="[3.0.20;3.0.*]"
+  logo=""
+  documentation=""
+>
+
+  <nom>Html2Spip</nom>
+
+  <auteur>bystrano</auteur>
+
+  <licence>GNU/GPL</licence>
+
+</paquet>
