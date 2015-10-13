@@ -440,7 +440,7 @@ class Accesrestreint_document {
 
 		// en controlant la cle passee en argument si elle est dispo
 		// (perf issue : toutes les urls ont en principe cette cle fournie dans la page au moment du calcul de la page)
-		if ($this->cle_action){
+		if ($this->cle_action && !defined('ACCES_RESTREINT_FORCE_AUTORISE')) {
 			include_spip('inc/securiser_action');
 			if (!verifier_cle_action($doc['id_document'].','.$this->_fichier, $this->cle_action)) {
 				spip_log("acces interdit $this->cle_action erronee");
