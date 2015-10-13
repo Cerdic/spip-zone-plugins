@@ -14,4 +14,6 @@
 
   <licence>GNU/GPL</licence>
 
+  <lib nom="html2spip" lien="http://files.spip.org/contribs/html2spip-0.6.zip" />
+
 </paquet>
