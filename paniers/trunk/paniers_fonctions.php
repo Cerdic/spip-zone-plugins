@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function dans_panier($id_objet, $objet) {
     include_spip('action/editer_liens');
-
+    include_spip('inc/session');
     $objet_panier = objet_trouver_liens(
         array('paniers' => session_get('id_panier')),
         array($objet => $id_objet)
