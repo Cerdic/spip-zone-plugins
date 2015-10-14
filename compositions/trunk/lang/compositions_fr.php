@@ -44,8 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_utilisation' => '1 utilisation',
 
 	// V
-	'voir_image_exemple' => "Voir une image d'exemple",
-
+	'voir_image_exemple' => 'Voir une image d’exemple'
 );
 
 ?>
