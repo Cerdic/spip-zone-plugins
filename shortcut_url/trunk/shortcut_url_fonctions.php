@@ -52,9 +52,10 @@ function shortcut_compteur($id_shortcut_url){
 			. ',i',(string) $_SERVER['HTTP_USER_AGENT'])
 		);
 	
-	if(_IS_BOT)
+	if(_IS_BOT) {
 		$humain = 'bot';
-	else
+		$insert_bot = sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address));
+	} else
 		$humain = 'oui';
 
 	$insert = sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'shorturl' => $shorturl['url'],'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address,'country_code' => $country_code,'humain' => $humain));

@@ -44,6 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_utiliser_shortcut_url' => 'Ajouter une URL et puis c\'est tout',
 	'item_utiliser_shortcut_title' => 'Vous pouvez définir le raccourci de votre URL (max 8 charactères)',
 
+	// N
+	'nb_click' => 'click',
+	'non_communique' => 'nc',
+
 	// P
 	'partage_googleplus' => 'Patager sur GooglePlus',
 	'partage_twitter' => 'Partager sur Twitter',
@@ -53,11 +57,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_statistique' => 'Pas de statistique',
 
 	// S
-	'shortcut_url' => 'Raccourcis d\'url',
-	'shortcut_url_logs' => 'Stats des raccourcis d\'url',
+	'shortcut_url' => 'Raccourcis d\'URL',
+	'shortcut_url_logs' => 'Stats des raccourcis',
 
 	// T
 	'titre_ajouter_shortcut_url' => 'Ajouter un lien raccourci',
+	'titre_modifier_shortcut_url' => 'Modifier un lien raccourci',
+	'titre_details_url' => 'Détails de l\'URL raccourcis',
+	'titre_page' => 'Titre de la page',
+	'titre_url' => 'URL',
 	'titre_liste_pays' => 'Liste des pays',
 	'titre_url_clicks' => 'Liste des connexions',
 	'titre_shortcut_url_auteur' => 'Liste des URL raccourcis par auteur',
@@ -68,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_shortcut_url_liste_logs' => 'Liste statistique des liens raccourcis',
 	'titre_shortcut_urls_logs' => 'Raccourcis d\'url',
 	'titre_shortcut_url_partage' => 'Partager ce lien',
-	'titre_shortcut_url_graph_carte' => 'Carte des raccourcis par pays',
-	'titre_shortcut_url_graph_pays' => 'Camembert raccourcis par pays',
+	'titre_shortcut_url_graph_carte' => 'Raccourcis par pays',
 	'titre_shortcut_url_graph_click' => 'Nombre de click par jour',
 );

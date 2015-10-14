@@ -1,4 +1,4 @@
-#bando_outils li.boussole { display: none !important; }
+#bando_outils li.boussole, .bando2_rubrique_creer { display: none !important; }
 div.bouton_stats { display: block; margin: .5em 0 2em 0; }
 .gros_bouton {  display: inline-block; border-radius: 5px; font-size: 3em; width: 90%; border: 1px solid; text-align: center; padding: 1em; background: #e5e5e5 none repeat scroll 0 0; }
 li.seenthis a, li.googleplus, li.facebook, li.twitter { list-style: none; float: left; padding: 0 0 0 .5em; }
@@ -11,6 +11,10 @@ li.googleplus a { background-image: url(../prive/themes/spip/images/googleplus.p
 li.facebook a { background-image: url(../prive/themes/spip/images/facebook.png); }
 li.twitter a { background-image: url(../prive/themes/spip/images/twitter.png); }
 .actions { display: inline-block; }
-.d3pie_pays { text-align: center; }
-.continent, .pays:not(#esh) { fill: #2484c1; stroke: #ccc; }
-path.pays.selected:not(#esh) { cursor: pointer; fill: #e6ca93; stroke: #2484c1; }
+.states-choropleth {
+  fill: #fff;
+}
+
+.bar text.value {
+  fill: #000000;
+}

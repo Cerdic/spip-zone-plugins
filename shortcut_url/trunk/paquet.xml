@@ -1,11 +1,11 @@
 <paquet
 	prefix="shortcut_url"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
-	schema="0.0.2"
+	schema="0.0.3"
 >
 
 	<nom>Shortcut URL</nom>
@@ -21,6 +21,7 @@
 	<pipeline nom="autoriser" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="d3js_plugins" inclure="shortcut_url_pipelines.php" />
 
 	<utilise nom="d3js" />
 

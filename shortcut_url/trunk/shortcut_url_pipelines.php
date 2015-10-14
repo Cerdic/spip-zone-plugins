@@ -62,6 +62,10 @@ function autoriser_rubriques_menu($faire, $type, $id, $qui, $opt){
 	return false;
 }
 
+function autoriser_rubrique_creer($faire, $type, $id, $qui, $opt){
+	return false;
+}
+
 function autoriser_documents_menu($faire, $type, $id, $qui, $opt){
 	return false;
 }
@@ -115,4 +119,19 @@ function shortcut_url_header_prive_css($flux) {
 
 	return $flux;
 }
+
+/**
+ * Insertion des plugins d3js supplémentaires dans le head
+ *
+ * @param $flux
+ * @return mixed
+ */
+function shortcut_url_d3js_plugins($plugins){
+	if(test_espace_prive()){
+		$plugins[] = 'topojson';
+
+	}
+	return $plugins;
+}
+
 ?>

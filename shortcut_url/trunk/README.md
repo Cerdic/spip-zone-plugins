@@ -15,6 +15,11 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+## 11 Oct 2015
+
+- Ajout d'une table bot pour cibler les robots (mise à jour de base)
+- Amélioration de la page des stats (Debug carte du monde et perf)
+
 ## 2 Oct 2015
 
 - Permettre de changer l'URL lors de la modification d'une URL existante
@@ -53,4 +58,4 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## A faire
 
-- Peaufiner les stats (debugger la carte du monde + perf)
+- Mettre des onglets sur la page des stats
