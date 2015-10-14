@@ -1,0 +1,16 @@
+[(#SET{pays,#ARRAY})]
+<BOUCLE_liste_shortcut_url_pays(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{id_shortcut_url}>
+	<BOUCLE_compte(SHORTCUT_URLS_LOGS){country_code}{id_shortcut_url}> </BOUCLE_compte>
+	[(#SET{total_pays,[(#TOTAL_BOUCLE)]})]
+	[(#SET{pays,[(#GET{pays}|array_merge{[(#ARRAY{#COUNTRY_CODE,[(#GET{total_pays})]})]})]})]
+	</B_compte>
+</BOUCLE_liste_shortcut_url_pays>
+<BOUCLE_comptetotal(SHORTCUT_URLS_LOGS){id_shortcut_url}> </BOUCLE_comptetotal>[(#SET{total,[(#TOTAL_BOUCLE)]})]</B_comptetotal>
+
+[<BOUCLE_liste_shortcut_url_pays_pie(DATA){source table,#GET{pays}}{!par valeur}{0,#ENV{limite,9}}{','}>
+	{
+		"label": "[(#CLE|=={''}|?{nc,#CLE})]",
+		"value": [(#VALEUR)],
+		"percent": [(#VALEUR|div{#GET{total}}|mult{100}|intval)]
+	}</BOUCLE_liste_shortcut_url_pays_pie>]
+#FILTRE{trim}
