@@ -72,7 +72,6 @@ function tooltip_jquery_plugins($plugins){
 	if(!function_exists('spip_version_compare') || spip_version_compare($f('jqueryui','version'),'1.10.1','<')){
 		$plugins[] = 'lib/delegate.js';
 		$plugins[] = 'lib/dimensions.js';
-		$plugins[] = 'demo/chili-1.7.pack.js';
 		$plugins[] = 'js/tooltip.js';
 	}
 	return $plugins;
