@@ -18,7 +18,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<necessite nom="organiseur" compatibilite="[0.6.1;[" />
+	<necessite nom="organiseur" compatibilite="[0.8.5;[" />
 
 	
 	<pipeline nom="messagerie_signer_message" inclure="messagerie_pipelines.php" />
