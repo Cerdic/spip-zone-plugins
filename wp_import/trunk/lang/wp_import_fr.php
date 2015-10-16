@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     "menage_explication" => "Avant d'importer faire un ménage par le vide : (supprimer les rubriques, documents, articles, mot-clés et auteurs). ATTENTION Ne pas cocher en prod ;) ",
 
     "documents_label" => "Documents",
-    "documents_explication" => "Importer les documents",
+    "documents_explication" => "Importer les documents. Si tu as accès à WORDPRESS/wp-content/uploads copie le répertoire dans SPIP/tmp/wordpress/uploads",
 
 
     'migration' => "Migration depuis Wordpress",

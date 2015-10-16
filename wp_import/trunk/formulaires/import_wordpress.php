@@ -286,8 +286,8 @@ function wp_import_import_wordpress()
                                     'mode' => 'document');
 
                                 $ajouter_un_document = charger_fonction('ajouter_un_document', 'action');
-                                //$id_document = $ajouter_un_document(0, $file, '', 0, 'document');
-                                //document_modifier($id_document, $data_document);
+                                $id_document = $ajouter_un_document(0, $file, '', 0, 'document');
+                                document_modifier($id_document, $data_document);
 
                                 $tab_document[basename($item['wp:attachment_url'][0])] = $id_document;
                                 break;
