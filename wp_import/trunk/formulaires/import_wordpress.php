@@ -311,7 +311,7 @@ function wp_import_import_wordpress()
                         break;
                     include_spip('action/editer_article');
                     foreach ($a as $item) {
-                        spip_log("post_type : ".$item['wp:post_type'][0], "wp_import" . _LOG_INFO_IMPORTANTE);
+                        spip_log("post_type : " . $item['wp:post_type'][0], "wp_import" . _LOG_INFO_IMPORTANTE);
                         switch ($item['wp:post_type'][0]) {
 
 
@@ -327,8 +327,8 @@ function wp_import_import_wordpress()
                                 if ($item['wp:status'][0] == 'publish') $statut = 'publie';
 
                                 // Sortir si NB_ARTICLES est défini
-                                if (defined('NB_ARTICLES') and $cpt_articles++ >20 )
-                                  break;
+                                if (defined('NB_ARTICLES') and $cpt_articles++ > 20)
+                                    break;
 
                                 $data_article = array(
                                     'titre' => $item['title'][0],
@@ -371,7 +371,7 @@ function wp_import_import_wordpress()
 
                         }
                     }
-                break;
+                    break;
             }
         }
     }
