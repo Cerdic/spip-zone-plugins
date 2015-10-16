@@ -11,5 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+define('_SPIP_SELECT_RUBRIQUES', 10000);
 
 ?>
