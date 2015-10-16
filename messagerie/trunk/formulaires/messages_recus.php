@@ -21,6 +21,21 @@ function formulaires_messages_recus_charger_dist($url_repondre=""){
 }
 
 
+function formulaires_messages_recus_verifier_dist($url_repondre=""){
+    $erreurs = array();
+    $liste = _request('selectionne');
+    $id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+    if (is_array($liste) && count($liste)) {
+        foreach ($liste as $id_mess){
+            if ( ! sql_fetsel('id_auteur', 'spip_auteurs_liens',array("id_auteur='$id_auteur'", "id_objet='$id_mess'", "objet='message'")) ) {
+                $erreurs['message_erreur'] = _T('erreur');
+            }    
+        }
+    }
+    return $erreurs;
+}
+
+
 /**
  * Traitement de la saisie de #FORMULAIRE_MESSAGES_RECUS
  *
