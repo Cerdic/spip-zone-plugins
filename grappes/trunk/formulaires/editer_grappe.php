@@ -47,5 +47,3 @@ function formulaires_editer_grappe_traiter_dist($id_grappe='new',$retour='', $co
 	return formulaires_editer_objet_traiter('grappe',$id_grappe,'','',$retour,$config_fonc,$row,$hidden);
 }
 
-
-?>

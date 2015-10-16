@@ -45,7 +45,7 @@
 		wysiwyg=1} />
 </div>
 
-#SET{tables_liees,#LIAISONS|explode{','}|sinon{#ARRAY}}
+#SET{tables_liees,#LIAISONS|explode{','}|sinon{#ARRAY}|array_filter}
 #SET{tables_liees,#VAL{objet_type}|array_map{#GET{tables_liees}}}
 <BOUCLE_types(GRAPPES_LIENS){id_grappe}>
 [(#OBJET|objet_type|in_array{#GET{tables_liees}}|non)

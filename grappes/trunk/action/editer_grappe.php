@@ -73,11 +73,11 @@ function grappe_inserer() {
  * @return string
  */
 function grappe_modifier($id_grappe, $set=false) {
-	
+
 	include_spip('inc/modifier');
-	
-	$c = $opt = array();
-	
+
+	$opt = array();
+
 	$c = collecter_requests(
 		// white list
 		objet_info('grappe','champs_editables'),
@@ -86,17 +86,21 @@ function grappe_modifier($id_grappe, $set=false) {
 		// donnees eventuellement fournies
 		$set
 	);
+
+
+	if (isset($c['acces'])) {
+		$opt['acces'] = $c['acces'];
+		unset($c['acces'], $set['acces']);
+	}
 	
-	$opt['acces'] = $c['acces'];
-	if(isset($c['acces']))
-		unset($c['acces'],$set['acces']);
 	$c['options'] = serialize($opt);
-	
-	if (is_array($c['liaisons']))
-		$c['liaisons'] = implode(',',$c['liaisons']);
-	
+
+	if (is_array($c['liaisons'])) {
+		$c['liaisons'] = implode(',', $c['liaisons']);
+	}
+
 	$invalideur = "id='grappe/$id_grappe'";
-	
+
 	if ($err = objet_modifier_champs('grappe', $id_grappe,
 		array(
 			'nonvide' => array('titre' => _T('info_sans_titre')),
@@ -106,11 +110,14 @@ function grappe_modifier($id_grappe, $set=false) {
 		return $err;
 
 	// Modification de la date ?
-	$c = collecter_requests(array('date'),array(''),$set);
-	if(isset($c['liaisons']))
+	$c = collecter_requests(array('date'), array(), $set);
+
+	if (isset($c['liaisons'])) {
 		unset($c['liaisons']);
+	}
+
 	include_spip('action/editer_objet');
-	$err = objet_instituer('grappe',$id_grappe, $c);
+	$err = objet_instituer('grappe', $id_grappe, $c);
 
 	return $err;
 }
@@ -136,7 +143,7 @@ function grappe_instituer($id_grappe, $c, $calcul_rub=true){
 	);
 
 	if (!count($c)) return;
-	
+
 	// Envoyer les modifs.
 	sql_updateq('spip_grappes', $c, "id_grappe=$id_grappe");
 
@@ -155,4 +162,3 @@ function grappe_instituer($id_grappe, $c, $calcul_rub=true){
 	return ''; // pas d'erreur
 }
 
-?>

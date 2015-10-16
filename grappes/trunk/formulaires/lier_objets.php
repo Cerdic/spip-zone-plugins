@@ -27,6 +27,8 @@ function formulaires_lier_objets_charger($objet, $source, $id_source, $identifia
 }
 
 function formulaires_lier_objets_verifier($objet, $source, $id_source, $identifiant){
+	$erreurs = array();
+
 	// si pas d'id, le selecteur generique n'a pas fonctionne
 	// on fait comment alors ??
 	if (!_request('pid_objet')) {
@@ -44,4 +46,3 @@ function formulaires_lier_objets_traiter($objet, $source, $id_source, $identifia
 	return array(true,''); // permettre d'editer encore le formulaire
 }
 
-?>

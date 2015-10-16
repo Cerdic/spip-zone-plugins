@@ -1,13 +1,13 @@
 <paquet
 	prefix="grappes"
 	categorie="divers"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
 	schema="0.2.4"
 	documentation="http://contrib.spip.net/4282"
->	
+>
 
 	<nom>Grappes</nom>
 	<!-- Regrouper des objets Spip dans un même univers -->
