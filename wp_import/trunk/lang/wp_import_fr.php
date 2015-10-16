@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     "document_xml_explication" => "Nom du fichier xml exporté depuis Wordpress à placer dans le repertoire tmp de votre site SPIP" ,
     "document_xml_label" => "fichier xml" ,
 
-    "id_rubrique_label" => "N° rubrique",
-    "id_rubrique_explication" => "Le Numéro de la rubrique qui recevra les articles créés ",
+    "id_parent_label" => "N° rubrique",
+    "id_parent_explication" => "Le Numéro de la rubrique qui recevra les articles créés ",
 
     "auteurs_label" => "Auteurs ? ",
     "auteurs_explication" => "Importer les auteurs ",
@@ -27,12 +27,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     "articles_label" => "Articles ? ",
     "articles_explication" => "Importer les articles",
 
-    "_label" => "",
-    "_explication" => "",
+    "motcle_label" => "Mots-clés",
+    "motcle_explication" => "Importer les mots-clés",
 
 
     "menage_label" => "Ménage",
-    "menage_explication" => "Avant d'importer faire un ménage par le vide : (supprimer les rubriques, documents, articles et auteurs)",
+    "menage_explication" => "Avant d'importer faire un ménage par le vide : (supprimer les rubriques, documents, articles, mot-clés et auteurs). ATTENTION Ne pas cocher en prod ;) ",
+
+    "documents_label" => "Documents",
+    "documents_explication" => "Importer les documents",
 
 
     'migration' => "Migration depuis Wordpress",

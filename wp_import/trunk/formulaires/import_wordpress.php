@@ -1,5 +1,7 @@
 <?php
 
+// A utiliser en DEV pour importer uniquement les NB_ARTICLES
+// define("NB_ARTICLES", 20);
 
 function formulaires_import_wordpress_charger()
 {
@@ -43,6 +45,13 @@ function formulaires_import_wordpress_charger()
                     'nom' => 'rubriques',
                     'label' => _T('wp_import:rubriques_label'),
                     'explication' => _T('wp_import:rubriques_explication')
+                )),
+            array(
+                'saisie' => 'case',
+                'options' => array(
+                    'nom' => 'motcle',
+                    'label' => _T('wp_import:motcle_label'),
+                    'explication' => _T('wp_import:motcle_explication')
                 )),
             array(
                 'saisie' => 'case',
@@ -129,14 +138,15 @@ function wp_import_import_wordpress()
         $menage = _request('menage');
         if ($menage) {
             spip_log("Vidage des tables ", "wp_import" . _LOG_INFO_IMPORTANTE);
-            spip_query("DELETE FROM   'spip_documents' ");
+            spip_query("DELETE FROM  'spip_documents' ");
             spip_query("DELETE FROM  'spip_documents_liens' ");
             spip_query("DELETE FROM  'spip_articles' ");
             spip_query("DELETE FROM  'spip_rubriques' ");
             spip_query("DELETE FROM  'spip_rubriques_liens'");
-            spip_query('DELETE FROM spip_auteurs where id_auteur>1 ');
+            spip_query('DELETE FROM  spip_auteurs where id_auteur>1 ');
             spip_query("DELETE FROM  'spip_auteurs_liens' ");
-            spip_query('ALTER TABLE `spip_auteurs` AUTO_INCREMENT =1');
+            spip_query("DELETE FROM  'spip_mots' ");
+            spip_query("DELETE FROM  'spip_groupes_mots' ");
         } else {
             spip_log("Pas de ménage", "wp_import" . _LOG_INFO_IMPORTANTE);
         }
@@ -148,8 +158,10 @@ function wp_import_import_wordpress()
         $cpt_articles = 0;
 
         foreach ($arbre as $type => $a) {
+            spip_log("Type : $type  ", "wp_import" . _LOG_INFO_IMPORTANTE);
 
             switch ($type) {
+
                 // Importation des auteurs
                 case "wp:author":
                     //sortir de suite si l'on n'a pas coché l'importation des auteurs
@@ -172,25 +184,57 @@ function wp_import_import_wordpress()
 
                     }
                     break;
+
                 case "wp:term":
-                    //var_dump($a);print_r('<br/>');
+                    //sortir de suite si l'on n'a pas coché l'importation des rubriques
+                    if (!_request("motcle"))
+                        break;
+                    include_spip("action/editer_mot");
+                    include_spip("action/editer_groupe_mots");
+                    include_spip("action/editer_objet");
+
+                    foreach ($a as &$term) {
+
+                        $id_groupe = 0;
+                        $titre_groupe = $term['wp:term_taxonomy'][0];
+                        if ($sql_groupe_mot = sql_fetsel('id_groupe', "spip_groupes_mots", "titre=" . sql_quote($titre_groupe))) {
+                            $id_groupe = $sql_groupe_mot['id_groupe'];
+                        } else {
+                            //Création du groupe de mot
+                            $data = array('titre' => $titre_groupe);
+                            //$id_groupe = groupe_mots_inserer( $data);
+                            $id_groupe = objet_inserer("groupe_mots");
+                            groupe_mots_modifier($id_groupe, $data);
+                            spip_log("Création groupe_mot $id_groupe ( $titre_groupe)  ", "wp_import" . _LOG_INFO_IMPORTANTE);
+                        }
+
+                        //Création du mot
+                        $data = array(
+                            'titre' => twp($term['wp:term_name'][0]),
+                            'id_groupe' => $id_groupe);
+
+                        $id_mot = mot_inserer($id_groupe);
+                        mot_modifier($id_mot, $data);
+                        spip_log("Création mot $id_mot (" . twp($term['wp:term_name'][0]) . ")  ", "wp_import" . _LOG_INFO_IMPORTANTE);
+
+                    }
                     break;
 
-                // Importation des rubriques
 
-                case "wp:category":
+                // Importation des rubriques
+                case
+                "wp:category":
                     //sortir de suite si l'on n'a pas coché l'importation des rubriques
                     if (!_request("rubriques"))
                         break;
                     include_spip('action/editer_rubrique');
                     $id_parent_rubrique = _request("id_parent");
-
                     foreach ($a as &$cat) {
                         $data_rub = array(
                             'titre' => twp($cat['wp:cat_name'][0]),
                             'id_parent' => "$id_parent_rubrique");
                         $id_rub = rubrique_inserer($id_parent_rubrique);
-                        spip_log("Création rubrique $id_rub (id_parent : $id_parent_rubrique) ", "wp_import" . _LOG_INFO_IMPORTANTE);
+                        spip_log("Création rubrique $id_rub (id_parent : $id_parent_rubrique) (" . twp($cat['wp:cat_name'][0]) . ") ", "wp_import" . _LOG_INFO_IMPORTANTE);
                         $cat["id"] = $id_rub;
                         $tab_cat[$cat['wp:category_nicename'][0]] = $id_rub;
                         rubrique_modifier($id_rub, $data_rub);
@@ -209,7 +253,7 @@ function wp_import_import_wordpress()
                 // Importation des articles et documents
 
                 case "item":
-                    //sortir de suite si l'on n'a pas coché l'importation des articles
+                    //sortir de suite si l'on n'a pas coché l'importation des documents
                     if (!_request("documents"))
                         break;
                     include_spip('action/editer_article');
@@ -258,6 +302,7 @@ function wp_import_import_wordpress()
 
 
         foreach ($arbre as $type => $a) {
+            spip_log("Type : $type  ", "wp_import" . _LOG_INFO_IMPORTANTE);
             switch ($type) {
 
                 case "item":
@@ -266,13 +311,24 @@ function wp_import_import_wordpress()
                         break;
                     include_spip('action/editer_article');
                     foreach ($a as $item) {
+                        spip_log("post_type : ".$item['wp:post_type'][0], "wp_import" . _LOG_INFO_IMPORTANTE);
                         switch ($item['wp:post_type'][0]) {
-                            case "page":
+
+
+                            case "accueil":
+                            case "agenda":
+                            case 'attachment':
+                            case 'faqs':
+                            case 'mediatheque':
+                            case 'nav_menu_item':
+                            case 'page':
                             case 'post':
                                 $statut = 'publie';
                                 if ($item['wp:status'][0] == 'publish') $statut = 'publie';
-                                if ($item['wp:post_id'][0] != 2882)
-                                    break;
+
+                                // Sortir si NB_ARTICLES est défini
+                                if (defined('NB_ARTICLES') and $cpt_articles++ >20 )
+                                  break;
 
                                 $data_article = array(
                                     'titre' => $item['title'][0],
@@ -315,13 +371,13 @@ function wp_import_import_wordpress()
 
                         }
                     }
-
-                    break;
+                break;
             }
         }
-        if (empty($erreurs))
-            $message = "Le contenu de votre site Wordpress a bien été importé";
     }
+    if (empty($erreurs))
+        $message = "Le contenu de votre site Wordpress a bien été importé";
+
 
     return array($message, $erreurs);
 }
