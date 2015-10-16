@@ -43,18 +43,18 @@
 	<pipeline nom="jqueryui_plugins" inclure="diogene_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.14.0;[" />
-	<necessite nom="images" />
-	<necessite nom="mediabox" />
+	<necessite nom="images" compatibilite="[1.1.1;[" />
+	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
 	<!-- Pour le fichier inc/date_gestion.php -->
-	<necessite nom="organiseur" />
+	<necessite nom="organiseur" compatibilite="[0.8.5;[" />
 
-	<utilise nom="menus" />
-	<utilise nom="polyhier" />
-	<utilise nom="medias" />
-	<utilise nom="cextras" />
-	<utilise nom="iextras" />
-	<utilise nom="pages" />
-	<utilise nom="Z" />
+	<utilise nom="menus" compatibilite="[0.9.4;[" />
+	<utilise nom="polyhier" compatibilite="[2.0.1;[" />
+	<utilise nom="medias" compatibilite="[2.7.27;[" />
+	<utilise nom="cextras" compatibilite="[2.0.0;[" />
+	<utilise nom="iextras" compatibilite="[2.0.0;[" />
+	<utilise nom="pages" compatibilite="[1.0.0;[" />
+	<utilise nom="Z" compatibilite="[1.7.14;[" />
 
 	<menu nom="diogenes" titre="diogene:bouton_editer_diogene" parent="menu_edition" icone="images/diogene-16.png" action="diogenes" />
 </paquet>
