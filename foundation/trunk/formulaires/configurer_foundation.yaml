@@ -6,9 +6,9 @@
     explication: <:foundation:version_explication:>
     datas:
       0: <:foundation:desactiver:>
-      3: <:foundation:3:>
-      4: <:foundation:4:>
-      5: <:foundation:5:>
+      3: <:foundation:foundation_3:>
+      4: <:foundation:foundation_4:>
+      5: <:foundation:foundation_5:>
 -
   saisie: oui_non
   options:
