@@ -59,29 +59,30 @@ href="[(#SELF|parametre_url{var_mode,css})]"><:minibando:mode_css:></a></li>]
 </ul></div>
 
 <script type="text/javascript">
-	$(function ($) {
-		var li_deroulants = $('#minibando > li');
+;if (window.jQuery)
+(function($) {
+	var li_deroulants = jQuery('#minibando > li');
 
-		function afficherSousMenu (lien) {
-			li_deroulants.removeClass('afficher');
-			$(lien).parents('#minibando > li').addClass('afficher');
-		}
+	function afficherSousMenu (lien) {
+		li_deroulants.removeClass('afficher');
+		jQuery$(lien).parents('#minibando > li').addClass('afficher');
+	}
 
-		function masquerSousMenu (lien) {
-			$(lien).parents('#minibando > li').removeClass('afficher');
-		}
+	function masquerSousMenu (lien) {
+		jQuery(lien).parents('#minibando > li').removeClass('afficher');
+	}
 
-		$('#minibando a')
-			.focusin(function () {
-				afficherSousMenu(this);
-			})
-			.focusout(function () {
-				masquerSousMenu(this);
-			})
-			.hover(function () {
-				afficherSousMenu(this);
-			}, function () {
-				masquerSousMenu(this);
-			});
-	});
+	jQuery('#minibando a')
+		.focusin(function () {
+			afficherSousMenu(this);
+		})
+		.focusout(function () {
+			masquerSousMenu(this);
+		})
+		.hover(function () {
+			afficherSousMenu(this);
+		}, function () {
+			masquerSousMenu(this);
+		});
+})(jQuery);
 </script>
