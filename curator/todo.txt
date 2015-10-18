@@ -1,0 +1,7 @@
+Configuration :
+
+- proposer le choix du groupe de mot clé pour les tags
+
+- proposer une rubrique racine pour ne pas lister toute l'arbo du site mais juste une branche "veille" par exemple
+
+- proposer une config pour ajouter ses notes dans le champ PS / DESCRIPTION / CHAPO, au choix
