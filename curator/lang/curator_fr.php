@@ -7,6 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'curator_titre' => 'curator',
+	
+	// T
+	'titre_page_configurer_curator' => 'Configurer'
+	
 );
 
 ?>
