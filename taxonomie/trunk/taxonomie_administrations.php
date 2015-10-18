@@ -55,6 +55,7 @@ function taxonomie_vider_tables($nom_meta_base_version) {
 
 	// Effacer la meta de configuration du plugin
 	effacer_meta('taxonomie');
+	// todo : supprimer les meta des règnes
 
 	effacer_meta($nom_meta_base_version);
 }

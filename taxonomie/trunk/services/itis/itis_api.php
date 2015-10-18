@@ -22,7 +22,7 @@ if (!defined('_TAXONOMIE_ITIS_LANGUE_DEFAUT'))
 	/**
 	 * Langue par défaut pour les api utilisant des noms communs
 	 */
-	define('_TAXONOMIE_ITIS_LANGUE_DEFAUT', 'english');
+	define('_TAXONOMIE_ITIS_LANGUE_DEFAUT', 'en');
 
 if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 	/**
@@ -36,7 +36,11 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 /**
  * Configuration de l'api du service web ITIS
  */
-$itis_webservice = array(
+$GLOBALS['itis_language'] = array(
+	'fr' => 'french',
+	'en' => 'english',
+);
+$GLOBALS['itis_webservice'] = array(
 	'search' => array(
 		'commonname' => array(
 			'function' => 'searchByCommonName',
@@ -473,16 +477,40 @@ function itis_api2url($format, $area, $api, $key) {
  * @return string
  */
 function itis_code2language($language_code) {
-	static $itis_languages = array(
-		'fr' => 'french',
-		'en' => 'english');
+	global $itis_language;
 
-	$language = _TAXONOMIE_ITIS_LANGUE_DEFAUT;
-	if (array_key_exists($language_code,  $itis_languages)) {
-		$language = $itis_languages[$language_code];
+	$language = $itis_language[_TAXONOMIE_ITIS_LANGUE_DEFAUT];
+	if (array_key_exists($language_code,  $itis_language)) {
+		$language = $itis_language[$language_code];
 	}
 
 	return $language;
+}
 
+
+function itis_list_sha() {
+	global $itis_language;
+	$shas = array();
+
+	include_spip('inc/taxonomer');
+	$kingdoms = lister_regnes();
+
+	foreach ($kingdoms as $_kingdom) {
+		$file = find_in_path('services/itis/' . ucfirst($_kingdom) . '_Genus.txt');
+		if (file_exists($file)
+		AND ($sha_file = sha1_file($file))) {
+			$shas['taxons'][$_kingdom] = $sha_file;
+		}
+	}
+
+	foreach (array_keys($itis_language) as $_language_code) {
+		$file = find_in_path("services/itis/vernaculars_${_language_code}.csv");
+		if (file_exists($file)
+		AND ($sha_file = sha1_file($file))) {
+			$shas['traductions'][$_language_code] = $sha_file;
+		}
+	}
+
+	return $shas;
 }
 ?>

@@ -1,13 +1,13 @@
+50,bactéries
 601,cyanophytes
 1447,chrysophycophytes
 1882,"algues vert-jaunes"
-2286,diatomées
+2287,diatomées
 5413,"algues vertes"
 5414,"algues vertes"
 9601,euglènes
 9873,dinoflagellés
 10685,"algues brunes"
-11452,"algues rouges"
 13762,myxomycètes
 14189,hépatiques
 14189,mousses
@@ -204,14 +204,14 @@
 36636,"hélianthe à feuilles étalées"
 37724,"épervière de Robinson"
 38895,"alisma subcorde"
-38907,"sagittaire à feuilles de graminées"
 38907,"Sagittaire a feuilles de graminees"
+38907,"sagittaire à feuilles de graminées"
 38908,"sagittaire latifoliée"
-38917,"sagittaire cunéaire"
 38917,"Sagittaria cuneaire"
+38917,"sagittaire cunéaire"
 38925,"Sagittaire spongieuse"
-38928,"sagittaire dressée"
 38928,"Sagittaire dressee"
+38928,"sagittaire dressée"
 38987,troscart
 38988,"troscart maritime"
 38998,"naïade de la Guadeloupe"
@@ -288,8 +288,8 @@
 51483,méduses
 51938,"anémones de mer"
 51938,coraux
-52079,"évantails de mer"
 52079,gorgones
+52079,"évantails de mer"
 52485,actinies
 52485,anémones
 52839,madrépores
@@ -342,8 +342,8 @@
 93294,amphipodes
 95599,crabes
 95599,crevettes
-95599,écrevisses
 95599,homards
+95599,écrevisses
 95601,"crevettes pénaéïdes"
 95602,"crevettes pénaéïdes"
 95625,"crevette tigrée brune"
@@ -764,8 +764,8 @@
 118728,"porte-case du pacanier"
 118729,"porte-case virgule du pommier"
 118730,"porte-case du cerisier"
-118731,"porte-case fusele du pommier"
 118731,"porte-case du bouleau"
+118731,"porte-case fusele du pommier"
 118816,"mineuse des bourgeons de l'érable"
 118822,"coupe-feuille de l'érable"
 118840,tipules
@@ -871,8 +871,8 @@
 149893,"mouche des semis"
 149916,"mouche du chou"
 150025,"mouches communes"
-150025,"mouches des cornes"
 150025,"mouches d'étables"
+150025,"mouches des cornes"
 150025,"mouches faciales"
 150025,"mouches tsé-tsé"
 150045,"muscine des étables"
@@ -978,8 +978,8 @@
 156755,brachiopodes
 156857,échinodermes
 156858,astéridés
-156862,"étoiles de mer"
 156862,stelléridés
+156862,"étoiles de mer"
 157325,ophiures
 157821,"châtaignes de mer"
 157821,clypéastres
@@ -1003,8 +1003,8 @@
 159722,"lamproie marine"
 159724,"lamproie de l'Ohio"
 159725,"lamproie brune"
-159726,"lamproie du nord"
 159726,"lamproie de ruisseau septentrionale"
+159726,"lamproie du nord"
 159727,"lamproie de ruisseau méridionale"
 159728,"lamproie de ruisseau d'Allegheny"
 159730,"lamproie argentée"
@@ -1029,8 +1029,8 @@
 159805,"requin dormeur chabot"
 159811,requins-lézards
 159814,grisets
-159854,requins-baleines
 159854,"requins baleine"
+159854,requins-baleines
 159857,"requin baleine"
 159870,"requin-tapis savetier"
 159872,"requin-tapis cordonnier"
@@ -1153,8 +1153,8 @@
 161997,"truite brune"
 162001,"omble chevalier"
 162002,touladi
-162003,"omble de fontaine"
 162003,"omble aurora"
+162003,"omble de fontaine"
 162008,"ménomini rond"
 162016,"ombre arctique"
 162024,huchon
@@ -1215,8 +1215,8 @@
 162848,charicidés
 162848,tétras
 163308,poissons-couteaux
-163342,"carpes et ménés"
 163342,carpes
+163342,"carpes et ménés"
 163342,ménés
 163344,carpe
 163348,tanche
@@ -1228,8 +1228,8 @@
 163368,"méné jaune"
 163375,ouitouche
 163376,"mulet à cornes"
-163382,"naseux noir de l'est"
 163382,"naseux noir"
+163382,"naseux noir de l'est"
 163384,"naseux des rapides"
 163402,"méné d'herbe"
 163404,"queue à tache noire"
@@ -1259,8 +1259,8 @@
 163947,"chevalier jaune"
 163976,loches
 163992,silures
-163995,"barbottes et barbues"
 163995,barbottes
+163995,"barbottes et barbues"
 163995,barbues
 163998,"barbue de rivière"
 164003,"chat-fou brun"
@@ -1303,8 +1303,8 @@
 164694,varlets
 164697,"bregmacère de l'oceán Indien"
 164701,morues
-164706,"saïda franc"
 164706,"saida franc"
+164706,"saïda franc"
 164711,"morue du Pacifique"
 164712,"morue de l'Atlantique"
 164712,"morue franche"
@@ -1312,8 +1312,8 @@
 164717,ogac
 164720,"poulamon atlantique"
 164725,lotte
-164727,"lieu noir"
 164727,goberge
+164727,"lieu noir"
 164728,"lieu jaune"
 164730,merluche-écureuil
 164732,"merluche blanche"
@@ -1396,9 +1396,9 @@
 167185,chabots
 167188,"icèle à deux cornes"
 167192,"icèle spatulée"
+167196,chabots
 167196,"chabots de mer"
 167196,"scorpions de mer"
-167196,chabots
 167207,"hameçon neigeux"
 167208,"hameçon atlantique"
 167232,"chabot visqueux"
@@ -1524,9 +1524,9 @@
 171123,blennidés
 171124,blennidés
 171124,blennies
+171124,"blennies à dents de peigne"
 171124,gonelles
 171124,"papillons de mer"
-171124,"blennies à dents de peigne"
 171335,poissons-loups
 171341,"loup atlantique"
 171342,"loup tacheté"
@@ -1580,8 +1580,8 @@
 172412,"maquereau Espagnol"
 172412,"maquereau blanc"
 172413,"maquereau blanc"
-172414,"maquereau commun"
 172414,"maquereau bleu"
+172414,"maquereau commun"
 172415,"maquereau tacheté"
 172419,germon
 172421,"thon rouge"
@@ -1721,8 +1721,8 @@
 174505,"Grèbe à bec bigarré"
 174508,"Grèbe minime"
 174512,albatros
-174512,tubinares
 174512,pétrels
+174512,tubinares
 174513,albatros
 174521,"albatros à nez jaune"
 174525,"Albatros hurleur"
@@ -1774,9 +1774,9 @@
 174650,"Océanite de Wilson"
 174655,"Océanite à ventre noir"
 174663,"Océanite tempête"
-174670,pélicans
-174670,ibis
 174670,hérons
+174670,ibis
+174670,pélicans
 174673,"Phaéton à bec rouge"
 174676,"Phaéton à bec jaune"
 174679,"Phaéton à brins rouges"
@@ -1811,8 +1811,8 @@
 174822,"Aigrette à gorge blanche"
 174824,"Aigrette roussâtre"
 174826,"Aigrette tricolore"
-174827,"aigrette bleu"
 174827,"Aigrette bleue"
+174827,"aigrette bleu"
 174832,"Bihoreau gris"
 174842,"Bihoreau violacé"
 174846,"Petit Blongios"
@@ -1837,8 +1837,8 @@
 174941,"Spatule rosée"
 174965,"Ibis mandore"
 174967,"Ibis vert"
-174976,"flamant rose"
 174976,"Flamant des Caraïbes"
+174976,"flamant rose"
 174982,canards
 174982,cygnes
 174982,oies
@@ -1959,8 +1959,8 @@
 175597,"Caracara de Guadalupe"
 175599,"Faucon gerfaut"
 175603,"Faucon des prairies"
-175604,"faucon pélerin"
 175604,"Faucon pèlerin"
+175604,"faucon pélerin"
 175610,"Faucon aplomado"
 175613,"Faucon émerillon"
 175620,"Faucon crécerelle"
@@ -2000,8 +2000,8 @@
 176280,"talève violacée"
 176284,"gallinule poule-d'eau"
 176292,"foulque d'Amérique"
-176445,goélands
 176445,alcidés
+176445,goélands
 176445,huîtriers
 176449,"Jacana du Mexique"
 176467,huîtriers
@@ -2011,8 +2011,8 @@
 176481,"Vanneau huppé"
 176484,"Vanneau téro"
 176504,"Pluvier grand-gravelot"
-176506,"pluvier à semipalmé"
 176506,"Pluvier semipalmé"
+176506,"pluvier à semipalmé"
 176507,"Pluvier siffleur"
 176514,"Pluvier de Mongolie"
 176517,"Pluvier de Wilson"
@@ -2023,8 +2023,8 @@
 176532,"Pluvier de Leschenault"
 176545,"Pluvier guignard"
 176561,"Pluvier doré"
-176564,"pluvier doré d'Amérique"
 176564,"Pluvier bronzé"
+176564,"pluvier doré d'Amérique"
 176567,"Pluvier argenté"
 176568,bécasseaux
 176571,"Tournepierre à collier"
@@ -2081,8 +2081,8 @@
 176687,"Barge rousse"
 176690,"Barge hudsonienne"
 176691,"Barge à queue noire"
-176695,"combatant varié"
 176695,"Combattant varié"
+176695,"combatant varié"
 176697,"Bécasseau spatule"
 176700,"Bécassine des marais"
 176709,"Bécassine solitaire"
@@ -2158,8 +2158,8 @@
 176971,"Petit Pingouin"
 176974,"Guillemot marmette"
 176978,"Guillemot de Brünnich"
-176982,"mergule main"
 176982,"Mergule nain"
+176982,"mergule main"
 176985,"Guillemot à miroir"
 176991,"Guillemot colombin"
 176996,"Guillemot marbré"
@@ -2443,7 +2443,7 @@
 180195,"tamia mineur"
 180207,"tamia rayé"
 180212,castor
-180273,rats
+180273,Rats
 180273,souris
 180276,"souris sylvestre"
 180278,"souris à pattes blanches"
@@ -2488,8 +2488,8 @@
 180539,carnivores
 180542,"ours blanc"
 180544,"ours noir"
-180549,"loutre de rivière"
 180549,"loutre de Canada"
+180549,"loutre de rivière"
 180551,carcajou
 180553,"vison d'Amérique"
 180554,"belette pygmée"
@@ -2525,6 +2525,9 @@
 182441,"alisma commun"
 182451,"sagittaire à grand calice variété spongieuse"
 182561,belle-angélique
+182653,"aloès amer"
+182653,"aloès vulgaire"
+182653,mazambron
 183376,"pin rigide"
 183480,"ciprés Monterrey"
 183608,"busserole rouge"
@@ -2715,7 +2718,6 @@
 202070,"soles américaines"
 202222,"Grèbe de l'Atitlan"
 202392,couguar
-202421,bactéries
 202422,plantes
 202423,animaux
 203347,ascidies
@@ -2733,8 +2735,8 @@
 331030,vertébrés
 501018,"botryche champêtre"
 501018,"botryche des champs"
-501029,"botryche à limbe rugueux"
 501029,"botryche du St. Laurent"
+501029,"botryche à limbe rugueux"
 501231,"carex de Host"
 501453,"chamésyce à feuilles de renouée"
 502246,"élodée de Nuttall"
@@ -2749,11 +2751,13 @@
 505490,"cèdre-thuya occidental"
 505490,"thuier cèdre"
 505587,"troscart de la Gaspésie"
+505879,"aloès arborescent"
+505880,"aloès du Cap"
 506500,abaca
 506728,"coco de mer"
 506848,"botryche pâle"
-506849,"botryche à segments spatulés"
 506849,"botryche spatulé"
+506849,"botryche à segments spatulés"
 509285,"aster du Saint-Laurent"
 510028,"doradille ambulante"
 511979,"souchet d'Engelmann"
@@ -3078,8 +3082,8 @@
 824147,"Chevalier semipalmé"
 846105,"aiguillat à grosse tête"
 846504,phanérogames
-846505,"plantes à fleurs"
 846505,angiospermes
+846505,"plantes à fleurs"
 846505,"plantes à fruits"
 846506,gymnospermes
 846542,monocotylédones
@@ -3172,3 +3176,14 @@
 950104,"Paruline de Lucy"
 950106,"Paruline à joues grises"
 950108,"Paruline de Virginia"
+950573,"ananas marron"
+950581,"mazambron marron"
+950581,"mazambron sauvage"
+950701,"Socotrine du pays"
+950701,"mazambron marron"
+950701,"mazambron sauvage"
+950823,"aloès tacheté"
+950823,"aloès zébré"
+950823,"bec de perroquet"
+950823,"gorge de perdrix"
+956108,cyanophytes

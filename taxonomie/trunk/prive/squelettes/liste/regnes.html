@@ -43,7 +43,7 @@ Les parametres d'environnement specifiques sont :
 					[(#SET{rang_mini, [(#VAL{taxonomie:rang_}|concat{#GET{meta_regne/rang}}|_T)]})]
 					<ul>
 						<li>[(#VAL{taxonomie:info_regne_compteur_taxons}|_T{#ARRAY{nb, #GET{meta_regne/compteur}, rang, #GET{rang_mini}}})]</li>
-					<BOUCLE_traductions(DATA) {source table, #GET{meta_regne/langues}}>
+					<BOUCLE_traductions(DATA) {source table, #GET{meta_regne/traductions/itis}}>
 						#SET{nb, #VALEUR|table_valeur{compteur}}
 						<li><:taxonomie:info_regne_compteur_traductions{nb=#GET{nb}, langue=#CLE}:></li>
 					</BOUCLE_traductions>

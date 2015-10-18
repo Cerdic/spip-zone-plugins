@@ -21,5 +21,7 @@
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
 
+    <genie nom="actualiser_itis" periode="86400" />
+
 	<menu nom="taxonomie" titre="taxonomie:bouton_taxonomie" parent="menu_edition" icone="images/taxon-16.png" action="taxonomie" />
 </paquet>
