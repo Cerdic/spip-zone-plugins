@@ -18,7 +18,8 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="curator_autorisations.php" />
-
+	<pipeline nom="insert_head_css" inclure="curator_pipelines.php"/>
+	
 	<necessite nom="etiquettes" compatibilite="[2.2.0;]" />
 
 </paquet>

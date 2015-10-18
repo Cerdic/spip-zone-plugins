@@ -1,14 +1,29 @@
-<html>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta name="viewport" content="width=device-width" />
+	[<link rel="stylesheet" href="(#CHEMIN{css/reset.css}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/font.css}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/typo.css}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/form.css}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/clear.css}|direction_css)" type="text/css" />]
+	#INSERT_HEAD_CSS
 	#INSERT_HEAD
+	[<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+	<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+	[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />
+	[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />]]
 </head>
-[(#SESSION{en_ligne}|oui)
-
-	#FORMULAIRE_SHARE{env}
-]
-[(#SESSION{en_ligne}|non)
-	#LOGIN_PUBLIC
-]
+<body class="page_share">
+	<div class="page">
+	[(#SESSION{en_ligne}|oui)
+		#FORMULAIRE_SHARE{env}
+	]
+	[(#SESSION{en_ligne}|non)
+		#LOGIN_PUBLIC
+	]
+	</div>
 </body>
 </html>

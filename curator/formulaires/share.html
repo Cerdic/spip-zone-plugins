@@ -1,27 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
-<head>
-
-[(#REM)
-	Head standard de toutes les pages ; les elements specifiques
-	(title, description) figurent dans les fichiers du dossier head/
-]
-[(#REM) Preciser le charset ]
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-
-[(#REM) Feuille de style par defaut pour les formulaires de SPIP ]
-[<link rel="stylesheet" href="(#CHEMIN{form.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
-
-[(#REM) Feuille de style personnalisee pour surcharger les precedentes
-	A noter par defaut cette css n'existe pas
-]
-[<link rel="stylesheet" href="(#CHEMIN{perso.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
-
-[<link rel="stylesheet" href="(#CHEMIN{css/curator.css})" type="text/css" media="projection, screen, tv" />]
-
-
-
-<body>
 
 <div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{id_article,nouveau}">
 <form action='#ENV{action}' method='post'>
@@ -61,5 +37,3 @@
 </form>
 </div>
 
-</body>
-</html>
