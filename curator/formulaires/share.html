@@ -55,7 +55,9 @@
 		
 		<label for="text_area"><:info_post_scriptum:><em class="aide">#AIDER{text_area}</em></label>
 		<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{texte})]</textarea>
-		
+
+		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags}
+	
 		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
 </form>
 </div>

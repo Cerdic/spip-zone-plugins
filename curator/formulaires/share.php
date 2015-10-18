@@ -1,4 +1,5 @@
-<? 
+<?php
+
 	function formulaires_share_charger_dist($titre,$nom_site,$url_site,$texte,$id_parent,$date,$auteur,$ps){
 		$valeurs = array('titre'=>$titre,'nom_site'=>$nom_site,'url_site'=>$url_site,'texte'=>$texte,'id_parent'=>'1',$date=>'',$auteur=>'',$ps=>'');
 		
@@ -26,11 +27,13 @@
 		                    'texte'=>$texte, 'statut'=>'publie', 'id_secteur'=>$id_parent,
 		                    'nom_site'=>$nom_site, 'url_site'=>$url_site, 'date'=>$date,'ps'=>$ps,'lang'=>$lang));
 		// gestion auteur            
-		sql_insertq( 'spip_auteurs_liens', array('id_auteur'=>$auteur, 'id_objet'=>$id_article, 'objet'=>'article')); 
+		sql_insertq( 'spip_auteurs_liens', array('id_auteur'=>$auteur, 'id_objet'=>$id_article, 'objet'=>'article'));
+
+		// ajout des mots clés
+		$etiquettes = _request('tags');
+		include_spip('inc/tag-machine');
+		ajouter_mots($etiquettes, $id_article, 'tags', 'articles', 'id_article');
+		
 		echo '<script language="JavaScript">self.close();</script>';
 		exit;               
 	}
-
- ?>
- 
- 
