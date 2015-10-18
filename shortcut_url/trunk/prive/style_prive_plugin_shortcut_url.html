@@ -26,11 +26,11 @@ path{
 	stroke:#GET{claire};
 }
 <BOUCLE_data(DATA){liste 1,2,3,4,5,6,7,8,9,10}>[(#SET{couleur,[(#GET{foncee}|couleur_saturation{[0.(#VALEUR|div{2})]})]})]
-.pays_couleur[(#VALEUR)]{
+.couleur[(#VALEUR)]{
 	fill :[#(#GET{couleur})];
 }
 
-.pays_couleur[(#VALEUR)] text{
+.couleur[(#VALEUR)] text{
 	fill: [(#GET{couleur}|couleur_extreme{0.7}|=={000000}|?{#fff,#000})];
 }
 </BOUCLE_data>

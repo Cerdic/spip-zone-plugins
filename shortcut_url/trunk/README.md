@@ -15,6 +15,15 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+## 18 Oct 2015
+
+- Ajout des onglets sur la page des stats
+- Ajout d'un bouton statistiques dans le menu principal
+
+## 15 Oct 2015
+
+- Oublie de déclarer la table des boot dans base.php pour declarer_tables_interfaces()
+
 ## 11 Oct 2015
 
 - Ajout d'une table bot pour cibler les robots (mise à jour de base)
@@ -58,4 +67,3 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## A faire
 
-- Mettre des onglets sur la page des stats

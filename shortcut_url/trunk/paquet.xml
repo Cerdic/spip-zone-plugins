@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
-	schema="0.0.3"
+	schema="0.0.4"
 >
 
 	<nom>Shortcut URL</nom>
@@ -18,12 +18,16 @@
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/shortcut_url.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/shortcut_url.php" />
-	<pipeline nom="autoriser" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="ajouter_menus" inclure="shortcut_url_pipelines.php" />
+	<pipeline nom="autoriser" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="d3js_plugins" inclure="shortcut_url_pipelines.php" />
 
 	<utilise nom="d3js" />
+
+	<menu nom="menu_shortcut_url" position="10" action="navigation" parametres="menu=menu_shortcut_url" titre="shortcut_url:icone_stats_shortcut" icone="images/shortcut_url-menu.png" />
+
 
 </paquet>
 

@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function autoriser_menugrandeentree($faire, $type, $id, $qui, $opt){
 
-		if(!in_array($type ,array('menuaccueil','menuedition','menupublication','menuadministration','menuconfiguration')))
+		if(!in_array($type ,array('menuaccueil','menuedition','menupublication','menuadministration','menuconfiguration','menushortcuturl')))
 			return false;
 		if($type != 'menuaccueil' && $qui['statut'] != '0minirezo')
 			return false;
@@ -80,6 +80,30 @@ function autoriser_mots_menu($faire, $type, $id, $qui, $opt){
 
 function autoriser_breves_menu($faire, $type, $id, $qui, $opt){
 	return false;
+}
+
+/**
+ * Ajouter un bouton stats 
+ * 
+ * @param string $faire, $type, $id, $qui, $opt 
+ * @return string
+ */
+function shortcut_url_ajouter_menus($boutons_admin){
+	include_spip('inc/autoriser');
+	if(autoriser('menu','_menu_shortcut_url')){
+		$boutons_admin['menu_shortcut_url']->sousmenu[str_replace('.html','',$page)] = new Bouton(find_in_theme('images/shortcut_url-16.png'), 'shortcut_url:shortcut_url_logs', 'shortcut_url_logs');
+	}
+	else{
+		unset($boutons_admin['menu_shortcut_url']);
+	}
+
+	spip_log($boutons_admin, 'test.' . _LOG_ERREUR);
+
+	return $boutons_admin;
+}
+
+function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt){
+	return $qui['statut']=='0minirezo' && count($qui['restreint']) == 0;
 }
 
 /**

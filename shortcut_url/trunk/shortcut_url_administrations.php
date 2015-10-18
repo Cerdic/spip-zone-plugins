@@ -30,6 +30,10 @@ function shortcut_url_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables', array('spip_shortcut_urls_bots'))
 	);
 
+	$maj['0.0.4'] = array(
+		array('maj_tables', array('spip_shortcut_urls_bots'))
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

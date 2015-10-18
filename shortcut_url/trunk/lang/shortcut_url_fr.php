@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_supprimer_shortcut_url' => 'Supprimer URL raccourci',
+	'icone_stats_shortcut'  => 'Statistiques',
 	'icone_stats_shortcut_url'  => 'Retour à la liste statistique',
 	'info_1_shortcut_url_click' => 'Ce lien a totalisé @nb@ click',
 	'info_nb_shortcut_url_clicks' => 'Ce lien a totalisé @nb@ clicks',
@@ -55,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'partage_seenthis' => 'Partager sur Seenthis',
 	'pas_de_shortcut_url' => 'Pas d\'URL raccourcis',
 	'pas_de_statistique' => 'Pas de statistique',
+	'plugin_d3js_noninstalle' => 'Le plugin d3js n\'est pas installé',
 
 	// S
 	'shortcut_url' => 'Raccourcis d\'URL',
@@ -77,5 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_shortcut_urls_logs' => 'Raccourcis d\'url',
 	'titre_shortcut_url_partage' => 'Partager ce lien',
 	'titre_shortcut_url_graph_carte' => 'Raccourcis par pays',
+	'titre_shortcut_url_graph_bots' => 'Raccourcis par bots',
 	'titre_shortcut_url_graph_click' => 'Nombre de click par jour',
+	'titre_shortcut_url_liste_logs_bots' => 'Liste statistique des bots'
 );

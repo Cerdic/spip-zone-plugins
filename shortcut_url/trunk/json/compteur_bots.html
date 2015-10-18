@@ -1,0 +1,16 @@
+[(#SET{user_agent,#ARRAY})]
+<BOUCLE_liste_shortcut_url_user_agent(SHORTCUT_URLS_LOGS){fusion user_agent}{par user_agent}{id_shortcut_url}>
+	<BOUCLE_compte(SHORTCUT_URLS_LOGS){user_agent}{humain=bot}{id_shortcut_url}> </BOUCLE_compte>
+	[(#SET{total_user_agent,[(#TOTAL_BOUCLE)]})]
+	[(#SET{user_agent,[(#GET{user_agent}|array_merge{[(#ARRAY{#USER_AGENT,[(#GET{total_user_agent})]})]})]})]
+	</B_compte>
+</BOUCLE_liste_shortcut_url_user_agent>
+<BOUCLE_comptetotal(SHORTCUT_URLS_BOTS){id_shortcut_url}> </BOUCLE_comptetotal>[(#SET{total,[(#TOTAL_BOUCLE)]})]</B_comptetotal>
+
+[<BOUCLE_liste_shortcut_url_user_agent_pie(DATA){source table,#GET{user_agent}}{!par valeur}{0,#ENV{limite,20}}{','}>
+	{
+		"label": "[(#CLE|=={''}|?{nc,#CLE})]",
+		"value": [(#VALEUR)],
+		"percent": [(#VALEUR|div{#GET{total}}|mult{100}|intval)]
+	}</BOUCLE_liste_shortcut_url_user_agent_pie>]
+#FILTRE{trim}

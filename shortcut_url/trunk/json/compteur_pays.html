@@ -1,6 +1,6 @@
 [(#SET{pays,#ARRAY})]
-<BOUCLE_liste_shortcut_url_pays(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{id_shortcut_url}>
-	<BOUCLE_compte(SHORTCUT_URLS_LOGS){country_code}{id_shortcut_url}> </BOUCLE_compte>
+<BOUCLE_liste_shortcut_url_pays(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{humain=oui}{id_shortcut_url}>
+	<BOUCLE_compte(SHORTCUT_URLS_LOGS){country_code}{humain=oui}{id_shortcut_url}> </BOUCLE_compte>
 	[(#SET{total_pays,[(#TOTAL_BOUCLE)]})]
 	[(#SET{pays,[(#GET{pays}|array_merge{[(#ARRAY{#COUNTRY_CODE,[(#GET{total_pays})]})]})]})]
 	</B_compte>

@@ -21,6 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function shortcut_url_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['shortcut_urls'] = 'shortcut_urls';
 	$interfaces['table_des_tables']['shortcut_urls_logs'] = 'shortcut_urls_logs';
+	$interfaces['table_des_tables']['shortcut_urls_bots'] = 'shortcut_urls_bots';
 	
 	return $interfaces;
 }

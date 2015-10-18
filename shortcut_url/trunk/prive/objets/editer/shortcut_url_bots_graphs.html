@@ -1,0 +1,130 @@
+<BOUCLE_liste_shortcut_url_logs_detail(SHORTCUT_URLS){id_shortcut_url}>
+
+<h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
+
+<div class="sites syndic">
+<table class='spip liste'>
+<caption><strong class="caption"><:shortcut_url:titre_details_url:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_page:></th>
+			<td>#DESCRIPTION</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:titre_url:></th>
+			<td>#URL</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:form_date_modif:></th>
+			<td>[(#DATE_MODIF|affdate_jourcourt)]</td>
+		</tr>
+	</thead>
+</table>
+</div>
+
+<br class="nettoyeur" />
+
+<B_si_plugins_d3js>
+<BOUCLE_si_plugins_d3js(CONDITION) {si #PLUGIN{D3JS}}>
+
+<h2><:shortcut_url:titre_shortcut_url_graph_bots:></h2>
+#INCLURE{fond=json/compteur_bots,id_shortcut_url}
+<script type="text/javascript">
+
+$(document).ready(function($) {
+
+	var data = #INCLURE{fond=json/compteur_bots,id_shortcut_url};
+	console.log(data);
+
+	var color = d3.scale.threshold()
+		.domain([1, 10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 4000, 5000])
+		.range(["couleur1", "couleur2", "couleur3", "couleur4", "couleur5", "couleur6", "couleur7", "couleur8", "couleur9", "couleur10"]);
+
+	var margin = {top: 20, right: 20, bottom: 20, left: 30},
+		width = 660 - margin.left - margin.right,
+		height = 600 - margin.top - margin.bottom;
+
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left")
+		.ticks(6);
+
+	var div = d3.select("body")
+		.append("div")
+		.attr("class", "tooltip")
+		.style("opacity", 0);
+
+	var svg = d3.select("#d3bar").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		x.domain(data.map(function(d) {return d.label; }));
+		y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+		svg.append("g")
+			.attr("class", "y axis")
+			.call(yAxis)
+			.append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", -15)
+			.attr("dy", ".71em")
+			.style("text-anchor", "end")
+			.text("<:shortcut_url:nb_click:>");
+
+		svg.selectAll(".d3bar")
+			.data(data)
+			.enter().append("rect")
+			.attr("class", function(d) { return color(d.value); })
+			.attr("x", function(d) { return x(d.label); })
+			.attr("width", x.rangeBand())
+			.attr("y", function(d) { return y(d.value); })
+			.attr("height", function(d) { return height - y(d.value); })
+			.on("mouseover", function(d) {
+				div.transition()
+					.duration(500)
+					.style("opacity", 0);
+				div.transition()
+					.duration(200)
+					.style("opacity", .9);
+				div.html(d.label + "<br /><strong>" + d.value + " <:shortcut_url:nb_click:></strong>")
+					.style("left", (d3.event.pageX) + "px")
+					.style("top", (d3.event.pageY - 28) + "px")
+					.style("z-index", 5000);
+			})
+			.on("mousemove", function (d) {
+
+				if(d3.event.clientX && d3.event.clientY){
+					tooltip.style("left", (d3.event.clientX - 350)+ "px")
+						.style("top",(d3.event.clientY + 20) + "px");
+				}
+
+			}).on("mouseout", function (d) {
+
+				return tooltip.style("opacity", "0");
+
+			});
+
+});
+</script>
+
+#BOITE_OUVRIR
+	<div id="d3bar"></div>
+#BOITE_FERMER
+
+</BOUCLE_si_plugins_d3js>
+</B_si_plugins_d3js>
+	<p><:shortcut_url:plugin_d3js_noninstalle:></p>
+<//B_si_plugins_d3js>
+</BOUCLE_liste_shortcut_url_logs_detail>

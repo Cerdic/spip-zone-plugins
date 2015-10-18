@@ -1,0 +1,11 @@
+<INCLURE{fond=prive/squelettes/contenu/shortcut_url_onglets,env} />
+
+[(#ENV{page}|=={detail}|oui)
+<INCLURE{fond=prive/objets/editer/shortcut_url_logs_detail,env} />]
+[(#ENV{page}|=={graphs}|oui)
+<INCLURE{fond=prive/objets/editer/shortcut_url_logs_graphs,env} />]
+[(#ENV{page}|=={bdetail}|oui)
+<INCLURE{fond=prive/objets/editer/shortcut_url_bots_detail,env} />]
+[(#ENV{page}|=={bgraphs}|oui)
+<INCLURE{fond=prive/objets/editer/shortcut_url_bots_graphs,env} />]
+
