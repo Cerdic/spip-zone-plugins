@@ -3,7 +3,7 @@
 	http://lil.share2.fr/plugins/curator/css/curator.css
 	http://ydikoi.net/plugins/auto/curator/v0.1.0/css/curator.css */
 
-body{
+.page{
 	margin-right: auto;
 	margin-left: auto;
 	width: 550px;
@@ -40,4 +40,8 @@ select#id_parent{
 }
 textarea#text_area{
 	height: 130px;
+}
+img {
+	max-width: 100%;
+	height: auto;
 }

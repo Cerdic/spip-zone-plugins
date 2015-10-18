@@ -28,8 +28,15 @@
 		<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
 		<br />
 		
+		[(#ENV{logo}|oui)
+		<label for="text_area"><:curator:logo:></label>
+		<input type="checkbox" name="ajouter_logo" value="on" checked="checked"><:curator:ajouter_logo:>
+		<div class="logo"><img src="#ENV{logo}"></div>
+		<input type="hidden" name="logo" value="#ENV{logo}">
+		]
+	
 		<label for="text_area"><:info_post_scriptum:><em class="aide">#AIDER{text_area}</em></label>
-		<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{texte})]</textarea>
+		<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 
 		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags}
 	

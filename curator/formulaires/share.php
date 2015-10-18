@@ -2,10 +2,11 @@
 
 function formulaires_share_charger_dist() {
 	$valeurs = array(
-		'titre'     => '',
+		'titre'     => _request('titre'),
 		'nom_site'  => '',
-		'url_site'  => '',
-		'texte'     => '',
+		'url_site'  => _request('url_site'),
+		'texte'     => _request('extrait'),
+		'logo'      => _request('logo'),
 		'id_parent' => '1',
 		'ps'        => ''
 	);
@@ -29,20 +30,22 @@ function formulaires_share_verifier_dist() {
 }
 
 function formulaires_share_traiter_dist() {
-	$id_auteur_session = (int)$GLOBALS['visiteur_session']['id_auteur'];
+	$id_auteur = (int)$GLOBALS['visiteur_session']['id_auteur'];
 
-	$titre       = _request('titre');
-	$nom_site    = _request('nom_site');
-	$id_rubrique = intval(_request('id_parent'));
-	$url_site    = _request('url_site');
-	$texte       = _request('texte');
-	$ps          = _request('ps');
-
+	$titre        = _request('titre');
+	$nom_site     = _request('nom_site');
+	$id_rubrique  = intval(_request('id_parent'));
+	$url_site     = _request('url_site');
+	$texte        = _request('texte');
+	$ps           = _request('ps');
+	$ajouter_logo = _request('ajouter_logo') == 'on' ? true : false;
+	$logo         = _request('logo');
+	
 	// créer un article dans la bonne rubrique
 	include_spip('action/editer_objet');
-	$id_article_cree = objet_inserer('article', $id_rubrique);
+	$id_article = objet_inserer('article', $id_rubrique);
 
-	if ($id_article_cree) {
+	if ($id_article) {
 		// insérer les valeurs saisies
 		$valeurs = array(
 			'titre'    => $titre,
@@ -54,18 +57,26 @@ function formulaires_share_traiter_dist() {
 			'statut'   => 'publie',
 
 		);
-		objet_modifier('article', $id_article_cree, $valeurs);
+		objet_modifier('article', $id_article, $valeurs);
 
 		// associer l'auteur
 		objet_associer(
-			array('auteur' => $id_auteur_session),
-			array('article' => $id_article_cree)
+			array('auteur' => $id_auteur),
+			array('article' => $id_article)
 		);
 
 		// ajout les mots clés
 		if ($etiquettes = _request('tags')) {
 			include_spip('inc/tag-machine');
-			ajouter_mots($etiquettes, $id_article_cree, 'tags', 'articles', 'id_article');
+			ajouter_mots($etiquettes, $id_article, 'tags', 'articles', 'id_article');
+		}
+
+		// ajouter le logo
+		if ($ajouter_logo && $logo) {
+			$info = pathinfo($logo);
+			$ext = $info['extension'];
+			$logo_file = _DIR_IMG.'arton'.$id_article.'.'.$ext;
+			copie_locale($logo, 'force', $logo_file);
 		}
 
 		// fermer la popup
