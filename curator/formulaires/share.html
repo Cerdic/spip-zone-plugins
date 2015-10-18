@@ -26,12 +26,11 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{id_article,nouveau}">
 <form action='#ENV{action}' method='post'>
         #ACTION_FORMULAIRE{#ENV{action}}
-        <input type='hidden' id='statut' name='statut' value='publie' />
-        <input type='hidden' id='date' name='date' value='#DATE' />
-        <input type='hidden' id='auteur' name='auteur' value='#SESSION{id_auteur}' />
-        <input type='hidden' id='lang' name='lang' value='#LANG' />
-        
+
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
 		<label for="titre"><:info_titre:><em class="aide">#AIDER{titre}</em></label>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 		<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
 		<br />
 		
