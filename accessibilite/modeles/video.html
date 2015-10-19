@@ -27,25 +27,6 @@
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]']>
 ]})
 ]
-[(#EXTENSION|=={swf}|?{' '})
-<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
- codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
- width='#GET{largeur}' height='#GET{hauteur}'>
-	<param name='movie' value='#URL_DOCUMENT' />
-	[(#ENV{quality,''}|non)<param name="quality" value="high" />]
-	[(#ENV*|env_to_params)]
-	<!--#EVAL**{chr(91)}if !IE#EVAL**{chr(93)}> <-->
-	<object data="#URL_DOCUMENT" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
-		[(#ENV{quality,''}|non)<param name="quality" value="high" />]
-		[(#ENV*|env_to_params)]
-		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
-		[(#ENV*{alternative}|propre)]
-	</object>
-	<!--> <!#EVAL**{chr(91)}endif#EVAL**{chr(93)}-->
-</object>
-#SET{done,1}
-]
-[(#GET{done,0}|non)
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#URL_DOCUMENT' />
 <param name='src' value='#URL_DOCUMENT' />
@@ -53,7 +34,6 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 <embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed>
 [(#ENV*{alternative}|propre)]
 </object>
-]
 [<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]</div>
 
 </BOUCLE_tous>
