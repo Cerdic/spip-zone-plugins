@@ -1,48 +1,66 @@
-/* @override 
-	http://h2v.me/essai/css/curator.css
-	http://lil.share2.fr/plugins/curator/css/curator.css
-	http://ydikoi.net/plugins/auto/curator/v0.1.0/css/curator.css */
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background: white;
+    margin:     0;
+    padding:    0;
+    font:       0.77em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
 
 .formulaire_curator {
-	margin-right: auto;
-	margin-left: auto;
-	width: 550px;
-	background-color: white;
-	margin-top: 25px;
-	position: relative;
+    margin:    2em auto 0 auto;
+    padding:   0 1em;
+    width:     100%;
+    max-width: 550px;
 }
+
 .formulaire_curator .editer {
-	margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
-.formulaire_curator label{
-	display: block;
-	font: bold 0.77em "Lucida Grande", Lucida, Verdana, sans-serif;
+
+.formulaire_curator label {
+    display:       block;
+    margin-bottom: 0.3em;
+    font-weight:   bold;
 }
 
 .formulaire_curator input[type=text],
-.formulaire_curator textarea{
-	-moz-box-shadow: 0 0 5px #c4c4c6;
-	box-shadow: 0 0 5px #c4c4c6;
-	width: 100%;
-	border: thin solid gray;
-	margin-right: auto;
-	margin-left: auto;
-	position: relative;
-	display: inline;
-	background-color: #f0f0f0;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding: 2px 5px;
+.formulaire_curator textarea,
+.formulaire_curator select {
+    font:                  inherit;
+    width:                 100%;
+    border:                thin solid gray;
+    background:            #f0f0f0;
+    -moz-border-radius:    5px;
+    -webkit-border-radius: 5px;
+    border-radius:         5px;
+    -moz-box-shadow:       0 0 5px #c4c4c6;
+    box-shadow:            0 0 5px #c4c4c6;
+    padding:               2px 5px;
+    margin-bottom:         0.3em;
 }
-.formulaire_curator select{
-	margin-left: 20px;
-	background-color: #feb6b6;
+
+.formulaire_curator textarea {
+    height: 130px;
 }
-.formulaire_curator textarea{
-	height: 130px;
+
+.formulaire_curator p.boutons {
+    text-align: right;
 }
+
+.formulaire_curator input.submit {
+    font:    inherit;
+    padding: 5px 10px;
+    height:  2em;
+}
+
 .formulaire_curator img {
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    height:    auto;
 }
