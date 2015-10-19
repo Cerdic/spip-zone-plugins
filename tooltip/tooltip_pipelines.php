@@ -42,8 +42,9 @@ function tooltip_insert_head($flux) {
 		$flux .=
 			'<script type="text/javascript">/* <![CDATA[ */
 				var tooltip_init=function(){
-					if($("'.$config['selecteur'].'").size() > 0)
-						$("'.$config['selecteur'].'").tooltip('.$options.');
+					selecteur = $("'.$config['selecteur'].'");
+					if(selecteur.size() > 0)
+						selecteur.tooltip('.$options.');
 				}
 				$(document).ready(function(){
 					tooltip_init();

@@ -52,9 +52,8 @@
 					this.tOpacity = helper_opacity;
 					// copy tooltip into its own expando and remove the title
 					this.tooltipText = this.title;
-					$(this).attr('title','');
 					// also remove alt attribute to prevent default tooltip in IE
-					this.alt = "";
+					this.title = this.alt = "";
 				});
 			this.attr('data-tooltip','true');
 			$(document.body).on('mouseover.tooltip','[data-tooltip]',save)
