@@ -22,7 +22,7 @@ function formulaires_share_verifier_dist() {
 	);
 	foreach ($obligatoires as $obligatoire) {
 		if (!_request($obligatoire)) {
-			$erreurs[$obligatoire] = _T('champ_obligatoire');
+			$erreurs[$obligatoire] = _T('info_obligatoire');
 		}
 	}
 

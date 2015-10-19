@@ -11,6 +11,9 @@
 	margin-top: 25px;
 	position: relative;
 }
+.formulaire_curator .editer {
+	margin-bottom: 0.5em;
+}
 .formulaire_curator label{
 	display: block;
 	font: bold 0.77em "Lucida Grande", Lucida, Verdana, sans-serif;

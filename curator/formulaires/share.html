@@ -1,55 +1,64 @@
 
 <div class="formulaire_spip formulaire_curator">
 <form action='#ENV{action}' method='post'>
-        #ACTION_FORMULAIRE{#ENV{action}}
+	#ACTION_FORMULAIRE{#ENV{action}}
 
-		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
-		<label for="titre"><:info_titre:><em class="aide">#AIDER{titre}</em></label>
-		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-		<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
-		<br />
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<div class="editer-groupe">
 		
+		<div class="editer">
+			<label for="titre"><:info_titre:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
+		</div>
 		
-		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>[
-		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
-		] 
-		<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}>
+		<div class="editer">
+			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>] 
+			<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}>
 			<select name="id_parent" id="id_parent">
 				<option value="#ID_RUBRIQUE">#TITRE</option>
 				<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
-			   	[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+				[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
 				<option value="#ID_RUBRIQUE">[(#VAL{'&nbsp;&nbsp;&nbsp;'}|str_repeat{#PROFONDEUR|moins{1}})]#TITRE</option>]
 				<BOUCLE_recursive(BOUCLE_listederoulante)></BOUCLE_recursive>
 				</BOUCLE_listederoulante>
 			</select>
-		</BOUCLE_rubs>
-	
-		<label for="nom_site"><:info_site:></label>
-		<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" size="35"  />
-		<br />
+			</BOUCLE_rubs>
+		</div>
 		
-		<label for="url_site"><:info_url:></label>
-		<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" size="35"  />
-		<br />
+		<div class="editer">
+			<label for="nom_site"><:info_site:></label>
+			<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" size="35"  />
+		</div>
 		
-		<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>
-		<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
-		<br />
+		<div class="editer">
+			<label for="url_site"><:info_url:></label>
+			<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" size="35"  />
+		</div>
 		
-		[(#ENV{logo}|oui)
-		<label for="text_area"><:curator:logo:></label>
-		<input type="checkbox" name="ajouter_logo" value="on" checked="checked"><:curator:ajouter_logo:>
-		<div class="logo"><img src="#ENV{logo}"></div>
-		<input type="hidden" name="logo" value="#ENV{logo}">
-		]
-	
-		<label for="text_area"><:info_post_scriptum:><em class="aide">#AIDER{text_area}</em></label>
-		<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
+		<div class="editer">
+			<label for="text_area"><:info_texte:></label>
+			<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
+		</div>
+		
+		<div class="editer">
+			[(#ENV{logo}|oui)
+			<label for="text_area"><:curator:logo:></label>
+			<input type="checkbox" name="ajouter_logo" value="on" checked="checked"><:curator:ajouter_logo:>
+			<div class="logo"><img src="#ENV{logo}"></div>
+			<input type="hidden" name="logo" value="#ENV{logo}">
+			]
+		</div>
+		
+		<div class="editer">
+			<label for="text_area"><:info_post_scriptum:></label>
+			<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
+		</div>
 
 		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags}
-	
-		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div>
+	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
 </form>
 </div>
 
