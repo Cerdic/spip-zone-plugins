@@ -61,18 +61,18 @@ href="[(#SELF|parametre_url{var_mode,css})]"><:minibando:mode_css:></a></li>]
 <script type="text/javascript">
 ;if (window.jQuery)
 (function($) {
-	var li_deroulants = jQuery('#minibando > li');
+	var li_deroulants = $('#minibando > li');
 
 	function afficherSousMenu (lien) {
 		li_deroulants.removeClass('afficher');
-		jQuery(lien).parents('#minibando > li').addClass('afficher');
+		$(lien).parents('#minibando > li').addClass('afficher');
 	}
 
 	function masquerSousMenu (lien) {
-		jQuery(lien).parents('#minibando > li').removeClass('afficher');
+		$(lien).parents('#minibando > li').removeClass('afficher');
 	}
 
-	jQuery('#minibando a')
+	$('#minibando a')
 		.focusin(function () {
 			afficherSousMenu(this);
 		})
