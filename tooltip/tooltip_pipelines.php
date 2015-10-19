@@ -70,9 +70,14 @@ function tooltip_jquery_plugins($plugins){
 	$f = chercher_filtre('info_plugin');
 	include_spip('plugins/installer');
 	if(!function_exists('spip_version_compare') || spip_version_compare($f('jqueryui','version'),'1.10.1','<')){
-		$plugins[] = 'lib/delegate.js';
-		$plugins[] = 'lib/dimensions.js';
-		$plugins[] = 'js/tooltip.js';
+		if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '<')) { 
+			$plugins[] = 'lib/delegate.js';
+			$plugins[] = 'lib/dimensions.js';
+			$plugins[] = 'js/tooltip.js';
+		}
+		else{
+			$plugins[] = 'js/tooltip2.js';
+		}
 	}
 	return $plugins;
 }
