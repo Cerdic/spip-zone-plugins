@@ -12,5 +12,5 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function filtre_bookmarklet($texte) {
-	return preg_replace(["/\r|\n/", '~\s~'], ['', '%20'], $texte);
+	return preg_replace(array("/\r|\n/", '~\s~'), array('', '%20'), $texte);
 }
