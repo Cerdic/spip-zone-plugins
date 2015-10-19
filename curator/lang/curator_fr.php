@@ -10,6 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// C
 	'curator_titre' => 'curator',
+	'configurer_rubrique' => 'Ajouter les articles dans la rubrique',
+	'configurer_groupe_mots' => 'Groupe de mots clés',
+	'configurer_groupe_mots_explication' => 'Par défaut, un groupe de mots clés "Tags" sera créé',
 	
 	// L
 	'logo' => 'Logo',

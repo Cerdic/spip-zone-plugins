@@ -4,8 +4,20 @@
 	
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul class="editer-groupe">
+		<ul class="">
 			<li class="editer">
+				<label for="id_parent"><:curator:configurer_rubrique:></label>
+				[(#VAL|chercher_rubrique{'', #ENV{id_parent}, '', '', '', 0,form_simple})]
+			</li>
+			<li class="editer">
+				<label for="groupe_mots"><:curator:configurer_groupe_mots:></label>
+				<p class="explication"><:curator:configurer_groupe_mots_explication:></p>
+				<select name="groupe_mots" id="groupe_mots">
+					<option value="">
+					<BOUCLE_groupes(GROUPES_MOTS){par titre}{tables_liees like %articles%}>
+					<option value="#ID_GROUPE" [(#ID_GROUPE|=={#ENV{groupe_mots}}|oui)selected="selected"]>#TITRE</option>
+					</BOUCLE_groupes>
+				</select>
 			</li>
 		</ul>
 		

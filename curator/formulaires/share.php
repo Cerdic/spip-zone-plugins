@@ -68,7 +68,11 @@ function formulaires_share_traiter_dist() {
 		// ajout les mots clés
 		if ($etiquettes = _request('tags')) {
 			include_spip('inc/tag-machine');
-			ajouter_mots($etiquettes, $id_article, 'tags', 'articles', 'id_article');
+			$groupe_mots = sql_getfetsel('titre','spip_groupes_mots','id_groupe='.lire_config('curator/groupe_mots'));
+			if( !$groupe_mots ) {
+				$groupe_mots = 'Tags';
+			}
+			ajouter_mots($etiquettes, $id_article, $groupe_mots, 'articles', 'id_article');
 		}
 
 		// ajouter le logo
