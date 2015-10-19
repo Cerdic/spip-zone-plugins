@@ -3,7 +3,7 @@
 	http://lil.share2.fr/plugins/curator/css/curator.css
 	http://ydikoi.net/plugins/auto/curator/v0.1.0/css/curator.css */
 
-.page{
+.formulaire_curator {
 	margin-right: auto;
 	margin-left: auto;
 	width: 550px;
@@ -11,15 +11,13 @@
 	margin-top: 25px;
 	position: relative;
 }
-form{
-	
-}
-label{
+.formulaire_curator label{
 	display: block;
 	font: bold 0.77em "Lucida Grande", Lucida, Verdana, sans-serif;
 }
 
-input#titre,input#nom_site, input#url_site, textarea{
+.formulaire_curator input[type=text],
+.formulaire_curator textarea{
 	-moz-box-shadow: 0 0 5px #c4c4c6;
 	box-shadow: 0 0 5px #c4c4c6;
 	width: 100%;
@@ -34,14 +32,14 @@ input#titre,input#nom_site, input#url_site, textarea{
 	border-radius: 5px;
 	padding: 2px 5px;
 }
-select#id_parent{
+.formulaire_curator select{
 	margin-left: 20px;
 	background-color: #feb6b6;
 }
-textarea#text_area{
+.formulaire_curator textarea{
 	height: 130px;
 }
-img {
+.formulaire_curator img {
 	max-width: 100%;
 	height: auto;
 }
