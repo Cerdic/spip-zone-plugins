@@ -16,7 +16,7 @@
 		] 
 		<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}}>
 			<select name="id_parent" id="id_parent">
-				<option value=""></option>
+				<option value="#ID_RUBRIQUE">#TITRE</option>
 				<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
 			   	[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
 				<option value="#ID_RUBRIQUE">[(#VAL{'&nbsp;&nbsp;&nbsp;'}|str_repeat{#PROFONDEUR|moins{1}})]#TITRE</option>]

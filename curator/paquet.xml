@@ -1,7 +1,7 @@
 <paquet
 	prefix="curator"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.*.*]"
 	logo="prive/themes/spip/images/curator-64.png"
@@ -23,4 +23,4 @@
 	
 	<necessite nom="etiquettes" compatibilite="[2.2.0;]" />
 
-</paquet>
+</paquet>/Users/h2v/Documents/svn/curator/share.html
