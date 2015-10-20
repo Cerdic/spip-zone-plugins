@@ -333,6 +333,12 @@ $.fn.activatecrayon = function(percent) {
 					d[$('input.crayon-id', crayon).val()]
 				)
 				.iconecrayon();
+
+				// Invalider des préchargements ajax
+				if (typeof jQuery.spip == 'object' && typeof jQuery.spip.preloaded_urls == 'object') {
+					jQuery.spip.preloaded_urls = {};
+				}
+
 				// Declencher le onAjaxLoad normal de SPIP
 				if (typeof jQuery.spip == 'object' && typeof jQuery.spip.triggerAjaxLoad == 'function') {
 					jQuery.spip.triggerAjaxLoad(tous.get());
