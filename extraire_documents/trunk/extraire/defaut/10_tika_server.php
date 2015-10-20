@@ -3,13 +3,18 @@
 /**
  * Tester si cette méthode d'extraction est disponible
  **/
-function extraire_defaut_10_tika_server_test_dist() {
+function extraire_defaut_10_tika_server_test_dist($mime) {
 	include_spip('inc/distant');
 	
 	// On cherche si le serveur Tika est bien lancé en local (valeurs peut-être à configurer…)
 	$tika_version = recuperer_page('http://localhost:9998/version');
 	
-	if (strpos($tika_version, 'Apache Tika') !== false) {
+	if (
+		strpos($tika_version, 'Apache Tika') !== false
+		// pas de image/truc pour l'instant avec Tika,
+		// sinon par défaut on va chercher à extraire des centaines ou des milliers d'images suivant les sites…
+		and strpos($mime, 'image') !== 0
+	) {
 		return true;
 	}
 	else {
@@ -24,7 +29,7 @@ function extraire_defaut_10_tika_server_test_dist() {
  * @param $fichier le fichier à traiter
  * @return Scontenu le contenu brut
  **/
-function extraire_defaut_10_tika_server_extraire_dist($fichier) {
+function extraire_defaut_10_tika_server_extraire_dist($fichier, $infos) {
     $infos = array('contenu' => false);
     $contenu = '';
 

@@ -125,7 +125,7 @@ function inc_extraire_document($document = array()) {
 	
 	if (
 		$fonction_extraire
-		and $extraction = $fonction_extraire($fichier)
+		and $extraction = $fonction_extraire($fichier, $infos)
 		and is_array($extraction)
 	) {
 		$infos = array_merge($infos, $extraction);
