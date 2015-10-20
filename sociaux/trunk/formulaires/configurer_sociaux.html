@@ -3,12 +3,13 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form method="post" action="#ENV{action}">
+	<form method="post" action="#ENV{action}">   
 	<div>
+  
 		#ACTION_FORMULAIRE{#ENV{action}}
 
     <!-- activer l'habillage CSS -->
-    <div>
+    <div style="margin:1em 0;">
       	<div class="choix">
       		<input type="checkbox" name="css" class="checkbox" value='on' id='cssn'[(#ENV{css}|oui)checked="checked"] />
       		<label for='css'><:sociaux:cfg_label_css:></label>
@@ -16,12 +17,12 @@
     </div>
   
     <!-- les reseaux --> 
-    <div style="margin-top:1em;margin-top:1px solid #eee;padding-top:1em;"><:sociaux:cfg_explication:></div>    
-    #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube}}
+    <div style="margin-top:1em;margin-top:1px solid #eee;padding-top:1em;font-weight:bold;"><:sociaux:cfg_explication:></div>    
+    #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email}}
     
     <BOUCLE_rezo(DATA){source tableau,#GET{rezo}}>
     <!-- #VALEUR -->
-    <div style="margin-top:1em;">
+    <div style="margin:1em 0;">
     	      <label for="nom">[(#VALEUR|ucfirst)]</label> 						
 						<input type="text" name="#VALEUR" id="#VALEUR" value="[(#ENV{#VALEUR})]"  class="text" />
     </div>
@@ -29,6 +30,6 @@
 
 		<input type="hidden" name="_meta_casier" value="sociaux" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-	</div>
+  </div>
 	</form>
 </div>
