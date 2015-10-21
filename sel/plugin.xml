@@ -2,14 +2,14 @@
     <!-- Nom du plugin -->
     <nom>
 	<multi>
-	[fr]Sel (Syst&egrave;me d'&eacute;change local)
+	[fr]SEL (Système d'échange local)
 	[en]Lets (Local Exchange Trading Systems)
 	[de]Tauschkreis
 	[es]Sistema de cambio local
 	[eo]Loka intersanga sistemo
 	[fi]Vaihtoty (talous)
 	[il]????? ??????
-	[hu]Kal�kak�r
+	[hu]Kalákakör
 	[nl]Lokale ruileconomie
 	[no]Byttering
 	[po]Sistema de intercambio local
@@ -21,28 +21,28 @@
 	<categorie>edition</categorie>
     <!-- Auteur du plugin -->
     <auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
-    <version>0.1</version>
+    <version>0.2</version>
     <version_base>0.1</version_base>
-	<licence>GNU/GPL</licence> <!-- dans paquet.xml, report� ici par coh�rence, mais pas forc�ment lu -->
+	<licence>GNU/GPL</licence> <!-- dans paquet.xml, reporté ici par cohérence, mais pas forcément lu -->
     <etat>test</etat>
     <icon>prive/themes/spip/images/sel-128.png</icon>
     <description>
 	<multi>
 	[fr] 
-	Ce plugin est destin&eacute; &agrave; la gestion int&eacute;grale d'un ou plusieurs syst&egrave;me d'&eacute;change local (SEL).
-	Que ce soit un SEl qui travaille sur des &eacute;changes simples, des &eacute;changes d'objets, des &eacute;changes de savoir, un SEL de stages, un SEL d 'h&eacute;bergement ou tout autre syst&egrave;.
-	Que ce soit un SEL qui fonctionne avec un carnet d'&eacute;change, un syst&egrave;me de JEU.
-	Il est destin&eacute; &agrave; tout type de SEL, de s�liste et de joueur.
-	La publication en ligne des annonces, avec cr&eacute;ation, changement ou suppression est pr&eacute;vue.
-	La publication autonome du catalogue, &agrave; partir des annonces en ligne, est pr&eacute;vue.
-	La gestion en ligne des &eacute;changes avec gestion autonome par les deux &eacute;changeurs, est pr&eacute;vue.
-	La gestion en ligne des adh&eacute;sions, leur renouvellement, leur caducit&eacute;, est pr&eacute;vue.
+	Ce plugin est destiné à la gestion intégrale d'un ou plusieurs système d'échange local (SEL).
+	Que ce soit un SEl qui travaille sur des échanges simples, des échanges d'objets, des échanges de savoir, un SEL de stages, un SEL d 'hébergement ou tout autre systéme.
+	Que ce soit un SEL qui fonctionne avec un carnet d'échange, un système de JEU.
+	Il est destiné à tout type de SEL, de séliste et de joueur.
+	La publication en ligne des annonces, avec création, changement ou suppression est prévue.
+	La publication autonome du catalogue, à partir des annonces en ligne, est prévue.
+	La gestion en ligne des échanges avec gestion autonome par les deux échangeurs, est prévue.
+	La gestion en ligne des adhésions, leur renouvellement, leur caducité, est prévue.
 	</multi>
 	</description>
     <!-- URL de documentation http://contrib.spip.net/ -->
     <lien>http://contrib.spip.net/SEL-systeme-d-echange-local</lien>
 
-    <!-- precise le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
+    <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
     <prefix>sel</prefix>
 
     <fonctions>sel_fonctions.php</fonctions>
@@ -52,8 +52,8 @@
     <install>sel_administrations.php</install>
 
     <!-- ensemble des pipelines :
-      http://doc.spip.org/@Les-points-d-entree-pipelines
-      http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php
+      http://code.spip.net/autodoc/@Les-points-d-entree-pipelines
+      https://core.spip.net/projects/spip/repository/changes/spip/ecrire/inc_version.php
 	  On peut rajouter dans la section pipeline <action>fonction</action>...
 	-->	
 	
@@ -105,7 +105,7 @@
 	</pipeline>
 	
    <!-- precise les dependances vis-vis de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->  
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
 	<!--utilise id="cfg" version='[1.15.2;]' /-->
 
 	
