@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_baked' => 'Erweiterte Bearbeitung: Sie können den HTML-Code des Newsletters direkt bearbeiten. Danach wird er nicht mehr automatisch erzeugt. Wenn Sie in den Standardmodus zurückschalten, gehen Ihre Änderungen verloren.',
+	'explication_baked_publie' => 'Dieser Newsletter ist erstellt: Sie können den HTM-Code oder den Text korrigieren, ihn aber nicht mehr über die Oberfläche bearbeiten.',
 	'explication_html_page_vide' => 'Ermöglicht im WWW eine andere Fassung des Newsletters als die per Mail verschickte anzuzeigen. Lassen sie das Feld leer, wenn beide Fassungen identisch seien sollen.',
 
 	// I
