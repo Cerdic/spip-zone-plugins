@@ -2,7 +2,7 @@
 
 	/!\ Cette saisie nécessite du javascript pour fonctionner.
 		En absence de JS, seul un champ de saisie texte est affiché.
-	
+
 	Cette saisie cree 3 champs a partir d'une date au format datetime mysql.
 	A chaque modification, un champ cache est modifie, contenant la date au format datetime.
 
@@ -11,7 +11,7 @@
 	- size_(jour|mois|annee)
 	- maxlength_(jour|mois|annee)
 	- datetime, par défaut oui. Si pas oui, utilisera une date au format aaaa-mm-jj au lieu d'un datetime mysql
-	
+
 	[(#SAISIE{date_jour_mois_annee, date_naissance,
 		label=Date de naissance
 	})]
@@ -28,14 +28,14 @@ function activer_dateur_#GET{id}() {
 			<input type="text" name="#ENV{nom}_jour" class="text date_jour[ (#ENV{class})]" id="champ_#ENV{nom}_jour"[ value="(#GET{valeur}|journum)"][ size="(#ENV{size_jour, 2})"][ maxlength="(#ENV{maxlength_jour, 2})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] onChange="changer_la_date(this);" />\
 		</div>\
 	';
-		
+
 	mois = '\
 		<div class="choix">\
 			[<label for="champ_#ENV{nom}_mois">(#ENV{label_mois,<:saisies:label_mois:>})</label>]\
 			<input type="text" name="#ENV{nom}_mois" class="text date_mois[ (#ENV{class})]" id="champ_#ENV{nom}_mois"[ value="(#GET{valeur}|mois)"][ size="(#ENV{size_mois, 2})"][ maxlength="(#ENV{maxlength_mois, 2})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] onChange="changer_la_date(this);" />\
 		</div>\
 	';
-	
+
 	annee = '\
 		<div class="choix">\
 			[<label for="champ_#ENV{nom}_annee">(#ENV{label_annee,<:saisies:label_annee:>})</label>]\
@@ -50,8 +50,9 @@ function activer_dateur_#GET{id}() {
 	jQuery('##GET{id}').after(jour + mois + annee);
 }
 
+#SET{li,#VAL{li}|saisie_balise_structure_formulaire}
 function changer_la_date(me) {
-	var li = jQuery(me).parents('li'),
+	var li = jQuery(me).parents('[(#GET{li})]'),
 		jour = jQuery.trim(li.find('.date_jour').val()),
 		mois = jQuery.trim(li.find('.date_mois').val()),
 		annee = jQuery.trim(li.find('.date_annee').val()),
