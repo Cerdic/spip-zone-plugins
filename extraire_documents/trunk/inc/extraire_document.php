@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+include_spip('base/abstract_sql');
+
 /**
  * Extraire le contenu d'un document donné
  *
@@ -23,7 +27,7 @@ function inc_extraire_document($document = array()) {
 		!isset($document['fichier'])
 		or !is_numeric($document['fichier'])
 	) {
-		$document =  sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$document['id_document']);
+		$document = sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$document['id_document']);
 	}
 	
 	if (empty($document)) {
@@ -59,6 +63,10 @@ function inc_extraire_document($document = array()) {
 	//http://stackoverflow.com/questions/10208698/checking-memory-limit-in-php
 	$memory_used = memory_get_usage();
 	$memory_limit = ini_get('memory_limit');
+	// S'il n'y a PAS de limite de mémoire on en invente une super large
+	if ($memory_limit == -1) {
+		$memory_limit = '512M';
+	}
 	$file_size = filesize(_DIR_RACINE.$fichier);
 	if (preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
 		if ($matches[2] == 'M') {
