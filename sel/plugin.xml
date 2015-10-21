@@ -21,7 +21,7 @@
 	<categorie>edition</categorie>
     <!-- Auteur du plugin -->
     <auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
-    <version>0.2</version>
+    <version>0.2.0</version>
     <version_base>0.1</version_base>
 	<licence>GNU/GPL</licence> <!-- dans paquet.xml, reporté ici par cohérence, mais pas forcément lu -->
     <etat>test</etat>
