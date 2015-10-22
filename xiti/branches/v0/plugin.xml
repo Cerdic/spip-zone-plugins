@@ -1,9 +1,10 @@
 <plugin>
 	<nom>XITI</nom>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1.0</version_base>
 	<prefix>xiti</prefix>
 	<icon>images/logo_xiti.gif</icon>
+	<categorie>statistique</categorie>
 	<auteur> [Olivier CARETTE->mailto:webmaster@phpasso.fr] _ [Site Internet->http://www.phpasso.fr]</auteur>
 	<description>Plugin permettant d'inclure une balise #XITI{page} dans un squelette pour voir mettre en place le système de comptabilisation des visites.</description>
 	<lien>http://contrib.spip.net/XiTi-pour-SPIP-2</lien>
