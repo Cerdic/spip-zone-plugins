@@ -22,7 +22,9 @@ function linkcheck_verifier_liens(adresse){
 
 $(document).ready(function(){
 	var adresse ='?'+$('#btn_linkcheck_tests form input').serialize();
-	$('#btn_linkcheck_tests .submit').click(function(){linkcheck_verifier_liens(adresse);
-	$('#btn_linkcheck_tests').hide().before('<div class="patience_la_fontaine">« Patience et longueur de temps font plus que force ni que rage. »</div>');
-	return false;})
+	$('#btn_linkcheck_tests .submit').on('click.linkchecks',function(){
+		linkcheck_verifier_liens(adresse);
+		$('#btn_linkcheck_tests').hide().before('<div class="patience_la_fontaine">« Patience et longueur de temps font plus que force ni que rage. »</div>');
+		return false;
+	});
 });
