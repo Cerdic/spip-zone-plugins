@@ -29,46 +29,61 @@ function linkcheck_post_edition($flux){
 
 	//on verifie que l'on est bien dans un contexte de verification d'objet
 	if($flux['args']['id_objet'] && $flux['args']['type']){
+		$champs_a_traiter = false;
 		$type_objet = $flux['args']['type'];
 		$id_objet = intval($flux['args']['id_objet']);
 		$table_sql = table_objet_sql($type_objet);
-		$champs_a_traiter = linkcheck_champs_a_traiter($table);
-		$tab_value=array();
-		foreach(array_keys($champs_a_traiter) as $ct)
-			if (isset($flux['data'][$ct]))
-				$tab_value[$ct]=$flux['data'][$ct];
-
-		//on parcours les liens et 
-		$tab_liens = linkcheck_lister_liens($tab_value);
-
-		//on les insère en base si besoin
-		linkcheck_ajouter_liens($tab_liens,$type_objet,$id_objet);
-			
-		//maintenant on vérifie que tous les liens de la base correspondant à cet objet soit encore présent ds l'objet
-		//on recup tout les liens de l'article presents en base
-		$sel = sql_select('l.url, l.id_linkcheck','spip_linkchecks_liens AS ll, spip_linkchecks AS l','l.id_linkcheck=ll.id_linkcheck AND id_objet='.$id_objet.' AND ll.objet='.sql_quote($type_objet));
-			
-		//pour chaque liens
-		while($lks = sql_fetch($sel)){
-				
-			//si il n'est plus ds l'article
-			if(!in_array($lks['url'], $tab_liens)){
-
-				//on supprime son entrée ds la table de liaison
-				sql_delete('spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck'].' AND id_objet='.$id_objet.' AND objet="'.$type_objet.'"');
-					
-				//on regarde s'il est utilisé ailleurs ds le site
-				$tpl = sql_getfetsel('count(*)','spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck']);
-					
-				//s'il ne l'est pas
-				if($tpl>0){
-					//on le supprime de la table liens
-					sql_delete('spip_linkchecks', 'id_linkcheck='.$lks['id_linkcheck']);
+		
+		$tables_a_traiter = linkcheck_tables_a_traiter();
+		foreach($tables_a_traiter as $key_table => $table){
+			foreach($table as $table_sql_def => $info_table){
+				if($table_sql_def == $table_sql){
+					$champs_a_traiter = linkcheck_champs_a_traiter($info_table);
+					break;
 				}
 			}
+			
+			if(is_array($champs_a_traiter))
+				break;
 		}
-		
-		queue_add_job('genie_linkcheck_test_postedition', 'Tests post_edition des liens d\'un objet', array($id_objet, $type_objet), 'genie/linkcheck_test_postedition');
+		if(is_array($champs_a_traiter)){
+			$tab_value=array();
+			foreach(array_keys($champs_a_traiter) as $ct)
+				if (isset($flux['data'][$ct]))
+					$tab_value[$ct]=$flux['data'][$ct];
+
+			//on parcours les liens et 
+			$tab_liens = linkcheck_lister_liens($tab_value);
+
+			//on les insère en base si besoin
+			linkcheck_ajouter_liens($tab_liens,$type_objet,$id_objet);
+
+			//maintenant on vérifie que tous les liens de la base correspondant à cet objet soit encore présent ds l'objet
+			//on recup tout les liens de l'article presents en base
+			$sel = sql_select('l.url, l.id_linkcheck','spip_linkchecks_liens AS ll, spip_linkchecks AS l','l.id_linkcheck=ll.id_linkcheck AND id_objet='.$id_objet.' AND ll.objet='.sql_quote($type_objet));
+				
+			//pour chaque liens
+			while($lks = sql_fetch($sel)){
+					
+				//si il n'est plus ds l'article
+				if(!in_array($lks['url'], $tab_liens)){
+	
+					//on supprime son entrée ds la table de liaison
+					sql_delete('spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck'].' AND id_objet='.$id_objet.' AND objet="'.$type_objet.'"');
+						
+					//on regarde s'il est utilisé ailleurs ds le site
+					$tpl = sql_getfetsel('count(*)','spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck']);
+						
+					//s'il ne l'est pas
+					if($tpl>0){
+						//on le supprime de la table liens
+						sql_delete('spip_linkchecks', 'id_linkcheck='.$lks['id_linkcheck']);
+					}
+				}
+			}
+			
+			queue_add_job('genie_linkcheck_test_postedition', 'Tests post_edition des liens d\'un objet', array($id_objet, $type_objet), 'genie/linkcheck_test_postedition');
+		}
 	}
 
 	return $flux;
