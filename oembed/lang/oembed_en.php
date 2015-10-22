@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_ajout_provider' => 'Error when adding the provider.',
 	'erreur_scheme_doublon' => 'This scheme is already in the list.',
 	'explication_scheme' => 'use * as wildcard',
-	'explication_upload_url' => 'Simply specify the URL of the page that contains the document for sites @hosts@', # MODIF
+	'explication_upload_url' => 'Simply specify the URL of the page that contains the document for <a href="http://contrib.spip.net/4595">the most usual sites </a>.',
 
 	// I
 	'info_1_provider' => '1 provider',
