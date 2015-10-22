@@ -44,7 +44,10 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 	}
 
 	if (defined('_TAILLE_RACCOURCI'))
-		$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
+		if(_TAILLE_RACCOURCI >= 8)
+			$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
+		else
+			$valeurs['taille_raccourci'] = 8;
 	else
 		$valeurs['taille_raccourci'] = 8;
 

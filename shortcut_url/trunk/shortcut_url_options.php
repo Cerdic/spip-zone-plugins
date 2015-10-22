@@ -12,4 +12,4 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_TAILLE_RACCOURCI', 10);
+define('_TAILLE_RACCOURCI', 1);
