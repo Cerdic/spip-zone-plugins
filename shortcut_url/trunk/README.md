@@ -15,6 +15,10 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Fait
 
+## 22 Oct 2015
+
+- Ajout d'un define pour choisir le nombre de signe pour le raccourci
+
 ## 18 Oct 2015
 
 - Ajout des onglets sur la page des stats
@@ -22,7 +26,7 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## 15 Oct 2015
 
-- Oublie de déclarer la table des boot dans base.php pour declarer_tables_interfaces()
+- Oublie de déclarer la table des bots dans base.php pour declarer_tables_interfaces()
 
 ## 11 Oct 2015
 
@@ -67,3 +71,4 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## A faire
 
+- Le tri par compte de click n'est pas fonctionnel car compte alphabétiquement donc 9 > 123 par exemple.

@@ -97,8 +97,6 @@ function shortcut_url_ajouter_menus($boutons_admin){
 		unset($boutons_admin['menu_shortcut_url']);
 	}
 
-	spip_log($boutons_admin, 'test.' . _LOG_ERREUR);
-
 	return $boutons_admin;
 }
 
