@@ -27,5 +27,5 @@
 </div>
 	<div class='ajax'>
 	<h3 class="titrem"><:ffedata:codes_equipes_club:></h3>
-	<INCLURE{fond=prive/squelettes/inclure/ffe_equipe_clubs_codes}
+[(#CONFIG{ffedata/saison}|=={""}|non) <INCLURE{fond=prive/squelettes/inclure/ffe_equipe_clubs_codes}>]
 	</div>
