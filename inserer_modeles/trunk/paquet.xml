@@ -19,7 +19,9 @@
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="inserer_modeles_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="inserer_modeles_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.5.0;[" />
-	<necessite nom="verifier" compatibilite="[0.1.1;[" />
-	<necessite nom="yaml" compatibilite="[1.4.1;[" />
+	<necessite nom="saisies" compatibilite="[2.5.0;2.*.*]" />
+	<necessite nom="verifier" compatibilite="[0.1.10;0.*.*]" />
+	<necessite nom="yaml" compatibilite="[1.5.1;1.*.*]" />
+	
+	<utilise nom="mediabox" compatibilite="[0.8.1;0.*.*]" />
 </paquet>
