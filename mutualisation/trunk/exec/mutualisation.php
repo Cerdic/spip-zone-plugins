@@ -119,19 +119,21 @@ function exec_mutualisation_dist()
             $plugins = '-';
         }
 
-        $compression = '';
-        if ($meta['auto_compress_css'] == 'oui') {
-            $compression .= 'CSS';
-        }
-        if ($meta['auto_compress_js'] == 'oui') {
-            $compression .= ($compression != '') ? '+JS' : 'JS';
-        }
-        if ($meta['auto_compress_http'] == 'oui') {
-            $compression .= ($compression != '') ? '+HTTP' : 'HTTP';
-        }
-        if ($compression == '') {
-            $compression = _L('Activer');
-        }
+		if(is_array($meta)){
+        	$compression = '';
+        	if ($meta['auto_compress_css'] == 'oui') {
+            	$compression .= 'CSS';
+        	}
+        	if ($meta['auto_compress_js'] == 'oui') {
+            	$compression .= ($compression != '') ? '+JS' : 'JS';
+        	}
+        	if ($meta['auto_compress_http'] == 'oui') {
+            	$compression .= ($compression != '') ? '+HTTP' : 'HTTP';
+        	}
+        	if ($compression == '') {
+            	$compression = _L('Activer');
+        	}
+		}
         $page .= '<script type="text/javascript">
         //<![CDATA[
         tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
