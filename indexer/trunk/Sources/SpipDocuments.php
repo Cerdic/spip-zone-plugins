@@ -226,6 +226,8 @@ class SpipDocuments implements SourceInterface {
 			// Là normalement on a maintenant la rubrique la plus basse
 			$doc['properties']['parents']['ids'] = array();
 			$doc['properties']['parents']['titres'] = array();
+			$doc['properties']['parents']['ids_hierarchie'] = array();
+			$doc['properties']['parents']['titres_hierarchie'] = array();
 			while ($f = sql_fetsel(
 				'id_parent, titre',
 				'spip_rubriques',
@@ -233,10 +235,19 @@ class SpipDocuments implements SourceInterface {
 			)){
 				$titre_actuel = supprimer_numero($f['titre']);
 				$id_parent = intval($f['id_parent']);
-				$doc['properties']['parents']['ids'][] = $id_rubrique_enfant;
-				$doc['properties']['parents']['titres'][$id_rubrique_enfant] = $titre_actuel;
 				
+				// On ajoute ce parent suivant au début du tableau
+				array_unshift($doc['properties']['parents']['ids'], $id_rubrique_enfant);
+				$doc['properties']['parents']['titres'] = array_merge(array($id_rubrique_enfant=>$titre_actuel), $doc['properties']['parents']['titres']);
+				
+				// On passe au parent suivant
 				$id_rubrique_enfant = $id_parent;
+			}
+			// C'est seulement une fois qu'on a tous les titres qu'on peut réussir à construire les bons hashs
+			foreach ($doc['properties']['parents']['titres'] as $titre) {
+				$id_hierarchie = $this->getIdHierarchie($doc['properties']['parents']['titres_hierarchie'], $titre);
+				$doc['properties']['parents']['ids_hierarchie'][] = $id_hierarchie;
+				$doc['properties']['parents']['titres_hierarchie'][$id_hierarchie] = $titre;
 			}
 			
 			// On ajoute la branche dans le fulltext
@@ -293,6 +304,17 @@ class SpipDocuments implements SourceInterface {
 
 	public function getObjectId($objet, $id_objet){
 		return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
+	}
+	
+	public function getIdHierarchie($hierarchie=array(), $titre='') {
+		// On ajoute le titre du contenu lui-même à la fin de la hiérarchie
+		if (!is_array($hierarchie)) {
+			$hierarchie = array();
+		}
+		$hierarchie[] = $titre;
+		$id = md5(serialize($hierarchie));
+		
+		return $id;
 	}
 
 	public function getBounds($column = '') {

@@ -87,6 +87,9 @@ function indexer_sources(){
 			}
 		}
 		
+		// Toute la hiérarchie des rubriques
+		$sources->register('hierarchie_rubriques', new Spip\Indexer\Sources\HierarchieRubriques());
+		
 		// On passe les sources dans un pipeline
 		$sources = pipeline('indexer_sources', $sources);
 	}
