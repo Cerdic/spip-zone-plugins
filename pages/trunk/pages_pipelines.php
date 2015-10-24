@@ -328,10 +328,10 @@ function pages_pre_boucle($boucle){
 				break;
 			}
 			elseif (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'page') { // {page=x}
-				if (
-					($_critere->op == '=') AND ($_critere->param[1][0]->texte == '')
-				  OR $_critere->not
-				  ) {
+				if (($_critere->op == '=')
+					AND ($_critere->param[1][0]->texte == '')
+					AND empty($_critere->param[1][1])
+				  OR $_critere->not) {
 					// On veut exclure explicitement les pages
 					break;
 				}
