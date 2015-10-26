@@ -182,6 +182,8 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$hauteur = intval($taille);
+	elseif ($GLOBALS['meta']['media_taille_defaut_hauteur'] && !$largeur)
+		$hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
 	else
 		$hauteur = 100000;
 	// largeur du redimensionnement
@@ -191,6 +193,8 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$largeur = intval($taille);
+	elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && !$hauteur)
+		$largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
 	else
 		$largeur = 100000;
 	// Doit-on redimensionner ?
@@ -294,10 +298,23 @@ function calculer_balise_MEDIA_TAILLE($dim,$args,$sql_largeur,$sql_hauteur){
 		'grand' => 640
 	);
 	// Une taille par défaut si le document n'en n'a pas
-	if (!is_numeric($sql_hauteur) || intval($sql_hauteur)<=0)
-		$sql_hauteur = isset($GLOBALS['meta']['media_taille_grand_hauteur']) ? $GLOBALS['meta']['media_taille_grand_hauteur'] : 480;
-	if (!is_numeric($sql_largeur) || intval($sql_largeur)<=0)
-		$sql_largeur = isset($GLOBALS['meta']['media_taille_grand_largeur']) ? $GLOBALS['meta']['media_taille_grand_largeur'] : 640;
+	if (!is_numeric($sql_hauteur) || intval($sql_hauteur)<=0) {
+		if ($GLOBALS['meta']['media_taille_defaut_hauteur'])
+			$sql_hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
+		elseif ($GLOBALS['meta']['media_taille_grand_hauteur'])
+			$sql_hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
+		else
+			$sql_hauteur = 480;
+	}
+	if (!is_numeric($sql_largeur) || intval($sql_largeur)<=0) {
+		if ($GLOBALS['meta']['media_taille_defaut_largeur'])
+			$sql_largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
+		elseif ($GLOBALS['meta']['media_taille_grand_largeur'])
+			$sql_largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
+		else
+			$sql_largeur = 640;
+	}
+	
 	// Hauteur visée (on peut avoir passé une hauteur en %)
 	if (substr(trim($hauteur),-1)=='%')
 		$hauteur = trim($hauteur);

@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_alt' => 'Texte alternatif :',
 	'label_configurer_media_largeur_legende' => 'Largeur des légendes :',
+	'label_configurer_media_taille_defaut' => 'Taille par défaut (optionnel) :',
 	'label_configurer_media_taille_grand' => 'Taille ’grand’ :',
 	'label_configurer_media_taille_icone' => 'Taille ’icone’ :',
 	'label_configurer_media_taille_moyen' => 'Taille ’moyen’ :',
@@ -63,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type' => 'Type de document :',
 	'label_variante' => 'Que souhaitez-vous ?',
 	'largeur' => 'Largeur :',
+	'legend_autres' => 'Autres paramètres',
+	'legend_tailles' => 'Tailles standards',
 
 	// M
 	'maj' => 'Mis à jour le :',
