@@ -18,6 +18,6 @@
 
 	<pipeline nom="autoriser" inclure="qrcode_autorisations.php" /> 
 
-	<menu nom="configurer_qrcode" titre="qrcode:titre_page_configurer_qrcode" parent="menu_configuration" icone="prive/themes/spip/images/qrcode-16.png" />
+	<menu nom="configurer_qrcode" titre="qrcode:titre_page_configurer_qrcode" parent="menu_configuration" icone="images/qrcode-16.png" />
 
 </paquet>
