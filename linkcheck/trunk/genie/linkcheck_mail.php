@@ -6,15 +6,16 @@ function genie_linkcheck_mail_dist(){
 	include_spip('inc/config');
 
 	if(lire_config('linkcheck/notifier_courriel')){
-		$sql = sql_fetsel( 'COUNT(id_linkcheck) AS c, etat','spip_linkchecks', 'etat!="ok"', '', 'etat');
+		$resultat = array();
+		$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', 'etat!="ok"', 'etat');
 
 		if($sql>0){
-			while($res = sql_fetch($sql)){
-				$cont .= '<li>'.$res['c'].' lien(s) '.$res['etat'].'.</li>';
+			foreach ($sql as $cle => $valeur) {
+				$msg_resultat .= '<li>'.$valeur['c'].' lien(s) '.$valeur['etat'].'.</li>';
 			}
 
 			$cont = _T('linkcheck:mail_notification1');
-			$cont .= '<ul>'.$cont.'</ul><br/>';
+			$cont .= '<ul>'.$msg_resultat.'</ul><br/>';
 			$cont .= _T('linkcheck:mail_notification2');
 
 			$email = lire_config('email_webmaster');
