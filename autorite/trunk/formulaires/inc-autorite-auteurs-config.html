@@ -40,10 +40,6 @@
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:droits_limites:></option>
 				#SET{val,oui}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:droits_idem_admins:></option>
-				#SET{val,2}
-				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:tous:></option>
-				#SET{val,-1}
-				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:personne:></option>
 			</select>
 		</li>
 	</ul>
