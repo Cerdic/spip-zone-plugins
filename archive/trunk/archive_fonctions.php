@@ -3,7 +3,6 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$GLOBALS['marqueur_skel'].=":archives";
 
 /**
  * Définition du critère {archive x} (pour compatibilité avec les anciennes versions)
