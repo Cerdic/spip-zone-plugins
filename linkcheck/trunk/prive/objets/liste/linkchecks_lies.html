@@ -23,8 +23,8 @@ a mis a jour la valeur avec la page reelle]
 		<tr class='first_row'>
 		<th class="id" scope='col'><:linkcheck:id:></th>
 		<th scope='col'><:linkcheck:url:></th>
-		<th scope='col'><:linkcheck:utilise:></th>
-		<th scope='col'><:linkcheck:etat:></th>
+		<th class="utilise" scope='col'><:linkcheck:utilise:></th>
+		<th class="etat" scope='col'><:linkcheck:etat:></th>
 		<th class='date' scope='col'><:linkcheck:maj:></th>
 		</tr>
 	</thead>
@@ -32,7 +32,7 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_linkchecks(LINKCHECKS){id_linkcheck IN #GET{selection}}
 		{tri #ENV{par,multi url},#GET{defaut_tri}}{pagination #ENV{nb,10} linl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#URL**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_LINKCHECK|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,ajax,env}>
+			<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
 		</tr>
 	</BOUCLE_liste_linkchecks>
 	</tbody>
@@ -40,7 +40,7 @@ a mis a jour la valeur avec la page reelle]
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_linkchecks>
-<div class="liste-objets liste-objets-lies linkchecks caption-wrap">
+<div class="liste-objets liste-objets-lies LINKCHECKS caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:linkcheck:info_aucun_linkcheck:>})]</strong>
 </div>
 <//B_liste_linkchecks>

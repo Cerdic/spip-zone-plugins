@@ -9,7 +9,9 @@
 	</ul>
 	<div class="nettoyeur"></div>
 </div>
-<div class="galerie">
+
+#BOITE_OUVRIR
+<div class="liste-objets">
 <B_ListeLink>
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 	<table>
@@ -17,16 +19,17 @@
 		<tr class='first_row'>
 		<th class="id" scope='col'><:linkcheck:id:></th>
 		<th scope='col'><:linkcheck:url:></th>
-		<th scope='col'><:linkcheck:utilise:></th>
-		<th scope='col'><:linkcheck:etat:></th>
+		<th class="utilise" scope='col'><:linkcheck:utilise:></th>
+		<th class="etat" scope='col'><:linkcheck:etat:></th>
 		<th class='date' scope='col'><:linkcheck:maj:></th>
 		</tr>
 	</thead>
 <BOUCLE_ListeLink(LINKCHECKS){!par maj}{etat?}{url?}{distant?}{pagination #ENV{pagination,10}}>
-	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,ajax,env}>
+	<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,env}>
 </BOUCLE_ListeLink>
 	</table>
 	[<p class="pagination">(#PAGINATION{prive})</p>]
 	#SET{nb_orphelins,#GRAND_TOTAL}
 </B_ListeLink>
 </div>
+#BOITE_FERMER
