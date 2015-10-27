@@ -182,7 +182,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$hauteur = intval($taille);
-	elseif ($GLOBALS['meta']['media_taille_defaut_hauteur'] && !$largeur)
+	elseif ($GLOBALS['meta']['media_taille_defaut_hauteur'] && is_null($args['largeur']))
 		$hauteur = $GLOBALS['meta']['media_taille_defaut_hauteur'];
 	else
 		$hauteur = 100000;
@@ -192,8 +192,8 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	elseif (in_array($taille,array('icone','petit','moyen','grand')))
 		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
 	elseif (is_numeric($taille) && intval($taille)>0)
-		$largeur = intval($taille);
-	elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && !$hauteur)
+		$largeur = intval($taille); 
+	elseif ($GLOBALS['meta']['media_taille_defaut_largeur'] && is_null($args['hauteur']))
 		$largeur = $GLOBALS['meta']['media_taille_defaut_largeur'];
 	else
 		$largeur = 100000;
