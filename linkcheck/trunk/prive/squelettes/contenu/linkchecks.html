@@ -4,8 +4,11 @@
 
 [(#SET{tab_avt, #LINKCHECK_CHIFFRE})]
 [(#GET{tab_avt}|table_valeur{nb_lien}|=={0}|oui)
-	<div><:linkcheck:pas_encore_de_liens:></div>
+	[(#BOITE_OUVRIR{<:linkcheck:info_aucun_lien:>,'simple','bam'})]
+	<:linkcheck:pas_encore_de_liens:>
+	#BOITE_PIED
 	[(#BOUTON_ACTION{<:linkcheck:commencer_parcours:>,#URL_ACTION_AUTEUR{linkcheck_parcours,'',#URL_ECRIRE{linkchecks}}})]
+	#BOITE_FERMER
 ]
 
 [(#GET{tab_avt}|table_valeur{nb_lien}|>{0}|oui)
@@ -13,8 +16,10 @@
 [(#BOITE_OUVRIR{'',info})]
 
 [(#GET{tab_avt}|table_valeur{nb_lien}|=={0}|oui)
+	#BOITE_PIED
 	<a href="#URL_ACTION_AUTEUR{linkcheck_parcours,'',#URL_ECRIRE{linkchecks}}"><:linkcheck:continuer_parcours:></a>]
 
+[(#GET{tab_avt}|table_valeur{nb_lien}|>{0}|oui)
 <strong>[(#GET{tab_avt}|table_valeur{nb_lien}|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks})]</strong>
 [(#GET{tab_avt}|table_valeur{nb_lien_inconnu}|>{0}|oui)[<small><:linkcheck:dont:> <span id="nb_lien_inconnu">(#GET{tab_avt}|table_valeur{nb_lien_inconnu})</span>[ (#GET{tab_avt}|table_valeur{nb_lien_inconnu}|singulier_ou_pluriel{<:linkcheck:non_verifie:>,<:linkcheck:non_verifies:>})]</small>]]]
 <div class="progress">
@@ -40,8 +45,12 @@
 	[(#SET{texte_bouton,#VAL{linkcheck:commencer_verification_liens}|_T})]
 ]
 
-[<div id="btn_linkcheck_tests">
-	#GET{texte_explication}  : (#BOUTON_ACTION{#GET{texte_bouton},#URL_ACTION_AUTEUR{linkcheck_tests,'',#URL_ECRIRE{linkchecks}}})
+[
+	#GET{texte_explication}
+	#BOITE_PIED
+	<div id="btn_linkcheck_tests">
+	(#BOUTON_ACTION{#GET{texte_bouton},#URL_ACTION_AUTEUR{linkcheck_tests,'',#URL_ECRIRE{linkchecks}}})
+	</div>
 </div>]
 
 [<script type="text/javascript" src="(#CHEMIN{js/linkcheck_progress.js})"></script>]
@@ -51,5 +60,4 @@
 
 <div class="ajax">
 <INCLURE{fond=prive/objets/liste/linkchecks,ajax,env}>
-</div>
-]
+</div>]

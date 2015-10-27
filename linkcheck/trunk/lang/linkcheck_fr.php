@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'id' => 'ID',
+	'info_aucun_lien' => 'Aucun lien n’est encore recensé.',
 	'info_1_linkcheck' => 'Un lien',
 	'info_aucun_linkcheck' => 'Aucun lien détecté',
 	'info_nb_linkchecks' => '@nb@ liens',
@@ -69,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'parcours_incomplete' => 'Le parcours des liens du site est incomplet ou n’a pas encore été effectué !',
-	'pas_encore_de_liens' => '<strong>Aucun lien n’est encore recensé.</strong> Pour lancer la vérification des liens, il vous faut lancer la fonction qui va parcourir le site à la recherche de tous les liens. Suivant la taille de votre site internet, l’opération de recherche peut durer entre quelques secondes à quelques minutes. Si la page ne reponds pas, recharger simplement cette page.',
+	'pas_encore_de_liens' => 'Pour lancer la vérification des liens, il vous faut lancer la fonction qui va parcourir le site à la recherche de tous les liens. Suivant la taille de votre site internet, l’opération de recherche peut durer entre quelques secondes à quelques minutes. Si la page ne reponds pas, recharger simplement cette page.',
 	'poursuivre_verification' => 'Tous les liens ne sont pas encore vérifiés, il vous faut poursuivre la vérification en cliquant sur ce bouton',
 	'poursuivre_verification_liens' => 'Poursuivre la vérification',
 
