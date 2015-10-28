@@ -8,6 +8,42 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Mettre a jour les stats d'un envoi
+ * @param $id_mailshot
+ */
+function mailshot_compter_envois($id_mailshot){
+
+	// todo, sent, fail, [read, [clic]],[spam]
+	$total = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot));
+	$statuts = sql_allfetsel("statut,count(email) as nb","spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot),"statut");
+	$statuts = array_combine(array_map('reset',$statuts),array_map('end',$statuts));
+	#var_dump($statuts);
+	$set = array(
+		'total' => $total,
+		'failed'  => 0,
+		"nb_read" => 0,
+		"nb_clic" => 0,
+		"nb_spam" => 0,
+	);
+	if (isset($statuts['fail']))
+		$set['failed'] = $statuts['fail'];
+	if (isset($statuts['read']))
+		$set['nb_read'] = $statuts['read'];
+	if (isset($statuts['clic'])){
+		$set['nb_read'] += $statuts['clic']; // les clics sont aussi des lus
+		$set['nb_clic'] = $statuts['clic'];
+	}
+	if (isset($statuts['spam']))
+		$set['nb_spam'] = $statuts['spam'];
+
+	// current c'est tous les envoyes (y compris fails)
+	unset($statuts['todo']);
+	$set['current'] = array_sum($statuts);
+	#var_dump($set);
+	sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($id_mailshot));
+}
+
+/**
  * Definir la combinaison (periode,nb envois) pour respecter la cadence maxi configuree
  *
  * @return array
@@ -136,15 +172,12 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 
 		if ($nb_max AND !count($dests) AND $offset==0){
 			// plus de destinataires ? on a fini, on met a jour compteur et statut
-			$sent = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('sent'));
-			$failed = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('fail'));
 			$set = array(
 				'statut' => 'end',
-				'failed' => $failed,
-				'current' => $sent+$failed,
 				'date' => date('Y-m-d H:i:s'),
 			);
 			sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($shoot['id_mailshot']));
+			mailshot_compter_envois($shoot['id_mailshot']);
 			mailshot_update_meta_processing();
 		}
 		if (!$nb_max OR time()>_MAILSHOT_MAX_TIME) return $nb_restant;

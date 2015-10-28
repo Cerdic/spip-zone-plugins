@@ -44,10 +44,15 @@ function mailshot_url_newsletter($id){
  */
 function mailshot_afficher_avancement($current,$total,$failed=0){
 	$out = "$current/$total";
-	if ($failed)
-	$out .= " ($failed fail)";
+	if ($current == $total){
+		$out = "$total";
+	}
+	if ($failed){
+		$out .= " ($failed&nbsp;fail)";
+	}
 	return $out;
 }
+
 
 /**
  * Puce statut non modifiable (temporaire avec SPIP <=3.0.5)

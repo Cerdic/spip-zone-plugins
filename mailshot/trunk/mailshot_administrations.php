@@ -50,9 +50,29 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.3.2'] = array(
 		array('sql_alter', 'TABLE spip_mailshots_destinataires ADD try tinyint NOT NULL DEFAULT 0'),
 	);
+	$maj['0.3.3'] = array(
+		array('maj_tables', array('spip_mailshots')),
+		array('mailshot_update_stats'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+
+/**
+ * Compter les stats de chaque envoi suite a l'ajout des champs
+ */
+function mailshot_update_stats(){
+	include_spip('inc/mailshot');
+	$ids = sql_allfetsel("id_mailshot","spip_mailshots","nb_read=0");
+	$ids = array_map('reset',$ids);
+	foreach($ids as $id){
+		mailshot_compter_envois($id);
+		// timeout ? on reviendra
+		if (time() >= _TIME_OUT)
+			return;
+	}
 }
 
 /**

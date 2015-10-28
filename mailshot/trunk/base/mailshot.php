@@ -10,6 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
+ * @param array $interfaces
+ * @return array
  */
 function mailshot_declarer_tables_interfaces($interfaces) {
 
@@ -21,6 +23,8 @@ function mailshot_declarer_tables_interfaces($interfaces) {
 
 /**
  * Déclaration des objets éditoriaux
+ * @param array $tables
+ * @return array
  */
 function mailshot_declarer_tables_objets_sql($tables) {
 
@@ -38,6 +42,9 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			"total"   => "bigint(21) NOT NULL",
 			"current" => "bigint(21) NOT NULL",
 			"failed" => "bigint(21) NOT NULL",
+			"nb_read" => "bigint(21) NOT NULL",
+			"nb_clic" => "bigint(21) NOT NULL",
+			"nb_spam" => "bigint(21) NOT NULL",
 			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"date_start" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut" => "varchar(20)  DEFAULT 'processing' NOT NULL",
@@ -84,6 +91,8 @@ function mailshot_declarer_tables_objets_sql($tables) {
 
 /**
  * Déclaration des tables secondaires (liaisons)
+ * @param array $tables
+ * @return array
  */
 function mailshot_declarer_tables_auxiliaires($tables) {
 

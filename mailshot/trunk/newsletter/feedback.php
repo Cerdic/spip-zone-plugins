@@ -78,6 +78,8 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 			$unsubscribe = charger_fonction("unsubscribe","newsletter");
 			$unsubscribe($email,array('notify'=>false));
 		}
+		// et on demande un recomptage async
+		job_queue_add("mailshot_compter_envois","mailshot_compter_envois",array($id_mailshot),"inc/mailshot",true);
 	}
 	else {
 		spip_log("lot #$id_mailshot | $quoi $email ras","newsletter_feedback");
