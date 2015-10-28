@@ -286,17 +286,20 @@ function typoenluminee_nettoyer_raccourcis_typo($texte){
 if (!function_exists('acronymes_traiter_raccourcis')) {
 	function acronymes_traiter_raccourcis($letexte){
 		$pattern="{\[([^\|\]-]+)\|([^\|\]-]+)\]}";
-		preg_match_all ($pattern, $letexte, $tagMatches, PREG_SET_ORDER);
-		$textMatches = preg_split ($pattern, $letexte);
+		if (preg_match_all ($pattern, $letexte, $tagMatches, PREG_SET_ORDER)) {
+			$textMatches = preg_split ($pattern, $letexte);
 
-		$tag_attr=array();
-		foreach ($tagMatches as $key => $value) {
-			$tag_attr[]="<acronym title='".texte_backend($value[2])."'>".$value[1]."</acronym>";
+			$tag_attr=array();
+			foreach ($tagMatches as $key => $value) {
+				$tag_attr[]="<acronym title='".texte_backend($value[2])."'>".$value[1]."</acronym>";
+			}
+			for ($i = 0; $i < count ($textMatches); $i ++) {
+				$textMatches [$i] = $textMatches [$i] . $tag_attr [$i];
+			}
+			return implode ("", $textMatches);
+		} else {
+			return $letexte;
 		}
-		for ($i = 0; $i < count ($textMatches); $i ++) {
-			$textMatches [$i] = $textMatches [$i] . $tag_attr [$i];
-		}
-		return implode ("", $textMatches);
 	}
 }
 
