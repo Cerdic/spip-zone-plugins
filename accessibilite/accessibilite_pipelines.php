@@ -10,7 +10,7 @@ function accessibilite_pre_liens($texte){
 			$intitule = traiter_raccourci_lien_atts($reg[1]);
 			// si le lien est de type raccourcis "doc40"			
 			$type = typer_raccourci($reg[4]);
-			if ($type[0] == 'document') {
+			if (count($type) AND $type[0] == 'document') {
 				// Rechercher la taille du Doc dont l'id est dans $type[2]
 				$row = sql_fetsel(
 					array('TT1.titre as T1', 'taille', 'TT2.titre as T2'), 
