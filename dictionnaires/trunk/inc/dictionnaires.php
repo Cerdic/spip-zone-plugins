@@ -34,7 +34,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function dictionnaires_lister_definitions($purger=false){
 	// Le nom du fichier de cache
 	$langue = false;
-	if(in_array('spip_definitions',explode(',',$GLOBALS['meta']['multi_objets']))){
+	if(in_array('spip_definitions',explode(',',(isset($GLOBALS['meta']['multi_objets'])?$GLOBALS['meta']['multi_objets']:'')))){
 		$langue = _request('lang') ? _request('lang') : ($GLOBALS['spip_lang'] ? $GLOBALS['spip_lang'] : $GLOBALS['meta']['langue_site']);
 		if(!in_array($langue,explode(',', $GLOBALS['meta']['langues_multilingue'])))
 			$langue = $GLOBALS['meta']['langue_site'];
