@@ -39,7 +39,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 		: strval($page); # SPIP 2.0 ou autre
 
 	return
-		md5(var_export(array($contexte, $page),true).'-'.$GLOBALS['dossier_squelettes'].'-'.$GLOBALS['marqueur'])
+		md5(var_export(array($contexte, $page),true).'-'.$GLOBALS['dossier_squelettes'].'-'.(isset($GLOBALS['marqueur'])?$GLOBALS['marqueur']:''))
 		. '-'.$indicateur;
 }
 
