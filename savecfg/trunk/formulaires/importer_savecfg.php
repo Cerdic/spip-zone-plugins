@@ -26,16 +26,17 @@ function formulaires_importer_savecfg_traiter_dist() {
 function importer_savecfg($fichier) {
 	$res = array();
 	$titres = array();
+	include_spip('inc/sauvegarder_savecfg');
+	
 	$file = unserialize(file_get_contents($_FILES['fichier']['tmp_name']));
 	foreach($file as $save=>$value) {
 		foreach($file[$save] as $mat=>$content) {
 			if ($mat == 'id_savecfg')
 				$file[$save][$mat] = '';
 			$file[$save]['titre'] = $save;
-			$titres[] = $file[$save]['titre'];
 		}
-		sql_insertq('spip_savecfg', $file[$save]);
+		$titres[]  = sauvegarder_savecfg($file[$save]['fond'], $file[$save]['titre'], $file[$save]['valeur']);
 	}
-	$res['message_ok'] = _T('savecfg:import_ok').' ('.implode(', ',array_unique($titres)).')';
+	$res['message_ok'] = _T('savecfg:import_ok').' <ul><li>'.implode('</li><li>',array_unique($titres)).'</li></ul>';
 	return $res;
 }

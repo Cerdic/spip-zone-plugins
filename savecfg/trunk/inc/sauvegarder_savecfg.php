@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function sauvegarder_savecfg($fond, $titre, $sfg) {
 		// Insert ou Update ?
@@ -13,4 +13,3 @@ function sauvegarder_savecfg($fond, $titre, $sfg) {
 			return _T('savecfg:sauvegarde_ok',array('titre'=>$titre));
 		}
 }
-?>

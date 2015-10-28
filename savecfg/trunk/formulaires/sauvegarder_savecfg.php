@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_sauvegarder_savecfg_charger() {
 	$fond = _request('cfg');
@@ -27,4 +27,3 @@ function formulaires_sauvegarder_savecfg_traiter() {
 	}
 	return $message;
 }
-?>
