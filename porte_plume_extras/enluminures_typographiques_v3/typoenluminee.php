@@ -293,7 +293,7 @@ if (!function_exists('acronymes_traiter_raccourcis')) {
 			foreach ($tagMatches as $key => $value) {
 				$tag_attr[]="<acronym title='".texte_backend($value[2])."'>".$value[1]."</acronym>";
 			}
-			for ($i = 0; $i < count ($textMatches); $i ++) {
+			for ($i = 0; $i < count($tag_attr); $i ++) {
 				$textMatches [$i] = $textMatches [$i] . $tag_attr [$i];
 			}
 			return implode ("", $textMatches);
