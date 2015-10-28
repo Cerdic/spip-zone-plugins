@@ -1,10 +1,10 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_importer_savecfg_charger_dist() {
 	$valeurs = array(
-		'fichier'=>$fichier,
+		'fichier'=>'',
 	);
 	return $valeurs;
 }
@@ -24,15 +24,18 @@ function formulaires_importer_savecfg_traiter_dist() {
 	return $message;
 }
 function importer_savecfg($fichier) {
+	$res = array();
+	$titres = array();
 	$file = unserialize(file_get_contents($_FILES['fichier']['tmp_name']));
 	foreach($file as $save=>$value) {
 		foreach($file[$save] as $mat=>$content) {
 			if ($mat == 'id_savecfg')
 				$file[$save][$mat] = '';
 			$file[$save]['titre'] = $save;
+			$titres[] = $file[$save]['titre'];
 		}
 		sql_insertq('spip_savecfg', $file[$save]);
 	}
-	return _T('savecfg:import_ok');
+	$res['message_ok'] = _T('savecfg:import_ok').' ('.implode(', ',array_unique($titres)).')';
+	return $res;
 }
-?>
