@@ -1,12 +1,12 @@
 <paquet
 	prefix="mailshot"
 	categorie="communication"
-	version="1.9.0"
+	version="1.10.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/mailshot-32.png"
 	documentation="http://contrib.spip.net/mailshot"
-	schema="0.3.3"
+	schema="0.3.4"
 >
 
 	<nom>MailShot</nom>
@@ -21,6 +21,7 @@
 	<pipeline nom="taches_generales_cron" inclure="mailshot_pipelines.php" />
 	<pipeline nom="afficher_complement_objet" inclure="mailshot_pipelines.php" />
 	<pipeline nom="afficher_fiche_objet" inclure="mailshot_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="mailshot_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="mailshot_pipelines.php" />
 	<pipeline nom="post_edition" inclure="mailshot_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="mailshot_pipelines.php" />

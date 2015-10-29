@@ -15,6 +15,11 @@ function mailshot_compter_envois($id_mailshot){
 
 	// todo, sent, fail, [read, [clic]],[spam]
 	$total = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot));
+	// si aucun destinataires en base on ne fait rien, pour ne pas risquer de tuer les stats d'un envoi purge
+	if (!$total) {
+		return;
+	}
+
 	$statuts = sql_allfetsel("statut,count(email) as nb","spip_mailshots_destinataires","id_mailshot=".intval($id_mailshot),"statut");
 	$statuts = array_combine(array_map('reset',$statuts),array_map('end',$statuts));
 	#var_dump($statuts);

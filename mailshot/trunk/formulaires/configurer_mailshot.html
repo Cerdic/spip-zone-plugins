@@ -178,6 +178,36 @@
 					</ul>
 				</fieldset>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailshot:legend_configuration_historique:></legend>
+					<p class="explication"><:mailshot:explication_purger_historique:></p>
+					<ul>
+						#SET{name,purger_historique}#SET{obli,''}#SET{defaut,'oui'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							#SET{val,non}
+							<input type="hidden" name="#GET{name}" value="#GET{val}" />
+							#SET{val,oui}
+							<div class="choix">
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"
+								[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+							</div>
+							<ul class="suite">
+								#SET{name,purger_historique_delai}#SET{obli,''}#SET{defaut,'12'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer gauche long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+									style="width: 6em;" /> <:date_mois:>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
 		</ul>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
@@ -196,7 +226,7 @@ jQuery(
 	function(){
 		jQuery('.suite').each(
 			function(){
-				var input=jQuery(this).prev('.choix').find('input.radio');
+				var input=jQuery(this).prev('.choix').find('input.radio,input.checkbox');
 				var me = jQuery(this);
 				var name = input.attr('name');
 				if (input.length){

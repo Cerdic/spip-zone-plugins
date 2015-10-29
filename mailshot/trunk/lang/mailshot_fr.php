@@ -18,6 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_boost_send' => 'Dans ce mode, les mails seront envoyés aussi vite que possible. Aucune limite de cadence n’est prise en compte.
 										L’envoi rapide est déconseillé car il augmente le risque de classement en SPAM.',
 	'explication_rate_limit' => 'Indiquer le nombre maximum de mail envoyés par jour ou laisser vide pour ne pas fixer de limite',
+	'explication_purger_historique' => 'Pour chaque envoi en nombre, l\'ensemble des destinataires est conservé en base, avec les informations concernant le statut de son envoi.
+	Cela peut représenter un volume important de données si vous faites beaucoup d\'envois et il est conseillé de purger le detail des vieux envois.',
 
 	// I
 	'info_1_mailshot' => '1 envoi',
@@ -67,7 +69,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Version Texte',
 	'legend_configuration_adresse_envoi' => 'Adresse d’envoi',
 	'legend_configuration_mailer' => 'Service d’envoi des mails',
+	'legend_configuration_historique' => 'Historique des envois',
 	'lien_voir_newsletter' => 'Voir l’infolettre',
+	'label_purger_historique_oui' => 'Effacer le detail des anciens envois',
+	'label_purger_historique_delai' => 'Plus vieux que',
 
 	// M
 	'mailshot_titre' => 'MailShot',

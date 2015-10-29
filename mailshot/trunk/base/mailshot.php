@@ -48,6 +48,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"date_start" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut" => "varchar(20)  DEFAULT 'processing' NOT NULL",
+			"maj"	=> "TIMESTAMP",
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_mailshot",

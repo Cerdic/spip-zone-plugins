@@ -31,7 +31,7 @@ function mailshot_taches_generales_cron($taches_generales){
 	// gerer les feedback par pooling par imap
 	if (isset($GLOBALS["imap_feedback_username"]) && isset($GLOBALS["imap_feedback_password"]) && $GLOBALS["imap_feedback_hostname"])
 		$taches_generales['imap_feedback'] = 3400;
-        
+
 	return $taches_generales;
 }
 
@@ -117,4 +117,52 @@ function mailshot_formulaire_traiter($flux){
 	}
 	return $flux;
 }
-?>
+
+/**
+ * Purger les envois a la pouvelle et le detail des vieux envois
+ * @param array $flux
+ * @return array
+ */
+function mailshot_optimiser_base_disparus($flux){
+	$n = &$flux['data'];
+	$mydate = $flux['args']['date'];
+
+	// supprimer les mailshosts a la poubelle, plus vieux que $mydate
+	$ids = sql_allfetsel("id_mailshot","spip_mailshots","maj<".sql_quote($mydate)." AND statut=".sql_quote('poubelle'));
+	$ids = array_map('reset',$ids);
+
+	if (count($ids)){
+		spip_log("Purger mailshots poubelle ".implode(",",$ids),"mailshot");
+		sql_delete("spip_mailshots_destinataires",sql_in('id_mailshot',$ids));
+		sql_delete("spip_mailshots",sql_in('id_mailshot',$ids));
+	}
+	else {
+		// sinon purgeons un vieux (pas dans le meme appel pour pas etre trop long)
+		include_spip("inc/config");
+		if (lire_config("mailshot/purger_historique",'non')=='oui'
+		  AND $delai = lire_config("mailshot/purger_historique_delai",0)){
+
+			// les envois finis depuis plus de $delai mois
+			$vieux = date('Y-m-d H:i:s',strtotime("-$delai month"));
+			$ids = sql_allfetsel(
+				"id_mailshot",
+				"spip_mailshots",
+				"date<".sql_quote($vieux)
+				." AND (date_start<date OR date_start<".sql_quote($vieux).")"
+				." AND ".sql_in('statut',array('end','cancel')));
+			$ids = array_map('reset',$ids);
+
+			// on en purge un seul, le premier qui vient
+			$id_mailshot = sql_getfetsel("id_mailshot","spip_mailshots_destinataires",sql_in('id_mailshot',$ids),"","","0,1");
+			if ($id_mailshot){
+				// mettre a jour les stats avant de purger
+				include_spip('inc/mailshot');
+				mailshot_compter_envois($id_mailshot);
+				sql_delete("spip_mailshots_destinataires",'id_mailshot='.intval($id_mailshot));
+				spip_log("Purger vieux mailshot $id_mailshot plus vieux que $vieux","mailshot");
+			}
+		}
+	}
+
+	return $flux;
+}
