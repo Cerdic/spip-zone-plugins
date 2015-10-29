@@ -140,7 +140,7 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 		// chercher les N prochains destinataires
 		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"$offset,$nb_max");
 		if (count($dests)){
-			$options = array('tracking_id'=>"mailshot".intval($shoot['id_mailshot']));
+			$options = array('tracking_id'=>"mailshot".intval($shoot['id_mailshot'])."-".date('Ym',strtotime($shoot['date_start'])));
 			$subscriber = charger_fonction("subscriber","newsletter");
 			$send = charger_fonction("send","newsletter");
 			$corps = array("sujet"=>&$shoot['sujet'],"html"=>&$shoot['html'],"texte"=>&$shoot['texte']);
