@@ -126,6 +126,9 @@ class SpipDocuments implements SourceInterface {
 		elseif (isset($contenu['nom'])) {
 			$doc['title'] = supprimer_numero($contenu['nom']);
 		}
+		elseif (isset($contenu['nom_site'])) {
+			$doc['title'] = supprimer_numero($contenu['nom_site']);
+		}
 		else {
 			$doc['title'] = '';
 		}

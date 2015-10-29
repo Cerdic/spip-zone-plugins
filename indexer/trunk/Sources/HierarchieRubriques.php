@@ -42,7 +42,7 @@ class HierarchieRubriques extends SpipDocuments {
 			foreach ($rubriques as $rubrique) {
 				$id_rubrique = intval($rubrique['id_rubrique']);
 				$titre = supprimer_numero($rubrique['titre']);
-				$rang= recuperer_numero($rubrique['titre']);
+				$rang = recuperer_numero($rubrique['titre']);
 				$id_hierarchie = $this->getIdHierarchie($parents, $titre);
 				$hierarchie[$id_hierarchie] = array(
 					'titre' => $titre,
