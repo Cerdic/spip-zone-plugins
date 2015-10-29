@@ -16,7 +16,7 @@
 
 function centre_image ($fichier) {
 	
-	if (_SPIP_CENTRE_IMAGE == "visage") return centre_image_visage ($fichier);
+	if (defined('_SPIP_CENTRE_IMAGE') AND _SPIP_CENTRE_IMAGE == "visage") return centre_image_visage ($fichier);
 	else return centre_image_densite ($fichier);
 }
 
@@ -118,11 +118,12 @@ function centre_image_y($fichier) {
  */
 
 function centre_image_visage ($fichier) {
+	static $spip_centre_image_visage = array();
 	if (preg_match("/src\=/", $fichier)) $fichier = extraire_attribut($fichier, "src");
 	$fichier = preg_replace(",\?[0-9]*$,", "", $fichier);
 
 	// on mémorise le résultat -> don
-	if ($spip_centre_image_visage["$fichier"]) return $spip_centre_image_visage["$fichier"];
+	if (isset($spip_centre_image_visage["$fichier"]) AND $spip_centre_image_visage["$fichier"]) return $spip_centre_image_visage["$fichier"];
 	
 	
 	if (file_exists($fichier)) {
