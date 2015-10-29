@@ -48,7 +48,7 @@ function autoriser_zotero_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Pour passer automatiquement les [ref=...] en notes de bas de page
-function zotspip_pre_propre($texte) {
+function zotspip_pre_typo($texte) {
 	$texte = preg_replace('#\[ref=(.*)\]#U','[[&#32;<ref|id=$1>]]',$texte);
 	return $texte;
 }
