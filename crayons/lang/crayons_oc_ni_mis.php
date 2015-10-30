@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_crayons' => 'Creioun',
 
 	// U
-	'update_impossible' => 'La metuda a jou a souhit.',
+	'update_impossible' => 'La messa a jou a souhit.',
 
 	// V
 	'veuillez_patienter' => 'Vourguès aspera...'
