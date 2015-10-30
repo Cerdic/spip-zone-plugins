@@ -45,7 +45,7 @@ function mailshot_url_newsletter($id){
 function mailshot_afficher_avancement($current,$total,$failed=0){
 	$out = "$current/$total";
 	if ($current == $total){
-		$out = "$total";
+		$out = "{$total} (100%)";
 	}
 	if ($failed){
 		$out .= " ($failed&nbsp;fail)";
