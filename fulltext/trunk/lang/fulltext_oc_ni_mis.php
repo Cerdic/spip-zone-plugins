@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mais_pas' => 'mà NOUN',
 	'message_ok_configuration' => 'Registramen de li vouòstri preferença acabat',
-	'message_ok_update_configuration' => 'Metuda a jou de li vouòstri preferença acabada',
+	'message_ok_update_configuration' => 'Messa a jou de li vouòstri preferença acabada',
 
 	// N
 	'nb_err' => 'En errour d’indessacioun',
