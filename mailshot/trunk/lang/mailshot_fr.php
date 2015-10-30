@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_generation_newsletter' => 'Une erreur est survenue lors de la génération de la newsletter',
 	'explication_boost_send' => 'Dans ce mode, les mails seront envoyés aussi vite que possible. Aucune limite de cadence n’est prise en compte.
 										L’envoi rapide est déconseillé car il augmente le risque de classement en SPAM.',
+	'explication_purger_historique' => 'Pour chaque envoi en nombre, l’ensemble des destinataires est conservé en base, avec les informations concernant le statut de son envoi.
+	Cela peut représenter un volume important de données si vous faites beaucoup d’envois et il est conseillé de purger le détail des vieux envois.',
 	'explication_rate_limit' => 'Indiquer le nombre maximum de mail envoyés par jour ou laisser vide pour ne pas fixer de limite',
-	'explication_purger_historique' => 'Pour chaque envoi en nombre, l\'ensemble des destinataires est conservé en base, avec les informations concernant le statut de son envoi.
-	Cela peut représenter un volume important de données si vous faites beaucoup d\'envois et il est conseillé de purger le détail des vieux envois.',
 
 	// I
 	'info_1_mailshot' => '1 envoi',
@@ -64,15 +64,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mailjet_api_key' => 'Clé API Mailjet',
 	'label_mailjet_secret_key' => 'Clé secrète Mailjet',
 	'label_mandrill_api_key' => 'Mandrill API Key',
+	'label_purger_historique_delai' => 'Plus vieux que',
+	'label_purger_historique_oui' => 'Effacer le détail des anciens envois',
 	'label_rate_limit' => 'Limiter la cadence d’envoi',
 	'label_sujet' => 'Sujet',
 	'label_texte' => 'Version Texte',
 	'legend_configuration_adresse_envoi' => 'Adresse d’envoi',
-	'legend_configuration_mailer' => 'Service d’envoi des mails',
 	'legend_configuration_historique' => 'Historique des envois',
+	'legend_configuration_mailer' => 'Service d’envoi des mails',
 	'lien_voir_newsletter' => 'Voir l’infolettre',
-	'label_purger_historique_oui' => 'Effacer le détail des anciens envois',
-	'label_purger_historique_delai' => 'Plus vieux que',
 
 	// M
 	'mailshot_titre' => 'MailShot',
