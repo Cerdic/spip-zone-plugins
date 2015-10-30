@@ -65,6 +65,7 @@ function oembed_lister_providers(){
 		'http://imgur.com/*'                      => 'http://api.imgur.com/oembed',
 		'http://*.imgur.com/*'                    => 'http://api.imgur.com/oembed',
 		'http://*.onf.ca/*'                       => 'http://www.onf.ca/remote/services/oembed/',
+		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
 		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
 		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
