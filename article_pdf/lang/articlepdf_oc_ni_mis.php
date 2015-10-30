@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'copyright' => 'Copyright © ',
 
 	// D
-	'date_de_mise_en_ligne' => 'Data de metuda en ligna : ',
+	'date_de_mise_en_ligne' => 'Data de messa en ligna : ',
 	'description' => 'Descricioun : ',
 
 	// E
