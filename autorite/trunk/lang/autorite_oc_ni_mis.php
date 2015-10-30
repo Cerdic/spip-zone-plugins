@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     \'1:5:8\');
 ?&gt;</pre>
 <p>A partì de SPIP 2.1, es finda poussible de douna lu drech de webmèstre a un aministratour vìa la pàgina d’édicioun de l’autour.</p>
-<p>A noutà : lu webmèstre definit d’aquela manièra noun an da besoun de prouchedre a l’autentificacioun per FTP dai ouperacioun delicadi (metuda a jou de la basa de dounada, per isemple).</p>
+<p>A noutà : lu webmèstre definit d’aquela manièra noun an da besoun de prouchedre a l’autentificacioun per FTP dai ouperacioun delicadi (messa a jou de la basa de dounada, per isemple).</p>
 
 <a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. doucumentacioun</a>
 ',
