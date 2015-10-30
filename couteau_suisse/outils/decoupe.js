@@ -1,5 +1,7 @@
 // variable modifiable afin d'initialiser l'ouverture d'un onglet
 if(typeof(onglet_actif)=='undefined') var onglet_actif = '';
+// variable modifiable afin de choisir la balise utilisee pour les onglets
+if(typeof(onglets_balise)=='undefined') var onglets_balise = 'h2';
 
 // fonction pour montrer un contenu
 jQuery.fn.montre_onglet = function( selector ) {
@@ -28,15 +30,15 @@ function onglets_init() {
 		.children('.onglets_contenu').each(function(i) {
 			this.id = 'onglets_contenu_' + i;
 			jQuery(this).parent().children('.onglets_liste').append(
-				'<h2 id="'+'onglets_titre_' + i + '" class="onglets_titre">' + this.firstChild.innerHTML + '</h2>'
+				'<'+onglets_balise+' id="'+'onglets_titre_' + i + '" class="onglets_titre">' + this.firstChild.innerHTML + '</'+onglets_balise+'>'
 			);
 		})
-		.children('h2').remove();
+		.children(onglets_balise).remove();
 	jQuery('div.onglets_liste', this).each(function() {
 		this.firstChild.className += ' selected';
 		this.nextSibling.className += ' selected';
 	});
-	jQuery('h2.onglets_titre', this).hover(
+	jQuery(onglets_balise+'.onglets_titre', this).hover(
 		function(){
 			jQuery(this).addClass('hover')
 		},function(){
@@ -46,13 +48,13 @@ function onglets_init() {
 	jQuery('div.onglets_bloc_initial', this)
 		.attr('class','onglets_bloc').each(function(i) {this.id = 'ongl_'+i;});
 	// clic du titre...
-	jQuery('h2.onglets_titre', this).click(function(e) {
+	jQuery(onglets_balise+'.onglets_titre', this).click(function(e) {
 		jQuery(this).montre_onglet();
 		return false;
 	});
 	// clic des <a>, au cas ou...
-	jQuery('h2.onglets_titre a', this).click(function(e){
-		jQuery(this).parents('h2').click();
+	jQuery(onglets_balise+'.onglets_titre a', this).click(function(e){
+		jQuery(this).parents(onglets_balise).click();
 		if (e.stopPropagation) e.stopPropagation();
 		e.cancelBubble = true;
 		return false;
