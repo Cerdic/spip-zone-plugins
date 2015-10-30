@@ -269,9 +269,12 @@ class FacteurMandrill extends Facteur {
 	* @access public
 	* @return void
 	*/
-	public function AddCustomHeader($custom_header) {
-		list($key,$value) = explode(':', $custom_header, 2);
-		$this->message['headers'][$key] = trim($value);
+	public function AddCustomHeader($name, $value = null) {
+		if ($value === null) {
+			// Value passed in as name:value
+			list($name, $value) = explode(':', $name, 2);
+		} 
+		$this->message['headers'][$name] = trim($value);
 	}
 
 	/**
