@@ -1,7 +1,7 @@
 <paquet
 	prefix="zinit"
 	categorie="outil"
-	version="0.2.3"
+	version="0.2.4"
 	etat="experimental"
 	compatibilite="[3.0.9;3.1.*]"
 	logo="prive/themes/spip/images/zinit-64.png"
