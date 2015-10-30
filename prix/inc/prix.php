@@ -10,16 +10,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix HT de l'objet sinon 0
  */
-function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2){
+function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2, $serveur){
 	$prix_ht = 0;
 	// Cherchons d'abord si l'objet existe bien
 	if ($type_objet
 		and $id_objet = intval($id_objet)
 		and include_spip('base/connect_sql')
 		and $type_objet = objet_type($type_objet)
-		and $table_sql = table_objet_sql($type_objet)
-		and $cle_objet = id_table_objet($type_objet)
-		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet")
+		and $table_sql = table_objet_sql($type_objet,$serveur)
+		and $cle_objet = id_table_objet($type_objet,$serveur)
+		and $ligne = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet",'','','','',$serveur)
 	){
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_ht_<objet>() dans prix/<objet>.php
 		if ($fonction_ht = charger_fonction('ht', "prix/$type_objet", true)){
@@ -60,13 +60,13 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2){
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($type_objet, $id_objet, $arrondi=2){
+function inc_prix_dist($type_objet, $id_objet, $arrondi=2, $serveur){
 	include_spip('base/connect_sql');
 	
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
 	$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 	$type_objet = objet_type($type_objet);
-	$prix = $prix_ht = $fonction_prix_ht($type_objet, $id_objet, 0);
+	$prix = $prix_ht = $fonction_prix_ht($type_objet, $id_objet, 0, $serveur);
 	
 	// On cherche maintenant s'il existe une personnalisation pour les taxes : prix_<objet>() dans prix/<objet>.php
 	if ($fonction_prix_objet = charger_fonction($type_objet, 'prix/', true)){
