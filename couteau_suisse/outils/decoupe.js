@@ -84,10 +84,11 @@ function get_onglet(url) {
  return tab==null?onglet_actif:tab[1];
 }
 
+// fonction non utilisee car en principe, les notes orphelines sont supprimees en php
 function decoupe_init() {
   // suppression des notes orphelines
   var that = this;
   jQuery('a[rev="footnote"].spip_note', that).each(function() {
 		if(!jQuery(this.getAttribute('href'), that).length) jQuery(this).parents('div[id^=nb]').eq(0).remove();
 	});
-}
+ }

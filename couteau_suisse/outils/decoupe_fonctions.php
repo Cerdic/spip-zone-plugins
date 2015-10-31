@@ -132,10 +132,7 @@ function decouper_en_pages_rempl($texte, $pagination_seule=false) {
 function decoupe_notes_orphelines(&$texte) {
 	if($GLOBALS['les_notes']=='') return;
 	$notes = $GLOBALS['les_notes'];
-/*	if(function_exists('tester_variable')) tester_variable('ouvre_note', '['); // tester_variable() depreciee sous SPIP 2.0
-	else*/ if (!isset($GLOBALS['ouvre_note'])) $GLOBALS['ouvre_note'] = '[';
-	$ouvre = preg_quote($GLOBALS['ouvre_note'],',');
-	$appel = ",<p[^>]*>.*?$ouvre<a [^>]*(?:name|id)=[\"']nb([0-9]+)[\"'] class=[\"']spip_note[\"'] [^>]+>[^<]+</a>.*?</p>,s";
+	$appel = ",<div id=[\"']nb([0-9]+)[\"']>.*?<a [^>]*class=[\"']spip_note[\"'][^>]+>[^<]+</a>.*?</div>,s";
 	preg_match_all($appel, $GLOBALS['les_notes'], $tableau);
 	for($i=0;$i<count($tableau[0]);$i++) {
 		if (!preg_match(",<a href=[\"']#nb{$tableau[1][$i]}[\"'],",$texte)) 

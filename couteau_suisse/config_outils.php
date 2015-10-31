@@ -853,7 +853,7 @@ if(!defined('_SPIP19300') && isset(\$_GET['var_recherche'])) {
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
 }",
 	// construction des onglets
-	'code:jq_init' => "onglets_init.apply(this); decoupe_init.apply(this);",
+	'code:jq_init' => "onglets_init.apply(this);",// decoupe_init.apply(this);",
 	'code:js' => "var onglets_balise = 'h2';",
 	// pour les balises #TEXTE : $table_des_traitements['TEXTE'] = 'cs_decoupe(propre(%s))';
 	// pour les articles, breves et rubriques : $table_des_traitements['TEXTE']['articles'] = 'cs_decoupe(propre(%s))';
