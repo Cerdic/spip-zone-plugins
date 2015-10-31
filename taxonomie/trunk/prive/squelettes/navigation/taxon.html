@@ -1,0 +1,14 @@
+<BOUCLE_nav(TAXONS){id_taxon}{si #ENV{exec}|=={taxon}}>
+#BOITE_OUVRIR{'','info'}
+    #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','taxon','id',#ENV{id_taxon}}}}
+#BOITE_FERMER
+
+<INCLURE{fond=prive/squelettes/inclure/inc-services,
+    nom=#NOM_SCIENTIFIQUE,
+    env}>
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,taxon,id,#ID_TAXON},data,''}}
+
+</BOUCLE_nav>
+[(#ENV{exec}|=={taxon_edit}|oui)<INCLURE{fond=prive/squelettes/navigation/taxon_edit,env} />]
+<//B_nav>

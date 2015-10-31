@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'action_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
+
+	// B
 	'bouton_taxonomie' => 'Taxonomie',
 
 	// C
