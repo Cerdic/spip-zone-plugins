@@ -26,7 +26,7 @@ function balise_PRIX_HT_dist($p) {
 // Un filtre pour obtenir le prix TTC d'un objet
 function prix_objet($id_objet, $type_objet, $serveur){
 	$fonction = charger_fonction('prix', 'inc/');
-	return $fonction($type_objet, $id_objet,'',$serveur);
+	return $fonction($type_objet, $id_objet,2,$serveur);
 }
 
 // La balise qui va avec le prix TTC
