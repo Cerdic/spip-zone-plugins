@@ -15,4 +15,3 @@ function prix_declarer_tables_interfaces($interface){
 function prix_prix_ht($flux){ return $flux; }
 function prix_priiix($flux){ return $flux; }
 
-?>

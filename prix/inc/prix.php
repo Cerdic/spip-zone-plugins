@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix HT de l'objet sinon 0
  */
-function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2, $serveur){
+function inc_prix_ht_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 	$prix_ht = 0;
 	// Cherchons d'abord si l'objet existe bien
 	if ($type_objet
@@ -60,7 +60,7 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2, $serveur){
  * @param int $id_objet L'identifiant de l'objet
  * @return float Retourne le prix TTC de l'objet sinon 0
  */
-function inc_prix_dist($type_objet, $id_objet, $arrondi=2, $serveur){
+function inc_prix_dist($type_objet, $id_objet, $arrondi = 2, $serveur = ''){
 	include_spip('base/connect_sql');
 	
 	// On va d'abord chercher le prix HT. On délègue le test de présence de l'objet dans cette fonction.
@@ -95,4 +95,3 @@ function inc_prix_dist($type_objet, $id_objet, $arrondi=2, $serveur){
 	return $prix;
 }
 
-?>
