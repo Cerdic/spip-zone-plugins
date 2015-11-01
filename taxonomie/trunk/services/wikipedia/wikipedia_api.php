@@ -31,7 +31,7 @@ if (!defined('_TAXONOMIE_WIKIPEDIA_LANGUE_DEFAUT'))
  * @param $nom_commun
  * @return array
  */
-function wikipedia_get($recherche, $section='') {
+function wikipedia_get($recherche, $section=null) {
 	global $spip_lang;
 	$information = '';
 
@@ -39,13 +39,13 @@ function wikipedia_get($recherche, $section='') {
 	$recherche = strtolower(trim($recherche));
 
 	// Construire l'URL de la function de recherche par nom vernaculaire
-	$url = wikipedia_api2url('json', 'query', $spip_lang, $recherche);
+	$url = wikipedia_api2url('json', 'query', $spip_lang, $recherche, $section);
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
 	$data = url2json_data($url);
 
-	// Récupération de la section demandée. Si vide on renvoie tout le texte
+	// Récupération de la section demandée.
 	if (isset($data['batchcomplete'])
 	AND isset($data['query']['pages'])) {
 		$reponses = $data['query']['pages'];
@@ -70,12 +70,14 @@ function wikipedia_get($recherche, $section='') {
  *
  * @return string
  */
-function wikipedia_api2url($format, $action, $langue, $recherche) {
+function wikipedia_api2url($format, $action, $langue, $recherche, $section) {
 
 	// Construire l'URL de l'api sollicitée
 	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE)
 		. 'action=' . $action
-		. '&prop=revisions&rvprop=content&continue=&redirects=1'
+		. '&prop=revisions&rvprop=content'
+		. (!is_null($section) ? '&rvsection=' . $section : '')
+		. '&continue=&redirects=1'
 		. '&format=' . $format
 		. '&titles=' . rawurlencode(ucfirst($recherche));
 
