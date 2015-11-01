@@ -185,6 +185,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	',
 
 	// L
+	'label_action_supprimer' => 'Actions',
+	'label_action_supprimer_objet' => 'Créer le fichier action/supprimer_<code>@objet@</code>',
+	'label_action_supprimer_explication' => 'Créer le fichier pour supprimer un objet (préférez le statut dans les champs spéciaux)',
 	'label_auteur' => 'Nom de l’auteur',
 	'label_auteur_lien' => 'URL vers l’auteur',
 	'label_auteurs_liens' => 'Lier des auteurs ?',

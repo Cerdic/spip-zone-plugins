@@ -438,6 +438,13 @@ function option_presente($objet, $champ) {
 			return " "; // true
 		}
 	}
+	
+	// fichier d'action creer_supprimer
+	if (isset($objet['creer_supprimer']) AND is_array($objet['creer_supprimer'])) {
+		if (in_array($champ, $objet['creer_supprimer'])) {
+			return " "; // true
+		}
+	}
 
 	return ""; // false
 }

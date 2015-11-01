@@ -373,6 +373,8 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// créer le formulaire d'edition
 			fabriquer_fichier("formulaires/editer_objet.html", $data);
 			fabriquer_fichier("formulaires/editer_objet.php", $data);
+			
+			// créer le fichier d'action pour supprimer l'objet
 
 			// créer la vue du contenu d'un objet
 			fabriquer_fichier("prive/objets/contenu/objet.html", $data);
@@ -419,6 +421,13 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 					if (champ_present($objet, 'id_parent')) {
 						fabriquer_fichier('saisies/_' . $saisie . '_recurs.html', $data);
 					}
+				}
+			}
+			
+			// créer le fichier d'action pour supprimer un objet
+			if (isset($objet['creer_supprimer']) and is_array($objet['creer_supprimer'])) {
+				foreach ($objet['creer_supprimer'] as $objet_creer_supprimer) {
+					fabriquer_fichier("action/supprimer_objet.php", $data);
 				}
 			}
 
