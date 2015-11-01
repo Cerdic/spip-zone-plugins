@@ -374,8 +374,6 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			fabriquer_fichier("formulaires/editer_objet.html", $data);
 			fabriquer_fichier("formulaires/editer_objet.php", $data);
 			
-			// créer le fichier d'action pour supprimer l'objet
-
 			// créer la vue du contenu d'un objet
 			fabriquer_fichier("prive/objets/contenu/objet.html", $data);
 
