@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'prix_ht' => '@prix@ HT',
-	'prix_ttc' => '@prix@ TTC'
+	'prix_ttc' => '@prix@ TTC',
 	
 	//T
 	'titre_prix' => 'Prix',
