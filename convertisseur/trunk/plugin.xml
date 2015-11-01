@@ -8,7 +8,7 @@
 	<auteur>[erational->http://www.erational.org], Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<icon>img_pack/convertisseur.png</icon>
-	<version>0.4.4</version>
+	<version>0.5.0</version>
 	<etat>test</etat>
 	<slogan>
 		<multi>
@@ -18,9 +18,9 @@
 	</slogan>
 	<description>
     	<multi>
-      [fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable
-    	[en]Converts various formats (wiki, phpBB) into SPIP format
-      </multi>
+        [fr]Convertit les formats de type wiki, phpBB, quark xpress tags en format SPIP et vice versa ; int&#232;gre au besoin les textes convertis dans des articles ; on peut uploader plusieurs textes en un seul coup en les zippant au pr&#233;alable
+        [en]Converts various formats (wiki, phpBB) into SPIP format
+        </multi>
 	</description>
 	<lien>http://contrib.spip.net/Plugin-Convertisseur</lien>
 	<prefix>convertisseur</prefix>
