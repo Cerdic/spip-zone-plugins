@@ -1,0 +1,7 @@
+\[(\#AUTORISER{supprimer,\#ENV{objet},\#ENV{id}}|oui)
+	\[(\#BOUTON_ACTION{\[(\#VAL{\#ENV{objet}:supprimer_\#ENV{objet}}|_T)], 
+		\[(\#URL_ACTION_AUTEUR{supprimer_\#ENV{objet},\#ENV{id},\#ENV{url_retour}})], 
+		danger,
+		\[(\#VAL{\#ENV{objet}:confirmer_supprimer_\#ENV{objet}}|_T)]
+	})]	
+]
