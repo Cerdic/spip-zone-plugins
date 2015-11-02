@@ -30,6 +30,10 @@ function compter_elements($table) {
 function fulltext_liste_des_tables(){
 	$champs = liste_des_champs();
 	$tables = array();
+	$champs_interdits = array(
+		'auteur'=>array('login')
+	);
+
 	foreach($champs as $table=>$fields){
 		$tables[$table] = array(
 			'fields' => $fields,
@@ -54,6 +58,8 @@ function fulltext_liste_des_tables(){
 			}
 			if (!isset($tables[$table]['keys']['tout'])){
 				$tables[$table]['index_prop']['tout'] = array_keys($fields);
+				if (isset($champs_interdits[$table]))
+					$tables[$table]['index_prop']['tout'] = array_diff($tables[$table]['index_prop']['tout'],$champs_interdits[$table]);
 			}
 		}
 	}
