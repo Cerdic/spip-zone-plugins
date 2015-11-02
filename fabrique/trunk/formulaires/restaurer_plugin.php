@@ -340,3 +340,43 @@ function fabrique_migration_v5($data) {
 	}
 	return $data;
 }
+
+
+/**
+ * Migration v6
+ *
+ * Les fichiers indiqués spécialement à créer vont dans une entrée 'fichiers' spécifique.
+ * - fichiers/echafaudages
+ * - fichiers/explicites
+ * - fichiers/...
+ * 
+ * @param  array $data Données à migrer
+ * @return array       Données migrées
+**/
+function fabrique_migration_v6($data) {
+	if (is_array($data['objets'])) {
+		$defaut = array(
+			'echafaudages' => array(),
+			'explicites'   => array(),
+		);
+		foreach ($data['objets'] as $c => $o) {
+			if (!isset($o['fichiers']) OR !is_array($o['fichiers'])) {
+				$data['objets'][$c]['fichiers'] = $defaut;
+			} else {
+				$data['objets'][$c]['fichiers'] = array_merge($defaut, $o['fichiers']);
+			}
+			if (isset($o['echafaudages'])) {
+				if (is_array($o['echafaudages'])) {
+					$data['objets'][$c]['fichiers']['echafaudages'] = $data['objets'][$c]['echafaudages'];
+				}
+				unset($data['objets'][$c]['echafaudages']);
+			}
+			if (!empty($o['supprimer_php'])) {
+				$data['objets'][$c]['fichiers']['explicites'][] = 'action/supprimer_objet.php';
+			}
+			unset($data['objets'][$c]['supprimer_php']);
+			unset($data['objets'][$c]['supprimer_html']);
+		}
+	}
+	return $data;
+}

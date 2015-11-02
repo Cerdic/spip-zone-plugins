@@ -403,10 +403,15 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("inc/precharger_objet.php", $data);
 			}
 
-			// fichiers echafaudes par SPIP mais demandes explicitement
-			if (isset($objet['echafaudages']) AND is_array($objet['echafaudages'])) {
-				foreach ($objet['echafaudages'] as $fichier) {
-					fabriquer_fichier($fichier, $data);
+			// fichiers demandés explicitement (échaffaudés normalement par SPIP ou autres spécifiques)
+			if (isset($objet['fichiers']) AND is_array($objet['fichiers'])) {
+				foreach ($objet['fichiers'] as $type => $fichiers) {
+					// type : echafaudages | explicites
+					if (is_array($fichiers)) {
+						foreach ($fichiers as $fichier) {
+							fabriquer_fichier($fichier, $data);
+						}
+					}
 				}
 			}
 
@@ -421,30 +426,19 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 					}
 				}
 			}
-			
-			// créer le fichier d'action pour supprimer un objet //#VALEUR|option_presente{menu_edition})]
-			if (isset($objet['fichiers_supprimer']) and is_array($objet['fichiers_supprimer'])) {
-				foreach ($objet['fichiers_supprimer'] as $option) {
-					if($option=="supprimer_php"){
-						fabriquer_fichier("action/supprimer_objet.php", $data);
-					}
-					if($option=="supprimer_html"){
-						$exist_supprimer_html=true;
-						// être certain d'avoir le fichier
-						fabriquer_fichier("prive/objets/infos/objet.html", $data);
-					}
-				}
+
+			// Si l'on n'a pas de statut pour cet objet, proposer un bouton de suppression et l'action correspondante.
+			if (!champ_present($objet, 'statut')) {
+				fabriquer_fichier("action/supprimer_objet.php", $data);
+				// être certain d'avoir ce fichier (échaffaudé)
+				fabriquer_fichier("prive/objets/infos/objet.html", $data);
 			}
 
 		}
 
 		unset($data['objet'],  $data['id_objet'], $data['type'],  $data['table']);
 		unset($data['mobjet'], $data['lobjet'],   $data['mtype'], $data['mid_objet']);
-		
-		//créer le fichier html à inclure pour supprimer tout objet
-		if($exist_supprimer_html===true){
-			fabriquer_fichier("formulaires/inc_supprimer_objet.html", $data);
-		}
+
 
 	}
 

@@ -3,6 +3,11 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.21 le 02 11 2015
+--------------------
+
+* Permettre de supprimer un objet éditorial n'utilisant pas les statuts
+
 
 2.0.19 le 30 06 2015
 --------------------

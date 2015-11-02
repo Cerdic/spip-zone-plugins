@@ -392,7 +392,7 @@
 
 
 
-<h3><a href="#fichiers_echafaudes"><:fabrique:legend_fichiers_echafaudes:></a></h3>
+<h3><a href="#fichiers_supplementaires"><:fabrique:legend_fichiers_supplementaires:></a></h3>
 <div>
 	<div class='editer-groupe'>
 		[(#SET{data,[(#ARRAY{
@@ -402,12 +402,33 @@
 		}
 		|tab_cle_de_langue{[(#ARRAY{objet,#GET{objets},type,#GET{type}})]}
 		|tab_wrap{<strong>}
-		|tab_cle_traduite_ajoute_dans_valeur{echafaudage_})]})]
+		|tab_cle_traduite_ajoute_dans_valeur{fichier_echafaudage_})]})]
 
-		[(#SAISIE{checkbox, objets/#CLE/echafaudages,
-			label=<:fabrique:label_fichiers:>,
+		[(#SAISIE{checkbox, objets/#CLE/fichiers/echafaudages,
+			label=<:fabrique:label_fichiers_echafaudes:>,
 			explication=<:fabrique:explication_fichiers_echafaudes:>,
 			datas=#GET{data}})]
+
+
+		[(#SET{data,[(#ARRAY{
+			action/supprimer_objet.php,action/supprimer_objet.php,
+		}
+		|tab_cle_de_langue{[(#ARRAY{objet,#GET{objets},type,#GET{type}})]}
+		|tab_wrap{<strong>}
+		|tab_cle_traduite_ajoute_dans_valeur{fichier_explicite_})]})]
+
+		[(#SAISIE{checkbox, objets/#CLE/fichiers/explicites,
+			label=<:fabrique:label_fichiers_explicites:>,
+			explication=<:fabrique:explication_fichiers_explicites:>,
+			datas=#GET{data}})]
+
+
+		[(#SAISIE{checkbox, objets/#CLE/saisies,
+			label=<:fabrique:label_saisies:>,
+			explication=<:fabrique:label_saisies_explication:>,
+			datas=[(#ARRAY{
+				objets,<:fabrique:saisies_objets{saisie=#LOBJET}:>})]})]
+
 	</div>
 </div>
 
@@ -470,12 +491,6 @@
 			menu_edition,<:fabrique:bouton_menu_edition:>,
 			outils_rapides,<:fabrique:bouton_outils_rapides:>})]})]
 
-	[(#SAISIE{checkbox, objets/#CLE/saisies,
-		label=<:fabrique:label_saisies:>,
-		explication=<:fabrique:label_saisies_explication:>,
-		datas=[(#ARRAY{
-			objets,<:fabrique:saisies_objets{saisie=#LOBJET}:>})]})]
-			
 	[(#SET{defaut_suppr,[(#ENV{objets/#CLE}|non|?{#LISTE{supprimer_php,supprimer_html},#LISTE})]})]
 	[(#SAISIE{checkbox, objets/#CLE/fichiers_supprimer,
 		label=<:fabrique:label_action_supprimer:>,

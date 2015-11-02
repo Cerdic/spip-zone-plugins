@@ -130,8 +130,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		en tapant une flèche bas au clavier ou en cliquant 2 fois dans la zone de saisie.',
 
 	// E
-	'echafaudage_prive/objets/infos/objet.html' => 'Ajoute le lien de prévisualisation',
-	'echafaudage_prive/squelettes/contenu/objets.html' => 'Ajoute un champ de recherche',
 	'echappement_accolades' => '{ }',
 	'echappement_crochets' => '[ ]',
 	'echappement_diese' => '#',
@@ -156,6 +154,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		s’ils sont absents. Vous pouvez cependant en créer certains afin de les modifier
 		pour changer le comportement par défaut de ce que propose SPIP.
 		Par ailleurs, ces fichiers ont parfois des ajouts minimes de fonctionnalités, alors indiquées.',
+	'explication_fichiers_explicites' => 'Ces fichiers n\'existent pas par défaut dans SPIP mais peuvent être générés
+		pour votre confort si besoin.',
 	'explication_reinitialiser' => 'Ceci efface les informations du plugin actuellement en cours de création.
 		Vous repartirez donc de zéro !',
 	'explication_roles' => 'De façon expérimentale, des rôles peuvent être gérés sur les liaisons en
@@ -178,6 +178,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fabrique_plugin' => 'Fabrique de @plugin@',
 	'fabrique_restaurer_titre' => 'Restaurer ou réinitialiser une fabrique',
 	'fabrique_titre' => 'La Fabrique',
+	'fichier_echafaudage_prive/objets/infos/objet.html' => 'Ajoute le lien de prévisualisation',
+	'fichier_echafaudage_prive/squelettes/contenu/objets.html' => 'Ajoute un champ de recherche',
+	'fichier_explicite_action/supprimer_objet.php' => 'Action de suppression de l\'objet (ce fichier est créé automatiquement si l\'objet ne gère pas de statut).',
 	'fichier_importation_cree_dans' => 'Fichier d’importation créé dans le répertoire <code>@dir@</code>, fichier <code>@import@</code> avec @lignes@ lignes pour un total de @taille@',
 	'fichiers_importations_compresses_cree_dans' => 'Fichier d’importation créé dans le répertoire <code>@dir@</code>, fichiers <code>@import@</code> et <code>@donnees_compressees@</code>, avec @lignes@ lignes pour un total de @taille@',
 
@@ -189,10 +192,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	',
 
 	// L
-	'label_action_supprimer' => 'Actions',
-	'label_action_supprimer_explication' => 'Créer les fichiers pour supprimer un objet (préférez le statut dans les champs spéciaux)',
-	'label_action_supprimer_html' => 'Créer le fichier html  et l’inclure',
-	'label_action_supprimer_objet' => 'Créer le fichier action/supprimer_<code>@objet@</code>',
 	'label_auteur' => 'Nom de l’auteur',
 	'label_auteur_lien' => 'URL vers l’auteur',
 	'label_auteurs_liens' => 'Lier des auteurs ?',
@@ -261,7 +260,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fichier_sauvegarde' => 'Fichier de sauvegarde',
 	'label_fichier_sauvegarde_ordinateur' => 'Sur votre ordinateur',
 	'label_fichier_sauvegarde_serveur' => 'Sur le serveur',
-	'label_fichiers' => 'Créer des fichiers ?',
+	'label_fichiers_echafaudes' => 'Fichiers échafaudés',
+	'label_fichiers_explicites' => 'Fichiers spécifiques',
 	'label_formulaire_configuration' => 'Formulaire de configuration ?',
 	'label_formulaire_configuration_titre' => 'Titre de la page de configuration',
 	'label_genre' => 'Genre',
@@ -340,7 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_date_publication' => 'Date de publication',
 	'legend_description' => 'Description',
 	'legend_fichiers' => 'Fichiers',
-	'legend_fichiers_echafaudes' => 'Fichiers échafaudés',
+	'legend_fichiers_supplementaires' => 'Fichiers supplémentaires',
 	'legend_inserer_administrations' => 'Dans <code>@prefixe@_administrations.php</code>',
 	'legend_inserer_base_tables' => 'Dans <code>base/@prefixe@.php</code>',
 	'legend_inserer_paquet' => 'Dans <code>paquet.xml</code>',
