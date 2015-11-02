@@ -24,7 +24,7 @@
 	\]
 \<//B_publie>
 </BOUCLE_statut>
-<BOUCLE_supprimer_objet(CONDITION){si (#OBJET|option_presente{supprimer_php}) et (#OBJET|option_presente{supprimer_html})}>
+<BOUCLE_supprimer_objet(CONDITION){si (#OBJET|option_presente{supprimer_php})}{si (#OBJET|option_presente{supprimer_html})}>
 \<INCLURE{fond=formulaires/inc_supprimer_objet,
 	id=\#ENV{id},
 	url_retour=\#URL_ECRIRE{#LOBJET},
