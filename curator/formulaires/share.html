@@ -5,17 +5,17 @@
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<div class="editer-groupe">
-		
+
 		<div class="editer">
 			<label for="titre"><:info_titre:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
 		</div>
-		
+
 		<div class="editer">
 			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>] 
-			<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}>
+			[<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>]
+			<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}{statut IN prepa,publie}>
 			<select name="id_parent" id="id_parent">
 				<option value="#ID_RUBRIQUE">#TITRE</option>
 				<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
@@ -26,22 +26,22 @@
 			</select>
 			</BOUCLE_rubs>
 		</div>
-		
+
 		<div class="editer">
 			<label for="nom_site"><:info_site:></label>
 			<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" size="35"  />
 		</div>
-		
+
 		<div class="editer">
 			<label for="url_site"><:info_url:></label>
 			<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" size="35"  />
 		</div>
-		
+
 		<div class="editer">
 			<label for="text_area"><:info_texte:></label>
 			<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
 		</div>
-		
+
 		<div class="editer">
 			[(#ENV{logo}|oui)
 			<label for="text_area"><:curator:logo:></label>
@@ -50,7 +50,7 @@
 			<input type="hidden" name="logo" value="#ENV{logo}">
 			]
 		</div>
-		
+
 		<div class="editer">
 			<label for="text_area"><:info_post_scriptum:></label>
 			<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
