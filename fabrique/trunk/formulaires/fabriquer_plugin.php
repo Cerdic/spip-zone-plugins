@@ -430,7 +430,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// Si l'on n'a pas de statut pour cet objet, proposer un bouton de suppression et l'action correspondante.
 			if (!champ_present($objet, 'statut')) {
 				fabriquer_fichier("action/supprimer_objet.php", $data);
-				// être certain d'avoir ce fichier (échaffaudé)
+				// être certain d'avoir ce fichier (échafaudé)
 				fabriquer_fichier("prive/objets/infos/objet.html", $data);
 			}
 
