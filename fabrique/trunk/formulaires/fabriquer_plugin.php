@@ -403,7 +403,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("inc/precharger_objet.php", $data);
 			}
 
-			// fichiers demandés explicitement (échaffaudés normalement par SPIP ou autres spécifiques)
+			// fichiers demandés explicitement (échafaudés normalement par SPIP ou autres spécifiques)
 			if (isset($objet['fichiers']) AND is_array($objet['fichiers'])) {
 				foreach ($objet['fichiers'] as $type => $fichiers) {
 					// type : echafaudages | explicites
