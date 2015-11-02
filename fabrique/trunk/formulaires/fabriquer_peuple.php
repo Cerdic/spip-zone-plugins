@@ -39,7 +39,7 @@ function formulaires_fabriquer_peuple_traiter_dist(){
 
 	// 'spip_articles' ou
 	// 'autreconnect:spip_articles'
-	list($connect, $table) = explode(':', $table);
+	list($connect, $table) = array_pad(explode(':', $table), 2, '');
 	if (!$table) {
 		$table = $connect;
 		$connect = '';
