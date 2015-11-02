@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'calcul_effectue' => 'Calcul effectué',
 	'chaine_ajouter_lien_objet' => 'Ajouter ce @type@',
 	'chaine_ajouter_lien_objet_feminin' => 'Ajouter cette @type@',
-	'chaine_confirmer_supprimer_objet_feminin' => 'Confirmez-vous la suppression de cette @type@ ?',
-	'chaine_confirmer_supprimer_objet' => 'Confirmez-vous la suppression de cet @type@ ?',
+	'chaine_confirmer_supprimer_objet' => 'Confirmez-vous la suppression de cet @type@ ?',
+	'chaine_confirmer_supprimer_objet_feminin' => 'Confirmez-vous la suppression de cette @type@ ?',
 	'chaine_icone_creer_objet' => 'Créer un @type@',
 	'chaine_icone_creer_objet_feminin' => 'Créer une @type@',
 	'chaine_icone_modifier_objet' => 'Modifier ce @type@',
@@ -190,9 +190,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_action_supprimer' => 'Actions',
-	'label_action_supprimer_objet' => 'Créer le fichier action/supprimer_<code>@objet@</code>',
-	'label_action_supprimer_html' => 'Créer le fichier html  et l\'inclure',
 	'label_action_supprimer_explication' => 'Créer les fichiers pour supprimer un objet (préférez le statut dans les champs spéciaux)',
+	'label_action_supprimer_html' => 'Créer le fichier html  et l’inclure',
+	'label_action_supprimer_objet' => 'Créer le fichier action/supprimer_<code>@objet@</code>',
 	'label_auteur' => 'Nom de l’auteur',
 	'label_auteur_lien' => 'URL vers l’auteur',
 	'label_auteurs_liens' => 'Lier des auteurs ?',
