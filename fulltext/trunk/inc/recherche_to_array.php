@@ -132,7 +132,8 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			// ET est nomme de la meme facon : `titre` (`titre`)
 			// sa ponderation est eventuellement donnee par la table $liste
 			if ($key == "t.`${name}`"
-			AND $ponderation = $liste[$table][$name])
+			  AND isset($champs[$name])
+			  AND $ponderation = $champs[$name])
 				$mult = $ponderation;
 
 			// Appliquer le coefficient multiplicatif
