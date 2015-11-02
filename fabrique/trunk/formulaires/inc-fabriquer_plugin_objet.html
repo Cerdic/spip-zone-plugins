@@ -310,6 +310,8 @@
 		texte_ajouter_objet,
 		texte_creer_associer_objet,
 		texte_changer_statut_objet,
+		supprimer_objet,
+		confirmer_supprimer_objet,
 	}>
 	[(#SAISIE{input, objets/#_objet:CLE/chaines/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
@@ -474,11 +476,14 @@
 		datas=[(#ARRAY{
 			objets,<:fabrique:saisies_objets{saisie=#LOBJET}:>})]})]
 			
-	[(#SAISIE{checkbox, objets/#CLE/creer_supprimer,
+	[(#SET{defaut_suppr,[(#ENV{objets/#CLE}|non|?{#LISTE{supprimer_php,supprimer_html},#LISTE})]})]
+	[(#SAISIE{checkbox, objets/#CLE/fichiers_supprimer,
 		label=<:fabrique:label_action_supprimer:>,
 		explication=<:fabrique:label_action_supprimer_explication:>,
+		defaut=#GET{defaut_suppr},
 		datas=[(#ARRAY{
-			actions,<:fabrique:label_action_supprimer_objet{objet=#TYPE}:>})]})]
+			supprimer_php,<:fabrique:label_action_supprimer_objet{objet=#TYPE}:>,
+			supprimer_html,<:fabrique:label_action_supprimer_html{objet=#TYPE}:>})]})]
 	</div>
 </div>
 

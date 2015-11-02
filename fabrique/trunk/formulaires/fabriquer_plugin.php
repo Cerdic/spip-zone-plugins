@@ -422,10 +422,17 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				}
 			}
 			
-			// créer le fichier d'action pour supprimer un objet
-			if (isset($objet['creer_supprimer']) and is_array($objet['creer_supprimer'])) {
-				foreach ($objet['creer_supprimer'] as $objet_creer_supprimer) {
-					fabriquer_fichier("action/supprimer_objet.php", $data);
+			// créer le fichier d'action pour supprimer un objet //#VALEUR|option_presente{menu_edition})]
+			if (isset($objet['fichiers_supprimer']) and is_array($objet['fichiers_supprimer'])) {
+				foreach ($objet['fichiers_supprimer'] as $option) {
+					if($option=="supprimer_php"){
+						fabriquer_fichier("action/supprimer_objet.php", $data);
+					}
+					if($option=="supprimer_html"){
+						$exist_supprimer_html=true;
+						// être certain d'avoir le fichier
+						fabriquer_fichier("prive/objets/infos/objet.html", $data);
+					}
 				}
 			}
 
@@ -433,6 +440,11 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 
 		unset($data['objet'],  $data['id_objet'], $data['type'],  $data['table']);
 		unset($data['mobjet'], $data['lobjet'],   $data['mtype'], $data['mid_objet']);
+		
+		//créer le fichier html à inclure pour supprimer tout objet
+		if($exist_supprimer_html===true){
+			fabriquer_fichier("formulaires/inc_supprimer_objet.html", $data);
+		}
 
 	}
 

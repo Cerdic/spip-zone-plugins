@@ -439,9 +439,9 @@ function option_presente($objet, $champ) {
 		}
 	}
 	
-	// fichier d'action creer_supprimer
-	if (isset($objet['creer_supprimer']) AND is_array($objet['creer_supprimer'])) {
-		if (in_array($champ, $objet['creer_supprimer'])) {
+	// fichiers supprimer_php, supprimer_html
+	if (isset($objet['fichiers_supprimer']) AND is_array($objet['fichiers_supprimer'])) {
+		if (in_array($champ, $objet['fichiers_supprimer'])) {
 			return " "; // true
 		}
 	}
