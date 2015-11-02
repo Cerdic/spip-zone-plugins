@@ -403,6 +403,11 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("inc/precharger_objet.php", $data);
 			}
 
+			// si inclusion dans plan du site
+			if (champ_present($objet, 'id_rubrique') and option_presente($objet, 'plan')) {
+				fabriquer_fichier("prive/squelettes/inclure/plan-objets.html", $data);
+			}
+
 			// fichiers demandés explicitement (échafaudés normalement par SPIP ou autres spécifiques)
 			if (isset($objet['fichiers']) AND is_array($objet['fichiers'])) {
 				foreach ($objet['fichiers'] as $type => $fichiers) {
@@ -438,8 +443,6 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 
 		unset($data['objet'],  $data['id_objet'], $data['type'],  $data['table']);
 		unset($data['mobjet'], $data['lobjet'],   $data['mtype'], $data['mid_objet']);
-
-
 	}
 
 	// creer les images

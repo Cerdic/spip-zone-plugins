@@ -3,6 +3,11 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.22 le 02 11 2015
+--------------------
+
+* Option pour permettre de lister un objet dans le plan du site s'il a un champ id_rubrique
+
 2.0.21 le 02 11 2015
 --------------------
 

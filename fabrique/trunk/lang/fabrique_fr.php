@@ -211,6 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ_lang_et_langue_choisie' => 'Champs <strong>lang</strong> et <strong>langue_choisie</strong>',
 	'label_champ_langues' => 'Gestion des langues',
 	'label_champ_langues_explication' => 'Ajouter des champs pour gérer les langues de l’objet (lang et langue_choisie) et les traductions (id_trad) ?',
+	'label_champ_plan_rubrique' => 'Lister l’objet dans le plan du site ?',
 	'label_champ_rubriques' => 'id_rubrique',
 	'label_champ_rubriques_explication' => 'Permet d’affecter cet objet dans une rubrique',
 	'label_champ_statut' => 'Champ <strong>statut</strong>',

@@ -418,7 +418,7 @@ function option_presente($objet, $champ) {
 		return " "; // true
 	}
 
-	// id_rubrique, vue_rubrique
+	// id_rubrique, vue_rubrique, plan
 	if (isset($objet['rubriques']) AND is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
 			return " "; // true
@@ -435,13 +435,6 @@ function option_presente($objet, $champ) {
 	// menu_edition, outils_rapides
 	if (isset($objet['boutons']) AND is_array($objet['boutons'])) {
 		if (in_array($champ, $objet['boutons'])) {
-			return " "; // true
-		}
-	}
-	
-	// fichiers supprimer_php, supprimer_html
-	if (isset($objet['fichiers_supprimer']) AND is_array($objet['fichiers_supprimer'])) {
-		if (in_array($champ, $objet['fichiers_supprimer'])) {
 			return " "; // true
 		}
 	}
