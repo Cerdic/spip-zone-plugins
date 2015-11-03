@@ -64,20 +64,8 @@ function sedna_utils(){
 	// forcer le refresh ?
 	if ($id = intval(_request('refresh'))) {
 		include_spip('genie/syndic');
-		spip_touch(_DIR_TMP.'syndic.lock');
 		syndic_a_jour($id);
 	}
-
-	// Calcul du delais optimal (on est tjs a jour, mais quand meme en cache)
-	// valeur max = 15 minutes (900s) (et on hacke #ENV{max_maj} pour affichage
-	// de "Derniere syndication..." en pied de page).
-	$GLOBALS['sedna_max_maj'] = @filemtime(_DIR_TMP.'syndic.lock');
-	if ($GLOBALS['sedna_max_maj'] > lire_meta('derniere_modif')) {
-		include_spip('inc/meta');
-		ecrire_meta('derniere_modif', $GLOBALS['sedna_max_maj']);
-		ecrire_metas();
-	}
-	$GLOBALS['sedna_max_maj'] = date('Y-m-d H:i:s', $GLOBALS['sedna_max_maj']); # format SPIP
 }
 
 ?>

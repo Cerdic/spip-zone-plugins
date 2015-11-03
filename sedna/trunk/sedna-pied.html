@@ -31,7 +31,7 @@
 		(#SYNDICATION|in_array{#ARRAY{0,off,1,sus}}|oui)- <:sedna:probleme_de_syndication:>]
 	]
 	</BOUCLE_refresh>
-	#SET{max_age,#EVAL{$GLOBALS['sedna_max_maj']}}
+	<BOUCLE_last(jobs){fonction=syndic}{0,1}>[(#SET{max_age,#VAL{'Y-m-d H:i:s'}|date{#DATE|strtotime|moins{#EVAL{_PERIODE_SYNDICATION}|intval|sinon{120}|mult{60}}}})]</BOUCLE_last>
 	[(#GET{ignore}|!={oui}|oui)
 		[<:sedna:derniere_syndication:>
 		(#GET{max_age}|date_relative)]
