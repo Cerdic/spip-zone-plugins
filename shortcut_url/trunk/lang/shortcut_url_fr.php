@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_shortcut_url_stat' => '@nb@ connexion sur l\'ensemble des URL',
 	'info_nb_shortcut_url_stats' => '@nb@ connexions sur l\'ensemble des URL',
 	'item_utiliser_shortcut_url' => 'Ajouter une URL et puis c\'est tout',
-	'item_utiliser_shortcut_title' => 'Vous pouvez définir le raccourci de votre URL (max @nb@ charactères)',
+	'item_utiliser_shortcut_title' => 'Vous pouvez définir le raccourci de votre URL (max @nb@ caractères)',
 
 	// N
 	'nb_click' => 'click',
