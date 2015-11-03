@@ -125,9 +125,12 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 		$set['id_shortcut_url'] = sql_insertq('spip_shortcut_urls', $set);
 		// Insertion de l'auteur à l'arrache
 		$auteur = sql_insertq('spip_auteurs_liens', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_objet' => $set['id_shortcut_url'], 'objet' => 'shortcut_url'));
+		$url = generer_url_entite($set['id_shortcut_url'],'shortcut_url','','',true);
 		$res = array('redirect' => self());
 	} else {
+		sql_delete("spip_urls", "id_objet=".intval($id_shortcut_url)." AND type=".sql_quote('shortcut_url'));
 		sql_updateq('spip_shortcut_urls', $set, 'id_shortcut_url=' . intval($id_shortcut_url));
+		$url = generer_url_entite($id_shortcut_url,'shortcut_url','','',true);
 		$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	}
 
