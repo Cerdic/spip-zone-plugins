@@ -39,6 +39,8 @@ function dupliquer_article($id_article,$rubrique){
 	//////////////
 	// ON DUPLIQUE
 	//////////////
+	//Sauvegarde de l'ancien id_article
+	$id_article_ori = $id_article;
 	// On le clone avec les champs choisis ci-dessus, il sera NON publié par défaut
 	$id_article = insert_article($rubrique);
 	revision_article($id_article, $infos_de_l_article);
@@ -53,8 +55,8 @@ function dupliquer_article($id_article,$rubrique){
 	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
 	
 	// On lui copie ses logos
-	dupliquer_logo($id_article,$id_article,'article',false);
-	dupliquer_logo($id_article,$id_article,'article',true);
+	dupliquer_logo($id_article_ori,$id_article,'article',false);
+	dupliquer_logo($id_article_ori,$id_article,'article',true);
 	
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
