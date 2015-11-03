@@ -154,7 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		s’ils sont absents. Vous pouvez cependant en créer certains afin de les modifier
 		pour changer le comportement par défaut de ce que propose SPIP.
 		Par ailleurs, ces fichiers ont parfois des ajouts minimes de fonctionnalités, alors indiquées.',
-	'explication_fichiers_explicites' => 'Ces fichiers n\'existent pas par défaut dans SPIP mais peuvent être générés
+	'explication_fichiers_explicites' => 'Ces fichiers n’existent pas par défaut dans SPIP mais peuvent être générés
 		pour votre confort si besoin.',
 	'explication_reinitialiser' => 'Ceci efface les informations du plugin actuellement en cours de création.
 		Vous repartirez donc de zéro !',
@@ -180,7 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fabrique_titre' => 'La Fabrique',
 	'fichier_echafaudage_prive/objets/infos/objet.html' => 'Ajoute le lien de prévisualisation',
 	'fichier_echafaudage_prive/squelettes/contenu/objets.html' => 'Ajoute un champ de recherche',
-	'fichier_explicite_action/supprimer_objet.php' => 'Action de suppression de l\'objet (ce fichier est créé automatiquement si l\'objet ne gère pas de statut).',
+	'fichier_explicite_action/supprimer_objet.php' => 'Action de suppression de l’objet (ce fichier est créé automatiquement si l’objet ne gère pas de statut).',
 	'fichier_importation_cree_dans' => 'Fichier d’importation créé dans le répertoire <code>@dir@</code>, fichier <code>@import@</code> avec @lignes@ lignes pour un total de @taille@',
 	'fichiers_importations_compresses_cree_dans' => 'Fichier d’importation créé dans le répertoire <code>@dir@</code>, fichiers <code>@import@</code> et <code>@donnees_compressees@</code>, avec @lignes@ lignes pour un total de @taille@',
 
@@ -211,7 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ_lang_et_langue_choisie' => 'Champs <strong>lang</strong> et <strong>langue_choisie</strong>',
 	'label_champ_langues' => 'Gestion des langues',
 	'label_champ_langues_explication' => 'Ajouter des champs pour gérer les langues de l’objet (lang et langue_choisie) et les traductions (id_trad) ?',
-	'label_champ_plan_rubrique' => 'Lister l’objet dans le plan du site ?',
+	'label_champ_plan_rubrique' => 'Lister l’objet dans le plan du site ?',
 	'label_champ_rubriques' => 'id_rubrique',
 	'label_champ_rubriques_explication' => 'Permet d’affecter cet objet dans une rubrique',
 	'label_champ_statut' => 'Champ <strong>statut</strong>',
