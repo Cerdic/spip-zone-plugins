@@ -56,7 +56,7 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 }
 
 /**
- * Vérifications du formulaire de configuration du shortcut_url
+ * Vérifications du formulaire de shortcut_url
  *
  * @return array
  *     Tableau des erreurs
@@ -76,17 +76,17 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url,'var_mode','');
 			// Check si l'URL existe deja
-			if ($url = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)) && $id_shortcut_url=="oui") {
-				set_request('id_shortcut_url_existe',$url);
+			if (($id_shortcut_url=="oui") && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)))){
+				set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
 				$erreurs['url'] = _T("shortcut_url:erreur_url_exist");
 			}
 		}
 	}
-	// On vérifie que l'URL raccourcis n'existe pas
+	// On vérifie que l'URL raccourcie n'existe pas
 	if(_request('titre')) {
-		$titre = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre')));
-		if($titre){
-			set_request('id_shortcut_url_existe',$titre);
+		$id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre')));
+		if($id_shortcut_url_existe){
+			set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
 			$erreurs['titre'] = _T("shortcut_url:erreur_url_raccourcis_exist");
 		}
 

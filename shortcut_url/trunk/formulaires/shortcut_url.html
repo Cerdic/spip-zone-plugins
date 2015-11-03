@@ -12,29 +12,28 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	]
+		[(#ENV{editable})
 		<ul>
-			[(#ENV{editable})
-				#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_url:></label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<div class="choix">
-						<input type="input" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" size="50" /><label for="#GET{name}"><:shortcut_url:item_utiliser_shortcut_url:></label>
-					</div>
-				</li>
-				#SET{name,titre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_title:></label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<div class="choix">
-						<input type="input" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" maxlength="#ENV{taille_raccourci}" /><label for="#GET{name}">[(#VAL{shortcut_url:item_utiliser_shortcut_title}|_T{[(#ARRAY{nb,[(#ENV{taille_raccourci})]})]})]</label>
-					</div>
-				</li>
-				[(#ENV{id_shortcut_url_existe}|oui) #SET{name,enbase} <li class="reponse_formulaire  reponse_formulaire_ok">
-				<label for="#GET{name}"><strong><:shortcut_url:titre_shortcut_url_enbase:></strong></label>
-				#INCLURE{fond=prive/objets/editer/shortcut_url_verif,id_shortcut_url=#ENV{id_shortcut_url_existe}}</li>]
-			]
-		</ul>
+			
+			#SET{name,url}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_url:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="input" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" size="50" />
+				</div>
+			</li>
+			#SET{name,titre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:shortcut_url:ajouter_shortcut_title:></label>
+				<p class="explication">[(#VAL{shortcut_url:item_utiliser_shortcut_title}|_T{[(#ARRAY{nb,[(#ENV{taille_raccourci})]})]})]</p>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="input" name="#GET{name}" id="#GET{name}" class="text" value="#ENV{#GET{name}}" maxlength="#ENV{taille_raccourci}" /><label for="#GET{name}"></label>
+			</li>
+		</ul>]
+		[(#ENV{id_shortcut_url_existe}|oui)<fieldset class="erreur">
+			<legend><:shortcut_url:titre_shortcut_url_enbase:></legend>
+			#INCLURE{fond=prive/objets/editer/shortcut_url_verif,id_shortcut_url=#ENV{id_shortcut_url_existe}}</fieldset>]
 
 	[(#ENV{editable})
 	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -51,20 +50,19 @@
 <textarea name='texte' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='80'>#DESCRIPTION #URL_SITE_SPIP/#TITRE</textarea>
 	<ul>
 		[<li class="seenthis">
-				<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://seenthis.net/#ajouter=[(#DESCRIPTION)]&url_site=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_seenthis|attribut_html:>" data-print="seenthis"><:shortcut_url:partage_seenthis:></a>
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://seenthis.net/#ajouter=[(#DESCRIPTION)]&url_site=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_seenthis|attribut_html:>" data-print="seenthis"><:shortcut_url:partage_seenthis:></a>
 		</li>]
 		[<li class="twitter">
-				<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://www.twitter.com/share?text=[(#DESCRIPTION)]&url=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_twitter|attribut_html:>" data-print="twitter"><:shortcut_url:partage_twitter:></a>
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://www.twitter.com/share?text=[(#DESCRIPTION)]&url=#URL_SITE_SPIP/(#TITRE)" title="<:shortcut_url:partage_twitter|attribut_html:>" data-print="twitter"><:shortcut_url:partage_twitter:></a>
 		</li>]
 		[<li class="facebook">
-				 <a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://www.facebook.com/sharer.php?u=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_facebook|attribut_html:>" data-print="facebook"><:shortcut_url:partage_googleplus:></a>
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="http://www.facebook.com/sharer.php?u=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_facebook|attribut_html:>" data-print="facebook"><:shortcut_url:partage_googleplus:></a>
 		</li>]
 		[<li class="googleplus">
-				 <a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://plus.google.com/share?url=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_googleplus|attribut_html:>" data-print="googleplus"><:shortcut_url:partage_googleplus:></a>
+			<a onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://plus.google.com/share?url=#URL_SITE_SPIP/(#TITRE)&t=[(#DESCRIPTION)]" title="<:shortcut_url:partage_googleplus|attribut_html:>" data-print="googleplus"><:shortcut_url:partage_googleplus:></a>
 		</li>]
 	</ul>
-</div>
-]
+</div>]
 
 <div style="float: right;">
 	<BOUCLE_stats(SHORTCUT_URLS_LOGS){id_shortcut_url}{0,1}>
