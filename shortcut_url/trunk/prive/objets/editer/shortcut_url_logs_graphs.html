@@ -40,13 +40,12 @@ $(document).ready(function($) {
 		.domain([1, 10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 4000, 5000])
 		.range(["couleur1", "couleur2", "couleur3", "couleur4", "couleur5", "couleur6", "couleur7", "couleur8", "couleur9", "couleur10"]);
 
-	var width = 800, 
+	var width = 760, 
 		height = 500;
 
 	var m_width = $("#map").width(),
 		width = width,
-		height = height,
-		tooltip = d3.selectAll(".tooltip_map");
+		height = height;
 
 	var projection = d3.geo.mercator()
 		.scale(100)
@@ -70,7 +69,10 @@ $(document).ready(function($) {
 	// Récupérer le TopoJSON des pays
 	d3.json('[(#CHEMIN{json/regions.json})]', function(error, borders) {
 		collection = topojson.feature(borders, borders.objects.maedi_pays);
-		
+		var tooltip = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
 		for (var i = 0; i < collection.features.length; i++) {
 			var iso2 = collection.features[i].properties.ISO2;
 			data.forEach(function(d) {
@@ -82,44 +84,37 @@ $(document).ready(function($) {
 			});
 		}
 
-		g.append("g")
-			.attr("id", "countries")
+		g.attr("id", "countries")
 			.selectAll("path")
 			.data(collection.features)
 			.enter()
 			.append("path")
 			.attr("class", function(d) { return color_fill[d.properties['ISO2']]; })
 			.attr("d", path)
-			.on("mouseover", function (d,event) {
-
+			.on("mouseenter", function (d,event) {
 				if(tooltip_click[d.properties['ISO2']] == undefined) 
 					var tooltip_data = "";
 				else
 					var tooltip_data = tooltip_click[d.properties['ISO2']] + " <:shortcut_url:nb_click:>";
 
 				tooltip.html("<strong>" + d.properties['NAME_ISO'].toLowerCase() + "</strong> " + tooltip_data);
-				if(d3.event.clientX && d3.event.clientY) {
-					tooltip.style("left", (d3.event.clientX - 350)+ "px")
-						.style("top",(d3.event.clientY + 20) + "px").style("opacity", "1");
+				if(d3.event.pageX && d3.event.pageY) {
+					tooltip.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px").style("opacity", "1");
 				}
 
 			}).on("mousemove", function (d) {
-
-				if(d3.event.clientX && d3.event.clientY){
-					tooltip.style("left", (d3.event.clientX - 350)+ "px")
-						.style("top",(d3.event.clientY + 20) + "px");
+				if(d3.event.pageX && d3.event.pageY){
+					tooltip.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px");
 				}
 
 			}).on("mouseout", function (d) {
-
 				return tooltip.style("opacity", "0");
-
 			});
-
 	});
 
-
-	// Affiche les bars verticales
+	// Affiche les barres horizontales
 	var margin = {top: 20, right:20, bottom: 20, left: 20},
 		width = 760 - margin.left - margin.right,
 		height = 300 - margin.top - margin.bottom;
@@ -136,38 +131,38 @@ $(document).ready(function($) {
 		.append("g")
 		.attr("transform", "translate(" + margin.bottom + "," + margin.top + ")");
 
+	var tooltip2 = d3.select("body")
+				.append("div")
+				.attr("class", "tooltip tooltip2")
+				.style("opacity", 0);
 		data.forEach(function(d) { d.value = +d.value; });
 		data.sort(function(a, b) { return b.value - a.value; });
 
 		x.domain([0, d3.max(data, function(d) { return d.value; })]);
 		y.domain(data.map(function(d) { return d.label; }));
 
-	  	var bar = svg.selectAll("g.bar")
+		var bar = svg.selectAll("g.bar")
 			.data(data)
 			.enter().append("g")
 			.attr("class",  function(d) { return color(d.value); })
 			.attr("transform", function(d) { return "translate(0," + y(d.label) + ")"; })
-			.on("mouseover", function (d,event) {
+			.on("mouseenter", function (d,event) {
 				if(d.value > 10)
-					tooltip.html("<strong>" + d.percent + " %</strong> ");
+					tooltip2.html("<strong>" + d.percent + " %</strong> ");
 				else
-					tooltip.html("<strong>" + d.value + " <:shortcut_url:nb_click:></strong> (" + d.value + " %) ");
-				if(d3.event.clientX && d3.event.clientY) {
-					tooltip.style("left", (d3.event.clientX - 450)+ "px")
-						.style("top",(d3.event.clientY + 220) + "px").style("opacity", "1");
+					tooltip2.html("<strong>" + d.value + " <:shortcut_url:nb_click:></strong> (" + d.value + " %) ");
+				if(d3.event.pageX && d3.event.pageY) {
+					tooltip2.style("left", (d3.event.pageX +20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px").style("opacity", "1");
 				}
 
 			}).on("mousemove", function (d) {
-
-				if(d3.event.clientX && d3.event.clientY){
-					tooltip.style("left", (d3.event.clientX - 450)+ "px")
-						.style("top",(d3.event.clientY + 220) + "px");
+				if(d3.event.pageX && d3.event.pageY){
+					tooltip2.style("left", (d3.event.pageX + 20)+ "px")
+						.style("top",(d3.event.pageY + 20) + "px");
 				}
-
 			}).on("mouseout", function (d) {
-
-				return tooltip.style("opacity", "0");
-
+				return tooltip2.style("opacity", "0");
 			});
 
 	  	bar.append("rect")
@@ -204,7 +199,6 @@ $(document).ready(function($) {
 <script type="text/javascript">
 
 	$(document).ready(function($) {
-
 			var json = [
 				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
 					<BOUCLE_shortcut_url_dateclick_graph(SHORTCUT_URLS_LOGS){id_shortcut_url}{fusion DATE_FORMAT(date_modif, '%Y-%m-%d')}{!par date_modif}>#SET{date_modif,#DATE_MODIF|affdate{Y-m-d}}
@@ -221,7 +215,7 @@ $(document).ready(function($) {
 			var title_value = "<:shortcut_url:nb_click:>";
 
 			var margin = {top: 60, right: 60, bottom: 60, left: 60},
-				width = 800 - margin.left - margin.right,
+				width = 760 - margin.left - margin.right,
 				height = 400 - margin.top - margin.bottom;
 
 			var parseDate = d3.time.format("%Y-%m-%d").parse;
