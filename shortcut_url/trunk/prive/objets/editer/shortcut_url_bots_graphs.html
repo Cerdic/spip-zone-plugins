@@ -34,7 +34,6 @@
 $(document).ready(function($) {
 
 	var data = #INCLURE{fond=json/compteur_bots,id_shortcut_url};
-	console.log(data);
 
 	var color = d3.scale.threshold()
 		.domain([1, 10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 4000, 5000])
@@ -91,7 +90,7 @@ $(document).ready(function($) {
 			.attr("width", x.rangeBand())
 			.attr("y", function(d) { return y(d.value); })
 			.attr("height", function(d) { return height - y(d.value); })
-			.on("mouseover", function(d) {
+			.on("mouseenter", function(d) {
 				div.transition()
 					.duration(500)
 					.style("opacity", 0);
@@ -104,18 +103,13 @@ $(document).ready(function($) {
 					.style("z-index", 5000);
 			})
 			.on("mousemove", function (d) {
-
 				if(d3.event.clientX && d3.event.clientY){
-					tooltip.style("left", (d3.event.clientX - 350)+ "px")
+					div.style("left", (d3.event.clientX + 20)+ "px")
 						.style("top",(d3.event.clientY + 20) + "px");
 				}
-
 			}).on("mouseout", function (d) {
-
-				return tooltip.style("opacity", "0");
-
+				return div.style("opacity", "0");
 			});
-
 });
 </script>
 
