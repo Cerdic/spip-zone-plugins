@@ -10,7 +10,7 @@
 		[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
 			[(#MODELE{emb, lien=#URL_DOCUMENT,lien_class=mediabox}|image_reduire{300})]
 		,
-			[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+			[(#LOGO_DOCUMENT{#URL_DOCUMENT})]
 		})]
 		</BOUCLE_doc></div></B_doc>
 	</div>
