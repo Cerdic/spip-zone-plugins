@@ -1,9 +1,9 @@
 <paquet
 	prefix="adxmenu"
 	categorie="navigation"
-	version="1.23.2"
+	version="1.23.3"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/adxmenu_36.png"
 	documentation="http://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant"
 >	
