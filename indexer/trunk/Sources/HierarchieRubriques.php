@@ -52,9 +52,9 @@ class HierarchieRubriques extends SpipDocuments {
 					'hash_parent' => $id_parent_hierarchie,
 				);
 				
-				$hierarchie = array_merge_recursive(
+				$hierarchie = array_merge(
 					$hierarchie,
-					$this->getHierarchie($id_rubrique, $id_hierarchie, array_merge($parents, array($titre)))
+					$this->getHierarchie($id_rubrique, $id_hierarchie, array_merge($parents, array($id_hierarchie => $titre)))
 				);
 			}
 		}
