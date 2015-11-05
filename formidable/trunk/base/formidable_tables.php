@@ -57,8 +57,8 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'info_1_objet' => 'formidable:info_1_formulaire',
 		'info_nb_objets' => 'formidable:info_nb_formulaires',
 
-		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect','resume_reponse'),
-		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect','resume_reponse'),
+		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
+		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
 		'field' => array(
 			"id_formulaire" => "bigint(21) NOT NULL",
 			"identifiant" => "varchar(200)",
@@ -69,6 +69,8 @@ function formidable_declarer_tables_objets_sql($tables) {
 			"traitements" => "text NOT NULL default ''",
 			"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
 			"apres" => "varchar(12) NOT NULL default ''",
+			"unicite" => "text NOT NULL default ''",
+			"message_erreur_unicite" => "text NOT NULL default ''",
 			"url_redirect" => "varchar(255)",
 			"statut" => "varchar(10) NOT NULL default ''",
 			"resume_reponse" => "text NOT NULL default ''",

@@ -69,6 +69,11 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 		// champ resume_reponse
 		array('maj_tables',array('spip_formulaires')),
 	);
+	// Pouvoir rendre un champ unique
+	$maj['0.6.5'] = array(
+		// champ resume_reponse
+		array('maj_tables',array('spip_formulaires')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

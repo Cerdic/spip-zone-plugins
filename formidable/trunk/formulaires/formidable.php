@@ -197,6 +197,20 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 
 		$erreurs = saisies_verifier($saisies);
 
+		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
+		if ($formulaire['unicite'] != "") {
+			if (!$erreurs[$formulaire['unicite']]) {
+				$reponses = sql_allfetsel('R.id_formulaire AS id', 'spip_formulaires_reponses AS R
+		        LEFT JOIN spip_formulaires AS F
+		          ON R.id_formulaire=F.id_formulaire
+                LEFT JOIN spip_formulaires_reponses_champs AS C
+		          ON R.id_formulaires_reponse=C.id_formulaires_reponse', 'R.id_formulaire = ' . $id_formulaire . ' AND C.nom='.sql_quote($formulaire['unicite']).' AND C.valeur='.sql_quote(_request($formulaire['unicite'])).' AND R.statut = "publie"');
+				if (is_array($reponses) && count($reponses) > 0) {
+					$erreurs[$formulaire['unicite']] = $formulaire['message_erreur_unicite'] ? _T($formulaire['message_erreur_unicite']) : _T('formidable:erreur_unicite');
+				}
+			}
+		}
+
 		if ($erreurs and !isset($erreurs['message_erreur']))
 			$erreurs['message_erreur'] = _T('formidable:erreur_generique');
 

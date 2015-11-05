@@ -69,6 +69,7 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				<p class="explication"><:formidable:editer_resume_reponse_explication:></p>
 			</li>
+			#INCLURE{fond=formulaires/inc-formidable-unicite, env}
 		</ul>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
