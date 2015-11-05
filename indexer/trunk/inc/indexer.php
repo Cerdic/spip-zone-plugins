@@ -132,3 +132,88 @@ function indexer_job_indexer_source($alias_de_sources, $start, $end){
 		);
 	}
 }
+
+
+
+
+function indexer_statistiques_indexes_depuis($date_reference = null) {
+	if (!$date_reference)
+		$date_reference = intval(lire_meta('indexer_derniere_reindexation'));
+
+	$query = "SELECT COUNT(*) AS c,
+	properties.objet AS objet,
+	(date_indexation > $date_reference) AS recent,
+	properties.source AS source
+	FROM " . SPHINX_DEFAULT_INDEX . "
+	GROUP BY recent, properties.objet, properties.source";
+
+	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+
+	$all = $sphinx->allfetsel($query);
+
+	if (!is_array($all)
+	OR !is_array($all['query'])
+	OR !is_array($all['query']['docs'])) {
+		echo "<p class=error>" . _L('Erreur Sphinx')."</p>";
+	} else {
+		$liste = [];
+		foreach ($all['query']['docs'] as $l) {
+			$liste[$l['source']][table_objet($l['objet'])][$l['recent']] = intval($l['c']);
+		}
+		return $liste;
+	}
+}
+
+
+
+function indexer_tout_reindexer_async($bloc = 100) {
+
+	foreach(indexer_lister_blocs_indexation($bloc) as $alias => $ids) {
+		foreach ($ids as $id) {
+			$start = $id;
+			$end = $id + $bloc-1;
+			job_queue_add(
+				'indexer_job_indexer_source',
+				'Indexer '.$alias.' de '.$start.' à '.$end,
+				array($alias, $start, $end),
+				'inc/indexer',
+				true // pas de duplication
+			);
+		}
+	}
+
+	ecrire_meta('indexer_derniere_reindexation', time());
+}
+
+function indexer_lister_blocs_indexation($bloc = 100) {
+
+	// On récupère toutes les sources compatibles avec l'indexation
+	$sources = indexer_sources();
+
+	$liste = [];
+
+	foreach ($sources as $alias => $source) {
+		// Si une méthode pour définir explicitement existe, on l'utilise
+		if (method_exists($source, 'getObjet')){
+			$objet_source = $source->getObjet();
+		}
+		// Sinon on cherche avec l'alias donné à la source
+		else {
+			$objet_source = objet_type(strtolower($alias));
+		}
+
+		// alias = mots, objet_source = mot
+		// alias = hierarchie_rubriques, objet_source = rubrique
+		$liste[$alias] = [];
+
+		$parts = new \ArrayIterator($source->getParts($bloc));
+		
+		while ($parts->valid()) {
+			$part = $parts->key();
+			$liste[$alias][] = $part*$bloc;
+			$parts->next();
+		}
+	}
+
+	return array_filter($liste);
+}
