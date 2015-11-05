@@ -33,7 +33,7 @@
 
 
 <BOUCLE_max_sphinx(SPHINX)
-	{index #ENV{source,spip}}
+	{index #ENV{source}}
 	{recherche #ENV*{recherche}}
 	{0,1}
 >#SET{max,#SCORE}</BOUCLE_max_sphinx>
@@ -58,7 +58,7 @@
 		<ul class='liste-items'>
 
 <BOUCLE_recherche_sphinx(SPHINX)
-	{index #ENV{source,spip}}
+	{index #ENV{source}}
 	{recherche #ENV*{recherche}}
 
 	{filter #ENV{annee},  'YEAR(date) = @valeur' }
