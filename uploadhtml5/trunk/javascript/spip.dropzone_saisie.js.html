@@ -3,6 +3,7 @@
 
 <script type="text/javascript">
 
+// Cette fonction s'occupe de bloquer le submit et de lancer l'upload de la queue
  var processSaisieUpload = function (event) {
    // Activer l'autoProcess
    event.data.dropzone.options.autoProcessQueue = true;
@@ -18,16 +19,25 @@
    maxFilesize: #CONFIG{uploadhtml5/max_file_size},
    maxFiles: #GET{maxFiles},
 
+   // On déclenchera manuellement l'envoie
+   autoProcessQueue: false,
+
+   // Pour ne pas embrouiller le script d'upload, on ne va faire qu'un seul fichier à la fois
+   parallelUploads: 1,
+
    [acceptedFiles: "(#ENV{acceptedFiles})",]
 
-   [success: function(file, response) {
-     ajaxReload("(#ENV{ajaxReload})");
-   },]
+   init: function () {
 
+     // Si le formulaire est soumit, on va d'abord envoyer les fichiers
+     $("\##ENV{id}").parents("form").bind("submit",{dropzone: this}, processSaisieUpload);
+   },
 
-   [complete: function (file, response) {
-     window.location = "(#ENV{redirect})";
-   },]
+   queuecomplete: function () {
+     // Le formulaire est uploader, on a plus besoin de l'event sur submit
+     // On soumet le formulaire normalement
+     $("\##ENV{id}").parents("form").unbind("submit", processSaisieUpload).submit();
+   },
 
    // Traduire dropzone
    #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
