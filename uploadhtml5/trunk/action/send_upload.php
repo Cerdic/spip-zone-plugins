@@ -10,7 +10,7 @@ function action_send_upload_dist($arg=null) {
 
     // On va temporairement écrire les fichiers dans le cache.
     include_spip('inc/flock');
-
+    include_spip('inc/session');
     spip_log($_FILES, 'uploadhtml5');
 
     foreach($_FILES as $fichier) {
