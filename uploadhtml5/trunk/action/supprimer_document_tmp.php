@@ -1,0 +1,37 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+/**
+ * Cette action permet de supprimer un document temporaire par une personne
+ * qui n'en a pas forcément les droits.
+ *
+ * @param mixed $arg
+ * @access public
+ */
+function action_supprimer_document_tmp_dist($arg=null) {
+    if (is_null($arg)){
+        $securiser_action = charger_fonction('securiser_action', 'inc');
+        $arg = $securiser_action();
+    }
+
+    // Charger la fonction de suppression du core
+    $supprimer_document = charger_fonction('supprimer_document', 'action');
+
+    // Avant de supprimer, on vérifie que le statut est bien tmp
+    $statut = sql_getfetsel('statut', 'spip_documents', 'id_document='.intval($arg));
+
+    // Si le statut est bien TMP, on continue
+    if ($statut == 'tmp') {
+
+        // Autoriser temporairement la suppression du document
+        autoriser_exception('supprimer', 'document', $arg, true);
+        // Supprimer le document
+        $supprimer_document($arg);
+        // Refermer l'exception d'autorisation
+        autoriser_exception('supprimer', 'document', $arg, false);
+    }
+
+
+}
