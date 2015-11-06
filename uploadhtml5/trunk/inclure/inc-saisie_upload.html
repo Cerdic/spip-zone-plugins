@@ -1,0 +1,11 @@
+[(#REM)
+Ce fichier affiche les fichiers temporairement uploadés par la saisie "upload"
+]
+
+<B_saisie_upload>
+  <div class="tmp-upload">
+    <BOUCLE_saisie_upload(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}>
+      #LOGO_DOCUMENT
+    </BOUCLE_saisie_upload>
+    </div>
+</B_saisie_upload>

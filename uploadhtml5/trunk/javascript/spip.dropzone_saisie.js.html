@@ -1,20 +1,12 @@
 [(#REM) Si env contient un maxFiles il surpasse la configuration ]
 [(#SET{maxFiles, [(#ENV{maxFiles, [(#CONFIG{uploadhtml5/max_file}|>{0}|?{#CONFIG{uploadhtml5/max_file},null})]})]})]
 
+[(#REM) maxFiles peut également être altérer lorsqu'il y a déjà des fichiers en session ]
+<BOUCLE_upload_en_session(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}{si #GET{maxFiles}|!={null}|oui}>
+  [(#SET{maxFiles, #GET{maxFiles}|moins{#TOTAL_BOUCLE}})]
+</BOUCLE_upload_en_session>
+
 <script type="text/javascript">
-
-// Cette fonction s'occupe de bloquer le submit et de lancer l'upload de la queue
- var processSaisieUpload = function (event) {
-   // Ne pas submit vraiment le formulaire
-   event.preventDefault();
-   event.stopPropagation();
-
-   // Activer l'autoProcess
-   event.data.dropzone.options.autoProcessQueue = true;
-   // Lancer l'upload
-   event.data.dropzone.processQueue();
- }
-
  var options = {
    [url: "(#ENV*{url})",]
    paramName: ["(#ENV{paramName, file})"],
@@ -22,30 +14,19 @@
    maxFiles: #GET{maxFiles},
 
    // On déclenchera manuellement l'envoie
-   autoProcessQueue: false,
+   autoProcessQueue: true,
 
    // Pour ne pas embrouiller le script d'upload, on ne va faire qu'un seul fichier à la fois
    parallelUploads: 1,
 
    [acceptedFiles: "(#ENV{acceptedFiles})",]
 
-   init: function () {
-
-     // Si le formulaire est soumit, on va d'abord envoyer les fichiers
-     $("\##ENV{id}").parents("form").bind("submit",{dropzone: this}, processSaisieUpload);
-   },
-
-   queuecomplete: function () {
-     // Le formulaire est uploader, on a plus besoin de l'event sur submit
-     // On soumet le formulaire normalement
-     $("\##ENV{id}").parents("form")
-                    .unbind("submit", processSaisieUpload)
-                    .submit();
+   success: function(file, response) {
+     ajaxReload("saisie_upload");
    },
 
    // Traduire dropzone
    #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
-
  };
 
  // Désactiver la découverte automatique de dropzone
