@@ -4,6 +4,7 @@
 <script type="text/javascript">
  var options = {
    paramName: ["(#ENV{paramName})"],
+   paramName: ["(#ENV{paramName, file})"],
    maxFilesize: #CONFIG{uploadhtml5/max_file_size},
    maxFiles: #GET{maxFiles},
 
@@ -18,7 +19,7 @@
    },]
 
    // Traduire dropzone
-   #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName}, env}
+   #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
 
  };
 
