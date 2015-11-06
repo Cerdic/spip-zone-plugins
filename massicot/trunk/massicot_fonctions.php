@@ -125,6 +125,35 @@ function massicot_get_parametres ($objet, $id_objet) {
 }
 
 /**
+ * Trouver l'objet associé à un logo donné par son fichier
+ *
+ * Retourne un tableau avec des clés 'objet' et 'id_objet'
+ *
+ * @param String $fichier : Le fichier de logo
+ *
+ * @return mixed : Un tableau représentant l'objet, rien si on n'a pas
+ *                 réussi à deviner
+ */
+function massicot_trouver_objet_logo ($fichier) {
+
+    $fichier = basename($fichier);
+
+    /* on retire l'extension */
+    $fichier = substr($fichier, 0, strpos($fichier, '.'));
+
+    $row = explode('on', $fichier);
+
+    if (is_array($row) AND (count($row) === 2)) {
+
+        return array(
+            'objet' => objet_type(
+                array_search($row[0], $GLOBALS['table_logos'])),
+            'id_objet' => $row[1],
+        );
+    }
+}
+
+/**
  * Massicoter un fichier image
  *
  * La fonction générale qui d'occupe du recadrage des images
@@ -300,6 +329,16 @@ function massicoter_logo ($logo, $connect = null, $objet = array()) {
     }
 
     $fichier = extraire_attribut($logo, 'src');
+
+    /* S'il n'y a pas d'objet, on essaie de le deviner avec le nom du
+       fichier, c'est toujours mieux que rien. Sinon on abandonne… */
+    if (is_null($objet)) {
+        $objet = massicot_trouver_objet_logo($fichier);
+
+        if (is_null($objet)) {
+            return $logo;
+        }
+    }
 
     /* Pour deviner le type d'objet, on cherche une entrée du type
        id_objet dans le tableau de l'objet, et on s'en sert pour
