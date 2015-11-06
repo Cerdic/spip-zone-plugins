@@ -16,8 +16,9 @@ function uploadhtml5_jquery_plugins($scripts) {
     if (
         (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
         or test_espace_prive() // Ou que l'on est dans l'espace privé
-    )
+    ) {
         $scripts[] = 'lib/dropzone/dropzone.js'; // Charger Dropzone
+    }
 
     return $scripts;
 }
@@ -27,8 +28,10 @@ function uploadhtml5_insert_head_css($flux) {
     if (
         (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
         or test_espace_prive() // Ou que l'on est dans l'espace privé
-    )
+    ) {
         $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/dropzone/dropzone.css').'" type="text/css" media="screen" />';
+    }
+
 
     return $flux;
 }
