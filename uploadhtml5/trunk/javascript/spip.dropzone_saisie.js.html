@@ -38,7 +38,9 @@
    queuecomplete: function () {
      // Le formulaire est uploader, on a plus besoin de l'event sur submit
      // On soumet le formulaire normalement
-     $("\##ENV{id}").parents("form").unbind("submit", processSaisieUpload).submit();
+     $("\##ENV{id}").parents("form")
+                    .unbind("submit", processSaisieUpload)
+                    .submit();
    },
 
    // Traduire dropzone
