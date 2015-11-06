@@ -8,30 +8,21 @@ function action_send_upload_dist($arg=null) {
         $arg = $securiser_action();
     }
 
-    // On va temporairement écrire les fichiers dans le cache.
-    include_spip('inc/flock');
+    // On va uploader les documents avec un mode "tmp"
+    // Cela permettra plus tard de faire un nettoyage de la base de donnée
+    include_spip('uploadhtml5_fonctions');
+    $documents = uploadhtml5_uploader_document('', 0, $_FILES, 'new', 'auto');
+
+    // Les document ne sont uploader que 1 par 1
+    $id_document = intval($documents[0]);
+
+    // On force le passage en statut tmp.
+    // On ne passe pas par l'API pour contourner les autorisations
+    sql_update('spip_documents', array('statut' => sql_quote('tmp')), 'id_document='.$id_document);
+
+    // On stock l'upload en session
     include_spip('inc/session');
-
-    foreach($_FILES as $key => $fichier) {
-
-        $cache_fichier = sous_repertoire(_DIR_CACHE, 'uploadhtml5').$fichier['name'].uniqid();
-
-        $contenu = spip_file_get_contents($fichier['tmp_name']);
-        ecrire_fichier($cache_fichier, $contenu);
-
-        /**
-         * On va stocker en session le chemin du fichier
-         * et les donnée relative à $_FILES. Cela simulera un upload multiple
-         *
-         * Cependant, on caviarde le tmp_name pour utiliser le cache
-         */
-        $file = session_get('upload');
-        $file[$key]['name'][] = $fichier['name'];
-        $file[$key]['type'][] = $fichier['type'];
-        $file[$key]['tmp_name'][] = $cache_fichier;
-        $file[$key]['error'][] = $fichier['error'];
-        $file[$key]['size'][] = $fichier['size'];
-
-        session_set('upload', $file);;
-    }
+    $uploads = session_get('upload') ?: array();
+    $uploads[] = $id_document;
+    session_set('upload', $uploads);
 }
