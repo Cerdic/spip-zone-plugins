@@ -42,6 +42,7 @@ function saisie_upload_traiter($objet, $id_objet) {
     include_spip('action/editer_objet');
     include_spip('action/editer_liens');
 
+    // Récupérer les documents et associer à l'objet
     $documents = saisie_upload_get();
     objet_associer(
         $documents,
@@ -53,5 +54,6 @@ function saisie_upload_traiter($objet, $id_objet) {
         objet_instituer('document', $id_document, array('statut' => 'publie'));
     }
 
+    // Terminer l'upload en nettoyant la session
     saisie_upload_terminer();
 }
