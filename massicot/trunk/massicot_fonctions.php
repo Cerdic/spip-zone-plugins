@@ -236,9 +236,20 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
     include_spip('inc/filtres');
     include_spip('inc/filtres_images_mini');
 
-    /* Si le document en question n'est pas une image, on ne fait rien */
+    /* S'il n'y a pas de fichier dans la pile, on va le chercher dans
+       la table documents */
+    if ( ! isset($doc['fichier'])) {
+        include_spip('base/abstract_sql');
+        $rows = sql_allfetsel('fichier, extension', 'spip_documents',
+                              'id_document='.intval($doc['id_document']));
+
+        $doc['fichier']   = $rows[0]['fichier'];
+        $doc['extension'] = $rows[0]['extension'];
+    }
+
+   /* Si le document en question n'est pas une image, on ne fait rien */
     if (( ! $logo) OR
-        ( ! in_array($doc['extension'], array('jpg','jpeg','png','gif')))) {
+        (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
 
         return $logo;
     }
