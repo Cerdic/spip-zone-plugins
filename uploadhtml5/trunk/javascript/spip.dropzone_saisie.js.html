@@ -5,12 +5,14 @@
 
 // Cette fonction s'occupe de bloquer le submit et de lancer l'upload de la queue
  var processSaisieUpload = function (event) {
+   // Ne pas submit vraiment le formulaire
+   event.preventDefault();
+   event.stopPropagation();
+
    // Activer l'autoProcess
    event.data.dropzone.options.autoProcessQueue = true;
    // Lancer l'upload
    event.data.dropzone.processQueue();
-   // Ne pas submit vraiment le formulaire
-   event.preventDefault();
  }
 
  var options = {
