@@ -3,9 +3,9 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form method="post" action="#ENV{action}">   
+	<form method="post" action="#ENV{action}">
 	<div>
-  
+
 		#ACTION_FORMULAIRE{#ENV{action}}
 
     <!-- activer l'habillage CSS -->
@@ -15,15 +15,15 @@
       		<label for='css'><:sociaux:cfg_label_css:></label>
       	</div>
     </div>
-  
-    <!-- les reseaux --> 
-    <div style="margin-top:1em;margin-top:1px solid #eee;padding-top:1em;font-weight:bold;"><:sociaux:cfg_explication:></div>    
-    #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email}}
-    
+
+    <!-- les reseaux -->
+    <div style="margin-top:1em;margin-top:1px solid #eee;padding-top:1em;font-weight:bold;"><:sociaux:cfg_explication:></div>
+    #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email,tripadvizor}}
+
     <BOUCLE_rezo(DATA){source tableau,#GET{rezo}}>
     <!-- #VALEUR -->
     <div style="margin:1em 0;">
-    	      <label for="nom">[(#VALEUR|ucfirst)]</label> 						
+    	      <label for="nom">[(#VALEUR|ucfirst)]</label>
 						<input type="text" name="#VALEUR" id="#VALEUR" value="[(#ENV{#VALEUR})]"  class="text" />
     </div>
     </BOUCLE_rezo>

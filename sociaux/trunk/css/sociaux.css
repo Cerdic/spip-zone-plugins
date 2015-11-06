@@ -1,7 +1,7 @@
 /*********************************
     style pour les liens sociaux
     base sur la police socicon
-    http://www.socicon.com/how.php  
+    http://www.socicon.com/how.php
 *********************************/
 @font-face {
     font-family: 'socicon';
@@ -140,5 +140,6 @@
 .sociaux .pinterest  .socicon   {background:#C92619;}
 .sociaux .rss  .socicon   {background:#F26109;}
 .sociaux .mail .socicon   {background:#000;}
+.sociaux .tripadvisor .socicon   {background:#599541;}
 
 .sociaux .socicon:hover {background:#000;}
