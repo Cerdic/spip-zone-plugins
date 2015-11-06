@@ -22,6 +22,7 @@
         right: 5px;
         bottom: 5px;
       }
+      padding: 10px;
 
       &:first-child {
         margin-left: 0;
@@ -30,8 +31,6 @@
       &:last-child {
         margin-right: 0;
       }
-
-      padding: 10px;
 
       .supprimer {
         clear: both;
