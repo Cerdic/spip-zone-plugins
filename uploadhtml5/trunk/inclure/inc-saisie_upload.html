@@ -5,7 +5,19 @@ Ce fichier affiche les fichiers temporairement uploadés par la saisie "upload"
 <B_saisie_upload>
   <div class="tmp-upload">
     <BOUCLE_saisie_upload(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}>
-      #LOGO_DOCUMENT
+        <div class="image">
+          [(#LOGO_DOCUMENT
+          |image_passe_partout{120,120}
+          |image_recadre{120,120})]
+          <div class="details">
+            [<div class="taille">
+            (#TAILLE|taille_en_octets)
+            </div>]
+            [<div class="fichier">
+              <span>(#FICHIER|basename)</span>
+            </div>]
+          </div>
+        </div>
     </BOUCLE_saisie_upload>
-    </div>
+  </div>
 </B_saisie_upload>
