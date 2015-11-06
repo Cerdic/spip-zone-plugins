@@ -1,4 +1,4 @@
-<INCLURE{fond=inclure/inc-saisie_upload, env, ajax=saisie_upload} />
+<INCLURE{fond=saisies/inc-saisie_upload, env, ajax=saisie_upload} />
 
 [(#SET{id, [(#ENV{id,#ENV{nom}}|saisie_nom2classe)]})]
 [(#SET{url, #URL_ACTION_AUTEUR{send_upload, upload}|replace{&amp;, &}})]
