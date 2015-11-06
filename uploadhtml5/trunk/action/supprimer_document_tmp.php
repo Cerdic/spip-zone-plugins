@@ -19,11 +19,9 @@ function action_supprimer_document_tmp_dist($arg=null) {
     // Charger la fonction de suppression du core
     $supprimer_document = charger_fonction('supprimer_document', 'action');
 
-    // Avant de supprimer, on vérifie que le statut est bien tmp
-    $statut = sql_getfetsel('statut', 'spip_documents', 'id_document='.intval($arg));
-
+    include_spip('inc/autoriser');
     // Si le statut est bien TMP, on continue
-    if ($statut == 'tmp') {
+    if (autoriser('tmp', 'supprimer', $arg)) {
 
         // Autoriser temporairement la suppression du document
         autoriser_exception('supprimer', 'document', $arg, true);
@@ -31,7 +29,5 @@ function action_supprimer_document_tmp_dist($arg=null) {
         $supprimer_document($arg);
         // Refermer l'exception d'autorisation
         autoriser_exception('supprimer', 'document', $arg, false);
-    }
-
 
 }
