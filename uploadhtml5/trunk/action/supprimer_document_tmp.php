@@ -30,4 +30,10 @@ function action_supprimer_document_tmp_dist($arg=null) {
         // Refermer l'exception d'autorisation
         autoriser_exception('supprimer', 'document', $arg, false);
 
+        // On nettoye le tableau de session suite à la suppression
+        include_spip('inc/session');
+        $upload = session_get('upload');
+        unset($upload[array_search($arg, $upload)]);
+        session_set('upload', $upload);
+    }
 }
