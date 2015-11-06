@@ -98,3 +98,16 @@ function uploadhtml5_formulaire_fond($flux) {
 
     return $flux;
 }
+
+
+/**
+ * Lacher le cron de nettoyage des fichiers media temporaire toute les 24 heures
+ *
+ * @param mixed $taches
+ * @access public
+ * @return mixed
+ */
+function uploadhtml5_taches_generales_cron($taches) {
+    $taches['nettoyer_document_temporaire'] = 24*3600;
+    return $taches;
+}
