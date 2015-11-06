@@ -15,7 +15,7 @@ function action_send_upload_dist($arg=null) {
 
     foreach($_FILES as $fichier) {
 
-        $cache_fichier = sous_repertoire(_DIR_CACHE, 'uploadhtml5').'/'.$fichier['name'];
+        $cache_fichier = sous_repertoire(_DIR_CACHE, 'uploadhtml5').'/'.$fichier['name'].uniqid();
 
         $contenu = spip_file_get_contents($fichier['tmp_name']);
         ecrire_fichier($cache_fichier, $contenu);
