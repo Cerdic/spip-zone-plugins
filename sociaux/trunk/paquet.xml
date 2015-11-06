@@ -1,9 +1,9 @@
-<paquet 
-	prefix="sociaux" 
-	categorie="edition" 
-	version="1.0.5" 
-	etat="stable"    
-	compatibilite="[3.0.20;3.1.*]"  
+<paquet
+	prefix="sociaux"
+	categorie="edition"
+	version="1.0.6"
+	etat="stable"
+	compatibilite="[3.0.20;3.1.*]"
 	logo="prive/themes/spip/images/sociaux-64.png"
 	documentation="http://contrib.spip.net/4720"
 
@@ -11,7 +11,7 @@
   <nom>sociaux</nom>
   <auteur lien='http://www.erational.org'>erational</auteur>
   <licence>GNU/GPL</licence>
-  
+
   <pipeline nom="insert_head_css" inclure="sociaux_pipelines.php" />
   <menu nom="sociaux" titre="sociaux:sociaux_titre" parent="menu_squelette" icone="images/sociaux-16.png" action="configurer_sociaux" />
 
