@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
  var options = {
-   [url: "(#ENV{url})",]
+   [url: "(#ENV*{url})",]
    paramName: ["(#ENV{paramName, file})"],
    maxFilesize: #CONFIG{uploadhtml5/max_file_size},
    maxFiles: #GET{maxFiles},
@@ -12,9 +12,22 @@
 
    [acceptedFiles: "(#ENV{acceptedFiles})",]
 
+   init: function () {
+     var dropzone = this;
+     $("\##ENV{id}").parents("form").submit(function (event) {
+       event.preventDefault();
+       dropzone.processQueue();
+     });
+   },
+
    [success: function(file, response) {
      ajaxReload("(#ENV{ajaxReload})");
    },]
+
+   // queuecomplete: function () {
+   //   alert('submit');
+   //   $("\##ENV{id}").parents("form").submit();
+   // },
 
    [complete: function (file, response) {
      window.location = "(#ENV{redirect})";
