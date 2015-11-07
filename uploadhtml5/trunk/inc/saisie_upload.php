@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/session');
 
-
 /**
  * Fonction qui renvoie les documents uploader dans un tableau
  * utilisable par objet_associer
@@ -26,6 +25,19 @@ function saisie_upload_get() {
  */
 function saisie_upload_terminer() {
     session_set('upload', null);
+}
+
+/**
+ * Supprimer un document de la session
+ *
+ * @param mixed $id_document
+ * @access public
+ */
+function saisie_supprimer_document_session($id_document) {
+    include_spip('inc/session');
+    $upload = session_get('upload');
+    unset($upload[array_search($id_document, $upload)]);
+    session_set('upload', $upload);
 }
 
 /**
