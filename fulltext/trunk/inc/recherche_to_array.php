@@ -148,7 +148,6 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$full_text_where[] = $val_where;
 			$score[] = $val;
 		}
-		$full_text_where = array("((".implode(") OR (",$full_text_where)."))");
 
 		// On ajoute la premiere cle FULLTEXT de chaque jointure
 		$from = array_pop($requete['FROM']);
@@ -194,6 +193,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
 							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 							$from .= $join;
+							$full_text_where[] = "o".$i.".score IS NOT NULL";
 						}
 						/**
 						 * cas simple : $cle_arrivee dans la table
@@ -213,6 +213,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
 							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 							$from .= $join;
+							$full_text_where[] = "o".$i.".score IS NOT NULL";
 						}
 						// sinon cherchons une table de liaison
 						// cas recherche principale article, objet lie document : passer par spip_documents_liens
@@ -229,6 +230,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								) AS o$i ON o$i.id_objet=t.$_id_table";
 							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 							$from .= $join;
+							$full_text_where[] = "o".$i.".score IS NOT NULL";
 						}
 						// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
 						elseif ($l = $depart_associable){
@@ -244,11 +246,14 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								) AS o$i ON o$i.id_objet=t.$_id_table";
 							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 							$from .= $join;
+							$full_text_where[] = "o".$i.".score IS NOT NULL";
 						}
 					}
 				}
 			}
 		}
+
+		$full_text_where = array("((".implode(") OR (",$full_text_where)."))");
 
 		$requete['FROM'][] = $from;
 		$score = join(' + ', $score).' AS score';
