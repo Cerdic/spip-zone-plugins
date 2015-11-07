@@ -90,6 +90,11 @@ function indexer_sources(){
 		// Toute la hiérarchie des rubriques
 		$sources->register('hierarchie_rubriques', new Spip\Indexer\Sources\HierarchieRubriques());
 		
+		// Toute la hiérarchie des mots
+		if (_DIR_PLUGIN_MOTS) {
+			$sources->register('hierarchie_mots', new Spip\Indexer\Sources\HierarchieMots());
+		}
+		
 		// On passe les sources dans un pipeline
 		$sources = pipeline('indexer_sources', $sources);
 	}

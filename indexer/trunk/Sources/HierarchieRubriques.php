@@ -4,6 +4,9 @@ namespace Spip\Indexer\Sources;
 
 use \Indexer\Sources\Document;
 
+include_spip('inc/texte');
+include_spip('indexer_fonctions');
+
 class HierarchieRubriques extends SpipDocuments {
 	public function __construct() {
 		// On force l'objet aux rubriques
@@ -16,7 +19,7 @@ class HierarchieRubriques extends SpipDocuments {
 			'title' => 'Hiérarchie des rubriques',
 			'properties' => array(
 				'objet' => 'hierarchie',
-				'id_objet' => 'rubrique',
+				'id_objet' => 'rubriques',
 				'source' => lire_config('indexer/source', lire_config('adresse_site')),
 			),
 		);
@@ -30,12 +33,8 @@ class HierarchieRubriques extends SpipDocuments {
 	/**
 	 * Récupérer toutes les rubriques du site
 	 * 
-	 * <BOUCLE_rubriques(DATA){source table,#GET{properties/tree}}>
-	 * 
-	 * </BOUCLE_rubriques>
 	 **/
 	private function getHierarchie($id_parent = 0, $id_parent_hierarchie = '', $parents = array()) {
-		include_spip('inc/texte');
 		$hierarchie = array();
 		
 		if ($rubriques = sql_allfetsel('*', 'spip_rubriques', 'id_parent = '.intval($id_parent), '', '0+titre,titre')) {
@@ -43,7 +42,7 @@ class HierarchieRubriques extends SpipDocuments {
 				$id_rubrique = intval($rubrique['id_rubrique']);
 				$titre = supprimer_numero($rubrique['titre']);
 				$rang = recuperer_numero($rubrique['titre']);
-				$id_hierarchie = $this->getIdHierarchie($parents, $titre);
+				$id_hierarchie = indexer_id_hierarchie($parents, $titre);
 				$hierarchie[$id_hierarchie] = array(
 					'titre' => $titre,
 					'rang' => $rang,

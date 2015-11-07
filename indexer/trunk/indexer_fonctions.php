@@ -4,6 +4,20 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Générer un identifiant unique suivant une hiérarchie de titres
+ **/
+function indexer_id_hierarchie($hierarchie=array(), $titre='') {
+	// On ajoute le titre du contenu lui-même à la fin de la hiérarchie
+	if (!is_array($hierarchie)) {
+		$hierarchie = array();
+	}
+	$hierarchie[] = $titre;
+	$id = md5(serialize($hierarchie));
+	
+	return $id;
+}
+
+/**
  * Lister les jointures de recherche possibles pour un objet
  * 
  * On liste les jointures déclarées et on ne garde que celles qui ont une fonction "indexer" dédiée.

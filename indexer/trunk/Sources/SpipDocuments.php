@@ -5,6 +5,8 @@ namespace Spip\Indexer\Sources;
 use \Indexer\Sources\SourceInterface;
 use \Indexer\Sources\Document;
 
+include_spip('indexer_fonctions');
+
 class SpipDocuments implements SourceInterface {
 	/** Type d'objet SPIP */
 	private $objet = null;
@@ -248,7 +250,7 @@ class SpipDocuments implements SourceInterface {
 			}
 			// C'est seulement une fois qu'on a tous les titres qu'on peut réussir à construire les bons hashs
 			foreach ($doc['properties']['parents']['titres'] as $titre) {
-				$id_hierarchie = $this->getIdHierarchie($doc['properties']['parents']['titres_hierarchie'], $titre);
+				$id_hierarchie = indexer_id_hierarchie($doc['properties']['parents']['titres_hierarchie'], $titre);
 				$doc['properties']['parents']['ids_hierarchie'][] = $id_hierarchie;
 				$doc['properties']['parents']['titres_hierarchie'][$id_hierarchie] = $titre;
 			}
@@ -307,17 +309,6 @@ class SpipDocuments implements SourceInterface {
 
 	public function getObjectId($objet, $id_objet){
 		return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
-	}
-	
-	public function getIdHierarchie($hierarchie=array(), $titre='') {
-		// On ajoute le titre du contenu lui-même à la fin de la hiérarchie
-		if (!is_array($hierarchie)) {
-			$hierarchie = array();
-		}
-		$hierarchie[] = $titre;
-		$id = md5(serialize($hierarchie));
-		
-		return $id;
 	}
 
 	public function getBounds($column = '') {
