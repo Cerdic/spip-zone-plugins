@@ -17,13 +17,13 @@
 ]
 
 [(#ENV{href}|oui)
-  [(#SET{href, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
+  [(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
 ]
 
-[<a [href="(#GET{href})"]
+[<a [href="(#ENV{href})"]
    [class="(#ENV{class})"]
    [data-reveal-id="reveal-(#ENV{data-id})"]
-   [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]
+   [(#ENV{ajax, oui}|oui)data-reveal-ajax="#GET{href_zajax}"]
    [title="(#ENV{titre}|attribut_html)"]>
   (#ENV*{titre})
 </a>]
