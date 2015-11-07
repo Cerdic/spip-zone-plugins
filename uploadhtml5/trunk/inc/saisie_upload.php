@@ -69,3 +69,40 @@ function saisie_upload_traiter($objet, $id_objet) {
     // Terminer l'upload en nettoyant la session
     saisie_upload_terminer();
 }
+
+/**
+ * Une fonction pour traiter les logos via la saisie upload
+ *
+ * @param mixed $objet
+ * @param mixed $id_objet
+ * @param bool $supprimer
+ *        Supprime le fichier logo de la session et de la médiathèque si true
+ * @access public
+ */
+function saisie_upload_traiter_logo($objet, $id_objet, $supprimer=true) {
+
+    // On prend le premier fichier image de la saisie et on le transform en logo
+    $documents = saisie_upload_get();
+    $fichier = sql_fetsel(
+        'id_document,fichier',
+        'spip_documents',
+        array(
+            'media='.sql_quote('image'),
+            sql_in('id_document', $documents['document'])
+        ),
+        '',
+        '',
+        '0,1'
+    );
+
+    // On utilise ce fichier de la médiathèque comme logo
+    include_spip('uploadhtml5_fonctions');
+    uploadhtml5_uploader_logo($objet, $id_objet, _DIR_IMG.$fichier['fichier']);
+
+    // Supprime le fichier logo de la session et de la médiathèque
+    if ($supprimer) {
+        saisie_supprimer_document_session($fichier['id_document']);
+        $supprimer_document = charger_fonction('supprimer_document_tmp', 'action');
+        $supprimer_document($fichier['id_document']);
+    }
+}
