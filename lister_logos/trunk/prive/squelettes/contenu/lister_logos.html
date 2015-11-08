@@ -35,7 +35,8 @@
 
 [(#ENV{controle}|oui)
 [(#SET{nb,[(#EVAL{[(#VAL{'_LOGO_'}|concat{#ENV{controle}|strtoupper})]})]})]
-<p>[(#VAL{lister_logos:controle_}|concat{#ENV{controle},'_explication'}|_T{#ARRAY{nb,#GET{nb}}})]</p>
+[(#GET{nb}|oui)
+<p>[(#VAL{lister_logos:controle_}|concat{#ENV{controle},'_explication'}|_T{#ARRAY{nb,#GET{nb}}})]</p>]
 ]
 [(#REM)
 on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux

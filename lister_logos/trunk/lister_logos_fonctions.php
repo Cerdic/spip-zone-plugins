@@ -163,18 +163,13 @@ function lister_logos_fichiers ($table = null, $mode = null, $constante = null, 
     // Si on a un mode
     switch ($mode) {
         case 'on':
-            $docs_fichiers_on = array_unique($docs_fichiers_on);
-            sort($docs_fichiers_on); // On trie dans l'ordre alphabétique
-            $docs_fichiers = $docs_fichiers_on;
+            $docs_fichiers = array_unique($docs_fichiers_on);
             break;
         case 'off':
-            $docs_fichiers_off = array_unique($docs_fichiers_off);
-            sort($docs_fichiers_off); // On trie dans l'ordre alphabétique
-            $docs_fichiers = $docs_fichiers_off;
+            $docs_fichiers = array_unique($docs_fichiers_off);
             break;
         default:
             $docs_fichiers = array_unique(array_merge($docs_fichiers_on, $docs_fichiers_off));
-            sort($docs_fichiers); // On trie dans l'ordre alphabétique
             break;
     }
 
@@ -205,7 +200,7 @@ function lister_logos_fichiers ($table = null, $mode = null, $constante = null, 
         default:
             break;
     }
-
+    natcasesort($docs_fichiers); // On trie dans l'ordre alphabétique naturel sans (cf. 1, 2, 3, 10, 12)
     return $docs_fichiers;
 }
 ?>
