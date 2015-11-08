@@ -20,5 +20,5 @@
 	
 	<traduire module="sedna" reference="fr" gestionnaire="salvatore" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="sedna_administrations.php" />
-	<necessite nom="sites" compatibilite="[1.7.14;[" />
+	<necessite nom="sites" compatibilite="[1.7.6;[" />
 </paquet>
