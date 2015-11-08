@@ -4,7 +4,7 @@
 	version="2.1.2"
 	schema="201406091738"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="odt2spip-64.png"
 	documentation="http://contrib.spip.net/3001"
 >	
