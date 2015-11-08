@@ -320,7 +320,7 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo ($logo, $connect = null, $objet = array()) {
+function massicoter_logo ($logo, $connect = null, $objet_type, $id_objet) {
 
     include_spip('inc/filtres');
 
@@ -330,35 +330,18 @@ function massicoter_logo ($logo, $connect = null, $objet = array()) {
 
     $fichier = extraire_attribut($logo, 'src');
 
-    /* S'il n'y a pas d'objet, on essaie de le deviner avec le nom du
+    /* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
        fichier, c'est toujours mieux que rien. Sinon on abandonne… */
-    if (is_null($objet)) {
+    if (is_null($id_objet)) {
 
         $objet = massicot_trouver_objet_logo($fichier);
 
         if (is_null($objet)) {
             return $logo;
-        } else {
-            $objet_type = $objet['objet'];
-            $id_objet   = $objet['id_objet'];
         }
-    } else {
 
-        /* Pour deviner le type d'objet, on cherche une entrée du type
-           id_objet dans le tableau de l'objet, et on s'en sert pour
-           déduire son type et son id */
-        foreach ($objet as $cle => $valeur) {
-            if (strpos($cle, 'id_') === 0) {
-                /* id_trad ne correspond pas à un objet */
-                if ( $cle === 'id_trad' ) {
-                    continue;
-                } else {
-                    $objet_type = objet_type($cle);
-                    $id_objet = $valeur;
-                    break;
-                }
-            }
-        }
+        $objet_type = $objet['objet'];
+        $id_objet   = $objet['id_objet'];
     }
 
     $parametres = massicot_get_parametres($objet_type, $id_objet);

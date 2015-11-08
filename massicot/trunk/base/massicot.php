@@ -42,7 +42,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
     foreach (lister_tables_objets_sql() as $table => $valeurs) {
         if ($table !== 'spip_documents') {
             $interfaces['table_des_traitements'][strtoupper('LOGO_'.objet_type($table))][] =
-                'massicoter_logo(%s, $connect, $Pile[1])';
+                'massicoter_logo(%s, $connect, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])';
 
         }
     }
