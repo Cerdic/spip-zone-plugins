@@ -22,7 +22,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         img = $('.image-massicot img'),
         imgAreaSelector,
         initialWidth = img.attr('width'),
-        zoom = options.zoom;
+        zoom = options.zoom,
+        /* On garde en mémoire la sélection telle qu'elle serait sans
+           le zoom, pour pouvoir zoomer-dézoomer perdre de la
+           précision à cause d'erreurs d'arrondi. */
+        selection_nozoom = {};
 
     /* Mise à jour du formulaire */
     function maj_formulaire (img, selection) {
@@ -66,6 +70,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
             };
         }
 
+        if ( ! selection_nozoom.x1) {
+            selection_nozoom = {
+                x1: selection_actuelle.x1 / zoom,
+                x2: selection_actuelle.x2 / zoom,
+                y1: selection_actuelle.y1 / zoom,
+                y2: selection_actuelle.y2 / zoom,
+            }
+        }
+
         if ( ! imgAreaSelector) {
 
             imgAreaSelector = img.imgAreaSelect({
@@ -73,6 +86,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
                 handles: true,
                 show: true,
                 onSelectEnd: maj_formulaire,
+                onSelectChange: function () {
+                    selection_nozoom = {};
+                },
                 x1: selection_actuelle.x1,
                 x2: selection_actuelle.x2,
                 y1: selection_actuelle.y1,
@@ -82,10 +98,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
         } else {
 
-            nouvelle_selection.x1 = Math.round(selection_actuelle.x1 / zoom * new_zoom);
-            nouvelle_selection.x2 = Math.round(selection_actuelle.x2 / zoom * new_zoom);
-            nouvelle_selection.y1 = Math.round(selection_actuelle.y1 / zoom * new_zoom);
-            nouvelle_selection.y2 = Math.round(selection_actuelle.y2 / zoom * new_zoom);
+            nouvelle_selection.x1 = Math.round(selection_nozoom.x1 * new_zoom);
+            nouvelle_selection.x2 = Math.round(selection_nozoom.x2 * new_zoom);
+            nouvelle_selection.y1 = Math.round(selection_nozoom.y1 * new_zoom);
+            nouvelle_selection.y2 = Math.round(selection_nozoom.y2 * new_zoom);
 
             nouvelle_selection.x1 = Math.max(0, nouvelle_selection.x1);
             nouvelle_selection.y1 = Math.max(0, nouvelle_selection.y1);
