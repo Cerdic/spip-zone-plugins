@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Date d'inscription [en]Registration date [es]Fecha de inscripci&#243;n</multi></nom>
 	<auteur>b_b</auteur>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1</version_base>
 	<etat>stable</etat>
 	<prefix>date_inscription</prefix>
