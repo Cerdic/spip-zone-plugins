@@ -1,7 +1,7 @@
 <paquet
 	prefix="sedna"
 	categorie="squelette"
-	version="1.3.2"
+	version="1.3.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/sedna-logo.jpg"
@@ -20,5 +20,5 @@
 	
 	<traduire module="sedna" reference="fr" gestionnaire="salvatore" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="sedna_administrations.php" />
-	<necessite nom="sites" compatibilite="[1.7.0;[" />
+	<necessite nom="sites" compatibilite="[1.7.14;[" />
 </paquet>
