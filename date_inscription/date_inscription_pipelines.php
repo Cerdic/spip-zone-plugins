@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Enregistrer la date d'inscription lors de l'insertion d'un auteur en base
  *
