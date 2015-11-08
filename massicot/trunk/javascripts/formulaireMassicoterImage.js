@@ -44,8 +44,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
             handles: true,
             show: true,
             onSelectEnd: maj_formulaire,
-            onSelectChange: function () {
+            onSelectChange: function (img, selection) {
                 selection_nozoom = {};
+                maj_formulaire(img, selection);
             },
             x1: selection_actuelle.x1,
             x2: selection_actuelle.x2,
