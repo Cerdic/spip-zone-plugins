@@ -44,7 +44,7 @@ on liste les types de logos des objets principaux de SPIP en prenant en compte l
 (#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys|array_diff{#GET{exclus}})]})]
 <div class="formulaire_spip formulaire_editer formulaire_editer_logo">
     <form action="#SELF" role="form">
-    <ul>
+    <ul class="editer-groupe">
         [(#SELF
         |parametre_url{logo,''}
         |form_hidden)]
