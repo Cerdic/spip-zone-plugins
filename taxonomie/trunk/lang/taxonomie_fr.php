@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Configuration du plugin Taxonomie',
-	'citation_itis' => 'Integrated Taxonomic Information System (ITIS), @url@.',
+	'citation_itis' => 'Informations taxonomique de base fournie par <a href="http://www.itis.gov/">ITIS (Integrated Taxonomic Information System)</a>. Voir aussi la page ITIS du taxon @url@.',
 	'citation_cinfo' => 'Commission internationale des noms français des oiseaux (CINFO), @url@.',
-	'citation_wikipedia' => 'Wikipedia, @url@.',
+	'citation_wikipedia' => 'Le descriptif est inspiré de Wikipedia, @url@.',
 
 	// D
 

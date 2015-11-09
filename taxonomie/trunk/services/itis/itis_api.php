@@ -17,7 +17,7 @@ if (!defined('_TAXONOMIE_ITIS_URL_CITATION'))
 	/**
 	 * URL à fournir dans la citation du service ITIS.
 	 */
-	define('_TAXONOMIE_ITIS_URL_CITATION', 'http://www.itis.gov');
+	define('_TAXONOMIE_ITIS_URL_BASE_CITATION', 'http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=%tsn%');
 if (!defined('_TAXONOMIE_ITIS_LANGUE_DEFAUT'))
 	/**
 	 * Langue par défaut pour les api utilisant des noms communs
@@ -444,11 +444,21 @@ function itis_list_vernaculars($language_code) {
 }
 
 /**
+ * @param $id_taxon
  * @return string
  */
-function itis_citation() {
-	$link = '<a href="' . _TAXONOMIE_ITIS_URL_CITATION . '">' . _TAXONOMIE_ITIS_URL_CITATION . '</a>';
-	return _T('taxonomie:citation_itis', array('url' => $link));
+function itis_citation($id_taxon) {
+	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
+	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+
+	// On crée l'url du taxon sur le site ITIS
+	$url = str_replace('%tsn%', $taxon['tsn'], _TAXONOMIE_ITIS_URL_BASE_CITATION);
+	$link = '<a href="' . $url . '"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
+
+	// On établit la citation
+	$citation = _T('taxonomie:citation_itis', array('url' => $link));
+
+	return $citation;
 }
 
 /**
@@ -488,6 +498,9 @@ function itis_code2language($language_code) {
 }
 
 
+/**
+ * @return array
+ */
 function itis_list_sha() {
 	global $itis_language;
 	$shas = array();

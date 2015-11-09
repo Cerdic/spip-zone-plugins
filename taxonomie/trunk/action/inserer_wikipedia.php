@@ -45,11 +45,26 @@ function action_inserer_wikipedia_dist(){
 				// Conversion du texte mediawiki vers SPIP
 				include_spip('convertisseur_fonctions');
 				$texte_converti = convertisseur_texte_spip($texte, 'MediaWiki_SPIP');
-				// Mise à jour du descriptif en base de données
+
+				// Récupération des informations source et edite du taxon
+				$taxon = sql_fetsel('sources, edite', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+
+				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
+				$maj = array();
 				// - le texte du descriptif est inséré dans la langue choisie
+				$maj[$champ] = $texte_converti;
 				// - l'indicateur d'édition est positionné à oui
+				if ($taxon['edite']) {
+					$maj['edite'] = 'oui';
+				}
 				// - la source wikipédia est ajoutée
-				sql_updateq('spip_taxons', array($champ => $texte_converti), 'id_taxon='. sql_quote($id_taxon));
+				$maj['sources'] = array('wikipedia' => array($champ));
+				if ($sources = unserialize($taxon['sources'])) {
+					$maj['sources'] = array_merge($maj['sources'], $sources);
+				}
+				$maj['sources'] = serialize($maj['sources']);
+				// - Mise à jour
+				sql_updateq('spip_taxons', $maj, 'id_taxon='. sql_quote($id_taxon));
 			}
 		}
 	}

@@ -19,10 +19,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string	$regne
  * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
  * @param string	$rang
- * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais et
+ * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
  * 		correspond à : phylum, class, order, family, genus.
  * @param array		$langues
- * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons
+ * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons. Le français
+ *      par défaut.
  *
  * @return bool|string
  * 		Retour true/false
@@ -30,8 +31,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	$retour = false;
 	$taxons_edites = array();
-
-	// todo : ne faut-il pas tester la valeur du regne ?
 
 	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
 	if ($regne_existe) {
@@ -276,12 +275,12 @@ function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
 		$liste_sources = array_merge($liste_sources, unserialize($sources_specifiques));
 	}
 
-	// Puis on construit le fichier
+	// Puis on construit la liste des sources pour l'affichage
 	foreach ($liste_sources as $_source => $_champs) {
 		include_spip("services/${_source}/${_source}_api");
 		if (function_exists($citer = "${_source}_citation")) {
 			$sources[$_source] = array(
-				'texte' => $citer(),
+				'texte' => $citer($id_taxon),
 				'champs' => $_champs
 			);
 		}
