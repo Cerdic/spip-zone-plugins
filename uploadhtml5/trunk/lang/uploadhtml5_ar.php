@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'drop_annuler' => 'إرسال ملغى',
 	'drop_annuler_confirm' => 'إلغاء هذا الإرسال؟',
+	'drop_fallbacktext' => 'الرجاء استخدام الاستمارة الاحتياطية أدناه وتنزيل الملفات كما في أيام زمان',
 	'drop_fichier_invalide' => 'نوع الملف غير صالح',
 	'drop_fichier_trop_gros' => 'هذا الملف ضخم جداً',
 	'drop_ici' => 'سحب الملفات الى هنا او النقر على هذا الاطار',
