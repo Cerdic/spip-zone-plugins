@@ -113,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_option_destinataire_intro_label' => 'Label du premier choix vide (lorsque sous forme de liste)',
 	'option_option_intro_label' => 'Label du premier choix vide',
 	'option_option_statut_label' => 'Afficher les statuts',
+	'option_placeholder_label' => 'Placeholder',
 	'option_pliable_label' => 'Pliable',
 	'option_pliable_label_case' => 'Le groupe de champs pourra être replié.',
 	'option_plie_label' => 'Déjà plié',
