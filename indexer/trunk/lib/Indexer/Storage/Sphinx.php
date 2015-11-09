@@ -17,6 +17,8 @@ class Sphinx implements StorageInterface {
 	}
 
 	public function replaceDocuments($documents){
+		include_spip('inc/config');
+
 		$query = "
 			REPLACE INTO $this->indexName
 				(id,  title, summary, content, date, date_indexation, uri, properties, signature)
@@ -28,9 +30,21 @@ class Sphinx implements StorageInterface {
 		foreach ($documents as $document) {
 			// On vérifie qu'il y a bien un Document
 			if ($document and $document instanceof \Indexer\Sources\Document) {
-				$data = $this->reformatDocument($document);
-				$data = array_map(array($this->sphinxql, 'escape_string'), $data);
-				$q = $query . "('" . implode("', '", $data) . "')";
+
+				// effacer les documents ayant un statut ignore
+				if ($statuts_ignores = lire_config('indexer/'. ($document->properties['objet']) .'/statuts_ignores')
+				AND isset($document->properties['statut'])
+				AND in_array($document->properties['statut'], $statuts_ignores)) {
+					$q = "DELETE FROM $this->indexName WHERE id=".$document->id;
+				}
+				else {
+					$data = $this->reformatDocument($document);
+					$data = array_map(array($this->sphinxql, 'escape_string'), $data);
+					$q = $query . "('" . implode("', '", $data) . "')";
+				}
+
+spip_log($q, 'indexer');
+
 				if (!$this->sphinxql->query($q)) {
 					spip_log($this->sphinxql->errors(), 'indexer');
 					spip_log($q, 'indexer');

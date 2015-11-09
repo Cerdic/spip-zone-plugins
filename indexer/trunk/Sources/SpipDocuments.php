@@ -60,14 +60,6 @@ class SpipDocuments implements SourceInterface {
 			if ($start) $where[] = "$column >= $start";
 			if ($end)   $where[] = "$column < $end";
 			
-			// S'il y a des statuts ignorés… ben on les ignore
-			if (
-				$statuts_ignores = ('indexer/'.$this->objet.'/statuts_ignores')
-				and is_array($statuts_ignores)
-			) {
-				$where[] = sql_in('statut', $statuts_ignores, 'not');
-			}
-			
 			$all = sql_allfetsel(
 				'*',
 				$this->table_objet, // la table de l'objet défini
@@ -99,17 +91,6 @@ class SpipDocuments implements SourceInterface {
 		include_spip('indexer_fonctions');
 		
 		$doc = array('properties' => array());		
-		
-		// S'il y a des statuts ignorés et que c'est le cas, on indexe pas
-		// Normalement déjà ignoré dans le SQL, mais si jamais la fonction est appelée autre part…
-		if (
-			$statuts_ignores = lire_config('indexer/'.$this->objet.'/statuts_ignores')
-			and is_array($statuts_ignores)
-			and isset($contenu['statut'])
-			and in_array($contenu['statut'], $statuts_ignores)
-		) {
-			return null;
-		}
 		
 		// On cherche les éléments dont on va avoir besoin
 		$id = intval($contenu[$this->cle_objet]);
