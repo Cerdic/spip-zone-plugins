@@ -1,0 +1,27 @@
+<paquet
+	prefix="spip_modales"
+	categorie="multimedia"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.0-rc;3.1.*]"
+	logo=""
+	documentation=""
+>
+
+	<nom>SPIP Modales</nom>
+	<!-- De jolies modales pour SPIP -->
+
+	<credit lien="https://github.com/dimsemenov/Magnific-Popup/">Magnific Popup</credit>
+	<credit lien="https://github.com/dimsemenov/photoswipe">PhotoSwipe</credit>
+	<auteur lien='http://demo.apsulis.com'>XDjuj</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head_css" inclure="spip_modales_pipelines.php" />
+	<pipeline nom="insert_head" inclure="spip_modales_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[2.5.1;[" />
+
+	<menu nom="spip_modales" titre="spip_modales:titre_menu" parent="menu_squelette" icone="images/spip_modales-16.png" action="configurer_spip_modales" />
+
+</paquet>

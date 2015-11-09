@@ -1,0 +1,90 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:spip_modales:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+
+		<div class="fieldset" id='magnific'>
+			<fieldset>
+				<legend><:spip_modales:titre_magnific_popup:></legend>
+				<div class="editer-groupe">
+					[(#SAISIE{checkbox, magnific_active,
+						label=<b><:spip_modales:spip_modales_active:></b>,
+						defaut=non,
+						datas=#ARRAY{
+							oui,<b><:spip_modales:magnific_active_explication:></b>
+						}
+					})]
+					<div id="magnific_config" class="config">
+						[(#SAISIE{input, magnific_selecteur,
+							label=<:spip_modales:spip_modales_selecteur:>,
+							defaut=".magnific_popup",
+							disable="oui",
+							explication=<:spip_modales:spip_modales_selecteur_explication:>})]
+
+						[(#SAISIE{input, magnific_selecteur_galerie,
+							label=<:spip_modales:spip_modales_selecteur_galerie:>,
+							defaut=".magnific-group",
+							disable="oui",
+							explication=<:spip_modales:spip_modales_selecteur_galerie_explication:>})]
+
+						[(#SAISIE{oui_non, magnific_selecteur_images,
+							label=<:spip_modales:spip_modales_selecteur_images:>,
+							disable="oui",
+							explication=<:spip_modales:spip_modales_selecteur_images_explication:>,
+							defaut=non})]
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="fieldset" id="photoswip">
+			<fieldset>
+				<legend><:spip_modales:titre_photoswipe:></legend>
+				<div class="editer-groupe">
+					[(#SAISIE{checkbox, photoswipe_active,
+						label=<b><:spip_modales:spip_modales_active:></b>,
+						defaut=non,
+						disable="oui",
+						datas=#ARRAY{
+							oui,<b><:spip_modales:photoswipe_active_explication:></b>
+						}
+					})]
+					<div id="photoswipe_config" class="config">
+						[(#SAISIE{input, photoswipe_selecteur,
+							label=<:spip_modales:spip_modales_selecteur:>,
+							defaut=".photoswipe",
+							explication=<:spip_modales:spip_modales_selecteur_explication:>})]
+
+						[(#SAISIE{input, photoswipe_selecteur_galerie,
+							label=<:spip_modales:spip_modales_selecteur_galerie:>,
+							disable="oui",
+							explication=<:spip_modales:spip_modales_selecteur_galerie_explication:>})]
+
+						[(#SAISIE{oui_non, photoswipe_selecteur_images,
+							label=<:spip_modales:spip_modales_selecteur_images:>,
+							disable="oui",
+							explication=<:spip_modales:spip_modales_selecteur_images_explication:>,
+							defaut=non})]
+					</div>
+				</div>
+			</fieldset>
+		</div>
+
+
+		<input type="hidden" name="_meta_casier" value="spip_modales" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
+<script type="text/javascript">
+	jQuery("#magnific_config, #photoswipe_config").hide();
+	if($( "#magnific input[type=checkbox]" ).prop("checked")){ jQuery("#magnific_config").show(); };
+	if($( "#photoswip input[type=checkbox]" ).prop("checked")){ jQuery("#photoswipe_config").show(); };
+	$( "input[type=checkbox]" ).change(function(){ jQuery(this).parent().parent().next(".config").slideToggle("slow"); });
+</script>
