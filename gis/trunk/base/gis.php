@@ -123,7 +123,10 @@ function gis_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	$spip_gis_liens_key = array(
 		"PRIMARY KEY" => "id_gis,id_objet,objet",
-		"KEY id_objet" => "id_gis");
+		"KEY id_gis" => "id_gis",
+		"KEY id_objet" => "id_objet",
+		"KEY objet" => "objet"
+	);
 
 	$tables_auxiliaires['spip_gis_liens'] = array(
 		'field' => &$spip_gis_liens,

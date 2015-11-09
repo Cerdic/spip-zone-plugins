@@ -11,13 +11,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function gis_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
-	
+
 	// Première installation
 	$maj['create'] = array(
 		array('maj_tables', array('spip_gis')),
 		array('maj_tables', array('spip_gis_liens')),
 	);
-	
+
 	// Mise à jour depuis GIS 1
 	$maj['2.0'] = array(
 		// On ajoute la nouvelle table
@@ -35,18 +35,18 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		// Virer la table pour les mots
 		array('sql_drop_table', 'spip_gis_mots'),
 	);
-	
+
 	// Des nouveaux champs
 	$maj['2.0.1'] = array(
 		array('maj_tables', array('spip_gis')),
 	);
-	
+
 	// Augmenter la précision des champs de coordonnées
 	$maj['2.0.2'] = array(
 		array('sql_alter', 'TABLE spip_gis CHANGE lat lat DOUBLE NULL NULL'),
 		array('sql_alter', 'TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL'),
 	);
-	
+
 	// Ajouter des INDEX sur les champs potentiellement utilisables dans des comparaisons/group by/etc.
 	$maj['2.0.4'] = array(
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (lat)'),
@@ -57,24 +57,32 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (ville(500))'),
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (code_postal)'),
 	);
-	
+
 	// Ajout du département dans les champs de coordonnées
 	$maj['2.0.5'] = array(
 		array('maj_tables',array('spip_gis')),
 	);
-	
+
 	// Transformer les titres des points de varchar(255) à text
 	$maj['2.0.6'] = array(
 		array('sql_alter', 'TABLE spip_gis CHANGE titre titre text NOT NULL'),
 	);
-	
+
+	// Ajouter un index sur toutes les colonnes de la table de liens, pas juste id_gis
+	$maj['2.0.8'] = array(
+		array('sql_alter', 'TABLE spip_gis_liens DROP INDEX id_objet'), // virer l'ancien d'abord (nommé id_objet)
+		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (id_gis)'),
+		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (objet)'),
+		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (id_objet)'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 function gis_upgrade_2_0(){
 	include_spip('action/editer_gis');
-	
+
 	// On déplace les liaisons articles et rubriques
 	$res = sql_select('*','spip_gis');
 	while ($row = sql_fetch($res)) {
@@ -83,7 +91,7 @@ function gis_upgrade_2_0(){
 		if($row['id_rubrique'] != 0)
 			lier_gis($row['id_gis'], 'article', $row['id_rubrique']);
 	}
-	
+
 	// On déplace les liaisons mots
 	$res = sql_select('*','spip_gis_mots');
 	while ($row = sql_fetch($res)) {

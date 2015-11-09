@@ -1,8 +1,8 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.31.5"
-	schema="2.0.7"
+	version="4.31.6"
+	schema="2.0.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gis.png"
@@ -89,7 +89,7 @@
 	<pipeline
 		nom="formulaire_traiter"
 		inclure="gis_pipelines.php"
-	/>	
+	/>
 	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
 	<menu nom="gis_nouveau" titre="gis:editer_gis_nouveau" parent="outils_rapides" icone="images/gis-new-16.png" action="gis_edit" parametres="new=oui" />
 </paquet>
