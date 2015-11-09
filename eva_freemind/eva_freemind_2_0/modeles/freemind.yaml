@@ -1,0 +1,33 @@
+nom: 'un FreeMind'
+logo: 'img_pack/freemind_icon-24.png'
+icone_barre: 'freemind.png'
+parametres:
+  -
+    saisie: 'selecteur_document'
+    options:
+      nom: 'doc'
+      label: '<:inserer_modeles:label_id_document:>'
+      defaut: ''
+      env: 'oui'
+      obligatoire: 'oui'
+    verifier:
+      type: 'id_document'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      label: '<:inserer_modeles:label_modele:>'
+      obligatoire: 'oui'
+      defaut: 'freemind'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur'
+      label: 'Largeur (100%)'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur'
+      label: 'Hauteur (400px)'
+      defaut: ''
