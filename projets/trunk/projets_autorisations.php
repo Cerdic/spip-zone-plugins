@@ -17,7 +17,7 @@ function projets_autoriser(){}
 
 
 /* Exemple
-function autoriser_configurer_projets_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projets_configurer_dist($faire, $type, $id, $qui, $opt) {
 	// type est un objet (la plupart du temps) ou une chose.
 	// autoriser('configurer', '_projets') => $type = 'projets'
 	// au choix
