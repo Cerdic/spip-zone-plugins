@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cextras');
 
 /**
- * Retourne la liste des saisies extras pour 
+ * Retourne la liste des saisies extras pour
  * un objet donné.
  *
  * @param string $table Nom de la table SQL de l'objet éditorial
@@ -13,7 +13,7 @@ include_spip('inc/cextras');
 **/
 function iextras_champs_extras_definis($table='') {
 	static $tables = array();
-	
+
 	if (!$tables) {
 		// sinon calculer...
 		$n = strlen('champs_extras_');
@@ -25,13 +25,13 @@ function iextras_champs_extras_definis($table='') {
 			}
 		}
 	}
-	
+
 	if (!$table) {
 		return $tables;
 	} elseif (isset($tables[$table])) {
 		return $tables[$table];
 	}
-	
+
 	return array();
 }
 
@@ -54,7 +54,7 @@ function compter_champs_extras($table) {
 			}
 		}
 	}
-	
+
 	if (isset($tables[$table])) {
 		return $tables[$table];
 	}
@@ -65,11 +65,11 @@ function compter_champs_extras($table) {
  * Ajouter les saisies SQL et de recherche
  * sur les options de config d'une saisie (de champs extras)
  *
- * @param 
- * @return 
+ * @param array
+ * @return array
 **/
 function iextras_formulaire_verifier($flux) {
-	if ($flux['args']['form'] == 'construire_formulaire' 
+	if ($flux['args']['form'] == 'construire_formulaire'
 	AND strpos($flux['args']['args'][0], 'champs_extras_')===0
 	AND $nom_ou_id = _request('configurer_saisie') ) {
 
@@ -77,7 +77,7 @@ function iextras_formulaire_verifier($flux) {
 		$identifiant = 'constructeur_formulaire_'.$flux['args']['args'][0];
 		// On récupère le formulaire à son état actuel
 		$formulaire_actuel = session_get($identifiant);
-				
+
 		if ($nom_ou_id[0] == '@') {
 			$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
 			$name = $saisies_actuelles[$nom_ou_id]['options']['nom'];
@@ -98,7 +98,7 @@ function iextras_formulaire_verifier($flux) {
 		// on ajoute le fieldset de restrictions de champs
 		// (des autorisations pre-reglées en quelque sorte)
 		$saisies_restrictions = array();
-		
+
 		// les restrictions de X ne peuvent apparaître que
 		// si l'objet possede un Y.
 		// secteurs -> id_secteur
@@ -177,7 +177,7 @@ function iextras_formulaire_verifier($flux) {
 			foreach ($saisies_sql as $s=>$d) {
 				$liste_saisies[$s] = $d['titre'];
 			}
-			
+
 			$sql = $saisies_sql[$type_saisie]['defaut']['options']['sql'];
 			$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
 
