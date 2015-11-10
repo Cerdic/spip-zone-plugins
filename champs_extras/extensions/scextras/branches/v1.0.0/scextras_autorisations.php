@@ -32,7 +32,7 @@ function autoriser_scextras_synchroniser_scextras_dist($faire, $type, $id, $qui,
 }
 
 /* Exemple
-function autoriser_configurer_scextras_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_scextras_configurer_dist($faire, $type, $id, $qui, $opt) {
 	// type est un objet (la plupart du temps) ou une chose.
 	// autoriser('configurer', '_scextras') => $type = 'scextras'
 	// au choix
