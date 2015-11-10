@@ -15,6 +15,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 function pack_cQuery($chemin) {
+	if (!$chemin) {
+		return;
+	}
+
 	$flux = spip_file_get_contents($chemin);
 	$flux = str_replace('jQuery', 'cQuery', $flux);
 	$flux = str_replace('cQuery.spip', 'jQuery.spip', $flux);
