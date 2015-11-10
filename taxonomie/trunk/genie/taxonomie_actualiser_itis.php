@@ -7,7 +7,7 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 	$regnes = lister_regnes();
 
 	include_spip('services/itis/itis_api');
-	$shas = itis_list_sha();
+	$shas = itis_review_sha();
 
 	include_spip('taxonomie_fonctions');
 	foreach ($regnes as $_regne) {
