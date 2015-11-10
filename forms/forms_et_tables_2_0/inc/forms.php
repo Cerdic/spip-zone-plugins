@@ -694,11 +694,11 @@
 					# cf. GROS HACK inc/forms_tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
-					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
+					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0 - (isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : 0)));
 					# cf. GROS HACK 2 balise/forms
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
-					spip_query("UPDATE spip_forms_donnees_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
+					spip_query("UPDATE spip_forms_donnees_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0 - (isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : 0)));
 				}
 				if (!($id_donnee>0)) {
 					$erreur['@'] = _T("forms:probleme_technique");
