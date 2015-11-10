@@ -68,7 +68,7 @@ $GLOBALS['itis_webservice'] = array(
 			'function' => 'getFullRecordFromTSN',
 			'argument' => 'tsn',
 			'list' => 'ns:return',
-			'index' => 'commonNameList,expertList,taxRank,parentTSN,scientificName,taxonAuthor'
+			'index' => 'scientificName,taxRank,kingdom,commonNameList,taxonAuthor,parentTSN'
 		)
 	),
 	'get' => array(
@@ -173,7 +173,7 @@ function itis_search_tsn($api, $recherche) {
 	if (isset($data[$api['list']])
 	AND $data[$api['list']]) {
 		// La recherche peut renvoyer plusieurs taxons. On considère que le "bon" taxon
-		// correspond à celui ont le nom est exactement celui recherché.
+		// correspond à celui dont le nom est exactement celui recherché.
 		foreach ($data[$api['list']] as $_data) {
 			if ($_data
 			AND (strcasecmp($_data[$api['index']], $recherche) == 0)) {
@@ -185,6 +185,82 @@ function itis_search_tsn($api, $recherche) {
 	}
 
 	return $tsn;
+}
+
+
+/**
+ * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique (tsn).
+ *
+ * @param int	$tsn
+ * 		Identifiant unique du taxon dans la base ITIS (tsn)
+ *
+ * @return array
+ */
+function itis_get_record($tsn) {
+	global $itis_webservice;
+	$output =array();
+
+	// Construire l'URL de l'api sollicitée
+	$url = itis_api2url('xml', 'getfull', 'record', strval($tsn));
+
+	// Acquisition des données spécifiées par l'url
+	$api = $itis_webservice['getfull']['record'];
+	include_spip('inc/distant');
+	$flux = recuperer_page($url);
+
+	if ($flux) {
+		// Suppression du préfixe ax21: des balises afin de récupérer des index associatifs non préfixés
+		$flux = str_replace('ax21:parentTsn', 'ax21:TsnParent', $flux );
+		$flux = str_replace('ax21:', '', $flux);
+		// Suppression des suffixes xsi:type="xxx" ou xsi:nil="xxx" pour avoir des index de tableau simples
+		$flux = preg_replace(';\sxsi:(type|nil)="\w*";i', '', $flux);
+
+		// Phrasage de la chaine XML obtenue
+		include_spip('inc/xml');
+		$arbre = spip_xml_parse($flux);
+		if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
+			$record = reset($matches);
+			// Il est compliqué de créer une configuration du service qui permette un traitement générique de chaque
+			// information. Le code est donc spécifique à chaque information.
+			// Le résultat est stocké dans un tableau dont chaque index est le nom du champ correspondant de spip_taxon.
+			if (isset($record[0])) {
+				$record = $record[0];
+				// Nom scientifique, rang taxonomique, règne et TSN parent
+				$output['nom_scientifique'] = (empty($record['scientificName'][0]['combinedName'][0])
+					? ''
+					: strtolower($record['scientificName'][0]['combinedName'][0]));
+				$output['rang'] = (empty($record['taxRank'][0]['rankName'][0])
+					? ''
+					: strtolower($record['taxRank'][0]['rankName'][0]));
+				$output['regne'] = (empty($record['kingdom'][0]['kingdomName'][0])
+					? ''
+					: strtolower($record['kingdom'][0]['kingdomName'][0]));
+				$output['tsn_parent'] = (empty($record['parentTSN'][0]['TsnParent'][0])
+					? 0
+					: intval($record['parentTSN'][0]['TsnParent'][0]));
+				// Auteur
+				$output['auteur'] = '';
+				if (!empty($record['taxonAuthor'])) {
+					foreach ($record['taxonAuthor'] as $_author) {
+						if (isset($_author['authorship'][0])) {
+							$output['auteur'] = $output['auteur'] ? ', ' . $_author['authorship'][0] : $_author['authorship'][0];
+						}
+					}
+				}
+				// Noms communs
+				$output['nom_commun'] = '';
+				if (!empty($record['commonNameList'][0]['commonNames'])) {
+					foreach ($record['commonNameList'][0]['commonNames'] as $_nom) {
+						if (isset($_nom['commonName'][0]) AND isset($_nom['language'][0])) {
+							$output['nom_commun'][$_nom['language'][0]] = $_nom['commonName'][0];
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $output;
 }
 
 
@@ -241,41 +317,37 @@ function itis_get_information($api, $tsn) {
 
 
 /**
- * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique (tsn).
- *
- * @param int	$tsn
- * 		Identifiant unique du taxon dans la base ITIS (tsn)
+ * @param $language_code
  *
  * @return array
  */
-function itis_get_record($tsn) {
+function itis_list_vernaculars($language_code) {
 	global $itis_webservice;
-	$output =array();
+	$vernaculars =array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('xml', 'getfull', 'record', strval($tsn));
+	$url = itis_api2url('xml', 'vernacular', 'vernacularlanguage', itis_code2language($language_code));
 
 	// Acquisition des données spécifiées par l'url
-	$api = $itis_webservice['getfull']['record'];
+	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
 
-	// Suppression du préfixe ax21: des balises afin de récupérer des index associatifs non préfixés
-	$flux = str_replace('ax21:parentTsn', 'ax21:TsnParent', $flux );
+	// Suppression du préfixe ax21: des balises afin de récupérer des index associatif non préfixés
 	$flux = str_replace('ax21:', '', $flux);
 
 	// Phrasage de la chaine XML obtenue
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($flux);
 	if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
-		$infos = reset($matches);
-		foreach ($infos[0] as $_info) {
-			$info = array();
-			$output[] = $info;
+		$names = reset($matches);
+		$tag_language = '[' . $language_code . ']';
+		foreach ($names as $_name) {
+			$vernaculars[$_name['tsn'][0]] .= $tag_language . $_name[$api['index']][0];
 		}
 	}
 
-	return $output;
+	return $vernaculars;
 }
 
 
@@ -402,41 +474,6 @@ function itis_read_vernaculars($language_code, &$sha_file) {
 				$name = explode(',', trim($_line));
 				$vernaculars[intval($name[0])] = $tag_language . trim($name[1], '"');
 			}
-		}
-	}
-
-	return $vernaculars;
-}
-
-
-/**
- * @param $language_code
- *
- * @return array
- */
-function itis_list_vernaculars($language_code) {
-	global $itis_webservice;
-	$vernaculars =array();
-
-	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('xml', 'vernacular', 'vernacularlanguage', itis_code2language($language_code));
-
-	// Acquisition des données spécifiées par l'url
-	$api = $itis_webservice['vernacular']['vernacularlanguage'];
-	include_spip('inc/distant');
-	$flux = recuperer_page($url);
-
-	// Suppression du préfixe ax21: des balises afin de récupérer des index associatif non préfixés
-	$flux = str_replace('ax21:', '', $flux);
-
-	// Phrasage de la chaine XML obtenue
-	include_spip('inc/xml');
-	$arbre = spip_xml_parse($flux);
-	if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
-		$names = reset($matches);
-		$tag_language = '[' . $language_code . ']';
-		foreach ($names as $_name) {
-			$vernaculars[$_name['tsn'][0]] .= $tag_language . $_name[$api['index']][0];
 		}
 	}
 

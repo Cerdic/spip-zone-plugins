@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient les fonctions qui permettent de construire, vérifier ou créer
- * les fichiers cache et les dossiers les contenant.
+ * les fichiers cache des services taxonomiques et les dossiers les contenant.
  *
  * @package SPIP\BOUSSOLE\Outils\Cache
  */
@@ -17,23 +17,6 @@ if (!defined('_TAXONOMIE_DIR_CACHE'))
 	 * Chemin du dossier contenant les fichiers caches des boussoles */
 	define('_TAXONOMIE_DIR_CACHE', _DIR_VAR . _TAXONOMIE_NOMDIR_CACHE);
 
-if (!defined('_BOUSSOLE_CACHE_LISTE'))
-	/**
-	 * Fichier cache de la liste des boussoles */
-	define('_BOUSSOLE_CACHE_LISTE', 'boussoles.xml');
-if (!defined('_BOUSSOLE_PREFIXE_CACHE'))
-	/**
-	 * Pattern remplacement de l'alias d'une boussole */
-	define('_BOUSSOLE_PREFIXE_CACHE', 'boussole-');
-if (!defined('_BOUSSOLE_PATTERN_ALIAS'))
-	/**
-	 * Pattern remplacement de l'alias d'une boussole */
-	define('_BOUSSOLE_PATTERN_ALIAS', '%alias%');
-if (!defined('_BOUSSOLE_CACHE'))
-	/**
-	 * Fichier cache d'une boussole */
-	define('_BOUSSOLE_CACHE', _BOUSSOLE_PREFIXE_CACHE . _BOUSSOLE_PATTERN_ALIAS . '.xml');
-
 
 /**
  * Ecriture des informations complètes d'une boussole dans un cache au format XML et de son SHA.
@@ -46,17 +29,28 @@ if (!defined('_BOUSSOLE_CACHE'))
  * @return boolean
  * 		Toujours à vrai.
  */
-function ecrire_cache_taxonomie($cache, $taxonomie){
+function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action='') {
 	// Création du dossier cache si besoin
-	$dossier = sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_NOMDIR_CACHE, '/'));
+	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_DIR_CACHE, '/'));
 
 	// Ecriture du fichier cache
-	$fichier_cache = $dossier . str_replace(_BOUSSOLE_PATTERN_ALIAS, $alias_boussole, _BOUSSOLE_CACHE);
+	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
 	ecrire_fichier($fichier_cache, $cache);
 
 	return true;
 }
 
+
+function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
+	// Ecriture du fichier cache
+	$fichier_cache = _TAXONOMIE_DIR_CACHE
+		. $service
+		. ($action ? '_' . $action : '')
+		. '_' . $tsn
+		. ($code_langue ? '_' . $code_langue : '');
+
+	return $fichier_cache;
+}
 
 /**
  * Vérifie l'existence du fichier cache d'une boussole et si oui retourne
@@ -68,9 +62,9 @@ function ecrire_cache_taxonomie($cache, $taxonomie){
  * @return string
  * 		Chemin du fichier cache si il existe ou chaine vide sinon.
  */
-function cache_taxonomie_existe($taxonomie){
-	// Ecriture du fichier cache
-	$fichier_cache = _BOUSSOLE_DIR_CACHE . str_replace(_BOUSSOLE_PATTERN_ALIAS, $alias_boussole, _BOUSSOLE_CACHE);
+function cache_taxonomie_existe($service, $tsn, $code_langue='', $action='') {
+	// Contruire le nom du fichier cache
+	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
 
 	// Vérification de l'existence du fichier:
 	// - chaine vide si le fichier n'existe pas

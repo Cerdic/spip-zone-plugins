@@ -1,0 +1,38 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+    <h1>Service ITIS</h1>
+
+    <h2>Action : search_tsn</h2>
+<?php
+    include_spip('services/itis/itis_api');
+//    $tsn = itis_search_tsn('scientificname', 'Animalia');
+    echo "TSN = $tsn</br>";
+//    $tsn = itis_search_tsn('scientificname', 'panthera leo');
+    echo "TSN = $tsn</br>";
+?>
+
+    <h2>Action : get_record</h2>
+<?php
+    $tsn = 202423;
+    $taxon = itis_get_record($tsn);
+    echo "Informations du taxon $tsn</br>";
+    var_dump($taxon);
+
+    $tsn = 170945;
+    $taxon = itis_get_record($tsn);
+    echo "Informations du taxon $tsn</br>";
+    var_dump($taxon);
+?>
+
+    <h2>Action : get_information</h2>
+
+    <h2>Action : list_vernaculars</h2>
+
+</div>
+</body>
+</html>
