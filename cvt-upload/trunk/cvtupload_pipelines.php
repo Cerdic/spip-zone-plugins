@@ -17,19 +17,20 @@ if (!defined('_CVTUPLOAD_MAX_FILES')) {
 }
 
 function cvtupload_chercher_fichiers($form, $args){
-	if ($fonction_fichiers = charger_fonction('fichiers', 'formulaires/'.$form, true)
-		and $fichiers = call_user_func_array($fonction_fichiers, $args)
-		and is_array($fichiers)
-		and $fichiers = pipeline(
-			'formulaire_fichiers',
-			array('args'=>array('form'=>$form, 'args'=>$args), 'data'=>$fichiers)
-		)
-		and is_array($fichiers)
-	){
-		return $fichiers;
+	$fichiers = array();
+	
+	// S'il existe une fonction de fichiers dédiée à ce formulaire
+	if ($fonction_fichiers = charger_fonction('fichiers', 'formulaires/'.$form, true)) {
+		$fichiers = call_user_func_array($fonction_fichiers, $args);
 	}
-
-	return false;
+	
+	// Dans tous les cas on applique le pipeline, si un plugin veut ajouter des choses
+	$fichiers = pipeline(
+		'formulaire_fichiers',
+		array('args'=>array('form'=>$form, 'args'=>$args), 'data'=>$fichiers)
+	);
+	
+	return $fichiers;
 }
 
 function cvtupload_hash(){
