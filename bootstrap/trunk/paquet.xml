@@ -1,14 +1,14 @@
 <paquet
-	prefix="bootstrap"
+	prefix="bootstrap3"
 	categorie="outil"
 	version="3.0.0"
-	etat="test"
+	etat="dev"
 	compatibilite="[3.0.2;3.1.*]"
 	logo="img/bootstrap-32.png"
 	documentation="http://spipr.nursit.com/bootstrap"
 >
 
-	<nom>Bootstrap</nom>
+	<nom>Bootstrap 3</nom>
 
 	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
 	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
@@ -20,6 +20,7 @@
 	<pipeline nom="affichage_final" inclure="bootstrap_fonctions.php" />
 
 	<necessite nom="lesscss" compatibilite="[1.0.0;1.*.*]" />
+	<procure nom="bootstrap" version="3.3.5" />
 
 	<chemin path="bootstrap" type="public" />
 	<chemin path="bootstrap2spip" type="public" />
