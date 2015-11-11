@@ -92,7 +92,7 @@ if (!defined('_TAXONOMIE_RANGS'))
 function url2json_data($url) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
-	$flux = recuperer_page($url);
+	$flux = recuperer_page($url, true);
 
 	// Tranformation de la chaine json reçue en tableau associatif
 	$data = json_decode($flux, true);
