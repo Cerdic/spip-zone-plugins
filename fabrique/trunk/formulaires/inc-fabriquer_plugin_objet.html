@@ -491,15 +491,6 @@
 		datas=[(#ARRAY{
 			menu_edition,<:fabrique:bouton_menu_edition:>,
 			outils_rapides,<:fabrique:bouton_outils_rapides:>})]})]
-
-	[(#SET{defaut_suppr,[(#ENV{objets/#CLE}|non|?{#LISTE{supprimer_php,supprimer_html},#LISTE})]})]
-	[(#SAISIE{checkbox, objets/#CLE/fichiers_supprimer,
-		label=<:fabrique:label_action_supprimer:>,
-		explication=<:fabrique:label_action_supprimer_explication:>,
-		defaut=#GET{defaut_suppr},
-		datas=[(#ARRAY{
-			supprimer_php,<:fabrique:label_action_supprimer_objet{objet=#TYPE}:>,
-			supprimer_html,<:fabrique:label_action_supprimer_html{objet=#TYPE}:>})]})]
 	</div>
 </div>
 
