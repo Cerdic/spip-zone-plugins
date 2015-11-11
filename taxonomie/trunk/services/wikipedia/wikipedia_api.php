@@ -7,12 +7,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE'))
+if (!defined('_TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL'))
 	/**
 	 * Préfixe des URL du service web de WIKIPEDIA.
 	 * Le service fournit des données au format XML ou JSON
 	 */
-	define('_TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE', 'http://%langue%.wikipedia.org/w/api.php?');
+	define('_TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL', 'http://%langue%.wikipedia.org/w/api.php?');
 if (!defined('_TAXONOMIE_WIKIPEDIA_URL_CITATION'))
 	/**
 	 * Préfixe des URL du service web de ITIS.
@@ -71,7 +71,7 @@ function wikipedia_get($recherche, $section=null) {
  * @param $id_taxon
  * @return string
  */
-function wikipedia_citation($id_taxon) {
+function wikipedia_credit($id_taxon) {
 	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
 	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
 
@@ -97,7 +97,7 @@ function wikipedia_citation($id_taxon) {
 function wikipedia_api2url($format, $action, $langue, $recherche, $section) {
 
 	// Construire l'URL de l'api sollicitée
-	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE)
+	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL)
 		. 'action=' . $action
 		. '&meta=siteinfo|wikibase'
 		. '&prop=revisions&rvprop=content'

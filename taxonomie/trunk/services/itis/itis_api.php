@@ -7,30 +7,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_TAXONOMIE_ITIS_URL_BASE_REQUETE'))
+if (!defined('_TAXONOMIE_ITIS_ENDPOINT_BASE_URL'))
 	/**
 	 * Préfixe des URL du service web de ITIS.
 	 * Le service fournit des données au format XML ou JSON
 	 */
-	define('_TAXONOMIE_ITIS_URL_BASE_REQUETE', 'http://www.itis.gov/ITISWebService/');
+	define('_TAXONOMIE_ITIS_ENDPOINT_BASE_URL', 'http://www.itis.gov/ITISWebService/');
 
-if (!defined('_TAXONOMIE_ITIS_URL_BASE_TAXON'))
+if (!defined('_TAXONOMIE_ITIS_TAXON_BASE_URL'))
 	/**
 	 * URL à fournir dans la citation du service ITIS.
 	 */
-	define('_TAXONOMIE_ITIS_URL_BASE_TAXON', 'http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=');
+	define('_TAXONOMIE_ITIS_TAXON_BASE_URL', 'http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=');
 
-if (!defined('_TAXONOMIE_ITIS_URL_SITE'))
+if (!defined('_TAXONOMIE_ITIS_SITE_URL'))
 	/**
 	 * URL à fournir dans la citation du service ITIS.
 	 */
-	define('_TAXONOMIE_ITIS_URL_SITE', 'http://www.itis.gov');
-
-if (!defined('_TAXONOMIE_ITIS_LANGUE_DEFAUT'))
-	/**
-	 * Langue par défaut pour les api utilisant des noms communs
-	 */
-	define('_TAXONOMIE_ITIS_LANGUE_DEFAUT', 'en');
+	define('_TAXONOMIE_ITIS_SITE_URL', 'http://www.itis.gov');
 
 if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 	/**
@@ -45,8 +39,9 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
  * Configuration de l'api des actions du service web ITIS
  */
 $GLOBALS['itis_language'] = array(
-	'fr' => 'french',
-	'en' => 'english',
+	'french' => 'fr',
+	'english' => 'en',
+	'spanish' => 'es'
 );
 $GLOBALS['itis_webservice'] = array(
 	'search' => array(
@@ -149,6 +144,9 @@ $GLOBALS['itis_webservice'] = array(
 	),
 );
 
+// -----------------------------------------------------------------------
+// ------------ API du web service ITIS - Actions principales ------------
+// -----------------------------------------------------------------------
 
 /**
  * Recherche un taxon dans la base ITIS par son nom commun ou scientifique
@@ -162,7 +160,7 @@ $GLOBALS['itis_webservice'] = array(
  * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
  *
  * @return int
- * 		Identifiant unique (tsn) dans la base ITIS ou 0 si la recherche échoue
+ * 		Identifiant unique tsn dans la base ITIS ou 0 si la recherche échoue
  */
 function itis_search_tsn($api, $recherche) {
 	global $itis_webservice;
@@ -296,12 +294,12 @@ function itis_get_record($tsn) {
  *      - 'parent' : le taxon parent dont son tsn
  *      - 'rankname' : le rang taxonomique du taxon
  *      - 'author' : le ou les auteurs du taxon
- * 		- 'coremetadata' : les métadonnées (???)
+ *      - 'coremetadata' : les métadonnées (à vérifier)
  * 		- 'experts' : les experts du taxon
  * 		- 'commonnames' : le ou les noms communs
  * 		- 'othersources' : les sources d'information sur le taxon
  * 		- 'hierarchyfull' : la hiérarchie complète jusqu'au taxon
- * 		- 'hierarchydown' : la hiérarchie ???
+ * 		- 'hierarchydown' : la hiérarchie (à vérifier)
  * @param int		$tsn
  * 		Identifiant unique du taxon dans la base ITIS (tsn)
  *
@@ -343,18 +341,18 @@ function itis_get_information($api, $tsn) {
  *
  * @api
  *
- * @param $language_code
+ * @param $language
  *
  *
  * @return array
  *      Liste des langues vernaculaires exprimées en anglais.
  */
-function itis_list_vernaculars($language_code) {
-	global $itis_webservice;
+function itis_list_vernaculars($language) {
+	global $itis_webservice, $itis_language;
 	$vernaculars =array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('xml', 'vernacular', 'vernacularlanguage', itis_code2language($language_code));
+	$url = itis_api2url('xml', 'vernacular', 'vernacularlanguage', $language);
 
 	// Acquisition des données spécifiées par l'url
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
@@ -369,7 +367,7 @@ function itis_list_vernaculars($language_code) {
 	$arbre = spip_xml_parse($flux);
 	if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
 		$names = reset($matches);
-		$tag_language = '[' . $language_code . ']';
+		$tag_language = '[' . $itis_language[$language] . ']';
 		foreach ($names as $_name) {
 			$vernaculars[$_name['tsn'][0]] .= $tag_language . $_name[$api['index']][0];
 		}
@@ -378,6 +376,10 @@ function itis_list_vernaculars($language_code) {
 	return $vernaculars;
 }
 
+
+// -----------------------------------------------------------------------------------------------
+// ------------ API du web service ITIS - Fonctions de lecture des fichiers de taxons ------------
+// -----------------------------------------------------------------------------------------------
 
 /**
  * Lecture du fichier hiérarchique ITIS des taxons d'un règne.
@@ -422,7 +424,6 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 		AND ($sha_file = sha1_file($file))) {
 			$lines = file($file);
 			if ($lines) {
-				$tsn = 0;
 				$groups = array();
 				for ($i=1;$i<=array_search($upto, $group_ids);$i++) {
 					$groups[$i] = 0;
@@ -480,17 +481,20 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
  * Lit le fichier des noms communs (tout règne confondu) d'une langue donnée et renvoie un tableau
  * de tous ces noms indexés par leur TSN.
  *
- * @param string	$language_code
+ * @api
+ *
+ * @param string	$language
  * @param int		$sha_file
  *
  * @return array
  */
-function itis_read_vernaculars($language_code, &$sha_file) {
+function itis_read_vernaculars($language, &$sha_file) {
+	global $itis_language;
 	$vernaculars =array();
 	$sha_file = false;
 
 	// Ouvrir le fichier de nom communs correspondant au code de langue spécifié
-	$file = find_in_path("services/itis/vernaculars_${language_code}.csv");
+	$file = find_in_path("services/itis/vernaculars_${language}.csv");
 	if (file_exists($file)
 	AND ($sha_file = sha1_file($file))) {
 		// Lecture du fichier csv comme un fichier texte sachant que :
@@ -499,7 +503,7 @@ function itis_read_vernaculars($language_code, &$sha_file) {
 		$lines = file($file);
 		if ($lines) {
 			// Créer le tableau de sortie à partir du tableau issu du csv (tsn, nom commun)
-			$tag_language = '[' . $language_code . ']';
+			$tag_language = '[' . $itis_language[$language] . ']';
 			foreach ($lines as $_line) {
 				$name = explode(',', trim($_line));
 				$vernaculars[intval($name[0])] = $tag_language . trim($name[1], '"');
@@ -510,28 +514,74 @@ function itis_read_vernaculars($language_code, &$sha_file) {
 	return $vernaculars;
 }
 
+
+// ---------------------------------------------------------------------
+// ------------ API du web service ITIS - Fonctions annexes ------------
+// ---------------------------------------------------------------------
+
 /**
- * @param $id_taxon
+ * Renvoie la langue telle que le service ITIS la désigne à partir du code de langue
+ * de SPIP.
+ *
+ * @api
+ *
+ * @param string    $language_code
+ *      Code de langue de SPIP. La variable globale $itis_language définit le transcodage langue ITIS
+ *      vers code SPIP.
+ *
  * @return string
+ *      Langue au sens d'ITIS ou chaine vide sinon.
  */
-function itis_citation($id_taxon) {
-	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
-	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+function itis_spipcode2language($language_code) {
+	global $itis_language;
 
-	// On crée l'url du taxon sur le site ITIS
-	$url_taxon = _TAXONOMIE_ITIS_URL_BASE_TAXON . $taxon['tsn'];
-	$link_taxon = '<a href="' . $url_taxon . '" rel="noreferrer"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
-	$link_site = '<a href="' . _TAXONOMIE_ITIS_URL_SITE . '" rel="noreferrer">' . _TAXONOMIE_ITIS_URL_SITE . '</a>';
+	if (!$language = array_search($language_code,  $itis_language)) {
+		$language = '';
+	}
 
-	// On établit la citation
-	$citation = _T('taxonomie:citation_itis', array('url_site' => $link_site, 'url_taxon' => $link_taxon));
-
-	return $citation;
+	return $language;
 }
 
 
 /**
+ * Construit la phrase de crédits précisant que les données fournies proviennent de la base de données
+ * d'ITIS.
+ *
+ * @api
+ *
+ * @param int   $id_taxon
+ *      Id du taxon nécessaire pour construire l'url de la page ITIS fournissant une information complète sur
+ *      le taxon.
+ *
+ * @return string
+ *      Phrase de crédit.
+ */
+function itis_credit($id_taxon) {
+	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
+	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+
+	// On crée l'url du taxon sur le site ITIS
+	$url_taxon = _TAXONOMIE_ITIS_TAXON_BASE_URL . $taxon['tsn'];
+	$link_taxon = '<a href="' . $url_taxon . '" rel="noreferrer"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
+	$link_site = '<a href="' . _TAXONOMIE_ITIS_SITE_URL . '" rel="noreferrer">' . _TAXONOMIE_ITIS_SITE_URL . '</a>';
+
+	// On établit la citation
+	$credit = _T('taxonomie:credit_itis', array('url_site' => $link_site, 'url_taxon' => $link_taxon));
+
+	return $credit;
+}
+
+
+/**
+ * Calcule le sha de chaque fichier ITIS fournissant des données, à savoir, ceux des règnes et ceux des noms
+ * communs par langue.
+ *
+ * @api
+ *
  * @return array
+ *      Tableau à deux index principaux:
+ *      - 'taxons'      : tableau associatif indexé par règne
+ *      - 'traductions' : tableau associatif par code de langue SPIP
  */
 function itis_review_sha() {
 	global $itis_language;
@@ -548,17 +598,21 @@ function itis_review_sha() {
 		}
 	}
 
-	foreach (array_keys($itis_language) as $_language_code) {
-		$file = find_in_path("services/itis/vernaculars_${_language_code}.csv");
+	foreach (array_keys($itis_language) as $_language) {
+		$file = find_in_path("services/itis/vernaculars_${_language}.csv");
 		if (file_exists($file)
 		AND ($sha_file = sha1_file($file))) {
-			$shas['traductions'][$_language_code] = $sha_file;
+			$shas['traductions'][$itis_language[$_language]] = $sha_file;
 		}
 	}
 
 	return $shas;
 }
 
+
+// ----------------------------------------------------------------
+// ------------ Fonctions internes utilisées par l'API ------------
+// ----------------------------------------------------------------
 
 /**
  * @param $format
@@ -572,27 +626,11 @@ function itis_api2url($format, $area, $api, $key) {
 	global $itis_webservice;
 
 	// Construire l'URL de l'api sollicitée
-	$url = _TAXONOMIE_ITIS_URL_BASE_REQUETE
+	$url = _TAXONOMIE_ITIS_ENDPOINT_BASE_URL
 		 . ($format=='json' ? 'jsonservice/' : 'services/ITISService/')
 		 . $itis_webservice[$area][$api]['function'] . '?'
 		 . $itis_webservice[$area][$api]['argument'] . '=' . $key;
 
 	return $url;
-}
-
-/**
- * @param $language_code
- *
- * @return string
- */
-function itis_code2language($language_code) {
-	global $itis_language;
-
-	$language = $itis_language[_TAXONOMIE_ITIS_LANGUE_DEFAUT];
-	if (array_key_exists($language_code,  $itis_language)) {
-		$language = $itis_language[$language_code];
-	}
-
-	return $language;
 }
 ?>

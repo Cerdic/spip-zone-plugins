@@ -21,14 +21,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string	$rang
  * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
  * 		correspond à : phylum, class, order, family, genus.
- * @param array		$langues
- * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons. Le français
- *      par défaut.
+ * @param array		$codes_langue
+ * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
  *
- * @return bool|string
+ * @return bool
  * 		Retour true/false
  */
-function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
+function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 	$retour = false;
 	$taxons_edites = array();
 
@@ -51,23 +50,26 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	if ($taxons) {
 		$meta_regne['compteur'] = count($taxons);
         $traductions = array();
-		foreach ($langues as $_cle => $_langue) {
-			$noms = itis_read_vernaculars($_langue, $sha_langue);
-			if ($noms) {
-				$meta_regne['traductions']['itis'][$_langue]['sha'] = $sha_langue;
-				$nb_traductions = 0;
-				foreach ($noms as $_tsn => $_nom) {
-					if (array_key_exists($_tsn, $taxons)) {
-                        // On ajoute les traductions qui sont de la forme [xx]texte
-                        // On sauvegarde le tsn concerné afin de clore les traductions
-                        // avec les balises multi et d'optimiser ainsi les traitements
-                        // sachant qu'il y a très peu de traductions comparées aux taxons
-						$taxons[$_tsn]['nom_commun'] .= $_nom;
-						$nb_traductions += 1;
-                        $traductions[$_tsn] = $_tsn;
+		foreach ($codes_langue as $_code_langue) {
+			$langue = itis_spipcode2language($_code_langue);
+			if ($langue) {
+				$noms = itis_read_vernaculars($langue, $sha_langue);
+				if ($noms) {
+					$meta_regne['traductions']['itis'][$_code_langue]['sha'] = $sha_langue;
+					$nb_traductions = 0;
+					foreach ($noms as $_tsn => $_nom) {
+						if (array_key_exists($_tsn, $taxons)) {
+	                        // On ajoute les traductions qui sont de la forme [xx]texte
+	                        // On sauvegarde le tsn concerné afin de clore les traductions
+	                        // avec les balises multi et d'optimiser ainsi les traitements
+	                        // sachant qu'il y a très peu de traductions comparées aux taxons
+							$taxons[$_tsn]['nom_commun'] .= $_nom;
+							$nb_traductions += 1;
+	                        $traductions[$_tsn] = $_tsn;
+						}
 					}
+					$meta_regne['traductions']['itis'][$_code_langue]['compteur'] = $nb_traductions;
 				}
-				$meta_regne['traductions']['itis'][$_langue]['compteur'] = $nb_traductions;
 			}
 		}
 
@@ -260,7 +262,7 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
  *
  * @return array
  */
-function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
+function taxonomie_crediter($id_taxon, $sources_specifiques=null) {
 	$sources = array();
 
 	// Si on ne passe pas les sources du taxon concerné alors on le cherche en base de données.
@@ -278,7 +280,7 @@ function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
 	// Puis on construit la liste des sources pour l'affichage
 	foreach ($liste_sources as $_source => $_champs) {
 		include_spip("services/${_source}/${_source}_api");
-		if (function_exists($citer = "${_source}_citation")) {
+		if (function_exists($citer = "${_source}_credit")) {
 			$sources[$_source] = array(
 				'texte' => $citer($id_taxon),
 				'champs' => $_champs
