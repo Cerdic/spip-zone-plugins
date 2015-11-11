@@ -14,6 +14,11 @@ include_spip('inc/session');
 function saisie_upload_get() {
     // récupérer les documents en session
     $documents = session_get('upload');
+
+    if (empty($documents)) {
+        return false;
+    }
+
     // On va renvoyer un tableau formaté pour passer dans objet_associer
     return array('document' => $documents);
 }
@@ -56,6 +61,11 @@ function saisie_upload_traiter($objet, $id_objet) {
 
     // Récupérer les documents et associer à l'objet
     $documents = saisie_upload_get();
+
+    if (!$documents) {
+        return false;
+    }
+
     objet_associer(
         $documents,
         array($objet => $id_objet)
@@ -83,6 +93,11 @@ function saisie_upload_traiter_logo($objet, $id_objet, $supprimer=true) {
 
     // On prend le premier fichier image de la saisie et on le transform en logo
     $documents = saisie_upload_get();
+
+    if (!$documents) {
+        return false;
+    }
+
     $fichier = sql_fetsel(
         'id_document,fichier',
         'spip_documents',
