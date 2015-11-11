@@ -63,8 +63,8 @@
 			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
 			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
 			<td class='auteur'>
-			<BOUCLE_auteur (AUTEURS) {id_auteur}>
-				<a href="(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})">#NOM</a>
+			<BOUCLE_auteur (AUTEURS){tout}{id_auteur}>
+				[<a href="(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})">#NOM</a>]
 			</BOUCLE_auteur></B_auteur>-<//B_auteur>
 			</td>
 			<td class='id'>[(#AUTORISER{modifier,contact,#ID_CONTACT}|?{
