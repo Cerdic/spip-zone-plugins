@@ -272,28 +272,20 @@ function taxonomie_crediter($id_taxon, $sources_specifiques=null) {
 	}
 
 	// On merge ITIS et les autres sources
-	$liste_sources = array('itis' => '');
+	$liste_sources = array('itis' => array());
 	if ($sources_specifiques) {
 		$liste_sources = array_merge($liste_sources, unserialize($sources_specifiques));
 	}
 
 	// Puis on construit la liste des sources pour l'affichage
-	foreach ($liste_sources as $_source => $_champs) {
+	foreach ($liste_sources as $_source => $_infos_source) {
 		include_spip("services/${_source}/${_source}_api");
 		if (function_exists($citer = "${_source}_credit")) {
-			$sources[$_source] = array(
-				'texte' => $citer($id_taxon),
-				'champs' => $_champs
-			);
+			$sources[$_source] = $citer($id_taxon, $_infos_source);
 		}
 	}
 
 	return $sources;
-}
-
-function taxonomie_informer($recherche, $section='') {
-	include_spip('services/wikipedia/wikipedia_api');
-	return wikipedia_get($recherche, $section);
 }
 
 ?>

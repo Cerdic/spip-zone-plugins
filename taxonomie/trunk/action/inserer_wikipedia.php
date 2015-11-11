@@ -36,18 +36,20 @@ function action_inserer_wikipedia_dist(){
 	// Si le champ n'est pas vide, son contenu est écrasé.
 	if ($arguments) {
 		// Détermination des arguments de l'action
-		list($id_taxon, $nom_scientifique, $champ, $section) = explode(':', $arguments);
+		list($id_taxon, $nom_scientifique, $code_langue, $champ, $section) = explode(':', $arguments);
 		$section = ($section == '*') ? null : $section;
 		if (intval($id_taxon)) {
-			include_spip('taxonomie_fonctions');
-			$texte = taxonomie_informer($nom_scientifique, $section);
+			// Récupération des informations tsn, source et edite du taxon
+			$taxon = sql_fetsel('tsn, sources, edite', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+
+			// Appel du service query de Wikipedia
+			include_spip('inc/services/wikipedia_api');
+			$langue = wikipedia_spipcode2language($code_langue); // TODO : attention à gérer la langue en amont
+			$texte = wikipedia_get($taxon['tsn'], $nom_scientifique, $langue, $section);
 			if ($texte) {
 				// Conversion du texte mediawiki vers SPIP
 				include_spip('convertisseur_fonctions');
 				$texte_converti = convertisseur_texte_spip($texte, 'MediaWiki_SPIP');
-
-				// Récupération des informations source et edite du taxon
-				$taxon = sql_fetsel('sources, edite', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
 
 				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
 				$maj = array();
@@ -58,7 +60,7 @@ function action_inserer_wikipedia_dist(){
 					$maj['edite'] = 'oui';
 				}
 				// - la source wikipédia est ajoutée
-				$maj['sources'] = array('wikipedia' => array($champ));
+				$maj['sources'] = array('wikipedia' => array('champs' => $champ));
 				if ($sources = unserialize($taxon['sources'])) {
 					$maj['sources'] = array_merge($maj['sources'], $sources);
 				}

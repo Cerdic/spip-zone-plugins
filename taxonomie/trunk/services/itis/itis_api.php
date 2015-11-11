@@ -558,11 +558,13 @@ function itis_spipcode2language($language_code) {
  * @param int   $id_taxon
  *      Id du taxon nécessaire pour construire l'url de la page ITIS fournissant une information complète sur
  *      le taxon.
+ * @param array $informations
+ *      Tableau des informations complémentaires sur la source. Pour ITIS ce tableau est vide.
  *
  * @return string
  *      Phrase de crédit.
  */
-function itis_credit($id_taxon) {
+function itis_credit($id_taxon, $informations) {
 	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
 	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
 

@@ -20,6 +20,12 @@ if (!defined('_TAXONOMIE_WIKIPEDIA_PAGE_BASE_URL'))
 	 */
 	define('_TAXONOMIE_WIKIPEDIA_PAGE_BASE_URL', 'https://%langue%.wikipedia.org/wiki/');
 
+if (!defined('_TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT'))
+	/**
+	 * Période de renouvellement du cache de Wikipedia : 30 jours
+	 */
+	define('_TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT', 86400*30);
+
 /**
  * Configuration de la correspondance entre langue Wikipedia et code de langue SPIP.
  * La langue du service est l'index, le code SPIP est la valeur.
@@ -37,7 +43,8 @@ $GLOBALS['wikipedia_language'] = array(
 
 /**
  * Renvoie le texte de la page ou d'une section de la page à partir d'une phrase de recherche.
- * Dans le cas du plugin, cette recherche est généralement le nom scientifique du taxon.
+ * Cette phrase de recherche est toujours le nom scientifique du taxon dans l'utilisation qui en est faite
+ * par le plugin Taxonomie.
  *
  * @api
  *
@@ -49,7 +56,8 @@ $GLOBALS['wikipedia_language'] = array(
  * @param string    $langue
  *      Langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut 'fr', 'en', 'es'...
  * @param int|null  $section
- *      Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0.
+ *      Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0. Cet argument est
+ *      optionnel.
  *
  * @return string
  *      Texte trouvé rédigé en mediawiki ou chaine vide sinon. Pour traduire le texte en SPIP
@@ -59,29 +67,42 @@ $GLOBALS['wikipedia_language'] = array(
 function wikipedia_get($tsn, $recherche, $langue, $section=null) {
 	$information = array();
 
-
-	// Normaliser la recherche: trim et mise en lettres minuscules
-	$recherche = strtolower(trim($recherche));
-
-	// Construire l'URL de la function de recherche par nom vernaculaire.
-	// L'encodage de la recherche est effectuée dans la fonction.
-	$url = wikipedia_api2url('json', 'query', $langue, $recherche, $section);
-
-	// Acquisition des données spécifiées par l'url
+	// Si le cache est absent ou invalide on le recrée en utilisant le service web Wikipedia
+	// sinon on le litet on revoie le tableau du contenu désérialisé.
 	include_spip('inc/taxonomer');
-	$data = url2json_data($url);
+	if (!$file_cache = cache_taxonomie_existe('wikipedia', $tsn, $langue)
+	OR !filemtime($file_cache)
+	OR (time()-filemtime($file_cache)>_TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)) {
+		// Normaliser la recherche: trim et mise en lettres minuscules
+		$recherche = strtolower(trim($recherche));
 
-	// Récupération de la section demandée.
-	if (isset($data['batchcomplete'])
-	AND isset($data['query']['pages'])) {
-		$reponses = $data['query']['pages'];
-		$page = reset($reponses);
-		$id = key($reponses);
-		if (($id > 0)
-		AND !isset($page['missing'])
-		AND isset($page['revisions'][0]['*'])) {
-			$information['texte'] = $page['revisions'][0]['*'];
+		// Construire l'URL de la function de recherche par nom vernaculaire.
+		// L'encodage de la recherche est effectuée dans la fonction.
+		$url = wikipedia_api2url('json', 'query', $langue, $recherche, $section);
+
+		// Acquisition des données spécifiées par l'url
+		include_spip('inc/taxonomer');
+		$data = url2json_data($url);
+
+		// Récupération de la section demandée.
+		if (isset($data['batchcomplete'])
+		AND isset($data['query']['pages'])) {
+			$reponses = $data['query']['pages'];
+			$page = reset($reponses);
+			$id = key($reponses);
+			if (($id > 0)
+			AND !isset($page['missing'])
+			AND isset($page['revisions'][0]['*'])) {
+				$information['texte'] = $page['revisions'][0]['*'];
+			}
 		}
+
+		// Mise en cache
+		ecrire_fichier($file_cache, serialize($information));
+	} else {
+		// Lecture et désérialisation du cache
+		lire_fichier($file_cache, $information);
+		$information = unserialize($information);
 	}
 
 	return $information;
@@ -93,13 +114,13 @@ function wikipedia_get($tsn, $recherche, $langue, $section=null) {
 // --------------------------------------------------------------------------
 
 /**
- * Renvoie la langue telle que le service ITIS la désigne à partir du code de langue
+ * Renvoie la langue telle que le service Wikipedia la désigne à partir du code de langue
  * de SPIP.
  *
  * @api
  *
  * @param string    $language_code
- *      Code de langue de SPIP. La variable globale $itis_language définit le transcodage langue Wikipedia
+ *      Code de langue de SPIP. La variable globale $wikipedia_language définit le transcodage langue Wikipedia
  *      vers code SPIP.
  *
  * @return string
@@ -117,21 +138,32 @@ function wikipedia_spipcode2language($language_code) {
 
 
 /**
- * @param $id_taxon
+ * Construit la phrase de crédits précisant que les données fournies proviennent d'une page de Wikipedia.
+ *
+ * @api
+ *
+ * @param int   $id_taxon
+ *      Id du taxon nécessaire pour construire l'url de la page Wikipedia concernée.
+ * @param array $informations
+ *      Tableau des informations complémentaires sur la source. Pour Wikipedia ce tableau fourni le champ
+ *      rempli (descriptif).
+ *
  * @return string
+ *      Phrase de crédit.
  */
-function wikipedia_credit($id_taxon) {
+function wikipedia_credit($id_taxon, $informations) {
 	// On recherche le tsn du taxon afin de construire l'url vers sa page sur ITIS
 	$taxon = sql_fetsel('tsn, nom_scientifique', 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
 
-	// On crée l'url du taxon sur le site ITIS
-	$url = str_replace('%tsn%', $taxon['tsn'], _TAXONOMIE_ITIS_URL_BASE_CITATION);
+	// On crée l'url du taxon sur le site de Wikipedia
+	$url = str_replace('%langue%', 'fr', _TAXONOMIE_WIKIPEDIA_PAGE_BASE_URL)
+		. rawurlencode($taxon['nom_scientifique']);
 	$link = '<a href="' . $url . '"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
 
 	// On établit la citation
-	$citation = _T('taxonomie:citation_itis', array('url' => $link));
+	$credit = _T('taxonomie:credit_wikipedia', array('url_taxon' => $link));
 
-	return $citation;
+	return $credit;
 }
 
 
