@@ -420,6 +420,7 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 	asort($group_ids);
 
 	if (array_key_exists($upto, $group_ids)) {
+		include_spip('inc/charsets');
 		// Construire la regexp qui permet de limiter la hiérarchie comme demandée
 		$groups_list = implode('|', array_map('ucfirst', array_slice(array_flip($group_ids), 0, $group_ids[$upto])));
 		$regexp = str_replace('%groups_list%', $groups_list, _TAXONOMIE_ITIS_REGEXP_RANKNAME);
@@ -444,7 +445,7 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 						// Initialisation du taxon
 						$taxon['rang'] = strtolower($match[1]);
 						$taxon['nom_scientifique'] = strtolower($match[2]);
-						$taxon['auteur'] = mb_convert_encoding(trim($match[3]), 'ISO-8859-1');
+						$taxon['auteur'] = importer_charset(trim($match[3]), 'iso-8859-1');
 						$tsn = intval($match[4]);
 						$taxon['tsn'] = $tsn;
 
