@@ -131,6 +131,10 @@ class Facteur extends PHPMailer {
 				if ($options['smtp_secure'] == 'tls') {
 					$this->SMTPSecure = 'tls';
 				}
+				
+				// Pour le moment on remet l'ancien fonctionnement :
+				// on ne doit pas tester les certificats si pas demandé explicitement avec l'option TLS !
+				$this->SMTPAutoTLS = false;
 			}
 		}
 		
