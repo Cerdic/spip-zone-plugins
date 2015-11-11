@@ -3,35 +3,39 @@
  * Ce fichier contient les fonctions qui permettent de construire, vérifier ou créer
  * les fichiers cache des services taxonomiques et les dossiers les contenant.
  *
- * @package SPIP\BOUSSOLE\Outils\Cache
+ * @package SPIP\TAXONOMIE\CACHE
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_TAXONOMIE_NOMDIR_CACHE'))
+if (!defined('_TAXONOMIE_CACHE_NOMDIR'))
 	/**
 	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie */
-	define('_TAXONOMIE_NOMDIR_CACHE', 'cache-taxonomie/');
-if (!defined('_TAXONOMIE_DIR_CACHE'))
+	define('_TAXONOMIE_CACHE_NOMDIR', 'cache-taxonomie/');
+if (!defined('_TAXONOMIE_CACHE_DIR'))
 	/**
 	 * Chemin du dossier contenant les fichiers caches des boussoles */
-	define('_TAXONOMIE_DIR_CACHE', _DIR_VAR . _TAXONOMIE_NOMDIR_CACHE);
+	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
 
 
 /**
- * Ecriture des informations complètes d'une boussole dans un cache au format XML et de son SHA.
+ * Ecriture d'un contenu issu d'un service web taxonomique dans un fichier texte afin d'optimiser le nombre
+ * de requête adressée au service.
  *
  * @param string	$cache
- * 		Contenu XML du fichier cache à créer.
- * @param string	$alias_boussole
- * 		Alias de la boussole dont le cache va être créé.
+ * 		Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sériliser avant
+ *      d'appeler cette fonction.
+ * @param string    $service
+ * @param int       $tsn
+ * @param string    $code_langue
+ * @param string    $action
  *
  * @return boolean
  * 		Toujours à vrai.
  */
 function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action='') {
 	// Création du dossier cache si besoin
-	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_DIR_CACHE, '/'));
+	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_DIR, '/'));
 
 	// Ecriture du fichier cache
 	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
@@ -41,9 +45,16 @@ function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action
 }
 
 
+/**
+ * @param $service
+ * @param $tsn
+ * @param string $code_langue
+ * @param string $action
+ * @return string
+ */
 function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
-	// Ecriture du fichier cache
-	$fichier_cache = _TAXONOMIE_DIR_CACHE
+	// Construction du chemin complet d'un fichier cache
+	$fichier_cache = _TAXONOMIE_CACHE_DIR
 		. $service
 		. ($action ? '_' . $action : '')
 		. '_' . $tsn
@@ -53,11 +64,13 @@ function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
 }
 
 /**
- * Vérifie l'existence du fichier cache d'une boussole et si oui retourne
- * son chemin complet.
+ * Vérifie l'existence du fichier cache pour un taxon et un service donnés. Si le fichier existe
+ * la fonction retourne son chemin complet.
  *
- * @param string	$alias_boussole
- * 		Alias de la boussole dont on teste l'existence du cache.
+ * @param string    $service
+ * @param int       $tsn
+ * @param string    $code_langue
+ * @param string    $action
  *
  * @return string
  * 		Chemin du fichier cache si il existe ou chaine vide sinon.
@@ -85,7 +98,7 @@ function cache_taxonomie_existe($service, $tsn, $code_langue='', $action='') {
 function supprimer_caches(){
 	include_spip('inc/flock');
 
-	if ($fichiers_cache = glob(_TAXONOMIE_DIR_CACHE . "*.*")) {
+	if ($fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . "*.*")) {
 		foreach ($fichiers_cache as $_fichier) {
 			supprimer_fichier($_fichier);
 		}

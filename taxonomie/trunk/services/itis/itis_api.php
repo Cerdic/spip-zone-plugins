@@ -36,13 +36,17 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 
 
 /**
- * Configuration de l'api des actions du service web ITIS
+ * Configuration de la correspondance entre langue Wikipedia et code de langue SPIP.
+ * La langue du service est l'index, le code SPIP est la valeur.
  */
 $GLOBALS['itis_language'] = array(
 	'french' => 'fr',
 	'english' => 'en',
 	'spanish' => 'es'
 );
+/**
+ * Configuration de l'api des actions du service web ITIS
+ */
 $GLOBALS['itis_webservice'] = array(
 	'search' => array(
 		'commonname' => array(
@@ -143,6 +147,7 @@ $GLOBALS['itis_webservice'] = array(
 		),
 	),
 );
+
 
 // -----------------------------------------------------------------------
 // ------------ API du web service ITIS - Actions principales ------------
