@@ -30,6 +30,7 @@ class Facteur extends PHPMailer {
 	 *
 	 */
 	function Facteur($email, $objet, $message_html, $message_texte, $options = array()) {
+		// On récupère toutes les options par défaut depuis le formulaire de config
 		$defaut = array();
 		foreach (array(
 			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom',
@@ -40,26 +41,38 @@ class Facteur extends PHPMailer {
 		) as $config) {
 			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
 		}
+		// On fusionne les options avec d'éventuelles surcharges lors de l'appel
 		$options = array_merge($defaut, $options);
-
+		
+		// Il est possible d'avoir beaucoup plus de logs avec 2, 3 ou 4, ce qui logs les échanges complets avec le serveur
 		if (defined('_FACTEUR_DEBUG_SMTP')) {
 			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
 		}
-		if ($options['adresse_envoi'] == 'oui'
-		  AND $options['adresse_envoi_email'])
+		
+		if (
+			$options['adresse_envoi'] == 'oui'
+			and $options['adresse_envoi_email']
+		) {
 			$this->From = $options['adresse_envoi_email'];
-		else
-			$this->From = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"])?
+		}
+		else {
+			$this->From = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"]) ?
 				$GLOBALS['meta']["email_envoi"]
-				:$GLOBALS['meta']['email_webmaster'];
+				: $GLOBALS['meta']['email_webmaster'];
+		}
 
 		// Si plusieurs emails dans le from, pas de Name !
-		if (strpos($this->From,",")===false){
-			if ($options['adresse_envoi'] == 'oui'
-			  AND $options['adresse_envoi_nom'])
+		if (strpos($this->From,",") === false) {
+			if (
+				$options['adresse_envoi'] == 'oui'
+				and $options['adresse_envoi_nom']
+			) {
 				$this->FromName = $options['adresse_envoi_nom'];
-			else
+			}
+			// Par défaut, l'envoyeur est le nom du site
+			else {
 				$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+			}
 		}
 
 		$this->CharSet = "utf-8";
@@ -69,32 +82,38 @@ class Facteur extends PHPMailer {
 		//Pour un envoi multiple de mail, $email doit être un tableau avec les adresses.
 		if (is_array($email)) {
 			foreach ($email as $cle => $adresseMail) {
-				if (!$this->AddAddress($adresseMail))
-					spip_log("Erreur AddAddress $adresseMail : ".print_r($this->ErrorInfo,true),'facteur');
+				if (!$this->AddAddress($adresseMail)) {
+					spip_log("Erreur AddAddress $adresseMail : ".print_r($this->ErrorInfo, true), 'facteur.'._LOG_ERREUR);
+				}
 			}
 		}
-		else
-			if (!$this->AddAddress($email))
-				spip_log("Erreur AddAddress $email : ".print_r($this->ErrorInfo,true),'facteur');
-
+		elseif (!$this->AddAddress($email)) {
+			spip_log("Erreur AddAddress $email : ".print_r($this->ErrorInfo, true), 'facteur.'._LOG_ERREUR);
+		}
+		
+		// Retour des erreurs
 		if (!empty($options['smtp_sender'])) {
 			$this->Sender = $options['smtp_sender'];
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
-
+		
+		// Destinataires en copie, seulement s'il n'y a pas de destinataire de test
 		if (!defined('_TEST_EMAIL_DEST')){
 			if (!empty($options['cc'])) {
-				$this->AddCC( $options['cc'] );
+				$this->AddCC($options['cc']);
 			}
 			if (!empty($options['bcc'])) {
-				$this->AddBCC( $options['bcc'] );
+				$this->AddBCC($options['bcc']);
 			}
 		}
-
+		
+		// Si on envoie avec un SMTP explicite
 		if (isset($options['smtp']) AND $options['smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $options['smtp_host'];
 			$this->Port 	= $options['smtp_port'];
+			
+			// SMTP authentifié
 			if ($options['smtp_auth'] == 'oui') {
 				$this->SMTPAuth = true;
 				$this->Username = $options['smtp_username'];
@@ -103,36 +122,49 @@ class Facteur extends PHPMailer {
 			else {
 				$this->SMTPAuth = false;
 			}
-			if (intval(phpversion()) == 5) {
-			if ($options['smtp_secure'] == 'ssl')
-				$this->SMTPSecure = 'ssl';
-			if ($options['smtp_secure'] == 'tls')
-				$this->SMTPSecure = 'tls';
+			
+			// À partir de PHP 5, on peut tester la sécurité de la connexion
+			if (intval(phpversion()) >= 5) {
+				if ($options['smtp_secure'] == 'ssl') {
+					$this->SMTPSecure = 'ssl';
+				}
+				if ($options['smtp_secure'] == 'tls') {
+					$this->SMTPSecure = 'tls';
+				}
 			}
 		}
-
+		
+		// S'il y a un contenu HTML
 		if (!empty($message_html)) {
-			$message_html = unicode_to_utf_8(charset2unicode($message_html,$GLOBALS['meta']['charset']));
+			$message_html = unicode_to_utf_8(charset2unicode($message_html, $GLOBALS['meta']['charset']));
+			
 			$this->Body = $message_html;
 			$this->IsHTML(true);
-			if ($options['filtre_images'])
+			if ($options['filtre_images']) {
 				$this->JoindreImagesHTML();
+			}
+			
 			$this->UrlsAbsolues();
 		}
+		
+		// S'il y a un contenu texte brut
 		if (!empty($message_texte)) {
-			$message_texte = unicode_to_utf_8(charset2unicode($message_texte,$GLOBALS['meta']['charset']));
+			$message_texte = unicode_to_utf_8(charset2unicode($message_texte, $GLOBALS['meta']['charset']));
+			
+			// Si pas de HTML on le remplace en tant que contenu principal
 			if (!$this->Body) {
 				$this->IsHTML(false);
 				$this->Body = $message_texte;
 			}
+			// Sinon on met le texte brut en contenu alternatif
 			else {
 				$this->AltBody = $message_texte;
 			}
 		}
 
-		if ($options['filtre_iso_8859'])
+		if ($options['filtre_iso_8859']) {
 			$this->ConvertirUtf8VersIso8859();
-
+		}
 	}
 
 	/**
@@ -293,7 +325,7 @@ class Facteur extends PHPMailer {
 		$error = ob_get_contents();
 		ob_end_clean();
 		if( !empty($error) ) {
-			spip_log("Erreur Facteur->Send : $error",'facteur.err');
+			spip_log("Erreur Facteur->Send : $error",'facteur.'._LOG_ERREUR);
 		}
 		return $retour;
 	}
@@ -304,7 +336,7 @@ class Facteur extends PHPMailer {
 		$error = ob_get_contents();
 		ob_end_clean();
 		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddAttachment : $error",'facteur.err');
+			spip_log("Erreur Facteur->AddAttachment : $error",'facteur.'._LOG_ERREUR);
 		}
 		return $retour;
 	}
@@ -315,7 +347,7 @@ class Facteur extends PHPMailer {
 		$error = ob_get_contents();
 		ob_end_clean();
 		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddReplyTo : $error",'facteur.err');
+			spip_log("Erreur Facteur->AddReplyTo : $error",'facteur.'._LOG_ERREUR);
 		}
 		return $retour;
 	}
@@ -325,7 +357,7 @@ class Facteur extends PHPMailer {
 		$error = ob_get_contents();
 		ob_end_clean();
 		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddBCC : $error",'facteur.err');
+			spip_log("Erreur Facteur->AddBCC : $error",'facteur.'._LOG_ERREUR);
 		}
 		return $retour;
 	}
@@ -335,10 +367,8 @@ class Facteur extends PHPMailer {
 		$error = ob_get_contents();
 		ob_end_clean();
 		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddCC : $error",'facteur.err');
+			spip_log("Erreur Facteur->AddCC : $error",'facteur.'._LOG_ERREUR);
 		}
 		return $retour;
 	}
 }
-
-?>
