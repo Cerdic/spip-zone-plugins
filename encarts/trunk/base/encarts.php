@@ -47,7 +47,7 @@ function encarts_declarer_tables_objets_sql($tables) {
 			"id_encart"          => "bigint(21) NOT NULL",
 			"titre"              => "tinytext NOT NULL",
 			"texte"              => "text NOT NULL",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
+			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -55,11 +55,12 @@ function encarts_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
+		'page' => false,
 		'champs_editables'  => array('titre','texte'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_encarts_liens'),
-		
+
 
 	);
 
