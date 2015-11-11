@@ -33,6 +33,7 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 						array('seminaire_pre_configuration',array()),
 						array('seminaire_creation_groupes',array())
 					);
+	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['create']);
 	/**
 	 * Copie de abstract vers descriptif
 	 * on change name en attendee
@@ -51,9 +52,9 @@ function seminaire_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.3'] = array(
 						array('sql_alter',"TABLE spip_evenements DROP id_mot"),
 					);
-	
+
 	cextras_api_upgrade(seminaire_declarer_champs_extras(), $maj['1.1.0']);
-	
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -161,7 +162,7 @@ function seminaire_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_groupes_mots","id_groupe=".intval($id_groupe_mot_categorie));
 
 	/*
-	* On supprime tous les articles qui son marqués seminaire
+	* On supprime tous les articles qui sont marqués seminaire
 	*/
 	sql_delete("spip_articles","seminaire='on'");
 	/* 

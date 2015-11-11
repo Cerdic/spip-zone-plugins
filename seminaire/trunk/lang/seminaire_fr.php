@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_groupe_mot_type'		 =>		'Mots sur les évènements de séminaires',
 	'label_prodid'				 =>		'PRODID pour le calendrier',
 	'label_mail_attendee' 		 =>		'Mail attendee' ,
-	'label_seminaire'			 =>		'Cet article présente-t-il des événements de type séminaire ? ',
+	'label_seminaire'			 =>		'Cet article présente-t-il des événements de type séminaire ?',
 	'lien_tout_replier'			 =>		'Sans résumé',
 	'lien_tout_deplier'			 =>		'Avec résumé',
 	'lieu'						 =>		'Lieu',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_notes'			 =>		'N\'apparaît que dans les détails de l\'événement',
 
 	// S
-	'seminaire_titre' => 'Séminaire',
+	'seminaire_titre' 			 =>		'Séminaire',
 
 	// T
 	'titre_agenda'				 =>		'Agenda Scientifique',
