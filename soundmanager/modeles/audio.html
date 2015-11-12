@@ -1,14 +1,18 @@
-<BOUCLE_article(ARTICLES){id_article}{statut IN prop,publie}>
-	#SET{fichier,#ID_ARTICLE|nom_fichier_audio}
-	#SET{rep,#GET{fichier}|match{\d\d\d\d-\d\d}}
-	<BOUCLE_son(DATA){source pregfiles, ../audio/#GET{rep}/, #GET{fichier}$}>
-		<div id="sm2-container">
+<div id="sm2-container">
 			
-		</div>
+</div>
 
-		<div class="ui360 ui360-vis">
-			<a href="[(#VAL{audio/}|concat{#VALEUR|basename}|url_absolue)]">Écouter cet article</a>
-		</div>
 
-	</BOUCLE_son>
-</BOUCLE_article>
+
+[(#REM)
+	Modele pour <audio> pour player MP3 360 exemple : <audio1>
+]
+
+<BOUCLE_doc(DOCUMENTS) {id_document=#ENV{id}} {extension IN mp3} {tout}>
+<BOUCLE_article(ARTICLES){id_document}>#SET{titre_art,#TITRE}</BOUCLE_article>
+[(#EXTENSION|=={mp3}|oui)
+<div class="ui360 ui360-vis">
+[<a href="(#URL_DOCUMENT)" title="Ecouter">[(#TITRE|sinon{#GET{titre_art}})]</a>]
+</div>
+]
+</BOUCLE_doc>
