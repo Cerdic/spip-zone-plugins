@@ -88,9 +88,9 @@ function formulaires_importer_map_traiter_dist()
             if (count($map_xml_formater['vectors']) > 0 and intval($_id_map) > 0) {
                 foreach ($map_xml_formater['vectors'] as $key => $vector) {
                     $vector['id_map'] = $_id_map;
-                    $where = 'titre='.sql_quote($vector['titre'])
-                    .' AND code_vector='.sql_quote($vector['code_vector'])
-                    .' AND id_map='.sql_quote($vector['id_map']);
+                    $where = 'titre='.sql_quote($vector['titre']);
+                    $where .= (isset($vector['code_vector'])) ? ' AND code_vector='.sql_quote($vector['code_vector']) : '';
+                    $where .= (isset($vector['id_map'])) ? ' AND id_map='.sql_quote($vector['id_map']) : '';
                     $deja = sql_fetsel('id_vector', 'spip_vectors', $where);
                     $messsage_log[] = "------\nVector\n".print_r($where, true)."\n------";
                     if ($deja) {

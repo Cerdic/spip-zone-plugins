@@ -10,7 +10,7 @@
     <form action="#ENV{action}" method="post" enctype='multipart/form-data'>
         #ACTION_FORMULAIRE{#ENV{action}}
         <input type="hidden" value="" name="maps_xml">
-        <ul class="editer-groupe">
+        <[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
             [(#SET{maps_xml,#ARRAY})]
             <BOUCLE_maps_xml (DATA) {source table, (#REM|lister_maps_xml)}>[(#SET{nom,#VALEUR})]
@@ -24,7 +24,7 @@
             [(#SAISIE{input, upload_xml,
                 label=<:map:import_maps_xml_label:>,
                 type=file})]
-        </ul>
+        </[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
         <p class="boutons">
             <input type="submit" class="submit" value="<:pass_ok:>" />

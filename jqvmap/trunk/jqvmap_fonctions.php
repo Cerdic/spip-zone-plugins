@@ -93,7 +93,11 @@ function map_xml_formater($fichier_xml)
     $chemin_fichier = $chemin_fichier[$fichier_xml];
     $contenu_xml_tmp = spip_xml_load($chemin_fichier);
     foreach ($contenu_xml_tmp['map'][0] as $key => $value) {
-        $resultat = trim($value[0]); // Quand PHP est en mode strict, il n'aime pas avoir un return d'une fonction
+        if (!is_array($value[0])) {
+            $resultat = trim($value[0]); // Quand PHP est en mode strict, il n'aime pas avoir un return d'une fonction
+        } else {
+            $resultat = $value[0];
+        }
         switch ($key) {
             case 'titre':
                 if (!empty($resultat)) {

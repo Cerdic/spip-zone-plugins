@@ -7,7 +7,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_vector' value='#ENV{id_vector}' />
 		<input type='hidden' name='id_map' value='#ENV{id_map}' />
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{maps, id_map, obligatoire=oui,
 				label=<:vector:champ_id_map_label:>})]
@@ -34,7 +34,7 @@
 			[(#SAISIE{input, url_site,
 				label=<:vector:champ_url_site_label:>})]
 
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

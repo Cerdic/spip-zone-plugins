@@ -33,28 +33,30 @@ Valeurs par defaut :
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     border-top: 1px solid #GET{claire};
+    text-align: #GET{left};
 }
 .map #wysiwyg .label.visible,
 .vector #wysiwyg .label.visible {
     display: block;
     width: 27%;
-    float: left;
-    clear: left;
+    float: #GET{left};
+    clear: #GET{left};
 }
 .map #wysiwyg .span,
 .vector #wysiwyg .span {
     display: block;
     width: 70%;
-    float: right;
-    clear: right;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
     word-wrap: break-word;
+    float: #GET{right};
+    clear: #GET{right};
 }
 .jqvmap-block {
     width: 100%;
     min-height: 1px;
+    margin: 0 auto;
 }
 .maps #navigation .box.sans_marge .inner .bd {
     padding-right: 0;
