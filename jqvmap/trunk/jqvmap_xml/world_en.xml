@@ -10,9 +10,9 @@
   <border_opacity>1.00</border_opacity>
   <border_width>1</border_width>
   <color>#ffffff</color>
-  <enable_zoom>true</enable_zoom>
+  <enable_zoom>false</enable_zoom>
   <hover_color></hover_color>
-  <hover_opacity>0.70</hover_opacity>
+  <hover_opacity>0.00</hover_opacity>
   <normalize_function>polynomial</normalize_function>
   <scale_colors>#C8EEFF, #006491</scale_colors>
   <selected_color>#666666</selected_color>

@@ -12,7 +12,7 @@
   <color>#13bae0</color>
   <enable_zoom>false</enable_zoom>
   <hover_color>#68D0EA</hover_color>
-  <hover_opacity>0.65</hover_opacity>
+  <hover_opacity>0.00</hover_opacity>
   <normalize_function>linear</normalize_function>
   <scale_colors></scale_colors>
   <selected_color></selected_color>

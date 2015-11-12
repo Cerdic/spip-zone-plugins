@@ -8,9 +8,9 @@
   <background_color></background_color>
   <border_color></border_color>
   <border_opacity>1.00</border_opacity>
-  <border_width>0</border_width>
+  <border_width>1</border_width>
   <color></color>
-  <enable_zoom>true</enable_zoom>
+  <enable_zoom>false</enable_zoom>
   <hover_color></hover_color>
   <hover_opacity>0.00</hover_opacity>
   <normalize_function></normalize_function>
