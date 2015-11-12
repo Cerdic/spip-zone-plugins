@@ -450,7 +450,7 @@ function reperer_items_non_utilises($utilisations, $module, $items_module) {
 			'occurrences_non' => $item_non,
 			'occurrences_non_mais' => $item_non_mais,
 			'occurrences_peut_etre' => $item_peut_etre,
-	       );
+			);
 }
 
 
@@ -512,7 +512,7 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 					// On vérifie si le raccourci appartient au module utilisé par l'occurrence en cours.
 					$module_utilise_verifiable = false;
 					$raccourci_dans_module_utilise = false;
-					if (in_array($module_utilise, $modules_tous_lang)) {
+					if ($module_utilise != "" && in_array($module_utilise, $modules_tous_lang)) {
 						$module_utilise_verifiable = true;
 						if (array_key_exists($_raccourci, $tous_lang)) {
 							foreach ($tous_lang[$_raccourci] as $_item_tous_lang) {
@@ -552,25 +552,47 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 							// de vérification. Il y a de grande chance que ce soit ok mais on le notifie
 							$item_oui_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 						} else {
-							// Cas 4 : le raccourci n'est ni dans le module en cours de vérification, ni dans le
-							// module de l'occurrence de vérification. Il est donc non défini mais on ne sait pas
-							// si cela concerne le module en cours ou pas.
-
-							// Si pas normalise, c'est une auto-definition
-							// Si l'index est deja pris pour un autre texte
-							// (48 caracteres initiaux communs)
-							// forcer un suffixe md5
-							// TODO : a priori ce code devrait être obsolete
-							$md5 = $_raccourci;
-							if (!preg_match(',^\w+$,', $_raccourci)) {
-								if (isset($tous_lang[$_raccourci])
-								AND !preg_match("%^\s*'$_raccourci',?\s*$%", $tous_lang[$_cle][0][2])) {
-									$md5 .= '_' . md5($_raccourci);
+							$item_ok = false;
+							if($module_utilise == ""){
+								/**
+								 * Cas 3.5
+								 * On vérifie si le raccourci est dans un module de spip par défaut (spip, public, ecrire, local) 
+								 * mais pas dans le module en cours de vérification, il y a de grande chance que ce soit ok mais on le notifie
+								 */
+								$modules_vides = array('local','public','spip','ecrire'); // Les modules par défaut de SPIP
+								if (array_key_exists($_raccourci, $tous_lang)) {
+									foreach ($tous_lang[$_raccourci] as $_item_tous_lang) {
+										// $_item_tous_lang[1] contient toujours le nom du module exact à savoir
+										// pour le core spip, public ou ecrire
+										if (!$_item_tous_lang[1]) continue;
+										if(in_array($_item_tous_lang[1],$modules_vides)){
+											$item_oui_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
+											$item_ok = true;
+										}
+									}
 								}
 							}
-							$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
-							$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4', $options);
-							$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1', $options);
+							if(!$item_ok){
+								// Cas 4 : le raccourci n'est ni dans le module en cours de vérification, ni dans le
+								// module de l'occurrence de vérification. Il est donc non défini mais on ne sait pas
+								// si cela concerne le module en cours ou pas.
+	
+								// Si pas normalise, c'est une auto-definition
+								// Si l'index est deja pris pour un autre texte
+								// (48 caracteres initiaux communs)
+								// forcer un suffixe md5
+								// TODO : a priori ce code devrait être obsolete
+								$md5 = $_raccourci;
+								if (!preg_match(',^\w+$,', $_raccourci)) {
+									if (isset($tous_lang[$_raccourci])
+									AND !preg_match("%^\s*'$_raccourci',?\s*$%", $tous_lang[$_cle][0][2])) {
+										$md5 .= '_' . md5($_raccourci);
+									}
+								}
+								$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
+								$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4', $options);
+								$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1', $options);
+							}
 						}
 					}
 				}
@@ -608,7 +630,7 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 			'occurrences_oui_mais' => $item_oui_mais,
 			'occurrences_peut_etre' => $item_peut_etre,
 			'complements' => $complement,
-	       );
+			);
 }
 
 ?>
