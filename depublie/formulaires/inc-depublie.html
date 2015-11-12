@@ -10,7 +10,7 @@
 		[(#ENV*{afficher_#GET{name}}|affdate|sinon{<:jour_non_connu_nc:>})]
 		</span>
 		[(#ENV{editable})
-		<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+		<span class="input editable"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
 			<span class="saisie_redac"[(#ENV{sans_depublie}|oui)style="display:none;"]>
 				<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"
 					onchange="if (jQuery(this).val() == '0000') jQuery(this).val('');" />
