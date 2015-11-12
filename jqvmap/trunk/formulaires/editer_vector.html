@@ -34,6 +34,11 @@
 			[(#SAISIE{input, url_site,
 				label=<:vector:champ_url_site_label:>})]
 
+			[(#SAISIE{selection, target,
+				label=<:vector:champ_target_label:>,
+				datas=[(#ARRAY{_blank,<:vector:champ_target_blank:>,_self,<:vector:champ_target_self:>})],
+				default=_blank})]
+
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

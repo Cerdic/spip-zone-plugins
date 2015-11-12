@@ -40,4 +40,9 @@
 	<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'>(#URL_SITE)</div>
 </div>]
 
+[<div class="champ contenu_target[ (#TARGET*|strlen|?{'',vide})]">
+	<div class='label visible'><:vector:champ_target_label:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{target} target'>(#TARGET|oui)[(#VAL{vector:champ_target}|concat{#TARGET}|_T)]</div>
+</div>]
+
 </BOUCLE_vector>

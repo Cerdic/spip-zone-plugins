@@ -18,8 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'champ_descriptif_label' => 'Descriptif',
     'champ_id_map_label' => 'Carte',
     'champ_path_label' => 'Coordonnées',
+    'champ_target_blank' => 'Oui',
+    'champ_target_label' => 'Ouvrir le lien dans une nouvelle fenêtre&nbsp;?',
+    'champ_target_self' => 'Non',
     'champ_titre_label' => 'Titre',
     'champ_url_site_label' => 'Lien hypertexte',
+    'confirmer_supprimer_vector' => 'Confirmez-vous la suppression de ce vecteur ?',
 
     // I
     'icone_creer_vector' => 'Créer un vecteur',
@@ -32,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // R
     'retirer_lien_vector' => 'Retirer ce vecteur',
     'retirer_tous_liens_vectors' => 'Retirer tous les vecteurs',
+
+    // S
+    'supprimer_vector' => 'Supprimer ce vecteur',
 
     // T
     'texte_ajouter_vector' => 'Ajouter un vecteur',

@@ -70,7 +70,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
             'selected_region' => "text NOT NULL DEFAULT ''",
             'show_tooltip' => "ENUM('true','false') DEFAULT 'true'",
             'data_name' => "text NOT NULL DEFAULT ''",
-            'statut' => "varchar(20)  DEFAULT '0' NOT NULL",
+            'statut' => "varchar(20) DEFAULT '0' NOT NULL",
             'date' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
             'maj' => 'TIMESTAMP',
         ),
@@ -82,7 +82,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
         'date' => 'date',
         'champs_editables' => array('titre', 'descriptif', 'width', 'height', 'code_map', 'background_color', 'border_color', 'border_opacity', 'border_width', 'color', 'enable_zoom', 'hover_color', 'hover_opacity', 'normalize_function', 'scale_colors', 'selected_color', 'selected_region', 'show_tooltip', 'data_name'),
         'champs_versionnes' => array('titre', 'descriptif', 'width', 'height', 'code_map', 'background_color', 'border_color', 'border_opacity', 'border_width', 'color', 'enable_zoom', 'hover_color', 'hover_opacity', 'normalize_function', 'scale_colors', 'selected_color', 'selected_region', 'show_tooltip', 'data_name'),
-        'rechercher_champs' => array('titre' => 8, 'descriptif' => 7),
+        'rechercher_champs' => array('titre' => 8, 'descriptif' => 7, 'code_map' => 8),
         'tables_jointures' => array(),
         'statut_textes_instituer' => array(
             'prepa' => 'texte_statut_en_cours_redaction',
@@ -118,6 +118,7 @@ function jqvmap_declarer_tables_objets_sql($tables)
             'data' => 'decimal(10,2) NOT NULL DEFAULT 0',
             'path' => "text NOT NULL DEFAULT ''",
             'url_site' => "text NOT NULL DEFAULT ''",
+            'target' => "varchar(25) NOT NULL DEFAULT '_blank'",
             'maj' => 'TIMESTAMP',
         ),
         'key' => array(
@@ -125,9 +126,9 @@ function jqvmap_declarer_tables_objets_sql($tables)
         ),
         'titre' => "titre AS titre, '' AS lang",
          #'date' => "",
-        'champs_editables' => array('id_map', 'titre', 'descriptif', 'code_vector', 'color', 'path', 'url_site', 'data'),
-        'champs_versionnes' => array('id_map', 'titre', 'descriptif', 'code_vector', 'color', 'path', 'url_site', 'data'),
-        'rechercher_champs' => array('titre' => 8, 'code_vector' => 8),
+        'champs_editables' => array('id_map', 'titre', 'descriptif', 'code_vector', 'color', 'path', 'url_site', 'data', 'target'),
+        'champs_versionnes' => array('id_map', 'titre', 'descriptif', 'code_vector', 'color', 'path', 'url_site', 'data', 'target'),
+        'rechercher_champs' => array('titre' => 8, 'code_vector' => 8, 'descriptif' => 4, 'code_vector' => 5),
         'tables_jointures' => array(),
 
     );

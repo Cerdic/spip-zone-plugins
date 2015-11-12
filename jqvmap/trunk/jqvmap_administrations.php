@@ -36,6 +36,9 @@ function jqvmap_upgrade($nom_meta_base_version, $version_cible)
     $maj['1.1.1'] = array(
         array('sql_alter', "TABLE spip_maps ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL AFTER statut"),
     );
+    $maj['1.1.2'] = array(
+        array('sql_alter', "TABLE spip_vectors ADD target varchar(25) NOT NULL DEFAULT '_blank' AFTER url_site"),
+    );
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
