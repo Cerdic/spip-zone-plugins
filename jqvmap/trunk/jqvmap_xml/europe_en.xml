@@ -10,14 +10,14 @@
   <border_opacity>1.00</border_opacity>
   <border_width>1</border_width>
   <color></color>
-  <enable_zoom>false</enable_zoom>
+  <enable_zoom>true</enable_zoom>
   <hover_color></hover_color>
   <hover_opacity>0.00</hover_opacity>
   <normalize_function></normalize_function>
   <scale_colors></scale_colors>
   <selected_color></selected_color>
   <selected_region></selected_region>
-  <show_tooltip>false</show_tooltip>
+  <show_tooltip>true</show_tooltip>
   <data_name></data_name>
   <vector>
     <titre>Greenland</titre>

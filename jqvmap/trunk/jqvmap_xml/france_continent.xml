@@ -10,7 +10,7 @@
   <border_opacity>1.00</border_opacity>
   <border_width>1</border_width>
   <color>#13bae0</color>
-  <enable_zoom>false</enable_zoom>
+  <enable_zoom>true</enable_zoom>
   <hover_color>#68D0EA</hover_color>
   <hover_opacity>0.00</hover_opacity>
   <normalize_function>linear</normalize_function>
