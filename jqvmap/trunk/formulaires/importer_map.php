@@ -81,6 +81,7 @@ function formulaires_importer_map_traiter_dist()
             } else {
                 // La carte aura un statut 'prepa'
                 $map_xml_formater['map']['statut'] = 'prepa';
+                $map_xml_formater['map']['date'] = date('Y-m-d H:i:s');
                 $_id_map = sql_insertq('spip_maps', $map_xml_formater['map']);
                 $messsage_log[] = "La carte $_id_map a été insérée en base : ".print_r($map_xml_formater['map'], true)."\n------";
                 $message_ok[] = _T('map:carte_importee');
