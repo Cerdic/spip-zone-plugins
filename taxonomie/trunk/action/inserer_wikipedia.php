@@ -56,14 +56,15 @@ function action_inserer_wikipedia_dist(){
 
 				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
 				$maj = array();
-				// - le texte du descriptif est inséré dans la langue choisie
+				// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
+				//   si besoin
 				include_spip('inc/taxonomer');
 				$maj[$champ] = merger_multi($taxon[$champ], $texte_converti, true);
 				// - l'indicateur d'édition est positionné à oui
 				if ($taxon['edite']) {
 					$maj['edite'] = 'oui';
 				}
-				// - la source wikipédia est ajoutée
+				// - la source wikipédia est ajoutée (ou écrasée si elle existe déjà)
 				$maj['sources'] = array('wikipedia' => array('champs' => array($champ)));
 				if ($sources = unserialize($taxon['sources'])) {
 					$maj['sources'] = array_merge($maj['sources'], $sources);

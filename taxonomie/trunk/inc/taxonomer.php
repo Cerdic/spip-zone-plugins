@@ -147,6 +147,7 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 	}
 
 	// On extrait les noms par langue
+	include_spip('inc/filtres');
 	if (preg_match(_EXTRAIRE_MULTI, $nom_source, $match)) {
 		$source = extraire_trads($match[1]);
 	}
