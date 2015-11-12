@@ -179,6 +179,24 @@ function traduire_champ_taxon($champ) {
 	return $traduction;
 }
 
+
+function extraire_element($tableau, $cles) {
+    $erreur = false;
+    $element = $tableau;
+	if ($cles) {
+		foreach ($cles as $_cle) {
+ 		if (isset($element[$_cle])) {
+          $element = $element[$_cle];
+ 		}
+ 		else {
+ 			$erreur = true;
+ 			break;
+ 		}
+ 	}
+	}
+    return ($erreur ? '' : $element);
+}
+
 /**
  * Ecriture d'un contenu issu d'un service web taxonomique dans un fichier texte afin d'optimiser le nombre
  * de requête adressée au service.

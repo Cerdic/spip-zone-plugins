@@ -72,10 +72,17 @@ $GLOBALS['itis_webservice'] = array(
 	),
 	'getfull' => array(
 		'record' => array(
-			'function' => 'getFullRecordFromTSN',
-			'argument' => 'tsn',
-			'list' => 'ns:return',
-			'index' => 'scientificName,taxRank,kingdom,commonNameList,taxonAuthor,parentTSN'
+			'function'  => 'getFullRecordFromTSN',
+			'argument'  => 'tsn',
+			'list'      => '',
+			'index'     => array(
+							'nom_scientifique'  => array('scientificName', 'combinedName'),
+							'rang'              => array('taxRank', 'rankName'),
+							'regne'             => array('kingdom', 'kingdomName'),
+							'tsn_parent'        => array('parentTSN', 'parentTsn'),
+							'auteur'            => array('taxonAuthor', 'authorship'),
+							'nom_commun'        => array('commonNameList', 'commonNames'),
+			)
 		)
 	),
 	'get' => array(
@@ -220,74 +227,43 @@ function itis_search_tsn($api, $recherche) {
  */
 function itis_get_record($tsn) {
 	global $itis_webservice;
-	$output =array();
+	$record = array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('xml', 'getfull', 'record', strval($tsn));
+	$url = itis_api2url('json', 'getfull', 'record', strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
+	include_spip('inc/taxonomer');
+	$data = url2json_data($url);
+
+	// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
+	// de l'action.
 	$api = $itis_webservice['getfull']['record'];
-	include_spip('inc/distant');
-	$flux = recuperer_page($url);
-
-	if ($flux) {
-		// Suppression du préfixe ax21: des balises afin de récupérer des index associatifs non préfixés
-		$flux = str_replace('ax21:parentTsn', 'ax21:TsnParent', $flux );
-		$flux = str_replace('ax21:', '', $flux);
-		// Suppression des suffixes xsi:type="xxx" ou xsi:nil="xxx" pour avoir des index de tableau simples
-		$flux = preg_replace(';\sxsi:(type|nil)="\w*";i', '', $flux);
-
-		// Phrasage de la chaine XML obtenue
-		include_spip('inc/xml');
-		$arbre = spip_xml_parse($flux);
-		if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
-			$record = reset($matches);
-			// Il est compliqué de créer une configuration du service qui permette un traitement générique de chaque
-			// information. Le code est donc spécifique à chaque information.
-			// Le résultat est stocké dans un tableau dont chaque index est le nom du champ correspondant de spip_taxon.
-			if (isset($record[0])) {
-				$record = $record[0];
-				// Nom scientifique, rang taxonomique, règne et TSN parent
-				$output['nom_scientifique'] = (empty($record['scientificName'][0]['combinedName'][0])
-					? ''
-					: strtolower($record['scientificName'][0]['combinedName'][0]));
-				$output['rang'] = (empty($record['taxRank'][0]['rankName'][0])
-					? ''
-					: strtolower($record['taxRank'][0]['rankName'][0]));
-				$output['regne'] = (empty($record['kingdom'][0]['kingdomName'][0])
-					? ''
-					: strtolower($record['kingdom'][0]['kingdomName'][0]));
-				$output['tsn_parent'] = (empty($record['parentTSN'][0]['TsnParent'][0])
-					? 0
-					: intval($record['parentTSN'][0]['TsnParent'][0]));
-				// Auteur
-				$output['auteur'] = '';
-				if (!empty($record['taxonAuthor'])) {
-					foreach ($record['taxonAuthor'] as $_author) {
-						if (isset($_author['authorship'][0])) {
-							$output['auteur'] = $output['auteur'] ? ', ' . $_author['authorship'][0] : $_author['authorship'][0];
-						}
-					}
-				}
-				// Noms communs dans différentes langues
-				$output['nom_commun'] = '';
-				if (!empty($record['commonNameList'][0]['commonNames'])) {
-					foreach ($record['commonNameList'][0]['commonNames'] as $_nom) {
-						if (isset($_nom['commonName'][0]) AND isset($_nom['language'][0])) {
-							$output['nom_commun'][$_nom['language'][0]] = $_nom['commonName'][0];
-						}
-					}
-				}
-			}
+	$data = extraire_element($data, $api['list']);
+	if (!empty($data)) {
+		foreach ($api['index'] as $_destination => $_keys) {
+			$element = extraire_element($data, $_keys);
+			$record[$_destination] = is_string($element) ? trim($element) : $element;
 		}
 	}
 
-	return $output;
+	// On réorganise le sous-tableau des noms communs
+	$noms = array();
+	if (is_array($record['nom_commun'])
+	AND $record['nom_commun']) {
+		foreach ($record['nom_commun'] as $_nom) {
+			$noms[strtolower($_nom['language'])] = trim($_nom['commonName']);
+		}
+	}
+	// Et on modifie l'index des noms communs avec le tableau venant d'être construit.
+	$record['nom_commun'] = $noms;
+
+	return $record;
 }
 
 
 /**
- * Renvoie les informations demandées sur un taxon désigné par son identifiant unique tsn.
+ * Renvoie les informations demandées sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
  *
@@ -305,7 +281,7 @@ function itis_get_record($tsn) {
  * 		- 'hierarchyfull' : la hiérarchie complète jusqu'au taxon
  * 		- 'hierarchydown' : la hiérarchie (à vérifier)
  * @param int		$tsn
- * 		Identifiant unique du taxon dans la base ITIS (tsn)
+ * 		Identifiant unique du taxon dans la base ITIS (TSN)
  *
  * @return array
  * 		Le tableau renvoyé est caractéristique du type d'information demandé.
