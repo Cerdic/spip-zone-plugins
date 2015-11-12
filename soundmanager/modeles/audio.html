@@ -1,18 +1,9 @@
-<div id="sm2-container">
-			
-</div>
-
-
-
 [(#REM)
 	Modele pour <audio> pour player MP3 360 exemple : <audio1>
 ]
-
 <BOUCLE_doc(DOCUMENTS) {id_document=#ENV{id}} {extension IN mp3} {tout}>
 <BOUCLE_article(ARTICLES){id_document}>#SET{titre_art,#TITRE}</BOUCLE_article>
-[(#EXTENSION|=={mp3}|oui)
 <div class="ui360 ui360-vis">
 [<a href="(#URL_DOCUMENT)" title="Ecouter">[(#TITRE|sinon{#GET{titre_art}})]</a>]
 </div>
-]
 </BOUCLE_doc>

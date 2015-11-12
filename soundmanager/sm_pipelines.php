@@ -5,21 +5,20 @@ function sm_insert_head($flux){
 	return $flux;
 }
 
+
 // Ajouter soundmanager s'il n'y est pas déjà et qu'on a des enclosures dans la page
 function sm_affichage_final($page) {
-	
-	if (!$GLOBALS['html']) return $page;
-
 	if (!strpos($page, 'script/soundmanager2.js')){
-		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'") AND $GLOBALS['html']){					
+		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'") AND $GLOBALS['html']){
+						
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('script/soundmanager2.js') . "\"></script>"."\n";
-			$script .= "<script type=\"text/javascript\" src=\"" . find_in_path('soundmanager.js') . "\"></script>"."\n";
+			$script .= "<script type=\"text/javascript\" src=\"" . find_in_path('multimedia.js') . "\"></script>"."\n";
 			$script .= "<link rel='stylesheet' href='" . generer_url_public('soundmanager.css') . "' type='text/css' media='projection, screen, tv' />"."\n";
 			
 			$page = substr_replace($page, $script, strpos($page, '</head>'), 0);
 		}
+
 		if(strpos($page, 'class="ui360')  OR strpos($page, "class='ui360") AND $GLOBALS['html']){					
-			$script .= "\n<link rel='stylesheet' href='" . find_in_path('flashblock/flashblock.css') . "' type='text/css' />"."\n";
 			$script .= "<link rel='stylesheet' href='" . find_in_path('360-player/360player.css') . "' type='text/css' />"."\n";
 			$script .= "<link rel='stylesheet' href='" . find_in_path('360-player/360player-visualization.css') . "' type='text/css' />"."\n";
 
@@ -72,10 +71,12 @@ EOD;
 			
 			$page = substr_replace($page, $script, strpos($page, '</head>'), 0);
 		}
-	}		
+
+	}
 	return $page;
 }
- 
+
+
  /**
  * Ajout d'un rel="enclosure" sur les liens mp3.
  * Permet de traiter les [mon son->http://monsite/mon_son.mp3] dans un texte.
@@ -107,4 +108,9 @@ function sm_pre_liens($texte) {
 	return $texte;
 }
 
-?>
+//
+function sm_styliser($flux){
+	
+	return $flux;
+}
+
