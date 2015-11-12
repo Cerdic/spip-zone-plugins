@@ -34,8 +34,12 @@
 
     <h2>Action : list_vernaculars</h2>
 <?php
-    $tsns = itis_list_vernaculars('es');
-    var_dump($tsns);
+    $tsns = itis_list_vernaculars('spanish');
+    var_dump(count($tsns), $tsns);
+    $tsns = itis_list_vernaculars('french');
+    var_dump(count($tsns), $tsns);
+    $tsns = itis_list_vernaculars('english');
+    var_dump(count($tsns), $tsns);
 ?>
 
 </div>

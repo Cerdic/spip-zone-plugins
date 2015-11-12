@@ -66,7 +66,7 @@ $GLOBALS['itis_webservice'] = array(
 		'vernacularlanguage' => array(
 			'function' => 'getTsnByVernacularLanguage',
 			'argument' => 'language',
-			'list' => 'ax23:vernacularTsns',
+			'list' => 'vernacularTsns',
 			'index' => 'commonName'
 		)
 	),
@@ -183,8 +183,7 @@ function itis_search_tsn($api, $recherche) {
 
 	// Récupération du TSN du taxon recherché
 	$api = $itis_webservice['search'][$api];
-	if (isset($data[$api['list']])
-	AND $data[$api['list']]) {
+	if (!empty($data[$api['list']])) {
 		// La recherche peut renvoyer plusieurs taxons. On considère que le "bon" taxon
 		// correspond à celui dont le nom est exactement celui recherché.
 		foreach ($data[$api['list']] as $_data) {
@@ -342,39 +341,38 @@ function itis_get_information($api, $tsn) {
 
 
 /**
- * Renvoie la liste des noms communs des taxons dans une langue donnée.
+ * Renvoie la liste des noms communs définis pour certains taxons dans une langue donnée.
+ * Peu de taxons sont traduits dans la base ITIS, seules les langues français, anglais et
+ * espagnol sont réellement utilisables.
  *
  * @api
  *
  * @param $language
- *
+ *      Langue au sens d'ITIS. Vaut 'french', 'english', 'spanish'...
  *
  * @return array
- *      Liste des langues vernaculaires exprimées en anglais.
+ *      Tableau des noms communs associés à leur TSN. Le format du tableau est le suivant:
+ *      - index     : le TSN du taxon
+ *      - valeur    : le nom commun préfixé du code de langue de SPIP (ex: '[fr]bactéries')
  */
 function itis_list_vernaculars($language) {
 	global $itis_webservice, $itis_language;
 	$vernaculars =array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('xml', 'vernacular', 'vernacularlanguage', $language);
+	$url = itis_api2url('json', 'vernacular', 'vernacularlanguage', $language);
 
 	// Acquisition des données spécifiées par l'url
+	include_spip('inc/taxonomer');
+	$data = url2json_data($url);
+
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
-	include_spip('inc/distant');
-	$flux = recuperer_page($url);
-
-	// Suppression du préfixe ax21: des balises afin de récupérer des index associatif non préfixés
-	$flux = str_replace('ax21:', '', $flux);
-
-	// Phrasage de la chaine XML obtenue
-	include_spip('inc/xml');
-	$arbre = spip_xml_parse($flux);
-	if (spip_xml_match_nodes(",^{$api['list']},", $arbre, $matches) > 0) {
-		$names = reset($matches);
+	if (!empty($data[$api['list']])) {
 		$tag_language = '[' . $itis_language[$language] . ']';
-		foreach ($names as $_name) {
-			$vernaculars[$_name['tsn'][0]] .= $tag_language . $_name[$api['index']][0];
+		foreach ($data[$api['list']] as $_name) {
+			if ($_name[$api['index']]) {
+				$vernaculars[$_name['tsn']] .= $tag_language . $_name[$api['index']];
+			}
 		}
 	}
 
@@ -511,8 +509,8 @@ function itis_read_vernaculars($language, &$sha_file) {
 			// Créer le tableau de sortie à partir du tableau issu du csv (tsn, nom commun)
 			$tag_language = '[' . $itis_language[$language] . ']';
 			foreach ($lines as $_line) {
-				$name = explode(',', trim($_line));
-				$vernaculars[intval($name[0])] = $tag_language . trim($name[1], '"');
+				list($tsn, $name) = explode(',', trim($_line));
+				$vernaculars[intval($tsn)] = $tag_language . trim($name, '"');
 			}
 		}
 	}

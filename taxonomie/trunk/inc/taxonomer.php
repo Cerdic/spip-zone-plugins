@@ -147,10 +147,12 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 	}
 
 	// On extrait les noms par langue
-	if (preg_match(_EXTRAIRE_MULTI, $nom_source, $match))
+	if (preg_match(_EXTRAIRE_MULTI, $nom_source, $match)) {
 		$source = extraire_trads($match[1]);
-	if (preg_match(_EXTRAIRE_MULTI, $nom_destination, $match))
+	}
+	if (preg_match(_EXTRAIRE_MULTI, $nom_destination, $match)) {
 		$destination = extraire_trads($match[1]);
+	}
 
 	// On complète la destination avec les noms de la source dont la langue n'est pas
 	// présente dans la destination
@@ -167,6 +169,14 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 	$nom_merge = '<multi>' . $nom_merge . '</multi>';
 
 	return $nom_merge;
+}
+
+function traduire_champ_taxon($champ) {
+	$traduction = '';
+	if ($champ) {
+		$traduction = _T("taxon:champ_${champ}_label");
+	}
+	return $traduction;
 }
 
 /**
@@ -186,7 +196,7 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
  */
 function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action='') {
 	// Création du dossier cache si besoin
-	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_DIR, '/'));
+	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
 	// Ecriture du fichier cache
 	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
@@ -209,7 +219,8 @@ function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
 		. $service
 		. ($action ? '_' . $action : '')
 		. '_' . $tsn
-		. ($code_langue ? '_' . $code_langue : '');
+		. ($code_langue ? '_' . $code_langue : '')
+		. '.txt';
 
 	return $fichier_cache;
 }

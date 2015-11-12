@@ -98,7 +98,7 @@ function wikipedia_get($tsn, $recherche, $langue, $section=null) {
 		}
 
 		// Mise en cache
-		ecrire_fichier($file_cache, serialize($information));
+		ecrire_cache_taxonomie(serialize($information), 'wikipedia', $tsn, $langue);
 	} else {
 		// Lecture et désérialisation du cache
 		lire_fichier($file_cache, $information);
@@ -160,8 +160,12 @@ function wikipedia_credit($id_taxon, $informations) {
 		. rawurlencode($taxon['nom_scientifique']);
 	$link = '<a href="' . $url . '"><em>' . ucfirst($taxon['nom_scientifique']) . '</em></a>';
 
+	// La liste des champs concernés (a priori le descriptif)
+	include_spip('inc/taxonomer');
+	$champs = implode(', ', array_map('traduire_champ_taxon', $informations['champs']));
+
 	// On établit la citation
-	$credit = _T('taxonomie:credit_wikipedia', array('url_taxon' => $link));
+	$credit = _T('taxonomie:credit_wikipedia', array('champs' => strtolower($champs),'url_taxon' => $link));
 
 	return $credit;
 }
