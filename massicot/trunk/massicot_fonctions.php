@@ -320,7 +320,7 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo ($logo, $connect = null, $objet_type, $id_objet) {
+function massicoter_logo ($logo, $connect = null, $objet_type = null, $id_objet = null) {
 
     include_spip('inc/filtres');
 
