@@ -2,8 +2,13 @@
 	#SET{fichier,#ID_ARTICLE|nom_fichier_audio}
 	#SET{rep,#GET{fichier}|match{\d\d\d\d-\d\d}}
 	<BOUCLE_son(DATA){source pregfiles, ../audio/#GET{rep}/, #GET{fichier}$}>
-		<div>
-		<a href="[(#VAL{audio/}|concat{#VALEUR|basename}|url_absolue)]">Écouter cet article</a>
+		<div id="sm2-container">
+			
 		</div>
+
+		<div class="ui360 ui360-vis">
+			<a href="[(#VAL{audio/}|concat{#VALEUR|basename}|url_absolue)]">Écouter cet article</a>
+		</div>
+
 	</BOUCLE_son>
 </BOUCLE_article>
