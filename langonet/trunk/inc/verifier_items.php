@@ -337,15 +337,14 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 	return $utilisations;
 }
 
-
-///  gerer les args
-/// La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
-/// define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
-/// define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
-
 /**
- * @param string	$raccourci_regexp
+ * Gérer les arguments
  *
+ * La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
+ * define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
+ * define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
+ * 
+ * @param string	$raccourci_regexp
  * @return array
  */
 function extraire_arguments($raccourci_regexp) {
@@ -353,9 +352,9 @@ function extraire_arguments($raccourci_regexp) {
 	$arguments = '';
 	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $raccourci_regexp, $matches, PREG_SET_ORDER)) {
 		foreach($matches as $_match) {
-		  $nom = strtolower($_match[4]);
-		  $raccourci_regexp = str_replace($_match[0], "@$nom@", $raccourci_regexp);
-		  $arguments[]= "$nom=" . $_match[0];
+			$nom = strtolower($_match[4]);
+			$raccourci_regexp = str_replace($_match[0], "@$nom@", $raccourci_regexp);
+			$arguments[]= "$nom=" . $_match[0];
 		}
 		$arguments = '{' . join(',',$arguments) . '}';
 	}
