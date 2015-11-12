@@ -99,10 +99,10 @@ if (!defined('_TAXONOMIE_CACHE_DIR'))
  *
 *@return array
  */
-function url2json_data($url) {
+function url2json_data($url, $taille_max=null) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
-	$flux = recuperer_page($url, true);
+	$flux = recuperer_page($url, true, false, $taille_max);
 
 	// Tranformation de la chaine json reçue en tableau associatif
 	$data = json_decode($flux, true);

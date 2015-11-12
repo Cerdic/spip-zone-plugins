@@ -312,7 +312,7 @@ function itis_get_record($tsn) {
  */
 function itis_get_information($api, $tsn) {
 	global $itis_webservice;
-	$output =array();
+	$information =array();
 
 	// Construire l'URL de l'api sollicitée
 	$url = itis_api2url('json', 'get', $api, strval($tsn));
@@ -326,24 +326,27 @@ function itis_get_information($api, $tsn) {
 	if ($api['multiple']) {
 		if (isset($data[$api['list']][0])
 		AND $data[$api['list']][0]) {
-			$output = $data[$api['list']];
+			$information = $data[$api['list']];
 		}
 	}
 	else {
 		if (isset($data[$api['index']])
 		AND $data[$api['index']]) {
-			$output = $data;
+			$information = $data;
 		}
 	}
 
-	return $output;
+	return $information;
 }
 
 
 /**
- * Renvoie la liste des noms communs définis pour certains taxons dans une langue donnée.
+ * Renvoie la liste des noms communs définis pour certains taxons dans une langue donnée mais
+ * tout règne confondu.
  * Peu de taxons sont traduits dans la base ITIS, seules les langues français, anglais et
  * espagnol sont réellement utilisables.
+ * Pour l'anglais, le nombre de taxons est très important car les 4 règnes non supportés par
+ * le plugin Taxonomie sont fortement traduits.
  *
  * @api
  *
@@ -364,7 +367,8 @@ function itis_list_vernaculars($language) {
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
-	$data = url2json_data($url);
+	include_spip('inc/distant');
+	$data = url2json_data($url, _INC_DISTANT_MAX_SIZE*10);
 
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
