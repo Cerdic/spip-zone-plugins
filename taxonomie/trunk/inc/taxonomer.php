@@ -171,6 +171,7 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 	return $nom_merge;
 }
 
+
 function traduire_champ_taxon($champ) {
 	$traduction = '';
 	if ($champ) {
@@ -194,7 +195,7 @@ function extraire_element($tableau, $cles) {
  		}
  	}
 	}
-    return ($erreur ? '' : $element);
+    return ($erreur ? null : $element);
 }
 
 /**
@@ -202,7 +203,7 @@ function extraire_element($tableau, $cles) {
  * de requête adressée au service.
  *
  * @param string	$cache
- * 		Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sériliser avant
+ * 		Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
  *      d'appeler cette fonction.
  * @param string    $service
  * @param int       $tsn

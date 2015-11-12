@@ -47,7 +47,7 @@ function action_inserer_wikipedia_dist(){
 			$langue = wikipedia_spipcode2language($spip_langue); // TODO : attention à gérer la langue en amont
 			$information = wikipedia_get($taxon['tsn'], $nom_scientifique, $langue, $section);
 			if ($information['texte']) {
-				// Conversion du texte mediawiki vers SPIP
+				// Conversion du texte mediawiki vers SPIP et mise en format multi
 				include_spip('convertisseur_fonctions');
 				$texte_converti = '<multi>'
 					. '[' . $spip_langue .']'
