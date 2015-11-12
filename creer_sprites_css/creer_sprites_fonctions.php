@@ -3,15 +3,18 @@
 $GLOBALS["sprites"] = false;
 
 function sprite ($img, $nom) {
+	
 
 	// Extraire le nom du fichier, soit directement soit dans <img src>
 	if (@file_exists($img)) $src = $img;	
 		else {
 			$src = extraire_attribut($img, "src");
+			$src = preg_replace(",\?[0-9]*$,", "", $src);
 			// Si pas de fichier, ignorer
 			if (!@file_exists($src)) return;
 		}
-	
+		
+		
 	$GLOBALS["sprites"]["$nom"]["fichiers"][] = $src;
 	
 	$largeur = largeur($img);
@@ -23,14 +26,13 @@ function sprite ($img, $nom) {
 	
 	$alt = extraire_attribut($img, "alt");
 	$class = extraire_attribut($img, "class");
-
 	$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$nom;
-	$fichier .= "?m=spiprempdate[$fichier]";
+	//$fichier .= "?m=spiprempdate[$fichier]";
 	
 	$date_src = @filemtime($src);
 	if ($date_src > $GLOBALS["sprites"]["$nom"]["date"]) $GLOBALS["sprites"]["$nom"]["date"] = $date_src;
 
-	return "<img src='rien.gif' width='".$largeur."px' height='".$hauteur."px' style='width: ".$largeur."px; height: ".$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
+	return "<img src='".find_in_path("rien.gif")."' width='".$largeur."px' height='".$hauteur."px' style='width: ".$largeur."px; height: ".$hauteur."px; background: url($fichier) 0px -".$hauteur_old."px;' alt='$alt' class='$class' />";
 }
 
 function creer_sprites_terminaison_fichier_image($fichier) {
@@ -46,11 +48,7 @@ function creer_sprites_terminaison_fichier_image($fichier) {
 function creer_sprites($flux) {
 	$sprites = $GLOBALS["sprites"];
 	$page = $flux['data']['texte'];
-	
 	if ($sprites) {
-
-
-	
 		foreach($sprites as $key => $sprite) {
 			$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$key;
 			
@@ -68,7 +66,7 @@ function creer_sprites($flux) {
 			
 			if ($creer) { 
 			
-				include_spip('inc/filtres_images_mini');
+				include_spip('inc/filtres_images');
 			
 				$im = imagecreatetruecolor($largeur, $hauteur);		
 				imagepalettetotruecolor($im);
@@ -100,13 +98,12 @@ function creer_sprites($flux) {
 					@copy($new, $fichier);
 						
 				}
-				
-				
-				
+								
 				imagedestroy($im);
 				imagedestroy($im_);
 	
 			}
+			
 		}
 	}
 	
