@@ -2,8 +2,8 @@
 
     #SET{spip_ecran,#EVAL{$GLOBALS['spip_ecran']}}
     [(#SET{ecran,[(#GET{spip_ecran}|=={'large'}|?{<:info_grand_ecran:>,<:info_petit_ecran:>})]})]
-    [(#SET{constante_petit_ecran,#EVAL{_PETIT_ECRAN}})]
-    [(#SET{constante_grand_ecran,#EVAL{_GRAND_ECRAN}})]
+    [(#SET{constante_petit_ecran,#EVAL{_PETIT_ECRAN}|sinon{960px}})]
+    [(#SET{constante_grand_ecran,#EVAL{_GRAND_ECRAN}|sinon{1280px}})]
     <h3 class="titrem"><:spip_hop:parametres{ecran=#GET{ecran}}:></h3>
 
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]

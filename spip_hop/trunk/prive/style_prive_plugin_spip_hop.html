@@ -16,8 +16,8 @@
 On recupere les valeurs des define pour ne pas casser la compatibilite
 #SET{config_petit_ecran,#CONFIG{spip_hop/petit_ecran}}
 #SET{config_grand_ecran,#CONFIG{spip_hop/grand_ecran}}
-#SET{petit_ecran,#GET{config_petit_ecran,#EVAL{_PETIT_ECRAN}}} [petit_ecran: (#GET{petit_ecran});]
-#SET{grand_ecran,#GET{config_grand_ecran,#EVAL{_GRAND_ECRAN}}} [grand_ecran: (#GET{grand_ecran});]
+#SET{petit_ecran,#GET{config_petit_ecran,#EVAL{_PETIT_ECRAN}|sinon{960px}}} [petit_ecran: (#GET{petit_ecran});]
+#SET{grand_ecran,#GET{config_grand_ecran,#EVAL{_GRAND_ECRAN}|sinon{1280px}}} [grand_ecran: (#GET{grand_ecran});]
 
 Gestion de la largeur du bandeau, par defaut (pour ne pas casser la compatibilite) il prend la dimension de la largeur de l'ecran
 [(#CONFIG{spip_hop/etendre_bandeau}|oui) #SET{largeur_bandeau,div#page}]
