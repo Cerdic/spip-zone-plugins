@@ -9,13 +9,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_encart' => 'Ajouter cet encart',
 
+	// B
+	'bouton_associer' => 'Ajouter cet encart',
+	'bouton_dissocier' => 'Détacher',
+
 	// I
 	'icone_creer_encart' => 'Créer un encart',
 	'icone_modifier_encart' => 'Modifier cet encart',
 	'info_1_encart' => 'Un encart',
+	'info_1_utilisation' => '1 utilisation',
 	'info_aucun_encart' => 'Aucun encart',
 	'info_encarts_auteur' => 'Les encarts de cet auteur',
 	'info_nb_encarts' => '@nb@ encarts',
+	'info_nb_utilisations' => '@nb@ utilisations',
 
 	// L
 	'label_texte' => 'Texte',
