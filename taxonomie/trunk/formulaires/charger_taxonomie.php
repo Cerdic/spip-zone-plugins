@@ -38,10 +38,12 @@ function formulaires_charger_taxonomie_charger() {
 	}
 	$valeurs['_rang_defaut'] = _TAXONOMIE_RANG_GENRE;
 
-	// Acquérir la liste des langues utilisables par le plugin
-	// -> pour l'instant on se limite au français et à l'anglais quelque soit la langue du site
-	$valeurs['_langues_regne'] = array('fr' =>  traduire_nom_langue('fr'), 'en' =>  traduire_nom_langue('en'));
-	$valeurs['_langues_defaut'] = array('fr');
+	// Acquérir la liste des langues utilisables par le plugin et stockées dans la configuration.
+	$langues_utilisees = lire_config('taxonomie/langues_utilisees');
+	foreach ($langues_utilisees as $_code_langue) {
+		$valeurs['_langues_regne'][$_code_langue] = traduire_nom_langue($_code_langue);
+	}
+	$valeurs['_langues_defaut'] = reset($langues_utilisees);
 
 	return $valeurs;
 }

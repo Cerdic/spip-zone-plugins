@@ -47,22 +47,30 @@ function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function taxonomie_vider_tables($nom_meta_base_version) {
 
+	// Supprimer la table des taxons créées par le plugin
 	sql_drop_table("spip_taxons");
 
 	// Nettoyer les versionnages
 	sql_delete("spip_versions",              sql_in("objet", array('taxon')));
 	sql_delete("spip_versions_fragments",    sql_in("objet", array('taxon')));
 
+	// Effacer la meta de chaque règne chargé. On boucle sur tous les règnes
+	include_spip('inc/taxonomer');
+	foreach (lister_regnes() as $_regne) {
+		effacer_meta("taxonomie_${_regne}");
+	}
+
 	// Effacer la meta de configuration du plugin
 	effacer_meta('taxonomie');
-	// todo : supprimer les meta des règnes
 
+	// Effacer la meta du schéma de la base
 	effacer_meta($nom_meta_base_version);
 }
 
 function configurer_taxonomie() {
 	$config = array(
-		'services' => array('cinfo'),
+		'langues_possibles' => array('fr', 'en', 'es'),
+		'langues_utilisees' => array('fr'),
 	);
 
 	return $config;

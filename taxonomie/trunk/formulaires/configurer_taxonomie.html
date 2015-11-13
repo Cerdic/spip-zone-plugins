@@ -8,8 +8,17 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
 		<input type="hidden" name="_meta_casier" value="taxonomie" />
+
+		<ul class="editer-groupe">
+		[(#SAISIE{checkbox, langues_utilisees,
+			explication=<:taxonomie:explication_langues_utilisees:>,
+			label=<:taxonomie:label_langues_possibles:>,
+			datas=#ENV{_langues},
+			obligatoire=oui,
+		})]
+		</ul>
+
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
