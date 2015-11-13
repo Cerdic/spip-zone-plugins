@@ -10,33 +10,26 @@
     <h2>Action : search_tsn</h2>
 <?php
     include_spip('services/itis/itis_api');
-    $tsn = itis_search_tsn('scientificname', 'Animalia');
-    echo "TSN = $tsn</br>";
-    $tsn = itis_search_tsn('scientificname', 'panthera leo');
-    echo "TSN = $tsn</br>";
 ?>
 
     <h2>Action : get_record</h2>
-<?php
-    $tsn = 202423;
-    $taxon = itis_get_record($tsn);
-    echo "Informations du taxon $tsn</br>";
-    var_dump($taxon);
-
-    $tsn = 170945;
-    $taxon = itis_get_record($tsn);
-    echo "Informations du taxon $tsn</br>";
-    var_dump($taxon);
-?>
 
     <h2>Action : get_information</h2>
+    <?php
+        $info = itis_get_information('scientificname', 117318);
+        var_dump(json_last_error_msg());
+        var_dump($info);
+
+        $info = itis_get_information('kingdomname', 117318);
+        var_dump(json_last_error_msg());
+        var_dump($info);
+
+        $info = itis_get_information('commonnames', 117318);
+        var_dump(json_last_error_msg());
+        var_dump($info);
+    ?>
 
     <h2>Action : list_vernaculars</h2>
-<?php
-    $tsns = itis_list_vernaculars('french');
-    var_dump(json_last_error_msg());
-    var_dump($tsns);
-?>
 
 </div>
 </body>

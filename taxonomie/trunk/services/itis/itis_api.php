@@ -52,22 +52,22 @@ $GLOBALS['itis_webservice'] = array(
 		'commonname' => array(
 			'function' => 'searchByCommonName',
 			'argument' => 'srchKey',
-			'list' => 'commonNames',
-			'index' => 'commonName'
+			'list' => array('commonNames', 'commonName'),
+			'index' => 'tsn'
 		),
-		'scientificname' => array(
-			'function' => 'searchByScientificName',
-			'argument' => 'srchKey',
-			'list' => 'scientificNames',
-			'index' => 'combinedName'
+		'scientificname'=> array(
+			'function'  => 'searchByScientificName',
+			'argument'  => 'srchKey',
+			'list'      => array('scientificNames', 'combinedName'),
+			'index'     => 'tsn'
 		)
 	),
 	'vernacular' => array(
 		'vernacularlanguage' => array(
-			'function' => 'getTsnByVernacularLanguage',
-			'argument' => 'language',
-			'list' => 'vernacularTsns',
-			'index' => 'commonName'
+			'function'  => 'getTsnByVernacularLanguage',
+			'argument'  => 'language',
+			'list'      => 'vernacularTsns',
+			'index'     => array('tsn' => 'commonName')
 		)
 	),
 	'getfull' => array(
@@ -90,13 +90,13 @@ $GLOBALS['itis_webservice'] = array(
 			'multiple' => false,
 			'function' => 'getScientificNameFromTSN',
 			'argument' => 'tsn',
-			'index' => 'combinedName',
+			'index' => array('nom_scientifique'  => array('combinedName')),
 		),
 		'kingdomname' => array(
 			'multiple' => false,
 			'function' => 'getKingdomNameFromTSN',
 			'argument' => 'tsn',
-			'index' => 'kingdomName',
+			'index' => array('regne'  => array('kingdomName')),
 		),
 		'parent' => array(
 			'multiple' => false,
@@ -166,7 +166,7 @@ $GLOBALS['itis_webservice'] = array(
  *
  * @api
  *
- * @param string	$api
+ * @param string	$action
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs 'commonname' ou 'scientificname'
  * @param string	$recherche
  * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
@@ -174,7 +174,7 @@ $GLOBALS['itis_webservice'] = array(
  * @return int
  * 		Identifiant unique tsn dans la base ITIS ou 0 si la recherche échoue
  */
-function itis_search_tsn($api, $recherche) {
+function itis_search_tsn($action, $recherche) {
 	global $itis_webservice;
 	$tsn = 0;
 
@@ -182,22 +182,23 @@ function itis_search_tsn($api, $recherche) {
 	$recherche = strtolower(trim($recherche));
 
 	// Construire l'URL de la fonction de recherche
-	$url = itis_api2url('json', 'search', $api, rawurlencode($recherche));
+	$url = itis_api2url('json', 'search', $action, rawurlencode($recherche));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
 	$data = url2json_data($url);
 
 	// Récupération du TSN du taxon recherché
-	$api = $itis_webservice['search'][$api];
-	if (!empty($data[$api['list']])) {
+	$api = $itis_webservice['search'][$action];
+	list($index_list, $index_name) = $api['list'];
+	if (!empty($data[$index_list])) {
 		// La recherche peut renvoyer plusieurs taxons. On considère que le "bon" taxon
 		// correspond à celui dont le nom est exactement celui recherché.
-		foreach ($data[$api['list']] as $_data) {
+		foreach ($data[$index_list] as $_data) {
 			if ($_data
-			AND (strcasecmp($_data[$api['index']], $recherche) == 0)) {
+			AND (strcasecmp($_data[$index_name], $recherche) == 0)) {
 				// On est sur le bon taxon, on renvoie le TSN
-				$tsn = intval($_data['tsn']);
+				$tsn = intval($_data[$api['index']]);
 				break;
 			}
 		}
@@ -267,7 +268,7 @@ function itis_get_record($tsn) {
  *
  * @api
  *
- * @param string	$api
+ * @param string	$action
  * 		Type d'information demandé. Prend les valeurs
  *      - 'scientificname' : le nom scientifique du taxon
  *      - 'kingdomname' : le règne du taxon
@@ -286,22 +287,22 @@ function itis_get_record($tsn) {
  * @return array
  * 		Le tableau renvoyé est caractéristique du type d'information demandé.
  */
-function itis_get_information($api, $tsn) {
+function itis_get_information($action, $tsn) {
 	global $itis_webservice;
-	$information =array();
+	$information = array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('json', 'get', $api, strval($tsn));
+	$url = itis_api2url('json', 'get', $action, strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
 	$data = url2json_data($url);
 
 	// On vérifie que le tableau est complet sinon on retourne un tableau vide
-	$api = $itis_webservice['get'][$api];
+	$api = $itis_webservice['get'][$action];
 	if ($api['multiple']) {
-		if (isset($data[$api['list']][0])
-		AND $data[$api['list']][0]) {
+		if (isset($data[$api['list']])
+		AND $data[$api['list']]) {
 			$information = $data[$api['list']];
 		}
 	}
@@ -344,14 +345,17 @@ function itis_list_vernaculars($language) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
 	include_spip('inc/distant');
-	$data = url2json_data($url, _INC_DISTANT_MAX_SIZE*10);
+	$data = url2json_data($url, _INC_DISTANT_MAX_SIZE*7);
 
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
 		$tag_language = '[' . $itis_language[$language] . ']';
-		foreach ($data[$api['list']] as $_name) {
-			if ($_name[$api['index']]) {
-				$vernaculars[$_name['tsn']] .= $tag_language . $_name[$api['index']];
+		$index = key($api['index']);
+		$index_name = $api['index'][$index];
+		foreach ($data[$api['list']] as $_data) {
+			if (!empty($_data[$index])
+			AND !empty($_data[$index_name])) {
+				$vernaculars[$_data[$index]] = $tag_language . $_data[$index_name];
 			}
 		}
 	}
