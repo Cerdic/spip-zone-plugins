@@ -335,15 +335,15 @@ function itis_get_information($action, $tsn) {
 /**
  * Renvoie la liste des noms communs définis pour certains taxons dans une langue donnée mais
  * tout règne confondu.
- * Peu de taxons sont traduits dans la base ITIS, seules les langues français, anglais et
- * espagnol sont réellement utilisables.
+ * Peu de taxons sont traduits dans la base ITIS, seules le français, l'anglais et
+ * l'espagnol sont réellement utilisables.
  * Pour l'anglais, le nombre de taxons est très important car les 4 règnes non supportés par
  * le plugin Taxonomie sont fortement traduits.
  *
  * @api
  *
  * @param $language
- *      Langue au sens d'ITIS. Vaut 'french', 'english', 'spanish'...
+ *      Langue au sens d'ITIS écrite en minuscules. Vaut 'french', 'english', 'spanish'...
  *
  * @return array
  *      Tableau des noms communs associés à leur TSN. Le format du tableau est le suivant:
