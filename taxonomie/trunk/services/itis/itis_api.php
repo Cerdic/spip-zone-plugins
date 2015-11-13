@@ -606,20 +606,20 @@ function itis_review_sha() {
 
 /**
  * @param $format
- * @param $area
- * @param $api
+ * @param $group
+ * @param $action
  * @param $key
  *
  * @return string
  */
-function itis_api2url($format, $area, $api, $key) {
+function itis_api2url($format, $group, $action, $key) {
 	global $itis_webservice;
 
 	// Construire l'URL de l'api sollicitée
 	$url = _TAXONOMIE_ITIS_ENDPOINT_BASE_URL
 		 . ($format=='json' ? 'jsonservice/' : 'services/ITISService/')
-		 . $itis_webservice[$area][$api]['function'] . '?'
-		 . $itis_webservice[$area][$api]['argument'] . '=' . $key;
+		 . $itis_webservice[$group][$action]['function'] . '?'
+		 . $itis_webservice[$group][$action]['argument'] . '=' . $key;
 
 	return $url;
 }
