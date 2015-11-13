@@ -78,7 +78,7 @@ function wikipedia_get($tsn, $recherche, $langue, $section=null) {
 
 		// Construire l'URL de la function de recherche par nom vernaculaire.
 		// L'encodage de la recherche est effectuée dans la fonction.
-		$url = wikipedia_api2url('json', 'query', $langue, $recherche, $section);
+		$url = api2url_wikipedia('json', 'query', $langue, $recherche, $section);
 
 		// Acquisition des données spécifiées par l'url
 		include_spip('inc/taxonomer');
@@ -183,7 +183,7 @@ function wikipedia_credit($id_taxon, $informations) {
  *
  * @return string
  */
-function wikipedia_api2url($format, $action, $langue, $recherche, $section) {
+function api2url_wikipedia($format, $action, $langue, $recherche, $section) {
 
 	// Construire l'URL de l'api sollicitée
 	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL) . '?'

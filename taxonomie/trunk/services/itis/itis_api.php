@@ -182,7 +182,7 @@ function itis_search_tsn($action, $recherche) {
 	$recherche = strtolower(trim($recherche));
 
 	// Construire l'URL de la fonction de recherche
-	$url = itis_api2url('json', 'search', $action, rawurlencode($recherche));
+	$url = api2url_itis('json', 'search', $action, rawurlencode($recherche));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
@@ -231,7 +231,7 @@ function itis_get_record($tsn) {
 	$record = array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('json', 'getfull', 'record', strval($tsn));
+	$url = api2url_itis('json', 'getfull', 'record', strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
@@ -291,7 +291,7 @@ function itis_get_information($action, $tsn) {
 	global $itis_webservice;
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('json', 'get', $action, strval($tsn));
+	$url = api2url_itis('json', 'get', $action, strval($tsn));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
@@ -356,7 +356,7 @@ function itis_list_vernaculars($language) {
 	$vernaculars =array();
 
 	// Construire l'URL de l'api sollicitée
-	$url = itis_api2url('json', 'vernacular', 'vernacularlanguage', $language);
+	$url = api2url_itis('json', 'vernacular', 'vernacularlanguage', $language);
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
@@ -627,7 +627,7 @@ function itis_review_sha() {
  *
  * @return string
  */
-function itis_api2url($format, $group, $action, $key) {
+function api2url_itis($format, $group, $action, $key) {
 	global $itis_webservice;
 
 	// Construire l'URL de l'api sollicitée
