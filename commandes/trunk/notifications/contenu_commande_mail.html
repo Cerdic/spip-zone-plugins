@@ -4,8 +4,11 @@
   (c) 2009 SPIP
   Distribue sous licence GPL
 
-][(#HTTP_HEADER{Content-type: text/#ENV{format_envoi}[; charset=(#CHARSET)]})]#CACHE{0}
+]
 <BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
+<body>
+
+<title>[#NOM_SITE_SPIP] <:commandes:commande_numero:>#REFERENCE</title>
 
 <BOUCLE_contact(CONTACTS?){id_auteur}>#SET{nom_client,#CIVILITE #NOM #PRENOM}</BOUCLE_contact>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>#SET{nom_client,#NOM}</BOUCLE_auteur><//B_contact>
@@ -27,8 +30,12 @@
 <hr />
 
 <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+</body>
 </BOUCLE_art>
+
 [(#ENV{format_envoi}|=={plain}|oui)
 	#FILTRE{supprimer_tags|filtrer_entites|trim}]
 [(#ENV{format_envoi}|=={plain}|non)
 	#FILTRE{filtrer_entites|trim}]
+
+#FILTRE{facteur_email_wrap_to_html}

@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="1.6.16"
+	version="1.6.17"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
@@ -23,8 +23,7 @@
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
-	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
-	<utilise nom="facteur" compatibilite="[2.0.0;]" />
+	<utilise nom="notifavancees" compatibilite="[0.3.1;]" />
 	<utilise nom="bank" compatibilite="[3.0.0;]" />
 
 	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" />
