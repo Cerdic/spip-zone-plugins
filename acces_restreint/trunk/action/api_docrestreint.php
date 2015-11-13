@@ -344,7 +344,7 @@ class Accesrestreint_document {
 	 * @return int
 	**/
 	public function get_id_document() {
-		return $this->document;
+		return $this->id_document;
 	}
 
 	/**
@@ -479,7 +479,7 @@ class Accesrestreint_document {
 			spip_log($where, 'dbg');
 
 			$doc = sql_fetsel(
-				"documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus, documents.extension",
+				"documents.*, types.mime_type, types.inclus",
 				"spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",
 				$where
 			);
