@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
-	date,-1, 
+	date,-1,
 	id_encart,1
 }})
 ]
@@ -37,7 +37,7 @@ a mis a jour la valeur avec la page reelle]
 			}
 		})]</B_lettre>
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
-	
+
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{multi titre,<:encart:label_titre:>,ajax})]</th>
 			<th class='action' scope='col'></th>
@@ -49,7 +49,7 @@ a mis a jour la valeur avec la page reelle]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='titre'>[(#LOGO_ENCART|image_reduire{20,20})]<a href="[(#ID_ENCART|generer_url_entite{encart})]">#TITRE</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[encart-#ID_ENCART-#OBJET-#ID_OBJET\]" value="+"><:encart:ajouter_lien_encart:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\[encart-#ID_ENCART-#OBJET-#ID_OBJET\]" value="+"><:encart:ajouter_lien_encart:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_encarts>
