@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     encarts
- * @copyright  2013
+ * @copyright  2013-2015
  * @author     Cyril
  * @licence    GNU/GPL
  * @package    SPIP\Encarts\Pipelines
@@ -63,6 +63,10 @@ function encarts_declarer_tables_objets_sql($tables) {
 
 
 	);
+
+	// jointures sur les encarts pour tous les objets
+	$tables[]['tables_jointures'][]= 'encarts_liens';
+	$tables[]['tables_jointures'][]= 'encarts';
 
 	return $tables;
 }
