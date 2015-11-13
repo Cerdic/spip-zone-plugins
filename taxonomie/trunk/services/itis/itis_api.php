@@ -87,70 +87,70 @@ $GLOBALS['itis_webservice'] = array(
 	),
 	'get' => array(
 		'scientificname' => array(
-			'multiple' => false,
-			'function' => 'getScientificNameFromTSN',
-			'argument' => 'tsn',
-			'index' => array('nom_scientifique'  => array('combinedName')),
+			'function'  => 'getScientificNameFromTSN',
+			'argument'  => 'tsn',
+			'list'      => '',
+			'index'     => array('string', 'combinedName'),
 		),
 		'kingdomname' => array(
-			'multiple' => false,
 			'function' => 'getKingdomNameFromTSN',
 			'argument' => 'tsn',
-			'index' => array('regne'  => array('kingdomName')),
+			'list'      => '',
+			'index'     => array('string', 'kingdomName'),
 		),
 		'parent' => array(
-			'multiple' => false,
 			'function' => 'getHierarchyUpFromTSN',
 			'argument' => 'tsn',
-			'index' => 'parentTsn',
+			'list'      => '',
+			'index'     => array('string', 'parentTsn'),
 		),
 		'rankname' => array(
-			'multiple' => false,
 			'function' => 'getTaxonomicRankNameFromTSN',
 			'argument' => 'tsn',
-			'index' => 'rankName',
+			'list'      => '',
+			'index'     => array('string', 'rankName'),
 		),
 		'author' => array(
-			'multiple' => false,
 			'function' => 'getTaxonAuthorshipFromTSN',
 			'argument' => 'tsn',
-			'index' => 'authorship',
+			'list'      => '',
+			'index'     => array('string', 'authorship'),
 		),
 		'coremetadata' => array(
-			'multiple' => false,
 			'function' => 'getCoreMetadataFromTSN',
 			'argument' => 'tsn',
-			'index' => 'rankId',
+			'list'      => '',
+			'index'     => array('array', ''),
 		),
 		'experts' => array(
-			'multiple' => true,
 			'function' => 'getExpertsFromTSN',
 			'argument' => 'tsn',
 			'list' => 'experts',
+			'index'     => array('array', ''),
 		),
 		'commonnames' => array(
-			'multiple' => true,
 			'function' => 'getCommonNamesFromTSN',
 			'argument' => 'tsn',
 			'list' => 'commonNames',
+			'index'     => array('array', array('language' => 'commonName')),
 		),
 		'othersources' => array(
-			'multiple' => true,
 			'function' => 'getOtherSourcesFromTSN',
 			'argument' => 'tsn',
 			'list' => 'otherSources',
+			'index'     => array('array', ''),
 		),
 		'hierarchyfull' => array(
-			'multiple' => true,
 			'function' => 'getFullHierarchyFromTSN',
 			'argument' => 'tsn',
 			'list' => 'hierarchyList',
+			'index'     => array('array', ''),
 		),
 		'hierarchydown' => array(
-			'multiple' => true,
 			'function' => 'getHierarchyDownFromTSN',
 			'argument' => 'tsn',
 			'list' => 'hierarchyList',
+			'index'     => array('array', ''),
 		),
 	),
 );
@@ -284,12 +284,11 @@ function itis_get_record($tsn) {
  * @param int		$tsn
  * 		Identifiant unique du taxon dans la base ITIS (TSN)
  *
- * @return array
- * 		Le tableau renvoyé est caractéristique du type d'information demandé.
+ * @return string|array
+ * 		Chaine ou tableau caractéristique du type d'information demandé.
  */
 function itis_get_information($action, $tsn) {
 	global $itis_webservice;
-	$information = array();
 
 	// Construire l'URL de l'api sollicitée
 	$url = itis_api2url('json', 'get', $action, strval($tsn));
@@ -300,16 +299,32 @@ function itis_get_information($action, $tsn) {
 
 	// On vérifie que le tableau est complet sinon on retourne un tableau vide
 	$api = $itis_webservice['get'][$action];
-	if ($api['multiple']) {
-		if (isset($data[$api['list']])
-		AND $data[$api['list']]) {
-			$information = $data[$api['list']];
+	$data = extraire_element($data, $api['list']);
+	list($type, $index) = $api['index'];
+
+	if ($type == 'string') {
+		$information = '';
+		if (!empty($data[$index])) {
+			$information = $data[$index];
 		}
-	}
-	else {
-		if (isset($data[$api['index']])
-		AND $data[$api['index']]) {
-			$information = $data;
+	} else {
+		$information = array();
+		if ($data) {
+			$first_value = reset($data);
+			if ($first_value) {
+				if (!$index) {
+					$information = $data;
+					$format = "format_$action";
+					if (function_exists($format)) {
+						$information = $format($information);
+					}
+				} else {
+					list($kkey, $kvalue) = each($index);
+					foreach ($data as $_data) {
+						$information[strtolower($_data[$kkey])][] = $_data[$kvalue];
+					}
+				}
+			}
 		}
 	}
 
@@ -333,7 +348,8 @@ function itis_get_information($action, $tsn) {
  * @return array
  *      Tableau des noms communs associés à leur TSN. Le format du tableau est le suivant:
  *      - index     : le TSN du taxon
- *      - valeur    : le nom commun préfixé du code de langue de SPIP (ex: '[fr]bactéries')
+ *      - valeur    : le tableau des noms communs, chaque nom étant préfixé du code de langue
+ *                    de SPIP (ex: '[fr]bactéries')
  */
 function itis_list_vernaculars($language) {
 	global $itis_webservice, $itis_language;
@@ -350,12 +366,11 @@ function itis_list_vernaculars($language) {
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
 		$tag_language = '[' . $itis_language[$language] . ']';
-		$index = key($api['index']);
-		$index_name = $api['index'][$index];
+		list($index, $index_name) = each($api['index']);
 		foreach ($data[$api['list']] as $_data) {
 			if (!empty($_data[$index])
 			AND !empty($_data[$index_name])) {
-				$vernaculars[$_data[$index]] = $tag_language . $_data[$index_name];
+				$vernaculars[$_data[$index]][] = $tag_language . $_data[$index_name];
 			}
 		}
 	}

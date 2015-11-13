@@ -186,6 +186,7 @@ function extraire_element($tableau, $cles) {
     $erreur = false;
     $element = $tableau;
 	if ($cles) {
+		$cles = is_string($cles) ? array($cles) : $cles;
 		foreach ($cles as $_cle) {
  		if (isset($element[$_cle])) {
           $element = $element[$_cle];

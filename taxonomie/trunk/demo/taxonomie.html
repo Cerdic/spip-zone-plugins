@@ -10,26 +10,79 @@
     <h2>Action : search_tsn</h2>
 <?php
     include_spip('services/itis/itis_api');
+    $nom = 'Animalia';
+    $tsn = itis_search_tsn('scientificname', $nom);
+    echo "TSN $nom = $tsn</br>";
+    $nom = 'panthera';
+    $tsn = itis_search_tsn('scientificname', $nom);
+    echo "TSN $nom = $tsn</br>";
+    $nom = 'panthera leo';
+    $tsn = itis_search_tsn('scientificname', $nom);
+    echo "TSN $nom = $tsn</br>";
 ?>
 
     <h2>Action : get_record</h2>
+<?php
+    $tsn = 202423;
+    $taxon = itis_get_record($tsn);
+    echo "Informations du taxon $tsn</br>";
+    var_dump($taxon);
+
+    $tsn = 170945;
+    $taxon = itis_get_record($tsn);
+    echo "Informations du taxon $tsn</br>";
+    var_dump($taxon);
+
+    $tsn = 117318;
+    $taxon = itis_get_record($tsn);
+    echo "Informations du taxon $tsn</br>";
+    var_dump($taxon);
+?>
 
     <h2>Action : get_information</h2>
-    <?php
-        $info = itis_get_information('scientificname', 117318);
-        var_dump(json_last_error_msg());
-        var_dump($info);
+<?php
+    $tsn = 117318;
+    echo "Informations du taxon $tsn</br>";
+    $info = itis_get_information('scientificname', $tsn);
+    var_dump($info);
 
-        $info = itis_get_information('kingdomname', 117318);
-        var_dump(json_last_error_msg());
-        var_dump($info);
+    $info = itis_get_information('kingdomname', $tsn);
+    var_dump($info);
 
-        $info = itis_get_information('commonnames', 117318);
-        var_dump(json_last_error_msg());
-        var_dump($info);
-    ?>
+    $info = itis_get_information('parent', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('rankname', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('author', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('commonnames', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('hierarchydown', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('hierarchyfull', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('coremetadata', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('experts', $tsn);
+    var_dump($info);
+
+    $info = itis_get_information('othersources', $tsn);
+    var_dump($info);
+?>
 
     <h2>Action : list_vernaculars</h2>
+<?php
+    $tsns = itis_list_vernaculars('french');
+    var_dump(json_last_error_msg());
+    var_dump($tsns);
+?>
 
 </div>
 </body>
