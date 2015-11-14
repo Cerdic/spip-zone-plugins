@@ -13,34 +13,53 @@
     <div>
         #ACTION_FORMULAIRE{#ENV{action}}
 
-        <ul class="editer-groupe">
-            <li class="legende">
-                <strong><:spip_hop:attention:></strong> <:spip_hop:explications:>
-            </li>
-            <li class="editer">
-                <label for="petit_ecran"><:spip_hop:petit_ecran:></label>
-                [(#GET{constante_petit_ecran}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
-                <input type="text" name="petit_ecran" value="[(#ENV{petit_ecran,#GET{constante_petit_ecran}})]"[(#GET{constante_petit_ecran}|oui) disabled="disabled"]>
-            </li>
-            <li class="editer">
-                <label for="grand_ecran"><:spip_hop:grand_ecran:></label>
-                [(#GET{constante_grand_ecran}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
-                <input type="text" name="grand_ecran" value="[(#ENV{grand_ecran,#GET{constante_grand_ecran}})]"[(#GET{constante_grand_ecran}|oui) disabled="disabled"]>
-            </li>
-            <li class="editer editer_methode">
-                <div class="explication">
-                    <:spip_hop:etendre_selection_bandeau:>
-                </div>
-                <div class="choix">
-                    <input type="radio" name="etendre_bandeau" class="radio" id="affichage_oui" [(#ENV{etendre_bandeau}|oui)checked="checked"] value="oui">
-                    <label for="affichage_oui"><:spip_hop:affichage_oui:></label>
-                </div>
-                <div class="choix">
-                    <input type="radio" name="etendre_bandeau" class="radio" id="affichage_non" [(#ENV{etendre_bandeau}|non)checked="checked"] value="">
-                    <label for="affichage_non"><:spip_hop:affichage_non:></label>
-                </div>
-            </li>
-        </ul>
+        <fieldset>
+            <legend><:spip_hop:titre_page_configurer_spip_hop:></legend>
+            
+            <ul class="editer-groupe">
+                <li class="editer">
+                    <p class='explication'><strong><:spip_hop:attention:></strong> <:spip_hop:explications:></p>
+                    <label for="petit_ecran"><:info_petit_ecran:></label>
+                    [(#EVAL{_PETIT_ECRAN}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+                    <input type="text" name="petit_ecran" value="[(#ENV{petit_ecran,#GET{constante_petit_ecran}})]"[(#EVAL{_PETIT_ECRAN}|oui) disabled="disabled"]>
+                </li>
+                <li class="editer">
+                    <label for="grand_ecran"><:info_grand_ecran:></label>
+                    [(#EVAL{_GRAND_ECRAN}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
+                    <input type="text" name="grand_ecran" value="[(#ENV{grand_ecran,#GET{constante_grand_ecran}})]"[(#EVAL{_GRAND_ECRAN}|oui) disabled="disabled"]>
+                </li>
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Option</legend>
+            <ul>
+                <li class="editer editer_methode long_label">
+                    <label><:spip_hop:etendre_selection_bandeau:></label>
+                    <div class="choix">
+                        <input type="radio" name="etendre_bandeau" class="radio" id="affichage_oui" [(#ENV{etendre_bandeau}|oui)checked="checked"] value="oui">
+                        <label for="affichage_oui"><:item_oui:></label>
+                    </div>
+                    <div class="choix">
+                        <input type="radio" name="etendre_bandeau" class="radio" id="affichage_non" [(#ENV{etendre_bandeau}|non)checked="checked"] value="">
+                        <label for="affichage_non"><:item_non:></label>
+                    </div>
+                </li>
+                <li class='editer editer_gd long_label'>
+                    <label><:spip_hop:forcer_grand_ecran:></label>
+                    <div class="choix">
+                        <input type="radio" name="forcer_grand_ecran" class="radio" id="gd_oui" [(#ENV{forcer_grand_ecran}|oui)checked="checked"] value="oui">
+                        <label for="gd_oui"><:item_oui:></label>
+                    </div>
+                    <div class="choix">
+                        <input type="radio" name="forcer_grand_ecran" class="radio" id="gd_non" [(#ENV{forcer_grand_ecran}|non)checked="checked"] value="">
+                        <label for="gd_non"><:item_non:></label>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        </fieldset>
+
 
         <input type="hidden" name="_meta_casier" value="spip_hop" />
         <p class="boutons">

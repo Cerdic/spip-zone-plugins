@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'info_constante_definie' => 'Une valeur a été définie pour ce champ dans un fichier <em>xxx_options.php</em>',
 
+    // F
+    'forcer_grand_ecran' => 'Forcer le mode ‘Grand écran‘ pour tous les auteurs ?',
+
     //P
     'parametres' => 'Paramètres (vous êtes en affichage : "@ecran@")',
     'petit_ecran' => 'Petit écran',
