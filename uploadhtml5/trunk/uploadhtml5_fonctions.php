@@ -27,8 +27,9 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
     /* S'il n'y a pas d'id_objet, c'est qu'on crée un nouveau
        document. Les autorisations seront gérées en aval dans
        ajouter_document. */
-    if ($id_objet AND (!autoriser('joindredocument',$objet,$id_objet)))
+    if ($id_objet AND (!autoriser('joindredocument',$objet,$id_objet))) {
         return false;
+    }
 
     // On va créer le tableau des documents.
     $docs = array();
@@ -65,14 +66,15 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 
     // Autorisation de mettre un logo?
     include_spip('inc/autoriser');
-    if (!autoriser('iconifier',$objet,$id_objet))
+    if (!autoriser('iconifier',$objet,$id_objet)) {
         return false;
+    }
 
     include_spip('action/editer_logo');
     // Version SPIP 3.1 de cette fonction:
-    if (function_exists('logo_modifier'))
+    if (function_exists('logo_modifier')) {
         return logo_modifier($objet, $id_objet, 'on', $fichier);
-
+    }
 
     include_spip('action/iconifier');
     $chercher_logo = charger_fonction('chercher_logo','inc');
@@ -81,21 +83,21 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
     $type = type_du_logo(id_table_objet($objet));
     $logo = $chercher_logo($id_objet, id_table_objet($objet));
 
-    if ($logo)
+    if ($logo) {
         spip_unlink($logo[0]);
+    }
 
     // Dans le cas d'un tableau, on présume que c'est un $_FILES et on passe directement
-    if (is_array($fichier))
+    if (is_array($fichier)) {
         $err = $ajouter_image($type."on".$id_objet," ", $fichier, true);
-    else
+    }
+    else {
         // Sinon, on caviarde la fonction ajouter_image
         $err = $ajouter_image($type."on".$id_objet," ", array('tmp_name' => $fichier), true);
+    }
 
-    if ($err)
-        return $err;
-    else
-        return true;
 
+    return ($err) ? $err : true;
 }
 
 /**
