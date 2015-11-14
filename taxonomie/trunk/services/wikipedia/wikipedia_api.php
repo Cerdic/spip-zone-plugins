@@ -4,6 +4,7 @@
  *
  * @package SPIP\TAXONOMIE\WIKIPEDIA
  * @todo phpdoc : décider sur les globales
+ * @todo phpdoc : exemples
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;

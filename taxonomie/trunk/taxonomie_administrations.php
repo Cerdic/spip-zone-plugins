@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Eric
  * @licence    GNU/GPL
- * @package    SPIP\Taxonomie\Installation
+ * @package    SPIP\TAXONOMIE\INSTALLATION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

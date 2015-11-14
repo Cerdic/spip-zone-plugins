@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Eric
  * @licence    GNU/GPL
- * @package    SPIP\Taxonomie\Pipelines
+ * @package    SPIP\TAXONOMIE\CONFIGURATION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

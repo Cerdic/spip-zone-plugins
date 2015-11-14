@@ -3,7 +3,7 @@
  * Ce fichier contient l'action `inserer_wikipedia` qui permet d'appeler l'api Wikipedia pour remplir
  * un champ de taxon.
  *
- * @package SPIP\BOUSSOLE\Serveur\Action
+ * @package SPIP\TAXONOMIE\WIKIPEDIA
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

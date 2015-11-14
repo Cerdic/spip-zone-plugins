@@ -6,7 +6,6 @@
  * @copyright  2014
  * @author     _Eric_
  * @licence    GNU/GPL
- * @package    SPIP\Taxon\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -16,6 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Surcharge de l'action modifier sur un taxon:
  * - positionner l'indicateur d'édition à oui afin que le taxon soit préservé lors d'un éventuel
  * rechargement du règne
+ *
+ * @package SPIP\TAXONOMIE\OBJET
  *
  * @param array $flux
  * @return array

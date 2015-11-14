@@ -1,4 +1,10 @@
 <?php
+/**
+ * CRON de mise à jour des taxons en fonction des fichiers de chaque règne embarqués.
+ *
+ * @package    SPIP\TAXONOMIE\ITIS
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function genie_taxonomie_actualiser_itis_dist($last) {

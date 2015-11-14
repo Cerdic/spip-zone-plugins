@@ -1,4 +1,9 @@
 <?php
+/**
+ * Ce fichier contient un ensembles d'utilitaires et de constantes manipulés par les fonctions et api du plugin.
+ *
+ * @package SPIP\TAXONOMIE\OUTILS
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -204,6 +209,8 @@ function extraire_element($tableau, $cles) {
  * Ecriture d'un contenu issu d'un service web taxonomique dans un fichier texte afin d'optimiser le nombre
  * de requête adressée au service.
  *
+ * @package SPIP\TAXONOMIE\CACHE
+ *
  * @param string	$cache
  * 		Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
  *      d'appeler cette fonction.
@@ -228,6 +235,9 @@ function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action
 
 
 /**
+ *
+ * @package SPIP\TAXONOMIE\CACHE
+ *
  * @param $service
  * @param $tsn
  * @param string $code_langue
@@ -249,6 +259,8 @@ function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
 /**
  * Vérifie l'existence du fichier cache pour un taxon et un service donnés. Si le fichier existe
  * la fonction retourne son chemin complet.
+ *
+ * @package SPIP\TAXONOMIE\CACHE
  *
  * @param string    $service
  * @param int       $tsn
@@ -275,10 +287,12 @@ function cache_taxonomie_existe($service, $tsn, $code_langue='', $action='') {
 /**
  * Supprime tous les fichiers caches.
  *
+ * @package SPIP\TAXONOMIE\CACHE
+ *
  * @return boolean
  * 		Toujours à vrai.
  */
-function supprimer_caches(){
+function cache_taxonomie_supprimer(){
 	include_spip('inc/flock');
 
 	if ($fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . "*.*")) {
@@ -288,37 +302,6 @@ function supprimer_caches(){
 	}
 
 	return true;
-}
-
-
-/**
- * Etablit la liste de tous les caches y compris celui de la liste des boussoles
- * et construit un tableau avec la liste des fichiers et l'alias de la boussole
- * associée.
- *
- * @return array
- * 		Tableau des caches recensés :
- *
- * 		- fichier : chemin complet du fichier cache,
- * 		- alias : alias de la boussole ou vide si on est en présence de la liste des boussoles.
- */
-function trouver_caches(){
-	$caches = array();
-
-	$fichier_liste = cache_liste_existe();
-	if ($fichier_liste)
-		$caches[] = array('fichier' => $fichier_liste, 'alias' => '');
-
-	$pattern_cache = _BOUSSOLE_DIR_CACHE . str_replace(_BOUSSOLE_PATTERN_ALIAS, '*', _BOUSSOLE_CACHE);
-	$fichiers_cache = glob($pattern_cache);
-	if ($fichiers_cache) {
-		foreach($fichiers_cache as $_fichier) {
-			$alias_boussole = str_replace(_BOUSSOLE_PREFIXE_CACHE, '', basename($_fichier, '.xml'));
-			$caches[] = array('fichier' => $_fichier, 'alias' => $alias_boussole);
-		}
-	}
-
-	return $caches;
 }
 
 ?>
