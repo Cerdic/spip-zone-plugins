@@ -38,8 +38,8 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 
 $GLOBALS['itis_language'] = array(
 	/**
-	 * Configuration de la correspondance entre langue Wikipedia et code de langue SPIP.
-	 * La langue du service est l'index, le code SPIP est la valeur.
+	 * @var array	$itis_language Variable globale de configuration de la correspondance entre langue Wikipedia
+	 * et code de langue SPIP. La langue du service est l'index, le code SPIP est la valeur.
 	 */
 	'french' => 'fr',
 	'english' => 'en',
@@ -166,8 +166,9 @@ $GLOBALS['itis_webservice'] = array(
  * et retourne son identifiant unique nommé TSN ou 0 si le taxon n'existe pas.
  *
  * @api
- * @uses api2url_itis
- * @uses url2json_data
+ * @uses api2url_itis()
+ * @uses url2json_data()
+ * @global $itis_webservice Configuration des actions du service web ITIS
  *
  * @param string	$action
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
@@ -215,9 +216,9 @@ function itis_search_tsn($action, $recherche) {
  * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
- * @uses api2url_itis
- * @uses url2json_data
- * @uses extraire_element
+ * @uses api2url_itis()
+ * @uses url2json_data()
+ * @uses extraire_element()
  *
  * @param int	$tsn
  * 		Identifiant unique du taxon dans la base ITIS, le TSN
@@ -273,9 +274,9 @@ function itis_get_record($tsn) {
  * Renvoie les informations demandées sur un taxon désigné par son identifiant unique TSN.
  *
  * @api
- * @uses api2url_itis
- * @uses url2json_data
- * @uses extraire_element
+ * @uses api2url_itis()
+ * @uses url2json_data()
+ * @uses extraire_element()
  *
  * @param string	$action
  * 		Type d'information demandé. Prend les valeurs
@@ -350,8 +351,8 @@ function itis_get_information($action, $tsn) {
  * le plugin Taxonomie sont fortement traduits.
  *
  * @api
- * @uses api2url_itis
- * @uses url2json_data
+ * @uses api2url_itis()
+ * @uses url2json_data()
  *
  * @param $language
  * 		Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish`...
@@ -605,7 +606,7 @@ function itis_credit($id_taxon, $informations) {
  * communs par langue.
  *
  * @api
- * @uses lister_regnes
+ * @uses lister_regnes()
  *
  * @return array
  * 	Tableau à deux index principaux:
@@ -662,6 +663,7 @@ function itis_review_sha() {
  * 		Cette clé doit être encodée si besoin par l'appelant.
  *
  * @return string
+ * 		L'URL de la requête au service
  */
 function api2url_itis($format, $group, $action, $key) {
 	global $itis_webservice;
