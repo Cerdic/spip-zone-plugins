@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_generation_newsletter' => 'Een fout is opgetreden bij het aanmaken van de nieuwsbrief',
 	'explication_boost_send' => 'In deze modus worden mails zo snel mogelijk verzonden. Er wordt niet gedoseerd.
 										Deze snelle verzendwijze wordt afgeraden omdat de verzending eerder als SPAM wordt beschouwd.',
+	'explication_purger_historique' => 'Voor iederen meervoudige verzending worden alle geadresseerden bewaard met van ieder de verzendstatus.
+	Bij veel verzendingen kan dit een behoorlijk volume inhouden. Er wordt dat ook aanbevolen om deze verzendgegevens te wissen.',
 	'explication_rate_limit' => 'Geef het maximum aantal e-mails per dag verstuurd , of laat leeg om geen limiet te stellen',
 
 	// I
@@ -64,10 +66,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mailjet_api_key' => 'Mailjet API key',
 	'label_mailjet_secret_key' => 'Mailjet geheime sleutel',
 	'label_mandrill_api_key' => 'Mandril API Key',
+	'label_purger_historique_delai' => 'Ouder dan',
+	'label_purger_historique_oui' => 'De details van oude verzendingen wissen',
 	'label_rate_limit' => 'Beperk het verzenden van tarief',
 	'label_sujet' => 'Onderwerp',
 	'label_texte' => 'Tekst versie',
 	'legend_configuration_adresse_envoi' => 'Verzendadres',
+	'legend_configuration_historique' => 'Verzendgeschiedenis',
 	'legend_configuration_mailer' => 'Service voor het verzenden van e-mails',
 	'lien_voir_newsletter' => 'View Nieuwsbrief',
 
