@@ -523,10 +523,9 @@ function champ_saisie_presente($champ, $saisie) {
  * Cela simplifie des boucles DATA
  *
  * @example
- *     #OBJETS|objets_champ_present{id_rubrique}
- * 
- *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- *     #OBJETS|objets_champ_present{id_rubrique, objet} // chats,souris
+ *     - `#OBJETS|objets_champ_present{id_rubrique}`
+ *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *       `#OBJETS|objets_champ_present{id_rubrique, objet}` // chats,souris
  *
  * @param array $objets
  *     Liste des descriptions d'objets créés avec la fabrique
@@ -551,11 +550,10 @@ function objets_champ_present($objets, $champ, $type='') {
  * Option au sens des clés du formulaire de configuration de l'objet
  *
  * @example 
- *     #OBJETS|objets_option_presente{vue_rubrique}
- *     #OBJETS|objets_option_presente{auteurs_liens}
- *
- *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- *     #OBJETS|objets_option_presente{auteurs_liens, objet} // chats,souris
+ *     - `#OBJETS|objets_option_presente{vue_rubrique}`
+ *     - `#OBJETS|objets_option_presente{auteurs_liens}`
+ *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *       `#OBJETS|objets_option_presente{auteurs_liens, objet}` // chats,souris
  *
  * @param array $objets
  *     Liste des descriptions d'objets créés avec la fabrique
@@ -578,10 +576,9 @@ function objets_option_presente($objets, $option, $type='') {
  * Retourne les objets possédant une certaine saisie
  * 
  * @example 
- *     #OBJETS|objets_saisie_presente{date}
- *
- *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- *     #OBJETS|objets_saisie_presente{date, objet} // chats,souris
+ *     - `#OBJETS|objets_saisie_presente{date}`
+ *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *       `#OBJETS|objets_saisie_presente{date, objet}` // chats,souris
  *
  * @param array $objets
  *     Liste des descriptions d'objets créés avec la fabrique
@@ -606,10 +603,9 @@ function objets_saisie_presente($objets, $saisie, $type='') {
  * Option au sens des clés du formulaire de configuration de l'objet
  *
  * @example
- *     #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}}
- * 
- *     On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
- *     #OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}, objet} // chats,souris
+ *     - `#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}}`
+ *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
+ *       `#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}, objet}` // chats,souris
  * 
  * @param array $objets
  *     Liste des descriptions d'objets créés avec la fabrique
@@ -631,8 +627,8 @@ function objets_options_presentes($objets, $options, $type='') {
  * Retourne des champs en fonction d'une option trouvée
  *
  * @example
- *     #CHAMPS|champs_option_presente{editable}
- *     #CHAMPS|champs_option_presente{versionne}
+ *     - `#CHAMPS|champs_option_presente{editable}`
+ *     - `#CHAMPS|champs_option_presente{versionne}`
  *
  * @param array $champs
  *     Liste des descriptions de champs d'un objet créé avec la fabrique
@@ -654,7 +650,7 @@ function champs_option_presente($champs, $option, $type='') {
  * Retourne des champs en fonction des options trouvées
  *
  * @example
- *     #CHAMPS|champs_options_presentes{#LISTE{obligatoire,saisie}}
+ *     `#CHAMPS|champs_options_presentes{#LISTE{obligatoire,saisie}}`
  *
  * @param array $champs
  *     Liste des descriptions de champs d'un objet créé avec la fabrique
@@ -676,7 +672,7 @@ function champs_options_presentes($champs, $options, $type='') {
  * Retourne des champs en fonction d'une option trouvée
  *
  * @example
- *     #CHAMPS|champs_saisie_presente{date}
+ *     `#CHAMPS|champs_saisie_presente{date}`
  *
  * @param array $champs
  *     Liste des descriptions de champs d'un objet créé avec la fabrique
@@ -786,10 +782,10 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 
 
 /**
- * Retourne une ecriture de criteres
- * {id_parent?}{id_documentation?}
- * avec tous les champs id_x declarés dans l'interface
- * dans la liste des champs.
+ * Retourne une ecriture de criteres `{id_xxx}`
+ * 
+ * Tous les champs déclarés commençant par `id_x` sont retournés
+ * sous forme d'une écriture de critère, tel que `{id_parent?}{id_documentation?}`
  * 
  * Cela ne concerne pas les champs speciaux (id_rubrique, id_secteur, id_trad)
  * qui ne seront pas inclus. 
@@ -975,7 +971,7 @@ function ecrire_tableau_sinon_rien($tableau, $quote = false) {
  * Ajoute autant des espaces à la fin d'une chaîne jusqu'à la taille indiquée
  * 
  * Fonction un peu equivalente à str_pad() mais avec une valeur par défaut
- * définie par la constante _FABRIQUE_ESPACER
+ * définie par la constante `_FABRIQUE_ESPACER`
  *
  * @param string $texte
  *     Texte à compléter
@@ -1065,11 +1061,13 @@ function fabrique_mb_strtolower($str) {
  * Attention à bien rafraîchir l'image réduite lorsqu'on change de logo.
  *
  * @example
- *     #URL_IMAGE|fabrique_miniature_image{128}
- *
+ *     `#URL_IMAGE|fabrique_miniature_image{128}`
  *     Applique l'équivalent de :
- *     #URL_IMAGE|image_reduire{128}|extraire_attribut{src}
+ *     ```
+ *     #URL_IMAGE
+ *         |image_reduire{128}|extraire_attribut{src}
  *         |explode{?}|array_shift|timestamp|balise_img
+ *     ```
  *
  * @param string $fichier
  *     Chemin du fichier
