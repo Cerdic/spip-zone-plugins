@@ -143,10 +143,21 @@ function cache_valide(&$page, $date) {
 	// sauf pour les bots, qui utilisent toujours le cache
 	else if ((!_IS_BOT AND $date + $duree < $now)
 		# le cache est anterieur a la derniere purge : l'ignorer, meme pour les bots
-	  OR $date<$cache_mark)
-		return _IS_BOT?-1:1;
-	else
+	  OR $date<$cache_mark) {
+	  	if (_IS_BOT) return -1;
+	  	
+	  	// si la charge est trop elevee on accepte de prendre un vieux cache
+	  	$load = function_exists('sys_getloadavg') ? sys_getloadavg() : array(0);
+	  	if ($load[0]>20) {
+	  		spip_log('load eleve ('. intval($load[0]).'), utilisation du cache pour '.var_export($page['source'],true).' sur '.self(), 'debug');
+	  		return 0;
+	  	}
+
+		// sinon on calcule
+	  	return 1;
+	} else {
 		return 0;
+	}
 }
 
 // Creer le fichier cache
