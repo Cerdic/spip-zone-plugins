@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'commandes_description' => 'Permet de g&#233;rer des commandes.',
+	'commandes_description' => 'Permet de gérer des commandes.',
 	'commandes_nom' => 'Commandes',
-	'commandes_slogan' => 'G&#233;rer des commandes',
+	'commandes_slogan' => 'Gérer des commandes',
 );
 
 ?>
