@@ -70,6 +70,10 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
         return false;
     }
 
+    // On commence par invalider le cache de l'objet
+    include_spip('inc/invalideur');
+    suivre_invalideur("id='$objet/$id_objet'");
+
     include_spip('action/editer_logo');
     // Version SPIP 3.1 de cette fonction:
     if (function_exists('logo_modifier')) {
@@ -95,7 +99,6 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
         // Sinon, on caviarde la fonction ajouter_image
         $err = $ajouter_image($type."on".$id_objet," ", array('tmp_name' => $fichier), true);
     }
-
 
     return ($err) ? $err : true;
 }
