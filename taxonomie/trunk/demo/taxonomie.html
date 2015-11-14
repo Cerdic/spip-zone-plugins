@@ -84,6 +84,12 @@
     var_dump($tsns);
 ?>
 
+	<h2>Action : read_hierarchy</h2>
+<?php
+ $taxons = itis_read_hierarchy('fungi', 'genus', $sha);
+ var_dump($taxons, $sha);
+?>
+
 </div>
 </body>
 </html>

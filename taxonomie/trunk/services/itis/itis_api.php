@@ -385,7 +385,7 @@ function itis_list_vernaculars($language) {
 // -----------------------------------------------------------------------------------------------
 
 /**
- * Lecture du fichier hiérarchique ITIS des taxons d'un règne.
+ * Lit le fichier hiérarchique ITIS des taxons d'un règne et renvoie la liste des taxons retenus.
  *
  * @api
  *
@@ -404,6 +404,9 @@ function itis_list_vernaculars($language) {
  * 		par la fonction afin d'être stocké par le plugin.
  *
  * @return array
+ * 		Chaque élément du tableau est un taxon. Un taxon est un tableau associatif dont chaque
+ * 		index correspond à un champ de la table spip_taxons. Le tableau est ainsi prêt pour une
+ * 		insertion en base de données.
  */
 function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 	$hierarchy = array();
@@ -498,6 +501,8 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
  * 		par la fonction afin d'être stocké par le plugin.
  *
  * @return array
+ * 		Tableau des noms communs d'une langue donnée indexé par TSN. Le nom commun est préfixé
+ * 		par le tag de langue SPIP pour être utilisé simplement dans une balise `<multi>`.
  */
 function itis_read_vernaculars($language, &$sha_file) {
 	global $itis_language;
@@ -567,7 +572,7 @@ function itis_spipcode2language($spip_language) {
  * 		Tableau des informations complémentaires sur la source. Pour ITIS ce tableau est vide.
  *
  * @return string
- *      Phrase de crédit.
+ * 		Phrase de crédit.
  */
 function itis_credit($id_taxon, $informations) {
 	// On recherche le TSN du taxon afin de construire l'url vers sa page sur ITIS
@@ -592,9 +597,9 @@ function itis_credit($id_taxon, $informations) {
  * @api
  *
  * @return array
- *      Tableau à deux index principaux:
- *      - `taxons`      : tableau associatif indexé par règne
- *      - `traductions` : tableau associatif par code de langue SPIP
+ * 	Tableau à deux index principaux:
+ * 		- `taxons`		: tableau associatif indexé par règne
+ * 		- `traductions`	: tableau associatif par code de langue SPIP
  */
 function itis_review_sha() {
 	global $itis_language;
@@ -628,7 +633,7 @@ function itis_review_sha() {
 // ----------------------------------------------------------------
 
 /**
- * Construire l'URL de la requête ITIS correspondant à la demande utilisateur.
+ * Construit l'URL de la requête ITIS correspondant à la demande utilisateur.
  *
  * @param string	$format
  * 		Format du résultat de la requête. Prend les valeurs `json` ou `xml`. Le `json` est recommandé.
