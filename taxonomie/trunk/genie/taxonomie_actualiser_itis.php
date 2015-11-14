@@ -2,7 +2,7 @@
 /**
  * CRON de mise à jour des taxons en fonction des fichiers de chaque règne embarqués.
  *
- * @package    SPIP\TAXONOMIE\ITIS
+ * @package    SPIP\TAXONOMIE\SERVICES\ITIS
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
