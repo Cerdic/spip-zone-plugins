@@ -32,7 +32,7 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
             'ajaxReload' => $ajaxReload, // Le bloc ajax à rafraichir
             'maxFiles' => 1, // un seul fichier
             'acceptedFiles' => trouver_mime_type('logo'), // N'accepter que les logo défini par spip
-            'id' => 'dropzonespip_logo' // Un ID spécifique pour les logo
+            'id' => 'dropzonespip_logo'.uniqid() // Un ID spécifique pour les logo
         );
 
         // Si on est dans l'espace privé, on ajouter le titre du bloc
