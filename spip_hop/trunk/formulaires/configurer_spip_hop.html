@@ -17,8 +17,12 @@
             <legend><:spip_hop:titre_page_configurer_spip_hop:></legend>
             
             <ul class="editer-groupe">
+
+                <li class="explication">
+                    <p class='explication'><strong><:spip_hop:important:></strong> <:spip_hop:explications:></p>
+                </li>
+                
                 <li class="editer">
-                    <p class='explication'><strong><:spip_hop:attention:></strong> <:spip_hop:explications:></p>
                     <label for="petit_ecran"><:info_petit_ecran:></label>
                     [(#EVAL{_PETIT_ECRAN}|oui)<div class="explication"><:spip_hop:info_constante_definie:></div>]
                     <input type="text" name="petit_ecran" value="[(#ENV{petit_ecran,#GET{constante_petit_ecran}})]"[(#EVAL{_PETIT_ECRAN}|oui) disabled="disabled"]>
@@ -32,7 +36,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Option</legend>
+            <legend><:spip_hop:options:></legend>
             <ul>
                 <li class="editer editer_methode long_label">
                     <label><:spip_hop:etendre_selection_bandeau:></label>
