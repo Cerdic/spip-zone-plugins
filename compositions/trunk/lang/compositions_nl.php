@@ -43,7 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verrouiller_toutes_compositions' => 'Alle composities vergrendelen (alleen webmasters kunnen ze aanpassen).',
 
 	// U
-	'une_utilisation' => '1 toepassing'
+	'une_utilisation' => '1 toepassing',
+
+	// V
+	'voir_image_exemple' => 'Een voorbeeldafbeelding bekijken'
 );
 
 ?>
