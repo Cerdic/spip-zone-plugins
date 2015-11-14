@@ -3,6 +3,7 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service de taxonomie ITIS.
  *
  * @package SPIP\TAXONOMIE\ITIS
+ * @todo phpdoc : décider sur les globales
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -38,7 +39,7 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 
 $GLOBALS['itis_language'] = array(
 	/**
-	 * @var array	$itis_language Variable globale de configuration de la correspondance entre langue Wikipedia
+	 * Variable globale de configuration de la correspondance entre langue Wikipedia
 	 * et code de langue SPIP. La langue du service est l'index, le code SPIP est la valeur.
 	 */
 	'french' => 'fr',
@@ -47,7 +48,7 @@ $GLOBALS['itis_language'] = array(
 );
 $GLOBALS['itis_webservice'] = array(
 	/**
-	 * Configuration de l'api des actions du service web ITIS
+	 * Variable globale de configuration de l'api des actions du service web ITIS
 	 */
 	'search' => array(
 		'commonname' => array(
@@ -168,25 +169,24 @@ $GLOBALS['itis_webservice'] = array(
  * @api
  * @uses api2url_itis()
  * @uses url2json_data()
- * @global $itis_webservice Configuration des actions du service web ITIS
  *
  * @param string	$action
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
- * @param string	$recherche
+ * @param string	$search
  * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
  *
  * @return int
  * 		Identifiant unique TSN dans la base ITIS ou 0 si la recherche échoue
  */
-function itis_search_tsn($action, $recherche) {
+function itis_search_tsn($action, $search) {
 	global $itis_webservice;
 	$tsn = 0;
 
 	// Normaliser la recherche: trim et mise en lettres minuscules
-	$recherche = strtolower(trim($recherche));
+	$search = strtolower(trim($search));
 
 	// Construire l'URL de la fonction de recherche
-	$url = api2url_itis('json', 'search', $action, rawurlencode($recherche));
+	$url = api2url_itis('json', 'search', $action, rawurlencode($search));
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
@@ -200,7 +200,7 @@ function itis_search_tsn($action, $recherche) {
 		// correspond à celui dont le nom est exactement celui recherché.
 		foreach ($data[$index_list] as $_data) {
 			if ($_data
-			AND (strcasecmp($_data[$index_name], $recherche) == 0)) {
+			AND (strcasecmp($_data[$index_name], $search) == 0)) {
 				// On est sur le bon taxon, on renvoie le TSN
 				$tsn = intval($_data[$api['index']]);
 				break;
@@ -403,8 +403,8 @@ function itis_list_vernaculars($language) {
  * @param string	$kingdom
  * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  * @param string	$upto
- * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais minusucule et
- * 		correspond à :
+ * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais et en minuscules.
+ * 		Il prend les valeurs :
  * 		- `phylum` (pour le règne Animalia) ou `division` (pour les règnes Fungi et Plantae),
  * 		- `class`,
  * 		- `order`,
@@ -416,7 +416,7 @@ function itis_list_vernaculars($language) {
  *
  * @return array
  * 		Chaque élément du tableau est un taxon. Un taxon est un tableau associatif dont chaque
- * 		index correspond à un champ de la table spip_taxons. Le tableau est ainsi prêt pour une
+ * 		index correspond à un champ de la table `spip_taxons`. Le tableau est ainsi prêt pour une
  * 		insertion en base de données.
  */
 function itis_read_hierarchy($kingdom, $upto, &$sha_file) {

@@ -3,6 +3,7 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service web de Wikipedia.
  *
  * @package SPIP\TAXONOMIE\WIKIPEDIA
+ * @todo phpdoc : décider sur les globales
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
