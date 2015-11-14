@@ -2,7 +2,7 @@
 /**
  * Fonctions CVT du formulaire de configuration du plugin
  *
- * @package SPIP\TAXONOMIE\CONFIGURATION
+ * @package SPIP\TAXONOMIE\ADMINISTRATION
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
