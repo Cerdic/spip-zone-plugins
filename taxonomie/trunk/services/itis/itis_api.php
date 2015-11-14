@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des constantes et functions implémentant le service de taxonomie ITIS.
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service de taxonomie ITIS.
  *
  * @package SPIP\TAXONOMIE\ITIS
  */
@@ -10,19 +10,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_TAXONOMIE_ITIS_ENDPOINT_BASE_URL'))
 	/**
 	 * Préfixe des URL du service web de ITIS.
-	 * Le service fournit des données au format XML ou JSON
 	 */
 	define('_TAXONOMIE_ITIS_ENDPOINT_BASE_URL', 'http://www.itis.gov/ITISWebService/');
 
 if (!defined('_TAXONOMIE_ITIS_TAXON_BASE_URL'))
 	/**
-	 * URL à fournir dans la citation du service ITIS.
+	 * URL de base d'une page d'un taxon sur le site d'ITIS.
+	 * Cette URL est fournie dans les credits.
 	 */
 	define('_TAXONOMIE_ITIS_TAXON_BASE_URL', 'http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=');
 
 if (!defined('_TAXONOMIE_ITIS_SITE_URL'))
 	/**
-	 * URL à fournir dans la citation du service ITIS.
+	 * URL de la page d'accueil du site ITIS.
+	 * Cette URL est fournie dans les credits.
 	 */
 	define('_TAXONOMIE_ITIS_SITE_URL', 'http://www.itis.gov');
 
@@ -36,8 +37,9 @@ if (!defined('_TAXONOMIE_ITIS_REGEXP_RANKNAME'))
 
 
 /**
- * Configuration de la correspondance entre langue Wikipedia et code de langue SPIP.
- * La langue du service est l'index, le code SPIP est la valeur.
+ * @global array	$itis_language
+ * 		Configuration de la correspondance entre langue Wikipedia et code de langue SPIP.
+ * 		La langue du service est l'index, le code SPIP est la valeur.
  */
 $GLOBALS['itis_language'] = array(
 	'french' => 'fr',
@@ -167,7 +169,7 @@ $GLOBALS['itis_webservice'] = array(
  * @api
  *
  * @param string	$action
- * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs 'commonname' ou 'scientificname'
+ * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
  * @param string	$recherche
  * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
  *
@@ -218,12 +220,12 @@ function itis_search_tsn($action, $recherche) {
  *
  * @return array
  *      Si le taxon est trouvé, le tableau renvoyé possède les index associatifs suivants:
- *      - 'nom_scientique'  : le nom scientifique du taxon en minuscules
- *      - 'rang'            : le nom anglais du rang taxonomique du taxon
- *      - 'regne'           : le nom scientifque du règne du taxon en minuscules
- *      - 'tsn_parent'      : le tsn du parent du taxon ou 0 si le taxon est un règne
- *      - 'auteur'          : la citation d’auteurs et la date de publication
- *      - 'nom_commun'      : un tableau indexé par langue (au sens d'ITIS, English, French...) fournissant le nom commun
+ *      - `nom_scientique`  : le nom scientifique du taxon en minuscules
+ *      - `rang`            : le nom anglais du rang taxonomique du taxon
+ *      - `regne`           : le nom scientifque du règne du taxon en minuscules
+ *      - `tsn_parent`      : le tsn du parent du taxon ou 0 si le taxon est un règne
+ *      - `auteur`          : la citation d’auteurs et la date de publication
+ *      - `nom_commun`      : un tableau indexé par langue (au sens d'ITIS, English, French...) fournissant le nom commun
  *                            dans chacune des langues
  */
 function itis_get_record($tsn) {
@@ -270,17 +272,17 @@ function itis_get_record($tsn) {
  *
  * @param string	$action
  * 		Type d'information demandé. Prend les valeurs
- *      - 'scientificname' : le nom scientifique du taxon
- *      - 'kingdomname' : le règne du taxon
- *      - 'parent' : le taxon parent dont son tsn
- *      - 'rankname' : le rang taxonomique du taxon
- *      - 'author' : le ou les auteurs du taxon
- *      - 'coremetadata' : les métadonnées (à vérifier)
- * 		- 'experts' : les experts du taxon
- * 		- 'commonnames' : le ou les noms communs
- * 		- 'othersources' : les sources d'information sur le taxon
- * 		- 'hierarchyfull' : la hiérarchie complète jusqu'au taxon
- * 		- 'hierarchydown' : la hiérarchie (à vérifier)
+ *      - `scientificname` : le nom scientifique du taxon
+ *      - `kingdomname` : le règne du taxon
+ *      - `parent` : le taxon parent dont son tsn
+ *      - `rankname` : le rang taxonomique du taxon
+ *      - `author` : le ou les auteurs du taxon
+ *      - `coremetadata` : les métadonnées (à vérifier)
+ * 		- `experts` : les experts du taxon
+ * 		- `commonnames` : le ou les noms communs
+ * 		- `othersources` : les sources d'information sur le taxon
+ * 		- `hierarchyfull` : la hiérarchie complète jusqu'au taxon
+ * 		- `hierarchydown` : la hiérarchie (à vérifier)
  * @param int		$tsn
  * 		Identifiant unique du taxon dans la base ITIS (TSN)
  *
@@ -343,13 +345,13 @@ function itis_get_information($action, $tsn) {
  * @api
  *
  * @param $language
- *      Langue au sens d'ITIS écrite en minuscules. Vaut 'french', 'english', 'spanish'...
+ *      Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish`...
  *
  * @return array
  *      Tableau des noms communs associés à leur TSN. Le format du tableau est le suivant:
  *      - index     : le TSN du taxon
  *      - valeur    : le tableau des noms communs, chaque nom étant préfixé du code de langue
- *                    de SPIP (ex: '[fr]bactéries')
+ *                    de SPIP (ex: `[fr]bactéries`)
  */
 function itis_list_vernaculars($language) {
 	global $itis_webservice, $itis_language;
@@ -585,8 +587,8 @@ function itis_credit($id_taxon, $informations) {
  *
  * @return array
  *      Tableau à deux index principaux:
- *      - 'taxons'      : tableau associatif indexé par règne
- *      - 'traductions' : tableau associatif par code de langue SPIP
+ *      - `taxons`      : tableau associatif indexé par règne
+ *      - `traductions` : tableau associatif par code de langue SPIP
  */
 function itis_review_sha() {
 	global $itis_language;
@@ -620,10 +622,22 @@ function itis_review_sha() {
 // ----------------------------------------------------------------
 
 /**
- * @param $format
- * @param $group
- * @param $action
- * @param $key
+ * Construire l'URL de la requête ITIS correspondant à la demande utilisateur.
+ *
+ * @param string	$format
+ * 		Format du résultat de la requête. Prend les valeurs `json` ou `xml`. Le `json` est recommandé.
+ * @param string	$group
+ * 		Groupe d'actions du même type. Prend les valeurs:
+ * 		- `search`		: groupe des actions de recherche du tsn à partir du nom commun ou scientifique
+ * 		- `vernacular`	: groupe de l'action fournissant les noms communs d'une langue donnée
+ * 		- `getfull`		: groupe de l'action fournissant l'ensemble des informations d'un taxon
+ * 		- `get			: groupe des actions fournissant une information précise sur un taxon
+ * @param string	$action
+ * 		Nom de l'action du service ITIS. Les valeurs dépendent du groupe. Par exemple, pour le groupe
+ * 		`search` les actions sont `commonname` et `scientificname`.
+ * @param string	$key
+ * 		Clé de recherche qui dépend de l'action demandée. Ce peut être le nom scientifique, le tsn, etc.
+ * 		Cette clé doit être encodée si besoin par l'appelant.
  *
  * @return string
  */
