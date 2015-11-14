@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bloc_deplier' => 'Openvouwen',
+	'bloc_replier' => 'Samenvouwen',
 	'blocsdepliables_titre' => 'Openvouwbare Blokken',
 
 	// C
@@ -29,6 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_balise_titre' => 'Baken voor de titels van de blokken',
 	'label_cookie_1' => 'De status van de blokken onthouden',
 	'label_unique_1' => 'Eén enkel geopend blok per bladzijde',
+
+	// P
+	'pp_blocs_bloc' => 'Een gesloten blok invoegen',
+	'pp_blocs_visible' => 'Een opengevouwen blok invoegen',
+	'pp_un_titre' => 'Een titel',
+	'pp_votre_texte' => 'Voer hier je tekst in',
 
 	// T
 	'titre_page_configurer_blocsdepliables' => 'Openvouwbare Blokken'
