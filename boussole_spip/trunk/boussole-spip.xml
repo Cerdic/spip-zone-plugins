@@ -10,7 +10,7 @@
 	<!-- Sites des extensions & contributions SPIP -->
 	<groupe type="extension">
 		<site alias="plugin" src="http://plugins.spip.net/" actif="oui" />
-		<site alias="plugincode" src="http://plugins.code.spip.net/" actif="oui" />
+		<site alias="plugincode" src="http://code.plugins.spip.net/" actif="oui" />
 		<site alias="contrib" src="http://contrib.spip.net/" actif="oui" />
 		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
 		<site alias="core" src="http://core.spip.net/" actif="oui" />
