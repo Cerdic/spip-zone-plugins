@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_selecteur' => 'Selector',
+	'label_showurl' => 'Toon geen URL in de tooltip',
 
 	// T
 	'titre_menu_tooltips' => 'Tooltips',
