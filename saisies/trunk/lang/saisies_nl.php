@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_option_destinataire_intro_label' => 'Label voor de eerste lege keuze (wanneer in lijstvorm)',
 	'option_option_intro_label' => 'Label voor de eerste lege keuze',
 	'option_option_statut_label' => 'Toon de status',
+	'option_placeholder_label' => 'Placeholder',
 	'option_pliable_label' => 'Uitvouwbaar',
 	'option_pliable_label_case' => 'De group velden kan worden uit- en ingevouwen.',
 	'option_plie_label' => 'Al ingevouwen',
