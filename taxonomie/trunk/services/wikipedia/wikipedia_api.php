@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service web de Wikipedia.
  *
- * @package SPIP\TAXONOMIE\WIKIPEDIA
+ * @package SPIP\TAXONOMIE\SERVICES\WIKIPEDIA
  * @todo phpdoc : décider sur les globales
  * @todo phpdoc : exemples
  */

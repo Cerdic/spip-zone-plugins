@@ -1,4 +1,13 @@
 <?php
+/**
+ * Gestion du formulaire de d'édition de taxon
+ *
+ * @plugin     Taxon
+ * @copyright  2014
+ * @author     _Eric_
+ * @licence    GNU/GPL
+ * @package    SPIP\TAXONOMIE\OBJET
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
