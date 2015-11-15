@@ -1,25 +1,23 @@
 <?php
 /**
- * Utilisations de pipelines par Taxon
- *
- * @plugin     Taxon
- * @copyright  2014
- * @author     _Eric_
- * @licence    GNU/GPL
+ * Ce fichier contient les cas d'utilisation de certains pipelines par le plugin Taxonomie.
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 
 /**
- * Surcharge de l'action modifier sur un taxon:
- * - positionner l'indicateur d'édition à oui afin que le taxon soit préservé lors d'un éventuel
- * rechargement du règne
+ * Surcharge l'action `modifier` d'un taxon en positionnant l'indicateur d'édition à `oui`
+ * afin que les modifications manuelles du taxon soient préservées lors d'un prochain
+ * rechargement du règne.
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param array $flux
+ * @param array		$flux
+ * 		Données du pipeline fournie en entrée (chaque pipeline possède une structure de donnée propre).
+ *
  * @return array
+ * 		Données du pipeline modifiées pour refléter le traitement.
  *
 **/
 function taxonomie_pre_edition($flux) {
