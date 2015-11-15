@@ -167,7 +167,7 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 		return $id_formulaire;
 	}
 	else{
-		return _T('formidable:erreur_importer_yaml').' : '.$erreur;
+		return _T('formidable:erreur_importer_wcs').' : '.$erreur;
 	}
 }
 
