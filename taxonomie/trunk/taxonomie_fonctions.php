@@ -8,24 +8,30 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Chargement de tous les taxons d'un règne donné, du règne lui-même aux taxons de genre au maximum.
+ * Charge tous les taxons d'un règne donné, du règne lui-même aux taxons de genre au maximum.
  * La fonction permet aussi de choisir un rang taxonomique feuille différent du genre.
- * Les nom communs anglais et français peuvent aussi être chargés en complément mais
+ * Les nom communs anglais, français ou espagnols peuvent aussi être chargés en complément mais
  * ne couvrent pas l'ensemble des taxons.
  *
  * @api
  * @filtre
+ * @uses taxonomie_regne_existe()
+ * @uses preserver_taxons_edites()
+ * @uses taxonomie_vider_regne()
+ * @uses itis_read_hierarchy()
+ * @uses itis_spipcode2language()
+ * @uses itis_read_vernaculars()
  *
  * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
+ * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  * @param string	$rang
  * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
- * 		correspond à : phylum, class, order, family, genus.
+ * 		correspond à : `phylum`, `class`, `order`, `family`, `genus`.
  * @param array		$codes_langue
  * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
  *
  * @return bool
- * 		Retour true/false
+ * 		`true` si le chargement a réussi, `false` sinon
  */
 function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 	$retour = false;
@@ -49,7 +55,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 	// Ajout des noms communs extraits de la base ITIS dans la langue demandée
 	if ($taxons) {
 		$meta_regne['compteur'] = count($taxons);
-        $traductions = array();
+		$traductions = array();
 		foreach ($codes_langue as $_code_langue) {
 			$langue = itis_spipcode2language($_code_langue);
 			if ($langue) {
@@ -59,13 +65,13 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 					$nb_traductions = 0;
 					foreach ($noms as $_tsn => $_nom) {
 						if (array_key_exists($_tsn, $taxons)) {
-	                        // On ajoute les traductions qui sont de la forme [xx]texte
-	                        // On sauvegarde le tsn concerné afin de clore les traductions
-	                        // avec les balises multi et d'optimiser ainsi les traitements
-	                        // sachant qu'il y a très peu de traductions comparées aux taxons
+							// On ajoute les traductions qui sont de la forme [xx]texte
+							// On sauvegarde le tsn concerné afin de clore les traductions
+							// avec les balises multi et d'optimiser ainsi les traitements
+							// sachant qu'il y a très peu de traductions comparées aux taxons
 							$taxons[$_tsn]['nom_commun'] .= $_nom;
 							$nb_traductions += 1;
-	                        $traductions[$_tsn] = $_tsn;
+							$traductions[$_tsn] = $_tsn;
 						}
 					}
 					$meta_regne['traductions']['itis'][$_code_langue]['compteur'] = $nb_traductions;
@@ -73,12 +79,12 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 			}
 		}
 
-        // Clore les traductions avec les balises multi
-        if ($traductions) {
-            foreach ($traductions as $_tsn) {
-                $taxons[$_tsn]['nom_commun'] =  '<multi>' . $taxons[$_tsn]['nom_commun'] . '</multi>';
-            }
-        }
+		// Clore les traductions avec les balises multi
+		if ($traductions) {
+			foreach ($traductions as $_tsn) {
+				$taxons[$_tsn]['nom_commun'] =  '<multi>' . $taxons[$_tsn]['nom_commun'] . '</multi>';
+			}
+		}
 
 		// Réinjection des taxons modifiés manuellement
 		// -- descriptif: remplacement
@@ -114,18 +120,19 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 
 
 /**
- * Suppression de tous les taxons d'un règne donné de la base de données.
+ * Supprime tous les taxons d'un règne donné de la base de données.
  * La meta concernant les informations de chargement du règne est aussi effacée.
- * Les modifications manuelles effectuées sur les taxons du règne sont perdues!
+ * Les modifications manuelles effectuées sur les taxons du règne sont perdues, elles
+ * doivent donc être préservées au préalable.
  *
  * @api
  * @filtre
  *
  * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
+ * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  *
  * @return bool
- * 		Retour true/false
+ * 		`true` si le vidage a réussi, `false` sinon
  */
 function taxonomie_vider_regne($regne) {
 	$retour = sql_delete('spip_taxons', 'regne=' . sql_quote($regne));
@@ -140,19 +147,20 @@ function taxonomie_vider_regne($regne) {
 
 
 /**
- * Interrogation sur l'existence ou pas d'un règne en base de données.
- * La fonction scrute la table spip_taxons et non la meta propre au règne.
+ * Retourne l'existence ou pas d'un règne en base de données.
+ * La fonction scrute la table `spip_taxons` et non la meta propre au règne.
  *
  * @api
  * @filtre
  *
  * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
+ * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  * @param array		$meta_regne
  * 		Meta propre au règne, créée lors du chargement de celui-ci et retournée si le règne
- * 		existe
+ * 		existe.
  *
  * @return bool
+ * 		`true` si le règne existe, `false` sinon.
  */
 function taxonomie_regne_existe($regne, &$meta_regne) {
 	$meta_regne = array();
@@ -171,22 +179,26 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
 
 
 /**
- * Liste dans un tableau les rangs taxonomiques supportés par le plugin, à savoir:
- * kingdom, phylum, class, order, family, genus et species.
- * Les règnes sont exprimés en anglais et écrits en lettres minuscules.
- * La fonction permet d'exclure de la liste les rangs extrêmes kingdom et specie et de choisir
- * entre le rang phylum et son synonyme division.
+ * Liste dans un tableau les rangs taxonomiques supportés par le plugin, suivant certains critères.
+ * Les règnes et les rangs sont exprimés en anglais et écrits en lettres minuscules.
+ * La fonction permet d'exclure certains rangs de la liste.
  *
- * @param bool $exclure_regne
- * 		Demande d'exclusion du règne de la liste des rangs
- * @param bool $exclure_espece
- * 		Demande d'exclusion de l'espèce de la liste des rangs
+ * @api
+ * @filtre
+ *
  * @param string	$regne
- * 		Nom scientifque du règne pour lequel la liste des rangs est demandée.
- * 		Cet argument permet de remplacer le rang phylum par division qui est son synonyme
- * 		pour les règnes fongique et végétal
+ * 		Nom scientifique du règne pour lequel la liste des rangs est demandée.
+ * 		Cet argument permet de remplacer le rang `phylum` par `division` qui est son synonyme
+ * 		pour les règnes fongique et végétal.
+ * @param array		$liste_base
+ * 		Liste de base contenant les rangs par défaut à renvoyer. Il existe deux listes de base, à savoir :
+ * 		- du règne au genre (`_TAXONOMIE_RANGS_PARENTS_ESPECE`)
+ * 		- de l'espèce à la sous-forme (`_TAXONOMIE_RANGS_ESPECE_ET_FILS`)
+ * @param array		$exclusions
+ * 		Liste des rangs à exclure de la liste fournie dans l'argument `$liste_base`
  *
  * @return array
+ * 		Liste des rangs demandée.
  */
 function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions=array()) {
 	include_spip('inc/taxonomer');
@@ -205,18 +217,22 @@ function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $ex
 
 
 /**
- * Fourniture de l'ascendance taxonomique d'un taxon donné.
+ * Fournit l'ascendance taxonomique d'un taxon donné par consultation en base de données.
  *
  * @api
  * @filtre
  *
- * @param int	$id_taxon
- * 		Id du taxon pour lequel il faut fournir l'ascendance
- * @param int	$tsn_parent
+ * @param int		$id_taxon
+ * 		Id du taxon pour lequel il faut fournir l'ascendance.
+ * @param int		$tsn_parent
  *      TSN du parent correspondant au taxon id_taxon. Ce paramètre permet d'optimiser le traitement
- * 		mais n'est pas obligatoire.
+ * 		mais n'est pas obligatoire. Si il n'est pas connu lors de l'appel il faut passer `null`.
+ * @param string	$ordre
+ * 		Classement de la liste des taxons : `descendant`(défaut) ou `ascendant`.
  *
  * @return array
+ * 		Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
+ * 		suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
  */
 function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='descendant') {
 	$ascendance = array();
@@ -247,22 +263,25 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
 
 
 /**
- * Fourniture des sources d'information ayant permis de compléter le taxon.
- * La référence ITIS n'est pas répétée dans le champ sources de chaque taxon car elle est
- * à la base de chaque règne. Elle est donc insérée par la fonction elle-même.
+ * Fournit les phrases de crédits des sources d'information ayant permis de compléter le taxon.
+ * La référence ITIS n'est pas répétée dans le champ `sources` de chaque taxon car elle est
+ * à la base de chaque règne. Elle est donc insérée par la fonction.
  *
  * @api
  * @filtre
+ * @uses ${service}_credit, fonction de formatage des crédits propre à chaque service
  *
  * @param int		$id_taxon
- * 		Id du taxon pour lequel il faut fournir l'ascendance
+ * 		Id du taxon pour lequel il faut fournir les crédits
  * @param string	$sources_specifiques
- * 		Tableau sérialisé des identifiants des sources possibles autres qu'ITIS (CINFO, WIKIPEDIA...).
+ * 		Tableau sérialisé des sources possibles autres qu'ITIS (CINFO, WIKIPEDIA...) telles qu'enregistrées
+ * 		en base de données dans le champ `sources`.
  * 		Ce paramètre permet d'optimiser le traitement mais n'est pas obligatoire.
  *
  * @return array
+ * 		Tableau des phrases de crédits indexées par source.
  */
-function taxonomie_crediter($id_taxon, $sources_specifiques=null) {
+function taxonomie_informer_credits($id_taxon, $sources_specifiques=null) {
 	$sources = array();
 
 	// Si on ne passe pas les sources du taxon concerné alors on le cherche en base de données.
@@ -278,10 +297,10 @@ function taxonomie_crediter($id_taxon, $sources_specifiques=null) {
 	}
 
 	// Puis on construit la liste des sources pour l'affichage
-	foreach ($liste_sources as $_source => $_infos_source) {
-		include_spip("services/${_source}/${_source}_api");
-		if (function_exists($citer = "${_source}_credit")) {
-			$sources[$_source] = $citer($id_taxon, $_infos_source);
+	foreach ($liste_sources as $_service => $_infos_source) {
+		include_spip("services/${_service}/${_service}_api");
+		if (function_exists($citer = "${_service}_credit")) {
+			$sources[$_service] = $citer($id_taxon, $_infos_source);
 		}
 	}
 
