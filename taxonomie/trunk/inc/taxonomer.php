@@ -205,30 +205,6 @@ function traduire_champ_taxon($champ) {
 
 
 /**
- * @param $tableau
- * @param $cles
- *
- * @return null
- */
-function extraire_element($tableau, $cles) {
-	$erreur = false;
-	$element = $tableau;
-	if ($cles) {
-		$cles = is_string($cles) ? array($cles) : $cles;
-		foreach ($cles as $_cle) {
-		if (isset($element[$_cle])) {
-		  $element = $element[$_cle];
-		}
-		else {
-			$erreur = true;
-			break;
-		}
-	}
-	}
-	return ($erreur ? null : $element);
-}
-
-/**
  * Ecrit le contenu issu d'un service taxonomique dans un fichier texte afin d'optimiser le nombre
  * de requêtes adressées au service.
  *
@@ -245,12 +221,12 @@ function extraire_element($tableau, $cles) {
  * @return boolean
  * 		Toujours à vrai.
  */
-function ecrire_cache_taxonomie($cache, $service, $tsn, $spip_langue='', $action='') {
+function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue='', $action='') {
 	// Création du dossier cache si besoin
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
 	// Ecriture du fichier cache
-	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $spip_langue, $action);
+	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $spip_langue, $action);
 	ecrire_fichier($fichier_cache, $cache);
 
 	return true;
@@ -270,7 +246,7 @@ function ecrire_cache_taxonomie($cache, $service, $tsn, $spip_langue='', $action
  *
  * @return string
  */
-function nommer_cache_taxonomie($service, $tsn, $spip_langue='', $action='') {
+function cache_taxonomie_nommer($service, $tsn, $spip_langue='', $action='') {
 	// Construction du chemin complet d'un fichier cache
 	$fichier_cache = _TAXONOMIE_CACHE_DIR
 		. $service
@@ -298,7 +274,7 @@ function nommer_cache_taxonomie($service, $tsn, $spip_langue='', $action='') {
  */
 function cache_taxonomie_existe($service, $tsn, $spip_langue='', $action='') {
 	// Contruire le nom du fichier cache
-	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $spip_langue, $action);
+	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $spip_langue, $action);
 
 	// Vérification de l'existence du fichier:
 	// - chaine vide si le fichier n'existe pas

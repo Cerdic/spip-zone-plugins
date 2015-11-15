@@ -51,7 +51,7 @@ $GLOBALS['wikipedia_language'] = array(
  *
  * @api
  * @uses cache_taxonomie_existe()
- * @uses ecrire_cache_taxonomie()
+ * @uses cache_taxonomie_ecrire()
  * @uses api2url_wikipedia()
  * @uses url2json_data()
  *
@@ -105,7 +105,7 @@ function wikipedia_get($tsn, $search, $language, $section=null) {
 		}
 
 		// Mise en cache
-		ecrire_cache_taxonomie(serialize($information), 'wikipedia', $tsn, $language);
+		cache_taxonomie_ecrire(serialize($information), 'wikipedia', $tsn, $language);
 	} else {
 		// Lecture et désérialisation du cache
 		lire_fichier($file_cache, $information);

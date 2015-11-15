@@ -4,39 +4,40 @@
 
 <body dir="#LANG_DIR">
 <div id="container">
+<?php
+    include_spip('services/itis/itis_api');
+?>
 
     <h1>Service ITIS</h1>
 
     <h2>Action : search_tsn</h2>
 <?php
-    include_spip('services/itis/itis_api');
     $nom = 'Animalia';
     $tsn = itis_search_tsn('scientificname', $nom);
-    echo "TSN $nom = $tsn</br>";
-    $nom = 'panthera';
-    $tsn = itis_search_tsn('scientificname', $nom);
-    echo "TSN $nom = $tsn</br>";
+    var_dump("TSN $nom (stricte)",$tsn);
+
+    $nom = 'panthera leo';
+    $tsn = itis_search_tsn('scientificname', $nom, false);
+    var_dump("TSN $nom (non stricte)",$tsn);
+
     $nom = 'panthera leo';
     $tsn = itis_search_tsn('scientificname', $nom);
-    echo "TSN $nom = $tsn</br>";
+    var_dump("TSN $nom (stricte)",$tsn);
 ?>
 
     <h2>Action : get_record</h2>
 <?php
     $tsn = 202423;
     $taxon = itis_get_record($tsn);
-    echo "Informations du taxon $tsn</br>";
-    var_dump($taxon);
+    var_dump("Informations du taxon $tsn", $taxon);
 
     $tsn = 170945;
     $taxon = itis_get_record($tsn);
-    echo "Informations du taxon $tsn</br>";
-    var_dump($taxon);
+    var_dump("Informations du taxon $tsn", $taxon);
 
     $tsn = 117318;
     $taxon = itis_get_record($tsn);
-    echo "Informations du taxon $tsn</br>";
-    var_dump($taxon);
+    var_dump("Informations du taxon $tsn", $taxon);
 ?>
 
     <h2>Action : get_information</h2>
@@ -44,44 +45,44 @@
     $tsn = 117318;
     echo "Informations du taxon $tsn</br>";
     $info = itis_get_information('scientificname', $tsn);
-    var_dump($info);
+    var_dump('scientificname', $info);
 
     $info = itis_get_information('kingdomname', $tsn);
-    var_dump($info);
+    var_dump('kingdomname', $info);
 
     $info = itis_get_information('parent', $tsn);
-    var_dump($info);
+    var_dump('parent', $info);
 
     $info = itis_get_information('rankname', $tsn);
-    var_dump($info);
+    var_dump('rankname', $info);
 
     $info = itis_get_information('author', $tsn);
-    var_dump($info);
+    var_dump('author', $info);
 
     $info = itis_get_information('commonnames', $tsn);
-    var_dump($info);
+    var_dump('commonnames', $info);
 
     $info = itis_get_information('hierarchydown', $tsn);
-    var_dump($info);
+    var_dump('hierarchydown', $info);
 
     $info = itis_get_information('hierarchyfull', $tsn);
-    var_dump($info);
+    var_dump('hierarchyfull', $info);
 
     $info = itis_get_information('coremetadata', $tsn);
-    var_dump($info);
+    var_dump('coremetadata', $info);
 
     $info = itis_get_information('experts', $tsn);
-    var_dump($info);
+    var_dump('experts', $info);
 
     $info = itis_get_information('othersources', $tsn);
-    var_dump($info);
+    var_dump('othersources', $info);
 ?>
 
     <h2>Action : list_vernaculars</h2>
 <?php
-    $tsns = itis_list_vernaculars('french');
-    var_dump(json_last_error_msg());
-    var_dump($tsns);
+	$langue = 'french';
+    $tsns = itis_list_vernaculars($langue);
+    var_dump("Noms communs en $langue", $tsns);
 ?>
 
 	<h2>Action : read_hierarchy</h2>

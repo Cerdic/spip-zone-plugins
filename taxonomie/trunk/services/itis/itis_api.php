@@ -53,16 +53,18 @@ $GLOBALS['itis_webservice'] = array(
 	 */
 	'search' => array(
 		'commonname' => array(
-			'function' => 'searchByCommonName',
-			'argument' => 'srchKey',
-			'list' => array('commonNames', 'commonName'),
-			'index' => 'tsn'
+			'function'	=> 'searchByCommonName',
+			'argument'	=> 'srchKey',
+			'list'		=> 'commonNames',
+			'index'		=> array('tsn' => 'tsn'),
+			'find'		=> array('nom_commun' => 'commonName')
 		),
 		'scientificname'=> array(
 			'function'  => 'searchByScientificName',
 			'argument'  => 'srchKey',
-			'list'      => array('scientificNames', 'combinedName'),
-			'index'     => 'tsn'
+			'list'      => 'scientificNames',
+			'index'		=> array('tsn' => 'tsn'),
+			'find'      => array('nom_scientifique' => 'combinedName')
 		)
 	),
 	'vernacular' => array(
@@ -79,12 +81,12 @@ $GLOBALS['itis_webservice'] = array(
 			'argument'  => 'tsn',
 			'list'      => '',
 			'index'     => array(
-							'nom_scientifique'  => array('scientificName', 'combinedName'),
-							'rang'              => array('taxRank', 'rankName'),
-							'regne'             => array('kingdom', 'kingdomName'),
-							'tsn_parent'        => array('parentTSN', 'parentTsn'),
-							'auteur'            => array('taxonAuthor', 'authorship'),
-							'nom_commun'        => array('commonNameList', 'commonNames'),
+							'nom_scientifique'  => 'scientificName/combinedName',
+							'rang'              => 'taxRank/rankName',
+							'regne'             => 'kingdom/kingdomName',
+							'tsn_parent'        => 'parentTSN/parentTsn',
+							'auteur'            => 'taxonAuthor/authorship',
+							'nom_commun'        => 'commonNameList/commonNames',
 			)
 		)
 	),
@@ -166,6 +168,8 @@ $GLOBALS['itis_webservice'] = array(
 /**
  * Recherche un taxon dans la base ITIS par son nom commun ou scientifique
  * et retourne son identifiant unique nommé TSN ou 0 si le taxon n'existe pas.
+ * Selon le critère de correspondance de la recherche (stricte ou pas) la fonction
+ * retourne un ou plusieurs taxons.
  *
  * @api
  * @uses api2url_itis()
@@ -175,13 +179,18 @@ $GLOBALS['itis_webservice'] = array(
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
  * @param string	$search
  * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
+ * @param bool		$strict
+ * 		`true` indique une correspondance stricte de la chaine recherchée ce qui a pour conséquence de renvoyer
+ * 		une seule valeur de TSN. `false` indique une correspondance partielle et peut donc renvoyer plusieurs TSN.
  *
- * @return int
- * 		Identifiant unique TSN dans la base ITIS ou 0 si la recherche échoue
+ * @return array
+ * 		Si la recherche est stricte, la fonction retourne l'identifiant unique TSN dans la base ITIS
+ * 		ou 0 si la recherche échoue.
+ * 		Sinon, la fonction retourne une liste de couples de valeurs (TNS, valeur trouvée).
  */
-function itis_search_tsn($action, $search) {
+function itis_search_tsn($action, $search, $strict=true) {
 	global $itis_webservice;
-	$tsn = 0;
+	$tsn = array();
 
 	// Normaliser la recherche: trim et mise en lettres minuscules
 	$search = strtolower(trim($search));
@@ -195,16 +204,20 @@ function itis_search_tsn($action, $search) {
 
 	// Récupération du TSN du taxon recherché
 	$api = $itis_webservice['search'][$action];
-	list($index_list, $index_name) = $api['list'];
-	if (!empty($data[$index_list])) {
-		// La recherche peut renvoyer plusieurs taxons. On considère que le "bon" taxon
-		// correspond à celui dont le nom est exactement celui recherché.
-		foreach ($data[$index_list] as $_data) {
-			if ($_data
-			AND (strcasecmp($_data[$index_name], $search) == 0)) {
-				// On est sur le bon taxon, on renvoie le TSN
-				$tsn = intval($_data[$api['index']]);
-				break;
+	if (!empty($data[$api['list']])) {
+		// La recherche peut renvoyer plusieurs taxons. Suivant le critère de correspondance de la recherche
+		// on renvoie le "bon" taxon ou tous les taxons trouvés.
+		list($tsn_destination, $tsn_key) = each($api['index']);
+		list($search_destination, $search_key) = each($api['find']);
+		foreach ($data[$api['list']] as $_data) {
+			if ($_data) {
+				if (!$strict
+				OR ($strict AND (strcasecmp($_data[$search_key], $search) == 0))) {
+					$tsn[] = array(
+						$tsn_destination => intval($_data[$tsn_key]),
+						$search_destination => $_data[$search_key]);
+					if ($strict) {break;}
+				}
 			}
 		}
 	}
@@ -248,10 +261,11 @@ function itis_get_record($tsn) {
 	// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
 	// de l'action.
 	$api = $itis_webservice['getfull']['record'];
-	$data = extraire_element($data, $api['list']);
+	include_spip('inc/filtres');
+	$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
 	if (!empty($data)) {
 		foreach ($api['index'] as $_destination => $_keys) {
-			$element = extraire_element($data, $_keys);
+			$element = $_keys ? table_valeur($data, $_keys, null) : $data;
 			$record[$_destination] = is_string($element) ? trim($element) : $element;
 		}
 	}
@@ -310,7 +324,8 @@ function itis_get_information($action, $tsn) {
 
 	// On vérifie que le tableau est complet sinon on retourne un tableau vide
 	$api = $itis_webservice['get'][$action];
-	$data = extraire_element($data, $api['list']);
+	include_spip('inc/filtres');
+	$data = $api['list'] ? table_valeur($data, $api['list'], null) : $data;
 	list($type, $index) = $api['index'];
 
 	if ($type == 'string') {
@@ -330,9 +345,9 @@ function itis_get_information($action, $tsn) {
 						$information = $format($information);
 					}
 				} else {
-					list($kkey, $kvalue) = each($index);
+					list($destination, $key) = each($index);
 					foreach ($data as $_data) {
-						$information[strtolower($_data[$kkey])][] = $_data[$kvalue];
+						$information[strtolower($_data[$destination])][] = $_data[$key];
 					}
 				}
 			}
@@ -360,9 +375,9 @@ function itis_get_information($action, $tsn) {
  *
  * @return array
  * 		Tableau des noms communs associés à leur TSN. Le format du tableau est le suivant:
- * 		- `index`	: le TSN du taxon
- * 		- `valeur`	: le tableau des noms communs, chaque nom étant préfixé du code de langue
- * 					  de SPIP (ex: `[fr]bactéries`)
+ * 		- l'index représente le TSN du taxon,
+ * 		- la valeur fournit le tableau des noms communs, chaque nom étant préfixé du code de langue
+ * 		de SPIP (ex: `[fr]bactéries`)
  */
 function itis_list_vernaculars($language) {
 	global $itis_webservice, $itis_language;
@@ -379,11 +394,11 @@ function itis_list_vernaculars($language) {
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
 		$tag_language = '[' . $itis_language[$language] . ']';
-		list($index, $index_name) = each($api['index']);
+		list($destination, $name_key) = each($api['index']);
 		foreach ($data[$api['list']] as $_data) {
-			if (!empty($_data[$index])
-			AND !empty($_data[$index_name])) {
-				$vernaculars[$_data[$index]][] = $tag_language . $_data[$index_name];
+			if (!empty($_data[$destination])
+			AND !empty($_data[$name_key])) {
+				$vernaculars[$_data[$destination]][] = $tag_language . $_data[$name_key];
 			}
 		}
 	}
