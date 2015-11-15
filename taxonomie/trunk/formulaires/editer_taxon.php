@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire de d'édition de taxon
+ * Gestion du formulaire d'édition de l'objet taxon
  *
  * @plugin     Taxon
  * @copyright  2014

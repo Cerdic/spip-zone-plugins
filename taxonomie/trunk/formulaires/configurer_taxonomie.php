@@ -1,12 +1,15 @@
 <?php
 /**
- * Fonctions CVT du formulaire de configuration du plugin
+ * Gestion du formulaire de configuration du plugin
  *
  * @package SPIP\TAXONOMIE\ADMINISTRATION
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * @return array
+ */
 function formulaires_configurer_taxonomie_charger() {
 	$valeurs = array();
 
@@ -22,6 +25,9 @@ function formulaires_configurer_taxonomie_charger() {
 	return $valeurs;
 }
 
+/**
+ * @return array
+ */
 function formulaires_configurer_taxonomie_verifier() {
 	$erreurs = array();
 

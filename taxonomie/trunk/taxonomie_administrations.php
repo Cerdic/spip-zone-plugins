@@ -13,14 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation et de mise à jour du plugin Taxonomie.
+ * Fonction d'installation et de mise à jour du plugin.
  * Le schéma du plugin est composé d'une table spip_taxons et d'une
  * configuration.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
- *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ *     Version du schéma de données (déclaré dans paquet.xml)
  * @return void
 **/
 function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
@@ -67,6 +67,12 @@ function taxonomie_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
+/**
+ * Initialise la configuration du plugin.
+ *
+ * @return array
+ * 		Le tableau de la configuration par défaut qui servira à initialiser la meta `taxonomie`.
+ */
 function configurer_taxonomie() {
 	$config = array(
 		'langues_possibles' => array('fr', 'en', 'es'),

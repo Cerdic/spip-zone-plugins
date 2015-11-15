@@ -7,6 +7,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * @param $last
+ *
+ * @return int
+ */
 function genie_taxonomie_actualiser_itis_dist($last) {
 
 	include_spip('inc/taxonomer');

@@ -1,16 +1,15 @@
 <?php
 /**
- * Gestion du formulaire de d'édition de taxon
+ * Gestion du formulaire de chargement d'un règne
  *
- * @plugin     Taxon
- * @copyright  2014
- * @author     _Eric_
- * @licence    GNU/GPL
  * @package    SPIP\TAXONOMIE\OBJET
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * @return array
+ */
 function formulaires_charger_taxonomie_charger() {
 	$valeurs = array();
 	include_spip('inc/taxonomer');
@@ -57,6 +56,9 @@ function formulaires_charger_taxonomie_charger() {
 	return $valeurs;
 }
 
+/**
+ * @return array
+ */
 function formulaires_charger_taxonomie_verifier() {
 	$erreurs = array();
 
@@ -69,6 +71,9 @@ function formulaires_charger_taxonomie_verifier() {
 	return $erreurs;
 }
 
+/**
+ * @return array
+ */
 function formulaires_charger_taxonomie_traiter() {
 	$retour = array();
 
