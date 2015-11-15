@@ -173,7 +173,7 @@ $GLOBALS['itis_webservice'] = array(
  *
  * @api
  * @uses api2url_itis()
- * @uses url2json_data()
+ * @uses service_requeter_json()
  *
  * @param string	$action
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs `commonname` ou `scientificname`
@@ -200,7 +200,7 @@ function itis_search_tsn($action, $search, $strict=true) {
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
-	$data = url2json_data($url);
+	$data = service_requeter_json($url);
 
 	// Récupération du TSN du taxon recherché
 	$api = $itis_webservice['search'][$action];
@@ -231,8 +231,7 @@ function itis_search_tsn($action, $search, $strict=true) {
  *
  * @api
  * @uses api2url_itis()
- * @uses url2json_data()
- * @uses extraire_element()
+ * @uses service_requeter_json()
  *
  * @param int	$tsn
  * 		Identifiant unique du taxon dans la base ITIS, le TSN
@@ -256,7 +255,7 @@ function itis_get_record($tsn) {
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
-	$data = url2json_data($url);
+	$data = service_requeter_json($url);
 
 	// Récupération des informations choisies parmi l'enregistrement reçu à partir de la configuration
 	// de l'action.
@@ -290,8 +289,7 @@ function itis_get_record($tsn) {
  *
  * @api
  * @uses api2url_itis()
- * @uses url2json_data()
- * @uses extraire_element()
+ * @uses service_requeter_json()
  *
  * @param string	$action
  * 		Type d'information demandé. Prend les valeurs
@@ -320,7 +318,7 @@ function itis_get_information($action, $tsn) {
 
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
-	$data = url2json_data($url);
+	$data = service_requeter_json($url);
 
 	// On vérifie que le tableau est complet sinon on retourne un tableau vide
 	$api = $itis_webservice['get'][$action];
@@ -368,7 +366,7 @@ function itis_get_information($action, $tsn) {
  *
  * @api
  * @uses api2url_itis()
- * @uses url2json_data()
+ * @uses service_requeter_json()
  *
  * @param $language
  * 		Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish`...
@@ -389,7 +387,7 @@ function itis_list_vernaculars($language) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/taxonomer');
 	include_spip('inc/distant');
-	$data = url2json_data($url, _INC_DISTANT_MAX_SIZE*7);
+	$data = service_requeter_json($url, _INC_DISTANT_MAX_SIZE*7);
 
 	$api = $itis_webservice['vernacular']['vernacularlanguage'];
 	if (!empty($data[$api['list']])) {
@@ -622,7 +620,6 @@ function itis_credit($id_taxon, $informations) {
  * communs par langue.
  *
  * @api
- * @uses lister_regnes()
  *
  * @return array
  * 	Tableau à deux index principaux:
@@ -634,7 +631,7 @@ function itis_review_sha() {
 	$shas = array();
 
 	include_spip('inc/taxonomer');
-	$kingdoms = lister_regnes();
+	$kingdoms = explode(':', _TAXONOMIE_REGNES);
 
 	foreach ($kingdoms as $_kingdom) {
 		$file = find_in_path('services/itis/' . ucfirst($_kingdom) . '_Genus.txt');

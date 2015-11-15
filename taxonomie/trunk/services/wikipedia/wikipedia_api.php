@@ -53,7 +53,7 @@ $GLOBALS['wikipedia_language'] = array(
  * @uses cache_taxonomie_existe()
  * @uses cache_taxonomie_ecrire()
  * @uses api2url_wikipedia()
- * @uses url2json_data()
+ * @uses service_requeter_json()
  *
  * @param int		$tsn
  * 		Identifiant ITIS du taxon, le TSN. Etant donné que ce service s'utilise toujours sur un taxon
@@ -89,7 +89,7 @@ function wikipedia_get($tsn, $search, $language, $section=null) {
 
 		// Acquisition des données spécifiées par l'url
 		include_spip('inc/taxonomer');
-		$data = url2json_data($url);
+		$data = service_requeter_json($url);
 
 		// Récupération de la section demandée.
 		if (isset($data['batchcomplete'])
@@ -169,7 +169,7 @@ function wikipedia_credit($id_taxon, $informations) {
 
 	// La liste des champs concernés (a priori le descriptif)
 	include_spip('inc/taxonomer');
-	$champs = implode(', ', array_map('traduire_champ_taxon', $informations['champs']));
+	$champs = implode(', ', array_map('taxon_traduire_champ', $informations['champs']));
 
 	// On établit la citation
 	$credit = _T('taxonomie:credit_wikipedia', array('champs' => strtolower($champs),'url_taxon' => $link));

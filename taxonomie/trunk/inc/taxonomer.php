@@ -53,10 +53,12 @@ if (!defined('_TAXONOMIE_RANG_FORME'))
 if (!defined('_TAXONOMIE_RANG_SOUS_FORME'))
 	define('_TAXONOMIE_RANG_SOUS_FORME', 'subforma');
 
-// Liste des rangs utilisés du règne au genre compris.
-// On utilise par défaut au niveau 2 le terme phylum du règne animal
-// (division pour les autres règnes)
+//
 if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
+	/**
+	 * Liste des rangs utilisés du règne au genre compris.
+	 * On utilise par défaut au niveau 2 le terme phylum du règne animal (division pour les autres règnes)
+	 */
 	define('_TAXONOMIE_RANGS_PARENTS_ESPECE',
 		implode(':', array(
 			_TAXONOMIE_RANG_REGNE,
@@ -66,8 +68,10 @@ if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
 			_TAXONOMIE_RANG_FAMILLE,
 			_TAXONOMIE_RANG_GENRE
 		)));
-// Liste des rangs utilisés de l'espèce à la sous-forme
 if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
+	/**
+	 * Liste des rangs utilisés de l'espèce à la sous-forme
+	 */
 	define('_TAXONOMIE_RANGS_ESPECE_ET_FILS',
 		implode(':', array(
 			_TAXONOMIE_RANG_ESPECE,
@@ -78,18 +82,22 @@ if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 			_TAXONOMIE_RANG_FORME,
 			_TAXONOMIE_RANG_SOUS_FORME
 		)));
-// Liste complète des rangs utilisés par le plugin
 if (!defined('_TAXONOMIE_RANGS'))
+	/**
+	 * Liste complète des rangs utilisés par le plugin
+	 */
 	define('_TAXONOMIE_RANGS',
 		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' .	_TAXONOMIE_RANGS_ESPECE_ET_FILS);
 
 if (!defined('_TAXONOMIE_CACHE_NOMDIR'))
 	/**
-	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie */
+	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie
+	 */
 	define('_TAXONOMIE_CACHE_NOMDIR', 'cache-taxonomie/');
 if (!defined('_TAXONOMIE_CACHE_DIR'))
 	/**
-	 * Chemin du dossier contenant les fichiers caches des boussoles */
+	 * Chemin du dossier contenant les fichiers caches des boussoles
+	 */
 	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
 
 
@@ -97,14 +105,19 @@ if (!defined('_TAXONOMIE_CACHE_DIR'))
  * Renvoie, à partir de l'url du service, le tableau des données demandées.
  * Le service utilise dans ce cas une chaine JSON qui est décodée pour fournir
  * le tableau de sortie. Le flux retourné par le service est systématiquement
- * transcodé dans le chrset du site avant d'être décodé.
+ * transcodé dans le charset du site avant d'être décodé.
  *
- *@param string $url
- * 		URL complète du service web.
+ * @package SPIP\TAXONOMIE\SERVICES
  *
-*@return array
+ * @param string	$url
+ * 		URL complète de la requête au service web concerné.
+ * @param int|null	$taille_max
+ * 		Taille maximale di flux récupéré suite à la requête.
+ * 		`null` désigne la taille par défaut.
+ *
+ * @return array
  */
-function url2json_data($url, $taille_max=null) {
+function service_requeter_json($url, $taille_max=null) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$flux = recuperer_page($url, true, false, $taille_max);
@@ -117,23 +130,14 @@ function url2json_data($url, $taille_max=null) {
 
 
 /**
- * Liste dans un tableau les règnes supportés par le plugin, à savoir: animalia,
- * plantae et fungi.
- * Les règnes sont exprimés avec leur nom scientifique en lettres minuscules.
  *
- * @return array
- */
-function lister_regnes() {
-	return explode(':', _TAXONOMIE_REGNES);
-}
-
-
-/**
+ * @package SPIP\TAXONOMIE\OBJET
+ *
  * @param $regne
  *
  * @return array
  */
-function preserver_taxons_edites($regne) {
+function taxon_preserver_editions($regne) {
 	$select = array('tsn', 'nom_commun', 'descriptif');
 	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'));
 	$taxons = sql_allfetsel($select, 'spip_taxons', $where);
@@ -143,13 +147,16 @@ function preserver_taxons_edites($regne) {
 
 
 /**
+ *
+ * @package SPIP\TAXONOMIE\OBJET
+ *
  * @param           $nom_charge
  * @param           $nom_edite
  * @param bool|true $priorite_edition
  *
  * @return string
  */
-function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
+function taxon_merger_traductions($nom_charge, $nom_edite, $priorite_edition=true) {
 	$source = array();
 	$destination = array();
 	$nom_merge = '';
@@ -191,11 +198,14 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 
 
 /**
+ *
+ * @package SPIP\TAXONOMIE\OBJET
+ *
  * @param $champ
  *
  * @return string
  */
-function traduire_champ_taxon($champ) {
+function taxon_traduire_champ($champ) {
 	$traduction = '';
 	if ($champ) {
 		$traduction = _T("taxon:champ_${champ}_label");

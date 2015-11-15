@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @api
  * @filtre
  * @uses taxonomie_regne_existe()
- * @uses preserver_taxons_edites()
+ * @uses taxon_preserver_editions()
  * @uses taxonomie_vider_regne()
  * @uses itis_read_hierarchy()
  * @uses itis_spipcode2language()
@@ -41,7 +41,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
 		include_spip('inc/taxonomer');
-		$taxons_edites = preserver_taxons_edites($regne);
+		$taxons_edites = taxon_preserver_editions($regne);
 
 		// Vider le règne avant de le recharger
 		taxonomie_vider_regne($regne);
@@ -95,7 +95,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 				if (($tsn = $_taxon_edite['tsn'])
 				AND (array_key_exists($tsn, $taxons))) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
-					$taxons[$tsn]['nom_commun'] = merger_multi(
+					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
 													$taxons[$tsn]['nom_commun'],
 													$_taxon_edite['nom_commun'],
 													true);

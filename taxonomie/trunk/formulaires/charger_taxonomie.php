@@ -24,7 +24,7 @@ function formulaires_charger_taxonomie_charger() {
 	// Acquérir la liste des règnes gérer par le plugin et leur statut de chargement
 	// Désactiver l'action vider si aucun règne n'est chargé
 	$aucun_regne_charge = true;
-	$regnes = lister_regnes();
+	$regnes = explode(':', _TAXONOMIE_REGNES);
 	foreach ($regnes as $_regne) {
 		$valeurs['_regnes'][$_regne] = '<span class="nom_scientifique">' . $_regne . '</span>, ' . _T("taxonomie:regne_$_regne");
 		if (taxonomie_regne_existe($_regne, $meta_regne)) {
