@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin LinkCheck
- * (c) 2013 Benjamin Grapeloux, Guillaume Wauquier
+ * (c) 2013-2015 Benjamin Grapeloux, Guillaume Wauquier
  * Licence GNU/GPL
  */
 
@@ -52,32 +52,30 @@ function linkcheck_post_edition($flux){
 				if (isset($flux['data'][$ct]))
 					$tab_value[$ct]=$flux['data'][$ct];
 
-			//on parcours les liens et 
+			//on parcours les liens 
 			$tab_liens = linkcheck_lister_liens($tab_value);
 
 			//on les insère en base si besoin
 			linkcheck_ajouter_liens($tab_liens,$type_objet,$id_objet);
 
-			//maintenant on vérifie que tous les liens de la base correspondant à cet objet soit encore présent ds l'objet
+			//maintenant on vérifie que tous les liens de la base correspondant à cet objet soit encore présent danss l'objet
 			//on recup tout les liens de l'article presents en base
-			$sel = sql_select('l.url, l.id_linkcheck','spip_linkchecks_liens AS ll, spip_linkchecks AS l','l.id_linkcheck=ll.id_linkcheck AND id_objet='.$id_objet.' AND ll.objet='.sql_quote($type_objet));
+			$sel = sql_allfetsel('l.url, l.id_linkcheck','spip_linkchecks_liens AS ll, spip_linkchecks AS l','l.id_linkcheck=ll.id_linkcheck AND id_objet='.$id_objet.' AND ll.objet='.sql_quote($type_objet));
 				
 			//pour chaque liens
-			while($lks = sql_fetch($sel)){
+			foreach($sel as $lks){
 					
 				//si il n'est plus ds l'article
 				if(!in_array($lks['url'], $tab_liens)){
-	
 					//on supprime son entrée ds la table de liaison
-					sql_delete('spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck'].' AND id_objet='.$id_objet.' AND objet="'.$type_objet.'"');
-						
+					sql_delete('spip_linkchecks_liens', 'id_linkcheck='.intval($lks['id_linkcheck']).' AND id_objet='.intval($id_objet).' AND objet='.sql_quote($type_objet));
+
 					//on regarde s'il est utilisé ailleurs ds le site
-					$tpl = sql_getfetsel('count(*)','spip_linkchecks_liens', 'id_linkcheck='.$lks['id_linkcheck']);
-						
+					$tpl = sql_getfetsel('count(*)','spip_linkchecks_liens', 'id_linkcheck='.intval($lks['id_linkcheck']));
 					//s'il ne l'est pas
-					if($tpl>0){
+					if($tpl == 0){
 						//on le supprime de la table liens
-						sql_delete('spip_linkchecks', 'id_linkcheck='.$lks['id_linkcheck']);
+						sql_delete('spip_linkchecks', 'id_linkcheck='.intval($lks['id_linkcheck']));
 					}
 				}
 			}
@@ -115,7 +113,6 @@ function linkcheck_taches_generales_cron($taches){
  */
 function linkcheck_alertes_auteur($flux){
 	include_spip('inc/config');
-
 	if(lire_config('linkcheck/afficher_alerte')){
 		include_spip('inc/autoriser');
 		if (autoriser('webmestre', $flux['args']['id_auteur'])){

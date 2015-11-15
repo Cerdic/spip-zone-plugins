@@ -15,6 +15,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * Bonnes chaînes de langue dans les comptes de liens
 * Correction du mail envoyé, ajout de l'état des liens (malade, deplace ou mort) dans le message
 * Nécessite saisies version 2.2.3 pour la fonction ```saisie_balise_structure_formulaire``` (formalisme SPIP 3.1)
+* Bien supprimer les liens qui ne sont plus liés à aucun objet (dans le pipeline ```post_edition```)
 
 ### Version 1.2.0
 
