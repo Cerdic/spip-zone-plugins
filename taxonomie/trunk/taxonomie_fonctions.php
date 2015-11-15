@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'ensemble fonctions implémentant l'API du plugin Taxonomie.
+ * Ce fichier contient l'ensemble des fonctions implémentant l'API du plugin Taxonomie.
  *
  * @package SPIP\TAXONOMIE\API
  */
@@ -225,7 +225,7 @@ function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $ex
  * @param int		$id_taxon
  * 		Id du taxon pour lequel il faut fournir l'ascendance.
  * @param int		$tsn_parent
- *      TSN du parent correspondant au taxon id_taxon. Ce paramètre permet d'optimiser le traitement
+ * 		TSN du parent correspondant au taxon id_taxon. Ce paramètre permet d'optimiser le traitement
  * 		mais n'est pas obligatoire. Si il n'est pas connu lors de l'appel il faut passer `null`.
  * @param string	$ordre
  * 		Classement de la liste des taxons : `descendant`(défaut) ou `ascendant`.

@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient un ensembles d'utilitaires et de constantes manipulés par les fonctions et api du plugin.
+ * Ce fichier contient l'ensemble des constantes et des utilitaires nécessaires au fonctionnement du plugin.
  *
  * @package SPIP\TAXONOMIE\OUTILS
  */
@@ -14,8 +14,8 @@ if (!defined('_TAXONOMIE_REGNE_VEGETAL'))
 if (!defined('_TAXONOMIE_REGNE_FONGIQUE'))
 	define('_TAXONOMIE_REGNE_FONGIQUE', 'fungi');
 
-if (!defined('_TAXONOMIE_LISTE_REGNES'))
-	define('_TAXONOMIE_LISTE_REGNES',
+if (!defined('_TAXONOMIE_REGNES'))
+	define('_TAXONOMIE_REGNES',
 		implode(':', array(
 			_TAXONOMIE_REGNE_ANIMAL,
 			_TAXONOMIE_REGNE_VEGETAL,
@@ -124,10 +124,15 @@ function url2json_data($url, $taille_max=null) {
  * @return array
  */
 function lister_regnes() {
-	return explode(':', _TAXONOMIE_LISTE_REGNES);
+	return explode(':', _TAXONOMIE_REGNES);
 }
 
 
+/**
+ * @param $regne
+ *
+ * @return array
+ */
 function preserver_taxons_edites($regne) {
 	$select = array('tsn', 'nom_commun', 'descriptif');
 	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'));
@@ -137,6 +142,13 @@ function preserver_taxons_edites($regne) {
 }
 
 
+/**
+ * @param           $nom_charge
+ * @param           $nom_edite
+ * @param bool|true $priorite_edition
+ *
+ * @return string
+ */
 function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 	$source = array();
 	$destination = array();
@@ -178,6 +190,11 @@ function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
 }
 
 
+/**
+ * @param $champ
+ *
+ * @return string
+ */
 function traduire_champ_taxon($champ) {
 	$traduction = '';
 	if ($champ) {
@@ -187,27 +204,33 @@ function traduire_champ_taxon($champ) {
 }
 
 
+/**
+ * @param $tableau
+ * @param $cles
+ *
+ * @return null
+ */
 function extraire_element($tableau, $cles) {
-    $erreur = false;
-    $element = $tableau;
+	$erreur = false;
+	$element = $tableau;
 	if ($cles) {
 		$cles = is_string($cles) ? array($cles) : $cles;
 		foreach ($cles as $_cle) {
- 		if (isset($element[$_cle])) {
-          $element = $element[$_cle];
- 		}
- 		else {
- 			$erreur = true;
- 			break;
- 		}
- 	}
+		if (isset($element[$_cle])) {
+		  $element = $element[$_cle];
+		}
+		else {
+			$erreur = true;
+			break;
+		}
 	}
-    return ($erreur ? null : $element);
+	}
+	return ($erreur ? null : $element);
 }
 
 /**
- * Ecriture d'un contenu issu d'un service web taxonomique dans un fichier texte afin d'optimiser le nombre
- * de requête adressée au service.
+ * Ecrit le contenu issu d'un service taxonomique dans un fichier texte afin d'optimiser le nombre
+ * de requêtes adressées au service.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
@@ -216,18 +239,18 @@ function extraire_element($tableau, $cles) {
  *      d'appeler cette fonction.
  * @param string    $service
  * @param int       $tsn
- * @param string    $code_langue
+ * @param string    $spip_langue
  * @param string    $action
  *
  * @return boolean
  * 		Toujours à vrai.
  */
-function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action='') {
+function ecrire_cache_taxonomie($cache, $service, $tsn, $spip_langue='', $action='') {
 	// Création du dossier cache si besoin
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
 	// Ecriture du fichier cache
-	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
+	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $spip_langue, $action);
 	ecrire_fichier($fichier_cache, $cache);
 
 	return true;
@@ -235,44 +258,47 @@ function ecrire_cache_taxonomie($cache, $service, $tsn, $code_langue='', $action
 
 
 /**
+ * Construit le nom du fichier cache en fonction du service, du taxon concernés et
+ * d'autres critères optionnels.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
- * @param $service
- * @param $tsn
- * @param string $code_langue
- * @param string $action
+ * @param string    $service
+ * @param int       $tsn
+ * @param string    $spip_langue
+ * @param string    $action
+ *
  * @return string
  */
-function nommer_cache_taxonomie($service, $tsn, $code_langue='', $action='') {
+function nommer_cache_taxonomie($service, $tsn, $spip_langue='', $action='') {
 	// Construction du chemin complet d'un fichier cache
 	$fichier_cache = _TAXONOMIE_CACHE_DIR
 		. $service
 		. ($action ? '_' . $action : '')
 		. '_' . $tsn
-		. ($code_langue ? '_' . $code_langue : '')
+		. ($spip_langue ? '_' . $spip_langue : '')
 		. '.txt';
 
 	return $fichier_cache;
 }
 
 /**
- * Vérifie l'existence du fichier cache pour un taxon et un service donnés. Si le fichier existe
- * la fonction retourne son chemin complet.
+ * Vérifie l'existence du fichier cache pour un taxon et un service donnés.
+ * Si le fichier existe la fonction retourne son chemin complet.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
  * @param string    $service
  * @param int       $tsn
- * @param string    $code_langue
+ * @param string    $spip_langue
  * @param string    $action
  *
  * @return string
  * 		Chemin du fichier cache si il existe ou chaine vide sinon.
  */
-function cache_taxonomie_existe($service, $tsn, $code_langue='', $action='') {
+function cache_taxonomie_existe($service, $tsn, $spip_langue='', $action='') {
 	// Contruire le nom du fichier cache
-	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $code_langue, $action);
+	$fichier_cache = nommer_cache_taxonomie($service, $tsn, $spip_langue, $action);
 
 	// Vérification de l'existence du fichier:
 	// - chaine vide si le fichier n'existe pas
@@ -285,17 +311,27 @@ function cache_taxonomie_existe($service, $tsn, $code_langue='', $action='') {
 
 
 /**
- * Supprime tous les fichiers caches.
+ * Supprime tout ou partie des fichiers cache taxonomiques.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
+ * @param array|string	$caches
+ * 		Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimer.
+ * 		Il est possible de passer un seul fichier comme une chaine et pas un tableau à un élément.
+ *
  * @return boolean
- * 		Toujours à vrai.
+ * 		Toujours à `true`.
  */
-function cache_taxonomie_supprimer(){
+function cache_taxonomie_supprimer($caches=array()){
 	include_spip('inc/flock');
 
-	if ($fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . "*.*")) {
+	if ($caches) {
+		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
+	} else {
+		$fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . "*.*");
+	}
+
+	if ($fichiers_cache) {
 		foreach ($fichiers_cache as $_fichier) {
 			supprimer_fichier($_fichier);
 		}
