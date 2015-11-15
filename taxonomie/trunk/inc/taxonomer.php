@@ -91,16 +91,16 @@ if (!defined('_TAXONOMIE_RANGS'))
 
 if (!defined('_TAXONOMIE_CACHE_NOMDIR'))
 	/**
-	 * @package SPIP\TAXONOMIE\CACHE
-	 *
 	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie
+	 *
+	 * @package SPIP\TAXONOMIE\CACHE
 	 */
 	define('_TAXONOMIE_CACHE_NOMDIR', 'cache-taxonomie/');
 if (!defined('_TAXONOMIE_CACHE_DIR'))
 	/**
-	 * @package SPIP\TAXONOMIE\CACHE
-	 *
 	 * Chemin du dossier contenant les fichiers caches des boussoles
+	 *
+	 * @package SPIP\TAXONOMIE\CACHE
 	 */
 	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
 
