@@ -1,6 +1,8 @@
 <?php
 /**
  * Ce fichier contient les cas d'utilisation de certains pipelines par le plugin Taxonomie.
+ *
+ * @package SPIP\TAXONOMIE
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

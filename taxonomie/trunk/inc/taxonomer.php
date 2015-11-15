@@ -2,7 +2,7 @@
 /**
  * Ce fichier contient l'ensemble des constantes et des utilitaires nécessaires au fonctionnement du plugin.
  *
- * @package SPIP\TAXONOMIE\OUTILS
+ * @package SPIP\TAXONOMIE
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
