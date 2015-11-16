@@ -22,6 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return void
 **/
 function spip_hop_upgrade($nom_meta_base_version, $version_cible) {
+	$maj = array();
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
