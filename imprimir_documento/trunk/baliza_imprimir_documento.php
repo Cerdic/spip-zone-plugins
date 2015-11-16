@@ -36,9 +36,9 @@ function preparar_enlace_imprimir($arg)
 
 function balise_IMPRIMIR_DOCUMENTO($p)
 {
-    if ($GLOBALS['contexte']['id_breve'] == '') {
+    if (isset($GLOBALS['contexte']['id_article'])) {
         $arg = "'page=imprimir_articulo&amp;id_article='.".champ_sql('id_article', $p);
-    } else {
+    } elseif (isset($GLOBALS['contexte']['id_breve'])) {
         $arg = "'page=imprimir_breve&amp;id_breve='.".champ_sql('id_breve', $p);
     }
 
