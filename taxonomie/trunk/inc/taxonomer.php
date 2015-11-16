@@ -134,12 +134,17 @@ function service_requeter_json($url, $taille_max=null) {
 
 
 /**
+ * Extrait de la table `spip_taxons` la liste des taxons d'un règne donné ayant fait l'objet
+ * d'une modification manuelle.
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param $regne
+ * @param string	$regne
+ * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  *
  * @return array
+ * 		Liste des taxons modifiées manuellement. Chaque élément de la liste est un tableau
+ * 		composé des index `tsn`, `nom_commun`, `descriptif`.
  */
 function taxon_preserver_editions($regne) {
 	$select = array('tsn', 'nom_commun', 'descriptif');
@@ -151,12 +156,15 @@ function taxon_preserver_editions($regne) {
 
 
 /**
+ * Fusionne les traductions d'une balise `<multi>` source avec celles d'une autre balise `<multi>`.
+ * Il est possible de considérer l'une ou l'autre balise comme prioritaire dans le cas où la même
+ * langue est présente dans les deux balises.
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param           $nom_charge
- * @param           $nom_edite
- * @param bool|true $priorite_edition
+ * @param string	$nom_charge
+ * @param string	$nom_edite
+ * @param bool|true	$priorite_edition
  *
  * @return string
  */
@@ -202,12 +210,15 @@ function taxon_merger_traductions($nom_charge, $nom_edite, $priorite_edition=tru
 
 
 /**
+ * Traduit un champ de la table `spip_taxons` dans la langue du site.
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
  * @param $champ
+ * 		Nom du champ dans la base de données.
  *
  * @return string
+ * 		Traduction du champ dans la langue du site.
  */
 function taxon_traduire_champ($champ) {
 	$traduction = '';
@@ -306,8 +317,8 @@ function cache_taxonomie_existe($service, $tsn, $spip_langue='', $action='') {
  * @package SPIP\TAXONOMIE\CACHE
  *
  * @param array|string	$caches
- * 		Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimer.
- * 		Il est possible de passer un seul fichier comme une chaine et pas un tableau à un élément.
+ * 		Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
+ * 		Il est possible de passer un seul fichier comme une chaine.
  *
  * @return boolean
  * 		Toujours à `true`.
