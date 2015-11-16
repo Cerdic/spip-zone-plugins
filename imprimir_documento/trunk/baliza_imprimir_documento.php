@@ -1,9 +1,10 @@
 <?php
 
-function preparar_enlace_imprimir($arg){
+function preparar_enlace_imprimir($arg)
+{
 
-// funcion para ventana pop-up centrada en la pantalla
-$javascript_centrar_imprimir = "<script type=\"text/javascript\">
+    // funcion para ventana pop-up centrada en la pantalla
+    $javascript_centrar_imprimir = "<script type=\"text/javascript\">
 	/*
 	Open Centered Popup Window Script-
 	 DHTMLShock (www.dhtmlshock.com)
@@ -20,32 +21,29 @@ $javascript_centrar_imprimir = "<script type=\"text/javascript\">
 	}
 </script>";
 
-// prepara logo
-		$logo = find_in_path('impresora.gif');
-		
-		$url = generer_url_public('',$arg);
+    // prepara logo
+    $logo = find_in_path('impresora.gif');
 
-// "'page=imprimir_articulo&amp;id_article='.".
-		
-// prepara el enlace completo
-		$enlace = $javascript_centrar_imprimir."<a href=\"javascript:;\" onclick=\"centrarVentana('$url','Imprimir_documento','scrollbars=yes,resizable=yes','700','470','true')\" title=\""._T('imprimirdocumento:version_doc_imprimir')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('imprimirdocumento:version_doc_imprimir')."\" /> "._T('imprimirdocumento:version_imprimir')."</a>";
-		return $enlace;
+    $url = generer_url_public('', $arg);
 
+    // "'page=imprimir_articulo&amp;id_article='.".
+
+    // prepara el enlace completo
+    $enlace = $javascript_centrar_imprimir."<a href=\"javascript:;\" onclick=\"centrarVentana('$url','Imprimir_documento','scrollbars=yes,resizable=yes','700','470','true')\" title=\""._T('imprimirdocumento:version_doc_imprimir')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('imprimirdocumento:version_doc_imprimir').'" /> '._T('imprimirdocumento:version_imprimir').'</a>';
+
+    return $enlace;
 }
 
-function balise_IMPRIMIR_DOCUMENTO($p) {
+function balise_IMPRIMIR_DOCUMENTO($p)
+{
+    if ($GLOBALS['contexte']['id_breve'] == '') {
+        $arg = "'page=imprimir_articulo&amp;id_article='.".champ_sql('id_article', $p);
+    } else {
+        $arg = "'page=imprimir_breve&amp;id_breve='.".champ_sql('id_breve', $p);
+    }
 
-	if ($GLOBALS['contexte']['id_breve'] == "") { 
-	$arg="'page=imprimir_articulo&amp;id_article='.".champ_sql('id_article', $p);
-	}
-	else {
-	$arg="'page=imprimir_breve&amp;id_breve='.".champ_sql('id_breve', $p);
-	}
+    $p->code = "preparar_enlace_imprimir($arg)";
+    $p->statut = 'html';
 
-   $p->code ="preparar_enlace_imprimir($arg)";
-   $p->statut = 'html';
-
-   return $p;
+    return $p;
 }
-
-?>
