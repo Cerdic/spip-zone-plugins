@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+    titre,1,
+    id_abomailman,1,
+    points,-1
+}})]<B_liste_abomailmans>
+#ANCRE_PAGINATION
+<div class="liste-objets abomailmans">
+<table class='spip liste'>
+    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{abomailmans:info_abomailmans_1,abomailmans:info_abomailmans_nb}})</strong></caption>]
+    <thead>
+        <tr class='first_row'>
+            <th class='picto' scope='col'></th>
+            <th class='titre' scope='col'>[(#TRI{titre,<:abomailmans:champ_titre_label:>,ajax})]</th>
+            <th class='lang'>[(#TRI{lang,<:abomailmans:langue_liste:>,ajax})]</th>
+            <th class='statut'>[(#TRI{desactive,<:abomailmans:activation:>,ajax})]</th>
+            <th class='id' scope='col'>[(#TRI{id_abomailman,<:info_numero_abbreviation:>,ajax})]</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_liste_abomailmans (ABOMAILMANS) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}}>
+        <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+            <td class='picto'>[<img src="(#CHEMIN{images/[(#REPONSES|?{'puce-verte-breve.gif','puce-orange-breve.gif'})]})" width="7" height="7" style="border:none" alt="" />]</td>
+            <td class='titre principale'>[(#LOGO_ABOMAILMAN|image_reduire{20,26})]<a href="[(#ID_ABOMAILMAN|generer_url_entite{abomailman})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ABOMAILMAN">[(#RANG). ]#TITRE</a></td>
+            <td class='lang'>[(#LANG)]</td>
+            <td class='statut'>
+                [(#DESACTIVE|=={1}|?{<:abomailmans:desactive:>,<:abomailmans:active:>})]
+            </td>
+            <td class='id'>[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN}|?{
+                <a href="[(#URL_ECRIRE{abomailman_edit,id_abomailman=#ID_ABOMAILMAN})]">#ID_ABOMAILMAN</a>,
+                #ID_ABOMAILMAN
+            })]</td>
+        </tr>
+    </BOUCLE_liste_abomailmans>
+    </tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_abomailmans>[
+<div class="liste-objets abomailmans caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_abomailmans>

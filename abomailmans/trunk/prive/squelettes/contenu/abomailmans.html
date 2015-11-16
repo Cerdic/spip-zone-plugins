@@ -1,40 +1,12 @@
 #CACHE{0}
-
 <h1><:abomailmans:les_listes_mailmans:></h1>
+<div class="nettoyeur"></div>
 
-<B_listes>
-#BOITE_OUVRIR
-	#ANCRE_PAGINATION
-	<div class="liste-objets abomailmans">
-	<table class='spip liste'>
-		<BOUCLE_listes(ABOMAILMANS){par titre}{pagination 10}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="statut">
-				[<img src="(#CHEMIN{images/[(#REPONSES|?{'puce-verte-breve.gif','puce-orange-breve.gif'})]})" width="7" height="7" style="border:none" alt="" />]
-			</td>
-			<td class="titre">
-				[(#TITRE)]
-			</td>
-			<td class="lang">
-				#LANG
-			</td>
-			<td class="statut">
-				[(#DESACTIVE|=={1}|?{<:abomailmans:desactive:>,<:abomailmans:active:>})]
-			</td>
-			<td class='id'>[(#AUTORISER{modifier,abomailman,#ID_ABOMAILMAN}|?{
-				<a href="[(#URL_ECRIRE{abomailman,id_abomailman=#ID_ABOMAILMAN})]">#ID_ABOMAILMAN</a>,
-				#ID_ABOMAILMAN
-			})]</td>
-		</tr>
-		</BOUCLE_listes>
-	</table>
-	[<div class="pagination">
-		(#PAGINATION)
-	</div>]
-</div>
-[(#BOITE_FERMER)]
-</B_listes>
-[(#AUTORISER{creer, abomailman}|oui)
-	[(#URL_ECRIRE{abomailman_edit,id_abomailman=new}|parametre_url{redirect,#SELF}
-		|icone_verticale{<:abomailmans:icone_ajouter_liste:>,abomailmans-24,new,right})]
+<INCLURE{fond=prive/objets/liste/abomailmans, par=titre, env, ajax, sinon=<:abomailmans:info_aucun_abomailman:>}>
+
+[(#AUTORISER{creer,abomailman})
+	[(#URL_ECRIRE{abomailman_edit,new=oui}|icone_verticale{<:abomailmans:icone_ajouter_liste:>,abomailmans-24,new,right})]
 ]
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
