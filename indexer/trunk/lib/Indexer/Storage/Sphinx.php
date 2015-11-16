@@ -32,9 +32,12 @@ class Sphinx implements StorageInterface {
 			if ($document and $document instanceof \Indexer\Sources\Document) {
 
 				// effacer les documents ayant un statut ignore
-				if ($statuts_ignores = lire_config('indexer/'. ($document->properties['objet']) .'/statuts_ignores')
-				AND isset($document->properties['statut'])
-				AND in_array($document->properties['statut'], $statuts_ignores)) {
+				if (
+					isset($document->properties['objet'])
+					and $statuts_ignores = lire_config('indexer/'. ($document->properties['objet']) .'/statuts_ignores')
+					and isset($document->properties['statut'])
+					and in_array($document->properties['statut'], $statuts_ignores)
+				) {
 					$q = "DELETE FROM $this->indexName WHERE id=".$document->id;
 				}
 				else {
