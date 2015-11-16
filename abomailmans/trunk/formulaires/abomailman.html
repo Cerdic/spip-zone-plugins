@@ -25,7 +25,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			<legend>#GET{legende}</legend>
-				<ul>
+				<ul class="editer-groupe">
 					<li class="editer abomailman_nom[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 						<label for="nom"><:abomailmans:nom:></label>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>]
@@ -36,10 +36,10 @@
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>]
 						<input name="email" id="email_listes" type="text" class="text" value="#ENV{email}" />
 					</li>
-					
+
 					<li class="editer abomailman_listes[ (#ENV**{erreurs}|table_valeur{listes}|oui)erreur]">
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{listes})</span>]
-						<ul>
+						<ul class="editer-groupe">
 							<li class="editer editer_listes">
 							<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}{par num titre,titre}>
 							<div class="choix">
@@ -53,7 +53,7 @@
 							</li>
 						</ul>
 					</li>
-						
+
 				</ul>
 				[(#REM) Piege a robots spammeurs, du moins on essaie]
 				<p style="display:none;">
