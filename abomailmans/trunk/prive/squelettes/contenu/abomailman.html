@@ -10,12 +10,11 @@
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{abomailmans-24.png}|balise_img{article,cadre-icone})]</h1>
 ],simple fiche_objet})]
-<div>
 <div id="wysiwyg">
 #INCLURE{fond=prive/objets/contenu/abomailman,env}
 </div>
 #BOITE_FERMER
-
+<div class="nettoyeur"></div>
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
 ]
