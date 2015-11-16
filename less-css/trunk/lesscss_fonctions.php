@@ -30,6 +30,7 @@ function lesscss_compile($style, $contexte = array()){
 	}
 
 	$parser = new Less_Parser();
+	$parser->setOption('sourceMap', lire_config('lesscss/activer_sourcemaps', false) == "on" ? true : false);
 	$parser->setImportDirs($import_dirs);
 	$parser->relativeUrls = true;
 
