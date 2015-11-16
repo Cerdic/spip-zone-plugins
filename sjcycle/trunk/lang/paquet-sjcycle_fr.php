@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sjcycle_slogan' => 'Un diaporama paramétrable pour Spip',
 	'sjcycle_nom' => 'SPIP Cycle2'
 );
-?>
