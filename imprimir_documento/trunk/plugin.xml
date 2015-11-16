@@ -13,7 +13,7 @@
 	</slogan>
 	<auteur>joseluis@digital77.com</auteur>
 	<licence>CopyLeft 2006</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -25,6 +25,6 @@
 	<icon>imprimir_documento.png</icon>
 	<fonctions>baliza_imprimir_documento.php</fonctions>
 	<prefix>imprimir_documento</prefix>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<categorie>edition</categorie>
 </plugin>
