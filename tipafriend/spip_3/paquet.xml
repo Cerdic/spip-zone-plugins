@@ -1,9 +1,9 @@
 <paquet
 	prefix="tipafriend"
 	categorie="communication"
-	version="1.6.2"
+	version="1.6.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="img/letter_32.png"
 	documentation="http://contrib.spip.net/?article3638"
 >	
