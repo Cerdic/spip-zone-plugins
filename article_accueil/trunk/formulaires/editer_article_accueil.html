@@ -26,7 +26,8 @@
 			<li class="editer_id_article_accueil[ (#GET{erreurs}|oui)erreur]">
 				<label for="id_article_accueil"><:article_accueil:label_id_article_accueil:></label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					#INCLURE{fond=inclure/inc-selecteur_accueil,id_rubrique}
+					[(#PLUGIN{polyhier}|oui) #INCLURE{fond=inclure/inc-selecteur_accueil_poly,id_rubrique} ]
+					[(#PLUGIN{polyhier}|non) #INCLURE{fond=inclure/inc-selecteur_accueil,id_rubrique} ]
 			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
