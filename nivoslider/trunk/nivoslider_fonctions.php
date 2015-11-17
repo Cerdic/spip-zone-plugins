@@ -29,11 +29,11 @@ function nivoslider_img_display_first_only($img, $compteur, $nolazy){
 	// charger l'image directement si c'est la premiere ou si on a active la navigation par vignette
 	if ($compteur==1 OR ($nolazy!=false AND $nolazy!=="false")) return $img;
 
-	$src = extraire_attribut($img,"src");
-	$img = inserer_attribut($img,"data-src",$src);
+	$src = extraire_attribut($img, "src");
+	$img = inserer_attribut($img, "data-src", $src);
 	// gif transparent 1px
 	// http://proger.i-forge.net/The_smallest_transparent_pixel/eBQ
-	$img = inserer_attribut($img,"src","data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
+	$img = inserer_attribut($img, "src", "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
 	return $img;
 }
 
