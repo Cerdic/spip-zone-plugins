@@ -9,7 +9,7 @@
 		#SET{fl,nivoslider}
 		<fieldset>
 			<legend><:nivoslider:general:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -70,7 +70,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:nivoslider:controls:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,directionNav}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -159,7 +159,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:nivoslider:legend:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,captionBackcolor}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -182,7 +182,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:nivoslider:default:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,id_defaut}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
