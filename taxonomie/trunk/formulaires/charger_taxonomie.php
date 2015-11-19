@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire de chargement d'un règne
+ * Gestion du formulaire de chargement des taxons d'un règne.
  *
  * @package    SPIP\TAXONOMIE\OBJET
  */
@@ -8,7 +8,24 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Chargement des données : le formulaire propose la liste des boussoles accessibles
+ * à partir des serveurs que le site client a déclaré.
+ *
+ * @uses taxonomie_regne_existe()
+ * @uses lister_rangs()
+ *
  * @return array
+ * 		Le tableau des données à charger par le formulaire. Toutes les données sont utilisées
+ * 		pour l'affichage du formulaire uniquement. Aucune donnée chargée n'est un champ de saisie.
+ *
+ * 		- `_actions_regnes`		: alias et libellés des actions possibles sur un règne, `charger` et `vider`
+ * 		- `_actions_disable`	: liste des actions désactivées (`vider` si le règne n`est pas chargé)
+ * 		- `_action_defaut`		: action sélectionnée par défaut, `charger`
+ * 		- `_regnes`				: noms scientifiques et libellés des règnes supportés par le plugin
+ * 		- `_rangs`				: noms anglais et libellés des rangs du `phylum` au `genus`
+ * 		- `_rang_defaut`		: nom anglais du rang sélectionné par défaut, `genus`
+ * 		- `_langues_regne`		: codes de langue SPIP et libellés des langues utilisées (configuration)
+ * 		- `_langue_defaut`		: la première langue de la liste des langues utilisées
  */
 function formulaires_charger_taxonomie_charger() {
 	$valeurs = array();
@@ -57,7 +74,12 @@ function formulaires_charger_taxonomie_charger() {
 }
 
 /**
+ * Vérification des saisies : il est indispensable de choisir une action (`vider` ou `charger`) et
+ * un règne.
+ * Un rang minimal est toujours sélectionné. La saisie des langues des noms communs est optionnelle.
+ *
  * @return array
+ * 		Tableau des erreurs sur l'action et/ou le règne ou tableau vide si aucune erreur.
  */
 function formulaires_charger_taxonomie_verifier() {
 	$erreurs = array();
@@ -72,7 +94,16 @@ function formulaires_charger_taxonomie_verifier() {
 }
 
 /**
+ * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang minimal
+ * choisi en y intégrant les traductions des noms communs sélectionnées.
+ *
+ * @uses taxonomie_regne_existe()
+ * @uses taxonomie_vider_regne()
+ * @uses taxonomie_charger_regne()
+ *
  * @return array
+ * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
+ * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
 function formulaires_charger_taxonomie_traiter() {
 	$retour = array();

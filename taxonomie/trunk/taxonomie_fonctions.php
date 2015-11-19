@@ -269,7 +269,7 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
  *
  * @api
  * @filtre
- * @uses ${service}_credit, fonction de formatage des crédits propre à chaque service
+ * @uses ${service}_credit fonction de formatage des crédits propre à chaque service
  *
  * @param int		$id_taxon
  * 		Id du taxon pour lequel il faut fournir les crédits

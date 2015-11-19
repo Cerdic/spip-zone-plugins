@@ -8,7 +8,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Chargement des données : le formulaire propose la liste des boussoles accessibles
+ * à partir des serveurs que le site client a déclaré.
+ *
+ * @uses lister_rangs()
+ *
  * @return array
+ * 		le tableau des données à charger par le formulaire :
+ *
+ * 		- 'boussole' : l'alias de la boussole choisie
+ * 		- '_boussoles' : la liste des boussoles accessibles
+ * 		- 'message_erreur' : message d'erreur éventuel retourné par un des serveurs interrogés
+ * 		- 'editable' : booleen à false si une erreur est survenue
  */
 function formulaires_configurer_taxonomie_charger() {
 	$valeurs = array();
@@ -26,7 +37,11 @@ function formulaires_configurer_taxonomie_charger() {
 }
 
 /**
+ * Vérification des saisies : aucune nécessaire, le formulaire ne proposnt que des boutons
+ * radio dont un est toujours actif.
+ *
  * @return array
+ * 		Tableau des erreur toujours vide.
  */
 function formulaires_configurer_taxonomie_verifier() {
 	$erreurs = array();
