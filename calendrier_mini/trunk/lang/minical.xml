@@ -24,6 +24,9 @@
 	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/minical?lang_cible=oc_ni_mis" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/minical?lang_cible=ru" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/minical?lang_cible=sk" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
