@@ -12,12 +12,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * à partir des serveurs que le site client a déclaré.
  *
  * @uses taxonomie_regne_existe()
- * @uses lister_rangs()
+ * @uses taxonomie_lister_rangs()
  *
  * @return array
- * 		Le tableau des données à charger par le formulaire. Toutes les données sont utilisées
- * 		pour l'affichage du formulaire uniquement. Aucune donnée chargée n'est un champ de saisie.
- *
+ * 		Le tableau des données à charger par le formulaire.
+ * 		Pour l'affichage uniquement :
  * 		- `_actions_regnes`		: alias et libellés des actions possibles sur un règne, `charger` et `vider`
  * 		- `_actions_disable`	: liste des actions désactivées (`vider` si le règne n`est pas chargé)
  * 		- `_action_defaut`		: action sélectionnée par défaut, `charger`
@@ -26,6 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_rang_defaut`		: nom anglais du rang sélectionné par défaut, `genus`
  * 		- `_langues_regne`		: codes de langue SPIP et libellés des langues utilisées (configuration)
  * 		- `_langue_defaut`		: la première langue de la liste des langues utilisées
+ * 		Aucune donnée chargée n'est un champ de saisie, celle-ci sont systématiquement remises à zéro.
  */
 function formulaires_charger_taxonomie_charger() {
 	$valeurs = array();

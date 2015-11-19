@@ -8,18 +8,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Chargement des données : le formulaire propose la liste des boussoles accessibles
- * à partir des serveurs que le site client a déclaré.
- *
- * @uses lister_rangs()
+ * Chargement des données : le formulaire propose la liste des langues possibles.
+ * L'utilisateur doit cocher les langues qu'il souhaite utiliser parmi les langues possibles.
  *
  * @return array
- * 		le tableau des données à charger par le formulaire :
- *
- * 		- 'boussole' : l'alias de la boussole choisie
- * 		- '_boussoles' : la liste des boussoles accessibles
- * 		- 'message_erreur' : message d'erreur éventuel retourné par un des serveurs interrogés
- * 		- 'editable' : booleen à false si une erreur est survenue
+ * 		Tableau des données à charger par le formulaire.
+ * 		Pour l'affichage uniquement :
+ * 		- `_langues`			: codes de langue et libellés des langues possibles
+ * 		Données de configuration :
+ * 		- `langues_utilisees`	: la liste des langues utilisées. Par défaut, le plugin
+ * 								  propose la langue française.
  */
 function formulaires_configurer_taxonomie_charger() {
 	$valeurs = array();
@@ -37,11 +35,10 @@ function formulaires_configurer_taxonomie_charger() {
 }
 
 /**
- * Vérification des saisies : aucune nécessaire, le formulaire ne proposnt que des boutons
- * radio dont un est toujours actif.
+ * Vérification des saisies : il est indispensable de choisir au moins une langue.
  *
  * @return array
- * 		Tableau des erreur toujours vide.
+ * 		Tableau des erreurs l'absence de langue ou tableau vide si aucune erreur.
  */
 function formulaires_configurer_taxonomie_verifier() {
 	$erreurs = array();
