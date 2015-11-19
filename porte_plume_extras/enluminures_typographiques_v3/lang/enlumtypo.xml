@@ -10,4 +10,7 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=it" total="27" traduits="14" relire="0" modifs="0" nouveaux="13" pourcent="51.85">
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=ru" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+	</langue>
 </traduction>
