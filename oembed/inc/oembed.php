@@ -62,13 +62,12 @@ function oembed_lister_providers(){
 		'http://*.imgur.com/*'                    => 'http://api.imgur.com/oembed',
 		'http://*.onf.ca/*'                       => 'http://www.onf.ca/remote/services/oembed/',
 		'http://vine.co/v/*'                      => 'https://vine.co/oembed.json',
-		#'http://*.tumblr.com/post/*'              => 'https://www.tumblr.com/oembed/1.0',
+		'http://*.tumblr.com/post/*'              => 'https://www.tumblr.com/oembed/1.0',
 		'http://*.kickstarter.com/projects/*'     => 'https://www.kickstarter.com/services/oembed',
 		'http://speakerdeck.com/*'                => 'https://speakerdeck.com/oembed.json',
 		
 		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
-		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
 		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
 	);
 
