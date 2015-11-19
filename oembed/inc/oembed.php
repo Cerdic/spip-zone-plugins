@@ -154,18 +154,8 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		return $cache[$data_url];
 	}
 
-	$cache[$data_url] = false;
-	// on recupere le contenu de la page
-	include_spip('inc/distant');
-	spip_log('Requete oembed pour '.$url.' : '.$data_url,'oembed.'._LOG_DEBUG);
-	if ($data = recuperer_page($data_url)) {
-		spip_log('infos oembed brutes pour '.$url.' : '.$data,'oembed.'._LOG_DEBUG);
-		if ($format == 'json')
-			$cache[$data_url] = json_decode($data,true);
-		// TODO : format xml
-		//if ($format == 'xml')
-		//	$cache[$data_url] = false;
-	}
+	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url','inc');
+	$cache[$data_url] = $oembed_recuperer_url($data_url,$url,$format);
 
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]){
