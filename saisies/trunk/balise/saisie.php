@@ -240,6 +240,7 @@ class Pile {
  * @uses Pile::recuperer_et_supprimer_argument_balise()
  * @uses Pile::creer_balise()
  * @uses Pile::creer_et_ajouter_argument_balise()
+ * @see balise_INCLURE_dist()
  *
  * @param Champ $p
  * @return Champ
@@ -263,10 +264,11 @@ function balise_SAISIE_dist($p) {
 
 	// on appelle la balise #INCLURE
 	// avec les arguments ajoutes
-	if (function_exists('balise_INCLURE'))
+	if (function_exists('balise_INCLURE')) {
 		return balise_INCLURE($p);
-	else
-		return balise_INCLURE_dist($p);	
+	} else {
+		return balise_INCLURE_dist($p);
+	}
 }
 
 
