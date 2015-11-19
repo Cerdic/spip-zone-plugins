@@ -62,7 +62,7 @@ function recuperer_fond_ajax() {
 
 	// Appliquer la methode: 
 	// - soit laisser les automatismes Ajax de SPIP {ajaxload}
-	// - soit sauvergarder "en dur" le resultat HTML {ajaxload=html}
+	// - soit sauvegarder "en dur" le resultat HTML {ajaxload=html}
 	// - soit retourner l'url de la noisette {ajaxload=url}
 	// - soit retourner l'url du fichier html {ajaxload=url_html}
 	$methode = $args[1]["ajaxload"];
@@ -132,7 +132,7 @@ function recuperer_fond_ajax() {
 			return call_user_func_array('recuperer_fond', $args);
 	
 		$ret =
-			"<div class='includeajax$class_ajax'><a href=\"$url\" rel=\"$ajax\">$searching</a></div>";
+			"<div class='includeajax$class_ajax'><a href=\"$url\" rel=\"$ajax nofollow\">$searching</a></div>";
 	}
 	
 	return $ret;

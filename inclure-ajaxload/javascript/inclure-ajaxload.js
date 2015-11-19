@@ -1,8 +1,8 @@
-jQuery(document).ready(function($) {
+$(function() {
 	function charger_inclure_ajaxload() {
 		$('.includeajax').each(function() {
 			var me = $(this);
-			var env = $('a', this).attr('rel');
+			var env = $('a', this).attr('rel').replace(/ nofollow$/, '');
 			if (env) {
 				$('a', this).attr('href','#');
 				$.ajax({
