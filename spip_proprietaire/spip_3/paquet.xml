@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_proprio"
 	categorie="communication"
-	version="1.70.0"
+	version="1.70.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
