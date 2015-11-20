@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
- *
  * 		- `_actions_regnes`		: (affichage) alias et libellés des actions possibles sur un règne, `charger` et `vider`
  * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si le règne n`est pas chargé)
  * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`

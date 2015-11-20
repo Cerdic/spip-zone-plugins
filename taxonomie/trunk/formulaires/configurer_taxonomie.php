@@ -13,7 +13,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage ou données de configuration).
- *
  * 		- `_langues`			: (affichage) codes de langue et libellés des langues possibles.
  * 		- `langues_utilisees`	: (configuration) la liste des langues utilisées. Par défaut, le plugin
  * 								  propose la langue française.
