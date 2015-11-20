@@ -82,7 +82,7 @@ function spip_proprio_form_config()
     $config['lignes_longues'] = $config['lignes'] + 15;
     $config['afficher_barre'] = $spip_display != 4;
     $config['langue'] = $spip_lang;
-    $config['_browser_caret'] = $GLOBALS['browser_caret'];
+    $config['_browser_caret'] = isset($GLOBALS['browser_caret']) ? $GLOBALS['browser_caret'] : '';
 
     return $config;
 }
