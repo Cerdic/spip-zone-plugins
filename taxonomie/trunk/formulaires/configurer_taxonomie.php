@@ -12,15 +12,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * L'utilisateur doit cocher les langues qu'il souhaite utiliser parmi les langues possibles.
  *
  * @return array
- * 		Tableau des données à charger par le formulaire.
+ * 		Tableau des données à charger par le formulaire (affichage ou données de configuration).
  *
- * 		Pour l'affichage uniquement :
- *
- * 		- `_langues`			: codes de langue et libellés des langues possibles.
- *
- * 		Données de configuration :
- *
- * 		- `langues_utilisees`	: la liste des langues utilisées. Par défaut, le plugin
+ * 		- `_langues`			: (affichage) codes de langue et libellés des langues possibles.
+ * 		- `langues_utilisees`	: (configuration) la liste des langues utilisées. Par défaut, le plugin
  * 								  propose la langue française.
  */
 function formulaires_configurer_taxonomie_charger() {

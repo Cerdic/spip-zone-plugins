@@ -15,20 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses taxonomie_lister_rangs()
  *
  * @return array
- * 		Le tableau des données à charger par le formulaire.
+ * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
+ * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
  *
- * 		Pour l'affichage uniquement :
- *
- * 		- `_actions_regnes`		: alias et libellés des actions possibles sur un règne, `charger` et `vider`
- * 		- `_actions_disable`	: liste des actions désactivées (`vider` si le règne n`est pas chargé)
- * 		- `_action_defaut`		: action sélectionnée par défaut, `charger`
- * 		- `_regnes`				: noms scientifiques et libellés des règnes supportés par le plugin
- * 		- `_rangs`				: noms anglais et libellés des rangs du `phylum` au `genus`
- * 		- `_rang_defaut`		: nom anglais du rang sélectionné par défaut, `genus`
- * 		- `_langues_regne`		: codes de langue SPIP et libellés des langues utilisées (configuration)
- * 		- `_langue_defaut`		: la première langue de la liste des langues utilisées
- * 
- * 		Aucune donnée chargée n'est un champ de saisie, celle-ci sont systématiquement remises à zéro.
+ * 		- `_actions_regnes`		: (affichage) alias et libellés des actions possibles sur un règne, `charger` et `vider`
+ * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si le règne n`est pas chargé)
+ * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`
+ * 		- `_regnes`				: (affichage) noms scientifiques et libellés des règnes supportés par le plugin
+ * 		- `_rangs`				: (affichage) noms anglais et libellés des rangs du `phylum` au `genus`
+ * 		- `_rang_defaut`		: (affichage) nom anglais du rang sélectionné par défaut, `genus`
+ * 		- `_langues_regne`		: (affichage) codes de langue SPIP et libellés des langues utilisées (configuration)
+ * 		- `_langue_defaut`		: (affichage) la première langue de la liste des langues utilisées
  */
 function formulaires_charger_taxonomie_charger() {
 	$valeurs = array();
