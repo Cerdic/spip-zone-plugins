@@ -1,16 +1,16 @@
 <?php
 /**
- * RAPPELS : Obligations légales françaises concernant tout site internet
+ * RAPPELS : Obligations légales françaises concernant tout site internet.
  *
  * Tout site Internet, qu'il soit professionnel ou 'de loisirs', doit respecter un ensemble
  * d'obligations légales dictées par la LCEN (<i>Loi pour la confiance dans l'économie numérique</i>)
- * de juin 2004. Ces informations doivent être clairement accessibles à tout internaute utilisant 
+ * de juin 2004. Ces informations doivent être clairement accessibles à tout internaute utilisant
  * le site et l'éditeur du site, son propriétaire, a le devoir de contrôler son contenu, autant
  * en terme rédactionnel que sur les commentaires laissés par les internautes.
  *
  * Dans la suite de cette documentation, nous utiliserons les termes suivants :
  * <ul>
- *		<li>l'<b>éditeur du site</b> est son 'propriétaire', l'organisme ou la personne 
+ *		<li>l'<b>éditeur du site</b> est son 'propriétaire', l'organisme ou la personne
  * qui en est responsable, qui en édite le contenu</li>
  *		<li>le <b>créateur du site</b> est l'organisme, la personne ou l'agence qui l'a
  * construit, fabriqué, à la demande de l'éditeur (<i>il est parfois nécessaire de différencier
@@ -38,7 +38,7 @@
  * </ul>
  *
  * <b>Concernant les sites édités par une personne physique (<i>un particulier</i>)</b>
- * <br />Une page "mentions légales" doit apparaître clairement sur le site, indiquant 
+ * <br />Une page "mentions légales" doit apparaître clairement sur le site, indiquant
  * les <b>nom</b>, <b>prénom</b>, <b>adresse de domicile</b> et <b>contact téléphonique</b> du
  * propriétaire.
  * <br />Il est cependant possibe de conserver son anonymat et de se dispenser de mentionner
@@ -63,7 +63,7 @@
  * <br />Dans le cas où des informations personnelles des internautes sont enregistrées par le site,
  * comme par exemple une adresse courriel pour l'inscription à une newsletter, les conditions d'utilisation
  * de ces informations par l'éditeur du site devront être clairement énumérées, notamment leur divulgation
- * à des tiers. 
+ * à des tiers.
  *
  * Dans le cas d'une newsletter, il y a <b>obligation de proposer un moyen de désinscription à volonté</b>
  * à l'internaute (<i>un lien présent dans chaque mail est la procédure courante</i>).
@@ -71,11 +71,11 @@
  * <b>Mention concernant la CNIL</b>
  * <br />La CNIL (<i>Commission Nationale Informatique et Libertés</i>) est un organisme ayant pour mission
  * la protection de la vie privée et des libertés individuelles.
- * <br />Dès lors qu'une information est enregistrée par votre site, qu'elle soit directement ou 
- * indirectement nominative, une déclaration doit être faite à la CNIL, qui vous transmet en retour 
+ * <br />Dès lors qu'une information est enregistrée par votre site, qu'elle soit directement ou
+ * indirectement nominative, une déclaration doit être faite à la CNIL, qui vous transmet en retour
  * un numéro de récépissé, que vous avez obligation de mentionner.
  * <br />Pour rappel, la CNIL propose une procédure de déclaration en ligne (<i>cf. site ci-dessous</i>).
- * 
+ *
  * De plus, l'internaute doit pouvoir obtenir un accès, une rectification s'il y a lieu et même un effacement
  * de toutes les informations le concernant personnellement stockées par le site. Les mentions légales devront donc
  * préciser clairement le moyen mis à disposition de l'internaute pour effectuer une telle demande.
@@ -96,7 +96,7 @@
  *
  * <b>Fonctionnalités du plugin SPIP Propriétaire</b>
  *
- * Ce plugin vous propose un ensemble de formulaires et de modèles pour faciliter la mise en place 
+ * Ce plugin vous propose un ensemble de formulaires et de modèles pour faciliter la mise en place
  * des informations précitées. Il vous permet notament de définir les informations concernant l'éditeur,
  * le créateur et l'hébergeur du site et propose des modèles d'affichages de ces informations.
  *
@@ -104,24 +104,23 @@
  * dans le répertoire 'modeles/' du plugin. C'est ici que se construisent les textes légaux. Vous pouvez
  * modifier ou ajouter des textes dans le fichier de langue 'texteslegaux_XX.php' (<i>avec XX la langue
  * concernée</i>) dans le répertoire 'lang/' du plugin.
- * 
+ *
  * Pour finir, des modèles de squelettes d'en-tête et de pieds de page sont proposés, construits
  * à l'image de ceux de la distribution de SPIP, ajoutant les informations de copyright et un accès
  * aux mentions légales du site. Vous pouvez bien entendu les personnaliser : il s'agit des fichiers
  * inc-head.html' et 'inc-pied.html' présents dans le répertoire 'public/inc/' du plugin. Pour les utiliser,
  * placez les directement dans le répertoire 'public/'.
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 //ini_set('display_errors','1'); error_reporting(E_ALL);
 
 // ---------------------------------------
 // SETUP
 // ---------------------------------------
 
-/**
+/*
  * Nom du meta du plugin
  */
 define('_META_SPIP_PROPRIO', 'spip_proprietaire');
-
-
-?>
