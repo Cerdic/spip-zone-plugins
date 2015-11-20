@@ -15,9 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Tableau des données à charger par le formulaire.
  *
  * 		Pour l'affichage uniquement :
- * 		- `_langues`			: codes de langue et libellés des langues possibles
+ *
+ * 		- `_langues`			: codes de langue et libellés des langues possibles.
  *
  * 		Données de configuration :
+ * 
  * 		- `langues_utilisees`	: la liste des langues utilisées. Par défaut, le plugin
  * 								  propose la langue française.
  */
@@ -40,7 +42,7 @@ function formulaires_configurer_taxonomie_charger() {
  * Vérification des saisies : il est indispensable de choisir au moins une langue.
  *
  * @return array
- * 		Tableau des erreurs l'absence de langue ou tableau vide si aucune erreur.
+ * 		Tableau des erreurs d'absence de langue saisie ou tableau vide si aucune erreur.
  */
 function formulaires_configurer_taxonomie_verifier() {
 	$erreurs = array();
