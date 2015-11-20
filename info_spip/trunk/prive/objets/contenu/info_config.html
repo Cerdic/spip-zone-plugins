@@ -16,7 +16,7 @@
 
 [<div class="champ contenu_date_creation">
 	<div class="label visible"><:info_spip:date_creation_label:></div>
-	<div dir='#LANG_DIR' class='date_creation span'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
+	<div dir='#LANG_DIR' class='date_creation span'>(#VAL{'Y-m-d H:i:s'}|date{#EVAL{'_FILE_CONNECT'}|filemtime})</div>
 </div>]
 
 [<div class="champ contenu_fo_url">

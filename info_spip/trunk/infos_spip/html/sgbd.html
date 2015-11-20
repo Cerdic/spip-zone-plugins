@@ -11,7 +11,7 @@
 
     C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ce qu'il désire.
 
-]   [(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
+]   [(#SET{bdd,[(#EVAL{'_FILE_CONNECT'}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
     [(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})]
     [(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})]
 [(#REM)
