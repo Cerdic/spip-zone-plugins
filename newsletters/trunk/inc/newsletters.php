@@ -74,7 +74,7 @@ function newsletters_html2text($html){
 	// nettoyer les balises de mise en page html
 	$html = preg_replace(",</(td|th)>,Uims","<br/>",$html);
 	$html = preg_replace(",</(table)>,Uims","@@@hr@@@",$html);
-	$html = preg_replace(",</?(html|body|table|td|th|tbody|thead|center|article|section|span)[^>]*>,Uims","\n\n",$html);
+	$html = preg_replace(",</?(!doctype|html|body|table|td|th|tbody|thead|center|article|section|span)[^>]*>,Uims","\n\n",$html);
 	$html = preg_replace(",<!--.*-->,Uims","\n",$html);
 	$html = preg_replace(",<(/?)(div|tr|caption)([^>]*>),Uims","<\\1p>",$html);
 	$html = preg_replace(",(<p>\s*)+,ims","<p>",$html);
