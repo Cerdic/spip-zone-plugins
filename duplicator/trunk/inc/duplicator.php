@@ -58,6 +58,19 @@ function dupliquer_article($id_article,$rubrique){
 	dupliquer_logo($id_article_ori,$id_article,'article',false);
 	dupliquer_logo($id_article_ori,$id_article,'article',true);
 	
+	//On verifie qu'on a bien associé les documents
+	$n = 0;
+    if($docs = sql_select("*", "spip_documents_liens", "objet = 'article' AND id_objet = ".intval($id_article_ori))){ //Documents liés à l'article d'origine
+		while ($doc = sql_fetch($docs)) {
+			$test = sql_select("id_document", "spip_documents_liens", "id_document = ".$doc['id_document']." AND objet = 'article' AND id_objet = ".intval($id_article));//Document lié à l'article dupliqué (ou pas)
+			$n = sql_count($test);
+			if($n == 0){
+				//La liaison a échoué pour une raison inconnue. On la refait.
+				$id_document = sql_insertq('spip_documents_liens', array('id_document'=> $doc['id_document'], 'id_objet' => $id_article, 'objet' => 'article', 'vu' => $doc['vu']));
+			}
+		}
+	}	
+	
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
 	/////////////////////////////////////
@@ -133,6 +146,19 @@ function dupliquer_rubrique($id_rubrique,$cible=null,$titre=' (copie)',$articles
 	$id_nouvelle_rubrique = rubrique_inserer($cible);
 	rubrique_modifier($id_nouvelle_rubrique,$infos_de_la_rubrique);
 
+	
+	//On verifie qu'on a bien associé les documents
+	$n = 0;
+    if($docs = sql_select("*", "spip_documents_liens", "objet = 'rubrique' AND id_objet = ".intval($id_rubrique))){ //Documents liés à la rubrique d'origine
+		while ($doc = sql_fetch($docs)) {
+			$test = sql_select("id_document", "spip_documents_liens", "id_document = ".$doc['id_document']." AND objet = 'rubrique' AND id_objet = ".intval($id_nouvelle_rubrique));//Document lié à la rubrique dupliquée (ou pas)
+			$n = sql_count($test);
+			if($n == 0){
+				//La liaison a échoué pour une raison inconnue. On la refait.
+				$id_document = sql_insertq('spip_documents_liens', array('id_document'=> $doc['id_document'], 'id_objet' => $id_nouvelle_rubrique, 'objet' => 'rubrique', 'vu' => $doc['vu']));
+			}
+		}
+	}	
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
 	/////////////////////////////////////
