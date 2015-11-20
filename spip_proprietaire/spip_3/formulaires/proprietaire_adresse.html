@@ -8,7 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	<p class='explication'><:spipproprio:adresse_comment:></p>
-	<ul>
+	<ul class="editer-groupe">
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{adresse_rue}|oui)erreur]">
 		    <label for="adresse_rue"><:spipproprio:rue_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_rue})</span>

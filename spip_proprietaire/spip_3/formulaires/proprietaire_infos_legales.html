@@ -8,7 +8,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	<p class='explication'><:spipproprio:legal_comment:></p>
-	<ul>
+	<ul class="editer-groupe">
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{capital_social}|oui)erreur]">
 		    <label for="capital_social"><:spipproprio:capital_social_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{legal_capital})</span>

@@ -7,7 +7,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
+	<ul class="editer-groupe">
 		<li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 	    	<label for="nom"><:spipproprio:nom_label:>&nbsp;:<span style='color: red;'>*</span></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>

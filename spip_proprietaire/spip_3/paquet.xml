@@ -3,17 +3,17 @@
 	categorie="communication"
 	version="1.70.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
 	documentation="http://contrib.spip.net/?article3516"
->	
+>
 
 	<nom>SPIP Mentions L&#233;gales</nom>
 	<!-- Mentions Légales, Conditions d'Utilisation et Copyright automatiques -->
 
 	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
-	<copyright>2009-2012</copyright>
+	<copyright>2009-2015</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
