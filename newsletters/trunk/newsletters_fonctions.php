@@ -196,8 +196,8 @@ function newsletter_fixer_image($src,$id_newsletter){
 	// recuperer l'image par copie directe si possible
 	if (strncmp($src,$GLOBALS['meta']['adresse_site'].'/',$l=strlen($GLOBALS['meta']['adresse_site'].'/'))==0)
 		$src = _DIR_RACINE . substr($src,$l);
-
 	$url = parse_url($src);
+
 	// hack : mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
 	// on ne fait plus rien dans ce cas
 	if ($url['fragment']=='fixed') return false;
@@ -207,8 +207,9 @@ function newsletter_fixer_image($src,$id_newsletter){
 
 	if (!$url['scheme']
 		AND !$url['host']
-	  AND file_exists($src)){
-		deplacer_fichier_upload($src, $dest, false);
+	  AND file_exists($url['path'])){
+		// on copie le fichier
+		deplacer_fichier_upload($url['path'], $dest, false);
 	}
 	else {
 		include_spip("inc/distant");
@@ -218,7 +219,7 @@ function newsletter_fixer_image($src,$id_newsletter){
 	if (!file_exists($dest))
 		return false;
 
-	return "$dest#fixed";
+	return timestamp($dest)."#fixed";
 }
 
 /**
