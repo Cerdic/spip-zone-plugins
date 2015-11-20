@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_langues`			: codes de langue et libellés des langues possibles.
  *
  * 		Données de configuration :
- * 
+ *
  * 		- `langues_utilisees`	: la liste des langues utilisées. Par défaut, le plugin
  * 								  propose la langue française.
  */

@@ -16,7 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @return array
  * 		Le tableau des données à charger par le formulaire.
+ *
  * 		Pour l'affichage uniquement :
+ *
  * 		- `_actions_regnes`		: alias et libellés des actions possibles sur un règne, `charger` et `vider`
  * 		- `_actions_disable`	: liste des actions désactivées (`vider` si le règne n`est pas chargé)
  * 		- `_action_defaut`		: action sélectionnée par défaut, `charger`
@@ -25,6 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_rang_defaut`		: nom anglais du rang sélectionné par défaut, `genus`
  * 		- `_langues_regne`		: codes de langue SPIP et libellés des langues utilisées (configuration)
  * 		- `_langue_defaut`		: la première langue de la liste des langues utilisées
+ * 
  * 		Aucune donnée chargée n'est un champ de saisie, celle-ci sont systématiquement remises à zéro.
  */
 function formulaires_charger_taxonomie_charger() {
