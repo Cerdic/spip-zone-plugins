@@ -76,3 +76,28 @@ function chercher_label($nom, $champs_extras = '') {
   return $label;
 
 }
+
+/**
+ * Cherche les infos d'un client
+ *
+ * @param  string $email L'email du client.
+ * @param  string $champ Un champ spécifique.
+ *
+ * @return mixed La valeur du champ ou un tableau avec tous les champs.
+ */
+function infos_client($email, $champ='') {
+  // Si on trouve un auteur spip on le prend, sinon on cherche dans les réservations
+  if (!$client = sql_fetsel('*','spip_auteurs','email=' . sql_quote($email)))
+    !$client  = sql_fetsel('*','spip_reservations','email=' . sql_quote($email),'','id_reservation DESC');
+  
+  // Si on a des informations on retrourne la valeur d'un champ
+  // ou le tableau des infos selon ce qui es demandé.
+  // sinon on ne retourne rien.
+  if ($client) {
+    if ($champ AND isset($client[$champ])) $infos= $client[$champ];
+    else $infos= $client;
+  }
+  else $infos = '';
+  
+  return $infos;
+}
