@@ -1,7 +1,7 @@
 <paquet
     prefix="babbi"
     categorie="navigation"
-    version="3.0.1"
+    version="3.0.2"
     etat="stable"
     compatibilite="[1.9.2;3.0.*]"
     logo="prive/themes/spip/images/logo_menu_50.png"
