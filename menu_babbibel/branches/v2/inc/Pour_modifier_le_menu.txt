@@ -1,0 +1,13 @@
+Les fichiers a modifier se trouve dans le dossier 
+-inc/norm pour les sites SANS gestion du multilinguisme
+-inc/multi pour les sites AVEC gestion du multilinguisme
+
+Dans ces 2 dossiers chaque fichier correspond a 1 type de menu :
+- inc_menu.html <=> Secteur>>>sous-rubriques
+- inc_menu_articles.html <=> Secteur>>>Articles
+- inc_menu_laur.html <=> Secteur>>>sous-rubriques + articles
+
+- inc_menu_mot_cle.html <=> Rubriques par mot-cle>>>sous-rubriques
+- inc_menu_mot_cle2.html <=> Rubriques par mot-cle>>>Articles
+- inc_menu_mot_cle3.html <=> Rubriques par mot-cle>>>sous-rubriques + articles
+
