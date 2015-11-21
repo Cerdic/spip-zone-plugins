@@ -8,13 +8,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_TAXONOMIE_REGNE_ANIMAL'))
+	/**
+	 * Nom latin du règne animal (animaux).
+	 */
 	define('_TAXONOMIE_REGNE_ANIMAL', 'animalia');
 if (!defined('_TAXONOMIE_REGNE_VEGETAL'))
+	/**
+	 * Nom latin du règne végétal (plantes).
+	 */
 	define('_TAXONOMIE_REGNE_VEGETAL', 'plantae');
 if (!defined('_TAXONOMIE_REGNE_FONGIQUE'))
+	/**
+	 * Nom latin du règne fongique (champignons).
+	 */
 	define('_TAXONOMIE_REGNE_FONGIQUE', 'fungi');
 
 if (!defined('_TAXONOMIE_REGNES'))
+	/**
+	 * Liste des règnes supportés par le plugin (concanétation des noms séparés par le signe deux-points).
+	 */
 	define('_TAXONOMIE_REGNES',
 		implode(':', array(
 			_TAXONOMIE_REGNE_ANIMAL,
@@ -23,40 +35,84 @@ if (!defined('_TAXONOMIE_REGNES'))
 		)));
 
 if (!defined('_TAXONOMIE_RANG_REGNE'))
+	/**
+	 * Nom anglais du rang `règne`.
+	 */
 	define('_TAXONOMIE_RANG_REGNE', 'kingdom');
 // Suivant le règne l'embranchement se nomme phylum (animalia) ou division (fungi, plantae).
 // Néanmoins, le terme phylum est souvent accepté pour l'ensemble des règnes
 if (!defined('_TAXONOMIE_RANG_PHYLUM'))
+	/**
+	 * Nom anglais du rang `phylum` ou `embranchement`.
+	 * Ce nom est utilisé pour le règne `animalia`
+	 */
 	define('_TAXONOMIE_RANG_PHYLUM', 'phylum');
 if (!defined('_TAXONOMIE_RANG_DIVISION'))
+	/**
+	 * Nom anglais du rang `division`.
+	 * Ce nom est utilisé pour le règne `fungi` ou `plantae` et correspond au `phylum` pour le règne animal.
+	 */
 	define('_TAXONOMIE_RANG_DIVISION', 'division');
 if (!defined('_TAXONOMIE_RANG_CLASSE'))
+	/**
+	 * Nom anglais du rang `classe`.
+	 */
 	define('_TAXONOMIE_RANG_CLASSE', 'class');
 if (!defined('_TAXONOMIE_RANG_ORDRE'))
+	/**
+	 * Nom anglais du rang `ordre`.
+	 */
 	define('_TAXONOMIE_RANG_ORDRE', 'order');
 if (!defined('_TAXONOMIE_RANG_FAMILLE'))
+	/**
+	 * Nom anglais du rang `famille`.
+	 */
 	define('_TAXONOMIE_RANG_FAMILLE', 'family');
 if (!defined('_TAXONOMIE_RANG_GENRE'))
+	/**
+	 * Nom anglais du rang `genre`.
+	 */
 	define('_TAXONOMIE_RANG_GENRE', 'genus');
 if (!defined('_TAXONOMIE_RANG_ESPECE'))
+	/**
+	 * Nom anglais du rang `espèce`.
+	 */
 	define('_TAXONOMIE_RANG_ESPECE', 'species');
 if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE'))
+	/**
+	 * Nom anglais du rang intercalaire `sous-espèce`.
+	 */
 	define('_TAXONOMIE_RANG_SOUS_ESPECE', 'subspecies');
 if (!defined('_TAXONOMIE_RANG_VARIETE'))
+	/**
+	 * Nom anglais du rang `variété`.
+	 */
 	define('_TAXONOMIE_RANG_VARIETE', 'variety');
 if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE'))
+	/**
+	 * Nom anglais du rang intercalaire `sous-variété`.
+	 */
 	define('_TAXONOMIE_RANG_SOUS_VARIETE', 'subvariety');
 if (!defined('_TAXONOMIE_RANG_RACE'))
+	/**
+	 * Nom anglais du rang `race`.
+	 */
 	define('_TAXONOMIE_RANG_RACE', 'race');
 if (!defined('_TAXONOMIE_RANG_FORME'))
+	/**
+	 * Nom anglais du rang `forme`.
+	 */
 	define('_TAXONOMIE_RANG_FORME', 'forma');
 if (!defined('_TAXONOMIE_RANG_SOUS_FORME'))
+	/**
+	 * Nom anglais du rang intercalaire `sous-règne`.
+	 */
 	define('_TAXONOMIE_RANG_SOUS_FORME', 'subforma');
 
 //
 if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
 	/**
-	 * Liste des rangs utilisés du règne au genre compris.
+	 * Liste des rangs utilisés du règne au genre compris (concanétation des noms séparés par le signe deux-points).
 	 * On utilise par défaut au niveau 2 le terme phylum du règne animal (division pour les autres règnes)
 	 */
 	define('_TAXONOMIE_RANGS_PARENTS_ESPECE',
@@ -70,7 +126,7 @@ if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
 		)));
 if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 	/**
-	 * Liste des rangs utilisés de l'espèce à la sous-forme
+	 * Liste des rangs utilisés de l'espèce à la sous-forme (concanétation des noms séparés par le signe deux-points).
 	 */
 	define('_TAXONOMIE_RANGS_ESPECE_ET_FILS',
 		implode(':', array(
@@ -84,7 +140,7 @@ if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 		)));
 if (!defined('_TAXONOMIE_RANGS'))
 	/**
-	 * Liste complète des rangs utilisés par le plugin
+	 * Liste complète des rangs utilisés par le plugin (concanétation des noms séparés par le signe deux-points).
 	 */
 	define('_TAXONOMIE_RANGS',
 		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' .	_TAXONOMIE_RANGS_ESPECE_ET_FILS);
