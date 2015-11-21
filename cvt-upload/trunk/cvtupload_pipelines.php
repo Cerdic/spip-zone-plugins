@@ -313,7 +313,7 @@ function cvtupload_nettoyer_repertoire($repertoire, $age_max=_CVTUPLOAD_AGE_MAX,
 			if (!in_array($fichier, array('.', '..', '.ok'))) {
 				$chemin_fichier = $repertoire.$fichier;
 				
-				if (is_file($fichier) and !jeune_fichier($chemin_fichier, $age_max)) {
+				if (is_file($chemin_fichier) and !jeune_fichier($chemin_fichier, $age_max)) {
 					supprimer_fichier($chemin_fichier);
 				}
 				else {
