@@ -218,7 +218,9 @@ function massicoter_fichier ($fichier, $parametres) {
  *
  * @return string : Un fichier massicoté
  */
-function massicoter_document ($fichier) {
+function massicoter_document ($fichier=FALSE) {
+
+    if ( ! $fichier) return;
 
     include_spip('base/abstract_sql');
     include_spip('inc/documents');
@@ -289,8 +291,12 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
         $lien = preg_replace('#(<a.*?>)<img.*$#', '$1', $logo);
     }
 
+    $fichier = extraire_attribut($logo, 'src');
+    /* On se débarasse d'un éventuel query string */
+    $fichier = preg_replace('#\?[0-9]+#', '', $fichier);
+
     list($largeur_logo, $hauteur_logo) =
-        getimagesize(extraire_attribut($logo, 'src'));
+        getimagesize($fichier);
 
     $balise_img = charger_filtre('balise_img');
 
