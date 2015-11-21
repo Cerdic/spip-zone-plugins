@@ -82,6 +82,7 @@ function chercher_label($nom, $champs_extras = '') {
  *
  * @param  string $email L'email du client.
  * @param  string $champ Un champ spécifique.
+ * @param  bin $retour_vide TRUE/FALSE.
  *
  * @return mixed La valeur du champ ou un tableau avec tous les champs.
  */
