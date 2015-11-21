@@ -16,7 +16,10 @@
 ]
 
 [(#REM) Initialisation de la valeur ]
-#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+[(#ENV{class}|=={'autodater'}|oui)
+	#SET{autodater,#VAL{Y-m-d H:i:s}|date}
+]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#GET{autodater}}}}}
 
 [(#REM) Regex de date SQL ]
 #SET{date_sql,"[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?"}
