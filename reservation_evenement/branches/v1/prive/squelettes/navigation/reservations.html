@@ -7,11 +7,12 @@
   <h3><:reservation_evenement:reservation_evenement_titre:></h3> 
   ,'simple personnel infos'})]  
 
-   <BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
+  <BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
     #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
-   [(#ENV{id_evenement}|oui)#SET{titre,#TITRE}]
-   </BOUCLE_evenements>
-          [<h4>(#GET{titre}|sinon{<:reservation:titre_reservations:>})</h4>]      
+    [(#ENV{id_evenement}|oui)#SET{soustitre,#TITRE}]
+  </BOUCLE_evenements>
+  [(#ENV{soustitre}|oui)#SET{soustitre,#ENV{soustitre}}]
+  [<h4>(#GET{soustitre}|sinon{<:reservation:titre_reservations:>})</h4>]      
   #SET{reservations,#ARRAY} 
   #SET{statuts,#LISTE{attente,attente_paiement,accepte}} 
   #SET{args,#ARRAY{id_evenement,#ENV{id_evenement},id_article,#ENV{id_article},id_rubrique,#ENV{id_rubrique},statut2,#GET{statuts}|implode{-}}}
@@ -42,10 +43,17 @@
           </ul>
       <li>
         [(#ENV{exec}|in_array{#LISTE{clients,client}}|non)#SET{a, </a>}
-                  <a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] &nbsp;<:reservation:titre_clients:>#GET{a}
+                  <a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] <:reservation:titre_clients:>#GET{a}
       </li>
   </B_reservations>
-      <li><a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">[(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] &nbsp;<:spip:icone_configuration_site:></a>   </li>
+      [(#REM) permet aux plugins d'insérér dun contenu au menu]
+      [(#PIPELINE{reservation_evenement_menu_admin,
+        [(#ARRAY{
+          args,[(#ARRAY{exec,#ENV{exec}})]
+        })]})]
+      <li>
+         [(#ENV{exec}|=={configurer_reservation_evenement}|non)#SET{a, </a>}
+        <a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">][(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] <:spip:icone_configuration_site:>#GET{a}</li>
   </ul>
 #BOITE_FERMER     
 

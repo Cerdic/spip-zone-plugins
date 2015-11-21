@@ -1,7 +1,7 @@
 <paquet
   prefix="reservation_evenement"
   categorie="date"
-  version="1.21.5"
+  version="1.21.6"
   etat="test"
   compatibilite="[3.0.16;3.1.*]"
   logo="prive/themes/spip/images/reservation_evenement-64.png"
@@ -26,6 +26,7 @@
   <!-- Déclaration de pipelines -->
   <pipeline nom="reservation_compteur_action" action='' />
   <pipeline nom="reservation_evenement_donnees_details" action='' />
+  <pipeline nom="reservation_evenement_menu_admin" action='' />
 
   <!-- Apelle les pipelines -->
   <pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" />
