@@ -1,11 +1,7 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin Taxonomie
+ * Fichier gérant l'installation et la désinstallation du plugin Taxonomie
  *
- * @plugin     Taxonomie
- * @copyright  2014
- * @author     Eric
- * @licence    GNU/GPL
  * @package    SPIP\TAXONOMIE\ADMINISTRATION
  */
 
@@ -14,13 +10,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Fonction d'installation et de mise à jour du plugin.
- * Le schéma du plugin est composé d'une table spip_taxons et d'une
- * configuration.
+ * Le schéma du plugin est composé d'une table `spip_taxons` et d'une configuration.
  *
- * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
- * @param string $version_cible
- *     Version du schéma de données (déclaré dans paquet.xml)
+ * @param string	$nom_meta_base_version
+ * 		Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string	$version_cible
+ * 		Version du schéma de données (déclaré dans paquet.xml)
+ *
  * @return void
 **/
 function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
@@ -41,8 +37,9 @@ function taxonomie_upgrade($nom_meta_base_version, $version_cible) {
 /**
  * Fonction de désinstallation du plugin.
  *
- * @param string $nom_meta_base_version
- *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string	$nom_meta_base_version
+ * 		Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP.
+ *
  * @return void
 **/
 function taxonomie_vider_tables($nom_meta_base_version) {

@@ -1,25 +1,23 @@
 <?php
 /**
- * Déclarations relatives à la base de données
+ * Déclarations relatives à la base de données.
  *
- * @plugin     Taxonomie
- * @copyright  2014
- * @author     Eric
- * @licence    GNU/GPL
- * @package    SPIP\TAXONOMIE\ADMINISTRATION
+ * @package SPIP\TAXONOMIE\ADMINISTRATION
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Déclaration des alias de tables et filtres automatiques de champs
+ * Déclaration des alias de tables et des filtres automatiques de champs.
  *
  * @pipeline declarer_tables_interfaces
+ *
  * @param array $interfaces
- *     Déclarations d'interface pour le compilateur
+ * 		Déclarations d'interface pour le compilateur.
+ *
  * @return array
- *     Déclarations d'interface pour le compilateur
+ * 		Déclarations d'interface pour le compilateur mises à jour.
  */
 function taxonomie_declarer_tables_interfaces($interfaces) {
 
@@ -30,28 +28,31 @@ function taxonomie_declarer_tables_interfaces($interfaces) {
 
 
 /**
- * Déclaration des objets éditoriaux
+ * Déclaration des objets éditoriaux du plugin. Le plugin ajoute l'objet taxon au travers de la
+ * seule table `spip_taxons`.
+ *
+ * L'objet taxon est défini comme une arborescence de taxons du règne au genre.
+ * Les taxons à partir de l'espèce ne font pas partie de cette table. Les champs principaux sont les
+ * suivants :
+ * 		- `nom_scientifique` est le nom en latin. Il est unique pour un rang taxonomique donné.
+ * 		- `rang` taxonomique est une valeur parmi `kingdom`, `phylum`, `class`, `order`, `family` et `genus`.
+ * 		- `nom_commun` est le nom vulgaire, si possible normalisé par une commission officielle. Il peut coincider ou pas
+ * 		avec le nom vernaculaire.
+ * 		- `auteur` est une information composée d'un ou plusieurs noms complétés par une date (ex : Linneus, 1798).
+ * 		- `tsn` est l'identifiant numérique unique du taxon dans la base taxonomique ITIS.
+ * 		- `tsn_parent` permet de créer l'arborescence taxonomique du règne conformément à l'organisation de la base ITIS.
  *
  * @pipeline declarer_tables_objets_sql
+ *
  * @param array $tables
- *     Description des tables
+ * 		Description des tables de la base.
+ *
  * @return array
- *     Description complétée des tables
+ * 		Description des tables de la base complétée par celles du plugin.
  */
 function taxonomie_declarer_tables_objets_sql($tables) {
 
 	/**
-	 * Déclaration de l'objet taxon utilisé pour matérialiser une arborescence de taxons
-	 * du règne au genre. Les taxons à partir de l'espèce ne font pas partie de cette
-	 * table.
-	 *
-	 * Le nom_scientifique est le nom en latin. Il est unique pour un rang taxonomique donné.
-	 * Le rang taxonomique est une valeur parmi règne, phylum, classe, ordre, famille et genre.
-	 * Le nom_commun est le nom vulgaire, si possible normalisé par une commission officielle. Il peut coincider ou pas
-	 * avec le nom vernaculaire.
-	 * L'auteur est une information composée d'un ou plusieurs noms complétés par une date (Linneus, 1798).
-	 * tsn est l'identifiant numérique unique du taxon dans la base taxonomique ITIS.
-	 * tsn_parent permet de créer l'arborescence taxonomique du règne conformément à l'organisation de la base ITIS
 	 */
 	$tables['spip_taxons'] = array(
 		'type' => 'taxon',

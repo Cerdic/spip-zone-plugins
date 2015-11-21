@@ -1,6 +1,6 @@
 <?php
 /**
- * CRON de mise à jour des taxons en fonction des fichiers de chaque règne embarqués.
+ * CRON de mise à jour des taxons en fonction des fichiers de chaque règne embarqué.
  *
  * @package    SPIP\TAXONOMIE\SERVICES\ITIS
  */

@@ -3,7 +3,6 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service de taxonomie ITIS.
  *
  * @package SPIP\TAXONOMIE\SERVICES\ITIS
- * @todo phpdoc : décider sur les globales
  * @todo phpdoc : exemples
  */
 
