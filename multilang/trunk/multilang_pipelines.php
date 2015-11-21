@@ -57,7 +57,7 @@ function multilang_insert_head($flux){
 		include_spip('inc/config');
 	$config = lire_config('multilang',array());
 
-	if($config['multilang_public'] == 'on'){
+	if(isset($config['multilang_public']) AND ($config['multilang_public'] == 'on')){
 		$flux .= multilang_insert_head_css(''); // au cas ou il n'est pas implemente
 		$flux .= multilang_inserer_head($config);
 	}
