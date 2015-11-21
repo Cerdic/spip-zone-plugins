@@ -23,6 +23,13 @@
 <category>1</category>
 </item>
 
+<item>
+  <title>Partage par email (mailto)</title>
+  <link>mailto:?subject=%t&body=%u</link>
+  <author>mail</author>
+  <category>1</category>
+</item>
+
 <!-- B -->
 <item>
 <title>BarraPunto</title>
