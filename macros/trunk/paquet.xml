@@ -1,9 +1,9 @@
 <paquet
 	prefix="macros"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
-	compatibilite="[3.0.11;3.0.*]"
+	compatibilite="[3.0.11;3.1.*]"
 	documentation="https://github.com/bystrano/macros"
 	logo="prive/themes/images/macros-24.gif"
 >
