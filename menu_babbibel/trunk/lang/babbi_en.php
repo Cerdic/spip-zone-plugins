@@ -8,15 +8,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 
 'aleatoire' => 'Random (<i>to make crazy your visitors</i>)',
-'article' => 'article(s)', 
+'article' => 'article(s)',
 
 // B
 
+'babbi_description' => 'This plugin provides a horizontal drop down menu based on jQuery library, configurable and without depth limitation. The code is very simple, the menu is easy to customize.',
+'babbi_slogan' => 'Horizontal drop-down menu in jQuery',
 
 // C
 
-
-'cle_article' => 'Section by keyword >>> Articles', 
+'choix_oui' => 'Yes',
+'cle_article' => 'Section by keyword >>> Articles',
 'cle_sousrub' => 'Section by keyword >>> under sections',
 'cle_duo' => 'Section by keyword >>> under sections + articles',
 'cocher_accueil' => 'Check to delete &quot;<b>Home</b>&quot; item',
@@ -30,9 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_inverse' => 'Check to reverse the classification of articles',
 'explication_nbarticles' => 'Enter the maximum number of items to display (Leave blank to view all)',
 
-
 // F
-
 
 
 // I
@@ -40,55 +40,52 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inverse' => 'Reverse the sort ?',
 
 // L
+
 'label_accueil' => 'Display &quot;<b>Home</b>&quot;',
 'label_classement' => 'Classification of items displayed',
 'label_explication' => 'Documentation and test pages links',
 'label_type' => 'Type of menu',
 'lien_doc' => 'See documentation on spip-contrib.net',
 
-// M 
+// M
+
 'message_erreur' => 'Your input has not been registered because it contains errors !',
 
 // N
 
 'nb_article' => 'Maximum number of items to display',
 
-
 // O
 
 
-
-//P
+// P
 
 'par_alpha' => 'Alphabetically',
 'par_date' => 'By date',
 'par_maj' => 'By date of update',
 'par_popu' => 'By popularity',
 
-//Q
+// Q
 
 'que_des_nombres_ici' => 'Enter a number equal or greater than zero',
 'question_nbarticles' => 'Most items in place',
 
-//R
-
+// R
 
 
 // S
+
 'selection_menu' => 'Select the type of menu',
 'secteur_sousrub' => 'Sections >>> Under sections',
 'secteur_article' => 'Sections >>> Articles',
 'secteur_duo' => 'Sections >>> Under sections + articles',
 
-
-
-//T
+// T
 
 'titre_menu' => 'Configuration menu babbibel',
 'titre_menu_babbibel' => 'Menu babbibel',
 'test_multi' => 'Test the multilingual menu by sector',
 'test_norm' => 'Test the menu',
-
 
 // Z
 

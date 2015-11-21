@@ -29,7 +29,7 @@ function formulaires_configurer_babbi_verifier_dist()
         $erreurs['nb_articles'] = _T('babbi:que_des_nombres_ici');
     }
 
-    if (count($erreurs)) {
+    if (count($erreurs) > 0) {
         $erreurs['message_erreur'] = _T('babbi:message_erreur');
     }
 
