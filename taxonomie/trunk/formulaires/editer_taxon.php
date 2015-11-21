@@ -2,10 +2,6 @@
 /**
  * Gestion du formulaire d'édition de l'objet taxon
  *
- * @plugin     Taxon
- * @copyright  2014
- * @author     _Eric_
- * @licence    GNU/GPL
  * @package    SPIP\TAXONOMIE\OBJET
  */
 
@@ -29,6 +25,7 @@ include_spip('inc/editer');
  *     Valeurs de la ligne SQL du taxon, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ *
  * @return string
  *     Hash du formulaire
  */
@@ -82,6 +79,7 @@ function formulaires_editer_taxon_charger_dist($id_taxon='new', $retour='', $lie
  *     Valeurs de la ligne SQL du taxon, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ *
  * @return array
  *     Tableau des erreurs
  */
@@ -110,6 +108,7 @@ function formulaires_editer_taxon_verifier_dist($id_taxon='new', $retour='', $li
  *     Valeurs de la ligne SQL du taxon, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ *
  * @return array
  *     Retours des traitements
  */

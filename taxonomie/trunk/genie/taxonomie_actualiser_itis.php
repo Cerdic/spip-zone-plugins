@@ -8,9 +8,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * @param $last
+ * Ce CRON permet de vérifier si les fichiers ITIS ayant servis à créer la base de taxons initiale
+ * ont été modifiés et si oui de déclencher une mise à niveau des taxons.
+ *
+ * Etant donné que les sha des fichiers sont enregistrés dans la meta de chaque règne, la fonction
+ * compare ces valeurs aux sha des fichiers embarqués dans le plugin. Les fichiers des taxons de chaque règne
+ * ainsi que les fichiers de traductions sont pris en compte.
+ * Si un fichier a changé on recharge le ou les règnes concernés.
+ *
+ * @uses itis_review_sha()
+ * @uses taxonomie_regne_existe()
+ * @uses taxonomie_charger_regne()
+ *
+ * @param int	$last
+ * 		Timestamp de la date de dernier appel de la tâche.
  *
  * @return int
+ * 		Timestamp de la date du prochain appel de la tâche.
  */
 function genie_taxonomie_actualiser_itis_dist($last) {
 

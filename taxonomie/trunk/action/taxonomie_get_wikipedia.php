@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'action `inserer_wikipedia` qui permet d'appeler l'api Wikipedia pour remplir
+ * Ce fichier contient l'action `taxonomie_get_wikipedia` qui permet d'appeler l'api Wikipedia pour remplir
  * un champ de taxon.
  *
  * @package SPIP\TAXONOMIE\SERVICES\WIKIPEDIA
@@ -9,15 +9,21 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Cette action permet au site client de retirer un serveur donné de sa liste des serveurs
- * qu'il est autorisé à interroger (variable de configuration).
+ * Cette action permet à un utilisateur d'insérer dans le champ d'un taxon (principalement le descriptif)
+ * le texte d'une section de page Wikipedia.
  *
- * Cette action est réservée aux webmestres. Elle nécessite un seul argument, le nom du serveur
- * à retirer.
+ * Cette action est réservée aux utilisateurs ayant le droit de modifier un taxon.
+ * Elle nécessite plusieurs arguments, à savoir, l'id du taxon, son nom scientifique, le code de langue SPIP,
+ * le champ de taxon concerné par l'insertion et la section de page Wikipedia à insérer ou `*`
+ * si toute la page est requise.
+ *
+ * @uses wikipedia_spipcode2language()
+ * @uses wikipedia_get()
+ * @uses taxon_merger_traductions()
  *
  * @return void
  */
-function action_inserer_wikipedia_dist(){
+function action_taxonomie_get_wikipedia_dist(){
 
 	// Securisation et autorisation car c'est une action auteur:
 	// -> argument attendu est l'alias du serveur
