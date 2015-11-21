@@ -45,6 +45,11 @@
                   <a href="#URL_ECRIRE{clients}" class="cellule-h">][(#CHEMIN_IMAGE{clients-16.png}|balise_img)] &nbsp;<:reservation:titre_clients:>#GET{a}
       </li>
   </B_reservations>
+      [(#REM) permet aux plugins d'insérér dun contenu au menu]
+      [(#PIPELINE{reservation_evenement_menu_admin,
+        [(#ARRAY{
+          args,[(#ARRAY{exec,#ENV{exec}})]
+        })]})]
       <li><a href="#URL_ECRIRE{configurer_reservation_evenement}" class="cellule-h">[(#CHEMIN_IMAGE{cfg-16.png}|balise_img)] &nbsp;<:spip:icone_configuration_site:></a>   </li>
   </ul>
 #BOITE_FERMER     
