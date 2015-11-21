@@ -53,11 +53,13 @@ function action_taxonomie_get_wikipedia_dist(){
 			$langue = wikipedia_spipcode2language($spip_langue); // TODO : attention à gérer la langue en amont
 			$information = wikipedia_get($taxon['tsn'], $nom_scientifique, $langue, $section);
 			if ($information['texte']) {
-				// Conversion du texte mediawiki vers SPIP et mise en format multi
-				include_spip('convertisseur_fonctions');
+				// Si le plugin Convertisseur est actif, conversion du texte mediawiki vers SPIP.
+				// Mise en format multi systématique.
+				include_spip('inc/filtres');
+				$convertir = chercher_filtre('convertisseur_texte_spip');
 				$texte_converti = '<multi>'
 					. '[' . $spip_langue .']'
-					. convertisseur_texte_spip($information['texte'], 'MediaWiki_SPIP')
+					. ($convertir ? $convertir($information['texte'], 'MediaWiki_SPIP') : $information['texte'])
 					. '</multi>';
 
 				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
