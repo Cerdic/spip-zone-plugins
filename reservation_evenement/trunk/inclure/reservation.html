@@ -53,7 +53,7 @@
          [(#GET{total}|floatval|>{0.00}|oui)<tfoot>
             <tr class="total_ttc">
                <td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ttc:>,<:reservation:total:>})]</td>
-               <td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</td>
+               <td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}})]</td>
                <td> </td>
             </tr>
          </tfoot>]
