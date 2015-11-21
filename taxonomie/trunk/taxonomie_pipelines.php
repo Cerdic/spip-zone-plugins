@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * afin que les modifications manuelles du taxon soient préservées lors d'un prochain
  * rechargement du règne.
  *
+ * @pipeline pre_edition
  * @package SPIP\TAXONOMIE\OBJET
  *
  * @param array		$flux
