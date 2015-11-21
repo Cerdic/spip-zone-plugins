@@ -16,6 +16,7 @@
 ]
 
 [(#REM) Initialisation de la valeur ]
+#SET{autodater,''}
 [(#ENV{class}|=={'autodater'}|oui)
 	#SET{autodater,#VAL{Y-m-d H:i:s}|date}
 ]
