@@ -85,7 +85,7 @@ function chercher_label($nom, $champs_extras = '') {
  *
  * @return mixed La valeur du champ ou un tableau avec tous les champs.
  */
-function infos_client($email, $champ='') {
+function infos_client($email, $champ='', $retour_vide = TRUE) {
   // Si on trouve un auteur spip on le prend, sinon on cherche dans les réservations
   if (!$client = sql_fetsel('*','spip_auteurs','email=' . sql_quote($email)))
     !$client  = sql_fetsel('*','spip_reservations','email=' . sql_quote($email),'','id_reservation DESC');
@@ -97,7 +97,8 @@ function infos_client($email, $champ='') {
     if ($champ AND isset($client[$champ])) $infos= $client[$champ];
     else $infos= $client;
   }
-  else $infos = '';
+  elseif($retour_vide) $infos = '';
+  else $infos = $email;
   
   return $infos;
 }
