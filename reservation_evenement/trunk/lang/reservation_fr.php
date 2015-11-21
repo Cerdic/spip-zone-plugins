@@ -177,6 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_refuse' => ' refusé',
 	'texte_voir' => 'voir',
 	'titre_clients' => 'Clients',
+	'titre_client' => 'Client',	
 	'titre_envoi_separe' => 'Mode Envoi Séparé activé',
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
