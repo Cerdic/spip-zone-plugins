@@ -11,7 +11,7 @@
 			[en]Horizontal dropdown menu with jQuery
 		</multi>
 	</slogan>
-	
+
 	<version>3.0.0</version>
 	<prefix>babbi</prefix>
 	<auteur>babbibel</auteur>
@@ -27,16 +27,16 @@
 	<lien>http://contrib.spip.net/?article3055</lien>
 
 	<bouton id='babbi' parent='configuration'>
-        	<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
-		      <titre>babbi:titre_menu_babbibel</titre>
-		      <url>configurer_babbi</url>  
+			<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+			  <titre>babbi:titre_menu_babbibel</titre>
+			  <url>configurer_babbi</url>
   </bouton>
 	<bouton id='babbi2' parent='bando_squelette'>
-           <icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
-           <titre>babbi:titre_menu_babbibel</titre>
-           <url>configurer_babbi</url>
+		   <icone>prive/themes/spip/images/logo_menu-27-24.png</icone>
+		   <titre>babbi:titre_menu_babbibel</titre>
+		   <url>configurer_babbi</url>
   </bouton>
-	
+
 	<fonctions>fonctions_menu.php</fonctions>
 
 	<pipeline>

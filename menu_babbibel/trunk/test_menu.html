@@ -23,20 +23,20 @@
 
 	[(#REM) Entete de la page + titre du site ]
 	<div id="entete" style="overflow: visible;">
-		
+
 		[(#REM) Afficher le logo ou le titre du site ]
-		
+
 		<a rel="start" href="#URL_SITE_SPIP/">
 		[(#LOGO_SITE_SPIP||?{
-		
+
 			[(#LOGO_SITE_SPIP
 				||image_reduire{770,200}
 				|inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}
 				|inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}
 				)]
-		
+
 			,
-		
+
 			<span id="nom_site_spip">#NOM_SITE_SPIP</span>
 		})]
 		</a>
@@ -55,56 +55,56 @@
 		<div style="margin-top:3em;padding:2em; margin-bottom:3em;border:1px solid #DDD;text-align: center;">
 		<a href="./ecrire/?exec=configurer_babbi">Configurer le menu</a>
 		</div>
-		
+
 		<div style="margin-top:3em;padding:2em; margin-bottom:3em;border:1px solid #DDD;text-align: center;">
-		Le menu affiche jusqu'&agrave; [(#CONFIG{babbi/nb_articles}|sinon{100})] articles class&eacute;s par #CONFIG{babbi/tri, date} [(#CONFIG{babbi/inverse}|choixsivide{""," inverse"})]	
+		Le menu affiche jusqu'&agrave; [(#CONFIG{babbi/nb_articles}|sinon{100})] articles class&eacute;s par #CONFIG{babbi/tri, date} [(#CONFIG{babbi/inverse}|choixsivide{""," inverse"})]
 		<br />
 		</div>
 		[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->
-	
+
 	[(#REM) Menu de navigation laterale ]
 	<div id="navigation">
-		
-        [(#REM) Rubriques liees au mot-cle ]
-        <B_rubriques_cle>
-        <div class="menu rubriques">
-            <h2><:rubriques:> selectionn&eacute;es</h2>
-            <ul>
-                <BOUCLE_rubriques_cle(RUBRIQUES) {titre_mot=menu_der} {par num titre, date, titre}>
-                	<li><a href="#URL_RUBRIQUE">#ID_RUBRIQUE[ - (#TITRE|supprimer_numero|couper{80})]</a></li>
-                </BOUCLE_rubriques_cle>
-            </ul>
-        </div>
-        </B_rubriques_cle>		
+
+		[(#REM) Rubriques liees au mot-cle ]
+		<B_rubriques_cle>
+		<div class="menu rubriques">
+			<h2><:rubriques:> selectionn&eacute;es</h2>
+			<ul>
+				<BOUCLE_rubriques_cle(RUBRIQUES) {titre_mot=menu_der} {par num titre, date, titre}>
+					<li><a href="#URL_RUBRIQUE">#ID_RUBRIQUE[ - (#TITRE|supprimer_numero|couper{80})]</a></li>
+				</BOUCLE_rubriques_cle>
+			</ul>
+		</div>
+		</B_rubriques_cle>
 
 	<B_rub_desel>
 	<div class="menu rubriques">
-            <h2><:rubriques:> exclues</h2>
-            <ul>
+			<h2><:rubriques:> exclues</h2>
+			<ul>
 		<BOUCLE_rub_desel (RUBRIQUES){titre_mot=exclu_menu_der} {par num titre, date, titre}>
 			<li><a href="#URL_RUBRIQUE">#ID_RUBRIQUE[ - (#TITRE|supprimer_numero|couper{80})]</a></li>
 		</BOUCLE_rub_desel>
-            </ul>
-        </div>
+			</ul>
+		</div>
 	</B_rub_desel>
 
 	<B_art_desel>
 	<div class="menu rubriques">
-            <h2>Articles exclus</h2>
-            <ul>
+			<h2>Articles exclus</h2>
+			<ul>
 		<BOUCLE_art_desel (ARTICLES){titre_mot=exclu_menu_der} {par num titre, date, titre}>
 			<li><a href="#URL_ARTICLE">[(#ID_ARTICLE)][ - (#TITRE|supprimer_numero|couper{80})]</a></li>
 		</BOUCLE_art_desel>
-            </ul>
-        </div>
+			</ul>
+		</div>
 	</B_art_desel>
 
 		<br class="nettoyeur" />
-    </div><!--#navigation-->
-		
+	</div><!--#navigation-->
+
 </div><!--#page-->
 </body>
 </html>
