@@ -50,7 +50,7 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 			AND ($infos['statut']=='prop')
 			AND ($nb_relecture_ouverte==0)
 			AND ($taille_elements > 0)
-			AND (intval($id_rubrique) > 0));
+			AND (intval($infos['id_rubrique']) > 0));
 	}
 
 	return $autoriser;
