@@ -1,0 +1,9 @@
+#HTTP_HEADER{Content-type:text/calendar;charset=#CHARSET}#CACHE{3600}BEGIN:VCALENDAR
+VERSION:2.0
+X-WR-TIMEZONE:Europe/Paris
+CALSCALE:GREGORIAN
+PRODID:-//SPIP/Plugin #PLUGIN{AGENDA,nom}//NONSGML v1.0//FR
+X-WR-CALNAME;VALUE=TEXT:[(#INFO_TITRE{article,#ENV{id_article}}|supprimer_numero|filtrer_ical)] -- [(#NOM_SITE_SPIP|filtrer_ical)]
+X-WR-RELCALID:[(#URL_ARTICLE|url_absolue|filtrer_ical)]
+<BOUCLE_evenement2(EVENEMENTS){id_evenement=#ID_EVENEMENT}>[(#INCLURE{fond=inclure/evenement-ical}{evtitre=#TITRE}{id_evenement=#ID_EVENEMENT}{date_debut}{horaire}{date_fin}{id_article}{descriptif}{lieu}{date_creation}{maj}{attendee}{descriptif})]
+</BOUCLE_evenement2>
