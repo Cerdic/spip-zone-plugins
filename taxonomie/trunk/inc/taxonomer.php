@@ -212,56 +212,71 @@ function taxon_preserver_editions($regne) {
 
 
 /**
- * Fusionne les traductions d'une balise `<multi>` source avec celles d'une autre balise `<multi>`.
- * Il est possible de considérer l'une ou l'autre balise comme prioritaire dans le cas où la même
+ * Fusionne les traductions d'une balise `<multi>` avec celles d'une autre balise `<multi>`.
+ * L'une des balise est considérée comme prioritaire ce qui permet de régler le cas où la même
  * langue est présente dans les deux balises.
+ * Si on ne trouve pas de balise `<multi>` dans l'un ou l'autre des paramètres, on considère que
+ * le texte est tout même formaté de la façon suivante : texte0[langue1]texte1[langue2]texte2...
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param string	$nom_charge
- * @param string	$nom_edite
- * @param bool|true	$priorite_edition
+ * @param string	$multi_prioritaire
+ * 		Balise multi considérée comme prioritaire en cas de conflit sur une langue.
+ * @param string	$multi_non_prioritaire
+ * 		Balise multi considérée comme non prioritaire en cas de conflit sur une langue.
  *
  * @return string
+ * 		La chaine construite est toujours une balise `<multi>` complète ou une chaine vide sinon.
  */
-function taxon_merger_traductions($nom_charge, $nom_edite, $priorite_edition=true) {
-	$source = array();
-	$destination = array();
-	$nom_merge = '';
+function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
+	$multi_merge = '';
 
-	// Suivant la priorite entre édition et chargement automatique on positionne la source
-	// (priorite plus faible) et la destination (priorité plus haute)
-	$nom_source = $nom_charge;
-	$nom_destination = $nom_edite;
-	if (!$priorite_edition) {
-		$nom_source = $nom_edite;
-		$nom_destination = $nom_charge;
-	}
-
-	// On extrait les noms par langue
+	// On extrait le contenu de la balise <multi> si elle existe.
 	include_spip('inc/filtres');
-	if (preg_match(_EXTRAIRE_MULTI, $nom_source, $match)) {
-		$source = extraire_trads($match[1]);
+	$multi_prioritaire = trim($multi_prioritaire);
+	$multi_non_prioritaire = trim($multi_non_prioritaire);
+	if (preg_match(_EXTRAIRE_MULTI, $multi_prioritaire, $match)) {
+		$multi_prioritaire = trim($match[1]);
 	}
-	if (preg_match(_EXTRAIRE_MULTI, $nom_destination, $match)) {
-		$destination = extraire_trads($match[1]);
+	if (preg_match(_EXTRAIRE_MULTI, $multi_non_prioritaire, $match)) {
+		$multi_non_prioritaire = trim($match[1]);
 	}
 
-	// On complète la destination avec les noms de la source dont la langue n'est pas
-	// présente dans la destination
-	foreach ($source as $_lang => $_nom) {
-		if (!array_key_exists($_lang, $destination)) {
-			$destination[$_lang] = $_nom;
+	if ($multi_prioritaire) {
+		if ($multi_non_prioritaire) {
+			// On extrait les traductions sous forme de tableau langue=>traduction.
+			$traductions_prioritaires = extraire_trads($multi_prioritaire);
+			$traductions_non_prioritaires = extraire_trads($multi_non_prioritaire);
+
+			// On complète les traductions prioritaires avec les traductions non prioritaires dont la langue n'est pas
+			// présente dans les traductions prioritaires.
+			foreach ($traductions_non_prioritaires as $_lang => $_traduction) {
+				if (!array_key_exists($_lang, $traductions_prioritaires)) {
+					$traductions_prioritaires[$_lang] = $_traduction;
+				}
+			}
+
+			// On construit le contenu de la balise <multi> mergé à partir des traductions prioritaires mises à jour.
+			// Les traductions vides sont ignorées.
+			ksort($traductions_prioritaires);
+			foreach ($traductions_prioritaires as $_lang => $_traduction) {
+				if ($_traduction) {
+					$multi_merge .= ($_lang ? '[' . $_lang . ']' : '') . trim($_traduction);
+				}
+			}
+		} else {
+			$multi_merge = $multi_prioritaire;
 		}
+	} else {
+		$multi_merge = $multi_non_prioritaire;
 	}
 
-	// On construit le nom mergé à partir de la destination
-	foreach ($destination as $_lang => $_nom) {
-		$nom_merge .= '[' . $_lang . ']' . $_nom;
+	// Si le contenu est non vide on l'insère dans une balise <multi>
+	if ($multi_merge) {
+		$multi_merge = '<multi>' . $multi_merge . '</multi>';
 	}
-	$nom_merge = '<multi>' . $nom_merge . '</multi>';
 
-	return $nom_merge;
+	return $multi_merge;
 }
 
 

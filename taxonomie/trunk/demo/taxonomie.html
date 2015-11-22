@@ -6,6 +6,40 @@
 <div id="container">
 <?php
     include_spip('services/itis/itis_api');
+    include_spip('inc/filtres');
+    include_spip('inc/taxonomer');
+?>
+
+	<h1>TAXONOMER</h1>
+
+	<h2>Fonction : taxon_merger_traductions</h2>
+	[(#VAL|tester_taxon_merger_traductions|propre)]
+
+	<h2>Fonction : extraire_multi</h2>
+	[(#VAL|tester_extraire_multi|propre)]
+<?php die(); ?>
+
+	<h2>Fonction : extraire_trads</h2>
+<?php
+	$multi = "<multi>[fr]en français</multi>";
+	$ret = preg_match(_EXTRAIRE_MULTI, $multi, $match);
+	var_dump($multi, $ret, gettype($ret), $match);
+	die();
+
+	$multi = '';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = 'sans langue';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = '[fr]en français';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = '[fr]en français[en]en anglais';
+	var_dump($multi, extraire_trads($multi));
+
+	$multi = 'en defaut[fr]en français[en]en anglais';
+	var_dump($multi, extraire_trads($multi));
 ?>
 
     <h1>Service ITIS</h1>
@@ -87,8 +121,8 @@
 
 	<h2>Action : read_hierarchy</h2>
 <?php
- $taxons = itis_read_hierarchy('fungi', 'genus', $sha);
- var_dump($taxons, $sha);
+	$taxons = itis_read_hierarchy('fungi', 'genus', $sha);
+	var_dump($taxons, $sha);
 ?>
 
 </div>

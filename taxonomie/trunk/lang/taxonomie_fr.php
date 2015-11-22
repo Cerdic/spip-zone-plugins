@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_gestion' => 'Gestion des règnes',
 	'onglet_configuration' => 'Configuration du plugin',
-	'onglet_navigation' => 'Navigation dans la taxonomie',
+	'onglet_navigation' => 'Navigation du règne au genre',
 
 	// S
 	'succes_vider_regne' => 'Le règne @regne@ a bien été supprimé de la base de données.',
