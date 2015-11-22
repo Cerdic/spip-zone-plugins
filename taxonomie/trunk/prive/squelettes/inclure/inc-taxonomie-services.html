@@ -1,5 +1,5 @@
 #SET{open,#BOITE_OUVRIR{'',raccourcis}}
 [(#GET{open}|unique)]
 [(#URL_ACTION_AUTEUR{taxonomie_get_wikipedia,#ID_TAXON:#NOM:#LANG:descriptif:*,#URL_ECRIRE{taxon_edit, id_taxon=#ID_TAXON}}
-	|icone_horizontale{<:taxonomie:action_wikipedia_descriptif:>,wikipedia-24})]
+	|icone_horizontale{<:taxonomie:bouton_wikipedia_descriptif:>,wikipedia-24})]
 [(#GET{open}|unique|?{'',#BOITE_FERMER})]

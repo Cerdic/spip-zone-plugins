@@ -5,10 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'action_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
-
-	// B
 	'bouton_taxonomie' => 'Taxons',
+	'bouton_wikipedia_descriptif' => 'Remplir le descriptif avec Wikipedia',
 
 	// C
 	'credit_itis' => 'Integrated Taxonomic Information System, @url_site@ (informations taxonomiques de base). Voir aussi la page du taxon @url_taxon@.',

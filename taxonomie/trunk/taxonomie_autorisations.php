@@ -41,7 +41,7 @@ function autoriser_taxon_creer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Autorisation de modifier un taxon : il faut pouvoir en créer unet que l'id soit précisé.
+ * Autorisation de modifier un taxon : il faut pouvoir en créer un et que l'id soit précisé.
  *
  * @param string	$faire
  * 		Action demandée.
@@ -153,7 +153,7 @@ function autoriser_taxons_voir_dist($faire, $type, $id, $qui, $opt) {
 
 /**
  * Autorisation sur l'entrée de menu affichant la liste des taxons : même autorisation que
- * voir_taxons, c'est-à-dire, tout le monde.
+ * `voir_taxons`, c'est-à-dire, tout le monde.
  *
  * @param string	$faire
  * 		Action demandée.
