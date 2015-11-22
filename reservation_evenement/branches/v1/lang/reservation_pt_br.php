@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => ' no lixo',
 	'texte_statut_refuse' => 'Resposta negada',
 	'texte_voir' => 'ver',
+	'titre_client' => 'Cliente',
 	'titre_envoi_separe' => 'Modo Envio Separado ativado',
 	'titre_reservation' => 'Reservas',
 	'titre_reservations' => 'Reservas',

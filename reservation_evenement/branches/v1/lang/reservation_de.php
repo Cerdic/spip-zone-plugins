@@ -120,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => 'im Abfalleimer',
 	'texte_statut_refuse' => 'abgelehnt',
 	'texte_voir' => 'einsehen',
+	'titre_client' => 'Kunde',
 	'titre_envoi_separe' => 'Modus "Einzeln Verschicken" aktiviert',
 	'titre_reservation' => 'Anmeldung',
 	'titre_reservations' => 'Anmeldungen',
