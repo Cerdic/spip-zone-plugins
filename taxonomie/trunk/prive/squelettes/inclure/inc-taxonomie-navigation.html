@@ -1,11 +1,11 @@
-[(#REM) <!-- Menu des onglets "gestion", "navigation" et "configuration du plugin"
+[(#REM) <!-- Menu des onglets "gestion des règnes", "navigation dans les taxons" et "configuration du plugin"
  --> ]
 <ul class="liste-items sous_navigation">
 	[<li class="item">
-		(#URL_ECRIRE{taxonomie}
+		(#URL_ECRIRE{regnes}
 			|lien_ou_expose{
 				<:taxonomie:onglet_gestion:>,
-				[(#ENV{exec}|=={taxonomie})]})
+				[(#ENV{exec}|=={regnes})]})
 	</li>]
 	[<li class="item">
 		(#URL_ECRIRE{taxons}
