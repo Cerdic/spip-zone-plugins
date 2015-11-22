@@ -1,4 +1,7 @@
 <traduction module="formidable" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=ar" total="197" traduits="117" relire="0" modifs="0" nouveaux="80" pourcent="59.39">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=de" total="197" traduits="98" relire="0" modifs="4" nouveaux="95" pourcent="49.75">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
