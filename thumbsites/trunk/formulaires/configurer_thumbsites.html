@@ -7,8 +7,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			<legend><:thumbsites:cfg_lgd_choix_serveur:></legend>
-			<ul>
-				<li>
+			<ul class="editer-groupe">
+				<li class="editer">
 					<p class="explication"><:thumbsites:cfg_inf_choix_serveur:></p>
 					<label for="serveur"><:thumbsites:cfg_lbl_serveur:></label>
 					<select name="serveur" id="serveur">
@@ -18,14 +18,14 @@
 						<option value="miwim"[ (#ENV{serveur, apercite}|=={miwim}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwim:></option>
 					</select>
 				</li>
-            </ul>
+			</ul>
 
-			<ul id="apercite" class="conf_serveur [(#ENV{serveur, apercite}|=={'apercite'}|?{'actif'})]">
-				<li>
+			<ul id="apercite" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'apercite'}|?{'actif'})]">
+				<li class="editer">
 					<label><:thumbsites:cfg_lbl_usage:></label>
 					<p class="explication"><:thumbsites:cfg_inf_apercite_presentation:></p>
 				</li>
-				<li>
+				<li class="editer">
 					<label for="apercite_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
 					<select name="apercite_taille" id="apercite_taille">
 						<option value="80x50" [(#ENV{apercite_taille, 120x90}|=={80x50}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80x50}:></option>
@@ -51,32 +51,32 @@
 				</li>
 			</ul>
 
-            <ul id="websnapr" class="conf_serveur [(#ENV{serveur, apercite}|=={'websnapr'}|?{'actif'})]">
-                <li>
-                    <label><:thumbsites:cfg_lbl_usage:></label>
-                    <p class="explication"><:thumbsites:cfg_inf_websnapr_presentation:></p>
-                </li>
-                <li>
-                    <label for="websnapr_clef"><:thumbsites:cfg_lbl_cle:></label>
-                    <input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
-                </li>
-                <li>
-                    <label for="websnapr_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
-                    <select name="websnapr_taille" id="websnapr_taille">
-                        <option value="T" [(#ENV{websnapr_taille, T}|=={T}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=92x70}:></option>
-                        <option value="S" [(#ENV{websnapr_taille, T}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=202x152}:></option>
-                        <option value="M" [(#ENV{websnapr_taille, T}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=400x300}:></option>
-                        <option value="L" [(#ENV{websnapr_taille, T}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
-                    </select>
-                </li>
-            </ul>
+			<ul id="websnapr" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'websnapr'}|?{'actif'})]">
+				<li class="editer">
+					<label><:thumbsites:cfg_lbl_usage:></label>
+					<p class="explication"><:thumbsites:cfg_inf_websnapr_presentation:></p>
+				</li>
+				<li class="editer">
+					<label for="websnapr_clef"><:thumbsites:cfg_lbl_cle:></label>
+					<input type="text" name="websnapr_clef" id="websnapr_clef" [value="(#ENV{websnapr_clef})"]>
+				</li>
+				<li class="editer">
+					<label for="websnapr_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+					<select name="websnapr_taille" id="websnapr_taille">
+						<option value="T" [(#ENV{websnapr_taille, T}|=={T}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=92x70}:></option>
+						<option value="S" [(#ENV{websnapr_taille, T}|=={S}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=202x152}:></option>
+						<option value="M" [(#ENV{websnapr_taille, T}|=={M}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=400x300}:></option>
+						<option value="L" [(#ENV{websnapr_taille, T}|=={L}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+					</select>
+				</li>
+			</ul>
 
-			<ul id="robothumb" class="conf_serveur [(#ENV{serveur, apercite}|=={'robothumb'}|?{'actif'})]">
-				<li>
+			<ul id="robothumb" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'robothumb'}|?{'actif'})]">
+				<li class="editer">
 					<label><:thumbsites:cfg_lbl_usage:></label>
 					<p class="explication"><:thumbsites:cfg_inf_rotothumb_presentation:></p>
 				</li>
-				<li>
+				<li class="editer">
 					<label for="robothumb_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
 					<select name="robothumb_taille" id="robothumb_taille">
 						<option value="100x75" [(#ENV{robothumb_taille, 120x90}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
@@ -92,12 +92,12 @@
 				</li>
 			</ul>
 
-			<ul id="miwim" class="conf_serveur [(#ENV{serveur, apercite}|=={'miwim'}|?{'actif'})]">
-				<li>
+			<ul id="miwim" class="editer-groupe conf_serveur [(#ENV{serveur, apercite}|=={'miwim'}|?{'actif'})]">
+				<li class="editer">
 					<label><:thumbsites:cfg_lbl_usage:></label>
 					<p class="explication"><:thumbsites:cfg_inf_miwim_presentation:></p>
 				</li>
-				<li>
+				<li class="editer">
 					<label for="miwim_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
 					<select name="miwim_taille" id="miwim_taille">
 						<option value="80X60" [(#ENV{miwim_taille, 120x90}|=={80X60}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80X60}:></option>
@@ -118,8 +118,8 @@
 
 		<fieldset>
 			<legend><:thumbsites:cfg_lgd_cache:></legend>
-			<ul>
-				<li>
+			<ul class="editer-groupe">
+				<li class="editer">
 					<label for="duree_cache"><:thumbsites:cfg_lbl_duree_cache:></label>
 					<input type="text" name="duree_cache" id="duree_cache" [value="(#ENV{duree_cache, 30})"]>
 				</li>

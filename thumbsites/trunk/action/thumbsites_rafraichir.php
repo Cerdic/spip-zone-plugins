@@ -10,19 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_thumbsites_rafraichir_dist(){
+function action_thumbsites_rafraichir_dist()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	$arg = explode('--',$arg);
-	
-	$ret=supprimer_fichier($arg[2]);
+	$arg = explode('--', $arg);
+
+	$ret = supprimer_fichier($arg[2]);
 	spip_log("action_thumbsites_rafraichir_dist file $arg[2] suppression reussie ? $ret");
 
-	include_spip("inc/thumbsites_filtres");
-	return(thumbshot($arg[1],true));
-}
+	include_spip('inc/thumbsites_filtres');
 
-?>
+	return(thumbshot($arg[1], true));
+}
