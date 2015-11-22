@@ -1,9 +1,10 @@
-<h1><:taxonomie:titre_page_taxonomie:></h1>
+[(#AUTORISER{voir, _taxons}|sinon_interdire_acces)]
+<h1 class="grostitre"><:taxonomie:titre_page_taxonomie:></h1>
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
 <INCLURE{fond=prive/objets/liste/taxons,
 	par=nom_scientifique,
-	env,
-	ajax, sinon=<:taxon:info_aucun_taxon:>}>
+	sinon=<:taxon:info_aucun_taxon:>,
+	env, ajax} />

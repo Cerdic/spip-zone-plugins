@@ -24,5 +24,5 @@
 
     <genie nom="actualiser_itis" periode="86400" />
 
-	<menu nom="taxonomie" titre="taxonomie:bouton_taxonomie" parent="menu_edition" icone="images/taxon-16.png" action="taxonomie" />
+	<menu nom="taxonomie" titre="taxonomie:bouton_taxonomie" parent="menu_edition" icone="images/taxon-16.png" action="taxons" />
 </paquet>
