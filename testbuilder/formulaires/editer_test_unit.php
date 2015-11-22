@@ -31,7 +31,7 @@ function formulaires_editer_test_unit_charger_dist($filename,$funcname){
 	}
 	// regarder si un demande a modifier un jeu d'essai
 	$modif = -1;
-	if (count($valeurs['_essais'])){
+	if (!empty($valeurs['_essais'])){
 		foreach($valeurs['_essais'] as $k=>$t)
 			if (_request("modif_$k")){
 				set_request('args'); // effacer la saisie

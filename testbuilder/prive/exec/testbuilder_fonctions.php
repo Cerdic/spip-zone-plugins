@@ -15,6 +15,7 @@ function tb_link($url,$texte){
 
 function tb_dirs($dir=""){
 	$dir = trim($dir);
+	$d =false;
 	if (!$dir
 			OR substr($dir,0,1)=="/"
 			OR substr($dir,strlen(_DIR_RACINE),2)==".."
@@ -34,6 +35,7 @@ function tb_dirs($dir=""){
 	$dir = rtrim($dir,'/');
 	$dirs = array("../"=>($dir=="." OR dirname($dir)==rtrim(_DIR_RACINE,'/'))?"":rtrim(dirname($dir),'/')."/");
 	$maxdirs = 1000;
+	$nbdirs = 0;
 	while (($f = readdir($d)) !== false && ($nbdirs<$maxdirs)) {
 		if ($f[0] != '.' # ignorer . .. .svn etc
 		AND $f != 'CVS'
