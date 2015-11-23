@@ -43,7 +43,7 @@ function noizetier_lister_noisettes($type = 'tout')
 		}
 	}
 
-	return $liste_noisettes[$type];
+	return isset($liste_noisettes[$type]) ? $liste_noisettes[$type]: '';
 }
 
 /**
@@ -690,8 +690,9 @@ function noizetier_page_type($page)
 function noizetier_page_composition($page)
 {
 	$type_compo = explode('-', $page, 2);
+	$type_compo = isset($type_compo[1]) ? $type_compo[1] : '';
 
-	return $type_compo[1];
+	return $type_compo;
 }
 
 /**
@@ -754,11 +755,11 @@ function noizetier_lister_icones()
  */
 function noizetier_test_compo_noizetier($page)
 {
-	$compos = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	$compos = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	$type = noizetier_page_type($page);
 	$composition = noizetier_page_composition($page);
 
-	return (is_array($compos[$type][$composition])) ? 'on' : '';
+	return (isset($compos[$type][$composition]) and is_array($compos[$type][$composition])) ? 'on' : '';
 }
 
 /**

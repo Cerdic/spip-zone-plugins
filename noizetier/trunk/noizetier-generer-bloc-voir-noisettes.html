@@ -2,10 +2,10 @@
 	style="padding:10px; border:4px dotted #DF454F; margin:10px 0;"
 >
 <input type='hidden' name='ordre[]' value='bloc-#ENV{bloc}' class="noizetier-tri" />
-<input type='hidden' name='ordre[]' value='page-#ENV{type}[-(#ENV{composition})]' class="noizetier-tri" />
-<div style="color:#8A1F11; font-size:2em; margin:5px 0;">[(#NOIZETIER_LISTE_PAGES{#ENV{type}[-(#ENV{composition})]}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom}|sinon{#ENV{bloc}})]</div>
-<div>[<strong>(#NOIZETIER_LISTE_PAGES{#ENV{type}[-(#ENV{composition})]}|table_valeur{nom})</strong>] ([(#ENV{type})][-(#ENV{composition})]) [\[<a href="(#URL_ECRIRE{noizetier_page,page=#ENV{type}[-(#ENV{composition})]})"><:noizetier:modifier_dans_prive:></a>\]]</div>
-	<BOUCLE_noisettes(NOISETTES){bloc=#ENV{bloc}}{type=#ENV{type}}{composition=#ENV{composition}}{par rang}>
+<input type='hidden' name='ordre[]' value='page-#ENV{type,#ENV{page}}[-(#ENV{composition})]' class="noizetier-tri" />
+<div style="color:#8A1F11; font-size:2em; margin:5px 0;">[(#NOIZETIER_LISTE_PAGES{#ENV{type,#ENV{page}}[-(#ENV{composition})]}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom}|sinon{#ENV{bloc}})]</div>
+<div>[<strong>(#NOIZETIER_LISTE_PAGES{#ENV{type,#ENV{page}}[-(#ENV{composition})]}|table_valeur{nom})</strong>] ([(#ENV{type,#ENV{page}})][-(#ENV{composition})]) [\[<a href="(#URL_ECRIRE{noizetier_page,page=#ENV{type,#ENV{page}}[-(#ENV{composition})]})"><:noizetier:modifier_dans_prive:></a>\]]</div>
+	<BOUCLE_noisettes(NOISETTES){bloc=#ENV{bloc}}{type=#ENV{type,#ENV{page}}}{composition=#ENV{composition}}{par rang}>
 	<div class="noizetier-noisette" id="noizetier-noisette-#ID_NOISETTE"
 		style="padding:10px; border:2px solid #9DBA00; margin:10px 0;"
 	>
@@ -13,12 +13,12 @@
 			<div style="float:right;">[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone|balise_img{})]</div>
 			[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom})]
 		</strong></div>
-		
+
 		[(#ENV{editer_noisette}|=={#ID_NOISETTE}|oui)
 			[(#FORMULAIRE_EDITER_NOISETTE{#ID_NOISETTE,[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]})]
 			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{editer_noisette,''})#noizetier-noisette-#ID_NOISETTE]"><:bouton_annuler:></a></strong>\]</div>
 		]
-		
+
 		[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
 			[<div class="noisette noisette_#NOISETTE[ (#CHAMP_SQL{css})]">(#NOIZETIER_AFFICHER_NOISETTE)</div>]
 			<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
@@ -29,7 +29,7 @@
 		<input type='hidden' name='ordre[]' value='noisette-#ID_NOISETTE' class="noizetier-tri" />
 	</div>
 	</BOUCLE_noisettes>
-	
+
 	[(#ENV{ajouter_noisette}|ou{#ENV{editer_noisette}}|non)
 		<div class="noizetier-action" style="text-align:#LANG_RIGHT;">
 			\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,#ENV{bloc}})#noizetier-ajouter-noisette]"><:noizetier:formulaire_ajouter_noisette:></a></strong>\]
@@ -37,7 +37,7 @@
 	]
 	[(#ENV{ajouter_noisette}|=={#ENV{bloc}}|oui)
 		<div id="noizetier-ajouter-noisette">
-			[(#FORMULAIRE_AJOUTER_NOISETTE{#ENV{type}[-(#ENV{composition})],#ENV{bloc},[(#SELF|parametre_url{ajouter_noisette,''})&editer_noisette=@id_noisette@#noizetier-noisette-@id_noisette@]})]
+			[(#FORMULAIRE_AJOUTER_NOISETTE{#ENV{type,#ENV{page}}[-(#ENV{composition})],#ENV{bloc},[(#SELF|parametre_url{ajouter_noisette,''})&editer_noisette=@id_noisette@#noizetier-noisette-@id_noisette@]})]
 			<div style="text-align:#LANG_RIGHT;">\[<strong><a href="[(#SELF|parametre_url{ajouter_noisette,''})#noizetier-bloc-#ENV{bloc}]"><:bouton_annuler:></a></strong>\]</div>
 			<style type="text/css">ul.liste-noisettes li.noisette {padding-#LANG_LEFT: 30px; background-repeat: no-repeat; background-position: #LANG_LEFT 9px;}</style>
 		</div>

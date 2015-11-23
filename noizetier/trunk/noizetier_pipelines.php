@@ -24,8 +24,8 @@ function noizetier_recuperer_fond($flux)
 {
 	if (defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) {
 		include_spip('noizetier_fonctions');
-		$fond = $flux['args']['fond'];
-		$composition = $flux['args']['contexte']['composition'];
+		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
+		$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
 		// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
 		// sauf s'il s'agit d'une page de type page (les squelettes page.html assurant la redirection)
 		if ($composition != '' and noizetier_page_composition($fond) == '' and noizetier_page_type($fond) != 'page') {
@@ -34,19 +34,19 @@ function noizetier_recuperer_fond($flux)
 
 		// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
 		if (isset($GLOBALS['meta']['noizetier_base_version'])) {
-			if ($flux['args']['contexte']['voir'] == 'noisettes' && !function_exists('autoriser')) {
+			if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && !function_exists('autoriser')) {
 				include_spip('inc/autoriser');
 			}     // si on utilise le formulaire dans le public
 			if (in_array($fond, noizetier_lister_blocs_avec_noisettes())) {
 				$contexte = $flux['data']['contexte'];
 				$contexte['bloc'] = substr($fond, 0, strpos($fond, '/'));
-				if ($flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
+				if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
 					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes', $contexte, array('raw' => true));
 				} else {
 					$complements = recuperer_fond('noizetier-generer-bloc', $contexte, array('raw' => true));
 				}
 				$flux['data']['texte'] .= $complements['texte'];
-			} elseif ($flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) { // Il faut ajouter les blocs vides en mode voir=noisettes
+			} elseif (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) { // Il faut ajouter les blocs vides en mode voir=noisettes
 				$contexte = $flux['data']['contexte'];
 				$bloc = substr($fond, 0, strpos($fond, '/'));
 				$contexte['bloc'] = $bloc;
@@ -73,11 +73,11 @@ function noizetier_recuperer_fond($flux)
 function noizetier_formulaire_fond($flux)
 {
 	// formulaire d'edition de la composition d'un objet
-	if ($flux['args']['form'] == 'editer_composition_objet') {
-		$objet = $flux['args']['contexte']['objet'];
-		$composition = $flux['args']['contexte']['composition'];
+	if (isset($flux['args']['form']) and $flux['args']['form'] == 'editer_composition_objet') {
+		$objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
+		$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
 		$type_page = $objet.($composition ? '-'.$composition : '');
-		$noizetier_compositions_meta = unserialize($GLOBALS['meta']['noizetier_compositions']);
+		$noizetier_compositions_meta = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 		$noizetier_compositions_xml = array_keys(noizetier_lister_pages());
 
 		// On vérifie que cette composition existe

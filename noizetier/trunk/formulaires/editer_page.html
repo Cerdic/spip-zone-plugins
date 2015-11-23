@@ -10,14 +10,14 @@
 		<input type='hidden' name='page' value='#ENV{page}' />
 		<input type='hidden' name='new' value='#ENV{new}' />
 		<input type='hidden' name='dupliquer' value='#ENV{dupliquer}' />
-		<ul>
+		<ul class="editer-groupe">
 
 			[(#REM) Type éditable ]
 			<BOUCLE_type_editable(CONDITION){si #ENV{acte}|=={creer}}>
 			#SET{name,type_page}
 			#SET{obli,'obligatoire'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_type:></label>
 				<div class="explication"><:noizetier:formulaire_type_explication:></div>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -34,7 +34,7 @@
 			#SET{name,type_page}
 			#SET{obli,'obligatoire'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_type:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<div class="explication">[(#NOIZETIER_LISTE_PAGES|table_valeur{#ENV{type_page}}|table_valeur{nom}|sinon{#ENV{type_page}})]</div>
@@ -47,7 +47,7 @@
 			#SET{name,composition}
 			#SET{obli,'obligatoire'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
 				<div class="explication">
 					<:noizetier:formulaire_composition_explication:>[
@@ -63,7 +63,7 @@
 			#SET{name,composition}
 			#SET{obli,'obligatoire'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_composition:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<div class="explication">#ENV{#GET{name}}</div>
@@ -74,7 +74,7 @@
 			#SET{name,nom}
 			#SET{obli,'obligatoire'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_nom:></label>
 				<div class="explication"><:noizetier:formulaire_nom_explication:></div>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -84,7 +84,7 @@
 			#SET{name,description}
 			#SET{obli,''}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_description:></label>
 				<div class="explication"><:noizetier:formulaire_description_explication:></div>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -94,7 +94,7 @@
 			#SET{name,icon}
 			#SET{obli,''}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:noizetier:formulaire_icon:></label>
 				<div class="explication"><:noizetier:formulaire_icon_explication:></div>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -142,7 +142,7 @@
 			#SET{obli,''}
 			#SET{defaut,'on'}
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>Noisettes</label>
 				<div class="explication">Vous pouvez peupler d'avance la nouvelle composition avec les noisettes de la composition mère (sauf s'il s'agit d'une page autonome).</div>
 				<div class="choix">
@@ -156,13 +156,13 @@
 		<fieldset>
 			<legend><:noizetier:formulaire_modifier_composition_heritages:></legend>
 			<p class="explication"><:noizetier:explication_heritages_composition:></p>
-			<ul>
+			<ul class="editer-groupe">
 			<BOUCLE_heritage(DATA){source table,#ENV{_heritiers}}{par cle}>
 				<B_type>
 				#SET{name,heritage-#CLE}
 				#SET{obli,''}
 				#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#NOIZETIER_LISTE_PAGES|table_valeur{#CLE}|table_valeur{nom}|sinon{#CLE})]</label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
 					<select class="select" name="#GET{name}" id="#GET{name}">

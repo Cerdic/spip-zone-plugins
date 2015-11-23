@@ -8,11 +8,11 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_noisette' value='#ENV{id_noisette}' />
 		<input type='hidden' name='noisette' value='#ENV{noisette}' />
-		[<ul>
+		[<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 		(#GENERER_SAISIES{#ENV{_params}})
-		</ul>]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>]
 		[(#ENV{_params}|non)<div class="explication"><:noizetier:formulaire_noisette_sans_parametre:></div>]
-		
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
