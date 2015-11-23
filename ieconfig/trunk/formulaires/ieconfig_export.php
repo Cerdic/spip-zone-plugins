@@ -65,13 +65,14 @@ function ieconfig_saisies_export()
 				$icone = find_in_path($data['icone']);
 			}
 			if ($icone) {
-				$icone = '<img src="'.$icone.'" alt="" style="margin-left:-50px; margin-right:34px;" />';
+				$icone = '<img src="'.$icone.'" alt="" style="margin-left:0px; margin-right:0.5em;" />';
 			}
 		} else {
 			$icone = '';
 		}
 		$ieconfig_metas[$prefixe] = $icone.(isset($data['titre']) ? $data['titre'] : $prefixe);
 	}
+	ksort($ieconfig_metas);
 	if (count($ieconfig_metas) > 0) {
 		$saisies[] = array(
 			'saisie' => 'fieldset',
