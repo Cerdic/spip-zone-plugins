@@ -1,14 +1,17 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function ieconfig_ieconfig($table){
+function ieconfig_ieconfig($table)
+{
 	return $table;
 }
 
-
 // On déclare ici la config du core
-function ieconfig_ieconfig_metas($table){
+function ieconfig_ieconfig_metas($table)
+{
 	// Articles
 	$table['articles']['titre'] = _T('icone_articles');
 	$table['articles']['icone'] = 'article-16.png';
@@ -61,8 +64,6 @@ function ieconfig_ieconfig_metas($table){
 	$table['moderniseur']['titre'] = _T('info_compatibilite_html');
 	$table['moderniseur']['icone'] = 'compat-16.png';
 	$table['moderniseur']['metas_brutes'] = 'version_html_max';
-	
+
 	return $table;
 }
-
-?>
