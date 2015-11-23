@@ -61,6 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menu_champs' => 'Configure the fields',
 	'editer_menu_formulaire' => 'Configure the form',
 	'editer_menu_traitements' => 'Configure the treatments',
+	'editer_message_erreur_unicite_explication' => 'If you leave this field empty, the Formidable default error message will be shown',
+	'editer_message_erreur_unicite_label' => 'Error message when a field is not unique',
 	'editer_message_ok' => 'Return message',
 	'editer_message_ok_explication' => 'You can customize the message that will be displayed to the user after submitting a valid form.',
 	'editer_modifier_formulaire' => 'Modify the form',
@@ -71,6 +73,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_resume_reponse_explication' => '
 This string is used to display a summary of each reply in the lists. Fields such as <tt>@input_1@</tt> will be replaced as indicated by the following reminder',
 	'editer_titre' => 'Title',
+	'editer_unicite_explication' => 'Save the form only if a field is unique',
+	'editer_unicite_label' => 'Verify that this field is unique',
 	'erreur_autorisation' => 'You do not have the right to edit the website forms',
 	'erreur_base' => 'An error occurred as the data was being saved.',
 	'erreur_generique' => 'There are errors in the fields below. Please check.',
@@ -80,6 +84,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'erreur_importer_wcs' => 'Error while importing the W.C.S form',
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
+	'erreur_unicite' => 'This value is already in use',
 	'exporter_formulaire_format_label' => 'File format',
 	'exporter_formulaire_statut_label' => 'Answers',
 
@@ -142,6 +147,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'reponses_exporter' => 'Export the answers',
 	'reponses_exporter_format_csv' => 'Spreadsheet.CSV',
 	'reponses_exporter_format_xls' => 'Excel .XLS',
+	'reponses_exporter_statut_publie' => 'Published',
 	'reponses_exporter_statut_tout' => 'All',
 	'reponses_exporter_telecharger' => 'Download',
 	'reponses_ip' => 'IP address',
