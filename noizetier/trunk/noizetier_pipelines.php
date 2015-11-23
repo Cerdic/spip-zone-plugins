@@ -107,7 +107,7 @@ function noizetier_formulaire_fond($flux)
  */
 function noizetier_compositions_lister_disponibles($flux)
 {
-	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	if (!is_array($noizetier_compositions)) {
 		$noizetier_compositions = array();
 	}
@@ -167,7 +167,7 @@ function noizetier_styliser($flux)
 		$ext = $flux['args']['ext'];
 		// Si on n'a pas trouvé de squelette
 		if (!$squelette) {
-			$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+			$noizetier_compositions = (isset($GLOBALS['meta']['noizetier_compositions'])) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 			// On vérifie qu'on n'a pas demandé une composition du noizetier de type page et qu'on appele ?page=type
 			if (isset($noizetier_compositions['page'][$fond])) {
 				$flux['data'] = substr(find_in_path("page.$ext"), 0, -strlen(".$ext"));
