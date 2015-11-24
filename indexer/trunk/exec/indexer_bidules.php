@@ -9,6 +9,8 @@ function exec_indexer_bidules() {
 	$stats = indexer_statistiques_indexes_depuis();
 	$source = lire_meta('adresse_site');
 
+	echo "<p>", date('Y-m-d H:i:s'),"</p>\n";
+
 	foreach(indexer_lister_blocs_indexation(10000000) as $alias => $ids) {
 		foreach ($ids as $id) {
 
