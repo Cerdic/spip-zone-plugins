@@ -236,6 +236,11 @@ function map_xml_formater($fichier_xml)
                                     $vector_tmp[$number]['url_site'] = $resultat_vector;
                                 }
                                 break;
+                            case 'target':
+                                if (!empty($resultat_vector)) {
+                                    $vector_tmp[$number]['target'] = $resultat_vector;
+                                }
+                                break;
                             default:
                                 break;
                         }
