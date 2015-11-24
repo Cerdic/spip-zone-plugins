@@ -299,12 +299,12 @@ function indexer_suggestions($mot) {
 // et supprimer ceux qui n'y figurent pas
 // on se base sur la forme exacte (=mot) ; et sans espaces ni tirets !
 function indexer_motiver_mots($mots) {
-	$liste = $mots;
+	$liste = [];
 	foreach($mots as $i => $m) {
 		$mots[$i] = '='.preg_replace('/\W/', '', $m);
 	}
 	$m = join(' ', $mots);
-	$query = "SELECT count(id) FROM " . SPHINX_DEFAULT_INDEX . " WHERE MATCH('$m')";
+	$query = "SELECT id FROM " . SPHINX_DEFAULT_INDEX . " WHERE MATCH('$m') LIMIT 1";
 
 	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 	$all = $sphinx->allfetsel($query);
@@ -312,14 +312,17 @@ function indexer_motiver_mots($mots) {
 	if (!is_array($all)
 	OR !is_array($all['query'])
 	OR !is_array($all['query']['meta'])) {
-		echo "<p class=error>" . _L('Erreur Sphinx')."</p>";
+		// echo "<p class=error>" . _L('Erreur Sphinx')."</p>";
 	} else {
-		foreach($all['query']['meta']['keywords'] as $i => $w) {
-			$translitt = substr($w['keyword'], 1);
-			$liste[$translitt] = intval($w['docs']);
+		if (is_array($all['query']['meta']['keywords'])) {
+			foreach($all['query']['meta']['keywords'] as $i => $w) {
+				$translitt = substr($w['keyword'], 1);
+				if (intval($w['docs']) > 3)
+					$liste[$translitt] = intval($w['docs']);
+			}
+			$liste = array_filter($liste);
+			arsort($liste);
 		}
-		$liste = array_filter($liste);
-		arsort($liste);
 		return array_keys($liste);
 	}
 }
