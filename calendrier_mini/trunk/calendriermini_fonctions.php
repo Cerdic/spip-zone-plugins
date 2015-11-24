@@ -24,15 +24,15 @@ function critere_archives($idb, &$boucles, $crit) {
 	$champ_date = "'" . $boucle->id_table ."." .
 	$date . "'";
 	$boucle->where[] = array(
-		'REGEXP',
-		$champ_date, 
-		"sql_quote(('^' . interdire_scripts(entites_html(\$Pile[0]['".VAR_DATE."']))))"
+		"'REGEXP'",
+		$champ_date,
+		"sql_quote(('^' . interdire_scripts(entites_html(@\$Pile[0]['".VAR_DATE."']))))"
 	);
 }
 
 /**
  * Crée un array d'un intervalle de jour entre la date de début $start et la date de fin $end
- * 
+ *
  * $start datetime SQL - La date de début
  * $end datetime SQL La date de fin
  */
