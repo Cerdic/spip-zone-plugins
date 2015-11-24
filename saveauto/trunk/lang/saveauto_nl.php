@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_impossible_liste_tables' => 'Kan de lijst met tabellen in de database.',
 	'erreur_probleme_donnees_corruption' => 'Probleem met de gegevens van @table@, corruptie mogelijk !',
 	'erreur_repertoire_inaccessible' => 'De map is niet toegankelijk @rep@ voor het schrijven.',
+	'erreur_repertoire_perso_inaccessible' => 'De geconfigureerde map @rep@ is niet toegankelijk: gebruik in de plaats de backupmap van SPIP',
 
 	// H
 	'help_cfg_generale' => 'Deze configuratie-instellingen zin van toepassing op alles backups, handmatig en automatisch.',
