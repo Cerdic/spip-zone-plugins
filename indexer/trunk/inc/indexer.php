@@ -222,3 +222,113 @@ function indexer_lister_blocs_indexation($bloc = 100) {
 
 	return array_filter($liste);
 }
+
+// suggerer des mots (si aspell est installee)
+// code adapté de https://github.com/splitbrain/dokuwiki-plugin-spellcheck/blob/master/spellcheck.php
+function indexer_suggestions($mot) {
+
+	include_spip('lib/aspell');
+	if (!class_exists('Aspell')) {
+		spip_log('pas trouvé aspell.php', 'indexer');
+		return array();
+	}
+
+	try {
+		$spell = new Aspell($GLOBALS['spip_lang'],null,'utf-8');
+		// $spell->setMode(PSPELL_FAST);
+		if(!$spell->runAspell($mot, $out,$err,array('!','+html','@nbsp'))){
+			spip_log("An error occurred while trying to run the spellchecker: ".$err, 'indexer');
+			return null;
+		} 
+	} catch(Exception $e) {
+		spip_log($e, 'indexer');
+		return null;
+	}
+
+
+	// go through the result
+	$lines = split("\n",$out);
+	$rcnt  = count($lines)-1;    // aspell result count
+	for($i=$rcnt; $i>=0; $i--){
+		$line = trim($lines[$i]);
+		if($line[0] == '@') continue; // comment
+		if($line[0] == '*') continue; // no mistake in this word
+		if($line[0] == '+') continue; // root of word was found
+		if($line[0] == '?') continue; // word was guessed
+		if(empty($line)){
+			continue;
+		}
+		// now get the misspelled words
+		if (preg_match('/^& ([^ ]+) (\d+) (\d+): (.*)/',$line,$match)){
+			// match with suggestions
+			$word = $match[1];
+			$off  = $match[3]-1;
+			$sug  = split(', ',$match[4]);
+		} else if (preg_match('/^# ([^ ]+) (\d+)/',$line,$match)) {
+			// match without suggestions
+			$word = $match[1];
+			$off  = $match[2]-1;
+			$sug  = null;
+		} else {
+			// couldn't parse output
+			spip_log("The spellchecker output couldn't be parsed line $i '$line'", 'indexer');
+			return null;
+		}
+	}
+
+	// aspell peut nous renvoyer des mots accentués
+	// qui auront la même valeur dans sphinx,
+	// il faut donc unifier
+	// ne pas non plus accepter de mots avec apostrophe
+	$suggests = array();
+	if (is_array($sug)) {
+		foreach($sug as $t) {
+			if (strpos($t, "'") === false) {
+				$s = translitteration($t);
+				$suggests[$s] = $t;
+			}
+		}
+		$sug = $suggests;
+	}
+	
+	return $sug;
+}
+
+
+// trier les mots par nombre d'occurrences reelles dans la base Sphinx
+// et supprimer ceux qui n'y figurent pas
+// on se base sur la forme exacte (=mot) ; et sans espaces ni tirets !
+function indexer_motiver_mots($mots) {
+	$liste = $mots;
+	foreach($mots as $i => $m) {
+		$mots[$i] = '='.preg_replace('/\W/', '', $m);
+	}
+	$m = join(' ', $mots);
+	$query = "SELECT count(id) FROM " . SPHINX_DEFAULT_INDEX . " WHERE MATCH('$m')";
+
+	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+	$all = $sphinx->allfetsel($query);
+
+	if (!is_array($all)
+	OR !is_array($all['query'])
+	OR !is_array($all['query']['meta'])) {
+		echo "<p class=error>" . _L('Erreur Sphinx')."</p>";
+	} else {
+		foreach($all['query']['meta']['keywords'] as $i => $w) {
+			$translitt = substr($w['keyword'], 1);
+			$liste[$translitt] = intval($w['docs']);
+		}
+		$liste = array_filter($liste);
+		arsort($liste);
+		return array_keys($liste);
+	}
+}
+
+// compare une liste de suggestions au contenu indexé dans la base sphinx
+function indexer_suggestions_motivees($mot) {
+	$sug = indexer_suggestions($mot);
+	if (is_array($sug) AND count($sug) > 0) {
+		$sug = indexer_motiver_mots($sug);
+	}
+	return $sug;
+}

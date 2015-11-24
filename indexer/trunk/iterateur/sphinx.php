@@ -274,6 +274,43 @@ class IterateurSPHINX implements Iterator {
 			}
 		}
 
+		// expérimental : utiliser aspell
+		// pour chercher des suggestions de mots-clés
+		// define('_INDEXER_SUGGESTIONS', 5);
+		// define('ASPELL_BIN', '/usr/local/bin/aspell');
+		if (defined('_INDEXER_SUGGESTIONS') AND _INDEXER_SUGGESTIONS) {
+			$max_suggestions = _INDEXER_SUGGESTIONS;
+			if (isset($result['query']['meta']['keywords'])){
+				foreach($result['query']['meta']['keywords'] as $w) {
+					// un mot inexistant ou rare
+					// est possiblement mal orthographié
+					if($w['docs'] <= 2) {
+						$mot = $this->keyword2word($w['keyword'], $q);
+						$suggests = indexer_suggestions_motivees($mot);
+						if (is_array($suggests) && count($suggests)>0) {
+							$liens_suggestion = array();
+							// on prend n suggestions
+							spip_log($suggests, 'indexer');
+							foreach(array_slice($suggests, 0, $max_suggestions) as $sug) {
+
+								$rech = preg_replace('/'.$mot.'/i', $sug, $q);
+
+								// tester si la requete modifiée donne plus de resultats ?
+								// attention à ne pas creer de boucle infernale
+
+								$url = parametre_url(self(), 'recherche', $rech);
+								$liens_suggestion[] = inserer_attribut('<a rel="nofollow">'.$sug.'</a>', 'href', $url);
+							}
+						}
+						if (count($liens_suggestion)>0) {
+							$message .= '<div class="indexer_suggestions">'._L('Suggestion : ') .join(', ', $liens_suggestion)."</div>";
+							$GLOBALS['sphinxReplaceMessage'][$q] = $message;
+							$this->save('message', $message);
+						}
+					}
+				}
+			}
+		}
 
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
