@@ -3,12 +3,11 @@
 	categorie="auteur"
 	version="2.3.6"
 	schema="1.8.3"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
 	documentation="http://contrib.spip.net/Plugin-Coordonnees"
 >
-
 	<nom>Coordonnées</nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
@@ -27,6 +26,7 @@
 	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
 	<!-- Éléments d'interface -->
 	<pipeline nom="afficher_fiche_objet" inclure="coordonnees_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="coordonnees_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="coordonnees_pipelines.php" />
 	<!-- optimiser liens -->
 	<pipeline nom="optimiser_base_disparus" inclure="coordonnees_pipelines.php" />
@@ -34,5 +34,4 @@
 	<pipeline nom="types_coordonnees" inclure="coordonnees_pipelines.php" action=""/>
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
-
 </paquet>
