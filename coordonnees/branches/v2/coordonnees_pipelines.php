@@ -22,7 +22,7 @@ function coordonnees_afficher_fiche_objet($flux) {
 	$e = trouver_objet_exec($exec);
 	$type = $flux['args']['type'];
 
-	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets')) ) {
+	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets'))) {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
@@ -36,28 +36,6 @@ function coordonnees_afficher_fiche_objet($flux) {
 			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
 		else
 			$flux['data'] .= $texte;
-	}
-
-	return $flux;
-}
-
-
-/**
- * Liste des coordonnées d'un auteur sur la page "infos_perso"
-**/
-function coordonnees_affiche_auteurs_interventions($flux) {
-	$texte = "";
-	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
-	if ($id_auteur = intval($flux['args']['id_auteur']) AND $exec != 'auteur') {
-		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
-			'objet' => 'auteur',
-			'id_objet' => $id_auteur,
-			),
-			array('ajax'=>'coordonnees')
-		);
-	}
-	if ($texte) {
-		$flux['data'] .= $texte;
 	}
 
 	return $flux;
