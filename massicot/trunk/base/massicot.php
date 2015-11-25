@@ -22,14 +22,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function massicot_declarer_tables_interfaces($interfaces) {
 
+    if (is_null($interfaces['table_des_traitements']['FICHIER']['documents'])) {
+        $interfaces['table_des_traitements']['FICHIER']['documents'] = '%s';
+    }
+
     $interfaces['table_des_traitements']['FICHIER']['documents'] =
       'massicoter_document(' . $interfaces['table_des_traitements']['FICHIER']['documents'] . ')';
 
     $interfaces['table_des_traitements']['LOGO_DOCUMENT'][] =
       'massicoter_logo_document(%s, $connect, $Pile[1])';
 
+    if (is_null($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) {
+        $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] = '%s';
+    }
+
     $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] =
-      'massicoter_document(' . $interfaces['table_des_traitements']['FICHIER']['documents'] . ')';
+      'massicoter_document(' . $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] . ')';
 
     /* On traîte aussi les balises #HAUTEUR et #LARGEUR des documents */
     $interfaces['table_des_traitements']['LARGEUR']['documents'] =
@@ -40,6 +48,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
     /* Pour chaque objet éditorial existant, ajouter un traitement sur
        les logos */
     foreach (lister_tables_objets_sql() as $table => $valeurs) {
+
         if ($table !== 'spip_documents') {
             $interfaces['table_des_traitements'][strtoupper('LOGO_'.objet_type($table))][] =
                 'massicoter_logo(%s, $connect, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])';

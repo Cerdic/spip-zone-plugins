@@ -178,6 +178,12 @@ function massicoter_fichier ($fichier, $parametres) {
     $fichier = parse_url($fichier);
     $fichier = $fichier['path'];
 
+    /* la balise #FICHIER sur les boucles documents donne un chemin
+       relatif au dossier IMG. Il faut traiter ce cas à part */
+    if (! file_exists($fichier)) {
+        $fichier = _DIR_IMG . $fichier;
+    }
+
     list($width, $height) = getimagesize($fichier);
 
     $fichier = extraire_attribut(
