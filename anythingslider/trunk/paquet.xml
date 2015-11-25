@@ -1,12 +1,12 @@
 <paquet
 	prefix="anythingslider"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.0.1"
 	etat="dev"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/anythingslider.png"
 	documentation="http://contrib.spip.net/AnythingSlider-version-2-x-x"
->	
+>
 
 	<nom>AnythingSlider</nom>
 	<!-- Faire d&#233; filer du contenu dans vos squelettes -->
