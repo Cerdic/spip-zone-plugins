@@ -176,7 +176,7 @@ class Crayon {
 	// $name : son nom
 	// $texts : tableau associatif des valeurs ou valeur unique si crayon monochamp
 	// $options : options directes du crayon (developpement)
-	function Crayon($name, $texts = array(), $options = array(), $c=null) {
+	function __construct($name, $texts = array(), $options = array(), $c=null) {
 		$this->name = $name;
 
 		list($this->type, $this->modele, $this->id) = array_pad(explode('-', $this->name, 3), 3, '');
@@ -408,8 +408,8 @@ function crayons_formulaire($html, $action='crayons_store') {
 //
 class SecureCrayon extends Crayon {
 
-	function SecureCrayon($name, $text='') {
-		parent::Crayon($name, $text);
+	function __construct($name, $text='') {
+		parent::__construct($name, $text);
 	}
 
 	function code() {
