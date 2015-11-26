@@ -7,7 +7,9 @@ function formulaires_ajoute_a2a_charger($id_article_orig,$id_article_dest){
 	return 
 		array(
 			'id_article_orig' => $id_article_orig,
-			'id_article_dest'=>$id_article_dest
+			'id_article_dest'=>$id_article_dest,
+			'lier' => '',
+			'lier2' => '',
 		);
 }
 
@@ -19,21 +21,24 @@ function formulaires_ajoute_a2a_verifier($id_article_orig,$id_article_dest){
 			return array('message_erreur'=>_T('a2a:type_inexistant'));
 		}
 	}
-	elseif(lire_config('a2a/type_obligatoire')){
+	elseif (lire_config('a2a/type_obligatoire')){
 		return array('message_erreur'=>_T('a2a:type_inexistant'));
 	}
+	return array();
 }
 
 function formulaires_ajoute_a2a_traiter($id_article_orig,$id_article_dest){
-	$lier = _request('lier');
+
+	$lier  = _request('lier');
 	$lier2 = _request('lier2');
 	include_spip('action/a2a');
 	$action_a2a = charger_fonction('a2a_lier_article','action');
+
 	if ($lier){
-		$action_a2a($id_article_dest,$id_article_orig,_request('type_liaison'),'');	
+		$action_a2a($id_article_dest,$id_article_orig,_request('type_liaison'),'');
 	}
 	if ($lier2){
-		$action_a2a($id_article_dest,$id_article_orig,_request('type_liaison'),'both');		
+		$action_a2a($id_article_dest,$id_article_orig,_request('type_liaison'),'both');
 	}
 	return array("message_ok"=>"ok");
 }
