@@ -67,7 +67,7 @@ function action_taxonomie_get_wikipedia_dist(){
 				// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
 				//   si besoin
 				include_spip('inc/taxonomer');
-				$maj[$champ] = taxon_merger_traductions($taxon[$champ], $texte_converti, true);
+				$maj[$champ] = taxon_merger_traductions($texte_converti, $taxon[$champ]);
 				// - l'indicateur d'édition est positionné à oui
 				if ($taxon['edite']) {
 					$maj['edite'] = 'oui';

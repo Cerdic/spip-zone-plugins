@@ -96,9 +96,8 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 				AND (array_key_exists($tsn, $taxons))) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
 					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
-													$taxons[$tsn]['nom_commun'],
 													$_taxon_edite['nom_commun'],
-													true);
+													$taxons[$tsn]['nom_commun']);
 					$taxons[$tsn]['edite'] = 'oui';
 				}
 			}
