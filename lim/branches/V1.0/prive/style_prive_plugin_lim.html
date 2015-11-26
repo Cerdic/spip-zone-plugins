@@ -1,0 +1,40 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+[(#REM) Saisies boutons radio sur une ligne ]
+.formulaire_spip .choix.ligne > label {margin-left:0px; margin-right:30px;}
+
+.formulaire_spip legend 	{margin-bottom:10px; letter-spacing:1px; background-color:[#(#ENV{foncee}|couleur_eclaircir)]}
+.formulaire_spip li.li_long { padding-left: 10px; padding-right: 10px; }
+
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.formulaire_spip.formulaire_configurer_lim_logos,
+.formulaire_spip.formulaire_configurer_lim_rubriques .choix label { vertical-align:middle; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul { margin:0;padding:0; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux 			{ margin:0;padding:0; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux li 		{ margin:0; padding:0; padding:0; border:1px solid #ddd; border-radius:5px; background-color:#fff; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux li ul		{ margin-bottom:5px; margin-#ENV{left}:20px; border-#ENV{left}:1px solid #ddd; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux li ul ul	{ margin-bottom:0; margin-#ENV{left}:20px; border-#ENV{left}:1px solid #ddd; }
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux li li		{ border:0; border-radius:0;}
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux li.secteur { margin-bottom:10px; [(#SPIP_VERSION|match{3.0}|oui) padding:5px;]}
+.formulaire_spip.formulaire_configurer_lim_rubriques ul.creneaux .checked 	{ background:[#(#ENV{claire}|couleur_eclaircir{0.7})];}
+.formulaire_spip.formulaire_configurer_lim_rubriques div.choix 				{ padding: 4px 10px; border:0; border-radius:0;}
+.formulaire_spip.formulaire_configurer_lim_rubriques div.choix input[type='checkbox'] { margin:1px 0.3ex; vertical-align:middle; border:0;}
+img.info_logo_site, img.forbidden 	{ vertical-align:middle; }

@@ -1,0 +1,4 @@
+﻿Todo
+
+gestion de la taille des logos
+
