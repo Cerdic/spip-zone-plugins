@@ -1,21 +1,24 @@
 <paquet
-    prefix="lister_objets"
-    categorie="outil"
-    version="1.0.1"
-    etat="stable"
-    compatibilite="[3.0.0;3.1.*]"
-    logo="prive/themes/spip/images/lister_objets-32.png"
-    documentation="http://contrib.spip.net/4709"
-    >
+	prefix="lister_objets"
+	categorie="outil"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/lister_objets-32.png"
+	documentation="http://contrib.spip.net/4709"
+	>
 
-    <nom>Lister les objets principaux de SPIP</nom>
+	<nom>Lister les objets principaux de SPIP</nom>
 
-    <auteur>Teddy Payet</auteur>
+	<auteur>Teddy Payet</auteur>
 
-    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-    <necessite nom="lister_config" compatibilite="[1.0.0;]" />
+	<menu nom="lister_objets" titre="lister_objets:titre_lister_objets" parent="menu_configuration" icone="images/lister_objets-16.png" />
 
-    <pipeline nom="listermenu" inclure="lister_objets_pipelines.php" />
+	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
+
+	<pipeline nom="autoriser" inclure="lister_objets_autorisations.php" />
+	<pipeline nom="listermenu" inclure="lister_objets_pipelines.php" />
 
 </paquet>
