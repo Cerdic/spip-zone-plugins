@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 
@@ -36,7 +36,7 @@ function lister_exec_autoriser()
 **/
 function autoriser_listerexec_voir_dist($faire, $type, $id, $qui, $opt)
 {
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -51,7 +51,7 @@ function autoriser_listerexec_voir_dist($faire, $type, $id, $qui, $opt)
 **/
 function autoriser_listerexec_configurer_dist($faire, $type, $id, $qui, $opt)
 {
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 // ------
@@ -71,7 +71,7 @@ function autoriser_listerexec_configurer_dist($faire, $type, $id, $qui, $opt)
 **/
 function autoriser_configurerlisterexec_menu_dist($faire, $type, $id, $qui, $opt)
 {
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -86,10 +86,10 @@ function autoriser_configurerlisterexec_menu_dist($faire, $type, $id, $qui, $opt
 **/
 function autoriser_listerexec_menu_dist($faire, $type, $id, $qui, $opt)
 {
-    include_spip('inc/filtres');
+	include_spip('inc/filtres');
 	$info = chercher_filtre('info_plugin');
 	$i = $info('lister_config', 'est_actif');
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui' and (empty($i) or $i == false or $i === 0);
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui' and (empty($i) or $i == false or $i === 0);
 }
 
 ?>
