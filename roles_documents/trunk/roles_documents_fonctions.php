@@ -15,11 +15,11 @@ function roles_documents_declarer_tables_interfaces($interfaces) {
 	return $interfaces;
 }
 
-function traiter_logo_article($logo_article, $id_article) {	
+function traiter_logo_article($logo_article, $id_article) {
 	return trim(recuperer_fond('logo/article', array('logo_article' => $logo_article, 'id_article' => $id_article)));
 }
 
-function traiter_logo_article_rubrique($logo_article, $id_article) {	
+function traiter_logo_article_rubrique($logo_article, $id_article) {
 	return trim(recuperer_fond('logo/article_rubrique', array('logo_article' => $logo_article, 'id_article' => $id_article)));
 }
 
