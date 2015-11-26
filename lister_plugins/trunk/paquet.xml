@@ -1,21 +1,24 @@
 <paquet
-    prefix="lister_plugins"
-    categorie="outil"
-    version="1.0.1"
-    etat="stable"
-    compatibilite="[3.0.0;3.1.*]"
-    logo="prive/themes/spip/images/lister_plugins-32.png"
-    documentation="http://contrib.spip.net/4710"
-    >
+	prefix="lister_plugins"
+	categorie="outil"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/lister_plugins-32.png"
+	documentation="http://contrib.spip.net/4710"
+	>
 
-    <nom>Lister les objets principaux de SPIP</nom>
+	<nom>Les plugins nécessaires au site</nom>
 
-    <auteur>Teddy Payet</auteur>
+	<auteur>Teddy Payet</auteur>
 
-    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-    <necessite nom="lister_config" compatibilite="[1.0.0;]" />
+	<menu nom="lister_plugins" titre="lister_plugins:titre_lister_plugins" parent="menu_configuration" icone="images/lister_plugins-16.png" />
 
-    <pipeline nom="listermenu" inclure="lister_plugins_pipelines.php" />
+	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
+
+	<pipeline nom="autoriser" inclure="lister_plugins_autorisations.php" />
+	<pipeline nom="listermenu" inclure="lister_plugins_pipelines.php" />
 
 </paquet>
