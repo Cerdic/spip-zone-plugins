@@ -80,7 +80,7 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
 a {color: @link-color;}
 a:focus,
 a:hover,
-a:active { background-color: spin(lighten(@link-color,50%) / 4 + @gray-lighter / 4 * 3, 20%); color: @link-hover-color; text-decoration: none; }
+a:active { background-color: spin(lighten(@link-color,50%) / 4 + @gray-lighter / 4 * 3, 20%); color: @link-hover-color; text-decoration: @link-hover-decoration; }
 a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
 @media print {
   a, a:visited { color: @text-color; text-decoration: underline; }
