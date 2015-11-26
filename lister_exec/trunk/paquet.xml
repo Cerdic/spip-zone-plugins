@@ -15,7 +15,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-    <menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
+    <menu nom="lister_exec" titre="lister_exec:titre_lister_exec" parent="menu_configuration" icone="images/lister_exec-16.png" />
 
 	<utilise nom="lister_config" compatibilite="[1.0.0;]" />
 
