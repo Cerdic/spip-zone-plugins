@@ -5,7 +5,7 @@
  *
  * Essentiellement des surcharges d'autorisations du plugin mots
  * 
- * @package Motus\Autorisations
+ * @package SPIP\Motus\Autorisations
 **/
 
 /** Fonction d'appel du pipeline **/
@@ -237,6 +237,3 @@ function autoriser_groupemots_dansrubrique_dist($faire,$type,$id,$qui,$opt){
 	return $rubriques[$id][$hash];
 }
 
-
-
-?>

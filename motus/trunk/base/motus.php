@@ -2,7 +2,7 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @package Motus\SQL
+ * @package SPIP\Motus\SQL
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -53,5 +53,3 @@ function motus_groupes_mots_arborescents_heritages($champs) {
 	$champs[] = 'rubriques_on';
 	return $champs;
 }
-
-?>

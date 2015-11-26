@@ -2,7 +2,7 @@
 /**
  * Fichier gérant l'installation et désinstallation du plugin
  *
- * @package Motus\Installation
+ * @package SPIP\Motus\Installation
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -38,4 +38,3 @@ function motus_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>
