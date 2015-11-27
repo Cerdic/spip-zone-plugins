@@ -1,4 +1,4 @@
-<traduction module="iextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras/interface/trunk/lang/" reference="fr">
+<traduction module="iextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras_interface/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=en" total="104" traduits="81" relire="0" modifs="2" nouveaux="21" pourcent="77.88">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
