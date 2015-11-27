@@ -8,7 +8,10 @@
  * @package SPIP\Motus\Autorisations
 **/
 
-/** Fonction d'appel du pipeline **/
+/**
+ * Fonction d'appel du pipeline
+ * @pipeline autoriser
+ **/
 function motus_autoriser(){}
 
 /**
@@ -157,7 +160,7 @@ function autoriser_groupemots_afficherselecteurmots($faire, $type, $id, $qui, $o
  * 
  * Autrement dit, si l'objet appartient à une des rubriques données
  *  
- * @param string $restriction
+ * @param string $restrictions
  *     Liste des restrictions issues d'une selection avec le selecteur generique (rubrique|3)
  * @param string $objet
  *     Objet sur lequel on teste l'appartenance a une des rubriques (article)
@@ -171,7 +174,7 @@ function motus_autoriser_groupe_si_selection_rubrique($restrictions, $objet, $id
 	// si restriction a une rubrique...
 	include_spip('formulaires/selecteur/generique_fonctions');
 	if ($rubs = picker_selected($restrictions, 'rubrique')) {
-		
+
 		// trouver la rubrique de l'objet en question
 		if ($objet != 'rubrique') {
 

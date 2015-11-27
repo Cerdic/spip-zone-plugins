@@ -12,6 +12,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Ajoute un champ «rubrique_on» sur les groupes de mots
  *
+ * @pipeline declarer_champs_extras
+ * 
  * @param array $champs
  *     Description des champs extras pour chaque table SQL
  * @return array
@@ -43,6 +45,8 @@ function motus_declarer_champs_extras($champs = array()){
  * du groupe de mot racine.
  *
  * L'autorisation du champs extras le cache dans les groupes enfants.
+ *
+ * @pipeline groupes_mots_arborescents_heritages
  * 
  * @param array $champs
  *     Liste des champs à hériter aux groupes enfants
