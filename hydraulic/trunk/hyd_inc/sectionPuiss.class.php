@@ -62,9 +62,10 @@ class cSnPuiss extends acSection {
 
     /**
      * Calcul du périmètre mouillé.
+     * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return B
      */
-     protected function CalcP() {
+     protected function CalcP($rY=0) {
         $n=100; /// Le nombre de partie pour le calcul de l'intégrale
         $rLambda2 = pow($this->Calc('Alpha'),2);
         $rP = 0; /// Le périmètre à calculer
@@ -80,9 +81,10 @@ class cSnPuiss extends acSection {
 
     /**
      * Calcul de la surface mouillée.
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S
      */
-    protected function CalcS() {
+    protected function CalcS($rY=0) {
         return $this->Calc('Alpha')*pow($this->rY, $this->rk+1)/($this->rk+1);
     }
 
@@ -106,20 +108,21 @@ class cSnPuiss extends acSection {
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYg() {
+    protected function CalcSYg($rY=0) {
         return $this->Calc('Alpha')*pow($this->rY, $this->rk+2)/(($this->rk+1)*($this->rk+2));
     }
     /**
      * Calcul de la dérivée distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYgder() {
+    protected function CalcSYgder($rY=0) {
         $SYg = $this->Calc('dAlpha')*pow($this->rY, $this->rk+2) + $this->Calc('Alpha')*pow($this->rY, $this->rk+1)*($this->rk+2);
         return $SYg/(($this->rk+1)*($this->rk+2));
     }
-
 }
 ?>

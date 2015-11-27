@@ -30,8 +30,10 @@ class cLog {
             <ul>';
    }
 
-   public function Add($sTxt) {
-      $this->txt .= '<li>'.$sTxt.'</li>';
+   public function Add($sTxt,$bErr=false) {
+      $this->txt .= '<li';
+      if($bErr) {$this->txt .= ' class="hyd_erreur"';}
+      $this->txt .= '>'.$sTxt.'</li>';
    }
 
    public function Result() {

@@ -33,30 +33,20 @@ function mes_saisies_section() {
     // On récupère les champs communs à tous les formulaires à savoir les champs de section.
     $fieldset_champs = caract_communes();
 
-    $fieldset_champs['Caract_bief'] = array(
-                                           'caract_bief',
-                                           array(
-                                                 'rKs'    =>array('coef_strickler',50),
-                                                 'rLong'  =>array('longueur_bief', 50),
-                                                 'rIf'    =>array('pente_fond', 0.005),
-                                                 'rYBerge'=>array('h_berge',1)
-                                                )
-                                       );
-
     $fieldset_champs['Cond_lim']    = array(
                                            'condition_limite',
                                            array(
-                                                 'rQ'     =>array('debit_amont', 2),
-                                                 'rYaval' =>array('h_aval_imposee', 0.6),
-                                                 'rYamont'=>array('h_amont_imposee', 0.15)
+                                                 'rQ'     =>array('debit_amont',2,'op'),
+                                                 'rYaval' =>array('h_aval_imposee',0.6,'pn'),
+                                                 'rYamont'=>array('h_amont_imposee',0.15,'pn')
                                                 )
                                        );
 
     $fieldset_champs['Param_calc']  = array(
                                            'param_calcul',
                                            array(
-                                                 'rDx'    =>array('pas_discret', 5),
-                                                 'rPrec'  =>array('precision_calc', 0.001)
+                                                 'rDx'    =>array('pas_discret',5,'op'),
+                                                 'rPrec'  =>array('precision_calc',0.001,'op')
                                                 )
                                        );
 
@@ -64,26 +54,26 @@ function mes_saisies_section() {
 
 }
 
-// Définition des champs obligatoires pour le formulaire.
-function champs_obligatoires() {
+// Définition des champs à lire dans le formulaire
+function getChamps() {
 
     $tSaisie = mes_saisies_section();
     $sTypeSection = _request('crTypeSection');
-    $tChOblig = array();
+    $tData = array();
 
     foreach($tSaisie as $IdFS=>$FieldSet) {
         // Si ce n'est pas une section ou la section définie...
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
             // ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
             foreach($FieldSet[1] as $Cle=>$Champ) {
-                if((!isset($Champ[2])) || (isset($Champ[2]) && $Champ[2])) {
-                    $tChOblig[] = $IdFS.'_'.$Cle;
-                }
+                $tData[$IdFS.'_'.$Cle] = _request($IdFS.'_'.$Cle);
+                $tCtrl[$IdFS.'_'.$Cle] = $Champ[2];
             }
         }
     }
-    return $tChOblig;
+    return array($tData,$tCtrl);
 }
+
 
 function formulaires_courbe_remous_charger_dist() {
     // On charge les saisies et les champs qui nécessitent un accès par les fonctions
@@ -93,10 +83,10 @@ function formulaires_courbe_remous_charger_dist() {
         'mes_saisies' => $tSaisie_section
     );
 
-	// On charge tous les champs avec leur valeur
+    // On charge tous les champs avec leur valeur
     foreach($tSaisie_section as $CleFD=>$FieldSet) {
         foreach($FieldSet[1] as $Cle=>$Champ) {
-			$valeurs[$CleFD.'_'.$Cle] = $Champ[1];
+            $valeurs[$CleFD.'_'.$Cle] = $Champ[1];
         }
     }
 
@@ -105,29 +95,9 @@ function formulaires_courbe_remous_charger_dist() {
 
 function formulaires_courbe_remous_verifier_dist(){
     $erreurs = array();
-    $datas = array();
-    $tChOblig= champs_obligatoires();
-
-    // On vérifie que les champs obligatoires sont bien là :
-    foreach($tChOblig as $obligatoire) {
-        if (!_request($obligatoire)) {
-            $erreurs[$obligatoire] = _T('hydraulic:champ_obligatoire');}
-        else {
-            $datas[$obligatoire] = _request($obligatoire);
-        }
-    }
-
-	// Gestion des valeurs négatives
-    foreach($datas as $champ=>$data) {
-        if ($data < 0) $erreurs[$champ] = _T('hydraulic:valeur_positive');
-    }
-
-	// On compte s'il y a des erreurs. Si oui, alors on affiche un message
-    if (count($erreurs)) {
-        $erreurs['message_erreur'] = _T('hydraulic:saisie_erreur');
-    }
-
-    return $erreurs;
+    list($tData,$tCtrl) = getChamps();
+    include_spip('hyd_inc/formulaire');
+    return hyd_formulaires_verifier($tData,$tCtrl);
 }
 
 function formulaires_courbe_remous_traiter_dist(){
@@ -144,11 +114,11 @@ function formulaires_courbe_remous_traiter_dist(){
     $tChUtil = array();
     $crTypeSection = _request('crTypeSection');
 
-	// On récupère tous les champs utiles, à savoir les champs fixes, et les champs appartenant à la section choisie
+    // On récupère tous les champs utiles, à savoir les champs fixes, et les champs appartenant à la section choisie
     foreach($tSaisie as $IdFS=>$FieldSet) {
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $crTypeSection)){
             foreach($FieldSet[1] as $Cle=>$Champ) {
-				$tChUtil[] = $IdFS.'_'.$Cle;
+                $tChUtil[] = $IdFS.'_'.$Cle;
             }
         }
     }
@@ -178,16 +148,16 @@ function formulaires_courbe_remous_traiter_dist(){
 
     // Contrôle du nombre de pas d'espace maximum
     $iPasMax = 1000;
-    if($Caract_bief_rLong / $Param_calc_rDx > $iPasMax) {
-        $Param_calc_rDx = $Caract_bief_rLong / $iPasMax;
+    if($c_bief_rLong / $Param_calc_rDx > $iPasMax) {
+        $Param_calc_rDx = $c_bief_rLong / $iPasMax;
         $oLog->Add(_T('hydraulic:pas_nombre').' > '.$iPasMax.' => '._T('hydraulic:pas_ajustement').$Param_calc_rDx.' m');
     }
-    //spip_log(array($Cond_lim_rYaval,$Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rLong,$Caract_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
+    //spip_log(array($Cond_lim_rYaval,$c_bief_rKs,$Cond_lim_rQ,$c_bief_rLong,$c_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($Caract_bief_rKs,$Cond_lim_rQ,$Caract_bief_rIf,$Param_calc_rPrec,$Caract_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$Caract_bief_rLong);
+    $oParam= new cParam($c_bief_rKs,$Cond_lim_rQ,$c_bief_rIf,$Param_calc_rPrec,$c_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$c_bief_rLong);
 
-	// Création d'un objet de type Section selon la section choisie.
+    // Création d'un objet de type Section selon la section choisie.
     switch($crTypeSection) {
         case 'FT':
             include_spip('hyd_inc/sectionTrapez.class');
@@ -299,25 +269,30 @@ function formulaires_courbe_remous_traiter_dist(){
             'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
     }
     // Hauteur critique
-    $oGraph->AddSerie(
-        'h_critique',
-        $trX,
-        $oSection->rHautCritique,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-        '#ff0000',
-        'lineWidth:2');
+    if(is_numeric($oSection->rHautCritique)) {
+        $oGraph->AddSerie(
+            'h_critique',
+            $trX,
+            $oSection->rHautCritique,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+            '#ff0000',
+            'lineWidth:2');
+    }
     // Hauteur normale
-    $oGraph->AddSerie(
-        'h_normale',
-        $trX,
-        $oSection->rHautNormale,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
-        '#a4c537',
-        'lineWidth:2');
+    if(is_numeric($oSection->rHautNormale)) {
+        $oGraph->AddSerie(
+            'h_normale',
+            $trX,
+            $oSection->rHautNormale,  // La cote du fond sera calculée à partir de la pente fournie dans GetGraph
+            '#a4c537',
+            'lineWidth:2');
+    }
 
     // Décalage des données par rapport au fond
-    $oGraph->Decal(0, $Caract_bief_rIf, $Caract_bief_rLong);
+    $oGraph->Decal(0, $c_bief_rIf, $c_bief_rLong);
 
     // Récupération du graphique
     $echo .= $oGraph->GetGraph('courbe_remous',400,600);
+
 
     $echo .= $sLog;
 
@@ -337,7 +312,6 @@ function formulaires_courbe_remous_traiter_dist(){
                 <th scope="col">'._T('hydraulic:tirant_eau').'</th>
                 <th scope="col">Froude</th>
             </tr>
-                <th></th>
         </thead>
         <tbody>';
     $i=0;
@@ -347,7 +321,7 @@ function formulaires_courbe_remous_traiter_dist(){
         $echo.=($i%2==0)?'row_even':'row_odd';
         $echo.='"><td>'.format_nombre($rX,$oParam->iPrec).'</td>';
         if(isset($tr['X1']) && !(($cle = array_search($rX,$tr['X1'])) === false)) {
-			// On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
+            // On formalise les résultats, avec le nombre de chiffres aprés la virgule adéquat
             $echo .= '<td>'.format_nombre($tr['Y1'][$cle],$oParam->iPrec).'</td>';
             $echo .= '<td>'.format_nombre($oSection->Calc('Fr', $tr['Y1'][$cle]),$oParam->iPrec).'</td>';
         }

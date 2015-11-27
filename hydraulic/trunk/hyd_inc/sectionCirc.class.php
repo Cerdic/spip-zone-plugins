@@ -95,9 +95,10 @@ class cSnCirc extends acSection {
 
     /**
      * Calcul du périmètre mouillé.
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return B
      */
-     protected function CalcP() {
+     protected function CalcP($rY=0) {
         if($this->rY > $this->oP->rYB and !$this->bSnFermee) {
             // On n'ajoute pas le périmètre dans le cas d'une fente de Preissmann
             return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
@@ -109,9 +110,10 @@ class cSnCirc extends acSection {
 
     /**
      * Calcul de la surface mouillée.
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S
      */
-    protected function CalcS() {
+    protected function CalcS($rY=0) {
         if($this->rY > $this->oP->rYB) {
             return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
         }
@@ -162,9 +164,10 @@ class cSnCirc extends acSection {
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYg() {
+    protected function CalcSYg($rY=0) {
         $SYg = sin($this->Calc('Alpha'))-pow(sin($this->Calc('Alpha')),3) / 3 - $this->Calc('Alpha') * cos($this->Calc('Alpha'));
         $SYg = pow($this->rD,3) / 8 * $SYg;
         return $SYg;
@@ -173,9 +176,10 @@ class cSnCirc extends acSection {
     /**
      * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYgder() {
+    protected function CalcSYgder($rY=0) {
         $cos = cos($this->Calc('Alpha'));
         $sin = sin($this->Calc('Alpha'));
         $SYg = $this->Calc('dAlpha') * $cos;

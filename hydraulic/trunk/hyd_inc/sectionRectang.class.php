@@ -35,29 +35,41 @@ class cSnRectang extends acSection {
         parent::__construct($oLog,$oP);
     }
 
-    protected function CalcP() {
+    /**
+     * Calcul du périmètre mouillé
+     * @param $rY Uniquement présent car la méthode parent à cet argument
+     * @return Périmètre mouillé (m)
+     */
+    protected function CalcP($rY=0) {
         return $this->rLargeurBerge+parent::CalcP($this->rY);
     }
 
-    protected function CalcS() {
+    /**
+     * Calcul de la surface mouillée
+     * @param $rY Uniquement présent car la méthode parent à cet argument
+     * @return Surface mouillée (m2)
+     */
+    protected function CalcS($rY=0) {
         return parent::CalcS($this->rY);
     }
 
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre
      * multiplié par la section
+     * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return SYg
      */
-    protected function CalcSYg() {
+    protected function CalcSYg($rY=0) {
         return parent::CalcSYg($this->rY);
     }
 
     /**
      * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
      * multiplié par la section
+     * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Dérivée de SYg par rapport à Y
      */
-    protected function CalcSYgder() {
+    protected function CalcSYgder($rY=0) {
         return parent::CalcSYgder($this->rY);
     }
 

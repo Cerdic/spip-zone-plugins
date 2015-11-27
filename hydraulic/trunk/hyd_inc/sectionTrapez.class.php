@@ -48,22 +48,37 @@ class cSnTrapez extends acSection {
         }
     }
 
-    protected function CalcP() {
+    /**
+     * Calcul du périmètre mouillé
+     * @param $rY Uniquement présent car la méthode parent à cet argument
+     * @return Périmètre mouillé (m)
+     */
+    protected function CalcP($rY=0) {
         if($this->rY > $this->oP->rYB) {
-            return $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+            $P = $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
         }
         else {
-            return $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
+            $P = $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
         }
+        //~ spip_log('Trapez->CalcP(rY='.$this->rY.')='.$P,'hydraulic');
+        return $P;
     }
 
-    protected function CalcS() {
+
+    /**
+     * Calcul de la surface mouillée
+     * @param $rY Uniquement présent car la méthode parent à cet argument
+     * @return Surface mouillée (m2)
+     */
+    protected function CalcS($rY=0) {
         if($this->rY > $this->oP->rYB) {
-            return $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+            $S = $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
         }
         else {
-            return $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
+            $S = $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
         }
+        //~ spip_log('Trapez->CalcS(rY='.$this->rY.')='.$S,'hydraulic');
+        return $S;
     }
 
     /**
@@ -108,18 +123,20 @@ class cSnTrapez extends acSection {
     /**
      * Calcul de la distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return S x Yg
      */
-    protected function CalcSYg() {
+    protected function CalcSYg($rY=0) {
         return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2);
     }
 
     /**
      * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
+     * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return S x Yg
      */
-    protected function CalcSYgder() {
+    protected function CalcSYgder($rY=0) {
         $SYg = $this->rFruit / 3 * pow($this->rY,2);
         $SYg += ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * 2 * $this->rY;
         return $SYg;

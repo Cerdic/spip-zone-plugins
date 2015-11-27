@@ -44,16 +44,20 @@ function CacheSize() {
 
 
 function CacheCleanAll() {
-   $dp = opendir(HYD_CACHE_DIRECTORY);
-   while($file = readdir($dp)) {
-      if($file !== '.' and $file != '..') {
-         unlink(HYD_CACHE_DIRECTORY."/".$file);
-      }
-   }
+    $dp = opendir(HYD_CACHE_DIRECTORY);
+    while($file = readdir($dp)) {
+        if($file !== '.' and $file != '..') {
+            unlink(HYD_CACHE_DIRECTORY."/".$file);
+        }
+    }
 }
 
 function format_nombre($nombre,$dec) {
-   return number_format($nombre, $dec, ',', ' ');
+    if($nombre === false) {
+        return _T('hydraulic:non_calcule');
+    } else {
+        return number_format($nombre, $dec, '.', ' ');
+    }
 }
 
 ?>

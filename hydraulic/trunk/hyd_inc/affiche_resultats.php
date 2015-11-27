@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Renvoie un tableau formaté à partir d'un array à deux dimensions
  * @param $tContent Tableau à 2 dimensions contenant les cellules [ligne][colonne]
