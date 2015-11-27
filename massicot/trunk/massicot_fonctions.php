@@ -169,6 +169,10 @@ function massicoter_fichier ($fichier, $parametres) {
     include_spip('inc/filtres_images_mini');
     include_spip('filtres/images_transforme');
 
+    /* on vire un éventuel query string */
+    $fichier = parse_url($fichier);
+    $fichier = $fichier['path'];
+
     /* la balise #FICHIER sur les boucles documents donne un chemin
        relatif au dossier IMG qu'on ne peut pas retourner tel quel,
        sous peine de de casser le portfolio de la dist.
@@ -181,10 +185,6 @@ function massicoter_fichier ($fichier, $parametres) {
     if ( ! $parametres) {
         return $fichier;
     }
-
-    /* on vire un éventuel query string */
-    $fichier = parse_url($fichier);
-    $fichier = $fichier['path'];
 
     list($width, $height) = getimagesize($fichier);
 
