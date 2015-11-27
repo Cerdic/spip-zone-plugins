@@ -1,4 +1,4 @@
-<traduction module="paquet-cextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras/core/trunk/lang/" reference="fr">
+<traduction module="paquet-cextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras_core/trunk/lang/" reference="fr">
 	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=de" total="4" traduits="3" relire="0" modifs="0" nouveaux="1" pourcent="75.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
