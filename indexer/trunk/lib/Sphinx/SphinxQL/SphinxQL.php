@@ -51,7 +51,7 @@ class SphinxQL {
 	 * Échappe une chaîne
 	**/
 	public function escape_string($string) {
-		if (!$this->sql) {
+		if (!$this->sql || $this->connect_errno) {
 			return false;
 		}
 		

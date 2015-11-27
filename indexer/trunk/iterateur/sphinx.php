@@ -153,7 +153,6 @@ class IterateurSPHINX implements Iterator {
 		$this->setOptions($this->command['options']);
 
 		$this->runQuery();
-
 	}
 
 
@@ -229,14 +228,17 @@ class IterateurSPHINX implements Iterator {
 
 		// erreur de syntaxe ? correction de la requete
 		if (isset($result['query']['meta']['error'])) {
-			$q = $this->queryApi->getMatch();
-			$GLOBALS['sphinxReplace'][$q] = trim(preg_replace('/\W+/u', ' ', $q));
-			$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
-			$query  = $this->queryApi->get();
-			$result = $this->sphinxQL->allfetsel($query);
-			$message = _L('transformation de la requête en « ').htmlspecialchars($GLOBALS['sphinxReplace'][$q])." »";
-			$GLOBALS['sphinxReplaceMessage'][$q] = $message;
-			$this->save('message', $message);
+			spip_log($result['query'], 'indexer');
+			if (preg_match('/syntax error/', $result['query']['meta']['error'])) {
+				$q = $this->queryApi->getMatch();
+				$GLOBALS['sphinxReplace'][$q] = trim(preg_replace('/\W+/u', ' ', $q));
+				$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
+				$query  = $this->queryApi->get();
+				$result = $this->sphinxQL->allfetsel($query);
+				$message = _L('transformation de la requête en « ').htmlspecialchars($GLOBALS['sphinxReplace'][$q])." »";
+				$GLOBALS['sphinxReplaceMessage'][$q] = $message;
+				$this->save('message', $message);
+			}
 		}
 
 		if (!$result) {
