@@ -1,4 +1,4 @@
-<traduction module="pp_codes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_extras/codes/trunk/lang/" reference="fr">
+<traduction module="pp_codes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_codes/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/pp_codes?lang_cible=en" total="16" traduits="15" relire="1" modifs="0" nouveaux="0" pourcent="93.75">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
