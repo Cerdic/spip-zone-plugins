@@ -60,43 +60,47 @@ function relecture_header_prive_css($flux){
  *
 **/
 function relecture_formulaire_charger($flux){
+	static $forms_concernes = array('dater', 'editer_liens', 'instituer_objet');
 
 	$form = $flux['args']['form'];
-	$objet = $flux['data']['objet'] ? $flux['data']['objet'] : $flux['data']['_objet'];
-	$id_objet = intval($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
+	// Filtrer les formulaires concernés afin d'éviter ceux qui ne manipulent pas d'objet.
+	if (in_array($form, $forms_concernes)) {
+		$objet = !empty($flux['data']['objet']) ? $flux['data']['objet'] : $flux['data']['_objet'];
+		$id_objet = !empty($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
 
-	if ($objet == 'relecture') {
-		if ($form == 'dater') {
-			// Identifier le label comme la date de fin des commentaires
-			$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
-			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
-			$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
+		if ($objet == 'relecture') {
+			if ($form == 'dater') {
+				// Identifier le label comme la date de fin des commentaires
+				$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
+				// Le formulaire n'est editable que si l'autorisation modifier est accordee.
+				$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
+			}
+			else if ($form == 'editer_liens') {
+				// Changer le titre du formulaire pour désigner clairement les relecteurs
+				$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
+				// Le formulaire n'est editable que si l'autorisation modifier est accordee.
+				$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
+			}
+			else if ($form == 'instituer_objet') {
+				// Le formulaire n'est editable que si l'autorisation instituer est accordee.
+				$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
+			}
 		}
-		else if ($form == 'editer_liens') {
-			// Changer le titre du formulaire pour désigner clairement les relecteurs
-			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
-			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
-			$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
+		else if ($objet == 'article') {
+			if ($form == 'instituer_objet') {
+				// Si une relecture est ouverte sur l'article alors on interdit de modifier
+				// le statut de l'article qui reste a "en cours de redaction"
+				$from = 'spip_relectures';
+				$where = array("id_article=$id_objet", "statut=" . sql_quote('ouverte'));
+				$flux['data']['editable'] = (sql_countsel($from, $where) == 0);
+			}
 		}
-		else if ($form == 'instituer_objet') {
-			// Le formulaire n'est editable que si l'autorisation instituer est accordee.
-			$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
-		}
-	}
-	else if ($objet == 'article') {
-		if ($form == 'instituer_objet') {
-			// Si une relecture est ouverte sur l'article alors on interdit de modifier
-			// le statut de l'article qui reste a "en cours de redaction"
-			$from = 'spip_relectures';
-			$where = array("id_article=$id_objet", "statut=" . sql_quote('ouverte'));
-			$flux['data']['editable'] = (sql_countsel($from, $where) == 0);
-		}
-	}
-	else if ($objet == 'commentaire') {
-		if ($form == 'instituer_objet') {
-			// Etant donné la complexité du workflow, tout est géré dans le formulaire édition
-			// du commentaire. De fait, on désactive le formulaire instituer
-			$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
+		else if ($objet == 'commentaire') {
+			if ($form == 'instituer_objet') {
+				// Etant donné la complexité du workflow, tout est géré dans le formulaire édition
+				// du commentaire. De fait, on désactive le formulaire instituer
+				$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
+			}
 		}
 	}
 
