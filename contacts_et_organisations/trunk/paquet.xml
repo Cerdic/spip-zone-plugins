@@ -1,7 +1,7 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.12.2"
+	version="2.12.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/contacts-128.png"
@@ -33,6 +33,7 @@
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.1.0;[" />
 
 	<utilise nom="coordonnees" compatibilite="[1.4.5;[" />
 	<utilise nom="crayons" compatibilite="[1.10.0;[" />
