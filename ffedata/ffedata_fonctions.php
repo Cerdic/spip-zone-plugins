@@ -121,17 +121,6 @@ function echec_ligne_tableau($vals, $nb, $njoueurs = '10') {
 			}
 		}
 	}
-	else {
-		foreach ($liste as $cellule) {
-			$v = isset($vals[$cellule . $nb]) ? $vals[$cellule . $nb] : '';
-			if ($cellule == 'Resultat') {
-				$ligne .= '<td> F-1 </td>';
-			}
-			else {
-				$ligne .= '<td>' . $v . '</td>';
-			}
-		}
-	}
 
 	$ligne .= "</tr>";
 

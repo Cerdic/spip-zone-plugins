@@ -7,14 +7,12 @@
  
 <BOUCLE_blanc(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeBlancRef=#ENV{equipe}}>
      <tr>
-<th>Ronde [(#VALEUR{Ronde})]</th>
-<th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>Ronde [(#VALEUR{Ronde})] <br /> [(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}<br /> à #VALEUR{Lieu}</th>
 <th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
-<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
-<th>à #VALEUR{Lieu}</th>
      </tr>
  
-<BOUCLE_joueurs(DATA){enum 1,8}>
+<BOUCLE_joueurs(DATA){enum 1,10}>
 [(#_blanc:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs>
 </BOUCLE_blanc>
@@ -22,13 +20,11 @@
 
 <BOUCLE_noir(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeNoirRef=#ENV{equipe}}>
      <tr>
-<th>Ronde [(#VALEUR{Ronde})]</th>
-<th>[(#VALEUR{PVDate}|affdate)]</th>
-<th>#VALEUR{Lieu}</th>
-<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
+<th>Ronde [(#VALEUR{Ronde})] <br /> [(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}  <br /> à #VALEUR{Lieu}</th>
 <th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
      </tr>
-<BOUCLE_joueurs_noir(DATA){enum 1,8}>
+<BOUCLE_joueurs_noir(DATA){enum 1,10}>
 [(#_noir:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs_noir>
 </BOUCLE_noir>
