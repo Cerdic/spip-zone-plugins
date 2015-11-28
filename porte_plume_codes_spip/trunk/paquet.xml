@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="icones_barre/porte_plume_codes_spip-128.png"
 	documentation=""
 >
