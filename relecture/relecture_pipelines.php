@@ -245,6 +245,7 @@ function relecture_pre_edition($flux) {
 
 			// -- Cloture
 			if (($flux['args']['statut_ancien'] == 'ouvert')
+			AND (isset($flux['data']['statut']))
 			AND (in_array($flux['data']['statut'], array('accepte', 'refuse', 'poubelle')))) {
 				// - mise a jour de la date de cloture
 				$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
