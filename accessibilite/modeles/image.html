@@ -6,7 +6,7 @@
 <span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ 
 	style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
 	<a href="(#ENV{lien})"
-		class="(#ENV{lien_class})"]
+		[ class="(#ENV{lien_class})"]
 		[ lang="(#ENV{langue})"]
 		[(#MODE|=={image}|non)
 			[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"]
