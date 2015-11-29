@@ -1,35 +1,23 @@
-[(#HTTP_HEADER{'Content-Type: text/javascript'})]
-
-
 $(document).ready(function() {
 	var compteur = 0;
 	var afficher = true;
 
 	url_site = escape("#URL_SITE_SPIP");
-	
+
 	$("ul.referers li a").addClass("afficherPR");
 	$("ul.referers li li a").removeClass("afficherPR");
-	
+
 	$("ul.referers li a.afficherPR").each(function() {
 		url = $(this).attr("href");
-		
+
 		url = "http://" + parseUri(url).host;
 
 		compteur ++;
 		var afficher = true;
-		
+
 		if (url.indexOf(url_site) >= 0) var afficher = false;
-		
-		if (afficher) {
-			texte = $(this).html();
-			if (texte.indexOf("<img") >= 0) var afficher = false;
-			if (texte.length == 0) var afficher = false;
-			
-		}
-		
 
 		if (afficher) {
-//			$(this).prepend(" +");
 			$(this).prepend("<span id='pr"+compteur+"'></span>");
 			$("#pr"+compteur).load("../?page=afficher_minipagerank_racine&url="+escape(url));
 		}
