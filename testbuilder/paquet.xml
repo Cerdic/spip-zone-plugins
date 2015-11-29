@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.3.7"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[2.0.10;3.1.*]"
 	logo="images/tb-32.png"
 	documentation="http://contrib.spip.net/TestBuilder"
 >	
