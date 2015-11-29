@@ -110,9 +110,6 @@ function echec_ligne_tableau($vals, $nb, $njoueurs = '10') {
 						break;
 					case 15:
 						$result = "A-1";
-						break;
-					default:
-						$result = "1-F";
 				}
 				$ligne .= '<td style="width:35px;">' . $result . '</td>';
 			}
@@ -121,8 +118,6 @@ function echec_ligne_tableau($vals, $nb, $njoueurs = '10') {
 			}
 		}
 	}
-
-	$ligne .= "</tr>";
 
 	return $ligne;
 }
