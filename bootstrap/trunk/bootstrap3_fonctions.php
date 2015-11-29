@@ -124,3 +124,52 @@ function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $titl
 	return "<form class='bouton_action_post$ajax' method='post' action='$url'><div>".form_hidden($url)
 		."<button type='submit' class='submit btn $class'$title$onclick>$libelle</button></div></form>";
 }
+
+
+
+if (!test_espace_prive()){
+
+/**
+ * Ouvrir une boite
+ * peut etre surcharge par filtre_boite_ouvrir_dist, filtre_boite_ouvrir
+ *
+ * @param string $titre
+ * @param string $class
+ * @return <type>
+ */
+function filtre_boite_ouvrir_dist($titre, $class='', $head_class='', $id=""){
+	$class = "panel panel-default $class";
+	$head_class = "panel-heading $head_class";
+	// dans l'espace prive, titrer en h3 si pas de balise <hn>
+	if (test_espace_prive() AND strlen($titre) AND strpos($titre,'<h')===false)
+		$titre = "<h3>$titre</h3>";
+	return '<div class="'.$class.($id?"\" id=\"$id":"").'">'
+	.($titre?'<div class="'.$head_class.'">'.$titre.'</div>':'')
+	.'<div class="panel-body">';
+}
+
+/**
+ * Passer au pied d'une boite
+ * peut etre surcharge par filtre_boite_pied_dist, filtre_boite_pied
+ *
+ * @param <type> $class
+ * @return <type>
+ */
+function filtre_boite_pied_dist($class='act'){
+	$class = "panel-footer $class";
+	return 	'</div>'
+	.'<div class="'.$class.'">';
+}
+
+/**
+ * Fermer une boite
+ * peut etre surcharge par filtre_boite_fermer_dist, filtre_boite_fermer
+ *
+ * @return <type>
+ */
+function filtre_boite_fermer_dist(){
+	return '</div>'
+	.'</div>';
+}
+
+}
