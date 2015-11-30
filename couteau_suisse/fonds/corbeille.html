@@ -24,7 +24,7 @@
 			<td class='titre principale'><a
 							href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
 							title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>  <a class="suppr"
-							href="[(#SELF|replace{'\|',%7C}|parametre_url{suppr,#VALEUR{id}})]" title="<:lien_supprimer|html_attribut:>">X</a>
+							href="[(#SELF|replace{'\|',%7C}|parametre_url{suppr,#VALEUR{id}})]" title="<:lien_supprimer|attribut_html:>">X</a>
 			</td>
  			<td class='statut'>#VALEUR{statut}</td>
 			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
