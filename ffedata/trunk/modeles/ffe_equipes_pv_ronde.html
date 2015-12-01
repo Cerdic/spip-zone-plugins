@@ -12,7 +12,7 @@
 <th> [(#VALEUR{BlancPts}|sinon{0})]-[(#VALEUR{NoirPts}|sinon{0})] </th>
 </tr>
 </thead>
-<BOUCLE_joueurs_noir(DATA){enum 1,#VALEUR{NbrJoueurs}}>
+<BOUCLE_joueurs(DATA){enum 1,#VALEUR{NbrJoueurs}}>
 <td>[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#VALEUR{NbrJoueurs}})]</td>
 </BOUCLE_joueurs>
 </table>
@@ -30,8 +30,8 @@
 <th> [(#VALEUR{BlancPts}|sinon{0})]-[(#VALEUR{NoirPts}|sinon{0})] </th>
 </tr>
 </thead>
-<BOUCLE_joueurs_noir(DATA){enum 1,#GET{nbjoueurs}}>
-<td>[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#GET{nbjoueurs}})]</td>
+<BOUCLE_joueurs_noir(DATA){enum 1,#VALEUR{NbrJoueurs}}>
+<td>[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#VALEUR{NbrJoueurs}})]</td>
 </BOUCLE_joueurs_noir>
 </table>
 </BOUCLE_noir>
