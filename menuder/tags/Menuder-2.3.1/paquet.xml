@@ -1,0 +1,23 @@
+<paquet
+	prefix="menuder"
+	categorie="navigation"
+	version="2.3.1"
+	schema="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/icon.png"
+	documentation="http://contrib.spip.net/?article3804"
+>
+
+	<nom>Menu déroulant</nom>
+	<!-- Menu déroulant en CSS sans limitation de profondeur -->
+
+	<auteur lien="http://www.notre-ville.net">cedric@notre-ville.net</auteur>
+	<auteur lien="http://www.maat.me/">Maat</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL 3.0</licence>
+
+	<pipeline nom="insert_head" inclure="menuder_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="menuder_pipelines.php" />
+
+</paquet>

@@ -1,0 +1,28 @@
+/* menuder.css */
+.menuder-container {}
+.menuder,
+.menuder ul { float: left; width: 100%; margin: 0; padding: 0; background-color: #fff; border: solid #666; border-width: 1px 0; list-style: none; text-align: left; font-weight: bold; }
+.menuder a { display: block; width: 10em; w\idth: 6em; padding: .25em 2em; text-decoration: none; }
+.menuder a.daddy { background: url(img/menuder.gif) center right no-repeat; }
+.menuder li { float: left; width: 10em; padding: 0; }
+.menuder li ul { position: absolute; left: -999em; height: auto; width: 14.4em; w\idth: 13.9em; margin: 0; border-width: .25em; font-weight: normal; z-index:100;}
+.menuder li li { width: 13em; padding-right: 1em; }
+.menuder li ul a { width: 13em; w\idth: 9em; }
+.menuder li ul ul { margin: -1.75em 0 0 14em; }
+.menuder li:hover ul ul,
+.menuder li:hover ul ul ul,
+.menuder li:hover ul ul ul ul,
+.menuder li.hover ul ul,
+.menuder li.hover ul ul ul,
+.menuder li.hover ul ul ul ul { left: -999em; }
+.menuder li:hover ul, 
+.menuder li li:hover ul, 
+.menuder li li li:hover ul,
+.menuder li li li li:hover ul { left: auto; }
+.menuder li.hover ul,
+.menuder li li.hover ul,
+.menuder li li li.hover ul,
+.menuder li li li li.hover ul { left: auto; }
+.menuder li:hover,
+.menuder li.hover { background-color: #666; }
+/* end */
