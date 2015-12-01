@@ -1,5 +1,4 @@
- #SET{idronde,#ENV{ronde}}
- [(#SET{nbjoueurs,[(#ENV{nbj}|is_null|?{8,#ENV{nbj}})]})]
+#SET{idronde,#ENV{ronde}}
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetPVs?saison=#ENV{saison}&ref=#ENV{ref}}>	  
   
 <BOUCLE_blanc(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeBlancRef=#ENV{equipe}}>
@@ -13,8 +12,8 @@
 <th> [(#VALEUR{BlancPts}|sinon{0})]-[(#VALEUR{NoirPts}|sinon{0})] </th>
 </tr>
 </thead>
-<BOUCLE_joueurs(DATA){enum 1,#GET{nbjoueurs}}>
-[(#_blanc:VALEUR|echec_ligne_tableau{#VALEUR,#GET{nbjoueurs}})]
+<BOUCLE_joueurs_noir(DATA){enum 1,#VALEUR{NbrJoueurs}}>
+<td>[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#VALEUR{NbrJoueurs}})]</td>
 </BOUCLE_joueurs>
 </table>
 </BOUCLE_blanc>
