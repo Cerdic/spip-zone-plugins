@@ -3,7 +3,7 @@
 <prefix>varicelle</prefix>
 <icon>icon/varicelle.png</icon>
 
-<version>0.2.1</version>
+<version>0.2.2</version>
 <etat>stable</etat>
 <categorie>outil</categorie>
 
@@ -16,7 +16,7 @@
 	<nom>insert_head_css</nom>
 	<inclure>varicelle_pipelines.php</inclure>
 </pipeline>
-<necessite id="SPIP" version="[1.9.1;3.0.99]" />
-<utilise id="Z" version="[;]" />
+<necessite id="SPIP" version="[1.9.1;3.1.99]" />
+<utilise id="Z" version="[1.0.0;]" />
 
 </plugin>
