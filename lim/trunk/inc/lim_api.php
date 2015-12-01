@@ -64,4 +64,25 @@ function lim_verifier_presence_objets($id_rubrique, $objet) {
 	return false;
 }
 
+/**
+ * Récupérer le type des objets sélectionnés. ex. spip_articles -> article
+ * 
+ * @param array 
+ * @return array
+ */
+function lim_type($tableau) {
+	if (!is_array($tableau))
+		return '';
+
+	array_walk($tableau, 'lim_get_type');
+	return $tableau;
+}
+
+/**
+ * Changer les valeurs du tableau spip_articles -> article
+ */
+function lim_get_type(&$value, $key) {
+	$value = objet_type(table_objet($key));
+}
+
 ?>
