@@ -17,7 +17,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @pipeline autoriser */
 function lim_autoriser(){}
 
-
 /**************************************************************/
 /************* DESACTIVER DES LOGOS PAR CONTENUS *************/
 
@@ -66,10 +65,8 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
 		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
 		
 		return
-			$id
-			AND $lim_rub
-			AND autoriser('voir','rubrique',$id)
-			AND autoriser('creer', 'article');
+			$lim_rub
+			AND autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 
@@ -80,11 +77,8 @@ if (!function_exists('autoriser_rubrique_creerbrevedans')) {
 		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
 
 		return
-			$id
-			AND $lim_rub
-			AND ($r['id_parent']==0)
-			AND ($GLOBALS['meta']["activer_breves"]!="non")
-			AND autoriser('voir','rubrique',$id);
+			$lim_rub
+			AND autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 
@@ -97,14 +91,8 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 		if (_request('exec') == 'sites') $lim_rub = true;
 		
 		return
-			$id
-			AND $lim_rub
-			AND autoriser('voir','rubrique',$id)
-			AND $GLOBALS['meta']['activer_sites'] != 'non'
-			AND (
-				$qui['statut']=='0minirezo'
-				OR ($GLOBALS['meta']["proposer_sites"] >=
-				    ($qui['statut']=='1comite' ? 1 : 2)));
+			$lim_rub
+			AND autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 
