@@ -49,15 +49,15 @@ Exemple de syntaxe dans l'article :
 Ligne 2
 </jeux>
 
-Syntaxe a utiliser apres [label] (tous les parametres sont optionels) :
+Syntaxe a utiliser apres [label] (tous les parametres sont optionnels) :
 	(nom) (votre texte)
 	- nom par defaut : saisie
-Syntaxe a utiliser apres [saisie] (tous les parametres sont optionels) :
+Syntaxe a utiliser apres [saisie] (tous les parametres sont optionnels) :
 	(nom) (type) (autres parametres de la balise)
 	(valeur 1 = libelle 1, cas d'un type 'select', 'radio' ou 'checkbox')
 	(valeur 2 = libelle 2, cas d'un type 'select', 'radio' ou 'checkbox')
 	...
-	(texte = Votre texte par defaut, pour certains types de saisie)
+	(value = Votre texte par defaut, pour certains types de saisie)
 	- nom par defaut : saisie
 Le nom : 
 	un mot sans espace compose de lettres/chiffres/:._-
