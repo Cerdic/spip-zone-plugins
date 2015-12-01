@@ -1,12 +1,12 @@
 <paquet
 	prefix="spipdf"
 	categorie="edition"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
-        compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="spipdf.png"
-        documentation="http://contrib.spip.net/3719"
->	
+	documentation="http://contrib.spip.net/3719"
+>
 	<nom>SpiPDF</nom>
 
 	<auteur lien="http://www.grafactory.net" mail="yvestanSANSPAM@gmail.com">Yves Tannier</auteur>
