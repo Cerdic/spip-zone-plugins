@@ -52,6 +52,8 @@ define('_JEUX_PENDU', 'pendu');
 define('_JEUX_DIAG_ECHECS', 'diag_echecs');
 define('_JEUX_COLORATION', 'coloration');
 define('_JEUX_CHESSSTUFF', 'chesstuff');
+define('_JEUX_SAISIE', 'saisie');
+define('_JEUX_LABEL', 'label');
 define('_JEUX_MULTI_JEUX', 'jeu');
 
 // globale stockant les carateristiques d'un jeu :
@@ -76,6 +78,7 @@ $jeux_caracteristiques = array(
 	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU, _JEUX_CONFIG),
 	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_COLORATION, _JEUX_CONFIG),
 	'chesstuff' => array(_JEUX_CHESSSTUFF, _JEUX_CONFIG),
+	'saisies' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_LABEL, _JEUX_SAISIE, _JEUX_CONFIG),
   ),
 
 // liste des signatures caracteristiques d'un jeu.
@@ -97,7 +100,8 @@ $jeux_caracteristiques = array(
 	'pendu' => array(_JEUX_PENDU),
 	'diag_echecs' => array(_JEUX_DIAG_ECHECS),
 	'chesstuff' => array(_JEUX_CHESSSTUFF),
-  ),
+ 	'saisies' => array(_JEUX_SAISIE),
+ ),
 
 // nom court a donner aux jeux
   'TYPES' => array(
@@ -112,6 +116,7 @@ $jeux_caracteristiques = array(
 	'pendu' => _T('pendu:titre_court'),
 	'diag_echecs' => _L('Echecs'),
 	'chesstuff' => _L('Echecs'),
+	'saisies' => _L('Saisies'),
   ),
 
 );
