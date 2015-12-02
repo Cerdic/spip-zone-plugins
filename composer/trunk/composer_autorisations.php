@@ -68,9 +68,9 @@ function autoriser_composerjson_modifier_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
- * Autorisation d'utiliser composer
+ * Autorisation de télécharger / exécuter Composer
  *
- * @uses autoriser_composer_acceder_dist()
+ * Uniquement les webmestres
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action

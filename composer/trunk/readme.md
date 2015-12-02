@@ -47,7 +47,7 @@ passe sur l'une des pages `exec=admin_plugin` ou `exec=composer`
 
 Il devient alors possible d'appliquer Composer sur ce fichier json,
 ce qui installe les librairies dans le répertoire `vendor/` à la racine
-du site. Il faut donc se mettre dans une terminal, dans le répertoire `config/`
+du site. Il faut donc se mettre dans un terminal, dans le répertoire `config/`
 et appeler `php composer.phar update` ou `composer update` selon sa configuration
 locale.
 
