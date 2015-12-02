@@ -1,0 +1,12 @@
+<!-- ig br -->
+
+[Composer->https://getcomposer.org/] permet de télécharger et d'utiliser différentes
+librairies ou package PHP.
+
+Ce plugin Composer pour SPIP permet que des plugins SPIP déclarent les dépendances
+dont ils ont besoin, ce qui permet de générer un fichier <code>composer.json</code>,
+par défaut stocké dans le répertoire <code>config/</code>.
+
+Cette page explique comment installer alors les dépendances avec Composer,
+et peut également tenter de s'en occuper, en fonction de la configuration
+du serveur.

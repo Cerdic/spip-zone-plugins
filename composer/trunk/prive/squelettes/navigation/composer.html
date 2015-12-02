@@ -1,0 +1,18 @@
+
+<div class='center'>
+[(#CHEMIN_IMAGE{composer-128.png}|balise_img)]
+</div>
+
+<div class='navigation'>
+	<ul class='list-items liste_items sous_navigation'>
+		<li class='item[(#ENV{quoi}|non) on]'>
+			<a href="[(#SELF|parametre_url{quoi,''})]">Présentation</a>
+		</li>
+		<li class='item[(#ENV{quoi}|=={manuel}|oui) on]'>
+			<a href="[(#SELF|parametre_url{quoi,manuel})]">Installation et mise à jour manuelle</a>
+		</li>
+		<li class='item[(#ENV{quoi}|=={auto}|oui) on]'>
+			<a href="[(#SELF|parametre_url{quoi,auto})]">Installation et mise à jour automatique</a>
+		</li>
+	</ul>
+</div>

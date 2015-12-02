@@ -1,0 +1,8 @@
+<!-- ig br -->
+
+SPIP essayera de télécharger ou mettre à jour <code>composer</code> dans le
+répertoire <code>config/</code>. Pour cela, il a besoin d'un accès à des commandes
+systèmes, ce qui n'est peut être pas autorisé sur ce serveur.
+
+Le répertoire <code>vendor</code> doit pouvoir être créé à la racine du site
+ou être déjà présent et accessible en écriture.

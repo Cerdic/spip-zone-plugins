@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:composer:jouer_composer:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{message_output}|oui)
+		<h4>Retour de l'exécution</h4>
+		[<div class="console_output">(#ENV*{message_output}|wrap{<cadre class='shell'>}|propre)</div>]
+	]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE
+
+			<h4>Contenu actuel du composer.json</h4>
+			[(#ENV*{_composer_json}|wrap{<cadre class='javascript'>}|propre)]
+
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span>
+				[(#ENV{_composer_phar}|non)
+					<input type="submit" class="submit" name="obtenir" value="<:composer:bouton_composer_obtenir:>" />
+				]
+				[(#ENV{_composer_phar}|oui)
+					<input type="submit" class="submit" name="self_update" value="<:composer:bouton_composer_self_update:>" />
+					<input type="submit" class="submit" name="update" value="<:composer:bouton_composer_update:>" />
+				]
+			</p>
+		</div>
+	</form>
+</div>

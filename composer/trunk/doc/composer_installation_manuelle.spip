@@ -1,0 +1,29 @@
+<!-- ig br -->
+
+{{{ Installation manuelle de composer }}}
+
+Sur votre site, dans un terminal — il faut donc un accès shell —,
+se rendre dans le répertoire config du site, et suivre [la procédure
+d'installation de Composer->https://getcomposer.org/doc/00-intro.md]
+
+<cadre class='shell'>
+cd config
+curl -sS https://getcomposer.org/installer | php
+</cadre>
+
+Vous pouvez alors installer les dépendances
+
+<cadre class='shell'>
+php composer.phar install
+</cadre>
+
+
+{{{ Mise à jour manuelle de composer }}}
+
+Se rendre en terminal dans le répertoire config, puis lancer les commandes :
+
+<cadre class='shell'>
+php composer.phar self-update
+php composer.phar update
+</cadre>
+

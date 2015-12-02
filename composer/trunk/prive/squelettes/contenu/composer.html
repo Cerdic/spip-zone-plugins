@@ -1,0 +1,21 @@
+[(#AUTORISER{acceder,_composer}|sinon_interdire_acces)]
+
+
+[(#ENV{quoi}|non)
+	<h1>Composer</h1>
+	[(#CHEMIN{doc/composer_presentation.spip}|file_get_contents|propre)]
+]
+
+[(#ENV{quoi}|=={manuel}|oui)
+	<h1>Procédure manuelle</h1>
+	[(#CHEMIN{doc/composer_installation_manuelle.spip}|file_get_contents|propre)]
+]
+
+[(#ENV{quoi}|=={auto}|oui)
+	<h1>Procédure auto</h1>
+	[(#CHEMIN{doc/composer_installation_automatique.spip}|file_get_contents|propre)]
+
+	<div class='ajax'>
+	#FORMULAIRE_JOUER_COMPOSER
+	</div>
+]
