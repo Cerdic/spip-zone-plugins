@@ -105,6 +105,6 @@ class Composer_JSON {
 	 * @return string JSON
 	**/
 	public function get_json() {
-		return json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+		return json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_FORCE_OBJECT );
 	}
 }

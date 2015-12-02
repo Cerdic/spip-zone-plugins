@@ -1,7 +1,7 @@
 <paquet
 	prefix="composer"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="experimental"
 	compatibilite="[3.1.0-rc;3.1.*]"
 	logo="prive/themes/spip/images/composer-64.png"
@@ -17,6 +17,8 @@
 
 	<pipeline nom="autoriser" inclure="composer_autorisations.php" />
 	<pipeline nom="preparer_composer_json" action="" />
+
+	<!-- necessite nom="php" compatibilite="[5.4;]" / -->
 
 	<menu nom="composer" titre="composer:composer_titre" parent="menu_administration" icone="images/composer-16.png" />
 
