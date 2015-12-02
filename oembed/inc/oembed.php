@@ -65,6 +65,7 @@ function oembed_lister_providers(){
 		'http://*.tumblr.com/post/*'              => 'https://www.tumblr.com/oembed/1.0',
 		'http://*.kickstarter.com/projects/*'     => 'https://www.kickstarter.com/services/oembed',
 		'http://speakerdeck.com/*'                => 'https://speakerdeck.com/oembed.json',
+		'http://issuu.com/*'                      => 'http://issuu.com/oembed',
 		
 		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
