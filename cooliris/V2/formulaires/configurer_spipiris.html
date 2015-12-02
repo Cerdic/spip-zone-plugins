@@ -1,0 +1,137 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+    <h3 class="titrem"><:spipiris:configuration_cooliris:></h3>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+    [(#ENV{editable})
+    <form method='post' action='#ENV{action}'>
+        <div>
+            [(#REM) declarer les hidden qui declencheront le service du formulaire
+            parametre : url d'action ]
+            #ACTION_FORMULAIRE{#ENV{action}}
+            <fieldset>
+                <legend>Animation</legend>
+                <ul class="editer-groupe">
+                    <li class="editer">
+                        <label for="largeur">Largeur (px)</label>
+                        <input type="text" name="largeur" class="type_txt" id="largeur" size="5" value="#ENV{largeur,600}" />
+                    </li>
+                    <li class="editer">
+                        <label for="hauteur">Hauteur (px)</label>
+                        <input type="text" name="hauteur" class="type_txt" id="hauteur" size="5" value="#ENV{hauteur,450}" />
+                    </li>
+                    <li class="editer">
+                        <label for="numrows">Nombre de lignes du mur</label>
+                        <select name="numrows" id="numrows">
+                            <option value="1"[(#ENV{numrows}|=={1}|?{' selected="selected"'})]>1</option>
+                            <option value="2"[(#ENV{numrows}|=={2}|?{' selected="selected"'})]>2</option>
+                            <option value="3"[(#ENV{numrows}|=={3}|?{' selected="selected"'})]>3</option>
+                            <option value="4"[(#ENV{numrows}|=={4}|?{' selected="selected"'})]>4</option>
+                            <option value="5"[(#ENV{numrows}|=={5}|?{' selected="selected"'})]>5</option>
+                        </select>
+                    </li>
+                    <li class="editer">
+                        <label for="style">Style du mur</label>
+                        <select name="style" id="style">
+                            <option value="black"[(#ENV{style}|=={black}|?{' selected="selected"'})]>black</option>
+                            <option value="dark"[(#ENV{style}|=={dark}|?{' selected="selected"'})]>dark</option>
+                            <option value="light"[(#ENV{style}|=={light}|?{' selected="selected"'})]>light</option>
+                            <option value="white"[(#ENV{style}|=={white}|?{' selected="selected"'})]>white</option>
+                        </select>
+                    </li>
+                    <li class="editer">
+                        <label for="intro">Animation de l'intro.</label>
+                        <select name="intro" id="intro">
+                            <option value="scrollLeft"[(#ENV{intro}|=={scrollLeft}|?{' selected="selected"'})]>scrollLeft</option>
+                            <option value="zoomIn"[(#ENV{intro}|=={zoomIn}|?{' selected="selected"'})]>zoomIn</option>
+                            <option value="appear"[(#ENV{intro}|=={appear}|?{' selected="selected"'})]>appear</option>
+                        </select>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend> Background Setting</legend>
+                <ul class="editer-groupe">
+                    <li class="editer">
+                        <label for="backgroundalpha">Opacité du fond, valeur entre 0.0 et 1.0</label>
+                        <input type="text" name="backgroundalpha" value="[(#ENV{backgroundalpha,1})]" size="3" class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="backgroundcolor">Couleur de fond</label>
+                        <input type="text" name="backgroundcolor" value="[(#ENV{backgroundcolor,#000000})]" size="7" class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="backgroundimage">Background image URL</label>
+                        <input type="text" name="backgroundimage" value="[(#ENV{backgroundimage})]" class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="backgroundmusic">Background music URL</label>
+                        <input type="text" name="backgroundmusic" value="[(#ENV{backgroundmusic})]" class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="defaultvolume">Volume : 0-100</label>
+                        <input type="text" name="defaultvolume" value="[(#ENV{defaultvolume,70})]" size="3" class="fondl" />
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>Controls</legend>
+                <ul class="editer-groupe">
+                    <li class="editer">
+                        <label for="showembed">Share Buttons</label>
+                        <input type="checkbox" name="showembed" [checked="(#ENV{showembed}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="showsearch">Search Button</label>
+                        <input type="checkbox" name="showsearch" [checked="(#ENV{showsearch}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="showchrome">Opaque Toolbar</label>
+                        <input type="checkbox" name="showchrome" [checked="(#ENV{showchrome}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="shownavarrows">Show Nav Arrows</label>
+                        <input type="checkbox" name="shownavarrows" [checked="(#ENV{shownavarrows}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="link">Rendre l'image cliquable</label>
+                        <input type="checkbox" name="link" [checked="(#ENV{link}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>Contenu</legend>
+                <ul class="editer-groupe">
+                    <li class="editer">
+                        <label for="showdescription">Affiche la description de l'item sélectionné</label>
+                        <input type="checkbox" name="showdescription" [checked="(#ENV{showdescription}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="showreflections">Affiche un reflet sous les items</label>
+                        <input type="checkbox" name="showreflections" [checked="(#ENV{showreflections}|!={''}|?{'checked'})"] class="fondl" />
+                    </li>
+                    <li class="editer">
+                        <label for="cellborder">Taille de la bordure blanche autour des items du mur</label>
+                        <input type="text" name="cellborder" class="type_txt" id="cellborder" size="1" value="#ENV{cellborder,0}" />
+                    </li>
+                    <li class="editer">
+                        <label for="celllargeur">Largeur de l'item selectionné</label>
+                        <input type="text" name="celllargeur" class="type_txt" id="celllargeur" size="5" value="#ENV{celllargeur,430}" />
+                    </li>
+                    <li class="editer">
+                        <label for="cellhauteur">Hauteur de l'item selectionné</label>
+                        <input type="text" name="cellhauteur" class="type_txt" id="cellhauteur" size="5" value="#ENV{cellhauteur,300}" />
+                    </li>
+                    <li class="editer">
+                        <label for="glowcolor">Couleur de la bordure de l'item sélectionné</label>
+                        <input type="text" name="glowcolor" value="[(#ENV{glowcolor,#FFFFFF})]" size="7" class="fondl" />
+                    </li>
+                </ul>
+            </fieldset>
+            <input type="hidden" name="_meta_casier" value="cooliris" />
+            <div class="boutons">
+                <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+            </div>
+        </div>
+    </form>
+    ]
+</div>
