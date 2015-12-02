@@ -30,7 +30,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_jeux' => 'Configure the games',
 	'correction' => 'Correction:', # MODIF
 	'corriger' => 'Check',
-	'envoyer' => 'Submit',
 
 	// E
 	'erreur_scripts' => 'Desactivated scripts : you can not play this game here!', # MODIF

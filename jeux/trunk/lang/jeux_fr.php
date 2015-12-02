@@ -28,14 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_jeux' => 'Configurer les jeux',
 	'correction' => 'Correction :',
 	'corriger' => 'Corriger',
-	'envoyer' => 'Envoyer',
-	'valider' => 'Valider',
 
 	// E
+	'envoyer' => 'Envoyer',
+	'erreur_doublon' => 'Erreur : doublon',
 	'erreur_scripts' => 'Scripts désactivés : vous ne pouvez pas jouer à ce jeu ici !',
 	'erreur_syntaxe' => 'Erreur de syntaxe',
 	'erreur_taille_grille' => 'Erreur : taille invalide',
-	'erreur_doublon' => 'Erreur : doublon',
 
 	// G
 	'grille_invalide' => 'La grille est invalide',
@@ -113,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_vide' => 'Une case vide',
 
 	// V
+	'valider' => 'Valider',
 	'verifier' => 'Vérifier',
 	'verifier_validite' => 'Vérifier la validité',
 	'voir_auteur' => 'Voir l’auteur',

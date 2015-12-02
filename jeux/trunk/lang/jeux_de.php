@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_n' => 'Spalte @n@',
 	'correction' => 'Lösung:', # MODIF
 	'corriger' => 'Antwort',
-	'envoyer' => 'Submit',
 
 	// E
 	'erreur_scripts' => 'Skripte verboten: Dieses Spiel kann nicht ausgeführt zerden!', # MODIF
