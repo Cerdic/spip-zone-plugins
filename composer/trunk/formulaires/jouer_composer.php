@@ -1,8 +1,11 @@
 <?php
 
 function formulaires_jouer_composer_charger_dist() {
-	$valeurs = array();
+	if (!autoriser('executer', 'composer')) {
+		return null;
+	}
 
+	$valeurs = array();
 	$valeurs['_composer_json'] = file_get_contents(_FILE_COMPOSER_JSON);
 	$valeurs['_composer_phar'] = file_exists(_DIR_COMPOSER . 'composer.phar');
 	$valeurs['message_output'] = "";

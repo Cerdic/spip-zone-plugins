@@ -42,11 +42,17 @@ installation ou mise à jour de ceux-ci. Ce n'est peut être donc pas impossible
 Ce plugin fait le choix de générer un fichier `composer.json` alimenté
 par le pipeline `preparer_composer_json`.
 
-Ce fichier est créé par défaut dans `tmp/composer.json` (malheureusement
-on ne peut pas être certain que apache puisse écrire à la racine de SPIP,
-donc on n'essaie pas).
+Ce fichier est créé par défaut dans `config/composer.json` lorsqu'on
+passe sur l'une des pages `exec=admin_plugin` ou `exec=composer`
 
+Il devient alors possible d'appliquer Composer sur ce fichier json,
+ce qui installe les librairies dans le répertoire `vendor/` à la racine
+du site. Il faut donc se mettre dans une terminal, dans le répertoire `config/`
+et appeler `php composer.phar update` ou `composer update` selon sa configuration
+locale.
 
+La page `exec=composer` peut s'occuper de l'installation de Composer
+et de son utilisation, si les droits accordés au serveur sont suffisants.
 
 
 

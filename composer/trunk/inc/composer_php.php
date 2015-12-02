@@ -11,8 +11,6 @@
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/composer_json');
-
 /**
  * Calculer et générer le json de composer
  *
@@ -23,6 +21,7 @@ include_spip('inc/composer_json');
  * @return bool True si écriture OK.
 **/
 function composer_generer_json() {
+	include_spip('inc/composer_json');
 	$Composer = pipeline('preparer_composer_json', new Composer_JSON());
 	$json = $Composer->get_json();
 	sous_repertoire(_DIR_COMPOSER);

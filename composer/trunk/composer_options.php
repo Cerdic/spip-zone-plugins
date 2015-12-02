@@ -24,19 +24,20 @@ if (!defined('_FILE_COMPOSER_JSON')) {
 if (!defined('_ROOT_VENDOR')) {
 	/** @var string
 	 *     Chemin complet où seront stockés les packages.
-	 *
 	 *     On met un chemin absolu car composer.json ne sera pas forcément
-	 *     dans le répertoire parent (mais probablement dans _DIR_TMP).
+	 *     dans le répertoire parent (mais probablement dans config/).
 	 */
 	define('_ROOT_VENDOR', _ROOT_RACINE . 'vendor/');
 }
 
 
-// Générer le composer.json s'il n'existe pas.
-// il faudrait un pipeline lors de la génération des matrices tmp/cache/charger_options.php et autres.
-if (!file_exists(_FILE_COMPOSER_JSON) or _request('exec') == 'admin_plugin') {
-	include_spip('inc/composer_php');
-	composer_generer_json();
+// Générer ou régénérer le composer.json
+if (test_espace_prive() and in_array(_request('exec'), array('composer', 'admin_plugin'))) {
+	include_spip('inc/autoriser');
+	if (autoriser('modifier', 'composerjson')) {
+		include_spip('inc/composer_php');
+		composer_generer_json();
+	}
 }
 
 // Intégrer l'autoloader s'il est présent
