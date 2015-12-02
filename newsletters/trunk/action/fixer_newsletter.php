@@ -29,14 +29,22 @@ function action_fixer_newsletter_dist($id_newsletter = null){
 
 		// trouver toutes les images dans les 2 versions html
 		$images = array();
-		foreach (array($row['html_email'],$row['html_page']) as $champ){
-			preg_match_all('/<img\s[^>]*(src=["\'])([^\'"]*)(["\'])/Uims', $champ, $matches, PREG_SET_ORDER);
+		foreach (array('html_email','html_page') as $champ){
+			preg_match_all('/<img\s[^>]*(src=["\'])([^\'"]*)(["\'])[^>]*>/Uims', $row[$champ], $matches, PREG_SET_ORDER);
 			if ($matches AND count($matches)){
 				foreach ($matches as $matche){
 					$src = $matche[2];
 					if (!isset($images[$src])){
 						if ($url = newsletter_fixer_image($src,$id_newsletter))
 							$images[$src] = url_absolue($url);
+					}
+					// et remplacer les simples quotes des balises img par doubles quotes au passage
+					// car certains outils d'envoi en ligne signalent les simples quote comme une erreur dans leur editeur
+					if (strpos($matche[0],"'")!==false){
+						$img = preg_replace(',=\'([^\'"]*)\',Uims','="\\1"',$matche[0]);
+						if ($img!==$matche[0]){
+							$row[$champ] = str_replace($matche[0],$img,$row[$champ]);
+						}
 					}
 				}
 			}
