@@ -320,8 +320,10 @@ function vues_dist($type, $modele, $id, $content, $wid){
 	if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
 		OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
 		OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
+
+		$primary = (function_exists('id_table_objet')?id_table_objet($table):'id_' . $table);
 		$contexte = array(
-			'id_' . $table => $id,
+			$primary => $id,
 			'crayon_type' => $type,
 			'crayon_modele' => $modele,
 			'champ' => $modele,
@@ -355,13 +357,21 @@ function vues_dist($type, $modele, $id, $content, $wid){
 			}
 		}
 
-		// seul spip core sait rendre les donnees
-		if (in_array($modele,
-			array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
-			return propre($valeur);
-		} else {
-			return typo($valeur);
+		if ($valeur){
+			// seul spip core sait rendre les donnees
+			if (function_exists('appliquer_traitement_champ')){
+				$valeur = appliquer_traitement_champ($valeur,$modele,table_objet($table));
+			}
+			else {
+				if (in_array($modele,
+					array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
+					$valeur = propre($valeur);
+				} else {
+					$valeur = typo($valeur);
+				}
+			}
 		}
+		return $valeur;
 	}
 }
 
