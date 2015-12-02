@@ -3,22 +3,20 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset">
 				<fieldset>
 					<legend><:rssconfig:label_activation:></legend>
 					<p class="explication"><:rssconfig:explication_activation_breves:></p>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer editer_activer[ (#ENV**{erreurs}|table_valeur{activer}|oui)erreur]">
 							<label><:rssconfig:label_activer:></label>
 							<div class="choix">
-								<input type="radio" name="activer" class="radio" id="activer_on" value="oui" [(#ENV{activer,oui}|=={oui}|oui) checked="checked"] 
-									onchange="if (jQuery(this).prop('checked')) jQuery('.opt_breves').show('fast');" />
+								<input type="radio" name="activer" class="radio" id="activer_on" value="oui" [(#ENV{activer,oui}|=={oui}|oui) checked="checked"] onchange="if (jQuery(this).prop('checked')) jQuery('.opt_breves').show('fast');" />
 								<label for='activer_on'><:item_oui:></label>
 							</div>
 							<div class="choix">
-								<input type="radio" name="activer" class="radio" id="activer_off" value="non" [(#ENV{activer,oui}|=={non}|oui) checked="checked"]
-									onchange="if (jQuery(this).prop('checked')) jQuery('.opt_breves').hide('fast');" />
+								<input type="radio" name="activer" class="radio" id="activer_off" value="non" [(#ENV{activer,oui}|=={non}|oui) checked="checked"] onchange="if (jQuery(this).prop('checked')) jQuery('.opt_breves').hide('fast');" />
 								<label for='activer_off'><:item_non:></label>
 							</div>
 						</li>
@@ -40,7 +38,7 @@
 				<fieldset>
 					<legend><:rssconfig:label_breves_a_inclure:></legend>
 					<p class="explication"><:rssconfig:explication_breves_a_inclure:></p>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer editer_nb_art[ (#ENV**{erreurs}|table_valeur{nb_art}|oui)erreur]">
 							<label for='nb_art'><:rssconfig:label_nb_art:></label>
 							<p class="explication"><:rssconfig:explication_nb_art:></p>
@@ -62,7 +60,7 @@
 			<li class="fieldset opt_breves">
 				<fieldset>
 					<legend><:rssconfig:label_options_breves:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer editer_creator[ (#ENV**{erreurs}|table_valeur{creator}|oui)erreur]">
 							<label for='creator'><:rssconfig:label_creator:></label>
 							<p class="explication"><:rssconfig:explication_creator_breves:></p>
@@ -126,11 +124,11 @@
 				<fieldset>
 					<legend><:rssconfig:label_rubriques:></legend>
 					<p class="explication"><:rssconfig:explication_rubriques:></p>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques_a_inclure}|oui)erreur]">
 							<label for='rubriques_a_inclure'><:rssconfig:label_rubriques_a_inclure:></label>
 							<p class="explication"><:rssconfig:explication_rubriques_a_inclure_selecteur:></p>
-							<input type="hidden" name="rubriques_a_inclure[]" value=""> [(#REM) Entrée vide pour que SPIP détecte le champs ] 
+							<input type="hidden" name="rubriques_a_inclure[]" value=""> [(#REM) EntrÃ©e vide pour que SPIP dÃ©tecte le champs ] 
 							<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV*{rubriques_a_inclure}}{name=rubriques_a_inclure}>
 						</li>
 					</ul>
