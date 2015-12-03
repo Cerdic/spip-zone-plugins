@@ -1,9 +1,10 @@
 <paquet
 	prefix="editer_liens_simples"
 	categorie="outil"
-	version="1.0.2"
-	etat="experimental"
+	version="1.0.3"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/editer_liens_simples-32.png"
 >
 
 	<nom>API Éditer Liens simples</nom>
