@@ -1,0 +1,52 @@
+[(#AUTORISER{voir,pays,#ID_PAYS}|sinon_interdire_acces)]
+<BOUCLE_pays(PAYS){id_pays}{si #ENV{exec}|=={pays}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,pays,#ID_PAYS})
+		[(#ID_PAYS|afficher_qui_edite{pays}|non)
+			[(#URL_ECRIRE{pays_edit,id_pays=#ID_PAYS}|icone_verticale{<:pays:icone_modifier_pays:>,pays,edit,right ajax preload})]
+		]
+		[(#ID_PAYS|afficher_qui_edite{pays}|oui)
+			[(#URL_ECRIRE{pays_edit,id_pays=#ID_PAYS}|icone_verticale{#ID_PAYS|afficher_qui_edite{pays},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{pays-24.png}|balise_img{pays,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{pays,#ID_PAYS}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/pays,id=#ID_PAYS,id_pays=#ID_PAYS,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,pays,#ID_PAYS})
+	[(#ID_PAYS|afficher_qui_edite{pays}|non)
+		[(#URL_ECRIRE{pays_edit,id_pays=#ID_PAYS}|icone_verticale{<:pays:icone_modifier_pays:>,pays,edit,right ajax preload})]
+	]
+	[(#ID_PAYS|afficher_qui_edite{pays}|oui)
+		[(#URL_ECRIRE{pays_edit,id_pays=#ID_PAYS}|icone_verticale{#ID_PAYS|afficher_qui_edite{pays},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,pays,id,#ID_PAYS},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_pays>
+[(#ENV**{exec}|=={pays_edit}|oui)
+	#INCLURE{fond=prive/squelettes/contenu/pays_edit,redirect='',env,retourajax=oui}
+]
+[(#ENV**{exec}|=={pays_edit}|non)
+	[(#ENV{id_pays}|oui)[(#REM|sinon_interdire_acces)]]
+	[(#ENV{id_pays}|non)<INCLURE{fond=prive/squelettes/contenu/pays_tous,env}>]
+]
+<//B_pays>

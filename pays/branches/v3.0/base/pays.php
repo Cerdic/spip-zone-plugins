@@ -21,7 +21,7 @@ function pays_declarer_tables_interfaces($interface){
 function pays_declarer_tables_objets_sql($tables){
 
 $tables['spip_pays'] = array(
-	
+
 		'principale' => "oui",
 		'field'=> array(
 			"id_pays"		=> "smallint(6) NOT NULL auto_increment",
@@ -38,8 +38,12 @@ $tables['spip_pays'] = array(
 		'champs_editables' => array(
 			"code", "nom"
 		),
+		'rechercher_champs'      => array('nom'=>5, 'code'=>3, 'code_alpha3'=>3),
 		'titre' => "nom AS titre, '' AS lang",
-		'type' => "pay",
+		'table_objet' => 'pays',
+		'table_objet_surnoms' => array('pays'),
+		'type' => "pays",
+		'type_surnoms' => array("pay"),
 
 		'texte_modifier' => "pays:icone_modifier_pays",
 		'texte_creer' => "pays:icone_creer_pays",
@@ -48,13 +52,39 @@ $tables['spip_pays'] = array(
 		'info_aucun_objet' => "pays:info_aucun_pays",
 		'info_1_objet' => "pays:info_1_pays",
 		'info_nb_objets' => "pays:info_nb_pays",
-		'texte_logo_objet' => "pays:texte_logo_pays"
+		'texte_logo_objet' => "pays:texte_logo_pays",
+		'tables_jointures'  => array('spip_pays_liens')
 
 	);
-	
+
 	return $tables;
 
 
 }
 
-?>
+/**
+ * Déclaration des tables secondaires (liaisons)
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function pays_declarer_tables_auxiliaires($tables) {
+
+	$tables['spip_pays_liens'] = array(
+		'field' => array(
+			"id_pays"            => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_pays,id_objet,objet",
+			"KEY id_pays"        => "id_pays"
+		)
+	);
+
+	return $tables;
+}
