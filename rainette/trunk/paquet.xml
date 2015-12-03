@@ -1,7 +1,7 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.2.3"
+	version="2.2.4"
 	etat="test"
 	compatibilite="[3.0.11;3.1.*]"
 	logo="rainette-64.png"
@@ -23,4 +23,5 @@
 
 	<pipeline nom="insert_head_css" inclure="rainette_pipelines.php" />
 	<pipeline nom="insert_head" action="insert_head_css" inclure="rainette_pipelines.php" />
+	<pipeline nom="post_chargement_meteo" action="" />
 </paquet>
