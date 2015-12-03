@@ -1,4 +1,5 @@
-$("a.spip_out").on("click", function() {
+
+$(document).on("click", "a.spip_out", function() {
 	window.open(this.href);
 	return false;
 });
