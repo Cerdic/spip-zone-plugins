@@ -36,6 +36,8 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
         - ordre_fixe       => Interdit de réordonner les éléments de la liste
         - cacher_supprimer => Cache les boutons supprimer sur les éléments
                               de la liste
+        - texte_bouton_ajouter => Le texte du bouton ajouter. "Ajouter" sinon.
+        - texte_bouton_supprimer => Le texte du bouton supprimer
 ]
 
 [(#SAISIE{liste, ma-liste,
