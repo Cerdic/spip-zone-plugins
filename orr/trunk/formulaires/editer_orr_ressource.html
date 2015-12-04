@@ -11,7 +11,8 @@
 			[(#SAISIE{input, orr_ressource_nom, obligatoire=oui,
 				label=Nom de la ressource})]
 
-			[(#SAISIE{input, orr_ressource_couleur, class='palette',
+			[(#SAISIE{input, orr_ressource_couleur,
+                type='color'
                 defaut = #ff00ff,
 				label=Couleur,
 				explication=Cliquez et choisissez la couleur voulue })]
@@ -19,7 +20,7 @@
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!-- extra -->
-		
+
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]

@@ -44,14 +44,14 @@ a mis a jour la valeur avec la page reelle]
 			</td><td>#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="X"><:orr:retirer_lien_orr_autorisation:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button class="button link delete" type="submit" name="supprimer_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="X"><:orr:retirer_lien_orr_autorisation:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 		</tr>
 	</BOUCLE_liste_orr_autorisations>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[orr_autorisation-*-#OBJET-#ID_OBJET\]" value="X"><:orr:retirer_tous_liens_orr_autorisations:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" type="submit" name="supprimer_lien\[orr_autorisation-*-#OBJET-#ID_OBJET\]" value="X"><:orr:retirer_tous_liens_orr_autorisations:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_orr_autorisations>
 <div class="liste-objets liste-objets-lies ORR_AUTORISATIONS caption-wrap">

@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
 	<necessite nom="timepicker" compatibilite="[1.4.3;]" />
-	<necessite nom="palette" compatibilite="[3.0.0;]" />
+	<!--<necessite nom="palette" compatibilite="[3.0.0;]" />-->
 
 	<pipeline nom="autoriser" inclure="orr_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/orr.php" />

@@ -50,7 +50,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='orr_autorisation_nom'>[(#LOGO_ORR_AUTORISATION|image_reduire{20,20})]<a href="[(#URL_ECRIRE{orr_autorisation_edit,id_orr_autorisation=#ID_ORR_AUTORISATION&redirect=[(#SELF|urlencode)]})]" title="<:orr:modifier:>">#ORR_AUTORISATION_NOM</a></td>
             <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="+"><:orr:ajouter_lien_orr_autorisation:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button class="button link add" type="submit" name="ajouter_lien\[orr_autorisation-#ID_ORR_AUTORISATION-#OBJET-#ID_OBJET\]" value="+"><:orr:ajouter_lien_orr_autorisation:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_orr_autorisations>

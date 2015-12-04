@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	orr_autorisation_nom,1, 
+	orr_autorisation_nom,1,
 	id_orr_autorisation,1,
 	points,-1
 }})]<B_liste_orr_autorisations>
@@ -29,7 +29,7 @@
 			</td>
             <td class="orr_autorisation_valeur">#ORR_AUTORISATION_VALEUR</td>
 			<td class="orr_autorisation_ressource_associe">
-				<BOUCLE_ressources(ORR_RESSOURCES){id_orr_autorisation}{"<br/>"}> 
+				<BOUCLE_ressources(ORR_RESSOURCES){id_orr_autorisation}{"<br/>"}>
 					[(#AUTORISER{modifier,ressource,#ID_ORR_RESSOURCE}|oui)<a href="#URL_ECRIRE{orr_ressource,id_orr_ressource=#ID_ORR_RESSOURCE}" title="<:orr:modifier:>">]
 					#ORR_RESSOURCE_NOM
 					[(#AUTORISER{modifier,ressource,#ID_ORR_RESSOURCE}|oui)</a>]</BOUCLE_ressources>
