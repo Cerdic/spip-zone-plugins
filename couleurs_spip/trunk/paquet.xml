@@ -1,12 +1,12 @@
 <paquet
 	prefix="couleurs_spip"
 	categorie="edition"
-	version="3.1.0"
+	version="3.1.1"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="couleurs_spip.png"
 	documentation="http://contrib.spip.net/?article3180"
->	
+>
 
 	<nom>Couleurs Spip</nom>
 	<!-- Des textes en couleur -->
