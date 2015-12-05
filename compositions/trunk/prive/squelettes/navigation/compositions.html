@@ -1,0 +1,8 @@
+[(#REM)
+  Message expliquant comment ajouter des compositions, réservé aux admins
+]
+[(#AUTORISER{configurer,compositions}|oui)
+[(#BOITE_OUVRIR{<:compositions:ajouter_compositions:>,info})]
+<:compositions:message_info_ajouter_compositions{url_doc=#PLUGIN{compositions,documentation}}|propre:>
+[(#BOITE_FERMER)]
+]
