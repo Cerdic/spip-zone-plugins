@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_aucune_composition' => 'Aucune composition',
 	'info_1_composition' => '1 composition',
-	'info_nb_composition' => '@nb@ compositions',
+	'info_nb_compositions' => '@nb@ compositions',
 
 	// L
 	'label_activer_composition_objets' => 'Utiliser les compositions sur les objets',
