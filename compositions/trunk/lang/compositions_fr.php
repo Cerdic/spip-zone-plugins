@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
 
 	// M
-	'message_info_ajouter_compositions' => 'Activez un squelette proposant des compositions ou créer vos propres compositions, consultez la documentation : @url_doc@.',
+	'message_info_ajouter_compositions' => 'Activez un squelette proposant des compositions ou créez vos propres compositions, consultez la documentation : @url_doc@.',
 
 	// U
 	'une_utilisation' => '1 utilisation',
