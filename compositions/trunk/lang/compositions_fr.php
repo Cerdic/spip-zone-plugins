@@ -46,12 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
 
 	// M
-	'message_info_ajouter_compositions' => 'Pour disposer de compositions, plusieurs possibilités :
-	<ul class="spip">
-		<li>Activez un plugin de squelettes proposant des compositions.</li>
-		<li>Crééz vos propres compositions en plaçant des paires de fichiers <strong>objet-<em>composition</em>.html</strong> / <strong>objet-<em>composition</em>.xml</strong> dans le dossier des compositions : <strong>@chemin@</strong>.</li>
-	</ul>
-	Consultez la documentation pour les informations complètes : <a class="spip_out" href="@url_doc">@url_doc@</a>.',
+	'message_info_ajouter_compositions' => 'Activez un squelette proposant des compositions ou créer vos propres compositions, consultez la documentation : @url_doc@.',
 
 	// U
 	'une_utilisation' => '1 utilisation',

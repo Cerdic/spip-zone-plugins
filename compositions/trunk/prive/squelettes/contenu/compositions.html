@@ -61,9 +61,9 @@
 	<h2><:compositions:info_aucune_composition:></h2>
 
 	[(#REM) message réservé aux admins expliquant comment ajouter des compositions ]
-	[(#BOITE_OUVRIR{'',simple})]
 	[(#AUTORISER{configurer,compositions}|oui)
-	<p>[(#VAL{compositions:message_info_ajouter_compositions}|_T{#ARRAY{chemin,#VAL{#REM|compositions_chemin},url_doc,#PLUGIN{compositions,documentation}}})]</p>
-	]
+	[(#BOITE_OUVRIR{'',simple})]
+	<:compositions:message_info_ajouter_compositions{url_doc=#PLUGIN{compositions,documentation}}|propre:>
 	[(#BOITE_FERMER)]
+	]
 <//B_compositions>
