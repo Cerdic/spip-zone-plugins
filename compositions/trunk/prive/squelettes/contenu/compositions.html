@@ -1,6 +1,12 @@
 #SET{compositions,#REM|compositions_lister_disponibles}
 
+<h1 class="grostitre"><:compositions:compositions:></h1>
+
+<B_compositions>
+[<h2>(#GRAND_TOTAL|singulier_ou_pluriel{compositions:info_1_composition,compositions:info_nb_composition})</h2>]
+
 <BOUCLE_compositions(DATA){source tableau, #GET{compositions}}>
+
 	<B_pour>
 
 	[(#BOITE_OUVRIR{[(#CLE|objet_info{texte_objets}|_T)], simple, section})]
@@ -51,3 +57,13 @@
 	#BOITE_FERMER
 	</B_pour>
 </BOUCLE_compositions>
+
+	<h2><:compositions:info_aucune_composition:></h2>
+
+	[(#REM) message réservé aux admins expliquant comment ajouter des compositions ]
+	[(#BOITE_OUVRIR{'',simple})]
+	[(#AUTORISER{configurer,compositions}|oui)
+	<p>[(#VAL{compositions:message_info_ajouter_compositions}|_T{#ARRAY{chemin,#VAL{#REM|compositions_chemin},url_doc,#PLUGIN{compositions,documentation}}})]</p>
+	]
+	[(#BOITE_FERMER)]
+<//B_compositions>

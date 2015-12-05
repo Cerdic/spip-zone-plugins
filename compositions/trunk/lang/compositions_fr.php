@@ -19,6 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'Cette composition définit des compositions par défaut pour les objets suivants :',
 
+	// I
+	'info_aucune_composition' => 'Aucune composition',
+	'info_1_composition' => '1 composition',
+	'info_nb_composition' => '@nb@ compositions',
+
 	// L
 	'label_activer_composition_objets' => 'Utiliser les compositions sur les objets',
 	'label_branche_verrouillee' => 'Les compositions de cette branche sont verrouillées.',
@@ -39,6 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tout_verrouiller' => 'Tout verrouiller',
 	'label_toutes_verrouilles' => 'Toutes les compositions sont verrouillées.',
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
+
+	// M
+	'message_info_ajouter_compositions' => 'Pour disposer de compositions, plusieurs possibilités :
+	<ul class="spip">
+		<li>Activez un plugin de squelettes proposant des compositions.</li>
+		<li>Crééz vos propres compositions en plaçant des paires de fichiers <strong>objet-<em>composition</em>.html</strong> / <strong>objet-<em>composition</em>.xml</strong> dans le dossier des compositions : <strong>@chemin@</strong>.</li>
+	</ul>
+	Consultez la documentation pour les informations complètes : <a class="spip_out" href="@url_doc">@url_doc@</a>.',
 
 	// U
 	'une_utilisation' => '1 utilisation',
