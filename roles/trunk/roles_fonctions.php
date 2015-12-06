@@ -23,7 +23,7 @@ include_spip('inc/roles');
 function filtre_role_dist($role, $objet) {
 	if (!$role) return '';
 	if (!$objet) return $role;
-	$roles = roles_presents(table_objet($objet));
+	$roles = roles_presents(table_objet(objet_type($objet)));
 	if (isset($roles['titres'][$role])) {
 		return _T($roles['titres'][$role]);
 	}
