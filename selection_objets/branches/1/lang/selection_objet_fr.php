@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/selection_d_objets/trunk/lang/
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/selection_objets/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_choix_illimite' => 'Desactiver la limite de sélection par Objet Cible',
 	'selection_cible' => 'Seléction des cibles pour',
 	'selection_objet' => 'Sélection',
-	'selection_objet_cible_titre' => 'Selection d’Objets Cibles',
+	'selection_objet_cible_titre' => 'Sélection d’Objets Cibles',
 	'selection_objets_pour' => 'Sélection objets pour',
 	'selection_rubrique_objet' => 'Objets qui peuvent être sélectionnés',
 	'selection_type_lien' => 'Type lien',

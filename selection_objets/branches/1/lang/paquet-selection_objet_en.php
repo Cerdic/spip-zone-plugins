@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_objet_description' => 'Plugin inspired by the plugin  article selection.
 Selects spip objects, store them and customize their display depending on the selected section',
 	'selection_objet_nom' => 'Objects selection',
-	'selection_objet_slogan' => 'List your spip objects'
+	'selection_objet_slogan' => 'List your spip objects' # MODIF
 );
 
 ?>

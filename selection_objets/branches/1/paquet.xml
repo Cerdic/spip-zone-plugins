@@ -1,7 +1,7 @@
 <paquet
 	prefix="selection_objet"
 	categorie="edition"
-	version="1.10.1"
+	version="1.10.2"
 	etat="test"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/selection_objet-64.png"
@@ -9,7 +9,7 @@
 	schema="0.5.1" 
 >
 
-	<nom>Selection d'objets</nom>
+	<nom>Sélection d'objets</nom>
 
 	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
 
