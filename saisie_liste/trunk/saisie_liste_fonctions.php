@@ -78,7 +78,7 @@ function preparer_tableau_saisie ($tableau_saisie) {
  *     Un tableau de saisies au format de #GENERER_SAISIES représentant
  *     un objet de la saisie liste.
  * @param array $valeurs
- *     Les valeurs par défaut, pour la saisie liste en entier.
+ *     Les valeurs pour la saisie liste en entier.
  * @param array $index_objet
  *     L'index de l'objet dont on veut charger les valeurs.
  * @return array
@@ -89,7 +89,11 @@ function preparer_tableau_saisie ($tableau_saisie) {
  */
 function charger_valeurs ($tableau_saisie, $valeurs, $index_objet) {
 
-  $tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
+  if ($valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ]) {
+    $tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
+  } elseif (isset($tableau_saisie['options']['defaut'])) {
+    $tableau_saisie['options']['defaut'] = $tableau_saisie['options']['defaut'];
+  }
 
   return $tableau_saisie;
 }

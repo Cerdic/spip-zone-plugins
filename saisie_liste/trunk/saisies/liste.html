@@ -1,18 +1,11 @@
-#SET{valeur, #ARRAY}
-[(#ENV{defaut}|oui)
-  #SET{valeur, #ENV{defaut}}
-]
-[(#ENV{valeur}|oui)
-  #SET{valeur, #ENV{valeur}}
-]
 <fieldset>
   [<legend>(#ENV{legende})</legend>]
 
   <input type="hidden" name="#ENV{nom}\[permutations\]"
-         value="[(#GET{valeur}|count|enumerer|joindre{','})]" />
+         value="[(#ENV{valeur}|count|enumerer|joindre{','})]" />
 
   <ul id="saisie-liste-#ENV{nom}" class="saisie-liste">
-    <BOUCLE_liste(DATA) {enum #ENV{interdire_ajout}|?{1,0}, #GET{valeur}|count}>
+    <BOUCLE_liste(DATA) {enum #ENV{interdire_ajout}|?{1,0}, #ENV{valeur}|count}>
       #SET{compteur_objets, #COMPTEUR_BOUCLE|moins{1}}
       <li>
         <fieldset class="table">
@@ -43,7 +36,7 @@
               [(#SET{saisie, #GET{saisie}|preparer_tableau_saisie})]
 
               [(#REM) charger les valeurs. ]
-              [(#SET{saisie, #GET{saisie}|charger_valeurs{#GET{valeur}, #GET{compteur_objets}}})]
+              [(#SET{saisie, #GET{saisie}|charger_valeurs{#ENV{valeur}, #GET{compteur_objets}}})]
 
               [(#REM) on renomme les saisies pour les grouper par objet. ]
               [(#SET{saisie, #GET{saisie}|renommer_saisies{#GET{compteur_objets}, #ENV{nom}}})]
