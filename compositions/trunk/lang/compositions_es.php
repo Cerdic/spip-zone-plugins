@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'Esta composición define las composiciones por defecto para los siguientes objetos:',
 
+	// I
+	'info_aucune_composition' => ' Ninguna composición',
+
 	// L
 	'label_activer_composition_objets' => 'Utilizar las composiciones en los objetos',
 	'label_branche_verrouillee' => 'Las composiciones de esta rama están bloqueadas.',

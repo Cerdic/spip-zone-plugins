@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'This composition defines default compositions for the following objects:',
 
+	// I
+	'info_aucune_composition' => 'No composition',
+
 	// L
 	'label_activer_composition_objets' => 'Use compositions on objects',
 	'label_branche_verrouillee' => 'The compositions of this branch are locked.',

@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heritages' => 'Cette composition définit des compositions par défaut pour les objets suivants :',
 
 	// I
-	'info_aucune_composition' => 'Aucune composition',
 	'info_1_composition' => '1 composition',
+	'info_aucune_composition' => 'Aucune composition',
 	'info_nb_compositions' => '@nb@ compositions',
 
 	// L
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmestres pourront les modifier).',
 
 	// M
-	'message_info_ajouter_compositions' => 'Pour créer vos propres compositions, consultez la documentation : @url_doc@.',
+	'message_info_ajouter_compositions' => 'Pour créer vos propres compositions, consultez la documentation : @url_doc@.',
 
 	// U
 	'une_utilisation' => '1 utilisation',

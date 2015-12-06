@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'Diese Komposition bestimmt die Standardkomposition für folgende Objekte:',
 
+	// I
+	'info_aucune_composition' => 'Keine Komposition',
+
 	// L
 	'label_activer_composition_objets' => 'Komposition für die Objekte verwenden',
 	'label_branche_verrouillee' => 'Die Kompositionen dieses Zweigs sind gesperrt.',

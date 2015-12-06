@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'Toto rozmiestnenie je predvolených rozmiestnením pre tieto objekty:',
 
+	// I
+	'info_aucune_composition' => 'Žiadne rozmiestnenie',
+
 	// L
 	'label_activer_composition_objets' => 'Rozmiestnenia používať na objekty',
 	'label_branche_verrouillee' => 'Rozmiestnenia tejto vetvy sú zamknuté.',

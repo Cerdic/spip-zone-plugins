@@ -21,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'heritages' => 'Этот шаблон определяет шаблоны страниц по умолчанию для следующих объектов:',
 
+	// I
+	'info_aucune_composition' => 'Нет шаблонов',
+
 	// L
 	'label_activer_composition_objets' => 'Использовать выбор шаблонов для объектов',
 	'label_branche_verrouillee' => 'Выбор шаблонов в этой ветке заблокирован вебмастером.',
