@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'selection_cible' => 'Selección de objetos diana para',
 	'selection_objet' => 'Selección',
-	'selection_objet_cible_titre' => 'Selección de Objetos Diana',
+	'selection_objet_cible_titre' => 'Selección de Objetos Diana', # MODIF
 	'selection_objets_pour' => 'Selección objetos para:',
 	'selection_rubrique_objet' => 'Objetos que pueden ser seleccionados',
 	'selection_type_lien' => 'Tipo de enlace',
