@@ -1,0 +1,20 @@
+[(#AUTORISER{configurer,_simplesaml}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:simplesaml:titre_page_configurer_simplesaml:></h1>
+
+[(#ENV{quoi}|non)
+	<div class='ajax'>#FORMULAIRE_CONFIGURER_SIMPLESAML</div>
+]
+
+[(#ENV{quoi}|=={installation}|oui)
+
+[(#CHEMIN{doc/simplesaml-installation.spip}|file_get_contents|propre|wrap{"<div class='wysiwyg'>"})]
+
+<h2>Config APACHE probable à renseigner</h2>
+
+<pre>
+SetEnv SIMPLESAMLPHP_CONFIG_DIR [(#CHEMIN{config/connect.php}|realpath|dirname)/simplesaml/config]
+Alias /simplesaml [(#CHEMIN{vendor/simplesamlphp/simplesamlphp/www/module.php}|realpath|dirname)]
+</pre>
+
+]

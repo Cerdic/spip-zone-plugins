@@ -1,0 +1,15 @@
+
+<div class='center'>
+[(#CHEMIN_IMAGE{simplesaml-128.png}|balise_img)]
+</div>
+
+<div class='navigation'>
+	<ul class='list-items liste_items sous_navigation'>
+		<li class='item[(#ENV{quoi}|non) on]'>
+			<a href="[(#SELF|parametre_url{quoi,''})]">Configuration</a>
+		</li>
+		<li class='item[(#ENV{quoi}|=={installation}|oui) on]'>
+			<a href="[(#SELF|parametre_url{quoi,installation})]">Installation de Simple Saml PHP</a>
+		</li>
+	</ul>
+</div>

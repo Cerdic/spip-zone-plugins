@@ -1,0 +1,25 @@
+
+
+<div class="container bor-t-pu-a bg-wh-a pa-40" itemtype="https://schema.org/Article" itemscope  role="article">
+	<header>
+		<h1 class="h-like-c light" itemprop="headline">Demo de saml</h1>
+	</header>
+	<section role="main">
+		<article class="wysiwyg">
+			[(#SESSION{id_auteur}|oui)
+				<p>Je suis authentifié chez SPIP en tant que <strong>#SESSION{nom}</strong>, avec une source <code>#SESSION{source}</code></p>
+				<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
+			]
+
+			[(#SESSION{id_auteur}|non)
+				<p>Là je ne suis pas authentifié</p>
+				<a href="#URL_LOGIN_SIMPLESAML" rel="nofollow"><:lien_connecter:></a>
+			]
+
+			<div>
+			[(#VAL|simplesaml_testeur|print)]
+			</div>
+
+		</article>
+	</section><!-- #main -->
+</div>

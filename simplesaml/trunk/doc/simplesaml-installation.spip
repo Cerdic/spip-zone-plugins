@@ -1,0 +1,73 @@
+<!-- ig br -->
+
+La configuration de Simple SAML se passe en plusieurs étapes, et ne peut pas
+se réaliser directement dans SPIP. L'important est d'installer [Simple SAML PHP->https://simplesamlphp.org/]
+et de partager la même configuration entre SPIP et Simple SAML PHP.
+
+Simple SAML PHP peut être installé globalement sur le serveur ou uniquement
+sur ce site. La déclaration <code>Alias</code> pour apache ne sera pas la même
+selon ce choix établi.
+
+Cette documentation présente une installation spécifique sur ce site. Dans tous les
+cas, il faut installer Composer, la configuration et une déclaration <code>SetEnv</code>
+dans le vhost d'Apache pour ce site. La configuration n'a pas spécialement besoin
+d'être stockée dans le répertoire <code>config/</code> de SPIP, mais c'est ce qui
+est proposé ici.
+
+
+{{{ 1. Installation }}}
+
+Installer ce plugin, ainsi que le plugin Composer dont il dépend.
+Mettre à jour (ou installer) les librairies Composer en suivant les
+instructions de la page <code>?exec=composer</code>.
+
+Le plugin SPIP a besoin d'accéder aux classes SimpleSaml, ce que permet l'installation
+de Composer et des dépenences requises.
+
+
+{{{ 2. Configuration }}}
+
+On propose ici d'installer la configuration de Simple SAML dans le répetoire <code>config/</code>
+de SPIP. Créer dedans les répertoires <code>simplesaml/config/</code> et <code>simplesaml/metadata/</code>
+qui contiendront les fichiers de configuration de Simple SAML.
+
+Se reporter à la [documentation de Simple SAML PHP->https://simplesamlphp.org/] pour cela.
+Un exemple minimal est fourni dans ce plugin : vous pouvez copier le répertoire <code>simplesaml-config-template</code>
+dans <code>config/simplesaml</code> et l'adapter :
+
+-* Il faut indiquer dans <code>config/config.php</code> :
+-** un mot de passe admin
+-** un email de contact technique
+-** un sel secret
+-* Il faut indiquer dans <code>config/authsources.php</code> :
+-** l'URL IdP (metadata probablement) du fournisseur d'identité utilisé
+-* Enfin dans <code>metadata/saml20-idp-remote.php</code>
+-** Mettre toutes les descriptions des sources autorisées à servir de fournisseur d'identité
+-** Problement que seule la source par défaut sera renseignée
+-** Le contenu PHP à mettre peut être généré par simplesamlphp une fois celui-ci fonctionnel,
+    à partir de l'URL metadata et de son XML.
+
+
+{{{ 3. Configurer Apache }}}
+
+Il faut que Simple SAML soit accessible depuis le web, généralement sur le chemin <code>simplesaml/</code>.
+Le tout, en utilisant notre répertoire de configuration. Pour cela, il va falloir déclarer
+une variable d'environnement spéciale, ainsi qu'un alias, dans le vhost Apache.
+
+<cadre class='apache'>
+SetEnv SIMPLESAMLPHP_CONFIG_DIR /var/www/votresite.tld/config/simplesaml/config
+Alias /simplesaml /var/www/votresite.tld/vendor/simplesamlphp/simplesamlphp/www
+</cadre>
+
+Actualiser la conf Apache ensuite, et se rendre sur
+<code>http://votre-domaine.tld/simplesaml/</code>. Cette URL doit afficher
+la page d'accueil de Simple SAML, et vous devez pouvoir vous connecter en admin
+avec le mot de passe indiqué dans la configuration. Si cela marche, il n'y a plus
+grand chose à faire.
+
+
+{{{ 4. Se faire connaître en tant que Fournisseur de Service (SP) }}}
+
+Il est fort probable que le fournisseur d'identité doive connaître vos informations
+metadata. Il faudra donc certainement lui transmettre votre URL metadata pour
+qu'il l'ajoute dans sa liste blanche. Cette URL peut être trouvée dans <code>http://votre-domaine.tld/simplesaml/</code>.

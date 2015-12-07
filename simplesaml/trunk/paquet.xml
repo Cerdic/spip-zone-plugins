@@ -1,0 +1,26 @@
+<paquet
+	prefix="simplesaml"
+	categorie="auteur"
+	version="1.0.1"
+	etat="test"
+	compatibilite="[3.1.0-rc;3.1.*]"
+	logo="prive/themes/spip/images/simplesaml-64.png"
+	documentation=""
+	schema="1.1.0" 
+>
+	<nom>Authentification SAML avec Simple SAML PHP</nom>
+	<!-- S'authentifier par SAML -->
+
+	<auteur lien='http://apsulis.com'>Matthieu Marcillaud</auteur>
+	<auteur lien="jschneider@entrouvert.com">Jérôme Schneider (auteur original)</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/simplesaml.php" />
+	<pipeline nom="definir_session" inclure="simplesaml_pipelines.php" />
+	<pipeline nom="preparer_composer_json" inclure="simplesaml_pipelines.php" />
+	<pipeline nom="trig_auth_trace" inclure="simplesaml_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[2.5.19;]" />
+	<necessite nom="composer" compatibilite="[1.0.0;1.*.*]" />
+</paquet>
