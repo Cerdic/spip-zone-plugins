@@ -12,7 +12,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-
 /**
  * Identifie dans SPIP l'auteur connecté par SAML
  *
@@ -20,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return bool
  *     True si réussi, false sinon.
 **/
-function simplesaml_auth_loger(\SimpleSAML_Auth_Simple $simplesaml) {
+function simplesaml_auth_loger() {
 
 	$simplesaml = new SimpleSAML_Auth_Simple('default-sp');
 	if (!$simplesaml->isAuthenticated()) {
