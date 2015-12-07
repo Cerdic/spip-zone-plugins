@@ -9,7 +9,7 @@
 	documentation="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin"
 >
 
-	<nom>Boite &#224; outils</nom>
+	<nom>Boite à outils</nom>
 	<!-- Collection d'outils pour articles -->
 
 	<auteur lien="http://contrib.spip.net/_vcris_">Christophe Vallois</auteur>
@@ -23,4 +23,5 @@
 	<utilise nom="imprimir_documento" compatibilite="[0.2.0;]" />
 	<utilise nom="boutonstexte" compatibilite="[2.0.0;]" />
 	<utilise nom="notation" compatibilite="[2.0.0;]" />
+	<utilise nom="recommander" compatibilite="[1.0.0;]" />
 </paquet>
