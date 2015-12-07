@@ -24,7 +24,7 @@
 <th>#VALEUR{EquipeBlancNom} - #VALEUR{EquipeNoirNom}<br /> [à (#VALEUR{Lieu})]</th>
 <th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
      </tr>
-<BOUCLE_joueurs_noir(DATA){enum 1,#VALEUR{NbrJoueurs}}>
+<BOUCLE_joueurs_noir(DATA){enum 1,#VALEUR{NbrJoueurs}}><td>
 [(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#VALEUR{NbrJoueurs}})]
 </BOUCLE_joueurs_noir>
 </BOUCLE_noir>
