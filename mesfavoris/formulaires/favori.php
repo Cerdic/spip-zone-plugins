@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $categorie
  * @return array
  */
-function formulaires_favori_charger_dist($objet, $id_objet, $categorie){
+function formulaires_favori_charger_dist($objet, $id_objet, $categorie = ""){
 	$valeur = array(
 		'editable'=>true,
 		'_deja_favori'=>false,
@@ -32,7 +32,7 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie){
 	}
 	else {
 		include_spip('inc/mesfavoris');
-		$favori = mesfavoris_trouver($id_objet,$objet,$GLOBALS['visiteur_session']['id_auteur'],$categorie);
+		$favori = mesfavoris_trouver($id_objet,$objet,$GLOBALS['visiteur_session']['id_auteur'],$categorie = "");
 		if ($favori){
 			$valeur['_deja_favori'] = true;
 		}
@@ -48,7 +48,7 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie){
  * @param  string $categorie 
  * @return array            
  */
-function formulaires_favori_traiter_dist($objet, $id_objet, $categorie){
+function formulaires_favori_traiter_dist($objet, $id_objet, $categorie = ""){
 	$res = array('message_ok'=>' ');
 	if ($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])){
 		include_spip('inc/mesfavoris');
