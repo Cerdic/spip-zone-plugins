@@ -45,11 +45,11 @@ sous forme d’une liste texte des mots, en minuscules et sans accents.
 
 On peut importer cette configuration dans la configuration de Sphinx:
 ```
-$stopfile = '/var/local/sphinx/data/index-stopwords.txt';
+$stopfile = '/var/lib/sphinxsearch/data/spip-stopwords.txt';
 $stopwords = @json_decode(file_get_contents('[URL]/spip.php?page=indexer-config-stopwords.json'), true);
 if (is_array($stopwords)) {
-	($fp = fopen($stopfile, 'w))
-  && fwrite($fp, join("\n", $stopwords)
+	($fp = fopen($stopfile, 'w'))
+  && fwrite($fp, join("\n", $stopwords))
   && fclose($fp);
 }
 echo "stopwords = $stopfile\n";
