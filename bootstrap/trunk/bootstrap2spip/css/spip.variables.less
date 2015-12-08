@@ -1,4 +1,4 @@
-// Compat BS2/BS3
+// Compatibilite mini BS2/BS3
 .border-radius(@border-radius) {
 	border-radius: @border-radius;
 }
@@ -16,8 +16,12 @@
 @iconSpritePath:          "../img/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
 
-// SPIP
 
+// Extension de BS3
+@screen-xxs-max: (@screen-xs-min - 1);
+
+
+// Typo SPIP
 @emFontSize : 1em * (@font-size-base / 16);
 @emLineHeight : 1em * (@line-height-base);
 @emVertMargin : @emLineHeight;
