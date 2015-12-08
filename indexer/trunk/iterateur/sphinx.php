@@ -308,6 +308,7 @@ class IterateurSPHINX implements Iterator {
 							$message .= '<div class="indexer_suggestions">'._L('Suggestion : ') .join(', ', $liens_suggestion)."</div>";
 							$GLOBALS['sphinxReplaceMessage'][$q] = $message;
 							$this->save('message', $message);
+							$this->save('suggestions', $liens_suggestion);
 						}
 					}
 				}
