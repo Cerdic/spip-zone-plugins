@@ -18,9 +18,7 @@ On teste "rubon" pour respecter l'ordre des priorités ]
   {role=logo}
   {0,1}
 >
-#SET{logo,#FICHIER}
+#SET{logo,#FICHIER|balise_img|inserer_attribut{class,spip_logo spip_logos}}
 </BOUCLE_doc>
 
-
-[(#REM) Retourner l'image avec la class spip_logos, elle sera réduite au besoin dans le squelette ]
-[(#GET{logo}|balise_img|inserer_attribut{class,spip_logos})]
+#GET{logo}
