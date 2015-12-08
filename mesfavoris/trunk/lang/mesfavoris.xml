@@ -1,4 +1,4 @@
-<traduction module="mesfavoris" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/lang/" reference="fr">
+<traduction module="mesfavoris" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/trunk/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ar" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
