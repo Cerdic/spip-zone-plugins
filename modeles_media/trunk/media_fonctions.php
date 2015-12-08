@@ -21,7 +21,7 @@ function balise_MEDIA_LEGENDE_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0]['args'],$connect)";
+	$p->code = "calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_titre,$sql_descriptif,$sql_credits,$sql_type,$sql_poids,\$Pile[0],$connect)";
 	return $p;
 }
 
@@ -31,7 +31,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 	$env_titre = $args['titre'];
 	$env_descriptif =$args['descriptif'];
 	$env_credits = $args['credits'];
-	$env_type = $args['type'];
+	$env_type = $args['args']['type']; // On regarde dans 'args' pour eviter interference avec variable type herite du contexte de l'article
 	$env_poids = $args['poids'];
 	
 	// Doit-on afficher une légende ?
@@ -126,7 +126,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 // Balise placée dans une boucle DOCUMENTS et appelée dans un modèle <media>
 function balise_MEDIA_AFFICHER_LEGENDE_dist($p) {
 	$conteneur = interprete_argument_balise(1,$p);
-	$p->code = "\$Pile[0]['args']['legende'] || \$Pile[0]['args']['titre'] || \$Pile[0]['args']['descriptif'] || \$Pile[0]['args']['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['args']['poids'] ? ' ' : ''";
+	$p->code = "\$Pile[0]['legende'] || \$Pile[0]['titre'] || \$Pile[0]['descriptif'] || \$Pile[0]['credits'] || \$Pile[0]['args']['type'] || \$Pile[0]['poids'] ? ' ' : ''";
 	return $p;
 }
 
