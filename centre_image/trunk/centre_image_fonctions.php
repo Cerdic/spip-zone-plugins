@@ -1,10 +1,23 @@
 <?php
+/**
+ * Fonctions utiles au plugin Centre image
+ *
+ * @plugin     Centre image
+ * @copyright  2015
+ * @author     ARNO*
+ * @licence    GNU/GPL
+ * @package    SPIP\Centre_image\Fonctions
+ */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Retourne les coordonnées du point d'intérêt de l'image transmise
  *
  * Retourne les coordonnées `[0.5, 0.5]` par défaut (si le calcul échoue par exemple).
+ *
+ * @uses centre_image_visage() Si la constante `_SPIP_CENTRE_IMAGE` définie à `visage`
+ * @uses centre_image_densite() sinon
  * 
  * @param string $fichier
  *     Chemin du fichier ou balise `<img>`
@@ -13,14 +26,27 @@
  *     - x entre 0 (à gauche) et 1 (à droite)
  *     - y entre 0 (en haut) et 1 (en bas)
 **/
-
-function centre_image ($fichier) {
-	
-	if (defined('_SPIP_CENTRE_IMAGE') AND _SPIP_CENTRE_IMAGE == "visage") return centre_image_visage ($fichier);
-	else return centre_image_densite ($fichier);
+function centre_image($fichier) {
+	if (defined('_SPIP_CENTRE_IMAGE') AND _SPIP_CENTRE_IMAGE == "visage") {
+		return centre_image_visage($fichier);
+	} else {
+		return centre_image_densite($fichier);
+	}
 }
 
-function centre_image_densite ($fichier) {
+/**
+ * Retourne les coordonnées du point d'intérêt de l'image transmise
+ *
+ * Retourne les coordonnées `[0.5, 0.5]` par défaut (si le calcul échoue par exemple).
+ *
+ * @param string $fichier
+ *     Chemin du fichier ou balise `<img>`
+ * @return float[]
+ *     Tableau (x, y) des coordonnées du point d'intéret ;
+ *     - x entre 0 (à gauche) et 1 (à droite)
+ *     - y entre 0 (en haut) et 1 (en bas)
+**/
+function centre_image_densite($fichier) {
 	static $spip_centre_image = array();
 
 	// nettoyer le fichier (qui peut être dans un <img> ou qui peut être daté)
@@ -53,8 +79,7 @@ function centre_image_densite ($fichier) {
 
 		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) > filemtime($fichier)) {
 			$res = json_decode(file_get_contents($fichier_forcer),TRUE);
-		}
-		else if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
+		} elseif (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
 			$res = json_decode(file_get_contents($fichier_json),TRUE);
 		} else {
 			if (function_exists("imagefilter")) {
@@ -113,19 +138,33 @@ function centre_image_y($fichier) {
 }
 
 
-/*
+/**
  * Détection du visage (attention: super-lourd)
- */
-
-function centre_image_visage ($fichier) {
+ * 
+ * Retourne les coordonnées du point d'intérêt de l'image transmise
+ * en s'appuyant sur une (lourde) fonction de détection de visage
+ *
+ * Retourne les coordonnées `[0.5, 0.5]` par défaut (si le calcul échoue par exemple).
+ *
+ * @param string $fichier
+ *     Chemin du fichier ou balise `<img>`
+ * @return float[]
+ *     Tableau (x, y) des coordonnées du point d'intéret ;
+ *     - x entre 0 (à gauche) et 1 (à droite)
+ *     - y entre 0 (en haut) et 1 (en bas)
+**/
+function centre_image_visage($fichier) {
 	static $spip_centre_image_visage = array();
-	if (preg_match("/src\=/", $fichier)) $fichier = extraire_attribut($fichier, "src");
+	if (preg_match("/src\=/", $fichier)) {
+		$fichier = extraire_attribut($fichier, "src");
+	}
 	$fichier = preg_replace(",\?[0-9]*$,", "", $fichier);
 
 	// on mémorise le résultat -> don
-	if (isset($spip_centre_image_visage["$fichier"]) AND $spip_centre_image_visage["$fichier"]) return $spip_centre_image_visage["$fichier"];
-	
-	
+	if (isset($spip_centre_image_visage["$fichier"]) AND $spip_centre_image_visage["$fichier"]) {
+		return $spip_centre_image_visage["$fichier"];
+	}
+
 	if (file_exists($fichier)) {
 
 		$md5 = $fichier;
@@ -140,7 +179,7 @@ function centre_image_visage ($fichier) {
 		$cache = sous_repertoire($cache, $l1);
 		$cache = sous_repertoire($cache, $l2);
 		$forcer = sous_repertoire(_DIR_IMG, "cache-centre-image");
-				
+
 		$fichier_json = "$cache$md5.json";
 		$fichier_forcer = "$forcer$md5.json";
 
@@ -151,37 +190,32 @@ function centre_image_visage ($fichier) {
 		else if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
 			$res = json_decode(file_get_contents($fichier_json),TRUE);
 		} else {
-		
+
 			include_spip ("inc/FaceDetector");
 			$detector = new svay\FaceDetector('detection.dat');
 			$detector->faceDetect($fichier);
 			$face = $detector->getFace();
-			
+
 			if ($face) {
 				$l = largeur($fichier);
 				$h = hauteur($fichier);
-			
+
 				$x = ($face["x"] + ($face["w"] / 2)) / $l ;
 				$y = ($face["y"] + ($face["w"] / 2)) / $h;
-				
-	
+
 				$res = array("x" => $x, "y" => $y);
 			} else {
 				$res = array("x" => 0.5, "y" => 0.33);
 			}
-				
-			file_put_contents($fichier_json, json_encode($res,TRUE));		
+
+			file_put_contents($fichier_json, json_encode($res, TRUE));
 		}
 
 		$spip_centre_image_visage["$fichier"] = $res;
 
 		return $res;    
-	
-	
 	}
-
 }
-
 
 
 /**

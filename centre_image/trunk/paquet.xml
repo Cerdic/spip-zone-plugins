@@ -1,7 +1,7 @@
 <paquet
 	prefix="centre_image"
 	categorie="multimedia"
-	version="0.6.7"
+	version="0.7.0"
 	etat="dev"
 	compatibilite="[3.0.18;3.1.*]"
 	logo="prive/themes/spip/images/centre_image-64.png"
