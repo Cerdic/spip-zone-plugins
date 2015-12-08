@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.2.3</version>
+	<version>0.3.0</version>
 
 	<nom>Bolo</nom>
 
@@ -42,6 +42,6 @@
 
 	<categorie>edition</categorie>
 
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 
 </plugin>
