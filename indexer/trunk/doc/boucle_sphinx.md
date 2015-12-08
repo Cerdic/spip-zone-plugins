@@ -308,3 +308,19 @@ Options pour les requêtes à Sphinx
 ** Exemple **
 
     {option field_weights, "(title=10, content=5)"}
+
+
+
+AFFICHAGE
+---------
+
+
+On peut afficher les messages de SPhinx avec la balise `#SPHINX_MESSAGE`.
+
+Pour les suggestions, la balise `#SPHINX_SUGGESTIONS` est un tableau de liens de recherches en modifiant un des mots.
+
+Exemple:
+`[SUGGESTIONS : (#SPHINX_SUGGESTIONS|print)]`
+
+Ne pas oublier de l'appliquer en cas d'échec de la boucle comme de succès (dans `</B>` et `<//B>`).
+
