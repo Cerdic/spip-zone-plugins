@@ -316,7 +316,7 @@ function indexer_motiver_mots($mots) {
 	} else {
 		if (is_array($all['query']['meta']['keywords'])) {
 			foreach($all['query']['meta']['keywords'] as $i => $w) {
-				$translitt = substr($w['keyword'], 1);
+				$translitt = str_replace('=', '', $w['keyword']);
 				if (intval($w['docs']) > 3)
 					$liste[$translitt] = intval($w['docs']);
 			}
