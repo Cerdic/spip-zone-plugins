@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_sources_objets_label' => 'Activer l’indexation sur les contenus :',
 	'configurer_statuts_ignores_explication' => 'Ne PAS indexer les contenus avec ce statut.',
 	'configurer_statuts_ignores_label' => 'Statuts ignorés',
+	'configurer_stopwords_explication' => 'Lister les mots à ignorer, séparés par des virgules.',
+	'configurer_stopwords_label' => 'Mots à ignorer',
 	'configurer_titre' => 'Configurer l’indexation',
 	
 	// I
