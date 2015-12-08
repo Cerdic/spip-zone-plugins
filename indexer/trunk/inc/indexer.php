@@ -76,6 +76,14 @@ function indexer_sources(){
 		// On crée la liste des sources
 		$sources = new Indexer\Sources\Sources();
 		
+		// Toute la hiérarchie des rubriques
+		$sources->register('hierarchie_rubriques', new Spip\Indexer\Sources\HierarchieRubriques());
+		
+		// Toute la hiérarchie des mots
+		if (_DIR_PLUGIN_MOTS) {
+			$sources->register('hierarchie_mots', new Spip\Indexer\Sources\HierarchieMots());
+		}
+		
 		// On ajoute chaque objet configuré aux sources à indexer
 		// Par défaut on enregistre les articles s'il n'y a rien
 		foreach (lire_config('indexer/sources_objets', array('spip_articles')) as $table) {
@@ -85,14 +93,6 @@ function indexer_sources(){
 					new Spip\Indexer\Sources\SpipDocuments(objet_type($table))
 				);
 			}
-		}
-		
-		// Toute la hiérarchie des rubriques
-		$sources->register('hierarchie_rubriques', new Spip\Indexer\Sources\HierarchieRubriques());
-		
-		// Toute la hiérarchie des mots
-		if (_DIR_PLUGIN_MOTS) {
-			$sources->register('hierarchie_mots', new Spip\Indexer\Sources\HierarchieMots());
 		}
 		
 		// On passe les sources dans un pipeline
