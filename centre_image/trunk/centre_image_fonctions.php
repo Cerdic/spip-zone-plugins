@@ -82,7 +82,7 @@ function centre_image_densite($fichier) {
 
 		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) >= $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_forcer), TRUE);
-		} elseif (file_exists($fichier_json) and filemtime($fichier_forcer) > $mtime_source) {
+		} elseif (file_exists($fichier_json) and filemtime($fichier_json) > $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
 			if (function_exists("imagefilter")) {
@@ -191,7 +191,7 @@ function centre_image_visage($fichier) {
 
 		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) >= $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_forcer), TRUE);
-		} elseif (file_exists($fichier_json) and filemtime($fichier_forcer) > $mtime_source) {
+		} elseif (file_exists($fichier_json) and filemtime($fichier_json) > $mtime_source) {
 			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
 			include_spip ("inc/FaceDetector");
