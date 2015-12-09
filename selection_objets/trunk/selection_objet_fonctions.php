@@ -6,55 +6,64 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
  //Applique des filtres sur des champs spéciciques
 function filtrer_champ($data){
-    include_spip('inc/texte');
-    $exceptions=charger_fonction('exceptions','inc');
-    $titres=$exceptions('titre');
-    $titres=array_merge(array(0=>'titre'),$titres);
-    $propres=array('descriptif','texte');
-    $extraire_multi=array_merge($titres,array('descriptif','texte'));
-    $filtres=array(
-        'extraire_multi'=>  $extraire_multi,          
-        'supprimer_numero'=>$titres,
-        'propre'=>$propres,
-       );
-        
-    foreach($filtres as $filtre => $champ){
-        if(is_array($data)){
-            if(is_array($champ)){
-                foreach($champ as $c){
-                    if($data[$c])$data[$c]=$filtre($data[$c]);
-                    }
-                }
-            }
-        else $data=$filtre($data);
-        }
-    return $data;   
-    
+	include_spip('inc/texte');
+	$exceptions=charger_fonction('exceptions', 'inc');
+	$titres = $exceptions('titre');
+	$titres = array_merge(array(0=>'titre'), $titres);
+	$propres=array('descriptif', 'texte');
+	$extraire_multi = array_merge($titres, array('descriptif','texte'));
+	$filtres = array(
+		'extraire_multi' => $extraire_multi,
+		'supprimer_numero' => $titres,
+		'propre' => $propres,
+	);
+
+	foreach($filtres as $filtre => $champ){
+		if (is_array($data)) {
+			if (is_array($champ)) {
+				foreach($champ as $c) {
+					if (isset($data[$c])) {
+						$data[$c]=$filtre($data[$c]);
+					}
+				}
+			}
+		} else {
+			$data=$filtre($data);
+		}
+	}
+	return $data;
 }
 
 /*Etablit le titre de l'objet*/
-function titre_objet_sel($objet,$contexte){
-
-    $exceptions=charger_fonction('exceptions','inc');
-    $exception_titre=$exceptions('titre');
-    //Les exceptions du titre
-    if(!$titre=$contexte[$exception_titre[$objet]] and isset($contexte['titre']))$titre=$contexte['titre'];
-    if(!$titre){
-        if($objet=='document'){
-            $f=explode('/',$contexte['fichier']);
-            $titre=$f[1];
-            }
-        elseif($objet){
-            $table_sql = table_objet_sql($objet);
-            $tables=lister_tables_objets_sql();
-            $titre_objet=_T($tables[$table_sql]['texte_objet']);
-            if(isset($contexte['id_objet']))$id=$contexte['id_objet'];
-            if($objet='selection_objet' AND isset($contexte['id_selection_objet']))$id=$contexte['id_selection_objet'];
-           $titre=$titre_objet.' '.$id; 
-        } 
-    
-    }
-    return $titre;
+function titre_objet_sel($objet, $contexte){
+	$exceptions = charger_fonction('exceptions','inc');
+	$exception_titre = $exceptions('titre');
+	//Les exceptions du titre
+	$titre = '';
+	if (isset($exception_titre[$objet]) and isset($contexte[$exception_titre[$objet]])) {
+		$titre = $contexte[$exception_titre[$objet]];
+	}
+	if (!$titre and isset($contexte['titre'])) {
+		$titre = $contexte['titre'];
+	}
+	if (!$titre) {
+		if ($objet == 'document') {
+			$f = explode('/', $contexte['fichier']);
+			$titre = $f[1];
+		} elseif ($objet) {
+			$table_sql = table_objet_sql($objet);
+			$tables = lister_tables_objets_sql();
+			$titre_objet = _T($tables[$table_sql]['texte_objet']);
+			if (isset($contexte['id_objet'])) {
+				$id = $contexte['id_objet'];
+			}
+			if ($objet='selection_objet' AND isset($contexte['id_selection_objet'])) {
+				$id = $contexte['id_selection_objet'];
+			}
+			$titre = $titre_objet.' '.$id; 
+		}
+	}
+	return $titre;
 }
 
 /* Fournit les champs désirés d'un objet donné */
@@ -115,33 +124,43 @@ function url_objet($id_objet,$objet,$titre='',$url=''){
 
 
 /*Fournit un tableau avec id_objet=>donnees_objet*/
-function tableau_objet($objet,$id_objet='',$champs='*',$where=array(),$filtrer=array(),$array_donnes=true){
-    
-    $d=info_objet($objet,$id_objet,$champs,$where);
-    
-    //Les tables non conforme, faudrait inclure une pipeline
-    $exceptions=charger_fonction('exceptions','inc');
-    $exception_objet=$exceptions('objet');
-    if($exception_objet[$objet]){
-         $objet=$exception_objet[$objet];
-    }
-    $data=array();
-    if(is_array($d)){
-        foreach($d as $r){
-            //déterminer le titre
-            if(!$r['titre'])$r['titre']=titre_objet_sel($objet,$r);
-            if(!$filtrer) $data[$r['id_'.$objet]]=$r;
-            elseif(is_array($filtrer)){
-                $donnees=array();
-                foreach($filtrer as $c){
-                if($r[$c])$donnees[$c]=$r[$c];  
-                }
-             if($array_donnes) $data[$r['id_'.$objet]]=$donnees; 
-             else $data[$r['id_'.$objet]]=implode(',',$donnees);
-            }
-        }
-    }
-    return $data;
+function tableau_objet($objet, $id_objet='', $champs='*', $where=array(), $filtrer=array(), $array_donnes=true){
+
+	$d=info_objet($objet,$id_objet,$champs,$where);
+
+	//Les tables non conforme, faudrait inclure une pipeline
+	$exceptions=charger_fonction('exceptions','inc');
+	$exception_objet=$exceptions('objet');
+	if (isset($exception_objet[$objet])) {
+		$objet=$exception_objet[$objet];
+	}
+	$data=array();
+	if (is_array($d)) {
+		foreach($d as $r) {
+			$donnees = array();
+
+			//déterminer le titre
+			if (!$r['titre']) {
+				$r['titre']=titre_objet_sel($objet,$r);
+			}
+			if (!$filtrer) {
+				$data[$r['id_'.$objet]]=$r;
+			} elseif (is_array($filtrer)) {
+				foreach ($filtrer as $c){
+					if (isset($r[$c]) and $r[$c]) {
+						$donnees[$c]=$r[$c];
+					}
+				}
+			}
+
+			if ($array_donnes) {
+				$data[$r['id_'.$objet]] = $donnees;
+			} else {
+				$data[$r['id_'.$objet]]=implode(',',$donnees);
+			}
+		}
+	}
+	return $data;
 }
 /* Assemble les données entre un objet sélectioné et son objet d'origine pour injection dans un modele choisit*/
 function generer_modele($id_objet,$objet='article',$fichier='modeles_selection_objet/defaut',$env=array(),$where=''){
