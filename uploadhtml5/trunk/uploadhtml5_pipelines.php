@@ -56,7 +56,14 @@ function uploadhtml5_formulaire_fond($flux) {
     $objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
     $id_objet = isset($flux['args']['contexte']['id_objet']) ? $flux['args']['contexte']['id_objet'] : 0;
 
-    if ($flux['args']['form'] == 'joindre_document') {
+    if (
+	    $flux['args']['form'] == 'joindre_document'
+	    and (
+		    isset($config['charger_public'])
+		    and $config['charger_public']
+		    and !test_espace_prive()
+	    )
+    ) {
 
         // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
         $uploadhtml5 = recuperer_fond(
@@ -71,7 +78,14 @@ function uploadhtml5_formulaire_fond($flux) {
         $flux['data'] = $uploadhtml5.$flux['data'];
     }
 
-    elseif ($flux['args']['form'] == 'editer_logo') {
+    elseif (
+	    $flux['args']['form'] == 'editer_logo'
+	    and (
+		    isset($config['charger_public'])
+	         and $config['charger_public']
+	         and !test_espace_prive()
+	    )
+    ) {
 
         $chercher_logo = charger_fonction('chercher_logo','inc');
         if (!$chercher_logo($id_objet, id_table_objet($objet))) {
