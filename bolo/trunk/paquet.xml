@@ -1,7 +1,7 @@
 <paquet
 	prefix="bolo"
 	categorie="edition"
-	version="0.3.2"
+	version="0.3.3"
 	etat="stable"
 	compatibilite="[1.9.0;3.1.*]"
 	logo="images/bolo-128.png"

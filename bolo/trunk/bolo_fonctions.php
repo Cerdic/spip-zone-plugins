@@ -64,3 +64,55 @@ function balise_BOLO($p) {
 
 	return $p;
 }
+
+
+/**
+ * Décale le contenu d'un texte.
+ *
+ * On veut éviter que les faux textes commencent toujours par la même chose.
+ * Ce filtre permet de varier le contenu du texte en "décalant" les mots.
+ * Par exemple, si on décale tous les mots de 5 positions vers la gauche,
+ * le 5ème mot va se retrouver au début, et tous les mots précédents seront collés à la fin.
+ *
+ * @example
+ * Le texte suivant :
+ * « Longtemps, je me suis levé de bonne heure »
+ * donnerait ceci avec un décalage de 3 :
+ * « suis levé de bonne heure. Longtemps, je me »
+ *
+ * @param string $texte
+ *     Texte à traiter
+ * @param int $decalage
+ *     Nombre de mots à décaler, aléatoire par défaut.
+ * @return string
+ *     Texte avec les mots décalé
+ */
+function filtre_decaler_texte_dist($texte, $decalage='') {
+
+	// on place tous les mots dans un tableau associatif.
+	// (position numérique du mot => mot)
+	$mots = str_word_count($texte, 2);
+
+	// on récupère la position du mot de départ.
+	// a) soit le numéro du mot est donné...
+	if (intval($decalage)) {
+		// on pondère l'decalage
+		$decalage = ($decalage > count($mots)) ? $decalage % count($mots) : $decalage;
+		// on récupère la position du mot correspondant
+		$v = array_reverse($mots)[$decalage];
+		$position = array_search($v,$mots);
+	}
+	// b) ...soit on choisit une position au hasard.
+	else {
+		$position = array_rand($mots);
+	}
+
+	// on coupe le texte en 2.
+	$debut = substr($texte, 0, $position);
+	$fin = substr($texte, $position);
+
+	// on recolle tout ça.
+	$texte = $fin.' '.$debut;
+
+	return $texte;
+}
