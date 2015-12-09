@@ -15,6 +15,8 @@ function paravent_autoriser(){}
  * @return booleen
  */
 function autoriser_travaux(){
-	return in_array($GLOBALS['visiteur_session']['statut'], array('0minirezo', '1comite'));
+	if (isset($GLOBALS['visiteur_session']['statut'])) {
+		return in_array($GLOBALS['visiteur_session']['statut'], array('0minirezo','1comite'),true);
+		}
 	}
 ?>
