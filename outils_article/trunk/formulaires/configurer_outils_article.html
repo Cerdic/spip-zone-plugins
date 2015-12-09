@@ -1,238 +1,238 @@
 <div class='formulaire_spip'>
 	<form method="post">
 		#ACTION_FORMULAIRE{#ENV{action}}
-		[(#CHEMIN{outilsarticle.png}|balise_img)]<:outilsarticle:descriptif:>
+		[(#CHEMIN{outilsarticle.png}|balise_img)]<:outils_article:descriptif:>
 		<fieldset>
-			<legend><:outilsarticle:boutonstexte_legend:> (<a href="[(#URL_ECRIRE{configurer_boutonstexte})]"><:outilsarticle:configuration:></a>)</legend>
+			<legend><:outils_article:boutonstexte_legend:> (<a href="[(#URL_ECRIRE{configurer_boutonstexte})]"><:outils_article:configuration:></a>)</legend>
 [(#PLUGIN{BOUTONSTEXTE}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:boutonstexte_affichage:></label>
+					<label><:outils_article:boutonstexte_affichage:></label>
 					<input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
 					<img src="#CHEMIN{css/images/kdepetit/textemoins.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:boutonstexte_affichage_int:></label>
+					<label><:outils_article:boutonstexte_affichage_int:></label>
 					<input type="checkbox" name="textemoinsint" [checked="(#ENV{textemoinsint})"] />
 					<label for="textemoinsdesc"></label>
-					<input type="text" name="textemoinsdesc" id="textemoinsdesc" value="[(#CONFIG{outils_article/textemoinsdesc}|sinon{<:outilsarticle:textemoins:>})]" style="display:inline"/>
+					<input type="text" name="textemoinsdesc" id="textemoinsdesc" value="[(#CONFIG{outils_article/textemoinsdesc}|sinon{<:outils_article:textemoins:>})]" style="display:inline"/>
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:boutonstexte_affichage_int:></label>
+					<label><:outils_article:boutonstexte_affichage_int:></label>
 					<input type="checkbox" name="texteplusint" [checked="(#ENV{texteplusint})"] />
 					<label for="texteplusdesc"></label>
-					<input type="text" name="texteplusdesc" id="texteplusdesc" value="[(#CONFIG{outils_article/texteplusdesc}|sinon{<:outilsarticle:texteplus:>})]" style="display:inline"/>
+					<input type="text" name="texteplusdesc" id="texteplusdesc" value="[(#CONFIG{outils_article/texteplusdesc}|sinon{<:outils_article:texteplus:>})]" style="display:inline"/>
 				</li>
 			</ul>
 ][(#PLUGIN{BOUTONSTEXTE}|non)
 			#SET{plugin, Boutons dans le texte}
-			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+			<p class="notice"><:outils_article:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
 
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:impression:></legend>
+			<legend><:outils_article:impression:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:impression_affichage:></label>
+					<label><:outils_article:impression_affichage:></label>
 					<input type="checkbox" name="impression" [checked="(#ENV{impression})"] />
 					<img src="#CHEMIN{css/images/kdepetit/printer.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:impression_affichage_int:></label>
+					<label><:outils_article:impression_affichage_int:></label>
 					<input type="checkbox" name="impressionint" [checked="(#ENV{impressionint})"] />
 					<label for="impressiondesc"></label>
-					<input type="text" name="impressiondesc" id="impressiondesc" value="[(#CONFIG{outils_article/impressiondesc}|sinon{<:outilsarticle:impression:>})]" style="display:inline"/>
+					<input type="text" name="impressiondesc" id="impressiondesc" value="[(#CONFIG{outils_article/impressiondesc}|sinon{<:outils_article:impression:>})]" style="display:inline"/>
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:flux_rss:></legend>
+			<legend><:outils_article:flux_rss:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:rss:></label>
+					<label><:outils_article:rss:></label>
 					<input type="checkbox" name="rss" [checked="(#ENV{rss})"] />
 					<img src="#CHEMIN{css/images/kdepetit/feed.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:intitule:></label>
+					<label><:outils_article:intitule:></label>
 					<input type="checkbox" name="rssint" [checked="(#ENV{rssint})"] />
 					<label for="rssdesc"></label>
-					<input type="text" name="rssdesc" id="rssdesc" value="[(#CONFIG{outils_article/rssdesc}|sinon{<:outilsarticle:rss:>})]" style="display:inline"/>
+					<input type="text" name="rssdesc" id="rssdesc" value="[(#CONFIG{outils_article/rssdesc}|sinon{<:outils_article:rss:>})]" style="display:inline"/>
 				</li>
 			</ul>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:rssforum:></label>
+					<label><:outils_article:rssforum:></label>
 					<input type="checkbox" name="rssforum" [checked="(#ENV{rssforum})"] />
 					<img src="#CHEMIN{css/images/kdepetit/rss_black.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:intitule:></label>
+					<label><:outils_article:intitule:></label>
 					<input type="checkbox" name="rssforumint" [checked="(#ENV{rssforumint})"] />
 					<label for="rssforumdesc"></label>
-					<input type="text" name="rssforumdesc" id="rssforumdesc" value="[(#CONFIG{outils_article/rssforumdesc}|sinon{<:outilsarticle:rssforum:>})]" style="display:inline"/>
+					<input type="text" name="rssforumdesc" id="rssforumdesc" value="[(#CONFIG{outils_article/rssforumdesc}|sinon{<:outils_article:rssforum:>})]" style="display:inline"/>
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:auteur:></legend>
+			<legend><:outils_article:auteur:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="auteur" [checked="(#ENV{auteur})"] />
 					<img src="#CHEMIN{css/images/kdepetit/auteur.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:affichage_int:></label>
+					<label><:outils_article:affichage_int:></label>
 					<input type="checkbox" name="auteurint" [checked="(#ENV{auteurint})"] />
 					<label for="auteurdesc"></label>
-					<input type="text" name="auteurdesc" id="auteurdesc" value="[(#CONFIG{outils_article/auteurdesc}|sinon{<:outilsarticle:auteur:>})]" style="display:inline"/>
+					<input type="text" name="auteurdesc" id="auteurdesc" value="[(#CONFIG{outils_article/auteurdesc}|sinon{<:outils_article:auteur:>})]" style="display:inline"/>
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:reagir:></legend>
+			<legend><:outils_article:reagir:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="reagir" [checked="(#ENV{reagir})"] />
 					<img src="#CHEMIN{css/images/kdepetit/chat.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:affichage_int:></label>
+					<label><:outils_article:affichage_int:></label>
 					<input type="checkbox" name="reagirint" [checked="(#ENV{reagirint})"] />
 					<label for="reagirdesc"></label>
-					<input type="text" name="reagirdesc" id="reagirdesc" value="[(#CONFIG{outils_article/reagirdesc}|sinon{<:outilsarticle:reagir:>})]" style="display:inline"/>
+					<input type="text" name="reagirdesc" id="reagirdesc" value="[(#CONFIG{outils_article/reagirdesc}|sinon{<:outils_article:reagir:>})]" style="display:inline"/>
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:compteur:></legend>
+			<legend><:outils_article:compteur:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="compteur" [checked="(#ENV{compteur})"] />
 					<img src="#CHEMIN{css/images/compteur.png}" />
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:pdf:></legend>
+			<legend><:outils_article:pdf:></legend>
 [(#PLUGIN{ARTICLE_PDF}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="pdf" [checked="(#ENV{pdf})"] />
 					<img src="#CHEMIN{css/images/kdepetit/pdf.png}">
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:affichage_int:></label>
+					<label><:outils_article:affichage_int:></label>
 					<input type="checkbox" name="pdfint" [checked="(#ENV{pdfint})"] />
 					<label for="pdfdesc"></label>
-					<input type="text" name="pdfdesc" id="pdfdesc" value="[(#CONFIG{outils_article/pdfdesc}|sinon{<:outilsarticle:pdf:>})]" style="display:inline"/>
+					<input type="text" name="pdfdesc" id="pdfdesc" value="[(#CONFIG{outils_article/pdfdesc}|sinon{<:outils_article:pdf:>})]" style="display:inline"/>
 				</li>
 			</ul>
 ][(#PLUGIN{ARTICLE_PDF}|non)
 			#SET{plugin, Article PDF}
-			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+			<p class="notice"><:outils_article:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:mail:></legend>
+			<legend><:outils_article:mail:></legend>
 [(#PLUGIN{ENVIAR_EMAIL}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="mail" [checked="(#ENV{mail})"] />
 					<img src="#CHEMIN{css/images/kdepetit/mail.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:affichage_int:></label>
+					<label><:outils_article:affichage_int:></label>
 					<input type="checkbox" name="mailint" [checked="(#ENV{mailint})"] />
 					<label for="maildesc"></label>
-					<input type="text" name="maildesc" id="maildesc" value="[(#CONFIG{outils_article/maildesc}|sinon{<:outilsarticle:mail:>})]" style="display:inline"/>
+					<input type="text" name="maildesc" id="maildesc" value="[(#CONFIG{outils_article/maildesc}|sinon{<:outils_article:mail:>})]" style="display:inline"/>
 				</li>
 			</ul>
 ][(#PLUGIN{ENVIAR_EMAIL}|non)
 			#SET{plugin, Envoyer par mail}
-			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+			<p class="notice"><:outils_article:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:recommander:></legend>
+			<legend><:outils_article:recommander:></legend>
 [(#PLUGIN{RECOMMANDER}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="recommander" [checked="(#ENV{recommander})"] />
 					<img src="#CHEMIN{css/images/kdepetit/mail.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:affichage_int:></label>
+					<label><:outils_article:affichage_int:></label>
 					<input type="checkbox" name="recommanderint" [checked="(#ENV{recommanderint})"] />
 					<label for="recommanderdesc"></label>
-					<input type="text" name="recommanderdesc" id="recommanderdesc" value="[(#CONFIG{outils_article/recommanderdesc}|sinon{<:outilsarticle:recommander:>})]" style="display:inline"/>
+					<input type="text" name="recommanderdesc" id="recommanderdesc" value="[(#CONFIG{outils_article/recommanderdesc}|sinon{<:outils_article:recommander:>})]" style="display:inline"/>
 				</li>
 			</ul>
 ][(#PLUGIN{RECOMMANDER}|non)
 			#SET{plugin, Recommander à un ami}
-			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+			<p class="notice"><:outils_article:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:notation:> (<a href="[(#URL_ECRIRE{configurer_notation})]"><:outilsarticle:configuration:></a>)</legend>
+			<legend><:outils_article:notation:> (<a href="[(#URL_ECRIRE{configurer_notation})]"><:outils_article:configuration:></a>)</legend>
 [(#PLUGIN{NOTATION}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:affichage:></label>
+					<label><:outils_article:affichage:></label>
 					<input type="checkbox" name="note" [checked="(#ENV{note})"] />
 					<img src="#CHEMIN{css/images/note.png}" />
 				</li>
 			</ul>
 ][(#PLUGIN{NOTATION}|non)
 			#SET{plugin, Notation}
-			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+			<p class="notice"><:outils_article:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:apparence:></legend>
+			<legend><:outils_article:apparence:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:barre:></label>
+					<label><:outils_article:barre:></label>
 					<input type="checkbox" name="barre" [checked="(#ENV{barre})"] />
 					<img src="#CHEMIN{css/images/barre.png}" />
 				</li>
 			</ul>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:boite:></label>
+					<label><:outils_article:boite:></label>
 					<input type="checkbox" name="boite" [checked="(#ENV{boite})"] />
 					<img src="#CHEMIN{css/images/boite.png}" />
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
-			<legend><:outilsarticle:icone:></legend>
+			<legend><:outils_article:icone:></legend>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label><:outilsarticle:jakukdesc:></label>
+					<label><:outils_article:jakukdesc:></label>
 					<img src="#CHEMIN{css/images/basepetit/jakub.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:kde:></label>
+					<label><:outils_article:kde:></label>
 					<img src="#CHEMIN{css/images/kdepetit/kde.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:crystal:></label>
+					<label><:outils_article:crystal:></label>
 					<img src="#CHEMIN{css/images/crystal/crystal.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:gos:></label>
+					<label><:outils_article:gos:></label>
 					<img src="#CHEMIN{css/images/gos/gos.png}" />
 				</li>
 				<li class="editer">
-					<label><:outilsarticle:osx:></label>
+					<label><:outils_article:osx:></label>
 					<img src="#CHEMIN{css/images/osx/osx2.png}" />
 				</li>
 			</ul>
@@ -240,15 +240,15 @@
 		<fieldset>
 			<ul class="editer-groupe">
 				<li class="editer">
-					<label for="theme"><:outilsarticle:theme:></label>
+					<label for="theme"><:outils_article:theme:></label>
 					<select name="theme" id="theme">
-						<option value="basepetit" [(#CONFIG{outils_article/theme}|=={basepetit}|?{selected="selected",})]><:outilsarticle:basepetit:></option>
-						<option value="basegrand" [(#CONFIG{outils_article/theme}|=={basegrand}|?{selected="selected",})]><:outilsarticle:basegrand:></option>
-						<option value="kdepetit" [(#CONFIG{outils_article/theme}|=={kdepetit}|?{selected="selected",})]><:outilsarticle:kdepetit:></option>
-						<option value="kdegrand" [(#CONFIG{outils_article/theme}|=={kdegrand}|?{selected="selected",})]><:outilsarticle:kdegrand:></option>
-						<option value="crystal" [(#CONFIG{outils_article/theme}|=={crystal}|?{selected="selected",})]><:outilsarticle:crystal:></option>
-						<option value="gos" [(#CONFIG{outils_article/theme}|=={gos}|?{selected="selected",})]><:outilsarticle:gos:></option>
-						<option value="osx" [(#CONFIG{outils_article/theme}|=={osx}|?{selected="selected",})]><:outilsarticle:osx:></option>
+						<option value="basepetit" [(#CONFIG{outils_article/theme}|=={basepetit}|?{selected="selected",})]><:outils_article:basepetit:></option>
+						<option value="basegrand" [(#CONFIG{outils_article/theme}|=={basegrand}|?{selected="selected",})]><:outils_article:basegrand:></option>
+						<option value="kdepetit" [(#CONFIG{outils_article/theme}|=={kdepetit}|?{selected="selected",})]><:outils_article:kdepetit:></option>
+						<option value="kdegrand" [(#CONFIG{outils_article/theme}|=={kdegrand}|?{selected="selected",})]><:outils_article:kdegrand:></option>
+						<option value="crystal" [(#CONFIG{outils_article/theme}|=={crystal}|?{selected="selected",})]><:outils_article:crystal:></option>
+						<option value="gos" [(#CONFIG{outils_article/theme}|=={gos}|?{selected="selected",})]><:outils_article:gos:></option>
+						<option value="osx" [(#CONFIG{outils_article/theme}|=={osx}|?{selected="selected",})]><:outils_article:osx:></option>
 					</select>
 				</li>
 			</ul>
