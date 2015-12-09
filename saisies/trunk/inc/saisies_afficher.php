@@ -239,9 +239,12 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		// À partir du moment où on passe tout l'environnement, il faut enlever
 		// certains éléments qui ne doivent absolument provenir que des options
 		$saisies_disponibles = saisies_lister_disponibles();
-		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
+
+		if (isset($saisies_disponibles[$contexte['type_saisie']]['options'])
+			and is_array($saisies_disponibles[$contexte['type_saisie']]['options']))
+		{
 			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
-			foreach ($options_a_supprimer as $option_a_supprimer){
+			foreach ($options_a_supprimer as $option_a_supprimer) {
 				unset($env[$option_a_supprimer]);
 			}
 		}
