@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function uploadhtml5_jquery_plugins($scripts) {
+	include_spip('inc/config');
     $config = lire_config('uploadhtml5');
     if (
         (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
@@ -24,6 +25,7 @@ function uploadhtml5_jquery_plugins($scripts) {
 }
 
 function uploadhtml5_insert_head_css($flux) {
+	include_spip('inc/config');
     $config = lire_config('uploadhtml5');
     if (
         (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
@@ -47,6 +49,8 @@ function uploadhtml5_header_prive($flux) {
 }
 
 function uploadhtml5_formulaire_fond($flux) {
+	include_spip('inc/config');
+	$config = lire_config('uploadhtml5');
 
     // Simplification de variable
     $objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
