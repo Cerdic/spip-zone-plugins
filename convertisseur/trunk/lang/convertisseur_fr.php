@@ -34,6 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // P
   'options' => 'Options :',
   
+  // Q
+  'Quark_SPIP' => 'Quark (XML) vers SPIP',
+  
   // S
   'SLA_SPIP' => 'SLA (Scribus) vers SPIP',
   'SPIP_txt' => 'SPIP vers texte brut',

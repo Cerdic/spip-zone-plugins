@@ -11,12 +11,18 @@ function exec_convertisseur(){
 
 	global $spip_lang_right;
 	global $log;
+	global $spip_version_branche ;
 
 	global $conv_formats;
 	global $conv_functions_pre;
 
-  $conv_in  = "";  
-  $conv_out = "";
+  	$conv_in  = "";  
+  	$conv_out = "";
+  
+	// convertir le charset ?
+	$convert_charset = (_request('convert_charset') == 'true');
+	$GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset'] = ($convert_charset) ? "oui" : "non" ;
+
 
   // check rights (utile ?)
   global $connect_statut;
@@ -37,7 +43,7 @@ function exec_convertisseur(){
 	if (isset($_POST['conv_in'])) {
 
 		$conv_textes = array();
-
+		
 		// upload ?
 		if (count($_FILES)) {
 			include_spip('inc/getdocument');
@@ -82,7 +88,6 @@ function exec_convertisseur(){
 				else
 				if (lire_fichier('../tmp/convertisseur.tmp', $tmp))
 					$conv_textes[$file['name']] = $tmp;
-
 			}
 		}
 
@@ -90,9 +95,6 @@ function exec_convertisseur(){
 		if (!count($conv_textes))
 			$conv_textes[] = _request('conv_in');
 
-		// convertir le charset ?
-		$convert_charset = (_request('convert_charset') == 'true');
-		$GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset'] = $convert_charset;
 		if ($convert_charset) {
 			include_spip('inc/charsets');
 			foreach ($conv_textes as $i => $t)
@@ -106,13 +108,6 @@ function exec_convertisseur(){
 			// on le memorise dans les prefs de l'auteur
 			// pour permettre de proposer le meme la prochaine fois
 			$GLOBALS['auteur_session']['prefs']['convertisseur_format'] = $format;
-
-			// enregistrer les prefs de l'auteur
-			spip_query('UPDATE spip_auteurs SET prefs='
-				._q(serialize($GLOBALS['auteur_session']['prefs']))
-				.' WHERE id_auteur='.intval($GLOBALS['auteur_session']['id_auteur'])
-			);
-
 
 			// Traitement et conversion de chaque texte soumis, dans un tableau
 			$out = array();
@@ -129,6 +124,12 @@ function exec_convertisseur(){
 
 		}
 
+
+		// enregistrer les prefs de l'auteur
+		spip_query('UPDATE spip_auteurs SET prefs='
+			._q(serialize($GLOBALS['auteur_session']['prefs']))
+			.' WHERE id_auteur='.intval($GLOBALS['auteur_session']['id_auteur'])
+		);
 
 	} // fin action
 
@@ -156,8 +157,13 @@ function exec_convertisseur(){
 			if ($f) echo "<h2>".basename($f)."</h2>\n";
 			echo "<textarea name='conv_out' cols='65' rows='12'>".entites_html($texte)."</textarea><br />\n";
 
-			if (isset($article[$f]))
+			if (isset($article[$f])){
+			// spip 3
+			if($spip_version_branche > "3")	
 				echo "<div>article ".$article[$f].": <a href='".generer_url_ecrire('article_edit', 'id_article='.$article[$f])."'>&#233;diter</a></div>\n";
+			else
+				echo "<div>article ".$article[$f].": <a href='".generer_url_ecrire('articles_edit', 'id_article='.$article[$f])."'>&#233;diter</a></div>\n";
+			}
 		}
 
 		echo "</div>\n";
@@ -198,7 +204,7 @@ function exec_convertisseur(){
 
 	echo "<h5>"._T("convertisseur:options")."</h5>\n";
 
-	$checked = $GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset']
+	$checked = ($GLOBALS['auteur_session']['prefs']['convertisseur_cvcharset'] == "oui")
 		? ' checked="checked"'
 		: '';
 	echo "<label><input type='checkbox' value='true' name='convert_charset'$checked

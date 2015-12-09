@@ -314,6 +314,7 @@ function nettoyer_format($t) {
   // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
   // cf. extract/quark.php
   $conv_formats['XTG_SPIP'] = 'quark'; // function extract/
+  $conv_formats['Quark_SPIP'] = 'quark_xml'; // function extract/
   $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
   
   //
@@ -461,8 +462,8 @@ function conversion_format($conv_in, $format) {
 				ecrire_fichier(_DIR_TMP.'convertisseur.tmp', $conv_in);
 				$conv_out = $cv(_DIR_TMP.'convertisseur.tmp', $charset);
 				supprimer_fichier(_DIR_TMP.'convertisseur.tmp');
-				include_spip('inc/charsets');
-				$conv_out = importer_charset($conv_out, $charset);
+				#include_spip('inc/charsets');
+				#$conv_out = importer_charset($conv_out, $charset);
 			}
 
 			if ($cv AND !$conv_out)
@@ -500,6 +501,7 @@ function accepte_fichier_upload2($f) {
 
 function inserer_conversion($texte, $id_rubrique, $f=null) {
 	global $log;
+	global $spip_version_branche ;
 
 	$id_rubrique = intval($id_rubrique);
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
@@ -515,14 +517,29 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	// dans la meme rubrique,
 	// avec le statut prepa, qui nous appartient, et... on l'ecrase
 	$ps = 'Conversion depuis '.basename($f);
-	$s = spip_query("SELECT a.id_article
-		FROM spip_articles AS a,
-		spip_auteurs_articles AS aut
-		WHERE id_rubrique=$id_rubrique
-		AND ps=".sql_quote($ps)."
-		AND aut.id_article=a.id_article
-		AND aut.id_auteur=".$id_auteur
-		);
+
+	// spip 3
+	if($spip_version_branche > "3")
+		$s = spip_query("SELECT a.id_article
+			FROM spip_articles AS a,
+			spip_auteurs_liens AS aut
+			WHERE id_rubrique=$id_rubrique
+			AND ps=".sql_quote($ps)."
+			AND aut.id_objet=a.id_article
+			AND aut.objet = 'article'
+			AND aut.id_auteur=".$id_auteur
+			);
+	// spip 2
+	else
+		$s = spip_query("SELECT a.id_article
+			FROM spip_articles AS a,
+			spip_auteurs_articles AS aut
+			WHERE id_rubrique=$id_rubrique
+			AND ps=".sql_quote($ps)."
+			AND aut.id_article=a.id_article
+			AND aut.id_auteur=".$id_auteur
+			);
+	
 	if ($t = spip_fetch_array($s)) {
 		$id_article = $t['id_article'];
 	} else {
@@ -562,14 +579,26 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			)
 		);
 
+		
 		if ($id_article>0
 		AND $id_auteur>0) {
-			sql_insertq('spip_auteurs_articles',
-				array(
-				'id_article' => $id_article,
-				'id_auteur' => $id_auteur
-				)
-			);
+
+			// s'ajouter en auteur en spip 2 ou 3
+			if($spip_version_branche > "3")
+				sql_insertq('spip_auteurs_liens',
+					array(
+					'id_objet' => $id_article,
+					'objet' => 'article',
+					'id_auteur' => $id_auteur
+					)
+				);
+			else	
+				sql_insertq('spip_auteurs_articles',
+					array(
+					'id_article' => $id_article,
+					'id_auteur' => $id_auteur
+					)
+				);
 		}
 	}
 
