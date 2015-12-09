@@ -17,7 +17,7 @@
 	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
 
  	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<necessite nom="saisies" compatibilite="[1.25.3;[" />
+	<necessite nom="saisies" compatibilite="[2.5.0;[" />
 	<necessite nom="yaml" compatibilite="[1.5.1;[" />
  
 	<pipeline nom="declarer_champs_extras" inclure="base/mosaique.php" />
