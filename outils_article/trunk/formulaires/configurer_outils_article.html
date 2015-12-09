@@ -2,9 +2,9 @@
 	<form method="post">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#CHEMIN{outilsarticle.png}|balise_img)]<:outilsarticle:descriptif:>
-[(#PLUGIN{boutonstexte}|oui)
 		<fieldset>
 			<legend><:outilsarticle:boutonstexte_legend:> (<a href="[(#URL_ECRIRE{configurer_boutonstexte})]"><:outilsarticle:configuration:></a>)</legend>
+[(#PLUGIN{BOUTONSTEXTE}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
 					<label><:outilsarticle:boutonstexte_affichage:></label>
@@ -24,8 +24,12 @@
 					<input type="text" name="texteplusdesc" id="texteplusdesc" value="[(#CONFIG{outils_article/texteplusdesc}|sinon{<:outilsarticle:texteplus:>})]" style="display:inline"/>
 				</li>
 			</ul>
-		</fieldset>
+][(#PLUGIN{BOUTONSTEXTE}|non)
+			#SET{plugin, Boutons dans le texte}
+			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
+
+		</fieldset>
 		<fieldset>
 			<legend><:outilsarticle:impression:></legend>
 			<ul class="editer-groupe">
@@ -113,10 +117,9 @@
 				</li>
 			</ul>
 		</fieldset>
-[(#PLUGIN{article_pdf}|oui)
-
 		<fieldset>
 			<legend><:outilsarticle:pdf:></legend>
+[(#PLUGIN{ARTICLE_PDF}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
 					<label><:outilsarticle:affichage:></label>
@@ -130,10 +133,14 @@
 					<input type="text" name="pdfdesc" id="pdfdesc" value="[(#CONFIG{outils_article/pdfdesc}|sinon{<:outilsarticle:pdf:>})]" style="display:inline"/>
 				</li>
 			</ul>
+][(#PLUGIN{ARTICLE_PDF}|non)
+			#SET{plugin, Article PDF}
+			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+]
 		</fieldset>
-][(#PLUGIN{enviar_email}|oui)
 		<fieldset>
 			<legend><:outilsarticle:mail:></legend>
+[(#PLUGIN{ENVIAR_EMAIL}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
 					<label><:outilsarticle:affichage:></label>
@@ -147,10 +154,14 @@
 					<input type="text" name="maildesc" id="maildesc" value="[(#CONFIG{outils_article/maildesc}|sinon{<:outilsarticle:mail:>})]" style="display:inline"/>
 				</li>
 			</ul>
+][(#PLUGIN{ENVIAR_EMAIL}|non)
+			#SET{plugin, Envoyer par mail}
+			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+]
 		</fieldset>
-][(#PLUGIN{recommander}|oui)
 		<fieldset>
 			<legend><:outilsarticle:recommander:></legend>
+[(#PLUGIN{RECOMMANDER}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
 					<label><:outilsarticle:affichage:></label>
@@ -164,10 +175,14 @@
 					<input type="text" name="recommanderdesc" id="recommanderdesc" value="[(#CONFIG{outils_article/recommanderdesc}|sinon{<:outilsarticle:recommander:>})]" style="display:inline"/>
 				</li>
 			</ul>
+][(#PLUGIN{RECOMMANDER}|non)
+			#SET{plugin, Recommander à un ami}
+			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+]
 		</fieldset>
-][(#PLUGIN{notation}|oui)
 		<fieldset>
 			<legend><:outilsarticle:notation:> (<a href="[(#URL_ECRIRE{configurer_notation})]"><:outilsarticle:configuration:></a>)</legend>
+[(#PLUGIN{NOTATION}|oui)
 			<ul class="editer-groupe">
 				<li class="editer">
 					<label><:outilsarticle:affichage:></label>
@@ -175,8 +190,11 @@
 					<img src="#CHEMIN{css/images/note.png}" />
 				</li>
 			</ul>
-		</fieldset>
+][(#PLUGIN{NOTATION}|non)
+			#SET{plugin, Notation}
+			<p class="notice"><:outilsarticle:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
 ]
+		</fieldset>
 		<fieldset>
 			<legend><:outilsarticle:apparence:></legend>
 			<ul class="editer-groupe">

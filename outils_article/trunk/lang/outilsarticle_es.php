@@ -1,20 +1,67 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'affichage' => 'Mostrar bot贸n',
+	'affichage_int' => 'Ver un t铆tulo',
+	'apparence' => 'La apariencia.',
 	'auteur' => 'Del mismo autor ',
-	'compteur' => 'muchas reacciones ',
-	'config_descr' => 'puede configurar los elementos que deben indicarse en la cojea a herramientas ',
-	'config_titre' => 'Caja de herramientas para art韈ulo ',
+	'auteur_affichage' => 'Mostrar bot贸n',
+	'auteur_affichage_int' => 'Ver un t铆tulo',
+
+	'barre' => 'Barra',
+	'boite' => 'Una caja',
+	'boutonstexte_affichage' => 'Mostrar los botones de texto',
+	'boutonstexte_affichage_int' => 'Ver un t铆tulo',
+	'boutonstexte_legend' => 'Boutons Texte',
+
+	'cfg_inf_plugin_inactif' => 'Esta funci贸n s贸lo est谩 disponible si se activa el plugin "@lbl_plugin@".',
+	'compteur' => 'Muchas reacciones ',
+	'compteur_affichage' => 'Mostrar bot贸n',
+	'compteur_affichage_int' => 'Ver un t铆tulo',
+	'config_descr' => 'Puede configurar los elementos que deben indicarse en la cojea a herramientas ',
+	'config_titre' => 'Caja de herramientas para art铆culo ',
+	'configuration' => 'Configuraci贸n',
+	'crystal' => 'Crystal',
+
+	'descriptif' => '<p>Puede configurar los datos para mostrar en la caja de herramientas.<br />La documentaci贸n completa sobre <a href="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin">contrib</a><br />Plugins compl&eacute;mentaires</p><ul class="spip"><li><a href="http://contrib.spip.net/Plugin-Article-PDF">Art铆culo PDF</a></li><li><a href="http://contrib.spip.net/Plugin-envoyer-a-un-ami">Enviar a un amigo</a></li><li><a href="http://contrib.spip.net/?art3727">Recomendar a un amigo</a></li><li><a href="http://contrib.spip.net/Texte-agrandi-ou-pleine-page">Bot贸n en el texto</a></li><li><a href="http://contrib.spip.net/Notation-d-articles-SPIP">Notaci贸n</a></li></ul>',
+
 	'elements' => 'Elementos que deben indicarse ',
-	'impression' => 'Impresi髇 ',
-	'impression_title' => 'versi髇 imprimible del art韈ulo ',
+
+	'flux_rss' => 'RSS Feed',
+
+	'gos' => 'GOS',
+
+	'icone' => 'Conjuntos de iconos',
+	'impression' => 'Impresi贸n',
+	'impression_affichage' => 'Mostrar bot贸n d\'impression',
+	'impression_affichage_int' => 'Ver un t铆tulo',
+	'impression_title' => 'Versi贸n imprimible del art铆culo ',
+	'intitule' => 'T铆tulo',
+
+	'jakukdesc' => 'jakukdesc',
+
+	'kde' => 'KDE',
+
 	'mail' => 'enviar por email',
+	'non' => 'No',
+	'notation' => 'Notation',
 	'note' => '',
+	'note' => 'Tasa art铆culo con el plugin de notaci贸n',
+
+	'osx' => 'OSX',
+	'oui' => 'S铆',
+
 	'pdf' => 'Formato pdf ',
+
 	'reaction' => 'Reacciones ',
-	'reagir' => 'Reaccionar al art韈ulo ',
-	'rss' => '',
+	'reagir' => 'Reaccionar al art铆culo ',
+	'recommander' => 'Recomendar',
+	'rss' => 'Distribuir el tema',
 	'rssforum' => '',
-	'taille' => 'Tama駉 ',
+
+	'taille' => 'Tama帽o',
+	'textemoins' => 'Disminuir el texto',
+	'texteplus' => 'Aumentar el texto',
+	'theme' => 'Tema',
 	'titre' => 'Caja de herramientas',
 );

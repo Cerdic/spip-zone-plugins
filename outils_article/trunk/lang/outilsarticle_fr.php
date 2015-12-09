@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boutonstexte_affichage' => 'Afficher les boutons de texte',
 	'boutonstexte_affichage_int' => 'Afficher un intitulé',
 
+	'cfg_inf_plugin_inactif' => 'Cette fonction n’est disponible que si le plugin « @lbl_plugin@ » est activé.',
 	'compteur' => 'Nombre de r&eacute;actions',
 	'compteur_affichage' => 'Afficher le bouton',
 	'compteur_affichage_int' => 'Afficher un intitulé',
