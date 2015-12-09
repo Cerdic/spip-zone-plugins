@@ -17,4 +17,3 @@ function inc_exceptions_dist($filtrer=''){
     return $retour;
 }
 
-?>

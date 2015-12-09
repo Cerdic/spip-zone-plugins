@@ -99,9 +99,11 @@ function selection_objet_formulaire_charger($flux){
     if(!$cfg['type_liens']=_request('type_liens')){
         $types_lien=lire_config('selection_objet/type_liens',array());
             $flux['data']['type_liens']='';
+            if (is_array($types_lien)) {
             foreach ($types_lien as $key => $value) {
                 if($key)$flux['data']['type_liens'].="$key,$value\n";
             }
+        }
         
     }
 
@@ -151,7 +153,7 @@ function selection_objet_jqueryui_plugins($scripts){
 
 function types_liaisons2array($type){
     $tableau    = array();
-    $lignes     = explode("\n",$type);
+    $lignes     = array_filter(explode("\n",$type));
     foreach ($lignes as $l){
         $donnees= explode(',',$l);
         if ($donnees[1])
@@ -162,4 +164,4 @@ function types_liaisons2array($type){
 
     return $tableau;
 }
-?>
+

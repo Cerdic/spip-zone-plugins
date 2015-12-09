@@ -49,5 +49,3 @@ function tableau_recherche_objet($objet,$exclus,$lang=''){
     }
     return $data;
 }
-
-?>
