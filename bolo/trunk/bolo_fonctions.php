@@ -44,6 +44,7 @@
 function balise_BOLO($p) {
 
 	// longueur du texte
+	$_couper = 'null';
 	if (($v = interprete_argument_balise(1,$p)) !== null) {
 		$_couper = '(intval('.$v.') > 0) ? intval('.$v.') : null';
 	}
