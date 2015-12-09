@@ -22,7 +22,7 @@ class MCache {
 		return !in_array($this->methode, array('filecache', 'nocache'));
 	}
 
-	function MCache($methode=null, $params=array()) {
+	function __construct($methode=null, $params=array()) {
 		// autodetect
 		$this->methode = $methode ? $methode : $this->methode();
 		$f = find_in_path($this->methode.'.inc',"memo/");
