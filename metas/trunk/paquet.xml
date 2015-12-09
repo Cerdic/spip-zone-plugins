@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/metas-24.png"
-	schema="1.2"
+	schema="1.2.0"
 	documentation="http://contrib.spip.net/Metas"
 >
 
