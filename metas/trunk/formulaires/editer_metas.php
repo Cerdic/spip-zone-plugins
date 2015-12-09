@@ -13,8 +13,7 @@ include_spip('action/editer_liens');
  *
  * @return
  */
-function formulaires_editer_metas_charger_dist($objet, $id_objet)
-{
+function formulaires_editer_metas_charger_dist($objet, $id_objet) {
 
 	// on a le type d'objet et l'id_objet (par exemple "article" et "1" ) ... cherchons l'id_meta associé
 	$id_meta = sql_getfetsel('id_meta', 'spip_metas_liens', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
@@ -40,8 +39,7 @@ function formulaires_editer_metas_charger_dist($objet, $id_objet)
 /**
  * @return
  */
-function formulaires_editer_metas_verifier_dist($objet, $id_objet)
-{
+function formulaires_editer_metas_verifier_dist($objet, $id_objet) {
 	$retour = array();
 	// on va dire que tout est ok ... à la limite tester sur le champs keywords
 	// le nombre maxi de cracteres et la présence des virgules

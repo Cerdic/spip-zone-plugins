@@ -1,10 +1,10 @@
 <paquet
 	prefix="metas"
 	categorie="outil"
-	version="1.4.1"
+	version="1.5.0"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
-	logo="images/metas-24.png"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/metas-24.png"
 	schema="1.2.0"
 	documentation="http://contrib.spip.net/Metas"
 >
