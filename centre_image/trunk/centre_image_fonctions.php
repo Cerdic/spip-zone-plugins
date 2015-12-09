@@ -77,10 +77,13 @@ function centre_image_densite($fichier) {
 		$fichier_json = "$cache$md5.json";
 		$fichier_forcer = "$forcer$md5.json";
 
-		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) > filemtime($fichier)) {
-			$res = json_decode(file_get_contents($fichier_forcer),TRUE);
-		} elseif (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
-			$res = json_decode(file_get_contents($fichier_json),TRUE);
+		// éviter plusieurs accès successifs
+		$mtime_source = filemtime($fichier);
+
+		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) >= $mtime_source) {
+			$res = json_decode(file_get_contents($fichier_forcer), TRUE);
+		} elseif (file_exists($fichier_json) and filemtime($fichier_forcer) > $mtime_source) {
+			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
 			if (function_exists("imagefilter")) {
 				if (preg_match(",\.(gif|jpe?g|png)($|[?]),i", $fichier, $regs)) {
@@ -99,14 +102,14 @@ function centre_image_densite($fichier) {
 				$res = array("x" => 0.5, "y" => 0.5);
 			}
 
-			file_put_contents($fichier_json, json_encode($res,TRUE));
+			file_put_contents($fichier_json, json_encode($res, TRUE));
 		}
 	} else {
 		$res = array("x" => 0.5, "y" => 0.5);
 	}
 
 	$spip_centre_image["$fichier"] = $res;
-	return $res;    
+	return $res;
 }
 
 /**
@@ -183,14 +186,14 @@ function centre_image_visage($fichier) {
 		$fichier_json = "$cache$md5.json";
 		$fichier_forcer = "$forcer$md5.json";
 
+		// éviter plusieurs accès successifs
+		$mtime_source = filemtime($fichier);
 
-		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) > filemtime($fichier)) {
-			$res = json_decode(file_get_contents($fichier_forcer),TRUE);
-		}
-		else if (file_exists($fichier_json) and filemtime($fichier_json) > filemtime($fichier)) {
-			$res = json_decode(file_get_contents($fichier_json),TRUE);
+		if (file_exists($fichier_forcer) and filemtime($fichier_forcer) >= $mtime_source) {
+			$res = json_decode(file_get_contents($fichier_forcer), TRUE);
+		} elseif (file_exists($fichier_json) and filemtime($fichier_forcer) > $mtime_source) {
+			$res = json_decode(file_get_contents($fichier_json), TRUE);
 		} else {
-
 			include_spip ("inc/FaceDetector");
 			$detector = new svay\FaceDetector('detection.dat');
 			$detector->faceDetect($fichier);
@@ -210,11 +213,12 @@ function centre_image_visage($fichier) {
 
 			file_put_contents($fichier_json, json_encode($res, TRUE));
 		}
-
-		$spip_centre_image_visage["$fichier"] = $res;
-
-		return $res;    
+	} else {
+		$res = array("x" => 0.5, "y" => 0.5);
 	}
+
+	$spip_centre_image_visage["$fichier"] = $res;
+	return $res;
 }
 
 

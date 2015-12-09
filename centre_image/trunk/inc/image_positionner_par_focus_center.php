@@ -18,9 +18,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @uses centre_image_x()
  * @uses centre_image_y()
  *
- * @note
- *     Code repris de image_proportions du plugin Image Responsive
- * 
  * @param string $img
  *     Chemin de l'image ou balise html `<img src=... />`.
  * @param int $width
