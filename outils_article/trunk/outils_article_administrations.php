@@ -15,3 +15,9 @@ function outils_article_corriger_theme() {
 		ecrire_config('outils_article/theme', $theme);
 	}
 }
+
+function outils_article_vider_tables($nom_meta_base_version) {
+	// Effacer la config
+	effacer_meta('outils_article');
+	effacer_meta($nom_meta_base_version);
+}
