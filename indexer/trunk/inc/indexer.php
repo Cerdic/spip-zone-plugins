@@ -335,3 +335,106 @@ function indexer_suggestions_motivees($mot) {
 	}
 	return $sug;
 }
+
+/*
+ * faire un DUMP SQL de notre base sphinx
+ * dest: fichier destination (null: stdout)
+ * bloc : nombre d'enregistrements a rapatrier a chaque tour (maximum 1000)
+ * usage :
+      include_spip('inc/indexer');
+      indexer_dumpsql();
+      // indexer_dumpsql('tmp/indexer.sql', 1000);
+*/
+function indexer_dumpsql($dest = null, $bloc = 100) {
+	if (is_null($dest))
+		$dest = 'php://stdout';
+
+	$fp = fopen($dest,'w');
+	if (!$fp) {
+		spip_log('Impossible d ouvrir '.$dest, 'indexer');
+		return false;
+	}
+
+	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+
+
+	$version = unserialize(lire_meta('plugin'));
+	$version = $version['INDEXER']['version'];
+	
+	$index = SPHINX_DEFAULT_INDEX;
+
+	$comm = '# SPIP indexer / SphinxQL Dump
+# version '. $version .'
+# http://contrib.spip.net/Indexer
+#
+# Host: '.SPHINX_SERVER_HOST.':'.SPHINX_SERVER_PORT.'
+# Generation Time: '.date(DATE_ISO8601).'
+# Server version: (unknown)
+# PHP Version: '. phpversion() .'
+# 
+# Database : `'. $index .'`
+# 
+
+';
+
+
+	$query = "DESC ".$index;
+	$all = $sphinx->allfetsel($query);
+
+	if (isset($all['query']['docs'])) {
+		$comm .= '# --------------------------------------------------------
+
+#
+# Table structure for table `' . $index . '`
+#
+
+CREATE TABLE `' . $index . '` (
+';
+		$fields = [];
+		foreach($all['query']['docs'] as $doc) {
+			$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $doc['Type'];
+		}
+		$comm .= join(",\n", $fields);
+		$comm .= "
+)
+
+
+#
+# Dumping data for table `" . $index . "`
+#
+
+";
+	}
+
+	if (!fwrite($fp, $comm)) {
+		spip_log('Impossible d ecrire dans '.$dest, 'indexer');
+		return false;
+	}
+
+	do {
+		
+		$where = isset($begin) ? " WHERE id > $begin " : '';
+		$query = "SELECT * FROM " . $index . $where . " ORDER BY id ASC LIMIT 0,$bloc";
+
+		$all = $sphinx->allfetsel($query);
+		$cdocs = count($all['query']['docs']);
+		if ($cdocs > 0) {
+			foreach($all['query']['docs'] as $doc) {
+				$sql = 'INSERT INTO ' . $index . ' ('
+					. join(', ', array_keys($doc))
+					. ') VALUES ('
+					. join(', ', array_map('_q', $doc))
+					. ');' . "\n";
+				
+				if (!fwrite($fp, $sql)) {
+					spip_log('Impossible d ecrire dans '.$dest, 'indexer');
+					return false;
+				}
+			}
+			$begin = $all['query']['docs'][$cdocs-1]['id'];
+		}
+	} while ($cdocs > 0);
+
+	if ($fp) fclose($fp);
+	return true;
+}
