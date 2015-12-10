@@ -13,5 +13,5 @@
 
 	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
-	<utilise nom="media" />
+	<utilise nom="media" compatibilite="[2.1.0;[" />
 </paquet>

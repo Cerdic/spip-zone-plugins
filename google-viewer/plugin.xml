@@ -12,5 +12,5 @@
 	<prefix>gviewer</prefix>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
-	<utilise id="media" />
+	<utilise id="media" version="[1.6.0;[" />
 </plugin>

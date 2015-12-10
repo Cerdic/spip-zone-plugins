@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // G
 	'gviewer_description' => 'Modèle pour utiliser le [lecteur de documents en ligne de Google->http://docs.google.com/viewer]. Ce plugin étend le modève <code><mediaXX|embed></code> pour les documents de type doc, docx, xls, xlsx, ppt, pptx, pdf, ai, psd, eps, ps, et ttf. En l\'absence des modèles media, il est possible d\'utiliser <code><embXX|google></code>.',
+	'gviewer_nom' => 'Google Viewer',
 	'gviewer_slogan' => 'Modèles dinsertion de documents utilisant le lecteur de documents de Google',
 );
 ?>
