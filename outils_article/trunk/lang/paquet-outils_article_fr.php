@@ -8,7 +8,9 @@
 // Date: 18-06-2012 14:15:31
 // Items: 3
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -19,4 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outils_article_nom' => 'Boite à outils',
 	'outils_article_slogan' => 'Collection d\'outils pour articles',
 );
-?>

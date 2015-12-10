@@ -1,6 +1,10 @@
 <?php
 
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 // Toute personne censee se detournerait de la rfc 822... et pourtant
 function date_rfc822($date_heure) {
 	list($annee, $mois, $jour) = recup_date($date_heure);
@@ -43,7 +47,7 @@ function age_style($date) {
  *    Auteur :  Roustoubi (roustoubi@tiscali.fr)
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
- *    Accorde le nom singulier passé en paramètre avec le nombre qui le quantifie
+ *    Accorde le nom singulier passÃ© en paramÃ¨tre avec le nombre qui le quantifie
  *    Exemple : [#TOTAL_BOUCLE (#TOTAL_BOUCLE|accord_pluriel{article})]
  *   +-------------------------------------+
  *

@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affichage' => 'Mostrar botón',
 	'affichage_int' => 'Ver un título',

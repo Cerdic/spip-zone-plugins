@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 function outils_article_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	$maj['create'] = array(array('outils_article_corriger_theme'));

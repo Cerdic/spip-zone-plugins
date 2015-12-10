@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'affichage' => 'Afficher le bouton',
@@ -24,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_titre' => 'Boite &agrave; outils pour article',
 	'crystal' => 'Crystal',
 
-	'descriptif' => '<p>Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans la boite &agrave; outils<br />Documentation compl&egrave;te sur <a href="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin">contrib</a><br />Plugins compl&eacute;mentaires</p><ul class="spip"><li><a href="http://contrib.spip.net/Plugin-Article-PDF">Article PDF</a></li><li><a href="http://contrib.spip.net/Plugin-envoyer-a-un-ami">Envoyer &agrave; un ami</a></li><li><a href="http://contrib.spip.net/?art3727">Recommander à un ami</a></li><li><a href="http://contrib.spip.net/Texte-agrandi-ou-pleine-page">Bouton texte</a></li><li><a href="http://contrib.spip.net/Notation-d-articles-SPIP">Notation</a></li></ul>',
+	'descriptif' => '<p>Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans la boite &agrave; outils. La documentation compl&egrave;te se trouve sur <a href="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin">contrib</a><br />Plugins compl&eacute;mentaires</p><ul class="spip"><li><a href="http://contrib.spip.net/Plugin-Article-PDF">Article PDF</a></li><li><a href="http://contrib.spip.net/Plugin-envoyer-a-un-ami">Envoyer &agrave; un ami</a></li><li><a href="http://contrib.spip.net/?art3727">Recommander à un ami</a></li><li><a href="http://contrib.spip.net/Texte-agrandi-ou-pleine-page">Bouton texte</a></li><li><a href="http://contrib.spip.net/Notation-d-articles-SPIP">Notation</a></li></ul>',
 
 	'elements' => 'Éléments &agrave; afficher',
 
@@ -38,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression_affichage_int' => 'Afficher un intitulé',
 	'impression_title' => 'Version imprimable de l\'article',
 	'intitule' => 'Intitulé',
+	'intitule_personnalise' => 'Intitulé personnalisé',
 
 	'jakukdesc' => 'jakukdesc',
 
