@@ -2,7 +2,7 @@
 <nom>Favicon</nom>
 <prefix>favicon</prefix>
 <icon>icon/favicon.png</icon>
-<lien>http://contrib.spip.net/4740</lien>
+
 <version>1.0.4</version>
 <etat>stable</etat>
 <categorie>multimedia</categorie>
