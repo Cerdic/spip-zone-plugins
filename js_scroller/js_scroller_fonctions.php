@@ -8,7 +8,7 @@
  * @package		Javascript_Scroller
  */
 
-function js_scroller_get_js($width,$height,$dir,$speed){
+function js_scroller_get_js($width,$height,$dir,$speed) {
 	$_dir = ($dir=='rtl') ? 'right' : 'left';
 	$_dir_px = ($dir=='rtl') ? 'pixelRight' : 'pixelLeft';
 	$code = <<<EOT

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Javascript Scroller</nom>
 	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
-	<version>1.44.1</version>
+	<version>1.44.2</version>
 	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<icon>javascriptb.png</icon>
 	<etat>stable</etat>
@@ -26,6 +26,6 @@ Une documentation interne est disponible lorsque le plugin est actif sur la page
 	<options>js_scroller_options.php</options>
 	<prefix>js_scroller</prefix>
 	<chemin dir='' />
-	<necessite id='SPIP' version='[2.0.0;3.0.99]' />
+	<necessite id='SPIP' version='[2.0.0;3.1.99]' />
 	<categorie>multimedia</categorie>
 </plugin>
