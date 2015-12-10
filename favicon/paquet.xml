@@ -1,0 +1,16 @@
+<paquet
+	prefix="favicon"
+	categorie="multimedia"
+	version="1.0.4"
+	etat="stable"
+	compatibilite="[2.1.0;3.1.99]"
+	logo="icon/favicon.png"
+  documentation="http://contrib.spip.net/4740"
+>	
+
+	<nom>Favicon</nom>
+	<!-- Favicon et touch icon du site -->
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<pipeline nom="insert_head" inclure="favicon_pipelines.php" />
+</paquet>
