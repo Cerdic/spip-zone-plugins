@@ -1,13 +1,12 @@
 <paquet
 	prefix="selecteurgenerique"
 	categorie="outil"
-	version="0.8.11"
+	version="0.9.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/selecteur_generique-64.png"
 	documentation="http://contrib.spip.net/Selecteur-generique"
 >	
-
 	<nom>S&#233;lecteur g&#233;n&#233;rique</nom>
 	<!-- Amélioration des sélecteurs de l'espace privé -->
 
@@ -17,6 +16,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
 	<necessite nom="jqueryui" compatibilite="[1.8.20;[" />
-	<pipeline nom="header_prive" action="inserer_javascript" inclure="selecteurgenerique_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="selecteurgenerique_pipelines.php" />
+	<pipeline nom="header_prive" action="inserer_javascript" inclure="selecteurgenerique_pipelines.php" />
+	<pipeline nom="insert_head" action="inserer_javascript" inclure="selecteurgenerique_pipelines.php" />
 </paquet>

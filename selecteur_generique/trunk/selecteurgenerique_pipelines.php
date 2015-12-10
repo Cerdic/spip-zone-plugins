@@ -4,14 +4,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function selecteurgenerique_jqueryui_plugins($plugins){
 	if (
-		(defined('DESACTIVER_SELECTEUR_GENERIQUE') and DESACTIVER_SELECTEUR_GENERIQUE)
-		or !test_espace_prive()
+		// Il ne faut pas avoir désactivé explicitement
+		(!defined('DESACTIVER_SELECTEUR_GENERIQUE') or !DESACTIVER_SELECTEUR_GENERIQUE)
+		and (
+			// Soit être dans l'admin
+			test_espace_prive()
+			// Soit avoir activé explicitement pour le public
+			or (defined('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC') and _SELECTEUR_GENERIQUE_ACTIVER_PUBLIC)
+		)
 	) {
-		return $plugins;
+		$plugins[] = 'jquery.ui.position';
+		$plugins[] = 'jquery.ui.autocomplete';
 	}
-	
-	$plugins[] = 'jquery.ui.position';
-	$plugins[] = 'jquery.ui.autocomplete';
 	
 	return $plugins;
 }
@@ -221,10 +225,16 @@ EOS;
 
 // Calcule et insere le javascript necessaire pour la page
 function selecteurgenerique_inserer_javascript($flux) {
-
-	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
-	AND DESACTIVER_SELECTEUR_GENERIQUE)
+	if (
+		(defined('DESACTIVER_SELECTEUR_GENERIQUE') and DESACTIVER_SELECTEUR_GENERIQUE)
+		or
+		(
+			!test_espace_prive()
+			and (!defined('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC') or !_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC)
+		)
+	) {
 		return $flux;
+	}
 
 	$js = '';
 	$js_final = "\n".'<script type="text/javascript">var selecteurgenerique_test_espace_prive = '.(test_espace_prive() ? 'true':'false').';</script>';
@@ -248,10 +258,11 @@ function selecteurgenerique_inserer_javascript($flux) {
 	/**
 	 * On insére les fonctions génériques de l'autocomplétion (attribut data-selecteur)
 	 */
-	if(strpos($flux,'selecteur_generique_functions')===FALSE){
+	if(strpos($flux, 'selecteur_generique_functions') === FALSE){
 		$functions = find_in_path('javascript/selecteur_generique_functions.js');
 		$js_final .= "\n<script type='text/javascript' src='$functions'></script>\n";
 	};
+	
 	/**
 	 * On compléte selon le contexte de l'espace privé
         */
@@ -263,8 +274,6 @@ function selecteurgenerique_inserer_javascript($flux) {
 	    . '// --></script>'
 	    . "\n";
 	}
+	
 	return $flux.$js_final;
-
 }
-
-?>
