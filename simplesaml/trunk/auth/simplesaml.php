@@ -127,15 +127,19 @@ function simplesaml_vider_sessions() {
 **/
 function simplesaml_auth_autologer() {
 	include_spip('lire_config');
-	if (lire_config('simplesaml/autologer/activer')) {
+	if (lire_config('simplesaml/autologin/activer')) {
 		$simplesaml = new SimpleSAML_Auth_Simple('default-sp');
 		if (!$simplesaml->isAuthenticated()) {
-			$cookie = lire_config('simplesaml/autologer/cookie/nom');
-			$valeur = lire_config('simplesaml/autologer/cookie/valeur');
+			$cookie = lire_config('simplesaml/autologin/cookie/nom');
+			$valeur = lire_config('simplesaml/autologin/cookie/valeur');
 			if (isset($_COOKIE[$cookie]) and ($_COOKIE[$cookie] == $valeur)) {
 				// a priori on est identifié sur le même domaine quelque part.
 				$simplesaml->requireAuth();
 			}
+		} else {
+			simplesaml_auth_loger();
+			include_spip('inc/headers');
+			redirige_par_entete(self());
 		}
 	}
 }
@@ -151,7 +155,11 @@ function simplesaml_auth_autologer() {
 function simplesaml_auth_deloger($url) {
 	$simplesaml = new SimpleSAML_Auth_Simple('default-sp');
 	if ($simplesaml->isAuthenticated()) {
-		simplesaml_vider_sessions();
+		// attention à ne pas créer une boucle infinie si autologin est actif
+		// dans ce cas, les sessions spip seront vidées automatiquement au retour
+		if (!lire_config('simplesaml/autologin/activer')) {
+			simplesaml_vider_sessions();
+		}
 		$simplesaml->logout(url_absolue($url));
 		// normalement… ça doit rediriger
 	}
