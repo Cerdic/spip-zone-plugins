@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Ce plugin ajoute un widget javascript sous forme de bannière défilante présentant une liste d\'éléments SPIP du site.
 
-Le widget s\'appelle en utilisant la balise : {{#JS_SCROLLER&#123;width,height,type,maximum,coupe,direction,titre&#125;}} avec :
+Le widget s\'appelle en utilisant la balise : {{#JS_SCROLLER&#123;width, height, type, maximum, coupe, direction, titre&#125;}} avec :
 - {{width et height}} les dimensions ({par défaut 600 x 20 pixels}),
 - {{type}} le type d\'éléments SPIP présenté ({par défaut les articles}),
 - {{maximum}} le nombre d\'entrées présentées ({par défaut 50}),

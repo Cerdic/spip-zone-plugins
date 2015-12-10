@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Ce widget s\'inclue dans vos squelettes en utilisant la balise suivante :
 
 <cadre class=\'spip\'>
-&#035;JS_SCROLLER{ width , height , type , maximum , coupe , direction , titre }
+&#035;JS_SCROLLER{ width, height, type, maximum, coupe, direction, titre}
 </cadre>
 
 dont toutes les options sont facultatives ({une valeur vide[[Pour rappel, chez SPIP une valeur vide dans une balise s\'&eacute;crit : \'\'.]] vaudra la valeur par d&eacute;faut}) et correspondent &agrave; :
