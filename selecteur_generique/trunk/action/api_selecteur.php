@@ -20,7 +20,10 @@ function action_api_selecteur_dist() {
 	}
 	
 	// On cherche le JSON en passant les params de l'URL
-	if ($json = recuperer_fond("selecteurs/$selecteur", $_GET)){
+	if (
+		(_request('php') and $fonction = charger_fonction($selecteur, 'selecteurs', true) and $json = $fonction())
+		or $json = recuperer_fond("selecteurs/$selecteur", $_GET)
+	) {
 		// On renvoie une ressource JSON
 		header('Status: 200 OK');
 		header("Content-type: application/json; charset=utf-8");
@@ -33,5 +36,3 @@ function action_api_selecteur_dist() {
 		exit;
 	}
 }
-
-?>

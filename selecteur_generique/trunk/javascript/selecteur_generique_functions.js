@@ -54,18 +54,23 @@ function extractLast(list, sep) {
 	var selecteurgenerique_select_callback_dist = function(event, ui){
 		// Si le champ est déclaré comme "multiple" on ne remplace que la fin
 		if ($(this).attr('multiple')){
+			// On définit le séparateur
+			var separateur = $(this).data('select-sep');
+			if (typeof(separateur) != 'string') {
+				separateur = ',';
+			}
 			// On récupère la liste des termes séparés par une VIRGULE (cas le plus courant)
-			var terms = split_multiple(this.value, ',');
+			var terms = split_multiple(this.value, separateur);
 			// On supprime le terme qui était en train d'être tapé
 			terms.pop();
 			// On ajoute à la fin ce qui a été sélectionné, éventuellement entouré de guillemets
 			var guillemets = false;
-			if (ui.item.value.indexOf(',') != -1){ guillemets = true; }
+			if (ui.item.value.indexOf(separateur) != -1){ guillemets = true; }
 			terms.push((guillemets ? '"' : '') + ui.item.value + (guillemets ? '"' : ''));
 			// On ajoute une entrée vide pour avoir le séparateur lors de la jointure
 			terms.push("");
 			// On joint tout les termes
-			this.value = terms.join(", ");
+			this.value = terms.join(separateur);
 		}
 		// Sinon on remplace tout
 		else{
@@ -79,7 +84,7 @@ function extractLast(list, sep) {
 		// chercher tous les inputs déclarés explicitement comme sélecteurs
 		var inputs = $('input[data-selecteur][autocomplete!=off]');
 		var api = 'selecteur.api/';
-		if (typeof(selecteurgenerique_test_espace_prive) != 'undefined'){
+		if (typeof(selecteurgenerique_test_espace_prive) != 'undefined' && selecteurgenerique_test_espace_prive){
 			api = '../' + api;
 		}
 	
@@ -90,15 +95,22 @@ function extractLast(list, sep) {
 			var quoi = me.data('selecteur');
 			var select_callback = me.data('select-callback');
 			if (typeof(select_callback) != 'function' && typeof(select_callback) != 'string'){ select_callback = selecteurgenerique_select_callback_dist; }
+			// On définit le séparateur
+			var separateur = me.data('select-sep');
+			if (typeof(separateur) != 'string') {
+				separateur = ',';
+			}
+			// On regarde si on demande un sélecteur PHP ou le classique squelette
+			var php = me.data('select-php');
 			
 			me
 				// appliquer l'autocomplete dessus
 				.autocomplete({
 					source: function(request, response) {
-						if (me.attr('multiple')){ var term = extractLast(request.term, ','); }
+						if (me.attr('multiple')){ var term = extractLast(request.term, separateur); }
 						else { var term = request.term; }
 						//console.log('"'+term+'"');
-						$.getJSON(api+quoi, {q:term}, response);
+						$.getJSON(api+quoi, {'q':term, 'php':php}, response);
 					},
 					delay: 300,
 					html: true,
