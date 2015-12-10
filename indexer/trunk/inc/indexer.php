@@ -338,16 +338,18 @@ function indexer_suggestions_motivees($mot) {
 
 /*
  * faire un DUMP SQL de notre base sphinx
+ * index: nom de l'index (table) a dumper
  * dest: fichier destination (null: stdout)
  * bloc : nombre d'enregistrements a rapatrier a chaque tour (maximum 1000)
  * usage :
       include_spip('inc/indexer');
       indexer_dumpsql();
-      // indexer_dumpsql('tmp/indexer.sql', 1000);
+      // indexer_dumpsql(SPHINX_DEFAULT_INDEX, 'tmp/indexer.sql', 1000);
 */
-function indexer_dumpsql($dest = null, $bloc = 100) {
-	if (is_null($dest))
+function indexer_dumpsql($index = null, $dest = null, $bloc = 100) {
+	if (is_null($dest)) {
 		$dest = 'php://stdout';
+	}
 
 	$fp = fopen($dest,'w');
 	if (!$fp) {
@@ -360,8 +362,10 @@ function indexer_dumpsql($dest = null, $bloc = 100) {
 
 	$version = unserialize(lire_meta('plugin'));
 	$version = $version['INDEXER']['version'];
-	
-	$index = SPHINX_DEFAULT_INDEX;
+
+	if (is_null($index)) {
+		$index = SPHINX_DEFAULT_INDEX;
+	}
 
 	$comm = '# SPIP indexer / SphinxQL Dump
 # version '. $version .'
