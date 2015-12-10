@@ -1,5 +1,14 @@
 <?php
 
+// Sait-on extraire ce format ?
+$GLOBALS['extracteur']['quark_xml'] = 'extracteur_quark_xml';
+
+function extracteur_quark_xml($fichier, &$charset) {
+	if (lire_fichier($fichier, $texte)) {		
+		return convertir_extraction_quark_xml($texte);
+	}
+}
+
 function convertir_extraction_quark_xml($c) {
 	$item = convertir_quark_xml($c);
 	$texte = "" ;
@@ -49,11 +58,6 @@ function convertir_quark_xml($c) {
 	if(preg_match("/DOSSIER/i", $fichier)){
 		$item["dossier"] = str_replace(".qxp", "", $item["mise_en_page"]) ;
 	}
-
-	// type d'article
-	
-	
-	
 
 	// L'article et son illustration son dans des <spread>
 	$sequences = extraire_balises($u, "SPREAD") ;
@@ -212,14 +216,6 @@ function convertir_quark_xml($c) {
 	return $item ;
 }
 
-function extracteur_quark_xml($fichier, &$charset) {
-	if (lire_fichier($fichier, $texte)) {		
-		return convertir_extraction_quark_xml($texte);
-	}
-}
-
-// Sait-on extraire ce format ?
-$GLOBALS['extracteur']['quark_xml'] = 'extracteur_quark_xml';
 
 
 // Fonctions spécialisées
@@ -228,4 +224,105 @@ function remove_utf8_bom($text){
     $bom = pack('H*','EFBBBF');
     $text = preg_replace("/^$bom/", '', $text);
     return $text;
+}
+
+
+//
+function nettoyer_xml_quark($xml){
+	
+	$texte = $xml ;
+	
+	$texte = preg_replace("/\R+/","",$xml);
+	$texte = preg_replace("/>\s+</","><",$texte);
+	
+	// espace insécable en balise vide.
+	$texte = preg_replace("/<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\"\/?>(<\/RICHTEXT>)?/ims", "<RICHTEXT MERGE=\"false\" NONBREAKING=\"true\">~</RICHTEXT>", $texte);
+	$texte = preg_replace("/<RICHTEXT[^>]+><\/RICHTEXT>/ims", "<RICHTEXT> </RICHTEXT>", $texte);
+	
+	$ital = false ;
+	
+	foreach(extraire_balises($texte, "RICHTEXT") as $b){
+		
+		// itals sur plusieurs balises
+		
+		$prefixe_ital = "" ;
+		$ital_statut = extraire_attribut($b, "ITALIC");
+		if(!$ital AND $ital_statut == "true"){
+			// début d'un ital
+			$prefixe_ital = "{" ;
+			$ital = true ;
+		}elseif($ital AND $ital_statut == "true"){
+			// ital qui continue
+			$prefixe_ital = "" ;
+			$ital = true ;
+		}elseif($ital AND !$ital_statut){
+			// fin d'ital
+			$prefixe_ital = "}" ;
+			$ital = false ;
+		}
+		
+		// gras
+		$gras_statut = extraire_attribut($b, "BOLD");
+		if($gras_statut == "true"){
+			$gras_debut = "{{" ;
+			$gras_fin = "}}" ;
+		}else{
+			$gras_debut = "" ;
+			$gras_fin = "" ;
+		}
+			
+		$b = supprimer_tags($b);
+		
+		$texte_clean .= $prefixe_ital . $gras_debut . $b . $gras_fin  ; 
+		//var_dump("<pre>",htmlspecialchars($texte_clean));
+	}
+	
+	// fermer l'ital eventuellement resté ouvert
+	if($ital){
+		$s = "}" ;
+		//var_dump("lol",$b);
+	}	
+	else
+		$s = "";	
+	
+	$texte = $texte_clean.$s ;
+		
+	//$texte = supprimer_tags($texte);
+		
+	// entites inventées
+	// espace fine
+	$texte = str_replace("&amp;flexSpace;", "~", $texte);
+	// cesures
+	$texte = str_replace("&amp;discHyphen;", "", $texte);
+	// autre
+	$texte = str_replace("&amp;punctSpace;", "~", $texte);
+	$texte = str_replace("&amp;thinsp;", "~", $texte);
+	$texte = str_replace("&amp;ndash;", "—", $texte);
+	$texte = str_replace("&amp;softReturn;", " ", $texte);
+	$texte = str_replace("&amp;nbsp;", "~", $texte);
+	$texte = str_replace("&nbsp;", "~", $texte);
+	
+
+	// espaces en gras.
+	$texte = str_replace(" }}","}} ",$texte);
+	$texte = str_replace("{{ "," {{",$texte);
+
+	// espaces en ital.
+	$texte = str_replace(" }","} ",$texte);
+	$texte = str_replace("{ "," {",$texte);
+
+	
+	/*	// espaces en italique ou en romain
+	$c = preg_replace(',[{] *~ *[}],', '~', $c);
+	$c = preg_replace(',[}] *~ *[{],', '~', $c);
+	$c = preg_replace(',[{] +[}],', ' ', $c);
+	$c = preg_replace(',[}] +[{],', ' ', $c);
+	$c = preg_replace(',([ ~])[}],', '}\1', $c);
+	$c = preg_replace(',[{]([ ~]),', '\1{', $c);
+	$c = preg_replace(',[ ~]?([{]»),', '{»', $c);
+	$c = preg_replace(',[{][}]|[}][{],', '', $c);
+*/	
+
+	
+	return $texte ;
 }
