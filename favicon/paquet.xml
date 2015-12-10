@@ -3,10 +3,10 @@
 	categorie="multimedia"
 	version="1.0.4"
 	etat="stable"
-	compatibilite="[2.1.0;3.1.99]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo="icon/favicon.png"
 
->	
+>
 
 	<nom>Favicon</nom>
 	<!-- Favicon et touch icon du site -->
