@@ -2,7 +2,7 @@
 	<nom>EZ-CSS</nom>
 	<auteur>Code original de [Thierry Koblentz->http://www.ez-css.org/]. Port&eacute; pour SPIP par [Gilles Klein->http://63com.com]</auteur>
 	<licence>Copyright © 2009-2015 — MIT/BSD</licence>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<description>
 Framework CSS simple et efficace. Permet de constuire un site complexe pour tous les navigateurs r&eacute;cents. Contrairement aux autres framework qui utilisent une grille, celui-ci se sert de blocs que l'on peut imbriquer ou non.
 Un framework CSS est utilis&eacute; essentiellement pour permettre &agrave; un site d'apparaitre de la même facon quelque soit le navigateur utilis&eacute; par le visiteur.
