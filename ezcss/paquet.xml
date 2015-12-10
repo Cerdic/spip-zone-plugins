@@ -3,15 +3,15 @@
 	categorie="navigation"
 	version="1.0.2"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
-	logo="img/logo.jpg"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/ezcss-64.jpg"
 	documentation="http://contrib.spip.net/?article3538"
 >
-	<nom>ezcss</nom>
-	<auteur lien="http://www.ez-css.org/">Thierry Koblenz et porté pour SPIP par Gilles Klein</auteur>
-	<licence>MSD/MIT</licence>
-	
-	<pipeline nom="insert_head_css" inclure="ezcss_pipelines.php" />
+	<nom>EZ-CSS</nom>
+	<auteur lien="http://www.ez-css.org/">Thierry Koblenz</auteur>
+	<auteur lien="http://63com.com/">Gilles Klein (portage pour SPIP)</auteur>
+	<licence>MIT/BSD</licence>
 
+	<pipeline nom="insert_head_css" inclure="ezcss_pipelines.php" />
 
 </paquet>
