@@ -1,9 +1,9 @@
 <paquet
 	prefix="gviewer"
 	categorie="edition"
-	version="0.3.1"
+	version="0.3.2"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo="images/gviewer.png"
 	documentation="http://contrib.spip.net/Plugin-Google-Viewer"
 >
