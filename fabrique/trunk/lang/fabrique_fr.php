@@ -261,6 +261,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fichier_sauvegarde' => 'Fichier de sauvegarde',
 	'label_fichier_sauvegarde_ordinateur' => 'Sur votre ordinateur',
 	'label_fichier_sauvegarde_serveur' => 'Sur le serveur',
+	'label_fichiers' => 'Fichiers',
 	'label_fichiers_echafaudes' => 'Fichiers échafaudés',
 	'label_fichiers_explicites' => 'Fichiers spécifiques',
 	'label_formulaire_configuration' => 'Formulaire de configuration ?',
