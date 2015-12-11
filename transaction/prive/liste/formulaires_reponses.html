@@ -5,7 +5,7 @@
 }})
 ]
 [(#SET{formulaire_avec_paiement,0})]
-			<BOUCLE_testreponses(FORMULAIRES_REPONSES){id_formulaire}{statut?}><BOUCLE_testtransactions(spip_formulaires_transactions){id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}>[(#SET{formulaire_avec_paiement,1})]</BOUCLE_testtransactions></BOUCLE_testreponses>
+<BOUCLE_testreponses (FORMULAIRES_REPONSES){id_formulaire}{statut?}><BOUCLE_testtransactions(spip_formulaires_transactions){id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}>[(#SET{formulaire_avec_paiement,1})]</BOUCLE_testtransactions></BOUCLE_testreponses>
 
 <B_reponses>
 #ANCRE_PAGINATION
@@ -23,10 +23,6 @@
 				<th class="titre"><:transaction:statut_transaction:></th>
 			]
 			<th class="titre"></th>
-			
-
-
-			
 		</tr>
 	</thead>
 	<tbody>
@@ -41,7 +37,7 @@
 				<:formidable:reponses_anonyme:>
 				<//B_auteur>
 			</td>
-			<td class="ip arial1">#IP</td>			
+			<td class="ip arial1">#IP</td>
 			<B_transactions>
 			<BOUCLE_transactions(spip_formulaires_transactions){id_formulaires_reponse=#ID_FORMULAIRES_REPONSE}>
 				<td>
@@ -56,14 +52,11 @@
 					<td></td><td></td>
 				]
 			<//B_transactions>
-
 			<td class="titre arial2">
 				<a href="[(#URL_ECRIRE{formulaires_reponse}|parametre_url{id_formulaires_reponse,#ID_FORMULAIRES_REPONSE})]" title="<:formidable:reponses_voir_detail:>">
 					<img src="#CHEMIN{images/formulaire-reponse-24.png}" alt="<:formidable:reponses_voir_detail:>" />
 				</a>
 			</td>
-			
-			
 		</tr>
 	</BOUCLE_reponses>
 	</tbody>
