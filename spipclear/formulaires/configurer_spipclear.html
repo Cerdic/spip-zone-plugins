@@ -7,8 +7,8 @@
 	<p class="explication"><:spipclear:explication_configurer:></p>
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="editer_spipclear_sommaire">
+		<ul class="editer-groupe">
+			<li class="editer editer_spipclear_sommaire">
 				<label>Sommaire</label>
 				<p class="explication"><:spipclear:look_sommaire:></p>
 				<div class="choix">
@@ -24,7 +24,7 @@
 					<label for="bloc_post_tags"><:spipclear:sommaire_afficher_tags:></label>
 				</div>
 			</li>
-			<li class="editer_spipclear_navigation">
+			<li class="editer editer_spipclear_navigation">
 				<label>Navigation</label>
 				<p class="explication"><:spipclear:look_navigation:></p>
 				<div class="choix">
@@ -32,7 +32,7 @@
 					<label for="navigation_desactiver_calendrier"><:spipclear:navigation_desactiver_calendrier:></label>
 				</div>
 			</li>
-			<li class="editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY{0,-1}}}
+			<li class="editer editer_secteur">#SET{secteurs,#CONFIG{spipclear/secteurs,#ARRAY{0,-1}}}
 				<label><:spipclear:secteurs_spipclear:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{secteurs})</span>]
 				<select name="secteurs[]" multiple="multiple" size="9">
@@ -42,7 +42,7 @@
 					</BOUCLE_racine>
 				</select>
 			</li>
-			<li class="editer_spipclear_choix_theme">
+			<li class="editer editer_spipclear_choix_theme">
 				<label><:spipclear:legend_theme:></label>
 				<p class="explication"><:spipclear:info_choix_theme:></p>
 				<div class="choix">
@@ -54,7 +54,7 @@
 					<label for="choix_theme_oui"><:spipclear:label_theme_perso:></label>
 				</div>
 			</li>
-			<li class="editer_spipclear_nom_theme">
+			<li class="editer editer_spipclear_nom_theme">
 				<p class="explication"><:spipclear:label_nom_theme:></p>
 				<input type="text" name="nom_theme" id="nom_theme" class="text" value="[(#ENV{nom_theme})]" size="32" />
 				[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
