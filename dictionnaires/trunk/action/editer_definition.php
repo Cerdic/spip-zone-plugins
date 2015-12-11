@@ -131,6 +131,7 @@ function definition_set($id_definition, $set=null, $purger_cache=true) {
 
 	if ($err = objet_modifier_champs('definition', $id_definition,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c)) {

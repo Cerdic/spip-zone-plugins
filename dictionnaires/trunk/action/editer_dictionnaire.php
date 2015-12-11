@@ -107,6 +107,7 @@ function dictionnaire_set($id_dictionnaire, $set=null) {
 
 	if ($err = objet_modifier_champs('dictionnaire', $id_dictionnaire,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c)) {
