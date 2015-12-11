@@ -116,6 +116,7 @@ function feedback_modifier($id_feedback, $set=null) {
 
 	if ($err = objet_modifier_champs('feedback', $id_feedback,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('feedback:titre_nouvelle_feedback')." "._T('info_numero_abbreviation').$id_feedback),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
