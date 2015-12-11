@@ -24,7 +24,7 @@
 		<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_contacts(CONTACTS){par num nom, nom}{tout}>
 		[(#ENV{multiple}|oui)
-		<option value="#ID_"[(#ID_CONTACT|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#NOM #PRENOM</option>]
+		<option value="#ID_CONTACT"[(#ID_CONTACT|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#NOM #PRENOM</option>]
 		[(#ENV{multiple}|non)
 		<option value="#ID_CONTACT"[(#ID_CONTACT|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#NOM #PRENOM</option>]
 	</BOUCLE_contacts>
