@@ -62,6 +62,7 @@ function tradlang_set($id_tradlang,$set=null){
 	$invalideur = "id='id_tradlang/$id_tradlang'";
 	if ($err = objet_modifier_champs('tradlang', $id_tradlang,
 		array(
+			'data' => $set,
 			'nonvide' => array(),
 			'invalideur' => $invalideur,
 			'indexation' => true,
