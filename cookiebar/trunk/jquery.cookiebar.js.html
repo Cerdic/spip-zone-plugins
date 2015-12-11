@@ -1,37 +1,26 @@
 #HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
-/*
- * Copyright (C) 2012 PrimeBox (info@primebox.co.uk)
- *
- * This work is licensed under the Creative Commons
- * Attribution 3.0 Unported License. To view a copy
- * of this license, visit
- * http://creativecommons.org/licenses/by/3.0/.
- *
- * Documentation available at:
- * http://www.primebox.co.uk/projects/cookie-bar/
- *
- * When using this software you use it at your own risk. We hold
- * no responsibility for any damage caused by using this plugin
- * or the documentation provided.
- */
+[(#REM)
+	Initialisation de cookiebar
+	
+	Voir la documentation ici : 
+	http://www.primebox.co.uk/projects/cookie-bar/
+]
 [(#CONFIG{cookiebar/message_txt}|?{
-    [(#SET{message,#CONFIG{cookiebar/message_txt}|typo|texte_script})],
-    [(#SET{message,<:cookiebar:message_message|texte_script:>})]
+	[(#SET{message,#CONFIG{cookiebar/message_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{message,<:cookiebar:message_message|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/accept_txt}|?{
-    [(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|typo|texte_script})],
-    [(#SET{accepttext,<:cookiebar:message_accepttext|texte_script:>})]
+	[(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{accepttext,<:cookiebar:message_accepttext|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/decline_txt}|?{
-    [(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|typo|texte_script})],
-    [(#SET{declinetext,<:cookiebar:message_declinetext|texte_script:>})]
+	[(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{declinetext,<:cookiebar:message_declinetext|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/policy_txt}|?{
-    [(#SET{policytext,#CONFIG{cookiebar/policy_txt}|typo|texte_script})],
-    [(#SET{policytext,<:cookiebar:message_policytext|texte_script:>})]
+	[(#SET{policytext,#CONFIG{cookiebar/policy_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{policytext,<:cookiebar:message_policytext|supprimer_tags|trim|texte_script:>})]
 })]
-
-
 
 (function($){
 	$.cookieBar = function(options,val){
@@ -44,7 +33,7 @@
 		}
 		var defaults = {
 			message: '<span class="cb-msg">#GET{message}</span>', //Message displayed on bar
-			acceptButton:  #CONFIG{cookiebar/accept_button,true} , //Set to true to show accept/enable button
+			acceptButton:  #CONFIG{cookiebar/accept_button,true}, //Set to true to show accept/enable button
 			acceptText: '#GET{accepttext}', //Text on accept/enable button
 			declineButton: #CONFIG{cookiebar/decline_button,true}, //Set to true to show decline/disable button
 			declineText: '#GET{declinetext}', //Text on decline/disable button
@@ -201,3 +190,5 @@
 		}
 	};
 })(jQuery);
+
+#FILTRE{trim}
