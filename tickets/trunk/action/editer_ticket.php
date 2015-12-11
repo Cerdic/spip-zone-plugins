@@ -109,6 +109,7 @@ function ticket_modifier($id_ticket, $set=null) {
 		
 	if ($err = objet_modifier_champs('ticket', $id_ticket,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('ticket:nouveau_ticket')." "._T('info_numero_abbreviation').$id_ticket),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
