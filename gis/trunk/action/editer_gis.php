@@ -94,7 +94,7 @@ function gis_modifier($id_gis, $set=null) {
 			}
 		}else if($c['lat'] <= -90){
 			while($c['lat'] <= -90){
-				$c['lat'] = $c['lon'] + 180;
+				$c['lat'] = $c['lat'] + 180;
 			}
 		}
 	}
