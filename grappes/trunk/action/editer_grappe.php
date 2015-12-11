@@ -69,10 +69,10 @@ function grappe_inserer() {
  * $c est un contenu (par defaut on prend le contenu via _request())
  *
  * @param int $id_grappe
- * @param array|bool $set
+ * @param array|null $set
  * @return string
  */
-function grappe_modifier($id_grappe, $set=false) {
+function grappe_modifier($id_grappe, $set=null) {
 
 	include_spip('inc/modifier');
 
@@ -103,6 +103,7 @@ function grappe_modifier($id_grappe, $set=false) {
 
 	if ($err = objet_modifier_champs('grappe', $id_grappe,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 		),
