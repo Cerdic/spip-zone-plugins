@@ -11,6 +11,12 @@ function extracteur_quark_xml($fichier, &$charset) {
 
 function convertir_extraction_quark_xml($c) {
 	$item = convertir_quark_xml($c);
+	$texte = extracteur_preparer_insertion($item);
+	return $texte ;
+}
+ 
+function extracteur_preparer_insertion($item){
+	
 	$texte = "" ;
 	
 	if($item['surtitre'])
@@ -31,7 +37,9 @@ function convertir_extraction_quark_xml($c) {
 	$texte .=  "\n\n" . $item['texte']	;
 	
 	return $texte ;
-}
+
+} 
+ 
  
 function convertir_quark_xml($c) {
 
