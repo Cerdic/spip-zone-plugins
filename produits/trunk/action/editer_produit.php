@@ -123,6 +123,7 @@ function produit_modifier($id_produit, $set=null) {
 
 	if ($err = objet_modifier_champs('produit', $id_produit,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
