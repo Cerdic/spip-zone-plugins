@@ -116,6 +116,7 @@ function zone_modifier ($id_zone, $set=null) {
 
 	if ($err = objet_modifier_champs('zone', $id_zone,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
