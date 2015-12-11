@@ -35,7 +35,7 @@
 #ANCRE_PAGINATION
 <div class="liste-objets contacts">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class="picto"></th>
