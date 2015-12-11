@@ -49,6 +49,7 @@ function signalement_modifier($id, $set=null) {
 
 	if ($err = objet_modifier_champs($objet, $id,
 		array(
+			'data' => $set,
 			'nonvide' => '',
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
