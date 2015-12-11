@@ -14,12 +14,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Supprimer une saisie dont on donne l'identifiant, le nom ou le chemin.
  *
- * @param array        $saisies
- *                                          Tableau des descriptions de saisies
+ * @param array        $saisies             Tableau des descriptions de saisies
  * @param string|array $id_ou_nom_ou_chemin
- *                                          L'identifiant unique
- *                                          ou le nom de la saisie à supprimer
- *                                          ou son chemin sous forme d'une liste de clés
+ *     L'identifiant unique
+ *     ou le nom de la saisie à supprimer
+ *     ou son chemin sous forme d'une liste de clés
  *
  * @return array
  *               Tableau modifié décrivant les saisies
@@ -47,19 +46,16 @@ function saisies_supprimer($saisies, $id_ou_nom_ou_chemin) {
 /**
  * Insère une saisie à une position donnée.
  *
- * @param array $saisies
- *                       Tableau des descriptions de saisies
- * @param array $saisie
- *                       Description de la saisie à insérer
+ * @param array $saisies     Tableau des descriptions de saisies
+ * @param array $saisie     Description de la saisie à insérer
  * @param array $chemin
- *                       Position complète où insérer la saisie.
- *                       En absence, insère la saisie à la fin.
+ *     Position complète où insérer la saisie.
+ *     En absence, insère la saisie à la fin.
  *
  * @return array
- *               Tableau des saisies complété de la saisie insérée
+ *     Tableau des saisies complété de la saisie insérée
  */
-function saisies_inserer($saisies, $saisie, $chemin = array())
-{
+function saisies_inserer($saisies, $saisie, $chemin = array()) {
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']) {
 		// ajouter un identifiant
@@ -103,8 +99,7 @@ function saisies_inserer($saisies, $saisie, $chemin = array())
  *
  * @return array Retourne le tableau modifié des saisies
  */
-function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin)
-{
+function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin) {
 	// On récupère le contenu de la saisie à déplacer
 	$saisie = saisies_chercher($saisies, $id_ou_nom_ou_chemin);
 	if ($saisie) {
@@ -134,8 +129,7 @@ function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin)
  *
  * @return array Retourne le tableau modifié des saisies
  */
-function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou)
-{
+function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou) {
 	// On récupère le contenu de la saisie à déplacer
 	$saisie = saisies_chercher($saisies, $id_ou_nom_ou_chemin);
 
@@ -196,8 +190,7 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou)
  *
  * @return Retourne le tableau décrivant les saisies, mais modifié
  */
-function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs)
-{
+function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 	$chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true);
 	$position = array_pop($chemin);
 	$parent = &$saisies;
@@ -239,18 +232,13 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs)
 /**
  * Transforme tous les noms du formulaire avec un preg_replace.
  *
- * @param array  $saisies
- *                             Un tableau décrivant les saisies
- * @param string $masque
- *                             Ce que l'on doit chercher dans le nom
- * @param string $remplacement
- *                             Ce par quoi on doit remplacer
+ * @param array  $saisies      Un tableau décrivant les saisies
+ * @param string $masque       Ce que l'on doit chercher dans le nom
+ * @param string $remplacement Ce par quoi on doit remplacer
  *
- * @return array
- *               Retourne le tableau modifié des saisies
+ * @return array               Retourne le tableau modifié des saisies
  */
-function saisies_transformer_noms($saisies, $masque, $remplacement)
-{
+function saisies_transformer_noms($saisies, $masque, $remplacement) {
 	if (is_array($saisies)) {
 		foreach ($saisies as $cle => $saisie) {
 			$saisies[$cle]['options']['nom'] = preg_replace($masque, $remplacement, $saisie['options']['nom']);
@@ -267,16 +255,13 @@ function saisies_transformer_noms($saisies, $masque, $remplacement)
  * Transforme les noms d'une liste de saisies pour qu'ils soient
  * uniques dans le formulaire donné.
  *
- * @param array $formulaire
- *                          Le formulaire à analyser
- * @param array $saisies
- *                          Un tableau décrivant les saisies.
+ * @param array $formulaire  Le formulaire à analyser
+ * @param array $saisies     Un tableau décrivant les saisies.
  *
  * @return array
- *               Retourne le tableau modifié des saisies
+ *     Retourne le tableau modifié des saisies
  */
-function saisies_transformer_noms_auto($formulaire, $saisies)
-{
+function saisies_transformer_noms_auto($formulaire, $saisies) {
 	if (is_array($saisies)) {
 		foreach ($saisies as $cle => $saisie) {
 			$saisies[$cle]['options']['nom'] = saisies_generer_nom($formulaire, $saisie['saisie']);
@@ -303,10 +288,9 @@ function saisies_transformer_noms_auto($formulaire, $saisies)
  * @param string $insertion Du code HTML à insérer dans la saisie
  * @param string $ou        L'endroit où insérer le HTML : "debut" ou "fin"
  *
- * @return array Retourne la description de la saisie modifiée
+ * @return array            Retourne la description de la saisie modifiée
  */
-function saisies_inserer_html($saisie, $insertion, $ou = 'fin')
-{
+function saisies_inserer_html($saisie, $insertion, $ou = 'fin') {
 	if (!in_array($ou, array('debut', 'fin'))) {
 		$ou = 'fin';
 	}
