@@ -116,7 +116,7 @@ function saisies_generer_html($champ, $env = array()) {
 	}
 
 	// Peut-être des transformations à faire sur les options textuelles
-	$options = $champ['options'];
+	$options = isset($champ['options']) ? $champ['options'] : array();
 	foreach ($options as $option => $valeur) {
 		if ($option == 'datas') {
 			// exploser une chaine datas en tableau (applique _T_ou_typo sur chaque valeur)
@@ -170,7 +170,7 @@ function saisies_generer_html($champ, $env = array()) {
 
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	// Si le nom du champ est un tableau indexé, il faut parser !
-	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
+	if (isset($contexte['nom']) and preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
 		$contexte['valeur'] = $env[$separe[1]];
 		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 		// On va chercher au fond du tableau
@@ -180,7 +180,7 @@ function saisies_generer_html($champ, $env = array()) {
 	}
 	// Sinon la valeur est juste celle du nom
 	else {
-		$contexte['valeur'] = (isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
+		$contexte['valeur'] = (isset($contexte['nom']) and isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
 	}
 
 	// Si ya des enfants on les remonte dans le contexte

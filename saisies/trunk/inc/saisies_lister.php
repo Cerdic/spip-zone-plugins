@@ -55,7 +55,7 @@ function saisies_lister_par_nom($contenu, $avec_conteneur = true) {
 	if (is_array($contenu)) {
 		foreach ($contenu as $ligne) {
 			if (is_array($ligne)) {
-				if (array_key_exists('saisie', $ligne) and (!isset($ligne['saisies']) or !is_array($ligne['saisies']) or $avec_conteneur)) {
+				if (array_key_exists('saisie', $ligne) and (!isset($ligne['saisies']) or !is_array($ligne['saisies']) or $avec_conteneur) and isset($ligne['options'])) {
 					$saisies[$ligne['options']['nom']] = $ligne;
 				}
 				if (isset($ligne['saisies']) and is_array($ligne['saisies'])) {
