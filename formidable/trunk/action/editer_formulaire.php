@@ -92,6 +92,7 @@ function formulaire_modifier($id_formulaire, $set=null) {
 	$invalideur = "id='id_formulaire/$id_formulaire'";
 	if ($err = objet_modifier_champs('formulaire', $id_formulaire,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 		),
