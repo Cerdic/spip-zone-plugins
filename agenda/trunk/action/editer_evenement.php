@@ -113,6 +113,7 @@ function evenement_modifier($id_evenement, $set=null){
 
 	if ($err = objet_modifier_champs('evenement', $id_evenement,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_nouvel_evenement')." "._T('info_numero_abbreviation').$id_evenement),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
