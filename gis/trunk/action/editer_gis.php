@@ -101,6 +101,7 @@ function gis_modifier($id_gis, $set=null) {
 	if ($err = objet_modifier_champs('gis', $id_gis,
 		array(
 			//'nonvide' => array('nom' => _T('info_sans_titre')),
+			'data' => $set,
 			'invalideur' => "id='gis/$id_gis'",
 		),
 		$c))
