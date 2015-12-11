@@ -73,7 +73,7 @@ function lister_themes() {
 					}
 				}
 				if ($nom_theme) {
-					$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'.$nom_theme.'" class="theme" href="#" title="'._T(selectionner_theme).'">'.$nom_theme.'</p>';
+					$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'.$nom_theme.'" class="theme" href="#" title="'._T('selectionner_theme').'">'.$nom_theme.'</p>';
 					if ($capture) {
 						$htm .= '<img src="'._DIR_PLUGIN_SPIPCLEAR.'themes/'.$rt.'/screenshot.jpg" />';
 					}
@@ -96,7 +96,7 @@ function lister_themes() {
 						}
 					}
 					if ($nom_theme) {
-						$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'.$nom_theme.'" class="theme" href="#" title="'._T(selectionner_theme).'">'.$nom_theme.'</p>';
+						$htm .= '<li style="padding-left: 10px; border-bottom: 2px solid #ccc;"><p><a id="'.$nom_theme.'" class="theme" href="#" title="'._T('selectionner_theme').'">'.$nom_theme.'</p>';
 						if ($capture) {
 							$htm .= '<img src="'.$dir_perso.$rt.'/screenshot.jpg" />';
 						}
