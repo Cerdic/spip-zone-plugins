@@ -115,6 +115,7 @@ function contact_modifier($id_contact, $set=null) {
 
 	if ($err = objet_modifier_champs('contact', $id_contact,
 		array(
+			'data' => $set,
 			'nonvide' => array('nom' => _T('contacts:contact_nouveau_titre')." "._T('info_numero_abbreviation').$id_contact),
 		),
 		$c)) {

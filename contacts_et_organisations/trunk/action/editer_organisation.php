@@ -108,6 +108,7 @@ function organisation_modifier($id_organisation, $set=null) {
 
 	if ($err = objet_modifier_champs('organisation', $id_organisation,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('contacts:organisation_nouveau_titre')." "._T('info_numero_abbreviation').$id_organisation),
 		),
 		$c)) {
