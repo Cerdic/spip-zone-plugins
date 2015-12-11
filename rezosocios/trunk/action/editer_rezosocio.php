@@ -84,6 +84,7 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
 	}
 	if ($err = objet_modifier_champs('rezosocio', $id_rezosocio,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c))
