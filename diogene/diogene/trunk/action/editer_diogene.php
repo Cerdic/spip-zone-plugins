@@ -132,7 +132,7 @@ function diogene_supprimer($id_diogene){
  * @param int $id_diogene Identifiant numérique du diogene
  * @param array $champs un tableau des champs à modifier en base
  */
-function diogene_modifier($id_diogene,$set=false){
+function diogene_modifier($id_diogene,$set=null){
 	
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
@@ -177,6 +177,7 @@ function diogene_modifier($id_diogene,$set=false){
 	
 	if ($err = objet_modifier_champs('diogene', $id_diogene,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
