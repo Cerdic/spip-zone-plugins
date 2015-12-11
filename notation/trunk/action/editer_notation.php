@@ -56,10 +56,10 @@ function notation_inserer($objet, $id_objet){
  * Modifier une note existante
  *
  * @param int $id_notation
- * @param array $set
+ * @param array|null $set
  * @return bool|string
  */
-function notation_modifier($id_notation, $set=array()) {
+function notation_modifier($id_notation, $set=null) {
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
@@ -74,7 +74,9 @@ function notation_modifier($id_notation, $set=array()) {
 	// recuperer l'objet sur lequel porte la notation
 	$t = sql_fetsel("objet,id_objet", "spip_notations", "id_notation=".intval($id_notation));
 	if ($err = objet_modifier_champs('notation', $id_notation,
-		array(),
+		array(
+			'data' => $set,
+		),
 		$c))
 		return $err;
 
