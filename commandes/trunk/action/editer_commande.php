@@ -172,6 +172,7 @@ function commande_modifier($id_commande, $set=null) {
 
 	if ($err = objet_modifier_champs('commande', $id_commande,
 		array(
+			'data' => $set,
 			'nonvide' => array('statut' => _T('info_sans_statut')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
