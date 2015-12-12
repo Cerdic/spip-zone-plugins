@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.2.2"
 	etat="dev"
-	compatibilite="[3.0.10;3.1.*]"
+	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/mejs-64.png"
 	documentation="http://contrib.spip.net/4403"
 	schema="0.1.0"
