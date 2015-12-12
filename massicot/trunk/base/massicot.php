@@ -29,8 +29,14 @@ function massicot_declarer_tables_interfaces($interfaces) {
     $interfaces['table_des_traitements']['LOGO_DOCUMENT'][] =
       'massicoter_logo_document(%s, $connect, $Pile[1])';
 
-    if (is_null($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) {
-        $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] = '%s';
+    if (! isset($interfaces['table_des_traitements']['URL_DOCUMENT'])) {
+	    $interfaces['table_des_traitements']['URL_DOCUMENT'] = array();
+    }
+
+    if ((! isset($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) or
+        is_null($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) {
+
+	    $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] = '%s';
     }
 
     $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] =
