@@ -8,9 +8,6 @@
  * @licence    GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
 /**
  * Déclaration des alias de tables et filtres automatiques de champs
  *

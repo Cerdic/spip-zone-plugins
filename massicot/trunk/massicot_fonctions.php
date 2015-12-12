@@ -9,8 +9,6 @@
  * @package    SPIP\Massicot\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
 /**
  * Retrouver le chemin d'une image donnée par un couple objet, id_objet
  *

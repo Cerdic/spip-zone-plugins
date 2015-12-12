@@ -8,9 +8,6 @@
  * @licence    GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
 /**
  * Saisies du formulaire de massicotage
  *

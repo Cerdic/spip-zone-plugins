@@ -9,9 +9,6 @@
  * @package    SPIP\Massicot\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
 /**
  * Insérer le plugin jquery de selection du cadre
  *
