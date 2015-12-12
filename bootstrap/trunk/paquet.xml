@@ -20,6 +20,7 @@
 	<pipeline nom="affichage_final" inclure="bootstrap3_fonctions.php" />
 
 	<necessite nom="lesscss" compatibilite="[1.0.0;1.*.*]" />
+	<necessite nom="jquery" compatibilite="[1.9.1;]" />
 	<procure nom="bootstrap" version="3.3.5" />
 
 	<chemin path="bootstrap" type="public" />
