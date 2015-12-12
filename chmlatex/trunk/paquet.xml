@@ -1,7 +1,7 @@
 <paquet
     prefix="chmlatex"
     categorie="edition"
-    version="1.4.0"
+    version="1.4.1"
     etat="test"
     compatibilite="[3.0.0;3.0.*]"
     logo="prive/themes/spip/images/chmlatex-32.png"

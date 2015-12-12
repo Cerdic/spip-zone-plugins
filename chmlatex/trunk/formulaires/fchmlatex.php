@@ -243,8 +243,10 @@ function imagehtml($matches)
 
 /**
  * Traitement des liens entre articles et rubriques pour l'export HTML/CHM
- * @param
- * @author Hicham Gartit
+ * Transforme les liens du type /?exec=article&id_article=nnn et /?exec=rubrique&id_rubrique=nnn
+ * en lien articlennn.html et rubriquennn.html
+ * @param $matches lien absolu ou relatif
+ * @author Hicham Gartit, David Dorchies
  */
 function html_lien($matches)
 {
@@ -258,9 +260,28 @@ function html_lien($matches)
     {
         if(substr($chemin, 0, strlen($GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')) === $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=')
         {
+            $tAncre = explode('#',$chemin); // Traitement des ancres
+            $chemin = $tAncre[0];
             if(strstr($chemin, 'exec=article'))
             {
                 $id = substr(strstr($chemin, "id_article="),11);
+                // Il faut s'assurer que l'id correspond à la traduction de la langue en cours
+                $art = sql_fetsel(array('id_trad','lang'), 'spip_articles', "id_article=$id");
+                $langue = _request('langue');
+                if($art['lang']!=$langue) {
+                    // Le lien ne pointe pas vers la bonne traduction de l'article
+                    $art2 = sql_fetsel('id_article', 'spip_articles',
+                        array('id_trad='.$art['id_trad'],"lang='$langue'"));
+                        //~ spip_log(sql_get_select('id_article', 'spip_articles',
+                        //~ array('id_trad='.$art['id_trad'],"lang='$langue'")),'lien');
+                    if(isset($art2['id_article'])) {
+                        // La bonne traduction existe
+                        $id = $art2['id_article'];
+                    } else {
+                        // La bonne traduction n'existe pas, on utilise l'article de référence
+                        $id = $art['id_trad'];
+                    }
+                }
                 $type = 'article';
             }
             else if(strstr($chemin, 'exec=rubrique'))
@@ -268,10 +289,8 @@ function html_lien($matches)
                 $id = substr(strstr($chemin, "id_rubrique="),12);
                 $type = 'rubrique';
             }
-            $aId = explode('#',$id); // Traitement des ancres
-            $id = $aId[0];
             $nom = $type.$id.'.html';
-            if(isset($aId[1])) $nom .= '#'.$aId[1];
+            if(isset($tAncre[1])) $nom .= '#'.$tAncre[1]; // Rajout de l'ancre si elle existe
 
             return str_replace($matches[1],$nom,$matches[0]);
         }
