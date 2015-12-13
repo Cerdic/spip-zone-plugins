@@ -7,10 +7,9 @@
 
 #SET{chemin,#CHEMIN{IMG/.htaccess}}
 #SET{htaccess_est_installe,#GET{chemin}|htaccess_est_installe}
-
 [(#GET{htaccess_est_installe}|non)
 	[(#BOITE_OUVRIR{[(#VAL{hasher:redirections}|_T)],'error'})]
-	<:hasher:htaccess_a_installer{htaccess=#GET{chemin}}:>
+	<:hasher:htaccess_a_installer{htaccess=#CHEMIN{IMG}/.htaccess}:>
 ]
 
 [(#GET{htaccess_est_installe}|oui)

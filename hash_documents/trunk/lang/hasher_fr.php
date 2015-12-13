@@ -12,10 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bilan_titre' => 'Bilan' ,
 	'bilan' => 'Ce site comporte @oui@ documents hashés, et @non@ qui ne le sont pas encore (ou ne peuvent pas l\'être).' ,
-	
+
 	// C
 	'choix_action' => 'Choisir l\'action à effectuer :',
-	
+
 	// D
 	'documents_modifies' => 'Documents modifiés : ' ,
 	'documents_site' => 'Documents du site' ,
@@ -25,12 +25,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_action' => 'Action erronée',
 
 	// H
-	'htaccess_a_installer' => 'Veuillez installer dans @htaccess@ un fichier contenant les codes suivants :' ,
+	'htaccess_a_installer' => 'Veuillez installer un fichier @htaccess@ contenant les codes suivants :' ,
 	'htaccess_installe' => 'Le fichier @htaccess@ semble correctement installé ; pour mémoire, il doit contenir les codes suivants :' ,
-	
+
 	// R
 	'redirections' => 'Redirections' ,
-	
+
 	// T
 	'titre' => 'Hash documents' ,
 );
