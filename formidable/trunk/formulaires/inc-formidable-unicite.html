@@ -1,5 +1,5 @@
-<B_champs_unicite>
 #SET{name,unicite}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<B_champs_unicite>
 <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	<label for="#GET{name}"><:formidable:editer_unicite_label:></label>[
 	<span class='erreur_message'>(#GET{erreurs})</span>

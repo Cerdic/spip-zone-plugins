@@ -48,9 +48,9 @@ function formulaires_editer_formulaire_traiter($id_formulaire, $nouveau){
 	include_spip('inc/editer');
 	$id_formulaire = $id_formulaire ? $id_formulaire : $nouveau;
 	$retours = formulaires_editer_objet_traiter('formulaire', $id_formulaire);
-	
+
 	// S'il n'y a pas d'erreur et que le formulaire est bien là
-	if (!$retours['message_erreur'] and $retours['id_formulaire'] > 0){
+	if (empty($retours['message_erreur']) and $retours['id_formulaire'] > 0){
 		// Si c'était un nouveau on reste sur l'édition
 		if (!intval($id_formulaire) and $nouveau == 'oui'){
 			// Tout a fonctionné. En fonction de la config, on attribue l'auteur courant
