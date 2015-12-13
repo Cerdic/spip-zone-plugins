@@ -40,3 +40,18 @@ class IndexerIndexer extends Command {
 		//~ $output->writeln("\n<info>{$message}</info>");
 	}
 }
+
+class IndexerDump extends Command {
+	protected function configure() {
+		$this
+			->setName('indexer:dump')
+			->setDescription('Récupérer les contenus indexés.')
+		;
+	}
+
+	protected function execute(InputInterface $input, OutputInterface $output) {
+		include_spip('inc/indexer');
+		indexer_dumpsql();
+	}
+}
+
