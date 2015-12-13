@@ -46,12 +46,22 @@ class IndexerDump extends Command {
 		$this
 			->setName('indexer:dump')
 			->setDescription('Récupérer les contenus indexés.')
+			->addOption(
+				'index',
+				'i',
+				InputOption::VALUE_OPTIONAL,
+				'nom de l’index sphinx',
+				null
+			)
 		;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		include_spip('inc/indexer');
-		indexer_dumpsql();
+
+		$index = $input->getOption('index');
+
+		indexer_dumpsql($index);
 	}
 }
 
