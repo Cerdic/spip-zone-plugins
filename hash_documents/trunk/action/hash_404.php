@@ -12,9 +12,9 @@ RewriteRule .* ../index.php?action=hash_404 [L]
 */
 function action_hash_404_dist(){
 
-	include_spip("hash_fonctions");
+	include_spip("hasher_fonctions");
 	$doc = preg_replace(',^.*?IMG/,', '', $_SERVER['REQUEST_URI']);
-	
+
 	if (($dest = hasher_adresser_document($doc)
 	AND file_exists('./'.$GLOBALS['meta']['dir_img'].$dest))
 	OR ($dest = hasher_adresser_document($doc, true)
