@@ -405,6 +405,7 @@ CREATE TABLE `' . $index . '` (
 					case 'field':
 						break;
 					case 'bigint':
+					case 'uint':
 						$type = 'BIGINT(21) NOT NULL';
 						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
 						break;
@@ -418,6 +419,10 @@ CREATE TABLE `' . $index . '` (
 						break;
 					case 'string':
 						$type = 'LONGTEXT DEFAULT \'\' NOT NULL';
+						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
+						break;
+					case 'mva':
+						$type = 'TINYTEXT DEFAULT \'\' NOT NULL';
 						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
 						break;
 				}
