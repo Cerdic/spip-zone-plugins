@@ -178,9 +178,13 @@ function saisies_generer_html($champ, $env = array()) {
 			$contexte['valeur'] = isset($contexte['valeur'][$cle]) ? $contexte['valeur'][$cle] : null;
 		}
 	}
-	// Sinon la valeur est juste celle du nom
+	// Sinon la valeur est juste celle du nom si elle existe
+	elseif (isset($contexte['nom']) and isset($env[$contexte['nom']])) {
+		$contexte['valeur'] = $env[$contexte['nom']];
+	}
+	// Sinon rien
 	else {
-		$contexte['valeur'] = (isset($contexte['nom']) && isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
+		$contexte['valeur'] = null;
 	}
 
 	// Si ya des enfants on les remonte dans le contexte
