@@ -180,7 +180,7 @@ function saisies_generer_html($champ, $env = array()) {
 	}
 	// Sinon la valeur est juste celle du nom
 	else {
-		$contexte['valeur'] = (isset($contexte['nom']) and isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
+		$contexte['valeur'] = (isset($contexte['nom']) && isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : null);
 	}
 
 	// Si ya des enfants on les remonte dans le contexte
