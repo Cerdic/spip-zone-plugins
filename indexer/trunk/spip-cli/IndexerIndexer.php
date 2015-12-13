@@ -53,6 +53,13 @@ class IndexerDump extends Command {
 				'nom de l’index sphinx',
 				null
 			)
+			->addOption(
+				'format',
+				'f',
+				InputOption::VALUE_OPTIONAL,
+				'format de sortie : sphinx ou mysql',
+				'sphinx'
+			)
 		;
 	}
 
@@ -60,8 +67,9 @@ class IndexerDump extends Command {
 		include_spip('inc/indexer');
 
 		$index = $input->getOption('index');
+		$format = $input->getOption('format');
 
-		indexer_dumpsql($index);
+		indexer_dumpsql($index, $format);
 	}
 }
 

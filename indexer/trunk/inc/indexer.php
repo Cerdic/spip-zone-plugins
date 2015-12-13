@@ -339,6 +339,7 @@ function indexer_suggestions_motivees($mot) {
 /*
  * faire un DUMP SQL de notre base sphinx
  * index: nom de l'index (table) a dumper
+ * format: format de sortie ("sphinx" ou "mysql")
  * dest: fichier destination (null: stdout)
  * bloc : nombre d'enregistrements a rapatrier a chaque tour (maximum 1000)
  * usage :
@@ -346,7 +347,7 @@ function indexer_suggestions_motivees($mot) {
       indexer_dumpsql();
       // indexer_dumpsql(SPHINX_DEFAULT_INDEX, 'tmp/indexer.sql', 1000);
 */
-function indexer_dumpsql($index = null, $dest = null, $bloc = 100) {
+function indexer_dumpsql($index = null, $format = 'sphinx', $dest = null, $bloc = 100) {
 	if (is_null($dest)) {
 		$dest = 'php://stdout';
 	}
@@ -396,11 +397,35 @@ CREATE TABLE `' . $index . '` (
 ';
 		$fields = [];
 		foreach($all['query']['docs'] as $doc) {
-			$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $doc['Type'];
+			if ($format == 'sphinx') {
+				$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $doc['Type'] ;
+			}
+			else if ($format == 'mysql') {
+				switch ($doc['Type']) {
+					case 'field':
+						break;
+					case 'bigint':
+						$type = 'BIGINT(21) NOT NULL';
+						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
+						break;
+					case 'timestamp':
+						$type = 'TINYTEXT DEFAULT \'\' NOT NULL';
+						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
+						break;
+					case 'json':
+						$type = 'TEXT DEFAULT \'\' NOT NULL';
+						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
+						break;
+					case 'string':
+						$type = 'LONGTEXT DEFAULT \'\' NOT NULL';
+						$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $type;
+						break;
+				}
+			}
 		}
 		$comm .= join(",\n", $fields);
 		$comm .= "
-)
+);
 
 
 #
