@@ -11,7 +11,7 @@
 	<!-- Open Graph Protocol -->
 	[<meta property="og:title" content="(#TITRE|attribut_html)" />]
 	<meta property="og:type" content="article" />
-	[<meta property="og:image" content="(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+	[<meta property="og:image" content="(#LOGO_NEWSLETTER_NORMAL|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
 	[<meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)" />]
 	[<meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)" />]
 	[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
@@ -120,7 +120,7 @@
 									    style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
 										<!-- // Begin Module: Standard Header Image \\ -->
 										[(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|image_passe_partout{600,250}|image_recadre{600,250,center,transparent}|image_aplatir{jpg,#ffffff,75}
-										  |inserer_attribut{alt,[(#LOGO_NEWSLETTER|non)#NOM_SITE_SPIP]}
+										  |inserer_attribut{alt,[(#LOGO_NEWSLETTER_NORMAL|non)#NOM_SITE_SPIP]}
 										  |inserer_attribut{border,'0'}
 										  |inserer_attribut{style,'margin: 0;padding: 0;width: 100%;border: 0;height: auto;line-height: 100%;outline: none;font-size:28px;text-decoration: none;'}
 										  |inserer_attribut{id,headerImage})]
@@ -166,7 +166,7 @@
 													<div
 														style="color: #505050;font-family: Arial;font-size: 14px;line-height: 150%;text-align: left;">
 														<h2 class="#EDIT{titre} h2" style="color: #202020;display: block;font-family: Arial;font-size: 26px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">
-															[(#LOGO_ARTICLE|image_reduire{100,200}
+															[(#LOGO_ARTICLE_NORMAL|image_reduire{100,200}
 															  |inserer_attribut{alt,''}
 															  |inserer_attribut{border,'0'}
 															  |inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width: 100%;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;'}
@@ -221,7 +221,7 @@
 												<td valign="top" width="190" id="logo_site" style="border-collapse: collapse;">
 													<div
 														style="color: #707070;font-family: Arial;font-size: 14px;line-height: 125%;text-align: right;">
-														[(#LOGO_NEWSLETTER|oui)
+														[(#LOGO_NEWSLETTER_NORMAL|oui)
 															[(#LOGO_SITE_SPIP|image_reduire{190,95}|image_aplatir{jpg,#ffffff,75}
 															  |inserer_attribut{alt,''}
 															  |inserer_attribut{border,'0'}

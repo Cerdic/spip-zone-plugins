@@ -15,7 +15,7 @@
 	<!-- Open Graph Protocol -->
 	[<meta property="og:title" content="(#TITRE|attribut_html)" />]
 	<meta property="og:type" content="article" />
-	[<meta property="og:image" content="(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+	[<meta property="og:image" content="(#LOGO_NEWSLETTER_NORMAL|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
 	[<meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)" />]
 	[<meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)" />]
 	[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
@@ -73,7 +73,7 @@
 				</h1>
 				<div
 					style="margin:0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;color:#000000;">
-					[(#LOGO_NEWSLETTER|image_reduire{100,200}
+					[(#LOGO_NEWSLETTER_NORMAL|image_reduire{100,200}
 					|inserer_attribut{alt,''}
 					|inserer_attribut{border,'0'}
 					|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:
@@ -101,7 +101,7 @@
 				<h2 style="margin:1em 0 3px 0;">
 					<a style="font-family:Verdana, Arial, Helvetica, sans-serif;font-size:16px;"
 					   href="#URL_ARTICLE" class="#EDIT{titre}">
-						[(#LOGO_ARTICLE|image_reduire{100,200}
+						[(#LOGO_ARTICLE_NORMAL|image_reduire{100,200}
 						|inserer_attribut{alt,''}
 						|inserer_attribut{border,'0'}
 						|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:
@@ -134,7 +134,7 @@
 				<h2 style="margin:1em 0 3px 0;">
 					<a style="font-family:Verdana, Arial, Helvetica, sans-serif;font-size:16px;"
 					   href="#URL_BREVE" class="#EDIT{titre}">
-						[(#LOGO_BREVE|image_reduire{100,200}
+						[(#LOGO_BREVE_NORMAL|image_reduire{100,200}
 						|inserer_attribut{alt,''}
 						|inserer_attribut{border,'0'}
 						|inserer_attribut{style,'margin: 0;margin-left: 1em;margin-bottom: 1em;float:right;padding: 0;max-width:

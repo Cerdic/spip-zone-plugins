@@ -38,12 +38,23 @@ function action_fixer_newsletter_dist($id_newsletter = null){
 						if ($url = newsletter_fixer_image($src,$id_newsletter))
 							$images[$src] = url_absolue($url);
 					}
+					$img = $matche[0];
 					// et remplacer les simples quotes des balises img par doubles quotes au passage
 					// car certains outils d'envoi en ligne signalent les simples quote comme une erreur dans leur editeur
-					if (strpos($matche[0],"'")!==false){
-						$img = preg_replace(',=\'([^\'"]*)\',Uims','="\\1"',$matche[0]);
-						if ($img!==$matche[0]){
-							$row[$champ] = str_replace($matche[0],$img,$row[$champ]);
+					if (strpos($img,"'")!==false){
+						$img_clean = preg_replace(',=\'([^\'"]*)\'([\s/>]),Uims','="\\1"\\2',$img);
+						if ($img_clean!==$img){
+							$row[$champ] = str_replace($img,$img_clean,$row[$champ]);
+							$img = $img_clean;
+						}
+					}
+					// supprimer aussi les attributs onmousexxx des logos de survol
+					if (strpos($img,"onmouse")!==false){
+						$img_clean = preg_replace(',\s+onmouse(out|over)=\'([^\']*)\',Uims','\\3',$img);
+						$img_clean = preg_replace(',\s+onmouse(out|over)="([^"]*)",Uims','\\3',$img_clean);
+						if ($img_clean!==$img){
+							$row[$champ] = str_replace($img,$img_clean,$row[$champ]);
+							$img = $img_clean;
 						}
 					}
 				}
