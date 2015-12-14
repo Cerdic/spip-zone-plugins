@@ -12,6 +12,26 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable()
+ *
+ * @param array $plugins
+ * @return array
+ */
+function selections_editoriales_jqueryui_forcer($plugins){
+    if(test_espace_prive()){ // On envoie que si on est dans l'espace prive
+	$plugins[] = "jquery.ui.core";
+	$plugins[] = "jquery.ui.widget";
+	$plugins[] = "jquery.ui.mouse";
+	$plugins[] = "jquery.ui.sortable";
+	$plugins[] = "jquery.ui.droppable";
+	$plugins[] = "jquery.ui.draggable";
+    }
+	return $plugins;
+}
+
+
+
+/**
  * Pas de logo de survol pour les contenus sélectionés
  *
  * @pipeline formulaire_charger

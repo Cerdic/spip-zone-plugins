@@ -3,7 +3,7 @@
 	[(#ENV{editer_selection}|=={oui}|oui)
 		<h3 class="titrem"><a href="[(#ENV{id_selection}|generer_url_entite{selection})]">#INFO_TITRE{selection,#ENV{id_selection}}</a></h3>
 	]
-	<div class="liste-items">
+	<div class="liste-items" id="sortable_elements">
 		<BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}{par num titre,titre}>
 		<div class="item" id="selection#ID_SELECTION-contenu#ID_SELECTIONS_CONTENU">
 			[<a class="ajax" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#SELF|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{non,#ID_SELECTIONS_CONTENU}})]">(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,spip_documents_left})</a>]
@@ -46,3 +46,23 @@
 	]
 
 #BOITE_FERMER
+<script>
+$(function(){
+    $("#sortable_elements").sortable({
+        items:"div.item",
+        cursor:"move"
+    });
+    $("#sortable_elements").disableSelection();
+    $("#sortable_elements").bind("sortupdate", function(event, ui){
+        var ordre = $(this).sortable('toArray').toString();
+        console.log(ordre);
+        var request = $.ajax({
+            type: "POST",
+            url: "?action=trier_selections_contenus&id_selection=#ENV{id_selection}&sort="+ordre
+        });
+        request.done(function() {
+            $('#wysiwyg').ajaxReload();
+        });        
+    });
+});
+</script>
