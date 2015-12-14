@@ -1,0 +1,12 @@
+<h1><:selection:titre_selections:></h1>
+
+<INCLURE{fond=prive/objets/liste/selections,env,ajax,titre=<:selection:titre_selections_autonomes:>,sinon=<:selection:info_aucun_selection:>} />
+
+[(#AUTORISER{creer,selection})
+	[(#URL_ECRIRE{selection_edit}|parametre_url{new,oui}|icone_verticale{<:selection:icone_creer_selection:>,selection,new,right})]
+]
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/selections_objets,env,ajax,titre=<:selection:titre_selections_objets:>,sinon=<:selection:info_aucun_selection:>} />
+

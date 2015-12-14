@@ -1,0 +1,17 @@
+[(#REM)
+
+  Squelette Présentation resumée d'un contenu sélectionné dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_contenu(SELECTIONS_CONTENUS){id_selections_contenu}>
+<article class="entry contenu hentry">
+	<strong class="entry-title"><a href="#URL" rel="bookmark">[(#LOGO_SELECTIONS_CONTENU|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]<span class="#EDIT{titre}">#TITRE</span></a></strong>
+	[(#ENV{coupe}|oui)
+	[<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe}, #ENV{suite, "&nbsp;(...)"}})</div>]
+	]
+	[(#ENV{coupe}|non)
+	<div class="#EDIT{descriptif} descriptif entry-content">#DESCRIPTIF</div>
+	]
+</article>
+</BOUCLE_contenu>
