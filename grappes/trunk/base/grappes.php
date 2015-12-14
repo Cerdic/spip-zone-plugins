@@ -54,6 +54,7 @@ function grappes_declarer_tables_objets_sql($tables){
 		'field' => array(
 			"id_grappe" => "bigint(21) NOT NULL",
 			"id_admin" => "bigint(21) NOT NULL DEFAULT '0'",
+                        "identifiant" => "varchar(255) default '' not null",
 			"titre" => "varchar(255) NOT NULL DEFAULT ''",
 			"descriptif" => "text NOT NULL DEFAULT ''",
 			"options" => "text NOT NULL DEFAULT ''",
@@ -72,8 +73,8 @@ function grappes_declarer_tables_objets_sql($tables){
 		'url_voir' => 'grappe',
 		'url_edit' => 'grappe_edit',
 		'editable' => 'oui',
-		'champs_editables' => array('titre','descriptif','liaisons','acces','type'),
-		'champs_versionnes' => array('titre','descriptif','liaisons','acces','type','id_admin','jointure_auteurs','jointure_articles','jointure_rubriques'),
+		'champs_editables' => array('identifiant','titre','descriptif','liaisons','acces','type'),
+		'champs_versionnes' => array('titre','descriptif'),
 		'rechercher_champs' => array(
 			'titre' => 8,
 			'descriptif' => 5

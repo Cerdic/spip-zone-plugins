@@ -6,8 +6,14 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <input type='hidden' name='id_grappe' value='#ENV{id_grappe}' />
-	  <ul class='editer-groupe'>
+		<input type='hidden' name='id_grappe' value='#ENV{id_grappe}' />
+		<ul class='editer-groupe'>
+            <li class='editer_identifiant obligatoire[ (#ENV**{erreurs}|table_valeur{identifiant}|oui)erreur] editer_type_input'>
+				<label for='identifiant'>[(#ENV{id_grappe}|intval|?{<:grappes:info_changer_identifiant_grappe:>,<:grappes:info_identifiant_grappe:>})]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{identifiant})</span>
+				]<input type='text' class='text' name='identifiant' id='identifiant' value='[(#ENV**{identifiant,#VAL{grappes:identifiant_nouvelle_grappe}|_T|filtrer_entites})]'
+				[(#ENV{identifiant,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+	    </li>
 	    <li class='editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
 				<label for='titre'>[(#ENV{id_grappe}|intval|?{<:grappes:info_changer_nom_grappe:>,<:grappes:info_nom_grappe:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>

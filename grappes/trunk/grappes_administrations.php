@@ -31,7 +31,8 @@ function grappes_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.2.2']  = array(array('sql_alter', 'TABLE spip_grappes_liens CHANGE COLUMN rang rang bigint(21) NOT NULL DEFAULT 0'));
 	$maj['0.2.3']  = array(array('sql_updateq',"spip_grappes_liens",array('objet'=>'site'),"objet='syndic'"));
 	$maj['0.2.4']  = array(array('sql_alter',"TABLE spip_grappes ADD date datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"));
-
+    $maj['0.2.5']  = array(array('maj_tables', 'spip_grappes'));
+        
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -43,7 +44,7 @@ function grappes_upgrade($nom_meta_base_version,$version_cible){
  * - spip_grappes
  * - spip_grappes_liens
  * 
- * On supprime les révisions de grappes si besoin
+ * On supprime les revisions de grappes si besoin
  * 
  * Supprime la meta d'installation
  * 

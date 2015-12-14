@@ -39,7 +39,7 @@ function grappes_edit_config($row)
 
 function formulaires_editer_grappe_verifier_dist($id_grappe='new',$retour='', $config_fonc='grappes_edit_config', $row=array(), $hidden=''){
 	// le id 0 est voulu, on ne souhaite pas controler le contenu des champs qui postent un array !
-	return formulaires_editer_objet_verifier('grappe',0,array('titre'));
+	return formulaires_editer_objet_verifier('grappe',0,array('identifiant'));
 }
 
 // http://doc.spip.org/@inc_editer_groupe_mot_dist

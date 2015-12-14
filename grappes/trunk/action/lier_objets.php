@@ -36,15 +36,33 @@ function action_lier_objets_dist(){
 
 
 function lier_objets($source,$id_source,$cible,$id_cible){
-	// si la source n'est pas une grappe un inverse le sens de la liaison pour matcher l'autorisation grappe_associer
-	if ($source != 'grappe')
-		objet_associer(array($cible=>$id_cible),array($source=>$id_source));
-	else
-		objet_associer(array($source=>$id_source),array($cible=>$id_cible));
+        //if ($liens = sql_allfetsel('objet, id_objet', 'spip_grappes_liens', 'id_grappe=' . intval($id_source)." AND objet = '$cible'")) 
+        //    $rang=count($liens)+1;
+        //else
+        //    $rang =1;
+
+	// si la source n'est pas une grappe on inverse le sens de la liaison pour matcher l'autorisation grappe_associer
+	if ($source != 'grappe'){
+                $rang = definir_rang($id_cible,$source);
+		objet_associer(array($cible=>$id_cible), array($source=>$id_source), array('rang'=>$rang) );
+	}else{
+                $rang = definir_rang($id_source,$cible);
+		objet_associer(array($source=>$id_source), array($cible=>$id_cible), array('rang'=>$rang) );      
+	}
 }
 
 function delier_objets($source,$id_source,$cible,$id_cible){
 	objet_dissocier(array($source=>$id_source),array($cible=>$id_cible));
 }
+
+function definir_rang($id_source, $cible){
+        if ($liens = sql_allfetsel('objet, id_objet', 'spip_grappes_liens', 'id_grappe=' . intval($id_source)." AND objet = '$cible'")) 
+            $rang=count($liens)+1;
+        else
+            $rang =1;
+            
+        return $rang;
+}
+
 
 ?>

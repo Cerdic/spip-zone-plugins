@@ -2,12 +2,13 @@
 <B_liste>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies auteurs">
-<table class='spip liste'>
+<table class='spip liste' id="sort-auteurs">
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong></caption>]
 	<tbody>
-	<BOUCLE_liste(AUTEURS){id_auteur IN #GET{selection}}{pagination 10}{recherche ?}{statut?}{tout}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<BOUCLE_liste(AUTEURS spip_grappes_liens){par spip_grappes_liens.rang}{id_auteur IN #GET{selection}}{pagination 10}{recherche ?}{statut ?}{tout}>
+		<tr id="#ID_AUTEUR" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+                        <td><BOUCLE_affRang(spip_grappes_liens){objet=auteur}{id_objet=#ID_AUTEUR}{id_grappe}>#RANG</BOUCLE_affRang></td>
 			<td class='nom'>#NOM[ <small>((#LOGIN))</small>]</td>
 			<td class='id'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><:grappes:voir:></a></td>
 			[(#ENV{editable})
@@ -21,3 +22,22 @@
 </B_liste>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap"><strong class="caption"><:info_aucun_auteur:></strong></div>
 <//B_liste>
+<script>
+$(function(){
+    $("#sort-auteurs").sortable({
+        items:"tr",
+        cursor:"move"
+    });
+    $("#sort-auteurs").disableSelection();
+    $("#sort-auteurs").bind("sortupdate", function(event, ui){
+        var ordre = $(this).sortable('toArray').toString();
+        var request = $.ajax({
+            type: "POST",
+            url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=auteur&sort="+ordre
+        });
+        request.done(function() {
+            $('.formulaire_lier_objets').ajaxReload();
+        });        
+    });
+});
+</script>

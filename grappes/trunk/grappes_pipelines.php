@@ -31,6 +31,26 @@ function grappes_inserer_javascript($flux){
 	return $flux;
 }
 
+
+/**
+ * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable()
+ *
+ * @param array $plugins
+ * @return array
+ */
+function grappes_jqueryui_forcer($plugins){
+    if(test_espace_prive()){ // On envoie que si on est dans l'espace prive
+		$plugins[] = "jquery.ui.core";
+		$plugins[] = "jquery.ui.widget";
+		$plugins[] = "jquery.ui.mouse";
+		$plugins[] = "jquery.ui.sortable";
+		$plugins[] = "jquery.ui.droppable";
+		$plugins[] = "jquery.ui.draggable";
+    }
+	return $plugins;
+}
+
+
 /**
  * Insertion dans le pipeline afficher_contenu_objet (SPIP)
  * 
