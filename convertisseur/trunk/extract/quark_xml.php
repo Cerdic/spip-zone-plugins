@@ -1,9 +1,11 @@
 <?php
 
+include_spip("inc/filtres");
+
 // Sait-on extraire ce format ?
 $GLOBALS['extracteur']['quark_xml'] = 'extracteur_quark_xml';
 
-function extracteur_quark_xml($fichier, &$charset) {
+function extracteur_quark_xml($fichier) {
 	if (lire_fichier($fichier, $texte)) {		
 		return convertir_extraction_quark_xml($texte);
 	}
@@ -54,7 +56,6 @@ function convertir_quark_xml($c) {
 	$mise_en_page = extraire_attribut($mise_en_page, "parentAssetName");
 	$item["mise_en_page"] = $mise_en_page ;
 	
-	
 	// type d'article
 	if(preg_match("/ENCADRÉ-Titre/i", $u)){
 		$item["type"] = "Encadré" ;
@@ -67,7 +68,7 @@ function convertir_quark_xml($c) {
 		$item["dossier"] = str_replace(".qxp", "", $item["mise_en_page"]) ;
 	}
 
-	// L'article et son illustration son dans des <spread>
+	// L'article et son illustration sont dans des <spread>
 	$sequences = extraire_balises($u, "SPREAD") ;
 	foreach($sequences as $s){
 		// est-on dans une illustration ?
@@ -121,7 +122,13 @@ function convertir_quark_xml($c) {
 				$texte = nettoyer_xml_quark($paragraphe);
 				
 				$item["styles"][$type] = 1 ;
-				
+
+				// inserer des traitements perso, dans mes_fonctions
+				// NDL, coupures, etc avec styles hors spip de base.
+				// if(function_exists(convertion_paragraphes_quark_xml_perso()))
+				// ne garder que ici que des titres, chapo, texte, etc, generique.
+
+				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
 
 				// Surtitre
 				if(preg_match("/-Surtitre$/", $type)){
@@ -134,7 +141,6 @@ function convertir_quark_xml($c) {
 					$item["titre"] .= $texte ;
 					continue ;
 				}
-
 
 				// Titre // auteur NDL
 				if(preg_match("/NDL-Œuvre$/i", $type)){
