@@ -323,10 +323,10 @@ function orthotypo_exposants_fr($texte){
 		$eaigu2 = unicode2charset('&#201;').'|&#201;|&Eacute;';
 		$accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
 		$typo = array(
-			// Mlle(s), Mme(s) et erreurs Melle(s)
+			// Mlle(s), Mme(s)
 			// Mme(s) et Mgr
 			'/\bM(gr|mes?)\b/u' => 'M'._TYPO_sup,
-			'/\bMe?(lles?)\b/u' => 'M'._TYPO_sup,
+			'/\bM(lles?)\b/u' => 'M'._TYPO_sup,
 			// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 			'/\b([DP])(r)(?=[\s\.-])/u' => _TYPO_sup2,
 
