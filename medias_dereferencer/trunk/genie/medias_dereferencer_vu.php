@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('medias_dereferencer_fonctions');
 
-function genie_medias_dereferencer_dist($t) {
+function genie_medias_dereferencer_vu_dist($t) {
     include_spip('inc/session');
     $message_log = array();
     $message_log[] = "\n-----";
@@ -26,7 +26,7 @@ function genie_medias_dereferencer_dist($t) {
         $message_log[] = "L'action a été lancé par SPIP en tâche de fond.";
     }
 
-    medias_maj_documents_lies();
+    medias_maj_documents_non_lies();
 
     // on met l'heure de fin de la procédure dans le message de log
     $message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
