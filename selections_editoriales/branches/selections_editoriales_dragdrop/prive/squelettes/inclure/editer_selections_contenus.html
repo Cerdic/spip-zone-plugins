@@ -50,7 +50,8 @@
 $(function(){
     $("#sortable_elements").sortable({
         items:"div.item",
-        cursor:"move"
+        cursor:"move",
+		axis:'y'
     });
     $("#sortable_elements").disableSelection();
     $("#sortable_elements").bind("sortupdate", function(event, ui){
@@ -58,7 +59,7 @@ $(function(){
         console.log(ordre);
         var request = $.ajax({
             type: "POST",
-            url: "?action=trier_selections_contenus&id_selection=#ENV{id_selection}&sort="+ordre
+            url: "?action=trier_selections_contenus&id_selection=#ENV{id_selection}&sort="+ordre+'&editer_contenu=non'
         });
         request.done(function() {
             $('#wysiwyg').ajaxReload();
