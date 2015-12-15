@@ -8,9 +8,9 @@ Mettre les fichiers XML dans le repertoire /exports_quark/%COLLECTION%/%NUMERO% 
 
 Lancer la commande spip-cli : spip convert
 
-Les ficheirs convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
+Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
 
-La commande spip convert -g https://github.com/xxx/xxx.git permet de placer les fichiers convertis dans un repertoire /collections versionné par github.
+La commande spip convert -g https://github.com/xxx/xxx.git permet de placer les fichiers convertis dans un repertoire xx/xx/collections versionné par github.
 
 
 ***/
