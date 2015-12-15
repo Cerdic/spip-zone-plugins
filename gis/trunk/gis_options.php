@@ -146,10 +146,6 @@ $gis_layers = array (
 		'nom' => 'Esri WorldGrayCanvas',
 		'layer' => 'L.tileLayer.provider("Esri.WorldGrayCanvas")'
 	),
-	'acetate' => array(
-		'nom' => 'Acetate',
-		'layer' => 'L.tileLayer.provider("Acetate.all")'
-	),
 	'cartodb_positron' => array(
 		'nom' => 'CartoDB Positron',
 		'layer' => 'L.tileLayer.provider("CartoDB.Positron")'
