@@ -1,15 +1,32 @@
+// si on a un fichier variables.less BS2, faire un mapping des variables BS3 dessus
+// on predefinit @bodyBackground pour voir si il va etre surcharge par une couleur
+// dans ce cas c'est un fichier de variables BS2 a convertir, on importe css/variables-bs2tobs3.less
+@bodyBackground:0;
+@bs-variables-version:3;
+@import "css/variables.less";
+.translate_variables() when (iscolor(@bodyBackground)) {
+	@import "css/variables-translatebs2.less";
+	@bs-variables-version:2;
+}
+.translate_variables() when (@bodyBackground=0){
+	@paddingLarge : @padding-large-vertical @padding-large-horizontal;
+	@paddingSmall: @padding-small-vertical @padding-small-horizontal;
+	@paddingMini: @padding-xs-vertical @padding-xs-horizontal;
+
+	@gridColumnWidth: @container-md / @grid-columns - @grid-gutter-width;
+	@gridColumnWidth768: @container-sm / @grid-columns - @grid-gutter-width;
+	@gridColumnWidth1200: @container-lg / @grid-columns - @grid-gutter-width;
+}
+
+.translate_variables();
+
+#logo_site_spip {line-height: @bs-variables-version !important;}
+
+
 // Compatibilite mini BS2/BS3
 .border-radius(@border-radius) {
 	border-radius: @border-radius;
 }
-
-@paddingLarge : @padding-large-vertical @padding-large-horizontal;
-@paddingSmall: @padding-small-vertical @padding-small-horizontal;
-@paddingMini: @padding-xs-vertical @padding-xs-horizontal;
-
-@gridColumnWidth: @container-md / @grid-columns - @grid-gutter-width;
-@gridColumnWidth768: @container-sm / @grid-columns - @grid-gutter-width;
-@gridColumnWidth1200: @container-lg / @grid-columns - @grid-gutter-width;
 
 // Sprite icons path
 // -------------------------
