@@ -63,8 +63,9 @@ class SpipImport extends Command {
 				
 				$output->writeln("\n<info>" . sizeof($fichiers_xml) . " fichiers à importer dans $source</info>");
 
-				foreach($fichiers_xml as $f){								
-					$output->writeln("$f");
+				foreach($fichiers_xml as $f){
+					$fichier = 	preg_replace("/$source.*collections\//","",$f);							
+					$output->writeln("$fichier");
 				}	
 
 			}

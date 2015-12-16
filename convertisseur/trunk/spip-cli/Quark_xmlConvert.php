@@ -70,18 +70,19 @@ class Quark_xmlConvert extends Command {
 			// Si c'est bon on continue
 			else{
 				$output->writeln("<info>C'est parti pour la convertion des fichiers Quark XML dans /$dest !</info>");
-				
-				$ls_sources = inc_ls_to_array_dist($source ."/*/");
-				
-				foreach($ls_sources as $s)
-					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
-				
+
+
 				// trouve t'on un repertoire trunk/collections dans $dest ?
 				if($ls_depot = inc_ls_to_array_dist($dest ."/trunk/collections")){
 					$dest = $ls_depot[0]['dirname'] . "/" .  $ls_depot[0]['basename'] ;
 					$output->writeln("<info>GIT : dest = $dest</info>");
 				}
 				
+				$ls_sources = inc_ls_to_array_dist($source ."/*/");
+				
+				foreach($ls_sources as $s)
+					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
+								
 				include_spip("inc/utils");
 				
 				// chopper des fichiers xml mais pas xxx.metatada.xml
