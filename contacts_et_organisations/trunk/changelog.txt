@@ -58,3 +58,5 @@
 2.8.0 (2013-08-03)
     - Option pour supprimer les contacts/organisations si un auteur passe à la poubelle, et réciproquement.
 
+2.12.6 (2015-12-16)
+    - Ajout de squelettes de pagination alphabétique pour les contacts et les organisations.
