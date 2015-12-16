@@ -8,4 +8,6 @@
 <description>Commiter des fichiers de contenu sur Github avec spip-cli</description>
 <lien></lien>
 <prefix>github_sync</prefix>
+<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+<categorie>edition</categorie>
 </plugin>
