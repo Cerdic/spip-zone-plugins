@@ -4,8 +4,8 @@
 	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
-	logo=""
-	documentation=""
+	logo="prive/themes/spip/images/sms-64.png"
+	documentation="http://contrib.spip.net/SMS"
 >
 	<nom>SMS</nom>
 
