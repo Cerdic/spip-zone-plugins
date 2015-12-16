@@ -19,13 +19,13 @@
    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Place}>
 	 
     <tr>
-		<td>#VALEUR{EquipeNom}</td>
-		<td>#VALEUR{PtsMatch}</td>		
-		<td>#VALEUR{Joue}</td>
-		<td>#VALEUR{PtsPour}</td>
-		<td>#VALEUR{PtsContre}</td>
-		<td>#VALEUR{PtsDiff}</td>
-		<td>#VALEUR{Place}</td>
+		<td>[(#VALEUR{EquipeNom})] </td>
+		<td>[(#VALEUR{PtsMatch}|abs)] </td>		
+		<td>[(#VALEUR{Joue}|abs)] </td>
+		<td>[(#VALEUR{PtsPour}|abs)] </td>
+		<td>[(#VALEUR{PtsContre}|abs)] </td>
+		<td>[(#VALEUR{PtsDiff}|abs)] </td>
+		<td>[(#VALEUR{Place}|abs)] </td>
     </tr>	
     </BOUCLE_donnees2>
 	
