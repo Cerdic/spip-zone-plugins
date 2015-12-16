@@ -76,9 +76,8 @@ class Quark_xmlConvert extends Command {
 				foreach($ls_sources as $s)
 					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
 				
-				// Repertoire /collections github alternatif pour dest ?
-				// trouver un depot git dans $dest
-				if($ls_depot = inc_ls_to_array_dist($dest ."/*.git/*/collections")){
+				// trouve t'on un repertoire trunk/collections dans $dest ?
+				if($ls_depot = inc_ls_to_array_dist($dest ."/trunk/collections")){
 					$dest = $ls_depot[0]['dirname'] . "/" .  $ls_depot[0]['basename'] ;
 					$output->writeln("<info>GIT : dest = $dest</info>");
 				}
