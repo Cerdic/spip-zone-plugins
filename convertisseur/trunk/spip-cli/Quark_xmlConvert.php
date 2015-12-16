@@ -10,10 +10,8 @@ Lancer la commande spip-cli : spip convert
 
 Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
 
-La commande spip convert -g https://github.com/xxx/xxx.git permet de placer les fichiers convertis dans un repertoire xx/xx/collections versionné par github.
+Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest. 
 
-
-***/
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -42,13 +40,6 @@ class Quark_xmlConvert extends Command {
 				InputOption::VALUE_OPTIONAL,
 				'Répertoire de destination',
 				'conversion_spip'
-			)
-			->addOption(
-				'depot',
-				'g',
-				InputOption::VALUE_OPTIONAL,
-				'Dépot GIT ou synchroniser les conversions',
-				''
 			)
 		;
 	}
@@ -80,34 +71,18 @@ class Quark_xmlConvert extends Command {
 			else{
 				$output->writeln("<info>C'est parti pour la convertion des fichiers Quark XML dans /$dest !</info>");
 				
-				chdir($dest) ;
-				
-				// depot git ?
-				if($depot = $input->getOption('depot')){ // dépot git ?
-					
-					$d = basename($depot);
-					
-					exec('svn info ' . $d , $r);
-										
-					if($r[0] == "Path: $d"){
-						$c = inc_ls_to_array_dist($d . "*/*/collections") ;
-						$collections = $c[0]['dirname'] . "/" . $c[0]['basename'] ;
-						$output->writeln("<info>Dépot Git OK : $dest/$collections</info>");
-						$dest = "$dest/$collections" ;
-					}else{
-						$output->writeln("<error>Checkout du dépot $depot</error>");
-						passthru("svn co $depot");
-						$output->writeln("<info>Relancez la commande.</info>");
-						exit ;
-					}
-				}
-				
-				chdir("../");
 				$ls_sources = inc_ls_to_array_dist($source ."/*/");
 				
 				foreach($ls_sources as $s)
 					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
-								
+				
+				// Repertoire /collections github alternatif pour dest ?
+				// trouver un depot git dans $dest
+				if($ls_depot = inc_ls_to_array_dist($dest ."/*.git/*/collections")){
+					$dest = $ls_depot[0]['dirname'] . "/" .  $ls_depot[0]['basename'] ;
+					$output->writeln("<info>GIT : dest = $dest</info>");
+				}
+				
 				include_spip("inc/utils");
 				
 				// chopper des fichiers xml mais pas xxx.metatada.xml
@@ -156,7 +131,6 @@ class Quark_xmlConvert extends Command {
 				
 			
 			}
-
 		}
 		else{
 			$output->writeln('<error>Vous n’êtes pas dans une installation de SPIP. Impossible de convertir le texte.</error>');
