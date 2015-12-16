@@ -1,0 +1,11 @@
+<plugin>
+<nom>Github Sync</nom>
+<auteur>BoOz</auteur>
+<icon>images/gtsync.png</icon>
+<licence>(c) 20[0-9]{2} GPL</licence>
+<version>0.1</version>
+<etat>test</etat>
+<description>Commiter des fichiers de contenu sur Github avec spip-cli</description>
+<lien></lien>
+<prefix>github_sync</prefix>
+</plugin>
