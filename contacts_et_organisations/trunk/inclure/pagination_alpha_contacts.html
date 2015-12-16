@@ -1,0 +1,19 @@
+[(#REM)
+
+	Pagination alphabétique des contacts.
+
+	Paramètres :
+	- id_boucle : identifiant de la boucle qui liste les contacts, par défaut 'liste_contacts'
+
+]
+<B_lettres>
+<div class="pagination alpha">
+	<BOUCLE_lettres(CONTACTS){fusion LOWER(SUBSTR(nom,1,1))}{'<span class="sep"> | </span>'}>
+	#SET{lettre,#NOM|mb_substr{0,1}|strtolower}
+	<BOUCLE_premier_element(CONTACTS){par nom}{nom like #GET{lettre}%}{0,1}>
+	[(#SELF|parametre_url{lettre,#GET{lettre}}|parametre_url{debut_#ENV{id_boucle,liste_contacts},@#ID_CONTACT}|ancre_url{contact#ID_CONTACT}
+		|lien_ou_expose{#GET{lettre},#VAL{debut_#ENV{id_boucle,liste_contacts}}|_request|=={@#ID_CONTACT}})]
+	</BOUCLE_premier_element>
+	</BOUCLE_lettres>
+</div>
+</B_lettres>
