@@ -22,21 +22,21 @@ function extracteur_preparer_insertion($item){
 	$texte = "" ;
 	
 	if($item['surtitre'])
-		$texte .= "<ins class='surtitre'>" . $item['surtitre'] . "</ins>\n\n" ;
+		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
 
 	if($item['titre'])
-		$texte .= "<ins class='titre'>" . $item['titre'] . "</ins>\n\n" ;
+		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
 	
 	if($item['chapo'])
-		$texte .= "<ins class='chapo'>" . $item['chapo'] . "</ins>\n\n" ;
+		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
 
 	if($item['auteurs'])
-		$texte .= "\n\n@@AUTEUR\n\n" . $item['auteurs'] . "\n\n";
+		$texte .= "\n\n@@AUTEUR\n\n" . trim($item['auteurs']) . "\n\n" ;
 
 	if($item['signature'])
-		$texte .= "\n\n@@SIGNATURE\n\n" . $item['signature'] . "\n\n";
+		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['signature']) . "\n\n" ;
 
-	$texte .=  "\n\n" . $item['texte']	;
+	$texte .=  "\n\n" . trim($item['texte']) ;
 	
 	return $texte ;
 
@@ -126,21 +126,6 @@ function convertir_quark_xml($c) {
 				// inserer des traitements perso, dans mes_fonctions
 				// NDL, coupures, etc avec styles hors spip de base.
 				// if(function_exists(convertion_paragraphes_quark_xml_perso()))
-				// ne garder que ici que des titres, chapo, texte, etc, generique.
-
-				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
-
-				// Surtitre
-				if(preg_match("/-Surtitre$/", $type)){
-					$item["surtitre"] .= $texte ;
-					continue ;
-				}
-		
-				// Titre 
-				if(preg_match("/titre$/i", $type)){
-					$item["titre"] .= $texte ;
-					continue ;
-				}
 
 				// Titre // auteur NDL
 				if(preg_match("/NDL-Œuvre$/i", $type)){
@@ -153,9 +138,42 @@ function convertir_quark_xml($c) {
 					continue ;
 				}
 
+				// TIMES-Note auteur
+				if(preg_match("/-Note auteur$/", $type)){
+					$texte = preg_replace("/^\s*\*\s*/","",$texte);
+					$item["signature"] .= $texte ;
+					continue ;
+				}
+
 				// Note biblio NDL
 				if(preg_match("/NDL-Biblio$/i", $type)){
 					$item["texte"] .= "[<>" . $texte . "]\n\n" ;
+					continue ;
+				}
+
+				// Par notre envoyé spécial...
+				if(preg_match("/^SIGNATURE-/", $type)){
+					$item["auteurs_tete"] .= trim($texte) ;
+					continue ;
+				}
+
+				// ne garder que ici que des titres, chapo, texte, etc, generique.
+
+				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
+
+				// Surtitre
+				if(preg_match("/surtitre/i", $type)){
+					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte))
+						$texte = " " . $texte ;
+					$item["surtitre"] .= $texte ;
+					continue ;
+				}
+		
+				// Titre 
+				if(preg_match("/titre/i", $type)){
+					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte))
+						$texte = " " . $texte ;
+					$item["titre"] .= $texte ;
 					continue ;
 				}
 				
@@ -166,39 +184,22 @@ function convertir_quark_xml($c) {
 				}
 		
 				// Auteurs
-				if(preg_match("/SIGNATURE$/i", $type)){
+				if(preg_match("/signature/i", $type)){
 					$item["auteurs"] .= $texte ;
-					continue ;
-				}
-				
-				if(preg_match("/^SIGNATURE PIED$/", $type)){
-					$item["auteurs"] .= $texte ;
-					continue ;
-				}
-
-
-				// Par notre envoyé spécial...
-				if(preg_match("/^SIGNATURE-/", $type)){
-					$item["auteurs_tete"] .= trim($texte) ;
-					continue ;
-				}
-												
-				// TIMES-Note auteur
-				if(preg_match("/-Note auteur$/", $type)){
-					$texte = preg_replace("/^\s*\*\s*/","",$texte);
-					$item["signature"] .= $texte ;
 					continue ;
 				}
 								
 				// Inters
-				if(preg_match("/-Accroche$/", $type)){
+				if(preg_match("/accroche/i", $type)){
 					$item["texte"] .= "\n\n" . '{{' . "$texte" . '}}' ."\n\n" ;
 					continue ;
 				}
 				
-				// chopper des balises text ital puis iterer
-				//$ital = extraire_attribut($paragraphe, "ITALIC");
-				//$item["texte"] .= $ital_ouvrant . trim($texte) . $ital_fermant . "\n\n" ;
+				// Notes de bas de page
+				if(preg_match("/notes/i", $type)){
+					$item["notes"] .= $texte ."\n" ;
+					continue ;
+				}
 				
 				$item["texte"] .= "$texte\n\n" ;
 				
@@ -209,7 +210,6 @@ function convertir_quark_xml($c) {
 			
 			$item["texte"] = preg_replace("/^([«\s~]*\w)\{/","{\\1", $item["texte"]);
 		
-		
 		}
 	}
 	
@@ -218,7 +218,13 @@ function convertir_quark_xml($c) {
 		$auteurs = preg_replace("/^\s*(P|p)ar\s*/","", $item["auteurs_tete"]);
 		$auteurs = preg_replace("/(\s|\*|~)+$/","",$auteurs);
 		$item["auteurs"] = $auteurs ;
-	}	
+	}
+	
+	// ajouter les notes
+	
+	if($item["notes"])
+		$item["texte"] = $item["texte"] . "\n\n\n\n" . "[[<>\n" . $item["notes"] ."]]" ;
+	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
 	
 	$item["textebrut"] = textebrut($u);
