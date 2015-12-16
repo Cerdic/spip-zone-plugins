@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sms:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input type="hidden" name="_meta_casier" value="sms" />
+
+		<ul class="">
+			<li class="fieldset">
+				<h3 class="legend"><:sms:choix_prestataire:></h3>
+				<ul>
+					<li class="editer">
+						<input type="radio" name="prestataire" value="" [(#ENV{prestataire}|=={""}|oui) checked]><:sms:aucun:>
+						<input type="radio" name="prestataire" value="smsfactor" [(#ENV{prestataire}|=={smsfactor}|oui) checked]>SMS Factor
+					</li>
+				</ul>
+			</li>
+
+			<li class="fieldset">
+					<h3 class="legend">SMS Factor </h3>
+					<p class="explication"><:sms:explication_smsfactor:></p>
+					<ul>
+						<li class="editer">
+							<label for="login_smsfactor"><:sms:login:></label>
+							<input type="text" name="login_smsfactor" value="[(#ENV{login_smsfactor})]" placeholder="mon_mail@spip.net">
+						</li>
+						<li class="editer">
+							<label for="login_smsfactor"><:sms:mot_de_passe:></label>
+							<input type="password" name="mdp_smsfactor" value="[(#ENV{mdp_smsfactor})]">
+						</li>
+						<li class="editer">
+							<p class="explication"><:sms:explication_expediteur:></p>
+							<label for="expediteur_smsfactor"><:sms:expediteur:></label>
+							<input type="text" name="expediteur_smsfactor" value="[(#ENV{expediteur_smsfactor})]">
+						</li>
+					</ul>
+			</li>
+
+		<p class="boutons"> <input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</form>
+</div>
