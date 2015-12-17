@@ -19,8 +19,8 @@
     <tr>
         <td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{Ref}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
         <td>#VALEUR{Commune}</td>
-        <td>[(#VAL{<a href="mailto:[(#VALEUR{PdtEmail})]">[(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}mailcrypt)]</td>
-		<td>[(#VAL{<a href="mailto:[(#VALEUR{CorrEmail})]">[(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{PdtEmail})">][(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}|mailcrypt)]</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{CorrEmail})">][(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
     </tr>#PAGINATION	
     </BOUCLE_donnees2>
 	

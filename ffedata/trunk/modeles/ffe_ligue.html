@@ -22,16 +22,16 @@
 <tr><td>Fax : </td><td>#VALEUR{Fax}</td></tr>
 [<tr><td>Adresse email :</td><td>(#VAL{<a href="mailto:[(#VALEUR{EMail})]">[(#VALEUR{EMail})]</a>}mailcrypt)</td></tr>]
 <tr><td>Site Web : </td><td><a href="#VALEUR{URL}">#VALEUR{URL}</a></td></tr>
-[<tr><td>Président :</td><td>(#VAL{<a href="mailto:[(#VALEUR{PdtEMail})]">[(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Correspondant :</td><td>(#VAL{<a href="mailto:[(#VALEUR{CorrEMail})]">[(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Trésorier :</td><td>(#VAL{<a href="mailto:[(#VALEUR{TresEMail})]">[(#VALEUR{TresPrenom})]&nbsp;[(#VALEUR{TresNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable Technique :</td><td>(#VAL{<a href="mailto:[(#VALEUR{TechEMail})]">[(#VALEUR{TechPrenom})]&nbsp;[(#VALEUR{TechNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable des Homologations :</td><td>(#VAL{<a href="mailto:[(#VALEUR{HomoEMail})]">[(#VALEUR{HomoPrenom})]&nbsp;[(#VALEUR{HomoNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable Jeunes :</td><td>(#VAL{<a href="mailto:[(#VALEUR{JneEMail})]">[(#VALEUR{JnePrenom})]&nbsp;[(#VALEUR{JneNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable scolaires :</td><td>(#VAL{<a href="mailto:[(#VALEUR{ScoEMail})]">[(#VALEUR{ScoPrenom})]&nbsp;[(#VALEUR{ScoNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable Formation :</td><td>(#VAL{<a href="mailto:[(#VALEUR{FormEMail})]">[(#VALEUR{FormPrenom})]&nbsp;[(#VALEUR{FormNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable de l'arbitrage :</td><td>(#VAL{<a href="mailto:[(#VALEUR{ArbEMail})]">[(#VALEUR{ArbPrenom})]&nbsp;[(#VALEUR{ArbNom})]</a>}mailcrypt)</td></tr>]
-[<tr><td>Responsable des Féminines :</td><td>(#VAL{<a href="mailto:[(#VALEUR{FemEMail})]">[(#VALEUR{FemPrenom})]&nbsp;[(#VALEUR{FemNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Président :</td><td>[(#VAL{[<a href="mailto:(#VALEUR{PdtEmail})">][(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}|mailcrypt)]</td></tr>]
+[<tr><td>[(#VAL{[<a href="mailto:(#VALEUR{CorrEmail})">][(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td></tr>]
+[<tr><td>Trésorier :</td><td>(#VAL{[<a href="mailto:(#VALEUR{TresEMail})">][(#VALEUR{TresPrenom})]&nbsp;[(#VALEUR{TresNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable Technique :</td><td>(#VAL{[<a href="mailto:(#VALEUR{TechEMail})">][(#VALEUR{TechPrenom})]&nbsp;[(#VALEUR{TechNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable des Homologations :</td><td>(#VAL{[<a href="mailto:[(#VALEUR{HomoEMail})">][(#VALEUR{HomoPrenom})]&nbsp;[(#VALEUR{HomoNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable Jeunes :</td><td>(#VAL{[<a href="mailto:(#VALEUR{JneEMail})">][(#VALEUR{JnePrenom})]&nbsp;[(#VALEUR{JneNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable scolaires :</td><td>(#VAL{[<a href="mailto:(#VALEUR{ScoEMail})">][(#VALEUR{ScoPrenom})]&nbsp;[(#VALEUR{ScoNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable Formation :</td><td>(#VAL{[<a href="mailto:(#VALEUR{FormEMail})">][(#VALEUR{FormPrenom})]&nbsp;[(#VALEUR{FormNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable de l'arbitrage :</td><td>(#VAL{[<a href="mailto:(#VALEUR{ArbEMail})">][(#VALEUR{ArbPrenom})]&nbsp;[(#VALEUR{ArbNom})]</a>}mailcrypt)</td></tr>]
+[<tr><td>Responsable des Féminines :</td><td>(#VAL{[<a href="mailto:(#VALEUR{FemEMail})">][(#VALEUR{FemPrenom})]&nbsp;[(#VALEUR{FemNom})]</a>}mailcrypt)</td></tr>]
 </BOUCLE_ligue>
 </BOUCLE_lecture_wsdl2>
 </table>

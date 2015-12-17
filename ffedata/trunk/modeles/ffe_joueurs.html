@@ -22,7 +22,7 @@
 <B_donnees2>
     <BOUCLE_donnees2(DATA){source table,#VALEUR}{!par Elo}{pagination #ENV{pagination,40}}>
     <tr>
-        <td>[(#VAL{<a href="mailto:[(#VALEUR{EMail})]">[(#VALEUR{Prenom})]&nbsp;[(#VALEUR{Nom})]</a>}mailcrypt)]</td>
+        <td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{Prenom})]&nbsp;[(#VALEUR{Nom})]</a>}|mailcrypt)]</td>
         <td>#VALEUR{Cat}</td>
         <td>#VALEUR{Elo}</td>
         <td>#VALEUR{Rapide}</td>

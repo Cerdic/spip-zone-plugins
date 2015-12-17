@@ -47,7 +47,7 @@
         <td>#VALEUR{CP}</td>
         <td>#VALEUR{Tel}</td>
         <td>#VALEUR{Fax}</td>
-        <td>[(#VAL{<a href="mailto:[(#VALEUR{EMail})]">[(#VALEUR{EMail})]&nbsp;</a>}mailcrypt)]</td>
+        <td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{EMail})]&nbsp;</a>}mailcrypt)]</td>
         <td><a href="#VALEUR{URL}">#VALEUR{URL}</a></td>
         <td>#VALEUR{Ouverture}</td>
         <td>#VALEUR{NbrJourOuvre}</td>
@@ -58,8 +58,8 @@
         <td>#VALEUR{DivisionAdulte}</td>
         <td>#VALEUR{DivisionJeune}</td>
         <td>#VALEUR{DivisionFeminine}</td>
-        <td>[(#VAL{<a href="mailto:[(#VALEUR{PdtEmail})]">[(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}mailcrypt)]</td>
-		<td>[(#VAL{<a href="mailto:[(#VALEUR{CorrEmail})]">[(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{PdtEmail})">][(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}|mailcrypt)]</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{CorrEmail})">][(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
 
     </tr>#PAGINATION	
     </BOUCLE_donnees2>
