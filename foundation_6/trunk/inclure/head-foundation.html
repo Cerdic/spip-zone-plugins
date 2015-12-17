@@ -12,14 +12,7 @@
 [(#REM) Inclusion des fichier Javascript si la config le permet ]
 [(#CONFIG{foundation_6/javascript}|oui)
 [<script type="text/javascript">
-  $(function () {
-    $.ajax({
-      type: "GET",
-      url: "(#CHEMIN{lib/foundation-6/js/vendor/what-input.min.js}|texte_script)",
-      dataType: "script",
-      cache: true
-    });
-  });
+  $.getScript("(#CHEMIN{lib/foundation-6/js/vendor/what-input.min.js})")
 </script>]
 [<script src="(#CHEMIN{lib/foundation-6/js/foundation.js})"></script>]
 <script type="text/javascript">
