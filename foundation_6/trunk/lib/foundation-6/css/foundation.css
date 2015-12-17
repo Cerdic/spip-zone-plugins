@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /**
  * Foundation for Sites by ZURB
- * Version 6.0.5
+ * Version 6.0.6
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
@@ -1030,22 +1030,22 @@ button {
     padding-left: 0;
     padding-right: 0; }
   .row.small-uncollapse > .column, .row.small-uncollapse > .columns {
-    padding-left: 30px;
-    padding-right: 30px; }
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem; }
   @media screen and (min-width: 40em) {
     .row.medium-collapse > .column, .row.medium-collapse > .columns {
       padding-left: 0;
       padding-right: 0; }
     .row.medium-uncollapse > .column, .row.medium-uncollapse > .columns {
-      padding-left: 30px;
-      padding-right: 30px; } }
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; } }
   @media screen and (min-width: 64em) {
     .row.large-collapse > .column, .row.large-collapse > .columns {
       padding-left: 0;
       padding-right: 0; }
     .row.large-uncollapse > .column, .row.large-uncollapse > .columns {
-      padding-left: 30px;
-      padding-right: 30px; } }
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; } }
   .row.expanded {
     max-width: none; }
 
@@ -1851,8 +1851,7 @@ ol {
 
 ul ul, ol ul, ul ol, ol ol {
   margin-left: 1.25rem;
-  margin-bottom: 0;
-  list-style-type: inherit; }
+  margin-bottom: 0; }
 
 dl {
   margin-bottom: 1rem; }
@@ -2012,19 +2011,19 @@ kbd {
   line-height: 1;
   cursor: pointer;
   -webkit-appearance: none;
-  transition: all 0.25s ease-out;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
   vertical-align: middle;
   border: 1px solid transparent;
   border-radius: 3px;
   padding: 0.85em 1em;
-  margin: 0 1rem 1rem 0;
+  margin: 0 0 1rem 0;
   font-size: 0.9rem;
-  background: #2ba6cb;
+  background-color: #2ba6cb;
   color: #fff; }
   [data-whatinput='mouse'] .button {
     outline: 0; }
   .button:hover, .button:focus {
-    background: #258dad;
+    background-color: #258dad;
     color: #fff; }
   .button.tiny {
     font-size: 0.6rem; }
@@ -2038,40 +2037,40 @@ kbd {
     margin-left: 0;
     margin-right: 0; }
   .button.primary {
-    background: #2ba6cb;
+    background-color: #2ba6cb;
     color: #fff; }
     .button.primary:hover, .button.primary:focus {
-      background: #2285a2;
+      background-color: #2285a2;
       color: #fff; }
   .button.secondary {
-    background: #e9e9e9;
+    background-color: #e9e9e9;
     color: #000; }
     .button.secondary:hover, .button.secondary:focus {
-      background: #bababa;
+      background-color: #bababa;
       color: #000; }
   .button.success {
-    background: #5da423;
+    background-color: #5da423;
     color: #fff; }
     .button.success:hover, .button.success:focus {
-      background: #4a831c;
+      background-color: #4a831c;
       color: #fff; }
   .button.alert {
-    background: #c60f13;
+    background-color: #c60f13;
     color: #fff; }
     .button.alert:hover, .button.alert:focus {
-      background: #9e0c0f;
+      background-color: #9e0c0f;
       color: #fff; }
   .button.warning {
-    background: #ffae00;
+    background-color: #ffae00;
     color: #fff; }
     .button.warning:hover, .button.warning:focus {
-      background: #cc8b00;
+      background-color: #cc8b00;
       color: #fff; }
   .button.hollow {
     border: 1px solid #2ba6cb;
     color: #2ba6cb; }
     .button.hollow, .button.hollow:hover, .button.hollow:focus {
-      background: transparent; }
+      background-color: transparent; }
     .button.hollow:hover, .button.hollow:focus {
       border-color: #165366;
       color: #165366; }
@@ -2148,7 +2147,7 @@ textarea {
   [type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus,
   textarea:focus {
     border: 1px solid #8a8a8a;
-    background: #fefefe;
+    background-color: #fefefe;
     outline: none;
     box-shadow: 0 0 5px #cacaca;
     transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
@@ -2274,7 +2273,6 @@ select {
   height: 2.4375rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
-  border-radius: 3px;
   margin: 0 0 1rem;
   font-size: 1rem;
   font-family: inherit;
@@ -2284,7 +2282,7 @@ select {
   border-radius: 3px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: rgb(51, 51, 51)"></polygon></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: rgb%2851, 51, 51%29"></polygon></svg>');
   background-size: 9px 6px;
   background-position: right 0.5rem center;
   background-repeat: no-repeat; }
@@ -2561,38 +2559,39 @@ select {
   .button-group.expanded .button:nth-last-child(6):first-child ~ .button {
     width: 16.66667%; }
   .button-group.primary .button {
-    background: #2ba6cb;
+    background-color: #2ba6cb;
     color: #fff; }
     .button-group.primary .button:hover, .button-group.primary .button:focus {
-      background: #2285a2;
+      background-color: #2285a2;
       color: #fff; }
   .button-group.secondary .button {
-    background: #e9e9e9;
+    background-color: #e9e9e9;
     color: #000; }
     .button-group.secondary .button:hover, .button-group.secondary .button:focus {
-      background: #bababa;
+      background-color: #bababa;
       color: #000; }
   .button-group.success .button {
-    background: #5da423;
+    background-color: #5da423;
     color: #fff; }
     .button-group.success .button:hover, .button-group.success .button:focus {
-      background: #4a831c;
+      background-color: #4a831c;
       color: #fff; }
   .button-group.alert .button {
-    background: #c60f13;
+    background-color: #c60f13;
     color: #fff; }
     .button-group.alert .button:hover, .button-group.alert .button:focus {
-      background: #9e0c0f;
+      background-color: #9e0c0f;
       color: #fff; }
   .button-group.warning .button {
-    background: #ffae00;
+    background-color: #ffae00;
     color: #fff; }
     .button-group.warning .button:hover, .button-group.warning .button:focus {
-      background: #cc8b00;
+      background-color: #cc8b00;
       color: #fff; }
   .button-group.stacked .button, .button-group.stacked-for-small .button {
-    width: 100%;
-    border-right: 0; }
+    width: 100%; }
+    .button-group.stacked .button:not(:last-child), .button-group.stacked-for-small .button:not(:last-child) {
+      border-right: 1px solid; }
   @media screen and (min-width: 40em) {
     .button-group.stacked-for-small .button {
       width: auto; }
@@ -2812,7 +2811,6 @@ select {
 .flex-video {
   position: relative;
   height: 0;
-  padding-top: 1.5625rem;
   padding-bottom: 75%;
   margin-bottom: 1rem;
   overflow: hidden; }
@@ -3394,7 +3392,8 @@ body.is-reveal-open {
     height: 100vh;
     min-height: 100vh;
     max-width: none;
-    margin-left: 0; }
+    margin-left: 0;
+    border: none; }
 
 .switch {
   margin-bottom: 1rem;
@@ -3744,19 +3743,43 @@ table.hover tr:nth-of-type(even):hover {
     clear: both; }
   .top-bar,
   .top-bar ul {
-    background-color: #eee; }
+    background-color: #e6e6e6; }
   .top-bar a {
-    color: #fff; }
+    color: #2ba6cb; }
   .top-bar input {
     width: 200px;
     margin-right: 1rem; }
   .top-bar input.button {
     width: auto; }
 
-@media screen and (min-width: 40em) {
-  .top-bar-left {
-    float: left; }
+@media screen and (max-width: 39.9375em) {
+  .stacked-for-small .top-bar-right {
+    width: 100%; }
+  .stacked-for-small .top-bar-left {
+    width: 100%; } }
+
+@media screen and (max-width: 63.9375em) {
+  .stacked-for-medium .top-bar-right {
+    width: 100%; }
+  .stacked-for-medium .top-bar-left {
+    width: 100%; } }
+
+@media screen and (max-width: 74.9375em) {
+  .stacked-for-large .top-bar-right {
+    width: 100%; }
+  .stacked-for-large .top-bar-left {
+    width: 100%; } }
+
+@media screen and (max-width: 39.9375em) {
   .top-bar-right {
-    float: right; } }
+    width: 100%; }
+  .top-bar-left {
+    width: 100%; } }
+
+.top-bar-left {
+  float: left; }
+
+.top-bar-right {
+  float: right; }
 
 /*# sourceMappingURL=foundation.css.map */
