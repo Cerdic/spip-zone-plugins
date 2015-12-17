@@ -2,17 +2,24 @@
 /**
  * Fonction d'upgrade/installation du plugin foundation-4-spip
  *
- * @plugin     foundation-4-spip
+ * @plugin	   foundation-4-spip
  * @copyright  2013
- * @author     Phenix
- * @licence    GNU/GPL
+ * @author	   Phenix
+ * @licence	   GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Inclure les fonctions de foundation
+include_spip('inc/foundation');
+
+
 /**
- * Rendre les iframes responsive via un filtre et la classe flex-video de Foundation.
- * @param  string $texte HTML pouvant contenir des iFrames
- * @return string        HTML avec les iFrames modifiée pour être responsive.
+ * Rendre les iframes responsive via un filtre et
+ * la classe flex-video de Foundation.
+ *
+ * @param string $texte HTML dans lequel chercher des iframes
+ * @access public
+ * @return string
  */
 function filtre_iframe_responsive($texte) {
 	include_spip('inc/foundation');
@@ -20,17 +27,16 @@ function filtre_iframe_responsive($texte) {
 	return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
 }
 
-/*
- *   Cette balise va permettre de rendre le squelette compatible avec toutes les versions de Foundation.
- *   La syntaxe est la suivante:
+/**
+ * Cette balise va permettre de rendre le squelette compatible
+ * avec toutes les versions de Foundation.
+ * La syntaxe est la suivante:
  *
- *   #COLONNES{nombre,type}
- *   nombre: le nombre de colonne foundation
- *   (optionnel) type: Dans le cas des version utilisant une syntaxe avec prefix, on lui passe le type (défaut: large)
+ * #COLONNES{nombre,type}
+ * nombre: le nombre de colonne foundation
+ * (optionnel) type: Dans le cas des version utilisant une
+ * syntaxe avec prefix, on lui passe le type (défaut: large)
  */
-
-// On va cherche trouver_syntaxe_foundation dans le inc
-include_spip('inc/foundation');
 function balise_COLONNES_dist($p) {
 	// On récupère les paramètres de la balise.
 	$nombre_colonnes = interprete_argument_balise(1, $p);
@@ -86,7 +92,7 @@ function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $ti
 	$onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
 	$title = $title ? " title='$title'" : "";
 	return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
-		     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
+			 ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 }
 
 
