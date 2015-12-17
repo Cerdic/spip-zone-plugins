@@ -1,5 +1,5 @@
 <?php
-function formulaires_configurer_foundation_saisies() {
+function formulaires_configurer_foundation_6_saisies() {
   // Lire le fichier YAML qui contient la structure du formulaire.
   include_spip('inc/yaml');
   $saisies = array(
@@ -15,9 +15,9 @@ function formulaires_configurer_foundation_saisies() {
   return $saisies;
 }
 
-function formulaires_configurer_foundation_charger() {
+function formulaires_configurer_foundation_6_charger() {
   // Lire la configuration de foundation
-  $config = lire_config('foundation');
+  $config = lire_config('foundation_6');
 
   return $config;
 }
