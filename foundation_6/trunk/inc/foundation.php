@@ -10,8 +10,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function responsive($matches) {
   // Dans le cas de vimeo, il faut ajouter une classe
-  if (strpos($matches[0], 'vimeo')) $vimeo = ' vimeo';
-  else $vimeo = '';
+  if (strpos($matches[0], 'vimeo')) {
+	  $vimeo = ' vimeo';
+  }
+  else {
+	  $vimeo = '';
+  }
 
   // On inclu les filtres, au cas ou
   include_spip('inc/filtres');

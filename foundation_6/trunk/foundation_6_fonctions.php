@@ -37,7 +37,9 @@ function balise_COLONNES_dist($p) {
   $type = interprete_argument_balise(2, $p);
 
   // On met une valeur par défaut à type.
-  if (!$type) $type = "'large'";
+  if (!$type) {
+	  $type = "'large'";
+  }
 
   // On calcule la class
   $p->code = "class_grid_foundation($nombre_colonnes, $type).'columns'";
@@ -81,8 +83,9 @@ function balise_F_BOUTON_ACTION_dist($p){
 	  $args[] = $_a;
 	}
 	// supprimer les args vides
-	while(end($args)=="''" AND count($args)>2)
+	while(end($args)=="''" AND count($args)>2) {
 		array_pop($args);
+	}
 	$args = implode(",",$args);
 
 	$bouton_action = chercher_filtre("f_bouton_action");
@@ -123,8 +126,9 @@ function filtre_etoile_foundation_dist ($nombre) {
 
     $config = lire_config('foundation');
 
-    if (!$config['foundation-icons'])
+    if (!$config['foundation-icons']) {
         return '<span>Les icones foundation ne sont pas activée !</span>';
+    }
 
     $etoile = '<span class="foundation_etoile">';
     for ($i=0;$i<$nombre; $i++) {
