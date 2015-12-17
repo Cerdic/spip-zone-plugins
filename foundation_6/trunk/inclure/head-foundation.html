@@ -15,6 +15,16 @@
 
 
 [(#REM) Inclusion des fichier Javascript ]
-[<script src="(#CHEMIN{lib/foundation-6/js/vendor/what-input.min.js})"></script>]
 [<script src="(#CHEMIN{lib/foundation-6/js/foundation.min.js})"></script>]
+[<script type="text/javascript">
+  $(function () {
+    $.ajax({
+      type: "GET",
+      url: "(#CHEMIN{lib/foundation-6/js/vendor/what-input.min.js}|texte_script)",
+      dataType: "script",
+      cache: true
+    });
+  });
+</script>]
+
 [<script src="(#CHEMIN{lib/foundation-6/js/app.js})"></script>]
