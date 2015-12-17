@@ -9,8 +9,8 @@
 [<link href="(#CHEMIN{lib/foundation-icons/foundation-icons.css}|direction_css)" rel="stylesheet"/>]
 ]
 
-
-[(#REM) Inclusion des fichier Javascript ]
+[(#REM) Inclusion des fichier Javascript si la config le permet ]
+[(#CONFIG{foundation_6/javascript}|oui)
 [<script type="text/javascript">
   $(function () {
     $.ajax({
@@ -21,7 +21,6 @@
     });
   });
 </script>]
-
-
 [<script src="(#CHEMIN{lib/foundation-6/js/foundation.js})"></script>]
 [<script src="(#CHEMIN{lib/foundation-6/js/app.js})"></script>]
+]
