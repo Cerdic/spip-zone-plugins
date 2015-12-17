@@ -21,11 +21,7 @@ function foundation_6_upgrade($nom_meta_base_version, $version_cible) {
     $maj = array();
 
     $config_default = array(
-        // Activer par défaut la version 5 de foundation. Désactiver le reste.
-        'variante' => 5,
         'javascript' => '',
-        'fichier_htc' => '',
-        'foundation-icons' => ''
     );
 
     // Tableau de la configuration par défaut
