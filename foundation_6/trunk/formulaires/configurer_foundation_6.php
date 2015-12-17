@@ -10,6 +10,14 @@ function formulaires_configurer_foundation_6_saisies() {
 				'label' => _T('foundation_6:activer_javascript'),
 				'explication' => _T('foundation_6:activer_javascript_explication')
 			)
+		),
+		array(
+			'saisie' => 'oui_non',
+			'options' => array(
+				'nom' => 'foundation-icons',
+				'label' => _T('foundation_6:icons'),
+				'explication' => _T('foundation:icons_explication')
+			)
 		)
 	);
 	return $saisies;
