@@ -1,14 +1,14 @@
 <paquet
-    prefix="foundation"
+    prefix="foundation_6"
     categorie="outil"
     version="2.3.21"
     etat="stable"
     compatibilite="[3.0.8;3.1.*]"
-    logo="prive/themes/spip/images/foundation-64.png"
+    logo="prive/themes/spip/images/foundation_6-64.png"
     schema="1.0"
     documentation="http://contrib.spip.net/Foundation-4-Spip"
 >
-    <nom>Foundation</nom>
+    <nom>Foundation 6</nom>
     <!-- Plugin qui intégre le framework Foundation à l'interface public de SPIP. -->
 
     <auteur lien='http://p.henix.be'>Phenix</auteur>
@@ -16,12 +16,12 @@
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
     <!-- On active le pipeline pour modifier le header -->
-    <pipeline nom="insert_head" inclure="foundation_pipelines.php" />
-    <pipeline nom="insert_head_css" inclure="foundation_pipelines.php" />
+    <pipeline nom="insert_head" inclure="foundation_6_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="foundation_6_pipelines.php" />
 
     <!-- On ajoute un bouton pour la configuration -->
     <!-- Bouton pour la configuration -->
-    <menu nom="foundation_titre" titre="foundation:foundation_titre" parent="menu_configuration" icone="images/foundation-16.png" action="configurer_foundation" />
+    <menu nom="foundation_titre" titre="foundation:foundation_6_titre" parent="menu_configuration" icone="images/foundation_6-16.png" action="configurer_foundation" />
 
     <!-- Les plugins indispensable -->
     <necessite nom="saisies" compatibilite="[2.0.3;[" />
