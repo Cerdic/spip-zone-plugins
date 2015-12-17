@@ -36,6 +36,10 @@ function filtre_iframe_responsive($texte) {
  * nombre: le nombre de colonne foundation
  * (optionnel) type: Dans le cas des version utilisant une
  * syntaxe avec prefix, on lui passe le type (défaut: large)
+ *
+ * @param mixed $p
+ * @access public
+ * @return mixed
  */
 function balise_COLONNES_dist($p) {
 	// On récupère les paramètres de la balise.
@@ -100,9 +104,9 @@ function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $ti
  * Filtre pour afficher des étoiles à la suite via les
  * icone foundation.
  *
- * @param mixed $nombre
+ * @param int $nombre
  * @access public
- * @return mixed
+ * @return string
  */
 function filtre_etoile_foundation_dist ($nombre) {
 
@@ -139,4 +143,4 @@ if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
 
 		return $p;
 	}
-		}
+}
