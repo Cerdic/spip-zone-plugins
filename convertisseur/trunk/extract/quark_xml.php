@@ -223,7 +223,7 @@ function convertir_quark_xml($c) {
 	// ajouter les notes
 	
 	if($item["notes"])
-		$item["texte"] = $item["texte"] . "\n\n\n\n" . "[[<>\n" . $item["notes"] ."]]" ;
+		$item["texte"] = $item["texte"] . "[[<>\n" . $item["notes"] ."]]" . "\n" ;
 	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
 	
@@ -310,17 +310,19 @@ function nettoyer_xml_quark($xml){
 	//$texte = supprimer_tags($texte);
 		
 	// entites inventées
-	// espace fine
+	// espaces fines ou insécables
 	$texte = str_replace("&amp;flexSpace;", "~", $texte);
+	$texte = str_replace("&amp;sixPerEmSpace;", "~", $texte);
+	$texte = str_replace("&amp;punctSpace;", "~", $texte);
+	$texte = str_replace("&amp;thinsp;", "~", $texte);
+	$texte = str_replace("&amp;nbsp;", "~", $texte);
+	$texte = str_replace("&nbsp;", "~", $texte);
+	
 	// cesures
 	$texte = str_replace("&amp;discHyphen;", "", $texte);
 	// autre
-	$texte = str_replace("&amp;punctSpace;", "~", $texte);
-	$texte = str_replace("&amp;thinsp;", "~", $texte);
 	$texte = str_replace("&amp;ndash;", "—", $texte);
 	$texte = str_replace("&amp;softReturn;", " ", $texte);
-	$texte = str_replace("&amp;nbsp;", "~", $texte);
-	$texte = str_replace("&nbsp;", "~", $texte);
 	
 
 	// espaces en gras.
