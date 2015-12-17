@@ -19,30 +19,3 @@ function responsive($matches) {
   // On revoie la bonne structure html d'iframe.
   return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');;
 }
-
-
-/**
- * Récupération des fichier css de foundation
- */
-function foundation_get_css($flux = '') {
-
-  // On lit la configuration du plugin pour savoir quel version de Foundation charger.
-  $config = lire_config('foundation');
-
-  // Si on est en mode app, on revoie le bon squelette
-  if (_FOUNDATION_SASS) {
-      $flux .= recuperer_fond('inclure/css/head-foundation-app');
-      return $flux;
-  }
-
-  // On renvoie le flux head avec le squelette foundation correspondant.
-  if ($config['variante'] == '3')
-    return $flux.recuperer_fond('inclure/css/head-foundation-3');
-  elseif ($config['variante'] == '4')
-    return $flux.recuperer_fond('inclure/css/head-foundation-4');
-  elseif ($config['variante'] == '5')
-    return $flux.recuperer_fond('inclure/css/head-foundation-5');
-  // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
-  else
-    return $flux;
-}

@@ -31,6 +31,14 @@ function foundation_6_insert_head ($flux) {
 *   Pipeline Insert_head_css
 */
 function foundation_6_insert_head_css ($flux) {
-  include_spip('inc/foundation');
-  return foundation_get_css($flux);
+
+    // Si on est en mode app, on revoie le bon squelette
+  if (_FOUNDATION_SASS) {
+      $flux .= recuperer_fond('inclure/css/head-foundation-app');
+  }
+  else {
+    $flux .= recuperer_fond('inclure/css/head-foundation');
+  }
+
+  return $flux;
 }
