@@ -25,6 +25,5 @@
 
     <!-- Les plugins indispensable -->
     <necessite nom="saisies" compatibilite="[2.0.3;[" />
-    <necessite nom="yaml" compatibilite="[1.5.2;[" />
 
 </paquet>

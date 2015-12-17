@@ -2,9 +2,17 @@
 function formulaires_configurer_foundation_saisies() {
   // Lire le fichier YAML qui contient la structure du formulaire.
   include_spip('inc/yaml');
-  $formulaire = yaml_decode_file(find_in_path('formulaires/configurer_foundation.yaml'));
-
-  return $formulaire;
+  $saisies = array(
+    array(
+      'saisie' => 'oui_non',
+      'options' => array(
+        'nom' => 'javascript',
+        'label' => _T('foundation_6:activer_javascript'),
+        'explication' => _T('foundation_6:activer_javascript_explication')
+      )
+    )
+  );
+  return $saisies;
 }
 
 function formulaires_configurer_foundation_charger() {
