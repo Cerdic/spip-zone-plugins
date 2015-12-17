@@ -1,19 +1,20 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function mathjax_spip_insert_head($flux){
-	$flux .= mathjax_spip_flux();
+function mathjax_insert_head($flux){
+	$flux .= mathjax_flux();
 	return $flux;
 }
 
-function mathjax_spip_header_prive($flux){
-	$flux .= mathjax_spip_flux();
+function mathjax_header_prive($flux){
+	$flux .= mathjax_flux();
 	return $flux;
 }
 	
-function mathjax_spip_flux(){
+function mathjax_flux(){
+	include_spip("inc/config");
 	$param = "MathJax.Hub.Config({";
 	$param .= "tex2jax: {";
 	$param .= "	inlineMath: [ ['$','$'] ],";
