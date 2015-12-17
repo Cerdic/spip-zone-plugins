@@ -15,7 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 *   Pipeline Insert_head
 */
 function foundation_6_insert_head ($flux) {
-  include_spip('inc/foundation');
 
   // Si on est en mode app, on revoie le bon squelette
   if (_FOUNDATION_SASS) {
