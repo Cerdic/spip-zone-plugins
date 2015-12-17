@@ -8,29 +8,25 @@
  zajax = l'id var_zajax
  titre = le titre du lien
  class = la class du lien
- ajax = si on passe ajax à non, on peux utiliser content
- content = contenu de la reveal
+ content = contenu de la reveal. Utile si on ne charge rien via ajax
 ]
 
-[(#CONFIG{foundation/javascript}|non)
+[(#CONFIG{foundation_6/javascript}|non)
   <:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
 ]
 
 [(#ENV{href}|oui)
-  [(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
+[(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
 ]
 
-[<a [href="(#ENV{href})"]
-   [class="(#ENV{class})"]
-   [data-reveal-id="reveal-(#ENV{data-id})"]
-   [(#ENV{ajax, oui}|oui)data-reveal-ajax="#GET{href_zajax}"]>
+[<a[ href="(#ENV{href})"]
+	 [data-toggle="reveal-(#ENV{data-id})"]
+	 [(#ENV{href}|oui)data-reveal-ajax="#GET{href_zajax}"]
+	 class="[(#ENV{href}|oui)reveal-ajax][ (#ENV{class})]">
   (#ENV*{titre})
 </a>]
 
-<div id="reveal-#ENV{data-id}" class="reveal-modal" data-reveal>
-  [(#ENV{ajax}|non)
-    [(#ENV**{content})
-      <a class="close-reveal-modal">&#215;</a>
-    ]
-  ]
+<div id="reveal-#ENV{data-id}" class="large reveal" data-reveal>
+	[(#ENV**{content})
+	<INCLURE{fond=inclure/reveal-close, content=oui} />]
 </div>
