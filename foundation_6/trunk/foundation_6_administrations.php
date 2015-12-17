@@ -11,16 +11,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /*
-*   Configuration de base:
-*   - Foundation desactivé
-*   - Pas de Javascript chargé.
-*/
+ *   Configuration de base:
+ *   - Foundation desactivé
+ *   - Pas de Javascript chargé.
+ */
 function foundation_6_upgrade($nom_meta_base_version, $version_cible) {
 
     // Création du tableau des mises à jour.
     $maj = array();
 
-     $config_default = array(
+    $config_default = array(
         // Activer par défaut la version 5 de foundation. Désactiver le reste.
         'variante' => 5,
         'javascript' => '',
@@ -30,8 +30,8 @@ function foundation_6_upgrade($nom_meta_base_version, $version_cible) {
 
     // Tableau de la configuration par défaut
     $maj['create'] = array(
-            array('ecrire_meta', 'foundation_6', serialize($config_default))
-        );
+        array('ecrire_meta', 'foundation_6', serialize($config_default))
+    );
 
     // Maj du plugin.
     include_spip('base/upgrade');
@@ -39,8 +39,8 @@ function foundation_6_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 /*
-*   Désintaller foundation.
-*/
+ *   Désintaller foundation.
+ */
 function foundation_6_vider_tables($nom_meta_base_version) {
     // Supprimer les méta, ou oublie pas celle de la base.
     effacer_meta('foundation_6_base_version');
