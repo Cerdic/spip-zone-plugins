@@ -60,7 +60,7 @@ function balise_COLONNES_dist($p) {
 /**
  * Generer un bouton d'action qui accepte les class de foundation
  */
-function balise_F_BOUTON_ACTION_dist($p){
+function balise_BOUTON_ACTION($p){
 
 	$args = array();
 	for ($k=1;$k<=6;$k++){
@@ -74,7 +74,7 @@ function balise_F_BOUTON_ACTION_dist($p){
 	}
 	$args = implode(",",$args);
 
-	$bouton_action = chercher_filtre("f_bouton_action");
+	$bouton_action = chercher_filtre("bouton_action");
 	$p->code = "$bouton_action($args)";
 	$p->interdire_scripts = false;
 	return $p;
@@ -85,7 +85,7 @@ function balise_F_BOUTON_ACTION_dist($p){
  * sur la balise <button> au lieu de pour assurer la
  * compatibilité avec les class button de foundation
  */
-function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+function filtre_bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
 	if ($confirm) {
 		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
 		if ($callback)
@@ -98,7 +98,6 @@ function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $ti
 	return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
 			 ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 }
-
 
 /**
  * Filtre pour afficher des étoiles à la suite via les
