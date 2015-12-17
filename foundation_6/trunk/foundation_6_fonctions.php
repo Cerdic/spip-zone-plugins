@@ -30,7 +30,7 @@ function filtre_iframe_responsive($texte) {
 */
 
 // On va cherche trouver_syntaxe_foundation dans le inc
-include_spip('inc/trouver_syntaxe_foundation');
+include_spip('inc/foundation');
 function balise_COLONNES_dist($p) {
   // On récupère les paramètres de la balise.
   $nombre_colonnes = interprete_argument_balise(1, $p);
@@ -39,8 +39,8 @@ function balise_COLONNES_dist($p) {
   // On met une valeur par défaut à type.
   if (!$type) $type = "'large'";
 
-  // On calcule la syntaxe
-  $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).'columns'";
+  // On calcule la class
+  $p->code = "class_grid_foundation($nombre_colonnes, $type).'columns'";
   $p->interdire_scripts = false;
   return $p;
 }
