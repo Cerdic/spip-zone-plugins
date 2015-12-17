@@ -11,7 +11,7 @@ $(".reveal-ajax").on('click', function (e) {
 
 	// bloquer l'événement click
 	e.preventDefault();
-
+	e.stopPropagation();
 	// Récupérer le lien ciblé par la requête ajax
 	var href = $(this).data("reveal-ajax");
 	// On a besoin de savoir sur quel modal il faut agir
