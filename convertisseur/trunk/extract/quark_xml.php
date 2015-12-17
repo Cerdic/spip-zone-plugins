@@ -36,7 +36,7 @@ function extracteur_preparer_insertion($item){
 	if($item['signature'])
 		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['signature']) . "\n\n" ;
 
-	$texte .=  "\n\n" . trim($item['texte']) ;
+	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
 	
 	return $texte ;
 
@@ -163,7 +163,7 @@ function convertir_quark_xml($c) {
 
 				// Surtitre
 				if(preg_match("/surtitre/i", $type)){
-					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte))
+					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["surtitre"]))
 						$texte = " " . $texte ;
 					$item["surtitre"] .= $texte ;
 					continue ;
@@ -171,7 +171,7 @@ function convertir_quark_xml($c) {
 		
 				// Titre 
 				if(preg_match("/titre/i", $type)){
-					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte))
+					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
 						$texte = " " . $texte ;
 					$item["titre"] .= $texte ;
 					continue ;
