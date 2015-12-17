@@ -8,7 +8,10 @@
  zajax = l'id var_zajax
  titre = le titre du lien
  class = la class du lien
+ class_reveal = la class pour la reveal (http://foundation.zurb.com/sites/docs/reveal.html#sizing)
  content = contenu de la reveal. Utile si on ne charge rien via ajax
+ animation-in = Animation d'entrée (http://foundation.zurb.com/sites/docs/motion-ui.html)
+ animation-out = Animation de sortie (http://foundation.zurb.com/sites/docs/motion-ui.html)
 ]
 
 [(#CONFIG{foundation_6/javascript}|non)
@@ -26,7 +29,11 @@
   (#ENV*{titre})
 </a>]
 
-<div id="reveal-#ENV{data-id}" class="large reveal" data-reveal>
+<div[ id="reveal-(#ENV{data-id})"]
+	  class="reveal[ (#ENV{class_reveal})]"
+	  [(#ENV{animation-in}|oui)data-animation-in="#ENV{animation-in}"]
+	  [(#ENV{animation-out}|oui)data-animation-out="#ENV{animation-out}"]
+	  data-reveal>
 	[(#ENV**{content})
 	<INCLURE{fond=inclure/reveal-close, content=oui} />]
 </div>
