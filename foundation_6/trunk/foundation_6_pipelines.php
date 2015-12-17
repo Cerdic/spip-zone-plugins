@@ -16,7 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 */
 function foundation_6_insert_head ($flux) {
   include_spip('inc/foundation');
-  return foundation_get_js($flux);
+
+  // Si on est en mode app, on revoie le bon squelette
+  if (_FOUNDATION_SASS) {
+    $flux .= recuperer_fond('inclure/head-foundation-app');
+  }
+  else {
+    $flux .= recuperer_fond('inclure/head-foundation');
+  }
+
+  return $flux;
 }
 
 /*
