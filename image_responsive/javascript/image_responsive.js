@@ -209,19 +209,23 @@ function charger_url_image_responsive_svg(this_img) {
 
 		var cl = this_img.attr("class");
 
-		if (cl.indexOf("image_responsive_svg_v")) {
+		if (this_img.hasClass("image_responsive_svg_v")) {
 			var vertical = true;
 			var dim= parseInt(this_img.parent().height());
 
+			//console.log("Dimension v: "+dim);
 
 		} else {
 			var vertical = false;
 			var dim= parseInt(this_img.parent().width());
+			//console.log("Dimension h: "+dim);
 		}
 		
 		
 		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
 		if (forcer_zoom) dim = dim * forcer_zoom;
+		
+		
 		
 		var tailles = this_img.attr("data-tailles");
 		
@@ -232,11 +236,11 @@ function charger_url_image_responsive_svg(this_img) {
 			
 			$.each(t, function (index, value) {
 				value = parseInt(value);
-				//console.log(value + " " + dim + " " + changer_w);
+				// console.log(value + " " + dim + " " + changer_w);
 				if (changer_w == 1) w_max = value;
 				if (value >= dim) changer_w = 0;
 			});
-			 //console.log ("Wmax: "+w_max);
+			// console.log ("Wmax: "+w_max);
 			if (w_max > 0) dim = w_max;
 		}
 			// console.log ("W: "+dim);

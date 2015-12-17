@@ -452,7 +452,7 @@ function image_responsive_svg($img, $taille=-1, $lazy=0, $vertical=0) {
 
 		}
 
-		$ret = "<image class='$classe' width='100%' height='100%' xlink:href='$src' data-src='$source' data-l='$l' data-h='$h'$data_tailles$data_autorisees></image>";
+		$ret = "<image class='$classe' width='100%' height='100%' preserveAspectRatio='xMinYMin meet' xlink:href='$src' data-src='$source' data-l='$l' data-h='$h'$data_tailles$data_autorisees></image>";
 
 	}
 
