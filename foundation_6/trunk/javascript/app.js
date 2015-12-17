@@ -24,5 +24,9 @@ $(".reveal-ajax").on('click', function (e) {
 	}
 
 	// On charge la page dans la reveal
-	$("#"+modal).load(href);
+
+	$("#"+modal).load(href, function () {
+		$(this).foundation("open");
+	});
+
 });
