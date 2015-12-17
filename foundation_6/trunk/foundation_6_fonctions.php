@@ -134,3 +134,23 @@ function filtre_etoile_foundation_dist ($nombre) {
 
     return $etoile;
 }
+
+
+if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
+	/**
+	 * Balise LIRE_CONSTANT pour SPIP
+	 *
+	 * @param mixed $p
+	 * @access public
+	 * @return mixed
+	 */
+	function balise_LIRE_CONSTANTE_dist($p) {
+        $constante = interprete_argument_balise(1,$p);
+
+        $p->code = "constant($constante)";
+
+        $p->interdire_scripts = false;
+
+        return $p;
+    }
+}
