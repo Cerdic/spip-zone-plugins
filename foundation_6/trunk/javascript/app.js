@@ -13,7 +13,7 @@ $(".reveal-ajax").on('click', function (e) {
 	e.preventDefault();
 
 	// Récupérer le lien ciblé par la requête ajax
-	var href = this.href;
+	var href = $(this).data("reveal-ajax");
 	// On a besoin de savoir sur quel modal il faut agir
 	var modal = $(this).data("toggle");
 
