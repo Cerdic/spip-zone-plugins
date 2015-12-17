@@ -111,7 +111,7 @@ function entravaux_styliser($flux){
 			AND !in_array($flux['args']['fond'],$pages_ok)
 			AND !in_array($flux['args']['fond'],$skels_ok)
 			AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
-			AND !((_request('var_mode') === 'preview') AND (_request('var_previewtoken') != '') AND autoriser_previsualiser_dist('','','','',''))
+			AND !((_request('var_mode') === 'preview') AND (_request('var_previewtoken') != '') AND autoriser('previsualiser'))
 			// et on laisse passer modeles et formulaires,
 			// qui ne peuvent etre inclus ou appeles que legitimement
 		  AND strpos($flux['args']['fond'],'/')===false){
