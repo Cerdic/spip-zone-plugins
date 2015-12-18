@@ -209,7 +209,7 @@ function charger_url_image_responsive_svg(this_img) {
 
 		var cl = this_img.attr("class");
 
-		if (this_img.hasClass("image_responsive_svg_v")) {
+		if (cl.indexOf("image_responsive_svg_v") > 0) {
 			var vertical = true;
 			var dim= parseInt(this_img.parent().height());
 
