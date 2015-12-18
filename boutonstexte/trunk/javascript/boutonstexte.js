@@ -33,7 +33,7 @@ if (typeof jQuery == 'function')
 			e.stopPropagation();
 			return false;
 		})
-		.attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
+		.attr({'title':boutonstexte.txtSizeUp});
 
 		$("img.textsizedown,a.textsizedown,button.textsizedown")
 		.click(function(e) {
@@ -41,7 +41,7 @@ if (typeof jQuery == 'function')
 			e.stopPropagation();
 			return false;
 		})
-		.attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
+		.attr({'title':boutonstexte.txtSizeDown});
 
 		$("img.textonly,a.textonly,button.textonly")
 		.click(function(e) {
@@ -49,7 +49,7 @@ if (typeof jQuery == 'function')
 			e.stopPropagation();
 			return false;
 		})
-		.attr({'alt':boutonstexte.txtOnly, 'title':boutonstexte.txtOnly});
+		.attr({'title':boutonstexte.txtOnly});
 
 	});
 })(jQuery);
@@ -70,7 +70,7 @@ boutonsTexte.prototype.texteOnly = function(elt)
 	jQuery("body").toggleClass('onlytext_wrapper');
 	if (this['backTextOnly']) {
 		texte.removeClass("onlytext");
-		jQuery(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
+		jQuery(elt).attr({ 'title': that.txtOnly }).
 			parent().insertBefore(jQuery("#marktextonly")).after(texte);
 		jQuery("#marktextonly").remove();
 		jQuery('body').children().removeClass('onlytext_hide');
@@ -80,7 +80,7 @@ boutonsTexte.prototype.texteOnly = function(elt)
 	texte.addClass("onlytext");
 	jQuery(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
 	$('body>*').addClass('onlytext_hide');
-	jQuery(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
+	jQuery(elt).attr({ 'title': that.txtBackSpip }).
 		parent().prependTo("body").after(texte);
 	this.backTextOnly = true;
 }
