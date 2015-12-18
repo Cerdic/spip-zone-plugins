@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 	// A
-	'aide' => 'Utilisez votre mobile pour scanner ce code barre et y télécharger le document',
+	'aide' => 'Utilisez votre mobile pour scanner ce code barre et y télécharger le document ou le lien',
 	
 	// B
 	'bouton_effacer' => 'Effacer',
