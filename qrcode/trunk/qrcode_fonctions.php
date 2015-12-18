@@ -41,7 +41,7 @@ function qrcode_getpng($texte, $taille, $ecc) {
 	return $filename ;
 }
 
-function filtre_qrcode($texte,$taille=false,$ecc=false) {
+function filtre_qrcode($texte,$taille=false,$ecc=false,$link=false) {
 	$taille || ( $taille = lire_config('qrcode/taille') ) || ( $taille = 1 ) ;
 	$ecc || ( $ecc = lire_config('qrcode/ecc') ) || ( $ecc = 'L' ) ;
 	if ($class = lire_config('qrcode/css')) { $class = ' class="'.$class.'"' ; }
@@ -49,6 +49,10 @@ function filtre_qrcode($texte,$taille=false,$ecc=false) {
 	$filename = qrcode_getpng($texte, $taille, $ecc) ;
 	$width = ' width="'.largeur($filename).'"';
 	$height = ' height="'.hauteur($filename).'"';
-	return "<img$class$style src=\"$filename\"$width$height alt=\"qrcode:$texte\" title=\""._T('qrcode:aide')."\"/>" ;
+	if ($link) {
+		return "<a href=\"$texte\" title=\""._T('qrcode:aide')."\"><img$class$style src=\"$filename\"$width$height alt=\"qrcode:$texte\"/></a>" ;
+	} else {
+		return "<img$class$style src=\"$filename\"$width$height alt=\"qrcode:$texte\" title=\""._T('qrcode:aide')."\"/>" ;
+	}
 }
 ?>
