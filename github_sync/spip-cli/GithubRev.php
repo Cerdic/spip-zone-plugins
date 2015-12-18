@@ -32,7 +32,7 @@ class GithubRev extends Command {
 				'action',
 				'a',
 				InputOption::VALUE_OPTIONAL,
-				'Actions possibles : commit, diff, ...',
+				'Actions possibles : up, status, commit, diff, ...',
 				''
 			)			
 
@@ -56,13 +56,14 @@ class GithubRev extends Command {
 			chdir($spip_racine);
 			
 			exec('svn info ' . $dest , $r);
-									
+			
+			// vérifions si on a un depot GIT 				
 			if($r[0] == "Path: $dest"){
 				$c = inc_ls_to_array_dist($dest . "/*/collections") ;
 				$collections = $c[0]['dirname'] . "/" . $c[0]['basename'] ;
 				$dest = "$collections" ;
 				$output->writeln("<info>Dépot Git OK : $dest</info>");
-			}else{ // pas de dépot GIT
+			}else{ // pas de dépot GIT, on checkout
 				if($depot){
 					$output->writeln("<error>Checkout du dépot $depot dans $dest</error>");
 					passthru("svn co $depot $dest");
@@ -86,7 +87,21 @@ class GithubRev extends Command {
 					array(
 					"<info>C'est parti pour une vérif de commit.</info>"
 				));
+
+				// ou en est-on dans les commit ?
+				exec('svn up', $results, $err);
+									
+				if ($err) {
+					$output->writeln(array("<error>Erreur SVN.</error>"));
+				} else {
+					$output->writeln(array(
+							'<info>Update</info>',
+							 join("\n", $results)
+					));
+				}
 				
+				$results = array();
+
 				// Quelques vérifs en svn status.
 				exec('svn status .', $results, $err);
 									
