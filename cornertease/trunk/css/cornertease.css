@@ -17,6 +17,7 @@
 #cornertease_conteneur.cornertease_closed{
 	box-shadow: none;
 	background:url(../img/coindepage.png) bottom left no-repeat;
+	padding:0;
 }
 
 #cornertease_conteneur.cornertease_open{
