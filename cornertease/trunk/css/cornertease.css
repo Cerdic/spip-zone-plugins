@@ -5,8 +5,8 @@
 	position:absolute;
 	top:0px;
 	right:0px;
-	width:54px;
-	height:54px;
+	width:64px;
+	height:64px;
 	cursor: pointer;
 	box-shadow: -2px 2px 12px #aaa;
 	z-index:1;
@@ -41,4 +41,5 @@
 	bottom:0px;
 	left:0px;
 }
+.cornertease_more { float: right; }
 .cornertease_clear{clear:both;}
