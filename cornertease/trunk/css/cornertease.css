@@ -7,7 +7,6 @@
 	right:0px;
 	width:64px;
 	height:64px;
-	cursor: pointer;
 	box-shadow: -2px 2px 12px #aaa;
 	z-index:1;
 	overflow:hidden;
@@ -15,6 +14,7 @@
 }
 
 #cornertease_conteneur.cornertease_closed{
+	cursor: pointer;
 	box-shadow: none;
 	background:url(../img/coindepage.png) bottom left no-repeat;
 	padding:0;
@@ -41,6 +41,7 @@
 	position:absolute;
 	bottom:0px;
 	left:0px;
+	cursor: pointer;
 }
 .cornertease_more { float: right; }
 .cornertease_clear{clear:both;}
