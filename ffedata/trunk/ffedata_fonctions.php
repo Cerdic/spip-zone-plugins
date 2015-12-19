@@ -53,6 +53,13 @@ function echecs_array_remove_empty($haystack) {
 	return $haystack;
 }
 
+// appel du fichier css 
+
+function ffedata_insert_head_css($flux){
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/ffedata.css').'" media="all" />'."\n";
+	return $flux;
+}
+
 //pour afficher le tableau des joueurs dans le modèle des équipes PV 
 
 function echec_ligne_tableau($vals, $nb, $njoueurs = '10') {

@@ -1,15 +1,14 @@
 <B_lecture_wsdl2>
 
-<table class="spip">
-    <thead>
+<table class="ffedata">    <thead>
         <tr>
+			<th>Place</th>
 			<th>Nom</th>
 			<th>Pts</th>			
 			<th>J</th>
+			<th>Diff</th>
 			<th>PtsP</th>
 			<th>PtsC</th>
-			<th>Diff</th>
-			<th>Place</th>	
         </tr>
     </thead>
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuGroupe?saison=#ENV{saison}&Ref=#ENV{Ref}}>
@@ -17,15 +16,14 @@
 	<h3> #VALEUR{CompetitionNom} , #VALEUR{DivisionNom} , #VALEUR{GroupeNom}      </h3>
 	</BOUCLE_titreg>	
    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Place}>
-	 
-    <tr style="background-color: [(#COMPTEUR_BOUCLE|alterner{LightSteelBlue,WhiteSmoke})];">
+	 <tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<td>[(#VALEUR{Place}|abs)] </td>
 		<td>[(#VALEUR{EquipeNom})] </td>
 		<td>[(#VALEUR{PtsMatch}|abs)] </td>		
 		<td>[(#VALEUR{Joue}|abs)] </td>
-		<td>[(#VALEUR{PtsPour}|abs)] </td>
-		<td>[(#VALEUR{PtsContre}|abs)] </td>
 		<td>[(#VALEUR{PtsDiff}|abs)] </td>
-		<td>[(#VALEUR{Place}|abs)] </td>
+		<td>[(#VALEUR{PtsPour}|abs)] </td>
+		<td>[(#VALEUR{PtsContre}|abs)] </td>	
     </tr>	
     </BOUCLE_donnees2>
 	
