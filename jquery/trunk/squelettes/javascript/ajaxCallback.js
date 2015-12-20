@@ -265,7 +265,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {
-					if (!c.length || c.indexOf("ajax-form-is-ok")==-1)
+					if (!c.length /*|| c.indexOf("ajax-form-is-ok")==-1 */)
 						return onError.apply(this,[status, xhr , $form]);
 					// commencons par vider le cache des urls, si jamais un js au retour
 					// essaye tout de suite de suivre un lien en cache
