@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_option_destinataire_intro_label' => 'Label of first choice empty (in list format)',
 	'option_option_intro_label' => 'Label for the first empty choice',
 	'option_option_statut_label' => 'Show the status',
+	'option_placeholder_label' => 'Placeholder',
 	'option_pliable_label' => 'Expandable',
 	'option_pliable_label_case' => 'The group of fields can be expanded or shrunk.',
 	'option_plie_label' => 'Already shrunk',
