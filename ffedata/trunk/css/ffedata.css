@@ -13,8 +13,9 @@ table.ffedata thead th{
 	background-color: #39548D;
     color: #FFF;
 	padding:0 4px 0 4px;
+	border: 1px solid #fff;
 }
 table.ffedata tbody tr.odd  {background:#EBEFF5;}
 table.ffedata tbody tr.even {background:#C6D3E8;}
 
-table.ffedata td {font-size: 12px; text-align: center; 	padding:0 4px 0 4px;}
+table.ffedata td {font-size: 12px; text-align: center; 	padding:0 4px 0 4px; border: 1px solid #fff;}
