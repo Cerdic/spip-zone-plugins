@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Upload documents',
 	'legend_editer_prive' => 'Use in editing area (experimental)',
 	'legend_introduction_article' => 'Introductory text for the article',
+	'legend_introduction_rubrique' => 'Section’s introductory text',
 
 	// M
 	'message_image_obligatoire' => 'You need to choose an image',
