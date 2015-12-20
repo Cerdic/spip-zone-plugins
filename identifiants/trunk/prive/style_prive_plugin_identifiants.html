@@ -1,0 +1,25 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+
+/*
+  FORMULAIRE
+  ==========
+*/
+.formulaire_editer_identifiant label {
+  font-weight: bold;
+}
+.formulaire_editer_identifiant label img {
+  vertical-align: middle;
+  margin-#ENV{right}: 0.33em;
+}
+.formulaire_editer_identifiant .editer_identifiant {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.formulaire_editer_identifiant .no_identifiant {
+  opacity: 0.5;
+}

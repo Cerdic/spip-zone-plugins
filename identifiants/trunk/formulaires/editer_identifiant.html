@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	]
+		<div class="editer-groupe">
+			#SET{name,identifiant} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{obli,''}
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="champ_#GET{name}"><:identifiant:champ_identifiant_label:>&nbsp;:</label>
+				[<span class="erreur_message">(#GET{erreurs})</span>]
+				<span[ (#ENV{#GET{name}}|oui)class="affiche"][(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+					[(#ENV{#GET{name}}|sinon{<em class="no_identifiant"><:identifiant:info_aucun_identifiant:></em>})]
+				</span>
+	[(#ENV{editable})
+				[(#REM) Bouton toggle ]
+				<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
+					&#91;<a href="#"
+						onclick="var f=jQuery(this).parents('form').eq(0);f.find('div .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.identifiant').eq(0).focus();return false;">
+						[(#ENV{has_identifiant}|?{<:identifiant:bouton_identifiant_modifier:>,<:identifiant:bouton_identifiant_definir:>})]
+					</a>&#93;
+				</span>
+				[(#REM) Input ]
+				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+					<input type="text" class="input text identifiant" name="#GET{name}" id="champ_#GET{name}" value="#ENV{#GET{name}}" size="40" />
+				</span>
+	]
+			</div>
+		</div>
+	[(#ENV{editable})
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
+			<span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' name='annuler' value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>
