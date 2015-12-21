@@ -5,9 +5,7 @@
 	ip_address,1,
 	click,-1,
 	points,-1
-}})
-]
-<B_liste_shortcut_url>
+}})]<B_liste_shortcut_url>
 <h1><:shortcut_url:titre_shortcut_url_liste:></h1>
 #ANCRE_PAGINATION
 <div class="liste-objets sites syndic">
@@ -25,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_shortcut_url(SHORTCUT_URLS){recherche?}{tri #ENV{par,date_modif},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_shortcut_url(SHORTCUT_URLS){recherche?}{tri #ENV{par,date_modif},#GET{defaut_tri}}{!par num click}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'><a href="[(#URL_ECRIRE{shortcut_url,id_shortcut_url=#ID_SHORTCUT_URL})]">#ID_SHORTCUT_URL</a></td>
 			<td class='principale'><a href="#URL_SHORTCUT_URL">[(#TITRE)]</a></td>
@@ -33,7 +31,7 @@
 			<td class='principale'>#URL</td>
 			<td class='principale'>#IP_ADDRESS</td>
 			<td class='secondaire'>[(#DATE_MODIF|affdate_jourcourt)]</td>
-			<td class='secondaire'><a href="[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ID_SHORTCUT_URL})]">#CLICK</a></td>
+			<td class='secondaire'><a href="[(#URL_ECRIRE{shortcut_url_logs_stats,id_shortcut_url=#ID_SHORTCUT_URL}|parametre_url{page,detail})]">#CLICK</a></td>
 		</tr>
 	</BOUCLE_liste_shortcut_url>
 	</tbody>

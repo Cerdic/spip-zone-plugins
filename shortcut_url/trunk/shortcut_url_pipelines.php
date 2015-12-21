@@ -22,7 +22,7 @@ function autoriser_menugrandeentree($faire, $type, $id, $qui, $opt){
 
 		if(!in_array($type ,array('menuaccueil','menuedition','menupublication','menuadministration','menuconfiguration','menushortcuturl')))
 			return false;
-		if($type != 'menuaccueil' && $qui['statut'] != '0minirezo')
+		if(!in_array($type ,array('menuaccueil','menushortcuturl')) && $qui['statut'] != '0minirezo')
 			return false;
 
 	return true;
@@ -101,7 +101,7 @@ function shortcut_url_ajouter_menus($boutons_admin){
 }
 
 function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt){
-	return $qui['statut']=='0minirezo' && count($qui['restreint']) == 0;
+	return in_array($qui['statut'] ,array('1comite','0minirezo')) && count($qui['restreint']) == 0;
 }
 
 /**

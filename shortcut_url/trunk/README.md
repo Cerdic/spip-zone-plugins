@@ -7,43 +7,45 @@ Attention ce plugin supprime des boutons de navigation dans le backoffice de SPI
 
 Ce plugins permet de stocker le le nombre de click par URL, de consulter la provenance des utilisateurs ...
 
-# Version 1.0.1
-
 ## Plugin SPIP
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
-## Fait
+## Version 1.0.4
 
-## 22 Oct 2015
+- Ajout du bouton pour accéder aux stats les rédacteurs, administrateurs
+- Lien vers le detail des stats sur la page d'accueil corrigé
+- Le tri par compte de click n'est pas fonctionnel car compte alphabétiquement donc 9 > 123 par exemple. (update de base)
+
+## Version 1.0.3 (22/10/2015)
 
 - Ajout d'un define pour choisir le nombre de signe pour le raccourci
 
-## 18 Oct 2015
+## Version 1.0.3 (18/10/2015)
 
 - Ajout des onglets sur la page des stats
 - Ajout d'un bouton statistiques dans le menu principal
 
-## 15 Oct 2015
+## Version 1.0.2 (15/10/2015)
 
 - Oublie de déclarer la table des bots dans base.php pour declarer_tables_interfaces()
 
-## 11 Oct 2015
+## Version 1.0.2 (11/10/2015)
 
 - Ajout d'une table bot pour cibler les robots (mise à jour de base)
 - Amélioration de la page des stats (Debug carte du monde et perf)
 
-## 2 Oct 2015
+## Version 1.0.1 (2/10/2015)
 
 - Permettre de changer l'URL lors de la modification d'une URL existante
 
-## 1 Oct 2015
+## Version 1.0.1 (1/10/2015)
 
 - Vérifier si l'url raccourcis existe avant de la créer
 - Gérer le tri des URL dans les listes
 - Lors de la vérification, si l'URL existe afficher l'objet présent dans la base
 
-### 30 Sept 2015
+### Version 1.0.1 (30/09/2015)
 
 - Pagination dans la page detail des stats
 - Ne pas afficher les brèves, les mots, les sites dans le menu édition
@@ -51,7 +53,7 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 - Correction sur la liste des URL par auteur
 - Un peu de commentaires sur les fonctions
 
-### 29 Sept 2015
+### Version 1.0.0 (29/09/2015)
 
 - Mettre les liens et form sur exec=accueil
 - Ajouter dans la recherche
@@ -69,6 +71,6 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 - Vérifier l'insertion de lien depuis le formulaire
 - Partager le lien raccourcis dans les réseaux sociaux
 
-## A faire
+## TODO
 
-- Le tri par compte de click n'est pas fonctionnel car compte alphabétiquement donc 9 > 123 par exemple.
+- Supprimer le fichier shortcut_url_options.php
