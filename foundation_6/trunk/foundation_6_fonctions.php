@@ -95,8 +95,15 @@ function filtre_bouton_action($libelle, $url, $class="", $confirm="", $title="",
 	}
 	$onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
 	$title = $title ? " title='$title'" : "";
-	return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
-			 ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
+
+	if (test_espace_prive()) {
+			return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+			 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
+	}
+	else {
+		return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
+			     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
+	}
 }
 
 /**
