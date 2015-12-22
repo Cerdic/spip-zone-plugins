@@ -1,6 +1,9 @@
 /* Une feuille css qui reprend certains des styles des pages du site http://www.echecs.asso.fr/ */
 
-
+table.ffedata {
+    margin: auto;
+	border-collapse: collapse;
+}
 table.ffedata tbody tr th, table.spip tr td{
     font-family: Arial,Helvetica,sans-serif;
 }
@@ -10,12 +13,12 @@ table.ffedata thead th{
     color: #FFF;
     font-weight: bold;
     text-align: center;
-	background-color: #39548D;
+    background-color: #39548D;
     color: #FFF;
-	padding:0 4px 0 4px;
-	border: 1px solid #fff;
+    padding:0 4px 0 4px;
+    border: 1px solid #fff;
 }
 table.ffedata tbody tr.odd  {background:#EBEFF5;}
 table.ffedata tbody tr.even {background:#C6D3E8;}
 
-table.ffedata td {font-size: 12px; text-align: center; 	padding:0 4px 0 4px; border: 1px solid #fff;}
+table.ffedata td {font-size: 12px; text-align: center;     padding:0 4px 0 4px; border: 1px solid #fff;}
