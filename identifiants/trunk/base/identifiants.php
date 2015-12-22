@@ -40,19 +40,17 @@ function identifiants_declarer_tables_interfaces($interfaces) {
  */
 function identifiants_declarer_tables_auxiliaires($tables) {
 
-	// PRIX
+	// IDENTIFIANTS
 	$tables['spip_identifiants'] = array(
 		'field'=> array(
-			"identifiant"   => "VARCHAR (255) DEFAULT '' NOT NULL",
-			"objet"         => "VARCHAR (25) DEFAULT '' NOT NULL",
-			"id_objet"      => "bigint(21) DEFAULT '0' NOT NULL",
-			"maj"           => "TIMESTAMP"
+			"id_identifiant" => "bigint(21) NOT NULL AUTO_INCREMENT",
+			"identifiant"    => "VARCHAR (255) DEFAULT '' NOT NULL",
+			"objet"          => "VARCHAR (25) DEFAULT '' NOT NULL",
+			"id_objet"       => "bigint(21) DEFAULT '0' NOT NULL",
+			"maj"            => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"       => "identifiant",
-			"KEY identifiant"   => "identifiant",
-			"KEY objet"         => "objet",
-			"KEY id_objet"      => "id_objet",
+			"PRIMARY KEY"    => "id_identifiant, identifiant, objet, id_objet",
 		)
 	);
 

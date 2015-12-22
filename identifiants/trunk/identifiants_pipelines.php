@@ -31,9 +31,10 @@ function identifiants_affiche_milieu($flux) {
 	// Identifiants sur les objets activés
 	if (
 		$e !== false // page d'un objet éditorial
-		AND $e['edition'] === false // pas en mode édition
-		AND $table_objet_sql = $e['table_objet_sql']
-		AND in_array($table_objet_sql,$objets)
+		and $e['edition'] === false // pas en mode édition
+		and $table_objet_sql = $e['table_objet_sql']
+		and in_array($table_objet_sql,$objets)
+		and autoriser('voir','identifiant')
 	) {
 		$texte .= recuperer_fond('prive/objets/editer/identifiant', array(
 			'objet'    => $e['type'],

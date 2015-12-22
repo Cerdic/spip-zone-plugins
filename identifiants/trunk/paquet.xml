@@ -1,12 +1,12 @@
 <paquet
 	prefix="identifiants"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/identifiants.png"
 	documentation=""
-	schema="1.0.0"
+	schema="1.0.1"
 >
 
 	<nom>Identifiants</nom>
@@ -16,9 +16,9 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="affiche_milieu" inclure="identifiants_pipelines.php" />
+	<pipeline nom="autoriser" inclure="identifiants_autorisations.php" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/identifiants.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/identifiants.php" />
-	<!--<pipeline nom="declarer_tables_objets_sql" inclure="base/identifiants.php" />-->
 
 </paquet>
