@@ -19,6 +19,8 @@ function nettoyer_format($t) {
 	$t = preg_replace(",~ +,", '~', $t);
 	$t = preg_replace("/{([?!., ]?)}/", '\1', $t);
 
+	$t = preg_replace(",^ +,m", '', $t);
+
 #$a = '«';
 #for($i=0;$i<strlen($a); $i++)
 #	echo ord($a[$i]).'-';exit;
