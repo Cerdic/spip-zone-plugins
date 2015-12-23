@@ -30,7 +30,7 @@ function nettoyer_format($t) {
 
 	// supprimer les insecables sauf dans les nombres,
 	// parce que ca prend le chou (?)
-	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
+	// $t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
 
 	return $t;
 }

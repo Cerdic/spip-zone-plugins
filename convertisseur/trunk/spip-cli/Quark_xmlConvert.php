@@ -112,6 +112,10 @@ class Quark_xmlConvert extends Command {
 											
 						$contenu = extracteur_quark_xml($f);
 						
+						include_spip("inc/convertisseur");
+
+						$contenu = nettoyer_format($contenu);
+
 						include_spip("inc/flock");
 						
 						// nettoyer les noms de fichiers
