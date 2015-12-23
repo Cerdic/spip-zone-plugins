@@ -11,7 +11,11 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
-## Version 1.0.4
+## Version 1.0.4 (23/12/2015)
+
+- Fixe le nombre de signe pour le raccourci dans options.php
+
+## Version 1.0.4 (21/12/2015)
 
 - Ajout du bouton pour accéder aux stats les rédacteurs, administrateurs
 - Lien vers le detail des stats sur la page d'accueil corrigé
@@ -70,7 +74,3 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 - Ajouter une champs human sur l'URL
 - Vérifier l'insertion de lien depuis le formulaire
 - Partager le lien raccourcis dans les réseaux sociaux
-
-## TODO
-
-- Supprimer le fichier shortcut_url_options.php

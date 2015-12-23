@@ -43,16 +43,15 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 		$valeurs['titre'] = $titre;
 	}
 
-	if (!defined('_TAILLE_RACCOURCI')) {
-		define('_TAILLE_RACCOURCI', 20);
+	if (defined('_TAILLE_RACCOURCI')) {
 
-		if(_TAILLE_RACCOURCI >= 8)
+		if(_TAILLE_RACCOURCI > 5)
 			$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
 		else
-			$valeurs['taille_raccourci'] = 8;
+			$valeurs['taille_raccourci'] = 5;
 
 	} else
-		$valeurs['taille_raccourci'] = 8;
+		$valeurs['taille_raccourci'] = 5;
 
 	return $valeurs;
 	
