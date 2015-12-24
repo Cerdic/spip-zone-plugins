@@ -17,13 +17,13 @@
 	</BOUCLE_titreg>	
    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Place}>
 	 <tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
-		<td>[(#VALEUR{Place}|abs)] </td>
+		<td>[(#VALEUR{Place}|round)] </td>
 		<td>[(#VALEUR{EquipeNom})] </td>
-		<td>[(#VALEUR{PtsMatch}|abs)] </td>		
-		<td>[(#VALEUR{Joue}|abs)] </td>
-		<td>[(#VALEUR{PtsDiff}|abs)] </td>
-		<td>[(#VALEUR{PtsPour}|abs)] </td>
-		<td>[(#VALEUR{PtsContre}|abs)] </td>	
+		<td>[(#VALEUR{PtsMatch}|round)] </td>		
+		<td>[(#VALEUR{Joue}|round)] </td>
+		<td>[(#VALEUR{PtsDiff}|round)] </td>
+		<td>[(#VALEUR{PtsPour}|round)] </td>
+		<td>[(#VALEUR{PtsContre}|round)] </td>	
     </tr>	
     </BOUCLE_donnees2>
 	
