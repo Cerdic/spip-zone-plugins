@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_desabonnement' => 'Unsubscribe',
 
 	// C
+	'champ_titre_label' => 'Title',
 	'choisir_liste' => 'You should choose a list.',
 	'contenu_date' => 'Content since this date',
 	'creation_droits_insuffisants' => 'Your rights are insufficients',
