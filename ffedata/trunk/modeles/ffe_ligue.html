@@ -3,16 +3,15 @@
 	Exemple de saisie :
 	<ffe_ligue|Ref=mpy>
 	mpy, l'abbréviation de Midi-Pyrénées dans la base FFE
-		]
-
+	]
 
 <B_lecture_wsdl2>
 <table class="spip">
 
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Ligues.asmx/GetLigue?Abreviation=#ENV{Ref}}>
-    <BOUCLE_ligue(DATA){source table,#VALEUR}>
-    <thead>  
-       </thead>     
+	<BOUCLE_ligue(DATA){source table,#VALEUR}>
+	<thead> 
+	</thead> 
 <tr><td>Ref :</td>  <td>#VALEUR{Ref}</td></tr>
 <tr><td>Ligue : </td> <td>#VALEUR{Nom}</td></tr>
 <tr><td>Abreviation : </td><td>#VALEUR{Abreviation}</td></tr>
@@ -35,4 +34,3 @@
 </BOUCLE_ligue>
 </BOUCLE_lecture_wsdl2>
 </table>
-		

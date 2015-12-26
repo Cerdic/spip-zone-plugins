@@ -7,8 +7,8 @@
 	]
 <B_lecture_wsdl2>
 <table class="spip">
-    <thead>
-        <tr>
+	<thead>
+		<tr>
 		<th>Ref</th>
 		<th>Nr FFE</th>
 		<th>Nom</th>
@@ -32,38 +32,37 @@
 		<th>Division Feminine</th>
 		<th>Président</th>
 		<th>Correspondant</th>
-        </tr>
-    </thead>
+		</tr>
+	</thead>
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Clubs.asmx/GetClubs?Ref=#ENV{Ref}}>
-    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Commune}{pagination 30}>
-    <tr>
-        <td>#VALEUR{Ref}</td>
-        <td>#VALEUR{NrFFE}</td>
-        <td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{Ref}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
-        <td>#VALEUR{ComiteRef}</td>
-        <td>#VALEUR{Ligue}</td>
-        <td>#VALEUR{Commune}</td>
+	<BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Commune}{pagination 30}>
+	<tr>
+		<td>#VALEUR{Ref}</td>
+		<td>#VALEUR{NrFFE}</td>
+		<td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{Ref}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
+		<td>#VALEUR{ComiteRef}</td>
+		<td>#VALEUR{Ligue}</td>
+		<td>#VALEUR{Commune}</td>
 		<td>#VALEUR{Adresse}</td>
-        <td>#VALEUR{CP}</td>
-        <td>#VALEUR{Tel}</td>
-        <td>#VALEUR{Fax}</td>
-        <td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{EMail})]&nbsp;</a>}mailcrypt)]</td>
-        <td><a href="#VALEUR{URL}">#VALEUR{URL}</a></td>
-        <td>#VALEUR{Ouverture}</td>
-        <td>#VALEUR{NbrJourOuvre}</td>
-        <td>#VALEUR{SalleAdresse}</td>
-        <td>#VALEUR{SalleCP}</td>
-        <td>#VALEUR{NbrAffA}</td>
-        <td>#VALEUR{NbrAffB}</td>
-        <td>#VALEUR{DivisionAdulte}</td>
-        <td>#VALEUR{DivisionJeune}</td>
-        <td>#VALEUR{DivisionFeminine}</td>
+		<td>#VALEUR{CP}</td>
+		<td>#VALEUR{Tel}</td>
+		<td>#VALEUR{Fax}</td>
+		<td>[(#VAL{[<a href="mailto:(#VALEUR{EMail})">][(#VALEUR{EMail})]&nbsp;</a>}mailcrypt)]</td>
+		<td><a href="#VALEUR{URL}">#VALEUR{URL}</a></td>
+		<td>#VALEUR{Ouverture}</td>
+		<td>#VALEUR{NbrJourOuvre}</td>
+		<td>#VALEUR{SalleAdresse}</td>
+		<td>#VALEUR{SalleCP}</td>
+		<td>#VALEUR{NbrAffA}</td>
+		<td>#VALEUR{NbrAffB}</td>
+		<td>#VALEUR{DivisionAdulte}</td>
+		<td>#VALEUR{DivisionJeune}</td>
+		<td>#VALEUR{DivisionFeminine}</td>
 		<td>[(#VAL{[<a href="mailto:(#VALEUR{PdtEmail})">][(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}|mailcrypt)]</td>
 		<td>[(#VAL{[<a href="mailto:(#VALEUR{CorrEmail})">][(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
+	</tr>#PAGINATION	
+	</BOUCLE_donnees2>
 
-    </tr>#PAGINATION	
-    </BOUCLE_donnees2>
-	
 </BOUCLE_lecture_wsdl2>
 </table>
 </B_lecture_wsdl2>
