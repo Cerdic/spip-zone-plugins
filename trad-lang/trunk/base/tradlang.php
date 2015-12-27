@@ -5,7 +5,9 @@
  */
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlangs'] = 'tradlangs';

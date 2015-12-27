@@ -8,7 +8,10 @@
  * 
  * @package SPIP\Tradlang\Formulaires
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+
+ if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement du formulaire

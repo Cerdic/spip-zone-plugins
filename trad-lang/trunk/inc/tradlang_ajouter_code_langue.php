@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'ajout de création d'une langue pour un module

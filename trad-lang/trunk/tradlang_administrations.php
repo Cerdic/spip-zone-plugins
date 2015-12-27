@@ -4,7 +4,9 @@
  * Licence GPL (c) 2009-2013
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/meta');
 

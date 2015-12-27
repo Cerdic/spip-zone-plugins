@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$lang,$lang_orig) {
 	$valeurs['_etapes'] = 2;

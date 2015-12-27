@@ -8,7 +8,9 @@
  * Fichier d'export d'un module de langue en .csv
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'export d'une langue d'un module en .csv

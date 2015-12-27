@@ -8,7 +8,9 @@
  * 
  * @package SPIP\Tradlang\Formulaires
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * chargement des valeurs par defaut du select de #FORMULAIRE_TRADLANG_SWITCHER_LANGUE

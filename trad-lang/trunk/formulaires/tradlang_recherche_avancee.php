@@ -1,6 +1,8 @@
 <?php 
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * chargement des valeurs par defaut des champs du #FORMULAIRE_TRADLANG_RECHERCHE_AVANCEE

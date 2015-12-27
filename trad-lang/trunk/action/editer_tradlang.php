@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function action_editer_tradlang_dist($arg=null) {
 	if (is_null($arg)){

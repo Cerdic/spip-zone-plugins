@@ -7,7 +7,9 @@
  * 
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Sauvegarde d'une langue d'un module dans son fichier

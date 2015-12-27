@@ -8,7 +8,9 @@
  * Fichier des fonctions spécifiques du plugin
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Fonction d'export d'une langue d'un module SPIP en php
@@ -69,7 +71,9 @@ function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
 	 */
 	$secure = ($module == 'tradloader')
 		? ''
-		: "if (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
+		: "if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}\n\n";
 
 	$fd = fopen($fichier, 'w');
 

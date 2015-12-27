@@ -4,10 +4,11 @@
  * 
  * Ne devrait jamais être utilisé à moins que l'import se soit mal passé
  * 
- * @return 
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function action_tradlang_synchro_base_fichier_dist(){
 	if(!function_exists('lire_config'))

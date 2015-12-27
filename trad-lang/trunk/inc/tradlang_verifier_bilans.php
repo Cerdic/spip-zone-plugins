@@ -7,7 +7,9 @@
  * @package SPIP\Tradlang\
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction de vérification de la concordance des bilans de chaque langue d'un module

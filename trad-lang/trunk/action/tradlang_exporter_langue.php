@@ -8,7 +8,9 @@
  * Action permettant de récupérer un fichier de langue
  * 
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function action_tradlang_exporter_langue_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');

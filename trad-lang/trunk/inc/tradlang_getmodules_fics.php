@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * retourne une liste contenant les modules

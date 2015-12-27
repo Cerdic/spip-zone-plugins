@@ -1,6 +1,8 @@
 <?php 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function inc_tradlang_forum_extraire_titre($id_objet){
 	$trouver_table = charger_fonction('trouver_table', 'base');

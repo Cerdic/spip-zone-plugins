@@ -6,7 +6,9 @@
  * 
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction de vérification de la concordance d'une langue x par rapport à la langue mère

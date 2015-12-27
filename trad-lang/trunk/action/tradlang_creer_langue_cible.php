@@ -1,5 +1,7 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Action permettant de creer une langue cible depuis la langue mère d'un module

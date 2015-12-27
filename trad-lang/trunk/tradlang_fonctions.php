@@ -10,7 +10,9 @@
  * @package SPIP\Tradlang\Fonctions
  */
  
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Retourne les modules disponibles en base sous la forme d'un array complet
