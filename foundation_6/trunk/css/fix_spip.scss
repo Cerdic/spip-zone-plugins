@@ -1,4 +1,6 @@
-
+html, body {
+	height: 100%; /* Fix un bug des reveal modale dans SPIP */
+}
 // Afficher correctement les datepickers
 input.hasDatepicker {
 	display: inline;
