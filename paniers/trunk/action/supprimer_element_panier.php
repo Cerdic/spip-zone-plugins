@@ -46,4 +46,6 @@ function action_supprimer_element_panier_dist($arg=null) {
         )
     );
 
+    include_spip('inc/invalideur');
+    suivre_invalideur("id='$objet/$id_objet'");
 }

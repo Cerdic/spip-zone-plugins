@@ -87,6 +87,11 @@ function action_remplir_panier_dist($arg=null) {
 			'id_panier = '.intval($id_panier)
 		);
 	}
+
+	// On vide le cache de l'objet sur lequel on vient de travailler.
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='$objet/$id_objet'");
+
 }
 
 ?>
