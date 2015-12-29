@@ -231,7 +231,7 @@ function centre_image_visage($fichier) {
 **/
 function centre_image_header_prive($flux) {
 	$flux .= "\n<script type='text/javascript' src='".find_in_path("centre_image_gestion.js")."'></script>\n";
-	$flux .= "\n<script>var croix = '".find_in_path("imgs/croix.png")."'</script>";
+	$flux .= "\n<script>var croix = '".find_in_path("imgs/croix-centre-image.png")."'</script>";
 	return $flux;
 }
 

@@ -1,9 +1,10 @@
 function centre_image_croix(el, x, y) {
 	if (el.find("img.croix_centre_image").length == 0) {
+	alert("Hop");
 		el.css("display", "inline-block").css("position", "relative")
 			.find("img").addClass("img_source").css("border", "1px solid green")
 			.parent()
-			.prepend("<img src='"+croix+"' class='croix_centre_image' style='cursor: move; position: absolute; margin-left: -7px; margin-top: -7px; margin-right: -7px; margin-bottom: -7px;'>");
+			.prepend("<img src='"+croix+"' class='croix_centre_image' style='cursor: move; position: absolute; margin-left: -7px; margin-top: -7px; margin-right: -7px; margin-bottom: -7px;background:transparent;'>");
 	}
 
 	el.find("img.croix_centre_image").css("left", x+"px").css("top", y+"px")
