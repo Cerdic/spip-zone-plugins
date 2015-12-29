@@ -1,6 +1,5 @@
 function centre_image_croix(el, x, y) {
 	if (el.find("img.croix_centre_image").length == 0) {
-	alert("Hop");
 		el.css("display", "inline-block").css("position", "relative")
 			.find("img").addClass("img_source").css("border", "1px solid green")
 			.parent()
@@ -29,7 +28,7 @@ function centre_image_croix(el, x, y) {
 
 function centre_image_afficher() {
 
-	$("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function(){
+	$(".portfolios, .formulaire_editer_logo .spip_logo, #documents_joints").find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function(){
 
 		// recuperer l'URL sans les ../
 		var lien = $(this).attr("href");
