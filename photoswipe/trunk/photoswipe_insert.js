@@ -129,7 +129,7 @@ function photoshow_gallery(items, index) {
         getThumbBoundsFn: function (index) {
             // find thumbnail element
             var thumbnail = items[index].thumbnail[0];
-console.log(thumbnail);
+
             if (!thumbnail) return;
 
             // get window scroll Y
