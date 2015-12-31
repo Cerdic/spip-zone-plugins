@@ -40,7 +40,8 @@
 	<li class="minibando_sep">&nbsp;</li>
 	[(#ENV{objet}|oui)
 		[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_#ENV{objet}})]" id="voir_#ENV{objet}">
-			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span>&nbsp;</span><ul><li><p><:bouton_modifier:> ([(#ENV{objet}|objet_info{texte_objet}|_T)] [(#ENV{id_objet})])</p></li></ul></li>]
+			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span>&nbsp;</span><ul><li><p>[(#ENV{objet}|objet_info{texte_objet}|_T)] [((#ENV{id_objet}))]</p></li>
+			<li><a href="[(#ENV{id_objet}|generer_url_ecrire_entite_edit{#ENV{objet}})]">[(#ENV{objet}|objet_info{texte_modifier}|_T)]</a></li></ul></li>]
 	]<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
 		<:admin_recalculer:>[(#ENV{use_cache})]</a><span>&nbsp;</span><ul><li><p><:admin_recalculer:></p></li></ul></li>
 	<!--extra-->[<li id="minibando_bouton_preview"><a href="(#ENV{preview})" id="preview"><:previsualisation:></a><span>&nbsp;</span><ul><li><p><:previsualisation:></p></li></ul></li>][(#SESSION{statut}|=={0minirezo}|oui)

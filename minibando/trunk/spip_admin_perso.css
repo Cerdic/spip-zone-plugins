@@ -13,7 +13,7 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
 #minibando li a:hover, #minibando li a:focus,
 #minibando li li a:hover, #minibando li li a:focus { background-color: white; }
-#minibando > li > a:focus { border-color: black; }
+#minibando > li > a:focus { border-color: black; background-color: #f8f8f8 !important; }
 #minibando li a:focus, #minibando li li a:focus { text-decoration: underline; }
 #minibando #bando1_menu_accueil { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% 0  no-repeat; }
 #minibando #bando1_menu_edition { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -168px no-repeat; }
