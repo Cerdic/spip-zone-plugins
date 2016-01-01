@@ -1,0 +1,5 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+<h1 class="grostitre"><:rainette:titre_page_configurer:></h1>
+
+[(#SET{configurer, [(#ENV{type-page})_[(#ENV{service, weather})]]})]
+[<div class='ajax'>(#FORMULAIRE_{#GET{configurer}})</div>]

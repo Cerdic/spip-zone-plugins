@@ -1,0 +1,103 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions d'un jour d'une ville
+	Il est appelee par le filtre rainette_coasser_previsions
+
+	Ce modèle ne peut être utiliser qu'avec le service weather.com qui propose des données pour la nuit.
+	L'utiliser avec un autre service renvoie un message d'erreur plutôt qu'un affichage farfelu.
+ -->]
+
+[(#REM) <!-- Erreur, le service ne supporte pas ce modèle -->]
+[(#ENV{service, weather}|=={weather}|non)
+	[(#INCLURE{fond=modeles/erreur,
+		service=#ENV{service},
+		erreur=affichage,
+		mode=modele,
+		modele=previsions_2x12h})]]
+
+[(#REM) <!-- Service weather, on affiche -->]
+[(#ENV{service, weather}|=={weather}|oui)
+	#SET{gauche, 0}
+	#SET{droite, 1}
+	[(#ENV{periode}|=={1}|oui) #SET{gauche, 1}#SET{droite, 2}]
+<div class="rainette_previsions_2x12h">
+	<!-- Cellule de gauche: 
+		- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
+		- si autre jour alors donnees du matin -->
+	[<div class="entete">(#ENV{periode}|=={0}|?{<:rainette:jour:>, <:rainette:nuit:>}|ucfirst)</div>]
+	[<div class="entete">(#ENV{periode}|=={0}|?{<:rainette:nuit:>, <:rainette:demain:>}|ucfirst)</div>]
+	<div class="cadre">
+		<div class="cellule gauche">
+			<div class="contenu">
+				<div class="icone">[(#ENV{#GET{gauche}/icone}|rainette_afficher_icone{grand}|image_reduire{95})]</div>
+				<div class="t_reelle">
+					[(#ENV{periode}|=={0}|?{<:rainette:temperature_max:>, <:rainette:temperature_min:>}|ucfirst)<br/>]
+					<span>[(#ENV{#GET{gauche}/temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]</span><br/>
+					[(#ENV{#GET{gauche}/resume}|rainette_afficher_resume)]
+				</div>
+				<div class="details">
+					<ul>
+						<li>
+							<span><:rainette:vent|ucfirst:></span>
+							[(#ENV{#GET{gauche}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})]
+							[ - (#ENV{#GET{gauche}/direction_vent}|rainette_afficher_direction)]
+						</li>
+						<li>
+							<span><:rainette:humidite|ucfirst:></span>
+							[(#ENV{#GET{gauche}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
+						</li>
+						<li>
+							<span><:rainette:risque_precipitation|ucfirst:></span>
+							[(#ENV{#GET{gauche}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
+						</li>
+						<li>
+							<span>[(#ENV{periode}|=={0}|?{<:rainette:lever_soleil:>, <:rainette:coucher_soleil:>}|ucfirst)]</span>
+							[(#ENV{periode}|=={0}|?{#ENV{lever_soleil}, #ENV{coucher_soleil}}|affdate{'H\hi'})]
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Cellule de droite:
+			- si aujourd'hui alors donnees du soir si l'heure est < 14:00 ou du lendemain sinon
+			- si autre jour alors donnees du soir -->
+		<div class="cellule droite">
+			<div class="contenu">
+				<div class="icone">[(#ENV{#GET{droite}/icone}|rainette_afficher_icone{grand}|image_reduire{95})]</div>
+				<div class="t_reelle">
+					[(#ENV{periode}|=={0}|?{<:rainette:temperature_min:>, <:rainette:temperature_max:>}|ucfirst)<br/>]
+					<span>[(#ENV{#GET{droite}/temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]</span><br/>
+					[(#ENV{#GET{droite}/resume}|rainette_afficher_resume)]
+				</div>
+				<div class="details">
+					<ul>
+						<li>
+							<span><:rainette:vent|ucfirst:></span>
+							[(#ENV{#GET{droite}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})]
+							[ - (#ENV{#GET{droite}/direction_vent}|rainette_afficher_direction)]
+						</li>
+						<li>
+							<span><:rainette:humidite|ucfirst:></span>
+							[(#ENV{#GET{droite}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
+						</li>
+						<li>
+							<span><:rainette:risque_precipitation|ucfirst:></span>
+							[(#ENV{#GET{droite}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
+						</li>
+						<li>
+							<span>[(#ENV{periode}|=={0}|?{<:rainette:coucher_soleil:>, <:rainette:lever_soleil:>}|ucfirst)]</span>
+							[(#ENV{periode}|=={0}|?{#ENV{coucher_soleil}, #ENV{lever_soleil}}|affdate{'H\hi'})]
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="maj">
+		<:rainette:derniere_maj|ucfirst:>&nbsp;:
+		[&nbsp;(#ENV{derniere_maj}|nom_jour)][&nbsp;(#ENV{derniere_maj}|affdate_heure)]
+		#INCLURE{fond=modeles/inc-credits,
+			classe_div=prev2x12h,
+			env}
+	</div>
+</div>
+]
