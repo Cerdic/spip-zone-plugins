@@ -64,8 +64,7 @@
 			'weather', 'FRXX0076',
 			'owm', 'Paris,Fr',
 			'wwo', 'Paris,France',
-			'wunderground', 'Paris,France',
-			'yahoo', '615702'}}
+			'wunderground', 'Paris,France'}}
 #SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
 
 <body>
@@ -108,19 +107,21 @@
 			<h2 class="h2">1.3 - UTILISATIONS DES PREVISIONS METEO</h2>
 			<a name="previsions" href="#"></a>
 			<div class="clearfix">
+<!--
 				<div class="clearfix">
 					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</h3>
 					[(#MODELE{rainette_previsions,code=#GET{lieu},type=x_jours,jour=5,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
-					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_2x12h)</h3>
+					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_12h)</h3>
 					<p>Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
-					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=0,sous_modele=previsions_2x12h, service=#GET{service}})]
+					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=0,sous_modele=previsions_12h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
-					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_2x12h)</h3>
-					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=2,sous_modele=previsions_2x12h, service=#GET{service}})]
+					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_12h)</h3>
+					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=2,sous_modele=previsions_12h, service=#GET{service}})]
 				</div>
+-->
 			</div>
 
 			<h2 class="h2">2.0 - COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>

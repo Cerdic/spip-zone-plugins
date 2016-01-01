@@ -82,14 +82,14 @@
 .rainette_conditions li img { margin: -1em 0 0 0}
 
 /* PREVISIONS: Styles utilises par le modele rainette_previsions, sur 1 jour presente en 2x12h */
-.rainette_previsions_2x12h {
+.rainette_previsions_12h {
 	float: left;
 	border: 0.2em solid #dddddd;
 	width: 54.2em;
 	margin: 0.5em 0 0 0;
 	line-height: normal;
 }
-.rainette_previsions_2x12h .entete {
+.rainette_previsions_12h .entete {
 	float: left;
 	height: 1.8em;
 	width: 26.9em;
@@ -100,29 +100,29 @@
 	font-weight: bold;
 	background: #fcfcfc;
 }
-.rainette_previsions_2x12h .entete+.entete {
+.rainette_previsions_12h .entete+.entete {
 	width: 27.2em;
 	border-right: 0;
 }
-.rainette_previsions_2x12h .cadre {float: left; background: #ffffff;}
-.rainette_previsions_2x12h .cellule {
+.rainette_previsions_12h .cadre {float: left; background: #ffffff;}
+.rainette_previsions_12h .cellule {
 	float: left;
 	width: 26.9em;
 	border-style: solid;
 	border-color: #dddddd;
 	border-width: 0 0.1em 0.1em 0;
 }
-.rainette_previsions_2x12h .cellule+.cellule {
+.rainette_previsions_12h .cellule+.cellule {
 	width: 27.2em;
 	border-width: 0 0 0.1em 0;
 }
-.rainette_previsions_2x12h .contenu {
+.rainette_previsions_12h .contenu {
 	float: left; width: 24em; margin: 0.5em 1em 1em 1em;
 }
-.rainette_previsions_2x12h .icone {
+.rainette_previsions_12h .icone {
 	float: left; width: 11em; height:11em; padding: 0 1em 0 1em;
 }
-.rainette_previsions_2x12h .t_reelle {
+.rainette_previsions_12h .t_reelle {
 	width: 10em;
 	float: left;
 	font-weight: bold;
@@ -130,20 +130,20 @@
 	color: #333333;
 	margin: 1em 0 0 1em;
 }
-.rainette_previsions_2x12h .t_reelle span {font-size: 3em;}
-.rainette_previsions_2x12h .details {
+.rainette_previsions_12h .t_reelle span {font-size: 3em;}
+.rainette_previsions_12h .details {
 	float: left;
 	clear: both;
 	color: #6e6e6e;
 	width: 26em;
 	padding: 0.5em 0 0 0;
 }
-.rainette_previsions_2x12h .details ul {
+.rainette_previsions_12h .details ul {
 	list-style-type: none; padding: 0; margin: 0;
 }
-.rainette_previsions_2x12h .details li {margin-left: 12em; clear:both;} 
-.rainette_previsions_2x12h .details li span {margin-left:-12em; float:left; display:inline; font-weight: bold;}
-.rainette_previsions_2x12h .maj {
+.rainette_previsions_12h .details li {margin-left: 12em; clear:both;}
+.rainette_previsions_12h .details li span {margin-left:-12em; float:left; display:inline; font-weight: bold;}
+.rainette_previsions_12h .maj {
 	float: left;
 	width: inherit; /* sinon le text-align est inoperant */
 	text-align: center;
@@ -156,6 +156,7 @@
 .rainette_previsions_24h {
 	float: left;
 	border: 0.1em solid #dddddd;
+	box-sizing: initial;
 	width: 11em;
 	margin: 0.4em 0.4em 2em 0;
 	line-height: normal;

@@ -3,264 +3,256 @@
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service l'ancien service Weather.com (weather).
  * Ce service fournit des données au format XML uniquement.
  *
- * @package SPIP\RAINETTE\WEATHER
+ * @package SPIP\RAINETTE\SERVICES\WEATHER
  */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-if (!defined('_RAINETTE_WEATHER_URL_BASE'))
+if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
 	define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
-if (!defined('_RAINETTE_WEATHER_JOURS_PREVISIONS'))
-	define('_RAINETTE_WEATHER_JOURS_PREVISIONS', 10);
+}
 
-function weather_service2cache($lieu, $mode) {
 
+// Configuration des valeurs par défaut des éléments de la configuration dynamique.
+// Ces valeurs sont applicables à tous les modes.
+$GLOBALS['rainette_weather_config']['service'] = array(
+	'defauts'        => array(
+		'inscription' => '',
+		'unite'       => 'm',
+		'condition'   => 'weather',
+		'theme'       => '',
+	),
+	'credits'        => array(
+		'titre' => null,
+		'logo'  => null,
+		'lien'  => 'http://www.weather.com/',
+	),
+	'previsions'	 => array(
+		'max_jours'		=> 10,
+		'periodicites'	=> array(12),
+		'defaut'		=> 12
+	),
+	'max_previsions' => 10,
+	'langue_service' => ''
+);
+
+// Configuration des données fournies par le service wunderground pour le mode 'infos'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_weather_config']['infos'] = array(
+	'periode_maj' => 86400,
+	'format_flux' => 'xml',
+	'cle_base'    => array('children', 'loc', 0, 'children'),
+	'donnees'     => array(
+		// Lieu
+		'ville'     => array('cle' => array('dnam', 0, 'text')),
+		'pays'      => array('cle' => array()),
+		'pays_iso2' => array('cle' => array()),
+		'region'    => array('cle' => array()),
+		// Coordonnées
+		'longitude' => array('cle' => array('lon', 0, 'text')),
+		'latitude'  => array('cle' => array('lat', 0, 'text')),
+		// Informations complémentaires : aucune configuration car ce sont des données calculées
+	),
+);
+
+// Configuration des données fournies par le service weather pour le mode 'conditions'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_weather_config']['conditions'] = array(
+	'periode_maj' => 1800,
+	'format_flux' => 'xml',
+	'cle_base'    => array('children', 'cc', 0, 'children'),
+	'donnees'     => array(
+		// Données d'observation
+		'derniere_maj'          => array('cle' => array('lsup', 0, 'text')),
+		'station'               => array('cle' => array('obst', 0, 'text')),
+		// Températures
+		'temperature_reelle'    => array('cle' => array('tmp', 0, 'text')),
+		'temperature_ressentie' => array('cle' => array('flik', 0, 'text')),
+		// Données anémométriques
+		'vitesse_vent'          => array('cle' => array('wind', 0, 'children', 's', 0, 'text')),
+		'angle_vent'            => array('cle' => array('wind', 0, 'children', 'd', 0, 'text')),
+		'direction_vent'        => array('cle' => array('wind', 0, 'children', 't', 0, 'text')),
+		// Données atmosphériques : risque_uv est calculé
+		'precipitation'         => array('cle' => array()),
+		'humidite'              => array('cle' => array('hmid', 0, 'text')),
+		'point_rosee'           => array('cle' => array('dewp', 0, 'text')),
+		'pression'              => array('cle' => array('bar', 0, 'children', 'r', 0, 'text')),
+		'tendance_pression'     => array('cle' => array('bar', 0, 'children', 'd', 0, 'text')),
+		'visibilite'            => array('cle' => array('vis', 0, 'text')),
+		'indice_uv'             => array('cle' => array('uv', 0, 'children', 'i', 0, 'text')),
+		// Etats météorologiques natifs
+		'code_meteo'            => array('cle' => array('icon', 0, 'text')),
+		'icon_meteo'            => array('cle' => array()),
+		'desc_meteo'            => array('cle' => array('t', 0, 'text')),
+		// Etats météorologiques calculés : icone, resume, periode sont calculés
+	),
+);
+
+// Configuration des données fournies par le service weather pour le mode 'conditions'.
+// -- Seules les données non calculées sont configurées.
+$GLOBALS['rainette_weather_config']['previsions'] = array(
+	'periode_maj' => 1800,
+	'format_flux' => 'xml',
+	'cle_base'    => array('children', 'dayf', 0, 'children', 'day'),
+	'cle_heure'   => array('children', 'part'),
+	'donnees'     => array(
+		// Données d'observation
+		'date'                 => array('cle' => array('attributes', 'dt')),
+		// Données astronomiques
+		'lever_soleil'         => array('cle' => array('children', 'sunr', 0, 'text')),
+		'coucher_soleil'       => array('cle' => array('children', 'suns', 0, 'text')),
+		// Températures
+		'temperature_max'      => array('cle' => array('children', 'hi', 0, 'text')),
+		'temperature_min'      => array('cle' => array('children', 'low', 0, 'text')),
+		// Données anémométriques
+		'vitesse_vent'         => array('cle' => array('children', 'wind', 0, 'children', 's', 0, 'text')),
+		'angle_vent'           => array('cle' => array('children', 'wind', 0, 'children', 'd', 0, 'text')),
+		'direction_vent'       => array('cle' => array('children', 'wind', 0, 'children', 't', 0, 'text')),
+		// Données atmosphériques : risque_uv est calculé
+		'risque_precipitation' => array('cle' => array('children', 'ppcp', 0, 'text')),
+		'precipitation'        => array('cle' => array()),
+		'humidite'             => array('cle' => array('children', 'hmid', 0, 'text')),
+		'point_rosee'          => array('cle' => array()),
+		'pression'             => array('cle' => array()),
+		'visibilite'           => array('cle' => array()),
+		'indice_uv'            => array('cle' => array()),
+		// Etats météorologiques natifs
+		'code_meteo'           => array('cle' => array('children', 'icon', 0, 'text')),
+		'icon_meteo'           => array('cle' => array()),
+		'desc_meteo'           => array('cle' => array('children', 't', 0, 'text')),
+		// Etats météorologiques calculés : icone, resume, periode sont calculés
+	),
+);
+
+
+/**
+ * @param string $mode
+ *
+ * @return string
+ */
+function weather_service2configuration($mode) {
+	global $rainette_weather_config;
+	// On merge la configuration propre au mode et la configuration du service proprement dit
+	// composée des valeurs par défaut de la configuration utilisateur et de paramètres généraux.
+	$config = array_merge($rainette_weather_config[$mode], $rainette_weather_config['service']);
+
+	return $config;
+}
+
+
+/**
+ * @param $lieu
+ * @param $mode
+ * @param $configuration
+ *
+ * @return string
+ */
+function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
 	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
 	$dir = sous_repertoire($dir, 'weather');
-	$f = $dir . strtoupper($lieu) . "_" . $mode . ".txt";
+
+	$f = $dir
+		 . strtoupper(trim($lieu))
+		 . '_' . $mode
+		 . ($periodicite ? strval($periodicite) : '')
+		 . '.txt';
 
 	return $f;
 }
 
 
-function weather_service2url($lieu, $mode) {
+/**
+ * @param $lieu
+ * @param $mode
+ * @param $configuration
+ *
+ * @return string
+ */
+function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 
-	include_spip('inc/config');
-	$unite = lire_config('rainette/weather/unite', 'm');
+	$url = _RAINETTE_WEATHER_URL_BASE
+		   . strtoupper(trim($lieu))
+		   . '?unit='
+		   . $configuration['unite'];
 
-	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . $unite;
 	if ($mode != 'infos') {
-		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_WEATHER_JOURS_PREVISIONS : '&cc=*';
+		$url .= ($mode == 'previsions')
+			? '&dayf=' . $configuration['previsions']['max_jours']
+			: '&cc=*';
 	}
 
 	return $url;
 }
 
 
-function weather_service2reload_time($mode) {
+function weather_complement2infos($tableau, $configuration) {
+	// Le nom de la ville retournée par le service est sous la forme 'Ville,Région[,Pays]' (Région désigne
+	// parfois le département (France) ou l'état (Etats-Unis).
+	// Il faut donc répartir la valeur d'index 'ville' dans les index 'ville', 'region' et 'pays' sachant
+	// que le pays n'est pas toujours fourni.
+	$lieu = explode(',', $tableau['ville']);
+	$tableau['ville'] = trim($lieu[0]);
+	$tableau['region'] = !empty($lieu[1]) ? trim($lieu[1]) : '';
+	$tableau['pays'] = !empty($lieu[2]) ? trim($lieu[2]) : '';
 
-	static $reload = array('conditions' => 1800, 'previsions' => 7200);
-
-	return $reload[$mode];
+	return $tableau;
 }
 
 
-function weather_url2flux($url) {
+function weather_complement2conditions($tableau, $configuration) {
 
-	include_spip('inc/xml');
-	$flux = spip_xml_load($url);
+	if ($tableau) {
+		// Compléter le tableau standard avec les états météorologiques calculés
+		if ($tableau['code_meteo']) {
+			// A priori la période de nuit commence à 14h et se termine à 5h.
+			// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à null : TODO
+			$tableau['periode'] = null;
 
-	return $flux;
+			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
+			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
+			etat2resume_weather($tableau, $configuration);
+		}
+	}
+
+	return $tableau;
 }
 
 
 /**
- * lire le xml fournit par le service meteo et en extraire les infos interessantes
- * retournees en tableau jour par jour
- * utilise le parseur xml de Spip
+ * Complète par des données spécifiques au service le tableau des conditions issu
+ * uniquement de la lecture du flux.
  *
- * ne gere pas encore le jour et la nuit de la date courante suivant l'heure!!!!
- * @param array $flux
+ * @api
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ * @param int   $index
+ *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ *
  * @return array
+ *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
+ *        du service.
  */
-function weather_flux2previsions($flux, $lieu) {
-	$tableau = array();
-	$index = 0;
-	$date_maj = '';
+function weather_complement2previsions($tableau, $configuration, $index_periode) {
 
-	$n = spip_xml_match_nodes(",^dayf,",$flux,$previsions);
-	if ($n==1){
-		$previsions = reset($previsions['dayf']);
-		// recuperer la date de debut des previsions (c'est la date de derniere maj)
-		$date_service = $previsions['lsup'][0];
-		// Certaines abréviations de fuseau ne sont pas reconnues par date_create suivant la configuration du serveur
-		// http. On supprime cette information avant le date_create qui produit un timezone erroné mais qui ne genera
-		// pas le format ensuite.
-		if (!$date_maj = date_create($date_service)) {
-			$elements_date = explode(' ', $date_service);
-			array_pop($elements_date);
-			$date_service = implode(' ', $elements_date);
-			$date_maj = date_create($date_service);
-		}
-		// On réinitialise la date de prévision à partir juste du jour afin d'avoir un time à 0
-		foreach($previsions as $day=>$p){
-			if (preg_match(",day\s*d=['\"?]([0-9]+),Uims",$day,$regs)){
-				// Index du jour et date du jour
-				$tableau[$index]['index'] = $index;
+	if (($tableau) and ($index_periode > -1)) {
 
-				// Date du jour
-				$date_prevision = date_create($elements_date[0]);
-				$interval = new DateInterval("P{$regs[1]}D");
-				date_add($date_prevision, $interval);
-				$tableau[$index]['date'] = date_format($date_prevision, 'Y-m-d');
-
-				$p = reset($p);
-
-				// Date complete des lever/coucher du soleil
-				list($heure,$am_pm) = explode(' ', $p['sunr'][0]);
-				list($heure, $minute) = explode(':', $heure);
-				$minute = strval($minute);
-				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
-				$interval = new DateInterval("PT${heure}H${minute}M");
-				$date_soleil = clone $date_prevision;
-				date_add($date_soleil, $interval);
-				$tableau[$index]['lever_soleil'] = date_format($date_soleil, 'Y-m-d H:i:s');
-
-				list($heure,$am_pm) = explode(' ', $p['suns'][0]);
-				list($heure, $minute) = explode(':', $heure);
-				$minute = strval($minute);
-				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
-				$interval = new DateInterval("PT${heure}H${minute}M");
-				$date_soleil = clone $date_prevision;
-				date_add($date_soleil, $interval);
-				$tableau[$index]['coucher_soleil'] = date_format($date_soleil, 'Y-m-d H:i:s');
-
-				// Previsions du jour
-				$tableau[$index][0]['temperature_max'] = intval($p['hi'][0]) ? floatval($p['hi'][0]) : '';
-				$tableau[$index][0]['temperature_min'] = intval($p['low'][0]) ? floatval($p['low'][0]) : '';
-				$tableau[$index][0]['vitesse_vent'] = intval($p['part p="d"'][0]['wind'][0]['s'][0]) ? floatval($p['part p="d"'][0]['wind'][0]['s'][0]) : '';
-				$tableau[$index][0]['angle_vent'] = $p['part p="d"'][0]['wind'][0]['d'][0];
-				$tableau[$index][0]['direction_vent'] = $p['part p="d"'][0]['wind'][0]['t'][0];
-				$tableau[$index][0]['risque_precipitation'] = intval($p['part p="d"'][0]['ppcp'][0]);
-				$tableau[$index][0]['precipitation'] = NULL;
-				$tableau[$index][0]['humidite'] = intval($p['part p="d"'][0]['hmid'][0]) ? intval($p['part p="d"'][0]['hmid'][0]) : '';
-
-				$tableau[$index][0]['code_meteo'] = intval($p['part p="d"'][0]['icon'][0]) ? intval($p['part p="d"'][0]['icon'][0]) : '';
-				$tableau[$index][0]['icon_meteo'] = NULL;
-				$tableau[$index][0]['desc_meteo'] = NULL;
-
-				// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
-				// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
-				$tableau[$index][0]['icone'] = $tableau[$index][0]['code_meteo'];
-				$tableau[$index][0]['resume'] = $tableau[$index][0]['code_meteo'];
-
-				// Previsions de la nuit
-				$tableau[$index][1]['temperature_max'] = intval($p['low'][0]) ? floatval($p['low'][0]) : '';
-				$tableau[$index][1]['temperature_min'] = NULL;
-				$tableau[$index][1]['vitesse_vent'] = intval($p['part p="n"'][0]['wind'][0]['s'][0]) ? floatval($p['part p="n"'][0]['wind'][0]['s'][0]) : '';
-				$tableau[$index][1]['angle_vent'] = $p['part p="n"'][0]['wind'][0]['d'][0];
-				$tableau[$index][1]['direction_vent'] = $p['part p="n"'][0]['wind'][0]['t'][0];
-				$tableau[$index][1]['risque_precipitation'] = intval($p['part p="n"'][0]['ppcp'][0]);
-				$tableau[$index][1]['precipitation'] = NULL;
-				$tableau[$index][1]['humidite'] = intval($p['part p="n"'][0]['hmid'][0]) ? intval($p['part p="n"'][0]['hmid'][0]) : '';
-
-				$tableau[$index][1]['code_meteo'] = intval($p['part p="n"'][0]['icon'][0]) ? intval($p['part p="n"'][0]['icon'][0]) : '';
-				$tableau[$index][1]['icon_meteo'] = NULL;
-				$tableau[$index][1]['desc_meteo'] = NULL;
-
-				$tableau[$index][1]['icone'] = $tableau[$index][1]['code_meteo'];
-				$tableau[$index][1]['resume'] = $tableau[$index][1]['code_meteo'];
-
-				// Détermination du mode jour/nuit
-				$tableau[$index]['periode'] = (($index == 0) AND !$tableau[$index][0]['code_meteo']) ? 1 : 0;
-
-				$index += 1;
-			}
-		}
+		// Compléter le tableau standard avec les états météorologiques calculés
+		etat2resume_weather($tableau, $configuration);
 	}
-
-	// Traitement des erreurs de flux
-	$tableau[$index]['erreur'] = (!$tableau) ? 'chargement' : '';
-
-	// On stocke en fin de tableau la date de derniere mise a jour et le nombre max de  jours de prévisions
-	$tableau[$index]['derniere_maj'] = date_format($date_maj,'Y-m-d H:i:s');
-	$tableau[$index]['max_jours'] = _RAINETTE_WEATHER_JOURS_PREVISIONS;
 
 	return $tableau;
 }
 
 
-function weather_flux2conditions($flux, $lieu) {
-	$tableau = array();
-	$n = spip_xml_match_nodes(",^cc,",$flux,$conditions);
-	if ($n==1){
-		$conditions = reset($conditions['cc']);
-		// recuperer la date de derniere mise a jour des conditions
-		if ($conditions) {
-			// Date d'observation : elle est exprimée dans le fuseau horaire du lieu sous la forme 'date time AM/PM fuseau'
-			$date_service = $conditions['lsup'][0];
-			// Certaines abréviations de fuseau ne sont pas reconnues par date_create suivant la configuration du serveur
-			// http. On supprime cette information avant le date_create qui produite un timezone erronné mais qui ne genera
-			// pas le format ensuite.
-			if (!$date_maj = date_create($date_service)) {
-				$elements_date = explode(' ', $date_service);
-				array_pop($elements_date);
-				$date_service = implode(' ', $elements_date);
-				$date_maj = date_create($date_service);
-			}
-			$tableau['derniere_maj'] = date_format($date_maj,'Y-m-d H:i:s');
-			// station d'observation (peut etre differente de la ville)
-			$tableau['station'] = $conditions['obst'][0];
+function etat2resume_weather(&$tableau, $configuration) {
 
-			// Liste des conditions meteo
-			$tableau['vitesse_vent'] = floatval($conditions['wind'][0]['s'][0]);
-			$tableau['angle_vent'] = intval($conditions['wind'][0]['d'][0]);
-			$tableau['direction_vent'] = $conditions['wind'][0]['t'][0];
-
-			$tableau['temperature_reelle'] = floatval($conditions['tmp'][0]);
-			$tableau['temperature_ressentie'] = floatval($conditions['flik'][0]);
-
-			$tableau['humidite'] = intval($conditions['hmid'][0]);
-			$tableau['point_rosee'] = intval($conditions['dewp'][0]);
-
-			$tableau['pression'] = floatval($conditions['bar'][0]['r'][0]);
-			$tableau['tendance_pression'] = $conditions['bar'][0]['d'][0];
-
-			$tableau['visibilite'] = floatval($conditions['vis'][0]);
-
-			$tableau['code_meteo'] = intval($conditions['icon'][0]);
-			$tableau['icon_meteo'] = NULL;
-			$tableau['desc_meteo'] = $conditions['t'][0];
-
-			// A priori la période de nuit commence à 14h et se termine à 5h.
-			// Cette données n'est pas utile pour les conditions de ce service, on la positionne à NULL : TODO
-			$tableau['periode'] = NULL;
-
-			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
-			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
-			$tableau['icone'] = $tableau['code_meteo'];
-			$tableau['resume'] = $tableau['code_meteo'];
-		}
+	if ($tableau['code_meteo']) {
+		$tableau['icone'] = $tableau['code_meteo'];
+		$tableau['resume'] = $tableau['code_meteo'];
 	}
-
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
-
-	return $tableau;
 }
-
-function weather_flux2infos($flux, $lieu){
-	$tableau = array();
-
-	// On stocke les informations disponibles dans un tableau standard
-	$regexp = 'loc id=\"' . $lieu . '\"';
-	$n = spip_xml_match_nodes(",^$regexp,", $flux, $infos);
-	if ($n==1){
-		$infos = reset($infos['loc id="' . $lieu . '"']);
-		// recuperer la date de debut des conditions
-		$tableau['ville'] = $infos['dnam'][0];
-		$tableau['region'] = NULL;
-
-		$tableau['longitude'] = floatval($infos['lon'][0]);
-		$tableau['latitude'] = floatval($infos['lat'][0]);
-
-		$tableau['population'] = NULL;
-		$tableau['max_previsions'] = _RAINETTE_WEATHER_JOURS_PREVISIONS;
-	}
-
-	// Traitement des erreurs de flux
-	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
-
-	return $tableau;
-}
-
-function weather_service2credits() {
-
-	$credits['titre'] = NULL;
-	$credits['logo'] = NULL;
-	$credits['lien'] = 'http://www.weather.com/';
-
-	return $credits;
-}
-
-?>

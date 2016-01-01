@@ -12,14 +12,14 @@
 		service=#ENV{service},
 		erreur=affichage,
 		mode=modele,
-		modele=previsions_2x12h})]]
+		modele=previsions_12h})]]
 
 [(#REM) <!-- Service weather, on affiche -->]
 [(#ENV{service, weather}|=={weather}|oui)
 	#SET{gauche, 0}
 	#SET{droite, 1}
 	[(#ENV{periode}|=={1}|oui) #SET{gauche, 1}#SET{droite, 2}]
-<div class="rainette_previsions_2x12h">
+<div class="rainette_previsions_12h">
 	<!-- Cellule de gauche: 
 		- si aujourd'hui alors donnees du matin si l'heure est < 14:00 ou du soir sinon
 		- si autre jour alors donnees du matin -->

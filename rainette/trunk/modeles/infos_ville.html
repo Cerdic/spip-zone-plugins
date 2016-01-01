@@ -1,14 +1,13 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
-	Il est appelee par le filtre rainette_coasser_infos
+	Il est appelee par le filtre rainette_coasser
  -->
 ]
 <div class="rainette_infos">
-	<h2 class="ville">[(#ENV{ville})]</h2>
+	<h2 class="ville">[(#ENV{ville})[, (#ENV{pays})]]</h2>
 	<ul class="coordonnees">
 		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})</li>]
 		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})</li>]
-		[<li><:rainette:population|ucfirst:>&nbsp;:&nbsp;(#ENV{population}|rainette_afficher_unite{population, -1, #ENV{service, weather}})</li>]
 		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{region})</li>]
 	</ul>
 

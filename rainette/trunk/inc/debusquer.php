@@ -84,8 +84,7 @@ function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 				'weather' => 'FRXX0076',
 				'owm' => 'Paris,Fr',
 				'wwo' => 'Paris,France',
-				'wunderground' => 'Paris,France',
-				'yahoo' => '615702');
+				'wunderground' => 'Paris,France');
 
 		// Recuperation du tableau des conditions courantes
 		foreach($jeu as $_service => $_lieu) {

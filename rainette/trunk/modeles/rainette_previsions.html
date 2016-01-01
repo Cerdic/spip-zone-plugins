@@ -3,10 +3,10 @@
 	- type : 1_jour (affichage de 24h uniquement) ou x_jours (affichage de x jours)
 	- jour : le numéro du jour en 1_jour ou le nombre de jours en x_jours
 	- sous_modele : le sous-modele Rainette ou personnalisé
-	- service : le service méteo utilisé (weather, wwo, wunderground, yahoo, owm)
+	- service : le service méteo utilisé (weather, wwo, wunderground, owm)
  -->]
 [(#ENV{code}|rainette_coasser_previsions{
 				#ENV{type, 1_jour},
 				#ENV{jour,0},
-				#ENV{sous_modele,previsions_2x12h},
+				#ENV{sous_modele,previsions_12h},
 				#ENV{service, weather}})]
