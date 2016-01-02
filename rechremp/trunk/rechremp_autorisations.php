@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Info SPIP
  *
  * @plugin     Rechercher Remplacer
- * @copyright  2013-2014
+ * @copyright  2013-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\rechremp\Autorisations
@@ -18,8 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser
  */
-function rechremp_autoriser()
-{
+function rechremp_autoriser() {
 }
 
 
@@ -33,8 +32,7 @@ function rechremp_autoriser()
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_rechremp_voir_dist($faire, $type, $id, $qui, $opt)
-{
+function autoriser_rechremp_voir_dist($faire, $type, $id, $qui, $opt) {
     return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
@@ -48,8 +46,7 @@ function autoriser_rechremp_voir_dist($faire, $type, $id, $qui, $opt)
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_rechremp_configurer_dist($faire, $type, $id, $qui, $opt)
-{
+function autoriser_rechremp_configurer_dist($faire, $type, $id, $qui, $opt) {
     return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 

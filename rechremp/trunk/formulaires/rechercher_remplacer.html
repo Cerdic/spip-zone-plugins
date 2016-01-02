@@ -7,7 +7,7 @@
 		<p class="explication"><:rechremp:explication_rechremp:></p>
 
 		#SET{fl,rechremp}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,search}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -33,7 +33,7 @@
 		<input type='submit' name="rechercher" class='submit' value='<:rechremp:bouton_rechercher|attribut_html:>' /></p>
 
 		<!-- Resultat de la recherche -->
-		[<ul><li class="editer pleine_largeur">
+		[<ul class="editer-groupe"><li class="editer pleine_largeur">
 		<h3><:resultats_recherche:> [<small>&#171;&nbsp;(#ENV{search})&nbsp;&#187;</small>]</h3>
 		(#ENV**{erreurs/search_results})
 		</li></ul>
