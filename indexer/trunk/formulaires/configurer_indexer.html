@@ -48,7 +48,7 @@
 					<legend>[(#VALEUR|objet_info{texte_objets}|_T)]</legend>
 					<ul class="editer-groupe">
 					(#CHEMIN{formulaires/configurer_indexer/#GET{objet}.html}|?{
-						#INCLURE{fond=formulaires/configurer_indexer/#GET{objet},env},
+						#INCLURE{fond=formulaires/configurer_indexer/#GET{objet},objet=#GET{objet},table=#VALEUR,env},
 						#INCLURE{fond=formulaires/configurer_indexer/objet,objet=#GET{objet},table=#VALEUR,env}
 					})
 					</ul>
