@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Accessibilité</nom>
+	<slogan>Améliorations de l'accessibilité pour les rédacteurs</slogan>
+	<auteur>Goetsu et [RealET->http://contrib.spip.net/_RealET_]</auteur>
+	<licence>GNU/LGPL (c) 2011</licence>
+	<version>2.0.0</version>
+	<etat>stable</etat>
+	<description>Depuis le 29 octobre 2009, les services de communication publique en ligne doivent se mettre en conformité par rapport au Référentiel Général d’Accessibilité pour les Administrations (RGAA) qui demande à ce que les sites web publics soient accessibles au plus grand nombre, notamment les personnes en situations de handicaps.
+
+L’objectif de ce plugin et de sa documentation associée n’est pas de présenter le contenu du RGAA ou l’intérêt d’une démarche d’accessibilité mais de voir thématique par thématique en quoi SPIP permet, nativement ou avec quelques ajouts, de produire du contenu accessible pour un rédacteur.
+	</description>
+	<lien>http://contrib.spip.net/Accessibilite-pour-les-redacteurs</lien>
+	<prefix>Accessibilite</prefix>
+	<icon>img_pack/wcag1AAA.png</icon>
+	<pipeline>
+		<nom>pre_liens</nom>
+		<inclure>accessibilite_pipelines.php</inclure>
+	</pipeline>
+	
+	<chemin dir='' />
+	<necessite id="SPIP" version="[3.1.0;3.1.99]" />
+	<utilise id="medias" version="[2.10.26;]" />
+	<categorie>navigation</categorie>
+</plugin>

@@ -1,0 +1,123 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+
+(#REM) Cas <imageXX>	: equivalent a <imgXX> pour une image en mode image
+
+][(#INCLUS|=={image}|et{#ENV{emb,''}|non}|oui)
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ 
+	style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
+	<a href="(#ENV{lien})"
+		[ class="(#ENV{lien_class})"]
+		[ lang="(#ENV{langue})"]
+		[(#MODE|=={image}|non)
+			[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"]
+		]
+		[(#MODE|=={image}|oui)
+			[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]
+		]
+		>]<img src='#URL_DOCUMENT'[
+		width="(#LARGEUR|?{#LARGEUR})"][
+		height="(#HAUTEUR|?{#HAUTEUR})"][
+		lang="(#ENV{langue})"]
+		[(#MODE|=={image}|non)
+			alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]]"
+		]
+		[(#MODE|=={image}|oui)
+			alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
+		]
+		[ (#DESCRIPTIF|oui)
+			longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"
+		]
+		/>[(#ENV{lien}|?{</a>})]</span>
+][
+
+(#REM) Cas <embXX> : on est appele ici avec emb=' ' : on veut la legende
+equivalent a un <docXX> pour une image en mode image
+
+][(#INCLUS|=={image}|et{#ENV{emb,''}|oui}|oui)
+#SET{fichier,#URL_DOCUMENT}
+#SET{width,#LARGEUR}
+#SET{height,#HAUTEUR}
+#SET{url,#ENV{lien}}
+[(#REM) qd titre ou descriptif on utilise le modele en dl sinon modele <img> à base de span
+][(#TITRE|!={''}|oui)
+	#SET{dl,'true'}
+][(#DESCRIPTIF|!={''}|oui)
+	#SET{dl,'true'}
+	#SET{desc,'true'}
+][(#GET{dl}|=={'true'}|oui)
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ 
+			style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|max{120})]px;']>
+<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"]
+	[(#MODE|=={image}|non)
+		[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"]
+	]
+	[(#MODE|=={image}|oui)
+		[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]
+	][ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]
+[ lang="(#ENV{langue})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'
+	[(#MODE|=={image}|non)
+		alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]]"
+	]
+	[(#MODE|=={image}|oui)
+		alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
+	]
+	[(#DESCRIPTIF|oui)
+		[(#ENV{legende}|?{longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]",longdesc="#desc-#ID_DOCUMENT"})]
+	][ lang="(#ENV{langue})"]
+	 />[(#GET{url}|?{</a>})]</dt>
+[(#GET{desc}|=={'true'}|oui)
+[<dt class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dt>]
+]
+[(#GET{desc}|=={''}|oui)
+[<dd class="#EDIT{titre} spip_doc_titre"[ style="width:(#GET{width}|min{350}|max{120})px;"]><strong>(#ENV*{titre}|propre|PtoBR|sinon{#TITRE})</strong></dd>]
+]
+[<dd id="desc-#ID_DOCUMENT" class="#EDIT{descriptif} spip_doc_descriptif"[ style="width:(#GET{width}|min{350}|max{120})px;"]>(#ENV*{legende}|propre|PtoBR|sinon{#DESCRIPTIF|PtoBR})[(#NOTES|PtoBR)]</dd>]
+</dl>
+]
+
+[(#GET{dl}|=={''}|oui)
+<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ 
+	style="float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]"]>[
+	<a href="(#GET{url})" 
+	[ class="(#ENV{lien_class})"]
+	[ lang="(#ENV{langue})"]
+	[(#MODE|=={image}|non)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]"]
+]
+ [(#MODE|=={image}|oui)
+[ title="(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})"]
+]
+	[ type="(#ENV{lien}|?{#ENV{lien_mime},#MIME_TYPE})"]>]
+	<img src="#GET{fichier}"
+	 width="#GET{width}" height="#GET{height}"
+	 [ lang="(#ENV{langue})"]
+	    [(#MODE|=={image}|non)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html|sinon{<:info_document:>}}})[(#ENV{lien}|?{'',' - '})][(#ENV{lien}|?{'',[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]]"
+ ]
+ [(#MODE|=={image}|oui)
+ alt="[(#ENV{alt}|attribut_html|sinon{#TITRE|attribut_html|sinon{#ENV{lien}|attribut_html}})]"
+ ]
+	  [(#DESCRIPTIF|oui)longdesc="[(#URL_PAGE{longdesc,id=#ID_DOCUMENT}|parametre_url{'lang',#ENV{langue,#LANG}})]"] />
+	  [(#GET{url}|?{</a>})]</span>
+]
+
+][
+
+(#REM) Cas des images qu'il faut embed (svg)
+][
+(#INCLUS|=={embed}|oui)
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+<object	data='#URL_DOCUMENT' 
+	type='#MIME_TYPE'[
+	width='(#ENV{largeur}?{'', #LARGEUR})'][
+	height='(#ENV{hauteur}?{'', #HAUTEUR})']
+	[(#ENV*|env_to_attributs)] >
+	<param name='src' value='#URL_DOCUMENT' />
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+</object>[
+<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>
+][
+<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>
+]</div>]
+</BOUCLE_tous>

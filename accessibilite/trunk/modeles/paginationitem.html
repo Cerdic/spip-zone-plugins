@@ -1,0 +1,6 @@
+[(#ENV{num}|=={#ENV{page_courante}}|oui)
+		[<span class="on">(#ENV*{texte})</span>]
+	][(#ENV{num}|=={#ENV{page_courante}}|non)
+		[<a href='#ENV{url}' class='lien_pagination' rel='nofollow'[(#ENV{avant}|?{' ',#ENV{apres}|oui})title="[(#ENV{avant}) ][(#ENV*{texte}|strval|=={'&gt;'}|?{<:accessibilite:page_suivante:>,[(#ENV*{texte}|strval|=={'&lt;'}|?{<:accessibilite:page_precedente:>,[(#ENV*{texte}|attribut_html)]})]})][-(#ENV{modele_item}|=={'standard'}|?{#ENV*{texte}|plus{#ENV{pas}},''})][ (#ENV{apres})]"]>(#ENV*{texte})</a>]
+	][(#ENV{num}|<{#ENV{derniere}}|?{#ENV*{separateur},''})]
+	

@@ -1,0 +1,32 @@
+<BOUCLE_description_document(DOCUMENTS) {id_document=#ENV{id}}{tout}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:info_document:>[ - (#TITRE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+[(#CHEMIN{inc-head.html}|?{#INCLURE{fond=inc-head},#INCLURE{fond=inclure/head}})]
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Contenu principal : contenu du descriptif + titre du doc ]
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
+	
+		<div class="cartouche">
+            <div class="surlignable">
+				<h1 class="#EDIT{titre} entry-title">#TITRE</h1>
+            </div>
+        </div>	
+		
+        <div class="surlignable">
+			[<div class="#EDIT{texte} texte entry-content">(#DESCRIPTIF)</div>]
+		</div>		
+	
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_description_document>
