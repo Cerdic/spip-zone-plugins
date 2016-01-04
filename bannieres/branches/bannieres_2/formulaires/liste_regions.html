@@ -1,0 +1,9 @@
+<li>
+<label for="champ_diffusion"><:bannieres:label_diffusion:></label>
+<select name="diffusion" id="champ_diffusion">
+	<option value=""><:bannieres:choix_region:></option>
+	<BOUCLE_regions(GEO_REGIONS){tout}>
+	[<option value="#ID_REGION"[(#ID_REGION|=={#ENV{diffusion}}|?{' '}) selected="selected"]>(#NOM)</option>]
+	</BOUCLE_regions>
+</select>
+</li>

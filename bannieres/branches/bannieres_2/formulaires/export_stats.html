@@ -1,0 +1,43 @@
+
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_banniere,nouveau}'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_banniere' value='#ENV{id_banniere}' />
+		<input type='hidden' name='creation' value='#DATE' />
+
+<h2><:bannieres:export_stats:></h2>
+<p><:bannieres:explications_export_stats:></p>
+	[(#SAISIE{input, bannieres,
+		label=<:bannieres:label_export_campagne:>,
+		explication=<:bannieres:explication_export:>})]
+
+<h2><:bannieres:periode_export:></h2>
+<p><:bannieres:explications_periode_export:></p>
+
+	[(#SAISIE{input, debut,
+		label=<:bannieres:label_debut:>,
+		defaut='00/00/0000',
+		explication=<:bannieres:explication_date_export:>})]
+
+	[(#SAISIE{input, fin,
+		label=<:bannieres:label_fin:>,
+		defaut='00/00/0000',
+		explication=<:bannieres:explication_date_export:>})]
+
+	[(#SAISIE{radio, format_export,
+		label=<:bannieres:format_export:>,
+		defaut='virgule',
+		datas=#ARRAY{
+			virgule,<:bannieres:format_virgule:>,
+			point-virgule,<:bannieres:format_point_virgule:>,
+			tab,<:bannieres:format_tabulation:>}})]
+
+		<p class="boutons"><input type='submit' class='submit' value='<:bannieres:bouton_exporter:>' /></p>
+	</div></form>
+	]
+</div>

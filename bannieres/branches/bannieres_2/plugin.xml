@@ -1,0 +1,62 @@
+<plugin>
+	<nom>Banni&#232;res</nom>
+	<auteur>Jeannot, Fran&#231;ois de Montlivault, Matthieu Marcillaud, [erational->http://www.erational.org]</auteur>
+	<version>0.29.0</version>
+	<version_base>0.22</version_base>
+	<licence>GNU/GPL - (c) 2009-2011</licence>
+	<install>base/bannieres_upgrade.php</install>
+	<etat>dev</etat>
+	<slogan>G&#233;rer des campagnes d'information compos&#233;es d'images ou d'animations</slogan>
+	<description>
+La balise <code>#BANNIERE</code> permet de positionner facilement cet objet dans vos squelettes. 
+Plusieurs objets peuvent &#234;tre plac&#233;s sur la page et g&#233;r&#233;s en fonction de leur position (ex.: <code>#BANNIERE{1}</code>). 
+
+Si vous lui faites passer des informations de localisation, vous pourrez choisir l'objet &#224; afficher en cons&#233;quence. 
+Un lien est plac&#233; sur les images et le clic est comptabilis&#233;. 
+
+Enfin, la campagne s'affiche pendant la p&#233;riode que vous d&#233;finissez dans l'espace priv&#233;.
+	</description>
+	<lien>http://contrib.spip.net/Bannieres-2</lien>
+	<icon>images/bannieres.png</icon>
+	<prefix>bannieres</prefix> 	
+	<fonctions>bannieres_fonctions.php</fonctions>	
+	<bouton id='bannieres' parent='naviguer'>
+		<icone>images/bannieres.png</icone>
+		<titre>bannieres:bannieres</titre>
+	</bouton>
+	<bouton id='bannieres21' parent='bando_edition'>
+        <icone>images/bannieres.png</icone>
+        <titre>bannieres:bannieres</titre>
+        <url>bannieres</url>
+	</bouton>
+	<!-- pipeline -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/bannieres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/bannieres.php</inclure>
+	</pipeline> 	
+	<pipeline>
+		<nom>encart</nom>
+		<inclure>bannieres_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>bannieres_autorisations.php</inclure>
+	</pipeline>
+	<!-- avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>bannieres_pipelines.php</inclure>
+	</pipeline> 	
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
+	<!-- facilitons les champs de formulaires -->
+	<necessite id="saisies" version="[1.5.1;]" />
+	<!-- filtre |icone et boucles CONDITIONS -->
+	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<categorie>divers</categorie>
+	<!-- Pour la geolocalisation -->
+	<!-- <necessite id="geographie" version="[0.2;]" /> -->
+</plugin>

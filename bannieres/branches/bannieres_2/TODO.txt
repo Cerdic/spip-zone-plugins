@@ -1,0 +1,5 @@
+TODO
+----
+- Un sélecteur pour la date façon spip
+- Voir pour l'utilisation du filtre image_reduire
+- Config du suivi (table ou log)

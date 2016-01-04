@@ -1,0 +1,14 @@
+<li class="#EDIT{diffusion}">
+<label for="champ_diffusion"><:bannieres:label_diffusion:></label>
+<div class="choix">
+<select name="diffusion[]" id="champ_diffusion" multiple="multiple"  class="select">
+<BOUCLE_selection(POUR){tableau #ENV{datas}}>
+	<option value="#VALEUR"
+		<BOUCLE_selected(POUR) {tableau #ENV{diff}}>
+	[(#VALEUR|=={#_selection:VALEUR}|oui) selected="selected"]
+	</BOUCLE_selected>
+	 >#VALEUR</option>
+</BOUCLE_selection>
+</select>
+</li>
+</div>
