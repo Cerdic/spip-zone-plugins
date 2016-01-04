@@ -11,6 +11,7 @@ class Document {
 	public $date_indexation = 0;
 	public $uri = '';
 	public $properties = array();
+	public $to_delete = false;
 
 	public function __construct($data) {
 		$this->setAll($data);

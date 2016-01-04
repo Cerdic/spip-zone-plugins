@@ -30,27 +30,19 @@ class Sphinx implements StorageInterface {
 		foreach ($documents as $document) {
 			// On vérifie qu'il y a bien un Document
 			if ($document and $document instanceof \Indexer\Sources\Document) {
-
-				// effacer les documents ayant un statut ignore
-				if (
-					isset($document->properties['objet'])
-					and $statuts_ignores = lire_config('indexer/'. ($document->properties['objet']) .'/statuts_ignores')
-					and isset($document->properties['statut'])
-					and in_array($document->properties['statut'], $statuts_ignores)
-				) {
+				// Effacer les documents ayant un drapeau "to_delete"
+				if ($document->to_delete === true) {
 					$q = "DELETE FROM $this->indexName WHERE id=".$document->id;
-				}
-				else {
+				} else {
 					$data = $this->reformatDocument($document);
 					$data = array_map(array($this->sphinxql, 'escape_string'), $data);
 					$q = $query . "('" . implode("', '", $data) . "')";
 				}
-
-spip_log($q, 'indexer');
-
+				
 				if (!$this->sphinxql->query($q)) {
 					spip_log($this->sphinxql->errors(), 'indexer');
 					spip_log($q, 'indexer');
+					
 					return false;
 				}
 			}
@@ -90,15 +82,15 @@ spip_log($q, 'indexer');
 
 	public function reformatDocument(Document $document) {
 		return array(
-			"id"         => $document->id,
-			"title"      => $document->title,
-			"summary"    => $document->summary,
-			"content"    => $document->content,
-			"date"       => strtotime($document->date),
+			"id"              => $document->id,
+			"title"           => $document->title,
+			"summary"         => $document->summary,
+			"content"         => $document->content,
+			"date"            => strtotime($document->date),
 			"date_indexation" => intval($document->date_indexation),
-			"uri"        => $document->uri,
-			"properties" => json_encode($document->properties),
-			"signature"  => $this->signer($document),
+			"uri"             => $document->uri,
+			"properties"      => json_encode($document->properties),
+			"signature"       => $this->signer($document),
 		);
 	}
 
