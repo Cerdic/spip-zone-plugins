@@ -52,7 +52,7 @@ function balise_COLONNES_dist($p) {
 	}
 
 	// On calcule la class
-	$p->code = "class_grid_foundation($nombre_colonnes, $type).' columns'";
+	$p->code = "class_grid_foundation($nombre_colonnes, $type).'columns'";
 	$p->interdire_scripts = false;
 	return $p;
 }

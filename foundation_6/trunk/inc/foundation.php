@@ -39,12 +39,12 @@ function class_grid_foundation($nombre_colonnes, $type) {
         foreach ($nombre_colonnes as $key => $value) {
             // Utiliser un tableau large => 4
             if (is_numeric($value)) {
-                $class .= $key.'-'.$value;
+                $class .= $key.'-'.$value.' ';
             }
         }
         return $class;
     }
     else {
-        return $type.'-'.$nombre_colonnes;
+        return $type.'-'.$nombre_colonnes.' ';
     }
 }
