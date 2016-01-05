@@ -1,9 +1,3 @@
-<!--#navigation-->
-[<div class='iconifier-#ID_BANNIERE'>
-(#PIPELINE{encart,#ID_BANNIERE})
-</div>]
-<!--/#navigation-->
-
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_banniere,nouveau}'>
 	
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -28,11 +22,11 @@
 			
 		[(#SAISIE{input, debut,
 			label=<:bannieres:label_debut2:>,
-			size=8})]
+			class=date})]
 
 		[(#SAISIE{input, fin,
 			label=<:bannieres:label_fin2:>,
-			size=8})]
+			class=date})]
 
 		[(#ENV{alt}|=={''}|non)
 		[(#SAISIE{input, alt,
@@ -74,10 +68,10 @@
 				departement,<:bannieres:action_ajouter_departement:>,
 				local,<:bannieres:action_ajouter_local:>}
 			})]
-		]
+		]	
 		
 		[(#PLUGIN{geographie}|non)
-		<input type='hidden' name='rayon' value='int' />
+			<input type='hidden' name='rayon' value='int' />
 		]
 		
 		[(#ENV{rayon}| == {'pays'}|oui)
@@ -106,3 +100,16 @@
 	</div></form>
 	]
 </div>
+
+<script type="text/javascript">
+jQuery(function(){
+	// http://api.jqueryui.com/datepicker/#utility-formatDate
+	// http://api.jqueryui.com/datepicker/#option-dateFormat
+	jQuery('input.date').datepicker({
+		dateFormat: "yy-mm-dd"
+	});
+
+	
+});
+</script>
+
