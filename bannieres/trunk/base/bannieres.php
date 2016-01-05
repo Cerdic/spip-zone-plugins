@@ -1,11 +1,11 @@
 <?php
 
 	/**
-	* Plugin Bannières
+	* Plugin Bannieres
 	*
 	* Copyright (c) 2009
 	* François de Montlivault - Jeannot
-	* Mise à jour Inspirée du plugin chats
+	* Mise a jour Inspiree du plugin chats
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
 	*  
@@ -18,47 +18,62 @@ function bannieres_declarer_tables_interfaces($interface){
 }
 
 
-function bannieres_declarer_tables_principales($tables_principales){
+function bannieres_declarer_tables_objets_sql($tables){
 
-	$spip_bannieres = array(
-		"id_banniere" 	=> "bigint(21) NOT NULL auto_increment",
-		"nom" 			=> "VARCHAR(100) DEFAULT '' NOT NULL",
-		"email" 		=> "VARCHAR(100) DEFAULT '' NOT NULL",
-		"site" 			=> "VARCHAR(255) DEFAULT '' NOT NULL",
-		"debut"			=> "date DEFAULT '0000-00-00' NOT NULL",
-		"fin"			=> "date DEFAULT '0000-00-00' NOT NULL",
-		"clics"			=> "int(11) DEFAULT '0' NOT NULL",
-		"affichages"		=> "int(11) DEFAULT '0' NOT NULL",
-		"commentaires" 	=> "text DEFAULT '' NOT NULL",
-		"creation"		=> "date DEFAULT '0000-00-00' NOT NULL",
-		"position"		=> "tinyint(2) NOT NULL default '1'",
-		"rayon"			=> "VARCHAR(50) DEFAULT 'int' NOT NULL",
-		"diffusion"		=> "text DEFAULT '' NOT NULL",
-		"maj" 			=> "TIMESTAMP",
-			);
+	$tables['spip_bannieres'] = array(
+		'type' => 'banniere',
+		'principale' => "oui",
+		'field'=>array(
+			"id_banniere" 	=> "bigint(21) NOT NULL auto_increment",
+			"nom" 			=> "VARCHAR(100) DEFAULT '' NOT NULL",
+			"email" 		=> "VARCHAR(100) DEFAULT '' NOT NULL",
+			"site" 			=> "VARCHAR(255) DEFAULT '' NOT NULL",
+			"debut"			=> "date DEFAULT '0000-00-00' NOT NULL",
+			"fin"			=> "date DEFAULT '0000-00-00' NOT NULL",
+			"clics"			=> "int(11) DEFAULT '0' NOT NULL",
+			"affichages"		=> "int(11) DEFAULT '0' NOT NULL",
+			"commentaires" 	=> "text DEFAULT '' NOT NULL",
+			"creation"		=> "date DEFAULT '0000-00-00' NOT NULL",
+			"position"		=> "tinyint(2) NOT NULL default '1'",
+			"rayon"			=> "VARCHAR(50) DEFAULT 'int' NOT NULL",
+			"diffusion"		=> "text DEFAULT '' NOT NULL",
+			"maj" 			=> "TIMESTAMP",
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_banniere" 
+		),
+		'titre' => "nom AS titre, '' AS lang",
+		 #'date' => "",
+		'champs_editables'  => array('nom', 'email', 'site', 'fin'),
+		'champs_versionnes' => array(),
+		'rechercher_champs' => array(),
+		'tables_jointures'  => array(),
+		
+	);
 	
-	$spip_bannieres_key = array(
-			"PRIMARY KEY"	=> "id_banniere"
-			);
 
-	$spip_bannieres_suivi = array(
-			"id_banniere"	=> "bigint(21) NOT NULL",
-			"id_auteur"		=> "bigint(21) NOT NULL",
-			"ip"			=> "VARCHAR(50) NOT NULL",
-			"page"			=> "VARCHAR(255) DEFAULT '' NOT NULL",
-			"date"			=> "timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL",
-			);
-	
-	$spip_bannieres_suivi_key = array(
-			"KEY"	=> "id_banniere"
-			);
-	
-	
-$tables_principales['spip_bannieres'] =	array('field' => &$spip_bannieres,'key'=>$spip_bannieres_key);
 
-$tables_principales['spip_bannieres_suivi'] =	array('field' => &$spip_bannieres_suivi,'key'=>$spip_bannieres_suivi_key);
+	$tables['spip_bannieres_suivi'] = array(
+			'type' => 'banniere_suivi',
+			'principale' => "oui",
+			'field'=>array(
+				"id_banniere"	=> "bigint(21) NOT NULL",
+				"id_auteur"		=> "bigint(21) NOT NULL",
+				"ip"			=> "VARCHAR(50) NOT NULL",
+				"page"			=> "VARCHAR(255) DEFAULT '' NOT NULL",
+				"date"			=> "timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL",
+			),
+			'key'=>array(
+				"KEY"	=> "id_banniere"
+			)
+	);
 
-	return $tables_principales;
+
+	
+	
+
+
+	return $tables;
 }
 
 

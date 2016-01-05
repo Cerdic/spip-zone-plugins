@@ -1,9 +1,23 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+
 function bannieres_objets_extensibles($objets){
 		return array_merge($objets, array('banniere' => _T('bannieres:bannieres')));
 }
 
+function bannieres_jqueryui_plugins($scripts){
+   $scripts[] = "jquery.ui.datepicker";
+   return $scripts;
+}
+
+/**
+ * banniere_encart()
+ *
+ * affiche les documents sur la page edition d'une banniere
+*/
 function bannieres_encart($flux){
 
 	$id_banniere = $flux;

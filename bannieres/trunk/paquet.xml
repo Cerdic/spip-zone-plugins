@@ -1,0 +1,43 @@
+<paquet
+	prefix="bannieres"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.99]"
+	logo="prive/theme/spip/images/banniere-32.png"
+	schema="1.0.0"
+	documentation="http://contrib.spip.net/Bannieres-2"
+>	
+
+	<nom>Banni&#232;res</nom>
+	<!-- Gérer des campagnes d'information composées d'images ou d'animations -->
+
+	<auteur>Jeannot</auteur>
+	<auteur>François de Montlivault</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.erational.org">erational</auteur>
+	<auteur lien="http://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
+	
+	<copyright>2009-2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="autoriser" inclure="bannieres_autorisations.php" />
+	
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/bannieres.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/bannieres.php" /> 
+	
+	<pipeline nom="encart" inclure="bannieres_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="bannieres_pipelines.php" />
+	
+	<pipeline nom="jqueryui_plugins" inclure="bannieres_pipelines.php" />
+	
+	<!--<pipeline nom="objets_extensibles" inclure="bannieres_pipelines.php" />-->
+
+	<necessite nom="saisies" compatibilite="[1.5.1;[" />
+	
+	<necessite nom="spip_bonux" compatibilite="[1.9.3;[" />
+
+	<!--<menu nom="bannieres" titre="bannieres:bannieres" parent="naviguer" icone="images/banniere-16.png" />-->
+	<menu nom="bannieres" titre="bannieres:bannieres" parent="menu_edition" icone="images/banniere-16.png" action="bannieres" />
+</paquet>
