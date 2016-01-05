@@ -61,10 +61,14 @@ class SPIP_GeSHi extends GeSHi {
 	 */
 	function handle_multiline_regexps($matches) {
 		$key = $this->_hmr_key;
-		if (    isset($this->language_data['REGEXPS'][$key][SPIP_GESHI_REGEXP_FUNCTION])
-		  and $func = $this->language_data['REGEXPS'][$key][SPIP_GESHI_REGEXP_FUNCTION]
-		  and function_exists($func)) {
-			return $func($matches, $this);
+		if (  is_array($this->language_data['REGEXPS'][$key])
+		  and isset($this->language_data['REGEXPS'][$key][SPIP_GESHI_REGEXP_FUNCTION])
+		  and $func = $this->language_data['REGEXPS'][$key][SPIP_GESHI_REGEXP_FUNCTION]) {
+
+			if (function_exists($func)) {
+				return $func($matches, $this);
+			}
+			spip_log("$func inexistante dans this->language_data['REGEXPS'][$key]=" . var_export($this->language_data['REGEXPS'][$key],true), "geshi" . _LOG_ERREUR);
 		}
 
 		return parent::handle_multiline_regexps($matches);
@@ -79,7 +83,8 @@ class SPIP_GeSHi extends GeSHi {
 	**/
 	function handle_singleline_regexps($stuff_to_parse, $regexp, $key) {
 
-		if (    isset($regexp[SPIP_GESHI_REGEXP_FUNCTION])
+		if (  is_array($regexp)
+		  and isset($regexp[SPIP_GESHI_REGEXP_FUNCTION])
 		  and $func = $regexp[SPIP_GESHI_REGEXP_FUNCTION]
 		  and function_exists($func)) {
 
