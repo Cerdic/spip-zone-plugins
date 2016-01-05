@@ -2,9 +2,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * informer si les magnets sont actifs sur un objet ou non (par defaut sur les articles uniquement)
+ *
+ * @param string $type
+ * @return bool
+ */
 function magnet_actif_sur_objet($type){
 	static $actifs;
 	if (is_null($actifs)){
+		if (!function_exists('lire_config')){
+			include_spip('inc/config');
+		}
 		$actifs = lire_config("magnet/objets",array('spip_articles'));
 		$actifs = array_map('objet_type',$actifs);
 	}
