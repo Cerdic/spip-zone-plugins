@@ -11,7 +11,7 @@
 		[(#SET{retour, [(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]})]
 	</BOUCLE_titre>
 		
-	[(#INCLURE{fond=prive/editer/banniere,
+	[(#INCLURE{fond=prive/squelettes/inclure/banniere_edit,
 		id_banniere=#GET{id_banniere},
 		rayon=#GET{rayon},
 		diffusion=#GET{diffusion},

@@ -1,0 +1,10 @@
+[(#AUTORISER{voir,banniere})
+	<h1 class="grostitre"><:bannieres:statistiques_des_campagnes:></h1>
+	<p><:bannieres:explications_statistiques:></p>
+	
+	<div class='ajax'>
+        [(#REM)<!-- tableau des stats des campagnes-->]
+		<INCLURE{fond=prive/squelettes/inclure/statistiques_bannieres,env,ajax} />
+	</div>
+
+]

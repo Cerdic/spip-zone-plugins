@@ -1,0 +1,31 @@
+[(#AUTORISER{voir,banniere})
+	<!--#navigation--> 
+	[(#AUTORISER{modifier,banniere})
+		[(#SET{titre_boite, [(#VAL{bannieres:bannieres}|_T)] })]
+		#BOITE_OUVRIR{#GET{titre_boite},'simple'}
+				<p><:bannieres:description_bannieres:></p>
+				[(#PLUGIN{geographie}|oui) <INCLURE{fond=inclure/liste_crea,env,ajax} />]
+				[(#PLUGIN{geographie}|non)
+						[(#URL_ECRIRE{banniere_edit}
+								|parametre_url{new,oui}
+								|parametre_url{rayon,int}
+								|icone_horizontale{<:bannieres:action_ajouter:>,banniere,new})]
+				]
+			
+				<ul style="padding:0;margin:1em 0;list-style:none;line-height:150%;">
+						<li><img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>" width="[(#CHEMIN{images/puce-blanche.gif}|largeur)]" height="[(#CHEMIN{images/puce-blanche.gif}|hauteur)]" /> <:bannieres:future:></li>
+						<li><img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>" width="[(#CHEMIN{images/puce-verte.gif}|largeur)]" height="[(#CHEMIN{images/puce-verte.gif}|hauteur)]" /> <:bannieres:active:></li>
+						<li><img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>" width="[(#CHEMIN{images/puce-rouge.gif}|largeur)]" height="[(#CHEMIN{images/puce-rouge.gif}|hauteur)]" /> <:bannieres:echue:></li>
+				</ul>
+			
+				<p>
+						
+						[(#URL_ECRIRE{statistiques_bannieres}|icone_horizontale{<:bannieres:statistiques:>,banniere})]
+				
+				</p>
+		
+		
+		#BOITE_FERMER	
+	]
+	<!--/#navigation-->
+]

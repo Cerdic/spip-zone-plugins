@@ -1,0 +1,60 @@
+#CACHE{0}
+<BOUCLE_actives(BANNIERES){id_banniere=#ENV{id}}>
+
+	<B_annee>
+	<h2><:bannieres:statistiques_campagne{num=#ID_BANNIERE}:></h2>
+
+	<BOUCLE_annee(BANNIERES_SUIVI){par date}{id_banniere=#ID_BANNIERE}{fusion YEAR(date)}>
+<table class='bannieres spip' summary="<:bannieres:tableau_statistiques:>">
+	<caption>
+		#SET{annee,#DATE|annee}
+		<:bannieres:statistiques_annee{ban=#ID_BANNIERE,annee=#GET{annee}}:>
+	</caption>
+	<thead>
+	<tr>
+		<th>01</th>
+		<th>02</th>
+		<th>03</th>
+		<th>04</th>
+		<th>05</th>
+		<th>06</th>
+		<th>07</th>
+		<th>08</th>
+		<th>09</th>
+		<th>10</th>
+		<th>11</th>
+		<th>12</th>
+	</tr>
+	</thead>
+	<tbody>
+
+	<tr>
+		<BOUCLE_mois(POUR){tableau 1:12}>
+			<BOUCLE_clics_mois(BANNIERES_SUIVI){id_banniere=#ID_BANNIERE}{agenda date, mois, (#DATE|annee), #VALEUR}> </BOUCLE_clics_mois>
+				#SET{mois#VALEUR,#GRAND_TOTAL}
+				<td>#GRAND_TOTAL</td>
+			</B_clics_mois>
+				#SET{mois#VALEUR,0}
+				<td>0</td>
+			<//B_clics_mois>
+		</BOUCLE_mois>
+	</tr>
+
+	</tbody>
+</table>
+
+[(#REM) Pour ceux qui ont installé le plugin JpGraph ]
+[(#PLUGIN{jpgraph}|oui)
+
+	[(#MODELE{jpgraph}
+	{type_graphe=barre}
+	{titre=[(#DATE|annee)]}
+		{donnee=[(#GET{mois1})];[(#GET{mois2})];[(#GET{mois3})];[(#GET{mois4})];[(#GET{mois5})];[(#GET{mois6})];[(#GET{mois7})];[(#GET{mois8})];[(#GET{mois9})];[(#GET{mois10})];[(#GET{mois11})];[(#GET{mois12})]}
+	{legende=Jan;Fev;Mar;Avr;Mai;Jui;Jui;Aou;Sep;Oct;Nov;Dec}
+	{largeur=500}
+	{hauteur=300}
+	{couleur=blue})]
+]
+	</BOUCLE_annee>
+
+</BOUCLE_actives>
