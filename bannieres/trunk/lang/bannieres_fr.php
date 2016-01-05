@@ -126,7 +126,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_nouveau_banniere' => 'Sans nom',
-
+    'titre_page_bannieres'=>'Gestion des campagnes',
+    'titre_page_statistiques'=>'Statistiques des campagnes',
+    
 	// U
 	'url_site' => 'Lien URL',
 	
