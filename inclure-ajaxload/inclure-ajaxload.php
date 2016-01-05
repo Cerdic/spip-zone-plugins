@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_SPIP_LIER_RESSOURCES")) define("_SPIP_LIER_RESSOURCES", false);
 
 // Par defaut, cache de 2 heures pour l'ajax statique
 // possibilité de forcer une duree avec le critere {ttl_ajaxload=60*60*24}
@@ -122,6 +123,7 @@ function recuperer_fond_ajax() {
 
 		$ret =
 			"<div class='includestatic$class_ajax'><a href=\"$url\" rel=\"$fichier\">$searching</a></div>";
+		if (_SPIP_LIER_RESSOURCES) $ret .= "<link href='$fichier' rel='attachment' property='url'>";
 		
 		
 		//print_r($contenu);
@@ -133,6 +135,8 @@ function recuperer_fond_ajax() {
 	
 		$ret =
 			"<div class='includeajax$class_ajax'><a href=\"$url\" rel=\"$ajax nofollow\">$searching</a></div>";
+		if (_SPIP_LIER_RESSOURCES) $ret .= "<link href='$url' rel='attachment' property='url'>";
+			
 	}
 	
 	return $ret;
