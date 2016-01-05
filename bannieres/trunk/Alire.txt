@@ -1,3 +1,20 @@
+Bannieres pour SPIP 3.0
+------------------------
+
+- passage du plugin pour spip 3.0.*; 3.1.*
+
+- modification de l'installation qui ne passait pas, utilisation de l'API spip 3 de declaration d'objets
+  * utilisation de la pipeline declarer_table_objet_sql
+  
+- Cosmétique : remise en forme sur les squelettes du privé avec la charte et les boites infos
+passage en squelettes Z des pages exec (à finir)
+
+- mise en place du datepicker de jquery.ui, avec la SAISIE date le format n'est pas renvoyé dans le bon format,
+et pas réussi à modifier le format dans le datepicker des saisies, via jQuery ("option","dateFormat")
+Pour le moment on utilise donc un champ input et on instancie un nouveau datepicker, qui se retrouve en anglais
+
+
+
 Bannieres pour SPIP 2.0
 ------------------------
 
