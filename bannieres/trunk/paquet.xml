@@ -3,8 +3,8 @@
 	categorie="divers"
 	version="1.0.0"
 	etat="dev"
-	compatibilite="[3.0.0;3.1.99]"
-	logo="prive/theme/spip/images/banniere-32.png"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/banniere-32.png"
 	schema="1.0.0"
 	documentation="http://contrib.spip.net/Bannieres-2"
 >	
@@ -34,9 +34,9 @@
 	
 	<!--<pipeline nom="objets_extensibles" inclure="bannieres_pipelines.php" />-->
 
-	<necessite nom="saisies" compatibilite="[1.5.1;[" />
+	<necessite nom="saisies" compatibilite="[2.5.*;[" />
 	
-	<necessite nom="spip_bonux" compatibilite="[1.9.3;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.2.*;[" />
 
 	<!--<menu nom="bannieres" titre="bannieres:bannieres" parent="naviguer" icone="images/banniere-16.png" />-->
 	<menu nom="bannieres" titre="bannieres:bannieres" parent="menu_edition" icone="images/banniere-16.png" action="bannieres" />

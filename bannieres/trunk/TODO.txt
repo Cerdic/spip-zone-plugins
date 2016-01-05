@@ -1,5 +1,16 @@
 TODO
 ----
-- Un sélecteur pour la date façon spip
+
+- Améliorer le selecteur de date :
+    actuellement on utilise jquery.ui datepicker a l'arrache pour pas embarquer verifier,
+    car la SAISIE date retourne les dates dans le mauvais format.
+
 - Voir pour l'utilisation du filtre image_reduire
+
 - Config du suivi (table ou log)
+
+- pouvoir utiliser un script ou du html en vue de proposer des bannières addWords
+si aucune campagne n'est active sur le site, et surtout passer au bannière responsives
+
+- dans le cas de contenus flash, proposer une image de fallback
+si flash player n'est pas présent (obligatoire en regie pub normalement)
