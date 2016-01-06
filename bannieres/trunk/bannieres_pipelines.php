@@ -3,11 +3,16 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-
+/**
+ * Champ extra : objet extensibles
+*/
 function bannieres_objets_extensibles($objets){
 		return array_merge($objets, array('banniere' => _T('bannieres:bannieres')));
 }
 
+/**
+ * JqueryUi.datePicker
+*/
 function bannieres_jqueryui_plugins($scripts){
    $scripts[] = "jquery.ui.datepicker";
    return $scripts;
