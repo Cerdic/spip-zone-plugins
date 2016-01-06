@@ -3,7 +3,7 @@
 	<slogan>Modifier, le temps d'un test, son statut de webmestre</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
@@ -41,7 +41,7 @@
 		<url>changestatut</url>
 		<args>statut=webmestre</args>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
-	<necessite id="bando" version="[1.1.;]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="bando" version="[1.1.0;]" />
 	<categorie>outil</categorie>
 </plugin>
