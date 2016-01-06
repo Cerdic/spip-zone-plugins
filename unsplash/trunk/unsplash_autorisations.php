@@ -15,7 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Fonction d'appel pour le pipeline.
- * @pipeline autoriser */
+ *
+ * @pipeline autoriser
+ */
 function unsplash_autoriser() {
 }
 

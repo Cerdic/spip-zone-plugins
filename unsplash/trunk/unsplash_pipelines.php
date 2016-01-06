@@ -34,7 +34,7 @@ function unsplash_affiche_auteurs_interventions($flux) {
 }
 
 function unsplash_header_prive($flux) {
-	$flux .= "<link rel='stylesheet' id='font-awesome-css'  href='".find_in_path('lib/font-awesome/css/font-awesome.min.css')."' type='text/css' media='all' />";
+	$flux .= "<link rel='stylesheet' id='font-awesome-css'  href='" . find_in_path('lib/font-awesome/css/font-awesome.min.css') . "' type='text/css' media='all' />";
 
 	return $flux;
 }

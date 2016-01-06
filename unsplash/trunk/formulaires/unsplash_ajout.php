@@ -23,10 +23,10 @@ function formulaires_unsplash_ajout_verifier_dist() {
 	$mode = _request('mode');
 	$id_objet = _request('id_objet');
 	$objet = _request('objet');
-	$where = array('id_unsplash='.$id_new, 'mode='.sql_quote($mode));
+	$where = array('id_unsplash=' . $id_new, 'mode=' . sql_quote($mode));
 	if (isset($id_objet) and isset($objet)) {
-		$where[] = 'id_objet='.$id_objet;
-		$where[] = 'objet='.sql_quote($objet);
+		$where[] = 'id_objet=' . $id_objet;
+		$where[] = 'objet=' . sql_quote($objet);
 	}
 	/* On vérifie que la photo n'a pas déjà été importé. */
 	$deja_upload = sql_countsel('spip_unsplash', $where);
@@ -90,14 +90,14 @@ function formulaires_unsplash_ajout_traiter_dist() {
 	}
 	$import_filename = explode('.', $photo_infos['filename']);
 	$import_filename = $import_filename[0];
-	$import_distant = _UNSPLASH_URL.$_width.'/'.$_height.'/?image='.$id_new;
-	$import_photo = _DIR_RACINE.copie_locale($import_distant);
+	$import_distant = _UNSPLASH_URL . $_width . '/' . $_height . '/?image=' . $id_new;
+	$import_photo = _DIR_RACINE . copie_locale($import_distant);
 	/*
 	 * On est ici dans le cadre d'un import d'une photo Unsplash en tant que document
 	 */
 	if ($mode === 'document') {
-		$import_dir = _DIR_IMG.$extension.'/';
-		$import_destination = $import_dir.$import_filename.'.'.$extension;
+		$import_dir = _DIR_IMG . $extension . '/';
+		$import_destination = $import_dir . $import_filename . '.' . $extension;
 		$import_result = deplacer_fichier_upload($import_photo, $import_destination, true);
 		if ($import_result) {
 			$document_info = array(
@@ -111,31 +111,38 @@ function formulaires_unsplash_ajout_traiter_dist() {
 				'statut' => 'prepa',
 				'distant' => 'non',
 				'date_publication' => $photo_infos['date_ajout'],
-				'credits' => '['.$photo_infos['author'].'->'.$photo_infos['author_url'].']',
+				'credits' => '[' . $photo_infos['author'] . '->' . $photo_infos['author_url'] . ']',
 				'media' => 'image',
 			);
 			$_id_document = sql_insertq('spip_documents', $document_info);
 			$photo_infos['id_objet'] = $_id_document; // On indique l'identifiant du document fraichement inséré dans la BDD
 			$photo_infos['objet'] = objet_type('documents'); // On indique l'objet
 			sql_insertq('spip_unsplash', $photo_infos);
-			$resultats = array('editable' => true, 'message_ok' => _T('unsplash:importation_reussie_document'), 'redirect' => generer_url_ecrire('unsplash'));
+			$resultats = array(
+				'editable' => true,
+				'message_ok' => _T('unsplash:importation_reussie_document'),
+				'redirect' => generer_url_ecrire('unsplash'),
+			);
 		}
 	} else {
 		/*
 		 * Ici on importe uen photo Unsplash en tant que logo
 		 */
-		echo 'On importe un logo <br/>';
 		include_spip('inc/chercher_logo');
 		$import_dir = _DIR_LOGOS;
 		$id_table_objet = id_table_objet($objet); // On cherche la clé primaire de l'objet
 		$_mode_logo = ($mode === 'normal') ? 'on' : 'off'; // Le mode du logo désiré
-		$import_destination = $import_dir.type_du_logo($id_table_objet).$_mode_logo.$id_objet.'.'.$extension; // On construit le futur logo de l'objet
+		$import_destination = $import_dir . type_du_logo($id_table_objet) . $_mode_logo . $id_objet . '.' . $extension; // On construit le futur logo de l'objet
 		$import_result = deplacer_fichier_upload($import_photo, $import_destination, true); // On déplace la photo Unsplash vers le logo de l'objet
 		$photo_infos['id_objet'] = $id_objet;
 		$photo_infos['objet'] = $objet;
 		if ($import_result) {
 			sql_insertq('spip_unsplash', $photo_infos); // On insère la trace de la photo dans la BDD.
-			$resultats = array('editable' => true, 'message_ok' => _T('unsplash:importation_reussie_logo'), 'redirect' => generer_url_ecrire($objet, $id_table_objet.'='.$id_objet));
+			$resultats = array(
+				'editable' => true,
+				'message_ok' => _T('unsplash:importation_reussie_logo'),
+				'redirect' => generer_url_ecrire($objet, $id_table_objet . '=' . $id_objet),
+			);
 		}
 	}
 
