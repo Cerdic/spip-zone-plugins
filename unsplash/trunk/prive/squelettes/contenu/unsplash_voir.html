@@ -1,0 +1,42 @@
+[(#AUTORISER{voir,unsplash,#ID_UNSPLASH}|sinon_interdire_acces)]
+<BOUCLE_unsplash (UNSPLASH){id_unsplash}{si #ENV{exec}|=={unsplash_voir}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,unsplash,#ID_UNSPLASH})
+		[(#ID_UNSPLASH|afficher_qui_edite{unsplash}|non)
+			[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH}|icone_verticale{<:unsplash:icone_modifier_unsplash:>,unsplash,edit,right ajax preload})]
+		]
+		[(#ID_UNSPLASH|afficher_qui_edite{unsplash}|oui)
+			[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH}|icone_verticale{#ID_UNSPLASH|afficher_qui_edite{unsplash},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#FILENAME|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{unsplash-24.png}|balise_img{unsplash,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/unsplash_voir,id=#ID_UNSPLASH,id_unsplash=#ID_UNSPLASH,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,unsplash,#ID_UNSPLASH})
+	[(#ID_UNSPLASH|afficher_qui_edite{unsplash}|non)
+		[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH}|icone_verticale{<:unsplash:icone_modifier_unsplash:>,unsplash,edit,right ajax preload})]
+	]
+	[(#ID_UNSPLASH|afficher_qui_edite{unsplash}|oui)
+		[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH}|icone_verticale{#ID_UNSPLASH|afficher_qui_edite{unsplash},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,unsplash,id,#ID_UNSPLASH},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_unsplash>
+[(#ENV**{exec}|=={unsplash_edit}|?{#INCLURE{fond=prive/squelettes/contenu/unsplash_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_unsplash>

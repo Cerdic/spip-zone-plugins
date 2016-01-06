@@ -1,0 +1,30 @@
+<paquet
+	prefix="unsplash"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.9;3.0.*]"
+	logo="prive/themes/spip/images/unsplash-64.png"
+	documentation=""
+	schema="0.1.0"
+>
+
+	<nom>Unsplash</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+	<necessite nom="spip_bonux"  compatibilite="[3.2.0;]" />
+
+	<lib nom="font-awesome" lien="https://fortawesome.github.io/Font-Awesome/assets/font-awesome-4.5.0.zip" />
+
+	<pipeline nom="autoriser" inclure="unsplash_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/unsplash.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/unsplash.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="unsplash_pipelines.php" />
+	<pipeline nom="header_prive" inclure="unsplash_pipelines.php" />
+
+	<menu nom="unsplash" titre="unsplash:titre_unsplash" parent="menu_edition" icone="images/unsplash-16.png" action="unsplash" />
+</paquet>

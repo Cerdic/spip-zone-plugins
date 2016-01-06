@@ -1,0 +1,35 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_unsplash,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_unsplash' value='#ENV{id_unsplash}' />
+		<ul class="editer-groupe">
+
+			[(#SAISIE{input, filename, obligatoire=oui,
+				label=<:unsplash:champ_filename_label:>})]
+
+			[(#SAISIE{input, width,
+				label=<:unsplash:champ_width_label:>})]
+
+			[(#SAISIE{input, height,
+				label=<:unsplash:champ_height_label:>})]
+
+			[(#SAISIE{input, author,
+				label=<:unsplash:champ_author_label:>})]
+
+			[(#SAISIE{input, author_url,
+				label=<:unsplash:champ_author_url_label:>})]
+
+			[(#SAISIE{input, post_url,
+				label=<:unsplash:champ_post_url_label:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

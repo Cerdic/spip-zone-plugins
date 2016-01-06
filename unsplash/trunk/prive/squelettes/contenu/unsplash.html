@@ -1,0 +1,11 @@
+<h1><:unsplash:titre_unsplash:></h1>
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/unsplash, par=filename, env, ajax, sinon=<:unsplash:info_aucun_unsplash:>}>
+
+
+[(#AUTORISER{ajouter,unsplash})
+    [(#URL_ECRIRE{unsplash_ajout}|icone_verticale{<:unsplash:icone_ajouter_unsplash:>,unsplash,new,right})]
+]

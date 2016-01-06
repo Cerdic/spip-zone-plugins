@@ -1,0 +1,179 @@
+[(#REM)<style>/*
+    Ce squelette definit les styles de l'espace prive
+
+    Note: l'entete "Vary:" sert a repousser l'entete par
+    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+    genant en cas de "rotation du cookie de session" apres
+    un changement d'IP (effet de clignotement).
+
+    ATTENTION: il faut absolument le charset sinon Firefox croit que
+    c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+#SET{unsplash_color,#A984D3} [unsplash_color: (#GET{unsplash_color});]
+#SET{unsplash_bg,#7e56ab} [unsplash_bg: (#GET{unsplash_bg});]
+#SET{unsplash_thumb_width,#EVAL{'_UNSPLASH_THUMB_WIDTH'}}
+#SET{unsplash_thumb_height,#EVAL{'_UNSPLASH_THUMB_HEIGHT'}}
+*/
+
+.unsplash_bg {
+    background-color: #GET{foncee};
+}
+
+.unsplash_color {
+    color: #GET{unsplash_color};
+}
+
+.unsplash_ajout #contenu .unsplash_photos {
+    list-style: outside none none;
+    margin-right: 0;
+    margin-left: 0;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    padding: 0;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    [width: (#GET{unsplash_thumb_width}|moins{2})px;]
+    [height: (#GET{unsplash_thumb_height}|moins{2})px;]
+    border: 1px solid #GET{foncee};
+    margin-[(#GET{right})]: 7px;
+    margin-[(#GET{left})]:; 0;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter:hover .detail {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.50);
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .preview {
+    clear: both;
+    display: block;
+    position: absolute;
+    top: -1px;
+    [width: (#GET{unsplash_thumb_width})px;]
+    [height: (#GET{unsplash_thumb_height})px;]
+    #GET{left}: -1px;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .preview button {
+    margin: 0;
+    padding: 0;
+    border: none transparent;
+    padding-block-end: 0;
+    padding-block-start: 0;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+    [width: (#GET{unsplash_thumb_width})px;]
+    [height: (#GET{unsplash_thumb_height})px;]
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .preview button img {
+    margin: 0;
+    padding: 0;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail {
+    font-size: 0.825em;
+    display: none;
+    position: relative;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+    right:0;
+    left:0;
+    color: [#(#GET{foncee}|replace{'#',''}|couleur_luminance{0})];
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .author a {
+    color: [#(#GET{foncee}|replace{'#',''}|couleur_luminance{0})];
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .controls {
+    display: block;
+    position: relative;
+    margin: -5px;
+    overflow: hidden;
+    background-color: #GET{foncee};
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .controls a,
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .zoom-in,
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .download {
+    display: block;
+    width: 2em;
+    height: 2em;
+    font-size: 1.5em;
+    line-height: 2em;
+    text-align: center;
+    color: [#(#GET{foncee}|replace{'#',''}|couleur_luminance{0})];
+    float: #GET{left};
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .download {
+    margin-#GET{left}: 5px;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .controls a i,
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .zoom-in i,
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .download i {
+    font-size: 1em;
+    line-height: 2em;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .num_photo {
+    font-weight: bold;
+    color: white;
+    float: #GET{right};
+    padding-#GET{right}: 10px;
+}
+.unsplash_ajout #contenu .unsplash_photos .ajouter .detail .info {
+    clear: both;
+    margin-bottom: 5px;
+}
+.unsplash_ajout #contenu .formulaire_unsplash_ajout {
+}
+.unsplash_ajout #contenu .unsplash_block .pagination {
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+}
+
+.unsplash_voir #contenu #wysiwyg .champ {
+    overflow: hidden;
+    padding-top: 0.5em;
+    margin-top: 0.5em;
+    border-top: 1px solid #GET{foncee};
+}
+.unsplash_voir #contenu #wysiwyg .champ .label.visible {
+    display: block;
+    width: 27%;
+    float: #GET{left};
+}
+.unsplash_voir #contenu #wysiwyg .champ .span {
+    display: block;
+    width: 70%;
+    float: #GET{right};
+}
+.unsplash_voir #conteneur div#navigation .infos .unsplash_preview {
+    display: block;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    [height: (#GET{unsplash_thumb_height})px;]
+}
+[(#REM)</style>]

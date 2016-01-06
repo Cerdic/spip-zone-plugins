@@ -1,0 +1,26 @@
+<BOUCLE_unsplash(UNSPLASH){id_unsplash=#ENV{id}}>
+[(#SET{unsplash_url,#EVAL{'_UNSPLASH_URL'}})]
+[(#SET{unsplash_thumb_width,#EVAL{'_UNSPLASH_THUMB_WIDTH'}})]
+[(#SET{unsplash_thumb_height,#EVAL{'_UNSPLASH_THUMB_HEIGHT'}})]
+<div class='infos'>
+    [(#SET{texte_objet,<:unsplash:titre_unsplash:>})]
+    <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_UNSPLASH</p></div>
+    <div class="unsplash_preview" style="background-image: url([(#GET{unsplash_url})][(#GET{unsplash_thumb_width})]/[(#GET{unsplash_thumb_height})]/?image=#ID_UNSPLASH)">
+    </div>
+    [(#URL_ECRIRE{[(#OBJET|=={document}|?{documents,#OBJET})],[(#OBJET|id_table_objet)=]#ID_OBJET}|icone_horizontale{<:unsplash:voir_objet_associe:>,#OBJET})]
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        unsplash_prevew_resize($('.unsplash_voir #conteneur div#navigation .infos .unsplash_preview'));
+        $( window ).resize(function() {
+            unsplash_prevew_resize($('.unsplash_voir #conteneur div#navigation .infos .unsplash_preview'));
+        });
+    });
+    function unsplash_prevew_resize(target){
+        var unsplash_preview_largeur = target.width();
+        target.css({
+            height: parseInt(unsplash_preview_largeur*[(#GET{unsplash_thumb_height})]/[(#GET{unsplash_thumb_width})]),
+        });
+    }
+</script>
+</BOUCLE_unsplash>

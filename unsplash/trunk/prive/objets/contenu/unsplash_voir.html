@@ -1,0 +1,48 @@
+<BOUCLE_unsplash (UNSPLASH) {id_unsplash}>
+
+[<div class="champ contenu_filename[ (#FILENAME*|strlen|?{'',vide})] invisible hidden">
+	<div class="label visible"><:unsplash:champ_filename_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{filename} filename span'>(#FILENAME)</div>
+</div>]
+
+[<div class="champ contenu_width[ (#WIDTH*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_width_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{width} width span'>(#WIDTH)</div>
+</div>]
+
+[<div class="champ contenu_height[ (#HEIGHT*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_height_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{height} height span'>(#HEIGHT)</div>
+</div>]
+
+[<div class="champ contenu_author[ (#AUTHOR*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_author_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{author} author span'>(#AUTHOR)</div>
+</div>]
+
+[<div class="champ contenu_author_url[ (#AUTHOR_URL*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_author_url_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{author_url} author_url span'><a href="#AUTHOR_URL" class="spip_out">(#AUTHOR_URL)</a></div>
+</div>]
+
+[<div class="champ contenu_post_url[ (#POST_URL*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_post_url_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{post_url} post_url span'><a href="#POST_URL" class="spip_out">(#POST_URL)</a></div>
+</div>]
+
+[<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_id_objet_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{id_objet} id_objet span'>(#ID_OBJET)</div>
+</div>]
+
+[<div class="champ contenu_objet[ (#OBJET*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_objet_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{objet} objet span'>(#OBJET|objet_info{texte_objet}|_T)</div>
+</div>]
+
+[<div class="champ contenu_mode[ (#MODE*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_mode_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{mode} mode span'>(#VAL{unsplash:mode_type_}|concat{#MODE}|_T)</div>
+</div>]
+
+</BOUCLE_unsplash>

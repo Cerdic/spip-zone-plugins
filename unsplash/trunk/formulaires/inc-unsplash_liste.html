@@ -1,0 +1,14 @@
+[(#SET{defaut_tri,#ARRAY{
+id,-1,
+}})][(#SET{unsplash_url,#EVAL{'_UNSPLASH_URL'}})]
+[(#SET{unsplash_thumb_width,#EVAL{'_UNSPLASH_THUMB_WIDTH'}})]
+[(#SET{unsplash_thumb_height,#EVAL{'_UNSPLASH_THUMB_HEIGHT'}})]
+<B_liste_unsplash>
+<div class="unsplash_block">
+<ul class="unsplash_photos ajouter-groupe">
+<BOUCLE_liste_unsplash (DATA) {source json, #EVAL{'_UNSPLASH_JSON'}} {pagination #ENV{pas,12}} {tri #ENV{par,filename},#GET{defaut_tri}}><li class="ajouter unsplash [photo_(#COMPTEUR_BOUCLE|alterner{1,2,3,4})]"><div class="preview"><button type="button" value="[(#VALEUR{id})]" name="id_new"><img src="[(#GET{unsplash_url})][(#GET{unsplash_thumb_width})]/[(#GET{unsplash_thumb_height})]/?image=#VALEUR{id}" width="[(#GET{unsplash_thumb_width})]" height="[(#GET{unsplash_thumb_height})]" /></button></div><div class="detail"><div class="info"><div class="dimensions">[<span class="width">(#VALEUR{width})</span>] x [<span class="height">(#VALEUR{height})</span>]</div>[<div class="author"><span class="texte"><:unsplash:info_author:> : </span><a href="[(#VALEUR{author_url})]">(#VALEUR{author})</a></div>]</div><div class="controls"><a href="#VALEUR{post_url}" class="zoom-in"><i class="fa fa-search-plus"></i></a><a href="#" class="download" onclick="document.forms['formulaire_#FORM-#ENV{id_unsplash,nouveau}'].id_new.value='#VALEUR{id}';document.forms['formulaire_#FORM-#ENV{id_unsplash,nouveau}'].submit();"><i class="fa fa-download"></i></a>[<div class="num_photo"># (#VALEUR{id})</div>]</div></div>
+</li></BOUCLE_liste_unsplash>
+</ul>
+<div class="pagination">[(#PAGINATION{prive})]</div>
+</div>
+</B_liste_unsplash>

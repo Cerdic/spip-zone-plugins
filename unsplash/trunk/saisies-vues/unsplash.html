@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_unsplash_selectionnes>
+	<ul>
+	<BOUCLE_unsplash_selectionnes(UNSPLASH){id_unsplash IN #GET*{valeur}}
+		{par num filename, filename}{tout}>
+		<li class="choix">#FILENAME (#ID_UNSPLASH)</li>
+	</BOUCLE_unsplash_selectionnes>
+	</ul>
+	</B_unsplash_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_unsplash_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_unsplash_selectionne(UNSPLASH){id_unsplash=#ENV{valeur}}
+		{par num filename, filename}{tout}>
+	  	<p>#FILENAME (#ID_UNSPLASH)</p>
+	</BOUCLE_unsplash_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_unsplash_selectionne>
+<//B_test_multiple>

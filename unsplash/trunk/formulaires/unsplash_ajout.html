@@ -1,0 +1,80 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_unsplash,nouveau}'>
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+    <form method='post' action='#ENV{action}' id="formulaire_#FORM-#ENV{id_unsplash,nouveau}"><div>
+        <input type="hidden" value="[(#ENV{mode,document})]" name="mode" />
+        #ACTION_FORMULAIRE{#ENV{action}}
+
+        <ul class="editer-groupe">
+            <li class="editer editer_width saisie_input obligatoire[(#ENV**{erreurs}|table_valeur{width}|oui)erreur]">
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{width})</span>]
+                <label for="champ_width"><:unsplash:champ_width_label:><:info_obligatoire_02:></label>
+                <input type="text" value="1500" id="champ_width" class="text" name="width" />
+            </li>
+            <li class="editer editer_height saisie_input obligatoire[(#ENV**{erreurs}|table_valeur{height}|oui)erreur]">
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{height})</span>]
+                <label for="champ_height"><:unsplash:champ_height_label:><:info_obligatoire_02:></label>
+                <input type="text" value="850" id="champ_height" class="text" name="height" />
+            </li>
+        </ul>
+
+        [(#SET{defaut_tri,#ARRAY{
+            id,-1,
+        }})][(#SET{unsplash_url,#EVAL{'_UNSPLASH_URL'}})]
+        [(#SET{unsplash_thumb_width,#EVAL{'_UNSPLASH_THUMB_WIDTH'}})]
+        [(#SET{unsplash_thumb_height,#EVAL{'_UNSPLASH_THUMB_HEIGHT'}})]
+        <B_liste_unsplash>
+        <div class="unsplash_block">
+<ul class="unsplash_photos ajouter-groupe">
+<BOUCLE_liste_unsplash (DATA) {source json, #EVAL{'_UNSPLASH_JSON'}} {pagination #ENV{pas,10}} {tri #ENV{par,filename},#GET{defaut_tri}}><li class="ajouter unsplash [photo_(#COMPTEUR_BOUCLE|alterner{1,2,3,4})]"><!--
+    --><div class="preview"><!--
+        --><button type="submit" value="[(#VALEUR{id})]" name="id_new"><!--
+            --><img src="[(#GET{unsplash_url})][(#GET{unsplash_thumb_width})]/[(#GET{unsplash_thumb_height})]/?image=#VALEUR{id}" width="[(#GET{unsplash_thumb_width})]" height="[(#GET{unsplash_thumb_height})]" /><!--
+        --></button><!--
+    --></div><!--
+    --><div class="detail"><!--
+        --><div class="info"><!--
+            --><div class="dimensions"><!--
+                -->[<span class="width">(#VALEUR{width})</span>] x [<span class="height">(#VALEUR{height})</span>]<!--
+            --></div><!--
+            -->[<div class="author"><!--
+                --><span class="texte"><:unsplash:info_author:> : </span><a href="[(#VALEUR{author_url})]">(#VALEUR{author})</a><!--
+            --></div>]<!--
+        --></div><!--
+        --><div class="controls"><!--
+            --><a href="[(#GET{unsplash_url})][(#GET{unsplash_thumb_width}|mult{2})]/[(#GET{unsplash_thumb_width}|mult{#VALEUR{height}}|div{#VALEUR{width}}|intval|mult{2})]/?image=#VALEUR{id}" class="mediabox boxIframe boxWidth-[(#GET{unsplash_thumb_width}|mult{2}|plus{70})]px boxHeight-[(#GET{unsplash_thumb_width}|mult{#VALEUR{height}}|div{#VALEUR{width}}|intval|mult{2}|plus{110})]px"><!--
+                --><i class="fa fa-[(#VALEUR{width}|>{#VALEUR{height}}|?{picture-o,file-image-o})]"></i><!--
+            --></a><!--
+            --><a href="#VALEUR{post_url}" class="spip_out"><!--
+                --><i class="fa fa-external-link"></i><!--
+            --></a><!--
+            -->[<div class="num_photo"># (#VALEUR{id})</div>]<!--
+        --></div><!--
+    --></div><!--
+--></li><!--
+
+--></BOUCLE_liste_unsplash>
+</ul>
+            <div class="pagination">[(#PAGINATION{prive})]</div>
+        </div>
+        </B_liste_unsplash>
+        [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+        <!--extra-->
+    </div></form>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("a[href^='https://unsplash']").attr('target', '_blank');
+        $('.preview button').on('click', function(){
+            var el = $(this);
+            var selection = $("#champ_selection").val().trim();
+            if (selection.length == 0) {
+                $("#champ_selection").val(el.val());
+            } else {
+                $("#champ_selection").val(selection + ',' + el.val());
+            };
+        });
+    });
+</script>

@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	filename,1,
+	mode,1,
+	date_ajout,-1,
+	id_unsplash,1,
+	points,-1
+}})]<B_liste_unsplash>
+#ANCRE_PAGINATION
+<div class="liste-objets unsplash">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{unsplash:info_1_unsplash,unsplash:info_nb_unsplash}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='filename' scope='col'>[(#TRI{filename,<:unsplash:champ_filename_label:>,ajax})]</th>
+			<th class='mode' scope='col'>[(#TRI{mode,<:unsplash:champ_mode_label:>,ajax})]</th>
+			<th class='objet' scope='col'>[(#TRI{objet,<:unsplash:champ_objet_label:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_ajout,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_unsplash,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_unsplash (UNSPLASH) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num filename},#GET{defaut_tri}} {par filename} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{unsplash-16.png}|balise_img)]</td>
+			<td class='filename principale'>[(#LOGO_UNSPLASH|image_reduire{20,26})]<a href="[(#ID_UNSPLASH|generer_url_entite{unsplash})]" title="<:info_numero_abbreviation|attribut_html:> #ID_UNSPLASH">[(#RANG). ]#FILENAME</a></td>
+			<td class='mode secondaire'>[(#VAL{unsplash:mode_type_}|concat{#MODE}|_T)]</td>
+			<td class='mode secondaire'>[(#OBJET|objet_info{texte_objet}|_T)]</td>
+			<td class='date secondaire'>[(#DATE_AJOUT|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,unsplash,#ID_UNSPLASH}|?{
+				<a href="[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH})]">#ID_UNSPLASH</a>,
+				#ID_UNSPLASH
+			})]</td>
+		</tr>
+	</BOUCLE_liste_unsplash>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_unsplash>[
+<div class="liste-objets unsplash caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_unsplash>
