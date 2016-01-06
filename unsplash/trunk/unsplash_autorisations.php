@@ -10,14 +10,13 @@
  * @licence    GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 /**
  * Fonction d'appel pour le pipeline.
  * @pipeline autoriser */
-function unsplash_autoriser()
-{
+function unsplash_autoriser() {
 }
 
 // -----------------
@@ -35,9 +34,8 @@ function unsplash_autoriser()
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return true;
+function autoriser_unsplash_menu_dist($faire, $type, $id, $qui, $opt) {
+	return true;
 }
 
 /**
@@ -51,9 +49,8 @@ function autoriser_unsplash_menu_dist($faire, $type, $id, $qui, $opt)
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_creer_dist($faire, $type, $id, $qui, $opt)
-{
-    return in_array($qui['statut'], array('0minirezo', '1comite'));
+function autoriser_unsplash_creer_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -67,9 +64,8 @@ function autoriser_unsplash_creer_dist($faire, $type, $id, $qui, $opt)
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_ajouter_dist($faire, $type, $id, $qui, $opt)
-{
-    return in_array($qui['statut'], array('0minirezo', '1comite'));
+function autoriser_unsplash_ajouter_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -83,9 +79,8 @@ function autoriser_unsplash_ajouter_dist($faire, $type, $id, $qui, $opt)
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_voir_dist($faire, $type, $id, $qui, $opt)
-{
-    return true;
+function autoriser_unsplash_voir_dist($faire, $type, $id, $qui, $opt) {
+	return true;
 }
 
 /**
@@ -99,10 +94,9 @@ function autoriser_unsplash_voir_dist($faire, $type, $id, $qui, $opt)
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_modifier_dist($faire, $type, $id, $qui, $opt)
-{
-    // return in_array($qui['statut'], array('0minirezo', '1comite'));
-    return false;
+function autoriser_unsplash_modifier_dist($faire, $type, $id, $qui, $opt) {
+	// return in_array($qui['statut'], array('0minirezo', '1comite'));
+	return false;
 }
 
 /**
@@ -116,7 +110,6 @@ function autoriser_unsplash_modifier_dist($faire, $type, $id, $qui, $opt)
  *
  * @return bool true s'il a le droit, false sinon
  **/
-function autoriser_unsplash_supprimer_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+function autoriser_unsplash_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }

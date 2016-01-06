@@ -10,11 +10,11 @@
  * @licence    GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 if (!defined('_UNSPLASH_JSON')) {
-    define('_UNSPLASH_JSON', 'https://unsplash.it/list');
+	define('_UNSPLASH_JSON', 'https://unsplash.it/list');
 }
 
 define('_UNSPLASH_URL', 'https://unsplash.it/');
