@@ -1,15 +1,15 @@
 <?php
 
-	/**
-	* Plugin Bannieres
-	*
-	* Copyright (c) 2009
-	* François de Montlivault - Jeannot
-	* Mise a jour Inspiree du plugin chats
-	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-	* Pour plus de details voir le fichier COPYING.txt.
-	*  
-	**/
+/**
+* Plugin Bannieres
+*
+* Copyright (c) 2009
+* François de Montlivault - Jeannot
+* Mise a jour Inspiree du plugin chats
+* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+* Pour plus de details voir le fichier COPYING.txt.
+*  
+**/
 
 function bannieres_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['bannieres'] = 'bannieres';	
@@ -17,7 +17,16 @@ function bannieres_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-
+/**
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * 
+ * Déclaration de l'objet supplémentaire bannieres
+ * 
+ * @param array $tables
+ * 	Le tableau de définition de tous les objets
+ * @return array $tables
+ * 	Le tableau complété avec notre objet supplémentaire
+ */
 function bannieres_declarer_tables_objets_sql($tables){
 
 	$tables['spip_bannieres'] = array(
@@ -47,15 +56,17 @@ function bannieres_declarer_tables_objets_sql($tables){
 		'champs_editables'  => array('nom', 'email', 'site', 'fin'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
-		'tables_jointures'  => array(),
-		
+		'tables_jointures'  => array('id_banniere'=>'banniere_suivi'),
 	);
 	
-
-
-	$tables['spip_bannieres_suivi'] = array(
-			'type' => 'banniere_suivi',
-			'principale' => "oui",
+	return $tables;
+}
+/**
+ * Insertion dans le pipeline declarer_tables_principales
+ */
+function bannieres_declarer_tables_principales($tables_principales){
+	
+	$tables_principales['spip_bannieres_suivi'] = array(
 			'field'=>array(
 				"id_banniere"	=> "bigint(21) NOT NULL",
 				"id_auteur"		=> "bigint(21) NOT NULL",
@@ -65,16 +76,10 @@ function bannieres_declarer_tables_objets_sql($tables){
 			),
 			'key'=>array(
 				"KEY"	=> "id_banniere"
-			)
+			),
+			'join'=>array('id_banniere')
 	);
-
-
-	
-	
-
-
-	return $tables;
+	return $tables_principales;
 }
-
 
 ?>
