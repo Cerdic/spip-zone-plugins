@@ -23,20 +23,23 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
 	<pipeline nom="autoriser" inclure="bannieres_autorisations.php" />
-	
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/bannieres.php" />
+	<!-- Ajouter l'objet Bannieres -->
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/bannieres.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/bannieres.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/bannieres.php" />
 	
 	<pipeline nom="encart" inclure="bannieres_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="bannieres_pipelines.php" />
 	
 	<pipeline nom="jqueryui_plugins" inclure="bannieres_pipelines.php" />
 	
-	<!--<pipeline nom="objets_extensibles" inclure="bannieres_pipelines.php" />-->
+	<!-- Champ extra : http://contrib.spip.net/Champs-Extras-2 -->
+	<pipeline nom="objets_extensibles" inclure="bannieres_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.5.*;[" />
+	<necessite nom="saisies" compatibilite="[2.0.0;[" />
 	
-	<necessite nom="spip_bonux" compatibilite="[3.2.*;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 
 	<!--<menu nom="bannieres" titre="bannieres:bannieres" parent="naviguer" icone="images/banniere-16.png" />-->
 	<menu nom="bannieres" titre="bannieres:bannieres" parent="menu_edition" icone="images/banniere-16.png" action="bannieres" />
