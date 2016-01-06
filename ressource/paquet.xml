@@ -19,5 +19,5 @@
 	<pipeline nom="pre_liens" action="pre_liens" inclure="inc/ressource.php" />
 	<utilise nom="tw" compatibilite="[0.8.11;[" />
 	<utilise nom="oembed" compatibilite="[;]" />
-	<necessite nom="queue" />
+	<necessite nom="queue" compatibilite="[0.6.6;]" />
 </paquet>

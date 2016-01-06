@@ -28,6 +28,6 @@
 	<necessite id="SPIP" version="[2.1.14;3.99.99]" />
 	<necessite id="tw" version="[0.8.3;[" />
 	<utilise nom="oembed" compatibilite="[;]" />
-	<necessite id="queue" />
+	<necessite id="queue" compatibilite="[0.6.6;]" />
 	<!-- traduire gestionnaire="salvatore" module="crayons" reference="fr" / -->
 </plugin>
