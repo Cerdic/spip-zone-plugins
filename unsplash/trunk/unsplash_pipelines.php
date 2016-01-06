@@ -5,7 +5,7 @@
  *
  * @plugin     Unsplash
  *
- * @copyright  2015
+ * @copyright  2015-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
