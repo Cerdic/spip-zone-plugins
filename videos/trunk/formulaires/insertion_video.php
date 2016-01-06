@@ -1,50 +1,46 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
-function formulaires_insertion_video_charger_dist($id_objet,$objet){
+
+function formulaires_insertion_video_charger_dist($id_objet, $objet){
 	$valeurs = array(
 		'id_objet' => $id_objet,
 		'objet' => $objet,
 		'video_url' => ''
-		);
+	);
 	return $valeurs;
 }
 
-function formulaires_insertion_video_verifier_dist($id_objet,$objet){
+function formulaires_insertion_video_verifier_dist($id_objet, $objet){
 	$erreurs = array();
 	// Retirer les trucs qui emmerdent : tous les arguments d'ancre / les espaces foireux les http://, https:// et les www. éventuels
 	$url = preg_replace('%(#.*$|https?://|www.)%', '', trim(_request('video_url')));
 
 	// ToDo : blinder un peu le controle des url
-	if(preg_match('/dailymotion/',$url)){
+	if (preg_match('/dailymotion/',$url)) {
 		set_request('type','dist_daily');
 		$lavideo = preg_replace('#dailymotion\.com/video/#','',$url);
 	}
-	else if(preg_match('/vimeo/',$url)){
+	elseif (preg_match('/vimeo/',$url)) {
 		set_request('type','dist_vimeo');
 		$lavideo = preg_replace('#vimeo\.com/#','',$url);
 	}
-	else if(preg_match('/(youtube|youtu\.be)/',$url)){
+	elseif (preg_match('/(youtube|youtu\.be)/',$url)) {
 		set_request('type','dist_youtu');
 		$lavideo = preg_replace('#(youtu\.be/|youtube\.com/watch\?v=|&.*$|\?hd=1)#','',$url);
 	}
-	/* On ne peut plus inserer les videos culture box
-	else if(preg_match('/culturebox/',$url)){
-		set_request('type','dist_cubox');
-		// Lien de type http://culturebox.france3.fr/#/roman/32428/l_or-et-la-toise-le-nouveau-roman-de-brice-tarvel
-		// On explode sur les slash et on recupere l'avant dernier element
-		$result=explode("/",_request('video_url'));
-		if(sizeof($result)>2)
-			$lavideo = $result[sizeof($result)-2];
-	}*/
 	
-	if(!$lavideo) $erreurs['message_erreur'] = _T('videos:erreur_adresse_invalide');
-	else set_request('lavideo',$lavideo);
+	if(!$lavideo) {
+		$erreurs['message_erreur'] = _T('videos:erreur_adresse_invalide');
+	} else {
+		set_request('lavideo',$lavideo);
+	}
 
 	return $erreurs;
 }
 
-function formulaires_insertion_video_traiter_dist($id_objet,$objet){
-	include_spip('inc/acces');	
+function formulaires_insertion_video_traiter_dist($id_objet, $objet){
+	include_spip('inc/acces');
 	$type = _request('type');
 	$fichier = _request('lavideo');
 	$url = _request('video_url');
@@ -52,7 +48,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	$titre = ""; $descriptif = ""; $id_vignette = "";
 
 	// On tente de récupérer titre et description à l'aide de Videopian
-	if(!preg_match('/culture/',$url) && (version_compare(PHP_VERSION, '5.2') >= 0)) {
+	if (!preg_match('/culture/', $url) && (version_compare(PHP_VERSION, '5.2') >= 0)) {
 		/*
 			TODO
 			Question ouverte : pourquoi ne pas utiliser => http://oohembed.com/ ? Nécessite quand même PHP5 (json) et semble faire pareil (mieux ?)
@@ -62,8 +58,8 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
 		$Videopian = new Videopian();
-		
-		if($Videopian) {
+
+		if ($Videopian) {
 			$infosVideo = $Videopian->get($url);
 			$titre = $infosVideo->title;
 			$descriptif = $infosVideo->description;
@@ -77,7 +73,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 		}
 	}
 
-	
+
 	// On va pour l'instant utiliser le champ extension pour stocker le type de source
 	$champs = array(
 		'titre'=>$titre,
@@ -87,14 +83,15 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 		'fichier'=>$fichier,
 		'distant'=>'oui'
 	);
-	
+
 	/** Gérer le cas de la présence des champs de Médiathèque (parce que Mediatheque c'est le BIEN mais c'est pas toujours activé) **/
-	$trouver_table=charger_fonction('trouver_table','base');	
+	$trouver_table=charger_fonction('trouver_table','base');
 	$desc = $trouver_table('spip_documents');
-	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
-	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
-	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
-	if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video'; 
+
+	if (array_key_exists('taille',  $desc['field'])) if ($infosVideo and isset($infosVideo->duration)) $champs['taille'] = $infosVideo->duration;
+	if (array_key_exists('credits', $desc['field'])) if ($infosVideo and isset($infosVideo->author)) $champs['credits'] = $infosVideo->author;
+	if (array_key_exists('statut',  $desc['field'])) $champs['statut'] = 'publie';
+	if (array_key_exists('media',   $desc['field'])) $champs['media'] = 'video'; 
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
