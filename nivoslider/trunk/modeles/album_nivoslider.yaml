@@ -34,8 +34,8 @@ parametres:
     saisie: 'case'
     options:
       nom: 'titre'
-      label_case: 'Afficher le titre'
-      valeur_oui: 'oui'
+      label_case: 'Masquer le titre'
+      valeur_oui: 'non'
   -
     saisie: 'input'
     options:
