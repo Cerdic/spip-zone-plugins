@@ -1,0 +1,20 @@
+<!--#navigation-->
+[(#REM) <!--Ce pipeline charge prive/infos/$type--> ]
+#BOITE_OUVRIR{'Campagne','simple'}
+[(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,banniere,
+			id,#ID_BANNIERE})],
+		data,''})]})
+]
+
+[(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,banniere,
+			id_objet,#ID_BANNIERE,
+			contexte,[(#ARRAY{
+				id_banniere,#ID_BANNIERE})]})],
+		data,[(#INCLURE{fond=prive/objets/contenu/banniere_resume,id=#ID_BANNIERE})]})]})
+]
+#BOITE_FERMER
+<!--/#navigation-->

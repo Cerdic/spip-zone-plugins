@@ -1,0 +1,35 @@
+<BOUCLE_si_autorise(CONDITION){si (#ID_BANNIERE|intval|et{#AUTORISER{voir,banniere,#ID_BANNIERE}})}>
+<BOUCLE_banniere(BANNIERES){id_banniere}{tout}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,banniere,#ID_BANNIERE})
+		<div class='bandeau_actions'>
+			[(#URL_ECRIRE{banniere_edit}
+				|parametre_url{id_banniere,#ID_BANNIERE}
+				|parametre_url{retour,#SELF}
+				|icone_verticale{<:bannieres:action_modifier:>, banniere, edit, right ajax preload})]
+		</div>
+	]
+	<h1[ class="(#EDIT{nom})"]>(#NOM)</h1>
+],simple fiche_objet})]
+
+	<div id='wysiwyg'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,banniere,
+				id_objet,#ID_BANNIERE,
+				contexte,[(#ARRAY{
+					id_banniere,#ID_BANNIERE})]})],
+			data,[(#INCLURE{fond=prive/objets/contenu/banniere,id=#ID_BANNIERE})]})]})]
+	</div>
+	<div id='stats_detail'>
+		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
+			args,[(#ARRAY{
+				type,banniere,
+				id_objet,#ID_BANNIERE,
+				contexte,[(#ARRAY{
+					id_banniere,#ID_BANNIERE})]})],
+			data,[(#INCLURE{fond=prive/objets/contenu/banniere_stats,id=#ID_BANNIERE})]})]})]
+	</div>
+#BOITE_FERMER
+</BOUCLE_banniere>
+</BOUCLE_si_autorise>
