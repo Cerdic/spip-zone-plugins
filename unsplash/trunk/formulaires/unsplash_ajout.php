@@ -67,7 +67,6 @@ function formulaires_unsplash_ajout_traiter_dist() {
 	$objet = _request('objet');
 	$mode = _request('mode');
 	$id_new = _request('id_new');
-	$id_unsplash = _request('id_unsplash');
 	$resultats = array('editable' => true, 'message_erreur' => _T('unsplash:erreur_formulaire'), 'redirect' => '');
 
 	$unsplash_list = json_decode(file_get_contents(_UNSPLASH_JSON), true);
