@@ -21,7 +21,7 @@
 	</thead>
 	<tbody>
 		<BOUCLE_actives(BANNIERES){debut<=#DATE}{fin>=#DATE}>
-			<BOUCLE_clics(BANNIERES_SUIVI) {par id_banniere} {id_banniere=#ID_BANNIERE}>
+		<BOUCLE_clics(BANNIERES_SUIVI) {par id_banniere} {id_banniere=#ID_BANNIERE}>
 			</BOUCLE_clics>
 				#SET{clics#ID_BANNIERE,#_clics:GRAND_TOTAL}
 			</B_clics>

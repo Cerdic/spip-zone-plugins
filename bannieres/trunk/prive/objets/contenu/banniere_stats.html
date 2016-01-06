@@ -1,6 +1,5 @@
 #CACHE{0}
 <BOUCLE_actives(BANNIERES){id_banniere=#ENV{id}}>
-
 	<B_annee>
 	<h2><:bannieres:statistiques_campagne{num=#ID_BANNIERE}:></h2>
 
@@ -29,8 +28,9 @@
 	<tbody>
 
 	<tr>
-		<BOUCLE_mois(POUR){tableau 1:12}>
-			<BOUCLE_clics_mois(BANNIERES_SUIVI){id_banniere=#ID_BANNIERE}{agenda date, mois, (#DATE|annee), #VALEUR}> </BOUCLE_clics_mois>
+		<BOUCLE_mois(DATA){enum 1,12}>
+			<BOUCLE_clics_mois(BANNIERES_SUIVI){id_banniere=#ID_BANNIERE}{agenda date, mois, (#DATE|annee), #VALEUR}>
+			</BOUCLE_clics_mois>
 				#SET{mois#VALEUR,#GRAND_TOTAL}
 				<td>#GRAND_TOTAL</td>
 			</B_clics_mois>
@@ -43,7 +43,7 @@
 	</tbody>
 </table>
 
-[(#REM) Pour ceux qui ont installé le plugin JpGraph ]
+[(#REM) <!--Pour ceux qui ont installé le plugin JpGraph -->]
 [(#PLUGIN{jpgraph}|oui)
 
 	[(#MODELE{jpgraph}
