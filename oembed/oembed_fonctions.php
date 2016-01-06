@@ -95,7 +95,25 @@ function oembed_force_video_autoplay($html){
 	return $html;
 }
 
-function inc_ressource_dist($rac) {
+include_spip('inc/ressource');
+if (function_exists('inc_ressource_dist')){
+	// SPIP 3.1
+	function inc_ressource($rac){
+		$html = oembed_traiter_ressource($rac);
+		if (is_null($html)) {
+			$html = inc_ressource_dist($rac);
+		}
+		return $html;
+	}
+}
+else {
+	// SPIP 3.0
+	function inc_ressource_dist($rac){
+		return oembed_traiter_ressource($rac);
+	}
+}
+
+function oembed_traiter_ressource($rac) {
 	static $null_allowed = null;
 
 	include_spip('inc/lien');

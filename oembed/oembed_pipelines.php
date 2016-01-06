@@ -227,6 +227,39 @@ function oembed_pre_propre($texte) {
 	return $texte;
 }
 
+
+/**
+ * pipeline pour typo
+ * pour traitement des ressources en SPIP 3.1
+ * @param $t
+ * @return mixed
+ */
+function oembed_post_typo($t) {
+	if (strpos($t, '<') !== false) {
+		$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+	}
+	return $t;
+}
+
+/**
+ * pipeline pour propre
+ * pour traitement des ressources en SPIP 3.1
+ * @param $t
+ * @return mixed
+ */
+function oembed_pre_liens($t) {
+	if (strpos($t, '<') !== false) {
+		$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+
+		// echapper les autoliens eventuellement inseres (en une seule fois)
+		if (strpos($t,"<html>")!==false)
+			$t = echappe_html($t);
+	}
+	return $t;
+}
+
+
+
 include_spip('inc/config');
 if (!function_exists('lire_config')) { function lire_config($a=null,$b=null) { return $b; } }
 
