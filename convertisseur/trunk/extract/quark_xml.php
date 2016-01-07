@@ -196,7 +196,7 @@ function convertir_quark_xml($c) {
 								
 				// Inters
 				if(preg_match("/accroche/i", $type)){
-					$item["texte"] .= "\n\n" . '{{' . "$texte" . '}}' ."\n\n" ;
+					$item["texte"] .= "\n\n" . '{{{' . "$texte" . '}}}' ."\n\n" ;
 					continue ;
 				}
 				
