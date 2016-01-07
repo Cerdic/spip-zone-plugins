@@ -11,6 +11,10 @@ function nettoyer_format($t) {
 	// Lettrine avec ital ex : //«~J{e ne suis pas // «C{’est comme la	
 	$t = preg_replace("/^([« ~]*\w)\{/Um","{\\1", $t);
 
+	// supprimer les insecables sauf dans les nombres,
+	// parce que ca prend le chou (?)
+	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
+
 	// resserrer les {}
 	$t = preg_replace('/{([.,]+)/', '\1{', $t);
 	$t = preg_replace('/}([.,]+)/', '\1}', $t);
@@ -33,10 +37,6 @@ function nettoyer_format($t) {
 	$t = str_replace("~\xc2\xbb", " \xc2\xbb", $t);  # guillemet >>
 	$t = str_replace("\xc2\xab~", "\xc2\xab ", $t);  # <<
 	$t = str_replace ("\xe2\x80\x93", '--', $t); # tiret long
-
-	// supprimer les insecables sauf dans les nombres,
-	// parce que ca prend le chou (?)
-	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
 
 	return $t;
 }

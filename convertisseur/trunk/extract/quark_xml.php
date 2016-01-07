@@ -322,7 +322,7 @@ function nettoyer_xml_quark($xml){
 	$texte = str_replace("&amp;discHyphen;", "", $texte);
 	// autre
 	$texte = str_replace("&amp;ndash;", "—", $texte);
-	$texte = str_replace("&amp;softReturn;", " ", $texte);
+	$texte = str_replace("&amp;softReturn;", " ", $texte); // ou bien par "" ? commence-&softReturn;t-on
 	
 
 	// espaces en gras.
