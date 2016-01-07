@@ -119,8 +119,13 @@ function convertir_quark_xml($c) {
 				
 				//var_dump("<pre>",htmlspecialchars($paragraphe));
 				
+				// nettoyer un peu
 				$texte = nettoyer_xml_quark($paragraphe);
 				
+				if($texte == "")
+					continue ;
+					
+				// init des styles
 				$item["styles"][$type] = 1 ;
 
 				// inserer des traitements perso, dans mes_fonctions
@@ -204,11 +209,6 @@ function convertir_quark_xml($c) {
 				$item["texte"] .= "$texte\n\n" ;
 				
 			}
-			
-			// Révisions post concatenation des paragrahes
-			// Lettrine avec ital ex : //«~J{e ne suis pas
-			
-			$item["texte"] = preg_replace("/^([«\s~]*\w)\{/","{\\1", $item["texte"]);
 		
 		}
 	}
@@ -343,8 +343,9 @@ function nettoyer_xml_quark($xml){
 	$c = preg_replace(',[{]([ ~]),', '\1{', $c);
 	$c = preg_replace(',[ ~]?([{]»),', '{»', $c);
 	$c = preg_replace(',[{][}]|[}][{],', '', $c);
-*/	
+	*/	
 
+	//var_dump("<pre>",$texte,"</pre>");	
 	
-	return $texte ;
+	return trim($texte) ;
 }

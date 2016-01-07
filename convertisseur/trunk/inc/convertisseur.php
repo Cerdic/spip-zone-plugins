@@ -25,14 +25,18 @@ function nettoyer_format($t) {
 #for($i=0;$i<strlen($a); $i++)
 #	echo ord($a[$i]).'-';exit;
 
+	// espaces dans les guillemets
 	## attention ici c'est de l'utf8
-	$t = str_replace("~\xc2\xbb", "\xc2\xbb", $t);  # guillemet >>
-	$t = str_replace("\xc2\xab~", "\xc2\xab", $t);  # <<
+	$t = str_replace("~\xc2\xbb", " \xc2\xbb", $t);  # guillemet >>
+	$t = str_replace("\xc2\xab~", "\xc2\xab ", $t);  # <<
 	$t = str_replace ("\xe2\x80\x93", '--', $t); # tiret long
+
+	// Lettrine avec ital ex : //«~J{e ne suis pas		
+	$t = preg_replace("/^([«\s~]*\w)\{/","{\\1", $t);
 
 	// supprimer les insecables sauf dans les nombres,
 	// parce que ca prend le chou (?)
-	// $t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
+	$t = preg_replace(",(\D)~(\D),", '\1 \2', $t);
 
 	return $t;
 }

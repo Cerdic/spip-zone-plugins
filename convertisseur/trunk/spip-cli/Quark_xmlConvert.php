@@ -113,10 +113,7 @@ class Quark_xmlConvert extends Command {
 						$contenu = extracteur_quark_xml($f);
 						
 						include_spip("inc/convertisseur");
-
 						$contenu = nettoyer_format($contenu);
-
-						include_spip("inc/flock");
 						
 						// nettoyer les noms de fichiers
 						include_spip("inc/charsets");
@@ -124,8 +121,8 @@ class Quark_xmlConvert extends Command {
 						
 						$article = preg_replace(',[^\w-]+,', '_', $article);
 						$article = preg_replace(',_xml$,', '.xml', $article);
-
 						
+						include_spip("inc/flock");
 						ecrire_fichier("$dest" . "/" . $collection . "/" . $numero . "/" . $article, $contenu);
 									
 						$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
