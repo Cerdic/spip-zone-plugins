@@ -109,7 +109,7 @@ function nettoyage_xtag($c) {
 	$c = preg_replace(",\n+,", "\n\n", $c);
 
 	// co case = majuscules
-	$c = preg_replace('/<Ko[(]"case","cpsp"[)]>([^<>]+)/imse', 'mb_strtoupper("\1")', $c);
+	$c = preg_replace_callback('/<Ko[(]"case","cpsp"[)]>([^<>]+)/ims', function ($m){ return mb_strtoupper($m[1]); }, $c);
 
 	// virer tous les tags restants
 	$c = strip_tags($c);
