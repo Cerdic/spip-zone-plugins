@@ -118,7 +118,6 @@ class Quark_xmlConvert extends Command {
 						// nettoyer les noms de fichiers
 						include_spip("inc/charsets");
 						$article = translitteration($article);
-						
 						$article = preg_replace(',[^\w-]+,', '_', $article);
 						$article = preg_replace(',_xml$,', '.xml', $article);
 						
