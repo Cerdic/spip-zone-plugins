@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2015 - Distribué sous licence GNU/GPL
+ * 2008-2016 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -412,7 +412,7 @@ function encodage($source,$options){
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
 			if($format == 'ipod'){
-				$infos_sup_normal .= ' -profile:v baseline -bf 0';	
+				$infos_sup_normal .= ' -profile:v baseline -pix_fmt yuv420p -bf 0';	
 			}
 			/**
 			 * Encodage pour PSP
