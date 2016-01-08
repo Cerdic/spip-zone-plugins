@@ -915,6 +915,12 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			return (bool)fabrique_lister_tables($objets, 'liens');
 			#return (bool)fabrique_lister_tables($objets, 'objets');
 			break;
+			
+		case "trig_propager_les_secteurs":
+			if (objets_options_presentes($objets, array('id_rubrique', 'id_secteur'))) {
+				return true;
+			}
+			break;
 	}
 	return false;
 }
