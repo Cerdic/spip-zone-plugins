@@ -52,7 +52,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				'conteneur' => $conteneur
 			),array(),$connect);
 		} else {
-			$width = is_numeric($width) ? 'width: '.intval($width).'px;' : '';
+			$width = is_numeric($width) ? 'max-width: '.intval($width).'px;' : '';
 			$dt = $conteneur=='dl' ? 'dt' : 'div';
 			$dd = $conteneur=='dl' ? 'dd' : 'div';
 			$distant = ($connect) ? $connect.'__' : '';
