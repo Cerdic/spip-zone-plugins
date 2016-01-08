@@ -121,7 +121,7 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
  * - du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
  * $forme peut contenir abbr (afficher le nom des jours en abbrege) et ou hcal (generer une date au format hcal)
- * 
+ *
  * @param string $date_debut
  * @param string $date_fin
  * @param string $horaire
@@ -133,14 +133,14 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
 	$affdate = "affdate_jourcourt";
 	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
-	
+
 	$dtstart = $dtend = $dtabbr = "";
 	if (strpos($forme,'hcal')!==false) {
 		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
 		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
 		$dtabbr = "</abbr>";
 	}
-	
+
 	$date_debut = strtotime($date_debut);
 	$date_fin = strtotime($date_fin);
 	$d = date("Y-m-d", $date_debut);
@@ -164,7 +164,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		if ($h){
 			$s = $du . $dtstart . affdate_jourcourt($d) . " $hd" . $dtabbr;
 			$s .= $au . $dtend . $affdate($f);
-			if ($hd!=$hf) $s .= " $hf";
+			$s .= " $hf";
 			$s .= $dtabbr;
 		}
 		else {
@@ -177,7 +177,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		$s = $du . $dtstart . affdate_jourcourt($d);
 		if ($h) $s .= " $hd";
 		$s .= $dtabbr . $au . $dtend . $affdate($f);
-		if ($h) $s .= " $hf";
+		$s .= " $hf";
 		$s .= $dtabbr;
 	}
 	else
@@ -190,7 +190,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 			$s .= " ".date("(H:i)",$date_fin);
 		$s .= $dtabbr;
 	}
-	return unicode2charset(charset2unicode($s,'AUTO'));	
+	return unicode2charset(charset2unicode($s,'AUTO'));
 }
 
 

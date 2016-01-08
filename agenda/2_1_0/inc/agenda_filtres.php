@@ -2,7 +2,7 @@
 /**
  * Plugin Agenda pour Spip 2.0
  * Licence GPL
- * 
+ *
  * Fichier de filtres communs au plugin agenda et PIM_agenda
  */
 
@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' permet d'afficher l'horaire, toute autre valeur n'indique que le jour
  * $forme peut contenir abbr (afficher le nom des jours en abbrege) et ou hcal (generer une date au format hcal)
- * 
+ *
  * @param string $date_debut
  * @param string $date_fin
  * @param string $horaire
@@ -25,19 +25,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  */
 function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
-	
+
 	$abbr = '';
 	if (strpos($forme,'abbr')!==false) $abbr = 'abbr';
 	$affdate = "affdate_jourcourt";
 	if (strpos($forme,'annee')!==false) $affdate = 'affdate';
-	
+
 	$dtstart = $dtend = $dtabbr = "";
 	if (strpos($forme,'hcal')!==false) {
 		$dtstart = "<abbr class='dtstart' title='".date_iso($date_debut)."'>";
 		$dtend = "<abbr class='dtend' title='".date_iso($date_fin)."'>";
 		$dtabbr = "</abbr>";
 	}
-	
+
 	$date_debut = strtotime($date_debut);
 	$date_fin = strtotime($date_fin);
 	$d = date("Y-m-d", $date_debut);
@@ -61,7 +61,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		if ($h){
 			$s = $du . $dtstart . affdate_jourcourt($d) . " $hd" . $dtabbr;
 			$s .= $au . $dtend . $affdate($f);
-			if ($hd!=$hf) $s .= " $hf";
+			$s .= " $hf";
 			$s .= $dtabbr;
 		}
 		else {
@@ -87,7 +87,7 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 			$s .= " ".date("(H:i)",$date_fin);
 		$s .= $dtabbr;
 	}
-	return unicode2charset(charset2unicode($s,'AUTO'));	
+	return unicode2charset(charset2unicode($s,'AUTO'));
 }
 
 function agenda_dateplus($date,$secondes,$format){
@@ -98,7 +98,7 @@ function agenda_dateplus($date,$secondes,$format){
 /**
  * Ajoute un evenement dans un buffer, comme le filtre agenda_memo,
  * mais en prenant une date de debut et de fin de l'evenement.
- * 
+ *
  * La liste est retournee et videe par un appel vide a cette fonction
  * (voir le filtre agenda_mini)
  *
@@ -113,7 +113,7 @@ function agenda_dateplus($date,$secondes,$format){
  * 	Inserer la date du jour parcouru dans l'URL du lien (de chaque evenement).
  * 	Passer pour cela le nom de la variable a utiliser
  * (typiquement, #ENV{var_date} avec le mini-calendrier).
- * 
+ *
  * @return
 **/
 function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='', $var_date='')
@@ -125,7 +125,7 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 		return $res;
 	}
 	$url=str_replace("&amp;","&",$url);
-	
+
 	$idatedeb = date_ical($date_deb);
 	$idatefin = date_ical($date_fin);
 	$cal = trim($cal); // func_get_args (filtre alterner) rajoute \n !!!!
@@ -135,16 +135,16 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 	$ts_date_fin=strtotime($date_fin);
 	$maxdays=365;
 	$d1 = date('Y-m-d', strtotime($date_deb));
-	
+
 	while (($ts_startday1 <= $ts_date_fin) && ($maxdays-- > 0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
 		$d2 = date('Y-m-d', $ts_startday1);
-		
+
 		if ($var_date) {
 			$url = parametre_url($url, $var_date, $d2);
 		}
-		
+
 		// element a ajouter:
 		$a2 = array (
 			     'CATEGORIES' => $cal,
@@ -174,8 +174,8 @@ function agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 		$agenda[$cal][(date_anneemoisjour($day))] = $tab;
 		//DEBUG echo " -->";
 		$ts_startday1 += 26*3600; // le jour suivant : +26 h pour gerer les changements d'heure
-		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
-		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
+		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1),
+		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure
 	}
 	// toujours retourner vide pour qu'il ne se passe rien
 	return "";
@@ -187,7 +187,7 @@ function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 	static $evenements = array();
 	if (!$date_deb) return $evenements;
 	$url=str_replace("&amp;","&",$url);
-	
+
 	$idatedeb = date_ical(reset(explode(" ",$date_deb))." 00:00:00");
 	$idatefin = date_ical(reset(explode(" ",$date_fin))." 00:00:00");
 	$cal = trim($cal); // func_get_args (filtre alterner) rajoute \n !!!!
@@ -208,8 +208,8 @@ function agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 			'LOCATION' => $lieu,
 			'URL' => $url);
 		$ts_startday1 += 26*3600; // le jour suivant : +26 h pour gerer les changements d'heure
-		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
-		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
+		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1),
+		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure
 	}
 
 	// toujours retourner vide pour qu'il ne se passe rien
