@@ -76,21 +76,24 @@ function formulaires_fchmlatex_traiter_dist($self)
     $secteur = _request('secteur_region');
 
     // Suppression du dossier d'export
-    $sDirExport = getDirExport();
+    $sDirExport = getDirExport('format_export','langue_export');
+    //~ spip_log($sDirExport,'chm');
     if (file_exists($sDirExport)) delTree($sDirExport);
     // Suppression du ZIP
-    $sZipFileName = getZipFileName();
+    $sZipFileName = getZipFileName('format_export','langue_export');
     if (file_exists($sZipFileName)) unlink($sZipFileName);
     // Suppression du YAML
     if (file_exists($sDirExport.'liste.yaml')) unlink($sDirExport.'liste.yaml');
+    // Suppression du log
+    if (file_exists($sDirExport.'export.log')) unlink($sDirExport.'export.log');
     // Création des dossiers d'export
     if (!file_exists($sDirExport)) mkdir($sDirExport, 0777);
     if (!file_exists($sDirExport.'images')) mkdir($sDirExport.'images', 0777);
     if ($format=='tex' && !file_exists($sDirExport.'inclus'))
         mkdir($sDirExport.'inclus', 0777);
     // Création du fichier YAML contenant la liste des rubriques et articles du secteur
-    cree_yaml($langue,$secteur);
-    // Construction de l'URL de rechargement javasscript du formulaire
+    cree_yaml($sDirExport,$langue,$secteur);
+    // Construction de l'URL de rechargement javascript du formulaire
     $url = parametre_url($self, 'num', '0');
     $url = parametre_url($url, 'format', $format);
     $url = parametre_url($url, 'secteur', $secteur);
@@ -190,9 +193,9 @@ function tex_post_traitement($code) {
  * @author David Dorchies
  * @date 09/06/2015
  */
-function getDirExport() {
+function getDirExport($format = 'format', $langue = 'langue') {
     $s = _DIR_RACINE . _NOM_TEMPORAIRES_INACCESSIBLES;
-    $s .= _request('format').'_'._request('langue').'/';
+    $s .= _request($format).'_'._request($langue).'/';
     return $s;
 }
 
@@ -202,9 +205,9 @@ function getDirExport() {
  * @author David Dorchies
  * @date 09/06/2015
  */
-function getZipFileName() {
+function getZipFileName($format = 'format', $langue = 'langue') {
     $s = _DIR_RACINE . _NOM_TEMPORAIRES_ACCESSIBLES;
-    $s .= _request('format').'_'._request('langue').'.zip';
+    $s .= _request($format).'_'._request($langue).'.zip';
     return $s;
 }
 
@@ -216,14 +219,13 @@ function getZipFileName() {
  * @return lien modifié pour pointer vers le dossier d'export
  * @author Hicham Gartit
  */
-function imagehtml($matches)
+function html_image($matches)
 {
-    $langue = $_GET['langue'];
     $chemin = $matches[1];
     $nomimg = pathinfo($chemin, PATHINFO_FILENAME);
     $extimg = pathinfo($chemin, PATHINFO_EXTENSION);
     $nom = $nomimg.'.'.$extimg;
-
+    //~ spip_log($chemin,'html_image');
     if(substr($chemin, 0, strlen('../')) === '../' || substr($chemin, 0, strlen('http')) === 'http')
     {
         $chemin = str_replace(' ','%20', $chemin);
@@ -234,9 +236,13 @@ function imagehtml($matches)
         $source = '../'.$chemin;
     }
     $dest = getDirExport().'images/'.$nom;
-    copy($source,$dest);
     $copie = 'images/'.$nom;
-    $ret = $ret = str_replace($matches[1],$copie,$matches[0]);
+    $ret = str_replace($matches[1],$copie,$matches[0]);
+    copy($source,$dest);
+    if(!file_exists($dest)) {
+        file_put_contents(getDirExport().'export.log',
+            'Image not found: '.$source."\n",FILE_APPEND);
+    }
     return $ret;
 }
 
@@ -271,14 +277,14 @@ function html_lien($matches)
                 if($art['lang']!=$langue) {
                     // Le lien ne pointe pas vers la bonne traduction de l'article
                     $art2 = sql_fetsel('id_article', 'spip_articles',
-                        array('id_trad='.$art['id_trad'],"lang='$langue'"));
+                        array('id_trad='.$art['id_trad'],"lang='$langue'",'statut="publie"'));
                         //~ spip_log(sql_get_select('id_article', 'spip_articles',
-                        //~ array('id_trad='.$art['id_trad'],"lang='$langue'")),'lien');
+                        //~ array('id_trad='.$art['id_trad'],array('id_trad='.$art['id_trad'],"lang='$langue'",'statut="publie"'))),'lien');
                     if(isset($art2['id_article'])) {
                         // La bonne traduction existe
                         $id = $art2['id_article'];
-                    } else {
-                        // La bonne traduction n'existe pas, on utilise l'article de référence
+                    } elseif($art['id_trad']!=0) {
+                        // La bonne traduction n'existe pas, on utilise l'article de rÃ©fÃ©rence
                         $id = $art['id_trad'];
                     }
                 }
@@ -302,9 +308,8 @@ function html_lien($matches)
 /**
  * Ecriture de la liste des articles et rubriques dans liste.yaml
  */
-function cree_yaml($langue,$secteur)
+function cree_yaml($sDirExport,$langue,$secteur)
 {
-                $sDirExport = getDirExport();
                 $yaml = recuperer_fond("yaml/index", array('id_rubrique' => $secteur,'lang' => $langue,));
                 file_put_contents($sDirExport.'liste.yaml',$yaml);
 }
@@ -334,7 +339,7 @@ function html_export($a,$num,$secteur,$langue)
 
         // fichier chm/css.html : traitement des images
         $t = recuperer_fond("chm/css");
-        $t = preg_replace_callback("#url\('(.*)'\);#iU",'imagehtml',$t);
+        $t = preg_replace_callback("#url\('(.*)'\);#iU",'html_image',$t);
         file_put_contents($sDirExport.'chm.css',$t);
     }
 
@@ -354,12 +359,15 @@ function html_export($a,$num,$secteur,$langue)
     }
 
     //Traitement des images
-    $code = preg_replace_callback('#<img.*src="(.*)".*>#iU','imagehtml',$code);
-    $code = preg_replace_callback("#<img.*src='(.*)'.*>#iU",'imagehtml',$code);
+    $code = preg_replace_callback('#<img.*src="(.*)".*>#isU','html_image',$code);
+    $code = preg_replace_callback("#<img.*src='(.*)'.*>#isU",'html_image',$code);
 
     //Traitement des liens
-    $code = preg_replace_callback("#href='(.*)'#iU",'html_lien',$code);
-    $code = preg_replace_callback('#href="(.*)"#iU','html_lien',$code);
+    $code = preg_replace_callback("#href='(.*?)'#i",'html_lien',$code);
+    $code = preg_replace_callback('#href="(.*?)"#i','html_lien',$code);
+
+    // Suppression des liens de téléchargement du plugin Coloration Code
+    $code = preg_replace('#<p class=\'download code_download\'>.*</p>#iU','',$code);
 
     // Enregistrement du fichier HTML
     file_put_contents("$sDirExport$n.html",$code);
