@@ -1,13 +1,13 @@
 <paquet
 	prefix="piwik"
 	categorie="statistique"
-	version="0.7.0"
+	version="0.8.0"
 	etat="dev"
-	compatibilite="[2.0.8;3.0.*]"
+	compatibilite="[2.0.8;3.1.*]"
 	logo="piwik.png"
 	schema="0.1"
 	documentation="http://contrib.spip.net/?article2860"
->	
+>
 
 	<nom>Piwik</nom>
 	<!-- Interfacer Spip et Piwik -->
