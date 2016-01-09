@@ -1031,7 +1031,7 @@ class Videopian {
             throw new Videopian_Exception(Videopian_Exception::API_KEY_NEEDED);
         }
         //$file_data = 'http://gdata.youtube.com/feeds/api/videos/'.self::$id;
-        $file_data = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id='.self::$id.'&key='.$youtube_api_key;
+        $file_data = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id='.self::$id.'&key='.trim($youtube_api_key);
         
         self::checkAvailability($file_data);
         //self::$video->xml_url = $file_data;
