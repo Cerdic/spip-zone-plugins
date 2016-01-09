@@ -193,7 +193,15 @@ function mailsubscribers_listes($options = array()){
 			}
 		}
 	}
-
+	
+	// Trier les résultats par le champ Status (d'abord open, puis close)
+	$status = array();
+	foreach ($listes as $key => $row)
+	{
+		$status[$key] = $row['status'];
+	}
+	array_multisort($status, SORT_DESC, $listes);
+	
 	return $listes;
 }
 
