@@ -28,7 +28,7 @@
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
-					<INCLURE{fond=formulaires/inc-options-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},status=open,env} />
+					<INCLURE{fond=formulaires/inc-options-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},env} />
 					</select>
 					<input type="submit" name="envoi" class="submit" value="<:newsletter:bouton_envoyer:>" name="test" />
 				</li>

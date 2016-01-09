@@ -22,7 +22,7 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 
 	if (!$mode_test){
 		$lists = charger_fonction('lists','newsletter');
-		$valeurs['_listes_dispo'] = $lists(array('status'=>'open'));
+		$valeurs['_listes_dispo'] = $lists();
 	}
 
 	return $valeurs;
