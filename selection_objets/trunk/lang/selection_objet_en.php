@@ -3,9 +3,7 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/selection_objet?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -58,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_choix_illimite' => 'Disable limit selection by Target Object',
 	'selection_cible' => 'Target selection for',
 	'selection_objet' => 'Selection',
-	'selection_objet_cible_titre' => 'Selection of target objects', # MODIF
+	'selection_objet_cible_titre' => 'Selection of target objects',
 	'selection_objets_pour' => 'Object selection for',
 	'selection_rubrique_objet' => 'Objects that can be selected',
 	'selection_type_lien' => 'Link type',

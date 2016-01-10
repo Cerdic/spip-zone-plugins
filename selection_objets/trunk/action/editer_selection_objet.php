@@ -128,7 +128,6 @@ function selection_objet_modifier ($id_selection_objet, $set=null) {
 
     if ($err = objet_modifier_champs('selection_objet', $id_selection_objet,
         array(
-            'data' => $set,
             'nonvide' => array(
          
                 ),                

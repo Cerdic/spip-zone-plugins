@@ -21,3 +21,4 @@ function inc_verifier_ordre_dist($where){
     return $ordre;
 }
 
+?>

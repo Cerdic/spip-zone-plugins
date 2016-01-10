@@ -26,8 +26,8 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_selection_objets'] = array(
 		'type' => 'selection_objet',
-		'principale' => "oui",
-		'table_objet_surnoms' => array('selectionobjet'), // table_objet('selection_objet') => 'selection_objets'
+		'principale' => "oui", 
+		'table_objet_surnoms' => array('selectionobjet'), // table_objet('selection_objet') => 'selection_objets' 
 		'field'=> array(
 			"id_selection_objet" => "bigint(21) NOT NULL",
 			"titre"              => "varchar(255) NOT NULL DEFAULT ''",
@@ -38,23 +38,23 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 			"objet"              => "varchar(100) NOT NULL",
 			"objet_dest"         => "varchar(100) NOT NULL",
 			"ordre"              => "bigint(21) NOT NULL",
-			"ordre_objet"         => "bigint(21) NOT NULL",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL",
+			"ordre_objet"         => "bigint(21) NOT NULL",			
+			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
+			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
-			"langue_choisie"     => "VARCHAR(3) DEFAULT 'non'",
-			"type_lien"          => "VARCHAR(100) NOT NULL DEFAULT ''",
+            "langue_choisie"     => "VARCHAR(3) DEFAULT 'non'", 			
+			"type_lien"          => "VARCHAR(100) NOT NULL DEFAULT ''",			
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_selection_objet",
-			"KEY id_objet"       => "id_objet",
-			"KEY id_objet_dest"  => "id_objet_dest",
-			"KEY objet"          => "objet",
-			"KEY objet_dest"     => "objet_dest",
-			"KEY lang"           => "lang",
+			"PRIMARY KEY"        => "id_selection_objet",	
+            "KEY id_objet"       => "id_objet",
+            "KEY id_objet_dest"  => "id_objet_dest",             
+            "KEY objet"          => "objet",             
+            "KEY objet_dest"     => "objet_dest", 							
+			"KEY lang"           => "lang", 
 			"KEY statut"         => "statut",
-
+			
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
@@ -72,13 +72,18 @@ function selection_objet_declarer_tables_objets_sql($tables) {
 				'champ'     => 'statut',
 				'publie'    => 'publie',
 				'previsu'   => 'publie,prop',
-				'post_date' => 'date',
+				'post_date' => 'date', 
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'selection_objet:texte_changer_statut_objet',
+		'texte_changer_statut' => 'selection_objet:texte_changer_statut_objet', 
+		
+
 	);
 
 	return $tables;
 }
 
+
+
+?>
