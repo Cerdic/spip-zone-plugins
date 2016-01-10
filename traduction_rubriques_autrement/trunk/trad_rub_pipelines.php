@@ -2,6 +2,15 @@
 function trad_rub_header_prive($flux) {
 
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('css/trad_rub_styles.css') . '" type="text/css" media="all" />';
+$flux .='<!-- Example script -->
+<script type="text/javascript">
+	$(document).ready( function() {
+		$(".avis_source").click( function() {
+			javascript:alert("'._T('tra:avis_rubrique_source').'");
+		});
+	});
+</script>
+';
 	return $flux;
 
 }

@@ -96,9 +96,11 @@
 }
 
 div.ref {
-	float: right;
-	margin: -3px -2px 0 0;
 	cursor: help;
+	position: absolute;
+	right:3px;
+	top: 0;
+	z-index: 100;
 }
 
 div.ref span {
