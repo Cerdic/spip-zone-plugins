@@ -56,7 +56,13 @@ a.bouton_options{background: none; display: inline-block}
 
 .liste-elements table.spip tr.trads{background:#dfdfdf}
 
-div.ref_article{float:right;margin:-3px -2px 0 0;cursor:help;}
+div.ref_article {
+	cursor: help;
+	position: absolute;
+	right:3px;
+	top: 0;
+	z-index: 100;
+}
 
 div.ref_article span {display:none;}
 
