@@ -5,7 +5,7 @@
 
 .onglets_traduction div.options{
 	margin :0;
-	padding:0; 
+	padding:0;
 }
 
 .onglets_traduction li.box_onglet{
@@ -33,6 +33,7 @@
 .onglets_traduction.barre_onglet a,
 .onglets_traduction.barre_onglet strong  {padding:5px}
 
+.onglets_traduction.barre_onglet .traduit a{background:#ffffff;}
 .onglets_traduction.barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
 
 .pagination{text-align:left;}
@@ -55,17 +56,17 @@ a.bouton_options{background: none; display: inline-block}
 
 .liste-elements table.spip tr.trads{background:#dfdfdf}
 
-div.ref_article{float:right;margin:-3px -2px 0 0;cursor:help;}	
+div.ref_article{float:right;margin:-3px -2px 0 0;cursor:help;}
 
 div.ref_article span {display:none;}
 
 div.ref_article:hover span {
 	display:block;
-	position:absolute; 
-	top:-25px; 
-	color: #000000; 
+	position:absolute;
+	top:-25px;
+	color: #000000;
 	font-weight:bold;
 	width:250px;
-} 
+}
 .editer_taa{margin-bottom:5px;}
 body.article .new_trad {display:none}
