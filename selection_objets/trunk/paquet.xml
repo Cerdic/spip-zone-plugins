@@ -1,12 +1,12 @@
 <paquet
 	prefix="selection_objet"
 	categorie="edition"
-	version="1.10.3"
+	version="1.10.4"
 	etat="test"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/selection_objet-64.png"
 	documentation="http://contrib.spip.net/Selection-d-objets"
-	schema="0.5.1" 
+	schema="0.5.1"
 >
 
 	<nom>Sélection d'objets</nom>
@@ -15,15 +15,16 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
-	<pipeline nom="autoriser" inclure="selection_objet_autorisations.php" /> 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/selection_objet.php" /> 
+	<pipeline nom="autoriser" inclure="selection_objet_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/selection_objet.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/selection_objet.php" />
-	<pipeline nom="affiche_milieu" inclure="selection_objet_pipelines.php" /> 
-	<pipeline nom="affiche_gauche" inclure="selection_objet_pipelines.php" /> 	
-	<pipeline nom="formulaire_charger" inclure="selection_objet_pipelines.php" /> 		
-	<pipeline nom="formulaire_traiter" inclure="selection_objet_pipelines.php" /> 
-	<pipeline nom="jqueryui_plugins" inclure="selection_objet_pipelines.php" /> 				 
+	<pipeline nom="affiche_milieu" inclure="selection_objet_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="selection_objet_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="selection_objet_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="selection_objet_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="selection_objet_pipelines.php" />
+	<pipeline nom="header_prive" inclure="selection_objet_pipelines.php" />
 
 </paquet>
