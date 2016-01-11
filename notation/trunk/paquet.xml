@@ -1,13 +1,13 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.0.11"
+	version="2.0.12"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/notation-32.png"
 	schema="0.6.3"
 	documentation="http://contrib.spip.net/Notation-d-elements-SPIP"
->	
+>
 
 	<nom>Notation</nom>
 	<!-- Attribuer une note aux éléments de SPIP -->

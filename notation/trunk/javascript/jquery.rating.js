@@ -209,7 +209,7 @@
 			// find data for event
 			var input = $(this).data('rating.input') || $( this.tagName=='INPUT' ? this : null );
    // focus handler, as requested by focusdigital.co.uk
-			if(control.focus) control.focus.apply(input[0], [input.val(), $('a', input.data('rating.star'))[0]]);
+			if(control.focus) control.focus.apply(input[0], [input.prop(), $('a', input.data('rating.star'))[0]]);
 		}, // $.fn.rating.focus
 		
 		blur: function(){
@@ -218,7 +218,7 @@
 			// find data for event
 			var input = $(this).data('rating.input') || $( this.tagName=='INPUT' ? this : null );
    // blur handler, as requested by focusdigital.co.uk
-			if(control.blur) control.blur.apply(input[0], [input.val(), $('a', input.data('rating.star'))[0]]);
+			if(control.blur) control.blur.apply(input[0], [input.prop(), $('a', input.data('rating.star'))[0]]);
 		}, // $.fn.rating.blur
 		
 		fill: function(){ // fill to the current mouse position.
@@ -244,7 +244,7 @@
 			this.rating('drain');
 			// Set control value
 			if(control.current){
-				control.current.data('rating.input').attr('checked','checked');
+				control.current.data('rating.input').prop('checked','checked');
 				control.current.prevAll().andSelf().filter('.rater-'+ control.serial).addClass('star-rating-on');
 			}
 			else
@@ -270,7 +270,7 @@
 				if(typeof value=='string')
 					//return 
 					$.each(control.stars, function(){
-						if($(this).data('rating.input').val()==value) $(this).rating('select');
+						if($(this).data('rating.input').prop()==value) $(this).rating('select');
 					});
 			}
 			else
@@ -285,7 +285,7 @@
 			// find data for event
 			var input = $( control.current ? control.current.data('rating.input') : null );
 			// click callback, as requested here: http://plugins.jquery.com/node/1655
-			if(control.callback) control.callback.apply(input[0], [input.val(), $('a', control.current)[0]]);// callback event
+			if(control.callback) control.callback.apply(input[0], [input.prop('value'), $('a', control.current)[0]]);// callback event
 		},// $.fn.rating.select
 		
 		readOnly: function(toggle, disable){ // make the control read-only (still submits value)
