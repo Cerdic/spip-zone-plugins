@@ -117,32 +117,6 @@ function prix_formater_devise($montant,$devise){
 
   $montant = number_format($montant, 2);
 
-  // Si prix objets installés on recupère ses configs
-  $config = lire_config('prix_objets');
-  $devises = isset($config['devises']) ? $config['devises'] : array();
-
-  //Si il y a un cookie 'geo_devise' et qu'il figure parmis les devises diponibles on le prend
-  if (!$devise) {
-    if (isset($_COOKIE['geo_devise']) AND in_array($_COOKIE['geo_devise'], $devises))
-      $devise = $_COOKIE['geo_devise'];
-    // Sinon on regarde si il ya une devise defaut valable
-    elseif ($config['devise_default'] AND in_array($config['devise_default'], $devises))
-      $devise = $config['devise_default'];
-    // Sinon on prend la première des devises choisies
-    elseif (isset($devises[0]))
-      $devise = $devises[0];
-    // Sinon on met l'Euro
-    elseif(! defined('DEVISE_DEFAUT')) {
-       $devise = 'EUR';
-      }
-    else $devise = DEVISE_DEFAUT;
-     
-
-    //On met le cookie
-    spip_setcookie('geo_devise', $devise, time() + 3660 * 24 * 365, '/');
-    define('DEVISE_DEFAUT',$devise);
-  }
-
   //On détermine la langue du contexte
   $lang = $GLOBALS['spip_lang'];
 
