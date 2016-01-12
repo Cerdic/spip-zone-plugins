@@ -27,7 +27,7 @@ function formulaires_ajouter_zitem_verifier_dist($auteur,$retour=NULL,$retourjav
 
 function formulaires_ajouter_zitem_traiter_dist($auteur,$retour=NULL,$retourjava=NULL){
 	$message = array();
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$id_auteur = isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '';
 	$ip = $id_auteur ? '' : $GLOBALS['ip'];
 	if ($auteur)
 		$titre = _T('bibliocheck:ajouter_reference2',array('auteur'=>$auteur));
@@ -41,8 +41,6 @@ function formulaires_ajouter_zitem_traiter_dist($auteur,$retour=NULL,$retourjava
 		'ip' => $ip,
 		'id_auteur' => $id_auteur,
 		'id_assigne' => 0,
-		'tracker' => 9,
-		'severite' => 3,
 		'titre' => $titre,
 		'texte' => _request('texte'),
 		'exemple' => _request('exemple'),
@@ -68,7 +66,7 @@ function formulaires_ajouter_zitem_traiter_dist($auteur,$retour=NULL,$retourjava
 	);
 	
 	$id_ticket = sql_insertq("spip_tickets", $champs);
-
+	
 	pipeline('post_insertion',
 		array(
 			'args' => array(

@@ -78,13 +78,4 @@ function autoriser_biblio_verifier_dist($faire, $type, $id, $qui, $opt){
 	return $autorise;
 }
 
-// Permet d'ajouter un nouveau type de ticket (numéroté 9)
-function bibliocheck_tickets_liste_tracker($flux) {
-	if ($flux['args']=='nom_long')
-		$flux['data'][9] = _T("bibliocheck:type_biblio_long");
-	else
-		$flux['data'][9] = _T("bibliocheck:type_biblio");
-	return $flux;
-}
-
 ?>

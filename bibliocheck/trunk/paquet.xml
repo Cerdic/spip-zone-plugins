@@ -1,7 +1,7 @@
 <paquet
 	prefix="bibliocheck"
 	categorie="edition"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/bibliocheck-32.png"
@@ -22,10 +22,9 @@
 	<pipeline nom="affiche_milieu" inclure="bibliocheck_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="bibliocheck_pipelines.php" />
 	<pipeline nom="autoriser" inclure="bibliocheck_pipelines.php"/>
-	<pipeline nom="tickets_liste_tracker" inclure="bibliocheck_pipelines.php" />
 
 	<necessite nom="zotspip" />
-	<necessite nom="tickets" compatibilite="[2.5.0;[" />
+	<necessite nom="tickets" compatibilite="[4.0.0;[" />
 	<necessite nom="medias" />
 	<necessite nom="forum" />
 </paquet>

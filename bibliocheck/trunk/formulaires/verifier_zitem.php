@@ -17,7 +17,7 @@ function formulaires_verifier_zitem_verifier_dist($id_zitem,$auteur,$retour=NULL
 
 function formulaires_verifier_zitem_traiter_dist($id_zitem,$auteur,$retour=NULL,$retourjava=NULL){
 	$message = array();
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$id_auteur = isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '';
 	$ip = $id_auteur ? '' : $GLOBALS['ip'];
 	if ($auteur)
 		$titre = _T('bibliocheck:corriger_reference2',array('id'=>$id_zitem,'auteur'=>$auteur));
@@ -31,8 +31,6 @@ function formulaires_verifier_zitem_traiter_dist($id_zitem,$auteur,$retour=NULL,
 		'ip' => $ip,
 		'id_auteur' => $id_auteur,
 		'id_assigne' => 0,
-		'tracker' => 9,
-		'severite' => 3,
 		'titre' => $titre,
 		'texte' => _request('texte'),
 		'exemple' => _request('exemple'),
