@@ -10,10 +10,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function genie_depublier_dist($time) {
 	//va chercher les objets de spip_depublies avec une date_depublie pour aujourd'hui
 	include_spip('base/abstract_sql');
-	$today = date('Y-m-d');
+	$today = date('Y-m-d H:i:s');
 	
 	if(
-		$depublications = sql_allfetsel('*','spip_depublies','DATE_FORMAT(date_depublie, "%Y-%m-%d") <= '.sql_quote($today).' AND DATE_FORMAT(date_depublie, "%Y-%m-%d") >0')
+		$depublications = sql_allfetsel('*','spip_depublies','DATE_FORMAT(date_depublie, "%Y-%m-%d %H:%i:%s") <= '.sql_quote($today).' AND DATE_FORMAT(date_depublie, "%Y-%m-%d %H:%i:%s") >0')
 		and is_array($depublications)
 	){
 		foreach ($depublications as $depublication){
