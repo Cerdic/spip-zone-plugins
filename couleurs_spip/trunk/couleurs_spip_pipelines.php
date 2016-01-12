@@ -229,7 +229,7 @@ function couleurs_spip_filtre_texte_echappe($texte, $filtre, $balises = '', $arg
  */
 function couleurs_spip_remplacer($texte) {
 	if (
-		(strpos($texte, '[/') === false) or strpos($texte, '[') === false
+		(strpos($texte, '[/') === false or strpos($texte, '[') === false)
 		and
 	  (strpos($texte, '</cs_') === false or strpos($texte, '<cs_') === false)
 		) {
@@ -256,7 +256,7 @@ function couleurs_spip_remplacer($texte) {
  */
 function couleurs_spip_pre_typo($texte) {
 	if (
-		(strpos($texte, '[/') === false) or strpos($texte, '[') === false
+		(strpos($texte, '[/') === false or strpos($texte, '[') === false)
 		and
 	  (strpos($texte, '</cs_') === false or strpos($texte, '<cs_') === false)
 		) {
