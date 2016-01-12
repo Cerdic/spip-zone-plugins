@@ -3,7 +3,7 @@
 ]
 [(#AUTORISER{depublierafficher,#ENV{objet},#ENV{id_objet}}|oui)
 	[(#SET{name,date_depublie})][(#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}})]
-	<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 		<label for="#GET{name}"><:depublie:texte_date_depublication:> #AIDER{artdate_depublie}</label>[
 		<span class='erreur_message'>(#GET{erreurs})</span>]
 		<span class="affiche"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>
@@ -26,7 +26,8 @@
 								if (jQuery('#' + '#GET{name}_jour').val() == '0000') jQuery('#' + '#GET{name}_jour').val('');
 							}"
 							/>
-				<label for="sans_depublie"><:depublie:texte_date_depublication_nonaffichee:></label>
+				<label for="sans_depublie" style='text-transform:none'><:depublie:texte_date_depublication_nonaffichee:></label>
 			</span>
 		</span>]
-	</li>]
+	</div>
+]
