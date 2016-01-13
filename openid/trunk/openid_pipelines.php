@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function openid_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
 		$openid = recuperer_fond('formulaires/inc-openid', $flux['args']['contexte']);
-		$flux['data'] = preg_replace('%(<li class=["\'][^"\']*editer_email(.*?)</li>)%is', '$1'."\n".$openid, $flux['data']);
+		$flux['data'] = preg_replace('%(<(div|li) class=["\'][^"\']*editer_email(.*?)</\\2>)%is', '$1'."\n".$openid, $flux['data']);
 	}
 	return $flux;
 }
@@ -83,31 +83,6 @@ function openid_formulaire_verifier($flux){
 	return $flux;
 }
 
-
-/**
- * Enregistrer l'openid dans la base au traitement du formulaire d'inscription
- * utilise en 2.0 uniquement
- *
- * @param array $flux
- * @return array
- */
-function openid_formulaire_traiter($flux){
-	if ($flux['args']['form']=='inscription'){
-		$nom = _request('nom_inscription');
-		$mail = _request('mail_inscription');
-		$openid = _request('openid');
-		if (function_exists('test_inscription'))
-			$f = 'test_inscription';
-		else 	$f = 'test_inscription_dist';
-		$desc = $f($mode, $mail, $flux['args']['args'][0], $flux['args']['args'][2]);
-		if (is_array($desc)
-		  AND $mail = $desc['email']){
-			include_spip('base/abstract_sql');
-			sql_updateq("spip_auteurs", array('openid'=>$openid),"statut='nouveau' AND email=" . sql_quote($mail));
-		}
-	}
-	return $flux;
-}
 
 
 /**

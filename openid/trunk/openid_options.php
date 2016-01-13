@@ -35,10 +35,11 @@ $GLOBALS['spip_pipeline']['openid_inscrire_redirect'] = '';
  * @return <type>
  */
 function openid_recuperer_fond($flux) {
-	if ($flux['args']['fond']=='formulaires/login' AND version_compare($GLOBALS['spip_version_branche'],"2.1.0 dev","<")){
+	if ($flux['args']['fond']=='formulaires/login') {
 		include_spip('inc/openid');
-		$flux['data']['texte'] = openid_login_form($flux['data']['texte'],$flux['data']['contexte']);
+		$flux['data']['texte'] = openid_login_form($flux['data']['texte'], $flux['data']['contexte']);
 	}
+
 	if ($flux['args']['fond']=='formulaires/inscription'){
 
 		$insc = recuperer_fond('formulaires/inc-inscription-openid',$flux['data']['contexte']);
