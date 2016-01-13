@@ -1,0 +1,10 @@
+Plugin Logos Médias : TODO
+--------------------------
+
+# API
+Utiliser la nouvelle API des logos
+
+# Bouton
+Trouver un autre terme que "utiliser comme logo" ?
+C'est un peu ambigu, ça peut laisser penser que le document et le logo sont liés.
+Or il s'agit d'une copie, le logo reste bien indépendant du document.

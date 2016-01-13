@@ -58,7 +58,7 @@ function action_iconifier_document_dist($arg=null){
 
 	// vérifier qu'on a le droit de logotifier le document
 	// et de modifier le logo (d'après charger de «editer_logo »)
-	include_spip('inc/autorise');
+	include_spip('inc/autoriser');
 	if (
 		autoriser('autoiconifier','document',$id_document,'',array('objet'=>$objet,'id_objet'=>$id_objet))
 		AND $charger = charger_fonction('charger','formulaires/editer_logo')
@@ -69,7 +69,7 @@ function action_iconifier_document_dist($arg=null){
 		// récupérer quelques infos sur le document
 		$document = sql_allfetsel('fichier,extension,taille','spip_documents', 'id_document='.$id_document);
 		$document = array_shift($document);
-		$type = sql_getfetsel('mime_type','spip_types_documents','extenstion='.sql_quote($document['extension']));
+		$type = sql_getfetsel('mime_type','spip_types_documents','extension='.sql_quote($document['extension']));
 
 		// créer une copie temporaire du document dans /tmp
 		$fichier = find_in_path(_NOM_PERMANENTS_ACCESSIBLES.$document['fichier']);

@@ -13,7 +13,7 @@ un bouton qui permet d\'utiliser une image liée à un objet comme logo de ce de
 Le logo n\'est pas lié au document : en cas de modification de ce dernier, le logo ne sera pas mis à jour.
 <br>Utiliser les documents pour gérer les logos des objets est prévu pour une version ultérieure de SPIP : ce jour là, ce plugin sera obsolète.',
 	'medias_logos_nom' => 'Logos Médias',
-	'medias_logos_slogan' => 'Définir des documents comme logo d\'objets',
+	'medias_logos_slogan' => 'Définir des documents comme logos d\'objets',
 
 	// B
 	'bouton_iconifier' => 'Utiliser comme logo',
