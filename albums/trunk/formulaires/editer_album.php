@@ -163,7 +163,7 @@ function formulaires_editer_album_traiter_dist($id_album='new', $retour='', $ass
 
 	// FIXME : cas particulier aux squelettes de l'espace privé
 	// Rechargement ajax en cas d'édition rapide sur place
-	if (!$res['redirect']){
+	if (empty($res['redirect'])) {
 		$id_album = $res['id_album'];
 		$js = "if (window.jQuery) jQuery(function(){ajaxReload('liste_albums');});";
 		$js = "<script type='text/javascript'>$js</script>";
