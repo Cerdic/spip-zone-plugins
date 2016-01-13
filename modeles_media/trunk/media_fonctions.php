@@ -156,12 +156,12 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 
 	if (!$src)
 		$src = $image;
-		
-	if(preg_match('/\.[jpg|gif|png]\?/i',$src,$matches)){
-		$pos = strpos($src,'?');
-		$src = substr($src,0,$pos);
+
+	// Supprimer proprement le query string
+	$url = parse_url($src);
+	if (!empty($url['query'])) {
+		$src = $url['scheme'].'://'.$url['host'].$url['path'];
 	}
-	
 	if(substr($src,0,strlen($url_site_spip))==$url_site_spip)
 		$src = substr($src,strlen($url_site_spip));
     
