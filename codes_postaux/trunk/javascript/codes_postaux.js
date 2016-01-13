@@ -38,15 +38,15 @@ select: function( event, ui ) {
 								return false;
 								}
 					})
-	.data("autocomplete")._renderItem = function (ul, item) {
+	.data("ui-autocomplete")._renderItem = function (ul, item) {
     return $("<li>")
-        .data("item.autocomplete", item)
+        .data("ui-autocomplete-item", item)
         .append("<a>" + item.label + " " + item.ville + "</a>")
         .appendTo(ul);
    		}
-					
-				
-					
+
+
+
 
 }
 
