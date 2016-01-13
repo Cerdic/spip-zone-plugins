@@ -18,11 +18,11 @@
 input[type=checkbox].lim_hidden {display:none; }
 	span.entete { font-weight: bold; }
 	span.center { text-align: center; }
-	span.tab.rubrique {display:inline-block; width:390px; font-weight:bold; }
-	.sousrub span.tab.rubrique { margin-left:10px; width:380px; font-weight:normal; }
-	.sousrub .sousrub span.tab.rubrique { margin-left:20px; width:370px;}
-	.sousrub .sousrub .sousrub span.tab.rubrique { margin-left:30px; width:360px;}
-	span.check {display:inline-block; width:[(#VAL{55}|div{#GET{nbre_col}})%]; text-align: center;}
+	span.tab.rubrique {display:inline-block; width:320px; font-weight:bold; }
+	.sousrub span.tab.rubrique { margin-left:10px; width:310px; font-weight:normal; }
+	.sousrub .sousrub span.tab.rubrique { margin-left:20px; width:300px;}
+	.sousrub .sousrub .sousrub span.tab.rubrique { margin-left:30px; width:320px;}
+	span.check {display:inline-block; width:[(#VAL{62}|div{#GET{nbre_col}})%]; text-align: center;}
 
 	#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 	#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}

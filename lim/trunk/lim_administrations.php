@@ -41,6 +41,7 @@ function lim_vider_tables($nom_meta_base_version) {
 	effacer_meta('lim');
 	effacer_meta('lim_logos');
 	effacer_meta('lim_rubriques');
+	effacer_meta('lim_objets');
 	effacer_meta($nom_meta_base_version);
 }
 
