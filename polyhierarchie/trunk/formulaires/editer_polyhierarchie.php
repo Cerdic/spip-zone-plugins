@@ -9,18 +9,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_polyhierarchie_charger($objet, $id_objet, $retour=''){
-	
+	$id_parent = null;
 	$valeurs['objet'] = $objet;
 	$valeurs['id_objet'] = intval($id_objet);
 	
 	$table_objet = table_objet_sql($objet);
 	$id_table_objet = id_table_objet($objet);
 	
-	if ($objet=='article')
+	if ($objet == 'article') {
 		$id_parent = sql_getfetsel('id_rubrique',$table_objet,$id_table_objet.'='.intval($id_objet));
-		
-	if ($objet=='rubrique')
+	}
+	elseif ($objet=='rubrique') {
 		$id_parent = sql_getfetsel('id_parent',$table_objet,$id_table_objet.'='.intval($id_objet));
+	}
 
 	// On ne fait rien si l'id_parent principal est incoherent (exemple : compat pages uniques)
 	if ($id_parent < 0)
@@ -30,7 +31,9 @@ function formulaires_editer_polyhierarchie_charger($objet, $id_objet, $retour=''
 
 	// on met en tete l'id_parent principal
 	// pour unifier la saisie
-	$valeurs['parents'] = array("rubrique|".$id_parent);
+	if (!is_null($id_parent)) {
+		$valeurs['parents'] = array("rubrique|".$id_parent);
+	}
 
 	include_spip('inc/polyhier');
 	$parents = polyhier_get_parents($id_objet,$objet,$serveur='');
