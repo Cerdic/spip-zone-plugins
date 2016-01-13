@@ -22,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function depublie_recuperer_fond($flux){
 	if($flux['args']['fond'] == 'formulaires/dater'){
 		$ajouter_depublier = recuperer_fond("formulaires/inc-depublie",$flux['args']['contexte']);
-		$flux['data']['texte'] = preg_replace("%(<\/div>.*<!--extra-->)%is", "$ajouter_depublier $0", $flux['data']['texte']);
+		$flux['data']['texte'] = preg_replace('%(<div class=["\'][^"\']*editer-groupe(.*?)</div>)%is', '$1'."\n".$ajouter_depublier, $flux['data']['texte']);
 	}
 	return $flux;
 }
