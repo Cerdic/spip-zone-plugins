@@ -211,7 +211,10 @@ function formulaires_albums_deplacer_documents_traiter_dist($objet='',$id_objet=
 		$id_form = "#formulaire_albums_deplacer_documents";
 		$id_form .= ($contexte_objet) ? "_${objet}${id_objet}" : "";
 		//if (_request('valider')) $callback = "jQuery('${id_form}').find('.boutons').hide();";
-		if (_request('annuler')) $callback = "jQuery('${id_form}').slideUp(500,function(){jQuery(this).find('.reponse_formulaire').hide();});";
+		$callback = '';
+		if (_request('annuler')) {
+			$callback = "jQuery('${id_form}').slideUp(500,function(){jQuery(this).find('.reponse_formulaire').hide();});";
+		}
 
 		$js = "if (window.jQuery) jQuery(function(){ajaxReload('liste_albums',{callback:function(){ ${callback} }});${ajaxReload_documents}});";
 		$js = "<script type='text/javascript'>${js}</script>";
