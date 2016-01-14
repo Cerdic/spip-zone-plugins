@@ -38,7 +38,7 @@
 		<nom>autoriser</nom>
 		<inclure>inc/anaclic_autorisations.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<categorie>statistique</categorie>
 	<!-- onglet SPIP v3 -->
 	<onglet id='statistiques_anaclic_v3' parent='statistiques'>

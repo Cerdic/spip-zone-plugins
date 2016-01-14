@@ -44,7 +44,11 @@ function action_telecharger()
 			au cas ou elle soit surchargee par un plugin (acces_restreint)
 		*/
 		include_spip('urls/standard');
-		$url = generer_url_document($id, 'document');
+		if (function_exists(generer_url_document)) $url = generer_url_document($id, 'document');
+		else
+		{	$generer_url_document = charger_fonction("generer_url_document","urls");
+			$url = $generer_url_document($id);
+		}
 
 		// ip du visiteur 
 		$ip = $_SERVER["REMOTE_ADDR"];
