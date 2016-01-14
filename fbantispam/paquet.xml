@@ -1,9 +1,9 @@
 <paquet
 	prefix="fbantispam"
 	categorie="performance"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/beos-stop-icone-8929-32.png"
 	documentation="http://contrib.spip.net/CAPTCHA-pour-forums"
 >	
@@ -12,14 +12,17 @@
 
 
 	<auteur lien="www.fbservices.fr">Fabio Bertagnin FBServices</auteur>
-
 	<copyright>2013-2016</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+        <necessite nom="saisies" compatibilite="[1.25.11;]"></necessite>
 
 	<pipeline nom="pre_edition" inclure="fbantispam_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="fbantispam_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="fbantispam_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="fbantispam_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="fbantispam_pipelines.php" />
+        
+	<menu nom="fbantispam" titre="Configurer FB Antispam" parent="menu_configuration" icone="images/beos-stop-icone-8929-16.png" action="?exec=configurer_fbantispam" />
 </paquet>

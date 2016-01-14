@@ -103,7 +103,7 @@ function fbantispam_formulaire_verifier($flux) {
             return $res;
         }
         $type_captcha = lire_config('fbantispam/type_captcha');
-        if ($type_captcha == 'copie')
+        if ($type_captcha == 'copie' || $type_captcha == '')
         {
             $cps = "$cp0" . "$cp1" . "$cp2" . "$cp3";
             if ($captcha != $cps) {
