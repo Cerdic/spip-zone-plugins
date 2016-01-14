@@ -57,6 +57,8 @@ function lim_afficher_config_objet($flux){
 **/
 function lim_formulaire_charger($flux){
 	$form				= $flux['args']['form'];
+	if (!strpos($form, 'editer'))
+		return $flux;
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
