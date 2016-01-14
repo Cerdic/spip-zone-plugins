@@ -25,6 +25,11 @@ if (!defined('_ALBUMS_BALISE_TITRE'))                  define('_ALBUMS_BALISE_TI
 if (!defined('_ALBUMS_BALISE_TITRE_VIGNETTES'))        define('_ALBUMS_BALISE_TITRE_VIGNETTES','');
 if (!defined('_ALBUMS_BALISE_TITRE_LISTE'))            define('_ALBUMS_BALISE_TITRE_LISTE','');
 
+// [tous] Affichage de la légende (titre et/ou descriptif) : `true` ou `oui`
+if (!defined('_ALBUMS_AFFICHER_TITRE'))                define('_ALBUMS_AFFICHER_TITRE','');
+if (!defined('_ALBUMS_AFFICHER_DESCRIPTIF'))           define('_ALBUMS_AFFICHER_DESCRIPTIF','');
+
+
 // [tous] Position de la légende (titre et descriptif) : `top` ou `bottom`
 if (!defined('_ALBUMS_POSITION_LEGENDE'))              define('_ALBUMS_POSITION_LEGENDE','top');
 if (!defined('_ALBUMS_POSITION_LEGENDE_VIGNETTES'))    define('_ALBUMS_POSITION_LEGENDE_VIGNETTES','bottom');

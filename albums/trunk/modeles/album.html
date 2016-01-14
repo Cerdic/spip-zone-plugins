@@ -77,9 +77,9 @@
 		balise_titraille  = balise_titre
 		media             pour restreindre à un type de document
 
-][(#SET{has_titre,      #ENV{titre}|in_array{#LISTE{oui,true}}})][
+][(#SET{has_titre,      #EVAL{_ALBUMS_AFFICHER_TITRE}|sinon{#ENV{titre}|in_array{#LISTE{oui,true}}}})][
 (#SET{titre,            #GET{has_titre}|?{#INFO_TITRE{album,#ENV{id_album}},#ENV{titre}|trim}})][
-(#SET{has_descriptif,   #ENV{descriptif}|in_array{#LISTE{oui,true}}})][
+(#SET{has_descriptif,   #EVAL{_ALBUMS_AFFICHER_DESCRIPTIF}|sinon{#ENV{descriptif}|in_array{#LISTE{oui,true}}}})][
 (#SET{descriptif,       #GET{has_descriptif}|?{#INFO_DESCRIPTIF{album,#ENV{id_album}}}})][
 (#SET{pagination,       #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_VIGNETTES}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
 (#SET{balise_titre,     #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
