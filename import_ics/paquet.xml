@@ -1,7 +1,7 @@
 <paquet
 	prefix="import_ics"
 	categorie="date"
-	version="1.2.2"
+	version="1.2.3"
 	etat="test"
 	compatibilite="[3.0.7;3.1.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
@@ -17,10 +17,10 @@
 	<auteur>Amaury</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="agenda"/>
-	<necessite nom="icalendar"/>
+	<necessite nom="agenda" compatibilite="[3.0.0;]" />
+	<necessite nom="icalendar" compatibilite="[0.2.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<necessite nom="seminaire" />
+	<necessite nom="seminaire" compatibilite="[2.1.10;]" />
 
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
