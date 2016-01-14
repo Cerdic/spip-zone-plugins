@@ -38,7 +38,7 @@ RewriteBase /
 
     $host = $_SERVER['HTTP_HOST'];
     $racine = dirname($_SERVER['SCRIPT_NAME']); // profondeur_url();
-    if ($racine == '/') {
+    if ($racine == '/' OR $racine == '\\') {
         $racine = '';
     }
     $site = basename(dirname($dir));
