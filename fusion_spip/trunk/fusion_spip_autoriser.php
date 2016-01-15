@@ -20,9 +20,8 @@ function fusion_spip_autoriser() { }
  * @return bool
  */
 function autoriser_fusionspip_menu($faire, $type, $id, $qui, $opt) {
-    if ($qui['webmestre']=='oui') {
-        return true;
-    }
-
-    return false;
+	if ($qui['webmestre'] == 'oui') {
+		return true;
+	}
+	return false;
 }
