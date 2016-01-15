@@ -50,9 +50,11 @@ function formulaires_fusion_spip_verifier_dist() {
 
 		$bases = bases_referencees(_FILE_CONNECT_TMP);
 		$connect = $bases[$base];
-
-		$principales = fusion_spip_lister_tables_principales($connect, false);
-		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
+		
+		$lister_tables_principales = charger_fonction('lister_tables_principales','fusion_spip');
+		$principales = $lister_tables_principales($connect, false);
+		$lister_tables_auxiliaires = charger_fonction('lister_tables_auxiliaires','fusion_spip');
+		$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
 
 		// vérifier la version de la base source
 		if(!sql_showtable('spip_meta', false, $connect)){
@@ -66,7 +68,8 @@ function formulaires_fusion_spip_verifier_dist() {
 		}
 		// vérifier la conformité du shéma de la base source
 		if( empty($erreurs) && _request('confirme_warning') != 'on' ){
-			$erreurs_shema = fusion_spip_comparer_shemas($connect, $principales, $auxiliaires);
+			$comparer_shemas = charger_fonction('comparer_shemas','fusion_spip');
+			$erreurs_shema = $comparer_shemas($connect, $principales, $auxiliaires);
 			if (count($erreurs_shema)) {
 				$erreurs['warning_shema'] = '- '.join('<br>- ', $erreurs_shema);
 			}
@@ -118,49 +121,60 @@ function formulaires_fusion_spip_traiter_dist() {
 
 		$time_start = microtime(true);
 
-        //commençons par vider la table de traitement fusion_spip pour pouvoir faire le comptage en fin de traiter
-        sql_delete("spip_fusion_spip");
-        fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
+		//commençons par vider la table de traitement fusion_spip pour pouvoir faire le comptage en fin de traiter
+		sql_delete("spip_fusion_spip");
+		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
-		$principales = fusion_spip_lister_tables_principales($connect, true);
-		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers);
-		$cles_primaires = fusion_spip_lister_cles_primaires($principales);
+		$lister_tables_principales = charger_fonction('lister_tables_principales','fusion_spip');
+		$principales = $lister_tables_principales($connect, false);
+		$lister_tables_auxiliaires = charger_fonction('lister_tables_auxiliaires','fusion_spip');
+		$auxiliaires = $lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
+		$lister_cles_primaires = charger_fonction('lister_cles_primaires','fusion_spip');
+		$cles_primaires = $lister_cles_primaires($principales);
 
 		// insérer les objets principaux
+		$inserer_table_principale = charger_fonction('inserer_table_principale','fusion_spip');
 		foreach ($principales as $nom_table => $shema) {
-			fusion_spip_inserer_table_principale($nom_table, $shema, $secteur, $connect);
+			$inserer_table_principale($nom_table, $shema, $secteur, $connect);
 		}
 
 		// mettre à jour les liens entre objets principaux
+		$liaisons_table_principale = charger_fonction('liaisons_table_principale','fusion_spip');
 		foreach ($principales as $nom_table => $shema) {
-			fusion_spip_liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect);
+			$liaisons_table_principale($nom_table, $shema, $cles_primaires, $connect);
 		}
 
 		// mise à jour des liaisons de vignettes de documents
-		fusion_spip_vignettes_documents($connect);
+		$vignettes_documents = charger_fonction('vignettes_documents','fusion_spip');
+		$vignettes_documents($connect);
 
 		// mise à jour des statuts des rubriques
 		include_spip('inc/rubriques');
 		calculer_rubriques();
 
 		// insérer les tables auxiliaires
+		$inserer_table_auxiliaire = charger_fonction('inserer_table_auxiliaire','fusion_spip');
 		foreach ($auxiliaires as $nom_table => $shema) {
-			fusion_spip_inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect);
+			$inserer_table_auxiliaire($nom_table, $shema, $cles_primaires, $connect);
 		}
 
 		// importer un par un les documents et logos de la source
 		if ($img_dir) {
-			fusion_spip_import_documents($img_dir, $connect);
+			$import_documents = charger_fonction('import_documents','fusion_spip');
+			$import_documents($img_dir, $connect);
 		}
 
 		// mise à jour des liens internes [...->...]
-		fusion_spip_maj_liens_internes($principales, $connect);
+		$maj_liens_internes = charger_fonction('maj_liens_internes','fusion_spip');
+		$maj_liens_internes($principales, $connect);
 
 		// mise à jour des modèles <docXX> <imgXX> <embXX> ...
-		fusion_spip_maj_modeles($principales, $connect);
+		$maj_modeles = charger_fonction('maj_modeles','fusion_spip');
+		$maj_modeles($principales, $connect);
 
 		// déclarer les url uniques importées avec "perma=1"
-		fusion_spip_maj_perma_urls($connect);
+		$maj_perma_urls = charger_fonction('maj_perma_urls','fusion_spip');
+		$maj_perma_urls($connect);
 
 		// appel d'une fonction de traitements perso (déclarée dans mes_options.php par exemple)
 		if (function_exists('fusion_spip_extra_action')) {
@@ -177,7 +191,7 @@ function formulaires_fusion_spip_traiter_dist() {
 		fusion_spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 		// Un résumé des objets importés
-		$res            = sql_select('objet, count(*) as count', 'spip_fusion_spip', '', 'objet');
+		$res = sql_select('objet, count(*) as count', 'spip_fusion_spip', '', 'objet');
 		$resume_imports = array();
 		while( $ligne = sql_fetch($res) ) {
 			if( $ligne['count'] > 0 ){
