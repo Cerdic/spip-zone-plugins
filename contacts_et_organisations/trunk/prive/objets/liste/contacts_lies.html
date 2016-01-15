@@ -68,7 +68,7 @@ a mis a jour la valeur avec la page reelle]
 
 			<td class='action'>
 				[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
-					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}#OBJET-#ID_OBJET-contact-#ID_CONTACT#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien#EVAL{chr(91)}#OBJET-#ID_OBJET-contact-#ID_CONTACT#EVAL{chr(93)}" value="X"><:contacts:contact_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
