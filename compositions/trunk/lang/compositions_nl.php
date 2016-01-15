@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_compositions' => 'Composities toevoegen',
+
 	// C
 	'composition' => 'Compositie',
 	'composition_defaut' => 'standaard compositie',
@@ -24,7 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heritages' => 'Deze compositie legt de standaardcompositie vast van de volgende objecten:',
 
 	// I
+	'info_1_composition' => '1 compositie',
 	'info_aucune_composition' => 'Geen enkele compositie',
+	'info_nb_compositions' => '@nb@ composities',
 
 	// L
 	'label_activer_composition_objets' => 'Pas de composities toe op de objecten',
@@ -46,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tout_verrouiller' => 'Alles vergrendelen',
 	'label_toutes_verrouilles' => 'Alle composities zijn vergrendeld.',
 	'label_verrouiller_toutes_compositions' => 'Alle composities vergrendelen (alleen webmasters kunnen ze aanpassen).',
+
+	// M
+	'message_info_ajouter_compositions' => 'Om je eigen composities te maken, raadpleeg je de documentatie: @url_doc@.',
 
 	// U
 	'une_utilisation' => '1 toepassing',
