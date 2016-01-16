@@ -32,8 +32,10 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 		'lien'  => 'http://www.wunderground.com/',
 	),
 	'previsions'	    => array(
-		'max_jours'	    => 10,
-		'periodicites'	=> array(24, 1),
+		'periodicites' => array(
+			24 => array('max_jours' => 10),
+			1  => array('max_jours' => 10)
+		),
 		'defaut'	    => 24
 	),
 	'max_previsions' => 10,

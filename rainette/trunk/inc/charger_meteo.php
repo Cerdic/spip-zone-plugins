@@ -194,9 +194,6 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 						}
 
 						// 3- Compléments standard communs à tous les services mais fonction du mode
-						if ($mode != 'conditions') {
-							$donnees['max_previsions'] = $configuration['max_previsions'];
-						}
 						if ($mode == 'conditions') {
 							// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
 							include_spip('inc/convertir');
@@ -216,25 +213,34 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 			}
 		}
 
-
 		// 4- Compléments standard à tous les services et tous les modes
-		$extra = array();
-		$extra['credits'] = $configuration['credits'];
-		$extra['config'] = $configuration_utilisateur;
-		$extra['erreur'] = '';
-		$extra['lieu'] = $lieu;
-		$extra['mode'] = $mode;
-		$extra['periodicite'] = $periodicite;
-		$extra['service'] = $service;
+		$extras = array();
+		$extras['credits'] = $configuration['credits'];
+		$extras['config'] = $configuration_utilisateur;
+		$extras['erreur'] = '';
+		$extras['lieu'] = $lieu;
+		$extras['mode'] = $mode;
+		$extras['periodicite_cache'] = $periodicite;
+		$extras['service'] = $service;
 
+		// On range les données et les extras dans un tableau associatif à deux entrées ('donnees', 'extras')
 		if ($tableau) {
-			$tableau = array_merge(array($extra), $tableau);
+			// Pour les modes "conditions" et "infos" l'ensemble des données météo est accessible sous
+			// l'index 'donnees'. Il faut donc supprimer l'index 0 provenant du traitement commun avec
+			// les prévisions.
+			// Pour les prévisions l'index 0 à n désigne le jour, il faut donc le conserver
+			$tableau = array(
+				'donnees' => ($mode != 'previsions' ? array_shift($tableau) : $tableau),
+				'extras' => $extras
+			);
 		} else {
 			// Traitement des erreurs de flux. On positionne toujours les bloc extra contenant l'erreur à l'index 0,
 			// le bloc des données qui est mis à tableau vide dans ce cas à l'index 1.
-			$extra['erreur'] = 'chargement';
-			$tableau[0] = $extra;
-			$tableau[1] = array();
+			$extras['erreur'] = 'chargement';
+			$tableau = array(
+				'donnees' => array(),
+				'extras'  => $extras
+			);
 		}
 
 		// Pipeline de fin de chargement des données météo. Peut-être utilisé :

@@ -29,9 +29,10 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'lien'  => 'http://www.weather.com/',
 	),
 	'previsions'	 => array(
-		'max_jours'		=> 10,
-		'periodicites'	=> array(12),
-		'defaut'		=> 12
+		'periodicites' => array(
+			12 => array('max_jours' => 10)
+		),
+		'defaut'       => 12
 	),
 	'max_previsions' => 10,
 	'langue_service' => ''

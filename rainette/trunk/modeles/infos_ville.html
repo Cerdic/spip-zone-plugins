@@ -1,14 +1,15 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
-	Il est appelee par le filtre rainette_coasser
+	Il est appelee par le filtre rainette_coasser.
+	Il n'est pas besoin d'utiliser des valeurs par défaut pour la balise #ENV car cela est géré en amont par le filtre.
  -->
 ]
 <div class="rainette_infos">
-	<h2 class="ville">[(#ENV{ville})[, (#ENV{pays})]]</h2>
+	<h2 class="ville">[(#ENV{donnees/ville})[, (#ENV{donnees/pays})]]</h2>
 	<ul class="coordonnees">
-		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{longitude}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})</li>]
-		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{latitude}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})</li>]
-		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{region})</li>]
+		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/longitude}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
+		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/latitude}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
+		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/region})</li>]
 	</ul>
 
 	#INCLURE{fond=modeles/inc-credits,

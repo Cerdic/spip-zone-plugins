@@ -32,8 +32,13 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		'lien'  => 'http://www.worldweatheronline.com/',
 	),
 	'previsions'       => array(
-		'max_jours'    => 15,
-		'periodicites' => array(24, 12, 6, 3, 1),
+		'periodicites' => array(
+			24 => array('max_jours' => 15),
+			12 => array('max_jours' => 15),
+			6  => array('max_jours' => 15),
+			3  => array('max_jours' => 15),
+			1  => array('max_jours' => 15)
+		),
 		'defaut'       => 24
 	),
 	'max_previsions' => 15,

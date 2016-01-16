@@ -6,19 +6,19 @@
 <div class="rainette_conditions">
 	<div class="statut">
 		<div class="cadre">
-			<div class="icone">[(#ENV{icone}|rainette_afficher_icone{grand})]</div>
-			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]</div>
-			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]<br/></div>
+			<div class="icone">[(#ENV{donnees/icone}|rainette_afficher_icone{grand})]</div>
+			<div class="t_reelle">[(#ENV{donnees/temperature_reelle}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]</div>
+			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{donnees/temperature_ressentie}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})]<br/></div>
 			<br style="clear:both" />
-			<div class="resume">[(#ENV{resume}|rainette_afficher_resume)]</div>
+			<div class="resume">[(#ENV{donnees/resume}|rainette_afficher_resume)]</div>
 		</div>
 		<div class="maj">
-			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj, #VAL{Y-m-d H:i:s}|date}|affdate_heure)]<br/>
-			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{station})]
-			[(#ENV{station}|non)
+			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/derniere_maj, #VAL{Y-m-d H:i:s}|date}|affdate_heure)]<br/>
+			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/station})]
+			[(#ENV{donnees/station}|non)
 				[<:rainette:lieu|ucfirst:>&nbsp;:&nbsp;
-					(#RAINETTE_INFOS{#ENV{lieu}, ville, #ENV{service, weather}})
-					[, (#RAINETTE_INFOS{#ENV{lieu}, pays, #ENV{service, weather}})]
+					(#RAINETTE_INFOS{#ENV{extras/lieu}, ville, #ENV{extras/service}})
+					[, (#RAINETTE_INFOS{#ENV{extras/lieu}, pays, #ENV{extras/service}})]
 				]
 			]
 		</div>
@@ -26,17 +26,17 @@
 
 	<ul class="details">
 		<li><span><:rainette:vent|ucfirst:></span>
-		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})]
-		[ - (#ENV{direction_vent}|rainette_afficher_direction)]</li>
+		[(#ENV{donnees/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})]
+		[ - (#ENV{donnees/direction_vent}|rainette_afficher_direction)]</li>
 		<li><span><:rainette:humidite|ucfirst:></span>
-		[(#ENV{humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]</li>
+		[(#ENV{donnees/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})]</li>
 		<li><span><:rainette:pression|ucfirst:></span>
-		[(#ENV{pression}|rainette_afficher_unite{pression, -1, #ENV{service, weather}})]
-		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]</li>
+		[(#ENV{donnees/pression}|rainette_afficher_unite{pression, -1, #ENV{extras/service}})]
+		[ (#ENV{donnees/tendance_pression}|rainette_afficher_tendance{icone})]</li>
 		[<li><span><:rainette:point_rosee|ucfirst:></span>
-		(#ENV{point_rosee}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})</li>]
+		(#ENV{donnees/point_rosee}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})</li>]
 		[<li><span><:rainette:visibilite|ucfirst:></span>
-		(#ENV{visibilite}|rainette_afficher_unite{distance, -1, #ENV{service, weather}})</li>]
+		(#ENV{donnees/visibilite}|rainette_afficher_unite{distance, -1, #ENV{extras/service}})</li>]
 	</ul>
 
 	#INCLURE{fond=modeles/inc-credits,

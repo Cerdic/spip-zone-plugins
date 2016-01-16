@@ -44,25 +44,28 @@ function balise_RAINETTE_INFOS($p) {
  */
 function calculer_infos($lieu, $type, $service) {
 
+	// Initialisation du retour
+	$info = '';
+
 	// Traitement des cas ou les arguments sont vides
-	if (!$lieu) {
-		return '';
-	}
-	if (!$service) {
-		$service = 'weather';
+	if ($lieu) {
+		if (!$service) {
+			$service = 'weather';
+		}
+
+		// Récupération des informations sur le lieu
+		$charger = charger_fonction('charger_meteo', 'inc');
+		$nom_cache = $charger($lieu, 'infos', 0, $service);
+		lire_fichier($nom_cache, $contenu_cache);
+		if (!isset($type) or !$type) {
+			$info = $contenu_cache;
+		} else {
+			$tableau = unserialize($contenu_cache);
+			$info = $tableau['donnees'][strtolower($type)];
+		}
 	}
 
-	$charger = charger_fonction('charger_meteo', 'inc');
-	$nom_fichier = $charger($lieu, 'infos', 0, $service);
-	lire_fichier($nom_fichier, $tableau);
-	if (!isset($type) or !$type) {
-		return $tableau;
-	} else {
-		list(, $donnees) = unserialize($tableau);
-		$info = $donnees[strtolower($type)];
-
-		return $info;
-	}
+	return $info;
 }
 
 // Filtres du plugin utilisables dans les squelettes et modeles
@@ -293,8 +296,8 @@ function rainette_coasser_previsions($lieu, $type = '1_jour', $jour = 0, $modele
 
 	// Recuperation du tableau des prévisions pour tous les jours disponibles
 	$charger = charger_fonction('charger_meteo', 'inc');
-	$nom_fichier = $charger($lieu, 'previsions', $periodicite, $service);
-	lire_fichier($nom_fichier, $tableau);
+	$nom_cache = $charger($lieu, 'previsions', $periodicite, $service);
+	lire_fichier($nom_cache, $tableau);
 	$tableau = unserialize($tableau);
 
 	// Détermination de l'index final contenant les extra (erreur, date...)
@@ -366,38 +369,146 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	// Initialisation du retour
 	$texte = '';
+	$tableau = array();
 
 	// Détermination de la périodicité en fonction du mode et du modèle demandés
+	$type_modele = 0;
 	$periodicite = 0;
+	$erreur = '';
 	if ($mode == 'previsions') {
-		$periodicite = 24;
+		// Identification de la périodicité à partir du nom du modèle. Cela évite une configuration compliquée.
+		if (preg_match(',_(1|12|24)h,is', $modele, $match)) {
+			$type_modele = intval($match[1]);
+
+			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
+			if (isset($options['periodicite'])) {
+				$periodicite_explicite = intval($options['periodicite']);
+				if (periodicite_compatible($type_modele, $periodicite_explicite)) {
+					$periodicite = $periodicite_explicite;
+				} else {
+					$erreur = 'modele_periodicite';
+				}
+			} else {
+				// Dans ce cas, il faut choisir une périodicité en fonction du type du modèle et du service.
+				$periodicite = trouver_periodicite($type_modele, $service);
+				if (!$periodicite) {
+					$erreur = 'modele_service';
+				}
+			}
+		} else {
+			// On ne connait pas le type du modèle, donc sa compatibilité.
+			// Si la périodicité est passée en argument on l'utilise sans se poser de question.
+			// Sinon c'est une erreur car on ne sait pas quelle périodicité est requise
+			if (isset($options['periodicite'])) {
+				$periodicite = intval($options['periodicite']);
+			} else {
+				$erreur = 'modele_inutilisable';
+			}
+		}
 	}
 
-	// Récupération du tableau des données météo
-	$charger = charger_fonction('charger_meteo', 'inc');
-	$nom_cache = $charger($lieu, $mode, $periodicite, $service);
-	lire_fichier($nom_cache, $contenu_cache);
-	$tableau = unserialize($contenu_cache);
+	if ($erreur) {
+		// On prépare un contexte extras minimal pour traiter les erreurs du modèle de façon standard
+		$extras['erreur'] = $erreur;
+		$extras['lieu'] = $lieu;
+		$extras['mode'] = $mode;
+		$extras['periodicite'] = $periodicite;
+		$extras['service'] = $service;
+	} else {
+		// Récupération du tableau des données météo
+		$charger = charger_fonction('charger_meteo', 'inc');
+		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
+		lire_fichier($nom_cache, $contenu_cache);
+		$tableau = unserialize($contenu_cache);
 
-	// Séparation des données communes liées au service et au mode et des données météorologiques
-	$extras = array_shift($tableau);
+		// Séparation des données communes liées au service et au mode et des données météorologiques
+		$extras = $tableau['extras'];
+		$erreur = $extras['erreur'];
+
+		if (!$erreur and ($mode == 'previsions')) {
+			// Adaptation des données en fonction de la demande et de la périodicité modèle-cache
+			$nb_index = count($tableau['donnees']);
+
+			$jour1 = 0;
+			if (isset($options['premier_jour'])) {
+				$jour1 = intval($options['premier_jour']) < $nb_index
+					? intval($options['premier_jour'])
+					: $nb_index -1;
+			}
+
+			$nb_jours = $nb_index - $jour1;
+			if (isset($options['nombre_jours'])) {
+				$nb_jours = ($jour1 + intval($options['nombre_jours']) <= $nb_index)
+					? intval($options['nombre_jours'])
+					: $nb_index - $jour1;
+			}
+
+			$tableau['premier_jour'] = $jour1;
+			$tableau['nombre_jours'] = $nb_jours;
+		}
+	}
 
 	// Affichage du message d'erreur ou des données
-	if ($extras['erreur']) {
+	if ($erreur) {
 		$texte = recuperer_fond('modeles/erreur', $extras);
 	} else {
-		// Pour les modes "conditions" et "infos" l'ensemble des données météo et extra sont des index
-		// associatifs du tableau. On supprime les index [0] et [1].
-		if ($mode != 'previsions') {
-			$donnees = array_shift($tableau);
-			$contexte = array_merge($donnees, $extras);
-		} else {
-			$index_debut = $options['premier_jour'];
-		}
-		$texte = recuperer_fond("modeles/$modele", $contexte);
+		// Appel du modèle avec le contexte complet
+		$texte = recuperer_fond("modeles/$modele", $tableau);
 	}
 
 	return $texte;
 }
+
+function trouver_periodicite($type_modele, $service) {
+
+	static $compatibilite_type_periodicite =array(
+		24 => array(24, 12),
+		12 => array(12),
+		1  => array(1,3,6)
+	);
+
+	// Périodicité initialisée à "non trouvée"
+	$periodicite = 0;
+
+	if (isset($compatibilite_type_periodicite[$type_modele])) {
+		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
+		// pour le mode prévisions
+		include_spip("services/${service}");
+		$configurer = "${service}_service2configuration";
+		$configuration = $configurer('previsions');
+		$periodicites_service = array_keys($configuration['previsions']['periodicites']);
+
+		$periodicites_modele = $compatibilite_type_periodicite[$type_modele];
+		foreach ($periodicites_modele as $_periodicite_modele) {
+			if (in_array($_periodicite_modele, $periodicites_service)) {
+				$periodicite = $_periodicite_modele;
+				break;
+			}
+		}
+	}
+
+	return $periodicite;
+}
+
+
+function periodicite_compatible($type_modele, $periodicite) {
+
+	static $compatibilite_type_periodicite =array(
+		24 => array(24, 12),
+		12 => array(12),
+		1  => array(1,3,6)
+	);
+
+	// Périodicité initialisée à "non trouvée"
+	$compatible = false;
+
+	if (isset($compatibilite_type_periodicite[$type_modele])
+	and in_array($periodicite, $compatibilite_type_periodicite[$type_modele])) {
+		$compatible = true;
+	}
+
+	return $compatible;
+}
+
 
 include_spip('inc/debusquer');

@@ -33,11 +33,12 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		'lien'  => 'http://openweathermap.org/',
 	),
 	'previsions'	 => array(
-		'max_jours'	    => 16,
-		'periodicites'	=> array(24, 3),
-		'defaut'	    => 24
+		'periodicites' => array(
+			24 => array('max_jours' => 16),
+			3  => array('max_jours' => 5)
+		),
+		'defaut'       => 24
 	),
-	'max_previsions' => 16,
 	'langue_service' => 'EN'
 );
 
