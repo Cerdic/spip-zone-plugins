@@ -7,11 +7,12 @@
  * @author	   Phenix
  * @licence	   GNU/GPL
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Inclure les fonctions de foundation
 include_spip('inc/foundation');
-
 
 /**
  * Rendre les iframes responsive via un filtre et
@@ -63,18 +64,20 @@ function balise_COLONNES_dist($p) {
 function balise_BOUTON_ACTION($p){
 
 	$args = array();
-	for ($k=1;$k<=6;$k++){
-		$_a = interprete_argument_balise($k,$p);
-		if (!$_a) $_a="''";
+	for ($k=1; $k<=6; $k++) {
+		$_a = interprete_argument_balise($k, $p);
+		if (!$_a) {
+			$_a="''";
+		}
 		$args[] = $_a;
 	}
 	// supprimer les args vides
-	while(end($args)=="''" AND count($args)>2) {
+	while (end($args)=="''" and count($args)>2) {
 		array_pop($args);
 	}
-	$args = implode(",",$args);
+	$args = implode(',', $args);
 
-	$bouton_action = chercher_filtre("bouton_action");
+	$bouton_action = chercher_filtre('bouton_action');
 	$p->code = "$bouton_action($args)";
 	$p->interdire_scripts = false;
 	return $p;
@@ -85,23 +88,23 @@ function balise_BOUTON_ACTION($p){
  * sur la balise <button> au lieu de pour assurer la
  * compatibilité avec les class button de foundation
  */
-function filtre_bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', $callback = '') {
 	if ($confirm) {
-		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
-		if ($callback)
+		$confirm = 'confirm(\"' . attribut_html($confirm) . '\")';
+		if ($callback) {
 			$callback = "$confirm?($callback):false";
-		else
+		} else {
 			$callback = $confirm;
+		}
 	}
-	$onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
-	$title = $title ? " title='$title'" : "";
+	$onclick = $callback?" onclick='return ".addcslashes($callback, "'")."'":'';
+	$title = $title ? " title='$title'" : '';
 
 	if (test_espace_prive()) {
 			return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 			 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
-	}
-	else {
-		return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
+	} else {
+		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 			     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 	}
 }
@@ -114,7 +117,7 @@ function filtre_bouton_action($libelle, $url, $class="", $confirm="", $title="",
  * @access public
  * @return string
  */
-function filtre_etoile_foundation_dist ($nombre) {
+function filtre_etoile_foundation_dist($nombre) {
 
 	$config = lire_config('foundation');
 
@@ -123,7 +126,7 @@ function filtre_etoile_foundation_dist ($nombre) {
 	}
 
 	$etoile = '<span class="foundation_etoile">';
-	for ($i=0;$i<$nombre; $i++) {
+	for ($i=0; $i<$nombre; $i++) {
 		$etoile .= '<span class="fi-star"></span>';
 	}
 	$etoile .= '</span>';
@@ -141,7 +144,7 @@ if (!function_exists('balise_LIRE_CONSTANTE_dist')) {
 	 * @return mixed
 	 */
 	function balise_LIRE_CONSTANTE_dist($p) {
-		$constante = interprete_argument_balise(1,$p);
+		$constante = interprete_argument_balise(1, $p);
 
 		$p->code = "constant($constante)";
 
