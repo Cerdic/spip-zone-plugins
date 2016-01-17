@@ -67,7 +67,7 @@ function identifiants_declarer_tables_auxiliaires($tables) {
  * @return array
  *     Description complétée des tables
  */
-function gis_declarer_tables_objets_sql($tables){
+function identifiants_declarer_tables_objets_sql($tables){
 
 	// jointure sur spip_identifiants pour tous les objets
 	$tables[]['tables_jointures'][]= 'identifiants';
