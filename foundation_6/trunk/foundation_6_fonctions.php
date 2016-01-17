@@ -104,7 +104,23 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 			return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 			 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 	} else {
-		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+
+		// Détection de la class ajax
+		// Code reprit (et modifié) du plugin bootstrap:
+		// http://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap/trunk/bootstrap3_fonctions.php#L109
+		$array_class = explode(' ', $class);
+		$ajax_index = array_search('ajax', $array_class);
+		if ($ajax_index !== false) {
+			$ajax = ' ajax';
+			// On a plus besoin de la class ajax dans la liste des class,
+			// ça pourrait créer des problèmes
+			unset($array_class[$ajax_index]);
+			$class = implode(' ', $array_class);
+		} else {
+			$ajax = '';
+		}
+
+		return "<form class='bouton_action_post $ajax' method='post' action='$url'><div>".form_hidden($url)
 			     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 	}
 }
