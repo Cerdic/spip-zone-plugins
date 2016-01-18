@@ -6,16 +6,14 @@
 	compatibilite="[2.0.6;3.1.*]"
 	logo="prive/themes/spip/images/contact_libre-48.png"
 	documentation="http://contrib.spip.net/Formulaire-de-contact-libre"
-	schema="1.0.0" 
 >
 	<nom>Contact libre</nom>
 	
 	<auteur>b_b</auteur>
 
 	<licence>GNU/GPL</licence>
-	
-	<utilise nom="nospam" compatibilite="[0.6;[" />
 
 	<traduire module="contact_libre" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-contact_libre" reference="fr" gestionnaire="salvatore" />
+	<utilise nom="nospam" compatibilite="[0.6;[" />
 </paquet>
