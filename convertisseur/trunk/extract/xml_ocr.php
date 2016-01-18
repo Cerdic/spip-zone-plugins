@@ -58,6 +58,10 @@ function convertir_xml_ocr($u) {
 	
 	# nettoyage
 	$article = str_replace("-<SHY/>","", $article);
+	$article = str_replace("<HHY/>","", $article);
+	$article = str_replace("<UHY/>","", $article);
+	
+	
 	
 	# balises uniques
 	$titraille = array("SURTITRE", "TITRE", "CHAPO");
@@ -66,16 +70,23 @@ function convertir_xml_ocr($u) {
 		$b = extraire_balise($article, $t) ;
 		$l = strtolower($t) ;
 		$item[$l] = trim(textebrut($b)) ;
-		$article = preg_replace("/<" . $t . "[^>]*>.*<\/" . $t . ">/U", "", $article);
-	}	
+		$article = str_replace($b, "", $article);
+	}
 	
-	# auteurs
-	$auteurs = extraire_balises($article, 'AUTEUR') ;
-	foreach($auteurs as $a){
-		$aa[] = textebrut($a) ;
-		$article = preg_replace("/<AUTEUR[^>]*>.*<\/AUTEUR>/U", "", $article);
+	# balises multiples
+	$balises_multiples = array('AUTEUR','AFFILIATION');
+	
+	foreach($balises_multiples as $t){
+		$aa = array();
+		$elms = extraire_balises($article, $t) ;
+		foreach($elms as $a){
+			$aa[] = preg_replace("/^\s*\*\s*/","", textebrut($a)) ;
+			$article = str_replace($a, "", $article);
+		}
+		$l = strtolower($t) . "s" ;
+		$aa = array_unique($aa);
+		$item[$l] = join(", " , $aa) ;
 	}	
-	$item['auteurs'] = join(", " , $aa) ;
 
 	# notes
 	$balises_notes = extraire_balises($article, 'NOTE') ;
@@ -85,11 +96,15 @@ function convertir_xml_ocr($u) {
 	}	
 
 	# paragraphes
-	$article = preg_replace(",</*P>,","\n\n", $article);
+	$article = preg_replace("#</*P>#","\n\n", $article);
 	
 	# inters
-	$article = preg_replace(",<INTERTITRE>,","{{{", $article);
-	$article = preg_replace(",</INTERTITRE>,","}}}", $article);
+	$article = preg_replace("#<INTERTITRE>,*\s*#","{{{", $article);
+	$article = preg_replace("#,*\s*</INTERTITRE>#","}}}", $article);
+	
+	# Citations
+	$article = preg_replace("#<EXERGUE>#","<blockquote>", $article);
+	$article = preg_replace("#</EXERGUE>#","</blockquote>", $article);
 	
 	# Italiques
 	
