@@ -12,11 +12,12 @@ function extracteur_xml_ocr($fichier) {
 function convertir_extraction_xml_ocr($c) {
 	$item = convertir_xml_ocr($c);
 	$texte = extracteur_preparer_insertion($item);
+		
 	return $texte ;
 }
  
 function extracteur_preparer_insertion($item){
-	
+		
 	$texte = "" ;
 	
 	if($item['surtitre'])
@@ -42,7 +43,6 @@ function extracteur_preparer_insertion($item){
  
  
 function convertir_xml_ocr($u) {
-
 
 	$article = extraire_balise($u, 'ARTICLE') ;
 	$attrs = explode(";" , extraire_attribut($article, "img")) ;
@@ -93,7 +93,10 @@ function convertir_xml_ocr($u) {
 	
 	# Italiques
 	
-	# Illustrations
+	# Illustrations en mode ressource du plugin ressource depuis une collection du plugin serveur de fichiers
+	// <ILLUSTRATION id="A-MV-1988-2-FR-0001-0001" xhg="41" yhg="1200" xbd="1347" ybd="3291" nump="5"/>
+	$path = url_absolue(dirname(urldecode(_request("fichier"))));
+	$article = preg_replace("/<ILLUSTRATION id=\"(.*)\".*>/U","<$path/\\1.jpg>", $article);
 	
 	# texte + notes
 	$item['texte'] = $article ;
@@ -101,7 +104,7 @@ function convertir_xml_ocr($u) {
 	if($notes){
 		$item['texte'] .= "[[<>\n" . join("\n", $notes) ."\n]]" . "\n" ;
 		$item['notes'] = $notes ;
-	}	
+	}
 	
 	return $item ;
 }
