@@ -18,7 +18,4 @@
 
 	<traduire module="contact_libre" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-contact_libre" reference="fr" gestionnaire="salvatore" />
-  
-	<menu nom="contact_libre" titre="contact_libre:icone_voir_contact_libre" parent="bando_activite" icone="images/contact_libre-16.png" />
-
 </paquet>
