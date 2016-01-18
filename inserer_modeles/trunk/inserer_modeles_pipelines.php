@@ -10,7 +10,7 @@ function inserer_modeles_affiche_droite($flux)
     if (in_array($flux['args']['exec'], $config_meta['objets'])) {
         include_spip('inc/inserer_modeles');
         if (count(inserer_modeles_lister_formulaires_modeles()) > 0) {
-            $flux['data'] .= recuperer_fond('inserer_modeles', $flux['args']);
+            $flux['data'] .= recuperer_fond('prive/squelettes/contenu/inserer_modeles', $flux['args']);
         }
     }
 
@@ -41,10 +41,10 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres)
                 'id' => 'inserer_modele_'.$nom,
                 'name' => _T_ou_typo($formulaire['nom']),
                 'className' => 'outil_inserer_modele_'.$nom,
-                'beforeInsert' => "function() {jQuery.modalboxload('".url_absolue(generer_url_public(
+                'beforeInsert' => "function() {jQuery.modalboxload('".generer_url_ecrire(
                     'inserer_modeles',
-                    "modalbox=oui&formulaire_modele=$nom&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
-                )).",{minHeight: '90%'});}",
+                    "var_zajax=contenu&modalbox=oui&formulaire_modele=$nom&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
+                ).",{minHeight: '90%'});}",
                 'display' => true,
             );
         }
@@ -55,10 +55,10 @@ function inserer_modeles_porte_plume_barre_pre_charger($barres)
             'name' => _T('inserer_modeles:outil_inserer_modeles'),
             'key' => 'M',
             'className' => 'outil_inserer_modeles',
-            'beforeInsert' => "function() {jQuery.modalboxload('".url_absolue(generer_url_public(
+            'beforeInsert' => "function() {jQuery.modalboxload('".generer_url_ecrire(
                 'inserer_modeles',
-                "modalbox=oui&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
-            )).",{minHeight: '90%'});}",
+                "var_zajax=contenu&modalbox=oui&id_article='+$(\"[name='id_article']\").val()+'&id_rubrique='+$(\"[name='id_rubrique']\").val()+'&id_breve='+$(\"[name='id_breve']\").val()"
+            ).",{minHeight: '90%'});}",
             'display' => true,
             'dropMenu' => $sous_menu,
          ));
