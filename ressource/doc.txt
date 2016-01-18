@@ -1,0 +1,9 @@
+/* Embryon de doc */
+
+Ce plugin permet d'intégrer un document distant ou local dans un texte en indiquant son url avec la syntaxe suivante :
+
+<http://url_du_document>
+
+Exemple : 
+
+<http://mon_site.net/IMG/mon_image.jpg>
