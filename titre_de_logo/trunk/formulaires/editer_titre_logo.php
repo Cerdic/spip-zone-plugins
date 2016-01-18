@@ -97,7 +97,7 @@ function formulaires_editer_titre_logo_traiter_dist($objet, $id_objet, $retour =
 
     if ($update_sql) {
         $res['message_ok'] = _T('info_modification_enregistree');
-        $res['redirect'] = $retour;
+        $res['redirect'] = "index.php?exec=$objet&$_id_objet=$id_objet";
     } else {
         $res['message_erreur'] = _T('avis_erreur');
     }
