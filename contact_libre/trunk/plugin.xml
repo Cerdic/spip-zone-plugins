@@ -2,7 +2,7 @@
 	<nom>Contact libre</nom>
 	<slogan>Formulaire de contact libre</slogan>
 	<auteur>b_b</auteur>
-	<version>0.2.0</version>
+	<version>0.2.2</version>
 	<etat>dev</etat>
 	<prefix>contact_libre</prefix>
 	<icon>images/contact_libre-48.png</icon>
@@ -14,5 +14,5 @@
 	<categorie>communication</categorie>
 	<options>contact_libre_options.php</options>
  	<necessite id='SPIP' version='[2.0.6;3.1.99]' />
- 	<utilise id="nospam" version="[0.6;]" />
+ 	<utilise id="nospam" version="[1.5.13;]" />
 </plugin>
