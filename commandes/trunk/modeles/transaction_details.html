@@ -36,15 +36,15 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td class="def"><:prix:label_total_ht:></td>
+			<td class="def" colspan="3"><:prix:label_total_ht:></td>
 			<td class="montant">[(#GET{ht}|sinon{#PRIX_HT*}|prix_formater)]</td>
 		</tr>		
 		<tr>
-			<td class="def"><:prix:label_taxes:></td>
+			<td class="def" colspan="3"><:prix:label_taxes:></td>
 			<td class="montant">[(#GET{ttc}|sinon{#PRIX*}|moins{#GET{ht}|sinon{#PRIX_HT*}}|prix_formater)]</td>
 		</tr>		
 		<tr class="total_ttc">
-			<td class="def"><:prix:label_total_ttc:></td>
+			<td class="def" colspan="3"><:prix:label_total_ttc:></td>
 			<td class="montant">[(#GET{ttc}|sinon{#PRIX*}|prix_formater)]</td>
 		</tr>		
 	</tfoot>
