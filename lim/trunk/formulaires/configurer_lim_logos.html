@@ -13,7 +13,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<p class='lim_info'>Note : les contenus marqués d'un <img src='#CHEMIN_IMAGE{del-24.png}' /> contiennent déjà des logos.</p>
+		<p class='lim_info'>Note : les contenus marqués d'un <img src='#CHEMIN_IMAGE{warning-16.png}' /> contiennent déjà des logos.</p>
 		<ul>
 			#SET{name,lim_logos}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
