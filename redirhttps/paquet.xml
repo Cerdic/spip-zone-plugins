@@ -3,7 +3,7 @@
 	categorie="performance"
 	version="0.1.0"
 	etat="test"
-	compatibilite="[2.1.11;3.0.*]"
+	compatibilite="[2.1.11;3.1.*]"
 	logo="images/redirhttps-128.png"
 	documentation="http://contrib.spip.net/Rediriger-en-HTTPS-quand-l-utilisateur-est-connecte"
 >	
