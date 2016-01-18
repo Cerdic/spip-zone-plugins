@@ -1,0 +1,20 @@
+nom: '<:contact_libre:modele_nom_formulaire:>'
+logo: 'images/contact_libre-24.png'
+icone_barre: 'contact_libre-16.png'
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'formulaire'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'contact_libre'
+  -
+    saisie: 'input'
+    options:
+      nom: 'adresse'
+      label: '<:entree_adresse_email:>'
+      obligatoire: 'oui'
