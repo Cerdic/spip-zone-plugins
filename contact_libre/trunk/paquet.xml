@@ -1,0 +1,22 @@
+<paquet
+	prefix="contact_libre"
+	categorie="communication"
+	version="0.2.0"
+	etat="dev"
+	compatibilite="[2.0.6;3.1.*]"
+	logo="prive/themes/spip/images/contact_libre-48.png"
+	documentation="http://contrib.spip.net/Formulaire-de-contact-libre"
+	schema="1.0.0" 
+>
+	<nom>Contact libre</nom>
+	
+	<auteur>b_b</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire module="contact_libre" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-contact_libre" reference="fr" gestionnaire="salvatore" />
+  
+	<menu nom="contact_libre" titre="contact_libre:icone_voir_contact_libre" parent="bando_activite" icone="images/contact_libre-16.png" />
+
+</paquet>
