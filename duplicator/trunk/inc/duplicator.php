@@ -254,6 +254,12 @@ function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol =
 	$source['error'] = 0;
 	$source['size'] = @filesize($logo_source);
 
+	include_spip('action/editer_logo');
+	// Version SPIP 3.1
+	if (function_exists('logo_modifier')) {
+		return logo_modifier($type, $id_destination, 'on', $logo_source);
+	}
+
 	action_spip_image_ajouter_dist(substr($type,0,3). $logo_type .$id_destination, 'local', $source );
 	return true;
 }
