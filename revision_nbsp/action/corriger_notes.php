@@ -8,6 +8,8 @@
  */
 
 function action_corriger_notes() {
+	global $spip_version_branche ;
+	
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
 		include_spip('revision_nbsp');
 		$id_article = intval(_request('id_article'));
@@ -26,10 +28,10 @@ function action_corriger_notes() {
 	
 	if($spip_version_branche > 3)
 		redirige_par_entete(
-			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
+			generer_url_ecrire('article', 'id_article='.$id_article, '&'));
 	else
 		redirige_par_entete(
-			generer_url_ecrire('article', 'id_article='.$id_article, '&'));
+			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
 }
 
 ?>
