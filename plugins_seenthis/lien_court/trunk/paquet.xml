@@ -1,13 +1,13 @@
 <paquet
 	prefix="lien_court"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 >
 
 	<nom>Lien court</nom>
- 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
 	<!-- Gestion des medias dans SPIP -->
 
