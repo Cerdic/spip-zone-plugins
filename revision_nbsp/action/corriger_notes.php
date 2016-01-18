@@ -3,7 +3,7 @@
 /*
  * corrige les notes
  * Auteur : fil@rezo.net
- * © 2005-2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005-2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -23,9 +23,13 @@ function action_corriger_notes() {
 			);
 		}
 	}
-
-	redirige_par_entete(
-		generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
+	
+	if($spip_version_branche > 3)
+		redirige_par_entete(
+			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
+	else
+		redirige_par_entete(
+			generer_url_ecrire('article', 'id_article='.$id_article, '&'));
 }
 
 ?>
