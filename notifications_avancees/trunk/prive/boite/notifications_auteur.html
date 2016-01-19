@@ -9,7 +9,7 @@
 ]
 </BOUCLE_notifications>
 
-[(#GET{abonnement}|>{0}
+[(#GET{abonnements}|>{0}
 	|ou{#GET{refus}|>{0}}
 	|ou{#ENV{id_auteur}|notifications_lister_creables|count|>{0}}|oui)
 

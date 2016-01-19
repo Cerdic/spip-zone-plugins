@@ -516,7 +516,7 @@ function notifications_trouver_objet ($quoi) {
 }
 
 function notifavancees_affiche_droite($flux){
-	if (in_array($flux['args']['exec'], array('auteur_infos', 'infos_perso'))){
+	if (in_array($flux['args']['exec'], array('auteur', 'infos_perso'))){
 		$boite = recuperer_fond(
 			'prive/boite/notifications_auteur',
 			array(
