@@ -57,14 +57,16 @@ function lim_afficher_config_objet($flux){
 **/
 function lim_formulaire_charger($flux){
 	$form				= $flux['args']['form'];
-	if (!strpos($form, 'editer'))
+	// si ce n'est pas un formulaire d'édition, on sort
+	$valid = strpos($form, 'editer');
+	if ($valid === false) 
 		return $flux;
+
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
-
+	
 	if (in_array($nom_table, $tableau_tables_lim)) {
-		//echo bel_env($flux);
 		
 		$tab_rubriques_choisies = lim_publierdansrubriques($type);
 		if (count($tab_rubriques_choisies) == 1) {
@@ -87,16 +89,19 @@ function lim_formulaire_charger($flux){
  *     le flux data complété ou non d'un message d'erreur
 **/
 function lim_formulaire_verifier($flux){
-	$form				= $flux['args']['form'];
-	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
-	// $nom_table			= table_objet_sql($type);
-	// $tableau_tables_lim	= explode(',', lire_config('lim_objets'));
-	$id = 
+	include_spip('inc/autoriser');
+	$form	= $flux['args']['form'];
+	$type	= substr($form, 7); // 'editer_objet' devient 'objet'
+	$nom_table			= table_objet_sql($type);
+	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
 
-	$faire = 'creer'.$type.'dans';
-	if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
-		$flux['data']['id_parent'] .= _T('info_creerdansrubrique_non_autorise');
+	if (strpos($form, 'editer') AND in_array($nom_table, $tableau_tables_lim)) {
+		$faire = 'creer'.$type.'dans';
+		if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
+			$flux['data']['id_parent'] .= _T('info_creerdansrubrique_non_autorise');
+		}
 	}
+	
 		
 
 	// if (in_array($nom_table, $tableau_tables_lim)) {
