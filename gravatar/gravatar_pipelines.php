@@ -40,9 +40,9 @@ function gravatar_affiche_gauche($flux) {
 				$cadre_gravatar = '<div id="iconifier-gravatar-' . $id_auteur . '" class="iconifier">';
 				$cadre_gravatar .= debut_cadre('r', find_in_path('images/gravatar-24.gif'), '', $bouton, '', '', false);
 				$cadre_gravatar .= '<div><a href="' . $gravatar_cache . '">'. $img . '</a></div>';
-				$cadre_gravatar .= debut_block_depliable(false,"gravatar-$id_auteur") 
+				$cadre_gravatar .= debut_block_depliable(false,"gravatar-$id_auteur")
 					. '<div class="cadre_padding">'
-					. '<div class="spip_xx-small">' . $taille . '</div>' 
+					. '<div class="spip_xx-small">' . $taille . '</div>'
 					. '</div>'
 					. fin_block();
 				$cadre_gravatar .= fin_cadre_relief(true);
@@ -69,7 +69,7 @@ function gravatar_recuperer_fond($flux){
 	  AND $flux['args']['fond'] == 'formulaires/editer_logo'
 	  AND $flux['args']['contexte']['objet']=='auteur'
 		AND $id_auteur = $flux['args']['contexte']['id_objet']
-		AND strpos($flux['data']['texte'],'spip_logos')==false
+		AND strpos($flux['data']['texte'],'spip_logo')==false
 	  AND $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur))){
 
 		include_spip('inc/gravatar');
