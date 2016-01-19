@@ -37,6 +37,9 @@ function nettoyer_format($t) {
 	$t = str_replace("~\xc2\xbb", " \xc2\xbb", $t);  # guillemet >>
 	$t = str_replace("\xc2\xab~", "\xc2\xab ", $t);  # <<
 	$t = str_replace ("\xe2\x80\x93", '--', $t); # tiret long
+	
+	# Mollo sur les sauts de lignes
+	$t = preg_replace("/\R{3,}/", "\n\n", $t);
 
 	return $t;
 }

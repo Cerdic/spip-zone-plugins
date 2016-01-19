@@ -80,7 +80,7 @@ function convertir_xml_ocr($u) {
 		$aa = array();
 		$elms = extraire_balises($article, $t) ;
 		foreach($elms as $a){
-			$aa[] = preg_replace("/^\s*\*\s*/","", textebrut($a)) ;
+			$aa[] = preg_replace("/^\s*\*\s*|\.*\s*$/","", textebrut($a)) ;
 			$article = str_replace($a, "", $article);
 		}
 		$l = strtolower($t) . "s" ;
