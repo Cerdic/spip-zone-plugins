@@ -26,6 +26,7 @@ parametres:
       nom: 'id_modele'
       label: <:album:label_modele_identifiant:>
       afficher_si: '@id_album@==""'
+      env: 'oui'
   -
     saisie: 'case'
     options:
