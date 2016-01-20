@@ -33,5 +33,6 @@
 ]
 $('#saisie-liste-#ENV{nom}').saisieListe({
     nom: '#ENV{nom}'
+[(#ENV{masquer_nouveaux}|oui),   hide_new: true]
 [(#ENV{ordre_fixe}|oui),   sortable: false]
 });

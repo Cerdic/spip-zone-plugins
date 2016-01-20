@@ -68,10 +68,10 @@
   [(#REM) s'il y a un fichier javascripts/saisie_NOM_DE_LA_SAISIE, on le
           prend. ]
   [(#CHEMIN{javascript/saisie_#ENV{nom}.js}|oui)
-    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}, ordre_fixe}
+    #INCLURE{fond=javascript/saisies_#ENV{nom}.js, nom=#ENV{nom}, env}
   ]
   [(#REM) sinon on prend le squelette par défaut.]
   [(#CHEMIN{javascript/saisie_#ENV{nom}}|non)
-    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}, ordre_fixe}
+    #INCLURE{fond=javascript/saisie_liste.js, nom=#ENV{nom}, env}
   ]
 </script>

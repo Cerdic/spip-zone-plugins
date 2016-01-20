@@ -2,10 +2,25 @@ $.fn.saisieListe = function( options ) {
 
     this.nom = options.nom;
 
+    var self = this;
+
+    if (options.hide_new === true) {
+        this.find('> li').last().hide().addClass('cache');
+
+        this.parent().find('input[name="' + options.nom + '\[action\]\[ajouter\]"]')
+            .on('click', function (e) {
+
+                // si plié on déplie et on ne submit pas
+                if (self.find('> li').last().hasClass('cache')) {
+                    self.find('> li').last().show().removeClass('cache')
+                    e.preventDefault();
+                }
+            });
+    }
+
     if (options.sortable !== false) {
 
-        var self = this,
-        defaut_sortable = {
+        var defaut_sortable = {
             // valeurs par défaut pour sortable
             containement: 'parent',
             cursor: 'move',

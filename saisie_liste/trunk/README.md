@@ -38,6 +38,8 @@ La saisie s'appelle dans les squelettes comme n'importe quelle saisie :
                               de la liste
         - texte_bouton_ajouter => Le texte du bouton ajouter. "Ajouter" sinon.
         - texte_bouton_supprimer => Le texte du bouton supprimer
+        - masquer_nouveaux => Ajoute un javascript qui masque le nouvel élément
+                              de la liste jusqu'à ce qu'on clique sur "Ajouter".
 ]
 
 [(#SAISIE{liste, ma-liste,
