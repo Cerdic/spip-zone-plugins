@@ -12,21 +12,21 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 			array(
 				"id"          => 'cadre_spip',
 				"name"        => _T('pp_codes:outil_inserer_cadre_spip'),
-				"className"   => 'outil_cadre_spip', 
+				"className"   => 'outil_cadre_spip',
 				"openWith" => "<cadre class='spip'>\n",
 				"closeWith" => "\n</cadre>",
 				"display"     => false,
-			), 
+			),
 			// bouton <cadre php>
 			array(
 				"id"          => 'cadre_php',
 				"name"        => _T('pp_codes:outil_inserer_cadre_php'),
-				"className"   => 'outil_cadre_php', 
+				"className"   => 'outil_cadre_php',
 				"openWith" => "<cadre class='php'>\n",
 				"closeWith" => "\n</cadre>",
 				"display"     => false,
 			),
-			// bouton <cadre html>				
+			// bouton <cadre html>
 			array(
 				"id"			=> 'cadre_html',
 				"name"			=> _T('pp_codes:outil_inserer_cadre_html'),
@@ -39,7 +39,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 			array(
 				"id"          => 'cadre_css',
 				"name"        => _T('pp_codes:outil_inserer_cadre_css'),
-				"className"   => 'outil_cadre_css', 
+				"className"   => 'outil_cadre_css',
 				"openWith" => "<cadre class='css'>\n",
 				"closeWith" => "\n</cadre>",
 				"display"     => false,
@@ -48,8 +48,35 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 			 array(
 				"id"          => 'cadre_xml',
 				"name"        => _T('pp_codes:outil_inserer_cadre_xml'),
-				"className"   => 'outil_cadre_xml', 
+				"className"   => 'outil_cadre_xml',
 				"openWith" => "<cadre class='xml'>\n",
+				"closeWith" => "\n</cadre>",
+				"display"     => false,
+			),
+			// bouton <cadre latex>
+			 array(
+				"id"          => 'cadre_latex',
+				"name"        => _T('pp_codes:outil_inserer_cadre_latex'),
+				"className"   => 'outil_cadre_latex',
+				"openWith" => "<cadre class='latex'>\n",
+				"closeWith" => "\n</cadre>",
+				"display"     => false,
+			),
+			// bouton <cadre bibtex>
+			 array(
+				"id"          => 'cadre_bibtex',
+				"name"        => _T('pp_codes:outil_inserer_cadre_bibtex'),
+				"className"   => 'outil_cadre_bibtex',
+				"openWith" => "<cadre class='bibtex'>\n",
+				"closeWith" => "\n</cadre>",
+				"display"     => false,
+			),
+			// bouton <cadre biblatex>
+			 array(
+				"id"          => 'cadre_biblatex',
+				"name"        => _T('pp_codes:outil_inserer_cadre_biblatex'),
+				"className"   => 'outil_cadre_biblatex',
+				"openWith" => "<cadre class='biblatex'>\n",
 				"closeWith" => "\n</cadre>",
 				"display"     => false,
 			),
@@ -57,7 +84,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 			array(
 				"id"          => 'pre',
 				"name"        => _T('pp_codes:outil_inserer_pre'),
-				"className"   => 'outil_pre', 
+				"className"   => 'outil_pre',
 				"openWith" => "<pre>",
 				"closeWith" => "</pre>",
 				"display"     => false,
@@ -66,7 +93,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 			array(
 				"id"          => 'var',
 				"name"        => _T('pp_codes:outil_inserer_var'),
-				"className"   => 'outil_var', 
+				"className"   => 'outil_var',
 				"openWith" => "<var>",
 				"closeWith" => "</var>",
 				"display"     => false,
@@ -89,7 +116,7 @@ function pp_codes_porte_plume_barre_pre_charger($barres){
 				"closeWith" => "</kbd>",
 				"display"     => false,
 			),
-			// Lien vers Trac 
+			// Lien vers Trac
 			// trop specifique a SPIP pour etre affiche par defaut...
 			array(
 				"id"          => 'lienTrac',
@@ -113,14 +140,13 @@ function pp_codes_porte_plume_barre_charger($barres){
 
 	if (isset($pp['codes']) and $codes = $pp['codes']) {
 		$activer = array();
-		
+
 		if ($codes['activer_barre_edition'] == 'on') {$activer[] = 'edition';}
 		if ($codes['activer_barre_forum'] == 'on') {$activer[] = 'forum';}
-
 		foreach ($activer as $nom) {
 			if (isset($barres[$nom])) {
 				$barre = &$barres[$nom];
-				
+
 				$outils_actifs = (isset($codes['outils_actifs']) and is_array($codes['outils_actifs'])) ? $codes['outils_actifs'] : array();
 				if ($outils_actifs) {
 					$barre->afficher($outils_actifs);
@@ -139,6 +165,9 @@ function pp_codes_porte_plume_lien_classe_vers_icone($flux){
 		'outil_cadre_php'=>'page_white_php.png',
 		'outil_cadre_html'=>'html.png',
 		'outil_cadre_xml'=>'page-xml.png',
+		'outil_cadre_latex'=>'latex.png',
+		'outil_cadre_biblatex'=>'biblatex.png',
+		'outil_cadre_bibtex'=>'bibtex.png',
 		'outil_cadre_css'=>'css.png',
 		'outil_pre'=>'page_white_code_red.png',
 		'outil_samp'=>'application_osx_terminal.png',

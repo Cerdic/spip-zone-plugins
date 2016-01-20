@@ -13,8 +13,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_outils_actifs' => 'Outils actifs',
 
 	// O
+	'outil_inserer_cadre_biblatex' => 'Insérer un code préformaté BibLaTeX (cadre)',
+	'outil_inserer_cadre_bibtex' => 'Insérer un code préformaté BibTeX (cadre)',
 	'outil_inserer_cadre_css' => 'Insérer un code préformaté CSS (cadre)',
 	'outil_inserer_cadre_html' => 'Insérer un code préformaté HTML (cadre)',
+	'outil_inserer_cadre_latex' => 'Insérer un code préformaté LaTeX (cadre)',
 	'outil_inserer_cadre_php' => 'Insérer un code préformaté PHP (cadre)',
 	'outil_inserer_cadre_spip' => 'Insérer un code préformaté SPIP (cadre)',
 	'outil_inserer_cadre_xml' => 'Insérer un code préformaté XML (cadre)',

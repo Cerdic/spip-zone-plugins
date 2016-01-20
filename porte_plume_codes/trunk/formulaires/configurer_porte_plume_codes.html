@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	
+
 <h3 class="titrem"><:pp_codes:titre_activer_extension_sur:></h3>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,7 +12,7 @@
 	[(#SAISIE{oui_non,activer_barre_edition,
 		label=<:pp_codes:label_activer_barre_edition:>,
 		defaut=on})]
-		
+
 	[(#SAISIE{oui_non,activer_barre_forum,
 		label=<:pp_codes:label_activer_barre_forum:>})]
 
@@ -21,6 +21,9 @@
 	[(#SET{cadre_xml,[(#CHEMIN{icones_barre/page-xml.png}|balise_img)] <:pp_codes:outil_inserer_cadre_xml:>})]
 	[(#SET{cadre_html,[(#CHEMIN{icones_barre/html.png}|balise_img)] <:pp_codes:outil_inserer_cadre_html:>})]
 	[(#SET{cadre_css,[(#CHEMIN{icones_barre/css.png}|balise_img)] <:pp_codes:outil_inserer_cadre_css:>})]
+	[(#SET{cadre_latex,[(#CHEMIN{icones_barre/latex.png}|balise_img)] <:pp_codes:outil_inserer_cadre_latex:>})]
+	[(#SET{cadre_bibtex,[(#CHEMIN{icones_barre/bibtex.png}|balise_img)] <:pp_codes:outil_inserer_cadre_bibtex:>})]
+	[(#SET{cadre_biblatex,[(#CHEMIN{icones_barre/biblatex.png}|balise_img)] <:pp_codes:outil_inserer_cadre_biblatex:>})]
 	[(#SET{pre,[(#CHEMIN{icones_barre/page_white_code_red.png}|balise_img)] <:pp_codes:outil_inserer_pre:>})]
 	[(#SET{samp,[(#CHEMIN{icones_barre/application_osx_terminal.png}|balise_img)] <:pp_codes:outil_inserer_samp:>})]
 	[(#SET{var,[(#CHEMIN{icones_barre/tag.png}|balise_img)] <:pp_codes:outil_inserer_var:>})]
@@ -36,6 +39,9 @@
 			cadre_xml,#GET{cadre_xml},
 			cadre_html,#GET{cadre_html},
 			cadre_css,#GET{cadre_css},
+			cadre_latex,#GET{cadre_latex},
+			cadre_bibtex,#GET{cadre_bibtex},
+			cadre_biblatex,#GET{cadre_biblatex},
 			pre,#GET{pre},
 			samp,#GET{samp},
 			var,#GET{var},
