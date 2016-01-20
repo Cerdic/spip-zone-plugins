@@ -51,7 +51,7 @@
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
-				<INCLURE{fond=formulaires/inc-check-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},status=open,env} />
+				<INCLURE{fond=formulaires/inc-check-subscribinglists,name=#GET{name},choix_listes=#ENV{_listes_dispo},env} />
 			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
