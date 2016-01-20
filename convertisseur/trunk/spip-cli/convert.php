@@ -122,13 +122,11 @@ class Convert extends Command {
 					$fichiers_xml = preg_files($s, "(?:(?<!\.metadata\.)xml$)");
 					
 					foreach($fichiers_xml as $f){
-						
-						// ne va pas toujours, prendre a partir de la fin. TODO
-						
-						$c = preg_match(",.*/(.*)/.*,U", dirname($f), $m);
+												
+						$c = preg_match(",.*/([^/]+)/[^/]+$,U", dirname($f), $m);
 						$collection = $m[1] ;
 						
-						$n = preg_match(",.*/.*/(.*)/.*,U", dirname($f), $m);
+						$n = preg_match(",.*/[^/]+/([^/]+)$,U", dirname($f), $m);
 						$numero = $m[1] ;
 						
 						if(!is_dir("$dest" . "/"  . $collection)){
@@ -139,7 +137,10 @@ class Convert extends Command {
 						}
 						
 						$article = basename($f);
-											
+						
+						// pour le chemin des documents.
+						set_request('fichier', "$collection/$numero/fichier.xml");
+					
 						$contenu = $fonction_extraction($f);
 						
 						include_spip("inc/convertisseur");
