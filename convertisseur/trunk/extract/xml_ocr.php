@@ -44,6 +44,7 @@ function extracteur_preparer_insertion($item){
  
 function convertir_xml_ocr($u) {
 
+	include_spip("inc/filtres");
 	$article = extraire_balise($u, 'ARTICLE') ;
 	$attrs = explode(";" , extraire_attribut($article, "img")) ;
 	

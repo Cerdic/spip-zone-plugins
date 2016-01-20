@@ -2,7 +2,9 @@
 
 /***
 
-Convertir des fichiers au format Quark XML en fichiers en format SPIP conversion.
+Convertir des fichiers par lots.
+
+au format Quark XML en fichiers en format SPIP conversion.
 
 Mettre les fichiers XML dans le repertoire /exports_quark/%COLLECTION%/%NUMERO% du SPIP
 
@@ -19,20 +21,27 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Quark_xmlConvert extends Command {
+class Convert extends Command {
 	protected function configure() {
 		$this
-			->setName('conversion:quarkxmlconvert')
+			->setName('conversion:convertir')
 			->setDescription('Convertion des fichiers Quarks XML en fichiers d\'import SPIP.')
 			->setAliases(array(
 				'convert' // abbréviation commune pour "synchro"
 			))
 			->addOption(
+				'extracteur',
+				'e',
+				InputOption::VALUE_OPTIONAL,
+				'Type d\'extracteur pour la conversion',
+				''
+			)
+			->addOption(
 				'source',
 				's',
 				InputOption::VALUE_OPTIONAL,
-				'Répertoire source',
-				'exports_quark'
+				'Répertoire source de la collection à convertir, structuré en collection/numero/[fichiers]',
+				'conversion_source'
 			)
 			->addOption(
 				'dest',
@@ -49,17 +58,22 @@ class Quark_xmlConvert extends Command {
 		global $spip_loaded;
 		
 		include_spip("iterateur/data");
-		
+				
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
-				
-		// Répertoire source, ou arrivent les fichiers Quark (/exports_quark par défaut).
-		if(!is_dir($source))
-			mkdir($source);
-
-		// Répertoire de destination ou l'on enregistre les fichiers spip (/convertion_spip par défaut).
-		if(!is_dir($dest))
-			mkdir($dest);
+		$extracteur = $input->getOption('extracteur') ;
+		
+		include_spip("inc/convertisseur");
+		global $conv_formats ;
+		foreach($conv_formats as $v)
+			if(!is_array($v))
+				$extracteurs_disponibles[] = $v ;
+		$extracteurs_dispos = join(", ",$extracteurs_disponibles);		
+						
+		if($extracteur == "" || !in_array($extracteur, $extracteurs_disponibles)){
+			$output->writeln("<error>Définir un extracteur `spip convert -e %extracteur%`. Extracteurs disponibles : $extracteurs_dispos</error>");
+			exit ;
+		}
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
@@ -67,10 +81,22 @@ class Quark_xmlConvert extends Command {
 			if (!function_exists('passthru')){
 				$output->writeln("<error>Votre installation de PHP doit pouvoir exécuter des commandes externes avec la fonction passthru().</error>");
 			}
+			
+			// Répertoire de destination ou l'on enregistre les fichiers spip (/convertion_spip par défaut).
+			if(!is_dir($source)){
+				$output->writeln("<error>Préciser où sont les fichiers à convertir `spip convert -s %repertoire%` ou créer un repertoire conversion_source/</error>");
+				exit ;
+			}
+			
+			// Repertoire source	
+			if(!is_dir($dest)){
+				$output->writeln("<error>Préciser où placer les fichiers convertis `spip convert -d %repertoire%` ou créer un repertoire conversion_spip/</error>");
+				exit ;
+			}
+			
 			// Si c'est bon on continue
 			else{
-				$output->writeln("<info>C'est parti pour la convertion des fichiers Quark XML dans /$dest !</info>");
-
+				$output->writeln("<info>C'est parti pour la convertion `$extracteur` des fichiers de $source/ dans $dest/ !</info>");
 
 				// trouve t'on un repertoire trunk/collections dans $dest ?
 				if($ls_depot = inc_ls_to_array_dist($dest ."/trunk/collections")){
@@ -82,18 +108,22 @@ class Quark_xmlConvert extends Command {
 				
 				foreach($ls_sources as $s)
 					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
-								
+				
+				// plugin convertisseur
+				include_spip("extract/$extracteur");
+											
 				include_spip("inc/utils");
+				
+				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
 				
 				// chopper des fichiers xml mais pas xxx.metatada.xml
 				foreach($sources as $s){
 					
 					$fichiers_xml = preg_files($s, "(?:(?<!\.metadata\.)xml$)");
 					
-					// plugin convertisseur
-					include_spip("extract/quark_xml");
-					
 					foreach($fichiers_xml as $f){
+						
+						// ne va pas toujours, prendre a partir de la fin. TODO
 						
 						$c = preg_match(",.*/(.*)/.*,U", dirname($f), $m);
 						$collection = $m[1] ;
@@ -110,7 +140,7 @@ class Quark_xmlConvert extends Command {
 						
 						$article = basename($f);
 											
-						$contenu = extracteur_quark_xml($f);
+						$contenu = $fonction_extraction($f);
 						
 						include_spip("inc/convertisseur");
 						$contenu = nettoyer_format($contenu);

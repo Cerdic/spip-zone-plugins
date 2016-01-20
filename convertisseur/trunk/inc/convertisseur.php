@@ -325,6 +325,7 @@ function nettoyer_format($t) {
   $conv_formats['XTG_SPIP'] = 'quark'; // function extract/
   $conv_formats['Quark_SPIP'] = 'quark_xml'; // function extract/
   $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
+  $conv_formats['XML_OCR'] = 'xml_ocr'; // function extract/
   
   //
   //  Les conversions SPIP vers qqchose ....
