@@ -32,8 +32,8 @@ function extracteur_preparer_insertion($item){
 	if($item['auteurs'])
 		$texte .= "\n\n@@AUTEUR\n\n" . trim($item['auteurs']) . "\n\n" ;
 
-	if($item['signature'])
-		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['signature']) . "\n\n" ;
+	if($item['affiliations'])
+		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['affiliations']) . "\n\n" ;
 
 	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
 	
@@ -81,7 +81,7 @@ function convertir_xml_ocr($u) {
 		$aa = array();
 		$elms = extraire_balises($article, $t) ;
 		foreach($elms as $a){
-			$aa[] = preg_replace("/^\s*\*\s*|\.*\s*$/","", textebrut($a)) ;
+			$aa[] = preg_replace("/^\s*\*\s*|(\.|\s|:)*$/","", textebrut($a)) ;
 			$article = str_replace($a, "", $article);
 		}
 		$l = strtolower($t) . "s" ;
