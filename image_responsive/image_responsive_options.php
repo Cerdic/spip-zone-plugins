@@ -241,7 +241,6 @@ function retour_image_responsive($img, $taille, $dpr, $xsendfile, $retour="http"
 			}
 		}
 		
-		
 		if (!file_exists($dest) OR filemtime($dest) < filemtime($img)) {
 			// Là on fabrique l'image
 			// et on la recopie vers $dest

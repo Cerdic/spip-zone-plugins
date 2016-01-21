@@ -6,10 +6,10 @@ function charger_url_image_responsive(this_img) {
 
 		if (this_img.hasClass("image_responsive_v")) {
 			var vertical = true;
-			var dim= parseInt(this_img.height());
+			var dim= parseInt(this_img.parent().height());
 		} else {
 			var vertical = false;
-			var dim= parseInt(this_img.width());
+			var dim= parseInt(this_img.parent().width());
 		}
 		
 		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
