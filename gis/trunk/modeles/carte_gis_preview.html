@@ -17,7 +17,7 @@
 		map_preview.addLayer(base_layer);
 		
 		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
-		
+
 		[(#REM) On ajoute les points ou le point unique suivant les params ]
 		<B_points>
 		var data = {
@@ -75,7 +75,8 @@
 			}).addTo(map_preview);
 			geojson.addData(data);
 			[(#GET{autocenter}|oui)
-			map_preview.fitBounds(geojson.getBounds());]
+			if(data.features.length > 1)
+				map_preview.fitBounds(geojson.getBounds());]
 		}
 		[(#REM) On ajoute les KML attachés à l'objet ]
 		<BOUCLE_kml(DOCUMENTS){tous}{objet}{id_objet}{extension=kml}>
