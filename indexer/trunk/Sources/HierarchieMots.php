@@ -39,7 +39,7 @@ class HierarchieMots extends SpipDocuments {
 		
 		// Si on a le plugin groupes arborescents, on le prend en compte
 		$where = array();
-		if (_DIR_PLUGIN_GMA) {
+		if (defined('_DIR_PLUGIN_GMA')) {
 			$where[] = 'id_parent = '.intval($id_parent);
 		}
 		
@@ -59,7 +59,7 @@ class HierarchieMots extends SpipDocuments {
 				);
 				
 				// Si on a le plugin groupes arborescents, on cherche les sous-groupes
-				if (_DIR_PLUGIN_GMA) {
+				if (defined('_DIR_PLUGIN_GMA')) {
 					$hierarchie = array_merge(
 						$hierarchie,
 						$this->getHierarchieGroupes($id_groupe, $id_hierarchie, array_merge($parents, array($id_hierarchie => $titre)))

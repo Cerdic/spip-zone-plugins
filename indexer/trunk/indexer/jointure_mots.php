@@ -38,7 +38,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 			
 			// Si on a le plugin groupes arborescents, on le prend en compte
 			$select = array('titre');
-			if (_DIR_PLUGIN_GMA) {
+			if (defined('_DIR_PLUGIN_GMA')) {
 				$select[] = 'id_parent';
 			}
 			
