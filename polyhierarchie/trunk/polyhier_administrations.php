@@ -21,7 +21,10 @@ function polyhier_declarer_tables_auxiliaires($tables_auxiliaires){
 		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL");
 	$spip_rubriques_liens_key = array(
 			"PRIMARY KEY"		=> "id_parent,id_objet,objet",
-			"KEY id_parent"	=> "id_parent");
+			"KEY id_parent"	=> "id_parent",
+			"KEY id_objet"	=> "id_objet",
+			"KEY objet"	=> "objet",
+	);
 
 	$tables_auxiliaires['spip_rubriques_liens'] = array(
 	'field' => &$spip_rubriques_liens,
@@ -38,16 +41,18 @@ function polyhier_declarer_tables_auxiliaires($tables_auxiliaires){
  */
 function polyhier_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('inc/meta');
-	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'0.1.0','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta($nom_meta_base_version,$current_version="0.1.0",'non');
-		}
-	}
+
+	$maj = array();
+	$maj['create'] = array(
+		array('maj_tables',array('spip_rubriques_liens')),
+	);
+
+	$maj['0.2.0'] = array(
+		array('maj_tables',array('spip_rubriques_liens')),
+	);
+	
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
