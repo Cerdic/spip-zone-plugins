@@ -157,7 +157,7 @@ function quark_bom_detect($t) {
 
 function extracteur_quark($fichier, &$charset) {
 	if (lire_fichier($fichier, $texte)) {
-
+		include_spip("inc/charsets");
 		if ($c = quark_bom_detect($texte)
 		AND $c != 'utf-8'
 		AND init_mb_string())

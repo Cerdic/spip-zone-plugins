@@ -5,7 +5,8 @@ include_spip("inc/filtres");
 // Sait-on extraire ce format ?
 $GLOBALS['extracteur']['quark_xml'] = 'extracteur_quark_xml';
 
-function extracteur_quark_xml($fichier) {
+function extracteur_quark_xml($fichier, &$charset) {
+	$charset = 'utf-8';
 	if (lire_fichier($fichier, $texte)) {		
 		return convertir_extraction_quark_xml($texte);
 	}

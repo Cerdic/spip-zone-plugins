@@ -3,7 +3,8 @@
 // Sait-on extraire ce format ?
 $GLOBALS['extracteur']['xml_ocr'] = 'extracteur_xml_ocr';
 
-function extracteur_xml_ocr($fichier) {
+function extracteur_xml_ocr($fichier, &$charset) {
+	$charset = 'utf-8';
 	if (lire_fichier($fichier, $texte)) {		
 		return convertir_extraction_xml_ocr($texte);
 	}

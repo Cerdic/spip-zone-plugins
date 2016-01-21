@@ -57,11 +57,12 @@ class Convert extends Command {
 		global $spip_racine;
 		global $spip_loaded;
 		
-		include_spip("iterateur/data");
-				
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
 		$extracteur = $input->getOption('extracteur') ;
+		
+		include_spip("iterateur/data");
+		include_spip("inc/utils");
 		
 		include_spip("inc/convertisseur");
 		global $conv_formats ;
@@ -88,7 +89,10 @@ class Convert extends Command {
 				exit ;
 			}
 			
-			// Repertoire source	
+			// Repertoire source
+			if($dest != "" AND !is_dir($dest))
+				mkdir($dest);
+			
 			if(!is_dir($dest)){
 				$output->writeln("<error>Préciser où placer les fichiers convertis `spip convert -d %repertoire%` ou créer un repertoire conversion_spip/</error>");
 				exit ;
@@ -104,31 +108,37 @@ class Convert extends Command {
 					$output->writeln("<info>GIT : dest = $dest</info>");
 				}
 				
+				// a t'on affaire à une source organisée en collection/numeros/[fichiers] ?
 				$ls_sources = inc_ls_to_array_dist($source ."/*/");
-				
-				foreach($ls_sources as $s)
-					$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
+				if(sizeof($ls_source) > 0){
+					foreach($ls_sources as $s)
+						$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
+				}else{
+				// sinon on se limite au repertoire indiqué.	
+						$sources[] = $source ."/" ;
+				}
 				
 				// plugin convertisseur
-				include_spip("extract/$extracteur");
-											
-				include_spip("inc/utils");
-				
+				include_spip("extract/$extracteur");				
 				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
-				
-				// chopper des fichiers xml mais pas xxx.metatada.xml
+								
 				foreach($sources as $s){
 					
-					$fichiers_xml = preg_files($s, "(?:(?<!\.metadata\.)xml$)");
-					
-					foreach($fichiers_xml as $f){
+					// chopper des fichiers xml mais pas xxx.metatada.xml
+					$fichiers = preg_files($s, "(?:(?<!\.metadata\.)xml$)");
+										
+					// ou a défaut n'importe quel fichier trouvé
+					if(sizeof($fichiers) == 0)
+						$fichiers = preg_files($s, "e$");
+															
+					foreach($fichiers as $f){
 												
 						$c = preg_match(",.*/([^/]+)/[^/]+$,U", dirname($f), $m);
 						$collection = $m[1] ;
 						
 						$n = preg_match(",.*/[^/]+/([^/]+)$,U", dirname($f), $m);
 						$numero = $m[1] ;
-						
+												
 						if(!is_dir("$dest" . "/"  . $collection)){
 							mkdir("$dest" . "/" . $collection) ;
 						}
@@ -141,7 +151,7 @@ class Convert extends Command {
 						// pour le chemin des documents.
 						set_request('fichier', "$collection/$numero/fichier.xml");
 					
-						$contenu = $fonction_extraction($f);
+						$contenu = $fonction_extraction($f,$charset);
 						
 						include_spip("inc/convertisseur");
 						$contenu = nettoyer_format($contenu);
