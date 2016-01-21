@@ -254,8 +254,10 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=arr
 	}
 
 	// Si on est pas dans une confirmation et qu'il n'y pas de vraies erreurs on affiche la prévisu du message
-	if (!_request('confirmer') AND !count($erreurs))
+	if (!_request('confirmer') AND !count($erreurs)) {
 		$erreurs['previsu']=' ';
+		$erreurs['message_erreur'] = ''; // pas de message d'erreur global si aucune erreur réelle
+	}
 
 	// Si on est pas dans une confirmation, on ajoute au contexte les infos des fichiers déjà téléchargés
 	if (!_request('confirmer'))
