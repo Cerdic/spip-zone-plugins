@@ -6,19 +6,19 @@
 	http://www.primebox.co.uk/projects/cookie-bar/
 ]
 [(#CONFIG{cookiebar/message_txt}|?{
-	[(#SET{message,#CONFIG{cookiebar/message_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{message,#CONFIG{cookiebar/message_txt}|extraire_multi|supprimer_tags|typo|trim|texte_script})],
 	[(#SET{message,<:cookiebar:message_message|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/accept_txt}|?{
-	[(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|extraire_multi|supprimer_tags|typo|trim|texte_script})],
 	[(#SET{accepttext,<:cookiebar:message_accepttext|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/decline_txt}|?{
-	[(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|extraire_multi|supprimer_tags|typo|trim|texte_script})],
 	[(#SET{declinetext,<:cookiebar:message_declinetext|supprimer_tags|trim|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/policy_txt}|?{
-	[(#SET{policytext,#CONFIG{cookiebar/policy_txt}|supprimer_tags|typo|trim|texte_script})],
+	[(#SET{policytext,#CONFIG{cookiebar/policy_txt}|extraire_multi|supprimer_tags|typo|trim|texte_script})],
 	[(#SET{policytext,<:cookiebar:message_policytext|supprimer_tags|trim|texte_script:>})]
 })]
 
