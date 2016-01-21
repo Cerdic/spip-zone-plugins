@@ -134,6 +134,9 @@ class Convert extends Command {
 						$collection = $classement[0] ;
 						$numero = $classement[1] ;
 					}
+					
+					// enregistrer les collections
+					$numeros["$collection-$numero"] = 1 ;
 									
 					if(!is_dir("$dest" . "/"  . $collection)){
 						mkdir("$dest" . "/" . $collection) ;
@@ -162,8 +165,22 @@ class Convert extends Command {
 					ecrire_fichier("$dest" . "/" . $collection . "/" . $numero . "/" . $article, $contenu);
 								
 					$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
-				}	
+				}
+				
+				// copier un éventuel zip des fichiers sources.			
+				foreach(array_keys($numeros) as $n){
+					list($publication, $num) = explode("-", $n);
+					
+					$file = "$source/$publication/$num/articles.zip" ;
+					$newfile = $dest . '/' . $publication . '/' . $num . '/' . "articles_Quark_xml.zip";
+					
+					if(file_exists($file))
+						if (!copy($file, $newfile)) 
+							$output->writeln("La copie $file du fichier a échoué...\n");
+						else
+							$output->writeln("$file copié");
 
+				}
 			}
 
 		}
