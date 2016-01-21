@@ -1,0 +1,28 @@
+<plugin>
+	<nom>Google Analytics</nom>
+	<slogan>Utiliser le service Google Analytics</slogan>
+	<auteur>Phil</auteur>
+	<version>0.4.9</version>
+	<etat>stable</etat>
+	<licence>GNU/GPL</licence>
+	<description>
+		<multi>
+			[fr]Ajoute automatiquement le script Google Analytics dans l'espace public en ins&#233;rant le code personnel de Google Analytics dans la configuration.
+ 			[en]Adds the Google Analytics script in public space by inserting google analytics code in the configuration.
+		</multi>
+	</description>
+	<icon>images/ga-32.png</icon>
+	<lien>http://contrib.spip.net/?article2495</lien>
+
+	<prefix>googleanalytics</prefix>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>googleanalytics_insert_head.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
+	<necessite id="spip_bonux" />
+
+	<categorie>statistique</categorie>
+</plugin>

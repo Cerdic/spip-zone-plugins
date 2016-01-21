@@ -1,0 +1,31 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=googleanalytics -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+			<li class="editer editer_idGoogle">
+				<label for="idgoogle"><:googleanalytics:label_id_google:></label>
+				<p class="explication"><:googleanalytics:explication_id_google:></p>
+				<input type="text" name="idGoogle" class="text" id="idgoogle" size="60" value="#ENV{idGoogle}" placeholder="UA-xxxxxxx-x" />
+			</li>
+			<li class="editer editer_ga_universal">
+			    <div class="choix">
+				    <input type="checkbox" name="ga_universal" class="checkbox" id="ga_universal" value="oui"[ (#ENV{ga_universal}|oui)checked="checked"] />
+				    <label for="ga_universal"><:googleanalytics:label_ga_universal:></label>
+			    </div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
+</div>
