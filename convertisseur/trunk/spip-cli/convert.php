@@ -58,7 +58,11 @@ class Convert extends Command {
 		global $spip_loaded;
 		
 		$source = $input->getOption('source') ;
+		
 		$dest = $input->getOption('dest') ;
+		if($dest == "drive")
+			$dest = '/Users/vincent/Google Drive/Fichiers_Diplodubas/exports_automatiques' ;
+
 		$extracteur = $input->getOption('extracteur') ;
 		
 		include_spip("iterateur/data");
@@ -88,7 +92,7 @@ class Convert extends Command {
 				$output->writeln("<error>Préciser où sont les fichiers à convertir `spip convert -s %repertoire%` ou créer un repertoire conversion_source/</error>");
 				exit ;
 			}
-			
+	
 			// Repertoire source
 			if($dest != "" AND !is_dir($dest))
 				mkdir($dest);
@@ -107,71 +111,61 @@ class Convert extends Command {
 					$dest = $ls_depot[0]['dirname'] . "/" .  $ls_depot[0]['basename'] ;
 					$output->writeln("<info>GIT : dest = $dest</info>");
 				}
-				
-				// a t'on affaire à une source organisée en collection/numeros/[fichiers] ?
-				$ls_sources = inc_ls_to_array_dist($source ."/*/");
-				if(sizeof($ls_source) > 0){
-					foreach($ls_sources as $s)
-						$sources[] = $s['dirname'] . "/" . $s['basename'] ; 
-				}else{
-				// sinon on se limite au repertoire indiqué.	
-						$sources[] = $source ."/" ;
-				}
-				
+								
 				// plugin convertisseur
 				include_spip("extract/$extracteur");				
 				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
-								
-				foreach($sources as $s){
-					
-					// chopper des fichiers xml mais pas xxx.metatada.xml
-					$fichiers = preg_files($s, "(?:(?<!\.metadata\.)xml$)");
-										
-					// ou a défaut n'importe quel fichier trouvé
-					if(sizeof($fichiers) == 0)
-						$fichiers = preg_files($s, "e$");
-															
-					foreach($fichiers as $f){
-												
-						$c = preg_match(",.*/([^/]+)/[^/]+$,U", dirname($f), $m);
-						$collection = $m[1] ;
-						
-						$n = preg_match(",.*/[^/]+/([^/]+)$,U", dirname($f), $m);
-						$numero = $m[1] ;
-												
-						if(!is_dir("$dest" . "/"  . $collection)){
-							mkdir("$dest" . "/" . $collection) ;
-						}
-						if(!is_dir("$dest" . "/" . $collection . "/" . $numero)){
-							mkdir("$dest" . "/" . $collection . "/" . $numero) ;
-						}
-						
-						$article = basename($f);
-						
-						// pour le chemin des documents.
-						set_request('fichier', "$collection/$numero/fichier.xml");
-					
-						$contenu = $fonction_extraction($f,$charset);
-						
-						include_spip("inc/convertisseur");
-						$contenu = nettoyer_format($contenu);
-						
-						// nettoyer les noms de fichiers
-						include_spip("inc/charsets");
-						$article = translitteration($article);
-						$article = preg_replace(',[^\w-]+,', '_', $article);
-						$article = preg_replace(',_xml$,', '.xml', $article);
-						
-						include_spip("inc/flock");
-						ecrire_fichier("$dest" . "/" . $collection . "/" . $numero . "/" . $article, $contenu);
+													
+				// chopper des fichiers xml mais pas xxx.metatada.xml
+				$fichiers = preg_files($source, "(?:(?<!\.metadata\.)xml$)");
 									
-						$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
-					}	
-
-				}
+				// ou a défaut n'importe quel fichier trouvé
+				if(sizeof($fichiers) == 0)
+					$fichiers = preg_files($source, ".*");
+																	
+				foreach($fichiers as $f){
+					
+					$fn = str_replace("$source/","", $f);
 				
-			
+					// Répertoires Collection et numero ?
+					$classement = explode("/", $fn); 
+					
+					if(sizeof($classement) > 1){
+						$collection = $classement[0] ;
+						$numero = $classement[1] ;
+					}
+									
+					if(!is_dir("$dest" . "/"  . $collection)){
+						mkdir("$dest" . "/" . $collection) ;
+					}
+					if(!is_dir("$dest" . "/" . $collection . "/" . $numero)){
+						mkdir("$dest" . "/" . $collection . "/" . $numero) ;
+					}
+					
+					$article = basename($f);
+					
+					// pour le chemin des documents.
+					set_request('fichier', "$collection/$numero/fichier.xml");
+				
+					$contenu = $fonction_extraction($f,$charset);
+										
+					include_spip("inc/convertisseur");
+					$contenu = nettoyer_format($contenu);
+					
+					// nettoyer les noms de fichiers
+					include_spip("inc/charsets");
+					$article = translitteration($article);
+					$article = preg_replace(',[^\w-]+,', '_', $article);
+					$article = preg_replace(',_xml$,', '.xml', $article);
+					
+					include_spip("inc/flock");
+					ecrire_fichier("$dest" . "/" . $collection . "/" . $numero . "/" . $article, $contenu);
+								
+					$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
+				}	
+
 			}
+
 		}
 		else{
 			$output->writeln('<error>Vous n’êtes pas dans une installation de SPIP. Impossible de convertir le texte.</error>');
