@@ -58,11 +58,7 @@ class Convert extends Command {
 		global $spip_loaded;
 		
 		$source = $input->getOption('source') ;
-		
 		$dest = $input->getOption('dest') ;
-		if($dest == "drive")
-			$dest = '/Users/vincent/Google Drive/Fichiers_Diplodubas/exports_automatiques' ;
-
 		$extracteur = $input->getOption('extracteur') ;
 		
 		include_spip("iterateur/data");
@@ -134,9 +130,6 @@ class Convert extends Command {
 						$collection = $classement[0] ;
 						$numero = $classement[1] ;
 					}
-					
-					// enregistrer les collections
-					$numeros["$collection-$numero"] = 1 ;
 									
 					if(!is_dir("$dest" . "/"  . $collection)){
 						mkdir("$dest" . "/" . $collection) ;
@@ -167,21 +160,6 @@ class Convert extends Command {
 					$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
 				}
 				
-				// copier un éventuel zip des fichiers sources.			
-				if($dest == "drive")
-					foreach(array_keys($numeros) as $n){
-						list($publication, $num) = explode("-", $n);
-						
-						$file = "$source/$publication/$num/articles.zip" ;
-						$newfile = $dest . '/' . $publication . '/' . $num . '/' . "articles_Quark_xml.zip";
-						
-						if(file_exists($file))
-							if (!copy($file, $newfile)) 
-								$output->writeln("La copie $file du fichier a échoué...\n");
-							else
-								$output->writeln("$file copié");
-	
-					}
 			}
 
 		}
