@@ -168,19 +168,20 @@ class Convert extends Command {
 				}
 				
 				// copier un éventuel zip des fichiers sources.			
-				foreach(array_keys($numeros) as $n){
-					list($publication, $num) = explode("-", $n);
-					
-					$file = "$source/$publication/$num/articles.zip" ;
-					$newfile = $dest . '/' . $publication . '/' . $num . '/' . "articles_Quark_xml.zip";
-					
-					if(file_exists($file))
-						if (!copy($file, $newfile)) 
-							$output->writeln("La copie $file du fichier a échoué...\n");
-						else
-							$output->writeln("$file copié");
-
-				}
+				if($dest == "drive")
+					foreach(array_keys($numeros) as $n){
+						list($publication, $num) = explode("-", $n);
+						
+						$file = "$source/$publication/$num/articles.zip" ;
+						$newfile = $dest . '/' . $publication . '/' . $num . '/' . "articles_Quark_xml.zip";
+						
+						if(file_exists($file))
+							if (!copy($file, $newfile)) 
+								$output->writeln("La copie $file du fichier a échoué...\n");
+							else
+								$output->writeln("$file copié");
+	
+					}
 			}
 
 		}
