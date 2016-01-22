@@ -56,15 +56,16 @@ function lim_afficher_config_objet($flux){
  *     le flux data complété par un input hidden 'id_parent' avec la bonne valeur
 **/
 function lim_formulaire_charger($flux){
-	$form				= $flux['args']['form'];
-	// si ce n'est pas un formulaire d'édition, on sort
-	$valid = strpos($form, 'editer');
-	if ($valid === false) 
-		return $flux;
+	$form	= $flux['args']['form'];
+	$valid 	= strpos($form, 'editer');
+	// si ce n'est pas un formulaire d'édition 
+	//ou si la restriction par rubrique n'a pas été activée, on sort
+	if ($valid === false OR is_null(lire_config('lim_objets'))) return $flux;
 
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
+	var_dump($tableau_tables_lim);
 	
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		
@@ -89,31 +90,23 @@ function lim_formulaire_charger($flux){
  *     le flux data complété ou non d'un message d'erreur
 **/
 function lim_formulaire_verifier($flux){
-	include_spip('inc/autoriser');
 	$form	= $flux['args']['form'];
+	$valid	= strpos($form, 'editer');
+	// si ce n'est pas un formulaire d'édition 
+	//ou si la restriction par rubrique n'a pas été activée, on sort
+	if ($valid === false OR is_null(lire_config('lim_objets'))) return $flux;
+
+	include_spip('inc/autoriser');
 	$type	= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
 
-	if (strpos($form, 'editer') AND in_array($nom_table, $tableau_tables_lim)) {
+	if (in_array($nom_table, $tableau_tables_lim)) {
 		$faire = 'creer'.$type.'dans';
 		if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
 			$flux['data']['id_parent'] .= _T('info_creerdansrubrique_non_autorise');
 		}
 	}
-	
-		
-
-	// if (in_array($nom_table, $tableau_tables_lim)) {
-		
-	// 	$id_rubrique	= $flux['args']['args'][1];
-	// 	$id_rubrique = _request('id_parent');
-	// 	$tab_rubriques_choisies = lim_publierdansrubriques($type);
-
-	// 	if (!in_array($id_rubrique, $tab_rubriques_choisies)) {
-	// 		$flux['data']['id_parent'] .= "Vous ne pouvez pas publier un $type à l'intérieur de cette rubrique";
-	// 	}
-	// }
 	return $flux;
 }
 
