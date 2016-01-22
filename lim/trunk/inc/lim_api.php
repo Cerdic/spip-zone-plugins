@@ -108,8 +108,13 @@ function lim_verifier_presence_objets($id_rubrique, $objet) {
  */
 
 function lim_publierdansrubriques($type) {
+	$rubriques_choisies = array();
 	$tab_rubrique_objet = lire_config("lim_rubriques/$type");
-	$res 				= sql_allfetsel('id_rubrique', 'spip_rubriques');
+
+	// si aucune restriction on sort.
+	if (is_null($tab_rubrique_objet)) return $rubriques_choisies;
+
+	$res = sql_allfetsel('id_rubrique', 'spip_rubriques');
 	foreach ($res as $key => $value) {
 		$tab_rubriques[] = $value['id_rubrique'];
 	}
