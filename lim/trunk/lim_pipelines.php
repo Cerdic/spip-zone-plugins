@@ -65,7 +65,6 @@ function lim_formulaire_charger($flux){
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
-	var_dump($tableau_tables_lim);
 	
 	if (in_array($nom_table, $tableau_tables_lim)) {
 		
