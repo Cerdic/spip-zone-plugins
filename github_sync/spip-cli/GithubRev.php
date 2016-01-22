@@ -12,7 +12,7 @@ class GithubRev extends Command {
 			->setName('github:revision')
 			->setDescription("\tCommit de fichiers de contenu sur Github (svn status, up, add, commit etc…)\n\t\t\t\tInitialiser avec un dépot Github avec la commande : spip rev -g https://github.com/xx/xx.git\n")
 			->setAliases(array(
-				'rev' // abbréviation commune pour "synchro"
+				'rev' // abbréviation commune pour "révision"
 			))
 			->addOption(
 				'dest',
@@ -55,7 +55,9 @@ class GithubRev extends Command {
 			
 			chdir($spip_racine);
 			
-			exec('svn info ' . $dest , $r);
+			exec('/usr/local/bin/svn info ' . $dest , $r);
+			
+			// var_dump($dest, $r);
 			
 			// vérifions si on a un depot GIT 				
 			if($r[0] == "Path: $dest"){
@@ -66,7 +68,7 @@ class GithubRev extends Command {
 			}else{ // pas de dépot GIT, on checkout
 				if($depot){
 					$output->writeln("<error>Checkout du dépot $depot dans $dest</error>");
-					passthru("svn co $depot $dest");
+					passthru("/usr/local/bin/svn co $depot $dest");
 					$output->writeln("<info>Relancez la commande.</info>");
 					die() ;
 				}else{
@@ -89,7 +91,7 @@ class GithubRev extends Command {
 				));
 
 				// ou en est-on dans les commit ?
-				exec('svn up', $results, $err);
+				exec('/usr/local/bin/svn up', $results, $err);
 									
 				if ($err) {
 					$output->writeln(array("<error>Erreur SVN.</error>"));
@@ -103,7 +105,7 @@ class GithubRev extends Command {
 				$results = array();
 
 				// Quelques vérifs en svn status.
-				exec('svn status .', $results, $err);
+				exec('/usr/local/bin/svn status .', $results, $err);
 									
 				if ($err) {
 					$output->writeln(array("<error>Erreur SVN.</error>"));
@@ -147,7 +149,7 @@ class GithubRev extends Command {
 							));
 							
 							foreach($dossiers_ajoutes as $dos){
-								exec("svn add " . $dos, $results, $err);
+								exec("/usr/local/bin/svn add " . $dos, $results, $err);
 								if ($err) {
 									$output->writeln(array("<error>Erreur SVN add $dos</error>"));
 								} else {
@@ -163,7 +165,7 @@ class GithubRev extends Command {
 								"<info>Svn add des fichiers</info>",
 								 join("\n", $fichiers_ajoutes)
 							));
-							exec("svn add " . join(" , ", $fichiers_ajoutes), $results, $err);
+							exec("/usr/local/bin/svn add " . join(" , ", $fichiers_ajoutes), $results, $err);
 							if ($err) {
 								$output->writeln(array("<error>Erreur SVN add fichiers.</error>"));
 							} else {
@@ -208,7 +210,7 @@ class GithubRev extends Command {
 								"<info>Commit…</info>"
 							));
 
-							exec('svn commit -m "Ajouts de fichiers"', $results, $err);
+							exec('/usr/local/bin/svn commit -m "Ajouts de fichiers"', $results, $err);
 							if ($err) 
 								$output->writeln(array("<error>Erreur SVN.</error>"));
 							
