@@ -25,12 +25,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-off { color:#ddd;}
+.icon-off { color:#ddd; }
 .icon-off:before {
 	content: "\e900";
 }
-
-.icon-on {color:#5da7c5;}
 
 .icon-on:before {
 	content: "\e901";
