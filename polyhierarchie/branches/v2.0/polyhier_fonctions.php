@@ -48,8 +48,8 @@ function critere_enfants($idb, &$boucles, $crit, $tous=true) {
 	  AND in_array(table_objet_sql($boucle->type_requete),array_keys(lister_tables_objets_sql()))){
 		$type = objet_type($boucle->type_requete);
 		$cond = "is_array(\$r=$arg)?sql_in('rl.id_parent',\$r):'rl.id_parent='.\$r";
-		$sous = "sql_allfetsel('rl.id_objet','spip_rubriques_liens as rl',$cond.' AND rl.objet=\'$type\'')";
-		$where[] = "sql_in('".$boucle->id_table.".".$boucle->primary."', array_map('reset',$sous))";
+		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',$cond.' AND rl.objet=\'$type\'')";
+		$where[] = "array('IN', '".$boucle->id_table.".".$boucle->primary."', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
 	if (count($where)==2)
 		$where = array("'OR'",$where[0],$where[1]);
@@ -98,8 +98,8 @@ function critere_parents($idb, &$boucles, $crit, $tous=true) {
 	  AND in_array(table_objet_sql($boucle_parent->type_requete),array_keys(lister_tables_objets_sql()))){
 		$arg = kwote(calculer_argument_precedent($idb, id_table_objet(objet_type($boucle_parent->type_requete)), $boucles));
 		$type = objet_type($boucle_parent->type_requete);
-		$sous = "sql_allfetsel('rl.id_parent','spip_rubriques_liens as rl','rl.id_objet='.$arg.' AND rl.objet=\'$type\'')";
-		$where[] = "sql_in('$primary', array_map('reset',$sous))";
+		$sous = "sql_get_select('rl.id_parent','spip_rubriques_liens as rl','rl.id_objet='.$arg.' AND rl.objet=\'$type\'')";
+		$where[] = array("'IN'", "'$primary'", "'(SELECT * FROM('.$sous.') AS subquery)'");
 	}
 	if (count($where)==2)
 		$where = array("'OR'",$where[0],$where[1]);
@@ -204,8 +204,8 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	  AND in_array(table_objet_sql($boucle->type_requete),array_keys(lister_tables_objets_sql()))){
 		$type = objet_type($boucle->type_requete);
 		$primary = $boucle->id_table.".".$boucle->primary;
-		$sous = "sql_allfetsel('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
-		$where[] = "sql_in('$primary', array_map('reset',$sous))";
+		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
+		$where[] = "array('IN', '$primary', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
 
 	if (count($where)==2)
