@@ -4,15 +4,13 @@
 
 Convertir des fichiers par lots.
 
-au format Quark XML en fichiers en format SPIP conversion.
-
-Mettre les fichiers XML dans le repertoire /exports_quark/%COLLECTION%/%NUMERO% du SPIP
+Mettre les fichiers dans le repertoire /conversion_source/%COLLECTION%/%NUMERO%/[fichiers] du SPIP par défaut, ou dans un autre répertoire.
 
 Lancer la commande spip-cli : spip convert
 
 Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
 
-Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest. 
+Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest (ce qui permet de faire un suivi de révision du contenu). 
 
 
 use Symfony\Component\Console\Command\Command;
@@ -25,9 +23,9 @@ class Convert extends Command {
 	protected function configure() {
 		$this
 			->setName('conversion:convertir')
-			->setDescription('Convertion des fichiers Quarks XML en fichiers d\'import SPIP.')
+			->setDescription('Conversion des fichiers divers en fichiers d\'import SPIP.')
 			->setAliases(array(
-				'convert' // abbréviation commune pour "synchro"
+				'convert' // abbréviation commune pour "conversion"
 			))
 			->addOption(
 				'extracteur',
@@ -139,7 +137,7 @@ class Convert extends Command {
 					}
 					
 					$article = basename($f);
-					
+
 					// pour le chemin des documents.
 					set_request('fichier', "$collection/$numero/fichier.xml");
 				

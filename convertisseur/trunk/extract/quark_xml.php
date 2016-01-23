@@ -21,22 +21,24 @@ function convertir_extraction_quark_xml($c) {
 function extracteur_preparer_insertion($item){
 	
 	$texte = "" ;
-	
-	if($item['surtitre'])
-		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
+	$champs_article = array("surtitre", "titre", "chapo");
 
-	if($item['titre'])
-		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
-	
-	if($item['chapo'])
-		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
+	# Champs articles
+	foreach($champs_article as $champ)
+		if($champ){
+			$texte .= "<ins class='$champ'>" . trim($item[$champ]) . "</ins>\n\n" ;
+			unset($item[$champ]);
+		}
 
-	if($item['auteurs'])
-		$texte .= "\n\n@@AUTEUR\n\n" . trim($item['auteurs']) . "\n\n" ;
-
-	if($item['signature'])
-		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['signature']) . "\n\n" ;
-
+	# autres champs
+	foreach($item as $k => $v)	
+		if($k != "texte")
+			if(is_array($v))
+				$texte .= "\n\n@@" . strtoupper($k) . "\n" . trim(join(",", $v)) . "\n\n" ;
+			else
+				$texte .= "\n\n@@" . strtoupper($k) . "\n" . trim($v) . "\n\n" ;
+				
+	# texte
 	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
 	
 	return $texte ;
@@ -86,7 +88,7 @@ function convertir_quark_xml($c) {
 				$paragraphe = extraire_balise($p, "PARAGRAPH");
 				$type = extraire_attribut($paragraphe, "PARASTYLE");
 				$texte = textebrut($paragraphe);
-				$item["styles"][$type] = 1 ;
+				$tech["styles"][$type] = 1 ;
 				
 				// Légende
 				if(preg_match("/Légende-Photo/", $type)){
@@ -127,7 +129,7 @@ function convertir_quark_xml($c) {
 					continue ;
 					
 				// init des styles
-				$item["styles"][$type] = 1 ;
+				$tech["styles"][$type] = 1 ;
 
 				// inserer des traitements perso, dans mes_fonctions
 				// NDL, coupures, etc avec styles hors spip de base.
@@ -223,14 +225,15 @@ function convertir_quark_xml($c) {
 	
 	// ajouter les notes
 	
-	if($item["notes"])
+	if($item["notes"]){
 		$item["texte"] = $item["texte"] . "[[<>\n" . $item["notes"] ."]]" . "\n" ;
+		unset($item["notes"]) ;
+	}
 	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
 	
-	$item["textebrut"] = textebrut($u);
-		
-	$item["xml"] = htmlspecialchars($u) ;
+	//$item["textebrut"] = textebrut($u);	
+	//$item["xml"] = htmlspecialchars($u) ;
 
 	//$item["xml"] = $u ;
 
