@@ -56,7 +56,7 @@ function critere_mesfavoris_dist($idb,&$boucles,$crit){
 function mesfavoris_critere_where($primary,$id_table,$table_objet,$objet,$type){
 	$in = "sql_in('$primary', prepare_mesfavoris($objet,$type), '')";
 	$type1 = "mesfavoris_definir_type($type)";
-	return "$type1 ? array($type1,'$id_table.$primary','('.sql_get_select('zzza.$primary','$table_objet as zzza',$in,'','','','',\$connect).')'):''";
+	return "$type1 ? array($type1,'$id_table.$primary','(SELECT * FROM('.sql_get_select('zzza.$primary','$table_objet as zzza',$in,'','','','',\$connect).') AS subquery)'):''";
 }
 
 function mesfavoris_definir_type($type){
