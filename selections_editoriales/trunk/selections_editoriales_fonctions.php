@@ -17,7 +17,7 @@ function critere_SELECTIONS_orphelins_dist($idb, &$boucles, $crit) {
 	$not = $crit->not?"":"NOT";
 
 	$select = sql_get_select("DISTINCT id_selection","spip_selections_liens as oooo");
-	$where = "'".$boucle->id_table.".id_selection $not IN ($select)'";
+	$where = "'".$boucle->id_table.".id_selection $not IN (SELECT * FROM($select) AS subquery)'";
 	if ($cond){
 		$_quoi = '@$Pile[0]["orphelins"]';
 		$where = "($_quoi)?$where:''";
