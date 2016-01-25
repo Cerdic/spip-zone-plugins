@@ -26,17 +26,17 @@
 			<div class='editer saisie_email_message obligatoire[ (#ENV*{erreurs}|table_valeur{email_message}|oui)erreur]'>
 				<label for="email_message#ENV{id}"><:entree_adresse_email:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_message})</span>]
-				<input type="text" class="text" name="email_message" id="email_message#ENV{id}" value="#ENV{email_message}" size="30" placeholder="<:entree_adresse_email:>" />
+				<input type="text" class="text" name="email_message" id="email_message#ENV{id}" value="#ENV{email_message}" size="30" [(#HTML5) placeholder="<:entree_adresse_email:>]" />
 			</div>
 			<div class='editer saisie_sujet_message obligatoire[ (#ENV*{erreurs}|table_valeur{sujet_message}|oui)erreur]'>
 				<label for="sujet_message#ENV{id}"><:form_prop_sujet:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sujet_message})</span>]
-				<input type="text" class="text" name="sujet_message" id="sujet_message#ENV{id}" value="#ENV{sujet_message}" size="30" placeholder="<:form_prop_sujet:>"  />
+				<input type="text" class="text" name="sujet_message" id="sujet_message#ENV{id}" value="#ENV{sujet_message}" size="30" [(#HTML5) placeholder="<:form_prop_sujet:>]"  />
 			</div>
 			<div class='editer saisie_texte_message obligatoire[ (#ENV*{erreurs}|table_valeur{texte_message}|oui)erreur]'>
 				<label for="texte_message#ENV{id}"><:info_texte_message:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_message})</span>]
-				<textarea name="texte_message" id="texte_message#ENV{id}" rows="8" cols="60" placeholder="<:info_texte_message:>" >#ENV{texte_message}</textarea>
+				<textarea name="texte_message" id="texte_message#ENV{id}" rows="8" cols="60" [(#HTML5) placeholder="<:info_texte_message:>]" >#ENV{texte_message}</textarea>
 			</div>
 		</div>
 	</fieldset>
