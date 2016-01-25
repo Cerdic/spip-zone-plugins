@@ -14,8 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('base/abstract_sql');
 include_spip('inc/config');
 
-function formulaires_editer_titre_logo_charger_dist($objet, $id_objet, $retour = '', $options = array())
-{
+function formulaires_editer_titre_logo_charger_dist($objet, $id_objet, $retour = '', $options = array()) {
+    
     $exec = (_request('exec')) ? _request('exec') : '';
     $objet = objet_type($objet);
     $table_objet = table_objet_sql($objet);
@@ -57,27 +57,25 @@ function formulaires_editer_titre_logo_charger_dist($objet, $id_objet, $retour =
     }
 
     $valeurs = array(
-        'objet' => $objet,
-        'id_objet' => $id_objet,
+        'objet'     => $objet,
+        'id_objet'  => $id_objet,
         'titre_logo' => $titre_logo,
         'descriptif_logo' => $descriptif_logo,
         'exec' => $exec,
-        'logo_on' => $options['logo_on'],
+        //'logo_on' => $options['logo_on'],
         '_options' => $options,
         );
 
     return $valeurs;
 }
 
-function formulaires_editer_titre_logo_verifier_dist($objet, $id_objet, $retour = '', $options = array())
-{
+function formulaires_editer_titre_logo_verifier_dist($objet, $id_objet, $retour = '', $options = array()) {
     $erreurs = array();
 
     return $erreurs;
 }
 
-function formulaires_editer_titre_logo_traiter_dist($objet, $id_objet, $retour = '', $options = array())
-{
+function formulaires_editer_titre_logo_traiter_dist($objet, $id_objet, $retour = '', $options = array()) {
     $res = array();
     $table_objet = table_objet_sql($objet);
     $titre_logo = _request('titre_logo');
