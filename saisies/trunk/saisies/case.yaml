@@ -34,6 +34,21 @@ options:
         options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'valeur_oui'
+          label: '<:saisies:option_valeur_oui_label:>'
+          explication: '<:saisies:option_valeur_oui_explication:>'
+          size: 50
+          defaut: 'on'
+      -
+        saisie: 'input'
+        options:
+          nom: 'valeur_non'
+          label: '<:saisies:option_valeur_non_label:>'
+          explication: '<:saisies:option_valeur_non_explication:>'
+          size: 50
   -
     saisie: 'fieldset'
     options:
