@@ -83,6 +83,7 @@ function nettoyage_xtag($c) {
 	$c = str_replace('<\\!f>', '~', $c);
 	$c = str_replace('<\\n>', '~', $c);
 	$c = str_replace('<\\!e>', ' ', $c);
+	$c = str_replace('<\\p>', '~', $c); # PUNCTUATION SPACE
 	$c = str_replace('<\\!p>', '~', $c); # NON BREAKING PUNCTUATION SPACE
 
 	// un <parastyle...> = un paragraphe
