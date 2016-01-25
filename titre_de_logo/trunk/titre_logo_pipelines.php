@@ -26,8 +26,6 @@ function titre_logo_recuperer_fond($flux) {
 		$objet = $flux["args"]["contexte"]["objet"];
 		$editable = $flux["args"]["contexte"]["_options"]["editable"];
 		
-		print_r($id_objet, $objet, $editable);
-		
 		if ($editable) {
 			
 			$objets_autorises = lire_config('titre_logo/objets_autorises');
