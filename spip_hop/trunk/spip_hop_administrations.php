@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin spip_hop
  *
  * @plugin     spip_hop
- * @copyright  2015
+ * @copyright  2015-2016
  * @author     Pierre Miquel
  * @licence    GNU/GPL
  * @package    SPIP\spip_hop\Installation
