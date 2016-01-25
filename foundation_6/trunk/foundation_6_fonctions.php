@@ -90,7 +90,7 @@ function balise_BOUTON_ACTION($p){
  */
 function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title = '', $callback = '') {
 	if ($confirm) {
-		$confirm = 'confirm(\"' . attribut_html($confirm) . '\")';
+		$confirm = 'confirm("' . attribut_html($confirm) . '")';
 		if ($callback) {
 			$callback = "$confirm?($callback):false";
 		} else {
