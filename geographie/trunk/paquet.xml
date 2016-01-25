@@ -14,8 +14,8 @@
 	
 	<licence>GNU/GPL</licence>
 	
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/geographie.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/geographie.php" />
+	<!--pipeline nom="declarer_tables_auxiliaires" inclure="base/geographie.php" /-->
 	<pipeline nom="lister_tables_noexport" inclure="base/geographie.php" /> 
-	<pipeline nom="rechercher_liste_des_champs" inclure="geographie_pipelines.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/geographie.php" /> 
-	<pipeline nom="declarer_tables_principales" inclure="base/geographie.php" /> 
 </paquet>

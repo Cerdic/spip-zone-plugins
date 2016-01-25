@@ -1,73 +1,18 @@
 <?php
-#include_spip('base/serial');
-
-function geographie_declarer_tables_principales($tables_principales){
-	$spip_geo_pays = array(
-			"id_pays"	=> "smallint NOT NULL",
-			"code"	=> "varchar(2) default '' NOT NULL",
-			"nom"	=> "text DEFAULT '' NOT NULL",
-	);
-	$spip_geo_pays_key = array(
-			"PRIMARY KEY"		=> "id_pays"
-	);
-	$spip_geo_regions = array(
-			"id_region"	=> "smallint NOT NULL",
-			"id_pays"	=> "smallint NOT NULL",
-			"nom"	=> "tinytext DEFAULT '' NOT NULL",
-	);
-	$spip_geo_regions_key = array(
-			"PRIMARY KEY"		=> "id_region"
-	);
-	$spip_geo_departements = array(
-			"id_departement"	=> "smallint NOT NULL",
-			"abbr"	=> "varchar(5) default '' NOT NULL",
-			"id_region"	=> "smallint NOT NULL",
-			"nom"	=> "tinytext DEFAULT '' NOT NULL",
-	);
-	$spip_geo_departements_key = array(
-			"PRIMARY KEY"		=> "id_departement"
-	);
-
-	$spip_geo_arrondissements = array(
-			"id_arrondissement"	=> "bigint(21) NOT NULL",
-			"id_departement"	=> "smallint NOT NULL",
-			"nom"	=> "tinytext DEFAULT '' NOT NULL",
-			"id_commune"	=> "bigint(21) NOT NULL",
-			"population"	=> "integer DEFAULT 0",
-			"superficie"	=> "integer DEFAULT 0",
-			"densite"	=> "integer DEFAULT 0",
-			"nb_cantons"	=> "integer DEFAULT 0",
-			"nb_communes"	=> "integer DEFAULT 0",
-	);
-	$spip_geo_arrondissements_key = array(
-			"PRIMARY KEY"		=> "id_arrondissement"
-	);
-
-	$spip_geo_communes = array(
-			"id_commune"	=> "bigint(21) NOT NULL",
-			"insee"	=> "char(6) default '' NOT NULL",
-			"id_departement"	=> "smallint NOT NULL",
-			"id_pays"	=> "smallint NOT NULL",
-			"code_postal"	=> "char(5) default '' NOT NULL",
-			"nom"	=> "tinytext DEFAULT '' NOT NULL",
-			"longitude"	=> "varchar(15) default '' NOT NULL",
-			"latitude"	=> "varchar(15) default '' NOT NULL",
-	);
-	$spip_geo_communes_key = array(
-			"PRIMARY KEY"		=> "id_commune",
-			"INDEX insee"		=> "insee",
-			"INDEX id_pays"		=> "id_pays"
-	);
-
-	$tables_principales['spip_geo_pays'] = array('field'=>&$spip_geo_pays,'key'=>$spip_geo_pays_key);
-	$tables_principales['spip_geo_regions'] = array('field'=>&$spip_geo_regions,'key'=>$spip_geo_regions_key);
-	$tables_principales['spip_geo_departements'] = array('field'=>&$spip_geo_departements,'key'=>$spip_geo_departements_key);
-	$tables_principales['spip_geo_arrondissements'] = array('field'=>&$spip_geo_arrondissements,'key'=>$spip_geo_arrondissements_key);
-	$tables_principales['spip_geo_communes'] = array('field'=>&$spip_geo_communes,'key'=>$spip_geo_communes_key);
-
-	return $tables_principales;
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
 
+/**
+ * Déclaration des alias de tables et filtres automatiques de champs
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interfaces
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function geographie_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['geo_pays'] = 'geo_pays';
 	$interface['table_des_tables']['geo_regions'] = 'geo_regions';
@@ -75,10 +20,130 @@ function geographie_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['geo_arrondissements'] = 'geo_arrondissements';
 	$interface['table_des_tables']['geo_communes'] = 'geo_communes';
 
-
 	return $interface;
 }
 
+/**
+ * Déclaration des objets éditoriaux
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function geographie_declarer_tables_objets_sql($tables) {
+	$tables['spip_geo_pays'] = array(
+		'type' => 'geo_pays',
+		'principale' => 'oui', 
+		'table_objet_surnoms' => array('geo_pay', 'geopay', 'geopays'), // table_objet('geopays') => 'geo_pays' 
+		'field'=> array(
+			'id_pays' => 'smallint NOT NULL',
+			'code'    => 'varchar(2) default "" NOT NULL',
+			'nom'     => 'text DEFAULT "" NOT NULL',
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_pays',
+		),
+		'titre' => 'nom AS titre, "" AS lang',
+		'champs_editables'  => array(''),
+		'champs_versionnes' => array(''),
+		'rechercher_champs' => array('code' => 10, 'nom' => 8),
+		'tables_jointures'  => array(),
+	);
+	
+	$tables['spip_geo_regions'] = array(
+		'type' => 'geo_region',
+		'principale' => 'oui', 
+		'table_objet_surnoms' => array('georegion'),
+		'field'=> array(
+			'id_region' => 'smallint NOT NULL',
+			'id_pays'   => 'smallint NOT NULL',
+			'nom'       => 'tinytext DEFAULT "" NOT NULL',
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_region',
+		),
+		'titre' => 'nom AS titre, "" AS lang',
+		'champs_editables'  => array(''),
+		'champs_versionnes' => array(''),
+		'rechercher_champs' => array('nom' => 10),
+		'tables_jointures'  => array(),
+	);
+	
+	$tables['spip_geo_departements'] = array(
+		'type' => 'geo_departement',
+		'principale' => 'oui', 
+		'table_objet_surnoms' => array('geodepartement'),
+		'field'=> array(
+			'id_departement' => 'smallint NOT NULL',
+			'abbr'           => 'varchar(5) default "" NOT NULL',
+			'id_region'      => 'smallint NOT NULL',
+			'nom'            => 'tinytext DEFAULT "" NOT NULL',
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_departement',
+		),
+		'titre' => 'nom AS titre, "" AS lang',
+		'champs_editables'  => array(''),
+		'champs_versionnes' => array(''),
+		'rechercher_champs' => array('nom' => 10, 'abbr' => 5),
+		'tables_jointures'  => array(),
+	);
+	
+	$tables['spip_geo_arrondissements'] = array(
+		'type' => 'geo_arrondissement',
+		'principale' => 'oui', 
+		'table_objet_surnoms' => array('geoarrondissement'),
+		'field'=> array(
+			'id_arrondissement' => 'bigint(21) NOT NULL',
+			'id_departement'    => 'smallint NOT NULL',
+			'nom'               => 'tinytext DEFAULT "" NOT NULL',
+			'id_commune'        => 'bigint(21) NOT NULL',
+			'population'        => 'integer DEFAULT 0',
+			'superficie'        => 'integer DEFAULT 0',
+			'densite'           => 'integer DEFAULT 0',
+			'nb_cantons'        => 'integer DEFAULT 0',
+			'nb_communes'       => 'integer DEFAULT 0',
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_arrondissement',
+		),
+		'titre' => 'nom AS titre, "" AS lang',
+		'champs_editables'  => array(''),
+		'champs_versionnes' => array(''),
+		'rechercher_champs' => array('nom' => 10),
+		'tables_jointures'  => array(),
+	);
+	
+	$tables['spip_geo_communes'] = array(
+		'type' => 'geo_commune',
+		'principale' => 'oui', 
+		'table_objet_surnoms' => array('geocommune'),
+		'field'=> array(
+			'id_commune'      => 'bigint(21) NOT NULL',
+			'insee'           => 'char(6) default "" NOT NULL',
+			'id_departement'  => 'smallint NOT NULL',
+			'id_pays'         => 'smallint NOT NULL',
+			'code_postal'     => 'char(5) default "" NOT NULL',
+			'nom'             => 'tinytext DEFAULT "" NOT NULL',
+			'longitude'       => 'varchar(15) default "" NOT NULL',
+			'latitude'        => 'varchar(15) default "" NOT NULL',
+		),
+		'key' => array(
+			'PRIMARY KEY'   => 'id_commune',
+			'INDEX insee'   => 'insee',
+			'INDEX id_pays' => 'id_pays'
+		),
+		'titre' => 'nom AS titre, "" AS lang',
+		'champs_editables'  => array(''),
+		'champs_versionnes' => array(''),
+		'rechercher_champs' => array('nom' => 10, 'code_postal' => 5),
+		'tables_jointures'  => array(),
+	);
+	
+	return $tables;
+}
 
 function geographie_lister_tables_noexport($liste){
 	$liste[] = 'spip_geo_communes';
@@ -86,12 +151,13 @@ function geographie_lister_tables_noexport($liste){
 	$liste[] = 'spip_geo_departements';
 	$liste[] = 'spip_geo_regions';
 	$liste[] = 'spip_geo_pays';
+	
 	return $liste;
 }
 
 global $IMPORT_tables_noerase;
-$IMPORT_tables_noerase[]='spip_geo_communes';
-$IMPORT_tables_noerase[]='spip_geo_arrondissements';
-$IMPORT_tables_noerase[]='spip_geo_departements';
-$IMPORT_tables_noerase[]='spip_geo_regions';
-$IMPORT_tables_noerase[]='spip_geo_pays';
+$IMPORT_tables_noerase[] = 'spip_geo_communes';
+$IMPORT_tables_noerase[] = 'spip_geo_arrondissements';
+$IMPORT_tables_noerase[] = 'spip_geo_departements';
+$IMPORT_tables_noerase[] = 'spip_geo_regions';
+$IMPORT_tables_noerase[] = 'spip_geo_pays';
