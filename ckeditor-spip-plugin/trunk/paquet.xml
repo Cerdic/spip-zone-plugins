@@ -1,9 +1,9 @@
 <paquet
 	prefix="ckeditor"
 	categorie="edition"
-	version="0.16.18"
+	version="0.16.19"
 	etat="stable"
-	compatibilite="[2.0.9;3.0.*]"
+	compatibilite="[2.0.9;3.1.*]"
 	logo="images/ckspip-logo.png"
 	documentation="http://contrib.spip.net/CKeditor-3-0"
 	schema="1.0.0" 
