@@ -1,10 +1,10 @@
 <paquet
 	prefix="titre_logo"
 	categorie="edition"
-	version="3.0.2"
+	version="3.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	schema="1.0.0"
+	schema="3.0.3"
 	logo="prive/themes/spip/images/image-32.png"
 	documentation="http://contrib.spip.net/Titre-de-logo-v2"
 >
