@@ -136,10 +136,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Type du champ',
 	'option_type_password' => 'Texte masqué lors de la saisie (ex : mot de passe)',
 	'option_type_text' => 'Normal',
-	'option_valeur_oui_label' => 'Valeur oui',
-	'option_valeur_oui_explication' => 'Valeur postée si le checkbox est sélectionné',
+	'option_valeur_non_explication' => 'Valeur postée si le checkbox n’est pas sélectionné',
 	'option_valeur_non_label' => 'Valeur non',
-	'option_valeur_non_explication' => 'Valeur postée si le checkbox n\'est pas sélectionné',
+	'option_valeur_oui_explication' => 'Valeur postée si le checkbox est sélectionné',
+	'option_valeur_oui_label' => 'Valeur oui',
 
 	// S
 	'saisie_auteurs_explication' => 'Permet de sélectionner un ou plusieurs auteurs',
