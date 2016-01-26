@@ -10,6 +10,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC')) 
+		define('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC', true);
+
+
 function etiquettes_produire_id($groupe, $type_objet='', $id_objet=''){
 
 	$elements = compact("groupe", "type_objet", "id_objet");
