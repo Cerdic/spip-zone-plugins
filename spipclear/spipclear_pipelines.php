@@ -16,10 +16,6 @@ function spipclear_styliser($flux) {
 	and in_array($fond, array('article', 'rubrique', 'sommaire'))) {
 		$ext = $flux['args']['ext'];
 
-		if ($squelette = test_squelette_spipclear($fond, $ext)) {
-			$flux['data'] = $squelette;
-		}
-
 		// cas du sommaire
 		if ($fond == 'sommaire') {
 			// uniquement si configuration de spipClear pour le sommaire
