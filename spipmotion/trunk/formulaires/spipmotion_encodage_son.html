@@ -1,11 +1,21 @@
 #SET{meta,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
 #SET{meta_compil_config,#GET{meta}|unserialize|table_valeur{configuration}}
 <div id="encodage_#VALEUR" class="spipmotion_profil">
-	<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
+	<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>#SET{acodecs,#ARRAY}
+	[(#ENV{valeur}|=={m4a}|oui)
+	[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
+		#SET{acodecs,#GET{acodecs}|push{libfaac}}]
+	[(#VAL{'--enable-libfdk-aac'}|in_array{#GET{meta_compil_config}}|oui)
+		#SET{acodecs,#GET{acodecs}|push{libfdk_aac}}]]
 	<ul>
+		[(#GET{acodecs}|count|>{0}|oui)
+			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
+				label=<:spipmotion:label_codec_son:>,
+				cacher_option_intro=oui,
+				datas=#GET{acodecs}})]]
 		[(#SAISIE{selection,frequence_audio_#ENV{valeur},
 			label=<:spipmotion:frequence_audio:>,
-			defaut=22050,
+			defaut=44100,
 			cacher_option_intro=oui,
 			datas=#ARRAY{
 				11025,11025 Hz,
@@ -60,7 +70,7 @@
 		[(#GET{vorbis}|non)
 			[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
 				label=<:spipmotion:bitrate_audio:>,
-				defaut=64,
+				defaut=128,
 				cacher_option_intro=oui,
 				datas=#ARRAY{
 					32,32 kbps,

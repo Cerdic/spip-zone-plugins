@@ -5,9 +5,9 @@
 		<div class="explication"><:spipmotion:explications_extensions_sortie:></div>
 		<ul>
 			<li>
-				#SET{audio_extensions_sortie,#LISTE{mp3,ogg}}
+				#SET{audio_extensions_sortie,#LISTE{m4a,mp3,ogg}}
 				<label for="fichiers_audios_sortie"><:spipmotion:extensions_audio:></label>
-				<select name="fichiers_audios_sortie[]" multiple="multiple" size="2">
+				<select name="fichiers_audios_sortie[]" multiple="multiple" size="3">
 					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}{par extension}>
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}

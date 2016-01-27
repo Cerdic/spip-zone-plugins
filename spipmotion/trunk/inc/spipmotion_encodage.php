@@ -104,8 +104,6 @@ function encodage($source,$options){
 
 	$extension_attente = $options['format'];
 
-	$encodeur = "ffmpeg";
-
 	include_spip('inc/documents');
 	$chemin = get_spip_doc($source['fichier']);
 	$fichier = basename($source['fichier']);
@@ -170,7 +168,7 @@ function encodage($source,$options){
 		$codec_audio = lire_config("spipmotion/acodec_$extension_attente");
 		if($extension_attente == "mp3")
 			$codec_audio = "libmp3lame";
-		else if(in_array($extension_attente,array('ogg','oga')))
+		else if(in_array($extension_attente,array('ogg','oga')) || $codec_audio == "vorbis")
 			$codec_audio = "libvorbis";
 		else if(!$codec_audio){
 			if($extension_attente == 'ogv')
@@ -178,13 +176,7 @@ function encodage($source,$options){
 		}
 		$acodec = $codec_audio ? "--acodec ".$codec_audio :'';
 
-		/**
-		 * Forcer libvorbis si on utilise ffmpeg
-		 */
-		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis"))
-			$acodec = '--acodec libvorbis';
-
-		if(in_array($codec_audio,array('vorbis','libvorbis'))){
+		if(in_array($codec_audio,array('libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg = "--audioquality $qualite";
 		}else{

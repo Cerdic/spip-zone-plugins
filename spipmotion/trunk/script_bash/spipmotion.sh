@@ -42,7 +42,7 @@ Exemples :
 ## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg ##
 #########################################################################################
 "
-		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4 mov m4v webm"
+		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4 m4a mov m4v webm"
 		mauvaisarg="SPIPmotion : argument ${1} non reconnu
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 		pasfichierentree="SPIPmotion : aucun fichier source n'a été spécifié
@@ -80,7 +80,7 @@ while test -n "${1}"; do
 		shift;;
 		--s) sortie="${2}"
 			case "$sortie" in
-			*".mp3"|*".flac"|*".flv"|*".mp4"|*".ogg"*|".oga"|*".ogv"|*".m4v"|*".webm");;
+			*".mp3"|*".m4a"|*".flac"|*".flv"|*".mp4"|*".ogg"*|".oga"|*".ogv"|*".m4v"|*".webm");;
 			*) echo "$formatsortie";
 			exit 1;;
 			esac
@@ -200,7 +200,7 @@ spipmotion_encodage_ffmpeg (){
 	############# ON UTILISE FFMPEG ################
 	
 	case "$sortie" in
-	  *".mp3"|*".flac"|*".ogg"|*".oga" )
+	  *".mp3"|*".flac"|*".ogg"|*".oga"|*".m4a" )
 	  	echo "SPIPmotion v$VERSION
 	
 	On encode un son
