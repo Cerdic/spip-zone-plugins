@@ -55,6 +55,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
     include_spip("inc/syndic"); 
     include_spip("inc/getdocument"); 
     include_spip("inc/ajouter_documents");
+    include_spip("inc/renseigner_document");
     include_spip('inc/config');
 
     $log_html = "";
@@ -82,16 +83,22 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
       spip_log("partageur: ".$url_syndic);
           
       // Aller chercher les donnees du flux RSS et les analyser
-      $rss = recuperer_page($url_syndic, true);
+      if (function_exists('recuperer_url'))
+          $rss = recuperer_url($url_syndic);
+      else
+            $rss = recuperer_page($url_syndic,true);
+
       if (!$rss) {
         $log_html .= "<div style='color:red'>"._T('partageur:erreur_echec_syndication')."</div>";  
       } else {
-      
-              
 
-             
-        $articles = analyser_backend_partageur($rss);              
-        //----*************        
+
+          if (function_exists('recuperer_url')){
+              $rss = $rss['page'];
+          }
+
+        $articles = analyser_backend_partageur($rss);
+         //----*************        
         // Des articles dispo pour ce site ?
         if (is_array($articles)) { 
             foreach ($articles as $article) {
@@ -135,23 +142,23 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
                             $source = $_document['url'];
                             $titre = stripslashes($_document['titre']);                        
                             $desc =  stripslashes($_document['desc']);
-                                              
-                            // inspire de @ajouter_un_document() - inc/ajout_documents.php 
-                            if ($a = recuperer_infos_distantes($source)) { 
+                            $fonction_renseigner='renseigner_source_distante';
+                            if (!function_exists($fonction_renseigner))
+                                $fonction_renseigner='recuperer_infos_distantes';
+
+                            if ($a = $fonction_renseigner($source)) {
                             
-                                $type_image = $a['type_image'];
+
+                          			unset($a['mime_type']);
                           			unset($a['type_image']);
                           			unset($a['body']);
-                          			unset($a['mode']); //
-                          
+                          			unset($a['mode']);
                           			$a['date'] = 'NOW()';
                           			$a['distant'] = 'oui';
-                          			//$a['mode'] = 'document';
                           			$a['fichier'] = set_spip_doc($source);
                           			                          			
                           			$a['titre'] = $titre;     // infos partageur, recuperer via le flux
                           			$a['descriptif'] = $desc;
-                          			
                           			$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
                                  
                         		}                            

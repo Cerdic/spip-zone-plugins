@@ -36,13 +36,16 @@ function formulaires_editer_partageur_verifier_dist($id_partageur='new', $retour
   if (!_request('titre')) 
                          $erreurs['titre'] = _T('partageur:erreur_obligatoire');
   
-  if ((!_request('url_site')) OR (_request('url_site')=="http://www")) {
+  if ((!_request('url_site')) OR (_request('url_site')=="http://")) {
                          $erreurs['url_site'] = _T('partageur:erreur_obligatoire');
   } else {
       // "ping" si flux distant disponible
       include_spip('inc/distant');     
       $url = _request('url_site')."/spip.php?page=backend-partageur&id_article=1";
-    	$ping = recuperer_page($url);  
+      $fonction_recuperer='recuperer_url';
+      if (!function_exists('recuperer_url'))
+          $fonction_recuperer = 'recuperer_page';
+       $ping = $fonction_recuperer($url);
     	if (!$ping) {    		
     		 $erreurs['url_site'] = _T('partageur:erreur_flux_inconnu')."<br /><a href='$url'>$url</a>";
     	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'id_partageur!='.intval($id_partageur).' AND statut="publie" AND url_site='.sql_quote(_request('url_site'))))   
