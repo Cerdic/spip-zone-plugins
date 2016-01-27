@@ -1,7 +1,7 @@
 #SET{id,#ENV{id}}
 #SET{url, #CONFIG{prestashop_api/url}|replace{(https?://), $1#CONFIG{prestashop_api/cle}@}}
 
-<BOUCLE_ean13(DATA){si #ENV{id}|non}{source simplexml, #GET{url}/api/products?filter[ean13]=#ENV{ean13}}{datapath root/children/products/0/children/product/0/attributes}>
+<BOUCLE_ean13(DATA){si #ENV{id}|non}{source simplexml, #GET{url}/api/products?filter[ean13]=#ENV{ean13}&sort=[id_DESC]}{datapath root/children/products/0/children/product/0/attributes}>
 [(#CLE|=={id}|oui) #SET{id,#VALEUR} ]
 </BOUCLE_ean13>
 
