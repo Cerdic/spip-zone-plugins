@@ -43,14 +43,13 @@ function identifiants_declarer_tables_auxiliaires($tables) {
 	// IDENTIFIANTS
 	$tables['spip_identifiants'] = array(
 		'field'=> array(
-			"id_identifiant" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"identifiant"    => "VARCHAR (255) DEFAULT '' NOT NULL",
 			"objet"          => "VARCHAR (25) DEFAULT '' NOT NULL",
 			"id_objet"       => "bigint(21) DEFAULT '0' NOT NULL",
 			"maj"            => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"    => "id_identifiant, identifiant, objet, id_objet",
+			"PRIMARY KEY"    => "identifiant, objet, id_objet",
 		)
 	);
 

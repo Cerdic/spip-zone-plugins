@@ -1,12 +1,12 @@
 <paquet
 	prefix="identifiants"
 	categorie="divers"
-	version="1.0.3"
+	version="1.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/identifiants.png"
 	documentation=""
-	schema="1.0.1"
+	schema="1.0.2"
 >
 
 	<nom>Identifiants</nom>

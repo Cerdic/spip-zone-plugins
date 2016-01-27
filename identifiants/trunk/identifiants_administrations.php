@@ -38,6 +38,18 @@ function identifiants_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', "TABLE spip_identifiants ADD PRIMARY KEY (id_identifiant,identifiant,objet,id_objet)")
 	);
 
+	// suppression de la colonne `id_identifiant`, modification de la clé primaire
+	$maj['1.0.2'] = array(
+		// supprimer l'auto increment de id_identifiant
+		array('sql_alter', "TABLE spip_identifiants CHANGE id_identifiant id_identifiant int"),
+		// supprimer les clés primaires
+		array('sql_alter', "TABLE spip_identifiants DROP PRIMARY KEY"),
+		// supprimer la colonne `id_identifiant`
+		array('sql_alter', "TABLE spip_identifiants DROP COLUMN id_identifiant"),
+		// nouvelles clés primaires
+		array('sql_alter', "TABLE spip_identifiants ADD PRIMARY KEY (identifiant,objet,id_objet)")
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
