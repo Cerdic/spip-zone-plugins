@@ -487,7 +487,7 @@ function encodage($source,$options){
 				$rotation = "-filter:v transpose=1";
 				$infos_sup_normal .= " $rotation $metadatas";
 			}
-			if($vcodec == '--vcodec libx264'){
+			if($vcodec == '--vcodec libx264' || $acodec == '--acodec libfdk_aac'){
 				$infos_sup_normal .= ' -movflags faststart';
 			}
 			if(strlen($infos_sup_normal) > 1)
