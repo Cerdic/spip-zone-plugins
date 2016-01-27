@@ -4,6 +4,16 @@
 <BOUCLE_objets_selectionnes(DATA){liste #CONFIG{lim_objets}}>#SET{objets,#GET{objets}|push{#VALEUR}} #SET{nbre_col,#TOTAL_BOUCLE|moins{1}}</BOUCLE_objets_selectionnes>
 #SET{objets,#GET{objets}|array_flip}
 
+[(#GET{nbre_col}|in_array{#ARRAY{0,1,1,2,2,3}}|oui) 
+	#SET{width_rub,450}
+	#SET{width_obj,448}
+]
+
+[(#GET{nbre_col}|>{3}|oui) 
+	#SET{width_rub,320}
+	#SET{width_obj,580}
+]
+
 [(#REM) multilinguisme : pour les objets sélectionnés, récupérer le nom traduit et les afficher dans l'ordre alphabétique ]
 #SET{traductions,#ARRAY}<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}>[(#EDITABLE|oui)
 [(#SET{traductions,#GET{traductions}|array_merge{#ARRAY{#CLE,#TEXTE_OBJETS|_T}}})]
@@ -15,70 +25,43 @@
 [(#SET{type, #GET{traductions}|lim_type})]
 
 <style>
-input[type=checkbox].lim_hidden {display:none; }
-	span.entete { font-weight: bold; }
-	span.center { text-align: center; }
-	span.tab.rubrique {display:inline-block; width:320px; font-weight:bold; }
-	.sousrub span.tab.rubrique { margin-left:10px; width:310px; font-weight:normal; }
-	.sousrub .sousrub span.tab.rubrique { margin-left:20px; width:300px;}
-	.sousrub .sousrub .sousrub span.tab.rubrique { margin-left:30px; width:320px;}
-	span.check {display:inline-block; width:[(#VAL{62}|div{#GET{nbre_col}})%]; text-align: center;}
-
-	#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-	#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-
-	.formulaire_spip.formulaire_configurer_lim_logos,
-	.formulaire_spip.formulaire_configurer_lim_rubriques .choix label { vertical-align:middle; }
-	.formulaire_spip.formulaire_configurer_lim_rubriques div.secteur 	{ margin:0; padding:0; padding:5px 10px; border:1px solid #ddd; border-radius:5px; background-color:#fff; }
-	.formulaire_spip.formulaire_configurer_lim_rubriques div div		{ margin-bottom:5px; border-#ENV{left}:1px solid #ddd; }
-	.formulaire_spip.formulaire_configurer_lim_rubriques div div div	{ margin-bottom:0; border-#ENV{left}:1px solid #ddd; }
-	.formulaire_spip.formulaire_configurer_lim_rubriques div div		{ border:0; border-radius:0;}
-	.formulaire_spip.formulaire_configurer_lim_rubriques div.secteur 	{ margin-bottom:10px; }
-	.formulaire_spip.formulaire_configurer_lim_rubriques div.choix 				{ padding: 4px 10px; border:0; border-radius:0;}
-	.formulaire_spip.formulaire_configurer_lim_rubriques div.choix input[type='checkbox'] { margin:1px 0.3ex; vertical-align:middle; border:0;}
-	img.info_logo_site, img.forbidden 	{ vertical-align:middle; }
+	.tab.rubrique {display:inline-block; width:#GET{width_rub}px; font-weight:bold; }
+	.sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{15})px]; font-weight:normal; }
+	.sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{30})px]; }
+	.sousrub .sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{45})px]; }
+	.sousrub .sousrub .sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{60})px]; }
+	.check { display:inline-block; width:[(#GET{width_obj}|div{#GET{nbre_col}})px]; text-align: center;}
 </style>
 
-<div>
-	<div>
-		<span class="tab rubrique entete"></span>
-		<BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par valeur}>
-			<span class="check entete center">#VALEUR</span>
-		</BOUCLE_entete>
-	</div>
-	<div>
-		<BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
-			<div class='secteur'>
-				<span class="tab rubrique">#TITRE</span>
-				<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par valeur}>
-					[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
-				</BOUCLE_par_traduction1>
-			<B_enfants_rubriques>
+<div class="tab rubrique"></div>
+<BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par valeur}>
+	<div class="check entete center"><img src='#CHEMIN_IMAGE{#VALEUR-16.png}'><br>#VALEUR</div>
+</BOUCLE_entete>
+
+<BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
+	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
+	<div class='secteur'>
+		<div class="tab rubrique">#TITRE</div>
+		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par valeur}>
+			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
+		</BOUCLE_par_traduction1>
+		<B_enfants_rubriques>
 			<div class='sousrub'>
 			<BOUCLE_enfants_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
-			<div class=''>
-				<span class="tab rubrique">#TITRE</span><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par valeur}>
-				[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
-				</BOUCLE_par_traduction2><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
-			</div>
+				<div class=''>
+					<div class="tab rubrique">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par valeur}>
+					[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
+					</BOUCLE_par_traduction2><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
+				</div>
 			</BOUCLE_enfants_rubriques>
 			</div>
-			</B_enfants_rubriques>
-		</div>
-		</BOUCLE_titre_rubrique>
-
+		</B_enfants_rubriques>
 	</div>
-</div>
+</BOUCLE_titre_rubrique>
+
 
 
 <script type="text/javascript">/*<![CDATA[*/
-// jQuery("span.icon-on").on('click', function(){
-// 	jQuery(this).removeClass('icon-on').addClass('icon-off');
-// });
-// jQuery("span.icon-off").on('click',function(){
-// 	jQuery(this).removeClass('icon-off').addClass('icon-on');
-// });
-
 jQuery("span.lim_icon").on('click', function(){
 	if (jQuery(this).hasClass('icon-on')) {
 		jQuery(this).removeClass('icon-on').addClass('icon-off');
