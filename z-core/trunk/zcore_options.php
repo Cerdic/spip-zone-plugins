@@ -28,6 +28,22 @@ else {
 }
 
 /**
+ * Passe un chemin en URL absolue uniquement si non vide
+ * utilise pour l'insertion d'URL conditionnee a l'existence d'un fichier (favicon.ico par exemple)
+ *
+ * @param string $path
+ * @param string $base
+ * @return string
+ */
+function url_absolue_si($path, $base='') {
+	if (!$path) return "";
+	if (!function_exists('url_absolue')){
+		include_spip('inc/filtres_mini');
+	}
+	return url_absolue($path, $base);
+}
+
+/**
  * html Pour pouvoir masquer les logos sans les downloader en petit ecran
  * il faut le mettre dans un conteneur parent que l'on masque
  * http://timkadlec.com/2012/04/media-query-asset-downloading-results/
