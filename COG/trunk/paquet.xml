@@ -1,17 +1,16 @@
 <paquet
 	prefix="cog"
 	categorie="outil"
-	version="2.1.1"
+	version="2.2.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/cog-32.png"
-	schema="1.1"
+	schema="1.2"
 	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
 >
 
 	<nom>Code Officiel Géographique</nom>
 	<!-- Ajouter à la base de données les codes officiels géographiques définis par l'Institut national de la statistique et des études économiques -->
-
 
 	<auteur>Guillaume Wauquier</auteur>
 

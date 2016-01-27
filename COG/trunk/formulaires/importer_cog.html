@@ -9,10 +9,10 @@
 
 <ul>
 <li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-		<label for="fichier"><:cog:fichiers:></label>[
+		<label for="select_objet"><:cog:fichiers:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 		]<p class='explication'><:cog:choississez_le_fichier_a_importer:></p>
-	<select name='objet' [(#ENV{objet,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]>
+	<select id='select_objet' name='objet' [(#ENV{objet,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]>
 	<BOUCLE_fichier(POUR){tableau #ENV**{tab_objet}}>
 		<option value="#CLE"[(#ENV{objet}|=={#CLE}) selected="selected"] [(#VALEUR|table_valeur{fichier_manquant}|oui) disabled="disabled"]>[(#VALEUR|table_valeur{nom})] [(#VALEUR|table_valeur{fichier_manquant}|oui) (Fichier manquant)]</option>
 	</BOUCLE_fichier>

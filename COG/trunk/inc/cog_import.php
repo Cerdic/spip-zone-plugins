@@ -18,4 +18,3 @@ else {
 	}
 return $tab_fichier;
 }
-?>

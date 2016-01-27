@@ -10,18 +10,29 @@ $emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 foreach($tab_objet as &$objet)
 	{
 		$fichier_manquant=false;
+
 		$tab_fichier=cog_tab_fichier_telecharger($objet['fichier']);
+
 		foreach($tab_fichier as $fichier)
 		{
-			$infos_fichier=pathinfo($fichier);
-			$nom_fichier=$emplacement.$infos_fichier['filename'].'.'.$infos_fichier['extension'];
-			if($infos_fichier['extension']=='zip')
-				$nom_fichier=$emplacement.$infos_fichier['filename'].'.txt';
-			if(!file_exists($nom_fichier))
-				$fichier_manquant=true;
-			$nom_fichier=$emplacement.$infos_fichier['filename'].'.xls';
-			if(file_exists($nom_fichier))
-				$fichier_manquant=false;
+			$infos_fichier = pathinfo($fichier);
+			if(preg_match('`^http`i',$fichier)) {
+
+
+				$nom_fichier = $emplacement . $infos_fichier['filename'] . '.' . $infos_fichier['extension'];
+				if ($infos_fichier['extension'] == 'zip')
+					$nom_fichier = $emplacement . $infos_fichier['filename'] . '.txt';
+				if (!file_exists($nom_fichier))
+					$fichier_manquant = true;
+				$nom_fichier = $emplacement . $infos_fichier['filename'] . '.xls';
+				if (!file_exists($nom_fichier))
+					$fichier_manquant = true;
+			}
+			else{
+				$nom_fichier=realpath(_DIR_PLUGIN_COG.'/data').'/'.$infos_fichier['filename'] . '.txt';
+				if (!file_exists($nom_fichier))
+					$fichier_manquant = true;
+			}
 		}
 		$objet['fichier_manquant']=$fichier_manquant;
 	}
@@ -34,7 +45,7 @@ function formulaires_importer_cog_verifier_dist(){
 	include_spip('inc/config');
 	$tab_objet=cog_config_tab_fichier();
 	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
-
+	$erreurs=array();
 	if ($objet = _request('objet')) {
 		if (!isset($tab_objet[$objet])) {
 			$erreurs['fichier'] = _T('cog:fichier_incorrect');
@@ -55,10 +66,12 @@ function formulaires_importer_cog_verifier_dist(){
 			$extension = $infos_fichier['extension'];
 			if($extension =='zip')
 				$extension = 'txt';
+
 			$fichier=$infos_fichier['filename'].'.'.$extension;
-			if(!file_exists($emplacement.$fichier))
+			$emplacement_local=realpath(_DIR_PLUGIN_COG.'/data').'/';
+			if(!file_exists($emplacement.$fichier) && !file_exists($emplacement_local.$fichier))
 				$fichier=$infos_fichier['filename'].'.xls';
-			if (!file_exists($emplacement.$fichier)) {
+			if (!file_exists($emplacement.$fichier) && !file_exists($emplacement_local.$fichier)) {
 				$erreurs['fichier'] .= _T('cog:fichier_introuvable')." ".$emplacement.$infos_fichier['filename'].'.[txt|xls]';
 				$erreurs['message_erreur'] .= _T('cog:fichier_introuvable');
 			}
@@ -230,6 +243,7 @@ foreach($filtres as $filtre){
 	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	$message=  'Importation du fichier '.$objet."<br />";
 //	$message.= 'Emplacement du fichier : '.$emplacement."<br />";
+
 if(is_array($tab_objet[$objet]['fichier']))	{
 		$fichier_modele=$tab_objet[$objet]['fichier'][0];}
 else{
@@ -239,16 +253,20 @@ else{
 	$extension = $infos_fichier['extension'];
 	if($extension =='zip')
 		$extension = 'txt';
-if(!file_exists($fichier_modele=$emplacement.$infos_fichier['filename'].'.'.$extension)) {
-	if(file_exists($emplacement.$infos_fichier['filename'].'.xls'))
-		{
-		foreach($tab_objet[$objet]['xls'] as $extraction)
-		if(!file_exists($emplacement.$extraction['fichier_csv'])){
-			conversion_fichier_excel($emplacement.$infos_fichier['filename'].'.xls',$emplacement.$extraction['fichier_csv'],$extraction['onglet'],$extraction['colonnes'],$extraction['ligne_depart'],$extraction['ligne_arrive']);
+
+if(!file_exists($fichier_modele=realpath(_DIR_PLUGIN_COG.'/data').'/'.$infos_fichier['filename'].'.'.$extension)	){
+
+	if(!file_exists($fichier_modele=$emplacement.$infos_fichier['filename'].'.'.$extension)) {
+		if(file_exists($emplacement.$infos_fichier['filename'].'.xls'))
+			{
+			foreach($tab_objet[$objet]['xls'] as $extraction)
+			if(!file_exists($emplacement.$extraction['fichier_csv'])){
+				conversion_fichier_excel($emplacement.$infos_fichier['filename'].'.xls',$emplacement.$extraction['fichier_csv'],$extraction['onglet'],$extraction['colonnes'],$extraction['ligne_depart'],$extraction['ligne_arrive']);
+				}
+				$fichier_modele=$emplacement.$tab_objet[$objet]['xls'][objet_type($objet)]['fichier_csv'];
 			}
-			$fichier_modele=$emplacement.$tab_objet[$objet]['xls'][objet_type($objet)]['fichier_csv'];
-		}
-		
+
+	}
 }
 $table=table_objet_sql($objet);
 $tab_description=description_table($table);
@@ -360,7 +378,7 @@ if($pointeur_fichier<>0){
 				
 
 				$super_cle=array();
-				$super_cles=='';
+				$super_cles='';
 				foreach($cle_unique as $cle){
 					$super_cle[]=$tab_value[$cle];
 					$super_cles.=$tab_value[$cle];
@@ -439,15 +457,10 @@ $fichier=copie_locale($source);
 		  PCLZIP_OPT_PATH, _tmp_dir,
 		  PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
 		  );
-	$contenu = verifier_compactes($archive);
-	$titrer = _request('titrer') == 'on';
-	foreach ($contenu as $fichier => $size) {
-	$f = basename($fichier);
-	$x = $ajouter_documents(_tmp_dir. $f, $f,
-	$type, $id, $mode, $id_document, $actifs, $titrer);
-	}
+	//$contenu = verifier_compactes($archive);
+
 	effacer_repertoire_temporaire(_tmp_dir);
-	return $x;
+	return true;
 }
 unset($filterSubset);
 

@@ -162,7 +162,7 @@ $tables['spip_cog_departements'] = array(
 	);
 
 
-//////////   Région   //////////
+//////////   Régions   //////////
 
 
 
@@ -197,8 +197,42 @@ $tables['spip_cog_regions'] = array(
 	);
 
 
+//////////   Anciennes Régions   //////////
+/*
+
+	$tab_champs=array('code',
+		'chef_lieu','type_charniere','nom_majuscule','nom');
+
+	$tables['spip_cog_regions_anciennes'] = array(
+
+		'type' => 'cog_region_ancienne',
+		'principale' => "oui",
+		'table_objet_surnoms' => array('cogregion'), // table_objet('cog_region') => 'cog_regions'
+		'field'=> array(
+			"id_cog_region_ancienne"	=> "INT(10) UNSIGNED NOT NULL COMMENT 'Identifiant du region'",
+			"code"=> "TINYINT ( 2 )  UNSIGNED NOT NULL	COMMENT 'Code région'",
+			"chef_lieu"=> "VARCHAR(5) NOT NULL  DEFAULT '0'	COMMENT 'Code de la commune chef-lieu'",
+			"type_charniere"=> "TINYINT( 1 ) UNSIGNED NOT NULL		COMMENT 'Type de nom en clair'",
+			"nom_majuscule"=> "VARCHAR( 70 ) NOT NULL	COMMENT 'Nom en clair (majuscules)'",
+			"nom"=> "VARCHAR( 70 ) NOT NULL COMMENT 'Nom en clair (typographie riche)'",
+			"region2016"=> "TINYINT ( 2 )  UNSIGNED NOT NULL	COMMENT 'Code région 2016'",
+			"maj"                => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY" 	=> "id_cog_region_ancienne",
+			"KEY code" 	=> "code"
+		),
+		'champs_editables' => $tab_champs,
+		'champs_versionnes' => $tab_champs,
+		'rechercher_champs' => array(
+			'nom' => 8, 'code' => 5
+		),
+		'titre' => "nom AS titre, '' as lang",
+		'page'=>''
+	);
 
 
+*/
 
 //////////   EPCI  //////////
 
@@ -379,6 +413,7 @@ $tables_interfaces['table_des_tables']['cog_epcis'] = 'cog_epcis';
 $tables_interfaces['table_des_tables']['cog_arrondissements'] = 'cog_arrondissements';
 $tables_interfaces['table_des_tables']['cog_departements'] = 'cog_departements';
 $tables_interfaces['table_des_tables']['cog_regions'] = 'cog_regions';
+$tables_interfaces['table_des_tables']['cog_regions_anciennes'] = 'cog_regions_anciennes';
 $tables_interfaces['tables_jointures']['spip_cog_communes'][] = 'cog_communes_liens';
 $tables_interfaces['tables_jointures']['spip_cog_communes_liens'][] = 'cog_communes';
 $tables_interfaces['tables_jointures']['spip_articles'][] = 'cog_communes_liens';

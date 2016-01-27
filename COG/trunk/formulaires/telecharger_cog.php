@@ -31,9 +31,6 @@ function formulaires_telecharger_cog_verifier_dist(){
 	include_spip('inc/config');
 	$erreurs = array();
 	$tab_objet=cog_config_tab_fichier();
-	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
-	// login trop court ou existant
-	$objet = array();
 	$objet = _request('objet');
 	if (count($objet) < 1) {
 		$erreurs['message_erreur'] = _T('cog:erreur_choix');
@@ -57,6 +54,7 @@ $tab_objet=cog_config_tab_fichier();
 $objet = array();
 $tab_fichier_telecharger=array();
 
+$objet_nom="";
 $objet =_request('objet');
 for($i = 0; $i < count($objet); $i++){
 	$objet_nom =$objet_nom.$objet[$i].' ';

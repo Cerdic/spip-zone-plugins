@@ -26,6 +26,7 @@ if(lire_config('cog/afficher_bloc_cog'))
 
 		$tab_rubriques_cog=lire_config("cog/rubriques_cog",array(0,-1));
 		$id_objet = $flux['args']["id_".$objet];
+		$id_rubriques="";
 		switch($objet)
 		{
 		case 'article':
