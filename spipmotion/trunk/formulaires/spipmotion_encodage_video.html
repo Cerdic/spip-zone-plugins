@@ -71,6 +71,8 @@
 				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
 			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libfdk-aac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfdk_aac}}]
 			[(#VAL{'--enable-libspeex'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libspeex}}]
 
@@ -85,6 +87,8 @@
 				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
 			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libfdk-aac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfdk_aac}}]
 			[(#VAL{'--enable-libx264'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libx264}}
 				#SET{presets_qualite,#LISTE{medium,placebo,ultrafast,superfast,faster,fast,slow,slower,veryslow}}]
