@@ -11,6 +11,9 @@
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+function mediaspip_player_autoriser(){}
+
 /**
  * Surcharges des autorisations du plugin medias 
  * depuis http://zone.spip.org/trac/spip-zone/changeset/89155/_core_#file3
