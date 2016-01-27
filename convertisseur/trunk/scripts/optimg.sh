@@ -1,5 +1,9 @@
 #!/bin/sh
 
+
+# conversion noir et blanc + contrast luminosité : convert -colorspace Gray -brightness-contrast 15x10 LMDEN_1998-10_03.jpg 15x10.jpg
+# convert -brightness-contrast 10x12
+
 # Optimisation d'images trop lourdes ou trop grandes avec imagemagick
 
 nom=${1##*/}

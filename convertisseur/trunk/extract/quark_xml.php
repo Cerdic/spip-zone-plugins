@@ -53,7 +53,13 @@ function convertir_quark_xml($c) {
 	
 	// Pages
 	$b = extraire_balise($u, 'folio') ;
-	$item["pages"] = textebrut($b);
+	$pages = textebrut($b);
+
+	$p = explode("-", $pages) ;
+	if(intval($p[0]) < 10)
+		$pages = "0" . $pages ;
+	
+	$item["pages"] = $pages ;
 	
 	$mise_en_page = extraire_balise($u, "RELATIONINFO");
 	$mise_en_page = extraire_attribut($mise_en_page, "parentAssetName");
