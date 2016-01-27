@@ -98,7 +98,8 @@ function roles_documents_post_edition_lien($flux) {
  */
 function roles_documents_post_edition($flux) {
 	if (
-		$flux['args']['action'] == 'modifier'           // on modifie un objet
+		isset($flux['args']['action'])
+		and $flux['args']['action'] == 'modifier'           // on modifie un objet
 		and $flux['args']['table'] !== 'spip_documents' // mais pas un document
 		and $objet = $flux['args']['type']
 		and $id_objet = intval($flux['args']['id_objet'])
