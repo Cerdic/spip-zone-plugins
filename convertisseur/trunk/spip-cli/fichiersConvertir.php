@@ -122,18 +122,31 @@ class Convert extends Command {
 					$fn = str_replace("$source/","", $f);
 				
 					// Répertoires Collection et numero ?
-					$classement = explode("/", $fn); 
+					$classement = explode("/", $fn);
 					
-					if(sizeof($classement) > 1){
+					if(sizeof($classement) >= 3){
 						$collection = $classement[0] ;
 						$numero = $classement[1] ;
+					}elseif(sizeof($classement) == 2){
+						$collection = "";
+						$numero=$classement[0] ;
+					}else{
+						$collection = "";
+						$numero="" ;
 					}
-									
-					if(!is_dir("$dest" . "/"  . $collection)){
-						mkdir("$dest" . "/" . $collection) ;
+					
+					if($collection != "")
+						$collection = "/" . $collection ;
+
+					if($numero != "")
+						$numero = "/" . $numero ;
+
+								
+					if(!is_dir("$dest" .  $collection)){
+						mkdir("$dest"  . $collection) ;
 					}
-					if(!is_dir("$dest" . "/" . $collection . "/" . $numero)){
-						mkdir("$dest" . "/" . $collection . "/" . $numero) ;
+					if(!is_dir("$dest"  . $collection  . $numero)){
+						mkdir("$dest"  . $collection  . $numero) ;
 					}
 					
 					$article = basename($f);
