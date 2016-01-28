@@ -71,7 +71,6 @@ class optimg extends Command {
 			// Si c'est bon on continue
 			else{				
 				if(strlen($dest) > 1){
-					var_dump("yoyo");
 					 $label_d=" dans $dest " ;
 					 $param_d=" $dest" ;
 					 if(!is_dir($dest))
