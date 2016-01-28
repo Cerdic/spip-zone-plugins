@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Convert extends Command {
 	protected function configure() {
 		$this
-			->setName('conversion:convertir')
+			->setName('fichiers:convertir')
 			->setDescription('Conversion des fichiers divers en fichiers d\'import SPIP.')
 			->setAliases(array(
 				'convert' // abbréviation commune pour "conversion"
