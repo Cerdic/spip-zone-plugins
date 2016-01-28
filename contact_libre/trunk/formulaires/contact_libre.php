@@ -64,8 +64,12 @@ function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 		}
 	}
 
-	if (!_request('confirmer') AND !count($erreurs))
-		$erreurs['previsu']=' ';
+        // Si on est pas dans une confirmation et qu'il n'y pas de vraies erreurs on affiche la prévisu du message
+        if (!_request('confirmer') AND !count($erreurs)) {
+        	$erreurs['previsu']=' ';
+        	$erreurs['message_erreur'] = ''; // pas de message d'erreur global si aucune erreur réelle
+	        }
+	        
 	return $erreurs;
 }
 
