@@ -1,4 +1,3 @@
-
 <div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_syndic,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -8,7 +7,7 @@
 		<ul>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
 			<li class="editer_rssarticle[ (#ENV**{erreurs}|table_valeur{rssarticle}|oui)erreur]">
-				<div class="choix" style="margin-left:-130px">
+				<div class="choix">
 					[(#CHEMIN_IMAGE{rssarticle-32.png}|balise_img{RSS})]
 					<input type='checkbox' class="checkbox" name='rssarticle' value='oui' id='rssarticle'[(#ENV{rssarticle}|=={oui}|oui)checked="checked"] />
 					<label for="rssarticle"><:rssarticle:activer_recopie:></label>
