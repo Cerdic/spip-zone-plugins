@@ -1,0 +1,11 @@
+[(#REM)
+
+	Affichage de l'identifiant sur la fiche d'un objet, si présent.
+	Inclus via le pipeline boite_infos.
+
+]
+[<div class="identifiant">
+	[(#CHEMIN_IMAGE{identifiant-12}|balise_img{<:identifiant:champ_identifiant_label:>,identifiant_icone})]
+	<span class="identifiant_label"><:identifiant:champ_identifiant_label:> :</span>
+	<span class="identifiant_valeur">(#ENV{identifiant})</span>
+</div>]

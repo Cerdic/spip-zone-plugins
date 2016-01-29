@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_cfg_objets_explication' => 'Choix des objets sur lesquels l\'ajout d\'identifiants est possible.
 	Les tables possédant déjà une colonne « identifiant » sont exclues.',
 	'champ_identifiant_label' => 'Identifiant',
-	'champ_identifiant_explication' => 'Charactères alphanumérique ou «_».',
+	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : charactères alphanumériques ou «_».',
 
 	// E
-	'erreur_champ_identifiant_format' => 'Format incorrect',
+	'erreur_champ_identifiant_format' => 'Format incorrect : n\'utilisez pas d\'espace, ni de caractères accentués ou spéciaux.',
 	'erreur_champ_identifiant_doublon' => 'Cet identifiant existe déjà pour ce type d\'objet',
 	'erreur_champ_identifiant_taille' => '50 caractères au maximum (actuellement @nb@)',
 

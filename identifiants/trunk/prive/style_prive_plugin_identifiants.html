@@ -6,20 +6,26 @@
 
 
 /*
-  FORMULAIRE
-  ==========
+  ===========
+  BOITE INFOS
+  ===========
 */
-.formulaire_editer_identifiant label {
+.infos .identifiant {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+.infos .identifiant_icone {
+  display: none;
+  vertical-align: middle;
+}
+.infos .identifiant_label {
+  text-transform: uppercase;
+  font-size: 0.769em;
   font-weight: bold;
 }
-.formulaire_editer_identifiant label img {
-  vertical-align: middle;
-  margin-#ENV{right}: 0.33em;
-}
-.formulaire_editer_identifiant .editer_identifiant {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.formulaire_editer_identifiant .no_identifiant {
-  opacity: 0.5;
+.infos .identifiant_valeur {
+  display: block;
+  font-family: mono;
+  color: #333;
 }

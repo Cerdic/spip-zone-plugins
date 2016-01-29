@@ -21,7 +21,7 @@ function identifiants_autoriser(){}
 /**
  * Autorisation à voir les identifiants.
  *
- * Uniquement les admins (complets et restreints).
+ * Uniquement les webmestres.
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -31,8 +31,8 @@ function identifiants_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_identifiant_voir_dist($faire, $type, $id, $qui, $opts) {
-	$is_admin  = ($qui['statut']=='0minirezo');
-	$autoriser = $is_admin;
+	$is_webmestre = ($qui['statut']=='0minirezo' and !$qui['restreint']);
+	$autoriser    = $is_webmestre;
 	return $autoriser;
 }
 
@@ -40,7 +40,7 @@ function autoriser_identifiant_voir_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation à modifier les identifiants.
  *
- * Uniquement les admins (complets et restreints).
+ * Uniquement les webmestres.
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -50,7 +50,7 @@ function autoriser_identifiant_voir_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_identifiant_modifier_dist($faire, $type, $id, $qui, $opts) {
-	$is_admin  = ($qui['statut']=='0minirezo');
-	$autoriser = $is_admin;
+	$is_webmestre = ($qui['statut']=='0minirezo' and !$qui['restreint']);
+	$autoriser    = $is_webmestre;
 	return $autoriser;
 }
