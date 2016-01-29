@@ -60,8 +60,6 @@ class optimg extends Command {
 		$resize = $input->getOption('resize') ;
 		$image = $input->getArgument('image');
 		
-		
-		
 		if ($spip_loaded) {
 			chdir($spip_racine);
 
@@ -90,7 +88,7 @@ class optimg extends Command {
 					$param_s = " $source" ;
 					$output->writeln("<info>C'est parti pour une petite optimisation des images de $source/ ${label_r}${label_d} !</info>");
 
-					$fichiers_jpg = preg_files($source . "/", "\.jpg$");
+					$fichiers_jpg = preg_files($source . "/", "\.(jpg|tif)$"); # ou ...
 	
 					foreach($fichiers_jpg as $image){
 						

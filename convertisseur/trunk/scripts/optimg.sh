@@ -18,13 +18,15 @@ fi
 if (( ${#3} > 0 )) ; then 
 	d=" dans $3"
 	dest="$3/$nom"
-	echo "Optimisation de $1${l}${d}"
-	echo ">> convert ${r}-strip -interlace Plane -gaussian-blur 0.05 -quality 80% $1 $dest"
-	convert ${r}-strip -interlace Plane -gaussian-blur 0.05 -quality 80% "$1" "$dest"
+	ext="${1##*.}"
+	filename="${dest%.*}" 
+	echo "\nOptimisation ($ext) de $1${l}${d}"
+	echo ">> convert ${r}-strip -interlace Plane -gaussian-blur 0.05 -quality 80% $1 $filename.jpg"
+	convert ${r}-strip -interlace Plane -gaussian-blur 0.05 -quality 80% "$1" "$filename.jpg"
 	
 	# pas de dest, on ecrase le fichier input avec sa version optimisée
 	else
-	echo "Optimisation de $1${l}"
+	echo "\nOptimisation de $1${l}"
 	mogrify ${r}-strip -interlace Plane -gaussian-blur 0.05 -quality 80% "$1"
 	
 fi

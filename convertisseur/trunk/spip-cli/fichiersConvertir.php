@@ -121,7 +121,7 @@ class Convert extends Command {
 					
 					$fn = str_replace("$source/","", $f);
 				
-					// Répertoires Collection et numero ?
+					// Répertoires publication et numero ?
 					$classement = explode("/", $fn);
 					
 					if(sizeof($classement) >= 3){
@@ -166,9 +166,9 @@ class Convert extends Command {
 					$article = preg_replace(',_xml$,', '.xml', $article);
 					
 					include_spip("inc/flock");
-					ecrire_fichier("$dest" . "/" . $collection . "/" . $numero . "/" . $article, $contenu);
+					ecrire_fichier($dest . $collection  . $numero . "/" . $article, $contenu);
 								
-					$output->writeln("Nouvelle conversion : $dest/" . $collection . "/" . $numero . "/" . $article);
+					$output->writeln("Nouvelle conversion : $dest" . $collection  . $numero . "/" . $article);
 				}
 				
 			}
