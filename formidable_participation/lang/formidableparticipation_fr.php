@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -22,8 +24,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_participation_option_champ_prenom_label' => 'Champ du Prénom',
 	'traiter_participation_option_champ_organisme_label' => 'Champ de l\'Organisme',
 	'traiter_participation_necessite_explication' => 'Pour la prise en charge de la participation, il est nécessaire d\'enregistrer les résultats dans la base de données.',
-
-
 );
-
-?>
