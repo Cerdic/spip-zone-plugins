@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="1.0.2"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/formidableparticipation-64.png"
 	documentation="http://contrib.spip.net/4532" 
 	schema="1.0.0"
