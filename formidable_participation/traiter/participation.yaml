@@ -22,7 +22,7 @@ options:
     saisie: 'input'
     options:
       nom: 'choix_participation_non'
-      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'     
+      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'
   -
     saisie: 'champ'
     options:
@@ -49,7 +49,7 @@ options:
       label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
       env: true
   -
-    saisie: 'input'
+    saisie: 'selection_evenement'
     options:
       nom: 'id_evenement_participation'
       label: '<:formidableparticipation:traiter_participation_id_evenement_participation:>'
