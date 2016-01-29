@@ -28,16 +28,6 @@ options:
           nom: 'defaut'
           label: '<:saisies:option_defaut_label:>'
           size: 50
-      - 
-        saisie: 'selection'
-        options:
-          nom: 'type'
-          label: "Type d'évenements"
-          explication: "Restreint le choix d'évenement à un type d'évenements particulier."
-          datas:
-            brunch: 'Brunch'
-            adultes: "Adultes"
-            enfants: "Enfants"
   -
     saisie: 'fieldset'
     options:
@@ -110,7 +100,7 @@ options:
           nom: 'info_obligatoire'
           label: '<:saisies:option_info_obligatoire_label:>'
           explication: '<:saisies:option_info_obligatoire_explication:>'
-      - 
+      -
         saisie: 'input'
         options:
           nom: 'class'
