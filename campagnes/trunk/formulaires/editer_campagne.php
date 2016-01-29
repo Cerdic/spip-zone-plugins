@@ -28,20 +28,18 @@ function formulaires_editer_campagne_saisies_dist($id_campagne='new', $retour=''
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'titre',
-				'label' => _T('campagne:champ_titre_label'),
+				'nom' => 'url',
+				'label' => _T('campagne:champ_url_label'),
+				'explication' => _T('campagne:champ_url_explication'),
 				'obligatoire' => 'oui'
 			)
 		),
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'url',
-				'label' => _T('campagne:champ_url_label'),
-				'obligatoire' => 'oui'
-			),
-			'verifier' => array(
-				'type' => 'url',
+				'nom' => 'titre',
+				'label' => _T('campagne:champ_titre_label'),
+				'explication' => _T('campagne:champ_titre_explication')
 			)
 		),
 		array(
@@ -158,7 +156,33 @@ function formulaires_editer_campagne_charger_dist($id_campagne='new', $retour=''
 function formulaires_editer_campagne_verifier_dist($id_campagne='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	include_spip('action/ajouter_documents');
 	include_spip('inc/campagnes');
-	$erreurs = formulaires_editer_objet_verifier('campagne',$id_campagne, array('titre', 'url'));
+	$erreurs = formulaires_editer_objet_verifier('campagne',$id_campagne, array('url'));
+	
+	// URL
+	// S'il n'y a pas d'erreurs et que le titre est vide, on va lancer des incantations magiques
+	if (!$erreurs and !_request('titre')) {
+		include_spip('inc/lien');
+		$url = _request('url');
+		
+		// Si on ne trouve pas d'objet SPIP
+		if (!$infos = traiter_lien_implicite($url, '', 'tout')) {
+			// On cherche le <title> de l'URL
+			include_spip('inc/distant');
+			$infos = recuperer_infos_distantes($url);
+		}
+		
+		// Si on a trouvé un bon titre
+		if ($infos and isset($infos['titre']) and $infos['titre']) {
+			$titre = $infos['titre'];
+		}
+		// Sinon on le remplit par une chaîne moche qui donnera envie de la changer
+		else {
+			$titre = _T('info_sans_titre');
+		}
+		
+		// On  génère le titre
+		set_request('titre', "$titre");
+	}
 	
 	// Infos sur l'encart
 	$encart = sql_fetsel('largeur, hauteur, type', 'spip_encarts', 'id_encart = '._request('id_encart'));

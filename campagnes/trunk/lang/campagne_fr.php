@@ -22,7 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_restrictions_publication_explication' => 'Permettre de publier ou dépublier cette publicité suivant certaines options.',
 	'champ_restrictions_publication_label' => 'Restrictions de publication',
 	'champ_titre_label' => 'Titre',
+    'champ_titre_explication'	=> 'Si le titre est vide, il essayera de se remplir magiquement.',
 	'champ_url_label' => 'URL',
+    'champ_url_explication'	=> 'L’URL d’une page (http://exemple) ou le raccourci d’un contenu SPIP (article123, rubrique456, etc).',
+
 	
 	// E
 	'erreur_date' => 'Cette date n’existe pas.',
