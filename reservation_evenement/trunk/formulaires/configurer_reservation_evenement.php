@@ -299,6 +299,16 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 						'afficher_si' => '@enregistrement_inscrit@ == "on"',
 					)
 				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'email_reutilisable',
+						'label' => _T('reservation:label_email_reutilisable'),
+						'explication' => _T('reservation:explication_email_reutilisable'),
+						'defaut' => $config['email_reutilisable'],
+						'afficher_si' => '@enregistrement_inscrit_obligatoire@ == ""',
+					)
+				),
 			)
 		)
 	);
