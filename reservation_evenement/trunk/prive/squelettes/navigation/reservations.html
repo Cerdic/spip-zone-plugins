@@ -49,7 +49,8 @@
       [(#REM) permet aux plugins d'insérér dun contenu au menu]
       [(#PIPELINE{reservation_evenement_menu_admin,
         [(#ARRAY{
-          args,[(#ARRAY{exec,#ENV{exec}})]
+          args,[(#ARRAY{exec,#ENV{exec}})],
+          data,'',
         })]})]
       <li>
          [(#ENV{exec}|=={configurer_reservation_evenement}|non)#SET{a, </a>}
