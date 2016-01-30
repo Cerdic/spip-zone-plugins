@@ -19,9 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : charactères alphanumériques ou «_».',
 
 	// E
-	'erreur_champ_identifiant_format' => 'Format incorrect : n\'utilisez pas d\'espace, ni de caractères accentués ou spéciaux.',
+	'erreur_champ_identifiant_format' => 'Format incorrect : n\'utilisez pas d\'espace, ni de majuscule, ni de caractères accentués ou spéciaux.',
 	'erreur_champ_identifiant_doublon' => 'Cet identifiant existe déjà pour ce type d\'objet',
-	'erreur_champ_identifiant_taille' => '50 caractères au maximum (actuellement @nb@)',
+	'erreur_champ_identifiant_taille' => '@nb_max@ caractères au maximum (actuellement @nb@)',
 
 	// I
 	'info_aucun_identifiant' => 'Aucun identifiant',

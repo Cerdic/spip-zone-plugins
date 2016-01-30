@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Ajouter du contenu sur les formulaires d'édition des objets.
  *
- * - Identifiants sur les objets configurés
+ * - Ajouter la saisie identifiant sur les objets configurés
  *
  * @pipeline editer_contenu_objet
  *
@@ -30,10 +30,9 @@ function identifiants_editer_contenu_objet($flux) {
 	// Identifiants sur les objets activés
 	if (
 		$objet = $flux['args']['type']
-		and $id_objet = intval($flux['args']['id'])
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiant')
+		and autoriser('modifier','identifiants')
 	) {
 
 		// récupérer le squelette de la saisie
@@ -60,7 +59,7 @@ function identifiants_editer_contenu_objet($flux) {
 /**
  * Ajouter du contenu dans la boîte infos d'un objet
  *
- * - Identifiants sur les objets configurés
+ * - Afficher l'identifiant sous le n° de l'objet pour les objets configurés
  *
  * @pipeline boite_info
  * @param array $flux Données du pipeline
@@ -76,7 +75,7 @@ function identifiants_boite_infos($flux){
 		and $id_objet = intval($flux['args']['id'])
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiant')
+		and autoriser('voir','identifiants')
 	) {
 
 		// récupérer la valeur de l'identifiant
@@ -105,9 +104,9 @@ function identifiants_boite_infos($flux){
 
 
 /**
- * Ajouter des vérifications aux formulaires
+ * Ajouter des valeurs au chargement des formulaires
  *
- * - Identifiants sur les objets configurés
+ * - Ajouter l'identifiant lors de l'édition d'un objet, pour les objets configurés
  *
  * @pipeline boite_info
  * @param array $flux Données du pipeline
@@ -117,15 +116,17 @@ function identifiants_formulaire_charger($flux){
 
 	include_spip('inc/config');
 	$objets = lire_config('identifiants/objets', array());
-	preg_match('/^editer_(.*)/', $flux['args']['form'], $matches);
 
 	if (
-		$objet = $matches[1]
-		and $id_objet = intval($flux['args']['args'][0]) // on suppose que c'est le 1er paramètre
+		preg_match('/^editer_(.*)/', $flux['args']['form'], $matches) // formulaire editer_xxx
+		and $objet = $matches[1]
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiant')
+		and autoriser('modifier','identifiants')
 	) {
+
+		// on suppose que id_objet est le 1er paramètre du formulaire
+		$id_objet = intval($flux['args']['args'][0]);
 
 		// récupérer la valeur de l'identifiant
 		$identifiant = sql_getfetsel(
@@ -144,7 +145,8 @@ function identifiants_formulaire_charger($flux){
 /**
  * Ajouter des vérifications aux formulaires
  *
- * - Identifiants sur les objets configurés
+ * - Vérifier le format et l'unicité de l'identifiant lors de l'édition d'un objet,
+ * pour les objets configurés.
  *
  * @pipeline boite_info
  * @param array $flux Données du pipeline
@@ -154,20 +156,20 @@ function identifiants_formulaire_verifier($flux){
 
 	include_spip('inc/config');
 	$objets = lire_config('identifiants/objets', array());
-	preg_match('/^editer_(.*)/', $flux['args']['form'], $matches);
 
 	if (
-		$objet = $matches[1]
-		and $id_objet = intval($flux['args']['args'][0]) // on suppose que c'est le 1er paramètre
+		preg_match('/^editer_(.*)/', $flux['args']['form'], $matches) // formulaire editer_xxx
+		and $objet = $matches[1]
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiant')
+		and autoriser('modifier','identifiants')
 	) {
 
 		if ($identifiant = _request('identifiant')) {
-			// nombre de charactères : 50 max
-			if (($nb = strlen($identifiant)) > 50) {
-				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb'=>$nb));
+			// nombre max de charactères (on ne sait jamais)
+			$nb_max = 255;
+			if (($nb = strlen($identifiant)) > $nb_max) {
+				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb'=>$nb, 'nb_max'=>$nb_max));
 			}
 			// format : charactères alphanumériques en minuscules ou "_"
 			elseif (!preg_match('/^[a-z0-9_]+$/', $identifiant)) {
@@ -188,7 +190,11 @@ function identifiants_formulaire_verifier($flux){
 /**
  * Ajouter des traitements aux formulaires
  *
- * - Enregistter les identifiants sur les objets configurés
+ * - Mettre à jour l'identifiant lors de l'édition d'un objet, pour les objets configurés
+ *
+ * @note
+ * On ne peut pas utiliser les pipelines pre_edition et post_edition,
+ * car il ne s'agit pas d'un champ de la table de l'objet édité.
  *
  * @pipeline boite_info
  * @param array $flux Données du pipeline
@@ -198,53 +204,109 @@ function identifiants_formulaire_traiter($flux){
 
 	include_spip('inc/config');
 	$objets = lire_config('identifiants/objets', array());
-	preg_match('/^editer_(.*)/', $flux['args']['form'], $matches);
 
 	if (
-		$objet = $matches[1]
+		preg_match('/^editer_(.*)/', $flux['args']['form'], $matches) // formulaire editer_xxx
+		and $objet = $matches[1]
 		and $id_objet = intval($flux['args']['args'][0]) // on suppose que c'est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiant')
+		and autoriser('modifier','identifiants')
 	) {
 
+		maj_identifiant_edition_objet($objet, $id_objet);
+
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Intervenir après la création d'un objet.
+ *
+ * - Créer l'identifiant lors de la création d'un objet, pour les objets configurés.
+ *
+ * @note
+ * L'identifiant n'est pas transmis dans $flux['data'], il faut le récupérer avec _request().
+ * Il ne s'agit pas d'un champ de la table de l'objet édité.
+ *
+ * @pipeline post_insertion
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function identifiants_post_insertion($flux){
+
+	include_spip('inc/config');
+	$objets = lire_config('identifiants/objets', array());
+
+	if (
+		$table_objet = $flux['args']['table']
+		and $objet = objet_type($table_objet)
+		and $id_objet = $flux['args']['id_objet']
+		and in_array($table_objet, $objets)
+		and autoriser('modifier','identifiants')
+	){
+
+		maj_identifiant_edition_objet($objet, $id_objet);
+
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Fonction privée pour mettre à jour l'identifiant lors de l'édition d'un objet.
+ *
+ * @param string $objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant numérique de l'objet
+ * @return void | bool | string
+ *     Retour des fonctions sql_insertq, sql_updateq ou sql_delete.
+ */
+function maj_identifiant_edition_objet($objet='', $id_objet=''){
+
+	if (
+		$objet
+		and $id_objet = intval($id_objet)
+	) {
+
+		// on récupère le nouvel identifiant
+		$new_identifiant = _request('identifiant');
+
+		// on récupère l'ancien identifiant
 		$old_identifiant = sql_getfetsel(
 			'identifiant',
 			'spip_identifiants',
 			'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet)
 		);
-		$new_identifiant = _request('identifiant');
+
+		// on prépare les données
 		$set = array(
 			'objet'       => $objet,
 			'id_objet'    => $id_objet,
 			'identifiant' => $new_identifiant,
 		);
 
-		// création...
-		if (
-			!$old_identifiant
-			and $new_identifiant
-		) {
-			sql_insertq('spip_identifiants', $set);
-		}
+		// on définit ce qu'on doit faire
+		$creation    = (!$old_identifiant and $new_identifiant);
+		$maj         = ($old_identifiant and $new_identifiant);
+		$suppression = ($old_identifiant and !$new_identifiant);
 
-		// ...ou mise à jour...
-		elseif (
-			$old_identifiant
-			and $new_identifiant
-		) {
-			sql_updateq('spip_identifiants', $set);
+		// création
+		if ($creation) {
+			return sql_insertq('spip_identifiants', $set);
 		}
-
-		// ... ou suppression
-		elseif (
-			$old_identifiant
-			and !$new_identifiant
-		) {
-			sql_delete('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
+		// mise à jour
+		elseif ($maj) {
+			return sql_updateq('spip_identifiants', $set);
 		}
-
+		// suppression
+		elseif ($suppression) {
+			return sql_delete('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
+		}
 	}
 
-	return $flux;
 }

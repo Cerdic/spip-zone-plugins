@@ -1,8 +1,8 @@
 <paquet
 	prefix="identifiants"
 	categorie="divers"
-	version="1.0.5"
-	etat="dev"
+	version="1.0.6"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/identifiants.png"
 	documentation=""
@@ -24,5 +24,6 @@
 	<pipeline nom="formulaire_charger" inclure="identifiants_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="identifiants_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="identifiants_pipelines.php" />
+	<pipeline nom="post_insertion" inclure="identifiants_pipelines.php" />
 
 </paquet>
