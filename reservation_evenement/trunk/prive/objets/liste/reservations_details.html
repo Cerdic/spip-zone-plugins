@@ -33,7 +33,7 @@ points,-1
 						<td class='descriptif principale'> [(#LOGO_RESERVATIONS_DETAIL|image_reduire{20,26})]<a href="[(#ID_RESERVATIONS_DETAIL|generer_url_entite{reservations_detail})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATIONS_DETAIL">[(#DESCRIPTIF**|supprimer_numero)]</a> [(#PRIX**|>{0}|ou{#PRIX_HT**|>{0}}|oui) <span class="prix">: #PRIX</span>] </td>
 						<td class='reservation'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:label_reference|attribut_html:> #REFERENCE">#REFERENCE</a></td>
 						<td class='nom'>
-						<BOUCLE_reservation(RESERVATIONS){id_reservation=#ID_RESERVATION}{tout}>
+						<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
 							<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 								<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
 							</BOUCLE_auteur>

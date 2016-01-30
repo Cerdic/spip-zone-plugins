@@ -295,7 +295,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 					'options' => array(
 						'nom' => 'enregistrement_inscrit_obligatoire',
 						'label' => _T('reservation:label_enregistrement_inscrit_obligatoire'),
-						'defaut' => $config['periodicite_cron'],
+						'defaut' => $config['enregistrement_inscrit_obligatoire'],
 						'afficher_si' => '@enregistrement_inscrit@ == "on"',
 					)
 				),
