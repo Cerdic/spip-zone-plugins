@@ -13,11 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_minibando' => 'Parámetros',
 
 	// L
-	'label_disposition' => 'Disposición', # RELIRE
+	'label_disposition' => 'Disposición',
 	'label_disposition_horizontale' => 'Horizontal',
 	'label_disposition_verticale' => 'Vertical',
 
 	// M
+	'mode_css' => 'Modo css',
 	'mode_debug' => 'Modo debug',
 	'mode_inclure' => 'Modo inclure',
 	'mode_profile' => 'Modo profile',
