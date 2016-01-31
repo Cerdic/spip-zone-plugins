@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
 	'evenement_cloture' => 'Évenement clôturé',
 	'explication_client' => 'Choissisez un client parmis les auteurs ou saisissez les données du client ci-bas',
-	'explication_email_reutilisable' => 'Permettre de réutiliser un email d\'un auteur spip lors d\'une réservation sans enregistrement',	
+	'explication_email_reutilisable' => 'Permettre de réutiliser un email d’un auteur spip lors d’une réservation sans enregistrement',
 	'explication_enregistrement_inscrit' => 'L’enregistrer en tant que auteur spip',
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
