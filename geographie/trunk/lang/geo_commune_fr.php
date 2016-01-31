@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_geo_commune' => 'Ajouter cette commune',
 
 	// C
+	'champ_nom_label' => 'Nom',
 	'confirmer_supprimer_geo_commune' => 'Confirmez-vous la suppression de cette commune ?',
 	
 	// I

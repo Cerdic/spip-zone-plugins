@@ -48,6 +48,19 @@ function geographie_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_delete', 'spip_geo_departements', 'nom=' . sql_quote('09')),
 	);
 	
+	// Toutes les tables de liens
+	$maj['1.0.0'] = array(
+		array('maj_tables',
+			array(
+				'spip_geo_pays_liens',
+				'spip_geo_regions_liens',
+				'spip_geo_departements_liens',
+				'spip_geo_arrondissements_liens',
+				'spip_geo_communes_liens',
+			),
+		),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -82,6 +95,12 @@ function geographie_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_geo_departements');
 	sql_drop_table('spip_geo_arrondissements');
 	sql_drop_table('spip_geo_communes');
+	
+	sql_drop_table('spip_geo_pays_liens');
+	sql_drop_table('spip_geo_regions_liens');
+	sql_drop_table('spip_geo_departements_liens');
+	sql_drop_table('spip_geo_arrondissements_liens');
+	sql_drop_table('spip_geo_communes_liens');
 	
 	effacer_meta($nom_meta_base_version);
 }

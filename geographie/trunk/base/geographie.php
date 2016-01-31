@@ -145,6 +145,84 @@ function geographie_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
+/**
+ * Déclaration des tables secondaires (liaisons)
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function geographie_declarer_tables_auxiliaires($tables) {
+	$tables['spip_geo_pays_liens'] = array(
+		'field' => array(
+			'id_pays'    => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'   => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'      => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'         => 'VARCHAR(6) DEFAULT "non" NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_pays,id_objet,objet',
+			'KEY id_pays' => 'id_pays'
+		)
+	);
+	
+	$tables['spip_geo_regions_liens'] = array(
+		'field' => array(
+			'id_region'  => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'   => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'      => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'         => 'VARCHAR(6) DEFAULT "non" NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY'   => 'id_region,id_objet,objet',
+			'KEY id_region' => 'id_region'
+		)
+	);
+	
+	$tables['spip_geo_departements_liens'] = array(
+		'field' => array(
+			'id_departement'  => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'        => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'           => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'              => 'VARCHAR(6) DEFAULT "non" NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY'        => 'id_departement,id_objet,objet',
+			'KEY id_departement' => 'id_departement'
+		)
+	);
+	
+	$tables['spip_geo_arrondissements_liens'] = array(
+		'field' => array(
+			'id_arrondissement'  => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'           => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'              => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'                 => 'VARCHAR(6) DEFAULT "non" NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY'           => 'id_arrondissement,id_objet,objet',
+			'KEY id_arrondissement' => 'id_arrondissement'
+		)
+	);
+	
+	$tables['spip_geo_communes_liens'] = array(
+		'field' => array(
+			'id_commune' => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'   => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'      => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'         => 'VARCHAR(6) DEFAULT "non" NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY'    => 'id_commune,id_objet,objet',
+			'KEY id_commune' => 'id_commune'
+		)
+	);
+
+	return $tables;
+}
+
 function geographie_lister_tables_noexport($liste){
 	$liste[] = 'spip_geo_communes';
 	$liste[] = 'spip_geo_arrondissements';
