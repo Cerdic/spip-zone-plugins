@@ -1,9 +1,9 @@
 <paquet
 	prefix="photo_infos"
 	categorie="multimedia"
-	version="2.0.2"
+	version="2.0.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="imgs_photo/logo-pb_plugin.png"
 	documentation="http://contrib.spip.net/Metadonnees-Photo"
 >	

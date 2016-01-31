@@ -218,7 +218,7 @@ function extraire_iptc($fichier) {
 
 
 function lire_iptc ($fichier, $type=false) {
-	if (!function_exists(iptcparse)) return;
+	if (!function_exists('iptcparse')) return;
 
 	$iptc = extraire_iptc($fichier);
 	
