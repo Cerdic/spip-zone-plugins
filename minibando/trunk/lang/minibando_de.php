@@ -9,7 +9,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'cfg_titre_minibando' => 'Parameter', # RELIRE
+
+	// L
+	'label_disposition' => 'Anordnung', # RELIRE
+	'label_disposition_horizontale' => 'Horizontale',
+	'label_disposition_verticale' => 'Vertikale',
+
 	// M
+	'mode_css' => 'CSS Modus',
 	'mode_debug' => 'Debug Modus',
 	'mode_inclure' => 'Include Modus',
 	'mode_profile' => 'Profil-Modus',
