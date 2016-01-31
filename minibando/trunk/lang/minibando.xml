@@ -2,7 +2,8 @@
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=ar" total="12" traduits="6" relire="0" modifs="0" nouveaux="6" pourcent="50.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=de" total="12" traduits="6" relire="0" modifs="0" nouveaux="6" pourcent="50.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=de" total="12" traduits="9" relire="2" modifs="0" nouveaux="1" pourcent="75.00">
+		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
@@ -11,7 +12,7 @@
 		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=es" total="12" traduits="10" relire="1" modifs="0" nouveaux="1" pourcent="83.33">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=es" total="12" traduits="12" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
