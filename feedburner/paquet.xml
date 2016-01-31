@@ -1,9 +1,9 @@
 <paquet
 	prefix="feedburner"
 	categorie="communication"
-	version="1.1.0"
+	version="1.1.1"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="feedburner-64.png"
 	documentation="http://contrib.spip.net/Plugin-FeedBurner"
 >	

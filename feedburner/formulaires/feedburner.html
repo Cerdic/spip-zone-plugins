@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_feedburner">
 <form action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=#ENV{_feedId}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
-	<ul>
-		<li>
+	<ul class="editer-groupe">
+		<li class="editer">
             <label for="email"><:feedburner:form_label:></label>
             <input type="email" class="text" name="email" id="email" placeholder="<:feedburner:form_placeholder:>" value="#ENV{email}" />
             <input type="hidden" name="uri" value="#ENV{_feedId}" />
