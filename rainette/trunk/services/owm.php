@@ -5,8 +5,7 @@
  *
  * @package SPIP\RAINETTE\SERVICES\OWM
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -31,13 +30,6 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		'titre' => null,
 		'logo'  => null,
 		'lien'  => 'http://openweathermap.org/',
-	),
-	'previsions'	 => array(
-		'periodicites' => array(
-			24 => array('max_jours' => 16),
-//			3  => array('max_jours' => 5)
-		),
-		'defaut'       => 24
 	),
 	'langue_service' => 'EN'
 );
@@ -100,12 +92,17 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 // -- On utilise le mode XML et non JSON car la date de dernière mise à jour et la précipitation ne sont
 //    pas disponibles en JSON
 $GLOBALS['rainette_owm_config']['previsions'] = array(
-	'periode_maj'     => 7200,
-	'format_flux'     => 'xml',
-	'cle_base'        => array('children', 'forecast', 0, 'children', 'time'),
-	'cle_heure'       => array(),
-	'structure_heure' => false,
-	'donnees'         => array(
+	'periodicites'       => array(
+		24 => array('max_jours' => 16),
+		//		3  => array('max_jours' => 5)
+	),
+	'periodicite_defaut' => 24,
+	'periode_maj'        => 7200,
+	'format_flux'        => 'xml',
+	'cle_base'           => array('children', 'forecast', 0, 'children', 'time'),
+	'cle_heure'          => array(),
+	'structure_heure'    => false,
+	'donnees'            => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('attributes', 'day')),
 		'heure'                => array('cle' => array()),
@@ -160,6 +157,8 @@ function owm_service2configuration($mode) {
 /**
  * @param string $lieu
  * @param string $mode
+ * @param        $periodicite
+ * @param        $configuration
  *
  * @return string
  */
@@ -185,6 +184,8 @@ function owm_service2cache($lieu, $mode, $periodicite, $configuration) {
 /**
  * @param $lieu
  * @param $mode
+ * @param $periodicite
+ * @param $configuration
  *
  * @return string
  */
@@ -208,7 +209,9 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 		   . 'q=' . str_replace(' ', '+', trim($lieu))
 		   . '&mode=' . $configuration['format_flux']
 		   . '&units=' . ($configuration['unite'] == 'm' ? 'metric' : 'imperial')
-		   . (($mode == 'previsions') and ($periodicite == 24) ? '&cnt=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours'] : '')
+		   . ((($mode == 'previsions') and ($periodicite == 24))
+			? '&cnt=' . $configuration['periodicites'][$periodicite]['max_jours']
+			: '')
 		   . '&lang=' . $code_langue
 		   . ($configuration['inscription'] ? '&APPID=' . $configuration['inscription'] : '');
 
@@ -216,10 +219,8 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 }
 
 /**
- * @param array  $flux
- * @param string $lieu
- * @param int    $index
- *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ * @param array $tableau
+ * @param       $configuration
  *
  * @return array
  */
@@ -285,7 +286,7 @@ function owm_complement2conditions($tableau, $configuration) {
  *        par le service.
  * @param array $configuration
  *        Configuration complète du service, statique et utilisateur.
- * @param int   $index
+ * @param int   $index_periode
  *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
  * @return array
@@ -312,6 +313,19 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
  * ---------------------------------------------------------------------------------------------
  */
 
+/**
+ * Calcule les états en fonction des états météorologiques natifs fournis par le service.
+ *
+ * @internal
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return void
+ */
 function etat2resume_owm(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo']

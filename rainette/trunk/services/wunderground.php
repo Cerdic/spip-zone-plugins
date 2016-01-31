@@ -10,9 +10,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE')) {
+	/**
+	 * URL de base (endpoint) des requêtes au service Wunderground
+	 */
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE', 'http://api.wunderground.com/api');
 }
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
+	/**
+	 * UEL de base des icônes fournis par le service Wunderground
+	 */
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 }
 
@@ -30,13 +36,6 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 		'titre' => null,
 		'logo'  => 'wunderground-126.png',
 		'lien'  => 'http://www.wunderground.com/',
-	),
-	'previsions'	    => array(
-		'periodicites' => array(
-			24 => array('max_jours' => 10),
-//			1  => array('max_jours' => 10)
-		),
-		'defaut'	    => 24
 	),
 	'langue_service' => 'EN'
 );
@@ -96,12 +95,17 @@ $GLOBALS['rainette_wunderground_config']['conditions'] = array(
 // Configuration des données fournies par le service wwo pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_wunderground_config']['previsions'] = array(
-	'periode_maj'     => 1800,
-	'format_flux'     => 'json',
-	'cle_base'        => array('forecast', 'simpleforecast', 'forecastday'),
-	'cle_heure'       => array(),
-	'structure_heure' => false,
-	'donnees'         => array(
+	'periodicites'       => array(
+		24 => array('max_jours' => 10),
+		//		1  => array('max_jours' => 10)
+	),
+	'periodicite_defaut' => 24,
+	'periode_maj'        => 1800,
+	'format_flux'        => 'json',
+	'cle_base'           => array('forecast', 'simpleforecast', 'forecastday'),
+	'cle_heure'          => array(),
+	'structure_heure'    => false,
+	'donnees'            => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('date', 'epoch')),
 		'heure'                => array('cle' => array()),
@@ -194,10 +198,23 @@ function wunderground_service2cache($lieu, $mode, $periodicite, $configuration) 
 }
 
 /**
- * @param $lieu
- * @param $mode
+ * Contruit l'url de la requête en fonction du lieu, du mode et de la périodicité demandés.
+ *
+ * @api
+ *
+ * @param string $lieu
+ *        Lieu pour lequel on requiert le nom du cache.
+ * @param string $mode
+ *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ * @param int    $periodicite
+ *        La périodicité horaire des prévisions :
+ *            - `24`, ou `1`, pour le mode `previsions`
+ *            - `0`, pour les modes `conditions` et `infos`
+ * @param array  $configuration
+ *        Configuration complète du service, statique et utilisateur.
  *
  * @return string
+ *        Chemin complet du fichier cache.
  */
 function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 
@@ -253,8 +270,6 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
  *        par le service.
  * @param array $configuration
  *        Configuration complète du service, statique et utilisateur.
- * @param int   $index
- *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
  * @return array
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
@@ -309,8 +324,8 @@ function wunderground_complement2conditions($tableau, $configuration) {
  *        par le service.
  * @param array $configuration
  *        Configuration complète du service, statique et utilisateur.
- * @param int   $index
- *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
+ * @param int   $index_periode
+ *        Index où trouver et ranger les données.
  *
  * @return array
  *        Tableau standardisé des conditions météorologiques complété par les données spécifiques
@@ -341,10 +356,25 @@ function wunderground_complement2previsions($tableau, $configuration, $index_per
  * PACKAGE SPIP\RAINETTE\WUNDERGROUND\OUTILS
  * ---------------------------------------------------------------------------------------------
  */
+
+/**
+ * Calcule les états en fonction des états météorologiques natifs fournis par le service.
+ *
+ * @internal
+ *
+ * @param array $tableau
+ *        Tableau standardisé des conditions contenant uniquement les données fournies sans traitement
+ *        par le service. Le tableau est mis à jour et renvoyé à l'appelant.
+ * @param array $configuration
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return void
+ */
 function etat2resume_wunderground(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo']
-	and $tableau['icon_meteo']) {
+		and $tableau['icon_meteo']
+	) {
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == 'wunderground') {
 			// On affiche les conditions natives fournies par le service.
@@ -383,7 +413,7 @@ function meteo_wunderground2weather($meteo, $periode = 0) {
 		'chanceflurries'  => array(41, 46),
 		'chancerain'      => array(39, 45),
 		'chancesleet'     => array(39, 45),
-//		'chancesleet'     => array(41, 46),
+		//		'chancesleet'     => array(41, 46),
 		'chancesnow'      => array(41, 46),
 		'chancetstorms'   => array(38, 47),
 		'clear'           => array(32, 31),
@@ -415,6 +445,11 @@ function meteo_wunderground2weather($meteo, $periode = 0) {
 	return $icone;
 }
 
+/**
+ * @param $langue
+ *
+ * @return string
+ */
 function langue2code_wunderground($langue) {
 	static $langue2wunderground = array(
 		'aa'           => array('', ''),     // afar

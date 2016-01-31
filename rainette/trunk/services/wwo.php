@@ -31,16 +31,6 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		'logo'  => null,
 		'lien'  => 'http://www.worldweatheronline.com/',
 	),
-	'previsions'       => array(
-		'periodicites' => array(
-			24 => array('max_jours' => 15),
-			12 => array('max_jours' => 15),
-			6  => array('max_jours' => 15),
-			3  => array('max_jours' => 15),
-			1  => array('max_jours' => 15)
-		),
-		'defaut'       => 24
-	),
 	'langue_service' => 'en',
 );
 
@@ -99,12 +89,20 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 // Configuration des données fournies par le service wwo pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_wwo_config']['previsions'] = array(
-	'periode_maj'     => 14400,
-	'format_flux'     => 'json',
-	'cle_base'        => array('data', 'weather'),
-	'cle_heure'       => array('hourly'),
-	'structure_heure' => true,
-	'donnees'         => array(
+	'periodicites'       => array(
+		24 => array('max_jours' => 15),
+		12 => array('max_jours' => 15),
+		6  => array('max_jours' => 15),
+		3  => array('max_jours' => 15),
+		1  => array('max_jours' => 15)
+	),
+	'periodicite_defaut' => 24,
+	'periode_maj'        => 14400,
+	'format_flux'        => 'json',
+	'cle_base'           => array('data', 'weather'),
+	'cle_heure'          => array('hourly'),
+	'structure_heure'    => true,
+	'donnees'            => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('date')),
 		'heure'                => array('cle' => array('time')),
@@ -242,7 +240,7 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 		$url .= '&cc=yes&fx=no';
 	} else {
 		$url .= '&cc=no&fx=yes'
-				. '&num_of_days=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours']
+				. '&num_of_days=' . $configuration['periodicites'][$periodicite]['max_jours']
 				. '&tp=' . strval($periodicite);
 	}
 

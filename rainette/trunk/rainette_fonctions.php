@@ -119,7 +119,7 @@ function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $exten
 
 	// On construit la balise img
 	$texte = attribut_html($resume);
-	$balise_img = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$taille_defaut\" height=\"$taille_defaut\" />";
+	$balise_img = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${taille_defaut}\" height=\"${taille_defaut}\" />";
 
 	return $balise_img;
 }
@@ -273,20 +273,20 @@ function rainette_afficher_unite($valeur, $type_valeur = '', $precision = -1, $s
 
 
 /**
- * @param        $lieu
+ * @param string $lieu
+ * @param string $mode
  * @param string $modele
  * @param string $service
+ * @param array  $options
  *
  * @return array|string
  */
 function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tempsreel', $service = 'weather', $options = array()) {
 
 	// Initialisation du retour
-	$texte = '';
 	$tableau = array();
 
 	// Détermination de la périodicité en fonction du mode et du modèle demandés
-	$type_modele = 0;
 	$periodicite = 0;
 	$erreur = '';
 	if ($mode == 'previsions') {

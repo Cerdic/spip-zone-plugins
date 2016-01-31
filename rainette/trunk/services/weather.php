@@ -28,12 +28,6 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'logo'  => null,
 		'lien'  => 'http://www.weather.com/',
 	),
-	'previsions'	 => array(
-		'periodicites' => array(
-			12 => array('max_jours' => 10)
-		),
-		'defaut'       => 12
-	),
 	'langue_service' => ''
 );
 
@@ -92,12 +86,16 @@ $GLOBALS['rainette_weather_config']['conditions'] = array(
 // Configuration des données fournies par le service weather pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_weather_config']['previsions'] = array(
-	'periode_maj'     => 1800,
-	'format_flux'     => 'xml',
-	'cle_base'        => array('children', 'dayf', 0, 'children', 'day'),
-	'cle_heure'       => array('children', 'part'),
-	'structure_heure' => true,
-	'donnees'         => array(
+	'periodicites'       => array(
+		12 => array('max_jours' => 10)
+	),
+	'periodicite_defaut' => 12,
+	'periode_maj'        => 1800,
+	'format_flux'        => 'xml',
+	'cle_base'           => array('children', 'dayf', 0, 'children', 'day'),
+	'cle_heure'          => array('children', 'part'),
+	'structure_heure'    => true,
+	'donnees'            => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('attributes', 'dt')),
 		'heure'                => array('cle' => array()),
@@ -147,6 +145,7 @@ function weather_service2configuration($mode) {
 /**
  * @param $lieu
  * @param $mode
+ * @param $periodicite
  * @param $configuration
  *
  * @return string
@@ -168,6 +167,7 @@ function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
 /**
  * @param $lieu
  * @param $mode
+ * @param $periodicite
  * @param $configuration
  *
  * @return string
@@ -175,13 +175,13 @@ function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
 function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	$url = _RAINETTE_WEATHER_URL_BASE
-		   . strtoupper(trim($lieu))
-		   . '?unit='
-		   . $configuration['unite'];
+	   . strtoupper(trim($lieu))
+	   . '?unit='
+	   . $configuration['unite'];
 
 	if ($mode != 'infos') {
 		$url .= ($mode == 'previsions')
-			? '&dayf=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours']
+			? '&dayf=' . $configuration['periodicites'][$periodicite]['max_jours']
 			: '&cc=*';
 	}
 
@@ -190,6 +190,7 @@ function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 
 
 function weather_complement2infos($tableau, $configuration) {
+
 	// Le nom de la ville retournée par le service est sous la forme 'Ville,Région[,Pays]' (Région désigne
 	// parfois le département (France) ou l'état (Etats-Unis).
 	// Il faut donc répartir la valeur d'index 'ville' dans les index 'ville', 'region' et 'pays' sachant
@@ -233,7 +234,7 @@ function weather_complement2conditions($tableau, $configuration) {
  *        par le service.
  * @param array $configuration
  *        Configuration complète du service, statique et utilisateur.
- * @param int   $index
+ * @param int   $index_periode
  *        Index où trouver et ranger les données. Cet index n'est pas utilisé pour les conditions
  *
  * @return array
@@ -243,7 +244,6 @@ function weather_complement2conditions($tableau, $configuration) {
 function weather_complement2previsions($tableau, $configuration, $index_periode) {
 
 	if (($tableau) and ($index_periode > -1)) {
-
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_weather($tableau, $configuration);
 	}

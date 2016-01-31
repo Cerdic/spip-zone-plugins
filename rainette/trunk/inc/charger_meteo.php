@@ -84,7 +84,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	// Si on a demandé le mode 'previsions' sans préciser la periodicité horaire des données, il faut prendre l'intervalle
 	// par défaut configuré pour le service.
 	if (($mode == 'previsions') and !$periodicite) {
-		$periodicite = $configuration['previsions']['defaut'];
+		$periodicite = $configuration['previsions']['periodicite_defaut'];
 	}
 
 	// Construire le nom du fichier cache
