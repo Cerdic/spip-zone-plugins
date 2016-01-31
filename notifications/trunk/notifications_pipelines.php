@@ -39,6 +39,7 @@ function notifications_go($x){
 function notifications_post_edition($x){
 	#spip_log($x,'notifications');
 	if (isset($x['args']['table'])
+		AND isset($GLOBALS['notifications_post_edition'][$x['args']['table']])
 		AND $quoi = $GLOBALS['notifications_post_edition'][$x['args']['table']]
 	){
 		// repasser par l'entree principale
