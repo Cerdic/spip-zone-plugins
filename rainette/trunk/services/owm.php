@@ -591,9 +591,9 @@ function langue2code_owm($langue) {
 	$code = $GLOBALS['rainette_owm_config']['service']['langue_service'];
 	if (array_key_exists($langue, $langue2owm)) {
 		if ($c0 = $langue2owm[$langue][0]) {
-			$code = strtoupper($c0);
+			$code = strtolower($c0);
 		} elseif ($c1 = $langue2owm[$langue][1]) {
-			$code = strtoupper($c1);
+			$code = strtolower($c1);
 		}
 	}
 

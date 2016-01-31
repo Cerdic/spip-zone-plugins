@@ -17,8 +17,6 @@ if (!defined('_RAINETTE_WWO_URL_BASE')) {
 
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
-// -- L'API gratuite fournit 5 jours de prévisions alors que l'API Premium fournit 15 jours
-//    de prévisions. On utilise donc le max des deux.
 $GLOBALS['rainette_wwo_config']['service'] = array(
 	'defauts'        => array(
 		'inscription' => '',
@@ -87,6 +85,8 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 );
 
 // Configuration des données fournies par le service wwo pour le mode 'conditions'.
+// -- L'API gratuite fournit 5 jours de prévisions alors que l'API Premium fournit 15 jours
+//    de prévisions. On utilise donc le max des deux.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_wwo_config']['previsions'] = array(
 	'periodicites'       => array(
