@@ -126,7 +126,7 @@ function sommaire_propre($texte, $connect, $env){
 		OR ($GLOBALS['meta']['sommaire_automatique']=="ondemand" AND
 		$has_sommaire)
 	){
-		$texte = sommaire_post_propre($texte,tru,false,$niveau_max);
+		$texte = sommaire_post_propre($texte,true,false,$niveau_max);
 	}
 	return $texte;
 }
