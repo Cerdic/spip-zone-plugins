@@ -41,7 +41,6 @@ $GLOBALS['rainette_wwo_config']['service'] = array(
 		),
 		'defaut'       => 24
 	),
-	'max_previsions' => 15,
 	'langue_service' => 'en',
 );
 
@@ -100,35 +99,38 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 // Configuration des données fournies par le service wwo pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_wwo_config']['previsions'] = array(
-	'periode_maj' => 14400,
-	'format_flux' => 'json',
-	'cle_base'    => array('data', 'weather'),
-	'cle_heure'   => array(),
-	'donnees'     => array(
+	'periode_maj'     => 14400,
+	'format_flux'     => 'json',
+	'cle_base'        => array('data', 'weather'),
+	'cle_heure'       => array('hourly'),
+	'structure_heure' => true,
+	'donnees'         => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('date')),
+		'heure'                => array('cle' => array('time')),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array('astronomy', 0, 'sunrise')),
 		'coucher_soleil'       => array('cle' => array('astronomy', 0, 'sunset')),
 		// Températures
+		'temperature'          => array('cle' => array('temp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		'temperature_max'      => array('cle' => array('maxtemp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		'temperature_min'      => array('cle' => array('mintemp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('hourly', 0, 'windspeed'), 'suffixe' => array('id_cle' => 2, 'm' => 'Kmph', 's' => 'Miles')),
-		'angle_vent'           => array('cle' => array('hourly', 0, 'winddirDegree')),
-		'direction_vent'       => array('cle' => array('hourly', 0, 'winddir16Point')),
+		'vitesse_vent'         => array('cle' => array('windspeed'), 'suffixe' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
+		'angle_vent'           => array('cle' => array('winddirDegree')),
+		'direction_vent'       => array('cle' => array('winddir16Point')),
 		// Données atmosphériques : risque_uv est calculé
-		'risque_precipitation' => array('cle' => array('hourly', 0, 'chanceofrain')),
-		'precipitation'        => array('cle' => array('hourly', 0, 'precipMM')),
-		'humidite'             => array('cle' => array('hourly', 0, 'humidity')),
-		'point_rosee'          => array('cle' => array('hourly', 0, 'DewPoint'), 'suffixe' => array('id_cle' => 2, 'm' => 'C', 's' => 'F')),
-		'pression'             => array('cle' => array('hourly', 0, 'pressure')),
-		'visibilite'           => array('cle' => array('hourly', 0, 'visibility')),
+		'risque_precipitation' => array('cle' => array('chanceofrain')),
+		'precipitation'        => array('cle' => array('precipMM')),
+		'humidite'             => array('cle' => array('humidity')),
+		'point_rosee'          => array('cle' => array('DewPoint'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'pression'             => array('cle' => array('pressure')),
+		'visibilite'           => array('cle' => array('visibility')),
 		'indice_uv'            => array('cle' => array('uvIndex')),
 		// Etats météorologiques natifs
-		'code_meteo'           => array('cle' => array('hourly', 0, 'weatherCode')),
-		'icon_meteo'           => array('cle' => array('hourly', 0, 'weatherIconUrl', 0, 'value')),
-		'desc_meteo'           => array('cle' => array('hourly', 0, 'weatherDesc', 0, 'value')),
+		'code_meteo'           => array('cle' => array('weatherCode')),
+		'icon_meteo'           => array('cle' => array('weatherIconUrl', 0, 'value')),
+		'desc_meteo'           => array('cle' => array('weatherDesc', 0, 'value')),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -240,7 +242,7 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 		$url .= '&cc=yes&fx=no';
 	} else {
 		$url .= '&cc=no&fx=yes'
-				. '&num_of_days=' . $configuration['previsions']['max_jours']
+				. '&num_of_days=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours']
 				. '&tp=' . strval($periodicite);
 	}
 

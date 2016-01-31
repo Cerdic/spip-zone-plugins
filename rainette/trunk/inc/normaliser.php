@@ -50,12 +50,14 @@ $GLOBALS['rainette_config']['conditions'] = array(
 $GLOBALS['rainette_config']['previsions'] = array(
 	// Données d'observation
 	'date'                 => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
+	'heure'                => array('origine' => 'service', 'type_php' => 'heure', 'rangement' => 'heure'),
 	// Données astronomiques
 	'lever_soleil'         => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
 	'coucher_soleil'       => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
 	// Températures
-	'temperature_max'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'temperature_min'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
+	'temperature'          => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
+	'temperature_max'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'jour'),
+	'temperature_min'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'jour'),
 	// Données anémométriques
 	'vitesse_vent'         => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
 	'angle_vent'           => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
@@ -78,8 +80,14 @@ $GLOBALS['rainette_config']['previsions'] = array(
 	'resume'               => array('origine' => 'calcul', 'type_php' => 'mixed', 'rangement' => 'heure'),
 	'periode'              => array('origine' => 'calcul', 'type_php' => 'int', 'rangement' => 'heure'),
 	// Informations complémentaires
-	'max_previsions'       => array('origine' => 'calcul', 'type_php' => 'int', 'rangement' => 'jour'),
 );
+
+$GLOBALS['rainette_config']['periodicite'] = array(
+	24 => array(24, 12),
+	12 => array(12),
+	1  => array(1,3,6)
+);
+
 
 
 /**
@@ -173,6 +181,9 @@ function donnee2typage($mode, $donnee) {
 			case 'date':
 				$fonction = 'donnee2date';
 				break;
+			case 'heure':
+				$fonction = 'donnee2heure';
+				break;
 			default:
 				$fonction = '';
 		}
@@ -183,23 +194,88 @@ function donnee2typage($mode, $donnee) {
 
 
 /**
- * @param $date_service
+ * @param $donnee
  *
  * @return string
  */
-function donnee2date($date_service) {
-	if (is_numeric($date_service)) {
-		$date = date('Y-m-d H:i:s', $date_service);
+function donnee2date($donnee) {
+	if (is_numeric($donnee)) {
+		$date = date('Y-m-d H:i:s', $donnee);
 	} else {
-		$date = date_create($date_service);
+		$date = date_create($donnee);
 		if (!$date) {
-			$elements_date = explode(' ', $date_service);
+			$elements_date = explode(' ', $donnee);
 			array_pop($elements_date);
-			$date_service = implode(' ', $elements_date);
-			$date = date_create($date_service);
+			$donnee = implode(' ', $elements_date);
+			$date = date_create($donnee);
 		}
 		$date = date_format($date, 'Y-m-d H:i:s');
 	}
 
 	return $date;
 }
+
+/**
+ * @param $donnee
+ *
+ * @return string
+ */
+function donnee2heure($donnee) {
+	if (is_numeric($donnee)) {
+		$taille = strlen($donnee);
+		if ($taille < 3) {
+			$m = '00';
+			$h = $donnee;
+		} else {
+			$m = substr($donnee, -2);
+			$h = strlen($donnee) == 3
+				? substr($donnee, 0, 1)
+				: substr($donnee, 0, 2);
+		}
+		$heure = "${h}:${m}";
+	} else {
+		$heure = $donnee;
+	}
+
+	return $heure;
+}
+
+function trouver_periodicite($type_modele, $service) {
+
+	// Périodicité initialisée à "non trouvée"
+	$periodicite = 0;
+
+	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])) {
+		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
+		// pour le mode prévisions
+		include_spip("services/${service}");
+		$configurer = "${service}_service2configuration";
+		$configuration = $configurer('previsions');
+		$periodicites_service = array_keys($configuration['previsions']['periodicites']);
+
+		$periodicites_modele = $GLOBALS['rainette_config']['periodicite'][$type_modele];
+		foreach ($periodicites_modele as $_periodicite_modele) {
+			if (in_array($_periodicite_modele, $periodicites_service)) {
+				$periodicite = $_periodicite_modele;
+				break;
+			}
+		}
+	}
+
+	return $periodicite;
+}
+
+
+function periodicite_compatible($type_modele, $periodicite) {
+
+	// Périodicité initialisée à "non trouvée"
+	$compatible = false;
+
+	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])
+	and in_array($periodicite, $GLOBALS['rainette_config']['periodicite'][$type_modele])) {
+		$compatible = true;
+	}
+
+	return $compatible;
+}
+

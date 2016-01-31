@@ -34,11 +34,10 @@ $GLOBALS['rainette_wunderground_config']['service'] = array(
 	'previsions'	    => array(
 		'periodicites' => array(
 			24 => array('max_jours' => 10),
-			1  => array('max_jours' => 10)
+//			1  => array('max_jours' => 10)
 		),
 		'defaut'	    => 24
 	),
-	'max_previsions' => 10,
 	'langue_service' => 'EN'
 );
 
@@ -97,17 +96,20 @@ $GLOBALS['rainette_wunderground_config']['conditions'] = array(
 // Configuration des données fournies par le service wwo pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_wunderground_config']['previsions'] = array(
-	'periode_maj' => 1800,
-	'format_flux' => 'json',
-	'cle_base'    => array('forecast', 'simpleforecast', 'forecastday'),
-	'cle_heure'   => array(),
-	'donnees'     => array(
+	'periode_maj'     => 1800,
+	'format_flux'     => 'json',
+	'cle_base'        => array('forecast', 'simpleforecast', 'forecastday'),
+	'cle_heure'       => array(),
+	'structure_heure' => false,
+	'donnees'         => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('date', 'epoch')),
+		'heure'                => array('cle' => array()),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array()),
 		'coucher_soleil'       => array('cle' => array()),
 		// Températures
+		'temperature'          => array('cle' => array()),
 		'temperature_max'      => array('cle' => array('high', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
 		'temperature_min'      => array('cle' => array('low', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
 		// Données anémométriques
@@ -200,6 +202,7 @@ function wunderground_service2cache($lieu, $mode, $periodicite, $configuration) 
 function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Determination de la demande
+	$demande = '';
 	switch ($mode) {
 		case 'infos':
 			$demande = 'geolookup';
@@ -380,7 +383,7 @@ function meteo_wunderground2weather($meteo, $periode = 0) {
 		'chanceflurries'  => array(41, 46),
 		'chancerain'      => array(39, 45),
 		'chancesleet'     => array(39, 45),
-		'chancesleet'     => array(41, 46),
+//		'chancesleet'     => array(41, 46),
 		'chancesnow'      => array(41, 46),
 		'chancetstorms'   => array(38, 47),
 		'clear'           => array(32, 31),

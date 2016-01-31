@@ -34,7 +34,6 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		),
 		'defaut'       => 12
 	),
-	'max_previsions' => 10,
 	'langue_service' => ''
 );
 
@@ -93,17 +92,20 @@ $GLOBALS['rainette_weather_config']['conditions'] = array(
 // Configuration des données fournies par le service weather pour le mode 'conditions'.
 // -- Seules les données non calculées sont configurées.
 $GLOBALS['rainette_weather_config']['previsions'] = array(
-	'periode_maj' => 1800,
-	'format_flux' => 'xml',
-	'cle_base'    => array('children', 'dayf', 0, 'children', 'day'),
-	'cle_heure'   => array('children', 'part'),
-	'donnees'     => array(
+	'periode_maj'     => 1800,
+	'format_flux'     => 'xml',
+	'cle_base'        => array('children', 'dayf', 0, 'children', 'day'),
+	'cle_heure'       => array('children', 'part'),
+	'structure_heure' => true,
+	'donnees'         => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('attributes', 'dt')),
+		'heure'                => array('cle' => array()),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array('children', 'sunr', 0, 'text')),
 		'coucher_soleil'       => array('cle' => array('children', 'suns', 0, 'text')),
 		// Températures
+		'temperature'          => array('cle' => array()),
 		'temperature_max'      => array('cle' => array('children', 'hi', 0, 'text')),
 		'temperature_min'      => array('cle' => array('children', 'low', 0, 'text')),
 		// Données anémométriques
@@ -179,7 +181,7 @@ function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	if ($mode != 'infos') {
 		$url .= ($mode == 'previsions')
-			? '&dayf=' . $configuration['previsions']['max_jours']
+			? '&dayf=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours']
 			: '&cc=*';
 	}
 

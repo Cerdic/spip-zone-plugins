@@ -35,7 +35,7 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 	'previsions'	 => array(
 		'periodicites' => array(
 			24 => array('max_jours' => 16),
-			3  => array('max_jours' => 5)
+//			3  => array('max_jours' => 5)
 		),
 		'defaut'       => 24
 	),
@@ -100,17 +100,20 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 // -- On utilise le mode XML et non JSON car la date de dernière mise à jour et la précipitation ne sont
 //    pas disponibles en JSON
 $GLOBALS['rainette_owm_config']['previsions'] = array(
-	'periode_maj' => 7200,
-	'format_flux' => 'xml',
-	'cle_base'    => array('children', 'forecast', 0, 'children', 'time'),
-	'cle_heure'   => array(),
-	'donnees'     => array(
+	'periode_maj'     => 7200,
+	'format_flux'     => 'xml',
+	'cle_base'        => array('children', 'forecast', 0, 'children', 'time'),
+	'cle_heure'       => array(),
+	'structure_heure' => false,
+	'donnees'         => array(
 		// Données d'observation
 		'date'                 => array('cle' => array('attributes', 'day')),
+		'heure'                => array('cle' => array()),
 		// Données astronomiques
 		'lever_soleil'         => array('cle' => array()),
 		'coucher_soleil'       => array('cle' => array()),
 		// Températures
+		'temperature'          => array('cle' => array()),
 		'temperature_max'      => array('cle' => array('children', 'temperature', 0, 'attributes', 'max')),
 		'temperature_min'      => array('cle' => array('children', 'temperature', 0, 'attributes', 'min')),
 		// Données anémométriques
@@ -205,7 +208,7 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 		   . 'q=' . str_replace(' ', '+', trim($lieu))
 		   . '&mode=' . $configuration['format_flux']
 		   . '&units=' . ($configuration['unite'] == 'm' ? 'metric' : 'imperial')
-		   . ($mode == 'previsions' ? '&cnt=' . $configuration['max_previsions'] : '')
+		   . (($mode == 'previsions') and ($periodicite == 24) ? '&cnt=' . $configuration['previsions']['periodicites'][$periodicite]['max_jours'] : '')
 		   . '&lang=' . $code_langue
 		   . ($configuration['inscription'] ? '&APPID=' . $configuration['inscription'] : '');
 

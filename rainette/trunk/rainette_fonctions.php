@@ -274,92 +274,6 @@ function rainette_afficher_unite($valeur, $type_valeur = '', $precision = -1, $s
 
 /**
  * @param        $lieu
- * @param string $type
- * @param int    $jour
- * @param string $modele
- * @param string $service
- *
- * @return array|string
- */
-function rainette_coasser_previsions($lieu, $type = '1_jour', $jour = 0, $modele = 'previsions_12h', $service = 'weather') {
-
-	// Initialisation du retour
-	$texte = '';
-
-	// Définir la périodicité à partir du modèle
-	// TODO : étudier comment améliorer ce fonctionnement
-	if (preg_match('#previsions_(\d{1,2})h#is', $modele, $match)) {
-		$periodicite = intval($match[1]);
-	} else {
-		$periodicite = 24;
-	}
-
-	// Recuperation du tableau des prévisions pour tous les jours disponibles
-	$charger = charger_fonction('charger_meteo', 'inc');
-	$nom_cache = $charger($lieu, 'previsions', $periodicite, $service);
-	lire_fichier($nom_cache, $tableau);
-	$tableau = unserialize($tableau);
-
-	// Détermination de l'index final contenant les extra (erreur, date...)
-	$index_extra = 0;
-
-	if (($tableau[$index_extra]['erreur'])) {
-		// Affichage du message d'erreur
-		$texte = recuperer_fond('modeles/erreur', $tableau[$index_extra]);
-	} else {
-		if ($type == '1_jour') {
-			// Dans ce cas la variable $jour indique le numéro du jour demandé (0 pour aujourd'hui)
-			// Plutôt que de renvoyer une erreur si le numéro du jour est supérieur au nombre de jours en prévisions
-			// on renvoie au moins le jour max
-			// Sinon, si $jour désigne un jour précis on renvoie une erreur si ce jour ne fait pas partie des
-			// prévisions disponibles
-			if (($d = intval(strtotime(strval($jour)))) <= 0) {
-				$index_jour = min($jour, $tableau[$index_extra]['max_previsions'] - 1);
-			} else {
-				$d = intval(ceil(($d - time()) / (24 * 3600)));
-				if (($d < 0) or ($d >= $tableau[$index_extra]['max_previsions'])) {
-					$tableau[$index_extra]['erreur'] = 'jour';
-					$tableau[$index_extra]['date_erreur'] = affdate($jour);
-					$texte = recuperer_fond('modeles/erreur', $tableau[$index_extra]);
-
-					return $texte;
-				}
-				$index_jour = $d;
-			}
-
-			// Si jour=0 (aujourd'hui), on complete par le tableau du lendemain matin
-			// afin de gérer le passage des prévisions jour à celles de la nuit
-			if ($index_jour == 0) {
-				$tableau[$index_jour]['lever_soleil'] = $tableau[$index_jour + 1]['lever_soleil'];
-				foreach ($tableau[$index_jour][0] as $_cle => $_valeur) {
-					$tableau[$index_jour][2][$_cle] = $tableau[$index_jour + 1][0][$_cle];
-				}
-			}
-
-			// On ajoute les informations extra (date et crédits)
-			$contexte = array_merge($tableau[$index_jour], $tableau[$index_extra]);
-			$texte = recuperer_fond("modeles/$modele", $contexte);
-		} elseif ($type == 'x_jours') {
-			// Si le nombre de jours demandés est supérieur à celui possible on ne renvoie pas une erreur
-			// mais le nombre de jours maximal
-			if ($jour == 0) {
-				$jour = $index_extra;
-			}
-			$nb_jours = min($jour, $index_extra);
-
-			for ($i = 0; $i < $nb_jours; $i++) {
-				$contexte = array_merge($tableau[$i], $tableau[$index_extra]);
-				$texte .= recuperer_fond("modeles/$modele", $contexte);
-			}
-		}
-	}
-
-	return $texte;
-}
-
-
-/**
- * @param        $lieu
  * @param string $modele
  * @param string $service
  *
@@ -381,6 +295,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 			$type_modele = intval($match[1]);
 
 			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
+			include_spip('inc/normaliser');
 			if (isset($options['periodicite'])) {
 				$periodicite_explicite = intval($options['periodicite']);
 				if (periodicite_compatible($type_modele, $periodicite_explicite)) {
@@ -458,57 +373,5 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 
 	return $texte;
 }
-
-function trouver_periodicite($type_modele, $service) {
-
-	static $compatibilite_type_periodicite =array(
-		24 => array(24, 12),
-		12 => array(12),
-		1  => array(1,3,6)
-	);
-
-	// Périodicité initialisée à "non trouvée"
-	$periodicite = 0;
-
-	if (isset($compatibilite_type_periodicite[$type_modele])) {
-		// Acquérir la configuration statique du service pour connaitre les périodicités horaires supportées
-		// pour le mode prévisions
-		include_spip("services/${service}");
-		$configurer = "${service}_service2configuration";
-		$configuration = $configurer('previsions');
-		$periodicites_service = array_keys($configuration['previsions']['periodicites']);
-
-		$periodicites_modele = $compatibilite_type_periodicite[$type_modele];
-		foreach ($periodicites_modele as $_periodicite_modele) {
-			if (in_array($_periodicite_modele, $periodicites_service)) {
-				$periodicite = $_periodicite_modele;
-				break;
-			}
-		}
-	}
-
-	return $periodicite;
-}
-
-
-function periodicite_compatible($type_modele, $periodicite) {
-
-	static $compatibilite_type_periodicite =array(
-		24 => array(24, 12),
-		12 => array(12),
-		1  => array(1,3,6)
-	);
-
-	// Périodicité initialisée à "non trouvée"
-	$compatible = false;
-
-	if (isset($compatibilite_type_periodicite[$type_modele])
-	and in_array($periodicite, $compatibilite_type_periodicite[$type_modele])) {
-		$compatible = true;
-	}
-
-	return $compatible;
-}
-
 
 include_spip('inc/debusquer');

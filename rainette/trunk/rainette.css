@@ -101,7 +101,7 @@
 	background: #fcfcfc;
 }
 .rainette_previsions_12h .entete+.entete {
-	width: 27.2em;
+	width: 26.9em;
 	border-right: 0;
 }
 .rainette_previsions_12h .cadre {float: left; background: #ffffff;}
@@ -113,7 +113,7 @@
 	border-width: 0 0.1em 0.1em 0;
 }
 .rainette_previsions_12h .cellule+.cellule {
-	width: 27.2em;
+	width: 26.9em;
 	border-width: 0 0 0.1em 0;
 }
 .rainette_previsions_12h .contenu {

@@ -168,7 +168,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 				// la majeure partie des cas
 				$flux_heure = $_flux_jour;
 				if ((count($periodes_horaires) > 1)	and !empty($configuration['cle_heure'])) {
-					$flux_heure = table_valeur($flux, implode('/', $configuration['cle_heure']), null);
+					$flux_heure = table_valeur($_flux_jour, implode('/', $configuration['cle_heure']), null);
 				}
 
 				// On boucle sur chaque periode horaire pour remplir le tableau complet.
@@ -177,10 +177,13 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 					//    fournies par le service.
 					//    Suivant la période il faut prendre le flux jour ou le flux heure. On calcule donc le flux heure
 					//    quand c'est nécessaire.
+					$flux_a_normaliser = $_periode == -1
+						? $_flux_jour
+						: ($configuration['structure_heure'] ? $flux_heure[$_periode] : $flux_heure);
 					$donnees = service2donnees(
 						$configuration,
 						$mode,
-						($_periode == -1 ? $_flux_jour : $flux_heure),
+						$flux_a_normaliser,
 						$_periode);
 
 					if ($donnees) {
@@ -206,7 +209,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 						if ($_periode == -1) {
 							$tableau[$_index_jour] = $donnees;
 						} else {
-							$tableau[$_index_jour][$_periode] = $donnees;
+							$tableau[$_index_jour]['heure'][$_periode] = $donnees;
 						}
 					}
 				}
