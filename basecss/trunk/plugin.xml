@@ -3,7 +3,7 @@
 	<prefix>basecss</prefix>
 	<icon>prive/img/basecss.png</icon>
 	
-	<version>3.0.3</version>
+	<version>3.0.4</version>
 	<etat>dev</etat>
 	<categorie>outil</categorie>
 	
@@ -13,7 +13,7 @@
 	<lien>http://contrib.spip.net/?rubrique214</lien>
 	<auteur>[Tetue->http://spip.tetue.net] - 2010</auteur>
 	
-	<necessite id="SPIP" version="[3.0.0;3.0.99]"/>
+	<necessite id="SPIP" version="[3.0.0;3.1.99]"/>
 	<bouton id='basecss' parent='bando_squelette'>
 		<icone>prive/img/basecss-16.png</icone>
 		<titre>Base&nbsp;CSS</titre>
