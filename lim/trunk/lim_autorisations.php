@@ -58,6 +58,16 @@ function autoriser_iconifier($faire, $type, $id, $qui, $opt) {
 /**********************************************************/
 /************* RESTRICTION DANS LES RUBRIQUES *************/
 
+if (!function_exists('autoriser_rubrique_creerrubriquedans')) {
+	function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt) {
+		$quelles_rubriques = lire_config('lim_rubriques/rubrique');
+		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
+		
+		return
+			$lim_rub
+			AND autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt);
+	}
+}
 
 if (!function_exists('autoriser_rubrique_creerarticledans')) {
 	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
