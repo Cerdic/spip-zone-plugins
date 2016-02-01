@@ -11,6 +11,8 @@
 	<nom>Google Tag Manager</nom>
 	<!-- Utiliser le Google Tag Manager -->
 
-	<auteur></auteur>
+	<licence>GNU/GPL</licence>
+
+	<auteur lien="https://www.fidh.org/spip.php?page=auteur&id_auteur=140">Cyril</auteur>
 
 </paquet>
