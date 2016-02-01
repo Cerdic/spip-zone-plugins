@@ -53,6 +53,13 @@ function traiter_participation_dist($args, $retours) {
 		  } else {
 			  $choix_participation='non';
 		  }
+	} else {
+
+		// Pour les formulaires qui n'offrent
+		// pas de séléction participe: oui/non/peut être
+		// si une personne à pris la peine de remplir
+		// le formulaire c'est qu'elle participe
+		$choix_participation = 'oui';
 	}
 
 	// Augmenter le potentiel de séléction de l'id_evenement
