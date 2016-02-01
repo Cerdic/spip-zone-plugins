@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function traiter_participation_dist($args, $retours) {
+
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -82,7 +83,10 @@ function traiter_participation_dist($args, $retours) {
 	);
 
 	// fabrique le pipeline traiter_formidableparticipation.
-	$pipeline = pipeline('traiter_formidableparticipation', array('args'=> $options, 'data'=> $pipeline));
+	$options = pipeline('traiter_formidableparticipation', $options);
+
+	include_spip('formidableparticipation_functions');
+	$retour = formidableparticipation_inserer($options);
 
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
