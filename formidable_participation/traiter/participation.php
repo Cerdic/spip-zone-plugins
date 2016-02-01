@@ -9,9 +9,11 @@
  * @package    SPIP\Formidableparticipation\traiter\participation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function traiter_participation_dist($args, $retours){
+function traiter_participation_dist($args, $retours) {
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -19,33 +21,40 @@ function traiter_participation_dist($args, $retours){
 	//$champs = saisies_lister_champs($saisies);
 
 	// saisies dans le formulaire
-	if ($options['champ_choix_participation'])
-	  $choix_participation = _request($options['champ_choix_participation']);
-
-	if ($options['champ_email_participation'])
-	  $email_participation = _request($options['champ_email_participation']);
-	
-	
-	if ($options['champ_nom_participation'])
-	  $nom_participation = _request($options['champ_nom_participation']);
-	
-	
-	if ($options['champ_prenom_participation'])
-	  $prenom_participation = _request($options['champ_prenom_participation']);
-	
-	if ($options['champ_organisme_participation'])
-	  $organisme_participation = _request($options['champ_organisme_participation']);
-		  
-	if ($options['champ_choix_participation']){
-		  $choix_participation = _request($options['champ_choix_participation']);
-		  
-		  if ($options['choix_participation_oui'])
-		  	  $participation_oui = $options['choix_participation_oui'];
-		  
-		  if($choix_participation == $participation_oui) $choix_participation='oui';
-		  else $choix_participation='non';
+	if ($options['champ_choix_participation']) {
+		$choix_participation = _request($options['champ_choix_participation']);
 	}
-	  
+
+	if ($options['champ_email_participation']) {
+		$email_participation = _request($options['champ_email_participation']);
+	}
+
+	if ($options['champ_nom_participation']) {
+		$nom_participation = _request($options['champ_nom_participation']);
+	}
+
+	if ($options['champ_prenom_participation']) {
+		$prenom_participation = _request($options['champ_prenom_participation']);
+	}
+
+	if ($options['champ_organisme_participation']) {
+		$organisme_participation = _request($options['champ_organisme_participation']);
+	}
+
+	if ($options['champ_choix_participation']) {
+		  $choix_participation = _request($options['champ_choix_participation']);
+
+		  if ($options['choix_participation_oui']) {
+			  $participation_oui = $options['choix_participation_oui'];
+		  }
+
+		  if ($choix_participation == $participation_oui) {
+			  $choix_participation='oui';
+		  } else {
+			  $choix_participation='non';
+		  }
+	}
+
 	$options = array(
 		'id_evenement'=> $options['id_evenement_participation'], //si oui, traitement avec agenda
 		'choix_participation' => $choix_participation,
@@ -57,12 +66,12 @@ function traiter_participation_dist($args, $retours){
 		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
 		'tracking_id' => $retours['id_formulaires_reponse'],
 	);
-	
+
 	// fabrique le pipeline traiter_formidableparticipation.
-	$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
-	
+	$pipeline = pipeline('traiter_formidableparticipation', array('args'=> $options, 'data'=> $pipeline));
+
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
-	
+
 	return $retours;
 }
