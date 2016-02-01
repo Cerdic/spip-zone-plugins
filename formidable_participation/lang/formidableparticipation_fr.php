@@ -24,4 +24,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_participation_option_champ_prenom_label' => 'Champ du Prénom',
 	'traiter_participation_option_champ_organisme_label' => 'Champ de l\'Organisme',
 	'traiter_participation_necessite_explication' => 'Pour la prise en charge de la participation, il est nécessaire d\'enregistrer les résultats dans la base de données.',
+	'traiter_participation_option_champ_id_label' => "Champ de l'événement"
 );

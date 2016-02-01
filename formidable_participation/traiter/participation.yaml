@@ -49,6 +49,12 @@ options:
       label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
       env: true
   -
+    saisie: 'champ'
+    options:
+      nom: 'champ_id_participation'
+      label: '<:formidableparticipation:traiter_participation_option_champ_id_label:>'
+      env: true
+  -
     saisie: 'selection_evenement'
     options:
       nom: 'id_evenement_participation'

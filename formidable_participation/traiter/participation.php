@@ -55,8 +55,15 @@ function traiter_participation_dist($args, $retours) {
 		  }
 	}
 
+	// Augmenter le potentiel de séléction de l'id_evenement
+	if ($options['champ_id_participation']) {
+		$id_evenement_participation = _request($options['champ_id_participation']);
+	} elseif ($options['id_evenement_participation']) {
+		$id_evenement_participation = $options['id_evenement_participation'];
+	}
+
 	$options = array(
-		'id_evenement'=> $options['id_evenement_participation'], //si oui, traitement avec agenda
+		'id_evenement'=> $id_evenement_participation, //si oui, traitement avec agenda
 		'choix_participation' => $choix_participation,
 		'email' => $email_participation,
 		'nom' => $nom_participation,
