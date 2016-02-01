@@ -68,6 +68,9 @@ function formidableparticipation_inserer($c) {
 		} else {
 			sql_insertq('spip_evenements_participants', $champs);
 		}
+
+		// Message OK
+		$retours['message_ok'] = _T('agenda:participation_prise_en_compte');
 	}
 
 	spip_log(
