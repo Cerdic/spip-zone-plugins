@@ -36,7 +36,7 @@ $(function(){
             url: "?action=trier_objets&id_grappe=#ENV{id_grappe}&objet=article&sort="+ordre
         });
         request.done(function() {
-            $('.formulaire_lier_objets').ajaxReload();
+            $('.formulaire_lier_objets').ajaxReload(); // Une fois trié on recharge la liste
         });        
     });
 });

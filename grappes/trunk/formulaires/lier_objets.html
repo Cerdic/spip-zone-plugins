@@ -5,7 +5,7 @@
 	[(#REM) Recherche pour ajouter de nouvelles liaisons ]
 	[(#ENV{editable})
 	<div class="formulaire_ajouter_objet">
-	<form action="#SELF" method="post">
+	<form action="#SELF" method="post" id='selecteur_#ENV{identifiant}'>
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
@@ -37,6 +37,14 @@
 			}
 			return false;
 		}
+		
+		$("#selecteur_#ENV{identifiant}").on("submit", function(){
+			$('.formulaire_lier_objets').ajaxReload({
+				args:{
+				},
+				history:false
+			});    
+		});
 	-->
 	</script>
 </div>
