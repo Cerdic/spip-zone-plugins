@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function formidableparticipation_inserer($c) {
 
 	// Définir le retour du traitement
-	$retour = array();
+	$retours = array();
 
 	$id_evenement = $c['id_evenement'];
 	$reponse = $c['choix_participation'];
@@ -66,5 +66,5 @@ function formidableparticipation_inserer($c) {
 		'formidable_participation'
 	);
 
-	return $retour;
+	return $retours;
 }

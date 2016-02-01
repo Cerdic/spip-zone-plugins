@@ -86,7 +86,7 @@ function traiter_participation_dist($args, $retours) {
 	$options = pipeline('traiter_formidableparticipation', $options);
 
 	include_spip('formidableparticipation_functions');
-	$retour = formidableparticipation_inserer($options);
+	$retours = formidableparticipation_inserer($options);
 
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
