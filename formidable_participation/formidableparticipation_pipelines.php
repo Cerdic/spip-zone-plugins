@@ -33,7 +33,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			$organisme = '('.$flux['args']['organisme'].')';
 		}
 
-		$nom = "$prenom $nom $organisme";
+		$nom = trim("$prenom $nom $organisme");
 
 		$champs = array(
 			'id_auteur' => $id_auteur,
