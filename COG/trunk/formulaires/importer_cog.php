@@ -25,7 +25,7 @@ foreach($tab_objet as &$objet)
 				if (!file_exists($nom_fichier))
 					$fichier_manquant = true;
 				$nom_fichier = $emplacement . $infos_fichier['filename'] . '.xls';
-				if (!file_exists($nom_fichier))
+				if ($fichier_manquant && !file_exists($nom_fichier))
 					$fichier_manquant = true;
 			}
 			else{
@@ -85,6 +85,7 @@ function formulaires_importer_cog_verifier_dist(){
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_importer_cog_traiter_dist(){
 
+	include_spip('cog_administrations');
 	 $options=array(
 	 'truncate'=>_request("option_truncate"),
 	 'replace'=>_request("option_ecraser"),
@@ -95,7 +96,7 @@ function formulaires_importer_cog_traiter_dist(){
 		list($message,$erreurs)=$fonction($objet, $options);
 	else
 		list($message,$erreurs)=cog_import($objet, $options);
-
+	cog_nouvelle_definition_regionale();
 $retour['editable']=true;
 if(count($erreurs)==0){
 	$retour['message_ok'] = $message;

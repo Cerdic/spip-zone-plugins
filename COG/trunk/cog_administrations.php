@@ -30,6 +30,7 @@ function cog_upgrade($nom_meta_base_version, $version_cible){
 		array('cog_nouvelle_definition_regionale')
 
 	);
+	$maj['1.3'] = array(array('cog_nouvelle_definition_regionale'));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -56,7 +57,8 @@ function cog_vider_tables($nom_meta_base_version) {
 function cog_nouvelle_definition_regionale(){
 
 $tab_region=array();
-$conf_region = cog_config_tab_fichier('cog_region_ancienne');
+include_spip('cog_config');
+$conf_region = cog_config_tab_fichier('cog_regions_ancienne');
 
 
 $fichier=realpath(_DIR_PLUGIN_COG.'/data/'.$conf_region['fichier']);
@@ -78,10 +80,8 @@ while (!feof($pointeur_fichier)){
 
 
 
-
 $tab_table=array(
 	'spip_cog_communes',
-	'spip_cog_communes_liens',
 	'spip_cog_cantons',
 	'spip_cog_arrondissements',
 	'spip_cog_departements');
