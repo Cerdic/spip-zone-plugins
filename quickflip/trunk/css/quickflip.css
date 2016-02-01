@@ -72,3 +72,14 @@
     font-size: 18px;
     padding-left: 15px;
 }
+/* pour retrouver le flux normal d'affichage */
+.nettoyeur {
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border: none;
+	height: 0;
+	line-height: 1px;
+	font-size: 1px;
+	visibility: hidden;
+}
