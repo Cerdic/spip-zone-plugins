@@ -1,0 +1,30 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=gtm -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+			<li class="editer editer_tag_gtm">
+				<label for="tag_gtm"><:gtm:label_tag_gtm:></label>
+				<p class="explication"><:gtm:explication_tag_gtm:></p>
+				<textarea name="tag_gtm"
+					class="text"
+					id="tag_gtm"
+					rows="8"
+					cols="60"
+					placeholder="<:gtm:placeholder:>">#ENV{tag_gtm}</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+		</div>
+	</form>
+</div>

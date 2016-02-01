@@ -1,0 +1,18 @@
+<paquet
+	prefix="gtm"
+	categorie="statistique"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/gtm-32.png"
+	documentation=""
+>
+
+	<nom>Google Tag Manager</nom>
+	<!-- Utiliser le Google Tag Manager -->
+
+	<auteur></auteur>
+
+	<pipeline nom="insert_body" inclure="gtm_insert_head.php" />
+
+</paquet>
