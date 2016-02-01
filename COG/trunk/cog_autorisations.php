@@ -107,6 +107,68 @@ function autoriser_cogcommune_supprimer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_associercogcommunes_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
+
+
+/**
+ * Autorisation à ajouter une commune à un objet à partir de l'interface.
+ *
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet auquel on veut ajouter une commune
+ * @param  int    $id    Identifiant de l'objet auquel on veut ajouter une commune
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_ajoutercommune_dist($faire, $type, $id, $qui, $opts) {
+
+	include_spip('inc/config');
+	$config = lire_config('cog/objets', array());
+	$autoriser = (
+		(
+			// objet activé
+		in_array(table_objet_sql($type),array_filter($config))
+		)
+		AND
+		(
+			// identifiant positif : cas «normal»
+			(
+				$id>0
+				AND
+				(
+					($qui['statut'] == '0minirezo' AND !$qui['restreint'])
+					// il faut être autorisé à modifier l'objet...
+					OR autoriser('modifier', $type, $id, $qui, $opts)
+					// ...mais ça donne un faux négatif depuis le pipeline «post_insertion» (cf. note),
+					// dans ce cas là on vérifie si l'objet est récent et qu'on a le droit d'écrire.
+					OR (
+						(time()-strtotime(generer_info_entite($id,$type,'date'))) < (60*1) // age < 1 min, cf. note
+						AND autoriser('ecrire', $type, $id, $qui, $opts)
+					)
+				)
+			)
+			// identifiant négatif : objet nouveau pas encore enregistré en base (cf. note)
+			OR
+			(
+				$id<0
+				AND
+				(
+					abs($id) == $qui['id_auteur']
+					AND autoriser('ecrire', $type, $id, $qui, $opts)
+				)
+			)
+		)
+	) ? true : false;
+
+	return $autoriser;
+}
+
+
+
+
+
+
+
 // -----------------
 // Objet cog_arrondissements
 

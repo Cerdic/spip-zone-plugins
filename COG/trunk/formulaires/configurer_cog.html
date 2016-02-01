@@ -19,18 +19,21 @@
 			</li>
 
 
-	<li class="editer_afficher_bloc_cog">
-	<label><:cog:bloc_cog:></label>
-		<div class="choix">
-			<input type="checkbox" name="afficher_bloc_cog" [checked="(#ENV{afficher_bloc_cog}|=={non}|?{checked})"] id="afficher_bloc_cog" value='non' />
-			<label for="afficher_bloc_cog"><:cog:activer_bloc_cog:></label>
-		</div>
+
+
+	[(#REM) choix des objets sur lesquels l'ajout de liens avec une ou plusieurs communes est possible ]
+	#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<label><:cog:label_activer_cog_objets:></label>
+		<p class="explication"><:cog:explication_activer_cog_objets:></p>[
+		<span class='erreur_message'>(#GET{erreurs})</span>
+		]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_cog_communes}}
 	</li>
 
 	<li class="editer_rubriques_cog">
 			<label for="rubriques_cog"><:cog:limitation_rubriques_cog:></label>
 			<p class="explication"><:cog:explication_limitation_rubriques_cog:></p>
-			<select name="rubriques_cog[]" multiple="multiple" size="9">
+			<select name="rubriques_cog[]" id="rubriques_cog" multiple="multiple" size="9">
 				<option value="-1"[ (#EVAL{-1}|in_array{#GET{wichrub}}|?{' selected="selected"'})]>Toutes</option>
 				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
 				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>

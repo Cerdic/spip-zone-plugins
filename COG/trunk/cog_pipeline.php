@@ -16,38 +16,26 @@ if (!defined('_DIR_PLUGIN_COG'))
 
 
 
+
 function cog_affiche_milieu($flux){
-if(lire_config('cog/afficher_bloc_cog'))
-{
-	$tab_page_bloc=array('article'=>'article','naviguer'=>'rubrique');
-	if (in_array($flux['args']['exec'],array_keys($tab_page_bloc))){
 
-		$objet=$tab_page_bloc[$flux['args']['exec']];
+$texte = "";
+$e     = trouver_objet_exec($flux['args']['exec']);
 
-		$tab_rubriques_cog=lire_config("cog/rubriques_cog",array(0,-1));
-		$id_objet = $flux['args']["id_".$objet];
-		$id_rubriques="";
-		switch($objet)
-		{
-		case 'article':
-			//on cherche la rubrique de l'article
-			$id_rubrique=sql_getfetsel('id_rubrique','spip_articles','id_article='.$id_objet);
-		break;
-		case 'rubrique':
-			$id_rubrique=$id_objet;
-		break;
-		}
-		if (!$id_rubriques){
-			if (!(in_array(-1,$tab_rubriques_cog) OR in_array($id_rubrique, $tab_rubriques_cog))) {
-				return $flux;
-			}
-		include_spip('inc/cog_boitier');
-		$flux['data'].= cog_boitier_cog($id_objet,$objet);
-		}
-	}
+if (
+	$e !== false // page d'un objet éditorial
+	AND $e['edition'] === false // pas en mode édition
+	AND $id_objet=$flux['args'][$e['id_table_objet']]
+	AND autoriser('ajoutercommune',$e['type'],$id_objet)
+) {
+	include_spip('inc/cog_boitier');
+	$flux['data'] .= cog_boitier_cog($id_objet, $e['type']);
+
 }
+
 	return $flux;
 }
+
 
 
 
