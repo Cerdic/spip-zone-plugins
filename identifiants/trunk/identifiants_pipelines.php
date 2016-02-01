@@ -160,6 +160,7 @@ function identifiants_formulaire_verifier($flux){
 	if (
 		preg_match('/^editer_(.*)/', $flux['args']['form'], $matches) // formulaire editer_xxx
 		and $objet = $matches[1]
+		and $id_objet = $flux['args']['args'][0] // on suppose que l'id est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql,$objets)
 		and autoriser('modifier','identifiants')
@@ -176,7 +177,18 @@ function identifiants_formulaire_verifier($flux){
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_format');
 			}
 			// doublon : on n'autorise qu'un seul identifiant par type d'objet
-			elseif (sql_countsel('spip_identifiants', 'identifiant='.sql_quote($identifiant).' AND objet='.sql_quote($objet).' AND id_objet!='.intval($id_objet))) {
+			elseif (
+				// objet existant
+				(
+					intval($id_objet)
+					and sql_countsel('spip_identifiants', 'identifiant='.sql_quote($identifiant).' AND objet='.sql_quote($objet).' AND id_objet!='.intval($id_objet))
+				)
+				// nouvel objet
+				or (
+					!intval($id_objet)
+					and sql_countsel('spip_identifiants', 'identifiant='.sql_quote($identifiant).' AND objet='.sql_quote($objet))
+				)
+			) {
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_doublon');
 			}
 		}
