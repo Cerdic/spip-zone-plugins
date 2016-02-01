@@ -41,6 +41,15 @@ function formidableparticipation_inserer($c) {
 	// et on laisse le traitement du nombre de places à la charge du webmestre et du squelette evenements
 	if (isset($id_evenement)) {
 
+		// Respecter le nombre de places disponibles
+		$places = sql_getfetsel('places', 'spip_evenements', 'id_evenement='.intval($id_evenement));
+		$nb_participant = sql_countsel('spip_evenements_participants', 'id_evenement='.intval($id_evenement));
+
+		if ($nb_participant >= $places) {
+			$retours['message_erreur'] = _T('agenda:plus_de_place');
+			return $retours;
+		}
+
 		// on ne loge pas l'auteur, si l'email sur le même id_evenement existe, mettre à jour
 		$reponse = sql_fetsel(
 			'reponse',
