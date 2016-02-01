@@ -1,7 +1,8 @@
 <traduction module="minical" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/calendrier_mini/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/minical?lang_cible=ar" total="14" traduits="3" relire="0" modifs="0" nouveaux="11" pourcent="21.43">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/minical?lang_cible=ar" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="Sami Lejmi" lien="http://trad.spip.net/auteur/sami-lejmi" />
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/minical?lang_cible=de" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
