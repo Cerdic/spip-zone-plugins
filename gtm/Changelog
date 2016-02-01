@@ -1,0 +1,4 @@
+2016-02-01	Cyril <cyril@cym.fr>
+	* mise en chaine de langue du message d'erreur GA actif
+	* modification balise à insérer dans le <body>
+	* incrément version maintenance

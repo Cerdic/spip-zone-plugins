@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_titre'      => 'Google Tag Manager',
 	'configurer_descriptif' => 'Configurer le Google Tag Manager pour votre site. Vous pouvez visiter ici une <a href="https://www.google.com/intl/fr/tagmanager/"> page de présentation du Google Tag Manager</a> (ou Gestionnaire de Balise Google).',
 	'placeholder'           => '<!-- Google Tag Manager -->',
-
+	'erreur_ga_actif'       => 'Attention, le plugin Google Analytics est actif, veuillez le désactiver avant de pouvoir utiliser GTM.',
 );
 
 ?>
