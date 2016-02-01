@@ -39,9 +39,9 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			'id_auteur' => $id_auteur,
 			'nom' => $nom,
 			'email' => $email,
-			'reponse'=>$reponse,
-			'id_evenement'=>$id_evenement,
-			'date'=>date('Y-m-d H:i:s'),
+			'reponse' => $reponse,
+			'id_evenement' => $id_evenement,
+			'date' => date('Y-m-d H:i:s')
 		);
 
 		// si evenement, on insere le participant et ses données
