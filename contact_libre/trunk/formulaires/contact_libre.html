@@ -3,13 +3,13 @@
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<BOUCLE_editable(CONDITION){si #ENV{editable}}>
-<form method="post" action="#ENV{action}formulaire_contact_libre#ENV{id}">
+[(#ENV{editable})
+<form method="post" action="[(#ENV{action})]#formulaire_contact_libre#ENV{id}">
 	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	
 	[(#REM) Previsualisation... ]
-	<BOUCLE_previsu(CONDITION){si #ENV*{erreurs}|table_valeur{previsu}|oui}>
+	[(#ENV*{erreurs}|table_valeur{previsu}|oui)
 	<fieldset class="previsu">
 		<legend><:previsualisation:></legend>
 		<div>
@@ -18,7 +18,7 @@
 		</div>
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
-	</BOUCLE_previsu>
+	]
 	
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
@@ -48,5 +48,5 @@
 	</p>
 	<p class="boutons"><input type="submit" class="submit" name="valide" value="<:form_prop_envoyer:>" /></p>
 </form>
-</BOUCLE_editable>
+]
 </div>
