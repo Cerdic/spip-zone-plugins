@@ -11,10 +11,10 @@ function mutu_connect_db($host, $port, $login, $pass, $db = '', $type = 'mysql',
 {
     $args = func_get_args();
 
-    // sinon plantages 1.9.3
-    // le fichier SERVEUR_out dans spip_connect_db
-    // empeche une nouvelle connexion ?
-    define('_ECRIRE_INSTALL', true);
+    // le fichier SERVEUR_out dans spip_connect_db empeche une nouvelle connexion ?
+    if (!defined('_ECRIRE_INSTALL')) {
+        define('_ECRIRE_INSTALL', true);
+    }
 
     $link = call_user_func_array('spip_connect_db', $args);
     if ($link) {
@@ -30,6 +30,13 @@ function mutu_connect_db($host, $port, $login, $pass, $db = '', $type = 'mysql',
 // utile reellement ?
 function mutu_close()
 {
-    $f = _INSTALL_SERVER_DB.'_close';
+    switch (_INSTALL_SERVER_DB) {
+        case 'mysql':
+            $f = 'mysqli_close';
+            break;
+        default:
+            $f = _INSTALL_SERVER_DB.'_close';
+            break;
+    }
     $f($GLOBALS['connexions'][_INSTALL_SERVER_DB]['link']);
 }
