@@ -1,0 +1,15 @@
+<paquet
+	prefix="infophp"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/infophp.png"
+	documentation=""
+>	
+	<nom>Info PHP</nom>
+	<auteur lien="http://contrib.spip.net/_RealET_">RealET</auteur>
+	<credit>Dolibarr</credit>
+	<copyright>2016</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+</paquet>

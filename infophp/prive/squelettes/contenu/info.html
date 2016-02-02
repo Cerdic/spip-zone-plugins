@@ -1,0 +1,76 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+<div>
+<?php
+
+function phpinfo_array() {
+	ob_start();
+	phpinfo();
+	$info_arr = array();
+	$info_lines = explode("\n", strip_tags(ob_get_clean(), "<tr><td><h2>"));	// end of ob_start()
+	$cat = "General";
+	foreach($info_lines as $line) {
+		// new cat?
+		preg_match("~<h2>(.*)</h2>~", $line, $title) ? $cat = $title[1] : null;
+		if(preg_match("~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~", $line, $val)) {
+			$info_arr[trim($cat)][trim($val[1])] = $val[2];
+		}
+		elseif(preg_match("~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~", $line, $val)) {
+			$info_arr[trim($cat)][trim($val[1])] = array("local" => $val[2], "master" => $val[3]);
+		}
+	}
+	return $info_arr;
+}
+
+print '<table>';
+print '<thead><tr><th><:infophp:parameter:></th><th><:infophp:value:></th></tr></thead>';
+print "\n";
+
+// Recupere la version de PHP
+$phpversion=phpversion();
+print '<tbody><tr><td  width="220px">'."<:infophp:version:>"."</td><td>".$phpversion."</td></tr></tbody>\n";
+
+print '</table>';
+print '<br>';
+
+// Get php_info array
+$phparray=phpinfo_array();
+foreach($phparray as $key => $value) {
+	print '<table>';
+	print '<thead><tr class="liste_titre">';
+	print '<th width="220px">'.$key.'</th>';
+	print '<th colspan="2"><:infophp:value:></th>';
+	print "</tr></thead>\n";
+	print "<tbody>\n";
+
+	foreach($value as $keyparam => $keyvalue) {
+		if (! is_array($keyvalue)) {
+			print '<tr>';
+			print '<td>'.$keyparam.'</td>';
+			$valtoshow=$keyvalue;
+			if ($keyparam == 'X-ChromePhp-Data') $valtoshow=dol_trunc($keyvalue,80);
+			print '<td colspan="2">';
+			if ($keyparam == 'Path') $valtoshow=join('; ',explode(';',trim($valtoshow)));
+			if ($keyparam == 'PATH') $valtoshow=join('; ',explode(';',trim($valtoshow)));
+			if ($keyparam == '_SERVER["PATH"]') $valtoshow=join('; ',explode(';',trim($valtoshow)));
+			print $valtoshow;
+			print '</td>';
+			print '</tr>';
+		} else {
+			print '<tr>';
+			print '<td>'.$keyparam.'</td>';
+			$i=0;
+			foreach($keyvalue as $keyparam2 => $keyvalue2) {
+				print '<td>';
+				$valtoshow=$keyvalue2;
+				if ($keyparam == 'disable_functions') $valtoshow=join(', ',explode(',',trim($valtoshow)));
+				print $valtoshow;
+				$i++;
+				print '</td>';
+			}
+			print '</tr>';
+		}
+	}
+	print '</tbody></table><br>';
+}
+?>
+</div>
