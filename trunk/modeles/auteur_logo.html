@@ -1,0 +1,3 @@
+<BOUCLE_logo(AUTEURS){id_auteur}>[(#REM) on redimenssionne avec largeur ou hauteur en pixels, on retire les classes spip_logos spip_logo car on veut le comportement comme un document, les classes sont sur le span]
+	[<span class="spip_documents[ spip_documents_(#ENV{align})]">(#LOGO_AUTEUR|inserer_attribut{class,''}|image_reduire{#ENV{largeur,*},#ENV{hauteur,*}})</span>]
+</BOUCLE_logo>
