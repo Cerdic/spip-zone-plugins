@@ -141,11 +141,11 @@ function mutu_etape_code_activation($e, $options)
                 ($options['utiliser_panel'] ? _T('mutu:install_code_panel') : _T('mutu:install_code')).
                 '</h3>'.
                 "<form method='post' action='".self()."'><div>
-				<input type='password' name='code_activation' size='10' />
-				<input type='submit' value='ok' />"
+                <input type='password' name='code_activation' size='10' />
+                <input type='submit' value='ok' />"
                 .$options['annonce']
                 .'</div></form>
-				',
+                ',
                 " id='mutu'"
             );
             exit;
