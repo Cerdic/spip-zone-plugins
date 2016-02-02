@@ -21,10 +21,17 @@ _chemin(_DIR_RACINE._DIRMUT);
 
 include_spip('inc/minipres');
 include_spip('inc/lang');
-
 utiliser_langue_visiteur();
 
-#$menu_langues = menu_langues('var_lang_ecrire');
+/* choix de la langue (ne fonctionne pas) */
+function mutu_menu_langues() 
+{
+    return '';
+
+    set_request('exec', 'install');
+    $menu_langues = menu_langues('var_lang_ecrire');
+    return '<div>'.$menu_langues."<br /></div>\n" ;
+}
 
 /* centrage...  */
 function mutu_minipres($titre = '', $contenu = '', $onload = '')
@@ -75,7 +82,7 @@ function mutu_etape_code_activation($e, $options)
             $lien = $options['url_contact_hebergeur'] ? $options['url_contact_hebergeur'] : ($options['url_hebergeur'] ? $options['url_hebergeur'] : _SITES_ADMIN_MUTUALISATION);
             echo mutu_minipres(
                 _T('mutu:site_suspendu'),
-                '<div>'.$menu_langues."<br /></div>\n".
+                mutu_menu_langues() .
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
                 '<h3>'._T('mutu:message_site_desactive', array('lien' => $lien)).'</h3>',
                 " id='mutu'"
@@ -85,7 +92,7 @@ function mutu_etape_code_activation($e, $options)
             $lien = $options['url_contact_hebergeur'] ? $options['url_contact_hebergeur'] : ($options['url_hebergeur'] ? $options['url_hebergeur'] : _SITES_ADMIN_MUTUALISATION);
             echo mutu_minipres(
                 _T('mutu:site_supprime'),
-                '<div>'.$menu_langues."<br /></div>\n".
+                mutu_menu_langues() .
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
                 '<h3>'._T('mutu:message_site_desactive', array('lien' => $lien)).'</h3>',
                 " id='mutu'"
@@ -95,7 +102,7 @@ function mutu_etape_code_activation($e, $options)
             $lien = $options['url_contact_hebergeur'] ? $options['url_contact_hebergeur'] : ($options['url_hebergeur'] ? $options['url_hebergeur'] : _SITES_ADMIN_MUTUALISATION);
             echo mutu_minipres(
                 _T('mutu:site_non_demande'),
-                '<div>'.$menu_langues."<br /></div>\n".
+                mutu_menu_langues() .
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
                 '<h3>'._T('mutu:message_site_desactive', array('lien' => $lien)).'</h3>',
                 " id='mutu'"
@@ -105,7 +112,7 @@ function mutu_etape_code_activation($e, $options)
             $lien = $options['url_contact_hebergeur'] ? $options['url_contact_hebergeur'] : ($options['url_hebergeur'] ? $options['url_hebergeur'] : _SITES_ADMIN_MUTUALISATION);
             echo mutu_minipres(
                 _T('mutu:site_non_active'),
-                '<div>'.$menu_langues."<br /></div>\n".
+                mutu_menu_langues() .
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
                 '<h3>'._T('mutu:message_site_desactive', array('lien' => $lien)).'</h3>',
                 " id='mutu'"
@@ -114,8 +121,8 @@ function mutu_etape_code_activation($e, $options)
         }
         include_spip('base/abstract_sql');
         $old_connect = _FILE_CONNECT;
-        define(_FILE_CONNECT, $options['repertoire'].'/'._SITES_ADMIN_MUTUALISATION.'/config/connect.php');
-        define(_FILE_CONNECT_OLD, $options['repertoire'].'/'._SITES_ADMIN_MUTUALISATION.'/config/connect.php');
+        define(_FILE_CONNECT, $options['repertoire'] . '/' . _SITES_ADMIN_MUTUALISATION.'/config/connect.php');
+        define(_FILE_CONNECT_OLD, $options['repertoire'] . '/' . _SITES_ADMIN_MUTUALISATION.'/config/connect.php');
         include_spip('auth/spip');
         $admin = auth_spip_dist($options['login'], $_REQUEST['code_activation']);
         if (!empty($admin)) {
@@ -127,11 +134,15 @@ function mutu_etape_code_activation($e, $options)
     if ($options['code']) {
         $secret = md5($options['code']);
 
-        if ($panel_nok and ($options['code'] != $_REQUEST['code_activation']
-        and $_COOKIE['mutu_code_activation'] != $secret)) {
+        if (
+            $panel_nok and (
+                $options['code'] != (empty($_REQUEST['code_activation']) ? '' : $_REQUEST['code_activation'])
+                and $secret != (empty($_COOKIE['mutu_code_activation']) ? '' : $_COOKIE['mutu_code_activation'])
+            )
+        ) {
             echo mutu_minipres(
                 _T('mutu:install_site'),
-                '<div>'.$menu_langues."<br /></div>\n".
+                mutu_menu_langues() .
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
                 (isset($_REQUEST['code_activation'])
                     ? _T('mutu:install_err')
@@ -143,7 +154,7 @@ function mutu_etape_code_activation($e, $options)
                 "<form method='post' action='".self()."'><div>
                 <input type='password' name='code_activation' size='10' />
                 <input type='submit' value='ok' />"
-                .$options['annonce']
+                . $options['annonce']
                 .'</div></form>
                 ',
                 " id='mutu'"

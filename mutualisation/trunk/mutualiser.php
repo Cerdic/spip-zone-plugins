@@ -37,6 +37,7 @@ function demarrer_site($site = '', $options = array())
             'repertoire' => 'sites',
             'utiliser_panel' => false,
             'url_img_courtes' => false,
+            'annonce' => '',
         ),
         $options
     );
