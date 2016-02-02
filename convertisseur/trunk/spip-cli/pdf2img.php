@@ -25,6 +25,12 @@ class pdf2img extends Command {
 			->setAliases(array(
 				'pdf2img' // abbréviation commune pour ca
 			))
+			->addArgument(
+                'pdf',
+                InputArgument::OPTIONAL,
+                'PDF à convertir.',
+                ''
+            )			
 			->addOption(
 				'source',
 				's',
@@ -39,6 +45,13 @@ class pdf2img extends Command {
 				'Répertoire de destination',
 				'conversion_spip'
 			)
+			->addOption(
+				'shave',
+				'c',
+				InputOption::VALUE_OPTIONAL,
+				'Rogner avec -shave XxY',
+				''
+			)
 		;
 	}
 
@@ -50,10 +63,10 @@ class pdf2img extends Command {
 		
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
-				
-		// Répertoire source ou sont les PDFs
-		if(!is_dir($source))
-			mkdir($source);
+		$shave = $input->getOption('shave') ;
+		$pdf = $input->getArgument('pdf');
+		
+		var_dump($shave);
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
@@ -64,14 +77,25 @@ class pdf2img extends Command {
 			// Si c'est bon on continue
 			else{
 				$output->writeln("<info>C'est parti pour une petite conversion de PDF en images !</info>");
-					
-				$fichiers_pdf = preg_files($source . "/", "\.pdf$");
 				
-				$output->writeln("<info>" . sizeof($fichiers_pdf) . " PDF(s) à convertir dans $source/</info>");
+				# Conversion d'un pdf  ?
+				if($pdf !== ""){
+					$output->writeln("<info>conversion de $pdf dans $dest/</info>");
 
-				foreach($fichiers_pdf as $f){
+					var_dump('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
+					
 					// Conversion imagemagick
-					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . $f . ' ' . $dest);
+					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
+
+				}else{	
+					$fichiers_pdf = preg_files($source . "/", "\.pdf$");
+					
+					$output->writeln("<info>" . sizeof($fichiers_pdf) . " PDF(s) à convertir dans $source/</info>");
+	
+					foreach($fichiers_pdf as $f){
+						// Conversion imagemagick
+						passthru('plugins/convertisseur/scripts/pdf2img.sh ' . $f . ' ' . $dest);
+					}
 				}
 			}
 		}
