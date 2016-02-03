@@ -81,8 +81,8 @@ class optimg extends Command {
 				
 				// optimisation imagemagick
 				if($image){
-					$output->writeln("<info>C'est parti pour une petite optimisation d'image(s) ${label_r}${label_d} !</info>");
-					passthru('plugins/convertisseur/scripts/optimg.sh ' . $image . $param_r . $param_d);
+					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d} !</info>");
+					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d);
 				}	
 				elseif($source){
 					$param_s = " $source" ;
