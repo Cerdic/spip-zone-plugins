@@ -109,6 +109,8 @@ function convertir_xml_ocr($u) {
 	$article = preg_replace("#</EXERGUE>#","</blockquote>", $article);
 	
 	# Italiques
+	$article = preg_replace("#<I>,*\s*#","{", $article);
+	$article = preg_replace("#,*\s*</I>#","}", $article);
 	
 	# Illustrations en mode ressource du plugin ressource depuis une collection du plugin serveur de fichiers
 	// <ILLUSTRATION id="A-MV-1988-2-FR-0001-0001" xhg="41" yhg="1200" xbd="1347" ybd="3291" nump="5"/>
@@ -120,7 +122,6 @@ function convertir_xml_ocr($u) {
 	
 	if($notes){
 		$item['texte'] .= "[[<>\n" . join("\n", $notes) ."\n]]" . "\n" ;
-		$item['notes'] = $notes ;
 	}
 	
 	return $item ;
