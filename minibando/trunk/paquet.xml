@@ -17,4 +17,9 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<traduire module="minibando" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="styliser" inclure="minibando_pipelines.php" />
+
+	<pipeline nom="autoriser" inclure="minibando_autorisations.php" />
+
 </paquet>

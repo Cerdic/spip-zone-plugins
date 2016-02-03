@@ -22,6 +22,14 @@
 							<label for="disposition_vertical"><:minibando:label_disposition_verticale:></label>
 						</div>
 					</li>
+					<li class="editer editer_methode">
+					  <label><:minibando:label_limite_webmestre:></label>
+
+					  <div class="choix">
+						<input type="checkbox" name="limite_webmestre" class="checkbox" [(#ENV{limite_webmestre}|=={on}|oui)checked="checked"] id="limite_webmestre">
+						<label for="limite_webmestre"><:minibando:label_limite_webmestre:></label>
+					  </div>
+					</li>
 				</ul>
 	
 			<p class="boutons">
