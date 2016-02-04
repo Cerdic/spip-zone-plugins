@@ -97,16 +97,11 @@ function facebook_access_token() {
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
 			return "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
 		}
-
-		echo '<h3>Long-lived</h3>';
-		var_dump($accessToken->getValue());
 	}
 
 	// Stocker le token dans la session SPIP
 	include_spip('inc/config');
 	ecrire_config('facebook/accessToken', $accessToken);
-
-	var_dump(lire_config('facebook'));
 }
 
 
