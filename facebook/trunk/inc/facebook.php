@@ -107,6 +107,9 @@ function facebook_access_token() {
 
 function facebook_poster_lien($lien, $message) {
 
+	include_spip('inc/config');
+	$config = lire_config('facebook');
+
 	$fb = facebook();
 
 	$linkData = [
@@ -116,7 +119,7 @@ function facebook_poster_lien($lien, $message) {
 
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->post('/me/feed', $linkData, '{access-token}');
+		$response = $fb->post('/me/feed', $linkData, $config['accessToken']);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
