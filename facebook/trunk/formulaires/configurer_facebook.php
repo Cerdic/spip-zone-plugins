@@ -28,7 +28,6 @@ function formulaires_configurer_facebook_saisies_dist() {
 function formulaires_configurer_facebook_charger_dist() {
 	// Contexte du formulaire.
 	include_spip('inc/config');
-	$config = lire_config('inc/config');
-
+	$config = lire_config('facebook');
 	return (empty($config)) ? array() : $config;
 }
