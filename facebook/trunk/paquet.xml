@@ -25,6 +25,9 @@
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
+	<menu nom="facebook_poster" titre="facebook:facebook_titre" parent="menu_publication" icone="images/facebook-16.png" />
+
+
 	<!--
 		Exemple de commandes
 		* dependances
