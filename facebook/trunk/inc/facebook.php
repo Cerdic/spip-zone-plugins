@@ -154,3 +154,29 @@ function facebook_poster_lien($lien, $message) {
 		exit;
 	}
 }
+
+function facebook_profil() {
+	$fb = facebook();
+
+	include_spip('inc/config');
+	$config = lire_config('facebook');
+
+	try {
+		// Returns a `Facebook\FacebookResponse` object
+		$response = $fb->get('/me', $config['accessToken']);
+	} catch (Facebook\Exceptions\FacebookResponseException $e) {
+		return 'Graph returned an error: ' . $e->getMessage();
+		exit;
+	} catch (Facebook\Exceptions\FacebookSDKException $e) {
+		return 'Facebook SDK returned an error: ' . $e->getMessage();
+		exit;
+	}
+
+	$user = $response->getGraphUser();
+
+	return array(
+		'nom' => $user['name'],
+		'id' => $user['id'],
+		'facebook' => $user
+	);
+}
