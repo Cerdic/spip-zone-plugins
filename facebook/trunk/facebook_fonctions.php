@@ -14,3 +14,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/facebook');
+
+function balise_FACEBOOK_LOGIN_dist($p) {
+
+	include_spip('inc/facebook');
+	$p->code = 'facebook_lien_connection()';
+
+	return $p;
+}
