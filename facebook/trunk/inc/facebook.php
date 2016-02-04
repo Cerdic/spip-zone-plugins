@@ -47,7 +47,9 @@ function facebook_lien_connection() {
 
 	$permission = explode(',', _FACEBOOK_PERMISSION);
 
-	$loginUrl = $helper->getLoginUrl(url_absolue(self()), $permission);
+	$url = generer_action_auteur('facebook_access_token', 'ok', self(), true);
+
+	$loginUrl = $helper->getLoginUrl($url, $permission);
 
 	// Dans le cas ou il y a déjà un compte facebook connecté, on le signale
 	include_spip('inc/config');
