@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('lib/facebook-php-sdk/src/Facebook/autoload');
-
+include_spip('inc/facebook_poster');
 // Le SDK de Facebook utilise des sessions PHP,
 // Cependant, il n'est pas foutu de faire lui même ce test.
 if (!session_id()) {
@@ -121,31 +121,16 @@ function facebook_access_token() {
 	ecrire_config('facebook/accessToken', $accessToken);
 }
 
+function facebook_liste_pages() {
 
-
-/**
- * Poster un lien sur facebook
- *
- * @param string $lien
- * @param string $message
- * @access public
- * @return string Un message d'erreur au besoin
- */
-function facebook_poster_lien($lien, $message) {
+	$fb = facebook();
 
 	include_spip('inc/config');
 	$config = lire_config('facebook');
 
-	$fb = facebook();
-
-	$linkData = [
-		'link' => $lien,
-		'message' => $message,
-	];
-
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->post('/me/feed', $linkData, $config['accessToken']);
+		$response = $fb->get('/me/accounts', $config['accessToken']);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
