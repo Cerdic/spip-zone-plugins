@@ -20,7 +20,7 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 	include_spip('formulaires/selecteur/generique_fonctions');
 
 	$config = lire_config('reservation_evenement', array());
-	$enregistrement_inscrit = isset($config['enregistrement_inscrit']) ? $config['enregistrement_inscrit'] : 'on';
+	$enregistrement_inscrit = isset($config['enregistrement_inscrit']) ? $config['enregistrement_inscrit'] : '';
 	$enregistrement_inscrit_obligatoire = isset($config['enregistrement_inscrit_obligatoire']) ? $config['enregistrement_inscrit_obligatoire'] : '';
 
 	//Si l'affichage n'est pas déjà définie on établit si une zone s'applique
