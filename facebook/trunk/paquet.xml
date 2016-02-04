@@ -21,6 +21,8 @@
 
 	<licence>GNU/GPL</licence>
 
+	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
+
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
 	<!--
@@ -41,9 +43,5 @@
 		* parents d'onglets... configuration, plugins, statistiques, ...
 		<onglet nom="facebook" titre="facebook:facebook_titre" parent="configuration" icone="images/facebook-24.png" />
 	-->
-
-
-	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
-
 
 </paquet>
