@@ -41,6 +41,14 @@ function facebook() {
  */
 function facebook_lien_connection() {
 
+	include_spip('inc/config');
+	$config = lire_config('facebook');
+
+	// Si facebook n'est pas configurer, on n'affiche pas de lien
+	if (empty($config['cle']) or empty($config['secret'])) {
+		return false;
+	}
+
 	$fb = facebook();
 
 	$helper = $fb->getRedirectLoginHelper();
@@ -52,8 +60,6 @@ function facebook_lien_connection() {
 	$loginUrl = $helper->getLoginUrl($url, $permission);
 
 	// Dans le cas ou il y a déjà un compte facebook connecté, on le signale
-	include_spip('inc/config');
-	$config = lire_config('facebook');
 	if (!empty($config['accessToken'])) {
 		$user = facebook_profil();
 
