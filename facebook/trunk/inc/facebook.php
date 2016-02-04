@@ -159,6 +159,20 @@ function facebook_poster_lien($lien, $message) {
 
 	return $graphEdges;
 }
+
+
+function facebook_page_token($id_page) {
+
+	$graphEdges = facebook_liste_pages();
+	foreach ($graphEdges as $graphEdge) {
+		if ($graphEdge['id'] == $id_page) {
+			return $graphEdge['access_token'];
+		}
+	}
+
+	return _T('facebook:erreur_page_access_token');
+}
+
 /**
  * Créer une datas saisies à partir des pages de la personne
  *
