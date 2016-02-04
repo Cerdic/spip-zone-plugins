@@ -26,7 +26,7 @@ function facebook() {
 	$fb = new Facebook\Facebook([
 		'app_id' => $config['cle'],
 		'app_secret' => $config['secret'],
-		'default_graph_version' => 'v2.2',
+		'default_graph_version' => 'v2.2'
 	]);
 
 	return $fb;
