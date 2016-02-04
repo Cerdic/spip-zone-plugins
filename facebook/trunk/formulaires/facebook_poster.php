@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function formulaires_facebook_poster_saisies_dist() {
+
+	include_spip('inc/facebook');
+
 	$saisies = array(
 		array(
 			'saisie' => 'textarea',
@@ -19,18 +22,36 @@ function formulaires_facebook_poster_saisies_dist() {
 				'nom' => 'facebook_lien',
 				'label' => _T('facebook:lien')
 			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'page',
+				'label' => _T('facebook:page'),
+				'datas' => facebook_saisie_pages()
+			)
 		)
 	);
+
 	return $saisies;
 }
 
 function formulaires_facebook_poster_traiter_dist() {
 	//Traitement du formulaire.
 	include_spip('inc/facebook');
-	$erreur = facebook_poster_lien(
-		_request('facebook_lien'),
-		_request('facebook_message')
-	);
+
+	if (_request('page')) {
+		$erreur = facebook_poster_lien_page(
+			_request('page'),
+			_request('facebook_lien'),
+			_request('facebook_message')
+		);
+	} else {
+		$erreur = facebook_poster_lien(
+			_request('facebook_lien'),
+			_request('facebook_message')
+		);
+	}
 
 	if ($erreur) {
 		return array('message_erreur' => $erreur);
