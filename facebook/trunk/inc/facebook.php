@@ -49,7 +49,7 @@ function facebook_lien_connection() {
 
 	$loginUrl = $helper->getLoginUrl(url_absolue(self()), $permission);
 
-	return '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook!</a>';
 }
 
 /**
