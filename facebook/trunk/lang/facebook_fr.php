@@ -2,11 +2,12 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'facebook_titre' => 'Facebook',
+	'titre_page_facebook_poster' => 'Poster sur Facebook',
 
 	// C
 	'cfg_exemple' => 'Exemple',
@@ -15,4 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_facebook' => 'Configuration de Facebook',
+	'compte_connecte' => 'Compte actuellement connecté: @compte@',
+	'cle' => "Identifiant de l'app",
+	'secret' => 'Clé secrète',
+	'message' => 'Message',
+	'lien' => 'Lien',
+	'page' => 'Poster sur un page ?',
+	'confirmer_poster' => 'Message correctement posté sur Facebook'
 );
