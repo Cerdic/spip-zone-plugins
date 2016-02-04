@@ -153,6 +153,34 @@ function facebook_poster_lien($lien, $message) {
 		return 'Facebook SDK returned an error: ' . $e->getMessage();
 		exit;
 	}
+
+	// On récupère les éléments pages
+	$graphEdges = $response->getGraphEdge();
+
+	return $graphEdges;
+}
+/**
+ * Créer une datas saisies à partir des pages de la personne
+ *
+ * @access public
+ * @return array Datas pour saisies
+ */
+function facebook_saisie_pages() {
+
+	$graphEdges = facebook_liste_pages();
+	if (!is_string($graphEdges)) {
+		// Replir un tableau utilisable avec saisies
+		$datas = array();
+		foreach ($graphEdges as $graphEdge) {
+			$datas[$graphEdge['id']] = $graphEdge['name'];
+		}
+	} else {
+		// C'est une erreur, on la renvoie
+		return $graphEdges;
+	}
+
+
+	return $datas;
 }
 
 function facebook_profil() {
