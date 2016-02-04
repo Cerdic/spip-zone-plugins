@@ -9,14 +9,11 @@
  * @package    SPIP\Facebook\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-
-/*
- * Un fichier d'options permet de définir des éléments
- * systématiquement chargés à chaque hit sur SPIP.
- *
- * Il vaut donc mieux limiter au maximum son usage
- * tout comme son volume !
- * 
- */
+// Définir les permissions de l'appication facebook
+// Par défaut on demande seulement le droit de publier
+// Les éléments doivent être séparé par une virgule
+define('_FACEBOOK_PERMISSION', 'publish_actions');

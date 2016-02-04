@@ -33,7 +33,9 @@ function facebook_lien_connection() {
 
 	$helper = $fb->getRedirectLoginHelper();
 
-	$loginUrl = $helper->getLoginUrl(url_absolue(self()));
+	$permission = explode(',', _FACEBOOK_PERMISSION);
+
+	$loginUrl = $helper->getLoginUrl(url_absolue(self()), $permission);
 
 	return '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 }
