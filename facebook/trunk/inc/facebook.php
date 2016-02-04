@@ -56,7 +56,10 @@ function facebook_lien_connection() {
 	$config = lire_config('facebook');
 	if (!empty($config['accessToken'])) {
 		$user = facebook_profil();
-		$compte_connecte = _T('facebook:compte_connecte', array('compte' => $user['nom']));
+
+		if (!is_string($user)) {
+			$compte_connecte = _T('facebook:compte_connecte', array('compte' => $user['nom']));
+		}
 	}
 
 	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook !</a> '.$compte_connecte;
