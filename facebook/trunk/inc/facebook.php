@@ -118,7 +118,6 @@ function facebook_access_token() {
 	}
 
 	// Stocker le token dans la session SPIP
-	include_spip('inc/config');
 	ecrire_config('facebook/accessToken', $accessToken);
 }
 
