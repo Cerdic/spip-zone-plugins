@@ -49,7 +49,15 @@ function facebook_lien_connection() {
 
 	$loginUrl = $helper->getLoginUrl(url_absolue(self()), $permission);
 
-	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook!</a>';
+	// Dans le cas ou il y a déjà un compte facebook connecté, on le signale
+	include_spip('inc/config');
+	$config = lire_config('facebook');
+	if (!empty($config['accessToken'])) {
+		$user = facebook_profil();
+		$compte_connecte = _T('facebook:compte_connecte', array('compte' => $user['nom']));
+	}
+
+	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook !</a> '.$compte_connecte;
 }
 
 /**
