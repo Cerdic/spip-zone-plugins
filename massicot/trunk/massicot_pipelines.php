@@ -18,7 +18,9 @@
  */
 function massicot_jquery_plugins ($scripts) {
 
-    $scripts[] = find_in_path('lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js');
+	if (test_espace_prive()) {
+		$scripts[] = find_in_path('lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js');
+	}
 
     return $scripts;
 }
@@ -32,8 +34,9 @@ function massicot_jquery_plugins ($scripts) {
  */
 function massicot_jqueryui_plugins ($scripts) {
 
-    $scripts[] = 'jquery.ui.slider';
-
+	if (test_espace_prive()) {
+		$scripts[] = 'jquery.ui.slider';
+	}
     return $scripts;
 }
 
@@ -45,13 +48,13 @@ function massicot_jqueryui_plugins ($scripts) {
  * @return array       Données du pipeline
  */
 function massicot_header_prive ($flux) {
+	if (test_espace_prive()) {
+		$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
+		      find_in_path('css/massicot.css') . '" />';
 
-    $flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
-          find_in_path('css/massicot.css') . '" />';
-
-    $flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
-        find_in_path('lib/jquery.imgareaselect.js/distfiles/css/imgareaselect-default.css') . '" />';
-
+		$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
+		      find_in_path('lib/jquery.imgareaselect.js/distfiles/css/imgareaselect-default.css') . '" />';
+	}
     return $flux;
 }
 
