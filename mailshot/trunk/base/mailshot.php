@@ -66,6 +66,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'end'=>'puce-publier-8.png',
 			'cancel'=>'puce-refuser-8.png',
 			'poubelle'=>'puce-supprimer-8.png',
+			'archive'=>'puce-archiver-8.png',
 		),
 		'statut_titres' => array(
 			'pause'=>'mailshot:info_statut_pause',
@@ -73,6 +74,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'end'=>'mailshot:info_statut_end',
 			'cancel'=>'mailshot:info_statut_cancel',
 			'poubelle'=>'mailshot:info_statut_poubelle',
+			'archive'=>'mailshot:info_statut_archive',
 		),
 		'statut_textes_instituer' => array(
 			'pause'=>'mailshot:texte_statut_pause',
@@ -80,6 +82,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'end'=>'mailshot:texte_statut_end',
 			'cancel'=>'mailshot:texte_statut_cancel',
 			'poubelle' => 'texte_statut_poubelle',
+			'archive' => 'mailshot:texte_statut_archive',
 		),
 		'texte_changer_statut' => 'mailshot:texte_changer_statut_mailshot',
 

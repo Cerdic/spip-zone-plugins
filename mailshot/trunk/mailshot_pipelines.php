@@ -140,7 +140,7 @@ function mailshot_optimiser_base_disparus($flux){
 		// sinon purgeons un vieux (pas dans le meme appel pour pas etre trop long)
 		include_spip("inc/config");
 		if (lire_config("mailshot/purger_historique",'non')=='oui'
-		  AND $delai = lire_config("mailshot/purger_historique_delai",0)){
+		  AND $delai = intval(lire_config("mailshot/purger_historique_delai",0))){
 
 			// les envois finis depuis plus de $delai mois
 			$vieux = date('Y-m-d H:i:s',strtotime("-$delai month"));
@@ -159,6 +159,7 @@ function mailshot_optimiser_base_disparus($flux){
 				include_spip('inc/mailshot');
 				mailshot_compter_envois($id_mailshot);
 				sql_delete("spip_mailshots_destinataires",'id_mailshot='.intval($id_mailshot));
+				sql_updateq("spip_mailshots",array('statut'=>'archive'),'id_mailshot='.intval($id_mailshot));
 				spip_log("Purger vieux mailshot $id_mailshot plus vieux que $vieux","mailshot");
 			}
 		}
