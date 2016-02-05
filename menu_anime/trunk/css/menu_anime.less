@@ -1,4 +1,4 @@
-/* Menu anime (v.1.0.8)
+/* Menu anime (v 1.0.9)
    ==========
 	Procédure de modification de la feuille de style 'menu_anime.css'
 	1. Modifier les paramètres souhaités dans le présent fichier (menu_anime.less).
@@ -53,6 +53,10 @@
 @small-menu-line-height: @small-menu-font-size + 4;
 @small-menu-padding-y1: 5px;
 @small-menu-padding-left: 20px;
+
+/* Selecteurs */
+@menu-selector: ~".menu_anime";
+@container-selector: ~".menu-conteneur";
 
 /* Valeurs dérivées */
 @top: @line-height + 2*@padding-y1 + 1;
@@ -197,7 +201,7 @@
 
 /* Menu principal */
 
-	.menu_anime {
+	@{menu-selector} {
 		width: @menu-width;
 		margin: 0px auto;
 		.gradient1(@theme-basic);
@@ -205,21 +209,21 @@
 		.box-shadow(2px 2px @shadow-color);
 	}
 	
-	.menu_anime:before,
-	.menu_anime:after {
+	@{menu-selector}:before,
+	@{menu-selector}:after {
 		content: "";
 		display: table;
 	}
 	
-	.menu_anime:after {
+	@{menu-selector}:after {
 		clear: both;
 	}
 	
-	.menu_anime {
+	@{menu-selector} {
 		zoom:1;
 	}
 	
-	.menu_anime ul {
+	@{menu-selector} ul {
 		width: @box-width;
 		list-style: none;
 		margin: 0;
@@ -236,12 +240,12 @@
 		.border-radius(3px);
 	}
 
-	.menu_anime ul ul {
+	@{menu-selector} ul ul {
 		top: 0;
 		left: @box-width + 1;
 	}
 	
-	.menu_anime li {
+	@{menu-selector} li {
 		float: none;
 		display: block;
 		position: relative;
@@ -250,11 +254,11 @@
 		background: none;
 	}
 	
-	.menu_anime li:hover > a {
+	@{menu-selector} li:hover > a {
 			color: @text-hover;
 	}
 
-	.menu_anime a {
+	@{menu-selector} a {
 		.font(@font-size);
 		text-decoration: none;
 		color: @text-basic;
@@ -263,18 +267,18 @@
 		background: none !important;
 	}
 	
-	.menu_anime > li:last-child {
+	@{menu-selector} > li:last-child {
 		border-right: 1px solid @theme-basic * @vborder-light-factor;
 	}
 
-	.menu_anime > li > a {
+	@{menu-selector} > li > a {
 		float: left;
 		padding: @padding-y1 @padding-x1;
 		text-transform: uppercase;
 		.vdivider(@theme-basic);
 	}
 	
-	.menu_anime ul a {
+	@{menu-selector} ul a {
 		padding: @padding-y2 1px @padding-y2 @padding-x2 + @text-indent;
 		.box-sizing(content-box);
 		text-indent: -@text-indent;
@@ -282,55 +286,55 @@
 		.hdivider(@theme-basic);	
 	}
 	
-	.menu_anime a:hover {
+	@{menu-selector} a:hover {
 		color: @text-hover;
 	}
 
-	.menu_anime > li > a:hover {
+	@{menu-selector} > li > a:hover {
 		.gradient1(@theme-hover);
 		.vdivider(@theme-hover);
 	}
 
-	.menu_anime > li {
+	@{menu-selector} > li {
 		float: left;
 	}
 
-	.menu_anime ul li > a:hover {
+	@{menu-selector} ul li > a:hover {
 		.gradient2(@theme-hover);
 		.hdivider(@theme-hover);
 	}
 	
-	.menu_anime > li:first-child > a {
+	@{menu-selector} > li:first-child > a {
 		border-left: 0;
 	}
 	
-	.menu_anime > li:first-child > a:hover {
+	@{menu-selector} > li:first-child > a:hover {
 		.border-radius-left(6px);
 	}
 
-	.menu_anime ul li:first-child > a {
+	@{menu-selector} ul li:first-child > a {
 		border-top: 0;
 		.border-radius-top(3px);
 		&::after { .arrowup(@theme-basic * @grad2-factor1) }
 		&:hover::after { .arrowup(@theme-hover * @grad2-factor1) }
 	}
 
-	.menu_anime ul ul li:first-child > a {
+	@{menu-selector} ul ul li:first-child > a {
 	 	&::after { .arrowleft(@theme-basic); }
 		&:hover::after { .arrowleft(@theme-hover); }
 	}
 
-	.menu_anime ul li:last-child > a {
+	@{menu-selector} ul li:last-child > a {
 		border-bottom: 0;
 		.border-radius-bottom(3px);
 	}
 
-	.menu_anime a:focus, .menu_anime a:active, .menu_anime a:visited {
+	@{menu-selector} a:focus, @{menu-selector} a:active, @{menu-selector} a:visited {
 		background: none !important;
 		color: @text-basic;
 	}
 	
-	.menu_anime li:hover > ul, .menu_anime li>a:focus + ul {
+	@{menu-selector} li:hover > ul, @{menu-selector} li>a:focus + ul {
 		opacity: 1;
 		visibility: visible;
 		margin: 0;
@@ -338,7 +342,7 @@
 
 	/* Pas de menu pour l'impression	*/
 	@media print {
-    .menu_anime { display: none; }
+    @{menu-selector} { display: none; }
 }
 
 	/* Menu pour mobile */
@@ -349,11 +353,11 @@
 	@media screen and (max-width: 600px) {
 
 		/* menu_conteneur */
-		.menu_conteneur {
+		@{container-selector} {
 			position: relative;
 		}
 
-		.menu_conteneur * {
+		@{container-selector} {
 		}
 
 		/* menu icon */
@@ -376,7 +380,7 @@
 		}
 		
 		/* main nav */
-		.menu_anime {
+		@{menu-selector} {
 			position: relative;
 			top: 0;
 			width: inherit;
@@ -387,7 +391,7 @@
 			.box-shadow-none;
 		}	
 
-		.menu_anime ul, .menu_anime ul ul {
+		@{menu-selector} ul, @{menu-selector} ul ul {
 			position: static;
 			visibility: visible;
 			opacity: 1;
@@ -396,48 +400,48 @@
 			.box-shadow-none;
 		}
 
-		.menu_anime li {
+		@{menu-selector} li {
 			position: static;
 			display: block;
 			float: none;
 			line-height: @small-menu-line-height;
 		}
 
-		.menu_anime a {
+		@{menu-selector} a {
 			font-size: @small-menu-font-size
 		}
 		
-		.menu_anime > li > a {
+		@{menu-selector} > li > a {
 			float: none;
 			border: 0;
 			padding: 0;
 		}
 		
-		.menu_anime ul a {
+		@{menu-selector} ul a {
 			border: 0;
 			padding: 0;
 			text-indent: 0;
 		}
 
-		.menu_anime > li > a:hover, .menu_anime ul li > a:hover {
+		@{menu-selector} > li > a:hover, @{menu-selector} ul li > a:hover {
 			background: none !important;
 			border: 0;
 		}
 
-		.menu_anime ul li > a, .menu_anime ul ul li > a,
-		.menu_anime ul li:first-child > a, .menu_anime ul li:first-child > a {
+		@{menu-selector} ul li > a, @{menu-selector} ul ul li > a,
+		@{menu-selector} ul li:first-child > a, @{menu-selector} ul li:first-child > a {
 			border: 0;
 			&::after, &:hover::after { border: 0; }
 		}
-		.menu_anime ul li:last-child > a, .menu_anime ul li:first-child > a,
-		.menu_anime ul ul li:first-child > a {
+		@{menu-selector} ul li:last-child > a, @{menu-selector} ul li:first-child > a,
+		@{menu-selector} ul ul li:first-child > a {
 			.border-radius-none;
 			&::after { border: 0; }
 		}			
 	}
 
 	@media screen and (min-width: 600px) {
-		.menu_anime {
+		@{menu-selector} {
 			display: block !important;
 		}
 	}	
@@ -450,6 +454,6 @@
 		display: none;  		
 	}
 
-	.menu_anime li:hover > .no-transition {
+	@{menu-selector} li:hover > .no-transition {
 		display: block;
 	}

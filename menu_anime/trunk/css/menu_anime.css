@@ -215,7 +215,7 @@
   display: none;
 }
 @media screen and (max-width: 600px) {
-  .menu_conteneur {
+  .menu-conteneur {
     position: relative;
   }
   .menu_anime-trigger {

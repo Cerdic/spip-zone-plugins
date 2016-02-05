@@ -1,7 +1,7 @@
 <paquet
 	prefix="menu_anime"
 	categorie="navigation"
-	version="1.0.8"
+	version="1.0.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/menu_anime-64.png"
@@ -11,7 +11,7 @@
 
 	<auteur lien="http://www.quelfutur.org/archive/louis_possoz.html">Louis Possoz</auteur>
 	<credit lien="http://red-team-design.com/css3-dropdown-menu/">Catalin Rosu - Red Team Design</credit>
-	<copyright>2011-2015</copyright>
+	<copyright>2011-2016</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<pipeline nom="insert_head_css" inclure="menu_anime_pipelines.php" />
