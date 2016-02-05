@@ -22,6 +22,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
+	<pipeline nom="affiche_gauche" inclure="facebook_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 

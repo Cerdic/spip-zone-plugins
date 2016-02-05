@@ -9,11 +9,15 @@
  * @package    SPIP\Facebook\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
+function facebook_affiche_gauche($flux) {
 
-/*
- * Un fichier de pipelines permet de regrouper
- * les fonctions de branchement de votre plugin
- * sur des pipelines existants.
- */
+	if ($flux['args']['exec'] == 'article') {
+		$flux['data'] .= recuperer_fond('prive/squelettes/gauche/facebook_affiche_gauche', $flux['args']);
+	}
+
+	return $flux;
+}
