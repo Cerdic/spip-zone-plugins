@@ -16,7 +16,7 @@
  * @param  array $scripts  Les scripts qui seront insérés dans la page
  * @return array       La liste des scripts complétée
  */
-function massicot_jquery_plugins ($scripts) {
+function massicot_jquery_plugins($scripts) {
 
 	if (test_espace_prive()) {
 		$scripts[] = find_in_path('lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js');
@@ -32,7 +32,7 @@ function massicot_jquery_plugins ($scripts) {
  * @param  array $scripts  Plugins jqueryui à charger
  * @return array       Liste des plugins jquerui complétée
  */
-function massicot_jqueryui_plugins ($scripts) {
+function massicot_jqueryui_plugins($scripts) {
 
 	if (test_espace_prive()) {
 		$scripts[] = 'jquery.ui.slider';
@@ -47,7 +47,7 @@ function massicot_jqueryui_plugins ($scripts) {
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function massicot_header_prive ($flux) {
+function massicot_header_prive($flux) {
 	if (test_espace_prive()) {
 		$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
 		      find_in_path('css/massicot.css') . '" />';
@@ -65,10 +65,12 @@ function massicot_header_prive ($flux) {
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function massicot_document_desc_actions ($flux) {
+function massicot_document_desc_actions($flux) {
 
-    $flux['data'] .= recuperer_fond('prive/squelettes/inclure/lien_recadre',
-                                    $flux['args']);
+    $flux['data'] .= recuperer_fond(
+	    'prive/squelettes/inclure/lien_recadre',
+	    $flux['args']
+    );
 
     return $flux;
 }
