@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_contact_libre ajax" id="formulaire_contact_libre#ENV{id}">
-<br class='bugajaxie' />
+<br class="bugajaxie" />
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -23,23 +23,30 @@
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
 		<legend><:envoyer_message:></legend>
-		<div class='editer-groupe'>
-			<div class='editer saisie_email_message obligatoire[ (#ENV*{erreurs}|table_valeur{email_message}|oui)erreur]'>
-				<label for="email_message#ENV{id}"><:entree_adresse_email:></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{email_message})</span>]
-				<input type="text" class="text" name="email_message" id="email_message#ENV{id}" value="#ENV{email_message}" size="30" [(#HTML5) placeholder="<:entree_adresse_email:>]" />
-			</div>
-			<div class='editer saisie_sujet_message obligatoire[ (#ENV*{erreurs}|table_valeur{sujet_message}|oui)erreur]'>
-				<label for="sujet_message#ENV{id}"><:form_prop_sujet:></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{sujet_message})</span>]
-				<input type="text" class="text" name="sujet_message" id="sujet_message#ENV{id}" value="#ENV{sujet_message}" size="30" [(#HTML5) placeholder="<:form_prop_sujet:>]"  />
-			</div>
-			<div class='editer saisie_texte_message obligatoire[ (#ENV*{erreurs}|table_valeur{texte_message}|oui)erreur]'>
-				<label for="texte_message#ENV{id}"><:info_texte_message:></label>
-				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{texte_message})</span>]
-				<textarea name="texte_message" id="texte_message#ENV{id}" rows="8" cols="60" [(#HTML5) placeholder="<:info_texte_message:>]" >#ENV{texte_message}</textarea>
-			</div>
-		</div>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{input,email_message,
+				id=email_message#ENV{id},
+				label=<:entree_adresse_email:>,
+				size=30,
+				obligatoire=oui,
+				info_obligatoire="",
+				placeholder=[(#HTML5|?{<:entree_adresse_email:>,""})]})]
+			[(#SAISIE{input,sujet_message,
+				id=sujet_message#ENV{id},
+				label=<:form_prop_sujet:>,
+				size=30,
+				obligatoire=oui,
+				info_obligatoire="",
+				placeholder=[(#HTML5|?{<:form_prop_sujet:>,""})]})]
+			[(#SAISIE{textarea,texte_message,
+				id=texte_message#ENV{id},
+				label=<:info_texte_message:>,
+				rows=8,
+				cols=60,
+				obligatoire=oui,
+				info_obligatoire="",
+				placeholder=[(#HTML5|?{<:info_texte_message:>,""})]})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 	</fieldset>
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;">

@@ -1,9 +1,9 @@
 <paquet
 	prefix="contact_libre"
 	categorie="communication"
-	version="0.2.5"
-	etat="dev"
-	compatibilite="[2.0.6;3.1.*]"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/contact_libre-48.png"
 	documentation="http://contrib.spip.net/Formulaire-de-contact-libre"
 >
@@ -13,5 +13,6 @@
 
 	<licence>GNU/GPL</licence>
 
+	<necessite nom="saisies" compatibilite="[2.5.26;[" />
 	<utilise nom="nospam" compatibilite="[1.5.13;[" />
 </paquet>
