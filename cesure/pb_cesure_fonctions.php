@@ -135,7 +135,8 @@
 						if($word != "") { 
 							// Couper les mots, sauf ceux avec majuscule initiale (francais, anglais)
 							if (($lang == "fr" || $lang =="en")) {
-								if (ereg("^[A-ZÀÉÈÎ]", $word)) $output[] = $word; 
+								if (preg_match("/^[A-ZÀÉÈÎ]/",$word)) $output[] = $word; 
+								
 								else $output[] = pb_word_hyphenation($word);
 							}
 							else {
@@ -165,8 +166,8 @@
 			function cesure($text, $lang="xxx") {
 			
 			
-
-				if (ereg("<p[^>]*>", $text)) {
+				
+				if (preg_match("/<p[^>]*>/",$text)) {
 					$text = preg_replace("/<p([^>]*)>(.*)<\/p>/miseU", "'<p\\1>'.stripslashes(pb_effectuer_cesure('\\2',$lang)).'</p>'", $text);
 				} else {
 					$text = pb_effectuer_cesure($text, $lang);
