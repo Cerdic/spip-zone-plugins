@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'roles_documents_nom' => 'Rôles de documents',
 	'roles_documents_slogan' => 'Typer des liaisons de documents',
 	'role_logo' => 'Logo',
-	'role_logo_survol' => 'Logo de survol'
+	'role_logo_survol' => 'Logo de survol',
+	'role_document' => 'Document',
 
 );
 

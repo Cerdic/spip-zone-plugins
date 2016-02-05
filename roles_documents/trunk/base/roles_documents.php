@@ -11,6 +11,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Déclarer la liste des rôles
  *
+ * @note
+ * L'API des rôles impose de donner un rôle par défaut : on ne peut pas dissocier des objets sans rôle.
+ * 'document' est le rôle par défaut, ça revient à dire que le document lié n'a aucun rôle particulier.
+ *
  * @param array $tables
  * 		Description des tables
  * @return array
@@ -18,12 +22,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function roles_documents_declarer_tables_objets_sql($tables){
 
-	// par défaut 2 rôles 'logo' et 'logo de survol'
+	// On propose 2 rôles en plus du rôle par défaut : 'logo' et 'logo de survol'
 	$roles_documents = array(
-		'logo'  => 'roles_documents:role_logo',
+		'document'     => 'roles_documents:role_document',
+		'logo'         => 'roles_documents:role_logo',
 		'logo_survol'  => 'roles_documents:role_logo_survol',
 	);
-	// ces 2 rôles sont affichés dans tous les cas
 	$choix = array_keys($roles_documents);
 
 	array_set_merge($tables, 'spip_documents', array(
@@ -32,7 +36,7 @@ function roles_documents_declarer_tables_objets_sql($tables){
 		"roles_objets" => array(
 			'*' => array(
 				'choix' => $choix,
-				'defaut' => ''
+				'defaut' => 'document'
 			)
 		)
 	));

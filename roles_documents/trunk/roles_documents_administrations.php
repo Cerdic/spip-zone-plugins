@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function roles_documents_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	// Ajout des rôles à la table de liens des documents
 	$maj['create'] = array(
 		// supprimer la clé primaire actuelle pour pouvoir en changer en ajoutant la colonne rôle
 		array('sql_alter', "TABLE spip_documents_liens DROP PRIMARY KEY"),
@@ -21,6 +22,11 @@ function roles_documents_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_documents_liens')),
 		// la nouvelle colonne est la, mettre sa nouvelle clé primaire
 		array('sql_alter', "TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet,role)"),
+	);
+
+	// Mettre un rôle 'document' par défaut aux liens dépourvus de rôle
+	$maj['1.0.1'] = array(
+		array('sql_update', "spip_documents_liens", array('role'=>sql_quote('document')), "role=".sql_quote('')),
 	);
 
 	include_spip('base/upgrade');
