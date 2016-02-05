@@ -14,21 +14,18 @@ function frimousses_liste_smileys() {
 				(
 					':-))',
 					':-D',
-					':D',
 					':))'
 				)
 			,
 			'smiley-kiss-16.png' => Array
 				(
 					':-)*',
-					':-*',
-					':*'
+					':-*'
 				)
 			,
 			'smiley-16.png' => Array
 				(
 					':-)',
-					':)',
 					':O)',
 					':o)',
 					':0)'
@@ -44,50 +41,41 @@ function frimousses_liste_smileys() {
 			'smiley-eek-16.png' => Array
 				(
 					'%-)',
-					'8-)',
-					'8)'
+					'8-)'
 				)
 			,
 			'smiley-wink-16.png' => Array
 				(
-					';-)',
-					';)'
+					';-)'
 				)
 			,
 			'smiley-sad-16.png' => Array
 				(
 					':-((',
-					':-(',
-					':('
+					':-('
 				)
 			,
 			'smiley-yell-16.png' => Array
 				(
 					':-O',
-					':O',
-					':0'
+					':-0'
 				)
 			,
 			'smiley-neutral-16.png' => Array
 				(
 					':-|',
-					':|',
-					'|-)',
-					'|)'
+					'|-)'
 				)
 			,
 			'smiley-confuse-16.png' => Array
 				(
-					':-/',
-					':/'
+					':-/'
 				)
 			,
 			'smiley-razz-16.png' => Array
 				(
 					':-p',
-					':-P',
-					':p ',
-					':P '
+					':-P'
 				)
 			,
 			'smiley-cry-16.png' => Array
@@ -109,31 +97,27 @@ function frimousses_liste_smileys() {
 			,
 			'smiley-zipper-16.png' => Array
 				(
-					':-x',
-					':x'
+					':-x'
 				)
 			,
 			'smiley-cool-16.png' => Array
 				(
-					'B-)',
-					'B)'
+					'B-)'
 				)
 			,
 			'smiley-sleep-16.png' => Array
 				(
-					':-@',
-					':@'
+					':-@'
 				)
 			,
 			'smiley-money-16.png' => Array
 				(
-					':$'
+					':-$'
 				)
 			,
 			'smiley-roll-16.png' => Array
 				(
-					':-!',
-					':!'
+					':-!'
 				)
 
 		);
