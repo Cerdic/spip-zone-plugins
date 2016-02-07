@@ -50,6 +50,11 @@ function facebook_lien_connection($action = 'facebook_access_token') {
 		return false;
 	}
 
+	// Raccourcis pour les auteurs
+	if ($action == 'auteur') {
+		$action = 'facebook_access_token_auteur';
+	}
+
 	$fb = facebook();
 
 	$helper = $fb->getRedirectLoginHelper();
