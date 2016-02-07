@@ -39,6 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'An error occurred while updating the database.',
 	'explication_code' => 'ATTENTION: for advanced users. You can specify Spip code (loops and tags) that will be interpreted as in a skeleton. Thus the nut will have access to all variables of the environment of the page.',
 	'explication_description_code' => 'For internal purpose. Not published on the public site.',
+	'explication_dupliquer_composition_reference' => 'The identifier of the duplicated page is <i>@composition@</i>.
+You can choose a new identifier or suffix the reference identifier as follows:
+<i>@composition@<strong>_suffixe</strong></i>',
 	'explication_dupliquer_composition_suffixer' => '.',
 	'explication_glisser_deposer' => 'You can add a nut or order them by drag and drop.',
 	'explication_heritages_composition' => 'Here you can set the compositions that will be inherited by the objects of the branch.',
@@ -56,6 +59,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_deplacer_haut' => 'Move up',
 	'formulaire_description' => 'Description',
 	'formulaire_description_explication' => 'You can use SPIP usual shortcuts, especially the &lt;multi&gt; tag.',
+	'formulaire_dupliquer_page' => 'Duplicate this page',
+	'formulaire_dupliquer_page_entete' => 'Duplicate a page',
+	'formulaire_dupliquer_page_titre' => 'Duplicate the page « @page@ »',
 	'formulaire_erreur_format_identifiant' => 'The identifier can only contain lowercase letters without accents, numbers and the "_" (underscore) character.',
 	'formulaire_icon' => 'Icon',
 	'formulaire_icon_explication' => 'You can enter the relative path to an icon (for example : <i>images/list-item-contenus.png</i>).',
