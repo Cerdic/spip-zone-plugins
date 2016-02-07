@@ -21,3 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 if (!defined('_FACEBOOK_PERMISSION')) {
 	define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list, email');
 }
+
+// Définir ce que récupère la fonction facebook_profil
+if (!defined('_FACEBOOK_CHAMP_PROFIL')) {
+	define('_FACEBOOK_CHAMP_PROFIL', 'id,name,email');
+}

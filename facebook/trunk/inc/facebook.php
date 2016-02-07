@@ -213,7 +213,7 @@ function facebook_profil($token = null) {
 
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->get('/me?fields=id,name,email', $token);
+		$response = $fb->get('/me?fields='._FACEBOOK_CHAMP_PROFIL, $token);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
