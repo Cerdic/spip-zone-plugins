@@ -17,8 +17,10 @@ include_spip('inc/facebook');
 
 function balise_FACEBOOK_LOGIN_dist($p) {
 
+	$action = interprete_argument_balise(1, $p);
+
 	include_spip('inc/facebook');
-	$p->code = 'facebook_lien_connection()';
+	$p->code = "facebook_lien_connection($action)";
 
 	return $p;
 }
