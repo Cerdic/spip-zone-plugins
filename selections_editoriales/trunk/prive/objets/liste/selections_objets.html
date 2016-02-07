@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_selections(SELECTIONS selections_liens){!orphelins}{auteurs_liens.id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par id_objet}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_selections(SELECTIONS selections_liens){!orphelins}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par id_objet}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{selection-16.png}|balise_img)]</td>
 			<td class='titre principale'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})] ([(#OBJET|objet_info{texte_objet}|_T)])</a></td>

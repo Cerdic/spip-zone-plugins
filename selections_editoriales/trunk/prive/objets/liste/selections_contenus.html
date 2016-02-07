@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_selections_contenus(SELECTIONS_CONTENUS){id_selection?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_selections_contenus(SELECTIONS_CONTENUS){id_selection?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{selections_contenu-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_SELECTIONS_CONTENU|image_reduire{20,26})]<a href="[(#ID_SELECTIONS_CONTENU|generer_url_entite{selections_contenu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTIONS_CONTENU">[(#RANG). ]#TITRE</a></td>
