@@ -136,8 +136,7 @@ function facebook_access_token() {
 		}
 	}
 
-	// Stocker le token dans la session SPIP
-	ecrire_config('facebook/accessToken', $accessToken);
+	return $accessToken;
 }
 
 function facebook_liste_pages() {

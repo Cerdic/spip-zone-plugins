@@ -11,5 +11,8 @@ function action_facebook_access_token_dist($arg = null) {
 	}
 
 	include_spip('inc/facebook');
-	facebook_access_token();
+	$token = facebook_access_token();
+
+	// Ecrire le token dans la session
+	ecrire_config('facebook/accessToken', $token);
 }
