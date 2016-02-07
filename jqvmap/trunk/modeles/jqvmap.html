@@ -10,7 +10,7 @@
 jQuery.fn.vectorMap('addMap', 'map_[(#CODE_MAP|sinon{[(#TITRE||translitteration|strtolower|trim|replace{#GET{regex},"_",u})]})]', {[
     "width": (#WIDTH),][
     "height": (#HEIGHT),]
-    "pathes": {
+    "paths": {
         <BOUCLE_path (VECTORS) {id_map}>
         "[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]": {
             "path": "[(#PATH)]",
@@ -42,7 +42,14 @@ jQuery(document).ready(function() {
                 <BOUCLE_click (VECTORS) {id_map} {url_site!=''}>
                 [(#COMPTEUR_BOUCLE|=={1}|?{'if','else if'})] (code == '[(#CODE_VECTOR|sinon{[(#ID_VECTOR)]})]')
                 {
-                    window.open('[(#URL_SITE)]','[(#TARGET)]');
+                    url_site="#URL_SITE";
+                    if (url_site.substr(0,1)=='#' && typeof $(window).scrollTo == 'function') {
+                        $(window).scrollTo(url_site,500);
+                    }
+                    else {
+                        window.open(url_site,'[(#TARGET)]');
+                    }
+
                 }</BOUCLE_click>
             },</B_click>[
         values: (#DATA_NAME),]
