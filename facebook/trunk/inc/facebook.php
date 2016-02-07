@@ -104,10 +104,10 @@ function facebook_access_token() {
 	if (! isset($accessToken)) {
 		if ($helper->getError()) {
 			header('HTTP/1.0 401 Unauthorized');
-			echo "Error: " . $helper->getError() . "\n";
-			echo "Error Code: " . $helper->getErrorCode() . "\n";
-			echo "Error Reason: " . $helper->getErrorReason() . "\n";
-			echo "Error Description: " . $helper->getErrorDescription() . "\n";
+			echo 'Error: '.$helper->getError()."\n";
+			echo 'Error Code: '.$helper->getErrorCode()."\n";
+			echo 'Error Reason: '.$helper->getErrorReason()."\n";
+			echo 'Error Description: '.$helper->getErrorDescription()."\n";
 		} else {
 			header('HTTP/1.0 400 Bad Request');
 			echo 'Bad request';
@@ -132,7 +132,7 @@ function facebook_access_token() {
 		try {
 			$accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
 		} catch (Facebook\Exceptions\FacebookSDKException $e) {
-			return "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
+			return '<p>Error getting long-lived access token: '.$helper->getMessage()."</p>\n\n";
 		}
 	}
 
