@@ -18,4 +18,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // Les éléments doivent être séparé par une virgule
 // On demande aussi l'email de la personne pour les inscriptions d'auteur
 // via facebook
-define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list, email');
+if (!defined('_FACEBOOK_PERMISSION')) {
+	define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list, email');
+}
