@@ -200,12 +200,16 @@ function facebook_saisie_pages() {
 	return $datas;
 }
 
-function facebook_profil() {
+function facebook_profil($token = null) {
+
 	$fb = facebook();
 
 	include_spip('inc/config');
 	$config = lire_config('facebook');
 
+	if (empty($token)) {
+		$token = $config['accessToken'];
+	}
 	try {
 		// Returns a `Facebook\FacebookResponse` object
 		$response = $fb->get('/me', $config['accessToken']);
