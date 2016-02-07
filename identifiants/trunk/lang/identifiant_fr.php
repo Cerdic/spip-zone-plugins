@@ -13,8 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'champ_cfg_objets_label' => 'Objets',
-	'champ_cfg_objets_explication' => 'Choix des objets sur lesquels l\'ajout d\'identifiants est possible.
-	Les tables possédant déjà une colonne « identifiant » sont exclues.',
+	'champ_cfg_objets_explication' => 'Choix des types d\'objets sur lesquels l\'ajout d\'un identifiant est possible.',
 	'champ_identifiant_label' => 'Identifiant',
 	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : charactères alphanumériques ou «_».',
 
@@ -26,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_aucun_identifiant' => 'Aucun identifiant',
 	'identifiants_titre' => 'Identifiants',
+	'info_identifiant_objet_exclu' => 'L\'objet suivant a déjà un champ «identifiant»',
+	'info_identifiant_objets_exclus' => 'Les objets suivants ont déjà un champ «identifiant»',
 
 	// T
 	'titre_page_configurer_identifiants' => 'Configuration des identifiants',
