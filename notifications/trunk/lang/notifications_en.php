@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 For General Administrators see
  <a href="?exec=configurer_interactions#suivi_edito_non">default tool of SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) proposed, published or deleted.',
+	'article_prive_auteurs_refus' => '<strong>Authors</strong> : authors receive notifications when the publications of their(s) article(s) is rejected.',
 	'article_prive_publieur' => 'If one of the authors is the one publishing the article he will not be notified.',
 	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
 	'article_propose_sujet' => '[@nom_site_spip@] Submitted: @titre@',
@@ -30,6 +31,9 @@ For General Administrators see
 	'article_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
 	'article_publie_titre' => 'Article published
 	--------------',
+	'article_refuse_detail' => 'The article "@titre@" has been rejected by @connect_nom@.',
+	'article_refuse_sujet' => '[@nom_site_spip@] REJECTED: @titre@',
+	'article_refuse_titre' => 'Article rejected',
 	'article_valide_date' => 'Without change, this article will be published',
 	'article_valide_detail' => 'The article "@titre@" is validated by @connect_nom@.',
 	'article_valide_sujet' => '[@nom_site_spip@] VALIDATED: @titre@',
