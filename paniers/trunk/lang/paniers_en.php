@@ -31,11 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mon_panier_voir' => 'See my cart',
 
 	// N
-	'noisette_label_afficher_lien_page_panier' => 'Display a link to the page spip.php?page=panier ?',
-	'noisette_label_afficher_titre_noisette' => 'Display a title ?',
+	'noisette_label_afficher_lien_page_panier' => 'Display a link to the page spip.php?page=panier?',
+	'noisette_label_afficher_titre_noisette' => 'Display a title?',
 	'noisette_label_niveau_titre' => 'Choose the title level',
-	'noisette_label_titre_noisette' => 'Title :',
-	'noisette_label_titre_noisette_perso' => 'If personnalized title :',
+	'noisette_label_titre_noisette' => 'Title:',
+	'noisette_label_titre_noisette_perso' => 'If personnalized title:',
 	'noisette_titre_perso' => 'Personnalized title',
 	'nom_bouton_plugin' => 'Carts',
 	'nom_noisette' => 'Mini cart',
@@ -56,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paniers' => 'Shopping carts',
 	'produit_un' => '1 product',
 	'produits_plusieurs' => '@nb@ products',
+
+	// S
+	'supprimer_du_panier' => 'Remove from cart',
 
 	// T
 	'titre_mon_panier' => 'My cart',
