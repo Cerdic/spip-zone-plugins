@@ -39,7 +39,7 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_geo_communes(GEO_COMMUNES){id_commune IN #GET{selection}}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} geol}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_COMMUNE|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='nom'>[(#LOGO_GEO_COMMUNE|image_reduire{20,20})]<a href="[(#ID_COMMUNE|generer_url_entite{geo_commune})]">#NOM</a></td>
+			<td class='nom'>[(#LOGO_GEO_COMMUNE|image_reduire{20,20})]<a href="[(#ID_COMMUNE|generer_url_entite{geo_commune})]">#NOM (#CODE_POSTAL)</a></td>
 
 			<td class='action'>
 				[(#ENV{editable}|oui)
