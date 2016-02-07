@@ -210,9 +210,10 @@ function facebook_profil($token = null) {
 	if (empty($token)) {
 		$token = $config['accessToken'];
 	}
+
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->get('/me', $config['accessToken']);
+		$response = $fb->get('/me?fields=id,name,email', $token);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
@@ -226,6 +227,7 @@ function facebook_profil($token = null) {
 	return array(
 		'nom' => $user['name'],
 		'id' => $user['id'],
+		'email' => $user['email'],
 		'facebook' => $user
 	);
 }

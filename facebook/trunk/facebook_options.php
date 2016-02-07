@@ -16,4 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // Définir les permissions de l'appication facebook
 // Par défaut on demande seulement le droit de publier et de gérer les pages
 // Les éléments doivent être séparé par une virgule
-define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list');
+// On demande aussi l'email de la personne pour les inscriptions d'auteur
+// via facebook
+define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list, email');
