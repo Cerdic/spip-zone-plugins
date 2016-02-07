@@ -57,12 +57,15 @@ function autoriser_iconifier($faire, $type, $id, $qui, $opt) {
 
 /**********************************************************/
 /************* RESTRICTION DANS LES RUBRIQUES *************/
+/**
+ * gérer création et modification (en fait publierdans)
+ * @pipeline autoriser 
+ */
 
 if (!function_exists('autoriser_rubrique_creerrubriquedans')) {
 	function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt) {
 		$quelles_rubriques = lire_config('lim_rubriques/rubrique');
 		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
-		
 		return
 			$lim_rub
 			AND autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt);
@@ -103,6 +106,27 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 		return
 			$lim_rub
 			AND autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt);
+	}
+}
+
+if (!function_exists('autoriser_rubrique_publierdans')) {
+	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
+		// Dans LIM l'appel à cette autorisation signifie que forcément $opt est renseigné
+		if (is_array($opt) AND array_key_exists('lim_except_rub',$opt) AND array_key_exists('type',$opt)) {
+			$type = $opt['type'];
+			$quelles_rubriques = lire_config("lim_rubriques/$type");
+			if (!is_null($quelles_rubriques)) {
+				$rubrique_except = array(0 => $opt['type']);
+				$quelles_rubriques = array_diff($quelles_rubriques, $opt);
+				$lim_rub = !in_array($id,$quelles_rubriques);
+			}
+		}
+		// ici gestion hors CVT
+		else $lim_rub = true;
+
+		return
+			$lim_rub
+			AND autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
 	}
 }
 

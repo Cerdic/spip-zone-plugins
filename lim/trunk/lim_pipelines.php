@@ -62,19 +62,19 @@ function lim_formulaire_charger($flux){
 	//ou si la restriction par rubrique n'a pas été activée, on sort
 	if ($valid === false OR is_null(lire_config('lim_objets'))) return $flux;
 
+
 	$type				= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
 	
 	if (in_array($nom_table, $tableau_tables_lim)) {
-		
 		$tab_rubriques_choisies = lim_publierdansrubriques($type);
 		if (count($tab_rubriques_choisies) == 1) {
 			$id_parent = $flux['data']['id_parent'];
 			if (empty($id_parent)) {
 				$id_parent = implode($tab_rubriques_choisies);
 			}
-			$flux['data']['_hidden'] .= "<input type='hidden' name='id_parent' value='$id_parent'>";
+			$flux['data']['_hidden'] = "<input type='hidden' name='id_parent' value='$id_parent'>";
 		}
 	}
 	return $flux;
@@ -91,43 +91,40 @@ function lim_formulaire_charger($flux){
 function lim_formulaire_verifier($flux){
 	$form	= $flux['args']['form'];
 	$valid	= strpos($form, 'editer');
+
 	// si ce n'est pas un formulaire d'édition 
 	//ou si la restriction par rubrique n'a pas été activée, on sort
 	if ($valid === false OR is_null(lire_config('lim_objets'))) return $flux;
-
-	include_spip('inc/autoriser');
+	
 	$type	= substr($form, 7); // 'editer_objet' devient 'objet'
 	$nom_table			= table_objet_sql($type);
 	$tableau_tables_lim	= explode(',', lire_config('lim_objets'));
 
 	if (in_array($nom_table, $tableau_tables_lim)) {
-		$faire = 'creer'.$type.'dans';
-		if (!autoriser($faire, 'rubrique', _request('id_parent'))) {
-			$flux['data']['id_parent'] .= _T('info_creerdansrubrique_non_autorise');
+		include_spip('inc/autoriser');
+
+		// Si modification : le rédacteur doit pouvoir modifier le contenu d'un objet existant, 
+		// même ci celui-ci est maintenant dans une rubrique où il est interdit de publier cet objet.
+		$id_objet = $flux['args']['args'][0];
+		if (is_numeric($id_objet)) { 	// c'est donc une modification, 
+
+			// récupérer l'id_rubrique actuel (en BdD) de l'objet 
+			$faire = 'publierdans';
+			$where = 'id_'.$type.'='.$id_objet;
+			$id_rub_en_cours = sql_getfetsel('id_rubrique', $nom_table, $where);
+			$opt = array('lim_except_rub' => $id_rub_en_cours, 'type' => $type);
+			$msg_error = _T('lim:info_deplacer_dans_rubrique_non_autorise');
+		}
+		else { //c'est une création
+			$faire = 'creer'.$type.'dans';
+			$opt = null;
+			$msg_error = _T('lim:info_creer_dans_rubrique_non_autorise')._T("info_1_$type")._T('lim:info_dans_cette_rubrique');
+		}
+		if (!autoriser($faire, 'rubrique', _request('id_parent'),'', $opt)) {
+			$flux['data']['id_parent'] = $msg_error;
 		}
 	}
 	return $flux;
 }
 
-
-// function lim_editer_contenu_objet($flux){
-// 	$type				= $flux['args']['type'];
-// 	$nom_table			= table_objet_sql($type);
-// 	$tableau_tables_lim = explode(',', lire_config("lim_objets"));
-
-// 	if (in_array($nom_table, $tableau_tables_lim)) {
-// 		$id_parent = $flux['args']['contexte']['id_parent'];
-// 		if (empty($id_parent)) {
-// 			$tab_rubriques_choisies = lim_publierdansrubriques($type);
-// 			if (count($tab_rubriques_choisies) == 1) {
-// 				$id_parent = implode($tab_rubriques_choisies);
-// 			} 
-// 			// le cas où plusieurs rubriques possibles : c'est le sélecteur qui gère.
-// 			else return $flux;
-// 		}
-// 		$id_parent_hidden= "<input type='hidden' name='id_parent' value='$id_parent'>";
-// 		$flux['data'] = preg_replace('%(<input name="exec(.*?)/>)%is', '$1'."\n".$id_parent_hidden, $flux['data']);
-// 	}
-// 	return $flux;
-// }
 ?>
