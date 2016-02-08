@@ -11,18 +11,18 @@ $(document).ready(function(){
 		}
 
 		/* Faire remonter les erreurs sur l'accordion et l'onglet */
-		$(".formulaire_fabriquer_plugin .sous_parties li.erreur").closest('div')
+		$(".formulaire_fabriquer_plugin .sous_parties div.erreur").parent().parent()
 			.prev('h4').addClass('erreur')
 			.closest('.sous_parties').prev('h3').addClass('erreur')
 			.closest('.parties').parent().parent().each(function(){
 				id = $(this).attr('id');
-				$('#tabs .tabs a[href=#' + id + ']').parent().addClass('erreur');
+				$('#tabs .tabs a[href="#' + id + '"]').parent().addClass('erreur');
 			});
-		$(".formulaire_fabriquer_plugin .parties li.erreur").closest('div')
+		$(".formulaire_fabriquer_plugin .parties div.erreur").parent().parent()
 			.prev('h3').addClass('erreur')
 			.parent().parent().each(function(){
 				id = $(this).attr('id');
-				$('#tabs .tabs a[href=#' + id + ']').parent().addClass('erreur');
+				$('#tabs .tabs a[href="#' + id + '"]').parent().addClass('erreur');
 			});
 
 		/* Deplier ou replier le diff */

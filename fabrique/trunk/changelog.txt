@@ -3,6 +3,13 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.26 le 08 02 2016
+--------------------
+
+* Correction du JS montrant les erreurs de saisies sur les accorédons et onglets, cassé
+  depuis le changement de structure des formulaires de li en div.
+* Compatibilité SPIP 3.1 minimum.
+
 2.0.22 le 02 11 2015
 --------------------
 
