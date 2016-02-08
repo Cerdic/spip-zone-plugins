@@ -4,7 +4,9 @@
 <B_agenda>
 <div class='pagination'>
 <div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:lien_tout_replier:></a></div>
-[(#GET{self}|parametre_url{date_debut,1900-01-01}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut}|=={1900-01-01},noajax}) |]
+<BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}>
+[(#GET{self}|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-01-01}}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut,''}|=={#DATE_DEBUT|affdate{Y-01-01}},noajax})] |
+</BOUCLE_debut>
 [(#GET{self}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut}|=={#ENV{date}|affdate{Y-m-d}},noajax}) ]
 </div>
 <ul class='liste_items liste-items evenements'>
