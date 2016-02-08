@@ -34,7 +34,7 @@
 </style>
 
 <div class="tab rubrique"></div>
-<BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par valeur}>
+<BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par cle}>
 	<div class="check entete center"><img src='#CHEMIN_IMAGE{#VALEUR-16.png}'><br>#VALEUR</div>
 </BOUCLE_entete>
 
@@ -42,14 +42,14 @@
 	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
 	<div class='secteur'>
 		<div class="tab rubrique">#TITRE</div>
-		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par valeur}>
+		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par cle}>
 			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
 		</BOUCLE_par_traduction1>
 		<B_enfants_rubriques>
 			<div class='sousrub'>
 			<BOUCLE_enfants_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
 				<div class=''>
-					<div class="tab rubrique">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par valeur}>
+					<div class="tab rubrique">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
 					[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
 					</BOUCLE_par_traduction2><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
 				</div>

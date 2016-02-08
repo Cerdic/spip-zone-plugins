@@ -116,9 +116,10 @@ function lim_formulaire_verifier($flux){
 			$msg_error = _T('lim:info_deplacer_dans_rubrique_non_autorise');
 		}
 		else { //c'est une création
+			// en fait, cela ne sert à rien...snif...à cause de /echafaudage qui intercepte les créations avant le CVT (?!).
 			$faire = 'creer'.$type.'dans';
 			$opt = null;
-			$msg_error = _T('lim:info_creer_dans_rubrique_non_autorise')._T("info_1_$type")._T('lim:info_dans_cette_rubrique');
+			$msg_error = _T('lim:info_creer_dans_rubrique_non_autorise');
 		}
 		if (!autoriser($faire, 'rubrique', _request('id_parent'),'', $opt)) {
 			$flux['data']['id_parent'] = $msg_error;
