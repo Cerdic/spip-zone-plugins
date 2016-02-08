@@ -18,8 +18,8 @@ $table_coggps_field = array(
 	"elevation_moyenne"		=>	"INT NULL  COMMENT 'elevation moyenne de la commune'",
 	"population"	=>	"BIGINT NULL  COMMENT 'elevation moyenne de la commune'",
 	"autre_nom"		=>	"TEXT NULL   COMMENT 'Nom dans d''autre langue'");
-
-$tables['spip_cog_communes']['field'] = array_merge($tables['spip_cog_communes']['field'],$table_coggps_field);
+	if(isset($tables['spip_cog_communes']['field']))
+		$tables['spip_cog_communes']['field'] = array_merge($tables['spip_cog_communes']['field'],$table_coggps_field);
 
 return $tables;
 
