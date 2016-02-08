@@ -45,9 +45,13 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
   
   if ($statut_calculer_auto == 'on') set_request('statuts_details_reservation',array());
 
-  $row = sql_fetsel('statut,date,id_auteur,email,lang', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
+  $row = sql_fetsel('statut,date,id_auteur,email,lang,donnees_auteur', 'spip_reservations', 'id_reservation=' . intval($id_reservation));
   $statut_ancien = $statut = $row['statut'];
   $date_ancienne = $date = $row['date'];
+  $donnees_auteur = isset($row['donnees_auteur']) ? $row['donnees_auteur'] :'';
+  if ($donnees_auteur) {
+  	$donnees_auteur = unserialize($donnees_auteur);
+  }
 
   $d = isset($c['date']) ? $c['date'] : null;
   $s = isset($c['statut']) ? $c['statut'] : $statut;
@@ -146,10 +150,10 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
     if (is_array($champs_extras_auteurs)) {
       foreach ($champs_extras_auteurs as $value) {
-        $valeurs_extras[$value['options']['nom']] = _request($value['options']['nom']);
+
+        $valeurs_extras[$value['options']['nom']] = _request($value['options']['nom']) ? _request($value['options']['nom']) : (isset($donnees_auteur[$value['options']['nom']]) ? $donnees_auteur[$value['options']['nom']] : '');
       }
     }
-
     $champs['donnees_auteur'] = serialize($valeurs_extras);
   }
 

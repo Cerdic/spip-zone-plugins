@@ -164,8 +164,18 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
       'devise',
       'id_prix_objet'
     ),
-    'champs_versionnes' => array(),
-    'rechercher_champs' => array(),
+    'champs_versionnes' => array(
+    	'descriptif',
+    	'quantite',
+    	'prix_ht',
+    	'prix',
+    	'taxe',
+    	'devise',
+    	'id_prix_objet',
+    ),
+    'rechercher_champs' => array(
+      "descriptif" => 8, 
+    ),
     'tables_jointures' => array(
       'id_evenement',
       'id_reservation'
