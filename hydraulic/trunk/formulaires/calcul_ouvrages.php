@@ -30,9 +30,9 @@ function numLoi(){
         4 => 's_noye',
         5 => 'v_denoye',
         6 => 'v_noye',
-        7 => 'cunge',
-        8 => 'or_cemagref02',
-        9 => 's_cemagref02'
+        //7 => 'cunge',
+        //8 => 'or_cemagref02',
+        //9 => 's_cemagref02'
     );
 
     return $numLoi;
@@ -62,7 +62,9 @@ function mes_saisies_surverse(){
     );
 
     foreach($num_equation as $valeur){
-        $surverse['loi_debit'][] = array($valeur, $numLoi[$valeur]);
+        if(isset($numLoi[$valeur])) {
+            $surverse['loi_debit'][] = array($valeur, $numLoi[$valeur]);
+        }
     }
 
     return $surverse;
@@ -132,13 +134,29 @@ function mes_saisies_ouvrages(){
 
     $mes_saisies_ouv = array();
 
+    /* Structure de $mes_saisies_ouv
+     * $mes_saisies_ouv=array
+     *      0:Code de type d'ouvrage
+     *      1:array
+     *          Code de caractéristique:array
+     *              0:Code de traduction de la caractéristique
+     *              1:Valeur par défaut
+     *      2:array
+     *          0,1,2:array
+     *              0:n° de loi
+     *              1:Code de traduction de la loi
+     */
+
     foreach($mes_saisies as $cleF=>$valeurTab){
         $mes_saisies_ouv[$cleF][0] = $valeurTab[0];
         foreach($valeurTab[1] as $valeur){
             $mes_saisies_ouv[$cleF][1][$valeur]= $champsLib[$valeur];
         }
+        $mes_saisies_ouv[$cleF][2]=array();
         foreach($valeurTab[2] as $valeur){
-            $mes_saisies_ouv[$cleF][2][]= array($valeur, $numLoi[$valeur]);
+            if(isset($numLoi[$valeur])) {
+                $mes_saisies_ouv[$cleF][2][]= array($valeur, $numLoi[$valeur]);
+            }
         }
         $mes_saisies_ouv[$cleF][3] = $valeurTab[3];
     }
@@ -151,7 +169,7 @@ function champs_obligatoires($bCalc = false){
      * Ce tableau contient la liste de tous les champs du formulaire.
      * La suite de cette fonction se chargera de supprimer les valeurs non obligatoires.
      */
-    spip_log('champs_obligatoires','hydraulic');
+    spip_log('champs_obligatoires','hydraulic.'._LOG_DEBUG);
     $nTypeOuv = _request('OuvrageType');
     $mes_saisies = mes_saisies_ouvrages();
     $tChOblig = array('OuvrageType','OuvrageLoi');
@@ -174,7 +192,7 @@ function champs_obligatoires($bCalc = false){
     }
 
     foreach($choix_champs as $cle=>$valeur){
-        spip_log('Choix champ '.$cle.'=>'.$valeur,'hydraulic');
+        spip_log('Choix champ '.$cle.'=>'.$valeur,'hydraulic.'._LOG_DEBUG);
         // Si le choix du select est de calculer une valeur...
         if(substr($valeur, 0,3) != 'val'){
             foreach($tChOblig as $cle1=>$valeur1){
@@ -193,8 +211,8 @@ function champs_obligatoires($bCalc = false){
             $tChOblig[] = 'pas_var_'.$cle;
         }
     }
-    spip_log($tChOblig,'hydraulic');
-    spip_log($tChCalc,'hydraulic');
+    spip_log($tChOblig,'hydraulic.'._LOG_DEBUG);
+    spip_log($tChCalc,'hydraulic.'._LOG_DEBUG);
     if($bCalc) {
         return $tChCalc;
     }

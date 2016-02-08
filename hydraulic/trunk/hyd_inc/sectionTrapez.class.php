@@ -60,7 +60,7 @@ class cSnTrapez extends acSection {
         else {
             $P = $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
         }
-        //~ spip_log('Trapez->CalcP(rY='.$this->rY.')='.$P,'hydraulic');
+        //~ spip_log('Trapez->CalcP(rY='.$this->rY.')='.$P,'hydraulic.'._LOG_DEBUG);
         return $P;
     }
 
@@ -77,7 +77,7 @@ class cSnTrapez extends acSection {
         else {
             $S = $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
         }
-        //~ spip_log('Trapez->CalcS(rY='.$this->rY.')='.$S,'hydraulic');
+        //~ spip_log('Trapez->CalcS(rY='.$this->rY.')='.$S,'hydraulic.'._LOG_DEBUG);
         return $S;
     }
 

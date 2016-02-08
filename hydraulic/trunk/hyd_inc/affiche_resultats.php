@@ -19,6 +19,7 @@ function GetResultTable($tContent,$tEntetes=false) {
             </thead>';
     }
     $echo.='<tbody>';
+    $i=0;
     foreach($tContent as $Ligne){
         $i++;
         $echo.= '<tr class="align_right ';
@@ -63,7 +64,7 @@ function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
     if(!$datas['ValVar']) {
         $tCnt[]=array('<b>'.$tLib[$datas['ValCal']].'</b>','<b>'.format_nombre($tRes[0], $datas['iPrec']).'</b>');
         if($tFlag) {
-            spip_log($tFlag,'hydraulic');
+            spip_log($tFlag,'hydraulic.'._LOG_DEBUG);
             $tCnt[]= array(_T('hydraulic:type_ecoulement'),_T('hydraulic:flag_'.$tFlag[0]));
         }
     }

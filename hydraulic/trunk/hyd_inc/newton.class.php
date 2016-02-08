@@ -58,7 +58,7 @@ abstract class acNewton {
      * @return Calcul de la fonction
      */
     protected function CalcDer($x) {
-        //~ spip_log('Newton:CalcDer $rX='.$x,'hydraulic');
+        //~ spip_log('Newton:CalcDer $rX='.$x,'hydraulic.'._LOG_DEBUG);
         return ($this->CalcFn($x+$this->rDx)-$this->CalcFn($x-$this->rDx))/(2*$this->rDx);
     }
 

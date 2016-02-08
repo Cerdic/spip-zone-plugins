@@ -102,7 +102,7 @@ class cOuvrage {
         }
         $this->tP = $tP;
         if(!isset($this->tP['C'])) {$this->tP['C']=0;} // Pour les lois trapézoïdales CEM02
-        spip_log($this,'hydraulic');
+        spip_log($this,'hydraulic.'._LOG_DEBUG);
     }
 
 
@@ -113,7 +113,7 @@ class cOuvrage {
      */
     public function Set($sMaj,$rMaj) {
         $this->tP[$sMaj] = $rMaj;
-        spip_log("cOuvrage->Set($sMaj,$rMaj)",'hydraulic');
+        spip_log("cOuvrage->Set($sMaj,$rMaj)",'hydraulic.'._LOG_DEBUG);
     }
 
 
@@ -135,6 +135,8 @@ class cOuvrage {
      */
     public function Calc($sCalc,$rInit=0.) {
         // Calcul du débit (facile !)
+        spip_log("Ouv->Calc($sCalc)",'hydraulic.'._LOG_DEBUG);
+        spip_log($this,'hydraulic.'._LOG_DEBUG);
         if($sCalc=='Q') {
             return $this->OuvrageQ();
         }
@@ -236,7 +238,7 @@ class cOuvrage {
                 }
             }
         }
-        //echo "\nCalc rVarC=$rVarC nFlag=$nFlag";
+        spip_log("Ouv->Calc rVarC=$rVarC nFlag=$nFlag",'hydraulic.'._LOG_DEBUG);
         return array($rVarC,$nFlag);
     }
 
@@ -350,6 +352,7 @@ class cOuvrage {
      */
     private function SeuilDen($rC,$rZ=0) {
         $rQ=$rC*$this->tP['L']*self::R2G*pow($this->tP['ZM']-$rZ,1.5);
+        spip_log($rQ,'hydraulic.'._LOG_DEBUG);
         return array($rQ,1);
     }
 
@@ -374,6 +377,10 @@ class cOuvrage {
     private function CalculQ($nLoi,$rC,$rZ=0) {
         $rQ=0; // Débit par défaut
         $nFlag=0; // Flag par défaut
+        if(!isset($this->tP['W'])) {
+            // Seuil <=> Ouverture de vanne infinie
+            $this->tP['W'] = INF;
+        }
         $tP = &$this->tP;
         switch($nLoi) {
         case 1 : // Equation seuil-orifice Cemagref

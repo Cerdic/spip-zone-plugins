@@ -104,7 +104,7 @@ abstract class acSection {
         $this->oP = &$oP;
         $this->oLog = &$oLog;
         $this->CalcGeo('B');
-        //~ spip_log($this,'hydraulic');
+        //~ spip_log($this,'hydraulic.'._LOG_DEBUG);
     }
 
     /**
@@ -142,12 +142,12 @@ abstract class acSection {
      */
     public function Calc($sDonnee, $rY = false) {
         if($rY!==false && $rY!=$this->rY) {
-            //~ spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic');
+            //~ spip_log('Calc('.$sDonnee.') rY='.$rY.' => $this->rY','hydraulic.'._LOG_DEBUG);
             $this->rY = $rY;
             // On efface toutes les données dépendantes de Y pour forcer le calcul
             $this->Reset(false);
         }
-        //~ spip_log($this->arCalc,'hydraulic');
+        //~ spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
         if(!isset($this->arCalc[$sDonnee]) | !$this->arCalc[$sDonnee]) {
             // La donnée a besoin d'être calculée
             switch($sDonnee) {
@@ -215,7 +215,7 @@ abstract class acSection {
                     break;
             }
         }
-        //~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic');
+        //~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
         return $this->arCalc[$sDonnee];
     }
 
@@ -234,7 +234,7 @@ abstract class acSection {
         }
         if(!isset($this->arCalcGeo[$sDonnee])) {
             // La donnée a besoin d'être calculée
-            //spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic');
+            //spip_log('CalcGeo('.$sDonnee.') rY='.$this->oP->rYB,'hydraulic.'._LOG_DEBUG);
             $this->Swap(true); // On mémorise les données hydrauliques en cours
             $this->Reset(false);
             $this->rY = $this->oP->rYB;
@@ -265,7 +265,7 @@ abstract class acSection {
                 case 'Hsc' : // Charge spécifique critique
                     $this->arCalcGeo[$sDonnee] = $this->CalcHsc();
             }
-            //~ spip_log('CalcGeo('.$sDonnee.',rY='.$this->oP->rYB.')='.$this->arCalcGeo[$sDonnee],'hydraulic');
+            //~ spip_log('CalcGeo('.$sDonnee.',rY='.$this->oP->rYB.')='.$this->arCalcGeo[$sDonnee],'hydraulic.'._LOG_DEBUG);
             $this->Swap(false); // On restitue les données hydrauliques en cours
         }
         return $this->arCalcGeo[$sDonnee];
@@ -276,7 +276,7 @@ abstract class acSection {
      * @return La surface hydraulique
      */
     protected function CalcS($rY) {
-        //~ spip_log('section->CalcS(rY='.$rY.')='.($rY*$this->rLargeurBerge),'hydraulic');
+        //~ spip_log('section->CalcS(rY='.$rY.')='.($rY*$this->rLargeurBerge),'hydraulic.'._LOG_DEBUG);
         return $rY*$this->rLargeurBerge;
     }
 
@@ -286,7 +286,7 @@ abstract class acSection {
     * @return Le périmètre hydraulique
     */
     protected function CalcP($rY=0) {
-        //~ spip_log('section->CalcP(rY='.$rY.')='.(2*$rY),'hydraulic');
+        //~ spip_log('section->CalcP(rY='.$rY.')='.(2*$rY),'hydraulic.'._LOG_DEBUG);
         return 2*$rY;
     }
     /**
@@ -571,7 +571,7 @@ abstract class acSection {
         $tPoints = array();
         $this->Swap(true); // On mémorise les données hydrauliques en cours
         for($rY=0;$rY<$this->oP->rYB+$rPas/2;$rY+=$rPas) {
-            //~ spip_log('DessinCoordonnees rY='.$rY,'hydraulic');
+            //~ spip_log('DessinCoordonnees rY='.$rY,'hydraulic.'._LOG_DEBUG);
             $tPoints['x'][] = $this->Calc('B',$rY)/2;
             $tPoints['y'][] = $rY;
         }
@@ -612,7 +612,7 @@ class cHautCritique extends acNewton {
         else {
             $rFn = INF;
         }
-        //~ spip_log('cHautCritique:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        //~ spip_log('cHautCritique:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
         return $rFn;
     }
 
@@ -630,7 +630,7 @@ class cHautCritique extends acNewton {
             $rDer = INF;
         }
 
-        //spip_log('cHautCritique:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        //spip_log('cHautCritique:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
         return $rDer;
     }
 }
@@ -665,7 +665,7 @@ class cHautNormale extends acNewton {
     protected function CalcFn($rX) {
         // Calcul de la fonction
         $rFn = ($this->rQ-$this->rKs*pow($this->oSn->Calc('R',$rX),2/3)*$this->oSn->Calc('S',$rX)*sqrt($this->rIf));
-        //spip_log('cHautNormale:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        //spip_log('cHautNormale:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
         return $rFn;
     }
 
@@ -678,7 +678,7 @@ class cHautNormale extends acNewton {
         $rDer = 2/3*$this->oSn->Calc('dR')*pow($this->oSn->Calc('R'),-1/3)*$this->oSn->Calc('S');
         $rDer += pow($this->oSn->Calc('R'),2/3)*$this->oSn->Calc('B');
         $rDer *= -$this->rKs * sqrt($this->rIf);
-        //spip_log('cHautNormale:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        //spip_log('cHautNormale:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
         return $rDer;
     }
 }
@@ -714,7 +714,7 @@ class cHautCorrespondante extends acNewton {
 
         // Calcul de la fonction
         $rFn = $this->rY - $rX + ($this->rS2-pow($this->oSn->Calc('S',$rX),-2))*$this->rQ2G;
-        //~ spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        //~ spip_log('cHautCorrespondante:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
         return $rFn;
     }
 
@@ -730,7 +730,7 @@ class cHautCorrespondante extends acNewton {
         else {
             $rDer = INF;
         }
-        //~ spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        //~ spip_log('cHautCorrespondante:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
         return $rDer;
     }
 
@@ -784,7 +784,7 @@ class cHautConjuguee extends acNewton {
         else {
             $rFn = -INF;
         }
-        //~ spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic');
+        //~ spip_log('cHautConjuguee:CalcFn('.$rX.')='.$rFn,'hydraulic.'._LOG_DEBUG);
         return $rFn;
     }
 
@@ -801,7 +801,7 @@ class cHautConjuguee extends acNewton {
         else {
             $rDer = -INF;
         }
-        //~ spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic');
+        //~ spip_log('cHautConjuguee:CalcDer('.$rX.')='.$rDer,'hydraulic.'._LOG_DEBUG);
         return $rDer;
     }
 

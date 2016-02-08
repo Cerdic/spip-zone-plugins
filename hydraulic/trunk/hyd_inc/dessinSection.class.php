@@ -65,7 +65,7 @@ class dessinSection {
                 $this->ValMax = $val;
             }
         }
-        //spip_log($this,'hydraulic');
+        //spip_log($this,'hydraulic.'._LOG_DEBUG);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-define(HYD_CACHE_DIRECTORY, _NOM_TEMPORAIRES_INACCESSIBLES.'hydraulic/');
-define(HYD_CACHE_MAX_SIZE, 1024*1024);
+define('HYD_CACHE_DIRECTORY', _NOM_TEMPORAIRES_INACCESSIBLES.'hydraulic/');
+define('HYD_CACHE_MAX_SIZE', 1024*1024);
 
 function WriteCacheFile($file_name, $file_content) {
    if(!is_dir(HYD_CACHE_DIRECTORY)) {
@@ -56,6 +56,7 @@ function format_nombre($nombre,$dec) {
     if($nombre === false) {
         return _T('hydraulic:non_calcule');
     } else {
+        if($nombre=='') $nombre=0;
         return number_format($nombre, $dec, '.', ' ');
     }
 }
