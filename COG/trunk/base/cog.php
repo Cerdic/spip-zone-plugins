@@ -145,7 +145,8 @@ $tables['spip_cog_departements'] = array(
 			"chef_lieu"=> "VARCHAR(5) NOT NULL 	COMMENT 'Code de la commune chef-lieu'",
 			"type_charniere"=> "TINYINT( 1 ) UNSIGNED NOT NULL		COMMENT 'Type de nom en clair'",
 			"nom_majuscule"=> "VARCHAR( 70 ) NOT NULL	COMMENT 'Nom en clair (majuscules)'",
-			"nom"=> "VARCHAR( 70 ) NOT NULL COMMENT 'Nom en clair (typographie riche)'"
+			"nom"=> "VARCHAR( 70 ) NOT NULL COMMENT 'Nom en clair (typographie riche)'",
+			"region_ancienne"=> "TINYINT( 2 )  UNSIGNED NOT NULL	COMMENT 'Code région avant 2016'",
 		),
 		'key' => array(
 			"PRIMARY KEY" 	=> "id_cog_departement",

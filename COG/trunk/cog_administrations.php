@@ -26,11 +26,10 @@ function cog_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter',"TABLE spip_cog_regions RENAME spip_cog_regions_anciennes"),
 		array('sql_alter',"TABLE spip_cog_regions_anciennes CHANGE `id_cog_region` `id_cog_region_ancienne` INT(10) auto_increment UNSIGNED NOT NULL COMMENT 'Identifiant du region' "),
 		array('sql_alter',"TABLE spip_cog_regions_anciennes ADD `region2016` TINYINT ( 2 )  UNSIGNED NOT NULL	COMMENT 'Code région 2016'"),
-		array('maj_tables', array('spip_cog_regions')),
-		array('cog_nouvelle_definition_regionale')
-
+		array('maj_tables', array('spip_cog_regions'))
 	);
-	$maj['1.3'] = array(array('cog_nouvelle_definition_regionale'));
+	$maj['1.4'] = array(	array('maj_tables', array('spip_cog_departements')),
+							array('cog_nouvelle_definition_regionale'));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -74,6 +73,8 @@ while (!feof($pointeur_fichier)){
 			if(trim($tab[0])!=trim($tab[5]))
 				$tab_region[trim($tab[0]).'']=trim($tab[5]);
 			sql_updateq('spip_cog_regions_anciennes',array('region2016'=>intval(trim($tab[5]))),'code = '.intval(trim($tab[0])));
+			$data=array('region'=>intval(trim($tab[5])),'region_ancienne'=>intval(trim($tab[0])));
+			sql_updateq('spip_cog_departements',$data,'region = '.intval(trim($tab[0])) );
 		}
 	}
 }
@@ -83,8 +84,7 @@ while (!feof($pointeur_fichier)){
 $tab_table=array(
 	'spip_cog_communes',
 	'spip_cog_cantons',
-	'spip_cog_arrondissements',
-	'spip_cog_departements');
+	'spip_cog_arrondissements');
 
 foreach($tab_table as $table){
 	foreach($tab_region as $anc=>$nouvelle){
