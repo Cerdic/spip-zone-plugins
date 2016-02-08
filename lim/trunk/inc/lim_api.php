@@ -100,6 +100,31 @@ function lim_verifier_presence_objets($id_rubrique, $objet) {
 	return false;
 }
 
+
+/**
+ * chercher les tables SPIP qui ne gèrent pas de rubrique, et donc non pertinentes dans la restriction par rubrique
+ * gestion des tables historiques également : annuaire de site et brèves activés ?
+ * 
+ * @return array
+ *	tableau des nom de tables SPIP à exclure (ex : spip_auteurs, spip_mots, etc.)
+ */
+function lim_objets_sans_rubrique() {
+	$exclus = array();
+	$tables = lister_tables_objets_sql();
+	foreach ($tables as $key => $value) {
+		
+		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique'])) {
+			array_push($exclus,$key);	
+		}
+		// Exception pour les objets breves et sites : sont-ils activés
+		if (lire_config('activer_breves') == 'non')
+			array_push($exclus,'spip_breves');
+		if (lire_config('activer_sites') == 'non')
+			array_push($exclus,'spip_syndic');
+	}
+	return $exclus;
+}
+
 /**
  * récupérer le tableau des rubriques dans lesquelles il est possible d'editer un objet
  * 
