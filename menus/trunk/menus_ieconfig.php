@@ -2,8 +2,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/*
+ * function menus_ieconfig_metas
+ * Pipeline ieconfig pour l'import/export desmetas du plugin menu
+ * 
+ * @param array $table
+ * @return array
+ * 
+ */
+function menus_ieconfig_metas($table) {
+    $table['menus_meta']['titre'] = _T('paquet-menus:menus_titre');
+	$table['menus_meta']['icone'] = 'prive/themes/spip/images/menu-16.png';
+	$table['menus_meta']['metas_serialize'] = 'menus';
+	return $table;
+}
+
 /**
- * Pipeline ieconfig pour l'import/export de configuration
+ * Pipeline ieconfig pour l'import/export des menus
  *
  * @param array $flux
  * @return array
