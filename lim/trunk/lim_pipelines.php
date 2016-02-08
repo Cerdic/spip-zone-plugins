@@ -111,7 +111,10 @@ function lim_formulaire_verifier($flux){
 			// récupérer l'id_rubrique actuel (en BdD) de l'objet 
 			$faire = 'publierdans';
 			$where = 'id_'.$type.'='.$id_objet;
-			$id_rub_en_cours = sql_getfetsel('id_rubrique', $nom_table, $where);
+			if ($type == 'rubrique')
+				$id_rub_en_cours = sql_getfetsel('id_parent', $nom_table, $where);
+			else
+				$id_rub_en_cours = sql_getfetsel('id_rubrique', $nom_table, $where);
 			$opt = array('lim_except_rub' => $id_rub_en_cours, 'type' => $type);
 			$msg_error = _T('lim:info_deplacer_dans_rubrique_non_autorise');
 		}

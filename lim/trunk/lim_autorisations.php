@@ -116,7 +116,7 @@ if (!function_exists('autoriser_rubrique_publierdans')) {
 			$type = $opt['type'];
 			$quelles_rubriques = lire_config("lim_rubriques/$type");
 			if (!is_null($quelles_rubriques)) {
-				$rubrique_except = array(0 => $opt['type']);
+				$rubrique_except = array(0 => $opt['lim_except_rub']);
 				$quelles_rubriques = array_diff($quelles_rubriques, $opt);
 				$lim_rub = !in_array($id,$quelles_rubriques);
 			}
