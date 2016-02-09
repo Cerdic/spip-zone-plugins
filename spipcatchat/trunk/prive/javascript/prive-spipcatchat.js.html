@@ -2,7 +2,7 @@
 var URLplugin='#ENV{url_plugin}';
 var idAuteur=encodeURIComponent('#ID_AUTEUR');
 var charset=encodeURIComponent('#CHARSET');
-var nom=encodeURIComponent('#ENV{nom}');
+var nom=encodeURIComponent('[(#ENV{nom}|trim)]'); 
 var langShowChat = new Array("<:spipcatchat:catchat_message:>");
 var catchatrefresh=[(#CONFIG{spipcatchat/refreshprive}||non)2000][(#CONFIG{spipcatchat/refreshprive}||oui)#CONFIG{spipcatchat/refreshprive}];
 var catchatrefreshstatut=125000;
@@ -24,9 +24,9 @@ function spipcatchatmessage()
  t=[(#CONFIG{spipcatchat/refreshprive}|div{1000})];
  
   if(""==$("#message").val())
-	$("#spipcatchatvide").css("display","block"), // Message d'erreur -> affichage message: Vide
+	$("#spipcatchatvide").css("display","block"), // Message d'erreur -> affichage le message: Vide
 	setTimeout(function(){$("#spipcatchatvide").css("display","none")},1E3); // Le message est de nouveau caché
-  else if(timer) // Si le message n'est pas vide et que la varible TIMER est égale à TRUE -> batteries de teste 
+  else if(timer) // Si le message n'est pas vide et que la variable TIMER est égale à TRUE -> batteries de test 
   		{
 	  		$("#spipcatchattimer").css("display","block"); // Message d'erreur -> affichage message: temporisation 
 	  		$("#spipcatchatcompt").html(t); // Initier le compte à rebours avec la variable T et premier affichage.
@@ -74,7 +74,7 @@ function spipcatchatShowChatAdmin(admin)
 { // Cette fonction permet d'initialiser le chat dans le bon environnement. En assignant les valeurs utiles au déroulement du chat, le time-code, les autorisations, les statuts etc... dans des variables de sessions.
 spipcatchatrestartstatut();
 $.ajax({
-	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les scripts sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
 	type:"POST",
 	data:"id_auteur="+idAuteur+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&admin="+admin,
 	success:function(e)
