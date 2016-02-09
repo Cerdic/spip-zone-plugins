@@ -3,10 +3,10 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(\#ENV*{message_erreur})</p>]
 
 	[(\#ENV{editable})
-	<form method='post' action='\#ENV{action}'><div>
+	<form method="post" action="\#ENV{action}"><div>
 		\#ACTION_FORMULAIRE{\#ENV{action}}
-		<input type='hidden' name='#ID_OBJET' value='\#ENV{#ID_OBJET}' />
-		<div class='editer-groupe'>[
+		<input type="hidden" name="#ID_OBJET" value="\#ENV{#ID_OBJET}" />
+		<div class="editer-groupe">[
 
 (#REM) On essaie de placer le formulaire de rubrique (s'il est demande)
        apres le titre, s'il est saisissable, sinon en 2e position 
@@ -35,7 +35,7 @@
 		</div>
 		[(\#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class="boutons"><input type='submit' class='submit' value='\<:bouton_enregistrer:>' /></p>
+		<p class="boutons"><input type="submit" class="submit" value="\<:bouton_enregistrer:>" /></p>
 	</div></form>
 	]
 </div>

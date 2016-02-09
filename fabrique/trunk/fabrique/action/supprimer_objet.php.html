@@ -31,8 +31,8 @@
  *
  * @example
  *     ```
- *     if (autoriser("supprimer", "#TYPE", $#ID_OBJET)) {
- *          $supprimer_#TYPE = charger_fonction("supprimer_#TYPE", "action");
+ *     if (autoriser('supprimer', '#TYPE', $#ID_OBJET)) {
+ *          $supprimer_#TYPE = charger_fonction('supprimer_#TYPE', 'action');
  *          $supprimer_#TYPE($#ID_OBJET);
  *     }
  *     ```
@@ -50,9 +50,9 @@ function action_supprimer_#ENV{type}_dist($arg=null) {
 
 	// cas suppression
 	if ($arg) {
-		sql_delete("#TABLE",  "#ID_OBJET=" . sql_quote($arg));
+		sql_delete('#TABLE',  '#ID_OBJET=' . sql_quote($arg));
 	}
 	else {
-		spip_log("action_supprimer_#ENV{type}_dist \$arg pas compris");
+		spip_log('action_supprimer_#ENV{type}_dist $arg pas compris');
 	}
 }

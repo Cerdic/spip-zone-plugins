@@ -28,7 +28,7 @@ a mis a jour la valeur avec la page reelle\]
 \#SET{afficher_lettres,\#TRI|=={'multi #GET{titre}'}|oui}
 \#ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies #LOBJET">
-<table class='spip liste'>
+<table class="spip liste">
 \[<caption><strong class="caption">(\#ENV*{titre,\#GRAND_TOTAL|singulier_ou_pluriel{#TYPE:info_1_#TYPE,#TYPE:info_nb_#LOBJET}})</strong></caption>\]
 	<thead>
 		\#SET{p,''}
@@ -44,29 +44,29 @@ a mis a jour la valeur avec la page reelle\]
 				\#REM|afficher_initiale{\#REM,\#TOTAL_BOUCLE,\#GET{debut},\#ENV{nb,10}}
 			}
 		})\]\</B_lettre>
-		\[<tr><td colspan="4"><p class='pagination'>(\#GET{p})</p></td></tr>\]
+		\[<tr><td colspan="4"><p class="pagination">(\#GET{p})</p></td></tr>\]
 
-		<tr class='first_row'>[
-			<th class='statut' scope='col'>\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
-			<th class='#GET{titre}' scope='col'>\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:>,ajax})\]</th>
-			<th class='role' scope='col'>\<:roles:role_titre:></th>
-			<th class='action' scope='col'></th>
+		<tr class="first_row">[
+			<th class="statut" scope="col">\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
+			<th class="#GET{titre}" scope="col">\[(\#TRI{multi #GET{titre},\<:#TYPE:champ_#GET{titre}_label:>,ajax})\]</th>
+			<th class="role" scope="col">\<:roles:role_titre:></th>
+			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
 	<tbody>
 	\<BOUCLE_liste_#LOBJET\(#MOBJET){#ID_OBJET IN \#GET{selection}}[(#OBJET|champ_present{statut}|?{'{statut?}'})]
 		{tri \#ENV{par,multi #GET{titre}},\#GET{defaut_tri}}{pagination \#ENV{nb,10} #GET{pagination}}>
 		<tr class="\[(\#COMPTEUR_BOUCLE|alterner{row_odd,row_even})\]\[ (\#EXPOSE|unique)\]\[ (\##GET{mtitre}**|extraire_multi|initiale|=={\#ENV{i}}|?{on}|unique)\]\[(\##MID_OBJET|=={\#ENV{id_lien_ajoute}}|oui)append\]">[
-			<td class='statut'>\[(\#STATUT|puce_statut\{#TYPE\})\]</td>(#OBJET|champ_present{statut})]
-			<td class='#GET{titre}'>\[(\#LOGO_#MTYPE|image_reduire{20,20})\]<a href="\[(\##MID_OBJET|generer_url_entite{#TYPE})\]">\##GET{mtitre}</a></td>[
-			<td class='role'>
+			<td class="statut">\[(\#STATUT|puce_statut\{#TYPE\})\]</td>(#OBJET|champ_present{statut})]
+			<td class="#GET{titre}">\[(\#LOGO_#MTYPE|image_reduire{20,20})\]<a href="\[(\##MID_OBJET|generer_url_entite{#TYPE})\]">\##GET{mtitre}</a></td>[
+			<td class="role">
 				\[(\#ENV{editable}|oui)
 					\[(\#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=\##MID_OBJET,cle=#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET})\]
 				\]
 				\<BOUCLE_roles\(#ENV{objet/nom_table_liens}\){#ID_OBJET}{objet}{id_objet}{par role}{", "}\>
 					\[(\#ROLE|role{#LOBJET})\]\</BOUCLE_roles\>
 			</td>(#OBJET|option_presente{roles})]
-			<td class='action'>
+			<td class="action">
 				\[(\#ENV{editable}|oui)
 					<button type="submit" class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
 				\]
@@ -75,7 +75,7 @@ a mis a jour la valeur avec la page reelle\]
 	\</BOUCLE_liste_#LOBJET>
 	</tbody>
 </table>
-\[<p class='pagination'>(\#PAGINATION{prive})</p>\]
+\[<p class="pagination">(\#PAGINATION{prive})</p>\]
 \[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
 </div>
 \</B_liste_#LOBJET>
