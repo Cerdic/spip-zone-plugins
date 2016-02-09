@@ -23,14 +23,7 @@ function accordion_jqueryui_plugins($plugins){
 }
 
 function accordion_insert_head($flux) {
-	$flux .="<script>$(document).ready(function(){
-	$( '.spip_accordeon' ).accordion({
-	header: 'h3',
-	active: false,
-	heightStyle: 'content',
-	collapsible: true
-	});
-	});
-	</script>";
+	$flux .='<link rel="stylesheet" href="'.find_in_path('css/spip_accordion.css').'">';
+	$flux .='<script src="'.find_in_path('javascript/spip_accordion.js').'"></script>';
 	return $flux;
 }

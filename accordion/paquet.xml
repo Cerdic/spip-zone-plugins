@@ -1,7 +1,7 @@
 <paquet
     prefix="accordion"
     categorie="outil"
-    version="1.0.1"
+    version="1.0.2"
     etat="test"
     compatibilite="[3.1.0;3.1.*]"
     logo="images/accordion.png"
