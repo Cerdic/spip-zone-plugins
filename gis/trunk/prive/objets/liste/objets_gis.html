@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_objets(GIS gis_liens){id_gis}{tri #ENV{order,objet},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_objets(GIS_LIENS){id_gis}{tri #ENV{order,objet},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#OBJET|objet_icone{16})]</td>
 			<td class='objet'>[(#OBJET|objet_info{texte_objet}|_T)]</td>
