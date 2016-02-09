@@ -275,8 +275,8 @@ function identifiants_post_insertion($flux){
  *     Type d'objet
  * @param int $id_objet
  *     Identifiant numérique de l'objet
- * @return void | bool | string
- *     Retour des fonctions sql_insertq, sql_updateq ou sql_delete.
+ * @return bool | string
+ *     False si problème, sinon retour des fonctions sql_insertq, sql_updateq ou sql_delete.
  */
 function maj_identifiant_edition_objet($objet='', $id_objet=''){
 
@@ -303,22 +303,26 @@ function maj_identifiant_edition_objet($objet='', $id_objet=''){
 		);
 
 		// on définit ce qu'on doit faire
-		$creation    = (!$old_identifiant and $new_identifiant);
-		$maj         = ($old_identifiant and $new_identifiant);
-		$suppression = ($old_identifiant and !$new_identifiant);
+		$action =
+			(!$old_identifiant and $new_identifiant)  ? 'creer' :
+			(($old_identifiant and $new_identifiant)  ? 'maj' :
+			(($old_identifiant and !$new_identifiant) ? 'supprimer' : ''));
 
-		// création
-		if ($creation) {
-			return sql_insertq('spip_identifiants', $set);
+		switch ($action) {
+
+			case 'creer' :
+				return sql_insertq('spip_identifiants', $set);
+
+			case 'maj' :
+				return sql_updateq('spip_identifiants', $set, array('objet'=>$id_objet, 'id_objet'=>$id_objet));
+
+			case 'supprimer' :
+				return sql_delete('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
+
+			default :
+				return false;
 		}
-		// mise à jour
-		elseif ($maj) {
-			return sql_updateq('spip_identifiants', $set);
-		}
-		// suppression
-		elseif ($suppression) {
-			return sql_delete('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
-		}
+
 	}
 
 }
