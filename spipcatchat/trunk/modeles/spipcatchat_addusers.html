@@ -41,7 +41,7 @@ select: function(event, ui){$('#selectUser').val(ui.item.id); },
 				<B_MEMBRES_AUTEURS_CHAT>
 				 <ul>
 					<BOUCLE_MEMBRES_AUTEURS_CHAT (AUTEURS){tout} {id_auteur!=#ID_AUTEUR}>      
-					   <li id="idauteurcatchat#ID_AUTEUR" class="spipcatchatmembreschat" title="<:spipcatchat:title_select_users:>" onclick="spipcatchatrestartmenu('#ID_AUTEUR','[(#NOM|sinon{#LOGIN})]');return false;" style="cursor:pointer;display:none">[<img src="[(#LOGO_AUTEUR|oui)/IMG/](#LOGO_AUTEUR**|sinon{#CHEMIN{images/spipcatchat-64.png}})" width="30px" >&nbsp;&nbsp;][(#NOM|sinon{#LOGIN})]</li>
+					   <li id="idauteurcatchat#ID_AUTEUR" class="spipcatchatmembreschat" title="<:spipcatchat:title_select_users:>" onclick="spipcatchatrestartmenu('#ID_AUTEUR','[(#NOM|trim|sinon{#LOGIN|trim})]');return false;" style="cursor:pointer;display:none">[<img src="[(#LOGO_AUTEUR|oui)/IMG/](#LOGO_AUTEUR**|sinon{#CHEMIN{images/spipcatchat-64.png}})" width="30px" >&nbsp;&nbsp;][(#NOM|trim|sinon{#LOGIN|trim})]</li>
 					</BOUCLE_MEMBRES_AUTEURS_CHAT>
 				</ul>
 				</B_MEMBRES_AUTEURS_CHAT>
