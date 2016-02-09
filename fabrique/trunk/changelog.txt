@@ -3,6 +3,12 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.27 le 09 02 2016
+--------------------
+
+* Lorsqu'un objet gère des statuts, supprimer les éléments à la poubelle
+  de plus de 24h comme le fait SPIP pour les articles.
+
 2.0.26 le 08 02 2016
 --------------------
 

@@ -909,11 +909,17 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			}
 			break;
 
+		
 		case "optimiser_base_disparus":
 			# nettoie depuis spip_{objet}_liens
 			# mais aussi les liaisions vers spip_{objet} (uniquement si une table de liens existe)
-			return (bool)fabrique_lister_tables($objets, 'liens');
-			#return (bool)fabrique_lister_tables($objets, 'objets');
+			if (fabrique_lister_tables($objets, 'liens')) {
+				return true;
+			}
+			# nettoie aussi les objets à la poubelle (si avec statut)
+			if (objets_champ_present($objets, 'statut')) {
+				return true;
+			}
 			break;
 			
 		case "trig_propager_les_secteurs":

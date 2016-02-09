@@ -171,21 +171,19 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
  * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_objet_compte_enfants($flux) {
-	if ($flux['args']['objet']=='rubrique'
-		AND $id_rubrique=intval($flux['args']['id_objet'])) {
+	if ($flux['args']['objet']=='rubrique' AND $id_rubrique=intval($flux['args']['id_objet'])) {
+<BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>[(#REM)
 
-<BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>
-		[(#STATUT|oui)
-		// juste les publiés ?
+][		// juste les publiés ?
 		if (array_key_exists('statut', $flux\['args'\]) and ($flux\['args'\]\['statut'\] == 'publie')) {
-			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut='publie')");
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
 		} else {
-			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique)." AND (statut<>'poubelle')");
-		}
-		][(#STATUT|non)
-			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique=".intval($id_rubrique));
-		]
-</BOUCLE_objet_compte_enfants>
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+		}(#STATUT|oui)][(#REM)
+
+][		$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique));(#STATUT|non)][(#REM)
+
+]</BOUCLE_objet_compte_enfants>
 	}
 	return $flux;
 }
@@ -201,16 +199,27 @@ function [(#PREFIXE)]_objet_compte_enfants($flux) {
 ]<BOUCLE_si_optimiser_base_disparus(CONDITION){si #OBJETS|fabrique_necessite_pipeline{optimiser_base_disparus}}>
 
 /**
- * Optimiser la base de données en supprimant les liens orphelins
- * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ * Optimiser la base de données 
+ * <BOUCLE_desc_objets_optimiser_liens(DATA){source tableau,(#OBJETS|objets_options_presentes{table_liens})}{0,1}>
+ * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.[(#REM)
+]</BOUCLE_desc_objets_optimiser_liens>[(#REM)
+]<BOUCLE_desc_objets_poubelle(DATA){source tableau,(#OBJETS|objets_champ_present{statut})}{0,1}>
+ * Supprime les objets à la poubelle.[(#REM)
+]</BOUCLE_desc_objets_poubelle>
  *
  * @pipeline optimiser_base_disparus
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function [(#PREFIXE)]_optimiser_base_disparus($flux){
+<B_objets_optimiser_liens>
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array(<BOUCLE_objets_optimiser_base_disparus(DATA){source tableau,(#OBJETS|objets_options_presentes{table_liens})}{', '}>'#TYPE'=>'*'</BOUCLE_objets_optimiser_base_disparus>),'*');
+	$flux['data'] += objet_optimiser_liens(array(<BOUCLE_objets_optimiser_liens(DATA){source tableau,(#OBJETS|objets_options_presentes{table_liens})}{', '}>'#TYPE'=>'*'</BOUCLE_objets_optimiser_liens>),'*');
+</B_objets_optimiser_liens>[(#REM)
+]<B_objets_optimiser_poubelle>[(#REM)
+]<BOUCLE_objets_optimiser_poubelle(DATA){source tableau,(#OBJETS|objets_champ_present{statut})}>
+	sql_delete("#TABLE", "statut='poubelle' AND maj < " . $flux['args']['date']);
+</BOUCLE_objets_optimiser_poubelle>
 	return $flux;
 }</BOUCLE_si_optimiser_base_disparus>[
 (#REM)
