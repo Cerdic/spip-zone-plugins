@@ -53,6 +53,6 @@ function action_supprimer_#ENV{type}_dist($arg=null) {
 		sql_delete('#TABLE',  '#ID_OBJET=' . sql_quote($arg));
 	}
 	else {
-		spip_log('action_supprimer_#ENV{type}_dist $arg pas compris');
+		spip_log("action_supprimer_#ENV{type}_dist $arg pas compris");
 	}
 }
