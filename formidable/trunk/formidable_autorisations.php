@@ -83,22 +83,24 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
 	$auteurs = lire_config('formidable/analyse/auteur');
         
 	/* administrateur ? */
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (count($qui['restreint']) == 0))
+	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (count($qui['restreint']) == 0)) {
 		return true;
+	}
 
 	/* Test des autorisations par auteur */
 	if ($auteurs == 'on') {
 		return formidable_autoriser_par_auteur($id);
 	}
         
-        /* Test des autorisations pour un admin restreint */
-        if (count($qui['restreint'])) {
-            $autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint']) 
-                    ? $GLOBALS['autoriser_admin_restreint'] 
-                        : lire_config('formidable/analyse/autoriser_admin_restreint') == 'on' 
-                            ? true 
-                            : false;
-            return $autoriser_admin_restreint;
+	/* Test des autorisations pour un admin restreint */
+	if (count($qui['restreint'])) {
+		$autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint']) 
+				? $GLOBALS['autoriser_admin_restreint'] 
+					: lire_config('formidable/analyse/autoriser_admin_restreint') == 'on' 
+						? true 
+						: false;
+		
+		return $autoriser_admin_restreint;
 	}
 }
 
@@ -115,8 +117,12 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt){
-    if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
-    else return false;
+    if (isset($qui['statut']) and $qui['statut'] <= '1comite') {
+		return true;
+	}
+    else {
+		return false;
+	}
 }
 
 
@@ -137,38 +143,46 @@ function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt){
-// On regarde si il y a déjà le formulaire dans les options
-    if (isset($options['formulaire']))
-        $formulaire = $options['formulaire'];
-    // Sinon on va le chercher
-    else{
-        $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id);
-    }
+	$id = intval($id);
+	
+	// On regarde si il y a déjà le formulaire dans les options
+	if (isset($opt['formulaire'])) {
+		$formulaire = $opt['formulaire'];
+	}
+	// Sinon on va le chercher
+	else {
+		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id);
+	}
 
-    $traitements = unserialize($formulaire['traitements']);
+	$traitements = unserialize($formulaire['traitements']);
 
-    // S'il n'y a pas d'enregistrement, c'est forcément bon
-    if (!isset($traitements['enregistrement']) OR !($options = $traitements['enregistrement'])) {
-        return true;
-    // Sinon faut voir les options
-    } else {
-        // Si multiple = oui c'est bon
-        if ($options['multiple'])
-            return true;
-        else{
-            // Si c'est modifiable, c'est bon
-            if ($options['modifiable'])
-                return true;
-            else{
-                include_spip('inc/formidable');
-                // Si la personne n'a jamais répondu, c'est bon
-                if (!formidable_verifier_reponse_formulaire($id))
-                    return true;
-                else
-                    return false;
-            }
-        }
-    }
+	// S'il n'y a pas d'enregistrement, c'est forcément bon
+	if (!isset($traitements['enregistrement']) OR !($options = $traitements['enregistrement'])) {
+		return true;
+	}
+	// Sinon faut voir les options
+	else {
+		// Si multiple = oui c'est bon
+		if ($options['multiple']) {
+			return true;
+		}
+		else {
+			// Si c'est modifiable, c'est bon
+			if ($options['modifiable']) {
+				return true;
+			}
+			else {
+				include_spip('inc/formidable');
+				// Si la personne n'a jamais répondu, c'est bon
+				if (!formidable_verifier_reponse_formulaire($id)) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -238,13 +252,19 @@ function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt){
+    $id = intval($id);
+    
     if ($id_formulaire = intval(sql_getfetsel(
-			'id_formulaire', 'spip_formulaires_reponses', "id_formulaires_reponse=$id"))) {
-
-		$retour = (autoriser_formulaire_editer_dist($faire, $type, $id_formulaire, $qui, $opt)
-				and formidable_auteur_admin_reponse($qui));
+		'id_formulaire',
+		'spip_formulaires_reponses',
+		"id_formulaires_reponse=$id"
+	))) {
+		return
+			autoriser_formulaire_editer_dist($faire, $type, $id_formulaire, $qui, $opt)
+			and formidable_auteur_admin_reponse($qui);
 	}
-	return $retour;
+	
+	return false;
 }
 
 /**
@@ -261,7 +281,6 @@ function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $o
 **/
 function autoriser_formulairesreponse_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	$retour = autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt);
+	
 	return $retour;
 }
-
-?>
