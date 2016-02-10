@@ -32,7 +32,7 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=pt_br" total="169" traduits="85" relire="1" modifs="0" nouveaux="83" pourcent="50.30">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=pt_br" total="169" traduits="169" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
