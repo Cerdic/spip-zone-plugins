@@ -1,6 +1,5 @@
 ;(function ($) {
 jQuery(document).ready(function(){
-
 	/* Remet le title sur les chosen s'il en existait un sur le select */
 	spip_chosen_title = function() {
 		$('.chosen-container').each(function () {
@@ -36,9 +35,9 @@ jQuery(document).ready(function(){
 		
 	}
 
-	/* Ajoute la propriete overflow:visible au li contenant le select chosen (pour contrer le css de SPIP) */
+	/* Ajoute la propriete overflow:visible au .editer contenant le select chosen (pour contrer le css de SPIP) */
 	spip_chosen_visible = function() {
-		$('.chosen-container').parents('li,fieldset,form').each(function () {
+		$('.chosen-container').parents('.editer, fieldset, form').each(function () {
 			$(this).css("overflow", "visible");
 		});
 	}
