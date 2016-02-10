@@ -5,7 +5,7 @@ $(document).keypress
 (function(e){if(e.keyCode==13)return false;});
 $(function() 
 	{
-var name=[<BOUCLE_LISTES_AUTEURS_CHAT (AUTEURS){tout} {id_auteur!=#ID_AUTEUR}>[{"value":"(#NOM|sinon{#LOGIN})",]["id":"(#ID_AUTEUR)"},]</BOUCLE_LISTES_AUTEURS_CHAT>];
+var name=[<BOUCLE_LISTES_AUTEURS_CHAT (AUTEURS){tout} {id_auteur!=#ID_AUTEUR}>[{"value":"(#NOM|trim|sinon{#LOGIN|trim})",]["id":"(#ID_AUTEUR)"},]</BOUCLE_LISTES_AUTEURS_CHAT>];
 $( "#auto" ).autocomplete({
 source: name,
 select: function(event, ui){$('#selectUser').val(ui.item.id); },
