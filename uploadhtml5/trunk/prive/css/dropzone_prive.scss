@@ -9,3 +9,11 @@
         border-style: none;
     }
 }
+
+// Ajouter un style sur les saisies upload de l'admin
+.saisie_upload {
+	.dropzone {
+		background: #f4f4f4;
+		border: 1px solid #C5E41C;
+	}
+}

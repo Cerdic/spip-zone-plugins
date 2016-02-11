@@ -5,4 +5,8 @@
     border: none;
     border-style: none; }
 
+.saisie_upload .dropzone {
+  background: #f4f4f4;
+  border: 1px solid #C5E41C; }
+
 /*# sourceMappingURL=dropzone_prive.css.map */
