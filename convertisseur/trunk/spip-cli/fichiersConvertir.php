@@ -164,15 +164,12 @@ class Convert extends Command {
 					);
 					
 					// surcharge nettoyage perso ?
-					include_once("mes_fonctions.php");
+					if(file_exists('mes_fonctions.php'))
+						include_once("mes_fonctions.php");
 
 					if (function_exists('nettoyer_conversion')){
-						$c = nettoyer_conversion($c);
-						var_dump($c);
-						exit ;
-					}else
-						exit ;
-					
+						$c = nettoyer_conversion($c);			
+					}
 													
 					if(!is_dir($c["dest"] . "/" .  $c["collection"])){
 						mkdir($c["dest"]  . "/" . $c["collection"]) ;
