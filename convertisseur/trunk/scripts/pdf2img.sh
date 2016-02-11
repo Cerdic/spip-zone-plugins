@@ -18,4 +18,3 @@ echo "conversion shave $3 de $1 dans $2"
 
 # une seule page
 convert -verbose -colorspace RGB -resize 1500 -interlace none -density 300 -background white -alpha remove -quality 80 -shave "$shave" "$1" "$2/$nom.jpg"
-

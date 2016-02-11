@@ -110,14 +110,16 @@ class Convert extends Command {
 				include_spip("extract/$extracteur");				
 				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
 													
-				// chopper des fichiers xml mais pas xxx.metatada.xml
-				$fichiers = preg_files($source, "(?:(?<!\.metadata\.)xml$)");
+				// chopper des fichiers xml mais pas xxx_metatada.xml
+				$fichiers = preg_files($source ."/", "(?:(?<!_metadata\.)xml$)");
 									
 				// ou a défaut n'importe quel fichier trouvé
 				if(sizeof($fichiers) == 0)
 					$fichiers = preg_files($source, ".*");
 																	
 				foreach($fichiers as $f){
+					
+					//var_dump($f);
 					
 					$fn = str_replace("$source/","", $f);
 				
@@ -135,20 +137,6 @@ class Convert extends Command {
 						$numero="" ;
 					}
 					
-					if($collection != "")
-						$collection = "/" . $collection ;
-
-					if($numero != "")
-						$numero = "/" . $numero ;
-
-								
-					if(!is_dir("$dest" .  $collection)){
-						mkdir("$dest"  . $collection) ;
-					}
-					if(!is_dir("$dest"  . $collection  . $numero)){
-						mkdir("$dest"  . $collection  . $numero) ;
-					}
-					
 					$article = basename($f);
 
 					// pour le chemin des documents.
@@ -157,18 +145,47 @@ class Convert extends Command {
 					$contenu = $fonction_extraction($f,$charset);
 										
 					include_spip("inc/convertisseur");
-					$contenu = nettoyer_format($contenu);
-					
-					// nettoyer les noms de fichiers
+					$contenu = nettoyer_format($contenu);					
+
+					// Générer des noms de fichiers valides
 					include_spip("inc/charsets");
-					$article = translitteration($article);
+					$article = translitteration($article);					
 					$article = preg_replace(',[^\w-]+,', '_', $article);
 					$article = preg_replace(',_xml$,', '.xml', $article);
+										
+					$c = array(
+						"fichier_source" => $f,					
+						"dest" => $dest,
+						"collection" => $collection,
+						"numero" => $numero,
+						"contenu" => $contenu,
+						"basename" => $article ,
+						"fichier_dest" => $dest . "/" . $collection  . "/" . $numero . "/" . $article
+					);
+					
+					// surcharge nettoyage perso ?
+					include_once("mes_fonctions.php");
+
+					if (function_exists('nettoyer_conversion')){
+						$c = nettoyer_conversion($c);
+						var_dump($c);
+						exit ;
+					}else
+						exit ;
+					
+													
+					if(!is_dir($c["dest"] . "/" .  $c["collection"])){
+						mkdir($c["dest"]  . "/" . $c["collection"]) ;
+					}
+					if(!is_dir($c["dest"]  . "/" . $c["collection"]  . "/" . $c["numero"])){
+						mkdir($c["dest"]  . "/" . $c["collection"]  . "/" . $c["numero"]) ;
+					}
 					
 					include_spip("inc/flock");
-					ecrire_fichier($dest . $collection  . $numero . "/" . $article, $contenu);
+					ecrire_fichier($c["fichier_dest"], $c["contenu"]);
 								
-					$output->writeln("Nouvelle conversion : $dest" . $collection  . $numero . "/" . $article);
+					$output->writeln("Nouvelle conversion : " . $c["fichier_dest"]);
+																
 				}
 				
 			}
@@ -179,3 +196,4 @@ class Convert extends Command {
 		}
 	}
 }
+

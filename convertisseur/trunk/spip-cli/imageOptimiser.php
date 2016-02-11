@@ -46,6 +46,14 @@ class optimg extends Command {
 				'Redimensionner la largeur à n px, en conservant les proportions pour calculer la hauteur. Exemple : `spip optimg -r 900 mon_image.jpg`',
 				'0'
 			)
+			->addOption(
+				'compression',
+				'c',
+				InputOption::VALUE_OPTIONAL,
+				'Compresser les images à 80%. Exemple : `spip optimg -c 80 mon_image.jpg`',
+				'0'
+			)
+
 		;
 	}
 
@@ -58,6 +66,7 @@ class optimg extends Command {
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
 		$resize = $input->getOption('resize') ;
+		$compression = $input->getOption('compression') ;
 		$image = $input->getArgument('image');
 		
 		if ($spip_loaded) {
@@ -79,10 +88,16 @@ class optimg extends Command {
 				}
 				$param_r=" $resize" ;
 				
+				if($compression > 0){
+					$label_c=" en compressant à $compression % " ;
+					$param_c=" $compression" ;
+				}
+				
+				
 				// optimisation imagemagick
 				if($image){
-					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d} !</info>");
-					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d);
+					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d}${label_c} !</info>");
+					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
 				}	
 				elseif($source){
 					$param_s = " $source" ;

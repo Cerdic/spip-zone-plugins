@@ -82,7 +82,7 @@ class pdf2img extends Command {
 				if($pdf !== ""){
 					$output->writeln("<info>conversion de $pdf dans $dest/</info>");
 
-					var_dump('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
+					// var_dump('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
 					
 					// Conversion imagemagick
 					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
