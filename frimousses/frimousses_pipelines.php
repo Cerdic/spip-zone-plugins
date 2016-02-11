@@ -3,7 +3,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function frimousses_porte_plume_barre_pre_charger($barres) {
 	// Commun aux 2 barres
-	$frimousses = smileys_uniques(liste_smileys()[0]);
+	$frimousses = frimousses_smileys_uniques(frimousses_liste_smileys()[0]);
 	$outil_frimousses = array();
 	for ( $compteur=0; $compteur<count($frimousses[2]); $compteur++ ){
 		$outil_frimousses[] = array(
@@ -37,14 +37,11 @@ function frimousses_porte_plume_barre_pre_charger($barres) {
 }
 
 function frimousses_porte_plume_lien_classe_vers_icone($flux) {
-	$outils_frimousses["outil_frimousses"] = array(find_in_path('frimousses/mort_de_rire.png'), '0');
-	
-	$frimousses = array_values(smileys_uniques(liste_smileys()[0])[2]);
-// 	echo print_r($frimousses);
+	$outils_frimousses["outil_frimousses"] = array(find_in_path('frimousses/mort_de_rire.png'), '0');	
+	$frimousses = array_values(frimousses_smileys_uniques(frimousses_liste_smileys()[0])[2]);
         foreach($frimousses as $compteur => $file) {
             $outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/'.$file), '0');
 	}
-	
 	return array_merge($flux, $outils_frimousses);
 }
 

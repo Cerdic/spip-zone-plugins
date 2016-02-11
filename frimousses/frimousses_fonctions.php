@@ -4,7 +4,6 @@ if (!isset($GLOBALS['spip_version_branche']) OR intval($GLOBALS['spip_version_br
 	define('_DIR_PLUGIN_FRIMOUSSES',(_DIR_PLUGINS.end($p)).'/');
 }
 
-
 // balises de tracage, directement compatibles regexpr
 // le separateur _FRIMOUSSES_HTMLX est supprime en fin de calcul
 @define('_FRIMOUSSES_HTMLA', '<span class="frimoussesfoo htmla"></span>');
@@ -13,91 +12,109 @@ if (!isset($GLOBALS['spip_version_branche']) OR intval($GLOBALS['spip_version_br
 
 
 // fonction ajoutant un smiley au tableau $tab
-// ex : compile_smiley($tab, ':-*', 'icon_kiss', 'gif');
-function compile_smiley(&$tab, $smy, $img, $ext='png') {
-        static $path, $path2;
-        if(!isset($path)) {
-                $path = find_in_path('frimousses');
-                $path2 = url_absolue($path);
-                $pp = defined('_DIR_PLUGIN_PORTE_PLUME');
-        }
-        $espace = strlen($smy)==2?' ':'';
-        $file = "$img.$ext";
-        list(,,,$size) = @getimagesize("$path/$file");
-        $tab['0']['0'][] = $espace.$smy;
-        // cs_code_echappement evite que le remplacement se fasse a l'interieur des attributs de la balise <img>
-        $tab[0][1][] = frimousses_code_echappement("$espace<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_$ext\" src=\"$path2/$file\" $size/>", 'FRIMOUSSES');
-       
-        $tab[0][2][] = $file;
-        $tab['racc'][] = $smy;
-        // pour le porte-plume
-        $tab[0][4]['smiley_'.$img] = $file;
+// ex : frimousses_compile_smiley($tab, ':-*', 'icon_kiss', 'gif');
+function frimousses_compile_smiley(&$tab, $smy, $img, $ext='png') {
+    static $path, $path2;
+    if(!isset($path)) {
+            $path = find_in_path('frimousses');
+            $path2 = url_absolue($path);
+            $pp = defined('_DIR_PLUGIN_PORTE_PLUME');
+    }
+    $espace = strlen($smy)==2?' ':'';
+    $file = "$img.$ext";
+    list(,,,$size) = @getimagesize("$path/$file");
+    $tab['0']['0'][] = $espace.$smy;
+    // frimousses_code_echappement evite que le remplacement se fasse a l'interieur des attributs de la balise <img>
+    $tab[0][1][] = frimousses_code_echappement("$espace<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_$ext\" src=\"$path2/$file\" $size/>", 'FRIMOUSSES');
+    
+    $tab[0][2][] = $file;
+    $tab['racc'][] = $smy;
+    // pour le porte-plume
+    $tab[0][4]['smiley_'.$img] = $file;
 }
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
-function liste_smileys($tab = array(0 => array(), 'racc' => array())) {
-        // l'ordre des smileys ici est important :
-        //  - les doubles, puis les simples, puis les courts
-        //  - le raccourci insere par la balise #SMILEYS est la premiere occurence de chaque fichier
-        $smileys = array(
-        // attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
-         ":&#8217;-))"=> 'pleure_de_rire',
-         ":&#8217;-)"=> 'pleure_de_rire',
-         ":&#8217;-D"   => 'pleure_de_rire',
-         ":&#8217;-("   => 'triste',
+function frimousses_liste_smileys($tab = array(0 => array(), 'racc' => array())) {
+    // l'ordre des smileys ici est important :
+    //  - les doubles, puis les simples, puis les courts
+    //  - le raccourci insere par la balise #SMILEYS est la premiere occurence de chaque fichier
+    $smileys = array(
+    // attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
+        ":&#8217;-))"=> 'pleure_de_rire',
+        ":&#8217;-)"=> 'pleure_de_rire',
+        ":&#8217;-D"   => 'pleure_de_rire',
+        ":&#8217;-("   => 'triste',
+    
+    // les doubles :
+        ':-))' => 'mort_de_rire',
+        ':))'  => 'mort_de_rire',
+        ":'-))"=> 'pleure_de_rire',
+        ':-((' => 'en_colere',
+        ':-)*' => 'bisou',
+        ':-...' => 'rouge',
+        ':...' => 'rouge', 
+        ':-..' => 'rouge', 
+        ':..' => 'rouge', 
+        ':-.' => 'rouge', 
+
         
-        // les doubles :
-         ':-))' => 'mort_de_rire',
-         ':))'  => 'mort_de_rire',
-         ":'-))"=> 'pleure_de_rire',
-         ':-((' => 'en_colere',
-
-        // les simples :
-         ';-)'  => 'clin_d-oeil',
-         ':-)'  => 'sourire',
-         ':-D'  => 'mort_de_rire',
-         ":'-)"=> 'pleure_de_rire',
-         ":'-D" => 'pleure_de_rire',
-         ':-('  => 'pas_content',
-         ":'-(" => 'triste',
-         ':-&gt;' => 'diable',
-         '|-)'  => 'rouge',
-         ':o)'  => 'rigolo',
-         'B-)'  => 'lunettes',
-         ':-P'  => 'tire_la_langue',
-         ':-p'  => 'tire_la_langue',
-         ':-|'  => 'bof',
-         ':-/'  => 'mouais',
-         ':-O'  => 'surpris',
-         ':-o'  => 'surpris',
-
-        // les courts : tester a l'usage...
-        // attention : ils ne sont reconnus que s'il y a un espace avant !
-         ':)'   => 'sourire',
-         ':('   => 'pas_content',
-         ';)'   => 'clin_d-oeil',
-         ':|'   => 'bof',
-         '|)'   => 'rouge',
-         ':/'   => 'mouais',
-        );
         
-        foreach ($smileys as $smy=>$val)
-                compile_smiley($tab, $smy, $val);
+    // les simples :
+        ';-)'  => 'clin_d-oeil',
+        ':-)'  => 'sourire',
+        ':-D'  => 'mort_de_rire',
+        ":'-)"=> 'pleure_de_rire',
+        ":'-D" => 'pleure_de_rire',
+        ':-('  => 'pas_content',
+        ":'-(" => 'triste',
+        ':~(' => 'triste',
+        ':-&gt;' => 'diable',
+        ':o)'  => 'rigolo',
+        'B-)'  => 'lunettes',
+        ':-P'  => 'tire_la_langue',
+        ':-p'  => 'tire_la_langue',
+        ':-|'  => 'bof',
+        '|-)'  => 'bof',        
+        ':-/'  => 'mouais',
+        ':-O'  => 'surpris',
+        ':-o'  => 'surpris',
+        ':-*'  => 'bisou',
+        'o:)' => 'ange',
+        'O:)' => 'ange',
+        '0:)' => 'ange',
+        ':.' => 'rouge', 
+        ':-x' => 'bouche_cousu',
+        ':-@' => 'dort',
+        ':-$' => 'argent',
+        ':-!' => 'indeci',
+        
+    // les courts : tester a l'usage...
+    // attention : ils ne sont reconnus que s'il y a un espace avant !
+        ':)'   => 'sourire',
+        ':('   => 'pas_content',
+        ';)'   => 'clin_d-oeil',
+        ':|'   => 'bof',
+        '|)'   => 'bof',
+        ':/'   => 'mouais',
+    );
+    
+    foreach ($smileys as $smy=>$val)
+            frimousses_compile_smiley($tab, $smy, $val);
 
-        return $tab;
+    return $tab;
 }
 
 
 // fonction qui renvoie un tableau de smileys uniques
-function smileys_uniques($smileys) {
+function frimousses_smileys_uniques($smileys) {
         $max = count($smileys[1]);
         $new = array(array(), array(), array());
         for ($i=0; $i<$max; $i++) {
-                if(!in_array($smileys[2][$i], $new[2])) {
-                        $new[0][] = $smileys[0][$i]; // texte
-                        $new[1][] = $smileys[1][$i]; // image
-                        $new[2][] = $smileys[2][$i]; // nom de fichier
-                }
+            if(!in_array($smileys[2][$i], $new[2])) {
+                $new[0][] = $smileys[0][$i]; // texte
+                $new[1][] = $smileys[1][$i]; // image
+                $new[2][] = $smileys[2][$i]; // nom de fichier
+            }
         }
         return $new;
 }
@@ -105,7 +122,7 @@ function smileys_uniques($smileys) {
 // fonction principale (pipeline pre_typo)
 function frimousses_pre_typo($texte) {
         if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-        // appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees
+        // appeler frimousses_rempl_smileys() une fois que certaines balises ont ete protegees
         return frimousses_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'frimousses_rempl_smileys', $texte);
 }
 
@@ -176,7 +193,7 @@ function frimousses_echappe_balises_callback($matches) {
 // les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
 function frimousses_rempl_smileys($texte) {
         if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-        $smileys_rempl = liste_smileys()[0];
+        $smileys_rempl = frimousses_liste_smileys()[0];
         $texte = preg_replace_callback(',(<img .*?/>),ms', 'frimousses_echappe_balises_callback', $texte);
         // smileys a probleme :
         $texte = str_replace(':->', ':-&gt;', $texte); // remplacer > par &gt;
@@ -188,8 +205,5 @@ function frimousses_rempl_smileys($texte) {
 
         return echappe_retour($texte, 'FRIMOUSSES');
 }
-
-
-
 
 ?>
