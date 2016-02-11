@@ -3,18 +3,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function frimousses_porte_plume_barre_pre_charger($barres) {
 	// Commun aux 2 barres
-	$frimousses = frimousses_liste_smileys();
+	$frimousses = smileys_uniques(liste_smileys()[0]);
 	$outil_frimousses = array();
-	$compteur = 0;
-	foreach($frimousses as $file => $smiley) {
+	for ( $compteur=0; $compteur<count($frimousses[2]); $compteur++ ){
 		$outil_frimousses[] = array(
 			"id"          => "barre_frimousse$compteur",
-			"name"        => _T('smileys:'.$smiley[0]).' '.implode(' ', $smiley),
+			"name"        => _T('smileys:'.$frimousses[0][$compteur]).' '.$frimousses[0][$compteur],
 			"className"   => "outil_frimousses$compteur", 
-			"replaceWith" => ' '.$smiley[0].' ',
+			"replaceWith" => ' '.$frimousses[0][$compteur].' ',
 			"display"     => true,
 		);
-		$compteur++;
 	}
 	
 	// On rajoute les boutons aussi bien pour l'édition du contenu que pour les forums
@@ -39,11 +37,12 @@ function frimousses_porte_plume_barre_pre_charger($barres) {
 }
 
 function frimousses_porte_plume_lien_classe_vers_icone($flux) {
-	$outils_frimousses["outil_frimousses"] = array(find_in_path('frimousses/smiley-16.png'), '0');
+	$outils_frimousses["outil_frimousses"] = array(find_in_path('frimousses/mort_de_rire.png'), '0');
 	
-	$frimousses = array_keys(frimousses_liste_smileys());
-		foreach($frimousses as $compteur => $file) {
-		$outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/'.$file), '0');
+	$frimousses = array_values(smileys_uniques(liste_smileys()[0])[2]);
+// 	echo print_r($frimousses);
+        foreach($frimousses as $compteur => $file) {
+            $outils_frimousses["outil_frimousses$compteur"] = array(find_in_path('frimousses/'.$file), '0');
 	}
 	
 	return array_merge($flux, $outils_frimousses);
