@@ -612,7 +612,8 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		}
 	}
 
-	// en cas d'echec de l'insertion
+	// En cas d'echec de l'insertion
+	
 	if (!$id_article) {
 		$log = "erreur insertion d'article";
 		return;
@@ -621,14 +622,32 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	// Si on a repere des <ins class='titre'> etc, les inserer
 	// dans les bons champs ; note : on choisi <ins> pour eviter les erreurs
 	// avec <div> qui est plus courant
+	
 	$c = array('texte' => $texte);
-	foreach (array('surtitre', 'titre', 'soustitre', 'chapo') as $champ) {
+	
+	// Champs d'un article
+	include_spip("base/abstract_sql");
+	$show = sql_showtable("spip_articles");
+	$champs = array_keys($show['field']);
+	foreach ($champs as $champ) {
 		if (preg_match(",<ins class='$champ'>(.*?)</ins>\n*,ims", $texte, $r)
-		AND strlen($x = trim($r[1]))) {
+		AND strlen($x = trim($r[1]))
+		AND $champ != "texte"
+		AND $champ != "ps") {
 			$c[$champ] = $x;
 			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $r[0]), strlen($r[0]));
 		}
 	}
+		
+	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute ostensiblement en haut du texte.
+	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
+		foreach($z as $d){
+			$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
+			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
+		}
+	}
+	
+	$c['texte'] = preg_replace("/\n\n+/m", "\n\n", $c['texte']);
 
 	$r = '';
 	foreach ($c as $var => $val)

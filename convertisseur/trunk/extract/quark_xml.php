@@ -24,22 +24,22 @@ function extracteur_preparer_insertion($item){
 	$champs_article = array("surtitre", "titre", "chapo");
 
 	# Champs articles
-	foreach($champs_article as $champ)
-		if($champ){
-			$texte .= "<ins class='$champ'>" . trim($item[$champ]) . "</ins>\n\n" ;
-			unset($item[$champ]);
-		}
+	# Baliser les champs articles
+	
+	foreach($item as $k => $v)	
+		if(in_array($k, $champs_article))
+			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
 
 	# autres champs
 	foreach($item as $k => $v)	
-		if($k != "texte")
+		if($k != "texte" and !in_array($k, $champs_article))
 			if(is_array($v))
-				$texte .= "\n\n@@" . strtoupper($k) . "\n" . trim(join(",", $v)) . "\n\n" ;
+				$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n" ;
 			else
-				$texte .= "\n\n@@" . strtoupper($k) . "\n" . trim($v) . "\n\n" ;
-				
+				$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
+					
 	# texte
-	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
+	$texte .=  "\n" . trim($item['texte']) . "\n" ;
 	
 	return $texte ;
 
@@ -56,10 +56,12 @@ function convertir_quark_xml($c) {
 	$pages = textebrut($b);
 
 	$p = explode("-", $pages) ;
-	if(intval($p[0]) < 10)
-		$pages = "0" . $pages ;
 	
-	$item["pages"] = $pages ;
+	foreach($p as &$v)
+		if(intval($v) < 10)
+			$v = "0" . $v ;
+	
+	$item["pages"] = join(" ", $p) ;
 	
 	$mise_en_page = extraire_balise($u, "RELATIONINFO");
 	$mise_en_page = extraire_attribut($mise_en_page, "parentAssetName");
