@@ -106,7 +106,9 @@ function etablir_prix($id, $objet, $datas, $set, $quantite) {
   if ($prix_ht) {
     $prix = $quantite * $prix;
     $prix_ht = $quantite * $prix_ht;
-    $taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+    if ($prix_ht > 0 ) {
+    	$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+    }
     $set['prix_ht'] = $prix_ht;
     $set['taxe'] = $taxe;
   }
