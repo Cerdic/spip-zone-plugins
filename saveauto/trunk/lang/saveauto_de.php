@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_webmestre' => 'Webmaster in die Enpfängerliste übernehmen',
+
 	// B
 	'bouton_sauvegarder' => 'Datenbank sichern',
 
@@ -21,17 +24,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_impossible_liste_tables' => 'Liste der Tabellen in der Datenbank kann nicht angezeigt werden.',
 	'erreur_probleme_donnees_corruption' => 'Datenfahler in der Tabelle @table@. Sie ist möglicherweise beschädigt !',
 	'erreur_repertoire_inaccessible' => 'In das Verzeichnis @rep@ kann nicht geschrieben werden.',
+	'erreur_repertoire_perso_inaccessible' => 'Das gewählte Verezeichnis @rep@ ist nicht zugänglich: Das SPIP-Sicherungsverzeichnis wird verwendet.',
 
 	// H
 	'help_cfg_generale' => 'Die Einstellungen gelten für alle manuellen und automatischen Backups.',
 	'help_contenu' => 'Wählen Sie die inhaltlichen Einstellungen ihrer Backups.',
 	'help_contenu_auto' => 'Wählen Sie die Inhalte der automatischen Backups aus.',
 	'help_frequence' => 'Wählen Sie die Zeitabstände in Tagen zwischen den automatischen Backups.',
-	'help_liste_tables' => 'In der Grundeinstellung werden alle Tabellen außer  @noexport@ gesichert. Wenn Sie die zu sichernden Tabellen einzeln auswählen möchten, öffnen Sie die Liste, indem Sie das Häkchen weiter unten entfernen.', # MODIF
+	'help_liste_tables' => 'In der Grundeinstellung werden alle Tabellen außer  @noexport@ gesichert. Wenn Sie die zu sichernden Tabellen, auch nicht SPIP-eigene, einzeln auswählen möchten, öffnen Sie die Liste, indem Sie das Häkchen weiter unten entfernen.',
 	'help_mail_max_size' => 'Angabe der Maximalgröße für Backupdateien, die per Mail verschickt wird. Der Wert ist abhängig von den Einstellungen Ihres Mailanbieters.',
 	'help_max_zip' => 'Die Sicherungsdatei wird automatisch als ZIP komprimiert, wenn sie kleiner als ein bestimmter Wert ist. Geben Sie diesen Wert in Megabyte an. (Dieser Schwellwert ist erforderlich, um den Server nicht durch die Produktion einer zu großen ZIP-Datei zu überlasten.)',
+	'help_nbr_garder' => 'Geben Sie die Zahl derSicherheitskopien an, die angelegt werden, bevor Kopien gelöscht werden, die älter als der eingestellte Aufbewahrungszeitraum sind. kommt.oberhalb derer d',
 	'help_notif_active' => 'Sie werden auf Wunsch über automatische Vorgänge informiert. Bei automatischen backups wird Ihnen die Sicherungsdatei zugeschickt, wenn diese nicht größer als ein bestimmter Wert ist, und wenn das Plugin "Facteur" aktiviert ist.',
-	'help_notif_mail' => 'Mehrere Adressen müssen mit Komma "," getrennt werden. Diese Adressen ergänzen die des Webmasters der Site.', # MODIF
+	'help_notif_mail' => 'Mehrere Adressen werden mit Komma "," getrennt.',
 	'help_obsolete' => 'Aufbewahrungszeitraum der Sicherungsdateien in Tagen.',
 	'help_prefixe' => 'Präfix des Namens der Backup-Datei.',
 	'help_repertoire' => 'Wenn Sie nicht das SPIP-Backupverzeichnis verwenden wollen, tragen Sie den gewüschen Pfad ab dem Installationsverzeichnis von SPIP (ein / am Ende ist erforderlich)',
@@ -39,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Sie können nicht mit dem SPIP-Backupsystem genutzt werden.<br /><br />
 Sie müssen für die Wiederherstellung das Interface ihres Servers verwenden. In PHPMyAdmin klicken Sie unter dem Reiter <strong>"SQL"</strong> sie auf die Schaltfläche <strong>"Datei wählen"</strong> suchen die gewünschte Sicherung aus. Falls erforderlich markieren sie die Option "gzip").br /><br />
 Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalten Befehle im SQL-Format, mit denen die vorhandenen SPIP-Tabellen <strong>gelöscht</strong> und durch die Backupdaten <strong>ersetzt</strong> werden. Neuere Daten als die im Backup vorhandenen <strong>gehen bei der Widerherstellung verloren</strong>!',
-	'help_sauvegarde_1' => 'Diese Option ermöglicht Ihnen, Struktur und Inhalt der Datenbank im SQL-Format im Verzeichnis tmp/dump/ zu speichern. Diese Datei wird <em>@prefixe@_aaaammjj_hhmmss.</em> benannt. Die Tabellenpräfixe werden beibehalten.', # MODIF
+	'help_sauvegarde_1' => 'Diese Option ermöglicht Ihnen, Struktur und Inhalt der Datenbank im SQL-Format im Verzeichnis tmp/dump/ zu speichern. Diese Datei wird <em>@prefixe@_aaaammjj_hhmmss.</em> benannt. Die Tabellenpräfixe werden beibehalten.',
 	'help_sauvegarde_2' => 'Automatische Backups sind aktiviert. Sie werden alle @frequence@) Tage angelegt.',
 
 	// I
@@ -65,14 +70,17 @@ Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalt
 	'label_frequence' => 'Häufigkeit der Backups',
 	'label_mail_max_size' => 'Maximalgröße für Mailversand',
 	'label_max_zip' => 'Schwellwert der ZIP-Dateien',
+	'label_nbr_garder' => 'Anzahl aufzubewahrender Sicherheitskopien',
 	'label_nettoyage_journalier' => 'Tägliches Aufräumen der Sicherungen',
 	'label_notif_active' => 'Benachrichtigungen aktivieren',
 	'label_notif_mail' => 'Zu benachrichtigende Adressen',
 	'label_obsolete_jours' => 'Aufbewahrungszeit der Sicherungskopien ',
 	'label_prefixe_sauvegardes' => 'Präfix',
+	'label_repertoire_sauvegardes' => 'Verzeichnis',
 	'label_sauvegarde_reguliere' => 'Regelmäßige Sicherungen aktivieren',
 	'label_structure' => 'Tabellenstruktur',
-	'label_toutes_tables' => 'Alle Tabellen sichern', # MODIF
+	'label_tables_non_spip' => 'Nicht-SPIP-Tabellen',
+	'label_toutes_tables' => 'Alle SPIP-Tabellen sichern',
 	'legend_cfg_generale' => 'Allgemeine Sicherungseinstellungen',
 	'legend_cfg_notification' => 'Benachrichtigungen',
 	'legend_cfg_sauvegarde_reguliere' => 'Automatische Abläufe',
@@ -88,7 +96,7 @@ Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalt
 	'message_telechargement_nok' => 'Übertragungsfehler',
 
 	// T
-	'titre_boite_historique' => 'Sicherungsgeschichte', # MODIF
+	'titre_boite_historique' => ' MySQL-Sicherheitskopien zum Herunterladen im Verzeichnis @dossier@ ',
 	'titre_boite_sauver' => 'MySQL Datensicherung anlegen',
 	'titre_page_configurer' => 'Konfiguration des Plugins saveauto',
 	'titre_page_saveauto' => 'Datenbank im SQL-Format sichern'
