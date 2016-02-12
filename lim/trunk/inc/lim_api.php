@@ -63,11 +63,14 @@ function inc_chercher_rubrique($id_rubrique, $type, $restreint, $idem = 0, $do =
 		return '';
 	}
 	/* surcharge */
-	$nbre_rubriques_total		= sql_countsel('spip_rubriques');
-	$nbre_rubriques_desactives	= count(lire_config("lim_rubriques/$type"));
+	$rubriques_restreintes = lire_config("lim_rubriques/$type");
+	if (!is_null($rubriques_restreintes)) {
+		$nbre_rubriques_total		= sql_countsel('spip_rubriques');
+		$nbre_rubriques_desactives	= count($rubriques_restreintes);
 
-	if ($nbre_rubriques_total - $nbre_rubriques_desactives <= 1) {
-		return '';
+		if ($nbre_rubriques_total - $nbre_rubriques_desactives <= 1) {
+			return '';
+		}
 	}
 	// note : du coup, plus de input name='id_parent' ! Un traitement via le pipeline "editer_contenu_objet" s'occupe de palier à ce problème.
 	/* fin surcharge */
