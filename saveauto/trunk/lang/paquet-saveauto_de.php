@@ -16,7 +16,7 @@ Die Sicherungen werden in einem Verzeichnis auf dem Server gespeichert (Grundein
 
 Es steht ein Interface zum manuellen Start des Backups und für die Vewaltung der Sicherungsdateien zur Verfügung.',
 	'saveauto_nom' => 'Automatisches Backup',
-	'saveauto_slogan' => 'Automatisches Backup der MySQL-Dtanbank von SPIP'
+	'saveauto_slogan' => 'Automatisches Backup der MySQL-SPIP-Datenbank'
 );
 
 ?>
