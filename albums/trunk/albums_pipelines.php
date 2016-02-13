@@ -242,19 +242,20 @@ function albums_post_insertion($flux){
  */
 function albums_post_edition($flux){
 
-	$table_objet_sql = $flux['args']['table'];
-	$serveur         = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
-	$type            = isset($flux['args']['type']) ? $flux['args']['type'] : objet_type($table_objet_sql);
-	$id_objet        = $flux['args']['id_objet'];
-	$id_table_objet  = id_table_objet($type, $serveur);
-	$table_objet     = isset($flux['args']['table_objet']) ? $flux['args']['table_objet'] : table_objet($table_objet_sql,$serveur);
-
 	// si on édite un objet, mettre ses albums liés à jour
-	if ($table_objet_sql !== 'spip_albums'){
+	if (isset($flux['args']['table']) and $flux['args']['table'] != 'spip_albums') {
+
+		$table_objet_sql = $flux['args']['table'];
+		$serveur         = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
+		$type            = isset($flux['args']['type']) ? $flux['args']['type'] : objet_type($table_objet_sql);
+		$id_objet        = $flux['args']['id_objet'];
+		$id_table_objet  = id_table_objet($type, $serveur);
+		$table_objet     = isset($flux['args']['table_objet']) ? $flux['args']['table_objet'] : table_objet($table_objet_sql, $serveur);
+
 		include_spip('inc/autoriser');
-		if (autoriser('autoassocieralbum',$type,$id_objet)){
-			$marquer_doublons_album = charger_fonction('marquer_doublons_album','inc');
-			$marquer_doublons_album($flux['data'],$id_objet,$type,$id_table_objet,$table_objet,$table_objet_sql,'',$serveur);
+		if (autoriser('autoassocieralbum', $type, $id_objet)){
+			$marquer_doublons_album = charger_fonction('marquer_doublons_album', 'inc');
+			$marquer_doublons_album($flux['data'], $id_objet, $type, $id_table_objet, $table_objet, $table_objet_sql, '', $serveur);
 		}
 	}
 
