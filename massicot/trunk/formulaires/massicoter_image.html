@@ -26,6 +26,12 @@
   </div>
 </form>
 
+
+<div class="image-massicot">
+  [(#ENV{objet}|massicot_chemin_image{#ENV{id_objet}}|balise_img)]
+</div>
+
+
 <script type="text/javascript" src="#CHEMIN{javascripts/formulaireMassicoterImage.js}"></script>
 <script type="text/javascript">
  $(function () {

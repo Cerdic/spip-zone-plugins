@@ -1,7 +1,3 @@
 <h1><:massicot:massicoter:> &laquo;[(#ENV{objet}|=={document}|?{#INFO_TITRE{document, #ENV{id_objet}}|sinon{Document #ENV{id_objet}}, Logo #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}|sinon{#ENV{objet} #ENV{id_objet}}})]&raquo;</h1>
 
 #FORMULAIRE_MASSICOTER_IMAGE{#OBJET, #ID_OBJET, #ENV{redirect}}
-
-<div class="image-massicot">
-  [(#ENV{objet}|massicot_chemin_image{#ENV{id_objet}}|balise_img)]
-</div>

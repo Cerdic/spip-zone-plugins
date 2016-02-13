@@ -70,6 +70,9 @@ function formulaires_massicoter_image_charger_dist ($objet, $id_objet, $redirect
         );
     }
 
+    $parametres['objet']    = $objet;
+    $parametres['id_objet'] = $id_objet;
+
     return $parametres;
 }
 
