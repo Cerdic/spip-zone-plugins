@@ -16,6 +16,8 @@
 
 	<licence>GNU/GPL</licence>
 
+	<traduire module="massicot" reference="fr" gestionnaire="salvatore" /> 
+
 	<pipeline nom="declarer_tables_interfaces"  inclure="base/massicot.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/massicot.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/massicot.php" />
