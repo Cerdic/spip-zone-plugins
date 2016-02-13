@@ -26,12 +26,12 @@ $.fn.formulaireMassicoterImage = function ( options ) {
            le zoom, pour pouvoir zoomer-dézoomer perdre de la
            précision à cause d'erreurs d'arrondi. */
         selection_nozoom = {},
-        selection_actuelle = ($('input[name=x1]').attr('value') !== '') ?
+        selection_actuelle = ( ! isNaN(parseInt($('input[name=x1]').val(), 10))) ?
             {
-                x1: parseInt($('input[name=x1]').attr('value'),10),
-                x2: parseInt($('input[name=x2]').attr('value'),10),
-                y1: parseInt($('input[name=y1]').attr('value'),10),
-                y2: parseInt($('input[name=y2]').attr('value'),10)
+                x1: parseInt($('input[name=x1]').val(), 10),
+                x2: parseInt($('input[name=x2]').val(), 10),
+                y1: parseInt($('input[name=y1]').val(), 10),
+                y2: parseInt($('input[name=y2]').val(), 10)
             } :
             {
                 x1: 0,
