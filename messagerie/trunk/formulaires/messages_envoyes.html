@@ -31,15 +31,14 @@ parametre : url d'action ]
 </form>
 ]
 </div>
-<script type='text/javascript'>(function($){
-	$(function(){
-		$('select#selection').change(function(){
-			var val = $(this).attr('value');
-			if (val=='none') $('ul.envoyes div.message input[type=checkbox]').attr('checked','');
-			if (val=='all') $('ul.envoyes div.message input[type=checkbox]').attr('checked','checked');
-		});
-	});
-}(jQuery));
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('select#selection').change(function(){
+                var val = $(this).val();
+                if (val=='none') $('ul.envoyes div.message input[type=checkbox]').prop('checked',false);
+                if (val=='all') $('ul.envoyes div.message input[type=checkbox]').prop('checked',true);
+        });
+    });
 </script>
 </BOUCLE_envoyes>
 <:messagerie:aucun_message_envoye:>

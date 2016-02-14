@@ -30,6 +30,12 @@ function messagerie_insert_head($texte){
 	return $texte;
 }
 
+
+function messagerie_jquery_plugins($scripts){
+    $scripts[] = find_in_path('javascript/jquery.autocompleter.js');
+    return $scripts;
+}
+
 function messagerie_messagerie_statuts_destinataires_possibles(){
         include_spip('inc/filtres_ecrire');
         return auteurs_lister_statuts('tous',false);

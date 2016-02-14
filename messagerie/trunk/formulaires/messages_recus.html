@@ -35,17 +35,17 @@ parametre : url d'action ]
 </form>
 ]
 </div>
-<script type='text/javascript'>(function($){
-	$(function(){
-		$('select#selection').change(function(){
-			var val = $(this).attr('value');
-			if ((val=='none') || (val=='read') || (val=='unread')) $('ul.messages.recus div.message input[type=checkbox]').attr('checked',false);
-			if (val=='read') $('ul.messages.recus div.message').not('.new').find('input[type=checkbox]').attr('checked',true);
-			if (val=='unread') $('ul.messages.recus div.message.new input[type=checkbox]').attr('checked',true);
-			if (val=='all') $('ul.messages.recus div.message input[type=checkbox]').attr('checked',true);
-		});
-	});
-}(jQuery));
+
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $('select#selection').change(function(){
+            var val = $(this).val();
+            if ((val=='none') || (val=='read') || (val=='unread')) $('ul.recus div.message input[type=checkbox]').prop('checked',false);
+            if (val=='read') $('ul.recus div.message').not('.new').find('input[type=checkbox]').prop('checked',true);
+            if (val=='unread') $('ul.recus div.message.new input[type=checkbox]').prop('checked',true);
+            if (val=='all') $('ul.recus div.message input[type=checkbox]').prop('checked',true);
+        });
+    });
 </script>
 </BOUCLE_recus>
 <:messagerie:aucun_message_recu:>
