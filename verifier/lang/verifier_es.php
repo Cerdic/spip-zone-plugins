@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => 'En formato «Datetime» (para SQL)',
 
 	// O
+	'option_code_postal_pays_explication' => 'Two-letters country code: FR, DZ, DE, etc.',
 	'option_couleur_normaliser_label' => '¿Normalizar el código color?',
 	'option_couleur_type_hexa' => 'Código color en formato hexadecimal',
 	'option_couleur_type_label' => 'Tipo de verificación a efectuar',
