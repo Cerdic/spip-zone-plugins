@@ -176,8 +176,10 @@ function formulaires_editer_commande_verifier($id_commande='new', $retour='', $l
 	$erreurs = formulaires_editer_objet_verifier('commande', $id_commande, array('reference'));
 	
 	// On vérifie qu'il n'y a pas déjà une commande avec la même référence
+	// seulement si c'est pour une nouvelle commande
 	if (
-		$reference = _request('reference')
+		!intval($id_commande)
+		and $reference = _request('reference')
 		and sql_getfetsel('id_commande', 'spip_commandes', 'reference = '.sql_quote($reference))
 	) {
 		$erreurs['reference'] = _T('commandes:erreur_reference_existante');
