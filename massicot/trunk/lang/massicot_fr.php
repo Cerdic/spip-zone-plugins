@@ -1,24 +1,28 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/massicot/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-    // E
-    'erreur_parametre_manquant' => "Le paramètre @parametre@ est obligatoire !",
+	// E
+	'erreur_parametre_manquant' => 'Le paramètre @parametre@ est obligatoire !',
 
-    // L
-    'label_annuler' => "Annuler",
-    'label_dimensions' => "Taille de l'image recadrée en pixels :&nbsp;",
+	// L
+	'label_annuler' => 'Annuler',
+	'label_dimensions' => 'Taille de l’image recadrée en pixels : ',
 
-    // M
-    'massicot_titre' => 'Massicot',
-    'massicoter' => "Recadrer l'image",
+	// M
+	'massicot_titre' => 'Massicot',
+	'massicoter' => 'Recadrer l’image',
 
-    // R
-    'reinitialiser' => 'Réinitialiser',
+	// R
+	'reinitialiser' => 'Réinitialiser',
 
-    // Z
-    'zoom' => 'Zoom',
+	// Z
+	'zoom' => 'Zoom'
 );
+
+?>
