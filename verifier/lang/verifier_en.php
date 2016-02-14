@@ -58,6 +58,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'normaliser_option_date_en_datetime' => '"Datetime" format (for SQL)',
 
 	// O
+	'option_code_postal_pays_explication' => 'Two-letter country code : FR, DZ, DE, etc.',
+	'option_code_postal_pays_label' => 'Country',
+	'option_comparaison_champ_champ_explication' => 'Field name («name» attribute)', # RELIRE
+	'option_comparaison_champ_champ_label' => 'Field',
+	'option_comparaison_champ_comparaison_explication' => 'Type of comparison',
+	'option_comparaison_champ_comparaison_label' => 'Comparison',
+	'option_comparaison_champ_egal' => '== Equality', # MODIF
+	'option_comparaison_champ_egal_type' => '=== Identical', # MODIF
+	'option_comparaison_champ_grand' => '> Greater than',
+	'option_comparaison_champ_grand_egal' => '>= Greater than or equal to ',
+	'option_comparaison_champ_nom_champ_explication' => 'Field name for human beings',
+	'option_comparaison_champ_nom_champ_label' => 'Field name',
+	'option_comparaison_champ_petit' => '< Less than',
+	'option_comparaison_champ_petit_egal' => '<= Less than or equal to',
 	'option_couleur_normaliser_label' => 'Normalize the color code?',
 	'option_couleur_type_hexa' => 'Color code in hexadecimal format',
 	'option_couleur_type_label' => 'Checking type to be made',
@@ -89,6 +103,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Web protocols: HTTP or HTTPS',
 
 	// T
+	'type_code_postal' => 'Postal code',
+	'type_code_postal_description' => 'Check that the value is a valid postal code.',
+	'type_comparaison_champ' => 'Comparison',
+	'type_comparaison_champ_description' => 'Compare the value with another field from the _request().', # RELIRE
 	'type_couleur' => 'Colour',
 	'type_couleur_description' => 'Check if the value is a color code.',
 	'type_date' => 'Date',
@@ -101,6 +119,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_disponible_description' => 'Check that the email address has not already been used by another system user.',
 	'type_entier' => 'Integer',
 	'type_entier_description' => 'Check that the value is an integer, with the option of being restricted between two range values.',
+	'type_id_document' => 'Document number',
+	'type_id_document_description' => 'Check that the value is an existing document number.', # RELIRE
+	'type_isbn' => 'ISBN',
+	'type_isbn_description' => 'Check that the value is a 10 or 13 digits long ISBN',
 	'type_regex' => 'Regular expression',
 	'type_regex_description' => 'Check that the value matches the defined expression. For more information on using regular expressions, please refer to <a href="http://fr2.php.net/manual/en/reference.pcre.pattern.syntax.php">the online PHP help</a>.',
 	'type_siren_siret' => 'SIREN or SIRET',
