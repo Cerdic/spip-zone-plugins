@@ -18,7 +18,7 @@ function facebook_affiche_gauche($flux) {
 	$config = lire_config('facebook');
 
 	if ($flux['args']['exec'] == 'article'
-	    and (!empty($config['cle']) or !empty($config['secret']))) {
+	    and (!empty($config['accessToken']))) {
 		$flux['data'] .= recuperer_fond('prive/squelettes/gauche/facebook_affiche_gauche', $flux['args']);
 	}
 
