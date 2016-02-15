@@ -163,7 +163,7 @@ function convertir_quark_xml($c) {
 
 				// Note biblio NDL
 				if(preg_match("/NDL-Biblio$/i", $type)){
-					$item["texte"] .= "[<>" . $texte . "]\n\n" ;
+					$item["texte"] .= "[[<>" . $texte . "]]\n\n" ;
 					continue ;
 				}
 
