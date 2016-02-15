@@ -21,7 +21,9 @@ function nettoyer_format($t) {
 	$t = preg_replace(',([^{]){ ,', '\1 {', $t);
 	$t = preg_replace(', }([^}]),', '} \1', $t);
 	$t = preg_replace(',} {,', ' ', $t);
-
+	// }.}
+	$t = preg_replace(',}\.},', '}}.', $t);
+	
 	$t = preg_replace(", +~,", '~', $t);
 	$t = preg_replace(",~ +,", '~', $t);
 	$t = preg_replace("/{([?!., ]?)}/", '\1', $t);
