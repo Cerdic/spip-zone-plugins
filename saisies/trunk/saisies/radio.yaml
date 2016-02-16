@@ -91,6 +91,12 @@ options:
       -
         saisie: 'input'
         options:
+          nom: 'class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
           nom: 'info_obligatoire'
           label: '<:saisies:option_info_obligatoire_label:>'
           explication: '<:saisies:option_info_obligatoire_explication:>'
