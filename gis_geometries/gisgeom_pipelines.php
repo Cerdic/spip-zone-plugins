@@ -156,7 +156,7 @@ function gisgeom_pre_insertion($flux){
 		 * Ex: CRUD, xmlrpc...
 		 */
 		else{
-			$point = array('type' => 'Feature','geometry' => array('type'=> 'Point','coordinates' => array(_request('lat')?_request('lat'):0,_request('lon')?_request('lon'):0)));
+			$point = array('type' => 'Feature','geometry' => array('type'=> 'Point','coordinates' => array(_request('lon')?_request('lon'):0,_request('lat')?_request('lat'):0)));
 			$json = json_encode($point);
 		}
 		include_spip('gisgeom_fonctions');
