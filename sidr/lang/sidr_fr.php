@@ -9,13 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_sidr' => 'Menu Responsive',
 	'titre_page_configurer_sidr' => 'Configuration du Menu Responsive',
 
-	'explication_selecteur' => 'Indiquez la cible du menu à rendre responsive. (Id CSS)',
+	'explication_selecteur' => 'Désignez le menu source à rendre responsive. (Sélecteur CSS)',
+	'explication_bouton_sidr' => 'Désignez l\'élément d\'appel (bouton) du menu responsive. (Sélecteur CSS)',
 
 	'label_apparence' => 'Apparence',
 	'label_choix_skin_dark' => 'Sombre',
 	'label_choix_skin_light' => 'Clair',
-	'label_selecteur' => 'Cible',
+	'label_selecteur' => 'Source',
+	'label_bouton_sidr' => 'Bouton',
 	'label_skin' => 'Habillage visuel',
-	
+
 );
-?>

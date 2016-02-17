@@ -12,8 +12,8 @@ function sidr_config($public=null){
 		'skin' => 'dark',
 	), $config);
 
-	
-	return $config;	
+
+	return $config;
 }
 
 function sidr_insert_head_css($flux){
@@ -37,7 +37,7 @@ function sidr_timestamp($fichier){
 function sidr_insert_head($flux){
 	// Possibilite de faire sa propre insertion de sidr dans son squelette
 	if (defined("_SIDR_PERSO")) return $flux;
-	
+
 	$config = sidr_config();
 
 	$flux = sidr_insert_head_css($flux); // au cas ou il n'est pas implemente
@@ -46,14 +46,12 @@ function sidr_insert_head($flux){
 
 	$flux .='<script type="text/javascript">/* <![CDATA[ */
 jQuery(document).ready(function() {
-	jQuery("#responsive-menu-button").sidr({
+	jQuery("'.$config['bouton_sidr'].'").sidr({
 	name: "sidr-main",
 	source: "'.$config['selecteur'].'"
 	});
 });
 /* ]]> */</script>'."\n";
-	
+
 	return $flux;
 }
-
-?>

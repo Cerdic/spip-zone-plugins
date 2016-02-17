@@ -13,6 +13,12 @@
 			<input type="text" name="selecteur" class="text" id="selecteur" size="60" value="[(#ENV*{selecteur}|sinon{#menu})]" />
 		</li>		
 
+		<li class="editer_bouton_sidr[ (#ENV**{erreurs}|table_valeur{bouton_sidr}|oui)erreur]">
+			<label for="bouton_sidr"><:sidr:label_bouton_sidr:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bouton_sidr})</span>]
+			<p class="explication"><:sidr:explication_bouton_sidr:></p>
+			<input type="text" name="bouton_sidr" class="text" id="bouton_sidr" size="60" value="[(#ENV*{bouton_sidr}|sinon{#responsive-menu-button})]" />
+		</li>
 
 		<li class="fieldset"><fieldset><legend><:sidr:label_apparence:></legend>
 		<ul>
