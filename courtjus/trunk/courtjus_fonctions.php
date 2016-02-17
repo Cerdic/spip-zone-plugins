@@ -65,10 +65,12 @@ function courtjus_calculer_rubrique($id_rubrique) {
     $objet = courtjus_trouver_objet($id_rubrique);
     if ($objet) {
         return $objet;
-    }
-    // Sinon, on cherche les enfant de la rubrique et on cherche un objet dedans
-    elseif (lire_config('courtjus/rubrique_enfant')) {
-        // On chercher parmit les enfants de la rubrique
+
+        // Sinon, on cherche les enfant de la rubrique
+        // et on cherche un objet dedans
+    } elseif (lire_config('courtjus/rubrique_enfant')) {
+
+	    // On chercher parmit les enfants de la rubrique
         $objet = courtjus_trouver_objet_enfant($id_rubrique);
 
         // Si on a trouver un objet enfant.
@@ -108,7 +110,8 @@ function courtjus_trouver_objet_enfant($id_rubrique) {
 
 
 /**
- * Renvoie le tableau des objets qui possède un id_rubrique. (sans la table spip_rubrique)
+ * Renvoie le tableau des objets qui possède un id_rubrique.
+ * (sans la table spip_rubrique)
  *
  * @access public
  * @return mixed
@@ -124,8 +127,8 @@ function courtjus_trouver_objet_rubrique() {
         // On exclue la table des rubriques de SPIP automatiquement
         // On exclu aussi éléments marqué comme exclu dans la config
         if (array_key_exists('id_rubrique', $data['field'])
-        and $table != table_objet_sql('rubrique')
-        and !in_array($table, lire_config('courtjus/objet_exclu'))) {
+            and $table != table_objet_sql('rubrique')
+            and !in_array($table, lire_config('courtjus/objet_exclu'))) {
             // On garde le champ qui fait office de titre pour l'objet
 	        // dans le tableau afin de pouvoir faire un classement par num titre.
             $objet_in_rubrique[] = array($table, $data['titre']);
@@ -211,8 +214,8 @@ function courtjus_trouver_objet($id_rubrique) {
 	    // Un seul objet dans la rubrique, on renvoie le tableau
         return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet'], '', '', true);
     } elseif ($nb_objet > 1
-      and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
-      and $config['num_titre'] == 'on') {
+              and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
+              and $config['num_titre'] == 'on') {
 	    // S'il y plusieurs objets dans la rubrique et que le mode "par num titre"
 	    // est activé, on regiride sur le num titre le plus petit.
 
