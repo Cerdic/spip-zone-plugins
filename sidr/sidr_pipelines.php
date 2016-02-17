@@ -8,6 +8,7 @@ function sidr_config($public=null){
 	if (!is_array($config))
 		$config = array();
 	$config = array_merge(array(
+		'bouton_sidr' => '#responsive-menu-button',
 		'selecteur' => '#menu',
 		'skin' => 'dark',
 	), $config);
