@@ -51,6 +51,12 @@ function formulaires_configurer_courtjus_saisies_dist() {
     return $saisies;
 }
 
+function formulaires_configurer_courtjus_charger_dist() {
+	include_spip('inc/config');
+	$config = lire_config('courtjus');
+	return (empty($config)) ? array() : $config;
+}
+
 function courtjus_rubrique_exclus() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
