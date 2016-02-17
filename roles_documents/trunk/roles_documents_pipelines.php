@@ -29,7 +29,7 @@ function roles_documents_document_desc_actions($flux) {
 		$e !== false // page d'un objet éditorial
 		AND $e['edition'] === false // pas en mode édition
 		AND $id_document = intval($flux['args']['id_document'])
-		AND ($media=sql_getfetsel('media','spip_documents',"id_document=".$id_document)=='image') // que pour les images
+		// AND ($media=sql_getfetsel('media','spip_documents',"id_document=".$id_document)=='image') // que pour les images
 		AND $objet = $e['type'] // article
 		AND $id_table_objet = $e['id_table_objet'] // id_article
 		AND $id_objet = intval(_request($id_table_objet))
