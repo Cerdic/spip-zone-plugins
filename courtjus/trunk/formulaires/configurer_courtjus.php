@@ -63,7 +63,7 @@ function courtjus_rubrique_exclus() {
 
     // On va filtrer pour avoir les objets qui n'ont pas d'id_rubrique
     $objet_exclus = array();
-    foreach($objets as $table => $data) {
+    foreach ($objets as $table => $data) {
         // Si on ne trouve pas d'"id_rubrique" dans la liste des champs, on garde
         // On garde aussi la table rubrique
         if (!array_key_exists('id_rubrique', $data['field']) or $table = table_objet_sql('rubrique')) {

@@ -9,7 +9,9 @@
  * @package    SPIP\Courtjus\Fonctions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Créer la balise #URL_RUBRIQUE et y affecter les fonctions du courtjus
@@ -20,7 +22,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function balise_URL_RUBRIQUE_dist($p) {
     $id_rubrique = interprete_argument_balise(1,$p);
-    if (!$id_rubrique) $id_rubrique = champ_sql('id_rubrique', $p);
+    if (!$id_rubrique) {
+	    $id_rubrique = champ_sql('id_rubrique', $p);
+    }
 
     $code = "courtjus_calculer_rubrique($id_rubrique)";
     $p->code = $code;
@@ -40,33 +44,37 @@ function courtjus_calculer_rubrique($id_rubrique) {
     $par_rubrique = lire_config('courtjus/squelette_par_rubrique');
     // Si on n'intervient pas sur les squelettes par rubrique
     if (empty($par_rubrique)) {
-        // Si on trouve une squelette spécifique à cette rubrique, et que l'option est activé, on renvoie l'URL rubrique
+        // Si on trouve une squelette spécifique à cette rubrique,
+	    // et que l'option est activé, on renvoie l'URL rubrique
         // Cela ne gère pas pour les sous-rubrique cependant
         if (find_in_path('rubrique='.$id_rubrique.'.html')
-        or find_in_path('rubrique-'.$id_rubrique.'.html'))
+            or find_in_path('rubrique-'.$id_rubrique.'.html')) {
             return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
+        }
 
         // Pour gérer les fichiers rubrique-X parent, on va tester chaque parent
         include_spip('public/quete');
         $parent = quete_parent($id_rubrique);
         do {
-            if (find_in_path('rubrique-'.$parent.'.html'))
+            if (find_in_path('rubrique-'.$parent.'.html')) {
                 return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
-        }
-        while ( ($parent = quete_parent($parent)) > 0);
+            }
+        } while (($parent = quete_parent($parent)) > 0);
     }
     // On récupère l'éventuel objet de redirection
     $objet = courtjus_trouver_objet($id_rubrique);
-    if ($objet)
+    if ($objet) {
         return $objet;
+    }
     // Sinon, on cherche les enfant de la rubrique et on cherche un objet dedans
-    elseif(lire_config('courtjus/rubrique_enfant')) {
+    elseif (lire_config('courtjus/rubrique_enfant')) {
         // On chercher parmit les enfants de la rubrique
         $objet = courtjus_trouver_objet_enfant($id_rubrique);
 
         // Si on a trouver un objet enfant.
-        if ($objet)
+        if ($objet) {
             return $objet;
+        }
     }
 
     return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
@@ -88,7 +96,8 @@ function courtjus_trouver_objet_enfant($id_rubrique) {
     while (list($key,$enfant) = each($enfants) and !$objet) {
         $objet = courtjus_trouver_objet($enfant);
 
-        // S'il n'y a pas d'objet au premier niveau on lance la récurcivité pour trouver continuer de descendre dans la hiérachie.
+        // S'il n'y a pas d'objet au premier niveau on lance la récurcivité
+        // pour trouver continuer de descendre dans la hiérachie.
         if (!$objet) {
             $objet = courtjus_trouver_objet_enfant($enfant);
         }
@@ -110,14 +119,15 @@ function courtjus_trouver_objet_rubrique() {
 
     // On va filtrer pour n'avoir que les objet avec un id_rubrique
     $objet_in_rubrique = array();
-    foreach($objets as $table => $data) {
+    foreach ($objets as $table => $data) {
         // Si on trouve "id_rubrique" dans la liste des champs, on garde
         // On exclue la table des rubriques de SPIP automatiquement
         // On exclu aussi éléments marqué comme exclu dans la config
         if (array_key_exists('id_rubrique', $data['field'])
         and $table != table_objet_sql('rubrique')
         and !in_array($table, lire_config('courtjus/objet_exclu'))) {
-            // On garde le champ qui fait office de titre pour l'objet dans le tableau afin de pouvoir faire un classement par num titre.
+            // On garde le champ qui fait office de titre pour l'objet
+	        // dans le tableau afin de pouvoir faire un classement par num titre.
             $objet_in_rubrique[] = array($table, $data['titre']);
         }
     }
@@ -169,8 +179,9 @@ function courtjus_trouver_objet($id_rubrique) {
 
         // Est-ce qu'il faut prendre en compte la langue ?
         include_spip('formulaires/configurer_multilinguisme');
-        if (table_supporte_trad($table))
+        if (table_supporte_trad($table)) {
             $where[] = 'lang='.sql_quote($GLOBALS['spip_lang']);
+        }
 
         // On récupère les objets de la rubrique.
         $objets_rubrique = sql_allfetsel($champs, $table, $where);
@@ -196,15 +207,14 @@ function courtjus_trouver_objet($id_rubrique) {
     if ($nb_objet <= 0) {
         // On renvoie false pour déclencher éventuellement la recherche dans une sous rubrique
         return false;
-    }
-    // Un seul objet dans la rubrique, on renvoie le tableau
-    elseif ($nb_objet == 1) {
+    } elseif ($nb_objet == 1) {
+	    // Un seul objet dans la rubrique, on renvoie le tableau
         return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet'], '', '', true);
-    }
-    // S'il y plusieurs objets dans la rubrique et que le mode "par num titre" est activé, on regiride sur le num titre le plus petit.
-    elseif ($nb_objet > 1
+    } elseif ($nb_objet > 1
       and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
       and $config['num_titre'] == 'on') {
+	    // S'il y plusieurs objets dans la rubrique et que le mode "par num titre"
+	    // est activé, on regiride sur le num titre le plus petit.
 
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
@@ -216,7 +226,13 @@ function courtjus_trouver_objet($id_rubrique) {
         $index = array_search(min($minmax), $minmax);
 
         // Créer l'URL de redirection
-        return generer_url_entite($objets_in_rubrique[$index]['id_objet'], $objets_in_rubrique[$index]['objet'], '', '', true);
+        return generer_url_entite(
+	        $objets_in_rubrique[$index]['id_objet'],
+	        $objets_in_rubrique[$index]['objet'],
+	        '',
+	        '',
+	        true
+        );
     }
 
     // Sinon, si le mot "plus récent"" est activé on redirige sur l'article le plus récente.

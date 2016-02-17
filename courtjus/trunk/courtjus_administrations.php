@@ -7,7 +7,10 @@
  * @author     Phenix
  * @licence    GNU/GPL
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 
