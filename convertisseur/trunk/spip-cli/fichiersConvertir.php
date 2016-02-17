@@ -167,8 +167,8 @@ class Convert extends Command {
 					if(file_exists('mes_fonctions.php'))
 						include_once("mes_fonctions.php");
 
-					if (function_exists('nettoyer_conversion')){
-						$c = nettoyer_conversion($c);			
+					if (function_exists('nettoyer_conversion_cli')){
+						$c = nettoyer_conversion_cli($c);			
 					}
 													
 					if(!is_dir($c["dest"] . "/" .  $c["collection"])){

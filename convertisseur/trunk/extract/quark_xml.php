@@ -66,18 +66,7 @@ function convertir_quark_xml($c) {
 	$mise_en_page = extraire_balise($u, "RELATIONINFO");
 	$mise_en_page = extraire_attribut($mise_en_page, "parentAssetName");
 	$item["mise_en_page"] = $mise_en_page ;
-	
-	// type d'article
-	if(preg_match("/ENCADRÉ-Titre/i", $u)){
-		$item["type"] = "Encadré" ;
-	}elseif(preg_match("/LIVRES/i", $fichier)){
-		$item["type"] = "Note de lecture" ;
-	}
 
-	// type d'article
-	if(preg_match("/DOSSIER/i", $fichier)){
-		$item["dossier"] = str_replace(".qxp", "", $item["mise_en_page"]) ;
-	}
 
 	// L'article et son illustration sont dans des <spread>
 	$sequences = extraire_balises($u, "SPREAD") ;
@@ -173,8 +162,6 @@ function convertir_quark_xml($c) {
 					continue ;
 				}
 
-				// ne garder que ici que des titres, chapo, texte, etc, generique.
-
 				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
 
 				// Surtitre
@@ -204,7 +191,7 @@ function convertir_quark_xml($c) {
 					$item["auteurs"] .= $texte ;
 					continue ;
 				}
-								
+				
 				// Inters
 				if(preg_match("/accroche/i", $type)){
 					$item["texte"] .= "\n\n" . '{{{' . "$texte" . '}}}' ."\n\n" ;
@@ -239,6 +226,21 @@ function convertir_quark_xml($c) {
 	}
 	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
+	
+	
+	// passer la main pour une surcharge éventuelle
+	$c = $item ;
+	
+	// surcharge nettoyage perso ?
+	if(file_exists('mes_fonctions.php'))
+		include_once("mes_fonctions.php");
+
+	if (function_exists('nettoyer_conversion')){
+		$item = nettoyer_conversion($item);			
+	}
+	
+	// var_dump($item["auteurs_tete"],"<hr>");
+	// var_dump($item["auteurs"]);
 	
 	//$item["textebrut"] = textebrut($u);	
 	//$item["xml"] = htmlspecialchars($u) ;
