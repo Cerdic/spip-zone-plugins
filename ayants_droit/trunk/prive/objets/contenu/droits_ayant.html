@@ -1,0 +1,18 @@
+<BOUCLE_droits_ayant(DROITS_AYANTS){id_droits_ayant}>
+
+[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<label><:droits_ayant:champ_email_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{email} email'><a href="mailto:#EMAIL">(#EMAIL)</a></span>
+</div>]
+
+[<div class="champ contenu_telephone[ (#TELEPHONE*|strlen|?{'',vide})]">
+	<label><:droits_ayant:champ_telephone_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{telephone} telephone'>(#TELEPHONE)</span>
+</div>]
+
+[<div class="champ contenu_adresse[ (#ADRESSE*|strlen|?{'',vide})]">
+	<label><:droits_ayant:champ_adresse_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{adresse} adresse'>(#ADRESSE)</span>
+</div>]
+
+</BOUCLE_droits_ayant>

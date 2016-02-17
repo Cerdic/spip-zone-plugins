@@ -1,0 +1,34 @@
+<paquet
+	prefix="ayantsdroit"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/ayantsdroit-64.png"
+	documentation=""
+	schema="1.1.0" 
+>
+	<!--
+		Paquet généré le 2016-02-01 19:22:56
+	-->
+	
+	<nom>Ayants droit</nom>
+	<!-- Gérer les droits d’auteur des contenus -->
+	
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+	
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="verifier" compatibilite="[1.0.0;]" />
+	<necessite nom="licence" compatibilite="[0.5.5;]" />
+	
+	<pipeline nom="autoriser" inclure="ayantsdroit_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/ayantsdroit.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/ayantsdroit.php" />
+	<pipeline nom="affiche_milieu" inclure="ayantsdroit_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="ayantsdroit_pipelines.php" />
+	
+	<menu nom="droits_ayants" titre="droits_ayant:titre_droits_ayants" parent="menu_edition" icone="images/droits_ayant-16.png" action="droits_ayants" /> 
+	<menu nom="droits_ayant_creer" titre="droits_ayant:icone_creer_droits_ayant" parent="outils_rapides" icone="images/droits_ayant-new-16.png" action="droits_ayant_edit" parametres="new=oui" /> 
+	<menu nom="droits_contrats" titre="droits_contrat:titre_droits_contrats" parent="menu_edition" icone="images/droits_contrat-16.png" action="droits_contrats" /> 
+</paquet>

@@ -1,0 +1,15 @@
+<BOUCLE_droits_ayant(DROITS_AYANTS){id_droits_ayant=#ENV{id}}>
+<div class='infos'>
+[(#SET{texte_objet,<:droits_ayant:titre_droits_ayant:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_DROITS_AYANT</p></div>
+
+	[(#AUTORISER{supprimer, droits_ayant, #ID_DROITS_AYANT}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{droits_ayant-del-24.png}|balise_img{<:droits_ayant:supprimer_droits_ayant:>}|concat{' ',#VAL{<:droits_ayant:supprimer_droits_ayant:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_droits_ayant, #ID_DROITS_AYANT, #URL_ECRIRE{droits_ayants}},
+			icone s24 horizontale danger droits_ayant-del-24, <:droits_ayant:confirmer_supprimer_droits_ayant:>})]
+	]
+</BOUCLE_supprimer_objet>
+
+</div>
+</BOUCLE_droits_ayant>

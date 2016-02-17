@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,droits_contrat,#ID_DROITS_CONTRAT}|sinon_interdire_acces)]
+<BOUCLE_droits_contrat(DROITS_CONTRATS){id_droits_contrat}{statut==.*}{si #ENV{exec}|=={droits_contrat}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,droits_contrat,#ID_DROITS_CONTRAT})
+		[(#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat}|non)
+			[(#URL_ECRIRE{droits_contrat_edit,id_droits_contrat=#ID_DROITS_CONTRAT}|icone_verticale{<:droits_contrat:icone_modifier_droits_contrat:>,droits_contrat,edit,right ajax preload})]
+		]
+		[(#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat}|oui)
+			[(#URL_ECRIRE{droits_contrat_edit,id_droits_contrat=#ID_DROITS_CONTRAT}|icone_verticale{#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}|concat{' / '}|concat{#INFO_TITRE{#OBJET,#ID_OBJET}}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{droits_contrat-24.png}|balise_img{droits_contrat,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{droits_contrat,#ID_DROITS_CONTRAT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/droits_contrat,id=#ID_DROITS_CONTRAT,id_droits_contrat=#ID_DROITS_CONTRAT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,droits_contrat,#ID_DROITS_CONTRAT})
+	[(#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat}|non)
+		[(#URL_ECRIRE{droits_contrat_edit,id_droits_contrat=#ID_DROITS_CONTRAT}|icone_verticale{<:droits_contrat:icone_modifier_droits_contrat:>,droits_contrat,edit,right ajax preload})]
+	]
+	[(#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat}|oui)
+		[(#URL_ECRIRE{droits_contrat_edit,id_droits_contrat=#ID_DROITS_CONTRAT}|icone_verticale{#ID_DROITS_CONTRAT|afficher_qui_edite{droits_contrat},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,droits_contrat,id,#ID_DROITS_CONTRAT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/droits_contrat-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/droits_contrat-enfants,id_droits_contrat,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,droits_contrat,id_droits_contrat,#ID_DROITS_CONTRAT,objet,droits_contrat,id_objet,#ID_DROITS_CONTRAT},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_droits_contrat>
+[(#ENV**{exec}|=={droits_contrat_edit}|?{#INCLURE{fond=prive/squelettes/contenu/droits_contrat_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_droits_contrat>

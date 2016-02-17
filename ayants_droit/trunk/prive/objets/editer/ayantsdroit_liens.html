@@ -1,0 +1,6 @@
+
+<INCLURE{fond=prive/objets/liste/droits_contrats, objet, id_objet, sinon=#VAL{droits_contrat:info_aucun_droits_contrat}|_T}>
+
+[(#AUTORISER{creer,droits_contrat})
+	[(#URL_ECRIRE{droits_contrat_edit,new=oui&objet=#OBJET&id_objet=#ID_OBJET&redirect=[(#VAL{&}|self|rawurlencode)]}|icone_verticale{<:droits_contrat:icone_creer_droits_contrat:>,droits_contrat,new,right})]
+]

@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_droits_ayants_selectionnes>
+	<ul>
+	<BOUCLE_droits_ayants_selectionnes(DROITS_AYANTS){id_droits_ayant IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_DROITS_AYANT)</li>
+	</BOUCLE_droits_ayants_selectionnes>
+	</ul>
+	</B_droits_ayants_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_droits_ayants_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_droits_ayant_selectionne(DROITS_AYANTS){id_droits_ayant=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_DROITS_AYANT)</p>
+	</BOUCLE_droits_ayant_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_droits_ayant_selectionne>
+<//B_test_multiple>

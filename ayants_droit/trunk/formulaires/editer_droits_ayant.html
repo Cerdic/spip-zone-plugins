@@ -1,0 +1,28 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_droits_ayant,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class='editer-groupe'>
+ 
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:droits_ayant:champ_nom_label:>})]
+ 
+			[(#SAISIE{input, email,
+				label=<:droits_ayant:champ_email_label:>})]
+ 
+			[(#SAISIE{input, telephone,
+				label=<:droits_ayant:champ_telephone_label:>})]
+ 
+			[(#SAISIE{textarea, adresse,
+				label=<:droits_ayant:champ_adresse_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,41 @@
+<BOUCLE_droits_contrat(DROITS_CONTRATS){id_droits_contrat}{statut?}>
+
+[<div class="champ contenu_id_droits_ayant[ (#ID_DROITS_AYANT*|!={0}|?{'',vide})]">
+	<label><:droits_contrat:champ_id_droits_ayant_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{id_droits_ayant} id_droits_ayant">
+		<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]">(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT})</a>
+	</span>
+</div>]
+
+[<div class="champ contenu_objet[ (#OBJET*|et{#ID_OBJET}|?{'',vide})]">
+	<label><:onglet_contenu:> : </label>
+	<span dir="#LANG_DIR" class="objet">
+		<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">(#INFO_TITRE{#OBJET,#ID_OBJET})</a>
+	</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:droits_contrat:champ_date_debut_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|affdate_jourcourt)</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:droits_contrat:champ_date_fin_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_fin} date_fin">(#DATE_FIN|affdate_jourcourt)</span>
+</div>]
+
+[<div class="champ contenu_montant[ (#MONTANT*|strlen|?{'',vide})]">
+	<label><:droits_contrat:champ_montant_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{montant} montant">(#MONTANT)</span>
+</div>]
+
+[<div class="champ contenu_credits[ (#CREDITS*|strlen|?{'',vide})]">
+	<label><:droits_contrat:champ_credits_label:> : </label>
+	<div dir="#LANG_DIR" class="#EDIT{credits} credits">(#CREDITS)</div>
+</div>]
+
+[<div class="champ champ_id_licence">
+(#LICENCE)
+</div>]
+
+</BOUCLE_droits_contrat>

@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/droits_ayants, par=nom, env, ajax, sinon=<:droits_ayant:info_aucun_droits_ayant:>}>
+
+[(#AUTORISER{creer,droits_ayant})
+	[(#URL_ECRIRE{droits_ayant_edit,new=oui}|icone_verticale{<:droits_ayant:icone_creer_droits_ayant:>,droits_ayant,new,right})]
+]

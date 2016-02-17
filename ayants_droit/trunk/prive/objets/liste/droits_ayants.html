@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1, 
+	id_droits_ayant,1,
+	email,1,
+	telephone,1,
+	points,-1
+}})]<B_liste_droits_ayants>
+#ANCRE_PAGINATION
+<div class="liste-objets droits_ayants">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{droits_ayant:info_1_droits_ayant,droits_ayant:info_nb_droits_ayants}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='nom' scope='col'>[(#TRI{nom,<:droits_ayant:champ_nom_label:>,ajax})]</th>
+			<th class="email"><:droits_ayant:champ_email_label:></th>
+			<th class="telephone"><:droits_ayant:champ_telephone_label:></th>
+			<th class='id' scope='col'>[(#TRI{id_droits_ayant,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_droits_ayants(DROITS_AYANTS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='nom principale'>[(#LOGO_DROITS_AYANT|image_reduire{20,26})]<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_AYANT">[(#RANG). ]#NOM</a></td>
+			<td class="email">[<a href="mailto:#EMAIL">(#EMAIL)</a>]</td>
+			<td class="telephone">[<a href="tel:#TELEPHONE">(#TELEPHONE)</a>]</td>
+			<td class='id'>[(#AUTORISER{modifier,droits_ayant,#ID_DROITS_AYANT}|?{
+				<a href="[(#URL_ECRIRE{droits_ayant_edit,id_droits_ayant=#ID_DROITS_AYANT})]">#ID_DROITS_AYANT</a>,
+				#ID_DROITS_AYANT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_droits_ayants>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_droits_ayants>[
+<div class="liste-objets droits_ayants caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_droits_ayants>
