@@ -20,10 +20,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array       Données du pipeline
  */
 function roles_documents_document_desc_actions($flux) {
-
-	$texte       = "";
-	$e           = trouver_objet_exec(_request('exec'));
 	include_spip('inc/autoriser');
+	
+	$texte = "";
+	$e = trouver_objet_exec(_request('exec'));
 
 	if (
 		$e !== false // page d'un objet éditorial
@@ -33,11 +33,11 @@ function roles_documents_document_desc_actions($flux) {
 		AND $objet = $e['type'] // article
 		AND $id_table_objet = $e['id_table_objet'] // id_article
 		AND $id_objet = intval(_request($id_table_objet))
-		AND autoriser('modifier','document',$id_document)
+		AND autoriser('modifier', 'document', $id_document)
 	) {
 		// description des roles
 		include_spip('inc/roles');
-		$roles = roles_presents('document',$objet);
+		$roles = roles_presents('document', $objet);
 		// mini-formulaire
 		$form = recuperer_fond('prive/squelettes/inclure/editer_roles_objet_lie',
 			array(
@@ -50,8 +50,9 @@ function roles_documents_document_desc_actions($flux) {
 		$texte = $form;
 	}
 
-	if ($texte)
-			$flux['data'] .= $texte;
+	if ($texte) {
+		$flux['data'] .= $texte;
+	}
 
 	return $flux;
 }
@@ -66,7 +67,6 @@ function roles_documents_document_desc_actions($flux) {
  * @return array       Données du pipeline
  */
 function roles_documents_post_edition_lien($flux) {
-
 	if (
 		$flux['args']['action'] == 'insert'             // il s'agit d'une création de lien
 		and $flux['args']['objet_source'] == 'document' // on a affaire à un document
@@ -79,7 +79,7 @@ function roles_documents_post_edition_lien($flux) {
 		and $objet = $flux['args']['objet']
 		and $id_objet = intval($flux['args']['id_objet'])
 		and $vu = sql_getfetsel('vu', 'spip_documents_liens', 'id_document=' .$id_document .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND '.$colonne_role.'='.sql_quote('document'))
-	){
+	) {
 		include_spip('action/editer_liens');
 		objet_qualifier_liens(array('document'=>$id_document), array($objet=>$id_objet), array($colonne_role=>$role, 'vu'=>$vu));
 	}
@@ -98,7 +98,6 @@ function roles_documents_post_edition_lien($flux) {
  * @return array       Données du pipeline
  */
 function roles_documents_post_edition($flux) {
-
 	if (
 		isset($flux['args']['action'])
 		and $flux['args']['action'] == 'modifier'       // on modifie un objet
