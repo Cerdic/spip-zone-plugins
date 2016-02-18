@@ -162,10 +162,9 @@ class Convert extends Command {
 						"basename" => $article ,
 						"fichier_dest" => $dest . "/" . $collection  . "/" . $numero . "/" . $article
 					);
-					
-					// surcharge nettoyage perso ?
-					if(file_exists('mes_fonctions.php'))
-						include_once("mes_fonctions.php");
+											
+					if(find_in_path('convertisseur_perso.php'))
+						include_spip("convertisseur_perso");
 
 					if (function_exists('nettoyer_conversion_cli')){
 						$c = nettoyer_conversion_cli($c);			

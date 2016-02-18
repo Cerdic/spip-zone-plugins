@@ -47,6 +47,10 @@ function extracteur_preparer_insertion($item){
  
  
 function convertir_quark_xml($c) {
+	
+	// surcharge nettoyage perso ?
+	if(find_in_path('convertisseur_perso.php'))
+		include_spip("convertisseur_perso");
 
 	// nettoyer le fichier
 	$u = remove_utf8_bom($c) ;
@@ -128,40 +132,6 @@ function convertir_quark_xml($c) {
 				// init des styles
 				$tech["styles"][$type] = 1 ;
 
-				// inserer des traitements perso, dans mes_fonctions
-				// NDL, coupures, etc avec styles hors spip de base.
-				// if(function_exists(convertion_paragraphes_quark_xml_perso()))
-
-				// Titre // auteur NDL
-				if(preg_match("/NDL-Œuvre$/i", $type)){
-					
-					list($titre,$ndl_auteur) = explode(" — ", $texte);
-					
-					$item["titre"] .= $titre ;
-					$item["soustitre"] .= $ndl_auteur ;
-					
-					continue ;
-				}
-
-				// TIMES-Note auteur
-				if(preg_match("/-Note auteur$/", $type)){
-					$texte = preg_replace("/^\s*\*\s*/","",$texte);
-					$item["signature"] .= $texte ;
-					continue ;
-				}
-
-				// Note biblio NDL
-				if(preg_match("/NDL-Biblio$/i", $type)){
-					$item["texte"] .= "[[<>" . $texte . "]]\n\n" ;
-					continue ;
-				}
-
-				// Par notre envoyé spécial...
-				if(preg_match("/^SIGNATURE-/", $type)){
-					$item["auteurs_tete"] .= trim($texte) ;
-					continue ;
-				}
-
 				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
 
 				// Surtitre
@@ -185,12 +155,6 @@ function convertir_quark_xml($c) {
 					$item["chapo"] .= $texte ;
 					continue ;
 				}
-		
-				// Auteurs
-				if(preg_match("/signature/i", $type)){
-					$item["auteurs"] .= $texte ;
-					continue ;
-				}
 				
 				// Inters
 				if(preg_match("/accroche/i", $type)){
@@ -204,6 +168,17 @@ function convertir_quark_xml($c) {
 					continue ;
 				}
 				
+				
+				// Eventuels traitements perso
+				if (function_exists('nettoyer_paragraphe')){
+					$res = nettoyer_paragraphe($type, $texte, $item);			
+					if($res){
+						$item = $res ;
+						continue ;	
+					}
+				}
+				
+				// Cas général
 				$item["texte"] .= "$texte\n\n" ;
 				
 			}
@@ -212,7 +187,7 @@ function convertir_quark_xml($c) {
 	}
 	
 	// s'assurer qu'on a bien un auteur.
-	if(!$item["auteurs"]){
+	if(!$item["auteurs"] and !$flag_ndl){
 		$auteurs = preg_replace("/^\s*(P|p)ar\s*/","", $item["auteurs_tete"]);
 		$auteurs = preg_replace("/(\s|\*|~)+$/","",$auteurs);
 		$item["auteurs"] = $auteurs ;
@@ -226,15 +201,10 @@ function convertir_quark_xml($c) {
 	}
 	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
-	
-	
+		
 	// passer la main pour une surcharge éventuelle
 	$c = $item ;
 	
-	// surcharge nettoyage perso ?
-	if(file_exists('mes_fonctions.php'))
-		include_once("mes_fonctions.php");
-
 	if (function_exists('nettoyer_conversion')){
 		$item = nettoyer_conversion($item);			
 	}
