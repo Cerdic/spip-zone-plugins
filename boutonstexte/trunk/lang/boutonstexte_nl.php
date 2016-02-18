@@ -17,12 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'diminuer_police' => 'Lettertype verkleinen',
-	'donnees_techniques' => 'Technnische gegevens niet te veranderen',
+	'donnees_techniques' => 'Niet te wijzigen technische gegevens',
 
 	// L
 	'label_selector' => 'CSS of jQuery code',
-	'label_skin' => 'Uiterlijk van de knoppen',
-	'label_txtBackSpip' => 'Tekst terug SPIP',
+	'label_skin' => 'Weergave van de knoppen',
+	'label_txtBackSpip' => 'Retourtekst SPIP',
 	'label_txtOnly' => 'Alleen tekst *',
 	'label_txtSizeDown' => 'Tekst verkleinen *',
 	'label_txtSizeUp' => 'Tekst vergroten *',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retour_a_spip' => 'Terug naar de volledige pagina',
 
 	// S
-	'selecteur' => 'Invoerveld van tekst te behandelen',
+	'selecteur' => 'Keuze van de te behandelen tekst',
 
 	// T
 	'texte_seulement' => 'Alleen tekst',
