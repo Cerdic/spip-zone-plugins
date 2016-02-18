@@ -30,7 +30,7 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 		return;
 	}
 
-	if (!preg_match(',^mailshot(\d+)$,',$tracking_id,$m)
+	if (!preg_match(',^mailshot(\d+)(-\d+)?$,',$tracking_id,$m)
 		OR !intval($id_mailshot=$m[1])){
 		spip_log("tracking_id $tracking_id inconnu","newsletter_feedback"._LOG_INFO_IMPORTANTE);
 		return;
