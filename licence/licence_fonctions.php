@@ -9,6 +9,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Lister toutes les licences disponibles
+ * 
+ * @return
+ * 		Retourne le tableau de description des licences
+ **/
+function licence_lister() {
+	include_spip('inc/licence');
+	$licences = $GLOBALS['licence_licences'];
+	
+	return $licences;
+}
+
 function licence_affiche($id_licence,$logo_non,$lien_non){
 	include_spip('inc/licence');
 	$licence = $GLOBALS['licence_licences'][$id_licence];

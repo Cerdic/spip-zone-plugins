@@ -1,0 +1,7 @@
+#SET{data,#ARRAY}
+
+<BOUCLE_licences(DATA){source table,#VAL|licence_lister}>
+	#SET{data, #GET{data}|plus{#ARRAY{#VALEUR{id}, #VALEUR{name}}}}
+</BOUCLE_licences>
+
+#INCLURE{fond=saisies/selection, datas=#GET{data}, env}

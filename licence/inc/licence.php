@@ -103,5 +103,3 @@ $GLOBALS['licence_licences'] = array (
 				"description" => _T('licence:description_autre'),
 				"abbr"		=> "???"),
 );
-
-?>
