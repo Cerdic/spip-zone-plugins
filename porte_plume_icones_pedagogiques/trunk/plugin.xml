@@ -3,7 +3,7 @@
 	<slogan>Des ic&#244;nes p&#233;dagogiques pour le Porte Plume</slogan>
 	<auteur>Olivier Gautier, Michel Fraisse</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>stable</etat>
 	<description>
 Ajoute des boutons au porte-plume afin d'ins&#233;rer des ic&ocirc;nes &agrave; orientation p&#233;dagogique ou des smileys.
@@ -36,6 +36,6 @@ Un simple clic sur une ic&#244;ne propos&#233;e permet d'ajouter dans le texte d
 		<inclure>iconespedago.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.3;3.1.99]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
