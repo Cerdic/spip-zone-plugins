@@ -26,7 +26,7 @@ function ayantsdroit_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['droits_contrats'] = 'droits_contrats';
 	
 	$interfaces['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
-	$interfaces['table_des_traitements']['CREDITS'][]= _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['CREDITS'][]= str_replace('%s', 'ayantsdroit_traiter_credits(%s)', _TRAITEMENT_RACCOURCIS);
 	
 	return $interfaces;
 }
