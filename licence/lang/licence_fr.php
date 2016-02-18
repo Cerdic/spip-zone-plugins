@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_copyright' => '© copyright auteur de l’article',
 	'description_gfdl' => 'Licence de documentation libre GNU',
 	'description_gpl' => 'Licence GNU/GPL',
+	'description_publicdomain' => 'Domaine public',
 	'description_wtfpl' => 'Licence Publique Rien À Branler',
 
 	// L
@@ -40,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
 	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_publicdomain' => 'http://creativecommons.org/publicdomain/mark/1.0/deed.fr',
 	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
@@ -66,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_copyright' => 'Copyright',
 	'titre_gfdl' => 'GNU FDL',
 	'titre_gpl' => 'GNU GPL',
+	'titre_publicdomain' => 'Domaine public',
 	'titre_wtfpl' => 'LPRAB'
 );
-
-?>
