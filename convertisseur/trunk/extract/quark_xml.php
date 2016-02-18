@@ -134,19 +134,28 @@ function convertir_quark_xml($c) {
 
 				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
 
+				// Titre 
+				if(preg_match("/titre/i", $type)){
+					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
+						$texte = " " . $texte ;
+						$item["titre"] .= $texte ;
+					continue ;
+				}
+
+				// Eventuels traitements perso
+				if (function_exists('nettoyer_paragraphe')){
+					$res = nettoyer_paragraphe($type, $texte, $item);			
+					if($res){
+						$item = $res ;
+						continue ;	
+					}
+				}
+
 				// Surtitre
 				if(preg_match("/surtitre/i", $type)){
 					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["surtitre"]))
 						$texte = " " . $texte ;
 					$item["surtitre"] .= $texte ;
-					continue ;
-				}
-		
-				// Titre 
-				if(preg_match("/titre/i", $type)){
-					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
-						$texte = " " . $texte ;
-					$item["titre"] .= $texte ;
 					continue ;
 				}
 				
@@ -168,29 +177,18 @@ function convertir_quark_xml($c) {
 					continue ;
 				}
 				
-				
-				// Eventuels traitements perso
-				if (function_exists('nettoyer_paragraphe')){
-					$res = nettoyer_paragraphe($type, $texte, $item);			
-					if($res){
-						$item = $res ;
-						continue ;	
-					}
+				// Auteurs
+				if(preg_match("/signature/i", $type)){
+					$item["auteurs"] .= $texte ;			
+					continue ;
 				}
-				
+								
 				// Cas général
 				$item["texte"] .= "$texte\n\n" ;
 				
 			}
 		
 		}
-	}
-	
-	// s'assurer qu'on a bien un auteur.
-	if(!$item["auteurs"] and !$flag_ndl){
-		$auteurs = preg_replace("/^\s*(P|p)ar\s*/","", $item["auteurs_tete"]);
-		$auteurs = preg_replace("/(\s|\*|~)+$/","",$auteurs);
-		$item["auteurs"] = $auteurs ;
 	}
 	
 	// ajouter les notes
