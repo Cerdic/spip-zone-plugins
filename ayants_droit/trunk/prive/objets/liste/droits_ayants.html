@@ -14,6 +14,7 @@
 			<th class='nom' scope='col'>[(#TRI{nom,<:droits_ayant:champ_nom_label:>,ajax})]</th>
 			<th class="email"><:droits_ayant:champ_email_label:></th>
 			<th class="telephone"><:droits_ayant:champ_telephone_label:></th>
+			<th class="nb"><:droits_contrat:titre_droits_contrats:></th>
 			<th class='id' scope='col'>[(#TRI{id_droits_ayant,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -23,6 +24,7 @@
 			<td class='nom principale'>[(#LOGO_DROITS_AYANT|image_reduire{20,26})]<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_AYANT">[(#RANG). ]#NOM</a></td>
 			<td class="email">[<a href="mailto:#EMAIL">(#EMAIL)</a>]</td>
 			<td class="telephone">[<a href="tel:#TELEPHONE">(#TELEPHONE)</a>]</td>
+			<td class="nb"><BOUCLE_nb_contrats(DROITS_CONTRATS){id_droits_ayant}{statut?}/>#TOTAL_BOUCLE<//B_nb_contrats></td>
 			<td class='id'>[(#AUTORISER{modifier,droits_ayant,#ID_DROITS_AYANT}|?{
 				<a href="[(#URL_ECRIRE{droits_ayant_edit,id_droits_ayant=#ID_DROITS_AYANT})]">#ID_DROITS_AYANT</a>,
 				#ID_DROITS_AYANT

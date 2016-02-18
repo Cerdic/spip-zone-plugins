@@ -1,17 +1,13 @@
 <paquet
 	prefix="ayantsdroit"
 	categorie="divers"
-	version="1.0.0"
+	version="1.2.0"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/ayantsdroit-64.png"
 	documentation=""
-	schema="1.1.0" 
+	schema="1.2.0" 
 >
-	<!--
-		Paquet généré le 2016-02-01 19:22:56
-	-->
-	
 	<nom>Ayants droit</nom>
 	<!-- Gérer les droits d’auteur des contenus -->
 	

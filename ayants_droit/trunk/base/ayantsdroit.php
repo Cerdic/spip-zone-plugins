@@ -26,7 +26,7 @@ function ayantsdroit_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['droits_contrats'] = 'droits_contrats';
 	
 	$interfaces['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
-	$interfaces['table_des_traitements']['CREDITS']['droits_contrats']= _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['CREDITS'][]= _TRAITEMENT_RACCOURCIS;
 	
 	return $interfaces;
 }
@@ -49,9 +49,11 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_droits_ayant"    => "bigint(21) NOT NULL",
 			"nom"                => "text NOT NULL DEFAULT ''",
+			'interlocuteur'      => 'text not null default ""',
 			"email"              => "varchar(255) NOT NULL DEFAULT ''",
 			"telephone"          => "varchar(255) NOT NULL DEFAULT ''",
 			"adresse"            => "tinytext NOT NULL DEFAULT ''",
+			'credits'            => 'text not null default ""',
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -59,9 +61,9 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('nom', 'email', 'telephone', 'adresse'),
-		'champs_versionnes' => array('nom', 'email', 'telephone', 'adresse'),
-		'rechercher_champs' => array("nom" => 10, 'email'=> 8, "adresse" => 5),
+		'champs_editables'  => array('nom', 'interlocuteur', 'email', 'telephone', 'adresse', 'credits'),
+		'champs_versionnes' => array('nom', 'interlocuteur', 'email', 'telephone', 'adresse', 'credits'),
+		'rechercher_champs' => array("nom" => 10, 'email'=> 8, "adresse" => 5, 'credits' => 5),
 		'tables_jointures'  => array(),
 	);
 
@@ -102,7 +104,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits'),
 		'rechercher_champs' => array('credits'=>5),
 		'rechercher_jointures' => array(
-			'droits_ayant' => array('nom'=>8),
+			'droits_ayant' => array('nom'=>8, 'email' => 5, 'credits' => 3),
 		),
 		'statut_textes_instituer' => array(
 			'a_faire'  => 'droits_contrat:statut_a_faire',

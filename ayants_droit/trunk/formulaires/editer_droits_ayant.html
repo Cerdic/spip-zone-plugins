@@ -9,6 +9,9 @@
  
 			[(#SAISIE{input, nom, obligatoire=oui,
 				label=<:droits_ayant:champ_nom_label:>})]
+				
+			[(#SAISIE{input, interlocuteur,
+				label=<:droits_ayant:champ_interlocuteur_label:>})]
  
 			[(#SAISIE{input, email,
 				label=<:droits_ayant:champ_email_label:>})]
@@ -17,7 +20,14 @@
 				label=<:droits_ayant:champ_telephone_label:>})]
  
 			[(#SAISIE{textarea, adresse,
-				label=<:droits_ayant:champ_adresse_label:>})]
+				label=<:droits_ayant:champ_adresse_label:>,
+				rows=4})]
+			
+			[(#SAISIE{textarea, credits,
+				label=<:droits_ayant:champ_credits_label:>,
+				explication=<:droits_ayant:champ_credits_explication:>,
+				rows=4,
+				inserer_barre=forum})]
 
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

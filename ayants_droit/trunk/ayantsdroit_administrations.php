@@ -28,9 +28,14 @@ function ayantsdroit_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_droits_ayants', 'spip_droits_contrats'))
 	);
 	
-	// Ajout du champ "montant"
+	// Ajout du champ "montant" dans les contrats
 	$maj['1.1.0'] = array(
 		array('maj_tables', array('spip_droits_contrats'))
+	);
+	
+	// Ajout des champs "interlocuteur" et "credits" pour les ayants droit
+	$maj['1.2.0'] = array(
+		array('maj_tables', array('spip_droits_ayants'))
 	);
 
 	include_spip('base/upgrade');

@@ -11,7 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_adresse_label' => 'Adresse',
+	'champ_credits_explication' => 'Si une formulation plus précise est demandée, elle sera utilisé à la place du simple nom de l’ayant droit.',
+	'champ_credits_label' => 'Crédits personnalisés',
 	'champ_email_label' => 'Email',
+	'champ_interlocuteur_label' => 'Interlocuteur/trice',
 	'champ_nom_label' => 'Nom',
 	'champ_telephone_label' => 'Téléphone',
 	'confirmer_supprimer_droits_ayant' => 'Confirmez-vous la suppression de cet ayant droit ?',
