@@ -1,9 +1,9 @@
 <paquet
 	prefix="formidablepaiement"
 	categorie="communication"
-	version="1.0.5"
+	version="1.0.6"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/formidablepaiement-64.png"
 	documentation="http://contrib.spip.net/4614"
 	schema="1.0.0"
