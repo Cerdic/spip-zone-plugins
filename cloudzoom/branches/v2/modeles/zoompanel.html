@@ -1,0 +1,68 @@
+<div class="zoompanel">
+
+<BOUCLE_zoompanelfirst (DOCUMENTS) {id_document IN (#ENV{id}|explode{','})} {0,1}>
+
+
+[(#MODE|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+
+[(#MODE|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+	
+]
+
+<dl class='mainzoom' style='[width:(#GET{width}|min{350}|max{120})]px;'>
+	<dt>
+	[<a href="(#GET{url})" class="cloud-zoom" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})] id='zoompanel' rel="[tint:'(#CONFIG{cloudzoom/tint})', ][tintOpacity:(#CONFIG{cloudzoom/tintopacity}), ][adjustX:(#CONFIG{cloudzoom/adjustx}), ][adjustY:(#CONFIG{cloudzoom/adjusty}), ][zoomWidth:(#CONFIG{cloudzoom/width}), ][zoomHeight:(#CONFIG{cloudzoom/height}), ][position:'(#CONFIG{cloudzoom/position})', ][softFocus:(#CONFIG{cloudzoom/softfocus}), ][lensOpacity:(#CONFIG{cloudzoom/lensopacity}), ][showTitle:(#CONFIG{cloudzoom/showtitle}), ][titleOpacity:'(#CONFIG{cloudzoom/titleopacity})', ]">]
+		<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' title='' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' class='smallpic'/>
+	[(#GET{url}|?{</a>})]
+	</dt>
+	<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px; text-align:center;']>
+	<strong><:cloudzoom:zoom:></strong></dt>
+	[<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>
+	(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+	</dd>]
+</dl>
+	
+	
+</BOUCLE_zoompanelfirst>
+
+<BOUCLE_zoomdesk (DOCUMENTS) {id_document IN (#ENV{id}|explode{','})}>
+[(#MODE|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+
+[(#MODE|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+	#SET{vu,oui}
+]
+
+<dl class='thumbnailist'>
+	<dt>
+	[<a href="(#GET{url})" class="cloud-zoom-gallery [(#EXPOSER)]" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})] id='zoom#ID_DOCUMENT' rel="useZoom: 'zoompanel', smallImage: '#GET{fichier}' ">]
+		<img src='#GET{fichier}' width='#EVAL{#GET{width}/2}' height='#EVAL{#GET{height}/2}' [title='(#TITRE|texte_backend)'] alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' class='thumbnail'/>
+	[(#GET{url}|?{</a>})]
+	</dt>
+	<dt class='#EDIT{titre} thumbnailtitre'>
+	<small>#TITRE</small></dt>
+	[<dd class='#EDIT{descriptif} spip_doc_descriptif'>
+	(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+	</dd>]
+</dl>
+
+</BOUCLE_zoomdesk>
+
+</div>

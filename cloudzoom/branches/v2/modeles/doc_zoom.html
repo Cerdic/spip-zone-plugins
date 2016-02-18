@@ -1,0 +1,34 @@
+<BOUCLE_zoom (DOCUMENTS) {id_document} {tout}>
+[(#REM)
+
+	Modele pour <zoom>
+
+	Si on a une image unique que l'on souhaite rendre zoomable
+
+]
+
+[(#MODE|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+]
+[(#MODE|=={image}|non)
+	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+	#SET{url,#ENV{lien,#URL_DOCUMENT}}
+]
+
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
+<dt>[<a href="(#GET{url})" class="cloud-zoom" title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})] id='zoom1' rel="[tint:'(#CONFIG{cloudzoom/tint})', ][tintOpacity:(#CONFIG{cloudzoom/tintopacity}), ][adjustX:(#CONFIG{cloudzoom/adjustx}), ][adjustY:(#CONFIG{cloudzoom/adjusty}), ][zoomWidth:(#CONFIG{cloudzoom/width}), ][zoomHeight:(#CONFIG{cloudzoom/height}), ][position:'(#CONFIG{cloudzoom/position})', ][softFocus:(#CONFIG{cloudzoom/softfocus}), ][lensOpacity:(#CONFIG{cloudzoom/lensopacity}), ][showTitle:(#CONFIG{cloudzoom/showtitle}), ][titleOpacity:'(#CONFIG{cloudzoom/titleopacity})', ]">]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' [title='(#TITRE|texte_backend)'] alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>
+<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong><:cloudzoom:zoom:></strong></dt>[
+<dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
+	
+	
+</BOUCLE_zoom>
+
+
+
+
