@@ -25,6 +25,7 @@ function ayantsdroit_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['droits_ayants'] = 'droits_ayants';
 	$interfaces['table_des_tables']['droits_contrats'] = 'droits_contrats';
 	
+	$interfaces['table_des_traitements']['EMAIL']['droits_ayants'] = _TRAITEMENT_RACCOURCIS;
 	$interfaces['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
 	$interfaces['table_des_traitements']['CREDITS'][]= str_replace('%s', 'ayantsdroit_traiter_credits(%s)', _TRAITEMENT_RACCOURCIS);
 	
@@ -119,13 +120,13 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 			'en_cours' => 'puce-proposer-8.png',
 			'ok'       => 'puce-publier-8.png',
 			'refuse'   => 'puce-refuser-8.png',
-			'cloture'  => 'puce-supprimer-8.png',
+			'cloture'  => 'puce-droits_contrat-cloture.png',
 			'poubelle' => 'puce-supprimer-8.png',
 		),
 		'statut'=> array(
 			array(
 				'champ'     => 'statut',
-				'publie'    => 'ok',
+				'publie'    => 'ok,en_cours,a_faire',
 				'previsu'   => 'ok,en_cours,a_faire',
 				'post_date' => 'date', 
 				'exception' => array('statut','tout')
