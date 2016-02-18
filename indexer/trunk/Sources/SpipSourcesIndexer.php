@@ -32,6 +32,7 @@ class SpipSourcesIndexer {
 
         if (is_null($timeout)) {
             include_spip('base/upgrade');
+            
             if (defined('_TIME_OUT')) {
                 $timeout = _TIME_OUT;
             } else {
@@ -49,10 +50,12 @@ class SpipSourcesIndexer {
 
     public function loadIndexesStats() {
         include_spip('inc/config');
+        
         $stats = lire_config($this->meta_stats, array());
         if (!is_array($stats)) {
             $stats = array();
         }
+        
         return $stats + array(
             'last' => array(
                 'sourceClass' => '',
@@ -75,6 +78,7 @@ class SpipSourcesIndexer {
             'documents'   => 0,
             'indexing'    => 0,
         );
+        
         return $stats;
     }
 
@@ -93,7 +97,6 @@ class SpipSourcesIndexer {
      * Indexe toutes les sources en prenant en compte le timeout
      */
     public function indexAll() {
-
         $this->initTimeout();
 
         $stats = $this->loadIndexesStatsClean();
@@ -102,7 +105,7 @@ class SpipSourcesIndexer {
         $sources = $this->sources->getIterator();
         // se replacer à la dernière source renseignée (cas d'une indexation non terminée)
         if ($stats['last']['source']) {
-            $sources->seek($infos['last']['source']);
+            $sources->seek($stats['last']['source']);
         }
 
         while ($sources->valid()) {
@@ -135,10 +138,12 @@ class SpipSourcesIndexer {
 
         if ($this->isTimeout()) {
             $this->saveIndexesStats($stats);
+            
             return false;
         }
 
         $this->resetIndexesStats();
+        
         return $stats;
     }
 
@@ -212,6 +217,7 @@ class SpipSourcesIndexer {
             $s = sprintf("%d ", $x = floor($p/1000));
             $p -= ($x*1000);
         }
+        
         return $s . sprintf($s?"%07.3f ms":"%.3f ms", $p);
     }
 }
