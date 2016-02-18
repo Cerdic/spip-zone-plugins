@@ -1,4 +1,6 @@
-#HTTP_HEADER{content-type:text/css}
+.spip_documents #wrap {
+	display: inline-block !important;
+}
 
 /* This is the moving lens square underneath the mouse pointer. */
 .cloud-zoom-lens {
