@@ -10,15 +10,22 @@
  * @licence    GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 if (!isset($GLOBALS['zinit_tables_exclues'])) {
-    $GLOBALS['zinit_tables_exclues'] = array('spip_jobs', 'spip_types_documents', 'spip_messages', 'spip_depots', 'spip_plugins', 'spip_paquets');
+	$GLOBALS['zinit_tables_exclues'] = array(
+		'spip_jobs',
+		'spip_types_documents',
+		'spip_messages',
+		'spip_depots',
+		'spip_plugins',
+		'spip_paquets',
+	);
 }
 
 if (!defined('_ZINIT_DIR_SQUELETTES')) {
-    define('_ZINIT_DIR_SQUELETTES', _DIR_RACINE.'squelettes_zcore/');
+	define('_ZINIT_DIR_SQUELETTES', _DIR_RACINE . 'squelettes_zcore/');
 }
 if (!defined('_DIR_SQUELETTES')) {
-    define('_DIR_SQUELETTES', _DIR_RACINE.'squelettes/');
+	define('_DIR_SQUELETTES', _DIR_RACINE . 'squelettes/');
 }

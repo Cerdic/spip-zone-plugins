@@ -10,12 +10,12 @@
  * @licence    GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 /**
  * Fonction d'appel pour le pipeline.
- * @pipeline autoriser */
-function zinit_autoriser()
-{
+ * @pipeline autoriser
+ */
+function zinit_autoriser() {
 }
