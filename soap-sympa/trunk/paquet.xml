@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="3.0.1"
 	etat="stable"
-	compatibilite="[3.0.0 ;3.1.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/soapsympa-128.png"
 	schema="0.1.5"
 	documentation="http://contrib.spip.net/Spip-ML-SYMPA"
@@ -21,11 +21,11 @@
 	<pipeline nom="header_prive" inclure="soapsympa_header_prive.php"/>
 
 
-	<necessite nom="spip_bonux" compatibilite="[1.0;]"/>
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;]"/>
+
 	<menu nom="edition_listes" titre="soapsympa:edition_soapsympa" parent="menu_edition" icone="images/soapsympa-16.png"
 				action="edition_soapsympa"/>
 	<menu nom="configurer_soapsympa" titre="soapsympa:configurer_soapsympa" parent="menu_configuration"
 				icone="images/soapsympa-16.png" action="configurer_soapsympa"/>
 
 </paquet>
-
