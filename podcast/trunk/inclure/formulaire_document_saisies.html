@@ -1,4 +1,4 @@
-		#SET{name,podcast}#SET{obli,''}#SET{defaut,'non'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		#SET{name,podcast}#SET{obli,''}#SET{defaut,#CONFIG{podcast/podcast_auto}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		<[(#ENV{_tag})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label><:podcast:cfg_titre_podcast:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
@@ -11,7 +11,7 @@
 				<label for="#GET{name}_#GET{val}"><:podcast:label_dans_podcast:></label>
 			</div>
 		</[(#ENV{_tag})]>
-		#SET{name,explicit}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		#SET{name,explicit}#SET{obli,''}#SET{defaut,#CONFIG{podcast/explicit_defaut}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 		<[(#ENV{_tag})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]
