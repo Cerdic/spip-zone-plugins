@@ -142,21 +142,20 @@ function mailshot_optimiser_base_disparus($flux){
 		if (lire_config("mailshot/purger_historique",'non')=='oui'
 		  AND $delai = intval(lire_config("mailshot/purger_historique_delai",0))){
 
-			// les envois finis depuis plus de $delai mois
+			// les envois finis depuis plus de $delai mois, les 2 plus anciens
 			$vieux = date('Y-m-d H:i:s',strtotime("-$delai month"));
 			$ids = sql_allfetsel(
 				"id_mailshot",
 				"spip_mailshots",
 				"date<".sql_quote($vieux)
 				." AND (date_start<date OR date_start<".sql_quote($vieux).")"
-				." AND ".sql_in('statut',array('end','cancel')));
+				." AND ".sql_in('statut',array('end','cancel')),"","id_mailshot","0,2");
 			$ids = array_map('reset',$ids);
 
-			// on en purge un seul, le premier qui vient
-			$id_mailshot = sql_getfetsel("id_mailshot","spip_mailshots_destinataires",sql_in('id_mailshot',$ids),"","","0,1");
-			if ($id_mailshot){
+			// on les purge et passe en archive
+			include_spip('inc/mailshot');
+			while ($ids AND $id_mailshot = array_shift($ids)){
 				// mettre a jour les stats avant de purger
-				include_spip('inc/mailshot');
 				mailshot_compter_envois($id_mailshot);
 				sql_delete("spip_mailshots_destinataires",'id_mailshot='.intval($id_mailshot));
 				sql_updateq("spip_mailshots",array('statut'=>'archive'),'id_mailshot='.intval($id_mailshot));
