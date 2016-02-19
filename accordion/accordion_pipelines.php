@@ -1,12 +1,12 @@
 <?php
 
 if (!defined('_ECRIRE_INC_VERSION')){
- 	 return;
+	return;
 }
 
 function accordion_jqueryui_plugins($plugins){
-        $plugins[] = "jquery.ui.accordion";
-        return $plugins;
+		$plugins[] = "jquery.ui.accordion";
+		return $plugins;
 }
 
 function accordion_insert_head($flux) {

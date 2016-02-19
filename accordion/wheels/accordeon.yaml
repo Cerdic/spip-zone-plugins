@@ -1,8 +1,8 @@
 --- # callback pour <accordeon> !spip.yaml
 
 accordeon:
-  # raccourci <accordeon>
-  match: ['<accordeon>', '</accordeon>']
-  replace: ['<div class="spip_accordeon">', '</div>']
-  if_str: '<accordeon>'
-  type: str
+	# raccourci <accordeon>
+	match: ['<accordeon>', '</accordeon>']
+	replace: ['<div class="spip_accordeon">', '</div>']
+	if_str: '<accordeon>'
+	type: str
