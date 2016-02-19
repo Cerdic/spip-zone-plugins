@@ -1,7 +1,7 @@
 <paquet
 	prefix="signalement"
 	categorie="edition"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/signalement.png"
@@ -27,8 +27,8 @@
 	<pipeline nom="notifications_destinataires" inclure="signalement_pipelines.php" />
 	
 	<necessite nom="notifications" compatibilite="[2.2.1;[" />
-	<utilise nom="facteur" />
-	<utilise nom="mediabox" />
+	<utilise nom="facteur" compatibilite="[2.0.0;]" />
+	<utilise nom="mediabox" compatibilite="[0.8.1;]" />
 	
 	<menu nom="signalements_reactions" titre="signalement:icone_suivi_signalements" parent="menu_activite" icone="images/signalement-16.png" action="controler_signalement" />
 	<menu nom="configurer_signalement" titre="signalement:titre_signalements" parent="menu_configuration" icone="images/signalement-16.png" />
