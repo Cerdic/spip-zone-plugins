@@ -27,5 +27,6 @@
 	<pipeline nom="editer_contenu_objet" inclure="licence_pipelines3.php" />
 	<pipeline nom="xmlrpc_methodes" inclure="licence_pipelines3.php" />
 	<pipeline nom="xmlrpc_server_class" inclure="licence_pipelines3.php" />
-	<utilise nom="medias" />
+
+	<utilise nom="medias" compatibilite="[2.7.27;]" />
 </paquet>
