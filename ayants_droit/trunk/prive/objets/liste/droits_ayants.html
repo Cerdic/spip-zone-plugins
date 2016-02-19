@@ -22,7 +22,7 @@
 	<BOUCLE_liste_droits_ayants(DROITS_AYANTS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='nom principale'>[(#LOGO_DROITS_AYANT|image_reduire{20,26})]<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_AYANT">[(#RANG). ]#NOM</a></td>
-			<td class="email">[<a href="mailto:#EMAIL">(#EMAIL)</a>]</td>
+			<td class="email">#EMAIL</td>
 			<td class="telephone">[<a href="tel:#TELEPHONE">(#TELEPHONE)</a>]</td>
 			<td class="nb"><BOUCLE_nb_contrats(DROITS_CONTRATS){id_droits_ayant}{statut?}/>#TOTAL_BOUCLE<//B_nb_contrats></td>
 			<td class='id'>[(#AUTORISER{modifier,droits_ayant,#ID_DROITS_AYANT}|?{
