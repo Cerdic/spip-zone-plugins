@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Plugin Simple Calendrier v2 pour SPIP 3.1
  * Licence GNU/GPL
- * 2010-2012
+ * 2010-2016
  *
  * cf. paquet.xml pour plus d'infos.
  */

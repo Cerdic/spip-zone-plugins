@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Plugin Simple Calendrier v2 pour SPIP 3.1
  * Licence GNU/GPL
- * 2010-2012
+ * 2010-2016
  *
  * cf. paquet.xml pour plus d'infos.
  */
@@ -97,6 +97,21 @@ function simplecal_declarer_tables_objets_sql($tables){
 	
 	// La Table
 	$tables['spip_evenements'] = array(
+		'type' => 'evenement',
+		'principale' => 'oui',
+		'field'=> $fields,
+		'key' => $key,
+		'join' => $join,
+		'titre' => 'titre, lang',
+		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
+		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
+		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
+		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
+		'rechercher_jointures' => array('document' => array('titre' => 2, 'descriptif' => 1)),
+		'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
+		'statut' =>  array($statut),
+		'statut_textes_instituer' => $statut_textes_instituer,
+		'statut_titres' => $statut_titres,
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'simplecal:evenements',
 		'texte_objet' => 'simplecal:evenement',
@@ -107,33 +122,8 @@ function simplecal_declarer_tables_objets_sql($tables){
 		'info_nb_objets' => 'simplecal:info_nb_evenements',
 		'texte_logo_objet' => 'simplecal:logo_evenement',
 		'texte_langue_objet' => 'simplecal:titre_langue_evenement',
-		'titre' => 'titre, lang',
-		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
-		'principale' => 'oui',
-		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
-		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
-		'field'=> $fields,
-		'key' => $key,
-		'join' => $join,
-		'statut' =>  array($statut),
-		'texte_changer_statut' => 'simplecal:entree_evenement_publie',
-		'statut_titres' => $statut_titres,
-		'statut_textes_instituer' => $statut_textes_instituer,
-		
-		'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
-
-		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
-		
-		'rechercher_jointures' => array(
-			'document' => array('titre' => 2, 'descriptif' => 1)
-		),
-		
+		'texte_changer_statut' => 'simplecal:entree_evenement_publie'
 	);
-	
-	// On peut lire dans :
-	// - Extensions/mots/base/mots.php     : jointures sur les mots pour tous les objets
-	// - Extensions/medias/base/medias.php : jointures sur les documents pour tous les objets
-	// - Extensions/forum/base/forum.php   : jointures sur les forums pour tous les objets
 	
 	return $tables;
 }

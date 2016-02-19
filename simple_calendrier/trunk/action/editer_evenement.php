@@ -1,11 +1,12 @@
 <?php
 /**
- * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Plugin Simple Calendrier v2 pour SPIP 3.1
  * Licence GNU/GPL
- * 2010-2012
+ * 2010-2016
  *
  * cf. paquet.xml pour plus d'infos.
  */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Envoi depuis le formulaire d'edition d'un evenement
@@ -108,9 +109,10 @@ function evenement_inserer($id_rubrique) {
  * @param array $set
  * @return
  */
-function evenement_modifier ($id_evenement, $set=null) {
+function evenement_modifier($id_evenement, $set=null) {
 
 	include_spip('inc/modifier');
+	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
 		objet_info('evenement','champs_editables'),

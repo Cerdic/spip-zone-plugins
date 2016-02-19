@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Simple Calendrier v2 pour SPIP 3.0
+ * Plugin Simple Calendrier v2 pour SPIP 3.1
  * Licence GNU/GPL
- * 2010-2012
+ * 2010-2016
  *
  * cf. paquet.xml pour plus d'infos.
  */
@@ -133,30 +133,6 @@ function simplecal_boite_infos($flux){
 	
 	return $flux;
 }
-
-
-function simplecal_afficher_fiche_objet($flux){
-
-	if (in_array($type = $flux['args']['type'],array('evenement'))
-	  AND $GLOBALS['meta']['forum_prive_objets'] != 'non'){
-		$id = $flux['args']['id'];
-		$table = table_objet($type);
-		$id_table_objet = id_table_objet($type);
-		$contexte = array_merge($flux['args']['contexte'],
-			array(
-				'objet'=>$type,
-				'id_objet'=>$id,
-				'quoi'=>'interne',
-				'statut'=>'prive'
-			)
-		);
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/discuter_forum',$contexte,array('ajax'=>true));
-	}
-	
-	return $flux;
-}
-
-
 
 
 function simplecal_configurer_liste_metas($metas) {
