@@ -32,6 +32,17 @@ function saisie_balise_structure_formulaire($tag){
 	if ($is_div) return "div";
 	return $tag;
 }
+// variante plus simple a ecrire dans les squelettes
+// [(#DIV|sinon{ul})]
+if (!function_exists('balise_DIV_dist')
+  and $version = explode(".",$GLOBALS['spip_version_branche'])
+  and ($version[0]>3 OR ($version[0]==3 AND $version[1]>0))){
+	function balise_DIV_dist($p){
+		$p->code = "'div'";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+}
 
 /**
  * Traiter la valeur de la vue en fonction du env
