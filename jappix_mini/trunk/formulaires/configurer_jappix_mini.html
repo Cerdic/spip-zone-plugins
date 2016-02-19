@@ -10,11 +10,11 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<ul class="editer-groupe">
 				<li class="fieldset"><fieldset>
 					<legend><:jappix_mini:section_jappix:></legend>
 			    <ul>
-			        <li class="editer_url_jappix">
+			        <li class="editer editer_url_jappix">
 			            <label for="url_jappix"><:jappix_mini:url_jappix:></label>
 			            <p class="explication"><:jappix_mini:url_jappix_explication:></p>
 			            <input type="text" name="url_jappix" id="url_jappix" class="text url" value="#ENV{url_jappix}" />
@@ -24,23 +24,23 @@
 
 				<li class="fieldset"><fieldset>
 			    <legend><:jappix_mini:section_jabber:></legend>
-			    <ul>
-			        <li class="editer_user_jabber">
+			    <ul class="editer-groupe">
+			        <li class="editer editer_user_jabber">
 			            <label for="utilisateur_jabber"><:jappix_mini:utilisateur_jabber:></label>
 			            <p class="explication"><:jappix_mini:utilisateur_jabber_explication:></p>
 			            <input type="text" name="user_jabber" id="user_jabber" class="text" autocomplete="off" value="#ENV{user_jabber}" />
 			        </li>
-			        <li class="editer_pass_jabber">
+			        <li class="editer editer_pass_jabber">
 			            <label for="pass_jabber"><:jappix_mini:pass_jabber:></label>
 			            <p class="explication"><:jappix_mini:pass_jabber_explication:></p>
 			            <input type="password" name="pass_jabber" id="pass_jabber" class="password" autocomplete="off" value="#ENV{pass_jabber}" />
 			        </li>
-			        <li class="editer_domaine_jabber">
+			        <li class="editer editer_domaine_jabber">
 			            <label for="domaine_jabber"><:jappix_mini:domaine_jabber:></label>
 			            <p class="explication"><:jappix_mini:domaine_jabber_explication:></p>
 			            <input type="text" name="domaine_jabber" id="domaine_jabber" class="text" value="#ENV{domaine_jabber}" />
 			        </li>
-			        <li class="editer_ressource">
+			        <li class="editer editer_ressource">
 			            <label for="ressource"><:jappix_mini:ressource:></label>
 			            <p class="explication"><:jappix_mini:ressource_explication:></p>
 			            <input type="text" name="ressource" id="ressource" class="text" value="#ENV{ressource}" />
@@ -50,25 +50,25 @@
 
 				<li class="fieldset"><fieldset>
 			    <legend><:jappix_mini:section_salons:></legend>
-			    <ul>
-			        <li class="editer_salons">
+			    <ul class="editer-groupe">
+			        <li class="editer editer_salons">
 			            <label for="salons"><:jappix_mini:liste_salons:></label>
 			            <p class="explication"><:jappix_mini:liste_salons_explication:></p>
 			            <textarea name="salons" id="salons">#ENV{salons}</textarea>
 			        </li>
-			        <li class="editer_pass_salons">
+			        <li class="editer editer_pass_salons">
 			            <label for="pass_salons"><:jappix_mini:liste_pass_salons:></label>
 			            <p class="explication"><:jappix_mini:liste_pass_salons_explication:></p>
 			            <textarea name="pass_salons" id="pass_salons">#ENV{pass_salons}</textarea>
 			        </li>
-			        <li class="editer_autojoin">
+			        <li class="editer editer_autojoin">
 			            <label for="autojoin"><:jappix_mini:entrer_automatiquement:></label>
 			            <div class="choix">
 			                <input type="checkbox" name="autojoin" id="autojoin" class="checkbox" value="on" [(#ENV{autojoin}|oui)checked="checked"] />
 			                <label for="autojoin"><:jappix_mini:entrer_automatiquement_explication:></label>
 			            </div>
 			        </li>
-			        <li class="editer_pseudo">
+			        <li class="editer editer_pseudo">
 			            <label for="pseudo"><:jappix_mini:pseudo_salons:></label>
 			            <p class="explication"><:jappix_mini:pseudo_salons_explication:></p>
 			            <input type="text" name="pseudo" id="pseudo" class="text" value="#ENV{pseudo}" />
@@ -78,15 +78,15 @@
 
 				<li class="fieldset"><fieldset>
 			    <legend><:jappix_mini:section_interface:></legend>
-			    <ul>
-			        <li class="editer_ouvrir_auto">
+			    <ul class="editer-groupe">
+			        <li class="editer editer_ouvrir_auto">
 			            <label for="ouvrir_auto"><:jappix_mini:derouler_panneau_auto:></label>
 			            <div class="choix">
 			                <input type="checkbox" name="ouvrir_auto" id="ouvrir_auto" class="checkbox" value="on" toto="#ENV{ouvrir_auto}" [(#ENV{ouvrir_auto}|oui)checked="checked"] />
 			                <label for="ouvrir_auto"><:jappix_mini:derouler_panneau_auto_explication:></label>
 			            </div>
 			        </li>
-			        <li class="langue">
+			        <li class="editer langue">
 			            <label for="langue"><:jappix_mini:langue_interface:></label>
 			            <p class="explication"><:jappix_mini:langue_interface_explication:></p>
 			            <select name="langue" id="langue">

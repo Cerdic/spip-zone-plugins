@@ -1,9 +1,9 @@
 <paquet
 	prefix="jappix_mini"
 	categorie="communication"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/jappix.png"
 	documentation="http://contrib.spip.net/Jappix-Mini"
 >	
