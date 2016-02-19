@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//B
 	'btn_abonnement_lists' => 'Abonner l\'auteur aux listes sélectionnées.',
 	'btn_desabonnement_lists' => 'Désabonner l\'auteur aux listes sélectionnées.',
-	'btn_desabonnement_emails' => 'Abonner les emails sélectionnés.',
+	'btn_abonnement_emails' => 'Abonner les emails sélectionnés.',
 	'btn_desabonnement_emails' => 'Désabonner les emails sélectionnés.',
 	'btn_search_emails' =>'Chercher un abonné.',
 	// C

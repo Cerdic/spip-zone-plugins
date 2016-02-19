@@ -8,8 +8,8 @@
 	<form method='post' action='#ENV{action}'>
 		<div class="abonnement">
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				<li class="editer_email obligatoire[ (#GET{erreurs}|oui)erreur]">
+			<ul class="editer-groupe">
+				<li class="editer editer_email obligatoire[ (#GET{erreurs}|oui)erreur]">
 					[<span class='erreur_message'>(#ENV*{erreur_email})</span>]
 					<label>#ENV{listname}</label>
 					<input name="email" id="email" type="text" value="<:soapsympa:votre_email:>" onclick="this.value=''"/>
