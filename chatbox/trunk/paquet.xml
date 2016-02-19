@@ -20,25 +20,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="chatbox_autorisations.php" />
-		<pipeline nom="insert_head" inclure="chatbox_pipelines.php" />
-		* declarer un pipeline 
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration 
-		<menu nom="chatbox" titre="chatbox:chatbox_titre" parent="menu_edition"  icone="images/chatbox-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ... 
-		<onglet nom="chatbox" titre="chatbox:chatbox_titre" parent="configuration" icone="images/chatbox-24.png" />
-	-->
-
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 
 	<pipeline nom="autoriser" inclure="chatbox_autorisations.php" /> 
