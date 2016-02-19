@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'aucun_signalement' => 'Aucun signalement',
+
 	// B
 	'bouton_alerter' => 'Alerter',
 	'bouton_enlever_alerte' => 'Enlever votre alerte',
