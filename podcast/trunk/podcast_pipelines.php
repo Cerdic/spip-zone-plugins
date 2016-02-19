@@ -16,8 +16,10 @@ function podcast_editer_contenu_objet($flux){
 	$type_form = $flux['args']['type'];
 	$id_document = $flux['args']['id'];
 	if(in_array($type_form,array('document'))){
-		if(preg_match(",<li [^>]*class=[\"'](?:editer )?editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
-			$ajouts = recuperer_fond('inclure/formulaire_document_saisies',array('id_document'=>$id_document));
+		if(preg_match(",<(li|div) [^>]*class=[\"'](?:editer )?editer_credits.*>(.*)<\/\\1>,Uims",$flux['data'],$regs)){
+			$contexte = $flux['args']['contexte'];
+			$contexte['_tag'] = $regs[1];
+			$ajouts = recuperer_fond('inclure/formulaire_document_saisies',$contexte);
 			$p = strpos($flux['data'],$regs[0])+strlen($regs[0]);
 			$flux['data'] = substr_replace($flux['data'],$ajouts,$p,0);
 		}
@@ -71,20 +73,20 @@ function podcast_post_edition($flux){
 			/**
 			 * Mise à jour du document
 			 */
-			include_spip('inc/modifier');
+			include_spip('action/editer_document');
 			if(isset($valeur_explicit) && ($valeur_explicit != 'clean')){
 				$infos['explicit'] = $valeur_explicit;
 			}
 			if(isset($valeur_podcast) && ($valeur_podcast != 'oui')){
 				$infos['podcast'] = $valeur_podcast;
 			}
-			revision_document($id_document, $infos);
+			document_modifier($id_document, $infos);
 
 			/**
 			 * On invalide le cache de cet élément si nécessaire
 			 */
 			include_spip('inc/invalideur');
-			suivre_invalideur("id='id_document/$id'");
+			suivre_invalideur("id='id_document/$id_document'");
 		}
 	}
 	return $flux;

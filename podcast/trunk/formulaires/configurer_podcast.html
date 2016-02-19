@@ -5,7 +5,7 @@
 <form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{radio, podcast_auto,
 				label=<:podcast:label_podcast_auto:>,
 				explication=<:podcast:explication_podcast_auto:>,
@@ -57,10 +57,10 @@
 				label=<:podcast:label_keywords:>,
 				rows=4,
 				obligatoire=non})]
-			<li class="fieldset">
+			<[(#DIV|sinon{li})] class="fieldset">
 				<fieldset>
 					<h3 class="legend"><:podcast:legend_itunes:></h3>
-					<ul>
+					<[(#DIV|sinon{ul})] class="editer-groupe">
 					[(#SAISIE{radio, explicit_defaut,
 						label=<:podcast:label_explicit:>,
 						explication=<:podcast:explication_explicit:>,
@@ -95,10 +95,10 @@
 							type=#GET{type}})]
 					]
 					</BOUCLE_souscategories>
-					</ul>
+					</[(#DIV|sinon{ul})]>
 				</fieldset>
-			</li>
-		</ul>
+			</[(#DIV|sinon{li})]>
+		</[(#DIV|sinon{ul})]>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
 		</p>
