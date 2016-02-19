@@ -3,6 +3,7 @@
 	date_debut,-1,
 	date_fin,1,
 	id_droits_contrat,1,
+	id_licence,1,
 	points,-1
 }})]<B_liste_droits_contrats>
 #ANCRE_PAGINATION
@@ -13,6 +14,7 @@
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="titre" scope="col">[(#TRI{nom,<:droits_ayant:titre_droits_ayant:> / <:onglet_contenu:>,ajax})]</th>
+			<th class="licence">[(#TRI{id_licence,<:droits_contrat:champ_id_licence_label:>})]</th>
 			<th class="date_debut" scope="col">[(#TRI{date_debut,<:droits_contrat:champ_date_debut_label:>,ajax})]</th> 
 			<th class="date_fin" scope="col">[(#TRI{date_fin,<:droits_contrat:champ_date_fin_label:>,ajax})]</th> 
 			<th class="id" scope="col">[(#TRI{id_droits_contrat,<:info_numero_abbreviation:>,ajax})]</th>
@@ -22,7 +24,8 @@
 	<BOUCLE_liste_droits_contrats(DROITS_CONTRATS droits_ayants){statut?}{id_droits_ayant?}{objet?}{id_objet?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{droits_contrat,#ID_DROITS_CONTRAT})]</td> 
-			<td class="titre principale"><a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_CONTRAT">#NOM / #INFO_TITRE{#OBJET,#ID_OBJET}</a></td>
+			<td class="titre principale"><a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_CONTRAT">[(#NOM|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})] / #INFO_TITRE{#OBJET,#ID_OBJET}</a></td>
+			<td class="licence">#LICENCE{non,non}</td>
 			<td class="date_debut secondaire">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{#DATE_DEBUT|affdate})]</td> 
 			<td class="date_fin secondaire">[(#DATE_FIN|!={0000-00-00 00:00:00}|?{#DATE_FIN|affdate})]</td> 
 			<td class="id">[(#AUTORISER{modifier,droits_contrat,#ID_DROITS_CONTRAT}|?{

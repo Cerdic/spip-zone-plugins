@@ -1,9 +1,9 @@
 <BOUCLE_droits_contrat(DROITS_CONTRATS){id_droits_contrat}{statut?}>
 
-[<div class="champ contenu_id_droits_ayant[ (#ID_DROITS_AYANT*|!={0}|?{'',vide})]">
+[<div class="champ contenu_id_droits_ayant">
 	<label><:droits_contrat:champ_id_droits_ayant_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{id_droits_ayant} id_droits_ayant">
-		<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]">(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT})</a>
+		<a href="[(#ID_DROITS_AYANT|generer_url_entite{droits_ayant})]">(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}, <:droits_contrat:champ_id_droits_ayant_inconnu:>})</a>
 	</span>
 </div>]
 

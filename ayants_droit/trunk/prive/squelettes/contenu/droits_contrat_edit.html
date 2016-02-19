@@ -13,7 +13,7 @@
 	[(#ID_DROITS_CONTRAT|?{<:droits_contrat:icone_modifier_droits_contrat:>,<:droits_contrat:icone_creer_droits_contrat:>})]
 	<h1>
 		<BOUCLE_contrat(DROITS_CONTRATS){id_droits_contrat}{statut?}>
-		[(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}|concat{' / '}|concat{#INFO_TITRE{#OBJET,#ID_OBJET}}|sinon{<:info_sans_titre:>})]
+		[(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT},<:droits_contrat:champ_id_droits_ayant_inconnu:>}|concat{' / '}|concat{#INFO_TITRE{#OBJET,#ID_OBJET}}|sinon{<:info_sans_titre:>})]
 		</BOUCLE_contrat>
 		#INFO_TITRE{#OBJET,#ID_OBJET}
 		<//B_contrat>

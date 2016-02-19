@@ -11,6 +11,18 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function ayantsdroit_pre_boucle($boucle) {
+	if ($boucle->type_requete == 'droits_contrats') {
+		// On cherche s'il y a une jointure sur les ayants droit
+		foreach ($boucle->from as $cle => $table){
+			if ($table == 'spip_droits_ayants'){
+				$boucle->from_type[$cle] = 'LEFT';
+			}
+		}
+	}
+	
+	return $boucle;
+}
 
 /**
  * Ajout de contenu sur certaines pages,

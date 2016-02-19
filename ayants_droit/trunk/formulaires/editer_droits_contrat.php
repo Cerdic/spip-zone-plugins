@@ -22,7 +22,7 @@ function formulaires_editer_droits_contrat_saisies_dist($objet, $id_objet, $id_d
 				'nom' => 'id_droits_ayant',
 				'label' => _T('droits_contrat:champ_id_droits_ayant_label'),
 				'class' => 'chosen',
-				'obligatoire' => 'oui',
+				'option_intro' => _T('droits_contrat:champ_id_droits_ayant_inconnu'),
 			),
 		),
 		array(

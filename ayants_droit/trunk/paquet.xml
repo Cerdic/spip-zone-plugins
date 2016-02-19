@@ -23,6 +23,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/ayantsdroit.php" />
 	<pipeline nom="affiche_milieu" inclure="ayantsdroit_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="ayantsdroit_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="ayantsdroit_pipelines.php" />
 	
 	<menu nom="droits_ayants" titre="droits_ayant:titre_droits_ayants" parent="menu_edition" icone="images/droits_ayant-16.png" action="droits_ayants" /> 
 	<menu nom="droits_ayant_creer" titre="droits_ayant:icone_creer_droits_ayant" parent="outils_rapides" icone="images/droits_ayant-new-16.png" action="droits_ayant_edit" parametres="new=oui" /> 

@@ -90,7 +90,7 @@ function autoriser_droitsayant_voir_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_droitsayant_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $id and $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
 /**

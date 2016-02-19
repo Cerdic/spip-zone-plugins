@@ -1,5 +1,5 @@
 [(#AUTORISER{voir,droits_ayant,#ID_DROITS_AYANT}|sinon_interdire_acces)]
-<BOUCLE_droits_ayant(DROITS_AYANTS){id_droits_ayant}{si #ENV{exec}|=={droits_ayant}}>
+<BOUCLE_droits_ayant(CONDITION){si #ENV{exec}|=={droits_ayant}}>
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,droits_ayant,#ID_DROITS_AYANT})
 		[(#ID_DROITS_AYANT|afficher_qui_edite{droits_ayant}|non)
@@ -10,7 +10,7 @@
 		]
 	]
 
-	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{droits_ayant-24.png}|balise_img{droits_ayant,cadre-icone})]</h1>
+	<h1>[(#RANG). ](#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant, #ID_DROITS_AYANT}}|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})[(#CHEMIN_IMAGE{droits_ayant-24.png}|balise_img{droits_ayant,cadre-icone})]</h1>
 
 ],simple fiche_objet})]
 

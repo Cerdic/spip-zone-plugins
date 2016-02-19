@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_date_debut_label' => 'Date de début',
 	'champ_date_fin_label' => 'Date de fin',
 	'champ_droits_contrat_label' => 'Type du contenu lié',
+	'champ_id_droits_ayant_inconnu' => 'Aucun ayant droit ou inconnu',
 	'champ_id_droits_ayant_label' => 'Ayant droit',
 	'champ_id_droits_contrat_label' => 'Identifiant du contenu lié',
 	'champ_id_licence_label' => 'Licence',
