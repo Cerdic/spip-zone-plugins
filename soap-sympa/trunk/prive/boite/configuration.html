@@ -1,0 +1,23 @@
+#BOITE_OUVRIR{'','info'}
+
+<div id="soapsympa">
+<table class="spip" summary="<:soapsympa:liste_des_listes:>" id="abonnees" cellpadding="5">
+<caption><:soapsympa:liste_des_listes:></caption>
+<tr class="row_first">
+ <th> <:soapsympa:adresse_liste:></th>
+<th> <:soapsympa:description_liste:></th>
+ <th> <:soapsympa:action:> </th>
+ 
+  </tr>
+<BOUCLE_abo(POUR){tableau #ENV{listoflists}}>
+<tr>
+<td class="listaddress tooltip">[(#VALEUR|table_valeur{'listaddress'})]</td>
+<td class="subject">[(#VALEUR|table_valeur{'subject'})]</td>
+<td><a href="?exec=soapsympa_review&amp;list=[(#VALEUR|table_valeur{'listaddress'})]"><:soapsympa:voir_abonnes:></a></td>
+</tr>
+</BOUCLE_abo>
+</table>
+
+</div>
+#BOITE_FERMER
+
