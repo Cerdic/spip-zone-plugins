@@ -14,7 +14,7 @@ parametres:
       datas:
         ffe_joueurs: 'liste joueurs d&rsquo;un club'
         ffe_clubs_classement: 'classement des clubs'
-        ffe_fiche_joueur: 'La fiche  d&rsquo;un joueur
+        ffe_fiche_joueur: 'La fiche  d&rsquo;un joueur'
         ffe_graph_joueur: 'Le graphique du &eacute;lo'
         ffe_clubs_departement: 'les clubs du d&eacute;partement'
         ffe_clubs_contacts: 'les contacts des clubs'
