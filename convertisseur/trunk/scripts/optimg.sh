@@ -6,26 +6,29 @@
 # Optimisation d'images trop lourdes ou trop grandes avec imagemagick
 # Fabriquer la ligne de commande dans le spip cli copmme l'autre.
 
-nom="${1##*/}"
+nom="${1##*/}" # basename
+resize=${2-0} # 0 par défaut
+compress=${4-0} # 0 par défaut
+dest="${3-0}"
 
 # resize ?
-if (( "${2}" > 0 )) ; then 
+if (( $resize > 0 )) ; then 
 	l=" avec une largeur de $2 pixels"
-	r="-resize $2x "
+	r="-resize ${resize}x "
 fi
 
 opt=""
-# resize ?
-if (( "${4}" > 0 )) ; then 
-	opt="-gaussian-blur 0.05 -quality ${4}% "
+# compression de x % ?
+if (( $compress > 0 )) ; then 
+	opt="-gaussian-blur 0.05 -quality ${compress}% "
 fi
 # compression ?
 
 
 # creer un fichier converti dans dest ?
-if (( ${#3} > 0 )) ; then 
-	d=" dans $3"
-	dest="$3/$nom"
+if [[ "$dest" != "0" ]] ; then 
+	d=" dans $dest"
+	dest="$dest/$nom"
 	ext="${1##*.}"
 		
 	filename="${dest%.*}" 
