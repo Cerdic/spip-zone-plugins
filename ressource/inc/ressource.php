@@ -237,7 +237,9 @@ function ressource_meta($res) {
 		$meta['type_document'] = ressource_mime($meta['extension']);
 
 	// demander le reload du contenu (?var_mode=reload)
-	if (_request('var_mode') == 'reload' && autoriser('reload', 'distant')) {
+	if (_request('var_mode') == 'reload'
+	&& preg_match(',^https?://,', $src)
+	&& autoriser('reload', 'distant')) {
 		include_spip('inc/queue');
 		queue_add_job('copie_locale', 'copier', array($src, 'force'), $file = 'inc/distant', $no_duplicate = true, $time=1, $priority=0);
 	}
