@@ -20,6 +20,8 @@ $GLOBALS['index_aide_plugonet'] = array(
 	'paqxmllib',
 	'paqxmlproc',
 	'paqxmlpath',
+	'paqxmlscript',
+	'paqxmlgenie',
 	'paqxmlspip',
 	'paqxmlfoi',
 	'paqxmlexe'
