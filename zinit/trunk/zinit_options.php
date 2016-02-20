@@ -29,3 +29,6 @@ if (!defined('_ZINIT_DIR_SQUELETTES')) {
 if (!defined('_DIR_SQUELETTES')) {
 	define('_DIR_SQUELETTES', _DIR_RACINE . 'squelettes/');
 }
+if (!defined('_DIR_SQUELETTES_DIST')) {
+	define('_DIR_SQUELETTES_DIST', _DIR_RACINE . 'squelettes-dist/');
+}

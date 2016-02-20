@@ -9,6 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'check_body_skel' => 'Le fichier <code>body.html</code> utilisé :',
 	'check_presence_globale_z_blocs' => 'Est-ce que la globale "z_blocs" a été créé ?',
 	'check_liste_repertoires_skel' => 'Liste des répertoires créés par le plugin&nbsp;:',
 	'check_liste_repertoires_skel_a_creer' => 'Les répertoires n\'ont pas encore été créés.',
@@ -21,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_confirm_repertoires' => 'Désirez-vous mettre à jour les répertoires ?',
 	'maj_label' => 'Mise à jour',
 
+    'surcharge_fichiers_dist' => 'Surcharger les fichiers de squelettes-dist/',
 	// T
 	'titre_blocs' => 'Blocs',
 	'titre_controle' => 'Contrôle',

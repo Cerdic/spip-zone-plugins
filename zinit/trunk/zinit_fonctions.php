@@ -180,3 +180,23 @@ function zinit_blocs_verifier() {
 		return false;
 	}
 }
+
+function zinit_check_skel_dist() {
+	$dir_skel_dist = _DIR_SQUELETTES_DIST;
+	$fichiers = array();
+	if (is_dir($dir_skel_dist) and is_readable($dir_skel_dist)) {
+		$contenus_skel_dist = array_diff(scandir($dir_skel_dist), array(
+			'..',
+			'.',
+			'.svn',
+			'.DS_Store',
+		)); // On ne liste pas le répertoire ^.
+		foreach ($contenus_skel_dist as $fichier) {
+			if (preg_match("/"._EXTENSION_SQUELETTES."$/", $fichier)) {
+				$fichiers[] = $fichier;
+			}
+		}
+	}
+
+	return $fichiers;
+}

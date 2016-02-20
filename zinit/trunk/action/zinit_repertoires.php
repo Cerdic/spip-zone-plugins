@@ -19,7 +19,7 @@ function action_zinit_repertoires_dist($arg = null) {
 		// On crée d'abord les répertoires
 		$repertoires = zinit_repertoire_skel_creer($cible);
 
-		if ($repertoires and $fichiers) {
+		if ($repertoires) {
 			if (!$redirect = _request('redirect')) {
 				$redirect = parametre_url(generer_url_ecrire('zcore_skel'));
 			}
