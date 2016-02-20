@@ -22,7 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_confirm_repertoires' => 'Désirez-vous mettre à jour les répertoires ?',
 	'maj_label' => 'Mise à jour',
 
-    'surcharge_fichiers_dist' => 'Surcharger les fichiers de squelettes-dist/',
+	// S
+    'surcharge_fichiers_dist' => 'Surcharger les fichiers de @repertoire@',
+
 	// T
 	'titre_blocs' => 'Blocs',
 	'titre_controle' => 'Contrôle',
