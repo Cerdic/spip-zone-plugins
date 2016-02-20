@@ -264,20 +264,20 @@ function phraser_tag($rr) {
 	$attribute_pattern =
 	'@
 	(
-	(?P<name>\w+)			 # attribute name
+	(?P<name>[-\w]+)			 # attribute name
 	\s*=\s*
 	(
 	    (?P<quote>[\"\'])(?P<value_quoted>.*?)(?P=quote)    # a quoted value
 	    |			   # or
 	    (?P<value_unquoted>[^\s"\']+?)(?:\s+)	   # an unquoted value
 	)
-	|(?P<auto>\w+)
+	|(?P<auto>[-\w]+)
 	)
 	@xsiS';
 
-	// d'abord eliminer le type du tag et l'evntuelle fermeture auto
+	// d'abord eliminer le type du tag et l'eventuelle fermeture auto
 	$res = array();
-	$rr = preg_replace(',^<\w+\s+,S', '', $rr);
+	$rr = preg_replace(',^<[:\w]+\s+,S', '', $rr);
 	$rr = preg_replace(',\s*/?'.'>$,S', ' ', $rr);
 
 	// ensuite parser le reste des attributs
