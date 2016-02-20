@@ -20,7 +20,7 @@ function genie_abonnements_verifier_echeances_dist($time){
 			'id_abonnement, date_fin',
 			'spip_abonnements',
 			array(
-				"date_fin = '0000-00-00 00:00:00' or date_fin > '$jourdhui'",
+				"(date_fin = '0000-00-00 00:00:00' or date_fin > '$jourdhui')",
 				"date_echeance < '$date_max_retard'",
 			)
 		)

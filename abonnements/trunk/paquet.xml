@@ -1,9 +1,9 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="3.0.10"
+	version="3.0.11"
 	schema="2.2.1"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/abonnements-64.png"
 	documentation="http://contrib.spip.net/4607"
