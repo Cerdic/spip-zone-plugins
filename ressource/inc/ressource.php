@@ -113,6 +113,18 @@ function ressource_meta($res) {
 	}
 	else
 	if (preg_match(',^https?://,', $src)) {
+
+		/* un document dropbox : remplacer www par dl */
+		$src = preg_replace(",^(https://)(www)(\.dropbox\.com/.*/.*/.*)$,",
+			'\1dl\3', $src);
+
+		/* un lien github */
+		if (preg_match(",^https://github\.com/[^/]+/[^/]+/blob/.*$,",
+		$src)) {
+			$src = parametre_url($src, 'raw', 'true');
+			
+		}
+
 		$meta['href'] = $src;
 
 		/* pipeline ! */
