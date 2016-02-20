@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Simple Calendrier v2 pour SPIP 3.1
+ * Plugin Simple Calendrier v2 pour SPIP 3
  * Licence GNU/GPL
  * 2010-2016
  *
@@ -47,23 +47,23 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 	// si le plugin Acces restreint est actif 
 	// ------------------------------------------
 	else {
-        include_spip('public/quete');
-        include_spip('inc/accesrestreint');
-        
-        $publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
-        $id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
-        
-        // Si l'évènement fait partie des contenus restreints directement, c'est niet
-        if (in_array($id, accesrestreint_liste_objets_exclus('evenements', $publique, $id_auteur))) {
-            return false;
-        }
-        
-        if (!$id_rubrique = $options['id_rubrique']){
-            $evenement = quete_parent_lang('spip_evenements', $id);
-            $id_rubrique = $evenement['id_rubrique'];
-        }
-        
-        return autoriser_rubrique_voir('voir', 'rubrique', $id_rubrique, $qui, $options);
+		include_spip('public/quete');
+		include_spip('inc/accesrestreint');
+		
+		$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
+		$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+		
+		// Si l'évènement fait partie des contenus restreints directement, c'est niet
+		if (in_array($id, accesrestreint_liste_objets_exclus('evenements', $publique, $id_auteur))) {
+			return false;
+		}
+		
+		if (!$id_rubrique = $options['id_rubrique']){
+			$evenement = quete_parent_lang('spip_evenements', $id);
+			$id_rubrique = $evenement['id_rubrique'];
+		}
+		
+		return autoriser_rubrique_voir('voir', 'rubrique', $id_rubrique, $qui, $options);
 	}
 }
 
@@ -125,33 +125,5 @@ function autoriser_evenement_modifier($faire, $type, $id, $qui, $opt) {
 	}
 	return $autorise;
 }
-
-
-// Afficher uniquement les groupes de mots cles specifies dans evenement_voir.
-// Sur le modele de ecrire/inc/autoriser.php (appele par ecrire/inc/editer_mots.php)
-function autoriser_evenement_editermots_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser_rubrique_editermots_dist($faire,'evenement',0,$qui,$opts);
-}
-
-
-// Le bloc "joindre un document" du core est protege par cette permission.
-// cf. inc/documents.php : afficher_documents_colonne
-// ET UTILISE UNIQUEMENT POUR LES REDACTEURS...
-function autoriser_evenement_joindredocument($faire, $type, $id, $qui, $opt) {
-    $conf_ok = in_array(table_objet_sql($type),explode(',',lire_config('documents_objets', '')));
-    $statut_ok = in_array($qui['statut'], simplecal_profils_autorises_a_creer());
-	return $conf_ok and $statut_ok;
-}
-
-// Pour la suppression du LOGO : 
-// Customisation de l'autorisation du core (autoriser_iconifier_dist)
-// (sinon, crash lie au fait qu'il recherche la rubrique de l'objet...)
-// autorisation renomme avec _evenement_ pour qu'il ne matche que sur ce type (autoriser_$type_$faire)
-function autoriser_evenement_iconifier($faire,$quoi,$id,$qui,$opts){
-	$droit = autoriser('modifier', 'evenement', $id);
-	return $droit;
-}
-
-
 
 ?>
