@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.0.9"
+	version="2.0.10"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -31,7 +31,8 @@
 	<pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="optimiser_base_disparus" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="propres_creer_chaine_url" inclure="simplecal_pipelines.php" />
-	
+	<pipeline nom="corbeille_table_infos" inclure="simplecal_pipelines.php" />
+    
 	<!-- Prendre en compte la table des evenements dans les recherches -->
 	<pipeline nom="rechercher_liste_des_champs" inclure="simplecal_pipelines.php" />
 	

@@ -297,4 +297,16 @@ function simplecal_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
+// pipeline : compatibilité plugin corbeille.
+function simplecal_corbeille_table_infos($param){
+    $param["evenements"] = array(
+        "statut" => "poubelle",
+        "tableliee"=> array("spip_auteurs_liens","spip_documents_liens","spip_mots_liens","spip_forum","spip_versions","spip_versions_fragments"),
+    );
+    return $param;
+}
+
+
+
+
 ?>

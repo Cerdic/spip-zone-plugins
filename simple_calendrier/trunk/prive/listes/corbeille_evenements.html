@@ -3,7 +3,7 @@
 [<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{simplecal:corbeille_un,simplecal:corbeille_tous})</h3>]
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='liste-items checkables'>
-<BOUCLE_evenements(EVENEMENTS){statut=poubelle}{pagination 5}{!par date}{recherche ?}>
+<BOUCLE_evenements(EVENEMENTS){statut}{pagination 5}{!par date}{recherche ?}>
 <li class='item'>
 <label for='evenement-#ID_EVENEMENT'><:corbeille:selectionner:></label>
 <input type='checkbox' name='elements[]' id="evenement-#ID_EVENEMENT" value='#ID_EVENEMENT'[ (#ID_EVENEMENT|in_any{#ENV{elements}}|oui)checked='checked']/>
