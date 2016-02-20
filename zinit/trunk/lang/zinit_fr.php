@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'check_body_skel' => 'Le fichier <code>body.html</code> utilisé :',
 	'check_structure_skel' => 'Le fichier <code>structure.html</code> utilisé :',
-	'check_presence_globale_z_blocs' => 'Est-ce que la globale "z_blocs" a été créé ?',
+	'check_presence_globale_z_blocs' => 'Est-ce que la globale "z_blocs" a été créée ?',
 	'check_liste_repertoires_skel' => 'Liste des répertoires créés par le plugin&nbsp;:',
 	'check_liste_repertoires_skel_a_creer' => 'Les répertoires n\'ont pas encore été créés.',
 	'copy_confirm_fichiers' => 'Désirez-vous copier les fichiers de \'squelettes_zcore\' vers \'squelettes\' ?',
