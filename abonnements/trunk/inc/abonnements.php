@@ -152,8 +152,8 @@ function abonnements_bank_date_fin($id_abonnement, $id_commande=0){
 	
 	// On teste si on trouve un renouvellement auto
 	if (
-		_DIR_PLUGIN_COMMANDES
-		and _DIR_PLUGIN_BANK
+		defined('_DIR_PLUGIN_COMMANDES')
+		and defined('_DIR_PLUGIN_BANK')
 		and (
 			// Soit on a déjà une commande sous la main
 			(
