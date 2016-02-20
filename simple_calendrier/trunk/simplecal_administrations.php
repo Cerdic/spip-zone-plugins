@@ -81,6 +81,10 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
 		array('simplecal_check_2_1_1'),
 	);
 	
+	$maj['2.1.2'] = array(
+		array('simplecal_check_2_1_2'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -111,6 +115,17 @@ function simplecal_check_2_1_1(){
 	$res = spip_query("SHOW FULL COLUMNS FROM spip_evenements LIKE 'lien_url'");
 	if (!$row = sql_fetch($res)){
 		sql_alter("TABLE spip_evenements ADD lien_url VARCHAR(255) NOT NULL AFTER lien_titre");
+	}
+}
+
+function simplecal_check_2_1_2(){
+	// La meta 'simplecal_rubrique' pouvait prendre les valeurs ['non', 'secteur', 'partout']
+	// En attendant https://core.spip.net/issues/2236, on restreint désormais à ['non', 'partout']
+	// Du coup, on remplace en base, la valeur 'secteur' par 'partout'.
+	
+	$row = sql_fetsel("m.nom, m.valeur", "spip_meta as m", "m.nom='simplecal_rubrique'");
+	if ($row and $row['valeur'] == "secteur") {
+		ecrire_meta('simplecal_rubrique', 'partout');
 	}
 }
 

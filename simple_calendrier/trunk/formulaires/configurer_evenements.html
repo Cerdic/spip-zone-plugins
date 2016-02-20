@@ -36,10 +36,13 @@
 						<input class='radio' type="radio" name="simplecal_rubrique" value='partout'[ (#ENV{simplecal_rubrique}|=={partout}|oui)checked="checked"] id="simplecal_rubrique_partout" />
 						<label for="simplecal_rubrique_partout"[ (#ENV{simplecal_rubrique}|=={partout}|oui)class="actif"]><:simplecal:config_rubrique_partout:></label>
 					</div>
+					[(#REM) A revoir plus tard. cf. https://core.spip.net/issues/2236
+					<!--
 					<div class='choix'>
 						<input class='radio' type="radio" name="simplecal_rubrique" value='secteur'[ (#ENV{simplecal_rubrique}|=={secteur}|oui)checked="checked"] id="simplecal_rubrique_secteur" />
 						<label for="simplecal_rubrique_secteur"[ (#ENV{simplecal_rubrique}|=={secteur}|oui)class="actif"]><:simplecal:config_rubrique_secteur:></label>
 					</div>
+					-->]
 					<div class='choix'>
 						<input class='radio' type="radio" name="simplecal_rubrique" value='non'[ (#ENV{simplecal_rubrique}|=={non}|oui)checked="checked"] id="simplecal_rubrique_non" />
 						<label for="simplecal_rubrique_non"[ (#ENV{simplecal_rubrique}|=={non}|oui)class="actif"]><:simplecal:config_rubrique_non:></label>
