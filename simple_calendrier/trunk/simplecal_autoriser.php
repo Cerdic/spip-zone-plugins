@@ -47,14 +47,23 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 	// si le plugin Acces restreint est actif 
 	// ------------------------------------------
 	else {
-		static $evenements_statut;
-		$publique = isset($opt['publique'])?$opt['publique']:!test_espace_prive();
-		$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
-		if (!isset($evenements_statut[$id_auteur][$publique][$id])){
-			$id_rubrique = sql_getfetsel('id_rubrique','spip_evenements','id_evenement='.intval($id));
-			$evenements_statut[$id_auteur][$publique][$id] = autoriser_rubrique_voir('voir', 'rubrique', $id_rubrique, $qui, $opt);
-		}
-		return $evenements_statut[$id_auteur][$publique][$id];
+        include_spip('public/quete');
+        include_spip('inc/accesrestreint');
+        
+        $publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
+        $id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+        
+        // Si l'évènement fait partie des contenus restreints directement, c'est niet
+        if (in_array($id, accesrestreint_liste_objets_exclus('evenements', $publique, $id_auteur))) {
+            return false;
+        }
+        
+        if (!$id_rubrique = $options['id_rubrique']){
+            $evenement = quete_parent_lang('spip_evenements', $id);
+            $id_rubrique = $evenement['id_rubrique'];
+        }
+        
+        return autoriser_rubrique_voir('voir', 'rubrique', $id_rubrique, $qui, $options);
 	}
 }
 

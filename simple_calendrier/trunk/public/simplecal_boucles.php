@@ -35,13 +35,15 @@ function simplecal_pre_boucle(&$boucle){
 		if (defined('_DIR_PLUGIN_ACCESRESTREINT')){
 			switch ($boucle->type_requete){
 				case 'evenements':
-					$t = $boucle->id_table . '.id_rubrique';
-					$boucle->select = array_merge($boucle->select, array($t)); // pour postgres
-					
-					// ajoute un "AND ((evenements.id_rubrique NOT IN (id1, id2, id3, etc.)))"
-					$boucle->where[] = accesrestreint_rubriques_accessibles_where($t);
-					$securise = true;
-					break;
+					$primary = $boucle->id_table.'.'.$boucle->primary;
+                    $t = $boucle->id_table . '.id_rubrique';
+                    $boucle->select = array_merge($boucle->select, array($t, $primary)); // pour postgres
+                    // Test sur l'objet lui-même
+                    $boucle->where[] = accesrestreint_objets_accessibles_where($boucle->id_table, $primary);
+                    // Test sur la hiérarchie
+                    $boucle->where[] = accesrestreint_rubriques_accessibles_where($t);
+                    $securise = true;
+                    break;
 			}
 		}
 		if ($securise){
