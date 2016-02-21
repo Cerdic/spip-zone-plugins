@@ -24,9 +24,8 @@
 	<pipeline nom="header_prive" action="inserer_javascript" inclure="grappes_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="grappes_pipelines.php" />
 	<pipeline nom="grappes_objets_lies" inclure="grappes_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="grappes_pipelines.php" action="jqueryui_forcer" />
 
-        <pipeline nom="jqueryui_plugins" inclure="grappes_pipelines.php" action="jqueryui_forcer" />
-        
 	<necessite nom="SelecteurGenerique" compatibilite="[0.8.3;[" />
 
 	<menu nom="grappes" titre="grappes:titre_page_grappes" parent="menu_edition" icone="images/grappe-16.png" />
