@@ -1,10 +1,10 @@
 <paquet
 	prefix="tablematieres"
 	categorie="edition"
-	version="2.3.0"
+	version="2.3.1"
 	etat="stable"
 	logo="images/table_matieres-64.png"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	documentation="http://contrib.spip.net/?article2365"
 >	
 
