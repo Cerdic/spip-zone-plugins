@@ -4,7 +4,8 @@
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/cookiebar?lang_cible=de" total="38" traduits="4" relire="0" modifs="0" nouveaux="34" pourcent="10.53">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/cookiebar?lang_cible=en" total="38" traduits="19" relire="0" modifs="0" nouveaux="19" pourcent="50.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/cookiebar?lang_cible=en" total="38" traduits="38" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/cookiebar?lang_cible=es" total="38" traduits="20" relire="0" modifs="0" nouveaux="18" pourcent="52.63">
