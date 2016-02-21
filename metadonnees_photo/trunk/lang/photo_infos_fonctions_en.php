@@ -1,35 +1,60 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/photo_infos_fonctions?lang_cible=en
+// ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'titre' => 'Title',
-'legende' => 'Legend',
-'copyright' => 'Copyright',
-'credits' => 'Credits',
-'motscles' => 'Keywords',
-'sensibilite' => 'Iso equiv.',
-'vitesse' => 'Speed',
-'ouverture' => 'Aperture',
-'focale' => 'Focal length',
-'focale35mm' => 'Focal eq.&nbsp;35mm',
-'flash' => 'Flash',
-'distance' => 'Distance',
-'ouverturemax' => 'Max. aperture',
-'objectif' => 'Lens',
-'intitule' => 'Headline',
-'categorie' => 'Category',
-'datecreation' => 'Creation date',
-'ville' => 'City',
-'provinceetat' => 'Province, State',
-'pays' => 'Country',
-'auteur' => 'Author',
-'latitude' => 'Latitude',
-'longitude' => 'Longitude'
 
+	// A
+	'auteur' => 'Author',
+
+	// C
+	'categorie' => 'Category',
+	'copyright' => 'Copyright',
+	'credits' => 'Credits',
+
+	// D
+	'datecreation' => 'Creation date',
+	'distance' => 'Distance',
+
+	// F
+	'flash' => 'Flash',
+	'focale' => 'Focal length',
+	'focale35mm' => 'Focal eq. 35mm',
+
+	// I
+	'intitule' => 'Headline',
+
+	// L
+	'latitude' => 'Latitude',
+	'legende' => 'Legend',
+	'longitude' => 'Longitude',
+
+	// M
+	'motscles' => 'Keywords',
+
+	// O
+	'objectif' => 'Lens',
+	'ouverture' => 'Aperture',
+	'ouverturemax' => 'Max. aperture',
+
+	// P
+	'pays' => 'Country',
+	'provinceetat' => 'Province, State',
+
+	// S
+	'sensibilite' => 'Iso equiv.',
+
+	// T
+	'titre' => 'Title',
+
+	// V
+	'ville' => 'City',
+	'vitesse' => 'Speed'
 );
-
 
 ?>

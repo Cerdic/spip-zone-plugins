@@ -1,35 +1,58 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/metadonnees_photo/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'titre' => 'Titre',
-'legende' => 'Légende',
-'copyright' => 'Copyright',
-'credits' => 'Crédits',
-'motscles' => 'Mots-clés',
-'sensibilite' => 'Sensibilité',
-'vitesse' => 'Vitesse',
-'ouverture' => 'Ouverture',
-'focale' => 'Focale',
-'focale35mm' => 'Focale éq.&nbsp;35mm',
-'flash' => 'Flash',
-'distance' => 'Distance',
-'ouverturemax' => 'Ouverture max.',
-'objectif' => 'Objectif',
-'intitule' => 'Intitulé',
-'categorie' => 'Catégorie',
-'datecreation' => 'Date de création',
-'ville' => 'Ville',
-'provinceetat' => 'Province, État',
-'pays' => 'Pays',
-'auteur' => 'Auteur',
-'latitude' => 'Latitude',
-'longitude' => 'Longitude'
 
+	// A
+	'auteur' => 'Auteur',
+
+	// C
+	'categorie' => 'Catégorie',
+	'copyright' => 'Copyright',
+	'credits' => 'Crédits',
+
+	// D
+	'datecreation' => 'Date de création',
+	'distance' => 'Distance',
+
+	// F
+	'flash' => 'Flash',
+	'focale' => 'Focale',
+	'focale35mm' => 'Focale éq. 35mm',
+
+	// I
+	'intitule' => 'Intitulé',
+
+	// L
+	'latitude' => 'Latitude',
+	'legende' => 'Légende',
+	'longitude' => 'Longitude',
+
+	// M
+	'motscles' => 'Mots-clés',
+
+	// O
+	'objectif' => 'Objectif',
+	'ouverture' => 'Ouverture',
+	'ouverturemax' => 'Ouverture max.',
+
+	// P
+	'pays' => 'Pays',
+	'provinceetat' => 'Province, État',
+
+	// S
+	'sensibilite' => 'Sensibilité',
+
+	// T
+	'titre' => 'Titre',
+
+	// V
+	'ville' => 'Ville',
+	'vitesse' => 'Vitesse'
 );
-
 
 ?>
