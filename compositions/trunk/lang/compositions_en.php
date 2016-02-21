@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_compositions' => 'Add compositions',
+
 	// C
 	'composition' => 'Composition',
 	'composition_defaut' => 'default composition',
@@ -24,7 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heritages' => 'This composition defines default compositions for the following objects:',
 
 	// I
+	'info_1_composition' => '1 composition',
 	'info_aucune_composition' => 'No composition',
+	'info_nb_compositions' => '@nb@ compositions',
 
 	// L
 	'label_activer_composition_objets' => 'Use compositions on objects',
@@ -47,8 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_toutes_verrouilles' => 'All compositions are locked.',
 	'label_verrouiller_toutes_compositions' => 'Lock all compositions (only the webmasters can change them).',
 
+	// M
+	'message_info_ajouter_compositions' => 'To create your own compositions, see the documentation : @url_doc@.',
+
 	// U
-	'une_utilisation' => '1 use'
+	'une_utilisation' => '1 use',
+
+	// V
+	'voir_image_exemple' => 'See an image sample'
 );
 
 ?>
