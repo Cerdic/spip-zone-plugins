@@ -1,5 +1,5 @@
 <traduction module="pp_codes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_codes/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/pp_codes?lang_cible=en" total="19" traduits="15" relire="1" modifs="0" nouveaux="3" pourcent="78.95">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/pp_codes?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />

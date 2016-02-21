@@ -15,8 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_outils_actifs' => 'Active tools',
 
 	// O
+	'outil_inserer_cadre_biblatex' => 'Insert a preformatted BibLaTex code (frame)',
+	'outil_inserer_cadre_bibtex' => 'Insert a preformatted BibTeX code (frame)',
 	'outil_inserer_cadre_css' => 'Insert a CSS preformatted code (frame)',
 	'outil_inserer_cadre_html' => 'Insert a preformatted HTML code (frame)',
+	'outil_inserer_cadre_latex' => 'Insert a preformatted LaTeX code (frame)',
 	'outil_inserer_cadre_php' => 'Insert tags for a PHP class frame segment (frame)',
 	'outil_inserer_cadre_spip' => 'Insert tags for a SPIP class frame segment (frame)',
 	'outil_inserer_cadre_xml' => 'Insert a preformatted XML code (frame)',
@@ -31,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_activer_extension_sur' => 'Activate on which toolbars?',
-	'titre_configurer_pp_codes' => 'Configure the Porte Plume extension for special display codes' # RELIRE
+	'titre_configurer_pp_codes' => 'Configure the computer codes extension for Porte Plume'
 );
 
 ?>
