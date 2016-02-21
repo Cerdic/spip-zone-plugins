@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuaire_ajouter' => 'Add a directory',
 	'annuaire_aucun' => 'No directory',
 	'annuaire_champ_descriptif_label' => 'Description',
+	'annuaire_champ_identifiant_explication' => 'A unique computer identifier, to help filter your content, for example with {directory = associations} for the "associations" identifier.',
 	'annuaire_champ_identifiant_label' => 'Id',
 	'annuaire_champ_titre_label' => 'Title',
 	'annuaire_creer' => 'Create a new directory',
@@ -57,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'By activating this option, when a contact (or an organisation) is deleted, the author associated with this contact, if one exists, sees their status move to the rubbish bin. Inversely, in the same way, if an author is put in the rubbish bin, the contact associated is deleted. This option can be useful on certain sites in order to avoid contacts left without an author (if the latter has been deleted) but be vigilent: deletion is definitive and authors are put in the rubbish ben even if they have written articles...',
 	'cfg_utiliser_annuaires_explication' => 'Activate the possibility to put your contacts in several different directories.',
 	'cfg_utiliser_annuaires_label' => 'Use several directories',
+	'cfg_utiliser_organisations_arborescentes_explication' => 'It is possible to define an organization is child of another. When this option is enabled, it adds a field in the organization edition to clarify this relationship .',
+	'cfg_utiliser_organisations_arborescentes_label' => 'Use a tree organisations',
 	'changer' => 'Change',
 	'chercher_contact' => 'Search',
 	'chercher_organisation' => 'Search',
@@ -115,6 +118,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explications_page_organisations' => 'Page under development. <br /><br /> Actions considered :
 <ul>
 <li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
+	'exporter_contacts' => 'Download those contacts as spreadsheet',
+	'exporter_organisations' => 'Download those organisations as spreadsheet ',
 
 	// I
 	'info_contacts_organisation' => 'Organisation’s contacts',

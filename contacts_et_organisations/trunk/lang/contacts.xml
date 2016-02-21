@@ -1,5 +1,5 @@
 <traduction module="contacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="184" traduits="179" relire="0" modifs="0" nouveaux="5" pourcent="97.28">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="184" traduits="184" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
