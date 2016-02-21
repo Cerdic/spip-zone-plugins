@@ -17,5 +17,5 @@
 
 	<pipeline nom="recuperer_fond" inclure="cmots_pipelines.php" />
 
-	<necessite nom="mots" />
+	<necessite nom="mots" compatibilite="[2.4.6;]" />
 </paquet>
