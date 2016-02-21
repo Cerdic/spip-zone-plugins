@@ -23,8 +23,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commande_client' => 'Customer',
+	'commande_creer' => 'Create an order',
 	'commande_date' => 'Order date',
 	'commande_date_paiement' => 'Payment date',
+	'commande_echeances_paiements_infini' => 'Following payments',
+	'commande_echeances_paiements_previsions' => 'Projected payments',
+	'commande_echeances_paiements_tous' => 'All payments',
+	'commande_echeances_type' => 'Means of payment',
+	'commande_echeances_type_annee' => 'Annual payment',
+	'commande_echeances_type_mois' => 'Monthly payment',
+	'commande_echeances_type_vide' => 'Single payment',
 	'commande_editer' => 'Edit the order',
 	'commande_modifier' => 'Modify the order:',
 	'commande_montant' => 'Amount',
@@ -38,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_notifications_commandes' => 'Set up notifications',
 	'configurer_titre' => 'Configure the "Commandes" plugin',
 	'confirmer_supprimer_commande' => 'Can you confirm the deletion of this order?',
+	'confirmer_supprimer_detail' => 'Do you confirm the suppression of this order detail?',
 	'contact_label' => 'Contact:',
 	'contenu' => 'Content',
 
@@ -50,23 +59,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_paiement_label' => 'Date of payment:',
 	'date_paiement_label_court' => 'Payment',
 	'designation' => 'Designation',
-	'detail_champ_prix_unitaire_ht_label' => 'Price', # MODIF
+	'detail_ajouter' => 'Add a command detail',
+	'detail_champ_descriptif_explication' => 'Can be left blank when specifying an existing SPIP content. In this case the title of the content will be used automatically.',
+	'detail_champ_descriptif_label' => 'Descriptive',
+	'detail_champ_id_objet_label' => 'SPIP content identifier',
+	'detail_champ_objet_label' => 'SPIP content type',
+	'detail_champ_prix_unitaire_ht_label' => 'Unit price exc. VAT',
 	'detail_champ_quantite_label' => 'Quantity',
 	'detail_champ_taxe_label' => 'Tax',
+	'detail_creer' => 'Create an order detail',
+	'detail_modifier' => 'Modifier ce détail de commande',
+	'detail_titre' => 'Order detail',
 	'details_commande' => 'Details of the order:',
+	'details_titre' => 'Order details',
 
 	// E
+	'erreur_reference_existante' => 'An order with the same reference already exists .',
+	'erreur_reference_inexistante' => 'There is no order with this reference.',
 	'etat' => 'Status',
 	'explication_accueil_encours' => 'Indicate the active orders on the homepage ?',
 	'explication_choix_statuts_actifs' => 'Status corresponding to active orders',
 	'explication_statuts_actifs' => 'According to their status, some orders may require your attention. They are « active » orders, which need an action on your part. You can display them on the homepage, in the list of the items awaiting evaluation.',
-	'explications_notifications_statuts' => 'Notification in case of status change', # MODIF
-	'explications_notifications_statuts_aucune' => 'No notification in case of status change', # MODIF
+	'explications_notifications_statuts' => 'Notification in case of status change(s) :',
+	'explications_notifications_statuts_aucune' => 'Notifications are disabled',
 
 	// F
 	'facture_date' => 'Date: <span>@date@</span>',
-	'facture_num' => 'Invoice n° <span>@num@</span>', # MODIF
+	'facture_num' => 'Invoice n°<span>@num@</span>',
 	'facture_titre' => 'Invoice',
+	'facture_voir' => 'See invoice',
 
 	// I
 	'info_1_commande' => '1 order',
@@ -79,8 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_commande_statut_paye' => '1 paid order',
 	'info_1_commande_statut_retour' => '1 returned order',
 	'info_1_commande_statut_retour_partiel' => '1 order partially returned',
+	'info_1_detail' => '1 order detail',
 	'info_aucun_client' => 'No author is associated to the order',
 	'info_aucun_commande' => 'No orders',
+	'info_aucun_detail' => 'No order detail',
 	'info_commande_vide' => 'The order is empty',
 	'info_commandes' => 'Orders',
 	'info_date_envoi_vide' => 'order not sent',
@@ -96,25 +119,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_commandes_statut_retour' => '@nb@ returned orders',
 	'info_nb_commandes_statut_retour_partiel' => '@nb@ partially returned orders',
 	'info_nb_commandse_statut_encours' => '@nb@ ongoing orders',
+	'info_nb_details' => '@nb@ order details',
 	'info_numero' => 'ORDER NUMBER:',
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_sans_descriptif' => 'Without description',
 	'info_toutes_commandes' => 'All orders',
 
 	// L
+	'label_actions' => 'Actions',
 	'label_commande_dates' => 'Dates',
+	'label_dont_taxe' => 'taxe included',
 	'label_filtre_clients' => 'Clients',
 	'label_filtre_dates' => 'Dates',
 	'label_filtre_etats' => 'States',
+	'label_filtre_paiement' => 'Payment means',
 	'label_filtre_tous_clients' => 'All clients',
+	'label_filtre_tous_mode_paiements' => 'All means',
 	'label_filtre_tous_statuts' => 'All states',
 	'label_filtre_toutes_dates' => 'All dates',
 	'label_infos' => 'Infos',
-	'label_objet' => 'Object', # MODIF
-	'label_objets' => 'Objects', # MODIF
+	'label_montant_ttc' => 'VAT price',
+	'label_objet' => 'Related content',
+	'label_objets' => 'Related contents',
 	'label_passee_le' => 'Ordered on',
 	'label_payee_le' => 'paid on the',
-	'label_prix_unitaire' => 'Price', # MODIF
+	'label_prix' => 'Price',
+	'label_prix_unitaire' => 'Unit price exc.VAT',
 	'label_quantite' => 'Quantity',
 	'label_recherche' => 'Search',
 	'label_statuts_actifs' => 'Status',
@@ -122,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'merci_de_votre_commande' => 'We have registered your order and we appreciate your trust.',
+	'merci_de_votre_commande_paiement' => 'We have registered your order  <b>@reference@</b>, and we will treat it promptly .',
 	'modifier_commande_statut' => 'This order is:',
 	'montant' => 'Amount',
 
@@ -141,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choose the sender notifications for the seller and buyer',
 	'notifications_expediteur_label' => 'Sender',
 	'notifications_expediteur_webmaster_label' => 'Select a webmaster:',
-	'notifications_explication' => 'Notifications are used to send emails after changes in order status: Pending, ongoing, sent, partially paid, paid, returned, partially return', # MODIF
+	'notifications_explication' => 'Notifications allow to send emails after changes in order status : Pending, ongoing, sent, partially paid, paid, returned, partially return. This feature requires <a href="http://plugins.spip.net/notifavancees.html">Advanced notification plugin</a>.',
 	'notifications_parametres' => 'Parameters of notifications',
 	'notifications_quand_explication' => 'Which are changes of status that will send a notification?',
 	'notifications_quand_label' => 'Outbreak',
@@ -176,12 +207,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_label' => 'Status:',
 	'statut_partiel' => 'Partially paid',
 	'statut_paye' => 'Paid',
+	'statut_poubelle' => 'Trash can',
 	'statut_retour' => 'Returned',
 	'statut_retour_partiel' => 'Partially return',
 	'supprimer' => 'Delete',
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
+	'texte_changer_statut_commande_detail' => 'This order detail is :',
 	'titre_adresse_client' => 'Client’s address',
 	'titre_adresse_commande' => 'Address associated with the order',
 	'titre_adresse_contact' => 'Contact’s address',
