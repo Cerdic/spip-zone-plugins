@@ -1,30 +1,40 @@
 <?php
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/legendes/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
 	'ajouter_legende' => 'Ajouter une note',
-	'autoriser_creerdans' => 'Cr&eacute;er des l&eacute;gendes',
-	'autoriser_modifier' => 'Modifier des l&eacute;gendes',
-	'autoriser_supprimer' => 'Supprimer des l&eacute;gendes',
+	'autoriser_creerdans' => 'Créer des légendes',
+	'autoriser_modifier' => 'Modifier des légendes',
+	'autoriser_supprimer' => 'Supprimer des légendes',
 
+	// B
 	'bouton_supprimer' => 'Supprimer',
-	
-	'cfg_descr_legendes' => 'Le plugin &laquo;L&eacute;gendes&raquo; permet d\'ajouter des annotations sur des images. Ce formulaire permet de configurer son utilisation.',
+
+	// C
+	'cfg_descr_legendes' => 'Le plugin « Légendes » permet d’ajouter des annotations sur des images. Ce formulaire permet de configurer son utilisation.',
 	'cfg_legend_statuts' => 'Statuts',
-	'cfg_titre_legendes' => 'L&eacute;gendes',
-	
-	'editer_legende' => '&Eacute;diter une note',
-	'explications_statuts_general' => 'Chaque s&eacute;lecteur ci-dessous d&eacute;fini le statut minimal d\'un utilisateur pour r&eacute;aliser une action particuli&egrave;re.',
-	'legende_enregistrer_ok' => 'Note enregistr&eacute;e',
-	'legende_supprimer_ok' => 'Note supprim&eacute;e',
-	
-	'msg_yaunenote' => 'Une note est associ&eacute;e à l\'image. Survolez l\'image pour afficher la note.',
-	'msg_yadesnotes' => '@nb@ notes sont associ&eacute;es à l\'image. Survolez l\'image pour afficher les notes.',
-	
+	'cfg_titre_legendes' => 'Légendes',
+
+	// E
+	'editer_legende' => 'Éditer une note',
+	'explications_statuts_general' => 'Chaque sélecteur ci-dessous défini le statut minimal d’un utilisateur pour réaliser une action particulière.',
+
+	// L
+	'legende_enregistrer_ok' => 'Note enregistrée',
+	'legende_supprimer_ok' => 'Note supprimée',
+
+	// M
+	'msg_yadesnotes' => '@nb@ notes sont associées à l’image. Survolez l’image pour afficher les notes.',
+	'msg_yaunenote' => 'Une note est associée à l’image. Survolez l’image pour afficher la note.',
+
+	// T
 	'texte_legende' => 'Texte de la note'
-	
 );
 
 ?>
