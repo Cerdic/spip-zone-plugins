@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_code_postal' => 'This post code is invalid.',
+	'erreur_code_postal' => 'This postcode is invalid.',
 	'erreur_comparaison_egal' => 'The value must be equal to the field "@nom_champ@"',
 	'erreur_comparaison_egal_type' => 'The value must be equal and the same type as the field "@nom_champ@"',
 	'erreur_comparaison_grand' => 'The value must be greater than the field "@nom_champ@"',
@@ -60,12 +60,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'option_code_postal_pays_explication' => 'Two-letter country code : FR, DZ, DE, etc.',
 	'option_code_postal_pays_label' => 'Country',
-	'option_comparaison_champ_champ_explication' => 'Field name («name» attribute)', # RELIRE
+	'option_comparaison_champ_champ_explication' => 'Field identifier (« name » attribute)',
 	'option_comparaison_champ_champ_label' => 'Field',
 	'option_comparaison_champ_comparaison_explication' => 'Type of comparison',
 	'option_comparaison_champ_comparaison_label' => 'Comparison',
-	'option_comparaison_champ_egal' => '== Equality', # MODIF
-	'option_comparaison_champ_egal_type' => '=== Identical', # MODIF
+	'option_comparaison_champ_egal' => '== Equal',
+	'option_comparaison_champ_egal_type' => '=== Identical (same kind)',
 	'option_comparaison_champ_grand' => '> Greater than',
 	'option_comparaison_champ_grand_egal' => '>= Greater than or equal to ',
 	'option_comparaison_champ_nom_champ_explication' => 'Field name for human beings',
@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_code_postal' => 'Postal code',
 	'type_code_postal_description' => 'Check that the value is a valid postal code.',
 	'type_comparaison_champ' => 'Comparison',
-	'type_comparaison_champ_description' => 'Compare the value with another field from the _request().', # RELIRE
+	'type_comparaison_champ_description' => 'Compare the value with another field from _request().',
 	'type_couleur' => 'Colour',
 	'type_couleur_description' => 'Check if the value is a color code.',
 	'type_date' => 'Date',
@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_entier' => 'Integer',
 	'type_entier_description' => 'Check that the value is an integer, with the option of being restricted between two range values.',
 	'type_id_document' => 'Document number',
-	'type_id_document_description' => 'Check that the value is an existing document number.', # RELIRE
+	'type_id_document_description' => 'Check that the value matches an existing document number.',
 	'type_isbn' => 'ISBN',
 	'type_isbn_description' => 'Check that the value is a 10 or 13 digits long ISBN',
 	'type_regex' => 'Regular expression',

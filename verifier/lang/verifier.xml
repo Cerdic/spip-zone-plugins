@@ -4,7 +4,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=de" total="117" traduits="66" relire="0" modifs="4" nouveaux="47" pourcent="56.41">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="117" traduits="112" relire="3" modifs="2" nouveaux="0" pourcent="95.73">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="117" traduits="117" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
