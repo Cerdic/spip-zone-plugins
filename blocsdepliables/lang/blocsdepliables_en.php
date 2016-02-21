@@ -10,6 +10,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
+	'bloc_deplier' => 'Unfold',
+	'bloc_replier' => 'Fold back',
 	'blocsdepliables_titre' => 'Expanding containers blocks',
 
 	// C
@@ -31,6 +33,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_balise_titre' => 'Tag for the blocks title',
 	'label_cookie_1' => 'Remember the blocks state',
 	'label_unique_1' => 'A single block opened on the page',
+
+	// P
+	'pp_blocs_bloc' => 'Insert a folded block',
+	'pp_blocs_visible' => 'Insert an unfolded block',
+	'pp_un_titre' => 'A title',
+	'pp_votre_texte' => 'Insert your text here',
 
 	// T
 	'titre_page_configurer_blocsdepliables' => 'Expanding containers blocks'
