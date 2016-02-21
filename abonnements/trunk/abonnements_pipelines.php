@@ -42,7 +42,8 @@ function abonnements_post_edition($flux){
 	// Si on modifie un abonnement
 	if ($flux['args']['table'] == 'spip_abonnements') {
 		include_spip('inc/abonnements');
-		$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '.intval($flux['args']['id_objet']));
+		$id_abonnement = intval($flux['args']['id_objet']);
+		$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '.$id_abonnement);
 		$offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre = '.intval($abonnement['id_abonnements_offre']));
 		$jourdhui = date('Y-m-d H:i:s');
 		
@@ -65,6 +66,19 @@ function abonnements_post_edition($flux){
 					job_queue_remove($lien['id_job']);
 				}
 			}
+		}
+		
+		// Si on a un id_commande dans l'environnement, on lie la commande à l'abonnement
+		if (
+			$id_commande = intval(_request('id_commande'))
+			and defined('_DIR_PLUGIN_COMMANDES')
+		) {
+			// On lie cet abonnement avec la commande qui l'a généré
+			include_spip('action/editer_liens');
+			objet_associer(
+				array('commande' => $id_commande),
+				array('abonnement' => $id_abonnement)
+			);
 		}
 		
 		$modifs = array();
@@ -143,21 +157,8 @@ function abonnements_post_edition($flux){
 				
 				// On crée ou renouvelle
 				include_spip('inc/abonnements');
+				set_request('id_commande', $id_commande); // on garde l'id_commande dans l'environnement
 				$retour = abonnements_creer_ou_renouveler($id_auteur, $id_abonnements_offre, $forcer_creation);
-				
-				// Si on a un retour correct avec un abonnement
-				if (
-					is_array($retour)
-					and $id_abonnement = intval(reset($retour))
-					and $id_abonnement > 0
-				) {
-					// On lie cet abonnement avec la commande qui l'a généré
-					include_spip('action/editer_liens');
-					objet_associer(
-						array('commande' => $id_commande),
-						array('abonnement' => $id_abonnement)
-					);
-				}
 			}
 		}
 	}

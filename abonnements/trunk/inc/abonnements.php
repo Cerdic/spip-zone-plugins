@@ -122,7 +122,7 @@ function abonnements_initialisation_dates($abonnement, $offre){
 	$modifs['date_fin'] = $modifs['date_echeance'];
 	
 	// Mais si c'est un renouvellement auto avec Commandes et Bank
-	if ($date_fin = abonnements_bank_date_fin($abonnement['id_abonnnement'])) {
+	if ($date_fin = abonnements_bank_date_fin($abonnement['id_abonnement'])) {
 		$modifs['date_fin'] = $date_fin;
 	}
 	
