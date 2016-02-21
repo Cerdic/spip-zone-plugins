@@ -23,7 +23,6 @@
 	</form>
 	</div>]
 	<script type="text/javascript">
-	<!--
 		var lier_objets_#ENV{identifiant} = function(event,ui){
 			if (typeof(ui) != 'undefined' && (typeof(ui.item.value) == 'string')) {
 				$('[#(#ENV{identifiant}) ].pid_objet').val(ui.item.id);
@@ -40,11 +39,9 @@
 		
 		$("#selecteur_#ENV{identifiant}").on("submit", function(){
 			$('.formulaire_lier_objets').ajaxReload({
-				args:{
-				},
+				args:{},
 				history:false
-			});    
+			});
 		});
-	-->
 	</script>
 </div>
