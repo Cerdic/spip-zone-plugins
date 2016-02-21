@@ -6,12 +6,13 @@ function spipcatchatemoticonpublic(emoticon)
 
 function session() {
     $(location).attr('href', 'spip.php')
-    
 }
+
 function spipcatchatrestartmenu(e, t) {
     $('#selectUser').val(e);
     $('#auto').val(t)
 }
+
 function spipcatchatadduser(e, t) {
     (id = $('#selectUser').val()) ? $.ajax({
         type: 'POST',
@@ -28,6 +29,7 @@ function spipcatchatadduser(e, t) {
     }, 4000), $('#auto').val(''), $('#selectUser').val(''));
     spipcatchatrest(t)
 }
+
 function spipcatchatrest(e) {
     $.getJSON(e + 'phpscripts/get-users-liste.php', function (e) {
         if (0 != e) {
@@ -37,18 +39,20 @@ function spipcatchatrest(e) {
         } else $('#BoxUsers').css('display', 'none')
     })
 }
-function spipcatchatShowChat(e, t, n, r, i, s, o, u, pack) {
+
+function spipcatchatShowChat(e, t, n, r, i, s, o, u, pack,q,cache) {
     $.ajax({
         url: e + 'phpscripts/get-autorisation.php',
         type: 'POST',
-        data: 'id_auteur=' + t + '&id_salon=' + n + '&nom=' + encodeURIComponent(s) + '&url=' + encodeURIComponent(e) + '&char=' + encodeURIComponent(o),
+        data: 'id_auteur='+t+'&id_salon='+n+'&nom='+encodeURIComponent(s)+'&url='+encodeURIComponent(e)+'&char='+encodeURIComponent(o)+'&historique='+encodeURIComponent(q)+'&catcache='+encodeURIComponent(cache),
         success: function (s) {
-            '1' == s || '4' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#spipcatchatselectsalon').css('display', 'block'))  : '2' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#pepoletrash').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : '3' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#pepoletrash').css('display', 'block'), $('#pepoleadd').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : ($('#spipcatchatsalonprive').css('display', 'block'), setTimeout(function () {
+            '1' == s || '4' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack,q), $('#spipcatchatselectsalon').css('display', 'block'))  : '2' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack,q), $('#pepoletrash').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : '3' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack,q), $('#pepoletrash').css('display', 'block'), $('#pepoleadd').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : ($('#spipcatchatsalonprive').css('display', 'block'), setTimeout(function () {
                 window.location = r
             }, 7000))
         }
     })
 }
+
 function spipcatchatsalon(e, t, n, r) {
     $.getJSON(e + 'phpscripts/get-selected-salon.php', {
         lang: t,
@@ -58,6 +62,7 @@ function spipcatchatsalon(e, t, n, r) {
         $('#spipcatchatselectedsalonchat').html(html_entity_decode(e))
     })
 }
+
 function spipcatchatShowSalon(e, t, n, r) {
     i && clearInterval(i);
     spipcatchatsalon(e, t, n, r);
@@ -65,15 +70,19 @@ function spipcatchatShowSalon(e, t, n, r) {
         spipcatchatsalon(e, t, n, r)
     }, 100000)
 }
+
 function logoSpipHidden(e) {
     $('.' + e).css('display', 'none')
 }
+
 function logoSpipShow(e) {
     $('.' + e).css('display', 'block')
 }
+
 function quit(e) {
     $(location).attr('href', e)
 }
+
 function spipcatchattrash(e, t, n, r) {
     $('#container').addClass('spipcatchatpause');
     $.ajax({
@@ -86,9 +95,11 @@ function spipcatchattrash(e, t, n, r) {
         }
     })
 }
+
 function unlocked(e, t) {
     'false' != document.getElementById('public').value ? ($('#public').attr('src', e), $('#public').val('false'))  : ($('#public').attr('src', t), $('#public').val('true'))
 }
+
 function spipcatchataddsalon(e, t, n) {
     var r = encodeURIComponent(htmlentities($('#newSalon').val())),
     s = encodeURIComponent($('#public').val()),
@@ -112,24 +123,29 @@ function spipcatchataddsalon(e, t, n) {
         }
     }))  : 0 == a && alert(n[1])
 }
+
 function spipcatchathelp(e) {
     window.open(e + '/doc/Guide de l utilisateur.pdf', '_blank')
 }
-function getMessages(e, t, n, r, i, pack) { 
+
+function getMessages(e, t, n, r, i, pack,q) { 
     $.getJSON(n + 'phpscripts/get-message.php', {
         auteur: t,
         ref: e / 1000,
         aucunmessage: r[0],
-        'char': i
+        'char': i,
+        'h':q,
     }, function (e) {
-        var t = $('#text');
+        var t = $('#text'); 
         $('#spipcatchatannonce').html('<span class="spipcatchatinfo"><b>' + e.annonce + '</b></span>');
         $('#text').html(spipcatchattypo(e.messages, n, pack.trim()));
         1 != scrollBar && (t[0].scrollTop = t[0].scrollHeight, scrollBar = !0);
         void 0 !== t && t[0].childNodes.length > nombreMessage && (t[0].scrollTop = t[0].scrollHeight, $('#soundGet').trigger('play'));
         void 0 !== t && (nombreMessage = t[0].childNodes.length)
+        if(e.cache=="oui"){$('#spipcatchatpointpublic').css('display','block'); }else{$('#spipcatchatpointpublic').css('display','none');}
     })
 }
+
 function spipcatchatsetmessage(e, t, n, r) {
     var i = encodeURIComponent($('#message').val());
     $('#message').val('');
@@ -148,13 +164,15 @@ function spipcatchatsetmessage(e, t, n, r) {
         }
     })
 }
-function startchat(e, t, n, r, i, s, o, u, pack) {
+
+function startchat(e, t, n, r, i, s, o, u, pack,q) {
     document.getElementById('message') && (getOnlineUsers(n, r, i, s, o, u), statusStart = window.setInterval(function () {
         getOnlineUsers(n, r, i, s, o, u)
     }, t), window.setInterval(function () {
-        getMessages(e, r, i, s, u, pack)
+        getMessages(e, r, i, s, u, pack,q)
     }, e), $('#message').focus())
 }
+
 function getOnlineUsers(e, t, n, r, i, s) {
     $.getJSON(n + 'phpscripts/get-online.php', {
         auteur: t,
@@ -170,6 +188,7 @@ function getOnlineUsers(e, t, n, r, i, s) {
         } else window.location = i
     })
 }
+
 function SpipCatChatsetStatus(e, t, n) {
     $.ajax({
         type: 'POST',
@@ -188,6 +207,7 @@ function SpipCatChatsetStatus(e, t, n) {
         }
     })
 }
+
 function rmResponse() {
     $('#statusResponse').html('');
     $('#users-td').removeClass('spipcatchatpause');

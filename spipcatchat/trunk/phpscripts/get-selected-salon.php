@@ -1,5 +1,5 @@
 <?php //Construction de la liste de choix des salons //
-if(isset($_GET['char'])){$utf=$_GET['char'];}else{$utf='utf-8';}
+if(isset($_GET['char'])){$utf=trim($_GET['char']);}else{$utf='utf-8';}
 header('Content-Type: text/html; charset='.$utf);
 session_start();//--On démarre la session
 require('../obj/salon.class.php');//------Les fichiers à inclure-----//

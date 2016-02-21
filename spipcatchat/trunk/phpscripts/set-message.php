@@ -1,5 +1,5 @@
 <?php session_start();//--On démarre la session
-if(isset($_POST['char'])){$utf=$_POST['char'];}else{$utf='utf-8';} $ref=($_POST['ref']-0.5);
+if(isset($_POST['char'])){$utf=trim($_POST['char']);}else{$utf='utf-8';} $ref=($_POST['ref']-0.5);
 header('Content-Type: text/html; charset='.$utf);
   include('../fonction/fonction.php');//------Les fichiers à inclure-----// 
 $p=$_SESSION['spipcatchatcode']; $l='../db_catchat/'.$p.'/'.$p.'.catchat'; 

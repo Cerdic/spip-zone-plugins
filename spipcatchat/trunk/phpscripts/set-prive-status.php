@@ -1,2 +1,2 @@
 <?php session_start();//--On démarre la session
-$_SESSION['spipcatchatprivestatut']=$_POST['status'].'_'; ?>
+$_SESSION['spipcatchatprivestatut']=trim($_POST['status']).'_'; ?>

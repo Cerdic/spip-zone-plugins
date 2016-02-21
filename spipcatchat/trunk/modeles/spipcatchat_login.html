@@ -2,12 +2,12 @@
 	<div id="spipcatchatcontainerlogin"> <!-- div container -->
 		<fieldset id="spipcatchatlogin">
 		<!-- Bouton Submit Aide -->
-		<div id="submit" class="spipcatchataide"  title="<:spipcatchat:title_aide:>" onclick="spipcatchathelp(['(#ENV{url_plugin})']);return false;" style="float:right;margin-right:2%;" ></div><br/>
+		<div id="submit" class="spipcatchataide"  title="<:spipcatchat:title_aide:>" onclick="spipcatchathelp(['(#ENV{url_plugin}|trim)']);return false;" style="float:right;margin-right:2%;" ></div><br/>
 		<p><:spipcatchat:formulaire_log:></p>
 		<!-- Formulaire de login Spip --->
 		[(#LOGIN_PUBLIC)] 
 		<!-- Label Copy -->
-		[(#CONFIG{spipcatchat/spicatchat_label}|=={non}|oui)
+		[(#ENV{label}|=={non}|oui)
 		<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
 		]
 		<p>&nbsp;<p/>
