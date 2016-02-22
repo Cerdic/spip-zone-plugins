@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Autorisation de créer un rezosocio
@@ -58,5 +60,4 @@ function autoriser_associerrezosocios_dist($faire,$type,$id,$qui,$opt){
 				AND autoriser('ecrire', $type, $id, $qui, $opt)
 			)
 		);
-	return false;
 }

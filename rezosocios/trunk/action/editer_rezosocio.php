@@ -1,13 +1,14 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/filtres');
 
 // Editer (modification) d'un rezosocio-cle
 // http://doc.spip.org/@action_editer_rezosocio_dist
-function action_editer_rezosocio_dist($arg=null)
-{
+function action_editer_rezosocio_dist($arg=null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -78,7 +79,7 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
 		$set
 	);
 	
-	if(isset($c['changer_lang'])){
+	if (isset($c['changer_lang'])) {
 		$c['lang'] = $c['changer_lang'];
 		unset($c['changer_lang']);
 	}
@@ -101,8 +102,8 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
  * @param  $c
  * @return void
  */
-function rezosocio_instituer($id_rezosocio, $c){
-	$row = sql_fetsel("date", "spip_rezosocios", "id_rezosocio=".intval($id_rezosocio));
+function rezosocio_instituer($id_rezosocio, $c) {
+	$row = sql_fetsel("date", "spip_rezosocios", "id_rezosocio = ".intval($id_rezosocio));
 
 	$date_ancienne = $date = $row['date'];
 	
@@ -132,7 +133,7 @@ function rezosocio_instituer($id_rezosocio, $c){
 
 	if (!$champs) return;
 
-	sql_updateq('spip_rezosocios', $champs, "id_rezosocio=".intval($id_rezosocio));
+	sql_updateq('spip_rezosocios', $champs, "id_rezosocio = ".intval($id_rezosocio));
 
 	//
 	// Post-modifications
@@ -174,7 +175,7 @@ function rezosocio_supprimer($id_rezosocio) {
 	rezosocio_dissocier($id_rezosocio, '*');
 	pipeline('trig_supprimer_objets_lies',
 		array(
-			array('type'=>'rezosocio','id'=>$id_rezosocio)
+			array('type'=>'rezosocio','id' => $id_rezosocio)
 		)
 	);
 }
@@ -197,7 +198,7 @@ function rezosocio_supprimer($id_rezosocio) {
  * @param array $qualif
  * @return string
  */
-function rezosocio_associer($id_rezosocio,$objets, $qualif = null){
+function rezosocio_associer($id_rezosocio, $objets, $qualif = null) {
 	include_spip('action/editer_liens');
 	return objet_associer(array('rezosocio'=>$id_rezosocio), $objets, $qualif);
 }
@@ -213,9 +214,9 @@ function rezosocio_associer($id_rezosocio,$objets, $qualif = null){
  * @param array $objets
  * @return string
  */
-function rezosocio_dissocier($id_rezosocio,$objets){
+function rezosocio_dissocier($id_rezosocio, $objets) {
 	include_spip('action/editer_liens');
-	return objet_dissocier(array('rezosocio'=>$id_rezosocio), $objets);
+	return objet_dissocier(array('rezosocio' => $id_rezosocio), $objets);
 }
 
 /**
@@ -232,7 +233,5 @@ function rezosocio_dissocier($id_rezosocio,$objets){
  */
 function rezosocio_qualifier($id_rezosocio,$objets,$qualif){
 	include_spip('action/editer_liens');
-	return objet_qualifier(array('rezosocio'=>$id_rezosocio), $objets, $qualif);
+	return objet_qualifier(array('rezosocio' => $id_rezosocio), $objets, $qualif);
 }
-
-?>

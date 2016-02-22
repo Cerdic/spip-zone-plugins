@@ -1,8 +1,10 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
-function rezosocios_liste(){
+function rezosocios_liste() {
 	$rezosocios = array(
 					'facebook' => array(
 									'nom' => 'Facebook',
@@ -52,4 +54,3 @@ function rezosocios_liste(){
 	$rezosocios = pipeline('rezosocios_liste',$rezosocios);
 	return $rezosocios;
 }
-?>

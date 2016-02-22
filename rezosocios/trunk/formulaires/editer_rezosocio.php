@@ -1,12 +1,14 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_rezosocio_dist
-function formulaires_editer_rezosocio_charger_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rezosocio_charger_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden='') {
 	$valeurs = formulaires_editer_objet_charger('rezosocio',$id_rezosocio,$id_parent,'',$retour,$config_fonc,$row,$hidden);
 
 	if ($associer_objet){
@@ -37,7 +39,7 @@ function formulaires_editer_rezosocio_charger_dist($id_rezosocio='new', $id_pare
  * Identifier le formulaire en faisant abstraction des parametres qui
  * ne representent pas l'objet edite
  */
-function formulaires_editer_rezosocio_identifier_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rezosocio_identifier_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden='') {
 	return serialize(array(intval($id_rezosocio),$associer_objet));
 }
 
@@ -54,7 +56,7 @@ function rezosocios_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden='') {
 
 	$erreurs = formulaires_editer_objet_verifier('rezosocio',$id_rezosocio,array('titre'));
 	// verifier qu'un rezosocio n'existe pas avec le meme titre
@@ -75,7 +77,7 @@ function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_par
 }
 
 // http://doc.spip.org/@inc_editer_rezosocio_dist
-function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden='') {
 	$res = array();
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_rezosocio",'action');
@@ -114,11 +116,7 @@ function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_pare
 					$res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_rezosocio, '&');
 			}
 		}
-
 	}
 
 	return $res;
 }
-
-
-?>
