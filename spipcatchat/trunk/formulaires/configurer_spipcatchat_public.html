@@ -7,7 +7,6 @@
 		[(#REM) Ici l’ont déclaré les hiddens qui déclencheront le service du formulaire paramètre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,spipcatchat}
-	<fieldset>
 		<ul>
 		#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -179,7 +178,6 @@
 						</div>
 				</li>
 		</ul>
-	</fieldset>
 		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>

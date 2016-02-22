@@ -6,7 +6,6 @@
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
 #SET{cap,spipcatchat}
-	<fieldset>
 		<ul>
 		#SET{name,name_auteur}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -94,7 +93,6 @@
 						</div>
 				</li>
 				</ul>
-		</fieldset>	
 <input type="hidden" name="_meta_casier" value="#EVAL{spipcatchat_prive}" />
 <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 </div>
