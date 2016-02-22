@@ -7,12 +7,18 @@
 	</span>
 </div>]
 
-[<div class="champ contenu_objet[ (#OBJET*|et{#ID_OBJET}|?{'',vide})]">
+<B_contenus>
+<div class="champ contenu_objet">
 	<label><:onglet_contenu:> : </label>
-	<span dir="#LANG_DIR" class="objet">
-		<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">(#INFO_TITRE{#OBJET,#ID_OBJET})</a>
-	</span>
-</div>]
+	<div dir="#LANG_DIR" class="objet">
+		<ul>
+		<BOUCLE_contenus(droits_contrats_liens){id_droits_contrat}{par objet,id_objet}>
+		<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
+		</BOUCLE_contenus>
+		</ul>
+	</div>
+</div>
+</B_contenus>
 
 [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<label><:droits_contrat:champ_date_debut_label:> : </label>

@@ -98,6 +98,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		),
 		'tables_jointures' => array(
 			'droits_ayants',
+			'spip_droits_contrats_liens',
 		),
 		'titre' => "(select nom from spip_droits_ayants as da where da.id_droits_ayant=spip_droits_contrats.id_droits_ayant) AS titre, '' AS lang",
 		//'date' => '',
@@ -133,6 +134,35 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'droits_contrat:texte_changer_statut_droits_contrat', 
+	);
+	
+	// Jointures sur les contrats pour tous les objets
+	$tables[]['tables_jointures'][] = 'droits_contrats_liens';
+
+	return $tables;
+}
+
+/**
+ * Déclaration des tables secondaires (liaisons)
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function ayantsdroit_declarer_tables_auxiliaires($tables) {
+	$tables['spip_droits_contrats_liens'] = array(
+		'field' => array(
+			'id_droits_contrat'  => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_objet'           => 'bigint(21) DEFAULT "0" NOT NULL',
+			'objet'              => 'VARCHAR(25) DEFAULT "" NOT NULL',
+			'vu'                 => 'VARCHAR(6) DEFAULT "non" NOT NULL',
+		),
+		'key' => array(
+			'PRIMARY KEY'           => 'id_droits_contrat,id_objet,objet',
+			'KEY id_droits_contrat' => 'id_droits_contrat',
+		)
 	);
 
 	return $tables;

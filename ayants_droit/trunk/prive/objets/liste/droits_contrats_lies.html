@@ -1,0 +1,77 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nom,1,
+	date_debut,-1, 
+	id_droits_contrat,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutdrol,#EVAL{_request("debutdrol");}}}
+<B_liste_droits_contrats>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutdrol,#EVAL{_request("debutdrol");}}}
+#SET{afficher_lettres,#TRI|=={'multi id_droits_ayant'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies droits_contrats">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{droits_contrat:info_1_droits_contrat,droits_contrat:info_nb_droits_contrats}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(DROITS_CONTRATS droits_ayants){tout}{id_droits_contrat IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi nom},#GET{defaut_tri}}{nom==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutdrol,@#ID_DROITS_CONTRAT}|ancre_url{paginationdrol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="nom" scope="col">[(#TRI{multi nom,<:droits_contrat:champ_id_droits_ayant_label:>,ajax})]</th>
+			<th class="contenu" scope="col"><:onglet_contenu:></th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_droits_contrats(DROITS_CONTRATS droits_ayants)
+		{id_droits_contrat IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}
+		{pagination #ENV{nb,10} drol}
+	>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ID_DROITS_AYANT**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_DROITS_CONTRAT|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{droits_contrat})]</td> 
+			<td class="nom">
+				<a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]">[(#NOM|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})] / #ID_DROITS_CONTRAT</a>
+			</td>
+			<td class="contenu">
+				<B_contenus>
+				<ul>
+				<BOUCLE_contenus(droits_contrats_liens){id_droits_contrat}{par objet,id_objet}>
+				<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
+				</BOUCLE_contenus>
+				</ul>
+				</B_contenus>
+			</td>
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[droits_contrat-#ID_DROITS_CONTRAT-#OBJET-#ID_OBJET\]" value="X"><:droits_contrat:retirer_lien_droits_contrat:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_droits_contrats>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[droits_contrat-*-#OBJET-#ID_OBJET\]" value="X"><:droits_contrat:retirer_tous_liens_droits_contrats:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_droits_contrats>
+<div class="liste-objets liste-objets-lies DROITS_CONTRATS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:droits_contrat:info_aucun_droits_contrat:>})]</strong>
+</div>
+<//B_liste_droits_contrats>

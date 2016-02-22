@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_droits_contrat_saisies_dist($objet, $id_objet, $id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_droits_contrat_saisies_dist($id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$saisies = array(
 		array(
 			'saisie' => 'droits_ayants',
@@ -101,7 +101,7 @@ function formulaires_editer_droits_contrat_saisies_dist($objet, $id_objet, $id_d
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_droits_contrat_identifier_dist($objet, $id_objet, $id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_droits_contrat_identifier_dist($id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return serialize(array(intval($id_droits_contrat)));
 }
 
@@ -127,7 +127,7 @@ function formulaires_editer_droits_contrat_identifier_dist($objet, $id_objet, $i
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_droits_contrat_charger_dist($objet, $id_objet, $id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_droits_contrat_charger_dist($id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('droits_contrat',$id_droits_contrat,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	unset($valeurs['id_droits_contrat']);
 	unset($valeurs['objet']);
@@ -158,7 +158,7 @@ function formulaires_editer_droits_contrat_charger_dist($objet, $id_objet, $id_d
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_droits_contrat_verifier_dist($objet, $id_objet, $id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_droits_contrat_verifier_dist($id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('droits_contrat', $id_droits_contrat);
 	
 	return $erreurs;
@@ -186,13 +186,7 @@ function formulaires_editer_droits_contrat_verifier_dist($objet, $id_objet, $id_
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_droits_contrat_traiter_dist($objet, $id_objet, $id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	// Pour une création : l'attachement du contrat est demandé dès l'appel du formulaire
-	if (!intval($id_droits_contrat)) {
-		set_request('objet', $objet);
-		set_request('id_objet', $id_objet);
-	}
-	
+function formulaires_editer_droits_contrat_traiter_dist($id_droits_contrat='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// Pas de dates nulles
 	if (!_request('date_debut')) {
 		set_request('date_debut', '0000-00-00 00:00:00');

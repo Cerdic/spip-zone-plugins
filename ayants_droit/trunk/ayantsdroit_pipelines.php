@@ -37,20 +37,17 @@ function ayantsdroit_affiche_milieu($flux) {
 	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
 	
-	// geoculture_artistes sur les documents, geoculture_oeuvres
+	// Les liaisons sur les objets configurés
 	if (
 		is_array($e)
 		and !$e['edition']
 		and in_array(table_objet_sql($e['type']), lire_config('ayantsdroit/lier_objets',array()))
 	) {
-		$texte .= recuperer_fond(
-			'prive/objets/editer/ayantsdroit_liens',
-			array(
-				'objet' => $e['type'],
-				'id_objet' => $flux['args'][$e['id_table_objet']],
-				'self' => self('&'),
-			)
-		);
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'droits_contrats',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
 	}
 	
 	if ($texte) {

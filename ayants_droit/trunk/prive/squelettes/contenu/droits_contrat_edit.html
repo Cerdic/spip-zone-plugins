@@ -1,7 +1,12 @@
+[(#ENV{associer_objet}|oui)
+	#SET{associer,#ENV{associer_objet}|explode{'|'}}
+	#SET{objet,#GET{associer/0}}
+	#SET{id_objet,#GET{associer/1}}
+]
 [(#ID_DROITS_CONTRAT|oui)
 	[(#AUTORISER{modifier,droits_contrat,#ID_DROITS_CONTRAT}|sinon_interdire_acces)]
 ][(#ID_DROITS_CONTRAT|non)
-	[(#AUTORISER{creerdroitscontratdans,#ENV{objet},#ENV{id_objet}}|sinon_interdire_acces)]
+	[(#AUTORISER{creerdroitscontratdans,#GET{objet},#GET{id_objet}}|sinon_interdire_acces)]
 ]
 #SET{redirect,#ENV{redirect}|sinon{#ID_DROITS_CONTRAT|?{#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat},#URL_ECRIRE{droits_contrats}}}}
 
@@ -13,9 +18,9 @@
 	[(#ID_DROITS_CONTRAT|?{<:droits_contrat:icone_modifier_droits_contrat:>,<:droits_contrat:icone_creer_droits_contrat:>})]
 	<h1>
 		<BOUCLE_contrat(DROITS_CONTRATS){id_droits_contrat}{statut?}>
-		[(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT},<:droits_contrat:champ_id_droits_ayant_inconnu:>}|concat{' / '}|concat{#INFO_TITRE{#OBJET,#ID_OBJET}}|sinon{<:info_sans_titre:>})]
+		[(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT},<:droits_contrat:champ_id_droits_ayant_inconnu:>}|concat{' / '}|concat{#ID_DROITS_CONTRAT}|sinon{<:info_sans_titre:>})]
 		</BOUCLE_contrat>
-		#INFO_TITRE{#OBJET,#ID_OBJET}
+		#INFO_TITRE{#GET{objet},#GET{id_objet}}
 		<//B_contrat>
 	</h1>
 </div>
@@ -25,7 +30,7 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-		[(#FORMULAIRE_EDITER_DROITS_CONTRAT{#ENV{objet}, #ENV{id_objet}, #ENV{id_droits_contrat,oui}, #GET{redirect}})]
+		[(#FORMULAIRE_EDITER_DROITS_CONTRAT{#ENV{id_droits_contrat,oui}, #GET{redirect}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>

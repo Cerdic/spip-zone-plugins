@@ -10,7 +10,7 @@
 		]
 	]
 
-	<h1>(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT},<:droits_contrat:champ_id_droits_ayant_inconnu:>}|concat{' / '}|concat{#INFO_TITRE{#OBJET,#ID_OBJET}}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{droits_contrat-24.png}|balise_img{droits_contrat,cadre-icone})]</h1>
+	<h1>(#ID_DROITS_AYANT|?{#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT},<:droits_contrat:champ_id_droits_ayant_inconnu:>}|concat{' / '}|concat{#ID_DROITS_CONTRAT}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{droits_contrat-24.png}|balise_img{droits_contrat,cadre-icone})]</h1>
 
 ],simple fiche_objet})]
 

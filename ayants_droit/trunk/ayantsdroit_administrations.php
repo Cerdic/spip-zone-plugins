@@ -25,21 +25,45 @@ function ayantsdroit_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_droits_ayants', 'spip_droits_contrats'))
+		array('maj_tables', array('spip_droits_ayants', 'spip_droits_contrats', 'spip_droits_contrats_liens')),
 	);
 	
 	// Ajout du champ "montant" dans les contrats
 	$maj['1.1.0'] = array(
-		array('maj_tables', array('spip_droits_contrats'))
+		array('maj_tables', array('spip_droits_contrats')),
 	);
 	
 	// Ajout des champs "interlocuteur" et "credits" pour les ayants droit
 	$maj['1.2.0'] = array(
-		array('maj_tables', array('spip_droits_ayants'))
+		array('maj_tables', array('spip_droits_ayants')),
+	);
+	
+	// Migration en table de liens
+	$maj['1.3.0'] = array(
+		array('maj_tables', array('spip_droits_contrats_liens')),
+		array('ayantsdroit_maj_1_3_0'),
+		array('sql_alter', 'table spip_droits_contrats drop column objet'),
+		array('sql_alter', 'table spip_droits_contrats drop column id_objet'),
 	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+// Déplacer tous les liens internes dans la table de liens
+function ayantsdroit_maj_1_3_0() {
+	if ($contrats = sql_allfetsel('id_droits_contrat, objet, id_objet', 'spip_droits_contrats')) {
+		include_spip('action/editer_liens');
+		
+		foreach ($contrats as $contrat) {
+			if ($objet = $contrat['objet'] and $id_objet = $contrat['id_objet']) {
+				objet_associer(
+					array('droits_contrat' => $contrat['id_droits_contrat']),
+					array($objet => $id_objet)
+				);
+			}
+		}
+	}
 }
 
 
