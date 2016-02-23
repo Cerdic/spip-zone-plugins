@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_disposition' => 'Disposición',
 	'label_disposition_horizontale' => 'Horizontal',
 	'label_disposition_verticale' => 'Vertical',
+	'label_limite' => 'Limitar',
+	'label_limite_webmestre' => 'Mostrar el "minibando" únicamente para los webmestres',
 
 	// M
 	'mode_css' => 'Modo css',
