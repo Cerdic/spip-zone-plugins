@@ -26,6 +26,14 @@ function rezosocios_liste() {
 									'nom' => 'Dailymotion',
 									'url' => 'http://www.dailymotion.com/'
 								),
+					'vimeo' => array(
+									'nom' => 'Vimeo',
+									'url' => 'https://vimeo.com/'
+					),
+					'instagram' => array(
+									'nom' => 'Instagram',
+									'url' => 'https://www.instagram.com/'
+								),
 					'pinterest' => array(
 									'nom' => 'Pinterest',
 									'url' => 'https://www.pinterest.com/'
@@ -37,6 +45,10 @@ function rezosocios_liste() {
 					'storify' => array(
 									'nom' => 'Storify',
 									'url' => 'https://storify.com/'
+								),
+					'tumblr' => array(
+									'nom' => 'tumblr.',
+									'url' => 'https://www.tumblr.com/'
 								),
 					'linkedin' => array(
 									'nom' => 'Linkedin',
