@@ -28,7 +28,7 @@ a mis a jour la valeur avec la page reelle]
 		<BOUCLE_lettre(DROITS_CONTRATS droits_ayants){tout}{!id_droits_contrat IN #GET{exclus}}{where?}{recherche?}{statut?}
 			{tri #ENV{par,nom},#GET{defaut_tri}}{nom==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
-		#SET{rien,#ID_DROITS_CONTRAT}
+		#SET{rien,#DATE_DEBUT}
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutdroa,@#ID_DROITS_CONTRAT}|ancre_url{paginationdroa}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
