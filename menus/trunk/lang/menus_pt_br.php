@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'configurer_entrees_masquees_explication' => 'Marque as entradas que você quer <strong> esconder</strong>durante a criação dum menu.',
+	'configurer_entrees_masquees_explication' => 'Selecione as entradas que você quer <strong> esconder</strong> na criação de um menu.',
 	'configurer_titre' => 'Configurar as entradas do plugin Menus',
 	'confirmer_supprimer_entree' => 'Deseja realmente excluir essa entrada ?',
 
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_connecter' => 'Título para acessar o formulário de identificação',
 	'entree_titre_prive' => 'Título para acessar a área privada.',
 	'entree_traduction_articles_rubriques' => 'Si possível, exibir as matérias da seção no idioma do contexto (colocar "trad" para fazer isso)',
-	'entree_traduction_objet' => 'No caso duma matéria, escolher a tradução em função do contexto (colocar "trad" para fazer isso)', # MODIF
+	'entree_traduction_objet' => 'Escolher a tradução em função do contexto (colocar "trad" para isso)',
 	'entree_tri' => 'Critério de triagem das seções ("titre" para classificar por título, "num titre" para classificar por números de título (prefixar com " !" para inverter a ordem)',
 	'entree_tri_articles' => 'Critério de triagem das matérias ("titre" para classificar por título, "num titre" para classificar por números de título, prefixar com " !" para inverter a ordem)',
 	'entree_type_objet' => 'Tipo do objeto',
