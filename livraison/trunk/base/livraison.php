@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Déclinaisons Produit
+ * Plugin Livraison
  * (c) 2012 Rainer Müller
  * Licence GNU/GPL
  */
