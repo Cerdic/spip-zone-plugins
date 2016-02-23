@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_id_licence_label' => 'Licence',
 	'champ_montant_label' => 'Montant de la négociation',
 	'confirmer_supprimer_droits_contrat' => 'Confirmez-vous la suppression de ce contrat de cession ?',
+	'contenus_nb' => '@nb@ contenus',
 
 	// I
 	'icone_creer_droits_contrat' => 'Créer un contrat de cession',

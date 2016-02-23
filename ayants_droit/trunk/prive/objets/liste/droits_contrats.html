@@ -27,13 +27,15 @@
 			<td class="statut">[(#STATUT|puce_statut{droits_contrat,#ID_DROITS_CONTRAT})]</td> 
 			<td class="titre principale"><a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DROITS_CONTRAT">[(#NOM|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})]</a></td>
 			<td class="contenu">
-				<B_contenus>
-				<ul>
-				<BOUCLE_contenus(droits_contrats_liens){id_droits_contrat}{par objet,id_objet}>
-				<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
-				</BOUCLE_contenus>
-				</ul>
-				</B_contenus>
+				<BOUCLE_contenus(droits_contrats_liens){id_droits_contrat}{par objet,id_objet}{0,2}>[(#TOTAL_BOUCLE|<={1}|oui)
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
+				]</BOUCLE_contenus>
+					<BOUCLE_compter_contenus(droits_contrats_liens){id_droits_contrat}/>
+					<a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]">
+						<:droits_contrat:contenus_nb{nb=#TOTAL_BOUCLE}:>
+					</a>
+					<//B_compter_contenus>
+				<//B_contenus>
 			</td>
 			<td class="licence">#LICENCE{non,non}</td>
 			<td class="date_debut secondaire">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{#DATE_DEBUT|affdate})]</td> 
