@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_image_defaut_identicon' => '<i>Identicon</i> (generado tras la dirección de correo electrónico)',
 	'label_image_defaut_monsterid' => '<i>MonsterID</i> (generado tras la dirección de correo electrónico)',
 	'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
+	'label_image_defaut_retro' => '<i>Retro</i> (generado en función de la dirección de correo)',
 	'label_image_defaut_wavatar' => '<i>Wavatar</i> (generado tras la dirección de correo electrónico)',
 	'label_taille' => 'Tamaño de los gravatars',
 
