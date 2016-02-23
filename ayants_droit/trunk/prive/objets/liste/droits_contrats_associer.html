@@ -43,7 +43,6 @@ a mis a jour la valeur avec la page reelle]
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			<th class="nom" scope="col">[(#TRI{nom,<:droits_contrat:champ_id_droits_ayant_label:>,ajax})]</th>
 			<th class="contenu" scope="col"><:onglet_contenu:></th>
-			<th class="licence" scope="col">[(#TRI{id_licence,<:droits_contrat:champ_id_licence_label:>,ajax})]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -57,6 +56,8 @@ a mis a jour la valeur avec la page reelle]
 			<td class="statut">[(#STATUT|puce_statut{droits_contrat})]</td> 
 			<td class="nom">
 				<a href="[(#ID_DROITS_CONTRAT|generer_url_entite{droits_contrat})]">[(#NOM|sinon{<:droits_contrat:champ_id_droits_ayant_inconnu:>})] / #ID_DROITS_CONTRAT</a>
+				<br/>
+				#LICENCE{non,non}
 			</td>
 			<td class="contenu">
 				<BOUCLE_contenus(droits_contrats_liens){id_droits_contrat}{par objet,id_objet}{0,2}>[(#TOTAL_BOUCLE|<={1}|oui)
@@ -69,7 +70,6 @@ a mis a jour la valeur avec la page reelle]
 					<//B_compter_contenus>
 				<//B_contenus>
 			</td>
-			<td class="licence">#LICENCE{non,non}</td>
 			<td class="action">
 				<button type="submit" class="button link add" name="ajouter_lien\[droits_contrat-#ID_DROITS_CONTRAT-#OBJET-#ID_OBJET\]" value="+"><:droits_contrat:ajouter_lien_droits_contrat:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
