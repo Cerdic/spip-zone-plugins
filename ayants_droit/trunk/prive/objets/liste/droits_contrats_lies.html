@@ -34,8 +34,9 @@ a mis a jour la valeur avec la page reelle]
 
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class="nom" scope="col">[(#TRI{multi nom,<:droits_contrat:champ_id_droits_ayant_label:>,ajax})]</th>
+			<th class="nom" scope="col">[(#TRI{nom,<:droits_contrat:champ_id_droits_ayant_label:>,ajax})]</th>
 			<th class="contenu" scope="col"><:onglet_contenu:></th>
+			<th class="date date_debut" scope="col">[(#TRI{date_debut,<:droits_contrat:champ_date_debut_label:>,ajax})]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -63,6 +64,7 @@ a mis a jour la valeur avec la page reelle]
 					<//B_compter_contenus>
 				<//B_contenus>
 			</td>
+			<td class="date date_debut">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{#DATE_DEBUT|affdate})]</td>
 			<td class="action">
 				[(#ENV{editable}|oui)
 					<button type="submit" class="button link delete" name="supprimer_lien\[droits_contrat-#ID_DROITS_CONTRAT-#OBJET-#ID_OBJET\]" value="X"><:droits_contrat:retirer_lien_droits_contrat:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
