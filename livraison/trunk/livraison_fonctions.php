@@ -1,19 +1,19 @@
 <?php
 /**
- * Fonctions utiles au plugin Shop Livraisons
+ * Fonctions utiles au plugin Livraisons
  *
- * @plugin     Shop Livraisons
+ * @plugin     Livraisons
  * @copyright  2013
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Shop_livraison\Fonctions
+ * @package    SPIP\livraison\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function unite_mesure($id_livraison_zone,$mesure='',$brute=false){
     include_spip('inc/config');
-    $config=lire_config('shop_livraison',array());
+    $config=lire_config('livraison',array());
     
     $unite=sql_getfetsel('unite','spip_livraison_zones','id_livraison_zone='.$id_livraison_zone);
     if(!$brute){
@@ -26,7 +26,7 @@ function unite_mesure($id_livraison_zone,$mesure='',$brute=false){
 // Charge l'unité par défaut
 function unite_defaut(){
     include_spip('inc/config');
-    $unite_defaut=lire_config('shop_livraison/unite_defaut',''); 
+    $unite_defaut=lire_config('livraison/unite_defaut',''); 
     return $unite_defaut;
 }
 
