@@ -1,14 +1,14 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/sms/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucun' => 'Aucun',
-	// S
-	'sms_titre' => 'SMS SPIP',
 
 	// C
 	'cfg_exemple' => 'Exemple',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'expediteur' => 'Expéditeur',
 	'explication_expediteur' => 'Personnalisation de l’expéditeur avec du texte (11 caractères Max.)
-	N° de Téléphone non pris en charge en France.',
+	N° de Téléphone non pris en charge en France.',
 	'explication_smsfactor' => 'Identifiant de votre compte en ligne',
 
 	// L
@@ -32,5 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sms_titre' => 'SMS SPIP',
 
 	// T
-	'titre_page_configurer_sms' => 'Configuration de l\'API SMS',
+	'titre_page_configurer_sms' => 'Configuration de l’API SMS'
 );
+
+?>
