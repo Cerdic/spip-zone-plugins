@@ -9,8 +9,9 @@ function rezosocios_nom($nom) {
 
 	$rezosocios = rezosocios_liste();
 
-	if (isset($rezosocios[$nom]))
+	if (isset($rezosocios[$nom])) {
 		$nom = $rezosocios[$nom]['nom'];
+	}
 
 	return $nom;
 }
@@ -20,10 +21,11 @@ function rezosocios_url($nom, $compte) {
 
 	$rezosocios = rezosocios_liste();
 
-	if (isset($rezosocios[$nom]))
+	if (isset($rezosocios[$nom])) {
 		$url = $rezosocios[$nom]['url'] . $compte;
-	else
+	} else {
 		$url = false;
+	}
 
 	return $url;
 }

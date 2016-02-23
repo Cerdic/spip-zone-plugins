@@ -58,7 +58,7 @@ function rezosocios_liste() {
 									'nom' => 'Weibo',
 									'url' => 'http://www.weibo.com/'
 								),
-					'VK' => array(
+					'vk' => array(
 									'nom' => 'VK',
 									'url' => 'http://vk.com/'
 								)

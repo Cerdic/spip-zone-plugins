@@ -2,9 +2,11 @@
 
 Ce fichier sert de changelog, il liste les modifications lors du changement de version.
 
-
-
 ## Version 0.4.x
+
+### Version 0.4.5
+
+* Résolution d'un bug  pour vk
 
 ### Version 0.4.4
 
