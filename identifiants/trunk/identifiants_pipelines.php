@@ -9,7 +9,9 @@
  * @package    SPIP\Identifiants\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -295,13 +297,6 @@ function maj_identifiant_edition_objet($objet='', $id_objet=''){
 			'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet)
 		);
 
-		// on prépare les données
-		$set = array(
-			'objet'       => $objet,
-			'id_objet'    => $id_objet,
-			'identifiant' => $new_identifiant,
-		);
-
 		// on définit ce qu'on doit faire
 		$action =
 			(!$old_identifiant and $new_identifiant)  ? 'creer' :
@@ -311,18 +306,30 @@ function maj_identifiant_edition_objet($objet='', $id_objet=''){
 		switch ($action) {
 
 			case 'creer' :
-				return sql_insertq('spip_identifiants', $set);
+				return sql_insertq(
+					'spip_identifiants',
+					array('objet' => $objet, 'id_objet' => $id_objet, 'identifiant' => $new_identifiant)
+				);
 
 			case 'maj' :
-				return sql_updateq('spip_identifiants', $set, array('objet'=>$id_objet, 'id_objet'=>$id_objet));
+				return sql_updateq(
+					'spip_identifiants',
+					array('identifiant' => $new_identifiant),
+					'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND identifiant='.sql_quote($old_identifiant)
+				);
 
 			case 'supprimer' :
-				return sql_delete('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
+				return sql_delete(
+					'spip_identifiants',
+					'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND identifiant='.sql_quote($old_identifiant)
+				);
 
 			default :
 				return false;
 		}
 
+	} else {
+		return false;
 	}
 
 }
