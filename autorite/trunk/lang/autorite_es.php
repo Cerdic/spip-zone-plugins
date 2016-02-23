@@ -79,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'Acceso restringido',
+	'info_gere_rubriques' => 'Maneja las secciones siguientes:',
+	'info_gere_rubriques_2' => 'Yo manejo las secciones siguientes:',
 	'infos_selection' => '(puede seleccionar varios sectores con la tecla shift)',
 	'interdire_admin' => 'Marque las casillas de abajo para prohibir a los administradores de crear',
 
