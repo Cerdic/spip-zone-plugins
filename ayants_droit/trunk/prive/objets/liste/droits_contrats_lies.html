@@ -18,7 +18,7 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(DROITS_CONTRATS droits_ayants){tout}{id_droits_contrat IN #GET{selection}}{where?}{statut?}
-			{tri #ENV{par,multi nom},#GET{defaut_tri}}{nom==#GET{afficher_lettres}|?{'.*','A'}}>[
+			{tri #ENV{par,nom},#GET{defaut_tri}}{nom==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutdrol,@#ID_DROITS_CONTRAT}|ancre_url{paginationdrol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
@@ -41,7 +41,7 @@ a mis a jour la valeur avec la page reelle]
 	<tbody>
 	<BOUCLE_liste_droits_contrats(DROITS_CONTRATS droits_ayants)
 		{id_droits_contrat IN #GET{selection}}{statut?}
-		{tri #ENV{par,multi nom},#GET{defaut_tri}}
+		{tri #ENV{par,nom},#GET{defaut_tri}}
 		{pagination #ENV{nb,10} drol}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#ID_DROITS_AYANT**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_DROITS_CONTRAT|=={#ENV{id_lien_ajoute}}|oui)append]">
