@@ -6,6 +6,13 @@ Ce fichier sert de changelog, il liste les modifications lors du changement de v
 
 ## Version 0.4.x
 
+### Version 0.4.4
+
+* Ajout des réseaux sociaux suivants : 
+  * [instagram](https://www.instagram.com/)
+  * [tumblr.](https://www.tumblr.com/)
+  * [vimeo](https://vimeo.com/)
+
 ### Version 0.4.3
 
 * Autoriser les rédacteurs à créer et modifier les réseaux sociaux
