@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_desabonnement' => 'Darse de baja',
 
 	// C
+	'champ_titre_label' => 'Título',
 	'choisir_liste' => 'Debe elegir una lista.',
 	'contenu_date' => 'Contenido a partir de esta fecha',
 	'creation_droits_insuffisants' => 'Sus derechos son insuficientes...',
