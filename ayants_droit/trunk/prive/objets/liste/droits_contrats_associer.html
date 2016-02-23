@@ -11,7 +11,7 @@
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutdroa,#EVAL{_request("debutdroa");}}}
-#SET{afficher_lettres,#TRI|=={'multi id_droits_ayant'}|oui}
+#SET{afficher_lettres,#TRI|=={'nom'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-associer droits_contrats">
 <table class="spip liste">
