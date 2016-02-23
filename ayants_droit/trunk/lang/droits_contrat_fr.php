@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_droits_contrat' => 'Contrat de cession',
 	'titre_droits_contrats' => 'Contrats de cession',
 	'titre_droits_contrats_prop' => 'Contrats de cession proposés',
+	'titre_droits_contrats_refuse' => 'Contrats de cession refusés',
 	'titre_droits_contrats_rubrique' => 'Contrats de cession de la rubrique',
 	'titre_langue_droits_contrat' => 'Langue de ce contrat de cession',
 	'titre_logo_droits_contrat' => 'Logo de ce contrat de cession',
