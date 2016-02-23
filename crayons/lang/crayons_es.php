@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => '¡No hay clave primaria!',
 	'activation_barre_impossible' => 'Otro plugin impide el uso del porta-plumas en el espacio público.',
 	'annuler' => 'Cancelar',
 
@@ -26,10 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Editar todo',
 	'effets' => 'Efectos',
 	'explication_exec_autorise' => 'Páginas cuya modificación es permitida
-  (?exec=...): (, para separar los exec - * para todas).', # MODIF
-	'explication_introduction_article' => 'La introducción de un artículo enseña la descripción del artículo, o los primeros 600 carácteres (epígrafe y luego texto).', # MODIF
+         (?exec=...): (, para separar los exec - * para todas).',
+	'explication_introduction_article' => 'La introducción de un artículo muestra la descripción del artículo, 
+   si no los primeros 600 carácteres (epígrafe y luego texto).',
 	'explication_reduire_logo' => 'Reducir el logotipo si va mas allá
-  del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)', # MODIF
+  del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)',
 
 	// I
 	'info_experimental' => 'Experimental',
@@ -59,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Subir documentos',
 	'legend_editer_prive' => 'Edición en el espacio privado (experimental)',
 	'legend_introduction_article' => 'Texto introductivo del artículo',
+	'legend_introduction_rubrique' => 'Texto introductorio de la sección',
 
 	// M
 	'message_image_obligatoire' => 'Hay que escoger una imagen',
