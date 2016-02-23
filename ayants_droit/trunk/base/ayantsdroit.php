@@ -108,6 +108,14 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		'rechercher_jointures' => array(
 			'droits_ayant' => array('nom'=>8, 'email' => 5, 'credits' => 3),
 		),
+		'statut_titres' => array(
+			'a_faire'  => 'droits_contrat:statut_a_faire',
+			'en_cours' => 'droits_contrat:statut_en_cours',
+			'ok'       => 'droits_contrat:statut_ok',
+			'refuse'   => 'droits_contrat:statut_refuse',
+			'cloture'  => 'droits_contrat:statut_cloture',
+			'poubelle' => 'texte_statut_poubelle',
+		),
 		'statut_textes_instituer' => array(
 			'a_faire'  => 'droits_contrat:statut_a_faire',
 			'en_cours' => 'droits_contrat:statut_en_cours',
