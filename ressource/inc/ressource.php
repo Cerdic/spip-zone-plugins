@@ -111,19 +111,64 @@ function ressource_meta($res) {
 		$meta['href'] = get_spip_doc($s['fichier']);
 		$meta['local'] = copie_locale($meta['href'], 'test');
 	}
-	else
+
+	/* un lien github */
+	if (preg_match(",^https://(github\.com)/([^/]+/[^/]+)/blob/([^/]+)/(.*)$,",
+	$src, $r)) {
+		# 1. calculer l'url avec ?raw=true pour un access https
+		$src = parametre_url($src, 'raw', 'true');
+
+		# 2. recuperer le repo, la branche et le chemin du fichier
+		$server = $r[1];
+		$repo = $r[2];
+		$branch = $r[3];
+		$file = $r[4];
+
+		# 3. regarder si on a un clone en local
+		if (defined('_DIR_RESSOURCE_GIT') && (_DIR_RESSOURCE_GIT !== false)) {
+
+			$dir = _DIR_RESSOURCE_GIT . $server . '/' . $repo;
+			if (is_dir($dir) && is_dir($dir.'/.git')) {
+				$_dir = escapeshellarg($dir);
+				$_branch = escapeshellarg($branch);
+
+				try {
+					# 4. se mettre dans la branche et recuperer le fichier
+					$cmd = "cd $_dir && git checkout $_branch";
+					$b = trim(`$cmd`);
+					spip_log("$cmd: $b", 'distant');
+
+					# 5. si pas de fichier, ou demande de ?var_mode=reload, 
+					#    mettre à jour le repo
+					if (!file_exists($dir.'/'.$file)
+					|| (_request('var_mode') == 'reload' && autoriser('reload', 'images') && (filemtime($dir.'/.git') < time() - 60))
+					) {
+						$cmd = "cd $_dir && git pull && git checkout $_branch";
+						$b = trim(`$cmd`);
+						spip_log("$cmd: $b", 'distant');
+
+						# 6. Si ca ne marche toujours pas on est déçu
+						#   et on va quand même tenter un accès https
+						if (!file_exists($dir.'/'.$file)) {
+							throw new Exception('github: pas de version locale, on essaiera par https');
+						}
+					}
+					$fichier = $src = $dir.'/'.$file;
+					$meta['local'] = $fichier;
+					$meta['href'] = $fichier;
+				}
+				catch (Exception $e) {
+					spip_log($e, 'distant');
+				}
+			}
+		}
+	}
+
 	if (preg_match(',^https?://,', $src)) {
 
 		/* un document dropbox : remplacer www par dl */
 		$src = preg_replace(",^(https://)(www)(\.dropbox\.com/.*/.*/.*)$,",
 			'\1dl\3', $src);
-
-		/* un lien github */
-		if (preg_match(",^https://github\.com/[^/]+/[^/]+/blob/.*$,",
-		$src)) {
-			$src = parametre_url($src, 'raw', 'true');
-			
-		}
 
 		$meta['href'] = $src;
 
