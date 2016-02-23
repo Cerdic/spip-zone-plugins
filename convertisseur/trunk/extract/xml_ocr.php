@@ -124,6 +124,9 @@ function convertir_xml_ocr($u) {
 		$item['texte'] .= "[[<>\n" . join("\n", $notes) ."\n]]" . "\n" ;
 	}
 	
+	# note signature
+	$item['signature'] = $item['affiliations'] ;
+	
 	return $item ;
 }
 
