@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_taille_cache_inconnue' => 'El método @methode@ no permite conocer el tamaño del caché.',
+	'invalider_cache' => 'Invalidar la caché',
 
 	// L
 	'label_cache_pages' => 'Administrar el caché de las páginas',
@@ -29,6 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_administration_memcache' => 'Administrar memcache',
 
 	// M
+	'memcached_donnes' => 'Datos de tu servidor memcached',
+	'memcached_script' => 'Script memcache.php por <a href="http://livebookmark.net">Harun Yayli</a>',
+	'memcached_serveur' => 'Servidor memcached',
+	'methodes_cache' => 'La caché de las páginas se gestiona por el método @type@',
 	'methodes_grisees' => 'Los métodos indicados en gris no están disponibles en este servidor',
 
 	// O
@@ -38,7 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_filecache' => 'Archivos (filecache)',
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Desactivado (nocache)',
-	'option_methode_xcache' => 'XCache'
+	'option_methode_xcache' => 'XCache',
+
+	// T
+	'taille_tototale_indisponible' => 'Tamaño total no disponible'
 );
 
 ?>
