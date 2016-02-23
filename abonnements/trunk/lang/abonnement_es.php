@@ -13,9 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnement' => 'Añadir esta inscripción',
 
 	// C
-	'champ_date_debut_label' => 'Principio', # MODIF
-	'champ_date_fin_allonger_label' => 'Usted puede modificar la fecha de vencimiento', # MODIF
-	'champ_date_fin_label' => 'Vencimiento', # MODIF
+	'champ_date_debut_label' => 'Principio de la suscripción',
+	'champ_date_echeance_label' => 'Próxima instancia',
+	'champ_date_fin_allonger_label' => 'Usted puede modificar la fecha de vencimiento',
+	'champ_date_fin_label' => 'Vencimiento',
 	'champ_id_abonnements_offre_label' => 'Oferta de iscripción',
 	'champ_id_auteur_label' => 'Usuario',
 
