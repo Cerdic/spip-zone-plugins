@@ -1,37 +1,37 @@
 <?php
 include_spip('inc/exclure_utils');
 
+/** 
+ * Filtrer les boucles pour ne pas afficher le ou les secteurs configurés
+ */
 function exclure_sect_pre_boucle(&$boucle){
 
-	if ($boucle->modificateur['tout_voir'] or ($boucle->modificateur['tout'] and lire_config('secteur/tout') == 'oui') or test_espace_prive()==1 or $boucle->nom=='calculer_langues_utilisees'){
+	if (
+		!empty($boucle->modificateur['tout_voir']) 
+		or (!empty($boucle->modificateur['tout']) and lire_config('secteur/tout') == 'oui') 
+		or test_espace_prive() == 1 
+		or $boucle->nom == 'calculer_langues_utilisees')
+	{
 		return $boucle;
 	}
+
 	$type = $boucle->id_table;
+	$crit = $boucle->criteres;
+	$exclut = exclure_sect_choisir($crit, $type);
 
-
-	if ($type == 'articles' or $type == 'rubriques' or $type == 'syndic'){
-
-		$crit = $boucle->criteres;
-		$exclut = exclure_sect_choisir($crit, $type);
-
+	if (in_array($type, array('articles', 'rubriques', 'syndic'))) {
 		if ($exclut !='z'){
 			$boucle->where[] = "sql_in('id_secteur', '$exclut', 'NOT')";
 		}
 	}
 
 	if ($type == 'breves'){
-
-		$crit = $boucle->criteres;
-		$exclut = exclure_sect_choisir($crit, $type);
 		if ($exclut !='z'){
 			$boucle->where[] = "sql_in('id_rubrique', '$exclut', 'NOT')";
 		}
 	}
 
 	if ($type == 'forum'){
-		$crit = $boucle->criteres;
-		$exclut = exclure_sect_choisir($crit, $type);
-
 		$select_article = "sql_get_select('id_article', 'spip_articles', sql_in('id_secteur', '$exclut'))";
 		if ($exclut !='z'){
 			$where = array(
@@ -44,5 +44,6 @@ function exclure_sect_pre_boucle(&$boucle){
 			);
 		}
 	}
+
 	return $boucle;
 }
