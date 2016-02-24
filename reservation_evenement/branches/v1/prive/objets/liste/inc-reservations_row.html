@@ -1,7 +1,7 @@
 <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
 <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
 <td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">#REFERENCE </a></td>
-<td class='auteur'>
+<td class='client'>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 	<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
 </BOUCLE_auteur>

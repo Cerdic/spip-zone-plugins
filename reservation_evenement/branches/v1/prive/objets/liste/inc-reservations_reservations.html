@@ -23,7 +23,7 @@
 					<th class='picto' scope='col'></th>
 					<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 					<th class='reference' scope='col'>[(#TRI{reference,<:reservation:label_reference:>,ajax})]</th>
-					<th class='date' scope='col'><:reservation:reservation_de:></th>
+					<th class='client' scope='col'><:reservation:reservation_de:></th>
 					<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 					<th class='id' scope='col'>[(#TRI{id_reservation,<:info_numero_abbreviation:>,ajax})]</th>
 				</tr>
@@ -32,15 +32,15 @@
 				<BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 					<tr>
 						<INCLURE{fond=prive/objets/liste/inc-reservations_row,
-						id_reservation,
-						reference,
-						id_auteur,
-						nom,
-						email,
-						date,
-						id_reservation_source,
-						type_lien,
-						origine_lien}/>
+							id_reservation,
+							reference,
+							id_auteur,
+							nom,
+							email,
+							date,
+							id_reservation_source,
+							type_lien,
+							origine_lien}/>
 					</tr>
 					[(#ENV{id_reservation_source}|=={0}|oui)
 					<INCLURE{fond=prive/objets/liste/inc-reservations_reservations_liees,env,id_reservation_source=#ID_RESERVATION}/>
