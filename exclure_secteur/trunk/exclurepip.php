@@ -10,8 +10,8 @@ function exclure_sect_pre_boucle(&$boucle){
 		!empty($boucle->modificateur['tout_voir']) 
 		or (!empty($boucle->modificateur['tout']) and lire_config('secteur/tout') == 'oui') 
 		or test_espace_prive() == 1 
-		or $boucle->nom == 'calculer_langues_utilisees')
-	{
+		or (!empty($boucle->nom) and $boucle->nom == 'calculer_langues_utilisees')
+	) {
 		return $boucle;
 	}
 
