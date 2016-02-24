@@ -1,71 +1,63 @@
 [(#SET{defaut_tri,#ARRAY{
-    reference,-1,
-    id_reservation,1,
-    date,-1,
-    points,-1
+	reference,-1,
+	id_reservation,1,
+	date,-1,
+	points,-1
 }})]
 #SET{chaine_defaut,reservation:type_lien}
 <B_liste_reservations>
-#ANCRE_PAGINATION
-[(#ENV{id_reservation_source}|>{0}|?{
-  #SET{titre_singulier,reservation:info_1_reservation_liee}
-  #SET{titre_pluriel,reservation:info_nb_reservations_liees},
-  #SET{titre_singulier,reservation:info_1_reservation}
-  #SET{titre_pluriel,reservation:info_nb_reservations}
-})]
-<div class="liste-objets reservations">
-<table class='spip liste'>
-
-    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#GET{titre_singulier},#GET{titre_pluriel}}})</strong></caption>]
-    <thead>
-        <tr class='first_row'>
-            <th class='picto' scope='col'></th>
-            <th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-            <th class='reference' scope='col'>[(#TRI{reference,<:reservation:label_reference:>,ajax})]</th>
-            <th class='date' scope='col'><:reservation:reservation_de:></th>
-            <th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
-            <th class='id' scope='col'>[(#TRI{id_reservation,<:info_numero_abbreviation:>,ajax})]</th>
-        </tr>
-    </thead>
-    <tbody>
-    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-        <tr>
-            <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
-            <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
-            <td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">
-              [(#RANG). ]#REFERENCE
-              </a>
-           </td>
-            <td class='auteur'>
-                   <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-                    <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> -
-                    <a href="mailto:#EMAIL">#EMAIL</a>
-                   </BOUCLE_auteur>
-                    <a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
-                 <//B_auteur>
-            </td>
-
-            <td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
-            <td class='id'>[(#AUTORISER{modifier,reservation,#ID_RESERVATION}|?{
-                <a href="[(#URL_ECRIRE{reservation_edit,id_reservation=#ID_RESERVATION})]">#ID_RESERVATION</a>,
-                #ID_RESERVATION
-            })][(#ID_RESERVATION_SOURCE|>{0}|oui)
-                #SET{reference,#INFO_REFERENCE{reservation,#ID_RESERVATION_SOURCE}}
-                #SET{chaine,#ORIGINE_LIEN|concat{:type_lien_#TYPE_LIEN}{reference=#GET{reference}}}
-                [(#SET{chaine_traduite,#GET{chaine}|_T{#ARRAY{reference,#GET{reference}},#ARRAY{force,''}}|sinon{#GET{chaine_defaut}|_T{#ARRAY{reference,#GET{reference}}}}})]
-                  <br /><img src="[(#CHEMIN_IMAGE{lien-#TYPE_LIEN-16.png}|sinon{#CHEMIN_IMAGE{lien-16.png}})]" alt="#GET{chaine_traduite}" title="#GET{chaine_traduite}" />
-              ]</td>
-        </tr>
-        [(#ENV{id_reservation_source}|=={0}|oui)
-          <INCLURE{fond=prive/objets/liste/inc-reservations_reservations_liees,env,id_reservation_source=#ID_RESERVATION}/>
-        ]
-    </BOUCLE_liste_reservations>
-    </tbody>
-</table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
-</div>
+	#ANCRE_PAGINATION
+	[(#ENV{id_reservation_source}|>{0}|?{
+		#SET{titre_singulier,reservation:info_1_reservation_liee}
+		#SET{titre_pluriel,reservation:info_nb_reservations_liees},
+		#SET{titre_singulier,reservation:info_1_reservation}
+		#SET{titre_pluriel,reservation:info_nb_reservations}
+	})]
+	<div class="liste-objets reservations">
+		<table class='spip liste'>
+			[<caption>
+				<strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#GET{titre_singulier},#GET{titre_pluriel}}})</strong>
+			</caption>]
+			<thead>
+				<tr class='first_row'>
+					<th class='picto' scope='col'></th>
+					<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+					<th class='reference' scope='col'>[(#TRI{reference,<:reservation:label_reference:>,ajax})]</th>
+					<th class='date' scope='col'><:reservation:reservation_de:></th>
+					<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+					<th class='id' scope='col'>[(#TRI{id_reservation,<:info_numero_abbreviation:>,ajax})]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+					<tr>
+						<INCLURE{fond=prive/objets/liste/inc-reservations_row,
+						id_reservation,
+						reference,
+						id_auteur,
+						nom,
+						email,
+						date,
+						id_reservation_source,
+						type_lien,
+						origine_lien}/>
+					</tr>
+					[(#ENV{id_reservation_source}|=={0}|oui)
+					<INCLURE{fond=prive/objets/liste/inc-reservations_reservations_liees,env,id_reservation_source=#ID_RESERVATION}/>
+					]
+				</BOUCLE_liste_reservations>
+			</tbody>
+		</table>
+		[
+		<p class='pagination'>
+			(#PAGINATION{prive})
+		</p>
+		]
+	</div>
 </B_liste_reservations>
 [(#ENV{id_reservation_source}|>{0}|non)
-  <div class="liste-objets reservations caption-wrap"><strong class="caption"><:reservation:info_aucun_reservation:></strong></div>
+<div class="liste-objets reservations caption-wrap">
+	<strong class="caption"><:reservation:info_aucun_reservation:></strong>
+</div>
 ]
 <//B_liste_reservations>
