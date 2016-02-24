@@ -306,6 +306,18 @@ function simplecal_corbeille_table_infos($param){
     return $param;
 }
 
+// pipeline : chargement de lib jquery-ui
+function simplecal_jqueryui_plugins($scripts){
+	$ph = $GLOBALS["meta"]["plugin_header"];
+	if (strpos($ph, "spip(3.0") !== false) {
+		$scripts[] = "jquery.ui.datepicker";
+	} else {
+		$scripts[] = "datepicker";
+	}
+   
+	return $scripts;
+} 
+
 
 
 
