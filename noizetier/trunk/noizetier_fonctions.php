@@ -395,23 +395,35 @@ function noizetier_blocs_defaut()
 	static $blocs_defaut = null;
 
 	if (is_null($blocs_defaut)) {
-		$blocs_defaut = array(
-			'contenu' => array(
-				'nom' => _T('noizetier:nom_bloc_contenu'),
-				'description' => _T('noizetier:description_bloc_contenu'),
-				'icon' => 'bloc-contenu-24.png',
-				),
-			'navigation' => array(
-				'nom' => _T('noizetier:nom_bloc_navigation'),
-				'description' => _T('noizetier:description_bloc_navigation'),
-				'icon' => 'bloc-navigation-24.png',
-				),
-			'extra' => array(
-				'nom' => _T('noizetier:nom_bloc_extra'),
-				'description' => _T('noizetier:description_bloc_extra'),
-				'icon' => 'bloc-extra-24.png',
-				),
-		);
+		if (defined('_DIR_PLUGIN_ZCORE') and isset($GLOBALS['z_blocs']) and is_array($GLOBALS['z_blocs'])) {
+			$blocs_defaut = array();
+			
+			foreach ($GLOBALS['z_blocs'] as $z_bloc) {
+				$blocs_defaut[$z_bloc] = array(
+					'nom' => ucfirst($z_bloc),
+				);
+			}
+		}
+		else {
+			$blocs_defaut = array(
+				'contenu' => array(
+					'nom' => _T('noizetier:nom_bloc_contenu'),
+					'description' => _T('noizetier:description_bloc_contenu'),
+					'icon' => 'bloc-contenu-24.png',
+					),
+				'navigation' => array(
+					'nom' => _T('noizetier:nom_bloc_navigation'),
+					'description' => _T('noizetier:description_bloc_navigation'),
+					'icon' => 'bloc-navigation-24.png',
+					),
+				'extra' => array(
+					'nom' => _T('noizetier:nom_bloc_extra'),
+					'description' => _T('noizetier:description_bloc_extra'),
+					'icon' => 'bloc-extra-24.png',
+					),
+			);
+		}
+		
 		$blocs_defaut = pipeline('noizetier_blocs_defaut', $blocs_defaut);
 	}
 
