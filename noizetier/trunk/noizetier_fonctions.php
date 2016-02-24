@@ -265,7 +265,7 @@ function noizetier_lister_pages($page_specifique = '')
 		}
 
 		$liste_pages = pipeline('noizetier_lister_pages', $liste_pages);
-
+		
 		// On ajoute les compositions du noizetier
 		if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
 			$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
@@ -288,7 +288,7 @@ function noizetier_lister_pages($page_specifique = '')
 					}
 				}
 			}
-			$liste_pages = array_merge($liste_pages, $liste_compos);
+			$liste_pages = $liste_pages + $liste_compos;
 		}
 	}
 	if ($page_specifique) {
