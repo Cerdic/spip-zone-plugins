@@ -310,24 +310,36 @@ function noizetier_lister_pages($page_specifique = '')
 function noizetier_charger_infos_page($dossier, $page, $info = '')
 {
 	// on peut appeler avec le nom du squelette
-		$page = preg_replace(',[.]html$,i', '', $page);
-
-		// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
-		// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
-		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES') ? _NOIZETIER_REPERTOIRE_PAGES : 'contenu/';
+	$page = preg_replace(',[.]html$,i', '', $page);
+	
+	// Choisir le bon répertoire des pages
+	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
+		$rep = _NOIZETIER_REPERTOIRE_PAGES;
+	}
+	elseif (defined('_DIR_PLUGIN_ZCORE')) {
+		$rep = 'content/';
+	}
+	else {
+		$rep = 'contenu/';
+	}
+	
+	// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
+	// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
 	$fichier = find_in_path("$rep$page.xml");
 
 	include_spip('inc/xml');
 	include_spip('inc/texte');
 	$infos_page = array();
-		// S'il existe un fichier xml de configuration (s'il s'agit d'une composition on utilise l'info de la composition)
-		if (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['page'])) {
-			$xml = reset($xml['page']);
-		} elseif (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['composition'])) {
-			$xml = reset($xml['composition']);
-		} else {
-			$xml = '';
-		}
+	
+	// S'il existe un fichier xml de configuration (s'il s'agit d'une composition on utilise l'info de la composition)
+	if (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['page'])) {
+		$xml = reset($xml['page']);
+	} elseif (file_exists($fichier) and $xml = spip_xml_load($fichier, false) and count($xml['composition'])) {
+		$xml = reset($xml['composition']);
+	} else {
+		$xml = '';
+	}
+	
 	if ($xml != '') {
 		$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 		$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
