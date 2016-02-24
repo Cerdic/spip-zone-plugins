@@ -5,7 +5,7 @@
 <div class='infos'>
     [(#SET{texte_objet,<:unsplash:titre_unsplash:>})]
     <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_UNSPLASH</p></div>
-    <div class="unsplash_preview" style="background-image: url([(#GET{unsplash_url})][(#GET{unsplash_thumb_width})]/[(#GET{unsplash_thumb_height})]/?image=#ID_UNSPLASH)">
+    <div class="unsplash_preview" style="background-image: url([(#GET{unsplash_url})][(#GET{unsplash_thumb_width})]/[(#GET{unsplash_thumb_height})]/?image=#ID_PHOTO)">
     </div>
     [(#URL_ECRIRE{[(#OBJET|=={document}|?{documents,#OBJET})],[(#OBJET|id_table_objet)=]#ID_OBJET}|icone_horizontale{<:unsplash:voir_objet_associe:>,#OBJET})]
 </div>

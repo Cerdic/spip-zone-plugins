@@ -17,6 +17,11 @@
                 <label for="champ_height"><:unsplash:champ_height_label:><:info_obligatoire_02:></label>
                 <input type="text" value="850" id="champ_height" class="text" name="height" />
             </li>
+            <li class="editer editer_greyscale saisie_input[(#ENV**{erreurs}|table_valeur{greyscale}|oui)erreur]">
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{greyscale})</span>]
+                <label for="champ_greyscale"><:unsplash:champ_greyscale_label:></label>
+                <input type="checkbox" value="greyscale" id="champ_greyscale" class="checkbox" name="greyscale" />
+            </li>
         </ul>
 
         [(#SET{defaut_tri,#ARRAY{

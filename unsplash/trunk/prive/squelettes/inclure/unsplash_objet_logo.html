@@ -1,0 +1,17 @@
+[(#REM)
+    On affiche le bloc Unsplash dans la boite info que si les logos ont été activés dans la configuration du site
+]
+[(#CONFIG{'activer_logos'}|=={'oui'}|oui)
+<div class="unsplash ajout_logo">
+    <h3><:unsplash:titre_unsplash:></h3>
+    [(#URL_ECRIRE{unsplash_ajout}|parametre_url{associer_objet,#ENV{associer_objet}}|parametre_url{mode,'normal'}|icone_horizontale{[(#ENV{logo_normal}|?{<:unsplash:logo_normal_modifier:>,<:unsplash:logo_normal_ajouter:>})],unsplash,[(#ENV{logo_normal}|?{edit,new})]})]
+    [(#REM)
+    On ajoute le lien pour ajouter/modifier le logo de survol que si on a le logo normal de l'objet ET que les logos de survol ont été activés dans la configuration du site
+    ]
+    [(#ENV{logo_normal}|et{#CONFIG{'activer_logos_survol'}|=={'oui'}}|oui)
+        [(#URL_ECRIRE{unsplash_ajout}|parametre_url{associer_objet,#ENV{associer_objet}}|parametre_url{mode,'normal'}|icone_horizontale{[(#ENV{logo_survol}|?{<:unsplash:logo_survol_modifier:>,<:unsplash:logo_survol_ajouter:>})],unsplash,[(#ENV{logo_survol}|?{edit,new})]})]
+    ]
+</div>
+]
+
+[<pre>(#CONFIG{'unsplash'}|unserialize|print_r{1})</pre>]

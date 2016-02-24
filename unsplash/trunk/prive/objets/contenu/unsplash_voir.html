@@ -1,5 +1,10 @@
 <BOUCLE_unsplash (UNSPLASH) {id_unsplash}>
 
+[<div class="champ contenu_id_photo[ (#ID_PHOTO*|strlen|?{'',vide})]">
+	<div class="label visible"><:unsplash:champ_id_photo_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{id_photo} id_photo span'>#(#ID_PHOTO)</div>
+</div>]
+
 [<div class="champ contenu_filename[ (#FILENAME*|strlen|?{'',vide})] invisible hidden">
 	<div class="label visible"><:unsplash:champ_filename_label:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{filename} filename span'>(#FILENAME)</div>

@@ -44,6 +44,7 @@ function unsplash_declarer_tables_objets_sql($tables) {
 		'table_objet_surnoms' => array('unsplash'), // table_objet('unsplash') => 'unsplash'
 		'field' => array(
 			'id_unsplash' => 'bigint(21) NOT NULL',
+			'id_photo' => 'bigint(21) NOT NULL',
 			'filename' => "varchar(30) NOT NULL DEFAULT ''",
 			'format' => "varchar(5) NOT NULL DEFAULT ''",
 			'width' => "varchar(5) NOT NULL DEFAULT ''",
@@ -63,6 +64,7 @@ function unsplash_declarer_tables_objets_sql($tables) {
 		'titre' => "filename AS titre, '' AS lang",
 		'date' => 'date_ajout',
 		'champs_editables' => array(
+			'id_photo',
 			'filename',
 			'format',
 			'width',
@@ -73,7 +75,7 @@ function unsplash_declarer_tables_objets_sql($tables) {
 			'mode',
 		),
 		'champs_versionnes' => array('format', 'width', 'height', 'author', 'author_url', 'post_url', 'mode'),
-		'rechercher_champs' => array('author' => 6, 'author_url' => 5),
+		'rechercher_champs' => array('author' => 6, 'author_url' => 5, 'id_photo' => 5),
 		'tables_jointures' => array(),
 		'page' => false,
 		'url_voir' => 'unsplash_voir',

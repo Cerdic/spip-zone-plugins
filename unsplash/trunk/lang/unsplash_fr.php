@@ -9,13 +9,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'activer_objets_explication' => 'L\'ajout des photos Unsplash en tant que logo sera permis sur les objets sélectionnés ci-dessous.',
+	'activer_objets_label' => 'Sélectionner les objets',
 	'ajouter_lien_unsplash' => 'Ajouter cette photo (Unsplash)',
 
 	// C
 	'champ_author_label' => 'Auteur',
 	'champ_author_url_label' => 'URL de l\'auteur',
 	'champ_filename_label' => 'Nom du fichier',
+	'champ_greyscale_label' => 'Niveau de gris',
 	'champ_height_label' => 'Hauteur',
+	'champ_id_photo_label' => 'Photo',
 	'champ_id_objet_label' => 'Identifiant de l\'objet',
 	'champ_mode_label' => 'Mode d\'importation',
 	'champ_objet_label' => 'Objet',
@@ -29,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_formulaire' => 'Des erreurs sont présentes dans le formulaire',
+
 
 	// I
 	'icone_ajouter_unsplash' => 'Ajouter une photo (Unsplash)',
@@ -44,6 +49,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_unsplash' => '@nb@ photo (Unsplash)',
 	'info_unsplash_auteur' => 'Les photo (Unsplash) de cet auteur',
 	'info_width' => 'Largeur',
+
+	// L
+	'logo_normal_ajouter' => 'Ajouter un logo',
+	'logo_normal_modifier' => 'Changer le logo',
+	'logo_survol_ajouter' => 'Ajouter un logo de survol',
+	'logo_survol_modifier' => 'Changer le logo de survol',
 
 	// M
 	'mode_type_' => 'Inconnu',
@@ -67,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_unsplash' => 'Logo de cette photo (Unsplash)',
 	'titre_unsplash' => 'Photos Unsplash',
 	'titre_unsplash_rubrique' => 'Photos Unsplash de la rubrique',
+	'titre_page_configurer_unsplash' => 'Configurer le plugin Unsplash',
 
 	// V
 	'valeur_entiere_attendue' => 'Une valeur entière sans virgule est attendue et doit être plus grande que 0',

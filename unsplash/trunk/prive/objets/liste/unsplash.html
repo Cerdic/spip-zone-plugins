@@ -2,7 +2,8 @@
 	filename,1,
 	mode,1,
 	date_ajout,-1,
-	id_unsplash,1,
+    id_photo,1,
+    id_unsplash,1,
 	points,-1
 }})]<B_liste_unsplash>
 #ANCRE_PAGINATION
@@ -16,6 +17,7 @@
 			<th class='mode' scope='col'>[(#TRI{mode,<:unsplash:champ_mode_label:>,ajax})]</th>
 			<th class='objet' scope='col'>[(#TRI{objet,<:unsplash:champ_objet_label:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_ajout,<:date:>,ajax})]</th>
+			<th class='id_photo' scope='col'>[(#TRI{id_photo,<:unsplash:champ_id_photo_label:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_unsplash,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -27,10 +29,11 @@
 			<td class='mode secondaire'>[(#VAL{unsplash:mode_type_}|concat{#MODE}|_T)]</td>
 			<td class='mode secondaire'>[(#OBJET|objet_info{texte_objet}|_T)]</td>
 			<td class='date secondaire'>[(#DATE_AJOUT|affdate_jourcourt)]</td>
-			<td class='id'>[(#AUTORISER{modifier,unsplash,#ID_UNSPLASH}|?{
-				<a href="[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH})]">#ID_UNSPLASH</a>,
-				#ID_UNSPLASH
-			})]</td>
+            <td class='id_photo'>[#(#ID_PHOTO)]</td>
+            <td class='id'>[(#AUTORISER{modifier,unsplash,#ID_UNSPLASH}|?{
+                <a href="[(#URL_ECRIRE{unsplash_edit,id_unsplash=#ID_UNSPLASH})]">#ID_UNSPLASH</a>,
+                #ID_UNSPLASH
+            })]</td>
 		</tr>
 	</BOUCLE_liste_unsplash>
 	</tbody>

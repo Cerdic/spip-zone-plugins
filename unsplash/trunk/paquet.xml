@@ -25,6 +25,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/unsplash.php" />
 	<pipeline nom="affiche_auteurs_interventions" inclure="unsplash_pipelines.php" />
 	<pipeline nom="header_prive" inclure="unsplash_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="unsplash_pipelines.php" />
 
 	<menu nom="unsplash" titre="unsplash:titre_unsplash" parent="menu_edition" icone="images/unsplash-16.png" action="unsplash" />
 </paquet>
