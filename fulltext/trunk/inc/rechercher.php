@@ -95,17 +95,16 @@ function expression_recherche($recherche, $options) {
 	$recherche = preg_replace(",(\w)\*($|\s),Uims","$1$2",$recherche);
 
 	$is_preg = false;
-	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/'){
+	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/') {
 		// c'est une preg
 		$recherche_trans = translitteration($recherche);
 		$preg = $recherche_trans.$options['preg_flags'];
 		$is_preg = true;
-	}
-	else{
-	// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
+	} else {
+		// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
 		// sauf ceux de moins de 4 lettres (on supprime ainsi 'le', 'les', 'un',
 		// 'une', 'des' ...)
-		if (preg_match(",\s+,".$u, $recherche)){
+		if (preg_match(",\s+,".$u, $recherche)) {
 			$is_preg = true;
 			$recherche_inter = '|';
 			$recherche_mots = explode(' ', $recherche);
@@ -118,9 +117,9 @@ function expression_recherche($recherche, $options) {
 			// mais on cherche quand même l'expression complète, même si elle
 			// comporte des mots de moins de quatre lettres
 			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
-			$recherche_trans = translitteration($recherche);
 		}
 
+		$recherche_trans = translitteration($recherche);
 		$preg = '/'.str_replace('/', '\\/', $recherche_trans).'/' . $options['preg_flags'];
 	}
 
