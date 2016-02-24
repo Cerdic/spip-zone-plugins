@@ -47,20 +47,25 @@ function iextras_upgrade_to_saisies() {
 	}
 
 	// logiquement, c'est bon du premier coup...
-	if (!$oextras = unserialize($old_extras)) {
-		// mais parfois, en cas d'import hasardeux...
-		
-		// tentative avec uniquement des \n
-		$o = str_replace(array("\r\n","\r"), "\n", $old_extras);
-		if (!$oextras = unserialize($o)) {
+	if (is_array($old_extras)) {
+		$oextras = $old_extras;
+	} else {
+		// autrement c'est encore sérializé ?
+		if (!$oextras = unserialize($old_extras)) {
+			// mais parfois, en cas d'import hasardeux...
 			
-			// tentative avec des \r\n
-			$o = str_replace("\n", "\r\n", $o);
+			// tentative avec uniquement des \n
+			$o = str_replace(array("\r\n","\r"), "\n", $old_extras);
 			if (!$oextras = unserialize($o)) {
-				// c'est foutu !
-				spip_log("Erreur de mise à jour : deserialisation ratée...", "iextras");
-				echo _L("L'installation n'a pas réussi à restaurer les informations de la version 2.
-						 Il vous faudra réassocier vous-même les champs extras.");
+				
+				// tentative avec des \r\n
+				$o = str_replace("\n", "\r\n", $o);
+				if (!$oextras = unserialize($o)) {
+					// c'est foutu !
+					spip_log("Erreur de mise à jour : deserialisation ratée...", "iextras");
+					echo _L("L'installation n'a pas réussi à restaurer les informations de la version 2.
+							 Il vous faudra réassocier vous-même les champs extras.");
+				}
 			}
 		}
 	}
@@ -93,8 +98,9 @@ function iextras_upgrade_to_saisies() {
 
 		// regroupement par table sql.
 		$table = $te['_table_sql'] ? $te['_table_sql'] : table_objet_sql($te['table']);
-		if (!is_array($extras[$table]))
+		if (!isset($extras[$table]) OR !is_array($extras[$table])) {
 			$extras[$table] = array();
+		}
 
 		$extras[$table][ $te['champ'] ] = $te;
 	}
@@ -121,7 +127,7 @@ function iextras_upgrade_to_saisies() {
 	// pour chaque table sql
 	foreach ($extras as $table => $champs) {
 		// on recupere les champs extras declares pour la nouvelle version
-		$ici = $GLOBALS['meta']['champs_extras_' . $table] ? unserialize($GLOBALS['meta']['champs_extras_' . $table]) : array();
+		$ici = isset($GLOBALS['meta']['champs_extras_' . $table]) ? unserialize($GLOBALS['meta']['champs_extras_' . $table]) : array();
 		$desc = sql_showtable($table);
 
 		#var_dump($table, $ici);
@@ -184,6 +190,7 @@ function iextras_upgrade_to_saisies() {
 				'saisie_parametres/li_class'    => 'conteneur_class',
 				'saisie_parametres/explication' => 'explication',
 				'saisie_parametres/attention'   => 'attention',
+				'__PHP_Incomplete_Class_Name'   => '', // interne à unserialize PHP s'il ne trouve pas la classe
 			) as $old => $new) {
 				// si $new est vide : on utilise pas.
 				// si le contenu de $old est vide, on ne prend pas.
