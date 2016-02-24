@@ -20,8 +20,7 @@ define('_CACHE_INCLUSIONS_NOISETTES', 'noisettes_inclusions.php');
  *
  * @return array
  */
-function noizetier_lister_noisettes($type = 'tout')
-{
+function noizetier_lister_noisettes($type = 'tout') {
 	static $liste_noisettes = array();
 	if ($type == 'tout') {
 		return noizetier_obtenir_infos_noisettes();
@@ -53,8 +52,7 @@ function noizetier_lister_noisettes($type = 'tout')
  *
  * @return array
  */
-function noizetier_info_noisette($noisette)
-{
+function noizetier_info_noisette($noisette) {
 	$noisettes = noizetier_obtenir_infos_noisettes();
 
 	return $noisettes[$noisette];
@@ -68,8 +66,7 @@ function noizetier_info_noisette($noisette)
  *
  * @return
  **/
-function noizetier_obtenir_infos_noisettes()
-{
+function noizetier_obtenir_infos_noisettes() {
 	static $noisettes = false;
 
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
@@ -94,8 +91,7 @@ function noizetier_obtenir_infos_noisettes()
  *
  * @return array
  */
-function noizetier_obtenir_infos_noisettes_direct()
-{
+function noizetier_obtenir_infos_noisettes_direct() {
 	$liste_noisettes = array();
 
 	$match = '[^-]*[.]html$';
@@ -136,12 +132,13 @@ function noizetier_obtenir_infos_noisettes_direct()
  *
  * @return array
  */
-function noizetier_charger_infos_noisette_yaml($noisette, $info = '')
-{
-	// on peut appeler avec le nom du squelette
-		$fichier = preg_replace(',[.]html$,i', '', $noisette).'.yaml';
+function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
 	include_spip('inc/yaml');
 	include_spip('inc/texte');
+	
+	// on peut appeler avec le nom du squelette
+	$fichier = preg_replace(',[.]html$,i', '', $noisette).'.yaml';
+	
 	$infos_noisette = array();
 	if ($infos_noisette = yaml_charger_inclusions(yaml_decode_file($fichier))) {
 		if (isset($infos_noisette['nom'])) {
@@ -158,22 +155,24 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info = '')
 			$infos_noisette['parametres'] = array();
 		}
 
-			// contexte
-			if (!isset($infos_noisette['contexte'])) {
-				$infos_noisette['contexte'] = array();
-			}
+		// contexte
+		if (!isset($infos_noisette['contexte'])) {
+			$infos_noisette['contexte'] = array();
+		}
+		
 		if (is_string($infos_noisette['contexte'])) {
 			$infos_noisette['contexte'] = array($infos_noisette['contexte']);
 		}
 
-			// ajax
-			if (!isset($infos_noisette['ajax'])) {
-				$infos_noisette['ajax'] = 'oui';
-			}
-			// inclusion
-			if (!isset($infos_noisette['inclusion'])) {
-				$infos_noisette['inclusion'] = 'statique';
-			}
+		// ajax
+		if (!isset($infos_noisette['ajax'])) {
+			$infos_noisette['ajax'] = 'oui';
+		}
+		
+		// inclusion
+		if (!isset($infos_noisette['inclusion'])) {
+			$infos_noisette['inclusion'] = 'statique';
+		}
 	}
 
 	if (!$info) {
@@ -191,8 +190,7 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info = '')
  *
  * @return array
  */
-function noizetier_charger_contexte_noisette($noisette)
-{
+function noizetier_charger_contexte_noisette($noisette) {
 	static $contexte_noisettes = null;
 
 	if (is_null($contexte_noisettes[$noisette])) {
@@ -213,8 +211,7 @@ function noizetier_charger_contexte_noisette($noisette)
  *
  * @return array
  */
-function noizetier_lister_pages($page_specifique = '')
-{
+function noizetier_lister_pages($page_specifique = '') {
 	static $liste_pages = null;
 
 	if (is_null($liste_pages)) {
@@ -307,8 +304,7 @@ function noizetier_lister_pages($page_specifique = '')
  *
  * @return array
  */
-function noizetier_charger_infos_page($dossier, $page, $info = '')
-{
+function noizetier_charger_infos_page($dossier, $page, $info = '') {
 	// on peut appeler avec le nom du squelette
 	$page = preg_replace(',[.]html$,i', '', $page);
 	
@@ -390,8 +386,7 @@ function noizetier_charger_infos_page($dossier, $page, $info = '')
  *
  * @return array
  */
-function noizetier_blocs_defaut()
-{
+function noizetier_blocs_defaut() {
 	static $blocs_defaut = null;
 
 	if (is_null($blocs_defaut)) {
@@ -435,15 +430,16 @@ function noizetier_blocs_defaut()
  *
  * @param text $page
  */
-function noizetier_supprimer_noisettes_page($page)
-{
+function noizetier_supprimer_noisettes_page($page) {
 	$type_compo = explode('-', $page, 2);
 	$type = $type_compo[0];
+	
 	if (isset($type_compo[1])) {
 		$composition = $type_compo[1];
 	} else {
 		$composition = '';
 	}
+	
 	if (autoriser('configurer', 'noizetier')) {
 		sql_delete('spip_noisettes', 'type='.sql_quote($type).' AND composition='.sql_quote($composition));
 		// On invalide le cache
@@ -457,8 +453,7 @@ function noizetier_supprimer_noisettes_page($page)
  *
  * @param text $id_noisette
  */
-function noizetier_supprimer_noisette($id_noisette)
-{
+function noizetier_supprimer_noisette($id_noisette) {
 	if (autoriser('configurer', 'noizetier') and intval($id_noisette)) {
 		sql_delete('spip_noisettes', 'id_noisette='.intval($id_noisette));
 		// On invalide le cache
@@ -477,8 +472,7 @@ function noizetier_supprimer_noisette($id_noisette)
  *
  * @return int
  */
-function noizetier_ajouter_noisette($noisette, $page, $bloc)
-{
+function noizetier_ajouter_noisette($noisette, $page, $bloc) {
 	if (autoriser('configurer', 'noizetier') && $noisette) {
 		$info_noisette = noizetier_info_noisette($noisette);
 		include_spip('inc/saisies');
@@ -521,8 +515,7 @@ function noizetier_ajouter_noisette($noisette, $page, $bloc)
  *
  * @return bool
  */
-function noizetier_trier_noisette($page, $ordre)
-{
+function noizetier_trier_noisette($page, $ordre) {
 	// Vérifications
 	if (!autoriser('configurer', 'noizetier')) {
 		return false;
@@ -538,6 +531,7 @@ function noizetier_trier_noisette($page, $ordre)
 		$type = noizetier_page_type($page);
 		$composition = noizetier_page_composition($page);
 	}
+	
 	$modifs = array();
 	foreach ($ordre as $entree) {
 		$entree = explode('-', $entree, 2);
@@ -584,8 +578,7 @@ function noizetier_trier_noisette($page, $ordre)
  * @param text $id_noisette
  * @param text $sens
  */
-function noizetier_deplacer_noisette($id_noisette, $sens)
-{
+function noizetier_deplacer_noisette($id_noisette, $sens) {
 	$id_noisette = intval($id_noisette);
 	if ($sens != 'bas') {
 		$sens = 'haut';
@@ -688,8 +681,7 @@ function noizetier_deplacer_noisette($id_noisette, $sens)
  *
  * @return text
  */
-function noizetier_supprimer_composition($page)
-{
+function noizetier_supprimer_composition($page) {
 	$type_page = noizetier_page_type($page);
 	$composition = noizetier_page_composition($page);
 	$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
@@ -707,8 +699,7 @@ function noizetier_supprimer_composition($page)
  *
  * @return text
  */
-function noizetier_page_type($page)
-{
+function noizetier_page_type($page) {
 	$type_compo = explode('-', $page, 2);
 
 	return $type_compo[0];
@@ -721,8 +712,7 @@ function noizetier_page_type($page)
  *
  * @return text
  */
-function noizetier_page_composition($page)
-{
+function noizetier_page_composition($page) {
 	$type_compo = explode('-', $page, 2);
 	$type_compo = isset($type_compo[1]) ? $type_compo[1] : '';
 
@@ -736,8 +726,7 @@ function noizetier_page_composition($page)
  *
  * @return array
  */
-function noizetier_lister_blocs_avec_noisettes()
-{
+function noizetier_lister_blocs_avec_noisettes() {
 	static $liste_blocs = null;
 
 	if (is_null($liste_blocs)) {
@@ -768,8 +757,7 @@ function noizetier_lister_blocs_avec_noisettes()
  *
  * @return array
  */
-function noizetier_lister_icones()
-{
+function noizetier_lister_icones() {
 	static $liste_icones = null;
 
 	if (is_null($liste_icones)) {
@@ -787,8 +775,7 @@ function noizetier_lister_icones()
  *
  * @return text
  */
-function noizetier_test_compo_noizetier($page)
-{
+function noizetier_test_compo_noizetier($page) {
 	$compos = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	$type = noizetier_page_type($page);
 	$composition = noizetier_page_composition($page);
@@ -804,8 +791,7 @@ function noizetier_test_compo_noizetier($page)
  *
  * @return
  **/
-function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette)
-{
+function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette) {
 	$contexte_noisette = array_flip(noizetier_obtenir_contexte($noisette));
 
 	// On transmet toujours l'id_noisette et les variables se terminant par _$id_noisette (utilisees par exemple par Aveline pour la pagination)
@@ -839,8 +825,7 @@ function noizetier_choisir_contexte($noisette, $contexte_entrant, $id_noisette)
  *
  * @return
  **/
-function noizetier_obtenir_contexte($noisette)
-{
+function noizetier_obtenir_contexte($noisette) {
 	static $noisettes = false;
 
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
@@ -874,8 +859,7 @@ function noizetier_obtenir_contexte($noisette)
  *
  * @return
  **/
-function noizetier_ajaxifier_noisette($noisette)
-{
+function noizetier_ajaxifier_noisette($noisette) {
 	static $noisettes = false;
 
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
@@ -909,8 +893,7 @@ function noizetier_ajaxifier_noisette($noisette)
  *
  * @return
  **/
-function noizetier_inclusion_dynamique($noisette)
-{
+function noizetier_inclusion_dynamique($noisette) {
 	static $noisettes = false;
 
 	// seulement 1 fois par appel, on lit ou calcule tous les contextes
@@ -942,8 +925,7 @@ function noizetier_inclusion_dynamique($noisette)
  *
  * @return
  **/
-function noizetier_tableau_export()
-{
+function noizetier_tableau_export() {
 	$data = array();
 
 	// On calcule le tableau des noisettes
@@ -980,8 +962,7 @@ function noizetier_tableau_export()
  *
  * @return bool
  */
-function noizetier_importer_configuration($type_import, $import_compos, $config)
-{
+function noizetier_importer_configuration($type_import, $import_compos, $config) {
 	if ($type_import != 'remplacer') {
 		$type_import = 'fusion';
 	}
@@ -998,9 +979,11 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 		$noisettes_insert = array();
 		$rang = 1;
 		$page = '';
+		
 		if ($type_import == 'remplacer') {
 			sql_delete('spip_noisettes', '1');
 		}
+		
 		foreach ($noisettes as $noisette) {
 			$type = $noisette['type'];
 			$composition = $noisette['composition'];
@@ -1017,6 +1000,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
 			$noisette['parametres'] = serialize($noisette['parametres']);
 			$noisettes_insert[] = $noisette;
 		}
+		
 		$ok = sql_insertq_multi('spip_noisettes', $noisettes_insert);
 	}
 
@@ -1060,8 +1044,7 @@ function noizetier_importer_configuration($type_import, $import_compos, $config)
  *
  * @return text
  */
-function noizetier_chemin_icone($icone)
-{
+function noizetier_chemin_icone($icone){
 	if ($i = chemin_image($icone)) {
 		return $i;
 	} else {

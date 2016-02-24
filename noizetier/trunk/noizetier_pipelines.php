@@ -5,8 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function noizetier_header_prive($flux)
-{
+function noizetier_header_prive($flux) {
 	$css = direction_css(find_in_path('css/noizetier.css'));
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
 
@@ -20,8 +19,7 @@ function noizetier_header_prive($flux)
  *
  * @return array
  */
-function noizetier_recuperer_fond($flux)
-{
+function noizetier_recuperer_fond($flux) {
 	if (defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) {
 		include_spip('noizetier_fonctions');
 		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
@@ -70,8 +68,7 @@ function noizetier_recuperer_fond($flux)
  * Ajout d'un lien vers la page de configuration
  * dans le formulaire de sélection de composition d'un objet
  */
-function noizetier_formulaire_fond($flux)
-{
+function noizetier_formulaire_fond($flux) {
 	// formulaire d'edition de la composition d'un objet
 	if (isset($flux['args']['form']) and $flux['args']['form'] == 'editer_composition_objet') {
 		$objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
@@ -105,8 +102,7 @@ function noizetier_formulaire_fond($flux)
  *
  * @return array
  */
-function noizetier_compositions_lister_disponibles($flux)
-{
+function noizetier_compositions_lister_disponibles($flux) {
 	$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions']) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
 	if (!is_array($noizetier_compositions)) {
 		$noizetier_compositions = array();
@@ -138,6 +134,7 @@ function noizetier_compositions_lister_disponibles($flux)
 		if (!is_array($flux['data'])) {
 			$flux['data'] = array();
 		}
+		
 		$flux['data'] = array_merge_recursive($flux['data'], $noizetier_compositions);
 	} elseif (count($noizetier_compositions[$type]) > 0) {
 		if (!is_array($flux['data'][$type])) {
@@ -146,6 +143,7 @@ function noizetier_compositions_lister_disponibles($flux)
 		if (!is_array($noizetier_compositions[$type])) {
 			$noizetier_compositions[$type] = array();
 		}
+		
 		$flux['data'][$type] = array_merge_recursive($flux['data'][$type], $noizetier_compositions[$type]);
 	}
 
@@ -159,12 +157,12 @@ function noizetier_compositions_lister_disponibles($flux)
  *
  * @return array
  */
-function noizetier_styliser($flux)
-{
+function noizetier_styliser($flux) {
 	if (defined('_NOIZETIER_COMPOSITIONS_TYPE_PAGE') and _NOIZETIER_COMPOSITIONS_TYPE_PAGE) {
 		$squelette = $flux['data'];
 		$fond = $flux['args']['fond'];
 		$ext = $flux['args']['ext'];
+		
 		// Si on n'a pas trouvé de squelette
 		if (!$squelette) {
 			$noizetier_compositions = (isset($GLOBALS['meta']['noizetier_compositions'])) ? unserialize($GLOBALS['meta']['noizetier_compositions']) : array();
@@ -186,8 +184,7 @@ function noizetier_styliser($flux)
  *
  * @return array
  */
-function noizetier_jqueryui_forcer($plugins)
-{
+function noizetier_jqueryui_forcer($plugins) {
 	$plugins[] = 'jquery.ui.core';
 	$plugins[] = 'jquery.ui.widget';
 	$plugins[] = 'jquery.ui.mouse';
@@ -198,26 +195,21 @@ function noizetier_jqueryui_forcer($plugins)
 	return $plugins;
 }
 
-function noizetier_noizetier_lister_pages($flux)
-{
+function noizetier_noizetier_lister_pages($flux) {
 	return $flux;
 }
-function noizetier_noizetier_blocs_defaut($flux)
-{
+function noizetier_noizetier_blocs_defaut($flux) {
 	return $flux;
 }
-function noizetier_noizetier_config_export($flux)
-{
+function noizetier_noizetier_config_export($flux) {
 	return $flux;
 }
-function noizetier_noizetier_config_import($flux)
-{
+function noizetier_noizetier_config_import($flux) {
 	return $flux;
 }
 
 // les boutons d'administration : ajouter le mode voir=noisettes
-function noizetier_formulaire_admin($flux)
-{
+function noizetier_formulaire_admin($flux) {
 	if (autoriser('configurer', 'noizetier')) {
 		$btn = recuperer_fond('prive/bouton/voir_noisettes');
 		$flux['data'] = preg_replace('%(<!--extra-->)%is', $btn.'$1', $flux['data']);
@@ -230,8 +222,7 @@ function noizetier_formulaire_admin($flux)
 // C'est un peu grossier mais pas trouvé de pipeline pour agir à la mise à jour d'un plugin.
 // Au moins, le cache est supprimé à chaque changement, mise à jour des plugins.
 
-function noizetier_affiche_milieu($flux)
-{
+function noizetier_affiche_milieu($flux) {
 	$exec = $flux['args']['exec'];
 
 	if ($exec == 'admin_plugin') {
