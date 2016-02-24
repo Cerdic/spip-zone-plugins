@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'photo_non_selectionnee' => 'Vous n\'avez pas choisi de photo.',
+	'photo_deja_importe' => 'La photo sélectionnée a déjà été importée. Veuillez en sélectionner une autre s\'il vous plaît.',
 
 	// R
 	'retirer_lien_unsplash' => 'Retirer cette photo (Unsplash)',
