@@ -1,27 +1,15 @@
 <BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
-  [(#REM) Si on trouve une reservation on prend ça comme base ]
-  #SET{details, #ARRAY}
-  #SET{total,0}
-  <BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
-    #SET{details, 
-      #GET{details}|push{
-        #ARRAY{
-          prix, #PRIX*,
-        }
-      }}
-    [(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
-  </BOUCLE_reservation_details>
-    #SET{reservation, #ARRAY{details, #GET{details}}}
+	[(#REM) Si on trouve une reservation on prend ça comme base ]
+	#SET{details, #ARRAY}
+	#SET{total,0}
+	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
+		#SET{details,
+		#GET{details}|push{
+		#ARRAY{
+		prix, #PRIX*,
+		}
+		}}
+		[(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
+	</BOUCLE_reservation_details>
+	#SET{reservation, #ARRAY{details, #GET{details}}}
 </BOUCLE_reservation>
-
-[(#GET{total}|>{0}|oui)
-<div class="champ contenu_montant">
-  <label><:reservation:montant:> : </label>
-  <span>[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</span>
-</div>
-]
-
-[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
-    <label><:reservation:label_email:>
-    <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
-</div>]
