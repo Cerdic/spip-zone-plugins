@@ -221,8 +221,18 @@ function noizetier_lister_pages($page_specifique = '')
 		$liste_pages = array();
 		$match = '.+[.]html$';
 
-		// lister les fonds disponibles dans le repertoire contenu
-		$rep = defined('_NOIZETIER_REPERTOIRE_PAGES') ? _NOIZETIER_REPERTOIRE_PAGES : 'contenu/';
+		// Choisir le bon répertoire des pages
+		if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
+			$rep = _NOIZETIER_REPERTOIRE_PAGES;
+		}
+		elseif (defined('_DIR_PLUGIN_ZCORE')) {
+			$rep = 'content/';
+		}
+		else {
+			$rep = 'contenu/';
+		}
+		
+		// Lister les fonds disponibles dans le repertoire contenu
 		$liste = find_all_in_path($rep, $match);
 		if (count($liste)) {
 			foreach ($liste as $squelette => $chemin) {
