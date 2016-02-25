@@ -46,13 +46,21 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document =
     if (!empty($docs)) {
         // On ajoute les documents a un objet SPIP.
         $ajouter_documents = charger_fonction('ajouter_documents', 'action');
-        return $ajouter_documents(
+        $res = $ajouter_documents(
             $id_document,
             $docs,
             $objet, // Article, rubrique, autre objet
             $id_objet,
             $mode
         );
+
+        // Obfusquer les noms de fichiers
+        if (_UPLOADHTML5_OBFUSQUER == true) {
+	        foreach ($res as $key => $id_document) {
+		        obfusquer_document($id_document);
+	        }
+        }
+        return $res;
     }
 }
 
@@ -168,4 +176,52 @@ function titre_cadre_logo($objet, $id_objet) {
     }
 
     return $img . $libelle;
+}
+
+/**
+ * Permet d'obfusquer le nom d'un document SPIP
+ *
+ * @param int $id_document
+ * @access public
+ * @return string Chemin du nouveau fichier
+ */
+function obfusquer_document($id_document) {
+
+	// On commence par le fichier
+	$fichier = sql_getfetsel('fichier', 'spip_documents', 'id_document='.intval($id_document));
+
+	$fichier = _DIR_IMG.$fichier;
+
+	// Récupérer les informations du fichier
+	$fichier_info = pathinfo($fichier);
+
+	// obfusquer
+	$nouveau_nom = uniqid();
+
+	// Construire le nouveau fichier
+	$nouveau_fichier = _DIR_IMG.$fichier_info['dirname'].'/'.$nouveau_nom.'.'.$fichier_info['extension'];
+
+	renommer_document($fichier, $nouveau_fichier, $id_document);
+
+	return $nouveau_fichier;
+}
+
+/**
+ * Permet de renommer un fichier
+ * De manière optionnel, si on passe un id_document,
+ * le champs fichier sera mis à jour avec le nouveau chemin
+ *
+ * @param string $ancien_chemin
+ * @param string $nouveau_chemin
+ * @param int $id_document
+ * @access public
+ */
+function renommer_document($ancien_chemin, $nouveau_chemin, $id_document = null) {
+
+	rename($ancien_chemin, $nouveau_chemin);
+
+	// Mettre à jour la base de donnée avec le nouveau chemin au besoin
+	if (!is_null($id_document)) {
+		sql_updateq('spip_documents', array('fichier' => $nouveau_chemin), 'id_document='.intval($id_document));
+	}
 }
