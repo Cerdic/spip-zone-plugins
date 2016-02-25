@@ -1,8 +1,8 @@
 [(#AUTORISER{configurer,fulltext}|sinon_interdire_acces)]
 
 <h1 class="grostitre"><:fulltext:titre_page_fulltext_index:></h1>
-[<div class="success">(#ENV{ok})</div>]
-[<div class="error">(#ENV{erreur})</div>]
+[<div class="success">(#ENV*{ok})</div>]
+[<div class="error">(#ENV*{erreur})</div>]
 
 #SET{tables,#REM|fulltext_liste_des_tables}
 #SET{nombre,0}

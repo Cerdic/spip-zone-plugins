@@ -5,23 +5,28 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/fulltext');
+
 function fulltext_liste_creer_index($arg=null){
 
-	list($table,$nom) = explode("/",$arg);
+	list($table, $nom) = array_pad(explode("/", $arg), 2, null);
 
 	$ok = $erreur = "";
 
 	$tables = fulltext_liste_des_tables();
 	if ($table AND isset($tables[$table]) AND isset($tables[$table]['index_prop'][$nom])){
-		list($ok,$erreur) = fulltext_creer_index($table,$nom,$tables[$table]['index_prop'][$nom]);
+		list($ok, $erreur) = fulltext_creer_index($table,$nom,$tables[$table]['index_prop'][$nom]);
 	}
-	elseif($table=="all"){
-		foreach($tables as $table=>$desc){
-			foreach($desc['index_prop'] as $nom=>$champs){
-				fulltext_creer_index($table,$nom,$champs);
+	elseif ($table=="all") {
+		foreach($tables as $table => $desc) {
+			foreach($desc['index_prop'] as $nom => $champs) {
+				list($ok1, $erreur1) = fulltext_creer_index($table, $nom, $champs);
+				if ($ok1) $ok .= $ok1 . "<br />";
+				if ($erreur1) $erreur .= $erreur1 . "<br />";
 			}
 		}
 	}
+
+	return array($ok, $erreur);
 }
 
 
@@ -40,9 +45,11 @@ function fulltext_creer_index($table, $nom, $vals) {
 	sql_optimize(table_objet_sql($table));
 
 	$keys = fulltext_keys($table);
-	if (isset($keys[$nom]))
-		return array("$table : " . _T('fulltext:fulltext_cree') . " : $keys[$nom]","");
-	else
-		return array("","$table : "._T('spip:erreur'));
+
+	if (isset($keys[$nom])) {
+		return array("$table : " . _T('fulltext:fulltext_cree') . " : $keys[$nom]", "");
+	} else {
+		return array("", "$table : "._T('spip:erreur'));
+	}
 
 }
