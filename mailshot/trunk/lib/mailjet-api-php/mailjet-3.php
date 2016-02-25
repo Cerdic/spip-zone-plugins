@@ -38,6 +38,15 @@ class Mailjet {
 			. 'api.mailjet.com/' . $this->apiVersion . '';
 	}
 
+	/*
+	 * Legacy methods
+	 */
+	public function userSenderadd($params){
+		$data = array('email'=>$params['email']);
+		include_spip('inc/json');
+		return $this->sender(array('data'=>json_encode($data)));
+	}
+
 	public function __call($method, $args){
 		# params
 		$params = (sizeof($args)>0) ? $args[0] : array();
@@ -81,6 +90,9 @@ class Mailjet {
 
 
 		include_spip('inc/distant');
+		if ($method!=='send'){
+			$method = "REST/$method";
+		}
 		$url = $this->apiUrl . $method;
 		$url_log = "api.mailjet.com/".$this->apiVersion.$method;
 		try {
@@ -93,12 +105,13 @@ class Mailjet {
 				$this->_response_code = 200; // on suppose car sinon renvoie false
 			}
 			else {
-				$res = recuperer_url($url,
-					array(
-						'methode' => $this->_method,
-						'datas' => $this->_data,
-					)
+				$options = array(
+					'methode' => $this->_request,
 				);
+				if ($this->_data) {
+					$options['datas'] = $this->_data;
+				}
+				$res = recuperer_url($url,$options);
 				$this->_response_code = $res['status'];
 				$response = $res['page'];
 			}

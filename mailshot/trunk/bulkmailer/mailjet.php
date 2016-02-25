@@ -45,6 +45,7 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 	if ($api_version==3){
 		// on utilise l'API REST
 		$options['sender_class'] = "FacteurMailjetv3";
+		
 	}
 	else {
 		// on passe par l'API SMTP basique
@@ -119,17 +120,37 @@ function &mailjet_api(){
 function mailjet_sender_status($sender_email){
 
 	$mj = mailjet_api();
-	$res = (array)$mj->userSenderlist();
-	if (!isset($res['status']) OR $res['status']!=='OK') return null;
+	// API v1
+	if ($mj->version<3){
+		$res = (array)$mj->userSenderlist();
+		if (!isset($res['status']) OR $res['status']!=='OK') return null;
 
-	foreach($res['senders'] as $sender){
-		if ($sender->email == $sender_email){
-			if ($sender->enabled>0)
-				return "active";
-			else
-				return "pending";
+		if (isset($res['senders'])){
+			foreach($res['senders'] as $sender){
+				if ($sender->email == $sender_email){
+					if ($sender->enabled>0)
+						return "active";
+					else
+						return "pending";
+				}
+			}
 		}
 	}
+	// API v3
+	if ($mj->version==3){
+		$res = (array)$mj->sender();
+		if (!isset($res['Count'])) return null;
+		if (isset($res['Data'])){
+			foreach($res['Data'] as $sender){
+				if ($sender['Email'] == $sender_email){
+					if (in_array($sender['Status'],array('Active','Pending'))){
+						return strtolower($sender['Status']);
+					}
+				}
+			}
+		}
+	}
+
 
 	return false;
 }
