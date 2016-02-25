@@ -1,14 +1,14 @@
 <div class="formulaire_spip formulaire_spipicious formulaire_#FORM ajax" id="formulaire_spipicious[_(#ENV{type})][_(#ENV{id_objet})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
+	#SET{mots,''}<BOUCLE_mots(SPIPICIOUS mots){id_objet}{objet}{id_auteur=#SESSION{id_auteur}}{statut?}>#SET{mots,oui}</BOUCLE_mots>
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'>
 		<div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<fieldset>
+		[<fieldset>(#GET{mots}|oui)
 			<legend><:spipicious:vos_tags:></legend>
 			<ul>
 				[(#SAISIE{spipicious_del_tags,remove_tags,
@@ -17,7 +17,7 @@
 					objet=#ENV{type},
 					label=''})]
 			</ul>
-		</fieldset>
+		</fieldset>]
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
 		<ul>
