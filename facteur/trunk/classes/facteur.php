@@ -139,19 +139,16 @@ class Facteur extends PHPMailer {
 				$this->SMTPAuth = false;
 			}
 			
-			// À partir de PHP 5, on peut tester la sécurité de la connexion
-			if (intval(phpversion()) >= 5) {
-				if ($options['smtp_secure'] == 'ssl') {
-					$this->SMTPSecure = 'ssl';
-				}
-				if ($options['smtp_secure'] == 'tls') {
-					$this->SMTPSecure = 'tls';
-				}
-				
-				// Pour le moment on remet l'ancien fonctionnement :
-				// on ne doit pas tester les certificats si pas demandé explicitement avec l'option TLS !
-				$this->SMTPAutoTLS = false;
+			if ($options['smtp_secure'] == 'ssl') {
+				$this->SMTPSecure = 'ssl';
 			}
+			if ($options['smtp_secure'] == 'tls') {
+				$this->SMTPSecure = 'tls';
+			}
+
+			// Pour le moment on remet l'ancien fonctionnement :
+			// on ne doit pas tester les certificats si pas demandé explicitement avec l'option TLS !
+			$this->SMTPAutoTLS = false;
 		}
 		
 		// S'il y a un contenu HTML
