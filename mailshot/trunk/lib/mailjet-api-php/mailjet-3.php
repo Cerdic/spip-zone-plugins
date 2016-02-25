@@ -3,18 +3,15 @@
 /**
  * Mailjet Public API
  *
- * @package    API v0.1
- * @author    Mailjet
+ * @package    API v3
+ * @author    Nursit
  * @link    http://api.mailjet.com/
  *
  */
 
 class Mailjet {
-	var $version = '0.1';
-	var $apiVersion = '0.1';
-
-	# Choose your weapon : php, json, xml, serialize, html, csv
-	var $output = 'json';
+	var $version = 3;
+	var $apiVersion = 'v3/';
 
 	# Connect thru https protocol
 	var $secure = true;
@@ -26,24 +23,33 @@ class Mailjet {
 	var $apiKey = '';
 	var $secretKey = '';
 
+	var $_method = '';
+	var $_request = '';
+	var $_data = '';
+	var $_response = '';
+	var $_error = '';
 
 	// Constructor function
 	public function __construct($apiKey = false, $secretKey = false){
 		if ($apiKey) $this->apiKey = $apiKey;
 		if ($secretKey) $this->secretKey = $secretKey;
-		$this->apiUrl = (($this->secure) ? 'https' : 'http') . '://api.mailjet.com/' . $this->apiVersion . '';
+		$this->apiUrl = (($this->secure) ? 'https' : 'http') . '://'
+		  . ($this->apiKey ? $this->apiKey . ':' . $this->secretKey . '@' : '')
+			. 'api.mailjet.com/' . $this->apiVersion . '';
 	}
 
 	public function __call($method, $args){
-
 		# params
 		$params = (sizeof($args)>0) ? $args[0] : array();
 
-		# request method
-		$request = isset($params["method"]) ? strtoupper($params["method"]) : 'GET';
+		$data = '';
+		$request = 'GET';
 
-		# unset useless params
-		if (isset($params["method"])) unset($params["method"]);
+		# request method
+		if (isset($params["method"])) {
+			$request = $params["method"];
+			unset($params["method"]);
+		}
 
 		# Make request
 		$result = $this->sendRequest($method, $params, $request);
@@ -58,62 +64,57 @@ class Mailjet {
 		return $return;
 	}
 
-	public function requestUrlBuilder($method, $params = array(), $request){
-
-
-		$query_string = array('output' => 'output=' . $this->output);
-
-
-		foreach ($params as $key => $value){
-			if ($request=="GET" || in_array($key, array('apikey', 'output'))) $query_string[$key] = $key . '=' . urlencode($value);
-			if ($key=="output") $this->output = $value;
-		}
-
-		$this->call_url = $this->apiUrl . '/' . $method . '/?' . join('&', $query_string);
-
-		return $this->call_url;
-
-	}
 
 	public function sendRequest($method = false, $params = array(), $request = "GET"){
 		# Method
 		$this->_method = $method;
 		$this->_request = $request;
+		$this->_data = '';
+		$this->_response ='';
+		$this->_error ='';
 
-		# Build request URL
-		$url = $this->requestUrlBuilder($method, $params, $request);
-
-		# Set up and execute the curl process  
-		$curl_handle = curl_init();
-		curl_setopt($curl_handle, CURLOPT_URL, $url);
-		curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt($curl_handle, CURLOPT_USERPWD, $this->apiKey . ':' . $this->secretKey);
-
-		$this->_request_post = false;
-		if ($request=='POST') :
-			curl_setopt($curl_handle, CURLOPT_POST, count($params));
-			curl_setopt($curl_handle, CURLOPT_POSTFIELDS, http_build_query($params, '', '&'));
-			$this->_request_post = $params;
-		endif;
+		if (isset($params['data'])){
+			$entete = "Content-Type: application/json\r\n";
+			$this->_data = $entete . "\r\n" . $params['data'];
+			$this->_request = $request = 'POST';
+		}
 
 
-		$buffer = curl_exec($curl_handle);
+		include_spip('inc/distant');
+		$url = $this->apiUrl . $method;
+		$url_log = "api.mailjet.com/".$this->apiVersion.$method;
+		try {
+			if (!function_exists('recuperer_url')){
+				$response = recuperer_page($url,false,false,null,$this->_data);
+				if (!$response){
+					$this->_error = 'erreur lors de recuperer_page sur API Mailjet '.$this->apiVersion;
+	        return false;
+				}
+				$this->_response_code = 200; // on suppose car sinon renvoie false
+			}
+			else {
+				$res = recuperer_url($url,
+					array(
+						'methode' => $this->_method,
+						'datas' => $this->_data,
+					)
+				);
+				$this->_response_code = $res['status'];
+				$response = $res['page'];
+			}
 
-		if ($this->debug>2) var_dump($buffer);
+		}
+		catch (Exception $e) {
+			$this->_error = "sendRequest $url_log : ".$e->getMessage();
+			spip_log($this->_error,"mailshot"._LOG_ERREUR);
+      return false;
+    }
 
-		# Response code
-		$this->_response_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
-
-		# Close curl process
-		curl_close($curl_handle);
-
-		# RESPONSE 
-		$this->_response = ($this->output=='json') ? json_decode($buffer) : $buffer;
-
-		return ($this->_response_code==200) ? true : false;
-
+		spip_log("$url_log resultat: " . $response,"mailshot"._LOG_DEBUG);
+		if ($response){
+			$this->_response = json_decode($response,true);
+		}
+		return (intval($this->_response_code/100)==2) ? true : false;
 	}
 
 

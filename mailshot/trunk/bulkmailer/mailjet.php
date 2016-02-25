@@ -37,22 +37,35 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 		$mailer_defaut = charger_fonction("defaut","bulkmailer");
 	}
 
-	// on ecrase le smtp avec celui de mailjet
-	$options['smtp'] = array(
-		"host" => "in.mailjet.com",
-		"port" => "587",
-		"auth" => "oui",
-		"username" => $config['mailjet_api_key'],
-		"password" => $config['mailjet_secret_key'],
-		"secure" => "non",
-	);
-	// support des API v2 et v3 de Mailjet
+	$api_version = 1;
 	if (isset($config['mailjet_api_version']) AND intval($config['mailjet_api_version'])>1){
-		$options['smtp']['host'] = "in-v".intval($config['mailjet_api_version']).".mailjet.com";
+		$api_version = intval($config['mailjet_api_version']);
 	}
 
-	// on utilise une surcharge pour gerer le tracking
-	$options['sender_class'] = "FacteurMailjet";
+	if ($api_version==3){
+		// on utilise l'API REST
+		$options['sender_class'] = "FacteurMailjetv3";
+	}
+	else {
+		// on passe par l'API SMTP basique
+
+		// on ecrase le smtp avec celui de mailjet
+		$options['smtp'] = array(
+			"host" => "in.mailjet.com",
+			"port" => "587",
+			"auth" => "oui",
+			"username" => $config['mailjet_api_key'],
+			"password" => $config['mailjet_secret_key'],
+			"secure" => "non",
+		);
+		// support des API v2 et v3 de Mailjet
+		if (isset($config['mailjet_api_version']) AND intval($config['mailjet_api_version'])>1){
+			$options['smtp']['host'] = "in-v".intval($config['mailjet_api_version']).".mailjet.com";
+		}
+
+		// on utilise une surcharge pour gerer le tracking
+		$options['sender_class'] = "FacteurMailjet";
+	}
 	return $mailer_defaut($to_send,$options);
 }
 
@@ -85,7 +98,17 @@ function &mailjet_api(){
 		include_spip('inc/config');
 		$config = lire_config('mailshot/');
 
-		include_spip('lib/mailjet-api-php/mailjet-0.1');
+		$api_version = 1;
+		if (isset($config['mailjet_api_version']) AND intval($config['mailjet_api_version'])>1){
+			$api_version = intval($config['mailjet_api_version']);
+		}
+
+		if ($api_version==3) {
+			include_spip('lib/mailjet-api-php/mailjet-3');
+		}
+		else {
+			include_spip('lib/mailjet-api-php/mailjet-0.1');
+		}
 		$mj = new Mailjet($config['mailjet_api_key'],$config['mailjet_secret_key']);
 		$mj->debug = 0;
 	}
@@ -153,6 +176,11 @@ function mailjet_id_from_custom_campaign($tracking_id){
 	return $res->id;
 }
 
+
+/**
+ * Class FacteurMailjet
+ * Utilise l'API SMTP valable dans toutes les versions d'API
+ */
 class FacteurMailjet extends Facteur {
 
 	public $send_options = array();
@@ -176,4 +204,180 @@ class FacteurMailjet extends Facteur {
 
 		return parent::Send();
 	}
+}
+
+
+/**
+ * Utilise l'API REST en v3
+ * Class FacteurMailjetv3
+ */
+class FacteurMailjetv3 extends Facteur {
+
+	protected $api_version = "v3/";
+	public $send_options = array();
+	protected $message = array(
+		'FromEmail' => '',
+	  'FromName' => '',
+    'Subject' => '',
+    'Text-part' => '',
+    'Html-part' => '',
+    'Recipients' => array(
+	    /*array(
+		    'Email' => '',
+		    'Name' => '',
+	    )*/
+    ),
+    //'Mj-campaign' => '',
+    //'Mj-deduplicatecampaign' => 1,
+		//'Mj-CustomID' => '',
+		'Headers' => array(
+			//'Reply-To' => 'copilot@mailjet.com',
+		),
+	);
+
+	protected function cleanAdress($address, $name = ''){
+		$address = trim($address);
+    $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
+		if (!self::ValidateAddress($address)) {
+			$this->SetError('invalid_address'.': '. $address);
+			return false;
+	  }
+		return array($address,$name);
+	}
+
+	/**
+	* Adds a "To" address.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddAddress($address, $name = '') {
+		if ($a = $this->cleanAdress($address,$name)){
+			$this->message['Recipients'][] = array('Email'=>$address,'Name'=>$name);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* Adds a "Cc" address.
+	* Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddCC($address, $name = '') {
+		return $this->AddAddress($address, $name);
+	}
+
+	/**
+	* Adds a "Bcc" address.
+	* Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddBCC($address, $name = '') {
+		return $this->AddAddress($address, $name);
+	}
+
+	/**
+	* Adds a "Reply-to" address.
+	* @param string $address
+	* @param string $name
+	* @return boolean
+	*/
+	public function AddReplyTo($address, $name = '') {
+		if ($a = $this->cleanAdress($address,$name)){
+			$this->message['Headers']['ReplyTo'] = $address;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* Adds a custom header.
+	* @access public
+	* @return void
+	*/
+	public function AddCustomHeader($name, $value = null) {
+		if ($value === null) {
+			// Value passed in as name:value
+			list($name, $value) = explode(':', $name, 2);
+		}
+		$this->message['Headers'][$name] = trim($value);
+	}
+
+	/**
+	 * utilise $this->send_options options d'envoi
+	 *     string tracking_id
+	 * @return bool
+	 */
+	public function Send() {
+
+		$this->message['Html-part'] = $this->Body;
+		$this->message['Text-part'] = $this->AltBody;
+		$this->message['Subject'] = $this->Subject;
+		$this->message['FromEmail'] = $this->From;
+		$this->message['FromName'] = $this->FromName;
+
+		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
+		if (isset($this->send_options['tracking_id'])
+		  AND $id = $this->send_options['tracking_id']){
+			//$this->message['track_opens'] = true;
+			//$this->message['track_clicks'] = true;
+
+			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
+			$this->message['Mj-campaign'] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
+			$this->message['Mj-deduplicatecampaign'] = 1;
+		}
+
+		$mj = mailjet_api();
+		include_spip('inc/json');
+		$res = $mj->send(array('data'=>json_encode($this->message)));
+		if (!$res){
+			$this->SetError($mj->_error);
+			return false;
+		}
+
+		/*
+		{
+		    "ErrorInfo": "Bad Request",
+		    "ErrorMessage": "Unknown resource: \"contacts\"",
+		    "StatusCode": 400
+		}
+		*/
+
+		// statut d'erreur au premier niveau ?
+		if (isset($res['StatusCode'])
+		  AND intval($res['StatusCode']/100)>2){
+
+			$this->SetError("status ".$res['StatusCode']." - ".$res['ErrorInfo'].": ".$res['ErrorMessage']);
+			return false;
+		}
+
+		// { "Sent" : [{ "Email" : "cedric@yterium.com", "MessageID" : 19140330729428381 }] }
+		if (isset($res['Sent']) AND count($res['Sent'])){
+			return true;
+		}
+		// les autres type de reponse sont non documentees. On essaye au hasard…
+		if (isset($res['Queued']) AND count($res['Queued'])){
+			return true;
+		}
+		if (isset($res['Invalid']) AND count($res['Invalid'])){
+			$this->SetError("invalid");
+			return false;
+		}
+		if (isset($res['Rejected']) AND count($res['Rejected'])){
+			$this->SetError("rejected");
+			return false;
+		}
+
+		// Erreur inconnue
+		$this->SetError("mailjetERROR ".var_export($res,true));
+		spip_log("mailjet/send resultat inatendu : ".json_encode($res),"mailshot_errors"._LOG_ERREUR);
+		return false;
+	}
+
+	public function CreateHeader(){}
 }
