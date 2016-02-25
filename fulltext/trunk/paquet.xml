@@ -1,13 +1,13 @@
 <paquet
 	prefix="fulltext"
 	categorie="navigation"
-	version="1.1.9"
+	version="1.1.10"
 	etat="test"
 	compatibilite="[3.0.1;3.1.*]"
 	logo="images/fulltext-32.png"
 	schema="0.2.1"
 	documentation="http://contrib.spip.net/Fulltext"
->	
+>
 
 	<nom>Fulltext</nom>
 	<!-- Indexation FULLTEXT pour accélérer les recherches -->

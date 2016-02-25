@@ -77,8 +77,9 @@ function fulltext_liste_des_tables(){
  * 		Le moteur utilisé
  */
 function fulltext_trouver_engine_table($table) {
-	if ($s = sql_query("SHOW CREATE TABLE " . table_objet_sql($table), $serveur) AND $t = sql_fetch($s) AND $create = array_pop($t) AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine))
+	if ($s = sql_query("SHOW CREATE TABLE " . table_objet_sql($table)) AND $t = sql_fetch($s) AND $create = array_pop($t) AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine)) {
 		return $engine[1];
+	}
 }
 
 function fulltext_index($table, $champs, $nom = null) {
