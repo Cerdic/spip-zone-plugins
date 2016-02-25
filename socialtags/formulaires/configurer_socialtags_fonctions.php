@@ -19,6 +19,9 @@ function socialtags_choix(){
 		//$image = find_in_path('images/'.$a.'.png');
 		$checked = in_array($a, $cfg) ? ' checked="checked"' : '';
 
+		if (!isset($retour[$category])) {
+			$retour[$category] = '';
+		}
 		$retour[$category] .= "<div class='choix'>
 				<input type='checkbox' id='choix_{$a}' name='tags[]' value='{$a}'{$checked} />
 				<label for='choix_{$a}'>
