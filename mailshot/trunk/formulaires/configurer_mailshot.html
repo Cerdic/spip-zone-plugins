@@ -10,11 +10,11 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,mailshot}
 		<input type="hidden" name="_meta_casier" value="mailshot" />
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset">
 				<fieldset>
 					<legend><:mailshot:legend_configuration_mailer:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						<li class="editer pleine_largeur editer_mailer [ (#ENV**{erreurs}|table_valeur{smtp}|oui)erreur]">
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp})</span>]
 							#SET{disable,#CONFIG{facteur_smtp}|=={oui}|non}
@@ -22,101 +22,10 @@
 								<input type="radio" name="mailer" class="radio" value="defaut" id="mailer_defaut"[(#GET{disable}|non)[(#ENV{mailer,'defaut'}|=={defaut}|oui)checked="checked"]][(#GET{disable}|oui)disabled="disabled"]/>
 								<label for="mailer_defaut"><:mailshot:label_mailer_defaut:>[(#GET{disable}|oui)<br /><b><:mailshot:label_mailer_defaut_desactive:>]</b></label>
 							</div>
-							<div class="choix">
-								<input type="radio" name="mailer" class="radio" value="smtp" id="mailer_smtp"[(#ENV{mailer,'defaut'}|=={smtp}|oui)checked="checked"]/>
-								<label for="mailer_smtp"><:mailshot:label_mailer_smtp:></label>
-							</div>
-							<ul class="suite">
-								<li class="editer gauche editer_smtp_param editer_smtp_host [ (#ENV**{erreurs}|table_valeur{smtp_host}|oui)erreur]">
-									<label for="smtp_host"><:facteur:facteur_smtp_host:></label>[
-									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_host})</span>]
-									<input type="text" name="smtp[host]" class="text" value="#ENV**{smtp/host}" id="smtp_host" />
-								</li>
-								<li class="editer gauche editer_smtp_param editer_smtp_port [ (#ENV**{erreurs}|table_valeur{smtp_port}|oui)erreur]">
-									<label for="smtp_port"><:facteur:facteur_smtp_port:></label>[
-									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_port})</span>]
-									<input type="text" name="smtp[port]" class="text" value="#ENV**{smtp/port}" id="smtp_port" />
-								</li>
-								<li class="editer editer_smtp_param editer_smtp_auth [ (#ENV**{erreurs}|table_valeur{smtp_auth}|oui)erreur]">
-									<label><:facteur:facteur_smtp_auth:></label>
-									[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_auth})</span>]
-									<div class="choix">
-										<input type="radio" name="smtp[auth]" class="radio" value="non" id="smtp_auth_non"[(#ENV{smtp/auth,'non'}|=={non}|oui)checked="checked"]/>
-										<label for="smtp_auth_non"><:facteur:facteur_smtp_auth_non:></label>
-									</div>
-									<div class="choix">
-										<input type="radio" name="smtp[auth]" class="radio" value="oui" id="smtp_auth_oui"[(#ENV{smtp/auth,'non'}|=={oui}|oui)checked="checked"]/>
-										<label for="smtp_auth_oui"><:facteur:facteur_smtp_auth_oui:></label>
-									</div>
-									<ul class="suite">
-										<li class="editer gauche editer_smtp_username [ (#ENV**{erreurs}|table_valeur{smtp_username}|oui)erreur]">
-											<label for="smtp_username"><:facteur:facteur_smtp_username:></label>[
-											<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_username})</span>]
-											<input type="text" name="smtp[username]" class="text" value="#ENV**{smtp/username}" id="smtp_username" />
-										</li>
-										<li class="editer gauche editer_smtp_password [ (#ENV**{erreurs}|table_valeur{smtp_password}|oui)erreur]">
-											<label for="smtp_password"><:facteur:facteur_smtp_password:></label>[
-											<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_password})</span>]
-											<input type="password" name="smtp[password]" class="text" value="#ENV**{smtp/password}" id="smtp_password" />
-										</li>
-									</ul>
-								</li>
-								[(#ENV{_enable_smtp_secure}|non)
-								<li class="editer editer_smtp_param editer_smtp_secure [ (#ENV**{erreurs}|table_valeur{smtp_secure}|oui)erreur]">
-									<label><:facteur:facteur_smtp_secure:></label>
-									[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_secure})</span>]
-									<div class="choix">
-										<input type="radio" name="smtp\[secure\]" class="radio" value="non" id="smtp_secure_non"[(#ENV{smtp/secure,'non'}|=={non}|oui)checked="checked"]/>
-										<label for="smtp_secure_non"><:facteur:facteur_smtp_secure_non:></label>
-									</div>
-									<div class="choix">
-										<input type="radio" name="smtp\[secure\]" class="radio" value="ssl" id="smtp_secure_ssl"[(#ENV{smtp/secure,'non'}|=={ssl}|oui)checked="checked"]/>
-										<label for="smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
-									</div>
-									<div class="choix">
-										<input type="radio" name="smtp\[secure\]" class="radio" value="tls" id="smtp_secure_tls"[(#ENV{smtp/secure,'non'}|=={tls}|oui)checked="checked"]/>
-										<label for="smtp_secure_tls"><:facteur:facteur_smtp_secure_tls:></label>
-									</div>
-								</li>]
-								<li class="editer editer_smtp_errorsto [ (#ENV**{erreurs}|table_valeur{smtp_errorsto}|oui)erreur]">
-									<label for="smtp_errorsto"><:facteur:facteur_smtp_sender:></label>[
-									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_errorsto})</span>]
-									<p class="explication"><:facteur:facteur_smtp_sender_descriptif:></p>
-									<input type="text" name="smtp[errorsto]" class="text" value="#ENV**{smtp/errorsto}" id="smtp_errorsto" />
-								</li>
-							</ul>
-							<div class="choix">
-								<input type="radio" name="mailer" class="radio" value="mandrill" id="mailer_mandrill"[(#ENV{mailer,'defaut'}|=={mandrill}|oui)checked="checked"]/>
-								<label for="mailer_mandrill"><:mailshot:label_mailer_mandrill:></label>
-								<a href="http://mandrill.com/">http://mandrill.com/</a>
-							</div>
-							<ul class="suite">
-								#SET{name,mandrill_api_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-								</li>
-							</ul>
-							<div class="choix">
-								<input type="radio" name="mailer" class="radio" value="mailjet" id="mailer_mailjet"[(#ENV{mailer,'defaut'}|=={mailjet}|oui)checked="checked"]/>
-								<label for="mailer_mailjet"><:mailshot:label_mailer_mailjet:></label>
-								<a href="http://www.mailjet.com/">http://www.mailjet.com/</a>
-							</div>
-							<ul class="suite">
-								#SET{name,mailjet_api_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-								</li>
-								#SET{name,mailjet_secret_key}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer gauche editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-								</li>
-							</ul>
+
+							<INCLURE{fond=formulaires/inc-config-mailshot-smtp,env} />
+							<INCLURE{fond=formulaires/inc-config-mailshot-mandrill,env} />
+							<INCLURE{fond=formulaires/inc-config-mailshot-mailjet,env} />
 							<!--editer_mailer_choix-->
 						</li>
 						<!--EX01-->
@@ -141,8 +50,8 @@
 								onchange="jQuery('#rate_limit').attr('disabled',jQuery(this).prop('checked')?true:false);"
 								[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
 								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-								<p class="explication"><:mailshot:explication_boost_send:></p>
 							</div>
+							<p class="explication"><:mailshot:explication_boost_send:></p>
 						</li>
 
 					</ul>
@@ -161,19 +70,19 @@
 							<div class="choix">
 								<input type="radio" name="adresse_envoi" class="radio" value="oui" id="adresse_envoi_oui"[(#ENV{adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
 								<label for="adresse_envoi_oui"><:facteur:personnaliser:></label>
+								<ul class="editer-groupe suite">
+									<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_nom [ (#ENV**{erreurs}|table_valeur{adresse_envoi_nom}|oui)erreur]">
+										<label for="adresse_envoi_nom"><:facteur:facteur_adresse_envoi_nom:></label>[
+										<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_nom})</span>]
+										<input type="text" name="adresse_envoi_nom" class="text" value="#ENV**{adresse_envoi_nom}" id="adresse_envoi_nom" />
+									</li>
+									<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_email [ (#ENV**{erreurs}|table_valeur{adresse_envoi_email}|oui)erreur]">
+										<label for="adresse_envoi_email"><:facteur:facteur_adresse_envoi_email:></label>[
+										<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_email})</span>]
+										<input type="text" name="adresse_envoi_email" class="text" value="#ENV**{adresse_envoi_email}" id="adresse_envoi_email" />
+									</li>
+								</ul>
 							</div>
-							<ul class="suite">
-								<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_nom [ (#ENV**{erreurs}|table_valeur{adresse_envoi_nom}|oui)erreur]">
-									<label for="adresse_envoi_nom"><:facteur:facteur_adresse_envoi_nom:></label>[
-									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_nom})</span>]
-									<input type="text" name="adresse_envoi_nom" class="text" value="#ENV**{adresse_envoi_nom}" id="adresse_envoi_nom" />
-								</li>
-								<li class="editer gauche editer_adresse_envoi_perso editer_adresse_envoi_email [ (#ENV**{erreurs}|table_valeur{adresse_envoi_email}|oui)erreur]">
-									<label for="adresse_envoi_email"><:facteur:facteur_adresse_envoi_email:></label>[
-									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi_email})</span>]
-									<input type="text" name="adresse_envoi_email" class="text" value="#ENV**{adresse_envoi_email}" id="adresse_envoi_email" />
-								</li>
-							</ul>
 						</li>
 					</ul>
 				</fieldset>
@@ -182,7 +91,7 @@
 				<fieldset>
 					<legend><:mailshot:legend_configuration_historique:></legend>
 					<p class="explication"><:mailshot:explication_purger_historique:></p>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,purger_historique}#SET{obli,''}#SET{defaut,'oui'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
@@ -194,16 +103,16 @@
 								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"
 								[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
 								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+								<ul class="editer-groupe suite">
+									#SET{name,purger_historique_delai}#SET{obli,''}#SET{defaut,'12'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+									<li class="editer gauche long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+										<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+										<span class='erreur_message'>(#GET{erreurs})</span>
+										]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+										style="width: 6em;" /> <:date_mois:>
+									</li>
+								</ul>
 							</div>
-							<ul class="suite">
-								#SET{name,purger_historique_delai}#SET{obli,''}#SET{defaut,'12'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer gauche long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
-									style="width: 6em;" /> <:date_mois:>
-								</li>
-							</ul>
 						</li>
 					</ul>
 				</fieldset>
@@ -226,7 +135,11 @@ jQuery(
 	function(){
 		jQuery('.suite').each(
 			function(){
-				var input=jQuery(this).prev('.choix').find('input.radio,input.checkbox');
+				var input=jQuery(this).prev('.choix');
+				if (!input.length){
+					input = jQuery(this).closest('.choix');
+				}
+				input=input.find('>input.radio,>input.checkbox');
 				var me = jQuery(this);
 				var name = input.attr('name');
 				if (input.length){
@@ -241,4 +154,5 @@ jQuery(
 <style type="text/css">
 .choix.disabled label {font-style: italic;opacity: 0.7;}
 .formulaire_spip .suite {padding-left: 20px;}
+.formulaire_spip .suite .editer {background: #f8f8f8}
 </style>
