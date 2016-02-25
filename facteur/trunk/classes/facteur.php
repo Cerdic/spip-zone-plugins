@@ -19,6 +19,16 @@ if (!class_exists('PHPMailer')) {
 
 include_spip('facteur_fonctions');
 
+/**
+ * Wrapper de spip_log pour par PHPMailer
+ * @param $message
+ * @param $level
+ */
+function facteur_log_debug($message,$level){
+	spip_log("$level: ".trim($message),"facteur"._LOG_DEBUG);
+}
+
+
 class Facteur extends PHPMailer {
 
 	/**
@@ -29,7 +39,7 @@ class Facteur extends PHPMailer {
 	 * @param array $options
 	 *
 	 */
-	function Facteur($email, $objet, $message_html, $message_texte, $options = array()) {
+	public function __construct($email, $objet, $message_html, $message_texte, $options = array()) {
 		// On récupère toutes les options par défaut depuis le formulaire de config
 		$defaut = array();
 		foreach (array(
@@ -43,12 +53,18 @@ class Facteur extends PHPMailer {
 		}
 		// On fusionne les options avec d'éventuelles surcharges lors de l'appel
 		$options = array_merge($defaut, $options);
-		
+
+		// par defaut on log rien car tres verbeux
+		// on utilise facteur_log_debug qui filtre log SPIP en _LOG_DEBUG
+		$this->SMTPDebug = 0;
+		$this->Debugoutput = "facteur_log_debug";
 		// Il est possible d'avoir beaucoup plus de logs avec 2, 3 ou 4, ce qui logs les échanges complets avec le serveur
+		// utiliser avec un define('_MAX_LOG',1000); car sinon on est limite a 100 lignes par hit et phpMailer est tres verbeux
 		if (defined('_FACTEUR_DEBUG_SMTP')) {
 			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
 		}
-		
+
+
 		if (
 			$options['adresse_envoi'] == 'oui'
 			and $options['adresse_envoi_email']
@@ -180,15 +196,23 @@ class Facteur extends PHPMailer {
 	 * @param bool $advanced Inutilisé
 	 * @return string Retourne un texte brut formaté correctement
 	 */
-	function html2text($html, $advanced = false){
+	public function html2text($html, $advanced = false){
 		return facteur_mail_html2text($html);
 	}
-	
+
+	/**
+	 * Compat ascendante, obsolete
+	 * @deprecated
+	 */
+	public function ConvertirStylesEnligne() {
+		$this->Body = facteur_convertir_styles_inline($this->Body);
+	}
+
 	/**
 	 * Transformer les urls des liens et des images en url absolues
 	 * sans toucher aux images embarquees de la forme "cid:..."
 	 */
-	function UrlsAbsolues($base=null){
+	protected function UrlsAbsolues($base=null){
 		include_spip('inc/filtres_mini');
 		if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS',
 		  $this->Body, $liens, PREG_SET_ORDER)) {
@@ -212,7 +236,10 @@ class Facteur extends PHPMailer {
 		}
 	}
 
-	function JoindreImagesHTML() {
+	/**
+	 * Embed les images HTML dans l'email
+	 */
+	protected function JoindreImagesHTML() {
 		$image_types = array(
 							'gif'	=> 'image/gif',
 							'jpg'	=> 'image/jpeg',
@@ -265,14 +292,12 @@ class Facteur extends PHPMailer {
 
 
 	/**
-	 * Compat ascendante, obsolete
+	 * Conversion safe d'un texte utf en isotruc
+	 * @param string $text
+	 * @param string $mode
+	 * @return string
 	 */
-	function ConvertirStylesEnligne() {
-		$this->Body = facteur_convertir_styles_inline($this->Body);
-	}
-
-
-	function safe_utf8_decode($text,$mode='texte_brut') {
+	protected function safe_utf8_decode($text,$mode='texte_brut') {
 		if (!is_utf8($text))
 			return ($text);
 
@@ -290,7 +315,10 @@ class Facteur extends PHPMailer {
 		}
 	}
 
-	function ConvertirUtf8VersIso8859() {
+	/**
+	 * Convertir tout le mail utf en isotruc
+	 */
+	protected function ConvertirUtf8VersIso8859() {
 		$this->CharSet	= 'iso-8859-1';
 		$this->Body		= str_ireplace('charset=utf-8', 'charset=iso-8859-1', $this->Body);
 		$this->Body		= $this->safe_utf8_decode($this->Body,'html');
@@ -299,7 +327,10 @@ class Facteur extends PHPMailer {
 		$this->FromName	= $this->safe_utf8_decode($this->FromName);
 	}
 
-	function ConvertirAccents() {
+	/**
+	 * Convertir les accents du body en entites html
+	 */
+	protected function ConvertirAccents() {
 		// tableau à compléter au fur et à mesure
 		$cor = array(
 						'à' => '&agrave;',
@@ -323,6 +354,11 @@ class Facteur extends PHPMailer {
 
 		$this->Body = strtr($this->Body, $cor);
 	}
+
+	/**
+	 * Envoi de l'email
+	 * @return bool
+	 */
 	public function Send() {
 		ob_start();
 		$retour = parent::Send();
