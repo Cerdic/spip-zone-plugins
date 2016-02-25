@@ -54,6 +54,10 @@ function rezosocios_liste() {
 									'nom' => 'Linkedin',
 									'url' => 'https://www.linkedin.com/profile/view?id='
 								),
+					'linkedin_company' => array(
+									'nom' => 'Linkedin (company)',
+									'url' => 'https://www.linkedin.com/company/'
+								),
 					'weibo' => array(
 									'nom' => 'Weibo',
 									'url' => 'http://www.weibo.com/'
