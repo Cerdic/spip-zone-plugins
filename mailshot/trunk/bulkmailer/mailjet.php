@@ -46,6 +46,10 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 		"password" => $config['mailjet_secret_key'],
 		"secure" => "non",
 	);
+	// support des API v2 et v3 de Mailjet
+	if (isset($config['mailjet_api_version']) AND intval($config['mailjet_api_version'])>1){
+		$options['smtp']['host'] = "in-v".intval($config['mailjet_api_version']).".mailjet.com";
+	}
 
 	// on utilise une surcharge pour gerer le tracking
 	$options['sender_class'] = "FacteurMailjet";
