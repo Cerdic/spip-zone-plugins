@@ -151,30 +151,54 @@ function formulaires_configurer_facteur_traiter_dist(){
 
 	// faut-il envoyer un message de test ?
 	if (_request('tester')){
-
+		$res = array();
 		$destinataire = _request('email_test');
-		if ((facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test')))===true){
-			// OK
-			$res = array('message_ok'=>_T('facteur:email_test_envoye'));
+		$err = facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test'));
+		if ($err) {
+			$res['message_erreur'] = $err;
 		}
 		else {
-			// erreur
-			$res = array('message_erreur'=>_T('facteur:erreur')._T('facteur:erreur_dans_log'));
+			$res['message_ok'] = _T('facteur:email_test_envoye');
 		}
 	}
 	
 	return $res;
 }
 
+/**
+ * Fonction pour tester un envoi de mail ver sun destinataire
+ * renvoie une erreur eventuelle ou rien si tout est OK
+ * @param string $destinataire
+ * @param string $titre
+ * @return string
+ *   message erreur ou vide si tout est OK
+ */
 function facteur_envoyer_mail_test($destinataire,$titre){
+
 	include_spip('classes/facteur');
 	$message_html	= recuperer_fond('emails/test_email_html', array());
 	$message_texte	= recuperer_fond('emails/test_email_texte', array());
+	$corps = array(
+		'html' => $message_html,
+		'texte' => $message_texte,
+		'exceptions' => true,
+	);
 
 	// passer par envoyer_mail pour bien passer par les pipeline et avoir tous les logs
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$retour = $envoyer_mail($destinataire, $titre, array('html'=>$message_html,'texte'=>$message_texte));
+	try {
+		$retour = $envoyer_mail($destinataire, $titre, $corps);
+	}
+	catch (Exception $e) {
+		return $e->getMessage();
+	}
 
-	return $retour?true:false;
+	// si echec mais pas d'exception, on signale de regarder dans les logs
+	if (!$retour) {
+		return _T('facteur:erreur').' '._T('facteur:erreur_dans_log');
+	}
+
+	// tout est OK, pas d'erreur
+	return "";
 }
 ?>

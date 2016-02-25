@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{tester,''}|oui)
+	[(#ENV{tester,''}|et{#ENV*{message_erreur}|non})
 	<iframe style='width:95%;height:500px;margin:10px;' src='#URL_PAGE{emails/test_email_html,var_mode=calcul}'></iframe>
 	]
 	<form method="post" action="#ENV{action}"><div>
