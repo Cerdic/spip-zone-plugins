@@ -53,10 +53,15 @@ function massicot_declarer_tables_interfaces($interfaces) {
     foreach (lister_tables_objets_sql() as $table => $valeurs) {
 
         if ($table !== 'spip_documents') {
-            $interfaces['table_des_traitements'][strtoupper('LOGO_'.objet_type($table))][] =
-                'massicoter_logo(%s, $connect, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])';
 
-        }
+	        $logo_type = strtoupper('LOGO_'.objet_type($table));
+
+	        if (!empty($interfaces['table_des_traitements'][$logo_type])) {
+		        $interfaces['table_des_traitements'][$logo_type][0] = 'massicoter_logo('.$interfaces['table_des_traitements'][$logo_type][0].', $connect, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])';
+	        } else {
+		        $interfaces['table_des_traitements'][$logo_type][] = 'massicoter_logo(%s, $connect, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])';
+	        }
+       }
     }
 
     return $interfaces;
