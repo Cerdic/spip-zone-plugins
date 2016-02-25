@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_cc' => 'Copie (CC) :',
 	'facteur_copies' => 'Copies :',
 	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.',
+	'facteur_email_test' => 'Envoyer un email de test à :',
 	'facteur_filtre_accents' => 'Transformer les accents en leur entités html (utile pour Hotmail notamment).',
 	'facteur_filtre_css' => 'Transformer les styles contenus entre <head> et </head> en des styles "en ligne", utile pour les webmails car les styles en ligne ont la priorité sur les styles externes.',
 	'facteur_filtre_images' => 'Embarquer les images référencées dans les emails',
@@ -56,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.',
 
 	// N
-	'note_test_configuration' => 'Un email sera envoyé à l’adresse d’envoi définie (ou celle du webmaster).',
+	'note_test_configuration' => 'Un email sera envoyé à cette adresse.',
 
 	// P
 	'personnaliser' => 'Personnaliser ces réglages',

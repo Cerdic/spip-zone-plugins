@@ -27,6 +27,7 @@ function formulaires_configurer_facteur_charger_dist(){
 		'facteur_cc'                  => lire_config('facteur_cc'),
 		'facteur_bcc'                 => lire_config('facteur_bcc'),
 		'_enable_smtp_secure'         => (intval(phpversion()) == 5)?' ':'',
+		'email_test'                  => lire_config('facteur_adresse_envoi')=='oui'?lire_config('facteur_adresse_envoi_email'):$GLOBALS['meta']['email_webmaster'],
 		'tester'                      => '',
 	);
 
@@ -44,6 +45,7 @@ function formulaires_configurer_facteur_verifier_dist(){
 		if (!($h=_request('facteur_smtp_host')))
 			$erreurs['facteur_smtp_host'] = _T('info_obligatoire');
 		else {
+			$h = trim($h);
 			$regexp_ip_valide = '#^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$#'; 
 			// Source : http://www.d-sites.com/2008/10/09/regex-ipv4-et-ipv6/
 			if (!preg_match($regexp_ip_valide,$h)){ // ce n'est pas une IP
@@ -55,6 +57,7 @@ function formulaires_configurer_facteur_verifier_dist(){
 				if (gethostbyaddr($h)==$h)
 					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
 			}
+			set_request('facteur_smtp_host',$h);
 		}
 		if (!($p=_request('facteur_smtp_port')))
 			$erreurs['facteur_smtp_port'] = _T('info_obligatoire');
@@ -79,6 +82,16 @@ function formulaires_configurer_facteur_verifier_dist(){
 	  AND !email_valide($emailbcc)) {
 		$erreurs['facteur_bcc'] = _T('form_email_non_valide');
 	}
+
+	if (_request('tester')){
+		if (!$email = _request('email_test')){
+			$erreurs['email_test'] = _T('info_obligatoire');
+		}
+		elseif (!email_valide($email)) {
+			$erreurs['email_test'] = _T('form_email_non_valide');
+		}
+	}
+
 	
 	if(count($erreurs)>0){
 		$erreurs['message_erreur'] = _T('facteur:erreur_generale');
@@ -139,12 +152,7 @@ function formulaires_configurer_facteur_traiter_dist(){
 	// faut-il envoyer un message de test ?
 	if (_request('tester')){
 
-		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
-		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
-			$destinataire = $GLOBALS['meta']['facteur_adresse_envoi_email'];
-		else
-			$destinataire = $GLOBALS['meta']['email_webmaster'];
-
+		$destinataire = _request('email_test');
 		if ((facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test')))===true){
 			// OK
 			$res = array('message_ok'=>_T('facteur:email_test_envoye'));
