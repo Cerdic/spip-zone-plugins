@@ -6,7 +6,6 @@
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
-
 				[(#SAISIE{statuts_auteurs,people,
 					label=<:spipicious:types_utilisateurs:>,
 					multiple=oui})]
@@ -19,7 +18,7 @@
 				</B_groupes>
 			</ul>
 			[(#GET{un_groupe_mot}|=={oui}|oui)
-			<input type="hidden" name="groupe_mots" value="#GET{id_groupe}" />]
+			<input type="hidden" name="groupe_mot" value="#GET{id_groupe}" />]
 			<p class="boutons">
 				<input type="submit" value="<:bouton_valider:>" class="submit" />
 			</p>
