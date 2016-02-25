@@ -63,6 +63,7 @@ class Facteur extends PHPMailer {
 		if (defined('_FACTEUR_DEBUG_SMTP')) {
 			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
 		}
+		$this->exceptions = false;
 
 
 		if (
@@ -182,6 +183,13 @@ class Facteur extends PHPMailer {
 		if ($options['filtre_iso_8859']) {
 			$this->ConvertirUtf8VersIso8859();
 		}
+	}
+
+	/**
+	 * @param bool $exceptions
+	 */
+	public function SetExceptions($exceptions){
+		$this->exceptions = ($exceptions?true:false);
 	}
 
 	/**
@@ -352,60 +360,51 @@ class Facteur extends PHPMailer {
 		$this->Body = strtr($this->Body, $cor);
 	}
 
+
 	/**
-	 * Envoi de l'email
+	 * Une fonction wrapper pour appeler une methode de phpMailer
+	 * en recuperant l'erreur eventuelle, en la loguant via SPIP et en lancant une exception si demandee
+	 * @param string $function
+	 * @param array $args
 	 * @return bool
+	 * @throws phpmailerException
 	 */
+	protected function callWrapper($function,$args){
+		$exceptions = $this->exceptions;
+		$this->exceptions = true;
+		try {
+			$retour = call_user_func_array($function,$args);
+			$this->exceptions = $exceptions;
+		}
+		catch (phpmailerException $exc) {
+			spip_log($function."() : ".$exc->getMessage(),'facteur.'._LOG_ERREUR);
+			$this->exceptions = $exceptions;
+			if ($this->exceptions) {
+				throw $exc;
+			}
+			return false;
+		}
+
+		return $retour;
+	}
+
+	/*
+	 * Appel des fonctions parents via le callWrapper qui se charge de loger les erreurs
+	 */
+
 	public function Send() {
-		ob_start();
-		$retour = parent::Send();
-		$error = ob_get_contents();
-		ob_end_clean();
-		if( !empty($error) ) {
-			spip_log("Erreur Facteur->Send : $error",'facteur.'._LOG_ERREUR);
-		}
-		return $retour;
+		return $this->callWrapper("parent::Send",func_get_args());
 	}
-
 	public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
-		ob_start();
-		$retour = parent::AddAttachment($path, $name, $encoding, $type);
-		$error = ob_get_contents();
-		ob_end_clean();
-		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddAttachment : $error",'facteur.'._LOG_ERREUR);
-		}
-		return $retour;
+		return $this->callWrapper("parent::AddAttachment",func_get_args());
 	}
-
 	public function AddReplyTo($address, $name = '') {
-		ob_start();
-		$retour = parent::AddReplyTo($address, $name);
-		$error = ob_get_contents();
-		ob_end_clean();
-		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddReplyTo : $error",'facteur.'._LOG_ERREUR);
-		}
-		return $retour;
+		return $this->callWrapper("parent::AddReplyTo",func_get_args());
 	}
 	public function AddBCC($address, $name = '') {
-		ob_start();
-		$retour = parent::AddBCC($address, $name);
-		$error = ob_get_contents();
-		ob_end_clean();
-		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddBCC : $error",'facteur.'._LOG_ERREUR);
-		}
-		return $retour;
+		return $this->callWrapper("parent::AddBCC",func_get_args());
 	}
 	public function AddCC($address, $name = '') {
-		ob_start();
-		$retour = parent::AddCC($address, $name);
-		$error = ob_get_contents();
-		ob_end_clean();
-		if( !empty($error) ) {
-			spip_log("Erreur Facteur->AddCC : $error",'facteur.'._LOG_ERREUR);
-		}
-		return $retour;
+		return $this->callWrapper("parent::AddCC", func_get_args());
 	}
 }
