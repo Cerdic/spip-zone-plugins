@@ -10,8 +10,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param mixed $arg
  * @access public
  */
-function action_supprimer_document_tmp_dist($arg=null) {
-    if (is_null($arg)){
+function action_supprimer_document_tmp_dist($arg = null) {
+
+    if (is_null($arg)) {
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
     }

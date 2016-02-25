@@ -9,8 +9,9 @@
  * @package    SPIP\Uploadhtml5\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation et de mise à jour du plugin Formulaire upload html5.

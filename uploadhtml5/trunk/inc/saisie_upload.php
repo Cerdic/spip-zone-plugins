@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/session');
 
@@ -72,7 +74,7 @@ function saisie_upload_traiter($objet, $id_objet) {
     );
 
     // Le lien est fait, les documents ne doivent plus être en mode temporaire
-    foreach($documents['document'] as $id_document) {
+    foreach ($documents['document'] as $id_document) {
         objet_instituer('document', $id_document, array('statut' => 'publie'));
     }
 

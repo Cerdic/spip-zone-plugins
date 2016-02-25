@@ -1,9 +1,11 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function genie_nettoyer_document_temporaire_dist($t) {
-    spip_log('nettoyage des documents','uploadhtml');
+    spip_log('nettoyage des documents', 'uploadhtml');
 
     // On séléctionne les documents qui on le statut temporaire
     // ET qui sont vieux de plus de 24h.

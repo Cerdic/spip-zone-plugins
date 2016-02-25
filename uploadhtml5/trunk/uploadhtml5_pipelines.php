@@ -9,13 +9,14 @@
  * @package    SPIP\Uploadhtml5\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function uploadhtml5_jquery_plugins($scripts) {
 	include_spip('inc/config');
     $config = lire_config('uploadhtml5');
-    if (
-        (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
+    if ((isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
         or test_espace_prive() // Ou que l'on est dans l'espace privé
     ) {
         $scripts[] = 'lib/dropzone/dropzone.js'; // Charger Dropzone
@@ -27,8 +28,7 @@ function uploadhtml5_jquery_plugins($scripts) {
 function uploadhtml5_insert_head_css($flux) {
 	include_spip('inc/config');
     $config = lire_config('uploadhtml5');
-    if (
-        (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
+    if ((isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
         or test_espace_prive() // Ou que l'on est dans l'espace privé
     ) {
         $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/dropzone/dropzone.css').'" type="text/css" media="screen" />';
@@ -79,8 +79,7 @@ function uploadhtml5_formulaire_fond($flux) {
 
         // Injecter uloadhtml5 au dessus du formulaire joindre_document.
         $flux['data'] = $uploadhtml5.$flux['data'];
-    }
-    elseif ($flux['args']['form'] == 'editer_logo') {
+    } elseif ($flux['args']['form'] == 'editer_logo') {
 
 	    /**
 	     * Si on est pas sur l'espace privé et que les scripts
@@ -91,7 +90,7 @@ function uploadhtml5_formulaire_fond($flux) {
 		    return $flux;
 	    }
 
-        $chercher_logo = charger_fonction('chercher_logo','inc');
+        $chercher_logo = charger_fonction('chercher_logo', 'inc');
         if (!$chercher_logo($id_objet, id_table_objet($objet))) {
 
 
@@ -99,8 +98,9 @@ function uploadhtml5_formulaire_fond($flux) {
             $ajaxReload = 'navigation';
 
             // Cas spécial: si on édite le logo du site, il faut recharger le contenu et non la navigation
-            if ($id_objet == 0 and $objet == 'site')
+            if ($id_objet == 0 and $objet == 'site') {
                 $ajaxReload = 'contenu';
+            }
 
             // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte
             $uploadhtml5 = recuperer_fond(
@@ -115,10 +115,11 @@ function uploadhtml5_formulaire_fond($flux) {
             $config = lire_config('uploadhtml5');
             // Injecter uloadhtml5 au dessus du formulaire joindre_document.
             if (isset($config['remplacer_editer_logo'])
-                and $config['remplacer_editer_logo'])
+                and $config['remplacer_editer_logo']) {
                 $flux['data'] = $uploadhtml5;
-            else
+            } else {
                 $flux['data'] = $uploadhtml5.$flux['data'];
+            }
         }
     }
 

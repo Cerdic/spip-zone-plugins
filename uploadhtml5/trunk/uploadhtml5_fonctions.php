@@ -9,7 +9,9 @@
  * @package    SPIP\Uploadhtml5\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Uploader et lier des documents à un objet SPIP
@@ -20,14 +22,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $id_document Dans le cas ou l'on veux remplacer un document.
  * @access public
  */
-function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new', $mode = 'auto') {
+function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document = 'new', $mode = 'auto') {
 
     // tester l'autorisation d'ajout de document
     include_spip('inc/autoriser');
     /* S'il n'y a pas d'id_objet, c'est qu'on crée un nouveau
        document. Les autorisations seront gérées en aval dans
        ajouter_document. */
-    if ($id_objet AND (!autoriser('joindredocument',$objet,$id_objet))) {
+    if ($id_objet and (!autoriser('joindredocument', $objet, $id_objet))) {
         return false;
     }
 
@@ -35,8 +37,9 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
     $docs = array();
     foreach ($files as $doc) {
         // pas de fichier vide
-        if (!empty($doc['name']))
+        if (!empty($doc['name'])) {
             $docs[] = $doc;
+        }
     }
 
     // On fait un test au cas ou
@@ -66,7 +69,7 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 
     // Autorisation de mettre un logo?
     include_spip('inc/autoriser');
-    if (!autoriser('iconifier',$objet,$id_objet)) {
+    if (!autoriser('iconifier', $objet, $id_objet)) {
         return false;
     }
 
@@ -81,8 +84,8 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
     }
 
     include_spip('action/iconifier');
-    $chercher_logo = charger_fonction('chercher_logo','inc');
-    $ajouter_image = charger_fonction('spip_image_ajouter','action');
+    $chercher_logo = charger_fonction('chercher_logo', 'inc');
+    $ajouter_image = charger_fonction('spip_image_ajouter', 'action');
 
     $type = type_du_logo(id_table_objet($objet));
     $logo = $chercher_logo($id_objet, id_table_objet($objet));
@@ -93,11 +96,10 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 
     // Dans le cas d'un tableau, on présume que c'est un $_FILES et on passe directement
     if (is_array($fichier)) {
-        $err = $ajouter_image($type."on".$id_objet," ", $fichier, true);
-    }
-    else {
+        $err = $ajouter_image($type.'on'.$id_objet, ' ', $fichier, true);
+    } else {
         // Sinon, on caviarde la fonction ajouter_image
-        $err = $ajouter_image($type."on".$id_objet," ", array('tmp_name' => $fichier), true);
+        $err = $ajouter_image($type.'on'.$id_objet, ' ', array('tmp_name' => $fichier), true);
     }
 
     return ($err) ? $err : true;
@@ -118,8 +120,7 @@ function trouver_mime_type($type) {
     if ($type == 'logo') {
         global $formats_logos;
         $type = $formats_logos;
-    }
-    else {
+    } else {
         // on explode pour passer $type dans sql_in
         $type = explode(',', $type);
     }
@@ -142,7 +143,7 @@ function trouver_mime_type($type) {
  */
 function titre_cadre_logo($objet, $id_objet) {
     $balise_img = chercher_filtre('balise_img');
-    $img = $balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
+    $img = $balise_img(chemin_image('image-24.png'), '', 'cadre-icone');
     $libelles = pipeline('libeller_logo', $GLOBALS['logo_libelles']);
     $libelle = (($id_objet OR $objet != 'rubrique') ? $objet : 'racine');
     if (isset($libelles[$libelle])) {
@@ -152,18 +153,18 @@ function titre_cadre_logo($objet, $id_objet) {
     } else {
         $libelle = _L('Logo');
     }
-    switch($objet){
-    case 'article':
-        $libelle .= " " . aide ("logoart");
-        break;
-    case 'breve':
-        $libelle .= " " . aide ("breveslogo");
-        break;
-    case 'rubrique':
-        $libelle .= " " . aide ("rublogo");
-        break;
-    default:
-        break;
+    switch ($objet) {
+        case 'article':
+	        $libelle .= ' ' . aide('logoart');
+	        break;
+        case 'breve':
+	        $libelle .= ' ' . aide('breveslogo');
+	        break;
+        case 'rubrique':
+	        $libelle .= ' ' . aide('rublogo');
+	        break;
+        default:
+	        break;
     }
 
     return $img . $libelle;

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Formulaire d'upload en html5
@@ -22,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
-    include_spip("uploadhtml5_fonctions");
+    include_spip('uploadhtml5_fonctions');
 
     // Si l'option logo est activée, on renvoie un contexte figé qui correspond
     if (isset($args['logo']) and $args['logo'] == 'oui') {
@@ -48,8 +50,9 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
     }
 
     // Convertir les acceptedFiles
-    if (!empty($args['acceptedFiles']))
-        $args['acceptedFiles'] = trouver_mime_type($args['acceptedFiles']);
+    if (!empty($args['acceptedFiles'])) {
+	    $args['acceptedFiles'] = trouver_mime_type($args['acceptedFiles']);
+    }
 
     // Contexte de base, qui pourra être surcharger par $args
     $contexte = array(
@@ -66,13 +69,12 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
-    if (isset($args['logo']) and $args['logo'] == 'oui')
+    if (isset($args['logo']) and $args['logo'] == 'oui') {
         uploadhtml5_uploader_logo($objet, $id_objet, $_FILES['file_logo']['tmp_name']);
-    else
+    } else {
         uploadhtml5_uploader_document($objet, $id_objet, $_FILES, 'new', $mode);
+    }
 
     // Donnée de retour.
-    return array(
-        'editable' => true
-    );
+    return array('editable' => true);
 }

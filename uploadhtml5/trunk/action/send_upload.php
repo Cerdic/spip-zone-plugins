@@ -1,9 +1,12 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_send_upload_dist($arg=null) {
-    if (is_null($arg)){
+function action_send_upload_dist($arg = null) {
+
+    if (is_null($arg)) {
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
     }
