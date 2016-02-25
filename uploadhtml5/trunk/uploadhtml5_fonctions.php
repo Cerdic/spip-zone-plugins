@@ -45,7 +45,7 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document =
     // On fait un test au cas ou
     if (!empty($docs)) {
         // On ajoute les documents a un objet SPIP.
-        $ajouter_documents = charger_fonction('ajouter_documents','action');
+        $ajouter_documents = charger_fonction('ajouter_documents', 'action');
         return $ajouter_documents(
             $id_document,
             $docs,
