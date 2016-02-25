@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_supprimer_tmp_dist($faire, $quoi, $id, $qui, $opt){
+function autoriser_supprimer_tmp_dist($faire, $quoi, $id, $qui, $opt) {
     // on vérifie que le statut est bien tmp
     $statut = sql_getfetsel('statut', 'spip_documents', 'id_document='.intval($id));
 

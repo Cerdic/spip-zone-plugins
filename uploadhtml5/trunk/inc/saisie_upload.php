@@ -91,7 +91,7 @@ function saisie_upload_traiter($objet, $id_objet) {
  *        Supprime le fichier logo de la session et de la médiathèque si true
  * @access public
  */
-function saisie_upload_traiter_logo($objet, $id_objet, $supprimer=true) {
+function saisie_upload_traiter_logo($objet, $id_objet, $supprimer = true) {
 
     // On prend le premier fichier image de la saisie et on le transform en logo
     $documents = saisie_upload_get();

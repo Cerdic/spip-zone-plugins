@@ -145,7 +145,7 @@ function titre_cadre_logo($objet, $id_objet) {
     $balise_img = chercher_filtre('balise_img');
     $img = $balise_img(chemin_image('image-24.png'), '', 'cadre-icone');
     $libelles = pipeline('libeller_logo', $GLOBALS['logo_libelles']);
-    $libelle = (($id_objet OR $objet != 'rubrique') ? $objet : 'racine');
+    $libelle = (($id_objet or $objet != 'rubrique') ? $objet : 'racine');
     if (isset($libelles[$libelle])) {
         $libelle = $libelles[$libelle];
     } elseif ($libelle = objet_info($objet, 'texte_logo_objet')) {
