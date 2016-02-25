@@ -2,7 +2,8 @@
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ar" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=de" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=de" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=en" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />

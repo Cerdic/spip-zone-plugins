@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'configurer' => 'Konfigurieren',
 
+	// I
+	'info_nombre_favoris_objet' => '@nb@ Mal als Lesezeichen gespeichert', # Pas utile dans le plugin lui-même mais peut l'être dans les squelettes
+
 	// L
 	'label_style_formulaire16' => 'Klein (16px)',
 	'label_style_formulaire24' => 'Mittel (24px)',
@@ -30,7 +33,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'remove' => 'Löschen',
-	'remove_from' => 'Aus meiner Liste löschen'
+	'remove_from' => 'Aus meiner Liste löschen',
+
+	// S
+	'ses_favoris' => 'Seine Lesezeichen',
+
+	// V
+	'vos_favoris' => 'Ihre Lesezeichen' # Utile pour modifier le titre de l'inclusion
 );
 
 ?>
