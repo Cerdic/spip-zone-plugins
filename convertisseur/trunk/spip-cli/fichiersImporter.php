@@ -19,13 +19,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SpipImport extends Command {
+class fichiersImporter extends Command {
 	protected function configure() {
 		$this
-			->setName('conversion:spipimport')
-			->setDescription('Importe des fichiers d\'import SPIP.')
+			->setName('fichiers:importer')
+			->setDescription('Importer des fichiers texte SPIP dans spip_articles.')
 			->setAliases(array(
-				'import' // abbréviation commune pour "synchro"
+				'import' // abbréviation commune pour "import"
 			))
 			->addOption(
 				'source',
@@ -47,7 +47,8 @@ class SpipImport extends Command {
 				
 		// Répertoire source, ou arrivent les fichiers Quark (/exports_quark par défaut).
 		if(!is_dir($source))
-			mkdir($source);
+			$output->writeln("<error>Préciser le répertoire avec les fichiers à importer. spip import -s repertoire </error>");
+
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
@@ -59,9 +60,9 @@ class SpipImport extends Command {
 			else{
 				$output->writeln("<info>C'est parti pour un petit import !</info>");
 					
-				$fichiers_xml = preg_files($source . "/", "(?:(?<!\.metadata\.)xml$)");
+				$fichiers_xml = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)");
 				
-				$output->writeln("\n<info>" . sizeof($fichiers_xml) . " fichiers à importer dans $source</info>");
+				$output->writeln("\n<info>" . sizeof($fichiers_xml) . " fichiers à importer dans $source/</info>");
 
 				foreach($fichiers_xml as $f){
 					$fichier = 	preg_replace("/$source.*collections\//","",$f);							
