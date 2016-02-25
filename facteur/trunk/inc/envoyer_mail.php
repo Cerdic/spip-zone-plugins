@@ -32,6 +32,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *       string encodage : encodage a utiliser, parmi 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
  *       string mime : mime type du document
  *     array headers : tableau d'en-tetes personalises, une entree par ligne d'en-tete
+ *     bool exceptions : lancer une exception en cas d'erreur (false par defaut)
  * @param string $from (deprecie, utiliser l'entree from de $corps)
  * @param string $headers (deprecie, utiliser l'entree headers de $corps)
  * @return bool
@@ -151,6 +152,9 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
+	if (is_array($corps) AND isset($corps['exceptions'])){
+		$facteur->SetExceptions(['exceptions']);
+	}
 	
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
 	if (empty($from) AND empty($facteur->From)) {
@@ -253,10 +257,9 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
 	$retour = $facteur->Send();
 	
-	if (!$retour)
-		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur.'._LOG_ERREUR);
+	if (!$retour){
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail.'._LOG_ERREUR);
+	}
 
 	return $retour ;
 }
-
-?>
