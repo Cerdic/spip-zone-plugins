@@ -22,15 +22,18 @@ function mailshot_taches_generales_cron($taches_generales){
 		$taches_generales['mailshot_bulksend'] = max(60,$periode-15);
 	}
 
-	// gerer les feedback par pooling sur mailjet (on ne sait pas faire mieux simplement)
+	// gerer les feedback par pooling sur mailjet si version<3 (on ne sait pas faire mieux simplement)
 	include_spip("inc/config");
 	$config = lire_config("mailshot/");
-	if ($config['mailer']=="mailjet")
+	if ($config['mailer']=="mailjet"
+	  AND (!isset($config['mailjet_api_version']) OR $config['mailjet_api_version']<3)) {
 		$taches_generales['mailjet_feedback'] = 3400;
+	}
 
 	// gerer les feedback par pooling par imap
-	if (isset($GLOBALS["imap_feedback_username"]) && isset($GLOBALS["imap_feedback_password"]) && $GLOBALS["imap_feedback_hostname"])
+	if (isset($GLOBALS["imap_feedback_username"]) && isset($GLOBALS["imap_feedback_password"]) && $GLOBALS["imap_feedback_hostname"]){
 		$taches_generales['imap_feedback'] = 3400;
+	}
 
 	return $taches_generales;
 }

@@ -92,6 +92,57 @@ function bulkmailer_mailjet_config_dist(&$flux){
 }
 
 
+/**
+ * Prendre en charge le webhook mailjet
+ *
+ * @param $arg
+ */
+function bulkmailer_mailjet_webhook_dist($arg){
+
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD'){
+		http_status(200);
+		exit;
+	}
+
+	// les donnes sont postees en JSON RAW
+	$data = $GLOBALS['HTTP_RAW_POST_DATA'];
+	spip_log("bulkmailer_mailjet_webhook_dist $data","mailshot");
+
+	include_spip('inc/json');
+	if (!$data OR !$events = json_decode($data, true)){
+		http_status(403);
+		exit;
+	}
+
+	// si un seul event, on le met dans un tableau pour tout traiter de la meme facon
+	if (isset($events['event'])){
+		$events = array($data);
+	}
+
+	foreach($events as $event){
+		// array("open", "click", "bounce", "spam", "blocked");
+		$quoi = $event['event'];
+		if ($quoi=="open") $quoi="read"; // open chez mailjet, read ici
+		if ($quoi=="click") $quoi="clic"; // click chez mailjet, clic ici
+		if ($quoi=="bounce") $quoi="soft_bounce"; // bounce chez mailjet, soft_bounce ici
+		if ($quoi=="blocked") $quoi="reject"; // blocked chez mailjet, reject ici
+
+		$email = $event['email'];
+		$tracking_id = $event['customcampaign'];
+		if ($tracking_id){
+			$tracking_id = explode('/#',$tracking_id);
+			if (reset($tracking_id)==protocole_implicite($GLOBALS['meta']['adresse_site'])){
+				$tracking_id = end($tracking_id);
+				spip_log("tracking $quoi $email $tracking_id",'mailshot');
+				// appeler l'api webhook mailshot
+				$feedback = charger_fonction("feedback","newsletter");
+				$feedback($quoi,$email,$tracking_id);
+			}
+		}
+	}
+
+}
+
 
 /**
  * Initialiser mailjet : declarer un eventcallbackurl pour recuperer les retours sur bounce, reject, open, clic....
