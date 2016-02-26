@@ -153,7 +153,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	if (is_array($corps) AND isset($corps['exceptions'])){
-		$facteur->SetExceptions(['exceptions']);
+		$facteur->SetExceptions($corps['exceptions']);
 	}
 	
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
