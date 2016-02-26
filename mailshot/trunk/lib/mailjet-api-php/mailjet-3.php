@@ -65,7 +65,11 @@ class Mailjet {
 		# Return result
 		$return = ($result===true) ? $this->_response : false;
 
-		if (isset($this->_response['StatusCode'])){
+		if ($this->_error){
+			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
+			spip_log("$url_log : ".$this->_error,'mailshot'._LOG_ERREUR);
+		}
+		elseif (isset($this->_response['StatusCode'])){
 			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
 			spip_log("$url_log : status ".$this->_response['StatusCode']." - ".$this->_response['ErrorInfo'].", ".$this->_response['ErrorMessage'],'mailshot'._LOG_INFO_IMPORTANTE);
 		}
@@ -138,7 +142,14 @@ class Mailjet {
 
 		try {
 			if (!function_exists('recuperer_url')){
-				$response = recuperer_page($url,false,false,null,$this->_data);
+				// en cas de DELETE on appelle directement recuperer_lapage
+				// en esperant ne pas avoir de 301
+				if (in_array($this->_request,array('DELETE'))){
+					$response = recuperer_lapage($url,false,$this->_request,1048576,$this->_data);
+				}
+				else {
+					$response = recuperer_page($url,false,false,null,$this->_data);
+				}
 				if (!$response){
 					$this->_error = 'erreur lors de recuperer_page sur API Mailjet '.$this->apiVersion;
 	        return false;
