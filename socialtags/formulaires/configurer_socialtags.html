@@ -15,13 +15,13 @@
 			<input type="hidden" name="tags[]" value="" />
 			[(#VAL|socialtags_choix)]
 			<script type='text/javascript'>
-			//<![CDATA[
+			/*<!\[CDATA\[*/ 
 				jQuery.extend({
 					sc_cocher_decocher_tout: function(b) {
 						$('#sc_list input[type=checkbox]').attr('checked', b);
 					}
 				});
-			//]]>
+			/*]]>*/ 
 			</script>
 			<noscript>
 				<:socialtags:cfg_activer_javascript:>
