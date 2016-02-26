@@ -88,7 +88,79 @@ function bulkmailer_mailjet_config_dist(&$flux){
 	if ($sender_mail){
 		mailjet_add_sender($sender_mail, true);
 	}
+
 }
+
+
+
+/**
+ * Initialiser mailjet : declarer un eventcallbackurl pour recuperer les retours sur bounce, reject, open, clic....
+ *
+ * @param int $id_mailshot
+ * @return bool
+ */
+function bulkmailer_mailjet_init_dist($id_mailshot=0){
+
+	$mj = mailjet_api();
+	if ($mj->version>=3){
+		spip_log("bulkmailer_mailjet_init_dist $id_mailshot","mailshot");
+
+		$params = array(
+			'filters' => array(
+				'Status' => 'alive'
+			)
+		);
+		$res = $mj->eventcallbackurl($params);
+		spip_log($res,'mjdebug');
+
+		// son webhook
+		$url = url_absolue(_DIR_RACINE."mailshot_webhook.api/mailjet/");
+		$events = array("open", "click", "bounce", "spam", "blocked");
+
+		if (isset($res['Count'])
+		  AND $res['Count']>0
+			AND isset($res['Data'])
+			AND $res['Data']){
+
+			foreach($res['Data'] as $eventCallback){
+				if (in_array($eventCallback['EventType'],$events)){
+					if ($eventCallback['Url']===$url){
+						// OK pour cet event, rien a faire
+						$events = array_diff($events,array($eventCallback['EventType']));
+					}
+					else {
+						// il faut supprimer cette callback qui n'est pas sur la bonne URL
+						// et on la rajoutera ensuite avec la bonne URL (en dessous)
+						$params = array(
+							'path' => $eventCallback['ID'],
+							'method' => 'DELETE',
+						);
+						$mj->eventcallbackurl($params);
+					}
+				}
+			}
+		}
+
+		// donc on a pas tous les webhook pour ce site, on les ajoute
+		if (count($events)){
+			foreach($events as $event){
+				$params = array(
+					'data' => array(
+						'EventType' => $event,
+						'Url' => $url,
+						'Version' => 2,
+					),
+				);
+				$res = $mj->eventcallbackurl($params);
+				spip_log($res,'mjdebug');
+			}
+		}
+	}
+
+	return true;
+
+}
+
 
 
 function &mailjet_api(){
