@@ -43,8 +43,7 @@ class Mailjet {
 	 */
 	public function userSenderadd($params){
 		$data = array('email'=>$params['email']);
-		include_spip('inc/json');
-		return $this->sender(array('data'=>json_encode($data)));
+		return $this->sender(array('data'=>$data));
 	}
 
 	public function __call($method, $args){
@@ -66,14 +65,32 @@ class Mailjet {
 		# Return result
 		$return = ($result===true) ? $this->_response : false;
 
+		if (isset($return['StatusCode'])
+		  AND intval($return['StatusCode']/100)>2){
+			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
+			spip_log("$url_log : status ".$return['StatusCode']." - ".$return['ErrorInfo'].", ".$return['ErrorMessage'],'mailshot'._LOG_INFO_IMPORTANTE);
+		}
+
+		/*
 		if ($this->debug==2 || ($this->debug==1 && $return==false)){
 			$this->debug();
-		}
+		}*/
 
 		return $return;
 	}
 
 
+	/**
+	 * @param bool $method
+	 *   api call method
+	 * @param array $params
+	 *   path : subpath of the method (:id/validate for calling sender/:id/validate)
+	 *   data : data to send as a POST
+	 *   filters : args to add in query string to filter results
+	 * @param string $request
+	 *   GET/POST/PUT/...
+	 * @return bool
+	 */
 	public function sendRequest($method = false, $params = array(), $request = "GET"){
 		# Method
 		$this->_method = $method;
@@ -82,9 +99,21 @@ class Mailjet {
 		$this->_response ='';
 		$this->_error ='';
 
+		// submethod path ?
+		if (isset($params['path'])){
+			$method .= "/" . ltrim($params['path'],"/");
+			$this->_method = $method;
+		}
+
+		// data is the json body of request
 		if (isset($params['data'])){
+			$data = $params['data'];
+			if (!is_string($data)){
+				include_spip('inc/json');
+				$data = json_encode($data);
+			}
 			$entete = "Content-Type: application/json\r\n";
-			$this->_data = $entete . "\r\n" . $params['data'];
+			$this->_data = $entete . "\r\n" . $data;
 			$this->_request = $request = 'POST';
 		}
 
@@ -93,8 +122,21 @@ class Mailjet {
 		if ($method!=='send'){
 			$method = "REST/$method";
 		}
+
 		$url = $this->apiUrl . $method;
 		$url_log = "api.mailjet.com/".$this->apiVersion.$method;
+
+		// filters is the query string part of request
+		if (isset($params['filters'])){
+			$qs = $params['filters'];
+			if (!is_string($qs)){
+				$qs = http_build_query($qs);
+			}
+			$url .= "?$qs";
+			$url_log .= "?$qs";
+		}
+
+
 		try {
 			if (!function_exists('recuperer_url')){
 				$response = recuperer_page($url,false,false,null,$this->_data);
@@ -123,7 +165,7 @@ class Mailjet {
       return false;
     }
 
-		spip_log("$url_log resultat: " . $response,"mailshot"._LOG_DEBUG);
+		spip_log("$request $url_log resultat: " . $response,"mailshot"._LOG_DEBUG);
 		if ($response){
 			$this->_response = json_decode($response,true);
 		}
