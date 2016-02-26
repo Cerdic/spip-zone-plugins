@@ -1,5 +1,5 @@
 #SET{url,#ENV{url_document,''}}#SET{id_document,''}#SET{largeur,0}
-<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>#SET{url,#FICHIER}#SET{id_document,#ID_DOCUMENT}#SET{largeur,#ENV{largeur,#LARGEUR}</BOUCLE_doc>
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>#SET{url,#URL_DOCUMENT}#SET{id_document,#ID_DOCUMENT}#SET{largeur,#ENV{largeur,#LARGEUR}</BOUCLE_doc>
 #SET{largeur,#ENV{largeur, #GET{largeur}|?{#GET{largeur},400}}|max{120}}
 <dt class='spip_doc_titre player #ENV{player}'>
 	<div class="mejs-audio-wrapper audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;margin:0 auto;']>
