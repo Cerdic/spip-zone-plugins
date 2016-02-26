@@ -43,30 +43,39 @@ function mailsubscribers_pre_insertion($flux){
  */
 function mailsubscribers_pre_edition($flux){
 	if ($flux['args']['table']=='spip_mailsubscribers'
-	  AND $flux['args']['action']=='instituer'
-	  AND $id_mailsubscriber = $flux['args']['id_objet']
-	  AND $statut_ancien = $flux['args']['statut_ancien']
-	  AND isset($flux['data']['statut'])
-	  AND $statut = $flux['data']['statut']
-	  AND $statut != $statut_ancien
-	  AND ($statut=='valide' OR $statut_ancien=='valide')){
+	  AND $id_mailsubscriber = $flux['args']['id_objet']){
 
-		// on change le statut : logons date et par qui dans le champ optin
-		$optin = sql_getfetsel("optin","spip_mailsubscribers","id_mailsubscriber=".intval($id_mailsubscriber));
-		$optin = trim($optin);
-		$optin .=
-		  "\n"
-		  . _T('mailsubscriber:info_statut_'.$statut)." : "
-			. date('Y-m-d H:i:s').", "
-		  . _T('public:par_auteur').' '
-			  . (isset($GLOBALS['visiteur_session']['id_auteur'])?"#".$GLOBALS['visiteur_session']['id_auteur'].' ':'')
-			  . (isset($GLOBALS['visiteur_session']['nom'])?$GLOBALS['visiteur_session']['nom'].' ':'')
-			  . (isset($GLOBALS['visiteur_session']['session_nom'])?$GLOBALS['visiteur_session']['session_nom'].' ':'')
-			  . (isset($GLOBALS['visiteur_session']['session_email'])?$GLOBALS['visiteur_session']['session_email'].' ':'')
-		    . '('.$GLOBALS['ip'].')'
-		;
-		$optin = trim($optin);
-		$flux['data']['optin'] = $optin;
+		$modif_optin = "";
+	  if ($flux['args']['action']=='instituer'
+		  AND $statut_ancien = $flux['args']['statut_ancien']
+		  AND isset($flux['data']['statut'])
+		  AND $statut = $flux['data']['statut']
+		  AND $statut != $statut_ancien
+		  AND ($statut=='valide' OR $statut_ancien=='valide')) {
+		  $modif_optin = _T('mailsubscriber:info_statut_' . $statut);
+	  }
+
+		if(isset($flux['data']['listes'])){
+			$modif_optin .= ' ' . $flux['data']['listes'];
+		}
+
+		if ($modif_optin) {
+			// on change le statut : logons date et par qui dans le champ optin
+			$optin = sql_getfetsel("optin", "spip_mailsubscribers", "id_mailsubscriber=" . intval($id_mailsubscriber));
+			$optin = trim($optin);
+			$optin .=
+				"\n"
+				. $modif_optin . " : "
+				. date('Y-m-d H:i:s') . ", "
+				. _T('public:par_auteur') . ' '
+				. (isset($GLOBALS['visiteur_session']['id_auteur']) ? "#" . $GLOBALS['visiteur_session']['id_auteur'] . ' ' : '')
+				. (isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] . ' ' : '')
+				. (isset($GLOBALS['visiteur_session']['session_nom']) ? $GLOBALS['visiteur_session']['session_nom'] . ' ' : '')
+				. (isset($GLOBALS['visiteur_session']['session_email']) ? $GLOBALS['visiteur_session']['session_email'] . ' ' : '')
+				. '(' . $GLOBALS['ip'] . ')';
+			$optin = trim($optin);
+			$flux['data']['optin'] = $optin;
+		}
 	}
 	return $flux;
 }
