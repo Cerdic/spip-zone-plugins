@@ -1,7 +1,7 @@
 #SET{url_plugin,#EVAL{str_replace('../ecrire/','',_DIR_PLUGIN_SPIPCATCHAT)}}
 <BOUCLE_AUTEUR_SESSION (AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
 	<script type="text/javascript">
-		<INCLURE{fond=prive/javascript/prive-spipcatchat.js}{url_plugin=#GET{url_plugin}}{id_auteur=#ID_AUTEUR}{nom=#NOM|sinon{#LOGIN}}>
+		<INCLURE{fond=prive/javascript/prive-spipcatchat.js}{url_plugin=#GET{url_plugin}|trim}{id_auteur=#ID_AUTEUR|trim}{nom=#NOM|trim|sinon{#LOGIN|trim}}>
 	</script>   
 	    	<INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
 	    <!--#navigation--> 

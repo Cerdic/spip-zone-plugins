@@ -174,15 +174,18 @@ function startchat(e, t, n, r, i, s, o, u, pack,q) {
 }
 
 function getOnlineUsers(e, t, n, r, i, s) {
+	$('#SpipCatChatStatus option[value=1]').removeProp('selected'); $('#SpipCatChatStatus option[value=2]').removeProp('selected'); $('#SpipCatChatStatus option[value=3]').removeProp('selected');
     $.getJSON(n + 'phpscripts/get-online.php', {
         auteur: t,
         salon: e
     }, function (e) {
         if (1 == e.autorisation) {
-            var r = '',
-            s,
-            o;
-            for (o in e.list) 'busy' == e.list[o].status ? (texte = 'Occupé(e) [X]', s = 'inactive', t == e.list[o].id && $('#SpipCatChatStatus option[value=2]').attr('selected', 'selected'))  : 'inactive' == e.list[o].status ? (texte = ' Absent(e) [-] ', s = 'neutral', t == e.list[o].id && $('#SpipCatChatStatus option[value=1]').attr('selected', 'selected'))  : (texte = 'En ligne [&radic;]', s = 'active', t == e.list[o].id && $('#SpipCatChatStatus option[value=3]').attr('selected', 'selected')),
+            var r = '', s,o;
+            for (o in e.list) 
+            'busy' == e.list[o].status ? (texte = 'Occupé(e) [X]', s = 'inactive', 
+            t == e.list[o].id && $('#SpipCatChatStatus option[value=2]').prop('selected', 'selected'))  : 'inactive' == e.list[o].status ? (texte = ' Absent(e) [-] ', s = 'neutral', 
+            t == e.list[o].id && $('#SpipCatChatStatus option[value=1]').prop('selected', 'selected'))  : (texte = 'En ligne [&radic;]', s = 'active', 
+            t == e.list[o].id && $('#SpipCatChatStatus option[value=3]').prop('selected', 'selected')),
             r += '<span title="' + texte + '"><img src="' + n + '/images/status-' + s + '.png" /> ' + e.list[o].login + '</span><br/>';
             $('#users').html(r)
         } else window.location = i
