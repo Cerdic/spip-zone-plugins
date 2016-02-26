@@ -65,10 +65,9 @@ class Mailjet {
 		# Return result
 		$return = ($result===true) ? $this->_response : false;
 
-		if (isset($return['StatusCode'])
-		  AND intval($return['StatusCode']/100)>2){
+		if (isset($this->_response['StatusCode'])){
 			$url_log = "api.mailjet.com/".$this->apiVersion.$this->_method;
-			spip_log("$url_log : status ".$return['StatusCode']." - ".$return['ErrorInfo'].", ".$return['ErrorMessage'],'mailshot'._LOG_INFO_IMPORTANTE);
+			spip_log("$url_log : status ".$this->_response['StatusCode']." - ".$this->_response['ErrorInfo'].", ".$this->_response['ErrorMessage'],'mailshot'._LOG_INFO_IMPORTANTE);
 		}
 
 		/*
