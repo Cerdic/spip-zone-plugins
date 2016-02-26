@@ -37,15 +37,11 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 		$mailer_defaut = charger_fonction("defaut","bulkmailer");
 	}
 
-	$api_version = 1;
-	if (isset($config['mailjet_api_version']) AND intval($config['mailjet_api_version'])>1){
-		$api_version = intval($config['mailjet_api_version']);
-	}
-
-	if ($api_version==3){
+	$mj = mailjet_api();
+	if ($mj->version==3){
 		// on utilise l'API REST
 		$options['sender_class'] = "FacteurMailjetv3";
-		
+
 	}
 	else {
 		// on passe par l'API SMTP basique
@@ -72,6 +68,7 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 
 /**
  * Configurer mailjet : declarer le sender si besoin
+ * appele depuis traiter() de formulaire_configurer_mailshot
  * @param $flux
  */
 function bulkmailer_mailjet_config_dist(&$flux){
@@ -88,8 +85,9 @@ function bulkmailer_mailjet_config_dist(&$flux){
 	}
 
 	// si le sender n'est pas dans les emails de mailjet l'ajouter
-	if ($sender_mail)
+	if ($sender_mail){
 		mailjet_add_sender($sender_mail, true);
+	}
 }
 
 
@@ -138,12 +136,15 @@ function mailjet_sender_status($sender_email){
 	}
 	// API v3
 	if ($mj->version==3){
-		$res = (array)$mj->sender();
+		$params = array(
+			'filters'=>array('Email'=>$sender_email),
+		);
+		$res = (array)$mj->sender($params);
 		if (!isset($res['Count'])) return null;
 		if (isset($res['Data'])){
 			foreach($res['Data'] as $sender){
 				if ($sender['Email'] == $sender_email){
-					if (in_array($sender['Status'],array('Active','Pending'))){
+					if (in_array($sender['Status'],array('Active','Inactive'))){
 						return strtolower($sender['Status']);
 					}
 				}
@@ -173,14 +174,41 @@ function mailjet_add_sender($sender_email, $force = false){
 	// si le sender n'est pas dans la liste ou en attente
 	$mj = mailjet_api();
 
-	// ajouter un sender
-	$params = array(
-		'method' => 'POST',
-		'email' => $sender_email,
-	);
+	if ($mj->version<3){
+		// ajouter un sender
+		$params = array(
+			'method' => 'POST',
+			'email' => $sender_email,
+		);
+		$res = (array)$mj->userSenderadd($params);
+		if (!isset($res['status']) OR $res['status']!=='OK') return null;
+	}
+	elseif($mj->version==3){
+		$params = array(
+			'data'=>array('Email'=>$sender_email),
+		);
+		$res = $mj->sender($params);
 
-	$res = (array)$mj->userSenderadd($params);
-	if (!isset($res['status']) OR $res['status']!=='OK') return null;
+		// :id/validate ne force pas la validation mais permet juste de lire l'etat de la validation
+		/*
+		// relire pour avoir l'ID
+		$params = array(
+			'filters'=>array('Email'=>$sender_email),
+		);
+		$res = $mj->sender($params);
+		if (!isset($res['Count']) OR !$res['Count']) return null;
+		if (isset($res['Data'])){
+			$sender = reset($res['Data']);
+			$id = $sender['ID'];
+			$params = array(
+				'path'=>"$id/validate",
+				'data'=>array(),
+			);
+			$res = $mj->sender($params);
+		}
+		*/
+	}
+
 	return mailjet_sender_status($sender_email);
 
 }
@@ -354,8 +382,7 @@ class FacteurMailjetv3 extends Facteur {
 		}
 
 		$mj = mailjet_api();
-		include_spip('inc/json');
-		$res = $mj->send(array('data'=>json_encode($this->message)));
+		$res = $mj->send(array('data'=>$this->message));
 		if (!$res){
 			$this->SetError($mj->_error);
 			return false;
