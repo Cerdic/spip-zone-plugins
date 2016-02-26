@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'Lou counfiguracioun dóu plugin "fatour" soubre-scriéu aquela adressa e-mail per la spedissioun.',
 
 	// N
-	'note_test_configuration' => 'Un e-mail serà mandat a l’adressa de spedissioun definida (o aquela dóu webmèstre).',
+	'note_test_configuration' => 'Un e-mail serà mandat a l’adressa de spedissioun definida (o aquela dóu webmèstre).', # MODIF
 
 	// P
 	'personnaliser' => 'Persounalisà aquestu reglage',

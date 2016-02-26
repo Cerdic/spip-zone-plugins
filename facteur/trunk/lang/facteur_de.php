@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'Die Konfiguration des Plugins Briefträger (facteur) überschreibt diese Adresse für den Mailversand.',
 
 	// N
-	'note_test_configuration' => 'Eine Mail wird an die Absendeadresse geschickt (oder an den Webmaster).',
+	'note_test_configuration' => 'Eine Mail wird an die Absendeadresse geschickt (oder an den Webmaster).', # MODIF
 
 	// P
 	'personnaliser' => 'Individuelle Einstellungen',

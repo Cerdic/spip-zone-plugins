@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'La configurazione del plugin "facteur" sovraccarica questo indirizzo mail per l’invio della posta.',
 
 	// N
-	'note_test_configuration' => 'Una mail sarà inviata all’indirizzo definito (o all’indirizzo del webmaster).',
+	'note_test_configuration' => 'Una mail sarà inviata all’indirizzo definito (o all’indirizzo del webmaster).', # MODIF
 
 	// P
 	'personnaliser' => 'Personnalizzate questi impostazioni',

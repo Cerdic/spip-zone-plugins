@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'La configuración del plugin "cartero" sobrecarga esta dirección de correo para el envío de correos.',
 
 	// N
-	'note_test_configuration' => 'Un correo electrónico se enviará a la dirección de envío definida (o aquélla del webmaster).',
+	'note_test_configuration' => 'Un correo electrónico se enviará a la dirección de envío definida (o aquélla del webmaster).', # MODIF
 
 	// P
 	'personnaliser' => 'Personalizar esta configuración',

@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'De configuratie van plugin "facteur" laadt dit e-mailadres voor het verzenden van mails.',
 
 	// N
-	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.',
+	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.', # MODIF
 
 	// P
 	'personnaliser' => 'Personaliseren',

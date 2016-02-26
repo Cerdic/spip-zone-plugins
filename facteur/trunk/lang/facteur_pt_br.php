@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'A configuração do plugin "Carteiro" define este endereço de e-mail para o envio das mensagens.',
 
 	// N
-	'note_test_configuration' => 'Um e-mail será enviado ao endereço de envio definido (ou ao do webmaster).',
+	'note_test_configuration' => 'Um e-mail será enviado ao endereço de envio definido (ou ao do webmaster).', # MODIF
 
 	// P
 	'personnaliser' => 'Personalizar essas configurações',

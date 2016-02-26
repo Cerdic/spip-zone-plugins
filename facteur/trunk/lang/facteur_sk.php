@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.',
 
 	// N
-	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).',
+	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).', # MODIF
 
 	// P
 	'personnaliser' => 'Prispôsobiť si tieto nastavenia',
