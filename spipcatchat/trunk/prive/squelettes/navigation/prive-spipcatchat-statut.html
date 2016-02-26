@@ -1,19 +1,11 @@
-<div class="box info">
-<b class="top">
-<b class="tl"></b>
-<b class="tr"></b>
-</b>
-<div class="inner" >
-<div class="hd "><:spipcatchat:info_en_ligne:></div>
-<div class="bd" id="users" style="height:400px;overflow-y: auto;"><:spipcatchat:catchat_chargement:>
-</div>
-</div>
-<b class="bottom">
-</div>
+#BOITE_OUVRIR{'',info}
+<div><:spipcatchat:info_en_ligne:></div>
+<div id="users" style="height:400px;overflow-y: auto;"><:spipcatchat:catchat_chargement:></div>
+#BOITE_FERMER
 <div class="formulaire_spip">
 <img id="spipcatchatpatientez" align="right" style="display:none" src="[(#CHEMIN{prive/images/searching.gif})]">
 <div id="catchatprivestatut">
-<ul >
+<ul>
 <li class="editer">
 <label for="SpipCatChatStatus"><:spipcatchat:info_statut:></label><br/>
 <select name="status" id="SpipCatChatStatus" title="<:spipcatchat:title_status:>" >
@@ -23,6 +15,6 @@
 </select>
 </li>
 </ul>
-<p class="boutons"><input class="submit" title="<:spipcatchat:title_status:>" type="submit" onclick="SpipCatChatsetStatus(document.getElementById('SpipCatChatStatus').value,'[(#ID_AUTEUR)]',['(#ENV{url_plugin})']);spipcatchatrestartstatut();" value="Envoyer"></p>
+<p class="boutons"><input class="submit" title="<:spipcatchat:title_status:>" type="submit" onclick="SpipCatChatsetStatus($('#SpipCatChatStatus').val(),'[(#ID_AUTEUR|trim)]',['(#ENV{url_plugin}|trim)']);spipcatchatrestartstatut();" value="Envoyer"></p>
 </div>
 </div>
