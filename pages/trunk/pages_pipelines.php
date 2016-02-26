@@ -258,11 +258,11 @@ function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article') {
 		include_spip('inc/presentation');
 		if (sql_getfetsel('page', 'spip_articles', 'id_article='. intval($flux['args']['id'])) == '') {
-			if (autoriser('creer', 'page', $flux['args']['id']))
+			if (autoriser('creer', 'page', $flux['args']['id']) && autoriser('convertir', 'page', $flux['args']['id']))
 				$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
 		}
 		else {
-			if (autoriser('modifier', 'page', $flux['args']['id']))
+			if (autoriser('modifier', 'page', $flux['args']['id']) && autoriser('convertir', 'page', $flux['args']['id']))
 				$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
 		}
 	}

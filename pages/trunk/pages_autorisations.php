@@ -152,6 +152,28 @@ function autoriser_pagecreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return $autoriser;
 }
 
+/**
+ * Autorisation d'afficher le bouton "convertir en page unique" et "convertir en article"
+ *
+ * Par défaut seuls les administrateurs complets sont autorisés.
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ *
+*@return
+ */
+function autoriser_page_convertir_dist($faire, $type, $id, $qui, $opt) {
+
+	// Conditions :
+	// - l'auteur connecté est un administrateur complet
+	$autoriser = pages_autorisation_defaut_dist($qui);
+
+	return $autoriser;
+}
+
 
 function pages_autorisation_defaut_dist($qui) {
 	return (($qui['statut'] == '0minirezo')
