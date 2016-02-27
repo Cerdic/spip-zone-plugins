@@ -13,12 +13,12 @@
 			<th class="statut" scope='col'></th>
 			<th class="titre" scope='col'>[(#TRI{titre,<:formidable:editer_titre:>,ajax})]</th>
 			<th class="identifiant" scope='col'>[(#TRI{identifiant,<:formidable:editer_identifiant:>,ajax})]</th>
-			<th class="reponses" scope='col'><:formidable:titre_reponses:></th>
+			<th class="reponses" scope='col'>[(#TRI{compteur_formulaires_reponses,<:formidable:titre_reponses:>,ajax})]</th>
 			<th class="id_formulaire id" scope='col'>[(#TRI{id_formulaire,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_formulaires(FORMULAIRES){id_formulaire?}{statut?}{tri #ENV{par,titre},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
+	<BOUCLE_formulaires(FORMULAIRES){statut?}{compteur_left formulaires_reponses}{tri #ENV{par,compteur_formulaires_reponses},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
 	#SET{reppub,''}#SET{repprop,''}#SET{nbrep,''}
 	[(#SET{reppub,[(#VAL{formulaires_reponses}|table_objet_sql|sql_countsel{#ARRAY{0,statut='publie',1,id_formulaire=#ID_FORMULAIRE}})]})]
 	[(#SET{repprop,[(#VAL{formulaires_reponses}|table_objet_sql|sql_countsel{#ARRAY{0,statut='prop',1,id_formulaire=#ID_FORMULAIRE}})]})]
