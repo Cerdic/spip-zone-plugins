@@ -2,7 +2,7 @@
 	#SET{titre,#VAL{noizetier:noisettes_disponibles}|_T}
 	#BOITE_OUVRIR{#GET{titre},'info noisettes_disponibles none'}
 	<p><:noizetier:explication_glisser_deposer:></p>
-	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,ordre=oui}>
+	<INCLURE{fond=formulaires/inc-liste_noisettes_disponibles,page,objet,id_objet,ordre=oui}>
 	#BOITE_FERMER
 	<script type="text/javascript">/*<!\[CDATA\[*/
 		jQuery('.noisettes_disponibles').show();

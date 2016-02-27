@@ -11,8 +11,7 @@ if (!function_exists('autoriser')) {
 	include_spip('inc/autoriser');
 }     // si on utilise le formulaire dans le public
 
-function formulaires_editer_noisette_charger_dist($id_noisette, $retour = '')
-{
+function formulaires_editer_noisette_charger_dist($id_noisette, $retour = '') {
 	$valeurs = array();
 	$valeurs['id_noisette'] = $id_noisette;
 	$entree = sql_fetsel(
@@ -49,16 +48,14 @@ function formulaires_editer_noisette_charger_dist($id_noisette, $retour = '')
 	return $valeurs;
 }
 
-function formulaires_editer_noisette_verifier_dist($id_noisette, $retour = '')
-{
+function formulaires_editer_noisette_verifier_dist($id_noisette, $retour = '') {
 	$noisette = _request('noisette');
 	$infos_noisette = noizetier_info_noisette($noisette);
 
 	return saisies_verifier($infos_noisette['parametres'], false);
 }
 
-function formulaires_editer_noisette_traiter_dist($id_noisette, $retour = '')
-{
+function formulaires_editer_noisette_traiter_dist($id_noisette, $retour = '') {
 	if (!autoriser('configurer', 'noizetier')) {
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
 	}

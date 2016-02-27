@@ -22,6 +22,7 @@ function noizetier_header_prive($flux) {
 function noizetier_recuperer_fond($flux) {
 	if (defined('_NOIZETIER_RECUPERER_FOND') ? _NOIZETIER_RECUPERER_FOND : true) {
 		include_spip('noizetier_fonctions');
+		
 		$fond = isset($flux['args']['fond']) ? $flux['args']['fond'] : '';
 		$composition = isset($flux['args']['contexte']['composition']) ? $flux['args']['contexte']['composition'] : '';
 		// Si une composition est définie et si elle n'est pas déjà dans le fond, on l'ajoute au fond
@@ -35,20 +36,47 @@ function noizetier_recuperer_fond($flux) {
 			if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && !function_exists('autoriser')) {
 				include_spip('inc/autoriser');
 			}     // si on utilise le formulaire dans le public
-			if (in_array($fond, noizetier_lister_blocs_avec_noisettes())) {
+			
+			// On cherche en priorité une correspondance d'objet précis !
+			// Sinon on cherche pour le type de page ou la composition
+			if (
+				(
+					$objet = $flux['args']['contexte']['type-page']
+					and $cle_objet = id_table_objet($objet)
+					and $id_objet = intval($flux['args']['contexte'][$cle_objet])
+					and $par_objet = in_array($flux['args']['fond'], noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet))
+				)
+				or in_array($fond, noizetier_lister_blocs_avec_noisettes())
+			) {
 				$contexte = $flux['data']['contexte'];
 				$contexte['bloc'] = substr($fond, 0, strpos($fond, '/'));
+				
+				if ($par_objet) {
+					$contexte['objet'] = $objet;
+					$contexte['id_objet'] = $id_objet;
+				}
+				
 				if (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
 					$complements = recuperer_fond('noizetier-generer-bloc-voir-noisettes', $contexte, array('raw' => true));
 				} else {
 					$complements = recuperer_fond('noizetier-generer-bloc', $contexte, array('raw' => true));
 				}
+				
 				$flux['data']['texte'] .= $complements['texte'];
-			} elseif (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) { // Il faut ajouter les blocs vides en mode voir=noisettes
+			}
+			// Il faut ajouter les blocs vides en mode voir=noisettes
+			elseif (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
 				$contexte = $flux['data']['contexte'];
 				$bloc = substr($fond, 0, strpos($fond, '/'));
 				$contexte['bloc'] = $bloc;
-				$page = isset($contexte['type']) ? $contexte['type'] : '';
+				
+				// Si ya au moins une noisette pour cet objet peu importe le bloc
+				if (sql_fetsel('id_noisette', 'spip_noisettes', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))) {
+					$contexte['objet'] = $objet;
+					$contexte['id_objet'] = $id_objet;
+				}
+				
+				$page = isset($contexte['type']) ? $contexte['type'] : (isset($contexte['type-page']) ? $contexte['type-page'] : '');
 				$page .= (isset($contexte['composition']) && $contexte['composition']) ? '-'.$contexte['composition'] : '';
 				$info_page = noizetier_lister_pages($page);
 				if (isset($info_page['blocs'][$bloc])) {
@@ -59,6 +87,40 @@ function noizetier_recuperer_fond($flux) {
 		}
 	}
 
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline boite_infos (SPIP)
+ * 
+ * Ajouter un lien pour configurer les noisettes de ce contenu précisément
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
+ */
+function noizetier_boite_infos($flux){
+	include_spip('inc/autoriser');
+	
+	if (autoriser('configurernoisettes', $flux['args']['type'], $flux['args']['id'])) {
+		include_spip('inc/presentation');
+		
+		// On cherche le nombre de noisettes déjà configurées pour ce contenu
+		$nb = sql_countsel('spip_noisettes', array('objet = '.sql_quote($flux['args']['type']), 'id_objet = '.intval($flux['args']['id'])));
+		if (!$nb) {
+			$texte = _T('noizetier:noisettes_configurees_aucune');
+		}
+		elseif ($nb == 1) {
+			$texte = _T('noizetier:noisettes_configurees_une');
+		}
+		else {
+			$texte = _T('noizetier:noisettes_configurees_nb', array('nb'=>$nb));
+		}
+		
+		$flux['data'] .= icone_horizontale($texte, parametre_url(parametre_url(generer_url_ecrire('noizetier_page'), 'id_objet', $flux['args']['id']), 'objet', $flux['args']['type']), 'noisette', $fonction="", $dummy="", $javascript="");
+	}
+	
 	return $flux;
 }
 

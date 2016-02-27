@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
 	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n’est pas installé sur votre site. Il n’est pas nécessaire au fonctionnement du noizetier. Cependant, s’il est activé, vous pourrez déclarer des compositions directement dans le noizetier.',
+	'configurer_titre' => 'Configurer le noiZetier',
+	'configurer_objets_noisettes_explication' => 'Sur ces types de contenus, il sera permis de personnaliser les noisettes <strong>contenu par contenu</strong>.',
+	'configurer_objets_noisettes_label' => 'Autoriser la personnalisation par contenu sur :',
 
 	// D
 	'description_bloc_contenu' => 'Contenu principal de chaque page.',
@@ -121,8 +124,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'Ne pas définir d’héritage',
 	'noisette_numero' => 'noisette numéro :',
 	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
+	'noisettes_configurees_aucune' => 'Aucune noisette configurée',
+	'noisettes_configurees_nb' => '@nb@ noisettes configurées',
+	'noisettes_configurees_une' => 'Une noisette configurée',
 	'noisettes_disponibles' => 'Noisettes disponibles',
 	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
+	'noisettes_pour' => 'Noisettes pour : ',
 	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
 	'noizetier' => 'noiZetier',
 	'nom_bloc_contenu' => 'Contenu',
@@ -155,5 +162,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n’est plus disponible.',
 	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n’est plus accessible. Il se peut qu’il s’agisse d’une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.'
 );
-
-?>

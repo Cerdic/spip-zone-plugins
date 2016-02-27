@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/meta');
 
 // Installation et mise à jour
-function noizetier_upgrade($nom_meta_base_version, $version_cible)
-{
+function noizetier_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
@@ -27,14 +26,23 @@ function noizetier_upgrade($nom_meta_base_version, $version_cible)
 	$maj['0.4.0'] = array(
 		array('maj_tables',array('spip_noisettes')),
 	);
+	
+	$maj['0.5.0'] = array(
+		array('maj_tables',array('spip_noisettes')),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (type(255))'),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (composition(255))'),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (bloc(255))'),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (noisette(255))'),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (objet)'),
+		array('sql_alter', 'TABLE spip_noisettes ADD INDEX (id_objet)'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 // Désinstallation
-function noizetier_vider_tables($nom_meta_version_base)
-{
+function noizetier_vider_tables($nom_meta_version_base) {
 	// On efface les tables du plugin
 	sql_drop_table('spip_noisettes');
 	// On efface la version enregistrée

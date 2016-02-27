@@ -4,8 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function action_supprimer_noisette_dist($id_noisette = null)
-{
+function action_supprimer_noisette_dist($id_noisette = null) {
 	if (is_null($id_noisette)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$id_noisette = $securiser_action();

@@ -13,17 +13,24 @@ if (!function_exists('autoriser')) {
 // Note : $retour indique la page à charger en cas d'ajout
 //        @id_noisette@ étant alors remplacer par la bonne valeur, connue seulement après ajout de la noisette
 
-function formulaires_ajouter_noisette_charger_dist($page, $bloc, $retour = '')
-{
-	return array(
-		'page' => $page,
+function formulaires_ajouter_noisette_charger_dist($page, $bloc, $retour = '') {
+	$contexte = array(
 		'bloc' => $bloc,
 		'editable' => autoriser('configurer', 'noizetier') ? 'on' : '',
 	);
+	
+	if (is_array($page)) {
+		$contexte['objet'] = $page['objet'];
+		$contexte['id_objet'] = $page['id_objet'];
+	}
+	else {
+		$contexte['page'] = $page;
+	}
+	
+	return $contexte;
 }
 
-function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $retour = '')
-{
+function formulaires_ajouter_noisette_traiter_dist($page, $bloc, $retour = '') {
 	if (!autoriser('configurer', 'noizetier')) {
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
 	}

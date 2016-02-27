@@ -7,13 +7,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('noizetier_fonctions');
 include_spip('base/abstract_sql');
 
-function formulaires_lister_noisettes_page_charger_dist($page)
-{
-	return array('page' => $page);
+function formulaires_lister_noisettes_page_charger_dist($page) {
+	if (is_array($page)) {
+		$contexte = $page;
+	}
+	else {
+		$contexte = array('page' => $page);
+	}
+	
+	return $contexte;
 }
 
-function formulaires_lister_noisettes_page_traiter_dist($page)
-{
+function formulaires_lister_noisettes_page_traiter_dist($page) {
 	if (_request('cancel')) {
 		return array('message_erreur' => _T('noizetier:operation_annulee'));
 	}
@@ -21,7 +26,7 @@ function formulaires_lister_noisettes_page_traiter_dist($page)
 	if (!autoriser('configurer', 'noizetier')) {
 		return array('message_erreur' => _T('noizetier:probleme_droits'));
 	}
-
+	
 	$ordre = _request('ordre');
 	if (_request('save') && $ordre) {
 		if (noizetier_trier_noisette($page, $ordre)) {
