@@ -179,20 +179,6 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     }
   }
 
-  // Si la config le prévoit, établir si il y eu un changement de statut.
-  if ($c['statut_calculer_auto'] == 'on') {
-    if ($c['statut'] != $champs['statut']) $statut_modifie = 1;
-    else $statut_modifie = 0;
-		
-		$statuts_details_reservation = _request('statuts_details_reservation');
-		
-		$statuts_details_reservation[$id_reservations_detail] = array(
-			'statut' => $champs['statut'],
-	    'statut_modifie' => $statut_modifie
-		);
-
-    set_request('statuts_details_reservation',$statuts_details_reservation);
-  }
 
   // Envoyer aux plugins
   $champs = pipeline('pre_edition',
@@ -207,6 +193,21 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
       'data' => $champs
     )
   );
+
+  // Si la config le prévoit, établir si il y eu un changement de statut.
+  if ($c['statut_calculer_auto'] == 'on') {
+    if ($c['statut'] != $champs['statut']) $statut_modifie = 1;
+    else $statut_modifie = 0;
+		
+		$statuts_details_reservation = _request('statuts_details_reservation');
+		
+		$statuts_details_reservation[$id_reservations_detail] = array(
+			'statut' => $champs['statut'],
+	    'statut_modifie' => $statut_modifie
+		);
+
+    set_request('statuts_details_reservation',$statuts_details_reservation);
+  }
 
   if (!count($champs)) return '';
   // Envoyer les modifs.
