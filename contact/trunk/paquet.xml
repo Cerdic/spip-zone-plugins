@@ -27,9 +27,9 @@
 	<pipeline nom="nospam_lister_formulaires" inclure="contact_pipelines.php" />
 	<pipeline nom="contact_pre_envoi" action="" />
 
-	<utilise nom="facteur" />
-	<utilise nom="inserer_modeles" compatibilite="[0.4.3;[" />
-	<necessite nom="organiseur" compatibilite="[0.6.1;[" />
+	<utilise nom="facteur" compatibilite="[2.0.0;]" />
+	<utilise nom="inserer_modeles" compatibilite="[1.0.0;]" />
+	<necessite nom="organiseur" compatibilite="[0.8.5;]" />
 
 	<menu nom="contact_message" action="messages" titre="contact:msg_messagerie" parent="menu_activite" icone="images/contact-16.png" />
 	<menu nom="configurer_contact" titre="contact:titre" parent="menu_configuration" icone="images/contact-16.png" />
