@@ -20,7 +20,7 @@ function formulaires_configurer_foundation_6_saisies() {
 			'options' => array(
 				'nom' => 'foundation-icons',
 				'label' => _T('foundation_6:icons'),
-				'explication' => _T('foundation:icons_explication')
+				'explication' => _T('foundation_6:icons_explication')
 			)
 		)
 	);
