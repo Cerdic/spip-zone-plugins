@@ -13,3 +13,10 @@
 	</BOUCLE_reservation_details>
 	#SET{reservation, #ARRAY{details, #GET{details}}}
 </BOUCLE_reservation>
+
+[(#GET{total}|>{0}|oui)
+	<div class="champ contenu_montant">
+		<label><:reservation:montant:> : </label>
+		<span>[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</span>
+	</div>
+]
