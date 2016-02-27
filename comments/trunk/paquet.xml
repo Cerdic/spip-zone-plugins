@@ -23,7 +23,7 @@
 	<necessite nom="forum" compatibilite="[1.8.12;]" />
 	<utilise nom="notifications" compatibilite="[2.2.1;]" />
 
-	<utilise nom='Zpip' compatibilite="[2.0.2-dev;]" />
+	<utilise nom='Zpip' compatibilite="[2.0.7-dev;]" />
 	<utilise nom='Z' compatibilite="[1.7.14;]" />
     
 	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
