@@ -130,12 +130,11 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 			$detail = $action($id_reservations_detail, 'reservations_detail', $set);
 		}
 	}
-spip_log($c['statut'],'teste');
+
 	//Etablir si tous les détails d'événement ont le statut de la réservation
 	if ($statut_calculer_auto == 'on' AND $c['statut'] == 'accepte') {
 
 		$statuts_details_reservation = _request('statuts_details_reservation');
-spip_log($statuts_details_reservation ,'teste');
 		$statut_modifie = array();
 
 		foreach ($statuts_details_reservation AS $id_detail_reservation => $data) {
