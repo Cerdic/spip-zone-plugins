@@ -6,7 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function formulaires_configurer_foundation_6_saisies() {
 	// Lire le fichier YAML qui contient la structure du formulaire.
-	include_spip('inc/yaml');
 	$saisies = array(
 		array(
 			'saisie' => 'oui_non',
