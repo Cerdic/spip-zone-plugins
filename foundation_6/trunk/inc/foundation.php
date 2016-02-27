@@ -1,5 +1,8 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction de callback utiliser par le filtre |iframe_responsive
@@ -12,8 +15,7 @@ function responsive($matches) {
   // Dans le cas de vimeo, il faut ajouter une classe
   if (strpos($matches[0], 'vimeo')) {
 	  $vimeo = ' vimeo';
-  }
-  else {
+  } else {
 	  $vimeo = '';
   }
 
@@ -21,7 +23,7 @@ function responsive($matches) {
   include_spip('inc/filtres');
 
   // On revoie la bonne structure html d'iframe.
-  return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');;
+  return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');
 }
 
 /**
@@ -43,8 +45,7 @@ function class_grid_foundation($nombre_colonnes, $type) {
             }
         }
         return $class;
-    }
-    else {
+    } else {
         return $type.'-'.$nombre_colonnes.' ';
     }
 }

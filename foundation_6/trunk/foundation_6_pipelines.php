@@ -9,36 +9,36 @@
  * @package    SPIP\Foundation\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-/*
-*   Pipeline Insert_head
-*/
-function foundation_6_insert_head ($flux) {
-
-  // Si on est en mode app, on revoie le bon squelette
-  if (_FOUNDATION_SASS) {
-    $flux .= recuperer_fond('inclure/head-foundation-app');
-  }
-  else {
-    $flux .= recuperer_fond('inclure/head-foundation');
-  }
-
-  return $flux;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
 }
 
 /*
-*   Pipeline Insert_head_css
-*/
-function foundation_6_insert_head_css ($flux) {
+ *   Pipeline Insert_head
+ */
+function foundation_6_insert_head($flux) {
 
     // Si on est en mode app, on revoie le bon squelette
-  if (_FOUNDATION_SASS) {
-      $flux .= recuperer_fond('inclure/css/head-foundation-app');
-  }
-  else {
-    $flux .= recuperer_fond('inclure/css/head-foundation');
-  }
+    if (_FOUNDATION_SASS) {
+        $flux .= recuperer_fond('inclure/head-foundation-app');
+    } else {
+        $flux .= recuperer_fond('inclure/head-foundation');
+    }
 
-  return $flux;
+    return $flux;
+}
+
+/*
+ *   Pipeline Insert_head_css
+ */
+function foundation_6_insert_head_css($flux) {
+
+    // Si on est en mode app, on revoie le bon squelette
+    if (_FOUNDATION_SASS) {
+        $flux .= recuperer_fond('inclure/css/head-foundation-app');
+    } else {
+        $flux .= recuperer_fond('inclure/css/head-foundation');
+    }
+
+    return $flux;
 }
