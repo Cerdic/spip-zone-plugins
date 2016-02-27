@@ -7,12 +7,12 @@
 
 	<ul>
 	<li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-		<label for="fichier"><:cog:fichiers_a_telecharger:></label>[
+		<label for="champs_fichier"><:cog:fichiers_a_telecharger:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 		]<p class='explication'><:cog:choississez_le_fichier_a_telecharger:></p>
 
 
-		<select name='objet[]' multiple="multiple" >
+		<select name='objet[]' multiple="multiple" id="champs_fichier" >
 
 		<BOUCLE_fichier(POUR){tableau #ENV{tab_objet}}>
 
