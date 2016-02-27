@@ -21,7 +21,7 @@
 	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
-	<necessite nom="prix" compatibilite="[0.1.0;]" />
+	<necessite nom="prix" compatibilite="[0.1.4;]" />
 	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.3.1;]" />
 	<utilise nom="bank" compatibilite="[3.0.0;]" />
