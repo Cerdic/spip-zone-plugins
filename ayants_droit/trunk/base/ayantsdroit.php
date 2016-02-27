@@ -104,7 +104,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		//'date' => '',
 		'champs_editables'  => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
 		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
-		'rechercher_champs' => array('credits'=>5, 'notes' => 3),
+		'rechercher_champs' => array('credits'=>5, 'commentaires' => 3),
 		'rechercher_jointures' => array(
 			'droits_ayant' => array('nom'=>8, 'email' => 5, 'credits' => 3),
 		),
