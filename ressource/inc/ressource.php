@@ -113,16 +113,21 @@ function ressource_meta($res) {
 	}
 
 	/* un lien github */
-	if (preg_match(",^https://(github\.com)/([^/]+/[^/]+)/blob/([^/]+)/(.*)$,",
+	if (preg_match(",^https://(github\.com)/([^/]+/[^/]+)/blob/([^/]+)/(.*\.([^.?]+))([?].*)?$,",
 	$src, $r)) {
-		# 1. calculer l'url avec ?raw=true pour un access https
-		$src = parametre_url($src, 'raw', 'true');
 
-		# 2. recuperer le repo, la branche et le chemin du fichier
+		# 1. recuperer le repo, la branche et le chemin du fichier
 		$server = $r[1];
 		$repo = $r[2];
 		$branch = $r[3];
 		$file = $r[4];
+		$ext = str_replace('jpeg', 'jpg', $r[5]);
+		$qs = $r[6];
+
+		# 2. calculer l'url avec ?raw=true pour un access https
+		#    et l'url de la copie locale
+		$src = parametre_url($src, 'raw', 'true');
+		$local = _DIR_RACINE . nom_fichier_copie_locale($src, $ext);
 
 		# 3. regarder si on a un clone en local
 		if (defined('_DIR_RESSOURCE_GIT') && (_DIR_RESSOURCE_GIT !== false)) {
@@ -138,22 +143,31 @@ function ressource_meta($res) {
 					$b = trim(`$cmd`);
 					spip_log("$cmd: $b", 'distant');
 
-					# 5. si pas de fichier, ou demande de ?var_mode=reload, 
+					# 5. si pas de fichier, ou demande de ?var_mode=images, 
 					#    mettre à jour le repo
 					if (!file_exists($dir.'/'.$file)
-					|| (_request('var_mode') == 'reload' && autoriser('reload', 'images') && (filemtime($dir.'/.git') < time() - 60))
+					|| (_request('var_mode') == 'images' && autoriser('reload', 'images') && (filemtime($dir.'/.git/FETCH_HEAD') < time() - 60))
 					) {
 						$cmd = "cd $_dir && git pull && git checkout $_branch";
 						$b = trim(`$cmd`);
 						spip_log("$cmd: $b", 'distant');
 
 						# 6. Si ca ne marche toujours pas on est déçu
-						#   et on va quand même tenter un accès https
-						if (!file_exists($dir.'/'.$file)) {
+						#   on regarde si on a déjà une copie locale,
+						#   sinon on va quand même tenter un accès https
+						if (!file_exists($local)
+						and !file_exists($dir.'/'.$file)) {
 							throw new Exception('github: pas de version locale, on essaiera par https');
 						}
 					}
-					$fichier = $src = $dir.'/'.$file;
+
+					if (file_exists($dir.'/'.$file)
+					and ( !file_exists($local)
+						OR filemtime($local) < filemtime($dir.'/'.$file) )
+					) {
+						@copy($dir.'/'.$file, $local);
+					}
+					$fichier = $src = $local;
 					$meta['local'] = $fichier;
 					$meta['href'] = $fichier;
 				}
@@ -163,6 +177,7 @@ function ressource_meta($res) {
 			}
 		}
 	}
+	/* fin github */
 
 	if (preg_match(',^https?://,', $src)) {
 
@@ -281,8 +296,8 @@ function ressource_meta($res) {
 	if (isset($meta['extension']))
 		$meta['type_document'] = ressource_mime($meta['extension']);
 
-	// demander le reload du contenu (?var_mode=reload)
-	if (_request('var_mode') == 'reload'
+	// demander le reload du contenu (?var_mode=images)
+	if (_request('var_mode') == 'images'
 	&& preg_match(',^https?://,', $src)
 	&& autoriser('reload', 'distant')) {
 		include_spip('inc/queue');
