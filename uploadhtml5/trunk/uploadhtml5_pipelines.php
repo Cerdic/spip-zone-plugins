@@ -137,3 +137,10 @@ function uploadhtml5_taches_generales_cron($taches) {
     $taches['nettoyer_document_temporaire'] = 24*3600;
     return $taches;
 }
+
+function uploadhtml5_formulaire_verifier($flux) {
+
+	var_dump($flux);
+
+	return $flux;
+}
