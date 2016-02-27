@@ -199,7 +199,7 @@ function obfusquer_document($id_document) {
 	$nouveau_nom = uniqid();
 
 	// Construire le nouveau fichier
-	$nouveau_fichier = _DIR_IMG.$fichier_info['dirname'].'/'.$nouveau_nom.'.'.$fichier_info['extension'];
+	$nouveau_fichier = $fichier_info['dirname'].'/'.$nouveau_nom.'.'.$fichier_info['extension'];
 
 	renommer_document($fichier, $nouveau_fichier, $id_document);
 
@@ -222,6 +222,9 @@ function renommer_document($ancien_chemin, $nouveau_chemin, $id_document = null)
 
 	// Mettre à jour la base de donnée avec le nouveau chemin au besoin
 	if (!is_null($id_document)) {
+
+		// Dans la base de donnée il ne faut pas avoir le dossier IMG
+		$nouveau_chemin = str_replace(_DIR_IMG, '', $nouveau_chemin);
 		sql_updateq('spip_documents', array('fichier' => $nouveau_chemin), 'id_document='.intval($id_document));
 	}
 }
