@@ -140,7 +140,44 @@ function uploadhtml5_taches_generales_cron($taches) {
 
 function uploadhtml5_formulaire_verifier($flux) {
 
-	var_dump($flux);
+	include_spip('inc/saisies');
+
+	// Est-ce que le formulaire soumis possède des saisies upload ?
+	$form = $flux['args']['form'];
+	// Ce n'est pas une faute de frappe
+	// le pipeline renvoi les argument dans un double args
+	$form_args = $flux['args']['args'];
+	$saisies = saisies_chercher_formulaire($form, $form_args);
+
+	// Chercher si une saisie upload ce trouve dans le tableau
+	$saisie = saisies_chercher($saisies, 'upload');
+
+	// Une saisie upload obligatoire a été trouvée,
+	// il faut donc la vérifier
+	if (isset($saisie['options']['obligatoire'])) {
+
+		// On commence par supprimer l'erreur générique.
+		// Comme la dropzone n'est pas un <input> classique,
+		// l'erreur générique sera toujours présente.
+		unset($flux['data'][$saisie['options']['nom']]);
+
+		// On vérifie qu'il y a des documents dans la session
+		include_spip('inc/saisie_upload');
+		$documents = saisie_upload_get();
+
+		// Pas de document dans la session ?
+		if (empty($documents['document'])) {
+			// Erreur !
+			$flux['data'][$saisie['options']['nom']] = _T('info_obligatoire');
+		}
+
+		// On vérifie le nombre d'erreur pour savoir
+		// s'il faut garder message_erreur
+		if (count($flux['data']) == 1) {
+			// une seul erreur, c'est message_erreur qui est seul.
+			unset($flux['data']['message_erreur']);
+		}
+	}
 
 	return $flux;
 }
