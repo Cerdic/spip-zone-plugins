@@ -26,8 +26,9 @@ function ayantsdroit_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['droits_contrats'] = 'droits_contrats';
 	
 	$interfaces['table_des_traitements']['EMAIL']['droits_ayants'] = 'PtoBR(' . _TRAITEMENT_RACCOURCIS . ')';
-	$interfaces['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
-	$interfaces['table_des_traitements']['CREDITS'][]= str_replace('%s', 'ayantsdroit_traiter_credits(%s)', _TRAITEMENT_RACCOURCIS);
+	$interfaces['table_des_traitements']['COMMENTAIRES']['droits_contrats'] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['ADRESSE'][] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['CREDITS'][] = str_replace('%s', 'ayantsdroit_traiter_credits(%s)', _TRAITEMENT_RACCOURCIS);
 	
 	return $interfaces;
 }
@@ -75,13 +76,12 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_droits_contrat"  => "bigint(21) NOT NULL",
 			"id_droits_ayant"    => "bigint(21) NOT NULL DEFAULT 0",
-			"objet"              => "varchar(25) NOT NULL DEFAULT ''",
-			"id_objet"           => "bigint(21) NOT NULL DEFAULT 0",
 			'id_licence'         => 'smallint not null default 0',
 			"date_debut"         => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"date_fin"           => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			'montant'            => 'varchar(255) not null default ""',
 			"credits"            => "text NOT NULL DEFAULT ''",
+			'commentaires'       => 'text NOT NULL DEFAULT ""',
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP"
 		),
@@ -102,9 +102,9 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "(select nom from spip_droits_ayants as da where da.id_droits_ayant=spip_droits_contrats.id_droits_ayant) AS titre, '' AS lang",
 		//'date' => '',
-		'champs_editables'  => array('objet', 'id_objet', 'id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits'),
-		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits'),
-		'rechercher_champs' => array('credits'=>5),
+		'champs_editables'  => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
+		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
+		'rechercher_champs' => array('credits'=>5, 'notes' => 3),
 		'rechercher_jointures' => array(
 			'droits_ayant' => array('nom'=>8, 'email' => 5, 'credits' => 3),
 		),

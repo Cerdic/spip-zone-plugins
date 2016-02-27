@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_droits_contrat' => 'Ajouter ce contrat de cession',
 
 	// C
+	'champ_commentaires_label' => 'Commentaires internes',
 	'champ_credits_explication' => 'Si le contrat prévoit une formulation particulière pour les crédits, celle-ci sera utilisée en priorité à la formulation générée automatiquement.',
 	'champ_credits_label' => 'Crédits personnalisés',
 	'champ_date_debut_label' => 'Date de début',

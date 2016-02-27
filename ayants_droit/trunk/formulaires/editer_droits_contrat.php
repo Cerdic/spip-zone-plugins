@@ -76,6 +76,16 @@ function formulaires_editer_droits_contrat_saisies_dist($id_droits_contrat='new'
 				'label' => _T('droits_contrat:champ_credits_label'),
 				'explication' => _T('droits_contrat:champ_credits_explication'),
 				'rows' => 4,
+				'inserer_barre' => 'forum',
+			),
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'commentaires',
+				'label' => _T('droits_contrat:champ_commentaires_label'),
+				'rows' => 4,
+				'inserer_barre' => 'forum',
 			),
 		),
 	);

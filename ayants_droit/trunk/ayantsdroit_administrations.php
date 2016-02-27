@@ -45,6 +45,11 @@ function ayantsdroit_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'table spip_droits_contrats drop column objet'),
 		array('sql_alter', 'table spip_droits_contrats drop column id_objet'),
 	);
+	
+	// Ajout du champ "notes" dans les contrats
+	$maj['1.4.0'] = array(
+		array('maj_tables', array('spip_droits_contrats')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
