@@ -298,6 +298,13 @@ function get_nom_commune($id_cog_commune)
 }
 
 
+function get_nom_commune_insee($code_insee)
+{
+	include_spip('base/abstract_sql');
+	return sql_getfetsel('trim(concat(MID(article,2,LENGTH(article_majuscule)-2),concat(\' \',nom))) as nom_commune', 'spip_cog_communes','concat(departement,code) = '.sql_quote($code_insee));
+}
+
+
 
 ////////////////////////////////////////
 // Pour l'espace privé en version 2.1
