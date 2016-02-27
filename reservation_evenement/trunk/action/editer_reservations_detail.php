@@ -102,7 +102,6 @@ function reservations_detail_inserer( $id_parent=null, $set=null) {
       $champs['statut'] = 'attente';
   }
 
-
   if ((isset($desc['date']) AND $d=$desc['date']) OR isset($desc['field'][$d='date']))
     $champs[$d] = date('Y-m-d H:i:s');
 
@@ -184,18 +183,15 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
   if ($c['statut_calculer_auto'] == 'on') {
     if ($c['statut'] != $champs['statut']) $statut_modifie = 1;
     else $statut_modifie = 0;
-    
-    set_request('statuts_details_reservation',
-      array_merge(
-        _request('statuts_details_reservation'),
-        array(
-          $id_reservations_detail => array(
-            'statut' => $champs['statut'],
-            'statut_modifie' => $statut_modifie
-          )
-        )
-      )
-    );
+		
+		$statuts_details_reservation = _request('statuts_details_reservation');
+		
+		$statuts_details_reservation[$id_reservations_detail] = array(
+			'statut' => $champs['statut'],
+	    'statut_modifie' => $statut_modifie
+		);
+
+    set_request('statuts_details_reservation',$statuts_details_reservation);
   }
 
   // Envoyer aux plugins
