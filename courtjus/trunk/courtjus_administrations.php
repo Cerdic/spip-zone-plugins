@@ -14,32 +14,32 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 
-    // Création du tableau des mises à jour.
-    $maj = array();
+	// Création du tableau des mises à jour.
+	$maj = array();
 
-     $config_default = array(
-         'objet_exclu' => array(),
-         'squelette_par_rubrique' => '',
-    );
+	$config_default = array(
+		'objet_exclu' => array(),
+		'squelette_par_rubrique' => '',
+	);
 
-    // Tableau de la configuration par défaut
-    $maj['create'] = array(
-        array('ecrire_meta', 'courtjus', serialize($config_default))
-    );
-    $maj['1.0.1'] =array(
-        array('ecrire_meta', 'courtjus', serialize($config_default))
-    );
+	// Tableau de la configuration par défaut
+	$maj['create'] = array(
+		array('ecrire_meta', 'courtjus', serialize($config_default))
+	);
+	$maj['1.0.1'] =array(
+		array('ecrire_meta', 'courtjus', serialize($config_default))
+	);
 
-    // Maj du plugin.
-    include_spip('base/upgrade');
-    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	// Maj du plugin.
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /*
  *   Désintaller courtjus.
  */
 function courtjus_vider_tables($nom_meta_base_version) {
-    // Supprimer les méta, ou oublie pas celle de la base.
-    effacer_meta('courtjus_base_version');
-    effacer_meta('courtjus');
+	// Supprimer les méta, ou oublie pas celle de la base.
+	effacer_meta('courtjus_base_version');
+	effacer_meta('courtjus');
 }
