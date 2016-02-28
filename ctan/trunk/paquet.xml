@@ -1,10 +1,11 @@
 <paquet
 	prefix="ctan"
 	categorie="divers"
-	version="1.0.1"
-	etat="test"
+	version="1.0.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="ctan.png"
+	documentation="http://contrib.spip.net/4487"
 >
 
 	<nom>Données CTAN</nom>
