@@ -5,9 +5,13 @@
 	[(#PIPELINE{boite_infos,#ARRAY{data,'',
 		args,#ARRAY{'type','formulaires_reponse','id',#ENV{id_formulaires_reponse}}}})]
 
+	[(#URL_ECRIRE{formulaires_reponses}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_horizontale{<:formidable:reponses_liste:>,formulaire-reponses-24})]
+
+	<BOUCLE_publies(FORMULAIRES_REPONSES){id_formulaire}{statut=publie}{0,1}>
 	[(#URL_ECRIRE{formulaires_analyse}
 		|parametre_url{id_formulaire,#ID_FORMULAIRE}
 		|icone_horizontale{<:formidable:reponses_analyse:>,formulaire-analyse-24})]
+	</BOUCLE_publies>
 
 #BOITE_FERMER
 
