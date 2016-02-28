@@ -75,6 +75,10 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables',array('spip_formulaires')),
 	);
 
+	$maj['0.6.6'] = array(
+		array('sql_updateq','spip_formulaires_reponses',array('statut'=>'refuse'),"statut=".sql_quote('poubelle')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
