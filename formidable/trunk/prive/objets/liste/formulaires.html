@@ -23,7 +23,9 @@
 			<td class="statut">[(#STATUT|puce_statut{formulaire,#ID_FORMULAIRE})]</td>
 			<td class="titre"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">#TITRE</a></td>
 			<td class="identifiant">#IDENTIFIANT</td>
-			<td class="reponses">[<a href="#URL_ECRIRE{formulaires_reponses,id_formulaire=#ID_FORMULAIRE}">(#COMPTEUR{formulaires_reponses}|?{#COMPTEUR{formulaires_reponses},''})</a>]</td>
+			<td class="reponses">[<a href="#URL_ECRIRE{formulaires_reponses,id_formulaire=#ID_FORMULAIRE}">(#COMPTEUR{formulaires_reponses}|?{#COMPTEUR{formulaires_reponses},''})</a>]
+			<BOUCLE_pub(FORMULAIRES_REPONSES){id_formulaire}{statut=publie}/>[<span class="small"><br />(#TOTAL_BOUCLE|!={#COMPTEUR{formulaires_reponses}}|et{#COMPTEUR{formulaires_reponses}}|?{#TOTAL_BOUCLE})&nbsp;[(#TOTAL_BOUCLE|>{1}|?{<:formidable:info_reponse_publiees:>,<:formidable:info_reponse_publiee:>})]</span>]<//B_pub>
+			</td>
 			<td class="id_formulaire id">[(#AUTORISER{modifier,formulaire,#ID_FORMULAIRE}|?{
 							<a href="[(#URL_ECRIRE{formulaire_edit,id_formulaire=#ID_FORMULAIRE})]">#ID_FORMULAIRE</a>,
 							#ID_FORMULAIRE
