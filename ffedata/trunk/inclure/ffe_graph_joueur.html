@@ -6,7 +6,7 @@ Par facilité d'utilisation	]
 
 <BOUCLE_lecture_wsdl4(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetHisto?Ref=#ENV{Ref}}>
 
-	<BOUCLE_donnees4(DATA){source table,#VALEUR}{!par DateArchive} {35,50} >
+	<BOUCLE_donnees4(DATA){source table,#VALEUR}{par DateArchive} {0,50} >
 	#SET{labels, #GET{labels}|concat{",",#VALEUR{DateArchive}|affdate_mois_annee}}
 	#SET{data,#GET{data}|concat{",",#VALEUR{Elo}}
 	</BOUCLE_donnees4>
