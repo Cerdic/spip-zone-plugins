@@ -14,23 +14,23 @@ function action_vider_formulaire_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
+
+
+	include_spip('inc/autoriser');
 	// si id_formulaires_reponse n'est pas un nombre, on ne fait rien
-	if ($id_formulaire = intval($arg)) {
-		// On supprime les réponse (statut => poubelle
-		$ok = sql_update(
-			'spip_formulaires_reponses',
-			array('statut' => sql_quote('poubelle')),
-			'id_formulaire = '.$id_formulaire
-		);
-	}
-	
-	if ($ok) {
-		/* on n'a plus de réponses à montrer, retour vers la page du formulaire */
-		if (!$redirect = _request('redirect'))
-			$redirect = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire);
-		
-		include_spip('inc/headers');
-		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+	if ($id_formulaire = intval($arg)
+	  AND autoriser('instituer','formulairesreponse',$id_formulaire)) {
+
+		// On supprime les réponse (statut => refuse)
+		$ok = sql_updateq('spip_formulaires_reponses', array('statut' => 'refuse'),
+			'id_formulaire=' . intval($id_formulaire));
+
+		if ($ok) {
+			/* on n'a plus de réponses à montrer, retour vers la page du formulaire */
+			if (!$redirect = _request('redirect')) {
+				$GLOBALS['redirect'] = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire);
+			}
+		}
 	}
 }
 
