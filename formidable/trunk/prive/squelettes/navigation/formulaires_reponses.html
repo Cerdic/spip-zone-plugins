@@ -3,9 +3,10 @@
 #BOITE_OUVRIR{'','info'}
 #PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','formulaire','id',#ENV{id_formulaire}}}}
 
-[(#SELF|icone_horizontale{<:formidable:reponses_liste:>,formulaire,formulaire-reponses-24,left})]
+	<BOUCLE_publies(FORMULAIRES_REPONSES){id_formulaire}{statut=publie}{0,1}>
+	[(#URL_ECRIRE{formulaires_analyse}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_horizontale{<:formidable:reponses_analyse:>,formulaire-analyse-24})]
+	</BOUCLE_publies>
 
-[(#URL_ECRIRE{formulaires_analyse}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_horizontale{<:formidable:reponses_analyse:>,formulaire-analyse-24})]
 
 #BOITE_FERMER
 </BOUCLE_autoriser>
