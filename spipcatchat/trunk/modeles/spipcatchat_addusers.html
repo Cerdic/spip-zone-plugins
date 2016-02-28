@@ -5,7 +5,7 @@ $(document).keypress
 (function(e){if(e.keyCode==13)return false;});
 $(function() 
 	{
-var name=[<BOUCLE_LISTES_AUTEURS_CHAT(AUTEURS){tout}{id_auteur!=#ID_AUTEUR}>[{"value":"(#NOM|trim|sinon{#LOGIN|trim})",["id":"(#ID_AUTEUR|trim)"},]]</BOUCLE_LISTES_AUTEURS_CHAT>];
+var name=[<BOUCLE_LISTES_AUTEURS_CHAT(AUTEURS){tout}{id_auteur!=#ID_AUTEUR}>[{"value":(#NOM|trim|json_encode|sinon{#LOGIN|trim|json_encode}),["id":"(#ID_AUTEUR|trim)"},]]</BOUCLE_LISTES_AUTEURS_CHAT>];
 $( "#auto" ).autocomplete({
 source: name,
 select: function(event, ui){$('#selectUser').val(ui.item.id); },
@@ -44,7 +44,7 @@ select: function(event, ui){$('#selectUser').val(ui.item.id); },
 					   [<li id="idauteurcatchat#ID_AUTEUR" class="spipcatchatmembreschat" title="<:spipcatchat:title_select_users:>" onclick="spipcatchatrestartmenu('[(#ID_AUTEUR|trim)]','[(#NOM|trim|sinon{#LOGIN|trim})]');return false;" style="cursor:pointer;display:none;margin-bottom:30px;">
 						[(#LOGO_AUTEUR|non)<img src="#CHEMIN{images/spipcatchat-64.png}" class="spip_logo spip_logo_left spip_logos" width="30">]
 						[(#LOGO_AUTEUR|left|image_reduire{30})]
-					    (#NOM|trim|sinon{#LOGIN|trim})
+					    (#NOM|sinon{#LOGIN})
 					    </li> ]
 					</BOUCLE_MEMBRES_AUTEURS_CHAT>
 				</ul>
