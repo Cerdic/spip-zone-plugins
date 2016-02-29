@@ -143,7 +143,7 @@ functional and sustainable plugins!
 	'echappement_crochets' => '[ ]',
 	'echappement_diese' => '#',
 	'echappement_idiome' => '&lt; :',
-	'echappement_inclure' => '&lt;INCLURE', # RELIRE
+	'echappement_inclure' => '&lt;INCLURE',
 	'echappement_parentheses' => '( )',
 	'echappement_php' => '&lt; ?php',
 	'echappement_tag_boucle' => '&lt; from loop', # RELIRE
@@ -163,8 +163,7 @@ depending on other options you have chosen elsewhere, especially if you activate
 		Furthermore, these files may have minimal functionality additions, then indicated.',
 	'explication_fichiers_explicites' => 'These files do not exist by default in SPIP but can be generated as needed for your comfort.',
 	'explication_reinitialiser' => 'This action delete plugin information currently being created. So you will start again from scratch!',
-	'explication_roles' => 'Experimentally, roles can be managed on bonds
-Using the "Roles" plugin.', # RELIRE
+	'explication_roles' => 'Experimentally, roles can be managed on connections using the "Roles" plugin.',
 	'explication_sauvegarde' => 'La Fabrique creates a backup file (<code>fabrique_{prefixe}.php</code>) within each plugin it creates. 
                 You can restore this file by sending it to the server or use one of the files already present.',
 	'explication_tables_hors_normes' => 'A table respects the SPIP default standards when it
@@ -299,16 +298,16 @@ Leave blank for not looking into it.',
 	'label_roles_explication' => 'Each line describes a role: <code> code of the role, title role </code>.
 		The first role is considered the role to be applied by default. Example: <code>translator, translator </code>',
 	'label_saisie' => 'Type of entries',
-	'label_saisie_explication' => 'If necessary (to display this field in the form), indicate the type of entry (of the plugin "saisies") you want.', # RELIRE
+	'label_saisie_explication' => 'If necessary (to display this field in the form), indicate the type of entry (from the plugin "saisies") you want.',
 	'label_saisie_options' => 'Entries options',
 	'label_saisie_options_explication' => 'Options of the tag #SAISIE.<br />
 		Example for a textarea :<br />
 		<code>conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4</code><br />
-		Example pour selection / checkbox / radio :<br />
-		<code>datas=[(#ARRAY{cle1,valeur1,cle2,valeur2})]</code>', # RELIRE
+		Example for selection / checkbox / radio :<br />
+		<code>datas=[(#ARRAY{cle1,valeur1,cle2,valeur2})]</code>',
 	'label_saisies' => 'Entries',
 	'label_saisies_explication' => 'Create entries and their views',
-	'label_schema' => 'Scheme', # RELIRE
+	'label_schema' => 'Scheme',
 	'label_schema_explication' => 'Version of the data structure',
 	'label_scripts_post_creation' => '<code>post_creation</code>',
 	'label_scripts_post_creation_explication' => 'After the creation of the files of your plugin in <code>@destination_plugin@</code>',
@@ -321,7 +320,7 @@ Leave blank for not looking into it.',
 However SPIP and la Fabrique can manage other cases.',
 	'label_table_compresser_donnees' => 'Compress the data?',
 	'label_table_compresser_donnees_explication' => 'Useful if the table is large!',
-	'label_table_destination' => 'Destination Table SQL ', # RELIRE
+	'label_table_destination' => 'SQL Destination Table',
 	'label_table_destination_explication' => 'Name of the table that will be imported data.
 By default the same name as the source table.',
 	'label_table_explication' => 'For example « spip_choses »',
@@ -420,9 +419,8 @@ parent path of these)',
 	'titre_plugin' => 'Plugin « @plugin@ »',
 
 	// V
-	'valider_nom_objet_avant' => 'Entering <code>saisie @ </ code>: To enter the language chains, please first validate
-the form after entering the name of the object. This enables complete part of
-language chains.' # RELIRE
+	'valider_nom_objet_avant' => 'To enter the language chains, please first validate 
+the form after entering the name of the object. This enables to complete part of language chains, it will take you just checking out.'
 );
 
 ?>
