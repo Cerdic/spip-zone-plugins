@@ -393,18 +393,23 @@ class Facteur extends PHPMailer {
 	 */
 
 	public function Send() {
-		return $this->callWrapper("parent::Send",func_get_args());
+		$args = func_get_args();
+		return $this->callWrapper("parent::Send",$args);
 	}
 	public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
-		return $this->callWrapper("parent::AddAttachment",func_get_args());
+		$args = func_get_args();
+		return $this->callWrapper("parent::AddAttachment",$args);
 	}
 	public function AddReplyTo($address, $name = '') {
-		return $this->callWrapper("parent::AddReplyTo",func_get_args());
+		$args = func_get_args();
+		return $this->callWrapper("parent::AddReplyTo",$args);
 	}
 	public function AddBCC($address, $name = '') {
-		return $this->callWrapper("parent::AddBCC",func_get_args());
+		$args = func_get_args();
+		return $this->callWrapper("parent::AddBCC",$args);
 	}
 	public function AddCC($address, $name = '') {
-		return $this->callWrapper("parent::AddCC", func_get_args());
+		$args = func_get_args();
+		return $this->callWrapper("parent::AddCC",$args);
 	}
 }
