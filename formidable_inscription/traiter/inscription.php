@@ -16,7 +16,6 @@ function traiter_inscription_dist($args, $retours){
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
-	$champs = saisies_lister_champs($saisies);
 
 	// saisies dans le formulaire
 	if ($options['champ_choix_inscription'])
