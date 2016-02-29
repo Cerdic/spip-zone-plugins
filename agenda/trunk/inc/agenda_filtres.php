@@ -177,7 +177,8 @@ function agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $for
 		$s = $du . $dtstart . affdate_jourcourt($d);
 		if ($h) $s .= " $hd";
 		$s .= $dtabbr . $au . $dtend . $affdate($f);
-		$s .= " $hf";
+		if ($h)
+			$s .= " $hf";
 		$s .= $dtabbr;
 	}
 	else
