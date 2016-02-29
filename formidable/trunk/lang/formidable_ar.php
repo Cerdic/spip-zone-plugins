@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste' => 'لائحة الإجابات',
 	'reponses_liste_prop' => 'إجابات بانتظار التصديق',
 	'reponses_liste_publie' => 'كل الإجابات المصدّقة',
-	'reponses_supprimer' => 'حذف كل الإجابات على هذه الاستمارة',
+	'reponses_supprimer' => 'حذف كل الإجابات على هذه الاستمارة', # MODIF
 	'reponses_voir_detail' => 'عرض الإجابة',
 
 	// S

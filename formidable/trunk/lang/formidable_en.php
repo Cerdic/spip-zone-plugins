@@ -157,7 +157,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'reponses_liste_prop' => 'Answers pending for validation',
 	'reponses_liste_publie' => 'All validated answers',
 	'reponses_nb' => '@nb@ answers',
-	'reponses_supprimer' => 'Delete all the answers to this form',
+	'reponses_supprimer' => 'Delete all the answers to this form', # MODIF
 	'reponses_supprimer_confirmation' => 'Are you sure you want to delete all answers to this form?',
 	'reponses_voir_detail' => 'See the answer',
 	'retour_aucun_traitement' => 'Your reply was accepted. But as the function of the form has not yet been configured, nothing was done with your data!',

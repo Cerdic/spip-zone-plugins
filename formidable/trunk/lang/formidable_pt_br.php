@@ -147,7 +147,7 @@ Nada',
 	'reponses_liste_prop' => 'Preenchimentos aguardando validação',
 	'reponses_liste_publie' => 'Todos os preenchimentos validados',
 	'reponses_nb' => '@nb@ preenchimentos',
-	'reponses_supprimer' => 'Apagar todos os preenchimentos deste formulário',
+	'reponses_supprimer' => 'Apagar todos os preenchimentos deste formulário', # MODIF
 	'reponses_supprimer_confirmation' => 'Tem certeza de que quer apagar todos os preenchimentos deste formulário?',
 	'reponses_voir_detail' => 'Ver preenchimento',
 	'retour_aucun_traitement' => 'Seu preenchimento foi enviado com sucesso, mas não há interação prevista para esse formulário.',
