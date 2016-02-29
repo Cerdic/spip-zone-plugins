@@ -6,7 +6,7 @@
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 // ********
@@ -16,10 +16,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // ********
 
 if (!defined('_PETIT_ECRAN')) {
-    define('_PETIT_ECRAN', '');
+	define('_PETIT_ECRAN', '');
 }
 if (!defined('_GRAND_ECRAN')) {
-    define('_GRAND_ECRAN', '');
+	define('_GRAND_ECRAN', '');
 }
 
 if (test_espace_prive()) {

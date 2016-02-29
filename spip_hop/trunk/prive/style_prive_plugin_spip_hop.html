@@ -1,13 +1,13 @@
 [(#REM)<style>/*
-    Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles de l'espace prive
 
-    Note: l'entete "Vary:" sert a repousser l'entete par
-    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-    genant en cas de "rotation du cookie de session" apres
-    un changement d'IP (effet de clignotement).
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
 
-    ATTENTION: il faut absolument le charset sinon Firefox croit que
-    c'est du text/html !
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
@@ -23,16 +23,16 @@ Gestion de la largeur du bandeau, par defaut (pour ne pas casser la compatibilit
 
 Si on est en pourcentage, on donne une valeur min-width equivalent aux valeurs standards de SPIP
 [(#GET{petit_ecran}|match{'%'}|oui)
-    [(#SET{petit_minwidth, 780px})]
+	[(#SET{petit_minwidth, 780px})]
 ][(#GET{grand_ecran}|match{'%'}|oui)
-    [(#SET{grand_minwidth, 974px})]
+	[(#SET{grand_minwidth, 974px})]
 ]
 Si on est en px, on verifie que la valeur indiquee dans la constante n'est pas plus petite que les valeurs standards de SPIP.
 Si oui, on prend cette valeur pour min-width, sinon, on prend les valeurs standards de SPIP.
 [(#GET{petit_ecran}|match{'px'}|oui)
-    [(#SET{petit_minwidth, [(#GET{petit_ecran}|intval|<{780}|?{#GET{petit_ecran},780px})]})]
+	[(#SET{petit_minwidth, [(#GET{petit_ecran}|intval|<{780}|?{#GET{petit_ecran},780px})]})]
 ][(#GET{grand_ecran}|match{'px'}|oui)
-    [(#SET{grand_minwidth, [(#GET{grand_ecran}|intval|<{974}|?{#GET{grand_ecran},974px})]})]
+	[(#SET{grand_minwidth, [(#GET{grand_ecran}|intval|<{974}|?{#GET{grand_ecran},974px})]})]
 ]
 */
 
@@ -83,18 +83,18 @@ body.large.edition #extra,
 	body.large { min-width: 98%; width: 98%; margin: 0 1%; }
 	/* ecran large*/
 	[(#GET{largeur_bandeau}) .largeur,
-    ][(#GET{largeur_bandeau}|non) .large .largeur,
-    ].ecrire #conteneur,
-    .ecrire #page div table.centered,
-    .ecrire #page .table_page,
+	][(#GET{largeur_bandeau}|non) .large .largeur,
+	].ecrire #conteneur,
+	.ecrire #page div table.centered,
+	.ecrire #page .table_page,
 	[(#GET{largeur_bandeau}) ].largeur,
-    .ecrire #conteneur,
-    .ecrire #page div table.centered,
-    .ecrire #page .table_page { width: 100%; }
+	.ecrire #conteneur,
+	.ecrire #page div table.centered,
+	.ecrire #page .table_page { width: 100%; }
 	.large #conteneur,
-    .large .table_page,
+	.large .table_page,
 	#conteneur,
-    .table_page { width: 100%; }
+	.table_page { width: 100%; }
 	.large div.messages-alertes,
 	div.messages-alertes { width: 95%; }
 	.large #navigation,
