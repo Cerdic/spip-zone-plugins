@@ -40,6 +40,10 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	$saisies_disponibles = saisies_lister_disponibles();
 	$contexte['_saisies_disponibles'] = $saisies_disponibles;
 	
+	// La liste des groupes de saisies
+	$saisies_groupes_disponibles = saisies_groupes_lister_disponibles("saisies/groupes");
+	$contexte['_saisies_groupes_disponibles'] = $saisies_groupes_disponibles;
+	
 	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	
 	// On cherche jquery UI pour savoir si on pourra glisser-déplacer
@@ -240,6 +244,19 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 	$identifiant = 'constructeur_formulaire_'.$identifiant;
 	// On récupère le formulaire à son état actuel
 	$formulaire_actuel = session_get($identifiant);
+	
+	// Si on demande à ajouter un groupe
+	if ($ajouter_saisie = _request('ajouter_groupe_saisie')){
+		$nom = saisies_generer_nom($formulaire_actuel, $ajouter_saisie);
+		$saisie = array(
+			'saisie' => $ajouter_saisie,
+			'options' => array(
+				'nom' => $nom
+			)
+		);
+		//chercher les saisies du groupe 
+		$formulaire_actuel = saisies_groupe_inserer($nom, $saisie, $formulaire_actuel);
+	}
 	
 	// Si on demande à ajouter une saisie
 	if ($ajouter_saisie = _request('ajouter_saisie')){
@@ -536,4 +553,32 @@ function saisie_option_contenu_vide($var) {
 		return false;
 	}
 	return true;
+}
+
+function saisies_groupe_inserer($nom, $saisie, $formulaire_actuel){
+	include_spip('inclure/configurer_saisie_fonctions');
+	
+		//on va chercher le groupe de saisies
+		$saisies_charger_infos = saisies_charger_infos($saisie['saisie'],$saisies_repertoire = "saisies/groupes");
+		
+		$classique_yaml=count($saisies_charger_infos['options']);
+		$formidable_yaml=count($saisies_charger_infos['saisies']);
+		if($classique_yaml>0) {
+			$champ_options = 'options';
+		}
+		if($formidable_yaml>0) { 
+			$champ_options = 'saisies';
+		}
+		
+		foreach($saisies_charger_infos[$champ_options] as $info_saisie){
+			spip_log("identifiant=".$info_saisie['identifiant'],"ajouter_saisie");
+			$saisies_disponibles = saisies_lister_disponibles();
+			$construire_nom = $info_saisie[$champ_options]['nom'] ? $info_saisie[$champ_options]['nom'] : $info_saisie['saisie'];
+			$nom = $info_saisie[$champ_options]['nom'] = saisies_generer_nom($formulaire_actuel,$construire_nom);
+			$saisie_saisie = $info_saisie['saisie'];
+			spip_log("each // nom = ".$nom." saisie =".$saisie_saisie,"ajouter_saisie");
+			
+			$formulaire_actuel = saisies_inserer($formulaire_actuel, $info_saisie);
+		}
+		return $formulaire_actuel;
 }

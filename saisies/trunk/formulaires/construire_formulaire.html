@@ -22,6 +22,7 @@
 				</button>
 			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 
+			[(#REM)<!-- les choix de saisies -->]
 			<BOUCLE_contenu(DATA){source tableau, #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
@@ -40,6 +41,18 @@
 				</BOUCLE_saisies_disponibles>
 			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 			</B_saisies_disponibles>
+			
+			<B_saisies_groupes_disponibles>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer haut saisies_groupes_disponibles" id="attrapable_bis">
+				<label><:saisies:construire_ajouter_groupe:></label>
+				<BOUCLE_saisies_groupes_disponibles(DATA){source tableau, #ENV{_saisies_groupes_disponibles}}{par cle}>
+				<button type="submit" name="ajouter_groupe_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#DESCRIPTION)"] [style="background-image:url((#ICONE|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
+					<span>#TITRE</span>
+				</button>
+				</BOUCLE_saisies_groupes_disponibles>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</B_saisies_groupes_disponibles>
+			
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		
