@@ -144,9 +144,11 @@ function convertir_quark_xml($c) {
 
 				// Titre (mais pas surtitre)
 				if(preg_match("/(?:(?<!sur)titre)/i", $type)){
+					# plusieurs titres ?? On envoie dans le texte les suivants
 					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
 						$texte = " " . $texte ;
-						$item["titre"] .= $texte ;
+						
+					$item["titre"] .= $texte ;
 					continue ;
 				}
 
