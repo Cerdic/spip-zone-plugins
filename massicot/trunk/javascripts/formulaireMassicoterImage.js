@@ -71,15 +71,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 			zoom = ui.value;
 
+			maj_image(zoom);
+			$('input#champ_zoom').attr('value', zoom);
+
 			var selection = zoomer_selection(selection_nozoom, zoom);
 
 			if (mode_dimensions_forcees) {
 				selection = forcer_dimensions_selection(selection);
 			}
 
-			$('input#champ_zoom').attr('value', zoom);
-
-			maj_image(zoom);
 			maj_selection(selection);
 			maj_formulaire(selection);
 		},
