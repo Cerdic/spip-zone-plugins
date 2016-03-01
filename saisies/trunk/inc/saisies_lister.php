@@ -311,11 +311,7 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = "saisies") {
 				$type_saisie = preg_replace(',[.]yaml$,i', '', $fichier);
 				$dossier = str_replace($fichier, '', $chemin);
 				// On ne garde que les saisies qui ont bien le HTML avec !
-				if (file_exists("$dossier$type_saisie.html")
-					and (
-						is_array($saisie = saisies_charger_infos($type_saisie,$saisies_repertoire))
-					)
-				) {
+				if (is_array($saisie = saisies_charger_infos($type_saisie,$saisies_repertoire))) {
 					$saisies[$type_saisie] = $saisie;
 				}
 			}
