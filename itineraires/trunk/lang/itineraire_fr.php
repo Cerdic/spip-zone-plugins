@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'locomotion_cheval' => 'Cheval',
 	'locomotion_pied' => 'Pédestre',
 	'locomotion_velo' => 'Vélo de route',
+	'locomotion_voiture' => 'Voiture',
 	'locomotion_vtt' => 'VTT',
 
 	// R
