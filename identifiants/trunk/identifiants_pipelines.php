@@ -27,6 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function identifiants_editer_contenu_objet($flux) {
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	// Identifiants sur les objets activés
@@ -70,6 +71,7 @@ function identifiants_editer_contenu_objet($flux) {
 function identifiants_boite_infos($flux){
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -117,6 +119,7 @@ function identifiants_boite_infos($flux){
 function identifiants_formulaire_charger($flux){
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -157,6 +160,7 @@ function identifiants_formulaire_charger($flux){
 function identifiants_formulaire_verifier($flux){
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -217,6 +221,7 @@ function identifiants_formulaire_verifier($flux){
 function identifiants_formulaire_traiter($flux){
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -252,6 +257,7 @@ function identifiants_formulaire_traiter($flux){
 function identifiants_post_insertion($flux){
 
 	include_spip('inc/config');
+	include_spip('inc/autoriser');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
