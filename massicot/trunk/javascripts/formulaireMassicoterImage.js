@@ -16,21 +16,21 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	var zoom = options.zoom,
 		img = $('.image-massicot img'),
 		initialWidth = img.attr('width'),
-		selection_actuelle,
+		selection_initiale,
 		selection_nozoom,
 		slider,
 		imgAreaSelector;
 
 	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
 	if (isNaN(parseInt($('input[name=x1]').val(), 10))) {
-		selection_actuelle = {
+		selection_initiale = {
 			x1: 0,
 			x2: parseInt(img.attr('width'),10),
 			y1: 0,
 			y2: parseInt(img.attr('height'),10)
 		};
 	} else {
-		selection_actuelle = {
+		selection_initiale = {
 			x1: parseInt($('input[name=x1]').val(), 10),
 			x2: parseInt($('input[name=x2]').val(), 10),
 			y1: parseInt($('input[name=y1]').val(), 10),
@@ -39,43 +39,40 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	}
 
 	/* On initialise le formulaire et l'affichage des dimensions */
-	maj_formulaire(selection_actuelle);
+	maj_formulaire(selection_initiale);
 
 	/* On garde en mémoire la sélection telle qu'elle serait sans le
 	   zoom, pour pouvoir zoomer-dézoomer perdre de la précision à
 	   cause d'erreurs d'arrondi. */
 	selection_nozoom = {
-		x1: selection_actuelle.x1 / zoom,
-		x2: selection_actuelle.x2 / zoom,
-		y1: selection_actuelle.y1 / zoom,
-		y2: selection_actuelle.y2 / zoom,
+		x1: selection_initiale.x1 / zoom,
+		x2: selection_initiale.x2 / zoom,
+		y1: selection_initiale.y1 / zoom,
+		y2: selection_initiale.y2 / zoom,
 	};
 
 	/* On crée ensuite le slider de zoom */
 	slider = $('#zoom-slider').slider({
-		/* SPIP ne propose pas de traitement d'image pour
-		   agrandir, alors pour l'instant on ne le permet pas… */
 		max: 1,
 		min: 0.01,
 		value: options.zoom,
 		step: 0.01,
 		slide: function (event, ui) {
-			var new_zoom = ui.value,
-				selection = zoomer_selection(selection_nozoom, new_zoom);
 
-			$('input#champ_zoom').attr('value', new_zoom);
+			zoom = ui.value;
 
-			maj_image(new_zoom);
+			var selection = zoomer_selection(selection_nozoom, zoom);
+
+			$('input#champ_zoom').attr('value', zoom);
+
+			maj_image(zoom);
 			maj_selection(selection);
 			maj_formulaire(selection);
-
-			zoom = new_zoom;
 		},
 		create: function () {
-			var new_zoom = $('input#champ_zoom').attr('value');
 
-			maj_image(new_zoom);
-			zoom = new_zoom;
+			zoom = $('input#champ_zoom').attr('value');
+			maj_image(zoom);
 		}
 	});
 
@@ -84,9 +81,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		instance: true,
 		handles: true,
 		show: true,
-		onSelectEnd: function (img, selection) {
-			maj_formulaire(selection);
-		},
+		x1: selection_initiale.x1,
+		x2: selection_initiale.x2,
+		y1: selection_initiale.y1,
+		y2: selection_initiale.y2,
 		onSelectChange: function (img, selection) {
 			selection_nozoom = {
 				x1: selection.x1 / zoom,
@@ -95,11 +93,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				y2: selection.y2 / zoom,
 			};
 			maj_formulaire(selection);
-		},
-		x1: selection_actuelle.x1,
-		x2: selection_actuelle.x2,
-		y1: selection_actuelle.y1,
-		y2: selection_actuelle.y2,
+		}
 	});
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
@@ -107,13 +101,18 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		$('#zoom-slider').slider('option', 'value', 1);
 		$('input#champ_zoom').attr('value', 1);
+
 		maj_image(1);
 
-		imgAreaSelector.setSelection(0,0,img.width(),img.height());
-		imgAreaSelector.update();
-
-		maj_formulaire({x1:0, y1:0, x2:img.width(), y2:img.height()});
-		selection_nozoom = {x1:0, y1:0, x2:img.width(), y2:img.height()};
+		var selection = {
+			x1: 0,
+			x2: img.width(),
+			y1: 0,
+			y2: img.height()
+		};
+		selection_nozoom = selection;
+		maj_selection(selection);
+		maj_formulaire(selection);
 
 		e.preventDefault();
 		return false;
@@ -146,19 +145,25 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/* Une fonction pour mettre à jour la sélection */
 	function maj_selection (selection) {
 
-		imgAreaSelector.setSelection(selection);
+		imgAreaSelector.setSelection(
+			selection.x1,
+			selection.y1,
+			selection.x2,
+			selection.y2
+		);
 		imgAreaSelector.update();
 	}
 
-	/* Calculer l'effet d'un zoom sur une sélection */
-	function zoomer_selection (selection, new_zoom) {
+	/* Calculer l'effet d'un zoom sur une sélection.
+	   Retourne la sélection zoomée. */
+	function zoomer_selection (selection, zoom) {
 
 		var nouvelle_selection = {};
 
-		nouvelle_selection.x1 = Math.round(selection.x1 * new_zoom);
-		nouvelle_selection.x2 = Math.round(selection.x2 * new_zoom);
-		nouvelle_selection.y1 = Math.round(selection.y1 * new_zoom);
-		nouvelle_selection.y2 = Math.round(selection.y2 * new_zoom);
+		nouvelle_selection.x1 = Math.round(selection.x1 * zoom);
+		nouvelle_selection.x2 = Math.round(selection.x2 * zoom);
+		nouvelle_selection.y1 = Math.round(selection.y1 * zoom);
+		nouvelle_selection.y2 = Math.round(selection.y2 * zoom);
 
 		nouvelle_selection.x1 = Math.max(0, nouvelle_selection.x1);
 		nouvelle_selection.y1 = Math.max(0, nouvelle_selection.y1);
