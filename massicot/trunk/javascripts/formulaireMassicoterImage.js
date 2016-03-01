@@ -8,20 +8,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
                       );
 
     var self = this,
-        slider = $('#zoom-slider').slider({
-            /* SPIP ne propose pas de traitement d'image pour
-               agrandir, alors pour l'instant on ne le permet pas… */
-            max: 1,
-            min: .01,
-            value: options.zoom,
-            step: .01,
-            slide: function ( event, ui ) {
-                $('input#champ_zoom').attr('value', ui.value).trigger('change');
-            }
-        }),
+        zoom = options.zoom,
         img = $('.image-massicot img'),
         initialWidth = img.attr('width'),
-        zoom = options.zoom,
         /* On garde en mémoire la sélection telle qu'elle serait sans
            le zoom, pour pouvoir zoomer-dézoomer perdre de la
            précision à cause d'erreurs d'arrondi. */
@@ -39,37 +28,57 @@ $.fn.formulaireMassicoterImage = function ( options ) {
                 y1: 0,
                 y2: parseInt(img.attr('height'),10)
             },
-        imgAreaSelector = img.imgAreaSelect({
-            instance: true,
-            handles: true,
-            show: true,
-            onSelectEnd: maj_formulaire,
-            onSelectChange: function (img, selection) {
-                selection_nozoom = {};
-                maj_formulaire(img, selection);
-            },
-            x1: selection_actuelle.x1,
-            x2: selection_actuelle.x2,
-            y1: selection_actuelle.y1,
-            y2: selection_actuelle.y2,
-        });
+        slider,
+        imgAreaSelector;
 
     /* On initialise le formulaire. On ne le fait pas en php parce que
        c'est plus facile de trouver les dimensions de l'image en js… */
     maj_formulaire(img, selection_actuelle);
 
-    /* la valeur du zoom agit sur l'image */
-    $('input#champ_zoom').change(function (e) {
-        var new_zoom = $(this).attr('value');
+	/* On crée ensuite le slider de zoom */
+	slider = $('#zoom-slider').slider({
+        /* SPIP ne propose pas de traitement d'image pour
+           agrandir, alors pour l'instant on ne le permet pas… */
+        max: 1,
+        min: 0.01,
+        value: options.zoom,
+        step: 0.01,
+        slide: function (event, ui) {
+			var new_zoom = ui.value;
 
-        maj_image(new_zoom);
-        maj_selection(new_zoom, zoom);
-        zoom = new_zoom;
+            $('input#champ_zoom')
+				.attr('value', new_zoom);
+
+			maj_image(new_zoom);
+			maj_selection(new_zoom, zoom);
+			zoom = new_zoom;
+        },
+		create: function (event, ui) {
+			var new_zoom = $('input#champ_zoom').attr('value');
+
+			maj_image(new_zoom);
+			zoom = new_zoom;
+		}
     });
-    /* initialiser le zoom */
-    $('input#champ_zoom').trigger('change');
 
-    /* Bouton de réinitialisation */
+	/* On crée le widget de sélection */
+	imgAreaSelector = img.imgAreaSelect({
+        instance: true,
+        handles: true,
+        show: true,
+        onSelectEnd: maj_formulaire,
+        onSelectChange: function (img, selection) {
+            selection_nozoom = {};
+            maj_formulaire(img, selection);
+        },
+        x1: selection_actuelle.x1,
+        x2: selection_actuelle.x2,
+        y1: selection_actuelle.y1,
+        y2: selection_actuelle.y2,
+    });
+
+
+    /* Et enfin on s'occupe du bouton de réinitialisation */
     $('#formulaire_massicoter_image_reset').click(function (e) {
 
         $('#zoom-slider').slider('option', 'value', 1);
@@ -86,9 +95,13 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         return false;
     });
 
+	/*************/
+	/* Fonctions */
+	/*************/
 
     /* Mise à jour du formulaire */
     function maj_formulaire (img, selection) {
+
         $('input[name=x1]').attr('value', selection.x1);
         $('input[name=x2]').attr('value', selection.x2);
         $('input[name=y1]').attr('value', selection.y1);
