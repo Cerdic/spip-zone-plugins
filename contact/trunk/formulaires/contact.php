@@ -183,6 +183,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=arr
 
 	// On s'occupe des pièces jointes.
 	$pj_fichiers = $_FILES['pj_fichiers'];
+	$infos_pj = array();
 
 	//Si le répertoire temporaire n'existe pas encore, il faut le créer.
 	$repertoire_temp_pj = _DIR_TMP.'/contact_pj/';
@@ -261,6 +262,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=arr
 
 	// Si on est pas dans une confirmation, on ajoute au contexte les infos des fichiers déjà téléchargés
 	if (!_request('confirmer')) {
+		$pj_fichiers = _request('pj_fichiers') ? _request('pj_fichiers') : array();
 		$pj_fichiers = _request('pj_fichiers') + $infos_pj;
 		ksort($pj_fichiers);
 		set_request('pj_fichiers', $pj_fichiers);
