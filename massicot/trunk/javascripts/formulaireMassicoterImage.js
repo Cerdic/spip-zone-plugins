@@ -39,7 +39,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	}
 
 	/* On initialise le formulaire et l'affichage des dimensions */
-	maj_formulaire(img, selection_actuelle);
+	maj_formulaire(selection_actuelle);
 
 	/* On garde en mémoire la sélection telle qu'elle serait sans le
 	   zoom, pour pouvoir zoomer-dézoomer perdre de la précision à
@@ -81,7 +81,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		instance: true,
 		handles: true,
 		show: true,
-		onSelectEnd: maj_formulaire,
+		onSelectEnd: function (img, selection) {
+			maj_formulaire(selection);
+		},
 		onSelectChange: function (img, selection) {
 			selection_nozoom = {
 				x1: selection.x1 / zoom,
@@ -89,7 +91,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				y1: selection.y1 / zoom,
 				y2: selection.y2 / zoom,
 			};
-			maj_formulaire(img, selection);
+			maj_formulaire(selection);
 		},
 		x1: selection_actuelle.x1,
 		x2: selection_actuelle.x2,
@@ -107,7 +109,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		imgAreaSelector.setSelection(0,0,img.width(),img.height());
 		imgAreaSelector.update();
 
-		maj_formulaire(img, {x1:0, y1:0, x2:img.width(), y2:img.height()});
+		maj_formulaire({x1:0, y1:0, x2:img.width(), y2:img.height()});
 		selection_nozoom = {x1:0, y1:0, x2:img.width(), y2:img.height()};
 
 		e.preventDefault();
@@ -119,7 +121,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/*************/
 
 	/* Mise à jour du formulaire */
-	function maj_formulaire (img, selection) {
+	function maj_formulaire (selection) {
 
 		$('input[name=x1]').attr('value', selection.x1);
 		$('input[name=x2]').attr('value', selection.x2);
@@ -161,7 +163,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		);
 		imgAreaSelector.update();
 
-		maj_formulaire(img, nouvelle_selection);
+		maj_formulaire(nouvelle_selection);
 		selection_actuelle = nouvelle_selection;
 	}
 };
