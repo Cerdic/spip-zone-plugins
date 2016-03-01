@@ -8,10 +8,19 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+    // A
+    'adresse_ip_explication' => 'Si vous avez activé la création du fichier <code>.htaccess</code> dans le répertoire <code>IMG/</code>, vous pouvez renseigner ci-dessous la liste des adresses IP qui pourront consulter les documents physiques.<br/><strong>Veuillez saisir les adresses IP séparées par un point-virgule ";"</strong>',
+    'adresse_ip_label' => 'Liste des adresses IP autorisées',
+
     // C
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
+
+    // H
+    'htaccess_content' => 'Contenu du fichier .htaccess',
+    'htaccess_explication' => 'Désirez-vous interdire la consultation des documents non-publiés ? Si oui, une tâche de fond créera un fichier <code>.htaccess</code> dans le répertoire <code>IMG/</code> du site contenant tous les fichiers non consultables.',
+    'htaccess_label' => 'Créer le fichier <em>.htaccess</em>',
 
     // L
     'lier_document_choix_non' => 'Non',
@@ -21,6 +30,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'medias_dereferencer_titre' => 'Déréférencer les médias',
+
+    // R
+    'robots_txt_content' => 'Inclusion pour le fichier robots.txt',
 
     // T
     'titre_page_configurer_medias_dereferencer' => 'Déréférencer les médias',
