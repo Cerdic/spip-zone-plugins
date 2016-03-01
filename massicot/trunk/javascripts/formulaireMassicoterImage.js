@@ -118,7 +118,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
                 x2: selection_actuelle.x2 / zoom,
                 y1: selection_actuelle.y1 / zoom,
                 y2: selection_actuelle.y2 / zoom,
-            }
+            };
         }
 
         nouvelle_selection.x1 = Math.round(selection_nozoom.x1 * new_zoom);
@@ -142,4 +142,4 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         maj_formulaire(img, nouvelle_selection);
         selection_actuelle = nouvelle_selection;
     }
-}
+};
