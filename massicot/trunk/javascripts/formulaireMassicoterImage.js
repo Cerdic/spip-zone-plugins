@@ -17,6 +17,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		img = $('.image-massicot img'),
 		largeur_image = img.attr('width'),
 		hauteur_image = img.attr('height'),
+		premier_chargement,
 		selection_initiale,
 		selection_nozoom,
 		slider,
@@ -27,6 +28,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
 	if (isNaN(parseInt($('input[name=x1]').val(), 10))) {
+		premier_chargement = true;
 		selection_initiale = {
 			x1: 0,
 			x2: parseInt(img.attr('width'),10),
@@ -34,6 +36,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			y2: parseInt(img.attr('height'),10)
 		};
 	} else {
+		premier_chargement = false;
 		selection_initiale = {
 			x1: parseInt($('input[name=x1]').val(), 10),
 			x2: parseInt($('input[name=x2]').val(), 10),
@@ -45,7 +48,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	if (mode_dimensions_forcees) {
 		forcer_largeur = parseInt(options.forcer_dimensions.largeur, 10);
 		forcer_hauteur = parseInt(options.forcer_dimensions.hauteur, 10);
-		selection_initiale = forcer_dimensions_selection(selection_initiale);
 	}
 
 	/* On garde en mémoire la sélection telle qu'elle serait sans le
@@ -67,7 +69,20 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		create: function () {
 
 			zoom = $('input#champ_zoom').attr('value');
-			maj_image(zoom);
+
+			if (premier_chargement && mode_dimensions_forcees) {
+				zoom = calculer_zoom_min();
+				$(this).slider('option', 'value', zoom);
+				maj_image(zoom);
+				selection_initiale = forcer_dimensions_selection({
+					x1: 0,
+					x2: img.width(),
+					y1: 0,
+					y2: img.height()
+				});
+			} else {
+				maj_image(zoom);
+			}
 			maj_formulaire(selection_initiale, zoom);
 		},
 		slide: function (event, ui) {
