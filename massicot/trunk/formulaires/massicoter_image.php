@@ -14,7 +14,7 @@
  * @return array
  *     Tableau des saisies du formulaire
  */
-function formulaires_massicoter_image_saisies_dist ($objet, $id_objet, $redirect) {
+function formulaires_massicoter_image_saisies_dist($objet, $id_objet, $redirect) {
 
     $saisies = array(
         array(
@@ -60,11 +60,11 @@ function formulaires_massicoter_image_saisies_dist ($objet, $id_objet, $redirect
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_massicoter_image_charger_dist ($objet, $id_objet, $redirect) {
+function formulaires_massicoter_image_charger_dist($objet, $id_objet, $redirect) {
 
     $parametres = massicot_get_parametres($objet, $id_objet);
 
-    if ( ! $parametres) {
+    if (! $parametres) {
         $parametres = array(
             'zoom' => 1,
         );
@@ -84,9 +84,9 @@ function formulaires_massicoter_image_charger_dist ($objet, $id_objet, $redirect
  * @return array
  *     Retours des traitements
  */
-function formulaires_massicoter_image_traiter_dist ($objet, $id_objet, $redirect) {
+function formulaires_massicoter_image_traiter_dist($objet, $id_objet, $redirect) {
 
-    if ( ! _request('annuler')) {
+    if (! _request('annuler')) {
 
         $parametres = array(
             'zoom' => _request('zoom'),
