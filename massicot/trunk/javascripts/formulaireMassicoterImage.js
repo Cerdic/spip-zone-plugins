@@ -48,9 +48,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		selection_initiale = forcer_dimensions_selection(selection_initiale);
 	}
 
-	/* On initialise le formulaire et l'affichage des dimensions */
-	maj_formulaire(selection_initiale);
-
 	/* On garde en mémoire la sélection telle qu'elle serait sans le
 	   zoom, pour pouvoir zoomer-dézoomer perdre de la précision à
 	   cause d'erreurs d'arrondi. */
@@ -67,12 +64,17 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		min: 0.01,
 		value: options.zoom,
 		step: 0.01,
+		create: function () {
+
+			zoom = $('input#champ_zoom').attr('value');
+			maj_image(zoom);
+			maj_formulaire(selection_initiale, zoom);
+		},
 		slide: function (event, ui) {
 
 			zoom = ui.value;
 
 			maj_image(zoom);
-			$('input#champ_zoom').attr('value', zoom);
 
 			var selection = zoomer_selection(selection_nozoom, zoom);
 
@@ -81,12 +83,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			}
 
 			maj_selection(selection);
-			maj_formulaire(selection);
-		},
-		create: function () {
-
-			zoom = $('input#champ_zoom').attr('value');
-			maj_image(zoom);
+			maj_formulaire(selection, zoom);
 		}
 	});
 
@@ -106,7 +103,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				y1: selection.y1 / zoom,
 				y2: selection.y2 / zoom,
 			};
-			maj_formulaire(selection);
+			maj_formulaire(selection, zoom);
 		}
 	});
 
@@ -126,7 +123,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	$('#formulaire_massicoter_image_reset').click(function (e) {
 
 		$('#zoom-slider').slider('option', 'value', 1);
-		$('input#champ_zoom').attr('value', 1);
 
 		maj_image(1);
 
@@ -138,7 +134,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		};
 		selection_nozoom = selection;
 		maj_selection(selection);
-		maj_formulaire(selection);
+		maj_formulaire(selection, 1);
 
 		e.preventDefault();
 		return false;
@@ -149,8 +145,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/*************/
 
 	/* Mise à jour du formulaire */
-	function maj_formulaire (selection) {
+	function maj_formulaire (selection, zoom) {
 
+		$('input#champ_zoom').attr('value', zoom);
 		$('input[name=x1]').attr('value', selection.x1);
 		$('input[name=x2]').attr('value', selection.x2);
 		$('input[name=y1]').attr('value', selection.y1);
