@@ -11,10 +11,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         zoom = options.zoom,
         img = $('.image-massicot img'),
         initialWidth = img.attr('width'),
-        /* On garde en mémoire la sélection telle qu'elle serait sans
-           le zoom, pour pouvoir zoomer-dézoomer perdre de la
-           précision à cause d'erreurs d'arrondi. */
-        selection_nozoom = {},
         selection_actuelle = ( ! isNaN(parseInt($('input[name=x1]').val(), 10))) ?
             {
                 x1: parseInt($('input[name=x1]').val(), 10),
@@ -28,6 +24,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
                 y1: 0,
                 y2: parseInt(img.attr('height'),10)
             },
+        /* On garde en mémoire la sélection telle qu'elle serait sans
+           le zoom, pour pouvoir zoomer-dézoomer perdre de la
+           précision à cause d'erreurs d'arrondi. */
+        selection_nozoom = {
+            x1: selection_actuelle.x1 / zoom,
+            x2: selection_actuelle.x2 / zoom,
+            y1: selection_actuelle.y1 / zoom,
+            y2: selection_actuelle.y2 / zoom,
+        },
         slider,
         imgAreaSelector;
 
@@ -68,7 +73,12 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         show: true,
         onSelectEnd: maj_formulaire,
         onSelectChange: function (img, selection) {
-            selection_nozoom = {};
+			selection_nozoom = {
+				x1: selection.x1 / zoom,
+				x2: selection.x2 / zoom,
+				y1: selection.y1 / zoom,
+				y2: selection.y2 / zoom,
+			};
             maj_formulaire(img, selection);
         },
         x1: selection_actuelle.x1,
@@ -89,7 +99,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
         imgAreaSelector.update();
 
         maj_formulaire(img, {x1:0, y1:0, x2:img.width(), y2:img.height()});
-        selection_nozoom = {};
+        selection_nozoom = {x1:0, y1:0, x2:img.width(), y2:img.height()};
 
         e.preventDefault();
         return false;
@@ -123,16 +133,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
     function maj_selection (new_zoom, zoom) {
 
         var nouvelle_selection = {};
-
-        if ( ! selection_nozoom.hasOwnProperty('x1')) {
-            selection_actuelle = imgAreaSelector.getSelection();
-            selection_nozoom = {
-                x1: selection_actuelle.x1 / zoom,
-                x2: selection_actuelle.x2 / zoom,
-                y1: selection_actuelle.y1 / zoom,
-                y2: selection_actuelle.y2 / zoom,
-            };
-        }
 
         nouvelle_selection.x1 = Math.round(selection_nozoom.x1 * new_zoom);
         nouvelle_selection.x2 = Math.round(selection_nozoom.x2 * new_zoom);
