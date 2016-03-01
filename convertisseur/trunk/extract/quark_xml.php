@@ -145,8 +145,10 @@ function convertir_quark_xml($c) {
 				// Titre (mais pas surtitre)
 				if(preg_match("/(?:(?<!sur)titre)/i", $type)){
 					# plusieurs titres ?? On envoie dans le texte les suivants
-					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
-						$texte = " " . $texte ;
+					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"])){
+						$item["texte"] .= "@TITRE\n$texte\n\n" ;
+						$texte = " // " . $texte ;
+					}	
 						
 					$item["titre"] .= $texte ;
 					continue ;
@@ -180,7 +182,7 @@ function convertir_quark_xml($c) {
 				}
 				
 				// Auteurs
-				if(preg_match("/signature/i", $type)){
+				if(preg_match("/auteur/i", $type)){
 					$item["auteurs"] .= $texte ;			
 					continue ;
 				}
@@ -196,11 +198,12 @@ function convertir_quark_xml($c) {
 	// ajouter les notes
 	
 	if($item["notes"]){
-		$item["texte"] = $item["texte"] . "[[<>\n" . $item["notes"] ."]]" . "\n" ;
+		$item["texte"] = $item["texte"] . "[[<>\n" . trim($item["notes"]) ."\n]]" . "\n" ;
 		unset($item["notes"]) ;
 	}
 	
 	$item["auteurs"] = preg_replace("/\.\s*$/","",$item["auteurs"]);
+	$item["auteurs"] = preg_replace("/^Par\s/i","",$item["auteurs"]);
 		
 	// passer la main pour une surcharge éventuelle
 	$c = $item ;
