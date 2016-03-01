@@ -15,11 +15,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 	var zoom = options.zoom,
 		img = $('.image-massicot img'),
-		initialWidth = img.attr('width'),
+		largeur_image = img.attr('width'),
+		hauteur_image = img.attr('height'),
 		selection_initiale,
 		selection_nozoom,
 		slider,
-		imgAreaSelector;
+		imgAreaSelector,
+		mode_dimensions_forcees = (options.forcer_dimensions !== null),
+		forcer_hauteur,
+		forcer_largeur;
 
 	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
 	if (isNaN(parseInt($('input[name=x1]').val(), 10))) {
@@ -36,6 +40,12 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			y1: parseInt($('input[name=y1]').val(), 10),
 			y2: parseInt($('input[name=y2]').val(), 10)
 		};
+	}
+
+	if (mode_dimensions_forcees) {
+		forcer_largeur = parseInt(options.forcer_dimensions.largeur, 10);
+		forcer_hauteur = parseInt(options.forcer_dimensions.hauteur, 10);
+		selection_initiale = forcer_dimensions_selection(selection_initiale);
 	}
 
 	/* On initialise le formulaire et l'affichage des dimensions */
@@ -62,6 +72,10 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			zoom = ui.value;
 
 			var selection = zoomer_selection(selection_nozoom, zoom);
+
+			if (mode_dimensions_forcees) {
+				selection = forcer_dimensions_selection(selection);
+			}
 
 			$('input#champ_zoom').attr('value', zoom);
 
@@ -95,6 +109,18 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			maj_formulaire(selection);
 		}
 	});
+
+	/* Options propres au mode avec dimensions imposées */
+	if (mode_dimensions_forcees) {
+
+		slider.slider('option', 'min', calculer_zoom_min());
+
+		imgAreaSelector.setOptions({
+			aspectRatio: forcer_largeur + ':' + forcer_hauteur,
+			minWidth: forcer_largeur,
+			minHeight: forcer_hauteur
+		});
+	}
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
 	$('#formulaire_massicoter_image_reset').click(function (e) {
@@ -137,9 +163,9 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	function maj_image (zoom) {
 
 		img
-			.css('width', zoom * initialWidth + 'px')
+			.css('width', zoom * largeur_image + 'px')
 			.css('height', 'auto')
-			.css('margin-left', '-' + (Math.max((zoom*initialWidth - 780),0) / 2) + 'px' );
+			.css('margin-left', '-' + (Math.max((zoom*largeur_image - 780),0) / 2) + 'px' );
 	}
 
 	/* Une fonction pour mettre à jour la sélection */
@@ -171,5 +197,39 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		nouvelle_selection.y2 = Math.min(nouvelle_selection.y2, img.height());
 
 		return nouvelle_selection;
+	}
+
+	/* Retourne une sélection aux dimensions reçues en option, en
+	   essayeant de rester le plus proche possible de la sélection
+	   passée en paramètre. On essaie de garder le même centre. */
+	function forcer_dimensions_selection(selection) {
+
+		var centre = {
+				x: (selection.x2 + selection.x1) / 2,
+				y: (selection.y2 + selection.y1) / 2
+			},
+			x1 = Math.round(Math.max(0, centre.x - (forcer_largeur / 2))),
+			x2 = x1 + forcer_largeur,
+			y1 = Math.round(Math.max(0, centre.y - (forcer_hauteur / 2))),
+			y2 = y1 + forcer_hauteur;
+
+		selection = {
+			x1: x1,
+			x2: x2,
+			y1: y1,
+			y2: y2
+		};
+
+		return selection;
+	}
+
+	/* La plus grande valeur de zoom possible avant d'être plus petit
+	   que les dimensions forcées */
+	function calculer_zoom_min() {
+
+		return Math.max(
+			forcer_largeur / largeur_image,
+			forcer_hauteur / hauteur_image
+		);
 	}
 };
