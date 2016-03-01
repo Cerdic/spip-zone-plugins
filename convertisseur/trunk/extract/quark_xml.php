@@ -173,7 +173,7 @@ function convertir_quark_xml($c) {
 				
 				// Notes de bas de page
 				if(preg_match("/notes/i", $type)){
-					$item["notes"] .= $texte ."\n" ;
+					$item["notes"] .= $texte ."\n\n" ;
 					continue ;
 				}
 				
