@@ -162,6 +162,20 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/* Mise à jour du formulaire */
 	function maj_formulaire (selection, zoom) {
 
+		/* En mode "dimensions forcées", on permet des sélections plus
+		   grandes que les dimensions voulues. Il faut alors tout
+		   remettre à la bonne échelle. */
+		if (mode_dimensions_forcees) {
+			var zoom_selection = calculer_zoom_selection(selection);
+			zoom = zoom * zoom_selection;
+			selection = {
+				x1: Math.round(selection.x1 * zoom_selection),
+				x2: Math.round(selection.x1 * zoom_selection) + forcer_largeur,
+				y1: Math.round(selection.y1 * zoom_selection),
+				y2: Math.round(selection.y1 * zoom_selection) + forcer_hauteur
+			};
+		}
+
 		$('input#champ_zoom').attr('value', zoom);
 		$('input[name=x1]').attr('value', selection.x1);
 		$('input[name=x2]').attr('value', selection.x2);
@@ -243,5 +257,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			forcer_largeur / largeur_image,
 			forcer_hauteur / hauteur_image
 		);
+	}
+
+	/* Calcul le zoom qu'il faut pour mettre une selection aux
+	   dimensions imposées */
+	function calculer_zoom_selection(selection) {
+
+		var zoom_x = forcer_largeur / (selection.x2 - selection.x1),
+			zoom_y = forcer_hauteur / (selection.y2 - selection.y1);
+
+		return Math.max(zoom_x, zoom_y);
 	}
 };
