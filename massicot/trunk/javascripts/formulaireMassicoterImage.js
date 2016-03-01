@@ -99,6 +99,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 			maj_selection(selection);
 			maj_formulaire(selection, zoom);
+
+			imgAreaSelector.setOptions({
+				minWidth: Math.round(forcer_largeur * zoom),
+				minHeight: Math.round(forcer_hauteur * zoom)
+			});
 		}
 	});
 
@@ -129,8 +134,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		imgAreaSelector.setOptions({
 			aspectRatio: forcer_largeur + ':' + forcer_hauteur,
-			minWidth: forcer_largeur,
-			minHeight: forcer_hauteur
+			minWidth: Math.round(forcer_largeur * zoom),
+			minHeight: Math.round(forcer_hauteur * zoom)
 		});
 	}
 
