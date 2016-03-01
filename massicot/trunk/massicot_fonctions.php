@@ -20,15 +20,18 @@
  *
  * @return string : le chemin vers l'image, un string vide sinon
  */
-function massicot_chemin_image ($objet, $id_objet) {
+function massicot_chemin_image($objet, $id_objet) {
 
     include_spip('base/abstract_sql');
     include_spip('base/objets');
 
     if (objet_type($objet) === 'document') {
 
-        $fichier = sql_getfetsel('fichier', 'spip_documents',
-                                 'id_document='.intval($id_objet));
+        $fichier = sql_getfetsel(
+	        'fichier',
+	        'spip_documents',
+	        'id_document='.intval($id_objet)
+        );
         return $fichier ?
             find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $fichier) : '';
 
@@ -54,41 +57,49 @@ function massicot_chemin_image ($objet, $id_objet) {
  * @return mixed   Rien si tout s'est bien passé, un message d'erreur
  *                 sinon
  */
-function massicot_enregistrer ($objet, $id_objet, $parametres) {
+function massicot_enregistrer($objet, $id_objet, $parametres) {
 
     include_spip('action/editer_objet');
     include_spip('action/editer_liens');
 
     /* Tester l'existence des parametres nécessaires */
-    if ( ! isset($parametres['zoom'])) {
+    if (! isset($parametres['zoom'])) {
         return _T('massicot:erreur_parametre_manquant', array('parametre' => 'zoom'));
-    } else if ( ! isset($parametres['x1'])) {
+    } elseif (! isset($parametres['x1'])) {
         return _T('massicot:erreur_parametre_manquant', array('parametre' => 'x1'));
-    } else if ( ! isset($parametres['x2'])) {
+    } elseif (! isset($parametres['x2'])) {
         return _T('massicot:erreur_parametre_manquant', array('parametre' => 'x2'));
-    } else if ( ! isset($parametres['y1'])) {
+    } elseif (! isset($parametres['y1'])) {
         return _T('massicot:erreur_parametre_manquant', array('parametre' => 'y1'));
-    } else if ( ! isset($parametres['y2'])) {
+    } elseif (! isset($parametres['y2'])) {
         return _T('massicot:erreur_parametre_manquant', array('parametre' => 'y2'));
     }
 
     $chemin_image = massicot_chemin_image($objet, $id_objet);
     list($width, $height) = getimagesize($chemin_image);
 
-    $id_massicotage = sql_getfetsel('id_massicotage', 'spip_massicotages_liens',
-                                    array(
-                                        'objet='.sql_quote($objet),
-                                        'id_objet='.intval($id_objet),
-                                    ));
+    $id_massicotage = sql_getfetsel(
+	    'id_massicotage',
+	    'spip_massicotages_liens',
+	    array(
+		    'objet='.sql_quote($objet),
+		    'id_objet='.intval($id_objet),
+	    )
+    );
 
-    if ( ! $id_massicotage) {
+    if (! $id_massicotage) {
         $id_massicotage = objet_inserer('massicotage');
-        objet_associer(array('massicotage' => $id_massicotage),
-                       array($objet => $id_objet));
+        objet_associer(
+	        array('massicotage' => $id_massicotage),
+	        array($objet => $id_objet)
+        );
     }
 
-    if ($err = objet_modifier('massicotage', $id_massicotage,
-                              array('traitements' => serialize($parametres)))) {
+    if ($err = objet_modifier(
+	    'massicotage',
+	    $id_massicotage,
+	    array('traitements' => serialize($parametres))
+    )) {
         return $err;
     }
 }
@@ -104,16 +115,19 @@ function massicot_enregistrer ($objet, $id_objet, $parametres) {
  *
  * @return array : Un tableau avec les paramètres de massicotage
  */
-function massicot_get_parametres ($objet, $id_objet) {
+function massicot_get_parametres($objet, $id_objet) {
 
     include_spip('base/abstract_sql');
 
     $traitements = sql_getfetsel(
         'traitements',
-        'spip_massicotages as M' .
-        ' INNER JOIN spip_massicotages_liens as L ON M.id_massicotage=L.id_massicotage',
-        array('L.objet='.sql_quote($objet),
-              'L.id_objet='.intval($id_objet)));
+        'spip_massicotages as M '
+        . 'INNER JOIN spip_massicotages_liens as L ON M.id_massicotage=L.id_massicotage',
+        array(
+	        'L.objet='.sql_quote($objet),
+	        'L.id_objet='.intval($id_objet)
+        )
+    );
 
     if ($traitements) {
         return unserialize($traitements);
@@ -132,7 +146,7 @@ function massicot_get_parametres ($objet, $id_objet) {
  * @return mixed : Un tableau représentant l'objet, rien si on n'a pas
  *                 réussi à deviner
  */
-function massicot_trouver_objet_logo ($fichier) {
+function massicot_trouver_objet_logo($fichier) {
 
     $fichier = basename($fichier);
 
@@ -141,11 +155,12 @@ function massicot_trouver_objet_logo ($fichier) {
 
     $row = explode('on', $fichier);
 
-    if (is_array($row) AND (count($row) === 2)) {
+    if (is_array($row) and (count($row) === 2)) {
 
         return array(
             'objet' => objet_type(
-                array_search($row[0], $GLOBALS['table_logos'])),
+                array_search($row[0], $GLOBALS['table_logos'])
+            ),
             'id_objet' => $row[1],
         );
     }
@@ -161,7 +176,7 @@ function massicot_trouver_objet_logo ($fichier) {
  *
  * @return string : Un fichier massicoté
  */
-function massicoter_fichier ($fichier, $parametres) {
+function massicoter_fichier($fichier, $parametres) {
 
     include_spip('inc/filtres');
     include_spip('inc/filtres_images_mini');
@@ -180,17 +195,20 @@ function massicoter_fichier ($fichier, $parametres) {
     }
 
     /* ne rien faire s'il n'y a pas de massicotage défini */
-    if ( ! $parametres) {
+    if (! $parametres) {
         return $fichier;
     }
 
     list($width, $height) = getimagesize($fichier);
 
     $fichier = extraire_attribut(
-        image_reduire($fichier,
-                      $parametres['zoom'] * $width,
-                      $parametres['zoom'] * $height),
-        'src');
+        image_reduire(
+	        $fichier,
+	        $parametres['zoom'] * $width,
+	        $parametres['zoom'] * $height
+        ),
+        'src'
+    );
 
     /* on vire un éventuel query string */
     $fichier = parse_url($fichier);
@@ -199,18 +217,24 @@ function massicoter_fichier ($fichier, $parametres) {
     list($width, $height) = getimagesize($fichier);
 
     $fichier = extraire_attribut(
-        image_recadre($fichier,
-                      $width  - $parametres['x1'],
-                      $height - $parametres['y1'],
-                      'bottom right'),
-        'src');
+        image_recadre(
+	        $fichier,
+	        $width  - $parametres['x1'],
+	        $height - $parametres['y1'],
+	        'bottom right'
+        ),
+        'src'
+    );
 
     $fichier = extraire_attribut(
-        image_recadre($fichier,
-                      $parametres['x2'] - $parametres['x1'],
-                      $parametres['y2'] - $parametres['y1'],
-                      'top left'),
-        'src');
+        image_recadre(
+	        $fichier,
+	        $parametres['x2'] - $parametres['x1'],
+	        $parametres['y2'] - $parametres['y1'],
+	        'top left'
+        ),
+        'src'
+    );
 
     return $fichier;
 }
@@ -224,9 +248,11 @@ function massicoter_fichier ($fichier, $parametres) {
  *
  * @return string : Un fichier massicoté
  */
-function massicoter_document ($fichier=FALSE) {
+function massicoter_document($fichier = false) {
 
-    if ( ! $fichier) return;
+	if (! $fichier) {
+		return;
+	}
 
     include_spip('base/abstract_sql');
     include_spip('inc/documents');
@@ -236,7 +262,8 @@ function massicoter_document ($fichier=FALSE) {
         'spip_massicotages as M' .
         ' INNER JOIN spip_massicotages_liens as L ON L.id_massicotage = M.id_massicotage' .
         ' INNER JOIN spip_documents as D ON (D.id_document = L.id_objet AND L.objet="document")',
-        'D.fichier='.sql_quote(set_spip_doc($fichier)));
+        'D.fichier='.sql_quote(set_spip_doc($fichier))
+    );
 
     return massicoter_fichier($fichier, unserialize($parametres));
 }
@@ -254,7 +281,7 @@ function massicoter_document ($fichier=FALSE) {
  *
  * @return string : Un fichier massicoté
  */
-function massicoter_objet ($fichier, $objet, $id_objet) {
+function massicoter_objet($fichier, $objet, $id_objet) {
 
     return massicoter_fichier($fichier, massicot_get_parametres($objet, $id_objet));
 }
@@ -268,25 +295,28 @@ function massicoter_objet ($fichier, $objet, $id_objet) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
+function massicoter_logo_document($logo, $connect = null, $doc = array()) {
 
     include_spip('inc/filtres');
     include_spip('inc/filtres_images_mini');
 
     /* S'il n'y a pas de fichier dans la pile, on va le chercher dans
        la table documents */
-    if ( ! isset($doc['fichier'])) {
+    if (! isset($doc['fichier'])) {
         include_spip('base/abstract_sql');
-        $rows = sql_allfetsel('fichier, extension', 'spip_documents',
-                              'id_document='.intval($doc['id_document']));
+        $rows = sql_allfetsel(
+	        'fichier, extension',
+	        'spip_documents',
+	        'id_document='.intval($doc['id_document'])
+        );
 
         $doc['fichier']   = $rows[0]['fichier'];
         $doc['extension'] = $rows[0]['extension'];
     }
 
    /* Si le document en question n'est pas une image, on ne fait rien */
-    if (( ! $logo) OR
-        (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
+    if ((! $logo)
+        or (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
 
         return $logo;
     }
@@ -314,7 +344,9 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
        reçu. */
     $balise = image_reduire(
         $balise_img($fichier_massicote, '', 'spip_logos'),
-        $largeur_logo, $hauteur_logo);
+        $largeur_logo,
+        $hauteur_logo
+    );
 
     if (isset($lien)) {
         $balise = $lien . $balise . '</a>';
@@ -332,11 +364,11 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo ($logo, $connect = null, $objet_type = null, $id_objet = null) {
+function massicoter_logo($logo, $connect = null, $objet_type = null, $id_objet = null) {
 
     include_spip('inc/filtres');
 
-    if ( ! $logo) {
+    if (! $logo) {
         return $logo;
     }
 
@@ -372,9 +404,9 @@ function massicoter_logo ($logo, $connect = null, $objet_type = null, $id_objet 
  *
  * @return string : La largeur de l'image après massicotage
  */
-function massicoter_largeur ($largeur, $connect = null, $doc = array()) {
+function massicoter_largeur($largeur, $connect = null, $doc = array()) {
 
-    if (( ! $largeur) OR ( ! isset($doc['id_document']))) {
+    if ((! $largeur) or (! isset($doc['id_document']))) {
         return $largeur;
     }
 
@@ -395,9 +427,9 @@ function massicoter_largeur ($largeur, $connect = null, $doc = array()) {
  *
  * @return string : La hauteur de l'image après massicotage
  */
-function massicoter_hauteur ($hauteur, $connect = null, $doc = array()) {
+function massicoter_hauteur($hauteur, $connect = null, $doc = array()) {
 
-    if (( ! $hauteur) OR ( ! isset($doc['id_document']))) {
+    if ((! $hauteur) or (! isset($doc['id_document']))) {
         return $hauteur;
     }
 
