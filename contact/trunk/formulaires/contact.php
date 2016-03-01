@@ -422,12 +422,18 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer='',$options=arra
 
 		// S'il y a des pièces jointes on les ajoute aux documents de SPIP.
 		if ($pj_enregistrees_nomfichier != null) {
+			include_spip('inc/autoriser');
+			
 			//On charge la fonction pour ajouter le document là où il faut
 			$ajouter_documents = charger_fonction('ajouter_documents','action');
-			$files[] = array('tmp_name'=>$repertoire_temp_pj.$nom_pj,'name'=>$nom_pj);
+			$files = array();
 			foreach ($pj_enregistrees_nomfichier as $nom_pj) {
-				$id_doc = $ajouter_documents("new", $files, 'message', $id_message, 'document');
+				$files[] = array('tmp_name'=>$repertoire_temp_pj.$nom_pj,'name'=>$nom_pj);
 			}
+			
+			autoriser_exception('modifier', 'message', $id_message, true);
+			$ajouts = $ajouter_documents("new", $files, 'message', $id_message, 'document');
+			autoriser_exception('modifier', 'message', $id_message, false);
 		}
 
 		// On lie le message au(x) destinataire(s) concerné(s)
