@@ -134,8 +134,16 @@ function convertir_quark_xml($c) {
 
 				// On cherche dans le nom des feuilles de style Quark des noms de champs spip
 
-				// Titre 
-				if(preg_match("/titre/i", $type)){
+				// Surtitre
+				if(preg_match("/surtitre/i", $type)){
+					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["surtitre"]))
+						$texte = " " . $texte ;
+					$item["surtitre"] .= $texte ;
+					continue ;
+				}
+
+				// Titre (mais pas surtitre)
+				if(preg_match("/(?:(?<!sur)titre)/i", $type)){
 					if(sizeof($item["titre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["titre"]))
 						$texte = " " . $texte ;
 						$item["titre"] .= $texte ;
@@ -149,14 +157,6 @@ function convertir_quark_xml($c) {
 						$item = $res ;
 						continue ;	
 					}
-				}
-
-				// Surtitre
-				if(preg_match("/surtitre/i", $type)){
-					if(sizeof($item["surtitre"]) > 0 and !preg_match("/^\s/", $texte) and !preg_match("/\s$/", $item["surtitre"]))
-						$texte = " " . $texte ;
-					$item["surtitre"] .= $texte ;
-					continue ;
 				}
 				
 				// Chapo
