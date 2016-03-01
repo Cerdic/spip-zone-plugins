@@ -16,34 +16,40 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	var zoom = options.zoom,
 		img = $('.image-massicot img'),
 		initialWidth = img.attr('width'),
-		selection_actuelle = ( ! isNaN(parseInt($('input[name=x1]').val(), 10))) ?
-			{
-				x1: parseInt($('input[name=x1]').val(), 10),
-				x2: parseInt($('input[name=x2]').val(), 10),
-				y1: parseInt($('input[name=y1]').val(), 10),
-				y2: parseInt($('input[name=y2]').val(), 10)
-			} :
-			{
-				x1: 0,
-				x2: parseInt(img.attr('width'),10),
-				y1: 0,
-				y2: parseInt(img.attr('height'),10)
-			},
-		/* On garde en mémoire la sélection telle qu'elle serait sans
-		   le zoom, pour pouvoir zoomer-dézoomer perdre de la
-		   précision à cause d'erreurs d'arrondi. */
-		selection_nozoom = {
-			x1: selection_actuelle.x1 / zoom,
-			x2: selection_actuelle.x2 / zoom,
-			y1: selection_actuelle.y1 / zoom,
-			y2: selection_actuelle.y2 / zoom,
-		},
+		selection_actuelle,
+		selection_nozoom,
 		slider,
 		imgAreaSelector;
 
-	/* On initialise le formulaire. On ne le fait pas en php parce que
-	   c'est plus facile de trouver les dimensions de l'image en js… */
+	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
+	if (isNaN(parseInt($('input[name=x1]').val(), 10))) {
+		selection_actuelle = {
+			x1: 0,
+			x2: parseInt(img.attr('width'),10),
+			y1: 0,
+			y2: parseInt(img.attr('height'),10)
+		};
+	} else {
+		selection_actuelle = {
+			x1: parseInt($('input[name=x1]').val(), 10),
+			x2: parseInt($('input[name=x2]').val(), 10),
+			y1: parseInt($('input[name=y1]').val(), 10),
+			y2: parseInt($('input[name=y2]').val(), 10)
+		};
+	}
+
+	/* On initialise le formulaire et l'affichage des dimensions */
 	maj_formulaire(img, selection_actuelle);
+
+	/* On garde en mémoire la sélection telle qu'elle serait sans le
+	   zoom, pour pouvoir zoomer-dézoomer perdre de la précision à
+	   cause d'erreurs d'arrondi. */
+	selection_nozoom = {
+		x1: selection_actuelle.x1 / zoom,
+		x2: selection_actuelle.x2 / zoom,
+		y1: selection_actuelle.y1 / zoom,
+		y2: selection_actuelle.y2 / zoom,
+	};
 
 	/* On crée ensuite le slider de zoom */
 	slider = $('#zoom-slider').slider({
