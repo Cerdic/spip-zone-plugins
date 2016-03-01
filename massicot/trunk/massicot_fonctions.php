@@ -316,7 +316,7 @@ function massicoter_logo_document ($logo, $connect = null, $doc = array()) {
         $balise_img($fichier_massicote, '', 'spip_logos'),
         $largeur_logo, $hauteur_logo);
 
-    if ($lien) {
+    if (isset($lien)) {
         $balise = $lien . $balise . '</a>';
     }
 

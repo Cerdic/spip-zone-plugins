@@ -19,8 +19,9 @@
  */
 function massicot_declarer_tables_interfaces($interfaces) {
 
-    if (is_null($interfaces['table_des_traitements']['FICHIER']['documents'])) {
-        $interfaces['table_des_traitements']['FICHIER']['documents'] = '%s';
+	if ((! isset($interfaces['table_des_traitements']['FICHIER']['documents']))
+	    or is_null($interfaces['table_des_traitements']['FICHIER']['documents'])) {
+		$interfaces['table_des_traitements']['FICHIER']['documents'] = '%s';
     }
 
     $interfaces['table_des_traitements']['FICHIER']['documents'] =
