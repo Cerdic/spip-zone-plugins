@@ -60,12 +60,15 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		value: options.zoom,
 		step: 0.01,
 		slide: function (event, ui) {
-			var new_zoom = ui.value;
+			var new_zoom = ui.value,
+				selection = zoomer_selection(selection_nozoom, new_zoom);
 
 			$('input#champ_zoom').attr('value', new_zoom);
 
 			maj_image(new_zoom);
-			maj_selection(new_zoom);
+			maj_selection(selection);
+			maj_formulaire(selection);
+
 			zoom = new_zoom;
 		},
 		create: function () {
@@ -140,30 +143,28 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			.css('margin-left', '-' + (Math.max((zoom*initialWidth - 780),0) / 2) + 'px' );
 	}
 
-	/* Une fonction pour mettre à jour la sélection lorsqu'on zoom */
-	function maj_selection (new_zoom) {
+	/* Une fonction pour mettre à jour la sélection */
+	function maj_selection (selection) {
+
+		imgAreaSelector.setSelection(selection);
+		imgAreaSelector.update();
+	}
+
+	/* Calculer l'effet d'un zoom sur une sélection */
+	function zoomer_selection (selection, new_zoom) {
 
 		var nouvelle_selection = {};
 
-		nouvelle_selection.x1 = Math.round(selection_nozoom.x1 * new_zoom);
-		nouvelle_selection.x2 = Math.round(selection_nozoom.x2 * new_zoom);
-		nouvelle_selection.y1 = Math.round(selection_nozoom.y1 * new_zoom);
-		nouvelle_selection.y2 = Math.round(selection_nozoom.y2 * new_zoom);
+		nouvelle_selection.x1 = Math.round(selection.x1 * new_zoom);
+		nouvelle_selection.x2 = Math.round(selection.x2 * new_zoom);
+		nouvelle_selection.y1 = Math.round(selection.y1 * new_zoom);
+		nouvelle_selection.y2 = Math.round(selection.y2 * new_zoom);
 
 		nouvelle_selection.x1 = Math.max(0, nouvelle_selection.x1);
 		nouvelle_selection.y1 = Math.max(0, nouvelle_selection.y1);
 		nouvelle_selection.x2 = Math.min(nouvelle_selection.x2, img.width());
 		nouvelle_selection.y2 = Math.min(nouvelle_selection.y2, img.height());
 
-		imgAreaSelector.setSelection(
-			nouvelle_selection.x1,
-			nouvelle_selection.y1,
-			nouvelle_selection.x2,
-			nouvelle_selection.y2
-		);
-		imgAreaSelector.update();
-
-		maj_formulaire(nouvelle_selection);
-		selection_actuelle = nouvelle_selection;
+		return nouvelle_selection;
 	}
 };
