@@ -1,4 +1,10 @@
+/* jshint strict: true, undef: true, unused: true, curly: true,
+   eqeqeq: true, freeze: true, funcscope: true, futurehostile: true,
+   nonbsp: true */
+/* globals $ */
+
 $.fn.formulaireMassicoterImage = function ( options ) {
+	"use strict";
 
 	options = $.extend(true,
 					   {
@@ -7,8 +13,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 					   options
 					  );
 
-	var self = this,
-		zoom = options.zoom,
+	var zoom = options.zoom,
 		img = $('.image-massicot img'),
 		initialWidth = img.attr('width'),
 		selection_actuelle = ( ! isNaN(parseInt($('input[name=x1]').val(), 10))) ?
@@ -51,14 +56,13 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		slide: function (event, ui) {
 			var new_zoom = ui.value;
 
-			$('input#champ_zoom')
-				.attr('value', new_zoom);
+			$('input#champ_zoom').attr('value', new_zoom);
 
 			maj_image(new_zoom);
-			maj_selection(new_zoom, zoom);
+			maj_selection(new_zoom);
 			zoom = new_zoom;
 		},
-		create: function (event, ui) {
+		create: function () {
 			var new_zoom = $('input#champ_zoom').attr('value');
 
 			maj_image(new_zoom);
@@ -86,7 +90,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		y1: selection_actuelle.y1,
 		y2: selection_actuelle.y2,
 	});
-
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
 	$('#formulaire_massicoter_image_reset').click(function (e) {
@@ -130,7 +133,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	}
 
 	/* Une fonction pour mettre à jour la sélection lorsqu'on zoom */
-	function maj_selection (new_zoom, zoom) {
+	function maj_selection (new_zoom) {
 
 		var nouvelle_selection = {};
 
