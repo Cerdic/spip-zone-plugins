@@ -263,7 +263,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=arr
 	// Si on est pas dans une confirmation, on ajoute au contexte les infos des fichiers déjà téléchargés
 	if (!_request('confirmer')) {
 		$pj_fichiers = _request('pj_fichiers') ? _request('pj_fichiers') : array();
-		$pj_fichiers = _request('pj_fichiers') + $infos_pj;
+		$pj_fichiers = $pj_fichiers + $infos_pj;
 		ksort($pj_fichiers);
 		set_request('pj_fichiers', $pj_fichiers);
 		$erreurs['infos_pj'] = $infos_pj;
