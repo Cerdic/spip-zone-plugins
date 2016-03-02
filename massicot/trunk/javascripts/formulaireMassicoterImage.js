@@ -17,7 +17,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		img = $('.image-massicot img'),
 		largeur_image = img.attr('width'),
 		hauteur_image = img.attr('height'),
-		premier_chargement,
+		premier_chargement = isNaN(parseInt($('input[name=x1]').val(), 10)),
 		selection_initiale,
 		selection_nozoom,
 		slider,
@@ -27,8 +27,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		forcer_largeur;
 
 	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
-	if (isNaN(parseInt($('input[name=x1]').val(), 10))) {
-		premier_chargement = true;
+	if (premier_chargement) {
 		selection_initiale = {
 			x1: 0,
 			x2: parseInt(img.attr('width'),10),
@@ -36,7 +35,6 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			y2: parseInt(img.attr('height'),10)
 		};
 	} else {
-		premier_chargement = false;
 		selection_initiale = {
 			x1: parseInt($('input[name=x1]').val(), 10),
 			x2: parseInt($('input[name=x2]').val(), 10),
