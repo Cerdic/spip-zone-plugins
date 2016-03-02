@@ -5,7 +5,7 @@
  *
  * @plugin     Déréférencer les médias
  *
- * @copyright  2015
+ * @copyright  2015-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
@@ -24,7 +24,7 @@ function medias_dereferencer_taches_generales_cron($taches) {
 	$taches['medias_dereferencer'] = 24 * 3600; // toutes les 24h
 	$taches['medias_dereferencer_vu'] = 24 * 3600; // toutes les 24h
 	if (defined('_DUREE_CACHE_DEFAUT')) {
-		$taches['medias_dereferencer_htaccess'] = _DUREE_CACHE_DEFAUT; // toutes les 24h
+		$taches['medias_dereferencer_htaccess'] = _DUREE_CACHE_DEFAUT; // On utilise le cache par défaut défini dans SPIP.
 	} else {
 		$taches['medias_dereferencer_htaccess'] = 24 * 3600; // toutes les 24h
 	}
