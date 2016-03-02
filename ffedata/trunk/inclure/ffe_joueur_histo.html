@@ -10,8 +10,8 @@
 	</thead>
 <BOUCLE_lecture_wsdl3(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetHisto?Ref=#ENV{Ref}}>
 <B_donnees3>
-	<BOUCLE_donnees3(DATA){source table,#VALEUR}{par DateArchive}>
-	<tr>
+	<BOUCLE_donnees3(DATA){source table,#VALEUR}{!par DateArchive}>
+	<tr class=" [(#COMPTEUR_BOUCLE|alterner{'odd','even'})] ">
 		<td>#VALEUR{Elo}</td>
 		<td>#VALEUR{Fide}</td>
 		<td>#VALEUR{NbrParties}</td>
