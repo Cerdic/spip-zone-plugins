@@ -200,9 +200,15 @@ function mailsubscribers_listes($options = array()){
 	{
 		$status[$key] = $row['status'];
 	}
+
 	array_multisort($status, SORT_DESC, $listes);
+	// array_multisort reindex les cle numeriques :(
+	$listes_ok = array();
+	foreach($listes as $liste){
+		$listes_ok[$liste['id']] = $liste;
+	}
 	
-	return $listes;
+	return $listes_ok;
 }
 
 /**
