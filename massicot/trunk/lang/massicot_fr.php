@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_annuler' => 'Annuler',
 	'label_dimensions' => 'Taille de l’image recadrée en pixels : ',
+	'label_format' => 'dimensions prédéfinies : ',
 
 	// M
 	'massicot_titre' => 'Massicot',
