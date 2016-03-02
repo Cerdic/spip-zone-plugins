@@ -1,7 +1,7 @@
 <paquet
 	prefix="coggps"
 	categorie="divers"
-	version="2.0.2"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/coggps-32.png"
