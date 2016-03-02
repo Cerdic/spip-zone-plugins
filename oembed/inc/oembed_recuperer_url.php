@@ -20,8 +20,8 @@ function inc_oembed_recuperer_url($oembed_url,$url,$format){
 
 	// on recupere le contenu de la page
 	// si possible via curl en IPv4 car youtube bug en IPv6
-	// uniquement si curl est dispo en version 7.10.8 mini
-	if (function_exists('curl_init') and $curl_version = curl_version() and version_compare($curl_version['version'], '7.10.8', '>=')) {
+	// uniquement si PHP >= 5.3.0 pour utiliser l'option CURLOPT_IPRESOLVE
+	if (function_exists('curl_init') and version_compare(phpversion(), '5.3.0', '>=')) {
 		spip_log('Requete oembed (curl) pour '.$url.' : '.$oembed_url,'oembed.'._LOG_DEBUG);
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
