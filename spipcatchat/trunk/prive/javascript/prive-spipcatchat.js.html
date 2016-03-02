@@ -1,28 +1,39 @@
-// ------------------------  Ici les variables SPIP --> JavaScript ----------------------------//
 var URLplugin='[(#ENV{url_plugin}|trim)]';
 var idAuteur=encodeURIComponent('[(#ID_AUTEUR|trim)]');
 var charset=encodeURIComponent('[(#CHARSET|trim)]');
 var nom=encodeURIComponent('[(#ENV{nom}|trim)]'); 
 var langShowChat = new Array("<:spipcatchat:catchat_message:>");
-
-[(#CONFIG{spipcatchat_prive/refreshprive}||non)var catchatrefresh=2000;]
-[(#CONFIG{spipcatchat_prive/refreshprive}||oui)[var catchatrefresh=(#CONFIG{spipcatchat_prive/refreshprive}|trim);]];
-
-[(#CONFIG{spipcatchat_commun/cache}|trim|non)var catcache="non";]
-[(#CONFIG{spipcatchat_commun/cache}|trim|oui)[var catcache="(#CONFIG{spipcatchat_commun/cache}|trim)";]]
-
-[(#CONFIG{spipcatchat_commun/history}||non)var hist=0;]
-[(#CONFIG{spipcatchat_commun/history}||oui)[var hist=(#CONFIG{spipcatchat_commun/history}|trim);]];
-
-[(#CONFIG{spipcatchat_commun/theme_emoticons}||non)var pack="classic";]
-[(#CONFIG{spipcatchat_commun/theme_emoticons}||oui)[var pack="(#CONFIG{spipcatchat_commun/theme_emoticons}|trim)";]]
-
+[var catchatrefresh=(#CONFIG{spipcatchat_prive/refreshprive,1000}|trim);]
+[var catcache="(#CONFIG{spipcatchat_commun/cache,non}|trim)";]
+[var hist=(#CONFIG{spipcatchat_commun/history,0}|trim);]
+[(#CONFIG{spipcatchat_commun/theme_emoticons}||non)var pack="classic"; #SET{catchatthememoti,classic}]
+[(#CONFIG{spipcatchat_commun/theme_emoticons}||oui)[var pack="(#CONFIG{spipcatchat_commun/theme_emoticons}|trim)";] #SET{catchatthememoti,#CONFIG{spipcatchat_commun/theme_emoticons}}]
 var catchatrefreshstatut=125000;
 var scrollBar = false;
 var nombreMessage;
 var emosta = 'status';
 
-// -------------------------------------------------------------------------------------------------// 
+function spipcatchattypo(texte,url,pack)
+{	
+#SET{spipcatchatregex2, [a-z A-Z 0-9]+.png$}
+<BOUCLE_EMOTICONS2(DATA){source glob, #ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/*.png}{valeur!==etiquette.png}>#SET{grommeler2,#VALEUR|match{#GET{spipcatchatregex2}, Uims }|replace{\.png$,'',S} }
+[texte = texte.replace(/[:(#GET{grommeler2}|trim):]/g,' <img src="(#CHEMIN{#VALEUR}|replace{../squelettes-dist/,'',S}|trim)" alt="#GET{grommeler2}" style="width:20px"/> ');]
+</BOUCLE_EMOTICONS2>	
+        texte = texte.replace(/[\W]{1}lol[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/smile.png" alt="Sourire" style="width:20px"/> ');
+        texte = texte.replace(/[\W]{1}mdr[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/heureux.png" alt="MDR" style="width:20px"/> ');
+        texte = texte.replace(/[\W]{1}[p]+tdr[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#GET{catchatthememoti}/bigrire.png" alt="PTDR" style="width:20px"/> ');		
+		texte = texte.replace(/_/gi,'<br />');
+		texte = texte.replace(/{{{/gi,'<span style="padding-left:20px;">');
+		texte = texte.replace(/}}}/gi,'</span>');
+		texte = texte.replace(/{{/gi,'<b>');
+		texte = texte.replace(/}}/gi,'</b>');
+		texte = texte.replace(/{/gi,'<i>');
+		texte = texte.replace(/}/gi,'</i>');
+		texte = texte.replace(/{/gi,'<i>');
+		texte = texte.replace(/}/gi,'</i>');
+		return texte;				
+	}
+
 
 function spipcatchatemoticonprive(emoticon)
 {
@@ -137,7 +148,7 @@ function getMessages(e,t,n,r,i)
 	function(e)
 		{
 		var t=$("#text");
-		$("#text").html(spipcatchattypo(e.messages,n,pack.trim())); // On passe en revue avant l'affichage du tableau des messages du chat avec la fonction SPIPCATCHATTYPO pour les émoticons et la typo SPIP
+		$("#text").html(spipcatchattypo(e.messages)); // On passe en revue avant l'affichage du tableau des messages du chat avec la fonction SPIPCATCHATTYPO pour les émoticons et la typo SPIP
 		1!=scrollBar&&(t[0].scrollTop=t[0].scrollHeight,scrollBar=!0);
 		void 0!==t&&t[0].childNodes.length>nombreMessage&&(t[0].scrollTop=t[0].scrollHeight, // Ici le nombre de ligne du tableau est passé à plus un, donc on descend la scroll bar
 		$("#soundGet").trigger("play")); // et comme tout chat qui se respecte on joue un son d'avertissement

@@ -15,16 +15,8 @@ function spipcatchat_jqueryui_plugins($scripts){
     return $scripts;
 }
 
-// Insertion du javascript de SpipCatChat
-function spipcatchat_insert_head($flux){
-	$flux .= '<script src="'.find_in_path('javascript/mes_fonction_javascript.js').'" type="text/javascript"></script>';
-	$flux .= '<script src="'.find_in_path('javascript/spipcatchat.js').'" type="text/javascript"></script>';
-	return $flux;	
-}
-
 // Insertion dans le header prive javascript et CSS
 function spipcatchat_header_prive($flux){
-	$flux .= '<script src="'.find_in_path('javascript/mes_fonction_javascript.js').'" type="text/javascript"></script>';
 	$flux .="\n".'<link rel="stylesheet" href="'.find_in_path('prive/themes/spip/spipcatchat_prive.css').'" />';
 	return $flux;	
 }
@@ -40,5 +32,4 @@ function spipcatchat_insert_head_css($flux){
 function autoriser_spipcatchat_menu_dist($faire, $type, $id, $qui, $opt){
     return true;
 }
-
 ?>

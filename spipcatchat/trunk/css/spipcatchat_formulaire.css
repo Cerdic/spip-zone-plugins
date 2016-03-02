@@ -1,22 +1,22 @@
-/* Mise en forme générale du formulaire login (container) et Mise en forme générale du formulaire salon (container)*/
+/* Mise en forme générale du formulaire login (container) et mise en forme plus générale du formulaire du salon (container)*/
 #spipcatchat, #spipcatchatcontainerlogin{
 	font: 1em/1.5em Georgia, Cambria, Times New Roman, Times, serif; 
 	color: #222222;  
 	padding:2%;
 	text-align: left;
 	width:45%;
-}  /* Les ID caché en début de chargement de page */
+}  /* Les ID cachés en début de chargement de page */
 #spipcatchatmembreajout , #spipcatchatsalonprive, #spipcatchatselectsalon, #BoxUsers{
 	display:none;
 	padding:2%;
-} /* Mise en forme fieldset du formulaire salon */
+} /* Mise en forme fieldset du formulaire du salon */
 #spipcatchat fieldset{	
 	padding:1%;
 }
 #spipcatchat input[type="text"]{
 	height:25px;
 	font-size:1.2em;
-} /* Mise en forme des titres du formulaire salon */
+} /* Mise en forme des titres du formulaire du salon */
 #spipcatchat p{  
 	font-size:1.1em;
 	text-align: left;
@@ -46,13 +46,13 @@
 #spipcatchat fieldset, #submit{
 	float:right;
 	margin:2%;
-} /* Mise en forme du select du formulaire des choix de salons*/
+} /* Mise en forme du select du formulaire des choix des salons*/
 #spipcatchat select{
 	width:260px;
 	border:none;
 	background:#fefaf2;
 	padding:1px;
-} /* Cache du selecteur du formulaire des choix des salons (pour ne voir le bouton de défilement)*/
+} /* Cache du selecteur du formulaire des choix des salons (pour ne pas voir le bouton de défilement)*/
 #spipcatchat .spipcatchatcache{
 	overflow:hidden;
 	width:240px;

@@ -17,7 +17,7 @@
 [(#CONFIG{spipcatchat_public/bruitage_public}|non)  #SET{sound_public,oui}]
 <!---- Taux de rafraîchissement du salon public ---->
 [(#CONFIG{spipcatchat_public/refresh}||oui)#SET{refresh,#CONFIG{spipcatchat_public/refresh}}]
-[(#CONFIG{spipcatchat_public/refresh}||non)#SET{refresh,2000}]
+[(#CONFIG{spipcatchat_public/refresh}||non)#SET{refresh,1000}]
  <!-- Définition du style de la feuille CSS -->  
 <!-- Liste des variables des couleurs des thèmes -->
 [(#CONFIG{spipcatchat_public/fond_color}||non) #SET{fond_color,ffffff}]
@@ -53,6 +53,9 @@
 ]
 <!-- fin de la liste des variables -->
 <!-- La feuille de style des salons public --> 
+<script type="text/javascript">
+	<INCLURE{fond=javascript/spipcatchat.js}{url_plugin=#GET{url_plugin}|trim}{theme_emo=#GET{theme_emo}|trim}>
+</script>   
 <style type="text/css">
 	<INCLURE{fond=css/spipcatchat_theme.css}{perso=#GET{perso}}{back=#GET{fond_color}}{icones=#GET{icones}}{rounded_corner=#GET{corner}}{smoke=#GET{smoke}}{color_primaire=#GET{color_primaire}}{color_secondaire=#GET{color_secondaire}}>
 </style>

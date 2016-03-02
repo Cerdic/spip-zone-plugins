@@ -46,10 +46,8 @@
 						 </BOUCLE_REPERTOIRE_EMOTICONS>
 					</select>
 					<center>
-					[(#CONFIG{spipcatchat_commun/theme_emoticons}||oui)#SET{pack_emoticons,#ENV{#GET{name}}}]
-					[(#CONFIG{spipcatchat_commun/theme_emoticons}||non)#SET{pack_emoticons,classic}]
-					[(#CHEMIN{images/emoticons/#GET{pack_emoticons}/etiquette.png}||oui)
-					<img src="#CHEMIN{images/emoticons/#GET{pack_emoticons}/etiquette.png}" style="width:350px;"/>
+					[(#CHEMIN{images/emoticons/#CONFIG{spipcatchat_commun/theme_emoticons,classic}/etiquette.png}||oui)
+					<img src="#CHEMIN{images/emoticons/#CONFIG{spipcatchat_commun/theme_emoticons,classic}/etiquette.png}" style="width:350px;"/>
 					]
 					</center>
 				</li>

@@ -1,5 +1,5 @@
 [(#AUTORISER{configurer}|sinon_interdire_acces)]
-[(#GET{page}|non)
+[(#ENV{page}|non)
 	[(#ENV{cfg, accueil}|=={accueil}|oui)
 		#BOITE_OUVRIR{#CHEMIN_IMAGE{spipcatchat-64.png}|balise_img{'formulaire',cadre-icone}, basic}
 		<h3 align="center" class="titrem" style="font-size:1.5em"><:spipcatchat:config_catchat:></h3>

@@ -18,7 +18,7 @@ select: function(event, ui){$('#selectUser').val(ui.item.id); },
 		<!-- Form Quitter -->
 	<form action="#SELF" method="post">
 		<input type="hidden" name="chat" value="oui"/>
-		<input type="hidden" name="spipsalon" value="#ENV{salon}" />
+		<input type="hidden" name="spipsalon" value="[(#ENV{salon}|trim)]" />
 		<input id="submit" class="spipcatchatcancel" type="submit" title="<:spipcatchat:title_retour_salon:>" value=""/>
 	</form>
 		<!-- Fin Quitter -->

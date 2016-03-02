@@ -37,7 +37,7 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
 						<BOUCLE_options_effect(POUR){tableau #LISTE{orange, bleu, noir, brun, jaune, rose, vert, pourpre, gris, rouge, lavande, bleu_ciel, blanc, vert_aubergine}}>
-							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"][(#CONFIG{spipcatchat_public/catchat_theme_color}||non)[(#VALEUR|=={orange}|oui)selected="selected"]]>#VALEUR</option>
 						</BOUCLE_options_effect>
 					</select>
 				</li>
@@ -69,19 +69,17 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
 					  <BOUCLE_REPERTOIRE_THEMES(php:DirectoryIterator){args #EVAL{_DIR_PLUGIN_SPIPCATCHAT}/images/theme/}{valeur!==\.}>
-						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"] style="text-transform:capitalize">#VALEUR</option>
+						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"][(#CONFIG{spipcatchat_public/catchat_theme_coloricone}||non)[(#VALEUR|=={orange}|oui)selected="selected"]] style="text-transform:capitalize">#VALEUR</option>
 					  </BOUCLE_REPERTOIRE_THEMES>
 					</select>
 					<center>
-					[(#CONFIG{spipcatchat_public/catchat_theme_coloricone}||oui)#SET{pack,#ENV{#GET{name}}}]
-					[(#CONFIG{spipcatchat_public/catchat_theme_coloricone}||non)#SET{pack,orange}]
 					<legend>
-					<img src="#CHEMIN{images/theme/#GET{pack}/aide-26.png}">&nbsp;
-					<img src="#CHEMIN{images/theme/#GET{pack}/cancel-26.png}">&nbsp;
-					<img src="#CHEMIN{images/theme/#GET{pack}/moins-26.png}">&nbsp;
-					<img src="#CHEMIN{images/theme/#GET{pack}/ok-26.png}">&nbsp;
-					<img src="#CHEMIN{images/theme/#GET{pack}/plus-26.png}">&nbsp;
-					<img src="#CHEMIN{images/theme/#GET{pack}/trash-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/aide-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/cancel-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/moins-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/ok-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/plus-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#CONFIG{spipcatchat_public/catchat_theme_coloricone,orange}/trash-26.png}">&nbsp;
 					</legend>
 					</center>
 				</li>

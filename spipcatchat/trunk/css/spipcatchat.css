@@ -143,7 +143,7 @@
 	border:none;
 	background:#fefaf2;
 	padding:1px;
-}/* Cache du selecteur du chat des choix du statut (pour ne voir le bouton de défilement)*/
+}/* Cache du selecteur du chat des choix du statut (pour ne pas voir le bouton de défilement)*/
 #spipcatchatcontainer .cache{
 	float:right;
 	overflow:hidden;
