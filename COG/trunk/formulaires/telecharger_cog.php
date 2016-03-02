@@ -50,9 +50,7 @@ function formulaires_telecharger_cog_traiter_dist()
     include_spip('cog_config');
     include_spip('inc/cog_import');
     $tab_objet = cog_config_tab_fichier();
-    $objet = array();
     $tab_fichier_telecharger = array();
-
     $objet_nom = "";
     $objet = _request('objet');
     for ($i = 0; $i < count($objet); $i++) {
@@ -80,22 +78,25 @@ function formulaires_telecharger_cog_traiter_dist()
 }
 
 
+
 function cog_telecharger_fichier_distant($source)
 {
     include_spip('inc/distant');
     include_spip('inc/config');
+
     $fichier = copie_locale($source,'force');
+
+    if (file_exists(_DIR_RACINE .$fichier)){
+
     $infos_fichier = pathinfo($source);
     $emplacement = sous_repertoire(_DIR_TMP, lire_config('cog/chemin_donnee'));
     @chmod($emplacement, 0777);
     $nom_fichier = $emplacement . $infos_fichier['filename'] . '.' . $infos_fichier['extension'];
-
     rename(_DIR_RACINE . $fichier, $nom_fichier);
     $infos_fichier = pathinfo($nom_fichier);
 
 // Si c'est un zip on l'extrait
     if ($infos_fichier['extension'] == 'zip') {
-
         include_spip('inc/pclzip');
         include_spip('inc/joindre_document');
         $archive = new PclZip($nom_fichier);
@@ -104,15 +105,23 @@ function cog_telecharger_fichier_distant($source)
 
         if (isset($contenu[0])) {
             foreach ($contenu[0] as $fichier) {
-                rename(_DIR_TMP . $fichier['filename'], $emplacement . $fichier['filename']);
+                if ($fichier['filename'] != "readme.txt")
+                    rename(_DIR_TMP . $fichier['filename'], $emplacement . $fichier['filename']);
             }
         }
-        unlink($nom_fichier);
     }
 
-    return $nom_fichier;
-
+    unlink($nom_fichier);
+   return $nom_fichier;
 }
+    return false;
+}
+
+
+
+
+
+
 
 
 ?>

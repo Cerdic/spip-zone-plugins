@@ -61,10 +61,10 @@ function action_geoportail_search_cog_dist()
 		// Pas trop !
 		$query .= " LIMIT 0,100";
 		// Lancer la recherche
-                $res = spip_query("SELECT * FROM spip_cog_communes WHERE ".$query);
+                $res = sql_query("SELECT * FROM spip_cog_communes WHERE ".$query);
 		$trouve = false;
 		include_spip ('public/geoportail_boucles');
-		while ($row =spip_fetch_array($res))
+		while ($row =sql_fetch_array($res))
 		{	if ($trouve) echo ",\n";
 			else $trouve=true;
 			// resultat
