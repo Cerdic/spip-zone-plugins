@@ -1,13 +1,14 @@
 #SET{name,#ENV{name}}#SET{defaut,''}
+[(#VAL{open}|unique{liststatus})]
 <option value=""></option>
 <BOUCLE_listes(POUR){tableau #ENV{choix_listes}}>
-	#SET{val,#CLE}
+	#SET{val,#VALEUR{id}}
 	[(#ENV{status,''}|non
 	  |ou{#ENV{status,''}|=={#VALEUR{status}}}
 	  |ou{#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}})
 
 		[
-		[(#VALEUR{status}|unique|oui)
+		[(#VALEUR{status}|unique{liststatus}|oui)
 			[(#GET{optgroup_ouvert}|oui)</optgroup>]
 			<optgroup label="[(#VAL{}|concat{'mailsubscriberscfg:label_status_',#VALEUR{status}}|_T)]">
 			[(#SET{optgroup_ouvert,oui})]
