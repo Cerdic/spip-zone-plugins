@@ -7,7 +7,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,newsletter}
 		<input type='hidden' name='id_newsletter' value='#ENV{id_newsletter}' />
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_titre:><em class="aide">#AIDER{titre}</em></label>[
@@ -15,7 +15,7 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"[(#HTML5|et{#GET{obli}})required='required']/>
 			</li>
 		</ul>
-		<ul class="nonbaked[(#ENV{baked}|oui)none]">
+		<ul class="editer-groupe nonbaked[(#ENV{baked}|oui)none]">
 			#SET{name,patron}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:newsletter:label_patron:></label>[
@@ -45,7 +45,7 @@
 			</li>
 		</ul>
 		[(#ENV{statut}|in_array{#LISTE{'',prepa,prop}}|oui)
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,baked}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -69,7 +69,7 @@
 		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|non)
 		<p class="explication"><:newsletter:explication_baked_publie:></p>
 		]
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,html_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[

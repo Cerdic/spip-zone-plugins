@@ -9,7 +9,7 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,newsletter}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,masquer_fond}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[

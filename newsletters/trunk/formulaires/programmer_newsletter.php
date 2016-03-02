@@ -38,7 +38,7 @@ function formulaires_programmer_newsletter_charger_dist($id_newsletter='new', $r
 	$valeurs = formulaires_programmer_newsletter_charger_rule($r, $valeurs);
 
 	$lists = charger_fonction('lists','newsletter');
-	$valeurs['_listes_dispo'] = $lists(array('status'=>'open'));
+	$valeurs['_listes_dispo'] = $lists();
 	return $valeurs;
 }
 

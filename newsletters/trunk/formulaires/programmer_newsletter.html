@@ -5,7 +5,7 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,programmernewsletter}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}"><:info_titre:><em class="aide">#AIDER{titre}</em></label>[
@@ -15,7 +15,7 @@
 			<li class="fieldset reccurence">
 				<fieldset>
 					<legend><:programmernewsletter:legend_recurrence:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,date_debut}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -154,7 +154,7 @@
 			<li class="fieldset">
 				<fieldset>
 					<legend><:programmernewsletter:legend_contenu:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,patron}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:newsletter:label_patron:></label>[
@@ -188,7 +188,7 @@
 			<li class="fieldset">
 				<fieldset>
 					<legend><:programmernewsletter:legend_envoi:></legend>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,email_test}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -200,7 +200,7 @@
 							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<select name="#GET{name}" class="select" id="#GET{name}">
-							<INCLURE{fond=formulaires/inc-options-subscribinglists-prog,name=#GET{name},choix_listes=#ENV{_listes_dispo},status=open,env} />
+							<INCLURE{fond=formulaires/inc-options-subscribinglists-prog,name=#GET{name},choix_listes=#ENV{_listes_dispo},env} />
 							</select>
 						</li>
 					</ul>
