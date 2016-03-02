@@ -24,7 +24,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		imgAreaSelector,
 		mode_dimensions_forcees = (options.forcer_dimensions !== null),
 		forcer_hauteur,
-		forcer_largeur;
+		forcer_largeur,
+		select_format = $('#champ_format');
 
 	/* Si le formulaire n'a pas été chargé en php, on s'en occupe ici. */
 	if (premier_chargement) {
@@ -136,6 +137,59 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			minHeight: Math.round(forcer_hauteur * zoom)
 		});
 	}
+
+	/* Gestion du selecteur de format */
+	select_format.change(function (e) {
+
+		var format = e.target.value;
+
+		if (format) {
+			mode_dimensions_forcees = true;
+
+			// TODO ne pas changer de zoom ni de sélection si on est
+			// déjà aux bonnes dimensions.
+
+			format = format.split(':');
+			forcer_largeur = parseInt(format[0], 10);
+			forcer_hauteur = parseInt(format[1], 10);
+			zoom = calculer_zoom_min();
+
+			maj_image(zoom);
+
+			slider.slider('option', 'min', zoom);
+			slider.slider('option', 'value', zoom);
+
+			imgAreaSelector.setOptions({
+				aspectRatio: forcer_largeur + ':' + forcer_hauteur,
+				minWidth: Math.round(forcer_largeur * zoom),
+				minHeight: Math.round(forcer_hauteur * zoom)
+			});
+
+			selection_initiale = forcer_dimensions_selection({
+				x1: 0,
+				x2: img.width(),
+				y1: 0,
+				y2: img.height()
+			});
+			maj_selection(selection_initiale);
+
+			maj_formulaire(selection_initiale, zoom);
+
+		} else {
+			mode_dimensions_forcees = false;
+
+			forcer_largeur = null;
+			forcer_hauteur = null;
+
+			slider.slider('option', 'min', 0.01);
+
+			imgAreaSelector.setOptions({
+				aspectRatio: '',
+				minWidth: 1,
+				minHeight: 1
+			});
+		}
+	});
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
 	$('#formulaire_massicoter_image_reset').click(function (e) {
