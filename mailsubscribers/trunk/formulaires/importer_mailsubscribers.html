@@ -6,7 +6,7 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype="multipart/form-data"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{fl,mailsubscriber}
 			#SET{name,file_import}#SET{obli,#ENV**{erreurs/test,''}|?{'',obligatoire}}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -20,7 +20,7 @@
 		<p class="boutons"><input type='submit' class='submit' value='<:mailsubscriber:bouton_previsu_importer|attribut_html:>' /></p>
 
 		[
-		<ul>
+		<ul class="editer-groupe">
 			<li class="fieldset">
 				<div style="width: 100%;overflow:auto;">
 				(#ENV**{erreurs/test}|propre)
