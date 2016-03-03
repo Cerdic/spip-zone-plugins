@@ -651,17 +651,16 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	
 	$c['texte'] = preg_replace("/\n\n+/m", "\n\n", $c['texte']);
 
-	$r = '';
+	// on ne retient pas l'id_article pour éviter des collisions éventuelles
+	if($c["id_article"])
+		unset($c["id_article"]);
+
+	$r = array();
 	foreach ($c as $var => $val)
-		$r .= "$var="._q(trim($val)).', ';
+		$r[$var] = sql_quote(trim($val));
 
-	spip_query("UPDATE spip_articles
-		SET $r
-		date=NOW(),
-		date_modif=NOW()
-		WHERE id_article=$id_article"
-	);
-
+	sql_update("spip_articles", $r, "id_article=" . $id_article);
+	
 	return $id_article;
 }
 
