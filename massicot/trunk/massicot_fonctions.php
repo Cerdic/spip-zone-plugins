@@ -300,6 +300,11 @@ function massicoter_logo_document($logo, $connect = null, $doc = array()) {
     include_spip('inc/filtres');
     include_spip('inc/filtres_images_mini');
 
+    /* On ne fait rien avec les documents distants */
+    if ($doc['distant'] === 'oui') {
+	    return $logo;
+    }
+
     /* S'il n'y a pas de fichier dans la pile, on va le chercher dans
        la table documents */
     if (! isset($doc['fichier'])) {
