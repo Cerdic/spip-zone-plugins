@@ -58,6 +58,8 @@
 		par               Tri des documents.
 		                  valeurs : id_document | titre | fichier | media | mode | extension | taille
 		                  défaut  : media, fichier, titre
+		sens              Sens du tri des documents.
+		                  valeurs : inverse | direct
 		align             Alignement du bloc conteneur (.album)
 		                  valeurs : left | right | center
 		                  défaut  : ''
@@ -96,24 +98,33 @@
 (#SET{source_docs,      #ENV{id_album}|intval|?{album,
                         #VAL{/\W/}|preg_split{#ENV*{id}}|array_filter|count|>{1}?{id,
                         #ENV{id_article}|intval|?{article}}}})][
+(#SET{defaut_tri,#ARRAY{
+	date,#ENV{sens,-1},
+	media,#ENV{sens,1},
+	fichier,#ENV{sens,1},
+	extension,#ENV{sens,1},
+	num titre,#ENV{sens,1},
+	id_document,#ENV{sens,1},
+	points,#ENV{sens,1}
+}})][
 
 
-(#REM) 1. ID DOCUMENTS
+(#REM) 1. Collecte des identifiants des documents
 
 
 ][
 (#REM) «id_album»
-]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={album}}
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{tri #ENV{par,media}, #GET{defaut_tri}}{par titre}{tout}{media?}{si #GET{source_docs}|=={album}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
 (#REM) sinon «id_article»
-]<BOUCLE_article(DOCUMENTS){id_article}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={article}}
+]<BOUCLE_article(DOCUMENTS){id_article}{tri #ENV{par,media}, #GET{defaut_tri}}{par titre}{tout}{media?}{si #GET{source_docs}|=={article}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
 (#REM) sinon «id»
 ]<BOUCLE_id(CONDITION){si #GET{source_docs}|=={id}}
 >#SET{ids_documents,#VAL{/\W/}|preg_split{#ENV*{id}}}</BOUCLE_id>[
 
 
-(#REM) 2. ALBUM
+(#REM) 2. Affichage de l'album
 
 
 ]<B_documents_album>

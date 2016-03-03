@@ -53,6 +53,14 @@ parametres:
         date: <:album:label_modele_tri_date:>
         media: <:album:label_modele_tri_media:>
   -
+    saisie: 'radio'
+    options:
+      nom: 'sens'
+      label: <:album:label_modele_sens_tri:>
+      datas:
+        direct: <:album:label_modele_sens_tri_direct:>
+        inverse: <:album:label_modele_sens_tri_inverse:>
+  -
     saisie: 'selection'
     options:
       nom: 'align'
@@ -108,3 +116,4 @@ parametres:
     options:
       nom: 'pagination'
       label: <:album:label_modele_pagination:>
+      placeholder: <:album:label_modele_pagination_placeholder:>
