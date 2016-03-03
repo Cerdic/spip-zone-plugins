@@ -145,7 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trash_bad' => 'un probl&egrave;me est survenu lors de la suppression',
 'trash_confirm' => 'voulez-vous vraiment supprimer ce salon ? Attention !, la suppression ne sera vraiment effective qu&apos;une fois que tous les membres auront quitt&eacute; la salle',
 /*--S--*/
-'salon_discussion' => 'Salon de discussion instantan&eacute;e (clavardage)',
+'salon_discussion' => 'Salon de discussion instantan&eacute;e',
 'select_option' => 'Liste des salons', 
 'success_ajout_salon' => 'Le salon est ajout&eacute;, il appara&icirc;t &agrave; pr&eacute;sent dans la liste de s&eacute;lection',
 'status_absent'=>'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absent',
