@@ -109,7 +109,7 @@ class fichiersImporter extends Command {
 						$annee = $m[1] ;
 						$id_rubrique = creer_rubrique_nommee($annee . "/" . $numero, $id_parent);
 						$progress->clear();
-						$progress->setMessage(" Creation de la rubrique $annee / $numero => $id_rubrique ", 'inforub');
+						$progress->setMessage(" Création de la rubrique $annee-$numero => $id_rubrique ", 'inforub');
 						$progress->display();
 											
 					}
