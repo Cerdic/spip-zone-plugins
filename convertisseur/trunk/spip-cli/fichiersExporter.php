@@ -2,16 +2,17 @@
 
 /***
 
-Convertir des fichiers au format Quark XML en fichiers en format SPIP conversion.
+Exporter la table spip_articles en format txt
 
-Mettre les fichiers XML dans le repertoire /exports_quark/%COLLECTION%/%NUMERO% du SPIP
+Lancer la commande spip-cli : spip export -d `repertoire destination`
 
-Lancer la commande spip-cli : spip convert
+Les fichiers txts sont placés dans le repertoire `repertoire destination` sur le disque dur.
 
-Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
+Si un repertoire git est trouvé dans /dest alors on prend le repertoire. todo
 
-Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest. 
+Voir aussi fichiersImporter.
 
+*/
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
