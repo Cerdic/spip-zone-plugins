@@ -57,7 +57,7 @@
 		{where?}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}
 	>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="organisation#ID_ORGANISATION">
 			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
 				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
 			</BOUCLE_lien_organisation>
