@@ -244,7 +244,7 @@ function html_entity_decode(texte) {
 function spipcatchattypo(texte,url,pack)
 {	
 #SET{spipcatchatregex2, [a-z A-Z 0-9]+.png$}
-<BOUCLE_EMOTICONS2(DATA){source glob, #ENV{url_plugin}images/emoticons/#ENV{theme_emo}/*.png}{valeur!==etiquette.png}>#SET{grommeler2,#VALEUR|match{#GET{spipcatchatregex2}, Uims }|replace{\.png$,'',S} }[texte = texte.replace(/[:(#GET{grommeler2}|trim):]/g,' <img src="(#CHEMIN{#VALEUR}|replace{../squelettes-dist/,'',S}|trim)" alt="#GET{grommeler2}" style="width:20px"/> ');]
+<BOUCLE_EMOTICONS2(DATA){source glob, #ENV{url_plugin}images/emoticons/#ENV{theme_emo}/*.png}{valeur!==etiquette.png}>#SET{grommeler2,#VALEUR|match{#GET{spipcatchatregex2}, Uims }|replace{\.png$,'',S} }[texte = texte.replace(/[:(#GET{grommeler2}|trim):]/g,' <img src="(#CHEMIN{#VALEUR}|replace{../squelettes-dist/,'',S}|trim)" alt="[(#GET{grommeler2}|trim)]" style="width:20px"/> ');]
 </BOUCLE_EMOTICONS2>	
         texte = texte.replace(/[\W]{1}lol[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#ENV{theme_emo}/smile.png" alt="Sourire" style="width:20px"/> ');
         texte = texte.replace(/[\W]{1}mdr[^\S]{1}/g,' <img src="#ENV{url_plugin}images/emoticons/#ENV{theme_emo}/heureux.png" alt="MDR" style="width:20px"/> ');
