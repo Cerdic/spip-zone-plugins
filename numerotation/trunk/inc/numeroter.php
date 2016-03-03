@@ -62,6 +62,7 @@ function numero_info_objet($objet,$id_objet=0){
 			'parent' => $parent,
 			'titre' => 'titre',
 			'tri_date' => '',
+			'numerotable' => true,
 		);
 		if (isset($desc['date']) AND isset($desc['field'][$desc['date']])){
 			$infos[$objet]['tri_date'] = $desc['date'];
@@ -69,11 +70,21 @@ function numero_info_objet($objet,$id_objet=0){
 		elseif(isset($desc['field']['maj'])){
 			$infos[$objet]['tri_date'] = 'maj';
 		}
-		// extraire le champ titre
-		if (isset($desc['titre'])){
-			$infos[$objet]['titre'] = explode(',',$desc['titre']);
-			$infos[$objet]['titre'] = explode(' ',reset($infos[$objet]['titre']));
-			$infos[$objet]['titre'] = reset($infos[$objet]['titre']);
+		
+		// Extraire le champ titre SI on a "as titre" dedans
+		// car sinon ça veut dire que c'est le champ titre tout court
+		if (
+			isset($desc['titre'])
+			and stripos($desc['titre'], 'as titre') !== false
+		){
+			// On récupère ce qui est avant le "as titre"
+			if (preg_match('/(^|,)([\w\s]+)\s+as titre/i', $desc['titre'], $trouve)) {
+				$infos[$objet]['titre'] = trim($trouve[2]);
+			}
+			// On a pas trouvé, l'objet n'est donc pas numérotable
+			else {
+				$infos[$objet]['numerotable'] = false;
+			}
 		}
 	}
 	$res = $infos[$objet];

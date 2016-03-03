@@ -14,18 +14,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/numeroter");
 
-function formulaires_numeroter_objet_charger_dist($objet,$id_objet){
-
-	$valeurs = array(
-		'_objet' => $objet,
-		'_id_objet' => $id_objet,
-		'precedent' => '',
-	);
-
+function formulaires_numeroter_objet_charger_dist($objet,$id_objet) {
+	$infos = numero_info_objet($objet);
+	
+	if ($infos['numerotable']) {
+		$valeurs = array(
+			'_objet' => $objet,
+			'_id_objet' => $id_objet,
+			'precedent' => '',
+		);
+	}
+	else {
+		$valeurs = false;
+	}
+	
 	return $valeurs;
 }
 
-function formulaires_numeroter_objet_traiter_dist($objet,$id_objet){
+function formulaires_numeroter_objet_traiter_dist($objet,$id_objet) {
 	$precedent = intval(_request('precedent'));
 
 	// recuperer le titre/parent de l'objet
