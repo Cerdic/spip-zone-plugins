@@ -82,6 +82,7 @@ class fichiersImporter extends Command {
 				$progress->setBarWidth(100);
 				$progress->setRedrawFrequency(1);
 				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message');
+				$progress->setMessage("", 'inforub');
 				$progress->start();
 
 				foreach($fichiers as $f){
@@ -108,7 +109,7 @@ class fichiersImporter extends Command {
 						$annee = $m[1] ;
 						$id_rubrique = creer_rubrique_nommee($annee . "/" . $numero, $id_parent);
 						$progress->clear();
-						$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... \nCreation de la rubrique $annee / $numero => $id_rubrique", 'message');
+						$progress->setMessage(" Creation de la rubrique $annee / $numero => $id_rubrique ", 'inforub');
 						$progress->display();
 											
 					}
@@ -119,7 +120,7 @@ class fichiersImporter extends Command {
 						
 						// Si tout s'est bien passé, on avance la barre
 						$progress->setMessage($f, 'filename');
-						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n\n");
+						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n\n");
 						$progress->advance();
 											
 					}else{

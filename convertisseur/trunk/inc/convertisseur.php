@@ -652,8 +652,11 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	$c['texte'] = preg_replace("/\n\n+/m", "\n\n", $c['texte']);
 
 	// on ne retient pas l'id_article pour éviter des collisions éventuelles
-	if($c["id_article"])
-		unset($c["id_article"]);
+	unset($c["id_article"]);
+	
+	// on ne retient pas l'id_rubrique et secteur car ce ne sont pas les memes d'un site à l'autre	
+	unset($c["id_secteur"]);
+	unset($c["id_rubrique"]);
 
 	$r = array();
 	foreach ($c as $var => $val)
