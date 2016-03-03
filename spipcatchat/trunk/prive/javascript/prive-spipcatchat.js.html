@@ -94,6 +94,7 @@ $.ajax({
 		    }
 		    else
 		    {
+			    emosta = 'status';
 				startchat(catchatrefresh,catchatrefreshstatut,idAuteur,URLplugin,langShowChat,charset);
 			}
 		}
@@ -189,18 +190,23 @@ function getOnlineUsers(t,n,r,i)
 	{auteur:t},
 	function(e)
 	{ $('#SpipCatChatStatus option[value=1]').removeProp("selected"); $('#SpipCatChatStatus option[value=2]').removeProp("selected"); $('#SpipCatChatStatus option[value=3]').removeProp("selected");
+	  $('#un').removeAttr("selected");$('#deux').removeAttr("selected");$('#trois').removeAttr("selected");
 	 var r="",i,s;
 		for(s in e.list){
+	    if(e.list[s].id==t){
+	    if("busy"==e.list[s].status)
+	    		{$('#deux').attr("selected","selected");$('#SpipCatChatStatus option[value=2]').prop("selected",true);}
+	    else if("inactive"==e.list[s].status)
+	    		{$('#un').attr("selected","selected");$('#SpipCatChatStatus option[value=1]').prop("selected",true);}
+	    else if("active"==e.list[s].status)
+	    		{$('#trois').attr("selected","selected");$('#SpipCatChatStatus option[value=3]').prop("selected",true);}
+	    }
 		"busy"==e.list[s].status?(texte="Occupé(e) [X]",
-		i="inactive",
-		t==e.list[s].id&&$('#SpipCatChatStatus option[value=2]').prop("selected","selected")):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
-		i="neutral",
-		t==e.list[s].id&&$('#SpipCatChatStatus option[value=1]').prop("selected","selected")):(texte="En ligne [&radic;]",
-		i="active",
-		t==e.list[s].id&&$('#SpipCatChatStatus option[value=3]').prop("selected","selected")),
+		i="inactive"):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
+		i="neutral"):(texte="En ligne [&radic;]",
+		i="active"),
 		r+='<span title="'+emosta+" - "+texte+'"><img src="'+n+"/images/"+emosta+"-"+i+'.png" /> '+e.list[s].login+"</span><br/>";
 		$("#users").html(r)
-		$("#marqueur").html(Math.random());
 		}	
 	}
   )
