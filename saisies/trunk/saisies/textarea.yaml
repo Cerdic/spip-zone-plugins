@@ -23,6 +23,12 @@ options:
           label: '<:saisies:option_defaut_label:>'
           rows: 4
       -
+        saisie: 'textarea'
+        options:
+          nom: 'placeholder'
+          label: '<:saisies:option_placeholder_label:>'
+          size: 50
+      -
         saisie: 'input'
         options:
           nom: 'explication'
