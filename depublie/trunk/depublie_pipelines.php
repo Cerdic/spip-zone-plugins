@@ -58,7 +58,7 @@ function depublie_formulaire_charger($flux){
 		}
 		else{
 			$annee_depublie = $mois_depublie = $jour_depublie = 0;
-			$heure_depublie = $minute_depublie = "00";
+			$heure_depublie = $minute_depublie = 00;
 		}
 		// attention, si la variable s'appelle date ou date_depublie, le compilo va
 		// la normaliser, ce qu'on ne veut pas ici.
