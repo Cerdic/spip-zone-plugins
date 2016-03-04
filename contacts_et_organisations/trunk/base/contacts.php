@@ -187,7 +187,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'info_aucun_objet'=> 'contacts:contact_aucun',
 		'info_1_objet' => 'contacts:contact_un',
 		'info_nb_objets' => 'contacts:contacts_nb',
-		'titre' => 'nom AS titre, "" AS lang',
+		'titre' => '"" as lang, trim(concat(prenom, \' \', nom)) AS titre',
 		'date' => 'date_naissance',
 		'principale' => 'oui',
 		'champs_editables' => array(
