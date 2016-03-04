@@ -23,7 +23,7 @@ class Convert extends Command {
 	protected function configure() {
 		$this
 			->setName('fichiers:convertir')
-			->setDescription('Conversion des fichiers divers en fichiers d\'import SPIP.')
+			->setDescription('Conversion de fichiers au format d\'import SPIP. `spip convert -e %extracteur% -s %source% -d %dest%`')
 			->setAliases(array(
 				'convert' // abbréviation commune pour "conversion"
 			))

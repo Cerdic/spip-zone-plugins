@@ -25,7 +25,7 @@ class fichiersExporter extends Command {
 	protected function configure() {
 		$this
 			->setName('fichiers:exporter')
-			->setDescription('Exporter spip_articles (ou autre) en fichiers texte.')
+			->setDescription('Exporter spip_articles (ou autre) au format txt. `spip export -d %dest%`')
 			->setAliases(array(
 				'export'
 			))

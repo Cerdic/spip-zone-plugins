@@ -2,15 +2,9 @@
 
 /***
 
-Convertir des fichiers au format Quark XML en fichiers en format SPIP conversion.
+Importer en masse des fichiers txt dans spip_articles.
 
-Mettre les fichiers XML dans le repertoire /exports_quark/%COLLECTION%/%NUMERO% du SPIP
-
-Lancer la commande spip-cli : spip convert
-
-Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
-
-Si un repertoire git est trouvé dans /dest alors on prend le repertoire */ // /*.git/*/collections comme répertoire dest. 
+*/
 
 
 use Symfony\Component\Console\Command\Command;
@@ -24,7 +18,7 @@ class fichiersImporter extends Command {
 	protected function configure() {
 		$this
 			->setName('fichiers:importer')
-			->setDescription('Importer des fichiers texte SPIP dans spip_articles.')
+			->setDescription('Importer des fichiers texte SPIP dans spip_articles. `spip import -s %source% -d %id_rubrique%`')
 			->setAliases(array(
 				'import' // abbréviation commune pour "import"
 			))
