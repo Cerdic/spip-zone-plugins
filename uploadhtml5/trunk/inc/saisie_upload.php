@@ -71,11 +71,12 @@ function saisie_supprimer_document_session($id_document) {
  * Basiquement, on associe les documents à un objet spécifique
  * Ensuite on nettoye la session
  *
- * @param mixed $objet
- * @param mixed $id_objet
+ * @param string $objet
+ * @param int $id_objet
+ * @param bool $lien_direct Gerer un champ id_document dans l'objet ?
  * @access public
  */
-function saisie_upload_traiter($objet, $id_objet) {
+function saisie_upload_traiter($objet, $id_objet, $lien_direct = false) {
 
     include_spip('action/editer_objet');
     include_spip('action/editer_liens');
@@ -87,12 +88,24 @@ function saisie_upload_traiter($objet, $id_objet) {
         return false;
     }
 
-    objet_associer(
-        $documents,
-        array($objet => $id_objet)
-    );
+    if (!$lien_direct) {
+	    objet_associer(
+		    $documents,
+		    array($objet => $id_objet)
+	    );
+    } else {
+	    // Traitement des liens directs entre les objets
+	    // Lorsqu'il y a un champ id_document sur un objet
+	    $table = table_objet_sql($objet);
+	    $cle_primaire = id_table_objet($objet);
+	    sql_updateq(
+		    $table,
+		    array('id_document' => $documents['document'][0]),
+		    $cle_primaire.'='.$id_objet
+	    );
+    }
 
-    // Le lien est fait, les documents ne doivent plus être en mode temporaire
+   // Le lien est fait, les documents ne doivent plus être en mode temporaire
     foreach ($documents['document'] as $id_document) {
         objet_instituer('document', $id_document, array('statut' => 'publie'));
     }
