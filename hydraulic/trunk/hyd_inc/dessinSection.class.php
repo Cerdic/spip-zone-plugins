@@ -48,21 +48,23 @@
 class dessinSection {
     private $hauteurDessin; // Hauteur du dessin en px
     private $largeurDessin; // Largeur du dessin en px
-    private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black');  // Couleur des différentes lignes
+    private $marges; // Marge à gauche et à droite du dessin pour le texte
+    private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black', 'pink');  // Couleur des différentes lignes
     private $sectionClass;
     private $donnees = array();
     private $rValMax = 0; // Hauteur maxi en m à figurer dans le dessin
     private $rSnXmax = 0; // Largeur maximum en m à figurer dans le dessin
 
-    function __construct($hauteur, $largeur, &$section, $lib_data) {
+    function __construct($hauteur, $largeur, $marges, &$section, $lib_data) {
         $this->hauteurDessin = (real) $hauteur;
-        $this->largeurDessin = (real) $largeur;
+        $this->largeurDessin = (real) $largeur - $marges*2;
+        $this->marges = (real) $marges;
         $this->sectionClass = &$section;
         $this->donnees = $lib_data;
         // On détermine la valeur la plus grande dans le tableau
         foreach($this->donnees as $val){
-            if($val > $this->ValMax){
-                $this->ValMax = $val;
+            if($val > $this->rValMax){
+                $this->rValMax = $val;
             }
         }
         //spip_log($this,'hydraulic.'._LOG_DEBUG);
@@ -71,10 +73,18 @@ class dessinSection {
     /**
      * Rajoute une ligne à notre dessin.
      * $color correspond à la couleur de la ligne
-     * $val correspond à l'ordonnée exprimée en pixel de la ligne
+     * $y correspond à l'ordonnée exprimée en pixel de la ligne
      */
-    function AddRow($color, $val){
-        $ligneDessin = '$("#dessinSection").drawLine(0,'.$val.','.$this->largeurDessin.','.$val.', {color: "'.$color.'"});';
+    function AddRow($color, $y){
+        $gauche = $this->marges;
+        $droite = round($gauche + $this->largeurDessin);
+        $y = round($y);
+        $ligneDessin = "
+            cx.strokeStyle = \"$color\";
+            cx.beginPath();
+            cx.moveTo($gauche, $y);
+            cx.lineTo($droite, $y);
+            cx.stroke();";
         return $ligneDessin;
     }
 
@@ -83,7 +93,7 @@ class dessinSection {
      */
     private function GetDessinY($val) {
         // La valeur maximum de l'échelle  en px correspondant à 10% de la hauteur afin de faire plus propre
-        return round($this->hauteurDessin * (1- 0.9*$val/$this->ValMax), 1)-2;
+        return round($this->hauteurDessin * (1- 0.9*$val/$this->rValMax), 1)-2;
     }
 
     /**
@@ -92,7 +102,7 @@ class dessinSection {
      * @return Abscisse en pixel à dessiner
      */
     private function GetDessinX($val,$Axe) {
-        return round(($this->largeurDessin-14) * (1/2 + $Axe*$val/$this->SnXmax), 1)+7;
+        return $this->marges + round(($this->largeurDessin-14) * (1/2 + $Axe*$val/$this->SnXmax), 1)+7;
     }
 
     /**
@@ -122,17 +132,13 @@ class dessinSection {
         $diffHautBerge = $mesDonnees['rYB'][0];
 
         // On définit le style de notre dessin
-        $dessin = '<style type="text/css">
-                    .canvas{
-                        position: relative;
-                        width:'.$this->largeurDessin.'px;
-                        height:'.$this->hauteurDessin.'px;
-                    }
-                    </style>';
+        $dessin = '<canvas id="cvsSection" width="'.($this->largeurDessin+2*$this->marges).'" height="'.$this->hauteurDessin.'"></canvas>';
 
         // On créé la base de notre dessin de section
-        $dessin.= '<script type="text/javascript">
-                    $(document).ready(function(){';
+        $dessin.= '
+        <script type="text/javascript">
+            var cx = document.getElementById("cvsSection").getContext("2d");
+            cx.strokeStyle = "black";';
         // Récupération des coordonnées de la section à dessiner
         $tCoordSn = $this->sectionClass->DessinCoordonnees();
 
@@ -143,11 +149,17 @@ class dessinSection {
         $LargeurBerge = $this->sectionClass->CalcGeo('B')/2;
         $xBergeGauche = $this->GetDessinX($LargeurBerge,-1);
         $xBergeDroite = $this->GetDessinX($LargeurBerge,1);
-        $dessin.= '$("#dessinSection").drawLine('.$xBergeGauche.', 0, '.$xBergeGauche.','.$diffHautBerge.', {stroke: 1});
-                   $("#dessinSection").drawLine('.$xBergeDroite.', 0,'.$xBergeDroite.','.$diffHautBerge.', {stroke: 1});';
+        $dessin.= "
+            cx.setLineDash([5]);
+            cx.beginPath();
+            cx.moveTo($xBergeGauche, 0);
+            cx.lineTo($xBergeGauche, $diffHautBerge);
+            cx.moveTo($xBergeDroite, 0);
+            cx.lineTo($xBergeDroite, $diffHautBerge);
+            cx.stroke();
+            cx.setLineDash([]);";
 
         // Dessin de la section
-
         $tSnX = array();
         $tSnY = array();
         // Parcours des points à gauche
@@ -160,35 +172,43 @@ class dessinSection {
             $tSnX[] = $this->GetDessinX($tCoordSn['x'][$i],1);
             $tSnY[] = $this->GetDessinY($tCoordSn['y'][$i]);
         }
-        $dessin.=   '$("#dessinSection").drawPolyline(
-                        ['.implode(',',$tSnX).'],
-                        ['.implode(',',$tSnY).'], {stroke: 4});';
-
-        // On ajoute les différentes lignes avec couleur + valeur
-        foreach($mesDonnees as $cle=>$valeur){
-            if($cle != 'rYB'){
-                $dessin.= $this->AddRow($valeur[1], $valeur[0]);
-            }
+        $dessin .= sprintf('
+            cx.lineWidth = 4;
+            cx.beginPath();
+            cx.moveTo(%d,%d);',$tSnX[0],$tSnY[0]);
+        for($i=1; $i<count($tSnX); $i++) {
+            $dessin .= sprintf('
+            cx.lineTo(%d,%d);',$tSnX[$i],$tSnY[$i]);
         }
+        $dessin .= '
+            cx.stroke();
+            cx.lineWidth = 1.0;';
 
-        $dessin.= '});
-            </script>';
-
-        //Div qui va contenir notre dessin de section
-        $dessin.='<div id="dessinSection" class="canvas">';
-
-        // Pour alterner le placement des libellés
-        $droiteGauche = 0;
+        // Affichage des valeurs pour chaque trait
+        $dessin .= '
+            cx.font = "12px sans-serif";';
+        $bDroiteGauche = true; // Pour alterner le placement des libellés
         // On rajoute les différents libelles avec la couleur qui va bien
         foreach($mesDonnees as $cle=>$valeur){
             if($cle != 'rYB'){
-                $placement = ($droiteGauche%2==0)?'left: -80px':'right: -80px;';
-                $dessin.= '<p style="position: absolute; top:'.($valeur[0]-8).'px;'.$placement.'; width: auto; display: inline-block; color:'.$valeur[1].'">'.$cle.' = '.round($this->donnees[$cle], $this->sectionClass->oP->iPrec).'</p>';
-                $droiteGauche++;
+                list($y,$color) = $valeur;
+                // Ajout du trait
+                $dessin .= $this->AddRow($color, $y);
+                // Ajout du texte
+                $dessin .= '
+            cx.fillStyle = "'.$color.'";
+            cx.textAlign="'.((!$bDroiteGauche)?'left':'right').'";';
+                $x = ($bDroiteGauche)?($this->marges-5):($this->marges+$this->largeurDessin+5);
+                $texte = $cle.' = '.round($this->donnees[$cle], $this->sectionClass->oP->iPrec);
+                $y += 4;
+                $dessin.= "
+            cx.fillText(\"$texte\",$x,$y);";
+                $bDroiteGauche = !$bDroiteGauche;
             }
         }
 
-        $dessin.= '</div>';
+        $dessin.= '
+            </script>';
 
         return $dessin;
     }

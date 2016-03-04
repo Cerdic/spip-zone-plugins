@@ -22,42 +22,41 @@
  *      MA 02110-1301, USA.
  */
 
-include_spip('hyd_inc/section');
 
 /* Tableau des champs à afficher dans le formulaire.
  * On travaille avec les libelles non traduits pour pouvoir gérer
  * le multilinguisme.
  */
-function mes_saisies_section() {
+function mes_saisies() {
 
     // On récupère les champs communs à tous les formulaires à savoir les champs de section.
-    $fieldset_champs = caract_communes();
+    include_spip('hyd_inc/section');
+    $fieldset_champs = mes_saisies_section(true);
 
     $fieldset_champs['Cond_lim']    = array(
-                                           'condition_limite',
-                                           array(
-                                                 'rQ'     =>array('debit_amont',2,'op'),
-                                                 'rYaval' =>array('h_aval_imposee',0.6,'pn'),
-                                                 'rYamont'=>array('h_amont_imposee',0.15,'pn')
-                                                )
-                                       );
+        'condition_limite',
+        array(
+            'rQ'     =>array('debit_amont',2,'op'),
+            'rYaval' =>array('h_aval_imposee',0.4,'pn'),
+            'rYamont'=>array('h_amont_imposee',0.15,'pn')
+        )
+    );
 
     $fieldset_champs['Param_calc']  = array(
-                                           'param_calcul',
-                                           array(
-                                                 'rDx'    =>array('pas_discret',5,'op'),
-                                                 'rPrec'  =>array('precision_calc',0.001,'op')
-                                                )
-                                       );
-
-  return $fieldset_champs;
-
+        'param_calcul',
+        array(
+             'rDx'    =>array('pas_discret',5,'op'),
+             'rPrec'  =>array('precision_calc',0.001,'op')
+        )
+    );
+    return $fieldset_champs;
 }
+
 
 // Définition des champs à lire dans le formulaire
 function getChamps() {
 
-    $tSaisie = mes_saisies_section();
+    $tSaisie = mes_saisies();
     $sTypeSection = _request('crTypeSection');
     $tData = array();
 
@@ -66,8 +65,8 @@ function getChamps() {
         if((substr($IdFS,0,1) != 'F') || ($IdFS == $sTypeSection)){
             // ... alors on parcourt notre deuxième tableau en ajoutant les champs nécessaires.
             foreach($FieldSet[1] as $Cle=>$Champ) {
-                $tData[$IdFS.'_'.$Cle] = _request($IdFS.'_'.$Cle);
-                $tCtrl[$IdFS.'_'.$Cle] = $Champ[2];
+                $tData[$IdFS.'_'.$Cle] = _request($IdFS.'_'.$Cle); // Valeur dans le formulaire
+                $tCtrl[$IdFS.'_'.$Cle] = $Champ[2]; // Codes de vérification
             }
         }
     }
@@ -77,7 +76,7 @@ function getChamps() {
 
 function formulaires_courbe_remous_charger_dist() {
     // On charge les saisies et les champs qui nécessitent un accès par les fonctions
-    $tSaisie_section = mes_saisies_section();
+    $tSaisie_section = mes_saisies();
     $valeurs = array(
         'crTypeSection' => 'FT',
         'mes_saisies' => $tSaisie_section
@@ -89,6 +88,7 @@ function formulaires_courbe_remous_charger_dist() {
             $valeurs[$CleFD.'_'.$Cle] = $Champ[1];
         }
     }
+    $valeurs['choix_resolution'] = _request('choix_resolution');
 
     return $valeurs;
 }
@@ -110,7 +110,7 @@ function formulaires_courbe_remous_traiter_dist(){
 
     $datas = array();
     $echo = '';
-    $tSaisie = mes_saisies_section();
+    $tSaisie = mes_saisies();
     $tChUtil = array();
     $crTypeSection = _request('crTypeSection');
 
@@ -155,7 +155,7 @@ function formulaires_courbe_remous_traiter_dist(){
     //spip_log(array($Cond_lim_rYaval,$c_bief_rKs,$Cond_lim_rQ,$c_bief_rLong,$c_bief_rIf,$Param_calc_rDx,$Param_calc_rPrec),'hydraulic');
 
     // Enregistrement des paramètres dans les classes qui vont bien
-    $oParam= new cParam($c_bief_rKs,$Cond_lim_rQ,$c_bief_rIf,$Param_calc_rPrec,$c_bief_rYBerge,$Cond_lim_rYaval,$Param_calc_rDx,$c_bief_rLong);
+    $oParam= new cParam($c_bief_rKs,$Cond_lim_rQ,$c_bief_rIf,$Param_calc_rPrec,$c_bief_rYB,$Cond_lim_rYaval,$Param_calc_rDx,$c_bief_rLong,_request('choix_resolution'));
 
     // Création d'un objet de type Section selon la section choisie.
     switch($crTypeSection) {
@@ -166,7 +166,7 @@ function formulaires_courbe_remous_traiter_dist(){
 
         case 'FR':
             include_spip('hyd_inc/sectionRectang.class');
-            $oSection=new cSnRectang($oLog,$oParam,$FR_rLargeurBerge);
+            $oSection=new cSnRectang($oLog,$oParam,$FR_rLargeurFond);
             break;
 
         case 'FC':

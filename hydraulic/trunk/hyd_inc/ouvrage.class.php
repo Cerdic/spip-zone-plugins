@@ -71,7 +71,7 @@ class cOuvrage {
      * - CR : Coefficient de débit partie rectangulaire pour les trapézoïdales
      * - CT : Coefficient de débit partie triangulaire pour les trapézoïdales
      * - CS : Coefficient de débit de la surverse
-     * - P : Précision du calcul
+     * - rPrec : Précision du calcul
      */
     private $tP = array();
 
@@ -221,7 +221,7 @@ class cOuvrage {
                 for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
                     $rVarC=$X;
                     list($Q,$nFlag) = $this->OuvrageQ();
-                    if($QT!=0 && abs($Q/$QT-1.) <= $this->tP['P']) {break;}
+                    if($QT!=0 && abs($Q/$QT-1.) <= $this->tP['rPrec']) {break;}
                     if($QT < $Q xor $Q1 <= $Q2) {
                         // QT < IQ et Q(X1) > Q(X2) ou pareil en inversant les inégalités
                         $X1=$rVarC;

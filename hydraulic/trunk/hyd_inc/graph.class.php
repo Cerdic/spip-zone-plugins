@@ -48,12 +48,18 @@
 class cGraph {
     private $tSeries;   //!< Tableau des séries
     private $echo;  //!< Chaine contenant le script jqPlot
+    private $tLabels; /// Respectivement les titres du graphique, des abscisses, des ordonnées
     ///@todo Transférer les deux constantes de graduation dans la configuration du plugin
     const nbTickXmax = 10; // Nbre max de graduation sur l'axe des abscisses
     const nbTickYmax = 10; // Nbre max de graduation sur l'axe des ordonnées
 
-    function __construct() {
+    function __construct($Title = '', $Xlabel='', $Ylabel='') {
         $this->tSeries = array();
+        $this->tLabels = array(
+            'title' =>  $Title,
+            'X'     =>  $Xlabel,
+            'Y'     =>  $Ylabel
+        );
     }
 
     /**
@@ -84,17 +90,17 @@ class cGraph {
     function Get1AxeOptions($tX, $Tmax) {
         $Xmin = min($tX);
         $Xmax = max($tX);
-        
+
         if($Xmin == $Xmax){
-			$Xmin = $Xmin * 0.9;
-			$Xmax = $Xmax * 1.1;
-		}
-		
-		if($xMin == 0 && $Xmax == 0){
-			$Xmin = -1;
-			$Xmax = 1;
-		}
-		
+            $Xmin = $Xmin * 0.9;
+            $Xmax = $Xmax * 1.1;
+        }
+
+        if($Xmin == 0 && $Xmax == 0){
+            $Xmin = -1;
+            $Xmax = 1;
+        }
+
         $r1 = ($Xmax - $Xmin) / floatval($Tmax);
         $r2 = floor($r1 * pow(10,(-floor(log10($r1))))*10)/10;
 
@@ -166,7 +172,12 @@ class cGraph {
             $sId,
             implode(', ',$tS));
         $this->echo .= '
-            {
+            {';
+        if($this->tLabels['title']) {
+            $this->echo .= '
+                title:\''.$this->tLabels['title'].'\',';
+        }
+        $this->echo .= '
                 seriesDefaults: {showMarker:false},';
         $tS = array();
         foreach($this->tSeries as $oSerie) {
@@ -195,17 +206,25 @@ class cGraph {
         list($Xmin, $Xmax, $XTick, $Ymin, $Ymax, $YTick) = $this->GetAxesOptions();
         $this->echo .= sprintf('
                 axes:{
-                    xaxis:{min:%s,
+                    xaxis:{
+                        label:\'%s\',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        min:%s,
                         max:%s,
                         tickInterval:%s},
-                    yaxis:{min:%s,
+                    yaxis:{
+                        label:\'%s\',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        min:%s,
                         max:%s,
                         tickInterval:%s,
                         tickOptions:{formatString:\'%%.3f\'}
                     }
                 }
             });
-        </script>', $Xmin, $Xmax, $XTick, $Ymin, $Ymax, $YTick);
+        </script>',
+            $this->tLabels['X'],$Xmin,$Xmax,$XTick,
+            $this->tLabels['Y'],$Ymin,$Ymax,$YTick);
 
         return $this->echo;
     }

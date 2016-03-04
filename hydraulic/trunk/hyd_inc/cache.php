@@ -1,19 +1,19 @@
 <?php
 
-define('HYD_CACHE_DIRECTORY', _NOM_TEMPORAIRES_INACCESSIBLES.'hydraulic/');
-define('HYD_CACHE_MAX_SIZE', 1024*1024);
+define('_HYD_CACHE_DIRECTORY', _NOM_TEMPORAIRES_INACCESSIBLES.'hydraulic/');
+define('_HYD_CACHE_MAX_SIZE', 1024*1024);
 
 function WriteCacheFile($file_name, $file_content) {
-   if(!is_dir(HYD_CACHE_DIRECTORY)) {
-      mkdir(HYD_CACHE_DIRECTORY);
+   if(!is_dir(_HYD_CACHE_DIRECTORY)) {
+      mkdir(_HYD_CACHE_DIRECTORY);
    }
-   if(is_dir(HYD_CACHE_DIRECTORY)) {
+   if(is_dir(_HYD_CACHE_DIRECTORY)) {
       if(mt_rand(0,5)==0) {
-         if(CacheSize()>HYD_CACHE_MAX_SIZE) {
+         if(CacheSize()>_HYD_CACHE_MAX_SIZE) {
             CacheCleanAll();
          }
       }
-      $file_name =HYD_CACHE_DIRECTORY.$file_name;
+      $file_name =_HYD_CACHE_DIRECTORY.$file_name;
       if($fichier_cache = fopen($file_name,'w')) {
          fwrite($fichier_cache,serialize($file_content));
          fclose($fichier_cache);
@@ -23,7 +23,7 @@ function WriteCacheFile($file_name, $file_content) {
 
 
 function ReadCacheFile($FileName) {
-   $FileName = HYD_CACHE_DIRECTORY.$FileName;
+   $FileName = _HYD_CACHE_DIRECTORY.$FileName;
    $aRetour = @unserialize(file_get_contents($FileName));
    return $aRetour;
 }
@@ -34,7 +34,7 @@ function ReadCacheFile($FileName) {
  * @return integer
  */
 function CacheSize() {
-   $directory=HYD_CACHE_DIRECTORY;
+   $directory=_HYD_CACHE_DIRECTORY;
     $size = 0;
     foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file){
         $size+=$file->getSize();
@@ -44,10 +44,10 @@ function CacheSize() {
 
 
 function CacheCleanAll() {
-    $dp = opendir(HYD_CACHE_DIRECTORY);
+    $dp = opendir(_HYD_CACHE_DIRECTORY);
     while($file = readdir($dp)) {
         if($file !== '.' and $file != '..') {
-            unlink(HYD_CACHE_DIRECTORY."/".$file);
+            unlink(_HYD_CACHE_DIRECTORY."/".$file);
         }
     }
 }

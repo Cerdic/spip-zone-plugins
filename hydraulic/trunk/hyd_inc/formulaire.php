@@ -9,6 +9,8 @@
  */
 function hyd_formulaires_verifier($tData,$tCtrl) {
 
+    $erreurs = array();
+
     foreach($tCtrl as $Cle=>$Ctrl) {
         $tData[$Cle] = trim(str_replace(',','.',$tData[$Cle]));
         if(strpos($Ctrl,'o')!==false & (!isset($tData[$Cle]) | $tData[$Cle]=="")) {

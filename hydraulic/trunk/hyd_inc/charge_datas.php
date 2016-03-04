@@ -1,12 +1,27 @@
 <?php
 
+/**
+ * Charge les données d'un formulaire avec choix des variables fixées, qui varient et à calculer
+ * @param $bLibelles Remplit la clé tlib avec les libellés traduits des variables
+ * @return un tableau avec les clés suivantes:
+ *      - Couples clés/valeur des champs du formulaire
+ *      - iPrec : nombre de décimales pour la précision des calculs
+ *      - tLib: tableau avec couples clés/valeurs des libellés traduits des champs du formulaire
+ *      - sLang : la langue en cours
+ *      - CacheFileName : Le nom du fichier de cache
+ *      - min, max, pas : resp. le min, le max et le pas de variation de la variable qui varie
+ *      - i : pointeur vers la variable qui varie
+ *      - ValCal : Nom de la variable à calculer
+ *      - ValVar : Nom de la variable qui varie
+ * @author David Dorchies
+ * @date Juillet 2012
+ */
 function charge_datas($bLibelles = true) {
     global $spip_lang;
 
     $tChOblig = champs_obligatoires();
     $tChCalc = champs_obligatoires(true);
-    //spip_log($tChOblig,'hydraulic');
-    //spip_log($tChCalc,'hydraulic');
+    spip_log($tChOblig,'hydraulic',_LOG_DEBUG);
     $choix_radio = array();
     $tLib = array();
     $datas=array();
@@ -16,6 +31,8 @@ function charge_datas($bLibelles = true) {
     foreach($tChOblig as $champ) {
         if (_request($champ)){
             $datas[$champ] = _request($champ);
+        } else {
+            $datas[$champ] = 0.;
         }
         $datas[$champ] = str_replace(',','.',$datas[$champ]); // Bug #574
     }

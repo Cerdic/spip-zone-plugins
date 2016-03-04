@@ -26,7 +26,7 @@ function afficher_cacher() {
 }
 </script>
 <div class="formulaire_spip form_courbe_remous">
-<form method="post" action="#ENV{action}" id="form_courbe_remous">
+<form method="post" action="#ENV{action}#VAL{#resultat_courbe_remous}" id="form_courbe_remous">
    #ACTION_FORMULAIRE{#ENV{action}}
    <table class="hyd_formulaire">
       <tbody>
@@ -82,6 +82,24 @@ function afficher_cacher() {
                 </BOUCLE_champsLib>
 
             </BOUCLE_fieldChamps>
+            <tr>
+                <td align="right">
+                    <:hydraulic:choix_resolution:>
+                </td>
+
+                <!-- On génére les options du select, correspondant aux types de section -->
+                <td>
+            [<div class='hyd_erreur'>(#ENV**{erreurs}|table_valeur{choix_resolution})</div>]
+            <select name="choix_resolution" id="choix_resolution">
+                <option value="RK4" [(#ENV{choix_resolution}|=={RK4}|?{'selected',''})]>
+                    <:hydraulic:runge_kutta:>
+                </option>
+                <option value="Euler" [(#ENV{choix_resolution}|=={Euler}|?{'selected',''})]>
+                    <:hydraulic:euler_explicite:>
+                </option>
+            </select>
+                </td>
+            </tr>
 
          <tr>
             <td colspan="2" class="hyd_bouton_submit">
@@ -93,4 +111,4 @@ function afficher_cacher() {
    </table>
 </form>
 </div>
-[<div class='hydraulic_resultat'>(#ENV*{message_ok})</div>]
+[<div id="hyd_resultat">(#ENV*{message_ok})</div>]

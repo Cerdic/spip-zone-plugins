@@ -39,8 +39,10 @@ class cParam {
     public $rG=9.81;/// Constante de gravité
     public $iPrec;  /// Précision en nombre de décimales
     public $rYB;    /// Hauteur de berge
+    public $sResolution; /// Méthode de résolution "Euler" ou "RK4"
 
-    function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0) {
+    function __construct($rKs, $rQ, $rIf, $rPrec, $rYB, $rYCL = 0, $rDx = 0, $rLong = 0, $sResolution = '') {
+        $this->sResolution = $sResolution;
         $this->rYCL=(real) $rYCL;
         $this->rKs=(real) $rKs;
         $this->rQ=(real) $rQ;
@@ -148,7 +150,7 @@ abstract class acSection {
             $this->Reset(false);
         }
         //~ spip_log($this->arCalc,'hydraulic.'._LOG_DEBUG);
-        if(!isset($this->arCalc[$sDonnee]) | !$this->arCalc[$sDonnee]) {
+        if(!isset($this->arCalc[$sDonnee]) | (isset($this->arCalc[$sDonnee]) && !$this->arCalc[$sDonnee])) {
             // La donnée a besoin d'être calculée
             switch($sDonnee) {
                 case 'S' : // Surface mouillée
@@ -377,10 +379,16 @@ abstract class acSection {
     * Calcul du point suivant de la courbe de remous par la méthode Euler explicite.
     * @return Tirant d'eau
     */
-    public function CalcY_M1($Y) {
+    public function CalcY_Euler($Y) {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-        return $Y+ $this->oP->rDx * $this->CalcdYdX($Y);
+        $Y2 = $Y+ $this->oP->rDx * $this->CalcdYdX($Y);
+        if($this->oP->rDx > 0 xor !($Y2 < $this->rHautCritique)) {
+            return false;
+        } else {
+            return $Y2;
+        }
     }
+
 
    /**
     * Calcul du point suivant de la courbe de remous par la méthode RK4.
@@ -390,10 +398,28 @@ abstract class acSection {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
         $rDx = $this->oP->rDx;
         $rk1 = $this->CalcdYdX($Y);
+        if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk1 < $this->rHautCritique)) {return false;}
         $rk2 = $this->CalcdYdX($Y + $rDx / 2 * $rk1);
+        if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk2 < $this->rHautCritique)) {return false;}
         $rk3 = $this->CalcdYdX($Y + $rDx / 2 * $rk2);
+        if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk3 < $this->rHautCritique)) {return false;}
         $rk4 = $this->CalcdYdX($Y + $rDx * $rk3);
+        if($this->oP->rDx > 0 xor !($Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4) < $this->rHautCritique)) {return false;}
         return $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
+    }
+
+
+   /**
+    * Calcul du point suivant d'une courbe de remous
+    * @return Tirant d'eau
+    */
+    public function CalcY($rY) {
+        $funcCalcY = 'CalcY_'.$this->oP->sResolution;
+        if(method_exists($this,$funcCalcY)) {
+            return $this->$funcCalcY($rY);
+        } else {
+            return false;
+        }
     }
 
    /**

@@ -45,9 +45,10 @@ function GetResultTable($tContent,$tEntetes=false) {
  *      - Le nombre de décimales pour la précision d'affichage (clé iPrec)
  * @param $tAbs Tableau contenant les abscisses du résultat (paramètre qui varie)
  * @param $tRes Tableau contenant les résultats du calcul
- * @param $tRes Tableau contenant les flags du résultats du calcul
+ * @param $tFlag Tableau contenant les flags du résultats du calcul
  */
 function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
+    $echo = '';
     $tLib = $datas['tLib'];
     if(!isset($datas['ValVar'])) {
         $datas['ValVar']='';
@@ -68,7 +69,7 @@ function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
             $tCnt[]= array(_T('hydraulic:type_ecoulement'),_T('hydraulic:flag_'.$tFlag[0]));
         }
     }
-    $echo = GetResultTable($tCnt,$tEnt);
+    $tableau_fixe = GetResultTable($tCnt,$tEnt);
 
     // Affichage d'un tableau pour un paramètre qui varie
     if($datas['ValVar']) {
@@ -77,7 +78,7 @@ function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
             $tCnt[] = array(format_nombre($Abs, $datas['iPrec']),format_nombre($tRes[$k], $datas['iPrec']));
         }
         $tEnt = array($tLib[$datas['ValVar']],$tLib[$datas['ValCal']]);
-        $echo .= '<table class="hyd_graph"><tr><td>'.GetResultTable($tCnt,$tEnt).'</td>';
+        $tableau_variable = GetResultTable($tCnt,$tEnt);
 
         // Si la première valeur est infinie alors ...
         if(is_infinite($tRes[0])){
@@ -95,8 +96,7 @@ function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
         *                        Affichage du graphique
         ****************************************************************************/
         include_spip('hyd_inc/graph.class');
-        $oGraph = new cGraph();
-        // Ligne de Lechapt et calmon
+        $oGraph = new cGraph('',$tLib[$datas['ValVar']],'');
         if(isset($tRes)) {
             $oGraph->AddSerie(
                 _T('hydraulic:param_'.$datas['ValCal']),
@@ -106,9 +106,14 @@ function AfficheResultats($datas, $tAbs, $tRes, $tFlag=false) {
                 'lineWidth:3, showMarker:true, markerOptions:{style:\'filledCircle\', size:8}');
         }
         // Récupération du graphique
-        $echo .= '<td>'.$oGraph->GetGraph('ligne_lechapt_calmon',400,600);
-        $echo .= $tLib[$datas['ValVar']].'</td></tr></table>';
+        $graph = $oGraph->GetGraph('graphique',400,600);
+        $echo = $graph."\n";
     }
+    $echo .= '<table class="hyd_graph"><tr><td>'.$tableau_fixe.'</td>';
+    if(isset($tableau_variable)) {
+        $echo .= '<td width="5%">&nbsp;</td><td>'.$tableau_variable.'</td>';
+    }
+    $echo .= '</tr></table>';
     return $echo;
 }
 
