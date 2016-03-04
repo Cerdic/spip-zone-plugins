@@ -7,6 +7,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/session');
 
 /**
+ * Chercher dans les groupes de saisies une saisie upload
+ *
+ * @param array $saisies
+ * @access public
+ * @return array
+ */
+function chercher_saisie_upload($saisies) {
+	include_spip('inc/saisies');
+
+	foreach ($saisies as $key => $saisie) {
+		if ($saisie['saisie'] == 'upload') {
+			$saisie_upload = $saisies[$key];
+		}
+	}
+
+	return $saisie_upload;
+}
+
+/**
  * Fonction qui renvoie les documents uploader dans un tableau
  * utilisable par objet_associer
  *

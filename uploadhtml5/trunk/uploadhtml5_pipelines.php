@@ -150,7 +150,8 @@ function uploadhtml5_formulaire_verifier($flux) {
 	$saisies = saisies_chercher_formulaire($form, $form_args);
 
 	// Chercher si une saisie upload ce trouve dans le tableau
-	$saisie = saisies_chercher($saisies, 'upload');
+	include_spip('inc/saisie_upload');
+	$saisie = chercher_saisie_upload($saisies);
 
 	// Une saisie upload obligatoire a été trouvée,
 	// il faut donc la vérifier
