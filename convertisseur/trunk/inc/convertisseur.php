@@ -640,12 +640,17 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $r[0]), strlen($r[0]));
 		}
 	}
-		
-	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute ostensiblement en haut du texte.
+
+	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute dans le champs metadonnees ou a défaut ostensiblement en haut du texte.
 	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
 		foreach($z as $d){
-			$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
-			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
+			if(!in_array("metadonnees", $champs)){
+				$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
+				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
+			}else{
+				$c['metadonnees'] = $d[0] . "\n\n" . $c['metadonnees'] ;
+				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
+			}
 		}
 	}
 	

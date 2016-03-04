@@ -4,6 +4,10 @@
 
 Importer en masse des fichiers txt dans spip_articles.
 
+Pour ajouter des champs à la rache :
+// sql_query("alter table spip_articles add signature MEDIUMTEXT NOT NULL DEFAULT ''");
+
+
 */
 
 
@@ -68,14 +72,34 @@ class fichiersImporter extends Command {
 			}
 			// Si c'est bon on continue
 			else{
-								
+				
+				// Champs d'un article
+				include_spip("base/abstract_sql");
+				$show = sql_showtable("spip_articles");
+				$champs = array_keys($show['field']);
+
+				/*
+				if(!in_array('signature', $champs))
+					sql_query("alter table spip_articles add signature MEDIUMTEXT NOT NULL DEFAULT ''");
+				
+				if(!in_array('pages', $champs))
+					sql_query("alter table spip_articles add pages TINYTEXT NOT NULL DEFAULT ''");
+
+				if(!in_array('free', $champs))
+					sql_query("alter table spip_articles add pages TINYTEXT NOT NULL DEFAULT ''");
+				*/
+				
+				// Ajout d'un champs pour stocker les éventuelles ins sans champs.
+				if(!in_array('metadonnees', $champs))
+					sql_query("alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
+			
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sizeof($fichiers));
 				$progress->setBarWidth(100);
 				$progress->setRedrawFrequency(1);
-				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message');
+				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
 				$progress->setMessage("", 'inforub');
 				$progress->start();
 
@@ -94,6 +118,7 @@ class fichiersImporter extends Command {
 					
 					$texte = preg_replace("/@@COLLECTION.*/", "", $texte);
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
+					
 										
 					// faut il creer des rubriques ?
 					$id_rubrique = sql_getfetsel("id_rubrique", "spip_rubriques", "titre='$numero'");
