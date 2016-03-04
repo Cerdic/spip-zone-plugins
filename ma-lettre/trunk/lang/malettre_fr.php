@@ -87,7 +87,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // 0
   'obligatoire' => 'Champs obligatoire',
   
-  //
+  // P
+  'lettre_preview_open' => 'Ouvrir dans une nouvelle fenêtre',
+  
+  // R
   'recharger_texte' => 'Recharger ce texte',
   
   // S

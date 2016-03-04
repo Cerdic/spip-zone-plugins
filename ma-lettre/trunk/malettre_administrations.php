@@ -33,4 +33,3 @@ function malettre_creer_repertoire_documents() {
 	   creer_repertoire_documents('lettre');  
 }
 
-?>
