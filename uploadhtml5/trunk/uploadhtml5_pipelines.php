@@ -149,6 +149,11 @@ function uploadhtml5_formulaire_verifier($flux) {
 	$form_args = $flux['args']['args'];
 	$saisies = saisies_chercher_formulaire($form, $form_args);
 
+	// S'il n'y a pas de saisies, il n'y a rien à vérifier
+	if (!$saisies) {
+		return $flux;
+	}
+
 	// Chercher si une saisie upload ce trouve dans le tableau
 	include_spip('inc/saisie_upload');
 	$saisie = chercher_saisie_upload($saisies);
