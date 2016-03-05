@@ -310,9 +310,12 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	   que les dimensions forcées */
 	function calculer_zoom_min() {
 
-		return Math.max(
-			forcer_largeur / largeur_image,
-			forcer_hauteur / hauteur_image
+		return Math.min(
+			1,
+			Math.max(
+				forcer_largeur / largeur_image,
+				forcer_hauteur / hauteur_image
+			)
 		);
 	}
 
