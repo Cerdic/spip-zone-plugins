@@ -186,6 +186,11 @@ function massicoter_fichier($fichier, $parametres) {
     $fichier = parse_url($fichier);
     $fichier = $fichier['path'];
 
+    // On ne traite pas les documents distants
+    if (! file_exists($fichier)) {
+	    return $fichier;
+    }
+
     /* la balise #FICHIER sur les boucles documents donne un chemin
        relatif au dossier IMG qu'on ne peut pas retourner tel quel,
        sous peine de de casser le portfolio de la dist.
@@ -299,11 +304,6 @@ function massicoter_logo_document($logo, $connect = null, $doc = array()) {
 
     include_spip('inc/filtres');
     include_spip('inc/filtres_images_mini');
-
-    /* On ne fait rien avec les documents distants */
-    if ($doc['distant'] === 'oui') {
-	    return $logo;
-    }
 
     /* S'il n'y a pas de fichier dans la pile, on va le chercher dans
        la table documents */
