@@ -8,5 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'suploadhtml5_description' => '',
 	'suploadhtml5_nom' => 'Saisie Uploadhtml5',
-	'suploadhtml5_slogan' => 'Support de saisie dans via uploadhtml5',
+	'suploadhtml5_slogan' => 'Support de saisie via uploadhtml5',
 );
