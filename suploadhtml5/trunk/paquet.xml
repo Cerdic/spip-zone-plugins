@@ -14,7 +14,7 @@
 	<auteur lien="http://p.henix.be">phenix</auteur>
 
 	<licence>GNU/GPL</licence>
-	<necessite nom="uploadhtml5" compatibilite="[1.5.3;]" />
+	<necessite nom="uploadhtml5" compatibilite="[1.6.0;]" />
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
 	<pipeline nom="autoriser" inclure="suploadhtml5_autorisations.php" />
