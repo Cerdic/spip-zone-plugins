@@ -104,9 +104,9 @@ class fichiersExporter extends Command {
 					$ins_mc = array();
 
 					foreach($f as $k => $v){
-						if($k == "texte" or $v == "" or $v == "0")
+						if($k == "texte" or $v == "" or $v == "0" or $v == "non" or $v == "0000-00-00 00:00:00")
 							continue ;
-						$fichier .= "<ins class='$k'>$v</ins>\n" ;
+						$fichier .= "<ins class='$k'>" . trim($v) ."</ins>\n" ;
 					}
 					$fichier .= "\n\n" . $f['texte'] . "\n\n" ;
 
