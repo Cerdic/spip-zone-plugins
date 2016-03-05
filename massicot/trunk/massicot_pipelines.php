@@ -2,11 +2,11 @@
 /**
  * Utilisations de pipelines par Massicot
  *
- * @plugin     Massicot
+ * @plugin	   Massicot
  * @copyright  2015
- * @author     Michel @ Vertige ASBL
- * @licence    GNU/GPL
- * @package    SPIP\Massicot\Pipelines
+ * @author	   Michel @ Vertige ASBL
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Massicot\Pipelines
  */
 
 /**
@@ -14,7 +14,7 @@
  *
  * @pipeline jquery_plugins
  * @param  array $scripts  Les scripts qui seront insérés dans la page
- * @return array       La liste des scripts complétée
+ * @return array	   La liste des scripts complétée
  */
 function massicot_jquery_plugins($scripts) {
 
@@ -22,7 +22,7 @@ function massicot_jquery_plugins($scripts) {
 		$scripts[] = find_in_path('lib/jquery.imgareaselect.js/jquery.imgareaselect.dev.js');
 	}
 
-    return $scripts;
+	return $scripts;
 }
 
 /**
@@ -30,14 +30,14 @@ function massicot_jquery_plugins($scripts) {
  *
  * @pipeline jqueryui_plugins
  * @param  array $scripts  Plugins jqueryui à charger
- * @return array       Liste des plugins jquerui complétée
+ * @return array	   Liste des plugins jquerui complétée
  */
 function massicot_jqueryui_plugins($scripts) {
 
 	if (test_espace_prive()) {
 		$scripts[] = 'jquery.ui.slider';
 	}
-    return $scripts;
+	return $scripts;
 }
 
 /**
@@ -45,17 +45,17 @@ function massicot_jqueryui_plugins($scripts) {
  *
  * @pipeline header_prive
  * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
+ * @return array	   Données du pipeline
  */
 function massicot_header_prive($flux) {
 	if (test_espace_prive()) {
 		$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
-		      find_in_path('css/massicot.css') . '" />';
+			  find_in_path('css/massicot.css') . '" />';
 
 		$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="' .
-		      find_in_path('lib/jquery.imgareaselect.js/distfiles/css/imgareaselect-default.css') . '" />';
+			  find_in_path('lib/jquery.imgareaselect.js/distfiles/css/imgareaselect-default.css') . '" />';
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
@@ -63,14 +63,14 @@ function massicot_header_prive($flux) {
  *
  * @pipeline editer_document_actions
  * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
+ * @return array	   Données du pipeline
  */
 function massicot_document_desc_actions($flux) {
 
-    $flux['data'] .= recuperer_fond(
-	    'prive/squelettes/inclure/lien_recadre',
-	    $flux['args']
-    );
+	$flux['data'] .= recuperer_fond(
+		'prive/squelettes/inclure/lien_recadre',
+		$flux['args']
+	);
 
-    return $flux;
+	return $flux;
 }
