@@ -182,14 +182,11 @@ function massicoter_fichier($fichier, $parametres) {
 	include_spip('inc/filtres_images_mini');
 	include_spip('filtres/images_transforme');
 
+	$fichier_original = $fichier;
+
 	/* on vire un éventuel query string */
 	$fichier = parse_url($fichier);
 	$fichier = $fichier['path'];
-
-	// On ne traite pas les documents distants
-	if (! file_exists($fichier)) {
-		return $fichier;
-	}
 
 	/* la balise #FICHIER sur les boucles documents donne un chemin
 	   relatif au dossier IMG qu'on ne peut pas retourner tel quel,
@@ -197,6 +194,10 @@ function massicoter_fichier($fichier, $parametres) {
 	   (constaté sur SPIP 3.1 RC1) */
 	if (! file_exists($fichier)) {
 		$fichier = _DIR_IMG . $fichier;
+		// Si on n'a toujours rien, c'est probablement un fichier distant
+		if (! file_exists($fichier)) {
+			return $fichier_original;
+		}
 	}
 
 	/* ne rien faire s'il n'y a pas de massicotage défini */
