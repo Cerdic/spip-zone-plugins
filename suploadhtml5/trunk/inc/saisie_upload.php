@@ -20,6 +20,11 @@ function chercher_saisie_upload($saisies) {
 		if ($saisie['saisie'] == 'upload') {
 			$saisie_upload = $saisies[$key];
 		}
+
+		// récursivité au besoin
+		if (isset($saisie['saisies'])) {
+			$saisie_upload = chercher_saisie_upload($saisie['saisies']);
+		}
 	}
 
 	return $saisie_upload;
