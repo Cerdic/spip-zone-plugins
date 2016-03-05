@@ -125,7 +125,7 @@ function saisie_upload_traiter($objet, $id_objet, $lien_direct = false) {
  */
 function saisie_upload_traiter_logo($objet, $id_objet, $supprimer = true) {
 
-    // On prend le premier fichier image de la saisie et on le transform en logo
+    // On prend le premier fichier image de la saisie et on le transforme en logo
     $documents = saisie_upload_get();
 
     if (!$documents) {
