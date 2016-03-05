@@ -11,7 +11,7 @@
 	<nom>Saisie Uploadhtml5</nom>
 	<!-- Support de saisie dans via uploadhtml5 -->
 
-	<auteur lien='http://p.henix.be'>phenix</auteur>
+	<auteur lien="http://p.henix.be">phenix</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="uploadhtml5" compatibilite="[1.5.3;]" />
