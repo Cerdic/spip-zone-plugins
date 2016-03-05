@@ -17,6 +17,8 @@
 	<necessite nom="uploadhtml5" compatibilite="[1.5.3;]" />
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
+	<pipeline nom="autoriser" inclure="suploadhtml5_autorisations.php" />
+
 	<pipeline nom="formulaire_verifier" inclure="suploadhtml5_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="suploadhtml5_pipelines.php" />
 
