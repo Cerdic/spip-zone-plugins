@@ -13,7 +13,7 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#ID_DROITS_CONTRAT|oui)
-	[(#GET{redirect}|icone_verticale{Retour,droits_contrat,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,droits_contrat,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[(#ID_DROITS_CONTRAT|?{<:droits_contrat:icone_modifier_droits_contrat:>,<:droits_contrat:icone_creer_droits_contrat:>})]
 	<h1>
