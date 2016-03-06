@@ -116,3 +116,46 @@ function massicot_post_edition($flux) {
 
 	return $flux;
 }
+
+/**
+ * Supprimer les traitements lorsqu'on supprime un logo
+ *
+ * @pipeline formulaire_traiter
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function massicot_formulaire_traiter($flux) {
+
+	if (($flux['args']['form'] === 'editer_logo')
+	    and (_request('supprimer_logo_on'))) {
+
+		include_spip('base/abstract_sql');
+		include_spip('action/editer_liens');
+
+		$objet = $flux['args']['args'][0];
+		$id_objet = $flux['args']['args'][1];
+
+		$massicotages = objet_trouver_liens(
+			array('massicotage' => '*'),
+			array($objet => $id_objet)
+		);
+
+		$id_massicotages = array_map(
+			function ($el) {
+				return $el['id_massicotage'];
+			},
+			$massicotages
+		);
+
+		sql_delete(
+			'spip_massicotages',
+			sql_in('id_massicotage', $id_massicotages)
+		);
+		sql_delete(
+			'spip_massicotages_liens',
+			sql_in('id_massicotage', $id_massicotages)
+		);
+	}
+
+	return $flux;
+}
