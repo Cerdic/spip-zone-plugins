@@ -187,6 +187,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	$('#formulaire_massicoter_image_reset').click(function (e) {
 
 		$('#zoom-slider').slider('option', 'value', 1);
+		select_format.val('').trigger('change');
 
 		maj_image(1);
 
