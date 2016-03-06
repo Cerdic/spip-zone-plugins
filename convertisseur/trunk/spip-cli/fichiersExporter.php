@@ -102,6 +102,11 @@ class fichiersExporter extends Command {
 					$fichier = "" ;
 					$ins_auteurs = array();
 					$ins_mc = array();
+					$ins_doc = array();
+					$progress->setMessage('', 'motscles');
+					$progress->setMessage('', 'docs');
+					$progress->setMessage('', 'auteurs');
+
 
 					foreach($f as $k => $v){
 						if($k == "texte" or $v == "" or $v == "0" or $v == "non" or $v == "0000-00-00 00:00:00")
@@ -119,10 +124,8 @@ class fichiersExporter extends Command {
 					
 					// auteurs spip 3
 					if($spip_version_branche > "3")
-						
 						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_liens al, spip_auteurs a", "al.id_objet=$id_article and al.objet='article' and al.id_auteur=a.id_auteur");
-					// spip 2
-					else
+					else // spip 2
 						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
 					
 					foreach($auteurs as $a){
@@ -135,24 +138,31 @@ class fichiersExporter extends Command {
 					$progress->setMessage($auteurs_m, 'auteurs');
 					
 					// mots-clés
-
-					// mots-clés spip 3
 					if($spip_version_branche > "3")
 						$motscles = sql_allfetsel("*", "spip_mots_liens ml, spip_mots m", "ml.id_objet=$id_article and ml.objet='article' and ml.id_mot=m.id_mot");
-					// spip 2
-					else
+					else // spip 2
 						$motscles = sql_allfetsel("*", "spip_mots_articles ma, spip_mots m", "ma.id_article=$id_article and ma.id_mot=m.id_mot");
 					
 					foreach($motscles as $mc){
 						if($mc['titre'])
 							$ins_mc[] = $mc['type'] . "::" . $mc['titre'] ;
 					}	
-						
-					$motscles = join("@@", $ins_mc) ;
-					$motscles_m = substr($motscles, 0, 100) ;
-					$progress->setMessage($motscles_m, 'motscles');
+					if(is_array($ins_mc)){
+						$motscles = join("@@", $ins_mc) ;
+						$motscles_m = substr($motscles, 0, 100) ;
+						$progress->setMessage($motscles_m, 'motscles');
+					}
 
-					
+					// documents joints
+					$documents = sql_allfetsel("*", "spip_documents_liens dl, spip_documents d", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
+					foreach($documents as $doc)
+							$ins_doc[] = json_encode($doc) ;
+					if(is_array($ins_doc)){
+						$documents = join("@@", $ins_doc) ;
+						$docs_m = substr($documents, 0, 100) ;
+						$progress->setMessage($docs_m, 'docs');
+					}
+
 					// Ajouter les métadonnées					
 					if($bio)
 						$fichier = "<ins class='bio'>$bio</ins>\n" . $fichier ;
@@ -160,6 +170,8 @@ class fichiersExporter extends Command {
 						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
 					if($motscles)
 						$fichier = "<ins class='mots_cles'>$motscles</ins>\n" . $fichier ;
+					if($documents)
+						$fichier = "<ins class='documents'>$documents</ins>\n" . $fichier ;
 					if($titre_parent && $titre_rubrique)
 						$fichier = "<ins class='hierarchie'>$titre_parent@@$titre_rubrique</ins>\n" . $fichier ;
 				
@@ -184,8 +196,7 @@ class fichiersExporter extends Command {
 					if(!is_dir("$dest/$annee/$annee-$mois"))
 						mkdir("$dest/$annee/$annee-$mois");	
 					
-					if(ecrire_fichier("$nom_fichier", $fichier)){				
-						
+					if(ecrire_fichier("$nom_fichier", $fichier)){
 						// Si tout s'est bien passé, on avance la barre
 						$nom_fichier_m = substr($nom_fichier, 0, 100) ;
 						$progress->setMessage($nom_fichier_m, 'filename');
@@ -196,8 +207,7 @@ class fichiersExporter extends Command {
 					else{
 						$output->writeln("<error>échec de l'export de $nom_fichier</error>");
 						exit ;
-					}
-										
+					}			
 				}
 				
 				// ensure that the progress bar is at 100%
