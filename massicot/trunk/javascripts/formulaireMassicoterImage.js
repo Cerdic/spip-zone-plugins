@@ -78,7 +78,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 					x2: img.width(),
 					y1: 0,
 					y2: img.height()
-				});
+				}, zoom);
 			} else {
 				maj_image(zoom);
 			}
@@ -93,7 +93,7 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			var selection = zoomer_selection(selection_nozoom, zoom);
 
 			if (mode_dimensions_forcees) {
-				selection = forcer_dimensions_selection(selection);
+				selection = forcer_dimensions_selection(selection, zoom);
 			}
 
 			maj_selection(selection);
@@ -146,18 +146,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 		if (format) {
 			mode_dimensions_forcees = true;
 
-			// TODO ne pas changer de zoom ni de sélection si on est
-			// déjà aux bonnes dimensions.
-
 			format = format.split(':');
 			forcer_largeur = parseInt(format[0], 10);
 			forcer_hauteur = parseInt(format[1], 10);
-			zoom = calculer_zoom_min();
 
-			maj_image(zoom);
-
-			slider.slider('option', 'min', zoom);
-			slider.slider('option', 'value', zoom);
+			slider.slider('option', 'min', calculer_zoom_min());
 
 			imgAreaSelector.setOptions({
 				aspectRatio: forcer_largeur + ':' + forcer_hauteur,
@@ -165,12 +158,11 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 				minHeight: Math.round(forcer_hauteur * zoom)
 			});
 
-			selection_initiale = forcer_dimensions_selection({
-				x1: 0,
-				x2: img.width(),
-				y1: 0,
-				y2: img.height()
-			});
+			selection_initiale = forcer_dimensions_selection(
+				imgAreaSelector.getSelection(),
+				zoom
+			);
+
 			maj_selection(selection_initiale);
 
 			maj_formulaire(selection_initiale, zoom);
@@ -285,25 +277,49 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/* Retourne une sélection aux dimensions reçues en option, en
 	   essayeant de rester le plus proche possible de la sélection
 	   passée en paramètre. On essaie de garder le même centre. */
-	function forcer_dimensions_selection(selection) {
+	function forcer_dimensions_selection(selection, zoom) {
 
-		var centre = {
-				x: (selection.x2 + selection.x1) / 2,
-				y: (selection.y2 + selection.y1) / 2
-			},
-			x1 = Math.round(Math.max(0, centre.x - (forcer_largeur / 2))),
-			x2 = x1 + forcer_largeur,
-			y1 = Math.round(Math.max(0, centre.y - (forcer_hauteur / 2))),
-			y2 = y1 + forcer_hauteur;
+		var x1 = selection.x1,
+			x2 = selection.x2,
+			y1 = selection.y1,
+			y2 = selection.y2,
+			zoom_max = Math.min(
+				(largeur_image * zoom) / forcer_largeur,
+				(hauteur_image * zoom) / forcer_hauteur
+			),
+			echelle_x = (x2 - x1) / forcer_largeur,
+			echelle_y = (y2 - y1) / forcer_hauteur,
+			echelle = Math.min(
+				Math.max(zoom, (echelle_x + echelle_y) / 2),
+				zoom_max
+			),
+			largeur_selection = forcer_largeur * echelle,
+			hauteur_selection = forcer_hauteur * echelle,
+			centre = {
+				x: (x2 + x1) / 2,
+				y: (y2 + y1) / 2
+			};
 
-		selection = {
+		x1 = Math.round(Math.max(0, centre.x - (largeur_selection / 2)));
+		x2 = Math.round(x1 + largeur_selection);
+		y1 = Math.round(Math.max(0, centre.y - (hauteur_selection / 2)));
+		y2 = Math.round(y1 + hauteur_selection);
+
+		if (x2 > largeur_image) {
+			x1 = x1 - (x2 - largeur_image);
+			x2 = largeur_image;
+		}
+		if (y2 > hauteur_image) {
+			y1 = y1 - (y2 - hauteur_image);
+			y2 = hauteur_image;
+		}
+
+		return {
 			x1: x1,
 			x2: x2,
 			y1: y1,
 			y2: y2
 		};
-
-		return selection;
 	}
 
 	/* La plus grande valeur de zoom possible avant d'être plus petit
