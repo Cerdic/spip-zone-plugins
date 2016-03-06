@@ -25,7 +25,7 @@ function itineraires_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_itineraires', 'spip_itineraires_locomotions')),
+		array('maj_tables', array('spip_itineraires', 'spip_itineraires_locomotions', 'spip_itineraires_etapes')),
 	);
 	
 	// Ajouter les étapes
