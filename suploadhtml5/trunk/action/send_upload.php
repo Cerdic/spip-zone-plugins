@@ -24,8 +24,6 @@ function action_send_upload_dist($arg = null) {
     sql_update('spip_documents', array('statut' => sql_quote('tmp')), 'id_document='.$id_document);
 
     // On stock l'upload en session
-    include_spip('inc/session');
-    $uploads = session_get('upload') ?: array();
-    $uploads[] = $id_document;
-    session_set('upload', $uploads);
+    include_spip('inc/saisie_upload');
+    saisie_upload_charger($id_document);
 }

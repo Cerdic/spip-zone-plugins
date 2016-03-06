@@ -159,3 +159,15 @@ function saisie_upload_traiter_logo($objet, $id_objet, $supprimer = true) {
         $supprimer_document($fichier['id_document']);
     }
 }
+
+/**
+ * fonction pour charger des documents dans la session
+ *
+ * @param mixed $id_document
+ * @access public
+ */
+function saisie_upload_charger($id_document) {
+    $uploads = session_get('upload') ?: array();
+    $uploads[] = $id_document;
+    session_set('upload', $uploads);
+}
