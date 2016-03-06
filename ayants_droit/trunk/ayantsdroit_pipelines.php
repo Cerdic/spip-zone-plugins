@@ -63,14 +63,17 @@ function ayantsdroit_affiche_milieu($flux) {
 /**
  * Optimiser la base de données 
  * 
- * Supprime les objets à la poubelle.
+ * Supprime les objets à la poubelle et les liens morts.
  *
  * @pipeline optimiser_base_disparus
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function ayantsdroit_optimiser_base_disparus($flux){
-	sql_delete("spip_droits_contrats", "statut='poubelle' AND maj < " . $flux['args']['date']);
-
+	include_spip('action/editer_liens');
+	
+	$flux['data'] += sql_delete("spip_droits_contrats", "statut='poubelle' AND maj < " . $flux['args']['date']);
+	$flux['data'] += objet_optimiser_liens(array('droits_contrat'=>'*'),'*');
+	
 	return $flux;
 }
