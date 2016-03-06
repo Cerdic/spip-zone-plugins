@@ -123,10 +123,11 @@ class fichiersImporter extends Command {
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 					
 					// Si des <ins> qui correspondent à des champs metadonnees connus,on les ajoute.
-					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie");
+					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
 					$hierarchie = "" ;
 					$auteurs = "" ;
-					$mots_cles = "" ;					
+					$mots_cles = "" ;
+					$documents = "" ;					
 	
 					if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){
 						foreach($z as $d){
@@ -235,9 +236,31 @@ class fichiersImporter extends Command {
 							}
 						}
 
+						// Créer des documents ?
+						if($documents){
+							foreach($documents as $doc){
+								$d = json_decode($doc, true);
+								$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
+								if(!$id_document){
+									$id_doc = $doc['id_document'] ;
+									//unset($doc['id_document']);
+									//$id_document = sql_insertq("spip_documents", $doc);
+   									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
+								}
+
+								//if(!sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
+								//	sql_insertq("spip_documents_liens", array(
+	    						//			"id_document" => $id_document,
+	    						//			"id_objet" => $id_article,
+	    						//			"objet" => "article"
+	    						//));
+								
+							}
+						}
+
 						// Si tout s'est bien passé, on avance la barre
 						$progress->setMessage($f, 'filename');
-						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n\n");
+						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . "<fg=white;bg=red>%inforub% %auteur% %mot%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n  %filename%\n%docs%\n\n");
 						$progress->advance();
 											
 					}else{
