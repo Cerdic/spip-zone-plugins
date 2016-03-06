@@ -62,5 +62,11 @@
 		<span dir='#LANG_DIR' class='#EDIT{lang} reference'>(#LANG|traduire_nom_langue)</span>
 	</div>
 	]
-	<INCLURE{fond=prive/objets/contenu/inc-reservation_montant,id_reservation}/>
+	#SET{details, #ARRAY}
+	#SET{total,0}
+	<BOUCLE_reservation_details(RESERVATIONS_DETAILS){id_reservation}{id_reservations_detail ?}{tout}>
+		[(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
+	</BOUCLE_reservation_details>
+
+	<INCLURE{fond=prive/objets/contenu/inc-reservation_montant,id_reservation,total=#GET{total}}/>
 </BOUCLE_reservation>
