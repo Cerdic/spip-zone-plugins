@@ -74,3 +74,45 @@ function massicot_document_desc_actions($flux) {
 
 	return $flux;
 }
+
+/**
+ * Supprimer les traitements lorsqu'on remplace l'image d'un document
+ *
+ * @pipeline post_edition
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function massicot_post_edition($flux) {
+
+	if (($flux['args']['type'] === 'document')
+	    and isset($flux['data']['fichier'])) {
+
+		include_spip('base/abstract_sql');
+		include_spip('action/editer_liens');
+
+		$id_document = $flux['args']['id_objet'];
+
+		$massicotages = objet_trouver_liens(
+			array('massicotage' => '*'),
+			array('document' => $id_document)
+		);
+
+		$id_massicotages = array_map(
+			function ($el) {
+				return $el['id_massicotage'];
+			},
+			$massicotages
+		);
+
+		sql_delete(
+			'spip_massicotages',
+			sql_in('id_massicotage', $id_massicotages)
+		);
+		sql_delete(
+			'spip_massicotages_liens',
+			sql_in('id_massicotage', $id_massicotages)
+		);
+	}
+
+	return $flux;
+}
