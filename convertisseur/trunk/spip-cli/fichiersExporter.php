@@ -123,7 +123,7 @@ class fichiersExporter extends Command {
 						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_liens al, spip_auteurs a", "al.id_objet=$id_article and al.objet='article' and al.id_auteur=a.id_auteur");
 					// spip 2
 					else
-						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_articles al, spip_auteurs a", " where al.id_article=$id_article and al.id_auteur=a.id_auteur");
+						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
 					
 					foreach($auteurs as $a){
 						if($a['nom'])
@@ -131,7 +131,8 @@ class fichiersExporter extends Command {
 					}	
 						
 					$auteurs = join("@@", $ins_auteurs) ;
-					$progress->setMessage($auteurs, 'auteurs');
+					$auteurs_m = substr($auteurs, 0, 100) ;
+					$progress->setMessage($auteurs_m, 'auteurs');
 					
 					// mots-clés
 
@@ -140,7 +141,7 @@ class fichiersExporter extends Command {
 						$motscles = sql_allfetsel("*", "spip_mots_liens ml, spip_mots m", "ml.id_objet=$id_article and ml.objet='article' and ml.id_mot=m.id_mot");
 					// spip 2
 					else
-						$motscles = sql_allfetsel("*", "spip_mots_articles ml, spip_mots a", " where ml.id_article=$id_article and ml.id_mot=m.id_mot");
+						$motscles = sql_allfetsel("*", "spip_mots_articles ma, spip_mots m", "ma.id_article=$id_article and ma.id_mot=m.id_mot");
 					
 					foreach($motscles as $mc){
 						if($mc['titre'])
@@ -148,7 +149,7 @@ class fichiersExporter extends Command {
 					}	
 						
 					$motscles = join("@@", $ins_mc) ;
-					$motscles_m = substr($motscles, 0, 230) ;
+					$motscles_m = substr($motscles, 0, 100) ;
 					$progress->setMessage($motscles_m, 'motscles');
 
 					
@@ -186,7 +187,7 @@ class fichiersExporter extends Command {
 					if(ecrire_fichier("$nom_fichier", $fichier)){				
 						
 						// Si tout s'est bien passé, on avance la barre
-						$nom_fichier_m = substr($nom_fichier, 0, 230) ;
+						$nom_fichier_m = substr($nom_fichier, 0, 100) ;
 						$progress->setMessage($nom_fichier_m, 'filename');
 						$progress->setFormat("<fg=white;bg=blue>%message%</>\n" . '%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%' . "\n %auteurs% %motscles% \n %filename% \n\n");
 						$progress->advance();
