@@ -38,6 +38,15 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,itineraire,id,#ID_ITINERAIRE},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/itineraire-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/itineraire-enfants,id_itineraire,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,itineraire,id_itineraire,#ID_ITINERAIRE,objet,itineraire,id_objet,#ID_ITINERAIRE},data,#GET{enfants}})]})]
+
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]

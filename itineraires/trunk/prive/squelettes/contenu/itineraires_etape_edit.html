@@ -1,0 +1,24 @@
+
+[(#AUTORISER{creeretapedans,itineraire,#ID_ITINERAIRE}|sinon_interdire_acces)]
+
+#SET{redirect,#ENV{redirect}|sinon{#ID_ITINERAIRES_ETAPE|?{#ID_ITINERAIRES_ETAPE|generer_url_entite{itineraires_etape},#ID_ITINERAIRE|generer_url_entite{itineraire}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,[(#ID_ITINERAIRE|?{itineraire,itineraires_etape})],'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#ID_ITINERAIRES_ETAPE|?{<:itineraires_etape:icone_modifier_itineraires_etape:>,<:itineraires_etape:icone_creer_itineraires_etape:>})]
+	<h1>
+		[(#INFO_TITRE{itineraires_etape,#ID_ITINERAIRES_ETAPE}|sinon{<:info_sans_titre:>})]
+	</h1>
+</div>
+
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+	[(#FORMULAIRE_EDITER_ITINERAIRES_ETAPE{#ENV{id_itineraires_etape,oui}, #ID_ITINERAIRE, #GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

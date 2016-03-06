@@ -1,17 +1,13 @@
 <paquet
 	prefix="itineraires"
 	categorie="divers"
-	version="1.0.4"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/itineraires-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="1.1.0" 
 >
-	<!--
-		Paquet genere le 2013-09-27 16:12:36
-	-->
-
 	<nom>Itinéraires</nom>
 
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
@@ -20,6 +16,7 @@
 	<necessite nom="saisies" compatibilite="[1.35.0;]" />
 	<necessite nom="verifier" compatibilite="[1.0.3;]" />
 	<necessite nom="yaml" compatibilite="[1.5.1;]" /> 
+	<utilise nom="gis" compatibilite="[4.32.5;]" /> 
 
 	<pipeline nom="autoriser" inclure="itineraires_autorisations.php" /> 
 

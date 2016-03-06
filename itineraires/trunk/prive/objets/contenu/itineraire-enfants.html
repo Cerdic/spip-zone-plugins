@@ -1,0 +1,11 @@
+
+[(#CONFIG{itineraires/activer_etapes}|oui)
+
+<INCLURE{fond=prive/objets/liste/itineraires_etapes, id_itineraire, env, ajax, sinon=<:itineraires_etape:info_aucun_itineraires_etape:>}>
+
+[(#AUTORISER{creeretapedans, itineraire, #ENV{id_itineraire}}|oui)
+	[(#URL_ECRIRE{itineraires_etape_edit, new=oui&id_itineraire=#ENV{id_itineraire}}|parametre_url{redirect,[(#VAL{&}|self)]}|icone_verticale{<:itineraires_etape:texte_ajouter_itineraires_etape:>,itineraires_etape,new,right})]
+]
+<div class="nettoyeur"></div>
+
+]

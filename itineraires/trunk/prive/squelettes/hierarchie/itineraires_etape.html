@@ -1,0 +1,8 @@
+[(#ID_ITINERAIRES_ETAPE|?{
+	#SET{id_itineraire,#INFO_ID_ITINERAIRE{itineraires_etape,#ID_ITINERAIRES_ETAPE}},
+	#SET{id_itineraire,#ID_ITINERAIRE}
+})]
+
+<a href="#URL_ECRIRE{itineraires}"><:itineraire:titre_itineraires:></a><span class="sep"> &gt;
+</span><a href="[(#GET{id_itineraire}|generer_url_entite{itineraire})]">#INFO_TITRE{itineraire,#GET{id_itineraire}}</a><span class="sep"> &gt;
+</span><strong>[(#INFO_TITRE{itineraires_etape,#ID_ITINERAIRES_ETAPE}|sinon{<:info_sans_titre:>})]</strong>

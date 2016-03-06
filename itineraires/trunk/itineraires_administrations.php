@@ -24,7 +24,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function itineraires_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_itineraires', 'spip_itineraires_locomotions')));
+	$maj['create'] = array(
+		array('maj_tables', array('spip_itineraires', 'spip_itineraires_locomotions')),
+	);
+	
+	// Ajouter les étapes
+	$maj['1.1.0'] = array(
+		array('maj_tables', array('spip_itineraires_etapes')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -39,9 +46,9 @@ function itineraires_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function itineraires_vider_tables($nom_meta_base_version) {
-
 	sql_drop_table("spip_itineraires");
 	sql_drop_table("spip_itineraires_locomotions");
+	sql_drop_table("spip_itineraires_etapes");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('itineraire')));
@@ -50,5 +57,3 @@ function itineraires_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

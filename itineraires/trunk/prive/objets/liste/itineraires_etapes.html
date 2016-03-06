@@ -1,0 +1,50 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	rang,1,
+	id_itineraire,1,
+	id_itineraires_etape,1,
+	points,-1
+}})]<B_liste_itineraires_etapes>
+#ANCRE_PAGINATION
+<div class="liste-objets itineraires_etapes">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{itineraires_etape:info_1_itineraires_etape,itineraires_etape:info_nb_itineraires_etapes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="rang" scope="col">[(#TRI{rang,<abbr title="<:itineraires_etape:champ_rang_label:>">#</abbr>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:itineraires_etape:champ_titre_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_itineraires_etapes(ITINERAIRES_ETAPES){id_itineraire?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,50}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="rang">#RANG</td>
+			<td class="titre principale">[(#LOGO_ITINERAIRES_ETAPE|image_reduire{20,26})]<a href="[(#ID_ITINERAIRES_ETAPE|generer_url_entite{itineraires_etape})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ITINERAIRES_ETAPE">#TITRE</a></td>
+			<td class="action">
+				[(#AUTORISER{modifier,itineraires_etape,#ID_ITINERAIRES_ETAPE}|oui)
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{etape_haut-16.png}|balise_img{<:prout:>})],
+						#URL_ACTION_AUTEUR{deplacer_itineraires_etape, #ID_ITINERAIRES_ETAPE-haut, #SELF},
+						ajax link
+					})]
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{etape_bas-16.png}|balise_img{<:caca:>})],
+						#URL_ACTION_AUTEUR{deplacer_itineraires_etape, #ID_ITINERAIRES_ETAPE-bas, #SELF},
+						ajax link
+					})]
+					
+					<a href="[(#URL_ECRIRE{itineraires_etape_edit,id_itineraires_etape=#ID_ITINERAIRES_ETAPE}|parametre_url{redirect,#VAL{&}|self})]">
+						[(#CHEMIN_IMAGE{edit-24.png}|balise_img{<:itineraires_etape:icone_modifier_itineraires_etape:> #ID_ITINERAIRES_ETAPE})]
+					</a>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_itineraires_etapes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_itineraires_etapes>[
+<div class="liste-objets itineraires_etapes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_itineraires_etapes>

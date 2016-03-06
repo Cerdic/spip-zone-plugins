@@ -339,6 +339,3 @@ function formulaires_editer_itineraire_traiter_dist($id_itineraire='new', $retou
 	
 	return $retours;
 }
-
-
-?>

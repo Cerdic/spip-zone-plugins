@@ -68,5 +68,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_itineraire' => 'Langue de cet itinéraire',
 	'titre_logo_itineraire' => 'Logo de cet itinéraire',
 );
-
-?>
