@@ -31,7 +31,7 @@
 
 	<!-- <lib nom="jquery.imgareaselect.js" lien="https://github.com/odyniec/imgareaselect/archive/master.zip" /> -->
 
-	<necessite nom="medias" />
-	<necessite nom="saisies" />
+	<necessite nom="medias" compatibilite="[2.7.59;[" />
+	<necessite nom="saisies" compatibilite="[2.6.1;[" />
 
 </paquet>
