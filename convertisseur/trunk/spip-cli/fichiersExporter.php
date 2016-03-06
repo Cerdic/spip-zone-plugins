@@ -145,7 +145,7 @@ class fichiersExporter extends Command {
 					
 					foreach($motscles as $mc){
 						if($mc['titre'])
-							$ins_mc[] = $mc['titre'] ;
+							$ins_mc[] = $mc['type'] . "::" . $mc['titre'] ;
 					}	
 						
 					$motscles = join("@@", $ins_mc) ;
@@ -159,7 +159,7 @@ class fichiersExporter extends Command {
 					if($auteurs)
 						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
 					if($motscles)
-						$fichier = "<ins class='motscles'>$motscles</ins>\n" . $fichier ;
+						$fichier = "<ins class='mots_cles'>$motscles</ins>\n" . $fichier ;
 					if($titre_parent && $titre_rubrique)
 						$fichier = "<ins class='hierarchie'>$titre_parent@@$titre_rubrique</ins>\n" . $fichier ;
 				
