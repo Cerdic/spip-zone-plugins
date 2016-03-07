@@ -18,7 +18,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_itineraires_etapes(ITINERAIRES_ETAPES){id_itineraire?}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,50}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" data-etape="#ID_ITINERAIRES_ETAPE">
 			<td class="rang">#RANG</td>
 			<td class="titre principale">[(#LOGO_ITINERAIRES_ETAPE|image_reduire{20,26})]<a href="[(#ID_ITINERAIRES_ETAPE|generer_url_entite{itineraires_etape})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ITINERAIRES_ETAPE">#TITRE</a></td>
 			<td class="action">
@@ -45,6 +45,43 @@
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){
+	$(function(){
+		$('.itineraires_etapes tbody').sortable({
+			items:"tr",
+			cursor:"move",
+			axis:'y'
+		});
+		$('.itineraires_etapes tbody').disableSelection();
+		
+		$('.itineraires_etapes tbody').on('sortupdate', function(event, ui) {
+			// URL de base de l'action
+			var url_action = '[(#VAL{deplacer_itineraires_etape}|generer_url_action{"", 1})]';
+			// On récupère l'identifiant de l'étape qui a bougé
+			var id_etape = ui.item.data('etape');
+			// On calcule le rang où elle arrive à la fin
+			var rang = ui.item.index() + 1;
+			
+			// URL finale
+			url_action = parametre_url(url_action, 'arg', id_etape + '-' + rang)
+			
+			//console.log(url_action);
+			
+			var request = $.ajax({
+				type: 'POST',
+				url: url_action
+			});
+			request.done(function() {
+				$('.itineraires_etapes').ajaxReload();
+			});
+		});
+	});
+})(jQuery);
+/*]]>*/
+</script>
+
 </B_liste_itineraires_etapes>[
 <div class="liste-objets itineraires_etapes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_itineraires_etapes>

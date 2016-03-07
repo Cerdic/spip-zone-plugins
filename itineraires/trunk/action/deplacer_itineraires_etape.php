@@ -15,8 +15,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function action_deplacer_itineraires_etape_dist($arg=null) {
 	if (is_null($arg)) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
+		// DEMI sécurité : s'il y a un hash, on teste la sécurité
+		if (_request('hash')) {
+			$securiser_action = charger_fonction('securiser_action', 'inc');
+			$arg = $securiser_action();
+		}
+		// Sinon, on prend l'arg direct
+		else {
+			$arg = _request('arg');
+		}
 	}
 	
 	// Argument de la forme "123-haut" ou "123-bas" ou "123-3" (rang précis)
@@ -41,7 +48,6 @@ function action_deplacer_itineraires_etape_dist($arg=null) {
 		$dernier_rang = sql_getfetsel('rang', 'spip_itineraires_etapes', 'id_itineraire = '.$id_parent, '', 'rang desc', '0,1');
 		
 		// On teste maintenant les différents cas
-		$nouveau_rang = null;
 		if ($deplacement === 'bas') {
 			// Si c'était tout en bas, on remonte en haut
 			if ($rang >= $dernier_rang) {

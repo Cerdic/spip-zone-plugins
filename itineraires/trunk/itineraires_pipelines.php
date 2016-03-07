@@ -95,5 +95,24 @@ function itineraires_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-
-?>
+/**
+ * Pipeline jqueryui_forcer pour demander au plugin l'insertion des scripts pour .sortable()
+ *
+ * @param array $plugins
+ * @return array
+ */
+function itineraires_jqueryui_plugins($plugins) {
+	include_spip('inc/config');
+	
+	// On envoie que si on est dans l'espace prive et qu'il y a des étapes
+    if(test_espace_prive() and lire_config('itineraires/activer_etapes', false)) {
+		$plugins[] = "jquery.ui.core";
+		$plugins[] = "jquery.ui.widget";
+		$plugins[] = "jquery.ui.mouse";
+		$plugins[] = "jquery.ui.sortable";
+		$plugins[] = "jquery.ui.droppable";
+		$plugins[] = "jquery.ui.draggable";
+    }
+    
+	return $plugins;
+}
