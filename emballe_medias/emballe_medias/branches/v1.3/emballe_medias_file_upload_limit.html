@@ -11,7 +11,7 @@
 </B_objet_env>
 [(#REM) Sinon, si l'option "chercher_article" est active, récupérer le nombre de docs attachés à l'objet en prop ou prepa ]
 <BOUCLE_chercher_objet(CONDITION){si #CONFIG{emballe_medias/fichiers/chercher_article}|=={on}|oui}>
-	[(#SET{req_en_cours,[select objet.[(#ENV{objet}|id_table_objet)] as id, from (#ENV{objet}|table_objet_sql) as #ENV{objet} left join spip_auteurs_liens as lien ON lien.objet=#ENV{objet} AND lien.id_objet=objet.id_objet where id_auteur=[(#ENV{id_auteur})][ AND em_type="(#ENV{em_type})"] AND statut IN ('prop','prepa')] LIMIT 0,1})]
+	[(#SET{req_en_cours,[SELECT [(#ENV{objet})].[(#ENV{objet}|id_table_objet)] AS id FROM (#ENV{objet}|table_objet_sql) AS[ (#ENV{objet}) ]LEFT JOIN spip_auteurs_liens AS lien ON  [(#ENV{objet})].[(#ENV{objet}|id_table_objet)]=lien.id_objet WHERE lien.objet=[(#ENV{objet}|sql_quote)] AND lien.id_auteur=[(#ENV{id_auteur}|intval)][ AND em_type="(#ENV{em_type})"] AND [(#ENV{objet})].statut IN ('prop','prepa')] LIMIT 1})]
 	<BOUCLE_documents_en_cours_bis(DATA){source sql,#GET{req_en_cours}}>
 		<BOUCLE_doc_bis(DOCUMENTS spip_documents_liens){id_objet=#VALEUR{id}}{objet=#ENV{objet}}{par id_document}{inverse}{tout}> </BOUCLE_doc_bis>
 		[(#SET{result,#TOTAL_BOUCLE})]
