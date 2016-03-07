@@ -137,9 +137,13 @@ function selections_editoriales_afficher_complement_objet($flux){
 		and autoriser('associerselections', $type, $id)
 		and autoriser('creer', 'selection')
 	 ) {
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/selections_objet', array(
-			'objet' => $type,
-			'id_objet' => $id,
+		$flux['data'] .= recuperer_fond(
+			'prive/squelettes/inclure/selections_objet',
+			array(
+				'objet' => $type,
+				'id_objet' => $id,
+				'editer_contenu' => _request('editer_contenu'),
+				'editer_contenu_logo' => _request('editer_contenu_logo'),
 			),
 			array('ajax'=>'selections')
 		);
