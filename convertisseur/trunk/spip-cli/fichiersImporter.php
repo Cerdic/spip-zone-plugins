@@ -284,6 +284,7 @@ class fichiersImporter extends Command {
 	    							$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
 									sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
 	    						}
+	    						// prevoir de recaler les liens aussi [->123456]
 							}
 						}
 
