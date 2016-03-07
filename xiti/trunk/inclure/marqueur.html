@@ -56,7 +56,11 @@
 	<div id="xiti-tag">
 		<script type="text/javascript">
 			// Si le plugin cookiebar est installé
-			var cookie = window.jQuery.cookieBar ? jQuery.cookieBar('cookies') : true;
+			var cookie = true;
+			if(window.jQuery && window.jQuery.cookieBar){
+				cookie = jQuery.cookieBar('cookies');
+			}
+
 			if(cookie) {
 				<!--
 				xtnv = #CONFIG{xiti/xtnv_xiti};	//parent.document or top.document or document
