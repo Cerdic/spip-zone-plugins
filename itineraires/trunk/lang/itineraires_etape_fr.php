@@ -14,6 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_texte_label' => 'Texte',
 	'champ_titre_label' => 'Titre',
 	
+	// D
+	'deplacer_apres' => 'Déplacer après',
+	'deplacer_avant' => 'Déplacer avant',
+	
 	// I
 	'icone_creer_itineraires_etape' => 'Créer une étape',
 	'icone_modifier_itineraires_etape' => 'Modifier cette étape',

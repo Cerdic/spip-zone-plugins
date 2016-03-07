@@ -24,12 +24,12 @@
 			<td class="action">
 				[(#AUTORISER{modifier,itineraires_etape,#ID_ITINERAIRES_ETAPE}|oui)
 					[(#BOUTON_ACTION{
-						[(#CHEMIN_IMAGE{etape_haut-16.png}|balise_img{<:prout:>})],
+						[(#CHEMIN_IMAGE{etape_haut-16.png}|balise_img{<:itineraires_etape:deplacer_avant:>})],
 						#URL_ACTION_AUTEUR{deplacer_itineraires_etape, #ID_ITINERAIRES_ETAPE-haut, #SELF},
 						ajax link
 					})]
 					[(#BOUTON_ACTION{
-						[(#CHEMIN_IMAGE{etape_bas-16.png}|balise_img{<:caca:>})],
+						[(#CHEMIN_IMAGE{etape_bas-16.png}|balise_img{<:itineraires_etape:deplacer_apres:>})],
 						#URL_ACTION_AUTEUR{deplacer_itineraires_etape, #ID_ITINERAIRES_ETAPE-bas, #SELF},
 						ajax link
 					})]
