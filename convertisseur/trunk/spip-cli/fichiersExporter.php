@@ -120,7 +120,8 @@ class fichiersExporter extends Command {
 					// hierarchie
 					$titre_rubrique = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
 					$id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
-					$titre_parent = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_parent");
+					if($id_parent)
+						$titre_parent = sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_parent");
 					
 					// auteurs spip 3
 					if($spip_version_branche > "3")
@@ -154,7 +155,7 @@ class fichiersExporter extends Command {
 					}
 
 					// documents joints
-					$documents = sql_allfetsel("*", "spip_documents_liens dl, spip_documents d", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
+					$documents = sql_allfetsel("*", "spip_documents d", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
 					foreach($documents as $doc)
 							$ins_doc[] = json_encode($doc) ;
 					if(is_array($ins_doc)){

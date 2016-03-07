@@ -40,6 +40,13 @@ class fichiersImporter extends Command {
 				'id_rubrique de la rubrique où importer les numéros et leurs articles',
 				'0'
 			)
+			->addOption(
+				'racine_documents',
+				'r',
+				InputOption::VALUE_OPTIONAL,
+				'path ajouté devant le `fichier` des documents joints importés',
+				''
+			)
 		;
 	}
 
@@ -51,7 +58,8 @@ class fichiersImporter extends Command {
 		include_spip("iterateur/data");
 		
 		$source = $input->getOption('source') ;
-		$id_parent = $input->getOption('dest') ;		
+		$id_parent = $input->getOption('dest') ;
+		$racine_documents = $input->getOption('racine_documents') ;		
 				
 		// Répertoire source, ou arrivent les fichiers Quark (/exports_quark par défaut).
 		if(!is_dir($source)){
@@ -78,6 +86,9 @@ class fichiersImporter extends Command {
 				include_spip("base/abstract_sql");
 				$show = sql_showtable("spip_articles");
 				$champs = array_keys($show['field']);
+				
+				$show = sql_showtable("spip_documents");
+				$champs_documents = array_keys($show['field']);
 
 				/*
 				if(!in_array('signature', $champs))
@@ -154,7 +165,8 @@ class fichiersImporter extends Command {
 					include_spip("inc/rubriques");
 					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
 					$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
-																
+					
+					$progress->setMessage("", 'docs');											
 					$progress->setMessage("", 'mot');
 					$progress->setMessage("", 'auteur');
 					
@@ -179,7 +191,9 @@ class fichiersImporter extends Command {
     										"nom" => $auteur,
     										"statut" => "1comite"
     								));
-    								$progress->setMessage("Création de l'auteur " . $auteur, 'auteur');
+    								
+    								$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
+    								$progress->setMessage($auteur_m, 'auteur');
 								}
 							
 								if($spip_version_branche > "3"){
@@ -217,7 +231,8 @@ class fichiersImporter extends Command {
     									"type" => $type_mot,
     									"id_groupe" => $id_groupe_mot
     								));
-   									$progress->setMessage("Création du mot " . $titre_mot . " (" . $type_mot .")", 'mot');
+    								$mot_m = substr("Création du mot " . $titre_mot . " (" . $type_mot .")", 0, 100) ;
+   									$progress->setMessage($mot_m, 'mot');
 								}
 
 								if($spip_version_branche > "3"){
@@ -240,21 +255,35 @@ class fichiersImporter extends Command {
 						if($documents){
 							foreach($documents as $doc){
 								$d = json_decode($doc, true);
+								$id_doc = $d['id_document'] ;
+								unset($d['id_document']);
+								$d['fichier'] = $racine_documents . $d['fichier'] ;
+								
+								// champs ok dans les documents ?
+								foreach($d as $k => $v)
+									if(in_array($k, $champs_documents))
+										$document_a_inserer[$k] = $v ;
+								
+								// insertion du doc
 								$id_document = sql_getfetsel("id_document", "spip_documents", "fichier=" . sql_quote($d['fichier']));
-								if(!$id_document){
-									$id_doc = $doc['id_document'] ;
-									//unset($doc['id_document']);
-									//$id_document = sql_insertq("spip_documents", $doc);
+								if(!$id_document){									
+									$id_document = sql_insertq("spip_documents", $document_a_inserer);
    									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
 								}
-
-								//if(!sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
-								//	sql_insertq("spip_documents_liens", array(
-	    						//			"id_document" => $id_document,
-	    						//			"id_objet" => $id_article,
-	    						//			"objet" => "article"
-	    						//));
-								
+								if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
+									sql_insertq("spip_documents_liens", array(
+	    									"id_document" => $id_document,
+	    									"id_objet" => $id_article,
+	    									"objet" => "article"
+	    						));
+	    						
+	    						// modifier le texte qui appelle peut etre un <doc123>
+	    						if($id_document){
+	    							// ressortir le texte propre...
+	    							$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article");
+	    							$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
+									sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
+	    						}
 							}
 						}
 
