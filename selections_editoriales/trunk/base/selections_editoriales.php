@@ -22,7 +22,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Déclarations d'interface pour le compilateur
  */
 function selections_editoriales_declarer_tables_interfaces($interfaces) {
-
 	$interfaces['table_des_tables']['selections'] = 'selections';
 	$interfaces['table_des_tables']['selections_contenus'] = 'selections_contenus';
 	
@@ -74,6 +73,7 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_selections_contenu" => "bigint(21) NOT NULL",
 			"id_selection"       => "bigint(21) NOT NULL DEFAULT 0",
+			'rang'               => 'int not null default 0',
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"url"                => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
@@ -85,8 +85,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('titre', 'url', 'descriptif', 'id_selection', 'css'),
-		'champs_versionnes' => array('titre', 'url', 'descriptif', 'css'),
+		'champs_editables'  => array('rang', 'titre', 'url', 'descriptif', 'id_selection', 'css',),
+		'champs_versionnes' => array('titre', 'url', 'descriptif', 'css',),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 4),
 		'tables_jointures'  => array(),
 		
@@ -123,6 +123,3 @@ function selections_editoriales_declarer_tables_auxiliaires($tables) {
 
 	return $tables;
 }
-
-
-?>

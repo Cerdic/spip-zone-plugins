@@ -33,10 +33,53 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 		array('maj_tables', array('spip_selections_contenus')),
 	);
 	
+	// Ajouter un vrai champ "rang" et le peupler
+	$maj['1.4.0'] = array(
+		array('maj_tables', array('spip_selections_contenus')),
+		array('selections_editoriales_maj_1_4_0'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+// Peupler le nouveau vrai champ "rang"
+function selections_editoriales_maj_1_4_0() {
+	// On cherche toutes les sélections
+	if ($selections = sql_allfetsel('id_selection', 'spip_selections')) {
+		foreach ($selections as $selection) {
+			$id_selection = intval($selection['id_selection']);
+			
+			// On cherche tous les contenus, déjà classés dans le bon ordre
+			if ($contenus = sql_allfetsel(
+				'id_selections_contenu, titre, 0+titre as num',
+				'spip_selections_contenus',
+				'id_selection = '.$id_selection,
+				'',
+				'num,titre'
+			)) {
+				include_spip('inc/filtres');
+				
+				$rang = 1;
+				foreach ($contenus as $contenu) {
+					$id_selections_contenu = intval($contenu['id_selections_contenu']);
+					
+					// On met à jour le rang et le titre sans l'ancien numéro
+					sql_updateq(
+						'spip_selections_contenus',
+						array(
+							'rang' => $rang,
+							'titre' => supprimer_numero($contenu['titre']),
+						),
+						'id_selections_contenu = '.$id_selections_contenu
+					);
+					
+					$rang++;
+				}
+			}
+		}
+	}
+}
 
 /**
  * Fonction de désinstallation du plugin Sélections éditoriales.

@@ -165,4 +165,22 @@ function selections_editoriales_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-?>
+/**
+ * Pipeline jqueryui_plugins pour demander au plugin l'insertion des scripts pour .sortable()
+ *
+ * @param array $plugins
+ * @return array
+ */
+function selections_editoriales_jqueryui_plugins($plugins) {
+	// On envoie que si on est dans l'espace prive
+    if(test_espace_prive()) {
+		$plugins[] = "jquery.ui.core";
+		$plugins[] = "jquery.ui.widget";
+		$plugins[] = "jquery.ui.mouse";
+		$plugins[] = "jquery.ui.sortable";
+		$plugins[] = "jquery.ui.droppable";
+		$plugins[] = "jquery.ui.draggable";
+    }
+    
+	return $plugins;
+}
