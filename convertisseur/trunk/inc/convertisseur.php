@@ -641,6 +641,14 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		}
 	}
 
+	// stocker l'id_article en id_source pour permettre le ré-examen des liens [->123] 
+	$id_source = $c["id_article"] ;
+
+	// attention les conflits		
+	unset($c["id_article"]);
+	unset($c["id_secteur"]);
+	unset($c["id_rubrique"]);
+
 	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute dans le champs metadonnees ou a défaut ostensiblement en haut du texte.
 	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
 		foreach($z as $d){
@@ -655,13 +663,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	}
 	
 	$c['texte'] = preg_replace("/\n\n+/m", "\n\n", $c['texte']);
-
-	// on ne retient pas l'id_article pour éviter des collisions éventuelles
-	unset($c["id_article"]);
-	
-	// on ne retient pas l'id_rubrique et secteur car ce ne sont pas les memes d'un site à l'autre	
-	unset($c["id_secteur"]);
-	unset($c["id_rubrique"]);
+	$c['id_source'] = $id_source ;
 
 	$r = array();
 	foreach ($c as $var => $val)

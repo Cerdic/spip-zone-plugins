@@ -105,6 +105,10 @@ class fichiersImporter extends Command {
 				if(!in_array('metadonnees', $champs))
 					sql_query("alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
 
+				// Ajout d'un champ la premiere fois pour stocker l'id_article original (pour ensuite remapper les liens [->123]).
+				if(!in_array('id_source', $champs))
+					sql_query("alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
+
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 
 				// start and displays the progress bar
@@ -114,6 +118,13 @@ class fichiersImporter extends Command {
 				$progress->setMessage(" Import de $source/*.txt en cours dans la rubrique $id_parent ... ", 'message'); /**/  
 				$progress->setMessage("", 'inforub');
 				$progress->start();
+
+				if(is_file("liens_a_corriger.txt"))
+					unlink("liens_a_corriger.txt");
+				if(is_file("liens_non_corriges.txt"))
+					unlink("liens_non_corriges.txt");
+				if(is_file("liens_corriges.txt"))
+					unlink("liens_corriges.txt");
 
 				foreach($fichiers as $f){
 
@@ -133,24 +144,19 @@ class fichiersImporter extends Command {
 					$texte = preg_replace("/@@COLLECTION.*/", "", $texte);
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 					
+					
 					// Si des <ins> qui correspondent à des champs metadonnees connus,on les ajoute.
 					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
 					$hierarchie = "" ;
 					$auteurs = "" ;
 					$mots_cles = "" ;
 					$documents = "" ;					
-	
-					if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){
-						foreach($z as $d){
-							if(in_array($d[1], $champs_metadonnees)){
-								// class="truc" => $truc
-								$$d[1] = split("@@", $d[2]);
-								// virer du texte
-								$texte = substr_replace($texte, '', strpos($texte, $d[0]), strlen($d[0]));
-							}
-						}
-					}
 					
+					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
+							$id_source = $z[1] ;
+
+					
+					// dans quelle rubrique importer ?
 					if($hierarchie){
 						$titre_parent = $hierarchie[0] ;
 						$titre_rubrique = $hierarchie[1] ;
@@ -173,7 +179,7 @@ class fichiersImporter extends Command {
 					// inserer l'article
 					include_spip("inc/convertisseur");
 
-					// auteur par défaut 
+					// auteur par défaut (admin)
 					$id_admin = sql_getfetsel("id_auteur", "spip_auteurs", "id_auteur=1");
 					$id_admin = ($id_admin)? $id_admin : 12166 ;
 
@@ -181,7 +187,7 @@ class fichiersImporter extends Command {
 			
 					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
 						
-						// l'auteur existe t'il ? Le créer.
+						// Créer l'auteur ?
 						if($auteurs){
 
 							foreach($auteurs as $auteur){
@@ -284,9 +290,13 @@ class fichiersImporter extends Command {
 	    							$texte = preg_replace("/(<(doc|img|emb))". $id_doc . "/i", "\${1}" . $id_document, $texte);
 									sql_update("spip_articles", array("texte" => sql_quote($texte)), "id_article=$id_article");
 	    						}
-	    						// prevoir de recaler les liens aussi [->123456]
 							}
 						}
+						
+						// recaler des liens [->123456] ?
+						include_spip("inc/lien");
+						if(preg_match(_RACCOURCI_LIEN, $texte))
+							passthru("echo '$id_article	$id_source' >> liens_a_corriger.txt");
 
 						// Si tout s'est bien passé, on avance la barre
 						$progress->setMessage($f, 'filename');
@@ -301,7 +311,38 @@ class fichiersImporter extends Command {
 
 				// ensure that the progress bar is at 100%
 				$progress->finish();
+				
+				// remapper les liens [->12345]
+				lire_fichier("liens_a_corriger.txt", $articles);
+				$corrections_liens = inc_file_to_array_dist($articles);
+				foreach($corrections_liens as $k => $v){
+					if($v){
+						list($id_article, $id_source) = explode("\t", $v);
+						$texte = sql_getfetsel("texte", "spip_articles", "id_article=$id_article") ;
+						// recaler des liens [->123456] ?
+						include_spip("inc/lien");
+						if(preg_match_all(_RACCOURCI_LIEN, $texte, $liens, PREG_SET_ORDER)){
+							foreach($liens as $l){
+								if(preg_match("/^[0-9]+$/", $l[4])){	
+									// trouver l'article dont l'id_source est $l[4] dans le secteur
+									if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
+										$lien = escapeshellarg($l[0] . " => " . str_replace($l[4], $id_dest, $l[0]));
+										passthru("echo $lien >> liens_corriges.txt");
+									}else{
+										$commande = escapeshellarg("Dans $id_article " . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
+										passthru("echo $commande >> liens_non_corriges.txt");
+									}	
+									
+								}
+							}	
+						}		
+												
+					}
+				}
+
 				$output->writeln("");
+				if(is_file("liens_a_corriger.txt"))
+					unlink("liens_a_corriger.txt");
 
 			}
 		}
