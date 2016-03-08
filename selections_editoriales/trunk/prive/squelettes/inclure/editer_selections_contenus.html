@@ -29,6 +29,7 @@
 						#URL_ACTION_AUTEUR{deplacer_selections_contenu, #ID_SELECTIONS_CONTENU-bas, #SELF},
 						ajax link
 					})]
+					[(#CHEMIN_IMAGE{rang_deplacer-16.png}|balise_img{<:selections_contenu:deplacer:>, deplacer})]
 				]
 			</div>
 			]
@@ -65,11 +66,11 @@
 ;(function($){
 	$(function(){
 		$('#editer_selections_contenus-#ID_SELECTION').sortable({
-			items:".item",
-			cursor:"move",
-			axis:'y'
+			items : '.item',
+			handle : '.deplacer',
+			cursor : 'move',
+			axis : 'y'
 		});
-		$('#editer_selections_contenus-#ID_SELECTION').disableSelection();
 		
 		$('#editer_selections_contenus-#ID_SELECTION').on('sortupdate', function(event, ui) {
 			// URL de base de l'action
