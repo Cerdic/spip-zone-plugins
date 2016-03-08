@@ -71,7 +71,7 @@ function clil_declarer_tables_objets_sql($tables) {
 }
 
 function clil_declarer_champs_extras($champs = array()) {
-
+	include_spip('base/abstract_sql');
 	// étape 1 : récupérer les datas 
 	$datas = array();
 
