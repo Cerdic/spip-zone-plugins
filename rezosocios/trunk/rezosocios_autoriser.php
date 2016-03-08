@@ -15,6 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
+
+/**
+ * Fonction vide pour charger ce fichier sans declencher de warning
+ *
+ * @return void
+ */
+function rezosocios_autoriser() { }
+
+
+
 function autoriser_rezosocio_creer_dist($faire, $type, $id, $qui, $opt) {
 	if (!in_array($qui['statut'],array('0minirezo','1comite')))
 		return false;
