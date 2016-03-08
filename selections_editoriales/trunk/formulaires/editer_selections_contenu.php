@@ -154,6 +154,25 @@ function formulaires_editer_selections_contenu_traiter_dist($id_selections_conte
 		set_request('rang', $dernier_rang + 1);
 	}
 	
+	// On défini l'objet et id_objet
+	if ($url = _request('url') and $trouve = typer_raccourci($url)) {
+		include_spip('inc/lien');
+		include_spip('base/objets');
+		
+		@list($objet, , $id_objet, , $args, , $ancre) = $trouve;
+		$objet = objet_type(table_objet($objet));
+		
+		if ($objet and $id_objet) {
+			set_request('objet', $objet);
+			set_request('id_objet', $id_objet);
+		}
+	}
+	// Sinon il faut être sûr de les vider !
+	else {
+		set_request('objet', '');
+		set_request('id_objet', '');
+	}
+	
 	// On appelle le traitement générique
 	$retours = formulaires_editer_objet_traiter('selections_contenu',$id_selections_contenu,'',0,$retour,$config_fonc,$row,$hidden);
 	

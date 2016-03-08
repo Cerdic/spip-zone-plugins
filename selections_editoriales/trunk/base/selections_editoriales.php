@@ -78,6 +78,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 			"url"                => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"css"                => "varchar(255) not null default ''",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -85,8 +87,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('rang', 'titre', 'url', 'descriptif', 'id_selection', 'css',),
-		'champs_versionnes' => array('titre', 'url', 'descriptif', 'css',),
+		'champs_editables'  => array('rang', 'objet', 'id_objet', 'titre', 'url', 'descriptif', 'id_selection', 'css',),
+		'champs_versionnes' => array('objet', 'id_objet', 'titre', 'url', 'descriptif', 'css',),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 4),
 		'tables_jointures'  => array(),
 		
@@ -107,7 +109,6 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
  *     Description complétée des tables
  */
 function selections_editoriales_declarer_tables_auxiliaires($tables) {
-
 	$tables['spip_selections_liens'] = array(
 		'field' => array(
 			"id_selection"       => "bigint(21) DEFAULT '0' NOT NULL",

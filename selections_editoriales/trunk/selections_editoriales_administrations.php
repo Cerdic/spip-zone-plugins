@@ -39,6 +39,12 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 		array('selections_editoriales_maj_1_4_0'),
 	);
 	
+	// Ajouter les champs objet/id_objet et les peupler
+	$maj['1.5.0'] = array(
+		array('maj_tables', array('spip_selections_contenus')),
+		array('selections_editoriales_maj_1_5_0'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -47,6 +53,8 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 function selections_editoriales_maj_1_4_0() {
 	// On cherche toutes les sélections
 	if ($selections = sql_allfetsel('id_selection', 'spip_selections')) {
+		include_spip('inc/filtres');
+		
 		foreach ($selections as $selection) {
 			$id_selection = intval($selection['id_selection']);
 			
@@ -58,8 +66,6 @@ function selections_editoriales_maj_1_4_0() {
 				'',
 				'num,titre'
 			)) {
-				include_spip('inc/filtres');
-				
 				$rang = 1;
 				foreach ($contenus as $contenu) {
 					$id_selections_contenu = intval($contenu['id_selections_contenu']);
@@ -76,6 +82,31 @@ function selections_editoriales_maj_1_4_0() {
 					
 					$rang++;
 				}
+			}
+		}
+	}
+}
+
+// Peupler les objet/id_objet pour les contenus déjà là
+function selections_editoriales_maj_1_5_0() {
+	// On cherche tous les contenus, peu importe la sélection
+	if ($contenus = sql_allfetsel('id_selections_contenu, url', 'spip_selections_contenus')) {
+		include_spip('inc/lien');
+		include_spip('base/objets');
+		
+		foreach ($contenus as $contenu) {
+			$trouve = typer_raccourci($contenu['url']);
+			@list($objet, , $id_objet, , $args, , $ancre) = $trouve;
+			
+			if ($objet and $id_objet and $objet = objet_type(table_objet($objet))) {
+				sql_updateq(
+					'spip_selections_contenus',
+					array(
+						'objet' => $objet,
+						'id_objet' => $id_objet,
+					),
+					'id_selections_contenu = '.$contenu['id_selections_contenu']
+				);
 			}
 		}
 	}
