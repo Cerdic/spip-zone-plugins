@@ -98,15 +98,6 @@ function formulaires_editer_selections_contenu_verifier_dist($id_selections_cont
 		include_spip('inc/lien');
 		$url = _request('url');
 		
-		// On cherche la sélection parente
-		if ($id_contenu = intval($id_selections_contenu)){
-			$id_selection = sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_contenu);
-		}
-		
-		// On cherche le numéro à lui mettre pour le placer suivant son rang
-		$rang = intval(sql_countsel('spip_selections_contenus', 'id_selection = '.intval($id_selection)));
-		$rang = ($id_contenu ? $rang : ($rang+1)) * 10; // Si c'est une modif on garde le même rang
-		
 		// Si on ne trouve pas d'objet SPIP
 		if (!$infos = traiter_lien_implicite($url, '', 'tout')) {
 			// On cherche le <title> de l'URL
@@ -124,7 +115,7 @@ function formulaires_editer_selections_contenu_verifier_dist($id_selections_cont
 		}
 		
 		// On  génère le titre
-		set_request('titre', "$rang. $titre");
+		set_request('titre', $titre);
 	}
 	
 	return $erreurs;
@@ -153,15 +144,20 @@ function formulaires_editer_selections_contenu_verifier_dist($id_selections_cont
  *     Retours des traitements
  */
 function formulaires_editer_selections_contenu_traiter_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
-	// Si création, on met en mémoire la sélection parente
-	if (intval($id_selections_contenu) <= 0 and intval($id_selection) > 0){
-		set_request('id_selection', intval($id_selection));
+	$id_selection = intval($id_selection);
+	
+	// Si création, on met en mémoire la sélection parente et on génère le dernier rang
+	if (intval($id_selections_contenu) <= 0 and $id_selection > 0){
+		set_request('id_selection', $id_selection);
+		
+		$dernier_rang = sql_getfetsel('rang', 'spip_selections_contenus', 'id_selection = '.$id_selection, '', 'rang desc', '0,1');
+		set_request('rang', $dernier_rang + 1);
 	}
 	
 	// On appelle le traitement générique
 	$retours = formulaires_editer_objet_traiter('selections_contenu',$id_selections_contenu,'',0,$retour,$config_fonc,$row,$hidden);
 	
-	// On va chercher la vrai sélection si on a bien un contenu
+	// On va chercher la vraie sélection si on a bien un contenu
 	if ($id_contenu = intval($retours['id_selections_contenu'])) {
 		$id_selection = intval(sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_contenu));
 	}
