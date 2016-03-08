@@ -13,8 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
-function jqvmap_header_prive($flux)
-{
+function jqvmap_header_prive($flux) {
     $css = find_in_path('lib/jqvmap/jqvmap/jqvmap.css');
     $flux = $flux."\n<link href='$css' media='screen' rel='stylesheet' type='text/css' />\n";
     $js = find_in_path('lib/jqvmap/jqvmap/jquery.vmap.js');
@@ -23,19 +22,13 @@ function jqvmap_header_prive($flux)
     return $flux;
 }
 
-function jqvmap_affiche_droite($flux)
-{
-    if ($flux['args']['exec'] == 'maps') {
-        $flux['data'] .= recuperer_fond('prive/squelettes/inclure/importer_map');
-    }
-
+function jqvmap_insert_head_css($flux) {
+    $css = find_in_path('lib/jqvmap/jqvmap/jqvmap.css');
+    $flux = $flux."\n<link href='$css' media='screen' rel='stylesheet' type='text/css' />\n";
     return $flux;
 }
 
-function jqvmap_insert_head($flux)
-{
-    $css = find_in_path('lib/jqvmap/jqvmap/jqvmap.css');
-    $flux = $flux."\n<link href='$css' media='screen' rel='stylesheet' type='text/css' />\n";
+function jqvmap_insert_head($flux) {
     $js = find_in_path('lib/jqvmap/jqvmap/jquery.vmap.js');
     $flux = $flux."\n<script type='text/javascript' src='$js'></script>\n";
 
