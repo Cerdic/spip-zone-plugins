@@ -14,5 +14,5 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="affiche_gauche" inclure="dompdf_pipelines.php" />
-	<utilise nom="formidable" />
+	<utilise nom="formidable" compatibilite="[1.3.0;]" />
 </paquet>
