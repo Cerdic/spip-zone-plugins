@@ -19,12 +19,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre_label' => 'Titre',
 	'champ_url_explication' => 'L’URL d’une page (http://exemple) ou le raccourci d’un contenu SPIP (article123, rubrique456, etc).',
 	'champ_url_label' => 'URL',
-	
+
 	// D
 	'deplacer' => 'Faire glisser et déplacer ce contenu',
 	'deplacer_apres' => 'Déplacer après',
 	'deplacer_avant' => 'Déplacer avant',
-	
+
 	// I
 	'icone_creer_selections_contenu' => 'Créer un contenu sélectionné',
 	'icone_modifier_selections_contenu' => 'Modifier ce contenu sélectionné',
