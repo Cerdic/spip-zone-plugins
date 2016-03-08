@@ -145,16 +145,26 @@ class fichiersImporter extends Command {
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 					
 					
-					// Si des <ins> qui correspondent à des champs metadonnees connus,on les ajoute.
+					// Si des <ins> qui correspondent à des champs metadonnees connus, on les ajoute.
 					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
 					$hierarchie = "" ;
 					$auteurs = "" ;
 					$mots_cles = "" ;
 					$documents = "" ;					
+
+					if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
+						foreach($z as $d){ 
+							if(in_array($d[1], $champs_metadonnees)){ 
+								// class="truc" => $truc 
+								$$d[1] = split("@@", $d[2]); 
+								// virer du texte 
+								$texte = substr_replace($texte, '', strpos($texte, $d[0]), strlen($d[0])); 
+							} 
+						} 
+					}
 					
 					if (preg_match(",<ins class='id_article'>(.*?)</ins>,ims", $texte, $z))
 							$id_source = $z[1] ;
-
 					
 					// dans quelle rubrique importer ?
 					if($hierarchie){
@@ -326,10 +336,10 @@ class fichiersImporter extends Command {
 								if(preg_match("/^[0-9]+$/", $l[4])){	
 									// trouver l'article dont l'id_source est $l[4] dans le secteur
 									if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
-										$lien = escapeshellarg($l[0] . " => " . str_replace($l[4], $id_dest, $l[0]));
+										$lien = escapeshellarg("$id_article : " . $l[0] . " => " . str_replace($l[4], $id_dest, $l[0]));
 										passthru("echo $lien >> liens_corriges.txt");
 									}else{
-										$commande = escapeshellarg("Dans $id_article " . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
+										$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
 										passthru("echo $commande >> liens_non_corriges.txt");
 									}	
 									
