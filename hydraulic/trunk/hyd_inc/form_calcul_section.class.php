@@ -60,63 +60,25 @@ class form_calcul_section extends form_section {
     protected function get_environnement() {
         $valeurs = array(
             'choix_section' => 'FT',
-            'val_a_cal_nc'  => 'Hs',
+            'val_a_cal'  => 'Hs',
             'choix_champs_select' => $this->champs_select_calc
         );
         return $valeurs;
     }
 
     protected function calculer() {
-        include_spip('hyd_inc/section.class');
+        $this->creer_section_param();
 
         // On transforme les champs du tableau des données du formulaire en variables
-        foreach($this->data as $cle=>&$valeur){
-            ${$cle} = &$valeur;
-        }
-        // On élimine les champs superflus correspondants au type de section non sélectionnés
-        foreach(array_keys($this->data) as $k) {
-            if(substr($k,0,1)=='F' && substr($k,0,3)!=$choix_section.'_') {
-                unset($this->data[$k]);
-            }
-        }
-
-        // Instanciation des objets pour le calcul
-        $oParam= new cParam($rKs, $rQ, $rIf, $rPrec, $rYB);
-        switch($choix_section) {
-            case 'FT':
-                include_spip('hyd_inc/sectionTrapez.class');
-                $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
-                break;
-
-            case 'FR':
-                include_spip('hyd_inc/sectionRectang.class');
-                $oSection=new cSnRectang($oLog,$oParam,$FR_rLargeurFond);
-                break;
-
-            case 'FC':
-                include_spip('hyd_inc/sectionCirc.class');
-                $oSection=new cSnCirc($oLog,$oParam,$FC_rD);
-                break;
-
-            case 'FP':
-                include_spip('hyd_inc/sectionPuiss.class');
-                $oSection=new cSnPuiss($oLog,$oParam,$FP_rCoef,$FP_rLargeurBerge);
-                break;
-
-            default:
-                include_spip('hyd_inc/sectionTrapez.class');
-                $oSection=new cSnTrapez($oLog,$oParam,$FT_rLargeurFond,$FT_rFruit);
-
-        }
-        $oSection->rY = $rY;
+        extract($this->data, EXTR_OVERWRITE|EXTR_REFS);
 
         if(isset($ValVar) && $ValVar != ''){
             // Pointage de la variable qui varie sur le bon attribut
-            if($ValVar == 'rY' or in_array($ValVar, $this->get_champs_section())){
-                $oSection->{$ValVar} = &$i;
+            if($ValVar == 'rY' or in_array($ValVar, $this->get_champs_section($choix_section))){
+                $this->oSn->{$ValVar} = &$i;
             }
             else{
-                $oParam->{$ValVar} = &$i;
+                $this->oP->{$ValVar} = &$i;
             }
             // Définition de la variable à calculer
             $tVarCal = array($val_a_cal);
@@ -133,25 +95,23 @@ class form_calcul_section extends form_section {
             }
         }
 
-        $max += $pas/2;
-
         $tRes = array(); // Tableau des résultats (ordonnées)
         $tAbs = array(); // Tableau des abscisses
         for($i = $min; $i <= $max; $i+= $pas){
-            $oSection->Reset(true);
+            $this->oSn->Reset(true);
             $tAbs[] = $i;
             foreach($tVarCal as $sCalc){
-                $rY = $oSection->rY;
+                $rY = $this->oSn->rY;
                 if(!in_array($sCalc,array('Yn', 'Yc', 'Hsc'))){
-                    $tRes[] = $oSection->Calc($sCalc);
+                    $tRes[] = $this->oSn->Calc($sCalc);
                 }
                 else{
-                    $tRes[] = $oSection->CalcGeo($sCalc);
+                    $tRes[] = $this->oSn->CalcGeo($sCalc);
                 }
-                $oSection->rY = $rY;
+                $this->oSn->rY = $rY;
             }
         }
-        return array('abs'=>$tAbs,'res'=>$tRes,'tVarCal'=>$tVarCal,'oSection'=>$oSection);
+        return array('abs'=>$tAbs,'res'=>$tRes,'tVarCal'=>$tVarCal);
     }
 
 
@@ -189,9 +149,9 @@ class form_calcul_section extends form_section {
                 $par++;
             }
 
-            $lib_datas['rYB'] = $this->result['oSection']->oP->rYB;
+            $lib_datas['rYB'] = $this->oP->rYB;
             include_spip('hyd_inc/dessinSection.class');
-            $dessinSection = new dessinSection(250, 400, 100, $this->result['oSection'], $lib_datas);
+            $dessinSection = new dessinSection(250, 400, 100, $this->oSn, $lib_datas);
             $echo.= $dessinSection->GetDessinSection();
             return $echo;
         }

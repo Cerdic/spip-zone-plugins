@@ -303,15 +303,14 @@ function formulaires_calcul_ouvrages_traiter_dist() {
     }
     $tFlags = array();
     $tAbs = array();
+    $tRes = array();
+    $rInit = $datas[$datas['ValCal']];
+
     for($i = $min; $i <= $max; $i+= $pas){
         if(isset($datas['ValVar'])) {
             $Ouv->Set($datas['ValVar'],$i);
         }
-        if(!isset($tRes)) {
-            $rInit = $datas[$datas['ValCal']];
-            $tRes = array();
-        }
-        else {
+        if(end($tRes)!==false) {
             // Solution initiale = dernière solution trouvée
             $rInit = end($tRes);
         }

@@ -109,8 +109,10 @@ abstract class acSection {
         //~ spip_log($this,'hydraulic.'._LOG_DEBUG);
     }
 
+
     /**
      * Efface toutes les données calculées pour forcer le recalcul
+     * @param $bGeo Réinitialise les données de géométrie aussi
      */
     public function Reset($bGeo=true) {
         $this->arCalc = array();
@@ -118,6 +120,7 @@ abstract class acSection {
          $this->arCalcGeo = array();
       }
     }
+
 
     /**
      * Mémorise les données hydraulique en cours ou les restitue
@@ -153,74 +156,17 @@ abstract class acSection {
         if(!isset($this->arCalc[$sDonnee]) | (isset($this->arCalc[$sDonnee]) && !$this->arCalc[$sDonnee])) {
             // La donnée a besoin d'être calculée
             switch($sDonnee) {
-                case 'S' : // Surface mouillée
-                    $this->arCalc[$sDonnee] = $this->CalcS();
-                    break;
-                case 'P' : // Périmètre mouillé
-                    $this->arCalc[$sDonnee] = $this->CalcP();
-                    break;
-                case 'R' : // Rayon hydraulique
-                    $this->arCalc[$sDonnee] = $this->CalcR();
-                    break;
-                case 'B' : // Largeur au miroir
-                    $this->arCalc[$sDonnee] = $this->CalcB();
-                    break;
-                case 'J' : // Perte de charge linéaire
-                    $this->arCalc[$sDonnee] = $this->CalcJ();
-                    break;
-                case 'Fr' : // Froude
-                    $this->arCalc[$sDonnee] = $this->CalcFr();
-                    break;
-                case 'dP' : // dP/dY
-                    $this->arCalc[$sDonnee] = $this->CalcPder();
-                    break;
-                case 'dR' : // dR/dY
-                    $this->arCalc[$sDonnee] = $this->CalcRder();
-                    break;
-                case 'dB' : // dB/dY
-                    $this->arCalc[$sDonnee] = $this->CalcBder();
-                    break;
-                case 'V' : // Vitesse moyenne
-                    $this->arCalc[$sDonnee] = $this->CalcV();
-                    break;
-                case 'Hs' : // Charge spécifique
-                    $this->arCalc[$sDonnee] = $this->CalcHs();
-                    break;
-                case 'Yf' : // Tirant d'eau fluvial
-                    $this->arCalc[$sDonnee] = $this->CalcYf();
-                    break;
-                case 'Yt' : // Tirant d'eau torrentiel
-                    $this->arCalc[$sDonnee] = $this->CalcYt();
-                    break;
-                case 'Yco' : // Tirant d'eau conjugué
-                    $this->arCalc[$sDonnee] = $this->CalcYco();
-                    break;
-                case 'Tau0' : // Force tractrice ou contrainte de cisaillement
-                    $this->arCalc[$sDonnee] = $this->CalcTau0();
-                    break;
-                case 'SYg' : // Distance du centre de gravité de la section à la surface libre
-                    $this->arCalc[$sDonnee] = $this->CalcSYg();
-                case 'dSYg' : // Dérivée Distance du centre de gravité de la section à la surface libre
-                    $this->arCalc[$sDonnee] = $this->CalcSYgder();
-                    break;
-                case 'Imp' : // Impulsion hydraulique
-                    $this->arCalc[$sDonnee] = $this->CalcImp();
-                    break;
-                case 'Alpha' : // Angle Alpha de la surface libre par rapport au fond pour les sections circulaires
-                    $this->arCalc[$sDonnee] = $this->CalcAlpha();
-                    break;
-                case 'dAlpha' : // Dérivée de l'angle Alpha de la surface libre par rapport au fond pour les sections circulaires
-                    $this->arCalc[$sDonnee] = $this->CalcAlphaDer();
-                    break;
                 case 'I-J' : // Variation linéaire de l'énergie spécifique (I-J) en m/m
                     $this->arCalc[$sDonnee] = $this->oP->rIf-$this->Calc('J');
                     break;
+                default :
+                    $Methode = 'Calc_'.$sDonnee;
+                    $this->arCalc[$sDonnee] = $this->$Methode();
             }
         }
         //~ spip_log('Calc('.$sDonnee.')='.$this->arCalc[$sDonnee],'hydraulic.'._LOG_DEBUG);
         return $this->arCalc[$sDonnee];
     }
-
 
 
     /**
@@ -243,7 +189,7 @@ abstract class acSection {
             switch($sDonnee) {
                 case 'B' : // Largeur aux berges
 
-                    $this->arCalcGeo[$sDonnee] = $this->CalcB();
+                    $this->arCalcGeo[$sDonnee] = $this->Calc_B();
                     if($this->arCalcGeo[$sDonnee] < $this->oP->rYB / 100) {
                         // Section fermée
                         $this->bSnFermee = true;
@@ -252,20 +198,9 @@ abstract class acSection {
                     }
                     $this->rLargeurBerge = $this->arCalcGeo[$sDonnee];
                     break;
-                case 'S' : // Surface mouillée au niveau des berges
-                    $this->arCalcGeo[$sDonnee] = $this->CalcS();
-                    break;
-                case 'P' : // Périmètre mouillé au niveau des berges
-                    $this->arCalcGeo[$sDonnee] = $this->CalcP();
-                    break;
-                case 'Yc' : // Tirant d'eau critique
-                    $this->arCalcGeo[$sDonnee] = $this->CalcYc();
-                    break;
-                case 'Yn' : // Tirant d'eau normal
-                    $this->arCalcGeo[$sDonnee] = $this->CalcYn();
-                    break;
-                case 'Hsc' : // Charge spécifique critique
-                    $this->arCalcGeo[$sDonnee] = $this->CalcHsc();
+                default :
+                    $Methode = 'Calc_'.$sDonnee;
+                    $this->arCalcGeo[$sDonnee] = $this->$Methode();
             }
             //~ spip_log('CalcGeo('.$sDonnee.',rY='.$this->oP->rYB.')='.$this->arCalcGeo[$sDonnee],'hydraulic.'._LOG_DEBUG);
             $this->Swap(false); // On restitue les données hydrauliques en cours
@@ -273,13 +208,23 @@ abstract class acSection {
         return $this->arCalcGeo[$sDonnee];
     }
 
+
     /**
      * Calcul de la surface hydraulique.
      * @return La surface hydraulique
      */
-    protected function CalcS($rY) {
+    protected function Calc_S($rY) {
         //~ spip_log('section->CalcS(rY='.$rY.')='.($rY*$this->rLargeurBerge),'hydraulic.'._LOG_DEBUG);
         return $rY*$this->rLargeurBerge;
+    }
+
+
+    /**
+     * Calcul de la dérivée surface hydraulique.
+     * @return La surface hydraulique
+     */
+    protected function Calc_dS() {
+        return $this->rLargeurBerge;
     }
 
 
@@ -287,23 +232,26 @@ abstract class acSection {
     * Calcul du périmètre hydraulique.
     * @return Le périmètre hydraulique
     */
-    protected function CalcP($rY=0) {
+    protected function Calc_P($rY=0) {
         //~ spip_log('section->CalcP(rY='.$rY.')='.(2*$rY),'hydraulic.'._LOG_DEBUG);
         return 2*$rY;
     }
+
+
     /**
      * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
      * @return dP
      */
-    protected function CalcPder() {
+    protected function Calc_dP() {
         return 2;
     }
+
 
    /**
     * Calcul du rayon hydraulique.
     * @return Le rayon hydraulique
     */
-    protected function CalcR() {
+    protected function Calc_R() {
         if($this->Calc('P')!=0) {
             return $this->Calc('S')/$this->Calc('P');
         }
@@ -312,11 +260,12 @@ abstract class acSection {
         }
     }
 
+
     /**
      * Calcul de dérivée du rayon hydraulique par rapport au tirant d'eau.
      * @return dR
      */
-    protected function CalcRder() {
+    protected function Calc_dR() {
         if($this->Calc('P')!=0) {
             return ($this->Calc('B')*$this->Calc('P')-$this->Calc('S')*$this->Calc('dP'))/pow($this->Calc('P'),2);
         }
@@ -325,26 +274,30 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul de la largeur au miroir.
     * @return La largeur au miroir
     */
-    protected function CalcB() {
+    protected function Calc_B() {
         return $this->rLargeurBerge;
     }
+
+
     /**
      * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
      * @return dB
      */
-    protected function CalcBder() {
+    protected function Calc_dB() {
         return 0;
     }
+
 
    /**
     * Calcul de la perte de charge par la formule de Manning-Strickler.
     * @return La perte de charge
     */
-    private function CalcJ() {
+    private function Calc_J() {
         if($this->Calc('R')!=0) {
             return pow($this->Calc('V')/$this->oP->rKs,2)/pow($this->Calc('R'),4/3);
         }
@@ -353,11 +306,12 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul du nombre de Froude.
     * @return Le nombre de Froude
     */
-    private function CalcFr() {
+    private function Calc_Fr() {
         if($this->Calc('S')!=0) {
             return $this->oP->rQ/$this->Calc('S')*sqrt($this->Calc('B')/$this->Calc('S')/$this->oP->rG);
         }
@@ -369,7 +323,7 @@ abstract class acSection {
    /**
     * Calcul de dy/dx
     */
-    private function CalcdYdX($Y) {
+    private function Calc_dYdX($Y) {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
         return - ($this->oP->rIf - $this->Calc('J',$Y)) / (1 - pow($this->Calc('Fr',$Y),2));
     }
@@ -379,9 +333,9 @@ abstract class acSection {
     * Calcul du point suivant de la courbe de remous par la méthode Euler explicite.
     * @return Tirant d'eau
     */
-    public function CalcY_Euler($Y) {
+    public function Calc_Y_Euler($Y) {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-        $Y2 = $Y+ $this->oP->rDx * $this->CalcdYdX($Y);
+        $Y2 = $Y+ $this->oP->rDx * $this->Calc_dYdX($Y);
         if($this->oP->rDx > 0 xor !($Y2 < $this->rHautCritique)) {
             return false;
         } else {
@@ -394,16 +348,16 @@ abstract class acSection {
     * Calcul du point suivant de la courbe de remous par la méthode RK4.
     * @return Tirant d'eau
     */
-    public function CalcY_RK4($Y) {
+    public function Calc_Y_RK4($Y) {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
         $rDx = $this->oP->rDx;
-        $rk1 = $this->CalcdYdX($Y);
+        $rk1 = $this->Calc_dYdX($Y);
         if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk1 < $this->rHautCritique)) {return false;}
-        $rk2 = $this->CalcdYdX($Y + $rDx / 2 * $rk1);
+        $rk2 = $this->Calc_dYdX($Y + $rDx / 2 * $rk1);
         if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk2 < $this->rHautCritique)) {return false;}
-        $rk3 = $this->CalcdYdX($Y + $rDx / 2 * $rk2);
+        $rk3 = $this->Calc_dYdX($Y + $rDx / 2 * $rk2);
         if($this->oP->rDx > 0 xor !($Y + $rDx / 2 * $rk3 < $this->rHautCritique)) {return false;}
-        $rk4 = $this->CalcdYdX($Y + $rDx * $rk3);
+        $rk4 = $this->Calc_dYdX($Y + $rDx * $rk3);
         if($this->oP->rDx > 0 xor !($Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4) < $this->rHautCritique)) {return false;}
         return $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
     }
@@ -413,8 +367,8 @@ abstract class acSection {
     * Calcul du point suivant d'une courbe de remous
     * @return Tirant d'eau
     */
-    public function CalcY($rY) {
-        $funcCalcY = 'CalcY_'.$this->oP->sResolution;
+    public function Calc_Y($rY) {
+        $funcCalcY = 'Calc_Y_'.$this->oP->sResolution;
         if(method_exists($this,$funcCalcY)) {
             return $this->$funcCalcY($rY);
         } else {
@@ -422,11 +376,12 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul de la vitesse moyenne.
     * @return Vitesse moyenne
     */
-    private function CalcV() {
+    private function Calc_V() {
         if($this->Calc('S')!=0) {
             return $this->oP->rQ/$this->Calc('S');
         }
@@ -435,11 +390,12 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul de la charge spécifique.
     * @return Charge spécifique
     */
-    private function CalcHs() {
+    private function Calc_Hs() {
         return $this->rY+pow($this->Calc('V'),2)/(2*$this->oP->rG);
     }
 
@@ -448,7 +404,7 @@ abstract class acSection {
     * Calcul de la charge spécifique critique.
     * @return Charge spécifique critique
     */
-    private function CalcHsc() {
+    private function Calc_Hsc() {
         $this->Swap(true); // On mémorise les données hydrauliques en cours
         // On calcule la charge avec la hauteur critique
         $rHsc = $this->Calc('Hs',$this->CalcGeo('Yc'));
@@ -462,7 +418,7 @@ abstract class acSection {
     * Calcul du tirant d'eau critique.
     * @return tirant d'eau critique
     */
-    private function CalcYc() {
+    private function Calc_Yc() {
         $oHautCritique = new cHautCritique($this, $this->oP);
         if(!$this->rHautCritique = $oHautCritique->Newton($this->oP->rYB) or !$oHautCritique->HasConverged()) {
          $this->oLog->Add(_T('hydraulic:h_critique').' : '._T('hydraulic:newton_non_convergence'),true);
@@ -474,7 +430,7 @@ abstract class acSection {
     * Calcul du tirant d'eau normal.
     * @return tirant d'eau normal
     */
-    private function CalcYn() {
+    private function Calc_Yn() {
         if($this->oP->rIf <= 0) {
             $this->rHautNormale = false;
             $this->oLog->Add(_T('hydraulic:h_normale_pente_neg_nul'),true);
@@ -487,11 +443,12 @@ abstract class acSection {
         return $this->rHautNormale;
     }
 
+
    /**
     * Calcul du tirant d'eau fluvial.
     * @return tirant d'eau fluvial
     */
-    private function CalcYf() {
+    private function Calc_Yf() {
         if($this->rY > $this->CalcGeo('Yc')) {
             return $this->rY;
         }
@@ -501,11 +458,12 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul du tirant d'eau torrentiel.
     * @return tirant d'eau torrentiel
     */
-    private function CalcYt() {
+    private function Calc_Yt() {
         if($this->rY < $this->CalcGeo('Yc')) {
             return $this->rY;
         }
@@ -515,11 +473,12 @@ abstract class acSection {
         }
     }
 
+
    /**
     * Calcul du tirant d'eau conjugué.
     * @return tirant d'eau conjugué
     */
-    protected function CalcYco() {
+    protected function Calc_Yco() {
         $oHautConj= new cHautConjuguee($this, $this->oP);
         // Choisir une valeur initiale du bon côté de la courbe
         if($this->Calc('Fr') < 1) {
@@ -536,11 +495,12 @@ abstract class acSection {
         return $Yco;
     }
 
+
    /**
     * Calcul de la contrainte de cisaillement.
     * @return contrainte de cisaillement
     */
-    private function CalcTau0() {
+    private function Calc_Tau0() {
         return 1000 * $this->oP->rG * $this->Calc('R') * $this->Calc('J');
     }
 
@@ -549,16 +509,17 @@ abstract class acSection {
      * multiplié par la surface hydraulique
      * @return S x Yg
      */
-    protected function CalcSYg($rY) {
+    protected function Calc_SYg($rY) {
         return pow($rY,2) * $this->rLargeurBerge / 2;
     }
+
 
     /**
      * Calcul de la dérivée distance du centre de gravité de la section à la surface libre
      * multiplié par la surface hydraulique
      * @return S x Yg
      */
-    protected function CalcSYgder($rY) {
+    protected function Calc_dSYg($rY) {
         return $rY * $this->rLargeurBerge;
     }
 
@@ -567,23 +528,25 @@ abstract class acSection {
      * Calcul de l'impulsion hydraulique.
      * @return Impulsion hydraulique
      */
-    protected function CalcImp() {
+    protected function Calc_Imp() {
         return 1000 * ($this->oP->rQ * $this->Calc('V') + $this->oP->rG * $this->Calc('SYg'));
     }
+
 
     /**
      * Calcul de l'angle Alpha entre la surface libre et le fond pour les sections circulaires.
      * @return Angle Alpha pour une section circulaire, 0 sinon.
      */
-    protected function CalcAlpha(){
+    protected function Calc_Alpha(){
         return 0;
     }
+
 
     /**
      * Calcul de la dérivée de l'angle Alpha entre la surface libre et le fond pour les sections circulaires.
      * @return Dérivée de l'angle Alpha pour une section circulaire, 0 sinon.
      */
-    protected function CalcAlphaDer(){
+    protected function Calc_dAlpha(){
         return 0;
     }
 

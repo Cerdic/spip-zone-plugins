@@ -25,6 +25,9 @@ include_spip('hyd_inc/formulaire.abstract.class');
 
 abstract class form_section extends formulaire {
 
+    protected $oSn; ///< Objet section
+    protected $oP; ///< Objet paramètres de section
+
     /*
      * Caractéristiques communes aux calculs sur les sections :
      * - Caractéristiques des différents types de section
@@ -94,17 +97,93 @@ abstract class form_section extends formulaire {
         parent::__construct();
     }
 
-    public function get_champs_section() {
+    public function get_champs_section($choix_section) {
         $ChampsSection = array();
         foreach($this->saisies as $fs_cle=>$fs) {
-            if(substr($fs_cle,0,1)=='F') {
+            if(substr($fs_cle,0,2)==$choix_section) {
                 $ChampsSection = array_merge($ChampsSection,array_keys($fs[1]));
             }
         }
         foreach($ChampsSection as &$Champ) {
             $Champ = substr($Champ,3);
         }
+        spip_log($ChampsSection,'hydraulic',_LOG_DEBUG);
         return $ChampsSection;
+    }
+
+
+
+    /** ************************************************************************
+     * Récupération des libellés des champs des variables de calcul (fvc)
+     ***************************************************************************/
+    protected function get_champs_libelles() {
+        $lib = array();
+        foreach($this->saisies as $fs) {
+            foreach($fs[1] as $cle=>$val) {
+                if($fs[2]!='fix') {
+                    if(substr($cle,0,1)!='F') {
+                        $lib[$cle] = _T('hydraulic:'.$val[0]);
+                    } else {
+                        $lib[substr($cle,3)] = _T('hydraulic:'.$val[0]);
+                    }
+                }
+            }
+        }
+        return $lib;
+    }
+
+
+    protected function creer_section_param() {
+        include_spip('hyd_inc/section.class');
+
+        foreach(array_keys($this->data) as $k) {
+            if(substr($k,0,1)=='F') {
+                if(substr($k,0,3)==$this->data['choix_section'].'_') {
+                    // On supprime le préfixe pour les champs dépendants du type de section
+                    $this->data[substr($k,3)] = $this->data[$k];
+                }
+                // On élimine les champs avec le préfixe "type de section"
+                unset($this->data[$k]);
+            }
+        }
+        // On supprime aussi le préfixe sur ValCal et ValVar
+        foreach(array('ValCal','ValVar') as $k) {
+            if(isset($this->data[$k]) && substr($this->data[$k],0,1)=='F') {
+                $this->data[$k] = substr($this->data[$k],3);
+            }
+        }
+
+        // On transforme les champs du tableau des données du formulaire en variables
+        extract($this->data, EXTR_OVERWRITE|EXTR_REFS);
+
+        // Instanciation des objets pour le calcul
+        $this->oP = new cParam($rKs, $rQ, $rIf, $rPrec, $rYB);
+        switch($choix_section) {
+            case 'FT':
+                include_spip('hyd_inc/sectionTrapez.class');
+                $this->oSn=new cSnTrapez($this->oLog,$this->oP,$rLargeurFond,$rFruit);
+                break;
+
+            case 'FR':
+                include_spip('hyd_inc/sectionRectang.class');
+                $this->oSn=new cSnRectang($this->oLog,$this->oP,$rLargeurFond);
+                break;
+
+            case 'FC':
+                include_spip('hyd_inc/sectionCirc.class');
+                $this->oSn=new cSnCirc($this->oLog,$this->oP,$rD);
+                break;
+
+            case 'FP':
+                include_spip('hyd_inc/sectionPuiss.class');
+                $this->oSn=new cSnPuiss($this->oLog,$this->oP,$rCoef,$rLargeurBerge);
+                break;
+
+            default:
+                include_spip('hyd_inc/sectionTrapez.class');
+                $this->oSn=new cSnTrapez($this->oLog,$this->oP,$rLargeurFond,$rFruit);
+        }
+        $this->oSn->rY = $rY;
     }
 }
 

@@ -39,7 +39,7 @@ class cSnTrapez extends acSection {
         parent::__construct($oLog,$oP);
     }
 
-    protected function CalcB($bBerge=false) {
+    protected function Calc_B($bBerge=false) {
         if(!$bBerge && $this->rY > $this->oP->rYB) {
             return $this->rLargeurBerge;
         }
@@ -53,9 +53,9 @@ class cSnTrapez extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Périmètre mouillé (m)
      */
-    protected function CalcP($rY=0) {
+    protected function Calc_P($rY=0) {
         if($this->rY > $this->oP->rYB) {
-            $P = $this->CalcGeo('P') + parent::CalcP($this->rY-$this->oP->rYB);
+            $P = $this->CalcGeo('P') + parent::Calc_P($this->rY-$this->oP->rYB);
         }
         else {
             $P = $this->rLargeurFond+2*sqrt(1+pow($this->rFruit,2))*$this->rY;
@@ -70,9 +70,9 @@ class cSnTrapez extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Surface mouillée (m2)
      */
-    protected function CalcS($rY=0) {
+    protected function Calc_S($rY=0) {
         if($this->rY > $this->oP->rYB) {
-            $S = $this->CalcGeo('S') + parent::CalcS($this->rY-$this->oP->rYB);
+            $S = $this->CalcGeo('S') + parent::Calc_S($this->rY-$this->oP->rYB);
         }
         else {
             $S = $this->rY*($this->rLargeurFond+$this->rFruit*$this->rY);
@@ -85,9 +85,9 @@ class cSnTrapez extends acSection {
      * Calcul de dérivée de la surface hydraulique par rapport au tirant d'eau.
      * @return dS
      */
-    protected function CalcSder() {
+    protected function Calc_dS() {
         if($this->rY > $this->oP->rYB) {
-            return parent::CalcSder();
+            return parent::Calc_dS();
         }
         else {
             return $this->rLargeurFond + 2*$this->rFruit*$this->rY;
@@ -98,9 +98,9 @@ class cSnTrapez extends acSection {
      * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
      * @return dP
      */
-    protected function CalcPder() {
+    protected function Calc_dP() {
         if($this->rY > $this->oP->rYB) {
-            return parent::CalcPder();
+            return parent::Calc_dP();
         }
         else {
             return 2*sqrt(1+$this->rFruit*$this->rFruit);
@@ -111,9 +111,9 @@ class cSnTrapez extends acSection {
      * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
      * @return dB
      */
-    protected function CalcBder() {
+    protected function Calc_dB() {
         if($this->rY > $this->oP->rYB) {
-            return parent::CalcBder();
+            return parent::Calc_dB();
         }
         else {
             return 2*$this->rLargeurFond*$this->rFruit;
@@ -126,7 +126,7 @@ class cSnTrapez extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return S x Yg
      */
-    protected function CalcSYg($rY=0) {
+    protected function Calc_SYg($rY=0) {
         return ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * pow($this->rY,2);
     }
 
@@ -136,7 +136,7 @@ class cSnTrapez extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return S x Yg
      */
-    protected function CalcSYgder($rY=0) {
+    protected function Calc_dSYg($rY=0) {
         $SYg = $this->rFruit / 3 * pow($this->rY,2);
         $SYg += ($this->rLargeurFond / 2 + $this->rFruit * $this->rY / 3) * 2 * $this->rY;
         return $SYg;

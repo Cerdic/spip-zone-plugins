@@ -1,4 +1,7 @@
 <?php
+// Instanciation du journal de calcul
+
+
 /** ****************************************************************************
  * Gestion des formulaires des calculettes pour l'hydraulique
  *******************************************************************************/
@@ -25,7 +28,8 @@ abstract class formulaire {
     protected $champs_fvc; ///< Liste des codes de champs du formulaire avec bouton radio
     protected $champs; ///< Liste des codes de champs du formulaire
     protected $data; ///< Données du formulaire
-    protected $sVarCal=''; ///< Champ à calculer par défaut
+    protected $sVarCal=''; ///< Nom du champ à calculer par défaut
+    public $VarCal; ///< Pointeur vers la variable de section qui sera calculée
     protected $nb_col; ///< Nombre de colonnes du tableau du formulaire (2,4 ou 5)
     /** Résultats du calcul - tableau associatif contenant :
      *  - 'abs' => Vecteur de la donnée qui varie (abscisse)
@@ -33,7 +37,11 @@ abstract class formulaire {
      *  - 'flag' => Vecteur du flags d'écoulement pour les ouvrages (facultatif)
      *  -  Plus d'autres qui peuvent être définies et utilisées par la méthode 'afficher' des classes filles */
     protected $result;
+    protected $oLog; ///< Journal de calcul
     private $bNoCache = true; ///< Utilisation du cache pour ne pas refaire les calculs (true pour débugage)
+
+    /// Nombre de pas de variation par défaut
+    protected $nbPas = 15;
 
     abstract protected function get_environnement();
 
@@ -51,6 +59,8 @@ abstract class formulaire {
         $this->champs = $this->get_champs();
         spip_log($this->saisies,'hydraulic',_LOG_DEBUG);
         spip_log($this->champs_fvc,'hydraulic',_LOG_DEBUG);
+        include_spip('hyd_inc/log.class');
+        $this->oLog = new cLog();
     }
 
     /** ************************************************************************
@@ -106,8 +116,6 @@ abstract class formulaire {
             if($valeur != 'fix'){
                 foreach($tChOblig as $cle1=>$valeur1){
                     if($cle == $valeur1){
-                        // ... alors on peut supprimer de notre tableau le champs calculé (il n'est pas obligatoire car grisé)
-                        unset($tChOblig[$cle1]);
                         // Permet de tasser le tableau
                         $tChOblig = array_values($tChOblig);
                     }
@@ -145,9 +153,9 @@ abstract class formulaire {
         $sVarCal = $this->sVarCal;
         foreach($this->champs_fvc as $cle){
             $valeurs['choix_champs_'.$cle] = 'fix';
-            $valeurs['val_min_'.$cle] = 1;
-            $valeurs['val_max_'.$cle] = 2;
-            $valeurs['pas_var_'.$cle] = 0.1;
+            $valeurs['val_min_'.$cle] = $valeurs[$cle]/2;
+            $valeurs['val_max_'.$cle] = $valeurs[$cle]*2;
+            $valeurs['pas_var_'.$cle] = 1.5*$valeurs[$cle]/$this->nbPas;
             if(_request('choix_champs_'.$cle)=='cal') {
                 $sVarCal = $cle;
             }
@@ -194,7 +202,6 @@ abstract class formulaire {
             }
             $data[$champ] = str_replace(',','.',$data[$champ]); // Bug #574
         }
-        //spip_log($data,'hydraulic');
         // On ajoute la langue en cours pour différencier le fichier de cache par langue
         $data['sLang'] = $spip_lang;
 
@@ -295,6 +302,7 @@ abstract class formulaire {
             // On effectue les calculs
             $this->result = $this->calculer();
         }
+        spip_log($this->result,'hydraulic',_LOG_DEBUG);
 
         // Affichage des résultats
         return array('message_ok'=>$this->afficher_result());
@@ -332,7 +340,9 @@ abstract class formulaire {
             $tFlag = false;
         }
         $tLib = $this->get_champs_libelles(); // Libellé traduit des champs fvc
-        $echo = '';
+
+        $echo = $this->oLog->Result(); // Insertion du journal de calcul
+
         if(!isset($data['ValVar'])) {
             $data['ValVar']='';
         }
@@ -387,11 +397,11 @@ abstract class formulaire {
             }
             // Récupération du graphique
             $graph = $oGraph->GetGraph('graphique',400,600);
-            $echo = $graph."\n";
+            $echo .= $graph."\n";
         }
-        $echo .= '<div class="hyd_inlineblock">'.$tableau_fixe.'</div>';
+        $echo .= '<div class="hyd_table">'.$tableau_fixe.'</div>';
         if(isset($tableau_variable)) {
-            $echo .= '<div class="hyd_inlineblock">'.$tableau_variable.'</div>';
+            $echo .= '<div class="hyd_table">'.$tableau_variable.'</div>';
         }
         return $echo;
     }

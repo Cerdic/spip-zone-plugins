@@ -43,7 +43,7 @@ class cSnPuiss extends acSection {
      * Calcul de Lambda (mais on garde la routine Alpha commune avec la section circulaire)
      * @return Lambda
      */
-    protected function CalcAlpha() {
+    protected function Calc_Alpha() {
         return $this->rLargeurBerge/pow($this->oP->rYB,$this->rk);
     }
 
@@ -51,7 +51,7 @@ class cSnPuiss extends acSection {
      * Calcul de la largeur au miroir.
      * @return B
      */
-    protected function CalcB() {
+    protected function Calc_B() {
         if($this->rY >= $this->oP->rYB) {
             return $this->rLargeurBerge;
         }
@@ -62,10 +62,10 @@ class cSnPuiss extends acSection {
 
     /**
      * Calcul du périmètre mouillé.
-     * @param $rY Uniquement présent car la méthode parent à cet argument
+     * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return B
      */
-     protected function CalcP($rY=0) {
+     protected function Calc_P($rY=0) {
         $n=100; /// Le nombre de partie pour le calcul de l'intégrale
         $rLambda2 = pow($this->Calc('Alpha'),2);
         $rP = 0; /// Le périmètre à calculer
@@ -84,7 +84,7 @@ class cSnPuiss extends acSection {
      * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S
      */
-    protected function CalcS($rY=0) {
+    protected function Calc_S($rY=0) {
         return $this->Calc('Alpha')*pow($this->rY, $this->rk+1)/($this->rk+1);
     }
 
@@ -93,7 +93,7 @@ class cSnPuiss extends acSection {
      * Calcul de dérivée du périmètre hydraulique par rapport au tirant d'eau.
      * @return dP
      */
-    protected function CalcPder() {
+    protected function Calc_dP() {
         return 2 * sqrt(1+pow($this->rk*$this->Calc('Alpha')/2,2)*pow($this->rY,2*($this->rk-1)));
     }
 
@@ -101,7 +101,7 @@ class cSnPuiss extends acSection {
      * Calcul de dérivée de la largeur au miroir par rapport au tirant d'eau.
      * @return dB
      */
-    protected function CalcBder() {
+    protected function Calc_dB() {
         return $this->Calc('Alpha')*$this->rk*pow($this->rY,$this->rk-1);
     }
 
@@ -111,7 +111,7 @@ class cSnPuiss extends acSection {
      * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYg($rY=0) {
+    protected function Calc_SYg($rY=0) {
         return $this->Calc('Alpha')*pow($this->rY, $this->rk+2)/(($this->rk+1)*($this->rk+2));
     }
     /**
@@ -120,7 +120,7 @@ class cSnPuiss extends acSection {
      * @param $rY Uniquement présent car la méthode parent a cet argument
      * @return S x Yg
      */
-    protected function CalcSYgder($rY=0) {
+    protected function Calc_dSYg($rY=0) {
         $SYg = $this->Calc('dAlpha')*pow($this->rY, $this->rk+2) + $this->Calc('Alpha')*pow($this->rY, $this->rk+1)*($this->rk+2);
         return $SYg/(($this->rk+1)*($this->rk+2));
     }

@@ -49,7 +49,7 @@ class dessinSection {
     private $hauteurDessin; // Hauteur du dessin en px
     private $largeurDessin; // Largeur du dessin en px
     private $marges; // Marge à gauche et à droite du dessin pour le texte
-    private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black', 'pink');  // Couleur des différentes lignes
+    private $mesCouleurs = array('red', 'blue', 'orange', 'green', 'grey', 'black', 'DarkMagenta ', 'cyan');  // Couleur des différentes lignes
     private $sectionClass;
     private $donnees = array();
     private $rValMax = 0; // Hauteur maxi en m à figurer dans le dessin

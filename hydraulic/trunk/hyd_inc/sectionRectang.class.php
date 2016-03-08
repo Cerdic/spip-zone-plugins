@@ -40,8 +40,8 @@ class cSnRectang extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Périmètre mouillé (m)
      */
-    protected function CalcP($rY=0) {
-        return $this->rLargeurBerge+parent::CalcP($this->rY);
+    protected function Calc_P($rY=0) {
+        return $this->rLargeurBerge+parent::Calc_P($this->rY);
     }
 
     /**
@@ -49,8 +49,8 @@ class cSnRectang extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Surface mouillée (m2)
      */
-    protected function CalcS($rY=0) {
-        return parent::CalcS($this->rY);
+    protected function Calc_S($rY=0) {
+        return parent::Calc_S($this->rY);
     }
 
     /**
@@ -59,8 +59,8 @@ class cSnRectang extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return SYg
      */
-    protected function CalcSYg($rY=0) {
-        return parent::CalcSYg($this->rY);
+    protected function Calc_SYg($rY=0) {
+        return parent::Calc_SYg($this->rY);
     }
 
     /**
@@ -69,8 +69,8 @@ class cSnRectang extends acSection {
      * @param $rY Uniquement présent car la méthode parent à cet argument
      * @return Dérivée de SYg par rapport à Y
      */
-    protected function CalcSYgder($rY=0) {
-        return parent::CalcSYgder($this->rY);
+    protected function Calc_dSYg($rY=0) {
+        return parent::Calc_dSYg($this->rY);
     }
 
    /**

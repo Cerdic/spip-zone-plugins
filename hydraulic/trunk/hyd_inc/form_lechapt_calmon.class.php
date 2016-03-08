@@ -118,9 +118,7 @@ class form_lechapt_calmon extends formulaire {
 
     protected function calculer() {
         // On transforme les champs du tableau des données du formulaire en variables
-        foreach($this->data as $cle=>&$valeur){
-            ${$cle} = &$valeur;
-        }
+        extract($this->data, EXTR_OVERWRITE|EXTR_REFS);
         /*
          * Selon la variable à calculer, on gère les valeurs = à 0  et les valeurs infinies
          * et on fait le valcul correspondant.

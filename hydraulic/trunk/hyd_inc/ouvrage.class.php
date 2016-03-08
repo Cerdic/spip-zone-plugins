@@ -75,11 +75,11 @@ class cOuvrage {
      */
     private $tP = array();
 
+    public $VarCal; ///< Pointeur vers l'élément du tableau tP qui sera calculé
+
     const G = 9.81; /// Constante de gravité terrestre
     const R2G = 4.42944; /// sqrt(2*self::gP);
     const R32 = 2.59807; /// 3*sqrt(3)/2;
-    const IDEFINT = 100; /// Pas de parcours de l'intervalle pour initialisation dichotomie
-    const IDICMAX = 100; /// Itérations maximum de la dichotomie
 
     /**
      * Construction de la classe.
@@ -134,112 +134,16 @@ class cOuvrage {
      * - 12 : surverse noyé
      */
     public function Calc($sCalc,$rInit=0.) {
-        // Calcul du débit (facile !)
-        spip_log("Ouv->Calc($sCalc)",'hydraulic.'._LOG_DEBUG);
-        spip_log($this,'hydraulic.'._LOG_DEBUG);
+        include_spip('hyd_inc/dichotomie.class');
         if($sCalc=='Q') {
-            return $this->OuvrageQ();
+            // Calcul du débit par la loi d'ouvrage
+            return OuvrageQ();
+        } else {
+            // Calcul indirect par dichotomie
+            $this->VarCal = &$this->tP[$sCalc];
+            $oDicho = new cDichotomie($this->oLog,$this,'OuvrageQ');
+            return $oDicho->calculer($this->tP['Q'],$this->tP['rPrec'],$rInit);
         }
-        else {
-            // Sinon calcul d'une autre donnée par dichotomie
-            $rVarC = &$this->tP[$sCalc];
-            $QT = $this->tP['Q']; // Débit recherché (Target)
-            $XMinInit = 0;
-            $rVarC = $XMinInit;
-            list($Q1,$nFlag) = $this->OuvrageQ();
-            $XMaxInit = $rInit*10; /// @todo Boucler la valeur max sur 10,100,1000,10000
-            $rVarC = $XMaxInit;
-            list($Q2,$nFlag) = $this->OuvrageQ();
-            $DX = ($XMaxInit - $XMinInit) / floatval(self::IDEFINT);
-            $nIterMax = floor(max($XMaxInit - $rInit,$rInit - $XMinInit) / $DX + 1);
-            $Xmin = $rInit;
-            $Xmax = $rInit;
-            $X1 = $rInit;
-            $X2 = $rInit;
-            $rVarC = $rInit;
-            list($Q,$nFlag) = $this->OuvrageQ();
-            $Q1 = $Q;
-            $Q2 = $Q;
-            //echo "\nQT=$QT nIterMax=$nIterMax XMinInit=$XMinInit XMaxInit=$XMaxInit DX=$DX";
-
-
-            for($nIter=1;$nIter<=$nIterMax;$nIter++) {
-                //Ouverture de l'intervalle des deux côtés puis à droite et à gauche
-                $Xmax = $Xmax + $DX;
-                if($Xmax > $XMaxInit xor $DX <= 0) $Xmax = $XMaxInit;
-                $rVarC = $Xmax;
-                list($Q,$nFlag) = $this->OuvrageQ();
-                if($Q1 < $Q2 xor $Q <= $Q2) {
-                    $Q2 = $Q;
-                    $X2 = $Xmax;
-                }
-                if($Q1 < $Q2 xor $Q >= $Q1) {
-                    $Q1 = $Q;
-                    $X1 = $Xmax;
-                }
-                $Xmin = $Xmin - $DX;
-                if($Xmin < $XMinInit xor $DX <= 0) {
-                    $Xmin = $XMinInit;
-                }
-                $rVarC = $Xmin;
-                list($Q,$nFlag) = $this->OuvrageQ();
-                if($Q1 < $Q2 xor $Q <= $Q2) {
-                    $Q2 = $Q;
-                    $X2 = $Xmin;
-                }
-                if($Q1 < $Q2 xor $Q >= $Q1) {
-                    $Q1 = $Q;
-                    $X1 = $Xmin;
-                }
-
-/*
-                echo "\n".'nIter='.$nIter.' Xmin='.$Xmin.' Xmax='.$Xmax;
-                echo "\n".'X1='.$X1.' Q1='.$Q1.' X2='.$X2.' Q2='.$Q2;
-                echo "\n".'$QT > $Q1 xor $QT >= $Q2 = '.($QT > $Q1 xor $QT >= $Q2);
-*/
-
-                if($QT > $Q1 xor $QT >= $Q2) {break;}
-            }
-
-            if($nIter >= self::IDEFINT) {
-                // Pas d'intervalle trouvé avec au moins une solution
-                if($Q2 < $QT and $Q1 < $QT) {
-                    // Cote de l'eau trop basse pour passer le débit il faut ouvrir un autre ouvrage
-                    $rVarC = $XmaxInit;
-                }
-                else {
-                    // Cote de l'eau trop grande il faut fermer l'ouvrage
-                    $rVarC = $XminInit;
-
-                }
-                list($Q,$nFlag) = $this->OuvrageQ();
-                $nFlag = -1;
-            }
-            else {
-                // Dichotomie
-                $X = $rInit;
-                for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
-                    $rVarC=$X;
-                    list($Q,$nFlag) = $this->OuvrageQ();
-                    if($QT!=0 && abs($Q/$QT-1.) <= $this->tP['rPrec']) {break;}
-                    if($QT < $Q xor $Q1 <= $Q2) {
-                        // QT < IQ et Q(X1) > Q(X2) ou pareil en inversant les inégalités
-                        $X1=$rVarC;
-                    }
-                    else {
-                        // QT < IQ et Q(X1) < Q(X2) ou pareil en inversant les inégalités
-                        $X2=$rVarC;
-                    }
-                    $X=($X2+$X1)*0.5;
-                }
-                if($nIter == self::IDICMAX) {
-                    //IF1 <-- -10 anomalie: la dichotomie n'a pas abouti en ITER iterations
-                    $nFlag = -1;
-                }
-            }
-        }
-        spip_log("Ouv->Calc rVarC=$rVarC nFlag=$nFlag",'hydraulic.'._LOG_DEBUG);
-        return array($rVarC,$nFlag);
     }
 
 
@@ -247,7 +151,7 @@ class cOuvrage {
      * Calcul du débit à l'ouvrage
      * @return array(0=> débit, 1=> Flag d'écoulement) (Voir Calc)
      */
-    private function OuvrageQ() {
+    public function OuvrageQ() {
         $nFlag=-1; // Initialisé à -1 pour détecter les modifications
         $bSensAmAv = true; // Par défaut on considère le sens d'écoulement amont -> aval
         if(!in_array($this->nL,array(3,5))) {

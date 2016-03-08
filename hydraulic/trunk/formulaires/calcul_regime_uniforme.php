@@ -23,26 +23,25 @@
  */
 
 
-include_spip('hyd_inc/form_calcul_section.class');
-global $FCS;
-$FCS = new form_calcul_section;
+include_spip('hyd_inc/form_regime_uniforme.class');
+global $FRU; // Nécessaire car nous ne sommes pas dans l'environnement global
+$FRU = new form_regime_uniforme;
 
-
-function formulaires_calcul_normale_critique_charger_dist() {
-    global $FCS;
-    return $FCS->charger();
+function formulaires_calcul_regime_uniforme_charger_dist() {
+    global $FRU;
+    return $FRU->charger();
 }
 
 
-function formulaires_calcul_normale_critique_verifier_dist(){
-    global $FCS;
-    return $FCS->verifier();
+function formulaires_calcul_regime_uniforme_verifier_dist(){
+    global $FRU;
+    return $FRU->verifier();
 }
 
 
-function formulaires_calcul_normale_critique_traiter_dist(){
-    global $FCS;
-    return $FCS->traiter();
+function formulaires_calcul_regime_uniforme_traiter_dist(){
+    global $FRU;
+    return $FRU->traiter();
 }
 ?>
 

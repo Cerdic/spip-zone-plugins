@@ -291,7 +291,7 @@ function formulaires_courbe_remous_traiter_dist(){
     $oGraph->Decal(0, $c_bief_rIf, $c_bief_rLong);
 
     // Récupération du graphique
-    $echo .= $oGraph->GetGraph('courbe_remous',400,600);
+    $echo .= $oGraph->GetGraph('graphique',400,600);
 
 
     $echo .= $sLog;

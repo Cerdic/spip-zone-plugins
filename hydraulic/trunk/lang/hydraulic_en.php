@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'diametre'          => "Diameter (m)",
     'donnee_calc'       => "Data to compute",
     'debit'             => "Flow (m<sup>3</sup>/s)",
+    'dichotomie_intervalle' => "Target value out of search interval",
+    'dichotomie_non_convergence' => "Non convergence of dichotomy at required accuracy, found value correspond to a discharge of ",
     // E
     'erreur_obligatoire' => "This field is required",
     'erreur_non_numerique' => "This field must be numeric",

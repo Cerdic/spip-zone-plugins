@@ -21,7 +21,7 @@ function calcul_courbe_remous($oParam,$oSection,$oLog,$iPrec) {
 
    // Boucle de calcul de la courbe de remous
     for($x = $xDeb + $dx; ($dx > 0 && $x <= $xFin) || ($dx < 0 && $x >= $xFin); $x += $dx) {
-        $rY = (real)$oSection->CalcY(end($trY));
+        $rY = (real)$oSection->Calc_Y(end($trY));
         if($rY) {
             if(end($trY) > $oSection->rHautNormale xor $rY > $oSection->rHautNormale) {
                 $oLog->Add(_T('hydraulic:pente_forte').' '.$x. ' m ('._T('hydraulic:reduire_pas').')',true);
