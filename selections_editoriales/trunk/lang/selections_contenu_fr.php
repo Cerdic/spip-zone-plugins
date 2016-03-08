@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_url_label' => 'URL',
 	
 	// D
+	'deplacer' => 'Faire glisser et déplacer ce contenu',
 	'deplacer_apres' => 'Déplacer après',
 	'deplacer_avant' => 'Déplacer avant',
 	
