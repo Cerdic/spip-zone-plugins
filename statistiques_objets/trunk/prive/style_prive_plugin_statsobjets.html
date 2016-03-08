@@ -1,0 +1,19 @@
+[(#REM)<style>]
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
+/**
+ * Insertion des documents : cacher les balises inutiles
+ */
+#documents_joints .item.image .raccourcis span:first-child,
+#documents_joints .item.image .raccourcis span:first-child+div,
+#documents_joints .item.image .raccourcis span:first-child+div+div,
+#documents_joints .item.image .raccourcis span:first-child+div+div+div,
+#documents_joints .item.image .raccourcis span:first-child+div+div+div+span,
+#documents_joints .item.image .raccourcis span:first-child+div+div+div+span+div,
+#documents_joints .item.image .raccourcis span:first-child+div+div+div+span+div+div,
+#documents_joints .item.image .raccourcis span:first-child+div+div+div+span+div+div+div {
+  display: none;
+}

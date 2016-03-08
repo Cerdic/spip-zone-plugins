@@ -1,0 +1,8 @@
+#SET{name,objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	<span class="explication"><:statistiques:cfg_champ_objets_explication:></span>
+	<label><:statistiques:cfg_champ_objets_label:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]
+	#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}}}
+</div>
