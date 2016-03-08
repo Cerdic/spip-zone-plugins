@@ -20,13 +20,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function dompdf_trouver_html($squelette, $contexte=array()) {
-    // Si on a passé un squelette
-    if (find_in_path($squelette.'.html'))
-        // On récupère le html du squelette.
-        return recuperer_fond($squelette, $contexte);
-    else
-        // Sinon, on déduit que c'est du html directement passé à la fonction
-        return $squelette;
+	// Si on a passé un squelette
+	if (find_in_path($squelette.'.html'))
+		// On récupère le html du squelette.
+		return recuperer_fond($squelette, $contexte);
+	else
+		// Sinon, on déduit que c'est du html directement passé à la fonction
+		return $squelette;
 }
 
 /**
@@ -40,15 +40,15 @@ function dompdf_trouver_html($squelette, $contexte=array()) {
  */
 function dompdf_cadre($url_action, $titre = null, $titre_export = null) {
 
-   include_spip('inc/presentation');
+	include_spip('inc/presentation');
 
-   return
-        debut_cadre_relief('',true,'', $titre).
-        icone_horizontale(
-            $titre_export,
-            $url_action,
-            'pdf-24.png',
-            "export",
-            false).
-        fin_cadre_relief(true);
+	return
+		debut_cadre_relief('',true,'', $titre).
+		icone_horizontale(
+			$titre_export,
+			$url_action,
+			'pdf-24.png',
+			"export",
+			false).
+		fin_cadre_relief(true);
 }

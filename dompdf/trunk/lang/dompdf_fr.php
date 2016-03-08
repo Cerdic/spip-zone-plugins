@@ -7,9 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'dompdf_titre' => 'DOMPDF',
-    'export' => 'Exporter en PDF',
-    'export_reponses' => 'Exporter les réponses en PDF',
-    'pdf' => 'PDF'
+	'export' => 'Exporter en PDF',
+	'export_reponses' => 'Exporter les réponses en PDF',
+	'pdf' => 'PDF'
 );
 
 ?>

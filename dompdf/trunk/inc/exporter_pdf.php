@@ -14,19 +14,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sortie.pdf', $paper = 'A4', $orientation = 'portrait') {
 
-  // On inclut la configuration DOMPDF
-  include_spip('lib/dompdf/dompdf_config.inc');
-  include_spip('dompdf_fonctions');
+	// On inclut la configuration DOMPDF
+	include_spip('lib/dompdf/dompdf_config.inc');
+	include_spip('dompdf_fonctions');
 
-  // On charge DOMPDF
-  $dompdf = new DOMPDF();
+	// On charge DOMPDF
+	$dompdf = new DOMPDF();
 
-  $html = dompdf_trouver_html($squelette, $contexte);
+	$html = dompdf_trouver_html($squelette, $contexte);
 
-  // On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
-  $dompdf->load_html($html);
-  $dompdf->set_paper($paper, $orientation);
-  $dompdf->render();
+	// On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
+	$dompdf->load_html($html);
+	$dompdf->set_paper($paper, $orientation);
+	$dompdf->render();
 
-  $dompdf->stream($filename, array("Attachment" => false));
+	$dompdf->stream($filename, array("Attachment" => false));
 }
