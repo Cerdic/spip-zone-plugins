@@ -155,8 +155,11 @@ function formulaires_editer_selections_contenu_traiter_dist($id_selections_conte
 	}
 	
 	// On défini l'objet et id_objet
-	if ($url = _request('url') and $trouve = typer_raccourci($url)) {
-		include_spip('inc/lien');
+	if (
+		$url = _request('url')
+		and include_spip('inc/lien')
+		and $trouve = typer_raccourci($url)
+	) {
 		include_spip('base/objets');
 		
 		@list($objet, , $id_objet, , $args, , $ancre) = $trouve;
