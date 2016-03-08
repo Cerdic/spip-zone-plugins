@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 	'statsobjets_nom' => 'Statistiques des objets',
-	'statsobjets_slogan' => 'Activer les statiques pour tous les objets éditoriaux',
+	'statsobjets_slogan' => 'Étendre les statiques de SPIP à tous les objets éditoriaux',
 	'statsobjets_description' => 'Ce plugin permet d\'activer les statistiques pour tous les objets éditoriaux, en plus des articles.',
 	
 );
