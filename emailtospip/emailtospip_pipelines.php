@@ -10,14 +10,11 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-	
+
 
 // les taches crons
 function emailtospip_taches_generales_cron($taches_generales){   
-  $taches_generales['emailtospip'] = 60*15;  // tous les 15 min		
+	$taches_generales['emailtospip'] = 60*15;  // tous les 15 min		
 	return $taches_generales;
 }
-
-
-
 ?>
