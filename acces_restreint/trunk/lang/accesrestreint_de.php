@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'BEREICH NUMMER:',
-	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich konrollieren',
+	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich kontrollieren',
 	'zone_restreinte_publique' => 'Zugang zu diesem Bereich in der öffentlichen Webseite kontrollieren'
 );
 
