@@ -17,7 +17,7 @@
 <ul class='liste-items liaisons'>
 
 	[(#REM) objets ]
-	<BOUCLE_objets(ALBUMS albums_liens){fusion objet}>
+	<BOUCLE_objets(albums_liens){fusion objet}>
 	#SET{actif, #ENV{objet}|=={#OBJET}|?{1,''}}
 	#SET{param, #GET{actif}|?{'',#OBJET}}
 	#SET{actif_unique, #GET{actif}|et{#ENV{id_objet}}|?{1,''}}
