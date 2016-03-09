@@ -167,10 +167,22 @@ function admin_statsobjets($objet, $id_objet, $var_preview = "") {
 			return array(
 				intval($row['visites']),
 				ceil($row['popularite']),
-				str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_objet))
+				str_replace('&amp;', '&', generer_url_ecrire_statistiques_objet($objet,$id_objet))
 			);
 		}
 	}
 
 	return false;
+}
+
+
+/**
+ * Génère URL de la page dans l'espace privé permettant de visualiser les statistiques d'un objet
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @return string URL
+ **/
+function generer_url_ecrire_statistiques_objet($objet, $id_objet) {
+	return parametre_url(generer_url_ecrire('stats_visites', "objet=$objet"), 'id_objet', $id_objet);
 }
