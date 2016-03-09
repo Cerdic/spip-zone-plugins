@@ -1,7 +1,7 @@
 <paquet
 	prefix="statsobjets"
 	categorie="statistique"
-	version="1.0.3"
+	version="1.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/statsobjets.png"
@@ -9,7 +9,7 @@
 	schema="1.0.0"
 >
 	<nom>Statistiques des objets éditoriaux</nom>
-  <!-- Gestion des statistiques des objets éditoriaux dans SPIP -->
+	<!--Étendre les statistiques de SPIP à tous les objets éditoriaux -->
 
 	<auteur>tcharlss</auteur>
 

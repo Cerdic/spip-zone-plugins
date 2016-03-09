@@ -14,4 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Si tous les objets sont décochés et que les statistiques sont activées,
 	les autres types de pages seront toujours pris en compte.',
 
+	// I
+	'info_afficher_visites_objets_plus_visites' => 'Les plus visités depuis le début :',
+	'info_visites_objets_plus_populaires' => 'Les plus populaires :',
+	'info_visites_objets_derniers' => 'Les derniers publiés :',
+
 );
