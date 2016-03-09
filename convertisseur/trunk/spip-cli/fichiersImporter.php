@@ -109,6 +109,10 @@ class fichiersImporter extends Command {
 				if(!in_array('id_source', $champs))
 					sql_query("alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
 
+				// Ajout d'un champ la premiere fois pour stocker le nom du fichier source, pour reconnaitre un article déjà importé.
+				if(!in_array('fichier_source', $champs))
+					sql_query("alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
+
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 
 				// start and displays the progress bar
@@ -198,6 +202,8 @@ class fichiersImporter extends Command {
 					$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
 			
 					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
+						// id d'importation
+						sql_update("spip_articles", array("fichier_source" => sql_quote($fichier)), "id_article=$id_article");
 						
 						// Créer l'auteur ?
 						if($auteurs){

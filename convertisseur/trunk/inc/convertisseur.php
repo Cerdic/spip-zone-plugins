@@ -524,11 +524,18 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		return false;
 	}
 
+	// Champs d'un article
+	include_spip("base/abstract_sql");
+	$show = sql_showtable("spip_articles");
+	$champs_article = array_keys($show['field']);
+
 	// Si $f (chargement zip), on cherche un article du meme $f
-	// (valeur stockée dans le PS)
+	// (valeur stockée dans un champ fichier_source ou à défaut dans le PS)
 	// dans la meme rubrique,
 	// avec le statut prepa, qui nous appartient, et... on l'ecrase
-	$ps = 'Conversion depuis '.basename($f);
+
+	$source = 'Conversion depuis '.basename($f) ;
+	$champ_source = (in_array("fichier_source", $champs_article)) ? "fichier_source" : "ps" ;
 
 	// spip 3
 	if($spip_version_branche > "3")
@@ -536,7 +543,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			FROM spip_articles AS a,
 			spip_auteurs_liens AS aut
 			WHERE id_rubrique=$id_rubrique
-			AND ps=".sql_quote($ps)."
+			AND $champ_source=".sql_quote($source)."
 			AND aut.id_objet=a.id_article
 			AND aut.objet = 'article'
 			AND aut.id_auteur=".$id_auteur
@@ -547,7 +554,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			FROM spip_articles AS a,
 			spip_auteurs_articles AS aut
 			WHERE id_rubrique=$id_rubrique
-			AND ps=".sql_quote($ps)."
+			AND $champ_source=".sql_quote($source)."
 			AND aut.id_article=a.id_article
 			AND aut.id_auteur=".$id_auteur
 			);
@@ -561,12 +568,12 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 		);
 
 		$champs = array(
-			'titre' => $ps,
+			'titre' => $source,
 			'statut' => 'prepa',
 			'id_rubrique' => $id_rubrique,
 			'id_secteur' => $q['id_secteur'],
 			'lang' => $q['lang'],
-			'ps' => $ps
+			$champ_source => $source
 			);
 
 		// Envoyer aux plugins
@@ -627,16 +634,13 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	
 	$c = array('texte' => $texte);
 	
-	// Champs d'un article
-	include_spip("base/abstract_sql");
-	$show = sql_showtable("spip_articles");
-	$champs = array_keys($show['field']);
-	foreach ($champs as $champ) {
+	foreach ($champs_article as $champ) {
 		if (preg_match(",<ins class='$champ'>(.*?)</ins>\n*,ims", $texte, $r)
 		AND strlen($x = trim($r[1]))
 		AND $champ != "texte"
-		AND $champ != "ps") {
-			$c[$champ] = $x;
+		) {
+			if($champ != $champ_source)
+				$c[$champ] = $x;
 			$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $r[0]), strlen($r[0]));
 		}
 	}
@@ -652,7 +656,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute dans le champs metadonnees ou a défaut ostensiblement en haut du texte.
 	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
 		foreach($z as $d){
-			if(!in_array("metadonnees", $champs)){
+			if(!in_array("metadonnees", $champs_articles)){
 				$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
 				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
 			}else{
