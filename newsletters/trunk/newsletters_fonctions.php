@@ -23,6 +23,15 @@ if (test_espace_prive()){
  * @return string
  */
 function newsletters_liens_absolus($texte, $base='') {
+	if (!$base) {
+		$base = url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
+		// respecter le protocole http/https de l'adresse principale du site
+		// car le back-office peut etre en https, mais le site public en http
+		$protocole = explode("://",$GLOBALS['meta']['adresse_site']);
+		$protocole = reset($protocole) . ":";
+		$base = $protocole . protocole_implicite($base);
+	}
+
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$href = extraire_attribut($lien[0],"href");
