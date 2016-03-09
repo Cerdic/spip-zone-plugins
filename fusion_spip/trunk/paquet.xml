@@ -1,7 +1,7 @@
 <paquet
 	prefix="fusion_spip"
 	categorie="maintenance"
-	version="1.1.1"
+	version="1.1.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/fusion_spip-32.png"
@@ -17,6 +17,8 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="pre_fusion" action="" />
+	<pipeline nom="post_fusion" action="" />
 	<pipeline nom="autoriser" inclure="fusion_spip_autoriser.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/fusion_spip_tables.php" />
 

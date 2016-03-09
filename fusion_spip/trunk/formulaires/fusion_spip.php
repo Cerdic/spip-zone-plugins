@@ -136,6 +136,23 @@ function formulaires_fusion_spip_traiter_dist() {
 
 		$time_start = microtime(true);
 
+		/**
+		 * Pipeline de préfusion 
+		 */
+		pipeline('pre_fusion',
+			array(
+				'args' => array(
+					'secteur' => $secteur,
+				),
+				'data' => array(
+					'base' => $base,
+					'img_dir' => $img_dir,
+					'connect' => $connect,
+					'traite_stats' => $traite_stats,
+					'traite_referers' => $traite_referers
+				)
+			)
+		);
 		//commençons par vider la table de traitement fusion_spip pour pouvoir faire le comptage en fin de traiter
 		sql_delete("spip_fusion_spip");
 		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
@@ -215,6 +232,24 @@ function formulaires_fusion_spip_traiter_dist() {
 		}
 		$resume_imports = join("<br>", $resume_imports);
 
+		/**
+		 * Pipeline de préfusion 
+		 */
+		pipeline('post_fusion',
+			array(
+				'args' => array(
+					'secteur' => $secteur,
+				),
+				'data' => array(
+					'base' => $base,
+					'img_dir' => $img_dir,
+					'connect' => $connect,
+					'traite_stats' => $traite_stats,
+					'traite_referers' => $traite_referers,
+					'resume_imports' => $resume_imports
+				)
+			)
+		);
 		$retour = array(
 			'message_ok' => _T('fusion_spip:message_import_ok') . $resume_imports
 		);
