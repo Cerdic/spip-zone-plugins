@@ -1,8 +1,8 @@
 <paquet
 	prefix="statsobjets"
 	categorie="statistique"
-	version="1.0.0"
-	etat="test"
+	version="1.0.1"
+	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/statsobjets.png"
 	documentation=""
@@ -19,5 +19,6 @@
 	<pipeline nom="formulaire_fond" inclure="statsobjets_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="statsobjets_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="statsobjets_pipelines.php" />
+	<pipeline nom="formulaire_admin" inclure="statsobjets_pipelines.php" />
 
 </paquet>

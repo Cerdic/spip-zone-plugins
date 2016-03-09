@@ -104,9 +104,9 @@ function statsobjets_formulaire_traiter ($flux){
 
 
 /**
- * Ajoute les boutons d'administration indiquant la popularité et les visites d'un objet
+ * Ajoute les boutons d'administration indiquant la popularité et les visites d'un objet autre qu'un article
  *
- * @uses admin_stats()
+ * @uses admin_statsobjets()
  * @pipeline formulaire_admin
  * @param array $flux Données du pipeline
  * @return array       Données du pipeline
@@ -118,7 +118,10 @@ function statsobjets_formulaire_admin($flux) {
 		and isset($flux['args']['contexte']['id_objet'])
 		and $id_objet = $flux['args']['contexte']['id_objet']
 	) {
-		if ($l = admin_statsobjets($objet, $id_objet, defined('_VAR_PREVIEW') ? _VAR_PREVIEW : '')) {
+		if (
+			$objet != 'article'
+			and $l = admin_statsobjets($objet, $id_objet, defined('_VAR_PREVIEW') ? _VAR_PREVIEW : '')
+		) {
 			$btn = recuperer_fond('prive/bouton/statistiques', array(
 				'visites' => $l[0],
 				'popularite' => $l[1],
@@ -133,10 +136,7 @@ function statsobjets_formulaire_admin($flux) {
 
 
 /**
- * Calcule les visites et popularite d'un objet éditorial
- *
- * @note
- *     Actuellement uniquement valable pour les articles.
+ * Calcule les visites et popularite d'un objet éditorial (sauf les articles)
  *
  * @param string $objet
  * @param int $id_objet
@@ -147,12 +147,21 @@ function statsobjets_formulaire_admin($flux) {
  *     - array : Tableau les stats `[visites, popularité, url]`
  **/
 function admin_statsobjets($objet, $id_objet, $var_preview = "") {
+
+	include_spip('inc/config');
+	include_spip('base/objets'); // au cas où
+	$tables_objets = lire_config('activer_statistiques_objets', array());
+	$table_objet_sql = table_objet_sql($objet);
+	$id_table_objet = id_table_objet($objet);
+
 	if ($GLOBALS['meta']["activer_statistiques"] != "non"
-		and $objet == 'article'
+		and $objet != 'article'
+		and in_array($table_objet_sql, $tables_objets)
+		and objet_test_si_publie($objet, $id_objet) === true
 		and !$var_preview
 		and autoriser('voirstats')
 	) {
-		$row = sql_fetsel("visites, popularite", "spip_articles", "id_article=$id_objet AND statut='publie'");
+		$row = sql_fetsel("visites, popularite", $table_objet_sql, $id_table_objet.'='.intval($id_objet));
 
 		if ($row) {
 			return array(
