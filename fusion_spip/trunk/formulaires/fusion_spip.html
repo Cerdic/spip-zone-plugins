@@ -16,7 +16,7 @@
 				<select name="base" id="base">
 					<option value=""></option>
 					<BOUCLE_bases(DATA){source tableau,#ENV{bases}}>
-					<option value="#CLE" [(#ENV{base}|=={#CLE}|oui)selected="selected"] >#VALEUR</option>
+					<option value="[(#CLE|plus{1})]" [(#ENV{base}|=={[(#CLE|plus{1})]}|oui)selected="selected"] >#VALEUR</option>
 					</BOUCLE_bases>
 				</select>
 				<p><:fusion_spip:base_desc:></p>

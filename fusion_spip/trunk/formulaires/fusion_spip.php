@@ -47,9 +47,24 @@ function formulaires_fusion_spip_verifier_dist() {
 	else {
 		$traite_stats = (_request('stats') != 'on' ? true : false);
 		$traite_referers = (_request('referers') != 'on' ? true : false);
-
+		/**
+		 * S'assurer de pouvoir créer des sous répertoires et des fichiers dans IMG/
+		 */
+		if($img = _request('img_dir')){
+			$ok = ecrire_fichier(_DIR_IMG.'test_fusion.txt', 'Test de fusion',true);
+			if($ok){
+				$ok = sous_repertoire(_DIR_IMG, 'test_fusion');
+				if(!$ok){
+					$erreurs['img_dir'] = _T('fusion_spip:erreur_img_accessible');
+				}
+			}else{
+				$erreurs['img_dir'] = _T('fusion_spip:erreur_img_accessible');
+			}
+			supprimer_fichier(_DIR_IMG.'test_fusion.txt');
+			supprimer_repertoire(_DIR_IMG.'test_fusion');
+		}
 		$bases = bases_referencees(_FILE_CONNECT_TMP);
-		$connect = $bases[$base];
+		$connect = $bases[$base-1];
 		
 		$lister_tables_principales = charger_fonction('lister_tables_principales','fusion_spip');
 		$principales = $lister_tables_principales($connect, false);
@@ -89,7 +104,7 @@ function formulaires_fusion_spip_traiter_dist() {
 	// préventif
 	@ini_set('max_execution_time', 0);
 
-	$base = _request('base');
+	$base = _request('base')-1;
 	$img_dir = _request('img_dir');
 	$secteur = _request('secteur');
 	$traite_stats = (_request('stats') != 'on' ? true : false);
