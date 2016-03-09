@@ -180,6 +180,8 @@ class fichiersImporter extends Command {
 					
 					include_spip("inc/rubriques");
 					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
+					sql_update('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
+					
 					$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
 					
 					$progress->setMessage("", 'docs');											
