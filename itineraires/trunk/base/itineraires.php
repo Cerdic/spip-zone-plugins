@@ -90,6 +90,8 @@ function itineraires_declarer_tables_objets_sql($tables) {
 	
 	$tables['spip_itineraires_etapes'] = array(
 		'type' => 'itineraires_etape',
+		'table_objet_surnoms' => array('itinerairesetape'),
+		'type_surnoms' => array('itinerairesetape'),
 		'principale' => "oui",
 		'field'=> array(
 			'id_itineraires_etape' => 'bigint(21) NOT NULL',
