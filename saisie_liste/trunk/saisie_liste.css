@@ -8,9 +8,11 @@
   vertical-align: top; }
 
 /* premier niveau de li */
-li.saisie_liste {
+li.saisie_liste,
+.formulaire_spip div.saisie_liste {
   padding: 0 10px; }
-  li.saisie_liste label {
+  li.saisie_liste label,
+  .formulaire_spip div.saisie_liste label {
     float: none;
     margin-left: 0; }
 
@@ -22,7 +24,7 @@ li.saisie_liste {
   .saisie-liste .liste-saisies {
     margin: 0;
     padding: 0; }
-    .saisie-liste .liste-saisies > li {
+    .saisie-liste .liste-saisies > li, .saisie-liste .liste-saisies > div {
       padding: 5px;
       text-align: left; }
     .saisie-liste .liste-saisies p {
@@ -31,16 +33,18 @@ li.saisie_liste {
     border: none;
     margin: 0;
     padding: 0; }
-  .saisie-liste > li {
+  .saisie-liste > li, .saisie-liste > div {
     padding: 3px; }
 
 /* effets pour jqueryui.sortable */
-.saisie-liste.ui-sortable > li {
+.saisie-liste.ui-sortable > li,
+.saisie-liste.ui-sortable > div {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;
   margin: 5px; }
-  .saisie-liste.ui-sortable > li:hover {
+  .saisie-liste.ui-sortable > li:hover,
+  .saisie-liste.ui-sortable > div:hover {
     background-color: #EBE7E7;
     background-color: rgba(232, 232, 232, 0.69); }
 
@@ -82,3 +86,5 @@ li.saisie_liste {
   margin-left: 4px; }
   .bouton-supprimer input:hover, .bouton-supprimer input:focus {
     box-shadow: 0px 0px 3px rgba(129, 129, 129, 0.46) inset; }
+
+/*# sourceMappingURL=saisie_liste.css.map */

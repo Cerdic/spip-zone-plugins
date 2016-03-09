@@ -9,7 +9,8 @@
 }
 
 /* premier niveau de li */
-li.saisie_liste {
+li.saisie_liste,
+.formulaire_spip div.saisie_liste {
   padding: 0 10px;
   label {
     float: none;
@@ -26,7 +27,8 @@ li.saisie_liste {
   .liste-saisies {
     margin: 0;
     padding: 0;
-    &> li {
+    &> li,
+	&> div {
       padding: 5px;
       text-align: left;
     }
@@ -39,13 +41,15 @@ li.saisie_liste {
     margin: 0;
     padding: 0;
   }
-  &> li {
+  &> li,
+  &> div {
     padding: 3px;
   }
 }
 
 /* effets pour jqueryui.sortable */
-.saisie-liste.ui-sortable > li {
+.saisie-liste.ui-sortable > li,
+.saisie-liste.ui-sortable > div {
   cursor: move;
   border: 1px solid #D0D0D0;
   background-color: #F4F4F4;
