@@ -1,19 +1,20 @@
 <paquet
-    prefix="rx_hashtags"
-    categorie="divers"
+    prefix="hashtags"
+    categorie="edition"
     version="0.0.25"
     etat="dev"
+    documentation="http://blog.roxing.net/spip-plugin-hashtags"
     compatibilite="[3.0.0;3.1.*]"
-    logo="prive/themes/spip/images/rx_hashtag-32.png">
+    logo="prive/themes/spip/images/hashtag-32.png">
 
     <nom>Hashtags</nom>
 
-    <auteur>Pierre LASZCZAK</auteur>
+    <auteur lien="http://blog.roxing.net/pierrox">Pierre LASZCZAK</auteur>
+    <credit>roxing.net</credit>
 
     <licence>GNU/GPL</licence>
 
-    <!-- Pipelines-->
-    <pipeline nom="post_edition" inclure="rx_hashtags_pipelines.php" />
-    <!--<pipeline nom="post_typo" inclure="rx_hashtags_pipelines.php" />-->
-    <pipeline nom="declarer_tables_interfaces" inclure="rx_hashtags_pipelines.php" />
+    <pipeline nom="post_edition" inclure="hashtags_pipelines.php" />
+    <pipeline nom="declarer_tables_interfaces" inclure="hashtags_pipelines.php" />
+
 </paquet>

@@ -9,10 +9,6 @@ function traitements_hashtags($str, $id_groupe=''){
 
     if ( preg_match_all($pattern, $str, $matches) ) {
 
-        echo '<pre>';
-        print_r($matches[0]);
-        echo '</pre>';
-
         $tagsBrutes = $matches[0];
         $tagsPropres = preg_replace('`#(!->|!|->)*`','',$tagsBrutes);
 

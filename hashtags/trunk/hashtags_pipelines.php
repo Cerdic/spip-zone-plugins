@@ -2,24 +2,15 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function rx_hashtags_formulaire_charger($flux){
-
-    return $flux;
-}
-
-function rx_hashtags_post_edition($flux){
+function hashtags_post_edition($flux){
 
     include_spip('inc/meta');
-    $cfg = lire_config('rx_cfg_hashtags');
+    $cfg = lire_config('cfg_hashtags');
 
-    //$table = $flux['args']['table'];                          // 'spip_articles',
     $table_objet = $flux['args']['table_objet'];                // 'articles',
-    //$spip_table_objet = $flux['args']['spip_table_objet'];    // 'spip_articles',
     $objet = $flux['args']['type'];                             // 'article'
     $id_objet = $flux['args']['id_objet'];                      // '23'
-
-    // spip_log("$objet . $id_objet . $table",_LOG_ERREUR);
-
+    
     if ( isset($table_objet) || array_key_exists($table_objet,$cfg) ) {
 
         # Patterns Hashtags!
@@ -80,10 +71,10 @@ function rx_hashtags_post_edition($flux){
     return $flux;
 }
 
-function rx_hashtags_declarer_tables_interfaces($interfaces) {
+function hashtags_declarer_tables_interfaces($interfaces) {
 
     # Ajouter les traitements qui vont bien en fonctions de la config des mot clefs
-    if (isset($GLOBALS['meta']['rx_cfg_hashtags']) AND $cfg_hashtags = $GLOBALS['meta']['rx_cfg_hashtags'])
+    if (isset($GLOBALS['meta']['cfg_hashtags']) AND $cfg_hashtags = $GLOBALS['meta']['cfg_hashtags'])
         foreach (unserialize($cfg_hashtags) as $k => $v)
             foreach ($v['champs'] as $champ)
                 $interfaces['table_des_traitements'][strtoupper($champ)][$k] =
@@ -96,9 +87,4 @@ function rx_hashtags_declarer_tables_interfaces($interfaces) {
                                       $interfaces['table_des_traitements'][strtoupper($champ)][0]);
 
     return $interfaces;
-}
-
-function rx_hashtags_post_typo($flux){
-    //$flux = preg_replace('~#(&nbsp;| )\!+(?![^<|-]*>|[^<>]*<\/)~u','#!',$flux);
-    return $flux;
 }

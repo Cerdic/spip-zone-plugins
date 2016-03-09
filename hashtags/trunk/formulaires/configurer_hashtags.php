@@ -24,7 +24,7 @@ function formulaires_configurer_hashtags_charger(){
 
     # Tous renvoyer au formulaire
     $valeurs['objets'] = $objets;
-    $valeurs['cfg_hashtags'] = lire_meta('rx_cfg_hashtags');
+    $valeurs['cfg_hashtags'] = lire_config('cfg_hashtags');
 
     return $valeurs;
 }
@@ -38,7 +38,7 @@ function formulaires_configurer_hashtags_verifier(){
         if ( $v['active'] AND $v['active'] === 'oui' )
             foreach ( array('champs','groupes') as $obligatoire )
                 if ( !count($v[$obligatoire]) )
-                    $erreurs[$k][$obligatoire] = _T('rx_hashtags:err_champs_et_groupe_obligatoire');
+                    $erreurs[$k][$obligatoire] = _T('hashtags:err_champs_et_groupe_obligatoire');
 
     return $erreurs;
 }
@@ -47,7 +47,7 @@ function formulaires_configurer_hashtags_traiter(){
 
     include_spip('inc/meta');
     if ( $cfg_hashtags = _request('cfg_hashtags') ){
-        ecrire_config('rx_cfg_hashtags',$cfg_hashtags);
+        ecrire_config('cfg_hashtags',$cfg_hashtags);
         $desc['message_ok'] = _T('config_info_enregistree');
     }
     else
