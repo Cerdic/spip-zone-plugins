@@ -77,12 +77,12 @@
 				<td class='num'>[<strong>(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})</strong>[(#GET{c}|count|singulier_ou_pluriel{info_classement_1,info_classement_2,liste})]]</td>
 			</tr>
 			</BOUCLE_objet>
-			[(#REM) total ]
+			[(#REM) total global ou pour un type d'objet ]
 			<tr class="odd">
 				<th><:info_total|trim{':'}|trim|ucfirst:></th>
-				<td class='num'>[(#REM|stats_total)]</td>
+				<td class='num'>[(#GET{objet}|stats_total_objet)]</td>
 			</tr>
-			[(#REM) popularité du site ]
+			[(#REM) popularité globale ]
 			[(#GET{objet}|non)
 			<tr class="odd">
 				<th><:statistiques:info_popularite_2|trim{':'}|trim|ucfirst:></th>
