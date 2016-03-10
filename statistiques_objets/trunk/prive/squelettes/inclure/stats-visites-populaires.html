@@ -15,9 +15,8 @@
 ]
 
 [(#REM) onglet des objets ]
-#SET{objets,#ARRAY}
-<BOUCLE_menu_articles(visites_articles){0,1}>#SET{objets,#GET{objets}|push{article}}</BOUCLE_menu_articles>
-<BOUCLE_menu_objets(visites_objets){fusion objet}>#SET{objets,#GET{objets}|push{#OBJET}}</BOUCLE_menu_objets>
+#SET{objets,#LISTE{article}}
+<BOUCLE_objets(visites_objets){fusion objet}>#SET{objets,#GET{objets}|push{#OBJET}}</BOUCLE_objets>
 #SET{objet,#VAL{objet}|_request|sinon{#VAL{id_article}|_request|?{article}}|sinon{#GET{objets/0}}}
 #SET{id_objet,#VAL{id_objet}|_request}
 #SET{id_table_objet, #GET{objet}|id_table_objet}
@@ -37,11 +36,11 @@
 
 	<div class="unit size1of2">
 
-		[(#REM) les plus populaires ]
+		[(#REM) les 30 plus populaires ]
 		#SET{c,#GET{objet}|classement_populaires}
-		[(#SET{req_pluspop,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)})]
+		[(#SET{req_pluspop,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\) ORDER BY FIELD\([(#GET{id_table_objet})][,(#GET{c}|join{','})]\) LIMIT [(#VAL{'0,30'})]})]
 		#SET{ids_pluspop,#ARRAY}
-		<p><:statistiques:info_visites_objets_plus_populaires:></p>
+		<h4><:statistiques:info_visites_objets_plus_populaires:></h4>
 		<B_pluspop>
 		<ol class="classement">
 			<BOUCLE_pluspop(DATA){source sql, #GET{req_pluspop}}>
@@ -58,14 +57,14 @@
 		</ol>
 
 		[(#REM) les 10 derniers visités ]
-		[(#SET{req_derniers,SELECT [(#GET{id_table_objet}),date,visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pluspop}|join{','})]\) RDER BY date DESC LIMIT [(#VAL{'0,10'})]})]
+		[(#SET{req_derniers,SELECT [(#GET{id_table_objet}),date,visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pluspop}|join{','})]\) ORDER BY date DESC LIMIT [(#VAL{'0,10'})]})]
 		<B_derniers>
 			<p class="center">[...]</p>
-			<p><:statistiques:info_visites_objets_derniers:></p>
+			<h4><:statistiques:info_visites_objets_derniers:></h4>
 			<ol class='classement'>
 				<BOUCLE_derniers(DATA){source sql, #GET{req_derniers}}>
 				#SET{popularite,#VALEUR{popularite}|ceil}
-				<li[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
+				<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
 						href="[(#SELF|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
@@ -76,11 +75,13 @@
 			</ol>
 		</B_derniers>
 		</B_pluspop>
+
 	</div>
 
 	[(#REM) les 30 plus visités depuis le début ]
 	<div class="unit lastUnit">
-		<p><:statistiques:info_afficher_visites_objets_plus_visites:></p>
+
+		<h4><:statistiques:info_afficher_visites_objets_plus_visites:></h4>
 		#SET{c,#GET{objet}|classement_populaires}
 		[(#SET{req_plusvisites,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\) ORDER BY visites DESC LIMIT [(#VAL{'0,30'})]})]
 		<ol class='classement'>
@@ -95,7 +96,8 @@
 		<hr />
 		<h4><:statistiques:info_comment_lire_tableau:></h4>
 		<p><:statistiques:texte_comment_lire_tableau:></p>
+
 	</div>
-	
+
 </div>
 #BOITE_FERMER
