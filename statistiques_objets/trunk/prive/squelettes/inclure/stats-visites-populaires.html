@@ -21,7 +21,8 @@
 #SET{id_objet,#VAL{id_objet}|_request}
 #SET{id_table_objet, #GET{objet}|id_table_objet}
 #SET{table_objet_sql,#GET{objet}|table_objet_sql}
-#SET{champ_titre,#GET{objet}|objet_info{titre}}
+#SET{champ_titre,#GET{objet}|objet_info{titre}|sinon{titre}}
+#SET{champ_date,#GET{objet}|objet_info{date}|sinon{date}}
 
 <div class="onglets_simple clearfix">
 	<ul>
@@ -57,7 +58,7 @@
 		</ol>
 
 		[(#REM) les 10 derniers visités ]
-		[(#SET{req_derniers,SELECT [(#GET{id_table_objet}),date,visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pluspop}|join{','})]\) ORDER BY date DESC LIMIT [(#VAL{'0,10'})]})]
+		[(#SET{req_derniers,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_date})][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pluspop}|join{','})]\) ORDER BY [(#GET{champ_date})] DESC LIMIT [(#VAL{'0,10'})]})]
 		<B_derniers>
 			<p class="center">[...]</p>
 			<h4><:statistiques:info_visites_objets_derniers:></h4>
