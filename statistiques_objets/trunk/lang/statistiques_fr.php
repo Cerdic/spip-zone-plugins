@@ -19,4 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_visites_objets_plus_populaires' => 'Les plus populaires :',
 	'info_visites_objets_derniers' => 'Les derniers publiés :',
 
+	// O
+	'onglet_visites_toutes' => 'Toutes les visites',
+
 );

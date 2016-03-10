@@ -7,30 +7,16 @@
 	- \#POPULARITE_ABSOLUE : on applique ceil à la popularite
 	- \#EXPOSE : avec une balise conditionnelle
 
-	Le squelette appelant ne transmet pas l'env, donc on récupère les variables nécessaires avec _request
-
 	Inclus dans :
 	- prive/squelettes/contenu/stats_visites.html
 
 ]
-
-[(#REM) onglet des objets ]
-#SET{objets,#LISTE{article}}
-<BOUCLE_objets(visites_objets){fusion objet}>#SET{objets,#GET{objets}|push{#OBJET}}</BOUCLE_objets>
-#SET{objet,#VAL{objet}|_request|sinon{#VAL{id_article}|_request|?{article}}|sinon{#GET{objets/0}}}
-#SET{id_objet,#VAL{id_objet}|_request}
+#SET{objet,#ENV{objet,article}}
+#SET{id_objet,#ENV{id_objet}|intval}
 #SET{id_table_objet, #GET{objet}|id_table_objet}
 #SET{table_objet_sql,#GET{objet}|table_objet_sql}
 #SET{champ_titre,#GET{objet}|objet_info{titre}|sinon{titre}}
 #SET{champ_date,#GET{objet}|objet_info{date}|sinon{date}}
-
-<div class="onglets_simple clearfix">
-	<ul>
-		<BOUCLE_menu(DATA){source table, #GET{objets}}>
-		<li>[(#SELF|parametre_url{objet,#VALEUR}|parametre_url{id_article|id_objet,''}|lien_ou_expose{[(#VALEUR|objet_icone{16}) ][(#VALEUR|objet_info{texte_objets}|_T)],#VALEUR|=={#GET{objet}},ajax})]</li>
-		</BOUCLE_menu>
-	</ul>
-</div>
 
 #BOITE_OUVRIR{'','note'}
 <div class="stats-articles">
@@ -49,7 +35,7 @@
 				#SET{popularite,#VALEUR{popularite}|ceil}
 				<li[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
-						href="[(#SELF|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
 						#VALEUR{titre}
 					</a>
@@ -67,7 +53,7 @@
 				#SET{popularite,#VALEUR{popularite}|ceil}
 				<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
-						href="[(#SELF|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
 						#VALEUR{titre}
 					</a>
@@ -88,8 +74,12 @@
 		<ol class='classement'>
 			<BOUCLE_plusvisites(DATA){source sql, #GET{req_plusvisites}}>
 			#SET{popularite,#VALEUR{popularite}|ceil}
-				<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]><a href="[(#SELF|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
-							title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">#TITRE</a></li>
+			<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
+				<a href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
+						#VALEUR{titre}
+				</a>
+			</li>
 			</BOUCLE_plusvisites>
 		</ol>
 

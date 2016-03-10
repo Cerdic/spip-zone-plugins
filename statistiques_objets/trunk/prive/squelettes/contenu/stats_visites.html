@@ -1,0 +1,27 @@
+[(#REM)
+
+	Surcharge : prise en compte des différents objets éditoriaux
+
+]
+[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+
+[(#REM) onglets des objets ]
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#SELF|parametre_url{objet|id_objet,''}|lien_ou_expose{[(#CHEMIN_IMAGE{racine-16}|balise_img) ]<:statistiques:onglet_visites_toutes:>,[(#ENV{objet}|non)]})]</li>
+		<li>[(#SELF|parametre_url{objet,article}|lien_ou_expose{[(#VAL{article}|objet_icone{16}) ][(#VAL{article}|objet_info{texte_objets}|_T)],#ENV{objet}|=={article}})]</li>
+		<BOUCLE_menu_objets(visites_objets){fusion objet}>
+		<li>[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''}|lien_ou_expose{[(#OBJET|objet_icone{16}) ][(#OBJET|objet_info{texte_objets}|_T)],#OBJET|=={#ENV{objet}}})]</li>
+		</BOUCLE_menu_objets>
+	</ul>
+</div>
+
+[(#REM) graphiques ]
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-data, env} />
+[(#REM) listes des objets populaires ]
+[(#ENV{objet}|oui)
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-populaires, env} />
+]
+
+[(#REM) scripts ]
+<INCLURE{fond=prive/stats/visites} />

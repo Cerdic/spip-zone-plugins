@@ -6,9 +6,9 @@
 	- prive/squelettes/contenu/stats_visites.html
 
 ]
-
 [(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{statistique-24.png}|balise_img{'',cadre-icone})]<h1><:statistiques:titre_evolution_visite:></h1>,'simple stats'})]
-[(#REM) Objet sélectionné ]
+
+[(#REM) éventuel objet sélectionné ]
 <BOUCLE_expose(CONDITION){si #ENV{objet}|et{#ENV{id_objet}|intval}}>
 #SET{id_table_objet, #ENV{objet}|id_table_objet}
 #SET{table_objet_sql,#ENV{objet}|table_objet_sql}
@@ -25,6 +25,7 @@
 </BOUCLE_objet>
 </BOUCLE_expose>
 
+[(#REM) Graphiques ]
 <INCLURE{fond=prive/squelettes/inclure/stats-visites-jours,ajax,env} />
 <INCLURE{fond=prive/squelettes/inclure/stats-visites-mois,ajax,env} />
 
