@@ -1,0 +1,31 @@
+[(#REM)
+
+	Surcharge : prise en compte des différents objets éditoriaux
+
+	Inclus dans :
+	- prive/squelettes/contenu/stats_visites.html
+
+]
+
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{statistique-24.png}|balise_img{'',cadre-icone})]<h1><:statistiques:titre_evolution_visite:></h1>,'simple stats'})]
+[(#REM) Objet sélectionné ]
+<BOUCLE_expose(CONDITION){si #ENV{objet}|et{#ENV{id_objet}|intval}}>
+#SET{id_table_objet, #ENV{objet}|id_table_objet}
+#SET{table_objet_sql,#ENV{objet}|table_objet_sql}
+#SET{champ_titre,#ENV{objet}|objet_info{titre}|sinon{titre}}
+#SET{champ_date,#ENV{objet}|objet_info{date}|sinon{date}}
+[(#SET{req,SELECT [(#GET{id_table_objet})][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#ENV{id_objet}|intval)]})]
+<BOUCLE_objet(DATA){source sql, #GET{req}}>
+#BOITE_OUVRIR{'','note'}
+	<a class='annule_filtre' href="[(#SELF|parametre_url{id_objet,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<:statistiques:titre_page_statistiques_visites:> <:info_pour:>
+	<h2 class='objet_titre'><a href='[(#ENV{id_objet}|generer_url_entite{#ENV{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
+	<a href="[(#VAL{stats_referers}|generer_url_ecrire{#GET{id_table_objet}=#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_liens_entrants:></a>
+#BOITE_FERMER
+</BOUCLE_objet>
+</BOUCLE_expose>
+
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-jours,ajax,env} />
+<INCLURE{fond=prive/squelettes/inclure/stats-visites-mois,ajax,env} />
+
+#BOITE_FERMER
