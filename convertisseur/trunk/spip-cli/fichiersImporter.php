@@ -184,9 +184,10 @@ class fichiersImporter extends Command {
 					
 					include_spip("inc/rubriques");
 					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
-					sql_update('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
+					$up = sql_update('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 					
-					$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
+					if($up)
+						$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
 					
 					$progress->setMessage("", 'docs');											
 					$progress->setMessage("", 'mot');
@@ -202,9 +203,6 @@ class fichiersImporter extends Command {
 					$GLOBALS['auteur_session']['id_auteur'] = $id_admin ;
 			
 					if($id_article = inserer_conversion($texte, $id_rubrique, $f)){
-						// id d'importation
-						sql_update("spip_articles", array("fichier_source" => sql_quote($fichier)), "id_article=$id_article");
-						
 						// Créer l'auteur ?
 						if($auteurs){
 

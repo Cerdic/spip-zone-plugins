@@ -534,8 +534,8 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	// dans la meme rubrique,
 	// avec le statut prepa, qui nous appartient, et... on l'ecrase
 
-	$source = 'Conversion depuis '.basename($f) ;
 	$champ_source = (in_array("fichier_source", $champs_article)) ? "fichier_source" : "ps" ;
+	$source = 'Conversion depuis '.basename($f) ;
 
 	// spip 3
 	if($spip_version_branche > "3")
@@ -656,7 +656,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	// Si des <ins> qui ne correspondent pas à des champs connus sont toujours là on les ajoute dans le champs metadonnees ou a défaut ostensiblement en haut du texte.
 	if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $c['texte'], $z, PREG_SET_ORDER)){
 		foreach($z as $d){
-			if(!in_array("metadonnees", $champs_articles)){
+			if(!in_array("metadonnees", $champs_article)){
 				$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
 				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
 			}else{
