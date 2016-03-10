@@ -5,7 +5,7 @@
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_selections_contenu' value='#ENV{id_selections_contenu}' />
+		
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{input, url, obligatoire=oui,
 				label=<:selections_contenu:champ_url_label:>,

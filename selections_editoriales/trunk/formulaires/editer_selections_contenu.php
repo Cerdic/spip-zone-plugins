@@ -65,6 +65,9 @@ function formulaires_editer_selections_contenu_charger_dist($id_selections_conte
 	}
 	
 	$valeurs = formulaires_editer_objet_charger('selections_contenu',$id_selections_contenu,'',0,$retour,$config_fonc,$row,$hidden);
+	unset($valeurs['id_selections_contenu']);
+	unset($valeurs['id_selection']);
+	
 	return $valeurs;
 }
 
