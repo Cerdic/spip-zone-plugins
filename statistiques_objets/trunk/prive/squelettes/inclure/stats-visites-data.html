@@ -20,7 +20,7 @@
 	<a class='annule_filtre' href="[(#SELF|parametre_url{id_objet,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
 	<:statistiques:titre_page_statistiques_visites:> <:info_pour:>
 	<h2 class='objet_titre'><a href='[(#ENV{id_objet}|generer_url_entite{#ENV{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
-	<a href="[(#VAL{stats_referers}|generer_url_ecrire{#GET{id_table_objet}=#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_liens_entrants:></a>
+	<a href="[(#VAL{stats_referers}|generer_url_ecrire{objet=#ENV{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_liens_entrants:></a>
 #BOITE_FERMER
 </BOUCLE_objet>
 </BOUCLE_expose>

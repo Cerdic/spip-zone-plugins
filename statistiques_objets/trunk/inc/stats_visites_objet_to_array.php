@@ -1,6 +1,6 @@
 <?php
 /**
- * Source pour les itérateurs : visites d'un objet éditorial.
+ * Source pour les itérateurs : visites d'un type objet éditorial (optionnel)
  *
  * Adaptation de stats_visites_to_array.php pour prendre en compte tous les objets éditoriaux
  *

@@ -18,8 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_afficher_visites_objets_plus_visites' => 'Les plus visités depuis le début :',
 	'info_visites_objets_plus_populaires' => 'Les plus populaires :',
 	'info_visites_objets_derniers' => 'Les derniers publiés :',
-
+	'info_0_referer' => 'Aucun lien entrant',
+	'info_0_visite' => 'Aucune visite',
+	
 	// O
 	'onglet_visites_toutes' => 'Toutes les visites',
+	'onglet_referers_tous' => 'Tous les referers',
 
 );
