@@ -11,7 +11,9 @@
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>[(#SELF|parametre_url{objet|id_objet,''}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_visites_toutes:>,[(#ENV{objet}|non)]})]</li>
+		<BOUCLE_menu_articles(visites_articles){0,1}>
 		<li>[(#SELF|parametre_url{objet,article}|lien_ou_expose{[(#VAL{article}|objet_icone{16}) ][(#VAL{article}|objet_info{texte_objets}|_T)],#ENV{objet}|=={article}})]</li>
+		</BOUCLE_menu_articles>
 		<BOUCLE_menu_objets(visites_objets){fusion objet}>
 		<li>[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''}|lien_ou_expose{[(#OBJET|objet_icone{16}) ][(#OBJET|objet_info{texte_objets}|_T)],#OBJET|=={#ENV{objet}}})]</li>
 		</BOUCLE_menu_objets>
