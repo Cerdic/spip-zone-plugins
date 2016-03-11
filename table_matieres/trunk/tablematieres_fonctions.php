@@ -12,6 +12,8 @@ define('_MIN_ANCRE', isset($tm['min']) ? $tm['min'] : 3);
 define('_RETOUR_TDM', '<a href="#tdm" class="tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
+defined('TDM_JAVASCRIPT') || define('TDM_JAVASCRIPT',true);
+
 
 /**
  * Fonction d'API.
