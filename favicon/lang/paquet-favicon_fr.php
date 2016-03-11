@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'favicon_description' => 'Génération automatique, à partir de votre logo de site, de favicon et touch icon pour les différents navigateurs et terminaux.
-	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 150 pixels de côté minimum. Sinon, déposer une image nommée « favicon.png » à la racine du dossier « squelettes ».',
+	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 200 pixels de côté minimum. Sinon, déposer une image nommée « favicon.png » à la racine du dossier « squelettes ».',
 	'favicon_slogan' => 'Favicon et touch icon du site',
 );
 ?>
