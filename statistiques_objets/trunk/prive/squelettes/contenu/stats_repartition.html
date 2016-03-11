@@ -1,0 +1,38 @@
+[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+<h1 class="grostitre"><:statistiques:titre_page_statistiques:></h1>
+
+[(#REM) onglets des objets
+        on n'affiche que les objets ayant un champ id_rubrique
+]
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>[(#SELF|parametre_url{objet|id_objet,''}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_tous_objets:>,[(#ENV{objet}|non)]})]</li>
+		<BOUCLE_menu_articles(visites_articles){0,1}>
+		<li>[(#SELF|parametre_url{objet,article}|lien_ou_expose{[(#VAL{article}|objet_icone{16}) ][(#VAL{article}|objet_info{texte_objets}|_T)],#ENV{objet}|=={article}})]</li>
+		</BOUCLE_menu_articles>
+		<BOUCLE_menu_objets(visites_objets){fusion objet}{objet != rubrique}>
+		[(#VAL{id_rubrique}|in_array{#OBJET|objet_info{field}|array_keys}|oui)
+		<li>[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''}|lien_ou_expose{[(#OBJET|objet_icone{16}) ][(#OBJET|objet_info{texte_objets}|_T)],#OBJET|=={#ENV{objet}}})]</li>
+		]
+		</BOUCLE_menu_objets>
+	</ul>
+</div>
+
+[(#REM) onglets répartition actuelle  /depuis le début ]
+<div class="onglets_simple second clearfix">
+	<ul>
+		<li>[(#URL_ECRIRE{stats_repartition}|lien_ou_expose{<:statistiques:icone_repartition_actuelle:>,[(#ENV{critere,''}|=={debut}|non)],ajax})]</li>
+		<li>[(#URL_ECRIRE{stats_repartition,critere=debut}|lien_ou_expose{<:statistiques:onglet_repartition_debut:>,[(#ENV{critere,''}|=={debut}|oui)],ajax})]</li>
+	</ul>
+</div>
+
+[(#BOITE_OUVRIR{#CHEMIN_IMAGE{repartition-24.png}|balise_img{'',cadre-icone}})]
+
+[(#ENV{objet}|enfants_objets_aff{0,400, 400, #ENV{critere}|=={debut}|?{visites,popularite}})]
+
+<p>
+	<:statistiques:texte_signification:>
+	<br /><:statistiques:texte_repartition_objets_rubriques:>
+</p>
+
+#BOITE_FERMER

@@ -24,5 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_visites_toutes' => 'Toutes les visites',
 	'onglet_referers_tous' => 'Tous les referers',
+	'onglet_tous_objets' => 'Tous les objets',
 
+	//T
+	'texte_repartition_objets_rubriques' => 'Seuls les objets pouvant être rangés dans des rubriques sont pris en compte.',
 );
