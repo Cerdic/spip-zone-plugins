@@ -5,6 +5,8 @@
 ]
 [(#AUTORISER{voirstats}|sinon_interdire_acces)]
 
+<h1 class="grostitre"><:statistiques:onglet_origine_visites:></h1>
+
 [(#REM) onglets des objets ]
 <div class="onglets_simple clearfix">
 	<ul>
@@ -46,7 +48,7 @@
 
 [(#REM) liste des referers ]
 <B_statsr>
-<h1><:statistiques:onglet_origine_visites:> (#TOTAL_BOUCLE [(#TOTAL_BOUCLE|singulier_ou_pluriel{info_site,info_sites})])</h1>
+<h2>#TOTAL_BOUCLE [(#TOTAL_BOUCLE|singulier_ou_pluriel{info_site,info_sites})]</h2>
 <div class="liste">
 	[<h2>(#ENV{jour,''}|=={jour}|oui)<:date_aujourdhui|ucfirst:></h2>]
 	[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]

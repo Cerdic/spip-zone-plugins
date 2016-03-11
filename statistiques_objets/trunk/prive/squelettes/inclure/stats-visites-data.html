@@ -6,7 +6,7 @@
 	- prive/squelettes/contenu/stats_visites.html
 
 ]
-[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{statistique-24.png}|balise_img{'',cadre-icone})]<h1><:statistiques:titre_evolution_visite:></h1>,'simple stats'})]
+[(#BOITE_OUVRIR{'','simple stats'})]
 
 [(#REM) éventuel objet sélectionné ]
 <BOUCLE_expose(CONDITION){si #ENV{objet}|et{#ENV{id_objet}|intval}}>
