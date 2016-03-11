@@ -1,7 +1,7 @@
 <paquet
 	prefix="statsobjets"
 	categorie="statistique"
-	version="1.0.12"
+	version="1.0.13"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/statsobjets.png"
@@ -13,7 +13,7 @@
 
 	<auteur>tcharlss</auteur>
 
-	<necessite nom="stats" compatibilite="[0.4.0;[" />
+	<necessite nom="stats" compatibilite="[0.4.7;[" />
 
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/statsobjets.php" />
 	<pipeline nom="formulaire_fond" inclure="statsobjets_pipelines.php" />
