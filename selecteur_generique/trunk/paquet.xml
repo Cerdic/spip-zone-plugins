@@ -1,8 +1,8 @@
 <paquet
 	prefix="selecteurgenerique"
 	categorie="outil"
-	version="1.0.0"
-	etat="test"
+	version="1.1.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/selecteur_generique-64.png"
 	documentation="http://contrib.spip.net/Selecteur-generique"
@@ -12,6 +12,8 @@
 
 	<auteur>Fil</auteur>
 	<auteur>kent1</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur>RastaPopoulos</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	
