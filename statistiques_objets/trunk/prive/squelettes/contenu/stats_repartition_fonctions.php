@@ -87,7 +87,7 @@ function enfants_objets_aff($id_parent, $decalage, $taille, $critere, $gauche = 
 		}
 	}
 	// sinon on s'assure d'avoir un array des objets passés en paramètres
-	elseif (!is_array($objets)) {
+	elseif (is_string($objets)) {
 		$objets = array($objets);
 	}
 
