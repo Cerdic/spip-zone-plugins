@@ -12,9 +12,15 @@ function selecteurs_generique_dist() {
 	$tables = lister_tables_objets_sql();
 	$search = trim(_request('q'));
 	$resultats = array();
+	$limite = 5;
 	
 	if (!$search) {
 		return $resultats;
+	}
+	
+	// Pouvoir personnaliser le nombre de résultats
+	if ($limite_perso = intval(_request('limite')) and $limite_perso > 0) {
+		$limite = $limite_perso;
 	}
 	
 	// On ne garde que les objets demandés… si demandé
@@ -57,7 +63,7 @@ function selecteurs_generique_dist() {
 					"$champ LIKE ".sql_quote("${search}%"),
 					'',
 					'',
-					'0,5'
+					"0,$limite"
 				)
 				or
 				// Sinon n'importe où dans le titre
@@ -67,7 +73,7 @@ function selecteurs_generique_dist() {
 					"$champ LIKE ".sql_quote("%${search}%"),
 					'',
 					'',
-					'0,5'
+					"0,$limite"
 				)
 			)
 		) {
