@@ -13,6 +13,10 @@ function selecteurs_generique_dist() {
 	$search = trim(_request('q'));
 	$resultats = array();
 	
+	if (!$search) {
+		return $resultats;
+	}
+	
 	// On ne garde que les objets demandés… si demandé
 	if ($objets = _request('objets') and is_array($objets)) {
 		$objets = array_flip(array_map('table_objet_sql', $objets));
