@@ -1,7 +1,7 @@
 <paquet
 	prefix="selections_editoriales"
 	categorie="navigation"
-	version="1.5.1"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/selections_editoriales-64.png"
@@ -14,7 +14,8 @@
 	<credit lien="http://www.beaumont63.fr">Mairie de Beaumont (Puy-de-Dôme)</credit>
 	<licence>GNU/GPL v3</licence>
 
-	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 
 	<pipeline nom="autoriser" inclure="selections_editoriales_autorisations.php" />
 	<pipeline nom="formulaire_charger" inclure="selections_editoriales_pipelines.php" />
