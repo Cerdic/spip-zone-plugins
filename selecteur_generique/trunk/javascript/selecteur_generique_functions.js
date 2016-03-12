@@ -102,15 +102,34 @@ function extractLast(list, sep) {
 			}
 			// On regarde si on demande un sélecteur PHP ou le classique squelette
 			var php = me.data('select-php');
+			// On cherche s'il y a des paramètres supplémentaires sous format objet JSON {cle:'valeur'}
+			var params = me.data('select-params');
+			if (typeof(params) == 'string') {
+				try {
+					params = JSON.parse(params);
+				}
+				catch (e) {
+					console.error('Erreur dans l’analyse des paramètres supplémentaires', e);
+				}
+			}
+			if (typeof(params) != 'object') {
+				params = {};
+			}
 			
 			me
 				// appliquer l'autocomplete dessus
 				.autocomplete({
 					source: function(request, response) {
+						// On génère le terme à chercher
 						if (me.attr('multiple')){ var term = extractLast(request.term, separateur); }
 						else { var term = request.term; }
-						//console.log('"'+term+'"');
-						$.getJSON(api+quoi, {'q':term, 'php':php}, response);
+						
+						// On remplit le tableau à poster
+						params.q = term;
+						params.php = php;
+						
+						// On demande les suggestions
+						$.getJSON(api+quoi, params, response);
 					},
 					delay: 300,
 					html: true,
