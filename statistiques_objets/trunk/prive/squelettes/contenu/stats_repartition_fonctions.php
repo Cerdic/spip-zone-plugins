@@ -12,14 +12,14 @@ include_spip('inc/presentation');
  * On peut passer en paramètre un ou plusieurs types d'objets pour n'afficher que les visites de ces objets,
  * sinon on retourne les visites de tous les types d'objets trouvés dans spip_visites_articles et spip_visites_objets
  * 
- * @param  array $objets              Types d'objets
- * @param  integer $id_parent         
- * @param  string $critere            critère pour le comptage : visites|popularite
- * @param  integer $nombre_branche    
- * @param  integer $nombre_rub
- * @return integer Nombre
+ * @param  integer $id_parent         Identifiant de la rubrique parente à partir de laquelle compter
+ * @param  string  $critere           Critère pour le comptage : visites|popularite
+ * @param  integer $nombre_branche    Nombre d'objets dans la branche
+ * @param  integer $nombre_rub        Nombre d'objets dans la rubrique
+ * @param  array   $objets            Types d'objets
+ * @return integer                    Nombre d'objets
  */
-function enfants_objets($objets=array(), $id_parent, $critere, &$nombre_branche, &$nombre_rub) {
+function enfants_objets($id_parent, $critere, &$nombre_branche, &$nombre_rub, $objets=array()) {
 
 	include_spip('base/objets'); // on ne sait jamais
 
@@ -30,12 +30,11 @@ function enfants_objets($objets=array(), $id_parent, $critere, &$nombre_branche,
 		$visites = 0;
 		$id_rubrique = $row['id_rubrique'];
 		foreach($objets as $objet){
-			$table_objet_sql = table_objet_sql($objet);
-			$visites += intval(sql_getfetsel("SUM(" . $critere . ")", $table_objet_sql, "id_rubrique=" . intval($id_rubrique)));
+			$visites += intval(sql_getfetsel("SUM(" . $critere . ")", table_objet_sql($objet), "id_rubrique=" . intval($id_rubrique)));
 		}
 		$nombre_rub[$id_rubrique] = $visites;
 		$nombre_branche[$id_rubrique] = $visites;
-		$nombre += $visites + enfants_objets($objets, $id_rubrique, $critere, $nombre_branche, $nombre_rub);
+		$nombre += $visites + enfants_objets($id_rubrique, $critere, $nombre_branche, $nombre_rub, $objets);
 	}
 	if (!isset($nombre_branche[$id_parent])) {
 		$nombre_branche[$id_parent] = 0;
@@ -52,16 +51,19 @@ function enfants_objets($objets=array(), $id_parent, $critere, &$nombre_branche,
  * On peut passer en paramètre un ou plusieurs types d'objets pour n'afficher que les visites de ces objets,
  * sinon on retourne les visites de tous les types d'objets trouvés dans spip_visites_articles et spip_visites_objets
  * 
- * @param  array|string $objets      Un ou plusieurs types d'objets
- * @param  integer $id_parent        
- * @param  integer $decalage         
- * @param  integer $taille           
- * @param  string $critere           critère pour le comptage : visites|popularite
- * @param  integer [$gauche = 0]     
- * @return string Contenu HTML
+ * @param  array|string $objets       Un ou plusieurs types d'objets
+ * @param  integer      $id_parent    Identifiant de la rubrique parente à partir de laquelle compter
+ * @param  integer      $decalage     
+ * @param  integer      $taille       
+ * @param  string       $critere      Critère pour le comptage : visites|popularite
+ * @param  integer      $gauche       Décalage entre les pourcentages et les barres
+ * @param  array        $objets       Types d'objets
+ * @return string                     Contenu HTML
  */
-function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere, $gauche = 0) {
+function enfants_objets_aff($id_parent, $decalage, $taille, $critere, $gauche = 0, $objets='') {
 
+	include_spip('base/objets'); // on ne sait jamais
+	
 	// sans objets demandés explicitement, on va chercher tous les types d'objets
 	// ayant un champ id_rubrique dans spip_visites_articles et spip_visites_objets
 	if (!$objets) {
@@ -97,16 +99,16 @@ function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere
 	if (is_null($total_site)) {
 		$nombre_branche = array();
 		$nombre_rub = array();
-		$total_site = enfants_objets($objets, 0, $critere, $nombre_branche, $nombre_rub);
+		$total_site = enfants_objets(0, $critere, $nombre_branche, $nombre_rub, $objets);
 		if ($total_site < 1) {
 			$total_site = 1;
 		}
 	}
+
 	$visites_abs = 0;
 	$out = "";
 	$width = intval(floor(($nombre_branche[$id_parent] / $total_site) * $taille));
 	$width = "width:{$width}px;float:$spip_lang_left;";
-
 
 	$result = sql_select("id_rubrique, titre, descriptif", "spip_rubriques", "id_parent=$id_parent", '', '0+titre,titre');
 
@@ -116,8 +118,8 @@ function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere
 		$descriptif = attribut_html(couper(typo($row['descriptif']), 80));
 
 		if ($nombre_branche[$id_rubrique] > 0 or $nombre_rub[$id_rubrique] > 0) {
-			$largeur_branche = floor(($nombre_branche[$id_rubrique] - $nombre_rub[$id_rubrique]) * $taille / $total_site);
-			$largeur_rub = floor($nombre_rub[$id_rubrique] * $taille / $total_site);
+			$largeur_branche = ceil(($nombre_branche[$id_rubrique] - $nombre_rub[$id_rubrique]) * $taille / $total_site);
+			$largeur_rub = ceil($nombre_rub[$id_rubrique] * $taille / $total_site);
 
 			if ($largeur_branche + $largeur_rub > 0) {
 
@@ -136,9 +138,11 @@ function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere
 
 
 				if ($largeur_branche > 2) {
-					$out .= bouton_block_depliable("<a href='" . generer_url_entite($id_rubrique,
-							'rubrique') . "' style='color: black;' title=\"$descriptif\">$titre</a>", "incertain",
-						"stats$id_rubrique");
+					$out .= bouton_block_depliable(
+						"<a href='" . generer_url_entite($id_rubrique,'rubrique') . "' style='color: black;' title=\"$descriptif\">$titre</a>",
+						"incertain",
+						"stats$id_rubrique"
+					);
 				} else {
 					$out .= "<div class='rubsimple' style='padding-left: 18px;'>"
 						. "<a href='" . generer_url_entite($id_rubrique,
@@ -150,7 +154,8 @@ function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere
 
 				// pourcentage de visites dans la branche par rapport au total du site
 				$pourcent = round($nombre_branche[$id_rubrique] / $total_site * 1000) / 10;
-				$out .= "\n<td class='verdana1' style='text-align: $spip_lang_right; width: 40px; border-bottom: 1px solid #aaaaaa;'>$pourcent%</td>";
+				$nb_visites = singulier_ou_pluriel($nombre_branche[$id_rubrique], 'statistiques:info_1_visite', 'statistiques:info_nb_visites');
+				$out .= "\n<td class='verdana1' style='text-align: $spip_lang_right; width: 40px; border-bottom: 1px solid #aaaaaa;'><abbr title='$nb_visites'>$pourcent%</abbr></td>";
 
 
 				$out .= "\n<td align='right' style='border-bottom: 1px solid #aaaaaa; width:" . ($taille + 5) . "px'>";
@@ -181,7 +186,7 @@ function enfants_objets_aff($objets='', $id_parent, $decalage, $taille, $critere
 		if (isset($largeur_branche) && ($largeur_branche > 0)) {
 			$niveau++;
 			$out .= debut_block_depliable(false, "stats$id_rubrique");
-			$out .= enfants_objets_aff($objets, $id_rubrique, $largeur_branche, $taille, $critere, $visites_abs + $gauche);
+			$out .= enfants_objets_aff($id_rubrique, $largeur_branche, $taille, $critere, $visites_abs + $gauche, $objets);
 			$out .= fin_block();
 			$niveau--;
 		}

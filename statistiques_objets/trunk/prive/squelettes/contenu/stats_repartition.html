@@ -28,7 +28,7 @@
 
 [(#BOITE_OUVRIR{#CHEMIN_IMAGE{repartition-24.png}|balise_img{'',cadre-icone}})]
 
-[(#ENV{objet}|enfants_objets_aff{0,400, 400, #ENV{critere}|=={debut}|?{visites,popularite}})]
+[(#REM|intval|enfants_objets_aff{400, 400, #ENV{critere}|=={debut}|?{visites,popularite}, 0, #ENV{objet}})]
 
 <p>
 	<:statistiques:texte_signification:>
