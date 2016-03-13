@@ -1,7 +1,7 @@
 <paquet
 	prefix="ctan"
 	categorie="divers"
-	version="1.0.4"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="ctan.png"
