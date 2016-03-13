@@ -34,7 +34,7 @@
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=pt_br" total="51" traduits="49" relire="0" modifs="1" nouveaux="1" pourcent="96.08">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=sk" total="51" traduits="47" relire="0" modifs="3" nouveaux="1" pourcent="92.16">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=sk" total="51" traduits="51" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

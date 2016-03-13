@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_cc' => 'Kópia (CC):',
 	'facteur_copies' => 'Kópie:',
 	'facteur_copies_descriptif' => 'Kópia e-mailu sa pošle na zadané adresy. Na jednu adresu bude odoslaná bežná kópia a/lebo skrytá kópia.',
+	'facteur_email_test' => 'Skúšobný e-mail poslať na adresu:',
 	'facteur_filtre_accents' => 'Diakritiku meniť na entity html (užitočné najmä pre Hotmail).',
 	'facteur_filtre_css' => 'Zmeniť štýly medzi <head> a </head> na "in-line" štýly, užitočné pre webmaily, lebo in-line štýly majú prednosť pred externými.',
 	'facteur_filtre_images' => 'Do e-mailov pridávať obrázky, na ktoré sa v nich odkazuje',
@@ -48,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_port' => 'Port:',
 	'facteur_smtp_secure' => 'Zabezpečené pripojenie:',
 	'facteur_smtp_secure_non' => 'nie',
-	'facteur_smtp_secure_ssl' => 'SSL', # MODIF
-	'facteur_smtp_secure_tls' => 'TLS', # MODIF
+	'facteur_smtp_secure_ssl' => 'SSL (zastarané)',
+	'facteur_smtp_secure_tls' => 'TLS (odporúča sa)',
 	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
 	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.',
 	'facteur_smtp_username' => 'Používateľské meno:',
@@ -58,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.',
 
 	// N
-	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).', # MODIF
+	'note_test_configuration' => 'E-mail bude odoslaný na túto adresu.',
 
 	// P
 	'personnaliser' => 'Prispôsobiť si tieto nastavenia',
