@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_image_defaut_identicon' => '<i>Identikona</i> (vytvára sa cez e-mailovú adresu)',
 	'label_image_defaut_monsterid' => '<i>MonsterID</i> (vytvára sa cez e-mailovú adresu)',
 	'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
+	'label_image_defaut_retro' => '<i>Retro</i> (generovaný z e-mailovej adresy)',
 	'label_image_defaut_wavatar' => '<i>Wavatar</i> (vytvára sa cez e-mailovú adresu)',
 	'label_taille' => 'Veľkosť gravatarov',
 
