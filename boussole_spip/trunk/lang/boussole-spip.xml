@@ -22,7 +22,7 @@
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk" total="88" traduits="80" relire="1" modifs="1" nouveaux="6" pourcent="90.91">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk" total="88" traduits="84" relire="0" modifs="1" nouveaux="3" pourcent="95.45">
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
