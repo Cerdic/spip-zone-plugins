@@ -6,9 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function zotero_url($params) {
 	include_spip('inc/config');
 	if (strpos($params,'?'))
-		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'&v=2&key='.lire_config('zotspip/api_key');
+		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'&v=3&key='.lire_config('zotspip/api_key');
 	else
-		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'?v=2&ey='.lire_config('zotspip/api_key');
+		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'?v=3&key='.lire_config('zotspip/api_key');
 }
 
 
@@ -56,7 +56,7 @@ function zotspip_maj_items($forcer=false, $n=NULL) {
 	else
 		$zotspip_maj_items = isset($GLOBALS['meta']['zotspip_maj_items']) ? unserialize($GLOBALS['meta']['zotspip_maj_items']) : array('forcer' => false, 'start' => 0);
 	
-	$feed = zotero_get('items/?format=atom&order=dateModified&sort=desc&content=json,csljson&limit='.$n.'&start='.$zotspip_maj_items['start']);
+	$feed = zotero_get('items/?format=atom&sort=dateModified&direction=desc&content=json,csljson&limit='.$n.'&start='.$zotspip_maj_items['start']);
 	// On vérifie qu'on a bien eu un retour
 	if (!$feed)
 		return 0;
@@ -285,7 +285,7 @@ function zotspip_maj_collections($forcer=false, $n=NULL) {
 	else
 		$zotspip_maj_collections = isset($GLOBALS['meta']['zotspip_maj_collections']) ? unserialize($GLOBALS['meta']['zotspip_maj_collections']) : array('forcer' => false, 'start' => 0);
 	
-	$feed = zotero_get('collections/?format=atom&order=dateModified&sort=desc&limit='.$n.'&start='.$zotspip_maj_collections['start']);
+	$feed = zotero_get('collections/?format=atom&content=none&sort=dateModified&direction=desc&limit='.$n.'&start='.$zotspip_maj_collections['start']);
 	// On vérifie qu'on a bien eu un retour
 	if (!$feed)
 		return 0;
