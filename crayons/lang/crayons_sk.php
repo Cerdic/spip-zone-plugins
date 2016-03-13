@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_documents' => 'Nahrávanie súborov',
 	'legend_editer_prive' => 'Použiť v súkromnej zóne (experimentálne)',
 	'legend_introduction_article' => 'Úvodný text článku',
+	'legend_introduction_rubrique' => 'Úvodný text rubriky',
 
 	// M
 	'message_image_obligatoire' => 'Musíte si vybrať obrázok',
