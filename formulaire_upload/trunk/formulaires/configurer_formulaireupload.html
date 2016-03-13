@@ -8,7 +8,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-    <ul>
+	<ul>
 		<li class="editer_formupload_files_accepted[ (#ENV**{erreurs}|table_valeur{files_accepted}|oui)erreur]">
 			<label for="files_accepted"><:formupload:cfg_lbl_files_accepted:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_accepted})</span>]
@@ -16,7 +16,7 @@
 			<input type="text" name="files_accepted" class="text" id="files_accepted" size="60"
 				value="#ENV*{files_accepted,''}" />
 		</li>
-		
+
 		<li class="editer_formupload_files_number[ (#ENV**{erreurs}|table_valeur{files_number}|oui)erreur]">
 			<label for="files_number"><:formupload:cfg_lbl_files_number:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_number})</span>]
@@ -24,16 +24,16 @@
 			<input type="text" name="files_number" class="text" id="files_number" size="60"
 				value="#ENV*{files_number,''}" />
 		</li>
-    
-    <li class="editer_formupload_files_quota[ (#ENV**{erreurs}|table_valeur{files_quota}|oui)erreur]">
+
+		<li class="editer_formupload_files_quota[ (#ENV**{erreurs}|table_valeur{files_quota}|oui)erreur]">
 			<label for="files_quota"><:formupload:cfg_lbl_files_quota:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{files_quota})</span>]
 			<p class="explication"><:formupload:cfg_inf_files_quota:></p>
 			<input type="text" name="files_quota" class="text" id="files_quota" size="60"
 				value="#ENV*{files_quota,''}" />
 		</li>
-    
-    <li class="editer_formupload_manage_title">
+
+		<li class="editer_formupload_manage_title">
 			<label><:formupload:cfg_lbl_manage_title:></label>
 			<p class="explications"><:formupload:cfg_manage_title:></p>
 			<div class="choix">
@@ -41,8 +41,7 @@
 				<label for="manage_title_oui"><:oui:></label>
 			</div>
 		</li>
-    
-	
+
 		<li class="editer_formupload_insert_code">
 			<label><:formupload:cfg_lbl_insert_code:></label>
 			<p class="explications"><:formupload:cfg_inf_insert_code:></p>
@@ -51,13 +50,12 @@
 				<label for="insert_code_oui"><:oui:></label>
 			</div>
 		</li>
-    
     </ul>
-    
-    [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-    
-    
+
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+
 		<input type="hidden" name="_meta_casier" value="formulaireupload" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>

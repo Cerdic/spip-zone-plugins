@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // Contexte du formulaire
 function balise_FORMULAIRE_UPLOAD ($p) {
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
-    $_id_objet = $p->boucles[$p->id_boucle]->primary;
+	$_id_objet = $p->boucles[$p->id_boucle]->primary;
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_UPLOAD',
@@ -37,7 +37,7 @@ function balise_FORMULAIRE_UPLOAD_stat($args, $filtres) {
 	// on envoie les arguments a la fonction charger 
 	// du formulaire CVT fomulaires/upload.php
 	return array($objet, $id_objet, $fond_documents);
-	
+
 }
 
 // balise type_boucle de Rastapopoulos dans le plugin etiquettes

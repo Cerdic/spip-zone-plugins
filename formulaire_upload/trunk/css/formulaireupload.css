@@ -9,5 +9,5 @@
 .fupld .pagination { width: 98%: }  
 
 @media print{
-    .formulaire_upload {display:none;}
-} 
+	.formulaire_upload {display:none;}
+}
