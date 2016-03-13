@@ -62,7 +62,7 @@ function zotspip_vider_tables($nom_meta_version_base){
 	supprimer_fichier(_DIR_TMP . 'schema_zotero.php');
 }
 
-// Installer le schéma de données Zotero (schéma mis à jour le 19 mars 2012)
+// Installer le schéma de données Zotero (schéma mis à jour le 13 mars 2016)
 // On le fait manuellement car la fonction de mise à jour doit être appelée au moins 4-5 fois pour couvrir tous les types
 // La mise à jour se fera en tâche CRON
 function zotspip_installer_schema_zotero(){
@@ -204,7 +204,7 @@ function zotspip_installer_schema_zotero(){
     94 => 'presentationType',
     95 => 'url',
     96 => 'university',
-    97 => 'version',
+    97 => 'versionNumber',
     98 => 'volume',
     99 => 'websiteTitle',
     100 => 'websiteType',
@@ -361,7 +361,7 @@ function zotspip_installer_schema_zotero(){
       0 => 'title',
       1 => 'abstractNote',
       2 => 'seriesTitle',
-      3 => 'version',
+      3 => 'versionNumber',
       4 => 'date',
       5 => 'system',
       6 => 'place',

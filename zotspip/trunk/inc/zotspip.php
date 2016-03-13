@@ -524,6 +524,7 @@ function zotspip_maj_schema_zotero() {
 
 	// Sauver le schéma en cache
 	ecrire_fichier_securise(_DIR_TMP . 'schema_zotero.php', serialize($schema));
+	//ecrire_fichier_securise(_DIR_TMP . 'schema_zotero_export.php', var_export($schema, true)); // For updating zotspip_administrations.php
 	
 	if (isset($schema['sync']))
 		return -5; // Continuer la synchronisation
