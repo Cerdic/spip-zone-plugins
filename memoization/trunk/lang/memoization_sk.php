@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_taille_cache_inconnue' => 'Metóda @methode@ nepozná veľkosť cache.',
+	'invalider_cache' => 'Vypnúť cache',
 
 	// L
 	'label_cache_pages' => 'Riadiť cache stránok',
@@ -29,6 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_administration_memcache' => 'Riadiť memcache',
 
 	// M
+	'memcached_donnes' => 'Dáta &7nbsp;vášho servera memcached',
+	'memcached_script' => 'Skript memcache.php vytvoril <a href="http://livebookmark.net">Harun Yayli</a>',
+	'memcached_serveur' => 'Server memcached',
+	'methodes_cache' => 'Cache stránok sa riadi metódou @type@',
 	'methodes_grisees' => 'Spôsoby napísané sivou nie sú na tomto serveri dostupné',
 
 	// O
@@ -38,7 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_filecache' => 'Súbory (filecache)',
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Deaktivované (nocache)',
-	'option_methode_xcache' => 'XCache'
+	'option_methode_xcache' => 'XCache',
+
+	// T
+	'taille_tototale_indisponible' => 'Celková veľkosť nie je známa'
 );
 
 ?>
