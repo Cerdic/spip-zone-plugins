@@ -8,92 +8,91 @@
  * @licence    GNU/GPL
  * @package    SPIP\Facteurmonitoring
  */
- 
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 //
 // envoie et verfie les emails du facteur
 function genie_facteurmonitoring_dist() {
-  include_spip('inc/config');
-  include_spip('inc/mail');
+	include_spip('inc/config');
+	include_spip('inc/mail');
 
 
-  // chargement de la configuration
-  $email = lire_config("facteurmonitoring/email");
-  $email_pwd = lire_config("facteurmonitoring/email_pwd");
-  $hote_imap = lire_config("facteurmonitoring/hote_imap");
-  $hote_port = lire_config("facteurmonitoring/hote_port");
-  $hote_inbox = lire_config("facteurmonitoring/hote_inbox");
-  
-  //lire_metas();
-  $adresse_site = $GLOBALS['meta']['adresse_site']; 
-  
-  // etape 1: verifier la bonne reception de l'email precedent
-  ecrire_meta('facteurmonitoring_etat', 'NOTOK');
-  
-  spip_log("---","facteurmonitoring");  
-  
-  if (isset($GLOBALS['meta']['facteurmonitoring_hash'])) {
-    $email_hash = trim($GLOBALS['meta']['facteurmonitoring_hash']);
-    
-    if ($email_hash) {
-        // on se connecte en IMAP pour rechercher cet email
-        $connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
-        $mbox = @imap_open($connection, $email, $email_pwd);
-          
-        if (FALSE === $mbox) {
-                spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                               
-        } else {
-                // lecture boite                  
-                $info = imap_check($mbox);
-                if (FALSE === $info) {
-                    spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                    
-                }  else {
-                    // to do search msg
-                    $msgs = imap_search($mbox, 'SUBJECT "'.$email_hash.'"', SE_UID);
-                    
-                    if (count($msgs)) {
-                       // on efface les emails
-                       foreach ($msgs as $msg) {
-                            imap_delete($mbox, $msg, FT_UID);
-                            // TODO: apparement la fonction marche mal sous GMAIL
-                       }
-                       imap_expunge($mbox); 
-                       ecrire_meta('facteurmonitoring_etat', 'OK'); 
-                       spip_log("[reception] OK, email lu $email_hash","facteurmonitoring");
-                        
-                    }  else {
-                       spip_log("[reception] NOTOK, erreur: email introuvable $email_hash","facteurmonitoring");
-                    }
+	// chargement de la configuration
+	$email = lire_config("facteurmonitoring/email");
+	$email_pwd = lire_config("facteurmonitoring/email_pwd");
+	$hote_imap = lire_config("facteurmonitoring/hote_imap");
+	$hote_port = lire_config("facteurmonitoring/hote_port");
+	$hote_inbox = lire_config("facteurmonitoring/hote_inbox");
 
-                }
-          }
-        
+	//lire_metas();
+	$adresse_site = $GLOBALS['meta']['adresse_site']; 
 
-    } else {       
-      spip_log("[reception] NOTOK, erreur: email hash vide","facteurmonitoring"); 
-    }     
-    
-  } else {
-      spip_log("[reception] NOTOK, erreur: email hash inconnu","facteurmonitoring"); 
-  }
-    
-  // etape 2: envoie d'un nouvel email test
-  $envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
-  $email_hash = md5($adresse_site.time());
-  $email_sujet = "[facteur-monitoring] $email_hash";
-  $email_body = _T('facteurmonitoring:no-reply',array('site'=>$adresse_site));
-  
-  if ($ok = $envoyer_mail($email,$email_sujet,$email_body)) {
-      ecrire_meta('facteurmonitoring_hash', $email_hash); 
-      spip_log("[envoi] OK, envoi email  $email_hash","facteurmonitoring");
-  } else {
-      ecrire_meta('facteurmonitoring_etat', 'NOTOK');
-      spip_log("[envoi] NOTOK, erreur: envoi email $email_hash","facteurmonitoring");
-  }    
-                
+	// etape 1: verifier la bonne reception de l'email precedent
+	ecrire_meta('facteurmonitoring_etat', 'NOTOK');
 
-  return 1;
+	spip_log("---","facteurmonitoring");  
+
+	if (isset($GLOBALS['meta']['facteurmonitoring_hash'])) {
+	$email_hash = trim($GLOBALS['meta']['facteurmonitoring_hash']);
+
+	if ($email_hash) {
+		// on se connecte en IMAP pour rechercher cet email
+		$connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
+		$mbox = @imap_open($connection, $email, $email_pwd);
+
+		if (FALSE === $mbox) {
+				spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                               
+		} else {
+				// lecture boite                  
+				$info = imap_check($mbox);
+				if (FALSE === $info) {
+					spip_log("[config] "._T('facteurmonitoring:test_connection_notok'),"facteurmonitoring");                    
+				}  else {
+					// to do search msg
+					$msgs = imap_search($mbox, 'SUBJECT "'.$email_hash.'"', SE_UID);
+
+					if (count($msgs)) {
+						// on efface les emails
+						foreach ($msgs as $msg) {
+							imap_delete($mbox, $msg, FT_UID);
+							// TODO: apparement la fonction marche mal sous GMAIL
+						}
+						imap_expunge($mbox); 
+						ecrire_meta('facteurmonitoring_etat', 'OK'); 
+						spip_log("[reception] OK, email lu $email_hash","facteurmonitoring");
+
+					}  else {
+						spip_log("[reception] NOTOK, erreur: email introuvable $email_hash","facteurmonitoring");
+					}
+				}
+		}
+
+
+	} else {       
+		spip_log("[reception] NOTOK, erreur: email hash vide","facteurmonitoring"); 
+	}
+
+	} else {
+		spip_log("[reception] NOTOK, erreur: email hash inconnu","facteurmonitoring"); 
+	}
+
+	// etape 2: envoie d'un nouvel email test
+	$envoyer_mail = charger_fonction('envoyer_mail', 'inc/');
+	$email_hash = md5($adresse_site.time());
+	$email_sujet = "[facteur-monitoring] $email_hash";
+	$email_body = _T('facteurmonitoring:no-reply',array('site'=>$adresse_site));
+
+	if ($ok = $envoyer_mail($email,$email_sujet,$email_body)) {
+		ecrire_meta('facteurmonitoring_hash', $email_hash); 
+		spip_log("[envoi] OK, envoi email  $email_hash","facteurmonitoring");
+	} else {
+		ecrire_meta('facteurmonitoring_etat', 'NOTOK');
+		spip_log("[envoi] NOTOK, erreur: envoi email $email_hash","facteurmonitoring");
+	}
+
+
+	return 1;
 }
 ?>
