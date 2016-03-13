@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/etiquettes.png"
 	documentation="http://contrib.spip.net/Etiquettes,2656"
->	
+>
 
 	<nom>&#201;tiquettes</nom>
 	<!-- Ajouter facilement des mots-clés à tout et n'importe quoi -->
@@ -18,6 +18,6 @@
 	<pipeline nom="insert_head" inclure="etiquettes_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/etiquettes_autoriser.php" />
 	
-	<utilise nom="selecteurgenerique" />
-	<utilise nom="nuage" />
+	<utilise nom="selecteurgenerique" compatibilite="[0.7.3;]" />
+	<utilise nom="nuage" compatibilite="[3.2.1;]" />
 </paquet>
