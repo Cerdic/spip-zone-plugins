@@ -1,22 +1,22 @@
 <plugin>
-    <nom>Forum sans prévisualisation</nom>
+	<nom>Forum sans prévisualisation</nom>
 
-    <categorie>communication</categorie>
-    <auteur>Communauté SPIP</auteur>
-    <version>1.0.0</version>
-    <icon>forum_sans_previsu.png</icon>
-    <prefix>forum_sans_previsu</prefix>
-    <etat>stable</etat>
-    <lien>http://contrib.spip.net/4705</lien>
+	<categorie>communication</categorie>
+	<auteur>Communauté SPIP</auteur>
+	<version>1.0.1</version>
+	<icon>forum_sans_previsu.png</icon>
+	<prefix>forum_sans_previsu</prefix>
+	<etat>stable</etat>
+	<lien>http://contrib.spip.net/4705</lien>
 
-    <slogan>Postez rapidement!</slogan>
-    <description>Ce plugin permet de poster un forum sans passer par l'étape prévisualisation.</description>
+	<slogan>Postez rapidement!</slogan>
+	<description>Ce plugin permet de poster un forum sans passer par l'étape prévisualisation.</description>
 	<pipeline>
 		<nom>formulaire_verifier</nom>
 		<inclure>forum_sans_previsu_pipelines.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-	<utilise id="forum" />
-  <utilise id="comments" />
+	<utilise id="forum" version="[0.1.0;]" />
+	<utilise id="comments" version="[2.1.9;]" />
 </plugin>

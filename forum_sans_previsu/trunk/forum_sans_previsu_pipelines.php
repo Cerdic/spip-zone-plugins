@@ -4,7 +4,7 @@ function forum_sans_previsu_formulaire_verifier($flux){
 
 		unset($flux['data']['previsu']);
 		unset($flux['data']['message_erreur']);
-		}
+	}
 	return $flux;
 }
 ?>
