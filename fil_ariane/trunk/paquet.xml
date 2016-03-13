@@ -11,11 +11,11 @@
 	<nom>Fil d'Ariane</nom>
 
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
-    <auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
+	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
 
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="fil_ariane" reference="fr" />
 
-    <pipeline nom="insert_head" inclure="fil_ariane_pipelines.php" />
+	<pipeline nom="insert_head" inclure="fil_ariane_pipelines.php" />
 
 </paquet>
