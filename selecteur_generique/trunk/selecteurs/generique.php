@@ -86,13 +86,20 @@ function selecteurs_generique_dist() {
 			foreach ($trouve as $resultat) {
 				$id_objet = $resultat[$cle_objet];
 				
-				$resultats[] = array(
-					'label' => appliquer_traitement_champ(
+				if (function_exists('appliquer_traitement_champ')) {
+					$titre = appliquer_traitement_champ(
 						$resultat[$champ],
 						'titre',
 						table_objet($table),
 						array('objet' => $objet, 'id_objet' => $id_objet)
-					),
+					);
+				}
+				else {
+					$titre = typo($resultat[$champ]);
+				}
+				
+				$resultats[] = array(
+					'label' => $titre,
 					'value' => $objet.$id_objet,
 				);
 			}
