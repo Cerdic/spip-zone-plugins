@@ -12,7 +12,7 @@
 	<nom>Forum périmé</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur> 
 	<licence>GNU/GPL</licence>
-  
-  <pipeline nom="formulaire_charger" inclure="forum_perime_pipelines.php" />
+
+	<pipeline nom="formulaire_charger" inclure="forum_perime_pipelines.php" />
 
 </paquet>
