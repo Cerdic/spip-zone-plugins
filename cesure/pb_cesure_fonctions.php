@@ -8,16 +8,6 @@
 
 // SETTINGS
 
-
-		define(_PB_HYPHEN, "&#173;");
-		
-		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-		define('_DIR_PLUGIN_PB_CESURE',(_DIR_PLUGINS.end($p)));
-
-		define (_PB_PATH_TO_PATTERNS, _DIR_PLUGIN_PB_CESURE."patterns/");
-		define(_PB_DICTIONARY, "dictionary.txt");
-		define (_PB_EXCLUDE_TAGS, "code,pre,script,style,pbperso");
-
 		// supply a mbstring alternative
 		// should use spip_strpos if any in the future
 		// inspired from inc/charsets.php (SPIP)

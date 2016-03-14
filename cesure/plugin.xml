@@ -3,7 +3,7 @@
 	<slogan>G&#233;rer les c&#233;sures sur l'affichage public</slogan>
 	<auteur>[ARNO*->arno@rezo.net], sur la base du travail de [Yellow Green->http://yellowgreen.de/hyphenation]</auteur>
 	<licence>Creative Commons by-sa</licence>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
 	<etat>stable</etat>
 	<description>
 		Ce plugin permet d'ins&#233;rer les indications de c&#233;sure optionnelle dans les textes trait&#233;s par SPIP.
@@ -14,6 +14,7 @@
 		Il est actif pour l'allemand, l'anglais et le fran&#231;ais.
 	</description>
 	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-de-cesure-html</lien>
+	<options>pb_cesure_options.php</options>
 	<fonctions>pb_cesure_fonctions.php</fonctions>
 	<prefix>pb_cesure</prefix>
 	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
