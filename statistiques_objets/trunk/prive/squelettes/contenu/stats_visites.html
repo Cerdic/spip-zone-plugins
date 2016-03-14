@@ -23,7 +23,7 @@
 [(#REM) graphiques ]
 <INCLURE{fond=prive/squelettes/inclure/stats-visites-data, env} />
 [(#REM) listes des objets populaires ]
-[(#ENV{objet}|oui)
+[(#ENV{objet}|ou{#ENV{id_article}}|oui)
 <INCLURE{fond=prive/squelettes/inclure/stats-visites-populaires, env} />
 ]
 

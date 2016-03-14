@@ -38,7 +38,7 @@
 				#SET{popularite,#VALEUR{popularite}|ceil}
 				<li[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
-						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
 						#VALEUR{titre}
 					</a>
@@ -56,7 +56,7 @@
 				#SET{popularite,#VALEUR{popularite}|ceil}
 				<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
-						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+						href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
 						#VALEUR{titre}
 					</a>
@@ -78,7 +78,7 @@
 			<BOUCLE_plusvisites(DATA){source sql, #GET{req_plusvisites}}>
 			#SET{popularite,#VALEUR{popularite}|ceil}
 			<li value="[(#VALEUR{#GET{id_table_objet}}|array_search{#GET{c}}|plus{1})]"[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
-				<a href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]#contenu" class="ajax"
+				<a href="[(#SELF|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}}|parametre_url{id_article,''})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VALEUR{visites},popularite=#GET{popularite}}|attribut_html:>">
 						#VALEUR{titre}
 				</a>

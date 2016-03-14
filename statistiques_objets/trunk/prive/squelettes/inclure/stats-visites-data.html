@@ -17,7 +17,7 @@
 [(#SET{req,SELECT [(#GET{id_table_objet})][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#ENV{id_objet}|intval)]})]
 <BOUCLE_objet(DATA){source sql, #GET{req}}>
 #BOITE_OUVRIR{'','note'}
-	<a class='annule_filtre' href="[(#SELF|parametre_url{id_objet,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<a class='annule_filtre' href="[(#SELF|parametre_url{id_objet,''}|parametre_url{id_article,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
 	<:statistiques:titre_page_statistiques_visites:> <:info_pour:>
 	<h2 class='objet_titre'><a href='[(#ENV{id_objet}|generer_url_entite{#ENV{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
 	<a href="[(#VAL{stats_referers}|generer_url_ecrire{objet=#ENV{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_liens_entrants:></a>
