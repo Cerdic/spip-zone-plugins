@@ -71,7 +71,7 @@ function http_collectionjson_get_index($requete, $reponse) {
 			$links[] = array(
 				'rel' => table_objet($table),
 				'prompt' => _T($desc['texte_objets']),
-				'href' => url_absolue(self()) . table_objet($table) . '/',
+				'href' => rtrim(url_absolue(self()), '/') . '/' . table_objet($table) . '/',
 			);
 		}
 	}
