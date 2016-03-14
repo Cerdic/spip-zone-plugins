@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_maj_zotspip' => 'ZotSpip se sincroniza con regularidad (aproximadamente cada cuatro horas) con el servidor Zotero. Solamente se toman en cuenta las últimas modificaciones (desde la última sincronización) En caso necesario, pueden forzar una actualización completa de la base de datos, entonces todas las referencias vuelven a descargarse. La sincronización se realiza en múltiples pasos, (referencias, colecciones Zotero, limpieza de elementos suprimidos).',
 	'explication_ordre_types' => 'Se puede personalizar el orden utilizado para las clasificaciones por tipo de referencia (cambie el orden por deslizarse/depositar).
 ',
-	'explication_pas_sync' => '50 máximo, por omisión 50 para las refrencias y 5 para las colecciones. Diminuye el paso de sincronización si encuentras errores de tipo <em>Maximum execution time</em>.',
+	'explication_pas_sync' => '50 máximo, por omisión 50 para las refrencias y 5 para las colecciones. Diminuye el paso de sincronización si encuentras errores de tipo <em>Maximum execution time</em>.', # MODIF
 	'explication_username' => 'Para una librería personal, el nombre de usuario es indicado sobre la <a href="https://www.zotero.org/settings/account"> página de configuración de la cuenta </a>. Para un grupo compartido, el nombre del grupo se sitúa al final del URL de la página inicial del grupo que aparece como <em>https://www.zotero.org/groups/<nom_du_groupe></em>  (en cierto caso, el nombre del grupo correspondiente a su identificador numérico).',
 	'exporter' => 'Exportar',
 	'exporter_reference' => 'Exportar la referencia:',
