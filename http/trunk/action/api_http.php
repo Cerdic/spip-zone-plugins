@@ -108,7 +108,6 @@ function action_api_http_dist(){
 				}
 			}
 			// Pour le DELETE, on ne gère que sur une ressource
-			// Pour le PUT, on ne gère que sur une ressource (pareil, à voir s'il faut quand même…)
 			elseif (
 				$methode == 'DELETE'
 				and $type_reponse == 'ressource'
