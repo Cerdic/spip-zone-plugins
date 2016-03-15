@@ -12,10 +12,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/simplecal_utils');
 
 function balise_SIMPLE_CALENDRIER($p) { 
+	$now = new DateTime();
+	$first_day = $now->format('Y-m-01');
+	$last_day = $now->format('Y-m-t');
 	
 	$req_select = "e.*";
 	$req_from = "spip_evenements AS e";
-	$req_where = "e.date_debut >= CONCAT(DATE_FORMAT(NOW(),'%Y-%m'), '-01') AND e.date_debut <= LAST_DAY(NOW()) AND e.statut = 'publie'";
+	// Eviter un 'no such function: LAST_DAY' qd on utilise SQLite
+	//$req_where = "e.date_debut >= CONCAT(DATE_FORMAT(NOW(),'%Y-%m'), '-01') AND e.date_debut <= LAST_DAY(NOW()) AND e.statut = 'publie'";
+	$req_where = "e.date_debut >= '$first_day' AND e.date_debut <= '$last_day' AND e.statut = 'publie'";
 	$req_orderby = "e.date_debut, e.date_fin";
 	
 	// ---- Acces restreint ---
