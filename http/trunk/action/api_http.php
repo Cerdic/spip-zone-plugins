@@ -114,7 +114,7 @@ function action_api_http_dist(){
 				and $fonction = charger_fonction("delete_$type_reponse", "http/$format/", true)
 			){
 				// Si on a l'autorisation, on lance la fonction trouvée
-				if (autoriser("delete_$type_reponse", $collection, $ressource)){ // autoriser_patates_put_ressource_dist()
+				if (autoriser("delete_$type_reponse", $collection, $ressource)){ // autoriser_patates_delete_ressource_dist()
 					$reponse = $fonction($requete, $reponse);
 				}
 				// Sinon on lève une 401
