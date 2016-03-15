@@ -1,7 +1,7 @@
 <?php
 
 	if (!defined("_ECRIRE_INC_VERSION")) return;
-	
+
 	global $tables_principales;
 	global $tables_auxiliaires;
 	global $tables_jointures;

@@ -35,7 +35,7 @@
 			else echo '<br><br>Erreur dans l\'insertion des donnees des departements dans la table spip_imap_departements: '.sql_error();
 		}
 	}
-	
+
 	function imapdepart_desinstallation() {
 		sql_drop_table("spip_imap_departements");
 		effacer_meta("imapdepart_version");
