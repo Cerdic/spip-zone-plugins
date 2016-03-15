@@ -133,26 +133,27 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		}
 		// Si on ne trouve rien on essaie de s'appuyer sur l'API objet
 		else  {
-
 			include_spip('base/abstract_sql');
 			include_spip('base/objets');
-
+			
 			// Si la collection demandée ne correspond pas à une table
 			// d'objet on arrête tout
-			if ( ! in_array(table_objet_sql($collection),
-							array_keys(lister_tables_objets_sql()))) {
+			if (!in_array(
+				table_objet_sql($collection),
+				array_keys(lister_tables_objets_sql())
+			)) {
 				// On utilise la fonction d'erreur générique pour
 				// renvoyer dans le bon format
 				$fonction_erreur = charger_fonction('erreur', "http/$format/");
 				return $fonction_erreur(404, $requete, $reponse);
 			}
-
+			
+			// On génère la pagination si besoin
 			$links = array();
-
 			$pagination = 10;
-			$offset = $contexte['offset'] ?: 0;
+			$offset = isset($contexte['offset']) ? $contexte['offset'] : 0;
 			$nb_objets = sql_countsel(table_objet_sql($collection));
-
+			
 			// On ajoute des liens de pagination
 			if ($offset > 0) {
 				$offset_precedant = max(0, $offset-$pagination);
@@ -172,25 +173,17 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 						parametre_url(self(), 'offset', $offset_suivant)),
 				);
 			}
-
+			
+			// On requête l'ensemble de cette page d'un coup
 			$table_collection = table_objet_sql($collection);
+			$cle_objet = id_table_objet($table_collection);
 			$description = lister_tables_objets_sql($table_collection);
-			$objets = sql_allfetsel('*', $table_collection,'','','',"$offset,$pagination");
+			$select = isset($description['champs_editables']) ? array_merge($description['champs_editables'], array($cle_objet)) : '*';
+			$lignes = sql_allfetsel($select, $table_collection,'','','',"$offset,$pagination");
 
 			$items = array();
-			foreach ($objets as $objet) {
-				$data = array();
-				foreach ($description['champs_editables'] as $champ){
-					$data[] = array(
-						'name' => $champ,
-						'value' => $objet[$champ],
-					);
-				}
-
-				$items[] = array(
-					'href' => url_absolue(parse_url(self(), PHP_URL_PATH) . $objet[id_table_objet($table_collection)]),
-					'data' => $data,
-				);
+			foreach ($lignes as $champs) {
+				$items[] = http_collectionjson_get_objet(objet_type($table_collection), $champs[$cle_objet], $requete, $champs);
 			}
 
 			$json = array(
@@ -274,42 +267,29 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			}
 		}
 	
-		// Si on n'a toujours aucun contenu json, on en échafaude un avec les API d'objets
-		if (empty($json)){
-			$table_collection = table_objet_sql($collection);
-			$objets = lister_tables_objets_sql();
-		
-			// Si la collection fait partie des objets SPIP et qu'on trouve la ligne de l'objet en question
-			// On ne montre par défaut que les champs *éditables*
-			if (
-				isset($objets[$table_collection])
-				and $description = $objets[$table_collection]
-				and $objet = sql_fetsel($description['champs_editables'], $table_collection, "$cle = ".intval($ressource))
-			){
-				include_spip('inc/filtres');
+		// Si on n'a toujours aucun contenu json, et que la collection est bien un objet SPIP,
+		// on en échafaude un avec les API d'objets
+		if (
+			empty($json)
+			and $table_collection = table_objet_sql($collection)
+			and $objets = lister_tables_objets_sql()
+			and isset($objets[$table_collection])
+			and $description = $objets[$table_collection]
+		) {
+			$objet = objet_type($collection);
+			$id_objet = intval($ressource);
 			
-				$data = array();
-				foreach ($objet as $champ=>$valeur){
-					$data[] = array('name' => $champ, 'value' => $valeur);
-				}
+			$item = http_collectionjson_get_objet($objet, $id_objet, $requete);
 			
-				$json = array(
-					'collection' => array(
-						'version' => '1.0',
-						'href' => url_absolue(self()),
-						'items' => array(
-							array(
-								'href' => url_absolue(self()),
-								'links' => array(
-									array('rel' => 'edit', 'href' => $GLOBALS['meta']['adresse_site']."/http.api/$format/$collection/$ressource"),
-									array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($ressource, objet_type($collection)))),
-								),
-								'data' => $data,
-							),
-						)
-					),
-				);
-			}
+			$json = array(
+				'collection' => array(
+					'version' => '1.0',
+					'href' => url_absolue(self()),
+					'items' => array(
+						$item,
+					)
+				),
+			);
 		}
 	
 		// On passe le json dans un pipeline
@@ -344,6 +324,48 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	}
 	
 	return $reponse;
+}
+
+/**
+ * Vue générique d'un objet en JSON
+ * 
+ * Cette fonction sert à mutualiser le code d'échafaudage pour générer le GET d'un objet.
+ * 
+ * @param string $objet Type de l’objet dont on veut générer la vue
+ * @param int $id_objet Identifiant de l’objet dont on veut générer la vue
+ * @param Request $requete
+ * @param string $contenu Optionnellement, les champs SQL déjà récupérés de l’objet, pour éviter de faire une requête
+ */
+function http_collectionjson_get_objet($objet, $id_objet, $requete, $champs=array()) {
+	include_spip('inc/filtres');
+	
+	$format = $requete->attributes->get('format');
+	$collection = $requete->attributes->get('collection');
+	$table_sql = table_objet_sql($objet);
+	$cle = id_table_objet($objet);
+	$description = lister_tables_objets_sql($table_sql);
+	
+	// S'il n'y a pas de champs, on fait une requête, par défaut on récupère uniquement les champs éditables
+	if (empty($champs)) {
+		$select = isset($description['champs_editables']) ? $description['champs_editables'] : '*';
+		$champs = sql_fetsel($select, $table_sql, $cle . ' = ' . intval($id_objet));
+	}
+	
+	$data = array();
+	foreach ($champs as $champ=>$valeur){
+		$data[] = array('name' => $champ, 'value' => $valeur);
+	}
+	
+	$item = array(
+		'href' => url_absolue("http.api/$format/$collection/$id_objet"),
+		'links' => array(
+			array('rel' => 'edit', 'href' => url_absolue("http.api/$format/$collection/$id_objet")),
+			array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($id_objet, $objet))),
+		),
+		'data' => $data,
+	);
+	
+	return $item;
 }
 
 /**
@@ -405,7 +427,10 @@ function http_collectionjson_put_ressource_dist($requete, $reponse){
  * Édition générique d'un objet en JSON
  * 
  * Cette fonction sert à mutualiser le code d'échafaudage entre le POST et le PUT pour créer ou modifier un objet.
- *
+ * 
+ * @param string $objet Type de l’objet à éditer
+ * @param int $id_objet Identifiant de l’objet à éditer
+ * @param string $contenu Contenu JSON de l’objet à éditer
  * @param Request $requete
  * @param Response $reponse
  * @return Response
