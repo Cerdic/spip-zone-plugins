@@ -1,0 +1,18 @@
+<paquet
+	prefix="switchcase"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/switchcase-32.png"
+>	
+ 
+	<nom>Balises #SWITCH #CASE</nom>
+	<!-- Lecteur de tables SQL -->
+ 
+	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<credit lien="https://thenounproject.com/term/flow-chart/49063/">Inspiration pour l'icone : flowchart by Piotr Kołodziejski, Licence Creative Commons</credit>
+ 
+</paquet>
