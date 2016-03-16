@@ -12,15 +12,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/lettres_fonctions');
 include_spip('classes/lettre');
 include_spip('base/abstract_sql');
+
 @define('_LETTRES_MAX_TRY_SEND',5);
 
+////////////////////////////////////////////////////////////////////////
 //
 // Programme l'envoi de la lettre aux destinataires issus d'une requête sql
+//
 // En complément de $id_lettre, les paramètres sont ceux de sql_select
-// La requête reçue doit produire un 'email', éventuellement un 'code' et d'autres champs
-// dont les valeurs seront substituées aux %%CHAMPS%% présents dans le mail
+//
+// La requête reçue doit produire un 'email', éventuellement un 'code' 
+// et d'autres champs dont les valeurs seront substituées aux `%%CHAMPS%%` 
+// présents dans le mail, qu'on peut aussi utiliser les syntaxes suivantes :
+// `%%CHAMPS|filtre ou valeur sinon%%` et `%%[texte avant (#CHAMP|filtre  ou valeur sinon) et après]%%`
+//
 // Si 'code' est fourni, %%URL_VALIDATION_DESABONNEMENTS%% et %%URL_VALIDATION_DESABONNEMENTS_PERSO%% seront substitués
-// avec les bons paramètres email et code pour la page de désabonnement par défaut; 
+// avec les bons paramètres email et code pour la page de désabonnement par défaut;
 // à savoir 'validation_desabonnements' (ou 'validation_desabonnements_perso' qu'il faut se construire sur mesure)
 //
 function lettres_sql_programmer_envois ($id_lettre, $select = array(), $from = "spip_abonnes", $where = array(), $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {

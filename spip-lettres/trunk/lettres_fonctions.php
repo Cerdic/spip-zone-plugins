@@ -74,8 +74,8 @@ function lettres_recuperer_la_rubrique_parente($id_rubrique) {
 
 // Traiter les raccourcis au moment de l'envoi, pour plus grande personnalisation du mail
 // %%CHAMP%%
-// %%CHAMP|texte sinon%%
-// %%[texte avant(#CHAMP|filtre ou valeur sinon) texte après]%%
+// %%CHAMP|filtre_si_existant ou texte_sinon%%
+// %%[texte avant(#CHAMP|filtre_si_existant ou texte_sinon) texte après]%%
 function lettres_remplacer_raccourci($raccourci, $valeur, $texte) {
 	$texte = str_replace('&nbsp;!', '!', $texte);
 	$texte = str_replace(' !', '!', $texte);
@@ -85,7 +85,7 @@ function lettres_remplacer_raccourci($raccourci, $valeur, $texte) {
 	// i: insensible à la casse, s : capturer les fins de lignes. U : ungreedy
 	$motif_simple = "`%%$raccourci%%`i";
 	$motif_complexe = "`%%$raccourci\|([^%]+)%%`i";
-	$motif_calcul = "`%%\[(.*)\(#$raccourci(\|.*)\)(.*)\]%%`isU";
+	$motif_calcul = "`%%\[([^\]]*)\(#$raccourci(\|[^)]+)?\)(.*)\]%%`isU";
 
 	if (preg_match_all($motif_calcul, $texte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $r) {
@@ -95,6 +95,8 @@ function lettres_remplacer_raccourci($raccourci, $valeur, $texte) {
 			$apres = $r[3];
 			$cherche = $r[0];
 			
+			// spip_log ("CALCUL motif ($motif_calcul) a trouve ($cherche) pour raccourci ($raccourci) avec valeur=($valeur), avant=($avant), pipe=($pipe), apres=($apres)", "lettres_raccourcis");
+
 			if ($pipe) {
 				$filtre = trim($sinon=substr($pipe,1));
 				if (function_exists($filtre))
