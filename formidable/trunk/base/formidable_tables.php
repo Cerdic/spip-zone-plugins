@@ -112,7 +112,10 @@ function formidable_declarer_tables_objets_sql($tables) {
 	);
 
 	$tables['spip_formulaires_reponses'] = array(
+		'type_objet'=>'formulaires_reponse',
+		'table_objet_surnoms' => array('formulairesreponse'),
 		'type'=>'formulaires_reponse',
+		'type_surnoms' => array('formulairesreponse'),
 		'titre' => "'' AS titre, '' AS lang",
 		'date' => 'date',
 		'principale' => 'oui',
