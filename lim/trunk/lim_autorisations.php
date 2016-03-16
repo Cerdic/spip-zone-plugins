@@ -111,6 +111,9 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 
 if (!function_exists('autoriser_rubrique_publierdans')) {
 	function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
+		// echo'<br>lili<br>lili<br>lili<br>lili<br>lili<br>lili';
+		// var_dump($opt);
+		// exit();
 		// Dans LIM l'appel à cette autorisation signifie que forcément $opt est renseigné
 		if (is_array($opt) AND array_key_exists('lim_except_rub',$opt) AND array_key_exists('type',$opt)) {
 			$type = $opt['type'];
