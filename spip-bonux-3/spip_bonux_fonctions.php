@@ -34,7 +34,7 @@ function previsu_verifier_cle_temporaire($cle) {
 	
 	do {
 		$date = date('Y-m-d H', strtotime("-$old hour"));
-		if ($cle == previsu_cle_temporaire($date))
+		if ($cle == previsu_cle_temporaire($date)) {
 			return true;
 		}
 	} while ($old++ < $validite);
@@ -54,4 +54,3 @@ function previsu_cle_temporaire($date=null){
 	
 	return $cle;
 }
-
