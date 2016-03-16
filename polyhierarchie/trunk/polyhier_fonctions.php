@@ -203,17 +203,20 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 		$cle = $boucle->id_table;
 	}
 	
-	$c = "sql_in(
-		'{$cle}.id_rubrique',
-		\$b = calcul_branche_polyhier_in($arg," . ($tous === true ? 'true' : "'directs'") . ")"
-		. ($not ? ", 'NOT'" : '')
-	. ")";
-	$where[] = $c;
+	$where = array();
 	
-	if (
-		$tous !== 'directs'
-		and in_array($boucle->type_requete,array('rubriques','articles'))
-	) {
+	// Si c'est tout ou que directs ET qu'on a trouvé un "id_rubrique" quelque part
+	// on ajoute le critère de branche principale, avec le champ id_rubrique
+	if ($tous !== 'indirects' and $cle) {
+		$where[] = "sql_in(
+			'{$cle}.id_rubrique',
+			\$b = calcul_branche_polyhier_in($arg," . ($tous === true ? 'true' : "'directs'") . ")"
+			. ($not ? ", 'NOT'" : '')
+		. ")";
+	}
+	
+	// Si c'est tout ou que indirects, on ajoute le critère de branche secondaire, avec la table de liens
+	if ($tous !== 'directs') {
 		$type = objet_type($boucle->type_requete);
 		$primary = $boucle->id_table.".".$boucle->primary;
 		
@@ -221,8 +224,9 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 		$where[] = "array('IN', '$primary', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
 	
+	// S'il y a les deux critères, c'est l'un ou l'autre
 	if (count($where) == 2) {
-		$where = "array('OR',".$where[0].",".$where[1].")";
+		$where = "array('OR'," . $where[0] . "," . $where[1] . ")";
 	}
 	else {
 		$where = reset($where);
@@ -237,6 +241,9 @@ function critere_branche_principale_dist($idb, &$boucles, $crit) {
 // un alias
 function critere_branche_directe_dist($idb, &$boucles, $crit) {
 	critere_branche($idb, $boucles, $crit, 'directs');
+}
+function critere_branche_indirecte_dist($idb, &$boucles, $crit) {
+	critere_branche($idb, $boucles, $crit, 'indirects');
 }
 function critere_branche_complete_dist($idb, &$boucles, $crit) {
 	critere_branche($idb, $boucles, $crit, true);

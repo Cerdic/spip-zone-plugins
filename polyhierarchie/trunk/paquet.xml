@@ -1,14 +1,13 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="3.2.0"
+	version="3.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/polyhier-32.png"
 	schema="0.2.0"
 	documentation="http://contrib.spip.net/Polyhierarchie"
 >
-
 	<nom>PolyHierarchy</nom>
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>
 	<licence>GPL</licence>
@@ -25,5 +24,4 @@
 	<pipeline nom="editer_contenu_objet" inclure="polyhier_pipeline.php" />
 	<pipeline nom="pre_edition" inclure="polyhier_pipeline.php" />
 	<pipeline nom="post_edition" inclure="polyhier_pipeline.php" />
-
 </paquet>
