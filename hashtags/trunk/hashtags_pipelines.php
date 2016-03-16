@@ -4,7 +4,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function hashtags_post_edition($flux){
 
-	include_spip('inc/meta');
 	$cfg = lire_config('cfg_hashtags');
 
 	$table_objet = $flux['args']['table_objet'];                // 'articles',
@@ -71,7 +70,7 @@ function hashtags_post_edition($flux){
 	return $flux;
 }
 
-function hashtags_declarer_tables_interfaces($interfaces) {
+function hashtags_declarer_tables_interfaces($interfaces){
 
 	# Ajouter les traitements qui vont bien en fonctions de la config des mot clefs
 	if (isset($GLOBALS['meta']['cfg_hashtags']) AND $cfg_hashtags = $GLOBALS['meta']['cfg_hashtags'])
@@ -87,4 +86,9 @@ function hashtags_declarer_tables_interfaces($interfaces) {
 										$interfaces['table_des_traitements'][strtoupper($champ)][0]);
 
 	return $interfaces;
+}
+
+# Nettoyage de la synatxe hashtag en particulier pour INTRODUCTION...
+function hashtags_nettoyer_raccourcis_typo($flux){
+    return  nettoyer_raccourcis_hashtags($flux);
 }

@@ -20,7 +20,7 @@ function traitements_hashtags($str, $id_groupe=''){
 		$mots = array();
 		if ( count($tagsPropres) AND $res = sql_allfetsel('id_mot, titre', 'spip_mots', $where) )
 			foreach ($res as $r)
-				$mots[$r['titre']] = $r['id_mot'];
+			   $mots[$r['titre']] = $r['id_mot'];
 
 		$patterns = array();
 		foreach ($tagsBrutes as $v)
@@ -36,9 +36,15 @@ function traitements_hashtags($str, $id_groupe=''){
 				$replacements[] = "<strong class=\"hashtag\" data-id-mot=\"$mots[$v]\">" . $v . "</strong>";
 			elseif ( $mots[$v] )
 				$replacements[] = "<span class=\"hashtag\" data-id-mot=\"$mots[$v]\">" . $v . "</span>";
+			else
+				$replacements[] = $v;
 
 		return preg_replace($patterns,$replacements,$str);
 	}
 
 	return $str;
+}
+
+function nettoyer_raccourcis_hashtags($flux,$option=''){
+	return preg_replace("~#(&nbsp;| )?(!->|->|!)?~u",$option,$flux);
 }

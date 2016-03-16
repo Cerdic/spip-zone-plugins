@@ -1,11 +1,11 @@
 <paquet
 	prefix="hashtags"
 	categorie="edition"
-	version="0.0.25"
+	version="0.0.26"
 	etat="dev"
-	documentation="http://blog.roxing.net/spip-plugin-hashtags"
+	documentation="http://contrib.spip.net/Hashtags"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="prive/themes/spip/images/hashtag-32.png"
+	logo="prive/themes/spip/images/hashtags-64.png"
 >
 
 	<nom>Hashtags</nom>
@@ -16,6 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="post_edition" inclure="hashtags_pipelines.php" />
+	<pipeline nom="nettoyer_raccourcis_typo" inclure="hashtags_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="hashtags_pipelines.php" />
 
 </paquet>
