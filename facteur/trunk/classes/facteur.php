@@ -107,13 +107,13 @@ class Facteur extends PHPMailer {
 		elseif (!$this->AddAddress($email)) {
 			spip_log("Erreur AddAddress $email : ".print_r($this->ErrorInfo, true), 'facteur.'._LOG_ERREUR);
 		}
-		
+
 		// Retour des erreurs
 		if (!empty($options['smtp_sender'])) {
 			$this->Sender = $options['smtp_sender'];
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
-		
+
 		// Destinataires en copie, seulement s'il n'y a pas de destinataire de test
 		if (!defined('_TEST_EMAIL_DEST')){
 			if (!empty($options['cc'])) {
@@ -123,13 +123,14 @@ class Facteur extends PHPMailer {
 				$this->AddBCC($options['bcc']);
 			}
 		}
-		
+
 		// Si on envoie avec un SMTP explicite
 		if (isset($options['smtp']) AND $options['smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $options['smtp_host'];
 			$this->Port 	= $options['smtp_port'];
-			
+			$this->From     = (!empty($options['smtp_sender'])) ? $options['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
+
 			// SMTP authentifié
 			if ($options['smtp_auth'] == 'oui') {
 				$this->SMTPAuth = true;
@@ -139,7 +140,7 @@ class Facteur extends PHPMailer {
 			else {
 				$this->SMTPAuth = false;
 			}
-			
+
 			if ($options['smtp_secure'] == 'ssl') {
 				$this->SMTPSecure = 'ssl';
 			}
@@ -151,24 +152,24 @@ class Facteur extends PHPMailer {
 			// on ne doit pas tester les certificats si pas demandé explicitement avec l'option TLS !
 			$this->SMTPAutoTLS = false;
 		}
-		
+
 		// S'il y a un contenu HTML
 		if (!empty($message_html)) {
 			$message_html = unicode_to_utf_8(charset2unicode($message_html, $GLOBALS['meta']['charset']));
-			
+
 			$this->Body = $message_html;
 			$this->IsHTML(true);
 			if ($options['filtre_images']) {
 				$this->JoindreImagesHTML();
 			}
-			
+
 			$this->UrlsAbsolues();
 		}
-		
+
 		// S'il y a un contenu texte brut
 		if (!empty($message_texte)) {
 			$message_texte = unicode_to_utf_8(charset2unicode($message_texte, $GLOBALS['meta']['charset']));
-			
+
 			// Si pas de HTML on le remplace en tant que contenu principal
 			if (!$this->Body) {
 				$this->IsHTML(false);
