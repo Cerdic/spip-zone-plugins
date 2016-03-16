@@ -7,7 +7,10 @@
  * 
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 include_spip('public/spip_bonux_criteres');
 include_spip('public/spip_bonux_balises');
 
@@ -19,27 +22,36 @@ include_spip('public/spip_bonux_balises');
  * @param string $class
  * @return string
  */
-function tag_img($img,$alt="",$class=""){
+function tag_img($img,$alt="",$class="") {
 	$balise_img = chercher_filtre('balise_img');
-	return $balise_img($img,$alt,$class);
+	
+	return $balise_img($img, $alt, $class);
 }
 
-function previsu_verifier_cle_temporaire($cle){
+function previsu_verifier_cle_temporaire($cle) {
 	$validite = 12; // validite de 12h maxi
 	$old = 0;
+	
 	do {
-		$date = date('Y-m-d H',strtotime("-$old hour"));
-		if ($cle==previsu_cle_temporaire($date))
+		$date = date('Y-m-d H', strtotime("-$old hour"));
+		if ($cle == previsu_cle_temporaire($date))
 			return true;
-	} while ($old++<$validite);
+		}
+	} while ($old++ < $validite);
+	
 	return false;
 }
+
 function previsu_cle_temporaire($date=null){
 	include_spip('inc/securiser_action');
-	if (!$date) $date = date('Y-m-d H');
+	
+	if (!$date) {
+		$date = date('Y-m-d H');
+	}
+	
 	$url = self();
 	$cle = md5($url.$date.secret_du_site());
+	
 	return $cle;
 }
 
-?>
