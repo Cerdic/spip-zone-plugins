@@ -144,13 +144,13 @@ function critere_parents_indirects_dist($idb, &$boucles, $crit) {
 function calcul_branche_polyhier_in($id, $tous=true) {
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
 	if (!is_array($id)) {
-		$id = explode(',',$id);
+		$id = explode(',', $id);
 	}
 	$id = array_map('intval', $id);
-
+	
 	// Notre branche commence par la rubrique de depart
 	$branche = $id;
-
+	
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement
 	while (
@@ -164,7 +164,7 @@ function calcul_branche_polyhier_in($id, $tous=true) {
 		$id = array_diff($id, $branche);
 		$branche = array_merge($branche, $id);
 	}
-
+	
 	return implode(',', $branche);
 }
 
@@ -205,12 +205,20 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	
 	$where = array();
 	
+	// On construit en avance la liste des rubriques
+	$boucle->hash .= "
+	// {branche}
+	if ($arg) {
+		\$in_rub = calcul_branche_polyhier_in($arg," . ($tous === true ? 'true' : "'directs'") . ");
+	}
+	";
+	
 	// Si c'est tout ou que directs ET qu'on a trouvé un "id_rubrique" quelque part
 	// on ajoute le critère de branche principale, avec le champ id_rubrique
 	if ($tous !== 'indirects' and $cle) {
 		$where[] = "sql_in(
 			'{$cle}.id_rubrique',
-			\$b = calcul_branche_polyhier_in($arg," . ($tous === true ? 'true' : "'directs'") . ")"
+			\$in_rub"
 			. ($not ? ", 'NOT'" : '')
 		. ")";
 	}
@@ -220,7 +228,7 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 		$type = objet_type($boucle->type_requete);
 		$primary = $boucle->id_table.".".$boucle->primary;
 		
-		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$b" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
+		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
 		$where[] = "array('IN', '$primary', '(SELECT * FROM('.$sous.') AS subquery)')";
 	}
 	
