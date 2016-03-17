@@ -61,18 +61,18 @@
         <input type="text" class="text" size="25" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur}|sinon{#ENV{message_ok}|table_valeur{passage}})]"/>
 
     </li>
-    <li class="editer">
 
-        <B_test20>
-        <label for="version"><:bible:form_version:></label>
 
-        <select name="version" id="version">
-        <BOUCLE_test20(POUR){tableau #GET{tableau} }>
-        <option value="#VALEUR" lang="#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}"[ selected="selected"(#GET{version}|=={#VALEUR}|oui)]>#INFO_BIBLE_TRADUCTION{#VALEUR,traduction}  &nbsp;&#091;#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}&#093;</option>
-        </BOUCLE_test20>
-        </select>
-        </B_test20>
-        </li>
+        <B_traduction>
+          <li class="editer">
+            <label for="version"><:bible:form_version:></label>
+            <select name="version" id="version">
+              <BOUCLE_traduction(POUR){tableau #GET{tableau}}>
+                <option value="#VALEUR" lang="#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}"[ selected="selected"(#GET{version}|=={#VALEUR}|oui)]>#INFO_BIBLE_TRADUCTION{#VALEUR,traduction}  &nbsp;&#091;#INFO_BIBLE_TRADUCTION{#VALEUR,lang_abrev}&#093;</option>
+              </BOUCLE_traduction>
+            </select>
+          </li>
+        </B_traduction>
         [(#CONFIG{bible_pp/numeros}|oui)
         <li class="editer">
 					<label for="numeros"><:bible:form_numeros:></label>
