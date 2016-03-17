@@ -1,90 +1,63 @@
 #SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
 
-<BOUCLE_extras(DATA){source tableau, #GET{extras}}>
-  #SET{champs_extras,#GET{champs_extras}|push{#VALEUR{options/nom}}
+<BOUCLE_extras (DATA){sourcetableau, #GET{extras}}>
+	#SET{champs_extras,#GET{champs_extras}|push{#VALEUR{options/nom}} 
 </BOUCLE_extras>
 
 #SET{id_evenement,#ARRAY}
 <BOUCLE_evenements(EVENEMENTS){id_rubrique ?}{id_article ?}{id_evenement ?}{inscription=1}{tout}>
-    #SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}}
+	#SET{id_evenement,#GET{id_evenement}|push{#ID_EVENEMENT}} 
 </BOUCLE_evenements>
 
 <B_evt>
-  <h1>[(#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations})]</h1>
+<h1>[(#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations})]</h1>
 #ANCRE_PAGINATION
-  <table>
-    <thead>
-      <tr>
-        <th>
-          <:reservation:label_reference:>
-        </th>
-        <th>
-          <:reservations_detail:label_descriptif:>
-        </th>
-        <th>
-          <:reservation:label_statut:>
-        </th>
-        <th>
-          <:reservation:label_date:>
-        </th>
-        <th>
-          <:reservation:label_nom:>
-        </th>
-        <th>
-          <:reservation:label_email:>
-        </th>
-        <BOUCLE_champs_extras(DATA){source tableau,#GET{champs_extras}}>
-        <th>[(#VALEUR|chercher_label{#GET{extras}}|extraire_multi)]</th>
-        </BOUCLE_champs_extras> 
-        <th>
-          <:reservations_detail:label_quantite:>
-        </th>                                       
-      </tr>
-    </thead>
-    <tbody>
-  <BOUCLE_evt(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
-    #SET{valeurs_extras,#ARRAY}
-    <BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
-      #SET{nom,#NOM} #SET{email,#EMAIL**}
-      <BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
-        #SET{nom,#NOM} #SET{email,#EMAIL**}
-        <BOUCLE_aut_ext(DATA){source tableau, #GET{champs_extras}}>
-        #SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR}|sinon{-}}}
-        </BOUCLE_aut_ext>
-      </BOUCLE_participants>
-        <BOUCLE_aut_ext2(DATA){source tableau, #GET{champs_extras}}>
-        #SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|unserialize|table_valeur{#VALEUR}|sinon{-}}}
-        </BOUCLE_aut_ext2>
-      <//B_participants>
-      <tr>
-        <td>
-          #REFERENCE
-        </td>
-    </BOUCLE_res>
-        <td>
-          #DESCRIPTIF
-        </td>
-        <td>
-           [(#VAL{reservation:texte_statut[_(#STATUT|trim)]}|_T)]
-        </td> 
-        <td>
-          #DATE
-        </td>
-        <td>
-          #GET{nom}
-        </td>
-        <td>
-          #GET{email}
-        </td>
-        <BOUCLE_champs_extras2(DATA){source tableau,#GET{valeurs_extras}}>
-        <td>[(#VALEUR)]</td>
-        </BOUCLE_champs_extras2>
-        <td>
-          #QUANTITE
-        </td>                                                   
-      </tr>
-  </BOUCLE_evt>
-  </tbody>
+<table>
+	<thead>
+		<tr>
+			<th><:reservation:label_reference:></th>
+			<th><:reservations_detail:label_descriptif:></th>
+			<th><:reservation:label_statut:></th>
+			<th><:reservation:label_date:></th>
+			<th><:reservation:label_nom:></th>
+			<th><:reservation:label_email:></th>
+			<BOUCLE_champs_extras (DATA){sourcetableau,#GET{champs_extras}}>
+			<th>[(#VALEUR|chercher_label{#GET{extras}}|extraire_multi)]</th>
+			</BOUCLE_champs_extras>
+			<th><:reservations_detail:label_quantite:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_evt (RESERVATIONS_DETAILS){id_evenementIN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
+		#SET{valeurs_extras,#ARRAY} 
+			<BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
+				#SET{nom,#NOM} #SET{email,#EMAIL**} 
+			<BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
+				#SET{nom,#NOM} #SET{email,#EMAIL**} 
+				<BOUCLE_aut_ext (DATA){sourcetableau, #GET{champs_extras}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR}|sinon{-}}}
+				</BOUCLE_aut_ext> 
+			</BOUCLE_participants>
+				<BOUCLE_aut_ext2 (DATA){sourcetableau, #GET{champs_extras}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|unserialize|table_valeur{#VALEUR}|sinon{-}}}
+				</BOUCLE_aut_ext2>
+			<//B_participants>
+		<tr>
+			<td>#REFERENCE</td>
+		</BOUCLE_res>
+		<td>#DESCRIPTIF</td>
+		<td>[(#VAL{reservation:texte_statut[_(#STATUT|trim)]}|_T)]</td>
+		<td>#DATE</td>
+		<td>#GET{nom}</td>
+		<td>#GET{email}</td>
+		<BOUCLE_champs_extras2 (DATA){sourcetableau,#GET{valeurs_extras}}>
+		<td>[(#VALEUR)]</td>
+		</BOUCLE_champs_extras2>
+		<td>#QUANTITE</td>
+		</tr>
+		</BOUCLE_evt>
+	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
-</B_evt>
+[
+<p class='pagination'>(#PAGINATION{prive})</p>
+] </B_evt>
