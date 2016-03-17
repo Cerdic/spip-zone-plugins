@@ -43,9 +43,9 @@
     </thead>
     <tbody>
   <BOUCLE_evt(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
-    #SET{nom,#NOM} #SET{email,#EMAIL**}
     #SET{valeurs_extras,#ARRAY}
     <BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
+      #SET{nom,#NOM} #SET{email,#EMAIL**}
       <BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
         #SET{nom,#NOM} #SET{email,#EMAIL**}
         <BOUCLE_aut_ext(DATA){source tableau, #GET{champs_extras}}>
