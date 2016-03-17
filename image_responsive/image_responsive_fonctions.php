@@ -168,7 +168,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		
 		// Gérer les tailles autorisées
 		if (count($tailles) > 0) {
-			sort($tailles);
 			include_spip("inc/json");
 			
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
@@ -314,8 +313,8 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 
 	if (_SPIP_LIER_RESSOURCES && $fichiers) {
 		foreach($fichiers as $f) {
-			$img .= "<link href='".$f[1]."' rel='attachment' property='url'>"
-				."<link href='".$f[2]."' rel='attachment' property='url'>";
+			$img .= "\n<link href='".$f[1]."' rel='attachment' property='url'>"
+				."\n<link href='".$f[2]."' rel='attachment' property='url'>";
 		}
 	}
 
