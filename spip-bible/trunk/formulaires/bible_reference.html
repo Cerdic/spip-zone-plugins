@@ -53,15 +53,15 @@
 #ACTION_FORMULAIRE{#ENV{action}}
     
     <div class="formulaire_spip formulaire_editer">
-    <ul>
-    [<li> [(#ENV{cadre}|!={false}|oui)<textarea rows="10" name="bible_resultat" id="bible_resultat">](#ENV*{message_ok}|table_valeur{resultat})[(#ENV{cadre}|!={false}|oui)</textarea>]</li>]
+    <ul class="editer-groupe">
+    [<li class="editer"> [(#ENV{cadre}|!={false}|oui)<textarea rows="10" name="bible_resultat" id="bible_resultat">](#ENV*{message_ok}|table_valeur{resultat})[(#ENV{cadre}|!={false}|oui)</textarea>]</li>]
     
-    <li[ class="erreur"(#ENV{erreurs}|table_valeur{erreur}|oui)]>
+    <li class="editer[ erreur(#ENV{erreurs}|table_valeur{erreur}|oui)]">
         <label for="passage"><:bible:form_passage:></label>
         <input type="text" class="text" size="25" name="passage" id="passage" value="[(#ENV{erreurs}|table_valeur{erreur}|sinon{#ENV{message_ok}|table_valeur{passage}})]"/>
         
     </li>
-    <li>
+    <li class="editer">
 
         <B_test20>
         <label for="version"><:bible:form_version:></label>
@@ -74,41 +74,41 @@
         </B_test20>
         </li>
         [(#CONFIG{bible_pp/numeros}|oui)	
-        <li>
+        <li class="editer">
 					<label for="numeros"><:bible:form_numeros:></label>
 					<input type="checkbox" name="numeros"  id="numeros" [checked="(#GET{numeros})"]  value="oui" />
 				
         </li>
         ]
 		[(#CONFIG{bible_pp/retour}|oui)		
-        <li>
+        <li class="editer">
 					<label for="retour"><:bible:form_retour:></label>
 					<input type="checkbox" name="retour"  id="retour" [checked="(#GET{retour})"]  value="oui" />
 				
         </li>
 		]
 		[(#CONFIG{bible_pp/ref}|oui)	
-        <li>
+        <li class="editer">
 					<label for="ref"><:bible:form_ref:></label>
 					<input type="checkbox" name="ref"  id="ref" [checked="(#GET{ref})"]  value="oui" />
 				
         </li>
         ]
 		[(#CONFIG{bible_pp/nommer_trad}|oui)
-        <li>
+        <li class="editer">
 					<label for="nommer_trad"><:bible:form_nommer_trad:></label>
 					<input type="checkbox" name="nommer_trad"  id="nommer_trad" [checked="(#GET{nommer_trad})"]  value="oui" />
         </li>
         ]
 		[(#CONFIG{bible_pp/url}|oui)	
-        <li>
+        <li class="editer">
 					<label for="url"><:bible:form_url:></label>
 					<input type="checkbox" name="url"  id="url" [checked="(#GET{url})"]  value="oui" />
 				
         </li>
         ]	
 	<B_forme_livre>
-	    <li>
+	    <li class="editer">
 	    <label for="forme_livre"><:bible:form_forme_livre:></label>
 	    <select name="forme_livre">
 		<BOUCLE_forme_livre(DATA){source tableau, #VAL{forme_livre/}|find_all_in_path{""}|array_keys}{si #CONFIG{bible_pp/forme_livre}|oui}>
