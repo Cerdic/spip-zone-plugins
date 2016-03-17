@@ -78,10 +78,12 @@ if (!function_exists('push_table_valeur')) {
  * @param mixed $condition=true
  *     Une valeur quelconque qui sera testée de manière booléenne pour savoir si on fait le traitement ou pas.
  *     Cela allège l'écriture si l'ajout de valeur ne doit se faire que sous condition, notamment que s'il y a une valeur à ajouter.
+ * @param string $cle_finale
+ *     Une clé dans laquelle placer la valeur si précisée
  * @return array|object
  *     Retourne le tableau ou l'objet initial, modifié suivant les paramètres.
  */
-function push_table_valeur($table, $chemin, $valeur, $condition=true) {
+function push_table_valeur($table, $chemin, $valeur, $condition=true, $cle_finale=false) {
 	// Si la condition est fausse, on ne fait rien du tout
 	if ($condition) {
 		$table = is_string($table) ? @unserialize($table) : $table;
@@ -118,7 +120,12 @@ function push_table_valeur($table, $chemin, $valeur, $condition=true) {
 		
 		// Si l'élément à modifier est bien un tableau : on push la valeur dedans
 		if (is_array($element_a_modifier)){
-			array_push($element_a_modifier, $valeur);
+			if ($cle_finale and is_string($cle_finale)) {
+				$element_a_modifier[$cle_finale] = $valeur;
+			}
+			else {
+				array_push($element_a_modifier, $valeur);
+			}
 		}
 		// Sinon (si c'est un scalaire) on ne fait rien et il faudra utiliser set_table_valeur() par exemple
 		
