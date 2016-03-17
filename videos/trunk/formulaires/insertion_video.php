@@ -67,6 +67,7 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet){
 			$logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
 			$logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
 			$logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;      
+			if(isset($infosVideo->thumbnails[$nbVignette]->weight)) $logoDocument_weight = $infosVideo->thumbnails[$nbVignette]->weight;
 		} else {
 			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
 			spip_log("L'ajout automatique du titre et de la description a echoué",'Videos');
@@ -124,6 +125,7 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet){
 			if ($champsVignette['largeur']==0) {              // en cas d'echec, recuperer les infos videopian
 				 $champsVignette['largeur'] = $logoDocument_width;
 				 $champsVignette['hauteur'] = $logoDocument_height;
+				if(isset($logoDocument_weight)) $champsVignette['taille'] = $logoDocument_weight;
 			}
      
 			// Ajouter
