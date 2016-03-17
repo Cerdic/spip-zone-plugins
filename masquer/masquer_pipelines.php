@@ -1,4 +1,11 @@
 <?php
+/**
+ * Plugin oEmbed
+ * Licence GPL3
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if(!defined('_MOT_MASQUER')) define('_MOT_MASQUER', 'masquer');
 if(!defined('_SPIP30000') && $GLOBALS['spip_version_code']>=17743) define('_SPIP30000', 1);
@@ -133,5 +140,3 @@ function masquer_articles_accessibles_where($primary, $not='NOT', $_publique='')
 function masquer_articles_where($primary, $_publique=''){
 	return "array('AND', ".masquer_objets_where($primary, 'article').', '.masquer_articles_accessibles_where($primary).')';
 }
-
-?>

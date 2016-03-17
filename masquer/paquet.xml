@@ -1,0 +1,21 @@
+<paquet
+	prefix="masquer"
+	categorie="navigation"
+	version="0.5.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="masquer.png"
+	documentation="http://contrib.spip.net/Plugin-masquer"
+>	
+
+	<nom>Masquer</nom>
+	<!-- Cacher des contenus sur le site public -->
+
+	<auteur>Nicolas Hoizey</auteur>
+	<auteur lien="http://www.clever-age.com/">Stéphanie Caron de Clever Age</auteur>
+	<auteur>Patrice Vanneufville</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="pre_boucle" inclure="masquer_pipelines.php" />
+</paquet>
