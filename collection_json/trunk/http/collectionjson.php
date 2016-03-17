@@ -40,7 +40,7 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse) {
 		$reponse->setContent(json_encode(array(
 			'collection' => array(
 				'version' => '1.0',
-				'href' => url_absolue(self()),
+				'href' => url_absolue(self('&')),
 				'error' => $erreur,
 			),
 		)));
@@ -73,7 +73,7 @@ function http_collectionjson_get_index_dist($requete, $reponse) {
 			$links[] = array(
 				'rel' => 'collection ' . table_objet($table),
 				'prompt' => _T($desc['texte_objets']),
-				'href' => rtrim(url_absolue(self()), '/') . '/' . table_objet($table) . '/',
+				'href' => rtrim(url_absolue(self('&')), '/') . '/' . table_objet($table) . '/',
 			);
 		}
 	}
@@ -81,7 +81,7 @@ function http_collectionjson_get_index_dist($requete, $reponse) {
 	$json = array(
 		'collection' => array(
 			'version' => '1.0',
-			'href' => url_absolue(self()),
+			'href' => url_absolue(self('&')),
 			'links' => $links,
 		),
 	);
@@ -163,7 +163,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse) {
 					'rel' => 'prev',
 					'prompt' => _T('public:page_precedente'),
 					'href' => url_absolue(
-						parametre_url(self(), 'offset', $offset_precedant)),
+						parametre_url(self('&'), 'offset', $offset_precedant)),
 				);
 			}
 			if (($offset + $pagination) < $nb_objets) {
@@ -172,7 +172,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse) {
 					'rel' => 'prev',
 					'prompt' => _T('public:page_suivante'),
 					'href' => url_absolue(
-						parametre_url(self(), 'offset', $offset_suivant)),
+						parametre_url(self('&'), 'offset', $offset_suivant)),
 				);
 			}
 			
@@ -191,7 +191,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse) {
 			$json = array(
 				'collection' => array(
 					'version' => '1.0',
-					'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
+					'href' => url_absolue(parse_url(self('&'), PHP_URL_PATH)),
 					'links' => $links,
 					'items' => $items,
 				),
@@ -286,7 +286,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			$json = array(
 				'collection' => array(
 					'version' => '1.0',
-					'href' => url_absolue(self()),
+					'href' => url_absolue(self('&')),
 					'items' => array(
 						$item,
 					)
@@ -483,7 +483,7 @@ function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete,
 			$json_reponse = array(
 				'collection' => array(
 					'version' => '1.0',
-					'href' => url_absolue(self()),
+					'href' => url_absolue(self('&')),
 					'error' => array(
 						'title' => _T('erreur'),
 						'code' => 400,
