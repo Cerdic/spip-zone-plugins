@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin oEmbed
+ * Plugin Masquer
  * Licence GPL3
  *
  */
