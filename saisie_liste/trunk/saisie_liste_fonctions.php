@@ -97,6 +97,10 @@ function preparer_tableau_saisie($tableau_saisie) {
  */
 function charger_valeurs($tableau_saisie, $valeurs, $index_objet) {
 
+	if (! isset($valeurs[$index_objet])) {
+		return $tableau_saisie;
+	}
+
 	if ($valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ]) {
 		$tableau_saisie['options']['defaut'] = $valeurs[ $index_objet ][ $tableau_saisie['options']['nom'] ];
 	} elseif (isset($tableau_saisie['options']['defaut'])) {
