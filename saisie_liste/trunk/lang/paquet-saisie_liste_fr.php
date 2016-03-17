@@ -10,5 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_liste_nom' => 'Saisie liste',
 	'saisie_liste_slogan' => 'Une saisie pour toutes sortes de listes.',
 );
-
-?>

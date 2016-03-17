@@ -1,12 +1,12 @@
 <paquet
-	prefix="saisie_liste"
-	categorie="outil"
-	version="1.4.1"
-	etat="stable"
-	compatibilite="[3.0.10;3.1.*]"
-	logo="images/logo_saisie_liste_48.png"
-	documentation="https://github.com/bystrano/saisie_liste"
-  demonstration="?exec=exemples_saisie_liste"
+    prefix="saisie_liste"
+    categorie="outil"
+    version="1.4.2"
+    etat="stable"
+    compatibilite="[3.0.10;3.1.*]"
+    logo="images/logo_saisie_liste_48.png"
+    documentation="https://github.com/bystrano/saisie_liste"
+    demonstration="?exec=exemples_saisie_liste"
 >
 
 	<nom>Saisie liste</nom>
@@ -15,9 +15,9 @@
 
 	<licence>GNU/GPL</licence>
 
-  <pipeline nom="jqueryui_plugins" inclure="saisie_liste_pipelines.php" />
-  <pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
-  <pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="insert_head" inclure="saisie_liste_pipelines.php" />
+	<pipeline nom="header_prive" inclure="saisie_liste_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.31.4;[" />
 	<utilise nom="yaml" compatibilite="[1.5.1;[" />
