@@ -60,23 +60,27 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		*/
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
-		$Videopian = new Videopian();
 
-		if ($Videopian) {
-			$infosVideo = $Videopian->get($url);
-			$titre = $infosVideo->title;
-			$descriptif = $infosVideo->description;
-			$nbVignette = abs(count($infosVideo->thumbnails) - 1);  // prendre la plus grande vignette
-			$logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
-			$logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
-			$logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;
-			if (isset($infosVideo->thumbnails[$nbVignette]->weight)) {
-				$logoDocument_weight = $infosVideo->thumbnails[$nbVignette]->weight;
+		try {
+			$Videopian = new Videopian();
+			if ($Videopian) {
+				$infosVideo = $Videopian->get($url);
+				$titre = $infosVideo->title;
+				$descriptif = $infosVideo->description;
+				$nbVignette = abs(count($infosVideo->thumbnails) - 1);  // prendre la plus grande vignette
+				$logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
+				$logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
+				$logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;
+				if (isset($infosVideo->thumbnails[$nbVignette]->weight)) {
+					$logoDocument_weight = $infosVideo->thumbnails[$nbVignette]->weight;
+				}
 			}
-		} else {
-			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
-			spip_log("L'ajout automatique du titre et de la description a echoué", 'Videos');
 		}
+		catch (Exception $e) {
+			spip_log("Echec ajout automatique titre+description : ".$e->getMessage(), 'videos' . _LOG_ERREUR);
+			return array('message_erreur'=>$e->getMessage());
+		}
+
 	}
 
 
@@ -122,9 +126,24 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		// Site spip seul
 		// IMG/
 
-//var_dump(copie_locale($logoDocument));
 
-		if ($fichier = preg_replace("#[a-z0-9/\._-]*IMG/#i", '', copie_locale($logoDocument))) {
+		// cas de youtube : la vignette a un basename qui est toujours /hqdefault.jpg ou /maxresdefault.jpg
+		// du coup si on a beaucoup de videos il y a collision sur les nom_fichier_local
+		// on ameliore ca en retirant ce segment pour calculer le nom du fichier local, car il est precede de l'ID de la video
+		$filename = $logoDocument;
+		if ($type=="dist_youtu") {
+			if (strncmp(basename($filename),"maxresdefault.",14)==0){
+				$filename = str_replace("/maxresdefault.",".",$filename);
+			}
+			if (strncmp(basename($filename),"hqdefault.",10)==0){
+				$filename = str_replace("/hqdefault.",".",$filename);
+			}
+		}
+		$filename = fichier_copie_locale($filename);
+		$filename = copie_locale($logoDocument,'auto',$filename);
+		//var_dump($filename);
+
+		if ($fichier = preg_replace("#[a-z0-9/\._-]*IMG/#i", '', $filename)) {
 			$champsVignette['fichier'] = $fichier;
 			$champsVignette['mode'] = 'vignette';
 
