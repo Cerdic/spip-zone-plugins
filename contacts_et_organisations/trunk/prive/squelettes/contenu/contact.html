@@ -1,6 +1,6 @@
 <BOUCLE_contact(CONTACTS){id_contact}{tous}{si #ENV{exec}|=={contact}}>
 [(#BOITE_OUVRIR{[
-	
+
 	[(#AUTORISER{modifier,contact,#ID_CONTACT})
 		[(#ID_CONTACT|afficher_qui_edite{contact}|non)
 			[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{<:contacts:contact_editer:>,contact,edit,right ajax preload})]
@@ -9,7 +9,7 @@
 			[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{#ID_CONTACT|afficher_qui_edite{contact},warning-24,'',right ajax preload})]
 		]
 	]
-	<h1>[(#RANG). ](#PRENOM|concat{' ',#NOM}|trim|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{contact-24.png}|balise_img{contact,cadre-icone})]</h1>
+	<h1>(#PRENOM|concat{' ',#NOM}|trim|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{contact-24.png}|balise_img{contact,cadre-icone})]</h1>
 ],simple fiche_objet})]
 
 
