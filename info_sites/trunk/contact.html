@@ -1,8 +1,9 @@
 <?php if ($auteur_session) { ?>
-<BOUCLE_principal (CONTACTS) {id_contact} {tout}>
+<BOUCLE_principal (CONTACTS) {id_contact} {tous}>
 <INCLURE{fond=structure,env,type-page=contact,composition=#COMPOSITION} />
 </BOUCLE_principal>
 <?php } else { ?>
 [(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
 <INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
 <?php } ?>
+[(#FILTRE{trim})]

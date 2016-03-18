@@ -1,34 +1,40 @@
 <body>
-    <div class="page">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="header" id="header">
-                        <INCLURE{fond=header/#ENV{type-page},env} />
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bg-dark">
-                    <INCLURE{fond=aside/#ENV{type-page},env} />
-        
-                <div class="content col-md-12" id="content">
-                    <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
-                    <div class="row">
-                        <div class="contenu col-md-12">
-                            <INCLURE{fond=content/#ENV{type-page},env} />
-                        </div>
-                        <!-- /.col-md-12 -->
-                    </div>
-                    <!-- /.row -->
+<div class="page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header" id="header">
+                    <INCLURE{fond=header/#ENV{type-page},env} />
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="row">
 
-    <div id="footer" class="footer">
-            <INCLURE{fond=footer/#ENV{type-page},env} />
+            <INCLURE{fond=navigation/dist, env} />
+
+            <div class="content col-md-12" id="content">
+
+                <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+                <div class="row">
+                    <div class="contenu col-md-12">
+                        <INCLURE{fond=content/#ENV{type-page},env} />
+
+                        <div id="extra">
+                            <INCLURE{fond=extra/#ENV{type-page},env} />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
-    
+</div>
+
+<div id="footer" class="footer">
+    <INCLURE{fond=footer/#ENV{type-page},env} />
+</div>
+
 </body>

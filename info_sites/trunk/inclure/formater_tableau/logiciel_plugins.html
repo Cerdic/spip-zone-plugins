@@ -1,5 +1,6 @@
 [(#SET{plugin_statut_class,[(#ARRAY{dist,info,actif,success,inactif,warning})]})]
 <B_plugins>
+    <div class="table-responsive">
 <table class="table spip liste">
     <caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_plugin,projets_site:info_nb_plugins})]</caption>
     <thead>
@@ -19,6 +20,7 @@
     </BOUCLE_plugins>
     </tbody>
 </table><!-- /.table spip liste -->
+    </div>
 </B_plugins>
     [(#ENV{array})]
 <//B_plugins>

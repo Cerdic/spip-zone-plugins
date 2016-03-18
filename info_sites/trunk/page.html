@@ -4,3 +4,4 @@
 [(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
 <INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
 <?php } ?>
+[(#FILTRE{trim})]

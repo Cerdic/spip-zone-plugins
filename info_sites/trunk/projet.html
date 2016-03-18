@@ -1,4 +1,4 @@
-<?php if ($auteur_session) { ?>
+<?php if ($auteur_session) { ?>#CACHE{0}
 <BOUCLE_principale_projet (PROJETS) {id_projet} {tout}>
 <INCLURE{fond=structure,env,type-page=projet,composition=#COMPOSITION} />
 </BOUCLE_principale_projet>
@@ -6,3 +6,4 @@
 [(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
 <INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
 <?php } ?>
+[(#FILTRE{trim})]

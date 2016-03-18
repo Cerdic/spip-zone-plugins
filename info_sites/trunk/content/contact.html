@@ -1,6 +1,6 @@
-<BOUCLE_contact(CONTACTS) {id_contact}>
+<BOUCLE_contact(CONTACTS) {id_contact} {tous}>
 [(#BOITE_OUVRIR{[
-    <h1 class="titre">[(#RANG). ](#NOM)[, (#PRENOM)]</h1>
+    <h1 class="titre">(#NOM)[, (#PRENOM)]</h1>
 ],simple fiche_objet})]
 
 [(#LOGO_CONTACT|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
@@ -25,5 +25,3 @@
 ]
 </BOUCLE_contact>
 </B_contact>
-[(#ENV**{type-page}|=={contact_edit}|?{#INCLURE{fond=prive/squelettes/contenu/contact_edit,redirect=#SELF,env,retourajax=oui},#REM|sinon_interdire_acces})]
-<//B_contact>

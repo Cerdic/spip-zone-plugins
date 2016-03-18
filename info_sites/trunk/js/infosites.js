@@ -10,8 +10,13 @@ $(document).ready(function(){
 			$('#aside').append('<div class="sommaire hidden-sm hidden-xs"><ul></ul></div>');
 		}
 
-		$('.contenu .legend').each(function(){
-			$('#aside .sommaire ul').append('<li><a href="#'+ $(this).attr('id') +'">'+ $(this).text() +'</a></li>');
-		});
-	}
-});
+						$('.contenu .legend').each(
+								function() {
+									$('#aside .sommaire ul').append(
+											'<li><a href="#'
+													+ $(this).attr('id') + '">'
+													+ $(this).text()
+													+ '</a></li>');
+								});
+					}
+				});

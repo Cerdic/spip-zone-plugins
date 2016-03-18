@@ -22,14 +22,14 @@
         </B_where>
         #SET{table,#OBJET|table_objet}
         [(#SET{titre,[#OBJET:info_(#GET{table})_liees_auteur]})]
-        [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
-        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_auteur,where=#GET{where,''},ajax,env} />
+        [(#SET{liste,#VAL{objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
+        <INCLURE{fond=objets/liste/#GET{liste},objet,id_auteur,where=#GET{where,''},ajax,env} />
         <div class="clearfix"></div>
     </BOUCLE_autresobjets>
 
 [(#PLUGIN{RSS_COMMITS}|oui)
     [(#SESSION{'email'}|oui)
     [(#SET{email,[(#SESSION{'email'}|explode{'@'}|table_valeur{0})]})]
-    <INCLURE{fond=prive/objets/liste/commits,titre=<:commit:vos_commits:>,where=commits.auteur LIKE '%#GET{email}%',par=date_creation,sinon=<:commit:aucun_commit_auteur_identifie:>,ajax} />]
+    <INCLURE{fond=objets/liste/commits,titre=<:commit:vos_commits:>,where=commits.auteur LIKE '%#GET{email}%',par=date_creation,sinon=<:commit:aucun_commit_auteur_identifie:>,ajax} />]
 ]
 </section>

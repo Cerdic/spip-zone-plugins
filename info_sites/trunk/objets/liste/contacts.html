@@ -37,10 +37,8 @@
 [<caption id="contactsOrganisation" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class="nom">[(#TRI{nom,<:contacts:label_prenom_nom:>,ajax})]</th>
+			<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
 			<th class="organisation"><:contacts:label_organisation:></th>
-			<th class='auteur'><:contacts:label_auteur_associe:></th>
-			<th class='id' scope='col'>[(#TRI{id_contact,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -53,18 +51,9 @@
 				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
 			</BOUCLE_lien_contact>
 				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
-			<//BOUCLE_lien_contact>
-			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
+			<//B_lien_contact>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
 			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
-			<td class='auteur'>
-			<BOUCLE_auteur (AUTEURS) {id_auteur}>
-				<a href="(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})">#NOM</a>
-			</BOUCLE_auteur></B_auteur>-<//B_auteur>
-			</td>
-			<td class='id'>[(#AUTORISER{modifier,contact,#ID_CONTACT}|?{
-				<a href="[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT})]">#ID_CONTACT</a>,
-				#ID_CONTACT
-			})]</td>
 		</tr>
 	</BOUCLE_liste_contacts>
 	</tbody>

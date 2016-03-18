@@ -16,13 +16,13 @@ a, button, input, textarea, select, option{
 }
 
 a{
-	color:@orange;
+	color:@main-color;
 
 	&:hover,
 	&:active,
 	&:focus,
 	&:visited{
-		color:darken(@orange, 5%);
+		color:darken(@main-color, 5%);
 	}
 }
 
@@ -99,7 +99,7 @@ a[rel*=home]{
 
 h1 {
 	small {
-		color: @orange;
+		color: @main-color;
 	}
 }
 
@@ -222,6 +222,18 @@ table {
 	margin-top: 1em;
 	border-top: 1px solid @gray-third;
 
+	&.projets {
+		.table {
+			tr {
+				th, td {
+					width: 18%;
+					&.nom {
+						width: 28%;
+					}
+				}
+			}
+		}
+	}
 	&.projets_sites {
 		&.caption-wrap {
 			padding-top: 0.5em;
@@ -687,6 +699,11 @@ input[type="radio"], input[type="checkbox"]{
 	overflow: hidden;
 	border:1px solid @border;
 	border-top: 0;
+	.coordonnees {
+		h5 {
+			display: none;
+		}
+	}
 }
 
 
@@ -707,7 +724,7 @@ input[type="radio"], input[type="checkbox"]{
 
 
 #menu {
-	background: @orange;
+	background: @main-color;
 	border:1px solid @border;
 	border-bottom: 0;
 	padding:0;
@@ -737,11 +754,18 @@ input[type="radio"], input[type="checkbox"]{
 					&:active,
 					&:focus,
 					&:hover{
-						color: @bg-dark !important;
+						color: @bg-dark;
 						background-color: @white;
 
 						i{
 							color: @bg-dark;
+						}
+					}
+					&.active {
+						color: @black;
+						background-color: @white;
+						i{
+							color: @black;
 						}
 					}
 
@@ -758,11 +782,11 @@ input[type="radio"], input[type="checkbox"]{
 
 
 #aside{
-	.filtre{
+	.filtre {
 		margin-top: 20px;
 	}
 
-	.sommaire{
+	.sommaire {
 		margin-top: 20px;
 
 		ul{
@@ -770,7 +794,49 @@ input[type="radio"], input[type="checkbox"]{
 			margin-bottom: 0;
 		}
 	}
+
+	.dropdown {
+		text-align: right;
+	}
+
+	.dropdown-menu {
+		left: auto;
+		right: 0;
+	}
+	.info {
+		.instituer_objet {
+			ul {
+				li {
+					label {
+						width: 100%;
+						margin-right: 0;
+						text-align: left;
+						font-weight: normal;
+					}
+					select {
+						width: 100%;
+					}
+					&.erreur {
+						.erreur_message {
+							display: block;
+							text-align: left;
+							float: none;
+						}
+					}
+				}
+			}
+			p {
+				&.boutons {
+					float: none;
+				}
+				&.reponse_formulaire {
+					display: none;
+				}
+			}
+		}
+	}
 }
+
 
 
 
@@ -784,7 +850,7 @@ input[type="radio"], input[type="checkbox"]{
 	position:absolute;
 	bottom:0;
 	width:100%;
-	background: @orange;
+	background: @main-color;
 
 	a {
 		color: @white;
@@ -870,6 +936,14 @@ input[type="radio"], input[type="checkbox"]{
 			input, .edition, .explication, select, textarea {
 				width: 76%;
 				float: right;
+				background-position: 4px center;
+				background-repeat: no-repeat;
+			}
+			select {
+				option {
+					background-position: 4px center;
+					background-repeat: no-repeat;
+				}
 			}
 
 			.edition {
@@ -948,6 +1022,11 @@ input[type="radio"], input[type="checkbox"]{
 .cadre-formulaire-editer {
 	.formulaire_spip {
 		&:extend{.formulaire_spip};
+	}
+	.entete-formulaire {
+		.icone {
+			margin-right: 1em;
+		}
 	}
 }
 
@@ -1172,17 +1251,6 @@ input[type="radio"], input[type="checkbox"]{
 	 	> a{
 			padding:7px 12px;
 		}
-	}
-}
-
-#aside{
-	.dropdown{
-		text-align: right;
-	}
-
-	.dropdown-menu{
-		left:auto;
-		right:0;
 	}
 }
 
