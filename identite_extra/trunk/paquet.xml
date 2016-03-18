@@ -1,11 +1,11 @@
 <paquet
 	prefix="identite_extra"
 	categorie="communication"
-	version="1.2.3"
+	version="1.2.4"
 	etat="test"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/identite_extra-32.png"
-	documentation=""
+	documentation="https://contrib.spip.net/Identite-Extra"
 	schema="1.0.0"
 >
 
