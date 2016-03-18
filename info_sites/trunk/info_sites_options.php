@@ -3,20 +3,27 @@
  * Définit les options du plugin Info Sites
  *
  * @plugin     Info Sites
- * @copyright  2014
+ * @copyright  2014-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_Sites\Options
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 
 if (!isset($GLOBALS['z_blocs'])) {
-    $GLOBALS['z_blocs'] = array('content','aside','extra','head','head_js','header','footer','breadcrumb');
+	$GLOBALS['z_blocs'] = array(
+		'content',
+		'aside',
+		'extra',
+		'head',
+		'head_js',
+		'header',
+		'footer',
+		'breadcrumb',
+	);
 }
 
-
-?>
