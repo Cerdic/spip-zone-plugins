@@ -18,7 +18,7 @@
 				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
 			</BOUCLE_lien_organisation>
 				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
-			<//BOUCLE_lien_organisation>
+			<//B_lien_organisation>
 			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'>
 				<a [ (#ENV{id_parent}|non)class="racine" ] href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
