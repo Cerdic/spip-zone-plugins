@@ -71,7 +71,8 @@ function http_collectionjson_get_index_dist($requete, $reponse) {
 	foreach (lister_tables_objets_sql() as $table => $desc) {
 		if (autoriser('get_collection', table_objet($table))) {
 			$links[] = array(
-				'rel' => 'collection ' . table_objet($table),
+				'rel' => 'collection',
+				'name' => table_objet($table),
 				'prompt' => _T($desc['texte_objets']),
 				'href' => rtrim(url_absolue(self('&')), '/') . '/' . table_objet($table) . '/',
 			);
