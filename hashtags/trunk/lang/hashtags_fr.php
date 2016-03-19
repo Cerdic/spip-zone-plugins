@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 											parametrer les l\'association des groupe de mot-clefs sur la <a href="@url2@">page de configuration des mots-clés</a>.',
 
 	//I
-	'info_formulaire_configurer_hashtags' => 'Parmi les objets listés ci-dessous, veuillez sélectionner les champs sur lesquelles sera utilisé la syntaxe #hashtags. Pour chaque objet choisi, sélectionnez au moins un champ et un groupe de mots-clés.' ,
+	'info_formulaire_configurer_hashtags' => 'Parmi les objets listés ci-dessous, veuillez sélectionner les champs sur lesquels sera utilisée la syntaxe #hashtags. Pour chaque objet choisi, sélectionnez au moins un champ et un groupe de mots-clés.' ,
 
 	//T
 	'titre_configurer_hashtags' => 'Configurer les hashtags',

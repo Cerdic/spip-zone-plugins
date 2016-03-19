@@ -29,8 +29,8 @@ function hashtags_post_edition($flux){
 				# Verifier si les mots clef n'existent pas déjà sur le groupe demandé
 				if ($req = sql_allfetsel('titre, id_mot', 'spip_mots', sql_in('titre', $tags))) {
 						foreach ($req as $ligne => $champ) {
-						$tagsConnus[] = $champ['titre'];
-						$id_mots[] = $champ['id_mot'];
+							$tagsConnus[] = $champ['titre'];
+							$id_mots[] = $champ['id_mot'];
 						}
 				}
 
@@ -72,16 +72,16 @@ function hashtags_post_edition($flux){
 
 function hashtags_declarer_tables_interfaces($interfaces){
 
-	# Ajouter les traitements qui vont bien en fonctions de la config des mot clefs
+	# Ajouter les traitements qui vont biens en fonction de la config des mots-clés
 	if (isset($GLOBALS['meta']['cfg_hashtags']) AND $cfg_hashtags = $GLOBALS['meta']['cfg_hashtags'])
 		foreach (unserialize($cfg_hashtags) as $k => $v)
 			foreach ($v['champs'] as $champ)
 				$interfaces['table_des_traitements'][strtoupper($champ)][$k] =
 					isset ( $interfaces['table_des_traitements'][strtoupper($champ)][$k] )
-						? str_replace("%s",
+						? str_replace(  "%s",
 										"traitements_hashtags(%s, $v[groupes])",
 										$interfaces['table_des_traitements'][strtoupper($champ)][$k])
-						: str_replace("%s",
+						: str_replace(  "%s",
 										"traitements_hashtags(%s, $v[groupes])",
 										$interfaces['table_des_traitements'][strtoupper($champ)][0]);
 
