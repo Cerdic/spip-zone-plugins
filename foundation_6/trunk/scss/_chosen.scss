@@ -1,0 +1,15 @@
+.chosen-container {
+	margin-bottom: $form-spacing;
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+	background-image: inherit;
+}
+
+.chosen-container-single .chosen-single {
+	@extend select;
+	margin-bottom: 0;
+	div b {
+		background: none;
+	}
+}
