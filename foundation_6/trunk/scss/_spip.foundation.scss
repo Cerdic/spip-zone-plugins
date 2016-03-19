@@ -4,7 +4,7 @@
 
 // Les boutons de SPIP utilise le style de foundation
 input.submit {
-	@include button(false, $success-color, scale-color($success-color, $lightness: -15%), $button-color, solid);
+	@include button(false, $primary-color, scale-color($primary-color, $lightness: -15%), $button-color, solid);
 }
 
 .explication {
