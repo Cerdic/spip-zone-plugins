@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 if (!isset($GLOBALS['z_blocs'])) {
 	$GLOBALS['z_blocs'] = array(
 		'content',
@@ -27,3 +26,4 @@ if (!isset($GLOBALS['z_blocs'])) {
 	);
 }
 
+define('_Z_AJAX_PARALLEL_LOAD', 'aside,extra');

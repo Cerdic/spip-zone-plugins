@@ -183,6 +183,8 @@ table {
 	}
 
 	> thead {
+		background-color: @main-color;
+		color: contrast(@main-color);
 		> tr {
 			> th, > td {
 			}
@@ -781,7 +783,7 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 
-#aside{
+#aside {
 	.filtre {
 		margin-top: 20px;
 	}
@@ -838,8 +840,6 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 
-
-
 #footer {
 	color: @white;
 	text-align: center;
@@ -883,6 +883,22 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 
+#editer_liens {
+	.liste-objets-lies, .liste-objets-associer {
+		table {
+			> thead, > tbody, > tfoot {
+				> tr {
+					> th, > td {
+						border-top: 1px solid #ddd;
+						line-height: 1.42857;
+						padding: 8px;
+						vertical-align: top;
+					}
+				}
+			}
+		}
+	}
+}
 // --------
 // Formulaires d'édition d'un objet.
 // --------

@@ -4,7 +4,7 @@
     <ul class="list-group menu" role="menu">
     [(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
         <li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a></li>
-        <li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation,id_organisation=#ID_ORGANISATION})]" class="bouton editer_liens" rel="nofollow" target="_blank"><i class="fa fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
+        <li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#SELF|parametre_url{editer_liens,oui})#editer_liens]" class="bouton editer_liens" rel="nofollow"><i class="fa fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
     ]</ul>
 </div>
 

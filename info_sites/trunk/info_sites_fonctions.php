@@ -122,3 +122,18 @@ function plugins_spip($plugins = array(), $branche_spip = null) {
 	if (is_array($plugins) and count($plugins) > 0 and !is_null($branche_spip)) {
 	}
 }
+
+function info_sites_lister_type($meta) {
+	include_spip('inc/config');
+	$objets_selectionnes = lire_config($meta, array());
+	if (count($objets_selectionnes) > 0) {
+		include_spip('base/objets');
+		foreach ($objets_selectionnes as $key => $value) {
+			$objets_selectionnes[$key] = objet_type($value);
+		}
+	}
+	$objets_selectionnes = array_filter($objets_selectionnes);
+
+	return $objets_selectionnes;
+
+}
