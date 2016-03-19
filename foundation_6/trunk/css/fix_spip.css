@@ -5,4 +5,8 @@ html, body {
 input.hasDatepicker {
   display: inline; }
 
+.formulaire_spip ul {
+  list-style-type: none;
+  margin-left: 0; }
+
 /*# sourceMappingURL=fix_spip.css.map */

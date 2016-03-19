@@ -5,3 +5,11 @@ html, body {
 input.hasDatepicker {
 	display: inline;
 }
+
+// Pour les formulaire spip qui sont encore en ul/li
+.formulaire_spip {
+	ul {
+		list-style-type: none;
+		margin-left: 0;
+	}
+}
