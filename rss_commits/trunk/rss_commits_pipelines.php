@@ -167,6 +167,10 @@ function rss_commits_afficher_fiche_objet($flux)
         $id = $flux['args']['id'];
         $table = table_objet($type);
         $id_table_objet = id_table_objet($type);
+        /**
+         * On va désactiver le listind des commits par rss… Ça fait ramer la page projet…
+         * Il faudra trouver une autre solution…
+         *
         if ($import_auto == 'non') {
             $flux['data'] .= recuperer_fond(
                 'prive/objets/liste/rss_commits',
@@ -178,6 +182,7 @@ function rss_commits_afficher_fiche_objet($flux)
                 )
             );
         }
+        **/
         $flux['data'] .= recuperer_fond(
             'prive/objets/liste/commits',
             array(
