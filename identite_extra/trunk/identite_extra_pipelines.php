@@ -48,8 +48,8 @@ function identite_extra_formulaire_charger($flux) {
 function identite_extra_formulaire_traiter($flux) {
 
 	# formulaire : configurer_identite
-	if ( $flux['args']['form'] == 'configurer_identite' AND $config = _request('identite_extra') ) {
+	if ( $flux['args']['form'] == 'configurer_identite' AND $config = _request('identite_extra') )
 			ecrire_config('identite_extra', $config);
-	}
+
 	return $flux;
 }
