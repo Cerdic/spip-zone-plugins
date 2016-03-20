@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+include_spip('inc/collectionjson');
+
 /**
  * Contenu collection+json d'une erreur
  *
@@ -186,7 +188,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse) {
 			
 			$items = array();
 			foreach ($lignes as $champs) {
-				$items[] = http_collectionjson_get_objet(objet_type($table_collection), $champs[$cle_objet], $requete, $champs);
+				$items[] = collectionjson_get_objet(objet_type($table_collection), $champs[$cle_objet], $requete, $champs);
 			}
 			
 			$json = array(
@@ -282,7 +284,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			$objet = objet_type($collection);
 			$id_objet = intval($ressource);
 			
-			$item = http_collectionjson_get_objet($objet, $id_objet, $requete);
+			$item = collectionjson_get_objet($objet, $id_objet, $requete);
 			
 			$json = array(
 				'collection' => array(
@@ -330,6 +332,61 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 }
 
 /**
+ * POST sur une collection : création d'une nouvelle ressource
+ * http://site/http.api/collectionjson/patates
+ *
+ * @param Request $requete
+ * @param Response $reponse
+ * @return Response
+ */
+function http_collectionjson_post_collection_dist($requete, $reponse) {
+	$format = $requete->attributes->get('format');
+	$collection = $requete->attributes->get('collection');
+	
+	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
+	// Cette fonction doit donc évidemment renvoyer un objet Response valide
+	if ($fonction_ressource = charger_fonction('post_collection', "http/$format/$collection/", true)) {
+		$reponse = $fonction_ressource($requete, $reponse);
+	}
+	// Sinon on échafaude en utilisant l'API des objets
+	else {
+		include_spip('base/objets');
+		$objet= objet_type($collection);
+		$reponse = collectionjson_editer_objet($objet, 'new', $requete->getContent(), $requete, $reponse);
+	}
+	
+	return $reponse;
+}
+
+/**
+ * PUT sur une ressource : modification d'une ressource existante
+ * http://site/http.api/collectionjson/patates/1234
+ *
+ * @param Request $requete
+ * @param Response $reponse
+ * @return Response
+ */
+function http_collectionjson_put_ressource_dist($requete, $reponse) {
+	$format = $requete->attributes->get('format');
+	$collection = $requete->attributes->get('collection');
+	
+	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
+	// Cette fonction doit donc évidemment renvoyer un objet Response valide
+	if ($fonction_ressource = charger_fonction('put_ressource', "http/$format/$collection/", true)) {
+		$reponse = $fonction_ressource($requete, $reponse);
+	}
+	// Sinon on échafaude en utilisant l'API des objets
+	else {
+		include_spip('base/objets');
+		$id_objet = intval($requete->attributes->get('ressource'));
+		$objet= objet_type($collection);
+		$reponse = collectionjson_editer_objet($objet, $id_objet, $requete->getContent(), $requete, $reponse);
+	}
+	
+	return $reponse;
+}
+
+/**
  * Vue générique d'un objet en JSON
  * 
  * Cette fonction sert à mutualiser le code d'échafaudage pour générer le GET d'un objet.
@@ -339,7 +396,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
  * @param Request $requete
  * @param string $contenu Optionnellement, les champs SQL déjà récupérés de l’objet, pour éviter de faire une requête
  */
-function http_collectionjson_get_objet($objet, $id_objet, $requete, $champs=array()) {
+function collectionjson_get_objet($objet, $id_objet, $requete, $champs=array()) {
 	include_spip('inc/filtres');
 	
 	$format = $requete->attributes->get('format');
@@ -372,61 +429,6 @@ function http_collectionjson_get_objet($objet, $id_objet, $requete, $champs=arra
 }
 
 /**
- * POST sur une collection : création d'une nouvelle ressource
- * http://site/http.api/collectionjson/patates
- *
- * @param Request $requete
- * @param Response $reponse
- * @return Response
- */
-function http_collectionjson_post_collection_dist($requete, $reponse) {
-	$format = $requete->attributes->get('format');
-	$collection = $requete->attributes->get('collection');
-	
-	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
-	// Cette fonction doit donc évidemment renvoyer un objet Response valide
-	if ($fonction_ressource = charger_fonction('post_collection', "http/$format/$collection/", true)) {
-		$reponse = $fonction_ressource($requete, $reponse);
-	}
-	// Sinon on échafaude en utilisant l'API des objets
-	else {
-		include_spip('base/objets');
-		$objet= objet_type($collection);
-		$reponse = http_collectionjson_editer_objet($objet, 'new', $requete->getContent(), $requete, $reponse);
-	}
-	
-	return $reponse;
-}
-
-/**
- * PUT sur une ressource : modification d'une ressource existante
- * http://site/http.api/collectionjson/patates/1234
- *
- * @param Request $requete
- * @param Response $reponse
- * @return Response
- */
-function http_collectionjson_put_ressource_dist($requete, $reponse) {
-	$format = $requete->attributes->get('format');
-	$collection = $requete->attributes->get('collection');
-	
-	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
-	// Cette fonction doit donc évidemment renvoyer un objet Response valide
-	if ($fonction_ressource = charger_fonction('put_ressource', "http/$format/$collection/", true)) {
-		$reponse = $fonction_ressource($requete, $reponse);
-	}
-	// Sinon on échafaude en utilisant l'API des objets
-	else {
-		include_spip('base/objets');
-		$id_objet = intval($requete->attributes->get('ressource'));
-		$objet= objet_type($collection);
-		$reponse = http_collectionjson_editer_objet($objet, $id_objet, $requete->getContent(), $requete, $reponse);
-	}
-	
-	return $reponse;
-}
-
-/**
  * Édition générique d'un objet en JSON
  * 
  * Cette fonction sert à mutualiser le code d'échafaudage entre le POST et le PUT pour créer ou modifier un objet.
@@ -438,7 +440,7 @@ function http_collectionjson_put_ressource_dist($requete, $reponse) {
  * @param Response $reponse
  * @return Response
  */
-function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete, $reponse) {
+function collectionjson_editer_objet($objet, $id_objet, $contenu, $requete, $reponse) {
 	// Si la requête a bien un contenu et qu'on a bien un tableau PHP et qu'on a au moins le bon tableau "data"
 	if (
 		$contenu
