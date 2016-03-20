@@ -251,7 +251,7 @@ function trouver_periodicite($type_modele, $service) {
 		include_spip("services/${service}");
 		$configurer = "${service}_service2configuration";
 		$configuration = $configurer('previsions');
-		$periodicites_service = array_keys($configuration['previsions']['periodicites']);
+		$periodicites_service = array_keys($configuration['periodicites']);
 
 		$periodicites_modele = $GLOBALS['rainette_config']['periodicite'][$type_modele];
 		foreach ($periodicites_modele as $_periodicite_modele) {

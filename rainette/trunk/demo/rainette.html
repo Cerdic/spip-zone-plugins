@@ -42,8 +42,7 @@
 		tbody tr td.erreur {background: #FBE3E4;}
 		tbody tr td.nonapi {background: #FFF6BF;}
 		.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
-		.clearfix{display:inline-table;}
-		div.clearfix{margin-bottom:30px;}
+		div.clearfix{margin-bottom:30px; display: block; clear: both;}
 		div.notice{padding:1em;color: #514721;border:2px solid #FFD324;background-color:#FFF6BF;}
 		.menu{background-color:#fefefe;margin-bottom:2em;padding:0;}
 		.menu .h2{border:0;color:#000;}
@@ -82,7 +81,11 @@
 			<div class="clearfix">
 				<div class="clearfix">
 					<h3>Utilisation du mod&eacute;le <strong>rainette_infos</strong></h3>
-					[(#MODELE{rainette_infos,code=#GET{lieu},sous_modele=infos_ville, service=#GET{service}})]
+					[(#MODELE{rainette_infos,lieu=#GET{lieu},sous_modele=infos_ville, service=#GET{service}})]
+					[<div class="clearfix">
+						<h3>Affichage debug du tableau des informations</h3>
+						(#GET{lieu}|rainette_dbg_afficher_cache{infos, 0, #GET{service}})
+					</div>]
 				</div>
 				<div class="clearfix">
 					<h3>Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
@@ -100,7 +103,11 @@
 			<a name="conditions" href="#"></a>
 			<div class="clearfix">
 				<h3>Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
-				[(#MODELE{rainette_conditions,code=#GET{lieu},sous_modele=conditions_tempsreel, service=#GET{service}})]
+				[(#MODELE{rainette_conditions,lieu=#GET{lieu},sous_modele=conditions_tempsreel, service=#GET{service}})]
+				[<div class="clearfix">
+					<h3>Affichage debug du tableau des conditions</h3>
+					(#GET{lieu}|rainette_dbg_afficher_cache{conditions, 0, #GET{service}})
+				</div>]
 			</div>
 
 
@@ -134,7 +141,7 @@
 				</ul>
 			</p>
 			<div class="clearfix">
-				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}}}
+				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}, 0}}
 				#INCLURE{fond=demo/inc-comparer_services,
 					jeu=#GET{jeu},
 					donnees=#GET{donnees},

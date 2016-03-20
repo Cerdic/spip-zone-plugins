@@ -9,28 +9,32 @@ if (!defined('_RAINETTE_DEBUG')) {
 }
 
 if (!defined('_RAINETTE_DEBUG_PREVISIONS')) {
-	define('_RAINETTE_DEBUG_PREVISIONS', 'index:date:lever_soleil:coucher_soleil:vitesse_vent:angle_vent:direction_vent:temperature_max:temperature_min:
-		risque_precipitation:precipitation:humidite:pression:code_meteo:icon_meteo:desc_meteo:periode:icone:resume');
+	define('_RAINETTE_DEBUG_PREVISIONS',
+		'Donn&#233;es d\'observation:date/heure
+		|Donn&#233;es astronomiques:lever_soleil/coucher_soleil
+		|Temp&#233;ratures:temperature:temperature_max:temperature_min
+		|Donn&#233;es an&#233;mom&#233;triques:vitesse_vent/angle_vent/direction_vent
+		|Donn&#233;es atmosph&#233;riques:risque_precipitation/precipitation/humidite/point_rosee/pression/visibilite/indice_uv/risque_uv
+		|&#201;tats m&#233;t&#233orologiques natifs:code_meteo/icon_meteo/desc_meteo
+		|&#201;tats m&#233;t&#233orologiques calcul&#233;s:periode/icone/resume');
 }
 if (!defined('_RAINETTE_DEBUG_CONDITIONS')) {
 	define('_RAINETTE_DEBUG_CONDITIONS',
-	'Donn&#233;es d\'observation:derniere_maj/station
+		'Donn&#233;es d\'observation:derniere_maj/station
 		|Temp&#233;ratures:temperature_reelle/temperature_ressentie
 		|Donn&#233;es an&#233;mom&#233;triques:vitesse_vent/angle_vent/direction_vent
-		|Donn&#233;es atmosph&#233;riques:humidite/point_rosee/pression/tendance_pression/visibilite
+		|Donn&#233;es atmosph&#233;riques:precipitation/humidite/point_rosee/pression/tendance_pression/visibilite/indice_uv/risque_uv
 		|&#201;tats m&#233;t&#233orologiques natifs:code_meteo/icon_meteo/desc_meteo
 		|&#201;tats m&#233;t&#233orologiques calcul&#233;s:icone/resume/periode');
 }
 if (!defined('_RAINETTE_DEBUG_INFOS')) {
 	define('_RAINETTE_DEBUG_INFOS',
-	'Lieu:ville/region
-		|Coordonn&#233;es:longitude/latitude
-		|D&#233;mographie:population');
+		'Lieu:ville/pays/pays_iso/region
+		|Coordonn&#233;es:longitude/latitude');
 }
 if (!defined('_RAINETTE_DEBUG_TYPE_UNITE')) {
 	define('_RAINETTE_DEBUG_TYPE_UNITE',
-	'population:population
-		|temperature:temperature_reelle,temperature_ressentie,point_rosee,temperature_max,temperature_min
+		'temperature:temperature_reelle,temperature_ressentie,point_rosee,temperature,temperature_max,temperature_min
 		|vitesse:vitesse_vent
 		|angle:angle_vent,longitude,latitude
 		|pourcentage:risque_precipitation,humidite
@@ -41,31 +45,17 @@ if (!defined('_RAINETTE_DEBUG_TYPE_UNITE')) {
 }
 
 
-function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
+function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $periodicite = 0, $service = 'weather') {
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
 	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
 		$charger = charger_fonction('charger_meteo', 'inc');
-		$nom_fichier = $charger($lieu, $mode, $service);
+		$nom_fichier = $charger($lieu, $mode, $periodicite, $service);
 		if ($nom_fichier) {
 			$contenu = '';
 			lire_fichier($nom_fichier, $contenu);
 			$tableau = unserialize($contenu);
-
-			// On ajoute le lieu, le mode et le service au contexte fourni au modele
-			if ($mode == 'previsions') {
-				// Pour les prévisions les informations communes sont stockées dans un index
-				// supplémentaire en fin de tableau
-				$index = count($tableau) - 1;
-				$tableau[$index]['lieu'] = $lieu;
-				$tableau[$index]['mode'] = $mode;
-				$tableau[$index]['service'] = $service;
-			} else {
-				$tableau['lieu'] = $lieu;
-				$tableau['mode'] = $mode;
-				$tableau['service'] = $service;
-			}
 
 			$debug = bel_env(serialize($tableau));
 		}
@@ -75,7 +65,7 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'we
 }
 
 
-function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
+function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array(), $periodicite = 0) {
 	$debug = array();
 
 	if (!$mode) {
@@ -98,21 +88,20 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 		// Recuperation du tableau des conditions courantes
 		foreach ($jeu as $_service => $_lieu) {
 			$charger = charger_fonction('charger_meteo', 'inc');
-			$nom_fichier = $charger($_lieu, $mode, $_service);
-			if ($nom_fichier) {
-				$contenu = '';
-				lire_fichier($nom_fichier, $contenu);
-				$tableau = unserialize($contenu);
-				if ($tableau) {
-					foreach ($tableau as $_donnee => $_valeur) {
-						$type = gettype($tableau[$_donnee]);
-						$debug[$_donnee][$_service]['valeur'] = $_valeur;
-						$debug[$_donnee][$_service]['type'] = $type;
-						if ($_donnee != 'erreur') {
-							$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($_valeur === '' ? 'erreur' : '');
-						} else {
-							$debug[$_donnee][$_service]['erreur'] = $_valeur ? 'erreur' : '';
-						}
+			$nom_cache = $charger($_lieu, $mode, $periodicite, $_service);
+			lire_fichier($nom_cache, $contenu_cache);
+			$tableau = unserialize($contenu_cache);
+
+			if (!$tableau['extras']['erreur']) {
+				$tableau =$tableau['donnees'];
+				foreach ($tableau as $_donnee => $_valeur) {
+					$type = gettype($tableau[$_donnee]);
+					$debug[$_donnee][$_service]['valeur'] = $_valeur;
+					$debug[$_donnee][$_service]['type'] = $type;
+					if ($_donnee != 'erreur') {
+						$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($_valeur === '' ? 'erreur' : '');
+					} else {
+						$debug[$_donnee][$_service]['erreur'] = $_valeur ? 'erreur' : '';
 					}
 				}
 			}

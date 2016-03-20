@@ -1,10 +1,10 @@
 [(#REM)<!-- 
 	Afficher les conditions météorologiques temps reel
-	- code : le lieu pour lequel on affiche les données méteo
+	- lieu : le lieu pour lequel on affiche les données méteo
 	- sous_modele : le sous-modele Rainette ou personnalisé
 	- service : le service méteo utilisé (weather, wwo, wunderground, owm...)
  -->]
-[(#ENV{code}|rainette_coasser{
+[(#ENV{lieu}|rainette_coasser{
 	conditions,
 	#ENV{sous_modele,conditions_tempsreel},
 	#ENV{service, weather}})]

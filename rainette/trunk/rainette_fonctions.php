@@ -22,14 +22,14 @@ if (!defined('_RAINETTE_ICONES_PETITE_TAILLE')) {
  */
 function balise_RAINETTE_INFOS($p) {
 
-	$code_meteo = interprete_argument_balise(1, $p);
-	$code_meteo = isset($code_meteo) ? str_replace('\'', '"', $code_meteo) : '""';
+	$lieu = interprete_argument_balise(1, $p);
+	$lieu = isset($lieu) ? str_replace('\'', '"', $lieu) : '""';
 	$type_info = interprete_argument_balise(2, $p);
 	$type_info = isset($type_info) ? str_replace('\'', '"', $type_info) : '""';
 	$service = interprete_argument_balise(3, $p);
 	$service = isset($service) ? str_replace('\'', '"', $service) : '"weather"';
 
-	$p->code = 'calculer_infos(' . $code_meteo . ', ' . $type_info . ', ' . $service . ')';
+	$p->code = 'calculer_infos(' . $lieu . ', ' . $type_info . ', ' . $service . ')';
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -327,7 +327,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 		$extras['erreur'] = $erreur;
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;
-		$extras['periodicite'] = $periodicite;
+		$extras['periodicite_cache'] = $periodicite;
 		$extras['service'] = $service;
 	} else {
 		// Récupération du tableau des données météo
