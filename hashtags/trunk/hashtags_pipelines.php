@@ -89,6 +89,6 @@ function hashtags_declarer_tables_interfaces($interfaces){
 }
 
 # Nettoyage de la synatxe hashtag en particulier pour INTRODUCTION...
-function hashtags_nettoyer_raccourcis_typo($flux){
+function hashtags_post_typo($flux){
     return  nettoyer_raccourcis_hashtags($flux);
 }

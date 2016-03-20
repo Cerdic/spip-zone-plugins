@@ -1,7 +1,7 @@
 <paquet
 	prefix="hashtags"
 	categorie="edition"
-	version="0.0.26"
+	version="0.0.27"
 	etat="dev"
 	documentation="http://contrib.spip.net/Hashtags"
 	compatibilite="[3.0.0;3.1.*]"
@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="post_edition" inclure="hashtags_pipelines.php" />
-	<pipeline nom="nettoyer_raccourcis_typo" inclure="hashtags_pipelines.php" />
+	<pipeline nom="post_typo" inclure="hashtags_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="hashtags_pipelines.php" />
 
 </paquet>
