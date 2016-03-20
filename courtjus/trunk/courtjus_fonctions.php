@@ -2,11 +2,11 @@
 /**
  * Fonctions utiles au plugin Court-jus
  *
- * @plugin     Court-jus
+ * @plugin	   Court-jus
  * @copyright  2014
- * @author     Phenix
- * @licence    GNU/GPL
- * @package    SPIP\Courtjus\Fonctions
+ * @author	   Phenix
+ * @licence	   GNU/GPL
+ * @package	   SPIP\Courtjus\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -21,7 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  */
 function balise_URL_RUBRIQUE_dist($p) {
-	$id_rubrique = interprete_argument_balise(1,$p);
+
+	$id_rubrique = interprete_argument_balise(1, $p);
 	if (!$id_rubrique) {
 		$id_rubrique = champ_sql('id_rubrique', $p);
 	}
@@ -47,10 +48,10 @@ function courtjus_calculer_rubrique($id_rubrique) {
 		// Si on trouve une squelette spécifique à cette rubrique,
 		// et que l'option est activé, on renvoie l'URL rubrique
 		// Cela ne gère pas pour les sous-rubrique cependant
-	if (find_in_path('rubrique='.$id_rubrique.'.html')
+		if (find_in_path('rubrique='.$id_rubrique.'.html')
 			or find_in_path('rubrique-'.$id_rubrique.'.html')) {
-		return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
-			}
+			return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
+		}
 
 		// Pour gérer les fichiers rubrique-X parent, on va tester chaque parent
 		include_spip('public/quete');
@@ -75,7 +76,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
 
 		// Si on a trouver un objet enfant.
 		if ($objet) {
-		return $objet;
+			return $objet;
 		}
 	}
 
@@ -214,8 +215,8 @@ function courtjus_trouver_objet($id_rubrique) {
 		// Un seul objet dans la rubrique, on renvoie le tableau
 		return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet'], '', '', true);
 	} elseif ($nb_objet > 1
-			and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
-			and $config['num_titre'] == 'on') {
+			  and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
+			  and $config['num_titre'] == 'on') {
 		// S'il y plusieurs objets dans la rubrique et que le mode "par num titre"
 		// est activé, on regiride sur le num titre le plus petit.
 
