@@ -62,6 +62,9 @@ function courtjus_calculer_rubrique($id_rubrique) {
 			}
 		} while (($parent = quete_parent($parent)) > 0);
 	}
+
+	$objet_in_rubrique = courtjus_objet_in_rubrique($id_rubrique);
+
 	// On récupère l'éventuel objet de redirection
 	$objet = courtjus_trouver_objet($id_rubrique);
 
@@ -70,7 +73,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
 
 		// Sinon, on cherche les enfant de la rubrique
 		// et on cherche un objet dedans
-	} elseif (lire_config('courtjus/rubrique_enfant')) {
+	} elseif (lire_config('courtjus/rubrique_enfant') and count($objet_in_rubrique) <= 0) {
 
 		// On chercher parmit les enfants de la rubrique
 		$objet = courtjus_trouver_objet_enfant($id_rubrique);
