@@ -16,9 +16,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Créer la balise #URL_RUBRIQUE et y affecter les fonctions du courtjus
  *
- * @param mixed $p
+ * @param champ $p
  * @access public
- * @return mixed
+ * @return champ
  */
 function balise_URL_RUBRIQUE_dist($p) {
 
@@ -36,12 +36,12 @@ function balise_URL_RUBRIQUE_dist($p) {
 /**
  * Calculer l'url de la rubrique
  *
- * @param mixed $id_rubrique
+ * @param int $id_rubrique
  * @access public
- * @return mixed
+ * @return string
  */
 function courtjus_calculer_rubrique($id_rubrique) {
-
+	include_spip('inc/config');
 	$par_rubrique = lire_config('courtjus/squelette_par_rubrique');
 	// Si on n'intervient pas sur les squelettes par rubrique
 	if (empty($par_rubrique)) {
@@ -86,9 +86,9 @@ function courtjus_calculer_rubrique($id_rubrique) {
 /**
  * Fonction récurcive de recherche dans les sous-rubriques
  *
- * @param mixed $id_rubrique
+ * @param int $id_rubrique
  * @access public
- * @return mixed
+ * @return string
  */
 function courtjus_trouver_objet_enfant($id_rubrique) {
 
@@ -115,7 +115,7 @@ function courtjus_trouver_objet_enfant($id_rubrique) {
  * (sans la table spip_rubrique)
  *
  * @access public
- * @return mixed
+ * @return array
  */
 function courtjus_trouver_objet_rubrique() {
 	// On va cherché les différent objets intaller sur SPIP
@@ -142,15 +142,15 @@ function courtjus_trouver_objet_rubrique() {
 /**
  * Fonction qui traite les objet d'une rubrique et renvoie l'url du court-cuircuit.
  *
- * @param mixed $id_rubrique
+ * @param int $id_rubrique
  * @access public
- * @return mixed
+ * @return string
  */
 function courtjus_trouver_objet($id_rubrique) {
 
 	// Aller chercher les filtres
-	include_spip('inc/flitres');
-
+	include_spip('inc/filtres');
+	include_spip('inc/config');
 	// On récupère le configuration du plugin
 	$config = lire_config('courtjus');
 
@@ -246,9 +246,9 @@ function courtjus_trouver_objet($id_rubrique) {
 /**
  * Renvoie tout les enfants direct d'une rubrique
  *
- * @param mixed $id_rubrique
+ * @param int $id_rubrique
  * @access public
- * @return mixed
+ * @return array
  */
 function courtjus_quete_enfant($id_rubrique) {
 
