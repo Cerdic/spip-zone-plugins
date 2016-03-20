@@ -63,17 +63,17 @@ function courtjus_calculer_rubrique($id_rubrique) {
 		} while (($parent = quete_parent($parent)) > 0);
 	}
 
-	$objet_in_rubrique = courtjus_objet_in_rubrique($id_rubrique);
+	$objets_in_rubrique = courtjus_objets_in_rubrique($id_rubrique);
 
 	// On récupère l'éventuel objet de redirection
-	$objet = courtjus_trouver_objet($id_rubrique);
+	$objet = courtjus_trouver_objet($id_rubrique, $objets_in_rubrique);
 
 	if ($objet) {
 		return $objet;
 
 		// Sinon, on cherche les enfant de la rubrique
 		// et on cherche un objet dedans
-	} elseif (lire_config('courtjus/rubrique_enfant') and count($objet_in_rubrique) <= 0) {
+	} elseif (lire_config('courtjus/rubrique_enfant') and count($objets_in_rubrique) <= 0) {
 
 		// On chercher parmit les enfants de la rubrique
 		$objet = courtjus_trouver_objet_enfant($id_rubrique);
@@ -94,19 +94,19 @@ function courtjus_calculer_rubrique($id_rubrique) {
  * @access public
  * @return string
  */
-function courtjus_trouver_objet_enfant($id_rubrique) {
+function courtjus_trouver_objet_enfant($id_rubrique, $objets_in_rubrique) {
 
 	// Chercher les enfants de la rubrique
 	$enfants = courtjus_quete_enfant($id_rubrique);
 
 	// On cherche un éventuel objet dans les premiers enfants
 	while (list($key,$enfant) = each($enfants) and !$objet) {
-		$objet = courtjus_trouver_objet($enfant);
+		$objet = courtjus_trouver_objet($enfant, $objets_in_rubrique);
 
 		// S'il n'y a pas d'objet au premier niveau on lance la récurcivité
 		// pour trouver continuer de descendre dans la hiérachie.
 		if (!$objet) {
-			$objet = courtjus_trouver_objet_enfant($enfant);
+			$objet = courtjus_trouver_objet_enfant($enfant, $objets_in_rubrique);
 		}
 	}
 	// On renvoie l'url
@@ -150,7 +150,7 @@ function courtjus_trouver_objet_rubrique() {
  * @access public
  * @return array
  */
-function courtjus_objet_in_rubrique($id_rubrique) {
+function courtjus_objets_in_rubrique($id_rubrique) {
 	// On va compter le nombre d'objet présent dans la rubrique
 	$tables = courtjus_trouver_objet_rubrique();
 
@@ -212,7 +212,7 @@ function courtjus_objet_in_rubrique($id_rubrique) {
  * @access public
  * @return string
  */
-function courtjus_trouver_objet($id_rubrique) {
+function courtjus_trouver_objet($id_rubrique, $objets_in_rubrique) {
 
 	// Aller chercher les filtres
 	include_spip('inc/filtres');
@@ -220,8 +220,6 @@ function courtjus_trouver_objet($id_rubrique) {
 
 	// On récupère le configuration du plugin
 	$config = lire_config('courtjus');
-
-	$objets_in_rubrique = courtjus_objet_in_rubrique($id_rubrique);
 
 	// Maintenant qu'on a le tableau des objets de la rubrique on compte
 	$nb_objet = count($objets_in_rubrique);
