@@ -101,6 +101,8 @@ function courtjus_trouver_objet_enfant($id_rubrique, $objets_in_rubrique) {
 
 	// On cherche un éventuel objet dans les premiers enfants
 	while (list($key,$enfant) = each($enfants) and !$objet) {
+		$objets_in_rubrique = courtjus_objets_in_rubrique($enfant);
+
 		$objet = courtjus_trouver_objet($enfant, $objets_in_rubrique);
 
 		// S'il n'y a pas d'objet au premier niveau on lance la récurcivité
