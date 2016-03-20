@@ -45,6 +45,6 @@ function traitements_hashtags($str, $id_groupe=''){
 	return $str;
 }
 
-function nettoyer_raccourcis_hashtags($flux,$option=''){
+function nettoyer_raccourcis_hashtags($flux,$option=""){
 	return preg_replace("~#(&nbsp;| )?(!->|->|!)?~u",$option,$flux);
 }
