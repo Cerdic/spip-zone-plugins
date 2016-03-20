@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'latitude' => 'latitude',
 	'lever_soleil' => 'lever du soleil',
+	'lieu' => 'lieu',
 	'longitude' => 'longitude',
 
 	'label_theme' => 'Thème d\'icônes',
