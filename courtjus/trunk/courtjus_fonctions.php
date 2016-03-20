@@ -64,6 +64,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
 	}
 	// On récupère l'éventuel objet de redirection
 	$objet = courtjus_trouver_objet($id_rubrique);
+
 	if ($objet) {
 		return $objet;
 
@@ -140,20 +141,13 @@ function courtjus_trouver_objet_rubrique() {
 }
 
 /**
- * Fonction qui traite les objet d'une rubrique et renvoie l'url du court-cuircuit.
+ * Retrouver les objets contenu dans une rubrique
  *
  * @param int $id_rubrique
  * @access public
- * @return string
+ * @return array
  */
-function courtjus_trouver_objet($id_rubrique) {
-
-	// Aller chercher les filtres
-	include_spip('inc/filtres');
-	include_spip('inc/config');
-	// On récupère le configuration du plugin
-	$config = lire_config('courtjus');
-
+function courtjus_objet_in_rubrique($id_rubrique) {
 	// On va compter le nombre d'objet présent dans la rubrique
 	$tables = courtjus_trouver_objet_rubrique();
 
@@ -203,6 +197,28 @@ function courtjus_trouver_objet($id_rubrique) {
 			);
 		}
 	}
+
+	return $objets_in_rubrique;
+}
+
+
+/**
+ * Fonction qui traite les objets d'une rubrique et renvoie l'url du court-cuircuit.
+ *
+ * @param int $id_rubrique
+ * @access public
+ * @return string
+ */
+function courtjus_trouver_objet($id_rubrique) {
+
+	// Aller chercher les filtres
+	include_spip('inc/filtres');
+	include_spip('inc/config');
+
+	// On récupère le configuration du plugin
+	$config = lire_config('courtjus');
+
+	$objets_in_rubrique = courtjus_objet_in_rubrique($id_rubrique);
 
 	// Maintenant qu'on a le tableau des objets de la rubrique on compte
 	$nb_objet = count($objets_in_rubrique);
