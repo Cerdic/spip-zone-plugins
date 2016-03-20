@@ -48,6 +48,15 @@
 	env,ajax}>
 [(#INCLURE{fond=objets/liste/projets, id_projet_parent=#ID_PROJET}|strlen|>{0}|oui)<div class="clearfix"></div>]
 
+[(#ENV{editer_liens}|=={oui}|oui)
+	<div id="editer_liens">
+		<div class="block_close"><a href="[(#SELF|parametre_url{editer_liens,''})]" class="close bg-reverse" aria-label="Close"><span aria-hidden="true">&times;</span></a></div>
+		<div class="close"></div>
+		[(#INCLURE{fond=prive/objets/editer/liens,table_source=projets_sites,objet=projet,id_objet=#ID_PROJET,env})]
+		<div class="clearfix"></div>
+		<div class="close"></div>
+	</div>
+]
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>

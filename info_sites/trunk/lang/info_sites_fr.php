@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_liens_contact' => '&Eacute;diter les liens',
-	'editer_liens_organisation' => '&Eacute;diter les liens',
-	'editer_liens_projet' => '&Eacute;diter les liens',
+	'editer_liens_organisation' => 'Joinde un projet existant',
+	'editer_liens_projet' => 'Joindre un site existant',
 	'editer_liens_projets_site' => '&Eacute;diter les liens',
 
 	// I

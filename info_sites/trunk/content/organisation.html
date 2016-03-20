@@ -40,7 +40,8 @@
 
 [(#ENV{editer_liens}|=={oui}|oui)
 	<div id="editer_liens">
-[(#INCLURE{fond=prive/objets/editer/liens,table_source=projets,objet=organisation,id_objet=#ID_ORGANISATION,env})]
+		<div class="block_close"><a href="[(#SELF|parametre_url{editer_liens,''})]" class="close bg-reverse" aria-label="Close">&nbsp;<span aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span></a></div>
+		[(#INCLURE{fond=prive/objets/editer/liens,table_source=projets,objet=organisation,id_objet=#ID_ORGANISATION,env})]
 		<div class="clearfix"></div>
 	</div>
 ]

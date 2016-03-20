@@ -6,13 +6,13 @@ $(document).ready(function () {
 			$('<div class="sommaire hidden-sm hidden-xs"><ul></ul></div>').insertAfter($('#aside .dropdown.boutons'));
 		}
 		else {
-			$('#aside').append('<div class="sommaire hidden-sm hidden-xs"><ul></ul></div>');
+			$('#aside').append('<div class="sommaire hidden-sm hidden-xs"><ul class="list-group"></ul></div>');
 		}
 
 		$('.contenu .legend').each(
 			function () {
 				$('#aside .sommaire ul').append(
-					'<li><a href="#'
+					'<li class="list-group-item"><a href="#'
 					+ $(this).attr('id') + '">'
 					+ $(this).text()
 					+ '</a></li>');
