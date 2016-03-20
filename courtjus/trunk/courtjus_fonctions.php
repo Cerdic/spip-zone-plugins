@@ -76,7 +76,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
 	} elseif (lire_config('courtjus/rubrique_enfant') and count($objets_in_rubrique) <= 0) {
 
 		// On chercher parmit les enfants de la rubrique
-		$objet = courtjus_trouver_objet_enfant($id_rubrique);
+		$objet = courtjus_trouver_objet_enfant($id_rubrique, $objets_in_rubrique);
 
 		// Si on a trouver un objet enfant.
 		if ($objet) {
