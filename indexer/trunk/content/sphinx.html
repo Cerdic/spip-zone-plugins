@@ -81,7 +81,7 @@
 			<p class="publication">
 				[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#PROPERTIES{authors}|implode{', '})</span>]
 			</p>
-			[<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY})</div>]
+			[<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY}|replace{b>,mark>}|propre)</div>]
 		</article>
 	</li>
 
