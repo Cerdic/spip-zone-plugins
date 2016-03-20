@@ -8,15 +8,9 @@
 	schema="1.0.1"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2014-05-22 18:47:49
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
-
 	<nom>Court-jus</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
-	<auteur lien='http://p.henix.be'>Phenix</auteur>
+	<auteur lien="http://p.henix.be">Phenix</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
