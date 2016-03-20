@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'controle_extension_curl_actif' => 'Est-ce que l\'extension cURL de PHP est activée&nbsp;?',
 	'controle_contacts_lies_aux_projets' => 'Est-ce que les contacts sont liés aux projets&nbsp;?',
+	'controle_contacts_orphelins' => 'Contacts sans organisation',
 	'controle_coordonnees_liees_contacts' => 'Est-ce que les coordonnées sont activées pour les contacts&nbsp;?',
 	'controle_info_sites_menu_organisations' => 'Est-ce que l\'entrée <strong>"Organisations"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_contacts' => 'Est-ce que l\'entrée <strong>"Contacts"</strong> est présente dans le menu de navigation&nbsp;?',
@@ -34,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_info_sites_menu_projets_sites' => 'Est-ce que l\'entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_statistiques' => 'Est-ce que l\'entrée <strong>"Statistiques"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_projets_lies_organisations' => 'Est-ce que les projets sont liés aux organisations&nbsp;?',
+	'controle_projets_orphelins' => 'Projets sans organisation',
+	'controle_projets_sites_orphelins' => 'Sites sans projet parent',
 	'creation_rapide_fiche' => 'Fiche condensée',
 
 	// D
@@ -74,7 +77,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selectionner_site' => 'Sélectionner un site&nbsp;:',
 	'label_stats_general' => 'Statistiques générales',
 	'label_total' => 'Total',
+	'label_type_site' => 'Environnements',
 	'label_validation' => 'Validation',
+	'label_valeur' => 'Valeur',
 	'liste_url_projets_explication' => 'Veuillez saisir ci-dessous la liste des urls de vos projets à ajouter. Une url par ligne.',
 	'liste_url_projets_label' => 'L\'url de projets en ligne',
 

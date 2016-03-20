@@ -26,4 +26,4 @@ if (!isset($GLOBALS['z_blocs'])) {
 	);
 }
 
-define('_Z_AJAX_PARALLEL_LOAD', 'aside,extra');
+define('_Z_AJAX_PARALLEL_LOAD', 'extra');

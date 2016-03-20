@@ -1,101 +1,98 @@
 @import "css/variables.less";
 
-html{
-	position:relative;
+html {
+	position: relative;
 	min-height: 100%;
 }
 
-body{
-	margin-bottom:60px;
+body {
+	margin-bottom: 60px;
 	background-color: @bg-site;
 }
 
-a, button, input, textarea, select, option{
-	outline:0 !important;
-	box-shadow:0 !important;
+a, button, input, textarea, select, option {
+	outline: 0 !important;
+	box-shadow: 0 !important;
 }
 
-a{
-	color:@main-color;
+a {
+	color: @main-color;
 
 	&:hover,
 	&:active,
 	&:focus,
-	&:visited{
-		color:darken(@main-color, 5%);
+	&:visited {
+		color: darken(@main-color, 5%);
 	}
 }
 
-a[rel*=home]{
-	text-decoration:none !important;
+a[rel*=home] {
+	text-decoration: none !important;
 }
-
 
 // couleurs de fond
 .bg-primary {
-  background-color: @bg-primary;
-  color: white;
+	background-color: @bg-primary;
+	color: white;
 }
 
 .bg-primary-light {
-  background-color: @bg-primary-light;
-  color: white;
+	background-color: @bg-primary-light;
+	color: white;
 }
 
 .bg-success {
-  background-color: @bg-success;
-  color: white;
+	background-color: @bg-success;
+	color: white;
 }
 
 .bg-info {
-  background-color: @bg-info;
-  color: white;
+	background-color: @bg-info;
+	color: white;
 }
 
 .bg-warning {
-  background-color: @bg-warning;
-  color: white;
+	background-color: @bg-warning;
+	color: white;
 }
 
 .bg-danger {
-  background-color: @bg-danger;
-  color: white;
+	background-color: @bg-danger;
+	color: white;
 }
 
 .bg-orange {
-  background-color: @bg-orange;
-  color: white;
+	background-color: @bg-orange;
+	color: white;
 }
 
 .bg-violet {
-  background-color: @bg-violet;
-  color: white;
+	background-color: @bg-violet;
+	color: white;
 }
 
 .bg-dark {
-  background-color: @bg-dark;
-  color: white;
-  #content {
-  	color: @gray-dark;
-  }
+	background-color: @bg-dark;
+	color: white;
+	#content {
+		color: @gray-dark;
+	}
 }
 
 .bg-bright {
-  background-color: @bg-bright;
-  color: @gray-light;
+	background-color: @bg-bright;
+	color: @gray-light;
 }
 
 .bg-reverse {
-  background-color: @bg-reverse;
-  color: @gray-light;
+	background-color: @bg-reverse;
+	color: @gray-light;
 }
-
 
 .container-fluid,
-.container{
+.container {
 	padding: 0 35px;
 }
-
 
 h1 {
 	small {
@@ -103,20 +100,18 @@ h1 {
 	}
 }
 
-h1.titre{
-	margin-top:0;
+h1.titre {
+	margin-top: 0;
 	font-size: 2.3em;
 }
 
-.contenu h2{
+.contenu h2 {
 	font-size: 1.7em;
 }
 
 .block {
 	margin-bottom: 1em;
 }
-
-
 
 .breadcrumb {
 	display: none;
@@ -149,13 +144,13 @@ h1.titre{
 .publication {
 	color: @gray-light;
 }
+
 .pagination {
 	text-align: right;
 	width: 100%;
 	clear: both;
 	overflow: hidden;
 }
-
 
 // TABLEAUX
 table {
@@ -187,6 +182,15 @@ table {
 		color: contrast(@main-color);
 		> tr {
 			> th, > td {
+				a {
+					color: contrast(@main-color);
+					&:hover {
+						color: contrast(@main-color);
+					}
+				}
+			}
+			> th {
+				font-weight: normal;
 			}
 		}
 	}
@@ -200,18 +204,18 @@ table {
 				}
 			}
 
-			&.type_site{
-				span{
+			&.type_site {
+				span {
 					display: inline-block;
-					width:10px;
+					width: 10px;
 					height: 10px;
 					background: #98DF00;
 					margin-right: 5px;
 
-					&.Rec{
+					&.Rec {
 						background: #29B6D6;
 					}
-					&.Pré-prod{
+					&.Pré-prod {
 						background: orange;
 					}
 				}
@@ -279,216 +283,248 @@ table {
 	}
 }
 
-
 // --------
 // Les boutons de bootstrap
 // --------
 .btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .btn:hover, .btn:focus {
-    color: @gray-light;
-    text-decoration: none;
+	color: @gray-light;
+	text-decoration: none;
 }
+
 .btn:active, .btn.active {
-    background-image: none;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	background-image: none;
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
+
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.65;
-    filter: alpha(opacity=65);
-    -webkit-box-shadow: none;
-    box-shadow: none;
+	cursor: not-allowed;
+	pointer-events: none;
+	opacity: 0.65;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
+
 .btn-default {
-    color: @gray-light;
-    background-color: @bg-bright;
-    border-color: darken(@bg-bright, 5%);
-    .badge {
-        color: @bg-bright;
-        background-color: @gray-light;
-    }
+	color: @gray-light;
+	background-color: @bg-bright;
+	border-color: darken(@bg-bright, 5%);
+	.badge {
+		color: @bg-bright;
+		background-color: @gray-light;
+	}
 }
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
-    color: @gray-light;
-    background-color: lighten(@gray-light, 41.5%);
-    border-color: lighten(@gray-light, 34.5%);
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+	color: @gray-light;
+	background-color: lighten(@gray-light, 41.5%);
+	border-color: lighten(@gray-light, 34.5%);
 }
-.btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
-    background-image: none;
+
+.btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+	background-image: none;
 }
+
 .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
-    background-color: @bg-bright;
-    border-color: darken(@bg-bright, 5%);
+	background-color: @bg-bright;
+	border-color: darken(@bg-bright, 5%);
 }
+
 .btn-primary {
-    color: white;
-    background-color: @bg-primary;
-    border-color: darken(@bg-primary, 5%); // #196fa5;
-    .badge {
-        color: @bg-primary;
-        background-color: white;
-    }
+	color: white;
+	background-color: @bg-primary;
+	border-color: darken(@bg-primary, 5%); // #196fa5;
+	.badge {
+		color: @bg-primary;
+		background-color: white;
+	}
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
-    color: white;
-    background-color: darken(@bg-primary, 10%); // #15608f;
-    border-color: darken(@bg-primary, 17%); // #114b70;
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+	color: white;
+	background-color: darken(@bg-primary, 10%); // #15608f;
+	border-color: darken(@bg-primary, 17%); // #114b70;
 }
-.btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
-    background-image: none;
+
+.btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+	background-image: none;
 }
+
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-    background-color: @bg-primary;
-    border-color: darken(@bg-primary, 5%); // #196fa5;
+	background-color: @bg-primary;
+	border-color: darken(@bg-primary, 5%); // #196fa5;
 }
+
 .btn-success {
-    background-color: @bg-success;
-    border-color: darken(@bg-success, 5%); // #196fa5;
-    .badge {
-        color: @bg-success; // @bg-success;
-        background-color: white;
-    }
+	background-color: @bg-success;
+	border-color: darken(@bg-success, 5%); // #196fa5;
+	.badge {
+		color: @bg-success; // @bg-success;
+		background-color: white;
+	}
 }
+
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active,
-.open >.btn-success.dropdown-toggle {
-    color: white;
-    background-color: darken(@bg-success, 5%); // #196fa5;
+.open > .btn-success.dropdown-toggle {
+	color: white;
+	background-color: darken(@bg-success, 5%); // #196fa5;
 }
-.btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
-    background-image: none;
+
+.btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
+	background-image: none;
 }
 
 .btn-info {
-    color: white;
-    background-color: @bg-info;
-    border-color: darken(@bg-info, 5%); // #1f9978;
-    .badge {
-        color: @bg-info;
-        background-color: white;
-    }
+	color: white;
+	background-color: @bg-info;
+	border-color: darken(@bg-info, 5%); // #1f9978;
+	.badge {
+		color: @bg-info;
+		background-color: white;
+	}
 }
-.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
-    color: white;
-    background-color: darken(@bg-info, 10%); // #259aa2;
-    border-color:  darken(@bg-info, 17%); // #1e7e85;
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+	color: white;
+	background-color: darken(@bg-info, 10%); // #259aa2;
+	border-color: darken(@bg-info, 17%); // #1e7e85;
 }
-.btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
-    background-image: none;
+
+.btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+	background-image: none;
 }
+
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
-    background-color: @bg-info; // #2ec1cc;
-    border-color:  darken(@bg-info, 5%); // #29adb7;
+	background-color: @bg-info; // #2ec1cc;
+	border-color: darken(@bg-info, 5%); // #29adb7;
 }
+
 .btn-warning {
-    color: white;
-    background-color: @bg-warning;
-    border-color: darken(@bg-warning, 5%);
-    .badge {
-        color: @bg-warning;
-        background-color: white;
-    }
+	color: white;
+	background-color: @bg-warning;
+	border-color: darken(@bg-warning, 5%);
+	.badge {
+		color: @bg-warning;
+		background-color: white;
+	}
 }
-.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
-    color: white;
-    background-color: darken(@bg-warning, 10%);
-    border-color: darken(@bg-warning, 17%);
+
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
+	color: white;
+	background-color: darken(@bg-warning, 10%);
+	border-color: darken(@bg-warning, 17%);
 }
-.btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
-    background-image: none;
+
+.btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
+	background-image: none;
 }
+
 .btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
-    background-color: @bg-warning;
-    border-color: darken(@bg-warning, 5%);
+	background-color: @bg-warning;
+	border-color: darken(@bg-warning, 5%);
 }
+
 .btn-danger {
-    color: white;
-    background-color: @bg-danger;
-    border-color: darken(@bg-danger, 5%);
-    .badge {
-        color: @bg-danger;
-        background-color: white;
-    }
+	color: white;
+	background-color: @bg-danger;
+	border-color: darken(@bg-danger, 5%);
+	.badge {
+		color: @bg-danger;
+		background-color: white;
+	}
 }
-.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
-    color: white;
-    background-color: darken(@bg-danger, 10%);
-    border-color: darken(@bg-danger, 17%);
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
+	color: white;
+	background-color: darken(@bg-danger, 10%);
+	border-color: darken(@bg-danger, 17%);
 }
-.btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
-    background-image: none;
+
+.btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
+	background-image: none;
 }
+
 .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
-    background-color: @bg-danger;
-    border-color: darken(@bg-danger, 5%);
+	background-color: @bg-danger;
+	border-color: darken(@bg-danger, 5%);
 }
+
 .btn-link {
-    color: @gray-dark;
-    font-weight: normal;
-    cursor: pointer;
-    border-radius: 0;
+	color: @gray-dark;
+	font-weight: normal;
+	cursor: pointer;
+	border-radius: 0;
 }
+
 .btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
+
 .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
-    border-color: transparent;
+	border-color: transparent;
 }
+
 .btn-link:hover, .btn-link:focus {
-    color: lighten(@black, 5%); // #0d0d0d;
-    text-decoration: underline;
-    background-color: transparent;
+	color: lighten(@black, 5%); // #0d0d0d;
+	text-decoration: underline;
+	background-color: transparent;
 }
+
 .btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
-    color: lighten(@black, 60%); // #999999;
-    text-decoration: none;
+	color: lighten(@black, 60%); // #999999;
+	text-decoration: none;
 }
-.btn-lg, .btn-group-lg >.btn {
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 2px;
+
+.btn-lg, .btn-group-lg > .btn {
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 2px;
 }
-.btn-sm, .btn-group-sm >.btn {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 2px;
+
+.btn-sm, .btn-group-sm > .btn {
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 2px;
 }
-.btn-xs, .btn-group-xs >.btn {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 2px;
+
+.btn-xs, .btn-group-xs > .btn {
+	padding: 1px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 2px;
 }
+
 .btn-block {
-    display: block;
-    width: 100%;
-    + .btn-block {
-            margin-top: 5px;
-        }
+	display: block;
+	width: 100%;
+	+ .btn-block {
+		margin-top: 5px;
+	}
 }
 
 button {
@@ -503,11 +539,9 @@ button {
 	}
 }
 
-input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block {
-    width: 100%;
+input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="button"].btn-block {
+	width: 100%;
 }
-
-
 
 // --------
 // Les boutons d'action
@@ -613,24 +647,23 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 // Eléments de formulaires
 // --------
 .form-control:focus,
-input, textarea, select{
-	-webkit-box-shadow:0;
-	-moz-box-shadow:0;
-	box-shadow:0;
+input, textarea, select {
+	-webkit-box-shadow: 0;
+	-moz-box-shadow: 0;
+	box-shadow: 0;
 }
 
-input:focus{
-	box-shadow:none !important;
+input:focus {
+	box-shadow: none !important;
 }
 
-textarea{
-	resize:vertical
+textarea {
+	resize: vertical
 }
 
-input[type="radio"], input[type="checkbox"]{
+input[type="radio"], input[type="checkbox"] {
 	margin-top: 1px;
 }
-
 
 // --------
 // Les grands blocs de pages
@@ -639,19 +672,19 @@ input[type="radio"], input[type="checkbox"]{
 	background-color: transparent;
 
 	header {
-		padding-left:0;
+		padding-left: 0;
 
 		h1 {
 			margin-top: 10px;
-			font-size:28px;
+			font-size: 28px;
 
 			a {
 				color: @bg-dark;
 			}
 		}
 
-		& + div{
-			padding-right:0;
+		& + div {
+			padding-right: 0;
 		}
 	}
 
@@ -670,21 +703,21 @@ input[type="radio"], input[type="checkbox"]{
 						}
 					}
 
-					& + .form-group{
+					& + .form-group {
 						margin-left: 10px;
 						float: right;
 						width: auto;
 						padding: 0;
 
-						button{
-							background-color:@bg-bright;
-    						border-color: darken(@bg-bright, 5%);
+						button {
+							background-color: @bg-bright;
+							border-color: darken(@bg-bright, 5%);
 
-    						&:hover{
-    							color: @gray-light;
-							    background-color: lighten(@gray-light, 41.5%);
-							    border-color: lighten(@gray-light, 34.5%);
-    						}
+							&:hover {
+								color: @gray-light;
+								background-color: lighten(@gray-light, 41.5%);
+								border-color: lighten(@gray-light, 34.5%);
+							}
 						}
 					}
 				}
@@ -694,12 +727,11 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
 #content {
 	padding-top: 20px;
 	background-color: @white;
 	overflow: hidden;
-	border:1px solid @border;
+	border: 1px solid @border;
 	border-top: 0;
 	.coordonnees {
 		h5 {
@@ -707,7 +739,6 @@ input[type="radio"], input[type="checkbox"]{
 		}
 	}
 }
-
 
 #extra {
 	padding-bottom: 1em;
@@ -723,13 +754,11 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
-
 #menu {
 	background: @main-color;
-	border:1px solid @border;
+	border: 1px solid @border;
 	border-bottom: 0;
-	padding:0;
+	padding: 0;
 
 	&.menu_pages {
 		margin-top: 1em;
@@ -743,8 +772,8 @@ input[type="radio"], input[type="checkbox"]{
 				font-size: 1em;
 				line-height: 1em;
 
-				& + li{
-					margin-top:0;
+				& + li {
+					margin-top: 0;
 				}
 
 				a {
@@ -755,18 +784,18 @@ input[type="radio"], input[type="checkbox"]{
 
 					&:active,
 					&:focus,
-					&:hover{
+					&:hover {
 						color: @bg-dark;
 						background-color: @white;
 
-						i{
+						i {
 							color: @bg-dark;
 						}
 					}
 					&.active {
 						color: @black;
 						background-color: @white;
-						i{
+						i {
 							color: @black;
 						}
 					}
@@ -782,7 +811,6 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
 #aside {
 	.filtre {
 		margin-top: 20px;
@@ -791,7 +819,7 @@ input[type="radio"], input[type="checkbox"]{
 	.sommaire {
 		margin-top: 20px;
 
-		ul{
+		ul {
 			padding-left: 14px;
 			margin-bottom: 0;
 		}
@@ -839,7 +867,6 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
 #footer {
 	color: @white;
 	text-align: center;
@@ -847,9 +874,9 @@ input[type="radio"], input[type="checkbox"]{
 	background-repeat: no-repeat;
 	background-position: 64% 47%;
 	background-size: auto 70%;
-	position:absolute;
-	bottom:0;
-	width:100%;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	background: @main-color;
 
 	a {
@@ -877,11 +904,10 @@ input[type="radio"], input[type="checkbox"]{
 		}
 	}
 
-	p{
-		margin:10px 0;
+	p {
+		margin: 10px 0;
 	}
 }
-
 
 #editer_liens {
 	.liste-objets-lies, .liste-objets-associer {
@@ -899,6 +925,7 @@ input[type="radio"], input[type="checkbox"]{
 		}
 	}
 }
+
 // --------
 // Formulaires d'édition d'un objet.
 // --------
@@ -939,7 +966,7 @@ input[type="radio"], input[type="checkbox"]{
 				margin-bottom: 0;
 				float: left;
 				text-align: right;
-				word-break:normal;
+				word-break: normal;
 				font-weight: normal;
 			}
 
@@ -1037,7 +1064,10 @@ input[type="radio"], input[type="checkbox"]{
 
 .cadre-formulaire-editer {
 	.formulaire_spip {
-		&:extend{.formulaire_spip};
+		&:extend {
+			.formulaire_spip
+		}
+	;
 	}
 	.entete-formulaire {
 		.icone {
@@ -1046,88 +1076,85 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
-.fa{
+.fa {
 	margin-right: 3px;
 }
-
 
 // --------
 // Inclures prive/objets/contenu/xxxx.html
 // --------
-	.champ {
-		overflow: hidden;
-		border-top: 1px solid @gray-lighter;
-		padding: 10px 0;
+.champ {
+	overflow: hidden;
+	border-top: 1px solid @gray-lighter;
+	padding: 10px 0;
 
-		&.vide {
-			visibility: hidden;
-			display: none;
-		}
+	&.vide {
+		visibility: hidden;
+		display: none;
+	}
 
-		&:first-child{
-			border:0;
-		}
+	&:first-child {
+		border: 0;
+	}
 
-		&.contenu_statut{
-			.statut{
-				img{
-					margin-bottom: 6px;
-				}
+	&.contenu_statut {
+		.statut {
+			img {
+				margin-bottom: 6px;
 			}
-		}
-
-		&.picto{
-			.label:before{
-				display: inline-block;
-				margin-right: 5px;
-				color: @black;
-				font-family: FontAwesome;
-				font-size: 14px;
-			}
-		}
-
-		&.picto.contenu_numero{
-			.label:before{
-				content: "\f095";
-			}
-		}
-
-		&.picto.contenu_email{
-			.label:before{
-				content: "\f003";
-			}
-		}
-
-		&.picto.contenu_adresse{
-			.label:before{
-				content: "\f041";
-			}
-		}
-
-		.label {
-			color: black;
-			display: block;
-			float: left;
-			font-size: 0.95em;
-			hyphens: auto;
-			line-height: 1.25em;
-			margin-right: 1%;
-			overflow: hidden;
-			text-align: left;
-			white-space: normal;
-			width: 14%;
-			word-wrap: break-word;
-			padding-left: 0;
-		}
-		.span {
-			width: 85%;
-			float: right;
-			text-align: left;
-			display: block;
 		}
 	}
 
+	&.picto {
+		.label:before {
+			display: inline-block;
+			margin-right: 5px;
+			color: @black;
+			font-family: FontAwesome;
+			font-size: 14px;
+		}
+	}
+
+	&.picto.contenu_numero {
+		.label:before {
+			content: "\f095";
+		}
+	}
+
+	&.picto.contenu_email {
+		.label:before {
+			content: "\f003";
+		}
+	}
+
+	&.picto.contenu_adresse {
+		.label:before {
+			content: "\f041";
+		}
+	}
+
+	.label {
+		color: black;
+		display: block;
+		float: left;
+		font-size: 0.95em;
+		hyphens: auto;
+		line-height: 1.25em;
+		margin-right: 1%;
+		overflow: hidden;
+		text-align: left;
+		white-space: normal;
+		width: 14%;
+		word-wrap: break-word;
+		padding-left: 0;
+	}
+	.span {
+		width: 85%;
+		float: right;
+		text-align: left;
+		display: block;
+	}
+}
 
 // --------
 // formulaire de liens dans le front
@@ -1171,9 +1198,6 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
-
-
 // --------
 // page de connexion au back office
 // --------
@@ -1186,7 +1210,7 @@ input[type="radio"], input[type="checkbox"]{
 
 	.container {
 		margin-top: 2em;
-		padding:20px;
+		padding: 20px;
 		background-color: @white;
 
 		> .row {
@@ -1206,7 +1230,7 @@ input[type="radio"], input[type="checkbox"]{
 					}
 				}
 
-				#formulaire_menu_lang{
+				#formulaire_menu_lang {
 					background-color: transparent;
 					padding-right: 0;
 				}
@@ -1215,34 +1239,34 @@ input[type="radio"], input[type="checkbox"]{
 
 			.formulaire_login {
 
-				fieldset{
-					margin:0 auto;
-					width:30%;
+				fieldset {
+					margin: 0 auto;
+					width: 30%;
 
-					legend{
-						border-bottom-color:@bg-site;
+					legend {
+						border-bottom-color: @bg-site;
 					}
 
-					> .form-group{
+					> .form-group {
 						position: relative;
 
-						&:first-child{
+						&:first-child {
 							margin-bottom: 25px;
 						}
 					}
 
 					input[type=text],
-					input[type=password]{
+					input[type=password] {
 						display: block;
-						width:100%;
+						width: 100%;
 					}
 
-					input[type=checkbox]{
+					input[type=checkbox] {
 						float: left;
 						margin-right: 10px;
 					}
 
-					#pass_securise{
+					#pass_securise {
 						position: absolute;
 						right: 0;
 						top: 0;
@@ -1254,18 +1278,21 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
-
-
+.page_diagnostic, .page_diagnostic_iso, .page_webservice {
+	.breadcrumb {
+		display: block;
+	}
+}
 // --------
 // Bouton d'action contenant un menu déroulant
 // --------
-.dropdown-menu{
-	padding:0;
-	box-shadow:0 !important;
+.dropdown-menu {
+	padding: 0;
+	box-shadow: 0 !important;
 
-	> li{
-	 	> a{
-			padding:7px 12px;
+	> li {
+		> a {
+			padding: 7px 12px;
 		}
 	}
 }
@@ -1273,24 +1300,23 @@ input[type="radio"], input[type="checkbox"]{
 // --------
 // Messages d'erreur
 // --------
-.erreur_message{
-	  display: inline-block;
-	  padding: 2px;
-	  margin-bottom: 5px;
+.erreur_message {
+	display: inline-block;
+	padding: 2px;
+	margin-bottom: 5px;
 }
-
 
 // --------
 // Media Queries
 // --------
 @media (max-width: 1180px) {
-	.page_projets_sites{
-		.contenu{
+	.page_projets_sites {
+		.contenu {
 			float: none;
-			width:100%;
+			width: 100%;
 		}
 
-		#aside{
+		#aside {
 			position: relative !important;
 			float: none;
 		}
@@ -1298,10 +1324,10 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 @media (max-width: 992px) {
-	#aside{
+	#aside {
 		position: absolute;
-		top:20px;
-		right:0;
+		top: 20px;
+		right: 0;
 	}
 
 	#menu {
@@ -1316,13 +1342,12 @@ input[type="radio"], input[type="checkbox"]{
 		}
 	}
 
-	.contenu{
-		h1.titre{
-			width:83%;
+	.contenu {
+		h1.titre {
+			width: 83%;
 		}
 	}
 }
-
 
 @media (max-width: 805px) {
 	#menu {
@@ -1339,19 +1364,19 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 @media (max-width: 767px) {
-	#header{
-		header+div{
+	#header {
+		header + div {
 			padding-left: 0;
 
-			.form-search{
+			.form-search {
 				margin-top: 0;
 
-				>div{
+				> div {
 					margin-bottom: 0;
 				}
 
-				form{
-					.form-group{
+				form {
+					.form-group {
 						float: left;
 					}
 				}
@@ -1367,8 +1392,8 @@ input[type="radio"], input[type="checkbox"]{
 							width: 83.3333%;
 							padding: 0;
 						}
-						& + .form-group{
-							margin:0;
+						& + .form-group {
+							margin: 0;
 							padding: 0;
 						}
 					}
@@ -1383,8 +1408,8 @@ input[type="radio"], input[type="checkbox"]{
 				> li {
 					margin-right: 3%;
 
-					&:last-child{
-						margin-right:0;
+					&:last-child {
+						margin-right: 0;
 					}
 
 					a {
@@ -1394,7 +1419,6 @@ input[type="radio"], input[type="checkbox"]{
 			}
 		}
 	}
-
 
 	#aside {
 		.menu {
