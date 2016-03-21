@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="#LANG">
+<head>
+	<meta charset="#CHARSET">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	[<link rel="icon" href="(#CHEMIN{favicon.ico})" />]
+
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+
+	[<link rel="stylesheet" href="(#CSS{css/bootstrap.min.css})" type="text/css" />]
+	[<link rel="stylesheet" href="(#CSS{css/bootstrap-theme.min.css})" type="text/css" />]
+	[<link rel="stylesheet" href="(#CHEMIN{css/font-awesome.min.css})" type="text/css" />]
+	[(#REM) Feuille de style du theme]
+	[<link rel="stylesheet" href="(#CSS{css/info_sites.less})" type="text/css" />]
+	[<link rel="stylesheet" href="(#CSS{css/theme.css})" type="text/css" />]
+	[<link rel="stylesheet" href="(#CSS{css/signin.css})" type="text/css" />]
+
+</head>
+
+<body>
+
+<div class="container">
+	<section>
+		<header class="cartouche">
+			[<h1>(#GET{prive}|?{<:login_acces_prive:>,<:lien_connecter:>})
+			<small>#NOM_SITE_SPIP</small>
+		</h1>]
+		</header >
+
+		<div class="main">
+			#MENU_LANG_ECRIRE
+
+			[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+		</div>
+	</section>
+</div> <!-- /container -->
+
+</body>
+</html>
