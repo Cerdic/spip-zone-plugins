@@ -229,7 +229,7 @@ function critere_PMB_datacache_dist($idb, &$boucles, $crit) {
  * Modifier le critere racine
  */
 function critere_PMB_racine_dist($idb, &$boucles, $crit) {
-	$c = array("'='", "racine", 1);
+	$c = array("'='", "'racine'", 1);
 	$boucles[$idb]->where[] = $c;
 }
 
@@ -238,7 +238,7 @@ function critere_PMB_racine_dist($idb, &$boucles, $crit) {
  */
 function critere_PMB_SECTIONS_id_parent_dist($idb, &$boucles, $crit) {
 	$id_section = kwote(calculer_argument_precedent($idb, 'id_section', $boucles));
-	$c = array("'='", "id_parent", $id_section);
+	$c = array("'='", "'id_parent'", $id_section);
 	$boucles[$idb]->where[] = $c;
 }
 
@@ -459,7 +459,7 @@ function inc_pmb_prets_select_dist(&$command, $iterateur) {
 	$ids = array();
 
 	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
+	if (isset($command['liste']) and is_array($command['liste']) and count($command['liste'])) {
 		$ids = $command['liste'];
 	}
 
@@ -583,7 +583,7 @@ function inc_pmb_select_abstract_dist(&$command, $iterateur, $objet, $_id_objet)
 	$ids = array();
 
 	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
+	if (isset($command['liste']) and is_array($command['liste']) and count($command['liste'])) {
 		$ids = $command['liste'];
 	}
 
@@ -686,7 +686,7 @@ function inc_pmb_sections_select_dist(&$command, $iterateur) {
 	$ids = array();
 
 	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
+	if (isset($command['liste']) and is_array($command['liste']) and count($command['liste'])) {
 		$ids = $command['liste'];
 	}
 

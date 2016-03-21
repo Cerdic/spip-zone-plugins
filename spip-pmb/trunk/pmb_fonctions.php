@@ -214,6 +214,10 @@ function pmb_extraire_notices_ids($ids_notices) {
 		$ws = pmb_webservice();
 		$r=$ws->pmbesNotices_fetchNoticeListArray($wanted,"utf-8",true,false);
 		if (is_array($r)) {
+			// s'il n'y a pas de résultats suffisants, ça retourne (parfois ?) 
+			// un tableau complété jusqu'à 100 entrées, mais avec des infos vides.
+			// on les enlèves, ces vides, avant d'analyser chaque contenu retourné.
+			$r = array_filter($r);
 			$r = array_map('pmb_ws_parser_notice', $r);
 
 			// on complete notre tableau de resultat
@@ -745,14 +749,14 @@ function pmb_extraire_reservations_ids($ids_pmb_session) {
  * 		Ids des notices trouvees
 **/
 function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $pagination=false) {
-	
-	$recherche          = $demande['recherche'];
-	$id_section         = $demande['id_section'];
-	$id_section_parent  = $demande['id_section_parent'];
-	$id_location        = $demande['id_location'];
-	$typdoc             = $demande['type_document'];
-	$look               = $demande['look'];
-	
+
+	$recherche          = isset($demande['recherche']) ? $demande['recherche'] : '';
+	$id_section         = isset($demande['id_section']) ? $demande['id_section'] : 0;
+	$id_section_parent  = isset($demande['id_section_parent']) ? $demande['id_section_parent'] : 0;
+	$id_location        = isset($demande['id_location']) ? $demande['id_location'] : 0;
+	$typdoc             = isset($demande['type_document']) ? $demande['type_document'] : '';
+	$look               = isset($demande['look']) ? $demande['look'] : array();
+
 	if ($id_section_parent) {
 		$id_location = $id_section_parent; // a n'y rien comprendre...
 	}
@@ -925,7 +929,7 @@ function pmb_recuperer_champs_recherche($langue=0) {
  * @return array Tableau traduit
 **/
 function pmb_ws_parser_notice($value) {
-	
+
 	// mise en cache des resultats en fonction de $value
 	static $resultats = array();
 	// on utilise le cache s'il est la.
