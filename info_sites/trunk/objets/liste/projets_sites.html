@@ -16,6 +16,7 @@
 		<tr class='first_row'>
 			<th class='titre principale' scope='col'>[(#TRI{titre,<:projets_site:titre_label:>,ajax})]</th>
 			<th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:type_site_label:>,ajax})]</th>
+			[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
 			<th class='logiciel_nom' scope='col'>[(#TRI{logiciel_nom,<:projets_site:logiciel_nom_label:>,ajax})]</th>
 			<th class='logiciel_version' scope='col'>[(#TRI{logiciel_version,<:projets_site:logiciel_version_label:>,ajax})]</th>
 			<th class='fo_url' scope='col'>[(#TRI{fo_url,<:projets_site:fo_url_label:>,ajax})]</th>
@@ -26,6 +27,9 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>
 			<td class='type_site'>[(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</td>
+			[(#ENV{id_auteur}|oui)
+			<td class="roles_auteur">[(#INCLURE{fond=inclure/roles_auteurs,id_auteur,objet=projets_site,id_objet=#ID_PROJETS_SITE})]</td>
+			]
 			<td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
 			<td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
 			<td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>

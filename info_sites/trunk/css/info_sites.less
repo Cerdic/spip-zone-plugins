@@ -184,7 +184,7 @@ table {
 			> th, > td {
 				a {
 					color: contrast(@main-color);
-					&:hover {
+					&:hover, &:visited {
 						color: contrast(@main-color);
 					}
 				}
@@ -923,6 +923,9 @@ input[type="radio"], input[type="checkbox"] {
 			}
 		}
 	}
+	.formulaire_editer_liens {
+		overflow: auto;
+	}
 }
 
 // --------
@@ -1038,6 +1041,17 @@ input[type="radio"], input[type="checkbox"] {
 					right: 5px;
 					bottom: 10px;
 				}
+			}
+		}
+	}
+	.dropdown-menu {
+		z-index: 1000;
+		li {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			button {
+				width: 100%;
+				text-align: left;
 			}
 		}
 	}
@@ -1202,6 +1216,7 @@ input[type="radio"], input[type="checkbox"] {
 		display: block;
 	}
 }
+
 // --------
 // Bouton d'action contenant un menu déroulant
 // --------

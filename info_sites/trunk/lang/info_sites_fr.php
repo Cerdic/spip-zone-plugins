@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_fiche_site_rapide' => 'Ajouter rapidement un site',
 	'ajouter_projets_rapide' => 'Ajouter des projets',
 	'ajouter_projets_rapide_explication' => 'Cette page vous permet d\'ajouter rapidement des projets en base de données, à partir de leur url en ligne. Le site de votre projet doit être accessible en ligne car le formulaire récupérera le &lt;title&gt; de la page d\'accueil comme nom de projet.',
+	'architecte_label' => 'Architecte',
 	'auteur_identifie_informations' => 'Vos informations',
 	'auteur_identifie_profil' => 'Votre profil',
 
@@ -21,9 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'btn_label_actions' => 'Actions',
 
 	// C
+	'chef_projets_label' => 'Chef de projets',
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'commercial_label' => 'Commercial',
 	'controle_extension_curl_actif' => 'Est-ce que l\'extension cURL de PHP est activée&nbsp;?',
 	'controle_contacts_lies_aux_projets' => 'Est-ce que les contacts sont liés aux projets&nbsp;?',
 	'controle_contacts_orphelins' => 'Contacts sans organisation',
@@ -40,13 +43,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creation_rapide_fiche' => 'Fiche condensée',
 
 	// D
+	'developpeur_label' => 'Développeur',
 	'diagnostic_logiciel_absent' => 'Il n\'y a pas de protocole de diagnostic défini pour ce logiciel.',
+	'dir_projets_label' => 'Directeur de projets',
 
 	// E
-	'editer_liens_contact' => '&Eacute;diter les liens',
-	'editer_liens_organisation' => 'Joinde un projet existant',
-	'editer_liens_projet' => 'Joindre un site existant',
-	'editer_liens_projets_site' => '&Eacute;diter les liens',
+	'editer_liens_auteur' => 'Joindre un auteur',
+	'editer_liens_contact' => 'Joindre un contact',
+	'editer_liens_organisation' => 'Joindre une organisation',
+	'editer_liens_projet' => 'Joindre un projet',
+	'editer_liens_projets_site' => 'Joindre un site',
 
 	// I
 	'icone_creer_fiche_siste' => 'Créer une fiche de site',
@@ -68,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sites_titre' => 'Info Sites',
 	'info_vos_criteres' => 'Vos critères',
 	'info_critere_sans_webservice' => 'Sans URL de webservice',
+	'integrateur_label' => 'Intégrateur',
 
 	// L
 	'label_branche' => 'Branche',
@@ -80,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_site' => 'Environnements',
 	'label_validation' => 'Validation',
 	'label_valeur' => 'Valeur',
+	'lead_developpeur_label' => 'Lead Développeur',
 	'liste_url_projets_explication' => 'Veuillez saisir ci-dessous la liste des urls de vos projets à ajouter. Une url par ligne.',
 	'liste_url_projets_label' => 'L\'url de projets en ligne',
 
@@ -101,6 +109,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_diagnostic_iso' => 'Diagnostic ISO',
 	'page_diagnostic' => 'Diagnostic',
 
+	// R
+	'ref_tech_label' => 'Référent technique',
+
 	// S
 	'stats_nb_logiciel_version' => 'Nombre de versions du logiciel',
 	'stats_nb_versions' => 'Nombre de versions',
@@ -114,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'webservice_consultation' => 'Consultation du webservice',
+
 );
 
 ?>

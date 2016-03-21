@@ -18,6 +18,7 @@
 			<tr class='first_row'>
 				<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
 				<th class='statut' scope='col'>[(#TRI{statut,<:projet:label_statut:>,ajax})]</th>
+				[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
 				<th class='url_site' scope='col'>[(#TRI{url_site,<:projet:label_url_site:>,ajax})]</th>
 				<th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
 				<th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
@@ -28,6 +29,9 @@
 			<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 				<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
 				<td class='statut'>[(#CHEMIN{prive/themes/spip/images/[(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**})]}|balise_img{[(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</td>
+				[(#ENV{id_auteur}|oui)
+				<td class="roles_auteur">[(#INCLURE{fond=inclure/roles_auteurs,id_auteur,objet=projet,id_objet=#ID_PROJET})]</td>
+				]
 				<td class='url_site secondaire'>[(#URL_SITE|oui)
 					<a href="#URL_SITE">#URL_SITE</a>
 					]
@@ -43,5 +47,3 @@
 </B_liste_projets>[
 <div class="liste-objets projets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_projets>
-
-[<pre>(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**}|print_r{1})</pre>]

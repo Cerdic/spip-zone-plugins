@@ -1,12 +1,12 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.0.0"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.8;3.0.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
 	documentation=""
-	schema="1.0.5"
+	schema="1.0.6"
 >
 	<nom>Info Sites</nom>
 
@@ -22,9 +22,12 @@
 	<necessite nom="projets" compatibilite="[1.0.9;]"/>
 	<necessite nom="lesscss" compatibilite="[0.7.11;]"/>
 	<necessite nom="projets_sites" compatibilite="[1.5.0;]"/>
+	<necessite nom="roles_auteurs" compatibilite="[1.0.0;]"/>
 
 	<utilise nom="rss_commits" compatibilite="[0.6.0;]"/>
 	<utilise nom="info_spip" compatibilite="[0.8.0;]"/>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
 
 	<pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php"/>
 
