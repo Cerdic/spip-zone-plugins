@@ -87,7 +87,8 @@ function mailshot_pre_edition($flux){
  * @return mixed
  */
 function mailshot_post_edition($flux){
-	if ($flux['args']['table']=='spip_mailshots'
+	if (isset($flux['args']['table'])
+	  AND $flux['args']['table']=='spip_mailshots'
 	  AND $flux['args']['action']=='instituer'
 	  AND $id_mailshot = $flux['args']['id_objet']
 	  AND $statut_ancien = $flux['args']['statut_ancien']
