@@ -2,7 +2,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_label' => 'Login',
 	'password_label' => 'Mot de passe',
 
-    // P
-    'projets_sites_titre' => 'Sites des projets',
+	// P
+	'projets_sites_titre' => 'Sites des projets',
 
 	// T
 	'titre_page_configurer_projets_sites' => 'Configurer le plugin "Sites pour projets"',

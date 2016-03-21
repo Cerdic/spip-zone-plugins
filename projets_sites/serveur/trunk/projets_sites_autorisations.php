@@ -3,22 +3,23 @@
  * Définit les autorisations du plugin Sites pour projets
  *
  * @plugin     Sites pour projets
- * @copyright  2013-2014
+ * @copyright  2013-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Projets_sites\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
-function projets_sites_autoriser()
-{
+ *
+ * @pipeline autoriser
+ */
+function projets_sites_autoriser() {
 }
 
 
@@ -34,11 +35,11 @@ function projets_sites_autoriser()
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return true;
+ **/
+function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt) {
+	return true;
 }
 
 
@@ -50,11 +51,11 @@ function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return autoriser('creer', 'projets_site', '', $qui, $opt);
+ **/
+function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('creer', 'projets_site', '', $qui, $opt);
 }
 
 /**
@@ -65,11 +66,11 @@ function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo';
+ **/
+function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -80,11 +81,11 @@ function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo';
+ **/
+function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -95,11 +96,11 @@ function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo';
+ **/
+function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -110,11 +111,11 @@ function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+ **/
+function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 
@@ -126,11 +127,11 @@ function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssite_maj_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+ **/
+function autoriser_projetssite_maj_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 
@@ -142,11 +143,11 @@ function autoriser_projetssite_maj_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+ **/
+function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 /**
@@ -157,11 +158,11 @@ function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_projetssitesecurite_voir_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo';
+ **/
+function autoriser_projetssitesecurite_voir_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo';
 }
 
 ?>
