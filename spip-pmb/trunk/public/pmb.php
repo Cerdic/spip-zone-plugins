@@ -275,7 +275,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 	$ids = array();
 
 	// depuis une liste
-	if (is_array($command['liste']) and count($command['liste'])) {
+	if (isset($command['liste']) and is_array($command['liste']) and count($command['liste'])) {
 		$ids = $command['liste'];
 	}
 
@@ -986,5 +986,3 @@ function balise_PMB_NOMBRE_RESULTATS_dist($p) {
 		'fin' => $pas))";
 	return $p;
 }
-
-?>

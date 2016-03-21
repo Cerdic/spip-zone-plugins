@@ -17,5 +17,3 @@ include_spip('inc/config');
 if (lire_config('spip_pmb/pmb_partout', 'non') == 'oui') {
 	_chemin(_DIR_PLUGIN_PMB . 'pmb_partout/');
 }
-
-?>

@@ -122,7 +122,7 @@ function pmb_parse_unimarc_defaut($valeur, $zone, $sous_zone, $id, $element, $gr
 		// juste la valeur
 		} else {
 			// soit 'nom' soit 'id:nom'
-			list($t, $sous) = explode(':', $t);
+			list($t, $sous) = array_pad(explode(':', $t), 2, null);
 			if (!$sous) {
 				// simple 'nom'
 				$cle = $t;
@@ -460,5 +460,3 @@ function pmb_parse_unimarc_data_900($groupe, $id) {
 		);
 	}
 }
-
-?>

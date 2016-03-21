@@ -983,10 +983,10 @@ function pmb_ws_parser_notice($value) {
 	}
 
 	// si pas d'auteur, on prend le responsable
-	if (!$tresultat['lesauteurs']) {
-		$tresultat['lesauteurs'] = $tresultat['auteur'];
+	if (empty($tresultat['lesauteurs'])) {
+		$tresultat['lesauteurs'] = isset($tresultat['auteur']) ? $tresultat['auteur'] : '';
 	}
-	
+
 	// tous les auteurs et tous les liens d'auteurs
 	// pour se simplifier un peu...
 	foreach (array('lesauteurs', 'liensauteurs') as $quoi) {
@@ -1237,4 +1237,3 @@ function pmb_nettoyer_caracteres($valeur) {
 		array("'", "&oelig;", "\"", "\"", "&euro;"), $valeur);
 	return $valeur;
 }
-?>
