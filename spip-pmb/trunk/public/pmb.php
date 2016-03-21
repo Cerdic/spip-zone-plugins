@@ -243,6 +243,19 @@ function critere_PMB_SECTIONS_id_parent_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Prendre en compte le critere {nouveautes xx} pour la boucle PMB:NOTICES
+ * de sorte que cela ne crée pas de notice php sur la compilation de SPIP
+ * 
+ * @see inc_pmb_notices_select_dist()
+ */
+function critere_PMB_NOTICES_nouveautes_dist($idb, &$boucles, $crit) {
+	// le critère est déjà traité dans inc_pmb_notices_select_dist()
+	$r = calculer_critere_infixe($idb, $boucles, $crit);
+	$r[2][0] = null; // éviter cette notice…
+	return calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
+}
+
+/**
  *
  * Selectionne les notices demandees
  * et retourne un tableau des elements parsees
