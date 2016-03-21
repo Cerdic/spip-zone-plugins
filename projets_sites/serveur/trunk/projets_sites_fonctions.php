@@ -72,4 +72,36 @@ function version2branche($version) {
 	return $version;
 }
 
-?>
+function sp_lister_type_sites($from = 'bdd') {
+	if (empty($from)) {
+		$from = 'bdd';
+	}
+	$liste_types_sites = array();
+
+	if ($from === 'objet') {
+		// On reprend les valeurs passées dans #FORMULAIRE_EDITER_PROJETS_SITE
+		$liste_types_sites = array(
+			'01local' => _T('projets_site:type_site_01local_court'),
+			'02dev' => _T('projets_site:type_site_02dev_court'),
+			'03inte' => _T('projets_site:type_site_03inte_court'),
+			'04test' => _T('projets_site:type_site_04test_court'),
+			'05rec' => _T('projets_site:type_site_05rec_court'),
+			'06prep' => _T('projets_site:type_site_06prep_court'),
+			'07prod' => _T('projets_site:type_site_07prod_court'),
+		);
+	} else {
+		// On va chercher les types de site enregistrés dans la base de données.
+		include_spip('base/abstract_sql');
+		$types_sites = sql_allfetsel("DISTINCT(type_site)", 'spip_projets_sites');
+		if (is_array($types_sites) and count($types_sites) > 0) {
+			foreach ($types_sites as $type_site) {
+				$liste_types_sites[] = $type_site['type_site'];
+			}
+			$liste_types_sites = array_filter($liste_types_sites); // On enlève les valeurs vides
+			$liste_types_sites = array_values($liste_types_sites); // On réindexe le tableau pour éviter des surprises
+		}
+	}
+
+
+	return $liste_types_sites;
+}
