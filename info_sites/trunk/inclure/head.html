@@ -10,29 +10,31 @@
 
 [(#REM) Lien vers le flux RSS du site ]
 [<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend})" />]
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 [<link rel="stylesheet" href="(#CSS{'font-awesome/css/font-awesome.min.css'})" type="text/css" />]
-[<link rel="stylesheet" href="(#CSS{css/bootstrap.css})" type="text/css" />]
-[<link rel="stylesheet" href="(#CSS{css/bootstrap-theme.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/bootstrap.min.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/bootstrap-theme.min.css})" type="text/css" />]
 
 [<link rel="stylesheet" href="(#CSS{css/spip.css})" type="text/css" />]
 [(#REM) Balise permettant aux plugins d'inserer des fichiers CSS ]
 #INSERT_HEAD_CSS
 
-[<link rel="stylesheet" href="(#CSS{css/info_sites.less})" type="text/css" />]
-
-[(#REM) Feuille de style du theme]
-[<link rel="stylesheet" href="(#CSS{css/theme.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CSS{css/info_sites.css})" type="text/css" />]
+[
+(#ENV{type-page}|=={login}|oui)
+[<link rel="stylesheet" href="(#CSS{css/signin.css})" type="text/css" />]
+][
+(#REM) Feuille de style du theme
+][<link rel="stylesheet" href="(#CSS{css/theme.css})" type="text/css" />]
 
 [(#CHEMIN{inc-theme-head.html}|oui)
 #INCLURE{fond=inc-theme-head,env}
-]
-
-[(#REM) Feuille de style personnalisee pour surcharger les precedentes
+][
+(#REM) Feuille de style personnalisee pour surcharger les precedentes
 	A noter par defaut cette css n'existe pas
-]
-[<link rel="stylesheet" href="(#CSS{css/perso.css})" type="text/css" />]
+][<link rel="stylesheet" href="(#CSS{css/perso.css})" type="text/css" />]
 
 [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ;
 	C'est ici que SPIP va inserer l'appel de la librairie jQuery

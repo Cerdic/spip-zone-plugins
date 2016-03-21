@@ -13,14 +13,14 @@
 
 		(#REM) Debut du head particulier a chaque page
 		pour inserer un title, des css particulieres(mais surchargees), ou des js *inline*
-		]<INCLURE{fond=head/#ENV{type-page},env}>[
+		]<INCLURE{fond=head/#ENV{type-page}, env}/>[
 
 		(#REM) Partie commune a toutes les pages, sans env
-		]<INCLURE{fond=inclure/head}>[
+		]<INCLURE{fond=inclure/head, type-page=#ENV{type-page}} />[
 
 		(#REM) Fin du head particulier a chaque page, pour inserer des js specifiques par exemple
 		pour inserer des js *externes*
-		]<INCLURE{fond=head_js/#ENV{type-page},env}>
+		]<INCLURE{fond=head_js/#ENV{type-page}, env}>
 	</head>
 	<INCLURE{fond=body,env}>
 </html>
