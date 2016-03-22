@@ -66,7 +66,7 @@ class pdf2img extends Command {
 		$shave = $input->getOption('shave') ;
 		$pdf = $input->getArgument('pdf');
 		
-		var_dump($shave);
+		// var_dump($shave);
 		
 		if ($spip_loaded) {
 			chdir($spip_racine);
@@ -85,7 +85,7 @@ class pdf2img extends Command {
 					// var_dump('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
 					
 					// Conversion imagemagick
-					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
+					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($pdf) . ' ' . $dest  . ' ' . $shave);
 
 				}else{	
 					$fichiers_pdf = preg_files($source . "/", "\.pdf$");
@@ -94,7 +94,7 @@ class pdf2img extends Command {
 	
 					foreach($fichiers_pdf as $f){
 						// Conversion imagemagick
-						passthru('plugins/convertisseur/scripts/pdf2img.sh ' . $f . ' ' . $dest);
+						passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($f) . ' ' . $dest);
 					}
 				}
 			}
