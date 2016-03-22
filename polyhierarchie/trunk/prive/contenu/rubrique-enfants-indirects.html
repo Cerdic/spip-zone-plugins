@@ -6,22 +6,12 @@
 
 ]
 #CACHE{3600*100}
-#SET{div,#BOITE_OUVRIR{#VAL{polyhier:titre_polyhierarchie}|_T|concat{#CHEMIN_IMAGE{polyhier-24.png}|balise_img{'',cadre-icone}},simple}}
 
-#SET{lid,'0'}
-<BOUCLE_polyhier_rub(RUBRIQUES){enfants_indirects #ID_RUBRIQUE}{statut?}>
-#SET{lid,#GET{lid}|concat{',',#ID_RUBRIQUE}}
-</BOUCLE_polyhier_rub>
-[(#GET{div}|unique)]
-<INCLURE{fond=prive/objets/liste/rubriques,id_rubrique=#GET{lid}|explode{','},titre=<:polyhier:rubriques_associees:>} />
-</B_polyhier_rub>
-
-#SET{lid,'0'}
-<BOUCLE_polyhier_art(ARTICLES){enfants_indirects #ID_RUBRIQUE}{statut?}>
-#SET{lid,#GET{lid}|concat{',',#ID_ARTICLE}}
-</BOUCLE_polyhier_art>
-[(#GET{div}|unique)]
-<INCLURE{fond=prive/objets/liste/articles,id_article=#GET{lid}|explode{','},titre=<:polyhier:articles_associes:>} />
-</B_polyhier_art>
-	
-[(#GET{div}|unique|?{'',#BOITE_FERMER})]
+<B_lies>
+  #BOITE_OUVRIR{#VAL{polyhier:titre_polyhierarchie}|_T|concat{#CHEMIN_IMAGE{polyhier-24.png}|balise_img{'',cadre-icone}},simple}
+  <BOUCLE_lies(POUR){tableau #ID_RUBRIQUE|polyhier_get_enfants}{par cle}>
+    [(#SET{fond,[prive/objets/liste/(#CLE|table_objet)]})]
+    [(#CLE|polyhier_lister_enfants{#VALEUR})]
+  </BOUCLE_lies>
+  #BOITE_FERMER
+</B_lies>

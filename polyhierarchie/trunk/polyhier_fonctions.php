@@ -277,3 +277,24 @@ function inc_rechercher_joints_objet_rubrique_dist($table, $table_liee, $ids_tro
 	
 	return array($cle_depart, 'id_rubrique', $s);
 }
+
+
+/**
+ * Filtre pour appeler polyhier_get_enfants depuis un squelette
+ * @param $id_parent
+ * @param string $objet
+ * @param string $serveur
+ * @return array
+ */
+function filtre_polyhier_get_enfants_dist($id_parent, $objet='', $serveur='') {
+	include_spip('inc/polyhier');
+	return polyhier_get_enfants($id_parent, $objet, $serveur);
+}
+
+function filtre_polyhier_lister_enfants($objet,$ids){
+	$fond = "prive/objets/liste/".table_objet($objet);
+	if (trouver_fond($fond)){
+		$primary = id_table_objet($objet);
+		return recuperer_fond($fond,array($primary=>$ids));
+	}
+}
