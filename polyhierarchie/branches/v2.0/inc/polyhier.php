@@ -9,56 +9,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rubriques');
-if (!function_exists('depublier_rubrique_if')) {
-
-	/**
-	 * Depublier une rubrique si aucun contenu publie connu
-	 * retourne true si la rubrique a ete depubliee
-	 *
-	 * @param int $id_rubrique
-	 * @param string $date
-	 * @return bool
-	 */
-	function depublier_rubrique_if($id_rubrique,$date=null){
-		if (is_null($date))
-			$date = date('Y-m-d H:i:s');
-		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-			" AND date <= ".sql_quote($date) : '';
-
-		if (!$id_rubrique=intval($id_rubrique))
-			return false;
-
-		// verifier qu'elle existe et est bien publiee
-		$r = sql_fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=$id_rubrique");
-		if (!$r OR $r['statut']!=='publie')
-			return false;
-
-		if (sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"))
-			return false;
-
-		if (sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_syndic",  "id_rubrique=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'"))
-			return false;
-
-		$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_rubrique,'statut'=>'publie','date'=>$date),'data'=>array()));
-		foreach($compte as $objet => $n)
-			if ($n)
-				return false;
-
-		sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_rubrique");
-		#		spip_log("depublier_rubrique $id_rubrique");
-		return true;
-	}
-
-}
 
 
 /**
