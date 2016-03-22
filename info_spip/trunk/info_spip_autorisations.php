@@ -3,23 +3,23 @@
  * Définit les autorisations du plugin Info SPIP
  *
  * @plugin     Info SPIP
- * @copyright  2013-2014
+ * @copyright  2013-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_SPIP\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 
 /**
  * Fonction d'appel pour le pipeline
+ *
  * @pipeline autoriser
  */
-function info_spip_autoriser()
-{
+function info_spip_autoriser() {
 
 }
 
@@ -32,11 +32,11 @@ function info_spip_autoriser()
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_infospip_voir_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_infospip_voir_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -47,11 +47,11 @@ function autoriser_infospip_voir_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_infospip_configurer_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_infospip_configurer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 // ------
@@ -66,11 +66,11 @@ function autoriser_infospip_configurer_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_configurer_info_spip_bouton_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_configurer_info_spip_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -81,11 +81,11 @@ function autoriser_configurer_info_spip_bouton_dist($faire, $type, $id, $qui, $o
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_info_config_bouton_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_info_config_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -97,11 +97,11 @@ function autoriser_info_config_bouton_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_configurer_info_spip_bando_bouton_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_configurer_info_spip_bando_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -113,11 +113,11 @@ function autoriser_configurer_info_spip_bando_bouton_dist($faire, $type, $id, $q
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_info_config_bando_bouton_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_info_config_bando_bouton_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 // ------
@@ -133,11 +133,11 @@ function autoriser_info_config_bando_bouton_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_configurerinfospip_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_configurerinfospip_menu_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 /**
@@ -148,11 +148,11 @@ function autoriser_configurerinfospip_menu_dist($faire, $type, $id, $qui, $opt)
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_infoconfig_menu_dist($faire, $type, $id, $qui, $opt)
-{
-    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+ **/
+function autoriser_infoconfig_menu_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 ?>

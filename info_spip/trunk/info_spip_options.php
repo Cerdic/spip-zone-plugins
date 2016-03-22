@@ -3,14 +3,14 @@
  * Options du plugin Info SPIP au chargement
  *
  * @plugin     Info SPIP
- * @copyright  2013-2014
+ * @copyright  2013-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_SPIP\Options
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 include_spip('inc/config');
@@ -18,7 +18,7 @@ include_spip('inc/meta');
 
 $config = lire_config('info_spip');
 
-if ( isset($config['type_site']) and intval($config['type_site'])!=0 ) {
+if (isset($config['type_site']) and intval($config['type_site']) != 0) {
 	switch ($config['type_site']) {
 		case 'dev':
 			$config['type_site'] = '02dev';

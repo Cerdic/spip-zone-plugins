@@ -3,6 +3,6 @@ On utilise une fonction maison qui teste l'existence de la fonction get_loaded_e
 
 <php version="#EVAL{phpversion()}" memory="#EVAL{ini_get('memory_limit')}" timezone="[(#EVAL{date_default_timezone_get()})]" >
 <B_extensions><BOUCLE_extensions (DATA) {source table, (#REM|lister_extensions_php)}>
-    <extension nom="#VALEUR" /></BOUCLE_extensions>
+	<extension nom="#VALEUR" /></BOUCLE_extensions>
 </B_extensions>
 </php>
