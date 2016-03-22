@@ -1,0 +1,1 @@
+#SET{applicatif_path,#EVAL{$_SERVER['SCRIPT_FILENAME']}}<applicatif path="[(#GET{applicatif_path}|replace{'spip.php',''})]" port="#EVAL{$_SERVER['SERVER_PORT']}" logiciel="#EVAL{$_SERVER['SERVER_SOFTWARE']}" nom="#EVAL{$_SERVER['SERVER_NAME']}" />
