@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'plugins_statut_inactif_label' => 'inactif',
     'plugins_statut_label' => 'Statut',
     'plugins_version_label' => 'Version',
+    'plugins_version_base_label' => 'Version du schéma',
 
     // S
     'sgbd_charset_label' => 'Jeu de caractères&nbsp;:',
