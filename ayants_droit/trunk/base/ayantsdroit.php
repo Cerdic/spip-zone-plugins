@@ -72,6 +72,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 	$tables['spip_droits_contrats'] = array(
 		'type' => 'droits_contrat',
 		'principale' => "oui", 
+		'page' => '',
 		'table_objet_surnoms' => array('droitscontrat'), // table_objet('droits_contrat') => 'droits_contrats' 
 		'field'=> array(
 			"id_droits_contrat"  => "bigint(21) NOT NULL",
@@ -100,7 +101,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 			'droits_ayants',
 			'spip_droits_contrats_liens',
 		),
-		'titre' => "(select nom from spip_droits_ayants as da where da.id_droits_ayant=spip_droits_contrats.id_droits_ayant) AS titre, '' AS lang",
+		'titre' => "concat('Contrat ', id_droits_contrat) AS titre, '' AS lang",
 		//'date' => '',
 		'champs_editables'  => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
 		'champs_versionnes' => array('id_droits_ayant', 'id_licence', 'date_debut', 'date_fin', 'montant', 'credits', 'commentaires'),
