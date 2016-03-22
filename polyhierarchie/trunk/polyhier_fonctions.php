@@ -209,11 +209,6 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 
 	$where = array();
 
-	$c = "sql_in('$cle" . ".$champ', \$b = calcul_branche_polyhier_in($arg,".($tous===true?'true':"'directs'").")"
-	  . ($not ? ", 'NOT'" : '') . ")";
-	$where[] = $c;
-
-
 	// On construit en avance la liste des rubriques
 	$boucle->hash .= "
 	// {branche}
@@ -226,7 +221,7 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	// on ajoute le critère de branche principale, avec le champ id_rubrique
 	if ($tous !== 'indirects' and $cle) {
 		$where[] = "sql_in(
-			'{$cle}.id_rubrique',
+			'{$cle}.{$champ}',
 			\$in_rub"
 			. ($not ? ", 'NOT'" : '')
 		. ")";
