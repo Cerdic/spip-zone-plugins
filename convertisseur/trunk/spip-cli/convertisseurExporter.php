@@ -24,8 +24,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 class fichiersExporter extends Command {
 	protected function configure() {
 		$this
-			->setName('fichiers:exporter')
-			->setDescription('Exporter spip_articles (ou autre) au format txt.')
+			->setName('convertisseur:exporter')
+			->setDescription('Exporter l atable spip_articles (ou autre) au format SPIP txt.')
 			->setAliases(array(
 				'export'
 			))

@@ -20,8 +20,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class pdf2img extends Command {
 	protected function configure() {
 		$this
-			->setName('conversion:pdf2img')
-			->setDescription('Conversion d\'un PDF en images')
+			->setName('convertisseur:convertir_pdf2img')
+			->setDescription('Conversion d\'un PDF en image(s).')
 			->setAliases(array(
 				'pdf2img' // abbréviation commune pour ca
 			))

@@ -22,8 +22,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Convert extends Command {
 	protected function configure() {
 		$this
-			->setName('fichiers:convertir')
-			->setDescription('Conversion de fichiers au format d\'import SPIP. `spip convert -e %extracteur% -s %source% -d %dest%`')
+			->setName('convertisseur:convertir')
+			->setDescription('Conversion de fichiers divers au format SPIP txt. `spip convert -e %extracteur% -s %source% -d %dest%`.')
 			->setAliases(array(
 				'convert' // abbréviation commune pour "conversion"
 			))

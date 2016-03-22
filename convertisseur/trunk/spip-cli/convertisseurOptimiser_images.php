@@ -15,8 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class optimg extends Command {
 	protected function configure() {
 		$this
-			->setName('images:optimiser')
-			->setDescription('Compression et redimensionnement en option d\'une ou plusieurs images')
+			->setName('convertisseur:optimiser_images')
+			->setDescription('Compression et/ou redimensionnement d\'une ou plusieurs images.')
 			->setAliases(array(
 				'optimg' // abbréviation pas ouf pour ca
 			))

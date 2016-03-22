@@ -21,8 +21,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 class fichiersImporter extends Command {
 	protected function configure() {
 		$this
-			->setName('fichiers:importer')
-			->setDescription('Importer des fichiers texte SPIP dans spip_articles.')
+			->setName('convertisseur:importer')
+			->setDescription('Importer des fichiers SPIP txt dans la table spip_articles (ou autre).')
 			->setAliases(array(
 				'import' // abbréviation commune pour "import"
 			))

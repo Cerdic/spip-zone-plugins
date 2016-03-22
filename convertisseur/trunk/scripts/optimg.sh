@@ -4,7 +4,6 @@
 # convert -brightness-contrast 10x12
 
 # Optimisation d'images trop lourdes ou trop grandes avec imagemagick
-# Fabriquer la ligne de commande dans le spip cli copmme l'autre.
 
 nom="${1##*/}" # basename
 resize=${2-0} # 0 par défaut
