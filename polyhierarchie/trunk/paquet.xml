@@ -1,7 +1,7 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="3.4.0"
+	version="3.4.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/polyhier-32.png"
@@ -24,9 +24,4 @@
 	<pipeline nom="editer_contenu_objet" inclure="polyhier_pipeline.php" />
 	<pipeline nom="pre_edition" inclure="polyhier_pipeline.php" />
 	<pipeline nom="post_edition" inclure="polyhier_pipeline.php" />
-<<<<<<< .working
 </paquet>
-=======
-
-</paquet>
->>>>>>> .merge-right.r53778
