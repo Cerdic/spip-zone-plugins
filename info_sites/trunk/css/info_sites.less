@@ -864,6 +864,14 @@ input[type="radio"], input[type="checkbox"] {
 			}
 		}
 	}
+	.champ {
+		.label {
+			width: 33%;
+		}
+		.span {
+			width: 65%;
+		}
+	}
 }
 
 #footer {
@@ -978,7 +986,7 @@ input[type="radio"], input[type="checkbox"] {
 				}
 			}
 
-			input, .edition, .explication, select, textarea {
+			input, .edition, .explication, select, textarea, &.editer_explication > h4 {
 				width: 76%;
 				float: right;
 				background-position: 4px center;
@@ -1005,6 +1013,14 @@ input[type="radio"], input[type="checkbox"] {
 				}
 				+ input, .edition, .explication, select, textarea {
 					margin-top: 0;
+				}
+				ul.spip {
+					list-style-type: disc;
+					padding-left: 2em;
+					li {
+						margin-bottom: 0;
+						overflow: visible;
+					}
 				}
 			}
 
@@ -1080,8 +1096,28 @@ input[type="radio"], input[type="checkbox"] {
 		&:extend {
 			.formulaire_spip
 		}
-	;
+		ul {
+			li.erreur {
+				.erreur_message {
+					display: block;
+					text-align: left;
+					float: right;
+					width: 76%;
+				}
+			}
+		}
+		&.formulaire_editer_projets_site {
+			.editer_versioning_fieldset {
+				display: none;
+			}
+		}
+		fieldset {
+			h3 {
+				border-bottom: 1px solid @main-color;
+			}
+		}
 	}
+
 	.entete-formulaire {
 		.icone {
 			margin-right: 1em;

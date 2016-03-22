@@ -1,16 +1,16 @@
 [(#REM)<style>
+/**
+	Ce squelette definit les styles de l'espace prive
 
-    Ce squelette definit les styles de l'espace prive
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
 
-    Note: l'entete "Vary:" sert a repousser l'entete par
-    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-    genant en cas de "rotation du cookie de session" apres
-    un changement d'IP (effet de clignotement).
-
-    ATTENTION: il faut absolument le charset sinon Firefox croit que
-    c'est du text/html !
-]
-#CACHE{3600*100,cache-client}
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+**/
+]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 /* #SQUELETTE */
@@ -36,22 +36,26 @@ body.configurer_info_sites tbody tr td.success,
 body.configurer_info_sites tbody tr:nth-child(2n) td.success,
 body.configurer_info_sites tbody tr td.notice,
 body.configurer_info_sites tbody tr:nth-child(2n) td.notice {
-    background-repeat: no-repeat;
-    background-position: center;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 body.configurer_info_sites tbody tr td.success,
 body.configurer_info_sites tbody tr:nth-child(2n) td.success {
-    background-image: url("[(#CHEMIN{themes/spip/images/ok-16.png})]");
+	background-image: url("[(#CHEMIN{themes/spip/images/ok-16.png})]");
 }
 body.configurer_info_sites tbody tr td.notice,
 body.configurer_info_sites tbody tr:nth-child(2n) td.notice {
-    background-image: url("[(#CHEMIN{themes/spip/images/warning-16.png})]");
+	background-image: url("[(#CHEMIN{themes/spip/images/warning-16.png})]");
 }
 body.configurer_info_sites tbody tr td.success span,
 body.configurer_info_sites tbody tr:nth-child(2n) td.success span,
 body.configurer_info_sites tbody tr td.notice span,
 body.configurer_info_sites tbody tr:nth-child(2n) td.notice span {
-    text-indent: -999em;
-    display: block;
-    overflow: hidden;
+	text-indent: -999em;
+	display: block;
+	overflow: hidden;
+}
+
+.formulaire_editer_projets_site .editer_versioning_fieldset {
+	display: none;
 }

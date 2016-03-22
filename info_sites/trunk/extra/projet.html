@@ -13,28 +13,6 @@
 ]
 
 <div class="block">
-	<B_autresobjets>
-	<BOUCLE_autresobjets(spip_projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
-	<div class="champ">
-		<div class="label visible">[(#OBJET|objet_info{texte_objet}|_T)]</div>
-		<div class="span" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
-	</div>
-	</BOUCLE_autresobjets>
-	<div class="clearfix"></div>
-	</B_autresobjets>
-
-	<B_auteurs>
-	<BOUCLE_auteurs (auteurs_liens) {id_objet=#ID_PROJET} {objet='projet'} {par role}>
-	<div class="champ">
-		<div class="label visible">[(#ROLE|role{auteurs}|sinon{[(#VAL{auteur}|objet_info{texte_objet}|_T)]})]</div>
-		<div class="span" dir="#LANG_DIR"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a></div>
-	</div>
-	</BOUCLE_auteurs>
-	<div class="clearfix"></div>
-	</B_auteurs>
-</div>
-
-<div class="block">
     <INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
 </div>
 <div class="clearfix"></div>

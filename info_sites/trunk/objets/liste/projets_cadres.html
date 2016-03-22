@@ -10,7 +10,6 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{titre,<:projets_cadre:label_titre:>,ajax})]</th>
-			[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
 			<th class='nb_projets' scope='col'><:info_sites:info_nombre_projets:></th>
 		</tr>
 	</thead>
@@ -18,9 +17,6 @@
 	<BOUCLE_liste_projets_cadres (PROJETS_CADRES) {id_mot?}{id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'>[(#LOGO_PROJETS_CADRE|image_reduire{20,26})]<a href="[(#ID_PROJETS_CADRE|generer_url_entite{projets_cadre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_CADRE">[(#RANG). ]#TITRE</a></td>
-			[(#ENV{id_auteur}|oui)
-			<td class="roles_auteur">[(#INCLURE{fond=inclure/roles_auteurs,id_auteur,objet=projets_cadre,id_objet=#ID_PROJETS_CADRE})]</td>
-			]
 			<td><BOUCLE_projets (PROJETS) {statut==.*} {id_projets_cadre}> </BOUCLE_projets>[<span class="badge">(#TOTAL_BOUCLE)</span>]</B_projets>
 			</td>
 		</tr>

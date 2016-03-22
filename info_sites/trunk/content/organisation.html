@@ -17,34 +17,27 @@
 	ajax}>
 
 <div class="block">
-    <INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env} />
+	<INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env} />
 </div>
 <div class="clearfix"></div>
 
 <div class="block">
-    <INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
+	<INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
 </div>
 <div class="clearfix"></div>
 
 <B_autresobjets>
 <div class="block">
-    <BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
-        #SET{table,#OBJET|table_objet}
-        [(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
-        [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
-        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env} />
-    </BOUCLE_autresobjets>
+	<BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env} />
+	</BOUCLE_autresobjets>
 </div>
 <div class="clearfix"></div>
 </B_autresobjets>
 
-[(#ENV{editer_liens}|=={oui}|oui)
-	<div id="editer_liens">
-		<div class="block_close"><a href="[(#SELF|parametre_url{editer_liens,''})]" class="close bg-reverse" aria-label="Close">&nbsp;<span aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></span></a></div>
-		[(#INCLURE{fond=prive/objets/editer/liens,table_source=projets,objet=organisation,id_objet=#ID_ORGANISATION,env})]
-		<div class="clearfix"></div>
-	</div>
-]
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>

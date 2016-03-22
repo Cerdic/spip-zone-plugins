@@ -226,3 +226,16 @@ function info_sites_lister_diagnostic_logiciel() {
 
 	return $repo_diagnostic;
 }
+
+function info_sites_determine_source_lien_objet($a, $b, $c) {
+	include_spip('formulaires/editer_liens');
+
+	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
+
+	return array(
+		'table_source' => $table_source,
+		'objet' => $objet,
+		'id_objet' => $id_objet,
+		'$objet_lien' => $objet_lien,
+	);
+}

@@ -3,7 +3,6 @@
 	<ul class="list-group menu" role="menu">
 	[(#AUTORISER{modifier,contact,#ID_CONTACT})
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,id_contact=#ID_CONTACT}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_contact:></a></li>
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,organisations}|parametre_url{objet,contact}|parametre_url{id_objet,#ID_CONTACT})]" class="bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_organisation|attribut_html:>"><i class="fa fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
 	]</ul>
 </div>
 </BOUCLE_extra>
