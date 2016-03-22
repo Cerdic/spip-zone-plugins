@@ -102,10 +102,8 @@ function critere_parents($idb, &$boucles, $crit, $tous=true) {
 		$where[] = "is_array(\$r=$argp)?sql_in('$primary',\$r):array('=', '$primary', \$r)";
 	}
 
-	if (
-		$tous !== 'directs'
-		and in_array($boucle_parent->type_requete, array('rubriques','articles'))
-	) {
+	if ($tous !== 'directs'
+	  AND in_array(table_objet_sql($boucle_parent->type_requete),array_keys(lister_tables_objets_sql()))){
 		$arg = kwote(calculer_argument_precedent($idb, id_table_objet(objet_type($boucle_parent->type_requete)), $boucles));
 		$type = objet_type($boucle_parent->type_requete);
 		$sous = "sql_get_select('rl.id_parent','spip_rubriques_liens as rl','rl.id_objet='.$arg.' AND rl.objet=\'$type\'')";

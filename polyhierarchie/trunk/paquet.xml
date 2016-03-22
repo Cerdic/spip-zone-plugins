@@ -24,4 +24,9 @@
 	<pipeline nom="editer_contenu_objet" inclure="polyhier_pipeline.php" />
 	<pipeline nom="pre_edition" inclure="polyhier_pipeline.php" />
 	<pipeline nom="post_edition" inclure="polyhier_pipeline.php" />
+<<<<<<< .working
 </paquet>
+=======
+
+</paquet>
+>>>>>>> .merge-right.r53778
