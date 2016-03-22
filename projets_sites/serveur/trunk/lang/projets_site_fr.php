@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bo_url_label' => 'Url du Back Office&nbsp;:',
 
 	// C
+	'champ_logiciel_version_format' => 'Vous devez saisir un numéro de version sous la forme "x.y.z", "x.y" ou "x".',
 	'confirmer_maj_projets_site' => 'Veuillez confirmer la demande de mise à jour de ce site par le biais du webservice.',
 	'confirmer_supprimer_projets_site' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce site&nbsp;?',
 	'consultation_webservice' => 'Consultation du webservice',

@@ -9,7 +9,7 @@
 			[(#ENV{id_projets_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
 			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
 			<fieldset class="editer editer_referencement_automatise fieldset">
-				<ul>
+				<ul class="editer-groupe">
 					<li class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
 						<p class="explication"><:projets_site:texte_referencement_automatique:></p>
@@ -27,7 +27,7 @@
 	Mais si on est sur une création d'un nouveau site (new=oui), on ne doit pas mettre 'disabled'
 	sur les champs, car SPIP 'reconnait' les champs disabled et ne les insère pas dans la table.
 ][(#SET{disabled,[(#ENV{id_projets_site}|=={oui}|?{'',#GET{disabled}})]})]
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:projets_site:titre_label:>,
 				size=255,
@@ -60,14 +60,14 @@
 				rows=10,
 				cols=40})]
 
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 <!-- Front Office -->
-		<fieldset>
+		<fieldset class="editer_fo_fieldset">
 			<h3 class="legend">
 				<:projets_site:fo_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, fo_url,
 					label=<:projets_site:fo_url_label:>,
 					size=255,
@@ -84,15 +84,15 @@
 					size=25,
 					maxlength=25})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- Back office -->
-		<fieldset>
+		<fieldset class="editer_bo_fieldset">
 			<h3 class="legend">
 				<:projets_site:bo_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, bo_url,
 					label=<:projets_site:bo_url_label:>,
 					size=255,
@@ -108,25 +108,27 @@
 					size=25,
 					maxlength=25})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- Logiciel -->
-		<fieldset>
+		<fieldset class="editer_logiciel_fieldset">
 			<h3 class="legend">
 				<:projets_site:logiciel_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, logiciel_nom, obligatoire=oui,
 					label=<:projets_site:logiciel_nom_label:>,
 					size=25,maxlength=25,
-					disable=[(#GET{disabled})]})]
+					disable=[(#GET{disabled})],
+					datas=#ENV{liste_logiciels_nom}})]
 
 				[(#SAISIE{input, logiciel_version, obligatoire=oui,
 					label=<:projets_site:logiciel_version_label:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})]})]
+					disable=[(#GET{disabled})],
+					datas=#ENV{liste_logiciels_version}})]
 
 				[(#SAISIE{input, logiciel_revision,
 					label=<:projets_site:logiciel_revision_label:>,
@@ -147,15 +149,15 @@
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- Les auteurs -->
-		<fieldset>
+		<fieldset class="editer_auteurs_fieldset">
 			<h3 class="legend">
 				<:projets_site:auteurs_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{explication, auteurs_explication,
 					inserer_debut=<:projets_site:auteurs_titre_explication:>,
 					texte=<:projets_site:auteurs_explication:>})]
@@ -170,15 +172,15 @@
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- applicatif -->
-		<fieldset>
+		<fieldset class="editer_serveur_fieldset">
 			<h3 class="legend">
 				<:projets_site:serveur_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, serveur_nom,
 					label=<:projets_site:serveur_nom_label:>,
 					size=255,
@@ -207,29 +209,29 @@
 					size=255,
 					maxlength=255})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- Apache -->
-		<fieldset>
+		<fieldset class="editer_apache_fieldset">
 			<h3 class="legend">
 				<:projets_site:apache_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{textarea, apache_modules,
 					label=<:projets_site:apache_modules_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- PHP -->
-		<fieldset>
+		<fieldset class="editer_php_fieldset">
 			<h3 class="legend">
 				<:projets_site:php_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, php_version,
 					label=<:projets_site:php_version_label:>,
 					size=25,
@@ -251,15 +253,15 @@
 					label=<:projets_site:php_timezone_label:>,
 					disable=[(#GET{disabled})]})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- versioning -->
-		<fieldset>
+		<fieldset class="editer_versioning_fieldset">
 			<h3 class="legend">
 				<:projets_site:versioning_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, versioning_type,
 					label=<:projets_site:versioning_type_label:>,
 					size=255,
@@ -275,15 +277,15 @@
 					label=<:projets_site:versioning_trac_label:>,
 					size=255,
 					maxlength=255})]
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- SAS -->
-		<fieldset>
+		<fieldset class="editer_sas_fieldset">
 			<h3 class="legend">
 				<:projets_site:sas_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, sas_protocole,
 					label=<:projets_site:sas_protocole_label:>,
 					size=255,
@@ -309,15 +311,15 @@
 					label=<:projets_site:sas_password_label:>,
 					size=25,
 					maxlength=25})]
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- SGBD -->
-		<fieldset>
+		<fieldset class="editer_sgbd_filedset">
 			<h3 class="legend">
 				<:projets_site:sgbd_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, sgbd_type,
 					label=<:projets_site:sgbd_type_label:>,
 					explication=<:projets_site:sgbd_type_explication:>,
@@ -373,15 +375,15 @@
 					size=25,
 					maxlength=25})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- autres champs -->
-		<fieldset>
+		<fieldset class="editer_autres_fieldset">
 			<h3 class="legend">
 				<:projets_site:autres_fieldset_label:>
 			</h3>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 				[(#SAISIE{input, sso,
 					label=<:projets_site:sso_label:>,
 					size=25,
@@ -409,7 +411,7 @@
 					explication=<:projets_site:remarques_explication:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

@@ -88,9 +88,36 @@ function formulaires_editer_projets_site_charger_dist(
 	$row = array(),
 	$hidden = ''
 ) {
-	$valeurs = formulaires_editer_objet_charger('projets_site', $id_projets_site, '', $lier_trad, $retour, $config_fonc,
-		$row, $hidden);
+	$valeurs = formulaires_editer_objet_charger('projets_site', $id_projets_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
+	include_spip('base/abstract_sql');
+	/**
+	 * On retourne tous les noms de logiciels d'un site de projets
+	 */
+	$liste_logiciels_nom = array();
+	$liste_logiciels_nom_bdd = sql_allfetsel("DISTINCT(logiciel_nom) as logiciel_nom", 'spip_projets_sites');
+	if (is_array($liste_logiciels_nom_bdd) and count($liste_logiciels_nom_bdd) > 0) {
+		foreach ($liste_logiciels_nom_bdd as $projets_site) {
+			$liste_logiciels_nom[] = $projets_site['logiciel_nom'];
+		}
+		$liste_logiciels_nom = array_filter($liste_logiciels_nom);
+		$liste_logiciels_nom = array_values($liste_logiciels_nom);
+	}
+	$valeurs['liste_logiciels_nom'] = $liste_logiciels_nom;
+
+	/**
+	 * On retourne toutes les versions de logiciels sans distinction des sites de projets
+	 */
+	$liste_logiciels_version = array();
+	$liste_logiciels_version_bdd = sql_allfetsel("DISTINCT(logiciel_version) as logiciel_version", 'spip_projets_sites');
+	if (is_array($liste_logiciels_version_bdd) and count($liste_logiciels_version_bdd) > 0) {
+		foreach ($liste_logiciels_version_bdd as $projets_site) {
+			$liste_logiciels_version[] = $projets_site['logiciel_version'];
+		}
+		$liste_logiciels_version = array_filter($liste_logiciels_version);
+		$liste_logiciels_version = array_values($liste_logiciels_version);
+	}
+	$valeurs['liste_logiciels_version'] = $liste_logiciels_version;
 	return $valeurs;
 }
 
@@ -132,6 +159,7 @@ function formulaires_editer_projets_site_verifier_dist(
 	include_spip('inc/filtres');
 	include_spip('inc/site');
 	$analyser_webservice = charger_fonction('analyser_webservice', 'inc');
+	$raccourcis_logiciels_noms = pipeline('lister_logiciels_noms', array('args' => array(), 'data' => array()));
 
 	// $oblis = array('titre','type_site','logiciel_nom','logiciel_service');
 	// Envoi depuis le formulaire d'analyse automatique d'un site
@@ -151,6 +179,26 @@ function formulaires_editer_projets_site_verifier_dist(
 		// et sinon l'url du front office, sans couper
 		titre_automatique('titre', array('fo_url'), 255);
 		$erreurs = formulaires_editer_objet_verifier('projets_site', $id_projets_site);
+	}
+	/**
+	 * Les versions de logiciels doivent être sous la forme x.y.z
+	 * Les alpha, dev, a, beta, b, rc, pl et p sont pris en compte à la fin de "x.y.z"
+	 */
+	if ($logiciel_version = _request('logiciel_version') and $logiciel_version = trim($logiciel_version) and !preg_match(',([0-9.]+)[\s-.]?(dev|alpha|a|beta|b|rc|pl|p)?$,i', $logiciel_version, $matches)) {
+		$erreurs['logiciel_version'] = _T('projets_site:champ_logiciel_version_format');
+	}
+	/**
+	 * On vérifie la bonne orthographe du nom de logiciel.
+	 * Si la correspondance n'est pas prévue dans le pipeline "lister_logiciels_noms",
+	 * on retourne la saisie en lui appliquant un trim().
+	 * Info : l'obligation a été testée par l'API formulaires_editer_objet_verifier()
+	 * donc on peut s'occuper d'autres choses pour ne pas faire de redondance.
+	 */
+	if ($logiciel_nom = _request('logiciel_nom') and $logiciel_nom = trim($logiciel_nom)) {
+		if (array_key_exists($logiciel_nom, $raccourcis_logiciels_noms)) {
+			$logiciel_nom = trim($raccourcis_logiciels_noms[$logiciel_nom]); // par sécurité, on fait un trim sur le contenu du pipeline alimenté.
+		}
+		set_request('logiciel_nom', $logiciel_nom);
 	}
 
 	return $erreurs;
@@ -210,6 +258,3 @@ function formulaires_editer_projets_site_traiter_dist(
 	return $res;
 
 }
-
-
-?>

@@ -91,4 +91,34 @@ function projets_sites_header_prive($flux) {
 	return $flux;
 }
 
-?>
+/**
+ * Ce pipeline permet de rajouter des écritures de noms de logiciels d'un site
+ *
+ * @param $flux
+ */
+function projets_sites_lister_logiciels_noms($flux) {
+
+	$raccourcis = array(
+		'WP' => 'WordPress',
+		'WordPress' => 'WordPress',
+		'Wordpress' => 'WordPress',
+		'wordpress' => 'WordPress',
+		'worpdress' => 'WordPress', // Easter egg :-)
+		'Worpdress' => 'WordPress', // Easter egg :-)
+		'Drupal' => 'Drupal',
+		'drupal' => 'Drupal',
+		'Spip' => 'SPIP',
+		'SPIP' => 'SPIP',
+		'spip' => 'SPIP',
+		'slip' => 'SPIP', // Easter egg :-)
+		'Slip' => 'SPIP', // Easter egg :-)
+		'Typo 3' => 'TYPO3',
+		'Typo3' => 'TYPO3',
+		'typo3' => 'TYPO3',
+		'typo 3' => 'TYPO3',
+	);
+	$flux['data'] = array_merge($flux['data'], $raccourcis);
+
+	return $flux;
+
+}
