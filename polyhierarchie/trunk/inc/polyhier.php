@@ -74,6 +74,36 @@ function polyhier_get_parents($id_objet,$objet,$serveur=''){
 }
 
 /**
+ *
+ * @param int/array $id_parent
+ * @param string $objet Un éventuel type d'objet
+ * @param string $serveur
+ * @return array
+ */
+function polyhier_get_enfants($id_parent, $objet='', $serveur=''){
+
+	$where = (is_array($id_parent) ? sql_in('id_parent',$id_parent) : ("id_parent=".intval($id_parent)));
+
+	// selectionner l'intersection entre base et tableau
+	$objets = sql_allfetsel("objet, id_objet","spip_rubriques_liens",$where,"","","","",$serveur);
+	
+	// S'il n'y a pas de type on retourne tous les couples
+	if (!$objet){
+		return $objets;
+	}
+	// S'il y a un type on retoure juste la liste des ID
+	else{
+		$ids = array();
+		foreach ($objets as $couple){
+			if ($couple['objet'] == $objet){
+				$ids[] = $couple['id_objet'];
+			}
+		}
+		return $ids;
+	}
+}
+
+/**
  * Retrouver tous les parents, directs et indirects
  * 
  * @param int|array $id_objet
