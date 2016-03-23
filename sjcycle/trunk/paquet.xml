@@ -13,6 +13,9 @@
 	<!--  Un diaporama param&#233;trable pour Spip  -->
 
 	<auteur>chankalan</auteur>
+	<credit>Minimalteck</credit><!-- pour les versions precedentes -->
+        <credit>Yffic</credit><!-- pour les versions precedentes -->
+	<credit lien="http://jquery.malsup.com/cycle2/">Cycle2</credit><!-- la librairie -->
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="insert_head_css" inclure="sjcycle_pipelines.php" />
