@@ -24,12 +24,12 @@ function responsivenav_insert_head_css($flux) {
 
 // on insert le script
 function responsivenav_insert_head($flux) {
-	$flux .= '<script type="text/javascript" src="'.produire_fond_statique('js/responsive-nav.js').'"></script>';
+	$flux .= '<script type="text/javascript" src="'.find_in_path('js/responsive-nav.js').'"></script>';
 
 	if (test_plugin_actif('Zpip')){
-		$flux .= '<script>$(function() {  var nav = responsiveNav(".menu.menu-container",{jsClass: "js-responsivenav"});}); </script>';
+		$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav(".menu.menu-container",{jsClass: "js-responsivenav"}); }); })(jQuery); /*]]>*/ </script>';
 	} else {
-		$flux .= '<script>$(function() {  var nav = responsiveNav("#nav",{jsClass: "js-responsivenav"});}); </script>';
+		$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav("#nav",{jsClass: "js-responsivenav"}); }); })(jQuery); /*]]>*/ </script>';
 	}
 
 	return $flux;
