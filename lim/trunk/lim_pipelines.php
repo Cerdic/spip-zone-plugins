@@ -110,8 +110,7 @@ function lim_formulaire_verifier($flux){
 
 			// récupérer l'id_rubrique actuel (en BdD) de l'objet 
 			$faire = 'publierdans';
-			$where = 'id_'.$type.'='.$id_objet;
-			if ($type == 'site') $where = 'id_syndic='.$id_objet;
+			$where = id_table_objet($type).'='.$id_objet;
 			if ($type == 'rubrique')
 				$id_rub_en_cours = sql_getfetsel('id_parent', $nom_table, $where);
 			else
