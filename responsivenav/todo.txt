@@ -1,0 +1,2 @@
+- choisir le breakpoint depuis l'espace privé
+- paramétrer les configs de Responsive Nav depuis l'espace privé

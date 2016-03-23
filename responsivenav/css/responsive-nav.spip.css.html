@@ -1,0 +1,18 @@
+#nav {border-top:0;}
+#nav ul li {text-align:center;}
+
+/* Si ZDist V1 avec le plugin Menus */
+[(#PLUGIN{Z}|oui)
+	#nav .menu-conteneur ul.menu-liste li.menu-entree {box-sizing:border-box;margin:0;padding:0.5em;display:inline-block;}
+]
+
+@media screen and (min-width: #EVAL{_RESPONSIVENAV_BREAKPOINT} ) {
+	/* Pour ZDist */
+	.nav-collapse ul.menu-items li.item {width:auto;}
+	/* Pour SPIP 3.1 dist */
+	.nav-collapse ul li.nav-item {display:inline;}
+}
+@media screen and (max-width: #EVAL{_RESPONSIVENAV_BREAKPOINT}) {
+	a.nav-toggle:link, a.nav-toggle:focus {display:block;height:30px;color:transparent  !important;text-align:center;color:transparent;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
+	a.nav-toggle.active, a.nav-toggle.active:focus {background-position: bottom center !important;}
+}
