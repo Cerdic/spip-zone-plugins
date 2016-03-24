@@ -1,39 +1,50 @@
 <BOUCLE_content(EVENEMENTS){id_evenement}>
-
-  #SET{id_evenement_source,#ID_EVENEMENT_SOURCE}
-  #SET{date_debut,#DATE_DEBUT}
-  [(#ID_EVENEMENT_SOURCE|=={0}|oui) #SET{id_evenement_source,#ID_EVENEMENT}]
-  [(#ID_EVENEMENT_SOURCE|!={0}|oui) #SET{date_debut,#INFO_DATE_DEBUT{evenement,#ID_EVENEMENT_SOURCE}}]
-
-  #SET{date_fin,#DATE_FIN}
-  <BOUCLE_evmt_lie(EVENEMENTS){id_evenement_source = #GET{id_evenement_source}}{! par date_fin}{0,1}>
-    #SET{date_fin,#DATE_FIN}
-  </BOUCLE_evmt_lie>
-
-<article class="entry evenement vevent id_#ID_EVENEMENT" id="evenement_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
-    <header class="cartouche">
-        [(#LOGO_EVENEMENT|image_reduire{200,200})]
-        <h1><span class="#EDIT{titre}">#TITRE</span></h1>
-		<meta itemprop="startDate" content="[(#GET{date_debut}|date_iso)]" />
-		<meta itemprop="endDate" content="[(#GET{date_fin}|date_iso)]" />
-		[<p class="info-publi"><time><i class="icon-calendar"></i> (#GET{date_debut}|agenda_affdate_debut_fin{#GET{date_fin},#HORAIRE*,'hcal'})</time></p>]
-    </header>
-   #SET{intro,''}<BOUCLE_art(ARTICLES){id_article}>#SET{intro,#TEXTE}</BOUCLE_art>
-	[(#SET{intro,[<div class="introduction #EDIT{descriptif}" itemprop="description">(#DESCRIPTIF|sinon{#GET{intro}})</div>]})]
-
-
-  [<div class="main">
-    (#GET{intro})
-  </div>]
-
-<INCLURE{fond=inclure/evenement_details,
-  id_objet=#GET{id_evenement_source},
-  id_article,
-  prix=#PRIX,
-  lieu,
-  places,
-  adresse
-  } />
-
-</article>
+	#SET{id_evenement_source,#ID_EVENEMENT_SOURCE}
+	#SET{date_debut,#DATE_DEBUT} [(#ID_EVENEMENT_SOURCE|=={0}|oui)
+	#SET{id_evenement_source,#ID_EVENEMENT}]
+	[(#ID_EVENEMENT_SOURCE|!={0}|oui)
+	#SET{date_debut,#INFO_DATE_DEBUT{evenement,#ID_EVENEMENT_SOURCE}}]
+	
+	#SET{date_fin,#DATE_FIN} 
+	<BOUCLE_evmt_lie(EVENEMENTS){id_evenement_source=#GET{id_evenement_source}}{! pardate_fin}{0,1}>
+		#SET{date_fin,#DATE_FIN} 
+	</BOUCLE_evmt_lie>
+	
+	<article class="entry evenement vevent id_#ID_EVENEMENT"
+		id="evenement_#ID_EVENEMENT" itemscope
+		itemtype="http://schema.org/Event">
+		<header class="cartouche">
+			[(#LOGO_EVENEMENT|image_reduire{200,200})]
+			<h1>
+				<span class="#EDIT{titre}">#TITRE</span>
+			</h1>
+			<meta itemprop="startDate" content="[(#GET{date_debut}|date_iso)]" />
+			<meta itemprop="endDate" content="[(#GET{date_fin}|date_iso)]" />
+			[
+			<p class="info-publi">
+				<time>
+					<i class="icon-calendar"></i>
+					(#GET{date_debut}|agenda_affdate_debut_fin{#GET{date_fin},#HORAIRE*,'hcal'})
+				</time>
+			</p>
+			]
+		</header>
+		#SET{intro,''}
+		<BOUCLE_art(ARTICLES){id_article}>
+			#SET{intro,#TEXTE}
+		</BOUCLE_art>
+		[(#SET{intro,[
+		<div class="introduction #EDIT{descriptif}" itemprop="description">
+			(#DESCRIPTIF|sinon{#GET{intro}})
+		</div>]})]
+		[<div class="main">(#GET{intro})</div>]
+	
+		<INCLURE {fond=inclure/evenement_details,
+			id_objet=#GET{id_evenement_source}, 
+			id_article,
+			prix=#PRIX, 
+			lieu,
+			places,
+			adresse} />
+	</article>
 </BOUCLE_content>

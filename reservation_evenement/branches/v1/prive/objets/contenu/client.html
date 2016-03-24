@@ -1,28 +1,27 @@
 <BOUCLE_reservation(RESERVATIONS){id_reservation}{statut?}>
-    <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-    [<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
-        <label><:reservation:label_email:></label>
-        <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
-    </div>]
-    
-    	#SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
-        <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
-        [<div class="champ contenu_#VALEUR{options/nom}">
-            <label>[(#VALEUR{options/label}|chercher_label{#GET{extras}}|extraire_multi|_T)]</label>
-            <span dir="#LANG_DIR" class="#CLE">(#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}})</span>
-        </div>]    
-        </BOUCLE_extras>
-    </BOUCLE_auteur>
-        [<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
-            <label><:reservation:label_email:></label>
-            <span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
-        </div>]
-     
-	    <BOUCLE_champs_extras(DATA){source tableau, #DONNEES_AUTEUR|unserialize}>
-	    [<div class="champ contenu_#CLE">
-	        <label>[(#CLE|chercher_label|extraire_multi|_T)] :</label>
-	        <span dir="#LANG_DIR" class="#CLE">(#VALEUR)</span>
-	    </div> ]   
-	    </BOUCLE_champs_extras>
-    <//B_auteur>    
+	<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+		[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+		<label><:reservation:label_email:></label>
+		<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+	</div>]
+		#SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
+		<BOUCLE_extras (DATA){sourcetableau, #GET{extras}}>
+		[<div class="champ contenu_#VALEUR{options/nom}">
+			<label>[(#VALEUR{options/label}|chercher_label{#GET{extras}}|extraire_multi|_T)]</label>
+			<span dir="#LANG_DIR" class="#CLE">(#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}})</span>
+		</div>]
+		</BOUCLE_extras>
+	</BOUCLE_auteur> 
+		[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+			<label><:reservation:label_email:></label>
+			<span dir='#LANG_DIR' class='#EDIT{email} email'>(#EMAIL)</span>
+		</div>]
+		<BOUCLE_champs_extras (DATA){sourcetableau, #DONNEES_AUTEUR|unserialize}>
+		[<div class="champ contenu_#CLE">
+			<label>[(#CLE|chercher_label|extraire_multi|_T)] :</label> <span
+				dir="#LANG_DIR" class="#CLE"
+			>(#VALEUR)</span>
+		</div>]
+		</BOUCLE_champs_extras>
+	<//B_auteur>
 </BOUCLE_reservation>
