@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.1.1"
+	version="1.2.0"
 	etat="dev"
 	compatibilite="[3.0.8;3.0.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
@@ -26,6 +26,9 @@
 
 	<utilise nom="rss_commits" compatibilite="[0.6.0;]"/>
 	<utilise nom="info_spip" compatibilite="[0.8.0;]"/>
+
+	<lib nom="font-awesome" lien="https://fortawesome.github.io/Font-Awesome/assets/font-awesome-4.5.0.zip" />
+	<lib nom="bootstrap" lien="https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
 
