@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_cc' => 'Cópia (CC):',
 	'facteur_copies' => 'Cópias:',
 	'facteur_copies_descriptif' => 'Um e-mail será enviado em cópia para os endereços especificados. Um único endereço em cópia e/ou um único endereço em cópia oculta.',
+	'facteur_email_test' => 'Enviar um e-mail de teste para:',
 	'facteur_filtre_accents' => 'Transformar os acentos em entidades HTML (útil especialmente para o Hotmail).',
 	'facteur_filtre_css' => 'Transformaros estílos contidos entre <head> e </head> em estilos "em linha", útil para os webmails, já que os estilos em linha têm prioridade sobre os estilos externos.',
 	'facteur_filtre_images' => 'Embutir as imagens referenciadas no próprio e-mail',
@@ -58,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'A configuração do plugin "Carteiro" define este endereço de e-mail para o envio das mensagens.',
 
 	// N
-	'note_test_configuration' => 'Um e-mail será enviado ao endereço de envio definido (ou ao do webmaster).', # MODIF
+	'note_test_configuration' => 'Um e-mail será enviado a este endereço.',
 
 	// P
 	'personnaliser' => 'Personalizar essas configurações',
