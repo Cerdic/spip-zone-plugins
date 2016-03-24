@@ -1,6 +1,7 @@
 <div class="choix">
-    <label for="id_evenement_#ID_EVENEMENT">
-        [(#ENV{prix}|>{0}|?{[(#ENV{prix})],<:reservation:label_inscription:>})]
-  </label>
-    <input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox evenement" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"[(#ID_EVENEMENT|in_array{#ENV{evenements,#ARRAY{}}}|oui) checked="checked"]/>
+	<label for="id_evenement_#ID_EVENEMENT">
+		[(#ENV{prix}|>{0}|?{[(#ENV{prix})],<:reservation:label_inscription:>})]
+	</label>
+	<input type="checkbox" name="id_evenement[#ID_EVENEMENT]" class="checkbox evenement" id="id_evenement_#ID_EVENEMENT" value="#ID_EVENEMENT"
+		[(#ID_EVENEMENT|in_array{#ENV{evenements, #ARRAY{}}}|oui) checked="checked" ]/>
 </div>

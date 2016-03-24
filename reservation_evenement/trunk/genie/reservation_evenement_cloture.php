@@ -16,8 +16,8 @@ function genie_reservation_evenement_cloture_dist ($t) {
 	$date=date('Y-m-d G:i:s');
 	
 	include_spip('action/editer_objet');
- 
- 	//Sélection des détails de réservation d'événements passé  qui ont action_cloture activé
+
+	//Sélection des détails de réservation d'événements passé  qui ont action_cloture activé
 	$sql=sql_select(
 		'id_reservations_detail,spip_reservations_details.id_evenement,date_fin',
 		'spip_reservations_details,spip_evenements',

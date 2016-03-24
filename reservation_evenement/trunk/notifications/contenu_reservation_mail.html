@@ -3,7 +3,7 @@
 #SET{config,#CONFIG{reservation_evenement}}
 [(#SET{envoi_separe,#GET{config}|table_valeur{envoi_separe}})]
 [(#GET{envoi_separe}|is_array|oui)
-    [(#STATUT|in_array{#GET{envoi_separe}}|oui)#SET{statut,#STATUT}]
+	[(#STATUT|in_array{#GET{envoi_separe}}|oui)#SET{statut,#STATUT}]
 ]
 
 <BOUCLE_art(RESERVATIONS){id_reservation}{tout}>
@@ -11,13 +11,13 @@
 #SET{extras,#DONNEES_AUTEUR|unserialize}
 #SET{email,#EMAIL}
 <BOUCLE_contact(AUTEURS){id_auteur=#ID_AUTEUR}{si #ID_AUTEUR|!={0}|oui}{tout}>
-    #SET{nom_client,#NOM}
-    #SET{valeurs_extras,#ARRAY}
-    #SET{email,#EMAIL}
-    #SET{extras,#VAL|champs_extras_reservation}
-    <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
-    #SET{valeurs_extras,#GET{valeurs_extras}|array_merge{#ARRAY{#VALEUR{options/label},#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}}}
-    </BOUCLE_extras>
+	#SET{nom_client,#NOM}
+	#SET{valeurs_extras,#ARRAY}
+	#SET{email,#EMAIL}
+	#SET{extras,#VAL|champs_extras_reservation}
+	<BOUCLE_extras(DATA){source tableau, #GET{extras}}>
+		#SET{valeurs_extras,#GET{valeurs_extras}|array_merge{#ARRAY{#VALEUR{options/label},#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}}}}}
+	</BOUCLE_extras>
 </BOUCLE_contact>
 #SET{extras,#GET{valeurs_extras}}
 </B_contact>

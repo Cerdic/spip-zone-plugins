@@ -59,5 +59,3 @@ function notifications_reservation_vendeur_dist($quoi,$id_reservation, $options)
 	}
 
 }
-
-?>

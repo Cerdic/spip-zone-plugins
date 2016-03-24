@@ -73,9 +73,9 @@
 	}
 
 	$("#champ_id_auteur")
-	  .change(function() {
+		.change(function() {
 			if($(this).find("option:selected").val() != "") {
-			  hide_fieldset(".fieldset_donnees_auteur",800);
+				hide_fieldset(".fieldset_donnees_auteur",800);
 			}
 			else {
 				$(".fieldset_donnees_auteur").show(800);
@@ -83,6 +83,6 @@
 		            $(this).prop('required','true');
 				});
 			} 
-        });
+		});
 
 </script>
