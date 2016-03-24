@@ -23,7 +23,7 @@
 
 [<link rel="stylesheet" href="(#CSS{css/info_sites.css})" type="text/css" />]
 [
-(#ENV{type-page}|=={login}|oui)
+(#ENV{type-page}|in_array{#LISTE{login,spip_pass}}|oui)
 [<link rel="stylesheet" href="(#CSS{css/signin.css})" type="text/css" />]
 ][
 (#REM) Feuille de style du theme
