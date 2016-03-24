@@ -189,18 +189,39 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 		$arg = kwote(calculer_argument_precedent($idb, 'id_rubrique', $boucles));
 	}
 	
+
+	$type = objet_type($boucle->type_requete);
+	$primary = $boucle->id_table.".".$boucle->primary;
+
 	//Trouver une jointure
 	$champ = "id_rubrique";
 	$desc = $boucle->show;
 	//Seulement si necessaire
 	if (!array_key_exists($champ, $desc['field'])){
-		$cle = trouver_jointure_champ($champ, $boucle);
 		$trouver_table = charger_fonction("trouver_table", "base");
-		$desc = $trouver_table($boucle->from[$cle]);
-		if (count(trouver_champs_decomposes($champ, $desc))>1){
-			$decompose = decompose_champ_id_objet($champ);
-			$champ = array_shift($decompose);
-			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
+		$cle = "";
+		// peut-etre deja une jointure qui fournit id_rubrique ?
+		foreach($boucle->from as $k=>$t){
+			$desc = $trouver_table($t);
+			if (isset($desc['field']['id_rubrique'])){
+				$cle = $k;
+				break;
+			}
+		}
+		if (!$cle){
+			$cle = trouver_jointure_champ($champ, $boucle);
+			$desc = $trouver_table($boucle->from[$cle]);
+			if (count(trouver_champs_decomposes($champ, $desc))>1){
+				$decompose = decompose_champ_id_objet($champ);
+				$champ = array_shift($decompose);
+				$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
+			}
+		}
+		// si le champ id_rubrique est recuperer par jointure, c'est le type et la primary de la table jointe
+		// qu'il faut chercher dans la table spip_rubriques_liens (ie cas des evenements)
+		if ($cle AND $desc) {
+			$type = objet_type($boucle->from[$cle]);
+			$primary = $cle . "." . id_table_objet($boucle->from[$cle]);
 		}
 	}
 	else {
@@ -229,8 +250,6 @@ function critere_branche($idb, &$boucles, $crit, $tous='elargie') {
 	
 	// Si c'est tout ou que indirects, on ajoute le critère de branche secondaire, avec la table de liens
 	if ($tous !== 'directs') {
-		$type = objet_type($boucle->type_requete);
-		$primary = $boucle->id_table.".".$boucle->primary;
 		
 		$sous = "sql_get_select('rl.id_objet','spip_rubriques_liens as rl',sql_in('rl.id_parent',\$in_rub" . ($not ? ", 'NOT'" : '') . ").' AND rl.objet=\'$type\'')";
 		$where[] = "array('IN', '$primary', '(SELECT * FROM('.$sous.') AS subquery)')";
