@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/amap_distributions, par=titre, env, ajax, sinon=<:amap_distribution:info_aucun_amap_distribution:>}>
+
+[(#AUTORISER{creer,amap_distribution})
+	[(#URL_ECRIRE{amap_distribution_edit,new=oui}|icone_verticale{<:amap_distribution:icone_creer_amap_distribution:>,amap_distribution,new,right})]
+]

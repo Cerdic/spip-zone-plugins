@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_amap_periodes_selectionnes>
+	<ul>
+	<BOUCLE_amap_periodes_selectionnes(AMAP_PERIODES){id_amap_periode IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_AMAP_PERIODE)</li>
+	</BOUCLE_amap_periodes_selectionnes>
+	</ul>
+	</B_amap_periodes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_amap_periodes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_amap_periode_selectionne(AMAP_PERIODES){id_amap_periode=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_AMAP_PERIODE)</p>
+	</BOUCLE_amap_periode_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_amap_periode_selectionne>
+<//B_test_multiple>

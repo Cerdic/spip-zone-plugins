@@ -1,0 +1,28 @@
+<BOUCLE_amap_periode(AMAP_PERIODES){id_amap_periode=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:amap_periode:titre_amap_periode:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_AMAP_PERIODE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{amap_periodes,#ID_AMAP_PERIODE})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(AMAP_PERIODES){id_amap_periode}>
+	[(#VAL{redirect}
+		|generer_url_action{type=amap_periodes&id=#ID_AMAP_PERIODE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,amap_periodes,#ID_AMAP_PERIODE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=amap_periodes&id=#ID_AMAP_PERIODE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_amap_periode>

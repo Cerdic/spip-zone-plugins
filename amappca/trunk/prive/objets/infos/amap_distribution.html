@@ -1,0 +1,14 @@
+<BOUCLE_amap_distribution(AMAP_DISTRIBUTIONS){id_amap_distribution=#ENV{id}}>
+<div class="infos">
+[(#SET{texte_objet,<:amap_distribution:titre_amap_distribution:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_AMAP_DISTRIBUTION</p></div>
+
+	[(#AUTORISER{supprimer, amap_distribution, #ID_AMAP_DISTRIBUTION}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN_IMAGE{amap_distribution-del-24.png}|balise_img{<:amap_distribution:supprimer_amap_distribution:>}|concat{' ',#VAL{<:amap_distribution:supprimer_amap_distribution:>}|wrap{<b>}}|trim)],
+			#URL_ACTION_AUTEUR{supprimer_amap_distribution, #ID_AMAP_DISTRIBUTION, #URL_ECRIRE{amap_distributions}},
+			icone s24 horizontale danger amap_distribution-del-24, <:amap_distribution:confirmer_supprimer_amap_distribution:>})]
+	]
+
+</div>
+</BOUCLE_amap_distribution>

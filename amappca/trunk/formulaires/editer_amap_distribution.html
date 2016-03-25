@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_amap_distribution,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_amap_distribution" value="#ENV{id_amap_distribution}" />
+		<div class="editer-groupe">
+ 
+			[(#SAISIE{amap_periodes, id_amap_periode, obligatoire=oui,
+				label=<:amap_distribution:champ_id_amap_periode_label:>})]
+ 
+			[(#SAISIE{date, date, obligatoire=oui,
+				label=<:amap_distribution:champ_date_label:>})]
+ 
+			[(#SAISIE{textarea, texte,
+				label=<:amap_distribution:champ_texte_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

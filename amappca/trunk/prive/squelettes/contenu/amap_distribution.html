@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,amap_distribution,#ID_AMAP_DISTRIBUTION}|sinon_interdire_acces)]
+<BOUCLE_amap_distribution(AMAP_DISTRIBUTIONS){id_amap_distribution}{si #ENV{exec}|=={amap_distribution}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,amap_distribution,#ID_AMAP_DISTRIBUTION})
+		[(#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution}|non)
+			[(#URL_ECRIRE{amap_distribution_edit,id_amap_distribution=#ID_AMAP_DISTRIBUTION}|icone_verticale{<:amap_distribution:icone_modifier_amap_distribution:>,amap_distribution,edit,right ajax preload})]
+		]
+		[(#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution}|oui)
+			[(#URL_ECRIRE{amap_distribution_edit,id_amap_distribution=#ID_AMAP_DISTRIBUTION}|icone_verticale{#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{amap_distribution-24.png}|balise_img{amap_distribution,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{amap_distribution,#ID_AMAP_DISTRIBUTION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/amap_distribution,id=#ID_AMAP_DISTRIBUTION,id_amap_distribution=#ID_AMAP_DISTRIBUTION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,amap_distribution,#ID_AMAP_DISTRIBUTION})
+	[(#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution}|non)
+		[(#URL_ECRIRE{amap_distribution_edit,id_amap_distribution=#ID_AMAP_DISTRIBUTION}|icone_verticale{<:amap_distribution:icone_modifier_amap_distribution:>,amap_distribution,edit,right ajax preload})]
+	]
+	[(#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution}|oui)
+		[(#URL_ECRIRE{amap_distribution_edit,id_amap_distribution=#ID_AMAP_DISTRIBUTION}|icone_verticale{#ID_AMAP_DISTRIBUTION|afficher_qui_edite{amap_distribution},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,amap_distribution,id,#ID_AMAP_DISTRIBUTION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/amap_distribution-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/amap_distribution-enfants,id_amap_distribution,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,amap_distribution,id_amap_distribution,#ID_AMAP_DISTRIBUTION,objet,amap_distribution,id_objet,#ID_AMAP_DISTRIBUTION},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_amap_distribution>
+[(#ENV**{exec}|=={amap_distribution_edit}|?{#INCLURE{fond=prive/squelettes/contenu/amap_distribution_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_amap_distribution>

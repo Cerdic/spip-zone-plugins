@@ -1,0 +1,33 @@
+<paquet
+	prefix="amappca"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/amappca-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<nom>AMAP, Producteurs et Consommateurs associés</nom>
+	<!-- Gérer une AMAP ou assimilé -->
+
+	<auteur>RastaPopoulos</auteur>
+	<auteur>Cédric</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="contacts" compatibilite="[2.13.3;]" />
+	<necessite nom="produits" compatibilite="[1.1.5;]" />
+	<necessite nom="commandes" compatibilite="[1.7.3;]" />
+	<necessite nom="cextras" compatibilite="[3.7.1;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="verifier" compatibilite="[1.0.0;]" />
+	
+	<pipeline nom="autoriser" inclure="amappca_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/amappca.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/amappca.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/amappca.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="amappca_pipelines.php" />
+
+	<menu nom="amap_periodes" titre="amap_periode:titre_amap_periodes" parent="menu_edition" icone="images/amap_periode-16.png" action="amap_periodes" /> 
+	<menu nom="amap_periode_creer" titre="amap_periode:icone_creer_amap_periode" parent="outils_rapides" icone="images/amap_periode-new-16.png" action="amap_periode_edit" parametres="new=oui" /> 
+</paquet>

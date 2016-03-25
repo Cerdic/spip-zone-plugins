@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,amap_periode,#ID_AMAP_PERIODE}|sinon_interdire_acces)]
+<BOUCLE_amap_periode(AMAP_PERIODES){id_amap_periode}{statut==.*}{si #ENV{exec}|=={amap_periode}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,amap_periode,#ID_AMAP_PERIODE})
+		[(#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode}|non)
+			[(#URL_ECRIRE{amap_periode_edit,id_amap_periode=#ID_AMAP_PERIODE}|icone_verticale{<:amap_periode:icone_modifier_amap_periode:>,amap_periode,edit,right ajax preload})]
+		]
+		[(#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode}|oui)
+			[(#URL_ECRIRE{amap_periode_edit,id_amap_periode=#ID_AMAP_PERIODE}|icone_verticale{#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{amap_periode-24.png}|balise_img{amap_periode,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{amap_periode,#ID_AMAP_PERIODE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/amap_periode,id=#ID_AMAP_PERIODE,id_amap_periode=#ID_AMAP_PERIODE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,amap_periode,#ID_AMAP_PERIODE})
+	[(#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode}|non)
+		[(#URL_ECRIRE{amap_periode_edit,id_amap_periode=#ID_AMAP_PERIODE}|icone_verticale{<:amap_periode:icone_modifier_amap_periode:>,amap_periode,edit,right ajax preload})]
+	]
+	[(#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode}|oui)
+		[(#URL_ECRIRE{amap_periode_edit,id_amap_periode=#ID_AMAP_PERIODE}|icone_verticale{#ID_AMAP_PERIODE|afficher_qui_edite{amap_periode},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,amap_periode,id,#ID_AMAP_PERIODE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/amap_periode-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/amap_periode-enfants,id_amap_periode,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,amap_periode,id_amap_periode,#ID_AMAP_PERIODE,objet,amap_periode,id_objet,#ID_AMAP_PERIODE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_amap_periode>
+[(#ENV**{exec}|=={amap_periode_edit}|?{#INCLURE{fond=prive/squelettes/contenu/amap_periode_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_amap_periode>

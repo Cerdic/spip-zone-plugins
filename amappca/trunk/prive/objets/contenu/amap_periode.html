@@ -1,0 +1,13 @@
+<BOUCLE_amap_periode(AMAP_PERIODES){id_amap_periode}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:amap_periode:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_date_limite[ (#DATE_LIMITE*|strlen|?{'',vide})]">
+	<label><:amap_periode:champ_date_limite_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_limite} date_limite">(#DATE_LIMITE)</span>
+</div>]
+
+</BOUCLE_amap_periode>

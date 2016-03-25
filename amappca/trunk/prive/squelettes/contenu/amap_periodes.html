@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/amap_periodes, par=titre, env, ajax, sinon=<:amap_periode:info_aucun_amap_periode:>}>
+
+[(#AUTORISER{creer,amap_periode})
+	[(#URL_ECRIRE{amap_periode_edit,new=oui}|icone_verticale{<:amap_periode:icone_creer_amap_periode:>,amap_periode,new,right})]
+]
