@@ -1,36 +1,38 @@
 [(#SET{liste_logiciels, [(#VAL|info_sites_lister_diagnostic_logiciel)]})]
 <BOUCLE_extra (PROJETS_SITES) {id_projets_site} {tout}>
 
-	<div class="boutons">
-		<ul class="list-group menu" role="menu">
-			[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
-			<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
-				<:info_sites:icone_modifier_projets_site:>
-			</a></li>
-			][(#LOGICIEL_PLUGINS*|strlen|oui|et{[(#LOGICIEL_NOM*|in_array{#GET{liste_logiciels}}|oui)]})
-			<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton diagnostic"><i class="fa fa-table"></i>
-				<:info_sites:btn_diagnostic:>
-			</a></li>
-			][(#WEBSERVICE*|strlen|oui)
-			<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton website"><i class="fa fa-globe"></i>
-				<:info_sites:btn_webservice_consultation:>
-			</a></li>
-			<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{maj_projets_site,#ID_PROJETS_SITE,#SELF})]" class="bouton website"><i class="fa fa-refresh"></i>
-				<:projets_site:maj_projets_site:>
-			</a></li>
-			]
-		</ul>
-	</div>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|oui}>
+		<div class="boutons">
+			<ul class="list-group menu" role="menu">
+				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
+					<:info_sites:icone_modifier_projets_site:>
+				</a></li>
+				[(#LOGICIEL_PLUGINS*|strlen|oui|et{[(#LOGICIEL_NOM*|in_array{#GET{liste_logiciels}}|oui)]})
+				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton diagnostic"><i class="fa fa-table"></i>
+					<:info_sites:btn_diagnostic:>
+				</a></li>
+				][(#WEBSERVICE*|strlen|oui)
+				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton website"><i class="fa fa-globe"></i>
+					<:info_sites:btn_webservice_consultation:>
+				</a></li>
+				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{maj_projets_site,#ID_PROJETS_SITE,#SELF})]" class="bouton website"><i class="fa fa-refresh"></i>
+					<:projets_site:maj_projets_site:>
+				</a></li>
+				]
+			</ul>
+		</div>
+	</BOUCLE_autoriser_modifier>
 
 	<B_projets_sites_liens>
 		<div class="projet block">
-			<BOUCLE_projets_sites_liens (projets_sites_liens) {id_projets_site} {objet="projet"}>
+			<BOUCLE_projets_sites_liens (projets_sites_liens) {id_projets_site} {objet="projet" }>
 				<B_autresobjets>
-					<BOUCLE_autresobjets(projets_liens) {id_projet=#ID_OBJET} {objet !IN projets_site} {fusion objet} {par objet}>
-					<div class="champ">
-						<div class="label visible">[(#OBJET|objet_info{texte_objet}|_T)]</div>
-						<div class="span" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
-					</div>
+					<BOUCLE_autresobjets
+							(projets_liens) {id_projet=#ID_OBJET} {objet !IN projets_site} {fusion objet} {par objet}>
+						<div class="champ">
+							<div class="label visible">[(#OBJET|objet_info{texte_objet}|_T)]</div>
+							<div class="span" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
+						</div>
 					</BOUCLE_autresobjets>
 					<div class="clearfix"></div>
 				</B_autresobjets>

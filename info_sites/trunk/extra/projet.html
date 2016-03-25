@@ -1,20 +1,20 @@
+<!-- extra -->
 <BOUCLE_extra (PROJETS) {id_projet} {tout}>
-<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
-<div class="clearfix"></div>
+	<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
+	<div class="clearfix"></div>
 
 [(#PLUGIN{RSS_COMMITS}|oui)
 	[(#SET{id_projet,[(#VERSIONING_RSS|?{#ID_PROJET,[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|?{#ID_PROJET_PARENT})]})]})]
 	[(#GET{id_projet}|is_int|oui)
 	[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
 	<INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax} />][(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
-	<INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax} />]
-	]
+	<INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax} />]]
 	<div class="clearfix"></div>
 ]
 
-<div class="block">
-    <INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
-</div>
-<div class="clearfix"></div>
+	<div class="block">
+		<INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
+	</div>
+	<div class="clearfix"></div>
 
 </BOUCLE_extra>
