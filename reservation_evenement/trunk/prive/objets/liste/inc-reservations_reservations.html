@@ -5,6 +5,7 @@
 	points,-1
 }})]
 #SET{chaine_defaut,reservation:type_lien}
+
 <B_liste_reservations>
 	#ANCRE_PAGINATION
 	[(#ENV{id_reservation_source}|>{0}|?{
@@ -29,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+				<BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur ?IN #ENV{id_auteur}}{id_mot?}{email?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 					<tr>
 						<INCLURE{fond=prive/objets/liste/inc-reservations_row,
 							statut,
