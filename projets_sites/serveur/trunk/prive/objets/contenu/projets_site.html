@@ -35,6 +35,7 @@
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{fo_url})]]  fo_url'><a href="#FO_URL" class="spip_out">(#FO_URL)</a></div>
 	</div>]
 
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_fo_login[ (#FO_LOGIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:fo_login_label:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{fo_login} fo_login'>(#FO_LOGIN)</div>
@@ -44,7 +45,7 @@
 		<div class="label visible"><:projets_site:fo_password_label:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{fo_password} fo_password'>(#FO_PASSWORD)</div>
 	</div>]
-
+]
 <!-- Back office -->
 <div class="champ fieldset[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|non) vide]"><h2 id="bo_fieldset_label" class="[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|oui)legend ]bo_fieldset"><:projets_site:bo_fieldset_label:></h2></div>
 
@@ -52,7 +53,7 @@
 		<div class="label visible"><:projets_site:bo_url_label:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_url} bo_url'><a href="#BO_URL" class="spip_out">(#BO_URL)</a></div>
 	</div>]
-
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_bo_login[ (#BO_LOGIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:bo_login_label:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_login} bo_login'>(#BO_LOGIN)</div>
@@ -62,7 +63,7 @@
 		<div class="label visible"><:projets_site:bo_password_label:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_password} bo_password'>(#BO_PASSWORD)</div>
 	</div>]
-
+]
 <!-- Logiciel/CMS -->
 <div class="champ fieldset [(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|non) vide]"><h2 id="logiciel_fieldset_label" class="[(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|oui)legend ]logiciel_fieldset"><:projets_site:logiciel_fieldset_label:></h2></div>
 
@@ -140,7 +141,8 @@
 			<thead>
 				<tr>
 					<th class="secondaire id"><:projets_site:auteur_id_label:></th>
-					<th class="secondaire login"><:projets_site:auteur_login_label:></th>
+					[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
+					<th class="secondaire login"><:projets_site:auteur_login_label:></th>]
 					<th class="secondaire email"><:projets_site:auteur_email_label:></th>
 					<th class="principale statut"><:projets_site:auteur_nom_label:></th>
 				</tr>
@@ -148,10 +150,11 @@
 			<tbody>
 			<BOUCLE_admins (DATA) {source table, (#AUTEURS_ADMIN**|formater_tableau)} {si (#AUTEURS_ADMIN|match{"\|"})} {par valeur}>
 				<tr>
-					<td>[(#VALEUR{0}|trim)]</td>
-					<td>[(#VALEUR{1}|trim)]</td>
-					<td>[(#VALEUR{2}|trim|replace{"@","@<wbr/>"})]</abbr></td>
-					<td>[(#VALEUR{3}|trim)]</td>
+					<td class="secondaire id">[(#VALEUR{0}|trim)]</td>
+					[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
+					<td class="secondaire login">[(#VALEUR{1}|trim)]</td>]
+					<td class="secondaire email">[(#VALEUR{2}|trim|replace{"@","@<wbr/>"})]</abbr></td>
+					<td class="principal statut">[(#VALEUR{3}|trim)]</td>
 				</tr>
 			</BOUCLE_admins>
 			</tbody>
@@ -178,17 +181,21 @@
 			<thead>
 				<tr>
 					<th class="secondaire id"><:projets_site:auteur_id_label:></th>
-					<th class="secondaire login"><:projets_site:auteur_login_label:></th>
+					[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
+					<th class="secondaire login"><:projets_site:auteur_login_label:></th>]
 					<th class="secondaire email"><:projets_site:auteur_email_label:></th>
 					<th class="principale statut"><:projets_site:auteur_nom_label:></th>
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_webmestres (DATA) {source table, (#AUTEURS_WEBMESTRES**|formater_tableau)} {si (#AUTEURS_WEBMESTRES|match{"\|"})} {par valeur}><B_webmestre>
-				<tr><BOUCLE_webmestre (DATA) {source table, #VALEUR}>
-					<td>[(#VALEUR|trim)]</td></BOUCLE_webmestre>
+			<BOUCLE_webmestres (DATA) {source table, (#AUTEURS_WEBMESTRES**|formater_tableau)} {si (#AUTEURS_WEBMESTRES|match{"\|"})} {par valeur}>
+				<tr>
+					<td class="secondaire id">[(#VALEUR{0}|trim)]</td>
+					[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
+					<td class="secondaire login">[(#VALEUR{1}|trim)]</td>]
+					<td class="secondaire email">[(#VALEUR{2}|trim|replace{"@","@<wbr/>"})]</abbr></td>
+					<td class="principal statut">[(#VALEUR{3}|trim)]</td>
 				</tr>
-			</B_webmestre>
 			</BOUCLE_webmestres>
 			</tbody>
 		</table><!-- /.table spip liste -->

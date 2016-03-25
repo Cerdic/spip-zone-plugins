@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bo_fieldset_label' => 'Back office',
 	'bo_login_label' => 'Identifiant du Back Office&nbsp;:',
 	'bo_password_label' => 'Mot de passe du Back Office&nbsp;:',
+	'bo_url_format' => 'L\'url du Back Office doit impérativement commencer par <em>http://</em> ou <em>https://</em>',
 	'bo_url_label' => 'Url du Back Office&nbsp;:',
 
 	// C
@@ -47,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fo_fieldset_label' => 'Front office',
 	'fo_login_label' => 'Identifiant du Front Office&nbsp;:',
 	'fo_password_label' => 'Mot de passe du Front Office&nbsp;:',
+	'fo_url_format' => 'L\'url du Front Office doit impérativement commencer par <em>http://</em> ou <em>https://</em>',
 	'fo_url_label' => 'Url du Front Office&nbsp;:',
 
 	// I

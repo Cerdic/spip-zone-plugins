@@ -180,6 +180,15 @@ function formulaires_editer_projets_site_verifier_dist(
 		titre_automatique('titre', array('fo_url'), 255);
 		$erreurs = formulaires_editer_objet_verifier('projets_site', $id_projets_site);
 	}
+	$les_urls = array('fo_url', 'bo_url');
+	foreach ($les_urls as $env) {
+		if ($value = _request($env) and $value = trim($value) and strlen($value) > 0) {
+			// Les urls doivent commencer par "http"
+			if (!preg_match(',^http(s)?://,i', $value)) {
+				$erreurs[$env] = _T('projets_site:'.$env.'_format');
+			}
+		}
+	}
 	/**
 	 * Les versions de logiciels doivent être sous la forme x.y.z
 	 * Les alpha, dev, a, beta, b, rc, pl et p sont pris en compte à la fin de "x.y.z"

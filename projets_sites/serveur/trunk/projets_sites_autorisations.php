@@ -70,7 +70,10 @@ function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo';
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
 }
 
 /**
@@ -85,7 +88,7 @@ function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo';
+	return true;
 }
 
 /**
@@ -100,7 +103,10 @@ function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo';
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
 }
 
 /**
@@ -131,7 +137,10 @@ function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_maj_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
 }
 
 
@@ -147,7 +156,10 @@ function autoriser_projetssite_maj_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
 }
 
 /**
@@ -164,5 +176,3 @@ function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_projetssitesecurite_voir_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
-
-?>
