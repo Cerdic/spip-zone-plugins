@@ -28,7 +28,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<BOUCLE_evt (RESERVATIONS_DETAILS){id_evenementIN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
+		<BOUCLE_evt (RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
 		#SET{valeurs_extras,#ARRAY} 
 			<BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
 				#SET{nom,#NOM} #SET{email,#EMAIL**} 
