@@ -25,13 +25,7 @@ function responsivenav_insert_head_css($flux) {
 // on insert le script
 function responsivenav_insert_head($flux) {
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/responsive-nav.js').'"></script>';
-
-	if (test_plugin_actif('Zpip')){
-		$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav(".menu.menu-container",{jsClass: "js-responsivenav"}); }); })(jQuery); /*]]>*/ </script>';
-	} else {
-		$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav("#nav",{jsClass: "js-responsivenav"}); }); })(jQuery); /*]]>*/ </script>';
-	}
-
+	$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav("'. _RESPONSIVENAV_SELECTOR .'",{jsClass: "'. _RESPONSIVENAV_JSCLASS .'"}); }); })(jQuery); /*]]>*/ </script>';
 	return $flux;
 }
 

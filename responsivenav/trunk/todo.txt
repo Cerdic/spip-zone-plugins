@@ -1,2 +1,2 @@
-- choisir le breakpoint depuis l'espace privé
-- paramétrer les configs de Responsive Nav depuis l'espace privé
+- pouvoir changer toutes les variables de config prévues par le script
+- paramétrer les variables de config depuis l'espace privé

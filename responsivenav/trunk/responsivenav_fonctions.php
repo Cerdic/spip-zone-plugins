@@ -2,10 +2,11 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// on définit le point de rupture par défaut
-// il est surchargeable dans le mes_options.php
-// et accepte les em, px...
+// On définit le point de rupture et le selecteur par défaut.
+// Surchargeable dans squelettes/mes_fonctions.php
 define('_RESPONSIVENAV_BREAKPOINT', '40em');
+define('_RESPONSIVENAV_SELECTOR', '#nav');
+define('_RESPONSIVENAV_JSCLASS', 'js-responsivenav');
 
 ?>
 
