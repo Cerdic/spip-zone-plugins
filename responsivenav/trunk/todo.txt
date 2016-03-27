@@ -1,2 +1,2 @@
-- pouvoir changer toutes les variables de config prévues par le script
+- faire la doc
 - paramétrer les variables de config depuis l'espace privé

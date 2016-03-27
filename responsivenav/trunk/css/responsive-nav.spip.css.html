@@ -1,3 +1,4 @@
+a.nav-toggle {display:block;text-align:center;font-size:1.2em;}
 #nav {border-top:0;}
 #nav ul li {text-align:center;}
 
@@ -12,7 +13,10 @@
 	/* Pour SPIP 3.1 dist */
 	.nav-collapse ul li.nav-item {display:inline;}
 }
+
+[(#EVAL{_RESPONSIVENAV_MENUBURGER}|=={true}|oui) 
 @media screen and (max-width: #EVAL{_RESPONSIVENAV_BREAKPOINT}) {
-	a.nav-toggle:link, a.nav-toggle:focus {display:block;height:30px;color:transparent  !important;text-align:center;color:transparent;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
+	a.nav-toggle:link, a.nav-toggle:focus {height:30px;color:transparent  !important;text-align:center;color:transparent;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
 	a.nav-toggle.active, a.nav-toggle.active:focus {background-position: bottom center !important;}
 }
+]
