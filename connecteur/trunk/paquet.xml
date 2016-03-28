@@ -19,4 +19,6 @@
 	<pipeline nom="autoriser" inclure="connecteur_autorisations.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/connecteur.php" />
 
+	<necessite nom="verifier" compatibilite="[1.0.9;]" />
+
 </paquet>
