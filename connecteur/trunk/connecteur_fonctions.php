@@ -52,14 +52,8 @@ function connecteur_lien($source) {
 
 
 /**
- * Cette fonction va créer un auteur SPIP en fonction d'une source
- * La source est définie par un plugin externe sous la forme
- *
- * ```
- * function connecteur_SOURCE_dist()
- * ```
- * Cette fonction connecteur ce charge de fournir un tableau d'information
- * qui servira créer l'auteur SPIP
+ * Cette fonction va créer un auteur SPIP en fonction d'un tableau
+ * de donnée simple
  *
  * ```
  * array('nom' => 'truc', 'email' => 'truc@machin.be')
@@ -68,23 +62,20 @@ function connecteur_lien($source) {
  * @param mixed $source
  * @access public
  */
-function connecteur_creer_auteur($source, $statut = '6forum') {
+function connecteur_creer_auteur($info, $statut = '6forum') {
 
-	// On commence par charger la fonction appeler
-	$connecteur = charger_fonction('connecteur_'.$source);
+	// Inscrire l'auteur sur base des informations du connecteur
+	$inscrire_auteur = charger_fonction('inscrire_auteur', 'action');
+	$desc = $inscrire_auteur(
+		$statut,
+		$info['email'],
+		$info['nom']
+	);
 
-	// Connecteur valide ?
-	if (is_array($connecteur)) {
+	// Envoyer aux pipelines
+	$desc = pipeline('post_connecteur', $desc);
 
-		// Inscrire l'auteur sur base des informations du connecteur
-		$inscrire_auteur = charger_fonction('inscrire_auteur', 'action');
-		$desc = $inscrire_auteur(
-			$statut,
-			$connecteur['email'],
-			$connecteur['nom']
-		);
+	return $desc;
+}
 
-		// Envoyer aux pipelines
-		$desc = pipeline('post_connecteur', $desc);
-	}
 }
