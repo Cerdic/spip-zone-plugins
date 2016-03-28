@@ -35,18 +35,23 @@ points,-1
 								[(#DESCRIPTIF**|supprimer_numero)]
 							</a>
 							[(#PRIX**|>{0}|ou{#PRIX_HT**|>{0}}|oui)
-								<div class="champ contenu_montant">
+								<div class="champ contenu_prix">
 									<label><:reservation:montant:> : </label>
 									<span>[(#PRIX|appliquer_filtre{prix_formater,#GET{total}|})]</span>
 								</div>]
+							[(#REM) Champ vebant du plugin Réservation Bank]
 							[<div class="champ contenu_montant_paye">
 									<label><:reservation_bank:montant_paye:></label>
 									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater,#MONTANT_PAYE})</span>
 								</div>]
 						</td>
-						<td class='reservation'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:label_reference|attribut_html:> #REFERENCE">#REFERENCE</a></td>
-						<td class='nom'>
 						<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
+						<td class='reservation'>
+							<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:reservation:label_reference:> #REFERENCE">
+								#REFERENCE
+								</a>
+						</td>
+						<td class='nom'>
 							<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 								<a href="#URL_ECRIRE{client,email=#EMAIL}" title="#NOM">#NOM</a> - <a href="mailto:#EMAIL">#EMAIL</a>
 							</BOUCLE_auteur>
