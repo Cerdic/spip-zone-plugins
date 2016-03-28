@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param mixed $token le token sous forme brut
  * @access public
  */
-function connecteur_enregistrer_token($id_auteur, $type, $token) {
+function connecteur_save_token($id_auteur, $type, $token) {
 
 	// Sérializer le token
 	$token = serialize($token);

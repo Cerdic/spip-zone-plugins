@@ -48,7 +48,7 @@ function action_connexion_dist($arg = null) {
 
 			// On enregistre le token
 			include_spip('inc/token');
-			connecteur_enregistrer_token($auteur['id_auteur'], $type, $token);
+			connecteur_save_token($auteur['id_auteur'], $type, $token);
 
 			// On va update la source de l'auteur
 			include_spip('action/editer_auteur');
