@@ -51,7 +51,6 @@ function connecteur_lien($source, $redirect = '') {
 	return $f($action);
 }
 
-
 /**
  * Cette fonction va créer un auteur SPIP en fonction d'un tableau
  * de donnée simple
