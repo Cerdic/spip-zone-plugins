@@ -30,7 +30,20 @@ points,-1
 					<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 						<td class='picto'>[(#CHEMIN_IMAGE{reservations_detail-16.png}|balise_img)]</td>
 						<td class='statut'>[(#STATUT|puce_statut{reservations_detail,#ID_RESERVATIONS_DETAIL})]</td>
-						<td class='descriptif principale'> [(#LOGO_RESERVATIONS_DETAIL|image_reduire{20,26})]<a href="[(#ID_RESERVATIONS_DETAIL|generer_url_entite{reservations_detail})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATIONS_DETAIL">[(#DESCRIPTIF**|supprimer_numero)]</a> [(#PRIX**|>{0}|ou{#PRIX_HT**|>{0}}|oui) <span class="prix">: #PRIX</span>] </td>
+						<td class='descriptif principale'> [(#LOGO_RESERVATIONS_DETAIL|image_reduire{20,26})]
+							<a href="[(#ID_RESERVATIONS_DETAIL|generer_url_entite{reservations_detail})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATIONS_DETAIL">
+								[(#DESCRIPTIF**|supprimer_numero)]
+							</a>
+							[(#PRIX**|>{0}|ou{#PRIX_HT**|>{0}}|oui)
+								<div class="champ contenu_montant">
+									<label><:reservation:montant:> : </label>
+									<span>[(#PRIX|appliquer_filtre{prix_formater,#GET{total}|})]</span>
+								</div>]
+							[<div class="champ contenu_montant_paye">
+									<label><:reservation_bank:montant_paye:></label>
+									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater,#MONTANT_PAYE})</span>
+								</div>]
+						</td>
 						<td class='reservation'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:label_reference|attribut_html:> #REFERENCE">#REFERENCE</a></td>
 						<td class='nom'>
 						<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
