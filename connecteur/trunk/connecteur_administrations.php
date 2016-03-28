@@ -10,6 +10,11 @@ function connecteur_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(array('maj_tables', array('spip_connecteur')));
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_connecteur')));
 
+	$maj['1.0.2'] = array(
+		array('sql_alter', 'TABLE spip_connecteur DROP COLUMN expire')
+	);
+
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
