@@ -17,26 +17,34 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param int $id_auteur
  * @param sting $type Type du token (ex: facebook)
  * @param mixed $token le token sous forme brut
+ * Cette variable peut également être un tableau de token type_token => token
  * @access public
  */
 function connecteur_save_token($id_auteur, $type, $token) {
 
-	// Est-ce qu'il y a déjà un token ?
-	$update = connecteur_get_token($id_auteur, $type);
-	if (!empty($update)) {
-		connecteur_update_token($id_auteur, $type, $token);
+	// dans le cas d'un tableau de token, on les enregistre tous
+	if (is_array($token)) {
+		foreach ($token as $tk_type => $tk) {
+			connecteur_save_token($id_auteur, $tk_type, $tk);
+		}
 	} else {
+		// Est-ce qu'il y a déjà un token ?
+		$update = connecteur_get_token($id_auteur, $type);
+		if (!empty($update)) {
+			connecteur_update_token($id_auteur, $type, $token);
+		} else {
 
-		// Sérializer le token
-		$token = serialize($token);
-		sql_insertq(
-			'spip_connecteur',
-			array(
-				'id_auteur' => $id_auteur,
-				'type' => $type,
-				'token' => $token
-			)
-		);
+			// Sérializer le token
+			$token = serialize($token);
+			sql_insertq(
+				'spip_connecteur',
+				array(
+					'id_auteur' => $id_auteur,
+					'type' => $type,
+					'token' => $token
+				)
+			);
+		}
 	}
 }
 
