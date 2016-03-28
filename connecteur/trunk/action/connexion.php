@@ -46,6 +46,10 @@ function action_connexion_dist($arg = null) {
 			// L'auteur n'est pas encore dans la base de donnée : on le crée
 			$auteur = connecteur_creer_auteur($auteur_info);
 
+			// On enregistre le token
+			include_spip('inc/token');
+			connecteur_enregistrer_token($auteur['id_auteur'], $type, $token);
+
 			// On va update la source de l'auteur
 			include_spip('action/editer_auteur');
 			auteur_modifier($auteur['id_auteur'], array('source' => $type));
