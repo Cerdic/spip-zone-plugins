@@ -111,4 +111,6 @@ function connecteur_connecter($auteur_info) {
 	$auteur_info = connecteur_completer_auteur($auteur_info);
 	include_spip('inc/auth');
 	auth_loger($auteur_info);
+
+	return $auteur_info;
 }
