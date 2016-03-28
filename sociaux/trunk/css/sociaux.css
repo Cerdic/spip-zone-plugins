@@ -166,7 +166,7 @@
 .sociaux ul {margin:0;padding:0;list-style:none;}
 .sociaux li {display:inline-block;margin:0 0.2em 0.4em 0;}
 .sociaux .name    { display:none;}
-.sociaux .socicon {font-size:1.4em;padding:.5em;border-radius:1em;color:#fff;background:#000;}
+.sociaux .socicon { font-size:1.4em;padding:.5em .5em .3em;border-radius:1em;color:#fff;background:#000;}
 
 .sociaux .facebook .socicon     {background:#3E5B98;}
 .sociaux .twitter  .socicon     {background:#4DA7DE;}
