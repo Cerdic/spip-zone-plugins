@@ -53,6 +53,8 @@ function action_connexion_dist($arg = null) {
 			// On va update la source de l'auteur
 			include_spip('action/editer_auteur');
 			auteur_modifier($auteur['id_auteur'], array('source' => $type));
+
+			// Et enfin on connecte la personne
 			connecteur_connecter($auteur);
 
 		} else {

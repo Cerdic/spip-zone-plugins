@@ -25,6 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param mixed $p
  * @access public
+ * @return mixed
  */
 function balise_CONNECTEUR__dist($p) {
 
