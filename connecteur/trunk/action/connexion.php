@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $arg Le nom du service
  * @access public
  */
-function action_connection_dist($arg = null) {
+function action_connexion_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
