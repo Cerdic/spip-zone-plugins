@@ -2,7 +2,7 @@
 /**
  * Fonction d'upgrade/installation du plugin foundation-4-spip
  *
- * @plugin     foundation-4-spip
+ * @plugin     foundation_6
  * @copyright  2013
  * @author     Phenix
  * @licence    GNU/GPL
