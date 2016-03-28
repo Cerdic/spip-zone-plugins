@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'adresse_ip_explication' => 'Si vous avez activé la création du fichier <code>.htaccess</code> dans le répertoire <code>IMG/</code>, vous pouvez renseigner ci-dessous la liste des adresses IP qui pourront consulter les documents physiques.<br/><strong>Veuillez saisir les adresses IP séparées par un point-virgule ";"</strong>',
 	'adresse_ip_label' => 'Liste des adresses IP autorisées',
+	'apache_explication' => 'Avez-vous une version d\'Apache supérieure ou égale à 2.4 ?',
+	'apache_label' => 'Version d\'Apache',
 
 	// C
 	'cfg_exemple' => 'Exemple',
@@ -21,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'htaccess_content' => 'Contenu du fichier .htaccess',
 	'htaccess_explication' => 'Désirez-vous interdire la consultation des documents non-publiés ? Si oui, une tâche de fond créera un fichier <code>.htaccess</code> dans le répertoire <code>IMG/</code> du site contenant tous les fichiers non consultables.',
 	'htaccess_label' => 'Créer le fichier <em>.htaccess</em>',
+	'htaccess_legend' => 'Fichier <em>.htaccess</em>',
 
 	// L
 	'lier_document_choix_non' => 'Non',

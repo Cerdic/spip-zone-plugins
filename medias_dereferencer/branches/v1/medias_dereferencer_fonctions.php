@@ -5,7 +5,7 @@
  *
  * @plugin     Déréférencer les médias
  *
- * @copyright  2015
+ * @copyright  2015-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Lister les champs de type text (TINYTEXT, TEXT, MEDIUMTEXT, et LONGTEXT) des différentes principales de SPIP.
  *
  * @return array
- *         Tableau avec pour clé le nom de la table.
+ *               Tableau avec pour clé le nom de la table.
  */
 function medias_lister_champs_texte() {
 	include_spip('base/objets');
@@ -28,8 +28,7 @@ function medias_lister_champs_texte() {
 		// On ne prend que les objets qui font partis des tables principales de SPIP.
 		// Donc, on ne prend pas les tables telles que spip_visites, spip_referers, etc.
 		// C'est une sécurité.
-		$id_primary_double = preg_match('/,/',
-			$valeur['key']['PRIMARY KEY']); // l'id_primary doit faire référence à un seul champ
+		$id_primary_double = preg_match('/,/', $valeur['key']['PRIMARY KEY']); // l'id_primary doit faire référence à un seul champ
 		if (in_array($table, $lister_tables_principales) and $id_primary_double == 0) {
 			$champs_texte[$table]['id_primary'] = $valeur['key']['PRIMARY KEY'];
 			$champs_texte[$table]['objet'] = objet_type($champs_texte[$table]['id_primary']);
@@ -69,8 +68,7 @@ function medias_lister_medias_used_in_text() {
 		if (isset($champs['statut']) and $champs['statut'] and $champs['objet'] != 'auteur') {
 			$statut_requete = ', statut';
 		}
-		$resultats = sql_allfetsel($champs['id_primary'] . ' as id_primary, CONCAT(' . $champs['texte'] . ') as texte_tmp' . $statut_requete,
-			$table);
+		$resultats = sql_allfetsel($champs['id_primary'] . ' as id_primary, CONCAT(' . $champs['texte'] . ') as texte_tmp' . $statut_requete, $table);
 		foreach ($resultats as $resultat => $value) {
 			// On recherche les raccourcis typographiques
 			if (preg_match_all('/(doc|img|emb)([0-9]+)/', $value['texte_tmp'], $docs)) {
@@ -145,12 +143,10 @@ function medias_maj_documents_lies() {
 		// ***
 		// Sélectionner tous les documents publiés liés à des objets non publiés
 		// ***
-		$documents = sql_allfetsel('id_document,statut', 'spip_documents',
-			"statut IN ('publie') AND id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='" . $objet_lie . "' AND id_objet IN (SELECT " . id_table_objet($objet_lie) . ' FROM ' . table_objet_sql($objet_lie) . " WHERE statut NOT IN ('publie')))");
+		$documents = sql_allfetsel('id_document,statut', 'spip_documents', "statut IN ('publie') AND id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='" . $objet_lie . "' AND id_objet IN (SELECT " . id_table_objet($objet_lie) . ' FROM ' . table_objet_sql($objet_lie) . " WHERE statut NOT IN ('publie')))");
 		if (is_array($documents) and count($documents) > 0) {
 			foreach ($documents as $document) {
-				if (sql_updateq('spip_documents', array('statut' => 'prepa'),
-					'id_document=' . $document['id_document'])) {
+				if (sql_updateq('spip_documents', array('statut' => 'prepa'), 'id_document=' . $document['id_document'])) {
 					$message_log[] = 'Le statut du document #' . $document['id_document'] . ' lié à l\'objet ' . $objet_lie . ' a bien été mis à jour avec le statut \'' . $document['statut'] . '\'';
 				}
 			}
@@ -206,13 +202,11 @@ function medias_maj_documents_non_lies() {
 				// Donc on met à jour la valeur de 'vu' pour ce lien.
 				if (sql_updateq('spip_documents_liens', array(
 					'vu' => $document['vu'],
-				),
-					'id_document=' . sql_quote($document['id_document']) . ' AND id_objet=' . sql_quote($document['id_objet']) . ' AND objet=' . sql_quote($document['objet']) . ' AND vu NOT IN (' . sql_quote($document['vu']) . ')')) {
+				), 'id_document=' . sql_quote($document['id_document']) . ' AND id_objet=' . sql_quote($document['id_objet']) . ' AND objet=' . sql_quote($document['objet']) . ' AND vu NOT IN (' . sql_quote($document['vu']) . ')')) {
 					$message_log[] = 'Le lien entre le document #' . $document['id_document'] . ' et l\'objet ' . $document['objet'] . ' #' . $document['id_objet'] . ' a bien été mis à jour avec la vu \'' . $document['vu'] . '\'';
 				}
 				// et on met à jour le statut dudit document si le statut est différent uniquement.
-				if (sql_updateq('spip_documents', array('statut' => $document['statut']),
-					'id_document=' . sql_quote($document['id_document']) . ' AND statut NOT IN (' . sql_quote($document['statut']) . ')')) {
+				if (sql_updateq('spip_documents', array('statut' => $document['statut']), 'id_document=' . sql_quote($document['id_document']) . ' AND statut NOT IN (' . sql_quote($document['statut']) . ')')) {
 					$message_log[] = 'Le statut du document #' . $document['id_document'] . ' lié à l\'objet ' . $document['objet'] . ' #' . $document['id_objet'] . ' a bien été mis à jour avec le statut \'' . $document['statut'] . '\'';
 				}
 			} elseif (!sql_countsel('spip_documents_liens', array(
@@ -234,8 +228,7 @@ function medias_maj_documents_non_lies() {
 					$message_log[] = 'Le lien entre le document #' . $document['id_document'] . ' et l\'objet ' . $document['objet'] . ' #' . $document['id_objet'] . ' a bien été inséré en base de données avec la vu \'' . $document['vu'] . '\'';
 				}
 				// et on met à jour le statut dudit document si le statut est différent uniquement.
-				if (sql_updateq('spip_documents', array('statut' => $document['statut']),
-					'id_document=' . sql_quote($document['id_document']) . ' AND statut NOT IN (' . sql_quote($document['statut']) . ')')) {
+				if (sql_updateq('spip_documents', array('statut' => $document['statut']), 'id_document=' . sql_quote($document['id_document']) . ' AND statut NOT IN (' . sql_quote($document['statut']) . ')')) {
 					$message_log[] = 'Le statut du document #' . $document['id_document'] . ' lié à l\'objet ' . $document['objet'] . ' #' . $document['id_objet'] . ' a bien été mis à jour avec le statut \'' . $document['statut'] . '\'';
 				}
 			}
@@ -275,7 +268,7 @@ function md_creation_htaccess_img() {
 		$message_log[] = "L'action a été lancé par SPIP en tâche de fond.";
 	}
 
-	/**
+	/*
 	 * On sélectionne les extensions des documents avec un statut en prepa,
 	 * pour ne pas être trop gourmand en écriture sur le serveur.
 	 */
@@ -284,28 +277,23 @@ function md_creation_htaccess_img() {
 		foreach ($extensions_documents as $extension) {
 			if (is_readable(_DIR_IMG . $extension['extension'])) {
 				$medias_htaccess = recuperer_fond('inclure/medias_htaccess', $extension);
-				if (function_exists('fopen')
-					and $ht = fopen(_DIR_IMG . $extension['extension'] . '/' . _ACCESS_FILE_NAME, "w")
-				) {
+				if (function_exists('fopen') and $ht = fopen(_DIR_IMG . $extension['extension'] . '/' . _ACCESS_FILE_NAME, 'w')) {
 					fputs($ht, $medias_htaccess);
 					fclose($ht);
 					@chmod(_DIR_IMG . $extension['extension'] . '/' . _ACCESS_FILE_NAME, _SPIP_CHMOD & 0666);
-					$message_log[] = "Le fichier " . _ACCESS_FILE_NAME . " pour " . _DIR_IMG . $extension['extension'] . " a été créé. " . date_format(date_create(),
-							'Y-m-d H:i:s');
+					$message_log[] = 'Le fichier ' . _ACCESS_FILE_NAME . ' pour ' . _DIR_IMG . $extension['extension'] . ' a été créé. ' . date_format(date_create(), 'Y-m-d H:i:s');
 				} else {
-					$message_log[] = "Le fichier " . _ACCESS_FILE_NAME . " pour " . _DIR_IMG . $extension['extension'] . " n'a pu être créé. "
-						. date_format(date_create(), 'Y-m-d H:i:s');
+					$message_log[] = 'Le fichier ' . _ACCESS_FILE_NAME . ' pour ' . _DIR_IMG . $extension['extension'] . " n'a pu être créé. " . date_format(date_create(), 'Y-m-d H:i:s');
 				}
 			}
 		}
 	}
 
-	/**
+	/*
 	 * Par défaut, le message de log a 4 entrées. Voir en début de la présente fonction.
 	 */
 	if (count($message_log) == 4) {
-		$message_log[] = 'Aucun fichier ' . _ACCESS_FILE_NAME . " n'a été créé. "
-			. date_format(date_create(), 'Y-m-d H:i:s');
+		$message_log[] = 'Aucun fichier ' . _ACCESS_FILE_NAME . " n'a été créé. " . date_format(date_create(), 'Y-m-d H:i:s');
 	}
 	// on met l'heure de fin de la procédure dans le message de log
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
@@ -336,7 +324,7 @@ function md_suppression_htaccess_img() {
 		$message_log[] = "L'action a été lancé par SPIP en tâche de fond.";
 	}
 
-	/**
+	/*
 	 * On recherche les extensions des documents sans distinction de statut des documents.
 	 */
 	$extensions_documents = sql_allfetsel('DISTINCT(extension)', 'spip_documents');
@@ -344,16 +332,14 @@ function md_suppression_htaccess_img() {
 		foreach ($extensions_documents as $extension) {
 			if (is_readable(_DIR_IMG . $extension['extension'])) {
 				spip_unlink(_DIR_IMG . $extension['extension'] . '/' . _ACCESS_FILE_NAME);
-				$message_log[] = "Le fichier " . _ACCESS_FILE_NAME . " pour " . _DIR_IMG . $extension['extension'] . " a été supprimé avec succès.";
+				$message_log[] = 'Le fichier ' . _ACCESS_FILE_NAME . ' pour ' . _DIR_IMG . $extension['extension'] . ' a été supprimé avec succès.';
 			}
 		}
 	}
 
-
 	// Par défaut, le message de log a 4 entrées. Voir en début de la présente fonction.
 	if (count($message_log) == 4) {
-		$message_log[] = 'Aucun fichier ' . _ACCESS_FILE_NAME . " n'a été supprimé. "
-			. date_format(date_create(), 'Y-m-d H:i:s');
+		$message_log[] = 'Aucun fichier ' . _ACCESS_FILE_NAME . " n'a été supprimé. " . date_format(date_create(), 'Y-m-d H:i:s');
 	}
 	// on met l'heure de fin de la procédure dans le message de log
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
@@ -366,21 +352,23 @@ function md_suppression_htaccess_img() {
 	}
 
 	return false;
-
 }
 
 function md_adresses_allow() {
 	include_spip('inc/config');
 	$config_md = lire_config('medias_dereferencer');
-	$config_md = $config_md['adresse_ip'];
-	if (empty($config_md)) {
+	$directive = 'Allow from';
+	if (isset($config_md['adresse_ip']) and empty($config_md['adresse_ip'])) {
 		return false;
 	}
-	if (!is_array($config_md)) {
-		$config_md = explode(';', $config_md);
+	if (!is_array($config_md['adresse_ip'])) {
+		$config_md['adresse_ip'] = explode(';', $config_md['adresse_ip']);
 	}
-	$config_md = array_filter($config_md);
-	$string = "    Allow from " . implode("\n    Allow from ", $config_md);
+	if (isset($config_md['apache']) and $config_md['apache'] === 'oui') {
+		$directive = 'Require not ip';
+	}
+	$config_md['adresse_ip'] = array_filter($config_md['adresse_ip']);
+	$string = "    $directive " . implode("\n    $directive ", $config_md['adresse_ip']);
 
 	return $string;
 }
