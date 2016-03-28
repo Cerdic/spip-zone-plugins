@@ -357,19 +357,18 @@ function md_suppression_htaccess_img() {
 function md_adresses_allow() {
 	include_spip('inc/config');
 	$config_md = lire_config('medias_dereferencer');
-	$config_md = $config_md['adresse_ip'];
 	$directive = 'Allow from';
-	if (empty($config_md)) {
+	if (isset($config_md['adresse_ip']) and empty($config_md['adresse_ip'])) {
 		return false;
 	}
-	if (!is_array($config_md)) {
-		$config_md = explode(';', $config_md);
+	if (!is_array($config_md['adresse_ip'])) {
+		$config_md['adresse_ip'] = explode(';', $config_md['adresse_ip']);
 	}
 	if (isset($config_md['apache']) and $config_md['apache'] === 'oui') {
 		$directive = 'Require not ip';
 	}
-	$config_md = array_filter($config_md);
-	$string = "    $directive " . implode("\n    $directive ", $config_md);
+	$config_md['adresse_ip'] = array_filter($config_md['adresse_ip']);
+	$string = "    $directive " . implode("\n    $directive ", $config_md['adresse_ip']);
 
 	return $string;
 }
