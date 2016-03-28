@@ -47,7 +47,7 @@ function balise_CONNECTEUR__dist($p) {
  */
 function connecteur_lien($source, $redirect = '') {
 	// On appel la fonction du service
-	$action = generer_action_auteur('connexion', 'facebook', $redirect, true);
+	$action = generer_action_auteur('connexion', $source, $redirect, true);
 	$f = charger_fonction($source.'_lien', 'connecteur');
 	return $f($action);
 }
