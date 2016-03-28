@@ -33,7 +33,15 @@ function balise_CONNECTEUR__dist($p) {
 	// Le substr supprime la partie "CONNECTEUR_" pour ne garder que la source
 	$connecteur_type = strtolower(substr($p->nom_champ, 11));
 	$redirect = interprete_argument_balise(1, $p);
-	$p->code = "connecteur_lien('$connecteur_type', $redirect)";
+
+	$site = interprete_argument_balise(2, $p);
+	if ($site) {
+		$site = ", 'true'";
+	} else {
+		$site = '';
+	}
+
+	$p->code = "connecteur_lien('$connecteur_type', $redirect $site)";
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -45,9 +53,14 @@ function balise_CONNECTEUR__dist($p) {
  *
  * @access public
  */
-function connecteur_lien($source, $redirect = '') {
+function connecteur_lien($source, $redirect = '', $site = false) {
 	// On appel la fonction du service
-	$action = generer_action_auteur('connexion', $source, $redirect, true);
+	if (!$site) {
+		$action = generer_action_auteur('connexion', $source, $redirect, true);
+	} else {
+		$action = generer_action_auteur('connexion_site', $source, $redirect, true);
+	}
+
 	$f = charger_fonction($source.'_lien', 'connecteur');
 	return $f($action);
 }
