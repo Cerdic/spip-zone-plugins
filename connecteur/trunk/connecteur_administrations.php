@@ -15,5 +15,6 @@ function connecteur_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 function connecteur_vider_tables($nom_meta_base_version) {
+	sql_drop_table('spip_connecteur');
 	effacer_meta($nom_meta_base_version);
 }
