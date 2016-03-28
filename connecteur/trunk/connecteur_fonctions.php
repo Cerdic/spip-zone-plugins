@@ -78,4 +78,37 @@ function connecteur_creer_auteur($info, $statut = '6forum') {
 	return $desc;
 }
 
+/**
+ * Une fonction qui va renvoyer les informations complète d'un auteur
+ * sur base de son email
+ *
+ * @param array $info Tableau contenant une clé email
+ * @access public
+ * @return array Les informations complète de l'auteur
+ */
+function connecteur_completer_auteur($info) {
+	// On complète le profil de l'auteur afin de pouvoir le connecteur
+	$info = sql_fetsel(
+		'*',
+		'spip_auteurs',
+		array(
+			'email='.sql_quote($info['email']),
+			'statut !='.sql_quote('5poubelle')
+		)
+	);
+
+	return $info;
+}
+
+/**
+ * Connecter un auteur à SPIP
+ *
+ * @param array $auteur_info Tableau contenant une clé email
+ * @access public
+ */
+function connecteur_connecter($auteur_info) {
+	// Récupérer toute les informations de l'auteur
+	$auteur_info = connecteur_completer_auteur($auteur_info);
+	include_spip('inc/auth');
+	auth_loger($auteur_info);
 }
