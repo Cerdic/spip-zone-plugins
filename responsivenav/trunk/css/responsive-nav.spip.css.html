@@ -7,12 +7,12 @@ a.nav-toggle {text-align:center;font-size:1.2em;}
 	#nav .menu-conteneur ul.menu-liste li.menu-entree {box-sizing:border-box;margin:0;padding:0.5em;display:inline-block;}
 ]
 
-@media screen and (min-width: #EVAL{_RESPONSIVENAV_BREAKPOINT} ) {
+@media screen and (min-width: #CONFIG{responsivenav/breakpoint,40em}) {
 	.nav-collapse ul li.nav-item {display:inline;} /* Pour SPIP 3.1 dist */
 	.nav-collapse ul.menu-items li.item {width:auto;} /* Pour ZDist V1 + V2 */
 }
 
-@media screen and (max-width: #EVAL{_RESPONSIVENAV_BREAKPOINT}) {
+@media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
 	a.nav-toggle {display:block;}
 	#nav ul li a {float:none;}  /* Pour SPIP 3.0 dist */
 	#nav ul.menu-items {float:none;overflow:hidden;}  /* Pour ZDist V2 */
@@ -20,7 +20,7 @@ a.nav-toggle {text-align:center;font-size:1.2em;}
 
 
 [(#EVAL{_RESPONSIVENAV_MENUBURGER}|=={true}|oui) 
-@media screen and (max-width: #EVAL{_RESPONSIVENAV_BREAKPOINT}) {
+@media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
 	a.nav-toggle:link, a.nav-toggle:focus {height:30px;color:transparent  !important;text-align:center;color:transparent;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
 	a.nav-toggle.active, a.nav-toggle.active:focus {background-position: bottom center !important;}
 }

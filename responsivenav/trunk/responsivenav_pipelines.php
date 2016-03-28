@@ -23,11 +23,9 @@ function responsivenav_insert_head_css($flux) {
 // on insert le script et on l'appelle
 function responsivenav_insert_head($flux) {
 	$flux .= '<script type="text/javascript" src="'.find_in_path('javascript/responsive-nav.js').'"></script>';
-	$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav("'. _RESPONSIVENAV_SELECTOR .'",{jsClass: "'. _RESPONSIVENAV_JSCLASS.'"' ;
+	$flux .= '<script>/*<![CDATA[*/ ;(function($){ $(function(){ var nav = responsiveNav("'.lire_config('responsivenav/selector','#nav').'",{jsClass: "'._RESPONSIVENAV_JSCLASS.'",label: "'.lire_config('responsivenav/label','&#9776; Menu').'",insert: "'.lire_config('responsivenav/insert','before').'"' ;
 	if (defined('_RESPONSIVENAV_ANIMATE')) {$flux .= ',animate: '._RESPONSIVENAV_ANIMATE;}
 	if (defined('_RESPONSIVENAV_TRANSITION')) {$flux .= ',transition: '._RESPONSIVENAV_TRANSITION;}
-	if (defined('_RESPONSIVENAV_LABEL')) {$flux .= ',label: "'._RESPONSIVENAV_LABEL.'"';}
-	if (defined('_RESPONSIVENAV_INSERT')) {$flux .= ',insert: "'._RESPONSIVENAV_INSERT.'"';}
 	if (defined('_RESPONSIVENAV_CUSTOMTOGGLE')) {$flux .= ',customToggle: "'._RESPONSIVENAV_CUSTOMTOGGLE.'"';}
 	if (defined('_RESPONSIVENAV_CLOSEONNAVCLICK')) {$flux .= ',closeOnNavClick: '._RESPONSIVENAV_CLOSEONNAVCLICK;}
 	if (defined('_RESPONSIVENAV_OPENPOS')) {$flux .= ',openPos: "'._RESPONSIVENAV_OPENPOS.'"';}

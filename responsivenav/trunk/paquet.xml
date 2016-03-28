@@ -17,6 +17,8 @@
 	
 	<licence>Creative Commons by-sa</licence>
 
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+
 	<pipeline nom="insert_head_css" inclure="responsivenav_pipelines.php" />
 	<pipeline nom="insert_head" inclure="responsivenav_pipelines.php" />
 

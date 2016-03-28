@@ -1,2 +1,0 @@
-- faire la doc
-- paramétrer les variables de config depuis l'espace privé
