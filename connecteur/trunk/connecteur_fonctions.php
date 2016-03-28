@@ -31,8 +31,9 @@ function balise_CONNECTEUR__dist($p) {
 	// Récupérer le type de connecteur
 	// Le substr supprime la partie "CONNECTEUR_" pour ne garder que la source
 	$connecteur_type = strtolower(substr($p->nom_champ, 11));
+	$redirect = interprete_argument_balise(1, $p);
 
-	$p->code = "connecteur_lien('$connecteur_type')";
+	$p->code = "connecteur_lien('$connecteur_type', $redirect)";
 	$p->interdire_scripts = false;
 
 	return $p;
@@ -44,10 +45,11 @@ function balise_CONNECTEUR__dist($p) {
  *
  * @access public
  */
-function connecteur_lien($source) {
+function connecteur_lien($source, $redirect = '') {
 	// On appel la fonction du service
+	$action = generer_action_auteur('connection', 'facebook', $redirect, true);
 	$f = charger_fonction($source.'_lien', 'connecteur');
-	return $f();
+	return $f($action);
 }
 
 
