@@ -17,6 +17,7 @@ function action_connexion_dist($arg = null) {
 	}
 
 	include_spip('connecteur_fonctions');
+	include_spip('inc/token');
 
 	// Type de connection à effectuer
 	$type = $arg;
@@ -47,7 +48,6 @@ function action_connexion_dist($arg = null) {
 			$auteur = connecteur_creer_auteur($auteur_info);
 
 			// On enregistre le token
-			include_spip('inc/token');
 			connecteur_save_token($auteur['id_auteur'], $type, $token);
 
 			// On va update la source de l'auteur
@@ -57,7 +57,8 @@ function action_connexion_dist($arg = null) {
 
 		} else {
 			// Sinon, on connecte l'auteur
-			connecteur_connecter($auteur_info);
+			$auteur = connecteur_connecter($auteur_info);
+			connecteur_save_token($auteur['id_auteur'], $type, $token);
 		}
 	}
 }
