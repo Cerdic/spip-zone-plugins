@@ -21,16 +21,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function connecteur_save_token($id_auteur, $type, $token) {
 
-	// Sérializer le token
-	$token = serialize($token);
-	sql_insertq(
-		'spip_connecteur',
-		array(
-			'id_auteur' => $id_auteur,
-			'type' => $type,
-			'token' => $token
-		)
-	);
+	// Est-ce qu'il y a déjà un token ?
+	$update = connecteur_get_token($id_auteur, $type);
+	if (!empty($update)) {
+		connecteur_update_token($id_auteur, $type, $token);
+	} else {
+
+		// Sérializer le token
+		$token = serialize($token);
+		sql_insertq(
+			'spip_connecteur',
+			array(
+				'id_auteur' => $id_auteur,
+				'type' => $type,
+				'token' => $token
+			)
+		);
+	}
 }
 
 /**
@@ -51,4 +58,24 @@ function connecteur_get_token($id_auteur, $type) {
 	);
 
 	return unserialize($token);
+}
+
+/**
+ * Mettre à jour un token
+ *
+ * @param int $id_auteur
+ * @param string $type
+ * @param mixed $token
+ * @access public
+ */
+function connecteur_update_token($id_auteur, $type, $token) {
+	$token = serialize($token);
+	sql_updateq(
+		'spip_connecteur',
+		array('token' => $token),
+		array(
+			'id_auteur='.intval($id_auteur),
+			'type='.sql_quote($type)
+		)
+	);
 }
