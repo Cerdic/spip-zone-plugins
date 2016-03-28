@@ -13,6 +13,37 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Balise des connecteurs
+ *
+ * Active le lien de connection spécifique à un connecteur
+ *
+ * ```
+ * #CONNECTEUR_FACEBOOK
+ * ```
+ * Cette balise appel une fonction du dossier connecteur: `connecteur_facebook_lien`
+ *
+ * @param mixed $p
+ * @access public
+ */
+function balise_CONNECTEUR__dist($p) {
+
+	// Récupérer le type de connecteur
+	// Le substr supprime la partie "CONNECTEUR_" pour ne garder que la source
+	$connecteur_type = strtolower(substr($p->nom_champ, 11));
+
+	$p->code = "connecteur_lien('$connecteur_type')";
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+function connecteur_lien($source) {
+	// On appel la fonction du service
+	$f = charger_fonction($source.'_lien', 'connecteur');
+	return $f();
+}
+
 
 /**
  * Cette fonction va créer un auteur SPIP en fonction d'une source
