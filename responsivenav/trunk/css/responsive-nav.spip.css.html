@@ -18,8 +18,7 @@ a.nav-toggle {text-align:center;font-size:1.2em;}
 	#nav ul.menu-items {float:none;overflow:hidden;}  /* Pour ZDist V2 */
 }
 
-
-[(#EVAL{_RESPONSIVENAV_MENUBURGER}|=={true}|oui) 
+[(#CONFIG{responsivenav/menuburger}|oui) 
 @media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
 	a.nav-toggle:link, a.nav-toggle:focus {height:30px;color:transparent  !important;text-align:center;color:transparent;background:url('#CHEMIN{images/menu-burger.png}') transparent top center no-repeat !important;background-size:30px 60px  !important;}
 	a.nav-toggle.active, a.nav-toggle.active:focus {background-position: bottom center !important;}

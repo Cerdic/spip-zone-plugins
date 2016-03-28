@@ -21,13 +21,19 @@
 			explication=<:responsivenav:label_explication:>,
 			defaut=&#9776; Menu,
 			size=10})]
-		[(#SAISIE{input,insert,
+		[(#SAISIE{radio,insert,
+			datas=#ARRAY{
+				before,<:responsivenav:avant:>,
+				after,<:responsivenav:apres:>},
 			label=<:responsivenav:insert:>,
 			explication=<:responsivenav:insert_explication:>,
-			defaut=before,
-			size=10})]
+			defaut=before})]
+		[(#SAISIE{checkbox,menuburger,
+			datas=true|<:responsivenav:oui:>,
+			label=<:responsivenav:menuburger:>,
+			explication=<:responsivenav:menuburger_explication:>,
+			defaut=unchecked})]
 	</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
-
 
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
