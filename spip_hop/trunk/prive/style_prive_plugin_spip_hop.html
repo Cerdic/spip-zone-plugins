@@ -81,26 +81,48 @@ body.large.edition #extra,
 @media (max-width: [(#GET{grand_minwidth})]) {
 	body { min-width: 98%; width: 98%; margin: 0 1%; }
 	body.large { min-width: 98%; width: 98%; margin: 0 1%; }
+	#navigation { min-height: 1px; }
 	/* ecran large*/
-	[(#GET{largeur_bandeau}) .largeur,
-	][(#GET{largeur_bandeau}|non) .large .largeur,
-	].ecrire #conteneur,
+	.ecrire #conteneur,
 	.ecrire #page div table.centered,
 	.ecrire #page .table_page,
 	[(#GET{largeur_bandeau}) ].largeur,
 	.ecrire #conteneur,
 	.ecrire #page div table.centered,
 	.ecrire #page .table_page { width: 100%; }
+
+	.large .largeur, .largeur {
+		width: 97.5%;
+		padding-right: 1.5%;
+		padding-left: 1.5%;
+	}
+
 	.large #conteneur,
 	.large .table_page,
 	#conteneur,
 	.table_page { width: 100%; }
+
 	.large div.messages-alertes,
 	div.messages-alertes { width: 95%; }
 	.large #navigation,
 	#navigation { width: 100%; float: none; }
+
 	.large #extra,
 	#extra { width: 100%; float: none; }
+
 	.large #contenu,
 	#contenu { margin-left: 0; width: 100%; }
+
+	body.large.edition #contenu,
+	.articles_edit.large #contenu,
+	.mots_edit.large #contenu,
+	.breves_edit.large #contenu,
+	.rubriques_edit.large #contenu { width: 100%; float: none; }
+
+	body.large.edition #extra,
+	.articles_edit.large #extra,
+	.mots_edit.large #extra,
+	.breves_edit.large #extra,
+	.rubriques_edit.large #extra { width: 100%; float: none; }
+
 }
