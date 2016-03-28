@@ -4,6 +4,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Action de connexion
+ *
+ * @param string $arg Le nom du service
+ * @access public
+ */
 function action_connection_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -37,9 +43,9 @@ function action_connection_dist($arg = null) {
 		// Est-ce que l'email est déjà présent dans la base de donnée ?
 		$verifier = charger_fonction('verifier', 'inc');
 		if (!$verifier($auteur_info['email'], 'email', array('disponible' => true))) {
-
 			// L'auteur n'est pas encore dans la base de donnée : on le crée
 			$auteur = connecteur_creer_auteur($auteur_info);
+
 			// On va update la source de l'auteur
 			include_spip('action/editer_auteur');
 			auteur_modifier($auteur['id_auteur'], array('source' => $type));
