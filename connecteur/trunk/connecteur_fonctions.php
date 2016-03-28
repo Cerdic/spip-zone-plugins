@@ -38,6 +38,12 @@ function balise_CONNECTEUR__dist($p) {
 	return $p;
 }
 
+/**
+ * Charger la fonction du service
+ * Utiliser charger_fonction dans une fonction balise provoque des bugs
+ *
+ * @access public
+ */
 function connecteur_lien($source) {
 	// On appel la fonction du service
 	$f = charger_fonction($source.'_lien', 'connecteur');
