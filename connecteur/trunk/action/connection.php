@@ -28,7 +28,8 @@ function action_connection_dist($arg = null) {
 		$trouver_token = $config['trouver_token'];
 		$token = $trouver_token();
 
-		// Maintenant qu'on a le token du service, on va demander les informations de connection
+		// Maintenant qu'on a le token du service, on va demander les
+		// informations de connexion
 		// Ce tableau doit à minima contenir un champ nom et un champ email
 		$info = charger_fonction($type.'_info', 'connecteur');
 		$auteur_info = $info($token);
