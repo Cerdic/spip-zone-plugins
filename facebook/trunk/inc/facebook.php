@@ -225,23 +225,3 @@ function facebook_profil($token = null) {
 		'facebook' => $user
 	);
 }
-
-/**
- * Créer un auteur SPIP à partir des données de facebook
- *
- * @access public
- */
-function facebook_creer_auteur($token) {
-
-	// Récupération des données de l'utilisateur sur base du token
-	$user = facebook_profil($token);
-
-	// Inscrire l'auteur sur base des informations de facebook
-	$inscrire_auteur = charger_fonction('inscrire_auteur', 'action');
-	$desc = $inscrire_auteur('6forum', $user['email'], $user['nom']);
-
-	// Envoyer aux pipelines
-	$desc = pipeline('post_inscrire_facebook', $desc);
-
-	return $desc;
-}
