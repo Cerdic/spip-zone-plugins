@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'param_J'           => "J: Head drop (m)",
     'param_Lg'          => "Lg: Pipe length (m)",
     'param_L'           => "Largeur (m)",
+    'param_nu'          => "Dynamic (shear) viscosity (Pa&middot;s)",
     'param_W'           => "Ouverture (m)",
     'param_C'           => "Coefficient de débit",
     'param_CS'          => "Coefficient de débit de la surverse",

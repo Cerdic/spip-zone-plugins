@@ -43,8 +43,6 @@ abstract class formulaire {
     /// Nombre de pas de variation par défaut
     protected $nbPas = 15;
 
-    abstract protected function get_environnement();
-
     /** ************************************************************************
      * Calcul des résultats
      * @return un tableau au format de $this->result
@@ -134,9 +132,11 @@ abstract class formulaire {
 
     /** ************************************************************************
      * Méthode à appeler par la procédure charger du formulaire CVT
+     * @note Etendre la méthode en faisant un $valeurs = parent::charger()
+     * pour ajouter des variables supplémentaires dans l'environnement du
+     * formulaire.
      ***************************************************************************/
     public function charger() {
-        $valeurs = $this->get_environnement();
         $valeurs['saisies'] = $this->saisies;
         $valeurs['nb_col'] = $this->nb_col;
         $valeurs['sVarCal'] = $this->sVarCal;

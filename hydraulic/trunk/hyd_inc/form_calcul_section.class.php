@@ -57,11 +57,14 @@ class form_calcul_section extends form_section {
     }
 
 
-    protected function get_environnement() {
-        $valeurs = array(
-            'choix_section' => 'FT',
-            'val_a_cal'  => 'Hs',
-            'choix_champs_select' => $this->champs_select_calc
+    public function charger() {
+        $valeurs = parent::charger();
+        $valeurs = array_merge($valeurs,
+            array(
+                'choix_section' => 'FT',
+                'val_a_cal'  => 'Hs',
+                'choix_champs_select' => $this->champs_select_calc
+            )
         );
         return $valeurs;
     }

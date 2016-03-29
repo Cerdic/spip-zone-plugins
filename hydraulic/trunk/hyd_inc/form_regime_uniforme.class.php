@@ -41,10 +41,9 @@ class form_regime_uniforme extends form_section {
     /*
      * Variables supplémentaires passées au formulaire
      */
-    protected function get_environnement() {
-        $valeurs = array(
-            'choix_section' => 'FT',
-        );
+    public function charger() {
+        $valeurs = parent::charger();
+        $valeurs{'choix_section'] = 'FT';
         return $valeurs;
     }
 

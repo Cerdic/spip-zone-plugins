@@ -107,11 +107,14 @@ class form_lechapt_calmon extends formulaire {
 
     }
 
-    protected function get_environnement() {
-        $valeurs = array(
-            'mes_saisies_materiaux' => $this->saisies_materiau(),
-            'tableau_caract' => array('caract_hydraulique'=>$this->champs_fvc),
-            'typeMateriau' => 1
+    public function charger() {
+        $valeurs = parent::charger();
+        $valeurs = array_merge($valeurs,
+            array(
+                'mes_saisies_materiaux' => $this->saisies_materiau(),
+                'tableau_caract' => array('caract_hydraulique'=>$this->champs_fvc),
+                'typeMateriau' => 1
+            )
         );
         return $valeurs;
     }

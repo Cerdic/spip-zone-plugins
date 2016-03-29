@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'param_J'           => "J: Perte de charge (m)",
     'param_Lg'          => "Lg: Longueur du tuyau (m)",
     'param_L'           => "Largeur (m)",
+    'param_nu'          => "Viscosité dynamique (Pa&middot;s)",
     'param_W'           => "Ouverture (m)",
     'param_C'           => "Coefficient de débit",
     'param_CS'          => "Coefficient de débit de la surverse",

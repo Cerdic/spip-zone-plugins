@@ -176,7 +176,7 @@ abstract class form_section extends formulaire {
 
             case 'FP':
                 include_spip('hyd_inc/sectionPuiss.class');
-                $this->oSn=new cSnPuiss($this->oLog,$this->oP,$rCoef,$rLargeurBerge);
+                $this->oSn=new cSnPuiss($this->oLog,$this->oP,$rk,$rLargeurBerge);
                 break;
 
             default:
