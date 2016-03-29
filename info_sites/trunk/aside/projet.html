@@ -1,11 +1,11 @@
 <BOUCLE_extra (PROJETS) {id_projet} {tout}>
-	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{modifier,projet,#ID_PROJET}|oui}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{projetmodifier,_info_sites,#ID_PROJET}|oui}>
 <div class="boutons">
 	<ul class="list-group menu" role="menu">
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_projet:></a></li>
-		[(#AUTORISER{creer,projets_site})
+		[(#AUTORISER{projetssitecreer,_info_sites})
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui&associer_objet=projet|#ID_PROJET}|parametre_url{redirect,#SELF})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a></li>]
-		[(#AUTORISER{associer,projets_sites})
+		[(#AUTORISER{projetssitesassocier,_info_sites})
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets_sites}|parametre_url{objet,projet}|parametre_url{id_objet,#ID_PROJET})]" class="bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_projets_site|attribut_html:>"><i class="fa fa-link"></i> <:info_sites:editer_liens_projets_site:></a></li>
 		]
 		[(#AUTORISER{associer,auteurs})
@@ -40,7 +40,7 @@
 		</B_auteurs>
 	</div>
 
-	[(#AUTORISER{instituer,projets_site})
+	[(#AUTORISER{projetssiteinstituer,_info_sites})
 	<div class="info">
 		[(#FORMULAIRE_INSTITUER_OBJET{projets,#ID_PROJET})]
 	</div>

@@ -1,6 +1,6 @@
 <div class="boutons">
 	<ul class="list-group menu" role="menu">
-	[(#AUTORISER{creer,projets_site})
+	[(#AUTORISER{projetssitecreer,_info_sites})
 	    <li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a></li>
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:info_sites:icone_creer_fiche_siste:></a></li>
 	]</ul>
@@ -46,7 +46,7 @@
 		<select name="logiciel_nom" id="champ_logiciel_nom" class="form-control">
 			<option value=""></option>
 			<BOUCLE_logiciel_nom (DATA) {source table, #GET{logiciel_nom}} {par valeur}>
-			<option value="#VALEUR"[ (#ENV{logiciel_nom}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option></BOUCLE_logiciel_nom>
+			[<option value="#VALEUR"[ (#ENV{logiciel_nom}|=={#VALEUR}|oui)selected="selected"]>(#VALEUR|unique)</option>]</BOUCLE_logiciel_nom>
 		</select>
 		</div>
 		</B_logiciel_nom>
