@@ -335,6 +335,11 @@
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_port})]] sgbd_port'>(#SGBD_PORT)</div>
 	</div>]
 
+	[<div class="champ contenu_sgbd_gestion[ (#SGBD_GESTION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:sgbd_gestion_label:></div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_gestion})]] sgbd_gestion'>(#SGBD_GESTION)</div>
+	</div>]
+
 [(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:sgbd_nom_label:></div>

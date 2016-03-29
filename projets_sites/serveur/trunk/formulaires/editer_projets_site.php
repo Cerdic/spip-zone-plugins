@@ -189,6 +189,12 @@ function formulaires_editer_projets_site_verifier_dist(
 			}
 		}
 	}
+	$obligatoires = array('titre', 'type_site', 'logiciel_nom', 'logiciel_version');
+	foreach ($obligatoires as $obligatoire) {
+		if (!_request($obligatoire)) {
+			$erreurs[$obligatoire] = _T('info_obligatoire');
+		}
+	}
 	/**
 	 * Les versions de logiciels doivent être sous la forme x.y.z
 	 * Les alpha, dev, a, beta, b, rc, pl et p sont pris en compte à la fin de "x.y.z"

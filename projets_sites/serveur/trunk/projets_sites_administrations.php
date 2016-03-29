@@ -274,6 +274,17 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible) {
 		array('projets_sites_maj150'),
 	);
 
+	/*
+	 * On ajoute :
+	 * - sgbd_gestion ;
+	**/
+	$maj['1.5.1'] = array(
+		array(
+			'sql_alter',
+			"TABLE spip_projets_sites ADD sgbd_gestion varchar(255) NOT NULL DEFAULT '' AFTER sgbd_port",
+		),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -21,7 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array         Tableau des tâches et leur périodicité en seconde
  */
 function projets_sites_taches_generales_cron($taches) {
-	$taches['maj_webservice'] = 7 * 24 * 3600; // tous 7 jours
+	$taches['maj_webservice'] = 7 * 24 * 3600; // tous les 7 jours
+	$taches['projetssites_nettoyage'] = 7 * 24 * 3600; // tous les 7 jours
 	return $taches;
 }
 

@@ -1,5 +1,5 @@
 [(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
-<BOUCLE_projets_site(PROJETS_SITES){id_projets_site}{si #ENV{exec}|=={projets_site}}>
+<BOUCLE_projets_site (PROJETS_SITES) {id_projets_site} {si #ENV{exec}|=={projets_site}}>
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
 		[(#ID_PROJETS_SITE|afficher_qui_edite{projets_site}|non)
@@ -45,7 +45,7 @@ On ne modifie pas la date par le biais du formulaire générique de SPIP
 
 <BOUCLE_autresobjets(spip_projets_sites_liens) {id_projets_site} {fusion objet}{par objet}>
 	#SET{table,#OBJET|table_objet}
-	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})] 
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})]
 	<INCLURE{fond=prive/objets/liste/objets_lies_projets_site,objet,id_projets_site,ajax,env} />
 </BOUCLE_autresobjets>
 

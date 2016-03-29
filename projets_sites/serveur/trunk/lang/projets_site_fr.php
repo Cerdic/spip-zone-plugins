@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sgbd_charset_label' => 'Jeu de caractères&nbsp;:',
 	'sgbd_collation_label' => 'Collation&nbsp;:',
 	'sgbd_fieldset_label' => 'Informations sur la SGBD',
+	'sgbd_gestion_label' => 'URL du gestionnaire de SGBD&nbsp;:',
 	'sgbd_login_label' => 'Identifiant&nbsp;:',
 	'sgbd_nom_label' => 'Nom de la SGBD&nbsp;:',
 	'sgbd_password_label' => 'Mot de passe&nbsp;:',

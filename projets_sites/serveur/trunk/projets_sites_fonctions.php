@@ -102,6 +102,6 @@ function sp_lister_type_sites($from = 'bdd') {
 		}
 	}
 
-
 	return $liste_types_sites;
 }
+
