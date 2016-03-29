@@ -19,8 +19,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function facebook_poster_lien($lien, $message) {
 
-	include_spip('inc/config');
-	$config = lire_config('facebook');
+	include_spip('inc/token');
+	$token = connecteur_get_token(0, 'facebook');
 
 	$fb = facebook();
 
@@ -31,7 +31,8 @@ function facebook_poster_lien($lien, $message) {
 
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->post('/me/feed', $linkData, $config['accessToken']);
+		include_spip('inc/token');
+		$response = $fb->post('/me/feed', $linkData, $token);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;

@@ -137,12 +137,12 @@ function facebook_liste_pages() {
 
 	$fb = facebook();
 
-	include_spip('inc/config');
-	$config = lire_config('facebook');
+	include_spip('inc/token');
+	$token = connecteur_get_token(0, 'facebook');
 
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->get('/me/accounts', $config['accessToken']);
+		$response = $fb->get('/me/accounts', $token);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
@@ -198,11 +198,9 @@ function facebook_profil($token = null) {
 
 	$fb = facebook();
 
-	include_spip('inc/config');
-	$config = lire_config('facebook');
-
 	if (empty($token)) {
-		$token = $config['accessToken'];
+		include_spip('inc/token');
+		$token = connecteur_get_token(0, 'facebook');
 	}
 
 	try {
