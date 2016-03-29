@@ -61,7 +61,7 @@ function facebook_lien_connection($action = 'facebook_access_token') {
 
 	$permission = explode(',', _FACEBOOK_PERMISSION);
 
-	$url = generer_action_auteur($action, 'ok', self(), true);
+	$url = generer_action_auteur($action, 'facebook', self(), true);
 
 	$loginUrl = $helper->getLoginUrl($url, $permission);
 
