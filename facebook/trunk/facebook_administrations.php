@@ -39,6 +39,11 @@ function facebook_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_auteurs')),
 	);
 
+	$maj['1.0.3'] = array(
+		array('sql_alter', 'TABLE spip_auteurs DROP COLUMN facebook_token')
+	);
+
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
