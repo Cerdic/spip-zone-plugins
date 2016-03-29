@@ -43,7 +43,7 @@ class form_regime_uniforme extends form_section {
      */
     public function charger() {
         $valeurs = parent::charger();
-        $valeurs{'choix_section'] = 'FT';
+        $valeurs['choix_section'] = 'FT';
         return $valeurs;
     }
 
