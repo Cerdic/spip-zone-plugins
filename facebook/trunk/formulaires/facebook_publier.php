@@ -24,6 +24,7 @@ function formulaires_facebook_publier_traiter_dist($objet, $id_objet) {
 	include_spip('inc/facebook');
 	$lien = generer_url_entite_absolue($id_objet, $objet);
 
+	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	$message = generer_info_entite($id_objet, $objet, 'titre');
 
