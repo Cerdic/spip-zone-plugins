@@ -21,8 +21,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="post_inscrire_facebook" inclure="base/facebook.php" />
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/facebook.php" />
 	<pipeline nom="autoriser" inclure="facebook_autorisations.php" />
 	<pipeline nom="affiche_gauche" inclure="facebook_pipelines.php" />
 
