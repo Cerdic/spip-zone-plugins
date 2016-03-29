@@ -22,5 +22,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Message',
 	'lien' => 'Lien',
 	'page' => 'Poster sur un page ?',
-	'confirmer_poster' => 'Message correctement posté sur Facebook'
+	'confirmer_poster' => 'Message correctement posté sur Facebook',
+	'publication' => 'Publication sur Facebook'
 );
