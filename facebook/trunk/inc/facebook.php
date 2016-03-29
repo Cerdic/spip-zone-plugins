@@ -39,7 +39,7 @@ function facebook() {
  * @param string $action Action sur lequel sera envoyer le tocken
  * @return string Lien vers Facebook
  */
-function facebook_lien_connection($action = 'facebook_access_token') {
+function facebook_lien_connection($action) {
 
 	include_spip('inc/config');
 	$config = lire_config('facebook');
@@ -60,11 +60,9 @@ function facebook_lien_connection($action = 'facebook_access_token') {
 
 	$permission = explode(',', _FACEBOOK_PERMISSION);
 
-	$url = generer_action_auteur($action, 'facebook', self(), true);
+	$loginUrl = $helper->getLoginUrl($action, $permission);
 
-	$loginUrl = $helper->getLoginUrl($url, $permission);
-
-	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook !</a> '.$compte_connecte;
+	return htmlspecialchars($loginUrl);
 }
 
 /**
