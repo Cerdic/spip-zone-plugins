@@ -49,9 +49,8 @@ function facebook_poster_lien($lien, $message) {
  * @return string Token ou erreur facebook
  */
 function facebook_poster_lien_page($id_page, $lien, $message) {
-
-	include_spip('inc/config');
-	$config = lire_config('facebook');
+	include_spip('inc/token');
+	$token = connecteur_get_token(0, 'facebook');
 
 	$fb = facebook();
 
@@ -62,7 +61,7 @@ function facebook_poster_lien_page($id_page, $lien, $message) {
 
 	try {
 		// Returns a `Facebook\FacebookResponse` object
-		$response = $fb->post('/'.$id_page.'/feed', $linkData, facebook_page_token($id_page));
+		$response = $fb->post('/'.$id_page.'/feed', $linkData, $token);
 	} catch (Facebook\Exceptions\FacebookResponseException $e) {
 		return 'Graph returned an error: ' . $e->getMessage();
 		exit;
