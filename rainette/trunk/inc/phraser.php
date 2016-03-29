@@ -15,11 +15,20 @@ function url2flux_xml($url, $utiliser_namespace = 'false') {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
+	if (!$flux) {
+		spip_log("URL indiponible : $url", "rainette");
+		return array();
+	}
 
 	// Tranformation de la chaine xml reçue en tableau associatif
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
-	$xml = $convertir(simplexml_load_string($flux), $utiliser_namespace);
-	$xml = $xml['root'];
+	try {
+		$xml = $convertir(simplexml_load_string($flux), $utiliser_namespace);
+		$xml = $xml['root'];
+	} catch (Exception $e) {
+		spip_log("Erreur analyse xml : " . $e->getMessage(), "rainette");
+		return array();
+	}
 
 	return $xml;
 }
@@ -34,9 +43,18 @@ function url2flux_json($url) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
+	if (!$flux) {
+		spip_log("URL indiponible : $url", "rainette");
+		return array();
+	}
 
 	// Tranformation de la chaine json reçue en tableau associatif
-	$json = json_decode($flux, true);
+	try {
+		$json = json_decode($flux, true);
+	} catch (Exception $e) {
+		spip_log("Erreur analyse json : " . $e->getMessage(), "rainette");
+		return array();
+	}
 
 	return $json;
 }
