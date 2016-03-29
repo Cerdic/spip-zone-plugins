@@ -137,7 +137,7 @@ class cOuvrage {
         include_spip('hyd_inc/dichotomie.class');
         if($sCalc=='Q') {
             // Calcul du débit par la loi d'ouvrage
-            return OuvrageQ();
+            return $this->OuvrageQ();
         } else {
             // Calcul indirect par dichotomie
             $this->VarCal = &$this->tP[$sCalc];
