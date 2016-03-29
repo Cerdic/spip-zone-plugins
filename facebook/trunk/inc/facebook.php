@@ -32,7 +32,6 @@ function facebook() {
 	return $fb;
 }
 
-
 /**
  * Obtenir un lien de connection Facebook
  *
@@ -64,15 +63,6 @@ function facebook_lien_connection($action = 'facebook_access_token') {
 	$url = generer_action_auteur($action, 'facebook', self(), true);
 
 	$loginUrl = $helper->getLoginUrl($url, $permission);
-
-	// Dans le cas ou il y a déjà un compte facebook connecté, on le signale
-	if (!empty($config['accessToken'])) {
-		$user = facebook_profil();
-
-		if (!is_string($user)) {
-			$compte_connecte = _T('facebook:compte_connecte', array('compte' => $user['nom']));
-		}
-	}
 
 	return '<a href="'.htmlspecialchars($loginUrl).'">Log in with Facebook !</a> '.$compte_connecte;
 }
