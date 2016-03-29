@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'image_supprimee' => 'L’image a été supprimée',
 	'insertion_code_explication' => '
-		Cette partie vous permet d’inserer du code dans certaines parties prévues
+		Cette partie vous permet d’insérer du code dans certaines parties prévues
 		par la Fabrique. Attention cependant à ce que ce code soit toujours valide !
 	',
 
