@@ -31,6 +31,3 @@ $(".reveal-ajax").on('click', function (e) {
 	});
 
 });
-
-// Déplacer les reveal à la fin du body pour éviter les combats de positions
-$(".reveal").appendTo(document.body);
