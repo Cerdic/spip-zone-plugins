@@ -15,9 +15,7 @@
 	<BOUCLE_objets(spip_auteurs_liens){id_auteur?}{objet?}{id_objet?}{!par id_objet}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>#GET{picto}</td>
-			<td class='titre principale'><a
-							href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
-							title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})]</a>
+			<td class='titre principale'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})]</a>
 			</td>
 			<td class='id'>[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|?{
 				[<a href="[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET})]">(#ID_OBJET)</a>],

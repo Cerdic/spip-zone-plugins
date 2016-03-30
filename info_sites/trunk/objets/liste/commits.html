@@ -24,7 +24,7 @@
 			<td class='picto'><a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</a></td>
 			<td class='titre principale'>[(#LOGO_COMMIT|image_reduire{20,26})]<a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#RANG). ]#TITRE</a></td>
 			<td class="id_projet secondaire">[(#ID_PROJET). ]<a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></td>
-			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td>
+			<td class='date secondaire'>[(#DATE_CREATION|affdate{'d-m-Y H:i:s'})]</td>
 		</tr>
 	</BOUCLE_liste_commits>
 	</tbody>
