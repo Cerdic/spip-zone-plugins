@@ -1,0 +1,8 @@
+
+[(#ENV{vue}|=={profil}|et{#AUTORISER{modifier,auteur,#ENV{id_auteur}}}|oui)
+<INCLURE{fond=inclure/i3_auteur-profil_modifier,ajax,env}>
+]
+
+[(#ENV{vue}|=={profil}|et{#AUTORISER{modifier,auteur,#ENV{id_auteur}}}|non)
+<INCLURE{fond=inclure/i3_auteur-profil_normal,ajax,env}>
+]

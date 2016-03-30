@@ -1,0 +1,9 @@
+[(#REM)
+
+	Vue pour le crayon 'telfax'
+
+]
+#CACHE{0}
+[<:inscription3:telephone:> : <span class="tel">(#ENV*{telephone}|typo|?{[(#ENV*{telephone}|typo)],<:inscription3:non_renseigne:>})</span><br />]
+[<:inscription3:mobile:> : <span class="tel">(#ENV*{mobile}|typo|?{[(#ENV*{mobile}|typo)],<:inscription3:non_renseigne:>})</span><br />]
+[<:inscription3:fax:> : <span class="fax">(#ENV*{fax}|typo|?{[(#ENV*{fax}|typo)],<:inscription3:non_renseigne:>})</span></span><br />]

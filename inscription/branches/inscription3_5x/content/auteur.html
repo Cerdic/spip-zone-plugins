@@ -1,0 +1,16 @@
+[(#REM)
+	Surcharge de la page des auteurs de Z
+	
+	Si on a dans l'environnement vue=profil et que l'on a le droit de modifier le profil
+	de l'individu, on obtient un formulaire de modification
+	Sinon on a une page décrivant l'auteur simplement
+	
+]
+
+[(#ENV{vue}|=={profil}|et{#AUTORISER{modifier,auteur,#ENV{id_auteur}}}|oui)
+	<INCLURE{fond=inclure/i3_auteur-profil_modifier,ajax,env}>
+]
+
+[(#ENV{vue}|=={profil}|et{#AUTORISER{modifier,auteur,#ENV{id_auteur}}}|non)
+	<INCLURE{fond=inclure/i3_auteur-normal,ajax,env}>
+]

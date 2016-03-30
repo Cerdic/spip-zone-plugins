@@ -1,0 +1,58 @@
+[(#REM)
+
+	Controleur pour le crayon 'adresse', uniquement html
+	Validation JS pour les champs specifies obligatoires
+	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS){id_auteur}{tout}>
+[<script type="text/javascript" src="(#PRODUIRE{fond=crayons_validation.js,lang=#ENV{lang}})"></script>]
+<script type="text/javascript">
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteur-adresse-#ID_AUTEUR");
+		var id = me.crayon().find('form');
+		function validation(){
+			var me = cQuery(".auteur-adresse-#ID_AUTEUR");
+			var id = me.crayon().find('form');
+			var validator = cQuery(id).validate({
+				onkeyup: function(){
+					validation();
+				},
+				showErrors: function(errors, errorList){
+					validator.defaultShowErrors();
+					crayon_affiche_submit(me, id);
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me, id)
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me, id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').append(' <span class="obligatoire"><:info_obligatoire_02:></span>');
+		setTimeout('validation()', 500);
+	}
+</script>
+<fieldset[ style="(#ENV{style})"]>
+	<ul>
+		[(#CONFIG{inscription3/adresse_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+		[(#CONFIG{inscription3/adresse_obligatoire}|=={on}|oui)#SET{adresse_obl,true}]
+		<li class="editer[(#GET{adresse_obl}|oui)obligatoire]">
+			<label><:inscription3:label_adresse:></label>
+			<textarea class="crayon-active text adresse[(#GET{adresse_obl}|oui) obligatoire]" name="#ENV{name_adresse}" rows="3">[(#ADRESSE**|entites_html)]</textarea>
+		</li>]
+	</ul>
+</fieldset>
+</BOUCLE_a>
+</B_a>
+<li class="editer">
+	[(#ENV**|unserialize|foreach)]
+	<label><:inscription3:label_adresse:></label>
+	<textarea class="crayon-active text adresse" name="#ENV{name_adresse}" rows="3">[(#ADRESSE**|entites_html)]</textarea>
+</li>
+<//B_a>

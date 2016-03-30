@@ -1,0 +1,9 @@
+<entree>
+	<nom><:inscription3:menu_nom_inscription3:></nom>
+	<rang>14</rang>
+	<description><:inscription3:menu_description_inscription3:></description>
+	<icone>prive/themes/spip/images/inscription3-24.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+	<refuser_sous_menu/>
+</entree>

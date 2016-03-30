@@ -1,0 +1,19 @@
+[(#REM)
+
+	Controleur pour le crayon 'organisationlink', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tout}>
+<fieldset[ style="(#ENV{style})"]>
+	<legend><:inscription3:label_societe:></legend>
+	<ul>
+		<li>
+			<label for="#ENV{name_societe}"><:inscription3:organisation:></label>
+			<input class="crayon-active" name="#ENV{name_societe}" style="width:#ENV{largeur}px;" value="[(#SOCIETE**|entites_html)]" id="#ENV{name_societe}" />
+		</li>
+	</ul>
+</fieldset>
+</BOUCLE_a>
+<//B_a>

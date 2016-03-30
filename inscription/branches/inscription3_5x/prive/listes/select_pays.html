@@ -1,0 +1,5 @@
+#CACHE{0}
+<option value=''><:inscription3:label_pays:></option>
+<BOUCLE_r(GEO_PAYS){tout}>
+<option value="#ID_PAYS"[(#ENV{id}|=={#ID_PAYS}|?{selected})]>[(#NOM|couper{30})]</option>
+</BOUCLE_r>

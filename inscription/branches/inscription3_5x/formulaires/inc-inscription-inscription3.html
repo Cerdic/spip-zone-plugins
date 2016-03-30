@@ -1,0 +1,11 @@
+[(#PIPELINE{i3_form_debut,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+
+<INCLURE{fond=formulaires/inscription3_infos_connection,env}>
+<INCLURE{fond=formulaires/inscription3_infos_perso,env}>
+<INCLURE{fond=formulaires/inscription3_cextras,env}>
+
+[(#PIPELINE{i3_form_fin,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+
+[(#CONFIG{inscription3/reglement}|=={on}|oui)
+	<INCLURE{fond=formulaires/inscription3_reglement,env}>
+]

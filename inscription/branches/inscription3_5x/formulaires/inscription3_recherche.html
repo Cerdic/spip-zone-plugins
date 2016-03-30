@@ -1,0 +1,47 @@
+<div class="formulaire_spip ajax formulaire_inscription3_recherche" id="formulaire_inscription3_recherche">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+[(#ENV{editable}|oui)
+	<form action='#ENV{action}' method='post'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:recherche_utilisateurs:></legend>
+					<ul>
+						<li>
+							<label for="valeur"><:info_rechercher_02:></label>
+							<input class="text" type="text" name="valeur" id="valeur" value="[(#ENV{valeur})]" />
+						</li>
+						<INCLURE{fond=prive/formulaires/inscription3_recherche_cas}{case}>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" name="rechercher" value="<:info_rechercher:>" />
+			[(#ENV{case}|oui)
+			<input type="submit" class="submit" name="afficher_tous" value="<:inscription3:afficher_tous:>" />]
+		</p>
+
+		<fieldset class="legend">
+			<legend><:inscription3:legende:></legend>
+			<p class="explication"><:inscription3:statuts_actifs:></p>
+			<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:admin|lcfirst:>,
+			<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:auteur|lcfirst:>,
+			<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:visiteur|lcfirst:>,
+			<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:a_confirmer|lcfirst:>,
+			<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription3:fiche_adherent:>" /> <:inscription3:autre|lcfirst:>
+		</fieldset>
+
+		[(#ENV{case}|?{
+			[(#INCLURE{fond=prive/table_adherent_auteur_recherche,ajax,ordre,env})],
+			[(#INCLURE{fond=prive/table_adherent_auteur,ajax,ordre,env})]})]
+
+		<p class="boutons">
+			<input type="submit" class="submit" name="supprimer_auteurs" value="<:inscription3:delete_user_select:>" />
+		</p>
+	</div></form>]
+</div>

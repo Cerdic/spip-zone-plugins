@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	[(#ENV{editable}|oui)
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="saisie_oubli[(#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
+				[<span class="erreur">(#ENV*{erreurs}|table_valeur{oubli})</span>]
+				<p class="explication"><:inscription3:explication_suppression_compte{nom=#ENV{nom},email=#ENV{email}}:></p>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:inscription3:bouton_suppression_compte:>" />
+		</p>
+	</form>]
+</div>

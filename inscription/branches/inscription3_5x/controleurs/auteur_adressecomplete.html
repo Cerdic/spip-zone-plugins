@@ -1,0 +1,78 @@
+[(#REM)
+
+	Controleur pour le crayon 'adressecomplete', uniquement html
+	Validation JS pour les champs specifies obligatoires
+	Si les champs ne sont pas actifs dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<BOUCLE_a(AUTEURS){id_auteur}{tout}>
+[<script type="text/javascript" src="(#PRODUIRE{fond=crayons_validation.js,lang=#ENV{lang}})"></script>]
+<script type="text/javascript">
+	if (typeof cQuery.fn.validate == "function") {
+		var me = cQuery(".auteur-adressecomplete-#ID_AUTEUR");
+		var id = me.crayon().find('form');
+
+		function validation(){
+			var me = cQuery(".auteur-adressecomplete-#ID_AUTEUR");
+			var id = me.crayon().find('form');
+			var validator = cQuery(id).validate({
+				onkeyup: function(){
+					validation();
+				},
+				showErrors: function(errors, errorList){
+					validator.defaultShowErrors();
+					crayon_affiche_submit(me, id);
+				},
+				success: function(label){
+					label.parents('li.erreur').removeClass('erreur');
+					label.remove();
+					crayon_affiche_submit(me, id)
+				}
+			});
+			//On test le formulaire pour chercher les potentielles erreurs
+			validator.form();
+			crayon_affiche_submit(me, id);
+		}
+		//On ajoute l'asterisque qui signale qu'un champ est obligatoire
+		id.find('.obligatoire label').append(' <span class="obligatoire"><:info_obligatoire_02:></span>');
+		setTimeout('validation()', 500);
+	}
+</script>
+<fieldset[ style="(#ENV{style})"]>
+	<legend><:inscription3:votre_adresse:></legend>
+	<ul>
+		[(#CONFIG{inscription3/adresse_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+		[(#CONFIG{inscription3/adresse_obligatoire}|=={on}|oui)#SET{adresse_obl, true}]
+		<li class="editer[(#GET{adresse_obl}|oui)obligatoire]">
+			<label for="#ENV{name_adresse}"><:inscription3:label_adresse:></label>
+			<textarea class="crayon-active text adresse[(#GET{adresse_obl}|oui) obligatoire]" name="#ENV{name_adresse}" id="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
+		</li>]
+
+		[(#CONFIG{inscription3/code_postal_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+		[(#CONFIG{inscription3/code_postal_obligatoire}|=={on}|oui)#SET{code_postal_obl,true}]
+		<li class="editer[(#GET{code_postal_obl}|oui)obligatoire]">
+			<label for="#ENV{name_code_postal}"><:inscription3:label_code_postal:></label>
+			<input class="crayon-active text cp[(#GET{code_postal_obl}|oui) obligatoire]" name="#ENV{name_code_postal}" id="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
+		</li>]
+
+		[(#CONFIG{inscription3/ville_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+		[(#CONFIG{inscription3/ville_obligatoire}|=={on}|oui)#SET{ville_obl,true}]
+		<li class="editer[(#GET{ville_obl}|oui)obligatoire]">
+			<label for="#ENV{name_ville}"><:inscription3:label_ville:></label>
+			<input class="crayon-active text ville[(#GET{ville_obl}|oui) obligatoire]" name="#ENV{name_ville}" id="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
+		</li>]
+
+		[(#CONFIG{inscription3/pays_fiche_mod}|=={on}|ou{#SESSION{statut}|=={0minirezo}}|oui)
+		[(#CONFIG{inscription3/pays_obligatoire}|=={on}|oui)#SET{pays_obl,true}]
+		<li class="editer[(#GET{pays_obl}|oui)obligatoire]">
+			<label for="#ENV{name_pays}"><:inscription3:label_pays:></label>
+			#SET{id,#PAYS}
+			<select class="crayon-active text pays[(#GET{pays_obl}|oui) obligatoire]" name="#ENV{name_pays}" id="#ENV{name_pays}" style="width:#ENV{largeur}px;" onchange="validation()">
+				<INCLURE{fond=prive/listes/select_pays}{id=#GET{id}}>
+			</select>
+		</li>]
+	</ul>
+</fieldset>
+</BOUCLE_a>
+<//B_a>

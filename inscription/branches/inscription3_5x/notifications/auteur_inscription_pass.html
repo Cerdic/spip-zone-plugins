@@ -1,0 +1,22 @@
+[(#REM)
+
+	Plugin Inscription3 pour SPIP
+ 	© 2007-2011 - cmtmt, BoOz, kent1
+	Licence GPL v3
+	
+	Squelette de notification envoyé à un auteur lorsqu'il a choisi son pass dans le formulaire
+  
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_aut(AUTEURS){id_auteur}{tout}>
+[(#VAL{inscription3:message_auteur_inscription_pass_titre_user}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP}}|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+
+<:form_forum_bonjour{nom=#NOM}:>
+
+<:inscription3:message_auteur_inscription_pass:>
+	
+<:inscription3:message_auteur_inscription_pass_rappel_login{login=#LOGIN}:>
+
+</BOUCLE_aut>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

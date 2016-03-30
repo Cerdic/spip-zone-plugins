@@ -1,0 +1,11 @@
+<traduction module="inscription3" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/inscription/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=en" total="220" traduits="214" relire="0" modifs="0" nouveaux="6" pourcent="97.27">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=es" total="220" traduits="214" relire="0" modifs="0" nouveaux="6" pourcent="97.27">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=fr" total="220" traduits="220" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>

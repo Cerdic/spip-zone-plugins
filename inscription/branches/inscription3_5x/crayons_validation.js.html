@@ -1,0 +1,28 @@
+[(#REM)
+
+	Charger la librairie pour la validation des crayons (a charger dans les controleurs)
+
+]
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#ENV**{debug_crayons}|?{
+	#CACHE{0}
+,
+	#CACHE{7*24*3600,cache-client}
+})]
+
+<!-- jquery-validation -->
+[(#CHEMIN{lib/jquery-validation-1.10.0/dist/jquery.validate.js}|pack_cQuery)]
+
+<!-- i3_validation_controleurs.js -->
+[(#CHEMIN{javascript/i3_validation_controleurs.js}|pack_cQuery)]
+
+<!-- i3_validation_methods.js -->
+[(#PRODUIRE{fond=i3_validation_methods.js,lang=#ENV{lang}}|pack_cQuery)]
+
+<!-- Pipeline pour ajouter des méthodes de validation -->
+[(#PIPELINE{i3_validation_methods,[(#ARRAY{args,[(#ENV*|unserialize)],data,''})]})]
+
+[(#ENV{lang}|=={en}|non)
+<!-- jquery-validation messages -->
+[(#CHEMIN{lib/jquery-validation-1.10.0/localization/messages_[(#ENV{lang})].js}|pack_cQuery)]]

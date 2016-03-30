@@ -1,0 +1,14 @@
+<BOUCLE_page_reglement(ARTICLES){si #ENV{reglement}|=={on}}{page=reglement}{!par date}{0,1}>
+<li>
+	<p class="explication">
+		<:inscription3:explication_reglement_article{titre=#TITRE,url=#URL_ARTICLE}:>
+	</p>
+</li>
+</BOUCLE_page_reglement>
+</B_page_reglement>
+[(#SAISIE{selecteur_article,
+	reglement_article,
+	option_intro=<:inscription3:option_choisissez:>,
+	recursif=oui,
+	label=<:inscription3:label_reglement_article:>})]
+<//B_page_reglement>

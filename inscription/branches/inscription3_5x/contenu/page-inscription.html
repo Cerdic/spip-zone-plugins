@@ -1,0 +1,23 @@
+[(#CONFIG{accepter_inscriptions}|=={oui}|ou{#CONFIG{accepter_visiteurs}|=={oui}}|oui)
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:inscription3:formulaire_inscription:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h2 class="h2"><:inscription3:formulaire_inscription:></h2>
+	</div>
+
+	<div class="ajax">
+		[(#ENV{mode}|=={profil}|oui)
+			[(#SESSION{id_auteur}|oui)
+				#FORMULAIRE_INSCRIPTION3{#SESSION{id_auteur}}
+			]
+			[(#SESSION{id_auteur}|non)
+				#LOGIN_PUBLIC
+			]
+		]
+		[(#ENV{mode}|=={profil}|non)
+			#FORMULAIRE_INSCRIPTION
+		]
+	</div>
+</div>]

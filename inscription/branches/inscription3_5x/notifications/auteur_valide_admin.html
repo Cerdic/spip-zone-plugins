@@ -1,0 +1,18 @@
+[(#REM)
+
+	Plugin Inscription3 pour SPIP
+ 	© 2007-2010 - cmtmt, BoOz, kent1
+	Licence GPL v3
+	
+	Squelette de notification envoyé aux admins lorsqu'un auteur est validé
+  
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_aut(AUTEURS){id_auteur}{tout}>
+[(#VAL{inscription3:message_auteur_valide_titre_admin}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,nom,#NOM}}|nettoyer_titre_email)]
+
+<:form_forum_message_auto:>
+
+<:inscription3:message_auteur_valide_contenu_admin{admin=#SESSION{nom},nom=#NOM}:>
+
+</BOUCLE_aut>
+#FILTRE{supprimer_tags|filtrer_entites|trim}
