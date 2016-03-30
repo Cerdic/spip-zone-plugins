@@ -1,9 +1,9 @@
 <paquet
 	prefix="diogene_geo"
 	categorie="edition"
-	version="1.3.2"
+	version="1.3.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/diogene-128.png"
 	documentation="http://www.mediaspip.net/documentation/les-plugins-utilises-par-mediaspip/diogene-managing-editorial-forms/diogene-additional-plugins/article/diogene-geo"
 >
