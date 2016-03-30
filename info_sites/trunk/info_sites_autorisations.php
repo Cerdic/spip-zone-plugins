@@ -126,6 +126,7 @@ function autoriser_info_sites_projetssitemaj_dist($faire, $type, $id, $qui, $opt
 		'1comite',
 	));
 }
+
 /**
  * Autorisation d'association (projetssite)
  *
@@ -156,6 +157,17 @@ function autoriser_info_sites_projetssitesassocier_dist($faire, $type, $id, $qui
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssitesecurite_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('base/abstract_sql');
+	$auteurs = sql_fetsel("role", "spip_auteurs_liens",
+		"objet='projet' AND id_objet IN (SELECT id_objet FROM spip_projets_sites_liens WHERE objet='projet' AND id_projets_site=" . $id . ") AND id_auteur=" . $qui['id_auteur']);
+
+	if (isset($auteurs['role'])) {
+		// Pour le moment, quelque soit le rôle de l'auteur, il peut voir les éléments sécurisés
+		// En effet, l'auteur a été ajouté au projet du site, donc, il fait parti de l'équipe.
+		return true;
+	}
+
+	// Si l'auteur ne fait pas parti de l'équipe, on prend en compte son statut.
 	return $qui['statut'] == '0minirezo';
 }
 

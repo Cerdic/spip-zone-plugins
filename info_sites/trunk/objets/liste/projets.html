@@ -20,7 +20,6 @@
 				<th class='statut' scope='col'>[(#TRI{statut,<:projet:label_statut:>,ajax})]</th>
 				[(#ENV{id_auteur}|oui)<th class="roles_auteur"><:roles:roles_titre:></th>]
 				<th class='url_site' scope='col'>[(#TRI{url_site,<:projet:label_url_site:>,ajax})]</th>
-				<th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
 				<th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
 			</tr>
 			</thead>
@@ -36,8 +35,7 @@
 					<a href="#URL_SITE">#URL_SITE</a>
 					]
 				</td>
-				<td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
-				<td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
+				<td class='date_debut secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
 			</tr>
 			</BOUCLE_liste_projets>
 			</tbody>
