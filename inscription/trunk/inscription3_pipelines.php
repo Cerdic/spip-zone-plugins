@@ -589,15 +589,16 @@ function inscription3_formulaire_traiter($flux){
 			if(intval($id_auteur) > 0){
 				$chercher_logo = charger_fonction('chercher_logo', 'inc');
 				
-				// supprimer l'ancien logo s'il existe
 				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
-	
-				// ajouter le nouveau
-				include_spip('action/iconifier');
-				
-				action_spip_image_ajouter_dist(
-					type_du_logo('id_auteur').'on'.$id_auteur, true, $_FILES['logo']
-				);
+				include_spip('formulaires/editer_logo');
+				include_spip('action/editer_logo');
+				$sources = formulaire_editer_logo_get_sources();
+				foreach ($sources as $etat => $file) {
+					if ($file and $file['error'] == 0) {
+						logo_modifier('auteur', $user['id_auteur'], $etat, $file);
+						set_request('logo_up', ' ');
+					}
+				}
 				// indiquer qu'on doit recalculer les images
 				$GLOBALS['var_images'] = true;
 			}
@@ -767,13 +768,17 @@ function inscription3_formulaire_traiter($flux){
 				$chercher_logo = charger_fonction('chercher_logo', 'inc');
 
 				// supprimer l'ancien logo
-				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) @unlink($on[0]);
-
-				// ajouter le nouveau
-				include_spip('action/iconifier');
-				action_spip_image_ajouter_dist(
-					type_du_logo('id_auteur').'on'.$user['id_auteur'], false, false
-				);
+				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
+				
+				include_spip('formulaires/editer_logo');
+				include_spip('action/editer_logo');
+				$sources = formulaire_editer_logo_get_sources();
+				foreach ($sources as $etat => $file) {
+					if ($file and $file['error'] == 0) {
+						logo_modifier('auteur', $user['id_auteur'], $etat, $file);
+						set_request('logo_up', ' ');
+					}
+				}
 				// indiquer qu'on doit recalculer les images
 				$GLOBALS['var_images'] = true;
 			}
