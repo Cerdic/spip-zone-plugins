@@ -190,7 +190,7 @@ you must complete certain information below.',
 	// I
 	'image_supprimee' => 'The image has been removed',
 	'insertion_code_explication' => 'This section allows you to insert code in parts provided by la Fabrique. Be careful though that this code is still valid!
-	',
+	', # MODIF
 
 	// L
 	'label_auteur' => 'Author Name',
