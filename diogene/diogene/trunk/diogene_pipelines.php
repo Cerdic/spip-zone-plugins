@@ -818,27 +818,15 @@ function diogene_diogene_traiter($flux){
 
 	if (is_array($_FILES) && isset($_FILES['logo_on'])){
 		include_spip('formulaires/editer_logo');
-
 		$objet = $flux['args']['type'];
-		$_id_objet = id_table_objet($objet);
-		
-		// supprimer l'ancien logo puis copier le nouveau
-		include_spip('inc/chercher_logo');
-		include_spip('inc/flock');
-		$type = type_du_logo($_id_objet);
-		$chercher_logo = charger_fonction('chercher_logo','inc');
-
-		include_spip('action/iconifier');
-		$ajouter_image = charger_fonction('spip_image_ajouter','action');
+		include_spip('action/editer_logo');
 		$sources = formulaire_editer_logo_get_sources();
-		foreach($sources as $etat=>$file) {
-			if ($file and $file['error']==0) {
-				$logo = $chercher_logo($flux['args']['id_objet'], $_id_objet, 'on');
-				if ($logo)
-					spip_unlink($logo[0]);
-				if ($err = $ajouter_image($type.$etat.$id_objet," ",$file,true))
+		foreach ($sources as $etat => $file) {
+			if ($file and $file['error'] == 0) {
+				if ($err = logo_modifier($objet, $flux['args']['id_objet'], $etat, $file)) {
 					$flux['message_erreur'] = $err;
-				set_request('logo_up',' ');
+				}
+				set_request('logo_up', ' ');
 			}
 		}
 	}
