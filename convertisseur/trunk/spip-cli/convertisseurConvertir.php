@@ -133,8 +133,11 @@ class Convert extends Command {
 						$collection = "";
 						$numero=$classement[0] ;
 					}else{
-						$collection = "";
-						$numero="" ;
+						# on recopie l'arbo de la source
+						preg_match(",.*/([^/]+)/([^/]+)/[^/]+$,", $f, $m);
+						$collection = $m[1] ;
+						$numero = $m[2] ;
+						// var_dump($m, $collection, $numero);
 					}
 					
 					$article = basename($f);
@@ -151,7 +154,7 @@ class Convert extends Command {
 					include_spip("inc/charsets");
 					$article = translitteration($article);					
 					$article = preg_replace(',[^\w-]+,', '_', $article);
-					$article = preg_replace(',_xml$,', '.xml', $article);
+					$article = preg_replace(',_xml$,', '.txt', $article);
 										
 					$c = array(
 						"fichier_source" => $f,					
