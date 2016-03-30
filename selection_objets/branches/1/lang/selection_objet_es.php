@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/selection_objet?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -54,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'selection_cible' => 'Selección de objetos diana para',
 	'selection_objet' => 'Selección',
-	'selection_objet_cible_titre' => 'Selección de Objetos Diana',
+	'selection_objet_cible_titre' => 'Selección de Objetos Diana', # MODIF
 	'selection_objets_pour' => 'Selección objetos para:',
 	'selection_rubrique_objet' => 'Objetos que pueden ser seleccionados',
 	'selection_type_lien' => 'Tipo de enlace',

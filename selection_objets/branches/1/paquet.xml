@@ -1,8 +1,8 @@
 <paquet
 	prefix="selection_objet"
 	categorie="edition"
-	version="1.10.3"
-	etat="test"
+	version="1.10.4"
+	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/selection_objet-64.png"
 	documentation="http://contrib.spip.net/Selection-d-objets"
