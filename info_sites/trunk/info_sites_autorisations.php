@@ -182,9 +182,6 @@ function autoriser_projetssite_infositescreer_dist($faire, $type, $id, $qui, $op
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
-	echo "<pre>";
-	var_dump($qui);
-	echo "</pre>";
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
