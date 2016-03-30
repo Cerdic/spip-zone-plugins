@@ -1,4 +1,4 @@
-[(#AUTORISER{projetssitevoir,_info_sites,#ID_PROJETS_SITE}|sinon_interdire_acces)]
+[(#AUTORISER{infositesvoir,projetssite,#ID_PROJETS_SITE}|sinon_interdire_acces)]
 <BOUCLE_projets_site (PROJETS_SITES){id_projets_site}>
 [(#BOITE_OUVRIR{[
     <h1 class="titre">[(#RANG). ](#TITRE|?{#TITRE,<:info_sans_titre:>})</h1>

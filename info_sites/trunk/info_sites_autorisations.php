@@ -39,6 +39,116 @@ function autoriser_ecrire($faire, $type, $id, $qui, $opt) {
 }
 
 // *****************************
+// Autorisation par défaut
+// *****************************
+
+/**
+ * Autorisation de créer
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositescreer_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+/**
+ * Autorisation de voir
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+/**
+ * Autorisation de modifier
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+/**
+ * Autorisation de supprimer
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
+}
+
+
+/**
+ * Autorisation de mise à jour
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+/**
+ * Autorisation d'association
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+// *****************************
 // Les sites de projets (projetssite)
 // *****************************
 
@@ -53,7 +163,7 @@ function autoriser_ecrire($faire, $type, $id, $qui, $opt) {
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitecreer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projetssite_infositescreer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -71,8 +181,14 @@ function autoriser_info_sites_projetssitecreer_dist($faire, $type, $id, $qui, $o
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitevoir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
+function autoriser_projetssite_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
+	echo "<pre>";
+	var_dump($qui);
+	echo "</pre>";
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
 }
 
 /**
@@ -86,7 +202,7 @@ function autoriser_info_sites_projetssitevoir_dist($faire, $type, $id, $qui, $op
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitemodifier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projetssite_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -104,7 +220,7 @@ function autoriser_info_sites_projetssitemodifier_dist($faire, $type, $id, $qui,
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitesupprimer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
@@ -120,7 +236,7 @@ function autoriser_info_sites_projetssitesupprimer_dist($faire, $type, $id, $qui
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitemaj_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projetssite_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -138,7 +254,7 @@ function autoriser_info_sites_projetssitemaj_dist($faire, $type, $id, $qui, $opt
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetssitesassocier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projetssites_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -186,7 +302,7 @@ function autoriser_projetssitesecurite_voir($faire, $type, $id, $qui, $opt) {
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetcreer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projet_infositescreer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -204,7 +320,7 @@ function autoriser_info_sites_projetcreer_dist($faire, $type, $id, $qui, $opt) {
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetvoir_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projet_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
@@ -219,7 +335,7 @@ function autoriser_info_sites_projetvoir_dist($faire, $type, $id, $qui, $opt) {
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetmodifier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projet_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -237,7 +353,7 @@ function autoriser_info_sites_projetmodifier_dist($faire, $type, $id, $qui, $opt
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetsupprimer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projet_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
@@ -252,7 +368,7 @@ function autoriser_info_sites_projetsupprimer_dist($faire, $type, $id, $qui, $op
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetmaj_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projet_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -270,7 +386,7 @@ function autoriser_info_sites_projetmaj_dist($faire, $type, $id, $qui, $opt) {
  *
  * @return bool          true s'il a le droit, false sinon
  **/
-function autoriser_info_sites_projetsassocier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_projets_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
