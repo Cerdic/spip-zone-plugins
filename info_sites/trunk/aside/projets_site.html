@@ -1,7 +1,7 @@
 [(#SET{liste_logiciels, [(#VAL|info_sites_lister_diagnostic_logiciel)]})]
 <BOUCLE_extra (PROJETS_SITES) {id_projets_site} {tout}>
 
-	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{modifierprojetssite,_info_sites,#ID_PROJETS_SITE}|oui}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{projetssitemodifier,_info_sites,#ID_PROJETS_SITE}|oui}>
 		<div class="boutons">
 			<ul class="list-group menu" role="menu">
 				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>

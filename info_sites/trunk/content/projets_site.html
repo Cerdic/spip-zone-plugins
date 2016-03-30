@@ -1,5 +1,5 @@
 <BOUCLE_projets_site (PROJETS_SITES) {id_projets_site} {tous}>
-[(#AUTORISER{voirprojetssite,_info_sites,#ID_PROJETS_SITE}|sinon_interdire_acces)]
+[(#AUTORISER{projetssitevoir,_info_sites,#ID_PROJETS_SITE}|sinon_interdire_acces)]
 [(#BOITE_OUVRIR{[
 	<h1 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h1>
 ],simple fiche_objet})]
