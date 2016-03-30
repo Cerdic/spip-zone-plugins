@@ -49,11 +49,13 @@ class pdf2img extends Command {
 				'shave',
 				'c',
 				InputOption::VALUE_OPTIONAL,
-				'Rogner avec -shave XxY',
+				'Rogner avec -c XxY. (exemples : -c 40x40 ou bien -c x40, ou encore -c 40x)',
 				''
 			)
 		;
 	}
+
+	// prevoir une option crop du genre : convert -verbose -colorspace RGB -interlace none -density 300 -resize 2000 -background white -alpha remove -crop 1734x2574+0+0 +repage
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		global $spip_racine;
