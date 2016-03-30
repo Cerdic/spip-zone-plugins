@@ -1,0 +1,29 @@
+<BOUCLE_diogene(DIOGENES){id_diogene}{id_secteur > 0}>
+	<BOUCLE_autorise_publier_secteur(CONDITION){si #AUTORISER{creerrubriquedans,rubrique,#ID_DIOGENE}|oui}>
+	<BOUCLE_secteur_existant(RUBRIQUES){id_rubrique=#_diogene:ID_SECTEUR}{tout}>
+		<BOUCLE_rubrique_existante(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{id_secteur=#_diogene:ID_SECTEUR}{tout}>
+			<INCLURE{fond=inclure/diogene_rubrique_description,id_rubrique,id_diogene=#_diogene:ID_DIOGENE,ajax} />
+			<div class="ajax">
+				[(#FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#ID_PARENT,#ENV{redirect},#ENV{lier_trad}})]
+			</div>
+		</BOUCLE_rubrique_existante>
+			<div class="ajax">
+				[(#FORMULAIRE_EDITER_RUBRIQUE{oui,#ENV{id_parent,#_diogene:ID_SECTEUR},#ENV{redirect},#ENV{lier_trad}})]
+			</div>
+		<//B_rubrique_existante>
+	</BOUCLE_secteur_existant>
+	</B_secteur_existant>
+		#BOITE_OUVRIR{'',error}
+		<p>
+			<:diogene:erreur_secteur_diogene_inexistant:>
+		</p>
+		#BOITE_FERMER
+	<//B_secteur_existant>
+	</BOUCLE_autorise_publier_secteur>
+		#BOITE_OUVRIR{'',error}
+			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SESSION{statut}|?{<:diogene:erreur_autorisation_statut_publier:>,<:diogene:erreur_autorisation_login_publier{url=[(#GET{url})]}:>})]
+		#BOITE_FERMER
+	</div>
+	<//B_autorise_publier_secteur>
+</BOUCLE_diogene>

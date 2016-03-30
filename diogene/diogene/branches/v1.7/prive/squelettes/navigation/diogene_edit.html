@@ -1,0 +1,16 @@
+[(#ENV{id_diogene,0}|intval|oui)
+[(#BOITE_OUVRIR{'','info'})]
+	<div class="infos">
+		<div class="numero">
+			<:diogene:info_numero_diogene:>
+			<p>#ID_DIOGENE</p>
+		</div>
+		[(#AUTORISER{supprimer,diogene,#ID_DIOGENE}|oui)
+			[(#URL_ACTION_AUTEUR{
+				supprimer_diogene,
+				#ID_DIOGENE,
+				#URL_ECRIRE{diogenes}}|icone_horizontale{<:diogene:bouton_supprimer_diogene:>,diogene-24,del}
+			)]
+		]
+	</div>
+#BOITE_FERMER]

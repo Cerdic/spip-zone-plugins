@@ -1,0 +1,11 @@
+[(#REM) Menu de navigation par rubriques ]
+<INCLURE{fond=inclure/diogenes_vos_objets,id_auteur=#SESSION{id_auteur},env}>
+#SET{rubriques,non}
+<BOUCLE_diogenes_rub(DIOGENES){objet=rubrique}>
+	[(#AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui)
+	[(#SET{rubriques,oui})]]
+</BOUCLE_diogenes_rub>
+[(#GET{rubriques}|=={oui})
+<INCLURE{fond=inclure/diogenes_rubriques_disponibles,id_rubrique,ajax}>]
+
+#FORMULAIRE_RECHERCHE

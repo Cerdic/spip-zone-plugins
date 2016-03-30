@@ -1,0 +1,60 @@
+<paquet
+	prefix="diogene"
+	categorie="edition"
+	version="1.7.9"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/diogene-128.png"
+	schema="0.3.7"
+	documentation="http://www.mediaspip.net/spip.php?article50"
+>	
+
+	<nom>Diogene</nom>
+	<!-- Cr&#233;ation de templates de formulaires pour les objets -->
+
+	<auteur>b_b</auteur>
+	<auteur mail="kent1@arscenic.info" lien="http://www.kent1.info">kent1</auteur>
+
+	<copyright>2010-2015</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<pipeline nom="diogene_charger" action="" />
+	<pipeline nom="diogene_champs_pre_edition" action="" />
+	<pipeline nom="diogene_champs_texte" action="" />
+	<pipeline nom="diogene_avant_formulaire" inclure="diogene_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_pipelines.php" />
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_pipelines.php" />
+	
+	<pipeline nom="insert_head_css" inclure="diogene_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/diogene.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/diogene.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/diogene.php" />
+	<pipeline nom="editer_contenu_objet" inclure="diogene_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="diogene_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="diogene_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="diogene_pipelines.php" />
+	<pipeline nom="pre_insertion" inclure="diogene_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="diogene_pipelines.php" />
+	<pipeline nom="post_edition" inclure="diogene_pipelines.php" />
+	<pipeline nom="autoriser" inclure="diogene_autoriser.php" />
+	<pipeline nom="ajouter_menus" inclure="diogene_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="diogene_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.14.0;[" />
+	<necessite nom="images" compatibilite="[1.1.1;[" />
+	<necessite nom="mediabox" compatibilite="[0.8.1;[" />
+	<!-- Pour le fichier inc/date_gestion.php -->
+	<necessite nom="organiseur" compatibilite="[0.8.5;[" />
+
+	<utilise nom="menus" compatibilite="[0.9.4;[" />
+	<utilise nom="polyhier" compatibilite="[2.0.1;[" />
+	<utilise nom="medias" compatibilite="[2.7.27;[" />
+	<utilise nom="cextras" compatibilite="[2.0.0;[" />
+	<utilise nom="iextras" compatibilite="[2.0.0;[" />
+	<utilise nom="pages" compatibilite="[1.0.0;[" />
+	<utilise nom="Z" compatibilite="[1.7.14;[" />
+
+	<menu nom="diogenes" titre="diogene:bouton_editer_diogene" parent="menu_edition" icone="images/diogene-16.png" action="diogenes" />
+</paquet>

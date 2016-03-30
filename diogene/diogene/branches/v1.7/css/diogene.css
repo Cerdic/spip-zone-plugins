@@ -1,0 +1,20 @@
+/**
+ * Feuille de style du plugin diogene
+ * 
+ * Elle n'est chargée que sur les pages de publication normalement
+ */
+
+.page_publier .container ul.menu-liste, .page_publier .container ul.liste-item{
+	list-style-type:none;
+	padding-top:0;
+	margin:0;
+}
+
+.page_publier a.lien_publier{
+	float:left;
+	margin:0;
+	margin-right:.5em;
+}
+.page_publier .diogene_geo .editer_carte{padding:0;}
+
+.page_publier .diogene_geo #geomap{width:100%;height:350px;}
