@@ -18,6 +18,8 @@
   <:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
 ]
 
+[(#SET{data-id, [(#ENV{data-id})][(#REM|uniqid)]})]
+
 [(#ENV{href}|oui)
 [(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
 ]
@@ -27,13 +29,13 @@
 [(#SET{animation-out, #LIRE_CONSTANTE{_REVEAL_ANIMATION_OUT}|?{#LIRE_CONSTANTE{_REVEAL_ANIMATION_OUT}, #ENV{animation-out}}})]
 
 [<a[ href="(#ENV{href})"]
-	 [data-toggle="reveal-(#ENV{data-id})"]
+	 [data-toggle="reveal-(#GET{data-id})"]
 	 [(#ENV{href}|oui)data-reveal-ajax="#GET{href_zajax}"]
 	 class="[(#ENV{href}|oui)reveal-ajax][ (#ENV{class})]">
   (#ENV*{titre})
 </a>]
 
-<div[ id="reveal-(#ENV{data-id})"]
+<div[ id="reveal-(#GET{data-id})"]
 	  class="reveal[ (#ENV{class_reveal, large})]"
 	  [(#GET{animation-in}|oui)data-animation-in="#GET{animation-in}"]
 	  [(#GET{animation-out}|oui)data-animation-out="#GET{animation-out}"]
