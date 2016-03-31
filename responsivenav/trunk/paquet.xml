@@ -1,7 +1,7 @@
 <paquet
 	prefix="responsivenav"
 	categorie="navigation"
-	version="0.1.0"
+	version="0.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/responsivenav-64.png"
@@ -12,9 +12,9 @@
 	<!-- Un menu responsive dans vos squelettes -->
 
 	<auteur>jeanmarie</auteur>
-	
+
 	<credit lien="http://responsive-nav.com/">Responsive Nav</credit>
-	
+
 	<licence>Creative Commons by-sa</licence>
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
