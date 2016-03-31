@@ -3,14 +3,14 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="list-inline pull-right">
-				[<li><a href="#URL_AUTEUR{#SESSION{id_auteur}}"><i class="fa fa-user"></i> (#SESSION{nom})</a></li>]
+				[<li><a href="#URL_AUTEUR{#SESSION{id_auteur}}"><i class="fa fa-user fa-lg"></i> (#SESSION{nom})</a></li>]
 				<?php if (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']) { ?>
 				<?php if (include_spip('inc/autoriser') AND autoriser('ecrire')){ ?>
-				<li><a href="#EVAL{_DIR_RESTREINT_ABS}" title="<:espace_prive:>"><i class="fa fa-lock"></i> <:espace_prive:></a></li>
+				<li><a href="#EVAL{_DIR_RESTREINT_ABS}" title="<:espace_prive:>"><i class="fa fa-lock fa-lg"></i> <:espace_prive:></a></li>
 				<?php } ?>
-				<li><a href="#URL_LOGOUT" rel="nofollow" title="<:icone_deconnecter:>"><i class="fa fa-power-off"></i> <span class="sr-only"><:icone_deconnecter:></span></a></li>
+				<li><a href="#URL_LOGOUT" rel="nofollow" title="<:icone_deconnecter:>"><i class="fa fa-sign-out fa-lg"></i> <span class="sr-only"><:icone_deconnecter:></span></a></li>
 <?php } else { ?>
-				<li><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal' title="<:lien_connecter:>"><:lien_connecter:></a></li>
+				<li><i class="fa fa-sign-in fa-lg"></i><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF|parametre_url{url,''}})]" rel="nofollow" class='login_modal' title="<:lien_connecter:>"><:lien_connecter:></a></li>
 				<?php } ?>
 			</ul>
 		</div>

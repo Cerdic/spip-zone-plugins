@@ -156,6 +156,7 @@ h1.titre {
 .table-responsive {
 	overflow-x: scroll;
 }
+
 table {
 	margin-bottom: 20px;
 	max-width: 100%;
@@ -750,10 +751,10 @@ input[type="radio"], input[type="checkbox"] {
 
 #content {
 	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
 	background-color: @white;
-	overflow: hidden;
 	border: 1px solid @border;
-	border-top: 0;
 	.coordonnees {
 		h5 {
 			display: none;
@@ -777,57 +778,68 @@ input[type="radio"], input[type="checkbox"] {
 
 #menu {
 	background: @main-color;
-	border: 1px solid @border;
+	border: 0px solid @border;
 	border-bottom: 0;
 	padding: 0;
+	border-radius: 0;
+	box-shadow: none;
+	min-height: auto;
 
-	&.menu_pages {
-		margin-top: 1em;
-		padding-top: 1px;
-		z-index: 1000;
+	.navbar-toggle {
+		border-color: contrast(@main-color);
+		color: contrast(@main-color);
+		.icon-bar {
+			background-color: contrast(@main-color);
+		}
+		&:hover {
+			border-color: darken(@main-color, 10%);
+			.icon-bar {
+				background-color: darken(@main-color, 10%);
+			}
+		}
+	}
+	ul {
 
-		ul {
+		> li {
+			float: left;
+			font-size: 1em;
+			line-height: 1em;
 
-			> li {
-				float: left;
-				font-size: 1em;
-				line-height: 1em;
+			& + li {
+				margin-top: 0;
+			}
 
-				& + li {
-					margin-top: 0;
-				}
+			a {
+				color: contrast(@main-color);
+				line-height: 26px;
+				margin-top: -1px;
+				padding: 10px 18px;
+				background-image: none;
 
-				a {
-					color: @white;
-					line-height: 26px;
-					margin-top: -1px;
-					padding: 10px 18px;
-
-					&:active,
-					&:focus,
-					&:hover {
-						color: @bg-dark;
-						background-color: @white;
-
-						i {
-							color: @bg-dark;
-						}
-					}
-					&.active {
-						color: @black;
-						background-color: @white;
-						i {
-							color: @black;
-						}
-					}
+				&:active,
+				&:focus,
+				&:hover {
+					color: @bg-dark;
+					background-color: @white;
 
 					i {
-						width: 1.25em;
-						text-align: center;
+						color: @bg-dark;
+					}
+				}
+				&.active {
+					color: @black;
+					background-color: @white;
+					i {
+						color: @black;
 					}
 				}
 
+				i {
+					width: 1.25em;
+					text-align: center;
+				}
 			}
+
 		}
 	}
 }
@@ -1304,24 +1316,10 @@ input[type="radio"], input[type="checkbox"] {
 // Media Queries
 // --------
 @media (max-width: 1180px) {
-	.page_projets_sites {
-		.contenu {
-			float: none;
-			width: 100%;
-		}
-
-		#aside {
-			position: relative !important;
-			float: none;
-		}
-	}
 }
 
 @media (max-width: 992px) {
 	#aside {
-		position: absolute;
-		top: 20px;
-		right: 0;
 	}
 
 	#menu {
