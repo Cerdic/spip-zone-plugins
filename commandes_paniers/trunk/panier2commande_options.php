@@ -18,7 +18,8 @@ if (  isset($_COOKIE['spip_pwl']) AND $_COOKIE['spip_pwl']
 	AND isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']){
 
 	include_spip('inc/filtres');
-	$arg = reset(decoder_contexte_ajax($_COOKIE['spip_pwl'],'spip_pwl'));
+	$contexte = decoder_contexte_ajax($_COOKIE['spip_pwl'],'spip_pwl');
+	$arg = reset($contexte);
 	$commandes_paniers = charger_fonction("commandes_paniers","action");
 	$commandes_paniers($arg);
 	include_spip('inc/cookie');
