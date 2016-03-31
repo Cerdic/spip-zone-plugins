@@ -60,7 +60,8 @@ function composer_composer_obtenir() {
 	sous_repertoire(_DIR_COMPOSER);
 	$root = realpath(_DIR_COMPOSER);
 	chdir($root);
-	$cmd = "curl -sS https://getcomposer.org/installer | php 2>&1";
+	$home = "export COMPOSER_HOME=" . _ROOT_RACINE . "tmp";
+	$cmd = "$home && curl -sS https://getcomposer.org/installer | php 2>&1";
 	exec($cmd, $output, $err);
 	if (!$err) {
 		exec("chmod 775 composer.phar", $output, $err);
