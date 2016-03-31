@@ -26,7 +26,7 @@
 /* le picker */
 
 /* begin: jQuery UI Datepicker moving pixels fix */
-	table.ui-datepicker-calendar {border-collapse: separate;}
+	table.ui-datepicker-calendar {border-collapse: separate; background-color: #fff}
 	.ui-datepicker-calendar td {border: 1px solid transparent;}
 /* end: jQuery UI Datepicker moving pixels fix */
 /* begin: jQuery UI Datepicker emphasis on selected dates */
