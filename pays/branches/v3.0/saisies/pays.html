@@ -28,13 +28,13 @@
 	(#REM) définition des valeurs et des labels correspondants à chaque champ. ][
 	(#SET{mapping_champs,#ARRAY{
 		id_pays,     #ARRAY{valeur,#ID_PAYS,     label,#NOM},
-		code,        #ARRAY{valeur,#CODE,        label,#CODE|concat{'. ',#NOM}},
+		code,        #ARRAY{valeur,#CODE,        label,#NOM},
 		code_alpha3, #ARRAY{valeur,#CODE_ALPHA3, label,#CODE_ALPHA3|concat{'. ',#NOM}},
 		code_num,    #ARRAY{valeur,#CODE_NUM,    label,#CODE_NUM|concat{'. ',#NOM}},
 		nom,         #ARRAY{valeur,#NOM,         label,#NOM}}})][
 
 	(#REM) définition du champ à utiliser : param champ_pays > code_pays > id_pays. ][
-	(#SET{champ_pays,#ENV{champ_pays,#ENV{code_pays}|=={oui}|?{code_pays,id_pays}}})][
+	(#SET{champ_pays,#ENV{champ_pays,#ENV{code_pays}|=={oui}|?{code,id_pays}}})][
 	(#SET{champ_pays,#GET{champ_pays}|in_array{#GET{mapping_champs}|array_keys}|?{#GET{champ_pays},id_pays}})][
 
 	(#REM) définition de la valeur et du label. ][
