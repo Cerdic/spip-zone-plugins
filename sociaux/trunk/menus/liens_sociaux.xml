@@ -1,0 +1,10 @@
+<entree>
+	<nom><:sociaux:menu_titre:></nom>
+	<rang>32</rang>
+	<description><:sociaux:menu_description:></description>
+	<icone>prive/themes/spip/images/sociaux-24.png</icone>
+	<parametre nom="nom" class="multilang" label="sociaux:menu_nom_reseau" obligatoire="oui" />
+	<parametre nom="url" label="menus:entree_url" obligatoire="oui" />
+	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="css_lien" label="menus:entree_css_lien" />
+</entree>
