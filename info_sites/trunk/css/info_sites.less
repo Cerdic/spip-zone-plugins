@@ -731,6 +731,23 @@ input[type="radio"], input[type="checkbox"] {
 	}
 }
 
+#connexion {
+	@connexion: darken(@main-color, 10%);
+	background-color: @connexion;
+	color: contrast(@connexion);
+	ul {
+		margin-bottom: 0;
+		li {
+			font-size: 0.825em;
+			line-height: 1em;
+			padding: 0.5em 1em;
+			a {
+				color: contrast(@connexion);
+			}
+		}
+	}
+}
+
 #content {
 	padding-top: 20px;
 	background-color: @white;
@@ -1248,6 +1265,9 @@ input[type="radio"], input[type="checkbox"] {
 			margin: 0.5em -0.5em -0.5em;
 			text-align: right;
 		}
+	}
+	.icone.s24 {
+		display: none;
 	}
 }
 

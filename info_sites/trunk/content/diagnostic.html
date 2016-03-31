@@ -1,4 +1,5 @@
 <BOUCLE_projets_site (PROJETS_SITES) {id_projets_site}>
+[(#AUTORISER{infositesvoir,projetssite,#ID_PROJETS_SITE}|sinon_interdire_acces)]
 [(#BOITE_OUVRIR{[
 		<h1 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>}) [(#TYPE_SITE|oui)[\((#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)\)]]</h1>
 ],simple fiche_objet})]
@@ -8,8 +9,8 @@
 		<div class="clearfix"></div>
 [(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#LOGICIEL_NOM|strtolower)],'/diagnostic'})]})]
 [(#CHEMIN{[(#GET{inclure}).html]}|?{
-    [(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
-    <info_sites:diagnostic_logiciel_absent:>
+	[(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
+	<:info_sites:diagnostic_logiciel_absent:>
 })]
 #BOITE_FERMER
 </BOUCLE_projets_site>

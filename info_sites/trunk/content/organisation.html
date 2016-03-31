@@ -1,4 +1,5 @@
 <BOUCLE_organisation (ORGANISATIONS) {id_organisation} {tous}>
+[(#AUTORISER{infositesvoir,organisation,#ID_ORGANISATION}|sinon_interdire_acces)]
 [(#BOITE_OUVRIR{[
 	<h1 class="titre">[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h1>
 ],simple fiche_objet})]

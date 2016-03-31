@@ -1,10 +1,10 @@
 <div class="boutons">
 	<ul class="list-group menu" role="menu">
-		[(#AUTORISER{creer,organisation})
+		[(#AUTORISER{infositescreer,organisation})
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:contacts:organisation_creer:>
 		</a></li>
-		][(#AUTORISER{creer,contact})
+		][(#AUTORISER{infositescreer,contact})
 		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:contacts:contact_creer:>
 		</a></li>

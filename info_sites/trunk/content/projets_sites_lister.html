@@ -1,4 +1,4 @@
-[(#AUTORISER{infositesvoir,projetssite}|sinon_interdire_acces)]
+[(#AUTORISER{infositesvoir,projetssites}|sinon_interdire_acces)]
 <h1 class="titre"><:info_sites:titre_page_lister_projets_sites:></h1>
 
 <div class="formulaire_spip">
@@ -7,14 +7,13 @@
 		<ul>
 			<li>
 				<label for="champ_where"><:info_sites:info_vos_criteres:></label>
-				<select name="where">
+				<select name="where" id="champ_where">
 					<option value=""></option>
 					<option value="projets_sites.webservice NOT LIKE '%http%'">
 						<:info_sites:info_critere_sans_webservice:>
 					</option>
 				</select>
 			</li>
-
 		</ul>
 
 		<p class="boutons">

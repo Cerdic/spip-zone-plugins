@@ -1,4 +1,8 @@
-<!-- extra -->
+<!-- extra -->[
+(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
+Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
+]<BOUCLE_autorisation (CONDITION) {si #AUTORISER{infositesvoir,projessite}|oui}>
+<B_sites>
 <div class="block">
 	<form action="#SELF" method="get" role="form" class="form">
 		<input type="hidden" name="page" value="#ENV{page}"/>
@@ -15,3 +19,5 @@
 		</div>
 	</form>
 </div>
+</B_sites>
+</BOUCLE_autorisation>

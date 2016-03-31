@@ -153,6 +153,21 @@ function autoriser_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
 // *****************************
 
 /**
+ * Surcharge d'autorisation de créer (projetssite)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetssite_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'projetssite', $id, $qui, $opt);
+}
+
+/**
  * Autorisation de créer (projetssite)
  *
  * @param  string $faire Action demandée
@@ -182,10 +197,22 @@ function autoriser_projetssite_infositescreer_dist($faire, $type, $id, $qui, $op
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array(
-		'0minirezo',
-		'1comite',
-	));
+	return true;
+}
+
+/**
+ * Surcharge d'autorisation de modifier (projetssite)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetssite_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'projetssite', $id, $qui, $opt);
 }
 
 /**
@@ -241,6 +268,21 @@ function autoriser_projetssite_infositesmaj_dist($faire, $type, $id, $qui, $opt)
 }
 
 /**
+ * Surcharge d'autorisation d'association (projetssites)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associerprojets_sites($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'projetssites', $id, $qui, $opt);
+}
+
+/**
  * Autorisation d'association (projetssite)
  *
  * @param  string $faire Action demandée
@@ -287,6 +329,21 @@ function autoriser_projetssitesecurite_voir($faire, $type, $id, $qui, $opt) {
 // *****************************
 // Les projets
 // *****************************
+
+/**
+ * Surcharge d'autorisation de créer (projet)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projet_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'projet', $id, $qui, $opt);
+}
 
 /**
  * Autorisation de créer (projet)
@@ -373,6 +430,21 @@ function autoriser_projet_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
+ * Surcharge d'autorisation d'association (projet)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associerprojets($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'projets', $id, $qui, $opt);
+}
+
+/**
  * Autorisation d'association (projet)
  *
  * @param  string $faire Action demandée
@@ -388,5 +460,197 @@ function autoriser_projets_infositesassocier_dist($faire, $type, $id, $qui, $opt
 		'0minirezo',
 		'1comite',
 	));
+}
+
+// *****************************
+// Les cadres de projets
+// *****************************
+
+/**
+ * Surcharge d'autorisation d'association (projetscadres)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associerprojets_cadres($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'projetscadres', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de creer un cadre de projet
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetscadre_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'projetscadre', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier une cadre de projet
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetscadre_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'projetscadre', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de suppression d'un cadre de projet
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetscadre_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'projetscadre', $id, $qui, $opt);
+}
+
+// *****************************
+// Les organisations
+// *****************************
+
+/**
+ * Surcharge d'autorisation d'association (organisations)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associerorganisations($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'organisations', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de creer une organisation
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_organisation_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'organisation', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier une organisation
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_organisation_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'organisation', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de suppression d'une organisation
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_organisation_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'organisation', $id, $qui, $opt);
+}
+
+// *****************************
+// Les contacts
+// *****************************
+
+/**
+ * Surcharge d'autorisation d'association (contact)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associercontacts($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'contacts', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de creer une contact
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_contact_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'contact', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier une contact
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_contact_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'contact', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de suppression d'une contact
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_contact_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'contact', $id, $qui, $opt);
 }
 
