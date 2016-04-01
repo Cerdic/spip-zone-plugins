@@ -1,72 +1,65 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
 function videos_upgrade($nom_meta_base_version, $version_cible) {
-	$current_version = 0.0;
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version]) != $version_cible)
-	) {
-		if (version_compare($current_version, '0.1', '<')) {
-			include_spip('base/abstract_sql');
+	$maj = array();
 
-			/* Mettre à jour la table DOCUMENTS pour regrouper les extensions "distantes" (changement de nomenclature) */
-			sql_updateq('spip_documents', array('extension' => 'dist_daily'), "extension='dailym'");
-			sql_updateq('spip_documents', array('extension' => 'dist_vimeo'), "extension='vimeo'");
-			sql_updateq('spip_documents', array('extension' => 'dist_youtu'), "extension='youtube'");
+	$maj['create'] = array(
+		/* Ajouter les nouvelles extensions en base pour qu'elles soient prises en compte comme des vidéos */
+		array('sql_insertq_multi', 'spip_types_documents', array(
+			array('extension' => 'dist_daily', 'titre' => 'Dailymotion',   'inclus' => 'embed', 'upload' => 'oui', 'media_defaut' => 'video'),
+			array('extension' => 'dist_vimeo', 'titre' => 'Vimeo',         'inclus' => 'embed', 'upload' => 'oui', 'media_defaut' => 'video'),
+			array('extension' => 'dist_youtu', 'titre' => 'Youtube',       'inclus' => 'embed', 'upload' => 'oui', 'media_defaut' => 'video'),
+			array('extension' => 'dist_cubox', 'titre' => 'CultureBox',    'inclus' => 'embed', 'upload' => 'oui', 'media_defaut' => 'video'),
+		)),
+	);
 
-			/* Ajouter les nouvelles extensions en base pour qu'elles soient prises en compte comme des vidéos */
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_daily', 'titre' => 'Dailymotion', 'inclus' => 'embed', 'upload' => 'oui'));
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_vimeo', 'titre' => 'Vimeo', 'inclus' => 'embed', 'upload' => 'oui'));
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_youtu', 'titre' => 'Youtube', 'inclus' => 'embed', 'upload' => 'oui'));
+	$maj['0.1'] = array(
+		/* Mettre à jour la table DOCUMENTS pour regrouper les extensions "distantes" (changement de nomenclature) */
+		array('sql_updateq', 'spip_documents', array('extension' => 'dist_daily'), "extension='dailym'"),
+		array('sql_updateq', 'spip_documents', array('extension' => 'dist_vimeo'), "extension='vimeo'"),
+		array('sql_updateq', 'spip_documents', array('extension' => 'dist_youtu'), "extension='youtube'"),
 
-			ecrire_meta($nom_meta_base_version, $current_version = "0.1", 'non');
-		}
-		if (version_compare($current_version, '0.2', '<')) {
-			include_spip('base/abstract_sql');
+		/* Ajouter les nouvelles extensions en base pour qu'elles soient prises en compte comme des vidéos */
+		array('sql_insertq_multi', 'spip_types_documents', array(
+			array('extension' => 'dist_daily', 'titre' => 'Dailymotion',   'inclus' => 'embed', 'upload' => 'oui'),
+			array('extension' => 'dist_vimeo', 'titre' => 'Vimeo',         'inclus' => 'embed', 'upload' => 'oui'),
+			array('extension' => 'dist_youtu', 'titre' => 'Youtube',       'inclus' => 'embed', 'upload' => 'oui'),
+		)),
+	);
 
-			sql_updateq('spip_documents', array('extension' => 'dist_cubox'), "extension='culturebox'");
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_cubox', 'titre' => 'CultureBox', 'inclus' => 'embed', 'upload' => 'oui'));
+	$maj['0.2'] = array(
+		array('sql_updateq', 'spip_documents', array('extension' => 'dist_cubox'), "extension='culturebox'"),
+		array('sql_insertq', 'spip_types_documents', array('extension' => 'dist_cubox', 'titre' => 'CultureBox', 'inclus' => 'embed', 'upload' => 'oui')),
+	);
 
-			ecrire_meta($nom_meta_base_version, $current_version = "0.2", 'non');
-		}
-		if (version_compare($current_version, '0.3', '<')) {
-			/* 0.1 et 0.2 rataient leurs insertions SI le plugin Mediatheque n'avait pas inséré le champ media, on relance donc l'insertion pour ceux qui ont raté le coche */
-			include_spip('base/abstract_sql');
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_daily', 'titre' => 'Dailymotion', 'inclus' => 'embed', 'upload' => 'oui'));
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_vimeo', 'titre' => 'Vimeo', 'inclus' => 'embed', 'upload' => 'oui'));
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_youtu', 'titre' => 'Youtube', 'inclus' => 'embed', 'upload' => 'oui'));
-			sql_insertq('spip_types_documents',
-				array('extension' => 'dist_cubox', 'titre' => 'CultureBox', 'inclus' => 'embed', 'upload' => 'oui'));
+	$maj['0.3'] = array(
+		/* 0.1 et 0.2 rataient leurs insertions SI le plugin Mediatheque n'avait pas inséré le champ media, 
+		 * on relance donc l'insertion pour ceux qui ont raté le coche */
+		array('sql_insertq_multi', 'spip_types_documents', array(
+			array('extension' => 'dist_daily', 'titre' => 'Dailymotion',   'inclus' => 'embed', 'upload' => 'oui'),
+			array('extension' => 'dist_vimeo', 'titre' => 'Vimeo',         'inclus' => 'embed', 'upload' => 'oui'),
+			array('extension' => 'dist_youtu', 'titre' => 'Youtube',       'inclus' => 'embed', 'upload' => 'oui'),
+			array('extension' => 'dist_cubox', 'titre' => 'CultureBox',    'inclus' => 'embed', 'upload' => 'oui'),
+		)),
+	);
 
-			echo "Mise à jour du plugin Vidéo(s) en version base $version_cible<br/>";
-			ecrire_meta($nom_meta_base_version, $current_version = $version_cible, 'non');
-		}
-	}
+	$maj['0.4'] = array(
+		/* corriger le champ media_defaut si besoin */
+		array('sql_updateq', 'spip_types_documents', array('media_defaut' => 'video'), "extension REGEXP '^dist_'")
+	);
 
-	// Si présence du champ MEDIA_DEFAUT : on MAJ
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$desc = $trouver_table('spip_types_documents');
-	if (array_key_exists('media_defaut', $desc['field'])) {
-		sql_updateq('spip_types_documents', array('media_defaut' => 'video'), "extension REGEXP '^dist_'");
-	}
-
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-function videos_vider_tables($nom_meta_base_version) {
-	sql_delete("spip_types_documents", "extension='dist_daily'");
-	sql_delete("spip_types_documents", "extension='dist_vimeo'");
-	sql_delete("spip_types_documents", "extension='dist_youtu'");
-	sql_delete("spip_types_documents", "extension='dist_cubox'");
-	sql_delete("spip_meta", "nom='videos'");
 
+function videos_vider_tables($nom_meta_base_version) {
+	sql_delete("spip_types_documents", sql_in("extension", array('dist_daily', 'dist_vimeo', 'dist_youtu', 'dist_cubox')));
+
+	effacer_meta('videos');
 	effacer_meta($nom_meta_base_version);
 }
