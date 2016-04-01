@@ -92,11 +92,13 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				$regs_h = false;
 				if (preg_match(",^([0-9\.]+\%?)(x([0-9\.]+\%?))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
 				
-					if ($regs[1] == "0") $regs[1] = $l;
-					if ($regs[3] == "0") $regs[3] = $h;
+					if ($regs[1] == "0") $p[$i]["l"] = $l;
+					else $p[$i]["l"] = $regs[1];
+
+					if ($regs[3] == "0") $p[$i]["h"] = $h;
+					else $p[$i]["h"] = $regs[3];
 				
-					$p[$i]["l"] = $regs[1];
-					$p[$i]["h"] = $regs[3];
+					
 					$p[$i]["f"] = $regs[5];
 					$p[$i]["z"] = $regs[7];
 
@@ -181,25 +183,26 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				$source_tmp = $source;
 
 				if (count($p) > 1 && count($p[$i]) > 1) {
-					$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
-					$source_tmp = extraire_attribut($source_tmp,"src");
+					if ($p[$i]["l"] != $l || $p[$i]["h"] != $h) { // Pas de redimension si on est au format source (0x0)
+						$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
+						$source_tmp = extraire_attribut($source_tmp,"src");
+					}
 				}			
-
 				if ($vertical && $t > $h) $t = $h;
 				else if (!$vertical && $t > $l) $t = $l;
 
 
 				if(_IMAGE_RESPONSIVE_CALCULER) {
-					$fichiers[$t][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
-					$fichiers[$t][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
+					$fichiers[$i][1] = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file");
+					$fichiers[$i][2] = retour_image_responsive($source_tmp, "$t$v", 2, 0, "file");
 				} else {
 					if ($htactif) {
-						$fichiers[$t][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
-						$fichiers[$t][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
+						$fichiers[$i][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp);
+						$fichiers[$i][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp);
 					}
 					else {
-						$fichiers[$t][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
-						$fichiers[$t][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
+						$fichiers[$i][1] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v";
+						$fichiers[$i][2] = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2";
 					}
 				}
 						
@@ -209,8 +212,8 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
 					$t = $tailles[0];
 					if ($t != 0 && $t <= $l) {
-						$srcset[] = $fichiers[$t][1]." 1x";
-						$srcset[] = $fichiers[$t][2]." 2x";
+						$srcset[] = $fichiers[1][1]." 1x";
+						$srcset[] = $fichiers[1][2]." 2x";
 					}
 			}
 
@@ -228,8 +231,8 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 												
 												
 						$source_tmp = $source;
-						$set =  $fichiers[$t][1]." 1x";
-						$set .=  ",".$fichiers[$t][2]. " 2x";
+						$set =  $fichiers[$i][1]." 1x";
+						$set .=  ",".$fichiers[$i][2]. " 2x";
 
 						if (strlen($m) > 0) {
 							$insm = " media='$m'";
