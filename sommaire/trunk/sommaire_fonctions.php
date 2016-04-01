@@ -228,18 +228,21 @@ function sommaire_recenser(&$texte) {
 	$ancres_vues = array();
 
 	// traitement des intertitres <hx>
-	preg_match_all(",(<h([123456])[^>]*>)(.*)(</h\\2>),Uims", $texte, $matches,PREG_SET_ORDER);
-	if (!count($matches))
+	preg_match_all(",(<h([123456])[^>]*>)(.*)(</h\\2>),Uims", $texte, $matches, PREG_SET_ORDER);
+	if (!count($matches)) {
 		return $texte;
+	}
 
 	$debutsommairedejala = strpos($texte,'<!--sommaire-->');
 	$finsommairedejala = strpos($texte,'<!--/sommaire-->');
 
 	// trouver le niveau mini des hn qui consitue le niveau 1 du sommaire
 	$toplevel = 6;
-	foreach($matches as $m){
+	foreach($matches as $m) {
 		$toplevel = min($toplevel,$m[2]);
-		if ($toplevel==1) break;
+		if ($toplevel==1) {
+			break;
+		}
 	}
 	#var_dump($toplevel);
 
@@ -251,11 +254,16 @@ function sommaire_recenser(&$texte) {
 		  AND ($pos<$debutsommairedejala OR $pos>=$finsommairedejala)) {
 
 			$titre = $m[3];
-			$titre = preg_replace(",</?a\b[^>]*>,Uims","",$titre);
-			$ancre = sommaire_intertitre_ancre($titre,$m,$ancres_vues);
+			$titre = preg_replace(",</?a\b[^>]*>,Uims", "", $titre);
+			$ancre = sommaire_intertitre_ancre($titre, $m, $ancres_vues);
 			$ancres_vues[] = $ancre;
 
-			$sommaire[] = array('niveau'=>$m[2]-$toplevel+1,'titre'=>$titre,'href'=>"#$ancre",'id'=>"s-$ancre");
+			$sommaire[] = array(
+				'niveau' => $m[2]-$toplevel+1,
+				'titre' => $titre,
+				'href' => "#$ancre",
+				'id' => "s-$ancre"
+			);
 
 			$lien_back = "<a class='sommaire-back' href='#s-$ancre' title='$titleretour'></a>";
 			$h = inserer_attribut($m[1],"id",$ancre).retire_ancres_sommaire($m[3]).$lien_back.$m[4];
@@ -264,10 +272,10 @@ function sommaire_recenser(&$texte) {
 		}
 	}
 
-	if (count($sommaire)){
+	if (count($sommaire)) {
 		// ajouter le nombre de liens en classe sur chaque ancre (masquage CSS)
 		$c = "sommaire-back-".count($sommaire);
-		$texte = str_replace("<a class='sommaire-back'","<a class='sommaire-back $c'",$texte);
+		$texte = str_replace("<a class='sommaire-back'", "<a class='sommaire-back $c'", $texte);
 	}
 
 	#var_dump($sommaire);
@@ -315,11 +323,9 @@ function sommaire_intertitre_ancre($titre, $h, $ancres_vues=array()){
 function sommaire_filtrer_niveaux($sommaire, $niveau_max=''){
 
 	$niveau_max = intval($niveau_max);
-	if (
-		$niveau_max <= 0
-		OR $niveau_max > 5
-	)
-	return $sommaire;
+	if ($niveau_max <= 0 OR $niveau_max > 5) {
+		return $sommaire;
+	}
 
 	foreach ($sommaire as $k => $v) {
 		if (
@@ -334,4 +340,4 @@ function sommaire_filtrer_niveaux($sommaire, $niveau_max=''){
 	return $sommaire;
 }
 
-?>
+
