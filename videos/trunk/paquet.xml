@@ -1,15 +1,15 @@
 <paquet
 	prefix="videos"
 	categorie="multimedia"
-	version="0.11.1"
+	version="0.12.0"
 	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="theme/img/videos-32.png"
 	schema="0.3"
 	documentation="http://contrib.spip.net/Plugin-Video-s"
->	
+>
 
-	<nom>Vid&#233;o(s)</nom>
+	<nom>Vidéo(s)</nom>
 	<!-- Interface de gestion et modèles d'insertion de vidéos -->
 
 	<auteur lien="http://demo.apsulis.com" mail="XDjuj@apsulis.com">XDjuj</auteur>
