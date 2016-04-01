@@ -22,11 +22,13 @@ function roles_documents_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_documents_liens')),
 		// la nouvelle colonne est la, mettre sa nouvelle clé primaire
 		array('sql_alter', "TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet,role)"),
+		// Mettre un rôle 'document' par défaut aux liens dépourvus de rôle
+		array('sql_update', "spip_documents_liens", array('role' => sql_quote('document')), "role=" . sql_quote('')),
 	);
 
 	// Mettre un rôle 'document' par défaut aux liens dépourvus de rôle
 	$maj['1.0.1'] = array(
-		array('sql_update', "spip_documents_liens", array('role'=>sql_quote('document')), "role=".sql_quote('')),
+		array('sql_update', "spip_documents_liens", array('role' => sql_quote('document')), "role=" . sql_quote('')),
 	);
 
 	include_spip('base/upgrade');
@@ -64,4 +66,3 @@ function roles_documents_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>
