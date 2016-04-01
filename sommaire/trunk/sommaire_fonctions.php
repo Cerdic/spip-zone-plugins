@@ -230,7 +230,7 @@ function sommaire_recenser(&$texte) {
 	// traitement des intertitres <hx>
 	preg_match_all(",(<h([123456])[^>]*>)(.*)(</h\\2>),Uims", $texte, $matches, PREG_SET_ORDER);
 	if (!count($matches)) {
-		return $texte;
+		return $sommaire;
 	}
 
 	$debutsommairedejala = strpos($texte,'<!--sommaire-->');
