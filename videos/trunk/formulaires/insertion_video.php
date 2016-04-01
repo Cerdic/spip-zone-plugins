@@ -194,10 +194,15 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		);
 	}
 
+	// faut il laisser le type ? c'est un peu cryptique pour le redacteur
 	$message_ok = _T('videos:confirmation_ajout', array(
 		'type' => $type,
 		'titre' => $titre,
 		'id_document' => $document
-	));    // faut il laisser le type ? c'est un peu cryptique pour le redacteur
+	));    
+
+	// recharger les documents après ajout d'un nouveau
+	$message_ok .= "\n<script type='text/javascript'>if (window.jQuery) jQuery('#documents').ajaxReload();</script>";
+
 	return array("message_ok" => $message_ok);
 }

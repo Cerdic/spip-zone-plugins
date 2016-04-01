@@ -1,11 +1,11 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM">
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 <form method='post' action='#ENV{action}'><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		<li class="editer_url">
+	<ul class='editer-groupe'>
+		<li class="editer editer_url haut">
 			<label>
 				[<strong>(#ENV*{message_ok}|oui) <:videos:label_ajouter_autre_video:></strong><br />]
 				<:videos:label_url:>
