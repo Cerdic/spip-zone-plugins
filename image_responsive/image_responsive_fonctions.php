@@ -249,13 +249,15 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				} else {
 					// Tailles déterminées, pas de @media
 					// dans le cas où l'on force précalcule
+					$i = 0;
 					foreach($tailles as $t) {
+						$i++;
 						if ($vertical && $t > $h) $t = $h;
 						else if (!$vertical && $t > $l) $t = $l;
 
 
-						$autorisees[$t][1] = $fichiers[$t][1];
-						$autorisees[$t][2] = $fichiers[$t][2];
+						$autorisees[$i][1] = $fichiers[$i][1];
+						$autorisees[$i][2] = $fichiers[$i][2];
 					}
 				}
 			}
