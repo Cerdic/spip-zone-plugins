@@ -523,7 +523,7 @@ function collectionjson_editer_objet($objet, $id_objet, $contenu, $requete, $rep
 			if (!$retours['message_erreur'] and $id_objet = $retours[$cle_objet]) {
 				// On va cherche la fonction qui génère la vue d'une ressource
 				if ($fonction_ressource = charger_fonction('get_ressource', 'http/collectionjson/', true)) {
-					// On ajoute à la requête, l'identitiant de la nouvelle ressource
+					// On ajoute à la requête, l'identifiant de la nouvelle ressource
 					$requete->attributes->set('ressource', $id_objet);
 					$reponse = $fonction_ressource($requete, $reponse);
 				}
