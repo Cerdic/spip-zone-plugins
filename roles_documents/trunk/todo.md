@@ -20,4 +20,3 @@ Rendre les rôles attribués plus visibles. Le rôle doit prendre la primeur sur
 
 - Chaque rôle donné à un document crée une nouvelle ligne dans la table `spip_documents_liens`, donc si on boucle sur cette table pour afficher les documents liés à un objet, le même document ressortira autant de fois qu'il a de rôles (cf. `documents_colonne.html` du plugins Médias).
 - Le critère `{vu}` est inopérant puisqu'un même document peut se retrouver à la fois vu et non vu après plusieurs manoeuvres. Pistes pour résoudre ça : une seul ligne par document lié, avec plusieurs rôles séparés par des virgules ? Ou alors par défaut faire en sorte que la boucle documents ne retourne qu'une seule fois un doc lié ayant plusieurs rôles ?
-- On ne peux pas détacher un document qui possède un rôle déclaré par un plugin désactivé.

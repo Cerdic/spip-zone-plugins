@@ -44,7 +44,10 @@ function roles_documents_document_desc_actions($flux) {
 				'objet_source' => "document",
 				'id_objet_source' => $id_document,
 				'objet' => $objet,
-				'id_objet' => $id_objet
+				'id_objet' => $id_objet,
+				'options' => array(
+					'ajaxReload' => '#documents',
+				),
 			)
 		);
 		$texte = $form;

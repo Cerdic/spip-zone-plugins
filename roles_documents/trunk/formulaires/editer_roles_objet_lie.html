@@ -1,4 +1,6 @@
 <div class="formulaire_spip formulaire_editer_roles_objet_lie">
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</div>]
 	<form action="#ENV{action}" method="post"><div class="spip roles roles-documents">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<B_roles>[<strong>(#TOTAL_BOUCLE|singulier_ou_pluriel{roles:role_titre,roles:roles_titre})</strong> : ]
