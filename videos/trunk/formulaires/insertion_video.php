@@ -78,7 +78,7 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		}
 		catch (Exception $e) {
 			spip_log("Echec ajout automatique titre+description : ".$e->getMessage(), 'videos' . _LOG_ERREUR);
-			return array('message_erreur'=>$e->getMessage());
+			return array('message_erreur' => $e->getMessage());
 		}
 
 	}
@@ -131,16 +131,16 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		// du coup si on a beaucoup de videos il y a collision sur les nom_fichier_local
 		// on ameliore ca en retirant ce segment pour calculer le nom du fichier local, car il est precede de l'ID de la video
 		$filename = $logoDocument;
-		if ($type=="dist_youtu") {
-			if (strncmp(basename($filename),"maxresdefault.",14)==0){
-				$filename = str_replace("/maxresdefault.",".",$filename);
+		if ($type == "dist_youtu") {
+			if (strncmp(basename($filename), "maxresdefault.", 14) == 0){
+				$filename = str_replace("/maxresdefault.", ".", $filename);
 			}
-			if (strncmp(basename($filename),"hqdefault.",10)==0){
-				$filename = str_replace("/hqdefault.",".",$filename);
+			if (strncmp(basename($filename), "hqdefault.", 10) == 0){
+				$filename = str_replace("/hqdefault.", ".", $filename);
 			}
 		}
 		$filename = fichier_copie_locale($filename);
-		$filename = copie_locale($logoDocument,'auto',$filename);
+		$filename = copie_locale($logoDocument, 'auto', $filename);
 		//var_dump($filename);
 
 		if ($fichier = preg_replace("#[a-z0-9/\._-]*IMG/#i", '', $filename)) {
@@ -182,7 +182,7 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 	}
 
 	$document = sql_insertq('spip_documents', $champs);
-	if ($document AND $id_objet) {
+	if ($document and $id_objet) {
 		$document_lien = sql_insertq(
 			'spip_documents_liens',
 			array(
@@ -199,7 +199,7 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		'type' => $type,
 		'titre' => $titre,
 		'id_document' => $document
-	));    
+	));
 
 	// recharger les documents après ajout d'un nouveau
 	$message_ok .= "\n<script type='text/javascript'>if (window.jQuery) jQuery('#documents').ajaxReload();</script>";

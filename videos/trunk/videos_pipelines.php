@@ -54,5 +54,3 @@ function videos_formulaire_fond($flux) {
 
 	return $flux;
 }
-
-?>
