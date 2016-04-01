@@ -19,16 +19,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function agessa_upgrade($nom_meta_base_version,$version_cible){
+function agessa_upgrade($nom_meta_base_version,$version_cible) {
 	$maj = array();
-  
 	$maj['create'] = array(
 		array('agessa_creer_repertoire'),
 	);
-    
 	include_spip('base/upgrade'); 	
-  maj_plugin($nom_meta_base_version, $version_cible, $maj);
-  
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
@@ -40,7 +37,6 @@ function agessa_upgrade($nom_meta_base_version,$version_cible){
  * @return void
 **/
 function agessa_vider_tables($nom_meta_base_version) {
-  
 }
 
 
@@ -50,6 +46,6 @@ function agessa_vider_tables($nom_meta_base_version) {
  * @return void
 **/
 function agessa_creer_repertoire() {
-  include_spip('inc/documents');  
-  $f = creer_repertoire_documents("pdf_agessa");   
+	include_spip('inc/documents');  
+	$f = creer_repertoire_documents("pdf_agessa");   
 }

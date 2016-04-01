@@ -10,4 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'agessa_nom' => 'Agessa',
 	'agessa_slogan' => 'Pré-remplit le borderau déclaratif Agessa et génére le pdf.',
 );
-

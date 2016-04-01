@@ -7,20 +7,19 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}'><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
-      <ul>
-
-      [(#SAISIE{input, montant_da,  
-				label=<:agessa:montant_da:>})]
-      
-
-      </ul>
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
-		<p class="boutons">
-          <input type='submit' class='btn btn-info'' value='<:bouton_enregistrer:>' />          
-    </p>
-	</div></form>
+		<form method='post' action='#ENV{action}'>
+			<div>
+				#ACTION_FORMULAIRE{#ENV{action}}
+				<ul>
+					[(#SAISIE{input, montant_da,  
+					label=<:agessa:montant_da:>})]
+				</ul>
+				[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+				<!--extra-->
+				<p class="boutons">
+					<input type='submit' class='btn btn-info'' value='<:bouton_enregistrer:>' />          
+				</p>
+			</div>
+		</form>
 	]
 </div>
