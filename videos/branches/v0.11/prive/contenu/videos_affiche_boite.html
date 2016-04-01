@@ -1,0 +1,17 @@
+<div class="box info">
+	<div class='inner cadre cadre-r'>
+		<img src="[(#CHEMIN{theme/img/videos-24.png})]" class='cadre-icone' alt='' />
+		<div onmouseover="jQuery(this).depliant('#plugin_videos');" class="titrem replie">
+			<a class="titremancre" onclick="return jQuery(this).depliant_clicancre('#plugin_videos');" href="#"></a>
+			<strong style='text-transform:uppercase'><:videos:label_ajouter_video:></strong>
+		</div><!-- .titrem -->
+		<div>
+			<div class='bd cadre_padding'>
+	      	<:videos:explication_ajouter_video:>
+				<div id='plugin_videos' class='bloc_depliable blocreplie'>
+					<div class='ajax' style='text-align:left'>#FORMULAIRE_INSERTION_VIDEO{#ENV{id_objet},#ENV{objet}}</div>
+				</div>	
+			</div><!-- .cadre_padding -->
+		</div>
+	</div><!-- .cadre .cadre-e -->
+</div>
