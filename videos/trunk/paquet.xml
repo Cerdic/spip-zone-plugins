@@ -26,7 +26,7 @@
 	<pipeline nom="formulaire_fond" inclure="videos_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="videos_pipelines.php" />
 
-	<necessite nom="medias" compatibilite="[2.7.27;[" />
+	<necessite nom="medias" compatibilite="[2.10.27;[" />
 
 	<menu nom="videos" titre="videos:titre_admin" parent="menu_squelette" icone="images/videos-16.png" action="configurer_videos" />
 </paquet>
