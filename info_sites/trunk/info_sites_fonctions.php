@@ -239,3 +239,10 @@ function info_sites_determine_source_lien_objet($a, $b, $c) {
 		'$objet_lien' => $objet_lien,
 	);
 }
+
+function info_sites_lister_content_html() {
+	$resultats = find_all_in_path('content/', "\.html$");
+	$resultats = array_keys($resultats);
+
+	return $resultats;
+}

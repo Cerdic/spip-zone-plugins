@@ -736,11 +736,13 @@ input[type="radio"], input[type="checkbox"] {
 	@connexion: darken(@main-color, 10%);
 	background-color: @connexion;
 	color: contrast(@connexion);
+	z-index: 100001;
+	position: relative;
 	ul {
 		margin-bottom: 0;
 		li {
 			font-size: 0.825em;
-			line-height: 1em;
+			line-height: calc(30px - 1em);
 			padding: 0.5em 1em;
 			a {
 				color: contrast(@connexion);
@@ -750,15 +752,18 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #content {
-	padding-top: 20px;
-	padding-bottom: 20px;
 	margin-bottom: 20px;
-	background-color: @white;
-	border: 1px solid @border;
 	.coordonnees {
 		h5 {
 			display: none;
 		}
+	}
+	.contenu {
+		padding-top: 20px;
+		padding-bottom: 20px;
+		background-color: @white;
+		border: 1px solid @border;
+		margin-bottom: 20px;
 	}
 }
 
