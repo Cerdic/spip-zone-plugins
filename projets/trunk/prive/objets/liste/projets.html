@@ -1,10 +1,11 @@
 [(#SET{defaut_tri,#ARRAY{
 	date_publication,-1,
-	nom,1, 
+	nom,1,
 	id_projet,1,
 	points,-1
 }})]
 <B_liste_projets>
+<div class="nettoyeur"></div>
 #ANCRE_PAGINATION
 <div class="liste-objets projets">
 <table class='spip liste'>
@@ -12,22 +13,22 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
-            <th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
-            <th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
-            <th class='id' scope='col'>[(#TRI{id_projet,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_projet,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_projets(PROJETS) {id_projet_parent?} {id_projets_cadre?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,date_publication},#GET{defaut_tri}} {!par date_publication} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projet-16.png}|balise_img)]</td>
-			<td class='statut'>[(#STATUT|puce_statut{projet,#ID_PROJET})]</td> 
+			<td class='statut'>[(#STATUT|puce_statut{projet,#ID_PROJET})]</td>
 			<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
-            <td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
-            <td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt)]</td>
-            <td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
+			<td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+			<td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
 				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET})]">#ID_PROJET</a>,
 				#ID_PROJET
 			})]</td>
@@ -38,5 +39,6 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_projets>[
+<div class="nettoyeur"></div>
 <div class="liste-objets projets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_projets>
