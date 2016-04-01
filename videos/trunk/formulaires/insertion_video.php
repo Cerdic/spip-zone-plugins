@@ -171,7 +171,8 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 			}
 
 			// Ajouter
-			$id_vignette = sql_insertq('spip_documents', $champsVignette);
+			include_spip('action/editer_document');
+			$id_vignette = document_inserer(null, $champsVignette);
 			if ($id_vignette) {
 				$champs['id_vignette'] = $id_vignette;
 			}
@@ -181,16 +182,14 @@ function formulaires_insertion_video_traiter_dist($id_objet, $objet) {
 		}
 	}
 
-	$document = sql_insertq('spip_documents', $champs);
+	include_spip('action/editer_document');
+	$document = document_inserer(null, $champs);
 	if ($document and $id_objet) {
-		$document_lien = sql_insertq(
-			'spip_documents_liens',
-			array(
-				'id_document' => $document,
-				'id_objet' => $id_objet,
-				'objet' => $objet,
-				'vu' => 'non'
-			)
+		include_spip('action/editer_liens');
+		objet_associer(
+			array('document' => $document),
+			array($objet => $id_objet),
+			array('vu' => 'non')
 		);
 	}
 
