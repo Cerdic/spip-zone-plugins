@@ -1,15 +1,14 @@
 <BOUCLE_extra (PROJETS_CADRES) {id_projets_cadre} {tout}>
 	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier,projetscadre,#ID_PROJETS_CADRE}|oui}>
-		<div class="boutons">
-			<ul class="list-group menu" role="menu">
-				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
+		<div class="block boutons">
+			<div class="list-group menu" role="menu">
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
 					<:projets_cadre:icone_modifier_projets_cadre:>
-				</a></li>
-				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,auteurs}|parametre_url{objet,projets_cadre}|parametre_url{id_objet,#ID_PROJETS_CADRE})]" class="bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_auteur|attribut_html:>"><i class="fa fa-link"></i>
+				</a>
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,auteurs}|parametre_url{objet,projets_cadre}|parametre_url{id_objet,#ID_PROJETS_CADRE})]" class="list-group-item bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_auteur|attribut_html:>"><i class="fa fa-link"></i>
 					<:info_sites:editer_liens_auteur:>
-				</a></li>
-			</ul>
+				</a>
+			</div>
 		</div>
 	</BOUCLE_autoriser_modifier>
-
 </BOUCLE_extra>

@@ -1,9 +1,9 @@
-<div class="boutons">
-	<ul class="list-group menu" role="menu">
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
 	[(#AUTORISER{infositescreer,projetssite})
-	    <li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a></li>
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:info_sites:icone_creer_fiche_siste:></a></li>
-	]</ul>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:info_sites:icone_creer_fiche_siste:></a>
+	]</div>
 </div>
 
 <div class="clearfix"></div>

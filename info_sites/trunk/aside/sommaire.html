@@ -1,28 +1,28 @@
-<div class="boutons">
-	<ul class="list-group menu" role="menu">
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
 		[(#AUTORISER{infositescreer,organisation})
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:contacts:organisation_creer:>
-		</a></li>
+		</a>
 		][(#AUTORISER{infositescreer,contact})
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:contacts:contact_creer:>
-		</a></li>
+		</a>
 		][(#AUTORISER{infositescreer,projet})
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projet_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projet_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:projet:icone_creer_projet:>
-		</a></li>
+		</a>
 		][(#AUTORISER{infositescreer,projetscadre})
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:projets_cadre:icone_creer_projets_cadre:>
-		</a></li>
+		</a>
 		][(#AUTORISER{infositescreer,projetssite})
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:projets_site:icone_creer_projets_site:>
-		</a></li>
-		<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
+		</a>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 			<:info_sites:icone_creer_fiche_siste:>
-		</a></li>
+		</a>
 		]
-	</ul>
+	</div>
 </div>

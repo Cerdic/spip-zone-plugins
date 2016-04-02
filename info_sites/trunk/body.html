@@ -1,43 +1,42 @@
 <body>
-	<INCLURE{fond=inclure/connexion,env} />
-	<div class="page">
-		<div class="header" id="header">
-			<div class="container-fluid">
-			<INCLURE{fond=header/#ENV{type-page},env} />
-			</div>
-		</div>
-
-		<INCLURE{fond=navigation/dist, env} />
-
+<INCLURE{fond=inclure/connexion,env} />
+<div class="page">
+	<div class="header" id="header">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="content col-md-12" id="content">
+			<INCLURE{fond=header/#ENV{type-page},env} />
+		</div>
+	</div>
 
-					<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+	<INCLURE{fond=navigation/dist, env} />
 
-					<div class="row">
-						<div class="contenu col-md-9">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="content col-md-12" id="content">
+
+				<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+
+				<div class="row">
+					<div class="col-md-9">
+						<div class="contenu">
 							<INCLURE{fond=content/#ENV{type-page},env} />
-
-							<div id="extra">
-								<INCLURE{fond=extra/#ENV{type-page},env} />
-							</div>
 						</div>
-
-						<div class="col-md-3" id="aside">
-							<INCLURE{fond=aside/#ENV{type-page},env} />
-						</div>
+						<INCLURE{fond=extra/#ENV{type-page},env} />
 					</div>
 
+					<div class="col-md-3" id="aside">
+						<INCLURE{fond=aside/#ENV{type-page},env} />
+					</div>
 				</div>
+
 			</div>
-
 		</div>
-		<div class="clearfix"></div>
-	</div>
 
-	<div id="footer" class="footer">
-		<INCLURE{fond=footer/#ENV{type-page},env} />
 	</div>
+	<div class="clearfix"></div>
+</div>
+
+<div id="footer" class="footer">
+	<INCLURE{fond=footer/#ENV{type-page},env} />
+</div>
 
 </body>

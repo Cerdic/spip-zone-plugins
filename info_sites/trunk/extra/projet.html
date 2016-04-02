@@ -3,6 +3,7 @@
 	(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
 	Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
 ]<BOUCLE_autorisation (CONDITION) {si #AUTORISER{infositesvoir,projet,#ID_PROJET}|oui}>
+<div id="extra">
 	<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
 	<div class="clearfix"></div>
 
@@ -22,5 +23,6 @@
 		<div class="clearfix"></div>
 	</div>
 	]]
+</div>
 </BOUCLE_autorisation>
 </BOUCLE_extra>

@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_liens_organisation' => 'Joindre une organisation',
 	'editer_liens_projet' => 'Joindre un projet',
 	'editer_liens_projets_site' => 'Joindre un site',
+	'editer_liens_projets_site_title' => 'Associer une fiche existante de site.',
 
 	// I
 	'icone_creer_fiche_siste' => 'Créer une fiche de site',

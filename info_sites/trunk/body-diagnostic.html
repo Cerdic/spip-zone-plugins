@@ -15,12 +15,14 @@
 
 				<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
-				<div class="contenu">
-					<INCLURE{fond=content/#ENV{type-page},env} />
-
-					<div id="extra">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="contenu">
+							<INCLURE{fond=content/#ENV{type-page},env} />
+						</div>
 						<INCLURE{fond=extra/#ENV{type-page},env} />
 					</div>
+
 				</div>
 
 			</div>

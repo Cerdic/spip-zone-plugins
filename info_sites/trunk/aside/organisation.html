@@ -1,14 +1,14 @@
 <BOUCLE_extra (ORGANISATIONS) {id_organisation} {tout}>
 	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier,organisation,#ID_ORGANISATION}|oui}>
-		<div class="boutons">
-			<ul class="list-group menu" role="menu">
-				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
+		<div class="block boutons">
+			<div class="list-group menu" role="menu">
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-itembouton modifier" rel="nofollow"><i class="fa fa-pencil-square-o"></i>
 					<:info_sites:icone_modifier_organisation:>
-				</a></li>
-				<li class="list-group-item" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION})]" class="bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_projet|attribut_html:>"><i class="fa fa-link"></i>
+				</a>
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION})]" class="list-group-item bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_projet|attribut_html:>"><i class="fa fa-link"></i>
 					<:info_sites:editer_liens_projet:>
-				</a></li>
-			</ul>
+				</a>
+			</div>
 		</div>
 	</BOUCLE_autoriser_modifier>
 
