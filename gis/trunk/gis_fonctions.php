@@ -427,17 +427,17 @@ function gis_icon_properties($img=''){
 		$icon = find_in_path('images/marker_defaut.png');
 	
 	if ($icon) {
-		$props .= ",\n\"icon\": ". json_encode(url_absolue($icon)).",";
+		$props .= ",\n\t\t\t\"icon\": ". json_encode(url_absolue($icon)).",";
 		list($h,$w) = taille_image($icon);
-		$props .= "\n\"icon_size\": ". json_encode(array($w,$h)).",";
-		$props .= "\n\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
-		$props .= "\n\"popup_anchor\": ". json_encode(array(1,-round($h/1.2,2)));
+		$props .= "\n\t\t\t\"icon_size\": ". json_encode(array($w,$h)).",";
+		$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
+		$props .= "\n\t\t\t\"popup_anchor\": ". json_encode(array(1,-round($h/1.2,2)));
 	}
 	
 	if ($shadow = find_in_path('images/marker_defaut_shadow.png')) {
-		$props .= ",\n\"shadow\": ". json_encode(url_absolue($shadow));
+		$props .= ",\n\t\t\t\"shadow\": ". json_encode(url_absolue($shadow));
 		list($h,$w) = taille_image($shadow);
-		$props .= ",\n\"shadow_size\": ". json_encode(array($w,$h));
+		$props .= ",\n\t\t\t\"shadow_size\": ". json_encode(array($w,$h));
 	}
 	
 	return $props;
