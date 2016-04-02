@@ -9,4 +9,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'feuillederoute_nom' => 'Feuille de Route',
 	'feuillederoute_slogan' => 'Un bouton d\'admin pour partager des informations hors publication.'
 );
-

@@ -21,7 +21,7 @@ function feuillederoute_autoriser(){}
  * @param boolean $utiliser_defaut [optional]
  * @return 
  */ 
-function definir_autorisations_feuillederoute($action,$utiliser_defaut=true){
+function definir_autorisations_feuillederoute($action,$utiliser_defaut=true) {
 	$aut = null;
 
 	switch(strtolower($action)){
@@ -61,7 +61,7 @@ function definir_autorisations_feuillederoute($action,$utiliser_defaut=true){
  * @param array $opt : les options
  * @return boolean true/false : true si autorisé, false sinon
  */ 
-function autoriser_feuillederoute_modifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_feuillederoute_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$autorise = false;
 	$utiliser_defaut = true;
 
@@ -111,7 +111,7 @@ function autoriser_feuillederoute_modifier_dist($faire, $type, $id, $qui, $opt){
  * @param array $opt : les options
  * @return boolean true/false : true si autorisé, false sinon
  */
-function autoriser_feuillederoute_lire_dist($faire, $type, $id, $qui, $opt){
+function autoriser_feuillederoute_lire_dist($faire, $type, $id, $qui, $opt) {
 	$autorise = false;
 	$utiliser_defaut = true;
 	
