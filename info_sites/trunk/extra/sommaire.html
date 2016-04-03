@@ -1,5 +1,7 @@
-<!-- extra -->
-<div id="extra">
+<!-- extra -->[(#SET{compteur,0})]
+<BOUCLE_compteur_forum (FORUMS) {plat} {par date} {inverse}></BOUCLE_compteur_forum>[(#SET{compteur,#GET{compteur}|plus{#TOTAL_BOUCLE}})]</B_compteur_forum>
+<BOUCLE_compteur_syndic (SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}></BOUCLE_compteur_syndic>[(#SET{compteur,#GET{compteur}|plus{#TOTAL_BOUCLE}})]</B_compteur_syndic>
+[(#GET{compteur}|>{0}|oui)<div id="extra">]
 	[(#REM) Liens des forums ]
 	<B_forums_liens>
 		<div class="liste forums">
@@ -23,4 +25,4 @@
 			</ul>
 		</div>
 	</B_syndic>
-</div>
+[(#GET{compteur}|>{0}|oui)</div>]
