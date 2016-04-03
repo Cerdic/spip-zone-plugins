@@ -30,5 +30,5 @@
 
 	<onglet nom="fulltext" titre="Fulltext" parent="configuration" icone="images/fulltext-24.png" />
 
-	<utilise nom="medias" compatibilite="[;]" />
+	<utilise nom="medias" compatibilite="[2.7.27;]" />
 </paquet>
