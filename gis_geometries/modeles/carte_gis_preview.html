@@ -28,8 +28,8 @@
 					"id":"#ID_GIS",
 					"properties": {
 						"title":[(#TITRE|supprimer_numero|json_encode)],
-						"description":[(#DESCRIPTIF|json_encode)][
-						(#LOGO_GIS|gis_icon_properties)]
+						"description":[(#DESCRIPTIF|json_encode)][(#TYPE|=={Point}|oui)[
+						(#LOGO_GIS|gis_icon_properties)]]
 					}
 				}
 		</BOUCLE_points>
@@ -46,8 +46,8 @@
 					"id":"#ID_GIS",
 					"properties": {
 						"title":[(#TITRE|supprimer_numero|json_encode)],
-						"description":[(#DESCRIPTIF|json_encode)][
-						(#LOGO_GIS|gis_icon_properties)]
+						"description":[(#DESCRIPTIF|json_encode)][(#TYPE|=={Point}|oui)[
+						(#LOGO_GIS|gis_icon_properties)]]
 					}
 				}]
 		};
