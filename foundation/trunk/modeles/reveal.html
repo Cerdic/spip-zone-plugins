@@ -13,24 +13,24 @@
 ]
 
 [(#CONFIG{foundation/javascript}|non)
-  <:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
+	<:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
 ]
 
 [(#ENV{href}|oui)
-  [(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
+	[(#SET{href_zajax, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
 ]
 
 [<a [href="(#ENV{href})"]
-   [class="(#ENV{class})"]
-   [data-reveal-id="reveal-(#ENV{data-id})"]
-   [(#ENV{ajax, oui}|oui)data-reveal-ajax="#GET{href_zajax}"]>
-  (#ENV*{titre})
+	[class="(#ENV{class})"]
+	[data-reveal-id="reveal-(#ENV{data-id})"]
+	[(#ENV{ajax, oui}|oui)data-reveal-ajax="#GET{href_zajax}"]>
+	(#ENV*{titre})
 </a>]
 
 <div id="reveal-#ENV{data-id}" class="reveal-modal" data-reveal>
-  [(#ENV{ajax}|non)
-    [(#ENV**{content})
-      <a class="close-reveal-modal">&#215;</a>
-    ]
-  ]
+	[(#ENV{ajax}|non)
+		[(#ENV**{content})
+			<a class="close-reveal-modal">&#215;</a>
+		]
+	]
 </div>

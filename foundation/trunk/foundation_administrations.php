@@ -17,32 +17,32 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 */
 function foundation_upgrade($nom_meta_base_version, $version_cible) {
 
-    // Création du tableau des mises à jour.
-    $maj = array();
+	// Création du tableau des mises à jour.
+	$maj = array();
 
-     $config_default = array(
-        // Activer par défaut la version 5 de foundation. Désactiver le reste.
-        'variante' => 5,
-        'javascript' => '',
-        'fichier_htc' => '',
-        'foundation-icons' => ''
-    );
+	$config_default = array(
+		// Activer par défaut la version 5 de foundation. Désactiver le reste.
+		'variante' => 5,
+		'javascript' => '',
+		'fichier_htc' => '',
+		'foundation-icons' => ''
+	);
 
-    // Tableau de la configuration par défaut
-    $maj['create'] = array(
-            array('ecrire_meta', 'foundation', serialize($config_default))
-        );
+	// Tableau de la configuration par défaut
+	$maj['create'] = array(
+		array('ecrire_meta', 'foundation', serialize($config_default))
+	);
 
-    // Maj du plugin.
-    include_spip('base/upgrade');
-    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	// Maj du plugin.
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /*
 *   Désintaller foundation.
 */
 function foundation_vider_tables($nom_meta_base_version) {
-    // Supprimer les méta, ou oublie pas celle de la base.
-    effacer_meta('foundation_base_version');
-    effacer_meta('foundation');
+	// Supprimer les méta, ou oublie pas celle de la base.
+	effacer_meta('foundation_base_version');
+	effacer_meta('foundation');
 }

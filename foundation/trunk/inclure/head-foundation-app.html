@@ -7,17 +7,17 @@
 [(#REM) Foundation JS ]
 [(#CONFIG{foundation/javascript}|oui)
 
-[<script src="(#CHEMIN{bower_components/foundation/js/foundation.min.js})" type="text/javascript"></script>]
+	[<script src="(#CHEMIN{bower_components/foundation/js/foundation.min.js})" type="text/javascript"></script>]
 
-[(#REM) Rustine pour charger app.js automatiquement ]
-[<script type="text/javascript">
-  $(function () {
-    $.ajax({
-      type: "GET",
-      url: "(#CHEMIN{js/app.js}|texte_script)",
-      dataType: "script",
-      cache: true
-    });
-  });
-</script>]
+	[(#REM) Rustine pour charger app.js automatiquement ]
+	[<script type="text/javascript">
+		$(function () {
+			$.ajax({
+				type: "GET",
+				url: "(#CHEMIN{js/app.js}|texte_script)",
+				dataType: "script",
+				cache: true
+			});
+		});
+	</script>]
 ]

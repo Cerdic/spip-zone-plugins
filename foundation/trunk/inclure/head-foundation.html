@@ -17,23 +17,22 @@
     On ajoute un fix pour rendre cela compatible.
 ]
 <style type="text/css">
-[(#CONFIG{foundation/fichier_htc}|oui)
-    .lt-ie8 *, .lt-ie8 *:before, .lt-ie8 *:after {
-        [behavior: url((#CHEMIN{boxsizing.htc}));]
-    }
-]
+	[(#CONFIG{foundation/fichier_htc}|oui)
+		.lt-ie8 *, .lt-ie8 *:before, .lt-ie8 *:after {
+			[behavior: url((#CHEMIN{boxsizing.htc}));]
+		}
+	]
 
-[(#REM)
-    Il y a un bug sous Firefox (et opéra?) avec les line-height et les input.
-    Il faudra probablement le faire pour chaque type de bouton si on veux avoir un affichage similaire entre les a.bouton et les input.button.
+	[(#REM)
+		Il y a un bug sous Firefox (et opéra?) avec les line-height et les input.
+		Il faudra probablement le faire pour chaque type de bouton si on veux avoir un affichage similaire entre les a.bouton et les input.button.
 
-    On utilise @-moz-document url-prefix() pour ne cibler que firefox
-]
-@-moz-document url-prefix() {
-    input.button.small {
-        padding-top: 0.38em !important;
-        padding-bottom: 0.3em !important;
-    }
-
-}
+		On utilise @-moz-document url-prefix() pour ne cibler que firefox
+	]
+	@-moz-document url-prefix() {
+		input.button.small {
+			padding-top: 0.38em !important;
+			padding-bottom: 0.3em !important;
+		}
+	}
 </style>
