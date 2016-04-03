@@ -13,7 +13,7 @@
 	<fonctions>frimousses_fonctions.php</fonctions>
 	<pipeline><nom>pre_typo</nom></pipeline>
 	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
-	<utilise id="porte_plume" />
+	<utilise id="porte_plume" version='[1.7.3;]' />
 	<pipeline>
 		<nom>porte_plume_barre_pre_charger</nom>
 		<inclure>frimousses_pipelines.php</inclure>
