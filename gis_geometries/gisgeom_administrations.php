@@ -15,7 +15,7 @@ function gisgeom_upgrade($nom_meta_base_version,$version_cible){
 
 	$maj['create'] = array(
 		// ajout des champs geo et type à la table gis
-		array('sql_alter', "TABLE spip_gis ADD geo GEOMETRY DEFAULT '' NOT NULL AFTER lon"),
+		array('sql_alter', "TABLE spip_gis ADD geo GEOMETRY NOT NULL AFTER lon"),
 		array('sql_alter', "TABLE spip_gis ADD type VARCHAR (25) DEFAULT '' NOT NULL AFTER zoom"),
 		// renseigner spip_gis.geo avec spip_gis.lat et spip_gis.lon pour les objets existants
 		array('sql_update', 'spip_gis', array("geo"=>"GeomFromText(CONCAT('POINT(',lon,' ',lat,')'))")),
