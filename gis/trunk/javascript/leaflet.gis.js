@@ -179,7 +179,9 @@ L.Map.Gis = L.Map.extend({
 					style: this.options.pathStyles,
 					onEachFeature: function (feature, layer) {
 						// Déclarer l'icone du point
-						map.setGeoJsonFeatureIcon(feature, layer);
+						if (feature.geometry.type =="Point") {
+							map.setGeoJsonFeatureIcon(feature, layer);
+						}
 						// Déclarer le contenu de la popup s'il y en a
 						map.setGeoJsonFeaturePopup(feature, layer);
 					}
