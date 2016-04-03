@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Utiliser la version SASS
 if (!defined('_FOUNDATION_SASS')) {
-    define('_FOUNDATION_SASS', false);
+	define('_FOUNDATION_SASS', false);
 }
 
 // Animation par défaut pour les reveal modal

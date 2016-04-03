@@ -61,7 +61,7 @@ function balise_COLONNES_dist($p) {
 /**
  * Generer un bouton d'action qui accepte les class de foundation
  */
-function balise_BOUTON_ACTION($p){
+function balise_BOUTON_ACTION($p) {
 
 	$args = array();
 	for ($k=1; $k<=6; $k++) {
@@ -101,8 +101,8 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 	$title = $title ? " title='$title'" : '';
 
 	if (test_espace_prive()) {
-			return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
-			 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
+		return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+		 ."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 	} else {
 
 		// Détection de la class ajax
@@ -121,7 +121,7 @@ function filtre_bouton_action($libelle, $url, $class = '', $confirm = '', $title
 		}
 
 		return "<form class='bouton_action_post $ajax' method='post' action='$url'><div>".form_hidden($url)
-			     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
+		."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 	}
 }
 

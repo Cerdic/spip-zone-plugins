@@ -1,12 +1,15 @@
 html, body {
-  height: 100%;
-  /* Fix un bug des reveal modale dans SPIP */ }
+	height: 100%;
+	/* Fix un bug des reveal modale dans SPIP */
+}
 
 input.hasDatepicker {
-  display: inline; }
+	display: inline;
+}
 
 .formulaire_spip ul {
-  list-style-type: none;
-  margin-left: 0; }
+	list-style-type: none;
+	margin-left: 0;
+}
 
 /*# sourceMappingURL=fix_spip.css.map */

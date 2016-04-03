@@ -10,7 +10,7 @@
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 /*
@@ -18,14 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function foundation_6_insert_head($flux) {
 
-    // Si on est en mode app, on revoie le bon squelette
-    if (_FOUNDATION_SASS) {
-        $flux .= recuperer_fond('inclure/head-foundation-app');
-    } else {
-        $flux .= recuperer_fond('inclure/head-foundation');
-    }
-
-    return $flux;
+	// Si on est en mode app, on revoie le bon squelette
+	if (_FOUNDATION_SASS) {
+		$flux .= recuperer_fond('inclure/head-foundation-app');
+		} else {
+			$flux .= recuperer_fond('inclure/head-foundation');
+		}
+	return $flux;
 }
 
 /*
@@ -33,12 +32,11 @@ function foundation_6_insert_head($flux) {
  */
 function foundation_6_insert_head_css($flux) {
 
-    // Si on est en mode app, on revoie le bon squelette
-    if (_FOUNDATION_SASS) {
-        $flux .= recuperer_fond('inclure/css/head-foundation-app');
-    } else {
-        $flux .= recuperer_fond('inclure/css/head-foundation');
-    }
-
-    return $flux;
+	// Si on est en mode app, on revoie le bon squelette
+	if (_FOUNDATION_SASS) {
+		$flux .= recuperer_fond('inclure/css/head-foundation-app');
+	} else {
+		$flux .= recuperer_fond('inclure/css/head-foundation');
+	}
+	return $flux;
 }

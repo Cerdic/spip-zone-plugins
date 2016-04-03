@@ -13,18 +13,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return string          iframe encadrée
  */
 function responsive($matches) {
-  // Dans le cas de vimeo, il faut ajouter une classe
-  if (strpos($matches[0], 'vimeo')) {
-	  $vimeo = ' vimeo';
-  } else {
-	  $vimeo = '';
-  }
+	// Dans le cas de vimeo, il faut ajouter une classe
+	if (strpos($matches[0], 'vimeo')) {
+		$vimeo = ' vimeo';
+	} else {
+		$vimeo = '';
+	}
 
-  // On inclu les filtres, au cas ou
-  include_spip('inc/filtres');
+	// On inclu les filtres, au cas ou
+	include_spip('inc/filtres');
 
-  // On revoie la bonne structure html d'iframe.
-  return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');
+	// On revoie la bonne structure html d'iframe.
+	return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');
 }
 
 /**
@@ -36,17 +36,17 @@ function responsive($matches) {
  */
 function class_grid_foundation($nombre_colonnes, $type) {
 
-    // Si la première variable est un tableau, on va le convertir en class
-    if (is_array($nombre_colonnes)) {
-        $class= '';
-        foreach ($nombre_colonnes as $key => $value) {
-            // Utiliser un tableau large => 4
-            if (is_numeric($value)) {
-                $class .= $key.'-'.$value.' ';
-            }
-        }
-        return $class;
-    } else {
-        return $type.'-'.$nombre_colonnes.' ';
-    }
+	// Si la première variable est un tableau, on va le convertir en class
+	if (is_array($nombre_colonnes)) {
+		$class= '';
+		foreach ($nombre_colonnes as $key => $value) {
+			// Utiliser un tableau large => 4
+			if (is_numeric($value)) {
+				$class .= $key.'-'.$value.' ';
+			}
+		}
+		return $class;
+	} else {
+		return $type.'-'.$nombre_colonnes.' ';
+	}
 }
