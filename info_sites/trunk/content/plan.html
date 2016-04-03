@@ -24,7 +24,7 @@
 			<ul>
 			<li class="h4"><:projets_site:titre_projets_sites:></li>
 			<BOUCLE_sites (PROJETS_SITES) {id_projet} {par titre} {tout}>
-			<li><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></li>
+			<li><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE [((#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T))]</a></li>
 			</BOUCLE_sites>
 			</ul>
 			</B_sites>
