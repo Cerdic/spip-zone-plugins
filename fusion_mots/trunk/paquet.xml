@@ -1,10 +1,10 @@
-<paquet 
-	prefix="fusionmots" 
-	categorie="navigation" 
-	version="1.0.1" 
-	etat="test" 
-	logo="images/fusion_mots_64.png" 
-	documentation="http://contrib.spip.net/Fusion-de-mots-clef" 
+<paquet
+	prefix="fusionmots"
+	categorie="navigation"
+	version="1.0.2" 
+	etat="test"
+	logo="images/fusion_mots_64.png"
+	documentation="http://contrib.spip.net/Fusion-de-mots-clef"
 	compatibilite="[3.0.0;3.1.*]"
 >
 
