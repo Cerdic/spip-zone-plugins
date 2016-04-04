@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
 	type_site,1,
-	date_creation,-1, 
+	date_creation,-1,
 	id_projets_site,1
 }})
 ]
@@ -12,6 +12,7 @@
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutprol,#EVAL{_request("debutprol");}}}
 #SET{afficher_lettres,#TRI|=={'multi type_site'}|oui}
+<div class="nettoyeur"></div>
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies projets_sites">
 <table class='spip liste'>
@@ -58,6 +59,7 @@ a mis a jour la valeur avec la page reelle]
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[projets_site-*-#OBJET-#ID_OBJET\]" value="X"><:projets_site:retirer_tous_liens_projets_sites:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_projets_sites>
+<div class="nettoyeur"></div>
 <div class="liste-objets liste-objets-lies PROJETS_SITES caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:projets_site:info_aucun_projets_site:>})]</strong>
 </div>
