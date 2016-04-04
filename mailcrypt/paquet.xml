@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailcrypt"
 	categorie="performance"
-	version="2.4.2"
+	version="2.4.3"
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="images/mailcrypt-256.png"
