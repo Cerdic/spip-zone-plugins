@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function coordonnees_autoriser(){}
+function coordonnees_autoriser() {}
 
 
 // --------------
@@ -23,7 +23,7 @@ function coordonnees_autoriser(){}
 
 // creer
 function autoriser_adresse_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -40,12 +40,12 @@ function autoriser_adresse_modifier_dist($faire, $type, $id, $qui, $opt) {
 // uniquement les orphelins
 function autoriser_adresse_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('action/editer_liens');
-	return !count(objet_trouver_liens(array('adresse'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
+	return !count(objet_trouver_liens(array('adresse' => $id), '*')) and ($qui['statut'] == '0minirezo' or $qui['restreint']);
 }
 
 // associer (lier / delier)
 function autoriser_associeradresses_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
+	return $qui['statut'] == '0minirezo' or $qui['restreint'];
 }
 
 
@@ -54,7 +54,7 @@ function autoriser_associeradresses_dist($faire, $type, $id, $qui, $opt) {
 
 // creer
 function autoriser_numero_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -71,12 +71,12 @@ function autoriser_numero_modifier_dist($faire, $type, $id, $qui, $opt) {
 // uniquement les orphelins
 function autoriser_numero_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('action/editer_liens');
-	return !count(objet_trouver_liens(array('numero'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
+	return !count(objet_trouver_liens(array('numero' => $id), '*')) and ($qui['statut'] == '0minirezo' or $qui['restreint']);
 }
 
 // associer (lier / delier)
 function autoriser_associernumeros_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
+	return $qui['statut'] == '0minirezo' or $qui['restreint'];
 }
 
 
@@ -85,7 +85,7 @@ function autoriser_associernumeros_dist($faire, $type, $id, $qui, $opt) {
 
 // creer
 function autoriser_email_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -102,15 +102,11 @@ function autoriser_email_modifier_dist($faire, $type, $id, $qui, $opt) {
 // uniquement les orphelins
 function autoriser_email_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('action/editer_liens');
-	return !count(objet_trouver_liens(array('emails'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
+	return !count(objet_trouver_liens(array('emails' => $id), '*')) and ($qui['statut'] == '0minirezo' or $qui['restreint']);
 }
 
 
 // associer (lier / delier)
 function autoriser_associeremails_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
+	return $qui['statut'] == '0minirezo' or $qui['restreint'];
 }
-
-
-
-?>

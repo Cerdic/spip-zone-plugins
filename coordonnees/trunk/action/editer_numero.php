@@ -6,7 +6,7 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_numero_dist($arg=null) {
+function action_editer_numero_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -47,7 +47,7 @@ function insert_numero($c = '') {
 			'type' => _request('type'));
 
 	// ajouter la liaison si presente
-	if (!empty($c['objet']) AND !empty($c['id_objet'])) {
+	if (!empty($c['objet']) and !empty($c['id_objet'])) {
 		if (empty($c['type'])) $c['type'] = '';
 		$c['id_numero'] = $id_numero;
 		sql_insertq("spip_numeros_liens", $c);
@@ -58,7 +58,7 @@ function insert_numero($c = '') {
 
 
 // Enregistrer certaines modifications d'un numero
-function revisions_numeros($id_numero, $c=false) {
+function revisions_numeros($id_numero, $c = false) {
 
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
@@ -78,8 +78,6 @@ function revisions_numeros($id_numero, $c=false) {
 		),
 		$c);
 	sql_update("spip_numeros_liens", array(
-			'type'=>sql_quote(_request('type'))
-		), "id_numero=".intval($id_numero)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')) );
+			'type' => sql_quote(_request('type'))
+		), "id_numero=".intval($id_numero)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));
 }
-
-?>

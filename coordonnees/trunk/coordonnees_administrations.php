@@ -30,7 +30,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_numeros_liens')),
 		array('maj_tables', array('spip_emails')),
 		array('maj_tables', array('spip_emails_liens')),
-		array('ecrire_meta', 'coordonnees', serialize(array('objets'=>array('spip_auteurs'))))
+		array('ecrire_meta', 'coordonnees', serialize(array('objets' => array('spip_auteurs'))))
 	);
 	$maj['1.1'] = array(
 		array('sql_update', array(array("voie" => "CONCAT(numero, ' ', voie)"),array("numero IS NOT NULL", "numero <> ''"))),
@@ -66,7 +66,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 			);
 	// mettre les auteurs par defaut comme objet «coordonnable»
 	$maj['1.5'] = array(
-		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('spip_auteurs')))),
+		array('ecrire_meta','coordonnees', serialize(array('objets' => array('spip_auteurs')))),
 	);
 
 	// ajout du champs region a la table adresses
@@ -77,13 +77,13 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	// migration de certaines valeurs pour pouvoir faire fonctionner les selecteurs pendant l'edition
 	//!\ comme on n'est pas certain de tous les migrer il y a donc rupture de compatibilite ? :-S
 	$maj['1.7'] = array(
-		array('sql_updateq', "spip_adresses_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'"),
-		array('sql_updateq', "spip_numeros_liens", array('type'=>'work'), "LOWER(type) LIKE 'pro%'"),
-		array('sql_updateq', "spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'"),
-		array('sql_updateq', "spip_adresses_liens", array('type'=>'home'), "LOWER(type) LIKE 'dom%'"),
-		array('sql_updateq', "spip_numeros_liens", array('type'=>'home'), "LOWER(type) LIKE 'perso%'"),
-		array('sql_updateq', "spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'cel%'"),
-		array('sql_updateq', "spip_numeros_liens", array('type'=>'cell'), "LOWER(type) LIKE 'mob%'"),
+		array('sql_updateq', "spip_adresses_liens", array('type' => 'work'), "LOWER(type) LIKE 'pro%'"),
+		array('sql_updateq', "spip_numeros_liens", array('type' => 'work'), "LOWER(type) LIKE 'pro%'"),
+		array('sql_updateq', "spip_adresses_liens", array('type' => 'home'), "LOWER(type) LIKE 'perso%'"),
+		array('sql_updateq', "spip_adresses_liens", array('type' => 'home'), "LOWER(type) LIKE 'dom%'"),
+		array('sql_updateq', "spip_numeros_liens", array('type' => 'home'), "LOWER(type) LIKE 'perso%'"),
+		array('sql_updateq', "spip_numeros_liens", array('type' => 'cell'), "LOWER(type) LIKE 'cel%'"),
+		array('sql_updateq', "spip_numeros_liens", array('type' => 'cell'), "LOWER(type) LIKE 'mob%'"),
 	);
 
 	// Definition des tables principales par declarer_tables_objets_sql au lieu de declarer_tables_principales
@@ -96,12 +96,12 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	// Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
-	$maj['1.8.2']= array(
+	$maj['1.8.2'] = array(
 		array('coordonnees_upgrade_1_8_2'),
 	);
 
 	// index (id_objet et objet) sur les tables de liaisons
-	$maj['1.8.3']= array(
+	$maj['1.8.3'] = array(
 		array('sql_alter', 'TABLE spip_adresses_liens ADD INDEX (id_objet)'),
 		array('sql_alter', 'TABLE spip_adresses_liens ADD INDEX (objet)'),
 		array('sql_alter', 'TABLE spip_numeros_liens ADD INDEX (id_objet)'),
@@ -162,11 +162,9 @@ function coordonnees_upgrade_1_3() {
  */
 function coordonnees_upgrade_1_8_2() {
 	include_spip('inc/config');
-	if ( $objets = lire_config('coordonnees/objets', null, true) AND is_array($objets) AND count($objets) > 0 ) {
+	if ($objets = lire_config('coordonnees/objets', null, true) and is_array($objets) and count($objets) > 0) {
 		foreach ($objets as $objet) $objets_sql[] = table_objet_sql($objet);
 		effacer_config('coordonnees/objets');
 		ecrire_config('coordonnees/objets', $objets_sql);
 	}
 }
-
-?>

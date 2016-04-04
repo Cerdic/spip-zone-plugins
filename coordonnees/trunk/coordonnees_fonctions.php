@@ -42,7 +42,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     ou chaîne de langue d'un type donné
  *     ou type tel quel si on ne trouve pas sa chaîne de langue
  */
-function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
+function coordonnees_lister_types_coordonnees($coordonnee = '', $type = null) {
 
 	// cf. note
 	if (!strlen($coordonnee) or (!is_null($type) and !strlen($type))) return;
@@ -69,30 +69,36 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 	$coord2abbr = array_flip($abbr);
 
 	// Vérification au cas-où
-	if (!in_array($coordonnee,$abbr) and !in_array($coordonnee,$coord2abbr)) return;
+	if (!in_array($coordonnee, $abbr) and !in_array($coordonnee, $coord2abbr)) return;
 
 	// Pour compatibilité si on utilise les abbréviations : adr etc.
-	if (in_array($coordonnee,$coord2abbr))
+	if (in_array($coordonnee, $coord2abbr)) {
 		$coordonnee = $abbr[$coordonnee];
+	}
 
 	// Remplissage de la liste
-	foreach ($types as $coord=>$types_coord)
-		foreach ($types_coord as $type_coord)
+	foreach ($types as $coord => $types_coord) {
+		foreach ($types_coord as $type_coord) {
 			$liste[$coord][$type_coord] = _T('coordonnees:type_'.$coord2abbr[$coordonnee].'_'.$type_coord);
+		}
+	}
 
 	// Envoyer aux plugins pour qu'ils complètent (ou altèrent) la liste
 	$liste = pipeline('types_coordonnees', $liste);
 
 	// Par défaut, renvoyer un tableau de tous les types
-	if (is_null($type))
+	if (is_null($type)) {
 		return $liste[$coordonnee];
 	// S'il y a un type, renvoyer sa chaîne de langue ou à défaut, tel quel
-	else if ($type)
-		if ($langue=$liste[$coordonnee][$type])
+	} elseif ($type) {
+		if ($langue = $liste[$coordonnee][$type]) {
 			return $langue;
-		else
+		} else {
 			return $type;
-	else return;
+		}
+	} else { 
+		return;
+	}
 
 }
 
@@ -113,8 +119,8 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_adresses($type=null) {
-	return coordonnees_lister_types_coordonnees('adresse',$type);
+function filtre_coordonnees_lister_types_adresses($type = null) {
+	return coordonnees_lister_types_coordonnees('adresse', $type);
 }
 
 /*
@@ -133,8 +139,8 @@ function filtre_coordonnees_lister_types_adresses($type=null) {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_numeros($type=null) {
-	return coordonnees_lister_types_coordonnees('numero',$type);
+function filtre_coordonnees_lister_types_numeros($type = null) {
+	return coordonnees_lister_types_coordonnees('numero', $type);
 }
 
 /*
@@ -153,8 +159,8 @@ function filtre_coordonnees_lister_types_numeros($type=null) {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_emails($type=null) {
-	return coordonnees_lister_types_coordonnees('email',$type);
+function filtre_coordonnees_lister_types_emails($type = null) {
+	return coordonnees_lister_types_coordonnees('email', $type);
 }
 
 /**
@@ -187,7 +193,7 @@ function filtre_coordonnees_lister_types_emails($type=null) {
  *     Balise `<IMG>` ou `<ABBR>` (sinon),
  *     avec classes semantiques micro-format et traduction des valeurs clés RFC2426
  */
-function logo_type_($coordonnee='', $type='') {
+function logo_type_($coordonnee = '', $type = '') {
 
 	include_spip('inc/utils');
 	include_spip('inc/filtres');
@@ -201,13 +207,13 @@ function logo_type_($coordonnee='', $type='') {
 		'email'  => 'email'
 	);
 	$coord2abbr = array_flip($abbr);
-	if (in_array($coordonnee,$coord2abbr))
+	if (in_array($coordonnee, $coord2abbr))
 		$coordonnee = $abbr[$coordonnee];
 
 	// chaîne de langue
 	$type = strtolower($type);
-	$langue_coordonnee = coordonnees_lister_types_coordonnees($coordonnee,$type);
-	$langue_perso = _T("perso:type_${type}",'',array('force'=>false));
+	$langue_coordonnee = coordonnees_lister_types_coordonnees($coordonnee, $type);
+	$langue_perso = _T("perso:type_${type}", '', array('force' => false));
 	$langue = ($type) ? ($coordonnee) ? $langue_coordonnee : $langue_perso : '';
 
 	// fichier image
@@ -225,9 +231,9 @@ function logo_type_($coordonnee='', $type='') {
 
 	if($langue){
 		if (isset($image))
-			return inserer_attribut(filtre_balise_img_dist($image,$type),'title',$langue);
+			return inserer_attribut(filtre_balise_img_dist($image, $type), 'title', $langue);
 		elseif ($type)
-			return inserer_attribut(inserer_attribut(wrap($langue,'<abbr>'),'title',$type),'class','type');
+			return inserer_attribut(inserer_attribut(wrap($langue, '<abbr>'), 'title', $type), 'class', 'type');
 		else
 			return '';
 	} else
@@ -309,5 +315,3 @@ function filtre_logo_type_email($type_email) {
 function filtre_logo_type_mel($type_email) {
 	return filtre_logo_type_email($type_email);
 }
-
-?>

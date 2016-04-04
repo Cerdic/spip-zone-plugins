@@ -22,20 +22,21 @@ function coordonnees_afficher_fiche_objet($flux) {
 	$e = trouver_objet_exec($exec);
 	$type = $flux['args']['type'];
 
-	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets'))) {
+	if (!$e['edition'] and in_array(table_objet_sql($type), lire_config('coordonnees/objets'))) {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
 			),
-			array('ajax'=>'coordonnees')
+			array('ajax' => 'coordonnees')
 		);
 	}
 
 	if ($texte) {
-		if ($p=strpos($flux['data'],"<!--afficher_fiche_objet-->"))
-			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-		else
+		if ($p = strpos($flux['data'], "<!--afficher_fiche_objet-->")) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
 			$flux['data'] .= $texte;
+		}
 	}
 
 	return $flux;
@@ -45,21 +46,21 @@ function coordonnees_afficher_fiche_objet($flux) {
  * Liste des coordonnées d'un auteur sur la page "infos_perso"
 **/
 function coordonnees_affiche_auteurs_interventions($flux) {
-   $texte = "";
-   $exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
-   if ($id_auteur = intval($flux['args']['id_auteur']) AND $exec != 'auteur') {
-       $texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
-           'objet' => 'auteur',
-           'id_objet' => $id_auteur,
-           ),
-           array('ajax'=>'coordonnees')
-       );
-   }
-   if ($texte) {
-       $flux['data'] .= $texte;
-   }
+	$texte = "";
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+	if ($id_auteur = intval($flux['args']['id_auteur']) and $exec != 'auteur') {
+		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
+			'objet' => 'auteur',
+			'id_objet' => $id_auteur,
+			),
+			array('ajax' => 'coordonnees')
+		);
+	}
+	if ($texte) {
+	   $flux['data'] .= $texte;
+	}
 
-   return $flux;
+	return $flux;
 }
 
 /**
@@ -73,13 +74,13 @@ function coordonnees_affiche_gauche($flux) {
 	if (
 		!$e['edition']
 		and $type = $e['type']
-		and in_array($type,array('adresse','email','numero'))
+		and in_array($type, array('adresse', 'email', 'numero'))
 		and $id_coordonnee = $flux['args']["id_${type}"]
 	) {
 		$texte .= recuperer_fond("prive/squelettes/contenu/utilisations_${type}", array(
 			"id_${type}" => intval($id_coordonnee)
 			),
-			array('ajax'=>true)
+			array('ajax' => true)
 		);
 	}
 
@@ -98,9 +99,9 @@ function coordonnees_affiche_gauche($flux) {
  * @param int $n
  * @return int
  */
-function coordonnees_optimiser_base_disparus($flux){
+function coordonnees_optimiser_base_disparus($flux) {
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('adresse'=>'*', 'numero'=>'*', 'email'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('adresse' => '*', 'numero' => '*', 'email' => '*'), '*');
 	return $flux;
 }
 
@@ -109,6 +110,3 @@ function coordonnees_optimiser_base_disparus($flux){
  * Déclaration du pipeline qui liste les types des coordonnées
  */
 function coordonnees_types_coordonnees($flux) { return $flux; }
-
-
-?>

@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - objet : type d'objet à associer
  *     - id_objet : identifiant de l'objet à associer
  */
-function action_associer_numero_dist($arg){
+function action_associer_numero_dist($arg) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
@@ -37,8 +37,8 @@ function action_associer_numero_dist($arg){
 
 	if (
 		list($id_numero, $objet, $id_objet) = preg_split('/\W/', $arg)
-		AND intval($id_numero)>0 AND intval($id_objet)>0
-		AND autoriser('modifier', $objet, $id_objet)
+		and intval($id_numero) > 0 and intval($id_objet) > 0
+		and autoriser('modifier', $objet, $id_objet)
 	){
 		include_spip('action/editer_liens');
 		objet_associer(array('numero' => $id_numero), array($objet => $id_objet));
