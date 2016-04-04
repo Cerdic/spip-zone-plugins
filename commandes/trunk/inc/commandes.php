@@ -126,7 +126,7 @@ function commandes_effacer($ids_commandes) {
  * On supprime les détails correspondant à commande dans la table `spip_commandes_details`.
  * Si tous ses détails sont supprimés par l'opération, la commande peut également être supprimée en présence du paramètre adéquat. 
  *
- * @uses commande_supprimer()
+ * @uses commandes_supprimer()
  *
  * @param int $id_commande
  *     Identifiant de la commande
@@ -151,7 +151,7 @@ function commandes_supprimer_detail($id_commande=0, $ids_details=array(), $suppr
 			sql_delete('spip_commandes_details', "id_commande=".intval($id_commande) . " AND id_commandes_detail=".intval($id_detail));
 		// optionnellement, si la commande est vide, on la supprime
 		if ($nb_details == count($ids_details) and $supprimer_commande)
-			commande_supprimer($id_commande);
+			commandes_supprimer($id_commande);
 		return true;
 	} else {
 		return false;
