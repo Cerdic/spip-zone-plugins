@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_taux' => 'Taux en vigueur',
 	'cfg_taux_explication' => 'Indiquer les taux en vigueur (exemple 0.011 = 1.1 %)',
 	'cfg_taux_maladie' => 'Cotisation maladie',
-	'cfg_taux_csg' => 'Cotisation Sociale Généraliséee',
+	'cfg_taux_csg' => 'Cotisation Sociale Généralisée',
 	'cfg_taux_rds' => 'Cotisation au Remboursement de la Dette Sociale',
 	'cfg_taux_formation' => 'Cotisation auteur formation professionnelle',
 	'cfg_auteur' => 'Auteur',

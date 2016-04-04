@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Formatte un champs en latin pour le pdf
+ * Formatte un champs dans le charset latin pour le pdf
  *
  * @param string $str
  * @return string 
@@ -13,7 +13,7 @@ function agessa_pdf_encode($str) {
 }
 
 /**
- * Ajouter des espaces a un champs pour attendre une longeur donnée
+ * Ajoute des espaces à un champs pour atteindre une longueur donnée
  *
  * @param string $str
  * @return string
@@ -166,7 +166,6 @@ function formulaires_agessa_traiter_dist() {
 	$pdf_path = _DIR_IMG .'pdf_agessa/' . $pdf_nom;
 	$pdf->Output($pdf_path, 'F'); 
 
-	// confirmer ok
 	return array(
 		'editable' => true,
 		'message_ok' => _T('agessa:pdf_cree', array('pdf_nom' => $nom_pdf, 'pdf_path' => $pdf_path)),
