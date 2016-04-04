@@ -19,7 +19,7 @@ function mailcrypt_affichage_final($texte) {
 function mc_lancerlien(a,b){x='ma'+'ilto'+':'+a+'@'+b.replace(/\.\..t\.\./g,'@'); return x;}
 jQuery(function(){
 	jQuery('.mcrypt').empty().append('@');
-	jQuery('a.spip_mail').attr('title',function(i, val) {   return val.replace(/\.\..t\.\./g,'@');  });
+	jQuery('a.spip_mail').attr('title',function(i, val) { if(val) return val.replace(/\.\..t\.\./g,'@');});
 });/*]]>*/</script>
 js;
 		if ($p = stripos($texte, '</body>')) {
