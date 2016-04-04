@@ -4,12 +4,12 @@
  *
  * @plugin     Commandes de Paniers
  * @copyright  2014
- * @author     Les Développements Durables
+ * @author     Les Dï¿½veloppements Durables
  * @licence    GNU/GPL
  * @package    SPIP\Panier2commande\options
  */
 
-// Sécurité
+// Securite
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // si on a une transformation panier=>commande en attente et qu'on est connecte,
@@ -23,7 +23,7 @@ if (  isset($_COOKIE['spip_pwl']) AND $_COOKIE['spip_pwl']
 	$commandes_paniers = charger_fonction("commandes_paniers","action");
 	$commandes_paniers($arg);
 	include_spip('inc/cookie');
-	spip_setcookie("spip_pwl",'',0);
+	spip_setcookie("spip_pwl",$_COOKIE['spip_pwl'] = '',0);
 }
 
 /**
@@ -31,7 +31,8 @@ if (  isset($_COOKIE['spip_pwl']) AND $_COOKIE['spip_pwl']
  * @param null $arg
  */
 function action_commandes_paniers_if_loged_dist($arg=null){
-	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
+
+	// Si $arg n'est pas donne directement, le recuperer via _POST ou _GET
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
