@@ -3,9 +3,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_csv2auteurs_exportation_charger_dist() {
     $nom_champs = csv2auteurs_exportation();
-    $valeurs = array( "choix_statut" => "6forum", "nom_champs" => $nom_champs );
-    //var_dump($nom_champs);
-    
+    $valeurs = array( "choix_statut" => "6forum", 
+		"nom_champs" => $nom_champs,
+		"choix_format" => "id");
+
 	return $valeurs;
 }
 
@@ -21,6 +22,8 @@ function formulaires_csv2auteurs_exportation_verifier_dist() {
 function formulaires_csv2auteurs_exportation_traiter_dist() {
     $nom_champs   = _request('nom_champs');
     $choix_statut = _request('choix_statut');
+    $choix_format = _request('choix_format');
+    
     $retour = $login_restreint = array();
     $correspondances_statuts = array( "0minirezo" => "administrateur", "1comite" => "redacteur", "6forum" => "visiteur");
     
@@ -40,7 +43,6 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 		$tableau_csv[0]["zone"] = "zone";
 
     // création d'un array contenant tous les logins des admins restreints
-    $i = 1;
     if (in_array("0minirezo", $choix_statut)) {
         $r = sql_select("DISTINCT auteur.login AS login",
 			array("spip_auteurs AS auteur","spip_auteurs_liens AS liens"),
@@ -49,11 +51,13 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
         while ($row = sql_fetch($r)) 
             $login_restreint[] = $row['login'];
     }
-
-    if ($res = sql_select('*', 'spip_auteurs AS auteur')) {
+	
+	// boucler dans tous les auteurs sélectionnés en fonction de leur statut
+    if ($res = sql_select('*', 'spip_auteurs')) {
+		$i = 1;
         while ($row = sql_fetch($res)) {
             // test les statuts demandés
-            if (in_array($row[statut], $choix_statut)) {
+            if (in_array($row['statut'], $choix_statut)) {
                 // si c'est un admin, on ne selectionne que les admins restreints !!!
                 if ((($row['statut'] == "0minirezo") AND (in_array($row['login'], $login_restreint))) 
 					OR $row['statut'] == "1comite" 
@@ -65,47 +69,52 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
                             $tableau_csv[$i]["statut"] = $correspondances_statuts[$row['statut']];
                         }
                         else {
-                            $tableau_csv[$i][$nom_champ]=$row[$nom_champ];
+                            $tableau_csv[$i][$nom_champ] = $row[$nom_champ];
                         }
                     }
-                    // on selectionne les noms des rubriques pour les admins restreints
-                    if ($res2 = sql_select(
-                        array("rub.titre AS titre"),
-                        array("spip_rubriques AS rub",
-                            "spip_auteurs_liens AS lien"),
-                        array("rub.id_rubrique = lien.id_objet",
-                            "lien.id_auteur  = ".$row['id_auteur'],
-                            "lien.objet      = 'rubrique'")
-                        )) {
-                            $j=0;
-                            while ($row2 = sql_fetch($res2)) {
-                                $input[$row['nom']][$j] = $row2['titre'];
-                                $j++;
-                            }
-                            if ($input[$row['nom']]) {
-                                $tableau_csv[$i]["ss_groupe"] =implode('|',$input[$row['nom']]);
+                    // on selectionne les noms des rubriques ou les id_rubriques pour les admins restreints
+                    if ($choix_format == 'titre')
+						$select1 = array("rub.titre AS id_titre");
+                    else 
+						$select1 = array("lien.id_objet AS id_titre");
+						
+					$from1 = array("spip_rubriques AS rub", 
+						"spip_auteurs_liens AS lien");
+					$where1 = array("rub.id_rubrique = lien.id_objet",
+						"lien.id_auteur  = ".$row['id_auteur'],
+						"lien.objet      = 'rubrique'");
+                    if ($res2 = sql_select($select1, $from1, $where1)) {
+                            $rubs = array();
+                            while ($row2 = sql_fetch($res2)) 
+                                $rubs[] = $row2['id_titre'];
+                            if (count($rubs)) {
+                                $tableau_csv[$i]["ss_groupe"] = implode('|', $rubs);
                             }
 					        else 
 						        $tableau_csv[$i]["ss_groupe"] = "";
                     }
                     // Prise en compte des zones restreintes : si le plugin est installe
                     if (test_plugin_actif ("accesrestreint")) {
-                        if ($res3 = sql_select(
-                            array("zones.titre AS titre"),
-                            array("spip_zones_liens AS liens", "spip_zones AS zones"),
-                            array("liens.objet = 'auteur'", 
-								"liens.id_objet = ".$row['id_auteur'],
-								"liens.id_zone = zones.id_zone")
-                          )) {
-								while ($row3 = sql_fetch($res3)) {
-									$zones[$row['nom']][] = $row3['titre'];
-									$tableau_csv[$i]['zone'] = implode('|',$zones[$row['nom']]);
-								}
+						if ($choix_format == 'titre') 
+							$select2 = array("zones.titre AS id_titre");
+						else 
+							$select2 = array("zones.id_zone AS id_titre");
+							
+						$from2 = array("spip_zones_liens AS liens", "spip_zones AS zones");
+						$where2 = array("liens.objet = 'auteur'", 
+							"liens.id_objet = ".$row['id_auteur'],
+							"liens.id_zone = zones.id_zone");
+                        if ($res3 = sql_select($select2, $from2, $where2)) {
+							$zones = array();
+							while ($row3 = sql_fetch($res3)) {
+								$zones[] = $row3['id_titre'];
+								$tableau_csv[$i]['zone'] = implode('|', $zones);
 							}
+						}
                     }
-
                 }
             }
+            // on passe à l'auteur suivant
             $i++;
         }
     }
@@ -132,14 +141,16 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
 // fonction pour récupérer un array avec les noms de schamps de la table spip_auteurs
 function csv2auteurs_exportation() {
     //récupération des noms des champs
-    $nom_champs= array();
-    $champ_supprimer = array(0,8,15,16,17,18,19);
-    $desc = sql_showtable('spip_auteurs',true);
-    foreach ($desc[field] as $cle => $valeur)
-		$nom_champs[$cle] = "-> $cle";
-    foreach ($champ_supprimer as $cle) {
-        unset($nom_champs[$cle]);
-    }
-    return $nom_champs;
+    $Tnom_champs= array();
+    $Tchamps_exclus = array('id_auteur', 'low_sec', 'maj', 'htpass', 'en_ligne', 
+		'alea_actuel', 'alea_futur', 'prefs', 'cookie_oubli', 'source', 'imessage', 'messagerie');
+    
+    $desc = sql_showtable('spip_auteurs', true);
+    foreach ($desc['field'] as $cle => $valeur) {
+		if (!in_array($cle, $Tchamps_exclus))
+			$Tnom_champs[$cle] = $cle;
+	}
+    
+    return $Tnom_champs;
 }
 ?>

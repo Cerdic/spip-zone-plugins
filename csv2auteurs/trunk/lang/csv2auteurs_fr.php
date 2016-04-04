@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'choix_statut'=> 'Choisissez les types de statut que vous désirez exporter',
     'champ_manquant' => 'Les champs : login, statut et email sont obligatoires !!',
     'chargement_fichier_CSV_OK' => 'Chargement du fichier <strong>@nom_fichier@</strong>: OK',
+    'choix_format_rub_zones' => 'Format pour les rubriques des admins et les zones d\'accés restreint',
 
 	// D
     'delimiteur'=>'Choisissez le type de délimiteur que vous désirer pour créer votre fichier csv',
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
     'fichier_uploader' => 'Fichier à téléverser',
+    'format_titres_rub_zone' => 'Titres complets',
+    'format_id_rub_zone' => 'Identifiants numériques',
 
 	// I
     'importer'=>'Importer',
@@ -90,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'supprimer_articles' =>'Supprimer les articles des auteurs effacés',
     'supprimer_auteur' => 'suppression complète (y compris ceux à la poubelle)',
     'separateur' => 'Choix du caractère de séparation de champs',
+    'submit_format_import' => 'Exporter au format d\'importation',
+    'submit_export_' => 'Exporter les champs sélectionnés',
     
 	// T
     'transfert' => 'Erreur lors du transfert !',
