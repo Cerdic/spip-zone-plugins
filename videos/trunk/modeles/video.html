@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
 /** Valeurs communes surchargeables **/
 ]
 #SET{document,#ENV{document}|sinon{#ID}}
@@ -19,8 +19,8 @@
 [(#SET{lesExtensions,
 	#ARRAY{	1,dist_daily,
 			2,dist_youtu,
-			3,dist_vimeo} 
-})]                     [(#REM) fermer l'accolade en fin de ligne sinon le retour à la ligne 
+			3,dist_vimeo}
+})]                     [(#REM) fermer l'accolade en fin de ligne sinon le retour à la ligne
 			                 est pris en compte dans la chaîne de caractère]
 [(#SET{lesExtensionsHtml5,
 	#ARRAY{ 1,m4v,
@@ -83,10 +83,10 @@
 ]
 	[(#EXTENSION|=={dist_vimeo}|oui)
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe[ title="(#GET{titre_video}|couper{80})"] src="//player.vimeo.com/video/#GET{fichier}?byline=0" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+			<iframe[ title="(#GET{titre_video}|couper{80})"] src="//player.vimeo.com/video/#GET{fichier}?byline=0&amp;autoplay=#ENV{autoplay,0}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
-	
+
 
 [(#REM)
 /** Traiter Youtube **/
@@ -96,11 +96,11 @@
 	- loop				|| Values: 0 or 1. Default is 0. In the case of a single video player, a setting of 1 will cause the player to play the initial video again and again. In the case of a playlist player (or custom player), the player will play the entire playlist and then start again at the first video.
 	- enablejsapi		|| Values: 0 or 1. Default is 0. Setting this to 1 will enable the Javascript API. For more information on the Javascript API and how to use it, see the JavaScript API documentation.
 	- playerapiid		|| Value can be any alphanumeric string. This setting is used in conjunction with the JavaScript API. See the JavaScript API documentation for details.
-	- disablekb			|| Values: 0 or 1. Default is 0. Setting to 1 will disable the player keyboard controls. Keyboard controls are as follows: 
-	     Spacebar: Play / Pause 
-	     Arrow Left: Jump back 10% in the current video 
-	     Arrow Right: Jump ahead 10% in the current video 
-	     Arrow Up: Volume up 
+	- disablekb			|| Values: 0 or 1. Default is 0. Setting to 1 will disable the player keyboard controls. Keyboard controls are as follows:
+	     Spacebar: Play / Pause
+	     Arrow Left: Jump back 10% in the current video
+	     Arrow Right: Jump ahead 10% in the current video
+	     Arrow Up: Volume up
 	     Arrow Down: Volume Down
 	- egm				|| Values: 0 or 1. Default is 0. Setting to 1 enables the "Enhanced Genie Menu". This behavior causes the genie menu (if present) to appear when the user's mouse enters the video display area, as opposed to only appearing when the menu button is pressed.
 	- border			|| Values: 0 or 1. Default is 0. Setting to 1 enables a border around the entire video player. The border's primary color can be set via the color1 parameter, and a secondary color can be set by the color2 parameter.
@@ -137,7 +137,7 @@
 			[(#GET{titre_descriptif}|=={oui}|oui)
 			[(#GET{liste_definition}|=={oui}|non)
 			<figcaption>
-				<p><strong>#GET{titre_video}</strong></p> 
+				<p><strong>#GET{titre_video}</strong></p>
 				#DESCRIPTIF
 			</figcaption>
 			]]
@@ -145,7 +145,7 @@
 		</section>
 	</div> <!-- Fermeture de ID : playerVideo -->
 	]
-	
+
 
 [(#GET{liste_definition}|=={oui}|oui)
 </dt>
@@ -167,21 +167,21 @@
     On passe par le modele emb qui est plus évolué que le modele video.
 ]
     [(#REM) Pour le cas du type mime video, on appelle explicitement le modele de la
-            distribution sinon SPIP appelle le fichier du plugin en boucle 
+            distribution sinon SPIP appelle le fichier du plugin en boucle
             sauf si un modele spécifique emb_extension.html existe
             ]
     <BOUCLE_distVideo(DOCUMENTS){id_document=#GET{document}}{tout}>
         [(#SET{modele_mime, [(#MIME_TYPE)] })]
         [(#SET{modele_fond, [(#VAL**{emb_[(#EXTENSION)]}|trouver_fond{modeles/})] })]
-        
+
         #SET{modele_video, 0}
-        [(#GET{modele_mime}|trim|=={'video'}|oui) 
+        [(#GET{modele_mime}|trim|=={'video'}|oui)
         [(#GET{modele_fond}|trim|=={''}|oui)
             #SET{modele_video,1}
         ]]
 
         [(#GET{modele_video}|=={1}|oui)
-    	     [(#INCLURE{fond=plugins-dist/medias/modeles/video,id_document=#GET{document},env})]    
+    	     [(#INCLURE{fond=plugins-dist/medias/modeles/video,id_document=#GET{document},env})]
         ]
         [(#GET{modele_video}|=={1}|non)
            [(#MODELE{emb}{id=#ID_DOCUMENT}{env}{emb=' '})]
