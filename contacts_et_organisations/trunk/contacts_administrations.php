@@ -24,7 +24,7 @@ include_spip('base/create');
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
  */
-function contacts_upgrade($nom_meta_base_version, $version_cible){
+function contacts_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
@@ -45,8 +45,8 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_contacts ADD INDEX (id_contact)'),
 		array('sql_alter', 'TABLE spip_comptes ADD INDEX (id_compte)'),
 		array('sql_alter', 'TABLE spip_comptes_contacts ADD INDEX (id_contact)'),
-		array('sql_update', 'spip_contacts', array('id_contact'=>'id_auteur')),
-		array('sql_update', 'spip_comptes', array('id_compte'=>'id_auteur')),
+		array('sql_update', 'spip_contacts', array('id_contact' => 'id_auteur')),
+		array('sql_update', 'spip_comptes', array('id_compte' => 'id_auteur')),
 	);
 
 	// On passe de compte à organisation
@@ -235,7 +235,7 @@ function contacts_vider_tables($nom_meta_base_version) {
  * pour les liens entre contacts et organisations. Utiliser
  * spip_organisations_liens pour ça créait des bugs et des confusions.
 **/
-function contacts_maj_1_6_0(){
+function contacts_maj_1_6_0() {
 	// remettre spip_organisations_contacts si besoin
 	creer_base();
 
@@ -321,5 +321,3 @@ function contacts_maj_1_10_0() {
 		ecrire_config('contacts_et_organisations/lier_organisations_objets', array('spip_rubriques'));
 	}
 }
-
-?>

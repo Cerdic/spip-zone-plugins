@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return Champ
  *     Pile complétée par le code à générer
  */
-function balise_LESORGANISATIONS_dist ($p) {
+function balise_LESORGANISATIONS_dist($p) {
 	// Cherche le champ 'lesorganisations' dans la pile
 	$_lesorganisations = champ_sql('lesorganisations', $p, false);
 
@@ -39,7 +39,7 @@ function balise_LESORGANISATIONS_dist ($p) {
 	// le modele lesorganisations.html en passant id_contact dans le contexte;
 	// dans le cas contraire on prend le champ 'lesorganisations'
 	if ($_lesorganisations
-	AND $_lesorganisations != '@$Pile[0][\'lesorganisations\']') {
+	and $_lesorganisations != '@$Pile[0][\'lesorganisations\']') {
 		$p->code = "safehtml($_lesorganisations)";
 		// $p->interdire_scripts = true;
 	} else {
@@ -98,17 +98,17 @@ function balise_ORGANISATIONS_dist($p) {
  * @param Critere $crit   Paramètres du critère dans cette boucle
  * @return void
  */
-function critere_compteur_contacts_dist($idb, &$boucles, $crit){
+function critere_compteur_contacts_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
-	$not="";
+	$not = "";
 	if ($crit->not)
-		$not=", 'NOT'";
+		$not = ", 'NOT'";
 	$boucle->from['LOC'] = 'spip_organisations_contacts';
 	$boucle->from_type['LOC'] = 'left';
 	$boucle->join['LOC'] = array("'organisations'","'id_organisation'","'id_organisation'");
 
-	$boucle->select[]= "COUNT(LOC.id_contact) AS compteur_contacts";
+	$boucle->select[] = "COUNT(LOC.id_contact) AS compteur_contacts";
 	$boucle->group[] = 'organisations.id_organisation';
 }
 
@@ -161,7 +161,7 @@ function balise_COMPTEUR_CONTACTS_dist($p) {
  * @return
  *     AST complété de la jointure correcte et des champs spéciaux
 **/
-function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
+function critere_contacts_auteurs_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	if ($boucle->id_table == 'auteurs') {
@@ -213,7 +213,7 @@ function critere_contacts_auteurs_dist($idb, &$boucles, $crit){
  * @return
  *     AST complété de la jointure correcte et des champs spéciaux
 **/
-function critere_organisations_auteurs_dist($idb, &$boucles, $crit){
+function critere_organisations_auteurs_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	if ($boucle->id_table == 'auteurs') {
@@ -377,7 +377,7 @@ function balise_IDS_ORGANISATION_BRANCHE_dist($p) {
 	// parcours de tous les identifiants recus en parametre
 	$n = 0;
 	$ids = array();
-	while ($id_org = interprete_argument_balise(++$n,$p)) {
+	while ($id_org = interprete_argument_balise(++$n, $p)) {
 		if ($id_org = trim(trim($id_org), "'")) { // vire les guillements pour accepter soit un terme soit un nombre
 			$ids = array_merge($ids, array($id_org)); // ... les merge avec id
 		}
@@ -410,7 +410,7 @@ function calcul_organisation_branche_in($id) {
 	static $b = array();
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
-	if (!is_array($id)) $id = explode(',',$id);
+	if (!is_array($id)) $id = explode(',', $id);
 	$id = join(',', array_map('intval', $id));
 	if (isset($b[$id]))
 		return $b[$id];
@@ -430,7 +430,7 @@ function calcul_organisation_branche_in($id) {
 	}
 
 	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
-	if (strlen($branche)<10000)
+	if (strlen($branche) < 10000)
 		$b[$id] = $branche;
 	return $branche;
 }
@@ -463,7 +463,7 @@ function calcul_organisation_branche_in($id) {
  *     Paramètres du critère dans cette boucle
  * @return void
 **/
-function critere_branche_organisation_dist($idb, &$boucles, $crit){
+function critere_branche_organisation_dist($idb, &$boucles, $crit) {
 
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -484,7 +484,7 @@ function critere_branche_organisation_dist($idb, &$boucles, $crit){
 		$cle = trouver_jointure_champ($champ, $boucle);
 		$trouver_table = charger_fonction("trouver_table", "base");
 		$desc = $trouver_table($boucle->from[$cle]);
-		if (count(trouver_champs_decomposes($champ, $desc))>1){
+		if (count(trouver_champs_decomposes($champ, $desc)) > 1){
 			$decompose = decompose_champ_id_objet($champ);
 			$champ = array_shift($decompose);
 			$boucle->where[] = array("'='", _q($cle.".".reset($decompose)), '"'.sql_quote(end($decompose)).'"');
@@ -497,6 +497,3 @@ function critere_branche_organisation_dist($idb, &$boucles, $crit){
 	$boucle->where[] = !$crit->cond ? $c :
 		("($arg ? $c : ".($not ? "'0=1'" : "'1=1'").')');
 }
-
-
-?>

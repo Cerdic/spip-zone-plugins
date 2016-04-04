@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function contacts_declarer_tables_interfaces($interface){
+function contacts_declarer_tables_interfaces($interface) {
 	
 	$interface['table_des_tables']['annuaires'] = 'annuaires';
 	$interface['table_des_tables']['organisations'] = 'organisations';
@@ -31,8 +31,8 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
 	// -- Liaisons organisations/contacts
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
+	$interface['tables_jointures']['spip_organisations_contacts'][] = 'contacts';
+	$interface['tables_jointures']['spip_organisations_contacts'][] = 'organisations';
 
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
@@ -63,14 +63,14 @@ function contacts_declarer_tables_interfaces($interface){
  * @return array
  *     Description complétée des tables
  */
-function contacts_declarer_tables_objets_sql($tables){
+function contacts_declarer_tables_objets_sql($tables) {
 	//-- Table annuaires ----------------------------------------
 	$tables['spip_annuaires'] = array(
 		// Caractéristiques
 		'principale' => 'oui',
-		'page'=>'annuaire',
+		'page' => 'annuaire',
 		// Les champs et leurs particularités (clés etc)
-		'field'=> array(
+		'field' => array(
 			'id_annuaire' 		=> "bigint(21) NOT NULL auto_increment",
 			'identifiant'		=> 'varchar(255) not null default ""',
 			'titre' 			=> "text DEFAULT '' NOT NULL",
@@ -102,14 +102,14 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_creer_associer' => 'contacts:annuaire_creer_associer',
 		'texte_ajouter' => 'contacts:annuaire_ajouter',
 		'texte_logo_objet' => 'contacts:annuaire_logo',
-		'info_aucun_objet'=> 'contacts:annuaire_aucun',
+		'info_aucun_objet' => 'contacts:annuaire_aucun',
 		'info_1_objet' => 'contacts:annuaire_un',
 		'info_nb_objets' => 'contacts:annuaires_nb',
 	);
 	
 	//-- Table organisations ----------------------------------------
 	$tables['spip_organisations'] = array(
-		'page'=>'organisation',
+		'page' => 'organisation',
 		'texte_objets' => 'contacts:organisations',
 		'texte_objet' => 'contacts:organisation',
 		'texte_modifier' => 'contacts:organisation_editer',
@@ -118,7 +118,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_creer_associer' => 'contacts:organisation_creer_associer',
 		'texte_ajouter' => 'contacts:organisation_ajouter',
 		'texte_logo_objet' => 'contacts:organisation_logo',
-		'info_aucun_objet'=> 'contacts:organisation_aucun',
+		'info_aucun_objet' => 'contacts:organisation_aucun',
 		'info_1_objet' => 'contacts:organisation_un',
 		'info_nb_objets' => 'contacts:organisations_nb',
 		'titre' => 'nom AS titre, "" AS lang',
@@ -128,7 +128,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'id_parent', 'id_auteur', 'id_annuaire',
 			'nom', 'statut_juridique', 'identification', 'activite',
 			'date_creation', 'descriptif', 'ouvertures', 'tarifs', 'url_site'),
-		'field'=> array(
+		'field' => array(
 			"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
 			'id_annuaire'		=> 'bigint(21) NOT NULL default 0',
 			"id_parent"			=> "bigint(21) NOT NULL default 0",
@@ -176,7 +176,7 @@ function contacts_declarer_tables_objets_sql($tables){
 
 	//-- Table contacts ----------------------------------------
 	$tables['spip_contacts'] = array(
-		'page'=>'contact',
+		'page' => 'contact',
 		'texte_objets' => 'contacts:contacts',
 		'texte_objet' => 'contacts:contact',
 		'texte_modifier' => 'contacts:contact_editer',
@@ -184,16 +184,16 @@ function contacts_declarer_tables_objets_sql($tables){
 		'texte_creer_associer' => 'contacts:contact_creer_associer',
 		'texte_ajouter' => 'contacts:contact_ajouter',
 		'texte_logo_objet' => 'contacts:contact_logo',
-		'info_aucun_objet'=> 'contacts:contact_aucun',
+		'info_aucun_objet' => 'contacts:contact_aucun',
 		'info_1_objet' => 'contacts:contact_un',
 		'info_nb_objets' => 'contacts:contacts_nb',
 		'titre' => '"" as lang, trim(concat(prenom, \' \', nom)) AS titre',
 		'date' => 'date_naissance',
 		'principale' => 'oui',
 		'champs_editables' => array(
-			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction', 
+			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction',
 			'date_naissance', 'descriptif'),
-		'field'=> array(
+		'field' => array(
 			"id_contact"	=> "bigint(21) NOT NULL auto_increment",
 			'id_annuaire'		=> 'bigint(21) NOT NULL default 0',
 			"id_auteur"   	=> "bigint(21) NOT NULL default 0",
@@ -201,7 +201,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 			"prenom"		=> "tinytext NOT NULL DEFAULT ''",
 			"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gérant, membre, trésorier, etc.
-			"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+			"date_naissance" => "datetime NOT NULL default '0000-00-00 00:00:00'",
 			"descriptif" 	=> "text DEFAULT '' NOT NULL",
 			"maj"			=> "TIMESTAMP"
 		),
@@ -228,7 +228,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'auteur' => array('nom' => 2, 'bio' => 1)
 		),*/
 		'champs_versionnes' => array(
-			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction', 
+			'id_auteur', 'id_annuaire', 'civilite', 'nom', 'prenom', 'fonction',
 			'date_naissance', 'descriptif'),
 	);
 
@@ -251,7 +251,7 @@ function contacts_declarer_tables_objets_sql($tables){
  * @return array
  *     Description complétée des tables
  */
-function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
+function contacts_declarer_tables_auxiliaires($tables_auxiliaires) {
 
 	//-- Table organisations_contacts -------------------------------------
 	$organisations_contacts = array(
@@ -303,5 +303,3 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 	
 	return $tables_auxiliaires;
 }
-
-?>

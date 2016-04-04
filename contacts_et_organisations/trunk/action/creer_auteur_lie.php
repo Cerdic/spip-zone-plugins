@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     et `id` son identifiant. En absence utilise l'argument de l'action sécurisée.
  * @return void
 **/
-function action_creer_auteur_lie_dist($arg=null) {
+function action_creer_auteur_lie_dist($arg = null) {
 
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -82,8 +82,6 @@ function action_creer_auteur_lie_dist($arg=null) {
 				break;
 		}
 	} else {
-		spip_log("erreur creation auteur lie a l objet ".$arg[0],"contacts");
+		spip_log("erreur creation auteur lie a l objet ".$arg[0], "contacts");
 	}
 }
-
-?>

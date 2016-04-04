@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param null|int $arg
  *     `id` de l'annuaire. En absence de `id`, utilise l'argument de l'action sécurisée.
 **/
-function action_supprimer_annuaire_dist($arg=null) {
+function action_supprimer_annuaire_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();

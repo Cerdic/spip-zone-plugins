@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param null|string $arg
  *     Il est possible de mettre l'identifiant d'un annuaire en argument (ou 0 pour cibler précisemment ce qui n'a pas d'annuaire).
 **/
-function action_exporter_organisations_dist($arg=null) {
+function action_exporter_organisations_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -58,7 +58,7 @@ function action_exporter_organisations_dist($arg=null) {
  * @param int $id_annuaire
  * @return void
  */
-function exporter_organisations_dist($id_annuaire=null) {
+function exporter_organisations_dist($id_annuaire = null) {
 	$where = array();
 	if (!is_null($id_annuaire)) {
 		$where[] = array('=', 'id_annuaire', intval($id_annuaire));
@@ -110,4 +110,3 @@ function exporter_organisations_dist($id_annuaire=null) {
 	
 	return $lignes;
 }
-

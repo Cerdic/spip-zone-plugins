@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Couple `type/id` où `type` est le type d'objet (organisation ou contact)
  *     et `id` son identifiant. En absence utilise l'argument de l'action sécurisée.
 **/
-function action_supprimer_contact_dist($arg=null) {
+function action_supprimer_contact_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -99,5 +99,3 @@ function action_supprimer_organisation_post($id_organisation) {
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_organisation/$id_organisation'");
 }
-
-?>

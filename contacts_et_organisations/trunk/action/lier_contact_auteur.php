@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Couple `id_contact/id_auteur` tel que `8/3`
  *     En absence utilise l'argument de l'action sécurisée.
 **/
-function action_lier_contact_auteur_dist($arg=null) {
+function action_lier_contact_auteur_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -55,5 +55,3 @@ function action_lier_contact_auteur_post($id_contact, $id_auteur) {
 		suivre_invalideur("id='id_contact/$id_contact'");
 	}
 }
-
-?>

@@ -25,7 +25,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  *     Environnement du formulaire
 **/
-function formulaires_lier_organisation_rubrique_charger_dist($id_rubrique, $redirect=''){
+function formulaires_lier_organisation_rubrique_charger_dist($id_rubrique, $redirect = '') {
 	$valeurs = array(
 		'recherche_organisation' => '',
 		'id_rubrique' => intval($id_rubrique),
@@ -48,7 +48,7 @@ function formulaires_lier_organisation_rubrique_charger_dist($id_rubrique, $redi
  * @return array
  *     Tableau des erreurs
 **/
-function formulaires_lier_organisation_rubrique_verifier_dist($id_rubrique, $redirect=''){
+function formulaires_lier_organisation_rubrique_verifier_dist($id_rubrique, $redirect = '') {
 	$erreurs = array();
 	$erreurs[''] = ''; // toujours en erreur : ce sont des actions qui lient les contacts
 	return $erreurs;
@@ -68,11 +68,9 @@ function formulaires_lier_organisation_rubrique_verifier_dist($id_rubrique, $red
  * @return array
  *     Retours des traitements
 **/
-function formulaires_lier_organisation_rubrique_traiter_dist($id_rubrique, $redirect=''){
+function formulaires_lier_organisation_rubrique_traiter_dist($id_rubrique, $redirect = '') {
 	return array(
 		'message_ok' => '',
 		'editable' => true,
 	);
 }
-
-?>

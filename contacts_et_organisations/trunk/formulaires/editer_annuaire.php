@@ -24,7 +24,7 @@ include_spip('inc/editer');
  * @return array
  *     Environnement du formulaire
 **/
-function formulaires_editer_annuaire_charger_dist($id_annuaire='new', $redirect=''){
+function formulaires_editer_annuaire_charger_dist($id_annuaire = 'new', $redirect = '') {
 	$contexte = formulaires_editer_objet_charger('annuaire', $id_annuaire, $rien, 0, $redirect, '');
 	return $contexte;
 }
@@ -40,7 +40,7 @@ function formulaires_editer_annuaire_charger_dist($id_annuaire='new', $redirect=
  * @return array
  *     Tableau des éventuelles erreurs
 **/
-function formulaires_editer_annuaire_verifier_dist($id_annuaire='new', $redirect=''){
+function formulaires_editer_annuaire_verifier_dist($id_annuaire = 'new', $redirect = '') {
 	$erreurs = formulaires_editer_objet_verifier('annuaire', $id_annuaire, array('titre', 'identifiant'));
 	// Pour une création, on teste l'identifiant
 	if (!intval($id_annuaire)
@@ -65,9 +65,7 @@ function formulaires_editer_annuaire_verifier_dist($id_annuaire='new', $redirect
  * @return array
  *     Retour des traitements
 **/
-function formulaires_editer_annuaire_traiter_dist($id_annuaire='new', $redirect=''){
+function formulaires_editer_annuaire_traiter_dist($id_annuaire = 'new', $redirect = '') {
 	$res = formulaires_editer_objet_traiter('annuaire', $id_annuaire, $rien, 0, $redirect);
 	return $res;
 }
-
-?>

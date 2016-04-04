@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Liste (identifiant du contact, Texte d'erreur éventuel)
  */
-function action_editer_contact_dist($arg=null) {
+function action_editer_contact_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -36,8 +36,8 @@ function action_editer_contact_dist($arg=null) {
 		if ($id_organisation = intval(_request('id_parent'))) {
 			include_spip('action/editer_liens_simples');
 			objet_associer_simples(
-				array('organisation'=>$id_organisation),
-				array('contact'=>$id_contact));
+				array('organisation' => $id_organisation),
+				array('contact' => $id_contact));
 		}
 	}
 
@@ -58,7 +58,7 @@ function action_editer_contact_dist($arg=null) {
  * @return int
  *     Identifiant du contact créé
  */
-function contact_inserer($id_parent=null, $champs=array()) {
+function contact_inserer($id_parent = null, $champs = array()) {
 
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
@@ -101,13 +101,13 @@ function contact_inserer($id_parent=null, $champs=array()) {
  * @return string
  *     Vide en cas de succès, texte d'erreur sinon.
  */
-function contact_modifier($id_contact, $set=null) {
+function contact_modifier($id_contact, $set = null) {
 
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		objet_info('contact','champs_editables'),
+		objet_info('contact', 'champs_editables'),
 		// black list
 		array(),
 		// donnees eventuellement fournies
@@ -125,6 +125,3 @@ function contact_modifier($id_contact, $set=null) {
 
 	return $err;
 }
-
-
-?>

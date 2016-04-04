@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Liste (identifiant de l'organisation, Texte d'erreur éventuel)
  */
-function action_editer_organisation_dist($arg=null) {
+function action_editer_organisation_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -51,7 +51,7 @@ function action_editer_organisation_dist($arg=null) {
  * @return int
  *     Identifiant de l'organisation créée
  */
-function organisation_inserer($id_parent=null, $champs=array()) {
+function organisation_inserer($id_parent = null, $champs = array()) {
 
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
@@ -94,13 +94,13 @@ function organisation_inserer($id_parent=null, $champs=array()) {
  * @return string
  *     Vide en cas de succès, texte d'erreur sinon.
  */
-function organisation_modifier($id_organisation, $set=null) {
+function organisation_modifier($id_organisation, $set = null) {
 
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		objet_info('organisation','champs_editables'),
+		objet_info('organisation', 'champs_editables'),
 		// black list
 		array('id_parent'),
 		// donnees eventuellement fournies
@@ -117,7 +117,7 @@ function organisation_modifier($id_organisation, $set=null) {
 	}
 
 	// Modification de statut, changement de rubrique ?
-	$c = collecter_requests(array('id_parent'),array(),$set);
+	$c = collecter_requests(array('id_parent'), array(), $set);
 	$err = organisation_instituer($id_organisation, $c);
 
 	return $err;
@@ -139,7 +139,7 @@ function organisation_modifier($id_organisation, $set=null) {
  * @return string|null
  *     Null si aucun champ n'est modifié, chaîne vide en cas de succès.
  */
-function organisation_instituer($id_organisation, $c, $calcul_rub=true){
+function organisation_instituer($id_organisation, $c, $calcul_rub = true) {
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
@@ -151,9 +151,9 @@ function organisation_instituer($id_organisation, $c, $calcul_rub=true){
 	// Verifier que le parent demandee existe et est different
 	// du parent actuel
 	if (isset($c['id_parent'])
-		AND $id_parent = intval($c['id_parent'])
-		AND $id_parent != $id_parent_actuel
-		AND sql_getfetsel('1', 'spip_organisations', 'id_organisation='.$id_parent))
+		and $id_parent = intval($c['id_parent'])
+		and $id_parent != $id_parent_actuel
+		and sql_getfetsel('1', 'spip_organisations', 'id_organisation='.$id_parent))
 	{
 		$champs['id_parent'] = $id_parent;
 	}
@@ -195,6 +195,3 @@ function organisation_instituer($id_organisation, $c, $calcul_rub=true){
 
 	return '';
 }
-
-
-?>

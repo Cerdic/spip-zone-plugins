@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - Identifiant de l'organisation ou du contact venant d'être créé en cas de succès
  *     - Rien sinon
 **/
-function action_definir_contact_dist($arg=null) {
+function action_definir_contact_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -84,7 +84,3 @@ function action_definir_organisation_post($id_auteur) {
 		'nom' => $nom,
 	));
 }
-
-
-
-?>

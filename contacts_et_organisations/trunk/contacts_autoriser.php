@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser
  */
-function contacts_autoriser(){}
+function contacts_autoriser() {}
 
 /**
  * Autorisation de modifier une organisation
@@ -30,7 +30,7 @@ function contacts_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_organisation_modifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_organisation_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer')
 		or (
 			$id_auteur = sql_getfetsel('id_auteur', 'spip_organisations', 'id_organisation = '.intval($id))
@@ -51,7 +51,7 @@ function autoriser_organisation_modifier_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_organisation_supprimer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_organisation_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer')
 		or (
 			$id_auteur = sql_getfetsel('id_auteur', 'spip_organisations', 'id_organisation = '.intval($id))
@@ -72,7 +72,7 @@ function autoriser_organisation_supprimer_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_organisation_exporter_dist($faire, $type, $id, $qui, $opt){
+function autoriser_organisation_exporter_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer');
 }
 
@@ -88,7 +88,7 @@ function autoriser_organisation_exporter_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer')
 		or (
 			$id_auteur = sql_getfetsel('id_auteur', 'spip_contacts', 'id_contact = '.intval($id))
@@ -109,7 +109,7 @@ function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_contact_supprimer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_contact_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer')
 		or (
 			$id_auteur = sql_getfetsel('id_auteur', 'spip_contacts', 'id_contact = '.intval($id))
@@ -130,7 +130,7 @@ function autoriser_contact_supprimer_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_contact_exporter_dist($faire, $type, $id, $qui, $opt){
+function autoriser_contact_exporter_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer');
 }
 
@@ -146,7 +146,7 @@ function autoriser_contact_exporter_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_annuaire_creer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_annuaire_creer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', $type, $id, $qui, $opt);
 }
 
@@ -162,7 +162,7 @@ function autoriser_annuaire_creer_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_annuaire_modifier_dist($faire, $type, $id, $qui, $opt){
+function autoriser_annuaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', $type, $id, $qui, $opt);
 }
 
@@ -178,12 +178,10 @@ function autoriser_annuaire_modifier_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_annuaire_supprimer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_annuaire_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return (
 		autoriser('configurer', $type, $id, $qui, $opt)
 		and !sql_count(sql_select('id_organisation', 'spip_organisations', 'id_annuaire = '.intval($id)))
 		and !sql_count(sql_select('id_contact', 'spip_contacts', 'id_annuaire = '.intval($id)))
 	);
 }
-
-?>
