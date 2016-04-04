@@ -1,7 +1,7 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.5.15"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/menu-32.png"
@@ -25,6 +25,9 @@
 	<pipeline nom="autoriser" inclure="inc/menus_autoriser.php" />
 	<pipeline nom="ieconfig" inclure="menus_ieconfig.php" />
 	<pipeline nom="ieconfig_metas" inclure="menus_ieconfig.php" />
+	
+	<!-- Déclaration des pipelines du plugin -->
+	<pipeline nom="menus_utiles" action="" />
 
 	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 

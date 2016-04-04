@@ -46,3 +46,19 @@ function menus_critere_tri($tri,$quoi){
 	// num titre => {par num titre}{par titre}
 	return "$inverse$tri";
 }
+
+/**
+ * Lister les menus utiles qui ne sont pas encore créés
+ **/ 
+function menus_utiles() {
+	if ($menus_utiles = pipeline('menus_utiles', array()) and is_array($menus_utiles)) {
+		foreach ($menus_utiles as $identifiant => $titre) {
+			// Si le menu existe déjà, on le vire
+			if (sql_getfetsel('id_menu', 'spip_menus', 'identifiant = '.sql_quote($identifiant))) {
+				unset($menus_utiles[$identifiant]);
+			}
+		}
+	}
+	
+	return $menus_utiles;
+}
