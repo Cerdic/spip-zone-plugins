@@ -69,15 +69,16 @@ function contact_inserer($id_parent=null, $champs=array()) {
 			'data' => $champs
 		)
 	);
-	
+
 	// Insérer l'objet
 	$id_contact = sql_insertq('spip_contacts', $champs);
-	
+
 	// Envoyer aux plugins après insertion
 	pipeline('post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_contacts',
+				'id_objet' => $id_contact
 			),
 			'data' => $champs
 		)

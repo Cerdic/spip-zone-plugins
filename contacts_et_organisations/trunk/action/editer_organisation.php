@@ -62,7 +62,7 @@ function organisation_inserer($id_parent=null, $champs=array()) {
 			'data' => $champs
 		)
 	);
-	
+
 	// Insérer l'objet
 	$id_organisation = sql_insertq('spip_organisations', $champs);
 	
@@ -71,11 +71,12 @@ function organisation_inserer($id_parent=null, $champs=array()) {
 		array(
 			'args' => array(
 				'table' => 'spip_organisations',
+				'id_objet' => $id_organisation
 			),
 			'data' => $champs
 		)
 	);
-	
+
 	return $id_organisation;
 }
 
