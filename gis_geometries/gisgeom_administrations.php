@@ -14,11 +14,13 @@ function gisgeom_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 
 	$maj['create'] = array(
-		// ajout des champs geo et type à la table gis
-		array('sql_alter', "TABLE spip_gis ADD geo GEOMETRY NOT NULL AFTER lon"),
-		array('sql_alter', "TABLE spip_gis ADD type VARCHAR (25) DEFAULT '' NOT NULL AFTER zoom"),
+		// ajout des champs geo et type à la table gis (procéder en 2 temps, dans le cas où la table n'est pas vide)
+		array('sql_alter', "TABLE spip_gis ADD geo GEOMETRY AFTER lon"),
 		// renseigner spip_gis.geo avec spip_gis.lat et spip_gis.lon pour les objets existants
 		array('sql_update', 'spip_gis', array("geo"=>"GeomFromText(CONCAT('POINT(',lon,' ',lat,')'))")),
+		// NOT NULL pour pouvoir avec index !
+		array('sql_alter', "TABLE spip_gis CHANGE COLUMN geo geo GEOMETRY NOT NULL"),
+		array('sql_alter', "TABLE spip_gis ADD type VARCHAR (25) DEFAULT '' NOT NULL AFTER zoom"),
 		// renseigner spip_gis.type = point pour les objets existants
 		array('sql_updateq', 'spip_gis', array("type"=>"Point")),
 		// ajouter un index sur le champ geo
