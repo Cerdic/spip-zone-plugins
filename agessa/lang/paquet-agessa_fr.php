@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'agessa_description' => 'Pré-remplit le borderau déclaratif Agessa et génére le pdf.',
+	'agessa_description' => 'Pré-remplit le bordereau déclaratif Agessa et génére le pdf.',
 	'agessa_nom' => 'Agessa',
-	'agessa_slogan' => 'Pré-remplit le borderau déclaratif Agessa et génére le pdf.',
+	'agessa_slogan' => 'Pré-remplit le bordereau déclaratif Agessa et génére le pdf.',
 );
