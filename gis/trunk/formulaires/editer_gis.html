@@ -55,6 +55,20 @@
 					label=<:gis:label_code_pays:>})]
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
 			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset styles"[(#PLUGIN{gisgeom}|et{#CONFIG{gis/styles}|=={on}}|non) style="display: none;"]>
+			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+				[(#SAISIE{couleur,color,
+					label=<:gis:label_color:>})]
+				[(#SAISIE{input,weight,
+					label=<:gis:label_weight:>})]
+				[(#SAISIE{input,opacity,
+					label=<:gis:label_opacity:>})]
+				[(#SAISIE{couleur,fillcolor,
+					label=<:gis:label_fillcolor:>})]
+				[(#SAISIE{input,fillopacity,
+					label=<:gis:label_fillopacity:>})]
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

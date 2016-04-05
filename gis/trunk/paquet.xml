@@ -1,8 +1,8 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.32.7"
-	schema="2.0.8"
+	version="4.33.0"
+	schema="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gis.png"

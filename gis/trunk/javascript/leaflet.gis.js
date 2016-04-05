@@ -176,7 +176,9 @@ L.Map.Gis = L.Map.extend({
 		if (!map.options.cluster){
 			if (data.features.length > 0){
 				var geojson = L.geoJson('', {
-					style: this.options.pathStyles,
+					style: this.options.pathStyles ? this.options.pathStyles : function (feature) {
+						return feature.properties.styles;
+					},
 					onEachFeature: function (feature, layer) {
 						// Déclarer l'icone du point
 						if (feature.geometry.type == "Point") {

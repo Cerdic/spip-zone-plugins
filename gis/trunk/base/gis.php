@@ -44,7 +44,12 @@ function gis_declarer_tables_objets_sql($tables){
 			"region" => "text NOT NULL DEFAULT ''",
 			"departement" => "text NOT NULL DEFAULT ''",
 			"ville" => "text NOT NULL DEFAULT ''",
-			"code_postal" => "varchar(255) NOT NULL DEFAULT ''"
+			"code_postal" => "varchar(255) NOT NULL DEFAULT ''",
+			"color" => "varchar(25) NOT NULL DEFAULT ''",
+			"weight" => "varchar(4) NOT NULL DEFAULT ''",
+			"opacity" => "varchar(4) NOT NULL DEFAULT ''",
+			"fillcolor" => "varchar(25) NOT NULL DEFAULT ''",
+			"fillopacity" => "varchar(4) NOT NULL DEFAULT ''"
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_gis",
@@ -71,8 +76,8 @@ function gis_declarer_tables_objets_sql($tables){
 		'url_voir' => 'gis',
 		'url_edit' => 'gis_edit',
 		'editable' => 'oui',
-		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
-		'champs_versionnes' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
+		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays', 'color', 'weight', 'opacity', 'fillcolor', 'fillopacity'),
+		'champs_versionnes' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays', 'color', 'weight', 'opacity', 'fillcolor', 'fillopacity'),
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(
 			'titre' => 8,

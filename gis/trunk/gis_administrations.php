@@ -75,6 +75,11 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (objet)'),
 		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (id_objet)'),
 	);
+	
+	// Ajout des champs de styles (color, weight, opacity, fillcolor & fillopacity)
+	$maj['2.1.0'] = array(
+		array('maj_tables',array('spip_gis')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
