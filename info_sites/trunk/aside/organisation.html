@@ -9,6 +9,11 @@
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui}|parametre_url{associer_objet,organisation|#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i>
 					<:contacts:contact_creer:>
 				</a>]
+				[(#AUTORISER{infositesassocier,contact})
+				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens_simples}|parametre_url{table_source,contacts}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION})]" class="list-group-item bouton editer_liens" rel="nofollow"><i class="fa fa-link"></i>
+					<:info_sites:editer_liens_contact:>
+				</a>
+				]
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_projet|attribut_html:>"><i class="fa fa-link"></i>
 					<:info_sites:editer_liens_projet:>
 				</a>

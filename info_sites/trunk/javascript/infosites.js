@@ -1,46 +1,50 @@
 // on ajoute les titres de section au sommaire du aside pour faire des liens vers les sections
 
 $(document).ready(function () {
-	if ($('.contenu .legend').length > 0) {
-		if ($('#aside .dropdown.boutons').length > 0) {
-			$('<div class="block sommaire hidden-sm hidden-xs"><div></div></div>').insertAfter($('#aside .dropdown.boutons'));
-		}
-		else {
+	function infosites_sommaire(target) {
+		console.log($('#aside .block.sommaire').length);
+		if ($('#aside').length > 0 && $('#aside .block.sommaire').length == 0) {
 			$('#aside').append('<div class="block sommaire hidden-sm hidden-xs"><div class="list-group"></div></div>');
 		}
-
-		$('.contenu .legend').each(
-			function () {
-				$('#aside .sommaire div').append(
+		if (target.length > 0) {
+			target.each(function () {
+				$('#aside .sommaire div.list-group').append(
 					'<a class="list-group-item" href="#'
 					+ $(this).attr('id') + '">'
 					+ $(this).text()
 					+ '</a>');
 			});
+
+		}
 	}
+
+	$(document).ajaxComplete(function () {
+		infosites_sommaire($('.contenu .legend'));
+		infosites_sommaire($('#extra .legend'));
+	});
 	// On active les tooltips pour la sidebar.
 	$('#aside a').tooltip({
 		placement: 'top',
 		trigger: 'hover'
 	});
 
-	$('[type=submit]').each(function(event) {
+	$('[type=submit]').each(function (event) {
 		$(this).addClass('btn btn-success');
 	});
-	$('#formulaire_recherche [type=submit]').each(function(event) {
+	$('#formulaire_recherche [type=submit]').each(function (event) {
 		$(this).removeClass('btn-success');
 	});
 
-	$('#content .icone.s24 a').each(function(event) {
+	$('#content .icone.s24 a').each(function (event) {
 		$(this).addClass('btn btn-default');
 	});
 
-	$('table.spip.liste').each(function(event) {
+	$('table.spip.liste').each(function (event) {
 		$(this).addClass('table table-striped table-bordered');
 	});
 
 	var rows = $(".page_diagnostic_iso #content table tr.data");
-	rows.each(function() {
+	rows.each(function () {
 		var cells = $(this).find('td');
 
 		for (var i = 1; i < cells.length; i++) {
@@ -49,12 +53,12 @@ $(document).ready(function () {
 				cells.eq(i).addClass('bg-warning');
 			}
 		}
-		$(this).find("table tr td").each(function() {
+		$(this).find("table tr td").each(function () {
 			$(this).removeClass('bg-warning');
 		});
 	});
 
-	$('.liste-objets.commits .commit span.titre').click(function(event){
+	$('.liste-objets.commits .commit span.titre').click(function (event) {
 		event.preventDefault();
 		var target = $(this);
 		var fiche = target.closest('tr').next('.fiche_commit');
@@ -68,11 +72,5 @@ $(document).ready(function () {
 			target.find('i').addClass('fa-angle-double-right').removeClass('fa-angle-double-down');
 		}
 	});
-
-	// $('.page_projets_site #wysiwyg .champ.fieldset').each(function () {
-	//     if ($(this).next().is('[class*="contenu"]') === false) {
-	//         $(this).addClass('vide');
-	//     }
-	// });
 
 });
