@@ -3,14 +3,14 @@
  * Fichier gérant l'installation et désinstallation du plugin Commits de projet
  *
  * @plugin     Commits de projet
- * @copyright  2014
+ * @copyright  2014-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\RSSCommits\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 include_spip('inc/cextras');
@@ -24,17 +24,22 @@ include_spip('base/projets_depots');
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ *
  * @return void
-**/
-function rss_commits_upgrade($nom_meta_base_version, $version_cible)
-{
-    $maj = array();
+ **/
+function rss_commits_upgrade($nom_meta_base_version, $version_cible) {
+	$maj = array();
 
-    $maj['create'] = array(array('maj_tables', array('spip_commits')));
-    cextras_api_upgrade(rss_commits_declarer_champs_extras(), $maj['create']);
+	$maj['create'] = array(
+		array(
+			'maj_tables',
+			array('spip_commits'),
+		),
+	);
+	cextras_api_upgrade(rss_commits_declarer_champs_extras(), $maj['create']);
 
-    include_spip('base/upgrade');
-    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
@@ -43,20 +48,19 @@ function rss_commits_upgrade($nom_meta_base_version, $version_cible)
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ *
  * @return void
-**/
-function rss_commits_vider_tables($nom_meta_base_version)
-{
+ **/
+function rss_commits_vider_tables($nom_meta_base_version) {
 
-    sql_drop_table("spip_commits");
-    cextras_api_vider_tables(rss_commits_declarer_champs_extras());
+	sql_drop_table("spip_commits");
+	cextras_api_vider_tables(rss_commits_declarer_champs_extras());
 
-    # Nettoyer les versionnages et forums
-    sql_delete("spip_versions", sql_in("objet", array('commit')));
-    sql_delete("spip_versions_fragments", sql_in("objet", array('commit')));
-    sql_delete("spip_forum", sql_in("objet", array('commit')));
+	# Nettoyer les versionnages et forums
+	sql_delete("spip_versions", sql_in("objet", array('commit')));
+	sql_delete("spip_versions_fragments", sql_in("objet", array('commit')));
+	sql_delete("spip_forum", sql_in("objet", array('commit')));
 
-    effacer_meta($nom_meta_base_version);
+	effacer_meta($nom_meta_base_version);
 }
 
-?>
