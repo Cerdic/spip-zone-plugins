@@ -61,9 +61,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_recherche_pas_resultats' => 'Aucun point ne correspond à la recherche.',
 	'erreur_xmlrpc_lat_lon' => 'La latitude et la longitude doivent être passées en argument',
 	'explication_api_forcee' => 'L’API est imposée par un autre plugin ou squelette.',
+	'explication_color' => 'Couleur de trait au format CSS (valeur par défaut : #0033FF)',
+	'explication_fillcolor' => 'Couleur de remplissage au format CSS (valeur par défaut : héritée de la couleur de trait)',
+	'explication_fillopacity' => 'Opacité du remplissage de 0 à 1 (valeur par défaut : 0.2)',
 	'explication_import' => 'Importer un fichier au format GPX ou KML.',
 	'explication_layer_forcee' => 'La couche est imposée par un autre plugin ou un squelette.',
 	'explication_maptype_force' => 'Le fond cartographique est imposé par un autre plugin ou squelette.',
+	'explication_opacity' => 'Opacité du trait de 0 à 1 (valeur par défaut : 0.5)',
+	'explication_weight' => 'Épaisseur du trait (valeur par défaut : 5)',
 
 	// F
 	'formulaire_creer_gis' => 'Créer un point géolocalisé :',

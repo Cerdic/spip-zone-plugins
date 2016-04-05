@@ -55,21 +55,26 @@
 					label=<:gis:label_code_pays:>})]
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
 			</[(#VAL{li}|saisie_balise_structure_formulaire)]>[
-			(#PLUGIN{gisgeom}|et{#CONFIG{gis/styles}|=={on}}|oui)
+			(#PLUGIN{gisgeom}|et{#CONFIG{gis/styles}|=={on}}|oui|et{#TYPE|!={Point}|ou{#TYPE|=={''}}})
 			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset styles">
 			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				[(#SAISIE{input,color,
 					label=<:gis:label_color:>,
+					explication=<:gis:explication_color:>,
 					class=palette})]
 				[(#SAISIE{input,weight,
-					label=<:gis:label_weight:>})]
+					label=<:gis:label_weight:>,
+					explication=<:gis:explication_weight:>})]
 				[(#SAISIE{input,opacity,
-					label=<:gis:label_opacity:>})]
+					label=<:gis:label_opacity:>,
+					explication=<:gis:explication_opacity:>})]
 				[(#SAISIE{input,fillcolor,
 					label=<:gis:label_fillcolor:>,
+					explication=<:gis:explication_fillcolor:>,
 					class=palette})]
 				[(#SAISIE{input,fillopacity,
-					label=<:gis:label_fillopacity:>})]
+					label=<:gis:label_fillopacity:>,
+					explication=<:gis:explication_fillopacity:>})]
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
 			</[(#VAL{li}|saisie_balise_structure_formulaire)]>]
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
