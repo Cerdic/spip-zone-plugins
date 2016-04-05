@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_supprimer_menu' => 'Supprimer le menu',
 	'formulaire_supprimer_sous_menu' => 'Supprimer ce sous-menu',
 	'formulaire_titre' => 'Titre',
-	
+
 	// I
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.',
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles',
@@ -165,10 +165,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tous_les_articles' => '... Tous les articles',
 	'toutes_les_rubriques' => '... Toutes les rubriques',
-	
+
 	// U
 	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser les menus suivants.',
 	'utiles_generer_menu' => 'Créer le menu <strong>@titre@ (<em>@identifiant@</em>)</strong>',
 	'utiles_generer_menus' => 'Créer <strong>tous</strong> les menus utiles',
-	'utiles_titre' => 'Menus utiles',
+	'utiles_titre' => 'Menus utiles'
 );
+
+?>
