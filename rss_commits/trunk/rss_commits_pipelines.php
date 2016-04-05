@@ -69,7 +69,6 @@ function rss_commits_affiche_enfants($flux) {
  * @return array       Données du pipeline
  */
 function rss_commits_afficher_complement_objet($flux) {
-	$texte = "";
 	$e = $flux['args'];
 	$import_auto = lire_config('rss_commits/import_auto', 'non');
 
@@ -167,14 +166,15 @@ function rss_commits_header_prive($flux) {
  * @return array
  */
 function rss_commits_afficher_fiche_objet($flux) {
-	$import_auto = lire_config('rss_config/import_auto', 'non');
 	if (in_array($type = $flux['args']['type'], array('projet'))) {
 		$id = $flux['args']['id'];
-		$table = table_objet($type);
-		$id_table_objet = id_table_objet($type);
 		/**
-		 * On va désactiver le listind des commits par rss… Ça fait ramer la page projet…
+		 * On va désactiver le listing des commits par rss… Ça fait ramer la page projet…
 		 * Il faudra trouver une autre solution…
+		 *
+		 * $import_auto = lire_config('rss_config/import_auto', 'non');
+		 * $table = table_objet($type);
+		 * $id_table_objet = id_table_objet($type);
 		 *
 		 * if ($import_auto == 'non') {
 		 * $flux['data'] .= recuperer_fond(

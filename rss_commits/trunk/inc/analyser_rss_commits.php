@@ -4,16 +4,21 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
+/**
+ * Formater le xml selon les besoins.
+ *
+ * @param $url  Url du fichier XML à analyser.
+ *
+ * @return array
+ *          Retourne l'arbre xml en tableau
+ */
 function inc_analyser_rss_commits_dist($url) {
 	include_spip('iterateur/data');
 	include_spip('inc/distant');
 	$recuperer_rss_commits = charger_fonction('recuperer_rss_commits', 'inc');
 	// $convertir = charger_fonction('xml_to_array', 'inc');
 
-	$valeurs = array();
-	$xml = false;
-
-	$valeurs = array();
+	$xml = array();
 	$page = $recuperer_rss_commits($url);
 	// $xml       = $convertir($page['content']);
 

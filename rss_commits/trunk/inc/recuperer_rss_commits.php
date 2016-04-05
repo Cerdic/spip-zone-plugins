@@ -10,8 +10,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * HTTP du server et le contenu de la page.
  *
  * @param string $url URL de la page à récupérer
+ * @param string $login
+ * @param string $password
  *
- * @return array
+ * @return array|mixed
  */
 function inc_recuperer_rss_commits_dist($url, $login = '', $password = '') {
 	include_spip('inc/config');
@@ -23,26 +25,26 @@ function inc_recuperer_rss_commits_dist($url, $login = '', $password = '') {
 		// code adapté du script issu de cette page :
 		// http://stackoverflow.com/a/14953910
 		$options = array(
-			CURLOPT_CUSTOMREQUEST => "GET",
 			// set request type post or get
-			CURLOPT_POST => false,
+			CURLOPT_CUSTOMREQUEST => "GET",
 			// set to GET
-			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_POST => false,
 			// return web page
-			CURLOPT_HEADER => false,
+			CURLOPT_RETURNTRANSFER => true,
 			// don't return headers
-			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HEADER => false,
 			// follow redirects
-			CURLOPT_AUTOREFERER => true,
+			CURLOPT_FOLLOWLOCATION => true,
 			// set referer on redirect
-			CURLOPT_CONNECTTIMEOUT => 120,
+			CURLOPT_AUTOREFERER => true,
 			// timeout on connect
-			CURLOPT_TIMEOUT => 120,
+			CURLOPT_CONNECTTIMEOUT => 120,
 			// timeout on response
+			CURLOPT_TIMEOUT => 120,
+			// stop after 10 redirects
 			CURLOPT_MAXREDIRS => 10,
 			// stop after 10 redirects
 			CURLOPT_SSL_VERIFYPEER => false,
-			// stop after 10 redirects
 		);
 
 		if (isset($login) and $login != '') {
