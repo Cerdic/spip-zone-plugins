@@ -1,15 +1,15 @@
-<!-- extra -->[
-(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
-Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
-]<BOUCLE_autorisation (CONDITION) {si #AUTORISER{voir,contact}|oui}>
-<BOUCLE_extra (CONTACTS) {id_contact} {tous}>
-	<div id="extra">
-		<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
+<!-- extra -->
+<BOUCLE_autorisation (CONDITION) {si #AUTORISER{voir,contact}|oui}>[
+	(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
+	Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
+	]<BOUCLE_extra (CONTACTS) {id_contact} {tous}>
+		<div id="extra">
+			<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
 
-	<div class="block">
-		<INCLURE{fond=objets/liste/organisations, id_contact=#ID_CONTACT, ajax=wysiwyg} />
-	</div>
+			<div class="block">
+				<INCLURE{fond=objets/liste/organisations, id_contact=#ID_CONTACT, ajax=wysiwyg} />
+			</div>
 
-	</div>
-</BOUCLE_extra>
+		</div>
+	</BOUCLE_extra>
 </BOUCLE_autorisation>

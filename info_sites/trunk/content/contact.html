@@ -14,6 +14,8 @@
 	<INCLURE{fond=content/coordonnees_fiche_objet, objet=contact, id=#ID_CONTACT, id_objet=#ID_CONTACT, ajax=wysiwyg} />
 </div>
 
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT},data,'<div class="nettoyeur"></div>'}}
+
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 <script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}', '#navigation,#chemin');/*\]\]>*/</script>
