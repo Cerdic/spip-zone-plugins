@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'choix_statut'=> 'Choisissez les types de statut que vous désirez exporter',
     'champ_manquant' => 'Les champs : login, statut et email sont obligatoires !!',
     'chargement_fichier_CSV_OK' => 'Chargement du fichier <strong>@nom_fichier@</strong>: OK',
-    'choix_format_rub_zones' => 'Format pour les rubriques des admins et les zones d\'accés restreint',
+    'choix_format_rub_zones' => 'Format pour les rubriques des admins (champ <strong>ss_groupe</strong>) et les zones d\'accés restreint (champ <strong>zone</strong>)',
+    'choix_manip' => 'Choix de l\'opération',
 
 	// D
     'delimiteur'=>'Choisissez le type de délimiteur que vous désirer pour créer votre fichier csv',
@@ -32,7 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'envoyer'=>'Lancer la moulinette',
     'erreurs' => 'Votre saisie contient des erreurs !',
     'extension' => 'Extension incorrect !',
-    'exporter'=>'Exporter',
+    'exporter'=>'Exportation de comptes utilisateurs',
+    'export_fichier_compatible_import' => 'Exporter un fichier directement réutilisable pour une importation ultérieure (= modèle)',
 
 	// F
     'fichier_uploader' => 'Fichier à téléverser',
@@ -40,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'format_id_rub_zone' => 'Identifiants numériques',
 
 	// I
-    'importer'=>'Importer',
+    'importer'=>'Importation de comptes utilisateurs',
     
     // L
     'login_idem_admin_non_traite' => '<strong class="erreur">Attention!</strong> Le compte ayant pour login <strong>@login_refuse@</strong> n\'a pas été traité car cet identifiant est celui d\'un administrateur complet',
@@ -66,7 +68,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'nb_auteurs_poubelle_effaces' => 'Nombre d\'utilisateurs à la poubelle supprimés: @nb_auteurs_poubelle_effaces@',
     'nb_visiteurs_effaces' => 'Nombre de visiteurs supprimés: @nb_visiteurs_effaces@',
     'nb_auteurs_effaces' => 'Nombre de rédacteurs supprimés: @nb_auteurs_effaces@',
-    'nb_admins_restreints_effaces' => 'Nombre d\'admins restreints supprimés: @nb_admins_restreints_effaces@',    
+    'nb_admins_restreints_effaces' => 'Nombre d\'admins restreints supprimés: @nb_admins_restreints_effaces@',
+    'nb_champ_passes' => '<strong>NB</strong>: les mots de passes n\'étant pas récupérables en clair, le champ <strong>pass</strong> sera toujours vide', 
 
 	// O 
     'obligatoire' => 'Ce champs est obligatoire !',
@@ -100,6 +103,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'transfert' => 'Erreur lors du transfert !',
     'transferer_articles' => 'Transférer les articles dans une rubrique d\'archives: ',
     'taille' => 'Le fichier est trop gros !',
+    'titre_choix_statuts' => 'Choix des catégories d\'utilisateurs à exporter',
+    'titre_choix_formats' => 'Choix de la forme des champs supplémentaires',
+    'titre_choix_champs' => 'Choix du type d\'exportation',
 
 	// V
     'visiteurs' => 'Visiteurs',

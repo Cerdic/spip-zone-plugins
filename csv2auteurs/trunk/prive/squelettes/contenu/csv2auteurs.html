@@ -6,8 +6,13 @@
     </div>
 
 
-	<input type="radio"  name="choix" value="importer" checked> <:csv2auteurs:importer:><br>
-	<input type="radio"  name="choix" value="exporter"> <:csv2auteurs:exporter:> <br>
+    <div id="choix_manip" class="formulaire_spip">
+		<h3 class="legend"><:csv2auteurs:choix_manip:></h3>
+		<ul>
+			<li><input type="radio"  name="choix" value="importer" checked="checked" id="choix_import"> <label for="choix_import"><:csv2auteurs:importer:></label></li>
+			<li><input type="radio"  name="choix" value="exporter" id="choix_export"> <label for="choix_export"><:csv2auteurs:exporter:></label></li>
+		</ul>
+	</div>
 
     <div id="exporter" class="aaa">
         #FORMULAIRE_CSV2AUTEURS_EXPORTATION

@@ -68,9 +68,11 @@ function formulaires_csv2auteurs_exportation_traiter_dist() {
                         if ($nom_champ == "statut") {
                             $tableau_csv[$i]["statut"] = $correspondances_statuts[$row['statut']];
                         }
-                        else {
+                        elseif ($nom_champ == "pass") {
+							$tableau_csv[$i][$nom_champ] = '';
+						}
+						else
                             $tableau_csv[$i][$nom_champ] = $row[$nom_champ];
-                        }
                     }
                     // on selectionne les noms des rubriques ou les id_rubriques pour les admins restreints
                     if ($choix_format == 'titre')

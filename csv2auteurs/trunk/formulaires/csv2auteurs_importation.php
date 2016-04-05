@@ -461,8 +461,11 @@ function csv2auteurs_ajout_utilisateur($login, $Tauteur_csv, $Tnom_champs_bdd, $
             }
         }
         
-        // gestion de tous autres champs (y compris extras)
+        // gestion de tous autres champs (y compris extras). 
+        // On ne modifie pas la valeur du passe si son champ est vide (comportement idem l'interface d'admin des utilisateurs)
         if (in_array($champ, $Tnom_champs_bdd)) {
+			if ($champ == 'pass' AND $valeur == '')
+				continue;
             $set[$champ] = ($champ == "statut" AND array_key_exists($valeur, $Tcorrespondances)) ? $Tcorrespondances[$valeur] : $valeur;
         }
     }
