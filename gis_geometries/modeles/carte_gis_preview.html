@@ -29,7 +29,8 @@
 					"properties": {
 						"title":[(#TITRE|supprimer_numero|json_encode)],
 						"description":[(#DESCRIPTIF|json_encode)][(#TYPE|=={Point}|oui)[
-						(#LOGO_GIS|gis_icon_properties)]]
+						(#LOGO_GIS|gis_icon_properties)]][,
+						"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]
 					}
 				}
 		</BOUCLE_points>
@@ -47,7 +48,8 @@
 					"properties": {
 						"title":[(#TITRE|supprimer_numero|json_encode)],
 						"description":[(#DESCRIPTIF|json_encode)][(#TYPE|=={Point}|oui)[
-						(#LOGO_GIS|gis_icon_properties)]]
+						(#LOGO_GIS|gis_icon_properties)]][,
+						"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]
 					}
 				}]
 		};
@@ -55,6 +57,9 @@
 		<//B_points>
 		if (data) {
 			var geojson = new L.geoJson('', {
+				style: function (feature) {
+					return feature.properties.styles;
+				},
 				onEachFeature: function (feature, layer) {
 					if (feature.properties && feature.properties.icon){
 						layer.setIcon(new L.Icon({

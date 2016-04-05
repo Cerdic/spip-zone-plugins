@@ -197,6 +197,7 @@ function gisgeom_post_edition($flux){
 /**
  * Surcharger les boucles GIS et celles qui comportent le critère gis 
  * pour permettre d'accéder à la valeur du champ geo au format WKT (voir balise #GEOMETRY)
+ * et aux valeurs des styles concaténées (voir balise #GEOMETRY_STYLES)
  *
  * @param $boucle
  * @return mixed
@@ -204,6 +205,7 @@ function gisgeom_post_edition($flux){
 function gisgeom_pre_boucle($boucle){
 	if ($boucle->type_requete == 'gis' OR in_array('gis',$boucle->jointures)) {
 		$boucle->select[]= 'AsText(gis.geo) AS geometry';
+		$boucle->select[]= "CONCAT_WS(',', gis.color, gis.weight, gis.opacity, gis.fillcolor, gis.fillopacity) AS geometry_styles";
 	}
 	return $boucle;
 }

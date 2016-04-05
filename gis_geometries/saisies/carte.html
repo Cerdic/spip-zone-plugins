@@ -173,7 +173,7 @@ var geocoder;]
 				}]
 		}
 		var geojson = new L.geoJson('', {[
-			style: (#ENV*{path_styles}|json_encode),
+			style: (#ENV*{path_styles}|?{[(#ENV*{path_styles}|json_encode)],[(#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]}),
 			]onEachFeature: function (feature, layer) {
 				if (feature.geometry.type == 'Polygon' || feature.geometry.type == 'LineString') {
 					// centrer la carte sur les bounds de l'objet

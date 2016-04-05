@@ -14,6 +14,17 @@ function balise_geometry_dist($p) {
 }
 
 /**
+ * Balise GEOMETRY_STYLES pour afficher la représentation JSON des styles
+ *
+ * @param $p
+ * @return mixed
+ */
+function balise_geometry_styles_dist($p) {
+	$p->code = '$Pile[$SP][\'geometry_styles\']';
+	return $p;
+}
+
+/**
  * Filtre wkt_to_json converti une chaine au format WKT en GeoJSON
  * 
  * @param string $wkt
@@ -66,6 +77,27 @@ function wkt_to_gpx($wkt) {
 	find_in_path(_DIR_LIB_GEOPHP.'geoPHP.inc', '', true);
 	$geometry = geoPHP::load($wkt,'wkt');
 	return $geometry->out('gpx');
+}
+
+/**
+ * Filtre geometry_styles_to_json converti une chaine de valeurs séparées par des virugles au format JSON
+ * 
+ * @param string $geometry_styles
+ * @return string
+ */
+function geometry_styles_to_json($geometry_styles) {
+	$values = explode(',', $geometry_styles);
+	if (count(array_filter($values)) < 1) {
+		return false;
+	}
+	$styles = array();
+	$keys = array('color', 'weight', 'opacity', 'fillColor', 'fillOpacity');
+	foreach ($keys as $index => $key) {
+		if (strlen($values[$index])) {
+			$styles[$key] = $values[$index];
+		}
+	}
+	return json_encode($styles);
 }
 
 ?>
