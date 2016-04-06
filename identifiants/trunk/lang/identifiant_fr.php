@@ -30,6 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_identifiants' => 'Configuration des identifiants',
+
+	// U 
+	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser ces identifiants pour les @objets@.', 
+	'utiles_generer_identifiant' => 'Attribuer l\'identifiant <strong>@identifiant@</strong>', 
+	'utiles_titre' => 'Identifiants utiles',
+
 );
 
 ?>

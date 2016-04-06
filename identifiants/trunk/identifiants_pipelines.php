@@ -233,7 +233,7 @@ function identifiants_formulaire_traiter($flux){
 		and autoriser('modifier','identifiants')
 	) {
 
-		maj_identifiant_edition_objet($objet, $id_objet);
+		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
 
 	}
 
@@ -268,7 +268,7 @@ function identifiants_post_insertion($flux){
 		and autoriser('modifier','identifiants')
 	){
 
-		maj_identifiant_edition_objet($objet, $id_objet);
+		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
 
 	}
 
@@ -277,65 +277,50 @@ function identifiants_post_insertion($flux){
 
 
 /**
- * Fonction privée pour mettre à jour l'identifiant lors de l'édition d'un objet.
+ * Ajouter du contenu dans la colonne de gauche d'un objet
  *
- * @param string $objet
- *     Type d'objet
- * @param int $id_objet
- *     Identifiant numérique de l'objet
- * @return bool | string
- *     False si problème, sinon retour des fonctions sql_insertq, sql_updateq ou sql_delete.
- */
-function maj_identifiant_edition_objet($objet='', $id_objet=''){
+ * - Afficher la suggestion de création d'identifiants
+ *
+ * @pipeline affiche_gauche
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/
+function identifiants_affiche_gauche($flux){
 
+	include_spip('inc/config');
+	include_spip('inc/autoriser');
+	include_spip('base/objets');
+	$objets = lire_config('identifiants/objets', array());
+	// prendre en compte le pipeline identifiant_utiles
 	if (
-		$objet
-		and $id_objet = intval($id_objet)
-	) {
-
-		// on récupère le nouvel identifiant
-		$new_identifiant = _request('identifiant');
-
-		// on récupère l'ancien identifiant
-		$old_identifiant = sql_getfetsel(
-			'identifiant',
-			'spip_identifiants',
-			'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet)
-		);
-
-		// on définit ce qu'on doit faire
-		$action =
-			(!$old_identifiant and $new_identifiant)  ? 'creer' :
-			(($old_identifiant and $new_identifiant)  ? 'maj' :
-			(($old_identifiant and !$new_identifiant) ? 'supprimer' : ''));
-
-		switch ($action) {
-
-			case 'creer' :
-				return sql_insertq(
-					'spip_identifiants',
-					array('objet' => $objet, 'id_objet' => $id_objet, 'identifiant' => $new_identifiant)
-				);
-
-			case 'maj' :
-				return sql_updateq(
-					'spip_identifiants',
-					array('identifiant' => $new_identifiant),
-					'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND identifiant='.sql_quote($old_identifiant)
-				);
-
-			case 'supprimer' :
-				return sql_delete(
-					'spip_identifiants',
-					'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND identifiant='.sql_quote($old_identifiant)
-				);
-
-			default :
-				return false;
-		}
-
-	} else {
-		return false;
+		is_array($identifiants_utiles = identifiants_utiles())
+		and $objets_utiles = array_map('table_objet_sql', array_keys($identifiants_utiles))
+	){
+		$objets = array_merge($objets, $objets_utiles);
 	}
 
+	if (
+		$objet = $flux['args']['type-page']
+		and $table_objet_sql = table_objet_sql($objet)
+		and in_array($table_objet_sql, $objets)
+		and $id_table_objet = id_table_objet($objet)
+		and $id_objet = intval($flux['args'][$id_table_objet])
+		and !sql_countsel('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet))
+		and autoriser('voir','identifiants')
+	) {
+
+		// récupérer le squelette
+		$utiles = recuperer_fond(
+			'prive/squelettes/inclure/identifiants_utiles', array(
+				'objet' => $objet,
+				'id_objet' => $id_objet,
+				'identifiants_utiles' => $identifiants_utiles[$objet]
+			)
+		);
+
+		$flux['data'] .= $utiles;
+
+	}
+
+	return $flux;
 }
