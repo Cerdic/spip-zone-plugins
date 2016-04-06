@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_entrees_masquees_explication' => 'Cochez les entrées que vous souhaitez <strong>masquer</strong> lors de la création d’un menu.',
 	'configurer_titre' => 'Configurer les entrées du plugin Menus',
 	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
+	'confirmer_supprimer_sous_menu' => 'Voulez-vous vraiment supprimer ce sous-menu ?',
 
 	// D
 	'description_menu_accueil' => 'Lien vers la page d’accueil du site.',
