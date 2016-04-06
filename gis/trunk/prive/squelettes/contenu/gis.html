@@ -3,7 +3,7 @@
 	[(#AUTORISER{modifier,gis,#ID_GIS})
 	[(#URL_ECRIRE{gis_edit,id_gis=#ID_GIS}|icone_verticale{<:gis:texte_modifier_gis:>,gis,edit,right ajax preload})]
 	]
-	<h1>(#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{gis-24.png}|balise_img{gis,cadre-icone})]</h1>
+	<h1 class="#EDIT{titre}">(#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{gis-24.png}|balise_img{gis,cadre-icone})]</h1>
 ],simple fiche_objet})]
 
 [(#INCLURE{fond=modeles/carte_gis_preview,id_gis})]
