@@ -25,7 +25,3 @@ if (
 ) {
 	ecrire_config('identifiants/objets', array_merge($objets, $objets_utiles));
 }
-
-$test = array('article' => array('caca'));
-$test2 = array('article' => array('pipi', 'popo'), 'rubrique'=>array('culcul'));
-var_dump(array_merge_recursive($test, $test2));
