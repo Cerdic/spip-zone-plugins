@@ -64,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_ajouter_shortcut_url' => 'Ajouter un lien raccourci',
+	'titre_afficher_logs_shortcut_url' => 'Afficher les logs',
+	'titre_afficher_bots_shortcut_url' => 'Afficher les bots',
 	'titre_modifier_shortcut_url' => 'Modifier un lien raccourci',
 	'titre_details_url' => 'Détails de l\'URL raccourcie',
 	'titre_page' => 'Titre de la page',
