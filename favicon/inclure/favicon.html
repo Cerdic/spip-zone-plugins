@@ -61,16 +61,15 @@
 		|image_passe_partout{192,192}
 		|image_recadre{192,192,center}
 		|extraire_attribut{src})" sizes="192x192" />]
-[<meta name="msapplication-TileColor" content="#(#CHEMIN{favicon.png}
-	|sinon{#LOGO_SITE_SPIP}
-		|image_reduire{10}
-		|couleur_extraire)" />]
 [<meta name="msapplication-TileImage" content="(#CHEMIN{favicon.png}
 	|sinon{#LOGO_SITE_SPIP}
 		|image_passe_partout{114,114}
 		|image_recadre{114,114,center}
 		|extraire_attribut{src})" />]
-[<meta name="theme-color" content="#(#CHEMIN{favicon.png}
-	|sinon{#LOGO_SITE_SPIP}
-		|image_reduire{10}
-		|couleur_extraire)" />]
+[(#VAL{_FAVICON_COULEUR}|defined|?{
+	#SET{couleur,#EVAL{_FAVICON_COULEUR}}
+,
+	#SET{couleur,#CHEMIN{favicon.png}|sinon{#LOGO_SITE_SPIP}|image_reduire{10}|couleur_extraire}
+})]
+[<meta name="msapplication-TileColor" content="#(#GET{couleur})" />]
+[<meta name="theme-color" content="#(#GET{couleur})" />]

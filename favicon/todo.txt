@@ -6,6 +6,9 @@
 - erational suggère une page démo dans l’espace privé pour toutes les voir
 - RealET suggère de pouvoir surcharger avec les fichiers graphiques générés par un générateur en ligne, de type http://realfavicongenerator.net
 - têtue préfère, côté interface, en rester au simple « plug&play »
+
+
+= FAIT
 - jeanmarie suggère de pouvoir surcharger theme-color et msapplication-TileColor pour pouvoir choisir plus finement la couleur
 
 Voir aussi :
