@@ -25,8 +25,12 @@ function genie_medias_dereferencer_htaccess_dist($t) {
 	} else {
 		$message_log[] = "L'action a été lancé par SPIP en tâche de fond.";
 	}
+	include_spip('inc/config');
+	$config_md = lire_config('medias_dereferencer');
 
-	md_creation_htaccess_img();
+	if ($config_md['htaccess'] === 'oui') {
+		md_creation_htaccess_img();
+	}
 
 	// on met l'heure de fin de la procédure dans le message de log
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');

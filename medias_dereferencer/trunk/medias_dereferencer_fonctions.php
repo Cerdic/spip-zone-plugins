@@ -275,7 +275,7 @@ function md_creation_htaccess_img() {
 	$extensions_documents = sql_allfetsel('DISTINCT(extension)', 'spip_documents', "statut='prepa'");
 	if (is_array($extensions_documents) and count($extensions_documents) > 0) {
 		foreach ($extensions_documents as $extension) {
-			if (is_readable(_DIR_IMG . $extension['extension'])) {
+			if (is_readable(_DIR_IMG . $extension['extension']) and $config_md['htaccess'] === 'oui') {
 				$medias_htaccess = recuperer_fond('inclure/medias_htaccess', $extension);
 				if (function_exists('fopen') and $ht = fopen(_DIR_IMG . $extension['extension'] . '/' . _ACCESS_FILE_NAME, 'w')) {
 					fputs($ht, $medias_htaccess);
