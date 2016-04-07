@@ -387,7 +387,13 @@ var geocoder;]
 		form_map.on('draw:deleted', function(e) {
 			if(Object.keys(e.layers._layers).length >= 1){
 				$('#champ_[(#ENV{champ_lat,lat})],#champ_[(#ENV{champ_lon,lon})],#champ_[(#ENV{champ_type,type})],#champ_[(#ENV{champ_geojson,geojson})]').val('');
-				gisdraw_change_controls(drawOptions);
+				[(#REM)
+
+					On passe par un settimeout ici pour laisser draw finir son action
+					https://github.com/Leaflet/Leaflet.draw/issues/369
+					
+				]
+				setTimeout(function(){gisdraw_change_controls(drawOptions)},200);
 			}
 		});
 		/**
