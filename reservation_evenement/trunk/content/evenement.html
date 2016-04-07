@@ -4,12 +4,12 @@
 	#SET{id_evenement_source,#ID_EVENEMENT}]
 	[(#ID_EVENEMENT_SOURCE|!={0}|oui)
 	#SET{date_debut,#INFO_DATE_DEBUT{evenement,#ID_EVENEMENT_SOURCE}}]
-	
-	#SET{date_fin,#DATE_FIN} 
-	<BOUCLE_evmt_lie(EVENEMENTS){id_evenement_source=#GET{id_evenement_source}}{! pardate_fin}{0,1}>
-		#SET{date_fin,#DATE_FIN} 
+
+	#SET{date_fin,#DATE_FIN}
+	<BOUCLE_evmt_lie(EVENEMENTS){id_evenement_source=#GET{id_evenement_source}}{! par date_fin}{0,1}>
+		#SET{date_fin,#DATE_FIN}
 	</BOUCLE_evmt_lie>
-	
+
 	<article class="entry evenement vevent id_#ID_EVENEMENT"
 		id="evenement_#ID_EVENEMENT" itemscope
 		itemtype="http://schema.org/Event">
@@ -38,11 +38,11 @@
 			(#DESCRIPTIF|sinon{#GET{intro}})
 		</div>]})]
 		[<div class="main">(#GET{intro})</div>]
-	
+
 		<INCLURE {fond=inclure/evenement_details,
-			id_objet=#GET{id_evenement_source}, 
+			id_objet=#GET{id_evenement_source},
 			id_article,
-			prix=#PRIX, 
+			prix=#PRIX,
 			lieu,
 			places,
 			adresse} />
