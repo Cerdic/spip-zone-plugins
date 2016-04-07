@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">
+	(#ENV*{message_erreur})
+</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">
+	(#ENV*{message_ok})
+</p>]
+	<BOUCLE_editable (CONDITION) {si #EDITABLE|oui}>
+	<form action="#ENV{action}" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div class="form-group text-right">
+			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
+		</div>
+			<BOUCLE_projets (PROJETS) {tout} {par num nom, nom}>
+				<div class="form-group">
+					<div class="control-label">[<strong>(#NOM)</strong>]</div>
+					<B_roles>
+						<div class="btn-group" data-toggle="buttons">
+							<BOUCLE_roles (DATA) {source table, #REM|info_sites_lister_roles_auteurs}>
+								<label class="btn btn-info[(#CLE|in_array{[(#ENV*{projets_anciens}|table_valeur{#_projets:ID_PROJET})]}|oui)active]">
+									<input type="checkbox" autocomplete="off" name="projets[#_projets:ID_PROJET][]" value="#CLE"[(#CLE|in_array{[(#ENV*{projets_anciens}|table_valeur{#_projets:ID_PROJET})]}|oui)checked]> [(#VALEUR|_T)]
+								</label>
+							</BOUCLE_roles>
+						</div>
+					</B_roles>
+				</div>
+			</BOUCLE_projets>
+		<div class="form-group text-right">
+			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
+		</div>
+	</form>
+	</BOUCLE_editable>
+</div>

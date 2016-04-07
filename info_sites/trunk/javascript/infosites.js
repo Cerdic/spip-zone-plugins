@@ -30,10 +30,9 @@ $(document).ready(function () {
 	});
 
 	$('[type=submit]').each(function (event) {
-		$(this).addClass('btn btn-success');
-	});
-	$('#formulaire_recherche [type=submit]').each(function (event) {
-		$(this).removeClass('btn-success');
+		if (!$(this).hasClass('btn')) {
+			$(this).addClass('btn btn-success');
+		}
 	});
 
 	$('#content .icone.s24 a').each(function (event) {

@@ -24,6 +24,10 @@ a, a.list-group-item {
 	&:visited {
 		color: darken(@main-color, 5%);
 	}
+	&.bouton_fermer {
+		display: block;
+		text-align: right;
+	}
 }
 
 a[rel*=home] {
@@ -135,6 +139,10 @@ h1.titre {
 			}
 		}
 	}
+}
+/* Utile pour le formulaire d'ajout des documents sur un objet dans l'espace public. */
+.none, .js .none-js, .no-js .none-nojs {
+	display: none;
 }
 
 .introduction {
@@ -903,8 +911,8 @@ input[type="radio"], input[type="checkbox"] {
 				-moz-box-shadow: @box-shadow;
 				box-shadow: @box-shadow;
 			}
-			ul {
-				li {
+			.editer-groupe {
+				.editer {
 					label {
 						width: 100%;
 						margin-right: 0;
@@ -913,6 +921,12 @@ input[type="radio"], input[type="checkbox"] {
 					}
 					select {
 						width: 100%;
+						background-repeat: no-repeat;
+						background-position: 4px center;
+						option {
+							background-repeat: no-repeat;
+							background-position: 4px center;
+						}
 					}
 					&.erreur {
 						.erreur_message {

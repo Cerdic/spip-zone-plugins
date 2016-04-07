@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'architecte_label' => 'Architecte',
 	'auteur_identifie_informations' => 'Vos informations',
 	'auteur_identifie_profil' => 'Votre profil',
+	'auteur_projets_attribuer' => 'Attribuer des projets à cet auteur',
 
 	// B
 	'btn_diagnostic_iso' => 'Diagnostic ISO',

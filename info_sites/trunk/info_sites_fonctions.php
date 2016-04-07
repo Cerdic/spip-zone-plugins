@@ -246,3 +246,24 @@ function info_sites_lister_content_html() {
 
 	return $resultats;
 }
+
+/**
+ * Lister les rôles possibles d'un auteur sur les projets.
+ * 
+ * @return array
+ *          Liste des rôles d'un auteur sur les projets
+ */
+function info_sites_lister_roles_auteurs() {
+	include_spip('base/objets');
+	$desc_auteurs = lister_tables_objets_sql('spip_auteurs');
+	$roles = array();
+	if (isset($desc_auteurs['roles_titres']) and isset($desc_auteurs['roles_objets']['projets']['choix'])) {
+		foreach ($desc_auteurs['roles_objets']['projets']['choix'] as $role_objet) {
+			if (isset($desc_auteurs['roles_titres'][$role_objet])) {
+				$roles[$role_objet] = $desc_auteurs['roles_titres'][$role_objet];
+			}
+		}
+	}
+
+	return $roles;
+}
