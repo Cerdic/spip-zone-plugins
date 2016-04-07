@@ -1,9 +1,10 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function balise_IDENTITE_($p) {
-
     $cfg = $GLOBALS['identite_extra'];
 
     $nom = $p->nom_champ;
@@ -13,15 +14,18 @@ function balise_IDENTITE_($p) {
         $msg = array('zbug_balise_sans_argument', array('balise' => ' IDENTITE_'));
         erreur_squelette($msg, $p);
         $p->interdire_scripts = false;
+        
         return $p;
-    } elseif ( !in_array($champ, $cfg) ) {
+    } elseif (!in_array($champ, $cfg)) {
         $msg = array('zbug_balise_inexistante', array('balise' => $nom, 'from' => 'identite_extra'));
         erreur_squelette($msg, $p);
         $p->interdire_scripts = false;
+        
         return $p;
     } else {
         $p->code = 'lire_config("identite_extra/' . $champ .'")';
         $p->interdire_scripts = false;
+        
         return $p;
     }
 }

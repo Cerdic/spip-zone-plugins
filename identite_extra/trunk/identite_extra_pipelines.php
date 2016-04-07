@@ -1,7 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) 
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
 
 /**
  * Ajouter des champs supplémentaires sur configurer_identite
@@ -14,42 +15,43 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @return array
  */
 function identite_extra_formulaire_fond($flux) {
-
 	# formulaire : configurer_identite
-	if ( $flux['args']['form'] == 'configurer_identite'
-		AND ( $p = strpos($flux['data'], '<!--extra-->') )
-		AND isset( $GLOBALS['identite_extra'] )
-		AND is_array( $GLOBALS['identite_extra'] ) ) {
-
-		$ajout = recuperer_fond("prive/formulaires/configurer_identite_extra", $flux['args']['contexte'] );
+	if (
+		$flux['args']['form'] == 'configurer_identite'
+		and ($p = strpos($flux['data'], '<!--extra-->'))
+		and isset($GLOBALS['identite_extra'])
+		and is_array($GLOBALS['identite_extra'])
+	) {
+		$ajout = recuperer_fond("prive/formulaires/configurer_identite_extra", $flux['args']['contexte']);
 		$flux['data'] = substr_replace($flux['data'], $ajout, $p, 0);
 	}
-
+	
 	return $flux;
 }
 
 // Charger les valeurs déjà existantes dans la méta
 function identite_extra_formulaire_charger($flux) {
-
 	# formulaire : configurer_identite
 	if ( $flux['args']['form'] == 'configurer_identite' ) {
-
 		$valeurs = array();
-		foreach ($GLOBALS['identite_extra'] as $k)
+		
+		foreach ($GLOBALS['identite_extra'] as $k) {
 			$valeurs['identite_extra'][$k] = lire_config('identite_extra/' . $k, '');
-
-		$flux['data'] = array_merge($flux['data'],$valeurs);
+		}
+		
+		$flux['data'] = array_merge($flux['data'], $valeurs);
 	}
+	
 	return $flux;
 }
 
 
 // Mettre à jour la méta
 function identite_extra_formulaire_traiter($flux) {
-
 	# formulaire : configurer_identite
-	if ( $flux['args']['form'] == 'configurer_identite' AND $config = _request('identite_extra') )
-			ecrire_config('identite_extra', $config);
+	if ($flux['args']['form'] == 'configurer_identite' and $config = _request('identite_extra')) {
+		ecrire_config('identite_extra', $config);
+	}
 
 	return $flux;
 }
