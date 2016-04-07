@@ -96,7 +96,11 @@ var geocoder;]
 			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
 			maj_inputs(form_map,editableLayers,query,'geocoding');
 		}else{
-			alert('<:gis:erreur_geocoder:> '+query.search);
+			if(query.search == 'undefined'){
+				alert('<:gis:erreur_geocoder:>\n'+query.search);
+			}else{
+				alert('<:gis:erreur_geocoder:>');
+			}
 		}
 	}]
 	
@@ -386,6 +390,11 @@ var geocoder;]
 		});
 		form_map.on('draw:deleted', function(e) {
 			if(Object.keys(e.layers._layers).length >= 1){
+				[(#REM)
+					
+					La forme est supprimée, donc on vide l'ensemble des champs
+					
+				]
 				$('#champ_[(#ENV{champ_lat,lat})],#champ_[(#ENV{champ_lon,lon})],#champ_[(#ENV{champ_type,type})],#champ_[(#ENV{champ_geojson,geojson})]').val('');
 				[(#REM)
 
