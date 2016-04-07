@@ -31,9 +31,11 @@ function action_gis_geocoder_rechercher_dist() {
 				unset($arguments['accept-language']);
 			}
 			if($mode == 'search'){
-				$mode = '';
+				$mode = 'api/';
+			}else{
+				$mode = 'reverse';
 			}
-			$url = 'http://photon.komoot.de/api/';
+			$url = 'http://photon.komoot.de/';
 		}
 		else{
 			$url = 'http://nominatim.openstreetmap.org/';
