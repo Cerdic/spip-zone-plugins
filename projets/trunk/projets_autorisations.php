@@ -1,11 +1,13 @@
 <?php
 /**
  * Plugin projets
- * (c) 2012 Cyril Marion
+ * (c) 2012-2016 Cyril Marion
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /*
  * Un fichier d'autorisations permet de regrouper
@@ -13,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 // declaration vide pour ce pipeline.
-function projets_autoriser(){}
-
+function projets_autoriser() {
+}
 
 /* Exemple
 function autoriser_projets_configurer_dist($faire, $type, $id, $qui, $opt) {
@@ -31,16 +33,14 @@ function autoriser_projets_configurer_dist($faire, $type, $id, $qui, $opt) {
 // -----------------
 // Objet projets
 
-
 // bouton de menu
-function autoriser_projets_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_projets_menu_dist($faire, $type, $id, $qui, $opts) {
 	return true;
-} 
-
+}
 
 // creer
 function autoriser_projet_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -58,24 +58,22 @@ function autoriser_projet_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
-
 // associer (lier / delier)
 function autoriser_associerprojets_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
+
 // -----------------
 // Objet projets_cadres
 
-
 // bouton de menu
-function autoriser_projetscadres_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_projetscadres_menu_dist($faire, $type, $id, $qui, $opts) {
 	return true;
-} 
-
+}
 
 // creer
 function autoriser_projetscadre_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -92,7 +90,5 @@ function autoriser_projetscadre_modifier_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_projetscadre_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
-
 
 ?>

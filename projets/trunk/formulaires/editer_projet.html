@@ -6,7 +6,7 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_projet' value='#ENV{id_projet}' />
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{projets, id_projet_parent,
 				label=<:projet:label_id_projet_parent:>,
@@ -37,18 +37,18 @@
 				label=<:projet:label_date_livraison:>,
 				explication=<:projet:explication_date_livraison:> })]
 
-            [(#SAISIE{input, nb_heures_estimees,
-                label=<:projet:label_nb_heures_estimees:>,
-                explication=<:projet:explication_nb_heures_estimees:> })]
+			[(#SAISIE{input, nb_heures_estimees,
+				label=<:projet:label_nb_heures_estimees:>,
+				explication=<:projet:explication_nb_heures_estimees:> })]
 
 			[(#SAISIE{input, nb_heures_reel,
 				label=<:projet:label_nb_heures_reelles:>,
 				explication=<:projet:explication_nb_heures_reelles:> })]
 
 			[(#SAISIE{oui_non, actif,
-                defaut=oui,
-                valeur_oui=oui,
-                valeur_non=non,
+				defaut=oui,
+				valeur_oui=oui,
+				valeur_non=non,
 				label=<:projet:label_actif:>,
 				explication=<:projet:explication_actif:> })]
 
@@ -72,7 +72,7 @@
 				explication=<:projet:explication_descriptif:> ,
 				li_class=haut, class=inserer_barre_edition, rows=4})]
 
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

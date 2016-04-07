@@ -1,8 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -27,9 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_descriptif' => 'Descriptif',
-	'label_id_projets_cadre'  => 'Identifiant du cadre de projet',
-	'label_maj'        => 'Date de mise à jour',
-	'label_titre'      => 'Titre',
+	'label_id_projets_cadre' => 'Identifiant du cadre de projet',
+	'label_maj' => 'Date de mise à jour',
+	'label_titre' => 'Titre',
 
 	// R
 	'retirer_lien_projets_cadre' => 'Retirer ce cadre de projet',
@@ -49,4 +50,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_projets_cadres_rubrique' => 'Cadres de projet de la rubrique',
 );
 
-?>

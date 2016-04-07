@@ -1,12 +1,14 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-    // C
-    'cadres_aide'   => "On peut caractériser un projet selon le cadre dans lequel il a été entrepris.
+	// C
+	'cadres_aide' => "On peut caractériser un projet selon le cadre dans lequel il a été entrepris.
 
 Par exemple, tel projet pourrait être entrepris dans le cadre :
 - d'une prestation forfaitaire,
@@ -25,12 +27,12 @@ Vous pouvez créer autant de cadres de projet que nécessaire.",
 	// E
 	'explication_cfg_objets' => 'Veuillez sélectionner les objets éditoriaux auquels vous désirez lier des projets.',
 
-	// E
+	// L
 	'label_cfg_objets' => 'Liste des objets éditoriaux&nbsp;:',
 
 	// P
 	'projets_titre' => 'Projets',
-    'projets_aide'  => "Cette page liste tous les projets gérés dans ce site.
+	'projets_aide' => "Cette page liste tous les projets gérés dans ce site.
 Il est possible de filtrer les projets selon leur statut dans la boite ci-dessus, et de les trier selon les champs indiqués en couleur dans le tableau ci-contre.
 [Voir la doc en ligne->@lien@].",
 
@@ -39,4 +41,3 @@ Il est possible de filtrer les projets selon leur statut dans la boite ci-dessus
 
 );
 
-?>
