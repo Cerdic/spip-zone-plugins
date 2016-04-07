@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.33.3"
+	version="4.33.4"
 	schema="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -22,7 +22,7 @@
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>
 	<credit lien="http://wiki.openstreetmap.org/wiki/Nominatim">Nominatim</credit>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
-	<copyright>2011-2015</copyright>
+	<copyright>2011-2016</copyright>
 	<licence>GPL v3</licence>
 
 	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
