@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_buttons_polygon' => 'Tracer un polygone',
 	'toolbar_buttons_polyline' => 'Tracer une ligne',
 	'toolbar_buttons_rectangle' => 'Tracer un rectangle',
-	'toolbar_edit_buttons_edit' => 'Modifier les objets',
+	'toolbar_edit_buttons_edit' => 'Modifier l\'objet',
 	'toolbar_edit_buttons_editdisabled' => 'Aucun objet modifiable',
 	'toolbar_edit_buttons_remove' => 'Supprimer un objet',
 	'toolbar_edit_buttons_removedisabled' => 'Aucun objet à supprimer',
@@ -184,6 +184,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_handlers_polyline_tooltip_cont' => 'Cliquez pour continuer à tracer la ligne',
 	'toolbar_handlers_polyline_tooltip_end' => 'Cliquez sur le dernier point pour terminer la ligne',
 	'toolbar_handlers_polyline_tooltip_start' => 'Cliquez pour commencer à tracer la ligne',
+	'toolbar_handlers_rectangle_tooltip_start' => 'Cliquez et déplacez pour tracer un rectangle',
+	'toolbar_handlers_simpleshape_tooltip_end' => 'Relâchez la souris pour terminer le dessin',
 	'toolbar_undo_text' => 'Effacer le dernier point',
 	'toolbar_undo_title' => 'Effacer le dernier point tracé',
 
