@@ -146,10 +146,28 @@ h1.titre {
 }
 
 .pagination {
-	text-align: right;
-	width: 100%;
 	clear: both;
 	overflow: hidden;
+	> li {
+		> a, > span {
+			border-color: @border-color;
+			color: @main-color;
+			&:focus, &:hover {
+				border-color: @border-color;
+				background-color: lighten(@border-color, 10%);
+				color: darken(@main-color, 10%);
+			}
+		}
+	}
+	> .active {
+		> a, > span {
+			&, &:focus, &:hover {
+				border-color: @main-color;
+				background-color: @main-color;
+				color: contrast(@main-color);
+			}
+		}
+	}
 }
 
 // TABLEAUX

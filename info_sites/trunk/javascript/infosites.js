@@ -2,17 +2,18 @@
 
 $(document).ready(function () {
 	function infosites_sommaire(target) {
-		console.log($('#aside .block.sommaire').length);
 		if ($('#aside').length > 0 && $('#aside .block.sommaire').length == 0) {
 			$('#aside').append('<div class="block sommaire hidden-sm hidden-xs"><div class="list-group"></div></div>');
 		}
 		if (target.length > 0) {
 			target.each(function () {
-				$('#aside .sommaire div.list-group').append(
-					'<a class="list-group-item" href="#'
-					+ $(this).attr('id') + '">'
-					+ $(this).text()
-					+ '</a>');
+				if ($("#aside .sommaire div.list-group a[href='#" + $(this).attr('id') + "']").length == 0) {
+					$('#aside .sommaire div.list-group').append(
+						'<a class="list-group-item" href="#'
+						+ $(this).attr('id') + '">'
+						+ $(this).text()
+						+ '</a>');
+				}
 			});
 
 		}
