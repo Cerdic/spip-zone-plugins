@@ -115,16 +115,16 @@ function lim_objets_sans_rubrique() {
 	$exclus = array();
 	$tables = lister_tables_objets_sql();
 	foreach ($tables as $key => $value) {
-		
-		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique'])) {
+		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique']))
 			array_push($exclus,$key);	
-		}
-		// Exception pour les objets breves et sites : sont-ils activés
-		if (lire_config('activer_breves') == 'non')
-			array_push($exclus,'spip_breves');
-		if (lire_config('activer_sites') == 'non')
-			array_push($exclus,'spip_syndic');
 	}
+	
+	// Exception pour les objets breves et sites : sont-ils activés
+	if (lire_config('activer_breves') == 'non')
+		array_push($exclus,'spip_breves');
+	if (lire_config('activer_sites') == 'non')
+		array_push($exclus,'spip_syndic');
+
 	return $exclus;
 }
 
