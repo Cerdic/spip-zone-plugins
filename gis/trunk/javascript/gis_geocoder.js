@@ -87,48 +87,54 @@ L.Geocoder = L.Class.extend({
 			return_location.street = return_location.postcode = return_location.postcode = 
 			return_location.locality = return_location.region = return_location.country  = '';
 			if(geocoder_server == 'photon'){
-				place = response.features[0];
-				var street_components = [];
-				
-				if (place.properties.country) {
-					return_location.country = place.properties.country;
+				if(!response.features.length || response.features.length == 0){
+					return_location.error = 'not found';
 				}
-				if (place.properties.country_code) {
-					return_location.country_code = place.properties.country_code;
+				else{
+					place = response.features[0];
+					var street_components = [];
+					
+					if (place.properties.country) {
+						return_location.country = place.properties.country;
+					}
+					if (place.properties.country_code) {
+						return_location.country_code = place.properties.country_code;
+					}
+					if (place.properties.state) {
+						return_location.region = place.properties.state;
+					}
+					if (place.properties.city) {
+						return_location.locality = place.properties.city;
+					} else if (place.properties.town) {
+						return_location.locality = place.properties.town;
+					} else if (place.properties.village) {
+						return_location.locality = place.properties.village;
+					}else if(place.properties.osm_key == 'place' && (place.properties.osm_value == 'city' || place.properties.osm_value == 'village')){
+						return_location.locality = place.properties.name;
+					} else if (place.properties.county) {
+						street_components.push(place.properties.county);
+					}
+					if (place.properties.postcode) {
+						return_location.postcode = place.properties.postcode;
+					}
+					if (place.properties.street) {
+						street_components.push(place.properties.street);
+					}
+					else if (place.properties.road) {
+						street_components.push(place.properties.road);
+					} else if (place.properties.pedestrian) {
+						street_components.push(place.properties.pedestrian);
+					}
+					if (place.properties.housenumber) {
+						street_components.unshift(place.properties.housenumber);
+					}
+					if (return_location.street === '' && street_components.length > 0) {
+						return_location.street = street_components.join(' ');
+					}
+					place.lat = place.geometry.coordinates[1];
+					place.lon = place.geometry.coordinates[0];
+					return_location.point = new L.LatLng(place.lat, place.lon);
 				}
-				if (place.properties.state) {
-					return_location.region = place.properties.state;
-				}
-				if (place.properties.city) {
-					return_location.locality = place.properties.city;
-				} else if (place.properties.town) {
-					return_location.locality = place.properties.town;
-				} else if (place.properties.village) {
-					return_location.locality = place.properties.village;
-				}else if(place.properties.osm_key == 'place' && (place.properties.osm_value == 'city' || place.properties.osm_value == 'village')){
-					return_location.locality = place.properties.name;
-				} else if (place.properties.county) {
-					street_components.push(place.properties.county);
-				}
-				if (place.properties.postcode) {
-					return_location.postcode = place.properties.postcode;
-				}
-				if (place.properties.street) {
-					street_components.push(place.properties.street);
-				}
-				else if (place.properties.road) {
-					street_components.push(place.properties.road);
-				} else if (place.properties.pedestrian) {
-					street_components.push(place.properties.pedestrian);
-				}
-				if (place.properties.housenumber) {
-					street_components.unshift(place.properties.housenumber);
-				}
-				if (return_location.street === '' && street_components.length > 0) {
-					return_location.street = street_components.join(' ');
-				}
-				place.lat = place.geometry.coordinates[1];
-				place.lon = place.geometry.coordinates[0];
 			}
 			else{
 				if (response.length > 0)
@@ -171,8 +177,8 @@ L.Geocoder = L.Class.extend({
 				if (return_location.street === '' && street_components.length > 0) {
 					return_location.street = street_components.join(' ');
 				}
+				return_location.point = new L.LatLng(place.lat, place.lon);
 			}
-			return_location.point = new L.LatLng(place.lat, place.lon);
 		}
 		this._user_callback(return_location);
 	}
