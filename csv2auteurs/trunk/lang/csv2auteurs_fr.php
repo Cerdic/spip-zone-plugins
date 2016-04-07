@@ -79,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'presentation_formulaire' => 'CSV2AUTEURS : gestion des utilisateurs de SPIP à partir de fichiers CSV',
     'point_virgule'=>'Point-virgule ";"',
     'passage_poubelle' => 'passer à la poubelle',
+    'probleme_creation_maj_compte' => '<strong class="erreur">Erreur !</strong> La création/modification du compte <strong>@login_auteur@</strong> retourne l\'erreur: ',
+    'pas_nouveau_compte_sans_mdp' => '<strong class="erreur">Erreur !</strong> La création du compte <strong>@login_auteur@</strong> est annulée: il manque le mot de passe.',
 
 	// R
     'redacteurs' => 'Rédacteurs',
@@ -98,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'separateur' => 'Choix du caractère de séparation de champs',
     'submit_format_import' => 'Exporter au format d\'importation',
     'submit_export_' => 'Exporter les champs sélectionnés',
+    'statut_absent' => '<strong class="erreur">Attention !</strong> Le compte <strong>@login_auteur@</strong> n\'a pas de statut défini: il est intégré comme visiteur.',
     
 	// T
     'transfert' => 'Erreur lors du transfert !',

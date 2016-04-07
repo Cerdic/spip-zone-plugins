@@ -148,7 +148,7 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
     // traiter le fichier CSV
     $i = 0;
     $num_statut = $num_login = -1;
-    while (($data = fgetcsv($fichiercsv, "$separateur")) !== FALSE){
+    while (($data = fgetcsv($fichiercsv, "$separateur")) !== FALSE) {
        // petit hack car fgetcsv ne reconnait pas le ~ comme séparateur !!!
        $data           = implode("$separateur", $data);
        $data           = explode("$separateur", $data);
@@ -166,7 +166,7 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
                 if ($en_tete[$j] == 'login')
                     $num_login = $j;
            }
-            if ($num_statut < 0 OR $num_login < 0){
+            if ($num_statut < 0 OR $num_login < 0) {
                 $retour['message_erreur'] = _T('csv2auteurs:champ_manquant').' login:'.$num_login.' statut'.$num_statut;
                 return  $retour;
             }
@@ -183,10 +183,10 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
                    if ($Tcorrespondances[strtolower($data[$num_statut])] == '6forum')
                         $tableau_csv_visiteurs[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "6forum" : $data[$j];
                         
-                   if ($Tcorrespondances[strtolower($data[$num_statut])] == '1comite')
+                   elseif ($Tcorrespondances[strtolower($data[$num_statut])] == '1comite')
                         $tableau_csv_redacs[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "1comite" : $data[$j];
                         
-                   if ($Tcorrespondances[strtolower($data[$num_statut])] == '0minirezo') {
+                   elseif ($Tcorrespondances[strtolower($data[$num_statut])] == '0minirezo') {
                         $tableau_csv_admins[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "0minirezo" : $data[$j];
                         // récup des rubriques pour les admins restreints
                         if ($en_tete[$j] == 'ss_groupe' AND $data[$j]) {
@@ -196,6 +196,13 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
                                     $tableau_csv_rubriques_admins[] = $rub;
                         }
                     }
+					// si pas de statut reconnu on passe en visiteur
+                    else {
+						$tableau_csv_visiteurs[$data[$num_login]][$en_tete[$j]] = $en_tete[$j] == "statut" ? "6forum" : $data[$j];
+						if ($en_tete[$j] == "login")
+							$retour['message_ok'] .= '<br />'._T('csv2auteurs:statut_absent', array('login_auteur' => $data[$j]));
+					}
+                    
                 }
             }
         }
@@ -402,7 +409,6 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
 			$retour['message_ok'] .= '<br />'._T('csv2auteurs:nb_admins_restreints_effaces', array('nb_admins_restreints_effaces' => count($Tid_admins)));
     }
 
-    
     return $retour;
 }
 
@@ -463,11 +469,19 @@ function csv2auteurs_ajout_utilisateur($login, $Tauteur_csv, $Tnom_champs_bdd, $
         
         // gestion de tous autres champs (y compris extras). 
         // On ne modifie pas la valeur du passe si son champ est vide (comportement idem l'interface d'admin des utilisateurs)
+        // en revanche si nouvel auteur et pas de passe: ne pas créer
         if (in_array($champ, $Tnom_champs_bdd)) {
-			if ($champ == 'pass' AND $valeur == '')
-				continue;
+			if ($champ == 'pass' AND $valeur == '') {
+				if (!$id_auteur) {
+					return '<br />'._T('csv2auteurs:pas_nouveau_compte_sans_mdp', array('login_auteur' => $login));
+				}
+				else
+					continue;
+			}
             $set[$champ] = ($champ == "statut" AND array_key_exists($valeur, $Tcorrespondances)) ? $Tcorrespondances[$valeur] : $valeur;
         }
+        
+        
     }
     // si l'utilisateur est 0minirezo mais qu'il n'a pas de rubrique à administrer, le dégrader en redacteur
     if ($set['statut'] == '0minirezo' AND count($Trubadmin) == 0) {
@@ -480,7 +494,9 @@ function csv2auteurs_ajout_utilisateur($login, $Tauteur_csv, $Tnom_champs_bdd, $
         $id_auteur = auteur_inserer();
     
     // remplir les champs ou les maj
-    auteur_modifier($id_auteur, $set);
+    $ret = auteur_modifier($id_auteur, $set);
+    if ($ret != '')
+		$retour .= '<br />'._T('csv2auteurs:probleme_creation_maj_compte', array('login_auteur' => $login)).$ret;
 
     //liaison des rubriques
     if (count($Trubadmin) AND $set["statut"] == "0minirezo")
