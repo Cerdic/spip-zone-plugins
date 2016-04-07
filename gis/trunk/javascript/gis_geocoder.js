@@ -60,6 +60,14 @@ L.Geocoder = L.Class.extend({
 			dataType: 'jsonp',
 			jsonp: 'json_callback',
 			success: this._callback,
+			error:function(e){
+				/**
+				 * Photon me renvoie une erreur à chaque fois
+				 */
+				if(e.statusText == "OK" && e.status == "200"){
+					this._callback(e.responseText,e.status,e);
+				}
+			},
 			url: url
 		});
 	},
@@ -68,56 +76,100 @@ L.Geocoder = L.Class.extend({
 		var return_location = {};
 		if(this.options.search)
 			return_location.search = this.options.search;
+		if(typeof response === "string"){
+			geocoder_server = 'photon';
+			response = JSON.parse(response);
+		}
 		if (((response instanceof Array) && (!response.length)) || ((response instanceof Object) && (response.error))) {
 			return_location.error = 'not found';
 		} else {
 			return_location.street = return_location.postcode = return_location.postcode = 
 			return_location.locality = return_location.region = return_location.country  = '';
+			if(geocoder_server == 'photon'){
+				place = response.features[0];
+				var street_components = [];
+				
+				if (place.properties.country) {
+					return_location.country = place.properties.country;
+				}
+				if (place.properties.country_code) {
+					return_location.country_code = place.properties.country_code;
+				}
+				if (place.properties.state) {
+					return_location.region = place.properties.state;
+				}
+				if (place.properties.city) {
+					return_location.locality = place.properties.city;
+				} else if (place.properties.town) {
+					return_location.locality = place.properties.town;
+				} else if (place.properties.village) {
+					return_location.locality = place.properties.village;
+				}else if(place.properties.osm_key == 'place' && (place.properties.osm_value == 'city' || place.properties.osm_value == 'village')){
+					return_location.locality = place.properties.name;
+				} else if (place.properties.county) {
+					street_components.push(place.properties.county);
+				}
+				if (place.properties.postcode) {
+					return_location.postcode = place.properties.postcode;
+				}
+				if (place.properties.street) {
+					street_components.push(place.properties.street);
+				}
+				else if (place.properties.road) {
+					street_components.push(place.properties.road);
+				} else if (place.properties.pedestrian) {
+					street_components.push(place.properties.pedestrian);
+				}
+				if (place.properties.housenumber) {
+					street_components.unshift(place.properties.housenumber);
+				}
+				if (return_location.street === '' && street_components.length > 0) {
+					return_location.street = street_components.join(' ');
+				}
+				place.lat = place.geometry.coordinates[1];
+				place.lon = place.geometry.coordinates[0];
+			}
+			else{
+				if (response.length > 0)
+					place = response[0];
+				else {
+					place = response;
+				}
 
-			if (response.length > 0)
-				place = response[0];
-			else {
-				place = response;
-			}
-
-			var street_components = [];
-
-			if (place.address.country) {
-				return_location.country = place.address.country;
-			}
-			if (place.address.country_code) {
-				return_location.country_code = place.address.country_code;
-			}
-			if (place.address.state) {
-				return_location.region = place.address.state;
-			}
-			/* un jour peut-être...
-			if (place.address.county) {
-				return_location.departement = place.address.county;
-			}
-			*/
-			if (place.address.city) {
-				return_location.locality = place.address.city;
-			} else if (place.address.town) {
-				return_location.locality = place.address.town;
-			} else if (place.address.village) {
-				return_location.locality = place.address.village;
-			} else if (place.address.county) {
-				street_components.push(place.address.county);
-			}
-			if (place.address.postcode) {
-				return_location.postcode = place.address.postcode;
-			}
-			if (place.address.road) {
-				street_components.push(place.address.road);
-			} else if (place.address.pedestrian) {
-				street_components.push(place.address.pedestrian);
-			}
-			if (place.address.house_number) {
-				street_components.unshift(place.address.house_number);
-			}
-			if (return_location.street === '' && street_components.length > 0) {
-				return_location.street = street_components.join(' ');
+				var street_components = [];
+	
+				if (place.address.country) {
+					return_location.country = place.address.country;
+				}
+				if (place.address.country_code) {
+					return_location.country_code = place.address.country_code;
+				}
+				if (place.address.state) {
+					return_location.region = place.address.state;
+				}
+				if (place.address.city) {
+					return_location.locality = place.address.city;
+				} else if (place.address.town) {
+					return_location.locality = place.address.town;
+				} else if (place.address.village) {
+					return_location.locality = place.address.village;
+				} else if (place.address.county) {
+					street_components.push(place.address.county);
+				}
+				if (place.address.postcode) {
+					return_location.postcode = place.address.postcode;
+				}
+				if (place.address.road) {
+					street_components.push(place.address.road);
+				} else if (place.address.pedestrian) {
+					street_components.push(place.address.pedestrian);
+				}
+				if (place.address.house_number) {
+					street_components.unshift(place.address.house_number);
+				}
+				if (return_location.street === '' && street_components.length > 0) {
+					return_location.street = street_components.join(' ');
+				}
 			}
 			return_location.point = new L.LatLng(place.lat, place.lon);
 		}

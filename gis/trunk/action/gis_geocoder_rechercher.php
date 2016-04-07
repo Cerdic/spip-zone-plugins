@@ -21,8 +21,24 @@ function action_gis_geocoder_rechercher_dist() {
 	/* On filtre les arguments à renvoyer à Nomatim (liste blanche) */
 	$arguments = collecter_requests(array("json_callback", "format", "q", "limit", "addressdetails", "accept-language", "lat", "lon"), array());
 
-	if(!empty($arguments)) {
+	$geocoder = defined('_GIS_GEOCODER') ? _GIS_GEOCODER : 'nominatim';
+	
+	if(!empty($arguments) && in_array($geocoder,array('photon','nominatim'))) {
 		header('Content-Type: application/json; charset=UTF-8');
-		echo recuperer_page("http://nominatim.openstreetmap.org/{$mode}?" . http_build_query($arguments));
+		if($geocoder == 'photon'){
+			if(isset($arguments['accept-language'])){
+				$arguments['lang'] = $arguments['accept-language'];
+				unset($arguments['accept-language']);
+			}
+			if($mode == 'search'){
+				$mode = '';
+			}
+			$url = 'http://photon.komoot.de/api/';
+		}
+		else{
+			$url = 'http://nominatim.openstreetmap.org/';
+		}
+		$data = recuperer_page("{$url}{$mode}?" . http_build_query($arguments));
+		echo $data;
 	}
 }
