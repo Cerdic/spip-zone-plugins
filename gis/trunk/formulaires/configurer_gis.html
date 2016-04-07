@@ -128,8 +128,13 @@
 	function geocode(query) {
 		if(!query.error)
 			maj_inputs(map,query,'geocoding');
-		else
-			alert('<:gis:erreur_geocoder:> '+query.search);
+		else{
+			if(query.search == 'undefined'){
+				alert('<:gis:erreur_geocoder:>\n'+query.search);
+			}else{
+				alert('<:gis:erreur_geocoder:>');
+			}
+		}
 	}
 
 	var init_config = function() {
