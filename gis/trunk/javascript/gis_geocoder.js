@@ -74,6 +74,7 @@ L.Geocoder = L.Class.extend({
 	
 	_callback: function (response,textStatus,jqXHR) {
 		var return_location = {};
+		var geocoder_server = false;
 		if(this.options.search)
 			return_location.search = this.options.search;
 		if(typeof response === "string"){
