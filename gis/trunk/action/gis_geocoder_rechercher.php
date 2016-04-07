@@ -43,8 +43,6 @@ function action_gis_geocoder_rechercher_dist() {
 		
 		$url = defined('_GIS_GEOCODER_URL') ? _GIS_GEOCODER_URL : $url;
 		$data = recuperer_page("{$url}{$mode}?" . http_build_query($arguments));
-		spip_log("{$url}{$mode}?" . http_build_query($arguments),'test.'._LOG_ERREUR);
-		spip_log($data,'test.'._LOG_ERREUR);
 		echo $data;
 	}
 }
