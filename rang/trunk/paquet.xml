@@ -1,0 +1,25 @@
+<paquet
+	prefix="rang"
+	categorie="navigation"
+	version="0.0.1"
+	etat="experimental"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="prive/themes/spip/images/rang-64.png"
+	documentation="https://contrib.spip.net/Plugin-Rang-ordonner-par-Drag-Drop"
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2016-02-01 15:11:47
+	-->
+
+	<nom>Rang</nom>
+	<!-- Permet de réordonner les tables de SPIP par drag&amp;drop -->
+
+	<auteur lien='http://www.akilia.net'>Pierre Miquel</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="rang_autorisations.php" />
+	<pipeline nom="recuperer_fond" inclure="rang_pipelines.php" />
+
+</paquet>
