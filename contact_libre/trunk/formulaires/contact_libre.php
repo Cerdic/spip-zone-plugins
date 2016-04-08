@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function formulaires_contact_libre_charger_dist($adresse, $url='', $sujet=''){
+function formulaires_contact_libre_charger_dist($adresse = null, $url='', $sujet=''){
 	include_spip('inc/texte');
 	
 	$valeurs = array(
@@ -17,7 +17,7 @@ function formulaires_contact_libre_charger_dist($adresse, $url='', $sujet=''){
 	return $valeurs;
 }
 
-function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
+function formulaires_contact_libre_verifier_dist($adresse = null, $url='', $sujet=''){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/texte');
@@ -73,12 +73,16 @@ function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 	return $erreurs;
 }
 
-function formulaires_contact_libre_traiter_dist($adresse, $url='', $sujet=''){
+function formulaires_contact_libre_traiter_dist($adresse = null, $url='', $sujet=''){
 	
 	$adres = _request('email_message');
 	$sujet = _request('sujet_message');
 	$texte = _request('texte_message');
-	
+
+	if (is_null($adresse)) {
+		$adresse = lire_config('email_webmaster');
+	}
+
 	$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 	if($url)
 		$texte .= "\n\n-- Depuis la page : ".supprimer_tags($url)." --\n";

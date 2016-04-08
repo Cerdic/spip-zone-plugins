@@ -1,7 +1,7 @@
 <paquet
 	prefix="contact_libre"
 	categorie="communication"
-	version="1.0.0"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/contact_libre-48.png"
