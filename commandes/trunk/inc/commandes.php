@@ -250,7 +250,7 @@ function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expedite
  *     Identifiant de la commande
  * @return void
  */
-function traiter_notifications_commande($id_commande=0){
+function commandes_notifier($id_commande=0){
 
 	if (intval($id_commande)==0) return;
 
@@ -286,4 +286,13 @@ function traiter_notifications_commande($id_commande=0){
 		}
 
 	}
+}
+
+/**
+ * legacy
+ * @uses commandes_notifier()
+ * @param int $id_commande
+ */
+function traiter_notifications_commande($id_commande=0){
+	return commandes_notifier($id_commande);
 }

@@ -57,7 +57,7 @@ function action_editer_commande_dist($id_commande=null) {
  *
  * Les notifications par email sont traitées après l'insertion en base et l'appel des pipelines
  *
- * @uses traiter_notifications_commande()
+ * @uses commandes_notifier()
  *
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
@@ -121,7 +121,7 @@ function commande_inserer($id_parent=null, $champs=array()) {
 		// Envoi des notifications par email
 		spip_log("inserer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
 		include_spip('inc/commandes');
-		traiter_notifications_commande($id_commande);
+		commandes_notifier($id_commande);
 
 	}
 
@@ -195,7 +195,7 @@ function commande_modifier($id_commande, $set=null) {
  * Modifie des éléments à part que sont l'auteur, la date, le statut
  *
  * @uses editer_commande_details()
- * @uses traiter_notifications_commande()
+ * @uses commandes_notifier()
  *
  * @pipeline_appel pre_edition
  * @pipeline_appel post_edition
@@ -291,7 +291,7 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 
 	// Envoi des notifications par email
 	spip_log("instituer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
-	traiter_notifications_commande($id_commande);
+	commandes_notifier($id_commande);
 
 	return ''; // pas d'erreur
 }
