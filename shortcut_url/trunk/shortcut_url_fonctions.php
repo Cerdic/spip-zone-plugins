@@ -55,6 +55,7 @@ function shortcut_compteur($id_shortcut_url){
 	if(_IS_BOT) {
 		$humain = 'bot';
 		$insert_bot = sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address));
+		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
 	} else
 		$humain = 'oui';
 

@@ -194,15 +194,15 @@ $(document).ready(function($) {
 	<div id="bar"></div>
 #BOITE_FERMER
 
-<h2><:shortcut_url:titre_shortcut_url_graph_click:></h2>
+<h2><:shortcut_url:titre_shortcut_url_graph_humain_click:></h2>
 
 <script type="text/javascript">
 
 	$(document).ready(function($) {
 			var json = [
 				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
-					<BOUCLE_shortcut_url_dateclick_graph(SHORTCUT_URLS_LOGS){id_shortcut_url}{fusion DATE_FORMAT(date_modif, '%Y-%m-%d')}{!par date_modif}>#SET{date_modif,#DATE_MODIF|affdate{Y-m-d}}
-					<BOUCLE_shortcut_url_dateclick_graph_nb(SHORTCUT_URLS_LOGS){id_shortcut_url}{date_modif LIKE (#GET{date_modif})%}> </BOUCLE_shortcut_url_dateclick_graph_nb>
+					<BOUCLE_shortcut_url_dateclick_graph(SHORTCUT_URLS_LOGS){id_shortcut_url}{humain=oui}{fusion DATE_FORMAT(date_modif, '%Y-%m-%d')}{!par date_modif}>#SET{date_modif,#DATE_MODIF|affdate{Y-m-d}}
+					<BOUCLE_shortcut_url_dateclick_graph_nb(SHORTCUT_URLS_LOGS){id_shortcut_url}{humain=oui}{date_modif LIKE (#GET{date_modif})%}> </BOUCLE_shortcut_url_dateclick_graph_nb>
 						{
 							"label": "[(#GET{date_modif})]",
 							"value": "#TOTAL_BOUCLE"

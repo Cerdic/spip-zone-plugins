@@ -3,6 +3,14 @@
 	country_code,1
 }})
 ]
+
+<BOUCLE_count_humains(SHORTCUT_URLS_LOGS) {id_shortcut_url}>
+[(#SET{total_humain, #TOTAL_BOUCLE})]
+</BOUCLE_count_humains>
+<BOUCLE_count_bots(SHORTCUT_URLS_BOTS) {id_shortcut_url}>
+[(#SET{total_bot, #TOTAL_BOUCLE})]
+</BOUCLE_count_bots>
+
 <BOUCLE_liste_shortcut_url_logs_detail(SHORTCUT_URLS){id_shortcut_url}>
 <h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
 
@@ -29,6 +37,10 @@
 <br class="nettoyeur" />
 
 [<strong>(#ENV*{titre,#CLICK|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url_click,shortcut_url:info_nb_shortcut_url_clicks}})</strong>]
+<p>
+	<:shortcut_url:info_1_shortcut_url_humain{click=#GET{total_humain}}:><br />
+	<:shortcut_url:info_1_shortcut_url_bot{click=#GET{total_bot}}:>
+</p>
 
 <B_liste_shortcut_url_logs>
 #ANCRE_PAGINATION

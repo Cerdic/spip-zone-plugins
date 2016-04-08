@@ -91,7 +91,12 @@ function autoriser_breves_menu($faire, $type, $id, $qui, $opt){
 function shortcut_url_ajouter_menus($boutons_admin){
 	include_spip('inc/autoriser');
 	if(autoriser('menu','_menu_shortcut_url')){
-		$boutons_admin['menu_shortcut_url']->sousmenu[str_replace('.html','',$page)] = new Bouton(find_in_theme('images/shortcut_url-16.png'), 'shortcut_url:shortcut_url_logs', 'shortcut_url_logs');
+		$pages = array('shortcut_url_logs', 'shortcut_url_logs_export');
+		foreach($pages as $page){
+			$boutons_admin['menu_shortcut_url']->sousmenu[] = new Bouton(find_in_theme('images/shortcut_url-16.png'), 'shortcut_url:' . $page, $page);
+		}
+
+
 	}
 	else{
 		unset($boutons_admin['menu_shortcut_url']);

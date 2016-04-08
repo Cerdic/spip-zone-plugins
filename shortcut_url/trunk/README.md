@@ -11,6 +11,16 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
+## Version 1.0.5 (08/04/2016)
+
+- Ajout du détail des clicks par bots et par humains
+- Ajout du graph en ligne pour le nombre de click par les bots
+- Ajout de l'export des statistiques au format CSV
+- Fixe le liens vers la liste des stats sur la liste des stats des bots
+- Fixe les chaînes de langue qui ne le sont pas
+- Fixe le bug de lien vers la page de détail de stats sur la page résumé du click
+- Fixe le nombre de click par URL, compte aussi les bots dans le total
+
 ## Version 1.0.4 (23/12/2015)
 
 - Fixe le nombre de signe pour le raccourci dans options.php
