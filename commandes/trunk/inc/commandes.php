@@ -257,7 +257,7 @@ function traiter_notifications_commande($id_commande=0){
 	if (
 		include_spip('inc/config')
 		and $config = lire_config('commandes')
-		and $quand = $config['quand'] ? $config['quand'] : array()
+		and $quand = ($config['quand'] ? $config['quand'] : array())
 		and $config['activer'] // les notifications sont activées
 		and $statut = sql_getfetsel('statut', table_objet_sql('commande'), "id_commande=".intval($id_commande))
 		and in_array($statut, $quand) // le nouveau statut est valide pour envoyer une notification
@@ -287,5 +287,3 @@ function traiter_notifications_commande($id_commande=0){
 
 	}
 }
-
-?>
