@@ -392,7 +392,9 @@ function commandes_bank_abos_preparer_echeance($flux){
 	// On commence par chercher la commande dont il s'agit
 	// et vérifier qu'elle a des échéances
 	if (
-		strncmp($id,"uid:",4) == 0
+		isset($flux['args']['id'])
+		and $id = $flux['args']['id']
+		and strncmp($id,"uid:",4) == 0
 		and $bank_uid = substr($id, 4)
 		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
 		and $id_commande = intval($commande['id_commande'])
@@ -434,7 +436,9 @@ function commandes_bank_abos_resilier($flux){
 	// On commence par chercher la commande dont il s'agit
 	// et vérifier qu'elle a des échéances
 	if (
-		strncmp($id,"uid:",4) == 0
+		isset($flux['args']['id'])
+		and $id = $flux['args']['id']
+		and strncmp($id,"uid:",4) == 0
 		and $bank_uid = substr($id, 4)
 		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
 		and $id_commande = intval($commande['id_commande'])
