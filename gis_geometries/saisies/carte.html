@@ -15,6 +15,7 @@
 	- hauteur = 350px
 	- nodraw = oui						permet de désactiver la barre d'édition pour revenir au comportement par défaut
 	- noimport = oui					permet de masquer le champ d'import de fichier GPX/KML
+	- nomajinputs = oui					permet de ne pas mettre à jour les inputs de lat / lon / zoom et adresse
 	- boutons = #ARRAY{marker,non}		permet de spécifier les boutons à ne pas afficher dans la barre d'édition (clés possibles : marker, polyline, polygon)
 	- path_styles=#ARRAY{color,#fff}	options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
 
@@ -57,23 +58,27 @@ var geocoder;]
 		var zoom = map.getZoom();
 		if(data.lng <= -180) data.lng = data.lng+360
 		else if(data.lng > 180) data.lng = data.lng-360;
-		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
+		[(#ENV{nomajinputs,non}|=={oui}|non)
+		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);]
 		if(action == 'click'){
+			[(#ENV{nomajinputs,non}|=={oui}|non)
 			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(data.lng);
+			$('#champ_#ENV{champ_lon,lon}').val(data.lng);]
 			annuler_geocoder = 1;
 			map.panTo(data);
 			marker.setLatLng(data);
 		}
 		else if(annuler_geocoder != 1){
 			if(data.point == 'undefined'){
+				[(#ENV{nomajinputs,non}|=={oui}|non)
 				$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-				$('#champ_#ENV{champ_lon,lon}').val(data.lng);
+				$('#champ_#ENV{champ_lon,lon}').val(data.lng);]
 				map.panTo(data);
 				marker.setLatLng(data);
 			}else{
+				[(#ENV{nomajinputs,non}|=={oui}|non)
 				$('#champ_#ENV{champ_lat,lat}').val(data.point.lat);
-				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);
+				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);]
 				map.panTo(data.point);
 				marker.setLatLng(data.point);
 			}
@@ -87,13 +92,14 @@ var geocoder;]
 	[(#GET{geocoder}|oui)
 	function geocode(query) {
 		if(! query.error){
+			[(#ENV{nomajinputs,non}|=={oui}|non)
 			$('#champ_#ENV{champ_adresse,adresse}').val(query.street);
 			$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
 			$('#champ_#ENV{champ_ville,ville}').val(query.locality);
 			$('#champ_#ENV{champ_departement,departement}').val(query.departement);
 			$('#champ_#ENV{champ_region,region}').val(query.region);
 			$('#champ_#ENV{champ_pays,pays}').val(query.country);
-			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
+			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);]
 			maj_inputs(form_map,editableLayers,query,'geocoding');
 		}else{
 			if(query.search == 'undefined'){
@@ -122,8 +128,9 @@ var geocoder;]
 				layer = e;
 			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
 			var center = layer.getBounds().getCenter();
+			[(#ENV{nomajinputs,non}|=={oui}|non)
 			$('#champ_#ENV{champ_lat,lat}').val(center.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+			$('#champ_#ENV{champ_lon,lon}').val(center.lng);]
 		}
 		var gisdraw_change_controls = function(options){
 			form_map.removeControl(drawControl);
@@ -180,10 +187,11 @@ var geocoder;]
 		);
 		// mettre à jour les champs de latitude et longitude quand la carte est chargée
 		// a voir si on le fait dans tous les cas, pas seulement pour la boundingbox, comme pour le zoom
+		[(#ENV{nomajinputs,non}|=={oui}|non)
 		form_map.on('load', function(e) {
 			$('#champ_#ENV{champ_lat,lat}').val(e.latlng.lat);
 			$('#champ_#ENV{champ_lon,lon}').val(e.latlng.lon);
-		});]
+		});]]
 
 		[(#REM)
 			
@@ -395,8 +403,9 @@ var geocoder;]
 					La forme est supprimée, donc on vide l'ensemble des champs
 					
 				]
+				[(#ENV{nomajinputs,non}|=={oui}|non)
 				$('#champ_[(#ENV{champ_lat,lat})],#champ_[(#ENV{champ_lon,lon})],#champ_[(#ENV{champ_type,type})],#champ_[(#ENV{champ_geojson,geojson})]').val('');
-				$('#champ_[(#ENV{champ_adresse,adresse})],#champ_[(#ENV{champ_code_postal,code_postal})],#champ_[(#ENV{champ_ville,ville})],#champ_[(#ENV{champ_departement,departement})],#champ_[(#ENV{champ_region,region})],#champ_[(#ENV{champ_pays,pays})],#champ_[(#ENV{champ_code_pays,code_pays})]').val('');
+				$('#champ_[(#ENV{champ_adresse,adresse})],#champ_[(#ENV{champ_code_postal,code_postal})],#champ_[(#ENV{champ_ville,ville})],#champ_[(#ENV{champ_departement,departement})],#champ_[(#ENV{champ_region,region})],#champ_[(#ENV{champ_pays,pays})],#champ_[(#ENV{champ_code_pays,code_pays})]').val('');]
 				[(#REM)
 
 					On passe par un settimeout ici pour laisser draw finir son action
@@ -444,6 +453,7 @@ var geocoder;]
 			marker_dragend(marker);
 		});
 		// mettre à jour le champ geosjon et le marker quand on change les valeur de lat ou lon
+		[(#ENV{nomajinputs,non}|=={oui}|non)
 		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').change(function(){
 			var new_lat = $('#champ_#ENV{champ_lat,lat}').val();
 			var new_lon = $('#champ_#ENV{champ_lon,lon}').val();
@@ -451,7 +461,7 @@ var geocoder;]
 			marker.setLatLng(new_center);
 			form_map.panTo(new_center);
 			$('#champ_#ENV{champ_geojson,geojson}').val('{"type":"Point","coordinates":\['+ new_lon +','+ new_lat +'\]}');
-		});]
+		});]]
 		
 		[(#ENV{nodraw}|oui)
 		// mettre à jour les coordonnées quand on déplace le marker
@@ -460,9 +470,10 @@ var geocoder;]
 		});]
 		
 		// mettre à jour le zoom quand on le modifie
+		[(#ENV{nomajinputs,non}|=={oui}|non)
 		form_map.on('zoomend', function(e) {
 			$('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
-		});
+		});]
 		
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
@@ -506,4 +517,5 @@ var geocoder;]
 	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
 	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
 </[(#VAL{li}|saisie_balise_structure_formulaire)]>]
+#FILTRE{trim}
 <!--extragis-->
