@@ -242,6 +242,6 @@ var geocoder;]
 [(#GET{geocoder}|oui)
 <[(#VAL{li}|saisie_balise_structure_formulaire)] class="rechercher_adresse editer editer_[(#ENV{nom})]">
 	<label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
-	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
+	<input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" placeholder="<:gis:placeholder_geocoder|attribut_html:>" value="" />
 	<a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
 </[(#VAL{li}|saisie_balise_structure_formulaire)]>]

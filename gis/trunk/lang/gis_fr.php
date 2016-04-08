@@ -150,6 +150,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_gis' => 'Ajouter ce point',
 	'lon' => 'Longitude',
 
+	// P
+	'placeholder_geocoder' => 'Une adresse, une ville, un pays, un lieu touristique...',
+
 	// T
 	'telecharger_gis' => 'Télécharger au format @format@',
 	'texte_ajouter_gis' => 'Ajouter un point géolocalisé',
