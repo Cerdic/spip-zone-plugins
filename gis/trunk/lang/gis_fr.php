@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_objet' => 'Aucun objet',
 
 	// B
-	'bouton_annuler_title' => 'Annuler l\'édition, effacera toutes les modifications.',
+	'bouton_annuler_title' => 'Annuler l’édition, effacera toutes les modifications.',
 	'bouton_enregistrer_title' => 'Enregistrez vos modifications.',
 	'bouton_lier' => 'Lier ce point',
 	'bouton_supprimer_gis' => 'Supprimer définitivement ce point',
@@ -170,12 +170,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_buttons_polygon' => 'Tracer un polygone',
 	'toolbar_buttons_polyline' => 'Tracer une ligne',
 	'toolbar_buttons_rectangle' => 'Tracer un rectangle',
-	'toolbar_edit_buttons_edit' => 'Modifier l\'objet',
+	'toolbar_edit_buttons_edit' => 'Modifier l’objet',
 	'toolbar_edit_buttons_editdisabled' => 'Aucun objet modifiable',
 	'toolbar_edit_buttons_remove' => 'Supprimer un objet',
 	'toolbar_edit_buttons_removedisabled' => 'Aucun objet à supprimer',
-	'toolbar_edit_handlers_edit_tooltip_text' => 'Déplacez les poignées ou le marker pour modifier l\'objet.',
 	'toolbar_edit_handlers_edit_tooltip_subtext' => 'Cliquez sur annuler pour supprimer les modifications',
+	'toolbar_edit_handlers_edit_tooltip_text' => 'Déplacez les poignées ou le marker pour modifier l’objet.',
 	'toolbar_edit_handlers_remove_tooltip_text' => 'Cliquez sur un objet pour le supprimer',
 	'toolbar_handlers_marker_tooltip_start' => 'Cliquez pour placer le marqueur',
 	'toolbar_handlers_polygon_tooltip_cont' => 'Cliquez pour continuer à tracer le polygone',
