@@ -265,6 +265,13 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_commande/$id_commande'");
 
+	include_spip('inc/commandes');
+	// distribuer la commande si payee
+	if ($statut != $statut_ancien
+	  and $statut=='paye'
+	  and in_array($statut_ancien,array('encours','attente','partiel'))){
+		commandes_distribuer($id_commande);
+	}
 
 	spip_log("instituer_commande : flux post_edition pour la commande $id_commande",'commandes.'._LOG_INFO);
 
@@ -284,7 +291,6 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 
 	// Envoi des notifications par email
 	spip_log("instituer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
-	include_spip('inc/commandes');
 	traiter_notifications_commande($id_commande);
 
 	return ''; // pas d'erreur
