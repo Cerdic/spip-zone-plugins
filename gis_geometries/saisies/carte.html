@@ -225,7 +225,7 @@ var geocoder;]
 					// centrer la carte sur les bounds de l'objet
 					form_map_[(#ENV{nom})].fitBounds(layer.getBounds());
 					// surveiller les changements sur les points de l'objet
-					layer.on("edit", function(e){
+					layer.on('edit', function(e){
 						layer_edit(e);
 					});
 				} else if (feature.geometry.type == 'Point') {
@@ -244,7 +244,7 @@ var geocoder;]
 					// rendre le marker draggable
 					layer.options.draggable = true;
 					// surveiller les changements sur le point
-					layer.on("dragend", function(e){
+					layer.on('dragend', function(e){
 						marker_dragend(e);
 					});
 				}
@@ -263,7 +263,7 @@ var geocoder;]
 					// centrer la carte sur les bounds de l'objet
 					form_map_[(#ENV{nom})].fitBounds(layer.getBounds());
 					// surveiller les changements sur les points de l'objet
-					layer.on("edit", function(e){
+					layer.on('edit', function(e){
 						layer_edit(e);
 					});
 				} else if (feature.geometry.type == 'Point') {
@@ -282,7 +282,7 @@ var geocoder;]
 					// rendre le marker draggable
 					layer.options.draggable = true;
 					// surveiller les changements sur le point
-					layer.on("dragend", function(e){
+					layer.on('dragend', function(e){
 						marker_dragend(e);
 					});
 				}
@@ -379,7 +379,7 @@ var geocoder;]
 				editableLayers_[(#ENV{nom})].addLayer(marker);
 				$('#champ_#ENV{champ_type,type}').val('Point');
 				marker_dragend(layer);
-				marker.on("dragend", function(e){
+				marker.on('dragend', function(e){
 					marker_dragend(e);
 				});
 			} else {
@@ -390,7 +390,7 @@ var geocoder;]
 					$('#champ_#ENV{champ_type,type}').val('LineString');
 				}
 				layer_edit(layer);
-				layer.on("edit", function(e){
+				layer.on('edit', function(e){
 					layer_edit(e);
 				});
 			}
@@ -455,7 +455,7 @@ var geocoder;]
 		});
 		// mettre à jour le champ geosjon et le marker quand on change les valeur de lat ou lon
 		[(#ENV{nomajinputs,non}|=={oui}|non)
-		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').change(function(){
+		$('#champ_#ENV{champ_lat,lat}, #champ_#ENV{champ_lon,lon}').on('change',function(){
 			var new_lat = $('#champ_#ENV{champ_lat,lat}').val();
 			var new_lon = $('#champ_#ENV{champ_lon,lon}').val();
 			var new_center = new L.LatLng(new_lat, new_lon);
@@ -478,14 +478,14 @@ var geocoder;]
 		
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
-		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
+		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").on('click',function(){
 			var address = $("#champ_#ENV{nom}_geocoder").val();
 			annuler_geocoder_[(#ENV{nom})] = 0;
 			geocoder.geocode(address);
 		});
 
 		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
-		$('#champ_#ENV{nom}_geocoder').keypress(function(e){
+		$('#champ_#ENV{nom}_geocoder').on('keypress', function(e){
 			if (e.which == 13) {
 				$('a##ENV{nom}_rechercher_geocodage').trigger("click");
 				return false;

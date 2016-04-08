@@ -194,7 +194,7 @@ var geocoder;]
 			maj_inputs(form_map,e.latlng,'click');
 		});
 
-		marker.on("dragend", function(e){
+		marker.on('dragend', function(e){
 			maj_inputs(form_map,e.target._latlng,'click');
 		});
 
@@ -205,14 +205,14 @@ var geocoder;]
 
 		[(#GET{geocoder}|oui)
 		// geocoder si clic...
-		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
+		$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").on('click',function(){
 			var address = $("#champ_#ENV{nom}_geocoder").val();
 			annuler_geocoder = 0;
 			geocoder.geocode(address);
 		});
 
 		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
-		$('#champ_#ENV{nom}_geocoder').keypress(function(e){
+		$('#champ_#ENV{nom}_geocoder').on('keypress', function(e){
 			if (e.which == 13) {
 				$('a##ENV{nom}_rechercher_geocodage').trigger("click");
 				return false;
