@@ -265,13 +265,6 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_commande/$id_commande'");
 
-	if ($date) {
-		$t = strtotime($date);
-		$p = @$GLOBALS['meta']['date_prochain_postdate'];
-		if ($t > time() AND (!$p OR ($t < $p))) {
-			ecrire_meta('date_prochain_postdate', $t);
-		}
-	}
 
 	spip_log("instituer_commande : flux post_edition pour la commande $id_commande",'commandes.'._LOG_INFO);
 
