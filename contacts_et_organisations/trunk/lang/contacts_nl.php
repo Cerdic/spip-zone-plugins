@@ -1,11 +1,15 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/contacts?lang_cible=nl
+// ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
 	'associe_a' => 'verbonden met :',
 	'associer_a' => 'Te verbinden met :',
 	'aucun_contact' => 'Er is geen contact !',
@@ -13,11 +17,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_associe_est_a_la_poubelle' => 'De verbonden auteur wordt weggegooit ! Deze auteur zal binnen enkele dagen uitgewist worden',
 	'auteur_associe_inexistant' => 'De verbonden auteur bestaat niet ! De auteur moest in de vuilbak verwijderd worden en werd verwijderd ',
 	'auteur_lie' => 'Id van de verbonden auteur',
+
+	// B
 	'bouton_contacts' => 'Contacten',
 	'bouton_contacts_organisations' => 'Contacten & Organisaties',
 	'bouton_organisations' => 'Oranisaties',
 	'bouton_rechercher' => 'Opzoeken',
 	'bouton_repertoire' => 'Adresboek',
+
+	// C
 	'changer' => 'Veranderen',
 	'chercher_contact' => 'Zoeken',
 	'chercher_organisation' => 'Zoeken',
@@ -50,11 +58,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contacts_tout' => 'Alle contacten',
 	'creer_auteur_contact' => 'Nieuwe auteur oprichten en aan dit contact te verbinden',
 	'creer_auteur_organisation' => 'Nieuwe auteur oprichten en aan deze organisatie te verbinden',
+
+	// D
 	'definir_auteur_comme_contact' => 'als contact aanwijzen',
 	'definir_auteur_comme_organisation' => 'als organisatie aanwijzen',
 	'delier_cet_auteur' => 'Losbinden',
 	'delier_contact' => 'Losbinden',
 	'delier_organisation' => 'Losbinden',
+
+	// E
 	'erreur_annuaire_identifiant_existant' => 'Deze identifier werd reeds gebruikt door één van onze ',
 	'est_un_contact' => 'Deze auteur wordt als contact gedefinieerd',
 	'est_une_organisation' => 'Deze auteur wordt als organisatie gedefinieerd',
@@ -67,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_organisation' => 'De afschaffing van de organisatie zal alle aanvullende informaties gegeven over de auteur afschaffen',
 	'exporter_contacts' => 'Deze contacten in een tabel downloaden',
 	'exporter_organisations' => 'Deze organisaties in een tabel downloaden',
+
+	// I
 	'info_contacts_organisation' => 'Contacten van de organisatie',
 	'info_nb_contacts' => 'Verbonden contacten',
 	'info_organisation_appartenance' => 'Bijbehorende organisatie',
@@ -76,6 +90,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_contacts' => 'Alle contacten',
 	'info_toutes_organisations' => 'Alle organisaties',
 	'infos_contacts_ou_organisations' => 'Contacten en Organisaties',
+
+	// L
 	'label_activite' => 'Activiteit',
 	'label_auteur_associe' => 'Verbonden auteur',
 	'label_civilite' => 'Burgerlijke stand',
@@ -108,11 +124,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_organisation' => 'Een organisatie verbinden',
 	'liste_contacts' => 'Contactenlijst',
 	'liste_organisations' => 'Organisatielijst',
+
+	// N
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacten',
 	'nom_contact' => 'Naam',
 	'nom_organisation' => 'Naam',
 	'non_renseigne' => 'Niet ingelicht',
+
+	// O
 	'organisation' => 'Organisatie',
 	'organisation_ajouter' => 'Een organisatie toevoegen',
 	'organisation_ajouter_lien' => 'Deze organisatie toevoegen',
@@ -134,16 +154,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisations' => 'Organisaties',
 	'organisations_nb' => '@nb@ organisaties',
 	'organisations_tout' => 'Alle organisaties',
+
+	// P
 	'prenom' => 'Voornaam',
+
+	// R
 	'recherche_de' => 'Opzoeken "@recherche@"',
 	'rechercher' => 'Opzoeken',
 	'resume_annuaire' => 'Samenvatting van uw adresboek',
 	'resume_annuaires' => 'Samenvatting van uw adresboeken',
+
+	// S
 	'statut_juridique' => 'Juridische statuut',
 	'suppression_automatique_de_organisation_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ',
 	'suppression_automatique_du_contact_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ',
 	'supprimer_contact' => 'Dit contact afschaffen',
 	'supprimer_organisation' => 'Deze organisatie afschaffen',
+
+	// T
 	'titre_contact' => 'Details van het contact',
 	'titre_contacts' => 'De contacten',
 	'titre_organisation' => 'Details van de organisatie',
@@ -153,5 +181,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_organisations' => 'Beheer van de organisaties',
 	'titre_page_repertoire' => 'Adresboek',
 	'titre_parametrages' => 'Parameters instellen',
-	'tous' => 'Alle',
+	'tous' => 'Alle'
 );
+
+?>
