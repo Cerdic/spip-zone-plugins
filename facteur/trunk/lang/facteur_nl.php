@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_cc' => 'Kopie (CC) :',
 	'facteur_copies' => 'Kopieën:',
 	'facteur_copies_descriptif' => 'Deze adressen worden in kopie van de email gezet. Niet meer dan één adres in kopie en/of in verborgen kopie.',
+	'facteur_email_test' => 'Een test email sturen naar:',
 	'facteur_filtre_accents' => 'Zet tekens met accenten om in hun html-code (met name voor Hotmail).',
 	'facteur_filtre_css' => 'Zet de stijlen binnen &lt;head&gt; en &lt;/head&gt; om in "inline" stijlen, wat zinvol is voor webmails.',
 	'facteur_filtre_images' => 'Voeg afbeeldingen in',
@@ -58,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_identite_email' => 'De configuratie van plugin "facteur" laadt dit e-mailadres voor het verzenden van mails.',
 
 	// N
-	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.', # MODIF
+	'note_test_configuration' => 'Een mail wordt naar het aangegeven adres (of naar de webmaster) verzonden.',
 
 	// P
 	'personnaliser' => 'Personaliseren',
