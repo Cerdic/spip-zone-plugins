@@ -146,8 +146,7 @@ function sites_projets_maj_plugins() {
 	$liste_plugins = array();
 
 	if (is_array($sites_projets)) {
-		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_plugins',
-			'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
+		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_plugins', 'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
 		if (is_array($liste_sites_projets_plugins) and count($liste_sites_projets_plugins) > 0) {
 			foreach ($liste_sites_projets_plugins as $key => $site_projet) {
 				$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins']);
@@ -191,11 +190,37 @@ function info_sites_lister_logiciels_sites() {
 			$logiciels_nom[] = $site['logiciel_nom'];
 		}
 	}
-
-	$logiciels_nom = array_filter($logiciels_nom); // On enlève les valeurs vides
-	$logiciels_nom = array_values($logiciels_nom); // On réindexe le tableau pour éviter des surprises
+	$logiciels_nom = info_sites_nettoyer_tableau($logiciels_nom);
 
 	return $logiciels_nom;
+}
+
+function info_sites_lister_logiciels_projet($id_projet, $class = '') {
+	include_spip('base/bastract_sql');
+	$logiciels_nom = array();
+	$logiciels_base = sql_allfetsel('logiciel_nom', 'spip_projets_sites', "id_projets_site IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE id_objet=$id_projet AND objet='projet')");
+	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
+		foreach ($logiciels_base as $site) {
+			if (is_null($class) or empty($class)) {
+				$logiciels_nom[] = $site['logiciel_nom'];
+			} else {
+				$logiciels_nom[] = info_sites_nom_machine($site['logiciel_nom']);
+			}
+		}
+	}
+	$logiciels_nom = info_sites_nettoyer_tableau($logiciels_nom);
+
+	return $logiciels_nom;
+}
+
+function info_sites_nom_machine($subject) {
+	$nom_tmp = trim($subject); // On enlève les espaces indésirables
+	$nom_tmp = translitteration_complexe($nom_tmp); // On enlève les accents et cie
+	$nom_tmp = preg_replace("/(\/|[[:space:]])/", '_', $nom_tmp); // On enlève les espaces et les slashs
+	$nom_tmp = preg_replace("/(_+)/", '_', $nom_tmp); // pas de double underscores
+	$nom_tmp = strtolower($nom_tmp); // On met en minuscules
+
+	return $nom_tmp;
 }
 
 function info_sites_lister_type($meta) {
@@ -207,7 +232,7 @@ function info_sites_lister_type($meta) {
 			$objets_selectionnes[$key] = objet_type($value);
 		}
 	}
-	$objets_selectionnes = array_filter($objets_selectionnes);
+	$objets_selectionnes = info_sites_nettoyer_tableau($objets_selectionnes);
 
 	return $objets_selectionnes;
 }
@@ -249,7 +274,7 @@ function info_sites_lister_content_html() {
 
 /**
  * Lister les rôles possibles d'un auteur sur les projets.
- * 
+ *
  * @return array
  *          Liste des rôles d'un auteur sur les projets
  */
@@ -266,4 +291,31 @@ function info_sites_lister_roles_auteurs() {
 	}
 
 	return $roles;
+}
+
+function info_sites_lister_projets_auteurs($id_auteur = '') {
+	if (is_null($id_auteur) or empty($id_auteur)) {
+		$id_auteur = session_get('id_auteur');
+	}
+	$projets_id = array();
+	$projets_base = sql_allfetsel('id_objet', 'spip_auteurs_liens', "objet='projet' AND id_auteur=$id_auteur");
+
+	if (is_array($projets_base) and count($projets_base) > 0) {
+		foreach ($projets_base as $projet) {
+			$projets_id[] = $projet['id_objet'];
+		}
+	}
+	$projets_id = info_sites_nettoyer_tableau($projets_id);
+
+	return $projets_id;
+}
+
+function info_sites_nettoyer_tableau($tableau = array()) {
+	if (count($tableau) > 0) {
+		$tableau = array_unique($tableau); // Pas de doublons
+		$tableau = array_filter($tableau); // On enlève les valeurs vides
+		$tableau = array_values($tableau); // On réindexe le tableau pour éviter des surprises
+	}
+
+	return $tableau;
 }

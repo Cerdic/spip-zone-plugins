@@ -1,5 +1,23 @@
 <div class="formulaire_spip formulaire_#FORM">
 
+	<div class="form-group">
+		<button data-toggle="collapse" href="#filtres" class="btn btn-info"><:info_sites:filtres_label:></button>
+		<div id="filtres" class="collapse">
+			<div class="form-group">
+				<h4><:info_sites:techno_label:></h4>
+				<button class="btn btn-default" onclick="show_block()"><:info_sites:voir_tout:></button>
+				<BOUCLE_logiciels_sites (DATA) {source table, #REM|info_sites_lister_logiciels_sites}>
+					<button class="btn btn-default" onclick="show_block(['(#VALEUR|info_sites_nom_machine)'])">[(#VALEUR)]</button>
+				</BOUCLE_logiciels_sites>
+			</div>
+			<div class="form-group">
+				<h4><:info_sites:autres_label:></h4>
+				<button class="btn btn-default" onclick="show_block()"><:info_sites:voir_tout:></button>
+				<button class="btn btn-default" onclick="show_block('auteur_session')"><:info_sites:mes_projets_label:></button>
+				<button class="btn btn-default" onclick="show_block('auteurs_projets')"><:info_sites:auteur_projets_label:></button>
+			</div>
+		</div>
+	</div>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">
 	(#ENV*{message_erreur})
 </p>]
@@ -12,8 +30,8 @@
 		<div class="form-group text-right">
 			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
 		</div>
-			<BOUCLE_projets (PROJETS) {tout} {par num nom, nom}>
-				<div class="form-group">
+			<BOUCLE_projets (PROJETS) {tout} {par num projets.nom, projets.nom}>
+				<div id="projet_#ID_PROJET" class="form-group projet[ (#ID_PROJET|info_sites_lister_logiciels_projet{'oui'}|implode{' '})][(#ID_PROJET|in_array{[(#REM|info_sites_lister_projets_auteurs)]}|oui)auteur_session][(#ID_PROJET|in_array{[(#ID_AUTEUR|info_sites_lister_projets_auteurs)]}|oui)auteurs_projets]">
 					<div class="control-label">[<strong>(#NOM)</strong>]</div>
 					<B_roles>
 						<div class="btn-group" data-toggle="buttons">
@@ -32,3 +50,14 @@
 	</form>
 	</BOUCLE_editable>
 </div>
+
+<script type='text/javascript'>
+	function show_block(nom_logiciel = null) {
+		if (nom_logiciel == null) {
+			$('.formulaire_auteur_projets_associer form .form-group.projet').show();
+		} else {
+			$('.formulaire_auteur_projets_associer form .form-group.projet').hide();
+			$('.formulaire_auteur_projets_associer form .form-group.projet.' + nom_logiciel).show();
+		}
+	}
+</script>

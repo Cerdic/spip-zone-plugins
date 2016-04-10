@@ -156,7 +156,13 @@ h1.titre {
 .pagination {
 	clear: both;
 	overflow: hidden;
+	float: none;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	width: 100%;
 	> li {
+		display: inline-block;
 		> a, > span {
 			border-color: @border-color;
 			color: @main-color;
@@ -1032,11 +1038,11 @@ input[type="radio"], input[type="checkbox"] {
 		visibility: hidden;
 	}
 
-	ul {
+	ul, .editer-groupe {
 		padding-left: 0;
 		list-style: none;
 
-		li {
+		li, .editer {
 			overflow: hidden;
 			padding-bottom: 0.5em;
 			margin-bottom: 1em;

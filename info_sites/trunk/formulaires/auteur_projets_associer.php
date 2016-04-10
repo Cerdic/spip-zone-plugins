@@ -37,9 +37,9 @@ function formulaires_auteur_projets_associer_traiter_dist($id_auteur) {
 	include_spip('base/abstract_sql');
 	$projets_anciens = _request('projets_anciens');
 	$projets = _request('projets');
-	if (is_array($projets_anciens) and count($projets_anciens) > 0) {
-		sql_delete('spip_auteurs_liens', "id_auteur=$id_auteur AND objet='projet' AND id_objet IN (" . implode(',', array_keys($projets_anciens)) . ")");
-	}
+	// On enlève les projets, pour les mettre à jour plus loin.
+	// On est sur une table de lien, de ce fait, il n'y a pas de procédures simples de mise à jour des tables de liens.
+	sql_delete('spip_auteurs_liens', "id_auteur=$id_auteur AND objet='projet'");
 
 	if (is_array($projets) and count($projets) > 0) {
 		foreach ($projets as $id_projet => $roles_auteur) {

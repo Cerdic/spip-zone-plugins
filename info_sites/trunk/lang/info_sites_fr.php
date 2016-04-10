@@ -15,6 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_identifie_informations' => 'Vos informations',
 	'auteur_identifie_profil' => 'Votre profil',
 	'auteur_projets_attribuer' => 'Attribuer des projets à cet auteur',
+	'auteur_projets_label' => 'Projets de l\'auteur',
+	'autres_label' => 'Autres',
 
 	// B
 	'btn_diagnostic_iso' => 'Diagnostic ISO',
@@ -55,6 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_liens_projet' => 'Joindre un projet',
 	'editer_liens_projets_site' => 'Joindre un site',
 	'editer_liens_projets_site_title' => 'Associer une fiche existante de site.',
+
+	// F
+	'filtres_label' => 'Filtres',
 
 	// I
 	'icone_creer_fiche_siste' => 'Créer une fiche de site',
@@ -100,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_projets_cadres' => 'Cadres de projet',
 	'menu_projets_sites' => 'Sites',
 	'menu_statistiques' => 'Statistiques',
+	'mes_projets_label' => 'Mes projets',
 
 	// N
 	'non' => 'Non',
@@ -119,11 +125,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'stats_nb_versions' => 'Nombre de versions',
 
 	// T
+	'techno_label' => 'Technologie',
 	'titre_informations_annexes' => 'Informations annexes',
 	'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
 	'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
 	'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
 	'titre_page_lister_projets_sites' => 'Lister les sites de projets',
+
+	// V
+	'voir_tout' => 'Tout voir',
 
 	// W
 	'webservice_consultation' => 'Consultation du webservice',

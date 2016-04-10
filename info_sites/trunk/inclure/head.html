@@ -21,6 +21,11 @@
 [(#REM) Balise permettant aux plugins d'inserer des fichiers CSS ]
 #INSERT_HEAD_CSS
 
+#SET{paramcss,#REM|parametres_css_prive}
+[<link rel="stylesheet" href="(#URL_PAGE{medias_css}|concat{'&',[(#GET{paramcss})]})" type="text/css" />]
+
+[<link rel="stylesheet" href="(#CSS{css/spip.css})" type="text/css" />]
+
 [<link rel="stylesheet" href="(#CSS{css/info_sites.css})" type="text/css" />]
 [
 (#ENV{type-page}|in_array{#LISTE{login,spip_pass}}|oui)
