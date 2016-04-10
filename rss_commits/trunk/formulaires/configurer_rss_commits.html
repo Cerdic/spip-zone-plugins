@@ -9,7 +9,7 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{radio, import_auto,
 				label=<:commits:label_import_auto:>,
@@ -27,7 +27,7 @@
 				type=password,
 				label=<:commits:label_password:>})]
 
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		<input type="hidden" name="_meta_casier" value="rss_commits" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
