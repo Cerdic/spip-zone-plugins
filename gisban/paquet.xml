@@ -1,7 +1,7 @@
 <paquet
 	prefix="gisban"
 	categorie="divers"
-	version="0.0.3"
+	version="0.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gis.png"
