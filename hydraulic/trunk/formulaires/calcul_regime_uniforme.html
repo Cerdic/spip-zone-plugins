@@ -2,25 +2,25 @@
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
 
 <form method="post" action="#ENV{action}" id="form_regime_uniforme">
-    #ACTION_FORMULAIRE{#ENV{action}}
-    <table class="hyd_formulaire">
-        <tbody>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<table class="hyd_formulaire">
+		<tbody>
 
-            <!-- On génère les champs du formulaire en suivant le tableau saisies -->
-            <INCLURE{fond=hyd_inc/formulaire_champs,env}>
+			<!-- On génère les champs du formulaire en suivant le tableau saisies -->
+			<INCLURE{fond=hyd_inc/formulaire_champs,env}>
 
-            <tr>
-                <td colspan="4" class="hyd_bouton_submit">
-                   <input type="submit" value="<:hydraulic:calculer:>">
-                </td>
-            </tr>
+			<tr>
+				<td colspan="4" class="hyd_bouton_submit">
+					<input type="submit" value="<:hydraulic:calculer:>">
+				</td>
+			</tr>
 
-      </tbody>
-   </table>
+		</tbody>
+	</table>
 </form>
 
 <script language="javascript">
-    // Affichage des champs du type de section sélectionné uniquement
-    sectionDisplayFieldset();
+	// Affichage des champs du type de section sélectionné uniquement
+	sectionDisplayFieldset();
 </script>
 [<div id="hyd_resultat">(#ENV*{message_ok})</div>]

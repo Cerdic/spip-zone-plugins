@@ -1,10 +1,10 @@
-function getSelectValue(selectId){
-	
+function getSelectValue(selectId) {
+
 	var selectElmt = document.getElementById(selectId);
 	return selectElmt.options[selectElmt.selectedIndex].value;
 }
 
-function getRadioValue(radioId){
+function getRadioValue(radioId) {
 	var radioElmt = document.getElementsByName(radioId);
 	var choix = "";
 	for (i=0; i<radioElmt.length; i++){
@@ -14,4 +14,3 @@ function getRadioValue(radioId){
 	}
 	return choix;
 }
-

@@ -30,57 +30,56 @@
  * @param $bCourbe Pour ajouter la longueur du bief dans la liste des champs (calcul courbe de remous)
  */
 function mes_saisies_section($bCourbe=false) {
-    /* Tableau niveau 1 : Composantes pour chaque variable, la clé est le nom de
-     * la variable dans le formulaire, et la valeur contient un tableau avec le
-     * code de langue, la valeur par défaut et les tests de de vérification à
-     * effectuer sur le champ (o : obligatoire, p : positif, n : nul accepté)
-     */
-    $caract_com = array(
-        'FT' => array(
-            'def_section_trap',
-            array(
-                'rLargeurFond'  =>array('largeur_fond',2.5,'opn'),
-                'rFruit'        =>array('fruit', 0.56,'opn')
-            )
-        ),
+	/* Tableau niveau 1 : Composantes pour chaque variable, la clé est le nom de
+	 * la variable dans le formulaire, et la valeur contient un tableau avec le
+	 * code de langue, la valeur par défaut et les tests de de vérification à
+	 * effectuer sur le champ (o : obligatoire, p : positif, n : nul accepté)
+	 */
+	$caract_com = array(
+		'FT' => array(
+			'def_section_trap',
+			array(
+				'rLargeurFond'  =>array('largeur_fond',2.5,'opn'),
+				'rFruit'        =>array('fruit', 0.56,'opn')
+			)
+		),
 
-        'FR' => array(
-            'def_section_rect',
-            array(
-                'rLargeurFond'  =>array('largeur_fond',2.5,'op'),
-            )
-        ),
+		'FR' => array(
+			'def_section_rect',
+			array(
+				'rLargeurFond'  =>array('largeur_fond',2.5,'op'),
+			)
+		),
 
-        'FC' => array(
-            'def_section_circ',
-            array(
-                'rD'  =>array('diametre',2,'op')
-            )
-        ),
+		'FC' => array(
+			'def_section_circ',
+			array(
+				'rD'  =>array('diametre',2,'op')
+			)
+		),
 
-        'FP' => array(
-            'def_section_parab',
-            array(
-                'rk' =>array('coef',0.5,'op'),
-                'rLargeurBerge' =>array('largeur_berge',4,'op')
-            )
-        )
-    );
+		'FP' => array(
+			'def_section_parab',
+			array(
+				'rk' =>array('coef',0.5,'op'),
+				'rLargeurBerge' =>array('largeur_berge',4,'op')
+			)
+		)
+	);
 
-    $caract_com['c_bief'] = array(
-       'caract_bief',
-       array(
-             'rKs'    =>array('coef_strickler',40,'op')));
-    if($bCourbe) {
-        // Pour la courbe de remous, on a besoin de la longueur du bief en plus
-        $caract_com['c_bief'][1]['rLong'] = array('longueur_bief',100,'op');
-    }
-    $caract_com['c_bief'][1]['rIf'] = array('pente_fond',0.001,'opn');
-    $caract_com['c_bief'][1]['rYB'] = array('h_berge',1,'opn');
+	$caract_com['c_bief'] = array(
+		'caract_bief',
+		array(
+			'rKs'    =>array('coef_strickler',40,'op')
+		)
+	);
+	if($bCourbe) {
+		// Pour la courbe de remous, on a besoin de la longueur du bief en plus
+		$caract_com['c_bief'][1]['rLong'] = array('longueur_bief',100,'op');
+	}
+	$caract_com['c_bief'][1]['rIf'] = array('pente_fond',0.001,'opn');
+	$caract_com['c_bief'][1]['rYB'] = array('h_berge',1,'opn');
 
-    return $caract_com;
+	return $caract_com;
 }
-
-
-
 ?>

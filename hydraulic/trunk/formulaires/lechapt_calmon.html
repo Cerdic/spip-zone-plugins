@@ -2,21 +2,21 @@
 <script language="javascript" type="text/javascript" src="#CHEMIN{js/hyd_fonctions.js}"></script>
 
 <form method="post" action="#ENV{action}#VAL{#resultat_lechapt_calmon}" id="form_lechapt_calmon">
-   #ACTION_FORMULAIRE{#ENV{action}}
-    <table class="hyd_formulaire">
-        <tbody>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<table class="hyd_formulaire">
+		<tbody>
 
-        <!-- On génère les champs du formulaire en suivant le tableau saisies -->
-        <INCLURE{fond=hyd_inc/formulaire_champs,env}>
+			<!-- On génère les champs du formulaire en suivant le tableau saisies -->
+			<INCLURE{fond=hyd_inc/formulaire_champs,env}>
 
-            <tr>
-                <td colspan="5" class="hyd_bouton_submit">
-                   <input type="submit" value="<:hydraulic:calculer_lechapt_calmon:>">
-                </td>
-            </tr>
+			<tr>
+				<td colspan="5" class="hyd_bouton_submit">
+					<input type="submit" value="<:hydraulic:calculer_lechapt_calmon:>">
+				</td>
+			</tr>
 
-        </tbody>
-    </table>
+		</tbody>
+	</table>
 </form>
 
 [<div id="hyd_resultat">(#ENV*{message_ok})</div>]

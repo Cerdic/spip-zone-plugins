@@ -43,19 +43,19 @@ global $FLC;
 $FLC = new form_lechapt_calmon;
 
 function formulaires_lechapt_calmon_charger_dist() {
-    global $FLC;
-    return $FLC->charger();
+	global $FLC;
+	return $FLC->charger();
 }
 
 
-function formulaires_lechapt_calmon_verifier_dist(){
-    global $FLC;
-    return $FLC->verifier();
+function formulaires_lechapt_calmon_verifier_dist() {
+	global $FLC;
+	return $FLC->verifier();
 }
 
 
-function formulaires_lechapt_calmon_traiter_dist(){
-    global $FLC;
-    return $FLC->traiter();
+function formulaires_lechapt_calmon_traiter_dist() {
+	global $FLC;
+	return $FLC->traiter();
 }
 ?>

@@ -28,20 +28,19 @@ global $FRU; // Nécessaire car nous ne sommes pas dans l'environnement global
 $FRU = new form_regime_uniforme;
 
 function formulaires_calcul_regime_uniforme_charger_dist() {
-    global $FRU;
-    return $FRU->charger();
+	global $FRU;
+	return $FRU->charger();
 }
 
 
-function formulaires_calcul_regime_uniforme_verifier_dist(){
-    global $FRU;
-    return $FRU->verifier();
+function formulaires_calcul_regime_uniforme_verifier_dist() {
+	global $FRU;
+	return $FRU->verifier();
 }
 
 
 function formulaires_calcul_regime_uniforme_traiter_dist(){
-    global $FRU;
-    return $FRU->traiter();
+	global $FRU;
+	return $FRU->traiter();
 }
 ?>
-

@@ -43,19 +43,19 @@ global $FCD;
 $FCD = new form_cond_distri;
 
 function formulaires_cond_distri_charger_dist() {
-    global $FCD;
-    return $FCD->charger();
+	global $FCD;
+	return $FCD->charger();
 }
 
 
-function formulaires_cond_distri_verifier_dist(){
-    global $FCD;
-    return $FCD->verifier();
+function formulaires_cond_distri_verifier_dist() {
+	global $FCD;
+	return $FCD->verifier();
 }
 
 
-function formulaires_cond_distri_traiter_dist(){
-    global $FCD;
-    return $FCD->traiter();
+function formulaires_cond_distri_traiter_dist() {
+	global $FCD;
+	return $FCD->traiter();
 }
 ?>

@@ -30,56 +30,56 @@ include_spip('hyd_inc/section.class');
  */
 class cSnRectang extends acSection {
 
-    function __construct(&$oLog,&$oP,$rLargeurFond) {
-        $this->rLargeurBerge = $rLargeurFond;
-        parent::__construct($oLog,$oP);
-    }
+	function __construct(&$oLog,&$oP,$rLargeurFond) {
+		$this->rLargeurBerge = $rLargeurFond;
+		parent::__construct($oLog,$oP);
+	}
 
-    /**
-     * Calcul du périmètre mouillé
-     * @param $rY Uniquement présent car la méthode parent à cet argument
-     * @return Périmètre mouillé (m)
-     */
-    protected function Calc_P($rY=0) {
-        return $this->rLargeurBerge+parent::Calc_P($this->rY);
-    }
+	/**
+	 * Calcul du périmètre mouillé
+	 * @param $rY Uniquement présent car la méthode parent à cet argument
+	 * @return Périmètre mouillé (m)
+	 */
+	protected function Calc_P($rY=0) {
+		return $this->rLargeurBerge+parent::Calc_P($this->rY);
+	}
 
-    /**
-     * Calcul de la surface mouillée
-     * @param $rY Uniquement présent car la méthode parent à cet argument
-     * @return Surface mouillée (m2)
-     */
-    protected function Calc_S($rY=0) {
-        return parent::Calc_S($this->rY);
-    }
+	/**
+	 * Calcul de la surface mouillée
+	 * @param $rY Uniquement présent car la méthode parent à cet argument
+	 * @return Surface mouillée (m2)
+	 */
+	protected function Calc_S($rY=0) {
+		return parent::Calc_S($this->rY);
+	}
 
-    /**
-     * Calcul de la distance du centre de gravité de la section à la surface libre
-     * multiplié par la section
-     * @param $rY Uniquement présent car la méthode parent à cet argument
-     * @return SYg
-     */
-    protected function Calc_SYg($rY=0) {
-        return parent::Calc_SYg($this->rY);
-    }
+	/**
+	 * Calcul de la distance du centre de gravité de la section à la surface libre
+	 * multiplié par la section
+	 * @param $rY Uniquement présent car la méthode parent à cet argument
+	 * @return SYg
+	 */
+	protected function Calc_SYg($rY=0) {
+		return parent::Calc_SYg($this->rY);
+	}
 
-    /**
-     * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
-     * multiplié par la section
-     * @param $rY Uniquement présent car la méthode parent à cet argument
-     * @return Dérivée de SYg par rapport à Y
-     */
-    protected function Calc_dSYg($rY=0) {
-        return parent::Calc_dSYg($this->rY);
-    }
+	/**
+	 * Calcul de la dérivée de la distance du centre de gravité de la section à la surface libre
+	 * multiplié par la section
+	 * @param $rY Uniquement présent car la méthode parent à cet argument
+	 * @return Dérivée de SYg par rapport à Y
+	 */
+	protected function Calc_dSYg($rY=0) {
+		return parent::Calc_dSYg($this->rY);
+	}
 
-   /**
-    * Calcul du tirant d'eau conjugué avec la formule analytique pour la section rectangulaire
-    * @return tirant d'eau conjugué
-    */
-    protected function CalcYco() {
-        return $this->rY*(sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
-    }
+	/**
+	 * Calcul du tirant d'eau conjugué avec la formule analytique pour la section rectangulaire
+	 * @return tirant d'eau conjugué
+	 */
+	protected function CalcYco() {
+		return $this->rY*(sqrt(1 + 8 * pow($this->Calc('Fr'),2)) - 1) / 2;
+	}
 
 }
 ?>

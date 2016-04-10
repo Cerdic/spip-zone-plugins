@@ -29,20 +29,19 @@ $FCS = new form_calcul_section;
 
 
 function formulaires_calcul_section_charger_dist() {
-    global $FCS;
-    return $FCS->charger();
+	global $FCS;
+	return $FCS->charger();
 }
 
 
-function formulaires_calcul_section_verifier_dist(){
-    global $FCS;
-    return $FCS->verifier();
+function formulaires_calcul_section_verifier_dist() {
+	global $FCS;
+	return $FCS->verifier();
 }
 
 
-function formulaires_calcul_section_traiter_dist(){
-    global $FCS;
-    return $FCS->traiter();
+function formulaires_calcul_section_traiter_dist() {
+	global $FCS;
+	return $FCS->traiter();
 }
 ?>
-

@@ -22,28 +22,29 @@
 
 
 class cLog {
-    public $txt;
+	public $txt;
 
-    function __construct() {
-        $this->txt = '';
-    }
+	function __construct() {
+		$this->txt = '';
+	}
 
-    public function Add($sTxt,$bErr=false) {
-        spip_log($sTxt,'hydraulic',_LOG_INFO);
-        $this->txt .= '<li';
-        if($bErr) {$this->txt .= ' class="hyd_erreur"';}
-        $this->txt .= '>'.$sTxt.'</li>';
-    }
+	public function Add($sTxt,$bErr=false) {
+		spip_log($sTxt,'hydraulic',_LOG_INFO);
+		$this->txt .= '<li';
+			if($bErr) {$this->txt .= ' class="hyd_erreur"';}
+		$this->txt .= '>'.$sTxt.'</li>';
+	}
 
-    public function Result() {
-        if($this->txt!='') {
-            return '<div class="hyd_log">
-                <div class="titre">'._T('hydraulic:log_titre').'</div>
-                <ul>'.$this->txt.'
-                </ul></div>';
-        } else {
-            return '';
-        }
-    }
+	public function Result() {
+		if($this->txt!='') {
+			return '<div class="hyd_log">
+				<div class="titre">'._T('hydraulic:log_titre').'</div>
+				<ul>'.$this->txt.'
+                </ul>
+			</div>';
+		} else {
+			return '';
+		}
+	}
 }
 ?>
