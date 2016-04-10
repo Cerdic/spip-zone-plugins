@@ -24,7 +24,7 @@ function inc_safehtml($t) {
 	include_spip('lib/HTMLPurifier.standalone');
 	if (!isset($purifier))
 		$purifier = new HTMLPurifier();
-		
+
 	$config = HTMLPurifier_Config::createDefault();
 	$config->set('Cache.SerializerPath', preg_replace(',/$,', '', realpath(_DIR_TMP)));
 
