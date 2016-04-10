@@ -8,7 +8,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{explication, curl_explication,
 				texte=<:projets_sites:curl_explication:>})]
@@ -19,7 +19,7 @@
 			[(#SAISIE{input, password,
 				label=<:projets_sites:password_label:>})]
 
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		<input type="hidden" name="_meta_casier" value="projets_sites" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
