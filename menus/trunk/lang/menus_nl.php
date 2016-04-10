@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_entrees_masquees_explication' => 'Geef aan welke items je wilt <strong>verbergen</strong> bij het aanmaken van een menu.',
 	'configurer_titre' => 'Configureer de items van plugin Menus',
 	'confirmer_supprimer_entree' => 'Wil je deze regel inderdaad verwijderen?',
+	'confirmer_supprimer_sous_menu' => 'Wil je dit submenu echt verwijderen?',
 
 	// D
 	'description_menu_accueil' => 'Link naar de startpagina van de site.',
@@ -166,7 +167,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_les_articles' => '... Alle artikelen',
-	'toutes_les_rubriques' => '... Alle rubrieken'
+	'toutes_les_rubriques' => '... Alle rubrieken',
+
+	// U
+	'utiles_explication' => 'De huidige skeletten van de site mogen de volgende menu’s gebruiken.',
+	'utiles_generer_menu' => 'Het menu <strong>@titre@ (<em>@identifiant@</em>)</strong> maken',
+	'utiles_generer_menus' => 'Maak <strong>alle</strong> menu’s bruikbaar',
+	'utiles_titre' => 'Bruikbare menu’s'
 );
 
 ?>
