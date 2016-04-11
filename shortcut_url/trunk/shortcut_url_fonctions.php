@@ -13,17 +13,34 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Créer les titres pour les liens raccourcis
+ * Générer la chaine de caractères
  * 
  * @param string $length taille de la chaîne de caractère 
  * @return string
  */
-function generer_chaine_aleatoire($length = 5) {
+function generer_chaine($length) {
 	return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 }
 
 /**
- * Stocker les visites des clicks des utilistateurs
+ * Créer les titres pour les liens raccourcis
+ * On doit retrouver une valeur numérique dans le titre pour eviter les gros mots
+ * 
+ * @param string $length taille de la chaîne de caractère 
+ * @return string
+ */
+function generer_chaine_aleatoire($length = 5){ 
+
+        $pass = generer_chaine($length);
+        do {
+                $pass = generer_chaine($length);
+        } while (!preg_match('/(?=.*\d)/', $pass));
+        return $pass;
+}
+
+
+/**
+ * Stocker les visites des clicks en séparant les humains des bots
  * 
  * @param int $id_shortcut_url id de l'URL raccourcis
  * @return boolean

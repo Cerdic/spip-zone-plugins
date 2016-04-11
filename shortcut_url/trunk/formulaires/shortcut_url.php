@@ -43,16 +43,6 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 		$valeurs['titre'] = $titre;
 	}
 
-	if (defined('_TAILLE_RACCOURCI')) {
-
-		if(_TAILLE_RACCOURCI > 5)
-			$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
-		else
-			$valeurs['taille_raccourci'] = 5;
-
-	} else
-		$valeurs['taille_raccourci'] = 5;
-
 	return $valeurs;
 	
 }
@@ -110,12 +100,22 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs))
 		$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
 
+	if (defined('_TAILLE_RACCOURCI')) {
+		if(_TAILLE_RACCOURCI > 5)
+			$taille_raccourci = _TAILLE_RACCOURCI;
+		else
+			$taille_raccourci = 5;
+	} else
+		$taille_raccourci = 5;
+
+	spip_log($taille_raccourci, 'test.' . _LOG_ERREUR);
+
 	$set = array();
 	$set['id_shortcut_url'] = $id_shortcut_url;
 	if(_request('titre'))
 		$set['titre'] = _request('titre');
 	else
-		$set['titre'] = generer_chaine_aleatoire();
+		$set['titre'] = generer_chaine_aleatoire($taille_raccourci);
 	$set['description'] = $result['nom_site'];
 	// On supprime ?var_mode=recalcul et autres var_mode
 	$set['url'] = parametre_url(_request('url'),'var_mode','');
