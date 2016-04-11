@@ -35,8 +35,8 @@
 
 		[(#SET{item, #ENV{page_courante}|mult{#ENV{pas}}})]
 
-		<li [class="(#ENV{page_courante}|<={1}|oui)disabled"]>
-			[(#ENV{page_courante}|<={1}|?{
+		<li [class="(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled"]>
+			[(#ENV{page_courante}|>={#ENV{nombre_pages}}|?{
 			<a href="[(#SELF|ancre_url{#ENV{ancre}})]">&raquo;</a>,
 			<a href="[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}|ancre_url{#ENV{ancre}})]">
 				&raquo;
