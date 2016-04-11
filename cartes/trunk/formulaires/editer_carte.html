@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{editable})
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="id_carte" value="#ENV{id_carte}" />
@@ -23,6 +23,20 @@
 			[(#SAISIE{textarea, texte_footer,
 				label=<:carte:champ_texte_footer_label:>})]
 			
+			#SET{layers,#ARRAY}
+			<BOUCLE_layer(DATA){source table, #EVAL{$GLOBALS['gis_layers']}}>
+			#SET{layers,#GET{layers}|array_merge{#ARRAY{#CLE,#VALEUR|table_valeur{nom}}}}
+			</BOUCLE_layer>
+			[(#SET{layer_defaut,#CONFIG{gis/layer_defaut,openstreetmap_mapnik}})]
+			[(#VAL{_GIS_LAYER_DEFAUT}|defined|oui)
+				[(#SET{gis_layer_defaut,[(#EVAL{_GIS_LAYER_DEFAUT})]})]
+			]
+
+			[(#SAISIE{selection,layer_defaut,
+				label=<:gis:cfg_lbl_layer_defaut:>,
+				cacher_option_intro=oui,
+				defaut=#GET{layer_defaut},
+				datas=#GET{layers}})]
 			<div class="fieldset">
 				<fieldset>
 					<legend><:carte:legend_centrage:></legend>
@@ -75,5 +89,5 @@
 		<!--extra-->
 		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
-	]
+	</BOUCLE_si_editable>
 </div>
