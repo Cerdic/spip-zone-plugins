@@ -1,0 +1,11 @@
+<BOUCLE_carte(CARTES){id_carte}>
+<div class="footer clearfix[ (#ENV{class})]">
+	<div class="left">
+		[<div class="logo">(#LOGO_CARTE|image_reduire{70,70})</div>]
+		[(#TEXTE_FOOTER)]
+	</div>[(#PLUGIN{licence}|oui)
+	<div class="right">
+		#MODELE{licence,id_licence=#CONFIG{licence/licence_defaut},hauteur_logo=22}
+	</div>]
+</div>
+</BOUCLE_carte>

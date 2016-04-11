@@ -1,0 +1,161 @@
+/* Noto Regular */
+@font-face {
+  font-family: 'noto_serif';
+  font-style: normal;
+  font-weight: normal;
+  src: url(fonts/NotoSerif-Regular-webfont.eot);
+  src: url(fonts/NotoSerif-Regular-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSerif-Regular-webfont.woff2) format('woff2'),
+       url(fonts/NotoSerif-Regular-webfont.woff) format('woff'),
+       url(fonts/NotoSerif-Regular-webfont.ttf) format('truetype');
+}
+/* Noto Bold */
+@font-face {
+  font-family: 'noto_serif';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/NotoSerif-Bold-webfont.eot);
+  src: url(fonts/NotoSerif-Bold-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSerif-Bold-webfont.woff2) format('woff2'),
+       url(fonts/NotoSerif-Bold-webfont.woff) format('woff'),
+       url(fonts/NotoSerif-Bold-webfont.ttf) format('truetype');
+}
+/* Noto Italic */
+@font-face {
+  font-family: 'noto_serif';
+  font-style: italic;
+  font-weight: normal;
+  src: url(fonts/NotoSerif-Italic-webfont.eot);
+  src: url(fonts/NotoSerif-Italic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSerif-Italic-webfont.woff2) format('woff2'),
+       url(fonts/NotoSerif-Italic-webfont.woff) format('woff'),
+       url(fonts/NotoSerif-Italic-webfont.ttf) format('truetype');
+}
+
+/* Noto Bold Italic */
+@font-face {
+  font-family: 'noto_serif';
+  font-style: italic;
+  font-weight: 600;
+  src: url(fonts/NotoSerif-BoldItalic-webfont.eot);
+  src: url(fonts/NotoSerif-BoldItalic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSerif-BoldItalic-webfont.woff2) format('woff2'),
+       url(fonts/NotoSerif-BoldItalic-webfont.woff) format('woff'),
+       url(fonts/NotoSerif-BoldItalic-webfont.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'noto_sans';
+  font-style: normal;
+  font-weight: normal;
+  src: url(fonts/NotoSans-Regular-webfont.eot);
+  src: url(fonts/NotoSans-Regular-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSans-Regular-webfont.woff2) format('woff2'),
+       url(fonts/NotoSans-Regular-webfont.woff) format('woff'),
+       url(fonts/NotoSans-Regular-webfont.ttf) format('truetype');
+}
+/* Noto Bold */
+@font-face {
+  font-family: 'noto_sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/NotoSans-Bold-webfont.eot);
+  src: url(fonts/NotoSans-Bold-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSans-Bold-webfont.woff2) format('woff2'),
+       url(fonts/NotoSans-Bold-webfont.woff) format('woff'),
+       url(fonts/NotoSans-Bold-webfont.ttf) format('truetype');
+}
+/* Noto Italic */
+@font-face {
+  font-family: 'noto_sans';
+  font-style: italic;
+  font-weight: normal;
+  src: url(fonts/NotoSans-Italic-webfont.eot);
+  src: url(fonts/NotoSans-Italic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSans-Italic-webfont.woff2) format('woff2'),
+       url(fonts/NotoSans-Italic-webfont.woff) format('woff'),
+       url(fonts/NotoSans-Italic-webfont.ttf) format('truetype');
+}
+
+/* Noto Bold Italic */
+@font-face {
+  font-family: 'noto_sans';
+  font-style: italic;
+  font-weight: 600;
+  src: url(fonts/NotoSans-BoldItalic-webfont.eot);
+  src: url(fonts/NotoSans-BoldItalic-webfont.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoSans-BoldItalic-webfont.woff2) format('woff2'),
+       url(fonts/NotoSans-BoldItalic-webfont.woff) format('woff'),
+       url(fonts/NotoSans-BoldItalic-webfont.ttf) format('truetype');
+}
+
+body{
+      margin:0;
+      font-family:"noto_sans",Helvetica, verdana, sans serif;
+}
+
+h1{
+      background:#000;
+      color:#fff;
+      border-bottom:.3em solid #d40000;
+      font-weight:normal;
+          margin: 0;
+    padding: .5em 1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.texte{
+      color:#fff;
+      background:#474746;
+}
+
+.texte p{
+      margin:0;
+      padding:.7em 1em;
+      font-size:.9em;
+      text-align:center;
+}
+
+.map_wrapper{
+      width:100%;
+      min-height:350px;
+}
+
+.footer{
+      background:#000;
+      color:#fff;
+      padding:.3em;
+      font-size:.8em;
+      width:100%;
+      box-sizing:border-box;
+}
+
+.footer a{
+      color:#fff;
+      text-decoration:none;
+}
+.left{
+      float:left;
+}
+
+.left *{
+      display:inline-block;
+      vertical-align:middle;
+      
+}
+.left .logo{
+      margin-right:1em;
+}
+.right{
+      float:right;
+}
+
+.clearfix:before, .clearfix:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+.clearfix:after {
+	clear: both;
+}

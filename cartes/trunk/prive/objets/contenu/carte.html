@@ -1,0 +1,55 @@
+<BOUCLE_carte(CARTES){id_carte}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:carte:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:carte:champ_texte_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_centrage">
+	<label><:carte:legend_centrage:></label>
+	(#LAT|et{#LON}|oui)
+	[(#SET{geojson,[\{"type": "FeatureCollection","features": \[\{"type": "Feature","geometry": \{"type":"Point","coordinates":\[(#LON),[(#LAT)]\]\},"id":"centre","properties": \{\}\}\]\}]})]
+	[(#INCLURE{fond=modeles/carte_gis_preview,lat=#LAT,lon=#LON,zoom=[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})],geojson=#GET{geojson},id_map=centrage})]
+</div>]
+
+[<div class="champ contenu_zoom_defaut[ (#ZOOM_DEFAUT*|strlen|?{'',vide})]">
+	<label><:carte:champ_zoom_defaut_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{zoom_defaut} zoom_defaut">(#ZOOM_DEFAUT)</span>
+</div>]
+
+[<div class="champ contenu_zoom_min[ (#ZOOM_MIN*|strlen|?{'',vide})]">
+	<label><:carte:champ_zoom_min_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{zoom_min} zoom_min">(#ZOOM_MIN)</span>
+</div>]
+
+[<div class="champ contenu_zoom_max[ (#ZOOM_MAX*|strlen|?{'',vide})]">
+	<label><:carte:champ_zoom_max_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{zoom_max} zoom_max">(#ZOOM_MAX)</span>
+</div>]
+
+[<div class="champ contenu_bounds[ (#GEOMETRY*|strlen|?{'',vide})]">
+	<label><:carte:champ_bounds_label:> : </label>[(#SET{geojson,[(#GEOMETRY|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
+	(#GEOMETRY*|strlen|oui)
+	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=#GET{zoom},lat=#LAT,lon=#LON}
+</div>]
+
+[<div class="champ contenu_style_carte[ (#STYLE_CARTE*|strlen|?{'',vide})]">
+	<label><:carte:champ_style_carte_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{style_carte} style_carte">(#STYLE_CARTE)</span>
+</div>]
+
+[<div class="champ contenu_footer_carte[ (#FOOTER_CARTE*|strlen|?{'',vide})]">
+	<label><:carte:champ_footer_carte_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{footer_carte} footer_carte">(#FOOTER_CARTE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:carte:champ_texte_footer_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE_FOOTER)</span>
+</div>]
+</BOUCLE_carte>

@@ -1,0 +1,54 @@
+<BOUCLE_principale(CARTES){id_carte}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
+	<INCLURE{fond=inclure/head_map} />
+	[(#SET{style,[css_carte/(#STYLE_CARTE|sinon{carte.css})]})]
+	[(#SET{js,[js_carte/(#STYLE_CARTE|sinon{carte.js})]})]
+	[<script type="text/javascript" src="(#CHEMIN{#GET{js}})"></script>]
+	[(#SET{geometry,[(#GEOMETRY|wkt_to_json|trim)]})]
+	<BOUCLE_si_bounds(CONDITION){si #GET{geometry}|strlen|>{2}|oui}>
+	<script type="text/javascript">
+		var data_bounds = {
+			"type": "FeatureCollection",
+			"features": [{
+				"type": "Feature",
+				["geometry": (#GET{geometry}),]
+				"id":"bounds"
+			}]
+		};
+		var geojson_bounds,bounds;
+	</script>
+	</BOUCLE_si_bounds>
+	[<link rel="stylesheet" href="(#CHEMIN{#GET{style}}|direction_css)" type="text/css" />]
+</head>
+
+<body class="pas_surlignable page_article">
+<div class="page">
+	<div class="main">
+		[(#REM) Contenu principal : contenu de l'article]
+		<div class="wrapper">
+			<div class="content" id="content">
+				<h1 class="#EDIT{titre} surlignable">#TITRE</h1>
+				[<div class="#EDIT{texte} texte surlignable clearfix">(#TEXTE|image_reduire{672,*})</div>]
+			</div>
+		</div>
+	</div>
+	<div class="map_wrapper">[(#SET{minzoom,[(#ZOOM_MIN|sinon{2})]})][(#SET{maxzoom,[(#ZOOM_MAX|sinon{12})]})]
+		#MODELE{carte_gis,objet=carte,autocenterandzoom=oui,minZoom=#GET{minzoom},maxZoom=#GET{maxzoom},id_objet=#ID_CARTE,height=100%}
+	</div>
+	[(#SET{footer,footer_carte/[(#FOOTER|sinon{footer})]})]
+	<INCLURE{fond=#GET{footer},id_carte,self=#SELF} />
+</div>
+</body>
+</html>
+</BOUCLE_principale>

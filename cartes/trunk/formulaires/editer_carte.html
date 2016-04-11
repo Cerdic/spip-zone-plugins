@@ -1,0 +1,80 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_carte,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_carte" value="#ENV{id_carte}" />
+		<div class="editer-groupe">
+ 
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:carte:champ_titre_label:>})]
+ 
+			[(#SAISIE{textarea, texte,
+				label=<:carte:champ_texte_label:>})]
+ 
+			[(#SAISIE{input, style_carte,
+				label=<:carte:champ_style_carte_label:>})]
+ 
+			[(#SAISIE{input, footer_carte,
+				label=<:carte:champ_footer_carte_label:>})]
+			
+			[(#SAISIE{textarea, texte_footer,
+				label=<:carte:champ_texte_footer_label:>})]
+			
+			<div class="fieldset">
+				<fieldset>
+					<legend><:carte:legend_centrage:></legend>
+					[(#SET{geojson_centre,[\{"type": "FeatureCollection","features": \[\{"type": "Feature","geometry": \{"type":"Point","coordinates":\[(#LON),[(#LAT)]\]\},"id":"centre","properties": \{\}\}\]\}]})]
+					[(#SAISIE{carte, centre,
+						recherche=non,
+						noimport=oui,
+						nodraw=oui,
+						lat=#LAT,
+						lon=#LON,
+						champ_zoom=zoom_defaut,
+						zoom=[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})],
+						champ_geojson=geojson_centre,
+						champ_type=type_centre,
+						geojson=#GET{geojson_centre}})]
+					[(#SAISIE{input,lat,
+						label=<:gis:lat:>,
+						defaut=#ENV{lat,#CONFIG{gis/lat,0}},
+						obligatoire=oui})]
+					[(#SAISIE{input,lon,
+						label=<:gis:lon:>,
+						defaut=#ENV{lon,#CONFIG{gis/lon,0}},
+						obligatoire=oui})]
+					[(#SAISIE{input,zoom_defaut,
+						label=<:carte:champ_zoom_defaut_label:>,
+						defaut=#ENV{zoom_defaut,#CONFIG{gis/zoom,0}},
+						size=2,
+						maxlength=2,
+						obligatoire=oui})]
+				</fieldset>
+			</div>
+
+			[(#SAISIE{input, zoom_min,
+				label=<:carte:champ_zoom_min_label:>})]
+ 
+			[(#SAISIE{input, zoom_max,
+				label=<:carte:champ_zoom_max_label:>})]
+ 			<div class="fieldset">
+				<fieldset>
+					<legend><:carte:champ_bounds_label:></legend>
+					[(#SAISIE{carte, bounds,
+						recherche=non,
+						geojson=#ENV{geojson},
+						noimport=oui,
+						nomajinputs=oui,
+						boutons=#ARRAY{marker,non,polyline,non,polygon,non}})]
+				</fieldset>
+			</div>	
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

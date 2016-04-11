@@ -1,0 +1,52 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'ajouter_lien_carte' => 'Ajouter cette carte',
+
+	// C
+	'champ_bounds_label' => 'Limites de la carte',
+	'champ_footer_carte_label' => 'Pied de la carte',
+	'champ_style_carte_label' => 'Style de la carte',
+	'champ_texte_label' => 'Texte',
+	'champ_texte_footer_label' => 'Texte du pied de page',
+	'champ_titre_label' => 'Titre',
+	'champ_zoom_defaut_label' => 'Zoom par défaut',
+	'champ_zoom_max_label' => 'Zoom maximum',
+	'champ_zoom_min_label' => 'Zoom minimum',
+	'confirmer_supprimer_carte' => 'Confirmez-vous la suppression de cette carte ?',
+
+	// I
+	'icone_creer_carte' => 'Créer une carte',
+	'icone_modifier_carte' => 'Modifier cette carte',
+	'info_1_carte' => 'Une carte',
+	'info_aucun_carte' => 'Aucune carte',
+	'info_cartes_auteur' => 'Les cartes de cet auteur',
+	'info_nb_cartes' => '@nb@ cartes',
+
+	// L
+	'legend_centrage' => 'Centrage par défaut',
+
+	// R
+	'retirer_lien_carte' => 'Retirer cette carte',
+	'retirer_tous_liens_cartes' => 'Retirer toutes les cartes',
+
+	// S
+	'supprimer_carte' => 'Supprimer cette carte',
+
+	// T
+	'texte_ajouter_carte' => 'Ajouter une carte',
+	'texte_changer_statut_carte' => 'Cette carte est :',
+	'texte_creer_associer_carte' => 'Créer et associer une carte',
+	'texte_definir_comme_traduction_carte' => 'Cette carte est une traduction de la carte numéro :',
+	'titre_carte' => 'Carte',
+	'titre_cartes' => 'Cartes',
+	'titre_cartes_rubrique' => 'Cartes de la rubrique',
+	'titre_langue_carte' => 'Langue de cette carte',
+	'titre_logo_carte' => 'Logo de cette carte',
+);
