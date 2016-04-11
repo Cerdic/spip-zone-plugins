@@ -12,8 +12,8 @@
 		map_preview = new L.Map(map_preview_container);
 		
 		map_preview.attributionControl.setPrefix('');
-		
-		var base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#REM|gis_layer_defaut)]/layer})];
+
+		var base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})];
 		map_preview.addLayer(base_layer);
 		
 		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);

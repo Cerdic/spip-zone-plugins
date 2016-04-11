@@ -10,7 +10,7 @@
 		var map_preview,
 			map_preview_container = 'map_preview#ENV{id_map}',
 			marker,
-			base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#REM|gis_layer_defaut)]/layer})];
+			base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})];
 		
 		map_preview = new L.Map(map_preview_container);
 		map_preview.attributionControl.setPrefix('');
