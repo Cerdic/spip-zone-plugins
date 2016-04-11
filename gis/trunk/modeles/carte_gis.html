@@ -136,7 +136,7 @@ var jQgisloader;
 						maxClusterRadius: [(#ENV{maxClusterRadius,80})]
 					},
 					pathStyles: [(#ENV*{path_styles}|json_encode)],
-					autocenterandzoom: [(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
+					autocenterandzoom: [(#ENV{autocenterandzoom,#ENV{centrer_auto,non}}|=={non}|?{false,true})],
 					openId: [(#ENV{id_a_ouvrir,false})],
 					localize_visitor: [(#ENV{localize_visitor,#ENV{localiser_visiteur}}|?{true,false})],
 					localize_visitor_zoom: [(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
