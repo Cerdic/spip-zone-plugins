@@ -1,23 +1,28 @@
-<BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>
-<div id="map_preview" class="carte_gis" style="width: 100%; height: 150px;"></div>
-
+<BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>[(#SET{afficher,oui})][(#SET{lat,#LAT})][(#SET{lon,#LON})][(#SET{zoom,#ZOOM})]</BOUCLE_gis>
+</B_gis>
+<BOUCLE_geojson(CONDITION){si #ENV{geojson}}>[(#SET{afficher,oui})][(#ENV{lat}|oui)#SET{lat,#ENV{lat}}][(#ENV{lon}|oui)#SET{lon,#ENV{lon}}][(#ENV{zoom}|oui)#SET{zoom,#ENV{zoom}}]</BOUCLE_geojson><//B_gis>
+<BOUCLE_si_afficher(CONDITION){si #GET{afficher}|=={oui}}>
+<div id="map_preview#ENV{id_map}" class="carte_gis" style="width: 100%; height: [(#ENV{height,150})]px;"></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 (function($){
 	var init_map_preview = function() {
-		var map_preview;
-		var map_preview_container = 'map_preview';
-		var marker;
+		var map_preview,
+			map_preview_container = 'map_preview#ENV{id_map}',
+			marker,
+			base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#REM|gis_layer_defaut)]/layer})];
 		
 		map_preview = new L.Map(map_preview_container);
-		
 		map_preview.attributionControl.setPrefix('');
-		
-		var base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#REM|gis_layer_defaut)]/layer})];
 		map_preview.addLayer(base_layer);
 		
-		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
+		map_preview.setView(new L.LatLng([(#GET{lat,#CONFIG{gis/lat,0}})],[(#GET{lon,#CONFIG{gis/lon,0}})]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
 		[(#REM) On ajoute les points ou le point unique suivant les params ]
+		<B_si_geojson>
+		<BOUCLE_si_geojson(CONDITION){si #ENV{geojson}}>
+		var data = [(#ENV**{geojson}|html_entity_decode)];
+		</BOUCLE_si_geojson>
+		</B_si_geojson>
 		<B_points>
 		var data = {
 			"type": "FeatureCollection",
@@ -55,6 +60,7 @@
 		};
 		</BOUCLE_point>
 		<//B_points>
+		<//B_si_geojson>
 		if (data) {
 			var geojson = new L.geoJson('', {
 				style: function (feature) {
@@ -78,7 +84,7 @@
 				}
 			}).addTo(map_preview);
 			geojson.addData(data);
-			if(data.features.length > 1)
+			if(data.features && data.features.length > 1)
 				map_preview.fitBounds(geojson.getBounds());
 		}
 		[(#REM) On ajoute les KML attachés à l'objet ]
@@ -95,10 +101,9 @@
 		jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
 			init_map_preview();
 		});
-		//onAjaxLoad(init_map_preview(true));
 	});
-
 })(jQuery);
 /*]]>*/
 </script>
-</BOUCLE_gis>
+</BOUCLE_si_afficher>
+#FILTRE{trim}
