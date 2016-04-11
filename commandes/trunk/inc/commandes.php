@@ -137,6 +137,63 @@ function commandes_effacer($ids_commandes) {
 	return commandes_supprimer($ids_commandes);
 }
 
+/**
+ * Ajouter une ligne de detail dans une commande
+ * @param int $id_commande
+ * @param array $emplette
+ *   objet : type de l'objet ajoute
+ *   id_objet : id de l'objet ajoute
+ *   quantite : quantite ajoutee
+ * @param bool $ajouter
+ * @return int
+ */
+function commandes_ajouter_detail($id_commande, $emplette, $ajouter=true){
+	static $fonction_prix,$fonction_prix_ht;
+	if (!$fonction_prix OR !$fonction_prix_ht){
+		$fonction_prix = charger_fonction('prix', 'inc/');
+		$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
+	}
+
+	// calculer la taxe
+	$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'],3);
+	$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'],3);
+	if($prix_ht > 0)
+		$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+	else
+		$taxe = 0;
+
+	$set = array(
+		'id_commande' => $id_commande,
+		'objet' => $emplette['objet'],
+		'id_objet' => $emplette['id_objet'],
+		'descriptif' => generer_info_entite($emplette['id_objet'], $emplette['objet'], 'titre', '*'),
+		'quantite' => $emplette['quantite'],
+		'prix_unitaire_ht' => $prix_ht,
+		'taxe' => $taxe,
+		'statut' => 'attente'
+	);
+
+	// chercher si une ligne existe deja ou l'ajouter
+	$where = array();
+	foreach($set as $k=>$w){
+		if (in_array($k,array('id_commande','objet','id_objet'))){
+			$where[] = "$k=".sql_quote($w);
+		}
+	}
+	// est-ce que cette ligne est deja la ?
+	if ($ajouter
+	  or !$id_commandes_detail = sql_getfetsel("id_commandes_detail","spip_commandes_details",$where)){
+		// sinon création et renseignement du détail de la commande
+		$id_commandes_detail = objet_inserer('commandes_detail');
+	}
+
+	// la mettre a jour
+	if ($id_commandes_detail) {
+		objet_modifier('commandes_detail', $id_commandes_detail, $set);
+	}
+
+	return $id_commandes_detail;
+}
 
 /**
  * Supprimer un ou plusieurs détails d'une commande
