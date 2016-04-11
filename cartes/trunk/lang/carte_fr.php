@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_bounds_label' => 'Limites de la carte',
+	'champ_center_points_label' => 'Centrer et zoomer automatiquement sur les points affichés sur la carte',
 	'champ_footer_carte_label' => 'Pied de la carte',
 	'champ_style_carte_label' => 'Style de la carte',
 	'champ_texte_label' => 'Texte',

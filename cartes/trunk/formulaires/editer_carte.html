@@ -40,18 +40,17 @@
 						geojson=#GET{geojson_centre}})]
 					[(#SAISIE{input,lat,
 						label=<:gis:lat:>,
-						defaut=#ENV{lat,#CONFIG{gis/lat,0}},
-						obligatoire=oui})]
+						defaut=#ENV{lat,#CONFIG{gis/lat,0}}})]
 					[(#SAISIE{input,lon,
 						label=<:gis:lon:>,
-						defaut=#ENV{lon,#CONFIG{gis/lon,0}},
-						obligatoire=oui})]
+						defaut=#ENV{lon,#CONFIG{gis/lon,0}}})]
 					[(#SAISIE{input,zoom_defaut,
 						label=<:carte:champ_zoom_defaut_label:>,
 						defaut=#ENV{zoom_defaut,#CONFIG{gis/zoom,0}},
 						size=2,
-						maxlength=2,
-						obligatoire=oui})]
+						maxlength=2})]
+					[(#SAISIE{case,center_points,
+						label=<:carte:champ_center_points_label:>})]
 				</fieldset>
 			</div>
 

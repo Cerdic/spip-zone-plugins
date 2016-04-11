@@ -22,6 +22,10 @@
 	<span dir="#LANG_DIR" class="#EDIT{zoom_defaut} zoom_defaut">(#ZOOM_DEFAUT)</span>
 </div>]
 
+[<div class="champ contenu_center_points[ (#CENTER_POINTS|=={on}|?{'',vide})]">
+	(#CENTER_POINTS|=={on}|?{' ',''})
+	<label><:carte:champ_center_points_label:></label>
+</div>]
 [<div class="champ contenu_zoom_min[ (#ZOOM_MIN*|strlen|?{'',vide})]">
 	<label><:carte:champ_zoom_min_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{zoom_min} zoom_min">(#ZOOM_MIN)</span>
