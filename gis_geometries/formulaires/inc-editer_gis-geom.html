@@ -1,15 +1,11 @@
-[(#SAISIE{hidden,geojson,
+[(#SAISIE{hidden,#ENV{champ_geojson,geojson},
 	defaut='',
 	obligatoire=oui})]
-[(#SAISIE{hidden,type,
+[(#SAISIE{hidden,#ENV{champ_type,type},
 	defaut='',
 	obligatoire=oui})]
 [(#ENV{id_gis}|intval|non|et{#ENV{noimport}|non})
-<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset import">
-<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 	[(#SAISIE{input,import,
 		type=file,
 		label=<:gis:label_import:>,
-		explication=<:gis:explication_import:>})]
-</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
-</[(#VAL{li}|saisie_balise_structure_formulaire)]>]
+		explication=<:gis:explication_import:>})]]
