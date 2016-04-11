@@ -36,3 +36,7 @@ function info_sites_affiche_milieu($flux) {
 	return $flux;
 }
 
+function info_sites_styliser($flux) {
+
+	return $flux;
+}

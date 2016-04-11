@@ -917,8 +917,8 @@ input[type="radio"], input[type="checkbox"] {
 				-moz-box-shadow: @box-shadow;
 				box-shadow: @box-shadow;
 			}
-			.editer-groupe {
-				.editer {
+			ul, .editer-groupe {
+				li, .editer {
 					label {
 						width: 100%;
 						margin-right: 0;
@@ -1185,8 +1185,8 @@ input[type="radio"], input[type="checkbox"] {
 		&:extend {
 			.formulaire_spip
 		}
-		ul {
-			li.erreur {
+		ul, .editer-groupe {
+			li.erreur, .editer.erreur {
 				.erreur_message {
 					display: block;
 					text-align: left;

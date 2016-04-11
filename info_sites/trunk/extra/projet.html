@@ -15,6 +15,7 @@
 	[(#PLUGIN{RSS_COMMITS}|oui)
 	[(#SET{id_projet,[(#VERSIONING_RSS|?{#ID_PROJET,[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|?{#ID_PROJET_PARENT})]})]})]
 	[(#GET{id_projet}|oui)
+	[(#AUTORISER{infositesvoir, commit}|oui)
 	<div class="block">
 		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
 		[(#INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax})]]
@@ -22,7 +23,7 @@
 		[(#INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax})]]
 		<div class="clearfix"></div>
 	</div>
-	]]
+	]]]
 
 </div>
 </BOUCLE_autorisation>

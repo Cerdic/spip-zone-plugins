@@ -1,5 +1,5 @@
 <BOUCLE_contact(CONTACTS) {id_contact} {tous}>
-[(#AUTORISER{infositesvoir,contact,#ID_CONTACT}|sinon_interdire_acces)]
+[(#AUTORISER{infositesvoir,contact,#ID_CONTACT}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
 [(#BOITE_OUVRIR{[
 <h1 class="titre">(#NOM)[, (#PRENOM)]</h1>
 ],simple fiche_objet})]

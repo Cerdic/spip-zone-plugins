@@ -34,8 +34,54 @@ div {
 			}
 		}
 		.main {
-			.formulaire_login {
+			.formulaire_spip {
 				margin-top: 2em;
+				ul, .editer-groupe {
+					li, .editer {
+						width: 100%;
+						margin-bottom: 0;
+						label {
+							width: 100%;
+							margin-right: 0;
+							text-align: left;
+							float: none;
+							display: block;
+							overflow: hidden;
+						}
+						input {
+							width: 100%;
+							display: block;
+							overflow: hidden;
+						}
+						p {
+							display: block;
+							clear: both;
+							margin-bottom: 0;
+						}
+						.choix {
+							margin-right: 0;
+							width: 100%;
+							label {
+								input {
+									width: auto;
+								}
+							}
+						}
+						&.editer_password {
+							#pass_securise {
+								background-color: @white;
+								border-left: 1px solid @border-color;
+								float: right;
+								height: 30px;
+								line-height: 30px;
+								margin-right: 1px;
+								margin-top: -32px;
+								padding-left: 10px;
+								padding-right: 9px;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

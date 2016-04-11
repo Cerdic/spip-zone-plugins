@@ -99,8 +99,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_url_projets_label' => 'L\'url de projets en ligne',
 
 	// M
-	'menu_organisations' => 'Organisations',
+	'menu_auteurs' => 'Auteurs',
+	'menu_commits' => 'Commits',
 	'menu_contacts' => 'Contacts',
+	'menu_organisations' => 'Organisations',
 	'menu_projets' => 'Projets',
 	'menu_projets_cadres' => 'Cadres de projet',
 	'menu_projets_sites' => 'Sites',
@@ -119,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'ref_tech_label' => 'Référent technique',
+	'retour_page_accueil' => 'Revenir à la page d\'accueil',
 
 	// S
 	'stats_nb_logiciel_version' => 'Nombre de versions du logiciel',
@@ -137,6 +140,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'webservice_consultation' => 'Consultation du webservice',
+
+	// Z
+	'zone_restreinte' => 'Vous n\'avez pas les droits suffisants pour accéder à cette page.',
 
 );
 

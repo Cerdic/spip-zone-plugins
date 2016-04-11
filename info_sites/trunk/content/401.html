@@ -1,12 +1,12 @@
 [(#REM) Fil d'Ariane ]
 <section>
 	<header class="cartouche">
-		<h1><:pass_erreur:>[ (#ENV{status})]</h1>
+		<h1><:pass_erreur:>[ (#ENV{status,401})]</h1>
 	</header>
-	<div class="main">
-		[<div class="chapo">(#ENV{erreur})</div>]
-	</div>
+	[<div class="main">
+		<div class="chapo">(#ENV{erreur})</div>
+	</div>]
 	<aside>
-	#FORMULAIRE_LOGIN{#ENV{cible},'',0}
+		<a href="#URL_SITE_SPIP"><:info_sites:retour_page_accueil:></a>
 	</aside>
 </section>

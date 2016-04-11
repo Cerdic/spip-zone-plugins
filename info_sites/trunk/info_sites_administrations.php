@@ -30,6 +30,7 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.3'][] = array('info_sites_menu_pages');
 	$maj['1.0.4'][] = array('info_sites_menu_pages');
 	$maj['1.0.5'][] = array('info_sites_menu_pages');
+	$maj['1.0.7'][] = array('info_sites_menu_pages');
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -74,6 +75,14 @@ function info_sites_menu_pages() {
 		'projets_sites' => array(
 			'nom' => 'info_sites:menu_projets_sites',
 			'icone' => 'fa fa-desktop fa-lg',
+		),
+		'commits' => array(
+			'nom' => 'info_sites:menu_commits',
+			'icone' => 'fa fa-code-fork fa-lg',
+		),
+		'auteurs' => array(
+			'nom' => 'info_sites:menu_auteurs',
+			'icone' => 'fa fa-users fa-lg',
 		),
 		'statistiques' => array(
 			'nom' => 'info_sites:menu_statistiques',
