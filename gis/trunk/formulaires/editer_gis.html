@@ -11,7 +11,11 @@
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{hidden,objet})]
 			[(#SAISIE{hidden,id_objet})]
-			[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset">
+			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+				[(#SAISIE{carte,editer_gis_#ENV{id_gis},env})]
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]></fieldset>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="fieldset">
 			<fieldset><[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				[(#SAISIE{input,lat,
