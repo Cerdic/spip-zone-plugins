@@ -36,7 +36,7 @@ L.Geocoder = L.Class.extend({
 				q: text,
 				limit: this.options.limit,
 				addressdetails: this.options.addressdetails,
-				"accept-language":this.options.acceptLanguage
+				'accept-language': this.options.acceptLanguage
 			}
 		);
 	},
@@ -60,11 +60,11 @@ L.Geocoder = L.Class.extend({
 			dataType: 'jsonp',
 			jsonp: 'json_callback',
 			success: this._callback,
-			error:function(e){
+			error: function (e) {
 				/**
 				 * Photon me renvoie une erreur à chaque fois
 				 */
-				if(e.statusText == "OK" && e.status == "200"){
+				if (e.statusText == 'OK' && e.status == '200') {
 					this._callback(e.responseText,e.status,e);
 				}
 			},
@@ -72,12 +72,13 @@ L.Geocoder = L.Class.extend({
 		});
 	},
 	
-	_callback: function (response,textStatus,jqXHR) {
-		var return_location = {};
-		var geocoder_server = false;
-		if(this.options.search)
+	_callback: function (response, textStatus, jqXHR) {
+		var return_location = {},
+			geocoder_server = false;
+		if (this.options.search) {
 			return_location.search = this.options.search;
-		if(typeof response === "string"){
+		}
+		if (typeof response === 'string') {
 			geocoder_server = 'photon';
 			response = JSON.parse(response);
 		}
@@ -86,14 +87,14 @@ L.Geocoder = L.Class.extend({
 		} else {
 			return_location.street = return_location.postcode = return_location.postcode = 
 			return_location.locality = return_location.region = return_location.country  = '';
-			if(geocoder_server == 'photon'){
-				if(!response.features.length || response.features.length == 0){
+			if (geocoder_server == 'photon') {
+				if (!response.features.length || response.features.length == 0) {
 					return_location.error = 'not found';
 				}
-				else{
+				else {
 					place = response.features[0];
 					var street_components = [];
-					
+
 					if (place.properties.country) {
 						return_location.country = place.properties.country;
 					}
@@ -109,7 +110,7 @@ L.Geocoder = L.Class.extend({
 						return_location.locality = place.properties.town;
 					} else if (place.properties.village) {
 						return_location.locality = place.properties.village;
-					}else if(place.properties.osm_key == 'place' && (place.properties.osm_value == 'city' || place.properties.osm_value == 'village')){
+					} else if (place.properties.osm_key == 'place' && (place.properties.osm_value == 'city' || place.properties.osm_value == 'village')) {
 						return_location.locality = place.properties.name;
 					} else if (place.properties.county) {
 						street_components.push(place.properties.county);
@@ -136,7 +137,7 @@ L.Geocoder = L.Class.extend({
 					return_location.point = new L.LatLng(place.lat, place.lon);
 				}
 			}
-			else{
+			else {
 				if (response.length > 0)
 					place = response[0];
 				else {
