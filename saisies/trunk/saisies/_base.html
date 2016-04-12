@@ -21,6 +21,7 @@
   - saisies_base_conteneur : définit la balise englobante de la saisie (balise div par défaut en SPIP 3.1+, et li avant)
   - conteneur_class : Classe CSS à ajouter au conteneur
   - li_class : pour compatibilité. Voir conteneur_class
+  - label_class : pour mettre des styles sur les labels
 
   
   Exemples d'appels :
@@ -45,7 +46,7 @@
 		<!--!inserer_saisie_editer-->
 		<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom}|saisie_nom2classe)][ (#GET{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#GET{conteneur_class})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
 			#ENV*{inserer_debut}
-			[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox}|non) for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+			[<label[(#ENV{type_saisie}|match{oui_non|radio|checkbox}|non) for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"][ class="(#ENV{label_class})"]>(#ENV*{label})[<span class='obligatoire'>(#GET{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			[<p class="explication" id="[explication_(#ENV{nom}|saisie_nom2name)]">(#ENV*{explication})</p>]
 			[<em class='attention'>(#ENV*{attention})</em>]
