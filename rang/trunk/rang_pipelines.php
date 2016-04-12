@@ -66,7 +66,7 @@ function rang_recuperer_fond($flux){
  **/
 
 function get_sources() {
-
+	include_spip('inc/config');
 	$sources = array();
 	$objets_selectionnes = lire_config('rang_objets');
 	$objets=explode(',',$objets_selectionnes);
