@@ -43,7 +43,7 @@
 	<categorie>divers</categorie>
 	<lien>http://sic.g-eau.net/spip.php?rubrique80</lien>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<necessite id="spip_bonux" version="[2.2.22;]" />
 	<etat>dev</etat>
 	<prefix>hydraulic</prefix>
 	<fonctions>hydraulic_fonctions.php</fonctions>
