@@ -18,5 +18,6 @@ function autoriser_minibando_dist($faire, $quoi, $id, $qui, $opt) {
 	if (isset($config['limite_webmestre']) and $config['limite_webmestre'] == 'on' and $qui['webmestre'] != 'oui') {
 		return false;
 	}
+
 	return true;
 }
