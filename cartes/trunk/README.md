@@ -49,6 +49,14 @@ Une carte peut se limiter à une zone précise, il n'est pas forcément utile de
 
 Il est donc possible de dessiner un rectangle permettant de limiter l'usage d'une carte à une zone spécifique.
 
+### Les contrôles affichés sur la carte
+
+Un sélecteur via checkbox permet de sélectionner quels controles supplémentaires sont affichés sur la carte parmis les choix suivants :
+
+* fullscreen : affiche un bouton permettant de passer la carte en plein écran;
+* scale : affiche l'échelle de la carte;
+* overview : affiche une mini carte d'aperçu;
+
 ### POI(s) associé(s) 
 
 ### Styles graphiques

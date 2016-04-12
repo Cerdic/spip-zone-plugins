@@ -67,6 +67,9 @@ function formulaires_editer_carte_charger_dist($id_carte='new', $retour='', $lie
 		$valeurs['geojson'] = wkt_to_json($valeurs['bounds']);
 		spip_log($valeurs['geojson'],'test.'._LOG_ERREUR);
 	}
+	if(isset($valeurs['controles']) && strlen($valeurs['controles']) > 1){
+		$valeurs['controles'] = unserialize($valeurs['controles']);
+	}
 	return $valeurs;
 }
 
@@ -123,11 +126,11 @@ function formulaires_editer_carte_verifier_dist($id_carte='new', $retour='', $li
  *     Retours des traitements
  */
 function formulaires_editer_carte_traiter_dist($id_carte='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	
+	if(_request('controles')){
+		set_request('controles',serialize(_request('controles')));
+	}
 	$retours = formulaires_editer_objet_traiter('carte', $id_carte, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
-	spip_log($retours,'test.'._LOG_ERREUR);
 	if(_request('geojson')){
-		spip_log(sql_getfetsel("GeomFromText(".json_to_wkt(_request('geojson')).")"));
 		sql_update('spip_cartes', array('bounds'=>"GeomFromText('".json_to_wkt(_request('geojson'))."')"),"id_carte=".intval($retours['id_carte']));
 	}
 	return $retours;

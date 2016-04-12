@@ -48,6 +48,18 @@
 	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=#GET{zoom},lat=#LAT,lon=#LON}
 </div>]
 
+<B_controles>
+<div class="champ contenu_controles[ (#CONTROLES**|strlen|?{'',vide})]">
+	<label><:carte:champ_controles_label:> : </label>
+	<ul>
+	<BOUCLE_controles(DATA){source table, #CONTROLES}>
+		<li>
+			[(#VAL{carte:option_}|concat{#VALEUR}|_T)]
+		</li>
+	</BOUCLE_controles>
+	</ul>
+</div>
+</B_controles>
 [<div class="champ contenu_style_carte[ (#STYLE_CARTE*|strlen|?{'',vide})]">
 	<label><:carte:champ_style_carte_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{style_carte} style_carte">(#STYLE_CARTE)</span>

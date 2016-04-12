@@ -83,7 +83,19 @@
 						nomajinputs=oui,
 						boutons=#ARRAY{marker,non,polyline,non,polygon,non}})]
 				</fieldset>
-			</div>	
+			</div>
+			<div class="fieldset">
+				<fieldset>
+					<legend><:carte:legend_controles:></legend>
+					[(#SAISIE{checkbox, controles,
+						label=<:carte:champ_controles_label:>,
+						defaut=#ARRAY,
+						datas=#ARRAY{
+							fullscreen,<:carte:option_fullscreen:>,
+							scale,<:carte:option_scale:>,
+							overview,<:carte:option_overview:>}})]
+				</fieldset>
+			</div>
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_bounds_label' => 'Limites de la carte',
 	'champ_center_points_label' => 'Centrer et zoomer automatiquement sur les points affichés sur la carte',
+	'champ_controles_label' => 'Contrôles ajoutés à la carte par défaut',
 	'champ_footer_carte_label' => 'Pied de la carte',
 	'champ_style_carte_label' => 'Style de la carte',
 	'champ_texte_label' => 'Texte',
@@ -32,7 +33,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'legend_centrage' => 'Centrage par défaut',
+	'legend_controles' => 'Les contrôles affichés',
 
+	// O
+	'option_fullscreen' => 'Plein écran',
+	'option_scale' => 'Échelle',
+	'option_overview' => 'Mini-carte d\'aperçu',
+	
 	// R
 	'retirer_lien_carte' => 'Retirer cette carte',
 	'retirer_tous_liens_cartes' => 'Retirer toutes les cartes',

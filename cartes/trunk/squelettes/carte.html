@@ -43,9 +43,27 @@
 			</div>
 		</div>
 	</div>
-	<div class="map_wrapper">[(#SET{minzoom,[(#ZOOM_MIN|sinon{2})]})][(#SET{maxzoom,[(#ZOOM_MAX|sinon{12})]})][(#SET{zoom_defaut,[(#ZOOM_DEFAUT|sinon{#GET{minzoom}})]})]
-		[(#SET{autocenterandzoom,[(#CENTER_POINTS|=={on}|?{oui,non})]})][(#SET{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]})]
-		#MODELE{carte_gis,objet=carte,autocenterandzoom=#GET{autocenterandzoom},default_layer=#GET{layer_defaut},zoom=#GET{zoom_defaut},minZoom=#GET{minzoom},maxZoom=#GET{maxzoom},id_objet=#ID_CARTE,height=100%}
+	<div class="map_wrapper">
+		[(#SET{minzoom,[(#ZOOM_MIN|sinon{2})]})]
+		[(#SET{maxzoom,[(#ZOOM_MAX|sinon{12})]})]
+		[(#SET{zoom_defaut,[(#ZOOM_DEFAUT|sinon{#GET{minzoom}})]})]
+		[(#SET{scale,[(#VAL{scale}|in_array{#CONTROLES}|?{oui,non})]})]
+		[(#SET{fullscreen,[(#VAL{fullscreen}|in_array{#CONTROLES}|?{oui,non})]})]
+		[(#SET{overview,[(#VAL{overview}|in_array{#CONTROLES}|?{oui,non})]})]
+		[(#SET{autocenterandzoom,[(#CENTER_POINTS|=={on}|?{oui,non})]})]
+		[(#SET{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]})]
+		[(#MODELE{carte_gis,objet=carte
+			autocenterandzoom=#GET{autocenterandzoom},
+			default_layer=#GET{layer_defaut},
+			zoom=#GET{zoom_defaut},
+			minZoom=#GET{minzoom},
+			maxZoom=#GET{maxzoom},
+			fullscreen=#GET{fullscreen},
+			overview=#GET{overview},
+			scale=#GET{scale},
+			objet=carte,
+			id_objet=#ID_CARTE,
+			height=100%})]
 	</div>
 	[(#SET{footer,footer_carte/[(#FOOTER|sinon{footer})]})]
 	<INCLURE{fond=#GET{footer},id_carte,self=#SELF} />

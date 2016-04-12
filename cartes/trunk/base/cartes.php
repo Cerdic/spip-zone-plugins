@@ -22,9 +22,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Déclarations d'interface pour le compilateur
  */
 function cartes_declarer_tables_interfaces($interfaces) {
-
 	$interfaces['table_des_tables']['cartes'] = 'cartes';
-	$interfaces['table_des_traitements']['TEXTE_FOOTER'][] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['TEXTE_FOOTER']['cartes'] = _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['CONTROLES']['cartes'] = 'unserialize(%s)';
 	return $interfaces;
 }
 
@@ -58,6 +58,7 @@ function cartes_declarer_tables_objets_sql($tables) {
 			'lon'				 => 'double NULL NULL',
 			'center_points'      => 'VARCHAR(3) DEFAULT "non"', 
 			'bounds'             => 'GEOMETRY DEFAULT "" NOT NULL',
+			'controles'              => 'text NOT NULL DEFAULT ""',
 			'type'               => 'text NOT NULL DEFAULT ""',
 			'date'               => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"', 
 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL', 
@@ -74,8 +75,8 @@ function cartes_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => 'titre AS titre, lang AS lang',
 		'date' => 'date',
-		'champs_editables'  => array('titre', 'texte','layer_defaut', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds','type','lat','lon','center_points'),
-		'champs_versionnes' => array('titre', 'texte','layer_defaut', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte','texte_footer', 'bounds','type','lat','lon','center_points'),
+		'champs_editables'  => array('titre', 'texte','layer_defaut', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds','controles', 'type','lat','lon','center_points'),
+		'champs_versionnes' => array('titre', 'texte','layer_defaut', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte','texte_footer', 'bounds','controles', 'type','lat','lon','center_points'),
 		'rechercher_champs' => array("titre" => 5, "texte" => 7,"texte_footer" => 4),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
