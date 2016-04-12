@@ -61,7 +61,7 @@
 		</BOUCLE_point>
 		<//B_points>
 		<//B_si_geojson>
-		if (data) {
+		if (typeof data === 'object') {
 			var geojson = new L.geoJson('', {
 				style: function (feature) {
 					return feature.properties.styles;
