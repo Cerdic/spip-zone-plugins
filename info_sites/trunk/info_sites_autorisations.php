@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Fonction d'appel pour le pipeline
  *
@@ -111,7 +110,6 @@ function autoriser_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
-
 /**
  * Autorisation de mise à jour
  *
@@ -197,6 +195,13 @@ function autoriser_projetssite_creer($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositescreer_dist($faire, $type, $id, $qui, $opt) {
+
+	if (is_array($opt) and isset($opt['projet'])) {
+		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
+			return $confirm;
+		}
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -245,6 +250,12 @@ function autoriser_projetssite_modifier($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
+			return $confirm;
+		}
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -266,7 +277,6 @@ function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui,
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
-
 /**
  * Autorisation de mise à jour (projetssite)
  *
@@ -279,6 +289,12 @@ function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui,
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
+			return $confirm;
+		}
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -312,6 +328,12 @@ function autoriser_associerprojets_sites($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssites_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
+			return $confirm;
+		}
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
@@ -331,8 +353,7 @@ function autoriser_projetssites_infositesassocier_dist($faire, $type, $id, $qui,
  **/
 function autoriser_projetssitesecurite_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('base/abstract_sql');
-	$auteurs = sql_fetsel("role", "spip_auteurs_liens",
-		"objet='projet' AND id_objet IN (SELECT id_objet FROM spip_projets_sites_liens WHERE objet='projet' AND id_projets_site=" . $id . ") AND id_auteur=" . $qui['id_auteur']);
+	$auteurs = sql_fetsel("role", "spip_auteurs_liens", "objet='projet' AND id_objet IN (SELECT id_objet FROM spip_projets_sites_liens WHERE objet='projet' AND id_projets_site=" . $id . ") AND id_auteur=" . $qui['id_auteur']);
 
 	if (isset($auteurs['role'])) {
 		// Pour le moment, quelque soit le rôle de l'auteur, il peut voir les éléments sécurisés
@@ -717,3 +738,36 @@ function autoriser_contact_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
+function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = array()) {
+	include_spip('base/abstract_sql');
+	$roles = array();
+	$auteur_roles = sql_allfetsel('role', 'spip_auteurs_liens', 'objet=' . sql_quote('projet') . ' AND id_auteur=' . $qui['id_auteur'] . ' AND id_objet=' . $id_projet);
+	if (is_array($auteur_roles) and count($auteur_roles) > 0) {
+		foreach ($auteur_roles as $auteur_role) {
+			$roles[] = $auteur_role['role'];
+		}
+	}
+	// Liste des rôles pouvant créer des sites sur un projet.
+	if (is_string($role_creation)) {
+		// Si on passe un string en 3ème paramètre le rôle tel que 'developpeur', on le reformate en tableau.
+		// Pas de séparateur/serialize prévu pour le moment.
+		$role_creation = array($role_creation);
+	} elseif (is_array($role_creation) and count($role_creation) == 0) {
+		$role_creation = array(
+			'dir_projets',
+			'chef_projets',
+			'ref_tech',
+			'architecte',
+			'lead_developpeur',
+			'developpeur',
+		);
+	}
+	if (!empty(array_intersect($roles, $role_creation))) {
+		return true;
+	}
+
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}

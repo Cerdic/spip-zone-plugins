@@ -84,6 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'integrateur_label' => 'Intégrateur',
 
 	// L
+	'label_autres' => 'Autres',
 	'label_branche' => 'Branche',
 	'label_branche_version' => 'Version',
 	'label_controle' => 'Points de contrôle',

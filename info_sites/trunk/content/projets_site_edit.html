@@ -1,2 +1,10 @@
-[(#AUTORISER{infositesmodifier,projetssite,#ID_PROJETS_SITE}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#SET{opt,#ARRAY})][(#ENV{associer_objet}|oui)
+	[(#ENV{associer_objet}|match{^projet|}|oui)[(#SET{opt,#ARRAY{projet,#ENV{associer_objet}|explode{'|'}|table_valeur{1}}})]]
+]
+
+[(#ID_PROJETS_SITE|oui)
+	[(#AUTORISER{infositesmodifier,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+][(#ID_PROJETS_SITE|non)
+	[(#AUTORISER{infositescreer,projets_site,'',[(#SESSION|unserialize)],#GET{opt}}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+]
 [(#INCLURE{fond=prive/squelettes/contenu/#ENV{page},exec=#ENV{page},env})]

@@ -33,10 +33,27 @@
 			</button>
 		</div>
 		<div class="collapse navbar-collapse" id="menu-content">
-			<ul class="nav navbar-nav"><BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}>[(#AUTORISER{infositesvoir,[(#CLE)]}|oui)<li[(#GET{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}"[(#GET{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})]"></i> [<span class="hidden-xs">(#VALEUR**{nom}|_T)</span>]</a></li>]
+			<ul class="nav navbar-nav"><BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}>[(#AUTORISER{infositesvoir,[(#CLE)]}|oui)<li[(#GET{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}"[(#GET{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})]"></i> [<span>(#VALEUR**{nom}|_T)</span>]</a></li>]
 			</BOUCLE_menu></ul>
 		</div>
 	</div>
 </nav>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var menu_items = $('#menu-content > ul > li');
+		if (menu_items.length > 5) {
+			var last_items = menu_items.length - 4;
+			var removed = menu_items.splice(5, last_items);
+			$('#menu-content > ul > li').slice(-last_items+1).remove();
+			var autres_items = new Array();
+			$.each(removed, function(key, value){
+				autres_items.push(value.outerHTML);
+			});
+
+			$('#menu-content > ul').append('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><:info_sites:label_autres:> <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>');
+			$('#menu-content > ul > li.dropdown > ul.dropdown-menu').append(autres_items.join(' '));
+		}
+	});
+</script>
 <!-- Fin menu -->
 [(#FILTRE{trim})]
