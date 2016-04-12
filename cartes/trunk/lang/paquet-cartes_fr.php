@@ -8,5 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cartes_description' => '',
 	'cartes_nom' => 'Création de cartes',
-	'cartes_slogan' => '',
+	'cartes_slogan' => 'Générer des cartes dans leurs moindres détails',
 );
