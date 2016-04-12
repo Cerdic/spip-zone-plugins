@@ -762,7 +762,8 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 			'developpeur',
 		);
 	}
-	if (!empty(array_intersect($roles, $role_creation))) {
+	$roles_autorises = array_intersect($roles, $role_creation);
+	if (!empty($roles_autorises)) {
 		return true;
 	}
 
