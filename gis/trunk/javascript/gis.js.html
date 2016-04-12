@@ -2,19 +2,19 @@
 
 [(#INCLURE{lib/leaflet/dist/[(#CONFIG{auto_compress_js}|=={oui}|?{'leaflet','leaflet-src'})].js})]
 
-[L.Icon.Default.imagePath = "(#CHEMIN{lib/leaflet/dist/images}|url_absolue)";]
+[L.Icon.Default.imagePath = '(#CHEMIN{lib/leaflet/dist/images}|url_absolue)';]
 
 (function() {
 
 L.gisConfig = {
-	"gis_layers":#EVAL{json_encode($GLOBALS['gis_layers'])},
-	"default_layer":"[(#REM|gis_layer_defaut)]",
-	"affiche_layers":[(#CONFIG{gis/layers,#ARRAY}|json_encode)]
+	'gis_layers': #EVAL{json_encode($GLOBALS['gis_layers'])},
+	'default_layer': '[(#REM|gis_layer_defaut)]',
+	'affiche_layers': [(#CONFIG{gis/layers,#ARRAY}|json_encode)]
 };
 
 L.geocoderConfig = {
-	"forwardUrl":"[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=search}|html_entity_decode)]",
-	"reverseUrl":"[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=reverse}|html_entity_decode)]"
+	'forwardUrl': '[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=search}|html_entity_decode)]',
+	'reverseUrl': '[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=reverse}|html_entity_decode)]'
 };
 
 })();
