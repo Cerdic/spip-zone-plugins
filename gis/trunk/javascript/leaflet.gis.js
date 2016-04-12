@@ -44,7 +44,8 @@ L.Map.Gis = L.Map.extend({
 		centrer_fichier: true,
 		kml: false,
 		gpx: false,
-		geojson: false
+		geojson: false,
+		topojson: false
 	},
 	
 	initialize: function (id,options) {
@@ -308,6 +309,15 @@ L.Map.Gis = L.Map.extend({
 					if (data)
 						map.parseGeoJson(data);
 				});
+			}
+		}
+		if (map.options.topojson && map.options.topojson.length){
+			for(var i in map.options.topojson){
+				map.topojson[i] = new L.TOPOJSON(map.options.topojson[i], {async: true});
+				if (map.options.centrer_fichier) {
+					map.topojson[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
+				}
+				map.addLayer(map.topojson[i]);
 			}
 		}
 	}
