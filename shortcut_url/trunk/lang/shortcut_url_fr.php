@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ajouter_shortcut_url' => 'Ajouter un lien raccourci',
 	'titre_afficher_logs_shortcut_url' => 'Afficher les logs',
 	'titre_afficher_bots_shortcut_url' => 'Afficher les bots',
+	'titre_csv_export' => 'Données de @date@ extraite le @date_jour@',
 	'titre_export_logs_shortcut_url' => 'Exporter des raccourcis',
 	'titre_modifier_shortcut_url' => 'Modifier un lien raccourci',
 	'titre_details_url' => 'Détails de l\'URL raccourcie',

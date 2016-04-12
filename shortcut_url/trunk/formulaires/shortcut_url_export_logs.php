@@ -50,35 +50,32 @@ function formulaires_shortcut_url_export_logs_verifier_dist(){
 **/
 function formulaires_shortcut_url_export_logs_traiter_dist(){
 
+	include_spip('inc/exporter_csv');
 	$donnees = '';
 	$date = _request('annee').'-'._request('mois');
 	$req = sql_select('DISTINCT id_shortcut_url', 'spip_shortcut_urls_logs', 'DATE(date_modif) like "' . $date . '%" and humain="oui"');
 	foreach ($req as $cle => $valeur) {
-		$id_shortcut_url = sql_select('id_shortcut_url,description, url', 'spip_shortcut_urls', 'id_shortcut_url=' . $valeur['id_shortcut_url']);
+		$id_shortcut_url = sql_select('id_shortcut_url, description, url', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($valeur['id_shortcut_url']));
 		foreach ($id_shortcut_url as $c => $v) {
-			$count_shortcut_url = sql_countsel('spip_shortcut_urls_logs', 'id_shortcut_url=' . $v['id_shortcut_url']);
+			$count_shortcut_url =  sql_countsel('spip_shortcut_urls_logs', 'id_shortcut_url=' . intval($v['id_shortcut_url']));
 			$donnees .= $count_shortcut_url . ',';
-			$donnees .= implode(',',str_replace('"', '', $v));
-			$donnees .= "\r\n";
+			$donnees .= exporter_csv_ligne($v);
 		}
 	}
 
 	$date_jour = date('Y-m-d_H-i');
 	$nom_fichier_csv = 'shortcut_urls_logs_'.$date_jour.'.csv';
 
-	Header('Content-Type: text/csv; charset=utf-8');
+	header('Content-Type: text/csv; charset=utf-8');
 	header("Content-Disposition: attachment; filename=$nom_fichier_csv");
 	header("Content-Length: ".strlen($donnees));
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Pragma: public');
-	echo "Données de " . $date  . " extraite le " . $date_jour . "\r\n";
+
+	echo _T('shortcut_url:titre_csv_export', array('date' => $date, 'date_jour' => $date_jour)) . "\r\n";
 	echo "nb click,id,description,url\r\n";
 	echo $donnees;
-	exit;
 
 	return array('editable' => false, 'message_ok'=>_T('shortcut_url:config_export_ok'));
 
 }
-
-?>
-

@@ -1,11 +1,11 @@
 <paquet
 	prefix="shortcut_url"
 	categorie="edition"
-	version="1.0.6"
+	version="1.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
-	schema="0.0.5"
+	schema="0.0.6"
 >
 
 	<nom>Shortcut URL</nom>

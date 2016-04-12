@@ -38,6 +38,10 @@ function shortcut_url_upgrade($nom_meta_base_version,$version_cible){
 		// Changer le type de champs pour le tri par click
 		array('sql_alter',"TABLE spip_shortcut_urls MODIFY COLUMN click bigint(11)"));
 
+	$maj['0.0.6'] = array(
+		// Ajouter un index à la table spip_shortcut_urls_logs
+		array('sql_alter',"TABLE spip_shortcut_urls_logs ADD INDEX (id_shortcut_url)"));
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

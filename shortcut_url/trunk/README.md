@@ -11,9 +11,14 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
+## Version 1.0.7 (12/04/2016)
+
+- Index sur la table des logs (spip_shortcut_urls_logs) pour accélérer l'export de stat
+
 ## Version 1.0.6 (11/04/2016)
 
-- Changement de la génération des titres des URL'S, avec obligation d'avoir un numérique dans la chaîne.
+- Confirmation lors de la suppression d'une URL
+- Changement de la génération des titres des URL'S, avec obligation d'avoir un numérique dans la chaîne
 - Fixe le bug sur la taille des titres (raccourci) lors de la génération des URL's
 
 ## Version 1.0.5 (08/04/2016)

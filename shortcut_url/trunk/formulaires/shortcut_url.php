@@ -108,8 +108,6 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 	} else
 		$taille_raccourci = 5;
 
-	spip_log($taille_raccourci, 'test.' . _LOG_ERREUR);
-
 	$set = array();
 	$set['id_shortcut_url'] = $id_shortcut_url;
 	if(_request('titre'))

@@ -69,7 +69,7 @@ function shortcut_url_declarer_tables_objets_sql($tables){
 			"humain" 			=> "varchar(3) default '' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"	=> "id_shortcut_urls_log"
+			"PRIMARY KEY"	=> "id_shortcut_urls_log",
 		)
 	);
 
