@@ -41,7 +41,8 @@ Parametres possibles :
 - limit|limite = 500               nombre max de marqueurs à afficher, 500 par defaut
 - kml = 12                         kml à superposer à la carte (id_document ou url ou liste d'url)
 - gpx = 12                         gpx à superposer à la carte (id_document ou url ou liste d'url)
-- geojson = 12                     geojson à superposer à la carte (id_document ou url  ou liste d'url)
+- geojson = 12                     geojson à superposer à la carte (id_document ou url ou liste d'url)
+- topojson = 12                    topojson à superposer à la carte (id_document ou url ou liste d'url)
 - centrer_fichier = non            permet de ne pas centrer la carte automatiquement sur les fichiers kml/gpx surperposés
 - point = non                      si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 
@@ -143,7 +144,8 @@ var jQgisloader;
 					centrer_fichier: [(#ENV{centrer_fichier,oui}|=={oui}|?{true,false})],
 					kml: [(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
 					gpx: [(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})],
-					geojson: [(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})]
+					geojson: [(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})],
+					topojson: [(#ENV{topojson,''}|?{[(#ENV{topojson}|is_array|?{#ENV{topojson},#LISTE{#ENV{topojson}}}|gis_kml_to_urls|json_encode)],false})]
 				});
 			});
 		});
