@@ -78,7 +78,7 @@ class optimg extends Command {
 			// Si c'est bon on continue
 			else{				
 				if(strlen($dest) > 1){
-					 $label_d=" dans $dest " ;
+					 $label_d=" dans $dest" ;
 					 $param_d=" $dest" ;
 					 if(!is_dir($dest))
 					 	mkdir($dest);
@@ -96,12 +96,12 @@ class optimg extends Command {
 				
 				// optimisation imagemagick
 				if($image){
-					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d}${label_c} !</info>");
+					$output->writeln("<info>C'est parti pour une petite optimisation d'image ${label_r}${label_d}/${label_c} !</info>");
 					passthru('plugins/convertisseur/scripts/optimg.sh ' . escapeshellarg($image) . $param_r . $param_d . $param_c);
 				}	
 				elseif($source){
 					$param_s = " $source" ;
-					$output->writeln("<info>C'est parti pour une petite optimisation des images de $source/ ${label_r}${label_d} !</info>");
+					$output->writeln("<info>C'est parti pour une petite optimisation des images de $source/ ${label_r}${label_d}/${label_c} !</info>");
 
 					$fichiers_jpg = preg_files($source . "/", "\.(jpg|tif)$"); # ou ...
 	
@@ -109,20 +109,21 @@ class optimg extends Command {
 						
 						$path = explode("/", preg_replace(",^/,", "", dirname(str_replace($source, "", $image)))) ;
 						
-						# var_dump($path);
+						// var_dump($path);
 						$dpt = $dest ;
-						foreach($path as $r){
-							if(!is_dir("$dpt/$r")){
-								mkdir("$dpt/$r");
-								$dpt="$dpt/$r";
-							}else
-								$dpt="$dpt/$r";
-						}
+						if($path[0] != "")
+							foreach($path as $r){
+								if(!is_dir("$dpt/$r")){
+									mkdir("$dpt/$r");
+									$dpt="$dpt/$r";
+								}else
+									$dpt="$dpt/$r";
+							}
 						
 						$param_d=" $dpt";
 
 						// Conversion imagemagick
-						passthru('plugins/convertisseur/scripts/optimg.sh ' . $image . $param_r . $param_d);
+						passthru('plugins/convertisseur/scripts/optimg.sh ' . $image . $param_r . $param_d . $param_c);
 					}
 				}	
 			}
