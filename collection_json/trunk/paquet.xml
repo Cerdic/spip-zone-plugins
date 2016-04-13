@@ -1,7 +1,7 @@
 <paquet
 	prefix="collectionjson"
 	categorie="outil"
-	version="1.3.0"
+	version="1.4.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo=""
@@ -16,6 +16,7 @@
 	<necessite nom="http" compatibilite="[1.2.0;]" />
 	
 	<pipeline nom="autoriser" inclure="collectionjson_autorisations.php" />
+	<pipeline nom="collectionjson_get_collection" action="" />
 	<pipeline nom="http_collectionjson_get_index_contenu" action="" />
 	<pipeline nom="http_collectionjson_get_collection_contenu" action="" />
 	<pipeline nom="http_collectionjson_get_ressource_contenu" action="" />
