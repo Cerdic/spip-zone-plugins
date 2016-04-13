@@ -67,14 +67,17 @@ function formulaires_shortcut_url_export_logs_traiter_dist(){
 	$nom_fichier_csv = 'shortcut_urls_logs_'.$date_jour.'.csv';
 
 	header('Content-Type: text/csv; charset=utf-8');
-	header("Content-Disposition: attachment; filename=$nom_fichier_csv");
-	header("Content-Length: ".strlen($donnees));
+	header('Content-Disposition: attachment; filename=$nom_fichier_csv');
+	header('Content-Length: '.strlen($donnees));
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Pragma: public');
 
 	echo _T('shortcut_url:titre_csv_export', array('date' => $date, 'date_jour' => $date_jour)) . "\r\n";
-	echo "nb click,id,description,url\r\n";
+	echo 'nb click,id,description,url\r\n';
 	echo $donnees;
+
+	// $telecharger = recuperer_fond('inclure/export_csv', array('date' => $date, 'date_jour' => $date_jour, 'nom_fichier_csv' => $nom_fichier_csv, 'id_shortcut_url' => $valeur['id_shortcut_url']), array('ajax' => false));
+	// spip_log($telecharger, 'test.' . _LOG_ERREUR);
 
 	return array('editable' => false, 'message_ok'=>_T('shortcut_url:config_export_ok'));
 

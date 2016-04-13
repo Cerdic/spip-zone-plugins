@@ -43,6 +43,16 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 		$valeurs['titre'] = $titre;
 	}
 
+	if (defined('_TAILLE_RACCOURCI')) {
+
+		if(_TAILLE_RACCOURCI > 5)
+			$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
+		else
+			$valeurs['taille_raccourci'] = 5;
+
+	} else
+			$valeurs['taille_raccourci'] = 5;
+
 	return $valeurs;
 	
 }
@@ -57,20 +67,20 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 
 	$erreurs = array();
 	if (!$url = _request('url'))
-		$erreurs['url'] = _T("info_obligatoire");
+		$erreurs['url'] = _T('info_obligatoire');
 	// Check si il existe le http://
 	else{
 		$parsed = parse_url($url );
 		if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-			$erreurs['url'] = _T("shortcut_url:erreur_url_invalide");
+			$erreurs['url'] = _T('shortcut_url:erreur_url_invalide');
 		}
 		else{
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url,'var_mode','');
 			// Check si l'URL existe deja
-			if (($id_shortcut_url=="oui") && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)))){
+			if (($id_shortcut_url=='oui') && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)))){
 				set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
-				$erreurs['url'] = _T("shortcut_url:erreur_url_exist");
+				$erreurs['url'] = _T('shortcut_url:erreur_url_exist');
 			}
 		}
 	}
@@ -79,7 +89,7 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 		$id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre')));
 		if($id_shortcut_url_existe){
 			set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
-			$erreurs['titre'] = _T("shortcut_url:erreur_url_raccourcis_exist");
+			$erreurs['titre'] = _T('shortcut_url:erreur_url_raccourcis_exist');
 		}
 
 	}
