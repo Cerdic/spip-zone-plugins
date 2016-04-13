@@ -1,0 +1,86 @@
+<script src="../javascript/d3.v3.min.js"></script>
+<script src="../javascript/d3-legend.min.js"></script>
+
+<style>
+
+	h1 {
+		display: inline-block;
+	}
+
+	svg {
+		background: white none repeat scroll 0 0;
+		display: block;
+		margin-bottom: 5px;
+		padding: 10px 15px;
+	}
+
+	.q0-9 { fill:rgb(247,251,255); }
+	.q1-9 { fill:rgb(222,235,247); }
+	.q2-9 { fill:rgb(198,219,239); }
+	.q3-9 { fill:rgb(158,202,225); }
+	.q4-9 { fill:rgb(107,174,214); }
+	.q5-9 { fill:rgb(66,146,198); }
+	.q6-9 { fill:rgb(33,113,181); }
+	.q7-9 { fill:rgb(8,81,156); }
+	.q8-9 { fill:rgb(8,48,107); }
+
+</style>
+
+<section id="legend">
+	<h1 id="color-legend">Quantile Scale Legend</h1>
+
+	<svg height="200" width="160" id="svg-color-quant"></svg>
+</section>
+
+<section id="linear">
+	<h1 id="color-linear">Linear Scale Legend - Horizontal</h1>
+
+	<svg height="60" width="200" id="svg-color-linear"></svg>
+</section>
+
+Source: <a href="http://d3-legend.susielu.com/" title="d3-legend">http://d3-legend.susielu.com/</a>
+
+<script type="text/javascript">
+
+// #svg-color-quant
+var svg = d3.select("#svg-color-quant");
+
+var quantize = d3.scale.quantize()
+	.domain([ 0, 0.15 ])
+	.range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+svg.append("g")
+	.attr("class", "legendQuant")
+	.attr("transform", "translate(20,20)");
+
+var legend = d3.legend.color()
+	.labelFormat(d3.format(".2f"))
+	.useClass(true)
+	.scale(quantize);
+
+svg.select(".legendQuant")
+	.call(legend);
+
+
+// #svg-color-linear
+var linear = d3.scale.linear().domain([0,10]).range(["rgb(46, 73, 123)", "rgb(71, 187, 94)"]);
+
+var svg = d3.select("#svg-color-linear");
+
+var linear = d3.scale.linear()
+	.domain([0,10])
+	.range(["rgb(46, 73, 123)", "rgb(71, 187, 94)"]);
+
+svg.append("g")
+	.attr("class", "legendLinear")
+	.attr("transform", "translate(20,20)");
+
+var legendLinear = d3.legend.color()
+	.shapeWidth(30)
+	.orient('horizontal')
+	.scale(linear);
+
+svg.select(".legendLinear")
+	.call(legendLinear);	
+
+</script>
