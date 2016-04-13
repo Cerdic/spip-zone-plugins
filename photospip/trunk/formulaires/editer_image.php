@@ -311,7 +311,7 @@ function formulaires_editer_image_traiter_dist($id_document='new',$mode=false, $
 				$size_image = getimagesize($tmp_img);
 				$largeur = $size_image[0];
 				$hauteur = $size_image[1];
-				$ext = substr(basename($tmp_img), strpos(basename($tmp_img), ".")+1, strlen(basename($tmp_img)));
+				$ext = substr(basename($tmp_img), strrpos(basename($tmp_img), ".")+1);
 				$poids = filesize($tmp_img);
 				/**
 				 * Crée une version de l'image

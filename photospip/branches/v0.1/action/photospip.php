@@ -162,7 +162,7 @@ function action_photospip_post($r){
 		spip_log("taille de l'image $size_image[0] x $size_image[1]","photospip");
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
-		$ext = substr($dest, strpos($dest, ".")+1, strlen($dest));
+		$ext = substr($dest, strrpos($dest, ".")+1);
 		$poids = filesize($dest);
 		
 		// succes !
