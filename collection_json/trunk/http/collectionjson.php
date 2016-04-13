@@ -332,14 +332,12 @@ function http_collectionjson_put_ressource_dist($requete, $reponse) {
  * 
  * @param string $objet Type de l’objet dont on veut générer la vue
  * @param int $id_objet Identifiant de l’objet dont on veut générer la vue
- * @param Request $requete
  * @param string $contenu Optionnellement, les champs SQL déjà récupérés de l’objet, pour éviter de faire une requête
  */
-function collectionjson_get_objet($objet, $id_objet, $requete, $champs=array()) {
+function collectionjson_get_objet($objet, $id_objet, $champs=array()) {
 	include_spip('inc/filtres');
 	
-	$format = $requete->attributes->get('format');
-	$collection = $requete->attributes->get('collection');
+	$collection = table_objet($objet); // l'objet au pluriel
 	$table_sql = table_objet_sql($objet);
 	$cle = id_table_objet($objet);
 	$description = lister_tables_objets_sql($table_sql);
@@ -356,9 +354,9 @@ function collectionjson_get_objet($objet, $id_objet, $requete, $champs=array()) 
 	}
 	
 	$item = array(
-		'href' => url_absolue("http.api/$format/$collection/$id_objet"),
+		'href' => url_absolue("http.api/collectionjson/$collection/$id_objet"),
 		'links' => array(
-			array('rel' => 'edit', 'href' => url_absolue("http.api/$format/$collection/$id_objet")),
+			array('rel' => 'edit', 'href' => url_absolue("http.api/collectionjson/$collection/$id_objet")),
 			array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($id_objet, $objet))),
 		),
 		'data' => $data,
