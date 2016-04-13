@@ -223,7 +223,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			$objet = objet_type($collection);
 			$id_objet = intval($ressource);
 			
-			$item = collectionjson_get_objet($objet, $id_objet, $requete);
+			$item = collectionjson_get_objet($objet, $id_objet);
 			
 			$json = array(
 				'collection' => array(

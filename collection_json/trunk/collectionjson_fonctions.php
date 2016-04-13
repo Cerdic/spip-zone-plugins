@@ -69,7 +69,7 @@ function collectionjson_get_collection($collection, $contexte) {
 		
 		$items = array();
 		foreach ($lignes as $champs) {
-			$items[] = collectionjson_get_objet(objet_type($table_collection), $champs[$cle_objet], $requete, $champs);
+			$items[] = collectionjson_get_objet(objet_type($table_collection), $champs[$cle_objet], $champs);
 		}
 		
 		$json = array(
