@@ -26,3 +26,34 @@ function itineraires_locomotions($type=null){
 	
 	return $locomotions;
 }
+
+function itineraires_locomotions_durees($id_itineraire) {
+	$id_itineraire = intval($id_itineraire);
+	
+	// On ajoute locomotions_durees
+	$locomotions_durees = array();
+	// Si c'est une modif on cherche l'existant
+	if (
+		$id_itineraire > 0
+		and $locomotions = sql_allfetsel('*', 'spip_itineraires_locomotions', 'id_itineraire = '.$id_itineraire)
+		and is_array($locomotions)
+	) {
+		$locomotions_durees = array('actives'=>array(), 'durees'=>array());
+		foreach ($locomotions as $locomotion){
+			$locomotions_durees['actives'][] = $locomotion['type_locomotion'];
+			// Seulement s'il y a une durée
+			if ($duree = $locomotion['duree']) {
+				$h = floor($duree/3600);
+				$m = floor(($duree-$h*3600)/60);
+				if ($h) {
+					$locomotions_durees['durees'][$locomotion['type_locomotion']]['heures'] = $h;
+				}
+				if ($m) {
+					$locomotions_durees['durees'][$locomotion['type_locomotion']]['minutes'] = $m;
+				}
+			}
+		}
+	}
+	
+	return $locomotions_durees;
+}
