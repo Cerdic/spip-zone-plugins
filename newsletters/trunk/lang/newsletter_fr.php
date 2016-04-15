@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_newsletter' => 'Créer une infolettre',
-	'icone_modifier_newsletter' => 'Modifier cette infolettre',
 	'icone_dupliquer_newsletter' => 'Dupliquer cette infolettre',
+	'icone_modifier_newsletter' => 'Modifier cette infolettre',
 	'info_1_mailsubscriber' => '1 inscrit',
 	'info_1_newsletter' => '1 infolettre',
 	'info_1_newsletter_prog' => '1 infolettre programmée',
