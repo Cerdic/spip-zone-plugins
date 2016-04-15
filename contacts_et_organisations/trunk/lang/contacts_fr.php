@@ -41,15 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Squelettes publics ZPIP v1',
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1,
-		permettant le parcourir les contacts et organisations dans l’espace public ?',
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Activer les squelettes publics pour ZPIP en version 1, permettant le parcourir les contacts et organisations dans l’espace public ?',
 	'cfg_afficher_infos_sur_auteurs' => 'Affichage détaillé des auteurs ?',
-	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d’organisation
-		également sur les pages auteurs dans l’espace privé ?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'Afficher les infos de contact ou d’organisation également sur les pages auteurs dans l’espace privé ?',
 	'cfg_associer_aux_auteurs' => 'Associer aux auteurs ?',
-	'cfg_associer_aux_auteurs_explication' => 'Permettre d’associer des contacts ou organisations
-		aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation,
-		et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
+	'cfg_associer_aux_auteurs_explication' => 'Permettre d’associer des contacts ou organisations aux auteurs. Cela ajoute un formulaire pour associer un auteur sur les pages contact ou organisation, et inversement cela ajoute un formulaire pour lier un contact ou une organisation sur les pages des auteurs.',
 	'cfg_lier_contacts_objets_explication' => 'Permettre d’associer les contacts aux contenus éditoriaux suivants. Cela affiche le sélecteur de contacts dans les pages d’administration de ces contenus.',
 	'cfg_lier_contacts_objets_label' => 'Associer les contacts',
 	'cfg_lier_organisations_objets_explication' => 'Permettre d’associer les organisations aux contenus éditoriaux suivants. Cela affiche le sélecteur d’organisations dans les pages d’administration de ces contenus.',
@@ -57,12 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_relations_avec_auteurs' => 'Relation avec les auteurs',
 	'cfg_relations_avec_objets' => 'Relation avec les contenus éditoriaux (autres que les auteurs)',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Supprimer réciproquement les auteurs et contacts ?',
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu’un contact
-		(ou une organisation) est supprimé, l’auteur associé à ce contact, s’il en existe un, voit son statut
-		passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle,
-		le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites
-		afin d’éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents :
-		une suppression est définitive et les auteurs passent à la poubelle même s’ils ont écrit des articles…',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'Avec cette option active, lorsqu’un contact (ou une organisation) est supprimé, l’auteur associé à ce contact, s’il en existe un, voit son statut passer à la poubelle. De la même manière, inversement, si un auteur est mis à la poubelle, le contact éventuel associé est supprimé. Cette option peut être pratique sur certains sites afin d’éviter des contacts orphelins de leur auteur (si celui-ci a été supprimé) mais soyez vigilents : une suppression est définitive et les auteurs passent à la poubelle même s’ils ont écrit des articles…',
 	'cfg_utiliser_annuaires_explication' => 'Activer la possibilité de classer vos contacts et organisations dans plusieurs annuaires différents.',
 	'cfg_utiliser_annuaires_label' => 'Utiliser plusieurs annuaires',
 	'cfg_utiliser_organisations_arborescentes_explication' => 'Il est possible de définir qu’une organisation est enfant d’une autre. Lorsque cette option est activée, cela ajoute un champ dans l’édition d’une organisation pour préciser ce lien de parenté.',
@@ -112,19 +103,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'est_un_contact' => 'Cet auteur est défini comme étant un contact.',
 	'est_une_organisation' => 'Cet auteur est défini comme étant une organisation.',
 	'explication_activite' => 'Activité de l’organisation : humanitaire, formation, édition...',
-	'explication_contacts_ou_organisations' => 'Vous pouvez définir cet auteur
-		comme étant un contact ou comme étant une organisation.
-		Ces attributions donnent accès à des champs de saisies supplémentaires
-		dans la fiche de renseignement de l’auteur.',
+	'explication_contacts_ou_organisations' => 'Vous pouvez définir cet auteur comme étant un contact ou comme étant une organisation. Ces attributions donnent accès à des champs de saisies supplémentaires dans la fiche de renseignement de l’auteur.',
 	'explication_identification' => 'Identifiant de l’organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explication_ouvertures' => 'Jours, horaires, saisons…',
 	'explication_statut_juridique' => 'SA, SARL, association...',
 	'explication_supprimer_contact' => 'La suppression du contact supprimera toutes les informations supplémentaires renseignées sur l’auteur.',
 	'explication_supprimer_organisation' => 'La suppression de l’organisation supprimera toutes les informations supplémentaires renseignées sur l’auteur.',
-	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
-	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
-	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul><li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul><li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'exporter_contacts' => 'Télécharger ces contacts en tableur',
 	'exporter_organisations' => 'Télécharger ces organisations en tableur',
 
@@ -214,12 +200,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Statut juridique',
-	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de cette organisation dans les jours à venir.',
-	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part,
-		la configuration actuelle du plugin Contacts & Organisations entraînera
-		la suppression automatique de ce contact dans les jours à venir.',
+	'suppression_automatique_de_organisation_prochainement' => 'Sans intervention de votre part, la configuration actuelle du plugin Contacts & Organisations entraînera la suppression automatique de cette organisation dans les jours à venir.',
+	'suppression_automatique_du_contact_prochainement' => 'Sans intervention de votre part, la configuration actuelle du plugin Contacts & Organisations entraînera la suppression automatique de ce contact dans les jours à venir.',
 	'supprimer_contact' => 'Supprimer ce contact',
 	'supprimer_organisation' => 'Supprimer cette organisation',
 
