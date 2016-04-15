@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_nom' => '-',
 	'explication_objectif' => 'Les objectifs du projet, en quelques mots...',
 	'explication_statut' => '-',
+	'explication_supprimer_projet' => 'La suppression de ce projet risque de rompre les liens entres objets.',
 	'explication_url_site' => 'Vous pouvez indiquer une url permettant de voir le projet en ligne',
 
 	// I
