@@ -1,6 +1,6 @@
 <?php
 /**
- * Définit les autorisations du plugin Contacts & Organisations 
+ * Définit les autorisations du plugin Contacts & Organisations
  *
  * @plugin Contacts & Organisations pour Spip 3.0
  * @license GPL (c) 2009 - 2013
@@ -145,7 +145,7 @@ function autoriser_contact_exporter_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_annuaire_creer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', $type, $id, $qui, $opt);
 }

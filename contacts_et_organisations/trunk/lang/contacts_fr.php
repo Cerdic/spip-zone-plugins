@@ -74,10 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_contact' => 'Êtes-vous sûr de vouloir délier cette organisation de ce contact ?',
 	'confirmer_delier_organisation' => 'Êtes-vous sûr de vouloir délier ce contact de cette organisation ?',
 	'confirmer_delier_organisation_rubrique' => 'Êtes-vous sûr de vouloir délier cette organisation de cette rubrique ?',
-	'confirmer_supprimer_contact' => 'Êtes-vous sûr de vouloir supprimer
-		les informations relatives à ce contact ?',
-	'confirmer_supprimer_organisation' => 'Êtes-vous sûr de vouloir supprimer
-		les informations relatives à cette organisation ?',
+	'confirmer_supprimer_contact' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce contact ?',
+	'confirmer_supprimer_organisation' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à cette organisation ?',
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Ajouter un contact',
 	'contact_ajouter_associe_a' => 'Ajouter un contact associé à :',
@@ -121,10 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_identification' => 'Identifiant de l’organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explication_ouvertures' => 'Jours, horaires, saisons…',
 	'explication_statut_juridique' => 'SA, SARL, association...',
-	'explication_supprimer_contact' => 'La suppression du contact supprimera
-		toutes les informations supplémentaires renseignées sur l’auteur.',
-	'explication_supprimer_organisation' => 'La suppression de l’organisation supprimera
-		toutes les informations supplémentaires renseignées sur l’auteur.',
+	'explication_supprimer_contact' => 'La suppression du contact supprimera toutes les informations supplémentaires renseignées sur l’auteur.',
+	'explication_supprimer_organisation' => 'La suppression de l’organisation supprimera toutes les informations supplémentaires renseignées sur l’auteur.',
 	'explications_page_contacts' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
