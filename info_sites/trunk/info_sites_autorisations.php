@@ -274,6 +274,14 @@ function autoriser_projetssite_infositesmodifier_dist($faire, $type, $id, $qui, 
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
+			return $confirm;
+		}
+	}
+	echo "<pre>";
+	var_dump($qui);
+	echo "</pre>";
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
@@ -504,6 +512,21 @@ function autoriser_projets_infositesassocier_dist($faire, $type, $id, $qui, $opt
 // *****************************
 // Les cadres de projets
 // *****************************
+
+/**
+ * Autorisation de voir (projetscadre)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_projetscadre_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
 
 /**
  * Surcharge d'autorisation d'association (projetscadres)

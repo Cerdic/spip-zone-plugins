@@ -70,7 +70,7 @@ function info_sites_menu_pages() {
 		),
 		'projets_cadres' => array(
 			'nom' => 'info_sites:menu_projets_cadres',
-			'icone' => 'fa  fa-clipboard fa-lg',
+			'icone' => 'fa fa-clipboard fa-lg',
 		),
 		'projets_sites' => array(
 			'nom' => 'info_sites:menu_projets_sites',

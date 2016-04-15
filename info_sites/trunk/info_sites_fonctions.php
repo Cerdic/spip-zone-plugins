@@ -293,6 +293,15 @@ function info_sites_lister_roles_auteurs() {
 	return $roles;
 }
 
+function info_sites_lister_roles_auteurs_tableaux() {
+	$roles = info_sites_lister_roles_auteurs();
+	$roles_tableaux = array();
+	foreach ($roles as $role) {
+		$roles_tableaux[$role] = array();
+	}
+	return $roles_tableaux;
+}
+
 function info_sites_lister_projets_auteurs($id_auteur = '') {
 	if (is_null($id_auteur) or empty($id_auteur)) {
 		$id_auteur = session_get('id_auteur');
@@ -308,6 +317,26 @@ function info_sites_lister_projets_auteurs($id_auteur = '') {
 	$projets_id = info_sites_nettoyer_tableau($projets_id);
 
 	return $projets_id;
+}
+
+function info_sites_lister_projets_auteurs_roles($id_projet) {
+	if (is_null($id_projet) or empty($id_projet)) {
+		return false;
+	}
+	$projets_roles = array();
+	$projets_base = sql_allfetsel('id_auteur, role', 'spip_auteurs_liens', "objet='projet' AND id_objet=$id_projet");
+
+	if (is_array($projets_base) and count($projets_base) > 0) {
+		foreach ($projets_base as $projet) {
+			$projets_roles[$projet['role']][] = $projet['id_auteur'];
+		}
+	}
+	/*
+	 * On ne passe pas par le nettoyeur pour ne pas réindexer le tableau car ici on a besoin des index rôle.
+	 * $projets_roles = info_sites_nettoyer_tableau($projets_roles);
+	 */
+
+	return $projets_roles;
 }
 
 function info_sites_nettoyer_tableau($tableau = array()) {

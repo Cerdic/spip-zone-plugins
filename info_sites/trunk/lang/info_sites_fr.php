@@ -68,10 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_projet' => 'Modifier ce projet',
 	'icone_modifier_projets_cadre' => 'Modifier ce cadre de projet',
 	'icone_modifier_projets_site' => 'Modifier ce site',
+	'info_1_auteur' => 'Un utilisateur',
 	'info_1_contact' => 'Un contact',
 	'info_1_organisation' => 'Une organisation',
 	'info_1_projet' => 'Un projet',
 	'info_1_projets_site' => 'Un site',
+	'info_auteurs' => 'Les utilisateurs',
+	'info_critere_sans_webservice' => 'Sans URL de webservice',
+	'info_nb_auteurs' => '@nb@ utilisateurs',
 	'info_nb_contacts' => '@nb@ contacts',
 	'info_nb_organisations' => '@nb@ organisations',
 	'info_nb_projets' => '@nb@ projets',
@@ -80,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_projets' => 'Nombre de projets',
 	'info_sites_titre' => 'Info Sites',
 	'info_vos_criteres' => 'Vos critères',
-	'info_critere_sans_webservice' => 'Sans URL de webservice',
 	'integrateur_label' => 'Intégrateur',
 
 	// L
@@ -100,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_url_projets_label' => 'L\'url de projets en ligne',
 
 	// M
-	'menu_auteurs' => 'Auteurs',
+	'menu_auteurs' => 'Utilisateurs',
 	'menu_commits' => 'Commits',
 	'menu_contacts' => 'Contacts',
 	'menu_organisations' => 'Organisations',
