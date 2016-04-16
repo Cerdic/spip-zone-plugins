@@ -30,12 +30,13 @@ function action_editer_grappe_dist($arg=null) {
 /**
  * Inserer une nouvelle grappe en base
  *
+ * @param int $id_parent
+ * @param array|null $champs
  * @return int $id_grappe
  * 	L'identifiant numérique de la nouvelle grappe
  */
-function grappe_inserer() {
+function grappe_inserer($id_parent = null, $champs = array()) {
 
-	$champs = array();
 	$champs['date'] = date('Y-m-d H:i:s');
 	$champs['id_admin'] = $GLOBALS['visiteur_session']['id_auteur'];
 	
@@ -48,7 +49,18 @@ function grappe_inserer() {
 			'data' => $champs
 		)
 	);
-
+	
+	if (is_array($champs['liaisons'])) {
+		$champs['liaisons'] = implode(',', $champs['liaisons']);
+	}
+	
+	if (isset($champs['acces'])) {
+		$opt['acces'] = $champs['acces'];
+		unset($champs['acces']);
+	}
+	
+	$champs['options'] = serialize($opt);
+	
 	$id_grappe = sql_insertq("spip_grappes", $champs);
 	pipeline('post_insertion',
 		array(
