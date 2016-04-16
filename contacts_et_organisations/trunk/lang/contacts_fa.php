@@ -51,11 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'est_un_contact' => 'اين نويسنده به عنوان يك تماس تعريف مي‌شود.',
 	'est_une_organisation' => 'اين نويسنده به عنوان يك سازمان تعريف مي‌شود.',
 	'explication_activite' => 'فعاليت سازمان:‌ بشردوستانه، فناوري اطلاعات، چاپ . . . ',
-	'explication_contacts_ou_organisations' => 'مي‌توانيد اين نويسنده را به عنوان يك تماس يا يك سازمان تعريف كنيد.ميدان‌هاي اضافي مي‌توانند بعداً از صفحه‌ي تكميلي اطلاعات نويسنده پر شوند.',
+	'explication_contacts_ou_organisations' => 'مي‌توانيد اين نويسنده را به عنوان يك تماس يا يك سازمان تعريف كنيد.ميدان‌هاي اضافي مي‌توانند بعداً از صفحه‌ي تكميلي اطلاعات نويسنده پر شوند.', # MODIF
 	'explication_identification' => 'هويت سازمان:‌ ',
 	'explication_statut_juridique' => 'سازمان، انجمن، شركت . . . ',
-	'explication_supprimer_contact' => 'حذف اين تماس تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف مي‌كند. ',
-	'explication_supprimer_organisation' => 'حذف اين سازمان تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف خواهد كرد. ',
+	'explication_supprimer_contact' => 'حذف اين تماس تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف مي‌كند. ', # MODIF
+	'explication_supprimer_organisation' => 'حذف اين سازمان تمام اطلاعات اضافي را كه در صفحه‌ي نويسنده پر شده حذف خواهد كرد. ', # MODIF
 
 	// I
 	'info_contacts_organisation' => 'تماس‌هاي سازمان',

@@ -33,8 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_contact' => 'Bent u zeker dat u deze orgzanisatie en dit contact wil losbinden ?',
 	'confirmer_delier_organisation' => 'Bent u zeker deze organisatie van deze contactpersoon te willen losbinden?',
 	'confirmer_delier_organisation_rubrique' => 'Bent u zeker deze organisatie van deze rubriek te willen losbinden?',
-	'confirmer_supprimer_contact' => 'Bent u zeker dat u de informaties met betrekking tot dit contact wilt afschaffen ?',
-	'confirmer_supprimer_organisation' => 'Bent u zeker dat u de informaties met betrekking tot deze organisatie wilt afschaffen ?',
+	'confirmer_supprimer_contact' => 'Bent u zeker dat u de informaties met betrekking tot dit contact wilt afschaffen ?', # MODIF
+	'confirmer_supprimer_organisation' => 'Bent u zeker dat u de informaties met betrekking tot deze organisatie wilt afschaffen ?', # MODIF
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Een contact toevoegen',
 	'contact_ajouter_associe_a' => 'Een contact verbonden met :     toevoegen',
@@ -71,12 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'est_un_contact' => 'Deze auteur wordt als contact gedefinieerd',
 	'est_une_organisation' => 'Deze auteur wordt als organisatie gedefinieerd',
 	'explication_activite' => 'Activiteit van de organisatie : humanitair, vorming, uigeven',
-	'explication_contacts_ou_organisations' => 'Uw kan deze auteur als contact of organisatie omschrijven.  Deze toewijzingen geven toegang tot aanvullende  in de inlichtingen fiche van de auteur',
+	'explication_contacts_ou_organisations' => 'Uw kan deze auteur als contact of organisatie omschrijven.  Deze toewijzingen geven toegang tot aanvullende  in de inlichtingen fiche van de auteur', # MODIF
 	'explication_identification' => 'Identifier v/d organisatie, bij voorbeeld BTW nummer, SIRET, SIRENE',
 	'explication_ouvertures' => 'Dagen, uurroosters, seizoenen',
 	'explication_statut_juridique' => 'BVBA, vzw, …',
-	'explication_supprimer_contact' => 'De afschaffing van het contact zal alle aanvullende informaties gegeven over de auteur afschaffen',
-	'explication_supprimer_organisation' => 'De afschaffing van de organisatie zal alle aanvullende informaties gegeven over de auteur afschaffen',
+	'explication_supprimer_contact' => 'De afschaffing van het contact zal alle aanvullende informaties gegeven over de auteur afschaffen', # MODIF
+	'explication_supprimer_organisation' => 'De afschaffing van de organisatie zal alle aanvullende informaties gegeven over de auteur afschaffen', # MODIF
 	'exporter_contacts' => 'Deze contacten in een tabel downloaden',
 	'exporter_organisations' => 'Deze organisaties in een tabel downloaden',
 
@@ -166,8 +166,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Juridische statuut',
-	'suppression_automatique_de_organisation_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ',
-	'suppression_automatique_du_contact_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ',
+	'suppression_automatique_de_organisation_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ', # MODIF
+	'suppression_automatique_du_contact_prochainement' => 'Zonder uw tussenkomst zal de huidige configuratie v/d  plugin Contacten & Organisaties de automatische verwijdering v/d organisatie binnen enkele dagen teweeg brengen. ', # MODIF
 	'supprimer_contact' => 'Dit contact afschaffen',
 	'supprimer_organisation' => 'Deze organisatie afschaffen',
 

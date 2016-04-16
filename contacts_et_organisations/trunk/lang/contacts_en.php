@@ -43,11 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_activer_squelettes_publics_zpip1' => 'Public skeleton of ZPIP v1',
-	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public templates for ZPIP version 1, which allow to browse contacts and organisations in the public area?',
+	'cfg_activer_squelettes_publics_zpip1_explication' => 'Enable public templates for ZPIP version 1, which allow to browse contacts and organisations in the public area?', # MODIF
 	'cfg_afficher_infos_sur_auteurs' => 'Detail display of the authors ?',
-	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact or organization information on the authors pages in the private area?',
+	'cfg_afficher_infos_sur_auteurs_explication' => 'View contact or organization information on the authors pages in the private area?', # MODIF
 	'cfg_associer_aux_auteurs' => 'Associate to the authors ?',
-	'cfg_associer_aux_auteurs_explication' => 'Allow to associate contacts or organizations to authors. This adds a form to associate an author on the contact pages or organization, and conversely it adds a form to link to a contact or an organization on the authors pages.',
+	'cfg_associer_aux_auteurs_explication' => 'Allow to associate contacts or organizations to authors. This adds a form to associate an author on the contact pages or organization, and conversely it adds a form to link to a contact or an organization on the authors pages.', # MODIF
 	'cfg_lier_contacts_objets_explication' => 'Allow to associate contacts with the following editorial objects. This function displays the contact selector within the administration pages of these objects.',
 	'cfg_lier_contacts_objets_label' => 'Associate the contacts',
 	'cfg_lier_organisations_objets_explication' => 'Allow to associate organizations with the following editorial objects. This function displays the organization selector in the administration pages of these objects.',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_relations_avec_auteurs' => 'Relationship with authors',
 	'cfg_relations_avec_objets' => 'Relationship with other editorial objects (other than authors)',
 	'cfg_supprimer_reciproquement_auteurs_et_contacts' => 'Mutually delete authors and contacts? ',
-	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'By activating this option, when a contact (or an organisation) is deleted, the author associated with this contact, if one exists, sees their status move to the rubbish bin. Inversely, in the same way, if an author is put in the rubbish bin, the contact associated is deleted. This option can be useful on certain sites in order to avoid contacts left without an author (if the latter has been deleted) but be vigilent: deletion is definitive and authors are put in the rubbish ben even if they have written articles...',
+	'cfg_supprimer_reciproquement_auteurs_et_contacts_explication' => 'By activating this option, when a contact (or an organisation) is deleted, the author associated with this contact, if one exists, sees their status move to the rubbish bin. Inversely, in the same way, if an author is put in the rubbish bin, the contact associated is deleted. This option can be useful on certain sites in order to avoid contacts left without an author (if the latter has been deleted) but be vigilent: deletion is definitive and authors are put in the rubbish ben even if they have written articles...', # MODIF
 	'cfg_utiliser_annuaires_explication' => 'Activate the possibility to put your contacts in several different directories.',
 	'cfg_utiliser_annuaires_label' => 'Use several directories',
 	'cfg_utiliser_organisations_arborescentes_explication' => 'It is possible to define an organization is child of another. When this option is enabled, it adds a field in the organization edition to clarify this relationship .',
@@ -67,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organization from this contact?',
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organization?',
 	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organization from this section?',
-	'confirmer_supprimer_contact' => 'Are you sure you want to delete all information about this contact?',
-	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organization?',
+	'confirmer_supprimer_contact' => 'Are you sure you want to delete all information about this contact?', # MODIF
+	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organization?', # MODIF
 	'contact' => 'Contact',
 	'contact_ajouter' => 'Add a contact',
 	'contact_ajouter_associe_a' => 'Add a contact assigned to:',
@@ -106,18 +106,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'est_une_organisation' => 'This author is set as an organization.',
 	'explication_activite' => 'Activity of the organization : NGO, education, edition...',
 	'explication_contacts_ou_organisations' => 'You can set this author as a contact or as an organization.Vous pouvez définir cet auteur
-  Additional fields can be then filled from the author modification page.',
+  Additional fields can be then filled from the author modification page.', # MODIF
 	'explication_identification' => 'Organisation identification : VAT, etc.',
 	'explication_ouvertures' => 'Days, times, seasons...',
 	'explication_statut_juridique' => 'company, organisation, ...',
-	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.',
-	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.',
+	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.', # MODIF
+	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.', # MODIF
 	'explications_page_contacts' => 'Page under development. <br /><br /> Actions considered :
 <ul>
-  <li>see all contacts</ li>   <li>transform the authors in contacts</ li><li>import contacts </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
+  <li>see all contacts</ li>   <li>transform the authors in contacts</ li><li>import contacts </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
 	'explications_page_organisations' => 'Page under development. <br /><br /> Actions considered :
 <ul>
-<li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)',
+<li>see all organizations</ li> <li>transform the authors in organizations</ li><li>import organizations </ li><li>...</ li> </ ul><br / > Thanks for your suggestions on <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">the forum</a> ;-)', # MODIF
 	'exporter_contacts' => 'Download those contacts as spreadsheet',
 	'exporter_organisations' => 'Download those organisations as spreadsheet ',
 
@@ -207,8 +207,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_juridique' => 'Legal status',
-	'suppression_automatique_de_organisation_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this organisation in the next few days.',
-	'suppression_automatique_du_contact_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this contact in the next few days.',
+	'suppression_automatique_de_organisation_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this organisation in the next few days.', # MODIF
+	'suppression_automatique_du_contact_prochainement' => 'Without your intervention, the current configuration of the Contacts & Organisations plugin will lead to the automatic deletion of this contact in the next few days.', # MODIF
 	'supprimer_contact' => 'Delete this contact',
 	'supprimer_organisation' => 'Delete this organisation',
 
