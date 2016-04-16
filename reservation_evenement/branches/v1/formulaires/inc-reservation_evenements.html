@@ -1,7 +1,7 @@
 <B_art_or>
 <li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
 	[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_evenement})</div>]
-<BOUCLE_art_or (DATA){source tableau,#ENV{evenements}} {id_evenement_source=0} {pardate_debut}>
+<BOUCLE_art_or (DATA){source tableau,#ENV{evenements}} {id_evenement_source=0} {par date_debut}>
 	#SET{prix,#VALEUR{prix}}
 	[(#REM) Si le plugin prix objets est activé on regarde si il y a un prix attaché à l'évenement]
 	#SET{prix2,''}
