@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
-	'erreur_pas_evenement' => 'Il n\'y a actuellment pas d\'événement ouvert à l\'inscription.',
+	'erreur_pas_evenement' => 'Il n’y a actuellment pas d’événement ouvert à l’inscription.',
 	'evenement_cloture' => 'Évenement clôturé',
 	'explication_client' => 'Choissisez un client parmis les auteurs ou saisissez les données du client ci-bas',
 	'explication_email_reutilisable' => 'Permettre de réutiliser un email d’un auteur spip lors d’une réservation sans enregistrement',
