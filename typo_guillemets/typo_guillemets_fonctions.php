@@ -165,8 +165,8 @@ function typo_guillemets_remplacements($texte) {
 	}
 
 	// on echappe les " dans les tags ;
-	// attention ici \01 est le caractere chr(1), et \$0 represente le tag
-	$texte = preg_replace(',<[^>]*"[^>]*(>|$),msSe', "str_replace(\"\'\", \"'\", str_replace('\"','\01', \"\$0\"))", $texte);
+	// attention ici \01 est le caractere chr(1), et $m[0] represente le tag
+	$texte = preg_replace_callback(',<[^>]*"[^>]*(>|$),msS', function($m) { return str_replace("\'", "'", str_replace('"',"\01", $m[0])); }, $texte);
 
 	// on corrige les guill restants, qui sont par definition hors des tags
 	// Un guill n'est pas pris s'il suit un caractere autre que espace, ou
