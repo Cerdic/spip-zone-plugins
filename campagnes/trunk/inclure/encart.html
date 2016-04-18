@@ -7,6 +7,6 @@
 #SET{id_campagne, #ID_ENCART|campagnes_chercher_campagne{#ENV{contexte,#LISTE}, #ENV{plusieurs_affichages,non}}}
 
 [(#REM) On sort la publicité choisie par la fonction précédente ]
-#INCLURE{fond=inclure/campagne,id_campagne=#GET{id_campagne}, largeur_max=#LARGEUR, hauteur_max=#HAUTEUR}
+#INCLURE{fond=inclure/campagne,id_campagne=#GET{id_campagne}, largeur_max=#LARGEUR, hauteur_max=#HAUTEUR, masquelabel}
 
 </BOUCLE_encart>
