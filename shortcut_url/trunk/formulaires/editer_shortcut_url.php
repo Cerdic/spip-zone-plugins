@@ -22,26 +22,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Environnement du formulaire
 **/
-function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-	$valeurs = array();
-	$req = sql_fetsel('*', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($id_shortcut_url));
+include_spip('inc/actions');
+include_spip('inc/editer');
+include_spip('action/editer_objet');
 
-	if($req) {
-		foreach ($req as $cle => $valeur) {
-			$valeurs["$cle"] = $valeur;
-		}
-	}
-
-	if(_request('id_shortcut_url_existe'))
-		$valeurs['id_shortcut_url_existe'] = _request('id_shortcut_url_existe');
-
-	if($url = _request('url')){
-		$valeurs['url'] = $url;
-	}
-	if($titre = _request('titre')){
-		$valeurs['titre'] = $titre;
-	}
+function formulaires_editer_shortcut_url_charger_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+	$valeurs = formulaires_editer_objet_charger('shortcut_url',$id_shortcut_url, '', '', $retour, '');
 
 	if (defined('_TAILLE_RACCOURCI')) {
 
@@ -54,18 +42,12 @@ function formulaires_shortcut_url_charger_dist($id_shortcut_url='new', $objet=''
 			$valeurs['taille_raccourci'] = 5;
 
 	return $valeurs;
-	
 }
 
-/**
- * Vérifications du formulaire de shortcut_url
- *
- * @return array
- *     Tableau des erreurs
-**/
-function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+	$erreurs = formulaires_editer_objet_verifier('shortcut_url',$id_shortcut_url,array('url'));
 
-	$erreurs = array();
+	// $erreurs = array();
 	if (!$url = _request('url'))
 		$erreurs['url'] = _T('info_obligatoire');
 	// Check si il existe le http://
@@ -95,16 +77,11 @@ function formulaires_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='
 	}
 
 	return $erreurs;
-
 }
 
-/**
- * Traitement du formulaire de configuration du shortcut_url
- *
- * @return array
- *     Retours du traitement
-**/
-function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+// http://doc.spip.org/@inc_editer_shortcut_url_dist
+function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
+
 	include_spip('inc/distant');
 	$recup = recuperer_page(_request('url'), true);
 	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs))
@@ -119,7 +96,6 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 		$taille_raccourci = 5;
 
 	$set = array();
-	$set['id_shortcut_url'] = $id_shortcut_url;
 	if(_request('titre'))
 		$set['titre'] = _request('titre');
 	else
@@ -131,21 +107,8 @@ function formulaires_shortcut_url_traiter_dist($id_shortcut_url='new', $objet=''
 	$set['date_modif'] = date('Y-m-d H:i:s');
 	$set['maj'] = date('Y-m-d H:i:s');
 
-	if($id_shortcut_url == 'oui') {
-		$set['id_shortcut_url'] = sql_insertq('spip_shortcut_urls', $set);
-		// Insertion de l'auteur à l'arrache
-		$auteur = sql_insertq('spip_auteurs_liens', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'id_objet' => $set['id_shortcut_url'], 'objet' => 'shortcut_url'));
-		$url = generer_url_entite($set['id_shortcut_url'],'shortcut_url','','',true);
-		$res = array('redirect' => self());
-	} else {
-		sql_delete("spip_urls", "id_objet=".intval($id_shortcut_url)." AND type=".sql_quote('shortcut_url'));
-		sql_updateq('spip_shortcut_urls', $set, 'id_shortcut_url=' . intval($id_shortcut_url));
-		$url = generer_url_entite($id_shortcut_url,'shortcut_url','','',true);
-		$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
-	}
+	$action = action_editer_objet_dist($id_shortcut_url, 'shortcut_url' , $set);
 
+	$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>$res);
-
 }
-
-?>

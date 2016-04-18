@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'shortcut_url' => 'Raccourcis d\'URL',
 	'shortcut_url_logs' => 'Stats des raccourcis',
 	'shortcut_url_logs_export' => 'Export des raccourcis',
-	'supprimer_confirmation' => 'Voulez vous vraiment supprimer cet URL ?',
+	'supprimer_confirmation' => 'Voulez-vous vraiment supprimer cet URL ?',
 
 	// T
 	'titre_ajouter_shortcut_url' => 'Ajouter un lien raccourci',

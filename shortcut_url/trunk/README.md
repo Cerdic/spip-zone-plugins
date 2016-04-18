@@ -11,6 +11,13 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
+## TODO
+
+## Version 1.0.9 (18/04/2016)
+
+- Supprimer l'autorisation redacteur pour supprimer un lien
+- Ajout des révisions (modification du formulaire d'edition)
+
 ## Version 1.0.8 (13/04/2016)
 
 - Fixe une régression sur la taille des raccourcis dans le formulaire de création.

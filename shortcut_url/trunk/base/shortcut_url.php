@@ -29,6 +29,7 @@ function shortcut_url_declarer_tables_interfaces($interfaces) {
 function shortcut_url_declarer_tables_objets_sql($tables){
 
 	$tables['spip_shortcut_urls'] = array(
+		'type' 			=> 'shortcut_url',
 		'texte_retour' 		=> 'icone_retour',
 		'texte_objets' 		=> 'shortcut_url:shortcut_url',
 		'texte_objet' 		=> 'shortcut_url:shortcut_url',
@@ -49,10 +50,14 @@ function shortcut_url_declarer_tables_objets_sql($tables){
 		'key' => array(
 			"PRIMARY KEY" 	=> "id_shortcut_url",
 		),
+                'join' => array(
+                        "id_shortcut_url" => "id_shortcut_url"
+                ),
 		'rechercher_champs' => array(
 			'titre' => 5, 'description' => 2, 'url' => 8
 		),
-		'champs_versionnes' => array('titre', 'url','description' => 2, 'date_modif'),
+		'champs_editables'  => array('titre','description','url'),
+		'champs_versionnes' => array('titre','description','url'),
 	);
 
 	$tables['spip_shortcut_urls_logs'] = array(
@@ -87,6 +92,9 @@ function shortcut_url_declarer_tables_objets_sql($tables){
 			"PRIMARY KEY"	=> "id_shortcut_urls_bot"
 		)
 	);
+
+	$tables[]['tables_jointures'][] = 'shortcut_urls';
+	$tables[]['champs_versionnes'][] = 'jointure_shortcut_url';
 
 	return $tables;
 }

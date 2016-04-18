@@ -82,6 +82,10 @@ function autoriser_breves_menu($faire, $type, $id, $qui, $opt){
 	return false;
 }
 
+function autoriser_voirrevisions($faire, $type, $id, $qui, $opt){
+	return true;
+}
+
 /**
  * Ajouter un bouton stats 
  * 
@@ -95,8 +99,6 @@ function shortcut_url_ajouter_menus($boutons_admin){
 		foreach($pages as $page){
 			$boutons_admin['menu_shortcut_url']->sousmenu[] = new Bouton(find_in_theme('images/shortcut_url-16.png'), 'shortcut_url:' . $page, $page);
 		}
-
-
 	}
 	else{
 		unset($boutons_admin['menu_shortcut_url']);
@@ -116,7 +118,6 @@ function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt){
  * @return string
  */
 function shortcut_url_affiche_milieu($flux) {
-
 	if (trouver_objet_exec($flux['args']['exec'] == "auteur") && $flux['args']['id_auteur']){
 		$id_auteur = $flux['args']['id_auteur'];
 		$texte = recuperer_fond('prive/objets/editer/shortcut_url_auteurs',
