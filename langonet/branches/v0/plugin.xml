@@ -2,7 +2,7 @@
 	<nom>LangOnet</nom>
 	<slogan>V&#233;rifier, g&#233;n&#233;rer, rechercher ou afficher les items de langue</slogan>
 	<auteur>Eric Lupinacci, denisb, esj, kent1</auteur>
-	<version>0.7.5</version>
+	<version>0.7.6</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/langonet-64.png</icon>
@@ -53,7 +53,7 @@ Ce plugin permet d'ex&#233;cuter des actions de v&#233;rification et de nettoyag
 		<url>langonet_rechercher</url>
 	</onglet>	
 
-	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="Iterateurs" version="[0.2.5;]" />
 	<categorie>outil</categorie>
 </plugin>
