@@ -15,7 +15,7 @@ Ce plugins permet de stocker le le nombre de click par URL, de consulter la prov
 
 ## Version 1.0.9 (18/04/2016)
 
-- Supprimer l'autorisation redacteur pour supprimer un lien
+- Supprimer l'autorisation redacteur pour supprimer un lien (Eratum: Trop risqué, on n'autorise pas la suppression par tous le monde.)
 - Ajout des révisions (modification du formulaire d'edition)
 
 ## Version 1.0.8 (13/04/2016)

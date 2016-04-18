@@ -9,3 +9,11 @@
 	[(#URL_ACTION_AUTEUR{supprimer_shortcut_url,#ID_SHORTCUT_URL,#URL_ECRIRE{accueil}}|icone_horizontale{<:shortcut_url:icone_supprimer_shortcut_url:>,danger shortcut_url,shortcut_url-del})]]
 
 </div>
+
+<script type="text/javascript">
+	(function($) {
+		$('span.danger.shortcut_url a').click(function(){
+			return confirm("[(#VAL{shortcut_url:supprimer_confirmation}|_T|attribut_html)]");
+		});
+	})(jQuery);
+</script>
