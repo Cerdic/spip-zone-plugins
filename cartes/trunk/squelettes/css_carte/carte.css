@@ -159,3 +159,7 @@ h1{
 .clearfix:after {
 	clear: both;
 }
+
+.info.leaflet-popup-content-wrapper{
+	width:28vw;
+}

@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/cartes-64.png"
 	documentation=""
-	schema="1.0.3"
+	schema="1.0.4"
 >
 	<nom>Création de cartes</nom>
 	

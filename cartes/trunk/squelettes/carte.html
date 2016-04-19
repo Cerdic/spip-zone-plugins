@@ -52,6 +52,7 @@
 		[(#SET{overview,[(#VAL{overview}|in_array{#CONTROLES}|?{oui,non})]})]
 		[(#SET{autocenterandzoom,[(#CENTER_POINTS|=={on}|?{oui,non})]})]
 		[(#SET{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]})]
+		[(#SET{options,#ARRAY{popup,#POPUP}})]
 		[(#MODELE{carte_gis,objet=carte
 			autocenterandzoom=#GET{autocenterandzoom},
 			default_layer=#GET{layer_defaut},
@@ -63,7 +64,8 @@
 			scale=#GET{scale},
 			objet=carte,
 			id_objet=#ID_CARTE,
-			height=100%})]
+			height=100%,
+			options=#GET{options}})]
 	</div>
 	[(#SET{footer,footer_carte/[(#FOOTER|sinon{footer})]})]
 	<INCLURE{fond=#GET{footer},id_carte,self=#SELF} />

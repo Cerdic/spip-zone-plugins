@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_center_points_label' => 'Centrer et zoomer automatiquement sur les points affichés sur la carte',
 	'champ_controles_label' => 'Contrôles ajoutés à la carte par défaut',
 	'champ_footer_carte_label' => 'Pied de la carte',
+	'champ_popup_label' => 'Affichage du contenu des POIs',
 	'champ_style_carte_label' => 'Style de la carte',
 	'champ_texte_label' => 'Texte',
 	'champ_texte_footer_label' => 'Texte du pied de page',
@@ -37,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'option_fullscreen' => 'Plein écran',
+	'option_openpopup' => 'Dans une infobulle',
+	'option_control' => 'Dans un bloc de texte séparé',
 	'option_scale' => 'Échelle',
 	'option_overview' => 'Mini-carte d\'aperçu',
 	

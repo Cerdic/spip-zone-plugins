@@ -37,6 +37,12 @@
 				cacher_option_intro=oui,
 				defaut=#GET{layer_defaut},
 				datas=#GET{layers}})]
+			[(#SAISIE{selection,popup,
+				label=<:carte:champ_popup_label:>,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					openpopup,<:carte:option_openpopup:>,
+					control,<:carte:option_control:>}})]
 			<div class="fieldset">
 				<fieldset>
 					<legend><:carte:legend_centrage:></legend>

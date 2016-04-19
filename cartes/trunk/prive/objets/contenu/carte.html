@@ -10,10 +10,15 @@
 	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE)</span>
 </div>]
 
+[<div class="champ contenu_popup[ (#POPUP*|strlen|?{'',vide})]">
+	<label><:carte:champ_popup_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{popup} popup">(#VAL{carte:option_}|concat{#POPUP}|_T)</span>
+</div>]
+
 <div class="champ contenu_layer_defaut">
 	<label><:gis:cfg_lbl_layer_defaut:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{layer_defaut} layer_defaut">[(#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]/nom})]})]</span>
-	[(#INCLURE{fond=modeles/carte_gis_preview,lat=[(#LAT|sinon{0})],lon=[(#LAT|sinon{0})],zoom=[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})],layer_defaut=[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})],id_map=layer_defaut})]
+	[(#INCLURE{fond=modeles/carte_gis_preview,lat=[(#LAT|sinon{0})],lon=[(#LAT|sinon{0})],zoom=1,layer_defaut=[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})],id_map=layer_defaut})]
 </div>
 
 [<div class="champ contenu_centrage">
@@ -45,7 +50,7 @@
 [<div class="champ contenu_bounds[ (#GEOMETRY*|strlen|?{'',vide})]">
 	<label><:carte:champ_bounds_label:> : </label>[(#SET{geojson,[(#GEOMETRY|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
 	(#GEOMETRY*|strlen|oui)
-	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=#GET{zoom},lat=#LAT,lon=#LON}
+	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=1,lat=#LAT,lon=#LON}
 </div>]
 
 <B_controles>
