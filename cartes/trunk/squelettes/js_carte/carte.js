@@ -1,6 +1,6 @@
 var resizemap = function (map_resize) {
 	$('.map_wrapper').height($(window).height() - $('.footer').outerHeight()-$('.main').outerHeight());
-	if (typeof map_resize != 'undefined') {
+	if (typeof map_resize != 'undefined' && typeof map_resize.invalidateSize == "function") {
 		map_resize.invalidateSize();
 	}
 }
