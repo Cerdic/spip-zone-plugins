@@ -125,6 +125,8 @@ h1.titre {
 .icone {
 	&.s24 {
 		&.right {
+			float: right;
+			margin-left: 0.5em;
 			a {
 				img {
 					margin-right: 0.5em;
@@ -132,6 +134,8 @@ h1.titre {
 			}
 		}
 		&.left {
+			float: left;
+			margin-right: 0.5em;
 			a {
 				img {
 					margin-left: 0.5em;
@@ -140,6 +144,7 @@ h1.titre {
 		}
 	}
 }
+
 /* Utile pour le formulaire d'ajout des documents sur un objet dans l'espace public. */
 .none, .js .none-js, .no-js .none-nojs {
 	display: none;
@@ -183,6 +188,7 @@ h1.titre {
 		}
 	}
 }
+
 .portfolios {
 	h3 {
 		background-color: @main-color;
@@ -206,6 +212,7 @@ h1.titre {
 		}
 	}
 }
+
 .formulaire_joindre_document {
 	[class*="joindre_mode_"] {
 		.editer-groupe {
@@ -226,7 +233,6 @@ h1.titre {
 		}
 	}
 }
-
 
 // TABLEAUX
 .table-responsive {
@@ -833,6 +839,7 @@ input[type="radio"], input[type="checkbox"] {
 		}
 	}
 	.contenu, #extra {
+		overflow: hidden;
 		padding: 20px;
 		background-color: @white;
 		border: 1px solid @border-color;
@@ -843,6 +850,15 @@ input[type="radio"], input[type="checkbox"] {
 		-webkit-box-shadow: @box-shadow;
 		-moz-box-shadow: @box-shadow;
 		box-shadow: @box-shadow;
+		.fiche_objet {
+			overflow: hidden;
+			.inner {
+				overflow: hidden;
+				.bd {
+					overflow: hidden;
+				}
+			}
+		}
 	}
 }
 
@@ -1301,23 +1317,20 @@ input[type="radio"], input[type="checkbox"] {
 			font-family: FontAwesome;
 			font-size: 14px;
 		}
-	}
-
-	&.picto.contenu_numero {
-		.label:before {
-			content: "\f095";
+		&.contenu_numero {
+			.label:before {
+				content: "\f095";
+			}
 		}
-	}
-
-	&.picto.contenu_email {
-		.label:before {
-			content: "\f003";
+		&.contenu_email {
+			.label:before {
+				content: "\f003";
+			}
 		}
-	}
-
-	&.picto.contenu_adresse {
-		.label:before {
-			content: "\f041";
+		&.contenu_adresse {
+			.label:before {
+				content: "\f041";
+			}
 		}
 	}
 

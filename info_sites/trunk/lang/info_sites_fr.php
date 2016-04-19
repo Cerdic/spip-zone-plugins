@@ -19,23 +19,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autres_label' => 'Autres',
 
 	// B
-	'btn_diagnostic_iso' => 'Diagnostic ISO',
 	'btn_diagnostic' => 'Diagnostic',
-	'btn_webservice_consultation' => 'Consulter le webservice',
+	'btn_diagnostic_iso' => 'Diagnostic ISO',
 	'btn_label_actions' => 'Actions',
+	'btn_webservice_consultation' => 'Consulter le webservice',
 
 	// C
-	'chef_projets_label' => 'Chef de projets',
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'chef_projets_label' => 'Chef de projets',
 	'commercial_label' => 'Commercial',
-	'controle_extension_curl_actif' => 'Est-ce que l\'extension cURL de PHP est activée&nbsp;?',
 	'controle_contacts_lies_aux_projets' => 'Est-ce que les contacts sont liés aux projets&nbsp;?',
 	'controle_contacts_orphelins' => 'Contacts sans organisation',
 	'controle_coordonnees_liees_contacts' => 'Est-ce que les coordonnées sont activées pour les contacts&nbsp;?',
-	'controle_info_sites_menu_organisations' => 'Est-ce que l\'entrée <strong>"Organisations"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_extension_curl_actif' => 'Est-ce que l\'extension cURL de PHP est activée&nbsp;?',
+	'controle_info_sites_menu_auteurs' => 'Est-ce que l\'entrée <strong>"Utilisateurs"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_commits' => 'Est-ce que l\'entrée <strong>"Commits"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_contacts' => 'Est-ce que l\'entrée <strong>"Contacts"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_organisations' => 'Est-ce que l\'entrée <strong>"Organisations"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_projets' => 'Est-ce que l\'entrée <strong>"Projets"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_projets_cadres' => 'Est-ce que l\'entrée <strong>"Cadres de projet"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_projets_sites' => 'Est-ce que l\'entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
@@ -96,8 +98,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_stats_general' => 'Statistiques générales',
 	'label_total' => 'Total',
 	'label_type_site' => 'Environnements',
-	'label_validation' => 'Validation',
 	'label_valeur' => 'Valeur',
+	'label_validation' => 'Validation',
 	'lead_developpeur_label' => 'Lead Développeur',
 	'liste_url_projets_explication' => 'Veuillez saisir ci-dessous la liste des urls de vos projets à ajouter. Une url par ligne.',
 	'liste_url_projets_label' => 'L\'url de projets en ligne',
@@ -149,5 +151,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte' => 'Vous n\'avez pas les droits suffisants pour accéder à cette page.',
 
 );
-
-?>
