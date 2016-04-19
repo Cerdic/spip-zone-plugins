@@ -53,6 +53,8 @@
 		[(#SET{autocenterandzoom,[(#CENTER_POINTS|=={on}|?{oui,non})]})]
 		[(#SET{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]})]
 		[(#SET{options,#ARRAY{popup,#POPUP}})]
+		[(#LAYER_TOPOJSON|oui)
+			[(#SET{options,[(#GET{options}|array_merge{[(#ARRAY{layer_topojson,[(#CHEMIN{#LAYER_TOPOJSON})]})]})]})]]
 		[(#MODELE{carte_gis,
 			autocenterandzoom=#GET{autocenterandzoom},
 			default_layer=#GET{layer_defaut},

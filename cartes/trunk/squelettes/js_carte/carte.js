@@ -14,6 +14,19 @@ var callback_map1 = function (map) {
 	}
 }
 
+var country_min_topojson_addlayer = function(e){
+    e.layer.eachLayer(function(dist){
+	var iso = dist.toGeoJSON().properties.ISO2.toLowerCase();
+	dist.bindPopup("<strong>"+dist.toGeoJSON().properties.NAME_FR+"</strong>",{closeButton:false,className:'popupcountry'});
+	if(dist.options){
+		dist.options.className = 'country country-'+iso;
+	}else {
+		dist.eachLayer(function (dist2) {
+			dist2.options.className = 'country country-'+iso;
+		});
+	}
+    });
+}
 $(document).ready(function () {
 	$(window).on('resize', function () {
 		var resized = false;
@@ -54,11 +67,26 @@ $(document).ready(function () {
 				layer.off('click').on('click',function(e,f){
 					if(layer._popup && layer._popup._content){
 						info.update(layer._popup._content);
+						map1.closePopup();
 						map1.panTo(e.latlng)
 						return false;
 					}
 				});
 			});
+			map1.on('popupopen',function(){
+			    	info.update();
+			})
+		}
+		if(typeof map1 != 'undefined' && map1.options.options && map1.options.options.layer_topojson){
+			var topojson_layer = new L.TOPOJSON(map1.options.options.layer_topojson, {async: true}),
+				fichier_topojson = map1.options.options.layer_topojson.replace(/^.*[\\\/]/, '').replace(/\./g,'_'),
+				addlayer = fichier_topojson+'_addlayer';
+			if(typeof window[addlayer] == 'function'){
+			topojson_layer.on('addlayer',function(e){
+			    	eval(eval(addlayer)(e));
+			});
+			}
+			map1.addLayer(topojson_layer);
 		}
 	});
 });

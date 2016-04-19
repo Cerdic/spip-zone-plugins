@@ -161,5 +161,32 @@ h1{
 }
 
 .info.leaflet-popup-content-wrapper{
-	width:28vw;
+	width:33vw;
+}
+
+.info.leaflet-popup-content-wrapper strong{
+	color:#d40000;
+	font-size:1.4em;
+	font-weight:normal;
+}
+.carte_gis{
+	background:#474747;
+}
+
+.country{
+	fill:#737473;
+	stroke:#737473;
+	stroke-width:1;
+	fill-opacity:1;
+	stroke-opacity:0;
+}
+
+.country-sy,.country-iq{
+	fill:#b0b0b0;
+	stroke-width:2;
+	stroke-opacity:1;
+}
+
+.popupcountry .leaflet-popup-content-wrapper{
+	text-align:center;
 }

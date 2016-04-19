@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_center_points_label' => 'Centrer et zoomer automatiquement sur les points affichés sur la carte',
 	'champ_controles_label' => 'Contrôles ajoutés à la carte par défaut',
 	'champ_footer_carte_label' => 'Pied de la carte',
+	'champ_layer_topojson_label' => 'Couche TopoJSON',
 	'champ_popup_label' => 'Affichage du contenu des POIs',
 	'champ_style_carte_label' => 'Style de la carte',
 	'champ_texte_label' => 'Texte',

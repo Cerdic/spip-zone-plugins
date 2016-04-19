@@ -21,6 +21,11 @@
 	[(#INCLURE{fond=modeles/carte_gis_preview,lat=[(#LAT|sinon{0})],lon=[(#LAT|sinon{0})],zoom=1,layer_defaut=[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})],id_map=layer_defaut})]
 </div>
 
+<div class="champ contenu_layer_topojson[ (#LAYER_TOPOJSON*|strlen|?{'',vide})]">
+	<label><:carte:champ_layer_topojson_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{layer_topojson} layer_topojson">[(#LAYER_TOPOJSON|basename)]</span>
+</div>
+
 [<div class="champ contenu_centrage">
 	<label><:carte:legend_centrage:></label>
 	(#LAT|et{#LON}|oui)

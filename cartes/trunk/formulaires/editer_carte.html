@@ -37,6 +37,18 @@
 				cacher_option_intro=oui,
 				defaut=#GET{layer_defaut},
 				datas=#GET{layers}})]
+				
+			#SET{layers_topojson,#ARRAY}
+			<BOUCLE_layers_topojson(DATA){source pregfiles, #EVAL{_DIR_RACINE}, .topojson$, 5}>
+			[(#VALEUR|match{topojson_carte}|oui)
+			#SET{layers_topojson,#GET{layers_topojson}|array_merge{#ARRAY{#VALEUR|replace{'\.\./',''},#VALEUR|basename}}}]
+			</BOUCLE_layers_topojson>
+			[(#SAISIE{selection,layer_topojson,
+				label=<:carte:champ_layer_topojson_label:>,
+				option_intro=<:carte:option_aucun_layer:>,
+				defaut='',
+				datas=#GET{layers_topojson}})]
+
 			[(#SAISIE{selection,popup,
 				label=<:carte:champ_popup_label:>,
 				cacher_option_intro=oui,
