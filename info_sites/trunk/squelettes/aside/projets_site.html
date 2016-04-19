@@ -1,6 +1,6 @@
 [(#SET{liste_logiciels, [(#VAL|info_sites_lister_diagnostic_logiciel)]})]
 <BOUCLE_extra (PROJETS_SITES) {id_projets_site} {tout}>[(#SET{opt,#ARRAY})]
-<BOUCLE_projets (projets_sites_liens) {id_projets_site} {objet="projet"}>[(#SET{opt,#ARRAY{projet,#ID_OBJET}})]</BOUCLE_projets>
+<BOUCLE_projets (projets_sites_liens) {id_projets_site} {objet="projet"}>[(#SET{opt,#ARRAY{projet,#ID_OBJET}})]</BOUCLE_projets>[(#REM) Si on a plusieurs associations à des projets, ça sera le dernier qui sera gardé… Il faudrait revoir ça plus tard.]
 	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier,projetssite,#ID_PROJETS_SITE}|oui}>
 		<div class="block boutons">
 			<div class="list-group menu" role="menu">
