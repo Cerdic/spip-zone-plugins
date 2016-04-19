@@ -96,12 +96,16 @@ L.Map.Gis = L.Map.extend({
 
 	populateTileLayers: function () {
 		// Fond de carte par défaut
-		var default_layer = this.createTileLayer(this.options.default_layer);
-		this.addLayer(default_layer);
+		if(this.options.default_layer != 'none'){
+			var default_layer = this.createTileLayer(this.options.default_layer);
+			this.addLayer(default_layer);
+		}
 		// Fonds de carte supplémentaires
 		if (this.options.layersControl && !this.options.noControl && this.options.affiche_layers.length>1) {
 			var layers_control = L.control.layers('','',this.options.layersControlOptions);
-			layers_control.addBaseLayer(default_layer,this.options.gis_layers[this.options.default_layer].nom);
+			if(this.options.default_layer != "none"){
+				layers_control.addBaseLayer(default_layer,this.options.gis_layers[this.options.default_layer].nom);
+			}
 			for (var l in this.options.affiche_layers) {
 				if (this.options.affiche_layers[l]!==this.options.default_layer) {
 					var layer = this.createTileLayer(this.options.affiche_layers[l]);
@@ -121,7 +125,7 @@ L.Map.Gis = L.Map.extend({
 		this.attributionControl.setPrefix('');
 		if (this.options.scaleControl)
 			L.control.scale().addTo(this);
-		if (this.options.overviewControl) {
+		if (this.options.overviewControl && this.options.default_layer != 'none') {
 			// todo ajouter une option pour permettre de choisir la couche à afficher dans la minimap
 			var minimap_layer = this.createTileLayer(this.options.default_layer);
 			L.control.minimap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(this);
