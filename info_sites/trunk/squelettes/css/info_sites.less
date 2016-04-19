@@ -183,6 +183,50 @@ h1.titre {
 		}
 	}
 }
+.portfolios {
+	h3 {
+		background-color: @main-color;
+		color: contrast(@main-color);
+	}
+	.documents {
+		overflow: hidden;
+		display: block;
+		margin-bottom: 1em;
+		.item {
+			overflow: hidden;
+			display: block;
+			.actions, .mode {
+				margin-top: 0;
+				form, .editbox {
+					display: inline-block;
+					margin-right: 0.5em;
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+.formulaire_joindre_document {
+	[class*="joindre_mode_"] {
+		.editer-groupe {
+			.editer {
+				.MultiFile-wrap {
+					width: 76%;
+					float: right;
+					input {
+						clear: both;
+						float: left;
+						width: 100%;
+					}
+					.MultiFile-list {
+						clear: both;
+					}
+				}
+			}
+		}
+	}
+}
+
 
 // TABLEAUX
 .table-responsive {

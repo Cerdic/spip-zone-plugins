@@ -20,27 +20,7 @@
 </div>
 	</BOUCLE_autoriser_voir>
 
-	<div class="block">
-		<div class="list-group">
-		<B_autresobjets>
-			<BOUCLE_autresobjets(projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
-			<div class="list-group-item">
-				<div class="list-group-item-heading"><strong>[(#OBJET|objet_info{texte_objet}|_T)]</strong></div>
-				<div class="list-group-item-text" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
-			</div>
-			</BOUCLE_autresobjets>
-		</B_autresobjets>
-
-		<B_auteurs>
-			<BOUCLE_auteurs (auteurs_liens) {id_objet=#ID_PROJET} {objet='projet'} {par role}>
-			<div class="list-group-item">
-				<div class="list-group-item-heading"><strong>[(#ROLE|role{auteurs}|sinon{[(#VAL{auteur}|objet_info{texte_objet}|_T)]})]</strong></div>
-				<div class="list-group-item-text" dir="#LANG_DIR"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a></div>
-			</div>
-			</BOUCLE_auteurs>
-		</B_auteurs>
-		</div>
-	</div>
+	[(#INCLURE{fond=objets/infos/projet,id_projet=#ID_PROJET})]
 
 	[(#AUTORISER{infositesinstituer,projet,#ID_PROJET})
 	<div class="block info">
