@@ -1,6 +1,6 @@
 var resizemap = function (map_resize) {
 	$('.map_wrapper').height($(window).height() - $('.footer').outerHeight()-$('.main').outerHeight());
-	if (typeof map_resize != 'undefined' && typeof map_resize.invalidateSize == "function") {
+	if (typeof map_resize != 'undefined' && typeof map_resize.invalidateSize == 'function') {
 		map_resize.invalidateSize();
 	}
 }
@@ -30,7 +30,7 @@ $(document).ready(function () {
 		resizemap(resized)
 	});
 	jQuery('#map1').on('ready',function(map){
-		if(typeof map1 != 'undefined' && map1.options.options && map1.options.options.popup == "control"){
+		if(typeof map1 != 'undefined' && map1.options.options && map1.options.options.popup == 'control'){
 			var info = L.control();
 			info.onAdd = function (map) {
 				this._div = L.DomUtil.create('div', 'info leaflet-popup-content-wrapper');
@@ -40,7 +40,7 @@ $(document).ready(function () {
 	
 			// method that we will use to update the control based on feature properties passed
 			info.update = function (text) {
-				if(typeof text != "undefined"){
+				if(typeof text != 'undefined'){
 					L.DomUtil.setOpacity(this._div,1);
 				}
 				else {
