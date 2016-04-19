@@ -13,8 +13,10 @@
 		
 		map_preview.attributionControl.setPrefix('');
 
-		var base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})];
-		map_preview.addLayer(base_layer);
+		var base_layer = [(#ENV{layer_defaut}|=={none}|?{"'none'",[new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})]})];
+		if(base_layer != 'none'){
+			map_preview.addLayer(base_layer);
+		}
 		
 		map_preview.setView(new L.LatLng([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
 

@@ -10,11 +10,13 @@
 		var map_preview,
 			map_preview_container = 'map_preview#ENV{id_map}',
 			marker,
-			base_layer = [new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})];
+			base_layer = [(#ENV{layer_defaut}|=={none}|?{"'none'",[new (#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#REM|gis_layer_defaut)]})]/layer})]})];
 		
 		map_preview = new L.Map(map_preview_container);
 		map_preview.attributionControl.setPrefix('');
-		map_preview.addLayer(base_layer);
+		if(base_layer != 'none'){
+			map_preview.addLayer(base_layer);
+		}
 		
 		map_preview.setView(new L.LatLng([(#GET{lat,#CONFIG{gis/lat,0}})],[(#GET{lon,#CONFIG{gis/lon,0}})]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
 		[(#REM) On ajoute les points ou le point unique suivant les params ]
