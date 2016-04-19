@@ -49,6 +49,7 @@ Parametres possibles :
 - media = non                      permet de passer le critère 'media' (pour les documents)
 - mots = #LISTE{1,4,7}             plugin critere {mots} http://contrib.spip.net/Critere-mots
 - path_styles=#ARRAY{color,#fff}   options de style des éléments de la couche GeoJSON (voir http://leafletjs.com/reference.html#path-options)
+- options=#ARRAY{option1,valeur1}  options ajoutées à la carte (qui peuvent être récupérées dans la fonction de callback par exemple par la suite)
 
 Uniquement si objets = point_libre :
 - icone = chemin/vers/image        image utilisée pour le marker
@@ -145,7 +146,8 @@ var jQgisloader;
 					kml: [(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
 					gpx: [(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})],
 					geojson: [(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})],
-					topojson: [(#ENV{topojson,''}|?{[(#ENV{topojson}|is_array|?{#ENV{topojson},#LISTE{#ENV{topojson}}}|gis_kml_to_urls|json_encode)],false})]
+					topojson: [(#ENV{topojson,''}|?{[(#ENV{topojson}|is_array|?{#ENV{topojson},#LISTE{#ENV{topojson}}}|gis_kml_to_urls|json_encode)],false})],
+					options: [(#ENV*{options,#ARRAY}|json_encode)]
 				});
 			});
 		});
