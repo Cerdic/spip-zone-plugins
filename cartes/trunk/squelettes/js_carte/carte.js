@@ -31,33 +31,34 @@ $(document).ready(function () {
 	});
 	jQuery('#map1').on('ready',function(map){
 		if(typeof map1 != 'undefined' && map1.options.options && map1.options.options.popup == "control"){
-		    var info = L.control();
-        	    info.onAdd = function (map) {
-        	        this._div = L.DomUtil.create('div', 'info leaflet-popup-content-wrapper');
-        	        this.update();
-        	        return this._div;
-        	    };
-        
-        	    // method that we will use to update the control based on feature properties passed
-        	    info.update = function (text) {
-        		if(typeof text != "undefined")
-        		    L.DomUtil.setOpacity(this._div,1);
-        		else
-        		    L.DomUtil.setOpacity(this._div,0);
-        	        this._div.innerHTML = text ? '<div class="leaflet-popup-content">'+text+'</div>' : '';
-        	    };
-        
-        	    info.addTo(map1);
+			var info = L.control();
+			info.onAdd = function (map) {
+				this._div = L.DomUtil.create('div', 'info leaflet-popup-content-wrapper');
+				this.update();
+				return this._div;
+			};
+	
+			// method that we will use to update the control based on feature properties passed
+			info.update = function (text) {
+				if(typeof text != "undefined"){
+					L.DomUtil.setOpacity(this._div,1);
+				}
+				else {
+					L.DomUtil.setOpacity(this._div,0);
+				}
+				this._div.innerHTML = text ? '<div class="leaflet-popup-content">'+text+'</div>' : '';
+			};
+	
+			info.addTo(map1);
 			map1.eachLayer(function(layer){
 				layer.off('click').on('click',function(e,f){
 					if(layer._popup && layer._popup._content){
-					    	info.update(layer._popup._content);
+						info.update(layer._popup._content);
 						map1.panTo(e.latlng)
 						return false;
 					}
 				});
 			});
 		}
-		
 	});
 });
