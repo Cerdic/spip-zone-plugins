@@ -53,7 +53,7 @@
 		[(#SET{autocenterandzoom,[(#CENTER_POINTS|=={on}|?{oui,non})]})]
 		[(#SET{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]})]
 		[(#SET{options,#ARRAY{popup,#POPUP}})]
-		[(#MODELE{carte_gis,objet=carte
+		[(#MODELE{carte_gis,
 			autocenterandzoom=#GET{autocenterandzoom},
 			default_layer=#GET{layer_defaut},
 			zoom=#GET{zoom_defaut},
