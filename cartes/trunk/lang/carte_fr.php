@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_controles' => 'Les contrôles affichés',
 
 	// O
+	'option_aucun_layer' => 'Aucune',
 	'option_fullscreen' => 'Plein écran',
 	'option_openpopup' => 'Dans une infobulle',
 	'option_control' => 'Dans un bloc de texte séparé',

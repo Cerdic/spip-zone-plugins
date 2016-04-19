@@ -23,7 +23,7 @@
 			[(#SAISIE{textarea, texte_footer,
 				label=<:carte:champ_texte_footer_label:>})]
 			
-			#SET{layers,#ARRAY}
+			#SET{layers,#ARRAY{none,#VAL{carte:option_aucun_layer}|_T}}
 			<BOUCLE_layer(DATA){source table, #EVAL{$GLOBALS['gis_layers']}}>
 			#SET{layers,#GET{layers}|array_merge{#ARRAY{#CLE,#VALEUR|table_valeur{nom}}}}
 			</BOUCLE_layer>
