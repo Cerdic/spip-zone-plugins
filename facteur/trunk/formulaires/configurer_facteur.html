@@ -84,6 +84,7 @@
 									<label for="facteur_smtp_password"><:facteur:facteur_smtp_password:></label>[
 									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_password})</span>]
 									<input type="password" name="facteur_smtp_password" class="text" value="#ENV**{facteur_smtp_password}" id="facteur_smtp_password" />
+									[<tt>(#ENV**{_facteur_smtp_password}|facteur_affiche_password_masque)</tt>]
 								</li>
 							</ul>
 						</li>

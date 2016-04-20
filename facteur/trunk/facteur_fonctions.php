@@ -8,6 +8,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function facteur_affiche_password_masque($pass){
+	$l = strlen($pass);
+	if ($l<=8){
+		return str_pad('',$l,'*');
+	}
+	$e = intval(ceil($l/10));
+	$mid = str_pad('',$l-2*$e,'*');
+	if (strlen($mid)>8){
+		$mid = '***...***';
+	}
+	return substr($pass,0,$e) . $mid . substr($pass,-$e);
+}
+
 /**
  * Transformer un mail texte ou HTML simplifie en mail HTML complet avec le wrapper emails/texte.html
  * Si le mail est un mail texte :
@@ -291,7 +304,7 @@ function facteur_nl2br_si_pas_autobr($texte){
 
 /**
  * Transformer un mail HTML en mail Texte proprement :
- * - les tableaux de mise en page sont utilisés pour structurer le mail texte
+ * - les tableaux de mise en page sont utilisï¿½s pour structurer le mail texte
  * - le reste du HTML est markdownifie car c'est un format texte lisible et conventionnel
  *
  * @param string $html
