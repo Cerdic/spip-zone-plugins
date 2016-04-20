@@ -23,6 +23,7 @@ function pays_declarer_tables_objets_sql($tables){
 $tables['spip_pays'] = array(
 
 		'principale' => "oui",
+		'page' => false,
 		'field'=> array(
 			"id_pays"		=> "smallint(6) NOT NULL auto_increment",
 			"code"			=> "varchar(2) NOT NULL default ''",

@@ -32,6 +32,14 @@ function pays_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_pays_menu_dist($faire, $type, $id, $qui, $opt){
+	if (!isset($GLOBALS['meta']['pays'])) return false;
+	if (($config = unserialize($GLOBALS['meta']['pays']))===false) return false;
+	if (!isset($config['pays_objets'])) return false;
+	if (!strlen(implode("",$config['pays_objets']))) return false;
+
+	// on a configurer le plugin pour utiliser les liens avec les pays
+	// affichons donc le menu dans edition
+	// (on pourrait aussi checker la presence de lien en BDD, mais dispensieux)
 	return true;
 } 
 
