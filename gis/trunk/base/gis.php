@@ -78,6 +78,7 @@ function gis_declarer_tables_objets_sql($tables){
 		'editable' => 'oui',
 		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays', 'color', 'weight', 'opacity', 'fillcolor', 'fillopacity'),
 		'champs_versionnes' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays', 'color', 'weight', 'opacity', 'fillcolor', 'fillopacity'),
+		'champs_critere_gis' => array('gis.titre AS titre_gis', 'gis.descriptif AS descriptif_gis', 'gis.adresse AS adresse_gis', 'gis.pays AS pays_gis', 'gis.code_pays AS code_pays_gis', 'gis.region AS region_gis', 'gis.departement AS departement_gis', 'gis.ville AS ville_gis', 'gis.code_postal AS code_postal_gis'),
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(
 			'titre' => 8,
