@@ -237,7 +237,7 @@ var geocoder;]
 					});
 				} else if (feature.geometry.type == 'Point') {
 					marker = layer;
-					if (feature.properties)
+					if (feature.properties) {
 						if(feature.properties.icon) {
 							layer.setIcon(new L.Icon({
 								iconUrl: feature.properties.icon,
@@ -249,7 +249,7 @@ var geocoder;]
 						if (feature.properties.title) {
 							layer.bindPopup(feature.properties.title);
 						};
-					}
+					};
 					[(#REM)
 
 						rendre le marker draggable
