@@ -167,11 +167,15 @@ function courtjus_objets_in_rubrique($id_rubrique) {
 		$objet = table_objet($table);
 		// l'identifiant de l'objet
 		$champs_id = id_table_objet($table);
+		// Le champ qui contient la date
+		$champ_date = objet_info($objet, 'date');
 
 		// Les champs qui seront utilisé pour la requête.
 		$champs = array(
 			$champs_id,
-			$titre
+			$titre,
+			// Convertir la date de l'objet en timestamp, cela permettra une comparaison rapide
+			'UNIX_TIMESTAMP('.$champ_date.') AS '.$champ_date
 		);
 
 		// Le where
@@ -198,7 +202,8 @@ function courtjus_objets_in_rubrique($id_rubrique) {
 			$objets_in_rubrique[] = array(
 				'id_objet' => $objet_rubrique[$champs_id],
 				'objet' => $objet,
-				'num_titre' => $num_titre
+				'num_titre' => $num_titre,
+				'date' => $objet_rubrique[$champ_date]
 			);
 		}
 	}
@@ -256,10 +261,28 @@ function courtjus_trouver_objet($id_rubrique, $objets_in_rubrique) {
 			'',
 			true
 		);
+	} elseif ($nb_objet > 1
+			  and $config['recent'] == 'on') {
+		// Si le mode par article le plus récent est activé
+
+		// On créer un tableau avec uniquement les timestamps des dates
+		$minmax = array_column($objets_in_rubrique, 'date');
+
+		// On va filtrer ce tableau pour n'avoir que des nombres à tester
+		$minmax = array_filter($minmax, 'is_numeric');
+
+		// On recherche l'index avec le timestamp le plus grand
+		$index = array_search(max($minmax), $minmax);
+
+		// Créer l'URL de redirection
+		return generer_url_entite(
+			$objets_in_rubrique[$index]['id_objet'],
+			$objets_in_rubrique[$index]['objet'],
+			'',
+			'',
+			true
+		);
 	}
-
-	// Sinon, si le mot "plus récent"" est activé on redirige sur l'article le plus récente.
-
 }
 
 /**

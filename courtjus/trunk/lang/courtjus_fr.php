@@ -1,5 +1,5 @@
 <?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// This is a SPIP language file	 --	 Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -19,5 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_num_titre' => 'Article numéroté',
 	'explication_num_titre' => "Rediriger sur l'article avec le plus petit num titre",
 	'chercher_rubrique_enfant' => 'Chercher dans les rubriques enfants ?',
-	'explication_chercher_rubrique_enfant' => 'Permettre de chercher dans les sous-rubriques pour trouver un objet ?'
+	'explication_chercher_rubrique_enfant' => 'Permettre de chercher dans les sous-rubriques pour trouver un objet ?',
+	'label_recent' => 'Article récent',
+	'explication_recent' => "Rediriger sur l'article le plus récent ?"
 );
