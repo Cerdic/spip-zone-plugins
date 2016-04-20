@@ -1,0 +1,20 @@
+<paquet
+	prefix="roles_gis"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/gis-poi-types.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<nom>GIS - Rôles de POIs</nom>
+
+	<auteur lien='http://www.kent1.info'>kent1</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="gis" compatibilite="[4.34.0;]" />
+	<necessite nom="roles" compatibilite="[1.8.2;]" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/roles_gis.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_gis.php" />
+</paquet>
