@@ -7,6 +7,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Afficher partiellement un password que l'on ne veut pas rendre lisible par un champ hidden
+ * @param $pass
+ * @return string
+ */
+function mailshot_affiche_password_masque($pass){
+	$l = strlen($pass);
+	if ($l<=8){
+		return str_pad('',$l,'*');
+	}
+	$e = intval(ceil($l/10));
+	$mid = str_pad('',$l-2*$e,'*');
+	if (strlen($mid)>8){
+		$mid = '***...***';
+	}
+	return substr($pass,0,$e) . $mid . substr($pass,-$e);
+}
 
 /**
  * Inliner du contenu base64 pour presenter les versions de newsletter dans une iframe
