@@ -15,6 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="gis" compatibilite="[4.36.0;]" />
 	<necessite nom="gisgeom" compatibilite="[1.9.0;]" />
 	<utilise nom="licence" />
 
