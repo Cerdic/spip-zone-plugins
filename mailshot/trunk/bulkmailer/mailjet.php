@@ -69,9 +69,9 @@ function &bulkmailer_mailjet_dist($to_send,$options=array()){
 /**
  * Configurer mailjet : declarer le sender si besoin
  * appele depuis traiter() de formulaire_configurer_mailshot
- * @param $flux
+ * @param $res
  */
-function bulkmailer_mailjet_config_dist(&$flux){
+function bulkmailer_mailjet_config_dist(&$res){
 	$sender_mail = "";
 
 	include_spip('inc/config');
@@ -116,7 +116,7 @@ function bulkmailer_mailjet_webhook_dist($arg){
 
 	// si un seul event, on le met dans un tableau pour tout traiter de la meme facon
 	if (isset($events['event'])){
-		$events = array($data);
+		$events = array($events['event']);
 	}
 
 	foreach($events as $event){
