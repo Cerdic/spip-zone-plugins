@@ -115,17 +115,18 @@ function bulkmailer_sparkpost_config_dist(&$res){
  */
 function bulkmailer_sparkpost_webhook_dist($arg){
 
-	if ($_SERVER['REQUEST_METHOD'] == 'HEAD'){
-		http_status(200);
-		exit;
-	}
-
 	// les donnes sont postees en JSON RAW
 	$data = $GLOBALS['HTTP_RAW_POST_DATA'];
 	spip_log("bulkmailer_sparkpost_webhook_dist $data","mailshot");
 
+	// quand on ajoute le webhook Sparkpost fait un POST sans donnees
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD' OR !strlen($data)){
+		http_status(200);
+		exit;
+	}
+
 	include_spip('inc/json');
-	if (!$data OR !$events = json_decode($data, true)){
+	if (!$events = json_decode($data, true)){
 		http_status(403);
 		exit;
 	}
@@ -295,6 +296,20 @@ function sparkpost_api_call($method,$data=null) {
 			//var_dump($response);
 		}
 	}
+	elseif(function_exists('curl_init')){
+		$ch = curl_init();
+		$headers = explode("\n",$headers);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		if ($data){
+			curl_setopt($ch, CURLOPT_POST, TRUE);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+		}
+		$response = curl_exec($ch);
+		curl_close($ch);
+	}
 	else {
 		$response = recuperer_page($url, '', '', '', $post_data);
 	}
@@ -302,14 +317,18 @@ function sparkpost_api_call($method,$data=null) {
 		OR !$response = json_decode($response, true)) {
 		$response = array(
 			'errors' => array(
-				'code' => '???',
-				'message' => 'Fail recuperer_page'
+				array(
+					'code' => '???',
+					'message' => 'Fail recuperer_page'
+				)
 			)
 		);
 	}
 
 	if (isset($response['errors'])){
-		spip_log("SparkPost API Call $method : Erreur ".$response['errors']['code'].' '.$response['errors']['message'],'mailshot'._LOG_ERREUR);
+		foreach($response['errors'] as $err){
+			spip_log("SparkPost API Call $method : Erreur ".$err['code'].' '.$err['message'],'mailshot'._LOG_ERREUR);
+		}
 	}
 
 	return $response;
