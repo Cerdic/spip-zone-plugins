@@ -186,31 +186,26 @@ function bulkmailer_sparkpost_init_dist($id_mailshot=0){
 		),
 	);
 
-/*
-	if (isset($res['Count'])
-	  AND $res['Count']>0
-		AND isset($res['Data'])
-		AND $res['Data']){
+	// verifier si le webhook existe deja
+	$found = false;
+	if (isset($res['results'])){
+		foreach($res['results'] as $webhook){
+			if ($webhook['target']==$url){
 
-		foreach($res['Data'] as $eventCallback){
-			if (in_array($eventCallback['EventType'],$events)){
-				if ($eventCallback['Url']===$url){
-					// OK pour cet event, rien a faire
-					$events = array_diff($events,array($eventCallback['EventType']));
+				if (!$found
+				  AND count(array_intersect($webhook['events'],$data['events']))==count($data['events'])
+				  AND $webhook['auth_type']==$data['auth_type']){
+					$found = true;
 				}
 				else {
-					// il faut supprimer cette callback qui n'est pas sur la bonne URL
-					// et on la rajoutera ensuite avec la bonne URL (en dessous)
-					$params = array(
-						'path' => $eventCallback['ID'],
-						'method' => 'DELETE',
-					);
-					$mj->eventcallbackurl($params);
+					// sinon il faut supprimer ce webhook
+					sparkpost_api_call('webhooks/'.$webhook['id'],null,'DELETE');
 				}
 			}
 		}
-	}*/
+	}
 
+	if ($found) return true;
 
 	// si le webhook n'existe pas on l'ajoute
 	$res = sparkpost_api_call('webhooks',$data);
@@ -264,9 +259,10 @@ function sparkpost_add_sender($sender_email){
  * Call on SparkPost API
  * @param string $method
  * @param array $data
+ * @param string $http_req
  * @return array
  */
-function sparkpost_api_call($method,$data=null) {
+function sparkpost_api_call($method,$data=null,$http_req=null) {
 	static $api_key = null;
 	if (is_null($api_key)){
 		include_spip('inc/config');
@@ -290,11 +286,14 @@ function sparkpost_api_call($method,$data=null) {
 	$post_data = $headers . "\n" . $post_data;
 
 	if (function_exists('recuperer_url')){
-		$result = recuperer_url($url, array('datas'=>$post_data));
-		$response = $result['page'];
-		if ($result['status']>200){
-			//var_dump($response);
+		$options = array(
+			'datas'=>$post_data
+		);
+		if (in_array($http_req,array("DELETE","PUT"))) {
+			$options['methode'] = $http_req;
 		}
+		$result = recuperer_url($url, $options);
+		$response = $result['page'];
 	}
 	elseif(function_exists('curl_init')){
 		$ch = curl_init();
@@ -303,6 +302,9 @@ function sparkpost_api_call($method,$data=null) {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		if (in_array($http_req,array("DELETE","PUT"))){
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $http_req);
+		}
 		if ($data){
 			curl_setopt($ch, CURLOPT_POST, TRUE);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
