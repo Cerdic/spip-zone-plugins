@@ -12,11 +12,11 @@
 		</multi>
 	</slogan>
 	<auteur>[joseluis->joseluis@digital77.com]</auteur>
-	<licence>GPL - (c) 2006</licence>
-	<version>0.2.0</version>
+	<licence>GPL - (c) 2006-2016</licence>
+	<version>0.2.1</version>
 	<etat>test</etat>
 	<description>
-		<multi>	
+		<multi>
 [es]Enviar la referencia al artículo o a la breve por email
 - Para utilizarla coloca la baliza <code>#ENVIAR_EMAIL**</code> donde quieras que aparezca el enlace (artículos o breves)
 - Los dos ** asteriscos son importantes, no los olvides.
