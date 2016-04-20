@@ -90,8 +90,9 @@ L.Map.Gis = L.Map.extend({
 		}
 		
 		// Si pas de points affichés trigger ready ici
-		if (!this.options.affiche_points || !this.options.json_points.length)
-			jQuery('#'+this._container.id).trigger('ready',this);
+		if (!this.options.affiche_points || !Object.keys(this.options.json_points).length) {
+			jQuery('#'+this._container.id).trigger('ready', this);
+		}
 	},
 
 	populateTileLayers: function () {
