@@ -86,7 +86,7 @@ function cartes_optimiser_base_disparus($flux){
 
 function cartes_pre_boucle($boucle){
 	if ($boucle->type_requete == 'cartes') {
-		$boucle->select[]= 'AsText(cartes.bounds) AS geometry';
+		$boucle->select[]= 'AsText(cartes.bounds) AS geometry_map';
 	}
 	return $boucle;
 }

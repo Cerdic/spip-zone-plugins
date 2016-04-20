@@ -52,9 +52,9 @@
 	<span dir="#LANG_DIR" class="#EDIT{zoom_max} zoom_max">(#ZOOM_MAX)</span>
 </div>]
 
-[<div class="champ contenu_bounds[ (#GEOMETRY*|strlen|?{'',vide})]">
-	<label><:carte:champ_bounds_label:> : </label>[(#SET{geojson,[(#GEOMETRY|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
-	(#GEOMETRY*|strlen|oui)
+[<div class="champ contenu_bounds[ (#GEOMETRY_MAP*|strlen|?{'',vide})]">
+	<label><:carte:champ_bounds_label:> : </label>[(#SET{geojson,[(#GEOMETRY_MAP|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
+	(#GEOMETRY_MAP*|strlen|oui)
 	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=1,lat=#LAT,lon=#LON}
 </div>]
 
