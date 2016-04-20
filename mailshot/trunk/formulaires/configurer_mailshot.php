@@ -17,11 +17,13 @@ function formulaires_configurer_mailshot_charger_dist(){
 	$valeurs['_smtp_password'] = $valeurs['smtp']['password'];
 	$valeurs['smtp']['password'] = '';
 
-	$valeurs['_mailjet_secret_key'] = $valeurs['mailjet_secret_key'];
-	$valeurs['mailjet_secret_key'] = '';
-
-	$valeurs['_mandrill_api_key'] = $valeurs['mandrill_api_key'];
-	$valeurs['mandrill_api_key'] = '';
+	foreach(array(
+		        'mailjet_secret_key',
+		        'sparkpost_api_key',
+		        'mandrill_api_key') as $_key){
+		$valeurs['_'.$_key] = $valeurs[$_key];
+		$valeurs[$_key] = '';
+	}
 
 	return $valeurs;
 }
@@ -40,13 +42,14 @@ function formulaires_configurer_mailshot_traiter_dist(){
 		$smtp['password'] = lire_config('mailshot/smtp/password');
 		set_request('smtp',$smtp);
 	}
-	if (!_request('mailjet_secret_key')){
-		$restore_after_save['mailjet_secret_key'] = '';
-		set_request('mailjet_secret_key',lire_config('mailshot/mailjet_secret_key'));
-	}
-	if (!_request('mandrill_api_key')){
-		$restore_after_save['mandrill_api_key'] = '';
-		set_request('mandrill_api_key',lire_config('mailshot/mandrill_api_key'));
+	foreach(array(
+		        'mailjet_secret_key',
+		        'sparkpost_api_key',
+		        'mandrill_api_key') as $_key){
+		if (!_request($_key)){
+			$restore_after_save[$_key] = '';
+			set_request($_key,lire_config('mailshot/'.$_key));
+		}
 	}
 
 	include_spip('inc/cvt_configurer');
@@ -55,6 +58,13 @@ function formulaires_configurer_mailshot_traiter_dist(){
 
 	foreach($restore_after_save as $k=>$v){
 		set_request($k,$v);
+	}
+
+	$config = lire_config("mailshot/");
+	if ($mailer = $config['mailer']
+	  AND include_spip("bulkmailer/$mailer")
+	  AND $config = charger_fonction($mailer."_config","bulkmailer",true)){
+		$config($res);
 	}
 
 	return $res;

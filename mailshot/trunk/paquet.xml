@@ -24,7 +24,6 @@
 	<pipeline nom="optimiser_base_disparus" inclure="mailshot_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="mailshot_pipelines.php" />
 	<pipeline nom="post_edition" inclure="mailshot_pipelines.php" />
-	<pipeline nom="formulaire_traiter" inclure="mailshot_pipelines.php" />
 	<pipeline nom="newsletter_pre_envoi" action="" />
 
 
