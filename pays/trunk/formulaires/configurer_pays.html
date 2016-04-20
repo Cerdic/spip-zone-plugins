@@ -5,16 +5,19 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-		<form method="post" action="#ENV{action}">
-		<div>
+		<form method="post" action="#ENV{action}"><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#SAISIE{choisir_objets, pays_objets,
-		label=<:pays:cfg_lbl_activer_objets:>,
-		exclus=spip_pays})]
+			<ul class="editer-groupe">
+				#SET{name,pays_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label><:pays:cfg_lbl_activer_objets:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_pays}
+				</div>
+			</ul>
 
 		<input type="hidden" name="_meta_casier" value="pays" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-	</div>
-	</form>
+	</div></form>
 </div>
