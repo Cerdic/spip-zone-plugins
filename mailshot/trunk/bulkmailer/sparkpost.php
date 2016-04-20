@@ -116,7 +116,14 @@ function bulkmailer_sparkpost_config_dist(&$res){
 function bulkmailer_sparkpost_webhook_dist($arg){
 
 	// les donnes sont postees en JSON RAW
-	$data = $GLOBALS['HTTP_RAW_POST_DATA'];
+	if (isset($GLOBALS['HTTP_RAW_POST_DATA']) AND $GLOBALS['HTTP_RAW_POST_DATA']){
+		$data = $GLOBALS['HTTP_RAW_POST_DATA'];
+	}
+	// PHP 5.6+ : $GLOBALS['HTTP_RAW_POST_DATA'] obsolete et non peuplee
+	else {
+		$data = file_get_contents('php://input');
+	}
+
 	spip_log("bulkmailer_sparkpost_webhook_dist $data","mailshot");
 
 	// quand on ajoute le webhook Sparkpost fait un POST sans donnees
@@ -131,30 +138,38 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 		exit;
 	}
 
-	if (isset($events['msys'])) $events = $events['msys'];
 	// si un seul event, on le met dans un tableau pour tout traiter de la meme facon
-	if (isset($events['message_event'])) {
-		$events = array($events['message_event']);
+	if (isset($events['msys'])) {
+		$events = array($events);
 	}
 
-	foreach($events as $event){
-		// array("open", "click", "bounce", "spam", "blocked");
-		$quoi = $event['type'];
-		if ($quoi=="open") $quoi="read"; // open chez sparkpost, read ici
-		if ($quoi=="click") $quoi="clic"; // click chez sparkpost, clic ici
-		if ($quoi=="bounce") $quoi="soft_bounce"; // bounce chez sparkpost, soft_bounce ici
-		//if ($quoi=="blocked") $quoi="reject"; // blocked chez sparkpost, reject ici
+	foreach($events as $e){
+		if (isset($e['msys']['track_event'])) {
+			$event = &$e['msys']['track_event'];
+			// array("open", "click", "bounce", "spam", "blocked");
+			$quoi = $event['type'];
+			if ($quoi == "open") {
+				$quoi = "read"; // open chez sparkpost, read ici
+			}
+			if ($quoi == "click") {
+				$quoi = "clic"; // click chez sparkpost, clic ici
+			}
+			if ($quoi == "bounce") {
+				$quoi = "soft_bounce"; // bounce chez sparkpost, soft_bounce ici
+			}
+			//if ($quoi=="blocked") $quoi="reject"; // blocked chez sparkpost, reject ici
 
-		$email = $event['rcpt_to'];
-		$tracking_id = $event['campaign_id'];
-		if ($tracking_id){
-			$tracking_id = explode('/#',$tracking_id);
-			if (reset($tracking_id)==protocole_implicite($GLOBALS['meta']['adresse_site'])){
-				$tracking_id = end($tracking_id);
-				spip_log("tracking $quoi $email $tracking_id",'mailshot');
-				// appeler l'api webhook mailshot
-				$feedback = charger_fonction("feedback","newsletter");
-				$feedback($quoi,$email,$tracking_id);
+			$email = $event['rcpt_to'];
+			$tracking_id = $event['campaign_id'];
+			if ($tracking_id) {
+				$tracking_id = explode('/#', $tracking_id);
+				if (reset($tracking_id) == protocole_implicite($GLOBALS['meta']['adresse_site'])) {
+					$tracking_id = end($tracking_id);
+					spip_log("tracking $quoi $email $tracking_id", 'mailshot');
+					// appeler l'api webhook mailshot
+					$feedback = charger_fonction("feedback", "newsletter");
+					$feedback($quoi, $email, $tracking_id);
+				}
 			}
 		}
 	}

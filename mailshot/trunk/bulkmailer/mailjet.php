@@ -105,7 +105,13 @@ function bulkmailer_mailjet_webhook_dist($arg){
 	}
 
 	// les donnes sont postees en JSON RAW
-	$data = $GLOBALS['HTTP_RAW_POST_DATA'];
+	if (isset($GLOBALS['HTTP_RAW_POST_DATA']) AND $GLOBALS['HTTP_RAW_POST_DATA']){
+		$data = $GLOBALS['HTTP_RAW_POST_DATA'];
+	}
+	// PHP 5.6+ : $GLOBALS['HTTP_RAW_POST_DATA'] obsolete et non peuplee
+	else {
+		$data = file_get_contents('php://input');
+	}
 	spip_log("bulkmailer_mailjet_webhook_dist $data","mailshot");
 
 	include_spip('inc/json');
