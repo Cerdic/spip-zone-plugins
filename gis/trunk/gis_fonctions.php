@@ -442,5 +442,3 @@ function gis_icon_properties($img=''){
 	
 	return $props;
 }
-
-?>

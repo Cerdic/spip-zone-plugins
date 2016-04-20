@@ -126,4 +126,3 @@ function gis_vider_tables($nom_meta_base_version) {
 	effacer_meta('gis');
 }
 
-?>

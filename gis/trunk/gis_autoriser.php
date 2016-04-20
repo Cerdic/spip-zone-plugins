@@ -110,4 +110,3 @@ function autoriser_gis_supprimer_dist($faire,$quoi,$id,$qui,$opts){
 	}
 	return autoriser('modifier','gis',$id,$qui,$opts);
 }
-?>

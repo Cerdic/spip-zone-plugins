@@ -347,4 +347,3 @@ function gis_formulaire_traiter($flux){
 	}
 	return $flux;
 }
-?>
