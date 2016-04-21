@@ -12,7 +12,8 @@
 				label=<:carte:champ_titre_label:>})]
  
 			[(#SAISIE{textarea, texte,
-				label=<:carte:champ_texte_label:>})]
+				label=<:carte:champ_texte_label:>,
+				rows=10})]
  
 			[(#SAISIE{input, style_carte,
 				label=<:carte:champ_style_carte_label:>})]
@@ -21,7 +22,8 @@
 				label=<:carte:champ_footer_carte_label:>})]
 			
 			[(#SAISIE{textarea, texte_footer,
-				label=<:carte:champ_texte_footer_label:>})]
+				label=<:carte:champ_texte_footer_label:>,
+				rows=7})]
 			
 			#SET{layers,#ARRAY{none,#VAL{carte:option_aucun_layer}|_T}}
 			<BOUCLE_layer(DATA){source table, #EVAL{$GLOBALS['gis_layers']}}>

@@ -1,4 +1,5 @@
 <BOUCLE_carte(CARTES){id_carte}{statut?}>
+<h2><:carte:titre_texte_carte:></h2>
 
 [<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
 	<label><:carte:champ_titre_label:> : </label>
@@ -10,22 +11,24 @@
 	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE)</span>
 </div>]
 
-[<div class="champ contenu_popup[ (#POPUP*|strlen|?{'',vide})]">
-	<label><:carte:champ_popup_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{popup} popup">(#VAL{carte:option_}|concat{#POPUP}|_T)</span>
+[<div class="champ contenu_descriptif[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:carte:champ_texte_footer_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE_FOOTER)</span>
 </div>]
+
+<h2><:carte:titre_affichage_carte:></h2>
+
+<p>
+	<strong><:carte:titre_fond_carte:></strong>
+</p>
 
 <div class="champ contenu_layer_defaut">
 	<label><:gis:cfg_lbl_layer_defaut:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{layer_defaut} layer_defaut">[(#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]/nom})]})]</span>
-	[(#INCLURE{fond=modeles/carte_gis_preview,lat=[(#LAT|sinon{0})],lon=[(#LAT|sinon{0})],zoom=1,layer_defaut=[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})],id_map=layer_defaut})]
+	<span dir="#LANG_DIR" class="#EDIT{layer_defaut} layer_defaut">
+		[(#LAYER_DEFAUT|=={none}|oui)<:carte:option_aucun_layer:>]
+		[(#LAYER_DEFAUT|=={none}|non)[(#EVAL{$GLOBALS\['gis_layers'\]}|table_valeur{[(#ENV{layer_defaut,[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})]/nom})]})]</span>
+		[(#INCLURE{fond=modeles/carte_gis_preview,lat=[(#LAT|sinon{0})],lon=[(#LAT|sinon{0})],zoom=1,layer_defaut=[(#LAYER_DEFAUT|sinon{[(#CONFIG{gis/layer_defaut,openstreetmap_mapnik})]})],id_map=layer_defaut})]]
 </div>
-
-<div class="champ contenu_layer_topojson[ (#LAYER_TOPOJSON*|strlen|?{'',vide})]">
-	<label><:carte:champ_layer_topojson_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{layer_topojson} layer_topojson">[(#LAYER_TOPOJSON|basename)]</span>
-</div>
-
 [<div class="champ contenu_centrage">
 	<label><:carte:legend_centrage:></label>
 	(#LAT|et{#LON}|oui)
@@ -33,15 +36,27 @@
 	[(#INCLURE{fond=modeles/carte_gis_preview,lat=#LAT,lon=#LON,zoom=[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})],geojson=#GET{geojson},id_map=centrage})]
 </div>]
 
+[<div class="champ contenu_layer_topojson[ (#LAYER_TOPOJSON*|strlen|?{'',vide})]">
+	<label><:carte:champ_layer_topojson_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{layer_topojson} layer_topojson">(#LAYER_TOPOJSON|basename)</span>
+</div>]
+
+<p>
+	<strong><:carte:titre_limites_zoom:></strong>
+</p>
+
+[(#SET{geojson,[(#GEOMETRY_MAP|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
+[<div class="champ contenu_bounds[ (#GEOMETRY_MAP*|strlen|?{'',vide})]">
+	<label><:carte:champ_bounds_label:> : </label>
+	(#GET{geojson}|strlen|oui)
+	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=1,lat=#LAT,lon=#LON}
+</div>]
+
 [<div class="champ contenu_zoom_defaut[ (#ZOOM_DEFAUT*|strlen|?{'',vide})]">
 	<label><:carte:champ_zoom_defaut_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{zoom_defaut} zoom_defaut">(#ZOOM_DEFAUT)</span>
 </div>]
 
-[<div class="champ contenu_center_points[ (#CENTER_POINTS|=={on}|?{'',vide})]">
-	(#CENTER_POINTS|=={on}|?{' ',''})
-	<label><:carte:champ_center_points_label:></label>
-</div>]
 [<div class="champ contenu_zoom_min[ (#ZOOM_MIN*|strlen|?{'',vide})]">
 	<label><:carte:champ_zoom_min_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{zoom_min} zoom_min">(#ZOOM_MIN)</span>
@@ -52,23 +67,30 @@
 	<span dir="#LANG_DIR" class="#EDIT{zoom_max} zoom_max">(#ZOOM_MAX)</span>
 </div>]
 
-[(#SET{geojson,[(#GEOMETRY_MAP|wkt_to_json)]})][(#SET{zoom,[(#ZOOM_DEFAUT|sinon{#CONFIG{gis/zoom,0}})]})]
-[<div class="champ contenu_bounds[ (#GEOMETRY_MAP*|strlen|?{'',vide})]">
-	<label><:carte:champ_bounds_label:> : </label>
-	(#GET{geojson}|strlen|oui)
-	#MODELE{carte_gis_preview,geojson=#GET{geojson},id_map=#ID_CARTE,zoom=1,lat=#LAT,lon=#LON}
+[<div class="champ contenu_center_points[ (#CENTER_POINTS|=={on}|?{'',vide})]">
+	(#CENTER_POINTS|=={on}|?{' ',''})
+	<label><:carte:champ_center_points_label:></label>
+</div>]
+
+<p>
+	<strong><:carte:titre_popup_controles:></strong>
+</p>
+
+[<div class="champ contenu_popup[ (#POPUP*|strlen|?{'',vide})]">
+	<label><:carte:champ_popup_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{popup} popup">(#VAL{carte:option_}|concat{#POPUP}|_T)</span>
 </div>]
 
 <B_controles>
 <div class="champ contenu_controles[ (#CONTROLES**|strlen|?{'',vide})]">
 	<label><:carte:champ_controles_label:> : </label>
-	<ul>
+	<ol>
 	<BOUCLE_controles(DATA){source table, #CONTROLES}>
 		<li>
 			[(#VAL{carte:option_}|concat{#VALEUR}|_T)]
 		</li>
 	</BOUCLE_controles>
-	</ul>
+	</ol>
 </div>
 </B_controles>
 [<div class="champ contenu_style_carte[ (#STYLE_CARTE*|strlen|?{'',vide})]">
@@ -79,10 +101,5 @@
 [<div class="champ contenu_footer_carte[ (#FOOTER_CARTE*|strlen|?{'',vide})]">
 	<label><:carte:champ_footer_carte_label:> : </label>
 	<span dir="#LANG_DIR" class="#EDIT{footer_carte} footer_carte">(#FOOTER_CARTE)</span>
-</div>]
-
-[<div class="champ contenu_descriptif[ (#TEXTE*|strlen|?{'',vide})]">
-	<label><:carte:champ_texte_footer_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{texte} texte">(#TEXTE_FOOTER)</span>
 </div>]
 </BOUCLE_carte>
