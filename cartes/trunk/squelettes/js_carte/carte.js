@@ -1,7 +1,7 @@
 var resizemap = function (map_resize) {
 	$('.map_wrapper').height($(window).height() - $('.footer').outerHeight()-$('.main').outerHeight());
 	if (typeof map_resize != 'undefined' && typeof map_resize.invalidateSize == 'function') {
-		map_resize.invalidateSize(true);
+		map_resize.invalidateSize();
 	}
 }
 var callback_map1 = function (map) {
@@ -114,5 +114,6 @@ $(document).ready(function () {
 	    	map.addLayer(topojson_layer);
 	    	topojson_layer.bringToFront();
 	    }
+	    resizemap(map);
 	});
 });
