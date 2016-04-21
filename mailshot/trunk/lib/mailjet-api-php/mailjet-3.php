@@ -108,6 +108,8 @@ class Mailjet {
 			$this->_method = $method;
 		}
 
+		$headers = "";
+		$data = "";
 		// data is the json body of request
 		if (isset($params['data'])){
 			$data = $params['data'];
@@ -115,9 +117,11 @@ class Mailjet {
 				include_spip('inc/json');
 				$data = json_encode($data);
 			}
-			$entete = "Content-Type: application/json\r\n";
-			$this->_data = $entete . "\r\n" . $data;
-			$this->_request = $request = 'POST';
+			$headers .= "Content-Type: application/json\r\n";
+			$this->_data = $headers . "\r\n" . $data;
+			if ($request=='GET'){
+				$this->_request = $request = 'POST';
+			}
 		}
 
 
@@ -141,7 +145,38 @@ class Mailjet {
 
 
 		try {
-			if (!function_exists('recuperer_url')){
+			if (function_exists('recuperer_url')) {
+				$options = array(
+					'methode' => $this->_request,
+				);
+				if ($this->_data) {
+					$options['datas'] = $this->_data;
+				}
+				$res = recuperer_url($url,$options);
+				$this->_response_code = $res['status'];
+				$response = $res['page'];
+			}
+			elseif(function_exists('curl_init')){
+				$ch = curl_init();
+				$headers = explode("\n",$headers);
+				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+				curl_setopt($ch, CURLOPT_HEADER, FALSE);
+				if ($headers){
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+				}
+				if (in_array($this->_request,array("DELETE","PUT"))){
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->_request);
+				}
+				if ($data){
+					curl_setopt($ch, CURLOPT_POST, TRUE);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+				}
+				$response = curl_exec($ch);
+				$this->_response_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+				curl_close($ch);
+			}
+			else {
 				// en cas de DELETE on appelle directement recuperer_lapage
 				// en esperant ne pas avoir de 301
 				if (in_array($this->_request,array('DELETE'))){
@@ -155,17 +190,6 @@ class Mailjet {
 	        return false;
 				}
 				$this->_response_code = 200; // on suppose car sinon renvoie false
-			}
-			else {
-				$options = array(
-					'methode' => $this->_request,
-				);
-				if ($this->_data) {
-					$options['datas'] = $this->_data;
-				}
-				$res = recuperer_url($url,$options);
-				$this->_response_code = $res['status'];
-				$response = $res['page'];
 			}
 
 		}
