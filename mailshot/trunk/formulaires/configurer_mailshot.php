@@ -35,6 +35,7 @@ function formulaires_configurer_mailshot_verifier_dist(){
 }
 
 function formulaires_configurer_mailshot_traiter_dist(){
+	include_spip('inc/config');
 	// reinjecter les password pas saisis si besoin
 	$restore_after_save = array();
 	if ($smtp = _request('smtp') AND !$smtp['password']){
