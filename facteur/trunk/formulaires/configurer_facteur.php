@@ -37,6 +37,7 @@ function formulaires_configurer_facteur_charger_dist(){
 
 function formulaires_configurer_facteur_verifier_dist(){
 	$erreurs = array();
+	include_spip('inc/config');
 	if ($email = _request('facteur_adresse_envoi_email')
 	  AND !email_valide($email)) {
 		$erreurs['facteur_adresse_envoi_email'] = _T('form_email_non_valide');
