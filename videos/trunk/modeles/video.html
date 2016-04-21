@@ -74,7 +74,7 @@
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
 
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe[ title="(#GET{titre_video}|couper{80})"] frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="//www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#GET{titre_video}|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=#ENV{autoplay,0}&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="//www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#GET{titre_video}|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=#ENV{autoplay,0}&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 [(#REM)
@@ -83,7 +83,7 @@
 ]
 	[(#EXTENSION|=={dist_vimeo}|oui)
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe[ title="(#GET{titre_video}|couper{80})"] src="//player.vimeo.com/video/#GET{fichier}?byline=0&amp;autoplay=#ENV{autoplay,0}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+			<iframe[ title="(#GET{titre_video}|couper{80})"] src="//player.vimeo.com/video/#GET{fichier}?byline=0&amp;autoplay=#ENV{autoplay,0}" width="#GET{largeur}" height="#GET{hauteur}"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 
@@ -119,7 +119,7 @@
 			[(#GET{mode_confidentialite}|=={non}|oui)#SET{url_youtube,//www.youtube.com/embed}]
 			[(#SET{url_complete,
 				#GET{url_youtube}/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}&amp;autoplay=#ENV{autoplay,0}[&amp;rel=0(#GET{afficher_suggestions}|=={non}|oui)][&amp;controls=0(#GET{afficher_commandes}|=={non}|oui)][&amp;showinfo=0(#GET{afficher_titres_et_actions}|=={non}|oui)]})]
-			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="[(#GET{url_complete}|replace{' ',''})]" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="[(#GET{url_complete}|replace{' ',''})]" allowfullscreen class="youtube-player"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 
