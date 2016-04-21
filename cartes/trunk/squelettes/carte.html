@@ -16,7 +16,7 @@
 	[(#SET{js,[js_carte/(#STYLE_CARTE|sinon{carte.js})]})]
 	[<script type="text/javascript" src="(#CHEMIN{#GET{js}})"></script>]
 	[(#SET{geometry_map,[(#GEOMETRY_MAP|wkt_to_json|trim)]})]
-	<BOUCLE_si_bounds(CONDITION){si #GET{geometry}|strlen|>{2}|oui}>
+	<BOUCLE_si_bounds(CONDITION){si #GET{geometry_map}|strlen|>{2}|oui}>
 	<script type="text/javascript">
 		var data_bounds = {
 			"type": "FeatureCollection",
