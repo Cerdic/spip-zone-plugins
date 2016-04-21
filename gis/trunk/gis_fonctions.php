@@ -428,7 +428,16 @@ function gis_icon_properties($img=''){
 		$props .= ",\n\t\t\t\"icon\": ". json_encode(url_absolue($icon)).",";
 		list($h,$w) = taille_image($icon);
 		$props .= "\n\t\t\t\"icon_size\": ". json_encode(array($w,$h)).",";
-		$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
+		/**
+		 * Si l'icone est carrée, on considère que c'est soit un point soit un carré qui pointe un lieu et non une "goutte"
+		 * On centre donc au milieu de l'icone
+		 */
+		if($w == $h) {
+			$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2,$h/2)).",";
+		}
+		else {
+			$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
+		}
 		$props .= "\n\t\t\t\"popup_anchor\": ". json_encode(array(1,-round($h/1.2,2)));
 	}
 	
