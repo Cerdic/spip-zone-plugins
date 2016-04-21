@@ -170,7 +170,7 @@ class Mailjet {
 				}
 				if ($data){
 					curl_setopt($ch, CURLOPT_POST, TRUE);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 				}
 				$response = curl_exec($ch);
 				$this->_response_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
