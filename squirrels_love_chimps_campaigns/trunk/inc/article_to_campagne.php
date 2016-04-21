@@ -54,7 +54,7 @@ function inc_article_to_campagne_dist($flux='',$id_article='',$unique=true){
 	
 				// Données article
 				if(!$id_article)$id_article= $flux['data']['id_article'];
-				$article=sql_fetsel('statut,titre,texte,descriptif,id_rubrique','spip_articles','id_article='.$id_article.$statut);
+				$article=sql_fetsel('statut,titre,texte,descriptif,id_rubrique','spip_articles','id_article='.$id_article);
 				
 	
 				if(!$statut=$flux['data']['statut'])$statut=$article['statut'];
