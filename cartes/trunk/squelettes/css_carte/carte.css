@@ -162,6 +162,7 @@ h1{
 .info.leaflet-popup-content-wrapper{
 	width:33vw;
 	font-size:1.2em;
+	max-width:35em;
 }
 
 .info.leaflet-popup-content-wrapper strong{
@@ -178,7 +179,7 @@ h1{
 	stroke:#737473;
 	stroke-width:1;
 	fill-opacity:1;
-	stroke-opacity:0;
+	stroke-opacity:1;
 }
 
 .country-sy,.country-iq{
@@ -195,10 +196,12 @@ h1{
 	background:none;
 	border:none;
 	font: 1.2em/1.5em "noto_sans", "Helvetica Neue", verdana, sans serif;
+	text-shadow:0px 0px .1em white;
 	padding:0;
 	font-weight:normal;
 }
 
+.leaflet-label:before, .leaflet-label:after,
 .leaflet-label.informatif:before, .leaflet-label.informatif:after{
 	content:none;
 }

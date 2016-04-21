@@ -89,11 +89,15 @@ $(document).ready(function () {
 		 */
 		if(layer.feature && layer.feature.properties && layer.feature.properties.role && $.inArray('informatif',layer.feature.properties.role) != -1){
 		    	layer.options.clickable = false;
-		    	layer.options.title = layer.feature.properties.title;
 		    	layer.options.riseOnHover = true;
 		    	layer.options.keyboard = false;
 		    	layer.options.icon.options.labelAnchor = [4,-4];
 		    	layer.unbindPopup().bindLabel(layer.feature.properties.title, { noHide: true, className: 'informatif', direction: 'auto' });
+		    	map.removeLayer(layer);
+		    	layer.addTo(map);
+		} else if (map.options.options && map.options.options.label && layer.feature && layer.feature.properties) {
+		    	layer.options.riseOnHover = true;
+		    	layer.bindLabel(layer.feature.properties.title, { className: 'action', direction: 'auto' });
 		    	map.removeLayer(layer);
 		    	layer.addTo(map);
 		}

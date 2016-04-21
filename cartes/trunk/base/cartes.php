@@ -59,6 +59,7 @@ function cartes_declarer_tables_objets_sql($tables) {
 			'lon'				 => 'double NULL NULL',
 			'center_points'      => 'VARCHAR(3) DEFAULT "non"',
 			'popup'              => 'text NOT NULL DEFAULT ""',
+			'label'              => 'text NOT NULL DEFAULT ""',
 			'bounds'             => 'GEOMETRY DEFAULT "" NOT NULL',
 			'controles'              => 'text NOT NULL DEFAULT ""',
 			'type'               => 'text NOT NULL DEFAULT ""',
@@ -77,8 +78,8 @@ function cartes_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => 'titre AS titre, lang AS lang',
 		'date' => 'date',
-		'champs_editables'  => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup'),
-		'champs_versionnes' => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup'),
+		'champs_editables'  => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup', 'label'),
+		'champs_versionnes' => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup', 'label'),
 		'rechercher_champs' => array("titre" => 5, "texte" => 7,"texte_footer" => 4),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
