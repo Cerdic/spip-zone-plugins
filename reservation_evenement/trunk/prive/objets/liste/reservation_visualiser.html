@@ -31,7 +31,8 @@
 		<BOUCLE_evt (RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}>
 		#SET{valeurs_extras,#ARRAY} 
 			<BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
-				#SET{nom,#NOM} #SET{email,#EMAIL**} 
+				#SET{nom,#NOM} #SET{email,#EMAIL**}
+				#SET{date,#DATE}
 			<BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
 				#SET{nom,#NOM} #SET{email,#EMAIL**} 
 				<BOUCLE_aut_ext (DATA){sourcetableau, #GET{champs_extras}}>
@@ -47,7 +48,7 @@
 		</BOUCLE_res>
 		<td>#DESCRIPTIF</td>
 		<td>[(#VAL{reservation:texte_statut[_(#STATUT|trim)]}|_T)]</td>
-		<td>#DATE</td>
+		<td>#GET{date}</td>
 		<td>#GET{nom}</td>
 		<td>#GET{email}</td>
 		<BOUCLE_champs_extras2 (DATA){sourcetableau,#GET{valeurs_extras}}>

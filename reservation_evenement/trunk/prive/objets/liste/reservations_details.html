@@ -1,6 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
 	descriptif,1,
-	reference,1,
 	quantite,1,
 	id_reservations_detail,1,
 	points,-1
@@ -17,7 +16,7 @@
 					<th class='picto' scope='col'></th>
 					<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 					<th class='descriptif' scope='col'>[(#TRI{descriptif,<:reservations_detail:label_descriptif:>,ajax})]</th>
-					<th class='reservation' scope='col'>[(#TRI{reference,<:reservation:label_reservation:>,ajax})]</th>
+					<th class='reservation' scope='col'><:reservation:label_reservation:></th>
 					<th class='nom' scope='col'><:reservation:label_nom:></th>
 					<th class='quantite' scope='col'>[(#TRI{quantite,<:reservations_detail:label_quantite:>,ajax})]</th>
 					<th class='id' scope='col'>[(#TRI{id_reservations_detail,<:info_numero_abbreviation:>,ajax})]</th>
