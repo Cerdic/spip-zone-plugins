@@ -141,11 +141,7 @@ function mailshot_optimiser_base_disparus($flux){
 			// on les purge et passe en archive
 			include_spip('inc/mailshot');
 			while ($ids AND $id_mailshot = array_shift($ids)){
-				// mettre a jour les stats avant de purger
-				mailshot_compter_envois($id_mailshot);
-				sql_delete("spip_mailshots_destinataires",'id_mailshot='.intval($id_mailshot));
-				sql_updateq("spip_mailshots",array('statut'=>'archive'),'id_mailshot='.intval($id_mailshot));
-				spip_log("Purger vieux mailshot $id_mailshot plus vieux que $vieux","mailshot");
+				mailshot_archiver($id_mailshot);
 			}
 		}
 	}

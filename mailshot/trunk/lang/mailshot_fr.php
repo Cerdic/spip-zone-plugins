@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_mailshot' => '1 envoi',
 	'info_1_mailshot_destinataire' => '1 destinataire',
 	'info_1_mailsubscriber' => '1 inscrit',
+	'info_archiver' => 'Archiver',
 	'info_aucun_destinataire' => 'Aucun destinataire',
 	'info_aucun_envoi' => 'Aucun envoi',
 	'info_envoi_programme_1_destinataire' => 'Envoi programmé vers 1 destinataire',

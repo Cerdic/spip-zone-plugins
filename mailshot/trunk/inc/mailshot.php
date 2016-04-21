@@ -48,6 +48,19 @@ function mailshot_compter_envois($id_mailshot){
 	sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($id_mailshot));
 }
 
+
+/**
+ * Archiver un envoi (vieux en cron ou a la demande)
+ * @param $id_mailshot
+ */
+function mailshot_archiver($id_mailshot){
+	// mettre a jour les stats avant de purger
+	mailshot_compter_envois($id_mailshot);
+	sql_delete("spip_mailshots_destinataires",'id_mailshot='.intval($id_mailshot));
+	sql_updateq("spip_mailshots",array('statut'=>'archive'),'id_mailshot='.intval($id_mailshot));
+	spip_log("Archiver mailshot $id_mailshot","mailshot");
+}
+
 /**
  * Definir la combinaison (periode,nb envois) pour respecter la cadence maxi configuree
  *
