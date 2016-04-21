@@ -90,3 +90,16 @@ function cartes_pre_boucle($boucle){
 	}
 	return $boucle;
 }
+
+function cartes_recuperer_fond($flux){
+	if ($flux['args']['fond'] == 'javascript/gis.js') {
+		$ajouts = "\n". spip_file_get_contents(find_in_path('javascript/leaflet.label-src.js'));
+		$flux['data']['texte'] .= $ajouts;
+	}
+	return $flux;
+}
+
+function cartes_insert_head_css($flux){
+	$flux .= "\n".'<link rel="stylesheet" href="'. find_in_path('css/leaflet.label.css') .'" />';
+	return $flux;
+}

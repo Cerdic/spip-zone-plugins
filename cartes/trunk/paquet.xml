@@ -26,11 +26,13 @@
 	<pipeline nom="affiche_milieu" inclure="cartes_pipelines.php" /> 
 	<pipeline nom="affiche_auteurs_interventions" inclure="cartes_pipelines.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="cartes_pipelines.php" />
-	<pipeline nom="pre_boucle" inclure="cartes_pipelines.php" /> 
+	<pipeline nom="pre_boucle" inclure="cartes_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="cartes_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="cartes_pipelines.php" />
 
 	<menu nom="cartes" titre="carte:titre_cartes" parent="menu_edition" icone="images/carte-16.png" action="cartes" /> 
 	<menu nom="carte_creer" titre="carte:icone_creer_carte" parent="outils_rapides" icone="images/carte-new-16.png" action="carte_edit" parametres="new=oui" /> 
 
 	<chemin path="./" />
-	<chemin path="squelettes" type='public'/>
+	<chemin path="squelettes" type='public' />
 </paquet>
