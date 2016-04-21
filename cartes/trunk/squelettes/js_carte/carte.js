@@ -68,10 +68,6 @@ $(document).ready(function () {
 		map.eachLayer(function(layer){
 			layer.off('click').on('click',function(e,f){
 				if(layer._popup && layer._popup._content){
-				    	console.log($.inArray('informatif',layer.feature.role));
-				    	console.log(layer.feature);
-				    	if(layer.feature.properties.role && $.inArray('informatif',layer.feature.properties.role) != -1)
-				    	    return false;
 					info.update(layer._popup._content);
 					map.closePopup();
 					map.panTo(e.latlng);
@@ -83,11 +79,30 @@ $(document).ready(function () {
 		    	info.update();
 		});
 	    }
+	    map.eachLayer(function(layer){
+		/**
+		 * Gestion des points informatifs
+		 * 
+		 * Ils ne sont pas clickable et sélectionnables
+		 * Ils n'ont pas de popup
+		 * On leur met un label qui est leur titre
+		 */
+		if(layer.feature && layer.feature.properties && layer.feature.properties.role && $.inArray('informatif',layer.feature.properties.role) != -1){
+		    	layer.options.clickable = false;
+		    	layer.options.title = layer.feature.properties.title;
+		    	layer.options.riseOnHover = true;
+		    	layer.options.keyboard = false;
+		    	layer.options.icon.options.labelAnchor = [4,-4];
+		    	layer.unbindPopup().bindLabel(layer.feature.properties.title, { noHide: true, className: 'informatif', direction: 'auto' });
+		    	map.removeLayer(layer);
+		    	layer.addTo(map);
+		}
+	    });
 	    if(map.options.options && map.options.options.layer_topojson){
 	    	var topojson_layer = new L.TOPOJSON(map.options.options.layer_topojson, {async: true}),
 	    		fichier_topojson = map1.options.options.layer_topojson.replace(/^.*[\\\/]/, '').replace(/\./g,'_'),
 	    		addlayer = fichier_topojson+'_addlayer';
-	    	if(typeof window[addlayer] == 'function'){
+	    	if (typeof window[addlayer] == 'function') {
         	    	topojson_layer.on('addlayer',function(e){
         	    	    	eval(eval(addlayer)(e,topojson_layer));
         	    	});
