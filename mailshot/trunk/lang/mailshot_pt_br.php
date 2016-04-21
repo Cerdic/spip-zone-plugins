@@ -64,8 +64,8 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'label_listes' => 'Listas',
 	'label_mailer_defaut' => 'Usar o mesmo serviço de envio dos outros e-mails',
 	'label_mailer_defaut_desactive' => 'Impossível: nenhum serviço de envio de e-mail foi configurado',
-	'label_mailer_mailjet' => 'Serviço Mailjet',
-	'label_mailer_mandrill' => 'Serviço Mandrill',
+	'label_mailer_mailjet' => 'Serviço Mailjet', # MODIF
+	'label_mailer_mandrill' => 'Serviço Mandrill', # MODIF
 	'label_mailer_smtp' => 'Servidor SMTP',
 	'label_mailjet_api_key' => 'Chave API Mailjet',
 	'label_mailjet_api_version' => 'API Versão',
