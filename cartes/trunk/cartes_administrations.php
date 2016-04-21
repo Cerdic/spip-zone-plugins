@@ -25,10 +25,6 @@ function cartes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(array('maj_tables', array('spip_cartes')));
-	$maj['1.0.1'] = array(array('maj_tables', array('spip_cartes')));
-	$maj['1.0.2'] = array(array('maj_tables', array('spip_cartes')));
-	$maj['1.0.3'] = array(array('maj_tables', array('spip_cartes')));
-	$maj['1.0.4'] = array(array('maj_tables', array('spip_cartes')));
 	$maj['1.0.5'] = array(array('maj_tables', array('spip_cartes')));
 
 	include_spip('base/upgrade');
