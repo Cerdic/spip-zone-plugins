@@ -61,8 +61,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'sync',
 						'label' => _T('sjcycle:label_sync'),
-						'explication' => _T('sjcycle:explication_sync'),
-						'defaut' => $config['sync']
+						'explication' => _T('sjcycle:explication_sync')
 					)
 				),
 				array(
@@ -71,8 +70,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'speed',
 						'label' => _T('sjcycle:label_speed'),
 						'explication' => _T('sjcycle:explication_speed'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['speed']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -81,8 +79,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'timeout',
 						'label' => _T('sjcycle:label_timeout'),
 						'explication' => _T('sjcycle:explication_timeout'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['timeout']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -90,8 +87,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'pause',
 						'label' => _T('sjcycle:label_pause'),
-						'explication' => _T('sjcycle:explication_pause'),
-						'defaut' => $config['pause']
+						'explication' => _T('sjcycle:explication_pause')
 					)
 				),
 				array(
@@ -99,8 +95,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'random',
 						'label' => _T('sjcycle:label_random'),
-						'explication' => _T('sjcycle:explication_random'),
-						'defaut' => $config['random']
+						'explication' => _T('sjcycle:explication_random')
 					)
 				),
 				array(
@@ -109,7 +104,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'text_prev',
 						'label' => _T('sjcycle:label_text_prev'),
 						'explication' => _T('sjcycle:explication_text_prev'),
-						'defaut' => _T('sjcycle:prev')
+						'placeholder' => _T('sjcycle:prev')
 					)
 				),
 				array(
@@ -118,7 +113,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'text_next',
 						'label' => _T('sjcycle:label_text_next'),
 						'explication' => _T('sjcycle:explication_text_next'),
-						'defaut' => _T('sjcycle:next')
+						'placeholder' => _T('sjcycle:next')
 					)
 				)
 			)
@@ -135,8 +130,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'div_class',
 						'label' => _T('sjcycle:label_div_class'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['div_class']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -144,8 +138,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'div_margin',
 						'label' => _T('sjcycle:label_div_margin'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['div_margin']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -153,8 +146,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'img_bordure',
 						'label' => _T('sjcycle:label_img_bordure'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['img_bordure']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -162,8 +154,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'div_background',
 						'label' => _T('sjcycle:label_div_background'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['div_background']
+						'obligatoire' => 'oui'
 					)
 				)
 			)
@@ -188,7 +179,6 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'img_position',
 						'label' => _T('sjcycle:label_img_position'),
 						'obligatoire' => 'oui',
-						'defaut' => $config['img_position'],
 						'datas' => array(
 							 'left top' => 'left top',
 							 'left center' => 'left center',
@@ -207,8 +197,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'img_width',
 						'label' => _T('sjcycle:label_img_width'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['img_width']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -216,8 +205,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'img_height',
 						'label' => _T('sjcycle:label_img_height'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['img_height']
+						'obligatoire' => 'oui'
 					)
 				),
 				array(
@@ -226,8 +214,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'img_background',
 						'label' => _T('sjcycle:label_img_background'),
 						'explication' => _T('sjcycle:explication_img_background'),
-						'obligatoire' => 'oui',
-						'defaut' => $config['img_background']
+						'obligatoire' => 'oui'
 					)
 				)
 			)
@@ -244,8 +231,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'tooltip',
 						'label' => _T('sjcycle:label_tooltip'),
-						'explication' => _T('sjcycle:explication_tooltip'),
-						'defaut' => $config['tooltip']
+						'explication' => _T('sjcycle:explication_tooltip')
 					)
 				),
 				array(
@@ -253,8 +239,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'tooltip_carac',
 						'label' => _T('sjcycle:label_tooltip_carac'),
-						'explication' => _T('sjcycle:explication_tooltip_carac'),
-						'defaut' => $config['tooltip_carac']
+						'explication' => _T('sjcycle:explication_tooltip_carac')
 					)
 				),
 				array(
@@ -262,8 +247,7 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'mediabox',
 						'label' => _T('sjcycle:label_mediabox'),
-						'explication' => _T('sjcycle:explication_mediabox'),
-						'defaut' => $config['mediabox']
+						'explication' => _T('sjcycle:explication_mediabox')
 					)
 				)
 			)
@@ -281,7 +265,6 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'afficher_aide',
 						'label' => _T('sjcycle:label_afficher_aide'),
 						'explication' => _T('sjcycle:explication_afficher_aide'),
-						'defaut' => $config['afficher_aide']
 					)
 				)
 			)
@@ -291,20 +274,18 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 
 function formulaires_configurer_sjcycle_charger(){
 
-	$erreurs = array();
+	$valeurs = lire_config('sjcycle');
 		
 	if (!lire_config('image_process')){
-		$erreurs['message_erreur'] = _T('sjcycle:erreur_config_image_process');
-		return $erreurs;
+		$valeurs['message_erreur'] = _T('sjcycle:erreur_config_image_process');
+		return $valeurs;
 	}
 	
 	//Generation de miniatures des images inactive
 	if (lire_config('creer_preview')!='oui') {
 		$erreurs['message_erreur'] = _T('sjcycle:erreur_config_creer_preview');
-		return $erreurs;
+		return $valeurs;
 	}
 
-	return $erreurs;
+	return $valeurs;
 }
-
-?>
