@@ -22,10 +22,10 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 						'nom' => 'fx',
 						'label' => _T('sjcycle:label_fx'),
 						'explication' => _T('sjcycle:explication_fx'),
-                  'obligatoire' => 'oui',
-                  'defaut' => $config['fx'],
+						'obligatoire' => 'oui',
+						'defaut' => $config['fx'],
 						'cacher_option_intro' => 'oui',
-                  'datas' => array(
+						'datas' => array(
 							'blindX' => 'blindX',
 							'blindY' => 'blindY',
 							'blindZ' => 'blindZ',
@@ -187,9 +187,9 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 					'options' => array(
 						'nom' => 'img_position',
 						'label' => _T('sjcycle:label_img_position'),
-                  'obligatoire' => 'oui',
-                  'defaut' => $config['img_position'],
-                  'datas' => array(
+						'obligatoire' => 'oui',
+						'defaut' => $config['img_position'],
+						'datas' => array(
 							 'left top' => 'left top',
 							 'left center' => 'left center',
 							 'left bottom' => 'left bottom',
