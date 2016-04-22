@@ -27,7 +27,7 @@
 			<td class='titre'><a href="[(#ID_TICKET|generer_url_entite{ticket})]">[(#TITRE|supprimer_numero)]</a></td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_auteur}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='action'><button class="button link" name="ajouter_lien[ticket-#ID_TICKET-#OBJET-#ID_OBJET]" value="+"><:tickets:lien_ajouter_ticket:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[ticket-#ID_TICKET-#OBJET-#ID_OBJET]" value="+"><:tickets:lien_ajouter_ticket:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
 		</tr>
 	</BOUCLE_liste_ticket>
 	</tbody>
