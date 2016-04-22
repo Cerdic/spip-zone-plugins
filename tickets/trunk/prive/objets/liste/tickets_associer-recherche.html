@@ -23,7 +23,7 @@
 	<tbody>
 	<BOUCLE_liste_ticket(TICKETS){doublons 2}{recherche #GET{recherche}}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10} ticketa}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[<img src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"[ alt="(#STATUT|tickets_texte_statut)"] />]</td>
+			<td class='statut'>[(#STATUT|puce_statut{ticket,#ID_TICKET})]</td>
 			<td class='titre'><a href="[(#ID_TICKET|generer_url_entite{ticket})]">[(#TITRE|supprimer_numero)]</a></td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_auteur}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
