@@ -1,0 +1,55 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:medias_dereferencer:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{radio, lier_document,
+				label=<:medias_dereferencer:lier_document_label:>,
+				explication=<:medias_dereferencer:lier_document_explication:>,
+				datas=#ARRAY{
+					oui,<:medias_dereferencer:lier_document_choix_oui:>,
+					non,<:medias_dereferencer:lier_document_choix_non:>},
+				defaut=non})]
+
+			<[(#DIV|sinon{li}) class="fieldset"]>
+				<fieldset>
+					<legend><:medias_dereferencer:htaccess_legend:></legend>
+
+				<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+
+					[(#SAISIE{radio, apache,
+						label=<:medias_dereferencer:apache_label:>,
+						explication=<:medias_dereferencer:apache_explication:>,
+						datas=#ARRAY{
+							oui,<:medias_dereferencer:lier_document_choix_oui:>,
+							non,<:medias_dereferencer:lier_document_choix_non:>},
+						defaut=non})]
+
+					[(#SAISIE{radio, htaccess,
+						label=<:medias_dereferencer:htaccess_label:>,
+						explication=<:medias_dereferencer:htaccess_explication:>,
+						datas=#ARRAY{
+							oui,<:medias_dereferencer:lier_document_choix_oui:>,
+							non,<:medias_dereferencer:lier_document_choix_non:>},
+						defaut=non})]
+
+					[(#SAISIE{textarea, adresse_ip,
+						label=<:medias_dereferencer:adresse_ip_label:>,
+						explication=<:medias_dereferencer:adresse_ip_explication:>,
+						rows=5})]
+				</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+				</fieldset>
+			</[(#DIV|sinon{li})]>
+
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		<input type="hidden" name="_meta_casier" value="medias_dereferencer" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
