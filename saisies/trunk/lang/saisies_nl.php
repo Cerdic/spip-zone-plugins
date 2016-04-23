@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_dupliquer_copie' => '(copy)',
 	'construire_action_supprimer' => 'Verwijder',
 	'construire_ajouter_champ' => 'Voeg veld toe',
+	'construire_ajouter_groupe' => 'Een groep toevoegen',
 	'construire_attention_enregistrer' => 'Sla je wijzingen op!',
 	'construire_attention_modifie' => 'Het onderstaande formulier wijkt van het oorspronkelijke af. Je kunt het naar de oorspronkelijke staat herstellen.',
 	'construire_attention_supprime' => 'Je wijzigingen bevatten verwijderingen van velden. Bevestig de nieuwe formulierversie.',
@@ -138,6 +139,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_label' => 'Veldtype',
 	'option_type_password' => 'Verborgen tekst tijdens invoer (bv: wachtwoord)',
 	'option_type_text' => 'Normaal',
+	'option_valeur_non_explication' => 'Geposte waarde wanneer de checkbox niet wordt geselecteerd',
+	'option_valeur_non_label' => 'Waarde non',
+	'option_valeur_oui_explication' => 'Geposte waarde wanneer de checkbox is geselecteerd',
+	'option_valeur_oui_label' => 'Waarde oui',
 
 	// S
 	'saisie_auteurs_explication' => 'Laat je een of meer auteurs kiezen',
