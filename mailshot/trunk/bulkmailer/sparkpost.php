@@ -49,6 +49,11 @@ function &bulkmailer_sparkpost_dist($to_send,$options=array()){
 		"secure" => "non",
 	);
 
+	// reprendre le port specifique s'il est defini dans le facteur
+	if (lire_config("facteur_smtp_host") == 'smtp.sparkpostmail.com') {
+		$options['smtp']['port'] = lire_config('facteur_smtp_port', '587');
+	}
+
 	// on utilise une surcharge pour gerer le tracking
 	$options['sender_class'] = "FacteurSparkpost";
 

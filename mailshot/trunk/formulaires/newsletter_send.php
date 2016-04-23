@@ -105,5 +105,3 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 	return $res;
 }
 
-
-?>

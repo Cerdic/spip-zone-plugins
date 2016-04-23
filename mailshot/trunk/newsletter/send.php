@@ -208,4 +208,3 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 	return $erreur;
 }
 
-?>

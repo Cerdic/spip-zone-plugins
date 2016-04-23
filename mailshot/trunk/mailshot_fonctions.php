@@ -87,4 +87,3 @@ function mailshot_puce_statut($statut,$objet,$id_objet=0,$id_parent=0){
 }
 
 
-?>
