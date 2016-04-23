@@ -16,7 +16,7 @@
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_adresse_envoi})</span>]
 							<div class="choix">
 								<input type="radio" name="facteur_adresse_envoi" class="radio" value="non" id="facteur_adresse_envoi_non"[(#ENV{facteur_adresse_envoi,'non'}|=={non}|oui)checked="checked"]/>
-								<label for="facteur_adresse_envoi_non"><:facteur:utiliser_reglages_site:></label>
+								<label for="facteur_adresse_envoi_non"><:facteur:utiliser_reglages_site{from=#ENV{_from_defaut}}:></label>
 							</div>
 							<div class="choix">
 								<input type="radio" name="facteur_adresse_envoi" class="radio" value="oui" id="facteur_adresse_envoi_oui"[(#ENV{facteur_adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
@@ -32,6 +32,18 @@
 							<label for="facteur_adresse_envoi_email"><:facteur:facteur_adresse_envoi_email:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_adresse_envoi_email})</span>]
 							<input type="text" name="facteur_adresse_envoi_email" class="text" value="#ENV**{facteur_adresse_envoi_email}" id="facteur_adresse_envoi_email" />
+						</li>
+						#SET{name,facteur_forcer_from}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							<div class="choix">
+								#SET{val,non}
+								<input type="hidden" name="#GET{name}" value="#GET{val}" />
+								#SET{val,oui}
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}"><:facteur:label_facteur_forcer_from:></label>
+							</div>
 						</li>
 					</ul>
 				</fieldset>

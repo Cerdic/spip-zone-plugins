@@ -14,6 +14,7 @@ function formulaires_configurer_facteur_charger_dist(){
 		'facteur_adresse_envoi'       => lire_config('facteur_adresse_envoi'),
 		'facteur_adresse_envoi_nom'   => lire_config('facteur_adresse_envoi_nom'),
 		'facteur_adresse_envoi_email' => lire_config('facteur_adresse_envoi_email'),
+		'facteur_forcer_from'         => lire_config('facteur_forcer_from'),
 		'facteur_smtp'                => lire_config('facteur_smtp'),
 		'facteur_smtp_host'           => lire_config('facteur_smtp_host'),
 		'facteur_smtp_port'           => lire_config('facteur_smtp_port', 25),
@@ -31,6 +32,14 @@ function formulaires_configurer_facteur_charger_dist(){
 		'email_test'                  => lire_config('facteur_adresse_envoi')=='oui'?lire_config('facteur_adresse_envoi_email'):$GLOBALS['meta']['email_webmaster'],
 		'tester'                      => '',
 	);
+
+	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
+	include_spip('classes/facteur');
+	$facteur = new Facteur('','','','',array('adresse_envoi'=>'non'));
+	$valeurs['_from_defaut'] = $facteur->From;
+	if ($facteur->FromName){
+		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
+	}
 
 	return $valeurs;
 }
@@ -112,6 +121,9 @@ function formulaires_configurer_facteur_traiter_dist(){
 
 	$facteur_adresse_envoi_email = _request('facteur_adresse_envoi_email');
 	ecrire_meta('facteur_adresse_envoi_email', $facteur_adresse_envoi_email?$facteur_adresse_envoi_email:'');
+
+	$facteur_forcer_from = _request('facteur_forcer_from');
+	ecrire_meta('facteur_forcer_from', ($facteur_forcer_from=='oui')?'oui':'non');
 
 	$facteur_smtp = _request('facteur_smtp');
 	ecrire_meta('facteur_smtp', ($facteur_smtp=='oui')?'oui':'non');

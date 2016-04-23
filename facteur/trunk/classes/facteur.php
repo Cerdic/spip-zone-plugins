@@ -30,6 +30,17 @@ function facteur_log_debug($message,$level){
 
 
 class Facteur extends PHPMailer {
+	/**
+	 * From force si From pas dans le bon domaine
+	 * @var string
+	 */
+	public $ForceFrom = '';
+
+	/**
+	 * FromName force si From pas dans le bon domaine
+	 * @var string
+	 */
+	public $ForceFromName = '';
 
 	/**
 	 * @param $email
@@ -43,7 +54,7 @@ class Facteur extends PHPMailer {
 		// On récupère toutes les options par défaut depuis le formulaire de config
 		$defaut = array();
 		foreach (array(
-			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom',
+			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from',
 			'cc', 'bcc',
 			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
 			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender',
@@ -90,6 +101,14 @@ class Facteur extends PHPMailer {
 			else {
 				$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 			}
+		}
+
+		// si forcer_from, on sauvegarde le From et FromName par defaut, qui seront utilises
+		// si From n'est pas dans le meme domaine
+		// (utiliser le facteur avec un service externe qui necessite la validation des domaines d'envoi)
+		if ($options['forcer_from']=='oui'){
+			$this->ForceFrom = $this->From;
+			$this->ForceFromName = $this->FromName;
 		}
 
 		$this->CharSet = "utf-8";
@@ -392,7 +411,26 @@ class Facteur extends PHPMailer {
 	 * Appel des fonctions parents via le callWrapper qui se charge de loger les erreurs
 	 */
 
+	/**
+	 * Avant le Send() on force le From si besoin
+	 * @return bool
+	 * @throws phpmailerException
+	 */
 	public function Send() {
+		if ($this->ForceFrom
+			AND $this->From!==$this->ForceFrom){
+			$forcedomain = explode('@',$this->ForceFrom);
+			$forcedomain = end($forcedomain);
+			$domain = explode('@',$this->From);
+			$domain = end($domain);
+			if ($domain!==$forcedomain){
+				// le From passe en ReplyTo
+				$this->AddReplyTo($this->From,$this->FromName);
+				// on force le From
+				$this->From = $this->ForceFrom;
+				$this->FromName = $this->ForceFromName;
+			}
+		}
 		$args = func_get_args();
 		return $this->callWrapper(array('parent','Send'),$args);
 	}

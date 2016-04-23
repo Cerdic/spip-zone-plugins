@@ -53,6 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender_descriptif' => 'Définit dans l’entête du mail l’adresse email de retour des erreurs (ou Return-Path)',
 	'facteur_smtp_username' => 'Nom d’utilisateur :',
 
+	'label_facteur_forcer_from' => 'Forcer cette adresse d’envoi quand le <tt>From</tt> n’est pas sur le même domaine',
+
 	// M
 	'message_identite_email' => 'La configuration du plugin "facteur" surcharge cette adresse email pour l’envoi de courriels.',
 
@@ -68,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Utiliser la fonction mail de PHP',
-	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : le nom affiché sera le nom du site SPIP et l’adresse email sera celle du webmaster',
+	'utiliser_reglages_site' => 'Utiliser les réglages du site SPIP : <br /><tt>@from@</tt>',
 	'utiliser_smtp' => 'Utiliser SMTP',
 
 	// V
