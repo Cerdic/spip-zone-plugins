@@ -90,7 +90,14 @@ function formulaires_editer_polyhierarchie_traiter($objet, $id_objet, $retour=''
 	$id_parents = array_diff($ids,array($id_parent));
 
 	include_spip('inc/polyhier');
-	polyhier_set_parents($id_objet,$objet,$id_parents,$serveur);
+	$changed = polyhier_set_parents($id_objet, $objet, $id_parents, $serveur);
+	if (count($changed['add']) OR count($changed['remove'])){
+		$statut = sql_getfetsel("statut", table_objet_sql($objet), id_table_objet($objet)."=".intval($id_objet));
+		// si l'objet est publie, repercuter le statut sur les rubriques quittes ou ajoutees
+		if ($statut == 'publie') {
+			polyhier_calculer_rubriques_if($id_parents, $changed, $statut);
+		}
+	}
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');
