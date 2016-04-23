@@ -9,9 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée',
-	'configuration_adresse_envoi' => 'Configuration de l’adresse d’envoi',
+	'configuration_adresse_envoi' => 'Adresse d’envoi par défaut',
 	'configuration_facteur' => 'Facteur',
-	'configuration_mailer' => 'Configuration du mailer',
+	'configuration_mailer' => 'Méthode d’envoi',
 	'configuration_smtp' => 'Choix de la méthode d’envoi de mail',
 	'configuration_smtp_descriptif' => 'Si vous n’êtes pas sûrs, choisissez la fonction mail de PHP.',
 	'corps_email_de_test' => 'Ceci est un email de test accentué',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Nom :',
 	'facteur_bcc' => 'Copie Cachée (BCC) :',
 	'facteur_cc' => 'Copie (CC) :',
-	'facteur_copies' => 'Copies :',
+	'facteur_copies' => 'Copies',
 	'facteur_copies_descriptif' => 'Un email sera envoyé en copie aux adresses définies. Une seule adresse en copie et/ou une seule adresse en copie cachée.',
 	'facteur_email_test' => 'Envoyer un email de test à :',
 	'facteur_filtre_accents' => 'Transformer les accents en leur entités html (utile pour Hotmail notamment).',
@@ -49,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'non',
 	'facteur_smtp_secure_ssl' => 'SSL (déprécié)',
 	'facteur_smtp_secure_tls' => 'TLS (recommandé)',
-	'facteur_smtp_sender' => 'Retour des erreurs (optionnel)',
-	'facteur_smtp_sender_descriptif' => 'Définit dans l’entête du mail l’adresse email de retour des erreurs (ou Return-Path), et lors d’un envoi via la méthode SMTP cela définit aussi l’adresse de l’envoyeur.',
+	'facteur_smtp_sender' => 'Adresse de retour des erreurs (optionnel)',
+	'facteur_smtp_sender_descriptif' => 'Définit dans l’entête du mail l’adresse email de retour des erreurs (ou Return-Path)',
 	'facteur_smtp_username' => 'Nom d’utilisateur :',
 
 	// M
