@@ -15,8 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_outils_actifs' => 'Actieve tools',
 
 	// O
+	'outil_inserer_cadre_biblatex' => 'Voeg een geformatteerde BibLaTeX (kader) code toe',
+	'outil_inserer_cadre_bibtex' => 'Voeg een geformatteerde BibTeX (kader) code toe',
 	'outil_inserer_cadre_css' => 'Geformatteerde CSS-code invoegen (kader)',
 	'outil_inserer_cadre_html' => 'Geformatteerde HTML-code invoegen (kader)',
+	'outil_inserer_cadre_latex' => 'Voeg een geformatteerde LaTeX (kader) code toe',
 	'outil_inserer_cadre_php' => 'Geformatteerde PHP-code invoegen (kader)',
 	'outil_inserer_cadre_spip' => 'Geformatteerde SPIP-code invoegen (kader)',
 	'outil_inserer_cadre_xml' => 'Geformatteerde XML-code invoegen (kader)',
