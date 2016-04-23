@@ -129,7 +129,6 @@ class Facteur extends PHPMailer {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $options['smtp_host'];
 			$this->Port 	= $options['smtp_port'];
-			$this->From     = (!empty($options['smtp_sender'])) ? $options['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
 
 			// SMTP authentifié
 			if ($options['smtp_auth'] == 'oui') {
