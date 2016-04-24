@@ -19,7 +19,7 @@ function action_installer_vocabulaire_dist($arg = null) {
     // On va ce servir des fonctions des gestions des fichiers
     // Elle consomme beaucoup moins de mémoire que les autres.
     $open = fopen($fichier_open, 'r');
-    for ($i = 0; $i < 1000; $i++) {
+    for ($i = 0; $i < _VOCABULAIRE_CADENCE; $i++) {
         // On ce positionne sur le pointer courant
         fseek($open, $pointer);
         // On lit la ligne
