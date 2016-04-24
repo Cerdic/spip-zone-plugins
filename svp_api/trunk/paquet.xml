@@ -2,7 +2,7 @@
 	prefix="svpapi"
 	categorie="outil"
 	version="0.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="svpapi_logo-64.png"
 >
@@ -10,7 +10,7 @@
 	<nom>API HTTP pour SVP</nom>
 	<!-- Une API REST pour interroger un serveur de plugins SVP -->
 
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 

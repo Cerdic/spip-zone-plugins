@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
@@ -31,11 +31,11 @@ function requete_verifier_format($valeur, &$erreur) {
 
 
 /**
- * Détermine si la valeur du crtière compatibilité SPIP est valide.
- * La fonction compare uniquement la structure de la chaine passée qui doit être un numéro de version ou de branche.
+ * Détermine si la collection demandée est valide.
+ * Le service ne fournit que la collection plugins.
  *
  * @param string $valeur
- * 		La valeur du critère compatibilite SPIP
+ * 		La valeur de la collection demandée
  *
  * @return boolean
  * 		True si la valeur est valide, false sinon.
@@ -53,6 +53,59 @@ function requete_verifier_collection($valeur, &$erreur) {
 	}
 
 	return $collection_valide;
+}
+
+
+/**
+ * Détermine si la collection demandée est valide.
+ * Le service ne fournit que la collection plugins.
+ *
+ * @param string $valeur
+ * 		La valeur de la collection demandée
+ *
+ * @return boolean
+ * 		True si la valeur est valide, false sinon.
+ */
+function requete_verifier_ressource($valeur, &$erreur) {
+	$ressource_valide = true;
+
+	if (!in_array($valeur, array('plugin'))) {
+		$erreur = array(
+			'status'	=> 400,
+			'type'		=> 'ressource_nok',
+			'element'	=> 'ressource',
+			'valeur'	=> $valeur);
+		$ressource_valide = false;
+	}
+
+	return $ressource_valide;
+}
+
+
+/**
+ * Détermine si la valeur du préfixe de plugin est valide.
+ * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
+ * celui d'un nom de variable.
+ *
+ * @param string $valeur
+ * 		La valeur du préfixe
+ *
+ * @return boolean
+ * 		True si la valeur est valide, false sinon.
+ */
+function requete_verifier_prefixe($valeur, &$erreur) {
+	$prefixe_valide = true;
+
+	if (!preg_match('#^(\w){2,}$#', strtolower($valeur))) {
+		$erreur = array(
+			'status'	=> 400,
+			'type'		=> 'prefixe_nok',
+			'element'	=> 'prefixe',
+			'valeur'	=> $valeur);
+		$prefixe_valide = false;
+	}
+
+	return $prefixe_valide;
 }
 
 
@@ -108,7 +161,7 @@ function requete_verifier_critere_categorie($valeur) {
 
 /**
  * Détermine si la valeur du critère compatibilité SPIP est valide.
- * La fonction compare uniquement la structure de la chaine passée qui doit être cohérent avec
+ * La fonction compare uniquement la structure de la chaine passée qui doit être cohérente avec
  * un numéro de version ou de branche.
  *
  * @param string $valeur

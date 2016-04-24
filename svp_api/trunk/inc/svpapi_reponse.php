@@ -36,8 +36,7 @@ function reponse_initialiser_contenu($requete) {
 		'requete'	=> $demande,
 		'erreur'	=> $erreur,
 		'schema' 	=> $schema,
-		'items'		=> array(),
-		'format'	=> 'json');
+		'items'		=> array());
 
 	return $contenu;
 }
@@ -69,13 +68,12 @@ function reponse_expliquer_erreur($erreur) {
  *
  * @return mixed
  */
-function reponse_construire($reponse, $contenu) {
+function reponse_construire($reponse, $contenu, $format_reponse) {
 
 	$reponse->setCharset('utf-8');
 	$reponse->setStatusCode($contenu['erreur']['status']);
-	$reponse->setContent('');
 
-	if ($contenu['format'] == 'json') {
+	if ($format_reponse == 'json') {
 		$reponse->headers->set('Content-Type', 'application/json');
 		$reponse->setContent(json_encode($contenu));
 	}

@@ -9,7 +9,8 @@ if (!defined('_ECRIRE_INC_VERSION'))
  */
 
 /**
- * Rien, car en Atom il n'y a malheureusement pas de gestion des erreurs pour l'instant
+ * Traitement des erreurs directements détectées par le serveur HTTP abstrait.
+ * Elles sont mises au format de l'API SVP et fournie au client en JSON.
  *
  * @param int $code Le code HTTP de l'erreur à générer
  * @return string Retourne une chaîne vide
@@ -18,18 +19,27 @@ function http_svp_erreur_dist($code, $requete, $reponse){
 
 	include_spip('inc/svpapi_reponse');
 
-	// Construction du contenu de la réponse. Deux cas possibles:
-	// -- erreur détectée par le serveur HTTP abstrait : le contenu n'est pas initialisé
-	//    et on utilise les messages générique du serveur HTTP
+	// Construction du contenu de la réponse:
+	// Comme l'erreur est détectée par le serveur HTTP abstrait, le contenu n'est pas initialisé.
+	// Il faut donc l'initialiser selon la structure imposée par l'API.
 	$contenu = reponse_initialiser_contenu($requete);
 
+	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
 	$contenu['erreur']['statut'] = $code;
 	$contenu['erreur']['type'] = '';
 	$contenu['erreur']['title'] = _T('http:erreur_' . $contenu['erreur']['statut'] . '_titre');
 	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['statut'] . '_message');
 
-	// Finaliser la réponse
-	$reponse = reponse_construire($reponse, $contenu);
+	// Détermination du format de la réponse. Etant donné que l'on traite déjà une erreur, on ne se préoccupe pas
+	// pas d'une éventuelle erreur sur le format, on utilisera dans ce cas le JSON.
+	$format_reponse = 'json';
+	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+		// On positionne le format de sortie car on sait que celui demandé est valide
+		$format_reponse = $contenu['requete']['format'];
+	}
+
+	// Finaliser la réponse selon le format demandé.
+	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
 
 	return $reponse;
 }
@@ -56,16 +66,18 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	include_spip('inc/svpapi_requete');
 	include_spip('inc/svpapi_reponse');
 
-	// Initialisation du format de sortie du contenu de la réponse
+	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
 	$contenu = reponse_initialiser_contenu($requete);
 	$erreur = array();
+	$format_reponse = 'json';
 
 	// Vérification du format de sortie demandé
 	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
 		// On positionne cette fois le format de sortie car on sait que celui demandé est valide
-		$contenu['format'] = $contenu['requete']['format'];
+		$format_reponse = $contenu['requete']['format'];
 		// Vérification du nom de la collection
 		if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
+			$items = array();
 			// Récupération de la collection en fonction des critères appliqués
 			$from = array('spip_plugins', 'spip_depots_plugins AS dp');
 			$select = array('*');
@@ -85,21 +97,21 @@ function http_svp_get_collection_dist($requete, $reponse) {
 					}
 				}
 				$plugins = sql_allfetsel($select, $from, $where, $group_by);
-				$items = array();
 				if ($plugins) {
 					// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par les préfixes.
 					foreach ($plugins as $_plugin) {
 						unset($_plugin['id_plugin']);
+						unset($_plugin['id_depot']);
 						$items[$_plugin['prefixe']] = $_plugin;
 					}
 				}
 				$contenu['items'] = $items;
-				$contenu['nb_items'] = count($items);
+				$contenu['nb_plugins'] = count($items);
 			}
 		}
 	}
 
-	// Si la réponse est une erreur, on complète le contenu avec les information issues de la
+	// Si la réponse est une erreur, on complète le contenu avec les informations issues de la
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
@@ -107,7 +119,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	}
 
 	// Construction de la réponse finale
-	$reponse = reponse_construire($reponse, $contenu);
+	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
 
 	return $reponse;
 }
@@ -126,28 +138,84 @@ function http_svp_get_collection_dist($requete, $reponse) {
  * 		Objet réponse complétée (status, contenu de la ressource...).
  */
 function http_svp_get_ressource_dist($requete, $reponse){
-	// Pour l'instant on va simplement chercher un squelette du nom de la ressource
-	// Le squelette prend en contexte les paramètres du GET + l'identifiant de la ressource en essayant de faire au mieux
-	include_spip('base/objets');
-	$collection = $requete->attributes->get('collection');
-	$ressource = $requete->attributes->get('ressource');
-	$cle = id_table_objet($collection);
-	$contexte = array(
-		$cle => $ressource,
-		'ressource' => $ressource,
-	);
-	$contexte = array_merge($requete->query->all(), $contexte);
-	
-	if ($flux = recuperer_fond("http/atom/$collection-ressource", $contexte)){
-		$reponse->setStatusCode(200);
-		$reponse->setCharset('utf-8');
-		$reponse->headers->set('Content-Type', 'application/atom+xml');
-		$reponse->setContent($flux);
+
+	include_spip('inc/svpapi_requete');
+	include_spip('inc/svpapi_reponse');
+
+	// Initialisation du format de sortie du contenu de la réponse, du bloc d'erreur et du format de sortie en JSON
+	$contenu = reponse_initialiser_contenu($requete);
+	$erreur = array();
+	$format_reponse = 'json';
+
+	// Vérification du format de sortie demandé
+	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+		// On positionne le format de sortie qui sera utilisé car on sait que celui demandé est valide
+		$format_reponse = $contenu['requete']['format'];
+		// Vérification du nom de la collection
+		if (requete_verifier_ressource($contenu['requete']['collection'], $erreur)) {
+			// Vérification du préfixe de la ressource
+			if (requete_verifier_prefixe($contenu['requete']['ressource'], $erreur)) {
+				$prefixe = strtoupper($contenu['requete']['ressource']);
+				$items = array();
+				// On recherche d'abord le plugin par son préfixe dans la table spip_plugins en vérifiant que
+				// c'est bien un plugin fourni pas un dépôt et pas un plugin installé sur le serveur uniquement
+				$from = array('spip_plugins', 'spip_depots_plugins AS dp');
+				$select = array('*');
+				$where = array(
+					'prefixe=' . sql_quote($prefixe),
+					'dp.id_depot>0',
+					'dp.id_plugin=spip_plugins.id_plugin');
+				$group_by = array('spip_plugins.id_plugin');
+				$plugin = sql_fetsel($select, $from, $where, $group_by);
+				if ($plugin) {
+					// On refactore le tableau de sortie du fetsel en supprimant les colonnes id_depot et id_plugin qui ne
+					// sont d'aucune utilité pour le service.
+					unset($plugin['id_plugin']);
+					unset($plugin['id_depot']);
+					$items['plugin'] = $plugin;
+
+					// On recherche maintenant les paquets du plugin
+					$from = array('spip_paquets');
+					$select = array('*');
+					$where = array(
+						'prefixe=' . sql_quote($prefixe),
+						'id_depot>0');
+					$paquets = sql_allfetsel($select, $from, $where);
+					$items['paquets'] = array();
+					if ($paquets) {
+						// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par archives zip.
+						$champs_inutiles = array(
+							'id_paquet', 'id_plugin', 'id_depot',
+							'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature');
+						foreach ($paquets as $_paquet) {
+							foreach ($champs_inutiles as $_champ) {
+								unset($_paquet[$_champ]);
+							}
+							$items['paquets'][$_paquet['nom_archive']] = $_paquet;
+						}
+					}
+				} else {
+					// On renvoie une erreur 404 pour indiquer que le plugin n'existe pas
+					$erreur = array(
+						'status'	=> 404,
+						'type'		=> 'plugin_nok',
+						'element'	=> 'plugin',
+						'valeur'	=> $contenu['requete']['ressource']);
+				}
+				$contenu['items'] = $items;
+			}
+		}
 	}
-	// Si on ne trouve rien c'est que ça n'existe pas
-	else{
-		$reponse->setStatusCode(404);
+
+	// Si la réponse est une erreur, on complète le contenu avec les informations issues de la
+	// vérification, le titre et le détail de l'erreur.
+	if ($erreur) {
+		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
+		$contenu['erreur'] = array_merge($contenu['erreur'], reponse_expliquer_erreur($contenu['erreur']));
 	}
-	
+
+	// Construction de la réponse finale
+	$reponse = reponse_construire($reponse, $contenu, $format_reponse);
+
 	return $reponse;
 }
