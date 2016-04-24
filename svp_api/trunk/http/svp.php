@@ -1,8 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION'))
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
 
 /*
  * Implémentation d'un serveur REST pour SVP
@@ -12,10 +13,13 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * Traitement des erreurs directements détectées par le serveur HTTP abstrait.
  * Elles sont mises au format de l'API SVP et fournie au client en JSON.
  *
- * @param int $code Le code HTTP de l'erreur à générer
- * @return string Retourne une chaîne vide
+ * @param int $code
+ *        Le code HTTP de l'erreur à générer
+ *
+ * @return string
+ *        Retourne une chaîne vide
  */
-function http_svp_erreur_dist($code, $requete, $reponse){
+function http_svp_erreur_dist($code, $requete, $reponse) {
 
 	include_spip('inc/svpapi_reponse');
 
@@ -25,10 +29,10 @@ function http_svp_erreur_dist($code, $requete, $reponse){
 	$contenu = reponse_initialiser_contenu($requete);
 
 	// Description de l'erreur : pour les messages, on utilise ceux du plugin serveur HTTP abstrait.
-	$contenu['erreur']['statut'] = $code;
+	$contenu['erreur']['status'] = $code;
 	$contenu['erreur']['type'] = '';
-	$contenu['erreur']['title'] = _T('http:erreur_' . $contenu['erreur']['statut'] . '_titre');
-	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['statut'] . '_message');
+	$contenu['erreur']['title'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_titre');
+	$contenu['erreur']['detail'] = _T('http:erreur_' . $contenu['erreur']['status'] . '_message');
 
 	// Détermination du format de la réponse. Etant donné que l'on traite déjà une erreur, on ne se préoccupe pas
 	// pas d'une éventuelle erreur sur le format, on utilisera dans ce cas le JSON.
@@ -48,18 +52,19 @@ function http_svp_erreur_dist($code, $requete, $reponse){
 /**
  * Fait un GET sur une collection de plugins.
  * La requête est du type /svp/plugins et renvoie les objets plugin contenu dans la base du serveur (hors les plugins
- * installés). Il est possible de filtrer cette requête par catégorie /svp/plugins&categorie=outil et/ou par compatibilité SPIP.
+ * installés). Il est possible de filtrer cette requête par catégorie /svp/plugins&categorie=outil et/ou par
+ * compatibilité SPIP.
  *
- * @param object	$requete
- * 		Objet matérialisant la requête faite au serveur SVP.
- * @param object	$reponse
- * 		Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
- * 		complétée avant d'être retourné par la fonction.
+ * @param object $requete
+ *        Objet matérialisant la requête faite au serveur SVP.
+ * @param object $reponse
+ *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *        complétée avant d'être retourné par la fonction.
  *
  * @return object
- * 		Objet réponse complétée (status, contenu de la ressource...).
- * 		La fonction peut lever une erreur sur le format de sortie, la collection et sur les critères de filtre,
- * 		catégorie et compatibilité SPIP.
+ *        Objet réponse complétée (status, contenu de la ressource...).
+ *        La fonction peut lever une erreur sur le format de sortie, la collection et sur les critères de filtre,
+ *        catégorie et compatibilité SPIP.
  */
 function http_svp_get_collection_dist($requete, $reponse) {
 
@@ -87,7 +92,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 			if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
 				// Si il y a des critères additionnels on complète le where en conséquence
 				if ($contenu['requete']['criteres']) {
-					foreach($contenu['requete']['criteres'] as $_critere => $_valeur) {
+					foreach ($contenu['requete']['criteres'] as $_critere => $_valeur) {
 						if ($_critere == 'compatible_spip') {
 							$f_critere = charger_fonction('where_compatible_spip', 'inc');
 							$where[] = $f_critere($_valeur, 'spip_plugins', '>');
@@ -128,16 +133,16 @@ function http_svp_get_collection_dist($requete, $reponse) {
 /**
  * Fait un GET sur une ressource de type plugin identifié par son préfixe.
  *
- * @param object	$requete
- * 		Objet matérialisant la requête faite au serveur SVP.
- * @param object	$reponse
- * 		Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
- * 		complétée avant d'être retourné par la fonction.
+ * @param object $requete
+ *        Objet matérialisant la requête faite au serveur SVP.
+ * @param object $reponse
+ *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *        complétée avant d'être retourné par la fonction.
  *
  * @return object
- * 		Objet réponse complétée (status, contenu de la ressource...).
+ *        Objet réponse complétée (status, contenu de la ressource...).
  */
-function http_svp_get_ressource_dist($requete, $reponse){
+function http_svp_get_ressource_dist($requete, $reponse) {
 
 	include_spip('inc/svpapi_requete');
 	include_spip('inc/svpapi_reponse');
@@ -164,7 +169,8 @@ function http_svp_get_ressource_dist($requete, $reponse){
 				$where = array(
 					'prefixe=' . sql_quote($prefixe),
 					'dp.id_depot>0',
-					'dp.id_plugin=spip_plugins.id_plugin');
+					'dp.id_plugin=spip_plugins.id_plugin'
+				);
 				$group_by = array('spip_plugins.id_plugin');
 				$plugin = sql_fetsel($select, $from, $where, $group_by);
 				if ($plugin) {
@@ -179,14 +185,16 @@ function http_svp_get_ressource_dist($requete, $reponse){
 					$select = array('*');
 					$where = array(
 						'prefixe=' . sql_quote($prefixe),
-						'id_depot>0');
+						'id_depot>0'
+					);
 					$paquets = sql_allfetsel($select, $from, $where);
 					$items['paquets'] = array();
 					if ($paquets) {
 						// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par archives zip.
 						$champs_inutiles = array(
 							'id_paquet', 'id_plugin', 'id_depot',
-							'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature');
+							'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature'
+						);
 						foreach ($paquets as $_paquet) {
 							foreach ($champs_inutiles as $_champ) {
 								unset($_paquet[$_champ]);
@@ -197,10 +205,11 @@ function http_svp_get_ressource_dist($requete, $reponse){
 				} else {
 					// On renvoie une erreur 404 pour indiquer que le plugin n'existe pas
 					$erreur = array(
-						'status'	=> 404,
-						'type'		=> 'plugin_nok',
-						'element'	=> 'plugin',
-						'valeur'	=> $contenu['requete']['ressource']);
+						'status'  => 404,
+						'type'    => 'plugin_nok',
+						'element' => 'plugin',
+						'valeur'  => $contenu['requete']['ressource']
+					);
 				}
 				$contenu['items'] = $items;
 			}
