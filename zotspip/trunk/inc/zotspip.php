@@ -204,6 +204,13 @@ function zotspip_maj_items($forcer=false, $n=NULL) {
 				if (isset($data[$zot]))
 					$insertion[$spip] = $data[$zot];
 			
+			// Récupérer l'année (car zapi:year n'est plus disponible depuis la v3 de l'API)
+			// On récupère donc dans la date une suite de 4 chiffres
+			if (isset($insertion['date'])) {
+				if (preg_match('#([0-9]{4})#',trim($insertion['date']),$matches))
+					$insertion['annee'] = $matches[1];
+			}
+			
 			// Vider le cache des documents distants
 			if ($insertion['type_ref'] == 'attachment') {
 				include_spip('inc/invalideur');
