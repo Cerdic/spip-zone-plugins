@@ -42,18 +42,12 @@ function vocabulaire_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function vocabulaire_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table('spip_dict_fr');
+	sql_drop_table('spip_vocabulaires');
 
 	# Nettoyer les versionnages et forums
-	sql_delete('spip_versions', sql_in('objet', array('dict_fr')));
-	sql_delete('spip_versions_fragments', sql_in('objet', array('dict_fr')));
-	sql_delete('spip_forum', sql_in('objet', array('dict_fr')));
+	sql_delete('spip_versions', sql_in('objet', array('vocabulaire')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('vocabulaire')));
+	sql_delete('spip_forum', sql_in('objet', array('vocabulaire')));
 
 	effacer_meta($nom_meta_base_version);
-}
-
-function installer_vocabulaire($fichier = 'vocabulaires/fr.txt') {
-    include_spip('inc/headers');
-    $url = generer_action_auteur('installer_vocabulaire', $fichier.'|0', '', true);
-    redirige_par_entete($url);
 }
