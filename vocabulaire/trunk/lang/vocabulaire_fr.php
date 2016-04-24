@@ -6,5 +6,5 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'dictionnaire_fr_titre' => 'Dictionnaire français',
+	'installer' => 'Installer un vocabulaire'
 );
