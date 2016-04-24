@@ -1,0 +1,19 @@
+<paquet
+	prefix="svpapi"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="svpapi_logo-64.png"
+>
+
+	<nom>API HTTP pour SVP</nom>
+	<!-- Une API REST pour interroger un serveur de plugins SVP -->
+
+	<auteur>Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<necessite nom="svp" compatibilite="[0.78.11;[" />
+	<necessite nom="http" compatibilite="[1.2.0;]" />
+</paquet>
