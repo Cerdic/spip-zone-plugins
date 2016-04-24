@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'پيكربندي پستجي ثبت شده است.',
-	'configuration_adresse_envoi' => 'پيكربندي نشاني نامه ',
+	'configuration_adresse_envoi' => 'پيكربندي نشاني نامه ', # MODIF
 	'configuration_facteur' => 'پستچي',
-	'configuration_mailer' => 'پيكربندي نامه‌ رسان',
+	'configuration_mailer' => 'پيكربندي نامه‌ رسان', # MODIF
 	'configuration_smtp' => 'انتخاب روش ارسال نامه',
 	'configuration_smtp_descriptif' => 'اگر در مورد تنظيمات مطمئن نيستيد، بگذاريد «پي.اچ.پي ميل» تنظيم كند. ',
 	'corps_email_de_test' => 'اين يك ايميل آزمايشي است.',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'نام:‌',
 	'facteur_bcc' => 'كپي مخفي (بي.سي.سي): ',
 	'facteur_cc' => 'كپي غيرمخفي (سي.سي): ',
-	'facteur_copies' => 'كپي‌ها:‌',
+	'facteur_copies' => 'كپي‌ها:‌', # MODIF
 	'facteur_copies_descriptif' => 'يك ايميل به نشاني مشخص شده ارسال خواهد شد. يك كپي غير مخفي و/يا يك كپي مخفي.',
 	'facteur_filtre_accents' => 'تبديل اكسان‌ها به اچ.تي.ام.ال (براي هاتميل مفيد است)',
 	'facteur_filtre_css' => 'تبديل استايل‌هاي مطالب بين <head> و </head> به استايل‌هاي  درخط، مفيد براي وب‌ميل‌ها، زيرا استايل‌هاي درخط بر استايل‌هاي بيروني اولويت مي‌يابند.',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'نه',
 	'facteur_smtp_secure_ssl' => 'اس.اس.ال', # MODIF
 	'facteur_smtp_secure_tls' => 'تي.ال.اس', # MODIF
-	'facteur_smtp_sender' => 'برگشت خطاها (دلبخواه)',
-	'facteur_smtp_sender_descriptif' => 'تعيين مسير برگشت در بالاي ايميل مفيد براي خطاي فيدبك، همچنين در حالت اس.ام.تي.پي (پروتكل انتقال ساده نامه) فرستنده نامه را مشخص مي‌كمند. ',
+	'facteur_smtp_sender' => 'برگشت خطاها (دلبخواه)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'تعيين مسير برگشت در بالاي ايميل مفيد براي خطاي فيدبك، همچنين در حالت اس.ام.تي.پي (پروتكل انتقال ساده نامه) فرستنده نامه را مشخص مي‌كمند. ', # MODIF
 	'facteur_smtp_username' => 'نام كاربر:‌',
 
 	// M
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'ار كاركرد نامه پي.اچ.پي استفاده كنيد',
-	'utiliser_reglages_site' => 'استفاده از تنظيمات سايت اسپيپ: نام وب سايت نام فرستنده خواهد بود و نشاني ايميل نشاني ايميل وب مستر خواهد بود. ',
+	'utiliser_reglages_site' => 'استفاده از تنظيمات سايت اسپيپ: نام وب سايت نام فرستنده خواهد بود و نشاني ايميل نشاني ايميل وب مستر خواهد بود. ', # MODIF
 	'utiliser_smtp' => 'از اس.ام.تي.پي (پروتكل ارسال ساده نامه)‌ اسفتاده كنيد',
 
 	// V

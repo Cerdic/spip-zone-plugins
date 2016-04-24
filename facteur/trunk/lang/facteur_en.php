@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'Postman’s configuration is now saved',
-	'configuration_adresse_envoi' => 'Sender’s address configuration',
+	'configuration_adresse_envoi' => 'Sender’s address configuration', # MODIF
 	'configuration_facteur' => 'Postman',
-	'configuration_mailer' => 'Mailer’s configuration',
+	'configuration_mailer' => 'Mailer’s configuration', # MODIF
 	'configuration_smtp' => 'Choose your mailer',
 	'configuration_smtp_descriptif' => 'If you’re not sure about the settings, leave them set to "PHP mail".',
 	'corps_email_de_test' => 'This is a test email',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Name:',
 	'facteur_bcc' => 'Blind Carbon Copy (BCC):',
 	'facteur_cc' => 'Carbon Copy (CC):',
-	'facteur_copies' => 'Copies:',
+	'facteur_copies' => 'Copies:', # MODIF
 	'facteur_copies_descriptif' => 'An email will be sent to specified adresses. One Carbon Copy and/or one Blind Carbon Copy.',
 	'facteur_filtre_accents' => 'Transform accents into their html entities (useful for Hotmail).',
 	'facteur_filtre_css' => 'Transform styles present between &lt;head&gt; and &lt;/head&gt; into inline styles, useful for webmails because inline styles overwrite external styles.',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'no',
 	'facteur_smtp_secure_ssl' => 'SSL (depreciated)',
 	'facteur_smtp_secure_tls' => 'TLS (recommended)',
-	'facteur_smtp_sender' => 'Return-Path (optional)',
-	'facteur_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender’s email.',
+	'facteur_smtp_sender' => 'Return-Path (optional)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender’s email.', # MODIF
 	'facteur_smtp_username' => 'Username:',
 
 	// M
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Use mail function from PHP',
-	'utiliser_reglages_site' => 'Use the site’s settings: the email address is the webmaster’s one and the name of the website is the name of the sender',
+	'utiliser_reglages_site' => 'Use the site’s settings: the email address is the webmaster’s one and the name of the website is the name of the sender', # MODIF
 	'utiliser_smtp' => 'Use SMTP',
 
 	// V

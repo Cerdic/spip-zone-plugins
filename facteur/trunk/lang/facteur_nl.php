@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'De configuratie is opgeslagen',
-	'configuration_adresse_envoi' => 'Configuratie van het verzendadres',
+	'configuration_adresse_envoi' => 'Configuratie van het verzendadres', # MODIF
 	'configuration_facteur' => 'Postbode',
-	'configuration_mailer' => 'Configuratie van de mailer',
+	'configuration_mailer' => 'Configuratie van de mailer', # MODIF
 	'configuration_smtp' => 'Verzendwijze',
 	'configuration_smtp_descriptif' => 'Kies, wanneer je twijfelt voor de functie PHP mail.',
 	'corps_email_de_test' => 'Dit is een geaccentueerd testbericht',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Naam:',
 	'facteur_bcc' => 'Verborgen (BCC) :',
 	'facteur_cc' => 'Kopie (CC) :',
-	'facteur_copies' => 'Kopieën:',
+	'facteur_copies' => 'Kopieën:', # MODIF
 	'facteur_copies_descriptif' => 'Deze adressen worden in kopie van de email gezet. Niet meer dan één adres in kopie en/of in verborgen kopie.',
 	'facteur_email_test' => 'Een test email sturen naar:',
 	'facteur_filtre_accents' => 'Zet tekens met accenten om in hun html-code (met name voor Hotmail).',
@@ -51,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'nee',
 	'facteur_smtp_secure_ssl' => 'SSL (gedeprecieerd)',
 	'facteur_smtp_secure_tls' => 'TLS (aanbevolen)',
-	'facteur_smtp_sender' => 'Return-Path (optioneel)',
-	'facteur_smtp_sender_descriptif' => 'Geef het Return-Path voor de mail aan, bv voor feedback. In SMTP bepaalt het het emailadres van de verzender.',
+	'facteur_smtp_sender' => 'Return-Path (optioneel)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Geef het Return-Path voor de mail aan, bv voor feedback. In SMTP bepaalt het het emailadres van de verzender.', # MODIF
 	'facteur_smtp_username' => 'Naam van de gebruiker:',
 
 	// M
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Gebruik de PHP mail functie',
-	'utiliser_reglages_site' => 'Gebruik de instellingen van SPIP: de getoonde naam is die van de site en het adres dat van de webmaster',
+	'utiliser_reglages_site' => 'Gebruik de instellingen van SPIP: de getoonde naam is die van de site en het adres dat van de webmaster', # MODIF
 	'utiliser_smtp' => 'Gebruik SMTP',
 
 	// V

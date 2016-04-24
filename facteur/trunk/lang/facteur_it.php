@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'La configurazione di Facteur è stata registrata',
-	'configuration_adresse_envoi' => 'Configurazione dell’indirizzo emittente',
-	'configuration_mailer' => 'Configurazione del mailer',
+	'configuration_adresse_envoi' => 'Configurazione dell’indirizzo emittente', # MODIF
+	'configuration_mailer' => 'Configurazione del mailer', # MODIF
 	'configuration_smtp' => 'Scelta del metodo d’invio di mail',
 	'configuration_smtp_descriptif' => 'Se no siete sicuri, scegliete la funzione mail di PHP.',
 	'corps_email_de_test' => 'Questo è un mail di prova con accento',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Cognome:',
 	'facteur_bcc' => 'Copia nascosta (CCN):',
 	'facteur_cc' => 'Copia (CC):',
-	'facteur_copies' => 'Copie:',
+	'facteur_copies' => 'Copie:', # MODIF
 	'facteur_copies_descriptif' => 'Una mail sarà mandata in copia agli indirizzi definiti. Un solo indirizzo in copia e/o un solo indirizzo in copia nascosta.',
 	'facteur_filtre_accents' => 'Trasformate gli accenti nella loro entity html (utile sopratutto per Hotmail).',
 	'facteur_filtre_css' => 'Trasformare gli stili contenuti tra <head> e </head> negli stili "in linea", utile per le webmail perché gli stili in linea hanno la precedenza sugli stili estermi.',
@@ -49,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'no',
 	'facteur_smtp_secure_ssl' => 'SSL', # MODIF
 	'facteur_smtp_secure_tls' => 'TLS', # MODIF
-	'facteur_smtp_sender' => 'Resoconto degli errori (opzionale)',
-	'facteur_smtp_sender_descriptif' => 'Definisce nella testata della mail l’indirizzo mail di resoconto degli errori (o Return-Path), e durante l’invio tramite il metodo SMTP definisce anche l’indirizzo del mittente.',
+	'facteur_smtp_sender' => 'Resoconto degli errori (opzionale)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Definisce nella testata della mail l’indirizzo mail di resoconto degli errori (o Return-Path), e durante l’invio tramite il metodo SMTP definisce anche l’indirizzo del mittente.', # MODIF
 	'facteur_smtp_username' => 'Nome dell’utente:',
 
 	// M
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Usare la funzione mail di PHP',
-	'utiliser_reglages_site' => 'Usare le impostazioni del sito SPIP: il nome visualizzato sarà il nome del sito SPIP e l’indirizzo mail sarà quello del webmaster',
+	'utiliser_reglages_site' => 'Usare le impostazioni del sito SPIP: il nome visualizzato sarà il nome del sito SPIP e l’indirizzo mail sarà quello del webmaster', # MODIF
 	'utiliser_smtp' => 'Utilisare SMTP',
 
 	// V

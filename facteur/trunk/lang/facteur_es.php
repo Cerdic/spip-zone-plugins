@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'La configuración del cartero fue guardada correctamente',
-	'configuration_adresse_envoi' => 'Configuración de la dirección de envío',
+	'configuration_adresse_envoi' => 'Configuración de la dirección de envío', # MODIF
 	'configuration_facteur' => 'Cartero',
-	'configuration_mailer' => 'Configuración del "mailer"',
+	'configuration_mailer' => 'Configuración del "mailer"', # MODIF
 	'configuration_smtp' => 'Elección del método de envío del correo electrónico',
 	'configuration_smtp_descriptif' => 'Si no estás seguro, elige la función de correo electrónico de PHP.',
 	'corps_email_de_test' => 'Éste es un mensaje de prueba acentuado',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Nombre:',
 	'facteur_bcc' => 'Copia Oculta (CCO):',
 	'facteur_cc' => 'Copia (CC) :',
-	'facteur_copies' => 'Copias:',
+	'facteur_copies' => 'Copias:', # MODIF
 	'facteur_copies_descriptif' => 'Un correo electrónico será enviado en copia a las direcciones definidas. Una sola dirección en copia y/o una sola dirección en copia oculta.',
 	'facteur_filtre_accents' => 'Transformar los acentos en su versión html (especialmente útil para Hotmail).',
 	'facteur_filtre_css' => 'Transformar los estilos contenidos entre <head> y </head> en estilos en línea, útil para los webmails porque los estilos lineales tienen prioridad sobre los estilos externos. ',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'no',
 	'facteur_smtp_secure_ssl' => 'SSL (obsoleto)',
 	'facteur_smtp_secure_tls' => 'TLS (recomendado)',
-	'facteur_smtp_sender' => 'Rebote de errores (opcional)',
-	'facteur_smtp_sender_descriptif' => 'Indica en el encabezado del correo electrónico la dirección de correo electrónico de rebote de errores (o "Return-Path"), y en caso de un envío a través del método SMTP indica, también, la dirección del remitente.',
+	'facteur_smtp_sender' => 'Rebote de errores (opcional)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Indica en el encabezado del correo electrónico la dirección de correo electrónico de rebote de errores (o "Return-Path"), y en caso de un envío a través del método SMTP indica, también, la dirección del remitente.', # MODIF
 	'facteur_smtp_username' => 'Nombre de usuario:',
 
 	// M
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Utilizar la función de correo electrónico de PHP',
-	'utiliser_reglages_site' => 'Utilizar la configuración del sitio SPIP: el nombre mostrado será el nombre del sitio SPIP y la dirección de correo electrónico será la del webmaster',
+	'utiliser_reglages_site' => 'Utilizar la configuración del sitio SPIP: el nombre mostrado será el nombre del sitio SPIP y la dirección de correo electrónico será la del webmaster', # MODIF
 	'utiliser_smtp' => 'Utilizar SMTP',
 
 	// V

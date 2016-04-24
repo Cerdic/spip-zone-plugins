@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'Nastavenia Poštára sa uložili správne',
-	'configuration_adresse_envoi' => 'Nastavenie adresy odosielateľa',
+	'configuration_adresse_envoi' => 'Nastavenie adresy odosielateľa', # MODIF
 	'configuration_facteur' => 'Poštár',
-	'configuration_mailer' => 'Nastavenia Poštára',
+	'configuration_mailer' => 'Nastavenia Poštára', # MODIF
 	'configuration_smtp' => 'Výber spôsobu odoslania e-mailu',
 	'configuration_smtp_descriptif' => 'Ak si nie ste istý, zvoľte si funkciu mail jazyka PHP.',
 	'corps_email_de_test' => 'Toto je testovací e-mail s diakritikou',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => '(Obchodné) meno:',
 	'facteur_bcc' => 'Skrytá kópia (BCC):',
 	'facteur_cc' => 'Kópia (CC):',
-	'facteur_copies' => 'Kópie:',
+	'facteur_copies' => 'Kópie:', # MODIF
 	'facteur_copies_descriptif' => 'Kópia e-mailu sa pošle na zadané adresy. Na jednu adresu bude odoslaná bežná kópia a/lebo skrytá kópia.',
 	'facteur_email_test' => 'Skúšobný e-mail poslať na adresu:',
 	'facteur_filtre_accents' => 'Diakritiku meniť na entity html (užitočné najmä pre Hotmail).',
@@ -51,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'nie',
 	'facteur_smtp_secure_ssl' => 'SSL (zastarané)',
 	'facteur_smtp_secure_tls' => 'TLS (odporúča sa)',
-	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
-	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.',
+	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.', # MODIF
 	'facteur_smtp_username' => 'Používateľské meno:',
 
 	// M
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Používať funkciu mail z PHP',
-	'utiliser_reglages_site' => 'Použiť nastavenia stránky v SPIPe: zobrazovaný názov je názov stránky a e-mailová adresa je e-mail webmastera',
+	'utiliser_reglages_site' => 'Použiť nastavenia stránky v SPIPe: zobrazovaný názov je názov stránky a e-mailová adresa je e-mail webmastera', # MODIF
 	'utiliser_smtp' => 'Používať SMTP',
 
 	// V

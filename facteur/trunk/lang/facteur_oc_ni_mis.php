@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'La counfiguracioun dóu fatour es ben estada registrada',
-	'configuration_adresse_envoi' => 'Counfiguracioun de l’adressa de spedissioun',
+	'configuration_adresse_envoi' => 'Counfiguracioun de l’adressa de spedissioun', # MODIF
 	'configuration_facteur' => 'Fatour',
-	'configuration_mailer' => 'Counfiguracioun dóu mailer',
+	'configuration_mailer' => 'Counfiguracioun dóu mailer', # MODIF
 	'configuration_smtp' => 'Chausida de la mètodou de spedissioun de mail',
 	'configuration_smtp_descriptif' => 'Se noun sias segur, chaussissès la founcioun mail de PHP.',
 	'corps_email_de_test' => 'Aiçòt es un e-mail de prova achentat',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Noum :',
 	'facteur_bcc' => 'Còpia Escounduda (BCC) :',
 	'facteur_cc' => 'Còpia (CC) :',
-	'facteur_copies' => 'Còpia :',
+	'facteur_copies' => 'Còpia :', # MODIF
 	'facteur_copies_descriptif' => 'Un e-mail serà mandat en còpia ai adressa definidi. Basta una adressa en còpia e/o basta una adressa en còpia escounduda.',
 	'facteur_filtre_accents' => 'Trasfourmà lu achent en li siéu entità html (utile per Hotmail per isemple).',
 	'facteur_filtre_css' => 'Trasfourmà lu estil countengut tra <head> e </head> en dei estil "en ligna", utile per lu webmail perqué lu estil en ligna an la priourità soubre lu estil estèrnou.',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'noun',
 	'facteur_smtp_secure_ssl' => 'SSL (oussoulet)',
 	'facteur_smtp_secure_tls' => 'TLS (racoumandat)',
-	'facteur_smtp_sender' => 'Retour dei errour (oupciounal)',
-	'facteur_smtp_sender_descriptif' => 'Definit en l’entestacioun dóu e-mail de retour dei errour  (o Return-Path), e dóu tems d’una spedissioun vìa lou mètodou SMTP acò definit finda l’adressa de l’espeditour.',
+	'facteur_smtp_sender' => 'Retour dei errour (oupciounal)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Definit en l’entestacioun dóu e-mail de retour dei errour  (o Return-Path), e dóu tems d’una spedissioun vìa lou mètodou SMTP acò definit finda l’adressa de l’espeditour.', # MODIF
 	'facteur_smtp_username' => 'Noum d’utilisaire :',
 
 	// M
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Utilisà la founcioun mail de PHP',
-	'utiliser_reglages_site' => 'Utilisà lu reglage dóu sit SPIP : lou noum afichat serà lou noum dóu sit SPIP et l’adressa e-mail serà aquela dóu webmèstre',
+	'utiliser_reglages_site' => 'Utilisà lu reglage dóu sit SPIP : lou noum afichat serà lou noum dóu sit SPIP et l’adressa e-mail serà aquela dóu webmèstre', # MODIF
 	'utiliser_smtp' => 'Utilisà SMTP',
 
 	// V

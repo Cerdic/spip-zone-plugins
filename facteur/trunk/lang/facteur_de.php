@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'Die Konfiguration des Briefträgers wurde gespeichert.',
-	'configuration_adresse_envoi' => 'Absenderadresse einstellen',
+	'configuration_adresse_envoi' => 'Absenderadresse einstellen', # MODIF
 	'configuration_facteur' => 'Briefträger',
-	'configuration_mailer' => 'Konfiguration des Mailers',
+	'configuration_mailer' => 'Konfiguration des Mailers', # MODIF
 	'configuration_smtp' => 'Auswahl der Versandmethode',
 	'configuration_smtp_descriptif' => 'Im Zweifel hier die mail() Funktion von PHP eintragen.',
 	'corps_email_de_test' => 'Das ist ein Versandtest mit Sondärzeichen: Bär Größe Maß accentué',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Name:',
 	'facteur_bcc' => 'Blindkopie (BCC) :',
 	'facteur_cc' => 'Kopie (CC) :',
-	'facteur_copies' => 'Kopien:',
+	'facteur_copies' => 'Kopien:', # MODIF
 	'facteur_copies_descriptif' => 'Eine Kopie der E-Mails wird an die angegebenen Adressen geschickt. Geben sie eine Adresse als Empfänger der Kopie bzw. Blindkopie an.',
 	'facteur_filtre_accents' => 'Sonderzeichen in HTML-Entitäten umwandeln (z.B. für Hotmail).',
 	'facteur_filtre_css' => 'Stile zwischen <head> und </head> zu "inline" Stilen umwandeln, sinnvoll für Webmail die inline-Stile externen vorzieht.',
@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'nein',
 	'facteur_smtp_secure_ssl' => 'SSL (obsolet)',
 	'facteur_smtp_secure_tls' => 'TLS (empfohlen)',
-	'facteur_smtp_sender' => 'Fehlercodes (optional)',
-	'facteur_smtp_sender_descriptif' => 'Legt im Kopf der Mail die Empfängeradresse für Fehlermeldungen fest (bzw. den Return-Path), bestimmt ebenfalls die Absenderadresse bei Versand per SMTP.',
+	'facteur_smtp_sender' => 'Fehlercodes (optional)', # MODIF
+	'facteur_smtp_sender_descriptif' => 'Legt im Kopf der Mail die Empfängeradresse für Fehlermeldungen fest (bzw. den Return-Path), bestimmt ebenfalls die Absenderadresse bei Versand per SMTP.', # MODIF
 	'facteur_smtp_username' => 'Benutzername:',
 
 	// M
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Funktion mail() von PHP verwenden',
-	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: als Name wird die Bezeichnung der SPIP-Website verwendet und als Adresse die des Webmasters.',
+	'utiliser_reglages_site' => 'Einstellungen von SPIP verwenden: als Name wird die Bezeichnung der SPIP-Website verwendet und als Adresse die des Webmasters.', # MODIF
 	'utiliser_smtp' => 'SMTP verwenden',
 
 	// V
