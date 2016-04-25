@@ -48,17 +48,17 @@
 	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
 	<pipeline nom="post_edition" inclure="inscription3_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.36.0;[" />
-	<necessite nom="cextras" compatibilite="[1.4.3;[" />
-	<necessite nom="verifier" compatibilite="[0.1.18;[" />
+	<necessite nom="saisies" compatibilite="[2.0.0;]" />
+	<necessite nom="cextras" compatibilite="[3.4.1;]" />
+	<necessite nom="verifier" compatibilite="[1.0.5;]" />
 
 	<lib nom="jquery-validation-1.10.0" lien="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.10.0.zip" />
 
-	<utilise nom="Z" />
-	<utilise nom="mediabox" />
-	<utilise nom="pages" />
-	<utilise nom="notifications" />
-	<utilise nom="openid" compatibilite="[1.1.11;[" />
+	<utilise nom="Z" compatibilite="[1.7.28;]" />
+	<utilise nom="mediabox" compatibilite="[1.0.1;]" />
+	<utilise nom="pages" compatibilite="[1.2.2;]" />
+	<utilise nom="notifications" compatibilite="[3.2.0;]" />
+	<utilise nom="openid" compatibilite="[2.0.0;[" />
 
 	<menu nom="inscription3_adherents" titre="inscription3:icone_afficher_utilisateurs" parent="menu_activite" icone="images/inscription3-16.png" action="inscription3_adherents" />
 	<menu nom="configurer_inscription3" titre="inscription3:icone_configurer_inscription3" parent="menu_configuration" icone="images/inscription3-16.png" action="configurer_inscription3" />
