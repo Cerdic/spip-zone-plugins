@@ -28,5 +28,5 @@
 	<options>icones_semantiques_options.php</options>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.2;3.1.99]" />
-	<necessite id="porte_plume" version="[0.0.0;]" />
+	<necessite id="porte_plume" version="[0.5.4;]" />
 </plugin>
