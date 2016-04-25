@@ -23,6 +23,7 @@ function action_fixer_newsletter_dist($id_newsletter = null){
 		$id_newsletter = $securiser_action();
 	}
 
+	$base = newsletter_url_base();
 	include_spip('inc/autoriser');
 	if (autoriser('modifier', 'newsletter', $id_newsletter)){
 		$row = sql_fetsel('html_email,html_page,texte_email', 'spip_newsletters', 'id_newsletter=' . intval($id_newsletter));
@@ -35,8 +36,9 @@ function action_fixer_newsletter_dist($id_newsletter = null){
 				foreach ($matches as $matche){
 					$src = $matche[2];
 					if (!isset($images[$src])){
-						if ($url = newsletter_fixer_image($src,$id_newsletter))
-							$images[$src] = url_absolue($url);
+						if ($url = newsletter_fixer_image($src,$id_newsletter)){
+							$images[$src] = url_absolue($url,$base);
+						}
 					}
 					$img = $matche[0];
 					// et remplacer les simples quotes des balises img par doubles quotes au passage

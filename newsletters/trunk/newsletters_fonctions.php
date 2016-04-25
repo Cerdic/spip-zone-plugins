@@ -13,6 +13,21 @@ if (test_espace_prive()){
 }
 
 /**
+ * URL de base de la newsletter, qui respecte le protocole http/https du site public
+ * independamment du protocole http/https du site prive
+ * @return string
+ */
+function newsletter_url_base(){
+	$base = url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
+	// respecter le protocole http/https de l'adresse principale du site
+	// car le back-office peut etre en https, mais le site public en http
+	$protocole = explode("://",$GLOBALS['meta']['adresse_site']);
+	$protocole = reset($protocole) . ":";
+	$base = $protocole . protocole_implicite($base);
+	return $base;
+}
+
+/**
  * un filtre pour transformer les URLs relatives en URLs absolues ;
  * ne s'applique qu'aux textes contenant des liens
  *
@@ -24,12 +39,7 @@ if (test_espace_prive()){
  */
 function newsletters_liens_absolus($texte, $base='') {
 	if (!$base) {
-		$base = url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
-		// respecter le protocole http/https de l'adresse principale du site
-		// car le back-office peut etre en https, mais le site public en http
-		$protocole = explode("://",$GLOBALS['meta']['adresse_site']);
-		$protocole = reset($protocole) . ":";
-		$base = $protocole . protocole_implicite($base);
+		$base = newsletter_url_base();
 	}
 
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
@@ -195,6 +205,7 @@ function newsletter_responsive_img_wrap($m){
  * @return bool|string
  */
 function newsletter_fixer_image($src,$id_newsletter){
+	static $url_base = null;
 	static $dir = array();
 	if (!isset($dir[$id_newsletter])){
 		$dir[$id_newsletter] = sous_repertoire(_DIR_IMG,"nl");
@@ -203,8 +214,12 @@ function newsletter_fixer_image($src,$id_newsletter){
 	include_spip("inc/documents"); //deplacer_fichier_upload
 
 	// recuperer l'image par copie directe si possible
-	if (strncmp($src,$GLOBALS['meta']['adresse_site'].'/',$l=strlen($GLOBALS['meta']['adresse_site'].'/'))==0)
-		$src = _DIR_RACINE . substr($src,$l);
+	if (is_null($url_base)){
+		$url_base = protocole_implicite($GLOBALS['meta']['adresse_site'].'/');
+	}
+	if (strncmp(protocole_implicite($src),$url_base,$l=strlen($url_base))==0){
+		$src = _DIR_RACINE . substr(protocole_implicite($src),$l);
+	}
 	$url = parse_url($src);
 
 	// hack : mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
