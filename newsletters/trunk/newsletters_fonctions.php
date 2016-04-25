@@ -32,6 +32,7 @@ function newsletter_url_base(){
  * ne s'applique qu'aux textes contenant des liens
  *
  * idem le filtre liens_absolus du core mais ne touche pas aux urls commencant par @@ qui sont en fait des variables
+ * + retablit en http les liens interne en https si l'url publique est en http
  *
  * @param string $texte
  * @param string $base
@@ -41,12 +42,21 @@ function newsletters_liens_absolus($texte, $base='') {
 	if (!$base) {
 		$base = newsletter_url_base();
 	}
+	$base_https = 'https:'.protocole_implicite($base);
+	if ($base_https===$base){
+		$base_https = '';
+	}
 
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$href = extraire_attribut($lien[0],"href");
 			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@',1)!==0){
-				$abs = url_absolue($href, $base);
+				if ($base_https AND strncmp($href,$base_https.'/',strlen($base_https.'/'))==0){
+					$abs = $base . substr($href,strlen($base_https));
+				}
+				else {
+					$abs = url_absolue($href, $base);
+				}
 				if ($abs <> $href){
 					$href = str_replace($href,$abs,$lien[0]);
 					$texte = str_replace($lien[0], $href, $texte);
@@ -57,7 +67,12 @@ function newsletters_liens_absolus($texte, $base='') {
 	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			if ($src = extraire_attribut($lien[0],"src")){
-				$abs = url_absolue($src, $base);
+				if ($base_https AND strncmp($href,$base_https.'/',strlen($base_https.'/'))==0){
+					$abs = $base . substr($href,strlen($base_https));
+				}
+				else {
+					$abs = url_absolue($src, $base);
+				}
 				if ($abs <> $src){
 					$src = str_replace($src,$abs,$lien[0]);
 					$texte = str_replace($lien[0], $src, $texte);
