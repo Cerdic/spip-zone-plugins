@@ -14,5 +14,5 @@
 
 	<licence>GNU/GPL</licence>
 
-  <necessite nom="vocabulaire" compatibilite="[1.0.0;]" />
+	<necessite nom="vocabulaire" compatibilite="[1.0.0;]" />
 </paquet>
