@@ -24,10 +24,9 @@
 	<pipeline nom="autoriser" inclure="shortcut_url_pipelines.php" />
 	<pipeline nom="d3js_plugins" inclure="shortcut_url_pipelines.php" />
 
-	<utilise nom="d3js" />
+	<utilise nom="d3js" compatibilite="[1.2.0;]" />
 
 	<menu nom="menu_shortcut_url" position="10" action="navigation" parametres="menu=menu_shortcut_url" titre="shortcut_url:icone_stats_shortcut" icone="images/shortcut_url-menu.png" />
 
 
 </paquet>
-
