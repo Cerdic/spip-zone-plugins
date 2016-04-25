@@ -38,6 +38,10 @@ function action_dupliquer_newsletter_dist($id_newsletter = null){
 					@copy($f,$fnew);
 				}
 			}
+			
+			// tous les objets lies
+			include_spip('action/editer_liens');
+			objet_dupliquer_liens('newsletter',$id_newsletter,$id_new);
 
 			$GLOBALS['redirect'] = generer_url_entite($id_new,"newsletter");
 		}
