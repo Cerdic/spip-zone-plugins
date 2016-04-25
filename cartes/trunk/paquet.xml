@@ -17,7 +17,7 @@
 	<necessite nom="gis" compatibilite="[4.36.2;]" />
 	<necessite nom="gisgeom" compatibilite="[1.9.1;]" />
 	<necessite nom="roles_gis" compatibilite="[1.0.0;]" />
-	<utilise nom="licence" />
+	<utilise nom="licence" compatibilite="[0.4.0;]" />
 
 	<pipeline nom="autoriser" inclure="cartes_autorisations.php" /> 
 
