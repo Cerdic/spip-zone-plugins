@@ -31,7 +31,8 @@
 	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=oc_ni_mis" total="52" traduits="43" relire="0" modifs="7" nouveaux="2" pourcent="82.69">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=pt_br" total="52" traduits="45" relire="0" modifs="6" nouveaux="1" pourcent="86.54">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=pt_br" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/facteur?lang_cible=sk" total="52" traduits="45" relire="0" modifs="6" nouveaux="1" pourcent="86.54">

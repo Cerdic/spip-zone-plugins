@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_info_enregistree' => 'A configuração do Carteiro foi gravada corretamente',
-	'configuration_adresse_envoi' => 'Configuração do endereço de envio', # MODIF
+	'configuration_adresse_envoi' => 'Endereço de envio padrão',
 	'configuration_facteur' => 'Carteiro',
-	'configuration_mailer' => 'Configuração do mailer', # MODIF
+	'configuration_mailer' => 'Método de envio',
 	'configuration_smtp' => 'Seleção do método de envio de e-mail',
 	'configuration_smtp_descriptif' => 'Se tiver dúvida, escolha a função mail do PHP.',
 	'corps_email_de_test' => 'Este é um e-mail de teste acentuado',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_adresse_envoi_nom' => 'Nome:',
 	'facteur_bcc' => 'Cópia Oculta (BCC):',
 	'facteur_cc' => 'Cópia (CC):',
-	'facteur_copies' => 'Cópias:', # MODIF
+	'facteur_copies' => 'Cópias',
 	'facteur_copies_descriptif' => 'Um e-mail será enviado em cópia para os endereços especificados. Um único endereço em cópia e/ou um único endereço em cópia oculta.',
 	'facteur_email_test' => 'Enviar um e-mail de teste para:',
 	'facteur_filtre_accents' => 'Transformar os acentos em entidades HTML (útil especialmente para o Hotmail).',
@@ -51,9 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'náo',
 	'facteur_smtp_secure_ssl' => 'SSL (obsoleto)',
 	'facteur_smtp_secure_tls' => 'TLS (recomendado)',
-	'facteur_smtp_sender' => 'Retorno dos erros (opcional)', # MODIF
-	'facteur_smtp_sender_descriptif' => 'Define no cabeçalho da mensagem o endereço de e-mail de retorno dos erros (ou Return-Path) e, quando de um envio pelo método SMTP, define também o endereço do remetente.', # MODIF
+	'facteur_smtp_sender' => 'Endereço pelo retorno dos erros (opcional)',
+	'facteur_smtp_sender_descriptif' => 'Informa, no cabeçalho da mensagem, o endereço de e-mail de retorno dos erros (ou Return-Path)',
 	'facteur_smtp_username' => 'Nome do usuário:',
+
+	// L
+	'label_facteur_forcer_from' => 'Forçar o endereço de envio quando o <tt>From</tt> não é no mesmo domínio.',
 
 	// M
 	'message_identite_email' => 'A configuração do plugin "Carteiro" define este endereço de e-mail para o envio das mensagens.',
@@ -70,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Usar a função mail do PHP',
-	'utiliser_reglages_site' => 'Usar as configurações do site SPIP: o nome exibido será o nome do site SPIP e o endereço de e-mail será o do webmaster', # MODIF
+	'utiliser_reglages_site' => 'Usar as configurações do site SPIP:  : <br /><tt>@from@</tt> ',
 	'utiliser_smtp' => 'Usar SMTP',
 
 	// V
