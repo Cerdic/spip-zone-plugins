@@ -42,17 +42,18 @@ function newsletters_liens_absolus($texte, $base='') {
 	if (!$base) {
 		$base = newsletter_url_base();
 	}
-	$base_https = 'https:'.protocole_implicite($base);
-	if ($base_https===$base){
-		$base_https = '';
+	$base_racine = rtrim(url_absolue(_DIR_RACINE,$base),'/').'/';
+	$base_racine_https = 'https:'.protocole_implicite($base_racine);
+	if ($base_racine_https===$base_racine){
+		$base_racine_https = '';
 	}
 
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			$href = extraire_attribut($lien[0],"href");
 			if ($href AND strncmp($href,'#',1)!==0 AND strncmp($href,'@',1)!==0){
-				if ($base_https AND strncmp($href,$base_https.'/',strlen($base_https.'/'))==0){
-					$abs = $base . substr($href,strlen($base_https));
+				if ($base_racine_https AND strncmp($href,$base_racine_https,strlen($base_racine_https))==0){
+					$abs = $base_racine . substr($href,strlen($base_racine_https));
 				}
 				else {
 					$abs = url_absolue($href, $base);
@@ -67,8 +68,8 @@ function newsletters_liens_absolus($texte, $base='') {
 	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*>),imsS',$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
 			if ($src = extraire_attribut($lien[0],"src")){
-				if ($base_https AND strncmp($href,$base_https.'/',strlen($base_https.'/'))==0){
-					$abs = $base . substr($href,strlen($base_https));
+				if ($base_racine_https AND strncmp($src,$base_racine_https,strlen($base_racine_https))==0){
+					$abs = $base_racine . substr($src,strlen($base_racine_https));
 				}
 				else {
 					$abs = url_absolue($src, $base);
