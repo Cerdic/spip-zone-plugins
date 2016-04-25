@@ -96,33 +96,33 @@ function introduction_distinguante($descriptif,$chapo, $texte, $longueur, $conne
 
 	if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
-    
-    //marquer le chapeau
-    if ($notes)
-        $notes('','empiler');
-        
-    $chapo = couper(propre($chapo),$longueur);
-    
-    if ($notes)
-		$notes('','depiler');
-    if ($chapo) {// si on a un chapo
-        $texte = str_replace($chapo,"<span class='introduction-chapo'>$chapo</span>",$texte,$replace);
-        if ($replace >0){ // si on a remplacé, c'est qu'on a le chapo complet
-                $texte = str_replace("<span class='introduction-chapo'>$chapo</span>","<span class='introduction-chapo'>$chapo</span><span class='introduction-texte'>",$texte);
-                $texte = str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);
-            }
-        else{//sinon a un chapo coupé
-                $texte = "<span class='introduction-texte'>".str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);
-            }
-        }
-    else {//si pas de chapo
-                $texte = "<span class='introduction-texte'>".str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);        
-        }
-    // et reparagrapher si necessaire (coherence avec le cas descriptif)
+
+	//marquer le chapeau
+	if ($notes)
+	$notes('','empiler');
+
+	$chapo = couper(propre($chapo),$longueur);
+
+	if ($notes)
+	$notes('','depiler');
+	if ($chapo) {// si on a un chapo
+		$texte = str_replace($chapo,"<span class='introduction-chapo'>$chapo</span>",$texte,$replace);
+		if ($replace >0){ // si on a remplacé, c'est qu'on a le chapo complet
+			$texte = str_replace("<span class='introduction-chapo'>$chapo</span>","<span class='introduction-chapo'>$chapo</span><span class='introduction-texte'>",$texte);
+			$texte = str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);
+		}
+		else{//sinon a un chapo coupé
+			$texte = "<span class='introduction-texte'>".str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);
+		}
+	}
+	else {//si pas de chapo
+		$texte = "<span class='introduction-texte'>".str_replace(_INTRODUCTION_SUITE,"</span>"._INTRODUCTION_SUITE,$texte);        
+	}
+	// et reparagrapher si necessaire (coherence avec le cas descriptif)
 	if ($GLOBALS['toujours_paragrapher'])
-		// Fermer les paragraphes
-		$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
-    
+	// Fermer les paragraphes
+	$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
+
 	return $texte;
 }
 ?>
