@@ -32,8 +32,8 @@
 					<li class="editer gauche editer_smtp_password [ (#ENV**{erreurs}|table_valeur{smtp_password}|oui)erreur]">
 						<label for="smtp_password"><:facteur:facteur_smtp_password:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{smtp_password})</span>]
-						<input type="password" name="smtp[password]" class="text" value="#ENV**{smtp/password}" id="smtp_password" />
-						[<tt>(#ENV**{_smtp_password}|mailshot_affiche_password_masque)</tt>]
+						<input type="password" name="smtp[password]" class="text" value="#ENV**{smtp/password}" id="smtp_password"
+			       [placeholder="(#ENV*{_smtp_password}|mailshot_affiche_password_masque)"] />
 					</li>
 				</ul>
 			</div>

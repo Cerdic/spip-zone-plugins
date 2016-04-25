@@ -67,7 +67,7 @@
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_envoi})</span>]
 							<div class="choix">
 								<input type="radio" name="adresse_envoi" class="radio" value="non" id="adresse_envoi_non"[(#ENV{adresse_envoi,'non'}|=={non}|oui)checked="checked"]/>
-								<label for="adresse_envoi_non"><:facteur:utiliser_reglages_site:></label>
+								<label for="adresse_envoi_non"><:facteur:utiliser_reglages_site{from=#ENV{_from_defaut}}:></label>
 							</div>
 							<div class="choix">
 								<input type="radio" name="adresse_envoi" class="radio" value="oui" id="adresse_envoi_oui"[(#ENV{adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
