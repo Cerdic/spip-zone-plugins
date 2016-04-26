@@ -58,6 +58,7 @@ var mejsloader;
 							}
 						}
 						if (run){
+							mejs.MediaFeatures.isChromium = false; // bugfix Chromium : can now play mpx sound files
 							new MediaElementPlayer('#'+id, jQuery.extend(opt.options, {
 								"success": function (media){
 									function togglePlayingState(){
