@@ -4,11 +4,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Détermine si la valeur du crtière compatibilité SPIP est valide.
- * La fonction compare uniquement la structure de la chaine passée qui doit être un numéro de version ou de branche.
+ * Détermine si la valeur du format de sortie est valide.
+ * Seul le format JSON est accepté.
  *
  * @param string	$valeur
- * 		La valeur du critère compatibilite SPIP
+ * 		La valeur du format de sortie
  * @param array		$erreur
  *
  * @return boolean
@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function requete_verifier_format($valeur, &$erreur) {
 	$format_valide = true;
 
-	if (!in_array($valeur, array('json', 'xml'))) {
+	if (!in_array($valeur, array('json'))) {
 		$erreur = array(
 			'status'	=> 400,
 			'type'		=> 'format_nok',
