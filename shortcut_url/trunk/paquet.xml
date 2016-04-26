@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
+	documentation="https://contrib.spip.net/Raccourcisseur-d-URL"
 	schema="0.0.3"
 >
 
