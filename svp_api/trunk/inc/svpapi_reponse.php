@@ -3,6 +3,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+if (!defined('_SVPAPI_CHAMPS_MULTI_PLUGIN')) {
+	define('_SVPAPI_CHAMPS_MULTI_PLUGIN', 'nom,slogan');
+}
+if (!defined('_SVPAPI_CHAMPS_SERIALISES_PLUGIN')) {
+	define('_SVPAPI_CHAMPS_SERIALISES_PLUGIN', '');
+}
+
+if (!defined('_SVPAPI_CHAMPS_MULTI_PAQUET')) {
+	define('_SVPAPI_CHAMPS_MULTI_PAQUET', 'description');
+}
+if (!defined('_SVPAPI_CHAMPS_SERIALISES_PAQUET')) {
+	define('_SVPAPI_CHAMPS_SERIALISES_PAQUET', 'auteur,credit,licence,copyright,dependances,procure,traductions');
+}
+
 /**
  * @param $requete
  *
@@ -41,6 +55,83 @@ function reponse_initialiser_contenu($requete) {
 	return $contenu;
 }
 
+
+function reponse_collectionner_plugins($where) {
+
+	// Initialisation de la collection
+	$plugins = array();
+
+	// Récupérer la liste des plugins (filtrée ou pas).
+	// Les plugins appartiennent forcément à un dépot logique installés sur le serveur. Les plugins
+	// installés directement sur le serveur, donc hors dépôt sont exclus.
+	$from = array('spip_plugins', 'spip_depots_plugins AS dp');
+	$select = array('*');
+	$where = array_merge(array('dp.id_depot>0', 'dp.id_plugin=spip_plugins.id_plugin'), $where);
+	$group_by = array('spip_plugins.id_plugin');
+	$collection = sql_allfetsel($select, $from, $where, $group_by);
+
+	// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par les préfixes.
+	// On transforme les champs multi en tableau associatif indexé par la langue et on désérialise les
+	// champs sérialisés.
+	if ($collection) {
+		foreach ($collection as $_plugin) {
+			unset($_plugin['id_plugin']);
+			unset($_plugin['id_depot']);
+			$plugins[$_plugin['prefixe']] = normaliser_champs('plugin', $_plugin);
+		}
+	}
+
+	return $plugins;
+}
+
+
+function reponse_collectionner_depots($where) {
+
+	// Initialisation de la collection
+	$depots = array();
+
+	// Récupérer la liste des dépôts
+	$from = array('spip_depots');
+	$select = array('*');
+	$collection = sql_allfetsel($select, $from, $where);
+
+	// Refactorer le tableau de sortie du allfetsel en supprimant
+	// les champs id_depot et maj.
+	if ($collection) {
+		foreach ($collection as $_depot) {
+			unset($_depot['id_depot']);
+			unset($_depot['maj']);
+			$depots[] = $_depot;
+		}
+	}
+
+	return $depots;
+}
+
+
+function normaliser_champs($type_objet, $objet) {
+
+	$objet_normalise = $objet;
+
+	// Traitement des champs multi et sérialisés
+	$champs_multi = explode(',', constant('_SVPAPI_CHAMPS_MULTI_' . strtoupper($type_objet)));
+	$champs_serialises = explode(',', constant('_SVPAPI_CHAMPS_SERIALISES_' . strtoupper($type_objet)));
+
+	if ($objet) {
+		foreach($objet as $_champ => $_valeur) {
+			if (in_array($_champ, $champs_multi)) {
+				include_spip('plugins/preparer_sql_plugin');
+				$objet_normalise[$_champ] = normaliser_multi($_valeur);
+			}
+
+			if (in_array($_champ, $champs_serialises)) {
+				$objet_normalise[$_champ] = unserialize($_valeur);
+			}
+		}
+	}
+
+	return $objet_normalise;
+}
 
 /**
  * @param $erreur

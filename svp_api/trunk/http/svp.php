@@ -83,12 +83,8 @@ function http_svp_get_collection_dist($requete, $reponse) {
 		// Vérification du nom de la collection
 		if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
 			$items = array();
-			// Récupération de la collection en fonction des critères appliqués
-			$from = array('spip_plugins', 'spip_depots_plugins AS dp');
-			$select = array('*');
-			$where = array('dp.id_depot>0', 'dp.id_plugin=spip_plugins.id_plugin');
-			$group_by = array('spip_plugins.id_plugin');
-			// On vérifie les critères de filtre additionnels
+			// On vérifie les critères de filtre additionnels si la requête en contient
+			$where = array();
 			if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
 				// Si il y a des critères additionnels on complète le where en conséquence
 				if ($contenu['requete']['criteres']) {
@@ -97,21 +93,16 @@ function http_svp_get_collection_dist($requete, $reponse) {
 							$f_critere = charger_fonction('where_compatible_spip', 'inc');
 							$where[] = $f_critere($_valeur, 'spip_plugins', '>');
 						} else {
-							$where[] = "spip_plugins.${_critere}=" . sql_quote(${_valeur});
+							$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
 						}
 					}
 				}
-				$plugins = sql_allfetsel($select, $from, $where, $group_by);
-				if ($plugins) {
-					// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par les préfixes.
-					foreach ($plugins as $_plugin) {
-						unset($_plugin['id_plugin']);
-						unset($_plugin['id_depot']);
-						$items[$_plugin['prefixe']] = $_plugin;
-					}
-				}
+
+				// Récupération de la collection spécifiée en fonction des critères appliqués
+				$collectionner = 'reponse_collectionner_' . $contenu['requete']['collection'];
+				$items = $collectionner($where);
+
 				$contenu['items'] = $items;
-				$contenu['nb_plugins'] = count($items);
 			}
 		}
 	}
@@ -178,7 +169,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 					// sont d'aucune utilité pour le service.
 					unset($plugin['id_plugin']);
 					unset($plugin['id_depot']);
-					$items['plugin'] = $plugin;
+					$items['plugin'] = normaliser_champs('plugin', $plugin);
 
 					// On recherche maintenant les paquets du plugin
 					$from = array('spip_paquets');
@@ -199,7 +190,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 							foreach ($champs_inutiles as $_champ) {
 								unset($_paquet[$_champ]);
 							}
-							$items['paquets'][$_paquet['nom_archive']] = $_paquet;
+							$items['paquets'][$_paquet['nom_archive']] = normaliser_champs('paquet', $_paquet);
 						}
 					}
 				} else {

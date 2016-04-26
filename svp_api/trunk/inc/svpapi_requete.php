@@ -43,7 +43,7 @@ function requete_verifier_format($valeur, &$erreur) {
 function requete_verifier_collection($valeur, &$erreur) {
 	$collection_valide = true;
 
-	if (!in_array($valeur, array('plugins'))) {
+	if (!in_array($valeur, array('plugins', 'depots'))) {
 		$erreur = array(
 			'status'	=> 400,
 			'type'		=> 'collection_nok',
