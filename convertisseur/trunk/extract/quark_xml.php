@@ -170,7 +170,7 @@ function convertir_quark_xml($c) {
 				}
 				
 				// Inters
-				if(preg_match("/accroche/i", $type)){
+				if(preg_match("/(accroche|-inter|-exergue)/i", $type)){
 					$item["texte"] .= "\n\n" . '{{{' . "$texte" . '}}}' ."\n\n" ;
 					continue ;
 				}
