@@ -56,7 +56,11 @@
 			<textarea name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 		</div>
 
-		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags}
+		<BOUCLE_groupes(GROUPES_MOTS){id_groupe=#CONFIG{curator/groupe_mots}}>
+			#SET{groupe,#TITRE}
+		</BOUCLE_groupes>
+		
+		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags, groupe=#GET{groupe, tags}, aide=autocompletion}
 	</div>
 	<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
 </form>
