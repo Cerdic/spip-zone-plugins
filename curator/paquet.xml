@@ -21,5 +21,6 @@
 	<pipeline nom="autoriser" inclure="curator_autorisations.php" />
 	
 	<necessite nom="etiquettes" compatibilite="[2.2.0;]" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 
 </paquet>
