@@ -26,7 +26,7 @@ function formulaires_configurer_mailshot_charger_dist(){
 	}
 
 	include_spip('classes/facteur');
-	$facteur = new Facteur();
+	$facteur = new Facteur('test@example.org','Test','','');
 	$valeurs['_from_defaut'] = $facteur->From;
 	if ($facteur->FromName){
 		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
