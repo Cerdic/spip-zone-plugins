@@ -17,6 +17,7 @@ function auteurspartout_post_insertion($flux) {
 		AND ($Tinfos[$table]['editable'] == 'oui')
 		AND ($id = intval($flux['args']['id_objet']))
 		AND $type = $Tinfos[$table]['type']
+		AND isset($GLOBALS['auteur_session']['id_auteur'])
 		) {
         sql_insertq("spip_auteurs_liens", array(
             'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
