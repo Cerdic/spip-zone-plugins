@@ -55,9 +55,9 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  * installés). Il est possible de filtrer cette requête par catégorie /svp/plugins&categorie=outil et/ou par
  * compatibilité SPIP.
  *
- * @param object $requete
+ * @param Symfony\Component\HttpFoundation\Request $requete
  *        Objet matérialisant la requête faite au serveur SVP.
- * @param object $reponse
+ * @param Symfony\Component\HttpFoundation\Response $reponse
  *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
  *        complétée avant d'être retourné par la fonction.
  *
@@ -124,9 +124,9 @@ function http_svp_get_collection_dist($requete, $reponse) {
 /**
  * Fait un GET sur une ressource de type plugin identifié par son préfixe.
  *
- * @param object $requete
+ * @param Symfony\Component\HttpFoundation\Request $requete
  *        Objet matérialisant la requête faite au serveur SVP.
- * @param object $reponse
+ * @param Symfony\Component\HttpFoundation\Response $reponse
  *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
  *        complétée avant d'être retourné par la fonction.
  *

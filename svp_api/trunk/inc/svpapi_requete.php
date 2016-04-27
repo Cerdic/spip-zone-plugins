@@ -9,7 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string	$valeur
  * 		La valeur du format de sortie
- * @param array		$erreur
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 400
+ *      - type : chaine identifiant l'erreur plus précisément, soit format_nok
+ *      - element : type d'objet sur lequel porte l'erreur, soit format
+ *      - valeur : la valeur du format
  *
  * @return boolean
  * 		True si la valeur est valide, false sinon.
@@ -36,6 +42,13 @@ function requete_verifier_format($valeur, &$erreur) {
  *
  * @param string $valeur
  * 		La valeur de la collection demandée
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 400
+ *      - type : chaine identifiant l'erreur plus précisément, soit collection_nok
+ *      - element : type d'objet sur lequel porte l'erreur, soit collection
+ *      - valeur : la valeur de la collection
  *
  * @return boolean
  * 		True si la valeur est valide, false sinon.
@@ -62,6 +75,13 @@ function requete_verifier_collection($valeur, &$erreur) {
  *
  * @param string $valeur
  * 		La valeur de la collection demandée
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 400
+ *      - type : chaine identifiant l'erreur plus précisément, soit ressource_nok
+ *      - element : type d'objet sur lequel porte l'erreur, soit ressource
+ *      - valeur : la valeur de la ressource
  *
  * @return boolean
  * 		True si la valeur est valide, false sinon.
@@ -89,6 +109,13 @@ function requete_verifier_ressource($valeur, &$erreur) {
  *
  * @param string $valeur
  * 		La valeur du préfixe
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 400
+ *      - type : chaine identifiant l'erreur plus précisément, soit prefixe_nok
+ *      - element : type d'objet sur lequel porte l'erreur, soit prefixe
+ *      - valeur : la valeur du préfixe
  *
  * @return boolean
  * 		True si la valeur est valide, false sinon.
@@ -109,6 +136,24 @@ function requete_verifier_prefixe($valeur, &$erreur) {
 }
 
 
+/**
+ * Détermine si la valeur de chaque critère est valide.
+ * Si plusieurs critères sont fournis, la fonction s'interromp dès qu'elle trouve un
+ * critère invalide.
+ *
+ * @param array	$criteres
+ * 		Tableau associatif des critères (couple nom du critère, valeur du critère)
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 400
+ *      - type : chaine identifiant l'erreur plus précisément, soit critere_nok
+ *      - element : nom du critère en erreur
+ *      - valeur : valeur du critère
+ *
+ * @return boolean
+ * 		True si la valeur est valide, false sinon.
+ */
 function requete_verifier_criteres($criteres, &$erreur) {
 
 	$critere_valide = true;

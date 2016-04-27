@@ -4,21 +4,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 if (!defined('_SVPAPI_CHAMPS_MULTI_PLUGIN')) {
+	/**
+	 *
+	 */
 	define('_SVPAPI_CHAMPS_MULTI_PLUGIN', 'nom,slogan');
 }
 if (!defined('_SVPAPI_CHAMPS_SERIALISES_PLUGIN')) {
+	/**
+	 *
+	 */
 	define('_SVPAPI_CHAMPS_SERIALISES_PLUGIN', '');
 }
 
 if (!defined('_SVPAPI_CHAMPS_MULTI_PAQUET')) {
+	/**
+	 *
+	 */
 	define('_SVPAPI_CHAMPS_MULTI_PAQUET', 'description');
 }
 if (!defined('_SVPAPI_CHAMPS_SERIALISES_PAQUET')) {
+	/**
+	 *
+	 */
 	define('_SVPAPI_CHAMPS_SERIALISES_PAQUET', 'auteur,credit,licence,copyright,dependances,procure,traductions');
 }
 
 /**
- * @param $requete
+ * @param Symfony\Component\HttpFoundation\Request	$requete
  *
  * @return array
  */
@@ -56,6 +68,11 @@ function reponse_initialiser_contenu($requete) {
 }
 
 
+/**
+ * @param array	$where
+ *
+ * @return array
+ */
 function reponse_collectionner_plugins($where) {
 
 	// Initialisation de la collection
@@ -85,6 +102,11 @@ function reponse_collectionner_plugins($where) {
 }
 
 
+/**
+ * @param array	$where
+ *
+ * @return array
+ */
 function reponse_collectionner_depots($where) {
 
 	// Initialisation de la collection
@@ -109,6 +131,12 @@ function reponse_collectionner_depots($where) {
 }
 
 
+/**
+ * @param string	$type_objet
+ * @param array		$objet
+ *
+ * @return array
+ */
 function normaliser_champs($type_objet, $objet) {
 
 	$objet_normalise = $objet;
@@ -134,9 +162,9 @@ function normaliser_champs($type_objet, $objet) {
 }
 
 /**
- * @param $erreur
+ * @param array	$erreur
  *
- * @return mixed
+ * @return array
  */
 function reponse_expliquer_erreur($erreur) {
 
@@ -154,8 +182,9 @@ function reponse_expliquer_erreur($erreur) {
 
 
 /**
- * @param $reponse
- * @param $contenu
+ * @param Symfony\Component\HttpFoundation\Response	$reponse
+ * @param array										$contenu
+ * @param string									$format_reponse
  *
  * @return mixed
  */
