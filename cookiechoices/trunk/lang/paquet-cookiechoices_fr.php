@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cookiechoices_slogan' => 'Affiche un avertissement à l\'utilisation des cookies',
 );
 
-?>

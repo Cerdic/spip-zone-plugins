@@ -37,4 +37,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_message_txt' => 'Personnaliser le message (facultatif) syntaxe &lt;multi&gt;&lt;/multi&gt; accepté',
 );
 
-?>
