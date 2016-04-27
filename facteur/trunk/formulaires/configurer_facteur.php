@@ -35,7 +35,7 @@ function formulaires_configurer_facteur_charger_dist(){
 
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
 	include_spip('classes/facteur');
-	$facteur = new Facteur('','','','',array('adresse_envoi'=>'non'));
+	$facteur = new Facteur('test@example.org','Test','','',array('adresse_envoi'=>'non'));
 	$valeurs['_from_defaut'] = $facteur->From;
 	if ($facteur->FromName){
 		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
