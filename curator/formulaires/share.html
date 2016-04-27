@@ -15,16 +15,23 @@
 		<div class="editer">
 			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs/id_parent})</span>]
-			<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}{statut IN prepa,publie}>
-			<select name="id_parent" id="id_parent">
-				<option value="#ID_RUBRIQUE">#TITRE</option>
-				<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
-				[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
-				<option value="#ID_RUBRIQUE">[(#VAL{'&nbsp;&nbsp;&nbsp;'}|str_repeat{#PROFONDEUR|moins{1}})]#TITRE</option>]
-				<BOUCLE_recursive(BOUCLE_listederoulante)></BOUCLE_recursive>
-				</BOUCLE_listederoulante>
-			</select>
-			</BOUCLE_rubs>
+
+				<BOUCLE_configuration_rubrique(CONDITION){si #CONFIG{curator/id_parent}}>
+					<BOUCLE_rubs(RUBRIQUES){id_rubrique=#CONFIG{curator/id_parent}|sinon{1}}{statut IN prepa,publie}>
+					<select name="id_parent" id="id_parent">
+						<option value="#ID_RUBRIQUE">#TITRE</option>
+						<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
+						[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+						<option value="#ID_RUBRIQUE">[(#VAL{'&nbsp;&nbsp;&nbsp;'}|str_repeat{#PROFONDEUR|moins{1}})]#TITRE</option>]
+						<BOUCLE_recursive(BOUCLE_listederoulante)></BOUCLE_recursive>
+						</BOUCLE_listederoulante>
+					</select>
+					</BOUCLE_rubs>
+				</BOUCLE_configuration_rubrique>
+					[(#VAL|chercher_rubrique{'', #ENV{id_parent}, '', '', '', 0,form_simple})]
+				<//B_configuration_rubrique>
+
+
 		</div>
 
 		<div class="editer">
