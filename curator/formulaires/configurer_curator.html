@@ -7,7 +7,7 @@
 		<ul class="">
 			<li class="editer">
 				<label for="id_parent"><:curator:configurer_rubrique:></label>
-				<p>Si aucune rubrique n'est s&eacute;lectionn&eacute;e, alors la publication sera possible dans toutes les rubriques</p>
+				<p class="explication"><:curator:configurer_rubrique_explication:></p>
 				[(#VAL|chercher_rubrique{'', #ENV{id_parent}, '', '', '', 0,form_simple})]
 			</li>
 			<li class="editer">
@@ -22,9 +22,14 @@
 			</li>
 		</ul>
 		
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		<p class="boutons"><span class="image_loading">&nbsp;</span>
+		<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
 
 	</div></form>
+		[(#BOUTON_ACTION{<:curator:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'curator',#SELF},ajax,})]
+	
+	
 </div>
 
 #BOITE_OUVRIR

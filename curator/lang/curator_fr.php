@@ -7,6 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_logo' => 'Ajouter le logo ?',
+
+	// B
+	'bouton_effacer' => 'Effacer les valeurs',
+
 	
 	// C
 	'curator_titre' => 'curator',
