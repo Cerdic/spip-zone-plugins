@@ -64,7 +64,7 @@
 		</div>
 
 		<BOUCLE_groupes(GROUPES_MOTS){id_groupe=#CONFIG{curator/groupe_mots}}>
-			#SET{groupe,#TITRE}
+			#SET{groupe,#TITRE*}
 		</BOUCLE_groupes>
 		
 		#FORMULAIRE_ETIQUETTES{uniquement_champ=true, objet=aucun, name=tags, groupe=#GET{groupe, tags}}
