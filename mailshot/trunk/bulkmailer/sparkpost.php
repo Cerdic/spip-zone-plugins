@@ -36,27 +36,9 @@ function &bulkmailer_sparkpost_dist($to_send,$options=array()){
 		$config = lire_config("mailshot/");
 		$mailer_defaut = charger_fonction("defaut","bulkmailer");
 	}
-
-	// on passe par l'API SMTP basique
-
-	// on ecrase le smtp avec celui de sparkpost
-	$options['smtp'] = array(
-		"host" => "smtp.sparkpostmail.com",
-		"port" => "587",
-		"auth" => "oui",
-		"username" => 'SMTP_Injection',
-		"password" => $config['sparkpost_api_key'],
-		"secure" => "non",
-	);
-
-	// reprendre le port specifique s'il est defini dans le facteur
-	if (lire_config("facteur_smtp_host") == 'smtp.sparkpostmail.com') {
-		$options['smtp']['port'] = lire_config('facteur_smtp_port', '587');
-	}
-
-	// on utilise une surcharge pour gerer le tracking
+	
+	// on utilise une surcharge pour utiliser l'API http
 	$options['sender_class'] = "FacteurSparkpost";
-
 	return $mailer_defaut($to_send,$options);
 }
 
@@ -359,11 +341,107 @@ function sparkpost_api_call($method,$data=null,$http_req=null) {
 
 /**
  * Class FacteurSparkpost
- * Utilise l'API SMTP valable dans toutes les versions d'API
+ * Utilise l'API HTTP transmission
  */
 class FacteurSparkpost extends Facteur {
 
 	public $send_options = array();
+	protected $message = array(
+		'options' => array(
+			'open_tracking' => false,
+			'clic_tracking' => false,
+		),
+		'campaign_id' => '',
+		#'return_path' => '',// do not provide if empty
+		#'metadata' => array(), // not used here, need to be a JSON object, fail if empty
+		#'substitution_data' => array(), // not used here, need to be a JSON object, fail if empty
+		'recipients' => array(
+			#array('address' => array('email'=>'','name'=>''))
+		),
+		'content' => array(
+			'from' => array('email'=>'','name'=>''),
+			'subject' => '',
+			#'reply_to' => '', // do not provide if empty
+			'headers' => array(),
+			'text' => '',
+			'html' => '',
+		)
+	);
+
+	protected function cleanAdress($address, $name = ''){
+		$address = trim($address);
+    $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
+		if (!self::ValidateAddress($address)) {
+			$this->SetError('invalid_address'.': '. $address);
+			return false;
+	  }
+		return array($address,$name);
+	}
+
+	/**
+	* Adds a "To" address.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddAddress($address, $name = '') {
+		if ($a = $this->cleanAdress($address,$name)){
+			$to = array('email'=>$address,'name'=>$name);
+			$this->message['recipients'][] = array('address'=>$to);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* Adds a "Cc" address.
+	* Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddCC($address, $name = '') {
+		return $this->AddAddress($address, $name);
+	}
+
+	/**
+	* Adds a "Bcc" address.
+	* Note: this function works with the SMTP mailer on win32, not with the "mail" mailer.
+	* @param string $address
+	* @param string $name
+	* @return boolean true on success, false if address already used
+	*/
+	public function AddBCC($address, $name = '') {
+		return $this->AddAddress($address, $name);
+	}
+
+	/**
+	* Adds a "Reply-to" address.
+	* @param string $address
+	* @param string $name
+	* @return boolean
+	*/
+	public function AddReplyTo($address, $name = '') {
+		if ($a = $this->cleanAdress($address,$name)){
+			if ($name) $address = "$name <$address>";
+			$this->message['content']['reply_to'] = $address;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* Adds a custom header.
+	* @access public
+	* @return void
+	*/
+	public function AddCustomHeader($name, $value = null) {
+		if ($value === null) {
+			// Value passed in as name:value
+			list($name, $value) = explode(':', $name, 2);
+		}
+		$this->message['content']['headers'][trim($name)] = trim($value);
+	}
 
 	/**
 	 * utilise $this->send_options options d'envoi
@@ -371,24 +449,69 @@ class FacteurSparkpost extends Facteur {
 	 * @return bool
 	 */
 	public function Send() {
+
+		$this->message['content']['html'] = $this->Body;
+		$this->message['content']['text'] = $this->AltBody;
+		$this->message['content']['subject'] = $this->Subject;
+		$this->message['content']['from']['email'] = $this->From;
+		$this->message['content']['from']['name'] = $this->FromName;
+
+		// ajouter le tracking_id en tag, pour retrouver le message apres webhook
 		if (isset($this->send_options['tracking_id'])
 		  AND $id = $this->send_options['tracking_id']){
-
-			$campaign = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
-
-			$options = array(
-				'options' => array(
-					'open_tracking' => true,
-					'click_tracking' => true,
-					//'transactional' => true,
-				),
-				//'metadata' => array('key'=>'value'),
-				//'tags' => array('tag1','tag2'),
-				'campaign_id' => $campaign,
-			);
-			$this->AddCustomHeader("X-MSYS-API: ".json_encode($options));
+			$this->message['options']['open_tracking'] = true;
+			$this->message['options']['clic_tracking'] = true;
+			// prefixer le tracking par l'url du site pour ne pas melanger les feedbacks
+			$this->message['campaign_id'] = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
 		}
 
-		return parent::Send();
+		try {
+			$response = sparkpost_api_call('transmissions',$this->message);
+		}
+		catch (Exception $e) {
+      $this->SetError($e->getMessage());
+      return false;
+    }
+
+		spip_log("FacteurSparkpost->Send resultat:".var_export($response,true),"mailshot");
+
+
+		// statut d'erreur au premier niveau ?
+		if (isset($response['errors'])){
+			$err = "";
+			foreach($response['errors'] as $e){
+				$err .=  $e['code'].' '.$e['message']."\n";
+			}
+			$this->SetError($err . var_export($this->message,true));
+			return false;
+		}
+
+		// sinon regarder le status du premier mail envoye (le to)
+		/*
+		{
+		  "results": {
+		    "total_rejected_recipients": 0,
+		    "total_accepted_recipients": 1,
+		    "id": "11668787484950529"
+		  }
+		}
+		 */
+		if (isset($response['results'])){
+			if ($response['results']['total_accepted_recipients']>=1){
+				return true;
+			}
+			if ($response['results']['total_rejected_recipients']>=1){
+				$this->SetError("rejected");
+				return false;
+			}
+		}
+
+		// ici on ne sait pas ce qu'il s'est passe !
+		$this->SetError("??????".var_export($response,true));
+		spip_log("FacteurSparkpost->Send resultat inatendu : ".var_export($response,true),"mailshot"._LOG_ERREUR);
+		return false;
+
 	}
+
+	public function CreateHeader(){}
 }
