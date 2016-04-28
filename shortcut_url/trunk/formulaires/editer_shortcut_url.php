@@ -73,7 +73,6 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url='new', $
 			set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
 			$erreurs['titre'] = _T('shortcut_url:erreur_url_raccourcis_exist');
 		}
-
 	}
 
 	return $erreurs;
@@ -105,10 +104,13 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url='new', $o
 	$set['url'] = parametre_url(_request('url'),'var_mode','');
 	$set['ip_address'] = $_SERVER['REMOTE_ADDR'];
 	$set['date_modif'] = date('Y-m-d H:i:s');
-	$set['maj'] = date('Y-m-d H:i:s');
-
-	$action = action_editer_objet_dist($id_shortcut_url, 'shortcut_url' , $set);
-
+	
+	if(intval($id_shortcut_url) > 0) {
+		sql_delete('spip_urls','type='.sql_quote('shortcut_url'). ' AND id_objet=' .intval($id_shortcut_url));
+	}
+	$editer_objet = charger_fonction('editer_objet','action');
+	$action = $editer_objet($id_shortcut_url, 'shortcut_url' , $set);
+	
 	$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>$res);
 }
