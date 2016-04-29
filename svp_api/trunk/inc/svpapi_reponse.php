@@ -15,6 +15,12 @@ if (!defined('_SVPAPI_CHAMPS_SERIALISES_PLUGIN')) {
 	 */
 	define('_SVPAPI_CHAMPS_SERIALISES_PLUGIN', '');
 }
+if (!defined('_SVPAPI_CHAMPS_VERSION_PLUGIN')) {
+	/**
+	 *
+	 */
+	define('_SVPAPI_CHAMPS_VERSION_PLUGIN', 'vmax');
+}
 
 if (!defined('_SVPAPI_CHAMPS_MULTI_PAQUET')) {
 	/**
@@ -27,6 +33,12 @@ if (!defined('_SVPAPI_CHAMPS_SERIALISES_PAQUET')) {
 	 *
 	 */
 	define('_SVPAPI_CHAMPS_SERIALISES_PAQUET', 'auteur,credit,licence,copyright,dependances,procure,traductions');
+}
+if (!defined('_SVPAPI_CHAMPS_VERSION_PAQUET')) {
+	/**
+	 *
+	 */
+	define('_SVPAPI_CHAMPS_VERSION_PAQUET', 'version, version_base');
 }
 
 /**
@@ -144,16 +156,22 @@ function normaliser_champs($type_objet, $objet) {
 	// Traitement des champs multi et sérialisés
 	$champs_multi = explode(',', constant('_SVPAPI_CHAMPS_MULTI_' . strtoupper($type_objet)));
 	$champs_serialises = explode(',', constant('_SVPAPI_CHAMPS_SERIALISES_' . strtoupper($type_objet)));
+	$champs_version = explode(',', constant('_SVPAPI_CHAMPS_VERSION_' . strtoupper($type_objet)));
 
 	if ($objet) {
+		include_spip('plugins/preparer_sql_plugin');
+		include_spip('svp_fonctions');
 		foreach($objet as $_champ => $_valeur) {
 			if (in_array($_champ, $champs_multi)) {
-				include_spip('plugins/preparer_sql_plugin');
 				$objet_normalise[$_champ] = normaliser_multi($_valeur);
 			}
 
 			if (in_array($_champ, $champs_serialises)) {
 				$objet_normalise[$_champ] = unserialize($_valeur);
+			}
+
+			if (in_array($_champ, $champs_version)) {
+				$objet_normalise[$_champ] = denormaliser_version($_valeur);
 			}
 		}
 	}
