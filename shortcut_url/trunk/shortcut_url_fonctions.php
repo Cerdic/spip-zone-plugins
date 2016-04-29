@@ -88,8 +88,8 @@ function shortcut_compteur($id_shortcut_url){
  * @return string
  */
 function get_user_agent() {
-		if ( !isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-				return '-';
+		if (!isset( $_SERVER['HTTP_USER_AGENT'] )) {
+			return '-';
 		}
 
 		$ua = strip_tags( html_entity_decode( $_SERVER['HTTP_USER_AGENT'] ));
