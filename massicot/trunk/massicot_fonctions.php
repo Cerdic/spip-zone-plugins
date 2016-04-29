@@ -320,7 +320,7 @@ function massicoter_logo_document($logo, $connect = null, $doc = array()) {
 		$doc['extension'] = $rows[0]['extension'];
 	}
 
-   /* Si le document en question n'est pas une image, on ne fait rien */
+	/* Si le document en question n'est pas une image, on ne fait rien */
 	if ((! $logo)
 		or (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
 
@@ -349,7 +349,11 @@ function massicoter_logo_document($logo, $connect = null, $doc = array()) {
 	   qu'on renvoie fait bien la même taille que le logo qu'on a
 	   reçu. */
 	$balise = image_reduire(
-		$balise_img($fichier_massicote, '', 'spip_logos'),
+		$balise_img(
+			$fichier_massicote,
+			extraire_attribut($logo, 'alt'),
+			extraire_attribut($logo, 'class')
+		),
 		$largeur_logo,
 		$hauteur_logo
 	);
@@ -379,6 +383,8 @@ function massicoter_logo($logo, $connect = null, $objet_type = null, $id_objet =
 	}
 
 	$fichier = extraire_attribut($logo, 'src');
+	$alt     = extraire_attribut($logo, 'alt');
+	$classes = extraire_attribut($logo, 'class');
 
 	/* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
 	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
@@ -400,7 +406,7 @@ function massicoter_logo($logo, $connect = null, $objet_type = null, $id_objet =
 
 	$balise_img = charger_filtre('balise_img');
 
-	return $balise_img($fichier, '', 'spip_logos');
+	return $balise_img($fichier, $alt, $classes);
 }
 
 /**
