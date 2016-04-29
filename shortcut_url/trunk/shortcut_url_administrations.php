@@ -59,5 +59,3 @@ function shortcut_url_vider_tables($nom_meta_base_version) {
 	effacer_meta("shortcut_url");
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
