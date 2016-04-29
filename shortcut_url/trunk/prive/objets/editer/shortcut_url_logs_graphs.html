@@ -31,14 +31,31 @@
 
 <script type="text/javascript">
 
-var data = #INCLURE{fond=json/compteur_pays,id_shortcut_url};
+var data = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url}|trim)];
+var data_full = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url,limite=300}|trim)];
 
 $(document).ready(function($) {
-
+	var scale = [1, 10, 50, 100, 500],
+		colors = ["couleur1","couleur2","couleur3","couleur4","couleur5"];
+	if(data.length > 0){
+		max = d3.max(data, function(d) { return d.value+1; });
+		if(max > 500){
+			var interval = (max - 500) / 5,
+				last = 500;
+			for (i = 0; i < 4; i++) {
+				last = last +interval;
+				scale.push(Math.floor(last));
+				colors.push("couleur"+(6+i));
+			}
+			
+			scale.push(max);
+			colors.push("couleur10");
+		}
+	}
 	// Affiche les stats sur la carte
 	var color = d3.scale.threshold()
-		.domain([1, 10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 4000, 5000])
-		.range(["couleur1", "couleur2", "couleur3", "couleur4", "couleur5", "couleur6", "couleur7", "couleur8", "couleur9", "couleur10"]);
+		.domain(scale)
+		.range(colors);
 
 	var width = 760, 
 		height = 500;
@@ -75,7 +92,7 @@ $(document).ready(function($) {
 				.style("opacity", 0);
 		for (var i = 0; i < collection.features.length; i++) {
 			var iso2 = collection.features[i].properties.ISO2;
-			data.forEach(function(d) {
+			data_full.forEach(function(d) {
 					if(iso2 == d.label) {
 						color_fill[d.label] = color(d.value);
 						tooltip_click[d.label] = d.value;
@@ -115,7 +132,7 @@ $(document).ready(function($) {
 	});
 
 	// Affiche les barres horizontales
-	var margin = {top: 20, right:20, bottom: 20, left: 20},
+	var margin = {top: 20, right:20, bottom: 20, left: 60},
 		width = 760 - margin.left - margin.right,
 		height = 300 - margin.top - margin.bottom;
 
@@ -126,10 +143,10 @@ $(document).ready(function($) {
 		yAxis = d3.svg.axis().scale(y).orient("left").tickSize(0);
 
 	var svg = d3.select("#bar").append("svg")
-		.attr("width", width + margin.right + margin.bottom)
-		.attr("height", height + margin.top + margin.left)
+		.attr("width", width + margin.right + margin.left)
+		.attr("height", height + margin.top + margin.bottom)
 		.append("g")
-		.attr("transform", "translate(" + margin.bottom + "," + margin.top + ")");
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	var tooltip2 = d3.select("body")
 				.append("div")
@@ -147,10 +164,7 @@ $(document).ready(function($) {
 			.attr("class",  function(d) { return color(d.value); })
 			.attr("transform", function(d) { return "translate(0," + y(d.label) + ")"; })
 			.on("mouseenter", function (d,event) {
-				if(d.value > 10)
-					tooltip2.html("<strong>" + d.percent + " %</strong> ");
-				else
-					tooltip2.html("<strong>" + d.value + " <:shortcut_url:nb_click:></strong> (" + d.value + " %) ");
+				tooltip2.html("<strong>" + d.value + " <:shortcut_url:nb_click:></strong> (" + d.percent + " %) ");
 				if(d3.event.pageX && d3.event.pageY) {
 					tooltip2.style("left", (d3.event.pageX +20)+ "px")
 						.style("top",(d3.event.pageY + 20) + "px").style("opacity", "1");
@@ -165,21 +179,9 @@ $(document).ready(function($) {
 				return tooltip2.style("opacity", "0");
 			});
 
-	  	bar.append("rect")
+		bar.append("rect")
 			.attr("width", function(d) { return x(d.value); })
 			.attr("height", y.rangeBand());
-
-	  	bar.append("text")
-			.attr("class", "value")
-			.attr("x", function(d) { return x(d.value); })
-			.attr("y", y.rangeBand() / 2)
-			.attr("dx", -3)
-			.attr("dy", ".35em")
-			.attr("text-anchor", "end")
-			.text(function(d) { 
-				if(d.value > 10)
-					return d.value + ' <:shortcut_url:nb_click:>'; }
-			);
 
 		svg.append("g")
 			.attr("class", "y axis")
@@ -197,7 +199,20 @@ $(document).ready(function($) {
 <h2><:shortcut_url:titre_shortcut_url_graph_humain_click:></h2>
 
 <script type="text/javascript">
-
+	var d3_locale_fr = d3.locale({
+		decimal: ".",
+		thousands: " ",
+		grouping: [ 3 ],
+		currency: [ "$", "" ],
+		dateTime: "%a %b %e %X %Y",
+		date: "%m/%d/%Y",
+		time: "%H:%M:%S",
+		periods: [ "AM", "PM" ],
+		days: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+		shortDays: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ],
+		months: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+		shortMonths: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aou", "Sep", "Oct", "Nov", "Déc" ]
+	});
 	$(document).ready(function($) {
 			var json = [
 				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
@@ -214,12 +229,12 @@ $(document).ready(function($) {
 
 			var title_value = "<:shortcut_url:nb_click:>";
 
-			var margin = {top: 60, right: 60, bottom: 60, left: 60},
+			var margin = {top: 60, right: 60, bottom: 80, left: 60},
 				width = 760 - margin.left - margin.right,
 				height = 400 - margin.top - margin.bottom;
 
-			var parseDate = d3.time.format("%Y-%m-%d").parse;
-			var tooltipDate = d3.time.format("%e %b");
+			var parseDate = d3_locale_fr.timeFormat("%Y-%m-%d");
+			var tooltipDate = d3_locale_fr.timeFormat("%e %b");
 
 			var x = d3.time.scale()
 				.range([0, width]);
@@ -230,6 +245,7 @@ $(document).ready(function($) {
 			var xAxis = d3.svg.axis()
 				.scale(x)
 				.tickSize(-height)
+				.tickFormat(d3_locale_fr.timeFormat("%B %Y"))
 				.tickSubdivide(1);
 
 			var yAxis = d3.svg.axis()
@@ -253,7 +269,7 @@ $(document).ready(function($) {
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 			json.forEach(function(d) {
-				d.label = parseDate(d.label);
+				d.label = parseDate.parse(d.label);
 				d.value = +d.value;
 			});
 

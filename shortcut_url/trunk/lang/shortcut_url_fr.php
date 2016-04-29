@@ -33,32 +33,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_titre' => 'Titre',
 	'form_url' => 'URL',
 	'form_user_agent' => 'User agent',
-	'form_click' => 'Nb click',
+	'form_click' => 'Nb clics',
 
 	// I
 	'icone_supprimer_shortcut_url' => 'Supprimer l\'URL raccourcie',
 	'icone_stats_shortcut'  => 'Statistiques',
 	'icone_stats_shortcut_url'  => 'Retour à la liste statistique',
-	'info_1_shortcut_url_click' => 'Ce lien a totalisé @nb@ click',
-	'info_nb_shortcut_url_clicks' => 'Ce lien a totalisé @nb@ clicks',
+	'info_1_shortcut_url_click' => 'Ce lien a totalisé @nb@ clic',
+	'info_nb_shortcut_url_clicks' => 'Ce lien a totalisé @nb@ clics',
 	'info_1_shortcut_url' => '@nb@ URL raccourcie',
 	'info_nb_shortcut_urls' => '@nb@ URL raccourcies',
 	'info_nb_shortcut_url_stat' => '@nb@ connexion sur l\'ensemble des URLs',
 	'info_nb_shortcut_url_stats' => '@nb@ connexions sur l\'ensemble des URLs',
-	'info_1_shortcut_url_humain' => '<strong>@click@</strong> clicks pour les humains',
-	'info_1_shortcut_url_bot' => '<strong>@click@</strong> clicks pour les robots',
+	'info_1_shortcut_url_humain' => '<strong>@click@</strong> clics pour les humains',
+	'info_1_shortcut_url_bot' => '<strong>@click@</strong> clics pour les robots',
 	'item_utiliser_shortcut_export' => 'Exporter les statistiques des liens raccourcis',
 	'item_utiliser_shortcut_url' => 'Ajouter une URL et puis c\'est tout',
 	'item_utiliser_shortcut_title' => 'Vous pouvez définir le raccourci de votre URL (max @nb@ caractères)',
 
-	'label_mois' => 'Sélectionner un mois',
+	// L
 	'label_annee' => 'Sélectionner une année',
+	'label_autres' => 'Autres',
+	'label_mois' => 'Sélectionner un mois',
 
 	// M
 	'message_confirmation_shortcut_url' => 'Votre raccourci a été enregistré.',
 
 	// N
-	'nb_click' => 'click',
+	'nb_click' => 'clics',
 	'non_communique' => 'nc',
 	
 	// P
@@ -98,8 +100,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_shortcut_url_partage' => 'Partager ce lien',
 	'titre_shortcut_url_graph_carte' => 'Raccourcis par pays',
 	'titre_shortcut_url_graph_bots' => 'Raccourcis par bots',
-	'titre_shortcut_url_graph_click' => 'Nombre de clicks par jour',
-	'titre_shortcut_url_graph_humain_click' => 'Nombre de clicks par jour pour les humains',
-	'titre_shortcut_url_graph_bot_click' => 'Nombre de clicks par jour pour les robots',
+	'titre_shortcut_url_graph_click' => 'Nombre de clics par jour',
+	'titre_shortcut_url_graph_humain_click' => 'Nombre de clics par jour pour les humains',
+	'titre_shortcut_url_graph_bot_click' => 'Nombre de clics par jour pour les robots',
 	'titre_shortcut_url_liste_logs_bots' => 'Liste statistique des bots'
 );

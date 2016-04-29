@@ -13,6 +13,12 @@ Ce plugins permet de stocker le nombre de click par URL, de consulter la provena
 
 ## Changelog
 
+### Version 1.1.2 (29/04/2016)
+
+- Amélioration des graphs
+- Mettre des fils d'Ariane partout
+- Modification CSS pour éviter que les listes se barrent en sucette
+
 ### Version 1.1.1 (29/04/2016)
 
 - Suppression du fichier d'options qui définissait une valeur qui doit être mise par défaut dans le code
