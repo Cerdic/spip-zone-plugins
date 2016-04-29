@@ -21,6 +21,12 @@ if (!defined('_SVPAPI_CHAMPS_VERSION_PLUGIN')) {
 	 */
 	define('_SVPAPI_CHAMPS_VERSION_PLUGIN', 'vmax');
 }
+if (!defined('_SVPAPI_CHAMPS_LISTE_PLUGIN')) {
+	/**
+	 *
+	 */
+	define('_SVPAPI_CHAMPS_LISTE_PLUGIN', 'branches_spip');
+}
 
 if (!defined('_SVPAPI_CHAMPS_MULTI_PAQUET')) {
 	/**
@@ -39,6 +45,12 @@ if (!defined('_SVPAPI_CHAMPS_VERSION_PAQUET')) {
 	 *
 	 */
 	define('_SVPAPI_CHAMPS_VERSION_PAQUET', 'version, version_base');
+}
+if (!defined('_SVPAPI_CHAMPS_LISTE_PAQUET')) {
+	/**
+	 *
+	 */
+	define('_SVPAPI_CHAMPS_LISTE_PAQUET', 'branches_spip');
 }
 
 /**
@@ -157,6 +169,7 @@ function normaliser_champs($type_objet, $objet) {
 	$champs_multi = explode(',', constant('_SVPAPI_CHAMPS_MULTI_' . strtoupper($type_objet)));
 	$champs_serialises = explode(',', constant('_SVPAPI_CHAMPS_SERIALISES_' . strtoupper($type_objet)));
 	$champs_version = explode(',', constant('_SVPAPI_CHAMPS_VERSION_' . strtoupper($type_objet)));
+	$champs_liste = explode(',', constant('_SVPAPI_CHAMPS_LISTE_' . strtoupper($type_objet)));
 
 	if ($objet) {
 		include_spip('plugins/preparer_sql_plugin');
@@ -172,6 +185,10 @@ function normaliser_champs($type_objet, $objet) {
 
 			if (in_array($_champ, $champs_version)) {
 				$objet_normalise[$_champ] = denormaliser_version($_valeur);
+			}
+
+			if (in_array($_champ, $champs_liste)) {
+				$objet_normalise[$_champ] = explode(',', $_valeur);
 			}
 		}
 	}
