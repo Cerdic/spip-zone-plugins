@@ -32,27 +32,25 @@ function formulaires_editer_shortcut_url_charger_dist($id_shortcut_url='new', $o
 	$valeurs = formulaires_editer_objet_charger('shortcut_url',$id_shortcut_url, '', '', $retour, '');
 
 	if (defined('_TAILLE_RACCOURCI')) {
-
-		if(_TAILLE_RACCOURCI > 5)
+		if(_TAILLE_RACCOURCI >= 5) {
 			$valeurs['taille_raccourci'] = _TAILLE_RACCOURCI;
-		else
-			$valeurs['taille_raccourci'] = 5;
-
-	} else
-			$valeurs['taille_raccourci'] = 5;
-
+		}else {
+			$valeurs['taille_raccourci'] = 8;
+		}
+	} else {
+			$valeurs['taille_raccourci'] = 8;
+	}
 	return $valeurs;
 }
 
 function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url='new', $objet='', $id_objet='', $retour='', $ajaxload='oui', $options=''){
 	$erreurs = formulaires_editer_objet_verifier('shortcut_url',$id_shortcut_url,array('url'));
 
-	// $erreurs = array();
-	if (!$url = _request('url'))
+	if (!$url = _request('url')){
 		$erreurs['url'] = _T('info_obligatoire');
-	// Check si il existe le http://
-	else{
-		$parsed = parse_url($url );
+	} else {
+		// Check si il existe le http://
+		$parsed = parse_url($url);
 		if (filter_var($url, FILTER_VALIDATE_URL) === false) {
 			$erreurs['url'] = _T('shortcut_url:erreur_url_invalide');
 		}
@@ -60,7 +58,7 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url='new', $
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url,'var_mode','');
 			// Check si l'URL existe deja
-			if (($id_shortcut_url=='oui') && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)))){
+			if (($id_shortcut_url == 'oui') && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url','spip_shortcut_urls', 'url=' . sql_quote($url)))){
 				set_request('id_shortcut_url_existe',$id_shortcut_url_existe);
 				$erreurs['url'] = _T('shortcut_url:erreur_url_exist');
 			}
@@ -87,18 +85,21 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url='new', $o
 		$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
 
 	if (defined('_TAILLE_RACCOURCI')) {
-		if(_TAILLE_RACCOURCI > 5)
+		if(_TAILLE_RACCOURCI >= 5) {
 			$taille_raccourci = _TAILLE_RACCOURCI;
-		else
-			$taille_raccourci = 5;
-	} else
-		$taille_raccourci = 5;
+		} else {
+			$taille_raccourci = 8;
+		}
+	} else {
+		$taille_raccourci = 8;
+	}
 
 	$set = array();
-	if(_request('titre'))
+	if(_request('titre')) {
 		$set['titre'] = _request('titre');
-	else
+	} else {
 		$set['titre'] = generer_chaine_aleatoire($taille_raccourci);
+	}
 	$set['description'] = $result['nom_site'];
 	// On supprime ?var_mode=recalcul et autres var_mode
 	$set['url'] = parametre_url(_request('url'),'var_mode','');
