@@ -76,33 +76,37 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	$erreur = array();
 	$format_reponse = 'json';
 
-	// Vérification du format de sortie demandé
+	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
+	// renvoyer des données complètes
 	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
-		// On positionne cette fois le format de sortie car on sait que celui demandé est valide
-		$format_reponse = $contenu['requete']['format'];
-		// Vérification du nom de la collection
-		if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
-			$items = array();
-			// On vérifie les critères de filtre additionnels si la requête en contient
-			$where = array();
-			if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
-				// Si il y a des critères additionnels on complète le where en conséquence
-				if ($contenu['requete']['criteres']) {
-					foreach ($contenu['requete']['criteres'] as $_critere => $_valeur) {
-						if ($_critere == 'compatible_spip') {
-							$f_critere = charger_fonction('where_compatible_spip', 'inc');
-							$where[] = $f_critere($_valeur, 'spip_plugins', '>');
-						} else {
-							$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+		// Vérification du format de sortie demandé
+		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+			// On positionne cette fois le format de sortie car on sait que celui demandé est valide
+			$format_reponse = $contenu['requete']['format'];
+			// Vérification du nom de la collection
+			if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
+				$donnees = array();
+				// On vérifie les critères de filtre additionnels si la requête en contient
+				$where = array();
+				if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
+					// Si il y a des critères additionnels on complète le where en conséquence
+					if ($contenu['requete']['criteres']) {
+						foreach ($contenu['requete']['criteres'] as $_critere => $_valeur) {
+							if ($_critere == 'compatible_spip') {
+								$f_critere = charger_fonction('where_compatible_spip', 'inc');
+								$where[] = $f_critere($_valeur, 'spip_plugins', '>');
+							} else {
+								$where[] = "spip_plugins.${_critere}=" . sql_quote($_valeur);
+							}
 						}
 					}
+
+					// Récupération de la collection spécifiée en fonction des critères appliqués
+					$collectionner = 'reponse_collectionner_' . $contenu['requete']['collection'];
+					$donnees = $collectionner($where);
+
+					$contenu['donnees'] = $donnees;
 				}
-
-				// Récupération de la collection spécifiée en fonction des critères appliqués
-				$collectionner = 'reponse_collectionner_' . $contenu['requete']['collection'];
-				$items = $collectionner($where);
-
-				$contenu['items'] = $items;
 			}
 		}
 	}
@@ -143,66 +147,70 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 	$erreur = array();
 	$format_reponse = 'json';
 
-	// Vérification du format de sortie demandé
+	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
+	// renvoyer des données complètes
 	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
-		// On positionne le format de sortie qui sera utilisé car on sait que celui demandé est valide
-		$format_reponse = $contenu['requete']['format'];
-		// Vérification du nom de la collection
-		if (requete_verifier_ressource($contenu['requete']['collection'], $erreur)) {
-			// Vérification du préfixe de la ressource
-			if (requete_verifier_prefixe($contenu['requete']['ressource'], $erreur)) {
-				$prefixe = strtoupper($contenu['requete']['ressource']);
-				$items = array();
-				// On recherche d'abord le plugin par son préfixe dans la table spip_plugins en vérifiant que
-				// c'est bien un plugin fourni pas un dépôt et pas un plugin installé sur le serveur uniquement
-				$from = array('spip_plugins', 'spip_depots_plugins AS dp');
-				$select = array('*');
-				$where = array(
-					'prefixe=' . sql_quote($prefixe),
-					'dp.id_depot>0',
-					'dp.id_plugin=spip_plugins.id_plugin'
-				);
-				$group_by = array('spip_plugins.id_plugin');
-				$plugin = sql_fetsel($select, $from, $where, $group_by);
-				if ($plugin) {
-					// On refactore le tableau de sortie du fetsel en supprimant les colonnes id_depot et id_plugin qui ne
-					// sont d'aucune utilité pour le service.
-					unset($plugin['id_plugin']);
-					unset($plugin['id_depot']);
-					$items['plugin'] = normaliser_champs('plugin', $plugin);
-
-					// On recherche maintenant les paquets du plugin
-					$from = array('spip_paquets');
+		// Vérification du format de sortie demandé
+		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+			// On positionne le format de sortie qui sera utilisé car on sait que celui demandé est valide
+			$format_reponse = $contenu['requete']['format'];
+			// Vérification du nom de la collection
+			if (requete_verifier_ressource($contenu['requete']['collection'], $erreur)) {
+				// Vérification du préfixe de la ressource
+				if (requete_verifier_prefixe($contenu['requete']['ressource'], $erreur)) {
+					$prefixe = strtoupper($contenu['requete']['ressource']);
+					$donnees = array();
+					// On recherche d'abord le plugin par son préfixe dans la table spip_plugins en vérifiant que
+					// c'est bien un plugin fourni pas un dépôt et pas un plugin installé sur le serveur uniquement
+					$from = array('spip_plugins', 'spip_depots_plugins AS dp');
 					$select = array('*');
 					$where = array(
 						'prefixe=' . sql_quote($prefixe),
-						'id_depot>0'
+						'dp.id_depot>0',
+						'dp.id_plugin=spip_plugins.id_plugin'
 					);
-					$paquets = sql_allfetsel($select, $from, $where);
-					$items['paquets'] = array();
-					if ($paquets) {
-						// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par archives zip.
-						$champs_inutiles = array(
-							'id_paquet', 'id_plugin', 'id_depot',
-							'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature'
+					$group_by = array('spip_plugins.id_plugin');
+					$plugin = sql_fetsel($select, $from, $where, $group_by);
+					if ($plugin) {
+						// On refactore le tableau de sortie du fetsel en supprimant les colonnes id_depot et id_plugin qui ne
+						// sont d'aucune utilité pour le service.
+						unset($plugin['id_plugin']);
+						unset($plugin['id_depot']);
+						$donnees['plugin'] = normaliser_champs('plugin', $plugin);
+
+						// On recherche maintenant les paquets du plugin
+						$from = array('spip_paquets');
+						$select = array('*');
+						$where = array(
+							'prefixe=' . sql_quote($prefixe),
+							'id_depot>0'
 						);
-						foreach ($paquets as $_paquet) {
-							foreach ($champs_inutiles as $_champ) {
-								unset($_paquet[$_champ]);
+						$paquets = sql_allfetsel($select, $from, $where);
+						$donnees['paquets'] = array();
+						if ($paquets) {
+							// On refactore le tableau de sortie du allfetsel en un tableau associatif indexé par archives zip.
+							$champs_inutiles = array(
+								'id_paquet', 'id_plugin', 'id_depot',
+								'actif', 'installe', 'recent', 'maj_version', 'superieur', 'obsolete', 'attente', 'constante', 'signature'
+							);
+							foreach ($paquets as $_paquet) {
+								foreach ($champs_inutiles as $_champ) {
+									unset($_paquet[$_champ]);
+								}
+								$donnees['paquets'][$_paquet['nom_archive']] = normaliser_champs('paquet', $_paquet);
 							}
-							$items['paquets'][$_paquet['nom_archive']] = normaliser_champs('paquet', $_paquet);
 						}
+					} else {
+						// On renvoie une erreur 404 pour indiquer que le plugin n'existe pas
+						$erreur = array(
+							'status'  => 404,
+							'type'    => 'plugin_nok',
+							'element' => 'plugin',
+							'valeur'  => $contenu['requete']['ressource']
+						);
 					}
-				} else {
-					// On renvoie une erreur 404 pour indiquer que le plugin n'existe pas
-					$erreur = array(
-						'status'  => 404,
-						'type'    => 'plugin_nok',
-						'element' => 'plugin',
-						'valeur'  => $contenu['requete']['ressource']
-					);
+					$contenu['donnees'] = $donnees;
 				}
-				$contenu['items'] = $items;
 			}
 		}
 	}

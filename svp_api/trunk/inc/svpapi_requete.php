@@ -4,6 +4,39 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
+ * Détermine si le serveur est en mode run-time ou pas.
+ * On considère qu'un serveur en mode run-time n'est pas valide pour
+ * traiter les requêtes.
+ *
+ * @param &array	$erreur
+ * 		Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
+ *      Les index mis à jour sont:
+ *      - status : le code de l'erreur HTTP, soit 501
+ *      - type : chaine identifiant l'erreur plus précisément, soit serveur_nok
+ *      - element : type d'objet sur lequel porte l'erreur, soit serveur
+ *      - valeur : la valeur du mode runtime
+ *
+ * @return boolean
+ * 		True si le serveur est valide, false sinon.
+ */
+function requete_verifier_serveur(&$erreur) {
+	$serveur_valide = true;
+
+	include_spip('inc/svp_phraser');
+	if (!_SVP_MODE_RUNTIME) {
+		$erreur = array(
+			'status'	=> 501,
+			'type'		=> 'serveur_nok',
+			'element'	=> 'serveur',
+			'valeur'	=> _SVP_MODE_RUNTIME);
+		$serveur_valide = false;
+	}
+
+	return $serveur_valide;
+}
+
+
+/**
  * Détermine si la valeur du format de sortie est valide.
  * Seul le format JSON est accepté.
  *

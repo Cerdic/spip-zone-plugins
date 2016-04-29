@@ -86,7 +86,7 @@ function reponse_initialiser_contenu($requete) {
 		'requete'	=> $demande,
 		'erreur'	=> $erreur,
 		'schema' 	=> $schema,
-		'items'		=> array());
+		'donnees'		=> array());
 
 	return $contenu;
 }
@@ -176,18 +176,23 @@ function normaliser_champs($type_objet, $objet) {
 		include_spip('svp_fonctions');
 		foreach($objet as $_champ => $_valeur) {
 			if (in_array($_champ, $champs_multi)) {
+				// Passer un champ multi en tableau indexé par la langue
 				$objet_normalise[$_champ] = normaliser_multi($_valeur);
 			}
 
 			if (in_array($_champ, $champs_serialises)) {
+				// Désérialiser un champ sérialisé
 				$objet_normalise[$_champ] = unserialize($_valeur);
 			}
 
 			if (in_array($_champ, $champs_version)) {
+				// Retourne la chaine de la version x.y.z sous sa forme initiale, sans
+				// remplissage à gauche avec des 0.
 				$objet_normalise[$_champ] = denormaliser_version($_valeur);
 			}
 
 			if (in_array($_champ, $champs_liste)) {
+				// Passer une chaine liste en tableau
 				$objet_normalise[$_champ] = explode(',', $_valeur);
 			}
 		}
@@ -227,6 +232,9 @@ function reponse_construire($reponse, $contenu, $format_reponse) {
 
 	$reponse->setCharset('utf-8');
 	$reponse->setStatusCode($contenu['erreur']['status']);
+	if ($contenu['erreur']['status'] == 200) {
+		$contenu['erreur'] = array();
+	}
 
 	if ($format_reponse == 'json') {
 		$reponse->headers->set('Content-Type', 'application/json');
