@@ -1,17 +1,22 @@
-SPIP shortcut_url
+SPIP - shortcut_url
 =======
 
-Créer des liens raccourcis facilement avec SPIP dans la joie, le plaisir et la bonne humeur et partager le dans votre réseau social favoris.
+Créer des liens raccourcis facilement avec SPIP dans la joie, le plaisir et la bonne humeur et partager les dans votre réseau social favori.
 
-Attention ce plugin supprime des boutons de navigation dans le backoffice de SPIP. Il faut installer une instance de SPIP dédié à cet usage. Seul les boutons pour accéder aux auteurs, les outils de maintenance et la configuration sont accessibles.
+Attention ce plugin supprime des boutons de navigation dans le backoffice de SPIP. Il faut installer une instance de SPIP dédié à cet usage. Seuls les boutons pour accéder aux auteurs, les outils de maintenance et la configuration sont accessibles.
 
-Ce plugins permet de stocker le le nombre de click par URL, de consulter la provenance des utilisateurs ...
+Ce plugins permet de stocker le nombre de click par URL, de consulter la provenance des utilisateurs ...
 
 ## Plugin SPIP
 
 * d3js (https://github.com/magikcypress/spip_d3js) [utilise]
 
 ## Changelog
+
+### Version 1.1.1 (29/04/2016)
+
+- Suppression du fichier d'options qui définissait une valeur qui doit être mise par défaut dans le code
+- Nettoyage de code
 
 ### Version 1.1.0 (29/04/2016)
 
