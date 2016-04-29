@@ -54,10 +54,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mois' => 'Sélectionner un mois',
 	'label_annee' => 'Sélectionner une année',
 
+	// M
+	'message_confirmation_shortcut_url' => 'Votre raccourci a été enregistré.',
+
 	// N
 	'nb_click' => 'click',
 	'non_communique' => 'nc',
-
+	
 	// P
 	'partage_googleplus' => 'Patager sur GooglePlus',
 	'partage_twitter' => 'Partager sur Twitter',

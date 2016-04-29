@@ -111,6 +111,13 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url='new', $o
 	$editer_objet = charger_fonction('editer_objet','action');
 	$action = $editer_objet($id_shortcut_url, 'shortcut_url' , $set);
 	
-	$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
-	return array('editable' => false, 'message_ok'=>_T('config_info_enregistree'), 'redirect'=>$res);
+	//$res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
+	$res = array('editable' => true, 'message_ok' => _T('shortcut_url:message_confirmation_shortcut_url'));
+	if(_request('exec') == 'accueil'){
+		set_request('id_shortcut_url',false);
+		set_request('url',false);
+		set_request('titre',false);
+	}
+	$res['message_ok'] .= "<script type='text/javascript'>if (window.jQuery) $('.liste-objets.shortcut_url').ajaxReload();</script>";
+	return $res;
 }

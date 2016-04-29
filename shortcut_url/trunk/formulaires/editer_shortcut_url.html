@@ -4,7 +4,7 @@
 <BOUCLE_auteurs(AUTEURS){id_objet=#ENV{id_shortcut_url}}>
 <span class="vcard author"><:shortcut_url:auteur_shortcut_url:> <a class="url fn spip_in" href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></span></BOUCLE_auteurs>
 
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
@@ -44,9 +44,9 @@
 	]
 </div>
 
-[(#ENV{id_shortcut_url}|!={oui}|oui)
+[(#ENV{id_shortcut_url}|intval|>{0}|oui)
 <h2><:shortcut_url:titre_shortcut_url_partage:></h2>
-<div class="simple fiche_objet" style="float: left;">
+<div class="simple fiche_objet">
 <textarea name='texte' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='75'>#DESCRIPTION #URL_SITE_SPIP/#TITRE</textarea>
 	<ul>
 		[<li class="seenthis">
