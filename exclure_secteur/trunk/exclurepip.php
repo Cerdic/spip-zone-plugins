@@ -21,13 +21,13 @@ function exclure_sect_pre_boucle(&$boucle){
 
 	if (in_array($type, array('articles', 'rubriques', 'syndic'))) {
 		if ($exclut !='z'){
-			$boucle->where[] = "sql_in('id_secteur', '$exclut', 'NOT')";
+			$boucle->where[] = "sql_in('$type.id_secteur', '$exclut', 'NOT')";
 		}
 	}
 
 	if ($type == 'breves'){
 		if ($exclut !='z'){
-			$boucle->where[] = "sql_in('id_rubrique', '$exclut', 'NOT')";
+			$boucle->where[] = "sql_in('$type.id_rubrique', '$exclut', 'NOT')";
 		}
 	}
 
