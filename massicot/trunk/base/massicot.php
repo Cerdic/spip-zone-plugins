@@ -72,6 +72,19 @@ function massicot_declarer_tables_interfaces($interfaces) {
 		}
 	}
 
+	/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
+	if (!empty($interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'])) {
+		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0]
+			= 'massicoter_logo('.$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0]
+			. ', $connect'
+			. ', $Pile)';
+	} else {
+		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][]
+			= 'massicoter_logo(%s'
+			. ', $connect'
+			. ', $Pile)';
+	}
+
 	return $interfaces;
 }
 
