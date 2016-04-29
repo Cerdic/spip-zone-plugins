@@ -31,11 +31,11 @@ function generer_chaine($length) {
  */
 function generer_chaine_aleatoire($length = 5){ 
 
-        $pass = generer_chaine($length);
-        do {
-                $pass = generer_chaine($length);
-        } while (!preg_match('/(?=.*\d)/', $pass));
-        return $pass;
+	$pass = generer_chaine($length);
+	do {
+		$pass = generer_chaine($length);
+	} while (!preg_match('/(?=.*\d)/', $pass));
+	return $pass;
 }
 
 
@@ -73,11 +73,12 @@ function shortcut_compteur($id_shortcut_url){
 		$humain = 'bot';
 		$insert_bot = sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address));
 		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
-	} else
+	} else {
 		$humain = 'oui';
+		$insert = sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'shorturl' => $shorturl['url'],'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address,'country_code' => $country_code,'humain' => $humain));
+		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
+	}
 
-	$insert = sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'shorturl' => $shorturl['url'],'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address,'country_code' => $country_code,'humain' => $humain));
-	$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
 	return false;
 }
 
@@ -87,8 +88,9 @@ function shortcut_compteur($id_shortcut_url){
  * @return string
  */
 function get_user_agent() {
-		if ( !isset( $_SERVER['HTTP_USER_AGENT'] ) )
+		if ( !isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 				return '-';
+		}
 
 		$ua = strip_tags( html_entity_decode( $_SERVER['HTTP_USER_AGENT'] ));
 		$ua = preg_replace('![^0-9a-zA-Z\':., /{}\(\)\[\]\+@&\!\?;_\-=~\*\#]!', '', $ua );
@@ -116,5 +118,3 @@ function get_geoip($ip=null){
 
 	return geoip_country_code_by_addr($gi,$ip);
 }
-
-?>
