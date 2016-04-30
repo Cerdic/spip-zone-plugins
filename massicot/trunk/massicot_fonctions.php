@@ -391,7 +391,7 @@ function massicoter_logo_document($logo, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
+function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = null) {
 
 	include_spip('inc/filtres');
 
@@ -419,7 +419,7 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 		$id_objet	= $objet['id_objet'];
 	}
 
-	$parametres = massicot_get_parametres($objet_type, $id_objet);
+	$parametres = massicot_get_parametres($objet_type, $id_objet, $role);
 
 	$fichier = massicoter_fichier($src, $parametres);
 
