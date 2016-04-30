@@ -16,5 +16,5 @@
 
   <pipeline nom="levenshtein_calculer" />
 
-  <utilise nom="vocabulaire" compatibilite="[1.0.0;]" />
+  <utilise nom="vocabulaire" compatibilite="[1.0.1;]" />
 </paquet>
