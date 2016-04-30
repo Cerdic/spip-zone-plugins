@@ -80,7 +80,7 @@ function formulaires_massicoter_image_saisies_dist($objet, $id_objet, $redirect,
  */
 function formulaires_massicoter_image_charger_dist($objet, $id_objet, $redirect, $forcer_dimensions = null, $role = null) {
 
-	$parametres = massicot_get_parametres($objet, $id_objet);
+	$parametres = massicot_get_parametres($objet, $id_objet, $role);
 
 	if (! $parametres) {
 		$parametres = array(
@@ -94,6 +94,7 @@ function formulaires_massicoter_image_charger_dist($objet, $id_objet, $redirect,
 
 	$parametres['objet']	= $objet;
 	$parametres['id_objet'] = $id_objet;
+	$parametres['role']     = $role;
 
 	return $parametres;
 }

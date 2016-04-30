@@ -20,7 +20,7 @@
  *
  * @return string : le chemin vers l'image, un string vide sinon
  */
-function massicot_chemin_image($objet, $id_objet) {
+function massicot_chemin_image($objet, $id_objet, $role = null) {
 
 	include_spip('base/abstract_sql');
 	include_spip('base/objets');
@@ -37,8 +37,14 @@ function massicot_chemin_image($objet, $id_objet) {
 
 	} else {
 
+		if ($role === 'logo_survol') {
+			$type_logo = 'off';
+		} else {
+			$type_logo = 'on';
+		}
+
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
-		$logo = $chercher_logo($id_objet, id_table_objet($objet), 'on');
+		$logo = $chercher_logo($id_objet, id_table_objet($objet), $type_logo);
 		if (is_array($logo)) {
 			return array_shift($logo);
 		}
@@ -125,7 +131,7 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
  *
  * @return array : Un tableau avec les paramètres de massicotage
  */
-function massicot_get_parametres($objet, $id_objet) {
+function massicot_get_parametres($objet, $id_objet, $role = '') {
 
 	include_spip('base/abstract_sql');
 
@@ -135,7 +141,8 @@ function massicot_get_parametres($objet, $id_objet) {
 		. 'INNER JOIN spip_massicotages_liens as L ON M.id_massicotage=L.id_massicotage',
 		array(
 			'L.objet='.sql_quote($objet),
-			'L.id_objet='.intval($id_objet)
+			'L.id_objet='.intval($id_objet),
+			'L.role='.sql_quote($role)
 		)
 	);
 
@@ -297,9 +304,9 @@ function massicoter_document($fichier = false) {
  *
  * @return string : Un fichier massicoté
  */
-function massicoter_objet($fichier, $objet, $id_objet) {
+function massicoter_objet($fichier, $objet, $id_objet, $role = null) {
 
-	return massicoter_fichier($fichier, massicot_get_parametres($objet, $id_objet));
+	return massicoter_fichier($fichier, massicot_get_parametres($objet, $id_objet, $role));
 }
 
 /**
