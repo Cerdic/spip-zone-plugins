@@ -1,10 +1,10 @@
 <paquet
 	prefix="vocabulaire"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
-	logo=""
+	logo="prive/themes/spip/images/vocabulaire-64.png"
 	documentation=""
 	schema="1.0.0"
 >
