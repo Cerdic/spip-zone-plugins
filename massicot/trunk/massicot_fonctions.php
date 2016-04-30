@@ -75,6 +75,14 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
 		return _T('massicot:erreur_parametre_manquant', array('parametre' => 'y2'));
 	}
 
+	/* le rôle est traité à part */
+	if (isset($parametres['role'])) {
+		$role = $parametres['role'];
+		unset($parametres['role']);
+	} else {
+		$role = '';
+	}
+
 	$chemin_image = massicot_chemin_image($objet, $id_objet);
 	list($width, $height) = getimagesize($chemin_image);
 
@@ -84,6 +92,7 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
 		array(
 			'objet='.sql_quote($objet),
 			'id_objet='.intval($id_objet),
+			'role='.sql_quote($role),
 		)
 	);
 
@@ -91,7 +100,8 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
 		$id_massicotage = objet_inserer('massicotage');
 		objet_associer(
 			array('massicotage' => $id_massicotage),
-			array($objet => $id_objet)
+			array($objet => $id_objet),
+			array('role' => $role)
 		);
 	}
 
