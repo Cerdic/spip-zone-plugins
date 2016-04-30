@@ -1,23 +1,26 @@
 <?php
-
-// Sécurité
+/**
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant une API REST pour SVP
+ * selon le modèle imposé par le serveur HTTP abstrait.
+ *
+ * @package SPIP\SVPAPI\API
+ */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-/*
- * Implémentation d'un serveur REST pour SVP
- */
 
 /**
- * Traitement des erreurs directements détectées par le serveur HTTP abstrait.
- * Elles sont mises au format de l'API SVP et fournie au client en JSON.
+ * Traite les erreurs directement détectées par le serveur HTTP abstrait uniquement.
+ * Celles-ci sont mises au format de l'API SVP et fournies au client systématiquement en JSON.
+ *
+ * @api
  *
  * @param int $code
- *        Le code HTTP de l'erreur à générer
+ *      Le code HTTP de l'erreur à générer
  *
- * @return string
- *        Retourne une chaîne vide
+ * @return Symfony\Component\HttpFoundation\Response
+ *      Retourne l'objet réponse dont le contenu est mis à jour avec les éléments du bloc d'erreur.
  */
 function http_svp_erreur_dist($code, $requete, $reponse) {
 
@@ -50,21 +53,24 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 
 
 /**
- * Fait un GET sur une collection de plugins.
- * La requête est du type /svp/plugins et renvoie les objets plugin contenu dans la base du serveur (hors les plugins
- * installés). Il est possible de filtrer cette requête par catégorie /svp/plugins&categorie=outil et/ou par
- * compatibilité SPIP.
+ * Fait un GET sur une collection de plugins ou de dépôts.
+ * La requête est du type `/svp/plugins` ou `/svp/depots` et renvoie les objets plugin contenus dans la base du serveur
+ * (hors les plugins installés) ou les objets dépôt hébergés par le serveur.
+ * Il est possible de filtrer la collection des plugins par catégorie /svp/plugins&categorie=outil et par
+ * compatibilité SPIP /svp/plugins&compatible_spip=2.1.
  *
- * @param Symfony\Component\HttpFoundation\Request $requete
- *        Objet matérialisant la requête faite au serveur SVP.
+ * @api
+ *
+ * @param Symfony\Component\HttpFoundation\Request  $requete
+ *      Objet matérialisant la requête faite au serveur SVP.
  * @param Symfony\Component\HttpFoundation\Response $reponse
- *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
- *        complétée avant d'être retourné par la fonction.
+ *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *      complétée avant d'être retourné par la fonction.
  *
  * @return object
- *        Objet réponse complétée (status, contenu de la ressource...).
- *        La fonction peut lever une erreur sur le format de sortie, la collection et sur les critères de filtre,
- *        catégorie et compatibilité SPIP.
+ *      Objet réponse complétée (status, contenu de la ressource...).
+ *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, la collection et sur les critères
+ *        de filtre à savoir catégorie et compatibilité SPIP.
  */
 function http_svp_get_collection_dist($requete, $reponse) {
 
@@ -78,7 +84,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes
-	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+	if (requete_verifier_serveur($erreur)) {
 		// Vérification du format de sortie demandé
 		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
 			// On positionne cette fois le format de sortie car on sait que celui demandé est valide
@@ -126,16 +132,20 @@ function http_svp_get_collection_dist($requete, $reponse) {
 
 
 /**
- * Fait un GET sur une ressource de type plugin identifié par son préfixe.
+ * Fait un GET sur une ressource de type plugin identifiée par son préfixe.
  *
- * @param Symfony\Component\HttpFoundation\Request $requete
- *        Objet matérialisant la requête faite au serveur SVP.
+ * @api
+ *
+ * @param Symfony\Component\HttpFoundation\Request  $requete
+ *      Objet matérialisant la requête faite au serveur SVP.
  * @param Symfony\Component\HttpFoundation\Response $reponse
- *        Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
- *        complétée avant d'être retourné par la fonction.
+ *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *      complétée avant d'être retourné par la fonction.
  *
  * @return object
- *        Objet réponse complétée (status, contenu de la ressource...).
+ *      Objet réponse complété (status, contenu de la ressource...).
+ *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, le type de ressouce et
+ *        sur l'existante de la ressource demandée.
  */
 function http_svp_get_ressource_dist($requete, $reponse) {
 
@@ -149,7 +159,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes
-	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+	if (requete_verifier_serveur($erreur)) {
 		// Vérification du format de sortie demandé
 		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
 			// On positionne le format de sortie qui sera utilisé car on sait que celui demandé est valide

@@ -1,6 +1,5 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/svp_stats/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -11,7 +10,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'svpapi_description' => 'Ce plugin est un module optionnel de SVP. 
 _ Il permet, sur un site utilisé comme un serveur de plugins à l\'instar de Plugins SPIP, de fournir une API REST de récupération des données d\'un plugin ou d\'un paquet.
 Les données sont fournies, par défaut, en format JSON.',
-	'svpapi_slogan' => 'API REST pour interroger un serveur de plugins SVP'
+	'svpapi_slogan'      => 'API REST pour interroger un serveur de plugins SVP'
 );
-
-?>
