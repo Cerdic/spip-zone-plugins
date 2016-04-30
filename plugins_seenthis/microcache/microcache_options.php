@@ -1,30 +1,5 @@
 <?php
 
-// FALSE pour new style = memoization, TRUE pour old style = fichier dans local/
-if (FALSE) {
-
-
-function supprimer_microcache($id, $fond) {
-	include_spip("inc/microcache");
-	_supprimer_microcache($id, $fond);
-}
-
-function microcache($id, $fond, $calcul=false) {
-	include_spip("inc/microcache");
-	return _microcache($id, $fond, $calcul);
-}
-
-function esi_microcache($id, $fond) {
-	include_spip("inc/microcache");
-	return _esi_microcache($id, $fond);
-}
-
-
-
-} else {
-
-
-
 function microcache_key($id, $fond) {
 	include_spip('memoization_options');
 	if (!function_exists('cache_set')) return false;
@@ -47,15 +22,13 @@ function microcache($id, $fond, $calcul=false) {
 		if ($key
 		AND $_GET['var_mode'] != 'inclure'
 		AND !$_POST
+		AND !(isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache'])
+		AND !defined('spip_interdire_cache')
 		) {
 			cache_set($key, $contenu, $ttl = 7*24*3600);
 		}
 	}
 	return $contenu;
-}
-
-
-
 }
 
 
