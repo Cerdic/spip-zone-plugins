@@ -72,7 +72,7 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
  *      complétée avant d'être retourné par la fonction.
  *
- * @return object
+ * @return Symfony\Component\HttpFoundation\Response $reponse
  *      Objet réponse complétée (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, la collection et sur les critères
  *      de filtre, à savoir, catégorie et compatibilité SPIP.
@@ -147,7 +147,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
  *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
  *      complétée avant d'être retourné par la fonction.
  *
- * @return object
+ * @return Symfony\Component\HttpFoundation\Response $reponse
  *      Objet réponse complété (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, le type de ressouce et
  *      sur l'existence de la ressource demandée.
