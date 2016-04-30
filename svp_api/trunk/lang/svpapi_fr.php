@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_400_collection_nok_message' => 'Vous avez demandé une collection qui n\'est pas supportée par ce service. SVP ne fournit que des collections de plugins.',
-	'erreur_400_collection_nok_titre'   => 'La collection « @valeur@ » n\'est pas fournie par ce service',
+	'erreur_400_collection_nok_titre'   => 'La collection« « @valeur@ » n\'est pas fournie par ce service',
 	'erreur_400_format_nok_message'     => 'Vous avez demandé de renvoyer les données dans un format qui n\'est pas supportée par ce service. SVP n\'utilise que les formats de sortie JSON et XML.',
 	'erreur_400_format_nok_titre'       => 'Le format « @valeur@ » n\'est pas supporté par ce service',
 	'erreur_400_critere_nok_message'    => 'Vous avez demandé de filtrer une collection avec un critère dont la valeur est invalide. Veuillez consulter la documentation pour spécifier un critère valide.',

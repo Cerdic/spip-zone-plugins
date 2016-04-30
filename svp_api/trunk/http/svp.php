@@ -16,8 +16,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @api
  *
- * @param int $code
+ * @param int                                       $code
  *      Le code HTTP de l'erreur à générer
+ * @param Symfony\Component\HttpFoundation\Request  $requete
+ *      Objet matérialisant la requête faite au serveur SVP.
+ * @param Symfony\Component\HttpFoundation\Response $reponse
+ *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *      complétée avant d'être retourné par la fonction.
  *
  * @return Symfony\Component\HttpFoundation\Response
  *      Retourne l'objet réponse dont le contenu est mis à jour avec les éléments du bloc d'erreur.
@@ -70,7 +75,7 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  * @return object
  *      Objet réponse complétée (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, la collection et sur les critères
- *        de filtre à savoir catégorie et compatibilité SPIP.
+ *      de filtre à savoir catégorie et compatibilité SPIP.
  */
 function http_svp_get_collection_dist($requete, $reponse) {
 
@@ -91,7 +96,6 @@ function http_svp_get_collection_dist($requete, $reponse) {
 			$format_reponse = $contenu['requete']['format'];
 			// Vérification du nom de la collection
 			if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
-				$donnees = array();
 				// On vérifie les critères de filtre additionnels si la requête en contient
 				$where = array();
 				if (requete_verifier_criteres($contenu['requete']['criteres'], $erreur)) {
@@ -145,7 +149,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
  * @return object
  *      Objet réponse complété (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, le type de ressouce et
- *        sur l'existante de la ressource demandée.
+ *      sur l'existante de la ressource demandée.
  */
 function http_svp_get_ressource_dist($requete, $reponse) {
 

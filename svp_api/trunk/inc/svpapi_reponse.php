@@ -74,10 +74,10 @@ if (!defined('_SVPAPI_CHAMPS_LISTE_PAQUET')) {
  *
  * @return array
  *      Le contenu d'une réponse de l'API SVP est un tableau associatif à 4 entrées:
- *      - requete : sous-tableau des éléments de la requête
- *      - erreur : sous-tableau des éléments descriptifs d'une erreur (status 200 par défaut)
- *      - schema : la version du schéma du plugin SVP hébergé par le serveur
- *      - donnees : le tableau des objets demandés fonction de la requête (vide)
+ *      - `requete` : sous-tableau des éléments de la requête
+ *      - `erreur`  : sous-tableau des éléments descriptifs d'une erreur (status 200 par défaut)
+ *      - `schema`  : la version du schéma du plugin SVP hébergé par le serveur
+ *      - `donnees` : le tableau des objets demandés fonction de la requête (vide)
  */
 function reponse_initialiser_contenu($requete) {
 
@@ -121,6 +121,8 @@ function reponse_initialiser_contenu($requete) {
  * installés sur le serveur et non liés à un dépôt (par exemple un zip personnel).
  * Chaque objet plugin est présenté comme un tableau dont tous les champs sont accessibles comme un
  * type PHP simple, entier, chaine ou tableau.
+ *
+ * @uses normaliser_champs()
  *
  * @param array $where
  *      Tableau des critères additionnels à appliquer au select.
@@ -194,8 +196,15 @@ function reponse_collectionner_depots($where) {
 
 
 /**
+ *
+ * @uses normaliser_multi()
+ * @uses denormaliser_version()
+ * 
  * @param string $type_objet
  * @param array  $objet
+ *
+ * @uses normaliser_multi()
+ * @uses denormaliser_version()
  *
  * @return array
  */
@@ -265,8 +274,10 @@ function reponse_expliquer_erreur($erreur) {
 /**
  * Finalise la réponse à la requête en complétant le header et le contenu mis au préalable
  * au format demandé.
- * 
+ *
  * @param Symfony\Component\HttpFoundation\Response $reponse
+ *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
+ *      complétée avant d'être retourné par la fonction.
  * @param array                                     $contenu
  * @param string                                    $format_reponse
  *
