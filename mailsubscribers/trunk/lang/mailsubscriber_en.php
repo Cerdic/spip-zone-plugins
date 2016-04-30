@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_valide' => 'subscribed',
 
 	// L
-	'label_desactiver_notif_1' => 'Disable notification of entries for this import',
+	'label_desactiver_notif_1' => 'Disable notification of entries for this import', # MODIF
 	'label_email' => 'Email',
 	'label_file_import' => 'File to import',
 	'label_from_email' => 'Invitation from email',
