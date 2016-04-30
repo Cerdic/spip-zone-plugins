@@ -9,6 +9,48 @@
  */
 
 /**
+ * Ajouter un traitement automatique sur une balise
+ *
+ * On peut restreindre l'application du traitement au balises appelées dans un
+ * type de boucle via le paramètre optionnel $table.
+ *
+ * @param array $interfaces
+ *    Les interfaces du pipeline declarer_tables_interfaces
+ * @param string $traitement
+ *    Un format comme pour sprintf, dans lequel le compilateur passera la valeur de la balise
+ * @param string $balise
+ *    Le nom de la balise à laquelle on veut appliquer le traitement
+ * @param string $table (optionnel)
+ *    Un type de boucle auquel on veut restreindre le traitement.
+ */
+function ajouter_traitement_automatique($interfaces, $traitement, $balise, $table = 0) {
+
+	$table_traitements = $interfaces['table_des_traitements'];
+
+	if (! isset($table_traitements[$balise])) {
+		$table_traitements[$balise] = array();
+	}
+
+	/* On essaie d'être tolérant sur le nom de la table */
+	if ($table) {
+		include_spip('base/objets');
+		$table = table_objet($table);
+	}
+
+	if (isset($table_traitements[$balise][$table])) {
+		$traitement_existant = $table_traitements[$balise][$table];
+	}
+
+	if (! $traitement_existant) {
+		$traitement_existant = '%s';
+	}
+
+	$interfaces['table_des_traitements'][$balise][$table] = sprintf($traitement, $traitement_existant);
+
+	return $interfaces;
+}
+
+/**
  * Déclaration des alias de tables et filtres automatiques de champs
  *
  * @pipeline declarer_tables_interfaces
@@ -19,35 +61,39 @@
  */
 function massicot_declarer_tables_interfaces($interfaces) {
 
-	if ((! isset($interfaces['table_des_traitements']['FICHIER']['documents']))
-		or is_null($interfaces['table_des_traitements']['FICHIER']['documents'])) {
-		$interfaces['table_des_traitements']['FICHIER']['documents'] = '%s';
-	}
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_document(%s)',
+		'FICHIER',
+		'documents'
+	);
 
-	$interfaces['table_des_traitements']['FICHIER']['documents'] =
-	  'massicoter_document(' . $interfaces['table_des_traitements']['FICHIER']['documents'] . ')';
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_logo_document(%s, $Pile[1])',
+		'LOGO_DOCUMENT'
+	);
 
-	$interfaces['table_des_traitements']['LOGO_DOCUMENT'][] =
-	  'massicoter_logo_document(%s, $Pile[1])';
-
-	if (! isset($interfaces['table_des_traitements']['URL_DOCUMENT'])) {
-		$interfaces['table_des_traitements']['URL_DOCUMENT'] = array();
-	}
-
-	if ((! isset($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) or
-		is_null($interfaces['table_des_traitements']['URL_DOCUMENT']['documents'])) {
-
-		$interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] = '%s';
-	}
-
-	$interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] =
-	  'massicoter_document(' . $interfaces['table_des_traitements']['URL_DOCUMENT']['documents'] . ')';
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_document(%s)',
+		'URL_DOCUMENT',
+		'documents'
+	);
 
 	/* On traîte aussi les balises #HAUTEUR et #LARGEUR des documents */
-	$interfaces['table_des_traitements']['LARGEUR']['documents'] =
-	  'massicoter_largeur(%s, $Pile[1])';
-	$interfaces['table_des_traitements']['HAUTEUR']['documents'] =
-	  'massicoter_hauteur(%s, $Pile[1])';
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_largeur(%s, $Pile[1])',
+		'LARGEUR',
+		'documents'
+	);
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_largeur(%s, $Pile[1])',
+		'HAUTEUR',
+		'documents'
+	);
 
 	/* Pour chaque objet éditorial existant, ajouter un traitement sur
 	   les logos */
@@ -55,30 +101,20 @@ function massicot_declarer_tables_interfaces($interfaces) {
 
 		if ($table !== 'spip_documents') {
 
-			$logo_type = strtoupper('LOGO_'.objet_type($table));
-
-			if (!empty($interfaces['table_des_traitements'][$logo_type])) {
-				$interfaces['table_des_traitements'][$logo_type][0]
-					= 'massicoter_logo('.$interfaces['table_des_traitements'][$logo_type][0]
-					. ', '.objet_type($table)
-					.', $Pile[1][\''.id_table_objet($table)
-					.'\'])';
-			} else {
-				$interfaces['table_des_traitements'][$logo_type][]
-					= 'massicoter_logo(%s, '.objet_type($table)
-					. ', $Pile[1][\''.id_table_objet($table).'\'])';
-			}
+			$interfaces = ajouter_traitement_automatique(
+				$interfaces,
+				'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])',
+				strtoupper('LOGO_'.objet_type($table))
+			);
 		}
 	}
 
 	/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
-	if (!empty($interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'])) {
-		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0]
-			= 'massicoter_logo('.$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0].')';
-	} else {
-		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][]
-			= 'massicoter_logo(%s)';
-	}
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_logo(%s)',
+		'LOGO_ARTICLE_RUBRIQUE'
+	);
 
 	return $interfaces;
 }
