@@ -18,5 +18,5 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/vocabulaire.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/vocabulaire.php" />
-
+	<pipeline nom="levenshtein_calculer" inclure="vocabulaire_pipelines.php" />
 </paquet>
