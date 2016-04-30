@@ -399,7 +399,7 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 		return $logo;
 	}
 
-	$fichier = extraire_attribut($logo, 'src');
+	$src     = extraire_attribut($logo, 'src');
 	$alt     = extraire_attribut($logo, 'alt');
 	$classes = extraire_attribut($logo, 'class');
 	$onmouseover = extraire_attribut($logo, 'onmouseover');
@@ -409,7 +409,7 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
 	if (is_null($id_objet)) {
 
-		$objet = massicot_trouver_objet_logo($fichier);
+		$objet = massicot_trouver_objet_logo($src);
 
 		if (is_null($objet)) {
 			return $logo;
@@ -421,7 +421,18 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 
 	$parametres = massicot_get_parametres($objet_type, $id_objet);
 
-	$fichier = massicoter_fichier($fichier, $parametres);
+	$fichier = massicoter_fichier($src, $parametres);
+
+	if ($onmouseout) {
+		$onmouseout = str_replace($src, $fichier, $onmouseout);
+	}
+
+	if ($onmouseover) {
+		$src_off = preg_replace('/^.*[\']([^\']+)[\']/', '$1', $onmouseover);
+		$parametres_off = massicot_get_parametres($objet_type, $id_objet, 'logo_survol');
+		$fichier_off = massicoter_fichier($src_off, $parametres_off);
+		$onmouseover = str_replace($src_off, $fichier_off, $onmouseover);
+	}
 
 	$balise_img = charger_filtre('balise_img');
 
