@@ -301,7 +301,7 @@ function massicoter_objet($fichier, $objet, $id_objet) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo_document($logo, $connect = null, $doc = array()) {
+function massicoter_logo_document($logo, $doc = array()) {
 
 	include_spip('inc/filtres');
 	include_spip('inc/filtres_images_mini');
@@ -374,7 +374,7 @@ function massicoter_logo_document($logo, $connect = null, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo($logo, $connect = null, $objet_type = null, $id_objet = null) {
+function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 
 	include_spip('inc/filtres');
 
@@ -416,7 +416,7 @@ function massicoter_logo($logo, $connect = null, $objet_type = null, $id_objet =
  *
  * @return string : La largeur de l'image après massicotage
  */
-function massicoter_largeur($largeur, $connect = null, $doc = array()) {
+function massicoter_largeur($largeur, $doc = array()) {
 
 	if ((! $largeur) or (! isset($doc['id_document']))) {
 		return $largeur;
@@ -439,7 +439,7 @@ function massicoter_largeur($largeur, $connect = null, $doc = array()) {
  *
  * @return string : La hauteur de l'image après massicotage
  */
-function massicoter_hauteur($hauteur, $connect = null, $doc = array()) {
+function massicoter_hauteur($hauteur, $doc = array()) {
 
 	if ((! $hauteur) or (! isset($doc['id_document']))) {
 		return $hauteur;

@@ -28,7 +28,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 	  'massicoter_document(' . $interfaces['table_des_traitements']['FICHIER']['documents'] . ')';
 
 	$interfaces['table_des_traitements']['LOGO_DOCUMENT'][] =
-	  'massicoter_logo_document(%s, $connect, $Pile[1])';
+	  'massicoter_logo_document(%s, $Pile[1])';
 
 	if (! isset($interfaces['table_des_traitements']['URL_DOCUMENT'])) {
 		$interfaces['table_des_traitements']['URL_DOCUMENT'] = array();
@@ -45,9 +45,9 @@ function massicot_declarer_tables_interfaces($interfaces) {
 
 	/* On traîte aussi les balises #HAUTEUR et #LARGEUR des documents */
 	$interfaces['table_des_traitements']['LARGEUR']['documents'] =
-	  'massicoter_largeur(%s, $connect, $Pile[1])';
+	  'massicoter_largeur(%s, $Pile[1])';
 	$interfaces['table_des_traitements']['HAUTEUR']['documents'] =
-	  'massicoter_hauteur(%s, $connect, $Pile[1])';
+	  'massicoter_hauteur(%s, $Pile[1])';
 
 	/* Pour chaque objet éditorial existant, ajouter un traitement sur
 	   les logos */
@@ -60,13 +60,12 @@ function massicot_declarer_tables_interfaces($interfaces) {
 			if (!empty($interfaces['table_des_traitements'][$logo_type])) {
 				$interfaces['table_des_traitements'][$logo_type][0]
 					= 'massicoter_logo('.$interfaces['table_des_traitements'][$logo_type][0]
-					. ', $connect'
 					. ', '.objet_type($table)
 					.', $Pile[1][\''.id_table_objet($table)
 					.'\'])';
 			} else {
 				$interfaces['table_des_traitements'][$logo_type][]
-					= 'massicoter_logo(%s, $connect, '.objet_type($table)
+					= 'massicoter_logo(%s, '.objet_type($table)
 					. ', $Pile[1][\''.id_table_objet($table).'\'])';
 			}
 		}
@@ -75,14 +74,10 @@ function massicot_declarer_tables_interfaces($interfaces) {
 	/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
 	if (!empty($interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'])) {
 		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0]
-			= 'massicoter_logo('.$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0]
-			. ', $connect'
-			. ', $Pile)';
+			= 'massicoter_logo('.$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][0].')';
 	} else {
 		$interfaces['table_des_traitements']['LOGO_ARTICLE_RUBRIQUE'][]
-			= 'massicoter_logo(%s'
-			. ', $connect'
-			. ', $Pile)';
+			= 'massicoter_logo(%s)';
 	}
 
 	return $interfaces;
