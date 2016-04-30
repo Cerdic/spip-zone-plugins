@@ -157,10 +157,11 @@ function massicot_declarer_tables_auxiliaires($tables_auxiliaires) {
 			'id_massicotage' => "bigint(21) DEFAULT '0' NOT NULL",
 			'id_objet'		 => "bigint(21) DEFAULT '0' NOT NULL",
 			'objet'			 => "VARCHAR(25) DEFAULT '' NOT NULL",
-			'vu'			 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+			'vu'			 => "VARCHAR(6) DEFAULT 'non' NOT NULL",
+			'role'			 => "VARCHAR(30) DEFAULT '' NOT NULL"
 		),
 		'key' => array(
-			'PRIMARY KEY'		 => 'id_massicotage,id_objet,objet',
+			'PRIMARY KEY'		 => 'id_massicotage,id_objet,objet,role',
 			'KEY id_massicotage' => 'id_massicotage',
 		),
 	);
