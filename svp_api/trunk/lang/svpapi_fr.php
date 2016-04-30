@@ -7,6 +7,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
+	'erreur_200_ok_message'             => 'La ressource ou la collection que vous avez demandée a bien été fournie par le service. Vous pouvez la consulter dans l\'index « donnees ».',
+	'erreur_200_ok_titre'               => 'La requête a été traité avec succès',
 	'erreur_400_collection_nok_message' => 'Vous avez demandé une collection qui n\'est pas supportée par ce service. SVP ne fournit que des collections de plugins (/svp/plugins) et de dépôts (/svp/depots).',
 	'erreur_400_collection_nok_titre'   => 'La collection« « @valeur@ » n\'est pas fournie par ce service',
 	'erreur_400_format_nok_message'     => 'Vous avez demandé de renvoyer les données dans un format qui n\'est pas supportée par ce service. SVP n\'utilise que les formats de sortie JSON et XML.',

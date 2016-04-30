@@ -98,7 +98,11 @@ function reponse_initialiser_contenu($requete) {
 
 	// Initialisation du bloc d'erreur à ok par défaut
 	$erreur['status'] = 200;
-	$erreur['type'] = '';
+	$erreur['type'] = 'ok';
+	$erreur['element'] = '';
+	$erreur['valeur'] = '';
+	$erreur['title'] = _T('svpapi:erreur_200_ok_titre');
+	$erreur['detail'] = _T('svpapi:erreur_200_ok_message');
 
 	// On intitialise le contenu avec les informations collectées.
 	// A noter que le format de sortie est initialisé par défaut à json indépendamment de la demande, ce qui permettra
