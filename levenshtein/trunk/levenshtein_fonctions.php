@@ -27,10 +27,10 @@ function levenshtein_calculer($term) {
 	$term = strtolower($term);
 
 	// On filtre les mots pour n'avoir que les mots qui "sonne" pareil
-	$get_lev = sql_allfetsel('mot', 'spip_vocabulaires', 'SOUNDEX(mot) = SOUNDEX('.sql_quote($term).')');
+	$get_lev = pipeline('levenshtein_calculer', array('mot' => array(), 'term' => $term));
 
 	// Simplification du tableau allfetsel
-	$get_lev = array_column($get_lev, 'mot');
+	$get_lev = array_column($get_lev['mot'], 'mot');
 
 	// Cette variable va contenu un index des distances de levenshtein
 	$lev_index = array();
