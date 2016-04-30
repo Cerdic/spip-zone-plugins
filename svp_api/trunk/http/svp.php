@@ -137,7 +137,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 
 /**
  * Fait un GET sur une ressource de type plugin identifiée par son préfixe.
- * La requête est du type `/svp/plugin/prefixe` et renvoie l'objet plugin et les objets paquets associés.
+ * La requête est du type `/svp/plugins/prefixe` et renvoie l'objet plugin et les objets paquets associés.
  *
  * @api
  *
@@ -234,7 +234,7 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = array_merge($contenu['erreur'], reponse_expliquer_erreur($contenu['erreur']));
+		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur']);
 	}
 
 	// Construction de la réponse finale

@@ -34,7 +34,7 @@ if (!defined('_SVPAPI_CHAMPS_LISTE_PLUGIN')) {
 	 * Liste des champs de l'objet plugin contenant un texte au format liste dont chaque
 	 * élément est séparé par une virgule.
 	 */
-	define('_SVPAPI_CHAMPS_LISTE_PLUGIN', 'branches_spip');
+	define('_SVPAPI_CHAMPS_LISTE_PLUGIN', 'branches_spip,tags');
 }
 
 if (!defined('_SVPAPI_CHAMPS_MULTI_PAQUET')) {
@@ -246,7 +246,7 @@ function normaliser_champs($type_objet, $objet) {
 
 			if (in_array($_champ, $champs_liste)) {
 				// Passer une chaine liste en tableau
-				$objet_normalise[$_champ] = explode(',', $_valeur);
+				$objet_normalise[$_champ] = $_valeur ? explode(',', $_valeur) : array();
 			}
 		}
 	}

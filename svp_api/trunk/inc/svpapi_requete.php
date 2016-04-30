@@ -82,7 +82,7 @@ function requete_verifier_format($valeur, &$erreur) {
 
 /**
  * Détermine si la collection demandée est valide.
- * Le service ne fournit que les collections plugins et dépôts.
+ * Le service ne fournit que les collections plugins (`plugins`) et dépôts (`depots`).
  *
  * @param string $valeur
  *        La valeur de la collection demandée
@@ -116,7 +116,7 @@ function requete_verifier_collection($valeur, &$erreur) {
 
 /**
  * Détermine si le type de ressource demandée est valide.
- * Le service ne fournit que des ressources de type plugin.
+ * Le service ne fournit que des ressources de type plugin (`plugins`).
  *
  * @param string $valeur
  *        La valeur de la collection demandée
@@ -134,7 +134,7 @@ function requete_verifier_collection($valeur, &$erreur) {
 function requete_verifier_ressource($valeur, &$erreur) {
 	$valide = true;
 
-	if (!in_array($valeur, array('plugin'))) {
+	if (!in_array($valeur, array('plugins'))) {
 		$erreur = array(
 			'status'  => 400,
 			'type'    => 'ressource_nok',
