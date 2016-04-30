@@ -292,11 +292,9 @@ function massicoter_document($fichier = false) {
 }
 
 /**
- * Massicoter un objet
+ * Massicoter un logo donné par son nom de fichier
  *
- * À utiliser comme filtre sur les balises #LOGO_*. Pour les balises
- * #LOGO_DOCUMENT, il faut utiliser la fonction
- * massicoter_logo_document
+ * Utilisé par formulaires/inc-apercu-logo
  *
  * @param string $fichier : Le fichier à massicoter
  * @param string $objet : Le type d'objet
