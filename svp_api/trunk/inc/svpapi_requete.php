@@ -5,7 +5,6 @@
  *
  * @package SPIP\SVPAPI\REQUETE
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -15,7 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Détermine si le serveur est capable de répondre aux requêtes SVP.
  * Pour cela on vérifie si le serveur est en mode run-time ou pas.
  * On considère qu'un serveur en mode run-time n'est pas valide pour
- * traiter les requêtes.
+ * traiter les requêtes car la liste des plugins et des paquets n'est
+ * pas complète.
  *
  * @param &array    $erreur
  *        Tableau initialisé avec les index identifiant l'erreur ou vide si pas d'erreur.
@@ -32,7 +32,7 @@ function requete_verifier_serveur(&$erreur) {
 	$valide = true;
 
 	include_spip('inc/svp_phraser');
-	if (!_SVP_MODE_RUNTIME) {
+	if (_SVP_MODE_RUNTIME) {
 		$erreur = array(
 			'status'  => 501,
 			'type'    => 'serveur_nok',

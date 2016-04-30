@@ -75,7 +75,7 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  * @return object
  *      Objet réponse complétée (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, la collection et sur les critères
- *      de filtre à savoir catégorie et compatibilité SPIP.
+ *      de filtre, à savoir, catégorie et compatibilité SPIP.
  */
 function http_svp_get_collection_dist($requete, $reponse) {
 
@@ -125,7 +125,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	// vérification, le titre et le détail de l'erreur.
 	if ($erreur) {
 		$contenu['erreur'] = array_merge($contenu['erreur'], $erreur);
-		$contenu['erreur'] = array_merge($contenu['erreur'], reponse_expliquer_erreur($contenu['erreur']));
+		$contenu['erreur'] = reponse_expliquer_erreur($contenu['erreur']);
 	}
 
 	// Construction de la réponse finale
@@ -137,6 +137,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 
 /**
  * Fait un GET sur une ressource de type plugin identifiée par son préfixe.
+ * La requête est du type `/svp/plugin/prefixe` et renvoie l'objet plugin et les objets paquets associés.
  *
  * @api
  *
@@ -149,7 +150,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
  * @return object
  *      Objet réponse complété (status, contenu de la ressource...).
  *      La fonction peut lever une erreur sur l'état du serveur, le format de sortie, le type de ressouce et
- *      sur l'existante de la ressource demandée.
+ *      sur l'existence de la ressource demandée.
  */
 function http_svp_get_ressource_dist($requete, $reponse) {
 

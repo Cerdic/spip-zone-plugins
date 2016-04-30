@@ -196,17 +196,19 @@ function reponse_collectionner_depots($where) {
 
 
 /**
+ * Transforme, pour un objet plugin ou paquet, les champs sérialisés, multi et liste (chaine d'éléments séparés
+ * par une virgule) en tableau et supprime des champs de type version les 0 à gauche des numéros.
  *
  * @uses normaliser_multi()
  * @uses denormaliser_version()
- * 
+ *
  * @param string $type_objet
+ * 		Type d'objet à normaliser, soit `plugin` ou `paquet`.
  * @param array  $objet
- *
- * @uses normaliser_multi()
- * @uses denormaliser_version()
+ * 		Tableau des champs de l'objet `plugin` ou `paquet` à normaliser.
  *
  * @return array
+ * 		Tableau des champs de l'objet `plugin` ou `paquet` normalisés.
  */
 function normaliser_champs($type_objet, $objet) {
 
@@ -249,12 +251,13 @@ function normaliser_champs($type_objet, $objet) {
 }
 
 /**
- * Construit à partir du status et du type de l'erreur le titre et l'explication de l'erreur.
- * Le tableau renvoyé sera concaténé avec les autres éléments du bloc d'erreur.
+ * Complète le bloc d'erreur avec le titre et l'explication de l'erreur.
  *
  * @param array $erreur
+ * 		Tableau initialisé avec les éléments de base de l'erreur (`status`, `type`, `element` et `valeur`).
  *
  * @return array
+ * 		Tableau de l'erreur complété avec le titre (index `title`) et le descriptif (index `detail`).
  */
 function reponse_expliquer_erreur($erreur) {
 
@@ -264,10 +267,10 @@ function reponse_expliquer_erreur($erreur) {
 		'valeur'  => $erreur['valeur']
 	);
 
-	$explication['title'] = _T("${prefixe}_titre", $parametres);
-	$explication['detail'] = _T("${prefixe}_message", $parametres);
+	$erreur['title'] = _T("${prefixe}_titre", $parametres);
+	$erreur['detail'] = _T("${prefixe}_message", $parametres);
 
-	return $explication;
+	return $erreur;
 }
 
 
@@ -276,20 +279,19 @@ function reponse_expliquer_erreur($erreur) {
  * au format demandé.
  *
  * @param Symfony\Component\HttpFoundation\Response $reponse
- *      Objet matérialisant la réponse telle qu'initialisée par le serveur HTTP abstrait. Cet objet sera
- *      complétée avant d'être retourné par la fonction.
+ *      Objet réponse tel qu'initialisé par le serveur HTTP abstrait.
  * @param array                                     $contenu
+ * 		Tableau du contenu de la réponse qui sera retourné selon le format défini.
  * @param string                                    $format_reponse
+ * 		Format de la réponse. Seul le format JSON est supporté.
  *
- * @return mixed
+ * @return Symfony\Component\HttpFoundation\Response $reponse
+ *      Retourne l'objet réponse dont le contenu et certains attributs du header sont mis à jour.
  */
 function reponse_construire($reponse, $contenu, $format_reponse) {
 
 	$reponse->setCharset('utf-8');
 	$reponse->setStatusCode($contenu['erreur']['status']);
-	if ($contenu['erreur']['status'] == 200) {
-		$contenu['erreur'] = array();
-	}
 
 	if ($format_reponse == 'json') {
 		$reponse->headers->set('Content-Type', 'application/json');
