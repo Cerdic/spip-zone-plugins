@@ -8,11 +8,11 @@
   #SET{hauteur,#ENV{logo}|massicoter_objet{#ENV{objet},#ENV{id_objet}}|hauteur}
   [<div class="titre">(#ENV{titre,''})</div>]
   <div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
-  [(#ENV{editable}|oui)
-  <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF})]"
+  <a href="[(#URL_ECRIRE{massicoter_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF}|parametre_url{role, #ENV{quoi}|=={logo_off}|?{logo_survol,''}})]"
      class="bouton">
     <strong><:massicot:massicoter:></strong>
   </a>
+  [(#ENV{editable}|oui)
   <input type='submit' class='submit supprimer' id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value='<:lien_supprimer|ucfirst|attribut_html:>' />
   ]
 </div>
