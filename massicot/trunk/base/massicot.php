@@ -109,7 +109,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 
 			$interfaces = ajouter_traitement_automatique(
 				$interfaces,
-				'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\']))',
+				'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])',
 				strtoupper('LOGO_'.objet_type($table)) . '_NORMAL'
 			);
 
