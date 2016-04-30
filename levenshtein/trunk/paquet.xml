@@ -15,5 +15,6 @@
 	<licence>GNU/GPL</licence>
 
   <pipeline nom="levenshtein_calculer" />
-  <necessite nom="vocabulaire" compatibilite="[1.0.0;]" />
+
+  <utilise nom="vocabulaire" compatibilite="[1.0.0;]" />
 </paquet>
