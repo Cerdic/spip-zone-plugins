@@ -395,6 +395,8 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 	$fichier = extraire_attribut($logo, 'src');
 	$alt     = extraire_attribut($logo, 'alt');
 	$classes = extraire_attribut($logo, 'class');
+	$onmouseover = extraire_attribut($logo, 'onmouseover');
+	$onmouseout  = extraire_attribut($logo, 'onmouseout');
 
 	/* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
 	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
@@ -416,7 +418,11 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null) {
 
 	$balise_img = charger_filtre('balise_img');
 
-	return $balise_img($fichier, $alt, $classes);
+	$balise = $balise_img($fichier, $alt, $classes);
+	$balise = inserer_attribut($balise, 'onmouseover', $onmouseover);
+	$balise = inserer_attribut($balise, 'onmouseout', $onmouseout);
+
+	return $balise;
 }
 
 /**
