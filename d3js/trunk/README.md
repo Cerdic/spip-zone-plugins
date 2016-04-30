@@ -12,6 +12,12 @@ Intégrer d3.js dans SPIP
 
 ## Changelog
 
+## Version 1.2.x
+
+### Version 1.2.1
+
+* Modification style pour les points des graphs (svg circle)
+
 ### Version 1.2.0
 
 * Choisir les plugins via le pipeline ```d3js_plugins```
