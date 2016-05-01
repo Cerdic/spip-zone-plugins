@@ -8,7 +8,9 @@
  * @package SPIP\Zen-Garden\Options
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 if (!defined('_DIR_PLUGIN_THEME')){
 	// si on est en mode apercu, il suffit de repasser dans l'espace prive pour desactiver l'apercu
@@ -65,7 +67,7 @@ if (!defined('_DIR_PLUGIN_THEME')){
  * 		Le contenu html de la page modifié
  */
 function zengarden_affichage_final($texte){
-	if ($GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
+	if ((!isset($GLOBALS['flag_preserver']) || $GLOBALS['flag_preserver'] != 1) && $GLOBALS['html'] and isset($GLOBALS['meta']['zengarden_switcher'])){
 		include_spip('prive/zengarden_theme_fonctions');
 		// on passe le theme selectionne en js pour ne pas polluer le cache du switcher
 		$theme = isset($_COOKIE['spip_zengarden_theme']) ? $_COOKIE['spip_zengarden_theme'] : '';
@@ -78,4 +80,3 @@ function zengarden_affichage_final($texte){
 	return $texte;
 }
 
-?>
