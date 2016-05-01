@@ -78,6 +78,8 @@ function connecteur_lien($source, $redirect = '', $site = false) {
  */
 function connecteur_creer_auteur($info, $statut = '6forum') {
 
+	$info = pipeline('pre_connecteur', $info);
+
 	// Inscrire l'auteur sur base des informations du connecteur
 	$inscrire_auteur = charger_fonction('inscrire_auteur', 'action');
 	$desc = $inscrire_auteur(
@@ -87,7 +89,7 @@ function connecteur_creer_auteur($info, $statut = '6forum') {
 	);
 
 	// Envoyer aux pipelines
-	$desc = pipeline('post_connecteur', $desc);
+	$desc = pipeline('post_connecteur', array('auteur' => $desc, 'info' => $info));
 
 	return $desc;
 }
