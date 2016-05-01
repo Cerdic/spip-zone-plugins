@@ -77,13 +77,17 @@ if (!defined('_SVPAPI_CHAMPS_LISTE_PAQUET')) {
  *      - `requete` : sous-tableau des éléments de la requête
  *      - `erreur`  : sous-tableau des éléments descriptifs d'une erreur (status 200 par défaut)
  *      - `schema`  : la version du schéma du plugin SVP hébergé par le serveur
+ *      - `version` : la version du plugin SVP API HTTP fonctionnant sur le serveur
  *      - `donnees` : le tableau des objets demandés fonction de la requête (vide)
  */
 function reponse_initialiser_contenu($requete) {
 
-	// Récupération du schéma de données de SVP
+	// Récupération du schéma de données de SVP et de la version du plugin SVP API HTTP
 	include_spip('inc/config');
 	$schema = lire_config('svp_base_version');
+	include_spip('inc/filtres');
+	$informer = charger_filtre('info_plugin');
+	$version = $informer('svpapi', 'version', true);
 
 	// Stockage des éléments de la requête
 	// -- La méthode
@@ -111,6 +115,7 @@ function reponse_initialiser_contenu($requete) {
 		'requete' => $demande,
 		'erreur'  => $erreur,
 		'schema'  => $schema,
+		'version' => $version,
 		'donnees' => array()
 	);
 
