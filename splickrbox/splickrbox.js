@@ -25,7 +25,7 @@ jQuery.fn.splicker = function() {
 	return this.each(function() {
 			var img_cnt = $(this).find('img').size();
 			if(img_cnt > 0) {
-				var size = $(this).find('img').css('width').replace('px',"");
+				var size = $(this).find('img').attr('width').replace('px',"");
 				var box = new jQuery.SplickerBox(this,img_cnt,size);
 			}
 		});
