@@ -8,7 +8,9 @@
  * @package SPIP\Zen-Garden\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline header_prive
@@ -28,5 +30,3 @@ function zengarden_header_prive($flux){
 
 	return $flux;
 }
-
-?>

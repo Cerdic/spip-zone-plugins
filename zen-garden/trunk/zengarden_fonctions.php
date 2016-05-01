@@ -6,8 +6,9 @@
  * @package SPIP\Zen-Garden\Fonctions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function zengarden_affiche_version_compatible($intervalle){
 	if (!strlen($intervalle)) return '';
@@ -147,5 +148,3 @@ function zengarden_affiche_info($donnees) {
 	}
 	return '';
 }
-
-?>

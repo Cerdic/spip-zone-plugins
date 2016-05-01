@@ -5,13 +5,17 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
-if (!defined('_DIR_THEMES'))
+if (!defined('_DIR_THEMES')) {
 	define('_DIR_THEMES', _DIR_RACINE . "themes/");
+}
 
-if (!defined('_DIR_THEMES_DIST'))
+if (!defined('_DIR_THEMES_DIST')) {
 	define('_DIR_THEMES_DIST', _DIR_RACINE . "themes-dist/");
+}
 
 function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = false){
 	$themes = array();
@@ -20,7 +24,7 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = fal
 	$files = liste_plugin_files($dir);
 
 	if (count($files)) {
-		$get_infos = charger_fonction('get_infos','plugins');
+		$get_infos = charger_fonction('get_infos', 'plugins');
 
 		$t = $get_infos($files,$force,$dir);
 		$themes = array();
@@ -39,5 +43,3 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = fal
 
 	return $themes;
 }
-
-?>
