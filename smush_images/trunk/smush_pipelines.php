@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function smush_post_image_filtrer($flux) {
 	if(!function_exists('lire_config'))
 		include_spip('inc/config');
-	if((!isset($GLOBALS['meta']['smush_casse']) || $GLOBALS['meta']['smush_casse'] != 'oui') && !defined('_SMUSH_INTERDIRE_AUTO') && (lire_config('smush/eviter_traitement_auto','off') != 'on')){
+	if((!isset($GLOBALS['meta']['smush_casse']) || $GLOBALS['meta']['smush_casse'] != 'oui') && (!isset($GLOBALS['Smush_Debraye']) || $GLOBALS['Smush_Debraye'] !== true) && !defined('_SMUSH_INTERDIRE_AUTO') && (lire_config('smush/eviter_traitement_auto','off') != 'on')){
 		$smush = charger_fonction('smush_image','inc');
 		$flux = $smush($flux);
 	}

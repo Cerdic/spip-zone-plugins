@@ -130,4 +130,13 @@ function image_smush($im) {
 	}
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
-?>
+
+function image_smush_debrayer($im){
+	$GLOBALS['Smush_Debraye'] = true;
+	return $im;
+}
+
+function image_smush_embrayer($im){
+	$GLOBALS['Smush_Debraye'] = false;
+	return $im;
+}
