@@ -1667,7 +1667,7 @@
 18806,American globeflower
 18808,yellowroot
 18809,yellowroot
-18811,bayberries
+18811,barberries
 18812,vanillaleaf
 18813,deer-foot
 18813,deervetch vanillaleaf
@@ -29566,6 +29566,7 @@
 113845,bark-gnawing beetles
 113849,cadelle
 113852,checkered beetles
+113855,blackbellied clerid
 113859,redlegged ham beetle
 113860,redshouldered ham beetle
 113869,solf-winged flower beetles
@@ -29620,6 +29621,7 @@
 114316,acute-angled fungus beetle
 114317,sigmoid fungus beetle
 114318,lizard beetles
+114320,clover stem borer
 114321,pleasing fungus beetles
 114324,shining flower beetles
 114327,cerylonid beetles
@@ -44130,11 +44132,16 @@
 178474,Wagtails
 178475,Wagtails
 178476,White Wagtail
+178478,Streak-eyed Wagtail
 178479,Black-backed Wagtail
+178479,Japanese Pied Wagtail
+178479,Kamchatka Pied Wagtail
 178480,Gray Wagtail
 178480,Grey Wagtail
 178483,Western Yellow Wagtail
 178483,Yellow Wagtail
+178486,Blue-headed Wagtail
+178486,Blue-headed Yellow Wagtail
 178487,Black-backed Wagtail
 178488,Pipits
 178489,Water Pipit
@@ -44559,6 +44566,12 @@
 179235,Oriental Goldfinch
 179235,Oriental Greenfinch
 179236,American Goldfinch
+179238,Arctic Redpoll
+179241,Common Redpoll
+179246,Pine Siskin
+179249,American Goldfinch
+179254,Lesser Goldfinch
+179257,Lawrence's Goldfinch
 179258,Crossbills
 179259,Red Crossbill
 179268,Two-barred Crossbill
@@ -44577,6 +44590,9 @@
 179313,Savannah Sparrows
 179314,Savannah Sparrow
 179315,Ipswich Sparrow
+179319,Dwarf Savannah Sparrow
+179321,Aleutian Savannah Sparrow
+179330,Large-billed Sparrow
 179332,Grassland Sparrows
 179333,Grasshopper Sparrow
 179335,Florida Grasshopper Sparrow
@@ -44610,6 +44626,7 @@
 179435,Chipping Sparrow
 179439,Clay-colored Sparrow
 179440,Brewer's Sparrow
+179441,Timberline Sparrow
 179443,Field Sparrow
 179446,Worthen's Sparrow
 179448,Black-chinned Sparrow
@@ -44621,6 +44638,7 @@
 179462,White-throated Sparrow
 179463,Fox Sparrows
 179464,Fox Sparrow
+179464,Red Fox Sparrow
 179480,Yolla Bolly Fox Sparrow
 179483,Song Sparrows
 179484,Lincoln's Sparrow
@@ -44688,6 +44706,7 @@
 179578,Honeycreeper
 179578,Palila
 179580,Akepa
+179580,Honeycreeper
 179582,Poo-uli
 179583,Oreomystine Creepers
 179584,Akikiki
@@ -44707,7 +44726,9 @@
 179593,Maui Honeycreeper
 179593,Maui Parrotbill
 179596,Koa-Finches
+179597,Lesser Koa Finch
 179597,Lesser Koa-Finch
+179598,Greater Koa Finch
 179598,Greater Koa-Finch
 179599,Laysan Finches
 179603,Iiwi
@@ -44890,7 +44911,6 @@
 179883,Scarlet Tanager
 179884,Hepatic Tanager
 179884,Red Tanager
-179886,Hepatic Tanager
 179888,Summer Tanager
 179891,Flame-colored Tanager
 179892,Euphonias
@@ -44902,6 +44922,7 @@
 179897,Western Spindalis
 179898,Bananaquit
 179898,Bananaquits
+179899,Bananaquit
 179899,Bananaquits
 179900,Bananaquit
 179903,White-eyes
@@ -45212,10 +45233,9 @@
 180077,free-tailed bats
 180078,mastiff-bats
 180079,Wagner's Bonneted Bat
-180079,Wagner's bonneted bat
 180079,Wagner's mastiff-bat
 180080,Greater Bonneted Bat
-180080,western bonneted bat
+180080,Western Bonneted Bat
 180080,western mastiff-bat
 180081,Underwood's Bonneted Bat
 180081,Underwood's mastiff-bat
@@ -45965,23 +45985,23 @@
 180595,dogs
 180595,foxes
 180595,jackals
+180596,Gray Wolf
 180596,Wolf
-180596,gray wolf
 180599,Coyote
-180600,red wolf
+180600,Red Wolf
 180601,Arctic foxes
-180602,Arctic fox
+180602,Arctic Fox
 180603,kit foxes
 180603,red foxes
 180604,Red Fox
 180606,Kit Fox
 180607,Swift Fox
 180608,gray foxes
+180609,Common Gray Fox
 180609,Gray Fox
-180609,common gray fox
-180610,Channel Islands gray fox
+180610,Channel Islands Gray Fox
 180610,Island Fox
-180610,island gray fox
+180610,Island Gray Fox
 180611,civets
 180611,mongooses
 180612,mongooses
@@ -47273,23 +47293,27 @@
 183813,Cheetah
 183815,domestic dog
 183815,domestic dog (feral)
-183816,dingo
+183816,Dingo
+183817,Eurasian Golden Jackal
 183817,Golden Jackal
 183818,Black-backed Jackal
 183819,Side-striped Jackal
+183821,Asiatic Raccoon
 183821,Raccoon dog
+183821,Tanuki
 183823,small-eared dog
 183825,Crab-eating Fox
 183827,Maned Wolf
 183829,Bush Dog
-183831,Asiatic wild dog
+183831,Asiatic Wild Dog
 183831,Dhole
 183831,Indian dhole
-183831,red dog
+183831,Red Dog
+183833,African Wild Dog
 183833,African hunting dog
-183833,African wild dog
+183833,Painted Hunting Dog
 183835,Bat-eared Fox
-183835,big-eared fox
+183835,Big-eared Fox
 183836,European Bison
 183836,European bison
 183836,wisent
@@ -50127,14 +50151,16 @@
 202291,Nihoa Millerbird
 202292,Barbados Yellow Warbler
 202292,Barbados Yellow Wood Warbler
-202293,Sao Miguel Bullfinch
+202293,São Miguel Bullfinch
 202307,California Towhee
 202309,Inyo California Towhee
 202311,Cape Sable Seaside Sparrow
 202312,Dusky Seaside Sparrow
+202319,Akiapolaau
 202320,Honeycreeper
 202321,Honeycreeper
 202321,Maui Akepa
+202322,Hawaii Creeper
 202328,Piping Crow
 202331,Reunion Cuckooshrike
 202333,Molokai Thrush
@@ -66445,8 +66471,8 @@
 552772,Peruvian beaked whale
 552772,Pygmy Beaked Whale
 552773,Short-eared Dog
+552773,Small-eared Dog
 552773,small eared zorro
-552773,small-eared dog
 552774,Rusty-Spotted Cat
 552775,Caracal
 552776,Mexican big-eared bat
@@ -68722,6 +68748,7 @@
 558537,Sao Tome Shorttail
 558539,Black Crake
 558541,Blue Seedeater
+558541,Cabanis's Seedeater
 558542,Blackish-blue Seedeater
 558543,Yellow-billed Cacique
 558544,Golden-fronted Bowerbird
@@ -68729,6 +68756,8 @@
 558547,Streaked Bowerbird
 558548,Thick-billed Weaver
 558549,Scarlet-headed Blackbird
+558550,Yellow-browed Sparrow
+558551,Grassland Sparrow
 558553,Desert Lark
 558554,Gray's Lark
 558556,Golden-crested Myna
@@ -69204,14 +69233,17 @@
 559061,Stresemann's Rosefinch
 559062,Dark-breasted Rosefinch
 559063,Beautiful Rosefinch
+559063,Himalayan Beautiful Rosefinch
 559064,Red-fronted Rosefinch
 559065,Red-mantled Rosefinch
+559066,Tibetan Rosefinch
 559068,Spot-winged Rosefinch
 559069,Pallas's Rosefinch
 559070,Blanford's Rosefinch
 559071,Great Rosefinch
 559072,Streaked Rosefinch
 559073,Sinai Rosefinch
+559074,Himalayan White-browed Rosefinch
 559074,White-browed Rosefinch
 559075,Three-banded Rosefinch
 559076,Vinaceous Rosefinch
@@ -69271,6 +69303,7 @@
 559139,Brown-throated Treecreeper
 559140,Bar-tailed Treecreeper
 559141,Rusty-flanked Treecreeper
+559144,Green Warbler-Finch
 559144,Warbler Finch
 559145,Karoo Lark
 559146,Red Lark
@@ -69968,6 +70001,7 @@
 559890,Black-faced Bunting
 559891,White-capped Bunting
 559892,House Bunting
+559892,Striolated Bunting
 559893,Yellow Bunting
 559894,Cinnamon-breasted Bunting
 559895,Tristram's Bunting
@@ -69996,6 +70030,7 @@
 559918,Black Solitaire
 559919,White-eared Solitaire
 559920,Blue-faced Honeyeater
+559921,Chinese Grosbeak
 559921,Yellow-billed Grosbeak
 559922,Japanese Grosbeak
 559923,Eastern Yellow Robin
@@ -71183,6 +71218,8 @@
 561224,Cape Gannet
 561225,Australasian Gannet
 561227,Cape Wagtail
+561228,Grey-backed Wagtail
+561228,Long-tailed Wagtail
 561228,Mountain Wagtail
 561229,Madagascar Wagtail
 561230,Japanese Wagtail
@@ -71470,6 +71507,7 @@
 561601,Galapagos Mockingbird
 561602,Floreana Mockingbird
 561603,Jamaican Blackbird
+561604,Inaccessible Island Finch
 561604,Tristan Finch
 561605,Wilkins's Finch
 561606,Cocos Flycatcher
@@ -71597,6 +71635,7 @@
 561739,Black-faced Quail-Finch
 561740,Black-chinned Quail-Finch
 561741,Locust Finch
+561742,Chestnut-bellied Seed Finch
 561742,Lesser Seed Finch
 561743,Black-billed Seed Finch
 561744,Large-billed Seed Finch
@@ -71813,6 +71852,7 @@
 561976,Brazza's Martin
 561977,White-bearded Flycatcher
 561978,Black-backed Grosbeak
+561979,Golden Grosbeak
 561979,Southern Yellow Grosbeak
 561980,Black-thighed Grosbeak
 561981,Swallow-tailed Cotinga
@@ -72185,6 +72225,7 @@
 562410,Cochabamba Mountain Finch
 562411,Collared Warbling Finch
 562412,Rufous-sided Warbling Finch
+562413,Buff-throated Warbling Finch
 562413,Red-rumped Warbling Finch
 562414,Black-capped Warbling Finch
 562415,Black-and-rufous Warbling Finch
@@ -72672,7 +72713,6 @@
 562949,Yellow Canary
 562950,Western Citril
 562951,Streaky-headed Seedeater
-562952,Southern Citril
 562953,Papyrus Canary
 562955,Protea Canary
 562956,White-rumped Seedeater
@@ -72789,7 +72829,9 @@
 563072,White-throated Seedeater
 563073,Variable Seedeater
 563073,Wing-barred Seedeater
+563074,Dubois's Seedeater
 563075,Capped Seedeater
+563075,Copper Seedeater
 563076,Lesson's Seedeater
 563077,Double-collared Seedeater
 563078,Chestnut-bellied Seedeater
@@ -73322,6 +73364,7 @@
 563648,Sri Lanka Blue Magpie
 563649,White-winged Magpie
 563650,Pink-tailed Rosefinch
+563650,Przevalski's Finch
 563654,White-bellied Wren
 563655,Asian Stubtail
 563656,Timor Stubtail
@@ -75729,6 +75772,8 @@
 572803,dwarf galagos
 572804,greater galagos
 572815,titi monkeys
+572816,gracile capuchins
+572816,untufted capuchins
 572820,Allen's Swamp Monkey
 572821,capped mangabeys
 572822,arborial guenons
@@ -75934,6 +75979,7 @@
 572959,Southern Muriqui
 572959,muriqui
 572960,Humboldt's woolly monkey
+572961,Peruvian Yellow-tailed Woolly Monkey
 572961,yellow-tailed woolly monkey
 572962,Atlantic Titi
 572962,Masked Titi
@@ -75999,6 +76045,7 @@
 572982,Black-headed Squirrel Monkey
 572983,Bald Uacari
 572983,red uakari
+572984,Black-faced Uacari
 572984,Black-headed Uacari
 572984,black uakari
 572985,Red-nosed Bearded Saki
@@ -78095,7 +78142,7 @@
 621854,Argentine gray fox
 621855,Pampas fox
 621856,Sechura fox
-621857,hoary fox
+621857,Hoary Fox
 621858,Bengal Fox
 621859,Blanford's Fox
 621860,Cape Fox
@@ -78104,8 +78151,8 @@
 621862,Tibetan fox
 621863,Pale Fox
 621864,Rüppell's Fox
+621865,Fennec
 621865,Fennec Fox
-621865,fennec
 621866,Bay Cat
 621867,Asian Golden Cat
 621867,Asiatic golden cat
@@ -78302,10 +78349,10 @@
 622024,speckle-throated otter
 622024,spot-necked otter
 622025,Arctic Fox
-622025,blue fox
-622025,ice fox
-622025,polar fox
-622025,white fox
+622025,Blue Fox
+622025,Ice Fox
+622025,Polar Fox
+622025,White Fox
 622026,Asiatic lion
 622027,Saimaa seal
 622028,leopard cat
@@ -80739,15 +80786,10 @@
 632203,Greater Naked Bat
 632203,hairless bat
 632204,Black Bonneted Bat
-632204,black bonneted bat
 632205,Dwarf Bonneted Bat
-632205,dwarf bonneted bat
 632206,Big Bonneted Bat
-632206,big bonneted bat
 632207,Sanborn's Bonneted Bat
-632207,Sanborn's bonneted bat
 632208,Guianan Bonneted Bat
-632208,Guianan bonneted bat
 632209,cinnamon dog-faced bat
 632210,Equatorial Dog-faced Bat
 632210,equatorial dog-faced bat
@@ -84658,7 +84700,9 @@
 678267,Gulf of Carpenteria anchovy
 678282,Hasselt's sprat
 678300,Black Sea sprat
+678308,ship-timber beetles
 678328,The travertine beetles
+678338,ship-timber beetles
 678367,polypore fungus beetles
 678380,antlike leaf beetles
 678380,false flower beetles
@@ -86458,6 +86502,7 @@
 726110,Socorro Mockingbird
 726111,Gray-headed Chickadee
 726113,Blue-and-white Swallow
+726116,Alaska Wagtail
 726117,Black-billed Magpie
 726119,Nepal House Martin
 726119,Nepal Martin
@@ -86492,6 +86537,7 @@
 726208,Sooty Grassquit
 726209,Dull-colored Grassquit
 726210,Black-and-yellow Tanager
+726211,Thick-billed Seed Finch
 726211,Thick-billed Seed-Finch
 726211,Thick-billed Seedfinch
 726250,Pantanal Cat
@@ -86588,6 +86634,7 @@
 729199,Corsican Finch
 729200,Citril Finch
 729201,Crimson-winged Finch
+729201,Eurasian Crimson-winged Finch
 729202,Trumpeter Finch
 729203,Desert Finch
 729204,Mongolian Finch
@@ -86609,13 +86656,16 @@
 729220,Yellow-browed Sparrow
 729221,Variable Seedeater
 729222,Caqueta Seedeater
+729222,Caquetá Seedeater
 729223,Carrizal Seedeater
 729224,Barbados Bullfinch
 729225,Vegetarian Finch
+729226,Grey Warbler-Finch
 729227,Half-collared Sparrow
 729228,Sao Francisco Sparrow
 729229,Choco Brush Finch
 729230,Rufous-naped Brush Finch
+729230,Yellow-breasted Brush Finch
 729231,Apurimac Brush Finch
 729232,Black-spectacled Brush Finch
 729233,Cuzco Brush Finch
@@ -86626,6 +86676,7 @@
 729238,Purplish-mantled Tanager
 729239,Turquoise Dacnis
 729240,Golden-collared Honeycreeper
+729241,Common Bush Tanager
 729247,Yellow-throated Brush Finch
 729248,Chestnut-capped Warbler
 729249,Grey-crowned Yellowthroat
@@ -86638,7 +86689,6 @@
 729256,Scarlet-and-white Tanager
 729282,Yellow-crowned Canary
 729288,Western Citril
-729289,Southern Citril
 729304,Reichenow's Seedeater
 729307,Yellow-rumped Seedeater
 729336,West African Seedeater
@@ -86658,13 +86708,13 @@
 730066,Vincent's Bunting
 730326,White-collared Seedeater
 730485,Cabanis's Ground Sparrow
+730572,Yellow-throated Brush Finch
 730636,White-browed Hemispingus
 730653,Western Hemispingus
 730654,Piura Hemispingus
 730723,Lemon-rumped Tanager
 730813,White-bellied Tanager
 730923,Yellow-tufted Dacnis
-731103,Tooth-billed Tanager
 731143,Olive Tanager
 731165,Godman's Euphonia
 733320,snake flies
@@ -93263,6 +93313,7 @@
 916306,White-naped Monarch
 916307,Golden Monarch
 916310,Torrentlark
+916313,Large Pied Wagtail
 916313,White-browed Wagtail
 916315,Fülleborn's Longclaw
 916321,White-crowned Robin-Chat
@@ -93389,6 +93440,30 @@
 919429,grey-headed blackbird
 919535,Grayson's Thrush
 920581,San Joaquin LeConte's thrasher
+920813,Sykes's Wagtail
+920814,Ashy-headed Wagtail
+920815,Black-headed Wagtail
+920816,Yellow-crowned Wagtail
+920817,Iberian Wagtail
+920817,Spanish Wagtail
+920818,White-headed Wagtail
+920819,Eastern Yellow-headed Wagtail
+920819,Yellow-browed Wagtail
+920819,Yellow-headed Wagtail
+920822,Egyptian Yellow Wagtail
+920823,Dark-headed Wagtail
+920823,Grey-headed Wagtail
+920834,Angolan Wagtail
+920835,Wells's Wagtail
+920843,Black-eared Wagtail
+920843,Hodgson's Wagtail
+920844,Swinhoe's Wagtail
+920846,Amur Wagtail
+920846,White-faced Wagtail
+920848,Masked Wagtail
+920849,Moroccan Wagtail
+920850,British Pied Wagtail
+920850,Pied Wagtail
 921013,Alexander's Robin
 922693,Scarlet-breasted Robin
 922851,Degodi Bushlark
@@ -94431,6 +94506,8 @@
 943907,giant mouse lemurs
 943941,red colobus
 943964,snub-nosed monkeys
+943970,robust capuchins
+943970,tufted capuchins
 943972,squirrel galagos
 943978,Pig-tailed Langur
 943998,Kipunji
@@ -94633,6 +94710,7 @@
 944176,Rio Negro Bearded Saki
 944177,Uta Hick's Bearded Saki
 944178,Guianan Bearded Saki
+944179,Golden-backed Black-faced Uacari
 944179,Spix's Black-headed Uacari
 944180,Ursine Red Howler
 944181,Guianan Red Howler
@@ -94829,6 +94907,8 @@
 944701,Laotian Langur
 944702,Cat Ba Langur
 944703,Shortridge's Langur
+944997,Burnished Saki
+944999,Hairy Saki
 945068,Gray Bamboo Lemur
 945069,Beanamalao Bamboo Lemur
 945070,Ranomafana Bamboo Lemur
@@ -94931,6 +95011,7 @@
 945157,Red Uacari
 945158,Ucayali Bald Uacari
 945159,Humboldts' Black-headed Uacari
+945159,Neblina Black-faced Uacari
 945160,Ayres' Black Uacari
 945161,Colombian Red Howler
 945162,Juruá Red Howler
@@ -95690,6 +95771,7 @@
 949454,Narborough Island Giant Tortoise
 949455,Indefatigable Island Giant Tortoise
 949455,Santa Cruz Giant Tortoise
+949455,Western Santa Cruz Tortoise
 949456,Albemarle Island Giant Tortoise
 949456,Southern Isabela Giant Tortoise
 949457,Reunion Giant Tortoise
@@ -96984,3 +97066,221 @@
 990183,smooth starfish
 990320,azure sea star
 990516,reef starfish
+997299,Eastern Santa Cruz Tortoise
+997693,Longspurs
+997693,Snow Buntings
+997715,Crested Bunting
+997716,Slaty Bunting
+997717,House Bunting
+997718,Gosling's Bunting
+997719,Vincent's Bunting
+997720,Sooty Fox Sparrow
+997721,Slate-colored Fox Sparrow
+997722,Large-billed Fox Sparrow
+997723,Sagebrush Sparrow
+997724,Bell's Sparrow
+997724,Sage Sparrow
+997725,Tumbes Sparrow
+997726,Stripe-capped Sparrow
+997727,Stripe-headed Sparrow
+997728,Black-chested Sparrow
+997729,Bridled Sparrow
+997730,Cinnamon-tailed Sparrow
+997731,Rufous-winged Sparrow
+997732,Cassin's Sparrow
+997733,Bachman's Sparrow
+997734,Botteri's Sparrow
+997735,Bermuda Towhee
+997736,White-throated Towhee
+997737,Canyon Towhee
+997738,California Towhee
+997739,Abert's Towhee
+997740,Cabanis's Ground Sparrow
+997741,Chestnut-capped Brush Finch
+997742,Green-striped Brush Finch
+997743,Black-headed Brush Finch
+997744,Costa Rican Brush Finch
+997745,Stripe-headed Brush-Finch
+997745,White-browed Brush Finch
+997746,Sierra Nevada Brush Finch
+997747,Perija Brush Finch
+997748,Grey-browed Brush Finch
+997749,Caracas Brush Finch
+997750,Paria Brush Finch
+997751,Sooty-faced Finch
+997752,Olive Finch
+997753,Black-fronted Brush Finch
+997754,Antioquia Brush Finch
+997755,Masked Cardinal
+997756,White-browed Hemispingus
+997757,Western Hemispingus
+997758,Piura Hemispingus
+997759,Lemon-rumped Tanager
+997760,Yellow-tufted Dacnis
+997761,Indigo Flowerpiercer
+997762,Golden-eyed Flowerpiercer
+997763,Bluish Flowerpiercer
+997764,Masked Flowerpiercer
+997765,Peg-billed Finch
+997766,Nightingale Island Finch
+997767,Cinereous Finch
+997768,Rufous-sided Warbling Finch
+997769,Grey-throated Warbling Finch
+997770,Bright-rumped Yellow Finch
+997771,Monte Yellow Finch
+997772,Tropeiro Seedeater
+997773,Pearly-bellied Seedeater
+997774,Tooth-billed Tanager
+997775,Hepatic Tanager
+997776,Olive Tanager
+997777,Ecuadorian Seedeater
+997778,Rothschild's Grosbeak
+997779,Azores Bullfinch
+997779,São Miguel Bullfinch
+997780,African Crimson-winged Finch
+997781,Mongolian Finch
+997782,Blanford's Rosefinch
+997783,Dark-breasted Rosefinch
+997784,Scarlet Finch
+997785,Bonin Grosbeak
+997786,Chinese Beautiful Rosefinch
+997787,Pink-rumped Rosefinch
+997788,Sharpe's Rosefinch
+997789,Taiwan Rosefinch
+997790,Pale Rosefinch
+997791,Long-tailed Rosefinch
+997792,Chinese White-browed Rosefinch
+997793,Crimson-browed Finch
+997794,Laysan Honeycreeper
+997795,Greater Amakihi
+997796,Lesser Akialoa
+997797,Greater Akialoa
+997798,Anianiau
+997799,Hawaii Creeper
+997800,Hawaii Amakihi
+997801,Oahu Amakihi
+997802,Kauai Amakihi
+997803,Purple Finch
+997804,Cassin's Finch
+997805,House Finch
+997806,European Greenfinch
+997807,Grey-capped Greenfinch
+997808,Yellow-breasted Greenfinch
+997809,Vietnamese Greenfinch
+997810,Black-headed Greenfinch
+997811,Arabian Golden-winged Grosbeak
+997812,Somali Golden-winged Grosbeak
+997813,Principe Seedeater
+997814,Sao Tome Grosbeak
+997815,African Citril
+997816,Western Citril
+997817,Southern Citril
+997818,Black-faced Canary
+997819,Papyrus Canary
+997820,Forest Canary
+997821,White-rumped Seedeater
+997822,Black-throated Canary
+997823,Yellow-rumped Seedeater
+997824,Reichenow's Seedeater
+997825,Arabian Serin
+997826,Yellow-throated Seedeater
+997827,Salvadori's Seedeater
+997828,Lemon-breasted Canary
+997829,Yellow-fronted Canary
+997830,White-bellied Canary
+997831,Ankober Serin
+997832,Yemen Serin
+997833,Cape Siskin
+997834,Drakensberg Siskin
+997835,Northern Grosbeak-Canary
+997836,Southern Grosbeak-Canary
+997837,Yellow Canary
+997838,Brimstone Canary
+997839,Reichard's Seedeater
+997840,Streaky-headed Seedeater
+997841,West African Seedeater
+997842,Black-eared Seedeater
+997843,Brown-rumped Seedeater
+997844,White-throated Canary
+997845,Thick-billed Seedeater
+997846,Streaky Seedeater
+997847,Yellow-browed Seedeater
+997848,Kipengere Seedeater
+997849,Protea Canary
+997850,Twite
+997851,Common Linnet
+997852,Yemen Linnet
+997853,Warsangli Linnet
+997854,Mountain Serin
+997855,Corsican Finch
+997856,Yellow-crowned Canary
+997857,Tibetan Serin
+997858,Eurasian Siskin
+997859,Antillean Siskin
+997860,Black-capped Siskin
+997861,Black-headed Siskin
+997862,Black-chinned Siskin
+997863,Yellow-bellied Siskin
+997864,Olivaceous Siskin
+997865,Hooded Siskin
+997866,Saffron Siskin
+997867,Yellow-faced Siskin
+997868,Red Siskin
+997869,Black Siskin
+997870,Yellow-rumped Siskin
+997871,Thick-billed Siskin
+997872,Andean Siskin
+997873,McCown's Longspur
+997879,Maui-nui Akialoa
+997881,Kauai Akialoa
+997961,American Tree Sparrow
+997966,Maui Akepa
+997967,Oahu Akepa
+997970,Maui Nukupuu
+997971,Kauai Nukupuu
+998051,Saltbush Sparrow
+998053,San Clemente Sage Sparrow
+998093,Inyo California Towhee
+998123,Common Bush Tanager
+998126,Piura Hemispingus
+998133,Yellow-tufted Dacnis
+998189,Stresemann's Rosefinch
+998286,West African Seedeater
+998327,Yellow-crowned Canary
+998421,African Golden Wolf
+998428,Chiribaya's Bonneted Bat
+998615,Cruz Lima's Saddle-back Tamarin
+998616,Brown-mantled Tamarin
+998616,Spix's Saddle-back Tamarin
+998617,Black-mantled Tamarin
+998621,Golden-faced Saki
+998622,Miller's Saki
+998623,Napo Saki
+998624,Cazuza's Saki
+998625,Isabel's Saki
+998626,Vanzolini's Bald-faced Saki
+998627,Mittermeier's Tapajós Saki
+998628,Ryland's Bald-Faced Saki
+998629,Pissinatti's Bald-faced Saki
+998631,Black-crowned Dwarf Marmoset
+998631,Roosmalens' Dwarf Marmoset
+998632,Aracá Uakari
+998633,Neblina Uakari
+998634,Thomas' Dwarf Lemur
+998636,White-cheeked Macaque
+998637,Collins' Squirrel Monkey
+998639,Urubamba Brown Titi Monkey
+998640,Lesson's Saddle-back Tamarin
+998641,Lako's Saddle-back Tamarin
+998642,Ávila Pires' Saddle-back Tamarin
+998643,Hershkovitz's Saddle-back Tamarin
+998644,Gray-fronted Saddle-back Tamarin
+998645,Spix's Black-mantled Tamarin
+998646,Graells's Tamarin
+998647,Hernández-Camacho's Black-mantled Tamarin
+998648,Poeppig's Woolly Monkey
+998648,Silvery Woolly Monkey
+998649,Peruvian Woolly Monkey
+998650,Geoffroy's Woolly Monkey
+998650,Gray Woolly Monkey
+998651,Defler's Woolly Monkey
