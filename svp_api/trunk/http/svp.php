@@ -45,9 +45,9 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
 	// Détermination du format de la réponse. Etant donné que l'on traite déjà une erreur, on ne se préoccupe pas
 	// pas d'une éventuelle erreur sur le format, on utilisera dans ce cas le JSON.
 	$format_reponse = 'json';
-	if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
+	if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
 		// On positionne le format de sortie car on sait que celui demandé est valide
-		$format_reponse = $contenu['requete']['format'];
+		$format_reponse = $contenu['requete']['format_contenu'];
 	}
 
 	// Finaliser la réponse selon le format demandé.
@@ -61,8 +61,8 @@ function http_svp_erreur_dist($code, $requete, $reponse) {
  * Fait un GET sur une collection de plugins ou de dépôts.
  * La requête est du type `/svp/plugins` ou `/svp/depots` et renvoie les objets plugin contenus dans la base du serveur
  * (hors les plugins installés) ou les objets dépôt hébergés par le serveur.
- * Il est possible de filtrer la collection des plugins par catégorie /svp/plugins&categorie=outil et par
- * compatibilité SPIP /svp/plugins&compatible_spip=2.1.
+ * Il est possible de filtrer la collection des plugins par catégorie et par compatibilité SPIP
+ * `/svp/plugins&compatible_spip=2.1&categorie=outil`.
  *
  * @api
  *
@@ -90,10 +90,10 @@ function http_svp_get_collection_dist($requete, $reponse) {
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes
 	if (requete_verifier_serveur($erreur)) {
-		// Vérification du format de sortie demandé
-		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
-			// On positionne cette fois le format de sortie car on sait que celui demandé est valide
-			$format_reponse = $contenu['requete']['format'];
+		// Vérification du format demandé pour le contenu
+		if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
+			// On positionne cette fois le format du contenu car on sait que celui demandé est valide
+			$format_reponse = $contenu['requete']['du contenu '];
 			// Vérification du nom de la collection
 			if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
 				// On vérifie les critères de filtre additionnels si la requête en contient
@@ -165,10 +165,10 @@ function http_svp_get_ressource_dist($requete, $reponse) {
 	// Vérification du mode SVP du serveur : celui-ci ne doit pas être en mode runtime pour
 	// renvoyer des données complètes
 	if (requete_verifier_serveur($erreur)) {
-		// Vérification du format de sortie demandé
-		if (requete_verifier_format($contenu['requete']['format'], $erreur)) {
-			// On positionne le format de sortie qui sera utilisé car on sait que celui demandé est valide
-			$format_reponse = $contenu['requete']['format'];
+		// Vérification du format demandé pour le contenu
+		if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
+			// On positionne le format du contenu qui sera utilisé car on sait que celui demandé est valide
+			$format_reponse = $contenu['requete']['format_contenu'];
 			// Vérification du nom de la collection
 			if (requete_verifier_ressource($contenu['requete']['collection'], $erreur)) {
 				// Vérification du préfixe de la ressource

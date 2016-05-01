@@ -94,7 +94,7 @@ function reponse_initialiser_contenu($requete) {
 	$parametres = $requete->query->all();
 	$demande['criteres'] = array_intersect_key($parametres, array_flip(array('categorie', 'compatible_spip')));
 	// -- Le format du contenu de la réponse fourni comme paramètre de l'url
-	$demande['format'] = isset($parametres['format']) ? $parametres['format'] : 'json';
+	$demande['format_contenu'] = isset($parametres['format']) ? $parametres['format'] : 'json';
 
 	// Initialisation du bloc d'erreur à ok par défaut
 	$erreur['status'] = 200;
