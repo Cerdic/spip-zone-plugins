@@ -13,6 +13,13 @@ Ce plugins permet de stocker le nombre de click par URL, de consulter la provena
 
 ## Changelog
 
+### Version 1.1.3 (30/04/2016)
+
+- Affichage du total des clics dans un tableau sur page détail
+- Amélioration des graphs sur les bots
+- Suppression des tags php fermant
+- Suppression class css inutile
+
 ### Version 1.1.2 (29/04/2016)
 
 - Amélioration des graphs

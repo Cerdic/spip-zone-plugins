@@ -134,7 +134,20 @@ $(document).ready(function($) {
 <h2><:shortcut_url:titre_shortcut_url_graph_bot_click:></h2>
 
 <script type="text/javascript">
-
+	var d3_locale_fr = d3.locale({
+		decimal: ".",
+		thousands: " ",
+		grouping: [ 3 ],
+		currency: [ "$", "" ],
+		dateTime: "%a %b %e %X %Y",
+		date: "%m/%d/%Y",
+		time: "%H:%M:%S",
+		periods: [ "AM", "PM" ],
+		days: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+		shortDays: [ "Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam" ],
+		months: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
+		shortMonths: [ "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aou", "Sep", "Oct", "Nov", "Déc" ]
+	});
 	$(document).ready(function($) {
 			var json = [
 				<BOUCLE_liste_shortcut_url_click_graph(SHORTCUT_URLS){id_shortcut_url}>
@@ -151,12 +164,12 @@ $(document).ready(function($) {
 			
 			var title_value = "<:shortcut_url:nb_click:>";
 
-			var margin = {top: 60, right: 60, bottom: 60, left: 60},
+			var margin = {top: 60, right: 60, bottom: 88, left: 60},
 				width = 760 - margin.left - margin.right,
 				height = 400 - margin.top - margin.bottom;
 			
-			var parseDate = d3.time.format("%Y-%m-%d").parse;
-			var tooltipDate = d3.time.format("%e %b");
+			var parseDate = d3_locale_fr.timeFormat("%Y-%m-%d");
+			var tooltipDate = d3_locale_fr.timeFormat("%e %b");
 			
 			var x = d3.time.scale()
 				.range([0, width]);
@@ -167,6 +180,7 @@ $(document).ready(function($) {
 			var xAxis = d3.svg.axis()
 				.scale(x)
 				.tickSize(-height)
+				.tickFormat(d3_locale_fr.timeFormat("%B %Y"))
 				.tickSubdivide(1);
 
 			var yAxis = d3.svg.axis()
@@ -190,7 +204,7 @@ $(document).ready(function($) {
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 			json.forEach(function(d) {
-				d.label = parseDate(d.label);
+				d.label = parseDate.parse(d.label);
 				d.value = +d.value;
 			});
 

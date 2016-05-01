@@ -31,5 +31,3 @@ function action_supprimer_shortcut_url_dist(){
 		shortcut_url_supprimer($id_shortcut_url);
 	}
 }
-
-?>

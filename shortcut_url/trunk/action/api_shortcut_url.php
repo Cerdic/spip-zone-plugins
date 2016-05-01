@@ -29,5 +29,3 @@ function action_api_shortcut_url($arg=null) {
 	}
 
 }
-
-?>

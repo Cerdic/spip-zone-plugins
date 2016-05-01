@@ -30,17 +30,21 @@
 			<th class='description' scope='col'><:shortcut_url:form_date_modif:></th>
 			<td>[(#DATE_MODIF|affdate_jourcourt)]</td>
 		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_nb_shortcut_url_clicks:></th>
+			<td>#CLICK</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_humain:></th>
+			<td>#GET{total_humain}</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_bot:></th>
+			<td>#GET{total_bot}</td>
+		</tr>
 	</thead>
 </table>
 </div>
-
-<br class="nettoyeur" />
-
-[<strong>(#ENV*{titre,#CLICK|singulier_ou_pluriel{shortcut_url:info_1_shortcut_url_click,shortcut_url:info_nb_shortcut_url_clicks}})</strong>]
-<p>
-	<:shortcut_url:info_1_shortcut_url_humain{click=#GET{total_humain}}:><br />
-	<:shortcut_url:info_1_shortcut_url_bot{click=#GET{total_bot}}:>
-</p>
 
 <B_liste_shortcut_url_logs>
 #ANCRE_PAGINATION

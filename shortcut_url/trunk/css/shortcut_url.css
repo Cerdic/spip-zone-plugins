@@ -1,6 +1,5 @@
 #bando_outils li.boussole, .bando2_rubrique_creer { display: none !important; }
 div.bouton_stats { display: block; margin: .5em 0 2em 0; }
-.gros_bouton { display: inline-block; border-radius: 5px; font-size: 3em; width: 90%; border: 1px solid; text-align: center; padding: 1em; background: #e5e5e5 none repeat scroll 0 0; }
 li.seenthis a, li.googleplus, li.facebook, li.twitter { list-style: none; float: left; padding: 0 0 0 .5em; }
 li.seenthis a,
 li.googleplus a,

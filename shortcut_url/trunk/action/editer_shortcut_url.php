@@ -33,5 +33,3 @@ function shortcut_url_supprimer($id_shortcut_url){
 	}
 	return false;
 }
-
-?>
