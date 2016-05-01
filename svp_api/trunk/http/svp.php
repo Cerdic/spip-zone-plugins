@@ -93,7 +93,7 @@ function http_svp_get_collection_dist($requete, $reponse) {
 		// Vérification du format demandé pour le contenu
 		if (requete_verifier_format($contenu['requete']['format_contenu'], $erreur)) {
 			// On positionne cette fois le format du contenu car on sait que celui demandé est valide
-			$format_reponse = $contenu['requete']['du contenu '];
+			$format_reponse = $contenu['requete']['format_contenu'];
 			// Vérification du nom de la collection
 			if (requete_verifier_collection($contenu['requete']['collection'], $erreur)) {
 				// On vérifie les critères de filtre additionnels si la requête en contient
