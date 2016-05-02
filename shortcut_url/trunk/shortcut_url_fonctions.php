@@ -46,16 +46,6 @@ function generer_chaine_aleatoire($length = 5){
  * @return boolean
  */
 function shortcut_compteur($id_shortcut_url){
-	
-	$shorturl = sql_fetsel('url,click', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
-
-	$date_modif = date('Y-m-d H:m:i');
-	$referrer = $_SERVER['REMOTE_ADDR'];
-	$user_agent = get_user_agent();
-	$ip_address = $_SERVER['SERVER_ADDR'];
-	$country_code = get_geoip($referrer);
-	$click = $shorturl['click']+1;
-
 	if (!defined('_IS_BOT'))
 		define('_IS_BOT',
 			isset($_SERVER['HTTP_USER_AGENT'])
@@ -69,16 +59,32 @@ function shortcut_compteur($id_shortcut_url){
 			. ',i',(string) $_SERVER['HTTP_USER_AGENT'])
 		);
 	
+	$ip_address = $_SERVER['SERVER_ADDR'];
+	
 	if(_IS_BOT) {
-		$humain = 'bot';
-		$insert_bot = sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address));
-		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
-	} else {
-		$humain = 'oui';
-		$insert = sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'shorturl' => $shorturl['url'],'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address,'country_code' => $country_code,'humain' => $humain));
-		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
+		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_bots','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . date('Y-m-d H:i:s',strtotime('-30 seconds')));
+	}else{
+		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_logs','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . date('Y-m-d H:i:s',strtotime('-30 seconds')));
 	}
-
+	if(!$appele){
+		$shorturl = sql_fetsel('url, click', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($id_shortcut_url));
+	
+		$date_modif = date('Y-m-d H:m:i');
+		$referrer = $_SERVER['REMOTE_ADDR'];
+		$user_agent = get_user_agent();
+		
+		$country_code = get_geoip($referrer);
+		$click = $shorturl['click']+1;
+		$insert_click = sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url=' . intval($id_shortcut_url));
+		
+		if(_IS_BOT) {
+			$humain = 'bot';
+			$insert_bot = sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address));
+		} else {
+			$humain = 'oui';
+			$insert = sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url,'date_modif' => $date_modif,'shorturl' => $shorturl['url'],'referrer' => $referrer,'user_agent' => $user_agent,'ip_address' => $ip_address,'country_code' => $country_code,'humain' => $humain));
+		}
+	}
 	return false;
 }
 

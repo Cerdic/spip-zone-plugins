@@ -13,6 +13,12 @@ Ce plugins permet de stocker le nombre de click par URL, de consulter la provena
 
 ## Changelog
 
+### Version 1.1.4 (02/05/2016)
+
+- Content-type sur les fichiers json
+- Fix un bug sur les graphs des bots
+- i18n pour les dates sur les graphs
+
 ### Version 1.1.3 (30/04/2016)
 
 - Affichage du total des clics dans un tableau sur page détail
