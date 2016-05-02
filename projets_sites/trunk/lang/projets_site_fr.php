@@ -198,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'uniqid_label' => 'Unique ID&nbsp;:',
 
 	// V
+	'version_base_label' => 'Version du schéma',
 	'version_label' => 'Version',
 	'versioning_fieldset_label' => 'Gestionnaire de versions',
 	'versioning_path_label' => 'Chemin du dépôt&nbsp;:',

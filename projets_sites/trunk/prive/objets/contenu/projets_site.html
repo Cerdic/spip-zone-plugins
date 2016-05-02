@@ -97,6 +97,7 @@
 				<tr>
 					<th class="principale prefixe"><:projets_site:prefixe_label:></th>
 					<th class="secondaire version"><:projets_site:version_label:></th>
+					<th class="secondaire version_base"><:projets_site:version_base_label:></th>
 					<th class="principale titre"><:projets_site:titre_label:></th>
 					<th class="secondaire statut"><:projets_site:statut_label:></th>
 				</tr>
@@ -104,11 +105,12 @@
 			<tbody>
 			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}>
 				<tr>
-					<td>[(#VALEUR{0}|trim)]</td>
-					<td>[(#VALEUR{1}|trim)]</td>
-					<td>[(#VALEUR{2}|trim)]</td>
+					<td>[(#VALEUR{prefixe}|trim)]</td>
+					<td>[(#VALEUR{version}|trim)]</td>
+					<td>[(#VALEUR{version_base}|trim)]</td>
+					<td>[(#VALEUR{titre}|trim)]</td>
 					<td class="[
-					(#REM|test_espace_prive|non)[(#GET{plugin_statut_class}|table_valeur{#VALEUR{3}|trim})]]">[(#VALEUR{3}|trim)]</td>
+					(#REM|test_espace_prive|non)[(#GET{plugin_statut_class}|table_valeur{#VALEUR{3}|trim})]]">[(#VALEUR{statut}|trim)]</td>
 				</tr>
 			</BOUCLE_plugins>
 			</tbody>
