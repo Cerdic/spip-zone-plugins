@@ -13,41 +13,42 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function formater_tableau($chaine) {
+function formater_tableau($chaine, $format = 'auteur') {
 	$listing = array();
 	if (preg_match("/\n/", $chaine)) {
 		$listing = explode("\n", $chaine);
 		if (is_array($listing) and count($listing) > 0) {
 			foreach ($listing as $cle => $valeur) {
-				$listing[$cle] = formater_valeur($valeur);
+				$listing[$cle] = formater_valeur($valeur, $format);
 			}
 		}
 	} else {
 		if (preg_match("/\|/", $chaine)) {
-			$listing[] = formater_valeur($chaine);
+			$listing[] = formater_valeur($chaine, $format);
 		}
 	}
 
 	return $listing;
 }
 
-function formater_valeur($valeur) {
+function formater_valeur($valeur, $format = 'auteur') {
 	$tableau = explode("|", $valeur);
-	if (count($tableau) == 4) {
-		$tableau['prefixe'] = trim($tableau[0]);
-		$tableau['version'] = trim($tableau[1]);
-		$tableau['version_base'] = '-';
-		$tableau['titre'] = trim($tableau[2]);
-		$tableau['statut'] = trim($tableau[3]);
-	} elseif (count($tableau) == 5) {
-		$tableau['prefixe'] = trim($tableau[0]);
-		$tableau['version'] = trim($tableau[1]);
-		$tableau['version_base'] = trim($tableau[2]);
-		$tableau['titre'] = trim($tableau[3]);
-		$tableau['statut'] = trim($tableau[4]);
-	} else {
-		foreach ($tableau as $key => $value) {
-			$tableau[$key] = trim($value);
+	foreach ($tableau as $key => $value) {
+		$tableau[$key] = trim($value);
+	}
+	if ($format == 'plugins') {
+		if (count($tableau) == 4) {
+			$tableau['prefixe'] = trim($tableau[0]);
+			$tableau['version'] = trim($tableau[1]);
+			$tableau['version_base'] = '-';
+			$tableau['titre'] = trim($tableau[2]);
+			$tableau['statut'] = trim($tableau[3]);
+		} elseif (count($tableau) == 5) {
+			$tableau['prefixe'] = trim($tableau[0]);
+			$tableau['version'] = trim($tableau[1]);
+			$tableau['version_base'] = trim($tableau[2]);
+			$tableau['titre'] = trim($tableau[3]);
+			$tableau['statut'] = trim($tableau[4]);
 		}
 	}
 

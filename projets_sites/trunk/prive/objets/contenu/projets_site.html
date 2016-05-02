@@ -103,14 +103,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}>
-				<tr>
-					<td>[(#VALEUR{prefixe}|trim)]</td>
-					<td>[(#VALEUR{version}|trim)]</td>
-					<td>[(#VALEUR{version_base}|trim)]</td>
-					<td>[(#VALEUR{titre}|trim)]</td>
-					<td class="[
-					(#REM|test_espace_prive|non)[(#GET{plugin_statut_class}|table_valeur{#VALEUR{3}|trim})]]">[(#VALEUR{statut}|trim)]</td>
+			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau{'plugins'})} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}>[(#SET{class_statut,[(#REM|test_espace_prive|non)[(#GET{plugin_statut_class}|table_valeur{#VALEUR{statut}|trim})]]})]
+				<tr class="[(#GET{class_statut}|trim)]">
+					<td class="prefixe">[(#VALEUR{prefixe}|trim)]</td>
+					<td class="version">[(#VALEUR{version}|trim)]</td>
+					<td class="version_base">[(#VALEUR{version_base}|trim)]</td>
+					<td class="titre">[(#VALEUR{titre}|trim)]</td>
+					<td class="statut[ (#GET{class_statut})]">[(#VALEUR{statut}|trim)]</td>
 				</tr>
 			</BOUCLE_plugins>
 			</tbody>
@@ -400,12 +399,3 @@
 	</div>]
 
 </BOUCLE_projets_site>
-[(#REM|test_espace_prive|non)
-<script type="text/javascript">
-$('.contenu_logiciel_plugins table.liste tbody tr td:last-child').each(function(index, el) {
-	var class_tableau = $(this).attr("class");
-	$(this).parent('tr').addClass( class_tableau + " text-" + class_tableau );
-});
-</script>
-]
-
