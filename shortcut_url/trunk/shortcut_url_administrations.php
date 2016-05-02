@@ -38,6 +38,12 @@ function shortcut_url_upgrade($nom_meta_base_version,$version_cible){
 		// Ajouter un index à la table spip_shortcut_urls_logs
 		array('sql_alter',"TABLE spip_shortcut_urls_logs ADD INDEX (id_shortcut_url)"));
 
+	$maj['0.0.4'] = array(
+		// Ajouter un index à la table spip_shortcut_urls_logs et spip_shortcut_urls_bots
+		// pour l'adresse ip
+		array('sql_alter',"TABLE spip_shortcut_urls_logs ADD INDEX (ip_address)"),
+		array('sql_alter',"TABLE spip_shortcut_urls_bots ADD INDEX (ip_address)"));
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

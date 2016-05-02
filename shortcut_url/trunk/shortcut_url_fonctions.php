@@ -62,9 +62,9 @@ function shortcut_compteur($id_shortcut_url){
 	$ip_address = $_SERVER['SERVER_ADDR'];
 	
 	if(_IS_BOT) {
-		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_bots','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . date('Y-m-d H:i:s',strtotime('-30 seconds')));
+		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_bots','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . sql_quote(date('Y-m-d H:i:s',strtotime('-30 seconds'))));
 	}else{
-		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_logs','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . date('Y-m-d H:i:s',strtotime('-30 seconds')));
+		$appele = sql_getfetsel('id_shortcut_url','spip_shortcut_urls_logs','ip_address = ' . sql_quote($ip_address) . ' AND id_shortcut_url = ' .intval($id_shortcut_url) . ' AND date_modif < ' . sql_quote(date('Y-m-d H:i:s',strtotime('-30 seconds'))));
 	}
 	if(!$appele){
 		$shorturl = sql_fetsel('url, click', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($id_shortcut_url));

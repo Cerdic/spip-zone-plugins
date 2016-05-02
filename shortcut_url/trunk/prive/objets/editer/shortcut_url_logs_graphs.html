@@ -1,3 +1,7 @@
+<BOUCLE_count_humains(SHORTCUT_URLS_LOGS) {id_shortcut_url}>
+[(#SET{total_humain, #TOTAL_BOUCLE})]
+</BOUCLE_count_humains>
+
 <BOUCLE_liste_shortcut_url_logs_detail(SHORTCUT_URLS){id_shortcut_url}>
 
 <h1><:shortcut_url:titre_shortcut_url_log_detail:> #URL_SITE_SPIP/#TITRE</h1>
@@ -17,6 +21,10 @@
 		<tr class='first_row'>
 			<th class='description' scope='col'><:shortcut_url:form_date_modif:></th>
 			<td>[(#DATE_MODIF|affdate_jourcourt)]</td>
+		</tr>
+		<tr class='first_row'>
+			<th class='description' scope='col'><:shortcut_url:info_1_shortcut_url_humain:></th>
+			<td>#GET{total_humain}</td>
 		</tr>
 	</thead>
 </table>
