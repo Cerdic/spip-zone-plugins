@@ -1,3 +1,4 @@
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
 [(#SET{user_agent,#ARRAY})][(#SET{total20,0})][(#SET{total,0})]
 <BOUCLE_liste_shortcut_url_user_agent(SHORTCUT_URLS_BOTS){fusion user_agent}{par user_agent}{id_shortcut_url}>
 	<BOUCLE_compte(SHORTCUT_URLS_BOTS){user_agent}{id_shortcut_url}> </BOUCLE_compte>

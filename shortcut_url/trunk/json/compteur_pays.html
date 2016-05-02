@@ -1,3 +1,4 @@
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
 [(#SET{pays,#ARRAY})][(#SET{total,0})][(#SET{total9,0})]
 <BOUCLE_liste_shortcut_url_pays(SHORTCUT_URLS_LOGS){fusion country_code}{par country_code}{humain=oui}{id_shortcut_url}>
 	<BOUCLE_compte(SHORTCUT_URLS_LOGS){country_code}{humain=oui}{id_shortcut_url}> </BOUCLE_compte>
