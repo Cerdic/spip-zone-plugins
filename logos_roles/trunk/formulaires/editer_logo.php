@@ -101,7 +101,6 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		'objet' => $objet,
 		'id_objet' => $id_objet,
 		'_options' => $options,
-		'_show_upload_off' => '',
 	);
 
 	// rechercher le logo de l'objet
@@ -115,12 +114,6 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 		if ($logo) {
 			$res['logo_' . $etat] = $logo[0];
 		}
-	}
-	// pas de logo_on -> pas de formulaire pour le survol
-	if (!isset($res['logo_on'])) {
-		$res['logo_survol'] = '';
-	} elseif (!isset($res['logo_off']) and _request('logo_up')) {
-		$res['_show_upload_off'] = ' ';
 	}
 
 	// si le logo n'est pas editable et qu'il n'y en a pas, on affiche pas du tout le formulaire
