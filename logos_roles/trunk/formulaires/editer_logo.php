@@ -196,30 +196,29 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 	include_spip('action/editer_logo');
 
 	// effectuer la suppression si demandee d'un logo
-	$on = _request('supprimer_logo_on');
-	if ($on or _request('supprimer_logo_off')) {
-		logo_supprimer($objet, $id_objet, $on ? 'on' : 'off');
-		$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
-		set_request('logo_up', ' ');
-	} // sinon supprimer ancien logo puis copier le nouveau
-	else {
-		$sources = formulaire_editer_logo_get_sources();
-		foreach ($sources as $etat => $file) {
-			if ($file and $file['error'] == 0) {
-				if ($err = logo_modifier($objet, $id_objet, $etat, $file)) {
-					$res['message_erreur'] = $err;
-				} else {
-					$res['message_ok'] = '';
-				} // pas besoin de message : la validation est visuelle
-				set_request('logo_up', ' ');
-			}
+	foreach (lister_logos_roles() as $role => $titre_role) {
+		if (_request('supprimer_' . $role)) {
+			logo_supprimer($objet, $id_objet, $role);
+			$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
+			set_request('logo_up', ' ');
+		}
+	}
+
+	// Sinon remplacer les logos par le ou les éventuels logos uploadés
+	foreach (formulaire_editer_logo_get_sources() as $role => $file) {
+		if ($file and $file['error'] == 0) {
+			if ($err = logo_modifier($objet, $id_objet, $role, $file)) {
+				$res['message_erreur'] = $err;
+			} else {
+				$res['message_ok'] = '';
+			} // pas besoin de message : la validation est visuelle
+			set_request('logo_up', ' ');
 		}
 	}
 
 	// Invalider les caches de l'objet
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='$objet/$id_objet'");
-
 
 	if ($retour) {
 		$res['redirect'] = $retour;
@@ -245,8 +244,8 @@ function formulaire_editer_logo_get_sources() {
 	}
 
 	$sources = array();
-	foreach (lister_logos_roles() as $role) {
-		if (isset($_FILES[$role]) and $_FILES[$role]['error'] == 0) {
+	foreach (lister_logos_roles() as $role => $titre_role) {
+		if (isset($_FILES[$role]) and $_FILES[$role]['error'] === 0) {
 			$sources[$role] = $_FILES[$role];
 		}
 	}
