@@ -157,11 +157,14 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour = '', 
 	$erreurs = array();
 	// verifier les extensions
 	$sources = formulaire_editer_logo_get_sources();
-	foreach ($sources as $etat => $file) {
+	foreach ($sources as $role => $file) {
 		// seulement si une reception correcte a eu lieu
 		if ($file and $file['error'] == 0) {
+			// Utiliser $GLOBALS['formats_logos'] au lieu de cette liste
+			// hardcodée ? Attention que 'jpeg' n'est pas dans la globale, à
+			// compléter ?
 			if (!in_array(strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)), array('jpg', 'png', 'gif', 'jpeg'))) {
-				$erreurs['logo_' . $etat] = _L('Extension non reconnue');
+				$erreurs[$role] = _L('Extension non reconnue');
 			}
 		}
 	}
@@ -227,11 +230,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour = '', $
 
 
 /**
- * Extraction des sources des fichiers uploadés correspondant aux 2 logos (normal + survol)
- * si leur upload s'est bien passé
+ * Extraction des sources des fichiers uploadés correspondant aux logos
+ * si leur upload s'est bien passé.
  *
- * @return array
- *     Sources des fichiers dans les clés `on` ou `off`
+ * @return array Sources des fichiers dans les clés données par des noms de
+ *     rôles, comme « logo » ou « logo_survol »
  */
 function formulaire_editer_logo_get_sources() {
 	if (!$_FILES) {
@@ -242,9 +245,9 @@ function formulaire_editer_logo_get_sources() {
 	}
 
 	$sources = array();
-	foreach (array('on', 'off') as $etat) {
-		if (isset($_FILES['logo_' . $etat]) and $_FILES['logo_' . $etat]['error'] == 0) {
-			$sources[$etat] = $_FILES['logo_' . $etat];
+	foreach (lister_logos_roles() as $role) {
+		if (isset($_FILES[$role]) and $_FILES[$role]['error'] == 0) {
+			$sources[$role] = $_FILES[$role];
 		}
 	}
 
