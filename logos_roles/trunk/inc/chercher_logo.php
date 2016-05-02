@@ -29,21 +29,60 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Identifiant de l'objet
  * @param string $_id_objet
  *     Nom de la clé primaire de l'objet
- * @param string $mode
- *     Mode de survol du logo désiré (on ou off)
+ * @param string $mode Mode de survol du logo désiré (on ou off), ou alors un
+ *     rôle dont l'identifiant commence par « logo ».
  * @return array
  *     - Liste (chemin complet du fichier, répertoire de logos, nom du logo, extension du logo, date de modification)
  *     - array vide aucun logo trouvé.
  **/
 function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
-	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 
 	$type = type_du_logo($_id_objet);
+
+	/* On commence par chercher via le mécanisme historique */
 	$nom = $type . $mode . intval($id);
 
 	foreach ($GLOBALS['formats_logos'] as $format) {
 		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {
 			return array($d, _DIR_LOGOS, $nom, $format, @filemtime($d));
+		}
+	}
+
+	/* Si on n'a rien trouvé, on cherche un document lié avec le bon rôle */
+	if ($type !== 'site') {
+
+		if ($mode === 'on') {
+			$role = 'logo';
+		} elseif ($mode === 'off') {
+			$role = 'logo_survol';
+		} else {
+			$role = $mode;
+		}
+
+		include_spip('base/abstract_sql');
+		$ligne = sql_fetsel(
+			'fichier, extension',
+			'spip_documents as D '
+			. 'INNER JOIN spip_documents_liens as L ON D.id_document=L.id_document',
+			array(
+				'L.objet='.sql_quote(objet_type($_id_objet)),
+				'L.id_objet='.intval($id),
+				'L.role='.sql_quote($role),
+			)
+		);
+
+		if ($ligne['fichier']) {
+
+			$fichier = _DIR_IMG . $ligne['fichier'];
+			$extension = $ligne['extension'];
+
+			return array(
+				$fichier,
+				dirname($fichier) . '/',
+				basename($fichier, '.' . $extension),
+				$extension,
+				@filemtime($fichier),
+			);
 		}
 	}
 
