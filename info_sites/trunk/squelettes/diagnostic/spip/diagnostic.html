@@ -20,10 +20,10 @@
         </tr>
     </thead>
 <tbody>
-<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {par /0}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{0})],titre,[(#VALEUR{2})], statut,[(#VALEUR{3})], version,[(#VALEUR{1})]})]})]
+<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau{'plugins'})} {par /0}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{prefixe})],titre,[(#VALEUR{titre})], statut,[(#VALEUR{statut})], version,[(#VALEUR{version})]})]})]
     <tr class="[(#GET{plugin/prefixe}|strtolower)]">
-        <td>[(#GET{plugin/prefixe})]</td><!-- prefixe -->
-        <td>[(#GET{plugin/titre})]</td><!-- titre -->
+        <td class="prefixe">[(#GET{plugin/prefixe})]</td><!-- prefixe -->
+        <td class="titre">[(#GET{plugin/titre})]</td><!-- titre -->
         <td class="[(#GET{plugin_statut_class}|table_valeur{#GET{plugin/statut}|trim})]">[(#GET{plugin/statut})]</td><!-- statut -->
         <td>[(#GET{plugin/version})]</td><!-- version -->
         <td>[(#_diagnostic:LOGICIEL_NOM)][ (#_diagnostic:LOGICIEL_VERSION|version2branche)]</td>
