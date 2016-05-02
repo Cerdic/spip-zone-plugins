@@ -5,6 +5,7 @@
 	[<div class="titre">(#ENV{titre,''})</div>]
 	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
 	[(#ENV{editable}|oui)
+    [(#PIPELINE{logo_desc_actions, #ARRAY{args,#ARRAY{logo, #ENV{logo}, objet, #ENV{objet}, id_objet, #ENV{id_objet}}, data, ''}})]
     <a href="[(#URL_ECRIRE{document_edit, id_document=#ENV{logo}|trouver_document_fichier})]"
        class="popin">
       <:logos_roles:titre_modifier_logo:>

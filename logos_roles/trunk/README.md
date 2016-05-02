@@ -45,7 +45,7 @@ Ce formulaire se comporte plus ou moins comme l'ancien, avec quelques améliorat
 - Il utilise les nouvelles APIs.
 - On ajoute automatiquement des champs d'upload fonctionnels pour tous les rôles de logos définis.
 - Permet d'éditer le document correspondant.
-- TODO ajouter un pipeline qui permet d'ajouter des actions, à l'image de `document_desc_actions`.
+- Ajoute un pipeline qui permet d'ajouter des liens d'actions en-dessous des aperçus de logo : `logo_desc_actions`.
 - TODO utiliser le plugin saisies pour construire le formulaire, avec à terme possibilité de compatibilité avec la saisie upload_html5
 
 ### Modification de `inc/chercher_logo.php` ###
