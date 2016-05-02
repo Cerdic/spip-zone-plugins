@@ -13,9 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Insertion dans le pipeline formulaire_fond (SPIP)
- * 
+ *
  * Ajouter le champ timezone dans le formulaire de configuration d'identité du site
- * 
+ *
  * @param array $flux
  * @return array $flux
  */
@@ -25,7 +25,7 @@ function timezone_formulaire_fond($flux){
 			include_spip('inc/config');
 		$flux['args']['contexte']['timezone'] = lire_config('timezone','');
 		$contenu = recuperer_fond('formulaires/timezone_inclure',$flux['args']['contexte']);
-		$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_descriptif_site.*<\/li>),Uims","\\1".$contenu,$flux['data'],1);
+		$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_descriptif_site.*<\/(li|div)>),Uims","\\1"."\n".$contenu,$flux['data'],1);
 	}
 	return $flux;
 }
@@ -33,9 +33,9 @@ function timezone_formulaire_fond($flux){
 
 /**
  * Insertion dans le pipeline formulaires_traiter (SPIP)
- * 
+ *
  * Ajouter la meta timezone suite au formulaire de configuration d'identité du site
- * 
+ *
  * @param array $flux
  * @return array $flux
  */
