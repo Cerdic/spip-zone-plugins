@@ -108,13 +108,7 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour = '', $
 	// le nom de la cle primaire (et non le nom de la table)
 	// ou directement le nom du raccourcis a chercher
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$table_documents = lister_tables_objets_sql('spip_documents');
-	$roles_logos = array_filter(
-		array_keys($table_documents['roles_titres']),
-		function ($el) {
-			return (strpos($el, 'logo') === 0);
-		}
-	);
+	$roles_logos = array_keys(lister_logos_roles());
 
 	foreach ($roles_logos as $role) {
 		$logo = $chercher_logo($id_objet, $_id_objet, $role);

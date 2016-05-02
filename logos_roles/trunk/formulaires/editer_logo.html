@@ -14,7 +14,6 @@
 		<div style="display:none;"><input type='submit' class='submit' value='<:bouton_upload:>' /></div>
 	]
 		<div class="editer-groupe">
-      <BOUCLE_roles_logos(DATA){source array, (#VAL{spip_documents}|lister_tables_objets_sql|table_valeur{roles_titres})}{cle == ^logo}>
 
         #SET{type_logo, #CLE}
         [(#CLE|=={logo}|oui)
@@ -23,6 +22,7 @@
         [(#CLE|=={logo_survol}|oui)
           #SET{type_logo, logo_off}
         ]
+      <BOUCLE_roles_logos(DATA){source array, #REM|lister_logos_roles}>
 
         [(#CONFIG{activer_logos_survol}|=={oui}|ou{#CLE|!={logo_survol}})
           <div class="editer editer_#GET{type_logo}[ (#ENV{#GET{type_logo}}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{#GET{type_logo}}|oui)erreur]">
