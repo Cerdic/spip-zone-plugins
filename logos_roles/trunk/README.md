@@ -44,7 +44,7 @@ Ce formulaire se comporte plus ou moins comme l'ancien, avec quelques améliorat
 
 - Il utilise les nouvelles APIs.
 - On ajoute automatiquement des champs d'upload fonctionnels pour tous les rôles de logos définis.
-- TODO permettre d'éditer le document correspondant.
+- Permet d'éditer le document correspondant.
 - TODO ajouter un pipeline qui permet d'ajouter des actions, à l'image de `document_desc_actions`.
 - TODO utiliser le plugin saisies pour construire le formulaire, avec à terme possibilité de compatibilité avec la saisie upload_html5
 

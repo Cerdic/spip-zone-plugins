@@ -7,4 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'logos_roles_titre' => 'Logos par rôle',
+
+	// T
+	'titre_modifier_logo' => 'Modifier le logo',
 );
