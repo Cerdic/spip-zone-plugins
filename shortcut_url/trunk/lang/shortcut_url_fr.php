@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_communique' => 'nc',
 	
 	// P
-	'partage_googleplus' => 'Patager sur GooglePlus',
+	'partage_googleplus' => 'Partager sur GooglePlus',
 	'partage_twitter' => 'Partager sur Twitter',
 	'partage_facebook' => 'Partager sur Facebook',
 	'partage_seenthis' => 'Partager sur Seenthis',

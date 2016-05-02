@@ -13,6 +13,10 @@ Ce plugins permet de stocker le nombre de click par URL, de consulter la provena
 
 ## Changelog
 
+### Version 1.1.5 (02/05/2016)
+
+- Traduction du fichier de langue en Anglais
+
 ### Version 1.1.4 (02/05/2016)
 
 - Nombre de total des clics sur les graphs
