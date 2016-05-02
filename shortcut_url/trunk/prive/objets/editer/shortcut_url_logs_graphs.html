@@ -31,12 +31,12 @@
 
 <script type="text/javascript">
 
-var data = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url}|trim)];
-var data_full = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url,limite=300}|trim)];
-
 $(document).ready(function($) {
-	var scale = [1, 10, 50, 100, 500],
+	var data = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url}|trim)],
+		data_full = [(#INCLURE{fond=json/compteur_pays,id_shortcut_url,limite=300}|trim)],
+		scale = [1, 10, 50, 100, 500],
 		colors = ["couleur1","couleur2","couleur3","couleur4","couleur5"];
+
 	if(data.length > 0){
 		max = d3.max(data, function(d) { return d.value+1; });
 		if(max > 500){
