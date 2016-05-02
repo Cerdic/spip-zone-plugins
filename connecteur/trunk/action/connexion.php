@@ -41,6 +41,9 @@ function action_connexion_dist($arg = null) {
 		$info = charger_fonction($type.'_info', 'connecteur');
 		$auteur_info = $info($token);
 
+		// Envoyer au pipeline les informations de la personne
+		$auteur_info = pipeline('pre_connecteur', $auteur_info);
+
 		// Est-ce que l'email est déjà présent dans la base de donnée ?
 		$verifier = charger_fonction('verifier', 'inc');
 		if (!$verifier($auteur_info['email'], 'email', array('disponible' => true))) {
@@ -62,5 +65,8 @@ function action_connexion_dist($arg = null) {
 			$auteur = connecteur_connecter($auteur_info);
 			connecteur_save_token($auteur['id_auteur'], $type, $token);
 		}
+
+		// Envoyer aux pipelines
+		$desc = pipeline('post_connecteur', array('auteur' => $auteur, 'info' => $auteur_info));
 	}
 }
