@@ -24,22 +24,24 @@
           #SET{type_logo, logo_off}
         ]
 
-        <div class="editer editer_#GET{type_logo}[ (#ENV{#GET{type_logo}}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{#GET{type_logo}}|oui)erreur]">
-          <h4>[(#VALEUR|_T)]</h4>
-          [(#ENV{#GET{type_logo}}|oui)
-            [(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{#GET{type_logo}},quoi=#GET{type_logo}})]
-          ]
-          [(#ENV{editable}|et{#ENV{#GET{type_logo}}|non}|oui)
-					  <label for="#GET{type_logo}_#ENV{objet}_#ENV{id_objet}">
-              [(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]
-            </label>
-            [<span class='erreur_message'>
-              (#ENV**{erreurs}|table_valeur{#GET{type_logo}})
-            </span>]
-            <input type='file' class='file' name='#GET{type_logo}' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#GET{type_logo}_#ENV{objet}_#ENV{id_objet}' value="" />
-					  #SET{valider,' '}
-          ]
-        </div>
+        [(#CONFIG{activer_logos_survol}|=={oui}|ou{#CLE|!={logo_survol}})
+          <div class="editer editer_#GET{type_logo}[ (#ENV{#GET{type_logo}}|non)logo_upload][ (#ENV**{erreurs}|table_valeur{#GET{type_logo}}|oui)erreur]">
+            <h4>[(#VALEUR|_T)]</h4>
+            [(#ENV{#GET{type_logo}}|oui)
+              [(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{#GET{type_logo}},quoi=#GET{type_logo}})]
+            ]
+            [(#ENV{editable}|et{#ENV{#GET{type_logo}}|non}|oui)
+					    <label for="#GET{type_logo}_#ENV{objet}_#ENV{id_objet}">
+                [(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]
+              </label>
+              [<span class='erreur_message'>
+                (#ENV**{erreurs}|table_valeur{#GET{type_logo}})
+              </span>]
+              <input type='file' class='file' name='#GET{type_logo}' size="[(#ENV{_options}|table_valeur{size_input}|sinon{12})]" id='#GET{type_logo}_#ENV{objet}_#ENV{id_objet}' value="" />
+					    #SET{valider,' '}
+            ]
+          </div>
+        ]
       </BOUCLE_roles_logos>
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
