@@ -39,6 +39,14 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode = 'on') {
 
 	$type = type_du_logo($_id_objet);
 
+	/* Si le paramètre $mode est un rôle correspondant aux logos historique, on
+	 * cherche quand même un logo enregistré avec la méthode historique. */
+	if ($mode === 'logo') {
+		$mode = 'on';
+	} elseif ($mode === 'logo_survol') {
+		$mode = 'off';
+	}
+
 	/* On commence par chercher via le mécanisme historique */
 	$nom = $type . $mode . intval($id);
 
