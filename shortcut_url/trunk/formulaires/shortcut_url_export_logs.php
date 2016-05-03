@@ -1,32 +1,28 @@
 <?php
 /**
- * shortcut_url
+ * Gestion du formulaire d'export des shortcut_url des sites
  *
  * @plugin     shortcut_url
  * @copyright  2015
  * @author     cyp
- * @licence    GNU/GPL
+ * @license    GNU/GPL
  * @package    SPIP\formulaires\shortcut_url_export_logs
  */
 
-/**
- * Gestion du formulaire d'export des shortcut_url des sites 
- *
- * @package SPIP\Formulaires
-**/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement du formulaire de configuration du shortcut_url
  *
  * @return array
  *     Environnement du formulaire
-**/
-function formulaires_shortcut_url_export_logs_charger_dist(){
-
+ */
+function formulaires_shortcut_url_export_logs_charger_dist() {
 	$valeurs = array();
 	return $valeurs;
-	
 }
 
 /**
@@ -34,12 +30,10 @@ function formulaires_shortcut_url_export_logs_charger_dist(){
  *
  * @return array
  *     Tableau des erreurs
-**/
-function formulaires_shortcut_url_export_logs_verifier_dist(){
-
+ */
+function formulaires_shortcut_url_export_logs_verifier_dist() {
 	$erreurs = array();
 	return $erreurs;
-
 }
 
 /**
@@ -47,9 +41,8 @@ function formulaires_shortcut_url_export_logs_verifier_dist(){
  *
  * @return array
  *     Retours du traitement
-**/
-function formulaires_shortcut_url_export_logs_traiter_dist(){
-
+ */
+function formulaires_shortcut_url_export_logs_traiter_dist() {
 	include_spip('inc/exporter_csv');
 	$donnees = '';
 	$date = _request('annee').'-'._request('mois');
@@ -76,9 +69,5 @@ function formulaires_shortcut_url_export_logs_traiter_dist(){
 	echo 'nb click,id,description,url\r\n';
 	echo $donnees;
 
-	// $telecharger = recuperer_fond('inclure/export_csv', array('date' => $date, 'date_jour' => $date_jour, 'nom_fichier_csv' => $nom_fichier_csv, 'id_shortcut_url' => $valeur['id_shortcut_url']), array('ajax' => false));
-	// spip_log($telecharger, 'test.' . _LOG_ERREUR);
-
 	return array('editable' => false, 'message_ok'=>_T('shortcut_url:config_export_ok'));
-
 }
