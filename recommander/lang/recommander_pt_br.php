@@ -13,10 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'destinataire' => 'Destinatário',
 
 	// R
-	'recommander' => 'Recomenda a leitura', # MODIF
-	'recommander_lecture' => 'Bom dia, @from@ recomenda a leitura deste texto: ', # MODIF
+	'recommander' => 'Recomendar esta página',
+	'recommander_lecture' => 'Bom dia, @from@ recomenda a leitura desta página: ',
 	'recommander_message' => 'Recomanda',
-	'recommander_titre' => 'Ler em @nom_site@ —' # MODIF
+	'recommander_titre' => 'Ler em @nom_site@ - '
 );
 
 ?>
