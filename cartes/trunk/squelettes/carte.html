@@ -32,7 +32,7 @@
 	[<link rel="stylesheet" href="(#CHEMIN{#GET{style}}|direction_css)" type="text/css" />]
 </head>
 
-<body class="pas_surlignable page_article">
+<body class="pas_surlignable page_carte">
 <div class="page">
 	<div class="main">
 		[(#REM) Contenu principal : contenu de l'article]
@@ -58,6 +58,7 @@
 		[(#LAYER_TOPOJSON|oui)
 			[(#SET{options,[(#GET{options}|array_merge{[(#ARRAY{layer_topojson,[(#CHEMIN{#LAYER_TOPOJSON})]})]})]})]]
 		[(#MODELE{carte_gis,
+			id_map=1,
 			autocenterandzoom=#GET{autocenterandzoom},
 			default_layer=#GET{layer_defaut},
 			zoom=#GET{zoom_defaut},
