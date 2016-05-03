@@ -48,22 +48,24 @@ else {
 function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, &$lastinclude, $connect='', $global_context=null, $init_time = null){
 	static $processing = false;
 	$background = false;
+	if (!defined('_CACHE_COOL_CACHE_SESSION')) define('_CACHE_COOL_CACHE_SESSION',false);
 
 	// calcul differe du cache ?
 	// prend la main si
 	// - c'est un calcul normal avec mise en cache
 	// - un cache existe deja qui peut etre servi
-	// - c'est une visite anonyme (cache mutualise)
+	// - c'est une visite anonyme (cache mutualise) OU la constante _CACHE_COOL_CACHE_SESSION a ete definie
 	// - on est pas deja en train de traiter un calcul en background
 	if ($use_cache==1 AND $chemin_cache
 		AND is_array($page) AND isset($page['texte'])
-		AND (!isset($GLOBALS['visiteur_session']['id_auteur']) OR !$GLOBALS['visiteur_session']['id_auteur'])
+		AND (_CACHE_COOL_CACHE_SESSION OR !isset($GLOBALS['visiteur_session']['id_auteur']) OR !$GLOBALS['visiteur_session']['id_auteur'])
 		AND !$processing
 		) {
 		// si c'est un bot, on ne lance pas un calcul differe
 		// ca ne sert qu'a remplir la queue qui ne sera pas videe par le bot (pas de cron)
 		// mais on lui sert le cache froid tout de meme
-		if (!defined('_IS_BOT') OR !_IS_BOT){
+		if (!defined('_CACHE_COOL_REFRESH_ON_BOT')) define('_CACHE_COOL_REFRESH_ON_BOT',false);
+		if (_CACHE_COOL_REFRESH_ON_BOT OR !defined('_IS_BOT') OR !_IS_BOT){
 			// on differe la maj du cache et on affiche le contenu du cache ce coup ci encore
 			$where = is_null($contexte_cache)?"principal":"inclure_page";
 			// on reprogramme avec un $use_cache=2 qui permettra de reconnaitre ces calculs
@@ -121,6 +123,13 @@ function public_produire_page($fond, $contexte, $use_cache, $chemin_cache, $cont
 		cache_cool_global_context($global_context);
 	include_spip('public/assembler');
 	$page = public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
+	
+	if ($background){
+		if (function_exists($f='cache_cool_post_produire') OR function_exists($f=($f.'_dist'))){
+			$f($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, $page, $lastinclude, $connect);
+		}
+	}
+	
 	// restaurer le contexte des globales si necessaire
 	if (!is_null($global_context))
 		cache_cool_global_context(false);
