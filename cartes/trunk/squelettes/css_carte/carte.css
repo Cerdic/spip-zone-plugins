@@ -89,12 +89,16 @@
        url(fonts/NotoSans-BoldItalic-webfont.ttf) format('truetype');
 }
 
-body{
+body.page_carte {
 	margin:0;
 	font-family:"noto_sans", "Helvetica Neue", verdana, sans serif;
 }
 
-h1{
+.page_carte .page{
+	width:100%;
+}
+
+.page_carte h1{
 	background:#000;
 	color:#fff;
 	border-bottom:.3em solid #d40000;
@@ -105,24 +109,24 @@ h1{
 	text-align: center;
 }
 
-.texte{
+.page_carte .texte{
 	color:#fff;
 	background:#474746;
 }
 
-.texte p{
+.page_carte .texte p{
 	margin:0;
 	padding:.7em 1em;
 	font-size:.9em;
 	text-align:center;
 }
 
-.map_wrapper{
+.page_carte .map_wrapper{
 	width:100%;
 	min-height:350px;
 }
 
-.footer{
+.page_carte .footer{
 	background:#000;
 	color:#fff;
 	padding:.3em;
@@ -131,22 +135,22 @@ h1{
 	box-sizing:border-box;
 }
 
-.footer a{
+.page_carte .footer a{
 	color:#fff;
 	text-decoration:none;
 }
-.left{
+.page_carte .left{
 	float:left;
 }
 
-.left *{
+.page_carte .left *{
 	display:inline-block;
 	vertical-align:middle;
 }
-.left .logo{
+.page_carte .left .logo{
 	margin-right:1em;
 }
-.right{
+.page_carte .right{
 	float:right;
 }
 
