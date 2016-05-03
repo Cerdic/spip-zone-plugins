@@ -15,7 +15,7 @@ function selecteurgenerique_jqueryui_plugins($plugins){
 	) {
 		$plugins[] = 'jquery.ui.position';
 		$plugins[] = 'jquery.ui.autocomplete';
-		$plugins[] = 'jquery.ui.autocomplete.html';
+		$plugins[] = 'autocomplete.html';
 	}
 	
 	return $plugins;
