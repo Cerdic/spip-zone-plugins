@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('lib/facebook-php-sdk/src/Facebook/autoload');
 include_spip('inc/facebook_poster');
-// Le SDK de Facebook utilise des sessions PHP,
+
 // Cependant, il n'est pas foutu de faire lui même ce test.
 if (!session_id()) {
     session_start();
@@ -222,4 +222,38 @@ function facebook_profil($token = null) {
 		'email' => $user['email'],
 		'facebook' => $user
 	);
+}
+
+function facebook_profil_picture($token = null, $width = 0, $height = 0) {
+
+	$fb = facebook();
+
+	if (empty($token)) {
+		include_spip('inc/token');
+		$token = connecteur_get_token(0, 'facebook');
+	}
+
+	try {
+
+		$size = '';
+		if ($width > 0) {
+			$size .= '&width='.$width;
+		}
+		if ($height > 0) {
+			$size .= '&height='.$height;
+		}
+
+		// Returns a `Facebook\FacebookResponse` object
+		$response = $fb->get('/me/picture?redirect=false'.$size, $token);
+	} catch (Facebook\Exceptions\FacebookResponseException $e) {
+		return 'Graph returned an error: ' . $e->getMessage();
+		exit;
+	} catch (Facebook\Exceptions\FacebookSDKException $e) {
+		return 'Facebook SDK returned an error: ' . $e->getMessage();
+		exit;
+	}
+
+	$picture = $response->getGraphUser();
+
+	return $picture;
 }
