@@ -29,17 +29,17 @@ function sound_manager_init(){
 	});
 	
 	// animation des boutons		
-	$("button.play")
-	.html("<span class='ui-icon-play'>play</span>")
+	$(".play")
 	.unbind('click')
 	.click( function() {
+
 		$(".playing").removeClass("playing");
 		
-		if ( $( this ).text() === "play" ) {
-		
+		if ( $( this ).text() === "play" || $(this).is("button") ) {
 			$( this ).html("<span class='ui-icon-pause'>pause</span>");
 		} else {
-			$( this ).html("<span class='ui-icon-play'>play</span>");
+			if ($(this).is("button"))
+				$( this ).html("<span class='ui-icon-play'>play</span>");
 		}
 		
 		var media_index = $(this).index();
@@ -51,8 +51,8 @@ function sound_manager_init(){
 
 		// ajouter une class pour cibler les barres de progression de ce son
 		parent_track.addClass(media_id);
-		
-		jouer_son(media_id, media_url,lastSound);
+
+		jouer_son(media_id, media_url);
 
 	});
 
@@ -60,6 +60,7 @@ function sound_manager_init(){
 
 function jouer_son(media_id, media_url){
 	
+
 	var soundURL = media_url;
     var soundId = media_id ;
     var thisSound = soundManager.getSoundById(soundId);
