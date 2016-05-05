@@ -21,4 +21,3 @@ function autoriser_socialtag_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('webmestre', $type, $id, $qui, $opt);
 }
 
-?>

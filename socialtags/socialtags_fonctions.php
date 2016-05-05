@@ -49,4 +49,3 @@ function socialtags_liste() {
 	return analyser_backend($rss);
 }
 
-?>
