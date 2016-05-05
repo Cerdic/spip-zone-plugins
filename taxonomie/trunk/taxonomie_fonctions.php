@@ -37,6 +37,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 	$retour = false;
 	$taxons_edites = array();
 
+	// Vérifie si le règne existe bien dans la table spip_taxons
 	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
 	if ($regne_existe) {
 		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
