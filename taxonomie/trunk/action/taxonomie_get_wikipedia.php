@@ -31,13 +31,6 @@ function action_taxonomie_get_wikipedia_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arguments = $securiser_action();
 
-	// Verification des autorisations
-	if (!autoriser('modifier', 'taxon')) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit();
-	}
-
 	// Insertion pour le taxon donné du texte Wikipedia récupéré.
 	// Le texte Wikipédia est inséré dans le champ précisé.
 	// Si le champ n'est pas vide, son contenu est écrasé.
@@ -45,6 +38,14 @@ function action_taxonomie_get_wikipedia_dist() {
 		// Détermination des arguments de l'action
 		list($id_taxon, $nom_scientifique, $spip_langue, $champ, $section) = explode(':', $arguments);
 		$section = ($section == '*') ? null : $section;
+
+		// Verification des autorisations
+		if (!autoriser('modifier', 'taxon', $id_taxon)) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit();
+		}
+
 		if (intval($id_taxon)) {
 			// Récupération des informations tsn, source et edite du taxon
 			$taxon = sql_fetsel(array('tsn', 'sources', 'edite', $champ), 'spip_taxons', 'id_taxon=' . sql_quote($id_taxon));
@@ -66,9 +67,9 @@ function action_taxonomie_get_wikipedia_dist() {
 				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
 				$maj = array();
 				// - le texte du descriptif est inséré dans la langue choisie en mergeant avec l'existant
-				//   si besoin
+				//   si besoin. On limite la taille du descriptif pour éviter un problème lors de l'update
 				include_spip('inc/taxonomer');
-				$maj[$champ] = taxon_merger_traductions($texte_converti, $taxon[$champ]);
+				$maj[$champ] = taxon_merger_traductions(substr($texte_converti, 0, 20000), $taxon[$champ]);
 				// - l'indicateur d'édition est positionné à oui
 				if ($taxon['edite']) {
 					$maj['edite'] = 'oui';

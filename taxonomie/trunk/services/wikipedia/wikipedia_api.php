@@ -75,7 +75,7 @@ $GLOBALS['wikipedia_language'] = array(
  *        doit être remanié manuellement.
  */
 function wikipedia_get($tsn, $search, $language, $section = null) {
-	$information = array();
+	$information = array('texte' => '');
 
 	// Si le cache est absent ou invalide on le recrée en utilisant le service web Wikipedia
 	// sinon on le litet on revoie le tableau du contenu désérialisé.
@@ -102,10 +102,7 @@ function wikipedia_get($tsn, $search, $language, $section = null) {
 			$reponses = $data['query']['pages'];
 			$page = reset($reponses);
 			$id = key($reponses);
-			if (($id > 0)
-				and !isset($page['missing'])
-					and isset($page['revisions'][0]['*'])
-			) {
+			if (($id > 0) and !isset($page['missing']) and isset($page['revisions'][0]['*'])) {
 				$information['texte'] = $page['revisions'][0]['*'];
 			}
 		}
