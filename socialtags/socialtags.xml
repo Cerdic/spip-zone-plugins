@@ -46,22 +46,9 @@
 </item>
 
 <item>
-<title>Bitacoras</title>
-<author>bitacoras</author>
-<link>http://bitacoras.com/anotaciones/%u</link>
-<description>Digg-like, es</description>
-</item>
-
-<item>
 <title>Blogmarks</title>
 <author>blogmarks</author>
 <link>http://blogmarks.net/my/new.php?mini=1&amp;url=%u&amp;title=%t</link>
-</item>
-
-<item>
-<title>BlogMemes</title>
-<author>blogmemes</author>
-<link>http://www.blogmemes.fr/post.php?url=%u&amp;title=%t</link>
 </item>
 
 <item>
@@ -130,12 +117,6 @@
 <link>http://www.friendfeed.com/share?title=%t&amp;link=%u</link>
 </item>
 
-<item>
-<title>Fuzz</title>
-<author>fuzz</author>
-<link>http://www.fuzz.fr/submit?url=%u&amp;title=%t</link> <!-- wrong referrer! correction en cours ? -->
-<description>Digg-like, news, fr</description>
-</item>
 
 <!-- G -->
 
@@ -208,12 +189,6 @@
 <author>meneame</author>
 <link>http://meneame.net/submit.php?url=%u&amp;title=%t</link>
 <description>Digg-like, es</description>
-</item>
-
-<item>
-<title>Mister wong</title>
-<author>misterwong</author>
-<link>http://www.mister-wong.com/addurl/?bm_url=%u&amp;bm_description=%t</link>
 </item>
 
 
