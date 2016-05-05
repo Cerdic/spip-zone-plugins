@@ -4,26 +4,30 @@
  *
  * @package SPIP\TAXONOMIE
  */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-if (!defined('_TAXONOMIE_REGNE_ANIMAL'))
+if (!defined('_TAXONOMIE_REGNE_ANIMAL')) {
 	/**
 	 * Nom latin du règne animal (animaux).
 	 */
 	define('_TAXONOMIE_REGNE_ANIMAL', 'animalia');
-if (!defined('_TAXONOMIE_REGNE_VEGETAL'))
+}
+if (!defined('_TAXONOMIE_REGNE_VEGETAL')) {
 	/**
 	 * Nom latin du règne végétal (plantes).
 	 */
 	define('_TAXONOMIE_REGNE_VEGETAL', 'plantae');
-if (!defined('_TAXONOMIE_REGNE_FONGIQUE'))
+}
+if (!defined('_TAXONOMIE_REGNE_FONGIQUE')) {
 	/**
 	 * Nom latin du règne fongique (champignons).
 	 */
 	define('_TAXONOMIE_REGNE_FONGIQUE', 'fungi');
+}
 
-if (!defined('_TAXONOMIE_REGNES'))
+if (!defined('_TAXONOMIE_REGNES')) {
 	/**
 	 * Liste des règnes supportés par le plugin (concanétation des noms séparés par le signe deux-points).
 	 */
@@ -33,84 +37,98 @@ if (!defined('_TAXONOMIE_REGNES'))
 			_TAXONOMIE_REGNE_VEGETAL,
 			_TAXONOMIE_REGNE_FONGIQUE
 		)));
+}
 
-if (!defined('_TAXONOMIE_RANG_REGNE'))
+if (!defined('_TAXONOMIE_RANG_REGNE')) {
 	/**
 	 * Nom anglais du rang `règne`.
 	 */
 	define('_TAXONOMIE_RANG_REGNE', 'kingdom');
+}
 // Suivant le règne l'embranchement se nomme phylum (animalia) ou division (fungi, plantae).
 // Néanmoins, le terme phylum est souvent accepté pour l'ensemble des règnes
-if (!defined('_TAXONOMIE_RANG_PHYLUM'))
+if (!defined('_TAXONOMIE_RANG_PHYLUM')) {
 	/**
 	 * Nom anglais du rang `phylum` ou `embranchement`.
 	 * Ce nom est utilisé pour le règne `animalia`
 	 */
 	define('_TAXONOMIE_RANG_PHYLUM', 'phylum');
-if (!defined('_TAXONOMIE_RANG_DIVISION'))
+}
+if (!defined('_TAXONOMIE_RANG_DIVISION')) {
 	/**
 	 * Nom anglais du rang `division`.
 	 * Ce nom est utilisé pour le règne `fungi` ou `plantae` et correspond au `phylum` pour le règne animal.
 	 */
 	define('_TAXONOMIE_RANG_DIVISION', 'division');
-if (!defined('_TAXONOMIE_RANG_CLASSE'))
+}
+if (!defined('_TAXONOMIE_RANG_CLASSE')) {
 	/**
 	 * Nom anglais du rang `classe`.
 	 */
 	define('_TAXONOMIE_RANG_CLASSE', 'class');
-if (!defined('_TAXONOMIE_RANG_ORDRE'))
+}
+if (!defined('_TAXONOMIE_RANG_ORDRE')) {
 	/**
 	 * Nom anglais du rang `ordre`.
 	 */
 	define('_TAXONOMIE_RANG_ORDRE', 'order');
-if (!defined('_TAXONOMIE_RANG_FAMILLE'))
+}
+if (!defined('_TAXONOMIE_RANG_FAMILLE')) {
 	/**
 	 * Nom anglais du rang `famille`.
 	 */
 	define('_TAXONOMIE_RANG_FAMILLE', 'family');
-if (!defined('_TAXONOMIE_RANG_GENRE'))
+}
+if (!defined('_TAXONOMIE_RANG_GENRE')) {
 	/**
 	 * Nom anglais du rang `genre`.
 	 */
 	define('_TAXONOMIE_RANG_GENRE', 'genus');
-if (!defined('_TAXONOMIE_RANG_ESPECE'))
+}
+if (!defined('_TAXONOMIE_RANG_ESPECE')) {
 	/**
 	 * Nom anglais du rang `espèce`.
 	 */
 	define('_TAXONOMIE_RANG_ESPECE', 'species');
-if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE'))
+}
+if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE')) {
 	/**
 	 * Nom anglais du rang intercalaire `sous-espèce`.
 	 */
 	define('_TAXONOMIE_RANG_SOUS_ESPECE', 'subspecies');
-if (!defined('_TAXONOMIE_RANG_VARIETE'))
+}
+if (!defined('_TAXONOMIE_RANG_VARIETE')) {
 	/**
 	 * Nom anglais du rang `variété`.
 	 */
 	define('_TAXONOMIE_RANG_VARIETE', 'variety');
-if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE'))
+}
+if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE')) {
 	/**
 	 * Nom anglais du rang intercalaire `sous-variété`.
 	 */
 	define('_TAXONOMIE_RANG_SOUS_VARIETE', 'subvariety');
-if (!defined('_TAXONOMIE_RANG_RACE'))
+}
+if (!defined('_TAXONOMIE_RANG_RACE')) {
 	/**
 	 * Nom anglais du rang `race`.
 	 */
 	define('_TAXONOMIE_RANG_RACE', 'race');
-if (!defined('_TAXONOMIE_RANG_FORME'))
+}
+if (!defined('_TAXONOMIE_RANG_FORME')) {
 	/**
 	 * Nom anglais du rang `forme`.
 	 */
 	define('_TAXONOMIE_RANG_FORME', 'forma');
-if (!defined('_TAXONOMIE_RANG_SOUS_FORME'))
+}
+if (!defined('_TAXONOMIE_RANG_SOUS_FORME')) {
 	/**
 	 * Nom anglais du rang intercalaire `sous-règne`.
 	 */
 	define('_TAXONOMIE_RANG_SOUS_FORME', 'subforma');
+}
 
-//
-if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
+if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE')) {
 	/**
 	 * Liste des rangs utilisés du règne au genre compris (concanétation des noms séparés par le signe deux-points).
 	 * On utilise par défaut au niveau 2 le terme phylum du règne animal (division pour les autres règnes)
@@ -123,8 +141,11 @@ if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
 			_TAXONOMIE_RANG_ORDRE,
 			_TAXONOMIE_RANG_FAMILLE,
 			_TAXONOMIE_RANG_GENRE
-		)));
-if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
+			)
+		)
+	);
+}
+if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS')) {
 	/**
 	 * Liste des rangs utilisés de l'espèce à la sous-forme (concanétation des noms séparés par le signe deux-points).
 	 */
@@ -137,28 +158,34 @@ if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 			_TAXONOMIE_RANG_RACE,
 			_TAXONOMIE_RANG_FORME,
 			_TAXONOMIE_RANG_SOUS_FORME
-		)));
-if (!defined('_TAXONOMIE_RANGS'))
+			)
+		)
+	);
+}
+if (!defined('_TAXONOMIE_RANGS')) {
 	/**
 	 * Liste complète des rangs utilisés par le plugin (concanétation des noms séparés par le signe deux-points).
 	 */
 	define('_TAXONOMIE_RANGS',
-		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' .	_TAXONOMIE_RANGS_ESPECE_ET_FILS);
+		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' . _TAXONOMIE_RANGS_ESPECE_ET_FILS);
+}
 
-if (!defined('_TAXONOMIE_CACHE_NOMDIR'))
+if (!defined('_TAXONOMIE_CACHE_NOMDIR')) {
 	/**
 	 * Nom du dossier contenant les fichiers caches des éléments de taxonomie
 	 *
 	 * @package SPIP\TAXONOMIE\CACHE
 	 */
 	define('_TAXONOMIE_CACHE_NOMDIR', 'cache-taxonomie/');
-if (!defined('_TAXONOMIE_CACHE_DIR'))
+}
+if (!defined('_TAXONOMIE_CACHE_DIR')) {
 	/**
 	 * Chemin du dossier contenant les fichiers caches des boussoles
 	 *
 	 * @package SPIP\TAXONOMIE\CACHE
 	 */
 	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
+}
 
 
 /**
@@ -168,22 +195,26 @@ if (!defined('_TAXONOMIE_CACHE_DIR'))
  * transcodé dans le charset du site avant d'être décodé.
  *
  * @package SPIP\TAXONOMIE\SERVICES
+ * @uses recuperer_url()
  *
- * @param string	$url
- * 		URL complète de la requête au service web concerné.
- * @param int|null	$taille_max
- * 		Taille maximale di flux récupéré suite à la requête.
- * 		`null` désigne la taille par défaut.
+ * @param string   $url
+ *        URL complète de la requête au service web concerné.
+ * @param int|null $taille_max
+ *        Taille maximale du flux récupéré suite à la requête.
+ *        `null` désigne la taille par défaut.
  *
  * @return array
  */
-function service_requeter_json($url, $taille_max=null) {
+function service_requeter_json($url, $taille_max = null) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
-	$flux = recuperer_page($url, true, false, $taille_max);
+	$options = array(
+		'transcoder' => true,
+		'taille_max' => $taille_max);
+	$flux = recuperer_url($url, $options);
 
 	// Tranformation de la chaine json reçue en tableau associatif
-	$data = json_decode($flux, true);
+	$data = json_decode($flux['page'], true);
 
 	return $data;
 }
@@ -195,12 +226,12 @@ function service_requeter_json($url, $taille_max=null) {
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
+ * @param string $regne
+ *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  *
  * @return array
- * 		Liste des taxons modifiées manuellement. Chaque élément de la liste est un tableau
- * 		composé des index `tsn`, `nom_commun`, `descriptif`.
+ *        Liste des taxons modifiées manuellement. Chaque élément de la liste est un tableau
+ *        composé des index `tsn`, `nom_commun`, `descriptif`.
  */
 function taxon_preserver_editions($regne) {
 	$select = array('tsn', 'nom_commun', 'descriptif');
@@ -220,13 +251,13 @@ function taxon_preserver_editions($regne) {
  *
  * @package SPIP\TAXONOMIE\OBJET
  *
- * @param string	$multi_prioritaire
- * 		Balise multi considérée comme prioritaire en cas de conflit sur une langue.
- * @param string	$multi_non_prioritaire
- * 		Balise multi considérée comme non prioritaire en cas de conflit sur une langue.
+ * @param string $multi_prioritaire
+ *        Balise multi considérée comme prioritaire en cas de conflit sur une langue.
+ * @param string $multi_non_prioritaire
+ *        Balise multi considérée comme non prioritaire en cas de conflit sur une langue.
  *
  * @return string
- * 		La chaine construite est toujours une balise `<multi>` complète ou une chaine vide sinon.
+ *        La chaine construite est toujours une balise `<multi>` complète ou une chaine vide sinon.
  */
 function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
 	$multi_merge = '';
@@ -286,16 +317,17 @@ function taxon_merger_traductions($multi_prioritaire, $multi_non_prioritaire) {
  * @package SPIP\TAXONOMIE\OBJET
  *
  * @param $champ
- * 		Nom du champ dans la base de données.
+ *        Nom du champ dans la base de données.
  *
  * @return string
- * 		Traduction du champ dans la langue du site.
+ *        Traduction du champ dans la langue du site.
  */
 function taxon_traduire_champ($champ) {
 	$traduction = '';
 	if ($champ) {
 		$traduction = _T("taxon:champ_${champ}_label");
 	}
+
 	return $traduction;
 }
 
@@ -306,18 +338,18 @@ function taxon_traduire_champ($champ) {
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
- * @param string	$cache
- * 		Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
- *      d'appeler cette fonction.
- * @param string    $service
- * @param int       $tsn
- * @param string    $spip_langue
- * @param string    $action
+ * @param string $cache
+ *        Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
+ *        d'appeler cette fonction.
+ * @param string $service
+ * @param int    $tsn
+ * @param string $spip_langue
+ * @param string $action
  *
  * @return boolean
- * 		Toujours à vrai.
+ *        Toujours à vrai.
  */
-function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue='', $action='') {
+function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue = '', $action = '') {
 	// Création du dossier cache si besoin
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
@@ -335,21 +367,21 @@ function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue='', $action
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
- * @param string    $service
- * @param int       $tsn
- * @param string    $spip_langue
- * @param string    $action
+ * @param string $service
+ * @param int    $tsn
+ * @param string $spip_langue
+ * @param string $action
  *
  * @return string
  */
-function cache_taxonomie_nommer($service, $tsn, $spip_langue='', $action='') {
+function cache_taxonomie_nommer($service, $tsn, $spip_langue = '', $action = '') {
 	// Construction du chemin complet d'un fichier cache
 	$fichier_cache = _TAXONOMIE_CACHE_DIR
-		. $service
-		. ($action ? '_' . $action : '')
-		. '_' . $tsn
-		. ($spip_langue ? '_' . $spip_langue : '')
-		. '.txt';
+					 . $service
+					 . ($action ? '_' . $action : '')
+					 . '_' . $tsn
+					 . ($spip_langue ? '_' . $spip_langue : '')
+					 . '.txt';
 
 	return $fichier_cache;
 }
@@ -360,23 +392,24 @@ function cache_taxonomie_nommer($service, $tsn, $spip_langue='', $action='') {
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
- * @param string    $service
- * @param int       $tsn
- * @param string    $spip_langue
- * @param string    $action
+ * @param string $service
+ * @param int    $tsn
+ * @param string $spip_langue
+ * @param string $action
  *
  * @return string
- * 		Chemin du fichier cache si il existe ou chaine vide sinon.
+ *        Chemin du fichier cache si il existe ou chaine vide sinon.
  */
-function cache_taxonomie_existe($service, $tsn, $spip_langue='', $action='') {
+function cache_taxonomie_existe($service, $tsn, $spip_langue = '', $action = '') {
 	// Contruire le nom du fichier cache
 	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $spip_langue, $action);
 
 	// Vérification de l'existence du fichier:
 	// - chaine vide si le fichier n'existe pas
 	// - chemin complet du fichier si il existe
-	if (!file_exists($fichier_cache))
+	if (!file_exists($fichier_cache)) {
 		$fichier_cache = '';
+	}
 
 	return $fichier_cache;
 }
@@ -387,20 +420,20 @@ function cache_taxonomie_existe($service, $tsn, $spip_langue='', $action='') {
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
- * @param array|string	$caches
- * 		Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
- * 		Il est possible de passer un seul fichier comme une chaine.
+ * @param array|string $caches
+ *        Liste des fichiers à supprimer ou vide si tous les fichiers cache doivent être supprimés.
+ *        Il est possible de passer un seul fichier comme une chaine.
  *
  * @return boolean
- * 		Toujours à `true`.
+ *        Toujours à `true`.
  */
-function cache_taxonomie_supprimer($caches=array()){
+function cache_taxonomie_supprimer($caches = array()) {
 	include_spip('inc/flock');
 
 	if ($caches) {
 		$fichiers_cache = is_string($caches) ? array($caches) : $caches;
 	} else {
-		$fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . "*.*");
+		$fichiers_cache = glob(_TAXONOMIE_CACHE_DIR . '*.*');
 	}
 
 	if ($fichiers_cache) {
@@ -411,5 +444,3 @@ function cache_taxonomie_supprimer($caches=array()){
 
 	return true;
 }
-
-?>

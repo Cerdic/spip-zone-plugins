@@ -4,8 +4,9 @@
  *
  * @package    SPIP\TAXONOMIE\SERVICES\ITIS
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ce CRON permet de vérifier si les fichiers ITIS ayant servis à créer la base de taxons initiale
@@ -20,11 +21,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses taxonomie_regne_existe()
  * @uses taxonomie_charger_regne()
  *
- * @param int	$last
- * 		Timestamp de la date de dernier appel de la tâche.
+ * @param int $last
+ *        Timestamp de la date de dernier appel de la tâche.
  *
  * @return int
- * 		Timestamp de la date du prochain appel de la tâche.
+ *        Timestamp de la date du prochain appel de la tâche.
  */
 function genie_taxonomie_actualiser_itis_dist($last) {
 
@@ -41,8 +42,7 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 			// On compare le sha du fichier des taxons
 			if ($meta_regne['sha'] != $shas['taxons'][$_regne]) {
 				$regne_a_recharger = true;
-			}
-			else {
+			} else {
 				// On compare le sha des fichiers de traductions
 				foreach ($meta_regne['traductions']['itis'] as $_code => $_infos) {
 					if ($_infos['sha'] != $shas['traductions'][$_code]) {
@@ -60,5 +60,3 @@ function genie_taxonomie_actualiser_itis_dist($last) {
 
 	return 1;
 }
-
-?>

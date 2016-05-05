@@ -5,8 +5,9 @@
  *
  * @package SPIP\TAXONOMIE\SERVICES\WIKIPEDIA
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Cette action permet à un utilisateur d'insérer dans le champ d'un taxon (principalement le descriptif)
@@ -23,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @return void
  */
-function action_taxonomie_get_wikipedia_dist(){
+function action_taxonomie_get_wikipedia_dist() {
 
 	// Securisation et autorisation car c'est une action auteur:
 	// -> argument attendu est l'alias du serveur
@@ -46,7 +47,7 @@ function action_taxonomie_get_wikipedia_dist(){
 		$section = ($section == '*') ? null : $section;
 		if (intval($id_taxon)) {
 			// Récupération des informations tsn, source et edite du taxon
-			$taxon = sql_fetsel(array('tsn', 'sources', 'edite', $champ), 'spip_taxons', 'id_taxon='. sql_quote($id_taxon));
+			$taxon = sql_fetsel(array('tsn', 'sources', 'edite', $champ), 'spip_taxons', 'id_taxon=' . sql_quote($id_taxon));
 
 			// Appel du service query de Wikipedia
 			include_spip('services/wikipedia/wikipedia_api');
@@ -58,9 +59,9 @@ function action_taxonomie_get_wikipedia_dist(){
 				include_spip('inc/filtres');
 				$convertir = chercher_filtre('convertisseur_texte_spip');
 				$texte_converti = '<multi>'
-					. '[' . $spip_langue .']'
-					. ($convertir ? $convertir($information['texte'], 'MediaWiki_SPIP') : $information['texte'])
-					. '</multi>';
+								  . '[' . $spip_langue . ']'
+								  . ($convertir ? $convertir($information['texte'], 'MediaWiki_SPIP') : $information['texte'])
+								  . '</multi>';
 
 				// Mise à jour pour le taxon du descriptif et des champs connexes en base de données
 				$maj = array();
@@ -79,10 +80,8 @@ function action_taxonomie_get_wikipedia_dist(){
 				}
 				$maj['sources'] = serialize($maj['sources']);
 				// - Mise à jour
-				sql_updateq('spip_taxons', $maj, 'id_taxon='. sql_quote($id_taxon));
+				sql_updateq('spip_taxons', $maj, 'id_taxon=' . sql_quote($id_taxon));
 			}
 		}
 	}
 }
-
-?>

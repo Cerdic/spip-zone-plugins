@@ -4,8 +4,10 @@
  *
  * @package SPIP\TAXONOMIE\API
  */
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Charge tous les taxons d'un règne donné, du règne lui-même aux taxons de genre au maximum.
@@ -22,18 +24,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses itis_spipcode2language()
  * @uses itis_read_vernaculars()
  *
- * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param string	$rang
- * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
- * 		correspond à : `phylum`, `class`, `order`, `family`, `genus`.
- * @param array		$codes_langue
- * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
+ * @param string $regne
+ *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
+ * @param string $rang
+ *        Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais, en minuscules et
+ *        correspond à : `phylum`, `class`, `order`, `family`, `genus`.
+ * @param array  $codes_langue
+ *        Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons.
  *
  * @return bool
- * 		`true` si le chargement a réussi, `false` sinon
+ *        `true` si le chargement a réussi, `false` sinon
  */
-function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
+function taxonomie_charger_regne($regne, $rang, $codes_langue = array()) {
 	$retour = false;
 	$taxons_edites = array();
 
@@ -83,7 +85,7 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 		// Clore les traductions avec les balises multi
 		if ($traductions) {
 			foreach ($traductions as $_tsn) {
-				$taxons[$_tsn]['nom_commun'] =  '<multi>' . $taxons[$_tsn]['nom_commun'] . '</multi>';
+				$taxons[$_tsn]['nom_commun'] = '<multi>' . $taxons[$_tsn]['nom_commun'] . '</multi>';
 			}
 		}
 
@@ -94,11 +96,12 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
 		if ($taxons_edites) {
 			foreach ($taxons_edites as $_taxon_edite) {
 				if (($tsn = $_taxon_edite['tsn'])
-				AND (array_key_exists($tsn, $taxons))) {
+					and (array_key_exists($tsn, $taxons))
+				) {
 					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
 					$taxons[$tsn]['nom_commun'] = taxon_merger_traductions(
-													$_taxon_edite['nom_commun'],
-													$taxons[$tsn]['nom_commun']);
+						$_taxon_edite['nom_commun'],
+						$taxons[$tsn]['nom_commun']);
 					$taxons[$tsn]['edite'] = 'oui';
 				}
 			}
@@ -128,11 +131,11 @@ function taxonomie_charger_regne($regne, $rang, $codes_langue=array()) {
  * @api
  * @filtre
  *
- * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
+ * @param string $regne
+ *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
  *
  * @return bool
- * 		`true` si le vidage a réussi, `false` sinon
+ *        `true` si le vidage a réussi, `false` sinon
  */
 function taxonomie_vider_regne($regne) {
 	$retour = sql_delete('spip_taxons', 'regne=' . sql_quote($regne));
@@ -153,14 +156,14 @@ function taxonomie_vider_regne($regne) {
  * @api
  * @filtre
  *
- * @param string	$regne
- * 		Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
- * @param array		$meta_regne
- * 		Meta propre au règne, créée lors du chargement de celui-ci et retournée si le règne
- * 		existe.
+ * @param string $regne
+ *        Nom scientifique du règne en lettres minuscules : `animalia`, `plantae`, `fungi`.
+ * @param array  $meta_regne
+ *        Meta propre au règne, créée lors du chargement de celui-ci et retournée si le règne
+ *        existe.
  *
  * @return bool
- * 		`true` si le règne existe, `false` sinon.
+ *        `true` si le règne existe, `false` sinon.
  */
 function taxonomie_regne_existe($regne, &$meta_regne) {
 	$meta_regne = array();
@@ -186,30 +189,32 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
  * @api
  * @filtre
  *
- * @param string	$regne
- * 		Nom scientifique du règne pour lequel la liste des rangs est demandée.
- * 		Cet argument permet de remplacer le rang `phylum` par `division` qui est son synonyme
- * 		pour les règnes fongique et végétal.
- * @param array		$liste_base
- * 		Liste de base contenant les rangs par défaut à renvoyer. Il existe deux listes de base, à savoir :
- * 		- du règne au genre (`_TAXONOMIE_RANGS_PARENTS_ESPECE`)
- * 		- de l'espèce à la sous-forme (`_TAXONOMIE_RANGS_ESPECE_ET_FILS`)
- * @param array		$exclusions
- * 		Liste des rangs à exclure de la liste fournie dans l'argument `$liste_base`
+ * @param string $regne
+ *        Nom scientifique du règne pour lequel la liste des rangs est demandée.
+ *        Cet argument permet de remplacer le rang `phylum` par `division` qui est son synonyme
+ *        pour les règnes fongique et végétal.
+ * @param array  $liste_base
+ *        Liste de base contenant les rangs par défaut à renvoyer. Il existe deux listes de base, à savoir :
+ *        - du règne au genre (`_TAXONOMIE_RANGS_PARENTS_ESPECE`)
+ *        - de l'espèce à la sous-forme (`_TAXONOMIE_RANGS_ESPECE_ET_FILS`)
+ * @param array  $exclusions
+ *        Liste des rangs à exclure de la liste fournie dans l'argument `$liste_base`
  *
  * @return array
- * 		Liste des rangs demandée.
+ *        Liste des rangs demandée.
  */
-function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions=array()) {
+function taxonomie_lister_rangs($regne = _TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions = array()) {
 	include_spip('inc/taxonomer');
 
 	$rangs = explode(':', $liste_base);
 	$rangs = array_diff($rangs, $exclusions);
 
 	if (($regne == _TAXONOMIE_REGNE_FONGIQUE)
-	OR  ($regne == _TAXONOMIE_REGNE_VEGETAL)) {
-		if ($index_cherche = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs))
+		or ($regne == _TAXONOMIE_REGNE_VEGETAL)
+	) {
+		if ($index_cherche = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs)) {
 			$rangs[$index_cherche] = _TAXONOMIE_RANG_DIVISION;
+		}
 	}
 
 	return $rangs;
@@ -222,19 +227,19 @@ function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $ex
  * @api
  * @filtre
  *
- * @param int		$id_taxon
- * 		Id du taxon pour lequel il faut fournir l'ascendance.
- * @param int		$tsn_parent
- * 		TSN du parent correspondant au taxon id_taxon. Ce paramètre permet d'optimiser le traitement
- * 		mais n'est pas obligatoire. Si il n'est pas connu lors de l'appel il faut passer `null`.
- * @param string	$ordre
- * 		Classement de la liste des taxons : `descendant`(défaut) ou `ascendant`.
+ * @param int    $id_taxon
+ *        Id du taxon pour lequel il faut fournir l'ascendance.
+ * @param int    $tsn_parent
+ *        TSN du parent correspondant au taxon id_taxon. Ce paramètre permet d'optimiser le traitement
+ *        mais n'est pas obligatoire. Si il n'est pas connu lors de l'appel il faut passer `null`.
+ * @param string $ordre
+ *        Classement de la liste des taxons : `descendant`(défaut) ou `ascendant`.
  *
  * @return array
- * 		Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
- * 		suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
+ *        Liste des taxons ascendants. Chaque taxon est un tableau associatif contenant les informations
+ *        suivantes : `id_taxon`, `tsn_parent`, `nom_scientifique`, `nom_commun`, `rang`.
  */
-function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='descendant') {
+function taxonomie_informer_ascendance($id_taxon, $tsn_parent = null, $ordre = 'descendant') {
 	$ascendance = array();
 
 	// Si on ne passe pas le tsn du parent correspondant au taxon pour lequel on cherche l'ascendance
@@ -255,8 +260,10 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
 	}
 
 	if ($ascendance
-	AND ($ordre == 'descendant'))
+		and ($ordre == 'descendant')
+	) {
 		$ascendance = array_reverse($ascendance);
+	}
 
 	return $ascendance;
 }
@@ -271,17 +278,17 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
  * @filtre
  * @uses ${service}_credit fonction de formatage des crédits propre à chaque service
  *
- * @param int		$id_taxon
- * 		Id du taxon pour lequel il faut fournir les crédits
- * @param string	$sources_specifiques
- * 		Tableau sérialisé des sources possibles autres qu'ITIS (CINFO, WIKIPEDIA...) telles qu'enregistrées
- * 		en base de données dans le champ `sources`.
- * 		Ce paramètre permet d'optimiser le traitement mais n'est pas obligatoire.
+ * @param int    $id_taxon
+ *        Id du taxon pour lequel il faut fournir les crédits
+ * @param string $sources_specifiques
+ *        Tableau sérialisé des sources possibles autres qu'ITIS (CINFO, WIKIPEDIA...) telles qu'enregistrées
+ *        en base de données dans le champ `sources`.
+ *        Ce paramètre permet d'optimiser le traitement mais n'est pas obligatoire.
  *
  * @return array
- * 		Tableau des phrases de crédits indexées par source.
+ *        Tableau des phrases de crédits indexées par source.
  */
-function taxonomie_informer_credits($id_taxon, $sources_specifiques=null) {
+function taxonomie_informer_credits($id_taxon, $sources_specifiques = null) {
 	$sources = array();
 
 	// Si on ne passe pas les sources du taxon concerné alors on le cherche en base de données.
@@ -306,5 +313,3 @@ function taxonomie_informer_credits($id_taxon, $sources_specifiques=null) {
 
 	return $sources;
 }
-
-?>
