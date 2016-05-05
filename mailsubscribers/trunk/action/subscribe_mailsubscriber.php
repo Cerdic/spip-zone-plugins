@@ -16,29 +16,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function action_subscribe_mailsubscriber_dist($email=null, $double_optin=null){
 	include_spip('mailsubscribers_fonctions');
+	include_spip('inc/mailsubscribers');
 	include_spip('inc/config');
 	if (is_null($email)){
-		$email = _request('email');
-		$arg = _request('arg');
-		if (is_null($arg) AND strpos($_SERVER["QUERY_STRING"],"arg%")!==false){
-			$query = str_replace("arg%","arg=",$_SERVER["QUERY_STRING"]);
-			parse_str($query,$args);
-			$arg = strtolower($args['arg']);
-			if (strlen($arg)>40)
-				$arg = substr($arg,-40);
+		list($email,$arg) = mailsubscribers_args_action();
+
+		$row = false;
+		if (!$email
+			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email))){
+			spip_log("subscribe_mailsubscriber : email $email pas dans la base spip_mailsubscribers","mailsubscribers");
 		}
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
-		if (!$row
-			OR $arg!==mailsubscriber_cle_action("subscribe",$row['email'],$row['jeton'])){
-			$row = false;
+		else {
+			$cle = mailsubscriber_cle_action("subscribe",$row['email'],$row['jeton']);
+			if ($arg!==$cle){
+				spip_log("subscribe_mailsubscriber : cle $arg incorrecte pour email $email","mailsubscribers");
+				$row = false;
+			}
 		}
+
 	}
 	else {
 		$row = sql_fetsel('id_mailsubscriber,email,jeton,statut','spip_mailsubscribers','email='.sql_quote($email));
 	}
 	if (!$row){
 		include_spip('inc/minipres');
-		echo minipres();
+		echo minipres(_T('info_email_invalide').'<br />'.$email);
 		exit;
 	}
 

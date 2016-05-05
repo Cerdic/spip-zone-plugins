@@ -9,6 +9,39 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Recuperer email et arg dans l'action confirm/subscribe/unsubscribe
+ * en gerant les cas foireux introduits par les urls coupees dans les mails
+ * ou par les services d'envoi+redirection qui abiment les URLs
+ * @return array
+ */
+function mailsubscribers_args_action(){
+	$email = _request('email');
+	$arg = _request('arg');
+
+	if (is_null($arg) OR is_null($email)){
+		$query = $_SERVER["QUERY_STRING"];
+		// cas du arg coupe
+		if (strpos($query,"arg%")!==false){
+			$query = str_replace("arg%","arg=",$query);
+		}
+		// cas du & transorme en &amp;
+		if (strpos($query,'&amp;')!==false){
+			$query = str_replace("&amp;","&",$query);
+		}
+		parse_str($query,$args);
+		$arg = strtolower($args['arg']);
+		$email = $args['email'];
+		if (strlen($arg)>40)
+			$arg = substr($arg,-40);
+		if ($arg AND $email){
+			spip_log("mailsubscriber : query_string mal formee, verifiez votre service d'envoi de mails [".$_SERVER["QUERY_STRING"]."]","mailsubscribers"._LOG_INFO_IMPORTANTE);
+		}
+	}
+
+	return array($email,$arg);
+}
+
+/**
  * Normaliser le nom d'une liste de diffusion
  *
  * @param string $liste

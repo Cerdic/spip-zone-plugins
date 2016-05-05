@@ -16,13 +16,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function action_confirm_mailsubscriber_dist($email=null){
 	include_spip('mailsubscribers_fonctions');
+	include_spip('inc/mailsubscribers');
 	if (is_null($email)){
-		$email = _request('email');
-		$arg = _request('arg');
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
-		if (!$row
-			OR $arg!==mailsubscriber_cle_action("confirm",$row['email'],$row['jeton'])){
-			$row = false;
+		list($email,$arg) = mailsubscribers_args_action();
+
+		$row = false;
+		if (!$email
+			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email))){
+			spip_log("confirm_mailsubscriber : email $email pas dans la base spip_mailsubscribers","mailsubscribers");
+		}
+		else {
+			$cle = mailsubscriber_cle_action("confirm",$row['email'],$row['jeton']);
+			if ($arg!==$cle){
+				spip_log("confirm_mailsubscriber : cle $arg incorrecte pour email $email","mailsubscribers");
+				$row = false;
+			}
 		}
 	}
 	else {
@@ -30,7 +38,7 @@ function action_confirm_mailsubscriber_dist($email=null){
 	}
 	if (!$row){
 		include_spip('inc/minipres');
-		echo minipres();
+		echo minipres(_T('info_email_invalide').'<br />'.$email);
 		exit;
 	}
 
