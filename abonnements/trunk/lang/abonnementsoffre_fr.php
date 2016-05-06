@@ -50,4 +50,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement'
 );
 
-?>
