@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'a2a_slogan' => 'Pour lier des articles'
 );
 
-?>

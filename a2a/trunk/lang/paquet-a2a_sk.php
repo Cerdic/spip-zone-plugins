@@ -16,4 +16,3 @@ Táto nová verzia vám umožňuje dopísať vzťahy medzi článkami. Táto fun
 	'a2a_slogan' => 'Na prepájanie článkov'
 );
 
-?>

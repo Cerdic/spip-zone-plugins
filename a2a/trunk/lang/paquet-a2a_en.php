@@ -16,4 +16,3 @@ This new version allows the typing of relations between items. This typing is no
 	'a2a_slogan' => 'Link articles together'
 );
 
-?>

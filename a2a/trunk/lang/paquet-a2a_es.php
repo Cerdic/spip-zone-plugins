@@ -16,4 +16,3 @@ Esta nueva versión permite además caracterizar las relaciones entre artículos
 	'a2a_slogan' => 'Para enlazar artículos'
 );
 
-?>

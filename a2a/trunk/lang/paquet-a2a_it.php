@@ -16,4 +16,3 @@ Questa nuova versione permette inoltre di  definire le relazioni tra gli articol
 	'a2a_slogan' => 'Per collegare gli articoli'
 );
 
-?>
