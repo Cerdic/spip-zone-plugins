@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'blocsdepliables_slogan' => 'Blocos expansíveis'
 );
 
-?>
