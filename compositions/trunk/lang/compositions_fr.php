@@ -59,5 +59,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_image_exemple' => 'Voir une image d’exemple'
 );
-
-?>
