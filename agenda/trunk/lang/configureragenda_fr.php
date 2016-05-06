@@ -30,4 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_configuration' => 'Affichage de l’Agenda'
 );
 
-?>
