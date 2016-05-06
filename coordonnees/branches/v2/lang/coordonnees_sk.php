@@ -108,5 +108,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_voice' => 'Hlasový',
 	'type_tel_work' => 'Do práce'
 );
-
-?>

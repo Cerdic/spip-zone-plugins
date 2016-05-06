@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ville' => 'المدينة',
 	'label_voie' => 'العنوان' # MODIF
 );
-
-?>
