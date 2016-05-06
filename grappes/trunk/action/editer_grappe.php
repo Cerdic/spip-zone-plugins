@@ -4,22 +4,26 @@
  * Licence GPL (c) Matthieu Marcillaud
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/filtres');
 
-function action_editer_grappe_dist($arg=null) {
+function action_editer_grappe_dist($arg = null) {
 
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
 
-	if (!$id_grappe = intval($arg))
+	if (!$id_grappe = intval($arg)) {
 		$id_grappe = grappe_inserer();
+	}
 
-	if (!$id_grappe)
+	if (!$id_grappe) {
 		return array(0,'');
+	}
 
 	$err = grappe_modifier($id_grappe);
 
@@ -39,9 +43,10 @@ function grappe_inserer($id_parent = null, $champs = array()) {
 
 	$champs['date'] = date('Y-m-d H:i:s');
 	$champs['id_admin'] = $GLOBALS['visiteur_session']['id_auteur'];
-	
+
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_grappes',
@@ -49,20 +54,21 @@ function grappe_inserer($id_parent = null, $champs = array()) {
 			'data' => $champs
 		)
 	);
-	
+
 	if (is_array($champs['liaisons'])) {
 		$champs['liaisons'] = implode(',', $champs['liaisons']);
 	}
-	
+
 	if (isset($champs['acces'])) {
 		$opt['acces'] = $champs['acces'];
 		unset($champs['acces']);
 	}
-	
+
 	$champs['options'] = serialize($opt);
-	
-	$id_grappe = sql_insertq("spip_grappes", $champs);
-	pipeline('post_insertion',
+
+	$id_grappe = sql_insertq('spip_grappes', $champs);
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_grappes',
@@ -84,7 +90,7 @@ function grappe_inserer($id_parent = null, $champs = array()) {
  * @param array|null $set
  * @return string
  */
-function grappe_modifier($id_grappe, $set=null) {
+function grappe_modifier($id_grappe, $set = null) {
 
 	include_spip('inc/modifier');
 
@@ -92,7 +98,7 @@ function grappe_modifier($id_grappe, $set=null) {
 
 	$c = collecter_requests(
 		// white list
-		objet_info('grappe','champs_editables'),
+		objet_info('grappe', 'champs_editables'),
 		// black list
 		array('date'),
 		// donnees eventuellement fournies
@@ -104,7 +110,7 @@ function grappe_modifier($id_grappe, $set=null) {
 		$opt['acces'] = $c['acces'];
 		unset($c['acces'], $set['acces']);
 	}
-	
+
 	$c['options'] = serialize($opt);
 
 	if (is_array($c['liaisons'])) {
@@ -113,14 +119,18 @@ function grappe_modifier($id_grappe, $set=null) {
 
 	$invalideur = "id='grappe/$id_grappe'";
 
-	if ($err = objet_modifier_champs('grappe', $id_grappe,
+	if ($err = objet_modifier_champs(
+		'grappe',
+		$id_grappe,
 		array(
 			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 		),
-		$c))
+		$c
+	)) {
 		return $err;
+	}
 
 	// Modification de la date ?
 	$c = collecter_requests(array('date'), array(), $set);
@@ -142,9 +152,10 @@ function grappe_modifier($id_grappe, $set=null) {
  * @param array|bool $c
  * @return string
  */
-function grappe_instituer($id_grappe, $c, $calcul_rub=true){
+function grappe_instituer($id_grappe, $c, $calcul_rub = true) {
 	// Envoyer aux plugins
-	$c = pipeline('pre_edition',
+	$c = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_grappes',
@@ -155,13 +166,16 @@ function grappe_instituer($id_grappe, $c, $calcul_rub=true){
 		)
 	);
 
-	if (!count($c)) return;
+	if (!count($c)) {
+		return;
+	}
 
 	// Envoyer les modifs.
 	sql_updateq('spip_grappes', $c, "id_grappe=$id_grappe");
 
 	// Pipeline
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_grappes',
@@ -174,4 +188,3 @@ function grappe_instituer($id_grappe, $c, $calcul_rub=true){
 
 	return ''; // pas d'erreur
 }
-
