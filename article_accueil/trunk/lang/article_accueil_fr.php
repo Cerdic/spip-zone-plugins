@@ -18,4 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_article_en_accueil' => 'Article d’accueil :'
 );
 
-?>
