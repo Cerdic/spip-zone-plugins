@@ -188,4 +188,3 @@ Je récupère le panier du @date_distribution@ produit par @nom_producteur@
 	'vous_etes_responsable_distribution' => 'Vous êtes responsable pour la distribution suivante :',
 	'vous_etes_responsable_distributions' => 'Vous êtes responsable pour les distributions suivantes :'
 );
-
