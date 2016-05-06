@@ -97,4 +97,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez_renseigner_ce_champ' => 'Si prega di compilare questo campo!'
 );
 
-?>

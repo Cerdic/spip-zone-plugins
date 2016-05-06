@@ -120,4 +120,3 @@ El coeficiente aplicado sobre los campos extras es 2 por defecto. Para que se ha
 	'veuillez_renseigner_ce_champ' => '¡Rellene por favor este campo!'
 );
 
-?>

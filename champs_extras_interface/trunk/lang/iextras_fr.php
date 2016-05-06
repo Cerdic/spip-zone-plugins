@@ -156,4 +156,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez_renseigner_ce_champ' => 'Veuillez renseigner ce champ !'
 );
 
-?>

@@ -128,4 +128,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez_renseigner_ce_champ' => 'Prosím, vyplňte toto pole!'
 );
 
-?>
