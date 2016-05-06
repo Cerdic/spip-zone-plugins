@@ -48,5 +48,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_detail' => 'ver los detalles'
 );
-
-?>
