@@ -134,4 +134,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'webmestre' => 'Webmaster',
 	'webmestres' => 'Webmasters'
 );
-
