@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_titre' => 'Champs Extras (Interface)'
 );
 
-?>

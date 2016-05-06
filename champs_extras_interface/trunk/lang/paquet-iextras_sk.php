@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_titre' => 'Ďalšie polia (rozhranie)'
 );
 
-?>

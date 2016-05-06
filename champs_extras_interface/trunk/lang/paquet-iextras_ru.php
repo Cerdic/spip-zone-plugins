@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_titre' => 'Создание новых полей - интерфейс (Champs Extras Interface)'
 );
 
-?>
