@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'comments_description' => 'LET OP, VERSIE IN ONWIKKELING, VOOR SPIP 3 !<br />Tonen van een lijst van berichten als blog met een vereenvoudigd formulier. Commentaar in microformaat, met een homogene naamgeving.',
 	'comments_slogan' => 'Commentaren en niets meer'
 );
-
-?>

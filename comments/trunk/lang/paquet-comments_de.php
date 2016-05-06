@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'comments_description' => 'ACHTUNG, VERSION IN ENTWICKLUNG FÜR SPIP 3 !<br />Beiträge werden über ein vereinfachtes Formular eingegeben und als Liste im Blog-Stil angezeigt. Kommentare als Microformate, einheitlicher Namensraum.',
 	'comments_slogan' => 'Vereinfachte Kommentarfunkton'
 );
-
-?>

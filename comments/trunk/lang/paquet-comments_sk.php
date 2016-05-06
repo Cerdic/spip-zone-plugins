@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'comments_description' => 'POZOR, VERZIA VO VÝVOJI PRE SPIP 3!<br />Zobrazenie príspevkov v zozname, ako na blogu cez zjednodušený formulár. Málo formátované komentáre, jednotný nadpis.',
 	'comments_slogan' => 'Komentáre celkom jednoducho'
 );
-
-?>
