@@ -18,4 +18,3 @@ a graphical interface to manage these new fields.',
 	'cextras_titre' => 'Extra fields'
 );
 
-?>

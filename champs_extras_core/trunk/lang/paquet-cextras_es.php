@@ -17,4 +17,3 @@ Es pues la base para otros plugins, especialmente para Â«Campos Extras InterfazÂ
 	'cextras_titre' => 'Campos Extras'
 );
 
-?>

@@ -18,4 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_titre' => 'Создание новых полей (Champs Extras)'
 );
 
-?>
