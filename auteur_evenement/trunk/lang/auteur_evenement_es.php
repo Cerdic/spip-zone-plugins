@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenements_auteur' => 'Los eventos de esta autora o autor'
 );
 
-?>
