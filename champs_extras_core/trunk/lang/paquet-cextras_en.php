@@ -17,4 +17,3 @@ a graphical interface to manage these new fields.',
 	'cextras_slogan' => 'Create new edit fields for SPIP objects',
 	'cextras_titre' => 'Extra fields'
 );
-

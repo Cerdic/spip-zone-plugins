@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'API voor het beheer van nieuw velden in redactionele objecten.',
 	'cextras_titre' => 'Extra Velden'
 );
-

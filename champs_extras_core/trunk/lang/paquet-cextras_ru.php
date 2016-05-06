@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'API для создания новых полей у существующих объектов (статей, разделов и т. д.).',
 	'cextras_titre' => 'Создание новых полей (Champs Extras)'
 );
-

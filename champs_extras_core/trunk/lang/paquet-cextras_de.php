@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'Zusätzliche Felder für die Standardobjekte von SPIP anlegen',
 	'cextras_titre' => 'Zusatzfelder'
 );
-

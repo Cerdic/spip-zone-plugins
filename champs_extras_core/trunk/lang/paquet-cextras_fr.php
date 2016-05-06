@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'API de gestion de nouveaux champs dans les objets éditoriaux.',
 	'cextras_titre' => 'Champs Extras'
 );
-

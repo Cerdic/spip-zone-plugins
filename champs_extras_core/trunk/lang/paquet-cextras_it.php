@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'Crea nuovi campi per gli oggetti editoriali di SPIP',
 	'cextras_titre' => 'Campi Extra'
 );
-

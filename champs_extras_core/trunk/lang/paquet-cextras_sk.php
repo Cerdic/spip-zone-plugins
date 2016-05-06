@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cextras_slogan' => 'Aplikácia na riadenie nových polí v redakčných objektoch',
 	'cextras_titre' => 'Doplnkové polia'
 );
-

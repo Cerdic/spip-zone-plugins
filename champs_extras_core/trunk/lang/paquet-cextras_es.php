@@ -16,4 +16,3 @@ Es pues la base para otros plugins, especialmente para «Campos Extras Interfaz�
 	'cextras_slogan' => 'API de gestión de nuevos campos en los objetos editoriales',
 	'cextras_titre' => 'Campos Extras'
 );
-
