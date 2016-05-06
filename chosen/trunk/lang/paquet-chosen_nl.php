@@ -22,4 +22,3 @@ Let vooral op het voorvoegsel ’chosen_’ dat wordt toegevoegd in parameter �
 	'chosen_slogan' => 'Bibliotheek Chosen in SPIP integreren (fork van koenpunt)'
 );
 
-?>

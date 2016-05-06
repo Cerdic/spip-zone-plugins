@@ -21,4 +21,3 @@ Take notice of the prefix ’chosen_’ that is added in the ’value’ paramet
 	'chosen_slogan' => 'Integrate the Chosen library in SPIP (koenpunt’s fork)'
 );
 
-?>

@@ -17,4 +17,3 @@ Trieda CSS <code>chosen</code> v prvku code><select></code> automaticky spustí
 (vidlica koenpunt)'
 );
 
-?>
