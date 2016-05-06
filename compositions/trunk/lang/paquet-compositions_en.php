@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Compositions',
 	'compositions_slogan' => 'Differ page layouts according to sections, articles...'
 );
-
-?>

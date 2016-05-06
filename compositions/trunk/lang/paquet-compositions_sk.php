@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Rozmiestnenia',
 	'compositions_slogan' => 'Meňte rozmiestnenie podľa rubrík, článkov, atď.'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Шаблоны страниц (Compositions)',
 	'compositions_slogan' => 'Возможность задавать определенный шаблон для вывода статьи, раздела и т.д.'
 );
-
-?>

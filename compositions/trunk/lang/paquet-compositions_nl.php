@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Composities',
 	'compositions_slogan' => 'Varieer de indeling van de bladzijdes volgens rubriek, artikel, ...'
 );
-
-?>

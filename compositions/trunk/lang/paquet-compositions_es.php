@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Composiciones',
 	'compositions_slogan' => 'Variar los formateos según las secciones, los artículos...'
 );
-
-?>

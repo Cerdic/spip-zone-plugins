@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'compositions_nom' => 'Compositions',
 	'compositions_slogan' => 'Varier les mises en page selon les rubriques, les articles...'
 );
-
-?>
