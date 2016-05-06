@@ -16,5 +16,3 @@ une unique page de configuration pour les réglages cachés de SPIP.',
 	'ck_nom' => 'Ar Gontell KISS',
 	'ck_slogan' => 'Simplifier certains réglages SPIP'
 );
-
-?>

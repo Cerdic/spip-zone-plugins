@@ -15,5 +15,3 @@ _ Un coutèu que ten dau bouòn en pocha, basta en una pàgina de counfiguraciou
 	'ck_nom' => 'Coutèu KISS',
 	'ck_slogan' => 'Simplificà d’unu reglage SPIP'
 );
-
-?>

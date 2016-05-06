@@ -15,5 +15,3 @@ _ Nožík, ktorý je naozaj vo vrecku v unikátnej skrytej stránke s konfigurá
 	'ck_nom' => 'Couteau KISS',
 	'ck_slogan' => 'zjednoduší niektoré nastavenia SPIPu'
 );
-
-?>

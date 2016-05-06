@@ -15,5 +15,3 @@ _ Een mes dat echt in de zak kan met een eenkel configuratie pagina om de verbor
 	'ck_nom' => 'Het KISS Mes',
 	'ck_slogan' => 'Enkele afstellingen va SPIP vereenvoudigen'
 );
-
-?>
