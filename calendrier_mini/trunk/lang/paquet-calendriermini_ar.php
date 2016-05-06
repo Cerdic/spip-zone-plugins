@@ -15,4 +15,3 @@ _ Lui sont adjoints d’autre éléments, tels que balises, critères, modèles.
 	'calendriermini_nom' => 'Mini Calendrier',
 	'calendriermini_slogan' => 'يسمح باستخدام علامة #CALENDRIER_MINI'
 );
-
