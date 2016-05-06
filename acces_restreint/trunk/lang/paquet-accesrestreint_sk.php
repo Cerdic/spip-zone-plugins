@@ -19,4 +19,3 @@ _ Zavedené cyly SPIPu sa upravia  podľa zistených prístupových práv návš
 	'accesrestreint_slogan' => 'Riadenie zón s obmedzeným prístupom'
 );
 
-?>

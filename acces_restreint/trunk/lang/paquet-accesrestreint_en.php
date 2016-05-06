@@ -17,4 +17,3 @@ _ All SPIP’s loops are loaded with the necessary tools to filter the results a
 	'accesrestreint_slogan' => 'Management of areas with restricted access'
 );
 
-?>

@@ -19,4 +19,3 @@ _ Alle standaard lussen van SPIP worden gefilterd op basis van de toegangsrechte
 	'accesrestreint_slogan' => 'Beheer van toegangszones'
 );
 
-?>

@@ -17,4 +17,3 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Über
 	'accesrestreint_slogan' => 'Verwaltung von Bereichen mit Zugangskontrolle'
 );
 
-?>
