@@ -4,7 +4,9 @@
  * Licence GPL (c) Matthieu Marcillaud
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // chargement des valeurs par defaut des champs du formulaire
 /**
@@ -14,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param unknown_type $id_source
  * @param unknown_type $identifiant
  */
-function formulaires_lier_objets_charger($objet, $source, $id_source, $identifiant){
+function formulaires_lier_objets_charger($objet, $source, $id_source, $identifiant) {
 	return
 		array(
 			'objet' => $objet,
@@ -26,7 +28,7 @@ function formulaires_lier_objets_charger($objet, $source, $id_source, $identifia
 		);
 }
 
-function formulaires_lier_objets_verifier($objet, $source, $id_source, $identifiant){
+function formulaires_lier_objets_verifier($objet, $source, $id_source, $identifiant) {
 	$erreurs = array();
 
 	// si pas d'id, le selecteur generique n'a pas fonctionne
@@ -38,11 +40,10 @@ function formulaires_lier_objets_verifier($objet, $source, $id_source, $identifi
 	return $erreurs;
 }
 
-function formulaires_lier_objets_traiter($objet, $source, $id_source, $identifiant){
+function formulaires_lier_objets_traiter($objet, $source, $id_source, $identifiant) {
 	$id_objet = _request('pid_objet');
 	include_spip('action/lier_objets');
-	lier_objets($source,$id_source,objet_type($objet),$id_objet);
+	lier_objets($source, $id_source, objet_type($objet), $id_objet);
 
 	return array(true,''); // permettre d'editer encore le formulaire
 }
-
