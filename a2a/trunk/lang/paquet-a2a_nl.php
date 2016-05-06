@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Deze nieuwe versie maakt optionele relaties tussen items mogelijk.',
 	'a2a_slogan' => 'Koppel artikelen'
 );
-

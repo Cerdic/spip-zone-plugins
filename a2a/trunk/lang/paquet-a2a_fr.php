@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Cette nouvelle version permet en outre de typer les relations entre articles. Cette fonction de typage n’est pas active par défaut pour conserver le fonctionnement classique du plugin (se référer à la documentation).',
 	'a2a_slogan' => 'Pour lier des articles'
 );
-

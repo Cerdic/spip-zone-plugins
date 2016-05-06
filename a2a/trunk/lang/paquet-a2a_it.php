@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Questa nuova versione permette inoltre di  definire le relazioni tra gli articoli. Questa funzione non è attiva per predefinizione per conservare il funzionamento classico del plugin (riferimenti alla documentazione).',
 	'a2a_slogan' => 'Per collegare gli articoli'
 );
-

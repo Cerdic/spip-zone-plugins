@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Táto nová verzia vám umožňuje dopísať vzťahy medzi článkami. Táto funkcia nie je aktivovaná v predvolených nastaveniach, aby sa zachoval spôsob, ako zásuvný modul tradične funguje (prečítajte si dokumentáciu).',
 	'a2a_slogan' => 'Na prepájanie článkov'
 );
-

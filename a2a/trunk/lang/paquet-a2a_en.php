@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 This new version allows the typing of relations between items. This typing is not active by default to keep the original function of the plugin (see the documentation).',
 	'a2a_slogan' => 'Link articles together'
 );
-

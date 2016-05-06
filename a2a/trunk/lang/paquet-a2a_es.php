@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Esta nueva versión permite además caracterizar las relaciones entre artículos. Esta función de tipificación no está activa por defecto para conservar el funcionamiento clásico del plugin (se refiere a la documentación).',
 	'a2a_slogan' => 'Para enlazar artículos'
 );
-
