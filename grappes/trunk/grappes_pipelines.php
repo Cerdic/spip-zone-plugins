@@ -11,13 +11,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Plugin Groupes pour Spip 2.0
- * Licence GPL (c) 2008 Matthieu Marcillaud
- */
-
-/**
- * Insertion dans les pipelines insert_head et header_prive (SPIP
- * )
+ * Insertion dans les pipelines insert_head et header_prive (SPIP)
  * Insérer les js du séleceteur générique s'ils ne sont pas déjà là
  *
  * @param string $flux
