@@ -15,11 +15,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_rubrique_depublie' => 'Only activate de-publishing for the following sectors (separated by a comma).',
 	'configurer_statut_depublie' => 'Choose the status to be given at de-publication',
 
+	// D
+	'date_depublie' => 'Changes',
+
 	// E
 	'erreur_date_superieure' => 'The date of depublication cannot be prior to the publication date',
 
 	// I
 	'icone_configurer_depublie' => 'Configure de-publications',
+	'icone_voir_depublie' => 'List of de-publications',
+	'info_1_objet' => 'An object',
+	'info_nb_objets' => '@nb@ objects',
+	'info_objet' => 'Object',
 
 	// L
 	'label_jour' => 'Days',
@@ -36,7 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_date_depublication' => 'Date of online de-publication:',
 	'texte_date_depublication_nonaffichee' => 'Do not use the date of de-publication',
-	'titre_page_configurer_depublies' => 'Configure de-publications'
+	'titre_page_configurer_depublies' => 'Configure de-publications',
+	'titre_page_depublies_objets' => 'Objects with a programmed change of status'
 );
 
 ?>
