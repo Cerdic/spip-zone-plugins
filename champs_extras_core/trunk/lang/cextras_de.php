@@ -22,4 +22,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zbug_balise_argument_non_texte' => 'Das Argument @nb@ im Tag @balise@ muß den Typ text haben.'
 );
 
-?>

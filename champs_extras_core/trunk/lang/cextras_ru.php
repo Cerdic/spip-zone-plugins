@@ -22,4 +22,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zbug_balise_argument_non_texte' => 'Параметры @nb@ для тега @balise@ должны быть в текстовом формате'
 );
 
-?>

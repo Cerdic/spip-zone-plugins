@@ -20,4 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zbug_balise_argument_non_texte' => 'L’argument @nb@ dans la balise @balise@ doit être de type texte'
 );
 
-?>
