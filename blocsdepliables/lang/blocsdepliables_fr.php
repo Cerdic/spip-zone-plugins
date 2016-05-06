@@ -41,4 +41,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_blocsdepliables' => 'Blocs dépliables'
 );
-
