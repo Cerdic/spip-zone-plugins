@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_evenement_nom' => 'Event Authors',
 	'auteur_evenement_slogan' => 'Associate an event with an author'
 );
-
