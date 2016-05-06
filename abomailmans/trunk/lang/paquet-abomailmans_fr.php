@@ -15,4 +15,3 @@ _ Le lien avec les listes Mailman, Ezmlm et Sympa se fait par des envois d’e-m
 	'abomailmans_nom' => 'Abonnement à des listes de diffusion',
 	'abomailmans_slogan' => 'Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP'
 );
-

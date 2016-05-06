@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			Dem Adminstrator steht ein Interface zur Verwaltung dieser Listen zur Verfügung.',
 	'abomailmans_nom' => 'Abonnieren Sie Mailing-Listen'
 );
-
