@@ -27,4 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tous_droits_reserves' => ' - Todos derechos reservados'
 );
-
