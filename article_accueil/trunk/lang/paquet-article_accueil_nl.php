@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_accueil_slogan' => 'Een introductie-artikel aan rubrieken toewijzen'
 );
 
-?>
