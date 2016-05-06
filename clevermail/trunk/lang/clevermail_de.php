@@ -141,4 +141,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infolettres' => 'Info-Briefe',
 	'informations' => 'Information'
 );
-

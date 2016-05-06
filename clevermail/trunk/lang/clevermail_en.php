@@ -309,4 +309,3 @@ Thanks',
 	'vous_devez_choisir_au_moins_une_liste' => 'You have to choose at least one letter',
 	'vous_devez_choisir_un_fichier' => 'You have to choose a file...'
 );
-

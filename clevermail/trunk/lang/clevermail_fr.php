@@ -311,4 +311,3 @@ Merci',
 	'vous_devez_choisir_au_moins_une_liste' => 'Vous devez choisir au moins une lettre.',
 	'vous_devez_choisir_un_fichier' => 'Vous devez choisir un fichier...'
 );
-
