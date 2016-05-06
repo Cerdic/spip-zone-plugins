@@ -104,4 +104,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zone' => 'L’espaci de desfouloupamen dei countribucioun a SPIP'
 );
 
-?>

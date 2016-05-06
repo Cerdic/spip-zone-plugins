@@ -73,4 +73,3 @@ http://webchat.freenode.net/?channels=#spip',
 	'slogan_site_spip_zine' => 'La retfanzino pri kaj ĉirkaŭ SPIP'
 );
 
-?>
