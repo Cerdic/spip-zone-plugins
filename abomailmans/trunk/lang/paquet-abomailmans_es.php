@@ -18,4 +18,3 @@ _ El enlace con las listas Mailman, Ezmlm y Sympa se hace por envíos de correo 
 	'abomailmans_slogan' => 'Vincular sus listas de difusiones mailman, ezmlm o sympa con su SPIP'
 );
 
-?>

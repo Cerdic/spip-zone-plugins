@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abomailmans_nom' => 'Abonnieren Sie Mailing-Listen'
 );
 
-?>

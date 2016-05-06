@@ -17,4 +17,3 @@ The administrator can manage the lists from the private space via a dedicated in
 	'abomailmans_slogan' => 'Interface your Mailman, Ezmlm or Sympa mailing lists and newsletters with SPIP'
 );
 
-?>

@@ -18,4 +18,3 @@ _ Odkaz na skupiny Mailman, Ezmlm a Sympa získate odoslaním e-mailu.',
 	'abomailmans_slogan' => 'Ovládajte svoje e-mailové skupiny, (e-mailové konferencie), diskusné skupiny či mailing listy typu mailman, ezmlm alebo sympa so svojím SPIPom'
 );
 
-?>
