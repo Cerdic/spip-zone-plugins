@@ -19,4 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rubrique_article_en_accueil' => 'Artículo destacado actual:'
 );
-
