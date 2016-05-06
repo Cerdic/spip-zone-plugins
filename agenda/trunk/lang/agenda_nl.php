@@ -164,4 +164,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_evenements_rubrique' => 'Bekijk de gebeurtenissen van de rubriek'
 );
-

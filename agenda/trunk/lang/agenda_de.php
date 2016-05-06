@@ -164,4 +164,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_evenements_rubrique' => 'Die Events der Rubrik einsehen'
 );
-
