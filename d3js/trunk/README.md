@@ -12,13 +12,18 @@ Intégrer d3.js dans SPIP
 
 ## Changelog
 
-## Version 1.2.x
+### Version 1.2.x
 
-### Version 1.2.1
+#### Version 1.2.2
+
+* Nettoyage de code
+* Mise à jour de la librairie topojson
+
+#### Version 1.2.1
 
 * Modification style pour les points des graphs (svg circle)
 
-### Version 1.2.0
+#### Version 1.2.0
 
 * Choisir les plugins via le pipeline ```d3js_plugins```
 * Ajout de [topojson](https://github.com/mbostock/topojson)
