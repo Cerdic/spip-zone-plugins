@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_accueil_nom' => 'Matérias principais',
 	'article_accueil_slogan' => 'Atribuir uma matéria principal às seções'
 );
-

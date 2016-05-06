@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_accueil_nom' => 'Главная статья',
 	'article_accueil_slogan' => 'Применить главную статью к разделу'
 );
-

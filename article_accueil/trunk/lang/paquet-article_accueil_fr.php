@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_accueil_nom' => 'Articles d’accueil',
 	'article_accueil_slogan' => 'Attribuer un article d’accueil aux rubriques'
 );
-

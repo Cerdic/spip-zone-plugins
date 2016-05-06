@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_accueil_nom' => 'Home article',
 	'article_accueil_slogan' => 'Assign a home article to a section'
 );
-
