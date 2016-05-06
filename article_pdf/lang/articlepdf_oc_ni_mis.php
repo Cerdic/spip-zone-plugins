@@ -24,4 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'post_scriptum' => 'Post-Escrich : '
 );
 
-?>

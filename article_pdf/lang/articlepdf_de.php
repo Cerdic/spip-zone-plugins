@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrer_pdf' => 'Als PDF speichern'
 );
 
-?>
