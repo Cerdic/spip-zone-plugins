@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cameras_nom' => 'Caméras'
 );
-
