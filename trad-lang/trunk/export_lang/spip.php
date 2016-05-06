@@ -1,20 +1,20 @@
 <?php
 /**
- * 
+ *
  * Trad-lang v2
  * Plugin SPIP de traduction de fichiers de langue
  * © Florent Jugla, Fil, kent1
- * 
+ *
  * Fichier des fonctions spécifiques du plugin
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 /**
  * Fonction d'export d'une langue d'un module SPIP en php
- * 
+ *
  * @param string $module
  * 		Le module à exporter
  * @param string $langue
@@ -26,44 +26,55 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @return string $fichier
  * 		Le fichier final
  */
-function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
+function export_lang_spip_dist($module, $langue, $dir_lang, $tout = false) {
 	/**
 	 * Le fichier final
 	 * local/cache-lang/module_lang.php
 	 */
-	$fichier = $dir_lang."/".$module."_".$langue.".php";
+	$fichier = $dir_lang . '/' . $module . '_' . $langue . '.php';
 
 	$tab = "\t";
-	$where = "module=".sql_quote($module)." AND lang=".sql_quote($langue);
-	if(!$tout)
+	$where = 'module = ' . sql_quote($module) . ' AND lang = ' . sql_quote($langue);
+	if (!$tout) {
 		$where .= " AND statut IN ('OK','MODIF','RELIRE')";
-	$res=sql_allfetsel("id,str,comm,statut","spip_tradlangs",$where,"id");
+	}
+	$res=sql_allfetsel('id,str,comm,statut', 'spip_tradlangs', $where, 'id');
 	$x=array();
-	$prev="";
-	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
-	foreach ($res as $row){
+	$prev = '';
+	/**
+	 * on part de l'origine comme ca on a tout
+	 * meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
+	 */
+	$tous = $lorigine;
+	foreach ($res as $row) {
 		$tous[$row['id']] = $row;
 	}
 	ksort($tous);
 	foreach ($tous as $row) {
-		if ($prev!=strtoupper($row['id'][0])) $x[] = "\n$tab// ".strtoupper($row['id'][0]);
-		$prev=strtoupper($row['id'][0]);
-		if (strlen($row['statut']) && ($row['statut'] != 'OK'))
+		if ($prev != strtoupper($row['id'][0])) {
+			$x[] = "\n$tab// ".strtoupper($row['id'][0]);
+		}
+		$prev = strtoupper($row['id'][0]);
+		if (strlen($row['statut']) and ($row['statut'] != 'OK')) {
 			$row['comm'] .= ' '.$row['statut'];
-		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
+		}
+		if (trim($row['comm'])) {
+			/**
+			 * on rajoute les commentaires ?
+			 */
+			$row['comm'] = ' # ' . trim($row['comm']);
+		}
 
 		$str = $row['str'];
 
 		$oldmd5 = md5($str);
-		$str = unicode_to_utf_8(
-			html_entity_decode(
-				preg_replace('/&([lg]t;)/S', '&amp;\1', $str),
-				ENT_NOQUOTES, 'utf-8')
-		);
+		$str = unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $str), ENT_NOQUOTES, 'utf-8'));
 		$newmd5 = md5($str);
-		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
+		if ($oldmd5 !== $newmd5) {
+			sql_updateq('spip_tradlangs', array('md5'=>$newmd5), 'md5 = ' . sql_quote($oldmd5) . ' AND module = '.sql_quote($module));
+		}
 
-		$x[]="$tab".var_export($row['id'],1).' => ' .var_export($str,1).','.$row['comm'] ;
+		$x[] = "$tab".var_export($row['id'], 1) . ' => ' . var_export($str, 1) . ',' . $row['comm'] ;
 	}
 
 	/**
@@ -82,29 +93,29 @@ function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
 	 */
 	$x[count($x)-1] = preg_replace('/,([^,]*)$/', '\1', $x[count($x)-1]);
 
-	$contenu = join("\n",$x);
-	
+	$contenu = join("\n", $x);
+
 	/**
 	 * On écrit le fichier
 	 */
-	fwrite($fd,
-	'<'.'?php
+	fwrite(
+		$fd,
+		'<'.'?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // extrait automatiquement de '.$url_trad.'
 // ** ne pas modifier le fichier **
 '
-."\n".$secure.'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(
+		."\n".$secure.'$GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 '
-. str_replace("\r\n", "\n", $contenu)
-.'
+		. str_replace("\r\n", "\n", $contenu)
+		.'
 );
 
 ?'.'>'
 	);
-	
+
 	fclose($fd);
 	@chmod($fichier, 0666);
-	
+
 	return $fichier;
 }
-?>
