@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'agenda_nom' => 'Расписание (Порядок дня)',
 	'agenda_slogan' => 'События в расписании'
 );
-
