@@ -128,4 +128,3 @@ The default coefficient applied to the extras fields is 2. To give you an idea, 
 	// V
 	'veuillez_renseigner_ce_champ' => 'Please enter this field!'
 );
-
