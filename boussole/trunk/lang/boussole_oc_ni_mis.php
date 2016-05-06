@@ -165,4 +165,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer' => 'Counfiguracioun dóu plugin boussola',
 	'titre_page_importer_boussole' => 'Empourtacioun d’una boussola'
 );
-

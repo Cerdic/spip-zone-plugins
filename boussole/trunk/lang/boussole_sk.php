@@ -159,4 +159,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer' => 'Nastavenia zásuvného modulu Kompas',
 	'titre_page_importer_boussole' => 'Nahrávanie kompasu'
 );
-
