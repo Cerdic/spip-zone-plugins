@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_syndic_nom' => 'Autoren von syndizierten Websites',
 	'auteurs_syndic_slogan' => 'Ermöglicht syndizierten Websites Autoren zuzuordnen'
 );
-

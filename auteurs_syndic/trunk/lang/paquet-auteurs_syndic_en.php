@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_syndic_nom' => 'Authors for Web site',
 	'auteurs_syndic_slogan' => 'Adds the ability to add authors to syndicated sites'
 );
-

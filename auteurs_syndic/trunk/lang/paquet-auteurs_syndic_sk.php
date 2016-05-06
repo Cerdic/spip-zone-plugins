@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_syndic_nom' => 'Autori na syndikované stránky',
 	'auteurs_syndic_slogan' => 'Umožňuje k syndikovaným stránkam pridávať autorov'
 );
-
