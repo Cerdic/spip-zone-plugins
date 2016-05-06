@@ -17,4 +17,3 @@ _ For DIYers, you can also use this plugin to display your own list of sites and
 	'boussole_slogan' => 'The favorite places of the SPIP galaxy or out there!'
 );
 
-?>

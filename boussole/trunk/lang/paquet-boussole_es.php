@@ -16,4 +16,3 @@ _ Para los amantes del bricolage, puede utilizar también este plugin para mostr
 	'boussole_slogan' => '¡Las buenas direcciones de la galaxia SPIP u otros lugares!'
 );
 
-?>

@@ -16,4 +16,3 @@ _ Memfarantoj, vi povas uzi ankaŭ tiun kromprogramon por afiŝi vian propran re
 	'boussole_slogan' => 'La taŭgaj adresoj de la SPIP-galakcio aŭ aliloke !'
 );
 
-?>

@@ -17,4 +17,3 @@ _ Per lu bricoulaire, poudès finda utilisà aqueu plugin da afichà la vouòstr
 	'boussole_slogan' => 'Li bouòni adressa de la galassìa SPIP o de fouòra !'
 );
 
-?>

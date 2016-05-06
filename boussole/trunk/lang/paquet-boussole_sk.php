@@ -16,4 +16,3 @@ _ Sami môžete tento zásuvný modul používať na zobrazenie svojho vlastnéh
 	'boussole_slogan' => 'Obľúbené adresy v galaxii SPIPu alebo inde!'
 );
 
-?>
