@@ -16,5 +16,3 @@ Con este plugin, ningún objeto volverá a ser eliminado automáticamente. La pa
 	'corbeille_nom' => 'Papelera',
 	'corbeille_slogan' => 'Gestión de los documentos enviados a la papelera.'
 );
-
-?>

@@ -14,5 +14,3 @@ Avec ce plugin, plus aucun objet n’est supprimé automatiquement. La poubelle 
 	'corbeille_nom' => 'Corbeille',
 	'corbeille_slogan' => 'Gestion des documents mis à la corbeille'
 );
-
-?>

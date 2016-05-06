@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corbeille_nom' => 'سلة المهملات',
 	'corbeille_slogan' => 'إدارة المستندات الموجودة في سلة المهملات'
 );
-
-?>

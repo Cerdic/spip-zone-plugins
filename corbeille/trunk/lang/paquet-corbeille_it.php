@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corbeille_nom' => 'Cestino',
 	'corbeille_slogan' => 'Gestione dei documenti nel cestino.'
 );
-
-?>

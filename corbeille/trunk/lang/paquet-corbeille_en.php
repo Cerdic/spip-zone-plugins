@@ -16,5 +16,3 @@ With this plugin none of the objects is deleted automatically. The basket keeps 
 	'corbeille_nom' => 'Recycle bin',
 	'corbeille_slogan' => 'Managing documents chucked in the recycle bin.'
 );
-
-?>

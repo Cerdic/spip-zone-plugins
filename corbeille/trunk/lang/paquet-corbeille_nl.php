@@ -16,5 +16,3 @@ Met deze plugin wroden objecten niet langer automatisch verwijderd. Alle artikel
 	'corbeille_nom' => 'Prullenbak',
 	'corbeille_slogan' => 'Beheer van documenten in de prullenbak'
 );
-
-?>
