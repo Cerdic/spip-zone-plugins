@@ -33,4 +33,3 @@ No data will be erased from articles : if you’re not pleased with the result, 
 	'titre_migrer_albums' => 'Migrate Articles into Albums'
 );
 
-?>

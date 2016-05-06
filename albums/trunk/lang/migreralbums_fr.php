@@ -33,4 +33,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_migrer_albums' => 'Migrer des Articles en Albums'
 );
 
-?>
