@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abozones_nom' => 'Subscriptions to restricted areas',
 	'abozones_slogan' => 'Link subscription offers to restricted areas'
 );
-

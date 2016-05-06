@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abozones_nom' => 'Inscripciones a zonas restringidas',
 	'abozones_slogan' => 'Vincular zonas de ofertas de inscripción a zonas restringidas.'
 );
-

@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abozones_nom' => 'Abonnements à des zones restreintes',
 	'abozones_slogan' => 'Lier des offres d’abonnement à des zones restreintes'
 );
-
