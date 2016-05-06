@@ -44,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_un_article' => 'Jediný článok rubriky',
 	'label_variantes_squelettes' => 'Rubrika s variantom šablón'
 );
-
-?>

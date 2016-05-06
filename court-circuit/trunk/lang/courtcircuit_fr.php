@@ -42,5 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_un_article' => 'Seul article de la rubrique',
 	'label_variantes_squelettes' => 'Rubrique avec variante de squelettes'
 );
-
-?>

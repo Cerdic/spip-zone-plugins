@@ -44,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_un_article' => 'Apenas uma matéria da seção',
 	'label_variantes_squelettes' => 'Seção com variação de templates'
 );
-
-?>

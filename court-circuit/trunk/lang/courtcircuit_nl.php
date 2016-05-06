@@ -44,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_un_article' => 'Enige artikel van de rubriek',
 	'label_variantes_squelettes' => 'Rubriek met afwijkende skeletten'
 );
-
-?>
