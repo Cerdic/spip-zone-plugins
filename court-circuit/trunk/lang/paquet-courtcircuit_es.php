@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit_nom' => 'Cortocircuito',
 	'courtcircuit_slogan' => 'Acceso directo a los artículos'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit_nom' => 'Kortsluiting (Court-circuit)',
 	'courtcircuit_slogan' => 'Directe toegang tot artikelen'
 );
-
-?>
