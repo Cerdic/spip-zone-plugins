@@ -131,4 +131,3 @@ Como los documentos, después, se pueden ser incluídos en el texto, o mostrados
 	'titre_logo_album' => 'Logotipo',
 	'titre_page_configurer_albums' => 'Configurar los Álbumes'
 );
-

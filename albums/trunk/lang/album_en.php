@@ -142,4 +142,3 @@ Similar to documents in portfolios, albums may be referenced in the text or disp
 	'titre_logo_album' => 'Logo',
 	'titre_page_configurer_albums' => 'Configure Albums'
 );
-
