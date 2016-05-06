@@ -70,4 +70,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir' => 'Bekijken'
 );
-
