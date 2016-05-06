@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'Text only',
 	'textes_icones' => 'Texts of the icons tooltip'
 );
-

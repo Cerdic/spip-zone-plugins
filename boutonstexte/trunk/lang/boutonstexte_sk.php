@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'Iba text',
 	'textes_icones' => 'Text bublinkovej nápovede'
 );
-

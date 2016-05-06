@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'نص فقط',
 	'textes_icones' => 'نص بالونات المساعدة'
 );
-

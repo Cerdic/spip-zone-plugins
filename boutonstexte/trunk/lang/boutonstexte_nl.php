@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'Alleen tekst',
 	'textes_icones' => 'Teksten van icoonvelden'
 );
-

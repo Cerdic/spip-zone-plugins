@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'فقط متن',
 	'textes_icones' => 'متن‌هاي صورتك‌هاي نكته ابزارها'
 );
-

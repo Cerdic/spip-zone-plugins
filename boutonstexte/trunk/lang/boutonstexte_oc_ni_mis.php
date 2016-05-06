@@ -38,4 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'Tèstou basta',
 	'textes_icones' => 'Tèstou dei boufa d’icona'
 );
-
