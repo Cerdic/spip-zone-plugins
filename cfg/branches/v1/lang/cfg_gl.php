@@ -61,4 +61,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Suprimir' # MODIF
 );
 
-?>

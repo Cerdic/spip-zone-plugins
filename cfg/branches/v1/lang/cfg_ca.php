@@ -63,4 +63,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Tornar a posar els valors per defecte'
 );
 
-?>
