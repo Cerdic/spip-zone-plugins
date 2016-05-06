@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cookiebar_nom' => 'cookiebar',
 	'cookiebar_slogan' => 'Affiche un avertissement à l’utilisation des cookies'
 );
-
-?>
