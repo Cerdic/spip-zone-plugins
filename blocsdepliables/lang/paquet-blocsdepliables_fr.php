@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'blocsdepliables_nom' => 'Blocs Dépliables',
 	'blocsdepliables_slogan' => 'Des blocs dépliables.'
 );
-
