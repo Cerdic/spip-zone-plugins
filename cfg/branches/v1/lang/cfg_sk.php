@@ -62,4 +62,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer' => 'Obnoviť na predvolené hodnoty'
 );
-

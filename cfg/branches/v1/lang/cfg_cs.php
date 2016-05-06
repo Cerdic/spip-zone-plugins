@@ -60,4 +60,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer' => 'Smazat' # MODIF
 );
-
