@@ -21,4 +21,3 @@ Ben noutà lou prefis "chosen_" ajustat en lou parametre "value" per permetre de
 	'chosen_nom' => 'Chosen (fork de koenpunt)',
 	'chosen_slogan' => 'Integrà la biblioutèca Chosen en SPIP (fork de koenpunt)'
 );
-

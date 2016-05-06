@@ -21,4 +21,3 @@ Apreciar el prefijo ’chosen_’ añadido en el parámetro ’value’ para per
 	'chosen_nom' => 'Chosen (fork de koenpunt)',
 	'chosen_slogan' => 'Integrar la biblioteca Chosen en SPIP (fork de koenpunt)'
 );
-

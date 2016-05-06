@@ -16,4 +16,3 @@ Trieda CSS <code>chosen</code> v prvku code><select></code> automaticky spustí
 	'chosen_slogan' => 'Zaviesť knižnicu Chosen do SPIPu
 (vidlica koenpunt)'
 );
-

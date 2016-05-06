@@ -19,4 +19,3 @@ Bien noter le préfixe "chosen_" ajouté dans le paramètre "value" pour permett
 	'chosen_nom' => 'Chosen (fork de koenpunt)',
 	'chosen_slogan' => 'Intégrer la librairie Chosen dans SPIP (fork de koenpunt)'
 );
-

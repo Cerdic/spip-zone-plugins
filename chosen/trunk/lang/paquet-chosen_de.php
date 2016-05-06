@@ -20,4 +20,3 @@ Das Präfix "chosen_" , wird dem Wert "value" hunzugefügt, um die von Chosen er
 	'chosen_nom' => 'Chosen (Tork von koenpunt)',
 	'chosen_slogan' => 'Integriert die Bibliothe Chosen in SPIP (Fork von koenpunt)'
 );
-
