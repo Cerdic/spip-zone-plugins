@@ -31,4 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mauvaise_reception' => 'Oops! Erro no recebimento do arquivo. Tente de novo...'
 );
 
-?>
