@@ -39,4 +39,3 @@ vous pouvez utiliser cet outil pour le transformer automatiquement en événemen
 	'titre_migrer_agenda' => 'Migrer un Agenda d’articles'
 );
 
-?>
