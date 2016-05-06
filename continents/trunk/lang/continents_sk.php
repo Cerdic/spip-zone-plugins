@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'continent_titre' => 'Kontinenty',
 	'continents_titre' => 'Kontinenty'
 );
-
-?>
