@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function tradlang_declarer_tables_interfaces($interface){
+function tradlang_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['tradlangs'] = 'tradlangs';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_des_tables']['tradlangs_bilans'] = 'tradlangs_bilans';
@@ -19,7 +19,7 @@ function tradlang_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function tradlang_declarer_tables_objets_sql($tables){
+function tradlang_declarer_tables_objets_sql($tables) {
 	$tables['spip_auteurs']['field']['langues_preferees'] = "text DEFAULT '' NOT NULL";
 	$tables['spip_grappes']['champs_versionnes'][] = 'jointure_tradlang_modules';
 	$tables['spip_tradlang_modules'] = array(
@@ -47,12 +47,12 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"limite_trad" => "tinyint NOT NULL DEFAULT 0"
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_tradlang_module",
-			"UNIQUE" => "module"
+			'PRIMARY KEY' => 'id_tradlang_module',
+			'UNIQUE' => 'module'
 		),
 		'join' => array(
-			"id_tradlang_module"=>"id_tradlang_module",
-			"module"=>"module"
+			'id_tradlang_module' => 'id_tradlang_module',
+			'module' => 'module'
 		),
 		'rechercher_champs' => array(
 			'module' => 8,
@@ -82,7 +82,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"module" => "varchar(32) NOT NULL default 0",
 			"lang" => "varchar(10) DEFAULT '' NOT NULL",
 			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-			"str" => "text NOT NULL", 
+			"str" => "text NOT NULL",
 			"comm" => "text NOT NULL",
 			"statut" => "varchar(16) NOT NULL default 'NEW'",
 			"traducteur" => "varchar(32) default NULL",
@@ -94,21 +94,25 @@ function tradlang_declarer_tables_objets_sql($tables){
 		/**
 		 * Laisser le statut ici sinon on n'agit plus sur le pipeline pre_boucle
 		 */
-		'statut' => array( 
-			array('champ'=>'statut','publie'=>'OK,NEW,MODIF,RELIRE','previsu'=>'OK,NEW,MODIF,RELIRE','exception'=>'statut') 
+		'statut' => array(
+			array(
+				'champ'=>'statut',
+				'publie'=>'OK,NEW,MODIF,RELIRE',
+				'previsu'=>'OK,NEW,MODIF,RELIRE',
+				'exception'=>'statut')
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_tradlang",
-			"UNIQUE" => "id,module,lang",
-			"INDEX" => "id",
-			"INDEX" => "module",
-			"INDEX" => "module,lang",
-			"INDEX" => "id_tradlang_module",
-			"INDEX" => "statut"
+			'PRIMARY KEY' => 'id_tradlang',
+			'UNIQUE' => 'id,module,lang',
+			'INDEX' => 'id',
+			'INDEX' => 'module',
+			'INDEX' => 'module,lang',
+			'INDEX' => 'id_tradlang_module',
+			'INDEX' => 'statut'
 		),
 		'join' => array(
-			"id_tradlang"=>"id_tradlang",
-			"module"=>"module"
+			'id_tradlang' => 'id_tradlang',
+			'module' =>'module'
 		),
 		'statut_images' => array(
 			'OK' => 'tradlang_statut_ok.png',
@@ -151,9 +155,9 @@ function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
 			"maj" => "timestamp NOT NULL");
 
 	$spip_tradlangs_bilans_keys = array(
-			"UNIQUE id_module_lang" => "id_tradlang_module,lang",
-			"KEY module" => "module",
-			"KEY lang" => "lang"
+			'UNIQUE id_module_lang' => 'id_tradlang_module,lang',
+			'KEY module' => 'module',
+			'KEY lang" => 'lang'
 	);
 
 	$tables_auxiliaires['spip_tradlangs_bilans'] = array(
@@ -162,4 +166,3 @@ function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
 
 	return $tables_auxiliaires;
 }
-?>
