@@ -235,5 +235,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'votre_commande_sur' => '@nom@ : votre commande'
 );
-
-?>

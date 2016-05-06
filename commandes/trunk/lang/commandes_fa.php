@@ -54,5 +54,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_retour' => 'برگشت',
 	'statut_retour_partiel' => 'مبلغ برگشتي'
 );
-
-?>
