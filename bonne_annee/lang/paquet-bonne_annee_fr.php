@@ -13,4 +13,3 @@ Ajouter <code>#INCLURE{fond=bonne_annee}</code> dans vos pages.',
 	'bonne_annee_nom' => 'Bonne année',
 	'bonne_annee_slogan' => 'Souhaiter la bonne année sur votre site'
 );
-
