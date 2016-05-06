@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'collectionjson_nom' => 'Collection+JSON API',
 	'collectionjson_slogan' => 'Implement a REST API for JSON objects of SPIP'
 );
-
-?>
