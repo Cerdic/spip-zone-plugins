@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ancresdouces_slogan' => 'Anker werden gleitend angesteuert.'
 );
 
-?>

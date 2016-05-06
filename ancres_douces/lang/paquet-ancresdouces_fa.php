@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ancresdouces_slogan' => 'لنگر‌‌هاي نرم'
 );
 
-?>

@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ancresdouces_slogan' => 'Des ancres en douceur'
 );
 
-?>
