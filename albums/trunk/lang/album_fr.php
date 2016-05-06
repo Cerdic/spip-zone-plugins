@@ -147,4 +147,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_albums' => 'Configurer les Albums'
 );
 
-?>
