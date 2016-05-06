@@ -186,6 +186,15 @@ if (!defined('_TAXONOMIE_CACHE_DIR')) {
 	 */
 	define('_TAXONOMIE_CACHE_DIR', _DIR_VAR . _TAXONOMIE_CACHE_NOMDIR);
 }
+if (!defined('_TAXONOMIE_CACHE_FORCER')) {
+	/**
+	 * Indicateur permettant de focer le recalcul du cache systématiquement.
+	 * A n'utiliser que temporairement en mode debug par exemple.
+	 *
+	 * @package SPIP\TAXONOMIE\CACHE
+	 */
+	define('_TAXONOMIE_CACHE_FORCER', false);
+}
 
 
 /**
@@ -342,19 +351,19 @@ function taxon_traduire_champ($champ) {
  *        Contenu du fichier cache. Si le service appelant manipule un tableau il doit le sérialiser avant
  *        d'appeler cette fonction.
  * @param string $service
- * @param int    $tsn
- * @param string $spip_langue
  * @param string $action
+ * @param int    $tsn
+ * @param array  $options
  *
  * @return boolean
  *        Toujours à vrai.
  */
-function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue = '', $action = '') {
+function cache_taxonomie_ecrire($cache, $service, $action, $tsn, $options) {
 	// Création du dossier cache si besoin
 	sous_repertoire(_DIR_VAR, trim(_TAXONOMIE_CACHE_NOMDIR, '/'));
 
 	// Ecriture du fichier cache
-	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $spip_langue, $action);
+	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $action, $options);
 	ecrire_fichier($fichier_cache, $cache);
 
 	return true;
@@ -362,47 +371,57 @@ function cache_taxonomie_ecrire($cache, $service, $tsn, $spip_langue = '', $acti
 
 
 /**
- * Construit le nom du fichier cache en fonction du service, du taxon concernés et
+ * Construit le nom du fichier cache en fonction du service, de l'action, du taxon concernés et
  * d'autres critères optionnels.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
  * @param string $service
- * @param int    $tsn
- * @param string $spip_langue
  * @param string $action
+ * @param int    $tsn
+ * @param array  $options
  *
  * @return string
  */
-function cache_taxonomie_nommer($service, $tsn, $spip_langue = '', $action = '') {
+function cache_taxonomie_nommer($service, $action, $tsn, $options) {
 	// Construction du chemin complet d'un fichier cache
 	$fichier_cache = _TAXONOMIE_CACHE_DIR
 					 . $service
 					 . ($action ? '_' . $action : '')
-					 . '_' . $tsn
-					 . ($spip_langue ? '_' . $spip_langue : '')
-					 . '.txt';
+					 . '_' . $tsn;
+
+	// On complète le nom avec les options éventuelles
+	if ($options) {
+		foreach ($options as $_option => $_valeur) {
+			if ($_valeur) {
+				$fichier_cache .= '_' . $_valeur;
+			}
+		}
+	}
+
+	// On rajoute l'extension texte
+	$fichier_cache .= '.txt';
 
 	return $fichier_cache;
 }
 
 /**
- * Vérifie l'existence du fichier cache pour un taxon et un service donnés.
+ * Vérifie l'existence du fichier cache pour un taxon, un service et une actions donnés.
  * Si le fichier existe la fonction retourne son chemin complet.
  *
  * @package SPIP\TAXONOMIE\CACHE
  *
  * @param string $service
- * @param int    $tsn
- * @param string $spip_langue
  * @param string $action
+ * @param int    $tsn
+ * @param array  $options
  *
  * @return string
  *        Chemin du fichier cache si il existe ou chaine vide sinon.
  */
-function cache_taxonomie_existe($service, $tsn, $spip_langue = '', $action = '') {
+function cache_taxonomie_existe($service, $action, $tsn, $options = array()) {
 	// Contruire le nom du fichier cache
-	$fichier_cache = cache_taxonomie_nommer($service, $tsn, $spip_langue, $action);
+	$fichier_cache = cache_taxonomie_nommer($service, $action, $tsn, $options);
 
 	// Vérification de l'existence du fichier:
 	// - chaine vide si le fichier n'existe pas

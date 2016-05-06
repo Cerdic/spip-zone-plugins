@@ -46,7 +46,8 @@ $GLOBALS['wikipedia_language'] = array(
 // ----------------------------------------------------------------------------
 
 /**
- * Renvoie le texte de la page ou d'une section de la page à partir d'une phrase de recherche.
+ * Renvoie, à partir d'une phrase de recherche, soit le texte de la page ou d'une section de la page,
+ * soit la liste des langues de la page.
  * Cette phrase de recherche est toujours le nom scientifique du taxon dans l'utilisation qui en est faite
  * par le plugin Taxonomie.
  * Le résultat de la requête est mis en cache pour une durée de plusieurs jours afin d'être servi à nouveau
@@ -58,57 +59,65 @@ $GLOBALS['wikipedia_language'] = array(
  * @uses api2url_wikipedia()
  * @uses service_requeter_json()
  *
+ * @param string   $resource
+ *      Chaine indiquant le type d'information à récupérer pour le taxon donné:
+ *      - `text`      : le texte de l'article ou d'une section de l'article
+ * 		- `languages` : la liste des langues de l'article concerné
  * @param int      $tsn
- *        Identifiant ITIS du taxon, le TSN. Etant donné que ce service s'utilise toujours sur un taxon
- *        existant le TSN existe toujours. Il sert à créer le fichier cache.
+ *      Identifiant ITIS du taxon, le TSN. Etant donné que ce service s'utilise toujours sur un taxon
+ *      existant le TSN existe toujours. Il sert à créer le fichier cache.
  * @param string   $search
- *        Chaine de recherche qui est en généralement le nom scientifique du taxon.
+ *      Chaine de recherche qui est en généralement le nom scientifique du taxon.
  * @param string   $language
- *        Langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es`...
+ *      Langue au sens de Wikipedia qui préfixe l'url du endpoint. Vaut `fr`, `en`, `es`...
  * @param int|null $section
- *        Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null` pour tout la page.
- *        Cet argument est optionnel.
+ *      Section de page dont le texte est à renvoyer. Entier supérieur ou égal à 0 ou `null` pour tout la page.
+ *      Cet argument est optionnel.
  *
- * @return string
- *        Texte trouvé rédigé en mediawiki ou chaine vide sinon. Pour traduire le texte en SPIP
- *        il est nécessaire d'utiliser le plugin Convertisseur. Néanmoins, le texte même traduit
- *        doit être remanié manuellement.
+ * @return string|array
+ *      Texte trouvé rédigé en mediawiki ou chaine vide sinon. Pour traduire le texte en SPIP
+ *      il est nécessaire d'utiliser le plugin Convertisseur. Néanmoins, le texte même traduit
+ *      doit être remanié manuellement.
  */
-function wikipedia_get($tsn, $search, $language, $section = null) {
-	$information = array('texte' => '');
+function wikipedia_get($resource, $tsn, $search, $options = array()) {
+
+	// Initialisation du tableau de sortie et du tableau d'options
+	$information = array();
 
 	// Si le cache est absent ou invalide on le recrée en utilisant le service web Wikipedia
-	// sinon on le litet on revoie le tableau du contenu désérialisé.
+	// sinon on le lit et on renvoie le tableau du contenu désérialisé.
 	include_spip('inc/taxonomer');
-	if (!$file_cache = cache_taxonomie_existe('wikipedia', $tsn, $language)
-		or !filemtime($file_cache)
-		or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
-	) {
+	if (!$file_cache = cache_taxonomie_existe('wikipedia', $resource, $tsn, $options)
+	or !filemtime($file_cache)
+	or (time() - filemtime($file_cache) > _TAXONOMIE_WIKIPEDIA_CACHE_TIMEOUT)
+	or (_TAXONOMIE_CACHE_FORCER)) {
 		// Normaliser la recherche: trim et mise en lettres minuscules
 		$search = strtolower(trim($search));
 
 		// Construire l'URL de la function de recherche par nom vernaculaire.
 		// L'encodage de la recherche est effectuée dans la fonction.
-		$url = api2url_wikipedia('json', 'query', $language, $search, $section);
+		$url = api2url_wikipedia('json', 'query', $resource, $search, $options);
 
 		// Acquisition des données spécifiées par l'url
-		include_spip('inc/taxonomer');
 		$data = service_requeter_json($url);
 
 		// Récupération de la section demandée.
 		if (isset($data['batchcomplete'])
-			and isset($data['query']['pages'])
-		) {
+		and isset($data['query']['pages'])) {
 			$reponses = $data['query']['pages'];
 			$page = reset($reponses);
 			$id = key($reponses);
-			if (($id > 0) and !isset($page['missing']) and isset($page['revisions'][0]['*'])) {
-				$information['texte'] = $page['revisions'][0]['*'];
+			if (($id > 0) and !isset($page['missing'])) {
+				if (($resource == 'text') and isset($page['revisions'][0]['*'])) {
+					$information[$resource] = $page['revisions'][0]['*'];
+				} elseif (($resource == 'languages')) {
+					$information[$resource] = $page['revisions'][0]['langlinks'];
+				}
 			}
 		}
 
 		// Mise en cache
-		cache_taxonomie_ecrire(serialize($information), 'wikipedia', $tsn, $language);
+		cache_taxonomie_ecrire(serialize($information), 'wikipedia', $resource, $tsn, $options);
 	} else {
 		// Lecture et désérialisation du cache
 		lire_fichier($file_cache, $information);
@@ -192,28 +201,42 @@ function wikipedia_credit($id_taxon, $informations) {
  *        Format du résultat de la requête. Prend les valeurs `json` ou `xml`. Le `json` est recommandé.
  * @param string   $action
  *        Nom de l'action du service Wikipedia. La seule action `query` est utilisée dans cette API.
- * @param string   $language
- *        Langue au sens de Wikipedia en minuscules. Prend les valeurs `fr`, `en`, `es`, etc.
+ * @param string   $resource
+ *      Chaine indiquant le type d'information à récupérer pour le taxon donné:
+ *      - `text`      : le texte de l'article ou d'une section de l'article
+ * 		- `languages` : la liste des langues de l'article concerné
  * @param string   $search
  *        Clé de recherche qui est essentiellement le nom scientifique dans l'utilisation normale.
  *        Cette clé doit être encodée si besoin par l'appelant.
+ * @param string   $language
+ *        Langue au sens de Wikipedia en minuscules. Prend les valeurs `fr`, `en`, `es`, etc.
  * @param int|null $section
  *        Section de la page à renvoyer. Valeur entière de 0 à n ou null si on veut toute la page.
  *
  * @return string
  *        L'URL de la requête au service
  */
-function api2url_wikipedia($format, $action, $language, $search, $section) {
+function api2url_wikipedia($format, $action, $resource, $search, $options) {
 
-	// Construire l'URL de l'api sollicitée
+	// Construire la partie standard de l'URL de l'api sollicitée
+	$language = !empty($options['language']) ? $options['language'] : 'fr';
 	$url = str_replace('%langue%', $language, _TAXONOMIE_WIKIPEDIA_ENDPOINT_BASE_URL) . '?'
 		   . 'action=' . $action
-		   . '&meta=siteinfo|wikibase'
-		   . '&prop=revisions&rvprop=content'
-		   . (!is_null($section) ? '&rvsection=' . $section : '')
-		   . '&continue=&redirects=1'
 		   . '&format=' . $format
-		   . '&titles=' . rawurlencode(ucfirst($search));
+		   . '&titles=' . rawurlencode(ucfirst($search))
+		   . '&continue=&redirects=1';
+
+	// Finalisation de l'URL suivant le type de ressource demandée.
+	switch ($resource) {
+		case 'text':
+			$url .= '&meta=siteinfo|wikibase'
+			     . '&prop=revisions&rvprop=content'
+	  		     . (!empty($options['section']) ? '&rvsection=' . $options['section'] : '');
+	  		break;
+		case 'languages':
+			$url .= '&prop=langlinks&lllimit=500';
+			break;
+	}
 
 	return $url;
 }
