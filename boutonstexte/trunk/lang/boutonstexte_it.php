@@ -25,4 +25,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_seulement' => 'Solo il testo'
 );
 
-?>

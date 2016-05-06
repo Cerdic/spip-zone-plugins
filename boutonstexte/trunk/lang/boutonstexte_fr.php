@@ -37,4 +37,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_icones' => 'Textes des bulles d’icones'
 );
 
-?>

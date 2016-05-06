@@ -39,4 +39,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_icones' => 'نص بالونات المساعدة'
 );
 
-?>
