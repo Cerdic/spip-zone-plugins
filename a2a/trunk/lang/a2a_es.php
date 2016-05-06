@@ -72,4 +72,3 @@ La descripción puede ser una cadena de idioma. ',
 	'voir' => 'Ver'
 );
 
-?>
