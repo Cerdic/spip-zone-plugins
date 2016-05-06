@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'amap_nom' => 'AMAP',
 	'amap_slogan' => 'Riadenie košíkov a členov pre AMAP'
 );
-

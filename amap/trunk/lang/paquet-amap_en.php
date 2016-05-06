@@ -15,4 +15,3 @@ The baskets are created and allocated to a subscriber who can make their basket 
 	'amap_nom' => 'CSA',
 	'amap_slogan' => 'Baskets and subscribers management for CSA'
 );
-

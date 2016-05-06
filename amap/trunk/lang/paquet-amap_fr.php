@@ -13,4 +13,3 @@ Les paniers sont créés et attribués à un amapien, ce dernier pourra mettre �
 	'amap_nom' => 'AMAP',
 	'amap_slogan' => 'Gestion des paniers et adhérents pour les AMAP'
 );
-
