@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_utilisateurs_label' => 'Utilisateurs supplémentaires autorisés'
 );
 
-?>
