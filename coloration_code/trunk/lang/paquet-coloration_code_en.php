@@ -26,5 +26,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: highlights #TEXTE with
 	'coloration_code_nom' => 'Code higlighting',
 	'coloration_code_slogan' => 'Syntax higlighting of code placed in articles'
 );
-
-?>

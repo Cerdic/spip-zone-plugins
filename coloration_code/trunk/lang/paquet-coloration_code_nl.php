@@ -26,5 +26,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: kleurt #TEXTE met de t
 	'coloration_code_nom' => 'Gekleurde Code',
 	'coloration_code_slogan' => 'Pas een op syntax gebaseerde kleurcode toe op broncode in artikelen'
 );
-
-?>

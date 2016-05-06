@@ -25,5 +25,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colore #TEXTE emb’
 	'coloration_code_nom' => 'Coulouramen Code',
 	'coloration_code_slogan' => 'Coulouramen sintàssicou dóu code sourgent en lu article'
 );
-
-?>

@@ -27,5 +27,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colore #TEXTE avec le
 	'coloration_code_nom' => 'كد برجسته سازي ',
 	'coloration_code_slogan' => 'سينتاكس برجسته‌ سازي منبع كد در داخل مقاله‌ها'
 );
-
-?>

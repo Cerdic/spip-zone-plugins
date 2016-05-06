@@ -26,5 +26,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code>:  colore #TEXTE s jazyk
 	'coloration_code_nom' => 'Kód zvýraznenia',
 	'coloration_code_slogan' => 'Zvýraznenie syntaxe zdrojového kódu v článkoch'
 );
-
-?>

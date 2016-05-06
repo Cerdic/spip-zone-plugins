@@ -24,5 +24,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colore #TEXTE avec l
 	'coloration_code_nom' => 'Coloration Code',
 	'coloration_code_slogan' => 'Coloration syntaxique du code source dans les articles'
 );
-
-?>

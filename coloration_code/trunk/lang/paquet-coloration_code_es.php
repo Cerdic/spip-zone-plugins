@@ -27,5 +27,3 @@ _ <code>#TEXTE**|coloration_code_color{spip,code}</code> : colorea #TEXTE con el
 	'coloration_code_nom' => 'Código de coloración',
 	'coloration_code_slogan' => 'Coloración de sintaxis del código fuente de los artículos'
 );
-
-?>
