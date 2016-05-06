@@ -30,4 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mauvaise_reception' => 'Tijdens de ontvangst van het bestand is een fout opgetreden. Probeer opnieuw...'
 );
-

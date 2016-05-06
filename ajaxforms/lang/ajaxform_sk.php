@@ -30,4 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mauvaise_reception' => 'Jaj! Pri prijímaní súboru sa vyskytla chyba. Prosím, skúste to znova...'
 );
-
