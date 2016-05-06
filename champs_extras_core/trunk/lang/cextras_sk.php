@@ -21,4 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zbug_balise_argument_non_texte' => 'Parameter @nb@ v tagu @balise@ musí byť typu "text"'
 );
-

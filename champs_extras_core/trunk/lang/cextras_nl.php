@@ -21,4 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zbug_balise_argument_non_texte' => 'Argument @nb@ van het baken @balise@ moet van het type tekst zijn'
 );
-
