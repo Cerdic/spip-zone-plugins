@@ -96,4 +96,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_camera' => 'Γλώσσα της κάμερας',
 	'titre_logo_camera' => 'Εικονίδιο κάμερας'
 );
-

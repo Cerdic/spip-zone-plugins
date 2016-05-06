@@ -98,4 +98,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_camera' => 'Camera language',
 	'titre_logo_camera' => 'Camera logo'
 );
-
