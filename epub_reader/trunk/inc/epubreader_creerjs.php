@@ -5,58 +5,62 @@
  * Licence GPL v3
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Créer le js qui sera utilisé par monocle
- * 
- * @param int $id_document 
+ *
+ * @param int $id_document
  * 		l'identifiant numérique du document
- * @param string $id 
+ * @param string $id
  * 		l'identifiant dans le dom
  * @param int $hauteur
  * 		La hauteur d'affichage
- * @return string|false 
+ * @return string|false
  * 		Le code javascript si possible
  */
-function inc_epubreader_creerjs_dist($id_document,$id=false,$hauteur=600) {
-	if($repertoire = epubreader_unzip($id_document)){
+function inc_epubreader_creerjs_dist($id_document, $id = false, $hauteur = 600) {
+	if ($repertoire = epubreader_unzip($id_document)) {
 		include_spip('inc/xml');
 		$base_root = $repertoire;
-		if(file_exists($repertoire.'META-INF/container.xml')){
+		if (file_exists($repertoire.'META-INF/container.xml')) {
 			$arbre_container = spip_xml_load($repertoire.'/META-INF/container.xml');
-			spip_xml_match_nodes(",^rootfile ,",$arbre_container, $rootfiles);
+			spip_xml_match_nodes(',^rootfile ,', $arbre_container, $rootfiles);
 			$items_manifest = array();
-			if(is_array($rootfiles)){
-				foreach($rootfiles as $rootfile => $info){
-					$file = extraire_attribut("<$rootfile>",'full-path');
-					if($file){
+			if (is_array($rootfiles)) {
+				foreach ($rootfiles as $rootfile => $info) {
+					$file = extraire_attribut("<$rootfile>", 'full-path');
+					if ($file) {
 						$base_root = dirname($repertoire.$file);
 						$arbre_root = spip_xml_load($repertoire.$file);
-						spip_xml_match_nodes(",^manifest,",$arbre_root, $manifest);
+						spip_xml_match_nodes(',^manifest,', $arbre_root, $manifest);
 						/**
 						 * On parcourt la partie manifest
 						 * et on remplit $items_manifest
 						 */
-						if(is_array($manifest)){
-							foreach($manifest['manifest'][0] as $item => $info_item){
-								if(preg_match('/^item.*href=["\'](.*)["\'].*id=["\'](.*)["\'].*/Uims',$item,$item_match))
+						if (is_array($manifest)) {
+							foreach ($manifest['manifest'][0] as $item => $info_item) {
+								if (preg_match('/^item.*href=["\'](.*)["\'].*id=["\'](.*)["\'].*/Uims', $item, $item_match)) {
 									$items_manifest[$item_match[2]] = array('content'=>url_absolue($base_root.'/'.$item_match[1]),'id'=>$item_match[2]);
-								else if(preg_match('/^item.*id=["\'](.*)["\'].*href=["\'](.*)["\'].*/Uims',$item,$item_match))
+								} elseif (preg_match('/^item.*id=["\'](.*)["\'].*href=["\'](.*)["\'].*/Uims', $item, $item_match)) {
 									$items_manifest[$item_match[1]] = array('content'=>url_absolue($base_root.'/'.$item_match[2]),'id'=>$item_match[1]);
+								}
 							}
 						}
 						/**
 						 * On parcourt la partie <spine></spine> et on range nos items comme dans cette partie
 						 */
-						if(count($items_manifest) > 0){
-							spip_xml_match_nodes(",^spine,",$arbre_root, $spines);
-							if(is_array($spines)){
+						if (count($items_manifest) > 0) {
+							spip_xml_match_nodes(',^spine,', $arbre_root, $spines);
+							if (is_array($spines)) {
 								$items_spine = array();
-								foreach($spines as $spine){
-									foreach($spine[0] as $itemref => $info_itemref){
-										if(preg_match('/^itemref.*idref=["\'](.*)["\'].*/Uims',$itemref,$itemref_match))
+								foreach ($spines as $spine) {
+									foreach ($spine[0] as $itemref => $info_itemref) {
+										if (preg_match('/^itemref.*idref=["\'](.*)["\'].*/Uims', $itemref, $itemref_match)) {
 											$items_spine[$itemref_match[1]] = $items_manifest[$itemref_match[1]];
+										}
 									}
 								}
 							}
@@ -64,32 +68,33 @@ function inc_epubreader_creerjs_dist($id_document,$id=false,$hauteur=600) {
 					}
 				}
 			}
-			if(is_array($items_spine)){
+			if (is_array($items_spine)) {
 				$items_manifest = $items_spine;
 			}
 		}
-		if($ncx = preg_files($repertoire, '[.]ncx$')){
-			foreach($ncx as $toc){
+		if ($ncx = preg_files($repertoire, '[.]ncx$')) {
+			foreach ($ncx as $toc) {
 				$base = dirname($toc);
-				lire_fichier($toc,$contenu);
-				$contenu = preg_replace(',<!DOCTYPE(.*)>,Uims','',$contenu);
+				lire_fichier($toc, $contenu);
+				$contenu = preg_replace(',<!DOCTYPE(.*)>,Uims', '', $contenu);
 				$arbre_toc = spip_xml_parse($contenu);
-				spip_xml_match_nodes(",^navMap,",$arbre_toc, $navmaps);
-				foreach($navmaps as $navmap => $nav){
-					foreach($nav[0] as $navpoints => $navpoint){
+				spip_xml_match_nodes(',^navMap,', $arbre_toc, $navmaps);
+				foreach ($navmaps as $navmap => $nav) {
+					foreach ($nav[0] as $navpoints => $navpoint) {
 						$new_navpoint = array();
-						foreach($navpoint[0] as $info => $data){
-							if(preg_match(',navLabel,',$info))
+						foreach ($navpoint[0] as $info => $data) {
+							if (preg_match(',navLabel,', $info)) {
 								$new_navpoint['label'] = $data[0]['text'][0];
-							else if(preg_match(',content src="(.*)",',$info,$matches))
+							} elseif (preg_match(',content src="(.*)",', $info, $matches)) {
 								$new_navpoint['content'] = url_absolue($base.'/'.$matches[1]);
+							}
 						}
 						$navpoint_final[$new_navpoint['content']] = $new_navpoint;
 					}
 				}
-				foreach($navpoint_final as $navpoint_final_content => $navpoint_final_content_infos){
-					foreach($items_manifest as $item_manifest => $item_manifest_info){
-						if($navpoint_final_content == $item_manifest_info['content']){
+				foreach ($navpoint_final as $navpoint_final_content => $navpoint_final_content_infos) {
+					foreach ($items_manifest as $item_manifest => $item_manifest_info) {
+						if ($navpoint_final_content == $item_manifest_info['content']) {
 							$items_manifest[$item_manifest]['label'] = $navpoint_final_content_infos['label'];
 							break;
 						}
@@ -97,27 +102,28 @@ function inc_epubreader_creerjs_dist($id_document,$id=false,$hauteur=600) {
 				}
 			}
 		}
-		if(count($items_manifest) > 0){
+		if (count($items_manifest) > 0) {
 			$components_done = array();
 			$components = $contents = $component = '';
-			foreach($items_manifest as $item_manifest => $item){
-				$component_normal = preg_replace(',#.*,','',$item['content']);
-				if(!in_array($component_normal,$components_done))
+			foreach ($items_manifest as $item_manifest => $item) {
+				$component_normal = preg_replace(',#.*,', '', $item['content']);
+				if (!in_array($component_normal, $components_done)) {
 					$components_done[] = "\"$component_normal\"";
+				}
 				$contents .= "{
 					title: '".texte_script($item['label'])."',
 					src: '".$item['content']."',
 				},";
 				$component .= '\''.$item['content'].'\':\'<h3>'.texte_script($item['label']).'</h3>\',';
 			}
-			$components = implode(',',$components_done);
+			$components = implode(',', $components_done);
 
 			$js = "<script type='text/javascript'>
 var base = '".$base_root."';
 var bookData = {
 	getComponents: function () {
 		return [
-			".$components."
+			' . $components . '
 		];
 	},
 	getContents: function () {
@@ -148,52 +154,56 @@ $('#".$id."').height(parseInt(".$hauteur."));
 
 // Initialize the reader element.
 Monocle.Reader('".$id."', bookData, { panels: Monocle.Panels.IMode });
-</script>";	
+</script>";
 			return $js;
 		}
 		return false;
-	}else
+	} else {
 		return false;
+	}
 }
 
 /**
  * Dézip un document epub dans son répertoire de cache
  * Le répertoire de cache défini est local/cache-epub/id_document
- * 
+ *
  * @param int $id_document
  * 		l'identifiant numérique du document
  * @return string|false $rep_dest
 		retourne le chemin du répertoire de cache ou false
  */
-function epubreader_unzip($id_document=false,$fichier=false){
+function epubreader_unzip($id_document = false, $fichier = false) {
 	include_spip('inc/documents');
-	if(intval($id_document)){
-		$document = sql_fetsel('*','spip_documents','id_document='.intval($id_document));
-		
+	if (intval($id_document)) {
+		$document = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
+
 		$fichier = get_spip_doc($document['fichier']);
-		if(!file_exists($fichier))
+		if (!file_exists($fichier)) {
 			return false;
+		}
 	}
-	
+
 	include_spip('inc/flock');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-epub/');
-	$rep_dest = sous_repertoire(_DIR_VAR.'cache-epub/',(intval($id_document) ? $id_document : md5($fichier)));
-	
+	$rep_dest = sous_repertoire(_DIR_VAR.'cache-epub/', (intval($id_document) ? $id_document : md5($fichier)));
+
 	include_spip('inc/pclzip');
 	$zip = new PclZip(get_spip_doc($fichier));
-	
+
 	$ok = $zip->extract(
-		PCLZIP_OPT_PATH,$rep_dest,
-		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
+		PCLZIP_OPT_PATH,
+		$rep_dest,
+		PCLZIP_OPT_SET_CHMOD,
+		_SPIP_CHMOD,
 		PCLZIP_OPT_REPLACE_NEWER,
-		PCLZIP_OPT_REMOVE_PATH, ''
+		PCLZIP_OPT_REMOVE_PATH,
+		''
 	);
 	if ($zip->error_code < 0) {
-		spip_log('Erreur de décompression ' . $zip->error_code .' pour le fichier: ' . $fichier,'epub_reader');
+		spip_log('Erreur de décompression ' . $zip->error_code .' pour le fichier: ' . $fichier, 'epub_reader');
 		return false;
 	}
-	else
-		return $rep_dest;
+	return $rep_dest;
 }
 
 /**
@@ -202,60 +212,60 @@ function epubreader_unzip($id_document=false,$fichier=false){
  * - Si on a bien un fichier META-INF/container.xml, on l'analyse pour trouver le document root
  * - On analyse chaque document "root"
  * Renvoie toutes les métas dublin core contenue dans le document.
- * 
+ *
  * On change certains noms de métas (title devient titre, subject devient descriptif, rights devient credits)
  * pour être compatible avec la table spip_documents
- * 
+ *
  * TODO Déplacer cette fonction dans metadatas/epub.php
- * 
+ *
  * @param int $id_document
  * 		l'identifiant numérique du document
  * @return array $infos
  * 		un array des métas du document
  */
-function epubreader_recuperer_metas($id_document=false,$fichier=false){
-	if($repertoire = epubreader_unzip($id_document,$fichier)){
-		if(file_exists($repertoire.'META-INF/container.xml')){
+function epubreader_recuperer_metas($id_document = false, $fichier = false) {
+	if ($repertoire = epubreader_unzip($id_document, $fichier)) {
+		if (file_exists($repertoire. 'META-INF/container.xml')) {
 			include_spip('inc/xml');
 			$arbre_container = spip_xml_load($repertoire.'META-INF/container.xml');
-			spip_xml_match_nodes(",^rootfile ,",$arbre_container, $rootfiles);
-			if(is_array($rootfiles)){
-				foreach($rootfiles as $rootfile => $info){
-					$file = extraire_attribut("<$rootfile>",'full-path');
-					if($file){
+			spip_xml_match_nodes(',^rootfile ,', $arbre_container, $rootfiles);
+			if (is_array($rootfiles)) {
+				foreach ($rootfiles as $rootfile => $info) {
+					$file = extraire_attribut("<$rootfile>", 'full-path');
+					if ($file) {
 						$file_dir = dirname($file);
 						$arbre_root = spip_xml_load($repertoire.$file);
-						spip_xml_match_nodes(",^dc:,",$arbre_root, $dublins);
-						if(is_array($dublins)){
-							foreach($dublins as $dublin => $info_dublin){
-								if(preg_match('/dc:title/',$dublin) && (strlen($info_dublin[0]) > 0)){
+						spip_xml_match_nodes(',^dc:,', $arbre_root, $dublins);
+						if (is_array($dublins)) {
+							foreach ($dublins as $dublin => $info_dublin) {
+								if (preg_match('/dc:title/', $dublin) && (strlen($info_dublin[0]) > 0)) {
 									$infos['titre'] = trim(textebrut(translitteration($info_dublin[0])));
-								}else if(preg_match('/dc:subject/',$dublin) && (strlen($info_dublin[0]) > 0)){
+								} elseif (preg_match('/dc:subject/', $dublin) && (strlen($info_dublin[0]) > 0)) {
 									$infos['descriptif'] = trim(textebrut(translitteration($info_dublin[0])));
-								}else if(preg_match('/dc:rights/',$dublin) && (strlen($info_dublin[0]) > 0)){
+								} elseif (preg_match('/dc:rights/', $dublin) && (strlen($info_dublin[0]) > 0)) {
 									$infos['credits'] = trim(textebrut(translitteration($info_dublin[0])));
-								}else if(preg_match('/dc:([a-z]*) /',$dublin,$matches) && (strlen($info_dublin[0]) > 0)){
+								} elseif (preg_match('/dc:([a-z]*) /', $dublin, $matches) && (strlen($info_dublin[0]) > 0)) {
 									$infos[$matches[1]] = trim(textebrut(translitteration($info_dublin[0])));
-								}else if(preg_match('/dc:([a-z]*)/',$dublin,$matches) && (strlen($info_dublin[0]) > 0)){
-									if(($matches[1] == 'description') && !$infos['descriptif']){
+								} elseif (preg_match('/dc:([a-z]*)/', $dublin, $matches) && (strlen($info_dublin[0]) > 0)) {
+									if (($matches[1] == 'description') && !$infos['descriptif']) {
 										$infos['descriptif'] = trim(textebrut(translitteration($info_dublin[0])));
 									}
 									$infos[$matches[1]] = trim(textebrut(translitteration($info_dublin[0])));
 								}
 							}
 						}
-						spip_xml_match_nodes(",^meta.*name,",$arbre_root, $metas);
-						if(is_array($metas)){
-							foreach($metas as $meta => $info_meta){
-								if(preg_match('/.*name=["\']cover["\'].*content=["\'](.*)["\'].*/',$meta,$meta_match) OR preg_match('/.*content=["\'](.*)["\'].*name=["\']cover["\'].*/',$meta,$meta_match)){
-									spip_xml_match_nodes(",^item.*href=['\"].*['\"].*id=['\"]".$meta_match[1]."['\"],",$arbre_root, $covers);
+						spip_xml_match_nodes(',^meta.*name,', $arbre_root, $metas);
+						if (is_array($metas)) {
+							foreach ($metas as $meta => $info_meta) {
+								if (preg_match('/.*name=["\']cover["\'].*content=["\'](.*)["\'].*/', $meta, $meta_match) or preg_match('/.*content=["\'](.*)["\'].*name=["\']cover["\'].*/', $meta, $meta_match)) {
+									spip_xml_match_nodes(",^item.*href=['\"].*['\"].*id=['\"]".$meta_match[1]."['\"],", $arbre_root, $covers);
 									/**
 									 * On parcourt les items trouvés pour retrouver le chemin de la cover si elle existe
 									 */
-									if(is_array($covers)){
-										foreach($covers as $cover => $info_cover){
-											preg_match('/^item.*href=["\'](.*)["\'].*id=["\']'.$meta_match[1].'["\'].*/Uims',$cover,$cover_match);
-											if(file_exists($repertoire.$cover_match[1])){
+									if (is_array($covers)) {
+										foreach ($covers as $cover => $info_cover) {
+											preg_match('/^item.*href=["\'](.*)["\'].*id=["\']'.$meta_match[1].'["\'].*/Uims', $cover, $cover_match);
+											if (file_exists($repertoire.$cover_match[1])) {
 												$infos['cover'] = $repertoire.$cover_match[1];
 												break;
 											}
@@ -264,12 +274,12 @@ function epubreader_recuperer_metas($id_document=false,$fichier=false){
 								}
 							}
 						}
-						spip_xml_match_nodes(",^reference ,",$arbre_root, $references);
-						if(is_array($references)){
-							foreach($references as $reference => $info_reference){
-								if(preg_match('/.*type=["\']cover["\'].*/s',$reference,$reference_match)){
-									if(preg_match('/ href=["\'](.*\.[a-z]{3})["\'] /',$reference,$cover_match)){
-										if(file_exists($repertoire.$file_dir.'/'.$cover_match[1])){
+						spip_xml_match_nodes(',^reference ,', $arbre_root, $references);
+						if (is_array($references)) {
+							foreach ($references as $reference => $info_reference) {
+								if (preg_match('/.*type=["\']cover["\'].*/s', $reference, $reference_match)) {
+									if (preg_match('/ href=["\'](.*\.[a-z]{3})["\'] /', $reference, $cover_match)) {
+										if (file_exists($repertoire.$file_dir.'/'.$cover_match[1])) {
 											$infos['cover'] = $repertoire.$file_dir.'/'.$cover_match[1];
 											break;
 										}
@@ -277,20 +287,21 @@ function epubreader_recuperer_metas($id_document=false,$fichier=false){
 								}
 							}
 						}
-						if(isset($infos['cover']) && file_exists($infos['cover'])){
-							$ext = substr($infos['cover'],-3);
-							if(in_array($ext,array('gif','png','jpg','jpeg')))
+						if (isset($infos['cover']) && file_exists($infos['cover'])) {
+							$ext = substr($infos['cover'], -3);
+							if (in_array($ext, array('gif', 'png', 'jpg', 'jpeg'))) {
 								$infos['cover'] = $infos['cover'];
-							elseif(in_array($ext,array('xml','html'))){
+							} elseif (in_array($ext, array('xml', 'html'))) {
 								include_spip('inc/flock');
 								$contenu = '';
-								lire_fichier($infos['cover'],$contenu);
-								if(strlen($contenu) > 1){
-									$img = extraire_attribut(extraire_balise($contenu,'img'),'src');
-									if(file_exists(dirname($infos['cover']).'/'.$img))
+								lire_fichier($infos['cover'], $contenu);
+								if (strlen($contenu) > 1) {
+									$img = extraire_attribut(extraire_balise($contenu, 'img'), 'src');
+									if (file_exists(dirname($infos['cover']).'/'.$img)) {
 										$infos['cover'] = dirname($infos['cover']).'/'.$img;
-									else
+									} else {
 										unset($infos['cover']);
+									}
 								}
 							}
 						}
@@ -298,28 +309,26 @@ function epubreader_recuperer_metas($id_document=false,$fichier=false){
 				}
 			}
 		}
-		
+
 		/**
 		 * Normaliser la date pour éviter des soucis d'édition
 		 */
-		if(isset($infos['date']) && $infos['date']){
+		if (isset($infos['date']) && $infos['date']) {
 			include_spip('inc/filtres');
 			if (!$infos['date'] = recup_date($infos['date'])) {
 				$erreur = "Impossible d'extraire la date de ".$infos['date'];
 				unset($infos['date']);
-			}
-			else if (!($infos['date'] = mktime($infos['date'][3], $infos['date'][4], 0, (int)$infos['date'][1], (int)$infos['date'][2], (int)$infos['date'][0])))
+			} elseif (!($infos['date'] = mktime($infos['date'][3], $infos['date'][4], 0, (int)$infos['date'][1], (int)$infos['date'][2], (int)$infos['date'][0]))) {
 				unset($infos['date']);
-			else{
-				$infos['date'] = date("Y-m-d H:i:s", $infos['date']);
+			} else {
+				$infos['date'] = date('Y-m-d H:i:s', $infos['date']);
 				$infos['date'] = vider_date($infos['date']); // enlever les valeurs considerees comme nulles (1 1 1970, etc...)
 			}
-			if (!$infos['date'])
+			if (!$infos['date']) {
 				unset($infos['date']);
+			}
 		}
 		return $infos;
-	}else
-		return array();
+	}
+	return array();
 }
-
-?>
