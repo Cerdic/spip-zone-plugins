@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alerte_urgence_nom' => 'Alerte d’urgence',
 	'alerte_urgence_slogan' => 'Afficher un message urgent à vos visiteurs, rapidement et très visible.'
 );
-
