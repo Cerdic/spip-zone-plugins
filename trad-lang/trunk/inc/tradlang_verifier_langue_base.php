@@ -30,7 +30,8 @@ function inc_tradlang_verifier_langue_base_dist($module, $langue) {
 	 * On crée trois tableaux:
 	 * -* l'ensemble des id de la langue mère non supprimés
 	 * -* l'ensemble des id de la langue cible non supprimés
-	 * -* l'ensemble des id de la langue cible qui ont été supprimés par le passé (dans le cas où l'on doit en récupérer)
+	 * -* l'ensemble des id de la langue cible qui ont été supprimés par le passé
+	 * (dans le cas où l'on doit en récupérer)
 	 */
 	$trad_langue_meres = sql_allfetsel('id', 'spip_tradlangs', 'module = ' . sql_quote($module) . ' AND lang = ' . sql_quote($langue_mere) . ' AND statut !="attic"', '', 'id');
 	foreach ($trad_langue_meres as $trad_langue_mere) {
@@ -79,7 +80,6 @@ function inc_tradlang_verifier_langue_base_dist($module, $langue) {
 				if (in_array($array['id'], $trad_langue_cible_id_attic)) {
 					$titre = $array['id'].' : '.$array['module'].' - '.$langue;
 					sql_updateq('spip_tradlangs', array('statut' => 'MODIF', 'titre' => $titre), 'id = ' . sql_quote($array['id']).' AND lang='.sql_quote($langue).' AND statut="attic"');
-					//spip_log('Recuperation de l\'id '.$array['id'].' de la langue "'.$langue.'" qui était dans l\'attic','tradlang.'._LOG_ERREUR);
 					$recuperees++;
 				} else {
 					$array['orig'] = 0;
