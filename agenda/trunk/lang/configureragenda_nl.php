@@ -31,4 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_configuration' => 'Weergave van de Agenda'
 );
-
