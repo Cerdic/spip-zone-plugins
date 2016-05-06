@@ -2,9 +2,9 @@
 /**
  * Plugin Grappes
  * Licence GPL (c) Matthieu Marcillaud
- * 
+ *
  * Fichier des fonctions du plugin
- * 
+ *
  * @package Grappes\Autorisations
  */
 
@@ -17,9 +17,9 @@ function grappes_autoriser(){}
 
 /**
  * Autorisation de création de grappe
- * 
+ *
  * Retourne la même chose que l'action de modification
- * 
+ *
  * @param string $faire
  * 	Action, ici creer
  * @param string $type
@@ -39,11 +39,11 @@ function autoriser_grappe_creer_dist($faire, $type, $id, $qui, $opt){
 
 /**
  * Autorisation de modification de grappe
- * 
- * On autorise les admins non restreints dans tous les cas 
+ *
+ * On autorise les admins non restreints dans tous les cas
  * (création et modification de toutes les grappes), l'id_admin pour la modification
  * d'une grappe particulière
- * 
+ *
  * @param string $faire
  * 	Action, ici modifier (mais utilisé également pour creer)
  * @param string $type
@@ -64,11 +64,11 @@ function autoriser_grappe_modifier_dist($faire, $type, $id, $qui, $opt){
 
 /**
  * Autorisation d'association d'un objet à une grappe
- * 
+ *
  * Vérifie la configuration de la grappe.
- * 
+ *
  * Si pas de configuration spécifique, seuls les administrateurs et l'id_admin peuvent associer un objet
- * 
+ *
  * @param string $faire
  * 	Action, ici associer
  * @param string $type
@@ -83,14 +83,17 @@ function autoriser_grappe_modifier_dist($faire, $type, $id, $qui, $opt){
  * 	true si autorisé, false sinon
  */
 function autoriser_grappe_associer_dist($faire, $type, $id, $qui, $opt){
+	if($qui['statut'] == '0minirezo' && $qui['webmestre'] == 'oui')
+		return true;
+
 	$res = sql_fetsel(array('id_admin','liaisons','options'),'spip_grappes','id_grappe='.sql_quote($id));
 	if (!is_array($options = @unserialize($res['options'])))
 		$acces = array('0minirezo');
 	else
 		$acces = is_array($options['acces'])?$options['acces']:array('0minirezo');
 
-	// tester le statut de l'auteur
-	if (!in_array($qui['statut'],$acces) OR ($res['id_admin'] != $qui['id_auteur']))
+	// Si le statut n'est pas dans $acces et que l'auteur n'est pas admin
+	if (!in_array($qui['statut'],$acces) && ($res['id_admin'] != $qui['id_auteur']))
 		return false;
 
 	// tester si l'on a le droit d'ajouter cet objet
