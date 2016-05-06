@@ -122,5 +122,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Kontakto forma',
 	'titre_court' => 'Kontaktas'
 );
-
-?>
