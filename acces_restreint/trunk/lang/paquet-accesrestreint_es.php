@@ -16,4 +16,3 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 	'accesrestreint_nom' => 'Acceso restringido',
 	'accesrestreint_slogan' => 'Gestión de zonas de acceso restringido'
 );
-

@@ -16,4 +16,3 @@ _ Toutes les boucles natives de SPIP sont surchargées pour en filtrer les résu
 	'accesrestreint_nom' => 'Accès Restreint',
 	'accesrestreint_slogan' => 'Gestion de zones d’accès restreint'
 );
-
