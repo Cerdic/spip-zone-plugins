@@ -48,4 +48,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'version' => 'Version en cours :'
 );
-
