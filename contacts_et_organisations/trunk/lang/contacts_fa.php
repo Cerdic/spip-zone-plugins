@@ -129,5 +129,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_organisations' => 'مديريت سازمان‌ها',
 	'titre_page_repertoire' => 'ديركتور'
 );
-
-?>

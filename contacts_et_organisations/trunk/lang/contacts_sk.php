@@ -211,5 +211,3 @@ súčasné nastavenia zásuvného modulu Kontakty a nštitúcie.
 	'titre_parametrages' => 'Nastavenie parametrov',
 	'tous' => 'Všetko'
 );
-
-?>

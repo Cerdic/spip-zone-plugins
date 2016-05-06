@@ -224,5 +224,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_parametrages' => 'Parameter setting',
 	'tous' => 'All'
 );
-
-?>
