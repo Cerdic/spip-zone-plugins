@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'إستمارة الاتصال المتقدمة',
 	'contact_slogan' => 'هذا التمديد يوفر شكل من أشكال الاتصال مع خيارات متعددة'
 );
-
-?>

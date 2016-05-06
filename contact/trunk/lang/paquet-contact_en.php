@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'Advanced Contact Form',
 	'contact_slogan' => 'This extension provides a contact form with multiple options'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'Erweitertes Kontaktformular',
 	'contact_slogan' => 'Dieses Plugin bietet ein Kontaktformular mit mehreren Optionen.'
 );
-
-?>

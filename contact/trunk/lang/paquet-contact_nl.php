@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'Geavanceerd contactformulier',
 	'contact_slogan' => 'Deze uitbreiding biedt een contactformulier met diverse opties'
 );
-
-?>

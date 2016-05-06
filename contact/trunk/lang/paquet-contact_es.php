@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'Formulario de contacto avanzado',
 	'contact_slogan' => 'Este plugin propone un formulario de contacto con múltiples opciones'
 );
-
-?>

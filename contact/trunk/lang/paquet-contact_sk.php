@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nom' => 'Rozšírený kontaktný formulár',
 	'contact_slogan' => 'Toto rozšírenie ponúka kontaktný formulár s viacerými možnosťami'
 );
-
-?>
