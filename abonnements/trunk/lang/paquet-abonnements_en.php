@@ -18,4 +18,3 @@ As there can be any kind of case, it’s not this plugin that decides what right
 	'abonnements_nom' => 'Subscriptions',
 	'abonnements_slogan' => 'Give rights for a certain time'
 );
-
