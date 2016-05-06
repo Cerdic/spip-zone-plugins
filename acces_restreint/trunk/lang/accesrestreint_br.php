@@ -73,4 +73,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_espace_prive' => 'Bevenniñ ar moned ouzh an takad-mañ el lodenn brevez',
 	'zone_restreinte_publique' => 'Bevenniñ ar moned ouzh an takad-mañ el lodenn foran'
 );
-

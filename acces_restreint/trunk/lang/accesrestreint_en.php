@@ -99,4 +99,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_espace_prive' => 'Restrict access to this area in the private area',
 	'zone_restreinte_publique' => 'Restrict access to this area in the public site'
 );
-

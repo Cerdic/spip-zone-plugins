@@ -82,4 +82,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_espace_prive' => 'حصر الدخول الى هذه المنطقة في المجال الخاص',
 	'zone_restreinte_publique' => 'حصر الدخول الى هذه المنطقة في الموقع العمومي'
 );
-

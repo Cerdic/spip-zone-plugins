@@ -73,4 +73,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_espace_prive' => 'Özel alanda bu bölgeye erişimi kısıtla',
 	'zone_restreinte_publique' => 'Kamusal alanda bu bölgeye erişimi kısıtla'
 );
-
