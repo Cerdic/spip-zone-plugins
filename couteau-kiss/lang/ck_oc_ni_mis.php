@@ -63,5 +63,3 @@ Se fourçàs d’unu reglage en lou vouòstre fichié <tt>config/mes_options.php
 Coura serès acabat embé la counfiguracioun dóu vouòstre sit, pourès, se lou voulès, coupià-coulà lou countengut dóu fichié <tt>tmp/ck_options.php</tt> en <tt>config/mes_options.php</tt> denant de desinstalà aquestou plugin que vi farà pu da besoun.',
 	'titre_page_couteau' => 'Coutèu KISS'
 );
-
-?>

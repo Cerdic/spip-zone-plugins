@@ -63,5 +63,3 @@ If you force some settings in your <tt>config/mes_options.php</tt> file, this fo
 When you finish configuring your website, you can, if you wish, copy and paste the content of <tt>tmp/ck_options</tt> into <tt>config/mes_options.php</tt> before uninstalling this plugin as it will no longer be useful.',
 	'titre_page_couteau' => 'KISS knife'
 );
-
-?>

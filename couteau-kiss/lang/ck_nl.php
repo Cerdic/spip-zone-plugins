@@ -63,5 +63,3 @@ Of je een aantal afstellingen in het bestand <tt>config/mes_options.php</tt> bep
 Wanner de configuratie van uw site klaar is kunt U de inhoud van het bestand <tt>tmp/ck_options.php</tt> in het bestand <tt>config/mes_options.php</tt> kopiëren en dan de plugin uitschakelen aangezien hij dan niet meer nuttig is.',
 	'titre_page_couteau' => 'KISS Mes'
 );
-
-?>

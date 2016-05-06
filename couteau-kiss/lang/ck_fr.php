@@ -61,5 +61,3 @@ Si vous forcez certains réglages dans votre fichier <tt>config/mes_options.php<
 Quand vous aurez terminé la configuration de votre site, vous pourrez, si vous le souhaitez, copier-coller le contenu du fichier <tt>tmp/ck_options.php</tt> dans <tt>config/mes_options.php</tt> avant de désinstaller ce plugin qui ne sera plus utile.',
 	'titre_page_couteau' => 'Couteau KISS'
 );
-
-?>

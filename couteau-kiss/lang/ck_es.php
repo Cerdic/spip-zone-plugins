@@ -63,5 +63,3 @@ Si fuerza alguna configuración en su archivo <tt>config/mes_options.php</tt>, e
 Cuando haya terminado la configuración de su sitio, podrá, si lo desea, copiar-pegar el contenido del archivo <tt>tmp/ck_options.php</tt> en <tt>config/mes_options.php</tt> antes de desinstalar este plugin que no será más útil.',
 	'titre_page_couteau' => 'Cuchillo KISS'
 );
-
-?>

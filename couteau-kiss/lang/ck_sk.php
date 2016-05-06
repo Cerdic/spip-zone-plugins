@@ -63,5 +63,3 @@ Ak si niektoré nastavenia vynútite vo svojom súbore <tt>config/mes_options.p
 Keď skončíte s nastavovaním svojej stránky, môžete, ak chcete, skopírovať a prilepiť obsah súboru <tt>tmp/ck_options</tt> do <tt>config/mes_options.php</tt> pred odinštalovaním tohto zásuvného modulu, ktorý už nebudete potrebovať.',
 	'titre_page_couteau' => 'Couteau KISS'
 );
-
-?>
