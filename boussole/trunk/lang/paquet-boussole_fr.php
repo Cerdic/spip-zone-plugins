@@ -14,4 +14,3 @@ _ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre 
 	'boussole_nom' => 'Boussole',
 	'boussole_slogan' => 'Les bonnes adresses de la galaxie SPIP ou d’ailleurs !'
 );
-
