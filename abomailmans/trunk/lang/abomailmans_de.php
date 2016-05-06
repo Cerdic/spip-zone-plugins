@@ -113,4 +113,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_email' => 'Ihre E-Mail'
 );
 
-?>
