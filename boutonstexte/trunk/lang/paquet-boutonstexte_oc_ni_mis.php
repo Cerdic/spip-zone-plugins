@@ -17,4 +17,3 @@ La counfiguracioun oupciounala pòu si faire en instalant lou plugin cfg. D’un
 	'boutonstexte_slogan' => 'Dei boutoun da gerà la talha dei caracter'
 );
 
-?>

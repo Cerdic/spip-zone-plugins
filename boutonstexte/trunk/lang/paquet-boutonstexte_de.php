@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boutonstexte_slogan' => 'Schaltflächen zum Vergrößern und Verkleinern von Text'
 );
 
-?>

@@ -15,4 +15,3 @@ La configuration optionnelle peut se faire en installant le plugin cfg. Certains
 	'boutonstexte_slogan' => 'Des boutons pour gérer la taille des caractères'
 );
 
-?>
