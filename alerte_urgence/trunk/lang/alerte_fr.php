@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_utilisateurs_explication' => 'Par défaut, seuls les administrateurs complets peuvent modifier l’alerte. On peut sélectionner ici des utilisateurs supplémentaires.',
 	'configurer_utilisateurs_label' => 'Utilisateurs supplémentaires autorisés'
 );
-

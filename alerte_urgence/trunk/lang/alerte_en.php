@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_utilisateurs_explication' => 'By default, only complete administrators can change the alert. Here you can select additional users.',
 	'configurer_utilisateurs_label' => 'Additional authorized users'
 );
-
