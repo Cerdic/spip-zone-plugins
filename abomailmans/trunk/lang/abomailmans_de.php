@@ -112,4 +112,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veut_se_desabonner' => 'want to unsubscribe',
 	'votre_email' => 'Ihre E-Mail'
 );
-

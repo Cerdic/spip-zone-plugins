@@ -138,4 +138,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_modele_depuis' => 'Zobraziť príklad šablóny s ',
 	'votre_email' => 'Váš e-mail'
 );
-

@@ -139,4 +139,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_modele_depuis' => 'Ver un ejemplo del modelo con',
 	'votre_email' => 'Su correo electrónico'
 );
-
