@@ -41,4 +41,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_configurer_preferences' => 'Configurar les teves preferències',
 	'titre_identite_site' => 'Identitat del lloc'
 );
-

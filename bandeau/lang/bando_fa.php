@@ -42,4 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_identite_site' => 'هويت سايت ',
 	'titre_infos_perso' => 'اطلاعات پرسنلي خودم'
 );
-

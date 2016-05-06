@@ -42,4 +42,3 @@ Estes endereços serão redirecionados automaticamente para o endereço principa
 	'titre_identite_site' => 'Identidade do site',
 	'titre_infos_perso' => 'Minhas informações pessoais'
 );
-

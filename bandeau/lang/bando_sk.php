@@ -42,4 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_identite_site' => 'Identita stránky',
 	'titre_infos_perso' => 'Moje osobné údaje'
 );
-
