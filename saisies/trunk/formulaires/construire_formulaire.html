@@ -84,7 +84,8 @@
 					.attr('id', 'formulaire_configurer-contenu-'+i)
 					.addClass('formulaire_configurer-contenu');
 				// On récupère le titre (en le cachant au passage)
-				var titre = $(this).find('[(#GLOBALS{debut_intertitre,<h3>}|replace{"<(\S*).*>",$1,i})]').eq(0).hide().text();
+				var titre = $(this).find('[(#VAL{"{{{ titre }}}"}|propre|replace{"<(\S*).*>",$1,i})]').eq(0).hide().text();
+
 				// On crée un onglet
 				var $onglet = $('<li><a href="#formulaire_configurer-contenu-'+i+'">'+titre+'</a></li>');
 				$onglet

@@ -16,7 +16,8 @@
 
 		[(#ENV{label}|oui)
 			[(#REM) Récupérer le tag qui sera utilisé pour la légende ]
-			[(#SET{tag, [(#ENV*{tagfield,#GLOBALS{debut_intertitre,<h3>}}|inserer_attribut{class,legend})]})]
+			[(#SET{tag_titre_defaut,[<(#VAL{"{{{ titre }}}"}|propre|replace{"<(\S*).*>",$1,i})>]})]
+			[(#SET{tag, [(#ENV*{tagfield,#GET{tag_titre_defaut}}|inserer_attribut{class,legend})]})]
 			[(#INCLURE{fond=inclure/fieldset_legend, env}|wrap{#GET{tag}})]
 		]
 
