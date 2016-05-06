@@ -32,4 +32,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_suivant' => 'Next month'
 );
 
-?>
