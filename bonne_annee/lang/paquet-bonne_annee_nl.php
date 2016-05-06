@@ -16,4 +16,3 @@ Voeg <code>#INCLURE{fond=bonne_annee}</code> toe aan je bladzijdes.',
 	'bonne_annee_slogan' => 'Nieuwjaarswensen op je site'
 );
 
-?>

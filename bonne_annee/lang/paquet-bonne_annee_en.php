@@ -16,4 +16,3 @@ Add <code>#INCLURE{fond=bonne_annee}</code> in your pages.',
 	'bonne_annee_slogan' => 'Wish a happy new year on your site'
 );
 
-?>
