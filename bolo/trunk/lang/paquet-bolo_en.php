@@ -18,4 +18,3 @@ This version inserts text in latin language only, a future version could offer t
 	'bolo_slogan' => 'Tools to create fake text'
 );
 
-?>

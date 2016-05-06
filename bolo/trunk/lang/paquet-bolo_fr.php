@@ -16,4 +16,3 @@ La version actuelle permet seulement d’insérer du texte latin ; une future v
 	'bolo_slogan' => 'Outils pour créer du faux texte'
 );
 
-?>
