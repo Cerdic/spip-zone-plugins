@@ -20,4 +20,3 @@ Como pueden haber varios casos diferentes, no es este plugin el que define los d
 	'abonnements_slogan' => 'Dar derechos durante un cierto tiempo'
 );
 
-?>

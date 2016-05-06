@@ -17,4 +17,3 @@ Comme il peut y avoir toute sorte de cas, ce n’est pas ce plugin qui décide q
 	'abonnements_slogan' => 'Donner des droits pendant un certain temps'
 );
 
-?>
