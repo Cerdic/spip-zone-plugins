@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ancresdouces_nom' => 'Jednoduché kotvy',
 	'ancresdouces_slogan' => 'Kotvy s ľahkosťou'
 );
-

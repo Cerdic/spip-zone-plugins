@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ancresdouces_nom' => 'Zachte ankers',
 	'ancresdouces_slogan' => 'Zachte scrol naar de ankers'
 );
-
