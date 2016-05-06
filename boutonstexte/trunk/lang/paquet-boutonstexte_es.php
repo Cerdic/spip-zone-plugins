@@ -16,4 +16,3 @@ La configuración opcional se puede habilitar instalando el plugin cfg. Ciertos 
 	'boutonstexte_nom' => 'Botones en el Texto',
 	'boutonstexte_slogan' => 'Botones para manejar el tamaño de los carácteres'
 );
-

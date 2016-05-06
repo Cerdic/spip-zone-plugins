@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boutonstexte_nom' => 'Textschaltflächen', # Bezeichnung ist mehrdeutig aber kurz. Das Kind muß einen Namen haben, Details können in erläuternden Texten stehen.
 	'boutonstexte_slogan' => 'Schaltflächen zum Vergrößern und Verkleinern von Text'
 );
-

@@ -16,4 +16,3 @@ Voliteľné nastavenia môžete pridať, ak nainštalujete zásuvný modul cfg. 
 	'boutonstexte_nom' => 'Tlačidlá v texte',
 	'boutonstexte_slogan' => 'Tlačidlá na zmenu veľkosti písma'
 );
-

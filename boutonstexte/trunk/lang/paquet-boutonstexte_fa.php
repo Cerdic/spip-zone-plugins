@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boutonstexte_nom' => 'دكمه‌هاي داخل متن',
 	'boutonstexte_slogan' => 'دكمه‌هاي مديريت اندازه‌ي قلم'
 );
-

@@ -16,4 +16,3 @@ De optionele configuratie kan met plugin cfg worden gedaan. Bepaalde elementen k
 	'boutonstexte_nom' => 'Knoppen in de tekst',
 	'boutonstexte_slogan' => 'Knoppen om de lettergrootte aan te passen'
 );
-

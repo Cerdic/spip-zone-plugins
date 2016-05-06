@@ -16,4 +16,3 @@ Optional configuration could be achieved by installing the cfg plugin. Some elem
 	'boutonstexte_nom' => 'Buttons in the text',
 	'boutonstexte_slogan' => 'Buttons to manage the font size'
 );
-
