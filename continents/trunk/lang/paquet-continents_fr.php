@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'continents_nom' => 'Continents',
 	'continents_slogan' => 'A chaque pays son continent !'
 );
-
-?>
