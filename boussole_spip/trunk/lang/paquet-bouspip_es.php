@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouspip_nom' => 'Brújula SPIP',
 	'bouspip_slogan' => '¡Las buenas direcciones de la galaxia SPIP!'
 );
-
