@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_slogan' => 'Интерфейс для добавления новых полей к существующим объектам',
 	'iextras_titre' => 'Создание новых полей - интерфейс (Champs Extras Interface)'
 );
-

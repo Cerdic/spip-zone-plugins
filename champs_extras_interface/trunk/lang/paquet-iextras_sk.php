@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_slogan' => 'Ponúka grafické rozhranie na riadenie ďalších polí',
 	'iextras_titre' => 'Ďalšie polia (rozhranie)'
 );
-

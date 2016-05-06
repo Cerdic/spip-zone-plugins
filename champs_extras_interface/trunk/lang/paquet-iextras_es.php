@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'iextras_slogan' => 'Ofrece una interfaz gráfica para administrar campos adicionales',
 	'iextras_titre' => 'Campos Adicionales (Interfaz)'
 );
-
