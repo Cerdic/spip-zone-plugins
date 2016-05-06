@@ -72,4 +72,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_langue_abonnement' => 'Lengua  de esta inscripción',
 	'titre_logo_abonnement' => 'Logo de esta inscripción'
 );
-
