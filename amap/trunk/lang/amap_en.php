@@ -191,4 +191,3 @@ I will get the basket of the @date_distribution@ produced by @nom_producteur@
 	'vous_etes_responsable_distributions' => 'You are in charge for the following distributions:'
 );
 
-?>
