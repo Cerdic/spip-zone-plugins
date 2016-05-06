@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_syndic_slogan' => 'Biedt de mogelijkheid om auteurs toe te voegen aan gesyndiceerde sites'
 );
 
-?>

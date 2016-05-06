@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_syndic_slogan' => 'Ajoute la possibilité d’ajouter des auteurs aux sites syndiqués'
 );
 
-?>
