@@ -89,5 +89,3 @@ Beispiel: 100. (0 = niemals)',
 	// V
 	'veuillez_patienter' => 'Bitte etwas Geduld...'
 );
-
-?>

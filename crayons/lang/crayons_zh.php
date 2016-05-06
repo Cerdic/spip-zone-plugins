@@ -63,5 +63,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'veuillez_patienter' => '请稍后...' # MODIF
 );
-
-?>

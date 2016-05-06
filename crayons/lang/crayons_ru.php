@@ -84,5 +84,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'veuillez_patienter' => 'Идет поиск ...'
 );
-
-?>

@@ -88,5 +88,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'veuillez_patienter' => 'Veuillez patienter...'
 );
-
-?>
