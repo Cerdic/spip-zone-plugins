@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bonne_annee' => 'Gelukkig Nieuwjaar'
 );
-
