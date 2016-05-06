@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorite_slogan' => 'بعض إعدادات الأذونات'
 );
 
-?>
