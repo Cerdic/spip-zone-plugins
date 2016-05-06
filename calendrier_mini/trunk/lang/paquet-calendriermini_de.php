@@ -16,4 +16,3 @@ _ Dazu kommen weitere Elemente wie Tags, Kriterien, Modelle, ...',
 	'calendriermini_slogan' => 'Stellt den Tag #CALENDRIER_MINI bereit'
 );
 
-?>

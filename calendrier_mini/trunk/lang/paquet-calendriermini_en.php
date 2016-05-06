@@ -16,4 +16,3 @@ _ Other tools are added, such as tags, criteria, models...',
 	'calendriermini_slogan' => 'Allow to use a #CALENDRIER_MINI tag'
 );
 
-?>

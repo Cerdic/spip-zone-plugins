@@ -16,4 +16,3 @@ _ Er zijn extra elementen aan toegevoegd, zoals bakens, criteria, modellen...',
 	'calendriermini_slogan' => 'Maakt het gebruik van #CALENDRIER_MINI mogelijk'
 );
 
-?>

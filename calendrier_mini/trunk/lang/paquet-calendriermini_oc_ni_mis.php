@@ -16,4 +16,3 @@ _ Lì soun ajounch d’autre elemen couma balisa, critèri, moudel...',
 	'calendriermini_slogan' => 'Permete l’utilisacioun d’una balisa #CALENDRIER_MINI'
 );
 
-?>

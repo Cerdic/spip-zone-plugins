@@ -16,4 +16,3 @@ _ Le son agregados otros elementos como etiquetas, criterios, modelos...',
 	'calendriermini_slogan' => 'Permite el uso de una etiqueta #CALENDRIER_MINI'
 );
 
-?>

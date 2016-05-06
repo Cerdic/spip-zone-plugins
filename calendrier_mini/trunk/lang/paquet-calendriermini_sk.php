@@ -17,4 +17,3 @@ _ Sám pomáha iným objektom, ako sú tagy, kritériá, šablóny atď.
 	'calendriermini_slogan' => 'Umožňuje používať tag #CALENDRIER_MINI'
 );
 
-?>
