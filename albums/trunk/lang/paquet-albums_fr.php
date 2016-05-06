@@ -21,4 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'albums_nom' => 'Albums',
 	'albums_slogan' => 'Gestion de groupes de documents sous forme d’albums'
 );
-

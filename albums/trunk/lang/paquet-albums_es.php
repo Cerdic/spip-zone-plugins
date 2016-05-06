@@ -16,4 +16,3 @@ La inserción de series de documentos al hilo del texto se encuentra simplificad
 	'albums_nom' => 'Álbumes',
 	'albums_slogan' => 'Agrupar sus documentos en forma de álbumes' # MODIF
 );
-
