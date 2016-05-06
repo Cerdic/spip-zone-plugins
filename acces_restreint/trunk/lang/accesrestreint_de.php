@@ -100,4 +100,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'Zugang zu diesem Bereich in der öffentlichen Webseite kontrollieren'
 );
 
-?>

@@ -100,4 +100,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'De toegang tot deze zone in het openbare deel beperken'
 );
 
-?>

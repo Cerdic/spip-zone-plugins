@@ -78,4 +78,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'Torgar l’accesu a esta estaya na parte pública'
 );
 
-?>

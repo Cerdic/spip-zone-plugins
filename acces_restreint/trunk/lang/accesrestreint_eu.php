@@ -52,4 +52,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_toutes' => 'Are guziak ikusi'
 );
 
-?>

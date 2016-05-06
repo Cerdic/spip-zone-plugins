@@ -83,4 +83,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'حصر الدخول الى هذه المنطقة في الموقع العمومي'
 );
 
-?>

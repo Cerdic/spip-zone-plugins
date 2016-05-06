@@ -83,4 +83,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'دسترسي محدود به اين منطقه در سايت همگاني'
 );
 
-?>

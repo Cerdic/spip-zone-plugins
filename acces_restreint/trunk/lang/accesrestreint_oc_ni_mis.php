@@ -75,4 +75,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zone_restreinte_publique' => 'Restregne l’achès en aquela zona en l’espaci pùblicou'
 );
 
-?>
