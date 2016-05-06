@@ -15,4 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouspip_slogan' => 'Dobré adresy v galaxii SPIPu.'
 );
 
-?>
