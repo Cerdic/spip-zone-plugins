@@ -8,12 +8,15 @@
  * @package Grappes\Autorisations
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'autorisation de base
  */
-function grappes_autoriser(){}
+function grappes_autoriser() {
+}
 
 /**
  * Autorisation de création de grappe
@@ -33,7 +36,7 @@ function grappes_autoriser(){}
  * @return boolean
  * 	true si autorisé, false sinon
  */
-function autoriser_grappe_creer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_grappe_creer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
@@ -57,9 +60,9 @@ function autoriser_grappe_creer_dist($faire, $type, $id, $qui, $opt){
  * @return boolean
  * 	true si autorisé, false sinon
  */
-function autoriser_grappe_modifier_dist($faire, $type, $id, $qui, $opt){
-	$id_admin = sql_getfetsel('id_admin','spip_grappes','id_grappe='.intval($id));
-	return ((($qui['statut']=='0minirezo') AND !$qui['restreint']) OR ($qui['id_auteur'] == $id_admin));
+function autoriser_grappe_modifier_dist($faire, $type, $id, $qui, $opt) {
+	$id_admin = sql_getfetsel('id_admin', 'spip_grappes', 'id_grappe = ' . intval($id));
+	return ((($qui['statut']=='0minirezo') and !$qui['restreint']) or ($qui['id_auteur'] == $id_admin));
 }
 
 /**
@@ -82,28 +85,30 @@ function autoriser_grappe_modifier_dist($faire, $type, $id, $qui, $opt){
  * @return boolean
  * 	true si autorisé, false sinon
  */
-function autoriser_grappe_associer_dist($faire, $type, $id, $qui, $opt){
-	if($qui['statut'] == '0minirezo' && $qui['webmestre'] == 'oui')
+function autoriser_grappe_associer_dist($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut'] == '0minirezo' && $qui['webmestre'] == 'oui') {
 		return true;
+	}
 
-	$res = sql_fetsel(array('id_admin','liaisons','options'),'spip_grappes','id_grappe='.sql_quote($id));
-	if (!is_array($options = @unserialize($res['options'])))
+	$res = sql_fetsel(array('id_admin','liaisons','options'), 'spip_grappes', 'id_grappe=' . sql_quote($id));
+	if (!is_array($options = @unserialize($res['options']))) {
 		$acces = array('0minirezo');
-	else
+	} else {
 		$acces = is_array($options['acces'])?$options['acces']:array('0minirezo');
+	}
 
 	// Si le statut n'est pas dans $acces et que l'auteur n'est pas admin
-	if (!in_array($qui['statut'],$acces) && ($res['id_admin'] != $qui['id_auteur']))
+	if (!in_array($qui['statut'], $acces) && ($res['id_admin'] != $qui['id_auteur'])) {
 		return false;
+	}
 
 	// tester si l'on a le droit d'ajouter cet objet
 	if ($opt['cible']) {
-		$liaisons = explode(',',$res['liaisons']);
-		if (!in_array(table_objet($opt['cible']),$liaisons))
+		$liaisons = explode(',', $res['liaisons']);
+		if (!in_array(table_objet($opt['cible']), $liaisons)) {
 			return false;
+		}
 	}
 
 	return true;
 }
-
-?>
