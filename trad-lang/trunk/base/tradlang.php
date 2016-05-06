@@ -157,7 +157,7 @@ function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$spip_tradlangs_bilans_keys = array(
 			'UNIQUE id_module_lang' => 'id_tradlang_module,lang',
 			'KEY module' => 'module',
-			'KEY lang" => 'lang'
+			'KEY lang' => 'lang'
 	);
 
 	$tables_auxiliaires['spip_tradlangs_bilans'] = array(
