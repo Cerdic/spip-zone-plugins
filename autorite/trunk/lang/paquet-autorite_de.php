@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorite_nom' => 'Autorität',
 	'autorite_slogan' => 'Feineinstellungen der Benutzerrechte (Sie können eigene Rechte hinzufügen!)'
 );
-

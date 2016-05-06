@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorite_nom' => 'السلطة',
 	'autorite_slogan' => 'بعض إعدادات الأذونات'
 );
-

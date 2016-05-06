@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorite_nom' => 'Autoridad',
 	'autorite_slogan' => 'Algunos parámetros de autorización (¡agrega los tuyos!)'
 );
-

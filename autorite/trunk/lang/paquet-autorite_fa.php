@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorite_nom' => 'اختيار',
 	'autorite_slogan' => 'تعدادي از تنظيم‌هاي مجوزها (ما خودتان را اضافه كنيد!)'
 );
-
