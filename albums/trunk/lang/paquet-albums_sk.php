@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'albums_slogan' => 'Zoskupte svoje dokumenty do albumov' # MODIF
 );
 
-?>

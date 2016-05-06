@@ -23,4 +23,3 @@ To make it available, you should install 2 plugins: «YAML» and «Saisies», wh
 	'albums_slogan' => 'Manage groups of documents as albums'
 );
 
-?>

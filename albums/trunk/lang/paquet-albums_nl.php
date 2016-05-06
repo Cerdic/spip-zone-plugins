@@ -23,4 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'albums_slogan' => 'Groepeer documenten in de vorm van een album'
 );
 
-?>
