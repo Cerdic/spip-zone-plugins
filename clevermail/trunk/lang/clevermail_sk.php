@@ -314,4 +314,3 @@ na potvrdenie svojej registrácie na odoberanie týchto informačných materiál
 	'vous_devez_choisir_un_fichier' => 'Musíte vytrať súbor...'
 );
 
-?>

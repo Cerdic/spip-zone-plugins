@@ -312,4 +312,3 @@ Merci',
 	'vous_devez_choisir_un_fichier' => 'Vous devez choisir un fichier...'
 );
 
-?>
