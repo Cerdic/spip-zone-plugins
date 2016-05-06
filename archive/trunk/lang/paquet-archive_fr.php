@@ -12,4 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'archive_nom' => 'Archive',
 	'archive_slogan' => 'Add status "archive" to objects'
 );
-

@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'archive_nom' => 'Archive',
 	'archive_slogan' => 'Ajouter le statut "archive" aux objets'
 );
-
