@@ -31,4 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois_precedent' => 'Предыдущий месяц',
 	'mois_suivant' => 'Следующий месяц'
 );
-
