@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_message' => 'Mit Ihrem Besuch auf dieser Website akzeptieren Sie den Einsatz von Cookies, mit deren Hilfe wir Statistiken über die Nutzung der Website erstellen können',
 	'message_policytext' => 'Datenschutzerklärung '
 );
-
-?>
