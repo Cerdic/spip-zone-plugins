@@ -9,7 +9,9 @@
  * @package    SPIP\D3js\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajout des scripts de d3js dans le head des pages publiques
@@ -17,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @pipeline jquery_plugins
  */
-function d3js_jquery_plugins($plugins){
+function d3js_jquery_plugins($plugins) {
 	// Modules demandés par le pipeline jqueryui_plugins
 	$d3js_plugins = array('d3.min');
 
@@ -25,7 +27,7 @@ function d3js_jquery_plugins($plugins){
 
 	// insérer les scripts nécessaires
 	foreach ($d3js_plugins as $val) {
-		$plugins[] = "javascript/".$val.".js";
+		$plugins[] = 'javascript/' . $val . '.js';
 	}
 
 	return $plugins;
@@ -33,7 +35,7 @@ function d3js_jquery_plugins($plugins){
 
 /**
  * Ajoute les css pour d3js chargées dans le privé
- * 
+ *
  * @param string $flux Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
  */
@@ -47,7 +49,7 @@ function d3js_header_prive_css($flux) {
 
 /**
  * Ajoute les css pour d3js chargées dans le public
- * 
+ *
  * @param string $flux Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
 **/
@@ -57,5 +59,3 @@ function d3js_insert_head_css($flux) {
 
 	return $flux;
 }
-
-?>
