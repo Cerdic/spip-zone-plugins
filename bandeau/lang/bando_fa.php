@@ -43,4 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_infos_perso' => 'اطلاعات پرسنلي خودم'
 );
 
-?>

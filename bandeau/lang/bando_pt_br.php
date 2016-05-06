@@ -43,4 +43,3 @@ Estes endereços serão redirecionados automaticamente para o endereço principa
 	'titre_infos_perso' => 'Minhas informações pessoais'
 );
 
-?>
