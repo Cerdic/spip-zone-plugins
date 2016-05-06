@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rang' => 'Rang'
 );
-
