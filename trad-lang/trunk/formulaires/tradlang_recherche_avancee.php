@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -11,13 +11,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $lien
  * @return array
  */
-function formulaires_tradlang_recherche_avancee_charger_dist($lien = ''){
-	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
+function formulaires_tradlang_recherche_avancee_charger_dist($lien = '') {
+	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']) {
 		$lang = $GLOBALS['spip_lang'];
-	else
+	} else {
 		$lang='';
+	}
 
-	return 
+	return
 		array(
 			'action' => ($lien ? $lien : generer_url_public('traduction_recheche')), # action specifique, ne passe pas par Verifier, ni Traiter
 			'recherche' => _request('recherche'),
@@ -27,5 +28,3 @@ function formulaires_tradlang_recherche_avancee_charger_dist($lien = ''){
 			'lang' => $lang
 		);
 }
-
-?>
