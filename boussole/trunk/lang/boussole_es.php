@@ -166,4 +166,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_importer_boussole' => 'Importación desde una brújula'
 );
 
-?>

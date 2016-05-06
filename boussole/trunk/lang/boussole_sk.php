@@ -160,4 +160,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_importer_boussole' => 'Nahrávanie kompasu'
 );
 
-?>

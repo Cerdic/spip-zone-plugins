@@ -166,4 +166,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_importer_boussole' => 'Import of a compass'
 );
 
-?>
