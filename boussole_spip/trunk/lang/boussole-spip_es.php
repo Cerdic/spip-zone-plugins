@@ -103,4 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_zine' => 'Revista electrónica (webzine) en y en torno a SPIP',
 	'slogan_site_spip_zone' => 'Espacio de desarrollo de las contribuciones a SPIP'
 );
-
