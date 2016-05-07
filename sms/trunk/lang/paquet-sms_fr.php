@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sms_nom' => 'SMS SPIP',
 	'sms_slogan' => ''
 );
-
-?>
