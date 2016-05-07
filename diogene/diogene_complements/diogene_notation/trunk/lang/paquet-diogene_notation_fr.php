@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_notation_nom' => 'Diogene - Notations',
 	'diogene_notation_slogan' => 'Complément notation pour "Diogene"'
 );
-
-?>

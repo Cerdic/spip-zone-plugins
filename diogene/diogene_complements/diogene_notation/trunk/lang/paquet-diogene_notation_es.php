@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_notation_nom' => 'Diógenes - Notaciones',
 	'diogene_notation_slogan' => 'Complemento notación para "Diógenes"'
 );
-
-?>

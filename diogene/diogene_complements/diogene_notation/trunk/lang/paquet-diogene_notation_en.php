@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_notation_nom' => 'Diogene - Ratings',
 	'diogene_notation_slogan' => 'Ratings add-on for "Diogene"'
 );
-
-?>
