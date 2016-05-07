@@ -87,5 +87,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'une_liste' => 'Eine einzige Liste'
 );
-
-?>
