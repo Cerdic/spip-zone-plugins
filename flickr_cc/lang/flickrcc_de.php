@@ -28,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_par_interet' => 'Nach Interesse',
 	'resultat_par_pertinence' => 'Nach Relevanz'
 );
-
-?>

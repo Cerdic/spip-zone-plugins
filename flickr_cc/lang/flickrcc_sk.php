@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_par_interet' => 'podľa záujmu',
 	'resultat_par_pertinence' => 'podľa dôležitosti'
 );
-
-?>

@@ -34,5 +34,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_par_interet' => 'طبق علاقه',
 	'resultat_par_pertinence' => 'طبق تناسب '
 );
-
-?>

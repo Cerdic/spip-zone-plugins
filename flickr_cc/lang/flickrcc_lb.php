@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultat_par_interet' => 'no Intérêt',
 	'resultat_par_pertinence' => 'no Warscheinlechkeet'
 );
-
-?>
