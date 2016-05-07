@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'pas_suggestion' => 'Sem sugestão'
 );
-
-?>
