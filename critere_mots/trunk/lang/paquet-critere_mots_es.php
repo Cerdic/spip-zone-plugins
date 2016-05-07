@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'critere_mots_description' => 'Permite mostrar los elementos que tienen varias palabras-claves en común, mediante la variable $mots[] pasada en el entorno',
 	'critere_mots_slogan' => 'Seleccionar objetos que tienen palabras-claves en común'
 );
-
-?>

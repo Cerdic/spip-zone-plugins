@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'critere_mots_description' => 'Allows the display of elements which have multiple keywords in common using variable $mots[], passed in the environnement',
 	'critere_mots_slogan' => 'Select objects which have keywords in common'
 );
-
-?>

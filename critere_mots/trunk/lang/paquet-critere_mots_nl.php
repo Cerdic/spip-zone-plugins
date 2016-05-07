@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'critere_mots_description' => 'Laat toe elementen te tonen die meerdere trefwoorden gemeen hebben door middel van de omgevingsvariabele $mots[]',
 	'critere_mots_slogan' => 'Objecten selecteren die gemeenschappelijke trefwoorden hebben'
 );
-
-?>
