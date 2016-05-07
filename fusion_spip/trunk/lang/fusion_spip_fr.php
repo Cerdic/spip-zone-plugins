@@ -53,5 +53,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_fusion_spip' => 'Fusion de sites Spip',
 	'titre_fusion_spip_suppression' => 'Suppression'
 );
-
-?>

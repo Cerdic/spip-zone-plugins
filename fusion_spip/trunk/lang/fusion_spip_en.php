@@ -55,5 +55,3 @@ The database of the source site must be in the same version as the one of the ho
 	'titre_fusion_spip' => 'Spip Websites Fusion',
 	'titre_fusion_spip_suppression' => 'Deletion'
 );
-
-?>
