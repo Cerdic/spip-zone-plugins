@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zengarden_description' => 'Bekijk, probeer en kies het juiste thema voor je site. ',
 	'zengarden_slogan' => 'SPIP in Zen-sferen'
 );
-
-?>

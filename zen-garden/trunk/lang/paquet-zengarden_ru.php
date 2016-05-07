@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zengarden_description' => ' ',
 	'zengarden_slogan' => 'Плагин "Zengarden" для SPIP' # MODIF
 );
-
-?>

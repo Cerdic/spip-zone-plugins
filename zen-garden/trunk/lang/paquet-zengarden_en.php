@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zengarden_description' => ' ',
 	'zengarden_slogan' => 'A Zen garden for the skeletons'
 );
-
-?>
