@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_doc2img' => 'Este documento ha sido automáticamente convertido en una serie de @nb@ imágenes.',
 	'info_nb_doc2img_un' => 'Este documento ha sido automáticamente convertido en una imagen.'
 );
-
-?>
