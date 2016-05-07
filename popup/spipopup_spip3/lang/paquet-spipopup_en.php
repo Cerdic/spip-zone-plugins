@@ -45,5 +45,3 @@ The tag gives a tag link (<code>a</code>) with the following attributs :
 ',
 	'spipopup_slogan' => 'Manage a single popup window in SPIP skeleton'
 );
-
-?>

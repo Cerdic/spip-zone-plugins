@@ -44,5 +44,3 @@ Tag vypíše tag odkazu (<code>a</code>) s týmito parametrami:
 - title = " nadpis – nové okno "',
 	'spipopup_slogan' => 'Ovládanie jedinečnej šablóny SPIPu pre vyskakovacie okno'
 );
-
-?>

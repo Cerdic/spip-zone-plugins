@@ -43,5 +43,3 @@ La balise retourne un tag de lien (<code>a</code>) avec les attributs suivants 
 ',
 	'spipopup_slogan' => 'Gestion d’une fenêtre popup unique en squelette SPIP'
 );
-
-?>
