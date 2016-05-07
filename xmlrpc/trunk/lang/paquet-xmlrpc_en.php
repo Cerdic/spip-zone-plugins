@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'xmlrpc_description' => 'API xml-rpc client and server',
 	'xmlrpc_slogan' => 'Server and client xml-rpc'
 );
-
-?>
