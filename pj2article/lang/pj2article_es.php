@@ -38,5 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_pj2article' => 'Importación de los archivos adjuntos a los emails'
 );
-
-?>
