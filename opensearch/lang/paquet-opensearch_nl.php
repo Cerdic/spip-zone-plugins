@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'opensearch_description' => 'Plugin die bezoekers kan voorstellen om jouw site als aangepaste zoekmachine aan hun browser toe te voegen.',
 	'opensearch_slogan' => 'Jouw site als zoekmachine'
 );
-
-?>

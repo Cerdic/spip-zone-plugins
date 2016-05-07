@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'opensearch_description' => 'Plugin which enables to offer the users to add a custom search engine related to your website on their browser.',
 	'opensearch_slogan' => 'Your website as search engine'
 );
-
-?>

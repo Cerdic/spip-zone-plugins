@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'opensearch_description' => 'هذا الملحق يتيح لزوار موقعك إضافة محرك بحث مخصص لمتصفحهم.',
 	'opensearch_slogan' => 'حول موقعك الى محرك بحث'
 );
-
-?>
