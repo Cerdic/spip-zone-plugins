@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'simplecal_description' => 'Un simple calendrier pour planifier des évènements.',
 	'simplecal_slogan' => 'Planifier simplement vos évènements.'
 );
-
-?>
