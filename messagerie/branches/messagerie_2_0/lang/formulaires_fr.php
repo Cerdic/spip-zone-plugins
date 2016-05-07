@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'valeur_incorrecte' => 'Cette valeur n’est pas correcte'
 );
-
-?>

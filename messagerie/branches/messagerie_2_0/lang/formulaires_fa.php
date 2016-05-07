@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'valeur_incorrecte' => 'اين مقدار درست نيست'
 );
-
-?>
