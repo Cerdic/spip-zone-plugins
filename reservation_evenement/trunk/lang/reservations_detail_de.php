@@ -38,5 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_reservations_detail' => 'Anmeldungsdetail',
 	'titre_reservations_details' => 'Anmeldungsdetails'
 );
-
-?>
