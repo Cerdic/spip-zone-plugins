@@ -45,5 +45,3 @@ Welche Umgebung wollen Sie nutzen?',
 	'label_tax' => 'Steuern',
 	'label_username' => 'API Benutzername '
 );
-
-?>

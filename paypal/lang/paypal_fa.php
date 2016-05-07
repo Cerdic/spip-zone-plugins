@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_soumission' => 'فرم ارايه',
 	'label_username' => 'اي.پي.آي يوزرنيم (شناسه)'
 );
-
-?>

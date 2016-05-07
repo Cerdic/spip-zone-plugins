@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tax' => 'Dane',
 	'label_username' => 'Používateľské meno aplikácie (identifikátor)'
 );
-
-?>

@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tax' => 'Taxes',
 	'label_username' => 'API Username'
 );
-
-?>
