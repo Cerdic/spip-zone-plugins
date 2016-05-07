@@ -280,5 +280,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes_auteur' => 'Lístky @nom@, ktoré boli priradené vám',
 	'vos_tickets_en_cours' => 'Vaše otvorené lístky'
 );
-
-?>

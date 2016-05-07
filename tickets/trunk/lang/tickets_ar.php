@@ -186,5 +186,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes_auteur' => 'تذاكر @nom@ المحالة اليك',
 	'vos_tickets_en_cours' => 'تذاكرك المفتوحة'
 );
-
-?>

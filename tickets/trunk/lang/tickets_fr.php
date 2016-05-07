@@ -278,5 +278,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes_auteur' => 'Les tickets de @nom@ qui vous sont assignés',
 	'vos_tickets_en_cours' => 'Vos tickets ouverts'
 );
-
-?>

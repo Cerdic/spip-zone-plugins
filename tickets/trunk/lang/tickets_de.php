@@ -283,5 +283,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes_auteur' => 'Die Tickets @nom@ sind ihnen zugewiesen',
 	'vos_tickets_en_cours' => 'Ihre Tickets in Bearbeitung'
 );
-
-?>

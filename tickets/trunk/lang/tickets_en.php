@@ -281,5 +281,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vos_tickets_assignes_auteur' => '@nom@ bug reports assigned to you',
 	'vos_tickets_en_cours' => 'Your ongoing bug reports'
 );
-
-?>

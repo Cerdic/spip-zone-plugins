@@ -280,5 +280,3 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'vos_tickets_assignes_auteur' => 'Tickets de @nom@ que le son asignados',
 	'vos_tickets_en_cours' => 'Sus tickets abiertos'
 );
-
-?>
