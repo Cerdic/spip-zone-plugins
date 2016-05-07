@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mesfavoris_description' => 'SPIP-Objekte aus- oder abwählen, die ein angemeldeter Besucher als Lesezeichen speichern kann.',
 	'mesfavoris_slogan' => 'Lesezeichen auswählen'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mesfavoris_description' => 'Selecteer een object om objecten (artikelen, rubrieken ...) als favoriet aan te merken voor een aangemelde bezoeker',
 	'mesfavoris_slogan' => 'Keuze van favorieten'
 );
-
-?>

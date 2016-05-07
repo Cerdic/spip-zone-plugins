@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mesfavoris_description' => '(Un)Select an object to manage favorites objects (articles, sections...) for authenticated visitors',
 	'mesfavoris_slogan' => 'Select favorites'
 );
-
-?>

@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mesfavoris_description' => '(Dé)Sélectionne un objet pour gérer des objets (articles, rubriques ...) favoris pour un visiteur authentifié',
 	'mesfavoris_slogan' => 'Sélection de favoris'
 );
-
-?>
