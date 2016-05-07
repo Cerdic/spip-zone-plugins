@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_option_tout' => 'كل الموقع',
 	'cfg_titre_opensearch' => 'البحث المفتوح OpenSearch'
 );
-
-?>

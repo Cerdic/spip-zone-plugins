@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_option_tout' => 'Ganze Website',
 	'cfg_titre_opensearch' => 'OpenSearch'
 );
-
-?>
