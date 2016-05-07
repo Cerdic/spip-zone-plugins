@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fusion_spip_description' => 'Importer tous les contenus d’un site source, objets, liaisons, documents en mettant à jour les identifiants des objets, les liens internes et les modèles.',
 	'fusion_spip_slogan' => 'Importer et fusionner tout le contenu d’un autre site'
 );
-
-?>
