@@ -112,5 +112,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @url_subscribe@',
 	'unsubscribe_titre_email' => 'Newsletter Abmeldung'
 );
-
-?>
