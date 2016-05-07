@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailshot_description' => 'Envoyer des courriels en nombre',
 	'mailshot_slogan' => 'Envoyer des courriels en nombre'
 );
-
-?>
