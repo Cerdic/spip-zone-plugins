@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legendes_nom' => 'Captions',
 	'legendes_slogan' => 'Add captions on photos'
 );
-
-?>

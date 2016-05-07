@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legendes_nom' => 'Légendes',
 	'legendes_slogan' => 'Légender ses photos'
 );
-
-?>
