@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<code>yaml_decode()</code> a <code>yaml_encode()</code>. Poskytuje formát yaml aj pre cyklus (DATA).',
 	'yaml_slogan' => 'Jednoduchý formát súborov na upravovanie zoznamov dát'
 );
-
-?>

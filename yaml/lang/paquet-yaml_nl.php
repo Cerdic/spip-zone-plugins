@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<code>yaml_decode()</code> en <code>yaml_encode()</code>. Het formaat kan ook in de (DATA) lus worden gebruikt.',
 	'yaml_slogan' => 'Een eenvoudig bestandsformaat om gegevenslijsten te redigeren'
 );
-
-?>

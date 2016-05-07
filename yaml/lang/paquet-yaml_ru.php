@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<code>yaml_decode()</code> и <code>yaml_encode()</code>. И позволяет использовать YAML в запросе BOUCLE(DATA).',
 	'yaml_slogan' => 'Позволяет работать с YAML форматом'
 );
-
-?>

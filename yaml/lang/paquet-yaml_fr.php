@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<code>yaml_decode()</code> et <code>yaml_encode()</code>. Il fournit aussi le format yaml pour la boucle (DATA).',
 	'yaml_slogan' => 'Un format de fichier simple pour éditer des listes de données'
 );
-
-?>

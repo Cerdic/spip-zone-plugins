@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'yaml_description' => 'Este plugin proporciona las funciones de lectura/escritura del formato YAML: <code>yaml_decode()</code> y <code>yaml_encode()</code>. También proporciona el formato yaml para el bucle (DATA).',
 	'yaml_slogan' => 'Un formato de archivo simple para editar listas de datos'
 );
-
-?>
