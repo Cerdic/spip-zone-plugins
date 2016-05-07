@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mediaspip_player_nom' => 'Lector de medios de MediaSPIP',
 	'mediaspip_player_slogan' => 'Lector multimedia HTML5 para MediaSPIP'
 );
-
-?>
