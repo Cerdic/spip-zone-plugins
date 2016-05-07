@@ -85,5 +85,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_signalements' => 'Notifications',
 	'tout_voir' => 'See all'
 );
-
-?>
