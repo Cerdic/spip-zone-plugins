@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_activer_extension_sur' => 'Op welke knoppenbalk(en) activeren?',
 	'titre_configurer_pp_codes' => 'Configureer de extensie voor informatica-codes voor de Penhouder'
 );
-
-?>

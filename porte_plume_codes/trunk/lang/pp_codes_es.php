@@ -33,5 +33,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_activer_extension_sur' => '¿Activar en qué barras de herramientas?',
 	'titre_configurer_pp_codes' => 'Configurar la extensión códigos informáticos para Portaplumas'
 );
-
-?>

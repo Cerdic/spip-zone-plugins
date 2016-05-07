@@ -33,5 +33,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_activer_extension_sur' => 'Включить на панели инструментов редактирования?',
 	'titre_configurer_pp_codes' => 'Настройте расширение компьютерных кодов для Porte Plume'
 );
-
-?>

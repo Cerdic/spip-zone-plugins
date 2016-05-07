@@ -34,5 +34,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_activer_extension_sur' => 'Activer sur quelles barres d’outils ?',
 	'titre_configurer_pp_codes' => 'Configurer l’extension codes informatiques pour Porte Plume'
 );
-
-?>
