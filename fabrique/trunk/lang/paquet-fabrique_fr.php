@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fabrique_slogan' => 'Outil pour créer des plugins SPIP.',
 	'fabrique_titre' => 'Fabrique'
 );
-
-?>

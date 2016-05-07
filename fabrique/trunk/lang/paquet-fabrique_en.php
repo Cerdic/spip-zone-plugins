@@ -17,5 +17,3 @@ perfect plugin, but a solid, quick to set up, to then edit to your liking.',
 	'fabrique_slogan' => 'Tool to create SPIP plugins.',
 	'fabrique_titre' => 'Fabrique'
 );
-
-?>
