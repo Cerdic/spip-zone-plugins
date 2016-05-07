@@ -33,5 +33,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'theme_actif' => 'Ce thème est actuellement utilisé',
 	'themes' => 'Thèmes'
 );
-
-?>

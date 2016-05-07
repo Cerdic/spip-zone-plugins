@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'theme_actif' => 'در حال حاضر اين تم مورد استفاده است',
 	'themes' => 'تم‌ها'
 );
-
-?>

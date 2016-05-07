@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'theme_actif' => 'Tento farebný motív sa používa teraz',
 	'themes' => 'Farebné motívy'
 );
-
-?>
