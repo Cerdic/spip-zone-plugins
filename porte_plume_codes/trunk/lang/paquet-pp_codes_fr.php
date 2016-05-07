@@ -13,5 +13,3 @@ Ajoute aussi un raccourci <code>[->ecrire/inc_versions.php#trac]</code>.',
 	'pp_codes_nom' => 'Codes Informatiques pour Porte Plume',
 	'pp_codes_slogan' => 'Ajoute des boutons à la barre d’outils du Porte Plume pour gérer des codes informatiques'
 );
-
-?>

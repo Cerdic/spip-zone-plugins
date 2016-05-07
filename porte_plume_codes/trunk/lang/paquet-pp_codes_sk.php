@@ -15,5 +15,3 @@ Pridáva aj skratku <code>[->ecrire/inc_versions.php#trac].</code>',
 	'pp_codes_nom' => 'Počítačové kódy pre Porte Plume',
 	'pp_codes_slogan' => 'Pridá tlačidlá na panel nástrojov Porte Plume na správu počítačových kódov'
 );
-
-?>

@@ -15,5 +15,3 @@ Adds a shortcut <code>[->ecrire/inc_versions.php#trac]</code>.',
 	'pp_codes_nom' => 'Computer codes for Quill',
 	'pp_codes_slogan' => 'Adds buttons to the Quill toolbar to handle computer code'
 );
-
-?>

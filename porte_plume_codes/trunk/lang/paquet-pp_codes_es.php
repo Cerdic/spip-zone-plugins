@@ -15,5 +15,3 @@ Añade también un acceso directo <code>[->ecrire/inc_versions.php#trac]</code>.
 	'pp_codes_nom' => 'Códigos Informáticos para Portaplumas',
 	'pp_codes_slogan' => 'Añade botones a la barra de herramientas del Portaplumas para generar códigos informáticos'
 );
-
-?>

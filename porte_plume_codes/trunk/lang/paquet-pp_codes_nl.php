@@ -15,5 +15,3 @@ Voegt ook een snelkoppeling <code>[->ecrire/inc_versions.php#trac]</code> toe.',
 	'pp_codes_nom' => 'Informatica-codes voor de Penhouder',
 	'pp_codes_slogan' => 'Voegt knoppen toe aan Porte Plume, de Penhouder, voor informatica-codes'
 );
-
-?>
