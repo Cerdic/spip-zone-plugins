@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'signalement_nom' => 'Reseña',
 	'signalement_slogan' => 'Reseña de contenidos ilícitos'
 );
-
-?>

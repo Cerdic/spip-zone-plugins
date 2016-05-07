@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'signalement_nom' => 'Signalement',
 	'signalement_slogan' => 'Signalement de contenus illicites'
 );
-
-?>
