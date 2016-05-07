@@ -22,5 +22,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_table_inconnue' => 'CRUD: onbekende tabel @table@',
 	'erreur_update' => 'CRUD: fout bij het aanpassen van object "@objet@" #@id@ (Controleer je rechten)'
 );
-
-?>

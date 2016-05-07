@@ -22,5 +22,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_table_inconnue' => 'CRUD: systém nepozná tabuľku @table@',
 	'erreur_update' => 'CRUD: chyba pri aktualizácii objektu "@objet@" #@id@ (Skontrolujte si svoje práva)'
 );
-
-?>

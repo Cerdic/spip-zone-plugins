@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_table_inconnue' => 'CRUD : table @table@ inconnue',
 	'erreur_update' => 'CRUD : erreur de mise à jour de l’objet "@objet@" #@id@ (Vérifiez vos droits)'
 );
-
-?>
