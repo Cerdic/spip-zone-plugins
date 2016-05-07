@@ -59,5 +59,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'version_encodee_de' => 'This document is a conversion of the document #@id_orig@'
 );
-
-?>
