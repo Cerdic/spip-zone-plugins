@@ -196,5 +196,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'votre_reservation_sur' => '@nom@ : votre réservation'
 );
-
-?>
