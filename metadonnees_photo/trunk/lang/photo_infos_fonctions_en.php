@@ -56,5 +56,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ville' => 'City',
 	'vitesse' => 'Speed'
 );
-
-?>
