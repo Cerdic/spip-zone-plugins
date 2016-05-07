@@ -110,5 +110,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_getid3' => 'GetID3',
 	'titre_infos_techniques' => 'Technical informations'
 );
-
-?>
