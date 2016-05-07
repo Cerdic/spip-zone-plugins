@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'memoization_description' => 'Memoización es un término de informática, del cual Wikipedia (fr) da la siguiente definición: «una técnica que consiste en reducir el tiempo de ejecución de una función memorizando sus resultados en cada caso». Es también el nombre de una nueva biblioteca de funciones para PHP, que hace seguimiento a más experimentaciones en XCache.',
 	'memoization_slogan' => 'Gestión del caché de SPIP mediante diversos métodos.'
 );
-
-?>
