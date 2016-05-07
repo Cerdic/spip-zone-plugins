@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_doc2article' => 'Module d’import des medias',
 	'titre_page_file' => 'File d’attente du module d’import des medias'
 );
-
-?>
