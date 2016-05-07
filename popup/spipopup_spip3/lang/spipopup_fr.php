@@ -65,5 +65,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'width' => 'Largeur (en pixels)',
 	'width_and_height' => 'Taille de la fenête'
 );
-
-?>

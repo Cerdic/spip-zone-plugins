@@ -67,5 +67,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'width' => 'Šírka (v pixeloch)',
 	'width_and_height' => 'Veľkosť okna'
 );
-
-?>

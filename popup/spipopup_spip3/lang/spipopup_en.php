@@ -67,5 +67,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'width' => 'Width (in pixels)',
 	'width_and_height' => 'Window size'
 );
-
-?>
