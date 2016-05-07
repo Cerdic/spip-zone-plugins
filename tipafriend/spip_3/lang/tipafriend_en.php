@@ -191,5 +191,3 @@ If the plugin {{[CFG : Configuration Engine->http://contrib.spip.net/?rubrique57
 	'taftest_to' => '<b><i>Recipients</i></b>',
 	'tipafriend' => 'Tip A Friend'
 );
-
-?>

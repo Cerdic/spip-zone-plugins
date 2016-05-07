@@ -190,5 +190,3 @@ Le bloc ci-dessous vous présente les valeurs de configuration enregistrées pou
 	'taftest_to' => '<b><i>Destinataires</i></b>',
 	'tipafriend' => 'Tip A Friend'
 );
-
-?>

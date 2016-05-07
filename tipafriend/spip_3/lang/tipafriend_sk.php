@@ -199,5 +199,3 @@ Ak je zásuvný modul {{[CFG: nástroj na nastavenie->http://contrib.spip.net/?r
 	'taftest_to' => '<b><i>Príjemcovia</i></b>',
 	'tipafriend' => 'Odporučiť priateľovi'
 );
-
-?>
