@@ -28,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'ការកំណត់ទំរង់ នៃឧបករពង្រីក'
 );
-
-?>
