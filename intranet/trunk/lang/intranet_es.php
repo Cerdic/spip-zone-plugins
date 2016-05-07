@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_message' => 'Personalización del mensaje',
 	'label_pages_intranet' => 'Páginas accesibles'
 );
-
-?>

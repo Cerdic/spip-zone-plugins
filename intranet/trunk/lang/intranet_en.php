@@ -26,5 +26,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pages_intranet' => 'Accessible pages',
 	'label_plageip' => 'IP range'
 );
-
-?>
