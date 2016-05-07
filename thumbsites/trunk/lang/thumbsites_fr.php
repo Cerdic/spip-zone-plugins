@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_thumbshot_site' => 'VIGNETTE DU SITE'
 );
-
-?>
