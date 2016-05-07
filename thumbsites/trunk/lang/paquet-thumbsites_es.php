@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'thumbsites_description' => 'Thumbsites proporciona un sistema de captura de pantalla de sitio generada por los servidores dedicados. El plugin propone etiquetas, filtros y modelos para mostrar la miniatura de un sitio dado. Este plugin genera también una caché que permite paliar las indisponibilidades frecuentes de servidores y acelerar las visualizaciones. Una configuración está disponible en el espacio privado.',
 	'thumbsites_slogan' => 'Una miniatura para sus sitios referenciados'
 );
-
-?>
