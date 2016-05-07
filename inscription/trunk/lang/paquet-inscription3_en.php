@@ -15,5 +15,3 @@ when registering and changing their profile.',
 	'inscription3_nom' => 'Subscription 3',
 	'inscription3_slogan' => 'Add information on authors'
 );
-
-?>

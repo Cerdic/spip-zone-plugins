@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription3_nom' => 'Inscripción 3',
 	'inscription3_slogan' => 'Ampliar la información sobre los autores'
 );
-
-?>

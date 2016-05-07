@@ -13,5 +13,3 @@ lors de leur inscription et de la modification de leur profil.',
 	'inscription3_nom' => 'Inscription 3',
 	'inscription3_slogan' => 'Étendre les informations sur les auteurs'
 );
-
-?>
