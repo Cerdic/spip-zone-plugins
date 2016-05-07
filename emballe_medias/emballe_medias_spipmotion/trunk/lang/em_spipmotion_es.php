@@ -29,5 +29,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title_infos_cacher' => 'Ocultar la información adicional',
 	'title_infos_voir' => 'Ver la información adicional'
 );
-
-?>
