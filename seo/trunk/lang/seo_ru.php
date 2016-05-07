@@ -70,5 +70,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'seo' => 'Поисковая оптимизация'
 );
-
-?>
