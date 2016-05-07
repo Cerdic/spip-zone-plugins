@@ -410,5 +410,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traduction' => 'Traducción @lang@',
 	'traductions' => 'Traducciones'
 );
-
-?>
