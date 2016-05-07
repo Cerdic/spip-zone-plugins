@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_selections_objets' => 'Sélections éditoriales liées à des contenus',
 	'titre_selections_rubrique' => 'Sélections éditoriales de la rubrique'
 );
-
-?>
