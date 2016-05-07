@@ -15,5 +15,3 @@ Selects spip objects, store them and customize their display depending on the se
 	'selection_objet_nom' => 'Objects selection', # MODIF
 	'selection_objet_slogan' => 'List your spip objects' # MODIF
 );
-
-?>
