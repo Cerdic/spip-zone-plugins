@@ -162,6 +162,7 @@ function iextras_saisies_construire_formulaire_config($flux) {
 			// Normalement le premier champ du premier onglet
 			if ($flux['data'][0]['saisies'][0]['verifier']['type'] == 'regex') {
 				$flux['data'][0]['saisies'][0]['verifier']['type'] = 'nom_champ_extra';
+				$flux['data'][0]['saisies'][0]['verifier']['options']['table'] = $table;
 			}
 
 

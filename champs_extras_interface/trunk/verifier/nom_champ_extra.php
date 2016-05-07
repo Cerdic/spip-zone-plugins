@@ -23,16 +23,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function verifier_nom_champ_extra_dist($valeur, $options=array()){
 
-	var_dump($valeur, $options);
-
+	$erreur = '';
 	// tester l'expression
 	if (!$erreur) {
 		$verifier = charger_fonction('verifier', 'inc');
 		$options += array('modele' => '/^[\w]+$/');
 		$erreur = $verifier($valeur, 'regex', $options);
 	}
-
-	$erreur = 'pas bien !';
 
 	return $erreur;
 }
