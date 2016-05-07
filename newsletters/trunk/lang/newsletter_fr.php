@@ -72,5 +72,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_newsletters' => 'Infolettres',
 	'titre_newsletters_rubrique' => 'Infolettres de la rubrique'
 );
-
-?>
