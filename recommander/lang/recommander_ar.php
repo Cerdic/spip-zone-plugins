@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recommander_message' => 'إنشر',
 	'recommander_titre' => 'إقراء في @nom_site@ —' # MODIF
 );
-
-?>

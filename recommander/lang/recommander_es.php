@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recommander_message' => 'Recomendar',
 	'recommander_titre' => 'Leer en @nom_site@ -'
 );
-
-?>
