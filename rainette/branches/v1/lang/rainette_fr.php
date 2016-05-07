@@ -144,5 +144,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vent' => 'vent',
 	'visibilite' => 'visibilité'
 );
-
-?>
