@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_defaut' => 'Your user account has been created!'
 );
-
-?>
