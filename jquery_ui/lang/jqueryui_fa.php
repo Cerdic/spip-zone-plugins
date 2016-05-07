@@ -67,5 +67,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois_8_abbr' => 'اوت',
 	'date_mois_9_abbr' => 'سپتامبر'
 );
-
-?>
