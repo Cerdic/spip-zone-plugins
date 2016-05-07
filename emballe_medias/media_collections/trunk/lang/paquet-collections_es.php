@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'collections_nom' => 'Colecciones de medios',
 	'collections_slogan' => 'Crear colecciones de medios'
 );
-
-?>
