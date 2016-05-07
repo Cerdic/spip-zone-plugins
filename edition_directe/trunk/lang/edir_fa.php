@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vider_cache' => 'لطفاً حافظه‌ي دم‌دستي را خالي كنيد'
 );
-
-?>

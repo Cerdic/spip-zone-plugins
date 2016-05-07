@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vider_cache' => 'Veuillez vider le cache'
 );
-
-?>
