@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tablematieres_nom' => 'Inhoudsopgave',
 	'tablematieres_slogan' => 'Een overzicht van een artikel maken'
 );
-
-?>

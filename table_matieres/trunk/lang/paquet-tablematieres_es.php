@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tablematieres_nom' => 'Tabla de Materias',
 	'tablematieres_slogan' => 'Crear el resumen de un artículo'
 );
-
-?>
