@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'videos_nom' => 'Video(s)',
 	'videos_slogan' => 'Management interface and integration models of videos'
 );
-
-?>

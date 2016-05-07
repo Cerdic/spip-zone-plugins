@@ -18,5 +18,3 @@ WebM und Mkv sogra auf mobilen Endgeräten.',
 	'videos_nom' => 'Video(s)',
 	'videos_slogan' => 'Verwaltungsoberfläche und Modell zum Einfügen von Videos'
 );
-
-?>
