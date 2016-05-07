@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menus_slogan' => 'Créez vos menus personnalisés.',
 	'menus_titre' => 'Menus'
 );
-
-?>

@@ -21,5 +21,3 @@ O objetivo do plugin {{Menus}} é facilitar a elaboração de menus através de 
 	'menus_slogan' => 'Crie os seus menus personalizados.',
 	'menus_titre' => 'Menus'
 );
-
-?>

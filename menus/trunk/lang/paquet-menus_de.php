@@ -17,5 +17,3 @@ Mit dem Plugin {{Menüs}} können öffentliche Menüs im Redaktionsbereich über
 	'menus_slogan' => 'Legen Sie eigene Menüs an',
 	'menus_titre' => 'Menüs'
 );
-
-?>

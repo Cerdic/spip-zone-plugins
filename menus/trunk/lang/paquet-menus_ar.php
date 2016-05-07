@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menus_slogan' => 'إنشاء قوائم شخصية',
 	'menus_titre' => 'القوائم'
 );
-
-?>

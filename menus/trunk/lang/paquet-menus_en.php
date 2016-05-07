@@ -21,5 +21,3 @@ The purpose of the plugin {{Menus}} is to allow you to create easily menus using
 	'menus_slogan' => 'Create your own custom menus.',
 	'menus_titre' => 'Menus'
 );
-
-?>

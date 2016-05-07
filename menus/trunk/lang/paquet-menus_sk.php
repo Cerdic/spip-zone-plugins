@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menus_slogan' => 'Vytvorte svoje vlastné ponuky menu.',
 	'menus_titre' => 'Ponuky menu'
 );
-
-?>
