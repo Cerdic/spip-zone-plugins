@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_tags' => 'Your tags (modification)'
 );
-
-?>
