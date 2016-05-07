@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formidable_description' => 'Création de formulaires avec une interface graphique et configuration des traitements associés (envoyer par courriel, enregistrer les réponses, etc).',
 	'formidable_slogan' => 'Générateur de formulaires'
 );
-
-?>
