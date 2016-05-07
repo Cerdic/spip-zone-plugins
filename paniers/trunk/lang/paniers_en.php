@@ -68,5 +68,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vider_le_panier' => 'Empty the cart',
 	'voir_mon_panier' => 'See my cart'
 );
-
-?>

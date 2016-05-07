@@ -32,5 +32,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_vide' => 'سبد خالي است.',
 	'paniers' => 'سبدهاي خريد'
 );
-
-?>

@@ -65,5 +65,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vider_le_panier' => 'Vyprázdniť vozík',
 	'voir_mon_panier' => 'Zobraziť vozík'
 );
-
-?>

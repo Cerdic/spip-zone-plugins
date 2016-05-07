@@ -59,5 +59,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vider_le_panier' => 'Vaciar la cesta',
 	'voir_mon_panier' => 'Mostrar mi cesta'
 );
-
-?>
