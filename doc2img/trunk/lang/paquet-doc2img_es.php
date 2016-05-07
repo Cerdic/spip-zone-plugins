@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_nom' => 'Documentos en Imágenes',
 	'doc2img_slogan' => 'Convertir los documentos de texto sobre la marcha'
 );
-
-?>

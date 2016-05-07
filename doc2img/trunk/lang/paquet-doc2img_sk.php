@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_nom' => 'Dokumenty na obrázky',
 	'doc2img_slogan' => 'Meňte textové dokumenty za pochodu'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2img_nom' => 'Document als Afbeelding',
 	'doc2img_slogan' => 'Converteer tekstdocumenten direct'
 );
-
-?>
