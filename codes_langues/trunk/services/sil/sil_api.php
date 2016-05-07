@@ -9,7 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS['sil_service'] = array(
-	'tables'	=> array('iso639codes', 'iso639names', 'iso639macros', 'iso639retirements'),
 	'fields'	=> 	array(
 		'iso639codes' => array(
 			'Id'           => 'code_639_3',
@@ -69,7 +68,7 @@ function sil_read_table($table, &$sha_file) {
 	$records = array();
 	$sha_file = false;
 
-	if (in_array($table, $GLOBALS['sil_service']['tables'])) {
+	if (in_array($table, array_keys($GLOBALS['sil_service']['fields']))) {
 		// Ouvrir le fichier des enregistrements de la table spécifiée.
 		$file = find_in_path("services/sil/${table}.tab");
 		if (file_exists($file) and ($sha_file = sha1_file($file))) {
@@ -79,7 +78,7 @@ function sil_read_table($table, &$sha_file) {
 			$lines = file($file);
 			if ($lines) {
 				$headers = array();
-				$conversion = $GLOBALS['sil_service']['fields'][$table];
+				$sil_to_spip = $GLOBALS['sil_service']['fields'][$table];
 				foreach ($lines as $_number => $_line) {
 					$values = explode("\t", trim($_line, "\r\n"));
 					if ($_number == 0) {
@@ -89,7 +88,7 @@ function sil_read_table($table, &$sha_file) {
 						// Création de chaque enregistrement de la table
 						$fields = array();
 						foreach ($headers as $_cle => $_header) {
-							$fields[$conversion[$_header]] = isset($values[$_cle]) ? $values[$_cle] : '';
+							$fields[$sil_to_spip[trim($_header)]] = isset($values[$_cle]) ? $values[$_cle] : '';
 						}
 						$records[] = $fields;
 					}

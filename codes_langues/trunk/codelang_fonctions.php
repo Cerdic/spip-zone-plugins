@@ -36,7 +36,7 @@ function codelang_charger_tables_sil() {
 	
 	// On récupère la liste des tables spip implémentant la base SIL
 	include_spip('services/sil/sil_api');
-	$tables_sil = $GLOBALS['sil_service']['tables'];
+	$tables_sil = array_keys($GLOBALS['sil_service']['fields']);
 	
 	// On charge chacune de ces tables
 	$meta = array();
