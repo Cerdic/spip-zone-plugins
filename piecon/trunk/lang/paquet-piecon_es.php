@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'piecon_nom' => 'Piecon',
 	'piecon_slogan' => 'Inserción de la biblioteca Piecon en SPIP'
 );
-
-?>
