@@ -43,5 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_traductions' => 'View the details of the translations'
 );
-
-?>
