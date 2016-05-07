@@ -116,5 +116,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zbug_critere_necessite_parametre' => 'The {@critere@} criteria requires a parameter'
 );
-
-?>
