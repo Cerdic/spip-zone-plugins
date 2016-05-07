@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservations_multiples_nom' => 'Réservations multiples',
 	'reservations_multiples_slogan' => 'Réserver pour plusieurs personnes à la fois'
 );
-
-?>
