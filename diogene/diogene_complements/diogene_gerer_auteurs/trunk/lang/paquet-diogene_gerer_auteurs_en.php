@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_gerer_auteurs_nom' => 'Diogene - Authors',
 	'diogene_gerer_auteurs_slogan' => '"Authors" add-on for "Diogene"'
 );
-
-?>
