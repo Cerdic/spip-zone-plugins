@@ -270,5 +270,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verification_fichier' => 'Vérification du fichier...',
 	'verifier_formulaire' => 'Il y a des erreurs.<br />Vérifiez le contenu du formulaire.'
 );
-
-?>
