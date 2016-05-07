@@ -17,5 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_defaut' => 'Теги',
 	'noisette_titre_noisette' => 'Заголовок:'
 );
-
-?>

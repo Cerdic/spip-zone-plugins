@@ -17,5 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_defaut' => 'Tagy',
 	'noisette_titre_noisette' => 'Titulok:'
 );
-
-?>
