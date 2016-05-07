@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'manuelsite_nom' => 'Manual de redacción del sitio',
 	'manuelsite_slogan' => 'Un manual característico de su sitio para sus redactores'
 );
-
-?>

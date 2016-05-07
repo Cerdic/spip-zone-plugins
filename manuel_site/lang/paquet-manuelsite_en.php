@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'manuelsite_nom' => 'Website Editor Handbook',
 	'manuelsite_slogan' => 'A handbook specific to your site for your editors'
 );
-
-?>
