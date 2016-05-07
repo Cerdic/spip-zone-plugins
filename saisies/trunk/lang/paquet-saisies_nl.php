@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_slogan' => 'Eenvoudig formuliervelden maken.',
 	'saisies_titre' => 'Invoer voor formulieren'
 );
-
-?>

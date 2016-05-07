@@ -17,5 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_slogan' => 'Create easily forms fields.',
 	'saisies_titre' => 'Entries for forms'
 );
-
-?>

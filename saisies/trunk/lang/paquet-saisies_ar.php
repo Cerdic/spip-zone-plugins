@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_slogan' => 'إنشاء حقول استمارات بسهولة',
 	'saisies_titre' => 'إدخال للاستمارات'
 );
-
-?>

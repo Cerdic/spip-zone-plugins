@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_slogan' => 'Facilitar a entrada de dados em campos de formulários.',
 	'saisies_titre' => 'Entrada de dados para formulários'
 );
-
-?>
