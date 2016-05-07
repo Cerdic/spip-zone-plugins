@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dictionnaires_nom' => 'Dictionnaires',
 	'dictionnaires_slogan' => 'Créer des dictionnaires'
 );
-
-?>
