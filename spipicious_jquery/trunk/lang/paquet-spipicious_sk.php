@@ -15,5 +15,3 @@ _ Kľúčové slová sa pridávajú do skupiny, ktorá sa dá upravovať (podľa
 _ Ikonu vytvoril [Pawel Kadysz->http://oneseventyseven.com/]',
 	'spipicious_slogan' => 'Označkujte všetky objekty'
 );
-
-?>

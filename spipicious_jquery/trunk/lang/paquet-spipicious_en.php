@@ -15,5 +15,3 @@ _ Keywords are added to a group we can configure (’{{- tags -}}’ by default)
 _ Icon from [Pawel Kadysz->http://oneseventyseven.com/]',
 	'spipicious_slogan' => 'Tag each objects'
 );
-
-?>

@@ -13,5 +13,3 @@ _ Les mots-clés sont ajoutés dans un groupe configurable (par défaut ’{{- t
 _ Icone de [Pawel Kadysz->http://oneseventyseven.com/]',
 	'spipicious_slogan' => 'Tagger tous les objets'
 );
-
-?>

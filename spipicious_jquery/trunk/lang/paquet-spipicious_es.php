@@ -15,5 +15,3 @@ _ Las palabras claves se añaden en un grupo configurable (por defecto ’{{- ta
 _ Icono de [Pawel Kadysz->http://oneseventyseven.com/]',
 	'spipicious_slogan' => 'Etiquetar todos los objetos'
 );
-
-?>
