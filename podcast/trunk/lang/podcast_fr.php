@@ -122,5 +122,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'valeur_no' => 'Non',
 	'valeur_yes' => 'Oui'
 );
-
-?>
