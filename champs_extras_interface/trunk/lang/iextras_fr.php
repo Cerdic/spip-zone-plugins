@@ -35,6 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_action' => 'Action @action@ inconnue.',
 	'erreur_enregistrement_champ' => 'Problème de création du champ extra.',
+	'erreur_nom_champ_mysql_keyword' => 'Ce nom de champ est un mot clé réservé par SQL et ne peut être utilisé.',
+	'erreur_nom_champ_utilise' => 'Ce nom de champ est déjà utilisé par SPIP ou un plugin actif.',
 	'erreur_format_export' => 'Format d’export @format@ inconnu.',
 	'exporter_objet' => 'Exporter tous les champs extras de : @objet@',
 	'exporter_objet_champ' => 'Exporter le champs extras : @objet@ / @nom@',
