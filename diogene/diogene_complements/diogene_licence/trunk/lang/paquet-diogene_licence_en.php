@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_licence_nom' => 'Diogene - License',
 	'diogene_licence_slogan' => '"License" add-on for "Diogene"'
 );
-
-?>

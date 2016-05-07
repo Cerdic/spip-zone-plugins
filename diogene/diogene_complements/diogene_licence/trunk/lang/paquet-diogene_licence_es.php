@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_licence_nom' => 'Diógenes - Licencia',
 	'diogene_licence_slogan' => 'Complemento "licencia" para "Diógenes"'
 );
-
-?>
