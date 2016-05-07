@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pj2article_nom' => 'Importation des pièces jointes',
 	'pj2article_slogan' => 'Importer l’ensemble des pièces jointes d’une boîte mail et créer un article par fichier automatiquement'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pj2article_nom' => 'Importación de archivos adjuntos',
 	'pj2article_slogan' => 'Importar todos los archivos adjuntos de un buzón de correos electrónicos y crear automáticamente un artículo por archivo'
 );
-
-?>

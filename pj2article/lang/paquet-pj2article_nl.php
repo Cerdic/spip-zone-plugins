@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pj2article_nom' => 'Importeren van bijvoegsels',
 	'pj2article_slogan' => 'Importeer alle bijvoegsels uit een mailbox en maak automatisch één artikel per bestand'
 );
-
-?>
