@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilang_description' => 'Deze plugin voegt een taalkeuzemenu toe van het type <code>[fr] [en] [nl]</code> bovenaan ieder formulier en gebaseerd op de taalinstellingen van de site.',
 	'multilang_slogan' => 'Regel de titels van de labels aan de hand van een menu'
 );
-
-?>

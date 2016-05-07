@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilang_description' => 'This plugin adds a language menu like <code>[fr] [en] [it]</code> at the top of each form, depending on the language selected in the site configuration.',
 	'multilang_slogan' => 'Control the display of the contents of multi tags with a language menu'
 );
-
-?>

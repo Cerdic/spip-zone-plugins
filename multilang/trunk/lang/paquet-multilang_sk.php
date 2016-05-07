@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilang_description' => 'Tento zásuvný modul pridá jazykové menu <code>[fr] [en] [it]</code> do hornej časti každého formulára podľa aktivovaných jazykov v konfigurácii stránky.',
 	'multilang_slogan' => 'Riadiť zobrazenie obsahu kombinovaných tagov podľa menu'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilang_description' => 'Este plugin añade un menú de idiomas del tipo <code>[fr] [en] [it]</code> encima de cada formulario, en función de los idiomas activados en la configuración del sitio.',
 	'multilang_slogan' => 'Administrar la muestra del contenido de las etiquetas multi con un menu'
 );
-
-?>

@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'multilang_description' => 'Questo plugin aggiunge un menu di linguaggi di tipo <code>[fr] [it] [it]</code> nella parte superiore di ogni modulo, a seconda della lingua selezionata nella configurazione del sito.'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilang_description' => 'Dieses Plugin fügt den Formularen der Website ein Sprachmenü im Format <code>[fr] [en] [it]</code> hinzu. Es können die für die Website aktivierten Sprachen ausgewählt werden.',
 	'multilang_slogan' => 'Anzeige der multi-Tags in Menüs einstellen'
 );
-
-?>
