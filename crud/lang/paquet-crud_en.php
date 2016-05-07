@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crud_description' => 'C(r)UD Interface for SPIP that can be used via an action defined by its URL or calling it directly.',
 	'crud_slogan' => 'Interface to create, update and delete an object'
 );
-
-?>

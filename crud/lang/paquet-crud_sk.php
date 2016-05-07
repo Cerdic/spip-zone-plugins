@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crud_description' => 'Rozhranie C(r)UD pre SPIP, ktoré môžete využívať prostredníctvom akcie, ktorá je definovaná cez svoju url alebo priamo prostredníctvom dialógového okna.',
 	'crud_slogan' => 'Rozhranie na vytváranie, aktualizovanie a vymazávanie objektu'
 );
-
-?>
