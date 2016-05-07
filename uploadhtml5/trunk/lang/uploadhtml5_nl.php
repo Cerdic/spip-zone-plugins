@@ -43,5 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'uploadhtml5_titre' => 'Formulier voor html5 upload'
 );
-
-?>

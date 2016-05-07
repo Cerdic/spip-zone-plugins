@@ -43,5 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'uploadhtml5_titre' => 'Formulario de sublda html5'
 );
-
-?>
