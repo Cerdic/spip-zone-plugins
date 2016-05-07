@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ieconfig' => 'Import / Export de configurations',
 	'titre_import' => 'Importer une configuration'
 );
-
-?>

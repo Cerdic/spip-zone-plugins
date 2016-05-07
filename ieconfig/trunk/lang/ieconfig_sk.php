@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ieconfig' => 'Nahrať/Exportovať nastavenia',
 	'titre_import' => 'Nahrať nastavenia'
 );
-
-?>
