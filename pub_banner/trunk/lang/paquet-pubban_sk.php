@@ -29,5 +29,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* Stránka so štatistikami zásuvného modulu je jednoduchým prispôsobením skriptu "{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}," ktorý naprogramoval {{Vincent Roseberry}} ({toho času s licenciou GPL.})', # MODIF
 	'pubban_slogan' => 'Ovládanie reklamných pútačov'
 );
-
-?>

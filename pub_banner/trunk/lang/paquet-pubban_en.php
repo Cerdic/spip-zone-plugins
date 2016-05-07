@@ -29,5 +29,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - * The statistics page of the plugin is a free adaptation of the script ’{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}’, developed by {{Vincent Roseberry}} ({GPL licensed at that time}).',
 	'pubban_slogan' => ' Ads banners manager'
 );
-
-?>

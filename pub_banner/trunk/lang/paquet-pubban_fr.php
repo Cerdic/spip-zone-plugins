@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* La page de statistiques du plugin est une adaptation libre du script ’{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}’ développé par {{Vincent Roseberry}} ({sous licence GPL à l’époque}).',
 	'pubban_slogan' => 'Gestionnaire de bannières publicitaires'
 );
-
-?>
