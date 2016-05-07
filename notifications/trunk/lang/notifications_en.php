@@ -135,5 +135,3 @@ Restricted administrators get notified when new posts are published in the secto
 	// T
 	'titre_moderation' => 'Moderation'
 );
-
-?>

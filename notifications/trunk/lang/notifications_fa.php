@@ -94,5 +94,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_vos_forums_date' => 'سخنگاه‌هاي شما، به ترتيب تاريخ',
 	'suivis_public_votre_page' => 'اين صفحه‌ي شخصي شما براي پيگيري سايت است'
 );
-
-?>

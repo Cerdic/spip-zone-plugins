@@ -133,5 +133,3 @@ Sie hat folgende Adresse :',
 	// T
 	'titre_moderation' => 'Moderation'
 );
-
-?>
