@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_tooltips' => 'Bublinková nápoveda',
 	'titre_page_configurer_tooltips' => 'Nastavenia bublinkovej nápovedy'
 );
-
-?>

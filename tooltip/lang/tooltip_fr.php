@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_tooltips' => 'Infobulles',
 	'titre_page_configurer_tooltips' => 'Configuration des infobulles'
 );
-
-?>

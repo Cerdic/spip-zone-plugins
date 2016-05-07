@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_tooltips' => 'Tooltips',
 	'titre_page_configurer_tooltips' => 'Configuratie van Tooltips'
 );
-
-?>
