@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'De meertalige velden kunnen alleen worden gelezen, kies een taal om ze aan te passen'
 );
-
-?>

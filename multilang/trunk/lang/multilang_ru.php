@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'Многоязычные поля только для чтения, выберите язык, чтобы их изменить'
 );
-
-?>

@@ -34,5 +34,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'Les champs multilingues sont en lecture seule, choisissez une langue pour les modifier'
 );
-
-?>

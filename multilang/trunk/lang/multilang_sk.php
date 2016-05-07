@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'Viacjazyčné polia sú iba na čítanie, ak ich chcete upraviť, vyberte si jazyk'
 );
-
-?>

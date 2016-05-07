@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'Die mehrsprachigen Felder befinden sich im Nur-Lesen-Modus. Wählen Sie eine Sprache, um sie zu ändern.'
 );
-
-?>

@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_champs_readonly' => 'The multilingual fields are in read only mode, choose a language to edit them'
 );
-
-?>
