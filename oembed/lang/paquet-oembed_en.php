@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'oembed_description' => 'oEmbed client/provider for SPIP.',
 	'oembed_slogan' => 'oEmbed client/provider for SPIP'
 );
-
-?>
