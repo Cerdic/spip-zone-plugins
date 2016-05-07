@@ -225,5 +225,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// W
 	'width_video' => 'Largeur de la sortie en px'
 );
-
-?>
