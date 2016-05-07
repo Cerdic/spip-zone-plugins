@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'photospip_description' => 'Modificar las imágenes insertadas en SPIP aplicándoles diferentes filtros',
 	'photospip_slogan' => 'Modificación de imágenes en SPIP'
 );
-
-?>
