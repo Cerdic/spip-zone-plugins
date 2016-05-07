@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_pages_converties' => '@nb@ pages converties liées',
 	'info_une_page_convertie' => 'Une page convertie liée'
 );
-
-?>

@@ -49,5 +49,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_pages_converties' => '@nb@ geconverteerde bladzijdes gekoppeld',
 	'info_une_page_convertie' => 'Eén geconverteerde bladzijde gekoppeld'
 );
-
-?>
