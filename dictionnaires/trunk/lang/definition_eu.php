@@ -37,5 +37,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_definitions' => 'Definizioak',
 	'titre_logo_definition' => 'definizio honen logotipoa'
 );
-
-?>
