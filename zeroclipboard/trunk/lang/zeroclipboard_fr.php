@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'link_title_copied' => 'Le contenu est copié dans le presse-papier',
 	'link_title_copy' => 'Copier dans le presse-papier'
 );
-
-?>
