@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'smush_description' => 'El plugin Smush permite reducir el tamaño de las imágenes de un sitio al mínimo utilizando softwares específicos en el servidor.',
 	'smush_slogan' => 'Reducir sus imágenes al mínimo.'
 );
-
-?>
