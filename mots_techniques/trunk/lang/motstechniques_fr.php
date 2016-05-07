@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_mots_cles_techniques' => 'Groupe de mots-clés techniques : '
 );
-
-?>
