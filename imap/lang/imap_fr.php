@@ -31,5 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'test_parametres_remplis_notok' => 'Remplir les paramètres du serveur avant de tester la connexion IMAP.',
 	'titre_page_configurer_imap' => 'Connexion IMAP'
 );
-
-?>
