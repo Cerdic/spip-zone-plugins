@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'informerpremiereconnexion_nom' => 'Informer à la première connexion',
 	'informerpremiereconnexion_slogan' => 'Afficher un message explicatif lors de la première connexion'
 );
-
-?>
