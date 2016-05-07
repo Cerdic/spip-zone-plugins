@@ -110,5 +110,3 @@ Par exemple pour le module Facebook "Send" :
 	// T
 	'titre_original' => 'Šablóny pre Facebook, zásuvný modul pre SPIP >2.0'
 );
-
-?>

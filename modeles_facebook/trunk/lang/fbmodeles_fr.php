@@ -108,5 +108,3 @@ Par exemple pour le module Facebook "Send" :
 	// T
 	'titre_original' => 'Facebook Models, plugin pour SPIP 2.0+'
 );
-
-?>
