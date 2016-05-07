@@ -180,5 +180,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zotspip' => 'ZotSpip'
 );
-
-?>
