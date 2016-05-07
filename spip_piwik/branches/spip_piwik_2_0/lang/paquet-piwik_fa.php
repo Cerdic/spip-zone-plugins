@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'piwik_description' => 'افزودن نويسه‌ي آماري پيويك (تحليلگر ترافيك وب)(Piwik) روي صفحه‌هاي سايت ',
 	'piwik_slogan' => 'پيوند [اسپيپ->http://www.spip.net] و [پيويك->http://www.piwik.org]'
 );
-
-?>

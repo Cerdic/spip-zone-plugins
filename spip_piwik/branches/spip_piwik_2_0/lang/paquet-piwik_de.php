@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'piwik_description' => 'Fügt den Webseiten das Statistiktool (Website Traffic Analyse) PIWIK hinzu.',
 	'piwik_slogan' => 'SPIP-Schnittstelle mit PIWIK'
 );
-
-?>
