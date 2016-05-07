@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_titre' => 'Trier par titre',
 	'tri_version' => 'Trier par version'
 );
-
-?>
