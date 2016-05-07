@@ -68,32 +68,13 @@ function compter_champs_extras($table) {
  * @param array
  * @return array
 **/
-function iextras_formulaire_verifier($flux) {
-	if ($flux['args']['form'] == 'construire_formulaire'
-	AND strpos($flux['args']['args'][0], 'champs_extras_')===0
-	AND $nom_ou_id = _request('configurer_saisie') ) {
+function iextras_saisies_construire_formulaire_config($flux) {
 
-		// On ajoute le préfixe devant l'identifiant
-		$identifiant = 'constructeur_formulaire_'.$flux['args']['args'][0];
-		// On récupère le formulaire à son état actuel
-		$formulaire_actuel = session_get($identifiant);
-
-		if ($nom_ou_id[0] == '@') {
-			$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
-			$name = $saisies_actuelles[$nom_ou_id]['options']['nom'];
-		} else {
-			$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
-			$name = $nom_ou_id;
-		}
-
-		// saisie inexistante => on sort
-		if (!isset($saisies_actuelles[$nom_ou_id])) {
-			return $flux;
-		}
-
-		$nom = 'configurer_' . $name;
-		$table = substr($flux['args']['args'][0], strlen('champs_extras_'));
-
+	if (strpos($flux['args']['identifiant'], 'constructeur_formulaire_champs_extras_') === 0) {
+		$table = substr($flux['args']['identifiant'], strlen('constructeur_formulaire_champs_extras_'));
+		$name  = $flux['args']['nom'];
+		$formulaire_actuel = $flux['data'];
+		$type_saisie = $flux['args']['saisie']['saisie'];
 
 		// on ajoute le fieldset de restrictions de champs
 		// (des autorisations pre-reglées en quelque sorte)
@@ -153,7 +134,7 @@ function iextras_formulaire_verifier($flux) {
 		}
 
 
-		$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
+		$flux['data'] = saisies_inserer($flux['data'], array(
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => "saisie_modifiee_${name}[options][restrictions]",
@@ -164,14 +145,19 @@ function iextras_formulaire_verifier($flux) {
 
 
 
-		// on récupère les informations de la saisie
+		// On récupère les informations de la saisie
 		// pour savoir si c'est un champs éditable (il a une ligne SQL)
-		// et dans ce cas, on ajoute les options techniques
-		$type_saisie = $saisies_actuelles[$nom_ou_id]['saisie'];
+		// et dans ce cas :
+		//
+		// - on modifie le type de vérification du nom du champ (regexp > nom_champ_extra)
+		//   Cette vérification crée une erreur si le nom est déjà utilisé par SPIP ou un plugin, et si c'est un mot clé SQL
+		//
+		// - on ajoute les options techniques
 		$saisies_sql = saisies_lister_disponibles_sql();
 
 		if (isset($saisies_sql[$type_saisie])) {
 
+			// Ajout de l'onglet Technique
 			// liste 'type_de_saisie' => 'Titre de la saisie'
 			$liste_saisies = array();
 			foreach ($saisies_sql as $s=>$d) {
@@ -179,7 +165,7 @@ function iextras_formulaire_verifier($flux) {
 			}
 
 			$sql = $saisies_sql[$type_saisie]['defaut']['options']['sql'];
-			$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
+			$flux['data'] = saisies_inserer($flux['data'], array(
 
 				'saisie' => 'fieldset',
 				'options' => array(
@@ -253,5 +239,6 @@ function iextras_formulaire_verifier($flux) {
 				)));
 		}
 	}
+
 	return $flux;
 }

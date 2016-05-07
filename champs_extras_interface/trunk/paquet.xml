@@ -1,7 +1,7 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="3.3.5"
+	version="3.4.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/iextras-64.png"
@@ -19,10 +19,10 @@
 	<pipeline nom="declarer_champs_extras" inclure="base/iextras.php" />
 
 	<pipeline nom="autoriser" inclure="inc/iextras_autoriser.php" />
-	<pipeline nom="formulaire_verifier" inclure="inc/iextras.php" />
+	<pipeline nom="saisies_construire_formulaire_config" inclure="inc/iextras.php" />
 
 	<necessite nom="cextras" compatibilite="[3.5.2;]" />
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.7.0;]" />
 	<necessite nom="verifier" compatibilite="[1.0.5;]" />
 	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 
