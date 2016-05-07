@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'polyhier_description' => 'Met deze plugin kunnen rubrieken en artikelen transversaal worden gekoppeld met andere rubrieken dan hun directe rubriek.',
 	'polyhier_slogan' => 'Koppel een artikel of een subrubriek aan meerdere rubrieken'
 );
-
-?>

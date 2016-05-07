@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	et articles à d’autres rubriques que leur parent direct.',
 	'polyhier_slogan' => 'Rattacher un article ou une rubrique à plusieurs rubriques parentes'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'polyhier_description' => 'Plugin que permite crear enlaces vinculando las secciones y artículos a más secciones que las de su origen directo.',
 	'polyhier_slogan' => 'Vincular un artículo o una sección a varias secciones de la misma familia'
 );
-
-?>

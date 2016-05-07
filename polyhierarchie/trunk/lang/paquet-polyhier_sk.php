@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	aj v iných rubrikách ako v priamej nadradenej rubrike.',
 	'polyhier_slogan' => 'Vytvorte odkaz na článok alebo rubriku vo viacerých nadradených rubrikách'
 );
-
-?>

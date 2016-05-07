@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	and articles to other sections that their direct parent.',
 	'polyhier_slogan' => 'Attach an article or a section on several parent sections.'
 );
-
-?>
