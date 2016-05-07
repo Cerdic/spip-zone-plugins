@@ -101,5 +101,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'Šis meklētājs izmanto standarta loģiskos operatorus.'
 );
-
-?>

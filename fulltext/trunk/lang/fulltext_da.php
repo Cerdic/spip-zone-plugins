@@ -84,5 +84,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'Søgningen bruger de standard logiske operatorer.'
 );
-
-?>

@@ -135,5 +135,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_doc_ptg' => 'Voir les documents protégés'
 );
-
-?>

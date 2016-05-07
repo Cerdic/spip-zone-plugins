@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'Vyhledávání používá standardní logické operátory.'
 );
-
-?>

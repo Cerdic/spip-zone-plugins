@@ -137,5 +137,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_doc_ptg' => 'Toon de beveiligde documenten'
 );
-
-?>

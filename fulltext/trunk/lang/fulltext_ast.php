@@ -96,5 +96,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'La gueta utiliza los operadores lóxicos más corrientes.'
 );
-
-?>

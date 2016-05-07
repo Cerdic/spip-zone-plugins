@@ -104,5 +104,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'Die Suche funktioniert mit den bekanntesten Operatoren.'
 );
-
-?>

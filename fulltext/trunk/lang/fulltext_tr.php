@@ -91,5 +91,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'Arama en sık kullanılan mantıksal operatörleri kullanır.'
 );
-
-?>

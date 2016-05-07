@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'A procura utiliza os operadores lógicos mais vulgares.'
 );
-
-?>

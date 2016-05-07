@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'utiliser_operateurs_logiques' => 'La cerca utilitza els operadors lògics més corrents.'
 );
-
-?>
