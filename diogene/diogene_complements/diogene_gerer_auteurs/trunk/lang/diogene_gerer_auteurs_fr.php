@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_impossible_supprimer_auteur' => 'Vous ne pouvez vous supprimer vous-même de la liste des auteurs. Vous perdriez vos droits d’édition.'
 );
-
-?>
