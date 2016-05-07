@@ -417,5 +417,3 @@ Numerous statistical studies show that the banners at the top of a web page, top
 	// W
 	'width' => 'Width'
 );
-
-?>

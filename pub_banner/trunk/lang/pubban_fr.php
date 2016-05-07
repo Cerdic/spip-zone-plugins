@@ -415,5 +415,3 @@ Les nombreuses études statistiques montrent que les bannières publicitaires pr
 	// W
 	'width' => 'Largeur'
 );
-
-?>
