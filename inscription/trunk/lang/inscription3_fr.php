@@ -286,5 +286,3 @@ Si vous n’avez pas demandé cette inscription ou si vous ne voulez plus faire 
 	'votre_mail' => 'Votre email :',
 	'votre_nom_complet' => 'Votre nom complet'
 );
-
-?>

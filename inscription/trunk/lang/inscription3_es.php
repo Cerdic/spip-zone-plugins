@@ -278,5 +278,3 @@ Si no ha solicitado este registro o si no quiere formar parte de nuestro sitio, 
 	'votre_mail' => 'Su dirección de correo electrónico:',
 	'votre_nom_complet' => 'Su nombre completo'
 );
-
-?>

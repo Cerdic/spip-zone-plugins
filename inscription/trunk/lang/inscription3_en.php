@@ -280,5 +280,3 @@ If you did not ask for this registration or do not want to take part in the site
 	'votre_mail' => 'Your email:',
 	'votre_nom_complet' => 'Your full name'
 );
-
-?>
