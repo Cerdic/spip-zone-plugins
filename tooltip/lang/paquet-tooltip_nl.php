@@ -15,5 +15,3 @@ _ Gebaseerd op het jQuery script "Tooltip".',
 	'tooltip_nom' => 'Tooltips',
 	'tooltip_slogan' => 'Tooltips in jQuery'
 );
-
-?>

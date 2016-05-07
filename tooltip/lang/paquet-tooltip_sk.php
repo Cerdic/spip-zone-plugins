@@ -15,5 +15,3 @@ _ D’après le script jQuery « Tooltip ».',
 	'tooltip_nom' => 'Bublinková nápoveda',
 	'tooltip_slogan' => 'Bublinková nápoveda v jQuery'
 );
-
-?>

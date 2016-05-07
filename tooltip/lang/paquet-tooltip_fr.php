@@ -13,5 +13,3 @@ _ D’après le script jQuery « Tooltip ».',
 	'tooltip_nom' => 'Tooltips',
 	'tooltip_slogan' => 'Infobulles jQuery'
 );
-
-?>

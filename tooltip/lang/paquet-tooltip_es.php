@@ -15,5 +15,3 @@ _ Según jQuery «Toolti ».',
 	'tooltip_nom' => 'Tooltips',
 	'tooltip_slogan' => 'Tooltips jQuery'
 );
-
-?>
