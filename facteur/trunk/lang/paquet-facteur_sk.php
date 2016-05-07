@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_nom' => 'Poštár',
 	'facteur_slogan' => 'Posiela vašu poštu'
 );
-
-?>

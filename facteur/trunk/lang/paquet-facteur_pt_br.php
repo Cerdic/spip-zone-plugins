@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_nom' => 'Carteiro',
 	'facteur_slogan' => 'Distribui os seus e-mails'
 );
-
-?>
