@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'openid_description' => 'Un usuario que desee utilizar su OpenID para acceder al sitio debe introducirlo como dirección de su sitio web en su perfil. A continuación, en lugar de meter su identificador de usuario o dirección de correo electrónico, basta con introducir su OpenID para conectarse.',
 	'openid_slogan' => 'Autentificación de los autores y visitantes en ayuda de su OpenID'
 );
-
-?>

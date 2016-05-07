@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'openid_description' => 'A user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.',
 	'openid_slogan' => 'Authenticates users with their OpenID'
 );
-
-?>
