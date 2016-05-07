@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facd_description' => 'Gestion de file d’attente pour la conversion de documents.',
 	'facd_slogan' => 'Gestion de file d’attente pour la conversion de documents'
 );
-
-?>

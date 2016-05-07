@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facd_description' => 'Beheer van een wachtrij voor de conversie van documenten.',
 	'facd_slogan' => 'Beheer van een wachtrij voor de conversie van documenten'
 );
-
-?>

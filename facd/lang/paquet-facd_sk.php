@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facd_description' => 'Riadenie radu dokumentov, ktoré čakajú na konverziu.',
 	'facd_slogan' => 'Riadenie radu dokumentov, ktoré čakajú na konverziu'
 );
-
-?>

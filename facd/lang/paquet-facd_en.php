@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facd_description' => 'Conversion queue management for documents.',
 	'facd_slogan' => 'Conversion queue management for documents'
 );
-
-?>
