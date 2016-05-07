@@ -16,5 +16,3 @@ En outre, PlugOnet permet de valider des fichiers paquet.xml écrits manuellemen
 une aide sur chaque balise de la nouvelle DTD.',
 	'plugonet_slogan' => 'Migrer de la DTD plugin à celle de paquet'
 );
-
-?>

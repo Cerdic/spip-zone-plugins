@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Okrem toho PlugOnet umožňuje overiť manuálne napísané súbory paquet.xml a poskytuje pomoc ku každému tagu nového DTD.',
 	'plugonet_slogan' => 'Prechod zo zásuvného modulu DTD na tento balík'
 );
-
-?>

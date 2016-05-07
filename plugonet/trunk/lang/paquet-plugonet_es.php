@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Además, PlugOnet permite validar archivos paquet.xml escritos manualmente y provee una ayuda sobre cada baliza de la nueva DTD.',
 	'plugonet_slogan' => 'Migrar de la DTD "plugin" a la DTD "paquet"'
 );
-
-?>

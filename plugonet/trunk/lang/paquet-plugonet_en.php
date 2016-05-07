@@ -15,5 +15,3 @@ In addition, PlugOnet allows to validates manually generated paquet.xml files an
 assistance for each tag of the new DTD.',
 	'plugonet_slogan' => 'Migrate from the plugin DTD to the the paquet DTD'
 );
-
-?>
