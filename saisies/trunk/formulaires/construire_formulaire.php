@@ -188,8 +188,22 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		}
 		$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
 	}
-	
-	
+
+
+	// Permettre d'intégrer des saisies et fieldset au formulaire de configuration.
+	// Si des vérifications sont à faire, elles seront prises en compte
+	// lors des tests de vérifications à l'enregistrement.
+	$formulaire_config = pipeline('saisies_construire_formulaire_config', array(
+		'data' => $formulaire_config,
+		'args' => array(
+			'identifiant' => $identifiant,
+			'action' => $enregistrer_saisie ? 'enregistrer' : 'configurer',
+			'options' => $options,
+			'nom' => $nom,
+			'saisie' => $saisie,
+		),
+	));
+
 	if ($enregistrer_saisie){
 		// La saisie modifié
 		$saisie_modifiee = _request("saisie_modifiee_${nom}");
