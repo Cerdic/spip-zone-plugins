@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_version_originale' => 'Version originale',
 	'titre_version_smushed' => 'Version optimisée'
 );
-
-?>
