@@ -16,5 +16,3 @@ _ <code>#INCLURE{fond=inclure/twidget_profile}</code>
  Le plugin fait office de proxy afin qu’aucune requête ne soit faite par vos visiteurs vers twitter et éviter tout traçage possible de leur activité (préservation de leur vie personnelle).',
 	'twidget_slogan' => 'Un widget Twitter facile a installer'
 );
-
-?>

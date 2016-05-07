@@ -18,5 +18,3 @@ _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}_ <code>#INCLURE{f
 a aby sa zabránilo možnosti sledovať ich aktivitu  (ukladania ich osobných údajov).',
 	'twidget_slogan' => 'Jednoduchý widget pre Twitter na nainštalovanie'
 );
-
-?>

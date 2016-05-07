@@ -18,5 +18,3 @@ _ <code>#INCLURE{fond=inclure/twidget_profile,user=GusLeLapin}</code>
 De plugin gebruikt een proxy om geen rechtstreeks verzoek van je bezoekers naar Twitter te provoceren en zo de sporen van hun activiteiten verborgen te houden (bescherming van de privacy).',
 	'twidget_slogan' => 'Eenvoudig te installeren Twitter widget'
 );
-
-?>
