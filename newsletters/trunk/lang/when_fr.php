@@ -52,5 +52,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_until_date' => 'jusqu’au @date@',
 	'info_wkst_day' => 'semaine commençant le @day@'
 );
-
-?>
