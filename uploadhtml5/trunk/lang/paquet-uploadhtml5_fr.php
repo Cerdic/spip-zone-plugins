@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'uploadhtml5_nom' => 'Formulaire upload html5',
 	'uploadhtml5_slogan' => 'Un formulaire d’upload en html5'
 );
-
-?>
