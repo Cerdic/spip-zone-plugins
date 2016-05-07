@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taa_nom' => 'Перевод статей по-иному',
 	'taa_slogan' => 'Облегчает перевод статей'
 );
-
-?>

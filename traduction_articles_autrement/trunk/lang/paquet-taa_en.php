@@ -18,5 +18,3 @@ And to take advantage of a translation system in the sense of this plugin, insta
 	'taa_nom' => 'Article translations differently',
 	'taa_slogan' => 'Make the articles translation easier.'
 );
-
-?>
