@@ -31,5 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_multilingue' => 'Configuration of Multilingual Web-site Easy'
 );
-
-?>
