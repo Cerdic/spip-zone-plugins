@@ -180,5 +180,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'validation_rubrique' => 'Folder is required.',
 	'validation_type_nexiste_pas' => '@type@ n° @id_objet@ doesn’t exist !'
 );
-
-?>

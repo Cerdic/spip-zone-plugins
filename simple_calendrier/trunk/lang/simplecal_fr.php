@@ -197,5 +197,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'validation_rubrique' => 'La rubrique est requise.',
 	'validation_type_nexiste_pas' => '@type@ n° @id_objet@ n’existe pas !'
 );
-
-?>
