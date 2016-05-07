@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		wenn diese ein Interface haben.',
 	'grappes_nom' => 'Trauben'
 );
-
-?>

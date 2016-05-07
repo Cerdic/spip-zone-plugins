@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grappes_nom' => 'Racimos',
 	'grappes_slogan' => 'Reagrupar los objetos SPIP en un mismo universo'
 );
-
-?>
