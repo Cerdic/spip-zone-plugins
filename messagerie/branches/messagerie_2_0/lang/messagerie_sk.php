@@ -31,5 +31,3 @@ Správu poslal(a) @nom_site@ (@url_site@)',
 	'texte_un_nouveau_message' => 'Máte <b>jednu</b> novú správu',
 	'titre_message_general' => 'Všeobecný oznam'
 );
-
-?>

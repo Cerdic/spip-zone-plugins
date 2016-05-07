@@ -31,5 +31,3 @@ Bericht verzonden door @nom_site@ (@url_site@)',
 	'texte_un_nouveau_message' => 'Je hebt <b>een</b> nieuw bericht',
 	'titre_message_general' => 'Algemene aankondiging'
 );
-
-?>

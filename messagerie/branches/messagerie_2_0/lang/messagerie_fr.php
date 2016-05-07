@@ -30,5 +30,3 @@ Courriel envoyé par @nom_site@ (@url_site@)',
 	'texte_un_nouveau_message' => 'Vous avez <b>un</b> nouveau message',
 	'titre_message_general' => 'Annonce générale'
 );
-
-?>

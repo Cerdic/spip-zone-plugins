@@ -31,5 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_un_nouveau_message' => '<b>يك</b>پيام جديد داريد',
 	'titre_message_general' => 'بيانيه‌ي همگاني'
 );
-
-?>

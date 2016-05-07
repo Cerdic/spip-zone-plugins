@@ -32,5 +32,3 @@ Correo enviado por @nom_site@ (@url_site@)',
 	'texte_un_nouveau_message' => 'Tienes <b>un</b> nuevo mensaje',
 	'titre_message_general' => 'Aviso general'
 );
-
-?>
