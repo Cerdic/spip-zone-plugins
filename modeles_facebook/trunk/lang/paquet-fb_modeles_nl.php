@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fb_modeles_nom' => 'Facebook Modellen',
 	'fb_modeles_slogan' => 'Modellen voor Facebook-modules'
 );
-
-?>

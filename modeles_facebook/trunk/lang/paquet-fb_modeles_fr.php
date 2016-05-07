@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fb_modeles_nom' => 'Facebook Models',
 	'fb_modeles_slogan' => 'Modèles pour inclure les modules sociaux Facebook'
 );
-
-?>

@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fb_modeles_nom' => 'Šablóny Facebooku',
 	'fb_modeles_slogan' => 'Šablóny na vloženie modulov sociálnej siete Facebook'
 );
-
-?>
