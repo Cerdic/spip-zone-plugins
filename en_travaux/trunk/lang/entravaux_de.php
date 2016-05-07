@@ -35,5 +35,3 @@ _ Bitte schauen sie später wieder vorbei.',
 	// T
 	'texte_lien_publier' => 'Website freischalten'
 );
-
-?>

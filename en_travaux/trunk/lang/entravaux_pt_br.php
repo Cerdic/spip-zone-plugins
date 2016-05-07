@@ -35,5 +35,3 @@ _ Volte mais tarde.',
 	// T
 	'texte_lien_publier' => 'Liberar o acesso público pelo site.'
 );
-
-?>

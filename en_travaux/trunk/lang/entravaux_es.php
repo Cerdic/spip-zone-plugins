@@ -35,5 +35,3 @@ _ Por favor regrese más tarde.',
 	// T
 	'texte_lien_publier' => 'Hacer público el sitio'
 );
-
-?>

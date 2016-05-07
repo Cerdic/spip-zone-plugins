@@ -35,5 +35,3 @@ _ Skúste neskôr.',
 	// T
 	'texte_lien_publier' => 'Zobraziť verejne prístupnú stránku'
 );
-
-?>

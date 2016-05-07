@@ -27,5 +27,3 @@ _ Torna più tardi...',
 	// P
 	'parametrage_page_travaux' => 'Configurazione della pagina di manutenzione'
 );
-
-?>

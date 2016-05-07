@@ -35,5 +35,3 @@ _ Please come back later...',
 	// T
 	'texte_lien_publier' => 'Make the Web site public'
 );
-
-?>

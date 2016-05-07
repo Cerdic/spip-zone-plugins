@@ -35,5 +35,3 @@ _ Tournàs pu tardi.',
 	// T
 	'texte_lien_publier' => 'Rendre lou sit pùblicou'
 );
-
-?>

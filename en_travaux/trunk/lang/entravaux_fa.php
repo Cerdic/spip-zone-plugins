@@ -37,5 +37,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_lien_publier' => 'ساخت سايت همگاني'
 );
-
-?>

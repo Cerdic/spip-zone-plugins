@@ -35,5 +35,3 @@ _ Kom later terug.',
 	// T
 	'texte_lien_publier' => 'Maak de site weer toegankelijk'
 );
-
-?>
