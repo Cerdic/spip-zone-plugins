@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entravaux_nom' => 'Отключить сайт (En travaux)',
 	'entravaux_slogan' => 'Позволяет отключать доступ к сайту для посетителей'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entravaux_nom' => 'Wartung',
 	'entravaux_slogan' => 'Ausgabe einer Wartungsmeldung'
 );
-
-?>

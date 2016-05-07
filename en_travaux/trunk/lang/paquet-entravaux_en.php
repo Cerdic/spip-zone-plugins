@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entravaux_nom' => 'Under construction',
 	'entravaux_slogan' => 'Indicate a maintenance phase'
 );
-
-?>

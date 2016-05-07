@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entravaux_nom' => 'Rekonštruuje sa',
 	'entravaux_slogan' => 'Nastaviť stránku rekonštrukcie'
 );
-
-?>
