@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivant_precedent_nom' => 'Critères Suivant / Précédent',
 	'suivant_precedent_slogan' => 'Ajoute des critères de boucles <code>{suivant}</code> et <code>{precedent}</code>'
 );
-
-?>

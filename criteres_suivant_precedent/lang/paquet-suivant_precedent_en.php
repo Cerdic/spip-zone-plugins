@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivant_precedent_nom' => 'Next / Previous criteria',
 	'suivant_precedent_slogan' => 'Adds loops criteria <code>{suivant}</code> and <code>{precedent}</code>'
 );
-
-?>
