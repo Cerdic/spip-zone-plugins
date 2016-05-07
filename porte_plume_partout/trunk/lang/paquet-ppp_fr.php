@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ppp_nom' => 'Porte Plume Partout',
 	'ppp_slogan' => 'Afficher le Porte Plume sur la plupart des champs de saisie'
 );
-
-?>

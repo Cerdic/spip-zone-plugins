@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ppp_nom' => 'Porte Plume Partout',
 	'ppp_slogan' => 'Gebruik Porte Plume bij de meeste invoervelden'
 );
-
-?>

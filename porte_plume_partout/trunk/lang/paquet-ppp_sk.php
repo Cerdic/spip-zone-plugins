@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ppp_nom' => 'Porte Plume všade',
 	'ppp_slogan' => 'Zobraziť Porte Plume pri väčšine textových polí'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ppp_nom' => 'Quill everywhere',
 	'ppp_slogan' => 'Display Quill on most input fields'
 );
-
-?>
