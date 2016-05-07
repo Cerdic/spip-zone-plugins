@@ -44,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_croissant' => 'Tri croissant',
 	'tri_decroissant' => 'Tri décroissant'
 );
-
-?>

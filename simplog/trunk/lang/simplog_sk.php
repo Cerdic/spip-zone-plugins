@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_croissant' => 'Zotriediť vzostupne',
 	'tri_decroissant' => 'Zotriediť zostupne'
 );
-
-?>

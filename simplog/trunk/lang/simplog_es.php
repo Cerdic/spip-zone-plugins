@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_croissant' => 'Orden descendente',
 	'tri_decroissant' => 'Orden descendiente'
 );
-
-?>
