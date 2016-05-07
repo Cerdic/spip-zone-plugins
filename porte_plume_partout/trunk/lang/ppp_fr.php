@@ -28,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer' => 'Remettre les valeurs par défaut'
 );
-
-?>

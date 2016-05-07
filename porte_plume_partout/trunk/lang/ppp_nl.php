@@ -30,5 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'supprimer' => 'Zet alle standaardwaardes terug'
 );
-
-?>
