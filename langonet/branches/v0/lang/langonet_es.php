@@ -162,5 +162,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'z_test' => 'PRUEBA: Este ítem de idioma sirve para la búsqueda de atajos y contiene "test"'
 );
-
-?>

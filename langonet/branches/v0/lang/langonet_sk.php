@@ -164,5 +164,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'z_test' => 'TEST: Táto položka jazyka slúži na vyhľadávanie skratiek a test obsahu.'
 );
-
-?>

@@ -162,5 +162,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'z_test' => 'TEST: this language item is used to search shortcuts and contains test.'
 );
-
-?>

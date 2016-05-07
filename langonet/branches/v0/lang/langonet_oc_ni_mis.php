@@ -162,5 +162,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'z_test' => 'PROVA : Aquel item de lenga sierve per la recerca d’escourcha e counten prova.'
 );
-
-?>
