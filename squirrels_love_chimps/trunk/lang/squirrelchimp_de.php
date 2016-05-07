@@ -28,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_raccourcis' => 'Abkürzung',
 	'titre_plugin' => 'Squirrels Love Chimps'
 );
-
-?>
