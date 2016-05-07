@@ -111,5 +111,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page' => 'PlugOnet',
 	'titre_page_navigateur' => 'PlugOnet'
 );
-
-?>
