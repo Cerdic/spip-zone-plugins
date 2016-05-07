@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_description' => 'Permite importar contactos tras enviar en masa invitaciones para unirse al grupo. Si las personas se registran, se conserva un vínculo con aquél que las ha invitado (el padrino).',
 	'parrainage_slogan' => 'Proponer a los usuarios una herramienta de apadrinamiento.'
 );
-
-?>

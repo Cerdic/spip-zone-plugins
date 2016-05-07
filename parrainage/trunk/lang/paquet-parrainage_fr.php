@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_description' => 'Permet d’importer des contacts puis d’envoyer en masse des invitations à rejoindre le site. Si des personnes s’inscrivent, alors un lien est conservé avec celui qui les a invité (le parrain).',
 	'parrainage_slogan' => 'Proposer aux utilisateurs un outil de parrainage.'
 );
-
-?>

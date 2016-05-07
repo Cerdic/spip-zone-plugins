@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parrainage_description' => 'Allows you to import contacts and send mass invitations to join the site. If people sign up, then a link is maintained with the one who invited them (the sponsor).',
 	'parrainage_slogan' => 'Provide users with a tool for sponsorship.'
 );
-
-?>
