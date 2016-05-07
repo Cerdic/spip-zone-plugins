@@ -54,5 +54,3 @@ Alón, y gracies.
 	'veuillez' => 'Tienes que poner la to direción.',
 	'votreemail' => 'El to email:'
 );
-
-?>

@@ -53,5 +53,3 @@ Děkujeme a zdravíme.
 	'veuillez' => 'Zadejte prosím adresu.',
 	'votreemail' => 'Váš e-mail:'
 );
-
-?>

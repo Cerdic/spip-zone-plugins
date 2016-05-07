@@ -54,5 +54,3 @@ Agur eta milesker.
 	'veuillez' => 'Zure helbidea zehaztea eskertzen dizugu.',
 	'votreemail' => 'Zure emaila :'
 );
-
-?>

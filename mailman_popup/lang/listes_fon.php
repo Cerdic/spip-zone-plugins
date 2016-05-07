@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez' => 'Mi kɛnklɛn mi lɛ vɔ tɛɖɛ nyikɔ mi tɔn ji ',
 	'votreemail' => 'e-mailu mi tɔn '
 );
-
-?>

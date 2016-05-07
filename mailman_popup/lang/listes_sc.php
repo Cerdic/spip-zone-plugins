@@ -54,5 +54,3 @@ Grazie.
 	'veuillez' => 'Pone s’indiritzu tuo de posta eletrònica.',
 	'votreemail' => 'Indiritzu de post.e.:'
 );
-
-?>

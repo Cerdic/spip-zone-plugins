@@ -54,5 +54,3 @@ Farvel og tak.
 	'veuillez' => 'Oplys venligst din adresse.',
 	'votreemail' => 'Din email:'
 );
-
-?>

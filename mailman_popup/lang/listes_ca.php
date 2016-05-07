@@ -54,5 +54,3 @@ Fins aviat i gràcies.
 	'veuillez' => 'Si us plau indiqueu la vostre adreça.',
 	'votreemail' => 'El vostre email :'
 );
-
-?>

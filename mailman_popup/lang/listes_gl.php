@@ -54,5 +54,3 @@ Deica logo, e gracias.
 	'veuillez' => 'Precise o seu enderezo',
 	'votreemail' => 'O seu correo :'
 );
-
-?>

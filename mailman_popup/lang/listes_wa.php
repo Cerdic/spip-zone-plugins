@@ -54,5 +54,3 @@ Ki ça vos våye bén, et gråces.
 	'veuillez' => 'Dinez voste adresse emile s’ i vs plait.',
 	'votreemail' => 'L’ emile da vosse:'
 );
-
-?>

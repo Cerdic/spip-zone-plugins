@@ -54,5 +54,3 @@ vorgatz escriure à &lt;@responsable@&gt;.
 	'veuillez' => 'Vorgatz precisar la voastra adreça.',
 	'votreemail' => 'Lo voastre e-mail :'
 );
-
-?>

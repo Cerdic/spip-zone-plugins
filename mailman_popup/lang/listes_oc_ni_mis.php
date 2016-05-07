@@ -52,5 +52,3 @@ A ben lèu, e mercì.',
 	'veuillez' => 'Vourguès endicà la vouòstra adressa.',
 	'votreemail' => 'Lou vouòstre e-mail :'
 );
-
-?>

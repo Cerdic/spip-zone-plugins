@@ -31,5 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez' => 'សូមបញ្ជាក់ អាសយដ្ឋាន របស់អ្នក។',
 	'votreemail' => 'អ៊ីមែវល៍ របស់អ្នក ៖'
 );
-
-?>

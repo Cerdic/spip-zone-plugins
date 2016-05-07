@@ -54,5 +54,3 @@ Mèsi a w.
 	'veuillez' => 'Tanpri pweziz ladrès w.',
 	'votreemail' => 'Limel a w :'
 );
-
-?>

@@ -54,5 +54,3 @@ Goodbye and thanks.
 	'veuillez' => 'Please give your address.',
 	'votreemail' => 'Your email:'
 );
-
-?>

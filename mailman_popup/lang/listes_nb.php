@@ -50,5 +50,3 @@ Takk, ha en fin dag.
 	'veuillez' => 'Oppgi din adresse.',
 	'votreemail' => 'Din epost:'
 );
-
-?>

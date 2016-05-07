@@ -54,5 +54,3 @@ Au revoir a merci.
 	'veuillez' => 'Gidd weg är Adress un.',
 	'votreemail' => 'Är Email-Adress:'
 );
-
-?>

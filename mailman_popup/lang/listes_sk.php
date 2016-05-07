@@ -54,5 +54,3 @@ prosím, napíšte na <@responsable@>.
 	'veuillez' => 'Prosím, zadajte svoju adresu',
 	'votreemail' => 'Váš e-mail:'
 );
-
-?>

@@ -53,5 +53,3 @@ Bedankt en tot ziens.
 	'veuillez' => 'Gelieve je adres op te geven.',
 	'votreemail' => 'Je e-mail :'
 );
-
-?>

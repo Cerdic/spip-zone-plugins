@@ -54,5 +54,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez' => 'الرجاء ادخال عنوانك.',
 	'votreemail' => 'عنوانك البريدي:'
 );
-
-?>

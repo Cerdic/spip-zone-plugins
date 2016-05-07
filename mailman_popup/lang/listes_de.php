@@ -53,5 +53,3 @@ Vielen Dank und auf Wiedersehen!
 	'veuillez' => 'Bitte geben Sie Ihre Adresse an.',
 	'votreemail' => 'Ihre E-Mail Adresse:'
 );
-
-?>

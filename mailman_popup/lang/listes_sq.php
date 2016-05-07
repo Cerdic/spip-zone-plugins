@@ -54,5 +54,3 @@ Faleminderit.
 	'veuillez' => 'Vendosni adresën tuaj email.',
 	'votreemail' => 'Adresa email:'
 );
-
-?>

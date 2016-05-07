@@ -54,5 +54,3 @@ Dziękujemy, miłego dnia.
 	'veuillez' => 'Prosimy o podanie adresu.',
 	'votreemail' => 'Twój e-mail :'
 );
-
-?>

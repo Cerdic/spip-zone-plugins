@@ -54,5 +54,3 @@ Adieu-siatz e mercé.
 	'veuillez' => 'Vorgatz precisar la vòstra adreiça.',
 	'votreemail' => 'Lo vòstre e-mail:'
 );
-
-?>

@@ -54,5 +54,3 @@ Mèrsi aou, nartrouvé.
 	'veuillez' => 'Mèrsi présizé out ladrès.',
 	'votreemail' => 'Out limèl :'
 );
-
-?>

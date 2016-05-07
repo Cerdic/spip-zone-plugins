@@ -54,5 +54,3 @@ La revedere şi vă mulţumim.
 	'veuillez' => 'Vă rugăm să precizaţi adresa dumneavoastră.',
 	'votreemail' => 'Email-ul dumneavoastră :'
 );
-
-?>

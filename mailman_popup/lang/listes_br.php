@@ -54,5 +54,3 @@ Kenavo, ha trugarez.
 	'veuillez' => 'Resisait ho chomlec’h.',
 	'votreemail' => 'Ho postel :'
 );
-
-?>

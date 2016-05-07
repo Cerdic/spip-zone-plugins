@@ -54,5 +54,3 @@ Adeus, e obrigado.
 	'veuillez' => 'Favor indicar o seu endereço.',
 	'votreemail' => 'O seu email :'
 );
-
-?>

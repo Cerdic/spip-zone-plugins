@@ -54,5 +54,3 @@ bonvolu skribi al <@responsable@>.
 	'veuillez' => 'Bonvolu precizigi vian adreson.',
 	'votreemail' => 'Via retpoŝtadreso :'
 );
-
-?>

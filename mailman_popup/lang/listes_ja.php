@@ -54,5 +54,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'veuillez' => 'あなたのアドレスを与えてください。',
 	'votreemail' => 'あなたのemailアドレス:'
 );
-
-?>

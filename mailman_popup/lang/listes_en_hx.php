@@ -54,5 +54,3 @@ G00dby3 4nd 7h4nk5.
 	'veuillez' => 'P13453 g1v3 y0ur 4ddr355.',
 	'votreemail' => 'Y0ur 3m411:'
 );
-
-?>

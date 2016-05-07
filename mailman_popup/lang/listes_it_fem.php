@@ -54,5 +54,3 @@ Grazie.
 	'veuillez' => 'Specificare il proprio indirizzo email.',
 	'votreemail' => 'Indirizzo email:'
 );
-
-?>

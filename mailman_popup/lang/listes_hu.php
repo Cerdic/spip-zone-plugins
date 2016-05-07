@@ -54,5 +54,3 @@ Au revoir, et merci.
 	'veuillez' => 'Legyen szíves pontosítani az Ön címét.',
 	'votreemail' => 'Az Ön e-mailje :'
 );
-
-?>

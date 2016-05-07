@@ -51,5 +51,3 @@ Hejdå och tack.
 	'veuillez' => 'Ange din adress.',
 	'votreemail' => 'Din e-post:'
 );
-
-?>

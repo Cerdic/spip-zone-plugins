@@ -54,5 +54,3 @@ Kiitos ja näkemiin.
 	'veuillez' => 'Anna osoitteesi.',
 	'votreemail' => 'Sinun sähköposti:'
 );
-
-?>

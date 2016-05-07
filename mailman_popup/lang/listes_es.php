@@ -54,5 +54,3 @@ Hasta luego, y gracias.
 	'veuillez' => 'Por favor indica tu dirección.',
 	'votreemail' => 'Tu e-milio:'
 );
-
-?>

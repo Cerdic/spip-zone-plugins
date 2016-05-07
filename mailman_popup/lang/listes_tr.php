@@ -54,5 +54,3 @@ Teşekkürler. Görüşmek üzere.
 	'veuillez' => 'Lütfen adresinizi belirtiniz.',
 	'votreemail' => 'E-posta adresiniz :'
 );
-
-?>

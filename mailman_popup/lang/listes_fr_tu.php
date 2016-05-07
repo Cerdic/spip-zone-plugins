@@ -54,5 +54,3 @@ Au revoir, et merci.
 	'veuillez' => 'Précise ton adresse.',
 	'votreemail' => 'Ton email :'
 );
-
-?>
