@@ -44,5 +44,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_inserer' => 'Insrt @modele@',
 	'titre_inserer_modeles' => 'Insert a template'
 );
-
-?>

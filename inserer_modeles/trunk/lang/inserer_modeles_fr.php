@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_inserer_modeles' => 'Insérer un modèle',
 	'titre_page_configurer_inserer_modeles' => 'Configurer le plugin ’Insérer un modèle’'
 );
-
-?>
