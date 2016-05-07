@@ -55,5 +55,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'upload' => 'Subir'
 );
-
-?>
