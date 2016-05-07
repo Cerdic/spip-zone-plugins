@@ -74,5 +74,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer' => 'Configuratie van plugin Mijn bestanden',
 	'titre_page_mes_fichiers' => 'Backup van mijn gepersonaliseerde bestanden'
 );
-
-?>
