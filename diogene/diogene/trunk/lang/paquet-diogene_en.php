@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 It allows to define for a particular sector a form mask per object, adding or removing fields to customize the edit form to conform to what we really want to publish in these areas but also bringing within the same edit form all the information to publish quickly.',
 	'diogene_slogan' => 'Forms templates creation for the objects'
 );
-
-?>

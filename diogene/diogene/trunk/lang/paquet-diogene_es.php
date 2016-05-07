@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Permite así definir, en base a un sector particular, una plantilla de formulario por objeto añadiendo o quitando de este modo campos para adecuar el formulario de edición a aquello que se desea realmente publicar en estos sectores, pero también recogiendo en un mismo formulario de edición toda la información necesaria para publicar rápidamente.',
 	'diogene_slogan' => 'Creación de plantillas de formularios para los objetos'
 );
-
-?>

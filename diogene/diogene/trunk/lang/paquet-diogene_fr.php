@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Il permet ainsi de définir en fonction d’un secteur particulier, un masque de formulaire par objet, ajoutant ou enlevant ainsi des champs afin de rendre le formulaire d’édition conforme à ce que l’on souhaite réellement publier dans ces secteurs mais également rassemblant au sein d’un même formulaire d’édition l’ensemble des informations permettant de publier rapidement.',
 	'diogene_slogan' => 'Création de templates de formulaires pour les objets'
 );
-
-?>
