@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_mots_nom' => 'Diógenes - Palabras',
 	'diogene_mots_slogan' => 'Complemento palabras clave para "Diógenes"'
 );
-
-?>
