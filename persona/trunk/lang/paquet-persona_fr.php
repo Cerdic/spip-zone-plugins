@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 A noter : persona est une technologie expérimentale, et le plugin persona pour SPIP est lui aussi expérimental.',
 	'persona_slogan' => 'Authentification des visiteurs via persona'
 );
-
-?>
