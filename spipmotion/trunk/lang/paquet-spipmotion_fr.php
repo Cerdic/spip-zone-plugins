@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipmotion_description' => 'Faire un site à la Youtube ou Dailymotion ...',
 	'spipmotion_slogan' => 'Encodage de documents multimedia'
 );
-
-?>
