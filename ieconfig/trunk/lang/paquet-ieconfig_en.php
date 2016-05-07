@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_description' => 'This plugin allows you to export the configuration of SPIP and compatible plugins in a single file in YAML format. These configuration files can be then imported.',
 	'ieconfig_slogan' => 'Import, export plugin configurations.'
 );
-
-?>
