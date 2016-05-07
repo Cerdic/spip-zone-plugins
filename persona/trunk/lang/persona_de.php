@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_afficher' => 'Klassisches Login-Formular anzeigen',
 	'form_masquer' => 'Klassisches Login-Formular ausblenden'
 );
-
-?>
