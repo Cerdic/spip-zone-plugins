@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'trad_delier_rubrique' => 'Não vincular mais esta seção às suas traduções'
 );
-
-?>
