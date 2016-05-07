@@ -157,6 +157,14 @@ function iextras_saisies_construire_formulaire_config($flux) {
 
 		if (isset($saisies_sql[$type_saisie])) {
 
+
+			// Modification du type de vérification
+			// Normalement le premier champ du premier onglet
+			if ($flux['data'][0]['saisies'][0]['verifier']['type'] == 'regex') {
+				$flux['data'][0]['saisies'][0]['verifier']['type'] = 'nom_champ_extra';
+			}
+
+
 			// Ajout de l'onglet Technique
 			// liste 'type_de_saisie' => 'Titre de la saisie'
 			$liste_saisies = array();
