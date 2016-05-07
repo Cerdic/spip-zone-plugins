@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'livraison_nom' => 'Livraisons',
 	'livraison_slogan' => 'Gestion de livraisons'
 );
-
-?>
