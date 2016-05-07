@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ht' => '@prix@ bez DPH',
 	'prix_ttc' => '@prix@ s DPH'
 );
-
-?>

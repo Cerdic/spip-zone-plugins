@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_ht' => '@prix@ ET',
 	'prix_ttc' => '@prix@ ATI'
 );
-
-?>

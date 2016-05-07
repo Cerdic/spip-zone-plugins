@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_prix' => 'Prix'
 );
-
-?>
