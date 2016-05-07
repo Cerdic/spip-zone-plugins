@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 جداول، عدادات، الخ.',
 	'spip_bonux_slogan' => 'الملحق الذي يجعل SPIP أكثر بياضاً من.'
 );
-
-?>

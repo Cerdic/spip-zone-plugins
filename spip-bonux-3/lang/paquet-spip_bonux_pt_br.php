@@ -15,5 +15,3 @@ Le plugin qui lave plus SPIP que SPIP, com brindes no pacote!
 	Tabela, contador etc.',
 	'spip_bonux_slogan' => 'O plugin que lava mais SPIP que SPIP.'
 );
-
-?>

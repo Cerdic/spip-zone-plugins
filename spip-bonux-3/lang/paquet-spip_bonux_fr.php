@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Tableaux, compteur, etc.',
 	'spip_bonux_slogan' => 'Le plugin qui lave plus SPIP que SPIP.'
 );
-
-?>

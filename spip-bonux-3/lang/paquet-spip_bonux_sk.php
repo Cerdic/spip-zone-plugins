@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Tabuľky, počítadlo, a i.',
 	'spip_bonux_slogan' => 'Zásuvný modul, ktorý prečistí SPIP ako SPIP.'
 );
-
-?>

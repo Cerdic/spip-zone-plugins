@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spip_bonux_description' => 'SPIP Bonux необходим для работы многих других плагинов. Он существенно расширяет возможности SPIP, делая его лучше чем SPIP :)))',
 	'spip_bonux_slogan' => 'SPIP Bonux существенно расширяет возможности SPIP, делая его лучше чем SPIP :)))'
 );
-
-?>
