@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_nom' => 'API для валидации данных (verifier)',
 	'verifier_slogan' => 'Плагин обеспечивает API для валидации данных. Необходим для работы многих плагинов.'
 );
-
-?>

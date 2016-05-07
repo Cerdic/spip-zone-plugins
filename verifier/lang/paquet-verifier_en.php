@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_nom' => 'Control API',
 	'verifier_slogan' => 'A generic API to control a value'
 );
-
-?>

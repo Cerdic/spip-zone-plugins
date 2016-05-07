@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_nom' => 'Aplikácia na overenie',
 	'verifier_slogan' => 'Spoločná aplikácia na overenie hodnoty'
 );
-
-?>

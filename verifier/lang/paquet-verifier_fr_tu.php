@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'verifier_nom' => 'API de vérification',
 	'verifier_slogan' => 'Une API générique pour vérifier une valeur'
 );
-
-?>
