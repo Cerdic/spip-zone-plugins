@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'intranet_nom' => 'Intranet/Extranet',
 	'intranet_slogan' => 'N’autoriser que les utilisateurs loggués (ou à l’intérieur d’un réseau interne) à visiter le site.'
 );
-
-?>
