@@ -73,5 +73,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_mon_badge_facebook' => 'Mon badge facebook',
 	'titre_sur_facebook' => 'Sur Facebook'
 );
-
-?>
