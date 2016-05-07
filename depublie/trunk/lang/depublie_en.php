@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_depublies' => 'Configure de-publications',
 	'titre_page_depublies_objets' => 'Objects with a programmed change of status'
 );
-
-?>

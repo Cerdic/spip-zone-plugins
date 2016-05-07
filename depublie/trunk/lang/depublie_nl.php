@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_depublies' => 'Depublicaties configureren',
 	'titre_page_depublies_objets' => 'De objecten die van status gaan veranderen'
 );
-
-?>
