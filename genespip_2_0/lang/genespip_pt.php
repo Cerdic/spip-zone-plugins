@@ -128,5 +128,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ville' => 'Cidade',
 	'visiteur' => 'Visitante'
 );
-
-?>
