@@ -26,5 +26,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langues_invisibles' => 'Jazyky, ktoré nebudú zobrazené v menu',
 	'label_separateur' => 'Oddeľovač jazykov'
 );
-
-?>

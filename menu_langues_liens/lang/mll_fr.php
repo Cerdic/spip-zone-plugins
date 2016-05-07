@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langues_invisibles' => 'Langues invisibles du menu',
 	'label_separateur' => 'Séparateur des langues'
 );
-
-?>

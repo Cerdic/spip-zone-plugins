@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_liste_liste' => 'Lista por viñetas',
 	'label_langues_invisibles' => 'Idiomas invisibles del menú'
 );
-
-?>
