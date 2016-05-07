@@ -69,5 +69,3 @@ Finally, many websites have one or several spaces reserved for their administrat
 	'url_complete' => 'Complete URL',
 	'utilisateur_concerne' => 'User concerned : '
 );
-
-?>

@@ -67,5 +67,3 @@ En dernier lieu, de nombreux sites web disposent d’un ou plusieurs espaces ré
 	'url_complete' => 'URL complète',
 	'utilisateur_concerne' => 'Utilisateur concerné : '
 );
-
-?>

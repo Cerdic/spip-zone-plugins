@@ -69,5 +69,3 @@ Por último, numerosos sitios web disponen de uno o varios espacios  reservados 
 	'url_complete' => 'URL completa',
 	'utilisateur_concerne' => 'Usuario en cuestión: '
 );
-
-?>

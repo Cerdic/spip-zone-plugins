@@ -69,5 +69,3 @@ V poslednom rade veľa internetových stránok má viac vyhradených zón pre a
 	'url_complete' => 'Celá internetová adresa',
 	'utilisateur_concerne' => 'Dotknutý používateľ: '
 );
-
-?>

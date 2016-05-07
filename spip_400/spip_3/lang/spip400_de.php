@@ -69,5 +69,3 @@ Zu guter Letzt, viele Seiten haben geschlossene Bereiche für Adminstratoren ode
 	'url_complete' => 'Komplette URL',
 	'utilisateur_concerne' => 'Betroffener Benutzer: '
 );
-
-?>
