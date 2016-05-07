@@ -142,5 +142,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_image_edit' => 'Image editing',
 	'type_original' => 'Type of document: '
 );
-
-?>

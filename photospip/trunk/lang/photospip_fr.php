@@ -141,5 +141,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_image_edit' => 'Édition de l’image',
 	'type_original' => 'Type du document : '
 );
-
-?>

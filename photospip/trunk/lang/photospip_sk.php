@@ -142,5 +142,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_image_edit' => 'Úprava obrázka',
 	'type_original' => 'Typ súboru: '
 );
-
-?>
