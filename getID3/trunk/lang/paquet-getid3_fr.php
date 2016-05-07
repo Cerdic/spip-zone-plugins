@@ -13,5 +13,3 @@ _ Il peut également écrire certains tags dans les métadonnées de fichiers so
 _ Pour ce faire, il utilise la librairie [GetID3->http://getid3.sourceforge.net/] sous licence [GNU/GPL v2->http://www.getid3.org/source/license.txt] ',
 	'getid3_slogan' => 'Lecture les métadonnées audio et vidéos de documents et écriture les tags audio'
 );
-
-?>

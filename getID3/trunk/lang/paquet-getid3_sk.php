@@ -15,5 +15,3 @@ _Dokáže tiež zapisovať niektoré tagy metadát do audio súborov.
 _Na to využíva knižnicu [GetID3->http://getid3.sourceforge.net/] s licenciou [GNU/GPL v2->http://www.getid3.org/source/license.txt] ',
 	'getid3_slogan' => 'Čítanie metadát zvukových súborov a súborov videí a zápis audio tagov.'
 );
-
-?>

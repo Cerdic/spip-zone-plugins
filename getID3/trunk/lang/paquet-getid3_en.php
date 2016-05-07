@@ -15,5 +15,3 @@ _ It can also write some metadata tags in audio files.
 _ To do so, it uses the library [GetID3->http://getid3.sourceforge.net/] under license [GNU/GPL v2->http://www.getid3.org/source/license.txt] ',
 	'getid3_slogan' => 'Play audio and video documents metadata and write audio tags'
 );
-
-?>
