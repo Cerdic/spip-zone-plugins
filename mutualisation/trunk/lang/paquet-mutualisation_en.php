@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mutualisation_nom' => 'Easy mutualisation',
 	'mutualisation_slogan' => 'Build a SPIP farm'
 );
-
-?>
