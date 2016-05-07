@@ -57,5 +57,3 @@ Veuillez vous reporter à la documentation du plugin pour bien maîtriser les di
 	'titre_logo_jeu' => 'Logo du jeu',
 	'titre_modules_dispos' => 'Modules disponibles'
 );
-
-?>

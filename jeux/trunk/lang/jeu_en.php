@@ -59,5 +59,3 @@ Pleasefollow the plugin documentation to understand the different separators.',
 	'titre_logo_jeu' => 'Game logo',
 	'titre_modules_dispos' => 'Available add-ons'
 );
-
-?>
