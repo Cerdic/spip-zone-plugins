@@ -20,5 +20,3 @@ Logo a niekoľko obrázkov zásuvného modulu: [->http://pixel-mixer.com/]',
 	'tipafriend_nom' => 'Odporučiť priateľom',
 	'tipafriend_slogan' => 'Pošlite stránku v SPIPe priateľom v zozname e-mailových adries'
 );
-
-?>

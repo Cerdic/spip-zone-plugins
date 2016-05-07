@@ -18,5 +18,3 @@ Logo et certaines images du plugin : [->http://pixel-mixer.com/]',
 	'tipafriend_nom' => 'Tip A Friend',
 	'tipafriend_slogan' => 'Envoyer une page d’un site SPIP à une liste d’adresses e-mail'
 );
-
-?>
