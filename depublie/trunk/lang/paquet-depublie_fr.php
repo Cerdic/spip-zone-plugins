@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'depublie_nom' => 'Dépublie',
 	'depublie_slogan' => 'Programmer les dépublications'
 );
-
-?>
