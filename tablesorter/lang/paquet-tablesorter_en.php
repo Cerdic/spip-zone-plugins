@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tablesorter_description' => 'This plugin allows you to sort the tables having the CSS class "spip" by clicking on a column header (HTML table  must have the tags thead and tbody). See all sorting options on the [->http://tablesorter.com] Web site.',
 	'tablesorter_slogan' => 'With tableSorter, the sort will be wonderfull!'
 );
-
-?>
