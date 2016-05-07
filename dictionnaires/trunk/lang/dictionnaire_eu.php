@@ -39,5 +39,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_dictionnaires' => 'Hiztegiak',
 	'titre_logo_dictionnaire' => 'Hiztegi honen logotipoa'
 );
-
-?>
