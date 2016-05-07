@@ -316,5 +316,3 @@ We also recommend you to take a look at the skeleton [legals->@mentions_legales@
 	// V
 	'ville_label' => 'City'
 );
-
-?>

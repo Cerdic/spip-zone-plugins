@@ -317,5 +317,3 @@ Tiež vám odporúčame, aby ste sa pozreli na  [informácie právneho charakter
 	// V
 	'ville_label' => 'Mesto'
 );
-
-?>

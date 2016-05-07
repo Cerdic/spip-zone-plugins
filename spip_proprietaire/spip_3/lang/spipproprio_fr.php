@@ -316,5 +316,3 @@ Nous vous conseillons également de jeter un oeil au squelette [mentions légale
 	// V
 	'ville_label' => 'Ville'
 );
-
-?>
