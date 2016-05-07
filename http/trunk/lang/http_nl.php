@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_415_message' => 'Uw verzoek is in een voor de server onbekend formaat.',
 	'erreur_415_titre' => 'Onbekend formaat'
 );
-
-?>

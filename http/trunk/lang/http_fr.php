@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_415_message' => 'Votre requête est dans un format inconnu, non supporté par ce serveur.',
 	'erreur_415_titre' => 'Format inconnu'
 );
-
-?>
