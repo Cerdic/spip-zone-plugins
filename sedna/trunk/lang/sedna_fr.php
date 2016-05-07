@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'toutes' => 'Toutes'
 );
-
-?>
