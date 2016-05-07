@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mll_nom' => 'Menu de langues avec liens',
 	'mll_slogan' => 'Afficher les langues sous forme de liens cliquables'
 );
-
-?>

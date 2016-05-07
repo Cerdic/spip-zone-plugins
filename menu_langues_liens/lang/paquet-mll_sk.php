@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mll_nom' => 'Jazykové menu s odkazmi',
 	'mll_slogan' => 'Zobraziť jazyky vo forme klikateľných odkazov'
 );
-
-?>
