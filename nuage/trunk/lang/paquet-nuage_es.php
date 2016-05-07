@@ -18,5 +18,3 @@ Varios modelos disponibles:
 -* nube_popularidad: muestra las palabras clave del sitio (o de un grupo), variando el tamaño en función de su popularidad relativa (suma de la popularidad de los artículos disponiendo de esta palabra)',
 	'nuage_slogan' => 'Mostrar las palabras clave variando el tamaño de la fuente'
 );
-
-?>

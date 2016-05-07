@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* nuage_popularite : affiche les mots-clés du site (ou d’un groupe), la taille variant en fonction de sa popularité relative (somme des popularité des articles ayant ce mot)',
 	'nuage_slogan' => 'Afficher les mots-clés en faisant varier la taille de la police'
 );
-
-?>

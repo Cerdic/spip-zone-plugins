@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* nuage_popularite: toont de trefwoorden van de site (of van een groep) met een grootte die afhangt van hun relatieve populariteit (de som van de populariteit van alle artikelen met dat trefwoord)',
 	'nuage_slogan' => 'Trefwoorden in verschillende lettergroottes tonen'
 );
-
-?>

@@ -19,5 +19,3 @@ Es stehen mehrere Anzeige-Modelle zur Verfügung:
 -* nuage_popularite : Zeigt Schlagworte der Website (oder einer Schlagwortgruppe) in unterschiedlicher Größe je nach ihrer relativen Popularität (Summe der Popularität der Artikel mit diesem Schlagwort).',
 	'nuage_slogan' => 'Schlagworte mit unterschiedlichen Schriftgrößen darstellen.'
 );
-
-?>

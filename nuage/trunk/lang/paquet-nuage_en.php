@@ -18,5 +18,3 @@ Several models available:
 -* nuage_popularite : displays the keywords of the Web site (or group), the size varying according to its relative popularity (sum of popularity of articles having that word);',
 	'nuage_slogan' => 'Display the keywords changing their font size'
 );
-
-?>

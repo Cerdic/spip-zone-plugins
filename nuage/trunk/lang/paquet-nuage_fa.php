@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'nuage_slogan' => 'نمايش كليدواژه‌ه با تغيير اندازه‌ي قلم'
 );
-
-?>

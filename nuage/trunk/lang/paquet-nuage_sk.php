@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* nuage_popularite: zobrazí kľúčové slová stránky (alebo skupiny), ktorých veľkosť písma sa bude odlišovať podľa ich relatívnej popularity (súčet popularity článkov s daným kľúčovým slovom)',
 	'nuage_slogan' => 'Zobrazí kľúčové slová s rôznou veľkosťou písma'
 );
-
-?>
