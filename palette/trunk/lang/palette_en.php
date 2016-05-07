@@ -23,5 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'palette_ecrire' => 'Activate Palette for the private area',
 	'palette_public' => 'Activate Palette for the public area'
 );
-
-?>

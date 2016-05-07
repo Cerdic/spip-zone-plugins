@@ -23,5 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'palette_ecrire' => 'Aktivovať paletu pre súkromnú zónu',
 	'palette_public' => 'Aktivovať paletu pre verejne prístupnú stránku'
 );
-
-?>

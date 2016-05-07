@@ -23,5 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'palette_ecrire' => 'فعال‌سازي پالت در قسمت خصوصي ',
 	'palette_public' => 'فعال‌سازي پالت در سايت همگاني '
 );
-
-?>

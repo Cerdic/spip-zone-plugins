@@ -22,5 +22,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'palette_ecrire' => 'Activar Palette a l’espai privat',
 	'palette_public' => 'Activar Palette al lloc públic'
 );
-
-?>

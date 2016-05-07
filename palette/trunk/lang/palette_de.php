@@ -24,5 +24,3 @@ indem es die CSS-Lasse «palette» erhält.',
 	'palette_ecrire' => 'Palette im Redaktionssystem aktivieren',
 	'palette_public' => 'Palette für den öffentlichen Teil der Website aktivieren'
 );
-
-?>
