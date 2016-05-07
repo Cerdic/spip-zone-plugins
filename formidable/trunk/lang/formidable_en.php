@@ -236,5 +236,3 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'voir_reponses' => 'See the answers',
 	'voir_traitements' => 'Treatments'
 );
-
-?>

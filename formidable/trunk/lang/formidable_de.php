@@ -131,5 +131,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_reponses' => 'Antworten anzeigen',
 	'voir_traitements' => 'Verarbeitungsoptionen'
 );
-
-?>

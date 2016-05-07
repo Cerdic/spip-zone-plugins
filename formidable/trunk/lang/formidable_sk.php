@@ -174,5 +174,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_reponses' => 'Zobraziť odpovede',
 	'voir_traitements' => 'Funkcie'
 );
-
-?>

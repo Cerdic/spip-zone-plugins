@@ -226,5 +226,3 @@ Nada',
 	'voir_reponses' => 'Ver preenchimentos',
 	'voir_traitements' => 'Interações'
 );
-
-?>
