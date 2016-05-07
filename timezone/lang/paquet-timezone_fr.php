@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'timezone_description' => 'Permettre de choisir le fuseau horaire du site lorsqu’il n’est pas, par exemple, hébergé sur un serveur du même fuseau horaire.',
 	'timezone_slogan' => 'Choisir le fuseau horaire du site'
 );
-
-?>
