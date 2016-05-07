@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'http_nom' => 'Servidor HTTP abstracto',
 	'http_slogan' => 'Gestión abstracta de los métodos HTTP.'
 );
-
-?>

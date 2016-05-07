@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'http_nom' => 'Vereenvoudigd HTTP-beheer',
 	'http_slogan' => 'Eenvoudig beheren van HTTP methodes.'
 );
-
-?>
