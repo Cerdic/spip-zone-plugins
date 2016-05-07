@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page' => 'صفحه',
 	'toutes_les_pages' => 'تمام صفه‌ها'
 );
-
-?>
