@@ -10,5 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_choisir_timezone' => 'Choisir le fuseau horaire du site'
 );
-
-?>
