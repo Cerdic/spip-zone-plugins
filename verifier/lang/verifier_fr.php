@@ -132,5 +132,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'URL',
 	'type_url_description' => 'Vérifie que l’url correspond à un schéma reconnu.'
 );
-
-?>

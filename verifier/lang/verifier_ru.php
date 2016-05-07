@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'URL',
 	'type_url_description' => 'Проверить соответствие ли URL  формат ввода.'
 );
-
-?>

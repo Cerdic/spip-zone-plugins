@@ -112,5 +112,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'Internetová adresa',
 	'type_url_description' => 'Overí, či sa internetová adresa zhoduje s rozoznávaným formátom.'
 );
-
-?>

@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'يو.آر.ال ',
 	'type_url_description' => 'چك كنيد كه يو.آر.ال با يك فرمت شناخته شده جور باشد. '
 );
-
-?>

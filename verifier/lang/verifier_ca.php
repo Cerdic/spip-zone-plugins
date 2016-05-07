@@ -63,5 +63,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_telephone' => 'Número de telèfon',
 	'type_telephone_description' => 'Verifica que el número de telèfon correspon a un esquema reconegut.'
 );
-
-?>

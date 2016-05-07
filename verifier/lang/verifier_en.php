@@ -134,5 +134,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'URL',
 	'type_url_description' => 'Verify that the URL matches a recognised format.'
 );
-
-?>

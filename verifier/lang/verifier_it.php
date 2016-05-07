@@ -85,5 +85,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_url' => 'URL',
 	'type_url_description' => 'Verifica che l’url corrisponda ad uno schema riconosciuto.'
 );
-
-?>
