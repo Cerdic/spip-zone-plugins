@@ -57,5 +57,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_syndic' => '@titre@ (@id_objet@)',
 	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)'
 );
-
-?>

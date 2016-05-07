@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_publie' => 'Publicado',
 	'statut_refuse' => 'Rexeitado'
 );
-
-?>

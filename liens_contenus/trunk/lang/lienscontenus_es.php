@@ -39,5 +39,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_rubrique_inexistant' => 'Sección inexistente (@id_objet@)',
 	'type_syndic_inexistant' => 'Sitio inexistente (@id_objet@)'
 );
-
-?>

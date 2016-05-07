@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_publie' => 'منتشر شده',
 	'statut_refuse' => 'ردي'
 );
-
-?>
