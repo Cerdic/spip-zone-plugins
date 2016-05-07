@@ -1,0 +1,20 @@
+<paquet
+	prefix="codelang"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="codelang_logo-64.png"
+	schema="1"
+>
+
+	<nom>Codes de Langue</nom>
+	<!-- Un outil pour convertir les codes de langue ISO -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/codelang_declarations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/codelang_declarations.php" />
+</paquet>

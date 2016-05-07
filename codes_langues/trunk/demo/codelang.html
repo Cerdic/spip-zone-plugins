@@ -1,0 +1,21 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+<?php
+    include_spip('services/sil/sil_api');
+?>
+
+	<h1>SERVICE SIL</h1>
+
+	<h2>Action : read_table</h2>
+<?php
+	$records = sil_read_table('iso639codes', $sha);
+	var_dump($records, $sha);
+?>
+
+</div>
+</body>
+</html>
