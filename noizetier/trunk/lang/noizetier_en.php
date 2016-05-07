@@ -159,5 +159,3 @@ nuts on the following pages:',
 	'warning_noisette_plus_disponible' => 'WARNING: this nut is no longer available.',
 	'warning_noisette_plus_disponible_details' => 'The template of the nut (<i>@squelette@</i>) is no longer available. It may be a nut requiring a plugin that you have disabled or uninstalled.'
 );
-
-?>

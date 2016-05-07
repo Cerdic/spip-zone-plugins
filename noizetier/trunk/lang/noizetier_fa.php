@@ -116,5 +116,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'توجه: اين فندق ديگر در دسترس نيست.',
 	'warning_noisette_plus_disponible_details' => 'اسكليت اين فندق  (<i>@squelette@</i>)  ديگر در دسترس نيست. ممكن است ناشي از يك فندق نيازمند پلگين باشد كه آن را غيرفعال يا نصب‌ زدايي كرده‌ايد.'
 );
-
-?>

@@ -114,5 +114,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'ACHTUNG: Diese Code-Nuss ist nicht merh verfügbar.',
 	'warning_noisette_plus_disponible_details' => 'Das Skelett (<i>@squelette@</i>) dieser Code-Nuss ist nicht mehr verfügbar. Es handelt sich möglicherweise um eine Code-Nuss, die ein Plugin benötigt, dass sie deaktiviert oder deinstalliert haben.'
 );
-
-?>

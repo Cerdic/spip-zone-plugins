@@ -146,5 +146,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'ATENCION : esta noisette ya no está disponible.',
 	'warning_noisette_plus_disponible_details' => 'El squelette de esta noisette  (<i>@squelette@</i>) ya no está accesible. Puede que se trate de una noisette que necesite un plugin que usted haya desactivado o desinstalado.' # squelette lo dejo tal cual no lo traduzco
 );
-
-?>

@@ -157,5 +157,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'LET OP: dit nootje is niet meer beschikbaar.',
 	'warning_noisette_plus_disponible_details' => 'Het skelet van dit nootje (<i>@squelette@</i>) is niet langer toegankelijk. Mogelijk maakt het gebruik van een niet langer aktieve plugin.'
 );
-
-?>

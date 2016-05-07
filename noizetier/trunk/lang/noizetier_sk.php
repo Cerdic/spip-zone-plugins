@@ -151,5 +151,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_noisette_plus_disponible' => 'POZOR: tento oriešok nie je dostupný.',
 	'warning_noisette_plus_disponible_details' => 'Šablóna tohto orieška (<i>@squelette@</i>) je nedostupná. Možno oriešok potrebuje zásuvný modul, ktorý ste deaktivovali alebo odinštalovali.'
 );
-
-?>
