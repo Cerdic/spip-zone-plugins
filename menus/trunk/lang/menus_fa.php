@@ -174,5 +174,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_les_articles' => '...تمام مقاله‌ها',
 	'toutes_les_rubriques' => '...تمام بخش‌ها'
 );
-
-?>

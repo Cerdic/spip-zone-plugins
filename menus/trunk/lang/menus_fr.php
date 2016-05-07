@@ -173,5 +173,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiles_generer_menus' => 'Créer <strong>tous</strong> les menus utiles',
 	'utiles_titre' => 'Menus utiles'
 );
-
-?>

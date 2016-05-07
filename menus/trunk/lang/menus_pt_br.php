@@ -168,5 +168,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_les_articles' => '... Todas as matérias',
 	'toutes_les_rubriques' => '... Todas as seções'
 );
-
-?>

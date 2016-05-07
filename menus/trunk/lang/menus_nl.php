@@ -175,5 +175,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'utiles_generer_menus' => 'Maak <strong>alle</strong> menu’s bruikbaar',
 	'utiles_titre' => 'Bruikbare menu’s'
 );
-
-?>

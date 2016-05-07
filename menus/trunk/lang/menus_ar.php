@@ -99,5 +99,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_les_articles' => 'كل المقالات',
 	'toutes_les_rubriques' => 'كل الأقسام'
 );
-
-?>

@@ -102,5 +102,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques_evenements' => 'Eventi delle rubriche',
 	'nom_menu_secteurlangue' => 'Settore di lingua'
 );
-
-?>

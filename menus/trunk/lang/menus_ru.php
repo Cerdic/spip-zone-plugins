@@ -66,5 +66,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_accueil' => 'Главная страница',
 	'nom_menu_texte_libre' => 'Просто текст'
 );
-
-?>
