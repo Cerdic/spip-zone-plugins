@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'licence_nom' => 'Licencia',
 	'licence_slogan' => 'Una Licencia para artículos y documentos'
 );
-
-?>
