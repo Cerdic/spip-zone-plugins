@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'table_matiere' => 'Obsah'
 );
-
-?>
