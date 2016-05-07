@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importateur_contacts_nom' => 'Importateur de contacts',
 	'importateur_contacts_slogan' => 'Formulaire d’importation de contacts.'
 );
-
-?>

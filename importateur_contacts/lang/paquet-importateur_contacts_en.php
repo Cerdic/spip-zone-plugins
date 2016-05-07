@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importateur_contacts_nom' => 'Contacts importer',
 	'importateur_contacts_slogan' => 'Contacts import form.'
 );
-
-?>

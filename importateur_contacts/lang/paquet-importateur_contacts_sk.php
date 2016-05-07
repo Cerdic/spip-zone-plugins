@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importateur_contacts_nom' => 'Nahrávač kontaktov',
 	'importateur_contacts_slogan' => 'Formulár na nahrávanie kontaktov'
 );
-
-?>
