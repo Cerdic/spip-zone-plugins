@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nospam_description' => 'توقف المتطفل! فلتر البريد المزعج في الرسائل ، دون ازعاج لمستخدم صادق.'
 );
-
-?>

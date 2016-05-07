@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nospam_description' => 'Detenga el spam! Filtro de spam en los mensajes, sin molestias a los usuarios honestos.',
 	'nospam_slogan' => 'Limitar el riesgo de spams en los foros'
 );
-
-?>

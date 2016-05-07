@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nospam_description' => 'SPAM stoppen! Ein Filter ohne Nebenwirkungen für ehrliche Nutzer.'
 );
-
-?>
