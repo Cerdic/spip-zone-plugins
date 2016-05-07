@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'todo_description' => 'Adds new typographical shortcuts to describe simple to do lists in a SPIP content. This version 2 extends the list of available statuses and allows the qualification of tasks by priority, tags and informations such as start and end dates, commit number, release number.',
 	'todo_slogan' => 'Quickly list things to do'
 );
-
-?>
