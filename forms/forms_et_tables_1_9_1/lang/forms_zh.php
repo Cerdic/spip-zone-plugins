@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_obligatoire_02' => '[必须的]'
 );
-
-?>

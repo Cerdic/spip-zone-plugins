@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_obligatoire_02' => '[Obligatorësch]'
 );
-
-?>

@@ -220,5 +220,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_article' => 'Consultar a matéria',
 	'voir_resultats' => 'Ver os resultados'
 );
-
-?>

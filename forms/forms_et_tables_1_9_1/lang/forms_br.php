@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_article' => 'Gwelet ar pennad'
 );
-
-?>

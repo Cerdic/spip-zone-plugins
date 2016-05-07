@@ -67,5 +67,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_article' => 'មើល អត្ថបទ',
 	'voir_resultats' => 'មើល លទ្ធផល'
 );
-
-?>
