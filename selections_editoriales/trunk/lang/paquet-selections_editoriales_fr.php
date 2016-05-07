@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selections_editoriales_nom' => 'Sélections éditoriales',
 	'selections_editoriales_slogan' => 'Faites des listes de choses intéressantes'
 );
-
-?>
