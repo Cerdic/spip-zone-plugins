@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_livraison_montants_rubrique' => 'Frais de livraison de la rubrique',
 	'titre_logo_livraison_montant' => 'Logo de ce frais de livraison'
 );
-
-?>
