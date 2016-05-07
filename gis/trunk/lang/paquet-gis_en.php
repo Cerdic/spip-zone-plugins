@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_description' => 'This plugin allows you to create location-based points that can be attached to SPIP objects to display them on maps in the pages of your site. They can use the tiles from different maps vendors through the Leaflet library.',
 	'gis_slogan' => 'Geographic Information System'
 );
-
-?>

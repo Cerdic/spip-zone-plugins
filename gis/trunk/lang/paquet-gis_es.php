@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_description' => 'Este plugin permite crear puntos geolocalizados que pueden adjuntarse a los objetos de SPIP a fin de mostrarlos en los mapas de las páginas de su sitio web. Éstos útlimos pueden utilizar las tejas de diferentes proveedores gracias a la librería Leaflet. ',
 	'gis_slogan' => 'Sistema de información geográfica'
 );
-
-?>

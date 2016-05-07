@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_description' => 'Deze plugin laat je locatiepunten maken die aan SPIP-objecten kunnen worden gekoppeld om een kaart te tonen. Verschillende soorten kaarten zijn mogelijk dankzij de Leaflet bibliotheek.',
 	'gis_slogan' => 'Geografisch Informatie Systeem'
 );
-
-?>
