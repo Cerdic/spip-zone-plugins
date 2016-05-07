@@ -35,5 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'ses_favoris' => 'دوستداشتني‌هاي او '
 );
-
-?>

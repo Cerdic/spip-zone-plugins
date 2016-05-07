@@ -39,5 +39,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vos_favoris' => 'Vos favoris' # Utile pour modifier le titre de l'inclusion
 );
-
-?>

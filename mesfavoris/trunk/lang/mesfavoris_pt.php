@@ -32,5 +32,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove' => 'Retirar',
 	'remove_from' => 'Retirar da minha seleção'
 );
-
-?>
