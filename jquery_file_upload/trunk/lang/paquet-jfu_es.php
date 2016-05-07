@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 _ Este plugin ofrece la libreria [jQuery-File-Upload->http://aquantum-demo.appspot.com/file-upload].',
 	'jfu_slogan' => 'jQuery-File-Upload'
 );
-
-?>
