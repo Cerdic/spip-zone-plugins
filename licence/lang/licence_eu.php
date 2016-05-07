@@ -68,5 +68,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_gpl' => 'GNU GPL',
 	'titre_wtfpl' => 'WTFPL'
 );
-
-?>

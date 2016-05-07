@@ -70,5 +70,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_gpl' => 'Licencia GNU GPL',
 	'titre_wtfpl' => 'LPRAB'
 );
-
-?>

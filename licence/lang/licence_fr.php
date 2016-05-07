@@ -71,5 +71,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_publicdomain' => 'Domaine public',
 	'titre_wtfpl' => 'LPRAB'
 );
-
-?>
