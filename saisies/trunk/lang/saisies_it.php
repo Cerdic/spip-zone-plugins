@@ -171,5 +171,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'z' => 'zzz'
 );
-
-?>

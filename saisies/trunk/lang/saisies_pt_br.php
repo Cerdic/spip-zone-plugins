@@ -200,5 +200,3 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	// Z
 	'z' => 'zzz'
 );
-
-?>
