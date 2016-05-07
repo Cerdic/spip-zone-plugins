@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'linkcheck_nom' => 'LinkCheck',
 	'linkcheck_slogan' => 'Verification automatisée des liens internes et externes'
 );
-
-?>
