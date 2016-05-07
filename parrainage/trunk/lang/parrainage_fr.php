@@ -74,5 +74,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_visite' => 'A visité le site',
 	'statut_visite_explication' => 'Cette personne a déjà suivi votre invitation à venir sur le site, mais ne s’est pas encore inscrite.'
 );
-
-?>

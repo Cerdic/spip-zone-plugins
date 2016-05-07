@@ -76,5 +76,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_visite' => 'Navštívil(a) stránku',
 	'statut_visite_explication' => 'Tento človek už dostal vašu pozvánku, aby prišiel na stránku, ale nezaregistroval sa.'
 );
-
-?>
