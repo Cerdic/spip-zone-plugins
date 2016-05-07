@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'em_spipmotion_nom' => 'Wrap medias - SPIPmotion',
 	'em_spipmotion_slogan' => 'Video add-on for "Wrap media" (use SPIPmotion)'
 );
-
-?>

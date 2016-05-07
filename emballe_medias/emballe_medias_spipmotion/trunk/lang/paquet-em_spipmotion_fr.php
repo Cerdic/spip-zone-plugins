@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'em_spipmotion_nom' => 'Emballe Medias - SPIPmotion',
 	'em_spipmotion_slogan' => 'Complément vidéo pour "Emballe Medias" (utilise SPIPmotion)'
 );
-
-?>
