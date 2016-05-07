@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'trop_majuscule' => 'Your title contains a lot of capital. Are you sure you do not want to put them in lower case? On the Internet, uppercase give the impression that you shout: use them sparingly.'
 );
-
-?>
