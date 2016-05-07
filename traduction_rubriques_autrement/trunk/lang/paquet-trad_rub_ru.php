@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'trad_rub_nom' => 'Перевод разделов по-иному',
 	'trad_rub_slogan' => 'Переходы между переведенными разделами.'
 );
-
-?>
