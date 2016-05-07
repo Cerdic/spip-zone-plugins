@@ -483,5 +483,3 @@ nbr_post@ mensagem (s). Apagados com ele !\\n',
 	'votre_url_avatar' => 'URL do vosso Avatar (http://...)',
 	'votre_url_site' => 'O endereço (URL) do vosso site'
 );
-
-?>

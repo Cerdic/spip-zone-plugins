@@ -522,5 +522,3 @@ _ • [van hele plugin->@plugin@]</p>',
 	'votre_url_avatar' => 'URL van uw Tegenslag (http://...)',
 	'votre_url_site' => 'Het adres (URL) van uw site'
 );
-
-?>

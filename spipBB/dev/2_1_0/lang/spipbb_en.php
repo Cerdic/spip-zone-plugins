@@ -519,5 +519,3 @@ _ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/s
 	'votre_url_avatar' => 'Your avatar’s URL(http://...)',
 	'votre_url_site' => 'Your websites’s address (URL)'
 );
-
-?>

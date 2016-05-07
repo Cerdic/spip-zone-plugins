@@ -491,5 +491,3 @@ _ • [eklenti->@plugin@]</p>',
 	'votre_url_avatar' => 'Avatar’ınızın URL’si (http://...)',
 	'votre_url_site' => 'Sitenizin URL adresi'
 );
-
-?>

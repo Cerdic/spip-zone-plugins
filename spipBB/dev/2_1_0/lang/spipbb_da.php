@@ -251,5 +251,3 @@ Vi bruger ikke din mail adresse til andet end at sende dig et password.</p>', # 
 	'votre_url_avatar' => 'Din avatars URL(http://...)',
 	'votre_url_site' => 'Dit sites (URL)'
 );
-
-?>

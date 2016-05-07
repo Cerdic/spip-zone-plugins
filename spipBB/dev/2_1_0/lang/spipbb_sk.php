@@ -496,5 +496,3 @@ _ • [pomocníka a podporu na spipbb.spip-zone.info.->http://spipbb.spip-zone.
 	'votre_url_avatar' => 'URL vášho avataru (http://...)',
 	'votre_url_site' => 'Adresa vašej stránky (URL)'
 );
-
-?>

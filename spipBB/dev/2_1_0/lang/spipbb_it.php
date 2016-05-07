@@ -152,5 +152,3 @@ Consulta la [documentazione su Spip-Contrib->http://contrib.spip.net/SpipBB-le-f
 	// V
 	'voir' => 'VEDI'
 );
-
-?>

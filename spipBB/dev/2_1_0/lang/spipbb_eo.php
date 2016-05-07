@@ -104,5 +104,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir' => 'VIDI'
 );
-
-?>

@@ -257,5 +257,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_site' => 'ឈ្មោះវ៉ែបសៃថ៍ របស់អ្នក',
 	'votre_url_site' => 'អាសយដ្ឋានវ៉ែបសៃថ៍ របស់អ្នក'
 );
-
-?>

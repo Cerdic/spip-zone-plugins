@@ -499,5 +499,3 @@ _ • [des Plugins->@plugin@]</p>',
 	'votre_url_avatar' => 'URL ihres Avatar (http://...)',
 	'votre_url_site' => 'Adresse (URL) ihrer Website'
 );
-
-?>

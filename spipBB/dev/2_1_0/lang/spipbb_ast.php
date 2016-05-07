@@ -520,5 +520,3 @@ _ • [de tou el plugin->@plugin@]</p>',
 	'votre_url_avatar' => 'URL del to Avatar (http://...)',
 	'votre_url_site' => 'Les señes (URL) del to sitiu web'
 );
-
-?>

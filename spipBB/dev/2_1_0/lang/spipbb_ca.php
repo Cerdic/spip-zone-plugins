@@ -495,5 +495,3 @@ _ • [L’ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.ph
 	'votre_url_avatar' => 'URL del vostre Avatar (http://...)',
 	'votre_url_site' => 'L’adreça (URL) del vostre lloc'
 );
-
-?>

@@ -514,5 +514,3 @@ _ • [de todo o módulo->@plugin@]</p>',
 	'votre_url_avatar' => 'URL do seu avatar (http://...)',
 	'votre_url_site' => 'O enderezo (URL) do seu web'
 );
-
-?>
