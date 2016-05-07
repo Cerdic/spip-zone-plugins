@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zeroclipboard_nom' => 'Zeroclipboard',
 	'zeroclipboard_slogan' => 'Copier coller facile'
 );
-
-?>
