@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_geo_nom' => 'Diogene - Geo',
 	'diogene_geo_slogan' => 'Geolocation add-on for "Diogene"'
 );
-
-?>

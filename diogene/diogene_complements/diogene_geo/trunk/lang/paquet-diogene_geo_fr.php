@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_geo_nom' => 'Diogène - Géo',
 	'diogene_geo_slogan' => 'Complément géographique pour "Diogène"'
 );
-
-?>
