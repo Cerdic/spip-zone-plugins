@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_authentification' => 'Error de autenticación. Compruebe la dirección y la contraseña y vuelva a intentarlo.',
 	'erreur_generale' => 'Un error interno impide la recuperación de sus contactos.'
 );
-
-?>

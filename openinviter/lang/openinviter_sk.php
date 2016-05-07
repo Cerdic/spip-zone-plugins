@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_authentification' => 'Nepodarilo sa overiť vašu totožnosť. Skontrolujte adresu a heslo a skúste to znova.',
 	'erreur_generale' => 'Obnoveniu vašich kontaktov bráni vnútorná chyba.'
 );
-
-?>
