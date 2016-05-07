@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <br /><a href="http://labs.finn.no/blog/finn-anbefaler-ie6-brukere-a-oppgradere-sin-nettleser">På FINN labs kan du lese mer om hvorfor vi anbefaler denne oppgraderingen.</a>', # MODIF
 	'noie_titre' => 'Tips fra oss: Du har en eldre versjon av nettleseren Internet Explorer.'
 );
-
-?>

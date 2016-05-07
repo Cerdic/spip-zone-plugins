@@ -16,5 +16,3 @@ Sitter du på jobb och inte har kontroll över din dator själv bör du kontakta
 <br /><a href="http://labs.finn.no/blog/finn-anbefaler-ie6-brukere-a-oppgradere-sin-nettleser">Den här uppmaningen har sitt ursprung i Norge och på en av deras största sajter, finn.no, kan du läsa om varför du bör uppgradera.</a>', # MODIF
 	'noie_titre' => 'Tips från oss: Du har en gammal version av webbläsaren Internet Explorer.'
 );
-
-?>

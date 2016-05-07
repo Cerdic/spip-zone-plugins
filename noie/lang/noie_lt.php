@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <br />Taip pat siùlome išbandyti puikias Internet Explorer alternatyvas: populiaruj? <a href="http://getfirefox.com">Firefox</a>, spar&ciaja <a href="http://www.opera.com">Opera</a> arba <a href="http://www.apple.com/safari/download/">Safari</a>.', # MODIF
 	'noie_titre' => 'Ar zinai, kad naudoji pasenusia naršykle?'
 );
-
-?>

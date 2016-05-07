@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <br />Nykyisen selaimesi tekniikka ja standardit ovat vanhentuneet vuosia sitten ja tämä heikentää tietoturvaasi!', # MODIF
 	'noie_titre' => 'Käytät Internet Explorerin vanhaa versiota'
 );
-
-?>
