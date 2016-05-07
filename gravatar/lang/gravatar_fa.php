@@ -36,5 +36,3 @@ nofollow" class="spip_out">gravatar.com</a> (مفت و راحت).',
 	// T
 	'titre_gravatar_auteur' => 'گراواتار'
 );
-
-?>

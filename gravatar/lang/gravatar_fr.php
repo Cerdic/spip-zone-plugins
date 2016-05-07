@@ -32,5 +32,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_gravatar_auteur' => 'Gravatar'
 );
-
-?>
