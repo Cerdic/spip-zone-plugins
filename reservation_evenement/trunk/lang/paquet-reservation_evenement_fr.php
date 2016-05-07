@@ -18,5 +18,3 @@ Il contient :
 	'reservation_evenement_nom' => 'Réservation Événements',
 	'reservation_evenement_slogan' => 'Gestionnaire de réservation d’événements'
 );
-
-?>
