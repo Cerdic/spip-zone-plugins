@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_licence_defaut' => 'Licence par défaut'
 );
-
-?>
