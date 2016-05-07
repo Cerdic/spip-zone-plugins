@@ -17,5 +17,3 @@ Il propose notamment :
 	'spip_400_nom' => 'SPIP 400',
 	'spip_400_slogan' => 'Gestion poussée des erreurs HTTP (401, 404) pour SPIP'
 );
-
-?>

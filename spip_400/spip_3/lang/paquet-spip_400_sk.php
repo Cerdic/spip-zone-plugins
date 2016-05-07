@@ -19,5 +19,3 @@ Ponúka najmä:
 	'spip_400_nom' => 'SPIP 400',
 	'spip_400_slogan' => 'Ovládanie vynútených chybových stránok (401, 404) pre SPIP'
 );
-
-?>

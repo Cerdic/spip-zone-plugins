@@ -19,5 +19,3 @@ It proposes to:
 	'spip_400_nom' => 'SPIP 400',
 	'spip_400_slogan' => 'Advanced management of HTTP errors (401, 404) for SPIP'
 );
-
-?>

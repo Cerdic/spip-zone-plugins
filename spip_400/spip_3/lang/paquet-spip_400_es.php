@@ -19,5 +19,3 @@ Propone particularmente:
 	'spip_400_nom' => 'SPIP 400',
 	'spip_400_slogan' => 'Gestión impulsada de errores HTTP (401, 404) para SPIP'
 );
-
-?>
