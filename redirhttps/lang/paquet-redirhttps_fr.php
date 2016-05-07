@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redirhttps_nom' => 'Redirections HTTPS',
 	'redirhttps_slogan' => 'Sécuriser l’accès à certaines pages du site'
 );
-
-?>

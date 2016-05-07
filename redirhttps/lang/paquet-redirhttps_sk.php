@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redirhttps_nom' => 'Presmerovania HTTPS',
 	'redirhttps_slogan' => 'Zabezpečiť prístup na určité stránky'
 );
-
-?>
