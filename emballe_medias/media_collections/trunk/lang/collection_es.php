@@ -147,5 +147,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_coop' => 'Colaboración',
 	'type_perso' => 'Personal'
 );
-
-?>
