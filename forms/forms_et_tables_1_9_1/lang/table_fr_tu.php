@@ -53,5 +53,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'une_reponse' => 'Une donnée'
 );
-
-?>

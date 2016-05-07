@@ -45,5 +45,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'une_reponse' => 'មួយទិន្នន័យ'
 );
-
-?>
