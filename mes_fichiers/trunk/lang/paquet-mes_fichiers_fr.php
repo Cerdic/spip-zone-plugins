@@ -15,5 +15,3 @@ Il est aussi possible de lancer une sauvegarde régulière automatique de tous l
 	'mes_fichiers_nom' => 'Mes fichiers',
 	'mes_fichiers_slogan' => 'Archiver ses fichiers et dossiers de personnalisation'
 );
-
-?>

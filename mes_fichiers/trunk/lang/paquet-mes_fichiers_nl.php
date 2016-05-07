@@ -17,5 +17,3 @@ Tevens is het mogelijk automatisch een regelmatige backup van de personalisatie 
 	'mes_fichiers_nom' => 'Mijn bestanden',
 	'mes_fichiers_slogan' => 'Archiveer de personalisaties van je site'
 );
-
-?>

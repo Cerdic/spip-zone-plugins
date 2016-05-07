@@ -17,5 +17,3 @@ It is also possible to initiate an automatic backup of all customisation files c
 	'mes_fichiers_nom' => 'My files',
 	'mes_fichiers_slogan' => 'Backup your customisation files and folders'
 );
-
-?>
