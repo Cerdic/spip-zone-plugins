@@ -422,5 +422,3 @@ parent path of these)',
 	'valider_nom_objet_avant' => 'To enter the language chains, please first validate 
 the form after entering the name of the object. This enables to complete part of language chains, it will take you just checking out.'
 );
-
-?>
