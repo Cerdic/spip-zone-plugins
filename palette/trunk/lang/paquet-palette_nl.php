@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'palette_description' => 'Geef class palette aan een input om er een kleurselectie aan toe te voegen: <code><input class="palette" name="couleur" value="#dfdfdf" /></code>',
 	'palette_slogan' => 'Kleurselectie'
 );
-
-?>
