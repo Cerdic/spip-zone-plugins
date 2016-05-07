@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tags_spipicious' => 'Tags'
 );
-
-?>
