@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zotspip_description' => 'Sync Spip with a Zotero library of bibliographic references (user or group library). Use Zotero to manage / import / edit your bibliographic references and insert them in your Spip using the models provided by ZotSpip.',
 	'zotspip_slogan' => 'The power of Zotero in your SPIP'
 );
-
-?>
