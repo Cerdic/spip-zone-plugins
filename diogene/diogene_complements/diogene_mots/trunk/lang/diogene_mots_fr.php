@@ -23,5 +23,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mots_obligatoires' => 'Groupes de mots obligatoires',
 	'limiter_usage_mots' => 'Limiter à une liste de mots pour le groupe « @groupe@ »'
 );
-
-?>

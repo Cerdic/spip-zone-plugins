@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mots_facultatifs' => 'Grupos de palabras facultativas',
 	'label_mots_obligatoires' => 'Grupos de palabras obligatorias'
 );
-
-?>
