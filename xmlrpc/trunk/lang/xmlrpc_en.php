@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_desactiver_rsd_long' => 'Disables the use of the RSD file in the pages header',
 	'label_ferme' => 'Deactivate the server'
 );
-
-?>
