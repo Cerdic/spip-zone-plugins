@@ -16,5 +16,3 @@ _ Detaillierte Informationen stehen in der Dokumentation des Plugins.
 ',
 	'fulltext_slogan' => 'Volltext-Indexierung zur Beschleunigung von Suchvorgängen'
 );
-
-?>

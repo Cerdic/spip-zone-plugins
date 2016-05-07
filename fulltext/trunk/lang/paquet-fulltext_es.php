@@ -15,5 +15,3 @@ _ Para un funcionamiento óptimo, ciertos programas complementarios son necesari
 _ Ver la documentación del plugin para más detalles. ',
 	'fulltext_slogan' => 'Indexación FULLTEXT para agilizar las búsquedas'
 );
-
-?>

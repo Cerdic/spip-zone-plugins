@@ -15,5 +15,3 @@ _ Voor een optimaal functioneren zijn enkele aanvullende programma’s op de ser
 _ Bekijk de documentatie van de plugin voor meer details.',
 	'fulltext_slogan' => 'FULLTEXT indexeert voor sneller zoeken'
 );
-
-?>

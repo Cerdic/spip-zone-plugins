@@ -15,5 +15,3 @@ _ For an optimum use, you need to install additional programs on the server and 
 _ See the plugin documentation for more details.',
 	'fulltext_slogan' => 'FULLTEXT indexation to speed up searches'
 );
-
-?>

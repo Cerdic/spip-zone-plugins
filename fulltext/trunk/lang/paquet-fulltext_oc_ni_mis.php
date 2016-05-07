@@ -15,5 +15,3 @@ _ Per un founciounamen otimal, d’uni prougrama coumplementari soun nechessari 
 _ Vèire la doucumentacioun dóu plugin per avé mai de detai.',
 	'fulltext_slogan' => 'Indessacioun FULLTEXT per achelerà li recerca'
 );
-
-?>

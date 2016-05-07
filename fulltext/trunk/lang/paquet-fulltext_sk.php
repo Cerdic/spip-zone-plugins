@@ -15,5 +15,3 @@ _ Na optimálne fungovanie potrebujete na serveri niektoré ďalšie programy a�
  _ Viac podrobností nájdete v dokumentácii k zásuvnému modulu.',
 	'fulltext_slogan' => 'Indexovanie CELÉHO TEXTU na zrýchlenie vyhľadávaní'
 );
-
-?>
