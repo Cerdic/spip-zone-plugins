@@ -77,5 +77,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'version_html' => 'HTML version.',
 	'version_texte' => 'Text version.'
 );
-
-?>

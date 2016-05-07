@@ -77,5 +77,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'version_html' => 'نسخه اچ.تي.ام.ال',
 	'version_texte' => 'نسخه متني.'
 );
-
-?>
