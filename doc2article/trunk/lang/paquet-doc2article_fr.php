@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2article_description' => 'Importer l’ensemble des fichiers du répertoire tmp/upload et créer un article par fichier automatiquement.',
 	'doc2article_slogan' => 'Importer l’ensemble des fichiers du répertoire tmp/upload et créer un article par fichier automatiquement'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc2article_description' => 'Importeer alle bestanden uit de map tmp/upload en maak van ieder bestand automatisch een artikel.',
 	'doc2article_slogan' => 'Importeer alle bestanden uit de map tmp/upload en maak van ieder bestand automatisch een artikel'
 );
-
-?>
