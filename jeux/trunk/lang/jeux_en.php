@@ -122,5 +122,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_choix' => 'Your answer: ', # MODIF
 	'votre_reponse' => 'Your answer: ' # MODIF
 );
-
-?>

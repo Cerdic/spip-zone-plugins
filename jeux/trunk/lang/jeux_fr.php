@@ -123,5 +123,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votre_choix' => 'Votre choix : ',
 	'votre_reponse' => 'Votre réponse : '
 );
-
-?>
