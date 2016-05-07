@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mathjax_nom' => 'MathJax pour SPIP !',
 	'mathjax_slogan' => 'Afficher des équations, des fonctions mathématiques'
 );
-
-?>
