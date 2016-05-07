@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Het objectief van de plugin is eenvoudig in zijn code te zijn en te blijven, en snel te laden. En ook een beetje esthetisch.',
 	'sedna_slogan' => 'RSS agregator'
 );
-
-?>

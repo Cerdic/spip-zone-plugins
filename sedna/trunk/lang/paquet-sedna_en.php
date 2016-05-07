@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Its purpose is to be and remain simple in its code, and quick to load. Aesthetics a bit, too.',
 	'sedna_slogan' => 'RSS aggregator'
 );
-
-?>

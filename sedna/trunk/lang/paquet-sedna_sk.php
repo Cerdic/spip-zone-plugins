@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Jej cieľom je stále mať jednoduchý kód a rýchlo sa spúšťať. A trochu aj estetický vzhľad.',
 	'sedna_slogan' => 'Kumulovanie RSS'
 );
-
-?>
