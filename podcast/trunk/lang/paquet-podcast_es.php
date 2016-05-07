@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'podcast_nom' => 'Podcasts',
 	'podcast_slogan' => 'Uno o varios flujos de podcast en su sitio'
 );
-
-?>
