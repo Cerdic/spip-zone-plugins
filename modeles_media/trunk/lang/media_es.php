@@ -83,5 +83,3 @@ Número cd documento:',
 	'pixels_maximum' => 'píxel máximo',
 	'pixels_minimum' => 'píxel mínimo'
 );
-
-?>

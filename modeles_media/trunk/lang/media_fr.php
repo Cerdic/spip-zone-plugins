@@ -83,5 +83,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pixels_maximum' => 'pixels maximum',
 	'pixels_minimum' => 'pixels minimum'
 );
-
-?>
