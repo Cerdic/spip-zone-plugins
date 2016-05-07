@@ -15,5 +15,3 @@ Sie können hingegen mit dem Namen eines Skeletts verknüpft werden.
 Das ist besonders für Impressumsseiten etc. nützlich.',
 	'pages_slogan' => 'Seiten ohne Rubrik'
 );
-
-?>

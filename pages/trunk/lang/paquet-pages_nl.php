@@ -15,5 +15,3 @@ Ze kunnen worden gekoppeld aan de naam van een skelet.
 Op deze manier kunnen bladzijdes zoals wettelijke vermeldingen, contactinformatie, disclaimers, enz. worden gemaakt.',
 	'pages_slogan' => 'Bladzijdes zonder rubriek'
 );
-
-?>

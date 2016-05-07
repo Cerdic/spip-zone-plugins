@@ -16,5 +16,3 @@ This allows the creation of pages of legal information, about, contact, etc..
 ',
 	'pages_slogan' => 'Unlinked pages'
 );
-
-?>

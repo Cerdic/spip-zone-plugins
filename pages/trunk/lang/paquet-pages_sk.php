@@ -15,5 +15,3 @@ Môžete ich však prepojiť s názvom šablóny.
 To vám umožňuje vytvárať stránky s informáciami právneho charakteru, časové osi, zmluvy, a i.',
 	'pages_slogan' => 'Stránky bez rubriky'
 );
-
-?>

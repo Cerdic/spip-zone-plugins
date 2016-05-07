@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Cela permet notamment de créer des pages de notice légale, d’à-propos, de contact, etc.',
 	'pages_slogan' => 'Отдельные страницы'
 );
-
-?>

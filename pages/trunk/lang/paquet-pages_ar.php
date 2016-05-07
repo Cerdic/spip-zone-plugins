@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'pages_slogan' => ' '
 );
-
-?>

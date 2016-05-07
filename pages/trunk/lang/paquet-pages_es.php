@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Por contra, pueden asociarse a un nombre de esqueleto. Ello permite crear páginas de aviso legal, acerca de, contacto, etc.',
 	'pages_slogan' => 'Páginas sin sección'
 );
-
-?>

@@ -13,5 +13,3 @@ En revanche elles peuvent être associées à un nom de squelette.
 Cela permet notamment de créer des pages de notice légale, d’à-propos, de contact, etc.',
 	'pages_slogan' => 'Des pages sans rubrique'
 );
-
-?>
