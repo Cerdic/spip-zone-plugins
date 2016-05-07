@@ -21,5 +21,3 @@ Proporciona el filtro <code>|gravatar</code>, a utilizar por ejemplo como
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.',
 	'gravatar_slogan' => 'Mostrar el Gravatar de un autor o de un colaborador de foro'
 );
-
-?>

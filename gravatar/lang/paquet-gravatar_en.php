@@ -18,5 +18,3 @@ Also extend the #LOGO_AUTEUR tag in order to take into account the gravatar of a
 _ Configures a default image, and image size.',
 	'gravatar_slogan' => 'Display Gravatar for author or forum poster'
 );
-
-?>

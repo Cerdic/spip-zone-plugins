@@ -20,5 +20,3 @@ Fournit le filtre <code>|gravatar</code>, à utiliser par exemple comme
 <code>[(#EMAIL|gravatar|image_reduire{80})]</code>.',
 	'gravatar_slogan' => 'Afficher le Gravatar d’un auteur ou d’un contributeur de forum'
 );
-
-?>

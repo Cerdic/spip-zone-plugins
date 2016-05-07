@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// G
 	'gravatar_slogan' => 'Zobrazí gravatar autora alebo prispievateľa diskusného fóra'
 );
-
-?>
