@@ -120,5 +120,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votes' => 'hodnotení',
 	'votre_note' => 'Vaša známka'
 );
-
-?>

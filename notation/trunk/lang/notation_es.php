@@ -120,5 +120,3 @@ Si desea garantizar la unicidad de la nota, limite el voto a las <b>seules</b> p
 	'votes' => 'votos',
 	'votre_note' => 'Su nota'
 );
-
-?>

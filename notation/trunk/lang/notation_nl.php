@@ -120,5 +120,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votes' => 'stemmen',
 	'votre_note' => 'Jouw beoordeling'
 );
-
-?>

@@ -118,5 +118,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'votes' => 'votes',
 	'votre_note' => 'Votre note'
 );
-
-?>
