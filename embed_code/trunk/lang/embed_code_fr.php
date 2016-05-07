@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_document_inexistant' => 'Ce document n’est pas disponible sur le site <a href="@url_site@">@nom_site@</a>.'
 );
-
-?>
