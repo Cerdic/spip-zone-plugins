@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_fallback_force' => 'force',
 	'option_fallback_true' => 'true'
 );
-
-?>
