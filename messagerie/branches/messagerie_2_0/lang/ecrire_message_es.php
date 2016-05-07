@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selection_selectionner' => 'seleccionar',
 	'selection_tous' => 'todos'
 );
-
-?>
