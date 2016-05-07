@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'declinaisons_nom' => 'Déclinaisons Produit',
 	'declinaisons_slogan' => 'Gérer des déclinaisons d’un produit'
 );
-
-?>
