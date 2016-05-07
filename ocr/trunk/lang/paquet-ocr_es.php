@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ocr_nom' => 'ocr',
 	'ocr_slogan' => 'Extraer un texto de una imagen por OCR'
 );
-
-?>
