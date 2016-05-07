@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_debug' => 'خطازدايي',
 	'titre_outils_rapides' => 'آفرينش' # MODIF
 );
-
-?>

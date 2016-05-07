@@ -29,5 +29,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_outils_rapides' => 'Création',
 	'titre_page_configurer_minibando' => 'Configurer le minibando'
 );
-
-?>

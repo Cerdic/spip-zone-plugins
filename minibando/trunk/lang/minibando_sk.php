@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_debug' => 'Ladiť',
 	'titre_outils_rapides' => 'Vytvorenie'
 );
-
-?>
