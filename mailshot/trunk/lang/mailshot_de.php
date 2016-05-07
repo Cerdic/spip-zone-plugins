@@ -92,5 +92,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_mailshots' => 'Mailing-Verwaltung',
 	'titre_page_configurer_mailshot' => 'MailShot'
 );
-
-?>

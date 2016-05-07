@@ -102,5 +102,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_mailshots' => 'Suivi des envois de mails en nombre',
 	'titre_page_configurer_mailshot' => 'MailShot'
 );
-
-?>

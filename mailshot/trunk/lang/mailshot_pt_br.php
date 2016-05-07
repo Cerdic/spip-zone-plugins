@@ -106,5 +106,3 @@ Isto pode representar um volume importante de dados; se você faz muitos envios,
 	'titre_menu_mailshots' => 'Acompanhamento dos envios em massa',
 	'titre_page_configurer_mailshot' => 'MailShot'
 );
-
-?>

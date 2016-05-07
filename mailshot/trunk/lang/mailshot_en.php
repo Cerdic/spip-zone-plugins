@@ -86,5 +86,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_menu_mailshots' => 'Track & Trace bulk mailings',
 	'titre_page_configurer_mailshot' => 'Mailshot'
 );
-
-?>
