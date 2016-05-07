@@ -48,5 +48,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'statut_campagne' => 'Statut'
 );
-
-?>
