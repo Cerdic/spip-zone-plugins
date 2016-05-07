@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'openinviter_description' => 'Intégration de la librairie OpenInviter avec l’API du plugin Importateur de contacts.',
 	'openinviter_slogan' => 'Intégration de la librairie OpenInviter.'
 );
-
-?>
