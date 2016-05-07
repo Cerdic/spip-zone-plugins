@@ -12,7 +12,7 @@ $GLOBALS['sil_service'] = array(
 	'tables'	=> array('iso639codes', 'iso639names', 'iso639macros', 'iso639retirements'),
 	'fields'	=> 	array(
 		'iso639codes' => array(
-			'﻿Ide' 			=> 'code_639_3',
+			'Id'           => 'code_639_3',
 			'Part2B' 		=> 'code_639_2b',
 			'Part2T' 		=> 'code_639_2t',
 			'Part1' 		=> 'code_639_1',
@@ -22,7 +22,7 @@ $GLOBALS['sil_service'] = array(
 			'Comment' 		=> 'comment'
 		),
 		'iso639names' => array(
-			'Ide' 			=> 'code_639_3',
+			'Id' 			=> 'code_639_3',
 			'Print_Name' 	=> 'print_name',
 			'Inverted_Name' => 'inverted_name'
 		),
@@ -32,7 +32,7 @@ $GLOBALS['sil_service'] = array(
 			'I_Status' 		=> 'status'
 		),
 		'iso639retirements' => array(
-			'Ide' 			=> 'code_639_3',
+			'Id' 			=> 'code_639_3',
 			'Ref_Name' 		=> 'ref_name',
 			'Ret_Reason' 	=> 'ret_reason',
 			'Change_To' 	=> 'change_to',
