@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crayons_nom' => 'Lápices',
 	'crayons_slogan' => 'Edición rápida desde las páginas publicas del sitio'
 );
-
-?>

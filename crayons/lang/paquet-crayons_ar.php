@@ -17,5 +17,3 @@ _ <code><h1 class="#EDIT{titre} علامات اخرى">#TITRE</h1></code>.',
 	'crayons_nom' => 'القلم',
 	'crayons_slogan' => 'هذا الملحق، {{المتوافر للاصدار ١'
 );
-
-?>

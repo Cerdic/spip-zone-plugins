@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'crayons_nom' => 'Der Stift',
 	'crayons_slogan' => 'Änderungen in öffentlichen Seiten direkt erledigen, Vorausetzung für Wikis mit SPIP'
 );
-
-?>
