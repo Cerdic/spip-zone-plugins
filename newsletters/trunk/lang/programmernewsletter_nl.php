@@ -49,5 +49,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_programmer_newsletter' => 'Programmeren van een nieuwsbrief'
 );
-
-?>
