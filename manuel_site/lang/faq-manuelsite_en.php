@@ -61,5 +61,3 @@ _ {Please note that the max size of a file is 150M, for an approximate length of
 	'video_dist' => 'If your video is hosted on DailyMotion, YouTube or Vimeo, in a new tab of your browser, go to the page viewing of the video, and copy the url. In the edit page of your article click "Add Video" and paste the URL. Then insert into the text of the article <code><videoXX|center></code>',
 	'video_dist_q' => 'How to add a video dailymotion (youtube,...) to an article?'
 );
-
-?>

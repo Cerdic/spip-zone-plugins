@@ -57,5 +57,3 @@ _ {Attention, la taille max d’un fichier est de 150M, soit environ une durée 
 	'video_dist' => 'Si votre vidéo est hébergée sur DailyMotion, YouTube ou Viméo, dans un nouvel onglet de votre navigateur, aller sur la page de visionnage de la vidéo, et copier l’url. Dans la page d’édition de votre article cliquer sur "Ajouter une vidéo" et coller l’url. Insérer alors dans la zone texte de l’article <code><videoXX|center></code>',
 	'video_dist_q' => 'Comment ajouter une vidéo dailymotion (youtube,...) à un article ?'
 );
-
-?>

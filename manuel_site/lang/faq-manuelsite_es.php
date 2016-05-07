@@ -61,5 +61,3 @@ _ {Atención, el tamaño máximo de un archivo es de 150M, o sea, en torno a una
 	'video_dist' => 'Si su viídeo está alojado en DailyMotion, YouTube o Viméo, en una nueva pestaña de su navegador, ir a la página de visualización del vídeo, y copiar la url. En la página de edición de su artículo haga clic sobre "Añadir un vídeo" y pegar la url. Insertar entonces en el área de texto del artículo <code><videoXX|center></code>',
 	'video_dist_q' => '¿Cómo añadir un vídeo dailymotin (youtube...) a un artículo?'
 );
-
-?>

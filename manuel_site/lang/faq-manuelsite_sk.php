@@ -59,5 +59,3 @@ _ {Pozor, maximálna veľkosť súboru je 150 MB alebo dĺžka približne 37,5 
 	'video_dist' => 'Ak sa vaše video nachádza na stránke DailyMotion, YouTube alebo Viméo  a máte ho na novej karte vášho prehliadača, prejdite na stránku, kde sa video nachádza a skopírujte internetovú adresu videa. Na stránke úprav svojho článku kliknite na tlačidlo "Pridať video" a prilepte jeho internetovú adresu. Potom vložte do textu článku <code><videoXX|center></code>',
 	'video_dist_q' => 'Ako k článku pridať video z dailymotion (youtube, atď.)?'
 );
-
-?>

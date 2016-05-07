@@ -59,5 +59,3 @@ _ {Let op: de maximale grootte is 150Mb, ofwel 37.5 minuten}',
 	'video_dist' => 'Staat de video op DailyMotion, YouTube of Viméo, ga dan in een nieuw venster naar de bladzijde van de video en kopieer de URL. Klik in de redactie van het artikel op "Een video toevoegen" en plak de URL. Plaats vervolgens in je tekst <code><videoXX|center></code>',
 	'video_dist_q' => 'Hoe voeg ik een dailymotion (youtube,...) video aan een artikel toe?'
 );
-
-?>
