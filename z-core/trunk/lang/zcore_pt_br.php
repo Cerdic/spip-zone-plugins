@@ -42,5 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zapl_loading' => 'Carregando...',
 	'zapl_reload_off' => 'Clique aqui si a página demora incompleta (ou active o javascript no seu navegador)'
 );
-
-?>

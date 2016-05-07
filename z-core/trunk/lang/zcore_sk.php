@@ -42,5 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zapl_loading' => 'Vykonávajú sa zmeny',
 	'zapl_reload_off' => 'Ak je stránka nedokončená (alebo vo vašom prehliadači spúšťa javascript), kliknite sem'
 );
-
-?>

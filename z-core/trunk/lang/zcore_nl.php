@@ -42,5 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zapl_loading' => 'Wordt geladen...',
 	'zapl_reload_off' => 'Klik hier als de pagina niet volledig is (of activeer Javascript in uw browser)'
 );
-
-?>
