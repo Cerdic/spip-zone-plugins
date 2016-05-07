@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'emballe_medias_nom' => 'Envuelve Medias',
 	'emballe_medias_slogan' => 'Envolver sus documentos correctamente'
 );
-
-?>
