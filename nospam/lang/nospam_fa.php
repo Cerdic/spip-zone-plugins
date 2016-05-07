@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'forum_saisie_texte_info' => 'اين فرم ميان‌ برهاي اسپيپ  <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code>و  كد اچ.تي.ام.ال را <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> مي‌پذيرد . براي ساختن پارگراف فقط يك سطر خالي بگذاريد. '
 );
-
-?>

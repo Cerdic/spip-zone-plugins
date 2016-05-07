@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_message_licite' => 'Dies ist kein mißbräuchlicher Beitrag.'
 );
-
-?>

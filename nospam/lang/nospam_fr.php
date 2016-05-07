@@ -25,5 +25,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_message_licite' => 'Ceci n’est pas un message abusif'
 );
-
-?>
