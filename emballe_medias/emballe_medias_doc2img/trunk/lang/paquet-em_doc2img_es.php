@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'em_doc2img_nom' => 'Envuelve Medias - Doc2Img',
 	'em_doc2img_slogan' => 'Complemento Doc2Img para "Envuelve Medias" (utiliza doc2img)'
 );
-
-?>

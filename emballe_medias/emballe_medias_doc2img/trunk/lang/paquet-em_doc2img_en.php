@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'em_doc2img_nom' => 'Wrap medias - Doc2Img',
 	'em_doc2img_slogan' => 'Doc2Img add-on for "Wrap media" (use doc2img)'
 );
-
-?>
