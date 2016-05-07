@@ -38,5 +38,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_legende' => 'Text of the caption'
 );
-
-?>

@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_legende' => 'Texte de la note'
 );
-
-?>
