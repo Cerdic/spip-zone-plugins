@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'embed_code_nom' => 'Embed code',
 	'embed_code_slogan' => 'Aanmaken van ingebedde code voor documenten'
 );
-
-?>

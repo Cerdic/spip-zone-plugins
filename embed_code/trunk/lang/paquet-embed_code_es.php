@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'embed_code_nom' => 'Código incrustado',
 	'embed_code_slogan' => 'Generación de código de incrustación para documentos'
 );
-
-?>
