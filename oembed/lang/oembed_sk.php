@@ -43,5 +43,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_configurer_providers' => 'oEmbedu – Poskytovatelia',
 	'titre_oembed' => 'oEmbed'
 );
-
-?>

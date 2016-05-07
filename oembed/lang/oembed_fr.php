@@ -41,5 +41,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_configurer_providers' => 'Providers oEmbed',
 	'titre_oembed' => 'oEmbed'
 );
-
-?>
