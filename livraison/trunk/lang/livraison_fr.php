@@ -42,5 +42,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_livraisons' => 'Livraisons',
 	'titre_page_configurer_livraison' => 'Livraisons'
 );
-
-?>
