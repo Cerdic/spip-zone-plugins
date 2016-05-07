@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Permits direct editing of the spip objects from their page. By default only articles are in direct mode, you can ad other objects in the plugins configuration panel',
 	'edition_directe_slogan' => 'Permits direct editing of the spip objects from their page'
 );
-
-?>

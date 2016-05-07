@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Editer directement les objets spip depuis leur page dans l’espace privé. Les objets à éditer directement doivent être activés dans Configuration',
 	'edition_directe_slogan' => 'Editer directement les objets spip depuis leur page'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Priama úprava objektov spipu z ich stránky v súkromnej zóne. Objekty na priame upravovanie musia byť aktivované v konfigurácii',
 	'edition_directe_slogan' => 'Priama úprava objektov spipu z ich stránky'
 );
-
-?>

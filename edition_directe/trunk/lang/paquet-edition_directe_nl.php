@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'SPIP objecten direct aanpassen vanaf hun pagina in de privé-omgeving. De direct aan te passen objecten moeten in de configuratie worden geactiveerd',
 	'edition_directe_slogan' => 'Pas SPIP objecten direct aan vanaf hun pagina'
 );
-
-?>

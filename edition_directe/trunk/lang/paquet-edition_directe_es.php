@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Permite editar directamente los objetos spip en el espacio privado. Por defecto sólo los artículos se pueden editar directamente, en el panel de configuración del plugin se pueden añadir otros objetos spip',
 	'edition_directe_slogan' => 'Posibilita editar directamente los objetos spip en el espacio privado'
 );
-
-?>

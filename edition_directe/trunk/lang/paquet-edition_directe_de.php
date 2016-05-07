@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Ermöglicht es Spip Objekete im Backoffice direkt auf von deren Seite aus zu bearbeiten. Die gewünschten Objekte müssen zuerst via cfg aktiviert werden',
 	'edition_directe_slogan' => 'Ermöglicht es Spip Objekete direkt auf von deren Seite her zu bearbeiten'
 );
-
-?>
