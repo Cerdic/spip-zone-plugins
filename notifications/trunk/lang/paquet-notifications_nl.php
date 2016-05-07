@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_description' => 'Notificatie per email wanneer bepaalde handelingen worden verricht, zoals in het forum of het privé berichtensysteem. Ook kan een email naar auteurs worden gestuurd bij publicatie van hun artikelen.',
 	'notifications_slogan' => 'Berichten per email over aanpassingen'
 );
-
-?>

@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_description' => 'Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l’espace privé, permet également l’envoi d’un mail aux auteurs lors de la publication de leurs articles.',
 	'notifications_slogan' => 'Signaler par mail des modifications'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'notifications_slogan' => 'خبردهي از اصلاحات با ايميل'
 );
-
-?>
