@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'imap_nom' => 'IMAP',
 	'imap_slogan' => 'Connexion à un serveur IMAP'
 );
-
-?>
