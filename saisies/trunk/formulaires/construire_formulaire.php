@@ -239,6 +239,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($enregistrer_saisie) {
 		if ($vraies_erreurs) {
 			$erreurs = array_merge($erreurs, $vraies_erreurs);
+			$erreurs['message_erreur'] = singulier_ou_pluriel(count($vraies_erreurs), 'avis_1_erreur_saisie', 'avis_nb_erreurs_saisie');
 		} else {
 			$erreurs = array();
 		}
