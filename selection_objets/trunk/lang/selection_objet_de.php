@@ -77,5 +77,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_liens_defaut' => 'Standard Verknüpfunsart, kann weiter unten überschrieben werden',
 	'type_liens_surcharge' => 'die standard Verknüpfunsarten überschreiben'
 );
-
-?>

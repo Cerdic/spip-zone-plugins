@@ -75,5 +75,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_liens_defaut' => 'types de lien par défaut, peuvent être surchargés ci-bas',
 	'type_liens_surcharge' => 'surcharger les types de lien par défaut'
 );
-
-?>
