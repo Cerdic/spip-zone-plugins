@@ -15,5 +15,3 @@ _ Je kunt ermee de gebruiksgegevens van SPIP plugins verzamelen, updaten en teru
 Deze statistieken komen van de site <a href="http://stats.spip.org">stats.spip.org</a>.',
 	'svpstats_slogan' => 'SVP module voor het beheer van statistieken over het gebruik van plugins'
 );
-
-?>

@@ -15,5 +15,3 @@ _ It allows you to acquire, update and return the usage statistics of SPIP plugi
 Those statistics come from the <a href="http://stats.spip.org">stats.spip.org</a> Web site.',
 	'svpstats_slogan' => 'SVP module to manage the usage statistics of the plugins'
 );
-
-?>

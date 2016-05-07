@@ -13,5 +13,3 @@ _ Il permet d’acquérir, de mettre à jour et de restituer les statistiques d�
 Ces statistiques sont issues du site <a href="http://stats.spip.org">stats.spip.org</a>.',
 	'svpstats_slogan' => 'Module SVP de gestion des statistiques d’utilisation des plugins'
 );
-
-?>

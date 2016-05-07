@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  Tieto štatistiky pochádzajú zo stránky <a href="http://stats.spip.org">stats.spip.org.</a>',
 	'svpstats_slogan' => 'Modul SVP na správu štatistík využívania zásuvných modulov'
 );
-
-?>
