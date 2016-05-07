@@ -51,5 +51,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_declinaison' => 'Logo de cette déclinaison',
 	'titre_page_configurer_declinaisons' => 'Configuration Déclinaisons'
 );
-
-?>
