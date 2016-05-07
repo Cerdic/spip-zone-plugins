@@ -30,5 +30,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'valider' => 'De video bijvoegen'
 );
-
-?>
