@@ -40,5 +40,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tableau_resume' => 'Résumé',
 	'tableau_titre' => 'Titre'
 );
-
-?>

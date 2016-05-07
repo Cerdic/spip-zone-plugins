@@ -27,5 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_puces' => 'Traitement des puces',
 	'cfg_titraille' => 'Titraille'
 );
-
-?>
