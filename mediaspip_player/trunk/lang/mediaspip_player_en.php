@@ -81,5 +81,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'valeur_horizontal' => 'Horizontal',
 	'valeur_vertical' => 'Vertical'
 );
-
-?>
