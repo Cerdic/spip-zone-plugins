@@ -24,5 +24,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_polyhierarchie' => 'Polyhiérarchie'
 );
-
-?>
