@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradrub_nom' => 'Translations between sections',
 	'tradrub_slogan' => 'Management of translation links between sections'
 );
-
-?>
