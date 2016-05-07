@@ -18,5 +18,3 @@ IPTC informations requires the "iptcparse" PHP function and use the class "class
 	'photo_infos_nom' => 'Photo metadata',
 	'photo_infos_slogan' => 'Display EXIF, IPTC and GPS data from a JPEG file'
 );
-
-?>
