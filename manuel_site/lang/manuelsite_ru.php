@@ -53,5 +53,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_manuel' => 'Руководство редактора сайта',
 	'titre_menu' => 'Руководство редактора сайта'
 );
-
-?>
