@@ -60,5 +60,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_votre_identifiant' => 'شناسه‌ي شما',
 	'textes_url_piwik' => 'ميزبان پي‌ويك شما'
 );
-
-?>

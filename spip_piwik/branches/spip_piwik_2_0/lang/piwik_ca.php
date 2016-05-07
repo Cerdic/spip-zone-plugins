@@ -51,5 +51,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_votre_identifiant' => 'Nom d’usuari',
 	'textes_url_piwik' => 'El vostre servidor piwik'
 );
-
-?>
