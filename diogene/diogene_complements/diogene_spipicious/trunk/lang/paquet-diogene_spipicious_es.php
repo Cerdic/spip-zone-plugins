@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_spipicious_description' => 'Complemento "etiquetas personales" para "Diógenes" (utiliza SpipIcious)',
 	'diogene_spipicious_slogan' => 'Complemento "etiquetas personales"'
 );
-
-?>

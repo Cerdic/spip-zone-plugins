@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diogene_spipicious_description' => 'Complément "tags personnels" pour "Diogene" (utilise SpipIcious)',
 	'diogene_spipicious_slogan' => 'Complément "tags personnels"'
 );
-
-?>
