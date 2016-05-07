@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 	'header_total' => 'Summe'
 );
-
-?>

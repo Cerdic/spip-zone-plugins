@@ -84,5 +84,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tax_and_shipping' => 'Frais et coût d’envoi' # MODIF
 );
-
-?>

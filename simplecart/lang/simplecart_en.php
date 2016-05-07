@@ -103,5 +103,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Y
 	'your_cart' => 'Your cart'
 );
-
-?>
