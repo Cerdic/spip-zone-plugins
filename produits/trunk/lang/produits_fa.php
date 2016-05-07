@@ -36,5 +36,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_statut' => 'تغيير وضعيت:‌',
 	'produits_titre' => 'كالاها'
 );
-
-?>

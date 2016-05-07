@@ -60,5 +60,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_produits' => 'Produits',
 	'tous_les_produits' => 'Tous les produits'
 );
-
-?>

@@ -54,5 +54,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tous_les_produits' => 'Všetky výrobky'
 );
-
-?>
