@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'seo_nom' => 'SEO',
 	'seo_slogan' => 'Search Engine Optimisation'
 );
-
-?>
