@@ -33,5 +33,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verif_refusee' => 'Verificación rechazada'
 );
-
-?>
