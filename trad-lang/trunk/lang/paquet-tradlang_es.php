@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradlang_description' => 'Un plugin para gestionar directamente los archivos de idiomas desde SPIP.',
 	'tradlang_slogan' => 'Gestionar los archivos de idioma'
 );
-
-?>

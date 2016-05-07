@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradlang_description' => 'Zásuvný modul na správu jazykových súborov priamo zo SPIPu.',
 	'tradlang_slogan' => 'Správa jazykových súborov'
 );
-
-?>

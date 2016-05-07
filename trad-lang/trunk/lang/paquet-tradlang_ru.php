@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradlang_description' => 'Плагин позволяет управлять языковыми файлами из админки SPIP',
 	'tradlang_slogan' => 'Управление языковыми файлами'
 );
-
-?>
