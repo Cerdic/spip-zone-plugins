@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_nom' => 'Tickets',
 	'tickets_slogan' => 'Système de suivi de tâches'
 );
-
-?>

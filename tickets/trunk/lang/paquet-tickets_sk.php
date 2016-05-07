@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_nom' => 'Lístky',
 	'tickets_slogan' => 'Systém na sledovanie chýb' # MODIF
 );
-
-?>

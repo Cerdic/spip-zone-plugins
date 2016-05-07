@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_nom' => 'Bug reports',
 	'tickets_slogan' => 'Bug tracking system'
 );
-
-?>
