@@ -174,5 +174,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_publier_proposes_page' => 'Un objet proposé',
 	'titre_publier_proposes_page_vous' => 'Vos objets proposés'
 );
-
-?>
