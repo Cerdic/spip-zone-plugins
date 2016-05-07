@@ -89,5 +89,3 @@ Stránky a obsah týchto stránok je vytvorený v programe {{SPIP,}} v slobodnom
 	// T
 	'test_fichier_langue' => 'TEST'
 );
-
-?>

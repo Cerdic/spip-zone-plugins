@@ -130,5 +130,3 @@ Vous pouvez, selon votre système :
 - visualiser la carte dans votre navigateur : {{[->@vcard_url@]}}
 - l’enregistrer sur votre ordinateur ({indiquer obligatoirement une extension de fichier {{’.VCF’}} si ce n’est pas le cas}) : {{[->@vcard_url_download@]}}'
 );
-
-?>

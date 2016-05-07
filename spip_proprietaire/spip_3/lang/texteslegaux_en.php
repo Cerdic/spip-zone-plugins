@@ -131,5 +131,3 @@ You can, depending on your system:
 - view the card in your browser: {{[->@vcard_url@]}}
 - save it to your computer ({put the file extension {{’.VCF’}} if it’s not the case}): {{[->@vcard_url_download@]}}'
 );
-
-?>
