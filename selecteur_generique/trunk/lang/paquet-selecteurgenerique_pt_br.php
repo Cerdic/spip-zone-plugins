@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selecteurgenerique_nom' => 'Seletor genérico',
 	'selecteurgenerique_slogan' => 'Melhoramento dos seletores da área restrita'
 );
-
-?>

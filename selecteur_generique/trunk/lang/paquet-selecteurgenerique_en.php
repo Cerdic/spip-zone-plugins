@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selecteurgenerique_nom' => 'Generic selector',
 	'selecteurgenerique_slogan' => 'Improving the selectors of private space'
 );
-
-?>
