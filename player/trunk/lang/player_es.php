@@ -118,5 +118,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'player_nom' => 'Reproductor Multimedia',
 	'player_video' => 'Reproductor de Video'
 );
-
-?>

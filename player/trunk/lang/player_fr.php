@@ -116,5 +116,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'player_nom' => 'Lecteur multimédia',
 	'player_video' => 'Player vidéo'
 );
-
-?>

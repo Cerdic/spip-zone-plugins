@@ -99,5 +99,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'player_audio' => 'Player audio',
 	'player_video' => 'Player video'
 );
-
-?>
