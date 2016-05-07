@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'massicot_nom' => 'Massicot',
 	'massicot_slogan' => 'Recadrez vos images dans SPIP !'
 );
-
-?>
