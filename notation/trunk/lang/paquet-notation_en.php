@@ -16,5 +16,3 @@ and <code><notation|topten></code> which gives the 10 best articles.',
 	'notation_nom' => 'Rating',
 	'notation_slogan' => 'Assign a rating to SPIP elements'
 );
-
-?>

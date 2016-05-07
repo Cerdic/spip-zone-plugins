@@ -16,5 +16,3 @@ a <code> <notation|topten> </ code> ktorá vypíše najlepších 10 článkov.'
 	'notation_nom' => 'Hodnotenie',
 	'notation_slogan' => 'Priradiť prvkom SPIPu hodnotenie'
 );
-
-?>

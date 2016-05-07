@@ -16,5 +16,3 @@ und <code><notation|topten></code> die 10 am besten bewerteten Artikel anzeigt.'
 	'notation_nom' => 'Benotung',
 	'notation_slogan' => 'SPIP-Elemente benoten'
 );
-
-?>

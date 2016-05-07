@@ -16,5 +16,3 @@ _تعريف مدل‌هاي <code><autxx|notation|id_article=yy></code>كه رت
 	'notation_nom' => 'رتبه بندي',
 	'notation_slogan' => 'اختصاص يك رتبه‌بندي به عناصري از اسپيپ'
 );
-
-?>

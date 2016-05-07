@@ -16,5 +16,3 @@ en <code><notation|topten></code> toont de 10 best beoordeelde artikelen.',
 	'notation_nom' => 'Scores',
 	'notation_slogan' => 'Geef een beoordeling voor SPIP elementen'
 );
-
-?>

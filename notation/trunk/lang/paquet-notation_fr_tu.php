@@ -16,5 +16,3 @@ et <code><notation|topten></code> qui donne les 10 meilleurs articles.',
 	'notation_nom' => 'Notation',
 	'notation_slogan' => 'Attribuer une note aux éléments de SPIP'
 );
-
-?>
