@@ -40,5 +40,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'temps_passe' => 'passed',
 	'temps_restant' => 'left'
 );
-
-?>
