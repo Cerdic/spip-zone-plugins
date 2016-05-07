@@ -47,5 +47,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_supprime' => 'Este sitio está a la espera de eliminación definitiva.',
 	'site_suspendu' => 'Este sitio está suspendido.'
 );
-
-?>
