@@ -27,5 +27,3 @@ Once the necessary plugins are activated, simply determine the language of the s
 	'multilingue_nom' => 'Easy Multilingual web-site',
 	'multilingue_slogan' => 'Create easily a multilingual site'
 );
-
-?>

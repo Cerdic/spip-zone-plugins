@@ -28,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilingue_nom' => 'Sitio multilingüe fácil',
 	'multilingue_slogan' => 'Crear fácilmente un sitio multilingüe'
 );
-
-?>
