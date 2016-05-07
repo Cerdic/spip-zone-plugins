@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'simplog_nom' => 'Log-Anzeige',
 	'simplog_slogan' => 'Anzeige der SPIP-Logdateien für Admins'
 );
-
-?>

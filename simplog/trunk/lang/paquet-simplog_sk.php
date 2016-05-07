@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'simplog_nom' => 'Jednoduché protokoly',
 	'simplog_slogan' => 'Zobrazenie protokolov SPIPu pre  administrátorov'
 );
-
-?>

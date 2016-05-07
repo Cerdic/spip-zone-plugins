@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'simplog_nom' => 'Simples Logs',
 	'simplog_slogan' => 'Visualisation des logs SPIP par les administrateurs'
 );
-
-?>
