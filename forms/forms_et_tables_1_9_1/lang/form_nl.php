@@ -54,5 +54,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'une_reponse' => 'Een antwoord'
 );
-
-?>

@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_supprimer_formulaire' => 'Vill du verkligen radera formuläret ?'
 );
-
-?>

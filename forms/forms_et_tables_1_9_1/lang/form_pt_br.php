@@ -54,5 +54,3 @@ Você quer realmente excluí-lo?',
 	// U
 	'une_reponse' => 'Uma resposta'
 );
-
-?>

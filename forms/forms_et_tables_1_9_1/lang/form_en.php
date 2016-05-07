@@ -54,5 +54,3 @@ Do you really want to delete it?',
 	// U
 	'une_reponse' => 'One reply'
 );
-
-?>

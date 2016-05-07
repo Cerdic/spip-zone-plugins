@@ -54,5 +54,3 @@ Möchten Sie es wirklich löschen?',
 	// U
 	'une_reponse' => 'Eine Antwort'
 );
-
-?>

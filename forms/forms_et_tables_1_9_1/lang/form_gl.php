@@ -54,5 +54,3 @@ Está certo de que o quere suprimir ?',
 	// U
 	'une_reponse' => 'Unha resposta'
 );
-
-?>

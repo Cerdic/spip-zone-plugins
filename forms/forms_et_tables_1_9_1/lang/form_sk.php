@@ -54,5 +54,3 @@ Naozaj ho chcete odstrániť?',
 	// U
 	'une_reponse' => 'Jedna odpoveď'
 );
-
-?>

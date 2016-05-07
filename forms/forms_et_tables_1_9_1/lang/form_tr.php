@@ -54,5 +54,3 @@ Gerçekten simek istiyor musunuz ?',
 	// U
 	'une_reponse' => 'Bir cevap'
 );
-
-?>
