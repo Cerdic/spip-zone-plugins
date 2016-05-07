@@ -18,5 +18,3 @@ _ l’url, l’intro et le sujet sont facultatifs',
 	'recommander_nom' => 'Recommander à un ami',
 	'recommander_slogan' => 'Fonction recommander une page à un ami'
 );
-
-?>

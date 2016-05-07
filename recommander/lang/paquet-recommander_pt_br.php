@@ -20,5 +20,3 @@ _ o url, a intro e o assunto são opcionais',
 	'recommander_nom' => 'Recomendar a um amigo',
 	'recommander_slogan' => 'Função recomendar uma página a um amigo'
 );
-
-?>

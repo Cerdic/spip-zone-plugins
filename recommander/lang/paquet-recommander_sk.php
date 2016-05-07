@@ -20,5 +20,3 @@ _ adresa, úvod a hlavný text sú nepovinné',
 	'recommander_nom' => 'Odporučiť priateľovi',
 	'recommander_slogan' => 'Funkcia Odporučiť stránku priateľovi'
 );
-
-?>

@@ -20,5 +20,3 @@ _ Url, introduction and subject are optionals.',
 	'recommander_nom' => 'Recommend to a friend',
 	'recommander_slogan' => '"Recommend a page to a friend" functionnality'
 );
-
-?>

@@ -20,5 +20,3 @@ _ de url, de introductie en het onderwerp zijn facultatief',
 	'recommander_nom' => 'Aan een vriend(in) aanbevelen',
 	'recommander_slogan' => 'Functie om een bladzijde aan een vriend(in) aan te bevelen'
 );
-
-?>
