@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noizetier_nom' => 'Nuts Manager (NoiZetier)',
 	'noizetier_slogan' => 'Nuts management, natively functional with Z skeletons'
 );
-
-?>

@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noizetier_nom' => 'درخت فندق',
 	'noizetier_slogan' => 'مديريت فندق‌ها، ذاتاً كاركردي با اسكلت‌هاي Z'
 );
-
-?>

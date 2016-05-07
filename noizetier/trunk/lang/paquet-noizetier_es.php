@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noizetier_nom' => 'NoiZetier',
 	'noizetier_slogan' => 'Gestionario de noisettes, originariamente funcional con los esqueletos Z'
 );
-
-?>

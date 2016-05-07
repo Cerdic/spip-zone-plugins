@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noizetier_nom' => 'Nussbaum',
 	'noizetier_slogan' => 'Verwaltung der Code-Nüsse, als Ergänzung der Z-Squelette oder als eigenständiges Modul.'
 );
-
-?>
