@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* В шаблоне <code>#MODELE{playliste}</code> отображает список последних mp3 файлов', # MODIF
 	'player_slogan' => 'Аудио и видео плеер' # MODIF
 );
-
-?>

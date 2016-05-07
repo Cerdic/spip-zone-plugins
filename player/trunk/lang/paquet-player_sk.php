@@ -18,5 +18,3 @@ Funguje na všetkých <code><docXX|player></code> vložených v texte, ako aj v
 -* v šablóne <code>#MODELE{playliste}</code> umožňuje zobraziť zoznam skladieb z posledných mp3',
 	'player_slogan' => 'Prehrávanie MP3'
 );
-
-?>

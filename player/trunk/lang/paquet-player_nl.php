@@ -18,5 +18,3 @@ Hij werkt op alle <code><docXX|player></code>, zowel in tekst als in skeletten.
 -* In een tekst kan met <code>#MODELE{playlist}</code> een playlist met de nieuwste mp3 bestanden worden getoond',
 	'player_slogan' => 'Geluidsbestanden in mp3 lezen'
 );
-
-?>

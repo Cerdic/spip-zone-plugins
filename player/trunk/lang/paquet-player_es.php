@@ -18,5 +18,3 @@ Actúa sobre todos los <code><docXX|player></code> insertados en los textos, de 
 -* En un esqueleto <code>#MODELE{playliste}</code> permite mostrar una playlist de los últimos mp3.',
 	'player_slogan' => 'Reproducir sonidos mp3'
 );
-
-?>

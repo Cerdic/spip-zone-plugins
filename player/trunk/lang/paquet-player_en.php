@@ -18,5 +18,3 @@ It works on all <code><docXX|player></code> inserted in the texts, as well as in
 -* In a template <code>#MODELE{playliste}</code> displays a playlist of the latest mp3',
 	'player_slogan' => 'Read mp3 sounds'
 );
-
-?>

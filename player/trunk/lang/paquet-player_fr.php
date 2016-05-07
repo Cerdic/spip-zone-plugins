@@ -16,5 +16,3 @@ Il agit sur tous les <code><docXX|player></code> insérés dans les textes, auss
 -* Dans un squelette <code>#MODELE{playliste}</code> permet d’afficher une playliste des derniers mp3',
 	'player_slogan' => 'Lire des sons mp3'
 );
-
-?>

@@ -19,5 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ', # MODIF
 	'player_slogan' => 'خواندن صدا و ويديو' # MODIF
 );
-
-?>
