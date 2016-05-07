@@ -34,5 +34,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'pages' => 'الصفحات'
 );
-
-?>
