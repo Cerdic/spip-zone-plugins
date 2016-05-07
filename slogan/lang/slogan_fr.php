@@ -16,5 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_identite_site' => 'Identité du site'
 );
-
-?>
