@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nbr_sites_1' => 'In 1 site gebruikt',
 	'info_nbr_sites_n' => 'In @nb@ sites gebruikt'
 );
-
-?>
