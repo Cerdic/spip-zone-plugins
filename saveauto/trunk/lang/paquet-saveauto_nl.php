@@ -21,5 +21,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saveauto_nom' => 'Automatische backup',
 	'saveauto_slogan' => 'Automatische MySQL backup van de SPIP database'
 );
-
-?>

@@ -21,5 +21,3 @@ Rozhranie umožňuje manuálne spúšťanie zálohovania a rozhodovať o vytvo
 	'saveauto_nom' => 'Automatické zálohovanie',
 	'saveauto_slogan' => 'Automatická záloha MySQL údajov v databáze SPIPu'
 );
-
-?>

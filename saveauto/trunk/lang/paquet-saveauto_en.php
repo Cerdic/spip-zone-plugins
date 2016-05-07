@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saveauto_nom' => 'Automatic backup',
 	'saveauto_slogan' => 'Automatic backup of the database used by SPIP'
 );
-
-?>

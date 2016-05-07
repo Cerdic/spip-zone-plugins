@@ -18,5 +18,3 @@ Es steht ein Interface zum manuellen Start des Backups und für die Vewaltung de
 	'saveauto_nom' => 'Automatisches Backup',
 	'saveauto_slogan' => 'Automatisches Backup der MySQL-SPIP-Datenbank'
 );
-
-?>
