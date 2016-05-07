@@ -32,5 +32,3 @@ Multiple formats are accepted: "Name of the person &lt;email@domain.tld&gt;", "e
 	'info_nb_contacts_erreur' => '@nb@ contacts have been recovered but can not be used.',
 	'info_titre' => 'Contacts Importer'
 );
-
-?>

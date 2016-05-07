@@ -32,5 +32,3 @@ Akceptovaných je viac formátov: "Meno človeka &lt;email@domaine.tld&gt;", "co
 	'info_nb_contacts_erreur' => 'Získali ste @nb@ kontaktov, ale nedali sa použiť',
 	'info_titre' => 'Nahrávač kontaktov'
 );
-
-?>

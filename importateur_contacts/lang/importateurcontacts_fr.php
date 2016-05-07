@@ -30,5 +30,3 @@ Plusieurs formats sont acceptés : "Nom de la personne &lt;email@domaine.tld&gt
 	'info_nb_contacts_erreur' => '@nb@ contacts ont été récupérés mais n’ont pu être utilisés.',
 	'info_titre' => 'Importateur de contacts'
 );
-
-?>
