@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sclp_nom' => 'Squirrels Love Chimps Plus',
 	'sclp_slogan' => 'Gestion avancé de mailing listes de Spip et de Mailchimp'
 );
-
-?>

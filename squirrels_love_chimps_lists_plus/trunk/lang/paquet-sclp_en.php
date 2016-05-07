@@ -16,5 +16,3 @@ Synchronistation between Spip lists and mailchimps list',
 	'sclp_nom' => 'Squirrels Love Chimps Plus',
 	'sclp_slogan' => 'Advanced management of Spip and MailChimp mailing lists'
 );
-
-?>
