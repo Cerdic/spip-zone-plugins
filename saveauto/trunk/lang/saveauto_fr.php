@@ -100,5 +100,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique',
 	'titre_page_saveauto' => 'Sauvegarder la base au format MySQL'
 );
-
-?>

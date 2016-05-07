@@ -107,5 +107,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer' => 'Automatische configuration van de plugin',
 	'titre_page_saveauto' => 'Backup van database'
 );
-
-?>

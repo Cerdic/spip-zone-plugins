@@ -103,5 +103,3 @@ The backups contain an SQL formatted file with the commands used to <strong>dele
 	'titre_page_configurer' => 'Saveauto plugin configuration',
 	'titre_page_saveauto' => 'Backup the database in MySQL format'
 );
-
-?>

@@ -96,5 +96,3 @@ plugin Saveauto',
 	'titre_page_configurer' => 'Configuración del plugin Sauvegarde automática',
 	'titre_page_saveauto' => 'Crear una copia de seguridad de la base en formato MySQL'
 );
-
-?>

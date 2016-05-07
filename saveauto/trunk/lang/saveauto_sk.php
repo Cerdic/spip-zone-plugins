@@ -98,5 +98,3 @@ Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej
 	'titre_page_configurer' => 'Nastavenia modulu Automatická záloha',
 	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL'
 );
-
-?>

@@ -66,5 +66,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_sauver' => 'Connector Saveauto: còpia de seguretat SQL de la base de dades', # MODIF
 	'titre_page_saveauto' => 'Còpia de seguretat de la base de dades' # MODIF
 );
-
-?>
