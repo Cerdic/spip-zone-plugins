@@ -48,5 +48,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'taille_tototale_indisponible' => 'Celková veľkosť nie je známa'
 );
-
-?>

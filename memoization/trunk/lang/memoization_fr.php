@@ -46,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'taille_tototale_indisponible' => 'Taille totale non disponible'
 );
-
-?>

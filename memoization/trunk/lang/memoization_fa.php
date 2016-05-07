@@ -41,5 +41,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_nocache' => 'غيرفعال‌سازي (بي‌حافظه‌ي پنهان)',
 	'option_methode_xcache' => 'ايكس كش'
 );
-
-?>
