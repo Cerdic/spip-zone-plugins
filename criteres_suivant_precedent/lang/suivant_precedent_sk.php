@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_meme_rubrique' => 'K článkom v rovnakej rubrike zobraziť jedinečné odkazy',
 	'noisette_nom' => 'Predchádzajúce/Ďalšie odkazy'
 );
-
-?>

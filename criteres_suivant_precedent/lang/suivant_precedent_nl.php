@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_meme_rubrique' => 'Toon uitsluitend links naar artikelen binnen dezelfde rubriek',
 	'noisette_nom' => 'Hyperlinks Vorige / Volgende'
 );
-
-?>

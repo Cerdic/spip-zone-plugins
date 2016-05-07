@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_meme_rubrique' => 'عرض الروابط الى مقالات القسم نفسه فقط',
 	'noisette_nom' => 'روابط السابق / التالي'
 );
-
-?>

@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_meme_rubrique' => 'View the links only to articles in the same section',
 	'noisette_nom' => 'Links Previous / Next'
 );
-
-?>

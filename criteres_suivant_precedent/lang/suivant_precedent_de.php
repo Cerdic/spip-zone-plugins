@@ -18,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_meme_rubrique' => 'Navigationslinks nur zu Artikeln der selben Rubrik anzeigen.',
 	'noisette_nom' => 'vorwärts-rückwärts-Links'
 );
-
-?>
