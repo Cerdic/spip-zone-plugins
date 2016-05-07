@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_techniques_slogan' => 'Skupine kľúčových slov pridá spresnenie "technické"',
 	'mots_techniques_titre' => 'Technické kľúčové slová'
 );
-
-?>

@@ -15,5 +15,3 @@ keywords and the criterion <code>{technique=oui}</code> allows to select by tech
 	'mots_techniques_slogan' => 'Adds a "technical" specialization to the keywords groups',
 	'mots_techniques_titre' => 'Technical keywords'
 );
-
-?>

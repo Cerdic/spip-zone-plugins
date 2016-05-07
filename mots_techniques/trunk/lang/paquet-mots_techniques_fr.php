@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_techniques_slogan' => 'Ajoute une spécialisation « technique » aux groupes de mots clés.',
 	'mots_techniques_titre' => 'Mots techniques'
 );
-
-?>

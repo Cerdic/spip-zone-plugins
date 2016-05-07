@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_techniques_slogan' => 'Позволяет выделять группу ключей для служебных целей',
 	'mots_techniques_titre' => 'Служебные ключи (Mots techniques)'
 );
-
-?>

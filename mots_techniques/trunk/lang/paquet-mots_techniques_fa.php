@@ -15,5 +15,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_techniques_slogan' => 'افزودن «فن» ويژه‌سازي به يك گروه از كليدواژه‌ها.',
 	'mots_techniques_titre' => 'واژه‌هاي فني '
 );
-
-?>

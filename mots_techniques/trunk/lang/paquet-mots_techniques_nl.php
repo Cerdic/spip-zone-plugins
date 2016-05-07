@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mots_techniques_slogan' => 'Voeg de specificatie "technisch" toe aan groepen van trefwoorden.',
 	'mots_techniques_titre' => 'Technische trefwoorden'
 );
-
-?>
