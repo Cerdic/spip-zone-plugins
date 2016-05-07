@@ -21,5 +21,3 @@ Certaines icônes du plugin, dans les modèles publics, proviennent du set "{{[b
 Les icônes de l’espace privé proviennent du projet {{[GNOME->http://www.gnome.org/]}}.',
 	'spip_proprio_slogan' => 'Mentions Légales, Conditions d’Utilisation et Copyright automatiques'
 );
-
-?>

@@ -23,5 +23,3 @@ Niektoré ikony zásuvného modulu vo verejných šablónach sú zo sady {{"[b
 Ikony súkromnej zóny sú z projektu {{[GNOME.->http://www.gnome.org/]}}',
 	'spip_proprio_slogan' => 'Automatické vytvorenie informácií právneho charakteru, podmienok používania stránky a poznámky o autorských právach'
 );
-
-?>

@@ -23,5 +23,3 @@ Some icons plugin in the public template, comes from the set "{{[bwpx.icns->http
 Icons from the private area of the project {{[GNOME-> http://www.gnome.org/]}}.',
 	'spip_proprio_slogan' => 'Legal statements, Terms of Use and automatic Copyright'
 );
-
-?>
