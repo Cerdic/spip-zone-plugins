@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailsubscribers_description' => 'Inscription à la diffusion par courriel',
 	'mailsubscribers_slogan' => 'Inscription à la diffusion par courriel'
 );
-
-?>
