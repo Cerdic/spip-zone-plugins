@@ -15,5 +15,3 @@ Wanneer je plugin Google+1 hebt geactiveerd, kan ook hiervoor een knop aan de li
 Bovendien kun je met deze plugin Facebook badges en een "Like" box opnemen.',
 	'socialtags_slogan' => 'Activeer knoppen om links te delen op sociale netwerken.'
 );
-
-?>

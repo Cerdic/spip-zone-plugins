@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Por otro lado, si el plugin Google+1 está activo, se puede agregar el botón correspondiente en la lista de los enlaces de liens de Social tags. Propone asimismo nueces configurables que permiten mostrar botones y cajas del tipo "Me gusta" de Facebook.',
 	'socialtags_slogan' => 'Activar botones de compartir de enlaces en las redes sociales.'
 );
-
-?>

@@ -15,5 +15,3 @@ In addition, if the Google+ 1 plugin is active, it’s possible to add the butto
 It also offers configurable nuts to display badges and "Like" box on Facebook.',
 	'socialtags_slogan' => 'Activate the social link sharing network buttons.'
 );
-
-?>
