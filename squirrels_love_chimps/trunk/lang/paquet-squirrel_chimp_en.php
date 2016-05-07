@@ -21,5 +21,3 @@ Currently exist for the following plugins
 	'squirrel_chimp_nom' => 'Squirrels Love Chimps',
 	'squirrel_chimp_slogan' => 'Connect SPIP with Mailchimp'
 );
-
-?>

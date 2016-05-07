@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'squirrel_chimp_nom' => 'Squirrels Love Chimps = Veveričky majú rady šímpanzov',
 	'squirrel_chimp_slogan' => 'Prihlásiť sa na SPIP cez Mailchimp'
 );
-
-?>
