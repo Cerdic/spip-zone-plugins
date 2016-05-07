@@ -67,5 +67,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'test_message_resultat' => 'Voici le résultat de l’analyse OCR.',
 	'titre_page_configurer_ocr' => 'Plugin d’analyse OCR'
 );
-
-?>
