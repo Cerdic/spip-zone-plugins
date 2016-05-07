@@ -11,5 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'skeleditor_description' => 'Editeur de squelettes, css, js, dans l’espace privé',
 	'skeleditor_slogan' => 'Editeur de squelettes'
 );
-
-?>

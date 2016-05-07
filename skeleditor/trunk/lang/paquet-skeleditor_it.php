@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'skeleditor_description' => 'Nello spazio riservato, concede a redattore gli scheletri delle lime',
 	'skeleditor_slogan' => 'Redattore di scheletro'
 );
-
-?>

@@ -13,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'skeleditor_description' => 'Edit template files in the backoffice',
 	'skeleditor_slogan' => 'Template editor'
 );
-
-?>
