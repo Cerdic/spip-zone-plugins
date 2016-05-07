@@ -14,5 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'epubreader_nom' => 'ePUB Lezer',
 	'epubreader_slogan' => 'ePUB bestanden lezen'
 );
-
-?>
