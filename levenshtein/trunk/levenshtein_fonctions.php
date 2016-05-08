@@ -37,7 +37,6 @@ function levenshtein_calculer($term) {
 
 	// On boucle sur les SOUNDEX
 	foreach ($get_lev as $lev) {
-
 		// On calcule la distance
 		$distance = levenshtein($term, $lev);
 
