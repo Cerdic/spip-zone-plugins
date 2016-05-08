@@ -26,7 +26,7 @@ function levenshtein_calculer($term) {
 	// La comparaison ce fait sans les majuscules
 	$term = strtolower($term);
 
-	// On filtre les mots pour n'avoir que les mots qui "sonne" pareil
+	// On demande au pipeline de travailler de sortir les mots qui s'approche
 	$get_lev = pipeline('levenshtein_calculer', array('mot' => array(), 'term' => $term));
 
 	// Simplification du tableau allfetsel
