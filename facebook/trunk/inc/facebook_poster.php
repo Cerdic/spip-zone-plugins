@@ -14,13 +14,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @param string $lien
  * @param string $message
+ * @param string $token
  * @access public
  * @return string Un message d'erreur au besoin
  */
-function facebook_poster_lien($lien, $message) {
+function facebook_poster_lien($lien, $message, $token = false) {
 
-	include_spip('inc/token');
-	$token = connecteur_get_token(0, 'facebook');
+	if (!$token) {
+		include_spip('inc/token');
+		$token = connecteur_get_token(0, 'facebook');
+	}
 
 	$fb = facebook();
 
@@ -45,12 +48,19 @@ function facebook_poster_lien($lien, $message) {
 /**
  * Poster un lien sur la page définie par la configuration
  *
+ * @param string $id_page
+ * @param string $lien
+ * @param string $message
+ * @param string $token
  * @access public
  * @return string Token ou erreur facebook
  */
-function facebook_poster_lien_page($id_page, $lien, $message) {
-	include_spip('inc/token');
-	$token = connecteur_get_token(0, 'facebook');
+function facebook_poster_lien_page($id_page, $lien, $message, $token = false) {
+
+	if (!$token) {
+		include_spip('inc/token');
+		$token = connecteur_get_token(0, 'facebook');
+	}
 
 	$fb = facebook();
 
