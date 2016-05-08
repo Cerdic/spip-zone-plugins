@@ -73,7 +73,9 @@ function codelang_verifier_codes_spip() {
 				$where = array('code_639_1=' . sql_quote($_code));
 				$codes_iso = sql_allfetsel($select, $from, $where);
 				if ($codes_iso) {
-					$codes_verifies['iso6391'][$_code] = $codes_iso;
+					$codes_verifies['ok']['iso6391'][$_code] = $codes_iso;
+				} else {
+					$codes_verifies['nok']['iso6391'][$_code] = array('nom_spip' => $_nom);
 				}
 			} elseif (strlen($_code) == 3) {
 				// Si le code a une taille de 3 caractères on recherche de suite dans la table iso639codes
@@ -81,10 +83,12 @@ function codelang_verifier_codes_spip() {
 				$where = array('code_639_3=' . sql_quote($_code));
 				$codes_iso = sql_allfetsel($select, $from, $where);
 				if ($codes_iso) {
-					$codes_verifies['iso6393'][$_code] = $codes_iso;
+					$codes_verifies['ok']['iso6393'][$_code] = $codes_iso;
+				} else {
+					$codes_verifies['nok']['iso6393'][$_code] = array('nom_spip' => $_nom);
 				}
 			} else {
-				$codes_verifies['spip'][$_code] = array('nom_spip' => $_nom);
+				$codes_verifies['nok']['spip'][$_code] = array('nom_spip' => $_nom);
 			}
 		}
 	}

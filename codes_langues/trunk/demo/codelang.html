@@ -12,7 +12,9 @@
 	<h2>Verifier les codes</h2>
 <?php
 	$codes = codelang_verifier_codes_spip();
-	var_dump('SPIP', $codes);
+	var_dump('SPIP 1', count($codes['nok']['iso6391']), $codes['nok']['iso6391']);
+	var_dump('SPIP 3', count($codes['nok']['iso6393']), $codes['nok']['iso6393']);
+	var_dump('SPIP 0', count($codes['nok']['spip']), $codes['nok']['spip']);
 ?>
 
 </div>
