@@ -24,7 +24,9 @@ Note : css automatique dans /prive/themes/spip/lists.css.html
 			<td class="statut">[(#STATUT|puce_statut{'evenement',#ID_EVENEMENT,#ID_RUBRIQUE})]</td>
 			<td class="titre principale">
 				[(#LOGO_EVENEMENT|image_reduire{20,26})]
-				<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT">#TITRE</a>
+				<a href="[(#ID_EVENEMENT|generer_url_entite{evenement})]" 
+					title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT"
+					[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]>#TITRE</a>
 				[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})][ - (#LIEU)]
 			</td>
 			<td class="auteur"><BOUCLE_auteurs(AUTEURS){id_evenement}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
