@@ -46,23 +46,20 @@ $GLOBALS['sil_service'] = array(
 // ----------------------------------------------------------------------------
 
 /**
- * Lit le fichier des noms communs - tout règne confondu - d'une langue donnée et renvoie un tableau
- * de tous ces noms indexés par leur TSN.
- * La base de données ITIS contient souvent plusieurs traductions d'une même langue pour un taxon donné. Cette
- * fonction met à jour séquentiellement les traductions sans s'en préoccuper. De fait, c'est la dernière traduction
- * rencontrée qui sera fournie dans le tableau de sortie.
+ * Lit le fichier .tab contenant les enregistrements d'une des tables SIL et renvoie un tableau
+ * prêt pour une insertion en base de données.
  *
  * @api
  *
- * @param string $language
- *        Langue au sens d'ITIS écrite en minuscules. Vaut `french`, `english`, `spanish` etc.
+ * @param string $table
+ *      Nom de la table SIL incluse dans la base de données spip (sans le préfixe) à savoir,
+ * 		`iso639codes`, `iso639names`, `iso639macros`, `iso639retirements`.
  * @param int    $sha_file
- *        Sha calculé à partir du fichier des noms communs choisi. Le sha est retourné
- *        par la fonction afin d'être stocké par le plugin.
+ *      Sha calculé à partir du fichier .tab des enregistrements de la table concernée. Le sha est retourné
+ *      par la fonction afin d'être stocké par le plugin.
  *
  * @return array
- *        Tableau des noms communs d'une langue donnée indexé par TSN. Le nom commun est préfixé
- *        par le tag de langue SPIP pour être utilisé simplement dans une balise `<multi>`.
+ *      Tableau des enregistrements de la table concernée prêts à une insertion en base de données.
  */
 function sil_read_table($table, &$sha_file) {
 	$records = array();

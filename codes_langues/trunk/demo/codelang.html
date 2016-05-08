@@ -5,15 +5,14 @@
 <body dir="#LANG_DIR">
 <div id="container">
 <?php
-    include_spip('services/sil/sil_api');
 ?>
 
-	<h1>SERVICE SIL</h1>
+	<h1>SERVICE SPIP</h1>
 
-	<h2>Action : read_table</h2>
+	<h2>Verifier les codes</h2>
 <?php
-	$records = sil_read_table('iso639codes', $sha);
-	var_dump($records, $sha);
+	$codes = codelang_verifier_codes_spip();
+	var_dump('SPIP', $codes);
 ?>
 
 </div>
