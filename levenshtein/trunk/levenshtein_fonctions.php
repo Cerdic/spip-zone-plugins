@@ -50,7 +50,6 @@ function levenshtein_calculer($term) {
 		}
 	}
 
-
     if (!empty($index)) {
         // Trier le tableau pour avoir les plus petites distances au dessus
         asort($index);
