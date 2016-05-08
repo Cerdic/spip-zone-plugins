@@ -235,7 +235,6 @@ function facebook_profil_picture($token = null, $width = 0, $height = 0) {
 	}
 
 	try {
-
 		$size = '';
 		if ($width > 0) {
 			$size .= '&width='.$width;
