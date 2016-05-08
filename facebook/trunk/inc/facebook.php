@@ -215,6 +215,7 @@ function facebook_profil($token = null) {
 	}
 
 	$user = $response->getGraphUser();
+	spip_log($user, 'facebook', _LOG_DEBUG);
 
 	return array(
 		'nom' => $user['name'],
