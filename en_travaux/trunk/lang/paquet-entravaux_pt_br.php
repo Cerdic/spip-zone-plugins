@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'entravaux_description' => 'Ative-lhe antes de uma fase de manutenção, este plugin imediatamente exibe uma página com um aviso, substituindo o site público. Cuidado: Somente o webmaster ainda pode acessar o espaço privado e o site público.',
+	'entravaux_description' => 'Ativado antes de uma fase de manutenção, este plugin exibe imediatamente uma página com uma mensagem, {{em substituição}} ao site público. Atenção: Apenas o webmaster poderá acessar a área restrita e o site público.',
 	'entravaux_nom' => 'Em manutenção',
-	'entravaux_slogan' => 'Torna o site em fase de manutenção.'
+	'entravaux_slogan' => 'Coloca o site em fase de manutenção.'
 );
