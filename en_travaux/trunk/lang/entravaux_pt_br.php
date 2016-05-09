@@ -14,12 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'en_travaux' => 'Em manutenção',
-	'erreur_droit' => 'Você deve ser Webmaster de usar o plugin Em manutenção !',
+	'erreur_droit' => 'Você deve ser webmaster de usar o plugin Em Manutenção!',
 
 	// I
-	'info_disallow_robot' => 'Seu site é protegido contra os bots e motores de busca durante a manutenção.',
-	'info_maintenance_en_cours' => 'O site está em manutenção. Apenas os webmasters do site podem ver o site público e acessar ao espaço privado.',
-	'info_message' => 'Você pode ativar a manutenção do site e criar um recado temporário em todas as páginas do site durante a fase de manutenção.',
+	'info_disallow_robot' => 'Seu site fica protegido contra bots e motores de busca durante a manutenção.',
+	'info_maintenance_en_cours' => 'O site está em manutenção. Apenas os webmasters do site podem ver o site público e acessar a área restrita.',
+	'info_message' => 'Você pode ativar a manutenção do site e configurar uma mensagem temporária em todas as páginas do site durante a fase de manutenção.',
 	'info_travaux_texte' => 'O site está em manutenção.
 _ Volte mais tarde.',
 
@@ -27,11 +27,11 @@ _ Volte mais tarde.',
 	'label_disallow_robots' => 'Proteger o site contra bots e motores de busca.',
 
 	// M
-	'message_temporaire' => 'Seu recado temporário:',
+	'message_temporaire' => 'Sua mensagem temporária:',
 
 	// P
 	'parametrage_page_travaux' => 'Configuração da página temporária',
 
 	// T
-	'texte_lien_publier' => 'Liberar o acesso público pelo site.'
+	'texte_lien_publier' => 'Liberar o acesso público ao site.'
 );
