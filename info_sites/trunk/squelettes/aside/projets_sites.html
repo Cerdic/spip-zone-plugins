@@ -9,7 +9,7 @@
 <div class="clearfix"></div>
 
 [(#SET{id_projet,#ARRAY})][(#SET{titre,#ARRAY})][(#SET{type_site,#ARRAY})][(#SET{logiciel_nom,#ARRAY})][(#SET{logiciel_version,#ARRAY})][(#SET{fo_url,#ARRAY})][(#SET{id_projets_site,#ARRAY})]
-<BOUCLE_lister (PROJETS_SITES)> [(#SET{titre,[(#GET{titre}|push{#TITRE})]})][(#SET{type_site,[(#GET{type_site}|push{#TYPE_SITE})]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|push{#LOGICIEL_NOM})]})][(#SET{logiciel_version,[(#GET{logiciel_version}|push{#LOGICIEL_VERSION})]})][(#SET{fo_url,[(#GET{fo_url}|push{#FO_URL})]})][(#SET{id_projets_site,[(#GET{id_projets_site}|push{#ID_PROJETS_SITE})]})]</BOUCLE_lister>[(#SET{titre,[(#GET{titre}|array_unique|array_filter)]})][(#SET{type_site,[(#GET{type_site}|array_unique|array_filter)]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|array_unique|array_filter)]})][(#SET{logiciel_version,[(#GET{logiciel_version}|array_unique|array_filter)]})][(#SET{fo_url,[(#GET{fo_url}|array_unique|array_filter)]})][(#SET{id_projets_site,[(#GET{id_projets_site}|array_unique|array_filter)]})]</B_lister>
+<BOUCLE_lister (PROJETS_SITES)> [(#SET{titre,[(#GET{titre}|push{#TITRE})]})][(#SET{type_site,[(#GET{type_site}|push{#TYPE_SITE})]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|push{#LOGICIEL_NOM})]})][(#SET{logiciel_version,[(#GET{logiciel_version}|push{#LOGICIEL_VERSION})]})][(#SET{fo_url,[(#GET{fo_url}|push{#FO_URL})]})][(#SET{id_projets_site,[(#GET{id_projets_site}|push{#ID_PROJETS_SITE})]})]</BOUCLE_lister>[(#SET{titre,[(#GET{titre}|array_unique|array_filter)]})][(#SET{type_site,[(#GET{type_site}|array_unique|array_filter)]})][(#SET{logiciel_nom,[(#GET{logiciel_nom}|array_unique|array_filter)]})][(#SET{logiciel_version,[(#GET{logiciel_version}|array_unique|array_filter)]})][(#SET{fo_url,[(#GET{fo_url}|array_unique|array_filter)]})][(#SET{id_projets_site,[(#GET{id_projets_site}|array_unique|array_filter)]})]
 <div class="block filtre liste">
 	<form action="#SELF" role="form">
 		[(#SELF
@@ -83,3 +83,4 @@
 		<button type="submit"><:bouton_valider:></button>
 	</form>
 </div>
+</B_lister>

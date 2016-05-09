@@ -31,6 +31,8 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.4'][] = array('info_sites_menu_pages');
 	$maj['1.0.5'][] = array('info_sites_menu_pages');
 	$maj['1.0.7'][] = array('info_sites_menu_pages');
+	$maj['1.0.7'][] = array('info_sites_menu_pages');
+	$maj['1.0.8'][] = array('info_sites_maj_108');
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -112,4 +114,27 @@ function info_sites_menu_pages() {
 	} else {
 		ecrire_meta('info_sites_menu', @serialize($liste_pages));
 	}
+}
+
+
+function info_sites_maj_108() {
+	include_spip('inc/config');
+
+	$config_svp = lire_config('svp');
+
+	if (is_null($config_svp)) {
+		$config_svp = array();
+		$config_svp['mode_runtime'] = 'non';
+		$config_svp['mode_pas_a_pas'] = 'non';
+		$config_svp['mode_log_verbeux'] = 'non';
+		$config_svp['autoriser_activer_paquets_obsoletes'] = 'non';
+		$config_svp['depot_editable'] = 'non';
+	} elseif (isset($config_svp['mode_runtime']) and $config_svp['mode_runtime'] != 'non') {
+		$config_svp['mode_runtime'] = 'non';
+	} else {
+		$config_svp['mode_runtime'] = 'non';
+	}
+	$config_svp = serialize($config_svp);
+	ecrire_config('svp', $config_svp);
+
 }
