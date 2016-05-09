@@ -37,15 +37,15 @@
 		<div class="form-group text-right">
 			<input type="submit" class="btn btn-default" value="<:bouton_enregistrer:>" />
 		</div>
-			<BOUCLE_projets (PROJETS) {tout} {par num projets.nom, projets.nom}>[(#SET{organisations,#ARRAY})]
+			<BOUCLE_projets (PROJETS) {tout} {par num projets.nom, projets.nom}>[(#SET{organisations,#ARRAY})][(#SET{projets_roles,[(#ENV*{projets_anciens}|table_valeur{#ID_PROJET})]})]
 				<BOUCLE_organisation (ORGANISATIONS) {where id_organisation IN (SELECT id_objet FROM spip_projets_liens WHERE objet='organisation' AND id_projet=#ID_PROJET)}>[(#SET{organisations,[(#GET{organisations}|push{organisation_[(#ID_ORGANISATION)]})]})] </BOUCLE_organisation>
 				<div id="projet_#ID_PROJET" class="form-group projet[ (#ID_PROJET|info_sites_lister_logiciels_projet{'oui'}|implode{' '})][(#ID_PROJET|in_array{[(#REM|info_sites_lister_projets_auteurs)]}|oui)auteur_session][(#ID_PROJET|in_array{[(#ID_AUTEUR|info_sites_lister_projets_auteurs)]}|oui)auteurs_projets][ (#GET{organisations,#LISTE{sans_organisation}}|join{' '})]">
 					<div class="control-label">[<strong>(#NOM)</strong>][ <em>\((#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)\)</em>]</div>
 					<B_roles>
 						<div class="btn-group" data-toggle="buttons">
 							<BOUCLE_roles (DATA) {source table, #REM|info_sites_lister_roles_auteurs}>
-								<label class="btn btn-info[(#CLE|in_array{[(#ENV*{projets_anciens}|table_valeur{#_projets:ID_PROJET})]}|oui)active]">
-									<input type="checkbox" autocomplete="off" name="projets[#_projets:ID_PROJET][]" value="#CLE"[(#CLE|in_array{[(#ENV*{projets_anciens}|table_valeur{#_projets:ID_PROJET})]}|oui)checked]> [(#VALEUR|_T)]
+								<label class="btn btn-info[(#CLE|in_array{#GET{projets_roles,#ARRAY}}|oui)active]">
+									<input type="checkbox" autocomplete="off" name="projets[#_projets:ID_PROJET][]" value="#CLE"[(#CLE|in_array{#GET{projets_roles,#ARRAY}}|oui)checked]> [(#VALEUR|_T)]
 								</label>
 							</BOUCLE_roles>
 						</div>
