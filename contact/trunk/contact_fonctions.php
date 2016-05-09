@@ -1,8 +1,10 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function contact_infos_supplementaires(){
+function contact_infos_supplementaires() {
 	$champs = array(
 		'civilite' => _T('contact:champ_civilite'),
 		'prenom' => _T('contact:champ_prenom'),
@@ -24,5 +26,3 @@ function contact_infos_supplementaires(){
 	$champs = pipeline('contact_infos_supplementaires', $champs);
 	return $champs;
 }
-
-?>
