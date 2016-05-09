@@ -71,7 +71,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$_id_table = explode(',',$_id_table);
 		$_id_table = reset($_id_table);
 	}
-	
+
 	$requete['SELECT'][] = "t.".$_id_table;
 	$a = array();
 	// Recherche fulltext
@@ -158,7 +158,10 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$cle_depart = id_table_objet($table);
 			$table_depart = table_objet($table,$serveur);
 			$desc_depart = $trouver_table($table_depart,$serveur);
-			$depart_associable = objet_associable($table);
+			$depart_associable = false;
+			if ($table != 'article') {
+				$depart_associable = objet_associable($table);
+			}
 			$i = 0;
 			foreach ($jointures[$table] as $table_liee => $champs) {
 				if ($table_liee!==$table){
@@ -376,7 +379,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	}
 
 	// Gerer les donnees associees
-	if (!$fulltext 
+	if (!$fulltext
 	AND isset($jointures[$table])
 	AND $joints = recherche_en_base(
 			$recherche,
@@ -429,7 +432,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			}
 			else
 				list($cle_depart,$cle_arrivee,$s) = $rechercher_joints($table,$table_liee,array_keys($ids_trouves), $serveur);
-	
+
 			while ($t = is_array($s)?array_shift($s):sql_fetch($s)) {
 				$id = $t[$cle_depart];
 				$joint = $ids_trouves[$t[$cle_arrivee]];
