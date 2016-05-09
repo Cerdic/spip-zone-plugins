@@ -1,12 +1,14 @@
 <?php
 /**
- * Crayons 
- * plugin for spip 
+ * Crayons
+ * plugin for spip
  * (c) Fil, toggg 2006-2013
  * licence GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 ## ceci n'est pas l'original mais la copie pour crayons
 
@@ -54,19 +56,21 @@ AND $f = charger_fonction('compat', 'inc'))
 // svn://zone.spip.org/spip-zone/_dev_/compat/
 
 
-function inc_compat_crayons_dist($quoi = NULL) {
-	if (!function_exists($f = 'compat_crayons_defs')) $f .= '_dist';
+function inc_compat_crayons_dist($quoi = null) {
+	if (!function_exists($f = 'compat_crayons_defs')) {
+		$f .= '_dist';
+	}
 	$defs = $f();
 
-	if (is_string($quoi))
+	if (is_string($quoi)) {
 		$quoi = array($quoi);
-	else if (is_null($quoi))
+	} elseif (is_null($quoi)) {
 		$quoi = array_keys($defs);
+	}
 
 	foreach ($quoi as $d) {
-		if (!function_exists($d)
-		AND isset($defs[$d])) {
-			eval ("function $d".$defs[$d]);
+		if (!function_exists($d) and isset($defs[$d])) {
+			eval("function $d". $defs[$d]);
 		}
 	}
 }
@@ -75,11 +79,12 @@ function compat_crayons_defs_dist() {
 	$defs = array();
 
 	// http://trac.rezo.net/trac/spip/changeset/9919
-	if ($GLOBALS['spip_version_code'] < '1.9259')
-	$defs['sql_fetch'] = '($res, $serveur=\'\') {
-		return spip_fetch_array($res);
-	}';
-	
+	if ($GLOBALS['spip_version_code'] < '1.9259') {
+		$defs['sql_fetch'] = '($res, $serveur=\'\') {
+			return spip_fetch_array($res);
+		}';
+	}
+
 	$defs['table_objet_sql'] = '($type) {
 		global $table_des_tables;
 		$nom = table_objet($type);
@@ -96,5 +101,3 @@ function compat_crayons_defs_dist() {
 
 	return $defs;
 }
-
-?>

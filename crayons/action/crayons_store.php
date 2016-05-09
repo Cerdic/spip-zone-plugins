@@ -1,17 +1,19 @@
 <?php
 /**
- * Crayons 
- * plugin for spip 
+ * Crayons
+ * plugin for spip
  * (c) Fil, toggg 2006-2013
  * licence GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function verif_secu($w, $secu) {
 	return (
 		$secu == md5($GLOBALS['meta']['alea_ephemere'].'='.$w)
-	OR
+	or
 		$secu == md5($GLOBALS['meta']['alea_ephemere_ancien'].'='.$w)
 	);
 }
@@ -19,51 +21,52 @@ function verif_secu($w, $secu) {
 function post_crayons() {
 	$results = array();
 
-	if (isset($_POST['crayons']) AND is_array($_POST['crayons']))
-	foreach ($_POST['crayons'] as $crayon) {
-		$name = $_POST['name_'.$crayon];
-		$content = array();
-		if ($_POST['fields_'.$crayon]) {
-			foreach (explode(',', $_POST['fields_'.$crayon]) as $field) {
-				// cas particulier d'un envoi de fichier
-				if (isset($_FILES['content_'.$crayon.'_'.$field])) {
-					if ($_FILES['content_'.$crayon.'_'.$field]['size']>0)
-						$content[$field] = $_FILES['content_'.$crayon.'_'.$field];
-					else
-						$content[$field] = false;
-					// cf. valeur passee dans crayon->md5() : false ou filemtime() du logo
-				} else {
-					/**
-					 * le changement de charset n'est plus necessaire
-					 * depuis jquery 1.5 (feature non documentee de jquery!)
-					 */
-					if (isset($_POST['content_'.$crayon.'_'.$field])) {
-						$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])
-							?implode(',',$_POST['content_'.$crayon.'_'.$field])
-							:$_POST['content_'.$crayon.'_'.$field];
+	if (isset($_POST['crayons']) and is_array($_POST['crayons'])) {
+		foreach ($_POST['crayons'] as $crayon) {
+			$name = $_POST['name_'.$crayon];
+			$content = array();
+			if ($_POST['fields_'.$crayon]) {
+				foreach (explode(',', $_POST['fields_'.$crayon]) as $field) {
+					// cas particulier d'un envoi de fichier
+					if (isset($_FILES['content_'.$crayon.'_'.$field])) {
+						if ($_FILES['content_'.$crayon.'_'.$field]['size'] > 0) {
+							$content[$field] = $_FILES['content_'.$crayon.'_'.$field];
+						} else {
+							$content[$field] = false;
+						}
+						// cf. valeur passee dans crayon->md5() : false ou filemtime() du logo
 					} else {
-						$content[$field] = null;
+						/**
+						 * le changement de charset n'est plus necessaire
+						 * depuis jquery 1.5 (feature non documentee de jquery!)
+						 */
+						if (isset($_POST['content_'.$crayon.'_'.$field])) {
+							$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])
+								?implode(',', $_POST['content_'.$crayon.'_'.$field])
+								:$_POST['content_'.$crayon.'_'.$field];
+						} else {
+							$content[$field] = null;
+						}
 					}
 				}
 			}
-		}
 
-		// Si les donnees POSTees ne correspondent pas a leur md5,
-		// il faut les traiter
-		if (isset($name)
-			AND md5(serialize($content)) != $_POST['md5_'.$crayon]) {
-			if (!isset($_POST['secu_'.$crayon])
-				OR verif_secu($name, $_POST['secu_'.$crayon])) {
-				$results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
+			// Si les donnees POSTees ne correspondent pas a leur md5,
+			// il faut les traiter
+			if (isset($name)
+				and md5(serialize($content)) != $_POST['md5_'.$crayon]) {
+				if (!isset($_POST['secu_'.$crayon])
+					or verif_secu($name, $_POST['secu_' . $crayon])) {
+					$results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
+				} else {
+					return false; // erreur secu
+				}
+			} else {
+				// cas inchange
+				$results[] = array($name, $content, false, $crayon);
 			}
-			else
-				return false; // erreur secu
 		}
-		// cas inchange
-		else
-			$results[] = array($name, $content, false, $crayon);
 	}
-
 	return $results;
 }
 
@@ -87,70 +90,70 @@ function crayons_store($options = array()) {
 	if (!is_array($postees)) {
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
 	} else {
-		foreach ($postees as $postee)
-		if ($postee[2] !== false) {
-			$name = $postee[0];
-			$content = $postee[1];
+		foreach ($postees as $postee) {
+			if ($postee[2] !== false) {
+				$name = $postee[0];
+				$content = $postee[1];
 
-			if ($content && preg_match(_PREG_CRAYON, 'crayon '.$name, $regs)) {
-				list(,$crayon,$type,$modele,$id) = $regs;
-				$wid = $postee[3];
+				if ($content && preg_match(_PREG_CRAYON, 'crayon '.$name, $regs)) {
+					list(,$crayon,$type,$modele,$id) = $regs;
+					$wid = $postee[3];
 
-				spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele)","crayons_distant");
-				if (!autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele))) {
-					$return['$erreur'] =
-						"$type $id: " . _U('crayons:non_autorise');
-				} else {
+					spip_log("autoriser('crayonner', $type, $id, null, array('modele' => $modele)", 'crayons_distant');
+					if (!autoriser('crayonner', $type, $id, null, array('modele' => $modele))) {
+						$return['$erreur'] =
+							"$type $id: " . _U('crayons:non_autorise');
+					} else {
+						// recuperer l'existant pour calculer son md5 et verifier
+						// qu'il n'a pas ete modifie entre-temps
+						$get_valeur = $options['f_get_valeur'];
+						$data = $get_valeur($content, $regs);
 
-					// recuperer l'existant pour calculer son md5 et verifier
-					// qu'il n'a pas ete modifie entre-temps
-					$get_valeur = $options['f_get_valeur'];
-					$data = $get_valeur($content, $regs);
+						$md5 = md5(serialize($data));
 
-					$md5 = md5(serialize($data));
+						// est-ce que le champ a ete modifie dans la base entre-temps ?
+						if ($md5 != $postee[2]) {
+							// si oui, la modif demandee correspond peut-etre
+							// a la nouvelle valeur ? dans ce cas on procede
+							// comme si "pas de modification", sinon erreur
+							if ($md5 != md5(serialize($content))) {
+								$return['$erreur'] = "$type $id $modele: " .
+									_U('crayons:modifie_par_ailleurs');
+							}
+						}
 
-					// est-ce que le champ a ete modifie dans la base entre-temps ?
-					if ($md5 != $postee[2]) {
-						// si oui, la modif demandee correspond peut-etre
-						// a la nouvelle valeur ? dans ce cas on procede
-						// comme si "pas de modification", sinon erreur
-						if ($md5 != md5(serialize($content))) {
-							$return['$erreur'] = "$type $id $modele: " .
-								_U('crayons:modifie_par_ailleurs');
+						$modifs[] = array($type, $modele, $id, $content, $wid);
+
+						/* aiguillage pour verification de la saisie
+						Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
+						 $invalides[wid_champ]['msg'] -> message de saisie invalide
+						 $invalides[wid_champ]['retour'] -> caracteres invalides */
+						$f = 'verifier_'.$type.'_'.$modele;
+						if (function_exists($f)) {
+							if (count($invalides = $f($modifs))) {
+								$return['$invalides'] = $invalides;
+							}
 						}
 					}
-
-					$modifs[] = array($type, $modele, $id, $content, $wid);
-					
-					/* aiguillage pour verification de la saisie
-					Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
-					 $invalides[wid_champ]['msg'] -> message de saisie invalide
-					 $invalides[wid_champ]['retour'] -> caracteres invalides */
-					$f = 'verifier_'.$type.'_'.$modele;
-					if (function_exists($f)) {
-						 if (count( $invalides = $f($modifs) )) {
-							$return['$invalides'] = $invalides;
-						 }
-						 
-					 }
 				}
 			}
 		}
 	}
 
-	if (!$modifs AND !$return['$erreur']) {
-		$return['$erreur'] = $wdgcfg['msgNoChange'] ?
-		   _U('crayons:pas_de_modification') : ' ';
+	if (!$modifs and !$return['$erreur']) {
+		$return['$erreur'] = $wdgcfg['msgNoChange'] ? _U('crayons:pas_de_modification') : ' ';
 		$return['$annuler'] = true;
 	}
-	
-	// un champ invalide ... ou rien ==> on ne fait rien ! 
-	if (isset($return['$invalides']) && $return['$invalides'])
+
+	// un champ invalide ... ou rien ==> on ne fait rien !
+	if (isset($return['$invalides']) and $return['$invalides']) {
 		return $return;
+	}
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
-	if (isset($return['$erreur']) && $return['$erreur'])
+	if (isset($return['$erreur']) and $return['$erreur']) {
 		return $return;
+	}
 
 	// on traite toutes les modifications
 	// en appelant la fonction adequate de traitement
@@ -158,17 +161,18 @@ function crayons_store($options = array()) {
 	$return = $set_modifs($modifs, $return);
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
-	if ($return['$erreur'])
+	if ($return['$erreur']) {
 		return $return;
+	}
 
 	// et maintenant refaire l'affichage des crayons modifies
 	include_spip('inc/texte');
 	foreach ($modifs as $m) {
 		list($type, $modele, $id, $content, $wid) = $m;
 			$f = charger_fonction($type.'_'.$modele, 'vues', true)
-			  OR $f = charger_fonction($modele, 'vues', true)
-			  OR $f = charger_fonction($type, 'vues', true)
-			  OR $f = 'vues_dist';
+				or $f = charger_fonction($modele, 'vues', true)
+				or $f = charger_fonction($type, 'vues', true)
+				or $f = 'vues_dist';
 			$return[$wid] = $f($type, $modele, $id, $content, $wid);
 	}
 	return $return;
@@ -192,64 +196,62 @@ function crayons_store_set_modifs($modifs, $return) {
 		$fun = '';
 		// si le crayon est un MODELE avec une fonction xxx_revision associee
 		// cas ou une fonction xxx_revision existe
-		if (function_exists($f = $type.'_'. $modele . "_revision")
-		OR function_exists($f = $modele . "_revision")
-		OR function_exists($f = $type . "_revision"))
+		if (function_exists($f = $type.'_'. $modele . '_revision')
+			or function_exists($f = $modele . '_revision')
+			or function_exists($f = $type . '_revision')) {
 			$fun = $f;
-
-		// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
-		// passer par l'API objet_modifier
-		elseif (function_exists('lister_tables_objets_sql')
-		  AND $tables_objet = lister_tables_objets_sql()
-			AND isset($tables_objet[table_objet_sql($type)])) {
+		} elseif (function_exists('lister_tables_objets_sql')
+			and $tables_objet = lister_tables_objets_sql()
+			and isset($tables_objet[table_objet_sql($type)])) {
+			// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
+			// passer par l'API objet_modifier
 			$fun = 'crayons_objet_modifier';
-		}
-
-		// sinon spip < 3 (ou pas un objet edito)
-		// on teste les objets connus et on route sur les fonctions correspondantes
-		else switch($type) {
-			case 'article':
-				$fun = 'crayons_update_article';
-				break;
-			case 'breve':
-				include_spip('action/editer_breve');
-				$fun = 'revisions_breves';
-				break;
-			case 'forum':
-				include_spip('inc/forum');
-				$fun = 'enregistre_et_modifie_forum';
-				break;
-			case 'rubrique':
-				include_spip('action/editer_rubrique');
-				$fun = 'revisions_rubriques';
-				break;
-			case 'syndic':
-			case 'site':
-				include_spip('action/editer_site');
-				$fun = 'revisions_sites';
-				break;
-			case 'document':
-				include_spip('plugins/installer');
-				include_spip('inc/plugin');
-				if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
-					include_spip('action/editer_document');
-					$fun = 'document_modifier';
-				} else {
+		} else {
+			// sinon spip < 3 (ou pas un objet edito)
+			// on teste les objets connus et on route sur les fonctions correspondantes
+			switch ($type) {
+				case 'article':
+					$fun = 'crayons_update_article';
+					break;
+				case 'breve':
+					include_spip('action/editer_breve');
+					$fun = 'revisions_breves';
+					break;
+				case 'forum':
+					include_spip('inc/forum');
+					$fun = 'enregistre_et_modifie_forum';
+					break;
+				case 'rubrique':
+					include_spip('action/editer_rubrique');
+					$fun = 'revisions_rubriques';
+					break;
+				case 'syndic':
+				case 'site':
+					include_spip('action/editer_site');
+					$fun = 'revisions_sites';
+					break;
+				case 'document':
+					include_spip('plugins/installer');
+					include_spip('inc/plugin');
+					if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) {
+						include_spip('action/editer_document');
+						$fun = 'document_modifier';
+					} else {
+						include_spip('inc/modifier');
+						$fun = 'revision_document';
+					}
+					break;
+				// cas geres de la maniere la plus standard
+				case 'auteur':
+				case 'mot':
+				case 'signature':
+				case 'petition':
+				default:
 					include_spip('inc/modifier');
-					$fun = 'revision_document';
-				}
-				break;
-			// cas geres de la maniere la plus standard
-			case 'auteur':
-			case 'mot':
-			case 'signature':
-			case 'petition':
-			default:
-				include_spip('inc/modifier');
-				$fun = 'revision_'.$type;
-				break;
+					$fun = 'revision_'.$type;
+					break;
+			}
 		}
-
 		// si on a pas reussi on passe par crayons_update() qui fera un update sql brutal
 		if (!$fun or !function_exists($fun)) {
 			$fun = 'crayons_update';
@@ -271,11 +273,12 @@ function crayons_store_set_modifs($modifs, $return) {
 	}
 
 	// il manque une fonction de mise a jour ==> on ne fait rien !
-	if ($return['$erreur'])
+	if ($return['$erreur']) {
 		return $return;
+	}
 
 	// hop ! mises a jour table par table et id par id
-	foreach ($updates as $type => $idschamps)
+	foreach ($updates as $type => $idschamps) {
 		foreach ($idschamps as $fun => $ids) {
 			foreach ($ids as $id => $champsvaleurs) {
 				/* cas particulier du logo dans un crayon complexe :
@@ -289,21 +292,23 @@ function crayons_store_set_modifs($modifs, $return) {
 					// -- revisions_articles($id_article, $c) --
 					spip_log("$fun($id ...)", 'crayons');
 					$updok = $fun($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
-					// Renvoyer erreur si update base distante echoue, on ne regarde pas les updates base local car ils ne renvoient rien
+					// Renvoyer erreur si update base distante echoue,
+					// on ne regarde pas les updates base local car ils ne renvoient rien
 					list($distant,$table) = distant_table($type);
-					if ($distant AND !$updok)
+					if ($distant and !$updok) {
 						$return['$erreur'] = "$type: " . _U('crayons:update_impossible');
+					}
 				}
 			}
 		}
-
+	}
 	return $return;
 }
 
 //
 // VUE
 //
-function vues_dist($type, $modele, $id, $content, $wid){
+function vues_dist($type, $modele, $id, $content, $wid) {
 	// pour ce qui a une {lang_select} par defaut dans la boucle,
 	// la regler histoire d'avoir la bonne typo dans le propre()
 	// NB: ceci n'a d'impact que sur le "par defaut" en bas
@@ -317,10 +322,9 @@ function vues_dist($type, $modele, $id, $content, $wid){
 
 	// chercher vues/article_toto.html
 	// sinon vues/toto.html
-	if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
-		OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
-		OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
-
+	if (find_in_path(($fond = 'vues/' . $type . '_' . $modele) . '.html')
+		or find_in_path(($fond = 'vues/' . $modele) .'.html')
+		or find_in_path(($fond = 'vues/' . $type) .'.html')) {
 		$primary = (function_exists('id_table_objet')?id_table_objet($table):'id_' . $table);
 		$contexte = array(
 			$primary => $id,
@@ -334,9 +338,8 @@ function vues_dist($type, $modele, $id, $content, $wid){
 		$contexte = array_merge($contexte, $content);
 		include_spip('public/assembler');
 		return recuperer_fond($fond, $contexte);
-	}
-	// vue par defaut
-	else {
+	} else {
+		// vue par defaut
 		// Par precaution on va rechercher la valeur
 		// dans la base de donnees (meme si a priori la valeur est
 		// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
@@ -357,14 +360,12 @@ function vues_dist($type, $modele, $id, $content, $wid){
 			}
 		}
 
-		if ($valeur){
+		if ($valeur) {
 			// seul spip core sait rendre les donnees
-			if (function_exists('appliquer_traitement_champ')){
-				$valeur = appliquer_traitement_champ($valeur,$modele,table_objet($table));
-			}
-			else {
-				if (in_array($modele,
-					array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
+			if (function_exists('appliquer_traitement_champ')) {
+				$valeur = appliquer_traitement_champ($valeur, $modele, table_objet($table));
+			} else {
+				if (in_array($modele, array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
 					$valeur = propre($valeur);
 				} else {
 					$valeur = typo($valeur);
@@ -386,8 +387,8 @@ function vues_dist($type, $modele, $id, $content, $wid){
  */
 function crayons_objet_modifier($id, $data, $type, $ref) {
 	if (include_spip('action/editer_objet')
-	    AND function_exists('objet_modifier')) {
-		return objet_modifier(objet_type($type),$id,$data);
+		and function_exists('objet_modifier')) {
+		return objet_modifier(objet_type($type), $id, $data);
 	}
 	// fallback
 	return crayons_update($id, $data, $type);
@@ -396,15 +397,17 @@ function crayons_objet_modifier($id, $data, $type, $ref) {
 //
 // Fonctions de mise a jour generique
 //
-function crayons_update($id, $colval = array(), $type = ''){
-	if (!$colval OR !count($colval))
+function crayons_update($id, $colval = array(), $type = '') {
+	if (!$colval or !count($colval)) {
 		return false;
+	}
 	list($distant,$table) = distant_table($type);
 
 	if ($distant) {
 		list($nom_table, $where) = table_where($type, $id);
-		if (!$nom_table)
+		if (!$nom_table) {
 			return false;
+		}
 
 		$update = $sep = '';
 		foreach ($colval as $col => $val) {
@@ -412,14 +415,12 @@ function crayons_update($id, $colval = array(), $type = ''){
 			$sep = ', ';
 		}
 
-		$a = spip_query($q =
-					'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where , $distant );
+		$a = spip_query($q = 'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where, $distant);
 
 		#spip_log($q);
 		include_spip('inc/invalideur');
-		suivre_invalideur($cond, $modif=true);
-	}
-	else {
+		suivre_invalideur($cond, $modif = true);
+	} else {
 		// cle primaire composee : 3-4-rubrique
 		// calculer un where approprie
 		// et modifier sans passer par la fonction destinee aux tables principales
@@ -433,7 +434,6 @@ function crayons_update($id, $colval = array(), $type = ''){
 			$a = modifier_contenu($type, $id, array(), $colval);
 		}
 	}
-
 	return $a;
 }
 
@@ -450,7 +450,7 @@ function crayons_update_article($id_article, $c = false) {
 	// NB: instituer_article veut id_parent, et pas id_rubrique !
 	if (isset($c['id_rubrique'])) {
 		$c['id_parent'] = $c['id_rubrique'];
-		unset ($c['id_rubrique']);
+		unset($c['id_rubrique']);
 	}
 	instituer_article($id_article, $c);
 }
@@ -462,7 +462,7 @@ function crayons_update_article($id_article, $c = false) {
  * La colonne est toujours 'valeur' pour ces données.
  * La donnée à enregistrer peut-être une sous partie de configuration.
  * Si c'est le cas, on gère l'enregistrement via ecrire_config.
- * 
+ *
  * @param string $a
  *   Nom ou clé de la meta (descriptif_site ou demo__truc pour demo/truc)
  * @param bool|array $c
@@ -503,7 +503,7 @@ function action_crayons_store_dist() {
 
 // permettre de passer une autre fonction de stockage des informations
 function action_crayons_store_args($store = 'crayons_store') {
-	header("Content-Type: text/plain; charset=".$GLOBALS['meta']['charset']);
+	header('Content-Type: text/plain; charset='.$GLOBALS['meta']['charset']);
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$r = $store();
@@ -517,28 +517,25 @@ function action_crayons_store_args($store = 'crayons_store') {
 	// En cas d'erreur il faudrait ajouter &err=... dans l'url ?
 	if (_request('redirect')) {
 		if (!$r['$erreur']
-		OR $r['$annuler']) {
+			or $r['$annuler']) {
 			include_spip('inc/headers');
 			redirige_par_entete(_request('redirect'));
 		} else {
 			echo "<h4 class='status'>".$r['$erreur']."</h4>\n";
 
 			foreach ($r as $wid => $v) {
-				if ($wid !== '$erreur')
+				if ($wid !== '$erreur') {
 					echo "<div id='$wid'>$v</div><hr />\n";
+				}
 			}
 			echo "<a href='".quote_amp(_request('redirect'))."'>"
 				.quote_amp(_request('redirect'))
 				."</a>\n";
 		}
-	}
-
-	// Cas normal : JSON
-	else {
+	} else {
+		// Cas normal : JSON
 		echo crayons_json_export($r);
 	}
 
 	exit;
 }
-
-?>

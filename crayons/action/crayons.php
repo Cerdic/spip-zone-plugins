@@ -1,12 +1,14 @@
 <?php
 /**
- * Crayons 
- * plugin for spip 
+ * Crayons
+ * plugin for spip
  * (c) Fil, toggg 2006-2013
  * licence GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // On a ete appele par un formulaire normal (ajax est traite par crayons_store)
 function action_crayons_dist() {
@@ -21,13 +23,12 @@ function action_crayons_dist() {
 	}
 
 	// S'il n'y a pas de redirect, on est mal : eviter toutefois la page blanche
-	if (!_request('redirect'))
+	if (!_request('redirect')) {
 		die('OK');
+	}
 
 	// Invalider le cache parce que bon... a priori on est dans une
 	// interface qui va avoir besoin de refresh
 	include_spip('inc/invalideur');
 	suivre_invalideur('1');
 }
-
-?>

@@ -1,12 +1,14 @@
 <?php
 /**
- * Crayons 
- * plugin for spip 
+ * Crayons
+ * plugin for spip
  * (c) Fil, toggg 2006-2013
  * licence GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Affiche le controleur (formulaire) d'un crayon
@@ -15,13 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $class
  *   Class CSS décrivant le champ
  * @param null $c
- * 
+ *
  * @return array
  *   Tableau avec 2 entrées possibles :
  *   - '$erreur' : texte d'erreur éventuel
  *   - '$html' : code HTML du controleur
 **/
-function affiche_controleur($class, $c=null) {
+function affiche_controleur($class, $c = null) {
 	$return = array('$erreur'=>'');
 
 	if (preg_match(_PREG_CRAYON, $class, $regs)) {
@@ -29,27 +31,29 @@ function affiche_controleur($class, $c=null) {
 		$regs[] = $class;
 
 		// A-t-on le droit de crayonner ?
-		spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$champ)","crayons_distant");
-		if (!autoriser('crayonner',$type, $id, NULL, array('modele'=>$champ))) {
+		spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$champ)", 'crayons_distant');
+		if (!autoriser('crayonner', $type, $id, null, array('modele'=>$champ))) {
 			$return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
 		} else {
 			$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
-			OR $f = charger_fonction($champ, 'controleurs', true)
-			OR $f = charger_fonction($type, 'controleurs', true)
-			OR $f = 'controleur_dist';
+			or $f = charger_fonction($champ, 'controleurs', true)
+			or $f = charger_fonction($type, 'controleurs', true)
+			or $f = 'controleur_dist';
 			list($html,$status) = $f($regs, $c);
-			if ($status)
+			if ($status) {
 				$return['$erreur'] = $html;
-			else
+			} else {
 				$return['$html'] = $html;
+			}
 		}
-	} else
+	} else {
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
+	}
 
 	return $return;
 }
 
-function controleur_dist($regs, $c=null) {
+function controleur_dist($regs, $c = null) {
 	list( , $nomcrayon, $type, $champ, $id, $class) = $regs;
 	$options = array(
 		'class' => $class
@@ -61,25 +65,26 @@ function controleur_dist($regs, $c=null) {
 	// Attention, un controleur multi-tables ne fonctionnera
 	// que si les champs ont le meme nom dans toutes les tables
 	// (par exemple: hyperlien est ok, mais pas nom)
-	if (($fichier = find_in_path(
-	($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
-	|| ($fichier = find_in_path(
-	($controleur = 'controleurs/' . $champ) .'.html'))) {
-		if (!lire_fichier($fichier, $controldata))
+	if (($fichier = find_in_path(($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
+		|| ($fichier = find_in_path(($controleur = 'controleurs/' . $champ) .'.html'))) {
+		if (!lire_fichier($fichier, $controldata)) {
 			die('erreur lecture controleur');
-		if (preg_match_all('/\bname=(["\'])#ENV\{name_(\w+)\}\1/',
-			$controldata, $matches, PREG_PATTERN_ORDER))
+		}
+		if (preg_match_all('/\bname=(["\'])#ENV\{name_(\w+)\}\1/', $controldata, $matches, PREG_PATTERN_ORDER)) {
 			$champ = $matches[2];
-	} else
+		}
+	} else {
 		$controleur = '';
+	}
 
 	$valeur = valeur_colonne_table($type, $champ, $id);
 
 	#spip_log("$valeur = valeur_colonne_table($type, $champ, $id);");
 	#spip_log($champ);
 
-	if ($valeur === false)
+	if ($valeur === false) {
 		return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
+	}
 /*	if (is_scalar($valeur)) {
 		$valeur = array($champ => $valeur);
 	}*/
@@ -90,19 +95,17 @@ function controleur_dist($regs, $c=null) {
 		$options['hauteurMini'] = 80; // base de hauteur mini
 		$option['inmode'] = 'controleur';
 		$options['controleur'] = $controleur;
-	} else
-	// si la valeur fait plusieurs lignes on doit mettre un textarea
-	// derogation specifique pour descriptif_site de spip_metas
-	if (
-		preg_match(",[\n\r],", $valeur[$champ])
-		OR (($champ == 'valeur') && ($id == 'descriptif_site'))
-		OR
+	} elseif (preg_match(",[\n\r],", $valeur[$champ])
+		or (($champ == 'valeur') && ($id == 'descriptif_site'))
+		or
 	// on regarde le type tel que defini dans serial
 	// (attention il y avait des blob dans les vieux spip)
 		($sqltype = colonne_table($type, $champ)) &&
-		(in_array($sqltype['type'] , array('mediumtext', 'longblob', 'longtext')) ||
-		(($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') 
-		&& in_array($champ, array('descriptif', 'bio'))))) {
+		(in_array($sqltype['type'], array('mediumtext', 'longblob', 'longtext')) ||
+		(($sqltype['type'] == 'text' || $sqltype['type'] == 'blob')
+		and in_array($champ, array('descriptif', 'bio'))))) {
+		// si la valeur fait plusieurs lignes on doit mettre un textarea
+		// derogation specifique pour descriptif_site de spip_metas
 		$options['hauteurMini'] = 80; // hauteur mini d'un textarea
 		$option['inmode'] = 'texte';
 	} else { // ligne, hauteur naturelle
@@ -114,19 +117,18 @@ function controleur_dist($regs, $c=null) {
 			if (is_array($sqltype['long'])) {
 				if (count($sqltype['long']) == 2) {
 					$inputAttrs['maxlength'] = $sqltype['long'][0] + 1 + $sqltype['long'][1];
-				}
-				// on ne sait pas ce que c'est !
-				else {
+				} else {
+					// on ne sait pas ce que c'est !
 					$inputAttrs['maxlength'] = $sqltype['long'][0];
 				}
 			} else {
 				$inputAttrs['maxlength'] = $sqltype['long'];
-			} 
+			}
 		}
 	}
 
 	$crayon = new Crayon($nomcrayon, $valeur, $options, $c);
-	$inputAttrs['style'] = implode('',$crayon->styles);
+	$inputAttrs['style'] = implode('', $crayon->styles);
 
 	if (!$controleur) {
 		$inputAttrs['style'] .= 'width:' . $crayon->largeur . 'px;' .
@@ -135,7 +137,7 @@ function controleur_dist($regs, $c=null) {
 
 	$html = $controleur ? $crayon->formulaire(null, $inputAttrs) :
 					$crayon->formulaire($option['inmode'], $inputAttrs);
-	$status = NULL;
+	$status = null;
 
 	return array($html,$status);
 }
@@ -176,7 +178,7 @@ class Crayon {
 	// $name : son nom
 	// $texts : tableau associatif des valeurs ou valeur unique si crayon monochamp
 	// $options : options directes du crayon (developpement)
-	function __construct($name, $texts = array(), $options = array(), $c=null) {
+	function __construct($name, $texts = array(), $options = array(), $c = null) {
 		$this->name = $name;
 
 		list($this->type, $this->modele, $this->id) = array_pad(explode('-', $this->name, 3), 3, '');
@@ -187,7 +189,7 @@ class Crayon {
 		$this->texts = $texts;
 		$this->key = strtr(uniqid('wid', true), '.', '_');
 		$this->md5 = $this->md5();
-		foreach ($options as $opt=>$val) {
+		foreach ($options as $opt => $val) {
 			$this->$opt = $val;
 		}
 		$this->dimension($c);
@@ -203,8 +205,7 @@ class Crayon {
 	// dimensions indicatives
 	function dimension($c) {
 		// largeur du crayon
-		$this->largeur = min(max(intval(_request('w', $c)),
-					$this->largeurMini), $this->largeurMaxi);
+		$this->largeur = min(max(intval(_request('w', $c)), $this->largeurMini), $this->largeurMaxi);
 		// hauteur maxi d'un textarea selon wh: window height
 		$maxheight = min(max(intval(_request('wh', $c)) - 50, 400), $this->hauteurMaxi);
 		$this->hauteur = min(max(intval(_request('h', $c)), $this->hauteurMini), $maxheight);
@@ -218,14 +219,15 @@ class Crayon {
 
 	// recuperer les elements de style
 	function css() {
-		foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'min-height', 'text-align') as $property) {
-			if (null !== ($p = _request($property)))
+		foreach (array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'min-height', 'text-align') as $property) {
+			if (null !== ($p = _request($property))) {
 				$this->styles[] = "$property:$p;";
+			}
 		}
 
 		$property = 'background-color';
 		if (!$p = _request($property)
-			OR $p == 'transparent') {
+			or $p == 'transparent') {
 			$p = 'white';
 		}
 		$this->styles[] = "$property:$p;";
@@ -250,14 +252,14 @@ class Crayon {
 		. '<input type="hidden" name="md5_'.$this->key
 		.'" value="'.$this->md5.'" />'."\n"
 		. '<input type="hidden" name="fields_'.$this->key
-		.'" value="'.join(',',array_keys($this->texts)).'" />'
+		.'" value="'.join(',', array_keys($this->texts)).'" />'
 		."\n"
 		;
 	}
 
 /**
  * Fabriquer les balises des champs d'apres un modele controleurs/(type_)modele.html
- * 
+ *
  * @param array $contexte
  * 	tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
  * @return string
@@ -277,7 +279,7 @@ class Crayon {
 		foreach ($this->texts as $champ => $val) {
 			$contexte['name_' . $champ] = 'content_' . $this->key . '_' . $champ;
 		}
-		$contexte['style'] = join(' ',$this->styles);
+		$contexte['style'] = join(' ', $this->styles);
 		include_spip('public/assembler');
 		return recuperer_fond($this->controleur, $contexte);
 	}
@@ -285,7 +287,7 @@ class Crayon {
 /**
  * Fabriquer les balises du ou des champs
  * $attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
- * 
+ *
  * @param string|array $spec
  *  soit un scalaire 'ligne' ou 'texte' précisant le type de balise
  *  soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
@@ -319,12 +321,12 @@ class Crayon {
 			}
 
 			if (is_array($spec) && isset($spec[$champ]['attrs'])) {
-				foreach ($spec[$champ]['attrs'] as $attr=>$val) {
+				foreach ($spec[$champ]['attrs'] as $attr => $val) {
 					$input = inserer_attribut($input, $attr, $val);
 				}
 			}
 
-			foreach ($attrs as $attr=>$val) {
+			foreach ($attrs as $attr => $val) {
 				$input = inserer_attribut($input, $attr, $val);
 			}
 
@@ -332,14 +334,13 @@ class Crayon {
 			// pour faire propre il faudra reprogrammer la bt en jquery
 			$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']) : array();
 			if (isset($meta_crayon['barretypo'])
-			AND $meta_crayon['barretypo']
-			AND $type == 'texte') {
+				and $meta_crayon['barretypo']
+				and $type == 'texte') {
 				// Pas la peine de mettre cette barre si PortePlume est la
-				if (
-					!(
+				if (!(
 						function_exists('chercher_filtre')
-						AND $f = chercher_filtre('info_plugin')
-						AND $f('PORTE_PLUME','est_actif')
+						and $f = chercher_filtre('info_plugin')
+						and $f('PORTE_PLUME', 'est_actif')
 					)
 				) {
 					include_spip('inc/barre');
@@ -360,7 +361,7 @@ class Crayon {
 
 /**
  *	Fabriquer les boutons du formulaire
- * 
+ *
  *  @param array $boutons
  * 	 Le tableau des boutons
  *  @return string
@@ -371,30 +372,34 @@ function crayons_boutons($boutons = array()) {
 	$boutons['cancel'] = array('cancel', texte_backend(_T('crayons:annuler')));
 
 	$html = '';
-	foreach ($boutons as $bnam => $bdef) if ($bdef) {
-		$html .= '<button type="button" class="crayon-' . $bnam .
-			'" title="' . $bdef[1] . '">' . $bdef[1] . '</button>';
+	foreach ($boutons as $bnam => $bdef) {
+		if ($bdef) {
+			$html .= '<button type="button" class="crayon-' . $bnam .
+				'" title="' . $bdef[1] . '">' . $bdef[1] . '</button>';
+		}
 	}
 
-	if ($html)
+	if ($html) {
 		return '<div class="crayon-boutons"><div>'.$html.'</div></div>';
+	}
 }
 
-function crayons_formulaire($html, $action='crayons_store') {
-	if (!$html)
+function crayons_formulaire($html, $action = 'crayons_store') {
+	if (!$html) {
 		return '';
+	}
 
 	// on est oblige de recreer un Crayon pour connaitre la largeur du form.
 	// Pb conceptuel a revoir
-	$crayon = new Crayon("");
-	$class = ($crayon->largeur<250?" small":"");
+	$crayon = new Crayon('');
+	$class = ($crayon->largeur < 250 ? ' small' : '');
 
 
 	include_spip('inc/filtres');
 	return liens_absolus(
 		'<div class="formulaire_spip">'
 		. '<form class="formulaire_crayon'.$class.'" method="post" action="'
-		. url_absolue(parametre_url(self(),'action', $action))
+		. url_absolue(parametre_url(self(), 'action', $action))
 		. '" enctype="multipart/form-data">'
 		. $html
 		. crayons_boutons()
@@ -424,29 +429,29 @@ class SecureCrayon extends Crayon {
 
 /**
  * Action affichant le controleur html ou php adéquat
- * 
+ *
  * on affiche le formulaire demande (controleur associe au crayon)
  * Si le crayon n'est pas de type "crayon", c'est un crayon etendu, qui
  * integre le formulaire requis à son controleur (pour avoir les boutons
  * du formulaire dans un controleur Draggable, par exemple, mais il y a
  * d'autres usages possibles)
- * 
+ *
  */
 function action_crayons_html_dist() {
 	include_spip('inc/crayons');
 
 	// Utiliser la bonne langue d'environnement
-	if(!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang'] OR ($GLOBALS['forcer_lang'] === 'non'))
+	if (!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang'] or ($GLOBALS['forcer_lang'] === 'non')) {
 		lang_select($GLOBALS['auteur_session']['lang']);
+	}
 
 	$return = affiche_controleur(_request('class'));
-	if (!_request('type') OR _request('type') == 'crayon')
+	if (!_request('type') or _request('type') == 'crayon') {
 		$return['$html'] = crayons_formulaire($return['$html']);
+	}
 
 	$json = trim(crayons_json_encode($return));
 
-	header("Content-Type: text/plain; charset=utf-8");
+	header('Content-Type: text/plain; charset=utf-8');
 	die($json);
 }
-
-?>

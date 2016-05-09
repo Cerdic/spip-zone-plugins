@@ -8,7 +8,9 @@
  * @package SPIP\Crayons\Fonctions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 if (!defined('_DEBUG_CRAYONS')) {
 	/**
@@ -124,7 +126,7 @@ function &Crayons_affichage_final(&$page) {
 	foreach ($regs as $reg) {
 		list(,$crayon,$type,$champ,$id) = $reg;
 		if (_DEBUG_CRAYONS) {
-			spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))", "crayons_distant");
+			spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))", 'crayons_distant');
 		}
 		if (autoriser('modifier', $type, $id, null, array('champ'=>$champ))) {
 			if (!isset($droits['.' . $crayon])) {
@@ -212,7 +214,6 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'pag
 		if (function_exists('chercher_filtre')
 		and $f = chercher_filtre('info_plugin')
 		and $f('PORTE_PLUME','est_actif')) {
-
 			$pp = <<<EOF
 cQuery(function() {
 	if (typeof onAjaxLoad == 'function') {
@@ -224,7 +225,6 @@ cQuery(function() {
 	}
 });
 EOF;
-
 		}
 	}
 
@@ -250,7 +250,7 @@ EOH;
 	if ($mode == 'head') {
 		//js inline avant les css, sinon ca bloque le chargement
 		$page = $page . $incJS . $incCSS;
-		return $page; 
+		return $page;
 	}
 
 	$pos_head = strpos($page, '</head>');
@@ -355,7 +355,7 @@ function balise_EDIT($p) {
 		. $type
 		."',"
 		.sinon($label, "''")
-		.","
+		.','
 		. $primary
 		.").' '";
 	$p->interdire_scripts = false;
@@ -478,5 +478,3 @@ function classe_boucle_crayon($type, $champ, $id) {
 
 	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
-
-?>
