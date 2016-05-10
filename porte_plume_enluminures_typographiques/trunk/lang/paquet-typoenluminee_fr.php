@@ -8,7 +8,9 @@
 // Date: 08-01-2012 17:02:08
 // Items: 2
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -29,4 +31,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'typoenluminee_slogan' => 'Plein de raccourcis pour la mise en forme !',
 );
-?>
