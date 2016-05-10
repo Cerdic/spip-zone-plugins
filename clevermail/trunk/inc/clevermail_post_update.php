@@ -48,8 +48,8 @@ function clevermail_post_update($pst_id) {
       $post['pst_text'] = strip_tags($post['pst_text']);
   	} else {
   	  // TODO : essayer d'utiliser TEN : http://www.headstar.com/ten/
-  	  include_spip('classes/facteur');
-  	  $post['pst_text'] = Facteur::html2text($post['pst_html']);
+  	  include_spip('facteur_fonctions');
+  	  $post['pst_text'] = facteur_mail_html2text($post['pst_html']);
   	}
 	  if (trim($post['pst_html']) != '' && trim($post['pst_text']) != '') {
 		  /*
