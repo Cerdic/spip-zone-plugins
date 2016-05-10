@@ -3,14 +3,15 @@
 	// attention avant de lancer ce test !
 	// le dossier du plugin ne doit pas être un lien symbolique dans /plugins
 	// sous peine de générer un timeout...
-	
+
 	$test = 'gis_connect_sql';
 
-	$remonte = "../";
-	while (!is_dir($remonte."ecrire"))
+	$remonte = '../';
+	while (!is_dir($remonte.'ecrire')) {
 		$remonte = "../$remonte";
+	}
 	require $remonte.'tests/test.inc';
-	find_in_path("./base/connect_sql.php",'',true);
+	find_in_path('./base/connect_sql.php', '', true);
 
 
 	// Les tests
@@ -33,14 +34,13 @@
 
 	// hop ! on y va
 	$err = array();
-	foreach($essais as $f=>$essai)
-		$err = array_merge(tester_fun($f, $essai),$err);
-	
+	foreach ($essais as $f => $essai) {
+		$err = array_merge(tester_fun($f, $essai), $err);
+	}
+
 	// si le tableau $err est pas vide ca va pas
 	if ($err) {
 		echo ('<dl>' . join('', $err) . '</dl>');
 	} else {
-		echo "OK";
+		echo 'OK';
 	}
-
-?>

@@ -1,9 +1,11 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // pour compat cf http://zone.spip.org/trac/spip-zone/changeset/79911/
-define('_DIR_LIB_GIS',find_in_path('lib/leaflet/'));
+define('_DIR_LIB_GIS', find_in_path('lib/leaflet/'));
 
 $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
@@ -173,7 +175,7 @@ $gis_layers = array (
 );
 
 if (isset($GLOBALS['gis_layers']) and is_array($GLOBALS['gis_layers'])) {
-	$GLOBALS['gis_layers'] = array_merge($gis_layers,$GLOBALS['gis_layers']);
+	$GLOBALS['gis_layers'] = array_merge($gis_layers, $GLOBALS['gis_layers']);
 } else {
 	$GLOBALS['gis_layers'] = $gis_layers;
 }

@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Installation/maj des tables gis
@@ -9,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function gis_upgrade($nom_meta_base_version, $version_cible){
+function gis_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	// Première installation
@@ -75,7 +77,7 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (objet)'),
 		array('sql_alter', 'TABLE spip_gis_liens ADD INDEX (id_objet)'),
 	);
-	
+
 	// Ajout des champs de styles (color, weight, opacity, fillcolor & fillopacity)
 	$maj['2.1.0'] = array(
 		array('maj_tables',array('spip_gis')),
@@ -85,22 +87,24 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-function gis_upgrade_2_0(){
+function gis_upgrade_2_0() {
 	include_spip('action/editer_gis');
 
 	// On déplace les liaisons articles et rubriques
-	$res = sql_select('*','spip_gis');
+	$res = sql_select('*', 'spip_gis');
 	while ($row = sql_fetch($res)) {
-		if($row['id_article'] != 0)
+		if ($row['id_article'] != 0) {
 			lier_gis($row['id_gis'], 'article', $row['id_article']);
-		if($row['id_rubrique'] != 0)
+		}
+		if ($row['id_rubrique'] != 0) {
 			lier_gis($row['id_gis'], 'article', $row['id_rubrique']);
+		}
 	}
 
 	// On déplace les liaisons mots
-	$res = sql_select('*','spip_gis_mots');
+	$res = sql_select('*', 'spip_gis_mots');
 	while ($row = sql_fetch($res)) {
-		$titre_mot = sql_getfetsel('titre','spip_mots','id_mot='.$row['id_mot']);
+		$titre_mot = sql_getfetsel('titre', 'spip_mots', 'id_mot='.$row['id_mot']);
 		$c = array(
 			'titre' => $titre_mot,
 			'lat'=> $row['lat'],
@@ -108,7 +112,7 @@ function gis_upgrade_2_0(){
 			'zoom' => $row['zoom']
 		);
 		$id_gis = insert_gis();
-		revisions_gis($id_gis,$c);
+		revisions_gis($id_gis, $c);
 		lier_gis($id_gis, 'mot', $row['id_mot']);
 	}
 }
@@ -119,10 +123,9 @@ function gis_upgrade_2_0(){
  * @param string $nom_meta_base_version
  */
 function gis_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_gis");
-	sql_drop_table("spip_gis_liens");
+	sql_drop_table('spip_gis');
+	sql_drop_table('spip_gis_liens');
 	effacer_meta($nom_meta_base_version);
 	// Effacer la config
 	effacer_meta('gis');
 }
-

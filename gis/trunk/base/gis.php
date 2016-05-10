@@ -1,8 +1,10 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function gis_declarer_tables_interfaces($interface){
+function gis_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['gis'] = 'gis';
 	$interface['table_des_tables']['gis_liens'] = 'gis_liens';
 
@@ -21,7 +23,7 @@ function gis_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function gis_declarer_tables_objets_sql($tables){
+function gis_declarer_tables_objets_sql($tables) {
 	/* Declaration de la table de points gis */
 	$tables['spip_gis'] = array(
 		/* Declarations principales */
@@ -52,7 +54,7 @@ function gis_declarer_tables_objets_sql($tables){
 			"fillopacity" => "varchar(4) NOT NULL DEFAULT ''"
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_gis",
+			'PRIMARY KEY' => 'id_gis',
 			'KEY lat' => 'lat',
 			'KEY lon' => 'lon',
 			'KEY pays' => 'pays(500)',
@@ -63,7 +65,7 @@ function gis_declarer_tables_objets_sql($tables){
 			'KEY code_postal' => 'code_postal',
 		),
 		'join' => array(
-				"id_gis"=>"id_gis"
+				'id_gis' => 'id_gis'
 		),
 		'principale' => 'oui',
 		'modeles' => array('carte_gis', 'carte_gis_preview'),
@@ -121,17 +123,17 @@ function gis_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
-function gis_declarer_tables_auxiliaires($tables_auxiliaires){
+function gis_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$spip_gis_liens = array(
 		"id_gis" => "bigint(21) NOT NULL",
 		"objet" => "VARCHAR (25) DEFAULT '' NOT NULL",
 		"id_objet" => "bigint(21) NOT NULL");
 
 	$spip_gis_liens_key = array(
-		"PRIMARY KEY" => "id_gis,id_objet,objet",
-		"KEY id_gis" => "id_gis",
-		"KEY id_objet" => "id_objet",
-		"KEY objet" => "objet"
+		'PRIMARY KEY' => 'id_gis,id_objet,objet',
+		'KEY id_gis' => 'id_gis',
+		'KEY id_objet' => 'id_objet',
+		'KEY objet' => 'objet'
 	);
 
 	$tables_auxiliaires['spip_gis_liens'] = array(
@@ -140,5 +142,3 @@ function gis_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	return $tables_auxiliaires;
 }
-
-?>
