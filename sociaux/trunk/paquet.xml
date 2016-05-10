@@ -13,6 +13,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="insert_head_css" inclure="sociaux_pipelines.php"/>
+	<pipeline nom="header_prive" inclure="sociaux_pipelines.php" />
 	<pipeline nom="sociaux_lister" inclure="sociaux_pipelines.php"/>
 
 	<menu nom="sociaux" titre="sociaux:sociaux_titre" parent="menu_squelette" icone="images/sociaux-16.png" action="configurer_sociaux"/>

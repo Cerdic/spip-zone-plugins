@@ -49,3 +49,16 @@ function sociaux_sociaux_lister($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajoute les scripts JS et CSS de saisies dans l'espace privé
+ *
+ * @param string $flux
+ * @return string
+ **/
+function sociaux_header_prive($flux){
+	$css = find_in_path('lib/socicon/styles.css');
+	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
+	return $flux;
+}
+

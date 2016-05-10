@@ -35,7 +35,7 @@
 					<BOUCLE_rezo (DATA){source tableau,#GET{rezo,#ARRAY}}>
 						<!-- #VALEUR -->
 						<li class="editer editer-[(#VALEUR)]">
-							<label for="socicon-[(#CLE)]">[(#VALEUR)]</label>
+							<label for="socicon-[(#CLE)]"><span class="socicon socicon-#CLE"></span> [(#VALEUR)]</label>
 							<input type="text" name="#CLE" id="socicon-[(#CLE)]" value="[(#ENV{#CLE})]" class="text"/>
 						</li>
 					</BOUCLE_rezo>
