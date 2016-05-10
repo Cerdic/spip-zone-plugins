@@ -9,7 +9,9 @@
  * @package	SPIP\Timezone\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline formulaire_fond (SPIP)
@@ -19,17 +21,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param array $flux
  * @return array $flux
  */
-function timezone_formulaire_fond($flux){
-	if($flux['args']['form'] == 'configurer_identite'){
-		if(!function_exists('lire_config'))
+function timezone_formulaire_fond($flux) {
+	if ($flux['args']['form'] == 'configurer_identite') {
+		if (!function_exists('lire_config')) {
 			include_spip('inc/config');
-		$flux['args']['contexte']['timezone'] = lire_config('timezone','');
-		$contenu = recuperer_fond('formulaires/timezone_inclure',$flux['args']['contexte']);
-		$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_descriptif_site.*<\/(li|div)>),Uims","\\1"."\n".$contenu,$flux['data'],1);
+		}
+		$flux['args']['contexte']['timezone'] = lire_config('timezone', '');
+		$contenu = recuperer_fond('formulaires/timezone_inclure', $flux['args']['contexte']);
+		$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_descriptif_site.*<\/(li|div)>),Uims", "\\1"."\n".$contenu, $flux['data'], 1);
 	}
 	return $flux;
 }
-
 
 /**
  * Insertion dans le pipeline formulaires_traiter (SPIP)
@@ -39,11 +41,11 @@ function timezone_formulaire_fond($flux){
  * @param array $flux
  * @return array $flux
  */
-function timezone_formulaire_traiter($flux){
-	if($flux['args']['form'] == 'configurer_identite'){
-		if(_request('timezone')){
+function timezone_formulaire_traiter($flux) {
+	if ($flux['args']['form'] == 'configurer_identite') {
+		if (_request('timezone')) {
 			include_spip('inc/meta');
-			ecrire_meta('timezone',_request('timezone'));
+			ecrire_meta('timezone', _request('timezone'));
 		}
 	}
 	return $flux;
