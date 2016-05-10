@@ -1,0 +1,11 @@
+#SET{nom, #ENV*{nom}|_T_ou_typo}
+#SET{nom_css, #ENV*{nom}|strtolower}
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{nom}</div>
+	<div class="infos">[(#ENV*{url}|extraire_multi)]</div>
+]
+[(#ENV{appel_menu}|oui)
+	<li class="menu-entree item sociaux[ (#ENV{css})]">
+		<a href="[(#ENV*{url}|extraire_multi)]" class="#GET{nom_css}[(#ENV{css_lien})]"><span class="socicon socicon-#GET{nom_css}"> </span></a>
+]
