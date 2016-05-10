@@ -1,24 +1,17 @@
 [(#REM)
-    liste les liens vers les réseaux sociaux
+liste les liens vers les réseaux sociaux
 
-    on associe les classes de socicon si l'option est activée
-    http://www.socicon.com/how.php
+on associe les classes de socicon si l'option est activée
+http://www.socicon.com/how.php
 
 ]
 <!-- sociaux -->
 <div class="sociaux">
-  <ul class="sociaux-list">
-      #SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email,tripadvisor,vimeo,flickr}}
-
-      <BOUCLE_rezo(DATA){source tableau,#GET{rezo}}>
-
-      [(#CONFIG{sociaux/#VALEUR}|oui)<li><a href="#CONFIG{sociaux/#VALEUR}" class="#VALEUR">[(#CONFIG{sociaux/css}|oui)<span class="socicon socicon-#VALEUR"></span> ]<span class="name">[(#VALEUR|ucfirst)]</span></a></li>]
-
-
-      </BOUCLE_rezo>
-
-
-
-  </ul>
+	<ul class="sociaux-list">
+		#SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email,tripadvisor,vimeo,flickr}}
+		<BOUCLE_rezo (DATA) {source tableau,#GET{rezo}}>
+		[(#CONFIG{sociaux/#VALEUR}|oui)
+		<li> <a href="#CONFIG{sociaux/#VALEUR}" class="#VALEUR">[(#CONFIG{sociaux/css}|oui)<span class="socicon socicon-#VALEUR"></span> ]<span class="name">[(#VALEUR|ucfirst)]</span></a></li>]</BOUCLE_rezo>
+	</ul>
 </div>
 <!-- #sociaux -->
