@@ -4,12 +4,14 @@
  * Le plugin qui lave plus SPIP que SPIP
  * (c) 2008 Mathieu Marcillaud, Cedric Morin, Tetue
  * Licence GPL
- * 
+ *
  * Fonctions de lecture d'un fichier CSV pour transformation en array()
- * 
+ *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/charsets');
 
@@ -30,13 +32,14 @@ include_spip('inc/charsets');
  * @param unknown_type $texte
  * @return array
  */
-function importer_csv_importcharset($texte){
+function importer_csv_importcharset($texte) {
 	// le plus frequent, en particulier avec les trucs de ms@@@
 	$charset_source = 'iso-8859-1';
 	// mais open-office sait faire mieux, donc mefiance !
-	if (is_utf8($texte))
+	if (is_utf8($texte)) {
 		$charset_source = 'utf-8';
-	return importer_charset($texte,$charset_source);
+	}
+	return importer_charset($texte, $charset_source);
 }
 
 /**
@@ -46,7 +49,7 @@ function importer_csv_importcharset($texte){
  * @param string $key
  * @return string
  */
-function importer_csv_nettoie_key($key){
+function importer_csv_nettoie_key($key) {
 	return translitteration($key);
 	/*$accents=array('�','�','�','�','�',"�","�","'");
 	$accents_rep=array('e','e','e','a','u',"o","c","_");
@@ -65,37 +68,40 @@ function importer_csv_nettoie_key($key){
  * @param int $len
  * @return array
  */
-function inc_importer_csv_dist($file, $head = false, $delim = ",", $enclos = '"', $len = 10000) {
+function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"', $len = 10000) {
 	$return = false;
 	if (@file_exists($file)
-		AND $handle = fopen($file, "r")){
+		and $handle = fopen($file, 'r')) {
 		if ($head) {
 			$header = fgetcsv($handle, $len, $delim, $enclos);
-			if ($header){
-				$header = array_map('importer_csv_importcharset',$header);
-				$header = array_map('importer_csv_nettoie_key',$header);
+			if ($header) {
+				$header = array_map('importer_csv_importcharset', $header);
+				$header = array_map('importer_csv_nettoie_key', $header);
 				$header_type = array();
 				foreach ($header as $heading) {
-					if (!isset($header_type[$heading]))
-						$header_type[$heading] = "scalar";
-					else
-						$header_type[$heading] = "array";
+					if (!isset($header_type[$heading])) {
+						$header_type[$heading] = 'scalar';
+					} else {
+						$header_type[$heading] = 'array';
+					}
 				}
 			}
 		}
-		while (($data = fgetcsv($handle, $len, $delim, $enclos)) !== FALSE) {
-			$data = array_map('importer_csv_importcharset',$data);
-			if ($head AND isset($header)) {
+		while (($data = fgetcsv($handle, $len, $delim, $enclos)) !== false) {
+			$data = array_map('importer_csv_importcharset', $data);
+			if ($head and isset($header)) {
 				$row = array();
-				foreach ($header as $key=>$heading) {
-					if ($header_type[$heading]=="array"){
-						if (!isset($row[$heading]))
+				foreach ($header as $key => $heading) {
+					if ($header_type[$heading] == 'array') {
+						if (!isset($row[$heading])) {
 							$row[$heading] = array();
-						if (isset($data[$key]) AND strlen($data[$key]))
+						}
+						if (isset($data[$key]) and strlen($data[$key])) {
 							$row[$heading][]= $data[$key];
-					}
-					else
+						}
+					} else {
 						$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
+					}
 				}
 				$return[]=$row;
 			} else {
@@ -105,4 +111,3 @@ function inc_importer_csv_dist($file, $head = false, $delim = ",", $enclos = '"'
 	}
 	return $return;
 }
-
