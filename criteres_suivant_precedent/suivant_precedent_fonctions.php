@@ -1,24 +1,26 @@
 <?php
 /**
  * Plugin critere suivant precedent
- * Licence GPL - 2010 - Matthieu Marcillaud 
- * 
+ * Licence GPL - 2010 - Matthieu Marcillaud
+ *
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // tester la presence des iterateurs...
 if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')
 	or defined('_DIR_PLUGIN_ITERATEURS')) {
-		define('avec_iterateur', true);
+	define('avec_iterateur', true);
 } else {
-		define('avec_iterateur', false);
+	define('avec_iterateur', false);
 }
 
 
 /**
  * Fournit le critère de boucle {suivant}
- * permettant de trouver l'élément suivant par rapport à la boucle parente 
+ * permettant de trouver l'élément suivant par rapport à la boucle parente
  *
 **/
 function critere_suivant_dist($idb, &$boucles, $crit) {
@@ -31,7 +33,7 @@ function critere_suivant_dist($idb, &$boucles, $crit) {
 
 /**
  * Fournit le critère de boucle {precedent}
- * permettant de trouver l'élément précédent par rapport à la boucle parente 
+ * permettant de trouver l'élément précédent par rapport à la boucle parente
  *
 **/
 function critere_precedent_dist($idb, &$boucles, $crit) {
@@ -55,7 +57,7 @@ function critere_precedent_dist($idb, &$boucles, $crit) {
 function calculer_critere_iterateur_suivant_precedent_dist($idb, &$boucles, $crit, $type) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
-	
+
 	$arg = kwote(calculer_argument_precedent($idb, $primary, $boucles));
 
 	$partie =
@@ -80,40 +82,41 @@ function calculer_critere_iterateur_suivant_precedent_dist($idb, &$boucles, $cri
 
 	$boucle->total_parties = 1;
 	calculer_parties($boucles, $idb, $partie, '++');
-	
+
 	// ajouter la cle primaire dans le select
 	// sauf si pas de primaire, ou si primaire composee
 	// dans ce cas, on ne sait pas gerer une pagination indirecte
 	// : il faut id_xx dans le select pour la fonction quete_position_primary()
 	$t = $boucle->id_table . '.' . $primary;
 	if ($boucle->primary
-		AND !preg_match('/[,\s]/',$primary)
-		AND !in_array($t, $boucle->select)) {
-	  $boucle->select[]= $t;
+		and !preg_match('/[,\s]/', $primary)
+		and !in_array($t, $boucle->select)) {
+		$boucle->select[]= $t;
 	}
 
 	// forcer le compilo à ne pas prendre en static a cause du $where fluctuant
-	$boucle->where[]= array("'='","'1'","sql_quote(1)");
-	  
+	$boucle->where[] = array("'='", "'1'", "sql_quote(1)");
 }
 
 
 
 // $trouver : suivant / precedent / (toute autre valeur retourne la position courante de l'id demande.
-function quete_iterateur_position_primary($primary, $valeur, $trouver, $iter){
+function quete_iterateur_position_primary($primary, $valeur, $trouver, $iter) {
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	if (!$primary OR preg_match('/[,\s]/', $primary))
+	if (!$primary or preg_match('/[,\s]/', $primary)) {
 		return false;
+	}
 
 	$pos = 0;
-	while ($row = $iter->fetch() AND $row[$primary]!=$valeur){
+	while ($row = $iter->fetch() and $row[$primary]!=$valeur) {
 		$pos++;
 	}
 
 	// si on a pas trouve
-	if ($row[$primary]!=$valeur)
+	if ($row[$primary] != $valeur) {
 		return false;
+	}
 
 	// precedent : prendre la position moins 1
 	if ($trouver == 'precedent') {
@@ -122,7 +125,7 @@ function quete_iterateur_position_primary($primary, $valeur, $trouver, $iter){
 		}
 		return false;
 	}
-	
+
 	// suivant : tester l'existence d'un suivant
 	if ($trouver == 'suivant') {
 		if ($row = $iter->fetch()) {
@@ -130,24 +133,16 @@ function quete_iterateur_position_primary($primary, $valeur, $trouver, $iter){
 		}
 		return false;
 	}
-	
+
 	// sinon, retourner la position de la ligne contenant l'enregistrement demande
 	return $pos;
 }
 
-
-
-
-
-
-
 /* ==================================================
  *
  * 		Ancienne ecriture (avant les iterateurs)
- * 
+ *
  */
-
-
 
 /**
  * Calcul des critères {suivant} et {precedent} (avant l'existence d'Iterateurs).
@@ -160,7 +155,7 @@ function quete_iterateur_position_primary($primary, $valeur, $trouver, $iter){
 function calculer_critere_suivant_precedent_dist($idb, &$boucles, $crit, $type) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
-	
+
 	$arg = kwote(calculer_argument_precedent($idb, $primary, $boucles));
 
 	$partie =
@@ -189,39 +184,39 @@ function calculer_critere_suivant_precedent_dist($idb, &$boucles, $crit, $type) 
 
 	$boucle->total_parties = 1;
 	calculer_parties($boucles, $idb, $partie, '++');
-	
+
 	// ajouter la cle primaire dans le select
 	// sauf si pas de primaire, ou si primaire composee
 	// dans ce cas, on ne sait pas gerer une pagination indirecte
 	// : il faut id_xx dans le select pour la fonction quete_position_primary()
 	$t = $boucle->id_table . '.' . $primary;
 	if ($boucle->primary
-		AND !preg_match('/[,\s]/',$primary)
-		AND !in_array($t, $boucle->select)) {
-	  $boucle->select[]= $t;
+		and !preg_match('/[,\s]/', $primary)
+		and !in_array($t, $boucle->select)) {
+		$boucle->select[]= $t;
 	}
 
 	// forcer le compilo à ne pas prendre en static a cause du $where fluctuant
-	$boucle->where[]= array("'='","'1'","sql_quote(1)");
-	  
+	$boucle->where[]= array("'='", "'1'", "sql_quote(1)");
 }
 
-
 // $trouver : suivant / precedent / (toute autre valeur retourne la position courante de l'id demande.
-function quete_position_primary($primary, $valeur, $trouver, $res, $serveur=''){
+function quete_position_primary($primary, $valeur, $trouver, $res, $serveur = '') {
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	if (!$primary OR preg_match('/[,\s]/', $primary))
+	if (!$primary or preg_match('/[,\s]/', $primary)) {
 		return false;
+	}
 
 	$pos = 0;
-	while ($row = sql_fetch($res, $serveur) AND $row[$primary]!=$valeur){
+	while ($row = sql_fetch($res, $serveur) and $row[$primary] != $valeur) {
 		$pos++;
 	}
 
 	// si on a pas trouve
-	if ($row[$primary]!=$valeur)
+	if ($row[$primary] != $valeur) {
 		return false;
+	}
 
 	// precedent : prendre la position moins 1
 	if ($trouver == 'precedent') {
@@ -230,7 +225,7 @@ function quete_position_primary($primary, $valeur, $trouver, $res, $serveur=''){
 		}
 		return false;
 	}
-	
+
 	// suivant : tester l'existence d'un suivant
 	if ($trouver == 'suivant') {
 		if ($row = sql_fetch($res, $serveur)) {
@@ -238,8 +233,7 @@ function quete_position_primary($primary, $valeur, $trouver, $res, $serveur=''){
 		}
 		return false;
 	}
-	
+
 	// sinon, retourner la position de la ligne contenant l'enregistrement demande
 	return $pos;
 }
-?>
