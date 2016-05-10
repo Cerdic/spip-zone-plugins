@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Filtre |retire_sommaire
@@ -13,10 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $texte
  * @return string
  */
-function retire_sommaire($texte){
+function retire_sommaire($texte) {
 	// retirer le sommaire
-	if (strpos($texte,"<!--sommaire-->")!==false)
-		$texte = preg_replace(",<!--sommaire-->.*<!--/sommaire-->,Uims","",$texte);
+	if (strpos($texte, '<!--sommaire-->') !== false) {
+		$texte = preg_replace(',<!--sommaire-->.*<!--/sommaire-->,Uims', '', $texte);
+	}
 	return $texte;
 }
 
@@ -26,10 +29,11 @@ function retire_sommaire($texte){
  * @param $texte
  * @return mixed
  */
-function retire_ancres_sommaire($texte){
+function retire_ancres_sommaire($texte) {
 	// retirer les liens de retour au sommaire
-	if (strpos($texte,"sommaire-back")!==false)
-		$texte = preg_replace(",<a class='sommaire-back'[^>]*></a>,Uims","",$texte);
+	if (strpos($texte, 'sommaire-back') !== false) {
+		$texte = preg_replace(",<a class='sommaire-back'[^>]*></a>,Uims", '', $texte);
+	}
 	return retire_sommaire($texte);
 }
 
@@ -41,7 +45,7 @@ function retire_ancres_sommaire($texte){
  * @param string $texte
  * @return string
  */
-function ancres_sommaire($texte){
+function ancres_sommaire($texte) {
 	$texte = sommaire_post_propre(retire_sommaire($texte), false);
 	return $texte;
 }
@@ -54,9 +58,9 @@ function ancres_sommaire($texte){
  * @param $p
  * @return mixed
  */
-function balise_SOMMAIRE_dist($p){
-	$_texte = interprete_argument_balise(1,$p);
-	$_niveau_max = interprete_argument_balise(2,$p);
+function balise_SOMMAIRE_dist($p) {
+	$_texte = interprete_argument_balise(1, $p);
+	$_niveau_max = interprete_argument_balise(2, $p);
 	$_niveau_max = ($_niveau_max?$_niveau_max:"''");
 
 	$p->code = "sommaire_empile_note().affiche_sommaire($_texte,$_niveau_max).sommaire_depile_note()";
@@ -68,7 +72,7 @@ function balise_SOMMAIRE_dist($p){
  * Protected
  */
 
-function sommaire_insert_head_css($flux){
+function sommaire_insert_head_css($flux) {
 	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/sommaire.css').'"/>'."\n";
 	return $flux;
 }
@@ -78,22 +82,31 @@ function sommaire_insert_head_css($flux){
  * @param string $texte
  * @return string
  */
-function affiche_sommaire($texte,$niveau_max=''){
+function affiche_sommaire($texte, $niveau_max = '') {
 
 	// retirer le(s) sommaire(s) eventuel(s) deja la avant de re-calculer le sommaire
-	return sommaire_post_propre(retire_sommaire($texte), $ajoute=true, $sommaire_seul=true, $niveau_max);
+	return sommaire_post_propre(retire_sommaire($texte), $ajoute = true, $sommaire_seul = true, $niveau_max);
 }
 
 /**
  * Empile les notes avant evaluation du texte sur lequel est calcule #SOMMAIRE
  * @return string
  */
-function sommaire_empile_note(){$notes = charger_fonction('notes','inc');$notes('','empiler');return '';}
+function sommaire_empile_note() {
+	$notes = charger_fonction('notes', 'inc');
+	$notes('', 'empiler');
+	return '';
+}
+
 /**
  * Depile les notes apres calcul de #SOMMAIRE
  * @return string
  */
-function sommaire_depile_note(){$notes = charger_fonction('notes','inc');$notes('','depiler');return '';}
+function sommaire_depile_note() {
+	$notes = charger_fonction('notes', 'inc');
+	$notes('', 'depiler');
+	return '';
+}
 
 
 /**
@@ -101,32 +114,32 @@ function sommaire_depile_note(){$notes = charger_fonction('notes','inc');$notes(
  * @param $interfaces
  * @return mixed
  */
-function sommaire_declarer_tables_interfaces($interfaces){
+function sommaire_declarer_tables_interfaces($interfaces) {
 	$traitement = $interfaces['table_des_traitements']['TEXTE'][0];
-	if (isset($interfaces['table_des_traitements']['TEXTE']['articles']))
+	if (isset($interfaces['table_des_traitements']['TEXTE']['articles'])) {
 		$traitement = $interfaces['table_des_traitements']['TEXTE']['articles'];
+	}
 
-	$traitement = str_replace("propre(","sommaire_propre(",$traitement);
+	$traitement = str_replace('propre(', 'sommaire_propre(', $traitement);
 	$interfaces['table_des_traitements']['TEXTE']['articles']= $traitement;
 
 	return $interfaces;
 }
 
-function sommaire_propre($texte, $connect, $env){
+function sommaire_propre($texte, $connect, $env) {
 	// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
-	$has_sommaire = preg_match("/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/",$texte);
+	$has_sommaire = preg_match('/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/', $texte);
 	// le niveau maximal peut être passé en paramètre de la balise <sommaire|niveau_max=N>
-	$niveau_max = (preg_match("/[<\[]sommaire.*niveau_max=(\d).*[>\]]/", $texte, $m)) ? $m[1] : '';
+	$niveau_max = (preg_match('/[<\[]sommaire.*niveau_max=(\d).*[>\]]/', $texte, $m)) ? $m[1] : '';
 
-	$texte = propre($texte,$connect,$env);
+	$texte = propre($texte, $connect, $env);
 
-	if (
-		!isset($GLOBALS['meta']['sommaire_automatique'])
-		OR $GLOBALS['meta']['sommaire_automatique']=="on"
-		OR ($GLOBALS['meta']['sommaire_automatique']=="ondemand" AND
+	if (!isset($GLOBALS['meta']['sommaire_automatique'])
+		or $GLOBALS['meta']['sommaire_automatique'] == 'on'
+		or ($GLOBALS['meta']['sommaire_automatique'] == 'ondemand' and
 		$has_sommaire)
-	){
-		$texte = sommaire_post_propre($texte,true,false,$niveau_max);
+	) {
+		$texte = sommaire_post_propre($texte, true, false, $niveau_max);
 	}
 	return $texte;
 }
@@ -148,33 +161,41 @@ function sommaire_propre($texte, $connect, $env){
  *   arguments supplementaires a passer au filtre
  * @return string
  */
-function sommaire_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL){
-	if(!strlen($texte)) return '';
+function sommaire_filtre_texte_echappe($texte, $filtre, $balises = '', $args = null) {
+	if (!strlen($texte)) {
+		return '';
+	}
 
-	if ($filtre!==false){
-		$fonction = chercher_filtre($filtre,false);
+	if ($filtre !== false) {
+		$fonction = chercher_filtre($filtre, false);
 		if (!$fonction) {
-			spip_log("sommaire_filtre_texte_echappe() : $filtre() non definie",_LOG_ERREUR);
+			spip_log("sommaire_filtre_texte_echappe() : $filtre() non definie", _LOG_ERREUR);
 			return $texte;
 		}
 		$filtre = $fonction;
 	}
 
 	// protection du texte
-	if($balises!==false) {
-		if(!strlen($balises)) $balises = _PROTEGE_BLOCS;//'html|code|cadre|frame|script';
-		else $balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
-		if (!function_exists('echappe_html'))
+	if ($balises !== false) {
+		if (!strlen($balises)) {
+			$balises = _PROTEGE_BLOCS;//'html|code|cadre|frame|script';
+		} else {
+			$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+		}
+		if (!function_exists('echappe_html')) {
 			include_spip('inc/texte_mini');
+		}
 		$texte = echappe_html($texte, 'FILTRETEXTECHAPPE', true, $balises);
 	}
 	// retour du texte simplement protege
-	if ($filtre===false) return $texte;
+	if ($filtre === false) {
+		return $texte;
+	}
 	// transformation par $fonction
-	if (!$args)
+	if (!$args) {
 		$texte = $filtre($texte);
-	else {
-		array_unshift($args,$texte);
+	} else {
+		array_unshift($args, $texte);
 		$texte = call_user_func_array($filtre, $args);
 	}
 
@@ -182,7 +203,7 @@ function sommaire_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL)
 	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
 }
 
-function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max=''){
+function sommaire_filtre($texte, $ajoute = true, $sommaire_seul = false, $niveau_max = '') {
 	$sommaire = sommaire_recenser($texte);
 
 	// le niveau max peut être passé en paramètre (via la balise texte ou squelette)
@@ -192,32 +213,34 @@ function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max
 	// on filtre les entrées du sommaire selon le niveau max
 	$sommaire = sommaire_filtrer_niveaux($sommaire, $niveau_max);
 
-	if ($ajoute OR $sommaire_seul){
+	if ($ajoute or $sommaire_seul) {
 		// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
-		$pattern = "/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/";
-		$sommaire = recuperer_fond("modeles/sommaire",array('sommaire'=>$sommaire,'niveau_max'=>$niveau_max));
+		$pattern = '/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/';
+		$sommaire = recuperer_fond('modeles/sommaire', array('sommaire' => $sommaire, 'niveau_max' => $niveau_max));
 		$sommaire = "<!--sommaire-->$sommaire<!--/sommaire-->";
-		if ($sommaire_seul)
+		if ($sommaire_seul) {
 			return $sommaire;
+		}
 		if (preg_match($pattern, $texte)) {
 			$texte = preg_replace($pattern, $sommaire, $texte);
+		} else {
+			$texte = $sommaire . $texte;
 		}
 		/*if ($p = strpos($texte,"<sommaire>") OR $p = strpos($texte,"[sommaire]")){
 			$texte = substr_replace($texte,$sommaire,$p,strlen("<sommaire>"));
 		}*/
-		else
-			$texte = $sommaire . $texte;
 	}
 
 	return $texte;
 }
 
-function sommaire_post_propre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max=''){
+function sommaire_post_propre($texte, $ajoute = true, $sommaire_seul = false, $niveau_max = '') {
 
-	if (strpos($texte, '<h')!==false)
-		$texte = sommaire_filtre_texte_echappe($texte,'sommaire_filtre','html|code|cadre|frame|script|acronym|cite',array($ajoute,$sommaire_seul,$niveau_max));
-	elseif ($sommaire_seul)
+	if (strpos($texte, '<h') !== false) {
+		$texte = sommaire_filtre_texte_echappe($texte, 'sommaire_filtre', 'html|code|cadre|frame|script|acronym|cite', array($ajoute,$sommaire_seul,$niveau_max));
+	} elseif ($sommaire_seul) {
 		return '';
+	}
 	return $texte;
 }
 
@@ -233,13 +256,13 @@ function sommaire_recenser(&$texte) {
 		return $sommaire;
 	}
 
-	$debutsommairedejala = strpos($texte,'<!--sommaire-->');
-	$finsommairedejala = strpos($texte,'<!--/sommaire-->');
+	$debutsommairedejala = strpos($texte, '<!--sommaire-->');
+	$finsommairedejala = strpos($texte, '<!--/sommaire-->');
 
 	// trouver le niveau mini des hn qui consitue le niveau 1 du sommaire
 	$toplevel = 6;
-	foreach($matches as $m) {
-		$toplevel = min($toplevel,$m[2]);
+	foreach ($matches as $m) {
+		$toplevel = min($toplevel, $m[2]);
 		if ($toplevel==1) {
 			break;
 		}
@@ -249,12 +272,11 @@ function sommaire_recenser(&$texte) {
 	$currentpos = 0;
 	$titleretour = attribut_html(_T('sommaire:titre_retour_sommaire'));
 
-	foreach($matches as $m){
-		if (($pos = strpos($texte, $m[0], $currentpos))!==false
-		  AND ($pos<$debutsommairedejala OR $pos>=$finsommairedejala)) {
-
+	foreach ($matches as $m) {
+		if (($pos = strpos($texte, $m[0], $currentpos)) !==false
+			and ($pos < $debutsommairedejala or $pos >= $finsommairedejala)) {
 			$titre = $m[3];
-			$titre = preg_replace(",</?a\b[^>]*>,Uims", "", $titre);
+			$titre = preg_replace(",</?a\b[^>]*>,Uims", '', $titre);
 			$ancre = sommaire_intertitre_ancre($titre, $m, $ancres_vues);
 			$ancres_vues[] = $ancre;
 
@@ -266,15 +288,15 @@ function sommaire_recenser(&$texte) {
 			);
 
 			$lien_back = "<a class='sommaire-back' href='#s-$ancre' title='$titleretour'></a>";
-			$h = inserer_attribut($m[1],"id",$ancre).retire_ancres_sommaire($m[3]).$lien_back.$m[4];
-			$texte = substr_replace($texte,$h,$pos,strlen($m[0]));
+			$h = inserer_attribut($m[1], 'id', $ancre).retire_ancres_sommaire($m[3]).$lien_back.$m[4];
+			$texte = substr_replace($texte, $h, $pos, strlen($m[0]));
 			$currentpos = $pos + strlen($h);
 		}
 	}
 
 	if (count($sommaire)) {
 		// ajouter le nombre de liens en classe sur chaque ancre (masquage CSS)
-		$c = "sommaire-back-".count($sommaire);
+		$c = 'sommaire-back-'.count($sommaire);
 		$texte = str_replace("<a class='sommaire-back'", "<a class='sommaire-back $c'", $texte);
 	}
 
@@ -282,29 +304,33 @@ function sommaire_recenser(&$texte) {
 	return $sommaire;
 }
 
-function sommaire_intertitre_ancre($titre, $h, $ancres_vues=array()){
+function sommaire_intertitre_ancre($titre, $h, $ancres_vues = array()) {
 	// un id sur le hn deja ?
-	if ($id = extraire_attribut($h[1],"id"))
+	if ($id = extraire_attribut($h[1], 'id')) {
 		return $id;
+	}
 
 	// generer une ancre a partir du titre
 	$ancre = trim(textebrut($titre));
 	$ancre = translitteration($ancre);
-	$ancre = couper($ancre,80);
-	$ancre = preg_replace(",\W+,","-",$ancre);
-	$ancre = trim($ancre,"-");
-	if (!preg_match(",^[a-z],i",$ancre))
+	$ancre = couper($ancre, 80);
+	$ancre = preg_replace(',\W+,', '-', $ancre);
+	$ancre = trim($ancre, '-');
+	if (!preg_match(',^[a-z],i', $ancre)) {
 		$ancre = "t$ancre";
+	}
 
-	if (!in_array($ancre,$ancres_vues))
+	if (!in_array($ancre, $ancres_vues)) {
 		return $ancre;
+	}
 
-	$md5 = substr(md5($titre),0,4);
-	if (!in_array("$ancre-$md5",$ancres_vues))
+	$md5 = substr(md5($titre), 0, 4);
+	if (!in_array("$ancre-$md5", $ancres_vues)) {
 		return "$ancre-$md5";
+	}
 
 	$i = 2;
-	while (in_array("$ancre-$i",$ancres_vues)){
+	while (in_array("$ancre-$i", $ancres_vues)) {
 		$i++;
 	}
 	return "$ancre-$i";
@@ -320,18 +346,17 @@ function sommaire_intertitre_ancre($titre, $h, $ancres_vues=array()){
  * @return array
  *     tableau associatif des entrées du sommaire expurgé de certaines entrées
  */
-function sommaire_filtrer_niveaux($sommaire, $niveau_max=''){
+function sommaire_filtrer_niveaux($sommaire, $niveau_max = '') {
 
 	$niveau_max = intval($niveau_max);
-	if ($niveau_max <= 0 OR $niveau_max > 5) {
+	if ($niveau_max <= 0 or $niveau_max > 5) {
 		return $sommaire;
 	}
 
 	foreach ($sommaire as $k => $v) {
-		if (
-			isset($v['niveau'])
-			AND is_int($v['niveau'])
-			AND $v['niveau'] > $niveau_max
+		if (isset($v['niveau'])
+			and is_int($v['niveau'])
+			and $v['niveau'] > $niveau_max
 		) {
 			unset($sommaire[$k]);
 		}
@@ -339,5 +364,3 @@ function sommaire_filtrer_niveaux($sommaire, $niveau_max=''){
 
 	return $sommaire;
 }
-
-
