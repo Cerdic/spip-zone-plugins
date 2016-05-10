@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -30,7 +32,7 @@ function extracteur_odt($fichier, &$charset, $bin = '', $opt = '') {
 		$texte = odt2text($fichier);
 
 		//Test si le retour n'est plus vide
-		if (($texte) && ($texte != "")) {
+		if (($texte) && ($texte != '')) {
 			spip_log('Extraction ODT de ' . $fichier . ' terminee avec succes', 'extract');
 			return $texte;
 		} else {
@@ -42,4 +44,3 @@ function extracteur_odt($fichier, &$charset, $bin = '', $opt = '') {
 	}
 
 }
-?>

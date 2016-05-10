@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -42,4 +44,3 @@ function extracteur_pptx($fichier, &$charset, $bin = '', $opt = '') {
 	}
 
 }
-?>

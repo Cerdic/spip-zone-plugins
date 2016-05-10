@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -42,7 +44,7 @@ function extracteur_xls($fichier, &$charset, $bin = '', $opt = '') {
 	$sortie = exec($cmd, $output, $return_var);
 	if ($return_var != 0) {
 		if ($return_var == 69) {
-			$erreur = "Le contenu de ce fichier XLS est protégé.";
+			$erreur = 'Le contenu de ce fichier XLS est protégé.';
 			spip_log('Erreur extraction ' . $fichier . ' protege (code ' . $return_var . ') : ' . $erreur, 'extract');
 			$return_var = 3;
 			return $return_var;
@@ -58,4 +60,3 @@ function extracteur_xls($fichier, &$charset, $bin = '', $opt = '') {
 		return $texte;
 	}
 }
-?>

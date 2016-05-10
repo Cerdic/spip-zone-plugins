@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -18,8 +20,9 @@ function extracteur_rtf($fichier, &$charset) {
 	$charset = 'iso-8859-1';
 
 	@exec('metamail -d -q -b -c application/rtf ' . escapeshellarg($fichier), $r, $e);
-	if (!$e)
+	if (!$e) {
 		return @join(' ', $r);
+	}
 
 	# wvText
 	# http://wvware.sourceforge.net/
@@ -27,8 +30,9 @@ function extracteur_rtf($fichier, &$charset) {
 	@exec('wvText ' . escapeshellarg($fichier) . '> ' . $temp, $r, $e);
 	lire_fichier($temp, $contenu);
 	@unlink($temp);
-	if (!$e)
+	if (!$e) {
 		return $contenu;
+	}
 
 	# unrtf
 	# http://www.gnu.org/software/unrtf/unrtf.html
@@ -42,15 +46,15 @@ function extracteur_rtf($fichier, &$charset) {
 		$a = preg_replace(',</?font\b[^>]*>,i', '', $a);
 		$a = supprimer_tags($a);
 		$a = preg_replace("/\n_ /", "\n\n", $a);
-		$a = preg_replace("/{{([^}]+?)\n* *}}/", "{{{ $1 }}}", $a);
-		$a = preg_replace("/^ +/m", "", $a);
-		$a = preg_replace("/^ +/m", "", $a);
-		$a = str_replace("``", "&#8220;", $a);
-		$a = str_replace("''", "&#8221;", $a);
-		$a = str_replace("&ndash;", "--", $a);
+		$a = preg_replace("/{{([^}]+?)\n* *}}/", '{{{ $1 }}}', $a);
+		$a = preg_replace('/^ +/m', '', $a);
+		$a = preg_replace('/^ +/m', '', $a);
+		$a = str_replace('``', '&#8220;', $a);
+		$a = str_replace("''", '&#8221;', $a);
+		$a = str_replace('&ndash;', '--', $a);
 		$a = preg_replace("/`(.*?)'/S", '&#8216;\1&#8217;', $a);
 		$a = preg_replace("/}}} +\r/S", "}}}\r", $a);
-		$a = str_replace("&hellip;", "...", $a);
+		$a = str_replace('&hellip;', '...', $a);
 		$charset = 'utf-8';
 		return $a;
 	}
@@ -58,8 +62,7 @@ function extracteur_rtf($fichier, &$charset) {
 	# catdoc
 	# http://www.45.free.net/~vitus/ice/catdoc/
 	@exec('catdoc ' . escapeshellarg($fichier), $r, $e);
-	if (!$e)
+	if (!$e) {
 		return join(' ', $r);
-
+	}
 }
-?>

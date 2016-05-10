@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -35,29 +37,31 @@ function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 
 	spip_log('Extraction DOC avec '.$exe, 'extract');
 	$cmd = $exe.$options.$fichier;
-	$sortie = exec($cmd, $output, $return_var); 
-	if($return_var != 0){
-	    if ($return_var == 3) {
-	      $erreur = "Le contenu de ce fichier DOC est prot�g�.";
-		  spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
-		  return $return_var;
-	    }else{
+	$sortie = exec($cmd, $output, $return_var);
+	if ($return_var != 0) {
+		if ($return_var == 3) {
+			$erreur = 'Le contenu de ce fichier DOC est protégé.';
+			spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
+			return $return_var;
+		} else {
 			spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
-		    return false;
+			return false;
 		}
-	}else{
+	} else {
 		//Go
-		spip_log('Fichier DOC '.$fichier.' a ete extrait avec '.$options,'extract');
-		foreach($output as $out){
-			$texte .= $out."\n"; 
+		spip_log('Fichier DOC '.$fichier.' a ete extrait avec '.$options, 'extract');
+		foreach ($output as $out) {
+			$texte .= $out."\n";
 		}
 		return $texte;
 	}
-	
+
 	//Anciens developpements pour autres binaires que catdoc. Antiword devrait fonctionner avec le code ci-dessus egalement.
 	#metamail
 	@exec('metamail -d -q -b -c application/msword '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return @join(' ', $r);
+	if (!$e) {
+		return @join(' ', $r);
+	}
 
 	# wvText
 	# http://wvware.sourceforge.net/
@@ -65,11 +69,14 @@ function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 	@exec('wvText '.escapeshellarg($fichier).'> '.$temp, $r, $e);
 	lire_fichier($temp, $contenu);
 	@unlink($temp);
-	if (!$e) return $contenu;
+	if (!$e) {
+		return $contenu;
+	}
 
 	# antiword
 	# http://www.winfield.demon.nl/
 	@exec('antiword '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return @join(' ', $r);
+	if (!$e) {
+		return @join(' ', $r);
+	}
 }
-?>

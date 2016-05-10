@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -52,10 +54,8 @@ function extracteur_xlsx($fichier, &$charset, $bin = '', $opt = '') {
 			spip_log('Extraction XLSX de ' . $fichier . ' a echoue', 'extract');
 			return false;
 		}
-
 	} else {
 		spip_log('Extraction XLSX a echoue : la class SimpleXLSX (lib/simplexlsx.class.php) ne semble pas etre disponible', 'extract');
 		return false;
 	}
 }
-?>

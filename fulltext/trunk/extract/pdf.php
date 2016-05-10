@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
@@ -35,7 +37,7 @@ function extracteur_pdf($fichier, &$charset, $bin = '', $opt = '') {
 	$sortie = exec($cmd, $output, $return_var);
 	if ($return_var != 0) {
 		if ($return_var == 3) {
-			$erreur = "Le contenu de ce fichier PDF est protégé.";
+			$erreur = 'Le contenu de ce fichier PDF est protégé.';
 			spip_log('Erreur extraction ' . $fichier . ' protege (code ' . $return_var . ') : ' . $erreur, 'extract');
 			return $return_var;
 		} else {
@@ -56,4 +58,3 @@ function extracteur_pdf($fichier, &$charset, $bin = '', $opt = '') {
 		}
 	}
 }
-?>

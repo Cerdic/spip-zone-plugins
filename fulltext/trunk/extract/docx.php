@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Sait-on extraire ce format ?
 // TODO: ici tester si les classes fonctionnent
@@ -29,7 +31,7 @@ function extracteur_docx($fichier, &$charset, $bin = '', $opt = '') {
 		//Utilisation de la fonction docx2text, renvoyant une chaine vide en cas d'erreur
 		$texte = docx2text($fichier);
 		//Test si le retour n'est plus vide
-		if (($texte) && ($texte != "")) {
+		if (($texte) && ($texte != '')) {
 			spip_log('Extraction DOCX de ' . $fichier . ' terminee avec succes', 'extract');
 			return $texte;
 		} else {
@@ -41,4 +43,3 @@ function extracteur_docx($fichier, &$charset, $bin = '', $opt = '') {
 	}
 
 }
-?>
