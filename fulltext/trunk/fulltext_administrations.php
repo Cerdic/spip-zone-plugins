@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'installation, mise a jour de la base
@@ -8,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function fulltext_upgrade($nom_meta_base_version,$version_cible){
+function fulltext_upgrade($nom_meta_base_version, $version_cible) {
 	$current_version = 0.0;
 	$maj = array();
 	$maj['create'] = array(
@@ -37,4 +39,3 @@ function fulltext_upgrade($nom_meta_base_version,$version_cible){
 function fulltext_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
-?>

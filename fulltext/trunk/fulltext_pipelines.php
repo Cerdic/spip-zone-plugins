@@ -3,8 +3,9 @@
  * Plugin FullText/Gestion des documents
  */
 
-if (!defined("_ECRIRE_INC_VERSION"))
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
+}
 
 function fulltext_taches_generales_cron($taches_generales) {
 	$fulltext = @unserialize($GLOBALS['meta']['fulltext']);
@@ -17,4 +18,3 @@ function fulltext_taches_generales_cron($taches_generales) {
 	}
 	return $taches_generales;
 }
-?>
