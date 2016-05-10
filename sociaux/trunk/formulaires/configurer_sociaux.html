@@ -29,14 +29,14 @@
 			<fieldset>
 				<h3 class="legend"><:sociaux:reseaux_sociaux_fieldset:></h3>
 				<p><:sociaux:cfg_explication:></p>
-				#SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email,tripadvisor,vimeo,flickr}}
+				[(#SET{rezo,[(#PIPELINE{sociaux_lister,#ARRAY{args,#ARRAY{skel,#SQUELETTE,date,#ENV**{date}},data,#ARRAY}})]})]
 				<B_rezo>
 					<ul class="editer-groupe">
-					<BOUCLE_rezo (DATA){source tableau,#GET{rezo}}>
+					<BOUCLE_rezo (DATA){source tableau,#GET{rezo,#ARRAY}}>
 						<!-- #VALEUR -->
 						<li class="editer editer-[(#VALEUR)]">
-							<label for="#VALEUR">[(#VALEUR|ucfirst)]</label>
-							<input type="text" name="#VALEUR" id="#VALEUR" value="[(#ENV{#VALEUR})]" class="text"/>
+							<label for="socicon-[(#CLE)]">[(#VALEUR)]</label>
+							<input type="text" name="#CLE" id="socicon-[(#CLE)]" value="[(#ENV{#CLE})]" class="text"/>
 						</li>
 					</BOUCLE_rezo>
 					</ul>

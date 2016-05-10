@@ -8,10 +8,10 @@ http://www.socicon.com/how.php
 <!-- sociaux -->
 <div class="sociaux">
 	<ul class="sociaux-list">
-		#SET{rezo,#LISTE{facebook,twitter,instagram,google-plus,blogger,pinterest,linkedin,youtube,rss,email,tripadvisor,vimeo,flickr}}
+		[(#SET{rezo,[(#PIPELINE{sociaux_lister,#ARRAY{args,#ARRAY{skel,#SQUELETTE,date,#ENV**{date}},data,#ARRAY}})]})]
 		<BOUCLE_rezo (DATA) {source tableau,#GET{rezo}}>
-		[(#CONFIG{sociaux/#VALEUR}|oui)
-		<li> <a href="#CONFIG{sociaux/#VALEUR}" class="#VALEUR">[(#CONFIG{sociaux/css}|oui)<span class="socicon socicon-#VALEUR"></span> ]<span class="name">[(#VALEUR|ucfirst)]</span></a></li>]</BOUCLE_rezo>
+		[(#CONFIG{sociaux/#CLE}|oui)
+		<li> <a href="#CONFIG{sociaux/#CLE}" class="#CLE">[(#CONFIG{sociaux/css}|oui)<span class="socicon socicon-#CLE"></span> ]<span class="name">[(#VALEUR)]</span></a></li>]</BOUCLE_rezo>
 	</ul>
 </div>
 <!-- #sociaux -->
