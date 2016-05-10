@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Vérifié une valeur suivant une expression régulière.
@@ -15,15 +17,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-function verifier_regex_dist($valeur, $options=array()){
+function verifier_regex_dist($valeur, $options = array()) {
 	$erreur = _T('verifier:erreur_regex');
-	if (!is_string($valeur))
+	if (!is_string($valeur)) {
 		return $erreur;
+	}
 
-	if (preg_match($options['modele'], $valeur))
+	if (preg_match($options['modele'], $valeur)) {
 		return '';
+	}
 
 	return $erreur;
 }
-
-?>

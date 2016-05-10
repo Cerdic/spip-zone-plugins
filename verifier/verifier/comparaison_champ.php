@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Compare la valeur avec un autre champ du _request().
@@ -13,17 +15,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-function verifier_comparaison_champ_dist($valeur, $options=array()){
+function verifier_comparaison_champ_dist($valeur, $options = array()) {
 	include_spip('inc/filtres');
-	
+
 	// On vérifie qu'on a bien un champ à comparer
-	if (!$champ = $options['champ'] or !is_scalar($champ)) return true;
-	else $valeur_champ = _request($champ);
-	
+	if (!$champ = $options['champ'] or !is_scalar($champ)) {
+		return true;
+	} else {
+		$valeur_champ = _request($champ);
+	}
+
 	// On cherche le nom du champ
 	$nom_champ = $options['nom_champ'] ? $options['nom_champ'] : $champ;
-	
-	switch ($options['comparaison']){
+
+	switch ($options['comparaison']) {
 		case 'petit':
 			return $valeur < $valeur_champ ? '' : _T('verifier:erreur_comparaison_petit', array('nom_champ'=>$nom_champ));
 			break;
@@ -44,4 +49,3 @@ function verifier_comparaison_champ_dist($valeur, $options=array()){
 			break;
 	}
 }
-

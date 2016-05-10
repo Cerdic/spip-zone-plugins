@@ -1,10 +1,12 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
- * Validation d'un SIREN ou d'un SIRET 
+ * Validation d'un SIREN ou d'un SIRET
  *
  * 1/ Un SIREN comporte STRICTEMENT 9 caractères
  * 1b/ Un SIRET comporte strictement 14 caractères
@@ -19,11 +21,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-function verifier_siren_siret_dist($valeur, $options=array()){
-	if (!$options['mode'] or !in_array($options['mode'], array('siren', 'siret'))){
+function verifier_siren_siret_dist($valeur, $options = array()) {
+	if (!$options['mode'] or !in_array($options['mode'], array('siren', 'siret'))) {
 		$mode = 'siren';
-	}
-	else{
+	} else {
 		$mode = $options['mode'];
 	}
 
@@ -31,43 +32,74 @@ function verifier_siren_siret_dist($valeur, $options=array()){
 	$valeur = preg_replace('/\s/', '', $valeur);
 
 	// Test de SIREN
-	if ($mode == 'siren'){
+	if ($mode == 'siren') {
 		$erreur = _T('verifier:erreur_siren');
-		if (!is_string($valeur))
+		if (!is_string($valeur)) {
 			return $erreur;
+		}
 
 		// Si pas 9 caractère, c'est déjà foiré !
-		if(!preg_match('/^[0-9]{9}$/',$valeur)) return $erreur;
-	
+		if (!preg_match('/^[0-9]{9}$/', $valeur)) {
+			return $erreur;
+		}
+
 		// On vérifie la clef de controle "1-2"
 		$somme = 0;
 		$i = 0; // Les impaires
-		while($i < 9){ $somme += $valeur[$i]; $i+=2; }
+		while ($i < 9) {
+			$somme += $valeur[$i];
+			$i+=2;
+		}
 		$i = 1; // Les paires !
-		while($i < 9){ if((2*$valeur[$i])>9) $somme += (2*$valeur[$i])-9; else $somme += 2*$valeur[$i]; $i+=2; }
-	
-		if ($somme % 10) return $erreur;
-	}
-	// Test de SIRET
-	else{
-		$erreur = _T('verifier:erreur_siret');
-		if (!is_string($valeur))
+		while ($i < 9) {
+			if ((2*$valeur[$i])>9) {
+				$somme += (2*$valeur[$i])-9;
+			} else {
+				$somme += 2*$valeur[$i];
+				$i+=2;
+			}
+		}
+
+		if ($somme % 10) {
 			return $erreur;
+		}
+	} else {
+		// Test de SIRET
+		$erreur = _T('verifier:erreur_siret');
+		if (!is_string($valeur)) {
+			return $erreur;
+		}
 
 		// Si pas 14 caractère, c'est déjà foiré !
-		if(!preg_match('/^[0-9]{14}$/',$valeur)) return $erreur;
-		if(preg_match('/[0]{8}/',$valeur)) return $erreur;
+		if (!preg_match('/^[0-9]{14}$/', $valeur)) {
+			return $erreur;
+		}
+		if (preg_match('/[0]{8}/', $valeur)) {
+			return $erreur;
+		}
 
 		// Pour le SIRET on vérifie la clef de controle "1-2" avec les impaires *2
 		// (vs pairs*2 pour SIREN, parce qu'on part de la fin)
 		$somme = 0;
 		$i = 1; // Les paires
-		while($i < 14){ $somme += $valeur[$i]; $i+=2; }
+		while ($i < 14) {
+			$somme += $valeur[$i];
+			$i+=2;
+		}
 		$i = 0; // Les impaires !
-		while($i < 14){ if((2*$valeur[$i])>9) $somme += (2*$valeur[$i])-9; else $somme += 2*$valeur[$i]; $i+=2; }
-	
-		if($somme % 10) return $erreur;
+		while ($i < 14) {
+			if ((2*$valeur[$i])>9) {
+				$somme += (2*$valeur[$i])-9;
+			} else {
+				$somme += 2*$valeur[$i];
+				$i+=2;
+			}
+		}
+
+		if ($somme % 10) {
+			return $erreur;
+		}
 	}
-	
+
 	return '';
 }
