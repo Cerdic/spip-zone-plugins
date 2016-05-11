@@ -5,38 +5,42 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline insert_head (SPIP)
- * 
+ *
  * @param string $flux
  * @return string
  */
-function blocsdepliables_insert_head($flux){
-	$flux .= "<script type='text/javascript' src='".timestamp(find_in_path("js/blocs.js"))."'></script>";
+function blocsdepliables_insert_head($flux) {
+	$flux .= "<script type='text/javascript' src='".timestamp(find_in_path('js/blocs.js'))."'></script>";
 	return $flux;
 }
 
-function blocsdepliables_insert_head_css($flux){
-	include_spip("inc/config");
-	$slide = lire_config('blocsdepliables/animation','aucun');
-	if ($slide=="millisec") $slide = lire_config('blocsdepliables/duree',100);
-	$js_cookie = "";
-	if (lire_config('blocsdepliables/cookie',0)){
-		$js_cookie = find_in_path("javascript/jquery.cookie.js");
+function blocsdepliables_insert_head_css($flux) {
+	include_spip('inc/config');
+	$slide = lire_config('blocsdepliables/animation', 'aucun');
+	if ($slide == 'millisec') {
+		$slide = lire_config('blocsdepliables/duree', 100);
+	}
+	$js_cookie = '';
+	if (lire_config('blocsdepliables/cookie', 0)) {
+		$js_cookie = find_in_path('javascript/jquery.cookie.js');
 	}
 
-	$js = "var blocs_replier_tout = ".intval(lire_config('blocsdepliables/unique',0)).";
-var blocs_slide = "._q($slide).";
-var blocs_title_sep = /".preg_quote(_BLOC_TITLE_SEP)."/g;
-var blocs_title_def = "._q(_T('blocsdepliables:bloc_deplier')._BLOC_TITLE_SEP._T('blocsdepliables:bloc_replier')).";
+	$js = 'var blocs_replier_tout = '.intval(lire_config('blocsdepliables/unique', 0)).';
+var blocs_slide = '._q($slide).';
+var blocs_title_sep = /'.preg_quote(_BLOC_TITLE_SEP).'/g;
+var blocs_title_def = '._q(_T('blocsdepliables:bloc_deplier')._BLOC_TITLE_SEP._T('blocsdepliables:bloc_replier')).";
 var blocs_js_cookie = '$js_cookie';
 ";
 	$flux =
 		"<script type='text/javascript'>/*<![CDATA[*/\n$js\n/*]]>*/</script>"
 		. $flux
-		. '<link rel="stylesheet" type="text/css" href="'.timestamp(find_in_path("css/blocs.css")).'" />';
+		. '<link rel="stylesheet" type="text/css" href="'.timestamp(find_in_path('css/blocs.css')).'" />';
 
 	return $flux;
 }
@@ -56,16 +60,22 @@ var blocs_js_cookie = '$js_cookie';
 function blocsdepliables_callback($matches) {
 	list($titre, $corps) = preg_split(',(\n\n|\r\n\r\n|\r\r),', trim($matches[3]), 2);
 	// pas de corps !
-	if(!strlen($corps = trim($corps))) {
+	if (!strlen($corps = trim($corps))) {
 		$corps = $titre;
 		$titre = preg_replace(',[\n\r]+,s', ' ', couper(propre($titre), 30));
 	}
 	// pas d'intertitre !
 	$titre = preg_replace(',^{{{(.*)}}}$,', '$1', trim($titre));
-	if(!strlen($titre)) $titre = '???';
+	if (!strlen($titre)) {
+		$titre = '???';
+	}
 	// un resume facultatif
-	if(preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $corps, $res))
-		{ $corps = $res[2]; $res = $res[1]; } else $res = '';
+	if (preg_match(',<resume>(.*)</resume>\s?(.*)$,ms', $corps, $res)) {
+		$corps = $res[2];
+		$res = $res[1];
+	} else {
+		$res = '';
+	}
 	// types de blocs : bloc|invisible|visible
 	if ($matches[1]=='visible' || defined('_CS_PRINT')) {
 		$h = $d = '';
@@ -84,13 +94,15 @@ function blocsdepliables_callback($matches) {
 		:''; // valeur par defaut geree en JS
 	$hn = blocdepliable_balise_titre();
 	return "<div class='cs_blocs$b'><$hn class='blocs_titre$h blocs_click'><a href='javascript:;'>$titre</a></$hn>"
-		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>":"")
+		.(strlen($res)?"<div class='blocs_resume$r'>\n$res\n</div>" : '')
 		."<div class='blocs_destination$d'>\n\n".blocsdepliables_rempl($corps)."\n\n</div>$title</div>";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function blocsdepliables_rempl($texte) {
-	if (strpos($texte, '<')===false) return $texte;
+	if (strpos($texte, '<') === false) {
+		return $texte;
+	}
 	// balises blocs|visible|invisible : il faut un callback pour analyser l'interieur du texte
 	return preg_replace_callback(',<(bloc#?|visible#?|invisible#?|blocintertitre#?)([0-9]*)>(.*?)</\1\2>,ms', 'blocsdepliables_callback', $texte);
 }
@@ -113,33 +125,41 @@ function blocsdepliables_rempl($texte) {
  *   arguments supplementaires a passer au filtre
  * @return string
  */
-function blocsdepliables_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL){
-	if(!strlen($texte)) return '';
+function blocsdepliables_filtre_texte_echappe($texte, $filtre, $balises = '', $args = null) {
+	if (!strlen($texte)) {
+		return '';
+	}
 
-	if ($filtre!==false){
-		$fonction = chercher_filtre($filtre,false);
+	if ($filtre!==false) {
+		$fonction = chercher_filtre($filtre, false);
 		if (!$fonction) {
-			spip_log("blocsdepliables_filtre_texte_echappe() : $filtre() non definie",_LOG_ERREUR);
+			spip_log("blocsdepliables_filtre_texte_echappe() : $filtre() non definie", _LOG_ERREUR);
 			return $texte;
 		}
 		$filtre = $fonction;
 	}
 
 	// protection du texte
-	if($balises!==false) {
-		if(!strlen($balises)) $balises = _PROTEGE_BLOCS;//'html|code|cadre|frame|script';
-		else $balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
-		if (!function_exists('echappe_html'))
+	if ($balises !== false) {
+		if (!strlen($balises)) {
+			$balises = _PROTEGE_BLOCS;//'html|code|cadre|frame|script';
+		} else {
+			$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+		}
+		if (!function_exists('echappe_html')) {
 			include_spip('inc/texte_mini');
+		}
 		$texte = echappe_html($texte, 'FILTRETEXTECHAPPE', true, $balises);
 	}
 	// retour du texte simplement protege
-	if ($filtre===false) return $texte;
+	if ($filtre === false) {
+		return $texte;
+	}
 	// transformation par $fonction
-	if (!$args)
+	if (!$args) {
 		$texte = $filtre($texte);
-	else {
-		array_unshift($args,$texte);
+	} else {
+		array_unshift($args, $texte);
 		$texte = call_user_func_array($filtre, $args);
 	}
 
@@ -150,71 +170,75 @@ function blocsdepliables_filtre_texte_echappe($texte, $filtre, $balises='', $arg
 
 // fonction pipeline
 function blocsdepliables_pre_typo($texte) {
-	if (strpos($texte, '<')===false) return $texte;
+	if (strpos($texte, '<') === false) {
+		return $texte;
+	}
 	// on remplace apres echappement
 	return blocsdepliables_filtre_texte_echappe($texte, 'blocsdepliables_rempl');
 }
 
 // 2 fonctions pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function blocsdepliables_porte_plume_cs_pre_charger($flux) {
-	$r = array(array(
-		"id" => 'blocs_bloc',
-		"name" => _T('blocsdepliables:pp_blocs_bloc'),
-		"className" => 'blocs_bloc',
-		"replaceWith" => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
-		"display" => true), array(
-		"id" => 'blocs_visible',
-		"name" => _T('blocsdepliables:pp_blocs_visible'),
-		"className" => 'blocs_visible',
-		"replaceWith" => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
-		"display" => true));
-	if(function_exists('cs_pp_liste_barres')){
-		foreach(cs_pp_liste_barres('blocs') as $b) {
-			if($b!='forum') {
+	$r = array(
+		array(
+			'id' => 'blocs_bloc',
+			'name' => _T('blocsdepliables:pp_blocs_bloc'),
+			'className' => 'blocs_bloc',
+			'replaceWith' => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
+			'display' => true
+		),
+		array(
+			'id' => 'blocs_visible',
+			'name' => _T('blocsdepliables:pp_blocs_visible'),
+			'className' => 'blocs_visible',
+			'replaceWith' => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
+			'display' => true)
+		);
+	if (function_exists('cs_pp_liste_barres')) {
+		foreach (cs_pp_liste_barres('blocs') as $b) {
+			if ($b!='forum') {
 				$flux[$b] = isset($flux[$b])?array_merge($flux[$b], $r):$r;
 			}
 		}
-	}else{
-		
 	}
 	return $flux;
 }
 
 // 2 fonctions pour le plugin Porte Plume, s'il est present (SPIP>=2.0)
 function blocsdepliables_porte_plume_barre_pre_charger($flux) {
-	if(!function_exists('cs_pp_liste_barres')){
+	if (!function_exists('cs_pp_liste_barres')) {
 		$barre = &$flux['edition'];
-		if(defined('_DIR_PLUGIN_TYPOENLUMINEE')){
+		if (defined('_DIR_PLUGIN_TYPOENLUMINEE')) {
 			$barre->ajouterApres('barre_cadre', array(
-						"id" => 'blocs_bloc',
-						"name" => _T('blocsdepliables:pp_blocs_bloc'),
-						"className" => 'blocs_bloc',
-						"replaceWith" => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
-						"display" => true));
+				'id' => 'blocs_bloc',
+				'name' => _T('blocsdepliables:pp_blocs_bloc'),
+				'className' => 'blocs_bloc',
+				'replaceWith' => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
+				'display' => true));
 			$barre->ajouterApres('blocs_bloc', array(
-						"id" => 'blocs_visible',
-						"name" => _T('blocsdepliables:pp_blocs_visible'),
-						"className" => 'blocs_visible',
-						"replaceWith" => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
-						"display" => true));
-		}else{
+				'id' => 'blocs_visible',
+				'name' => _T('blocsdepliables:pp_blocs_visible'),
+				'className' => 'blocs_visible',
+				'replaceWith' => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
+				'display' => true));
+		} else {
 			$barre->set('header1', array(
 				// groupe formatage paragraphe
-				"dropMenu"    => array(
+				'dropMenu' => array(
 					// bouton <cadre>
 					array(
-						"id" => 'blocs_bloc',
-						"name" => _T('blocsdepliables:pp_blocs_bloc'),
-						"className" => 'blocs_bloc',
-						"replaceWith" => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
-						"display" => true
+						'id' => 'blocs_bloc',
+						'name' => _T('blocsdepliables:pp_blocs_bloc'),
+						'className' => 'blocs_bloc',
+						'replaceWith' => "\n<bloc>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</bloc>\n",
+						'display' => true
 					),
 					array(
-						"id" => 'blocs_visible',
-						"name" => _T('blocsdepliables:pp_blocs_visible'),
-						"className" => 'blocs_visible',
-						"replaceWith" => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
-						"display" => true
+						'id' => 'blocs_visible',
+						'name' => _T('blocsdepliables:pp_blocs_visible'),
+						'className' => 'blocs_visible',
+						'replaceWith' => "\n<visible>"._T('blocsdepliables:pp_un_titre')."\n\n"._T('blocsdepliables:pp_votre_texte')."\n</visible>\n",
+						'display' => true
 					)
 				)
 			));
@@ -228,5 +252,3 @@ function blocsdepliables_porte_plume_lien_classe_vers_icone($flux) {
 	$flux['blocs_visible'] = 'bloc_visible.png';
 	return $flux;
 }
-
-?>
