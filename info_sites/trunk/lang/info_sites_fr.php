@@ -20,10 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'btn_diagnostic' => 'Diagnostic',
-	'btn_diagnostic_maj' => 'Mise à jour des plugins',
+	'btn_diagnostic_maj' => 'Mettre à jour les plugins',
 	'btn_diagnostic_iso' => 'Diagnostic ISO',
 	'btn_label_actions' => 'Actions',
 	'btn_webservice_consultation' => 'Consulter le webservice',
+	'btn_telecharger' => 'Télécharger',
 
 	// C
 	'cfg_exemple' => 'Exemple',
