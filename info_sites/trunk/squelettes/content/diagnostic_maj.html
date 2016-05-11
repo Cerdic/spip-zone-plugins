@@ -6,10 +6,13 @@
 
 	[(#LOGO_PROJETS_SITE|image_reduire{150,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
 	<div class="clearfix"></div>]
-[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#LOGICIEL_NOM|strtolower)],'/diagnostic'})]})]
+	<BOUCLE_projets (PROJETS projets_sites_liens) {tout} {id_projets_site} {projets_sites_liens.objet="projet"}>
+		<h2><a href="#URL_PROJET">[(#NOM)]</a></h2>
+[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#_projets_site:LOGICIEL_NOM|strtolower)],'/maj',[_(#VERSIONING_TYPE|strtolower)]})]})]
 [(#CHEMIN{[(#GET{inclure}).html]}|?{
 	[(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
 	<:info_sites:diagnostic_logiciel_absent:>
 })]
+	</BOUCLE_projets>
 #BOITE_FERMER
 </BOUCLE_projets_site>

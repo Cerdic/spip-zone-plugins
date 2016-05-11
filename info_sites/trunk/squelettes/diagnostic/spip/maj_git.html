@@ -1,10 +1,7 @@
 <BOUCLE_principale (PROJETS_SITES) {id_projets_site}>[(#SET{lesmaj,#ARRAY})]
-[(#BOITE_OUVRIR{[
-<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>}) [(#TYPE_SITE|oui)[\((#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)\)]]</h2>
-],simple fiche_objet})]
 <textarea class="textarea" cols="100" rows="10">#!/bin/bash
 url_local=[(#SERVEUR_PATH)]
-<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {par /0}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{prefixe})],titre,[(#VALEUR{titre})], statut,[(#VALEUR{statut})], version,[(#VALEUR{version})]})]})]<BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_principale:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1}  {si (#GET{plugin/statut}|=={dist}|non)}>[(#VERSION|=={#_plugins_site:GET{plugin/version}}|non)[(#SET{lesmaj,[(#GET{lesmaj}|push{#PREFIXE})]})]
+<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau{plugins})} {par /prefixe}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{prefixe})],titre,[(#VALEUR{titre})], statut,[(#VALEUR{statut})], version,[(#VALEUR{version})]})]})]<BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_principale:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1}  {si (#GET{plugin/statut}|=={dist}|non)}>[(#VERSION|=={#_plugins_site:GET{plugin/version}}|non)[(#SET{lesmaj,[(#GET{lesmaj}|push{#PREFIXE})]})]
 # Branche [(#_principale:LOGICIEL_NOM)] [(#_principale:LOGICIEL_VERSION|version2branche)]
 cd ${url_local}/plugins/
 rm -rf [(#PREFIXE|strtolower)/]
