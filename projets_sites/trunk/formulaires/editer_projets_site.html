@@ -2,7 +2,14 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{editable})
+[(#REM)
+	Si on a un webservice, on ne touche pas aux champs mis à jour par ce dernier. On les cache par CSS car il s'avère que les disabled ne font plus bon ménage en SPIP 3.1.
+][(#SET{class_webservice,[(#ENV{webservice}|?{'hidden invisible',''})]})]
+[(#REM)
+	Mais si on est sur une création d'un nouveau site (new=oui), on ne doit pas mettre 'class_webservice'
+	sur les champs.
+][(#SET{class_webservice,[(#ENV{id_projets_site}|=={oui}|?{'',#GET{class_webservice}})]})]
+[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_projets_site' value='#ENV{id_projets_site}' />
@@ -20,24 +27,21 @@
 				<p class="explication"><:projets_site:texte_non_fonction_referencement:></p>
 			</fieldset>
 			]]
-[(#REM)
-	Si on a un webservice, on ne touche pas aux champs mis à jour par ce dernier
-][(#SET{disabled,[(#ENV{webservice}|?{'oui',''})]})]
-[(#REM)
-	Mais si on est sur une création d'un nouveau site (new=oui), on ne doit pas mettre 'disabled'
-	sur les champs, car SPIP 'reconnait' les champs disabled et ne les insère pas dans la table.
-][(#SET{disabled,[(#ENV{id_projets_site}|=={oui}|?{'',#GET{disabled}})]})]
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#GET{class_webservice}|=={'hidden invisible'}|oui)
+				[(#SAISIE{explication,webservice_active_explication,
+					texte=<:projets_site:webservice_active_explication:>})]
+			]
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:projets_site:titre_label:>,
 				size=255,
 				maxlength=255,
-				disable=[(#GET{disabled})]})]
+				conteneur_class=[(#GET{class_webservice})]})]
 
 			[(#SAISIE{selection, type_site, obligatoire=oui,
 				label=<:projets_site:type_site_label:>,
 				datas=#ARRAY{01local,<:projets_site:type_site_01local:>,02dev,<:projets_site:type_site_02dev:>,03inte,<:projets_site:type_site_03inte:>,04test,<:projets_site:type_site_04test:>,05rec,<:projets_site:type_site_05rec:>,06prep,<:projets_site:type_site_06prep:>,07prod,<:projets_site:type_site_07prod:>},
-				defaut='07prod',disable=[(#GET{disabled})]})]
+				defaut='07prod',conteneur_class=[(#GET{class_webservice})]})]
 
 			[(#SAISIE{input, uniqid,
 				label=<:projets_site:uniqid_label:>,
@@ -51,7 +55,7 @@
 
 			[(#SAISIE{date, date_creation,
 				label=<:projets_site:date_creation_label:>,
-				disable=[(#GET{disabled})]})]
+				conteneur_class=[(#GET{class_webservice})]})]
 
 			[(#SAISIE{textarea, descriptif,
 				label=<:projets_site:descriptif_label:>,
@@ -72,7 +76,7 @@
 					label=<:projets_site:fo_url_label:>,
 					size=255,
 					maxlength=255,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, fo_login,
 					label=<:projets_site:fo_login_label:>,
@@ -112,7 +116,7 @@
 		</fieldset>
 
 <!-- Logiciel -->
-		<fieldset class="editer_logiciel_fieldset">
+		<fieldset class="editer_logiciel_fieldset[ (#GET{class_webservice})]">
 			<h3 class="legend" id="editer_logiciel_legend">
 				<:projets_site:logiciel_fieldset_label:>
 			</h3>
@@ -120,25 +124,25 @@
 				[(#SAISIE{input, logiciel_nom, obligatoire=oui,
 					label=<:projets_site:logiciel_nom_label:>,
 					size=25,maxlength=25,
-					disable=[(#GET{disabled})],
+					conteneur_class=[(#GET{class_webservice})],
 					datas=#ENV{liste_logiciels_nom}})]
 
 				[(#SAISIE{input, logiciel_version, obligatoire=oui,
 					label=<:projets_site:logiciel_version_label:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})],
+					conteneur_class=[(#GET{class_webservice})],
 					datas=#ENV{liste_logiciels_version}})]
 
 				[(#SAISIE{input, logiciel_revision,
 					label=<:projets_site:logiciel_revision_label:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, logiciel_charset,
 					label=<:projets_site:logiciel_charset_label:>,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{explication,logiciel_plugins_explication,
 					inserer_debut=<:projets_site:logiciel_plugins_titre_explication:>,
@@ -147,13 +151,13 @@
 				[(#SAISIE{textarea, logiciel_plugins,
 					label=<:projets_site:logiciel_plugins_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- Les auteurs -->
-		<fieldset class="editer_auteurs_fieldset">
+		<fieldset class="editer_auteurs_fieldset[ (#GET{class_webservice})]">
 			<h3 class="legend" id="editer_auteurs_legend">
 				<:projets_site:auteurs_fieldset_label:>
 			</h3>
@@ -165,12 +169,12 @@
 				[(#SAISIE{textarea, auteurs_admin,
 					label=<:projets_site:auteurs_admin_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{textarea, auteurs_webmestres,
 					label=<:projets_site:auteurs_webmestres_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
@@ -185,24 +189,24 @@
 					label=<:projets_site:serveur_nom_label:>,
 					size=255,
 					maxlength=255,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, serveur_port,
 					label=<:projets_site:serveur_port_label:>,
 					size=4,
 					maxlength=4,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, serveur_path,
 					label=<:projets_site:serveur_path_label:>,
 					size=255,
 					maxlength=255,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{textarea, serveur_logiciel,
 					label=<:projets_site:serveur_logiciel_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, serveur_surveillance,
 					label=<:projets_site:serveur_surveillance_label:>,
@@ -213,7 +217,7 @@
 		</fieldset>
 
 <!-- Apache -->
-		<fieldset class="editer_apache_fieldset">
+		<fieldset class="editer_apache_fieldset[ (#GET{class_webservice})]">
 			<h3 class="legend" id="editer_apache_legend">
 				<:projets_site:apache_fieldset_label:>
 			</h3>
@@ -221,13 +225,13 @@
 				[(#SAISIE{textarea, apache_modules,
 					label=<:projets_site:apache_modules_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 
 <!-- PHP -->
-		<fieldset class="editer_php_fieldset">
+		<fieldset class="editer_php_fieldset[ (#GET{class_webservice})]">
 			<h3 class="legend" id="editer_php_legend">
 				<:projets_site:php_fieldset_label:>
 			</h3>
@@ -236,22 +240,22 @@
 					label=<:projets_site:php_version_label:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, php_memory,
 					label=<:projets_site:php_memory_label:>,
 					size=10,
 					maxlength=10,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{textarea, php_extensions,
 					label=<:projets_site:php_extensions_label:>,
 					rows=6,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, php_timezone,
 					label=<:projets_site:php_timezone_label:>,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
@@ -325,25 +329,25 @@
 					explication=<:projets_site:sgbd_type_explication:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_version,
 					label=<:projets_site:sgbd_version_label:>,
 					size=50,
 					maxlength=50,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_serveur,
 					label=<:projets_site:sgbd_serveur_label:>,
 					size=255,
 					maxlength=255,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_port,
 					label=<:projets_site:sgbd_port_label:>,
 					size=5,
 					maxlength=5,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_gestion,
 					label=<:projets_site:sgbd_gestion_label:>,
@@ -354,21 +358,21 @@
 					label=<:projets_site:sgbd_nom_label:>,
 					size=50,
 					maxlength=50,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_prefixe,
 					label=<:projets_site:sgbd_prefixe_label:>,
 					size=25,
 					maxlength=25,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_charset,
 					label=<:projets_site:sgbd_charset_label:>,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_collation,
 					label=<:projets_site:sgbd_collation_label:>,
-					disable=[(#GET{disabled})]})]
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, sgbd_login,
 					label=<:projets_site:sgbd_login_label:>,

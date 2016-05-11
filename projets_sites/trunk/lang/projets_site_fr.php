@@ -208,6 +208,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'webservice_absent' => 'Aucun webservice',
+	'webservice_active_explication' => 'L\'url de Webservice a été renseigné. De ce fait, certains champs sont cachés à la saisie car ceux-ci sont mis à jour par le biais du webservice.',
+	'webservice_active_titre_explication' => 'Webservice actif',
 	'webservice_explication' => 'URL pour un suivi de configuration du site.',
 	'webservice_label' => 'Url du Web Service&nbsp;:',
 );
