@@ -39,16 +39,25 @@ function formater_valeur($valeur, $format = 'auteur') {
 	if ($format == 'plugins') {
 		if (count($tableau) == 4) {
 			$tableau['prefixe'] = trim($tableau[0]);
+			unset($tableau[0]);
 			$tableau['version'] = trim($tableau[1]);
+			unset($tableau[1]);
 			$tableau['version_base'] = '-';
 			$tableau['titre'] = trim($tableau[2]);
+			unset($tableau[2]);
 			$tableau['statut'] = trim($tableau[3]);
+			unset($tableau[3]);
 		} elseif (count($tableau) == 5) {
 			$tableau['prefixe'] = trim($tableau[0]);
+			unset($tableau[0]);
 			$tableau['version'] = trim($tableau[1]);
+			unset($tableau[1]);
 			$tableau['version_base'] = trim($tableau[2]);
+			unset($tableau[2]);
 			$tableau['titre'] = trim($tableau[3]);
+			unset($tableau[3]);
 			$tableau['statut'] = trim($tableau[4]);
+			unset($tableau[4]);
 		}
 	}
 
