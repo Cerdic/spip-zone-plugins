@@ -8,5 +8,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'texte_definir_comme_traduction_rubrique' => 'Cette rubrique est une traduction de la rubrique numéro :',
+	'texte_definir_comme_traduction_rubrique' => 'Cette rubrique est une traduction de la rubrique numéro :'
 );
