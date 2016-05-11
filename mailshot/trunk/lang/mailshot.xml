@@ -1,5 +1,5 @@
 <traduction module="mailshot" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mailshot/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/mailshot?lang_cible=de" total="81" traduits="69" relire="0" modifs="2" nouveaux="10" pourcent="85.19">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/mailshot?lang_cible=de" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/mailshot?lang_cible=en" total="81" traduits="64" relire="0" modifs="1" nouveaux="16" pourcent="79.01">

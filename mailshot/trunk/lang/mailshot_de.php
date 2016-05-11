@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_exemple' => 'Exemple',
+	'cfg_exemple' => 'Beispiel',
 	'cfg_exemple_explication' => 'Erläuterung des Beispiels',
 	'cfg_titre_parametrages' => 'Mailings konfigurieren',
 
@@ -20,12 +20,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_envoi_mail_force_debug' => 'Versand an @email@ erzwungen von <tt>_TEST_EMAIL_DEST</tt>',
 	'erreur_generation_newsletter' => 'Beim Erzeugen des Newsletters ist ein Fehler aufgetreten',
 	'explication_boost_send' => 'In diesem Modus werden die Mails so schnell wie möglich verschickt. Es wird keine Begrenzung berücksichtigt. Der Schnellversand ist nicht empfehlenswert, da er die Wahrscheinlichkeit der Einstufung der Mails als SPAM vergrößert.',
+	'explication_purger_historique' => 'Für jeden Massenversand werden die Empfänger in der Datenbank gespeichert, mit Informationen zum Status des jeweiligen Versand.
+Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ratsam ist diese Versanddetails nach einer gewissen Zeit zu löschen.',
 	'explication_rate_limit' => 'Obergrenze der pro Tag versendeten Mails einstellen oder freilassen um keine Begrenzung einzustellen',
 
 	// I
 	'info_1_mailshot' => '1 Auslieferung',
 	'info_1_mailshot_destinataire' => '1 Empfänger',
 	'info_1_mailsubscriber' => '1 Abonnent',
+	'info_archiver' => 'Archivieren',
 	'info_aucun_destinataire' => 'Kein Empfänger',
 	'info_aucun_envoi' => 'Kein Versand',
 	'info_envoi_programme_1_destinataire' => 'Versand an einen Empfänger konfiguriert',
@@ -59,16 +62,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_listes' => 'Listen',
 	'label_mailer_defaut' => 'Den selben Versandservice wie für alle anderen Mails verwenden',
 	'label_mailer_defaut_desactive' => 'Unmöglich: kein Versandservice eingestellt',
-	'label_mailer_mailjet' => 'Mailjet Dienst', # MODIF
-	'label_mailer_mandrill' => 'Mandrill-Server', # MODIF
+	'label_mailer_mailjet' => 'Mailjet',
+	'label_mailer_mandrill' => 'Mandrill',
 	'label_mailer_smtp' => 'SMTP-Server',
+	'label_mailer_sparkpost' => 'Sparkpost',
 	'label_mailjet_api_key' => 'Mailjet API Schlüssel',
+	'label_mailjet_api_version' => 'API Version',
 	'label_mailjet_secret_key' => 'Geheimer Mailjet Schlüssel',
 	'label_mandrill_api_key' => 'Mandrill API Key',
+	'label_purger_historique_delai' => 'Älter als',
+	'label_purger_historique_oui' => 'Details alter Versandvorgänge löschen',
 	'label_rate_limit' => 'Versand- geschwindigkeit beschränken',
+	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Gegenstand',
 	'label_texte' => 'Textversion',
 	'legend_configuration_adresse_envoi' => 'Absenderadresse',
+	'legend_configuration_historique' => 'Versandhistorie',
 	'legend_configuration_mailer' => 'Mail-Versandservice',
 	'lien_voir_newsletter' => 'Newsletter ansehen',
 
@@ -77,10 +86,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_mailshot' => 'Mailingstatus:',
+	'texte_statut_archive' => 'archiviert',
 	'texte_statut_cancel' => 'Abgebrochen',
 	'texte_statut_end' => 'Beendet',
 	'texte_statut_pause' => 'Pause',
 	'texte_statut_processing' => 'Wird ausgeführt',
+	'titre_envois_archives' => 'Versandarchiv',
 	'titre_envois_destinataires_fail' => 'Fehlgeschlagene Sendungen',
 	'titre_envois_destinataires_init_encours' => 'Kein Empfänger vorprogrammiert (wird initialisiert)',
 	'titre_envois_destinataires_ok' => 'Erfolgreiche Sendungen',
