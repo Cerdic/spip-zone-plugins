@@ -8,23 +8,25 @@
 
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Compile la balise `#VOIR_SAISIE` qui retourne le code HTML de la vue d'une saisie indiquée
  *
  * Cette balise incluera le squelette `saisies-vues/_base.html` et lui-même `saisies-vues/{type}.html`
- * 
+ *
  * @syntaxe `#VOIR_SAISIE{type,nom[,option=valeur,...]}`
  * @uses Pile::recuperer_et_supprimer_argument_balise()
  * @uses Pile::creer_et_ajouter_argument_balise()
  * @uses Pile::creer_balise()
  * @see balise_INCLURE_dist()
- * 
+ *
  * @param Champ $p
  * @return Champ
  */
-function balise_VOIR_SAISIE_dist ($p) {
+function balise_VOIR_SAISIE_dist($p) {
 
 	// on recupere les parametres sans les traduire en code d'execution php
 	$type_saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p);
@@ -42,7 +44,7 @@ function balise_VOIR_SAISIE_dist ($p) {
 
 	// on appelle la balise #INCLURE
 	// avec les arguments ajoutes
-	if(function_exists('balise_INCLURE')) {
+	if (function_exists('balise_INCLURE')) {
 		return balise_INCLURE($p);
 	} else {
 		return balise_INCLURE_dist($p);

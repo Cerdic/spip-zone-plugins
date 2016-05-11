@@ -5,8 +5,10 @@
  *
  * @package SPIP\Saisies\Action
  */
- 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Action de déplacement de saisies dans le constructeur de formulaires
@@ -24,19 +26,19 @@ function action_deplacer_saisie_dist() {
 	$formulaire_actuel = session_get($session);
 
 	if (!$formulaire_actuel) {
-		return "";
+		return '';
 	}
 
 	include_spip('inc/saisies');
-	
+
 	$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
 	if (!isset($saisies_actuelles[$identifiant])) {
-		return "";
+		return '';
 	}
 
 	// tester @id et [@id] (fieldset)
-	if ($ou and !isset($saisies_actuelles[$ou]) and !isset($saisies_actuelles[ substr($ou,1,-1) ])) {
-		return "";
+	if ($ou and !isset($saisies_actuelles[$ou]) and !isset($saisies_actuelles[ substr($ou, 1, -1) ])) {
+		return '';
 	}
 
 	// on deplace ou c'est demande...
@@ -45,4 +47,3 @@ function action_deplacer_saisie_dist() {
 	// On sauve tout ca
 	$formulaire_actuel = session_set($session, $formulaire_actuel);
 }
-

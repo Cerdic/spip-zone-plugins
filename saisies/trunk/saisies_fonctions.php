@@ -6,7 +6,9 @@
  * @package SPIP\Saisies\Fonctions
 **/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/saisies');
 include_spip('balise/saisie');
@@ -22,28 +24,31 @@ include_spip('formulaires/selecteur/generique_fonctions');
  * @return string
  *   $tag initial ou div
  */
-function saisie_balise_structure_formulaire($tag){
+function saisie_balise_structure_formulaire($tag) {
 
 	// Pouvoir forcer l'utilisation de formulaire de type SPIP 3
 	if (_SAISIE_TAG_3) {
 		return $tag;
 	}
 
-	static $is_div=null;
-	if (is_null($is_div)){
-		$version = explode(".",$GLOBALS['spip_version_branche']);
-		if ($version[0]>3 OR ($version[0]==3 AND $version[1]>0))
+	static $is_div = null;
+	if (is_null($is_div)) {
+		$version = explode('.', $GLOBALS['spip_version_branche']);
+		if ($version[0] > 3 or ($version[0] == 3 and $version[1] > 0)) {
 			$is_div = true;
+		}
 	}
-	if ($is_div) return "div";
+	if ($is_div) {
+		return 'div';
+	}
 	return $tag;
 }
 // variante plus simple a ecrire dans les squelettes
 // [(#DIV|sinon{ul})]
 if (!function_exists('balise_DIV_dist')
-  and $version = explode(".",$GLOBALS['spip_version_branche'])
-  and ($version[0]>3 OR ($version[0]==3 AND $version[1]>0))){
-	function balise_DIV_dist($p){
+	and $version = explode('.', $GLOBALS['spip_version_branche'])
+	and ($version[0]>3 or ($version[0]==3 and $version[1] > 0))) {
+	function balise_DIV_dist($p) {
 		$p->code = "'div'";
 		$p->interdire_scripts = false;
 		return $p;
@@ -59,11 +64,13 @@ if (!function_exists('balise_DIV_dist')
  * @param string|array $env
  * @return string
  */
-function saisie_traitement_vue($valeur,$env){
-	if (is_string($env))
+function saisie_traitement_vue($valeur, $env) {
+	if (is_string($env)) {
 		$env = unserialize($env);
-	if (!function_exists('propre'))
+	}
+	if (!function_exists('propre')) {
 		include_spip('inc/texte');
+	}
 
 	$valeur = trim($valeur);
 
@@ -73,9 +80,8 @@ function saisie_traitement_vue($valeur,$env){
 	if ($valeur and !isset($env['traitements'])) {
 		if (in_array($env['type_saisie'], array('textarea'))) {
 			$valeur = propre($valeur);
-		}
-		else {
-			$valeur = "<p>" . typo($valeur) . "</p>";
+		} else {
+			$valeur = '<p>' . typo($valeur) . '</p>';
 		}
 	}
 
@@ -84,7 +90,7 @@ function saisie_traitement_vue($valeur,$env){
 
 /**
  * Passer un nom en une valeur compatible avec une classe css
- * 
+ *
  * - toto => toto,
  * - toto/truc => toto_truc,
  * - toto[truc] => toto_truc
@@ -98,7 +104,7 @@ function saisie_nom2classe($nom) {
 
 /**
  * Passer un nom en une valeur compatible avec un `name` de formulaire
- * 
+ *
  * - toto => toto,
  * - toto/truc => toto[truc],
  * - toto[truc] => toto[truc]
@@ -123,24 +129,25 @@ function saisie_nom2name($nom) {
  *     ```
  *     #GLOBALS{debut_intertitre}
  *     ```
- * 
+ *
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
  *     Pile complétée du code php de la balise.
 **/
 function balise_GLOBALS_dist($p) {
-	if (function_exists('balise_ENV'))
+	if (function_exists('balise_ENV')) {
 		return balise_ENV($p, '$GLOBALS');
-	else
+	} else {
 		return balise_ENV_dist($p, '$GLOBALS');
+	}
 }
 
 /**
  * Liste les éléments du sélecteur générique triés
  *
  * Les éléments sont triés par objets puis par identifiants
- * 
+ *
  * @example
  *     L'entrée :
  *     'rubrique|3,rubrique|5,article|2'
@@ -178,7 +185,7 @@ function picker_selected_par_objet($selected) {
 
 	// on remet tout en file
 	$liste = array();
-	foreach ($res as $objet=>$ids) {
+	foreach ($res as $objet => $ids) {
 		foreach ($ids as $id) {
 			$liste[] = array('objet' => $objet, 'id_objet' => $id);
 		}
@@ -197,19 +204,18 @@ function picker_selected_par_objet($selected) {
  *               'url_edit' : l'url d'édition de l'objet ;
  *               'texte_objets' : le nom humain de l'objet éditorial.
  */
-function lister_tables_objets_edit()
-{
-    include_spip('base/abstract_sql');
+function lister_tables_objets_edit() {
+	include_spip('base/abstract_sql');
 
-    $objets = lister_tables_objets_sql();
-    $objets_edit = array();
+	$objets = lister_tables_objets_sql();
+	$objets_edit = array();
 
-    foreach ($objets as $objet => $definition) {
-        if (isset($definition['editable']) and isset($definition['url_edit']) and $definition['url_edit'] != '') {
-            $objets_edit[$objet] = array('type' => $definition['type'], 'url_edit' => $definition['url_edit'], 'texte_objets' => $definition['texte_objets']);
-        }
-    }
-    $objets_edit = array_filter($objets_edit);
+	foreach ($objets as $objet => $definition) {
+		if (isset($definition['editable']) and isset($definition['url_edit']) and $definition['url_edit'] != '') {
+			$objets_edit[$objet] = array('type' => $definition['type'], 'url_edit' => $definition['url_edit'], 'texte_objets' => $definition['texte_objets']);
+		}
+	}
+	$objets_edit = array_filter($objets_edit);
 
-    return $objets_edit;
+	return $objets_edit;
 }

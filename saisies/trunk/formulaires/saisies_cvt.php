@@ -1,9 +1,11 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_saisies_cvt_saisies_dist(){
+function formulaires_saisies_cvt_saisies_dist() {
 	return array(
 		array(
 			'saisie' => 'input',
@@ -37,4 +39,3 @@ function formulaires_saisies_cvt_saisies_dist(){
 		)
 	);
 }
-

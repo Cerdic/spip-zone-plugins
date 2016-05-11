@@ -6,7 +6,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Compile la balise `#CONFIGURER_SAISIE`
@@ -14,11 +16,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses Pile::recuperer_et_supprimer_argument_balise()
  * @uses Pile::creer_et_ajouter_argument_balise()
  * @see balise_INCLURE_dist()
- *  
+ *
  * @param Champ $p
  * @return Champ
 **/
-function balise_CONFIGURER_SAISIE_dist($p){
+function balise_CONFIGURER_SAISIE_dist($p) {
 
 	// On recupere le premier argument : le nom de la saisie
 	$saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p);
@@ -40,5 +42,3 @@ function balise_CONFIGURER_SAISIE_dist($p){
 	}
 
 }
-
-

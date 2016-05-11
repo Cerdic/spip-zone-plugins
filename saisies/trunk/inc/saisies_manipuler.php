@@ -140,17 +140,15 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou) {
 		if (!$ou) {
 			$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 			$chemin = array(count($saisies));
-		}
-		// Si l'endroit est entre crochet, c'est un conteneur
-		elseif (preg_match('/^\[(@?[\w]*)\]$/', $ou, $match)) {
+		} elseif (preg_match('/^\[(@?[\w]*)\]$/', $ou, $match)) {
+			// Si l'endroit est entre crochet, c'est un conteneur
 			$parent = $match[1];
 			// Si dans les crochets il n'y a rien, on met à la fin du formulaire
 			if (!$parent) {
 				$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 				$chemin = array(count($saisies));
-			}
-			// Sinon on vérifie que ce conteneur existe
-			elseif (saisies_chercher($saisies, $parent, true)) {
+			} elseif (saisies_chercher($saisies, $parent, true)) {
+				// Sinon on vérifie que ce conteneur existe
 				// S'il existe on supprime la saisie et on recherche la nouvelle position
 				$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 				$parent = saisies_chercher($saisies, $parent, true);
@@ -158,9 +156,8 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou) {
 			} else {
 				$chemin = false;
 			}
-		}
-		// Sinon ça sera devant un champ
-		else {
+		} else {
+			// Sinon ça sera devant un champ
 			// On vérifie que le champ existe
 			if (saisies_chercher($saisies, $ou, true)) {
 				// S'il existe on supprime la saisie
@@ -205,8 +202,7 @@ function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs) {
 		$modifs['options']['nom'] = $parent[$position]['options']['nom'];
 	}
 	// On récupère les enfants tels quels s'il n'y a pas des enfants dans la modif
-	if (
-		!isset($modifs['saisies'])
+	if (!isset($modifs['saisies'])
 		and isset($parent[$position]['saisies'])
 		and is_array($parent[$position]['saisies'])
 	) {

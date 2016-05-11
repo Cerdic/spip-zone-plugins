@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Gestion de la balise `#GENERER_SAISIES`
@@ -7,7 +7,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Compile la balise `#GENERER_SAISIES` qui retourne le code HTML des saisies de formulaire,
@@ -24,13 +26,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @uses Pile::recuperer_et_supprimer_argument_balise()
  * @uses Pile::creer_et_ajouter_argument_balise()
  * @see balise_INCLURE_dist()
- * 
+ *
  * @param Champ $p
  *     Pile au niveau de la balise
  * @return Champ
  *     Pile complété du code à générer
 **/
-function balise_GENERER_SAISIES_dist($p){
+function balise_GENERER_SAISIES_dist($p) {
 
 	// On recupere le premier (et seul) argument : le tableau decrivant ce qu'on veut generer
 	$config = Pile::recuperer_et_supprimer_argument_balise(1, $p);
@@ -52,4 +54,3 @@ function balise_GENERER_SAISIES_dist($p){
 	}
 
 }
-

@@ -155,9 +155,8 @@ function saisies_generer_html($champ, $env = array()) {
 		}
 
 		$contexte = array_merge($env, $contexte);
-	}
-	// Sinon on ne sélectionne que quelques éléments importants
-	else {
+	} else {
+		// Sinon on ne sélectionne que quelques éléments importants
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
 		// On récupère la langue de l'objet si existante
@@ -177,13 +176,11 @@ function saisies_generer_html($champ, $env = array()) {
 		foreach ($index[1] as $cle) {
 			$contexte['valeur'] = isset($contexte['valeur'][$cle]) ? $contexte['valeur'][$cle] : null;
 		}
-	}
-	// Sinon la valeur est juste celle du nom si elle existe
-	elseif (isset($contexte['nom']) and isset($env[$contexte['nom']])) {
+	} elseif (isset($contexte['nom']) and isset($env[$contexte['nom']])) {
+		// Sinon la valeur est juste celle du nom si elle existe
 		$contexte['valeur'] = $env[$contexte['nom']];
-	}
-	// Sinon rien
-	else {
+	} else {
+		// Sinon rien
 		$contexte['valeur'] = null;
 	}
 
@@ -268,18 +265,16 @@ function saisies_generer_vue($saisie, $env = array(), $env_obligatoire = array()
 	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
 	if ($env['valeurs'] and is_array($env['valeurs']) and isset($env['valeurs'][$contexte['nom']])) {
 		$contexte['valeur'] = $env['valeurs'][$contexte['nom']];
-	}
-	// Si le nom du champ est un tableau indexé, il faut parser !
-	elseif (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
+	} elseif (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
+		// Si le nom du champ est un tableau indexé, il faut parser !
 		$contexte['valeur'] = $env[$separe[1]];
 		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 		// On va chercher au fond du tableau
 		foreach ($index[1] as $cle) {
 			$contexte['valeur'] = $contexte['valeur'][$cle];
 		}
-	}
-	// Sinon la valeur est juste celle du nom
-	else {
+	} else {
+		// Sinon la valeur est juste celle du nom
 		// certains n'ont pas de nom (fieldset)
 		$contexte['valeur'] = isset($env[$contexte['nom']]) ? $env[$contexte['nom']] : '';
 	}

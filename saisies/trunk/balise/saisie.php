@@ -6,7 +6,9 @@
  * @package SPIP\Saisies\Balises
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // pour ne pas interferer avec d'eventuelles futures fonctions du core
 // on met le tout dans une classe ; les fonctions sont autonomes.
@@ -20,11 +22,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     transmettent des arguments supplémentaires automatiquement, à des balises
  *     déjà existantes.
  *     Voir un exemple d'utilisation dans `balise_SAISIE_dist()`.
- * 
+ *
  * @note
  *     Les arguments sont stockés sont dans l'entree 0 de la propriété `param`
  *     dans l'objet Champ (représenté par `$p`), donc dans `$p->param[0]`.
- * 
+ *
  *     `param[0][0]` vaut toujours '' (ou presque ?)
  *
  * @see balise_SAISIE_dist() Pour un exemple d'utilisation
@@ -34,7 +36,7 @@ class Pile {
 
 	/**
 	 * Récupère un argument de balise
-	 * 
+	 *
 	 * @param int $pos
 	 * @param Champ $p
 	 * @return mixed|null Élément de l'AST représentant l'argument s'il existe
@@ -62,7 +64,7 @@ class Pile {
 		}
 		if (!isset($p->param[0][$pos])) {
 			return null;
-		}	
+		}
 		if ($pos == 0) {
 			array_shift($p->param[0]);
 		} else {
@@ -79,7 +81,7 @@ class Pile {
 	 *
 	 * @uses Pile::recuperer_argument_balise()
 	 * @uses Pile::supprimer_argument_balise()
-	 * 
+	 *
 	 * @param int $pos
 	 * @param Champ $p
 	 * @return mixed|null Élément de l'AST représentant l'argument s'il existe
@@ -95,7 +97,7 @@ class Pile {
 	 * Ajoute un argument de balise
 	 *
 	 * Empile l'argument à la suite des arguments déjà existants pour la balise
-	 * 
+	 *
 	 * @param mixed $element Élément de l'AST représentant l'argument à ajouter
 	 * @param Champ $p
 	 * @return Champ
@@ -122,11 +124,11 @@ class Pile {
 	 *     ```
 	 *     $nom = Pile::creer_argument_balise(nom);           // {nom}
 	 *     $nom = Pile::creer_argument_balise(nom, 'coucou'); // {nom=coucou}
-	 *     
+	 *
 	 *     $balise = Pile::creer_balise('BALISE');
 	 *     $nom = Pile::creer_argument_balise(nom, $balise);  // {nom=#BALISE}
 	 *     ```
-	 * 
+	 *
 	 * @param string $nom
 	 *     Nom de l'argument
 	 * @param string|object $valeur
@@ -138,26 +140,24 @@ class Pile {
 		$s = new Texte;
 		$s->texte = $nom;
 		$s->ligne=0;
-		
+
 		// si #BALISE cree avec Pile::creer_balise(), le mettre en array, comme les autres
 		if (is_object($valeur)) {
 			$valeur = array($valeur);
 		}
-		
+
 		$res = null;
-		
+
 		// {nom}
 		if (is_null($valeur)) {
 			$res = array($s);
-		} 
-		// {nom=coucou}
-		elseif (is_string($valeur)) {
+		} elseif (is_string($valeur)) {
+			// {nom=coucou}
 			$s->texte .= "=$valeur";
 			$res = array($s);
-		}
-		// {nom=#BALISE}
-		elseif (is_array($valeur)) {
-			$s->texte .= "="; // /!\ sans cette toute petite chose, ça ne fait pas d'egalite :)
+		} elseif (is_array($valeur)) {
+			// {nom=#BALISE}
+			$s->texte .= '='; // /!\ sans cette toute petite chose, ça ne fait pas d'egalite :)
 			$res = array_merge(array($s), $valeur);
 		}
 
@@ -170,7 +170,7 @@ class Pile {
 	 *
 	 * @uses Pile::creer_argument_balise()
 	 * @uses Pile::ajouter_argument_balise()
-	 * 
+	 *
 	 * @param Champ $p
 	 * @param string $nom
 	 *     Nom de l'argument
@@ -179,7 +179,7 @@ class Pile {
 	 * @return Champ
 	**/
 	static function creer_et_ajouter_argument_balise($p, $nom, $valeur = null) {
-		$new = Pile::creer_argument_balise($nom, $valeur); 
+		$new = Pile::creer_argument_balise($nom, $valeur);
 		return Pile::ajouter_argument_balise($new, $p);
 	}
 
@@ -191,10 +191,10 @@ class Pile {
 	 * @example
 	 *     ```
 	 *     // Crée : #ENV*{titre}
-	 *     $titre = Pile::recuperer_argument_balise(1, $p); // $titre, 1er argument de la balise actuelle 
+	 *     $titre = Pile::recuperer_argument_balise(1, $p); // $titre, 1er argument de la balise actuelle
 	 *     $env = Pile::creer_balise('ENV', array('param' => array($titre), 'etoile' => '*'));
 	 *     ```
-	 * 
+	 *
 	 * @param string $nom
 	 *     Nom de la balise
 	 * @param array $opt
@@ -205,8 +205,8 @@ class Pile {
 		include_spip('public/interfaces');
 		$b = new Champ;
 		$b->nom_champ = strtoupper($nom);
-		foreach ($opt as $o=>$val) {
-			if (property_exists($b,$o)) {
+		foreach ($opt as $o => $val) {
+			if (property_exists($b, $o)) {
 				if ($o == 'param') {
 					array_unshift($val, '');
 					$b->$o = array($val);
@@ -229,7 +229,7 @@ class Pile {
  * La balise `#SAISIE` est un raccourci pour une écriture plus compliquée de la balise `#INCLURE`.
  * La balise calcule une série de paramètre récupérer et à transmettre à `#INCLURE`,
  * en fonction des valeurs des 2 premiers paramètres transmis.
- * 
+ *
  * Les autres arguments sont transmis tels quels à la balise `#INCLURE`.
  *
  * Ainsi `#SAISIE{input,nom,label=Nom,...}` exécutera l'équivalent de
@@ -270,5 +270,3 @@ function balise_SAISIE_dist($p) {
 		return balise_INCLURE_dist($p);
 	}
 }
-
-
