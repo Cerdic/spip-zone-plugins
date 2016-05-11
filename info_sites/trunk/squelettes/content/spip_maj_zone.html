@@ -1,0 +1,37 @@
+<BOUCLE_principale (PROJETS_SITES) {id_projets_site}>[(#SET{lesmaj,#ARRAY})]
+[(#BOITE_OUVRIR{[
+<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>}) [(#TYPE_SITE|oui)[\((#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)\)]]</h2>
+],simple fiche_objet})]
+<textarea class="textarea" cols="100" rows="10">#!/bin/bash
+# On stocke les variables d'environnement
+url_svn=$URL_SVN
+url_local=$URL_WORKING_COPY
+# On met à jour le dépôt local des plugins
+svn up ${url_local}
+<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {par /0}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{0})],titre,[(#VALEUR{2})], statut,[(#VALEUR{3})], version,[(#VALEUR{1})]})]})]<BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_principale:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1}  {si (#GET{plugin/statut}|=={dist}|non)}>[(#VERSION|=={#_plugins_site:GET{plugin/version}}|non)[(#SET{lesmaj,[(#GET{lesmaj}|push{#PREFIXE})]})]
+# Branche [(#_principale:LOGICIEL_NOM)] [(#_principale:LOGICIEL_VERSION|version2branche)]
+cd ${url_local}[(#PREFIXE|strtolower)]
+svn cp ${url_svn}[(#PREFIXE|strtolower)]/branches/v[(#_plugins_site:GET{plugin/version}|explode{'.'}|table_valeur{0})] ${url_svn}[(#PREFIXE|strtolower)]/tags/v[(#_plugins_site:GET{plugin/version})] -m "On pose un tag pour ['(#GET{plugin/titre})'] v[(#GET{plugin/version})]"
+svn up
+cd ${url_local}[(#PREFIXE|strtolower)]/branches
+]<BOUCLE_archive_mm_branche (DEPOTS) {id_depot} {si (#VERSION|=={#_plugins_site:GET{plugin/version}}|non)}>curl -LOk [(#URL_ARCHIVES)/#_paquet_meme_branche:NOM_ARCHIVE]
+unzip [(#_paquet_meme_branche:NOM_ARCHIVE)]
+folder=$(zipinfo -1 [(#_paquet_meme_branche:NOM_ARCHIVE)] | head -n 1)
+rsync -avz --delete "$folder"/ "v[(#_plugins_site:GET{plugin/version}|explode{'.'}|table_valeur{0})]/"
+rm -rf [(#_paquet_meme_branche:NOM_ARCHIVE)] "$folder"/
+svn st
+for new_element in $(svn st | grep "^?" | cut -c9-); do
+	svn add ${new_element};
+done;
+for delete_element in $(svn st | grep "^!" | cut -c9-); do
+	svn delete ${delete_element};
+done;
+svn ci -m "Mise à jour du plugin ['(#GET{plugin/titre})'] en v[(#_paquet_meme_branche:VERSION)]"
+</BOUCLE_archive_mm_branche></BOUCLE_paquet_meme_branche></BOUCLE_plugins_site>
+svn up ${url_local}
+</textarea><br/>
+<BOUCLE_lesmaj (DATA) {source table, #GET{lesmaj}}>
+#VALEUR </br>
+</BOUCLE_lesmaj>
+#BOITE_FERMER
+</BOUCLE_principale>
