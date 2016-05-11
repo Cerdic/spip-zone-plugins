@@ -10,14 +10,16 @@
  * @package    SPIP\Plan\Action
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 function action_deplacer_objets_dist() {
 
 	include_spip('inc/autoriser');
 	if (!autoriser('ecrire')) {
-		return plan_json_erreur(_T("plan:erreur_autorisation_insuffisante") . " " . _T("plan:erreur_deplacement_impossible"));
+		return plan_json_erreur(_T('plan:erreur_autorisation_insuffisante') . ' ' . _T('plan:erreur_deplacement_impossible'));
 	}
 
 	include_spip('base/objets');
@@ -31,13 +33,13 @@ function action_deplacer_objets_dist() {
 	$id_rubrique_new = _request('id_rubrique_destination');
 
 	if (!is_array($ids) or !$objet) {
-		return plan_json_erreur(_T("plan:erreur_aucun_identifiant") . " " . _T("plan:erreur_deplacement_impossible"));
+		return plan_json_erreur(_T('plan:erreur_aucun_identifiant') . ' ' . _T('plan:erreur_deplacement_impossible'));
 	}
 	if ($id_rubrique_old == $id_rubrique_new) {
-		return plan_json_erreur(_T("plan:erreur_rubriques_parentes_incorrectes") . " "  . _T("plan:erreur_deplacement_impossible"));
+		return plan_json_erreur(_T('plan:erreur_rubriques_parentes_incorrectes') . ' '  . _T('plan:erreur_deplacement_impossible'));
 	}
 	if ($objet != 'rubrique' and !$id_rubrique_new) {
-		return plan_json_erreur(_T("plan:erreur_rubriques_parentes_incorrectes") . " " . _T("plan:erreur_deplacement_impossible"));
+		return plan_json_erreur(_T('plan:erreur_rubriques_parentes_incorrectes') . ' ' . _T('plan:erreur_deplacement_impossible'));
 	}
 
 	$ids = array_filter($ids);
@@ -65,7 +67,7 @@ function action_deplacer_objets_dist() {
 				$success["$objet-$id"] = true;
 			}
 		} else {
-			$errors["$objet-$id"] = _T("plan:erreur_autorisation_insuffisante") . " " . _T("plan:erreur_deplacement_impossible");
+			$errors["$objet-$id"] = _T('plan:erreur_autorisation_insuffisante') . ' ' . _T('plan:erreur_deplacement_impossible');
 		}
 	}
 
@@ -76,7 +78,7 @@ function action_deplacer_objets_dist() {
 		$ids = array_map('array_shift', $ids);
 		if ($ids) {
 			foreach ($ids as $id) {
-				$errors["$objet-$id"] = _T("plan:erreur_deplacement");
+				$errors["$objet-$id"] = _T('plan:erreur_deplacement');
 				unset($success["$objet-$id"]);
 			}
 		}
@@ -90,7 +92,7 @@ function action_deplacer_objets_dist() {
 }
 
 function plan_json_envoi($data) {
-	header("Content-Type: application/json; charset=" . $GLOBALS['meta']['charset']);
+	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
 	echo json_encode($data);
 }
 

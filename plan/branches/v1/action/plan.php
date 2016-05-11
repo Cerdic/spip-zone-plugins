@@ -10,8 +10,9 @@
  * @package    SPIP\Plan\Action
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function action_plan_dist() {
 
@@ -36,11 +37,11 @@ function action_plan_dist() {
 	}
 
 	$fond = "prive/squelettes/inclure/plan-$objet";
-	header("Content-Type: text/html; charset=" . $GLOBALS['meta']['charset']);
+	header('Content-Type: text/html; charset=' . $GLOBALS['meta']['charset']);
 
 	if (trouver_fond($fond)) {
 		echo recuperer_fond($fond, $env);
 	} else {
-		echo "";
+		echo '';
 	}
 }

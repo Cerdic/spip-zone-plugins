@@ -9,7 +9,9 @@
  * @package    SPIP\Plan\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Retourne le nombre d'éléments d'une liste d'objet qui fait qu'on
@@ -83,7 +85,7 @@ function plan_lister_objets_rubrique() {
  *
  * @see plan_lister_objets_rubrique_statuts_auteur()
  * @uses plan_lister_objets_rubrique()
- * 
+ *
  * @return array
 **/
 function plan_lister_objets_rubrique_statuts() {
@@ -116,7 +118,7 @@ function plan_lister_objets_rubrique_statuts() {
  * dans une rubrique ainsi que leurs statuts utilisables pour l'auteur en cours
  *
  * @uses plan_lister_objets_rubrique_statuts();
- * 
+ *
  * @return array
 **/
 function plan_lister_objets_rubrique_statuts_auteur() {
