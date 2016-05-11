@@ -5,12 +5,14 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
  * Ajoute Chosen aux plugins JS chargés
- * 
+ *
  * @param array $flux
  *     Liste des js chargés
  * @return array
@@ -18,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function chosen_jquery_plugins($flux) {
 	include_spip('inc/config');
-	$config = lire_config('chosen/active','non');
+	$config = lire_config('chosen/active', 'non');
 	if (test_espace_prive() || $config =='oui') {
 		$flux[] = 'lib/chosen/chosen.jquery.js'; # lib originale
 		$flux[] = 'javascript/spip_chosen.js';   # chargements SPIP automatiques
@@ -28,7 +30,7 @@ function chosen_jquery_plugins($flux) {
 
 /**
  * Ajoute Chosen aux css chargées dans le privé
- * 
+ *
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
  */
@@ -56,7 +58,7 @@ function chosen_header_prive($texte) {
 
 /**
  * Ajoute Chosen aux css chargées dans le privé
- * 
+ *
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
  */
@@ -72,14 +74,14 @@ function chosen_header_prive_css($texte) {
 
 /**
  * Ajoute Chosen aux css chargées dans le public
- * 
+ *
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
 **/
 function chosen_insert_head_css($flux) {
 	include_spip('inc/config');
-	$config = lire_config('chosen',array());
-	if (isset($config['active']) and $config['active']=='oui'){
+	$config = lire_config('chosen', array());
+	if (isset($config['active']) and $config['active']=='oui') {
 		$css = find_in_path('lib/chosen/chosen.css');
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />';
 		$css = find_in_path('css/spip.chosen.css');
@@ -90,13 +92,13 @@ function chosen_insert_head_css($flux) {
 
 /**
  * Ajoute Chosen aux css chargées dans le public
- * 
+ *
  * @param string $texte Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
 **/
 function chosen_insert_head($flux) {
 	include_spip('inc/config');
-	$config = lire_config('chosen',array());
+	$config = lire_config('chosen', array());
 	if (isset($config['active']) and $config['active']=='oui') {
 		$flux .= '<script type="text/javascript">/* <![CDATA[ */
 			var selecteur_chosen = "' . trim(isset($config['selecteur_commun']) ? $config['selecteur_commun'] : '') . '";
@@ -117,5 +119,3 @@ function chosen_insert_head($flux) {
 	}
 	return $flux;
 }
-
-?>
