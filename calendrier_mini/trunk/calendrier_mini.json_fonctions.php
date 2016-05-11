@@ -4,7 +4,9 @@
  *
  * @package SPIP\CalendrierMini\Fonctions
 **/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/json');
 
@@ -14,6 +16,6 @@ include_spip('inc/json');
  * @param int $t Timestamp
  * @return string Date au format SQL
 **/
-function todate($t){return date('Y-m-d H:i:s',$t);}
-
-?>
+function todate($t) {
+	return date('Y-m-d H:i:s', $t);
+}
