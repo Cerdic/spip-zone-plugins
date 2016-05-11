@@ -23,6 +23,12 @@ include_spip('formulaires/selecteur/generique_fonctions');
  *   $tag initial ou div
  */
 function saisie_balise_structure_formulaire($tag){
+
+	// Pouvoir forcer l'utilisation de formulaire de type SPIP 3
+	if (_SAISIE_TAG_3) {
+		return $tag;
+	}
+
 	static $is_div=null;
 	if (is_null($is_div)){
 		$version = explode(".",$GLOBALS['spip_version_branche']);

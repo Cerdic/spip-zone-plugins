@@ -9,6 +9,11 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Pouvoir forcer l'utilisation de formulaire de type SPIP 3
+if (!defined('_SAISIE_TAG_3')) {
+	define('_SAISIE_TAG_3', false);
+}
+
 
 if (!function_exists('_T_ou_typo')){
 	/**
