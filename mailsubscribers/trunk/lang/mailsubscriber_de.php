@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_valide' => 'angmeldet',
 
 	// L
-	'label_desactiver_notif_1' => 'Benachrichtigung über die Anmeldung bei diesem Importvorgang deaktivieren', # MODIF
+	'label_desactiver_notif_1' => 'Anmeldebenachrichtigungen für diesem Importvorgang deaktivieren',
 	'label_email' => 'Email',
 	'label_file_import' => 'Dateiimport',
 	'label_from_email' => 'E-Mail-Adresse des Einladenden',
