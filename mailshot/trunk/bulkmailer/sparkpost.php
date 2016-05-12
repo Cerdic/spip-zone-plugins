@@ -482,7 +482,10 @@ class FacteurSparkpost extends Facteur {
 			foreach($response['errors'] as $e){
 				$err .=  $e['code'].' '.$e['message']."\n";
 			}
-			$this->SetError($err . var_export($this->message,true));
+			$dump = $this->message;
+			$dump['content']['html'] = '...';
+			$dump['content']['text'] = '...';
+			$this->SetError($err . var_export($dump,true));
 			return false;
 		}
 
