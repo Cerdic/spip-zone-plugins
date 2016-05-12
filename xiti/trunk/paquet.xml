@@ -1,7 +1,7 @@
 <paquet
 	prefix="xiti"
 	categorie="statistique"
-	version="1.1.1"
+	version="1.2.0"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -10,7 +10,7 @@
 >
 
 	<nom>Xiti</nom>
-	 <!--Ce plugin permet de tagger des pages avec l'outil de stat Xiti-->
+	<!--Ce plugin permet de tagger des pages avec l'outil de stats Xiti-->
 
 	<auteur mail="cyp@rouquin.me">cyp</auteur>
 	<auteur lien="http://www.maat.me/">Maat</auteur>
