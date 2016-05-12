@@ -2,7 +2,7 @@
 	$(document).ready(function () {
 		var textFile = null,
 				makeTextFile = function (text) {
-					var data = new Blob([text], {type: 'text/plain'});
+					var data = new Blob([text], {encoding: "#CHARSET", type: 'text/plain;charset=#CHARSET'});
 
 					// If we are replacing a previously generated file we need to
 					// manually revoke the object URL to avoid memory leaks.
@@ -14,7 +14,6 @@
 
 					return textFile;
 				};
-
 
 		var create = document.getElementById('create'),
 				textbox = document.getElementById('textbox');
