@@ -142,37 +142,32 @@ function sites_webservices() {
  */
 function sites_projets_maj_plugins() {
 	include_spip('base/abstract_sql');
+	include_spip('inc/utils');
 	$sites_projets = sites_webservices();
 	$liste_plugins = array();
+	$sites_projets_maj = array();
 
 	if (is_array($sites_projets)) {
-		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_plugins', 'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
+		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_version, logiciel_plugins', 'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
 		if (is_array($liste_sites_projets_plugins) and count($liste_sites_projets_plugins) > 0) {
 			foreach ($liste_sites_projets_plugins as $key => $site_projet) {
-				$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins']);
-				foreach ($liste_plugins_tmp as $key => $plugin) {
-					switch (strtolower($site_projet['logiciel_nom'])) {
-						case 'spip':
-							# TODO : utiliser la fonction idoine plugin_spip()
-							break;
+				if ($key == 0) {
+					$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins'], 'plugins');
+					foreach ($liste_plugins_tmp as $key => $plugin) {
+						$logiciel = strtolower($site_projet['logiciel_nom']);
+						$info_plugin = charger_fonction('plugins_' . $logiciel, 'inc');
+						if ($info_plugin !== false) {
+							$a_mettre_jour = $info_plugin($plugin, $site_projet['logiciel_version']);
 
-						default:
-							# code...
-							break;
+						}
 					}
+					$liste_plugins = array_merge($liste_plugins, $liste_plugins_tmp);
 				}
-				$liste_plugins = array_merge($liste_plugins, $liste_plugins_tmp);
 			}
 		}
 	}
 
 	return $liste_plugins;
-}
-
-function plugins_spip($plugins = array(), $branche_spip = null) {
-	if (is_array($plugins) and count($plugins) > 0 and !is_null($branche_spip)) {
-		# TODO : Créer la fonction qui va chercher les infos d'un plugin SPIP.
-	}
 }
 
 /**
@@ -299,6 +294,7 @@ function info_sites_lister_roles_auteurs_tableaux() {
 	foreach ($roles as $role) {
 		$roles_tableaux[$role] = array();
 	}
+
 	return $roles_tableaux;
 }
 
@@ -331,6 +327,7 @@ function info_sites_lister_projets_auteurs_roles($id_projet) {
 			$projets_roles[$projet['role']][] = $projet['id_auteur'];
 		}
 	}
+
 	/*
 	 * On ne passe pas par le nettoyeur pour ne pas réindexer le tableau car ici on a besoin des index rôle.
 	 * $projets_roles = info_sites_nettoyer_tableau($projets_roles);

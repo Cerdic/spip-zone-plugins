@@ -137,8 +137,17 @@ h1.titre {
 			float: left;
 			margin-right: 0.5em;
 			a {
+				line-height: 1;
 				img {
 					margin-left: 0.5em;
+				}
+			}
+			&.retour {
+				a {
+					img {
+						margin-left: 0;
+						margin-right: 0.5em;
+					}
 				}
 			}
 		}
@@ -1144,6 +1153,25 @@ input[type="radio"], input[type="checkbox"] {
 				}
 			}
 
+			&.saisie_date {
+				position: relative;
+
+				.explication {
+					clear: right;
+				}
+				input {
+					clear: right;
+				}
+
+				.ui-datepicker-trigger {
+					float: right;
+					position: absolute;
+					margin-left: 0;
+					right: 5px;
+					bottom: 10px;
+				}
+			}
+
 			input, .edition, .explication, select, textarea, &.editer_explication > h4 {
 				width: 76%;
 				float: right;
@@ -1197,25 +1225,6 @@ input[type="radio"], input[type="checkbox"] {
 				}
 			}
 
-			&.saisie_date {
-				position: relative;
-
-				.explication {
-					clear: right;
-				}
-				input {
-					width: 72%;
-					clear: right;
-				}
-
-				.ui-datepicker-trigger {
-					float: right;
-					position: absolute;
-					margin-left: 0;
-					right: 5px;
-					bottom: 10px;
-				}
-			}
 		}
 	}
 	.dropdown-menu {

@@ -1,7 +1,7 @@
 [(#SET{liste_logiciels, [(#VAL|info_sites_lister_diagnostic_logiciel)]})]
 <BOUCLE_extra (PROJETS_SITES) {id_projets_site} {tout}>[(#SET{opt,#ARRAY})]
 <BOUCLE_projets (projets_sites_liens) {id_projets_site} {objet="projet"}>[(#SET{opt,#ARRAY{projet,#ID_OBJET}})]</BOUCLE_projets>[(#REM) Si on a plusieurs associations à des projets, ça sera le dernier qui sera gardé… Il faudrait revoir ça plus tard.]
-	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier,projetssite,#ID_PROJETS_SITE}|oui}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier, projetssite, #ID_PROJETS_SITE, (#SESSION|unserialize), #GET{opt}}|oui}>
 		<div class="block boutons">
 			<div class="list-group menu" role="menu">
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span>

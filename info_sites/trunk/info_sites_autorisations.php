@@ -37,6 +37,24 @@ function autoriser_ecrire($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
+/**
+ * Autorisation de créer un contenu
+ *
+ * Accordée par defaut ceux qui accèdent à l'espace privé,
+ * peut-être surchargée au cas par cas
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', $type, $id, $qui, $opt);
+}
+
 // *****************************
 // Autorisation par défaut
 // *****************************
@@ -165,6 +183,34 @@ function autoriser_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // *****************************
+// Auteurs
+// *****************************
+
+/**
+ * Autorisation d'association (auteurs)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_auteurs_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
+	if (is_array($opt) and isset($opt['projet'])) {
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
+	}
+
+	return in_array($qui['statut'], array(
+		'0minirezo',
+		'1comite',
+	));
+}
+
+// *****************************
 // Les sites de projets (projetssite)
 // *****************************
 
@@ -197,9 +243,9 @@ function autoriser_projetssite_creer($faire, $type, $id, $qui, $opt) {
 function autoriser_projetssite_infositescreer_dist($faire, $type, $id, $qui, $opt) {
 
 	if (is_array($opt) and isset($opt['projet'])) {
-		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
-			return $confirm;
-		}
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
 	}
 
 	return in_array($qui['statut'], array(
@@ -251,9 +297,9 @@ function autoriser_projetssite_modifier($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_projetssite_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
 	if (is_array($opt) and isset($opt['projet'])) {
-		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
-			return $confirm;
-		}
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
 	}
 
 	return in_array($qui['statut'], array(
@@ -275,13 +321,11 @@ function autoriser_projetssite_infositesmodifier_dist($faire, $type, $id, $qui, 
  **/
 function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui, $opt) {
 	if (is_array($opt) and isset($opt['projet'])) {
-		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
-			return $confirm;
-		}
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
 	}
-	echo "<pre>";
-	var_dump($qui);
-	echo "</pre>";
+
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
@@ -298,9 +342,9 @@ function autoriser_projetssite_infositessupprimer_dist($faire, $type, $id, $qui,
  **/
 function autoriser_projetssite_infositesmaj_dist($faire, $type, $id, $qui, $opt) {
 	if (is_array($opt) and isset($opt['projet'])) {
-		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
-			return $confirm;
-		}
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
 	}
 
 	return in_array($qui['statut'], array(
@@ -337,9 +381,9 @@ function autoriser_associerprojets_sites($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_projetssites_infositesassocier_dist($faire, $type, $id, $qui, $opt) {
 	if (is_array($opt) and isset($opt['projet'])) {
-		if ($confirm = confirmer_roles_auteurs_projets($qui, $opt['projet'])) {
-			return $confirm;
-		}
+		$confirm = confirmer_roles_auteurs_projets($qui, $opt['projet']);
+
+		return $confirm;
 	}
 
 	return in_array($qui['statut'], array(
@@ -776,6 +820,7 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 		// Pas de séparateur/serialize prévu pour le moment.
 		$role_creation = array($role_creation);
 	} elseif (is_array($role_creation) and count($role_creation) == 0) {
+		// par défaut
 		$role_creation = array(
 			'dir_projets',
 			'chef_projets',
@@ -786,10 +831,13 @@ function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = 
 		);
 	}
 	$roles_autorises = array_intersect($roles, $role_creation);
-	if (!empty($roles_autorises)) {
+	// roles_autorises est toujours un array et s'il est vide,
+	// c'est que l'auteur n'a pas le rôle adéquate.
+	if (is_array($roles_autorises) and count($roles_autorises) > 0) {
 		return true;
 	}
 
+	// On prend les statuts par défaut
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
