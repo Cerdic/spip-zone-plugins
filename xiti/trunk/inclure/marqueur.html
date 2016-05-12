@@ -1,3 +1,4 @@
+<BOUCLE_si_activer(CONDITION){si #CONFIG{xiti/activer_xiti}|=={oui}|oui}>
 [(#SET{xtpage, ''})]
 
 [(#REM) boucle artourub détermine si article ou rubrique ]
@@ -50,9 +51,6 @@
 [(#GET{xtpage}|=={''}|oui)
 	[(#SET{xtpage, [page_(#ENV{page,accueil})][_(#LANG)]})]
 ]
-
-[(#REM) On verifie si Xiti est activé et on affiche le marqueur]
-[(#CONFIG{xiti/activer_xiti}|oui)
 	<div id="xiti-tag">
 		<script type="text/javascript">
 			// Si le plugin cookiebar est installé
@@ -83,11 +81,12 @@
 		</script>
 		<script type="text/javascript" src="[(#CHEMIN{javascript/xtclicks.js}|url_absolue)]"></script>
 		<script type="text/javascript" src="[(#CHEMIN{javascript/xtcore.js}|url_absolue)]"></script>
-	</div>]
+	</div>
 
 	<noscript>
 		<div id='xiti-tag-noscript'>
 			<img width='1' height='1' src='http://#CONFIG{xiti/xtsd_xiti}.xiti.com/hit.xiti?s=#CONFIG{xiti/xtsite_xiti}&amp;s2=#CONFIG{xiti/xtn2_xiti}&amp;p=#GET{xtpage}&amp;di=&amp;' alt='XiTi' />
 		</div>
 	</noscript>
+</BOUCLE_si_activer>
 #FILTRE{trim}
