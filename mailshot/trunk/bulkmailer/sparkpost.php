@@ -113,7 +113,7 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 
 	spip_log("bulkmailer_sparkpost_webhook_dist $data","mailshot");
 
-	// quand on ajoute le webhook Sparkpost fait un POST sans donnees
+	// HEAD de test ? (a priori pas utilise par SparkPost)
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD' OR !strlen($data)){
 		http_status(200);
 		exit;
@@ -160,6 +160,9 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 			}
 		}
 	}
+
+	// il faut finir par un status 200 sinon SparkPost considere que c'est un echec
+	http_status(200);
 
 }
 
