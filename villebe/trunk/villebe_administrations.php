@@ -29,6 +29,10 @@ function villebe_upgrade($nom_meta_base_version, $version_cible) {
         array('peupler_base_villebe')
     );
 
+	$maj['1.0.1'] = array(
+        array('maj_tables', array('spip_villes_belges_liens')),
+	);
+
 	include_spip('base/upgrade');
     include_spip('base/villebe_peupler_base');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -44,6 +48,7 @@ function villebe_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function villebe_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_villes_belges");
+	sql_drop_table('spip_villes_belges');
+	sql_drop_table('spip_villes_belges_liens');
 	effacer_meta($nom_meta_base_version);
 }

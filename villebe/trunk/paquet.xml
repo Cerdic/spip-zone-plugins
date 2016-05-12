@@ -1,12 +1,12 @@
 <paquet
 	prefix="villebe"
 	categorie="navigation"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/villebe-64.png"
 	documentation=""
-	schema="1.0.0"
+	schema="1.0.1"
 >
 	<nom>Villes de Belgique</nom>
 	<!-- Toutes les villes de Belgique -->
@@ -18,5 +18,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/villebe.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/villebe.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/villebe.php" />
 
 </paquet>

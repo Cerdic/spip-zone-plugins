@@ -24,6 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function villebe_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['villes_belges'] = 'villes_belges';
+	$interfaces['table_des_tables']['villes_belges_liens'] = 'villes_belges_liens';
 
 	return $interfaces;
 }
@@ -62,4 +63,23 @@ function villebe_declarer_tables_objets_sql($tables) {
 	);
 
 	return $tables;
+}
+
+function villebe_declarer_tables_auxiliaires($tables_auxiliaires) {
+
+	$tables_auxiliaires['spip_villes_belges_liens'] = array(
+		'field' => array(
+			'id_villes_belge' => 'bigint(21) NOT NULL',
+			'objet' => "VARCHAR (25) DEFAULT '' NOT NULL",
+			'id_objet' => 'bigint(21) NOT NULL'
+		),
+		'key' => array(
+			'PRIMARY KEY' => 'id_villes_belge,id_objet,objet',
+			'KEY id_villes_belge' => 'id_villes_belge',
+			'KEY id_objet' => 'id_objet',
+			'KEY objet' => 'objet'
+		)
+	);
+
+	return $tables_auxiliaires;
 }
