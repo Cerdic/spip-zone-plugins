@@ -10,7 +10,9 @@
  * @package    SPIP\Xiti\administrations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Installation/maj des tables xiti
@@ -18,8 +20,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function xiti_upgrade($nom_meta_base_version, $version_cible){
-	
+function xiti_upgrade($nom_meta_base_version, $version_cible) {
+
 	$maj = array();
 
 	include_spip('base/upgrade');
@@ -32,8 +34,6 @@ function xiti_upgrade($nom_meta_base_version, $version_cible){
  * @param string $nom_meta_base_version
  */
 function xiti_vider_tables($nom_meta_base_version) {
-	effacer_meta("xiti");
+	effacer_meta('xiti');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

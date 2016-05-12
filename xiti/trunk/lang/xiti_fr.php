@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/xiti/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,9 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_titre_chapitre' => 'Titre par chapitre',
 	'item_titre_seul' => 'Titre par chapitre',
 	'item_xtnv_xiti' => 'Variable xtnv',
-	'item_xtnv_explication_xiti' => '<strong>Obligatoire</strong> - niveau d\'arborescence HTML du site. 
-										Cette variable spécifiant l’emplacement du referrer à récupérer. 
-										Cette variable est renseignée par défaut à "document", elle doit être changée en "parent.document" dans le cas d’une frame/iframe sur le même nom de domaine 
+	'item_xtnv_explication_xiti' => '<strong>Obligatoire</strong> - niveau d\'arborescence HTML du site.
+										Cette variable spécifiant l’emplacement du referrer à récupérer.
+										Cette variable est renseignée par défaut à "document", elle doit être changée en "parent.document" dans le cas d’une frame/iframe sur le même nom de domaine
 										(dans le cas de noms de domaines différents, contactez le Service Clients qu\'il faut!).',
 	'item_xtsd_xiti' => 'Variable xtsd',
 	'item_xtsd_explication_xiti' => '<strong>Obligatoire</strong> - sous-domaine du collecteur AT Internet. À récupérer dans le panneau Marqueurs. Cette information ne doit pas être modifiée.',
@@ -39,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_xtor_explication_xiti' => 'La variable xtor doit contenir au minimum un préfixe indiquant le type de campagne, ainsi qu\'un identifiant de campagne.',
 
 	// T
-	'texte_xiti' => '<p>Activer Xiti, puis renseigner le formulaire de configuration du plugin</p> 
+	'texte_xiti' => '<p>Activer Xiti, puis renseigner le formulaire de configuration du plugin</p>
 					 <p>Consulter la documentation <a href="http://help.atinternet-solutions.com/FR/implementation/general/abouttagging_fr.htm">en ligne</a></p>',
 	'titre_configurer' => 'Configurer Xiti',
 	'titre_xiti' => 'Configuration du plugin Xiti',
