@@ -4,4 +4,4 @@
 
 ### Installation
 
-#INCLURE{fond=marqueur,id_rubrique,id_article,id_mot,id_secteur,lang,page}
+`#INCLURE{fond=marqueur,id_rubrique,id_article,id_mot,id_secteur,lang,page}`
