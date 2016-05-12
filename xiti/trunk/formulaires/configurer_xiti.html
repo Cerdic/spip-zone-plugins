@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<p><:xiti:texte_xiti:></p>
+	<:xiti:texte_xiti:>
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -78,7 +78,7 @@
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:xiti:item_xtn2_explication_xiti:></p>
 							<div class="choix">
-								<input type="text" name="#GET{name}" class="text" id="#GET{name}_oui" value="#ENV{#GET{name}}" placeholder="0" />
+								<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
 							</div>
 						</li>
 						#SET{name,xtdi_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -87,7 +87,7 @@
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:xiti:item_xtdi_explication_xiti:></p>
 							<div class="choix">
-								<input type="text" name="#GET{name}" class="text" id="#GET{name}_oui" value="#ENV{#GET{name}}" placeholder="0" />
+								<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
 							</div>
 						</li>
 					</ul>
@@ -103,7 +103,7 @@
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:xiti:item_xtor_explication_xiti:></p>
 							<div class="choix">
-								<input type="text" name="#GET{name}" class="text" id="#GET{name}_oui" value="#ENV{#GET{name}}" size="50" placeholder="0" />
+								<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" size="50" placeholder="0" />
 							</div>
 						</li>
 					</ul>
