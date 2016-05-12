@@ -3,10 +3,10 @@
 /**
  * Fonctions pour Xiti
  *
- * @plugin	 Xiti
+ * @plugin Xiti
  * @copyright  2014
- * @author	 France diplomatie - Vincent
- * @licence	GNU/GPL
+ * @author France diplomatie - Vincent
+ * @license	GNU/GPL
  * @package	SPIP\Xiti\fonctions
  */
 
@@ -14,8 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
-/** Liste des caractères spéciaux dans le titre de la page
+/**
+ * Liste des caractères spéciaux dans le titre de la page
  * @param $texte
  * @return string
  */
@@ -25,7 +25,8 @@ function xiti_caracteres($texte) {
 	return str_replace($aaccent, $saccent, $texte);
 }
 
-/** Nettoyer les caractères spéciaux dans le titre de la page
+/**
+ * Nettoyer les caractères spéciaux dans le titre de la page
  * @param $texte
  * @return string
  */
@@ -39,8 +40,9 @@ function xiti($texte) {
 	return($texte);
 }
 
-/** Gérer les caractères non-latin
- * @param $texte
+/**
+ * Gérer les caractères non-latin
+ * @param string $texte
  * @return string
  */
 function xiti_nonlatin($texte) {
@@ -48,17 +50,19 @@ function xiti_nonlatin($texte) {
 	return($texte);
 }
 
-/** Nettoyer les URL's
- * @param $texte
+/**
+ * Nettoyer les URL's
+ * @param string $texte
  * @return string
  */
 function xiti_xtdmc($texte) {
 	return str_replace(array('http://www','http://'), array('','.'), $texte);
 }
 
-/** Passe une chaîne vers de l'ascii
- * @param $texte
- * @param $encoding
+/**
+ * Passe une chaîne vers de l'ascii
+ * @param string $texte
+ * @param string $encoding
  * @return string
  */
 function strtoascii($texte, $encoding = 'utf-8') {
@@ -66,53 +70,53 @@ function strtoascii($texte, $encoding = 'utf-8') {
 
 	// Tableau des corespondance
 	$str_ascii = array(
-		'A'	 => 'ÀÁÂÃÄÅĀĂǍẠẢẤẦẨẪẬẮẰẲẴẶǺĄ',
-		'a'	 => 'àáâãäåāăǎạảấầẩẫậắằẳẵặǻą',
-		'C'	 => 'ÇĆĈĊČ',
-		'c'	 => 'çćĉċč',
-		'D'	 => 'ÐĎĐ',
-		'd'	 => 'ďđ',
-		'E'	 => 'ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ',
-		'e'	 => 'èéêëēĕėęěẹẻẽếềểễệ',
-		'G'	 => 'ĜĞĠĢ',
-		'g'	 => 'ĝğġģ',
-		'H'	 => 'ĤĦ',
-		'h'	 => 'ĥħ',
-		'I'	 => 'ÌÍÎÏĨĪĬĮİǏỈỊ',
-		'J'	 => 'Ĵ',
-		'j'	 => 'ĵ',
-		'K'	 => 'Ķ',
-		'k'	 => 'ķ',
-		'L'	 => 'ĹĻĽĿŁ',
-		'l'	 => 'ĺļľŀł',
-		'N'	 => 'ÑŃŅŇ',
-		'n'	 => 'ñńņňŉ',
-		'O'	 => 'ÒÓÔÕÖØŌŎŐƠǑǾỌỎỐỒỔỖỘỚỜỞỠỢ',
-		'o'	 => 'òóôõöøōŏőơǒǿọỏốồổỗộớờởỡợð',
-		'R'	 => 'ŔŖŘ',
-		'r'	 => 'ŕŗř',
-		'S'	 => 'ŚŜŞŠ',
-		's'	 => 'śŝşš',
-		'T'	 => 'ŢŤŦ',
-		't'	 => 'ţťŧ',
-		'U'	 => 'ÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛỤỦỨỪỬỮỰ',
-		'u'	 => 'ùúûüũūŭůűųưǔǖǘǚǜụủứừửữự',
-		'W'	 => 'ŴẀẂẄ',
-		'w'	 => 'ŵẁẃẅ',
-		'Y'	 => 'ÝŶŸỲỸỶỴ',
-		'y'	 => 'ýÿŷỹỵỷỳ',
-		'Z'	 => 'ŹŻŽ',
-		'z'	 => 'źżž',
+		'A' => 'ÀÁÂÃÄÅĀĂǍẠẢẤẦẨẪẬẮẰẲẴẶǺĄ',
+		'a' => 'àáâãäåāăǎạảấầẩẫậắằẳẵặǻą',
+		'C' => 'ÇĆĈĊČ',
+		'c' => 'çćĉċč',
+		'D' => 'ÐĎĐ',
+		'd' => 'ďđ',
+		'E' => 'ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ',
+		'e' => 'èéêëēĕėęěẹẻẽếềểễệ',
+		'G' => 'ĜĞĠĢ',
+		'g' => 'ĝğġģ',
+		'H' => 'ĤĦ',
+		'h' => 'ĥħ',
+		'I' => 'ÌÍÎÏĨĪĬĮİǏỈỊ',
+		'J' => 'Ĵ',
+		'j' => 'ĵ',
+		'K' => 'Ķ',
+		'k' => 'ķ',
+		'L' => 'ĹĻĽĿŁ',
+		'l' => 'ĺļľŀł',
+		'N' => 'ÑŃŅŇ',
+		'n' => 'ñńņňŉ',
+		'O' => 'ÒÓÔÕÖØŌŎŐƠǑǾỌỎỐỒỔỖỘỚỜỞỠỢ',
+		'o' => 'òóôõöøōŏőơǒǿọỏốồổỗộớờởỡợð',
+		'R' => 'ŔŖŘ',
+		'r' => 'ŕŗř',
+		'S' => 'ŚŜŞŠ',
+		's' => 'śŝşš',
+		'T' => 'ŢŤŦ',
+		't' => 'ţťŧ',
+		'U' => 'ÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛỤỦỨỪỬỮỰ',
+		'u' => 'ùúûüũūŭůűųưǔǖǘǚǜụủứừửữự',
+		'W' => 'ŴẀẂẄ',
+		'w' => 'ŵẁẃẅ',
+		'Y' => 'ÝŶŸỲỸỶỴ',
+		'y' => 'ýÿŷỹỵỷỳ',
+		'Z' => 'ŹŻŽ',
+		'z' => 'źżž',
 		// Ligatures
-		'AE'	 => 'Æ',
-		'ae'	 => 'æ',
-		'OE'	 => 'Œ',
-		'oe'	 => 'œ'
+		'AE' => 'Æ',
+		'ae' => 'æ',
+		'OE' => 'Œ',
+		'oe' => 'œ'
 	);
 
 	// Convertion
 	foreach ($str_ascii as $k => $v) {
-		$texte = mb_ereg_replace('['.$v.']', $k, $texte);
+		$texte = mb_ereg_replace('/['.$v.']/', $k, $texte);
 	}
 
 	return $texte;
