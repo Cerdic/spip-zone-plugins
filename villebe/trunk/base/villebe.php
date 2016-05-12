@@ -59,7 +59,7 @@ function villebe_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array(),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
-		'tables_jointures'  => array()
+		'tables_jointures'  => array('spip_villes_belges_liens')
 	);
 
 	return $tables;
