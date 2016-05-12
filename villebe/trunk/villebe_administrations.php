@@ -27,7 +27,7 @@ function villebe_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-        array('maj_tables', array('spip_villes_belges')),
+        array('maj_tables', array('spip_villes_belges', 'spip_villes_belges_liens')),
         array('peupler_base_villebe')
     );
 
