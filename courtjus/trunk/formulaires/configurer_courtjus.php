@@ -53,7 +53,15 @@ function formulaires_configurer_courtjus_saisies_dist() {
                 'label' => _T('courtjus:label_recent'),
                 'explication' => _T('courtjus:explication_recent')
             )
-        )
+        ),
+		array(
+			'saisie' => 'mot',
+			'options' => array(
+				'nom' => 'mot_exclusion',
+				'label' => _T('courtjus:label_mot_exclusion'),
+				'multiple' => 'oui'
+			)
+		)
 	);
 
 	return $saisies;

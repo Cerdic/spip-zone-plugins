@@ -42,6 +42,23 @@ function balise_URL_RUBRIQUE_dist($p) {
  */
 function courtjus_calculer_rubrique($id_rubrique) {
 	include_spip('inc/config');
+
+	$exclusion_mot = lire_config('courtjus/mot_exclusion');
+	if (!empty($exclusion_mot)) {
+		// Construire le where
+		$where = array(
+			sql_in('id_mot', $exclusion_mot),
+			'objet='.sql_quote('rubrique'),
+			'id_objet='.intval($id_rubrique)
+		);
+
+		// Présence d'un mot clé d'exclusion ?
+		$exclusion = sql_getfetsel('id_objet', 'spip_mots_liens', $where);
+		if (!is_null($exclusion)) {
+			return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
+		}
+	}
+
 	$par_rubrique = lire_config('courtjus/squelette_par_rubrique');
 	// Si on n'intervient pas sur les squelettes par rubrique
 	if (empty($par_rubrique)) {
