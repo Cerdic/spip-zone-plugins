@@ -380,7 +380,7 @@ function inc_pmb_notices_select_dist(&$command, $iterateur) {
 		// permettant de ne pas demander tous les resultats
 		// mais seulement ceux a afficher dans le cadre en cours
 		$pagination = false;
-		if ($command['pagination']) {
+		if (!empty($command['pagination'])) {
 			list($debut, $nombre) = $command['pagination'];
 			if (!$debut) $debut = 0;
 			$pagination = true;
