@@ -37,7 +37,7 @@ function xiti_nettoyeur($texte) {
 function xiti($texte) {
 	$texte = strtolower(strtoascii($texte));
 	$texte = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte);
-	return($texte);
+	return $texte;
 }
 
 /**
@@ -46,8 +46,7 @@ function xiti($texte) {
  * @return string
  */
 function xiti_nonlatin($texte) {
-	$texte = preg_replace('[^a-z0-9_:~\\\/\-]', '_', $texte);
-	return($texte);
+	return xiti($texte);
 }
 
 /**
@@ -55,8 +54,10 @@ function xiti_nonlatin($texte) {
  * @param string $texte
  * @return string
  */
-function xiti_xtdmc($texte) {
-	return str_replace(array('http://www','http://'), array('','.'), $texte);
+function xiti_xtdmc($url) {
+	$url = str_replace(array('http://www','https://www', 'http://', 'https://'), array('','','',''), $url);
+	$url = preg_replace('/\/.*/','',$url);
+	return '.' . $url;
 }
 
 /**

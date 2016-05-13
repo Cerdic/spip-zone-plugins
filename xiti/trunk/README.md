@@ -6,7 +6,12 @@
 
 ## Changelog
 
-### Version 1.1.x 
+### Version 1.x.x 
+
+#### Version 1.3.0
+
+* Pouvoir configurer un code xtsite par secteur si on souhaite loguer chaque secteur différemment
+* On améliorer le marqueur pour plus de facilité de lecture
 
 #### Version 1.2.0
 
