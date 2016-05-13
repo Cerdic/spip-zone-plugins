@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.9.0"
+	version="1.9.1"
 	etat="dev"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
@@ -14,6 +14,13 @@
 	<auteur>Jeremy Scherrer</auteur>
 
 	<licence>GNU/GPL</licence>
+
+	<!-- On indique les plugins minimum du core en cas de distribution dédiée d'InfoSites -->
+	<necessite nom="svp" compatibilite="[0.80.0;]"/>
+	<necessite nom="revisions" compatibilite="[1.7.0;]"/>
+	<necessite nom="vertebres" compatibilite="[1.2.0;]"/>
+	<necessite nom="jqueryui" compatibilite="[1.8.0;]"/>
+	<necessite nom="medias" compatibilite="[2.7.0;]"/>
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]"/>
 	<necessite nom="Zcore" compatibilite="[2.4.0;]"/>

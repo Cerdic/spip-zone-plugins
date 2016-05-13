@@ -26,9 +26,9 @@ function inc_plugins_spip_dist($plugin = array(), $branche_spip = null) {
 			$branche_spip = $t[0] . '.' . $t[1];
 
 		}
-		echo "<pre>";
-		var_dump($svp_plugin);
-		echo "</pre>";
+		//echo "<pre>";
+		//var_dump($svp_plugin);
+		//echo "</pre>";
 		# TODO : Créer la fonction qui va chercher les infos d'un plugin SPIP.
 		return $svp_plugin;
 	}

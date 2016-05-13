@@ -10,12 +10,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_fiche_site_rapide' => 'Ajouter rapidement un site',
 	'ajouter_projets_rapide' => 'Ajouter des projets',
-	'ajouter_projets_rapide_explication' => 'Cette page vous permet d\'ajouter rapidement des projets en base de données, à partir de leur url en ligne. Le site de votre projet doit être accessible en ligne car le formulaire récupérera le &lt;title&gt; de la page d\'accueil comme nom de projet.',
+	'ajouter_projets_rapide_explication' => 'Cette page vous permet d’ajouter rapidement des projets en base de données, à partir de leur url en ligne. Le site de votre projet doit être accessible en ligne car le formulaire récupérera le &lt;title&gt; de la page d’accueil comme nom de projet.',
 	'architecte_label' => 'Architecte',
+	'auteur_commits_label' => 'Commits de l’utilisateur',
+	'auteur_contacts_label' => 'Contacts de l’utilisateur',
 	'auteur_identifie_informations' => 'Vos informations',
 	'auteur_identifie_profil' => 'Votre profil',
+	'auteur_organisations_label' => 'Organisations de l’utilisateur',
 	'auteur_projets_attribuer' => 'Attribuer des projets à cet auteur',
-	'auteur_projets_label' => 'Projets de l\'auteur',
+	'auteur_projets_cadres_label' => 'Cadres de projets de l’utilisateur',
+	'auteur_projets_label' => 'Projets de l’utilisateur',
+	'auteur_projets_sites_label' => 'Sites de l’utilisateur',
+	'auteur_vos_commits_label' => 'Vos commits',
+	'auteur_vos_contacts_label' => 'Vos contacts',
+	'auteur_vos_organisations_label' => 'Vos organisations',
+	'auteur_vos_projets_cadres_label' => 'Vos cadres de projets',
+	'auteur_vos_projets_label' => 'Vos projets',
+	'auteur_vos_projets_sites_label' => 'Vos sites',
 	'autres_label' => 'Autres',
 
 	// B
@@ -35,15 +46,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_contacts_lies_aux_projets' => 'Est-ce que les contacts sont liés aux projets&nbsp;?',
 	'controle_contacts_orphelins' => 'Contacts sans organisation',
 	'controle_coordonnees_liees_contacts' => 'Est-ce que les coordonnées sont activées pour les contacts&nbsp;?',
-	'controle_extension_curl_actif' => 'Est-ce que l\'extension cURL de PHP est activée&nbsp;?',
-	'controle_info_sites_menu_auteurs' => 'Est-ce que l\'entrée <strong>"Utilisateurs"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_commits' => 'Est-ce que l\'entrée <strong>"Commits"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_contacts' => 'Est-ce que l\'entrée <strong>"Contacts"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_organisations' => 'Est-ce que l\'entrée <strong>"Organisations"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_projets' => 'Est-ce que l\'entrée <strong>"Projets"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_projets_cadres' => 'Est-ce que l\'entrée <strong>"Cadres de projet"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_projets_sites' => 'Est-ce que l\'entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
-	'controle_info_sites_menu_statistiques' => 'Est-ce que l\'entrée <strong>"Statistiques"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_extension_curl_actif' => 'Est-ce que l’extension cURL de PHP est activée&nbsp;?',
+	'controle_info_sites_menu_auteurs' => 'Est-ce que l’entrée <strong>"Utilisateurs"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_commits' => 'Est-ce que l’entrée <strong>"Commits"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_contacts' => 'Est-ce que l’entrée <strong>"Contacts"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_organisations' => 'Est-ce que l’entrée <strong>"Organisations"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_projets' => 'Est-ce que l’entrée <strong>"Projets"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_projets_cadres' => 'Est-ce que l’entrée <strong>"Cadres de projet"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_projets_sites' => 'Est-ce que l’entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_info_sites_menu_statistiques' => 'Est-ce que l’entrée <strong>"Statistiques"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_projets_lies_organisations' => 'Est-ce que les projets sont liés aux organisations&nbsp;?',
 	'controle_projets_orphelins' => 'Projets sans organisation',
 	'controle_projets_sites_orphelins' => 'Sites sans projet parent',
@@ -51,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'developpeur_label' => 'Développeur',
-	'diagnostic_logiciel_absent' => 'Il n\'y a pas de protocole de diagnostic défini pour ce logiciel.',
+	'diagnostic_logiciel_absent' => 'Il n’y a pas de protocole de diagnostic défini pour ce logiciel.',
 	'dir_projets_label' => 'Directeur de projets',
 
 	// E
@@ -104,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_validation' => 'Validation',
 	'lead_developpeur_label' => 'Lead Développeur',
 	'liste_url_projets_explication' => 'Veuillez saisir ci-dessous la liste des urls de vos projets à ajouter. Une url par ligne.',
-	'liste_url_projets_label' => 'L\'url de projets en ligne',
+	'liste_url_projets_label' => 'L’url de projets en ligne',
 
 	// M
 	'menu_auteurs' => 'Utilisateurs',
@@ -130,7 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'ref_tech_label' => 'Référent technique',
-	'retour_page_accueil' => 'Revenir à la page d\'accueil',
+	'retour_page_accueil' => 'Revenir à la page d’accueil',
 
 	// S
 	'stats_nb_logiciel_version' => 'Nombre de versions du logiciel',
@@ -151,6 +162,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'webservice_consultation' => 'Consultation du webservice',
 
 	// Z
-	'zone_restreinte' => 'Vous n\'avez pas les droits suffisants pour accéder à cette page.',
+	'zone_restreinte' => 'Vous n’avez pas les droits suffisants pour accéder à cette page.',
 
 );
