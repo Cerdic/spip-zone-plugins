@@ -355,30 +355,34 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 				foreach ($champs as $champ => $poids) {
 					$champ = explode('.', $champ);
 					$champ = end($champ);
-					// translitteration_rapide uniquement si on est deja en utf-8
-					$value = ($GLOBALS['meta']['charset']=='utf-8' ? translitteration_rapide($t[$champ]) : translitteration($t[$champ]));
-					if ($n =
-						($options['score'] || $options['matches'])
-						? preg_match_all($preg, $value, $regs, PREG_SET_ORDER)
-						: preg_match($preg, $value)
-					) {
-						$vu = true;
+					// éviter des divisions par zéro sur le calcul du score :
+					// tester seulement les champs avec du contenu !
+					if ($len = strlen($t[$champ])) {
+						// translitteration_rapide uniquement si on est deja en utf-8
+						$value = ($GLOBALS['meta']['charset']=='utf-8' ? translitteration_rapide($t[$champ]) : translitteration($t[$champ]));
+						if ($n =
+							($options['score'] || $options['matches'])
+							? preg_match_all($preg, $value, $regs, PREG_SET_ORDER)
+							: preg_match($preg, $value)
+						) {
+							$vu = true;
 
-						if ($options['champs']) {
-							$champs_vus[$champ] = $t[$champ];
-						}
-						if ($options['score']) {
-							// on pondere le nombre d'occurence par une fonction inverse de la longueur du contenu
-							// 1 = 1 occurence pour 200 mots de 8 lettres = 1600 signes
-							$score += $n * $poids * sqrt(sqrt(1600/strlen($t[$champ])));
-						}
-						if ($options['matches']) {
-							$matches[$champ] = $regs;
-						}
-						if (!$options['champs']
-							and !$options['score']
-							and !$options['matches']) {
-							break;
+							if ($options['champs']) {
+								$champs_vus[$champ] = $t[$champ];
+							}
+							if ($options['score']) {
+								// on pondere le nombre d'occurence par une fonction inverse de la longueur du contenu
+								// 1 = 1 occurence pour 200 mots de 8 lettres = 1600 signes
+								$score += $n * $poids * sqrt(sqrt(1600/$len));
+							}
+							if ($options['matches']) {
+								$matches[$champ] = $regs;
+							}
+							if (!$options['champs']
+								and !$options['score']
+								and !$options['matches']) {
+								break;
+							}
 						}
 					}
 				}
