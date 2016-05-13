@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
+	'item_secteur_xiti_home' => 'Considérer ces secteurs comme la home',
 	'item_secteur_xiti_oui' => 'Activer la configuration par secteur',
 	'item_secteur_xiti_non' => 'Désactiver la configuration par secteur',
 	'item_non_utiliser_xiti' => 'Désactiver Xiti',

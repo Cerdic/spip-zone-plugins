@@ -8,6 +8,10 @@
 
 ### Version 1.x.x 
 
+#### Version 1.3.1
+
+* Stipuler dans la configuration si l'on souhaite que les secteurs ayant une conf particulière soient considérés comme la home
+
 #### Version 1.3.0
 
 * Pouvoir configurer un code xtsite par secteur si on souhaite loguer chaque secteur différemment

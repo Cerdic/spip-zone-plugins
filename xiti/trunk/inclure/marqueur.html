@@ -19,7 +19,7 @@
 	[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
 	[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
 		#SET{xtsite,#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}}
-		[(#CONFIG{xiti/xtpage_xiti}|=={oui}|oui)
+		[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
 			#SET{profondeur,0}
 		]
 	]
@@ -37,7 +37,7 @@
 		[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
 			[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
 				#SET{xtsite,#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}}
-				[(#CONFIG{xiti/xtpage_xiti}|=={oui}|oui)
+				[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
 					#SET{profondeur,0}
 				]
 			]
