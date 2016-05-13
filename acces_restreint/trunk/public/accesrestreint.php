@@ -28,7 +28,11 @@ function critere_tout_voir_dist($idb, &$boucles, $crit) {
  */
 function accesrestreint_pre_boucle(&$boucle){
 	// On ne filtre que s'il n'y a pas le critère {tout_voir} et pas la constante qui fait tout voir partout
-	if ((!defined('AR_TOUJOURS_TOUT_VOIR') or !AR_TOUJOURS_TOUT_VOIR) and !isset($boucle->modificateur['tout_voir'])) {
+	if (
+		(!defined('AR_TOUJOURS_TOUT_VOIR') or !AR_TOUJOURS_TOUT_VOIR)
+		and !isset($boucle->modificateur['tout_voir'])
+		and $boucle->iterateur == 'SQL'
+	) {
 		$securise = false;
 		
 		switch ($boucle->type_requete) {
