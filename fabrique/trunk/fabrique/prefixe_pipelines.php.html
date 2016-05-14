@@ -41,7 +41,7 @@ function [(#PREFIXE)]_affiche_enfants($flux) {
 					. "<br class='nettoyeur' />";
 		}
 
-		$flux['data'] .= $lister_objets('#OBJET', array('titre'=>_T('#TYPE:titre_[(#OBJET)]_rubrique') , 'id_rubrique'=>$id_rubrique[, 'par'=>'(#CHAMP_TITRE)']));
+		$flux['data'] .= $lister_objets('#OBJET', array('titre'=>_T('#TYPE:titre_[(#OBJET)]_rubrique') , 'id_rubrique'=>$id_rubrique));
 		$flux['data'] .= $bouton;
 </BOUCLE_objets_affiche_enfants>
 	}
