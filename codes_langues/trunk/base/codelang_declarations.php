@@ -12,12 +12,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Déclaration des nouvelles tables de la base de données propres au plugin.
  *
- * Le plugin déclare 4 nouvelles tables issues de la base SIL qui sont :
+ * Le plugin déclare 5 nouvelles tables ISO-639 issues de 2 bases de données (SIL et Library of Congress
+ * uniquemet pour les familles de langues) :
  *
  * - `spip_iso639codes`, qui contient les codes ISO-639-3, 2 et 1,
  * - `spip_iso639names`, qui contient les noms de langue,
  * - `spip_iso639macros`, qui contient le mapping des macrolangues,
  * - `spip_iso639retirements`, qui contient les langues retirées de la liste officielle,
+ * - `spip_iso639families`, qui contient les familles et groupes de langues,
  *
  * et une table `spip_codes_langues` qui contient les codes de langues de certains services
  * comme spip et leur correspondance avec les codes ISO-639.
@@ -32,6 +34,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function codelang_declarer_tables_principales($tables_principales) {
 
+	// -------------------------------------------------
 	// Table principale des codes ISO : spip_iso639codes
 	$table_codes = array(
 		'code_639_3'  => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-3 identifier
@@ -52,6 +55,7 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639codes'] =
 		array('field' => &$table_codes, 'key' => &$table_codes_key);
 
+	// --------------------------------------------
 	// Tables des noms de langue : spip_iso639names
 	$table_names = array(
 		'code_639_3'    => "char(3) DEFAULT '' NOT NULL",     // The three-letter 639-3 identifier
@@ -67,6 +71,7 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639names'] =
 		array('field' => &$table_names, 'key' => &$table_names_key);
 
+	// -------------------------------------------
 	// Tables des macrolangues : spip_iso639macros
 	$table_macros = array(
 		'macro_639_3' => "char(3) DEFAULT '' NOT NULL",       // The identifier for a macrolanguage
@@ -82,7 +87,8 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639macros'] =
 		array('field' => &$table_macros, 'key' => &$table_macros_key);
 
-	// Tables des macrolangues : spip_iso639retirements
+	// ------------------------------------------------------
+	// Tables des langues supprimées : spip_iso639retirements
 	$table_rets = array(
 		'code_639_3'     => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-3 identifier
 		'ref_name'       => "varchar(150) DEFAULT '' NOT NULL", // Reference language name
@@ -100,6 +106,28 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639retirements'] =
 		array('field' => &$table_rets, 'key' => &$table_rets_key);
 
+	// ---------------------------------------------------------------------------
+	// Tables des familles et groupes de langues (ISO-639-5) : spip_iso639families
+	$table_families = array(
+		'code_639_5'     => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-5 identifier
+		'uri'		     => "varchar(150) DEFAULT '' NOT NULL", // Description page
+		'label_en'       => "text DEFAULT '' NOT NULL",         // English label for the family
+		'label_fr'       => "text DEFAULT '' NOT NULL",         // French label for the family
+		'code_639_1'     => 'char(2)',                          // Equivalent 639-1 identifier, if there is one
+		'scope'          => "char(1) DEFAULT '' NOT NULL",      // C(ollective) always
+		'code_set'       => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
+		'parent'         => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
+		'maj'            => 'timestamp'
+	);
+
+	$table_families_key = array(
+		'PRIMARY KEY' => 'code_639_5'
+	);
+
+	$tables_principales['spip_iso639families'] =
+		array('field' => &$table_families, 'key' => &$table_families_key);
+
+	// ------------------------------------------------------------
 	// Tables des codes de langues des services web, spip y compris
 	$table_langues = array(
 		'service'	    => "varchar(32) DEFAULT '' NOT NULL", // Nom du service, par exemple spip ou wunderground
@@ -142,6 +170,7 @@ function codelang_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639names'] = 'iso639names';
 	$interfaces['table_des_tables']['iso639macros'] = 'iso639macros';
 	$interfaces['table_des_tables']['iso639retirements'] = 'iso639retirements';
+	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
 	$interfaces['table_des_tables']['codes_langues'] = 'codes_langues';
 
 	// Les traitements

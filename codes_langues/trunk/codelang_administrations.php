@@ -26,17 +26,27 @@ function codelang_upgrade($nom_meta_base_version, $version_cible) {
 //	$config_defaut = configurer_codelang();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_iso639codes', 'spip_iso639names', 'spip_iso639macros', 'spip_iso639retirements')),
+		array(
+			'maj_tables',
+			array(
+				'spip_iso639codes',
+				'spip_iso639names',
+				'spip_iso639macros',
+				'spip_iso639retirements',
+				'spip_iso639families',
+				'spip_codes_langues'
+			)
+		),
 		//		array('ecrire_config', 'codelang', $config_defaut)
 	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 
-	// Ajout systématique des données SIL dans la base de données, quelque soit l'action en cours.
+	// Ajout systématique des données iso dans la base de données, quelque soit l'action en cours.
 	// Ces données n'étant pas modifiables, il n'y a pas de risque à recharger ces tables.
 	include_spip('codelang_fonctions');
-	codelang_charger_tables_sil();
+	codelang_charger_tables_iso();
 }
 
 
@@ -55,9 +65,11 @@ function codelang_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_iso639names');
 	sql_drop_table('spip_iso639macros');
 	sql_drop_table('spip_iso639retirements');
+	sql_drop_table('spip_iso639families');
+	sql_drop_table('spip_codes_langues');
 
-	// Effacer la meta de configuration du plugin et la meta des tables SIL
-	effacer_meta('codelang_sil');
+	// Effacer la meta de configuration du plugin et la meta des tables iso
+	effacer_meta('codelang_iso');
 
 	// Effacer la meta de configuration du plugin
 	//	effacer_meta('codelang');
