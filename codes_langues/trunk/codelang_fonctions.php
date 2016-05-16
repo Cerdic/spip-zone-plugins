@@ -16,17 +16,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @filtre
  * @uses iso_read_table()
  *
+ * @param array	$tables_iso
+ * 		Tableau des tables ISO-639 à charger ou tableau vide sinon. Si le tableau est vide, l'ensemble des
+ * 		tables ISO seront chargées. Les tables doivent être libellées sans le préfixe `spip_`.
+ *
 * @return bool
  *        `true` si le chargement a réussi, `false` sinon
  */
-function codelang_charger_tables_iso() {
+function codelang_charger_tables_iso($tables_iso = array()) {
 
 	$retour = true;
 	
 	// On récupère la liste des tables spip implémentant la base iso
 	include_spip('services/iso/iso_api');
-	$tables_iso = array_keys($GLOBALS['iso_service']['basic_fields']);
-	
+	if (!$tables_iso) {
+		$tables_iso = array_keys($GLOBALS['iso_service']['basic_fields']);
+	}
+
 	// On charge chacune de ces tables avec le fichier .tab extrait du site iso.
 	// Pour éviter d'avoir une mise à jour bancale, il faudrait inclure les requêtes SQL dans
 	// une transaction ce qui n'est pas possible avec spip aujourd'hui.
