@@ -13,7 +13,7 @@
 [(#ENV{nombre_jours}|oui)
 	[(#SET{options, #GET{options}|array_merge{#ARRAY{nombre_jours, #ENV{nombre_jours}}}})]
 ]
-[(#ENV{code}|rainette_coasser{
+[(#ENV{lieu}|rainette_coasser{
 	previsions,
 	#ENV{sous_modele, previsions_12h},
 	#ENV{service, weather},
