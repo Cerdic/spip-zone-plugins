@@ -12,7 +12,7 @@ Reste à faire
 
 ### appel dans les squelettes ###
 
-Il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
+Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
 
 En modifiant la balise `#LOGO_*` ?
 En ajoutant un traitement auto ?
