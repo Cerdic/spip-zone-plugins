@@ -71,7 +71,7 @@ $GLOBALS['iso_service'] = array(
 				'Scope'	        => 'scope'
 			),
 			'loc'			=> array(
-				'Hierarchy'	    => 'parent'
+				'Hierarchy'	    => 'hierarchy'
 			)
 		)
 	)
@@ -244,11 +244,20 @@ function iso639families_complete_by_table($records) {
 		}
 	}
 
-	// On complète maintenant le tableau des enregistrements avec la colonne additionnelle hierarchy
+	// On complète maintenant le tableau des enregistrements avec la colonne additionnelle hierarchy et la colonne
+	// dérivée parent qui ne contient que le code alpha-3 de la famille parente si elle existe.
 	foreach($records as $_cle => $_record) {
 		$code = $_record['code_639_5'];
+		$records[$_cle]['parent'] = '';
 		if (isset($hierarchies[$code])) {
 			$records[$_cle][$loc_to_spip['Hierarchy']] = $hierarchies[$code];
+			// Calcul du parent : si la hierarchie ne contient qu'un code c'est qu'il n'y a pas de parent.
+			// Sinon, le parent est le premier code qui précède le code du record.
+			$parents = explode(',', $hierarchies[$code]);
+			if (count($parents) > 1) {
+				array_pop($parents);
+				$records[$_cle]['parent'] = array_pop($parents);
+			}
 		} else {
 			$records[$_cle][$loc_to_spip['Hierarchy']] = '';
 		}

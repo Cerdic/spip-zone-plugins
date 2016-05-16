@@ -116,7 +116,8 @@ function codelang_declarer_tables_principales($tables_principales) {
 		'code_639_1'     => 'char(2)',                          // Equivalent 639-1 identifier, if there is one
 		'scope'          => "char(1) DEFAULT '' NOT NULL",      // C(ollective) always
 		'code_set'       => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
-		'parent'         => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
+		'hierarchy'      => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
+		'parent'         => "char(3) DEFAULT '' NOT NULL",      // The parent three-letter 639-5 identifier
 		'maj'            => 'timestamp'
 	);
 
@@ -158,7 +159,7 @@ function codelang_declarer_tables_principales($tables_principales) {
  *
  * @pipeline declarer_tables_interfaces
  *
- * @param array $interface
+ * @param array $interfaces
  *        Tableau global des informations tierces sur les tables de la base de données
  *
  * @return array
