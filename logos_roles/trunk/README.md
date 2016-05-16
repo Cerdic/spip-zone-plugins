@@ -7,6 +7,11 @@ Cela permet d'assurer une bonne rétro-compatibilité tout en permettant d'éten
 L'idée est de se baser sur les rôles de documents dont le nom commence par `logo` pour définir les types de logos disponibles.
 Les rôles définis par le plugin « Rôles de documents » nous donnent les rôles habituels de spip : « logo » et « logo_survol », mais on peut aussi ajouter d'autres rôles de logos via la méthode décrite dans [La documentation du plugin Rôles](http://contrib.spip.net/Des-roles-sur-des-liens).
 
+### Modification des boucles `DOCUMENTS` ###
+
+Pour des raisons de rétro-compatibilité, les boucles `DOCUMENTS` ne montrent pas les logos.
+Les logos n'apparaissent que si l'on utilise le critère `{role}` dans la boucle.
+
 Reste à faire
 -------------
 
@@ -18,11 +23,6 @@ En modifiant la balise `#LOGO_*` ?
 En ajoutant un traitement auto ?
 
 TODO le logo principal devrait être utilisé comme valeur par défaut pour les autres.
-
-### Modification des boucles `DOCUMENTS` ? ###
-
-Les boucles `DOCUMENTS` posent un problème de compatibilité, puisqu'elle font soudainement apparaître les logos.
-Peut-être qu'il faudrait s'arranger pour que les boucles `DOCUMENTS` ne sortent les logos que si on ajoute un critère, genre `{afficher_logos}` ?
 
 ### Migration des logos existants ###
 
