@@ -7,15 +7,15 @@
         <ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-            
+
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
-                {class=datepicker})]
+                {class=datepicke})]
 
             [(#SAISIE{input,date_fin,obligatoire}
                 {label=<:orr:date_de_fin:>}
-                {class=datepicker})]
-                
+                {class=datepicke})]
+
             #SET{tableau_ressource, #ARRAY}
             <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
                 [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
@@ -29,11 +29,11 @@
                 <select id="select_multiple" size="4" multiple="multiple" class="champ_liste_ressources" name="liste_ressources[]"
                     size="[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]">
                     <INCLURE{fond=formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
-                </select>               
+                </select>
 
             </li>
 
-            [(#CONFIG*{champs_extras_spip_orr_reservations}|oui) 
+            [(#CONFIG*{champs_extras_spip_orr_reservations}|oui)
                 <INCLURE{fond=inc/formulaire_reservation_champs_extra}{env} />]
         </ul>
         <p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
@@ -44,8 +44,9 @@
     jQuery(function(){
         var champ_date_debut = $('#champ_date_debut');
         var champ_date_fin = $('#champ_date_fin');
-        champ_date_debut.datetimepicker({ 
-            timeFormat: 'HH:mm:ss',
+        champ_date_debut.datetimepicker({
+			dateFormat: "yy/mm/dd",
+			timeFormat: 'HH:mm:ss',
             showSecond: 0,
             stepHour: 1,
             stepMinute: 15,
@@ -74,15 +75,16 @@
                 jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
                         { "date_debut_ajax": date_debut,
                         "date_fin_ajax": date_fin,
-                        "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});             
+                        "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});
                 },
             onSelect: function (selectedDateTime){
                 champ_date_fin.datetimepicker('option', 'minDate', champ_date_debut.datetimepicker('getDate') );
             }
         });
 
-        champ_date_fin.datetimepicker({ 
-            timeFormat: 'HH:mm:ss',
+        champ_date_fin.datetimepicker({
+			dateFormat: "yy/mm/dd",
+			timeFormat: 'HH:mm:ss',
             showSecond: 0,
             stepHour: 1,
             stepMinute: 15,
@@ -111,7 +113,7 @@
                 jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
                     { "date_debut_ajax": date_debut,
                     "date_fin_ajax": date_fin,
-                    "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});             
+                    "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});
             },
             onSelect: function (selectedDateTime){
                 champ_date_debut.datetimepicker('option', 'maxDate', champ_date_fin.datetimepicker('getDate') );
