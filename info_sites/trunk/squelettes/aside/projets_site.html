@@ -13,8 +13,7 @@
 				</a>
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="list-group-item bouton website"><span class="fa-stack text-primary"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-globe fa-stack-1x fa-inverse"></i></span>
 				<:info_sites:btn_webservice_consultation:>
-				</a>][
-				(#LOGICIEL_PLUGINS*|strlen|oui|et{[(#LOGICIEL_NOM*|in_array{#GET{liste_logiciels}}|oui)]})
+				</a>][(#LOGICIEL_PLUGINS*|strlen|oui|et{[(#LOGICIEL_NOM*|in_array{#GET{liste_logiciels}}|oui)]})
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="list-group-item bouton diagnostic"><span class="fa-stack text-primary"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-table fa-stack-1x fa-inverse"></i></span>
 					<:info_sites:btn_diagnostic:>
 				</a>

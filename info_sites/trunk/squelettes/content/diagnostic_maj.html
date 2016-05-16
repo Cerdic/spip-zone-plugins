@@ -8,7 +8,7 @@
 	<div class="clearfix"></div>]
 	<BOUCLE_projets (PROJETS projets_sites_liens) {tout} {id_projets_site} {projets.versioning_path!=""} {projets.versioning_type!=""} {projets_sites_liens.objet="projet"}>
 		<h2><a href="#URL_PROJET">[(#NOM)]</a></h2>
-[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#_projets_site:LOGICIEL_NOM|strtolower)],'/maj',[_(#VERSIONING_TYPE|strtolower)]})]})]
+[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#_projets_site:LOGICIEL_NOM|strtolower|replace{(&#38;nbsp;|\p{P}|\h)+,_,S})],'/maj',[_(#VERSIONING_TYPE|strtolower)]})]})]
 [(#CHEMIN{[(#GET{inclure}).html]}|?{
 	[(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
 	<:info_sites:diagnostic_logiciel_absent:>
