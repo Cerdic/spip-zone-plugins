@@ -15,6 +15,7 @@ function url2flux_xml($url, $utiliser_namespace = 'false') {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
+
 	if (!$flux) {
 		spip_log("URL indiponible : $url", "rainette");
 		return array();
@@ -22,13 +23,23 @@ function url2flux_xml($url, $utiliser_namespace = 'false') {
 
 	// Tranformation de la chaine xml reçue en tableau associatif
 	$convertir = charger_fonction('simplexml_to_array', 'inc');
+
+	// Pouvoir attraper les erreurs de simplexml_load_string() !!!
+	// http://stackoverflow.com/questions/17009045/how-do-i-handle-warning-simplexmlelement-construct/17012247#17012247
+	set_error_handler(function($errno, $errstr, $errfile, $errline) {
+		throw new Exception($errstr, $errno);
+	});
+
 	try {
 		$xml = $convertir(simplexml_load_string($flux), $utiliser_namespace);
 		$xml = $xml['root'];
 	} catch (Exception $e) {
+		restore_error_handler();
 		spip_log("Erreur analyse xml : " . $e->getMessage(), "rainette");
 		return array();
 	}
+
+	restore_error_handler();
 
 	return $xml;
 }
@@ -43,6 +54,7 @@ function url2flux_json($url) {
 	// Acquisition des données spécifiées par l'url
 	include_spip('inc/distant');
 	$flux = recuperer_page($url);
+
 	if (!$flux) {
 		spip_log("URL indiponible : $url", "rainette");
 		return array();
