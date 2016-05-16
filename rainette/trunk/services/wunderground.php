@@ -232,13 +232,20 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 			break;
 	}
 
-	// Identification et formatage du lieu
+	// Identification et formatage du lieu.
+	// Le service Wunderground permet d'utiliser les codes de Weather comme FRXX0076 pour Paris.
+	// On détecte donc le format du lieu.
 	$query = str_replace(array(' ', ','), array('', '/'), trim($lieu));
-	$index = strpos($query, '/');
-	if ($index !== false) {
-		$ville = substr($query, 0, $index);
-		$pays = substr($query, $index + 1, strlen($query) - $index - 1);
-		$query = $pays . '/' . $ville;
+
+	if (preg_match('#[a-zA-Z]{4}[0-9]{4}#', $query)) {
+		$query = 'locid:' . strtoupper($lieu);
+	} else {
+		$index = strpos($query, '/');
+		if ($index !== false) {
+			$ville = substr($query, 0, $index);
+			$pays = substr($query, $index + 1, strlen($query) - $index - 1);
+			$query = $pays . '/' . $ville;
+		}
 	}
 
 	// Identification de la langue du resume.
