@@ -126,7 +126,7 @@ function simplesaml_vider_sessions() {
  *     True si réussi, false sinon.
 **/
 function simplesaml_auth_autologer() {
-	include_spip('lire_config');
+	include_spip('inc/config');
 	if (lire_config('simplesaml/autologin/activer')) {
 		$simplesaml = new SimpleSAML_Auth_Simple('default-sp');
 		if (!$simplesaml->isAuthenticated()) {
