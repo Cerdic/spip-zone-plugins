@@ -1,3 +1,4 @@
+
 Logos par rôles
 ===============
 
@@ -12,26 +13,6 @@ Les rôles définis par le plugin « Rôles de documents » nous donnent les rô
 Pour des raisons de rétro-compatibilité, les boucles `DOCUMENTS` ne montrent pas les logos.
 Les logos n'apparaissent que si l'on utilise le critère `{role}` dans la boucle.
 
-Reste à faire
--------------
-
-### appel dans les squelettes ###
-
-Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
-
-En modifiant la balise `#LOGO_*` ?
-En ajoutant un traitement auto ?
-
-TODO le logo principal devrait être utilisé comme valeur par défaut pour les autres.
-
-### Migration des logos existants ###
-
-Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
-En l'état actuel, on peut passer un logo enregistré avec l'ancienne API à la nouvelle API en le ré-uploadant dans le formulaire d'édition des logos.
-Mais à terme il serait bien de migrer les logos historiques vers le système de rôles.
-
-Comme ça représente potentiellement beaucoup de logos, il faut être prudent.
-On pourrait se servir d'un cron qui le ferait petit à petit, et/ou une commande spip-cli ?
 
 Surcharges du core
 ------------------
@@ -61,3 +42,24 @@ Ici aussi, on essaie de garder une totale rétro-compatibilité, mais en permett
 
 Les logos enregistrés avec l'ancienne API sont convertis à la nouvelle automatiquement.
 
+
+Reste à faire
+-------------
+
+### appel dans les squelettes ###
+
+Même si les balises `LOGO_*` existantes fonctionnent toujours, il reste à trouver un moyen d'appeler les nouveaux type de logos dans les squelettes.
+
+En modifiant la balise `#LOGO_*` ?
+En ajoutant un traitement auto ?
+
+TODO le logo principal devrait être utilisé comme valeur par défaut pour les autres.
+
+### Migration des logos existants ###
+
+Comme les logos enregistrés avec l'ancienne API fonctionnent toujours avec la nouvelle, il n'y pas d'urgence à migrer, la cohabitation se fait bien.
+En l'état actuel, on peut passer un logo enregistré avec l'ancienne API à la nouvelle API en le ré-uploadant dans le formulaire d'édition des logos.
+Mais à terme il serait bien de migrer les logos historiques vers le système de rôles.
+
+Comme ça représente potentiellement beaucoup de logos, il faut être prudent.
+On pourrait se servir d'un cron qui le ferait petit à petit, et/ou une commande spip-cli ?
