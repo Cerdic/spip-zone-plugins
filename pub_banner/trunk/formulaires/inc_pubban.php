@@ -85,6 +85,11 @@ function formulaires_inc_pubban_charger_dist($env=null,$id_banniere=null){
 		'from' => $page,
 		'tout'=>$tout
 	);
+
+	// un cas tellement idiot : il n'y a qu'une banniere => pas de refresh
+	if (!$nbpub){
+		$valeurs['javascript_refresh'] = 0;
+	}
 	
 	return $valeurs;
 }
