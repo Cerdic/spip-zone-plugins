@@ -117,16 +117,16 @@
 <!--
 				<div class="clearfix">
 					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</h3>
-					[(#MODELE{rainette_previsions,code=#GET{lieu},type=x_jours,jour=5,sous_modele=previsions_24h, service=#GET{service}})]
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},type=x_jours,jour=5,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
 					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le jour courant (jour=0, type=1_jour, sous-modele=previsions_12h)</h3>
 					<p>Avant 14h00 on affiche jour et nuit, apr&egrave;s 14h00 on affiche nuit et le lendemain matin</p>
-					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=0,sous_modele=previsions_12h, service=#GET{service}})]
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},type=1_jour,jour=0,sous_modele=previsions_12h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
 					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour le surlendemain (jour=2, type=1_jour, sous-modele=previsions_12h)</h3>
-					[(#MODELE{rainette_previsions,code=#GET{lieu},type=1_jour,jour=2,sous_modele=previsions_12h, service=#GET{service}})]
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},type=1_jour,jour=2,sous_modele=previsions_12h, service=#GET{service}})]
 				</div>
 -->
 			</div>
