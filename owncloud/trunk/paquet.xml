@@ -19,7 +19,7 @@
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 	<necessite nom="cextras" compatibilite="[3.7.1;]" />
-	<utilise nom="mediabox" compatibilite="[0.8.0;]" />
+	<utilise nom="mediabox" compatibilite="[1.0.1;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/owncloud.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/owncloud.php" />
