@@ -35,7 +35,7 @@ function url2flux_xml($url, $utiliser_namespace = 'false') {
 		$xml = $xml['root'];
 	} catch (Exception $e) {
 		restore_error_handler();
-		spip_log("Erreur analyse xml : " . $e->getMessage(), "rainette");
+		spip_log("Erreur d'analyse XML pour l'URL `$url` : " . $e->getMessage(), "rainette");
 		return array();
 	}
 
@@ -64,7 +64,7 @@ function url2flux_json($url) {
 	try {
 		$json = json_decode($flux, true);
 	} catch (Exception $e) {
-		spip_log("Erreur analyse json : " . $e->getMessage(), "rainette");
+		spip_log("Erreur d'analyse JSON pour l'URL `$url` : " . $e->getMessage(), "rainette");
 		return array();
 	}
 
