@@ -10,12 +10,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_xiti' => 'Activer',
 	'activer_xiti_par_secteur' => 'Configurer Xiti par secteur',
+	'activer_xiti_par_langue' => 'Configurer Xiti par langue',
 
 	// E
 	'explication_activer_xiti_par_secteur' => 'Configurer un code XITI différent en fonction de chaque secteur.',
+	'explication_activer_xiti_par_langue' => 'Configurer un code XITI différent en fonction de chaque langue (compatible avec la configuration par secteur).',
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
+	'item_langue_xiti_non' => 'Désactiver la configuration par langue',
+	'item_langue_xiti_oui' => 'Activer la configuration par langue',
 	'item_non_utiliser_xiti' => 'Désactiver Xiti',
 	'item_secteur_xiti_home' => 'Considérer ces secteurs comme la home',
 	'item_secteur_xiti_non' => 'Désactiver la configuration par secteur',
@@ -45,7 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'legend_activer_xiti' => 'Choix d’activer Xiti',
+	'legend_configuration_generale' => 'Configuration générale',
+	'legend_configuration_langue' => 'Configuration par langue',
+	'legend_configuration_secteur' => 'Configuration par secteur',
 	'legend_explication_obligatoire_xiti' => ' ',
+	'legend_informations_xiti_langue' => 'Variables de configuration pour la langue "@lang@"',
 	'legend_informations_xiti_secteur' => 'Variables de configuration du secteur "@titre@"',
 	'legend_obligatoire_xiti' => 'Variables fixes et obligatoires',
 	'legend_recommande_xiti' => 'Variables optionnelles dépendant de chaque page auditée (utilisation fortement recommandée)',

@@ -1,13 +1,17 @@
-<BOUCLE_si_activer(CONDITION){si #CONFIG{xiti/activer_xiti}|=={oui}|oui}>
+[(#REM)
+	
+	Plugin Xiti
+	
+	Génération des différentes variables utiles pour le code javascript du marqueur
+	et insertion du marqueur javascript
+
+]<BOUCLE_si_activer(CONDITION){si #CONFIG{xiti/activer_xiti}|=={oui}|oui}>
 [(#REM)
 
 	Les configurations de base
 
 ]
-[(#SET{xtpage, ''})]
 [(#SET{xtnv,[(#CONFIG{xiti/xtnv_xiti, document})]})]
-[(#SET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]})]
-[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]})]
 [(#SET{xtn2,[(#CONFIG{xiti/xtn2_xiti})]})]
 [(#SET{xtdi,[(#CONFIG{xiti/xtdi_xiti})]})]
 [(#SET{xtdmc,[(#CONFIG{xiti/xtdmc_xiti,[(#URL_SITE_SPIP|xiti_xtdmc)]})]})]
@@ -17,22 +21,30 @@
 [(#REM) boucle artourub détermine si article ou rubrique ]
 <BOUCLE_artourub(ARTICLES){id_article}>
 	[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
-	[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
-		#SET{xtsite,#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}}
-		[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
-			#SET{profondeur,0}
+		[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{xtsite,#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}}
+			[(#CONFIG{xiti/xtpage_xiti}|=={oui}|et{#CONFIG{xiti/secteur_xiti_home}|=={on}}|oui)
+				#SET{profondeur,0}
+			]
+		]
+		[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
+			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
 		]
 	]
-	[(#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
-		#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
-	]]
+	[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+		[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+			#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+		]
+		[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+			[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+		]
+	]
 	[(#REM) placer un libelle de page pour les rapports Xiti]
 	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}{profondeur > #GET{profondeur}}>
 		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
 	</BOUCLE_chemin_art2>
 	[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
 </BOUCLE_artourub>
-
 	<BOUCLE_rubchemin(RUBRIQUES){id_rubrique}>
 		[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
 			[(#CONFIG{xiti/xtsite_xiti_#ID_SECTEUR}|trim|strlen|>{2}|oui)
@@ -45,8 +57,15 @@
 				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#ID_SECTEUR}}
 			]
 		]
+		[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+			[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+				#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+			]
+			[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+				[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+			]
+		]
 		[(#REM) placer un libelle de page pour les rapports Xiti]
-		
 		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}{profondeur > #GET{profondeur}}>
 			[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
 		</BOUCLE_chemin2>
@@ -54,30 +73,38 @@
 		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]]
 	</BOUCLE_rubchemin>
 <//B_artourub>
-#GET{profondeur}
 [(#ENV{page}|=={recherche}|oui)
 	[(#SET{xtpage, page_recherche[::(#RECHERCHE|xiti_caracteres|xiti)]})]
 ]
 
-[(#GET{titre_objet}|et{#GET{xtpage}|=={''}}|oui)
+[(#GET{titre_objet}|et{#GET{xtpage}|non|ou{#GET{xtpage}|=={''}|oui}}|oui)
 	[(#SET{xtpage, [(#GET{titre_objet})]})]
 ]
-[(#GET{xtpage}|=={''}|oui)
+[(#GET{xtpage}|non|ou{#GET{xtpage}|=={''}|oui}|oui)
 	[(#SET{xtpage, [page_(#ENV{page,accueil})][_(#LANG)]})]
 ]
 
-#INCLURE{fond=inclure/marqueur_js,
-	xtnv=#GET{xtnv},
-	xtsd=#GET{xtsd},
-	xtsite=#GET{xtsite},
-	xtn2=#GET{xtn2},
-	xtpage=#GET{xtpage},
-	xtdi=#GET{xtdi},
-	xt_multc=#GET{xt_multc},
-	xt_an=#GET{xt_an},
-	xt_ac=#GET{xt_ac},
-	xtdmc=#GET{xtdmc},
-	xtprm=#GET{xtprm},
-	xtergo=#GET{xtergo}}
+[(#CONFIG{xiti/langue_xiti}|=={oui}|oui) 
+	[(#GET{xtsd}|non|et{#CONFIG{xiti/xtsd_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+		#SET{xtsd,#CONFIG{xiti/xtsd_xiti_#LANG}}
+	]
+	[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
+		[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
+	]
+]
+
+[(#INCLURE{fond=inclure/marqueur_js,
+	xtnv=[(#GET{xtnv})],
+	xtsd=[(#GET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]})],
+	xtsite=[(#GET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]})],
+	xtn2=[(#GET{xtn2})],
+	xtpage=[(#GET{xtpage})],
+	xtdi=[(#GET{xtdi})],
+	xt_multc=[(#GET{xt_multc})],
+	xt_an=[(#GET{xt_an})],
+	xt_ac=[(#GET{xt_ac})],
+	xtdmc=[(#GET{xtdmc})],
+	xtprm=[(#GET{xtprm})],
+	xtergo=[(#GET{xtergo})]})]
 </BOUCLE_si_activer>
 #FILTRE{trim}

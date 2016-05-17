@@ -1,29 +1,38 @@
-<div id="xiti-tag">
+[(#REM)
+
+	Plugins Xiti
+
+]<div id="xiti-tag">
 	<script type="text/javascript">
-		// Si le plugin cookiebar est installé
+		[(#REM)
+
+			Si le plugin cookiebar est installé
+
+		]
 		var cookie = true;
 		if(window.jQuery && window.jQuery.cookieBar){
 			cookie = jQuery.cookieBar('cookies');
 		}
 
 		if(cookie) {
-			<!--
 			xtnv = #ENV{xtnv,document};
 			xtsd = '[http://(#ENV{xtsd})]';
-			xtsite = '[(#ENV{xtsite})]';
-			xtn2 = '[(#ENV{xtn2})]';
-			xtpage = '[(#ENV{xtpage})]';
-			xtdi = '[(#ENV{xtdi})]';
+			xtsite = '[(#ENV{xtsite})]';[
+			xtn2 = '(#ENV{xtn2})';
+			]xtpage = '[(#ENV{xtpage})]';[
+			xtdi = '(#ENV{xtdi})';]
 			xt_multc = '[(#ENV{xt_multc})]';
 			xt_an = '[(#ENV{xt_an})]';
-			xt_ac = '[(#ENV{xt_ac})]';
-			xtdmc = '[(#ENV{xtdmc})]';
-			xtprm = '[(#ENV{xtprm})]'; 
-			xtergo = '[(#ENV{xtergo})]';
-			//do not modify below
-			if (window.xtparam!=null){window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;}
-			else{window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;};
-			//-->
+			xt_ac = '[(#ENV{xt_ac})]';[
+			xtdmc = '(#ENV{xtdmc})';][
+			xtprm = '(#ENV{xtprm})';][
+			xtergo = '(#ENV{xtergo})';]
+			if (window.xtparam!=null){
+				window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;
+			}
+			else{
+				window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;
+			};
 		}
 	</script>
 	<script type="text/javascript" src="[(#CHEMIN{javascript/xtclicks.js}|url_absolue)]"></script>
