@@ -56,7 +56,7 @@ function xiti_nonlatin($texte) {
  */
 function xiti_xtdmc($url) {
 	$url = str_replace(array('http://www','https://www', 'http://', 'https://'), array('','','',''), $url);
-	$url = preg_replace('/\/.*/','',$url);
+	$url = preg_replace('/\/.*/', '', $url);
 	return '.' . $url;
 }
 
