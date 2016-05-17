@@ -7,7 +7,7 @@
  * @copyright  2014
  * @author     France diplomatie - Vincent
  * @license    GNU/GPL
- * @package    SPIP\Xiti\administrations
+ * @package    SPIP\Xiti\Formulaires\Configurer_xiti
  */
 
 /**
