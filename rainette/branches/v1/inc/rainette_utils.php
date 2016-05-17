@@ -131,7 +131,7 @@ function charger_meteo($code_meteo, $mode='previsions'){
 	if ($mode == 'infos') {
 		// Traitement du fichier d'infos
 		if (!file_exists($f)) {
-			$flux = "http://xml.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
+			$flux = "http://wxdata.weather.com/wxdata/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
 			include_spip('inc/xml');
 			$xml = spip_xml_load($flux);
 			$tableau = xml2tab_infos($xml, $code_meteo);
@@ -144,7 +144,7 @@ function charger_meteo($code_meteo, $mode='previsions'){
 		if (!file_exists($f)
 		  || !filemtime($f)
 		  || (time()-filemtime($f)>$reload_time)) {
-			$flux = "http://xml.weather.com/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
+			$flux = "http://wxdata.weather.com/wxdata/weather/local/".$code_meteo."?unit="._RAINETTE_SYSTEME_MESURE;
 			$flux .= ($mode == 'previsions') ? "&dayf="._RAINETTE_JOURS_PREVISION : "&cc=*";
 			include_spip('inc/xml');
 			$xml = spip_xml_load($flux);
