@@ -8,9 +8,6 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-
-		<!-- TODO: Voir si on passe un hidden avec le mot de passe, sécurité ??? -->
-		<input type="hidden" value="[(#REM|construire_url|table_valeur{url})]" />
 		<p class="boutons">
 			<span class="image_loading">&nbsp;</span>
 			<input type="submit" class="submit" value="<:owncloud:bouton_recuperer_media:>" /></p>

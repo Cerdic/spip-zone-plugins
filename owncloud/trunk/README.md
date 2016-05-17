@@ -16,6 +16,10 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
+### Version 1.0.4 (17/05/2015)
+
+- On sécurise les URL pour ne pas voir apparaître le mot de passe de Owncloud
+
 ### Version 1.0.3 (15/05/2015)
 
 - Gérer les sous-répertoires
@@ -45,7 +49,5 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## TODO
 
-- Cacher le user/password dans les URL dans le HTML avec javascript
 - Tester le mime-type des documents dans la liste pour éviter de récupérer la racine du répertoire et pour éviter d'avoir une boite mediabox vide sur les documents autres que des images
 - Lors de la suppression d'un document dans SPIP on peut vérifier si il y a une md5 dans la base spip_ownclouds et le supprimer
-- Si on déplace des fichiers identiques dans un sous-répertoire sur Owncloud, le fichier n'a plus le même md5 

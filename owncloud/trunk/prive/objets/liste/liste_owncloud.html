@@ -20,16 +20,18 @@
 		<BOUCLE_liste_owncloud(DATA){si #GET{json}|file_exists}{source json, #GET{json}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'></td>
-			[<td class='titre principale'>
-			<a href="(#VALEUR|table_valeur{'document'}|securise_identifiants{true})" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]" class='mediabox'>
+			<td class='titre principale'>
 				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|oui)
+				<a href="[(#URL_ACTION_AUTEUR{securise_media, [(#VALEUR|table_valeur{'document'})]})]" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]" class='mediabox'>
 					[(#VALEUR|table_valeur{document}|securise_identifiants{true}|balise_img|image_reduire{42,42})]
+				</a>
 				]
 				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|non)
+				<a href="[(#URL_ACTION_AUTEUR{securise_media, [(#VALEUR|table_valeur{'document'})]}|parametre_url{type,[(#VALEUR|table_valeur{'body/mime_type'})]})]" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]">
 					[(#CHEMIN{[prive/vignettes/(#VALEUR|table_valeur{body/extension}).png]}|sinon{#CHEMIN{rien.gif}}|balise_img)]
+				</a>
 				]
-			</a>
-			</td>]
+			</td>
 			[<td class='date'>(#VALEUR|table_valeur{'getlastmodified'})</td>]	
 			[<td class='taille'>(#VALEUR|table_valeur{'body/taille'}|taille_en_octets)</td>]
 			<td class='action'>
