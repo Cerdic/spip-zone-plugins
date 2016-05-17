@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles"
 	categorie="outil"
-	version="1.8.2"
+	version="1.8.3"
 	etat="test"
 	compatibilite="[3.1.0-dev;3.1.*]"
 	logo="prive/themes/spip/images/roles-64.png"
@@ -16,8 +16,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="jquery_plugins"       inclure="roles_pipelines.php" />
-	<pipeline nom="header_prive_css"     inclure="roles_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="roles_pipelines.php" />
+	<pipeline nom="header_prive_css" inclure="roles_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="roles_pipelines.php" />	
 
 	<necessite nom="chosen" compatibilite="[1.0.0;]" />
 </paquet>

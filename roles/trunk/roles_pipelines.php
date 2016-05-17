@@ -5,12 +5,13 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
- * Ajoute Bootstrap (minimal) aux plugins chargés
+ * Ajoute Bootstrap dropdown aux plugins chargés
  * 
  * @param array $flux
  *     Liste des js chargés
@@ -18,23 +19,42 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Liste complétée des js chargés
 **/
 function roles_jquery_plugins($flux) {
-	$flux[] = 'javascript/bootstrap-dropdown.js';
+
+	$config = lire_config('chosen/active', false);
+	if (test_espace_prive() || $config =='oui') {
+		$flux[] = 'javascript/bootstrap-dropdown.js';
+	}
 	return $flux;
 }
 
 
 /**
- * Ajoute Bootstrap (minimal) aux css chargées
+ * Ajoute Bootstrap dropdown aux css chargées dans le privé
  * 
- * @param string $texte Contenu du head HTML concernant les CSS
+ * @param string $flux Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
 **/
-function roles_header_prive_css($texte) {
+function roles_header_prive_css($flux) {
 
 	$css = find_in_path('css/bootstrap-button-dropdown.css');
-	$texte .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+	$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
 
-	return $texte;
+	return $flux;
 }
 
-?>
+
+/**
+ * Ajoute Bootstrap dropdown aux css chargées dans le public
+ *
+ * @param string $flux  Contenu du head HTML concernant les CSS
+ * @return string       Contenu du head HTML concernant les CSS
+**/
+function roles_insert_head_css($flux) {
+	
+	$config = lire_config('chosen', array());
+	if (isset($config['active']) and $config['active']=='oui') {
+		$css = find_in_path('css/bootstrap-button-dropdown.css');
+		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
+	}
+	return $flux;
+}
