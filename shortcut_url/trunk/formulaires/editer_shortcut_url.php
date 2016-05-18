@@ -43,9 +43,7 @@ function formulaires_editer_shortcut_url_charger_dist($id_shortcut_url = 'new', 
 	return $valeurs;
 }
 function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
-	$erreurs = formulaires_editer_objet_verifier('shortcut_url', $id_shortcut_url, array(
-			'url'
-	));
+	$erreurs = formulaires_editer_objet_verifier('shortcut_url', $id_shortcut_url, array('url'));
 
 	if (!$url = _request('url')) {
 		$erreurs['url'] = _T('info_obligatoire');

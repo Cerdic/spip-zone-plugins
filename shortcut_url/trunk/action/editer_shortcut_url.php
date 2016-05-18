@@ -10,7 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/autoriser');
 
@@ -20,12 +22,12 @@ include_spip('inc/autoriser');
  * @param int $id_shortcut_url identifiant numérique du url
  * @return int|false 0 si réussite, false dans le cas ou l'url n'existe pas
  */
-function shortcut_url_supprimer($id_shortcut_url){
-	$valide = sql_getfetsel('id_shortcut_url','spip_shortcut_urls','id_shortcut_url='.intval($id_shortcut_url));
-	if($valide && autoriser('supprimer','shortcut_url',$valide)){
-		sql_delete("spip_shortcut_urls", "id_shortcut_url=".intval($id_shortcut_url));
-		sql_delete("spip_auteurs_liens", "id_objet=".intval($id_shortcut_url));
-		sql_delete("spip_urls", "id_objet=".intval($id_shortcut_url)." AND type=".sql_quote('shortcut_url'));
+function shortcut_url_supprimer($id_shortcut_url) {
+	$valide = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
+	if ($valide && autoriser('supprimer', 'shortcut_url', $valide)) {
+		sql_delete('spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
+		sql_delete('spip_auteurs_liens', 'id_objet='.intval($id_shortcut_url));
+		sql_delete('spip_urls', 'id_objet=' . intval($id_shortcut_url) . ' AND type=' . sql_quote('shortcut_url'));
 		$id_shortcut_url = 0;
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_shortcut_url/$id_shortcut_url'");

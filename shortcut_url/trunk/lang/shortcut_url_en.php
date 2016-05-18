@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/monitor/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -23,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_date_connect' => 'Connection data',
 	'form_date_modif' => 'Date published',
 	'form_date_insert' => 'Date insert',
-	'form_description' => 'Description',	
+	'form_description' => 'Description',
 	'form_edit' => 'Edit',
 	'form_id_shortcut_urls' => 'id',
 	'form_ip_address' => 'IP Address',

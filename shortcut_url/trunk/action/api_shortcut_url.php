@@ -10,7 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Acces aux shortcut_url
@@ -20,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param null $arg
  */
-function action_api_shortcut_url($arg=null) {
+function action_api_shortcut_url($arg = null) {
 
 	if (is_null($arg)) {
 		$arg = _request('arg');
