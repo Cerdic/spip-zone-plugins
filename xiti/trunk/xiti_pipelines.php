@@ -26,7 +26,7 @@ function xiti_affiche_milieu($flux) {
 		and (autoriser('lierxitiniveau', $type, $id))
 	) {
 		$texte = recuperer_fond('prive/squelettes/inclure/xiti_lier', array('id_objet' => $id, 'objet' => $type));
-		if ($p = strpos($flux['data'], "<!--affiche_milieu-->")) {
+		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
 		} else {
 			$flux['data'] .= $texte;

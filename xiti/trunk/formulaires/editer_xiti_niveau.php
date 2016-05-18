@@ -24,7 +24,7 @@ function formulaires_editer_xiti_niveau_verifier_dist($id_xiti_niveau = 'new', $
 	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_article si vide
 	$erreurs = formulaires_editer_objet_verifier('xiti_niveau', $id_xiti_niveau);
 	foreach (array('titre', 'niveau', 'xtsite') as $obli) {
-		if(!_request($obli)){
+		if (!_request($obli)) {
 			$erreurs[$obli] = _T('info_obligatoire');
 		}
 	}

@@ -31,7 +31,7 @@ function xiti_declarer_tables_objets_sql($tables) {
 			'PRIMARY KEY' => 'id_xiti_niveau'
 		),
 		'join' => array(
-				'id_xiti_niveau' => 'id_xiti_niveau'
+			'id_xiti_niveau' => 'id_xiti_niveau'
 		),
 		'principale' => 'oui',
 

@@ -49,7 +49,6 @@ function formulaires_editer_xiti_niveau_objet_traiter($type, $id) {
 	if (_request('id_xiti_niveau') != $actuel) {
 		sql_delete('spip_xiti_niveaux_liens', 'id_objet='.intval($id).' AND objet='.sql_quote($type));
 		$top = sql_insertq('spip_xiti_niveaux_liens', array('id_xiti_niveau' => _request('id_xiti_niveau'), 'id_objet' => intval($id), 'objet' => $type));
-		spip_log($top,'test.'._LOG_ERREUR);
 		$res['message_ok'] = _T('xiti_niveau:message_niveau_maj');
 	} elseif (!_request('id_xiti_niveau') or _request('id_xiti_niveau') == '') {
 		sql_delete('spip_xiti_niveaux_liens', 'id_objet='.intval($id).' AND objet='.sql_quote($type));
