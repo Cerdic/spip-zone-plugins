@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
-	define('_RAINETTE_WEATHER_URL_BASE', '//wxdata.weather.com/wxdata/weather/local/');
+	define('_RAINETTE_WEATHER_URL_BASE', 'http://wxdata.weather.com/wxdata/weather/local/');
 }
 
 
