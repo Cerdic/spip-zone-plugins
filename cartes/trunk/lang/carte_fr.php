@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -45,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_control' => 'Dans un bloc de texte séparé',
 	'option_scale' => 'Échelle',
 	'option_overview' => 'Mini-carte d\'aperçu',
-	
+
 	// R
 	'retirer_lien_carte' => 'Retirer cette carte',
 	'retirer_tous_liens_cartes' => 'Retirer toutes les cartes',

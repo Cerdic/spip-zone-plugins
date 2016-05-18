@@ -9,7 +9,9 @@
  * @package    SPIP\Cartes\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -42,7 +44,7 @@ function cartes_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_cartes'] = array(
 		'type' => 'carte',
-		'principale' => "oui",
+		'principale' => 'oui',
 		'field'=> array(
 			'id_carte'           => 'bigint(21) NOT NULL',
 			'titre'              => 'text NOT NULL DEFAULT ""',
@@ -63,24 +65,24 @@ function cartes_declarer_tables_objets_sql($tables) {
 			'bounds'             => 'GEOMETRY DEFAULT "" NOT NULL',
 			'controles'              => 'text NOT NULL DEFAULT ""',
 			'type'               => 'text NOT NULL DEFAULT ""',
-			'date'               => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"', 
-			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL', 
+			'date'               => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
+			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
-			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"', 
-			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0', 
+			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
 			'maj'                => 'TIMESTAMP'
 		),
 		'key' => array(
 			'PRIMARY KEY'        => 'id_carte',
-			'KEY lang'           => 'lang', 
-			'KEY id_trad'        => 'id_trad', 
-			'KEY statut'         => 'statut', 
+			'KEY lang'           => 'lang',
+			'KEY id_trad'        => 'id_trad',
+			'KEY statut'         => 'statut',
 		),
 		'titre' => 'titre AS titre, lang AS lang',
 		'date' => 'date',
 		'champs_editables'  => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup', 'label'),
 		'champs_versionnes' => array('titre', 'texte', 'layer_defaut', 'layer_topojson', 'zoom_defaut', 'zoom_min', 'zoom_max', 'style_carte', 'footer_carte', 'texte_footer', 'bounds', 'controles', 'type', 'lat', 'lon', 'center_points', 'popup', 'label'),
-		'rechercher_champs' => array("titre" => 5, "texte" => 7,"texte_footer" => 4),
+		'rechercher_champs' => array('titre' => 5, 'texte' => 7, 'texte_footer' => 4),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
@@ -94,7 +96,7 @@ function cartes_declarer_tables_objets_sql($tables) {
 				'champ'     => 'statut',
 				'publie'    => 'publie',
 				'previsu'   => 'publie,prop,prepa',
-				'post_date' => 'date', 
+				'post_date' => 'date',
 				'exception' => array('statut','tout')
 			)
 		),

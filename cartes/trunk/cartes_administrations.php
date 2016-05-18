@@ -9,7 +9,9 @@
  * @package    SPIP\Cartes\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -41,12 +43,12 @@ function cartes_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function cartes_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_cartes");
+	sql_drop_table('spip_cartes');
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('carte')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('carte')));
-	sql_delete("spip_forum",                 sql_in("objet", array('carte')));
+	sql_delete('spip_versions', sql_in('objet', array('carte')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('carte')));
+	sql_delete('spip_forum', sql_in('objet', array('carte')));
 
 	effacer_meta($nom_meta_base_version);
 }

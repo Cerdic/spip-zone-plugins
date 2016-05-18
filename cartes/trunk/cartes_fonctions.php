@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Balise GEOMETRY_MAP pour afficher le champ bounds de la table spip_cartes au format WKT

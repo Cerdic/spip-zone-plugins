@@ -9,13 +9,16 @@
  * @package    SPIP\Cartes\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function cartes_autoriser(){}
+function cartes_autoriser() {
+}
 
 
 // -----------------
@@ -32,9 +35,9 @@ function cartes_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_cartes_menu_dist($faire, $type, $id, $qui, $opt){
+function autoriser_cartes_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
-} 
+}
 
 
 /**
@@ -47,9 +50,9 @@ function autoriser_cartes_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_cartecreer_menu_dist($faire, $type, $id, $qui, $opt){
+function autoriser_cartecreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'carte', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (carte)
@@ -62,7 +65,7 @@ function autoriser_cartecreer_menu_dist($faire, $type, $id, $qui, $opt){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_carte_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -104,5 +107,5 @@ function autoriser_carte_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_carte_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
