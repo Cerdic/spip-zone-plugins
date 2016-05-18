@@ -18,14 +18,16 @@
 	adresses liées à la commande
 ]
 <B_adresses_commande>
-[<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_commande,commandes:titre_adresses_commande})</h2>]
-<table><tbody>
+<div class="liste-objets">
+<table class='spip liste commande_adresses'>
+[<caption><strong class="caption">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_commande,commandes:titre_adresses_commande})</strong></caption>]
+	<tbody>
 	<BOUCLE_adresses_commande(adresses_liens){id_commande}{!par type}>
 	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
 	<td>
-		<div class="adresse-commande">
+		<div class="adresse-commande bd">
 			<h4>[(#TYPE|logo_type_adresse) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
 			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
 		</div>
@@ -33,6 +35,7 @@
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}}}|oui)</tr>]
 	</BOUCLE_adresses_commande>
 </tbody></table>
+</div>
 </B_adresses_commande>
 
 [(#REM)
