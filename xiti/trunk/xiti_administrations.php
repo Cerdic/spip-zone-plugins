@@ -45,5 +45,7 @@ function xiti_vider_tables($nom_meta_base_version) {
 	effacer_meta('xiti');
 	sql_drop_table('spip_xiti_niveaux');
 	sql_drop_table('spip_xiti_niveaux_liens');
+	sql_delete('spip_versions', sql_in('objet', array('xiti_niveau')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('xiti_niveau')));
 	effacer_meta($nom_meta_base_version);
 }

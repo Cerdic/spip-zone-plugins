@@ -23,6 +23,10 @@
 
 ### Version 1.x.x 
 
+##### Version 1.5.1
+
+* Suppression des révisions sur les niveaux 2 de Xiti si les révisions sont activées
+
 #### Version 1.5.0
 
 * Gestion des seconds niveaux (`xtn2`)
