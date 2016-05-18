@@ -3,6 +3,18 @@
 ## Installation
 
 `#INCLURE{fond=inclure/marqueur,id_rubrique,id_article,id_mot,id_secteur,lang,page}`
+## Documentation
+
+### Elements du marqueur xiti
+
+#### Elements obligatoires
+
+* `xtsite` (`s` dans le hit.xiti) : numéro de site
+
+#### Elements facultatifs
+
+* `xtn2` (`s2` dans le hit.xiti) : niveau 2 dans lequel sera rangée la page (peut être remplacé par `xtcustom`)
+* `xtpage` (`p` dans le hit.xiti) : nomme la page auditée et de la ranger dynamiquement dans un chapitre (peut être remplacé par `xtcustom`)
 
 ## TODO
 
@@ -18,6 +30,10 @@
 
 * Sur les pages d'objets, afficher les variables complètes du code Xiti pour les webmestre afin qu'ils puissent voir d'un coup d'oeil ce qui sera généré
 
+### Marqueur Javascript
+
+* Mise à jour des script xtcore et xtclick
+
 
 ## Changelog
 
@@ -26,6 +42,7 @@
 ##### Version 1.5.1
 
 * Suppression des révisions sur les niveaux 2 de Xiti si les révisions sont activées
+* Grosse simplification des fonctions, on utilise une seule fonction de remplacement de caractères : `strtoascii()` qui est appelée par la fonction `xiti()`, `xiti_nettoyeur` n'est plus nécessaire
 
 #### Version 1.5.0
 

@@ -43,12 +43,12 @@
 	</BOUCLE_xtn2_art>
 	[(#REM) placer un libelle de page pour les rapports Xiti]
 	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}{profondeur > #GET{profondeur}}>
-		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti|couper{50,''}|textebrut)]})]
 		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 		[(#SET{xtn2,#NIVEAU})]
 		</BOUCLE_xtn2_hierarchie_art>
 	</BOUCLE_chemin_art2>
-	[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+	[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti|couper{50,''}|textebrut)]})]
 </BOUCLE_artourub>
 	<BOUCLE_rubchemin(RUBRIQUES){id_rubrique}>
 		[(#CONFIG{xiti/secteur_xiti}|=={oui}|oui)
@@ -75,17 +75,17 @@
 		</BOUCLE_xtn2_rub>
 		[(#REM) placer un libelle de page pour les rapports Xiti]
 		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}{profondeur > #GET{profondeur}}>
-			[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+			[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti|couper{50,''}|textebrut)]})]
 			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
 			[(#SET{xtn2,#NIVEAU})]
 			</BOUCLE_xtn2_hierarchie_rub>
 		</BOUCLE_chemin2>
 		[(#PROFONDEUR|>{#GET{profondeur}}|oui)
-		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]]
+		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti|couper{50,''}|textebrut)]})]]
 	</BOUCLE_rubchemin>
 <//B_artourub>
 [(#ENV{page}|=={recherche}|oui)
-	[(#SET{xtpage, page_recherche[::(#RECHERCHE|xiti_caracteres|xiti)]})]
+	[(#SET{xtpage, page_recherche[::(#RECHERCHE|xiti)]})]
 ]
 
 [(#GET{titre_objet}|et{#GET{xtpage}|non|ou{#GET{xtpage}|=={''}|oui}}|oui)
