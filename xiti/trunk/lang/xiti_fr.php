@@ -9,12 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_xiti' => 'Activer',
-	'activer_xiti_par_secteur' => 'Configurer Xiti par secteur',
 	'activer_xiti_par_langue' => 'Configurer Xiti par langue',
+	'activer_xiti_par_secteur' => 'Configurer Xiti par secteur',
 
 	// E
-	'explication_activer_xiti_par_secteur' => 'Configurer un code XITI différent en fonction de chaque secteur.',
 	'explication_activer_xiti_par_langue' => 'Configurer un code XITI différent en fonction de chaque langue (compatible avec la configuration par secteur).',
+	'explication_activer_xiti_par_secteur' => 'Configurer un code XITI différent en fonction de chaque secteur.',
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
