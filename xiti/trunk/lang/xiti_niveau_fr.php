@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_niveau_supprime' => 'Le niveau 2 a été supprimé',
 
 	// T
+	'th_xiti_niveau' => 'Identifiant',
 	'titre_lier_niveau' => 'Xiti - Niveau 2',
 	'titre_nouveau_niveau' => 'Nouveau niveau 2',
 	'titre_xiti_niveau' => 'Niveau 2 de Xiti',

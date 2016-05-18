@@ -20,7 +20,6 @@
 
 ### Gestion des niveaux deux
 
-* Affichage de l'`xtsite` dans la liste des niveaux deux (`?exec=xiti_niveaux`)
 * Affichage des objets liés à chaque niveaux deux dans la page du niveau
 * Sur la page d'un objet, si un niveau 2 est utilisé pour le secteur et / ou pour la langue, l'afficher quelque part
 * Suppression des liens des niveaux lors de la suppression d'un niveau
@@ -39,7 +38,11 @@
 
 ### Version 1.x.x 
 
-##### Version 1.5.1
+#### Version 1.5.2
+
+* Affichage de l'`xtsite` et du numéro du niveau deux dans la liste des niveaux deux (`?exec=xiti_niveaux`)
+
+#### Version 1.5.1
 
 * Suppression des révisions sur les niveaux 2 de Xiti si les révisions sont activées
 * Grosse simplification des fonctions, on utilise une seule fonction de remplacement de caractères : `strtoascii()` qui est appelée par la fonction `xiti()`, `xiti_nettoyeur` n'est plus nécessaire
