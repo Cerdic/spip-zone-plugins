@@ -12,7 +12,6 @@
 
 ]
 [(#SET{xtnv,[(#CONFIG{xiti/xtnv_xiti, document})]})]
-[(#SET{xtn2,[(#CONFIG{xiti/xtn2_xiti})]})]
 [(#SET{xtdi,[(#CONFIG{xiti/xtdi_xiti})]})]
 [(#SET{xtdmc,[(#CONFIG{xiti/xtdmc_xiti,[(#URL_SITE_SPIP|xiti_xtdmc)]})]})]
 [(#SET{xtprm,'&amp;xtcode=UTF-8'})]
@@ -39,9 +38,15 @@
 			[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
 		]
 	]
+	<BOUCLE_xtn2_art(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}}{id_article}>
+	[(#SET{xtn2,#NIVEAU})]
+	</BOUCLE_xtn2_art>
 	[(#REM) placer un libelle de page pour les rapports Xiti]
 	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}{profondeur > #GET{profondeur}}>
 		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+		<BOUCLE_xtn2_hierarchie_art(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+		[(#SET{xtn2,#NIVEAU})]
+		</BOUCLE_xtn2_hierarchie_art>
 	</BOUCLE_chemin_art2>
 	[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
 </BOUCLE_artourub>
@@ -65,9 +70,15 @@
 				[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
 			]
 		]
+		<BOUCLE_xtn2_rub(XITI_NIVEAUX){si #CONFIG{xiti/niveaux_deux}|=={on}}{id_rubrique}>
+		[(#SET{xtn2,#NIVEAU})]
+		</BOUCLE_xtn2_rub>
 		[(#REM) placer un libelle de page pour les rapports Xiti]
 		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}{profondeur > #GET{profondeur}}>
 			[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+			<BOUCLE_xtn2_hierarchie_rub(XITI_NIVEAUX){si #GET{xtn2}|non|et{#CONFIG{xiti/niveaux_deux}|=={on}}}{id_rubrique}>
+			[(#SET{xtn2,#NIVEAU})]
+			</BOUCLE_xtn2_hierarchie_rub>
 		</BOUCLE_chemin2>
 		[(#PROFONDEUR|>{#GET{profondeur}}|oui)
 		[(#SET{titre_objet, [(#GET{titre_objet})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]]
@@ -91,6 +102,10 @@
 	[(#GET{xtsite}|non|et{#CONFIG{xiti/xtsite_xiti_#LANG}|trim|strlen|>{2}|oui}|oui)
 		[(#SET{xtsite,[(#CONFIG{xiti/xtsite_xiti_[(#LANG)]})]})]
 	]
+]
+
+[(#GET{xtn2}|non)
+	[(#SET{xtn2,[(#CONFIG{xiti/xtn2_xiti})]})]
 ]
 
 [(#INCLURE{fond=inclure/marqueur_js,

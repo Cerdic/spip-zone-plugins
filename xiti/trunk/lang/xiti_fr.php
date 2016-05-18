@@ -18,8 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
+	'item_activer_niveau_objets' => 'Activer les niveaux deux sur les contenus :',
 	'item_langue_xiti_non' => 'Désactiver la configuration par langue',
 	'item_langue_xiti_oui' => 'Activer la configuration par langue',
+	'item_niveaux_deux' => 'Activer les niveaux 2',
 	'item_non_utiliser_xiti' => 'Désactiver Xiti',
 	'item_secteur_xiti_home' => 'Considérer ces secteurs comme la home',
 	'item_secteur_xiti_non' => 'Désactiver la configuration par secteur',
@@ -55,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_explication_obligatoire_xiti' => ' ',
 	'legend_informations_xiti_langue' => 'Variables de configuration pour la langue "@lang@"',
 	'legend_informations_xiti_secteur' => 'Variables de configuration du secteur "@titre@"',
+	'legend_niveau_deux' => 'Niveaux 2',
 	'legend_obligatoire_xiti' => 'Variables fixes et obligatoires',
 	'legend_recommande_xiti' => 'Variables optionnelles dépendant de chaque page auditée (utilisation fortement recommandée)',
 	'legend_recommande_xiti_campagne' => 'Variable optionnelle utilisé pour les campagnes emailings',

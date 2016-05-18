@@ -121,6 +121,27 @@
 							</ul>
 						</fieldset>
 					</li>
+					<li class="fieldset"[(#ENV{activer_xiti}|=={oui}|non)style="display:none;"]>
+						<fieldset>
+							<legend><:xiti:legend_niveau_deux:></legend>
+							#SET{name,niveaux_deux}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}"><:xiti:item_niveaux_deux:></label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<div class="choix">
+									<input type="checkbox" name="#GET{name}" id="#GET{name}" value="on"
+									[(#ENV{#GET{name}}|=={on}|oui)checked="checked"]
+									onchange="if ($(this).prop('checked')) { $('li.editer_niveaux_deux').siblings('li').show('fast'); } else { $('li.editer_niveaux_deux').siblings('li').hide('fast'); }" />
+								</div>
+							</li>
+							#SET{name,xiti_niveaux_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{niveaux_deux}|=={on}|non)style="display:none;"]>
+								<label><:xiti:item_activer_niveau_objets:></label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_xiti_niveaux}
+							</li>
+						</fieldset>
+					</li>
 				</fieldset>
 			</li>
 			<li class="fieldset">

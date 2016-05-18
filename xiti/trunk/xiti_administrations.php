@@ -4,7 +4,7 @@
  * Pipeline pour Xiti
  *
  * @plugin     Xiti
- * @copyright  2014
+ * @copyright  2014-2016
  * @author     France diplomatie - Vincent
  * @licence    GNU/GPL
  * @package    SPIP\Xiti\administrations
@@ -23,7 +23,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function xiti_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
-
+	$maj['1.5.0'] = array(
+		// On ajoute les nouvelles table
+		// spip_xiti_niveaux
+		// spip_xiti_niveaux_liens
+		array('maj_tables', array('spip_xiti_niveaux', 'spip_xiti_niveaux_liens'))
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -31,9 +36,14 @@ function xiti_upgrade($nom_meta_base_version, $version_cible) {
 /**
  * Desinstallation/suppression des tables xiti
  *
+ * Supprime la configuration de Xiti et les deux tables
+ * gérant les niveaux deux
+ *
  * @param string $nom_meta_base_version
  */
 function xiti_vider_tables($nom_meta_base_version) {
 	effacer_meta('xiti');
+	sql_drop_table('spip_xiti_niveaux');
+	sql_drop_table('spip_xiti_niveaux_liens');
 	effacer_meta($nom_meta_base_version);
 }
