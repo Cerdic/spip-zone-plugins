@@ -44,6 +44,12 @@ $(document).ready(function () {
 			$(this).addClass('btn btn-default');
 		});
 
+		$('.liste-objets.coordonnees .action a').each(function (event) {
+			if (!$(this).hasClass('btn')) {
+				$(this).addClass('btn btn-default');
+			}
+		});
+
 		$('table.spip.liste').each(function (event) {
 			$(this).addClass('table table-striped table-bordered');
 		});

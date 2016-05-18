@@ -13,6 +13,9 @@
 <div class="clearfix"></div>
 
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_site,id,#ID_PROJETS_SITE},data,'<div class="nettoyeur"></div>'}}
+	[(#SET{exec,#ARRAY{exec,projets_site}})]
+	[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
+	#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,projets_site,id,#ID_PROJETS_SITE,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
 
 	#BOITE_FERMER
 [(#EVAL{_AJAX}|oui)

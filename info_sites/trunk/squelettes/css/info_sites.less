@@ -153,6 +153,10 @@ h1.titre {
 		}
 	}
 }
+.icones-ajouter {
+	overflow: hidden;
+	width: 100%;
+}
 
 .pre-scrollable {
 	white-space: pre-wrap;
@@ -1322,12 +1326,20 @@ input[type="radio"], input[type="checkbox"] {
 	}
 
 	&.picto {
-		.label:before {
-			display: inline-block;
-			margin-right: 5px;
-			color: @black;
-			font-family: FontAwesome;
-			font-size: 14px;
+		.label {
+			padding-left: 20px;
+			position: relative;
+			&:before {
+				position: absolute;
+				display: block;
+				color: @black;
+				font-family: FontAwesome;
+				font-size: 14px;
+				line-height: 2em;
+				top: 0;
+				bottom: 0;
+				left: 0;
+			}
 		}
 		&.contenu_numero {
 			.label:before {
@@ -1378,6 +1390,73 @@ input[type="radio"], input[type="checkbox"] {
 			width: 100%;
 			margin-right: 0;
 			margin-left: 0;
+		}
+	}
+}
+.coordonnees {
+	&.simple {
+		overflow: hidden;
+		display: block;
+		border-top: 1px solid @gray-third;
+		padding-top: 1em;
+		.liste-objets {
+			.liste {
+				.picto {
+					width: 30px;
+					&:before {
+						display: block;
+						color: @black;
+						font-family: FontAwesome;
+						font-size: 28px;
+						line-height: 2em;
+						width: 100%;
+						height: 100%;
+						vertical-align: middle;
+						text-align: center;
+					}
+				}
+				.action {
+					width: 30px;
+					> a {
+						&:before {
+							display: block;
+							content: "\f040";
+							font-family: FontAwesome;
+							font-size: 14px;
+						}
+						img {
+							display: none;
+						}
+					}
+				}
+			}
+			&.numeros {
+				.liste {
+					.picto {
+						&:before {
+							content: "\f095";
+						}
+					}
+				}
+			}
+			&.emails {
+				.liste {
+					.picto {
+						&:before {
+							content: "\f003";
+						}
+					}
+				}
+			}
+			&.adresses {
+				.liste {
+					.picto {
+						&:before {
+							content: "\f041";
+						}
+					}
+				}
+			}
 		}
 	}
 }

@@ -13,6 +13,9 @@
 <div class="clearfix clear"></div>
 
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+	[(#SET{exec,#ARRAY{exec,organisation}})]
+	[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
+	#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
