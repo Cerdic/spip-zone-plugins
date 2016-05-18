@@ -34,24 +34,24 @@ function gis_declarer_tables_objets_sql($tables) {
 
 		/* La table */
 		'field' => array(
-			"id_gis" => "bigint(21) NOT NULL",
-			"titre" => "text NOT NULL DEFAULT ''",
-			"descriptif" => "text NOT NULL DEFAULT ''",
-			"lat" => "double NULL NULL",
-			"lon" => "double NULL NULL",
-			"zoom" => "tinyint(4) NULL NULL",
-			"adresse" => "text NOT NULL DEFAULT ''",
-			"pays" => "text NOT NULL DEFAULT ''",
-			"code_pays" => "varchar(255) NOT NULL DEFAULT ''",
-			"region" => "text NOT NULL DEFAULT ''",
-			"departement" => "text NOT NULL DEFAULT ''",
-			"ville" => "text NOT NULL DEFAULT ''",
-			"code_postal" => "varchar(255) NOT NULL DEFAULT ''",
-			"color" => "varchar(25) NOT NULL DEFAULT ''",
-			"weight" => "varchar(4) NOT NULL DEFAULT ''",
-			"opacity" => "varchar(4) NOT NULL DEFAULT ''",
-			"fillcolor" => "varchar(25) NOT NULL DEFAULT ''",
-			"fillopacity" => "varchar(4) NOT NULL DEFAULT ''"
+			'id_gis' => 'bigint(21) NOT NULL',
+			'titre' => "text NOT NULL DEFAULT ''",
+			'descriptif' => "text NOT NULL DEFAULT ''",
+			'lat' => 'double NULL NULL',
+			'lon' => 'double NULL NULL',
+			'zoom' => 'tinyint(4) NULL NULL',
+			'adresse' => "text NOT NULL DEFAULT ''",
+			'pays' => "text NOT NULL DEFAULT ''",
+			'code_pays' => "varchar(255) NOT NULL DEFAULT ''",
+			'region' => "text NOT NULL DEFAULT ''",
+			'departement' => "text NOT NULL DEFAULT ''",
+			'ville' => "text NOT NULL DEFAULT ''",
+			'code_postal' => "varchar(255) NOT NULL DEFAULT ''",
+			'color' => "varchar(25) NOT NULL DEFAULT ''",
+			'weight' => "varchar(4) NOT NULL DEFAULT ''",
+			'opacity' => "varchar(4) NOT NULL DEFAULT ''",
+			'fillcolor' => "varchar(25) NOT NULL DEFAULT ''",
+			'fillopacity' => "varchar(4) NOT NULL DEFAULT ''"
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_gis',
@@ -125,9 +125,9 @@ function gis_declarer_tables_objets_sql($tables) {
 
 function gis_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$spip_gis_liens = array(
-		"id_gis" => "bigint(21) NOT NULL",
-		"objet" => "VARCHAR (25) DEFAULT '' NOT NULL",
-		"id_objet" => "bigint(21) NOT NULL");
+		'id_gis' => 'bigint(21) NOT NULL',
+		'objet' => "VARCHAR (25) DEFAULT '' NOT NULL",
+		'id_objet' => 'bigint(21) NOT NULL');
 
 	$spip_gis_liens_key = array(
 		'PRIMARY KEY' => 'id_gis,id_objet,objet',
