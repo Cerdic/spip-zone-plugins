@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_xiti_niveaux' => 'Un niveau 2 pour Xiti',
 	'info_aucune_utilisation' => 'Ce niveau 2 n\'est pas utilisé par un objet éditorial.',
 	'info_nb_xiti_niveaux' => '@nb@ niveaux 2 pour Xiti',
+	'info_niveau_hierarchie' => 'Le niveau deux utilisé sera "<a href="@url@">@titre@</a>" si aucune configuration spécifique n\'est sélectionnée.',
 	'info_utilisation' => '@nb@ utilisation',
 	'info_utilisations' => '@nb@ utilisations',
 

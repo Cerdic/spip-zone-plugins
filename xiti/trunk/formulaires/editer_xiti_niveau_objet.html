@@ -1,3 +1,20 @@
+<BOUCLE_xiti_defaut(XITI_NIVEAUX){si #ENV{id_xiti_niveau}|non|et{#ENV{id_rubrique}}}{id_rubrique}>
+[(#SET{titre_niveau,#TITRE})][(#SET{id_xiti_niveau,#ID_XITI_NIVEAU})]
+</BOUCLE_xiti_defaut>
+</B_xiti_defaut>
+<BOUCLE_xiti_hier(HIERARCHIE){si #ENV{id_xiti_niveau}|non|et{#ENV{id_rubrique}}}{id_rubrique}>
+	<BOUCLE_xiti_defaut_hier(XITI_NIVEAUX){id_rubrique}>
+	[(#GET{titre_niveau}|non)
+	[(#SET{titre_niveau,#TITRE})][(#SET{id_xiti_niveau,#ID_XITI_NIVEAU})]]
+	</BOUCLE_xiti_defaut_hier>
+</BOUCLE_xiti_hier>
+</B_xiti_hier>
+<BOUCLE_xiti_defaut_secteur(XITI_NIVEAUX){si #ENV{id_xiti_niveau}|non|et{#ENV{id_secteur}}}{id_rubrique=#ENV{id_secteur}}>
+[(#GET{titre_niveau}|non)
+[(#SET{titre_niveau,#TITRE})][(#SET{id_xiti_niveau,#ID_XITI_NIVEAU})]]
+</BOUCLE_xiti_defaut_secteur>
+<//B_xiti_hier>
+<//B_xiti_defaut>
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_xiti_niveau,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -7,6 +24,8 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_xiti_niveau' value='#ENV{id_xiti_niveau}' />
+		[(#GET{titre_niveau}|oui)[(#SET{url,[(#GET{id_xiti_niveau}|generer_url_entite{xiti_niveau})]})]
+		<p class="explication"><:xiti_niveau:info_niveau_hierarchie{url=#GET{url},titre=#GET{titre_niveau}}:>]
 		<ul>
 			<li class="editer editer_id_xiti_niveaux[ (#ENV**{erreurs}|table_valeur{id_xiti_niveau}|oui)erreur]">
 				<label for="id_xiti_niveau"><:xiti_niveau:entree_xiti_niveau:></label>[
@@ -31,3 +50,4 @@
 	</div></form>
 	</BOUCLE_editable>
 </div>
+#FILTRE{trim}

@@ -21,6 +21,21 @@ function formulaires_editer_xiti_niveau_objet_charger($type, $id) {
 	$valeurs['id_objet'] = intval($id);
 
 	$row = sql_fetsel('*', 'spip_xiti_niveaux_liens', 'id_objet='.intval($id).' AND objet='.sql_quote($type));
+	$objet = objet_info($table_objet_sql, 'field');
+	if (isset($objet['id_secteur']) or (isset($objet['id_rubrique']) and $type != 'rubrique') or isset($objet['id_parent'])) {
+		if (isset($objet['id_rubrique'])) {
+			if($type == 'rubrique') {
+				$info = 'id_parent';
+			} else {
+				$info = 'id_rubrique';
+			}
+			$valeurs['id_rubrique'] = sql_getfetsel($info, $table_objet_sql, $id_table_objet.'='.intval($id));
+		} elseif (isset($objet['id_parent'])) {
+			$valeurs['id_rubrique'] = sql_getfetsel('id_parent', $table_objet_sql, $id_table_objet.'='.intval($id));
+		} elseif (isset($objet['id_secteur'])) {
+			$valeurs['id_secteur'] = sql_getfetsel('id_secteur', $table_objet_sql, $id_table_objet.'='.intval($id));
+		}
+	}
 
 	if (in_array($type, array('article', 'rubrique')) and lire_config('xiti/secteur_xiti', '') == 'oui') {
 		$id_secteur = sql_getfetsel('id_secteur', $table_objet_sql, $id_table_objet.' = '.$id);
