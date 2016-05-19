@@ -15,7 +15,7 @@
 
 	<necessite nom="facteur" compatibilite="[2.4.5;]" />
 	<necessite nom="saisies" compatibilite="[2.6.1;]"/>
-	<utilise nom="notifications" /> 
+	<utilise nom="notifications" compatibilite="[2.0.5;]"/>
 
 	<pipeline nom="formulaire_charger" inclure="inscriptionmotdepasse_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="inscriptionmotdepasse_pipelines.php" />
