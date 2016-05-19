@@ -13,6 +13,7 @@
 	<credit>Aha-Soft pour l'icône</credit>
 	<licence>GPL v3</licence>
 
+	<necessite nom="facteur" compatibilite="[2.4.5;]" />
 	<necessite nom="saisies" compatibilite="[2.6.1;]"/>
 	<utilise nom="notifications" /> 
 
