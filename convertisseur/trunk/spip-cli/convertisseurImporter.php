@@ -61,7 +61,7 @@ class fichiersImporter extends Command {
 		$id_parent = $input->getOption('dest') ;
 		$racine_documents = $input->getOption('racine_documents') ;		
 				
-		// Répertoire source, ou arrivent les fichiers Quark (/exports_quark par défaut).
+		// Répertoire source
 		if(!is_dir($source)){
 			$output->writeln("<error>Préciser le répertoire avec les fichiers à importer. spip import -s repertoire </error>\n");
 			exit ;
@@ -98,21 +98,25 @@ class fichiersImporter extends Command {
 					sql_query("alter table spip_articles add pages TINYTEXT NOT NULL DEFAULT ''");
 
 				if(!in_array('free', $champs))
-					sql_query("alter table spip_articles add pages TINYTEXT NOT NULL DEFAULT ''");
+					sql_query("alter table spip_articles add free TINYTEXT NOT NULL DEFAULT ''");
 				*/
 				
 				// Ajout d'un champ la premiere fois pour stocker les éventuelles ins qui n'ont pas de champs (peut-être long).
-				if(!in_array('metadonnees', $champs))
+				if(!in_array('metadonnees', $champs)){
+					$output->writeln("MAJ BDD : alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
-
+				}
 				// Ajout d'un champ la premiere fois pour stocker l'id_article original (pour ensuite remapper les liens [->123]).
-				if(!in_array('id_source', $champs))
+				if(!in_array('id_source', $champs)){
+					$output->writeln("MAJ BDD : alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add id_source BIGINT(21) NOT NULL DEFAULT ''");
-
+				}
 				// Ajout d'un champ la premiere fois pour stocker le nom du fichier source, pour reconnaitre un article déjà importé.
-				if(!in_array('fichier_source', $champs))
+				if(!in_array('fichier_source', $champs)){
+					$output->writeln("MAJ BDD : alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
-
+				}
+				// on prends tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 
 				// start and displays the progress bar
@@ -149,14 +153,14 @@ class fichiersImporter extends Command {
 					$texte = preg_replace("/@@SOURCE.*/", "", $texte);
 					
 					
-					// Si des <ins> qui correspondent à des champs metadonnees connus, on les ajoute.
+					// Si des <ins> correspondent à des champs metadonnees connus, on les ajoute.
 					$champs_metadonnees = array("mots_cles", "auteurs", "hierarchie", "documents");
 					$hierarchie = "" ;
 					$auteurs = "" ;
 					$mots_cles = "" ;
 					$documents = "" ;					
 
-					if (preg_match_all(",<ins[^>]+class='(.*?)'>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
+					if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
 						foreach($z as $d){ 
 							if(in_array($d[1], $champs_metadonnees)){ 
 								// class="truc" => $truc 
@@ -175,7 +179,7 @@ class fichiersImporter extends Command {
 						$titre_parent = $hierarchie[0] ;
 						$titre_rubrique = $hierarchie[1] ;
 
-						$titre_rubrique = preg_replace(",^(\d{4})/(\d{2})$,", "\\2", $titre_rubrique); // perso diplo
+						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); // perso diplo 2006/02 => 02 ou 2006-02 => 02
 
 					}else{
 						$titre_parent = $annee ;

@@ -635,7 +635,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	$c = array('texte' => $texte);
 	
 	foreach ($champs_article as $champ) {
-		if (preg_match(",<ins class='$champ'>(.*?)</ins>\n*,ims", $texte, $r)
+		if (preg_match(",<ins class='$champ'[^>]*?>(.*?)</ins>\n*,ims", $texte, $r)
 		AND strlen($x = trim($r[1]))
 		AND $champ != "texte"
 		) {
