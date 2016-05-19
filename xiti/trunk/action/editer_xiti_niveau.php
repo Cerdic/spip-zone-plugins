@@ -1,4 +1,9 @@
 <?php
+/**
+ * Gestion de l'action de suppression de niveau de Xiti
+ *
+ * @package SPIP\Xiti\Action
+ **/
 
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
