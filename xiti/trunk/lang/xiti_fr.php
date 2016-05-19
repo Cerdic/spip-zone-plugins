@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_xiti' => 'Configurer Xiti',
-	'item_activer_niveau_objets' => 'Activer les niveaux deux sur les contenus :',
+	'item_activer_niveau_objets' => 'Activer les niveaux deux sur les contenus :',
 	'item_langue_xiti_non' => 'Désactiver la configuration par langue',
 	'item_langue_xiti_oui' => 'Activer la configuration par langue',
 	'item_niveaux_deux' => 'Activer les niveaux 2',
