@@ -26,6 +26,13 @@ function autoriser_xitiniveau_modifier_dist($faire, $quoi, $id, $qui, $opts) {
 	return autoriser('creer', 'xitiniveau', $id, $qui, $opt);
 }
 
+function autoriser_xitiniveau_supprimer_dist($faire, $quoi, $id, $qui, $opts) {
+	if (sql_getfetsel('id_objet', 'spip_xiti_niveaux_liens', 'id_xiti_niveau='.intval($id))) {
+		return false;
+	}
+	return lire_config('xiti/niveaux_deux') == 'on' and $qui['statut'] == '0minirezo';
+}
+
 function autoriser_xitiniveaux_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'xitiniveau', $id, $qui, $opt);
 }
