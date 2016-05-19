@@ -27,4 +27,3 @@ function exec_webfonts(){
 	echo fin_grand_cadre(true),fin_page();
 }
 
-?>
