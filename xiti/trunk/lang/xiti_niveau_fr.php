@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_supprimer_xiti_niveau' => 'Supprimer ce niveau 2',
+	'bouton_xiti_niveau' => 'Dissocier ce niveau 2',
 
 	// E
 	'entree_xiti_niveau' => 'Identifiant du niveau (Interface de Xiti)',
@@ -18,7 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_xiti_niveau' => 'Modifier ce niveau 2',
 	'info_aucun_xiti_niveaux' => 'Aucun niveau 2 pour Xiti',
 	'info_1_xiti_niveaux' => 'Un niveau 2 pour Xiti',
+	'info_aucune_utilisation' => 'Ce niveau 2 n\'est pas utilisé par un objet éditorial.',
 	'info_nb_xiti_niveaux' => '@nb@ niveaux 2 pour Xiti',
+	'info_utilisation' => '@nb@ utilisation',
+	'info_utilisations' => '@nb@ utilisations',
 
 	// M
 	'message_aucun_niveau' => 'Aucun niveau 2 de créé pour l\'xtsite "@xtsite@"',
