@@ -4,24 +4,13 @@
   (c) 2009 SPIP
   Distribue sous licence GPL
 
-]
-<title>[\[(#NOM_SITE_SPIP|concat{'\] : ',<:form_forum_identifiants:>}|nettoyer_titre_email)]</title>
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+[\[(#NOM_SITE_SPIP|concat{'\] : ',<:form_forum_identifiants:>}|nettoyer_titre_email)]
 
-<body>
-[(#SET{nom,[<strong>(#ENV{nom})</strong>]})]
-<p><:form_forum_bonjour{nom=#GET{nom}}:></p>
+<:form_forum_message_auto:>
 
+<:form_forum_bonjour{nom=#ENV{nom}}:>
 
+<:form_forum_confirmer_email{url_confirm=#ENV{url_confirm}}:>
 
-<p><:notifications:form_forum_confirmer_email:></p>
-<div>
-[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_confirm}|url_absolue)],label=<:notifications:bouton_finir_inscription:>,width=250px})</center><br>]
-</div>
-
-#SET{url_site,#URL_SITE_SPIP/}
-[(#SET{nom_site,[<a href="#GET{url_site}">(#NOM_SITE_SPIP)</a>]})]
-
-
-</body>
-
-#FILTRE{facteur_email_wrap_to_html}
+#FILTRE{supprimer_tags|filtrer_entites|trim}
