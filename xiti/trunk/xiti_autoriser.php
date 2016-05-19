@@ -38,7 +38,7 @@ function autoriser_xitiniveaux_menu_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * On ne peut joindre un niveau xiti qu'a un objet qu'on a le droit d'editer
+ * On ne peut joindre ou délier un niveau xiti qu'a un objet qu'on a le droit d'editer
  * Il faut aussi que les niveaux xiti aient ete actives sur les objets concernes
  *
  * @return bool
@@ -47,4 +47,8 @@ function autoriser_lierxitiniveau_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/config');
 	return (in_array(table_objet_sql($type), lire_config('xiti/xiti_niveaux_objets', '')))
 		and (($id > 0 and autoriser('modifier', $type, $id, $qui, $opt)));
+}
+
+function autoriser_dissocierxitiniveau_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('lierxitiniveau', $type, $id, $qui, $opt);
 }
