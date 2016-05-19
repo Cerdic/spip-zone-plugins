@@ -7,8 +7,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'admin_modifier_auteur' => 'Modifier cet utilisateur',
 	'icone_auteurs' => 'Utilisateurs',
+	'icone_creer_nouvel_auteur' => 'Créer un nouvel utilisateur',
+	'icone_tous_auteur' => 'Tous les utilisateurs',
+	'info_auteurs_nombre' => 'utilisateur(s) :',
+	'info_envoyer_message_prive' => 'Envoyer un message privé à cet utilisateur',
 	'info_statut_auteur' => 'Statut :',
+	'lien_voir_auteur' => 'Voir cet utilisateur',
+	'onglet_auteur' => 'L’utilisateur',
 	'statut_webmestre' => 'Utilisateur de niveau 0',
 	'titre_image_administrateur' => 'Utilisateur de niveau 1',
 	'titre_image_auteur_supprime' => 'Utilisateur supprimé',

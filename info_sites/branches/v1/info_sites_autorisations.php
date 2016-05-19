@@ -107,6 +107,12 @@ function autoriser_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
+
+	if ($type === 'auteur') {
+		include_spip('inc/autoriser');
+		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
+	}
+
 	return in_array($qui['statut'], array(
 		'0minirezo',
 		'1comite',
