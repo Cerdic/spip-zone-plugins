@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Mes Favoris 2</nom>
+	<nom>Mes Favoris</nom>
 	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
 	<version>2.5.0</version>
