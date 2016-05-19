@@ -9,6 +9,8 @@
 
 #### Elements obligatoires
 
+* `xtnv` : niveau d'arborescence HTML du site (`document` ou `parent.document`)
+* `xtsd` : sous-domaine du collecteur AT Internet
 * `xtsite` (`s` dans le hit.xiti) : numéro de site
 
 #### Elements facultatifs
@@ -31,16 +33,21 @@
 
 ### Marqueur Javascript
 
-* Mise à jour des script xtcore et xtclick
-
+* Ajouter la prise en compte des visiteurs identifiés (http://help.atinternet-solutions.com/fr/implementation/specific_tags/tg_population_fr.htm)
+* Regarder si les résultats de recherche peuvent être loggés : https://help.atinternet-solutions.com/FR/launch_page.htm#implementation/specific_tags/tg_clicks_FR.htm
 
 ## Changelog
 
 ### Version 1.x.x 
 
-#### Version 1.5.2
+#### Version 1.6.0
 
 * Affichage de l'`xtsite` et du numéro du niveau deux dans la liste des niveaux deux (`?exec=xiti_niveaux`)
+* Concaténation de `xtcore.js` et `xtclick.js` via `#PRODUIRE`
+* Mettre un fichier `xtcore.js` neutre (nom de domaine `.mondomaine.tld`) et remplacer ce `.mondomaine.tld` par la valeur de `xtdmc` de la conf
+* Rendre la valeur de conf `xtdmc` obligatoire.
+* Pouvoir donner un niveaux deux X à la home et ce dans les marqueurs par secteur également si les secteurs sont considérés comme home.
+* Mise à jour des script xtcore et xtclick
 
 #### Version 1.5.1
 

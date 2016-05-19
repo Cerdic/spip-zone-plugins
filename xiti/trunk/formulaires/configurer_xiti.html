@@ -13,7 +13,7 @@
 				<fieldset class="general">
 					<legend><:xiti:legend_configuration_generale:></legend>
 					#SET{name,activer_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 						<label><:xiti:activer_xiti:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						]<div class="choix">
@@ -32,16 +32,16 @@
 							<legend><:xiti:legend_obligatoire_xiti:></legend>
 							<ul>
 								#SET{name,xtdmc_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name}) obligatoire[ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtdmc_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtdmc_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_xtdmc_explication_xiti:> <strong><:info_obligatoire_02:></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="[(#URL_SITE_SPIP|xiti_xtdmc)]" />
 									</div>
 								</li>
 								#SET{name,xtnv_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtnv_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtnv_explication_xiti:></p>
@@ -75,7 +75,7 @@
 							<legend><:xiti:legend_recommande_xiti:></legend>
 							<ul>
 								#SET{name,xtpage_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label><:xiti:item_xtpage_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtpage_explication_xiti:></p>
@@ -85,7 +85,7 @@
 									</div>
 								</li>
 								#SET{name,xtn2_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtn2_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtn2_explication_xiti:></p>
@@ -93,8 +93,17 @@
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
 									</div>
 								</li>
+								#SET{name,xtn2_accueil_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}"><:xiti:item_xtn2_xiti_accueil:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<p class="explication"><:xiti:item_xtn2_explication_xiti_accueil:></p>
+									<div class="choix">
+										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
+									</div>
+								</li>
 								#SET{name,xtdi_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtdi_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtdi_explication_xiti:></p>
@@ -110,7 +119,7 @@
 							<legend><:xiti:legend_recommande_xiti_campagne:></legend>
 							<ul>
 								#SET{name,xtor_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtor_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtor_explication_xiti:></p>
@@ -125,7 +134,7 @@
 						<fieldset>
 							<legend><:xiti:legend_niveau_deux:></legend>
 							#SET{name,niveaux_deux}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}"><:xiti:item_niveaux_deux:></label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<div class="choix">
@@ -135,7 +144,7 @@
 								</div>
 							</li>
 							#SET{name,xiti_niveaux_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{niveaux_deux}|=={on}|non)style="display:none;"]>
+							<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]"[(#ENV{niveaux_deux}|=={on}|non)style="display:none;"]>
 								<label><:xiti:item_activer_niveau_objets:></label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_xiti_niveaux}
@@ -148,7 +157,7 @@
 				<fieldset>
 					<legend><:xiti:legend_configuration_secteur:></legend>
 					#SET{name,secteur_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 						<label><:xiti:activer_xiti_par_secteur:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						<p class="explication"><:xiti:explication_activer_xiti_par_secteur:></p>
@@ -164,11 +173,12 @@
 						</div>
 					</li>
 					#SET{name,secteur_xiti_home}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 						<label for="#GET{name}"><:xiti:item_secteur_xiti_home:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						]<div class="choix">
 							<input type="checkbox" name="#GET{name}" id="#GET{name}" value="on"
+							onchange="if ($(this).prop('checked')) { $('li.editer_xtn2_home_secteur').show('fast'); } else { $('li.editer_xtn2_home_secteur').hide('fast');}"
 							[(#ENV{#GET{name}}|=={on}|oui)checked="checked"] />
 						</div>
 					</li>
@@ -178,7 +188,7 @@
 							<legend><:xiti:legend_informations_xiti_secteur{titre=#TITRE}:></legend>
 							<ul>
 								#SET{name,xtsd_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtsd_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtsd_explication_xiti:></p>
@@ -187,12 +197,21 @@
 									</div>
 								</li>
 								#SET{name,xtsite_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtsite_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtsite_explication_xiti:></p>
 									<div class="choix">
 										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{xtsite_xiti,00000000}" />
+									</div>
+								</li>
+								#SET{name,xtn2_home_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer editer_xtn2_home_secteur editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]"[(#ENV{secteur_xiti_home}|=={on}|non)style="display:none;"]>
+									<label for="#GET{name}"><:xiti:item_xtn2_home_xiti:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<p class="explication"><:xiti:item_xtn2_explication_xiti:></p>
+									<div class="choix">
+										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" />
 									</div>
 								</li>
 							</ul>
@@ -205,7 +224,7 @@
 				<fieldset>
 					<legend><:xiti:legend_configuration_langue:></legend>
 					#SET{name,langue_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-					<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 						<label><:xiti:activer_xiti_par_langue:></label>[
 						<span class='erreur_message'>(#GET{erreurs})</span>
 						<p class="explication"><:xiti:explication_activer_xiti_par_langue:></p>
@@ -226,7 +245,7 @@
 							<legend><:xiti:legend_informations_xiti_langue{lang=#VALEUR}:></legend>
 							<ul>
 								#SET{name,xtsd_xiti_#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtsd_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtsd_explication_xiti:></p>
@@ -235,7 +254,7 @@
 									</div>
 								</li>
 								#SET{name,xtsite_xiti_#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
 									<label for="#GET{name}"><:xiti:item_xtsite_xiti:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<p class="explication"><:xiti:item_xtsite_explication_xiti:></p>

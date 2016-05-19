@@ -18,7 +18,7 @@
 function formulaires_configurer_xiti_verifier_dist() {
 	$erreurs = array();
 	if (_request('activer_xiti') == 'oui') {
-		foreach (array('xtsd_xiti', 'xtsite_xiti') as $obligatoire) {
+		foreach (array('xtsd_xiti', 'xtsite_xiti', 'xtdmc_xiti') as $obligatoire) {
 			if (!_request($obligatoire)) {
 				$erreurs[$obligatoire] = _T('info_obligatoire');
 			}

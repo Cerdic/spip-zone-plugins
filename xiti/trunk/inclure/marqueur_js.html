@@ -18,8 +18,8 @@
 			xtnv = #ENV{xtnv,document};
 			xtsd = '[http://(#ENV{xtsd})]';
 			xtsite = '[(#ENV{xtsite})]';[
-			xtn2 = '(#ENV{xtn2})';
-			]xtpage = '[(#ENV{xtpage})]';[
+			xtn2 = '(#ENV{xtn2})';]
+			xtpage = '[(#ENV{xtpage})]';[
 			xtdi = '(#ENV{xtdi})';]
 			xt_multc = '[(#ENV{xt_multc})]';
 			xt_an = '[(#ENV{xt_an})]';
@@ -29,14 +29,12 @@
 			xtergo = '(#ENV{xtergo})';]
 			if (window.xtparam!=null){
 				window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;
-			}
-			else{
+			} else {
 				window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;
 			};
 		}
 	</script>
-	[<script type="text/javascript" src="(#CHEMIN{javascript/xtclicks.js}|url_absolue)"></script>]
-	[<script type="text/javascript" src="(#CHEMIN{javascript/xtcore.js}|url_absolue)"></script>]
+	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js}|url_absolue)"></script>]
 </div>
 <noscript>
 	<div id='xiti-tag-noscript'>
