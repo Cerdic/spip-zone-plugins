@@ -17,6 +17,7 @@
 			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
 			<th class='niveau' scope='col'>[(#TRI{niveau,<:xiti_niveau:th_xiti_niveau:>,ajax})]</th>
 			<th class='xtsite' scope='col'>[(#TRI{xtsite,<:xiti_niveau:entree_xtsite:>,ajax})]</th>
+			<th class='utilisations' scope='col'></th>
 			<th class='id' scope='col'>[(#TRI{id_xiti_niveau,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -30,6 +31,7 @@
 			</td>
 			<td class="niveau">#NIVEAU</td>
 			<td class="xtsite">#XTSITE</td>
+			<td class="utilisations">#SET{utilise,#ID_XITI_NIVEAU|objets_associes_xiti_niveau|implode{', '}}#GET{utilise}</td>
 			<td class='id'>[(#AUTORISER{modifier,xiti_niveau,#ID_XITI_NIVEAU}|?{
 				[<a href="[(#ID_XITI_NIVEAU|generer_url_ecrire_entite_edit{xiti_niveau})]">(#ID_XITI_NIVEAU)</a>],
 				[(#ID_XITI_NIVEAU)]
