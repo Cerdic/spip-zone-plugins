@@ -22,10 +22,7 @@
 
 ### Gestion des niveaux deux
 
-* Affichage des objets liés à chaque niveaux deux dans la page du niveau
 * Sur la page d'un objet, si un niveau 2 est utilisé pour le secteur et / ou pour la langue, l'afficher quelque part
-* Suppression des liens des niveaux lors de la suppression d'un niveau
-* Ne pouvoir supprimer les liens de niveaux que si rien n'est lié à ce niveau
 
 ### Espace privé / Gestion de Xiti
 
@@ -39,6 +36,14 @@
 ## Changelog
 
 ### Version 1.x.x 
+
+#### Version 1.7.0
+
+* Ne pouvoir supprimer les liens de niveaux que si rien n'est lié à ce niveau
+* Affichage des objets liés à chaque niveaux deux dans la page du niveau
+* Pouvoir délier facilement un niveau deux de xiti depuis la liste des objets liés dans la page de visu d'un niveau 2
+* Dans la liste de tous les niveaux deux, afficher le nombre d'usages (comme les mots clés)
+* Corrections mineures
 
 #### Version 1.6.0
 
