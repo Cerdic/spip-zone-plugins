@@ -1,0 +1,100 @@
+@import 'css/variables.less';
+
+html, body {
+	height: 100%;
+}
+
+body {
+	padding-top: 4em;
+	padding-bottom: 4em;
+	background-color: @main-color;
+	background-image: url("https://unsplash.it/1280/800/?random&gravity=east");
+	background-position: center;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+
+}
+div {
+	background-color: transparent;
+	section {
+		max-width: 350px;
+		margin: 0 auto;
+		padding: 2em;
+		background-color: contrast(@main-color);
+		border-radius: 2em;
+		box-shadow: 0 0 3em darken(@main-color, 20%);
+		header {
+			h1 {
+				margin-top: 0;
+				small {
+					display: block;
+				}
+			}
+		}
+		.main {
+			.formulaire_spip {
+				margin-top: 2em;
+				ul, .editer-groupe {
+					li, .editer {
+						width: 100%;
+						margin-bottom: 0;
+						label {
+							width: 100%;
+							margin-right: 0;
+							text-align: left;
+							float: none;
+							display: block;
+							overflow: hidden;
+						}
+						input {
+							width: 100%;
+							display: block;
+							overflow: hidden;
+						}
+						p {
+							display: block;
+							clear: both;
+							margin-bottom: 0;
+						}
+						.choix {
+							margin-right: 0;
+							width: 100%;
+							label {
+								input {
+									width: auto;
+								}
+							}
+						}
+						&.editer_password {
+							#pass_securise {
+								background-color: @white;
+								border-left: 1px solid @border-color;
+								float: right;
+								height: 30px;
+								line-height: 30px;
+								margin-right: 1px;
+								margin-top: -32px;
+								padding-left: 10px;
+								padding-right: 9px;
+							}
+						}
+					}
+				}
+			}
+			.formulaire_menu_lang {
+				background-color: transparent;
+				padding: 0;
+				form {
+					label {
+						display: none;
+					}
+					select {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

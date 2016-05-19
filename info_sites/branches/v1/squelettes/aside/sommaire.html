@@ -1,0 +1,28 @@
+<div class="block boutons">
+	<div class="list-group menu" role="menu">
+		[(#AUTORISER{infositescreer,organisation})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{organisation_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:contacts:organisation_creer:>
+		</a>
+		][(#AUTORISER{infositescreer,contact})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:contacts:contact_creer:>
+		</a>
+		][(#AUTORISER{infositescreer,projet})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projet_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:projet:icone_creer_projet:>
+		</a>
+		][(#AUTORISER{infositescreer,projetscadre})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_cadre_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:projets_cadre:icone_creer_projets_cadre:>
+		</a>
+		][(#AUTORISER{infositescreer,projetssite})
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,new=oui})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:projets_site:icone_creer_projets_site:>
+		</a>
+		<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
+			<:info_sites:icone_creer_fiche_siste:>
+		</a>
+		]
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<BOUCLE_breadcrumb (COMMITS) {id_commit}>
+[(#REM) Fil d'Ariane ]
+<ul class="breadcrumb">
+    <li><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+    <li><a href="#URL_PAGE{'projets'}"><:info_sites:menu_projets:></a></li>
+    <BOUCLE_content (PROJETS) {id_projet} {tout}>[<li><a href="#URL_PROJET">(#NOM|couper{80})</a></li>]</BOUCLE_content>
+    <li class="active">[(#TITRE|couper{80})]</li>
+</ul>
+</BOUCLE_breadcrumb>

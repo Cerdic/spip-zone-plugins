@@ -1,0 +1,7 @@
+[(#REM) Fil d'Ariane ]
+<ul class="breadcrumb">
+    <li><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+    <li><a href="#URL_PAGE{'projets'}"><:info_sites:menu_projets:></a></li>
+	<BOUCLE_content (PROJETS) {id_projet} {tout}>
+    [<li class="active"><span>(#NOM|couper{80})</span></li>]</BOUCLE_content>
+</ul>

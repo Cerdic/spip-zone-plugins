@@ -1,0 +1,20 @@
+<BOUCLE_commit (COMMITS) {id_commit} {tous}>
+[(#AUTORISER{infositesvoir,commit,#ID_COMMIT}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+[(#BOITE_OUVRIR{[
+	<h1 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[(#LOGO_COMMIT|image_reduire{150,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
+
+<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/commit,id=#ID_COMMIT,id_commit=#ID_COMMIT,ajax=wysiwyg} />
+</div>
+<div class="clearfix"></div>
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commit,id,#ID_COMMIT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+</BOUCLE_commit>
+<//B_commit>

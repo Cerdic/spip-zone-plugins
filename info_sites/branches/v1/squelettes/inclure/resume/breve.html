@@ -1,0 +1,21 @@
+[(#REM)
+
+  Squelette Presentation resumee d'un breve dans une liste
+  Distribue sous licence GPL
+
+]
+<BOUCLE_breves(BREVES) {id_breve} {statut?}>
+<article class="entry breve hentry">
+	<strong class="h3-like entry-title"><a href="#URL_BREVE" rel="bookmark">[(#LOGO_BREVE_RUBRIQUE|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]#TITRE<span
+		class="read-more hide"><i class="fa fa-lg fa-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:> &laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></strong>
+	<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="fa fa-lg fa-calendar"></i> (#DATE|affdate_jourcourt)</time>]</p>
+	[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+	<p class="postmeta">
+	<BOUCLE_nb_commentaires(FORUMS) {id_breve}{plat} />	[(#TOTAL_BOUCLE|oui)
+		<span class="sep">|</span>
+		<a[ href="(#URL_BREVE|ancre_url{comments})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="fa fa-lg fa-comment"></i> (#TOTAL_BOUCLE)]</a>
+		]
+	<//B_nb_commentaires>
+	</p>
+</article>
+</BOUCLE_breves>

@@ -1,0 +1,30 @@
+<!-- extra -->
+<BOUCLE_extra (PROJETS) {id_projet} {tout}>[
+	(#REM) On utilise une boucle pour afficher le contenu selon autorisation.
+	Le filtre sinon_interdire_access est à utiliser uniquement dans content/objet.html
+]<BOUCLE_autorisation (CONDITION) {si #AUTORISER{infositesvoir,projet,#ID_PROJET}|oui}>
+<div id="extra">
+	<h2 id="<:info_sites:titre_informations_annexes|trim|translitteration_rapide|replace{' ','_'}|strtolower:>" class="legend"><:info_sites:titre_informations_annexes:></h2>
+	<div class="clearfix"></div>
+
+	<div class="block">
+		<INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
+		<div class="clearfix"></div>
+	</div>
+
+	[(#PLUGIN{RSS_COMMITS}|oui)
+	[(#SET{id_projet,[(#VERSIONING_RSS|?{#ID_PROJET,[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|?{#ID_PROJET_PARENT})]})]})]
+	[(#GET{id_projet}|oui)
+	[(#AUTORISER{infositesvoir, commit}|oui)
+	<div class="block">
+		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+		[(#INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax})]]
+		[(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+		[(#INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet,0}, force=0, par=date_creation, env, ajax})]]
+		<div class="clearfix"></div>
+	</div>
+	]]]
+
+</div>
+</BOUCLE_autorisation>
+</BOUCLE_extra>

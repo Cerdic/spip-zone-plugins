@@ -1,0 +1,35 @@
+[(#SET{statut_color,#ARRAY{0minirezo,text-success,1comite,text-primary,6forum,text-muted,5poubelle,text-muted}})][(#SET{statut_fa,#ARRAY{0minirezo,fa-user,1comite,fa-user,6forum,fa-user,5poubelle,fa-ban}})]
+<BOUCLE_content (AUTEURS) {id_auteur} {tout}>
+	<header class="cartouche">
+		<h1 class="#EDIT{qui} fn titre" itemprop="name">[(#LOGO_AUTEUR|image_reduire{150,0}|inserer_attribut{itemprop,image})]#NOM</h1>
+	</header>
+
+<section class="vcard" itemscope itemtype="http://schema.org/Person"> [(#REM) microformat vcard]
+	<div class="main">
+		<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+			<div class="label visible"><:info_statut_auteur:></div>
+			<div dir='#LANG_DIR' class='span statut'><span class="#GET{statut_color/#STATUT}" title="[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#STATUT)]})]})]"><i class="fa fa-lg [(#WEBMESTRE|=={oui}|?{fa-user-md,#GET{statut_fa/#STATUT}})]"></i> </span>[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#STATUT)]})]})]</div>
+		</div>
+		[<div class="champ contenu_bio[ (#BIO*|strlen|?{'',vide})]">
+			<div class="label visible"><:info_bio:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{bio} bio'>(#BIO)</div>
+		</div>]
+		[<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+			<div class="label visible"><:email_2:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{email} email'><a href="mailto:#EMAIL">(#EMAIL)</a></div>
+		</div>]
+		[<div class="champ contenu_nom_site[ (#NOM_SITE*|strlen|?{'',vide})]">
+			<div class="label visible"><:info_site_2:></div>
+			<div dir='#LANG_DIR' class='span #EDIT{nom_site} nom_site'>(#NOM_SITE)</div>
+		</div>]
+		[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+			<div class="label visible"><:voir_en_ligne:>&nbsp;:</div>
+			<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></div>
+		</div>]
+	</div>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+</section>
+</BOUCLE_content>

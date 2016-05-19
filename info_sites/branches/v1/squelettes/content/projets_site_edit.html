@@ -1,0 +1,37 @@
+[(#SET{opt,#ARRAY})]<BOUCLE_projets (projets_sites_liens) {id_projets_site} {objet="projet"}>[(#SET{opt,#ARRAY{projet,#ID_OBJET}})]</BOUCLE_projets>[(#REM) Si on a plusieurs associations à des projets, ça sera le dernier qui sera gardé… Il faudrait revoir ça plus tard.]
+[(#ENV{associer_objet}|oui)
+	[(#ENV{associer_objet}|match{^projet|}|oui)[(#SET{opt,#ARRAY{projet,#ENV{associer_objet}|explode{'|'}|table_valeur{1}}})]]
+]
+
+[(#ID_PROJETS_SITE|oui)
+	[(#AUTORISER{infositesmodifier,projets_site,#ID_PROJETS_SITE,[(#SESSION|unserialize)],#GET{opt}}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+][(#ID_PROJETS_SITE|non)
+	[(#AUTORISER{infositescreer,projets_site,'',[(#SESSION|unserialize)],#GET{opt}}|sinon_interdire_acces{'',401,<:info_sites:zone_restreinte:>})]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ID_PROJETS_SITE|?{#ID_PROJETS_SITE|generer_url_entite{projets_site},#URL_PAGE{projets_sites}}}}
+
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ID_PROJETS_SITE|oui)
+		[(#GET{redirect}|icone_verticale{Retour,projets_site,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[(#ID_PROJETS_SITE|non)
+		[(#GET{redirect}|icone_verticale{Retour,projets_site,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[
+		[(#ID_PROJETS_SITE|?{<:projets_site:icone_modifier_projets_site:>,<:projets_site:icone_creer_projets_site:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{projets_site,#ID_PROJETS_SITE}|sinon{<:info_sans_titre:>}})</h1>
+		]
+	</div>
+
+	#SET{redirect,#ENV{redirect,#ID_PROJETS_SITE|generer_url_entite{projets_site}}}
+	[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+		]
+		[(#FORMULAIRE_EDITER_PROJETS_SITE{#ENV{id_projets_site,oui}, #GET{redirect}, #ENV{associer_objet}})]
+		[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+	]
+</div>
