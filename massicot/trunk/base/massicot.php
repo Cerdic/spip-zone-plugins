@@ -41,7 +41,7 @@ function ajouter_traitement_automatique($interfaces, $traitement, $balise, $tabl
 		$traitement_existant = $table_traitements[$balise][$table];
 	}
 
-	if (! $traitement_existant) {
+	if (!isset($traitement_existant) or (! $traitement_existant)) {
 		$traitement_existant = '%s';
 	}
 
