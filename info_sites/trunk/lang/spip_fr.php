@@ -7,6 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	'icone_auteurs' => 'Utilisateurs',
 	'info_statut_auteur' => 'Statut :',
 	'statut_webmestre' => 'Utilisateur de niveau 0',
 	'titre_image_administrateur' => 'Utilisateur de niveau 1',
