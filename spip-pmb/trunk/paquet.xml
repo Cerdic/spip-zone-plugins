@@ -23,7 +23,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pmb.php" />
 
 	<!-- squelettes proposes avec le plugin -->
-	<utilise nom="Zpip" compatibilite="[2.0.0;]" />
+	<utilise nom="Zpip" compatibilite="[2.0.*;]" />
 	<!--chargement asynchrone de certaines inclusions -->
 	<utilise nom="inclureajaxload" compatibilite="[1.1.0;]" />
 	<!-- utilisation de fenetres modales pour ajouter des mots cles ou donner des avis DANS PMB -->
