@@ -55,7 +55,7 @@
 		{recherche?}{auteurs.statut ?= #ENV{statut,''}}
 		{id_mot?}
 		{where?}
-		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20} #ENV{pagination_id,'_liste_orga'}}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="organisation#ID_ORGANISATION">
 			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
