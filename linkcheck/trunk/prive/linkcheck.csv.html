@@ -1,4 +1,4 @@
-#HTTP_HEADER{Content-Type: text/plain}
+#HTTP_HEADER{Content-Type: text/csv}
 etat	url	articles
-<BOUCLE_li(LINKCHECKS){etat IN mort,deplace}>#ETAT	<BOUCLE_l(spip_linkchecks_liens){id_linkcheck}{", "}><BOUCLE_a(ARTICLES){id_article=#ID_OBJET}{", "}>[(#URL_ARTICLE|url_absolue)]</BOUCLE_a></BOUCLE_l>	#URL
+<BOUCLE_li(LINKCHECKS){etat IN mort,deplace}>#ETAT	#URL	<BOUCLE_l(spip_linkchecks_liens){id_linkcheck}{", "}>[(#ID_OBJET|generer_url_entite{#OBJET}|url_absolue)]</BOUCLE_l>
 </BOUCLE_li>
