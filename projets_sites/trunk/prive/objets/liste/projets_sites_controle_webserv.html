@@ -25,7 +25,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}} {pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}} {pagination #ENV{nb,10} #ENV{pagination_id,'_liste_projets_sites'}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
 			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{12,12})]<a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
@@ -51,7 +51,7 @@
 	</BOUCLE_liste_projets_sites>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<div class='pagination'>(#PAGINATION{prive})</div>]
 </div>
 </B_liste_projets_sites>[
 <div class="liste-objets projets_sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>

@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
 	multi type_site,1,
-	date_creation,-1, 
+	date_creation,-1,
 	id_projets_site,1
 }})
 ]
@@ -37,7 +37,7 @@ a mis a jour la valeur avec la page reelle]
 			}
 		})]</B_lettre>
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
-	
+
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{multi titre,<:projets_site:titre_label:>,ajax})]</th>
 			<th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:type_site_label:>,ajax})]</th>
@@ -46,7 +46,7 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_projets_sites(PROJETS_SITES){!id_projets_site IN #GET{exclus}}{where?}{recherche?}
-		{tri #ENV{par,multi type_site},#GET{defaut_tri}}{pagination #ENV{nb,10} proa}>
+		{tri #ENV{par,multi type_site},#GET{defaut_tri}}{pagination #ENV{nb,10}  #ENV{pagination_id,'_proa'}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{20,20})]<a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
 			<td class='type_site'>[(#VAL{'projets_site:type_site_'}|concat{#TYPE_SITE,'_abbr'}|_T)]</td>
@@ -57,7 +57,7 @@ a mis a jour la valeur avec la page reelle]
 	</BOUCLE_liste_projets_sites>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<div class='pagination'>(#PAGINATION{prive})</div>]
 </div>
 </B_liste_projets_sites>[(#ENV{recherche}|oui)
 <div class="liste-objets liste-objets-associer projets_sites caption-wrap">

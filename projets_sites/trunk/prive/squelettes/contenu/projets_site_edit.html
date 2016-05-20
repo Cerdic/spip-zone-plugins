@@ -3,7 +3,7 @@
 ][(#ID_OBJET|non)
 	[(#AUTORISER{creer,projets_site}|sinon_interdire_acces)]
 ]
- 
+
 #SET{redirect,#ENV{redirect}|sinon{#ID_PROJETS_SITE|?{#ID_PROJETS_SITE|generer_url_entite{projets_site},#URL_ECRIRE{projets_sites}}}}
 
 <div class='cadre-formulaire-editer'>
