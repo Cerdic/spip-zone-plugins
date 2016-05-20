@@ -34,10 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_xtdmc_explication_xiti' => 'Domaine de pose du cookie - nom de domaine au format « .domaine.com » (sans sous-domaine, commençant par un point).',
 	'item_xtdmc_xiti' => 'Variable xtdmc',
 	'item_xtn2_explication_xiti' => 'Identifiant numérique du niveau 2 dans lequel il faut ranger la page auditée. Les niveaux 2 sont à créer via votre interface XITI.',
-	'item_xtn2_explication_xiti_accueil' => 'Identifiant numérique du niveau 2 uniquement pour l\'accueil du site, la page sommaire.',
-	'item_xtn2_xiti' => 'Variable "xtn2" ou "s2="',
-	'item_xtn2_xiti_accueil' => 'Variable "xtn2" ou "s2=" spécifique à l\'accueil',
+	'item_xtn2_explication_xiti_accueil' => 'Identifiant numérique du niveau 2 uniquement pour l’accueil du site, la page sommaire.',
 	'item_xtn2_home_xiti' => 'Variable "xtn2" ou "s2=" de la home de ce secteur',
+	'item_xtn2_xiti' => 'Variable "xtn2" ou "s2="',
+	'item_xtn2_xiti_accueil' => 'Variable "xtn2" ou "s2=" spécifique à l’accueil',
 	'item_xtnv_explication_xiti' => 'Niveau d’arborescence HTML du site.
 										Cette variable spécifiant l’emplacement du referrer à récupérer.
 										Cette variable est renseignée par défaut à "document", elle doit être changée en "parent.document" dans le cas d’une frame/iframe sur le même nom de domaine
