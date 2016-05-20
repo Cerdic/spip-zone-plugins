@@ -1,0 +1,23 @@
+[(#AUTORISER{configurer,_plugins}|sinon_interdire_acces)]
+<h1><:info_sites:titre_page_controle_info_sites:></h1>
+
+[(#ENV{controle}|oui)
+[(#INCLURE{fond=prive/squelettes/inclure/controle/#ENV{controle}, env, ajax})]
+]
+[(#ENV{controle}non)<p class="explication"><:info_sites:controle_explication:></p>]
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		if ($('#contenu h3.legend').length > 0) {
+			$('#extra').append('<div class="block sommaire"><div class="liste"><ul class="liste-items"></ul></div></div>');
+			$('#contenu h3.legend').each(function(){
+				$('#extra .sommaire div.liste ul.liste-items').append(
+						'<li class="item"><a class="list-group-item" href="#'
+						+ $(this).attr('id') + '">'
+						+ $(this).text()
+						+ '</a></li>');
+			});
+		}
+	});
+</script>
+
