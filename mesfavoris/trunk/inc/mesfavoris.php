@@ -27,10 +27,11 @@ function mesfavoris_supprimer($paires) {
 		$res = sql_select('id_favori,categorie,objet,id_objet,id_auteur', 'spip_favoris', $cond);
 		
 		include_spip('inc/invalideur');
+		
 		while ($row = sql_fetch($res)) {
-			sql_delete("spip_favoris","id_favori=".intval($row['id_favori']));
-			suivre_invalideur("favori/".$row['objet']."/".$row['id_objet']);
-			suivre_invalideur("favori/auteur/".$row['id_auteur']);
+			sql_delete('spip_favoris', 'id_favori='.intval($row['id_favori']));
+			suivre_invalideur('favori/'.$row['objet'].'/'.$row['id_objet']);
+			suivre_invalideur('favori/auteur/'.$row['id_auteur']);
 		}
 	}
 }
