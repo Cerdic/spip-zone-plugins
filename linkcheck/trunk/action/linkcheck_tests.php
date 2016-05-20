@@ -1,8 +1,10 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_linkcheck_tests_dist(){
+function action_linkcheck_tests_dist() {
 	include_spip('inc/autoriser');
 	include_spip('inc/linkcheck_fcts');
 
@@ -11,17 +13,15 @@ function action_linkcheck_tests_dist(){
 
 	linkcheck_tests();
 
-	if(defined('_AJAX') && _AJAX) {
+	if (defined('_AJAX') && _AJAX) {
 		include_spip('linkcheck_fonctions');
 		$chiffres=linkcheck_chiffre();
 		echo(json_encode($chiffres));
 		exit();
-	}
-	else {
+	} else {
 		if ($redirect = _request('redirect')) {
 			include_spip('inc/headers');
 			redirige_par_entete($redirect.'&message=check_ok');
 		}
 	}
 }
-?>

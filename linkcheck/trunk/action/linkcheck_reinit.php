@@ -1,8 +1,10 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_linkcheck_reinit_dist(){
+function action_linkcheck_reinit_dist() {
 	include_spip('inc/autoriser');
 	include_spip('inc/config');
 
@@ -19,5 +21,3 @@ function action_linkcheck_reinit_dist(){
 		redirige_par_entete($redirect.'&message=delete_ok');
 	}
 }
-
-?>

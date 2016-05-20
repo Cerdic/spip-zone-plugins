@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /*
  * Un fichier d'autorisations permet de regrouper
@@ -13,7 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 // declaration vide pour ce pipeline.
-function linkcheck_autoriser(){}
+function linkcheck_autoriser() {
+}
 
 
 /* Exemple
@@ -33,12 +36,12 @@ function autoriser_configurer_linkcheck_dist($faire, $type, $id, $qui, $opt) {
 
 
 // bouton de menu
-function autoriser_linkcheck_menu_dist($faire, $type, $id, $qui, $opts){
+function autoriser_linkcheck_menu_dist($faire, $type, $id, $qui, $opts) {
 	return autoriser('webmestre');
 }
 // creer
 function autoriser_linkcheck_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 // voir les fiches completes
@@ -53,11 +56,11 @@ function autoriser_linkcheck_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 // supprimer
 function autoriser_linkcheck_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 
 // associer (lier / delier)
 function autoriser_associerlinkchecks_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }

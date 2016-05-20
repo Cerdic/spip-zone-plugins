@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -14,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
- * - mettre à jour la structure SQL 
+ * - mettre à jour la structure SQL
 **/
 function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
@@ -27,7 +29,7 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 		array('ecrire_config', 'linkcheck_etat_parcours', false),
 		array('ecrire_config', 'linkcheck/notifier_courriel', 1),
 		array('ecrire_config', 'linkcheck/afficher_alerte', 1)
-		
+
 	);
 
 	include_spip('base/upgrade');
@@ -39,11 +41,11 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
  * Fonction de désinstallation du plugin.
  * Vous devez :
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
- * - supprimer les tables et les champs créés par le plugin. 
+ * - supprimer les tables et les champs créés par le plugin.
 **/
 function linkcheck_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_linkchecks");
-	sql_drop_table("spip_linkchecks_liens");
+	sql_drop_table('spip_linkchecks');
+	sql_drop_table('spip_linkchecks_liens');
 
 	effacer_meta($nom_meta_base_version);
 	effacer_meta('linkcheck_dernier_id_objet');
@@ -53,5 +55,3 @@ function linkcheck_vider_tables($nom_meta_base_version) {
 	effacer_meta('linkcheck/notifier_courriel');
 	effacer_meta('linkcheck/afficher_alerte');
 }
-
-?>

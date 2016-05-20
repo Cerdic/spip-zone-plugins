@@ -1,15 +1,17 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function genie_linkcheck_mail_dist(){
+function genie_linkcheck_mail_dist() {
 	include_spip('inc/config');
 
-	if(lire_config('linkcheck/notifier_courriel')){
+	if (lire_config('linkcheck/notifier_courriel')) {
 		$resultat = array();
 		$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', 'etat!="ok"', 'etat');
 
-		if($sql>0){
+		if ($sql>0) {
 			foreach ($sql as $cle => $valeur) {
 				$msg_resultat .= '<li>'.$valeur['c'].' lien(s) '.$valeur['etat'].'.</li>';
 			}
@@ -26,9 +28,10 @@ function genie_linkcheck_mail_dist(){
 
 			$ok = $envoyer_mail($email, 'Liens cassés sur '.$nsite, array('html' => $cont, 'texte' => strip_tags($cont), 'nom_envoyeur' => 'Linkcheck'));
 
-			if($ok) return 1;
+			if ($ok) {
+				return 1;
+			}
 		}
 	}
 	return 0;
 }
-?>
