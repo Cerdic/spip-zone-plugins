@@ -7,24 +7,22 @@
  * @package SPIP\Compositions\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_COMPOSITIONS_MATCH', '-([^0-9][^.]*)');
+define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 
 /**
  * Lister les objets actives par configuration
  *
  * @return array
  */
-function compositions_objets_actives() {
+function compositions_objets_actives(){
 	static $config=null;
-	if (is_null($config)) {
+	if (is_null($config)){
 		// lister les objets dont on a active la composition dans la configuration
 		$config = isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array();
 		$config = (isset($config['objets'])?$config['objets']:array('spip_articles','spip_rubriques'));
-		$config = array_map('objet_type', $config);
+		$config = array_map('objet_type',$config);
 	}
 	return $config;
 }
@@ -35,14 +33,15 @@ function compositions_objets_actives() {
  *
  * @return string
  */
-function compositions_chemin() {
+function compositions_chemin(){
 	$config_chemin = 'compositions/';
-	if (defined('_DIR_PLUGIN_Z') or defined('_DIR_PLUGIN_ZCORE')) {
+	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE'))
 		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu').'/';
-	} elseif (isset($GLOBALS['meta']['compositions'])) {
+
+	elseif (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
-		if (isset($config['chemin_compositions'])) {
-			$config_chemin = rtrim($config['chemin_compositions'], '/').'/';
+		if (isset ($config['chemin_compositions'])){
+			$config_chemin = rtrim($config['chemin_compositions'],'/').'/';
 		}
 	}
 
@@ -53,13 +52,14 @@ function compositions_chemin() {
  * Tester si la stylisation auto est activee
  * @return string
  */
-function compositions_styliser_auto() {
+function compositions_styliser_auto(){
 	$config_styliser = true;
-	if (defined('_DIR_PLUGIN_Z') or defined('_DIR_PLUGIN_ZCORE')) {
+	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE')){
 		$config_styliser = false; // Z s'occupe de styliser les compositions
-	} elseif (isset($GLOBALS['meta']['compositions'])) {
+	}
+	elseif (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
-		$config_styliser = (!isset($config['styliser_auto']) or ($config['styliser_auto'] != 'non'));
+		$config_styliser = (!isset($config['styliser_auto']) OR ($config['styliser_auto'] != 'non'));
 	}
 	return $config_styliser?' ':'';
 }
@@ -72,30 +72,32 @@ function compositions_styliser_auto() {
  * @param bool $informer
  * @return array
  */
-function compositions_lister_disponibles($type, $informer = true) {
+function compositions_lister_disponibles($type, $informer=true){
 	include_spip('inc/compositions');
-	$type_match = '';
-	if (strlen($type)) {
+	$type_match = "";
+	if (strlen($type)){
 		$type = objet_type($type); // securite
 		$type_match = $type;
-	} else {
+	}
+	else {
 		// _ pour le cas des groupe_mots
-		$type_match = '[a-z0-9_]+';
+		$type_match = "[a-z0-9_]+";
 	}
 
 	// rechercher les skel du type article-truc.html
 	// truc ne doit pas commencer par un chiffre pour eviter de confondre avec article-12.html
-	$match = "($type_match)("._COMPOSITIONS_MATCH.')?[.]html$';
+	$match = "($type_match)("._COMPOSITIONS_MATCH.")?[.]html$";
 
 	// lister les compositions disponibles
-	$liste = find_all_in_path(compositions_chemin(), $match);
+	$liste = find_all_in_path(compositions_chemin(),$match);
 	$res = array();
-	if (count($liste)) {
-		foreach ($liste as $s) {
-			$base = preg_replace(',[.]html$,i', '', $s);
-			if (preg_match(",$match,ims", basename($s), $regs)
-				and ($composition = !$informer
-					or $composition = compositions_charger_infos($base))) {
+	if (count($liste)){
+		foreach($liste as $s) {
+			$base = preg_replace(',[.]html$,i','',$s);
+			if (preg_match(",$match,ims",basename($s),$regs)
+				AND ($composition = !$informer
+					OR $composition = compositions_charger_infos($base)))
+			{
 				$regs = array_pad($regs, 4, null);
 				$res[$regs[1]][$regs[3]] = $composition;
 				// retenir les skels qui ont un xml associe
@@ -103,10 +105,11 @@ function compositions_lister_disponibles($type, $informer = true) {
 		}
 	}
 	// Pipeline compositions_lister_disponibles
-	$res = pipeline('compositions_lister_disponibles', array(
+	$res = pipeline('compositions_lister_disponibles',array(
 		'args'=>array('type' => $type,'informer' => $informer),
 		'data'=> $res
-		));
+		)
+	);
 	return $res;
 }
 
@@ -117,7 +120,7 @@ function compositions_lister_disponibles($type, $informer = true) {
  * @param string $composition
  * @return array
  */
-function compositions_lister_utilisations($type, $composition) {
+function compositions_lister_utilisations($type,$composition){
 	$table_sql = table_objet_sql($type);
 	if (!in_array($table_sql, sql_alltable())) {
 		return;
@@ -126,7 +129,7 @@ function compositions_lister_utilisations($type, $composition) {
 	$desc = $trouver_table($table_sql);
 	$_id_table_objet = id_table_objet($type);
 	$titre = isset($desc['titre']) ? $desc['titre'] : "'' AS titre";
-	return sql_allfetsel("$_id_table_objet as id, $titre", $table_sql, 'composition='.sql_quote($composition));
+	return sql_allfetsel("$_id_table_objet as id, $titre", $table_sql, "composition=".sql_quote($composition));
 }
 
 /**
@@ -142,31 +145,27 @@ function compositions_lister_utilisations($type, $composition) {
  * @param string $vide
  * @return string
  */
-function compositions_selectionner($composition, $type, $defaut = '', $ext = 'html', $fullpath = false, $vide = 'composition-vide') {
-	if ($type=='syndic') {
-		$type='site'; //grml
-	}
+function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fullpath = false, $vide="composition-vide"){
+	if ($type=='syndic') $type='site'; //grml
 	$fond = compositions_chemin() . $type;
 
 	// regarder si compositions/article-xxx est disponible
 	if (strlen($composition)
-		and $f = find_in_path("$fond-$composition.$ext")) {
+		AND $f = find_in_path("$fond-$composition.$ext"))
 		return $fullpath ? $f : $fond . "-$composition";
-	} elseif (strlen($defaut)
-		and $f = find_in_path("$fond-$defaut.$ext")) {
+	else
 		// sinon regarder si compositions/article-defaut est disponible
-		return $fullpath ? $f : $fond . "-$defaut";
-	}
+		if (strlen($defaut)
+			AND $f = find_in_path("$fond-$defaut.$ext"))
+			return $fullpath ? $f : $fond . "-$defaut";
 
 	// se rabattre sur compositions/article si disponible
-	if ($f = find_in_path("$fond.$ext")) {
+	if ($f = find_in_path("$fond.$ext"))
 		return $fullpath ? $f : $fond;
-	}
 
 	// sinon une composition vide pour ne pas generer d'erreur
-	if ($vide and $f = find_in_path("$vide.$ext")) {
+	if ($vide AND $f = find_in_path("$vide.$ext"))
 		return $fullpath ? $f : $vide;
-	}
 
 	// rien mais ca fera une erreur dans le squelette si appele en filtre
 	return '';
@@ -178,24 +177,19 @@ function compositions_selectionner($composition, $type, $defaut = '', $ext = 'ht
  * @param string $composition
  * @return array|bool|string
  */
-function compositions_decrire($type, $composition) {
+function compositions_decrire($type, $composition){
 	static $compositions = array();
-	if (!function_exists('compositions_charger_infos')) {
+	if (!function_exists('compositions_charger_infos'))
 		include_spip('inc/compositions');
-	}
-	if ($type=='syndic') {
-		$type='site'; //grml
-	}
-	if (isset($compositions[$type][$composition])) {
+	if ($type=='syndic') $type='site'; //grml
+	if (isset($compositions[$type][$composition]))
 		return $compositions[$type][$composition];
-	}
-	$ext = 'html';
+	$ext = "html";
 	$fond = compositions_chemin() . $type;
 	if (strlen($composition)
-		and $f = find_in_path("$fond-$composition.$ext")
-		and $desc = compositions_charger_infos($f)) {
+		AND $f = find_in_path("$fond-$composition.$ext")
+		AND $desc = compositions_charger_infos($f))
 		return $compositions[$type][$composition] = $desc;
-	}
 	return $compositions[$type][$composition] = false;
 }
 
@@ -209,12 +203,11 @@ function compositions_decrire($type, $composition) {
  * @param string $type
  * @return string
  */
-function composition_class($composition, $type) {
+function composition_class($composition,$type){
 	if ($desc = compositions_decrire($type, $composition)
-		and isset($desc['class'])
-		and strlen($desc['class'])) {
+		AND isset($desc['class'])
+		AND strlen($desc['class']))
 		return $desc['class'];
-	}
 	return $composition;
 }
 
@@ -226,14 +219,14 @@ function composition_class($composition, $type) {
  * @staticvar array $liste
  * @return array
  */
-function compositions_types() {
+function compositions_types(){
 	static $liste = null;
 	if (is_null($liste)) {
-		if (_VAR_MODE or !isset($GLOBALS['meta']['compositions_types'])) {
+		if (_VAR_MODE OR !isset($GLOBALS['meta']['compositions_types'])){
 			include_spip('inc/compositions');
 			compositions_cacher();
 		}
-		$liste = explode(',', $GLOBALS['meta']['compositions_types']);
+		$liste = explode(',',$GLOBALS['meta']['compositions_types']);
 	}
 	return $liste;
 }
@@ -247,16 +240,13 @@ function compositions_types() {
  * @staticvar array $heritages
  * @return array
  */
-function compositions_recuperer_heritage($type = null) {
-	static $heritages = null;
-	if (is_null($heritages)) {
-		// recuperer les heritages declares via le pipeline compositions_declarer_heritage
+function compositions_recuperer_heritage($type=NULL){
+	static $heritages = NULL;
+	if (is_null($heritages)) // recuperer les heritages declares via le pipeline compositions_declarer_heritage
 		$heritages = pipeline('compositions_declarer_heritage', array());
-	}
 
-	if (is_null($type)) {
+	if (is_null($type))
 		return $heritages;
-	}
 
 	if (array_key_exists($type, $heritages)) {
 		$type_parent = $heritages[$type];
@@ -267,11 +257,10 @@ function compositions_recuperer_heritage($type = null) {
 		// verifier que table et champs existent...
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		if (!$type_parent
-			or !$desc = $trouver_table($table_parent)
-			or !isset($desc['field']['composition'])
-			or !isset($desc['field'][$nom_id_parent])) {
+			OR !$desc = $trouver_table($table_parent)
+			OR !isset($desc['field']['composition'])
+			OR !isset($desc['field'][$nom_id_parent]))
 			return '';
-		}
 
 		return array(
 			'type_parent' => $type_parent,
@@ -294,13 +283,12 @@ function compositions_recuperer_heritage($type = null) {
  * @param bool $etoile
  * @return string
  */
-function compositions_determiner($type, $id, $serveur = '', $etoile = false) {
+function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	static $composition = array();
 	$id = intval($id);
 
-	if (isset($composition[$etoile][$serveur][$type][$id])) {
+	if (isset($composition[$etoile][$serveur][$type][$id]))
 		return $composition[$etoile][$serveur][$type][$id];
-	}
 
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
@@ -311,21 +299,19 @@ function compositions_determiner($type, $id, $serveur = '', $etoile = false) {
 
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
-	if (isset($desc['field']['composition']) and $id) {
-		$select = 'composition';
-	}
+	if (isset($desc['field']['composition']) AND $id){
+		$select = "composition";
 
 	$heritage = compositions_recuperer_heritage($type);
-	if (isset($desc['field'][$heritage['nom_id_parent']])) {
+	if (isset($desc['field'][$heritage['nom_id_parent']]))
 		$select .= ', '.$heritage['nom_id_parent'].' as id_parent';
-	}
 
 	$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-	if ($row['composition'] != '') {
+	if ($row['composition'] != '')
 		$retour = $row['composition'];
-	} elseif (!$etoile
-		and isset($row['id_parent'])
-		and $row['id_parent']) {
+	elseif (!$etoile
+	  AND isset($row['id_parent'])
+	  AND $row['id_parent'])
 		$retour = compositions_heriter($type, $id, $row['id_parent'], $serveur);
 	}
 	return $composition[$etoile][$serveur][$type][$id] = (($retour == '-') ? '' : $retour);
@@ -341,13 +327,9 @@ function compositions_determiner($type, $id, $serveur = '', $etoile = false) {
  * @param string $serveur
  * @return string
  */
-function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
-	if ($type=='syndic') {
-		$type='site'; //grml
-	}
-	if (intval($id) < 1) {
-		return '';
-	}
+function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
+	if ($type=='syndic') $type='site'; //grml
+	if (intval($id) < 1) return '';
 	static $infos = null;
 	$compo_parent = '';
 
@@ -355,45 +337,39 @@ function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
 
 	/* Si aucun héritage n'a été défini pour le type d'objet, ce
 	* n'est pas la peine d'aller plus loin. */
-	if (count($heritage) == 0) {
+	if(count($heritage) == 0)
 		return '';
-	}
 
 	$type_parent = $heritage['type_parent'];
 	$table_parent = $heritage['table_parent'];
 	$nom_id_parent = $heritage['nom_id_parent'];
 	$nom_id_table_parent = $heritage['nom_id_table_parent'];
 
-	if (is_null($id_parent)) {
+	if (is_null($id_parent))
 		$id_parent = sql_getfetsel($nom_id_parent, table_objet_sql($type), id_table_objet($type).'='.intval($id));
-	}
 
 	$heritages = compositions_recuperer_heritage();
 
 	do {
 		$select = 'composition';
-		if ($heritages[$type_parent]==$type_parent) {
-			// S'il y a recursivite sur le parent
+		if ($heritages[$type_parent]==$type_parent) // S'il y a recursivite sur le parent
 			$select .= ', id_parent';
-		}
-		$row = sql_fetsel($select, $table_parent, $nom_id_table_parent.'='.intval($id_parent), '', '', '', '', $serveur);
-		if (strlen($row['composition']) and $row['composition']!='-') {
+		$row = sql_fetsel($select, $table_parent, $nom_id_table_parent.'='.intval($id_parent),'','','','',$serveur);
+		if (strlen($row['composition']) AND $row['composition']!='-')
 			$compo_parent = $row['composition'];
-		} elseif (strlen($row['composition'])==0 and isset($heritages[$type_parent])) {
-			// Si le parent peut heriter, il faut verifier s'il y a heritage
-			$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur = '');
-		}
+		elseif (strlen($row['composition'])==0 AND isset($heritages[$type_parent])) // Si le parent peut heriter, il faut verifier s'il y a heritage
+			$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur='');
 
-		if (strlen($compo_parent) and is_null($infos)) {
+		if (strlen($compo_parent) AND is_null($infos))
 			$infos = compositions_lister_disponibles('');
-		}
-	} while ($id_parent = $row['id_parent']
-		and
-		(!strlen($compo_parent) or !isset($infos[$type_parent][$compo_parent]['branche'][$type])));
 
-	if (strlen($compo_parent) and isset($infos[$type_parent][$compo_parent]['branche'][$type])) {
-		return $infos[$type_parent][$compo_parent]['branche'][$type];
 	}
+	while ($id_parent = $row['id_parent']
+		AND
+		(!strlen($compo_parent) OR !isset($infos[$type_parent][$compo_parent]['branche'][$type])));
+
+	if (strlen($compo_parent) AND isset($infos[$type_parent][$compo_parent]['branche'][$type]))
+		return $infos[$type_parent][$compo_parent]['branche'][$type];
 
 	return '';
 }
@@ -414,24 +390,23 @@ function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
  * @return array	AST->code modifie pour calculer le nom de la composition
  */
 function balise_COMPOSITION_dist($p) {
-	$_composition = '';
+	$_composition = "";
 	if ($_objet = interprete_argument_balise(1, $p)) {
 		$_id_objet = interprete_argument_balise(2, $p);
 	} else {
-		$_composition = champ_sql('composition', $p);
+		$_composition = champ_sql('composition',$p);
 		$_id_objet = champ_sql($p->boucles[$p->id_boucle]->primary, $p);
 		$_objet = "objet_type('" . $p->boucles[$p->id_boucle]->id_table . "')";
 	}
 	// si on veut le champ brut, et qu'on l'a sous la main, inutile d'invoquer toute la machinerie
-	if ($_composition and $p->etoile) {
+	if ($_composition AND $p->etoile)
 		$p->code = $_composition;
-	} else {
+	else {
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 		$p->code = "compositions_determiner($_objet, $_id_objet, '$connect', ".($p->etoile?'true':'false').")";
 		// ne declencher l'usine a gaz que si composition est vide ...
-		if ($_composition) {
+		if ($_composition)
 			$p->code = "((\$zc=$_composition)?(\$zc=='-'?'':\$zc):".$p->code.")";
-		}
 	}
 	return $p;
 }
@@ -445,11 +420,10 @@ function balise_COMPOSITION_dist($p) {
  * @param string $serveur
  * @return string
  */
-function compositions_verrouiller($type, $id, $serveur = '') {
+function compositions_verrouiller($type, $id, $serveur=''){
 	$config = (isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array());
-	if (isset($config['tout_verrouiller']) and $config['tout_verrouiller'] == 'oui') {
+	if (isset($config['tout_verrouiller']) AND $config['tout_verrouiller'] == 'oui')
 		return true;
-	}
 
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
@@ -458,19 +432,18 @@ function compositions_verrouiller($type, $id, $serveur = '') {
 
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
-	if (isset($desc['field']['composition_lock']) and $id) {
+	if (isset($desc['field']['composition_lock']) AND $id){
 		$lock = sql_getfetsel('composition_lock', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-		if ($lock) {
+		if ($lock)
 			return true;
-		} elseif (isset($desc['field']['id_rubrique'])) {
+		elseif (isset($desc['field']['id_rubrique'])) {
 			$id_rubrique = sql_getfetsel('id_rubrique', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
 			return compositions_verrou_branche($id_rubrique, $serveur);
-		} else {
-			return false;
 		}
-	} else {
-		return false;
+		else
+			return false;
 	}
+	else return false;
 }
 
 /**
@@ -479,17 +452,15 @@ function compositions_verrouiller($type, $id, $serveur = '') {
  * @param string $serveur
  * @return string
  */
-function compositions_verrou_branche($id_rubrique, $serveur = '') {
+function compositions_verrou_branche($id_rubrique, $serveur=''){
 
-	if (intval($id_rubrique) < 1) {
-		return false;
-	}
-	if ($infos_rubrique = sql_fetsel(array('id_parent', 'composition_branche_lock'), 'spip_rubriques', 'id_rubrique='.intval($id_rubrique), '', '', '', '', $serveur)) {
-		if ($infos_rubrique['composition_branche_lock']) {
+	if (intval($id_rubrique) < 1) return false;
+	if($infos_rubrique = sql_fetsel(array('id_parent','composition_branche_lock'),'spip_rubriques','id_rubrique='.intval($id_rubrique),'','','','',$serveur)) {
+		if ($infos_rubrique['composition_branche_lock'])
 			return true;
-		} else {
-			return compositions_verrou_branche($infos_rubrique['id_parent'], $serveur);
-		}
+		else
+			return compositions_verrou_branche($infos_rubrique['id_parent'],$serveur);
 	}
 	return '';
 }
+?>
