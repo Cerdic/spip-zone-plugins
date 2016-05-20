@@ -20,4 +20,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="mesfavoris_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="mesfavoris_pipelines.php" />
 	<pipeline nom="autoriser" inclure="mesfavoris_autoriser.php" />
+	
+	<utilise nom="collectionjson" compatibilite="[1.4.0;]" />
 </paquet>

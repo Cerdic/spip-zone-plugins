@@ -25,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array            Cet Array de description modifié
  */
 function mesfavoris_declarer_tables_interfaces($interface) {
-	$interface['table_des_tables']['favoris']='favoris';
+	$interface['table_des_tables']['favoris'] = 'favoris';
 	
 	return $interface;
 }

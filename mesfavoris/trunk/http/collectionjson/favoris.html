@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_favori,1,
+	id_auteur,1,
+	id_objet,1,
+	objet,1,
+	categorie,1,
+}})]
+
+{
+	"collection": {
+		"version": "1.0",
+		"href": "[(#URL_SITE_SPIP|concat{/http.api/collectionjson/favoris}|url_absolue)]",
+		"title": "#NOM_SITE_SPIP - Favoris",
+		"updated": "[(#DATE|date_iso)]"
+		<B_favoris>
+		,
+		"links": [
+			{"rel":"self", "type":"application/json", "href":"[(#VAL{&}|self|url_absolue)]"},
+			{"rel":"alternate", "type":"text/html", "href":"[(#URL_PAGE{recherche}|url_absolue)]"}[,
+			(#PAGINATION{collectionjson})]
+		],
+		"totalResults": #GRAND_TOTAL,
+		"startIndex": #ENV{debut_favoris,0},
+		"itemsPerPage": #ENV{pagination,100},
+		"items": [
+		<BOUCLE_favoris(FAVORIS)
+			{id_auteur?}
+			{objet?}
+			{id_objet?}
+			{categorie?}
+			{tri #ENV{par,id_favori},#GET{defaut_tri}}
+			{pagination #ENV{pagination,100}}{","}
+		>
+			<INCLURE{fond=http/collectionjson/inc-favori, id_favori, mode, url_self=#SELF}>
+		</BOUCLE_favoris>
+		]
+		</B_favoris>
+	}
+}

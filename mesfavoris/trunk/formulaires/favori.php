@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $categorie
  * @return array
  */
-function formulaires_favori_charger_dist($objet, $id_objet, $categorie="") {
+function formulaires_favori_charger_dist($objet, $id_objet, $categorie='') {
 	$contexte = array(
 		'editable'     => true,
 		'_deja_favori' => false,
@@ -54,7 +54,7 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie="") {
  * @param  string $categorie 
  * @return array            
  */
-function formulaires_favori_traiter_dist($objet, $id_objet, $categorie="") {
+function formulaires_favori_traiter_dist($objet, $id_objet, $categorie='') {
 	$res = array('message_ok'=>' ');
 	
 	if ($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])) {
