@@ -61,7 +61,7 @@ function formulaires_favori_traiter_dist($objet, $id_objet, $categorie="") {
 		include_spip('inc/mesfavoris');
 		
 		if (!is_null(_request('ajouter'))) {
-			mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie);
+			$res['id_favori'] = mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie);
 		}
 		
 		if (!is_null(_request('retirer'))) {

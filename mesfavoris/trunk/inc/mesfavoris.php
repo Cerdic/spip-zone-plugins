@@ -11,11 +11,16 @@
  }
 
 /**
- * Supprimer un ensemble de favoris dont on connait les id
+ * Supprimer un ensemble de favoris dont on donne les conditions
  *
- * @param int $id_favori
- */
+ * @param array $paires
+ * 		Tableau listant des conditions à supprimer (tel id_auteur, tel objet, etc)
+ * @return array
+ * 		Retourne une liste des identifiants de favoris supprimés
+ **/
 function mesfavoris_supprimer($paires) {
+	$liste = array();
+	
 	if (count($paires)) {
 		$cond = array();
 		
@@ -29,21 +34,41 @@ function mesfavoris_supprimer($paires) {
 		include_spip('inc/invalideur');
 		
 		while ($row = sql_fetch($res)) {
-			sql_delete('spip_favoris', 'id_favori='.intval($row['id_favori']));
+			if (sql_delete('spip_favoris', 'id_favori='.intval($row['id_favori']))) {
+				$liste[] = $row['id_favori'];
+			}
 			suivre_invalideur('favori/'.$row['objet'].'/'.$row['id_objet']);
 			suivre_invalideur('favori/auteur/'.$row['id_auteur']);
 		}
 	}
+	
+	return $liste;
 }
 
+/**
+ * Ajoute un favori entre un utilisateur et un objet
+ * 
+ * @param int $id_objet
+ * 		Identifiant de l'objet à mettre en favori
+ * @param string $objet
+ * 		Type de l'objet à mettre en favori
+ * @param int $id_auteur
+ * 		Identifiant de l'utilisateur
+ * @param string $categorie
+ * 		Catégorie optionnelle typant le favori
+ * @return int|boolean
+ * 		Retourne l'identifiant du favori ajouté ou false sinon
+ **/
 function mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie='') {
+	$id_favori = false;
+	
 	if (
 		$id_auteur = intval($id_auteur)
 		and $id_objet = intval($id_objet)
 		and preg_match(",^\w+$,",$objet)
 	) {
 		if (!mesfavoris_trouver($id_objet, $objet, $id_auteur, $categorie)) {
-			sql_insertq(
+			$id_favori = sql_insertq(
 				'spip_favoris',
 				array(
 					'id_auteur' => $id_auteur,
@@ -61,6 +86,8 @@ function mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie='') {
 	else {
 		spip_log("erreur ajouter favori $id_objet-$objet-$categorie-$id_auteur");
 	}
+	
+	return $id_favori;
 }
 
 function mesfavoris_trouver($id_objet, $objet, $id_auteur, $categorie='') {

@@ -2,7 +2,7 @@
 	<nom>Mes Favoris</nom>
 	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
-	<version>2.5.0</version>
+	<version>2.5.1</version>
 	<version_base>1.2.0</version_base>
 	<etat>test</etat>
 	<prefix>mesfavoris</prefix>
