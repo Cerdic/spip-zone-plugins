@@ -5,8 +5,10 @@
  * Distribue sous licence GPL
  *
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
-
+ 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ce formulaire permet de bookmarker des objets de SPIP.
@@ -21,9 +23,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
  * <BOUCLE_(ARTICLES){id_article}> #FORMULAIRE_FAVORI{ma_categorie} ...
  *  
  */
-function balise_FORMULAIRE_FAVORI ($p) {
+function balise_FORMULAIRE_FAVORI($p) {
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
 	$_id_objet = $p->boucles[$p->id_boucle]->primary;
+	
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_FAVORI',
@@ -44,6 +47,7 @@ function balise_FORMULAIRE_FAVORI_stat($args) {
 	$objet = $args[0];
 	$id_objet = $args[1];
 	$categorie = $args[2];
+	
 	// pas dans une boucle ? on generera une erreur ?
 	if ($objet == "'balise_hors_boucle'") {
 		$objet = '';
@@ -53,8 +57,7 @@ function balise_FORMULAIRE_FAVORI_stat($args) {
 	
 	// on envoie les arguments a la fonction charger
 	// du formulaire CVT fomulaires/favori.php
-	return array($objet, $id_objet,$categorie);
-	
+	return array($objet, $id_objet, $categorie);
 }
 
 // balise type_boucle de Rastapopoulos dans le plugin etiquettes
@@ -63,6 +66,6 @@ function balise_FORMULAIRE_FAVORI_stat($args) {
 function balise_FAVORI_TYPE_BOUCLE($p) {
 	$type = $p->boucles[$p->id_boucle]->id_table;
 	$p->code = $type ? "objet_type('$type')" : "'balise_hors_boucle'";
+	
 	return $p;
 }
-?>

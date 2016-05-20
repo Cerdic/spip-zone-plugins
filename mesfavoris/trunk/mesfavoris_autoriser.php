@@ -13,7 +13,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function mesfavoris_autoriser(){}
 
@@ -31,12 +33,11 @@ function mesfavoris_autoriser(){}
  * @return boolean       true si la modification est possible
  */
 function autoriser_favori_modifier_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut'] == '0minirezo' AND !$qui['restreint'])
+	if ($qui['statut'] == '0minirezo' AND !$qui['restreint']) {
 		return true;
-	else{
-		$auteur_favori = sql_getfetsel('id_auteur','spip_favoris','id_favori='.intval($id));
+	}
+	else {
+		$auteur_favori = sql_getfetsel('id_auteur', 'spip_favoris', 'id_favori='.intval($id));
 		return ($qui['id_auteur'] == $auteur_favori);
 	}
 }
-
-?>

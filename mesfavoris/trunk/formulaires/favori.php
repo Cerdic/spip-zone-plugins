@@ -6,7 +6,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Charger du formulaire CVT 
@@ -17,27 +19,31 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $categorie
  * @return array
  */
-function formulaires_favori_charger_dist($objet, $id_objet, $categorie = ""){
-	$valeur = array(
-		'editable'=>true,
-		'_deja_favori'=>false,
-		'_objet'=>$objet,
-		'categorie'=>$categorie
+function formulaires_favori_charger_dist($objet, $id_objet, $categorie="") {
+	$contexte = array(
+		'editable'     => true,
+		'_deja_favori' => false,
+		'_objet'       => $objet,
+		'categorie'    => $categorie,
 	);
-	if (defined('_MESFAVORIS_PERSO_ID_OBJET'))
-		$valeur['_id_objet'] = $id_objet;
 	
-	if (!isset($GLOBALS['visiteur_session']['statut'])){
-		$valeur['editable'] = false;
+	if (defined('_MESFAVORIS_PERSO_ID_OBJET')) {
+		$contexte['_id_objet'] = $id_objet;
+	}
+	
+	if (!isset($GLOBALS['visiteur_session']['statut'])) {
+		$contexte['editable'] = false;
 	}
 	else {
 		include_spip('inc/mesfavoris');
-		$favori = mesfavoris_trouver($id_objet,$objet,$GLOBALS['visiteur_session']['id_auteur'],$categorie);
-		if ($favori){
-			$valeur['_deja_favori'] = true;
+		$favori = mesfavoris_trouver($id_objet, $objet, $GLOBALS['visiteur_session']['id_auteur'], $categorie);
+		
+		if ($favori) {
+			$contexte['_deja_favori'] = true;
 		}
 	}
-	return $valeur;
+	
+	return $contexte;
 }
 
 /**
@@ -48,17 +54,25 @@ function formulaires_favori_charger_dist($objet, $id_objet, $categorie = ""){
  * @param  string $categorie 
  * @return array            
  */
-function formulaires_favori_traiter_dist($objet, $id_objet, $categorie = ""){
+function formulaires_favori_traiter_dist($objet, $id_objet, $categorie="") {
 	$res = array('message_ok'=>' ');
-	if ($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])){
+	
+	if ($id_auteur = intval($GLOBALS['visiteur_session']['id_auteur'])) {
 		include_spip('inc/mesfavoris');
-		if (!is_null(_request('ajouter'))){
+		
+		if (!is_null(_request('ajouter'))) {
 			mesfavoris_ajouter($id_objet, $objet, $id_auteur, $categorie);
 		}
-		if (!is_null(_request('retirer'))){
-			mesfavoris_supprimer(array('id_objet'=>$id_objet,'objet'=>$objet,'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'],'categorie' => $categorie));
+		
+		if (!is_null(_request('retirer'))) {
+			mesfavoris_supprimer(array(
+				'id_objet'  => $id_objet,
+				'objet'     => $objet,
+				'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],
+				'categorie' => $categorie,
+			));
 		}
 	}
+	
 	return $res;
 }
-?>
