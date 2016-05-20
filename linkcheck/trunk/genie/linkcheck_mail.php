@@ -11,7 +11,7 @@ function genie_linkcheck_mail_dist() {
 		$resultat = array();
 		$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', 'etat!="ok"', 'etat');
 
-		if ($sql>0) {
+		if (is_array($sql) && count($sql) > 0) {
 			foreach ($sql as $cle => $valeur) {
 				$msg_resultat .= '<li>'.$valeur['c'].' lien(s) '.$valeur['etat'].'.</li>';
 			}
