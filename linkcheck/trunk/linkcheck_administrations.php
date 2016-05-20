@@ -27,9 +27,8 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 		array('ecrire_config', 'linkcheck_dernier_id_lien', 0),
 		array('ecrire_config', 'linkcheck_dernier_objet', 0),
 		array('ecrire_config', 'linkcheck_etat_parcours', false),
-		array('ecrire_config', 'linkcheck/notifier_courriel', 1),
-		array('ecrire_config', 'linkcheck/afficher_alerte', 1)
-
+		array('ecrire_config', 'linkcheck/notifier_courriel', 'on'),
+		array('ecrire_config', 'linkcheck/afficher_alerte', 'on')
 	);
 
 	include_spip('base/upgrade');
