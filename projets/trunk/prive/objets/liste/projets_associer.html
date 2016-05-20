@@ -50,7 +50,7 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_projets(PROJETS){!id_projet IN #GET{exclus}}{where?}{recherche?}{statut?}
-		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} proa}>
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} #ENV{pagination_id,'proa'}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{projet})]</td>
 			<td class='nom'>[(#LOGO_PROJET|image_reduire{20,20})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></td>
@@ -62,7 +62,7 @@ a mis a jour la valeur avec la page reelle]
 	</BOUCLE_liste_projets>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<div class='pagination'>(#PAGINATION{prive})</div>]
 </div>
 </B_liste_projets>[(#ENV{recherche}|oui)
 <div class="nettoyeur"></div>

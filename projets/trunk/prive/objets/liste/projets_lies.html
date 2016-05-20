@@ -43,7 +43,7 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_projets(PROJETS){id_projet IN #GET{selection}}{statut?}
-		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} prol}>
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} #ENV{pagination_id,'prol'}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PROJET|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='statut'>[(#STATUT|puce_statut{projet})]</td>
 			<td class='nom'>[(#LOGO_PROJET|image_reduire{20,20})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></td>
@@ -57,7 +57,7 @@ a mis a jour la valeur avec la page reelle]
 	</BOUCLE_liste_projets>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+[<div class='pagination'>(#PAGINATION{prive})</div>]
 [(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[projet-*-#OBJET-#ID_OBJET\]" value="X"><:projet:retirer_tous_liens_projets:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_projets>
