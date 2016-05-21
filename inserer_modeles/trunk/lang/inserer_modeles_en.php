@@ -14,7 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_inserer' => 'Insert',
 
 	// C
+	'cfg_titre_parametrages' => 'Parameters',
 	'choisir_modele' => 'What do you want to add?',
+	'choix_objets_editable' => 'Choose one or more object',
+	'choix_objets_editable_explication' => 'Please select one or more objects in which you want the model insertion bloc to appear.',
 
 	// E
 	'erreur_choix_modele' => 'You must choose a template.',
@@ -42,5 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_inserer' => 'Insrt @modele@',
-	'titre_inserer_modeles' => 'Insert a template'
+	'titre_inserer_modeles' => 'Insert a template',
+	'titre_page_configurer_inserer_modeles' => 'Configure plugin ’Model Insertion’'
 );
