@@ -54,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_owm' => 'Le service fournit gratuitement les données météorologiques sous licence CC-BY-SA 2.0 pour une utilisation commerciale ou pas. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://openweathermap.org/copyright">Terms and Conditions</a>.',
 	'info_utilisation_wwo' => 'Le service fournit gratuitement les données météorologiques pour une utilisation commerciale ou pas. Il est demandé de créditer le service avec un lien vers le site web. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://developer.worldweatheronline.com/api_terms_and_conditions">API Terms and Conditions</a>.',
 	'info_utilisation_wunderground' => 'Le service fournit gratuitement les données météorologiques. Il est demandé de créditer le service avec le nom et le logo du service. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://www.wunderground.com/weather/api/d/terms.html">Weather API Terms of Service</a>.',
-	'info_utilisation_yahoo' => 'Le service fournit gratuitement les données météorologiques pour les usages personnel et à but non lucratif. Il est demandé de créditer le service avec le nom du service ou le logo. Pour consulter les termes exacts d\'utilisation veuillez vous rendre sur la page <a href="http://developer.yahoo.com/weather/#terms">Terms of Use</a>.',
 	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
 	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.',
 	'info_credits' => 'Données fournies par @service@',
@@ -231,7 +230,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_service_weather' => 'weather.com&reg;',
 	'titre_service_wwo' => 'World Weather Online',
 	'titre_service_wunderground' => 'Weather Underground',
-	'titre_service_yahoo' => 'Yahoo! Weather',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
 
 	// U

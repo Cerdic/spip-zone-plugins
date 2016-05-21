@@ -76,8 +76,8 @@ function weather_flux2previsions($flux, $lieu) {
 		// Certaines abréviations de fuseau ne sont pas reconnues par date_create suivant la configuration du serveur
 		// http. On supprime cette information avant le date_create qui produit un timezone erroné mais qui ne genera
 		// pas le format ensuite.
+		$elements_date = explode(' ', $date_service);
 		if (!$date_maj = date_create($date_service)) {
-			$elements_date = explode(' ', $date_service);
 			array_pop($elements_date);
 			$date_service = implode(' ', $elements_date);
 			$date_maj = date_create($date_service);
@@ -99,8 +99,7 @@ function weather_flux2previsions($flux, $lieu) {
 				// Date complete des lever/coucher du soleil
 				list($heure,$am_pm) = explode(' ', $p['sunr'][0]);
 				list($heure, $minute) = explode(':', $heure);
-				$minute = strval($minute);
-				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
+				$heure = ($am_pm == 'PM') ? strval(intval($heure) + 12) : $heure;
 				$interval = new DateInterval("PT${heure}H${minute}M");
 				$date_soleil = clone $date_prevision;
 				date_add($date_soleil, $interval);
@@ -108,8 +107,7 @@ function weather_flux2previsions($flux, $lieu) {
 
 				list($heure,$am_pm) = explode(' ', $p['suns'][0]);
 				list($heure, $minute) = explode(':', $heure);
-				$minute = strval($minute);
-				$heure = ($am_pm == 'PM') ? strval($heure) + 12 : strval($heure);
+				$heure = ($am_pm == 'PM') ? strval(intval($heure) + 12) : $heure;
 				$interval = new DateInterval("PT${heure}H${minute}M");
 				$date_soleil = clone $date_prevision;
 				date_add($date_soleil, $interval);

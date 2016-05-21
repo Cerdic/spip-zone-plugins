@@ -21,7 +21,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 			- 'weather' pour le weather.com, la valeur par défaut
  * 			- 'wwo' pour World Weather Online
  * 			- 'wunderground' pour Wunderground
- * 			- 'yahoo' pour Yahoo! Weather
  * 			- 'owm' pour Open Weather Map
  *
  * @return string
