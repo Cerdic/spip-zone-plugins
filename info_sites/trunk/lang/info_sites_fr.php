@@ -96,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_projets_versioning_type_vide' => 'Type de versioning non-renseigné',
 	'controle_roles_auteurs_projets_explication' => 'Vérifier que tous les utilisateurs associés à un projet ont bien un rôle défini. Les utilisateurs qui seraient listés dans le tableau ci-dessous n’ont pas de rôle défini sur le projet auquel ils sont liés. Il faudra y remédier le cas échéant.',
 	'controle_roles_auteurs_projets_ok' => 'Tous les utilisateurs ont au moins un rôle défini sur les projets auxquels ils sont associés.',
+	'controle_roles_auteurs_projets_orphelins' => 'Utilisateurs sans rôle sur leur projet',
 	'creation_rapide_fiche' => 'Fiche condensée',
 
 	// D
