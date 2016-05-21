@@ -37,7 +37,7 @@ function calculer_infos($lieu, $type, $service) {
 		return $tableau;
 	else {
 		$tableau = unserialize($tableau);
-		$info = $tableau[strtolower($type)];
+		$info = isset($tableau[strtolower($type)]) ? $tableau[strtolower($type)] : '';
 		return $info;
 	}
 }

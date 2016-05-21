@@ -372,7 +372,7 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		$tableau['point_rosee'] = (isset($conditions['dewpoint_'.$ut])) ? intval($conditions['dewpoint_'.$ut][0]['text']) : '';
 
 		$tableau['pression'] = (isset($conditions['pressure_'.$up])) ? floatval($conditions['pressure_'.$up][0]['text']) : '';
-		$tableau['tendance_pression'] = (isset($conditions['pressure_trend']) AND array_key_exists($conditions['pressure_trend'][0]['text'], $tendances))
+		$tableau['tendance_pression'] = (isset($conditions['pressure_trend'][0]['text']) AND array_key_exists($conditions['pressure_trend'][0]['text'], $tendances))
 					? $tendances[$conditions['pressure_trend'][0]['text']]
 					: '';
 
