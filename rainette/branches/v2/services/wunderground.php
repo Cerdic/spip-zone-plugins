@@ -483,7 +483,7 @@ function json2conditions_wunderground($flux, $tendances, $suffixes) {
 			: '';
 
 		// Liste des conditions meteo extraites dans le systeme demande
-		list($ut, $up, $ud, $uv) = $suffixes;
+		list($ut, $up, $ud, $uv, $ur) = $suffixes;
 		$tableau['vitesse_vent'] = (isset($conditions['wind_'.$uv])) ? floatval($conditions['wind_'.$uv]) : '';
 		$tableau['angle_vent'] = (isset($conditions['wind_degrees'])) ? intval($conditions['wind_degrees']) : '';
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
@@ -578,13 +578,11 @@ function meteo_wunderground2weather($meteo, $periode=0) {
 							'partlysunny'=> array(28,27),
 							'sleet'=> array(5,5),
 							'rain'=> array(11,11),
-							'sleet'=> array(5,5),
 							'snow'=> array(16,16),
 							'sunny'=> array(32,31),
 							'tstorms'=> array(4,4),
 							'thunderstorms'=> array(4,4),
 							'unknown'=> array(4,4),
-							'cloudy'=> array(26,26),
 							'scatteredclouds'=> array(30,29),
 							'overcast'=> array(26,26));
 

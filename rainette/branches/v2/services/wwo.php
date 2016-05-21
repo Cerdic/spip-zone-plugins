@@ -252,14 +252,10 @@ function wwo_flux2infos($flux, $lieu) {
 
 	// Construire le tableau standard des informations sur le lieu et ajouter le nombre de jours de prévisions
 	$tableau = ($format == 'xml') ? xml2infos_wwo($flux) : json2infos_wwo($flux);
+	$tableau['max_previsions'] = _RAINETTE_WWO_JOURS_PREVISIONS;
 
-	if ($tableau) {
-		// Ajouter les informations calculées, à savoir, le nombre de jours de prévisions
-		$tableau['max_previsions'] = _RAINETTE_WWO_JOURS_PREVISIONS;
-	} else {
-		// Traitement des erreurs de flux
-		$tableau['erreur'] = 'chargement';
-	}
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }
