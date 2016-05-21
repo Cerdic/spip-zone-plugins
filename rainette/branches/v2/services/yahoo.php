@@ -40,7 +40,7 @@ function yahoo_service2reload_time($mode) {
 
 function yahoo_url2flux($url) {
 
-	include_spip('inc/phraser');
+	include_spip('inc/rainette_phraser');
 	$flux = url2flux_xml($url, true);
 
 	return $flux;
@@ -125,7 +125,7 @@ function yahoo_flux2conditions($flux, $lieu) {
 	static $tendance = array(0 => 'steady', 1 => 'rising', 2 => 'falling');
 	$tableau = array();
 
-	include_spip('inc/convertir');
+	include_spip('inc/rainette_convertir');
 
 	if (isset($flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'])) {
 		$conditions = $flux['children']['channel'][0]['children']['yweather:wind'][0]['attributes'];

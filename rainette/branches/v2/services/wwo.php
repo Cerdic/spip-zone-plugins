@@ -85,7 +85,7 @@ function wwo_url2flux($url) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/wwo/format', 'xml');
 
-	include_spip('inc/phraser');
+	include_spip('inc/rainette_phraser');
 	$flux = ($format == 'xml') ? url2flux_xml($url, false) : url2flux_json($url);
 
 	return $flux;
@@ -189,7 +189,7 @@ function wwo_flux2conditions($flux, $lieu) {
 		// Convertir les informations exprimées en système métrique dans le systeme US si la
 		// configuration le demande
 		if ($systeme_unite == 's') {
-			include_spip('inc/convertir');
+			include_spip('inc/rainette_convertir');
 			// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
 			// les deux systèmes.
 			$tableau['visibilite'] = ($tableau['visibilite'])
@@ -315,7 +315,7 @@ function xml2previsions_wwo($flux, $suffixes) {
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['hourly'][0]['children']['winddir16point'])) ? $_prevision['hourly'][0]['children']['winddir16point'][0]['text'] : '';
 
 					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['hourly'][0]['children']['chanceofrain'])) ? intval($_prevision['hourly'][0]['children']['chanceofrain'][0]['text']) : '';
-					include_spip('inc/convertir');
+					include_spip('inc/rainette_convertir');
 					$tableau[$_index][0]['precipitation'] = (isset($_prevision['hourly'][0]['children']['precipmm'])) ? floatval($_prevision['hourly'][0]['children']['precipmm'][0]['text']) : '';
 					if (($ur == 'in') AND $tableau[$_index][0]['precipitation'])
 						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);
@@ -440,7 +440,7 @@ function json2previsions_wwo($flux, $suffixes) {
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['hourly'][0]['winddir16Point'])) ? $_prevision['hourly'][0]['winddir16Point'] : '';
 
 					$tableau[$_index][0]['risque_precipitation'] = NULL;
-					include_spip('inc/convertir');
+					include_spip('inc/rainette_convertir');
 					$tableau[$_index][0]['precipitation'] = (isset($_prevision['hourly'][0]['precipMM'])) ? floatval($_prevision['hourly'][0]['precipMM']) : '';
 					if (($ur == 'in') AND $tableau[$_index][0]['precipitation'])
 						$tableau[$_index][0]['precipitation'] = millimetre2inch($tableau[$_index][0]['precipitation']);

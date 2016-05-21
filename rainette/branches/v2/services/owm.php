@@ -107,7 +107,7 @@ function owm_url2flux($url) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
 
-	include_spip('inc/phraser');
+	include_spip('inc/rainette_phraser');
 	$flux = ($format == 'xml') ? url2flux_xml($url, false) : url2flux_json($url);
 
 	return $flux;
@@ -274,7 +274,7 @@ function xml2previsions_owm($flux, $unite) {
 		$maintenant = time();
 
 		if ($previsions) {
-			include_spip('inc/convertir');
+			include_spip('inc/rainette_convertir');
 			foreach ($previsions as $_index => $_prevision) {
 				if (isset($_prevision['children'])) {
 					// Index du jour et date du jour
@@ -327,7 +327,7 @@ function xml2conditions_owm($flux) {
 	$tableau = array();
 
 	if (isset($flux['children'])) {
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$conditions = $flux['children'];
 
 		// Date d'observation
@@ -404,7 +404,7 @@ function json2previsions_owm($flux, $unite) {
 		$maintenant = time();
 
 		if ($previsions) {
-			include_spip('inc/convertir');
+			include_spip('inc/rainette_convertir');
 			foreach ($previsions as $_index => $_prevision) {
 				// Index du jour et date du jour
 				$tableau[$_index]['index'] = $_index;
@@ -449,7 +449,7 @@ function json2conditions_owm($flux) {
 	$tableau = array();
 
 	if ($flux) {
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$conditions = $flux;
 
 		// Date d'observation

@@ -120,7 +120,7 @@ function wunderground_url2flux($url) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/wunderground/format', 'json');
 
-	include_spip('inc/phraser');
+	include_spip('inc/rainette_phraser');
 	$flux = ($format == 'json') ? url2flux_json($url) : url2flux_xml($url, false);
 
 	return $flux;
@@ -317,7 +317,7 @@ function xml2previsions_wunderground($flux, $unites) {
 					// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 					// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 					// --> Le mieux est donc de convertir à partir de l'angle
-					include_spip('inc/convertir');
+					include_spip('inc/rainette_convertir');
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['avewind'][0]['children'])) ? angle2direction($tableau[$_index][0]['angle_vent']) : '';
 
 					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['pop'])) ? intval($_prevision['pop'][0]['text']) : '';
@@ -360,7 +360,7 @@ function xml2conditions_wunderground($flux, $tendances, $suffixes) {
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 		// --> Le mieux est donc de convertir à partir de l'angle
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$tableau['direction_vent'] = (isset($conditions['wind_degrees'])) ? angle2direction($tableau['angle_vent']) : '';
 
 		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? floatval($conditions['temp_'.$ut][0]['text']) : '';
@@ -446,7 +446,7 @@ function json2previsions_wunderground($flux, $unites) {
 					// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 					// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 					// --> Le mieux est donc de convertir à partir de l'angle
-					include_spip('inc/convertir');
+					include_spip('inc/rainette_convertir');
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['avewind'])) ? angle2direction($tableau[$_index][0]['angle_vent']) : '';
 
 					$tableau[$_index][0]['risque_precipitation'] = (isset($_prevision['pop'])) ? intval($_prevision['pop']) : '';
@@ -489,7 +489,7 @@ function json2conditions_wunderground($flux, $tendances, $suffixes) {
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 		// --> Le mieux est donc de convertir à partir de l'angle
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$tableau['direction_vent'] = (isset($conditions['wind_degrees'])) ? angle2direction($tableau['angle_vent']) : '';
 
 		$tableau['temperature_reelle'] = (isset($conditions['temp_'.$ut])) ? floatval($conditions['temp_'.$ut]) : '';

@@ -117,7 +117,7 @@ function rainette_afficher_resume($meteo) {
  */
 function rainette_afficher_direction($direction) {
 
-	include_spip('inc/convertir');
+	include_spip('inc/rainette_convertir');
 	$direction = angle2direction($direction);
 
 	if ($direction)
@@ -338,6 +338,6 @@ function rainette_coasser_infos($lieu, $modele='infos_ville', $service='weather'
 	return $texte;
 }
 
-include_spip('inc/debusquer');
+include_spip('inc/rainette_debusquer');
 
 ?>
