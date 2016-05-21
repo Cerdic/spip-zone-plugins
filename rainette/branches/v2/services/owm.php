@@ -187,9 +187,10 @@ function owm_flux2conditions($flux, $lieu) {
 	$tableau = ($format == 'xml') ? xml2conditions_owm($flux) : json2conditions_owm($flux);
 
 	// Compléter le tableau standard avec les états météorologiques calculés
-	if ($tableau['code_meteo']
-	AND $tableau['icon_meteo']
-	AND isset($tableau['desc_meteo'])) {
+	if ($tableau
+	and $tableau['code_meteo']
+	and $tableau['icon_meteo']
+	and isset($tableau['desc_meteo'])) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
 		// par "n" pour la nuit.

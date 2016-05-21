@@ -214,9 +214,10 @@ function wunderground_flux2conditions($flux, $lieu) {
 	$tableau = ($format == 'json') ? json2conditions_wunderground($flux, $tendances, $suffixes) : xml2conditions_wunderground($flux, $tendances, $suffixes);
 
 	// Compléter le tableau standard avec les états météorologiques calculés
-	if ($tableau['code_meteo']
-	AND $tableau['icon_meteo']
-	AND isset($tableau['desc_meteo'])) {
+	if ($tableau
+	and $tableau['code_meteo']
+	and $tableau['icon_meteo']
+	and isset($tableau['desc_meteo'])) {
 		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
 		// Pour ce service (cas actuel) le nom du fichier icone commence par "nt_" pour la nuit.
 		$icone = basename($tableau['icon_meteo']);
