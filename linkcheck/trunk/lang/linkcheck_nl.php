@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commencer_parcours' => 'Start met zoeken',
-	'commencer_verification' => 'De links zijn gevonden, je kunt nu met de verificatie beginnen',
+	'commencer_verification' => 'De links zijn gevonden, je kunt nu met de verificatie beginnen', # MODIF
 	'commencer_verification_liens' => 'Start de verificatie',
 	'configuration_generale' => 'Algemene configuratie',
 	'configurer_linkcheck' => 'LinkCheck configureren',
@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'id' => 'ID',
 	'info_1_linkcheck' => 'Een link',
+	'info_aucun_lien' => 'Nog geen enkele link werd beoordeeld.',
 	'info_aucun_linkcheck' => 'Geen enkele link gevonden',
 	'info_nb_linkchecks' => 'links',
 
@@ -58,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_notification1' => 'Hallo,<br/>
 							Je ontvangt deze mail omdat een aantal links op je site problemen geeft.<br/>
-							Hieronder een samenvatting: <br/>',
+							Hieronder een samenvatting: <br/>', # MODIF
 	'mail_notification2' => 'Ga naar de beheerpagina van je site om deze problemen op te lossen! Bedankt.',
 	'maj' => 'Aanpassing ',
 	'message_confirmation_reinitialiser' => 'Ben je zeker dat je de tabellen spip_linkchecks en spip_linkchecks_liens wilt ledigen',
@@ -68,16 +69,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_verifies' => 'niet gecontroleerd',
 	'notifier_par_courriel' => 'Bericht per email',
 
+	// O
+	'ouvrenouvelonglet' => 'nieuwe tab',
+
 	// P
 	'parcours_incomplete' => 'Het doorzoeken van links is onvolledig of nog niet uitgevoerd!',
-	'pas_encore_de_liens' => '<strong>Geen enkele link is beoordeeld.</strong> Voer eerst de verificatie uit, wat enkele seconden tot enkele minuten kan duren. Reageert de bladzijde niet, laadt hem dan opnieuw.',
+	'pas_encore_de_liens' => '<strong>Geen enkele link is beoordeeld.</strong> Voer eerst de verificatie uit, wat enkele seconden tot enkele minuten kan duren. Reageert de bladzijde niet, laadt hem dan opnieuw.', # MODIF
 	'poursuivre_verification' => 'Er is nog niet geverificeerd, druk op de toets voor de verificatie',
 	'poursuivre_verification_liens' => 'Verificatie uitvoeren',
 
 	// R
 	'reinitialiser' => 'Herinitialiseren',
 	'reinitialiser_la_base' => 'Om alle handelingen te resetten, druk je op "Herinitialiseren". De tabellen spip_linkchecks en spip_linkchecks_liens worden geledigd',
-	'rescensement_incomplet' => 'De beoordeling is onvolledig! ',
+	'rescensement_incomplet' => 'De beoordeling is onvolledig! ', # MODIF
 
 	// T
 	'tester_liens_linkchecks' => 'Test de links van mijn site',
