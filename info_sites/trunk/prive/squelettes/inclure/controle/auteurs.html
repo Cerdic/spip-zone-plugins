@@ -29,3 +29,13 @@
 <div class="liste-objets auteurs caption-wrap"><strong class="caption"><:info_sites:controle_roles_auteurs_projets_ok:></strong></div>
 <//B_auteurs_liens>
 [(#BOITE_FERMER)]
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="auteurs_projets_bloc"><:info_sites:controle_auteurs_projets_orphelins:></h3>, 'info'})]
+<div class="auteurs_projets">
+	<p class="explication"><:info_sites:controle_auteurs_projets_orphelins_explication:></p>
+	[(#SET{where,"auteurs.id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_liens WHERE objet='projet')"})]
+	<INCLURE{fond=prive/objets/liste/auteurs,where=#GET{where},pagination_id=_auteurs_projets,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER
+
