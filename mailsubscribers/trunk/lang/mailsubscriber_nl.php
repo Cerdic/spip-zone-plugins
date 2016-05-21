@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_valide' => 'geregistreerd',
 
 	// L
-	'label_desactiver_notif_1' => 'De kennisgeving van inschrijvingen voor deze import annuleren', # MODIF
+	'label_desactiver_notif_1' => 'De kennisgeving van inschrijvingen voor deze import annuleren',
 	'label_email' => 'E-mail',
 	'label_file_import' => 'Bestand om te importeren',
 	'label_from_email' => 'Email die uitnodigt',
