@@ -209,10 +209,6 @@ function weather_complement2conditions($tableau, $configuration) {
 	if ($tableau) {
 		// Compléter le tableau standard avec les états météorologiques calculés
 		if ($tableau['code_meteo']) {
-			// A priori la période de nuit commence à 14h et se termine à 5h.
-			// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à null : TODO
-			$tableau['periode'] = null;
-
 			// La traduction du resume dans la bonne langue est toujours faite par les fichiers de langue SPIP
 			// car l'API ne permet pas de choisir la langue. On ne stocke donc que le code meteo
 			etat2resume_weather($tableau, $configuration);
@@ -255,6 +251,10 @@ function weather_complement2previsions($tableau, $configuration, $index_periode)
 function etat2resume_weather(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo']) {
+		// A priori la période de nuit commence à 14h et se termine à 5h.
+		// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à null : TODO
+		$tableau['periode'] = null;
+
 		$tableau['icone'] = $tableau['code_meteo'];
 		$tableau['resume'] = $tableau['code_meteo'];
 	}
