@@ -273,6 +273,34 @@ function rainette_afficher_unite($valeur, $type_valeur = '', $precision = -1, $s
 
 
 /**
+ * @param string $mode
+ *
+ * @return array|string
+ */
+function rainette_lister_services($mode = 'tableau') {
+
+	$services = array();
+
+	// On lit les fichiers php dans répertoire services du plugin sachant ce répertoire
+	// contient exclusivement les api de chaque service dans un fichier unique appelé
+	// nom_du_service.php
+	if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
+		foreach ($fichiers_api as $_fichier) {
+			$services[] = strtolower(basename($_fichier, '.php'));
+		}
+	}
+
+	// Par défaut la liste est fournie comme un tableau.
+	// Si le mode demandé est 'liste' on renvoie une chaine énumérée séparée par des virgules.
+	if ($mode == 'liste') {
+		$services = implode(',', $services);
+	}
+
+	return $services;
+}
+
+
+/**
  * @param string $lieu
  * @param string $mode
  * @param string $modele

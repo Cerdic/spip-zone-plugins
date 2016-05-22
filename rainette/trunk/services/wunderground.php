@@ -236,9 +236,8 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le service Wunderground permet d'utiliser les codes de Weather comme FRXX0076 pour Paris.
 	// On détecte donc le format du lieu.
 	$query = str_replace(array(' ', ','), array('', '/'), trim($lieu));
-
 	if (preg_match('#[a-zA-Z]{4}[0-9]{4}#', $query)) {
-		$query = 'locid:' . strtoupper($lieu);
+		$query = 'locid:' . strtoupper($query);
 	} else {
 		$index = strpos($query, '/');
 		if ($index !== false) {
