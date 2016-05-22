@@ -17,8 +17,8 @@
 			[<:rainette:station_observation|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/station})]
 			[(#ENV{donnees/station}|non)
 				[<:rainette:lieu|ucfirst:>&nbsp;:&nbsp;
-					(#RAINETTE_INFOS{#ENV{extras/lieu}, ville, #ENV{extras/service}})
-					[, (#RAINETTE_INFOS{#ENV{extras/lieu}, pays, #ENV{extras/service}})]
+					(#RAINETTE_INFOS{#ENV{extras/lieu}, ville, #ENV{extras/service}})[,
+					(#RAINETTE_INFOS{#ENV{extras/lieu}, pays, #ENV{extras/service}})]
 				]
 			]
 		</div>

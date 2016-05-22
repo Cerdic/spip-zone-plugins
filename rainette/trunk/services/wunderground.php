@@ -300,6 +300,9 @@ function wunderground_complement2conditions($tableau, $configuration) {
 		// Correspondance des tendances de pression dans le système standard
 		$tableau['tendance_pression'] = $tendances[$tableau['tendance_pression']];
 
+		// Parfois le nom de la station se termine par une virgule et un espace : dans supprime ces deux caractères.
+		$tableau['station'] = rtrim($tableau['station'], ' ,');
+
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_wunderground($tableau, $configuration);
 	}
