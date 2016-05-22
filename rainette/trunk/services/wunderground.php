@@ -295,7 +295,7 @@ function wunderground_complement2conditions($tableau, $configuration) {
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 		// --> Le mieux est donc de convertir à partir de l'angle
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 		// Correspondance des tendances de pression dans le système standard
 		$tableau['tendance_pression'] = $tendances[$tableau['tendance_pression']];
@@ -344,7 +344,7 @@ function wunderground_complement2previsions($tableau, $configuration, $index_per
 		// La documentation indique que les directions uniques sont fournies sous forme de texte comme North
 		// alors que les autres sont des acronymes. En outre, la valeur semble être traduite
 		// --> Le mieux est donc de convertir à partir de l'angle
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 
 		// Compléter le tableau standard avec les états météorologiques calculés

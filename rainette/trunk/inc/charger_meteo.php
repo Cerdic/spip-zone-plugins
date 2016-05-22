@@ -121,7 +121,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		$url = $urler($lieu, $mode, $periodicite, $configuration);
 
 		// Acquérir le flux XML ou JSON dans un tableau
-		include_spip('inc/phraser');
+		include_spip('inc/rainette_phraser');
 		$acquerir = "url2flux_{$configuration['format_flux']}";
 		$flux = $acquerir($url);
 
@@ -147,7 +147,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 			// -1- initialisation du tableau standard à partir uniquement des données reçues du service
 			// -2- complément du tableau avec les données propres à chaque service
 			// -3- complément du tableau avec les données communes à tous les services
-			include_spip('inc/normaliser');
+			include_spip('inc/rainette_normaliser');
 			foreach ($flux as $_index_jour => $_flux_jour) {
 				// Pour les informations et les conditions les données récupérées concernent toute la même "période".
 				// Par contre, pour les prévisions on distingue 2 type de données :
@@ -199,7 +199,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 						// 3- Compléments standard communs à tous les services mais fonction du mode
 						if ($mode == 'conditions') {
 							// Calcul du risque uv à partir de l'indice uv si celui-ci est fourni
-							include_spip('inc/convertir');
+							include_spip('inc/rainette_convertir');
 							$donnees['risque_uv'] = is_int($donnees['indice_uv'])
 								? indice2risque_uv($donnees['indice_uv'])
 								: $donnees['indice_uv'];

@@ -251,7 +251,7 @@ function owm_complement2conditions($tableau, $configuration) {
 	if ($tableau) {
 		// Calcul de la température ressentie et de la direction du vent (16 points), celles-ci
 		// n'étant pas fournie nativement par owm
-		include_spip('inc/convertir');
+		include_spip('inc/rainette_convertir');
 		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 

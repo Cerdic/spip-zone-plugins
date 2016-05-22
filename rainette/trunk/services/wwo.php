@@ -340,7 +340,7 @@ function wwo_complement2previsions($tableau, $configuration, $index_periode) {
  * @return void
  */
 function metrique2imperial_wwo(&$tableau) {
-	include_spip('inc/convertir');
+	include_spip('inc/rainette_convertir');
 
 	// Seules la température, la température ressentie et la vitesse du vent sont fournies dans
 	// les deux systèmes.

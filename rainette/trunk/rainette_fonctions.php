@@ -158,7 +158,7 @@ function rainette_afficher_resume($meteo) {
  */
 function rainette_afficher_direction($direction) {
 
-	include_spip('inc/convertir');
+	include_spip('inc/rainette_convertir');
 	$direction = angle2direction($direction);
 
 	if ($direction) {
@@ -323,7 +323,7 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 			$type_modele = intval($match[1]);
 
 			// On verifie que la périodicité demandée explicitement dans l'appel du modèle est ok
-			include_spip('inc/normaliser');
+			include_spip('inc/rainette_normaliser');
 			if (isset($options['periodicite'])) {
 				$periodicite_explicite = intval($options['periodicite']);
 				if (periodicite_compatible($type_modele, $periodicite_explicite)) {
@@ -402,4 +402,4 @@ function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tem
 	return $texte;
 }
 
-include_spip('inc/debusquer');
+include_spip('inc/rainette_debusquer');
