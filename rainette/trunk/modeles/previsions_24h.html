@@ -24,6 +24,7 @@
 					<span><:rainette:vent|ucfirst:></span><br />
 					(#VALEUR{heure/#GET{index_heure}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})
 				</li>]
+				#SET{pluie, non}
 				[<li>
 					<span><:rainette:precipitation|ucfirst:></span><br />
 					(#VALEUR{heure/#GET{index_heure}/precipitation}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})

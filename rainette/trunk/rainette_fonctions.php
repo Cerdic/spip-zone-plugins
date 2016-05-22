@@ -61,7 +61,9 @@ function calculer_infos($lieu, $type, $service) {
 			$info = $contenu_cache;
 		} else {
 			$tableau = unserialize($contenu_cache);
-			$info = $tableau['donnees'][strtolower($type)];
+			if (isset($tableau['donnees'][strtolower($type)])) {
+				$info = $tableau['donnees'][strtolower($type)];
+			}
 		}
 	}
 
