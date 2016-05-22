@@ -230,10 +230,10 @@ function wwo_flux2conditions($flux, $lieu) {
 				$tableau['resume'] = $meteo;
 			}
 		}
-	} else {
-		// Traitement des erreurs de flux
-		$tableau['erreur'] = 'chargement';
 	}
+
+	// Traitement des erreurs de flux
+	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
 
 	return $tableau;
 }

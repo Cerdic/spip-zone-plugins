@@ -216,6 +216,29 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1, $servi
 }
 
 
+function rainette_lister_services($mode = 'tableau') {
+
+	$services = array();
+
+	// On lit les fichiers php dans répertoire services du plugin sachant ce répertoire
+	// contient exclusivement les api de chaque service dans un fichier unique appelé
+	// nom_du_service.php
+	if ($fichiers_api = glob(_DIR_PLUGIN_RAINETTE . '/services/*.php')) {
+		foreach ($fichiers_api as $_fichier) {
+			$services[] = strtolower(basename($_fichier, '.php'));
+		}
+	}
+
+	// Par défaut la liste est fournie comme un tableau.
+	// Si le mode demandé est 'liste' on renvoie une chaine énumérée séparée par des virgules.
+	if ($mode == 'liste') {
+		$services = implode(',', $services);
+	}
+
+	return $services;
+}
+
+
 /**
  * Charger le fichier des infos meteos jour par jour
  * et rendre l'affichage pour les N premiers jours
