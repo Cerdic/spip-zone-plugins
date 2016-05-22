@@ -14,7 +14,6 @@ $GLOBALS['rainette_config']['infos'] = array(
 	'longitude'      => array('origine' => 'service', 'type_php' => 'float'),
 	'latitude'       => array('origine' => 'service', 'type_php' => 'float'),
 	// Informations complémentaires
-	'max_previsions' => array('origine' => 'calcul', 'type_php' => 'int'),
 );
 
 $GLOBALS['rainette_config']['conditions'] = array(

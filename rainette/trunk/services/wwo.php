@@ -273,18 +273,6 @@ function wwo_complement2conditions($tableau, $configuration) {
 			metrique2imperial_wwo($tableau);
 		}
 
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service aucun indicateur n'est disponible
-		// -> on utilise le nom de l'icone qui contient l'indication "night" pour la nuit
-		$icone = basename($tableau['icon_meteo']);
-		if (strpos($icone, '_night') === false) {
-			// C'est le jour
-			$tableau['periode'] = 0;
-		} else {
-			// C'est la nuit
-			$tableau['periode'] = 1;
-		}
-
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_wwo($tableau, $configuration);
 	}
@@ -361,6 +349,18 @@ function metrique2imperial_wwo(&$tableau) {
 function etat2resume_wwo(&$tableau, $configuration) {
 
 	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service aucun indicateur n'est disponible
+		// -> on utilise le nom de l'icone qui contient l'indication "night" pour la nuit
+		$icone = basename($tableau['icon_meteo']);
+		if (strpos($icone, '_night') === false) {
+			// C'est le jour
+			$tableau['periode'] = 0;
+		} else {
+			// C'est la nuit
+			$tableau['periode'] = 1;
+		}
+
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == 'wwo') {
 			// On affiche les conditions natives fournies par le service.

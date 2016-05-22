@@ -255,18 +255,6 @@ function owm_complement2conditions($tableau, $configuration) {
 		$tableau['temperature_ressentie'] = temperature2ressenti($tableau['temperature_reelle'], $tableau['vitesse_vent']);
 		$tableau['direction_vent'] = angle2direction($tableau['angle_vent']);
 
-		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
-		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
-		// par "n" pour la nuit.
-		$icone = $tableau['icon_meteo'];
-		if (strpos($icone, 'n') === false) {
-			// C'est le jour
-			$tableau['periode'] = 0;
-		} else {
-			// C'est la nuit
-			$tableau['periode'] = 1;
-		}
-
 		// Compléter le tableau standard avec les états météorologiques calculés
 		etat2resume_owm($tableau, $configuration);
 	}
@@ -328,9 +316,19 @@ function owm_complement2previsions($tableau, $configuration, $index_periode) {
  */
 function etat2resume_owm(&$tableau, $configuration) {
 
-	if ($tableau['code_meteo']
-		and $tableau['icon_meteo']
-	) {
+	if ($tableau['code_meteo'] and $tableau['icon_meteo']) {
+		// Determination de l'indicateur jour/nuit qui permet de choisir le bon icone
+		// Pour ce service le nom du fichier icone finit par "d" pour le jour et
+		// par "n" pour la nuit.
+		$icone = $tableau['icon_meteo'];
+		if (strpos($icone, 'n') === false) {
+			// C'est le jour
+			$tableau['periode'] = 0;
+		} else {
+			// C'est la nuit
+			$tableau['periode'] = 1;
+		}
+
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 		if ($configuration['condition'] == 'owm') {
 			// On affiche les conditions natives fournies par le service.

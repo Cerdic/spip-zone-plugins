@@ -10,6 +10,8 @@
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:rainette:meteo|ucfirst:></strong></p>
 
 #SET{nom_ville, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, ville, #ENV{service, weather}}}
+#SET{pays, #RAINETTE_INFOS{#ENV{pays, FRXX0076}, pays, #ENV{service, weather}}}
+[(#SET{nom_ville, [(#GET{nom_ville})[, (#GET{pays})]]})]
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
 	<p class="info-publi">
@@ -17,11 +19,11 @@
 			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
 													#ENV{ville, FRXX0076},
 													longitude,
-													#ENV{service, weather}}|rainette_afficher_unite{angle, -1, #ENV{service, weather}})]
+													#ENV{service, weather}}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})]
 			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
 											#ENV{ville, FRXX0076},
 											latitude,
-											#ENV{service, weather}}|rainette_afficher_unite{angle, -1, #ENV{service, weather}})]
+											#ENV{service, weather}}|rainette_afficher_unite{angle, 2, #ENV{service, weather}})]
 		</small>
 	</p>
 </div>
@@ -34,11 +36,9 @@
 	service=#ENV{service, weather}})]
 <br class="nettoyeur"/>
 
-#SET{max_previsions, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, max_previsions,	#ENV{service, weather}}}
 <h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=#GET{max_previsions}}|ucfirst:></h2>
 [(#MODELE{rainette_previsions,
 	lieu=#ENV{ville, FRXX0076},
-	type=x_jours,
-	jour=#GET{max_previsions},
+	premier_jour=1,
 	sous_modele=previsions_24h,
 	service=#ENV{service, weather}})]
