@@ -25,8 +25,8 @@ function rezosocios_upgrade($nom_meta_base_version, $version_cible) {
  * @param string $nom_meta_base_version
  */
 function rezosocios_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_rezosocios");
-	sql_drop_table("spip_rezosocios_liens");
+	sql_drop_table('spip_rezosocios');
+	sql_drop_table('spip_rezosocios_liens');
 
 	effacer_meta($nom_meta_base_version);
 }

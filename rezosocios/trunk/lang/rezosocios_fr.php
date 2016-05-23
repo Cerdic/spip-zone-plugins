@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
@@ -35,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rezosocio_creer_associer' => 'Créer et associer un lien de réseau social',
 	'rezosocio_un' => '1 lien de réseau social',
 	'rezosocios_nb' => '@nb@ liens de réseaux sociaux',
-	
+
 	// T
 	'texte_nouveau_rezosocio' => 'Nouveau lien de réseau social',
 	'texte_rezosocio_statut' => 'Ce lien de réseau social est :',
@@ -44,5 +46,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_rezosocios_page' => 'Les liens de réseaux sociaux',
 	'titre_tweetsde' => 'Tweets de @@name@'
 );
-
-?>

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -8,8 +8,8 @@ include_spip('inc/filtres');
 
 // Editer (modification) d'un rezosocio-cle
 // http://doc.spip.org/@action_editer_rezosocio_dist
-function action_editer_rezosocio_dist($arg=null) {
-	if (is_null($arg)){
+function action_editer_rezosocio_dist($arg = null) {
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -20,8 +20,10 @@ function action_editer_rezosocio_dist($arg=null) {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_rezosocio > 0) $err = rezosocio_modifier($id_rezosocio);
-	
+	if ($id_rezosocio > 0) {
+		$err = rezosocio_modifier($id_rezosocio);
+	}
+
 	return array($id_rezosocio,$err);
 }
 
@@ -33,9 +35,10 @@ function action_editer_rezosocio_dist($arg=null) {
 function rezosocio_inserer() {
 
 	$champs = array();
-	
+
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_rezosocios',
@@ -45,9 +48,10 @@ function rezosocio_inserer() {
 	);
 
 	$champs['date'] = date('Y-m-d H:i:s');
-	$id_rezosocio = sql_insertq("spip_rezosocios", $champs);
+	$id_rezosocio = sql_insertq('spip_rezosocios', $champs);
 
-	pipeline('post_insertion',
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_rezosocios',
@@ -66,7 +70,7 @@ function rezosocio_inserer() {
  * @param array $set
  * @return string
  */
-function rezosocio_modifier($id_rezosocio, $set=null) {
+function rezosocio_modifier($id_rezosocio, $set = null) {
 	include_spip('inc/modifier');
 	$c = collecter_requests(
 		// white list
@@ -78,18 +82,22 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
 		// donnees eventuellement fournies
 		$set
 	);
-	
+
 	if (isset($c['changer_lang'])) {
 		$c['lang'] = $c['changer_lang'];
 		unset($c['changer_lang']);
 	}
-	if ($err = objet_modifier_champs('rezosocio', $id_rezosocio,
+	if ($err = objet_modifier_champs(
+		'rezosocio',
+		$id_rezosocio,
 		array(
 			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
-		$c))
+		$c
+	)) {
 		return $err;
+	}
 
 	$c = array();
 	$err = rezosocio_instituer($id_rezosocio, $c);
@@ -103,24 +111,25 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
  * @return void
  */
 function rezosocio_instituer($id_rezosocio, $c) {
-	$row = sql_fetsel("date", "spip_rezosocios", "id_rezosocio = ".intval($id_rezosocio));
+	$date_db = sql_getfetsel('date', 'spip_rezosocios', 'id_rezosocio = '.intval($id_rezosocio));
 
-	$date_ancienne = $date = $row['date'];
-	
+	$date = $date_db;
+
 	$champs = array();
-	
+
 	$d = isset($c['date'])?$c['date']:null;
 
-	if ($d AND $d != $date) {
-		
-		if ($d OR strtotime($d=$date)>time())
+	if ($d and $d != $date) {
+		if ($d or strtotime($d = $date) > time()) {
 			$champs['date'] = $date = $d;
-		else
+		} else {
 			$champs['date'] = $date = date('Y-m-d H:i:s');
+		}
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
+	$champs = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_rezosocios',
@@ -131,9 +140,11 @@ function rezosocio_instituer($id_rezosocio, $c) {
 		)
 	);
 
-	if (!$champs) return;
+	if (!$champs) {
+		return;
+	}
 
-	sql_updateq('spip_rezosocios', $champs, "id_rezosocio = ".intval($id_rezosocio));
+	sql_updateq('spip_rezosocios', $champs, 'id_rezosocio = '.intval($id_rezosocio));
 
 	//
 	// Post-modifications
@@ -144,7 +155,8 @@ function rezosocio_instituer($id_rezosocio, $c) {
 	suivre_invalideur("id='rezosocio/$id_rezosocio'");
 
 	// Pipeline
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_rezosocios',
@@ -171,9 +183,10 @@ function rezosocio_instituer($id_rezosocio, $c) {
  * @return void
  */
 function rezosocio_supprimer($id_rezosocio) {
-	sql_delete("spip_rezosocios", "id_rezosocio=".intval($id_rezosocio));
+	sql_delete('spip_rezosocios', 'id_rezosocio='.intval($id_rezosocio));
 	rezosocio_dissocier($id_rezosocio, '*');
-	pipeline('trig_supprimer_objets_lies',
+	pipeline(
+		'trig_supprimer_objets_lies',
 		array(
 			array('type'=>'rezosocio','id' => $id_rezosocio)
 		)
@@ -191,8 +204,9 @@ function rezosocio_supprimer($id_rezosocio) {
  *
  * Exemples:
  * rezosocio_associer(3, array('auteur'=>2));
- * rezosocio_associer(3, array('auteur'=>2), array('vu'=>'oui)); // ne fonctionnera pas ici car pas de champ 'vu' sur spip_rezosocios_liens
- * 
+ * rezosocio_associer(3, array('auteur'=>2), array('vu'=>'oui));  ne fonctionnera pas ici
+ * car pas de champ 'vu' sur spip_rezosocios_liens
+ *
  * @param int $id_rezosocio
  * @param array $objets
  * @param array $qualif
@@ -231,7 +245,7 @@ function rezosocio_dissocier($id_rezosocio, $objets) {
  * @param array $objets
  * @param array $qualif
  */
-function rezosocio_qualifier($id_rezosocio,$objets,$qualif){
+function rezosocio_qualifier($id_rezosocio, $objets, $qualif) {
 	include_spip('action/editer_liens');
 	return objet_qualifier(array('rezosocio' => $id_rezosocio), $objets, $qualif);
 }

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -67,6 +67,6 @@ function rezosocios_liste() {
 									'url' => 'http://vk.com/'
 								)
 				);
-	$rezosocios = pipeline('rezosocios_liste',$rezosocios);
+	$rezosocios = pipeline('rezosocios_liste', $rezosocios);
 	return $rezosocios;
 }
