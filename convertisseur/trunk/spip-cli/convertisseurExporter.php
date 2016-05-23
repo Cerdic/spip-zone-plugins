@@ -125,16 +125,19 @@ class fichiersExporter extends Command {
 					
 					// auteurs spip 3
 					if($spip_version_branche > "3")
-						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_liens al, spip_auteurs a", "al.id_objet=$id_article and al.objet='article' and al.id_auteur=a.id_auteur");
+						$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_liens al, spip_auteurs a", "al.id_objet=$id_article and al.objet='article' and al.id_auteur=a.id_auteur");
 					else // spip 2
-						$auteurs = sql_allfetsel("a.nom", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
+						$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
 					
 					foreach($auteurs as $a){
-						if($a['nom'])
+						if($a['nom']){
 							$ins_auteurs[] = $a['nom'] ;
+							$ins_bios[] = $a['bio']
+						}	
 					}	
 						
 					$auteurs = join("@@", $ins_auteurs) ;
+					$bios = join("@@", $ins_bios) ;
 					$auteurs_m = substr($auteurs, 0, 100) ;
 					$progress->setMessage($auteurs_m, 'auteurs');
 					
@@ -165,7 +168,7 @@ class fichiersExporter extends Command {
 					}
 
 					// Ajouter les métadonnées					
-					if($bio)
+					if($bios)
 						$fichier = "<ins class='bio'>$bio</ins>\n" . $fichier ;
 					if($auteurs)
 						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
