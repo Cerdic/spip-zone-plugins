@@ -132,7 +132,7 @@ class fichiersExporter extends Command {
 					foreach($auteurs as $a){
 						if($a['nom']){
 							$ins_auteurs[] = $a['nom'] ;
-							$ins_bios[] = $a['bio']
+							$ins_bios[] = $a['bio'] ;
 						}	
 					}	
 						
