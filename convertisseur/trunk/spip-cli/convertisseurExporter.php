@@ -169,7 +169,7 @@ class fichiersExporter extends Command {
 
 					// Ajouter les métadonnées					
 					if($bios)
-						$fichier = "<ins class='bio'>$bio</ins>\n" . $fichier ;
+						$fichier = "<ins class='bio'>$bios</ins>\n" . $fichier ;
 					if($auteurs)
 						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
 					if($motscles)
