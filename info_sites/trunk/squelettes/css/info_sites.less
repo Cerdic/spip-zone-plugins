@@ -327,10 +327,23 @@ table {
 	}
 }
 
+.list-group-item {
+	&.active {
+		background-image: none;
+		background-color: @main-color;
+		border-color: @main-color;
+		color: contrast(@main-color) !important;
+		text-shadow: none;
+		&:focus, &:hover {
+			background-image: none;
+			background-color: darken(@main-color, 5%);
+		}
+	}
+}
+
 .liste-objets {
 	margin-top: 1em;
 	border-top: 1px solid @gray-third;
-
 	&.projets {
 		.table {
 			tr {
@@ -351,6 +364,25 @@ table {
 	}
 }
 
+.page_controle_info_sites {
+	.liste-objets, .liste-objets.projets {
+		.table {
+			tr {
+				th, td {
+					&.picto, &.statut {
+						width: 20px;
+					}
+				}
+			}
+		}
+	}
+}
+.puce_objet_popup {
+	background-color: contrast(@main-color);
+	a {
+		padding: 0 2px;
+	}
+}
 .liste {
 	&.documents_joints {
 		ul {

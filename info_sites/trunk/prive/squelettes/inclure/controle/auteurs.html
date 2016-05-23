@@ -23,7 +23,10 @@
 		</BOUCLE_auteurs_liens>
 		</tbody>
 	</table>
-		[<div class="block_pagination pagination">(#PAGINATION{prive})</div>]
+		[(#REM|test_espace_prive|?{
+		[<div class="pagination">(#PAGINATION{prive})</div>],
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		})]
 	</div>
 </B_auteurs_liens>
 <div class="liste-objets auteurs caption-wrap"><strong class="caption"><:info_sites:controle_roles_auteurs_projets_ok:></strong></div>
@@ -34,7 +37,7 @@
 <div class="auteurs_projets">
 	<p class="explication"><:info_sites:controle_auteurs_projets_orphelins_explication:></p>
 	[(#SET{where,"auteurs.id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_liens WHERE objet='projet')"})]
-	<INCLURE{fond=prive/objets/liste/auteurs,where=#GET{where},pagination_id=_auteurs_projets,sinon=<:info_sites:controle_ok:>,env}/>
+	<INCLURE{fond=objets/liste/auteurs,where=#GET{where},pagination_id=_auteurs_projets,sinon=<:info_sites:controle_ok:>,env}/>
 	<div class="nettoyeur"></div>
 </div>
 #BOITE_FERMER

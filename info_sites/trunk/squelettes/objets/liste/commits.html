@@ -29,7 +29,10 @@
 	</BOUCLE_liste_commits>
 	</tbody>
 </table>
-[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	[(#REM|test_espace_prive|?{
+	[<div class="pagination">(#PAGINATION{prive})</div>],
+	[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	})]
 </div>
 </B_liste_commits>[
 <div class="liste-objets commits caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>

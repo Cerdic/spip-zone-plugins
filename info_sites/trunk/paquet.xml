@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.10.0"
+	version="1.11.0"
 	etat="test"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
@@ -42,9 +42,11 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
 
 	<pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php"/>
+	<pipeline nom="header_prive" inclure="info_sites_pipelines.php"/>
+	<pipeline nom="taches_generales_cron" inclure="info_sites_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="info_sites_autorisations.php"/>
 
 	<chemin path="./" />
-	<chemin path="squelettes" type='public'/>
+	<chemin path="squelettes"/>
 </paquet>

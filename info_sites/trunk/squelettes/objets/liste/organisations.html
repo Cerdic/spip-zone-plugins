@@ -35,14 +35,14 @@
 </BOUCLE_test_annuaire>
 
 <div class="liste-objets organisations table-responsive">
-<table class='table table-striped table-bordered'>
+<table class='spip liste table table-striped table-bordered'>
 	[<caption id="liste_objets_organisations" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_organisation,info_sites:info_nb_organisations}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
-            <th class="nb_contacts" scope="col"><:info_sites:info_nombre_contacts:></th>
-            <th class="nb_projets" scope="col"><:info_sites:info_nombre_projets:></th>
+			<th class="nb_contacts" scope="col"><:info_sites:info_nombre_contacts:></th>
+			<th class="nb_projets" scope="col"><:info_sites:info_nombre_projets:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -50,6 +50,7 @@
 		{compteur_contacts}
 		{id_annuaire?}{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
 		{recherche?}{auteurs.statut ?= #ENV{statut,''}}
+		{where?}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
@@ -74,7 +75,10 @@
 	</BOUCLE_liste_orga>
 	</tbody>
 </table>
-[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	[(#REM|test_espace_prive|?{
+	[<div class="pagination">(#PAGINATION{prive})</div>],
+	[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	})]
 </div>
 </B_liste_orga>[
 <div class="liste-objets organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
