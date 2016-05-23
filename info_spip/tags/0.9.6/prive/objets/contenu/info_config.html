@@ -1,0 +1,42 @@
+﻿[<div class="champ contenu_nom_site">
+	<div class="label visible"><:info_spip:nom_site_label:></div>
+	<div dir='#LANG_DIR' class='nom_site span'>(#NOM_SITE_SPIP)</div>
+</div>]
+
+[<div class="champ contenu_logiciel">
+	<div class="label visible"><:info_spip:logiciel_label:></div>
+	<div dir='#LANG_DIR' class='logiciel span'>SPIP (#SPIP_VERSION)</div>
+</div>]
+
+[(#CONFIG{'info_spip/type_site'}|oui)
+<div class="champ contenu_type_site">
+	<div class="label visible"><:info_spip:type_site_label:></div>
+	<div dir='#LANG_DIR' class='type_site span'>[(#VAL{'info_spip:type_site_'}|concat{#CONFIG{'info_spip/type_site'}}|_T)]</div>
+</div>]
+
+[<div class="champ contenu_date_creation">
+	<div class="label visible"><:info_spip:date_creation_label:></div>
+	<div dir='#LANG_DIR' class='date_creation span'>(#VAL{'Y-m-d H:i:s'}|date{#EVAL{'_FILE_CONNECT'}|filemtime})</div>
+</div>]
+
+[<div class="champ contenu_fo_url">
+	<div class="label visible"><:info_spip:fo_url_label:></div>
+	<div dir='#LANG_DIR' class='fo_url span'>(#URL_SITE_SPIP)</div>
+</div>]
+
+[<div class="champ contenu_bo_url">
+	<div class="label visible"><:info_spip:bo_url_label:></div>
+	<div dir='#LANG_DIR' class='fo_url span'>(#CONFIG{'info_spip/bo_url'})</div>
+</div>]
+
+[<div class="champ contenu_charset">
+	<div class="label visible"><:info_spip:charset_label:></div>
+	<div dir='#LANG_DIR' class='charset span'>(#CHARSET)</div>
+</div>]
+
+<!-- Informations complémentaires qui peuvent être ajoutées par des modules -->
+<BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
+[(#CHEMIN{#VAL{'infos_spip/html/'}|concat{#VALEUR,'.html'}}|oui)
+<INCLURE{fond=infos_spip/html/#VALEUR, env} />
+]</BOUCLE_module_info>
+
