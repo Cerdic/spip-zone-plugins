@@ -4,6 +4,11 @@ Ce fichier sert de changelog, il liste les modifications lors du changement de v
 
 ## Version 0.4.x
 
+### Version 0.4.7
+
+* Optimisation des images
+* PSR SPIP
+
 ### Version 0.4.6
 
 * Doubler le réseau social Linkedin par "Linkedin company" pour pouvoir avoir des liens directs vers les pages entreprises
