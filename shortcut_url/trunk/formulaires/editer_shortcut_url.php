@@ -42,21 +42,22 @@ function formulaires_editer_shortcut_url_charger_dist($id_shortcut_url = 'new', 
 	}
 	return $valeurs;
 }
+
 function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
 	$erreurs = formulaires_editer_objet_verifier('shortcut_url', $id_shortcut_url, array('url'));
 
 	if (!$url = _request('url')) {
 		$erreurs['url'] = _T('info_obligatoire');
 	} else {
-		// Check si il existe le http://
-		$parsed = parse_url($url);
+		// Check si l'url est valide
 		if (filter_var($url, FILTER_VALIDATE_URL) === false) {
 			$erreurs['url'] = _T('shortcut_url:erreur_url_invalide');
 		} else {
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url, 'var_mode', '');
 			// Check si l'URL existe deja
-			if (($id_shortcut_url == 'oui') && ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'url=' . sql_quote($url)))) {
+			if (($id_shortcut_url == 'oui')
+				and ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'url=' . sql_quote($url)))) {
 				set_request('id_shortcut_url_existe', $id_shortcut_url_existe);
 				$erreurs['url'] = _T('shortcut_url:erreur_url_exist');
 			}
@@ -77,6 +78,7 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new',
 // http://doc.spip.org/@inc_editer_shortcut_url_dist
 function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
 	include_spip('inc/distant');
+	$result = $set = array();
 	$recup = recuperer_page(_request('url'), true);
 	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs)) {
 		$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
@@ -92,7 +94,6 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', 
 		$taille_raccourci = 8;
 	}
 
-	$set = array();
 	if (_request('titre')) {
 		$set['titre'] = _request('titre');
 	} else {
@@ -108,7 +109,7 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', 
 		sql_delete('spip_urls', 'type=' . sql_quote('shortcut_url') . ' AND id_objet=' . intval($id_shortcut_url));
 	}
 	$editer_objet = charger_fonction('editer_objet', 'action');
-	$action = $editer_objet($id_shortcut_url, 'shortcut_url', $set);
+	$editer_objet($id_shortcut_url, 'shortcut_url', $set);
 
 	// $res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	$res = array(
