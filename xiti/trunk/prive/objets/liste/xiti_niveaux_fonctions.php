@@ -30,17 +30,18 @@ function filtre_objets_associes_xiti_niveau_dist($id_xiti_niveau) {
 	$associes = array();
 	$tables = lister_tables_objets_sql();
 	foreach ($tables as $table_objet_sql => $infos) {
-		$nb = (isset($occurrences[$id_xiti_niveau][$table_objet_sql][$id_xiti_niveau]) ? $occurrences[$id_xiti_niveau][$table_objet_sql][$id_xiti_niveau] : 0);
+		$nb = (isset($occurrences[$id_xiti_niveau][$table_objet_sql][$id_xiti_niveau]) ?
+					$occurrences[$id_xiti_niveau][$table_objet_sql][$id_xiti_niveau] : 0);
 		if ($nb) {
 			$associes[] = objet_afficher_nb($nb, $infos['type']);
 		}
 	}
 
 	$associes = pipeline(
-					'afficher_nombre_objets_associes_a',
-					array('args' => array('objet' => 'xiti_niveau', 'id_objet' => $id_xiti_niveau),
-						'data' => $associes)
-					);
+		'afficher_nombre_objets_associes_a',
+		array('args' => array('objet' => 'xiti_niveau', 'id_objet' => $id_xiti_niveau),
+			'data' => $associes)
+	);
 	return $associes;
 }
 
@@ -56,10 +57,10 @@ function filtre_objets_associes_xiti_niveau_dist($id_xiti_niveau) {
 function calculer_utilisations_xiti_niveaux($id_xiti_niveau) {
 	$retour = array();
 	$objets = sql_allfetsel(
-					'DISTINCT objet',
-					array('spip_xiti_niveaux_liens AS L', 'spip_xiti_niveaux AS M'),
-					array('L.id_xiti_niveau=M.id_xiti_niveau', 'M.id_xiti_niveau=' . intval($id_xiti_niveau))
-					);
+		'DISTINCT objet',
+		array('spip_xiti_niveaux_liens AS L', 'spip_xiti_niveaux AS M'),
+		array('L.id_xiti_niveau=M.id_xiti_niveau', 'M.id_xiti_niveau=' . intval($id_xiti_niveau))
+	);
 
 	foreach ($objets as $o) {
 		$objet = $o['objet'];
@@ -88,20 +89,21 @@ function calculer_utilisations_xiti_niveaux($id_xiti_niveau) {
 				} // objets sans champ previsu ou avec un previsu == '!' (par ex les rubriques)
 				else {
 					$statuts = ' AND ' . sql_in(
-									"O.$c_statut",
-									($GLOBALS['connect_statut'] == '0minirezo') ? array('prepa', 'prop', 'publie') : array('prop', 'publie')
-									);
+						"O.$c_statut",
+						($GLOBALS['connect_statut'] == '0minirezo') ?
+							array('prepa', 'prop', 'publie') : array('prop', 'publie')
+					);
 				}
 			}
 			$res = sql_allfetsel(
-							'COUNT(*) AS cnt, L.id_xiti_niveau',
-							'spip_xiti_niveaux_liens AS L
+				'COUNT(*) AS cnt, L.id_xiti_niveau',
+				'spip_xiti_niveaux_liens AS L
 					LEFT JOIN spip_xiti_niveaux AS M ON L.id_xiti_niveau=M.id_xiti_niveau
-						AND L.objet=' . sql_quote($objet) . '
+					AND L.objet=' . sql_quote($objet) . '
 					LEFT JOIN ' . $table_objet_sql . " AS O ON L.id_objet=O.$_id_objet",
-							"M.id_xiti_niveau=$id_xiti_niveau$statuts",
-							'L.id_xiti_niveau'
-							);
+				"M.id_xiti_niveau=$id_xiti_niveau$statuts",
+				'L.id_xiti_niveau'
+			);
 			foreach ($res as $row) {
 				$retour[$table_objet_sql][$row['id_xiti_niveau']] = $row['cnt'];
 			}

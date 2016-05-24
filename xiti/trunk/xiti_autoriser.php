@@ -23,7 +23,7 @@ function autoriser_xitiniveau_creer_dist($faire, $quoi, $id, $qui, $opts) {
 }
 
 function autoriser_xitiniveau_modifier_dist($faire, $quoi, $id, $qui, $opts) {
-	return autoriser('creer', 'xitiniveau', $id, $qui, $opt);
+	return autoriser('creer', 'xitiniveau', $id, $qui, $opts);
 }
 
 function autoriser_xitiniveau_supprimer_dist($faire, $quoi, $id, $qui, $opts) {

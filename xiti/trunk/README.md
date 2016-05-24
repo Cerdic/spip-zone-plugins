@@ -3,6 +3,7 @@
 ## Installation
 
 `#INCLURE{fond=inclure/marqueur,id_rubrique,id_article,id_mot,id_secteur,lang,page}`
+
 ## Documentation
 
 ### Elements du marqueur xiti
@@ -20,22 +21,22 @@
 
 ## TODO
 
-### Gestion des niveaux deux
-
-* Sur la page d'un objet, si un niveau 2 est utilisé pour le secteur et / ou pour la langue, l'afficher quelque part
-
 ### Espace privé / Gestion de Xiti
 
 * Sur les pages d'objets, afficher les variables complètes du code Xiti pour les webmestre afin qu'ils puissent voir d'un coup d'oeil ce qui sera généré
 
 ### Marqueur Javascript
 
-* Ajouter la prise en compte des visiteurs identifiés (http://help.atinternet-solutions.com/fr/implementation/specific_tags/tg_population_fr.htm)
-* Regarder si les résultats de recherche peuvent être loggés : https://help.atinternet-solutions.com/FR/launch_page.htm#implementation/specific_tags/tg_clicks_FR.htm
+* Ajouter la prise en compte des [visiteurs identifiés](http://help.atinternet-solutions.com/fr/implementation/specific_tags/tg_population_fr.htm)
+* Regarder si les [résultats de recherche peuvent être loggés](https://help.atinternet-solutions.com/FR/launch_page.htm#implementation/specific_tags/tg_clicks_FR.htm)
 
 ## Changelog
 
 ### Version 1.x.x 
+
+#### Version 1.8.0
+
+* Sur la page d'un objet, si un niveau 2 est utilisé pour le secteur ou pour une rubrique de la hiérarchie l'afficher quelque part
 
 #### Version 1.7.0
 

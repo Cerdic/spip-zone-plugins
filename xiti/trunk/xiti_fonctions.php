@@ -29,7 +29,13 @@ function xiti_caracteres($texte) {
  * @return string
  */
 function xiti_nettoyeur($texte) {
-	return strtolower(preg_replace(array('/[^a-zA-Z0-9 -]/', '/[ -]+/', '/^-|-$/'), array('', '-', ''), xiti_caracteres($texte)));
+	return strtolower(
+		preg_replace(
+			array('/[^a-zA-Z0-9 -]/', '/[ -]+/', '/^-|-$/'),
+			array('', '-', ''),
+			xiti_caracteres($texte)
+		)
+	);
 }
 
 function xiti($texte) {
@@ -123,7 +129,7 @@ function strtoascii($texte, $encoding = 'utf-8') {
 
 	// Conversion
 	foreach ($str_ascii as $k => $v) {
-		$texte = mb_ereg_replace("[".$v."]", $k, $texte);
+		$texte = mb_ereg_replace('['.$v.']', $k, $texte);
 	}
 
 	return $texte;

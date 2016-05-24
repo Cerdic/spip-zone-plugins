@@ -5,7 +5,7 @@
  * @package SPIP\Xiti\Action
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -33,7 +33,7 @@ function action_dissocier_xiti_niveau_dist($arg = null) {
 	) {
 		supprimer_lien_xiti_niveau($xiti_niveau, $objet, $id_objet);
 	} else {
-		spip_log("Interdit de modifier $objet $id_objet", "spip");
+		spip_log("Interdit de modifier $objet $id_objet", 'spip');
 	}
 }
 
@@ -58,7 +58,8 @@ function supprimer_lien_xiti_niveau($id_xiti_niveau, $objet, $id_objet, $supprim
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_xiti_niveau/$id_xiti_niveau'");
 
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'operation' => 'delier_xiti_niveau', // compat v<=2
@@ -72,4 +73,3 @@ function supprimer_lien_xiti_niveau($id_xiti_niveau, $objet, $id_objet, $supprim
 		)
 	);
 }
-

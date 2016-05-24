@@ -18,14 +18,17 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_xiti_niveau,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#GET{titre_niveau}|oui)[(#SET{url,[(#GET{id_xiti_niveau}|generer_url_entite{xiti_niveau})]})]
+	<p class="explication"><:xiti_niveau:info_niveau_hierarchie{url=#GET{url},titre=#GET{titre_niveau}}:>]
 	<BOUCLE_editable(CONDITION){si #EDITABLE}>
 	<form method='post' action='#ENV{action}'><div>
+		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id_objet}-#ENV{objet}"/>
+		<div class="over"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></div>
+		
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_xiti_niveau' value='#ENV{id_xiti_niveau}' />
-		[(#GET{titre_niveau}|oui)[(#SET{url,[(#GET{id_xiti_niveau}|generer_url_entite{xiti_niveau})]})]
-		<p class="explication"><:xiti_niveau:info_niveau_hierarchie{url=#GET{url},titre=#GET{titre_niveau}}:>]
 		<ul>
 			<li class="editer editer_id_xiti_niveaux[ (#ENV**{erreurs}|table_valeur{id_xiti_niveau}|oui)erreur]">
 				<label for="id_xiti_niveau"><:xiti_niveau:entree_xiti_niveau:></label>[
