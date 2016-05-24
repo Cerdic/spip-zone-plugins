@@ -24,6 +24,7 @@ function saisies_header_prive($flux) {
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	$css_constructeur = find_in_path('css/formulaires_constructeur.css');
 	$flux .= "\n<link rel='stylesheet' href='$css_constructeur' type='text/css' />\n";
+	
 	return $flux;
 }
 
@@ -37,7 +38,8 @@ function saisies_header_prive($flux) {
  * @return string
 **/
 function saisies_affichage_final($flux) {
-	if ($GLOBALS['html'] // si c'est bien du HTML
+	if (
+		$GLOBALS['html'] // si c'est bien du HTML
 		and ($p = strpos($flux, '<!--!inserer_saisie_editer-->')) !== false // et qu'on a au moins une saisie
 		and strpos($flux, '<head') !== false // et qu'on a la balise <head> quelque part
 	) {
@@ -77,6 +79,7 @@ function saisies_affichage_final($flux) {
 		$ins_js = "\n<script type='text/javascript' src='$js'></script>\n";
 		$flux = substr_replace($flux, $ins_js, $pos_head, 0);
 	}
+	
 	return $flux;
 }
 
@@ -126,8 +129,9 @@ function saisies_formulaire_charger($flux) {
  * @return array
 **/
 function saisies_styliser($flux) {
-	// Si on cherche un squelette de formulaire
-	if (strncmp($flux['args']['fond'], 'formulaires/', 12) == 0
+	if (
+		// Si on cherche un squelette de formulaire
+		strncmp($flux['args']['fond'], 'formulaires/', 12) == 0
 		// Et qu'il y a des saisies dans le contexte
 		and isset($flux['args']['contexte']['_saisies'])
 		// Et que le fichier choisi est vide ou n'existe pas
