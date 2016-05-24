@@ -34,7 +34,7 @@
 
 <div class="liste-objets contacts table-responsive">
 <table class='spip liste table table-striped table-bordered'>
-[<caption id="liste_objets_contacts" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
+[<caption id="liste_objets_contacts[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>

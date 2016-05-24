@@ -11,16 +11,16 @@
 			#SET{table,#OBJET|table_objet}
 			[(#SET{titre,[#OBJET:info_(#GET{table})_liees_auteur]})]
 			[(#SET{liste,#VAL{objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
-			<INCLURE{fond=objets/liste/#GET{liste}, objet, id_auteur, where=#GET{where,''}, titre=(#VAL{info_sites:auteur_}|concat{(#OBJET|table_objet),'_label'}|_T), ajax, env} />
+			<INCLURE{fond=objets/liste/#GET{liste}, objet, id_auteur, where=#GET{where,''}, ajax, env} />
 			<div class="clearfix"></div>
 		</BOUCLE_autresobjets>
 
-		<INCLURE{fond=objets/liste/projets_sites,par=titre,id_projet=#GET{projets_id,0}, env, ajax, titre=<:info_sites:auteur_projets_sites_label:>}>
+		<INCLURE{fond=objets/liste/projets_sites,par=titre,id_projet=#GET{projets_id,0}, env, ajax}>
 
 		[(#PLUGIN{RSS_COMMITS}|oui)
 		[(#EMAIL|oui)
 		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
-		<INCLURE{fond=objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax, titre=<:info_sites:auteur_commits_label:>} />]
+		<INCLURE{fond=objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
 		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
 		<INCLURE{fond=objets/liste/rss_commits, force=0, par=date_creation, auteur=^#GET{email}, env, ajax, titre=<:info_sites:auteur_commits_label:>}>]
 		]

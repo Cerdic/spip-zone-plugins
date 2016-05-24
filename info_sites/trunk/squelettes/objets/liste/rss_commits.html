@@ -8,7 +8,7 @@
 [(#ANCRE_PAGINATION)]
 <div class="liste-objets commits table-responsive">
 <table class="spip liste table table-striped table-bordered">
-	[<caption id="liste_objets_rss_commits" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commit:info_1_commit,commit:info_nb_commits}})</strong></caption>]
+	[<caption id="liste_objets_rss_commits[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commit:info_1_commit,commit:info_nb_commits}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class="titre">[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
