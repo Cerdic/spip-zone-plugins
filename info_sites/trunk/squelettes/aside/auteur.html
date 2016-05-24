@@ -1,5 +1,5 @@
 <BOUCLE_extra (AUTEURS) {id_auteur} {tout}>
-	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesmodifier, auteur, #ID_AUTEUR}|oui}>
+	<BOUCLE_autoriser_modifier (CONDITION) {si #AUTORISER{infositesassocier, auteur, #ID_AUTEUR}|oui}>
 		<div class="block boutons">
 			<div class="list-group menu" role="menu">
 				[(#AUTORISER{infositesmodifier, auteur, #ID_AUTEUR}|oui)
