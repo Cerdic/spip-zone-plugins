@@ -14,6 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'config_export_ok' => 'L\'export des données c\'est correctement déroulé',
+	'csv_description' => 'description',
+	'csv_id' => 'Identifiant',
+	'csv_nb_click' => 'Nombre de clics',
+	'csv_shortcut' => 'Raccourcis',
+	'csv_titre' => 'Titre',
+	'csv_url' => 'Url finale',
 
 	// E
 	'erreur_url_invalide' => 'Veuillez insérer une URL valide',
@@ -63,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_click' => 'clics',
 	'non_communique' => 'nc',
-	
+
 	// P
 	'partage_googleplus' => 'Partager sur GooglePlus',
 	'partage_twitter' => 'Partager sur Twitter',

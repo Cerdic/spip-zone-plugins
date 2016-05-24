@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'nb_click' => 'clicks',
 	'non_communique' => 'nc',
-	
+
 	// P
 	'partage_googleplus' => 'Share on GooglePlus',
 	'partage_twitter' => 'Share on Twitter',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ajouter_shortcut_url' => 'Add shortcut URL',
 	'titre_afficher_logs_shortcut_url' => 'Display logs',
 	'titre_afficher_bots_shortcut_url' => 'Display bots',
-	'titre_csv_export' => 'Data of @date@ for @date_jour@',
+	'titre_csv_export' => 'Data from @date@ extracted on @date_jour@',
 	'titre_export_logs_shortcut_url' => 'Export shortcuts',
 	'titre_modifier_shortcut_url' => 'Edit shortcut URL',
 	'titre_details_url' => 'Details shortcut URL',
