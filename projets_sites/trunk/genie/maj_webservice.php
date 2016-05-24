@@ -15,6 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function genie_maj_webservice_dist($t) {
 	include_spip('base/abstract_sql');
+	include_spip('inc/utils');
 	$analyser_webservice = charger_fonction('analyser_webservice', 'inc');
 
 	$webservices = sql_allfetsel('webservice,id_projets_site,fo_login,fo_password', 'spip_projets_sites',
@@ -24,7 +25,7 @@ function genie_maj_webservice_dist($t) {
 		foreach ($webservices as $key_webservice => $value_webservice) {
 			$champs = $analyser_webservice($value_webservice['webservice'], $value_webservice['fo_login'],
 				$value_webservice['fo_password']);
-//            var_dump($champs);
+			// var_dump($champs);
 			if ($champs and count($champs) > 0) {
 				sql_updateq('spip_projets_sites', $champs, 'id_projets_site=' . $value_webservice['id_projets_site']);
 				spip_log(_T('projets_site:maj_webservice_log_ok', array(

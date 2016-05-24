@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function genie_projetssites_nettoyage_dist($t) {
 	include_spip('base/abstract_sql');
+	include_spip('inc/utils');
 
 	/**
 	 * On sélectionne tous les sites projets de la bdd
