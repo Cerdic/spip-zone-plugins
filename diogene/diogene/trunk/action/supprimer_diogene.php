@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Plugin Diogene
  *
@@ -12,18 +12,18 @@
  *
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_supprimer_diogene_dist(){
-	
+function action_supprimer_diogene_dist() {
+
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	$id_diogene = intval($arg);
-	
-	if ($id_diogene > 0){
+
+	if ($id_diogene > 0) {
 		include_spip('action/editer_diogene');
 		diogene_supprimer($id_diogene);
 	}
 }
-
-?>

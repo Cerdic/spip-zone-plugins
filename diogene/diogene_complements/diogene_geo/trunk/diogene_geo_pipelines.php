@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Diogène géo : extensions géographique pour Diogène
- * 
+ *
  * Auteurs :
  * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
@@ -13,65 +13,71 @@
  * @package SPIP\Diogene_geo\Pipelines
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline diogene_ajouter_saisies (plugin Diogene)
- * 
+ *
  * On ajoute la carte et les saisies supplémentaires liées à diogene_geo ou un sélecteur de point existant
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		le contexte du pipeline
  * @return array $flux
  * 		Le contexte du pipeline modifié
  */
-function diogene_geo_diogene_ajouter_saisies($flux){
+function diogene_geo_diogene_ajouter_saisies($flux) {
 	$objet = $flux['args']['type'];
 	$id_objet = $flux['args']['contexte']['id_'.$objet];
-	if(defined('_DIR_PLUGIN_GIS') && in_array($objet,array('article','rubrique')) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('geo',unserialize($flux['args']['champs_ajoutes']))){
+	if (defined('_DIR_PLUGIN_GIS')
+		and in_array($objet, array('article', 'rubrique'))
+		and is_array(unserialize($flux['args']['champs_ajoutes']))
+		and in_array('geo', unserialize($flux['args']['champs_ajoutes']))) {
 		/**
 		 * Récupérer le point gis lié à l'objet
 		 */
-		if(intval($id_objet)){
-			$valeurs_gis = sql_fetsel("*","spip_gis AS gis LEFT JOIN spip_gis_liens AS lien USING(id_gis)","lien.id_objet=$id_objet AND lien.objet=".sql_quote($objet));
-			if(is_array($valeurs_gis)){
+		if (intval($id_objet)) {
+			$valeurs_gis = sql_fetsel('*', 'spip_gis AS gis LEFT JOIN spip_gis_liens AS lien USING(id_gis)', "lien.id_objet=$id_objet AND lien.objet=".sql_quote($objet));
+			if (is_array($valeurs_gis)) {
 				$valeurs_gis['gis_titre'] = $valeurs_gis['titre'];
 				$valeurs_gis['gis_descriptif'] = $valeurs_gis['descriptif'];
 				unset($valeurs_gis['titre']);
 				unset($valeurs_gis['gis_descriptif']);
-				$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$valeurs_gis);
+				$flux['args']['contexte'] = array_merge($flux['args']['contexte'], $valeurs_gis);
 			}
 		}
 		/**
 		 * Afficher le select si on veut forcer le point existant
 		 */
-		if(isset($flux['args']['options_complements']['geo_forcer_existant']) && $flux['args']['options_complements']['geo_forcer_existant'] == 'on'){
-			if(intval(_request('id_gis')) > 0)
+		if (isset($flux['args']['options_complements']['geo_forcer_existant']) and $flux['args']['options_complements']['geo_forcer_existant'] == 'on') {
+			if (intval(_request('id_gis')) > 0) {
 				$flux['args']['contexte']['id_gis'] = _request('id_gis');
-			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo_forcer',$flux['args']['contexte']);
+			}
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo_forcer', $flux['args']['contexte']);
+		} else {
+			/**
+			 * Afficher une carte dans les autres cas
+			 */
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo', $flux['args']['contexte']);
 		}
-		/**
-		 * Afficher une carte dans les autres cas
-		 */
-		else
-			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo',$flux['args']['contexte']);
 	}
 	return $flux;
 }
 
 /**
  * Insertion dans le pipeline diogene_charger (plugin Diogène)
- * 
+ *
  * On récupère les valeurs de lat, lon, zoom, gis_titre et gis_descriptif dans ce qui a été auparavant posté
  * (On évite le $_GET de l'url) pour le réinsérer en cas d'erreur dans le formulaire
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		Le contexte du pipeline
- * @return array $flux 
+ * @return array $flux
  * 		Le contexte du pipeline modifié
  */
-function diogene_geo_diogene_charger($flux){
-	if(defined('_DIR_PLUGIN_GIS')){
+function diogene_geo_diogene_charger($flux) {
+	if (defined('_DIR_PLUGIN_GIS')) {
 		$flux['data']['lat'] = $_POST['lat'];
 		$flux['data']['lon'] = $_POST['lon'];
 		$flux['data']['zoom'] = $_POST['zoom'];
@@ -90,49 +96,57 @@ function diogene_geo_diogene_charger($flux){
 
 /**
  * Insertion dans le pipeline diogene_verifier (Plugin Diogene)
- * 
+ *
  * Vérifie la validité des champs lat, lon, zoom, gis_titre, gis_descriptif
  * - Si au moins une de ces valeurs est présente (sauf le descriptif), lat, lon, zoom, et titre
  * deviennent obligatoires
  * - Si lat et lon sont présents mais ne sont pas de type float => erreur
  * - Si zoom est présent et n'est pas un int => erreur
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		Le contexte du pipeline
- * @return array $flux 
+ * @return array $flux
  * 		Le contexte du pipeline modifié
  */
-function diogene_geo_diogene_verifier($flux){
-	if(defined('_DIR_PLUGIN_GIS') && !_request('gis_supprimer') && _request('gis_afficher')){
+function diogene_geo_diogene_verifier($flux) {
+	if (defined('_DIR_PLUGIN_GIS') && !_request('gis_supprimer') && _request('gis_afficher')) {
 		$erreurs = &$flux['args']['erreurs'];
-		if(!isset($flux['args']['options_complements']['geo_forcer_existant']) || $flux['args']['options_complements']['geo_forcer_existant'] != 'on'){
+		if (!isset($flux['args']['options_complements']['geo_forcer_existant'])
+			or $flux['args']['options_complements']['geo_forcer_existant'] != 'on') {
 			$lat = _request('lat');
 			$lon = _request('lon');
 			$zoom = _request('zoom');
 			$titre = _request('gis_titre');
 
-			if(_request('statut') != 'poubelle' && ($lat OR $lon OR $zoom)){
-				if(!$lat)
+			if (_request('statut') != 'poubelle' && ($lat or $lon or $zoom)) {
+				if (!$lat) {
 					$flux['data']['lat'] = _T('info_obligatoire');
-				if(!$lon)
+				}
+				if (!$lon) {
 					$flux['data']['lon'] = _T('info_obligatoire');
-				if(!$zoom)
+				}
+				if (!$zoom) {
 					$flux['data']['zoom'] = _T('info_obligatoire');
-				if(!$titre)
+				}
+				if (!$titre) {
 					$flux['data']['gis_titre'] = _T('info_obligatoire');
+				}
 			}
 
-			if((!$erreur['lat']) && $lat){
-				if((!empty($lat)) && !is_numeric($lat))
-					$flux['data']['lat'] = _T('diogene:erreur_valeur_float',array('champ'=> _T('diogene_geo:latitude')));
+			if ((!$erreurs['lat']) && $lat) {
+				if ((!empty($lat)) && !is_numeric($lat)) {
+					$flux['data']['lat'] = _T('diogene:erreur_valeur_float', array('champ' => _T('diogene_geo:latitude')));
+				}
 			}
-			if((!$erreur['lon']) && $lon){
-				if((!empty($lon)) && !is_numeric($lon))
-					$flux['data']['lonx'] = _T('diogene:erreur_valeur_float',array('champ'=> _T('diogene_geo:longitude')));
+			if ((!$erreurs['lon']) && $lon) {
+				if ((!empty($lon)) && !is_numeric($lon)) {
+					$flux['data']['lonx'] = _T('diogene:erreur_valeur_float', array('champ' => _T('diogene_geo:longitude')));
+				}
 			}
-			if((!$erreur['zoom']) && $zoom){
-				if((!empty($zoom)) && !ctype_digit($zoom))
-					$flux['data']['zoom'] = _T('diogene:erreur_valeur_int',array('champ'=>_T('diogene_geo:zoom')));
+			if ((!$erreurs['zoom']) && $zoom) {
+				if ((!empty($zoom)) && !ctype_digit($zoom)) {
+					$flux['data']['zoom'] = _T('diogene:erreur_valeur_int', array('champ' =>_T('diogene_geo:zoom')));
+				}
 			}
 		}
 	}
@@ -141,57 +155,58 @@ function diogene_geo_diogene_verifier($flux){
 
 /**
  * Insertion dans le pipeline diogene_traiter (plugin Diogene)
- * 
+ *
  * On crée un point ou le met à jour si on a les infos de géoloc
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		Le contexte du pipeline
  * @return array $flux
  * 		Le contexte du pipeline modifié
  */
-function diogene_geo_diogene_traiter($flux){
-	if(defined('_DIR_PLUGIN_GIS') && $flux['args']['action'] == 'modifier'){
+function diogene_geo_diogene_traiter($flux) {
+	if (defined('_DIR_PLUGIN_GIS') && $flux['args']['action'] == 'modifier') {
 		$objet = $flux['args']['type'];
 		$id_objet = $flux['args']['id_objet'];
-		if(intval(_request('id_diogene')) > 0)
-			$options_complements = unserialize(sql_getfetsel("options_complements","spip_diogenes","id_diogene=".intval(_request('id_diogene'))));
-		if(isset($options_complements['geo_forcer_existant']) && $options_complements['geo_forcer_existant'] == 'on'){
+		if (intval(_request('id_diogene')) > 0) {
+			$options_complements = unserialize(sql_getfetsel('options_complements', 'spip_diogenes', 'id_diogene='.intval(_request('id_diogene'))));
+		}
+		if (isset($options_complements['geo_forcer_existant']) && $options_complements['geo_forcer_existant'] == 'on') {
 			include_spip('action/editer_gis');
 			$id_gis = false;
 			$post_gis = _request('id_gis') ? _request('id_gis') : $_POST['id_gis'];
-			if(intval($id_objet))
-				$id_gis = sql_getfetsel("gis.id_gis","spip_gis AS gis LEFT JOIN spip_gis_liens AS lien USING(id_gis)","lien.id_objet=$id_objet AND lien.objet=".sql_quote($objet));
-
-			if(intval($id_gis) > 0 &&  $id_gis != $post_gis)
-				gis_dissocier($id_gis,array($objet => $id_objet));
-
-			if(intval($post_gis) > 0 && $id_gis != $post_gis)
+			if (intval($id_objet)) {
+				$id_gis = sql_getfetsel('gis.id_gis', 'spip_gis AS gis LEFT JOIN spip_gis_liens AS lien USING(id_gis)', "lien.id_objet=$id_objet AND lien.objet=".sql_quote($objet));
+			}
+			if (intval($id_gis) > 0 &&  $id_gis != $post_gis) {
+				gis_dissocier($id_gis, array($objet => $id_objet));
+			}
+			if (intval($post_gis) > 0 && $id_gis != $post_gis) {
 				gis_associer($post_gis, array($objet => $id_objet));
-		}
-		else{
-			if(_request('gis_supprimer')){
+			}
+		} else {
+			if (_request('gis_supprimer')) {
 				include_spip('action/editer_gis');
 				$id_gis = _request('id_gis');
 				delier_gis($id_gis, $objet, $id_objet);
-				$nb_gis = sql_countsel('spip_gis_liens','id_gis='.intval($id_gis));
-				if($nb_gis == 0)
+				$nb_gis = sql_countsel('spip_gis_liens', 'id_gis='.intval($id_gis));
+				if ($nb_gis == 0) {
 					supprimer_gis($id_gis);
+				}
 
 				/**
 				 * On vide ensuite les request sur les données géo
 				 */
-				set_request('lat','');
-				set_request('lon','');
-				set_request('zoom','');
-				set_request('gis_titre','');
-				set_request('gis_descriptif','');
-				set_request('adresse','');
-				set_request('code_postal','');
-				set_request('ville','');
-				set_request('region','');
-				set_request('pays','');
-			}
-			else if(($lat = _request('lat')) && ($lon = _request('lon')) && ($gis_afficher = _request('gis_afficher'))){
+				set_request('lat', '');
+				set_request('lon', '');
+				set_request('zoom', '');
+				set_request('gis_titre', '');
+				set_request('gis_descriptif', '');
+				set_request('adresse', '');
+				set_request('code_postal', '');
+				set_request('ville', '');
+				set_request('region', '');
+				set_request('pays', '');
+			} elseif (($lat = _request('lat')) && ($lon = _request('lon')) && ($gis_afficher = _request('gis_afficher'))) {
 				include_spip('action/editer_gis');
 				// On crée l'array pour l'update et pour la création des coordonnées
 				$zoom = _request('zoom');
@@ -211,36 +226,38 @@ function diogene_geo_diogene_traiter($flux){
 					'region' => _request('region'),
 					'pays' => _request('pays')
 				);
-				if(!intval($id_gis))
+				if (!intval($id_gis)) {
 					$id_gis = insert_gis();
-	
-				if(isset($datas['lon'])){
-					if($datas['lon'] > 180){
-						while($datas['lon'] > 180){
+				}
+
+				if (isset($datas['lon'])) {
+					if ($datas['lon'] > 180) {
+						while ($datas['lon'] > 180) {
 							$datas['lon'] = $datas['lon'] - 360;
 						}
-					}else if($datas['lon'] <= -180){
-						while($datas['lon'] <= -180){
+					} elseif ($datas['lon'] <= -180) {
+						while ($datas['lon'] <= -180) {
 							$datas['lon'] = $datas['lon'] + 360;
 						}
 					}
 				}
-				if(isset($datas['lat'])){
-					if($datas['lat'] > 90){
-						while($datas['lat'] > 90){
+				if (isset($datas['lat'])) {
+					if ($datas['lat'] > 90) {
+						while ($datas['lat'] > 90) {
 							$datas['lat'] = $datas['lat'] - 180;
 						}
-					}else if($datas['lat'] <= -90){
-						while($datas['lat'] <= -90){
+					} elseif ($datas['lat'] <= -90) {
+						while ($datas['lat'] <= -90) {
 							$datas['lat'] = $datas['lon'] + 180;
 						}
 					}
 				}
-				sql_updateq('spip_gis',$datas,'id_gis='.intval($id_gis));
-				if($objet && $id_objet)
+				sql_updateq('spip_gis', $datas, 'id_gis='.intval($id_gis));
+				if ($objet && $id_objet) {
 					lier_gis($id_gis, $objet, $id_objet);
+				}
 			}
-			set_request('gis_afficher',$gis_afficher);
+			set_request('gis_afficher', $gis_afficher);
 		}
 	}
 	return $flux;
@@ -248,44 +265,46 @@ function diogene_geo_diogene_traiter($flux){
 
 /**
  * Insertion dans le pipeline diogene_objets (plugin Diogene)
- * 
- * On ajoute la possibilité d'avoir une partie de formulaire pour gis pour les articles, les rubriques, 
+ *
+ * On ajoute la possibilité d'avoir une partie de formulaire pour gis pour les articles, les rubriques,
  * les pages spécifiques et emballe_medias
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		Le contexte du flux
- * @return array $flux 
+ * @return array $flux
  * 		Le contexte du flux modifié
  */
-function diogene_geo_diogene_objets($flux){
-	if(defined('_DIR_PLUGIN_GIS')){
+function diogene_geo_diogene_objets($flux) {
+	if (defined('_DIR_PLUGIN_GIS')) {
 		$flux['article']['champs_sup']['geo'] = $flux['rubrique']['champs_sup']['geo'] = _T('diogene_geo:form_legend');
-		if(defined('_DIR_PLUGIN_PAGES'))
+		if (defined('_DIR_PLUGIN_PAGES')) {
 			$flux['page']['champs_sup']['geo'] = _T('diogene_geo:form_legend');
+		}
 	}
 	return $flux;
 }
 
 /**
  * Insertion dans le pipeline diogene_champs_texte (plugin Diogene)
- * 
- * On ajoute dans le formulaire d'édition de diogène la possibilité 
- * de demander de cacher la carte par défaut car elle prend beaucoup de place 
+ *
+ * On ajoute dans le formulaire d'édition de diogène la possibilité
+ * de demander de cacher la carte par défaut car elle prend beaucoup de place
  * (utile pour les sites qui ne sont pas basés sur la géolocalisation d'objets)
- * 
- * @param array $flux 
+ *
+ * @param array $flux
  * 		Le contexte du flux
- * @return array $flux 
+ * @return array $flux
  * 		Le contexte du flux modifié
  */
-function diogene_geo_diogene_champs_texte($flux){
-	if(defined('_DIR_PLUGIN_GIS') && in_array($flux['args']['objet'],array('article','page','emballe_media')))
-		$flux['data'] .= recuperer_fond('formulaires/diogene_geo_cacher',$flux['args']);
+function diogene_geo_diogene_champs_texte($flux) {
+	if (defined('_DIR_PLUGIN_GIS') && in_array($flux['args']['objet'], array('article','page','emballe_media'))) {
+		$flux['data'] .= recuperer_fond('formulaires/diogene_geo_cacher', $flux['args']);
+	}
 	return $flux;
 }
 
-function diogene_geo_diogene_champs_pre_edition($array){
-	if(defined('_DIR_PLUGIN_GIS')){
+function diogene_geo_diogene_champs_pre_edition($array) {
+	if (defined('_DIR_PLUGIN_GIS')) {
 		$array[] = 'geo_cacher';
 		$array[] = 'geo_forcer_existant';
 	}
@@ -294,36 +313,35 @@ function diogene_geo_diogene_champs_pre_edition($array){
 
 /**
  * Insertion dans le pipeline em_post_upload_medias (plugin Emballe médias)
- * 
- * Dans le cas des documents mis en ligne par emballe medias, 
+ *
+ * Dans le cas des documents mis en ligne par emballe medias,
  * si on a récupéré une géolocalisation associée au document,
- * on l'ajoute à l'article également 
- * 
- * @param array $flux 
+ * on l'ajoute à l'article également
+ *
+ * @param array $flux
  * 		Le contexte du flux
- * @param array $flux 
+ * @param array $flux
  * 		Le contexte du flux sans modification
  */
-function diogene_geo_em_post_upload_medias($flux){
-	if(defined('_DIR_PLUGIN_GIS')){
+function diogene_geo_em_post_upload_medias($flux) {
+	if (defined('_DIR_PLUGIN_GIS')) {
 		/**
 		 * Si on reçoit un id_gis_meta dans l'environnement,
 		 * c'est que cela vient d'une récupération de metas après upload de document
 		 * dans spipmotion par exemple (par metadata/video.php)
 		 */
-		if(_request('id_gis_meta')){
+		if (_request('id_gis_meta')) {
 			$id_gis = intval(_request('id_gis_meta'));
 			lier_gis($id_gis, 'document', $flux['args']['id_document']);
-		}else{
-			$id_gis = sql_getfetsel('id_gis','spip_gis_liens','objet='.sql_quote('document').' AND id_objet='.intval($flux['args']['id_document']));
+		} else {
+			$id_gis = sql_getfetsel('id_gis', 'spip_gis_liens', 'objet='.sql_quote('document').' AND id_objet='.intval($flux['args']['id_document']));
 		}
-		if(intval($id_gis)){
+		if (intval($id_gis)) {
 			include_spip('action/editer_gis');
-			sql_delete('spip_gis_liens','objet='.sql_quote($flux['args']['objet']).' AND id_objet='.intval($flux['args']['id_objet']));
+			sql_delete('spip_gis_liens', 'objet='.sql_quote($flux['args']['objet']).' AND id_objet='.intval($flux['args']['id_objet']));
 			lier_gis($id_gis, $flux['args']['objet'], $flux['args']['id_objet']);
-			set_request('position_auto',true);
+			set_request('position_auto', true);
 		}
 	}
 	return $flux;
 }
-?>

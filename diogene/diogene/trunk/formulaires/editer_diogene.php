@@ -6,73 +6,77 @@
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
  * © 2010-2014 - Distribue sous licence GNU/GPL
- * 
+ *
  * Formulaire d'edition d'un template de formulaire "Diogene"
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_diogene_charger_dist($id_diogene='new',$objet='article', $retour='',$config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_diogene_charger_dist($id_diogene = 'new', $objet = 'article', $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
 	$pipeline = pipeline('diogene_objets');
 	$valeurs = array();
-	if(!is_numeric($id_diogene) && is_array($pipeline) AND !isset($pipeline[$objet])){
+	if (!is_numeric($id_diogene) and is_array($pipeline) and !isset($pipeline[$objet])) {
 		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('diogene:erreur_objet_non_diogene',array('objet'=>$objet));
+		$valeurs['message_erreur'] = _T('diogene:erreur_objet_non_diogene', array('objet'=>$objet));
 		return $valeurs;
-	}else if(
-		!is_numeric($id_diogene)
+	} elseif (!is_numeric($id_diogene)
 		&& is_array($pipeline)
 		&& isset($pipeline[$objet]['diogene_max'])
-		&& sql_countsel('spip_diogenes','type='.sql_quote($objet)) >= intval($pipeline[$objet]['diogene_max'])){
+		&& sql_countsel('spip_diogenes', 'type='.sql_quote($objet)) >= intval($pipeline[$objet]['diogene_max'])) {
 		$valeurs['editable'] = false;
-		$valeurs['message_erreur'] = _T('diogene:erreur_objet_diogene_max',array('objet'=>$objet,'max'=>$pipeline[$objet]['diogene_max']));
+		$valeurs['message_erreur'] = _T('diogene:erreur_objet_diogene_max', array('objet' => $objet, 'max' => $pipeline[$objet]['diogene_max']));
 		return $valeurs;
 	}
 
-	$valeurs = formulaires_editer_objet_charger('diogene',$id_diogene,0,0,$retour,$config_fonc,$row,$hidden);
-	if(empty($valeurs['objet']) OR (!in_array($valeurs['objet'],array('article','rubrique')) && !is_int($id_diogene)))
+	$valeurs = formulaires_editer_objet_charger('diogene', $id_diogene, 0, 0, $retour, $config_fonc, $row, $hidden);
+	if (empty($valeurs['objet']) or (!in_array($valeurs['objet'], array('article', 'rubrique')) and !is_int($id_diogene))) {
 		$valeurs['objet'] = $objet;
+	}
 
-	if(isset($valeurs['type'])){
+	if (isset($valeurs['type'])) {
 		$valeurs['identifiant'] = $valeurs['type'];
 		unset($valeurs['type']);
 	}
-	if(intval($valeurs['id_secteur']) && !$secteur_existe=sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($valeurs['id_secteur'])))
+	if (intval($valeurs['id_secteur']) and !$secteur_existe = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($valeurs['id_secteur']))) {
 		$valeurs['message_erreur'] = _T('diogene:erreur_secteur_diogene_inexistant');
-
+	}
 	if (intval($valeurs['id_rubrique_defaut'])) {
 		$valeurs['rubrique_defaut'] = 'rubrique|'.$valeurs['id_rubrique_defaut'];
 	}
-	
+
 	return $valeurs;
 }
 
-function formulaires_editer_diogene_verifier_dist($id_diogene='new',$objet='article', $retour='', $config_fonc='', $row=array(), $hidden=''){
-	/* rubrique_defaut rend un tableau contenant 'rubrique|123' 
+function formulaires_editer_diogene_verifier_dist($id_diogene = 'new', $objet = 'article', $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
+	/**
+	 * rubrique_defaut rend un tableau contenant 'rubrique|123'
 	 * on extrait l'identifiant de la rubrique, ou on rend 0
 	 */
-	$arr = _request("rubrique_defaut");
+	$arr = _request('rubrique_defaut');
 	if (count($arr)) {
-		$tmp=explode("|",$arr[0]);
+		$tmp=explode('|', $arr[0]);
 		if (count($tmp) == 2) {
-			set_request("id_rubrique_defaut", intval($tmp[1]));
+			set_request('id_rubrique_defaut', intval($tmp[1]));
 		}
 	} else {
-		set_request("id_rubrique_defaut", 0);
+		set_request('id_rubrique_defaut', 0);
 	}
 
-	$erreurs = formulaires_editer_objet_verifier('diogene',$id_diogene,array('titre','statut_auteur','identifiant'));
+	$erreurs = formulaires_editer_objet_verifier('diogene', $id_diogene, array('titre','statut_auteur','identifiant'));
 	$type = _request('identifiant');
-	if($id_diogene = sql_getfetsel('id_diogene','spip_diogenes','type='.sql_quote($type).' AND id_diogene!='.intval($id_diogene)))
+	if ($id_diogene = sql_getfetsel('id_diogene', 'spip_diogenes', 'type='.sql_quote($type).' AND id_diogene!='.intval($id_diogene))) {
 		$erreurs['identifiant'] = _T('diogene:erreur_identifiant_existant');
+	}
 
 	return $erreurs;
 }
 
-function formulaires_editer_diogene_traiter_dist($id_diogene='new',$objet='article', $retour='', $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_diogene_traiter_dist($id_diogene = 'new', $objet = 'article', $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
 	/**
 	 * On invalide le cache pour que les modifications sur les droits
 	 * soient automatiquement prises en compte par les squelettes
@@ -80,7 +84,5 @@ function formulaires_editer_diogene_traiter_dist($id_diogene='new',$objet='artic
 	include_spip('inc/invalideur');
 	suivre_invalideur(1);
 
-	return formulaires_editer_objet_traiter('diogene',$id_diogene,0,'',$retour,$config_fonc,$row,$hidden);
+	return formulaires_editer_objet_traiter('diogene', $id_diogene, 0, '', $retour, $config_fonc, $row, $hidden);
 }
-
-?>

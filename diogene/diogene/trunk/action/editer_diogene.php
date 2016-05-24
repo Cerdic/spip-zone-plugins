@@ -11,10 +11,12 @@
  * Action d'édition d'un diogene
  *
  **/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_editer_diogene_dist($arg=null){
-	if (is_null($arg)){
+function action_editer_diogene_dist($arg = null) {
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -30,12 +32,14 @@ function action_editer_diogene_dist($arg=null){
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_diogene > 0)
+	if ($id_diogene > 0) {
 		$err = diogene_modifier($id_diogene);
-	
-	if ($err)
-		spip_log("echec editeur diogene: $err",_LOG_ERREUR);
-	
+	}
+
+	if ($err) {
+		spip_log("echec editeur diogene: $err", 'diogene.'._LOG_ERREUR);
+	}
+
 	return array($id_diogene,$err);
 }
 
@@ -48,7 +52,8 @@ function action_editer_diogene_dist($arg=null){
 function diogene_instituer($id_diogene, $c) {
 
 	// Envoyer aux plugins
-	$c = pipeline('pre_edition',
+	$c = pipeline(
+		'pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_diogenes',
@@ -59,14 +64,17 @@ function diogene_instituer($id_diogene, $c) {
 		)
 	);
 
-	if (!count($c)) return;
+	if (!count($c)) {
+		return;
+	}
 
 	// Envoyer les modifs.
 
 	sql_updateq('spip_diogenes', $c, "id_diogene=$id_diogene");
 
 	// Pipeline
-	pipeline('post_edition',
+	pipeline(
+		'post_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_diogenes',
@@ -82,7 +90,7 @@ function diogene_instituer($id_diogene, $c) {
 
 /**
  * Fonction d'insertion d'un template
- * 
+ *
  * @return int $id_diogene
  * 	L'identifiant numérique du template créé
  */
@@ -90,7 +98,8 @@ function diogene_inserer() {
 
 	$champs = array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur']);
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_diogenes',
@@ -98,104 +107,116 @@ function diogene_inserer() {
 			'data' => $champs
 		)
 	);
-	$id_diogene = sql_insertq("spip_diogenes", $champs);
+	$id_diogene = sql_insertq('spip_diogenes', $champs);
 
 	return $id_diogene;
 }
 
 /**
  * Fonction de suppression d'un diogene
- * 
+ *
  * @param int $id_diogene
  * 		L'identifiant numérique du diogène à supprimer
  * @return bool true/false
  */
-function diogene_supprimer($id_diogene){
-	$diogene = sql_getfetsel('id_diogene','spip_diogenes','id_diogene='.intval($id_diogene));
-	if(is_numeric($diogene) && (intval($diogene) > 0) && include_spip('inc/autoriser') && autoriser('modifier','diogene',$id_diogene)){
-		if($del = sql_delete('spip_diogenes','id_diogene = '.intval($id_diogene))){
+function diogene_supprimer($id_diogene) {
+	$diogene = sql_getfetsel('id_diogene', 'spip_diogenes', 'id_diogene='.intval($id_diogene));
+	if (is_numeric($diogene)
+		and (intval($diogene) > 0)
+		and include_spip('inc/autoriser')
+		and autoriser('modifier', 'diogene', $id_diogene)) {
+		if (sql_delete('spip_diogenes', 'id_diogene = '.intval($id_diogene))) {
 			/**
 			 * Invalider le cache
 			 */
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='diogene/$id_diogene'");
 			return true;
-		}else
+		} else {
 			return false;
-	}else
+		}
+	} else {
 		return false;
+	}
 }
 
 /**
  * Fonction de révision d'un diogène
- * 
+ *
  * @param int $id_diogene Identifiant numérique du diogene
  * @param array $champs un tableau des champs à modifier en base
  */
-function diogene_modifier($id_diogene,$set=null){
-	
+function diogene_modifier($id_diogene, $set = null) {
+
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		objet_info('diogene','champs_editables'),
+		objet_info('diogene', 'champs_editables'),
 		// black list
 		array('id_secteur','objet','type'),
 		// donnees eventuellement fournies
 		$set
 	);
-	
-	if(!_request('menu'))
+
+	if (!_request('menu')) {
 		$c['menu'] = '';
+	}
 
 	/**
 	 * Les champs champs_caches, champs_ajoutes, options_complements
 	 * doivent être des tableau serialisés
 	 */
-	foreach(array(
+	foreach (array(
 		'champs_caches','champs_ajoutes','options_complements'
-	) as $champ){
-		if(isset($c[$champ]) && is_array($c[$champ]))
+	) as $champ) {
+		if (isset($c[$champ]) and is_array($c[$champ])) {
 			$c[$champ] = serialize($c[$champ]);
-		else if(isset($c[$champ]) && is_array(@unserialize($c[$champ])))
+		} elseif (isset($c[$champ]) and is_array(@unserialize($c[$champ]))) {
 			$c[$champ] = $c[$champ];
-		else
+		} else {
 			$c[$champ] = '';
+		}
 	}
-	
-	foreach(array(
+
+	foreach (array(
 		'titre','description'
-	) as $texte){
-		if(isset($c[$champ]))
+	) as $texte) {
+		if (isset($c[$champ])) {
 			$c[$texte] = filtrer_entites($c[$texte]);
-		else
+		} else {
 			$c[$texte] = '';
+		}
 	}
 
 	$invalideur = "id='diogene/$id_diogene'";
 	$indexation = true;
-	
-	if ($err = objet_modifier_champs('diogene', $id_diogene,
+
+	if ($err = objet_modifier_champs(
+		'diogene',
+		$id_diogene,
 		array(
 			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
 		),
-		$c))
-		return $err;	
-		
-	$rubriques = _request('id_rubrique',$set);
-	sql_delete('spip_diogenes_liens','id_diogene='.intval($id_diogene).' AND objet="rubrique"');
-	if(is_array($rubriques)){
-		foreach($rubriques as $id_rubrique){
-			sql_insertq('spip_diogenes_liens',array('id_diogene' => $id_diogene,'objet'=> $id_rubrique,'objet'=> 'rubrique'));
+		$c
+	)) {
+		return $err;
+	}
+
+	$rubriques = _request('id_rubrique', $set);
+	sql_delete('spip_diogenes_liens', 'id_diogene='.intval($id_diogene).' AND objet="rubrique"');
+	if (is_array($rubriques)) {
+		foreach ($rubriques as $id_rubrique) {
+			sql_insertq('spip_diogenes_liens', array('id_diogene' => $id_diogene, 'objet'=> $id_rubrique, 'objet'=> 'rubrique'));
 		}
 	}
 
-	$c = collecter_requests(array('id_secteur','objet','identifiant','type'),array(),$set);
-	
-	if(isset($c['identifiant'])){
+	$c = collecter_requests(array('id_secteur','objet','identifiant','type'), array(), $set);
+
+	if (isset($c['identifiant'])) {
 		$c['type'] = $c['identifiant'];
 		unset($c['identifiant']);
 	}
@@ -203,16 +224,15 @@ function diogene_modifier($id_diogene,$set=null){
 	return $err;
 }
 
-function revision_diogene($id_diogene, $c=false) {
-	return diogene_modifier($id_diogene,$c);
+function revision_diogene($id_diogene, $c = false) {
+	return diogene_modifier($id_diogene, $c);
 }
-function diogene_set($id_diogene, $set=null) {
-	return diogene_modifier($id_diogene,$set);
+function diogene_set($id_diogene, $set = null) {
+	return diogene_modifier($id_diogene, $set);
 }
 function insert_diogene($id_diogene, $c) {
 	return diogene_inserer();
 }
-function instituer_diogene(){
+function instituer_diogene($id_diogene, $c) {
 	return diogene_instituer($id_diogene, $c);
 }
-?>

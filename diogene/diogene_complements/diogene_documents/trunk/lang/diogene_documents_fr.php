@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_documents_un_par_un' => 'Afficher autant de bouton parcourir que le nombre maximal de documents (si supérieur à 1).',
@@ -15,5 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_document' => 'Supprimer ce document',
 	'legende_documents' => 'Documents',
 );
-
-?>

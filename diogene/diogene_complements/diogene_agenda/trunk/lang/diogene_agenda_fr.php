@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
@@ -15,9 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_agenda_multiple' => 'Permettre de lier plusieurs événements à un article',
 	'label_agenda_obligatoire' => 'L\'événement est obligatoire',
 	'label_cfg_ajout_agenda' => 'Événement',
-	
+
 	// T
 	'titre_evenements_lies' => 'Événements liés'
 );
-
-?>
