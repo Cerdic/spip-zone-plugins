@@ -4,12 +4,13 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
 
-include_spip('rss_commits_fonctions');
-include_spip('base/abstract_sql');
-
 function genie_import_commits_dist($t) {
+	include_spip('rss_commits_fonctions');
+	include_spip('base/abstract_sql');
+	include_spip('inc/utils');
+
 	$log = array();
-	$log[] = "\n ----------" . date_format(date_create(), 'Y-m-d H:i:s') . ' : on lance ' . __FUNCTION__;
+	$log[] = "\n ----------\n" . date_format(date_create(), 'Y-m-d H:i:s') . ' : on lance ' . __FUNCTION__;
 	$commits_anciens = array();
 	$commits_nouveaux = array();
 	$commits_en_bdd = sql_allfetsel('id_projet,url_revision', 'spip_commits', "url_revision !=''");
@@ -39,7 +40,7 @@ function genie_import_commits_dist($t) {
 	} else {
 		$log[] = 'Il n\'y a pas de nouveaux commits';
 	}
-	$log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : ' . __FUNCTION__ . ' a fini son travail' . "\n ----------";
+	$log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : ' . __FUNCTION__ . ' a fini son travail' . "\n ----------\n";
 
 	spip_log(implode("\n", $log), 'rss_commits');
 }
