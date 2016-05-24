@@ -25,7 +25,7 @@ class fichiersExporter extends Command {
 	protected function configure() {
 		$this
 			->setName('convertisseur:exporter')
-			->setDescription('Exporter l atable spip_articles (ou autre) au format SPIP txt.')
+			->setDescription('Exporter la table spip_articles (ou autre) au format SPIP txt.')
 			->setAliases(array(
 				'export'
 			))
@@ -131,10 +131,10 @@ class fichiersExporter extends Command {
 						$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
 					
 					foreach($auteurs as $a){
-						if($a['nom']){
+						if($a['nom'])
 							$ins_auteurs[] = $a['nom'] ;
+						if($a['bio'])	
 							$ins_bios[] = $a['bio'] ;
-						}	
 					}	
 						
 					$auteurs = join("@@", $ins_auteurs) ;
