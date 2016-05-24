@@ -9,10 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Ajoute Bootstrap dropdown aux plugins chargés
- * 
+ *
  * @param array $flux
  *     Liste des js chargés
  * @return array
@@ -27,10 +26,9 @@ function roles_jquery_plugins($flux) {
 	return $flux;
 }
 
-
 /**
  * Ajoute Bootstrap dropdown aux css chargées dans le privé
- * 
+ *
  * @param string $flux Contenu du head HTML concernant les CSS
  * @return string       Contenu du head HTML concernant les CSS
 **/
@@ -50,7 +48,7 @@ function roles_header_prive_css($flux) {
  * @return string       Contenu du head HTML concernant les CSS
 **/
 function roles_insert_head_css($flux) {
-	
+
 	$config = lire_config('chosen', array());
 	if (isset($config['active']) and $config['active']=='oui') {
 		$css = find_in_path('css/bootstrap-button-dropdown.css');
