@@ -101,6 +101,7 @@ class fichiersExporter extends Command {
 					// Exporter les champs spip_articles
 					$fichier = "" ;
 					$ins_auteurs = array();
+					$ins_bios = array();
 					$ins_mc = array();
 					$ins_doc = array();
 					$progress->setMessage('', 'motscles');
