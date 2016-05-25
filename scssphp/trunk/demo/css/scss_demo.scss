@@ -1,0 +1,15 @@
+$blue: #3bbfce;
+$marges: 16px;
+.content{ color: $blue; padding: $marges; }
+.border { padding: $marges / 2; margin: $marges / 2; border: 2px $blue solid;}
+
+/* commentaire variable color redéfinie */
+
+$color: orange;
+@mixin couleurs($color: grey) {
+    background-color: $color;
+    @content;
+}
+body {
+    @include couleurs { color: $color; };
+}
