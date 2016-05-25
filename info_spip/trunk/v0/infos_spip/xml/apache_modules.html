@@ -1,0 +1,8 @@
+[(#REM) On affiche les modules d'apache.
+On utilise une fonction maison qui teste l'existence de la fonction apache_get_modules() au cas où on serait un autre type de serveur qu'Apache]
+
+<B_modules>
+<apache><BOUCLE_modules (DATA) {source table, (#REM|lister_modules_apache)} {par valeur}>
+	<module nom="[(#VALEUR|attribut_html)]" /></BOUCLE_modules>
+</apache>
+</B_modules>

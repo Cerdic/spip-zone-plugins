@@ -1,0 +1,5 @@
+<B_administrateur>
+<administrateurs><BOUCLE_administrateur (AUTEURS) {statut='0minirezo'} {tout}>
+	<administrateur id="[(#ID_AUTEUR)]" login="[(#LOGIN|attribut_html|sinon{'-'})]" email="[(#EMAIL|textebrut|sinon{'-'})]" nom="[(#NOM|attribut_html|sinon{'-'})]" /></BOUCLE_administrateur>
+</administrateurs>
+</B_administrateur>
