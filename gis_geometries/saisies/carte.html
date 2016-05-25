@@ -396,6 +396,16 @@ var geocoder;]
 		if (Object.keys(editableLayers_[(#ENV{nom})]._layers).length >= 1) {
 			drawControl = new L.Control.Draw(drawOptionsBlocked);
 		}
+		[(#REM)
+
+			Si on a un seul objet, on le rend éditable
+
+		]
+		if (Object.keys(editableLayers_[(#ENV{nom})]._layers).length == 1) {
+			editableLayers_[(#ENV{nom})].eachLayer(function (layer) {
+				layer.editing.enable();
+			});
+		}
 		form_map_[(#ENV{nom})].addControl(drawControl);
 		form_map_[(#ENV{nom})].drawControl = drawControl;
 		form_map_[(#ENV{nom})].on('draw:created', function (e) {
