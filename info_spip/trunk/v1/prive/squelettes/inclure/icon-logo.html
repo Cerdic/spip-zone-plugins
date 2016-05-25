@@ -1,0 +1,5 @@
+<BOUCLE_icon(PAQUETS){tout} {id_plugin=#ENV{id_plugin}}>
+[(#LOGO|oui)
+[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]
+]
+</BOUCLE_icon>
