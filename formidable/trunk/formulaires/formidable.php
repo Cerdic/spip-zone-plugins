@@ -72,6 +72,22 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
 
+			// Si on est en train de réafficher les valeurs postées,
+			// ne pas afficher les saisies hidden
+			if (
+				$formulaire['apres'] == 'valeurs'
+				and _request('formidable_afficher_apres') == 'valeurs'
+			){
+				foreach ($saisies as $k => $saisie){
+					if (
+						isset($saisie['saisie'])
+						and $saisie['saisie'] == 'hidden'
+					) {
+						unset($saisies[$k]);
+					}
+				}
+			}
+
 			// On déclare les champs avec les valeurs par défaut
 			$contexte = array_merge(saisies_lister_valeurs_defaut($saisies), $contexte);
 			$contexte['mechantrobot'] = '';
@@ -378,4 +394,19 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 	}
 
 	return $contexte;
+}
+
+
+/**
+ * Retirer les saisies de type hidden d'une liste de définition de saisies,
+ * dans les cas où on affiche les valeurs saisies.
+ * 
+ * @param array $saisies
+ *     Définition de saisies
+ * @return array $saisies 
+ *     Définition de saisies expurgée des saisies de type hidden
+ */
+function retirer_saisies_hidden ($saisies = array()){
+	
+	return $saisies;
 }
