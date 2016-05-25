@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'scssphp_description' => 'Intégration de l’implémentation php de SCSS [->http://leafo.github.io/scssphp/]',
+	'scssphp_description' => 'Intégration de l’implémentation php de SCSS [->http://leafo.github.io/scssphp/]. Il faut avoir au minimum PHP 5.4 pour le bon fonctionnement de cette intégration.',
 	'scssphp_titre' => 'SCSS PHP'
 );
 

@@ -1,14 +1,14 @@
 <paquet
 	prefix="scssphp"
 	categorie="outil"
-	version="1.2.0"
-	etat="stable"
+	version="1.3.0"
+	etat="test"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="scssphp.png"
 	documentation=""
 >
 	<nom>SCSS PHP</nom>
-	
+
 	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
 	<credit>Jean-Baptiste Bourgoin</credit>
 	<credit lien="http://leafo.net">Leafo</credit>
