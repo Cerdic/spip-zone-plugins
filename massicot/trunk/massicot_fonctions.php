@@ -389,7 +389,7 @@ function massicoter_logo_document($logo, $doc = array()) {
  *
  * @return string : Un logo massicoté
  */
-function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = null) {
+function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = null, $env = null) {
 
 	include_spip('inc/filtres');
 
@@ -408,6 +408,24 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = nu
 	if (is_null($id_objet)) {
 
 		$objet = massicot_trouver_objet_logo($src);
+
+		/* Si le plugin roles_documents est activé, l'objet n'est pas forcément
+		 * devinable via le nom de fichier (notamment avec la balise
+		 * LOGO_ARTICLE_RUBRIQUE). Dans ce cas on essaie de bidouiller un truc
+		 * avec l'environnement. */
+		if (test_plugin_actif('roles_documents') and $env) {
+			if (isset($env['id_article'])) {
+				$objet = array(
+					'objet' => 'article',
+					'id_objet' => $env['id_article'],
+				);
+			} elseif (isset($env['id_rubrique'])) {
+				$objet = array(
+					'objet' => 'rubrique',
+					'id_objet' => $env['id_rubrique'],
+				);
+			}
+		}
 
 		if (is_null($objet)) {
 			return $logo;

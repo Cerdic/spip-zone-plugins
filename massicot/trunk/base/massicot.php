@@ -124,7 +124,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 	/* sans oublier #LOGO_ARTICLE_RUBRIQUE… */
 	$interfaces = ajouter_traitement_automatique(
 		$interfaces,
-		'massicoter_logo(%s)',
+		'massicoter_logo(%s,null,null,null,$Pile[0])',
 		'LOGO_ARTICLE_RUBRIQUE'
 	);
 
