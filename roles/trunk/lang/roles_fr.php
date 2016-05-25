@@ -1,11 +1,12 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/roles/trunk/lang
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'ajouter_role' => 'Ajouter un rôle',
 
@@ -20,11 +21,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_roles_title' => 'Modifier les rôles',
 
 	// R
+	'role_titre' => 'Rôle',
 	'roles_titre' => 'Rôles',
-	'role_titre'  => 'Rôle',
 
 	// S
-	'selectionner_roles' => 'Sélectionner le ou les rôles souhaités',
 	'saisir_role' => 'Indiquer un rôle…',
 	'saisir_valeur' => 'Valeur',
+	'selectionner_roles' => 'Sélectionner le ou les rôles souhaités'
 );
