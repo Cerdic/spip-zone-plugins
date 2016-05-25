@@ -1,31 +1,30 @@
 <paquet
-	prefix="player"
-	categorie="multimedia"
-	version="2.7.9"
+	prefix="saisies"
+	categorie="outil"
+	version="2.7.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="prive/themes/spip/images/player-32.png"
-	documentation="http://contrib.spip.net/Lecteur-Multimedia"
-	schema="0.2.4"
->	
+	logo="images/logo_saisie_48.png"
+	documentation="http://contrib.spip.net/Saisies"
+>
+	<nom>Saisies</nom>
+	<auteur lien="http://contrib.spip.net/Matthieu-Marcillaud">Matthieu Marcillaud</auteur>
+	<auteur lien="http://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GNU/GPL</licence>
 
-	<nom>Lecteur Multim&#233;dia</nom>
-	<!-- Lire des sons -->
+	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
 
-	<auteur>BoOz</auteur>
-	<auteur>Cédric</auteur>
-	<auteur>erational</auteur>
-	<auteur>CP.</auteur>
+	<pipeline nom="header_prive" inclure="saisies_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="saisies_pipelines.php" />
+	<pipeline nom="saisies_autonomes" action="" />
+	<pipeline nom="saisies_construire_formulaire_config" action="" />
+	<pipeline nom="formulaire_saisies" action="" />
+	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
+	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
 
-	<pipeline nom="post_propre" />
-	<pipeline nom="insert_head_css" />
-	<pipeline nom="insert_head" />
-	<pipeline nom="header_prive_css" action="insert_head_css"/>
-	<pipeline nom="header_prive" action="insert_head"/>
-	<pipeline nom="affichage_final" inclure="player_fonctions.php" />
-
-	<menu nom="configurer_player" titre="player:player_nom" parent="menu_squelette" icone="images/player-16.png" />
-
-	<utilise nom="medias" compatibilite="[2.7.27;]" />
-
+	<utilise nom="verifier" compatibilite="[0.1.10;]" />
+	<utilise nom="spip_bonux" compatibilite="[3.0.0;]" />
 </paquet>
