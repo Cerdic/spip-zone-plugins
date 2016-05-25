@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>Liens explicites</title>
+[(#CHEMIN{inc-head.html}|oui)<INCLURE{fond=inc-head}>][(#REM)aller chercher le inc-head dans squelettes-dist/inc-head.html pour SPIP2 ]
+[(#CHEMIN{inclure/head.html}|oui)<INCLURE{fond=inclure/head}>][(#REM)aller chercher le head dans extensions/dist/inclure/head.html pour SPIP3 ]
+<style type="text/css">
+body { padding: 10%; text-align: left; }
+</style>
+</head>
+
+<body>
+<h1>Liens explicites</h1>
+#MODELE{charte_links}
+</body>
+</html>
