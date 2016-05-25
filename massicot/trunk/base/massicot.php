@@ -128,6 +128,18 @@ function massicot_declarer_tables_interfaces($interfaces) {
 		'LOGO_ARTICLE_RUBRIQUE'
 	);
 
+	/* …ni les #LOGO_SITE_SPIP ! */
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_logo(%s,"site","0","",$Pile[0])',
+		'LOGO_SITE_SPIP'
+	);
+	$interfaces = ajouter_traitement_automatique(
+		$interfaces,
+		'massicoter_logo(%s,"site","0","logo_survol",$Pile[0])',
+		'LOGO_SITE_SPIP_SURVOL'
+	);
+
 	return $interfaces;
 }
 
