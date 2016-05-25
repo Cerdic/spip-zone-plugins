@@ -1,0 +1,23 @@
+<BOUCLE_selections_contenu(SELECTIONS_CONTENUS){id_selections_contenu}>
+
+[<div class="champ contenu_id_selection[ (#ID_SELECTION*|strlen|?{'',vide})]">
+	<div class="label"><:selections_contenu:champ_id_selection_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{id_selection} id_selection span'>(#ID_SELECTION) <a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#INFO_TITRE{selection,#ID_SELECTION})]</a></div>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class="label"><:selections_contenu:champ_titre_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre span'>(#TITRE)</div>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<div class="label"><:selections_contenu:champ_url_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{url} url span'>(#URL)</div>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class="label"><:selections_contenu:champ_descriptif_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif span'>(#DESCRIPTIF)</div>
+</div>]
+
+</BOUCLE_selections_contenu>

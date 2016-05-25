@@ -1,30 +1,34 @@
 <paquet
-	prefix="newsletters"
-	categorie="communication"
-	version="1.3.24"
+	prefix="selections_editoriales"
+	categorie="navigation"
+	version="1.6.2"
 	etat="stable"
-	compatibilite="[3.0.5;3.1.*]"
-	logo="prive/themes/spip/images/newsletters-64.png"
-	documentation="http://contrib.spip.net/newsletters"
-	schema="0.2.1"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/selections_editoriales-64.png"
+	documentation="http://contrib.spip.net/4647"
+	schema="1.5.0"
 >
-	<nom>Newsletters</nom>
+	<nom>Sélections éditoriales</nom>
 
-	<auteur lien='http://nursit.com/'>Cedric Morin</auteur>
+	<auteur lien="http://www.ldd.net">Les Développements Durables</auteur>
+	<credit lien="http://www.beaumont63.fr">Mairie de Beaumont (Puy-de-Dôme)</credit>
+	<licence>GNU/GPL v3</licence>
 
-	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<utilise nom="selecteurgenerique" compatibilite="[1.1.0;]" />
 
-	<pipeline nom="autoriser" inclure="newsletters_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="selections_editoriales_autorisations.php" />
+	<pipeline nom="formulaire_charger" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/selections_editoriales.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/selections_editoriales.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/selections_editoriales.php" />
+	<pipeline nom="affiche_milieu" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="selections_editoriales_pipelines.php" />
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/newsletters.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/newsletters.php" /> 
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/newsletters.php" /> 
-	<pipeline nom="pre_edition" inclure="newsletters_pipelines.php" />
-	<pipeline nom="optimiser_base_disparus" inclure="newsletters_pipelines.php" />
-	<pipeline nom="taches_generales_cron" inclure="newsletters_pipelines.php" />
-
-	<menu nom="newsletters" titre="newsletter:titre_newsletters" parent="menu_edition" icone="images/newsletter-16.png" action="newsletters" />
-
-	<necessite nom="mailsubscribers" compatibilite="[0.7.0;]" />
-	<necessite nom="mailshot" compatibilite="[0.3.1;]" />
+	<menu nom="selections" titre="selection:titre_selections" parent="menu_edition" icone="images/selections_contenu-16.png" action="selections" />
+	<menu nom="selection_creer" titre="selection:icone_creer_selection" parent="outils_rapides" icone="images/selections_contenu-new-16.png" action="selection_edit" parametres="new=oui" />
 </paquet>
