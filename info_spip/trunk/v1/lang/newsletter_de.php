@@ -7,19 +7,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_envoyer' => 'Senden !',
-	'bouton_tester_envoi' => 'Testen !',
-
-	// I
-	'info_tester_newsletter' => 'Einzelsendung testen',
-	'info_envoi_unique_newsletter' => 'An 1 Empfänger senden',
-	'info_envoyer_newsletter' => 'Newsletter senden',
-	'info_test_envoye' => 'Testversand des Newsletter an @email@ abgeschlossen',
-	'info_envoi_unique_reussi' => 'Der Newsletter wurde an @email@ gesendet.',
+	'bouton_subscribe' => 'Newsletter bestellen',
+	'bouton_unsubscribe' => 'Newsletter abbestellen',
 
 	// L
-	'label_email_test' => 'Mailadresse',
-	'label_liste' => 'an die Abonnenten von ',
+	'label_email_subscribe' => 'Email',
+	'label_email_unsubscribe' => 'Email',
+	'label_link_unsubscribe' => 'Diesen Newsletter abbestellen',
+
+	// S
+	'subscribe_message_ok' => 'Ihre ANmeldung unter der Adresse @email@ wird bearbeitet.',
+	'unsubscribe_message_ok' => 'Die Adresse @email@ wurde aus der Empfängerliste gestrichen.',
+
 
 );
 

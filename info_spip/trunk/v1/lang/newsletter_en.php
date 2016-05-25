@@ -7,19 +7,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	"bouton_envoyer" => "Send !",
-	"bouton_tester_envoi" => "Test !",
-
-	// I
-	"info_tester_newsletter" => "Testing with a single email",
-	"info_envoi_unique_newsletter" => "Send to one person",
-	"info_envoyer_newsletter" => "Send the newsletter",
-	"info_test_envoye" => "The newsletter was sent to @email@ as a test",
-	'info_envoi_unique_reussi' => 'The newsletter was sent to @email@',
+	"bouton_subscribe" => "Subscribe to the Newsletter",
+	"bouton_unsubscribe" => "Unsubscribe from the Newsletter",
 
 	// L
-	"label_email_test" => "to the email address",
-	"label_liste" => "to subscribers of",
+	"label_email_subscribe" => "Email",
+	"label_email_unsubscribe" => "Email",
+	"label_link_unsubscribe" => "Unsubscribe from this Newsletter",
+
+	// S
+	"subscribe_message_ok" => "Your subscription with the address @email@ has been taken into account",
+	'subscribe_message_ok_confirm' => 'A mail has been sent to @email@ to let you confirm your subscription.',
+	'subscribe_message_ok_confirm_invite_singulier' => 'A mail has been sent to email @email@ with an invitation to subscribe.',
+	'subscribe_message_ok_confirm_invite_pluriel' => 'A mail has been sent to emails @email@ with an invitation to subscribe.',
+	"unsubscribe_message_ok" => "The address @email@ has been delisted from the Newsletter",
+
 
 );
 

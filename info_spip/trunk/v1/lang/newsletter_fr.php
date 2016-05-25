@@ -7,19 +7,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_envoyer' => 'Envoyer !',
-	'bouton_tester_envoi' => 'Tester !',
-
-	// I
-	'info_tester_newsletter' => 'Tester avec un envoi unique',
-	'info_envoi_unique_newsletter' => 'Envoyer à 1 personne',
-	'info_envoyer_newsletter' => 'Envoyer l\'infolettre',
-	'info_test_envoye' => 'La newsletter a été envoyée en test à @email@',
-	'info_envoi_unique_reussi' => 'La newsletter a bien été envoyée à @email@',
+	'bouton_subscribe' => 'M\'inscrire à la Newsletter',
+	'bouton_unsubscribe' => 'Me désinscrire de la Newsletter',
 
 	// L
-	'label_email_test' => 'à l\'adresse email',
-	'label_liste' => 'aux abonnés de ',
+	'label_email_subscribe' => 'Email',
+	'label_email_unsubscribe' => 'Email',
+	'label_link_unsubscribe' => 'Me désinscrire de cette Newsletter',
+
+	// S
+	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte.',
+	'subscribe_message_ok_confirm' => 'Vous allez recevoir un email sur l\'adresse @email@ pour confirmer votre inscription.',
+	'subscribe_message_ok_confirm_invite_singulier' => 'Un email a été envoyé à @email@ pour l\'inviter à s\'inscrire.',
+	'subscribe_message_ok_confirm_invite_pluriel' => 'Un email a été envoyé aux emails suivants @email@ pour les inviter à s\'inscrire.',
+	'unsubscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter.',
+
 
 );
 

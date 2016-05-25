@@ -1,0 +1,41 @@
+<div class='formulaire_spip formulaire_newsletter formulaire_[(#FORM)] ajax'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+    #SET{fl,mailsubscriber}
+    [(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+			[(#ENV{afficher_from_email}|=={oui}|oui)
+            #SET{name,from_email}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+            <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+                <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+                <span class='erreur_message'>(#GET{erreurs})</span>
+                ]<input type="email" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+            </li>
+			]
+            #SET{name,to_email}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+            <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+                <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+                <span class='erreur_message'>(#GET{erreurs})</span>
+                ]<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
+                <input type="text" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+            </li>
+
+            #SET{name,message_invite_email_subscribe}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+            <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+                <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+                <span class='erreur_message'>(#GET{erreurs})</span>
+                ]
+                <textarea name="#GET{name}" class="textarea" rows="3">
+<:mailsubscriber:defaut_message_invite_email_subscribe{nom_site_spip=#NOM_SITE_SPIP}:>
+</textarea>
+            </li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:mailsubscriber:bouton_invitation|attribut_html:>' /></p>
+	</div></form>
+	]
+</div>

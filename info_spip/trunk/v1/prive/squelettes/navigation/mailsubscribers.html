@@ -1,0 +1,35 @@
+<!-- Filtrer par listes de diffusion -->
+<B_listes>
+	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
+	<ul class="liste-items">
+		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
+	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
+		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]
+		([(#CLE|mailsubscribers_compte_inscrits)])
+		</li>
+	</BOUCLE_listes>
+	</ul>
+	#BOITE_FERMER
+</B_listes>
+
+[(#AUTORISER{exporter,_mailsubscribers}|oui)
+#BOITE_OUVRIR{'','raccourcis'}
+[(#AUTORISER{configurer,_mailsubscribers}|oui)
+[(#URL_ECRIRE{configurer_mailsubscribers}|icone_horizontale{<:mailsubscriberscfg:cfg_titre_parametrages:>,mailsubscriber-24})]
+<hr />
+]
+
+[(#PLUGIN{spip_bonux}|non)
+<p>Pour importer ou exporter les listes d'inscrits, installez le plugin <a href="http://plugins.spip.net/spip_bonux">SPIP-Bonux</a></p>
+]
+[(#PLUGIN{spip_bonux}|oui)
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,valide}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers:>,mailsubscriber-24,export})]
+[(#URL_ACTION_AUTEUR{mailsubscribers_export,all}|icone_horizontale{<:mailsubscriber:titre_export_mailsubscribers_all:>,mailsubscriber-24,export})]
+
+[(#AUTORISER{importer,mailsubscriber}|et{#ENV{importer,''}|non})
+[(#SELF|parametre_url{importer,oui}|icone_horizontale{<:mailsubscriber:titre_import_mailsubscribers:>,mailsubscriber-24,import})]
+]
+]
+#BOITE_FERMER
+]
+

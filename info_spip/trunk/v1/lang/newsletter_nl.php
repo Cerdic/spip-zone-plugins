@@ -7,19 +7,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	"bouton_envoyer" => "Stuur !",
-	"bouton_tester_envoi" => " Test!",
-
-	// I
-	"info_tester_newsletter" => "Testen met een enkele e-mail",
-	"info_envoi_unique_newsletter" => "Stuur naar een persoon",
-	"info_envoyer_newsletter" => "Stuur de nieuwsbrief",
-	"info_test_envoye" => "De nieuwsbrief werd verzonden naar @email@ als een test",
-	'info_envoi_unique_reussi' => 'De nieuwsbrief werd verzonden naar @email@',
+	"bouton_subscribe" => "Abonneren op de nieuwsbrief",
+	"bouton_unsubscribe" => "Uitschrijven voor de nieuwsbrief",
 
 	// L
-	"label_email_test" => "om het e-mailadres",
-	"label_liste" => "aan abonnees",
+	"label_email_subscribe" => "E-mail",
+	"label_email_unsubscribe" => "E-mail",
+	"label_link_unsubscribe" => "Afmelden voor deze nieuwsbrief",
+
+	// S
+	"subscribe_message_ok" => "Er wordt rekening gehouden met uw registratie voor het adres @email@",
+	"unsubscribe_message_ok" => "Het adres @email@ is geschrapt van de nieuwsbrief",
+
 
 );
 

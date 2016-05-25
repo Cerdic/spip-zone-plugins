@@ -1,32 +1,31 @@
 <paquet
-	prefix="mailshot"
+	prefix="mailsubscribers"
 	categorie="communication"
-	version="1.17.2"
+	version="1.7.14"
 	etat="stable"
-	compatibilite="[3.0.5;3.1.*]"
-	logo="prive/themes/spip/images/mailshot-32.png"
-	documentation="http://contrib.spip.net/mailshot"
-	schema="0.3.4"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/mailsubscriber-32.png"
+	documentation="http://contrib.spip.net/mailsubscribers"
+	schema="0.3.0"
 >
+	<nom>MailSubscribers</nom>
+	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
 
-	<nom>MailShot</nom>
+	<licence>GNU/GPL v3</licence>
 
-	<auteur lien='http://nursit.com'>Cedric Morin</auteur>
+	<pipeline nom="autoriser" inclure="mailsubscribers_autorisations.php" />
 
-	<licence>GNU/GPL</licence>
-	<pipeline nom="autoriser" inclure="mailshot_autorisations.php" />
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailshot.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/mailshot.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/mailshot.php" />
-	<pipeline nom="taches_generales_cron" inclure="mailshot_pipelines.php" />
-	<pipeline nom="afficher_complement_objet" inclure="mailshot_pipelines.php" />
-	<pipeline nom="afficher_fiche_objet" inclure="mailshot_pipelines.php" />
-	<pipeline nom="optimiser_base_disparus" inclure="mailshot_pipelines.php" />
-	<pipeline nom="pre_edition" inclure="mailshot_pipelines.php" />
-	<pipeline nom="post_edition" inclure="mailshot_pipelines.php" />
-	<pipeline nom="newsletter_pre_envoi" action="" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailsubscribers.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mailsubscribers.php" />
+	<pipeline nom="pre_insertion" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="mailsubscribers_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="mailsubscribers_pipelines.php" />
 
-
-	<necessite nom="facteur" compatibilite="[2.3.0;]" />
-	<menu nom="mailshost" titre="mailshot:titre_menu_mailshots" parent="menu_publication" icone="images/mailshot-16.png" action="mailshots" />
+	<menu nom="mailsubscribers" titre="mailsubscriber:titre_mailsubscribers" parent="menu_activite" icone="images/mailsubscriber-16.png" action="mailsubscribers" />
+	<necessite nom="facteur" compatibilite="[2.4.5;]" />
 </paquet>
