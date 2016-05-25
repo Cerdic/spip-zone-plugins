@@ -12,7 +12,9 @@
  * @package SPIP\GetID3\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Installation/maj : création des champs manquants dans spip_documents et préconfiguration
@@ -23,9 +25,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
  */
-function getid3_upgrade($nom_meta_base_version,$version_cible){
+function getid3_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	
+
 	$maj['create'] = array(
 		array('maj_tables',array('spip_documents')),
 		array('getid3_verifier_binaires',array())
@@ -45,22 +47,22 @@ function getid3_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.5.0'] = array(
 		array('maj_tables',array('spip_documents'))
 	);
-	
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**
  * Fonction de suppression du plugin
- * 
- * Supprime les différentes métas en base : 
+ *
+ * Supprime les différentes métas en base :
  * -* configuration;
  * -* installation;
  * -* les formats de tags que l'on peut écrire;
  * -* si on est en safe mode;
  * -* vorbiscomment non disponible;
  * -* metaflac non disponible;
- * 
+ *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
@@ -77,67 +79,71 @@ function getid3_vider_tables($nom_meta_base_version) {
 
 /**
  * Fonction de vérification de la présence des fichiers binaires présents
- * 
+ *
  * @return void
  */
-function getid3_verifier_binaires(){
-	$getid3_binaires = charger_fonction('getid3_verifier_binaires','inc');
+function getid3_verifier_binaires() {
+	$getid3_binaires = charger_fonction('getid3_verifier_binaires', 'inc');
 	$getid3_binaires(true);
 }
 
 /**
  * Fonction de mise en concordance de la base entre GetID3 et SPIPmotion
- * 
+ *
  * @return void
  */
-function getid3_upgrade_compat_spipmotion(){
-	$desc = sql_showtable('spip_documents', true, $connect);
+function getid3_upgrade_compat_spipmotion() {
+	$desc = sql_showtable('spip_documents', true);
 	/**
 	 * Soit on transfère les anciens canaux en audiochannels si le champs audiochannels existe
-	 * Soit on fait juste un alter table 
+	 * Soit on fait juste un alter table
 	 */
 	if (is_array($desc['field']) && isset($desc['field']['canaux']) && isset($desc['field']['audiochannels'])) {
-		$res = sql_select("*","spip_documents","canaux > 0");
-		while($row = sql_fetch($res)){
-			sql_updateq('spip_documents',array('audiochannels'=>$row['canaux'],'canaux'=>0),'id_document='.intval($row['id_document']));
-			if (time() >= _TIME_OUT)
+		$res = sql_select('canaux,id_document', 'spip_documents', 'canaux > 0');
+		while ($row = sql_fetch($res)) {
+			sql_updateq('spip_documents', array('audiochannels' => $row['canaux'], 'canaux'=>0), 'id_document='.intval($row['id_document']));
+			if (time() >= _TIME_OUT) {
 				return;
+			}
 		}
 		sql_alter('TABLE spip_documents DROP canaux');
-	}else if(isset($desc['field']['canaux'])){
+	} elseif (isset($desc['field']['canaux'])) {
 		sql_alter("TABLE spip_documents CHANGE `canaux` `audiochannels` TEXT DEFAULT '' NOT NULL");
 	}
-	
+
 	/**
 	 * Soit on transfère les anciens bitrate_mode en audiobitratemode si le champs audiobitratemode existe
-	 * Soit on fait juste un alter table 
+	 * Soit on fait juste un alter table
 	 */
-	if (is_array($desc['field']) && isset($desc['field']['bitrate_mode']) && isset($desc['field']['audiobitratemode'])) {
-		$res = sql_select("*","spip_documents","bitrate_mode != ''");
-		while($row = sql_fetch($res)){
-			sql_updateq('spip_documents',array('audiobitratemode'=>$row['bitrate_mode'],'bitrate_mode'=>''),'id_document='.intval($row['id_document']));
-			if (time() >= _TIME_OUT)
+	if (is_array($desc['field'])
+		&& isset($desc['field']['bitrate_mode'])
+		&& isset($desc['field']['audiobitratemode'])) {
+		$res = sql_select('*', 'spip_documents', "bitrate_mode != ''");
+		while ($row = sql_fetch($res)) {
+			sql_updateq('spip_documents', array('audiobitratemode' => $row['bitrate_mode'], 'bitrate_mode' => ''), 'id_document='.intval($row['id_document']));
+			if (time() >= _TIME_OUT) {
 				return;
+			}
 		}
 		sql_alter('TABLE spip_documents DROP bitrate_mode');
-	}else if(isset($desc['field']['bitrate_mode'])){
+	} elseif (isset($desc['field']['bitrate_mode'])) {
 		sql_alter("TABLE spip_documents CHANGE `bitrate_mode` `audiobitratemode` TEXT DEFAULT '' NOT NULL");
 	}
-	
+
 	/**
 	 * On crée le champs audiobitrate s'il n'existe pas
 	 * On transfère les anciens bitrate en audiobitratemode dans les champs audiobitrate vides
 	 */
-	if(is_array($desc['field']) && !isset($desc['field']['audiobitrate'])) {
-		sql_alter("TABLE `spip_documents` ADD `audiobitrate` INT NOT NULL"); 
+	if (is_array($desc['field']) && !isset($desc['field']['audiobitrate'])) {
+		sql_alter('TABLE `spip_documents` ADD `audiobitrate` INT NOT NULL');
 	}
 	if (is_array($desc['field']) && isset($desc['field']['bitrate']) && isset($desc['field']['audiobitrate'])) {
-		$res = sql_select("*","spip_documents","audiobitrate = '' AND bitrate > 0");
-		while($row = sql_fetch($res)){
-			sql_updateq('spip_documents',array('audiobitrate'=>$row['bitrate']),'id_document='.intval($row['id_document']));
-			if (time() >= _TIME_OUT)
+		$res = sql_select('*', 'spip_documents', "audiobitrate = '' AND bitrate > 0");
+		while ($row = sql_fetch($res)) {
+			sql_updateq('spip_documents', array('audiobitrate' => $row['bitrate']), 'id_document = '.intval($row['id_document']));
+			if (time() >= _TIME_OUT) {
 				return;
+			}
 		}
 	}
 }
-?>

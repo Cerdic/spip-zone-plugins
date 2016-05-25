@@ -10,7 +10,9 @@
  * @package SPIP\GetID3\Crons
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction appelée par le génie de SPIP à intervalle régulier
@@ -21,10 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return
  * @param object $time
  */
-function genie_getid3_taches_generales($time){
-	$verifier_binaires = charger_fonction('getid3_verifier_binaires','inc');
+function genie_getid3_taches_generales($time) {
+	$verifier_binaires = charger_fonction('getid3_verifier_binaires', 'inc');
 	$verifier_binaires(true);
 
 	return 1;
 }
-?>

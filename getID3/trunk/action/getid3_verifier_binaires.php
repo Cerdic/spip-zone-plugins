@@ -9,28 +9,29 @@
  *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 
 /**
  * Action de vérification des binaires
  */
-function action_getid3_verifier_binaires_dist(){
+function action_getid3_verifier_binaires_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
 	include_spip('inc/autoriser');
 
-	if(autoriser('configurer')){
-		$verifier_binaires = charger_fonction('getid3_verifier_binaires','inc');
+	if (autoriser('configurer')) {
+		$verifier_binaires = charger_fonction('getid3_verifier_binaires', 'inc');
 		$verifier_binaires(true);
 	}
-	if(_request('redirect')){
-		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+	if (_request('redirect')) {
+		$redirect = str_replace('&amp;', '&', urldecode(_request('redirect')));
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
 }
-?>
