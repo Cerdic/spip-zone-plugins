@@ -1,24 +1,32 @@
 <paquet
-    prefix="lister_constantes"
-    categorie="outil"
-    version="1.1.0"
-    etat="stable"
-    compatibilite="[3.0.0;3.1.*]"
-    logo="prive/themes/spip/images/lister_constantes-32.png"
-    documentation="http://contrib.spip.net/4707"
-    >
+	prefix="mailshot"
+	categorie="communication"
+	version="1.17.2"
+	etat="stable"
+	compatibilite="[3.0.5;3.1.*]"
+	logo="prive/themes/spip/images/mailshot-32.png"
+	documentation="http://contrib.spip.net/mailshot"
+	schema="0.3.4"
+>
 
-    <nom>Lister les constantes PHP de SPIP</nom>
+	<nom>MailShot</nom>
 
-    <auteur>Teddy Payet</auteur>
+	<auteur lien='http://nursit.com'>Cedric Morin</auteur>
 
-    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<licence>GNU/GPL</licence>
+	<pipeline nom="autoriser" inclure="mailshot_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailshot.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/mailshot.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mailshot.php" />
+	<pipeline nom="taches_generales_cron" inclure="mailshot_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="mailshot_pipelines.php" />
+	<pipeline nom="afficher_fiche_objet" inclure="mailshot_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="mailshot_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="mailshot_pipelines.php" />
+	<pipeline nom="post_edition" inclure="mailshot_pipelines.php" />
+	<pipeline nom="newsletter_pre_envoi" action="" />
 
-    <menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
 
-    <utilise nom="lister_config" compatibilite="[1.0.0;]" />
-
-    <pipeline nom="listermenu" inclure="lister_constantes_pipelines.php" />
-    <pipeline nom="autoriser" inclure="lister_constantes_autorisations.php" />
-
+	<necessite nom="facteur" compatibilite="[2.3.0;]" />
+	<menu nom="mailshost" titre="mailshot:titre_menu_mailshots" parent="menu_publication" icone="images/mailshot-16.png" action="mailshots" />
 </paquet>

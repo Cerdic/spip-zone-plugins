@@ -1,0 +1,40 @@
+[
+	[(#GET{un}|non)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	<h2><:mailshot:titre_envois_destinataires_todo:></h2>#SET{un,' '}
+	<div class="dest_todo">
+	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,statut=#LISTE{todo},ajax})
+	</div>
+]
+
+[
+	[(#GET{un}|non)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	<h2><:mailshot:titre_envois_destinataires_ok:></h2>#SET{un,' '}
+	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{sent,read,clic,spam},ajax})
+]
+
+[
+	[(#GET{un}|non)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	<h2><:mailshot:titre_envois_destinataires_fail:></h2>#SET{un,' '}
+	<div class="dest_fail">
+	(#INCLURE{fond=prive/objets/liste/mailshots_destinataires,env,par=date,statut=#LISTE{fail},ajax})
+	</div>
+]
+
+[(#GET{un}|non)
+	[(#ENV{recherche}|oui)
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		<div class="nettoyeur"></div>
+	]
+	[(#INFO_STATUT{mailshot,#ID_MAILSHOT}|in_array{#LISTE{pause,processing}}|oui)
+		<p class="notice"><:mailshot:titre_envois_destinataires_init_encours:></p>
+	]
+]
