@@ -1,9 +1,0 @@
-[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:accueil_site:>})]})]
-[(#ENV{appel_formulaire}|oui)
-	<div class="titre">#GET{titre}</div>
-	<div class="infos"><:info_racine_site:></div>
-]
-[(#ENV{appel_menu}|oui)
-	<li class="menu-entree item[ (#ENV{css})][(#ENV{env/type}|=={page}|et{#ENV{env/composition}|=={sommaire}}|ou{#ENV{env/type-page}|=={sommaire}|oui}|oui)on active]">
-		<a href="#URL_SITE_SPIP/">#GET{titre}</a>
-]

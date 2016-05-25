@@ -1,43 +1,25 @@
 <paquet
-	prefix="menus"
+	prefix="minibando"
 	categorie="navigation"
-	version="1.6.1"
+	version="1.3.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="prive/themes/spip/images/menu-32.png"
-	documentation="http://contrib.spip.net/Menus-3139"
-	schema="0.5.3"
+	logo="images/minibando-64.png"
+	documentation="http://contrib.spip.net/minibando"
 >
-	<nom>Menus</nom>
 
-	<auteur>RastaPopoulos</auteur>
-	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
-	<licence>GPL v3</licence>
+	<nom>minibando</nom>
+	<!-- Un minibando pour un maximum de fonctionnalités ! -->
 
-	<traduire module="menus" reference="fr" gestionnaire="salvatore" />
+	<auteur>b_b</auteur>
+	<credit lien="http://www.greepit.com/open-source-icons-gcons/index.htm">Icônes de Sarfraz Shoukat</credit>
 
-	<pipeline nom="declarer_tables_principales" inclure="base/menus_tables.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/menus_tables.php" />
-	<pipeline nom="header_prive" inclure="menus_pipelines.php" />
-	<pipeline nom="pre_boucle" inclure="menus_pipelines.php" />
-	<pipeline nom="menus_lister_disponibles" inclure="menus_pipelines.php" />
-	<pipeline nom="declarer_url_objets" inclure="menus_pipelines.php" />
-	<pipeline nom="autoriser" inclure="inc/menus_autoriser.php" />
-	<pipeline nom="ieconfig" inclure="menus_ieconfig.php" />
-	<pipeline nom="ieconfig_metas" inclure="menus_ieconfig.php" />
-	
-	<!-- Déclaration des pipelines du plugin -->
-	<pipeline nom="menus_utiles" action="" />
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
+	<traduire module="minibando" reference="fr" gestionnaire="salvatore" />
 
-	<!-- pour _T_ou_typo -->
-	<necessite nom="saisies" compatibilite="[1.14.0;]" />
+	<pipeline nom="styliser" inclure="minibando_pipelines.php" />
 
-	<utilise nom="Z" />
-	<utilise nom="Zpip" />
-	<utilise nom="spipr" />
-	<utilise nom="spipr_blog" />
-	<utilise nom="spipr_dist" />
-	<utilise nom="spipr_doc" />
+	<pipeline nom="autoriser" inclure="minibando_autorisations.php" />
+
 </paquet>

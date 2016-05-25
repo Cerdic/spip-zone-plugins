@@ -1,7 +1,0 @@
-<entree>
-	<nom>Moteur de recherche</nom>
-	<rang>30</rang>
-	<description>Ajoute le moteur de recherche de SPIP</description>
-	<icone>images/menus_rechercher.png</icone>
-	<parametre nom="css" label="menus:entree_css" />
-</entree>

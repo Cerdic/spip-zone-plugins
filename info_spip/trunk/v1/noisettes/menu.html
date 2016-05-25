@@ -1,6 +1,0 @@
-<BOUCLE_menu(MENUS){identifiant=#ENV{identifiant}}>
-	<div class="menu">
-		[(#ENV{afficher_titre_menu}|oui)[<h2 class="h2">(#TITRE|typo)</h2>]]
-		#INCLURE{fond=inclure/menu, env, identifiant=#IDENTIFIANT}
-	</div>
-</BOUCLE_menu>
