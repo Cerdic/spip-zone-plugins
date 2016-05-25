@@ -1,0 +1,57 @@
+[<!--(#REM)
+
+	Modele pour <playliste> qui utilise MediaElement.js
+
+	afficher une playliste
+	
+	Ex: a partir d'un squelette
+	[(#MODELE{playliste}{par=fichier})]
+	permet de forcer l'ordre des elements dans la liste
+	triee par le nom du fichier mp3.
+	Pratique si vos noms de fichiers commencent par 
+	un chiffre ;-)
+	
+-->]#SET{id_first,0}[(#SET{playlist_id,[p(#ENV**|concat{uniqid}|md5|substr{0,8})]})]
+<B_doc>
+	<div class="liste documents play-liste">
+		[<h2>(#ENV{titre,Playlist})</h2>]
+		<dl class='spip_documents spip_documents_playlist[ (#ENV{class})] spip_lien_ok'>
+			[(#INCLURE**{fond=players/mejs/player,
+				id_document=#GET{id_first},
+				player=mejs,
+				largeur=1000,
+				playlist=[#(#GET{playlist_id})],
+			  features=#LISTE{'playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'},
+			  plugins=#ARRAY{playlist,#CHEMIN{players/mejs/mejs-feature-playlist.min.js}|timestamp},
+			})]
+			<dd class="mejs-playlist" id="#GET{playlist_id}">
+				<ul class="liste-items">
+				<BOUCLE_doc (DOCUMENTS)
+					{id_document ?}
+					{id_article ?}
+					{id_album ?}
+					{id_objet ?}{objet ?}
+					{media=audio}
+					{extension=mp3}
+					{tri #ENV{par,num titre}}{par titre}{!par date}{0,100}>[(#GET{id_first}|non)#SET{id_first,#ID_DOCUMENT}]
+					#SET{titre,#TITRE|sinon{#FICHIER|player_joli_titre|couper{30}}}
+					<li class="item short track"
+						data-url="[(#FICHIER|attribut_html)]"
+						title="[(#GET{titre}|attribut_html)]">
+						<article class="entry document spip_doc[ (#EXTENSION|attribut_html)]">
+							<strong class="h3-like entry-title">[(#TITRE|sinon{#FICHIER|basename|couper{80}})]</strong>
+							<a href="#URL_DOCUMENT" rel="download" class="download" type="#MIME_TYPE" title="<:bouton_telecharger:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" ><:bouton_telecharger:></a>
+							<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>]
+							<span class="type"><span class="sep"> - </span>[(#TYPE_DOCUMENT)]</span><span class="poids"><span class="sep"> - </span>[(#TAILLE|taille_en_octets)]</span>
+							</p>
+							[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF)</div>]
+						</article>
+					</li>
+				</BOUCLE_doc>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	[<style>(#INCLURE{#CHEMIN{players/mejs/mejs-feature-playlist.css}|url_absolue_css})</style>]
+	[<style>(#INCLURE{#CHEMIN{css/playliste.css}|url_absolue_css})</style>]
+</B_doc>

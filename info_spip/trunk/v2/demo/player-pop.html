@@ -1,0 +1,30 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type:text/html}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut) - Le player]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE|couper{150}|textebrut)" />]
+[(#REM) Preciser le charset ]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[(#REM) Fierement fabrique avec SPIP ]
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+
+#INSERT_HEAD
+
+	<style type="text/css" media="screen">
+		@import url('#CHEMIN{css/base.css}');
+		@import url('#CHEMIN{css/home.css}');
+		@import url('#CHEMIN{css/spip_style.css}');
+		@import url('#CHEMIN{css/radio.css}');
+	
+		body {
+			background:#000000 ;
+		}
+	</style>
+</head>
+<body>
+	<INCLURE{fond=skins/blogo/blogoplayer}>
+</body>
+</html>

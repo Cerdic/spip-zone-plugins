@@ -1,0 +1,30 @@
+[<!--(#REM)
+
+	// modeles/doc_player.html
+
+	// $LastChangedRevision: 18209 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2008-01-27 17:54:31 +0100 (dim., 27 janv. 2008) $
+
+Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
+http://spip-zone.info/spip.php?article18
+
+Si le document est de format mp3, afficher la vignette si elle est personnalisee
+Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
+
+Sinon, utiliser le comportement normal.
+
+
+-->]
+#SET{player,#ENV{player,#CONFIG{player/player_mp3,'neoplayer'}}}
+#SET{my_width,#ENV{width,120}}
+[(#GET{player}|=={pixplayer}|oui)#SET{my_width,#ENV{largeur,#ENV{width,290}}}]
+[(#GET{player}|=={neoplayer}|oui)#SET{my_width,#ENV{largeur,#ENV{width,200}}}]
+[(#GET{player}|=={dewplayer}|oui)#SET{my_width,#ENV{largeur,#ENV{width,200}}}]
+[(#GET{player}|=={mejs}|oui)#SET{my_width,#ENV{largeur,#ENV{width,400}}}]
+<dl class='spip_documents spip_documents_player[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_doc_player auto_player'[ style='float:(#ENV{align}|match{left|right});']>
+#INCLURE**{fond=players/#GET{player}/player,env,player=#GET{player},my_width=#GET{my_width}}
+[
+<dt class='spip_doc_titre'[ style='width:(#GET{my_width}|min{350}|max{120,[(#GET{my_width})]})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='spip_doc_descriptif #EDIT{descriptif}'[ style='margin-bottom:0;width:(#GET{my_width})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
