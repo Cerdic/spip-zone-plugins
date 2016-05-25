@@ -61,6 +61,7 @@ function info_sites_header_prive($flux) {
  */
 function info_sites_taches_generales_cron($taches) {
 	$taches['maj_sites_plugins'] = 24 * 3600; // toutes les 24 heures
+	$taches['recuperer_releases'] = 24 * 3600; // toutes les 24 heures
 
 	return $taches;
 }
