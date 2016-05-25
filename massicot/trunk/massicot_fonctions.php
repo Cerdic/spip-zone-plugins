@@ -109,6 +109,20 @@ function massicot_enregistrer($objet, $id_objet, $parametres) {
 			array($objet => $id_objet),
 			array('role' => $role)
 		);
+
+		/* Le logo du site est un cas spécial. SPIP le traite comme le « site »
+		 * avec l'id 0, alors on fait pareil. */
+		if ($id_objet == 0) { // peut être le string '0'
+			sql_insertq(
+				'spip_massicotages_liens',
+				array(
+					'id_massicotage' => $id_massicotage,
+					'id_objet' => 0,
+					'objet' => 'site',
+					'role' => $role,
+				)
+			);
+		}
 	}
 
 	if ($err = objet_modifier(
