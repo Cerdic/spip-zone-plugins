@@ -1,0 +1,51 @@
+[(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
+[(#SET{tri_num, #ENV{tri,titre}|menus_critere_tri{num}})]
+[(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
+[(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
+[(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
+[(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
+[(#SET{tri_num,#GET{tri_num}|ltrim{!}})]
+[(#SET{tri_alpha,#GET{tri_alpha}|ltrim{!}})]
+
+[(#ENV{appel_formulaire}|oui)
+	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
+	<div class="titre">#GET{titre}</div>
+	<div class="infos">
+		<:menus:info_tri:> [(#GET{tri_num}) <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) <:menus:info_tri_alpha:>]
+	</div>
+]
+<BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
+	<BOUCLE_env_trad(CONDITION){si #ENV{trad}|=={trad}}>
+	#SET{cpt,0}
+	<BOUCLE_cpt_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{origine_traduction}> </BOUCLE_cpt_articles_orig>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles_orig>
+	<BOUCLE_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{origine_traduction}{0,#GET{articles_max_affiches}}>
+		<BOUCLE_trad(ARTICLES){traduction}{id_rubrique=#GET{id_rubrique}}{lang=#ENV{lang}}>
+		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+			<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
+		</BOUCLE_trad>
+		</B_trad>
+		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+			<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
+		<//B_trad>
+	</BOUCLE_articles_orig>
+	[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
+    	<li><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
+    ]
+	</B_articles_orig>
+	</BOUCLE_env_trad>
+	</B_env_trad>
+	#SET{cpt,0}
+	<BOUCLE_cpt_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}> </BOUCLE_cpt_articles>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles>
+	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{articles_max_affiches}}>
+		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+			<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
+	</BOUCLE_articles>
+	[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
+    	<li><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
+    ]
+	</B_articles>
+	<//B_env_trad>
+</BOUCLE_appel>

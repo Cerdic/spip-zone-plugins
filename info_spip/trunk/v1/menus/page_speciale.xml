@@ -1,0 +1,11 @@
+<entree>
+	<nom><:menus:nom_menu_page_speciale:></nom>
+	<rang>10</rang>
+	<description><:menus:description_menu_page_speciale:></description>
+	<icone>images/menus_page_speciale.png</icone>
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" obligatoire="oui" />
+	<parametre nom="nom" label="menus:entree_page" obligatoire="oui" />
+	<parametre nom="parametres" label="menus:entree_parametres" />
+	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="suivant_connexion" label="menus:entree_suivant_connexion" />
+</entree>

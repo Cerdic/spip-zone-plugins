@@ -1,0 +1,12 @@
+<entree>
+	<nom><:menus:nom_menu_objet:></nom>
+	<rang>02</rang>
+	<description><:menus:description_menu_objet:></description>
+	<icone>images/menus_objet.png</icone>
+	<parametre nom="type_objet" label="menus:entree_type_objet" obligatoire="oui" />
+	<parametre nom="id_objet" label="menus:entree_id_objet" obligatoire="oui" />
+	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="connexion" label="menus:entree_connexion_objet" />
+	<parametre nom="trad" label="menus:entree_traduction_objet" />
+</entree>

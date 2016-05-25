@@ -1,0 +1,48 @@
+#SET{id_objet,#ENV{id_objet}}
+<BOUCLE_si_art(CONDITION){si #ENV{type_objet}|=={article}|et{#ENV{trad}|=={trad}}}>
+<BOUCLE_art_orig(ARTICLES){id_article=#ENV{id_objet}}{origine_traduction}>
+<BOUCLE_art_lang(ARTICLES){traduction}{lang=#ENV{lang}}>
+#SET{id_objet,#ID_ARTICLE}
+</BOUCLE_art_lang>
+#SET{id_objet,#ID_ARTICLE}
+<//B_art_lang>
+</BOUCLE_art_orig>
+</BOUCLE_si_art>
+
+<BOUCLE_test_tradrub(CONDITION){si #PLUGIN{tradrub}}>
+<BOUCLE_si_rub(CONDITION){si #ENV{type_objet}|=={rubrique}|et{#ENV{trad}|=={trad}}}>
+<BOUCLE_rub_orig(RUBRIQUES){id_rubrique=#ENV{id_objet}}{origine_traduction}>
+<BOUCLE_rub_lang(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+#SET{id_objet,#ID_RUBRIQUE}
+</BOUCLE_rub_lang>
+#SET{id_objet,#ID_RUBRIQUE}
+<//B_rub_lang>
+</BOUCLE_rub_orig>
+</BOUCLE_si_rub>
+</BOUCLE_test_tradrub>
+
+[(#SET{titre, #ENV*{titre}|typo|sinon{#INFO_TITRE{#ENV{type_objet}, #GET{id_objet}}}|sinon{<:info_sans_titre:>}})]
+
+[(#ENV{trad}|=={trad}|et{#ENV{type_objet}|=={article}}|oui)#SET{info_trad,#VAL{menus:info_traduction_recuperee}|_T}]
+
+#SET{visible,oui}
+[(#ENV{connexion}|=={session}|oui)
+	[(#SESSION{statut}|non)
+		#SET{visible,non}]
+	#SET{info_session,#VAL{menus:info_connexion_obligatoire}|_T}
+]
+[(#ENV{connexion}|=={nosession}|oui)
+	[(#SESSION{statut}|oui)
+		#SET{visible,non}]
+	#SET{info_session,#VAL{menus:info_deconnexion_obligatoire}|_T}
+]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos">#ENV{type_objet}-#GET{id_objet}[-(#GET{info_session})][-(#GET{info_trad})]</div>
+]
+
+[(#ENV{appel_menu}|et{#GET{visible}|=={oui}}|oui)
+	<li class="menu-entree item[ (#ENV{css})][ (#ENV{id_objet}|menus_exposer{#ENV{type_objet},#ENV*{env}})]">
+		<a href="#INFO_URL{#ENV{type_objet}, #GET{id_objet}}">#GET{titre}</a>
+]

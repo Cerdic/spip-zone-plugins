@@ -1,23 +1,43 @@
 <paquet
-	prefix="medias_dereferencer"
-	categorie="statistique"
-	version="1.2.4"
-	etat="test"
-	compatibilite="[3.0.9;3.1.*]"
-	logo="prive/themes/spip/images/medias_dereferencer-64.png"
-	documentation=""
-	schema="1.0.0"
+	prefix="menus"
+	categorie="navigation"
+	version="1.6.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/menu-32.png"
+	documentation="http://contrib.spip.net/Menus-3139"
+	schema="0.5.3"
 >
-	<nom>Déréférencer les médias</nom>
+	<nom>Menus</nom>
 
-	<auteur>Teddy Payet</auteur>
+	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GPL v3</licence>
 
-	<licence>GNU/GPL</licence>
+	<traduire module="menus" reference="fr" gestionnaire="salvatore" />
 
-	<necessite nom="saisies" compatibilite="[2.5.29;]" />
+	<pipeline nom="declarer_tables_principales" inclure="base/menus_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/menus_tables.php" />
+	<pipeline nom="header_prive" inclure="menus_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="menus_pipelines.php" />
+	<pipeline nom="menus_lister_disponibles" inclure="menus_pipelines.php" />
+	<pipeline nom="declarer_url_objets" inclure="menus_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/menus_autoriser.php" />
+	<pipeline nom="ieconfig" inclure="menus_ieconfig.php" />
+	<pipeline nom="ieconfig_metas" inclure="menus_ieconfig.php" />
+	
+	<!-- Déclaration des pipelines du plugin -->
+	<pipeline nom="menus_utiles" action="" />
 
-	<pipeline nom="autoriser" inclure="medias_dereferencer_autorisations.php" />
-	<pipeline nom="taches_generales_cron" inclure="medias_dereferencer_pipelines.php" />
+	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 
-	<menu nom="medias_dereferencer" titre="medias_dereferencer:titre_page_configurer_medias_dereferencer" parent="menu_activite" icone="images/medias_dereferencer-16.png" />
+	<!-- pour _T_ou_typo -->
+	<necessite nom="saisies" compatibilite="[1.14.0;]" />
+
+	<utilise nom="Z" />
+	<utilise nom="Zpip" />
+	<utilise nom="spipr" />
+	<utilise nom="spipr_blog" />
+	<utilise nom="spipr_dist" />
+	<utilise nom="spipr_doc" />
 </paquet>

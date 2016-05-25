@@ -1,0 +1,17 @@
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:espace_prive:>})]})]
+[(#SET{titre_connecter,[(#ENV*{titre_connecter}|typo|sinon{<:lien_connecter:>})]})]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"> </div>
+]
+[(#ENV{appel_menu}|oui)
+	[(#AUTORISER{ecrire})
+		<li class="menu-entree item[ (#ENV{css})]">
+			<a href="#EVAL{_DIR_RESTREINT_ABS}">#GET{titre}</a>
+	]
+	[(#SESSION{id_auteur}|>{0}|non)
+		<li class="menu-entree item[ (#ENV{css})]">
+			<a href="[(#URL_PAGE{login}|parametre_url{url,#ENV{url,#SELF}})]" rel="nofollow">#GET{titre_connecter}</a>
+	]
+]

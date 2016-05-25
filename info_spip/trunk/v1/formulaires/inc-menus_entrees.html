@@ -1,0 +1,86 @@
+#SET{rang_suivant,1}
+<ul id="menu-#ENV{id_menu}" class="editer-groupe menus_entrees">
+	<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
+	<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
+		<BOUCLE_test_modifier(CONDITION){si #ENV{id_menus_entree}|=={#ID_MENUS_ENTREE}|non}>
+		<div class="ligne">
+			<div class="description arial2">
+				#SET{supprimer_seulement,non}
+				[(#CHEMIN{menus/#TYPE_ENTREE.html}|oui)
+				#MENUS_AFFICHER_ENTREE{appel_formulaire}]
+				[(#CHEMIN{menus/#TYPE_ENTREE.html}|non)
+				#SET{supprimer_seulement,oui}
+				#INCLURE{fond=formulaires/inc-menus_entrees_inexistantes,appel_formulaire=oui,titre=#TYPE_ENTREE}
+				]
+			</div>
+			<div class="actions">
+				[(#REM) S'il y a déjà un sous-menu on ne l'affiche pas ?)]
+				<BOUCLE_sous_menu_test(MENUS){id_menus_entree}>
+				[(#REM) Rien]
+				</BOUCLE_sous_menu_test>
+				[(#GET{supprimer_seulement}|=={non}|oui)
+				[(#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{refuser_sous_menu}|non)
+				<button type="submit" name="demander_sous_menu" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_ajouter_sous_menu:>">
+					[<img height="24" width="24" src="(#CHEMIN{images/menus-24.png})" alt="" />]
+				</button>
+				]]
+				<//B_sous_menu_test>
+				[(#GET{supprimer_seulement}|=={non}|oui)
+				<button type="submit" name="modifier_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_modifier_entree:>">
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_modifier.png})" alt="" />]
+				</button>]
+				<button type="submit" name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>"
+					onclick="return confirm('<:menus:confirmer_supprimer_entree:>')"
+				>
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
+				</button>
+				[(#GET{supprimer_seulement}|=={non}|oui)
+				<button type="submit" name="deplacer_entree" value="#ID_MENUS_ENTREE-bas" title="<:menus:formulaire_deplacer_bas:>">
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_bas.png})" alt="" />]
+				</button>]
+				[(#GET{supprimer_seulement}|=={non}|oui)
+				<button type="submit" name="deplacer_entree" value="#ID_MENUS_ENTREE-haut" title="<:menus:formulaire_deplacer_haut:>">
+					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_haut.png})" alt="" />]
+				</button>]
+			</div>
+			<div class="nettoyeur"></div>
+		</div>
+		</BOUCLE_test_modifier>
+		#INCLURE{fond=formulaires/inc-nouvelle_entree-2, env, id_menus_entree=#ID_MENUS_ENTREE}
+		<//B_test_modifier>
+
+		[(#REM) Est-ce qu'il y a un sous-menu ?)]
+		<BOUCLE_sous_menu(MENUS){id_menus_entree}>
+			#INCLURE{fond=formulaires/inc-menus_entrees, env, id_menu, sous_menu=oui}
+		</BOUCLE_sous_menu>
+	</li>
+	#SET{rang_suivant,(#RANG|plus{1})}
+	</BOUCLE_entrees>
+	<li class="editer_entree fieldset">
+		#SET{id_menu_nouvelle_entree, (#ENV{id_menu_nouvelle_entree})}
+		#SET{type_entree, (#ENV{type_entree})}
+		
+		<BOUCLE_pas_demande_entree(CONDITION){si #GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|non}>
+			<div class="boutons">
+			[(#ENV{sous_menu}|non)<span class="image_loading"></span>]
+			[<button type="submit" class="submit link" name="supprimer_menu" value="#ENV{id_menu}"
+				onclick="return confirm('<:menus:confirmer_supprimer_sous_menu:>')"
+			>
+				[<img src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
+				(#ENV{sous_menu}|?{<:menus:formulaire_supprimer_sous_menu:>,''})
+			</button>]
+			<button type="submit" class="submit" name="demander_nouvelle_entree" value="#ENV{id_menu}">
+				[<img src="(#CHEMIN{images/menus_action_ajouter.png})" alt="" />]
+				<:menus:formulaire_ajouter_entree:>
+			</button>
+			</div>
+		</BOUCLE_pas_demande_entree>
+			[(#GET{type_entree}|non)
+				#INCLURE{fond=formulaires/inc-nouvelle_entree-1, env, id_menu_nouvelle_entree=#GET{id_menu_nouvelle_entree}}
+			]
+			[(#GET{type_entree}|oui)
+				#INCLURE{fond=formulaires/inc-nouvelle_entree-2, env, id_menu_nouvelle_entree=#GET{id_menu_nouvelle_entree}, rang_suivant=#GET{rang_suivant}}
+			]
+		<//B_pas_demande_entree>
+	</li>
+</ul>

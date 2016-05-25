@@ -1,0 +1,9 @@
+[(#SET{titre,[(#ENV*{titre}|typo|sinon{<:menus:entree_mapage:>})]})]
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"> </div>
+]
+[(#ENV{appel_menu}|et{#SESSION{id_auteur}|>{0}|oui}|oui)
+	<li class="menu-entree item[ (#ENV{css})][(#ENV{env/type}|=={auteur}|ou{#ENV{env/type-page}|=={auteur}}|et{#ENV{env/id_auteur}|=={#SESSION{id_auteur}}}) on active]">
+		<a href="#URL_AUTEUR{#SESSION{id_auteur}}">#GET{titre}</a>
+]

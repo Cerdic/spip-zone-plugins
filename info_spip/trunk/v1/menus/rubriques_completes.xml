@@ -1,0 +1,20 @@
+<entree>
+	<nom><:menus:nom_menu_rubriques_completes:></nom>
+	<rang>04</rang>
+	<description><:menus:description_menu_rubriques_completes:></description>
+	<icone>images/menus_rubriques.png</icone>
+	<parametre nom="id_rubrique" label="menus:entree_id_rubrique_ou_courante" />
+	<parametre nom="id_secteur_exclus" label="menus:entree_id_secteur_exclus" />
+	<parametre nom="niveau" label="menus:entree_niveau" />
+	<parametre nom="id_rubriques_exclues" label="menus:entree_id_rubriques_exclues" />
+	<parametre nom="rubriques_max_affichees" label="menus:entree_rubriques_max_affichees" />
+	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
+	<parametre nom="classe_parent" label="menus:entree_classe_parent" />
+	<parametre nom="tri" label="menus:entree_tri" />
+	<parametre nom="afficher_articles" label="menus:entree_afficher_articles" />
+	<parametre nom="masquer_articles_uniques" label="menus:entree_masquer_articles_uniques" />
+	<parametre nom="articles_max" label="menus:entree_articles_max" />
+	<parametre nom="articles_max_affiches" label="menus:entree_articles_max_affiches" />
+	<parametre nom="tri_articles" label="menus:entree_tri_articles" />
+	<refuser_sous_menu/>
+</entree>
