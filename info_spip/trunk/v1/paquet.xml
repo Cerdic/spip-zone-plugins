@@ -1,25 +1,24 @@
 <paquet
-	prefix="lister_config"
-	categorie="outil"
-	version="1.3.1"
-	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
-	logo="prive/themes/spip/images/lister_config-32.png"
-	documentation="http://contrib.spip.net/4712"
-	>
+    prefix="lister_constantes"
+    categorie="outil"
+    version="1.1.0"
+    etat="stable"
+    compatibilite="[3.0.0;3.1.*]"
+    logo="prive/themes/spip/images/lister_constantes-32.png"
+    documentation="http://contrib.spip.net/4707"
+    >
 
-	<nom>Lister les formulaires de configuration</nom>
-	<!-- Ce plugin permet de lister sur une page tous les liens vers les pages de configuration des plugins -->
+    <nom>Lister les constantes PHP de SPIP</nom>
 
-	<auteur>Teddy Payet</auteur>
-	<credit lien="https://www.iconfinder.com/icons/416405/service_setting_tool_tools_work_wrench_icon">Pixel Buddha</credit>
+    <auteur>Teddy Payet</auteur>
 
-	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
-	<menu nom="lister_config_plugins" titre="lister_config:titre_lister_config_plugins" parent="menu_configuration" icone="images/lister_config-16.png" />
+    <menu nom="lister_constantes" titre="lister_constantes:titre_lister_constantes" parent="menu_configuration" icone="images/lister_constantes-16.png" />
 
-	<pipeline nom="autoriser" inclure="lister_config_autorisations.php" />
-	<pipeline nom="listermenu" inclure="lister_config_pipelines.php" />
+    <utilise nom="lister_config" compatibilite="[1.0.0;]" />
+
+    <pipeline nom="listermenu" inclure="lister_constantes_pipelines.php" />
+    <pipeline nom="autoriser" inclure="lister_constantes_autorisations.php" />
 
 </paquet>
