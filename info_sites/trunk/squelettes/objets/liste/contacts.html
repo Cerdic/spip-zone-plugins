@@ -33,35 +33,34 @@
 </BOUCLE_test_annuaire>
 
 <div class="liste-objets contacts table-responsive">
-<table class='spip liste table table-striped table-bordered'>
-[<caption id="liste_objets_contacts[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
-	<thead>
-		<tr class='first_row'>
-			<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
-			<th class="organisation"><:contacts:label_organisation:></th>
-		</tr>
-	</thead>
-	<tbody>
-	<BOUCLE_liste_contacts (CONTACTS)
-		{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
-		{auteurs.statut ?= #ENV{statut,''}}
-		{where?}
-		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<BOUCLE_lien_contact(contacts_liens){id_contact}>
-				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
-			</BOUCLE_lien_contact>
-				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
-			<//B_lien_contact>
-			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
-			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
-		</tr>
-	</BOUCLE_liste_contacts>
-	</tbody>
-</table>
+	<table class='spip liste table table-striped table-bordered'>
+	[<caption id="liste_objets_contacts[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
+		<thead>
+			<tr class='first_row'>
+				<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
+				<th class="organisation"><:contacts:label_organisation:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_liste_contacts (CONTACTS)
+			{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
+			{auteurs.statut ?= #ENV{statut,''}}
+			{where?} {tri #ENV{order,nom},#GET{defaut_tri}} {pagination #ENV{nb,20} #ENV{pagination_id,'_liste_contacts'}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<BOUCLE_lien_contact(contacts_liens){id_contact}>
+					[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+				</BOUCLE_lien_contact>
+					[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
+				<//B_lien_contact>
+				<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
+				<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
+			</tr>
+		</BOUCLE_liste_contacts>
+		</tbody>
+	</table>
 	[(#REM|test_espace_prive|?{
-	[<div class="pagination">(#PAGINATION{prive})</div>],
-	[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		[<div class="pagination">(#PAGINATION{prive})</div>],
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
 	})]
 </div>
 </B_liste_contacts>[

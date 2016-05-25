@@ -4,6 +4,7 @@
 url_svn=$URL_SVN
 url_local=$URL_WORKING_COPY
 # On met à jour le dépôt local des plugins
+cd ${url_local}
 svn up ${url_local}
 <BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau{'plugins'})}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{prefixe})],titre,[(#VALEUR{titre})],statut,[(#VALEUR{statut})], version,[(#VALEUR{version})]})]})]<BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_principale:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1} {si (#GET{plugin/statut}|=={dist}|non)}>[(#VERSION|=={#_plugins_site:GET{plugin/version}}|non)[(#SET{lesmaj,[(#GET{lesmaj}|push{<strong>[(#_plugins_site:GET{plugin/titre})]</strong> <em>\([(#PREFIXE)] [(#_plugins_site:GET{plugin/version})] -> [(#VERSION)]\)</em>})]})]]<B_archive_mm_branche>
 # Branche [(#_principale:LOGICIEL_NOM)] [(#_principale:LOGICIEL_VERSION|version2branche)]
