@@ -29,6 +29,9 @@ function formulaires_editer_gis_charger_dist($id_gis = 'new', $objet = '', $id_o
 	/* Traitement des options */
 	/* peut etre a envoyer dans une fonction generique de verification des options */
 	if (is_array($options)) {
+		if (is_string($options['titre'])) {
+			$valeurs['titre']=$options['titre'];
+		}
 		if (!$valeurs['lat'] and is_numeric($options['lat'])) {
 			$valeurs['lat']=$options['lat'];
 		}
