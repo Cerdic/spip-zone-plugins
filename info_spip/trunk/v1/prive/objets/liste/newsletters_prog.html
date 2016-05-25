@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_newsletter,1,
+	points,-1
+}})]<B_liste_newsletters>
+#ANCRE_PAGINATION
+<div class="liste-objets newsletters">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{newsletter:info_1_newsletter_prog,newsletter:info_nb_newsletters_prog}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:newsletter:label_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:programmernewsletter:label_date_debut:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:programmernewsletter:label_date_prochaine:>,ajax})]</th>
+			<th class='dest' scope='col'>A</th>
+			<th class='id' scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_newsletters(NEWSLETTERS){id_mot?}{id_auteur?}{where?}{statut=prog}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{newsletter-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_NEWSLETTER|image_reduire{20,26})]<a href="[(#URL_ECRIRE{newsletter_prog,id_newsletter=#ID_NEWSLETTER})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NEWSLETTER">[(#RANG). ]#TITRE</a>
+			[<p class="small">(#RECURRENCE|newsletter_afficher_recurrence_regle{<br />})</p>]</td>
+			<td class='date secondaire'>[(#RECURRENCE|newsletter_afficher_recurrence_debut|affdate_jourcourt)][
+				<br />\(<:programmernewsletter:label_date_derniere:> (#DATE_REDAC|affdate_jourcourt)\)]</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt|?{[(#DATE|affdate_jourcourt)[ (#DATE|heures_minutes)]],#VAL{'('}|concat{<:programmernewsletter:info_prochaine_occurence_fini:>,')'}})]</td>
+			<td class='secondaire'>[(#EMAIL_TEST)
+			][(#CHAMP_SQL{liste})
+			]</td>
+			<td class='id'>[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER}|?{
+				<a href="[(#URL_ECRIRE{newsletter_prog,id_newsletter=#ID_NEWSLETTER})]">Modifier</a>,
+				#ID_NEWSLETTER
+			})]</td>
+		</tr>
+	</BOUCLE_liste_newsletters>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_newsletters>[
+<div class="liste-objets newsletters caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_newsletters>

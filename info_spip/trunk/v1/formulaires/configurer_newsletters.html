@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:newsletters:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,newsletter}
+		<ul class="editer-groupe">
+			#SET{name,masquer_fond}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<BOUCLE_patrons(POUR){tableau #REM|liste_choix_patrons{tout}}>
+				#SET{val,#CLE}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#VALEUR|extraire_multi)]</label>
+				</div>
+				</BOUCLE_patrons>
+			</li>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="newsletters" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

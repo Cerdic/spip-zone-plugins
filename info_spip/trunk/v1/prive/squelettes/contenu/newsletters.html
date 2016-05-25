@@ -1,0 +1,15 @@
+<h1 class="grostitre"><:newsletters:newsletters_titre:></h1>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/newsletters, par=date, statut=#LISTE{prepa,prop,publie,refuse}, env, ajax, sinon=<:newsletter:info_aucun_newsletter:>}>
+
+[(#AUTORISER{creer,newsletter})
+	[(#URL_ECRIRE{newsletter_edit,new=oui}|icone_verticale{<:newsletter:icone_creer_newsletter:>,newsletter,new,right})]
+]
+
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/objets/liste/newsletters_prog, par=date, env, ajax}>
+[(#AUTORISER{programmer,newsletter})
+	[(#URL_ECRIRE{newsletter_prog,new=oui}|icone_verticale{<:programmernewsletter:icone_programmer_newsletter:>,newsletter_prog,new,right})]
+]
