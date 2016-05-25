@@ -395,18 +395,3 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 
 	return $contexte;
 }
-
-
-/**
- * Retirer les saisies de type hidden d'une liste de définition de saisies,
- * dans les cas où on affiche les valeurs saisies.
- * 
- * @param array $saisies
- *     Définition de saisies
- * @return array $saisies 
- *     Définition de saisies expurgée des saisies de type hidden
- */
-function retirer_saisies_hidden ($saisies = array()){
-	
-	return $saisies;
-}
