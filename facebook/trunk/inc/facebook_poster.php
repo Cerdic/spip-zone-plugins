@@ -9,8 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('inc/facebook');
-
 /**
  * Poster un lien sur Le profil de la personne
  *
