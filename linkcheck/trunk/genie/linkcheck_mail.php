@@ -9,9 +9,10 @@ function genie_linkcheck_mail_dist() {
 
 	if (lire_config('linkcheck/notifier_courriel')) {
 		$resultat = array();
-		$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', 'etat!="ok"', 'etat');
+		$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', 'etat IN ("mort", "malade") AND date > subdate(current_date, 1)', 'etat');
 
 		if (is_array($sql) && count($sql) > 0) {
+			$sql = sql_allfetsel('COUNT(id_linkcheck) AS c, etat', 'spip_linkchecks', '', 'etat');
 			foreach ($sql as $cle => $valeur) {
 				$msg_resultat .= '<li>'.$valeur['c'].' lien(s) '.$valeur['etat'].'.</li>';
 			}
