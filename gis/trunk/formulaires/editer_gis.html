@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' name='formulaire_editer_gis' id='formulaire_editer_gis'><div>
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data" name="formulaire_editer_gis" id="formulaire_editer_gis"><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -83,8 +83,8 @@
 		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
-			<input class='submit' type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+		<p class="boutons"[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
+			<input class="submit" type="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 		</p>
 	</div></form>
 	</BOUCLE_editable>
