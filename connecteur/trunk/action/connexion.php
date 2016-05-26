@@ -59,7 +59,6 @@ function action_connexion_dist($arg = null) {
 
 			// Et enfin on connecte la personne
 			connecteur_connecter($auteur);
-
 		} else {
 			// Sinon, on connecte l'auteur
 			$auteur = connecteur_connecter($auteur_info);

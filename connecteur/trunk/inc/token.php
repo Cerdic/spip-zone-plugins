@@ -33,7 +33,6 @@ function connecteur_save_token($id_auteur, $type, $token) {
 		if (!empty($update)) {
 			connecteur_update_token($id_auteur, $type, $token);
 		} else {
-
 			// Sérializer le token
 			$token = serialize($token);
 			sql_insertq(
