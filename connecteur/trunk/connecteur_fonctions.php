@@ -59,11 +59,17 @@ function balise_CONNECTEUR__dist($p) {
  * @access public
  */
 function connecteur_lien($source, $redirect = '', $site = false) {
+	include_spip('inc/session');
 	// On appel la fonction du service
-	if (!$site) {
-		$action = generer_action_auteur('connexion', $source, $redirect, true);
-	} else {
+	if ($site) {
+		// On a explicitement demandé de connecter un compte pour le site
 		$action = generer_action_auteur('connexion_site', $source, $redirect, true);
+	} elseif (!empty(session_get('id_auteur'))) {
+		// Si une session SPIP est déjà ouverte, on va ajouter le compte
+		$action = generer_action_auteur('connecteur_lier', $source, $redirect, true);
+	} else {
+		// On est dans la création d'un nouveau compte SPIP
+		$action = generer_action_auteur('connexion', $source, $redirect, true);
 	}
 
 	$f = charger_fonction($source.'_lien', 'connecteur');
