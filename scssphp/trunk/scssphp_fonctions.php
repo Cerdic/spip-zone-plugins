@@ -4,6 +4,7 @@
  * Distribue sous licence MIT
  *
  */
+use Leafo\ScssPhp\Compiler;
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -20,8 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function scss_compile($style, $contexte = array()) {
 	require_once 'scssphp/scss.inc.php';
 
-	// le compilateur scssc compile le contenu
-	$scss = new scssc();
+	// le compilateur Leafo\ScssPhp\Compiler compile le contenu
+	$scss = new Compiler();
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
 
@@ -31,7 +32,7 @@ function scss_compile($style, $contexte = array()) {
 	}
 	// en cas d'erreur, on retourne du vide...
 	catch (exception $ex) {
-		spip_log('scssc fatal error:'.$ex->getMessage(),'scss'._LOG_ERREUR);
+		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(),'scss'._LOG_ERREUR);
 		erreur_squelette(
 			"SCSS : Echec compilation"
 			. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
