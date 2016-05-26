@@ -48,7 +48,7 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'inscription'){
 		// Si les deux champs de mot de passe sont différents, ce n'est pas bien confirmé
 		if (_request('password') != _request('password_confirmation')){
-			$flux['data']['password_confirmation'] = _T('inscriptionmotdepasse:erreur_confirmation');
+			$flux['data']['password_confirmation'] = _T('info_passes_identiques');
 		}
 		
 		// Mais si l'un des deux champs n'est pas rempli, cette erreur prend le dessus
