@@ -190,7 +190,6 @@ function facebook_saisie_pages() {
 		return $graphEdges;
 	}
 
-
 	return $datas;
 }
 
