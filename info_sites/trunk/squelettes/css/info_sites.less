@@ -217,12 +217,18 @@ h1.titre {
 		.item {
 			overflow: hidden;
 			display: block;
+			padding-top: 1em;
 			.actions, .mode {
 				margin-top: 0;
 				form, .editbox {
 					display: inline-block;
 					margin-right: 0.5em;
 					margin-top: 0;
+				}
+			}
+			.tourner {
+				form {
+					float: right;
 				}
 			}
 		}
@@ -1554,6 +1560,28 @@ input[type="radio"], input[type="checkbox"] {
 		display: none;
 	}
 }
+
+// -------
+// Formulaire d'édition d'un document
+// -------
+.formulaire_editer_document, .formulaire_illustrer_document {
+	ul, .editer-groupe {
+		li, .editer {
+			padding-left: 20%;
+			label {
+				margin-left: -23%;
+			}
+			input, textarea {
+				width: 100%;
+			}
+			.tourner {
+				width: 12px;
+			}
+		}
+	}
+
+}
+
 
 [class*="page_diagnostic"], .page_diagnostic_iso, .page_webservice {
 	.breadcrumb {
