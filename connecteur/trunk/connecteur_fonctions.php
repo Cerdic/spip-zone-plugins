@@ -34,6 +34,11 @@ function balise_CONNECTEUR__dist($p) {
 	$connecteur_type = strtolower(substr($p->nom_champ, 11));
 	$redirect = interprete_argument_balise(1, $p);
 
+	// Toujours avoir au moins une redirection
+	if (empty($redirect)) {
+		$redirect = '\''.self().'\'';
+	}
+
 	$site = interprete_argument_balise(2, $p);
 	if ($site) {
 		$site = ", 'true'";
