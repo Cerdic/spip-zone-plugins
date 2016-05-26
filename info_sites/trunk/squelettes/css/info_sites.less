@@ -1033,6 +1033,14 @@ input[type="radio"], input[type="checkbox"] {
 				-webkit-box-shadow: @box-shadow;
 				-moz-box-shadow: @box-shadow;
 				box-shadow: @box-shadow;
+				&.formulaire_editer_logo {
+					h3.titrem {
+						display: block;
+						visibility: visible;
+						font-size: 18px;
+						margin-top: 0;
+					}
+				}
 			}
 			ul, .editer-groupe {
 				li, .editer {
@@ -1050,6 +1058,9 @@ input[type="radio"], input[type="checkbox"] {
 							background-repeat: no-repeat;
 							background-position: 4px center;
 						}
+					}
+					input {
+						width: 100%;
 					}
 					&.erreur {
 						.erreur_message {
@@ -1437,7 +1448,7 @@ input[type="radio"], input[type="checkbox"] {
 		.liste-objets {
 			.liste {
 				.picto {
-					width: 30px;
+					width: 50px;
 					&:before {
 						display: block;
 						color: @black;
@@ -1450,8 +1461,11 @@ input[type="radio"], input[type="checkbox"] {
 						text-align: center;
 					}
 				}
+				.titre {
+					width: 150px;
+				}
 				.action {
-					width: 30px;
+					width: 50px;
 					> a {
 						&:before {
 							display: block;
