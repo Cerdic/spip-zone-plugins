@@ -24,5 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page' => 'Poster sur un page ?',
 	'confirmer_poster' => 'Message correctement posté sur Facebook',
 	'publication' => 'Publication sur Facebook',
-	'titre_compte_boite' => 'Compte Facebook'
+	'titre_compte_boite' => 'Compte Facebook',
+	'titre_connecter_facebook' => 'Connecter un compte facebook au site'
 );
