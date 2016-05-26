@@ -101,7 +101,6 @@ class fichiersExporter extends Command {
 					// Exporter les champs spip_articles
 					$fichier = "" ;
 					$ins_auteurs = array();
-					$ins_bios = array();
 					$ins_mc = array();
 					$ins_doc = array();
 					$progress->setMessage('', 'motscles');
@@ -130,15 +129,21 @@ class fichiersExporter extends Command {
 					else // spip 2
 						$auteurs = sql_allfetsel("a.nom, a.bio", "spip_auteurs_articles aa, spip_auteurs a", "aa.id_article=$id_article and aa.id_auteur=a.id_auteur");
 					
-					foreach($auteurs as $a){
+					foreach($auteurs as $a)
 						if($a['nom'])
-							$ins_auteurs[] = $a['nom'] ;
-						if($a['bio'])	
-							$ins_bios[] = $a['bio'] ;
-					}	
-						
-					$auteurs = join("@@", $ins_auteurs) ;
-					$bios = join("@@", $ins_bios) ;
+							$ins_auteurs[] = $a ;
+				
+					$auteurs = "" ;
+					foreach($ins_auteurs as $k => $a){
+							if($k == 0)
+								$sep = "" ;
+							else
+								$sep = "@@" ;
+							$bio = ($a['bio'] != "") ? "::" . $a['bio'] : "" ;
+								
+							$auteurs .= $sep . $a['nom'] . $bio ;
+					}					
+										
 					$auteurs_m = substr($auteurs, 0, 100) ;
 					$progress->setMessage($auteurs_m, 'auteurs');
 					
@@ -168,9 +173,7 @@ class fichiersExporter extends Command {
 						$progress->setMessage($docs_m, 'docs');
 					}
 
-					// Ajouter les métadonnées					
-					if($bios)
-						$fichier = "<ins class='bio'>$bios</ins>\n" . $fichier ;
+					// Ajouter les métadonnées
 					if($auteurs)
 						$fichier = "<ins class='auteurs'>$auteurs</ins>\n" . $fichier ;				
 					if($motscles)

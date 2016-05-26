@@ -211,11 +211,15 @@ class fichiersImporter extends Command {
 						if($auteurs){
 
 							foreach($auteurs as $auteur){
-								$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($auteur));
+								
+								list($nom_auteur,$bio_auteur) = explode("::", $auteur);
+								
+								$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
 								if(!$id_auteur){
 									$id_auteur = sql_insertq("spip_auteurs", array(
     										"nom" => $auteur,
-    										"statut" => "1comite"
+    										"statut" => "1comite",
+    										"bio" => $bio_auteur
     								));
     								
     								$auteur_m = substr("Création de l'auteur " . $auteur, 0, 100) ;
