@@ -9,24 +9,27 @@
  * @license    http://opensource.org/licenses/gpl-2.0.php  General Public License (GPL 2.0)
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/texte');
 
-function seo_interprete_contexte($contexte){
+function seo_interprete_contexte($contexte) {
 	static $infos;
 	$s = serialize($contexte);
-	if (isset($infos[$s]))
+	if (isset($infos[$s])) {
 		return $infos[$s];
-	$infos[$s] = array('objet'=>'sommaire');
-	if(isset($contexte['page'])){
-		$infos[$s] = array('objet'=>$contexte['page']);
 	}
-	if (isset($contexte['type-page'])){
+	$infos[$s] = array('objet' => 'sommaire');
+	if (isset($contexte['page'])) {
+		$infos[$s] = array('objet' => $contexte['page']);
+	}
+	if (isset($contexte['type-page'])) {
 		$infos[$s]['objet'] = $contexte['type-page'];
 		if ($infos[$s]['objet']!=='sommaire'
-			AND $primary = id_table_objet($infos[$s]['objet'])
-			AND isset($contexte[$primary])){
+			and $primary = id_table_objet($infos[$s]['objet'])
+			and isset($contexte[$primary])) {
 			$infos[$s]['id_objet'] = $contexte[$primary];
 			$infos[$s]['primary'] = $primary;
 			$infos[$s]['table_sql'] = table_objet_sql($infos[$s]['objet']);
@@ -34,7 +37,7 @@ function seo_interprete_contexte($contexte){
 		return $infos[$s];
 	}
 	// d'abord les rubriques
-	if (isset($contexte['id_rubrique'])){
+	if (isset($contexte['id_rubrique'])) {
 		$infos[$s] = array(
 			'objet'=>'rubrique',
 			'id_objet'=>$contexte['id_rubrique'],
@@ -44,14 +47,14 @@ function seo_interprete_contexte($contexte){
 	}
 	// puis voyons si on trouve un objet plus precis
 	$tables = lister_tables_objets_sql();
-	foreach ($tables as $t=>$d){
-		if (
-			$t!=='spip_rubriques' AND isset($d['key']['PRIMARY KEY'])
-		  AND
-			($infos[$s]['objet']!=='rubrique' OR isset($d['field']['id_rubrique']))
-		){
+	foreach ($tables as $t => $d) {
+		if ($t!=='spip_rubriques'
+			and isset($d['key']['PRIMARY KEY'])
+			and ($infos[$s]['objet']!=='rubrique'
+			or isset($d['field']['id_rubrique']))
+		) {
 			$primary = $d['key']['PRIMARY KEY'];
-			if (isset($contexte[$primary])){
+			if (isset($contexte[$primary])) {
 				$infos[$s]['objet'] = $d['type'];
 				$infos[$s]['id_objet'] = $contexte[$primary];
 				$infos[$s]['primary'] = $primary;
@@ -71,82 +74,85 @@ function seo_interprete_contexte($contexte){
  * @param array $contexte
  * @return string
  */
-function seo_insere_remplace_metas($head,$contexte){
+function seo_insere_remplace_metas($head, $contexte) {
 
-	$append = "<!--seo_insere-->";
+	$append = '<!--seo_insere-->';
 	// on ne fait rien si deja insere
-	if (strpos($head,$append)!==false)
+	if (strpos($head, $append) !== false) {
 		return $head;
+	}
 
 	include_spip('inc/config');
 	$config = lire_config('seo/');
 	$i = seo_interprete_contexte($contexte);
 	$is_sommaire = ($i['objet']=='sommaire');
 
-	if (isset($config['meta_tags']['activate']) AND $config['meta_tags']['activate']=='yes'){
+	if (isset($config['meta_tags']['activate']) and $config['meta_tags']['activate']=='yes') {
 		/* d'abord les meta tags */
-		$meta_tags = seo_generer_meta_tags(null,$contexte);
+		$meta_tags = seo_generer_meta_tags(null, $contexte);
 
-		foreach ($meta_tags as $key => $meta){
+		foreach ($meta_tags as $key => $meta) {
 			$preg = '';
-			/**
-			 * Si le tag est <title>
-			 */
-			if ($key=='title')
+			if ($key=='title') {
+				/**
+				 * Si le tag est <title>
+				 */
 				$preg = "/(<{$key}[^>]*>.*<\/{$key}[^>]*>)/Uims";
-			/**
-			 * Le tag est une <meta>
-			 */
-			else
+			} else {
+				/**
+				 * Le tag est une <meta>
+				 */
 				$preg = "/(<meta\s+name=['\"]{$key}['\"][^>]*>)/Uims";
+			}
 
 			// remplacer la meta si on la trouve
-			if ($preg AND preg_match($preg,$head,$match)){
-				$head = str_replace($match[0],$meta,$head);
-			}
-			else
+			if ($preg and preg_match($preg, $head, $match)) {
+				$head = str_replace($match[0], $meta, $head);
+			} else {
 				$append .= "$meta\n";
+			}
 		}
 	}
 	/* META GOOGLE WEBMASTER TOOLS */
 	if (isset($config['webmaster_tools'])
-		AND $config['webmaster_tools']['activate']=='yes'
-		AND $is_sommaire){
+		and $config['webmaster_tools']['activate']=='yes'
+		and $is_sommaire) {
 		$append .= "\n" . seo_generer_webmaster_tools();
 	}
 
 	if (isset($config['bing'])
-		AND $config['bing']['activate']=='yes'
-		AND $is_sommaire){
+		and $config['bing']['activate'] == 'yes'
+		and $is_sommaire) {
 		$append .= "\n" . seo_generer_bing();
 	}
 
 	/* CANONICAL URL */
 	if (isset($config['canonical_url'])
-		AND $config['canonical_url']['activate']=='yes'){
+		and $config['canonical_url']['activate']=='yes') {
 		$append .= "\n" . seo_generer_urls_canoniques($contexte);
 	}
 
 	/* GOOGLE ANALYTICS */
 	if (isset($config['analytics'])
-		AND $config['analytics']['activate']=='yes'){
+		and $config['analytics']['activate']=='yes') {
 		$append .= "\n" . seo_generer_google_analytics();
 	}
 
 	/* ALEXA */
 	if (isset($config['alexa'])
-		AND $config['alexa']['activate']=='yes'
-		AND $is_sommaire){
+		and $config['alexa']['activate']=='yes'
+		and $is_sommaire) {
 		$append .= "\n" . seo_generer_alexa();
 	}
 
-	if ($append){
+	if ($append) {
 		$append = "\n$append\n";
 		// sinon ajouter en fin de </head>
-		if ($p=stripos($head,"</head>"))
-			$head = substr_replace($head,$append,$p,0);
-		else
+		if ($p = stripos($head, '</head>')) {
+			$head = substr_replace($head, $append, $p, 0);
+		} else {
 			$head .= $append;
+		}
 	}
 
 	return $head;
@@ -154,37 +160,36 @@ function seo_insere_remplace_metas($head,$contexte){
 
 /**
  * Renvoyer la balise <link> pour URL CANONIQUES
- * 
+ *
  * @param array $contexte
  * @return string
  */
-function seo_generer_urls_canoniques($contexte){
+function seo_generer_urls_canoniques($contexte) {
 	include_spip('inc/urls');
 	$i = seo_interprete_contexte($contexte);
 
-	if (isset($i['id_objet'])){
+	if (isset($i['id_objet'])) {
 		return '<link rel="canonical" href="' . generer_url_entite_absolue($i['id_objet'], $i['objet']) . '" />';
-	}
-	elseif($i['objet']=='sommaire')
+	} elseif ($i['objet'] == 'sommaire') {
 		return '<link rel="canonical" href="' . url_de_base() . '" />';
+	}
 
 	return '';
 }
 
 /**
  * Renvoyer la balise SCRIPT de Google Analytics
- * 
+ *
  * @return string
  */
-function seo_generer_google_analytics(){
+function seo_generer_google_analytics() {
 	include_spip('inc/config');
 
 	/* GOOGLE ANALYTICS */
-	$flux = "";
-	if ($id=lire_config('seo/analytics/id')){
+	if ($id = lire_config('seo/analytics/id')) {
 		$id = texte_script($id);
 		// Nouvelle balise : http://www.google.com/support/analytics/bin/answer.py?hl=fr_FR&answer=174090&utm_id=ad
-		if (!lire_config('seo/analytics/universal'))
+		if (!lire_config('seo/analytics/universal')) {
 			return "<script type=\"text/javascript\">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', '$id']);
@@ -196,8 +201,8 @@ function seo_generer_google_analytics(){
 	})();
 </script>
 ";
-		else
-		        return "<script type=\"text/javascript\">
+		} else {
+			return "<script type=\"text/javascript\">
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -206,26 +211,27 @@ function seo_generer_google_analytics(){
 	ga('send', 'pageview');
 </script>
 ";
-
+		}
 	}
 
-	return "";
+	return '';
 }
 
 /**
  * Renvoyer les META Classiques
  * - Meta Titre / Description / etc.
- * 
+ *
  * @param null|array $contexte
  * @return array
  */
-function seo_calculer_meta_tags($contexte=null){
+function seo_calculer_meta_tags($contexte = null) {
 	include_spip('inc/config');
 	include_spip('inc/filtres');
 	$config = lire_config('seo/');
 
-	if (is_null($contexte))
+	if (is_null($contexte)) {
 		$contexte = $GLOBALS['contexte'];
+	}
 	$i = seo_interprete_contexte($contexte);
 
 	/* META TAGS */
@@ -233,67 +239,76 @@ function seo_calculer_meta_tags($contexte=null){
 	// If the meta tags configuration is activate
 	$meta_tags = array();
 
-	if (isset($i['id_objet'])){
-		$trouver_table = charger_fonction("trouver_table","base");
+	if (isset($i['id_objet'])) {
+		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table($i['table_sql']);
 		$select = array();
-		if (isset($desc['titre']))
+		if (isset($desc['titre'])) {
 			$select[] = $desc['titre'];
-		elseif(isset($desc['field']['titre']))
-			$select[] = "titre";
-		if (isset($desc['field']['descriptif']))
-			$select[] = "descriptif";
-		if (isset($desc['field']['chapo']))
-			$select[] = "chapo";
-		if (isset($desc['field']['texte']))
-			$select[] = "texte";
+		} elseif (isset($desc['field']['titre'])) {
+			$select[] = 'titre';
+		}
+		if (isset($desc['field']['descriptif'])) {
+			$select[] = 'descriptif';
+		}
+		if (isset($desc['field']['chapo'])) {
+			$select[] = 'chapo';
+		}
+		if (isset($desc['field']['texte'])) {
+			$select[] = 'texte';
+		}
 
 		$tag = array();
-		if (count($select)){
-			$select = implode(",",$select);
-			$row = sql_fetsel($select, $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
-			if($row){
-				if (isset($row['titre'])){
+		if (count($select)) {
+			$select = implode(',', $select);
+			$row = sql_fetsel($select, $i['table_sql'], $i['primary'].'=' . intval($i['id_objet']));
+			if ($row) {
+				if (isset($row['titre'])) {
 					$tag['title'] = couper(extraire_multi($row['titre'], isset($contexte['lang']) ? $contexte['lang'] : $GLOBALS['spip_lang']), 64);
 					unset($row['titre']);
 				}
-				if (isset($row['lang']))
+				if (isset($row['lang'])) {
 					unset($row['lang']);
-	
-				if (count($row))
-					$tag['description'] = couper(implode(" ", $row), 150, '');
+				}
+
+				if (count($row)) {
+					$tag['description'] = couper(implode(' ', $row), 150, '');
+				}
 			}
 		}
 		// Get the value set by default
-		if (isset($config['meta_tags']['default']) AND is_array($config['meta_tags']['default'])){
-			foreach ($config['meta_tags']['default'] as $name => $option){
+		if (isset($config['meta_tags']['default']) and is_array($config['meta_tags']['default'])) {
+			foreach ($config['meta_tags']['default'] as $name => $option) {
 				$meta_tags[$name] = array();
-				if (in_array($option,array('page','page_sommaire'))){
-					if (isset($tag[$name]))
+				if (in_array($option, array('page', 'page_sommaire'))) {
+					if (isset($tag[$name])) {
 						$meta_tags[$name][] = $tag[$name];
+					}
 				}
-				if (in_array($option,array('sommaire','page_sommaire'))){
-					if (isset($config['meta_tags']['tag'][$name]))
+				if (in_array($option, array('sommaire','page_sommaire'))) {
+					if (isset($config['meta_tags']['tag'][$name])) {
 						$meta_tags[$name][] = $config['meta_tags']['tag'][$name];
+					}
 				}
-				if (count($meta_tags[$name]))
-					$meta_tags[$name] = implode(" - ",$meta_tags[$name]);
-				else
+				if (count($meta_tags[$name])) {
+					$meta_tags[$name] = implode(' - ', $meta_tags[$name]);
+				} else {
 					unset($meta_tags[$name]);
+				}
 			}
 		}
 
 		// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
 		if (isset($config['meta_tags']['activate_editing'])
-			AND $config['meta_tags']['activate_editing']=='yes'){
-			$result = sql_select("*", "spip_seo", "id_objet=" . intval($i['id_objet']) . " AND objet=" . sql_quote($i['objet']));
-			while ($r = sql_fetch($result)){
-				if ($r['meta_content']!='')
+			and $config['meta_tags']['activate_editing'] == 'yes') {
+			$result = sql_select('*', 'spip_seo', 'id_objet=' . intval($i['id_objet']) . ' AND objet=' . sql_quote($i['objet']));
+			while ($r = sql_fetch($result)) {
+				if ($r['meta_content'] != '') {
 					$meta_tags[$r['meta_name']] = $r['meta_content'];
+				}
 			}
 		}
-	}
-	elseif($i['objet']=="sommaire") {
+	} elseif ($i['objet'] == 'sommaire') {
 		$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 	}
 	return $meta_tags;
@@ -304,19 +319,22 @@ function seo_calculer_meta_tags($contexte=null){
  * @param null|array $meta_tags
  * @return array
  */
-function seo_generer_meta_tags($meta_tags = null, $contexte = null){
+function seo_generer_meta_tags($meta_tags = null, $contexte = null) {
 	$tags = array();
 	//Set meta list if not provided
-	if (!is_array($meta_tags))
+	if (!is_array($meta_tags)) {
 		$meta_tags = seo_calculer_meta_tags($contexte);
+	}
 
 	// Print the result on the page
-	foreach ($meta_tags as $name => $content){
-		if ($content!='')
-			if ($name=='title')
+	foreach ($meta_tags as $name => $content) {
+		if ($content!='') {
+			if ($name == 'title') {
 				$tags[$name] = '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
-			else
+			} else {
 				$tags[$name] = '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
+			}
+		}
 	}
 	return $tags;
 }
@@ -326,19 +344,20 @@ function seo_generer_meta_tags($meta_tags = null, $contexte = null){
  * @param string $nom
  * @return string
  */
-function seo_generer_meta_brute($nom){
+function seo_generer_meta_brute($nom) {
 	include_spip('inc/config');
-	return lire_config("seo/meta_tags/tag/$nom","");
+	return lire_config("seo/meta_tags/tag/$nom", '');
 }
 
 /**
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  * @return string
  */
-function seo_generer_webmaster_tools(){
+function seo_generer_webmaster_tools() {
 	include_spip('inc/config');
-	if ($id=lire_config('seo/webmaster_tools/id'))
+	if ($id = lire_config('seo/webmaster_tools/id')) {
 		return '<meta name="google-site-verification" content="' . texte_script($id) . '" />';
+	}
 }
 
 
@@ -346,20 +365,22 @@ function seo_generer_webmaster_tools(){
  * Renvoyer la META BING TOOLS
  * @return string
  */
-function seo_generer_bing(){
+function seo_generer_bing() {
 	include_spip('inc/config');
-	if ($id=lire_config('seo/bing/id'))
+	if ($id=lire_config('seo/bing/id')) {
 		return '<meta name="msvalidate.01" content="' . texte_script($id) . '" />';
+	}
 }
 
 /**
  * Renvoyer la META ALEXA
  * @return string
  */
-function seo_generer_alexa(){
+function seo_generer_alexa() {
 	include_spip('inc/config');
-	if ($id=lire_config('seo/alexa/id'))
+	if ($id=lire_config('seo/alexa/id')) {
 		return '<meta name="alexaVerifyID" content="' . texte_script($id) . '" />';
+	}
 }
 
 /**
@@ -367,7 +388,7 @@ function seo_generer_alexa(){
  * Renvoyer la balise <link> pour URL CANONIQUES
  * @param $p
  */
-function balise_SEO_URL_dist($p){
+function balise_SEO_URL_dist($p) {
 	$p->code = "seo_generer_urls_canoniques(\$Pile[0])";
 	$p->interdire_scripts = false;
 	return $p;
@@ -378,7 +399,7 @@ function balise_SEO_URL_dist($p){
  * Renvoyer la balise SCRIPT de Google Analytics
  * @param $p
  */
-function balise_SEO_GA_dist($p){
+function balise_SEO_GA_dist($p) {
 	$p->code = "seo_generer_google_analytics()";
 	$p->interdire_scripts = false;
 	return $p;
@@ -390,7 +411,7 @@ function balise_SEO_GA_dist($p){
  * - Meta Titre / Description / etc.
  * @param $p
  */
-function balise_SEO_META_TAGS_dist($p){
+function balise_SEO_META_TAGS_dist($p) {
 	$p->code = 'implode("\\n",seo_generer_meta_tags(null,$Pile[0]))';
 	$p->interdire_scripts = false;
 	return $p;
@@ -401,8 +422,8 @@ function balise_SEO_META_TAGS_dist($p){
  * Renvoyer la valeur de la meta appelée (sans balise)
  * @param $p
  */
-function balise_SEO_META_BRUTE_dist($p){
-	$_nom = str_replace("'", "", interprete_argument_balise(1, $p));
+function balise_SEO_META_BRUTE_dist($p) {
+	$_nom = str_replace("'", '', interprete_argument_balise(1, $p));
 	$p->code = "table_valeur(seo_calculer_meta_tags(),$_nom,'')";
 	$p->interdire_scripts = false;
 	return $p;
@@ -413,7 +434,7 @@ function balise_SEO_META_BRUTE_dist($p){
  * Renvoyer la META GOOGLE WEBMASTER TOOLS
  * @param $p
  */
-function balise_SEO_GWT_dist($p){
+function balise_SEO_GWT_dist($p) {
 	$p->code = "seo_generer_webmaster_tools()";
 	$p->interdire_scripts = false;
 	return $p;
@@ -423,7 +444,7 @@ function balise_SEO_GWT_dist($p){
  * #SEO : insere toutes les meta d'un coup, a l'endroit indique
  * @param $p
  */
-function balise_SEO_dist($p){
+function balise_SEO_dist($p) {
 	$p->code = "seo_insere_remplace_metas('',\$Pile[0])";
 	$p->interdire_scripts = false;
 	return $p;
