@@ -96,8 +96,8 @@ function expression_recherche($recherche, $options) {
 	$recherche = trim($recherche);
 
 	// retirer les + de +truc et les * de truc*
-	$recherche = preg_replace(',(^|\s)\+(\w),Uims', "$1$2", $recherche);
-	$recherche = preg_replace(',(\w)\*($|\s),Uims', "$1$2", $recherche);
+	$recherche = preg_replace(',(^|\s)\+(\w),Uims', '$1$2', $recherche);
+	$recherche = preg_replace(',(\w)\*($|\s),Uims', '$1$2', $recherche);
 
 	$is_preg = false;
 	if (substr($recherche, 0, 1) == '/' and substr($recherche, -1, 1) == '/') {
@@ -134,7 +134,8 @@ function expression_recherche($recherche, $options) {
 	or (@preg_match($preg, '') === false) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses et autres caract�res qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		// eviter les parentheses et autres caracteres qui interferent avec pcre
+		// par la suite (dans le preg_match_all) s'il y a des reponses
 		$recherche = str_replace(
 			array('(',')','?','[', ']', '+', '*', '/'),
 			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
