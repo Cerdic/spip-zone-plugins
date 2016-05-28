@@ -58,7 +58,7 @@ function action_remplir_panier_dist($arg=null) {
 		if ($quantite_deja){
 			$cumul_quantite = $quantite_deja + $quantite;
 			//Si le cumul_quantite est 0, on efface
-			if ($cumul_quantite == 0) 
+			if ($cumul_quantite <= 0) 
 				sql_delete('spip_paniers_liens','id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet));
 			//Sinon on met à jour
 			else sql_updateq(
