@@ -1,0 +1,102 @@
+[(#REM)<!--
+
+  Squelette Webfonts
+  (c) 2010 Cedric MORIN
+  Distribue sous licence GPL
+  
+  
+  https://developers.google.com/fonts/docs/getting_started#specifying_font_families_and_styles_in_a_stylesheet_url
+
+-->]
+<style>
+.typelist_block_preview{
+	
+}
+	.webfont_preview {
+		width: 100%;
+		height:auto;
+		overflow: auto;
+		
+		margin-bottom: 1em;
+		border-top: 1px solid silver;
+		border-bottom: 1px solid silver;
+	}
+</style>
+
+<form action="[(#SELF)]" method="GET" id="filtrer">
+	[(#SELF|form_hidden)]
+	<label for="font_search">Rechercher une typo</label>
+	<input name="font_search" type="text" value="#ENV{font_search}">
+	<label for="sort">Trier par</label>
+	<select name="sort" id="sort">
+	  <option value="popularity"[(#ENV{sort}|=={popularity}|?{' selected="selected"',''})]>Popularité</option>
+	  <option value="alpha"[(#ENV{sort}|=={alpha}|?{' selected="selected"',''})]>Alphabétique</option>
+	</select>
+	<label for="preview_text">Texte pour la preview</label>
+	<input type="text" name="preview_text" value='#ENV{preview_text, Grumpy wizards make toxic brew for the evil Queen and Jack.}'>
+	<label for="category">Catégories</label>
+	<select name="category" id="category">
+		<option value=""> Choisissez une catégorie</option>
+		<option value="serif"[(#ENV{category}|=={serif}|?{'selected="selected"',''})]>Sérif</option>
+		<option value="sans-serif"[(#ENV{category}|=={sans-serif}|?{'selected="selected"',''})]>Sans sérif</option>
+		<option value="display"[(#ENV{category}|=={display}|?{'selected="selected"',''})]>Display</option>
+		<option value="handwriting"[(#ENV{category}|=={handwriting}|?{'selected="selected"',''})]>Handwritting</option>
+		<option value="monospace"[(#ENV{category}|=={monospace}|?{'selected="selected"',''})]>Monospace</option>
+	</select>
+	<input type="submit">
+</form>
+
+[(#ENV|print_r{1})]
+
+
+
+
+#SET{webfont_api_key, #EVAL{_GOOGLE_API_KEY}}
+#SET{webfonts,#ARRAY}
+<BOUCLE_listWebFont(DATA){source json, https://www.googleapis.com/webfonts/v1/webfonts?key=#GET{webfont_api_key}&sort=#ENV{sort,popularity}}>
+[(#SET{webfonts,#GET{webfonts}|push{#VALEUR}})]
+</BOUCLE_listWebFont>
+
+<div id="google_webfont_list" class="ajax typelist">
+<BOUCLE_fontsList(DATA){source table, #GET{webfonts}}>
+	<div class="typelist_block">
+    <BOUCLE_fontInfos(DATA){source table, #VALEUR}{category ?== #ENV{category}}{pagination 10}>
+		#SET{font-family,#VALEUR{family}}
+		<div class="typelist_block_title">
+			<h2>[(#VALEUR{family})]</h2>
+		</div>
+		<div class="typelist_block_infos">
+			<strong>Categorie : </strong>[(#VALEUR{category})]<br>
+			<h3>Subsets :</h3>
+			<ul>
+				<BOUCLE_listFiles(POUR){tableau #VALEUR{subsets}}>
+					<li>[(#VALEUR)]</li>
+				</BOUCLE_listFiles>
+			</ul>
+			<strong>Variantes :</strong>
+			<ul>
+				<BOUCLE_listVariants(POUR){tableau #VALEUR{variants}}>
+					<li>
+						<input type="checkbox" name="#GET{font-family}:[(#VALEUR)]" value="#GET{font-family}:[(#VALEUR)]">[(#VALEUR)]
+						<div class="typelist_block_preview">
+							<h3>Preview</h3>
+							#SET{preview_font-size, 48px}
+							#SET{preview_text,#ENV{preview_text}}
+							#SET{font-categorie,#VALEUR{category}}
+							<iframe class="webfont_preview ajax" src="[(#URL_PAGE{webfont_preview,font-family=#GET{font-family}}
+																		|parametre_url{font-categorie,#GET{font-categorie}}
+																		|parametre_url{font-variant,#VALEUR}
+																		|parametre_url{preview_font-size, #GET{preview_font-size}}
+																		|parametre_url{preview_text,#GET{preview_text}})]"></iframe>
+						</div>					
+					</li>
+				</BOUCLE_listVariants>
+			</ul>
+		</div>
+
+	</BOUCLE_fontInfos>
+	#PAGINATION
+	</B_fontInfos>
+	</div>
+</BOUCLE_fontsList>
+</div>
