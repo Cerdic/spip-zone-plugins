@@ -31,7 +31,7 @@ function abozones_post_edition($flux){
 		and $id_auteur = $abonnement['id_auteur']
 		and $id_abonnements_offre = $abonnement['id_abonnements_offre']
 		and include_spip('action/editer_liens')
-		and $liens = objet_trouver_liens(array('zones'=>'*'), array('abonnements_offre'=>$id_abonnements_offre))
+		and $liens = objet_trouver_liens(array('zone'=>'*'), array('abonnements_offre'=>$id_abonnements_offre))
 	) {
 		include_spip('inc/autoriser');
 		include_spip('action/editer_zone');
@@ -60,23 +60,22 @@ function abozones_post_edition($flux){
 			and $flux['data']['statut'] != 'actif'
 		) {
 			// On cherche si la personne a d'autres abonnements ACTIFS en même temps
-			if ($autres_abonnements = sql_allfetsel(
-				'id_abonnement, id_abonnements_offre',
+			if ($autres_abonnements_actifs = sql_allfetsel(
+				'id_abonnements_offre',
 				'spip_abonnements',
 				array('id_auteur = '.$id_auteur, 'id_abonnement != '.$id_abonnement, 'statut = "actif"')
 			)) {
+				$autres_offres_actives = array_map('reset', $autres_abonnements_actifs);
 				$zones_a_pas_retirer = array();
 				
-				foreach ($autres_abonnements as $autre_abonnement) {
-					// Si cet abonnement a des zones restreintes liées
-					if ($liens_autre = objet_trouver_liens(
-						array('zones'=>'*'),
-						array('abonnements_offre'=>$autre_abonnement['id_abonnements_offre'])
-					)) {
-						// On ne va PAS retirer ces zones à l'utilisateur
-						foreach ($liens_autre as $lien_autre) {
-							$zones_a_pas_retirer[] = $lien_autre['id_zone'];
-						}
+				// Si ces offres actives ont des zones restreintes liées
+				if ($liens_autres = objet_trouver_liens(
+					array('zone'=>'*'),
+					array('abonnements_offre'=>$autres_offres_actives)
+				)) {
+					// On ne va PAS retirer ces zones à l'utilisateur
+					foreach ($liens_autres as $lien_autres) {
+						$zones_a_pas_retirer[] = $lien_autres['id_zone'];
 					}
 				}
 				
@@ -85,9 +84,11 @@ function abozones_post_edition($flux){
 			}
 			
 			// On retire à l'utilisateur toutes les zones qui ne sont pas aussi dans d'autres abonnements actifs
-			autoriser_exception('retirerzones', 'auteur', $id_auteur);
-			zone_lier($zones, 'auteur', $id_auteur, 'del');
-			autoriser_exception('retirerzones', 'auteur', $id_auteur, false);
+			if ($zones) {
+				autoriser_exception('retirerzones', 'auteur', $id_auteur);
+				zone_lier($zones, 'auteur', $id_auteur, 'del');
+				autoriser_exception('retirerzones', 'auteur', $id_auteur, false);
+			}
 		}
 	}
 	
