@@ -5,11 +5,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 function cmots_mots_deja_associes($id_groupe, $objet, $id_objet) {
-	$select_id_mots = sql_allfetsel(
-		'mots.id_mot AS id_mot', // select
-		array('spip_mots AS mots','spip_mots_liens AS liens'), // from
-		array('mots.id_groupe='.intval($id_groupe),'liens.objet='.sql_quote($objet),'liens.id_objet='.intval($id_objet),'mots.id_mot=liens.id_mot') // where
-	);
+	if (test_plugin_actif(gma)) 
+		$select_id_mots = sql_allfetsel(
+			'mots.id_mot AS id_mot', // select
+			array('spip_mots AS mots','spip_mots_liens AS liens'), // from
+			array('mots.id_groupe_racine='.intval($id_groupe),'liens.objet='.sql_quote($objet),'liens.id_objet='.intval($id_objet),'mots.id_mot=liens.id_mot') // where
+		);
+	else
+		$select_id_mots = sql_allfetsel(
+			'mots.id_mot AS id_mot', // select
+			array('spip_mots AS mots','spip_mots_liens AS liens'), // from
+			array('mots.id_groupe='.intval($id_groupe),'liens.objet='.sql_quote($objet),'liens.id_objet='.intval($id_objet),'mots.id_mot=liens.id_mot') // where
+		);
 	$mots=array();
 	foreach ($select_id_mots as $select_id_mot)
 		$mots[] = $select_id_mot['id_mot'];
