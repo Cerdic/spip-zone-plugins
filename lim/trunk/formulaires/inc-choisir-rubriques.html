@@ -20,7 +20,7 @@
 ]</BOUCLE_objets>
 [(#SET{traductions,#GET{traductions}|array_intersect_key{#GET{objets}}})]
 
-[(#REM) Récupérer le type des objets sélectionnés. ex. spip_articles -> article ]
+[(#REM) Récupérer le tableau des types d'objets sélectionnés. ex. spip_articles -> article ]
 #SET{type, #ARRAY}
 [(#SET{type, #GET{traductions}|lim_type})]
 
@@ -35,7 +35,8 @@
 
 <div class="tab rubrique"></div>
 <BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par cle}>
-	<div class="check entete center"><img src='#CHEMIN_IMAGE{#VALEUR-16.png}'><br>#VALEUR</div>
+	#SET{type_obj, #CLE|objet_type}
+	<div class="check entete center"><img src='#CHEMIN_IMAGE{#GET{type_obj}-24.png}'><br>#VALEUR</div>
 </BOUCLE_entete>
 
 <BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
