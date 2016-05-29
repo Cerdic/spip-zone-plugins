@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_geo_pays_selectionnes>
+	<ul>
+	<BOUCLE_geo_pays_selectionnes(geo_pays){id_pays IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#ID_PAYS)</li>
+	</BOUCLE_geo_pays_selectionnes>
+	</ul>
+	</B_geo_pays_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_geo_pays_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_pay_selectionne(geo_pays){id_pays=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+	  	<p>#NOM (#ID_PAYS)</p>
+	</BOUCLE_pay_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_pay_selectionne>
+<//B_test_multiple>
