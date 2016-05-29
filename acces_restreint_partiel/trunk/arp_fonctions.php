@@ -26,16 +26,23 @@ lance les filtres adéquats en fonction des mots-clé présents dans l'article
 */
  
 function arp_filtrage($texte, $connect, $pile){
-	$id_rubrique = $pile['id_rubrique'];
+
 	$id_article = $pile['id_article'];
 	if (isset($GLOBALS['auteur_session']['id_auteur'])) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$change = false;
 //echo "<br>id_auteur=$id_auteur";
 	if (accesrestreint_article_restreint($id_article, $id_auteur)) // TODO: enlever le ! après test
 	{
-		$zone = accesrestreint_zones_rubrique_et_hierarchie($id_rubrique);
-//krumo($zone);
-		$zone = $zone[0];
+		// Avant, on pouvait lire id_rubrique dans la pile : $id_rubrique = $pile['id_rubrique'];
+		// mais cela ne marche plus désormais. Depuis quand ? pourquoi ? mystère !
+		// Donc on va chercher dans la base
+		$s = spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article");
+		$r = sql_fetch($s);
+		$id_rubrique = $r['id_rubrique'];
+
+		$zone = accesrestreint_zones_rubrique_et_hierarchie($id_rubrique); // on obtient la liste des zones qui référencent cette rubrique.
+//krumo($zone); var_dump($zone);
+		$zone = $zone[0]; // On prend arbitrairement la 1ère de la liste. TODO : réfléchir à une gestion plus fine car les N zones peuvent avoir un paramètrage différent.
 //echo "<br>zone=$zone";
 
 		// Le visiteur n'a pas le droit d'accès à cet article

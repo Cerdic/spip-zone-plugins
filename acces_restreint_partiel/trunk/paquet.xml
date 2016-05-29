@@ -1,7 +1,7 @@
 <paquet
 	prefix="arp"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/arp-64.png"
