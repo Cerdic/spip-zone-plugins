@@ -1,7 +1,7 @@
 <paquet
 	prefix="switchcase"
 	categorie="outil"
-	version="0.1.0"
+	version="0.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/switchcase-32.png"
@@ -9,7 +9,7 @@
 >	
  
 	<nom>Balises #SWITCH #CASE</nom>
-	<!-- Lecteur de tables SQL -->
+	<!-- Balises #SWITCH et #CASE pour les squelettes -->
  
 	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
