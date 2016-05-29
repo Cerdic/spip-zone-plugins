@@ -1,17 +1,17 @@
 <plugin>
-        <nom>Balises #SWITCH et #CASE</nom>
-        <slogan>Balises #SWITCH et #CASE pour les squelettes</slogan>
-        <icon>images/switchcase-32.png</icon>
-        <auteur>JLuc</auteur>
-        <licence>GPL</licence>
-        <version>0.1.1</version>
-        <etat>test</etat>
-        <description>
-        D&eacute;finition de balises #SWITCH ET #CASE pour les cr&eacute;ateurs de squelette, pour comparer une valeur � plusieurs autres.
-        </description>
-        <prefix>switchcase</prefix>
-        <necessite id="SPIP" version="[2.1.0;2.1.99]" />
-        <categorie>outil</categorie>
-        
-        <options>switchcase_options.php</options>
+	<nom>Balises #SWITCH et #CASE</nom>
+	<slogan>Balises #SWITCH et #CASE pour les squelettes</slogan>
+	<icon>images/switchcase-32.png</icon>
+	<auteur>JLuc</auteur>
+	<licence>GPL</licence>
+	<version>0.1.1</version>
+	<etat>test</etat>
+	<description>
+	Définition de balises #SWITCH ET #CASE pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
+	</description>
+	<prefix>switchcase</prefix>
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<categorie>outil</categorie>
+
+	<options>switchcase_options.php</options>
 </plugin>
