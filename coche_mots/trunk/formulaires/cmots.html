@@ -9,7 +9,7 @@
 		
 		<ul><li>
 		<BOUCLE_mots(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
-			<div class="choix choix_#ID_MOT">
+			<div class="choix choix_#ID_MOT" style="border:none; background: none;">
 				<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
 				<label for="champ_mot_#ID_MOT">#TITRE</label>
 			</div>
@@ -23,7 +23,7 @@
 			<B_mots_sous>
 				<ul><li>
 			<BOUCLE_mots_sous(MOTS){id_groupe}{par multi titre}{si #AUTORISER{associermots,#ENV{objet},#ENV{id_objet},'',#ARRAY{id_groupe,#ENV{id_groupe}}}}>
-				<div class="choix choix_#ID_MOT">
+				<div class="choix choix_#ID_MOT" style="border:none; background: none;">
 					<input type="checkbox" name="mots[]" class="checkbox" id="champ_mot_#ID_MOT"[(#ID_MOT|in_array{#ENV{mots}}|oui)checked="checked"] value="#ID_MOT" />
 					<label for="champ_mot_#ID_MOT">#TITRE</label>
 				</div>
