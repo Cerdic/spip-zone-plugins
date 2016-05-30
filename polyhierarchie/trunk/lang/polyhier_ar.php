@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_associes' => 'المقالات المربوطة',
+	'articles_associes' => 'المقالات المرتبطة',
 
 	// L
 	'label_autre_parent' => 'أيضاً في القسم',
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parent_obligatoire' => 'يجب تحديد قسم واحد على الأقل',
 
 	// R
-	'rubriques_associees' => 'الأقسام المربوطة',
+	'rubriques_associees' => 'الأقسام المرتبطة',
 
 	// T
 	'titre_polyhierarchie' => 'الهرمية المتعددة'
