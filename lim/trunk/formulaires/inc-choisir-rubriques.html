@@ -25,15 +25,17 @@
 [(#SET{type, #GET{traductions}|lim_type})]
 
 <style>
-	.tab.rubrique {display:inline-block; width:#GET{width_rub}px; font-weight:bold; }
-	.sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{15})px]; font-weight:normal; }
-	.sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{30})px]; }
-	.sousrub .sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{45})px]; }
-	.sousrub .sousrub .sousrub .sousrub .tab.rubrique { width:[(#GET{width_rub}|moins{60})px]; }
+	.tab.rub {display:inline-block; width:#GET{width_rub}px; font-weight:bold; }
+	.sousrub .tab.rub { width:[(#GET{width_rub}|moins{15})px]; font-weight:normal; }
+	.sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{30})px]; }
+	.sousrub .sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{45})px]; }
+	.sousrub .sousrub .sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{60})px]; }
 	.check { display:inline-block; width:[(#GET{width_obj}|div{#GET{nbre_col}})px]; text-align: center;}
+	.check[rub_secteur=oui] {position:relative;}
+	.check[rub_secteur=oui] label {position:absolute; top:-14px; left:30%; }
 </style>
 
-<div class="tab rubrique"></div>
+<div class="tab rub"></div>
 <BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par cle}>
 	#SET{type_obj, #CLE|objet_type}
 	<div class="check entete center"><img src='#CHEMIN_IMAGE{#GET{type_obj}-24.png}'><br>#VALEUR</div>
@@ -42,15 +44,15 @@
 <BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
 	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
 	<div class='secteur'>
-		<div class="tab rubrique">#TITRE</div>
+		<div class="tab rub">#TITRE</div>
 		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par cle}>
-			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
+			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE}{secteur=oui})]
 		</BOUCLE_par_traduction1>
 		<B_enfants_rubriques>
 			<div class='sousrub'>
 			<BOUCLE_enfants_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
 				<div class=''>
-					<div class="tab rubrique">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
+					<div class="tab rub">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
 					[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
 					</BOUCLE_par_traduction2><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
 				</div>
@@ -60,18 +62,28 @@
 	</div>
 </BOUCLE_titre_rubrique>
 
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
 
-
-<script type="text/javascript">/*<![CDATA[*/
-jQuery("span.lim_icon").on('click', function(){
-	if (jQuery(this).hasClass('icon-on')) {
-		jQuery(this).removeClass('icon-on').addClass('icon-off');
-	}
-	else if (jQuery(this).hasClass('icon-off'))
-		jQuery(this).removeClass('icon-off').addClass('icon-on');
-
-});
-/*]]>*/</script>
-
-
-
+		jQuery("input:checkbox").change(function(){
+			var type = $(this).attr('name').slice(0,-2);
+			var $check = "div.check." + type;
+			console.log($check);
+			if (jQuery(this).is(":checked")) {
+				jQuery.each( jQuery(this).parent().parent().find($check), function(index,item) {
+					console.log(item);
+					jQuery(item).find('input').prop('checked',true);
+					jQuery(item).find('.lim_icon').removeClass('icon-on').addClass('icon-off');
+				});
+			} else {
+				jQuery.each( jQuery(this).parent().parent().find($check), function(index,item) {
+					console.log(item);
+					jQuery(item).find('input').prop('checked',false);
+					jQuery(item).find('.lim_icon').removeClass('icon-off').addClass('icon-on');
+				});
+			}
+		});
+	});
+})(jQuery);
+</script>
