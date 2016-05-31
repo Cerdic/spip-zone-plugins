@@ -14,7 +14,7 @@ function formulaires_configurer_mailshot_charger_dist(){
 	$valeurs = cvtconf_formulaires_configurer_recense('configurer_mailshot');
 	$valeurs['editable'] = true;
 
-	$valeurs['_smtp_password'] = $valeurs['smtp']['password'];
+	$valeurs['_smtp_password'] = isset($valeurs['smtp']['password']) ? $valeurs['smtp']['password'] : '';
 	$valeurs['smtp']['password'] = '';
 
 	foreach(array(
