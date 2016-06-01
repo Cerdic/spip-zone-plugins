@@ -112,33 +112,22 @@ function gis_post_edition($flux) {
 				spip_log("GIS EXIFS : Récuperation des coordonnees du fichier $fichier", 'gis');
 
 				$LatDeg = explode('/', $exifs['GPSLatitude'][0]);
-				if (is_numeric($LatDeg[1]) > 0) {
-					$intLatDeg = $LatDeg[0]/$LatDeg[1];
-				}
+				$intLatDeg = $LatDeg[0] / ($LatDeg[1] ? $LatDeg[1] : 1);
 
 				$LatMin = explode('/', $exifs['GPSLatitude'][1]);
-				if (is_numeric($LatMin[1]) > 0) {
-					$intLatMin = $LatMin[0]/$LatMin[1];
-				}
+				$intLatMin = $LatMin[0] / ($LatMin[1] ? $LatMin[1] : 1);
+
 				$LatSec = explode('/', $exifs['GPSLatitude'][2]);
-				if (is_numeric($LatSec[1]) > 0) {
-					$intLatSec = $LatSec[0]/$LatSec[1];
-				}
+				$intLatSec = $LatSec[0] / ($LatSec[1] ? $LatSec[1] : 1);
 
 				$LongDeg = explode('/', $exifs['GPSLongitude'][0]);
-				if (is_numeric($LongDeg[1]) > 0) {
-					$intLongDeg = $LongDeg[0]/$LongDeg[1];
-				}
+				$intLongDeg = $LongDeg[0] / ($LongDeg[1] ? $LongDeg[1] : 1);
 
 				$LongMin = explode('/', $exifs['GPSLongitude'][1]);
-				if (is_numeric($LongMin[1]) > 0) {
-					$intLongMin = $LongMin[0]/$LongMin[1];
-				}
+				$intLongMin = $LongMin[0] / ($LongMin[1] ? $LongMin[1] : 1);
 
 				$LongSec = explode('/', $exifs['GPSLongitude'][2]);
-				if (is_numeric($LongSec[1]) > 0) {
-					$intLongSec = $LongSec[0]/$LongSec[1];
-				}
+				$intLongSec = $LongSec[0] / ($LongSec[1] ? $LongSec[1] : 1);
 
 				// round to 5 = approximately 1 meter accuracy
 				if (is_numeric($intLatDeg) && is_numeric($intLatMin) && is_numeric($intLatSec)) {
