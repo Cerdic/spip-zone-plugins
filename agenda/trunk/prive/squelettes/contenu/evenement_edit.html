@@ -17,7 +17,7 @@
 	<div class="ajax">
 	<script type="text/javascript">/*<!\[CDATA\[*/var date_picker_loading = false;/*\]\]>*/</script>
 ]
-	#FORMULAIRE_EDITER_EVENEMENT{#ENV{id_evenement,oui},#ENV{id_article},#GET{redirect},#ENV{associer_objet}}
+	#FORMULAIRE_EDITER_EVENEMENT{#ENV{id_evenement,oui},#ENV{id_article,#CONFIG{agenda/articlepardefaut}},#GET{redirect},#ENV{associer_objet}}
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}', '#navigation,#chemin');/*\]\]>*/</script>

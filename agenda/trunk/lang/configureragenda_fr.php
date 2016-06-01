@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_debut_debut_semaine_prec' => 'Début de la semaine précédente',
 	'label_affichage_debut_mois_passe' => '@mois@ précédent',
 	'label_affichage_duree' => 'Lister les événements sur',
+	'label_articlepardefaut' => 'Identifiant article par défaut',
 	'label_descriptif' => 'Descriptif',
 	'label_insert_head_css_1' => 'Insérer automatiquement les styles par défaut de l’agenda',
 	'label_titre' => 'Titre de la page',
