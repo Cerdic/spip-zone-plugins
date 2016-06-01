@@ -52,7 +52,9 @@ function archive_declarer_tables_objets_sql($tables) {
 	 * il ne forcera pas le statut à publie
 	 */
 	if (!is_array($tables['spip_articles']['statut'][0]['exception'])) {
-		$tables['spip_articles']['statut'][0]['exception'] = array($tables['spip_articles']['statut'][0]['exception'],'archive');
+		$tables['spip_articles']['statut'][0]['exception'] = array(
+			$tables['spip_articles']['statut'][0]['exception'],'archive'
+		);
 	} else {
 		$tables['spip_articles']['statut'][0]['exception'][] = 'archive';
 	}

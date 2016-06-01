@@ -15,7 +15,8 @@ function genie_archive_cron($t) {
 		$articles = sql_allfetsel(
 			'id_article',
 			'spip_articles',
-			'FROM_UNIXTIME(UNIX_TIMESTAMP(date))<FROM_UNIXTIME(UNIX_TIMESTAMP(NOW())-'.($jours*24*3600).') AND '.sql_in('id_rubrique', lire_config('archive/idrub', array()))
+			'FROM_UNIXTIME(UNIX_TIMESTAMP(date)) < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW())-'.($jours*24*3600).')
+				AND '.sql_in('id_rubrique', lire_config('archive/idrub', array()))
 		);
 		if (count($articles) > 0) {
 			include_spip('action/editer_article');
