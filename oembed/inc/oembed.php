@@ -5,13 +5,15 @@
  *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Lister les providers connus
  * @return array
  */
-function oembed_lister_providers(){
+function oembed_lister_providers() {
 
 	// liste des providers par defaut
 
@@ -66,18 +68,18 @@ function oembed_lister_providers(){
 		'http://*.kickstarter.com/projects/*'     => 'https://www.kickstarter.com/services/oembed',
 		'http://speakerdeck.com/*'                => 'https://speakerdeck.com/oembed.json',
 		'http://issuu.com/*'                      => 'http://issuu.com/oembed',
-		
+
 		'http://egliseinfo.catholique.fr/*'       => 'http://egliseinfo.catholique.fr/api/oembed',
 
 		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
 	);
 
 	// pipeline pour permettre aux plugins d'ajouter/supprimer/modifier des providers
-	$providers = pipeline('oembed_lister_providers',$providers);
+	$providers = pipeline('oembed_lister_providers', $providers);
 
 	// merger avec la globale pour perso mes_options dans un site
 	// pour supprimer un scheme il suffit de le renseigner avec un endpoint vide
-	if (isset($GLOBALS['oembed_providers'])){
+	if (isset($GLOBALS['oembed_providers'])) {
 		$providers = array_merge($providers, $GLOBALS['oembed_providers']);
 		// retirer les providers avec un endpoint vide
 		$providers = array_filter($providers);
@@ -106,72 +108,82 @@ function oembed_lister_providers(){
 function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $format = 'json', $detecter_lien = 'non') {
 	static $cache = array();
 	$provider = false;
-	
+
 	$provider = oembed_verifier_provider($url);
 
 	if ((!$provider)
-		AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
+		and (($detecter_lien != 'non')
+		or lire_config('oembed/detecter_lien', 'non') == 'oui')) {
 		$provider = oembed_detecter_lien($url);
 	}
 
-	if (!$provider)
+	if (!$provider) {
 		return false;
-	
-	$data_url = parametre_url(url_absolue($provider['endpoint'],url_de_base()),'url',$url,'&');
-	include_spip('inc/config');
-	if (!$maxwidth){
-		$maxwidth = lire_config('oembed/maxwidth','600');
-	}
-	if (!$maxheight){
-		$maxheight = lire_config('oembed/maxheight','400');
 	}
 
-	$data_url = parametre_url($data_url,'maxwidth',$maxwidth,'&');
-	$data_url = parametre_url($data_url,'maxheight',$maxheight,'&');
-	$data_url = parametre_url($data_url,'format',$format,'&');
+	$data_url = parametre_url(url_absolue($provider['endpoint'], url_de_base()), 'url', $url, '&');
+	include_spip('inc/config');
+	if (!$maxwidth) {
+		$maxwidth = lire_config('oembed/maxwidth', '600');
+	}
+	if (!$maxheight) {
+		$maxheight = lire_config('oembed/maxheight', '400');
+	}
+
+	$data_url = parametre_url($data_url, 'maxwidth', $maxwidth, '&');
+	$data_url = parametre_url($data_url, 'maxheight', $maxheight, '&');
+	$data_url = parametre_url($data_url, 'format', $format, '&');
 
 	// pre-traitement du provider si besoin
-	$endpoint = explode("//",$provider['endpoint']);
-	$endpoint = explode("/",$endpoint[1]);
+	$endpoint = explode('//', $provider['endpoint']);
+	$endpoint = explode('/', $endpoint[1]);
 	$endpoint = reset($endpoint);
-	$endpoint = preg_replace(",\W+,","_",$endpoint);
-	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$endpoint",'oembed/input',true)){
+	$endpoint = preg_replace(',\W+,', '_', $endpoint);
+	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$endpoint", 'oembed/input', true)) {
 		$a = func_get_args();
 		$args = array('url'=>array_shift($a));
-		if (count($a)) $args['maxwidth'] = array_shift($a);
-		if (count($a)) $args['maxheight'] = array_shift($a);
-		if (count($a)) $args['format'] = array_shift($a);
-		$data_url = $oembed_endpoint_pretraite($data_url,$args);
+		if (count($a)) {
+			$args['maxwidth'] = array_shift($a);
+		}
+		if (count($a)) {
+			$args['maxheight'] = array_shift($a);
+		}
+		if (count($a)) {
+			$args['format'] = array_shift($a);
+		}
+		$data_url = $oembed_endpoint_pretraite($data_url, $args);
 	}
 
-	if (isset($cache[$data_url]))
+	if (isset($cache[$data_url])) {
 		return $cache[$data_url];
+	}
 
-	$oembed_cache = sous_repertoire(_DIR_CACHE,'oembed').md5($data_url).".".$format;
+	$oembed_cache = sous_repertoire(_DIR_CACHE, 'oembed').md5($data_url). '.'.$format;
 	// si cache oembed dispo et pas de recalcul demande, l'utiliser (perf issue)
-	if (file_exists($oembed_cache) AND _VAR_MODE!=='recalcul'){
-		lire_fichier($oembed_cache,$cache[$data_url]);
+	if (file_exists($oembed_cache) and _VAR_MODE !== 'recalcul') {
+		lire_fichier($oembed_cache, $cache[$data_url]);
 		$cache[$data_url]=unserialize($cache[$data_url]);
 		return $cache[$data_url];
 	}
 
-	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url','inc');
-	$cache[$data_url] = $oembed_recuperer_url($data_url,$url,$format);
+	$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
+	$cache[$data_url] = $oembed_recuperer_url($data_url, $url, $format);
 
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
-	if ($cache[$data_url]){
-		$provider_name= str_replace(" ", "_", strtolower($cache[$data_url]['provider_name']));
+	if ($cache[$data_url]) {
+		$provider_name= str_replace(' ', '_', strtolower($cache[$data_url]['provider_name']));
 		$type = strtolower($cache[$data_url]['type']);
 		// securisons le nom de la fonction (provider peut contenir n'importe quoi)
-		$f1 = preg_replace(",\W,","","posttraite_{$provider_name}_$type");
-		$f2 = preg_replace(",\W,","","posttraite_{$provider_name}");
-		if ($oembed_provider_posttraite = charger_fonction($f1,'oembed/input',true)
-		  OR $oembed_provider_posttraite = charger_fonction($f2,'oembed/input',true))
-			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url],$url);
+		$f1 = preg_replace(',\W,', '', "posttraite_{$provider_name}_$type");
+		$f2 = preg_replace(',\W,', '', "posttraite_{$provider_name}");
+		if ($oembed_provider_posttraite = charger_fonction($f1, 'oembed/input', true)
+			or $oembed_provider_posttraite = charger_fonction($f2, 'oembed/input', true)) {
+			$cache[$data_url] = $oembed_provider_posttraite($cache[$data_url], $url);
+		}
 
-		ecrire_fichier($oembed_cache,serialize($cache[$data_url]));
+		ecrire_fichier($oembed_cache, serialize($cache[$data_url]));
 	}
-	spip_log('infos oembed pour '.$url.' : '.var_export($cache[$data_url],true),'oembed.'._LOG_DEBUG);
+	spip_log('infos oembed pour '.$url.' : '.var_export($cache[$data_url], true), 'oembed.'._LOG_DEBUG);
 
 	return $cache[$data_url];
 }
@@ -184,12 +196,13 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
  *   false si non ; details du provider dans un tabeau associatif si oui
  */
 function oembed_verifier_provider($url) {
-	if (strncmp($url,$GLOBALS['meta']['adresse_site'],strlen($GLOBALS['meta']['adresse_site']))==0)
+	if (strncmp($url, $GLOBALS['meta']['adresse_site'], strlen($GLOBALS['meta']['adresse_site'])) == 0) {
 		return false;
+	}
 	$providers = oembed_lister_providers();
-	foreach ($providers as $scheme=>$endpoint) {
+	foreach ($providers as $scheme => $endpoint) {
 		$regex = '#' . str_replace('\*', '(.+)', preg_quote($scheme, '#')) . '#';
-		$regex = preg_replace( '|^#http\\\://|', '#https?\://', $regex );
+		$regex = preg_replace('|^#http\\\://|', '#https?\://', $regex);
 		if (preg_match($regex, $url)) {
 			return array('endpoint' => $endpoint);
 		}
@@ -209,7 +222,6 @@ function oembed_detecter_lien($url) {
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
 	if ($html = recuperer_page($url)) {
-		
 		// types de liens oembed à détecter
 		$linktypes = array(
 			'application/json+oembed' => 'json',
@@ -219,7 +231,7 @@ function oembed_detecter_lien($url) {
 		);
 
 		// on ne garde que le head de la page
-		$head = substr($html,0,stripos($html,'</head>'));
+		$head = substr($html, 0, stripos($html, '</head>'));
 
 		// un test rapide...
 		$tagfound = false;
@@ -232,25 +244,27 @@ function oembed_detecter_lien($url) {
 
 		if ($tagfound && preg_match_all('/<link([^<>]+)>/i', $head, $links)) {
 			foreach ($links[0] as $link) {
-				$type = extraire_attribut($link,'type');
-				$href = extraire_attribut($link,'href');
-				if (!empty($type) AND !empty($linktypes[$type]) AND !empty($href)) {
+				$type = extraire_attribut($link, 'type');
+				$href = extraire_attribut($link, 'href');
+				if (!empty($type) and !empty($linktypes[$type]) and !empty($href)) {
 					$providers[$linktypes[$type]] = $href;
 					// on a le json, ça nous suffit
-					if ('json' == $linktypes[$type])
+					if ('json' == $linktypes[$type]) {
 						break;
+					}
 				}
 			}
 		}
 	}
 
 	// on préfère le json au xml
-	if (!empty($providers['json']))
+	if (!empty($providers['json'])) {
 		return array('endpoint'=>$providers['json']);
-	elseif (!empty($providers['xml']))
-		return array('endpoint'=>$providers['xml']);
-	else
+	} elseif (!empty($providers['xml'])) {
+		return array('endpoint' => $providers['xml']);
+	} else {
 		return false;
+	}
 }
 
 
@@ -259,23 +273,24 @@ function oembed_detecter_lien($url) {
  * @param string $lien
  * @return string
  */
-function oembed_embarquer_lien($lien){
+function oembed_embarquer_lien($lien) {
 	static $base = null;
 
 	$url = extraire_attribut($lien, 'href');
 	$texte = null;
 	if ($url
-		AND (
+		and (
 			oembed_verifier_provider($url)
-			OR (lire_config('oembed/detecter_lien','non')=='oui'))
-		){
-		if (is_null($base))
+			or (lire_config('oembed/detecter_lien', 'non') == 'oui'))
+		) {
+		if (is_null($base)) {
 			$base = url_de_base();
+		}
 		// on embarque jamais un lien de soi meme car c'est une mise en abime qui donne le tourni
 		// (et peut provoquer une boucle infinie de requetes http)
-		if (strncmp($url,$base,strlen($base))!=0){
-			$fond = recuperer_fond('modeles/oembed',array('url'=>$url,'lien'=>$lien));
-			if ($fond = trim($fond)){
+		if (strncmp($url, $base, strlen($base)) != 0) {
+			$fond = recuperer_fond('modeles/oembed', array('url' => $url, 'lien' => $lien));
+			if ($fond = trim($fond)) {
 				$texte = $fond;
 			}
 		}
@@ -283,5 +298,3 @@ function oembed_embarquer_lien($lien){
 
 	return $texte;
 }
-
-?>

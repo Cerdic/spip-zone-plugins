@@ -5,6 +5,10 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 include_spip('inc/filtres');
 
 /**
@@ -13,16 +17,17 @@ include_spip('inc/filtres');
  * @param bool $output
  * @return void|string
  */
-function oembed_output_xml_dist($res, $output=true){
+function oembed_output_xml_dist($res, $output = true) {
 
 	$out = '<'.'?xml version="1.0" encoding="utf-8" standalone="yes"?>'."\n";
-	$out .= "<oembed>";
-	$out .= oembed_assocToXML($res,0);
+	$out .= '<oembed>';
+	$out .= oembed_assocToXML($res, 0);
 	$out .= "\n</oembed>\n";
-	if (!$output)
+	if (!$output) {
 		return $out;
+	}
 
-	header("Content-type: text/xml; charset=utf-8");
+	header('Content-type: text/xml; charset=utf-8');
 	echo $out;
 }
 
@@ -36,22 +41,22 @@ function oembed_output_xml_dist($res, $output=true){
 	* @param : $theArray - The jagged Associative Array
 	* @param : $tabCount - for persisting tab count across recursive function calls
 	*/
-function oembed_assocToXML($theArray, $tabCount = 2){
+function oembed_assocToXML($theArray, $tabCount = 2) {
 	//echo "The Array: ";
 	//var_dump($theArray);
 	// variables for making the XML output easier to read
 	// with human eyes, with tabs delineating nested relationships, etc.
 
-	$theXML = "";
+	$theXML = '';
 	$tabCount++;
-	$tabSpace = "";
-	for ($i = 0; $i<$tabCount; $i++){
+	$tabSpace = '';
+	for ($i = 0; $i<$tabCount; $i++) {
 		$tabSpace .= "\t";
 	}
 
 	// parse the array for data and output xml
-	foreach ($theArray as $tag => $val){
-		if (!is_array($val)){
+	foreach ($theArray as $tag => $val) {
+		if (!is_array($val)) {
 			$theXML .= PHP_EOL
 						.$tabSpace
 						.'<'.$tag.'>'.
@@ -66,5 +71,3 @@ function oembed_assocToXML($theArray, $tabCount = 2){
 
 	return $theXML;
 }
-
-?>

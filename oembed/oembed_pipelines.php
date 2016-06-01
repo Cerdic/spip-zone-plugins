@@ -5,14 +5,16 @@
  *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Inserer une CSS pour le contenu embed
  * @param $head
  * @return string
  */
-function oembed_insert_head_css($head){
+function oembed_insert_head_css($head) {
 	$head .= '<link rel="stylesheet" type="text/css" href="'.find_in_path('css/oembed.css').'" />'."\n";
 	return $head;
 }
@@ -24,9 +26,9 @@ function oembed_insert_head_css($head){
  * @return string
  */
 function oembed_insert_head($head) {
-	$service = "oembed.api/";
+	$service = 'oembed.api/';
 
-	$ins = '<link rel="alternate" type="application/json+oembed" href="<?php include_spip(\'inc/filtres_mini\');echo parametre_url(url_absolue("'.parametre_url($service,'format','json').'"),"url",url_absolue(self()));?>" />'."\n";
+	$ins = '<link rel="alternate" type="application/json+oembed" href="<?php include_spip(\'inc/filtres_mini\');echo parametre_url(url_absolue("'.parametre_url($service, 'format', 'json').'"), "url", url_absolue(self()));?>" />'."\n";
 	/*
 	$ins .= '<link rel="alternate" type="text/xml+oembed" href="<?php echo parametre_url(url_absolue("'.parametre_url($service,'format','xml').'"),"url",url_absolue(self()));?>" />'."\n";
 	*/
@@ -40,11 +42,12 @@ function oembed_insert_head($head) {
  * @param $flux
  * @return
  */
-function oembed_formulaire_charger($flux){
-	if ($flux['args']['form']=='editer_document'){
+function oembed_formulaire_charger($flux) {
+	if ($flux['args']['form']=='editer_document') {
 		if ($flux['data']['oembed']
-		  AND !isset($flux['data']['apercu']))
+			and !isset($flux['data']['apercu'])) {
 			$flux['data']['_inclus'] = 'embed';
+		}
 	}
 	return $flux;
 }
@@ -54,19 +57,19 @@ function oembed_formulaire_charger($flux){
  * @param $flux
  * @return array
  */
-function oembed_recuperer_fond($flux){
-	if ($flux['args']['fond']=='formulaires/inc-upload_document'){
+function oembed_recuperer_fond($flux) {
+	if ($flux['args']['fond'] == 'formulaires/inc-upload_document') {
 		include_spip('inc/oembed');
 		$providers = oembed_lister_providers();
 		$hosts = array();
-		foreach($providers as $scheme=>$endpoint){
-			$h = parse_url($scheme,PHP_URL_HOST);
-			$hosts[trim(preg_replace(",^(\*|www)\.,i","",$h))]=true;
+		foreach ($providers as $scheme => $endpoint) {
+			$h = parse_url($scheme, PHP_URL_HOST);
+			$hosts[trim(preg_replace(',^(\*|www)\.,i', '', $h))] = true;
 		}
-		$hosts = implode(', ',array_keys($hosts));
-		$i = _T('oembed:explication_upload_url',array('hosts'=>$hosts));
+		$hosts = implode(', ', array_keys($hosts));
+		$i = _T('oembed:explication_upload_url', array('hosts' => $hosts));
 		$i = "<p class='explication small'>$i</p>";
-		$flux['data'] = str_replace($t="<!--editer_url-->",$t.$i,$flux['data']);
+		$flux['data'] = str_replace($t = '<!--editer_url-->', $t. $i, $flux['data']);
 	}
 	return $flux;
 }
@@ -84,12 +87,12 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
-	if ($data = oembed_recuperer_data($flux['source'])){
+	if ($data = oembed_recuperer_data($flux['source'])) {
 		// si on a recupere une URL c'est direct un doc distant
 		if (isset($data['url'])
-			AND $data['type']!=='rich'
+			and $data['type'] !== 'rich'
 			// on recupere les infos du document distant
-			AND $doc = recuperer_infos_distantes($data['url'])) {
+			and $doc = recuperer_infos_distantes($data['url'])) {
 			unset($doc['body']);
 			$doc['distant'] = 'oui';
 			$doc['mode'] = 'document';
@@ -98,24 +101,25 @@ function oembed_renseigner_document_distant($flux) {
 			$doc['oembed'] = $flux['source'];
 			$doc['titre'] = $data['title'];
 			$doc['credits'] = $data['author_name'];
-			if (isset($data['media']))
+			if (isset($data['media'])) {
 				$doc['media'] = $data['media'];
-			elseif (isset($medias[$data['type']]))
+			} elseif (isset($medias[$data['type']])) {
 				$doc['media'] = $medias[$data['type']];
+			}
 			return $doc;
-		}
-		elseif(isset($data['html']) OR $data['type']=='link'){
-			if ($data['type']=='link')
-				$data['html'] = '<a href="' . $flux['source'] . '">' . sinon($data['title'],$flux['source']) . '</a>';
+		} elseif (isset($data['html']) or $data['type'] == 'link') {
+			if ($data['type']=='link') {
+				$data['html'] = '<a href="' . $flux['source'] . '">' . sinon($data['title'], $flux['source']) . '</a>';
+			}
 			// créer une copie locale du contenu html
 			// cf recuperer_infos_distantes()
 			// generer un nom de fichier unique : on l'index sur l'id du prochain document + uniqid
-			$id = sql_getfetsel("id_document","spip_documents","","","id_document DESC","0,1");
-			include_spip("inc/acces");
+			$id = sql_getfetsel('id_document', 'spip_documents', '', '', 'id_document DESC', '0,1');
+			include_spip('inc/acces');
 			$id = "id$id-".creer_uniqid();
-			$id = substr(md5($id),0,7);
-			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], "html");
-			$doc['fichier'] = preg_replace(",\.html$,i","-$id.html",$doc['fichier']);
+			$id = substr(md5($id), 0, 7);
+			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], 'html');
+			$doc['fichier'] = preg_replace(',\.html$,i', "-$id.html", $doc['fichier']);
 			ecrire_fichier($doc['fichier'], $data['html']);
 			// set_spip_doc() pour récupérer le chemin du fichier relatif a _DIR_IMG
 			$doc['fichier'] = set_spip_doc($doc['fichier']);
@@ -126,10 +130,11 @@ function oembed_renseigner_document_distant($flux) {
 			$doc['oembed'] = $flux['source'];
 			$doc['titre'] = $data['title'];
 			$doc['credits'] = $data['author_name'];
-			if (isset($data['media']))
+			if (isset($data['media'])) {
 				$doc['media'] = $data['media'];
-			elseif (isset($medias[$data['type']]))
+			} elseif (isset($medias[$data['type']])) {
 				$doc['media'] = $medias[$data['type']];
+			}
 			return $doc;
 		}
 	}
@@ -145,19 +150,18 @@ function oembed_renseigner_document_distant($flux) {
  * @return array
  */
 function oembed_post_edition($flux) {
-	if ($flux['args']['action']=='ajouter_document' AND !empty($flux['data']['oembed'])){
+	if ($flux['args']['action']=='ajouter_document' and !empty($flux['data']['oembed'])) {
 		$id_document = $flux['args']['id_objet'];
-		if ($data = oembed_recuperer_data($flux['data']['oembed'])){
+		if ($data = oembed_recuperer_data($flux['data']['oembed'])) {
 			// vignette disponible ? la recupérer et l'associer au document
-			if (
-			     (isset($data['thumbnail_url']) AND $v=$data['thumbnail_url'])
-			  OR (isset($data['image']) AND $v=$data['image'])
+			if ((isset($data['thumbnail_url']) and $v = $data['thumbnail_url'])
+				or (isset($data['image']) and $v = $data['image'])
 			) {
-				spip_log('ajout de la vignette '.$v.' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
+				spip_log('ajout de la vignette '.$v.' pour '.$flux['data']['oembed'], 'oembed.'._LOG_DEBUG);
 				// cf formulaires_illustrer_document_traiter_dist()
 				$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 				$files = false;
-				if (preg_match(",^(\w+:)?//,",$v)){
+				if (preg_match(',^(\w+:)?//,', $v)) {
 					$files = array(
 						array(
 							'name' => basename($v),
@@ -165,23 +169,22 @@ function oembed_post_edition($flux) {
 							'distant' => true,
 						)
 					);
-				}
-				elseif (file_exists($v)) {
+				} elseif (file_exists($v)) {
 					$files = array(array(
 						'name' => basename($v),
 						'tmp_name' => $v
 					));
 				}
 				if ($files
-					AND $ajoute = action_ajouter_documents_dist('new',$files,'',0,'vignette')
-				  AND intval(reset($ajoute))){
+					and $ajoute = action_ajouter_documents_dist('new', $files, '', 0, 'vignette')
+					and intval(reset($ajoute))) {
 					$id_vignette = reset($ajoute);
 					include_spip('action/editer_document');
-					document_modifier($id_document,array("id_vignette" => $id_vignette));
+					document_modifier($id_document, array('id_vignette' => $id_vignette));
 				}
+			} else {
+				spip_log('pas de vignette pour '.$flux['data']['oembed'], 'oembed.'._LOG_DEBUG);
 			}
-			else
-				spip_log('pas de vignette pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 		}
 	}
 	return $flux;
@@ -198,30 +201,28 @@ function oembed_pre_propre($texte) {
 
 	// si oembed/embed_auto==oui on oembed les liens qui sont tous seuls sur une ligne
 	// (mais jamais les liens inline dans le texte car ca casse trop l'ancien contenu)
-	if (stripos($texte,"<a")!==false
-	  AND stripos($texte,"auto")!==false
-	  AND stripos($texte,"spip_out")!==false
-		AND lire_config('oembed/embed_auto','oui')!='non'
-	  AND strpos($texte,"\n")!==false) {
-		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims",trim($texte),$matches,PREG_SET_ORDER);
-		if (count($matches)){
-
+	if (stripos($texte, '<a') !== false
+		and stripos($texte, 'auto') !== false
+		and stripos($texte, 'spip_out') !== false
+		and lire_config('oembed/embed_auto', 'oui') != 'non'
+		and strpos($texte, '\n') !== false) {
+		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims", trim($texte), $matches, PREG_SET_ORDER);
+		if (count($matches)) {
 			$replace = array();
-
 			include_spip('inc/oembed');
 			foreach ($matches as $match) {
 				if (!isset($replace[$match[0]])
-				  AND preg_match(',\bauto\b,', extraire_attribut($match[2], 'class'))
-				  AND !is_null($emb = oembed_embarquer_lien($match[2]))) {
-					if ($wrap_embed_html = charger_fonction("wrap_embed_html","inc",true)){
+					and preg_match(',\bauto\b,', extraire_attribut($match[2], 'class'))
+					and !is_null($emb = oembed_embarquer_lien($match[2]))) {
+					if ($wrap_embed_html = charger_fonction('wrap_embed_html', 'inc', true)) {
 						$emb = $wrap_embed_html($match[2],$emb);
 					}
 					$replace[$match[0]] = $match[1] . echappe_html("<html>$emb</html>") . $match[3];
 				}
 			}
-
-			if (count($replace))
+			if (count($replace)) {
 				$texte = str_replace(array_keys($replace), array_values($replace), $texte);
+			}
 		}
 	}
 	return $texte;
@@ -252,8 +253,9 @@ function oembed_pre_liens($t) {
 		$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
 
 		// echapper les autoliens eventuellement inseres (en une seule fois)
-		if (strpos($t,"<html>")!==false)
+		if (strpos($t, '<html>') !== false) {
 			$t = echappe_html($t);
+		}
 	}
 	return $t;
 }
@@ -261,5 +263,8 @@ function oembed_pre_liens($t) {
 
 
 include_spip('inc/config');
-if (!function_exists('lire_config')) { function lire_config($a=null,$b=null) { return $b; } }
-
+if (!function_exists('lire_config')) {
+	function lire_config($a = null, $b = null) {
+		return $b;
+	}
+}

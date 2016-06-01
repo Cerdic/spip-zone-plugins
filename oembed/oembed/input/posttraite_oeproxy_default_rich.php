@@ -5,9 +5,11 @@
  *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function oembed_input_posttraite_oeproxy_default_rich_dist($data, $url){
+function oembed_input_posttraite_oeproxy_default_rich_dist($data, $url) {
 
 	#$data['html'] = "<blockquote class='spip oe-cite' cite='$url'>".$data['html']."</blockquote>";
 

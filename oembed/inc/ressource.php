@@ -2,22 +2,23 @@
 
 /*
  * transforme un raccourci de ressource en un joli html a embed
- * 
+ *
  *
  */
 
 define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',UimsS');
 
 function traiter_ressources($r) {
-	if ($ressource = charger_fonction('ressource', 'inc', true))
+	if ($ressource = charger_fonction('ressource', 'inc', true)) {
 		$html = $ressource($r[0]);
-	else
+	} else {
 		$html = htmlspecialchars($r[0]);
+	}
 
 	return '<html>'.$html.'</html>';
 }
 
-function inc_ressource_dist($html){
+function inc_ressource_dist($html) {
 	return tw_traiter_ressources(array(0=>$html));
 }
 
@@ -29,18 +30,18 @@ function tw_traiter_ressources($r) {
 	$url = $url[0];
 	# <http://url/absolue>
 	if (preg_match(',^https?://,i', $url)) {
-		$html = PtoBR(propre("<span class='ressource spip_out'>&lt;[->" . $url . "]&gt;</span>"));
+		$html = PtoBR(propre("<span class='ressource spip_out'>&lt;[->" . $url . ']&gt;</span>'));
 	} # <url/relative>
 	else {
 		if (false !== strpos($url, '/')) {
-			$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[->" . $url . "]&gt;</span>"));
+			$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[->" . $url . ']&gt;</span>'));
 		} # <fichier.rtf>
 		else {
 			preg_match(',\.([^.]+)$,', $url, $regs);
 			if (file_exists($f = _DIR_IMG . $regs[1] . '/' . $url)) {
-				$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[" . $url . "->" . $f . "]&gt;</span>"));
+				$html = PtoBR(propre("<span class='ressource spip_in'>&lt;[" . $url . '->' . $f . ']&gt;</span>'));
 			} else {
-				$html = PtoBR(propre("<span class='ressource'>&lt;" . $url . "&gt;</span>"));
+				$html = PtoBR(propre("<span class='ressource'>&lt;" . $url . '&gt;</span>'));
 			}
 		}
 	}
