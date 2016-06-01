@@ -16,7 +16,7 @@ function agenda_autoriser() {
 }
 
 function autoriser_evenementcreer_menu_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
-	autoriser('creer', 'evenement', $id, $qui, $opt);
+	return autoriser('creer', 'evenement', $id, $qui, $opt);
 }
 
 function autoriser_evenements_menu_dist($faire, $type = '', $id = 0, $qui = null, $opt = null) {
