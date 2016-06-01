@@ -7,7 +7,9 @@
  * Auteurs : cf paquet.xml
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('public/agenda');
 include_spip('inc/agenda_filtres'); // deprecies mais encore supportes pour le moment
@@ -22,9 +24,9 @@ include_spip('inc/agenda_filtres'); // deprecies mais encore supportes pour le m
  *   format de sortie de la date
  * @return string
  */
-function agenda_dateplus($date,$secondes,$format="Y-m-d H:i:s"){
+function agenda_dateplus($date, $secondes, $format = 'Y-m-d H:i:s') {
 	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
-	return date($format,$date);
+	return date($format, $date);
 }
 
 /**
@@ -37,19 +39,27 @@ function agenda_dateplus($date,$secondes,$format="Y-m-d H:i:s"){
  * @param string $format
  * @return string
  */
-function agenda_moisdecal($date,$decalage,$format="Y-m-d H:i:s"){
+function agenda_moisdecal($date, $decalage, $format = 'Y-m-d H:i:s') {
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
-	if ($date_array) list($annee, $mois, $jour) = $date_array;
-	if (!$jour) $jour=1;
-	if (!$mois) $mois=1;
+	if ($date_array) {
+		list($annee, $mois, $jour) = $date_array;
+	}
+	if (!$jour) {
+		$jour = 1;
+	}
+	if (!$mois) {
+		$mois = 1;
+	}
 	$mois2 = $mois + $decalage;
 	$date2 = mktime(1, 1, 1, $mois2, $jour, $annee);
 	// mois normalement attendu
 	$mois3 = date('m', mktime(1, 1, 1, $mois2, 1, $annee));
 	// et si le mois de la nouvelle date a moins de jours...
 	$mois2 = date('m', $date2);
-	if ($mois2 - $mois3) $date2 = mktime(1, 1, 1, $mois2, 0, $annee);
+	if ($mois2 - $mois3) {
+		$date2 = mktime(1, 1, 1, $mois2, 0, $annee);
+	}
 	return date($format, $date2);
 }
 
@@ -62,12 +72,18 @@ function agenda_moisdecal($date,$decalage,$format="Y-m-d H:i:s"){
  * @param string $format
  * @return string
  */
-function agenda_jourdecal($date,$decalage,$format="Y-m-d H:i:s"){
+function agenda_jourdecal($date, $decalage, $format = 'Y-m-d H:i:s') {
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
-	if ($date_array) list($annee, $mois, $jour) = $date_array;
-	if (!$jour) $jour=1;
-	if (!$mois) $mois=1;
+	if ($date_array) {
+		list($annee, $mois, $jour) = $date_array;
+	}
+	if (!$jour) {
+		$jour = 1;
+	}
+	if (!$mois) {
+		$mois = 1;
+	}
 	$jour2 = $jour + $decalage;
 	$date2 = mktime(1, 1, 1, $mois, $jour2, $annee);
 	return date($format, $date2);
@@ -82,11 +98,12 @@ function agenda_jourdecal($date,$decalage,$format="Y-m-d H:i:s"){
  *   date de reference, par defaut celle du serveur (argument utile pour les tests unitaires)
  * @return string
  */
-function agenda_date_a_venir($date_test,$date_ref=null){
-	if (is_null($date_ref))
+function agenda_date_a_venir($date_test, $date_ref = null) {
+	if (is_null($date_ref)) {
 		$date_ref = $_SERVER['REQUEST_TIME'];
-	else
+	} else {
 		$date_ref = strtotime($date_ref);
+	}
 
 	return (strtotime($date_test)>$date_ref)?' ':'';
 }
@@ -101,13 +118,14 @@ function agenda_date_a_venir($date_test,$date_ref=null){
  *   date de reference, par defaut celle du serveur (argument utile pour les tests unitaires)
  * @return string
  */
-function agenda_date_passee($date_test,$date_ref=null){
-	if (is_null($date_ref))
+function agenda_date_passee($date_test, $date_ref = null) {
+	if (is_null($date_ref)) {
 		$date_ref = $_SERVER['REQUEST_TIME'];
-	else
+	} else {
 		$date_ref = strtotime($date_ref);
+	}
 
-	return (strtotime($date_test)<$date_ref)?' ':'';
+	return (strtotime($date_test) < $date_ref) ? ' ' : '';
 }
 
 /**
@@ -117,44 +135,44 @@ function agenda_date_passee($date_test,$date_ref=null){
  * @param string $affichage_debut
  * @return string
  */
-function agenda_date_debut_liste($date,$affichage_debut='date_jour'){
-	switch($affichage_debut){
-		case 'date_jour' :
+function agenda_date_debut_liste($date, $affichage_debut = 'date_jour') {
+	switch ($affichage_debut) {
+		case 'date_jour':
 			break;
-		case 'date_veille' :
+		case 'date_veille':
 			$date = agenda_jourdecal($date, -1);
 			break;
-		case 'debut_semaine' :
+		case 'debut_semaine':
 			$t = strtotime($date);
 			$date = agenda_jourdecal($date, -(date('N', $t)-1));
 			break;
-		case 'debut_semaine_prec' :
+		case 'debut_semaine_prec':
 			$t = strtotime($date);
 			$date = agenda_jourdecal($date, -(date('N', $t)-1+7));
 			break;
-		case 'debut_mois' :
+		case 'debut_mois':
 			$t = strtotime($date);
 			$date = agenda_jourdecal($date, -(date('j', $t)-1));
 			break;
-		case 'debut_mois_prec' :
+		case 'debut_mois_prec':
 			$t = strtotime($date);
 			$date = agenda_jourdecal($date, -(date('j', $t)-1)); // debut de mois
 			$date = agenda_moisdecal($date, -1); // precedent
 			break;
-		case 'debut_mois_1' :
-		case 'debut_mois_2' :
-		case 'debut_mois_3' :
-		case 'debut_mois_4' :
-		case 'debut_mois_5' :
-		case 'debut_mois_6' :
-		case 'debut_mois_7' :
-		case 'debut_mois_8' :
-		case 'debut_mois_9' :
-		case 'debut_mois_10' :
-		case 'debut_mois_11' :
-		case 'debut_mois_12' :
+		case 'debut_mois_1':
+		case 'debut_mois_2':
+		case 'debut_mois_3':
+		case 'debut_mois_4':
+		case 'debut_mois_5':
+		case 'debut_mois_6':
+		case 'debut_mois_7':
+		case 'debut_mois_8':
+		case 'debut_mois_9':
+		case 'debut_mois_10':
+		case 'debut_mois_11':
+		case 'debut_mois_12':
 			$t = strtotime($date);
-			$mdebut = intval(substr($affichage_debut,strlen('debut_mois_')));
+			$mdebut = intval(substr($affichage_debut, strlen('debut_mois_')));
 			$mcourant = date('n', $t);
 			$offset = ($mcourant-$mdebut+12)%12;
 			$date = agenda_jourdecal($date, -(date('j', $t)-1)); // debut de mois
@@ -176,14 +194,16 @@ function agenda_date_debut_liste($date,$affichage_debut='date_jour'){
  * @param string $affichage_debut
  * @return string
  */
-function affdate_periode($date,$nb_mois,$affichage_debut='date_jour'){
-	$fixe = in_array($affichage_debut,array('debut_mois_1','debut_mois_2','debut_mois_3','debut_mois_4','debut_mois_5','debut_mois_6','debut_mois_7','debut_mois_8','debut_mois_9','debut_mois_10','debut_mois_11','debut_mois_12'));
-	if ($nb_mois==1)
+function affdate_periode($date, $nb_mois, $affichage_debut = 'date_jour') {
+	$fixe = in_array($affichage_debut, array('debut_mois_1', 'debut_mois_2', 'debut_mois_3', 'debut_mois_4', 'debut_mois_5', 'debut_mois_6', 'debut_mois_7', 'debut_mois_8', 'debut_mois_9', 'debut_mois_10', 'debut_mois_11', 'debut_mois_12'));
+	if ($nb_mois == 1) {
 		return affdate_mois_annee($date);
-	if ($nb_mois==12 AND mois($date)==1)
+	}
+	if ($nb_mois == 12 and mois($date) == 1) {
 		return ($fixe?_T('agenda:label_annee').' ':'').annee($date);
+	}
 
-	return ($fixe?_T('agenda:label_periode_saison').' ':'').affdate_mois_annee($date)." - ".affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
+	return ($fixe?_T('agenda:label_periode_saison').' ':'').affdate_mois_annee($date).' - '.affdate_mois_annee(agenda_moisdecal($date, $nb_mois-1));
 }
 
 /**
@@ -193,5 +213,3 @@ function affdate_periode($date,$nb_mois,$affichage_debut='date_jour'){
 function generer_url_evenement($id, $args='', $ancre='') {
 	return array('evenement', $id);
 }*/
-
-?>

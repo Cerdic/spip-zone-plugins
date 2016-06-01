@@ -7,7 +7,9 @@
  * Auteurs : cf paquet.xml
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -16,17 +18,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $interface
  * @return array
  */
-function agenda_declarer_tables_interfaces($interface){
+function agenda_declarer_tables_interfaces($interface) {
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['evenements']='evenements';
-	
+
 	$interface['table_des_traitements']['LIEU'][]= 'expanser_liens('._TRAITEMENT_TYPO.')';
 	$interface['table_des_traitements']['ADRESSE'][]= _TRAITEMENT_RACCOURCIS;
-	
+
 	// permet d'utiliser les criteres racine, meme_parent, id_parent
 	$interface['exceptions_des_tables']['evenements']['id_parent']='id_evenement_source';
 	$interface['exceptions_des_tables']['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
-		
+
 	return $interface;
 }
 
@@ -35,24 +37,24 @@ function agenda_declarer_tables_interfaces($interface){
  * @param array $tables_auxiliaires
  * @return array
  */
-function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
+function agenda_declarer_tables_auxiliaires($tables_auxiliaires) {
 
 	//-- Table des participants ----------------------
 	$spip_evenements_participants = array(
-			"id_evenement_participant" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
-			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-			"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-			"nom"	=> "text NOT NULL DEFAULT ''",
-			"email"	=> "tinytext NOT NULL DEFAULT ''",
-			"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"reponse" => "char(3) default '?' NOT NULL", // oui, non, ?
-			);
-	
+		'id_evenement_participant' => 'BIGINT(21) NOT NULL AUTO_INCREMENT',
+		'id_evenement'	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		'id_auteur'	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		'nom'	=> "text NOT NULL DEFAULT ''",
+		'email'	=> "tinytext NOT NULL DEFAULT ''",
+		'date' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		'reponse' => "char(3) default '?' NOT NULL", // oui, non, ?
+	);
+
 	$spip_evenements_participants_key = array(
-			"PRIMARY KEY"	=> "id_evenement_participant",
-			"KEY id_evenement"	=> "id_evenement",
-			"KEY id_auteur"	=> "id_auteur");
-	
+			'PRIMARY KEY'	=> 'id_evenement_participant',
+			'KEY id_evenement'	=> 'id_evenement',
+			'KEY id_auteur'	=> 'id_auteur');
+
 	$tables_auxiliaires['spip_evenements_participants'] = array(
 		'field' => &$spip_evenements_participants,
 		'key' => &$spip_evenements_participants_key);
@@ -66,7 +68,7 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
  * @param array $tables
  * @return array
  */
-function agenda_declarer_tables_objets_sql($tables){
+function agenda_declarer_tables_objets_sql($tables) {
 	$tables['spip_evenements'] = array(
 		'page'=>'evenement',
 		'texte_retour' => 'icone_retour',
@@ -83,31 +85,31 @@ function agenda_declarer_tables_objets_sql($tables){
 		'principale' => 'oui',
 		'champs_editables' => array('date_debut', 'date_fin', 'titre', 'descriptif','lieu', 'adresse', 'inscription', 'places', 'horaire'),
 		'field'=> array(
-			"id_evenement"	=> "bigint(21) NOT NULL",
-			"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-			"date_debut"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"date_fin"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"titre"	=> "text NOT NULL DEFAULT ''",
-			"descriptif"	=> "text NOT NULL DEFAULT ''",
-			"lieu"	=> "text NOT NULL DEFAULT ''",
-			"adresse"	=> "text NOT NULL DEFAULT ''",
-			"inscription" => "tinyint(1) DEFAULT 0 NOT NULL",
-			"places" => "int(11) DEFAULT 0 NOT NULL",
-			"horaire" => "varchar(3) DEFAULT 'oui' NOT NULL",
-			"id_evenement_source"	=> "bigint(21) NOT NULL",
-			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-			"maj"	=> "TIMESTAMP",
-			"date_creation"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+			'id_evenement'	=> 'bigint(21) NOT NULL',
+			'id_article'	=> "bigint(21) DEFAULT '0' NOT NULL",
+			'date_debut'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			'date_fin'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			'titre'	=> "text NOT NULL DEFAULT ''",
+			'descriptif'	=> "text NOT NULL DEFAULT ''",
+			'lieu'	=> "text NOT NULL DEFAULT ''",
+			'adresse'	=> "text NOT NULL DEFAULT ''",
+			'inscription' => 'tinyint(1) DEFAULT 0 NOT NULL',
+			'places' => 'int(11) DEFAULT 0 NOT NULL',
+			'horaire' => "varchar(3) DEFAULT 'oui' NOT NULL",
+			'id_evenement_source'	=> 'bigint(21) NOT NULL',
+			'statut'	=> "varchar(10) DEFAULT '0' NOT NULL",
+			'maj'	=> 'TIMESTAMP',
+			'date_creation'	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"	=> "id_evenement",
-			"KEY date_debut"	=> "date_debut",
-			"KEY date_fin"	=> "date_fin",
-			"KEY id_article"	=> "id_article"
+			'PRIMARY KEY'	=> 'id_evenement',
+			'KEY date_debut'	=> 'date_debut',
+			'KEY date_fin'	=> 'date_fin',
+			'KEY id_article'	=> 'id_article'
 		),
 		'join' => array(
-			"id_evenement"=>"id_evenement",
-			"id_article"=>"id_article"
+			'id_evenement' => 'id_evenement',
+			'id_article' => 'id_article'
 		),
 		'tables_jointures' => array(
 			'articles',
@@ -149,6 +151,3 @@ function agenda_declarer_tables_objets_sql($tables){
 
 	return $tables;
 }
-
-
-?>
