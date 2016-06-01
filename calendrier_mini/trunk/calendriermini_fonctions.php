@@ -48,7 +48,6 @@ function calendriermini_intervalle($start, $end = false) {
 	if (!$end) {
 		return $jours;
 	}
-	$endtime = strtotime($end);
 	$enddate = date('Y-m-d', strtotime($end));
 	$starttime = $starttime + (3600*24);
 	while (($date_test = date('Y-m-d', $starttime)) < $enddate) {
