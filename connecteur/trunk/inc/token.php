@@ -55,6 +55,17 @@ function connecteur_save_token($id_auteur, $type, $token) {
  * @access public
  */
 function connecteur_get_token($id_auteur, $type) {
+
+	// Afin de prévenir des problèmes de nom de class type "__PHP_Incomplete_Class_Name"
+	// On va charger l'éventuel fichier référencé dans la config du plugin
+	$connecteur_config = charger_fonction($type.'_config', 'connecteur');
+	$config = $connecteur_config();
+
+	if (isset($config['charger_fichier'])) {
+		include_spip($config['charger_fichier']);
+	}
+
+	// Récupérer le token
 	$token = sql_getfetsel(
 		'token',
 		'spip_connecteur',
