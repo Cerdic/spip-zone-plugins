@@ -4,17 +4,17 @@
  * Licence GPL (c) 2006-2008 Cedric Morin
  *
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-function action_supprimer_zone_dist(){
-	$securiser_action = charger_fonction('securiser_action','inc');
-	$arg = $securiser_action();
-	
-	if ($id_zone = intval($arg)
-	 AND autoriser('supprimer','zone',$id_zone)) {
-	 	include_spip('action/editer_zone');
-	 	zone_supprimer($id_zone);
-	}
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
 
-?>
+function action_supprimer_zone_dist() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if ($id_zone = intval($arg)
+		and autoriser('supprimer', 'zone', $id_zone)) {
+		include_spip('action/editer_zone');
+		zone_supprimer($id_zone);
+	}
+}

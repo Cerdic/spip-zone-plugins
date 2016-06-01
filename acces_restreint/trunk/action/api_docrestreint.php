@@ -10,13 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/headers');
 
 /**
  * Acces aux documents joints securise
- * 
+ *
  * verifie soit que le demandeur est authentifie
  * soit que le document est publie, c'est-a-dire
  * joint a au moins 1 article, breve ou rubrique publie
@@ -26,16 +28,16 @@ include_spip('inc/headers');
  *
  * @pipeline_appel accesrestreint_repertoires_toujours_autorises
  * @pipeline_appel accesrestreint_pre_vue_document
- * 
+ *
  * @param null $arg
  */
-function action_api_docrestreint_dist($arg=null) {
+function action_api_docrestreint_dist($arg = null) {
 
 	// Obtenir l'argument '{id_document}/{cle_action}/{chemin_fichier.ext}'
 	if (is_null($arg)) {
 		$arg = _request('arg');
 	}
-	$arg = explode("/", $arg);
+	$arg = explode('/', $arg);
 
 	// Supprimer et vider les buffers qui posent des problemes de memory limit
 	accesrestreint_vider_buffers();
@@ -51,14 +53,14 @@ function action_api_docrestreint_dist($arg=null) {
 	// file ($f) exige pour eviter le scan id_document par id_document
 	$id_document = intval(array_shift($arg));
 	$cle         = array_shift($arg);
-	$f           = implode("/", $arg);
+	$f           = implode('/', $arg);
 
 	// Objet reprenant toutes les infos connues
 	$Document = new Accesrestreint_document($f, $id_document, $cle);
 
 	// Simple test de fonctionnement ?
 	if ($Document->est_un_test()) {
-		echo "OK";
+		echo 'OK';
 		return;
 	}
 
@@ -70,7 +72,7 @@ function action_api_docrestreint_dist($arg=null) {
 	}
 
 	// inexistant ou non lisible : 404
-	if (!$Document->est_existant() OR !$Document->est_lisible()) {
+	if (!$Document->est_existant() or !$Document->est_lisible()) {
 		$Document->status = 404;
 		accesrestreint_afficher_document_selon_status($Document);
 		return;
@@ -94,9 +96,9 @@ function action_api_docrestreint_dist($arg=null) {
 	 * Particulièrement pour donner le status http qui convient pour ce document.
 	 *
 	 * Si ce 'status' est renseigné par un plugin : on affiche le document (ou l'erreur) avec le statut trouvé
-	 * 
+	 *
 	 * Sinon, il sera calculé automatiquement ensuite :
-	 * 
+	 *
 	 * - si le document ne fait pas partie de spip_documents : 404
 	 * - sinon, test d'autorisation de voir ce document (par clé d'action si indiquée, sinon par l'api autoriser)
 	**/
@@ -122,7 +124,7 @@ function action_api_docrestreint_dist($arg=null) {
 	$ETag = $Document->get_Etag();
 
 	if (isset($_SERVER['HTTP_IF_NONE_MATCH'])
-	  AND $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag) {
+		and $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag) {
 		$Document->status = 304; // Not modified
 		accesrestreint_afficher_document_selon_status($Document);
 		exit;
@@ -143,16 +145,16 @@ function action_api_docrestreint_dist($arg=null) {
  * Supprimer et vider les buffers qui posent des problemes de memory limit
  *
  * @link http://www.php.net/manual/en/function.readfile.php#81032
- * 
+ *
  * @return void
 **/
 function accesrestreint_vider_buffers() {
-	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
-	@ini_set("output_buffering","off");
+	@ini_set('zlib.output_compression', '0'); // pour permettre l'affichage au fur et a mesure
+	@ini_set('output_buffering', 'off');
 	@ini_set('implicit_flush', 1);
 	@ob_implicit_flush(1);
 	$level = ob_get_level();
-	while ($level--){
+	while ($level--) {
 		@ob_end_clean();
 	}
 }
@@ -168,7 +170,6 @@ function accesrestreint_vider_buffers() {
 **/
 function accesrestreint_afficher_document_selon_status(Accesrestreint_document $Document) {
 	switch ($Document->status) {
-
 		case 304:
 		case 403:
 		case 404:
@@ -190,9 +191,7 @@ function accesrestreint_afficher_document_selon_status(Accesrestreint_document $
  * @return void
 **/
 function accesrestreint_afficher_erreur_document($status = 404) {
-
-	switch ($status)
-	{
+	switch ($status) {
 		case 304:
 			// not modified : sortir de suite !
 			http_status(304);
@@ -200,13 +199,13 @@ function accesrestreint_afficher_erreur_document($status = 404) {
 
 		case 403:
 			include_spip('inc/minipres');
-			echo minipres("","","",true);
+			echo minipres('', '', '', true);
 			break;
 
 		case 404:
 			http_status(404);
 			include_spip('inc/minipres');
-			echo minipres(_T('erreur') . ' 404', _T('medias:info_document_indisponible'), "", true);
+			echo minipres(_T('erreur') . ' 404', _T('medias:info_document_indisponible'), '', true);
 			break;
 	}
 }
@@ -224,7 +223,7 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 	$chemin_fichier = $Document->get_chemin_complet_fichier();
 
 	// toujours envoyer un content type, meme vide !
-	header("Content-Type: " . $Document->get_mime_type());
+	header('Content-Type: ' . $Document->get_mime_type());
 
 	// document décrit dans la table spip_documents ?
 	if ($doc = $Document->get_spip_document()) {
@@ -233,7 +232,7 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 			'args' => array('document' => $Document),
 			'data' => $doc,
 		));
-		
+
 		// pour les images ne pas passer en attachment
 		// sinon, lorsqu'on pointe directement sur leur adresse,
 		// le navigateur les downloade au lieu de les afficher
@@ -243,22 +242,21 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 			header('Content-Type: application/octet-stream');
 
 			header("Content-Disposition: attachment; filename=\"$f\";");
-			header("Content-Transfer-Encoding: binary");
+			header('Content-Transfer-Encoding: binary');
 
 			// fix for IE catching or PHP bug issue
-			header("Pragma: public");
-			header("Expires: 0"); // set expiration time
-			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			header('Pragma: public');
+			header('Expires: 0'); // set expiration time
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		} else {
-			header("Expires: 3600"); // set expiration time
+			header('Expires: 3600'); // set expiration time
 		}
 	} else {
-		header("Expires: 3600"); // set expiration time
+		header('Expires: 3600'); // set expiration time
 	}
 
-
 	if ($size = filesize($chemin_fichier)) {
-		header("Content-Length: ". $size);
+		header('Content-Length: '. $size);
 	}
 
 	readfile($chemin_fichier);
@@ -278,7 +276,7 @@ class Accesrestreint_document {
 	 * Identifiant du document demandé, si connu
 	 *
 	 * 0 si document inconnu.
-	 * 
+	 *
 	 * @var int
 	**/
 	private $id_document = 0;
@@ -288,30 +286,30 @@ class Accesrestreint_document {
 	 *
 	 * 0 si inconnue
 	 *
-	 * @var int|string 
+	 * @var int|string
 	**/
 	private $cle_action = 0;
 
 	/**
 	 * Chemin du fichier demandé, depuis IMG/
 	 *
-	 * @var string 
+	 * @var string
 	**/
-	private $_fichier = "";
+	private $_fichier = '';
 
 	/**
 	 * Status HTTP à utiliser pour ce document
 	 *
 	 * @var string|int
 	**/
-	public $status = "";
+	public $status = '';
 
 	/**
 	 * Mime type pour ce document
 	 *
 	 * @var string
 	**/
-	private $mime_type = "";
+	private $mime_type = '';
 
 
 	/**
@@ -323,7 +321,7 @@ class Accesrestreint_document {
 	 *     Identifiant du document, si connu
 	 * @param int|string $cle_action
 	 *     Clé d'action auteur, si connue
-	 * @return 
+	 * @return
 	**/
 	public function __construct($_fichier, $id_document = 0, $cle_action = 0) {
 		$this->_fichier = $_fichier;
@@ -355,33 +353,32 @@ class Accesrestreint_document {
 		return $this->cle_action;
 	}
 
-
 	/**
-	 * Test si le document demandé vérifie simplement le fonctionnement correct du .htaccess dans IMG posé par Acces Restreint
-	 * 
+	 * Test si le document demandé vérifie simplement le fonctionnement correct du .htaccess
+	 * dans IMG posé par Acces Restreint
+	 *
 	 * @see accesrestreint_gerer_htaccess()
-	 * 
+	 *
 	 * return bool
 	 *     True si document de test
 	 */
 	public function est_un_test() {
 		return  $this->id_document == 0
-			AND $this->cle_action == 1
-			AND $this->_fichier == "test/.test";
+			and $this->cle_action == 1
+			and $this->_fichier == 'test/.test';
 	}
-
 
 	/**
 	 * Test si le document demandé n'a pas un chemin d'accès sécurisé
 	 *
 	 * Par exemple avec ../ ou url absolue http://
-	 * 
+	 *
 	 * @return bool
 	 *     True si le chemin est insécurisé
 	**/
 	public function est_insecurise() {
 		return (strpos($this->_fichier, '../') !== false)
-			OR (preg_match(',^\w+://,', $this->_fichier));
+			or (preg_match(',^\w+://,', $this->_fichier));
 	}
 
 	/**
@@ -434,7 +431,7 @@ class Accesrestreint_document {
 	public function est_autorise() {
 		$doc = $this->get_spip_document();
 		if (!$doc) {
-			spip_log("acces interdit, document hors de spip_documents");
+			spip_log('acces interdit, document hors de spip_documents');
 			return false;
 		}
 
@@ -448,14 +445,14 @@ class Accesrestreint_document {
 			}
 			return true;
 		}
-		
+
 		// en verifiant le droit explicitement sinon, plus lent !
-		if (!function_exists("autoriser")) {
-			include_spip("inc/autoriser");
+		if (!function_exists('autoriser')) {
+			include_spip('inc/autoriser');
 		}
 
 		if (!autoriser('voir', 'document', $doc['id_document'])) {
-			spip_log("acces interdit, pas autorise a voir le document " . $doc['id_document']);
+			spip_log('acces interdit, pas autorise a voir le document ' . $doc['id_document']);
 			return false;
 		}
 
@@ -474,13 +471,13 @@ class Accesrestreint_document {
 		static $doc = null;
 		if (is_null($doc)) {
 			include_spip('inc/documents');
-			$where = "documents.fichier = ".sql_quote(set_spip_doc($this->get_chemin_complet_fichier()))
-				. ($this->id_document ? " AND documents.id_document=".intval($this->id_document): '');
+			$where = 'documents.fichier = '.sql_quote(set_spip_doc($this->get_chemin_complet_fichier()))
+				. ($this->id_document ? ' AND documents.id_document='.intval($this->id_document): '');
 			spip_log($where, 'dbg');
 
 			$doc = sql_fetsel(
-				"documents.*, types.mime_type, types.inclus",
-				"spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",
+				'documents.*, types.mime_type, types.inclus',
+				'spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension',
 				$where
 			);
 
@@ -540,14 +537,14 @@ class Accesrestreint_document {
 			return $this->mime_type;
 		}
 		if (!$calculer) {
-			return "";
+			return '';
 		}
 		if ($doc = $this->get_spip_document()) {
 			if ($doc['mime_type']) {
 				return $doc['mime_type'];
 			}
 		}
-		return "";
+		return '';
 	}
 
 	/**

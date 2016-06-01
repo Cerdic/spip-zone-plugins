@@ -5,7 +5,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -14,23 +16,21 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $flux
  * @return string
  */
-function accesrestreint_affiche_milieu($flux){
-	if (
-		($e = trouver_objet_exec($flux['args']['exec'])
-	  AND $e['type'] == 'auteur'
-	  AND $e['edition'] == false
-	  AND $id_auteur = $flux['args']['id_auteur'])
-	OR (
-		$flux['args']['exec'] == "infos_perso"
-		AND $id_auteur = $GLOBALS['visiteur_session']['id_auteur']
-		)){
-
-		$ins = recuperer_fond('prive/squelettes/inclure/acces_auteur',array('id_auteur'=>$id_auteur));
-		if (($p = strpos($flux['data'],"<!--affiche_milieu-->")) !== false)
-			$flux['data'] = substr_replace($flux['data'],$ins,$p,0);
-		else
+function accesrestreint_affiche_milieu($flux) {
+	if (($e = trouver_objet_exec($flux['args']['exec'])
+			and $e['type'] == 'auteur'
+			and $e['edition'] == false
+			and $id_auteur = $flux['args']['id_auteur'])
+		or (
+			$flux['args']['exec'] == 'infos_perso'
+			and $id_auteur = $GLOBALS['visiteur_session']['id_auteur']
+		)) {
+		$ins = recuperer_fond('prive/squelettes/inclure/acces_auteur', array('id_auteur' => $id_auteur));
+		if (($p = strpos($flux['data'], '<!--affiche_milieu-->')) !== false) {
+			$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
+		} else {
 			$flux['data'] .= $ins;
-		
+		}
 	}
 	return $flux;
 }
@@ -43,11 +43,11 @@ function accesrestreint_affiche_milieu($flux){
  */
 function accesrestreint_affiche_gauche($flux) {
 	if ($e = trouver_objet_exec($flux['args']['exec'])
-	  AND $e['type'] == 'rubrique'
-	  AND $e['edition'] == false
-	  AND $id_rubrique = $flux['args']['id_rubrique']){
+		and $e['type'] == 'rubrique'
+		and $e['edition'] == false
+		and $id_rubrique = $flux['args']['id_rubrique']) {
 		if (autoriser('administrer', 'zone', 0)) {
-			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/acces_rubrique', array('id_rubrique'=>$id_rubrique));
+			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/acces_rubrique', array('id_rubrique' => $id_rubrique));
 		}
 	}
 	return $flux;
@@ -60,9 +60,9 @@ function accesrestreint_affiche_gauche($flux) {
  * @param array $contexte
  * @return array
  */
-function accesrestreint_page_indisponible($contexte){
-	if ($contexte['status']=='404'){
-		$objet = "";
+function accesrestreint_page_indisponible($contexte) {
+	if ($contexte['status'] == '404') {
+		$objet = '';
 		if (isset($contexte['type'])) {
 			$objet = $contexte['type'];
 		} elseif (isset($contexte['type-page'])) {
@@ -78,35 +78,34 @@ function accesrestreint_page_indisponible($contexte){
 				$objet = $c2['type-page'];
 			}
 		}
-		if ($objet){
+		if ($objet) {
 			$table_sql = table_objet_sql($objet);
 			$id_table_objet = id_table_objet($objet);
-			if ($id = intval($contexte[$id_table_objet])){
-
+			if ($id = intval($contexte[$id_table_objet])) {
 				$publie = true;
-				if (include_spip("base/objets")
-				  AND function_exists("objet_test_si_publie")){
-					$publie = objet_test_si_publie($objet,$id);
-				}
-				else {
-					$trouver_table = charger_fonction('trouver_table','base');
+				if (include_spip('base/objets')
+					and function_exists('objet_test_si_publie')) {
+					$publie = objet_test_si_publie($objet, $id);
+				} else {
+					$trouver_table = charger_fonction('trouver_table', 'base');
 					$desc = $trouver_table($table_sql);
-					if (isset($desc['field']['statut'])){
+					if (isset($desc['field']['statut'])) {
 						$statut = sql_getfetsel('statut', $table_sql, "$id_table_objet=".intval($id));
-						if ($statut!='publie')
+						if ($statut!='publie') {
 							$publie = false;
+						}
 					}
 				}
 
 				include_spip('inc/autoriser');
-				if ($publie AND !autoriser('voir',$objet,$id)){
+				if ($publie and !autoriser('voir', $objet, $id)) {
 					// c'est un contenu restreint
 					$contexte['status'] = '401';
 					$contexte['code'] = '401 Unauthorized';
 					$contexte['fond'] = '401';
 					$contexte['erreur'] = _T('accesrestreint:info_acces_restreint');
 					$contexte['cible'] = self();
-					if (!isset($contexte['objet'])){
+					if (!isset($contexte['objet'])) {
 						$contexte['objet'] = $objet;
 						$contexte['id_objet'] = $id;
 					}
@@ -116,5 +115,3 @@ function accesrestreint_page_indisponible($contexte){
 	}
 	return $contexte;
 }
-
-?>

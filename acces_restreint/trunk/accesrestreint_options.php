@@ -5,16 +5,17 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
-if (isset($GLOBALS['meta']["accesrestreint_base_version"])){
+if (isset($GLOBALS['meta']['accesrestreint_base_version'])) {
 	// Si on n'est pas connecte, aucune autorisation n'est disponible
 	// pas la peine de sortir la grosse artillerie
-	if (!isset($GLOBALS['visiteur_session']['id_auteur'])){
+	if (!isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		$GLOBALS['accesrestreint_zones_autorisees'] = '';
-	}
-	else {
+	} else {
 		// Pipeline : calculer les zones autorisees, sous la forme '1,2,3'
 		// TODO : avec un petit cache pour eviter de solliciter la base de donnees
 		$GLOBALS['accesrestreint_zones_autorisees'] =
@@ -22,9 +23,9 @@ if (isset($GLOBALS['meta']["accesrestreint_base_version"])){
 	}
 
 	// Ajouter un marqueur de cache pour le differencier selon les autorisations
-	if (!isset($GLOBALS['marqueur'])) $GLOBALS['marqueur'] = '';
-	$GLOBALS['marqueur'] .= ":accesrestreint_zones_autorisees="
+	if (!isset($GLOBALS['marqueur'])) {
+		$GLOBALS['marqueur'] = '';
+	}
+	$GLOBALS['marqueur'] .= ':accesrestreint_zones_autorisees='
 		.$GLOBALS['accesrestreint_zones_autorisees'];
 }
-
-?>

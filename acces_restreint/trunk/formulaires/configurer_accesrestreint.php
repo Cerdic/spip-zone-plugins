@@ -5,9 +5,11 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_configurer_accesrestreint_charger_dist(){
+function formulaires_configurer_accesrestreint_charger_dist() {
 	include_spip('inc/config');
 	$valeurs = array(
 		'accesrestreint_proteger_documents' => lire_config('accesrestreint_proteger_documents', 'non'),
@@ -16,7 +18,7 @@ function formulaires_configurer_accesrestreint_charger_dist(){
 	return $valeurs;
 }
 
-function formulaires_configurer_accesrestreint_traiter_dist(){
+function formulaires_configurer_accesrestreint_traiter_dist() {
 
 	$champs = array('accesrestreint_proteger_documents','creer_htpasswd');
 
@@ -24,18 +26,18 @@ function formulaires_configurer_accesrestreint_traiter_dist(){
 	$old_config = lire_config('accesrestreint_proteger_documents');
 
 	foreach ($champs as $c) {
-		ecrire_config($c,_request($c)=='oui'?'oui':'non');
+		ecrire_config($c, _request($c) == 'oui' ? 'oui' : 'non');
 	}
 
 	// generer/supprimer les fichiers htaccess qui vont bien
-	include_spip("inc/accesrestreint_documents");
+	include_spip('inc/accesrestreint_documents');
 	$new_config = lire_config('accesrestreint_proteger_documents');
-	accesrestreint_gerer_htaccess($new_config == "oui");
+	accesrestreint_gerer_htaccess($new_config == 'oui');
 
 	// si le reglage du htaccess a change, purger le cache
 	if ($new_config !== $old_config) {
-		$purger = charger_fonction("purger", "action");
-		$purger("cache");
+		$purger = charger_fonction('purger', 'action');
+		$purger('cache');
 	}
 
 	return array('message_ok'=>_T('config_info_enregistree'), 'editable'=>true);

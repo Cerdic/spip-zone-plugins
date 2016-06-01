@@ -10,7 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/headers');
 
@@ -27,9 +29,7 @@ function action_acceder_document_dist() {
 	$arg = rawurldecode(_request('arg'));
 	$cle = _request('cle');
 
-	$api_docrestreint = charger_fonction("api_docrestreint","action");
+	$api_docrestreint = charger_fonction('api_docrestreint', 'action');
 	return $api_docrestreint("$arg/$cle/$f");
 
 }
-
-?>
