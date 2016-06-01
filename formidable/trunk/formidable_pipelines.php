@@ -2,22 +2,23 @@
 
 /**
  * Utilisation de pipelines
- * 
+ *
  * @package SPIP\Formidable\Pipelines
 **/
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-
-
-define('_RACCOURCI_MODELE_FORMIDABLE',
-	 '(<(formulaire\|formidable|formidable|form)' # <modele
+define(
+	'_RACCOURCI_MODELE_FORMIDABLE',
+	'(<(formulaire\|formidable|formidable|form)' # <modele
 	.'([0-9]*)\s*' # id
 	.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
 	.'>)' # fin du modele >
 	.'\s*(<\/a>)?' # eventuel </a>
-       );
+);
 
 /**
  * Ajouter la protection NoSpam de base a formidable (jeton)
@@ -25,7 +26,7 @@ define('_RACCOURCI_MODELE_FORMIDABLE',
  * @param $formulaires
  * @return array
  */
-function formidable_nospam_lister_formulaires($formulaires){
+function formidable_nospam_lister_formulaires($formulaires) {
 	$formulaires[] = 'formidable';
 	return $formulaires;
 }
@@ -35,28 +36,30 @@ function formidable_nospam_lister_formulaires($formulaires){
  * @param $texte
  * @return array
  */
-function formidable_trouve_liens($texte){
+function formidable_trouve_liens($texte) {
 	$formulaires = array();
-	if (preg_match_all(','._RACCOURCI_MODELE_FORMIDABLE.',ims', $texte, $regs, PREG_SET_ORDER)){
+	if (preg_match_all(','._RACCOURCI_MODELE_FORMIDABLE.',ims', $texte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $r) {
 			$id_formulaire = 0;
-			if ($r[2]=="formidable")
+			if ($r[2] == 'formidable') {
 				$id_formulaire = $r[3];
-			elseif ($r[2]=="form")
-				$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires","identifiant=".sql_quote("form".$r[3]));
-			elseif ($r[2]=="formulaire|formidable"){
-				$args = ltrim($r[4],"|");
-				$args = explode("=",$args);
+			} elseif ($r[2] == 'form') {
+				$id_formulaire = sql_getfetsel('id_formulaire', 'spip_formulaires', 'identifiant='.sql_quote('form'.$r[3]));
+			} elseif ($r[2] == 'formulaire|formidable') {
+				$args = ltrim($r[4], '|');
+				$args = explode('=', $args);
 				$args = $args[1];
-				$args = explode("|",$args);
+				$args = explode('|', $args);
 				$args = trim(reset($args));
-				if (is_numeric($args))
+				if (is_numeric($args)) {
 					$id_formulaire = intval($args);
-				else
-					$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires","identifiant=".sql_quote($args));
+				} else {
+					$id_formulaire = sql_getfetsel('id_formulaire', 'spip_formulaires', 'identifiant='.sql_quote($args));
+				}
 			}
-			if ($id_formulaire = intval($id_formulaire))
+			if ($id_formulaire = intval($id_formulaire)) {
 				$formulaires[$id_formulaire] = $id_formulaire;
+			}
 		}
 	}
 	return $formulaires;
@@ -67,34 +70,33 @@ function formidable_trouve_liens($texte){
  * @param $flux
  * @return mixed
  */
-function formidable_post_edition($flux){
-	if (
-		isset($flux['args']['table'])
-		AND $table = $flux['args']['table']
-		AND $id_objet = intval($flux['args']['id_objet'])
-		AND $primary = id_table_objet($table)
-		AND $row = sql_fetsel("*",$table,"$primary=".intval($id_objet)))
-	{
-
+function formidable_post_edition($flux) {
+	if (isset($flux['args']['table'])
+		and $table = $flux['args']['table']
+		and $id_objet = intval($flux['args']['id_objet'])
+		and $primary = id_table_objet($table)
+		and $row = sql_fetsel('*', $table, "$primary=".intval($id_objet))
+	) {
 		$objet = objet_type($table);
-		$contenu = implode(' ',$row);
+		$contenu = implode(' ', $row);
 		$formulaires = formidable_trouve_liens($contenu);
-		include_spip("action/editer_liens");
-		$deja = objet_trouver_liens(array("formulaire"=>"*"),array($objet=>$id_objet));
+		include_spip('action/editer_liens');
+		$deja = objet_trouver_liens(array('formulaire' => '*'), array($objet => $id_objet));
 		$del = array();
-		if (count($deja)){
-			foreach($deja as $l){
-				if (isset($formulaires[$l['id_formulaire']]))
+		if (count($deja)) {
+			foreach ($deja as $l) {
+				if (isset($formulaires[$l['id_formulaire']])) {
 					unset($formulaires[$l['id_formulaire']]);
-				else
+				} else {
 					$del[] = $l['id_formulaire'];
+				}
 			}
 		}
-		if (count($formulaires)){
-			objet_associer(array("formulaire"=>$formulaires),array($objet=>$id_objet));
+		if (count($formulaires)) {
+			objet_associer(array('formulaire' => $formulaires), array($objet => $id_objet));
 		}
-		if (count($del)){
-			objet_dissocier(array("formulaire"=>$del),array($objet=>$id_objet));
+		if (count($del)) {
+			objet_dissocier(array('formulaire' => $del), array($objet=>$id_objet));
 		}
 	}
 	return $flux;
@@ -105,29 +107,28 @@ function formidable_post_edition($flux){
  * @param $flux
  * @return mixed
  */
-function formidable_affiche_droite($flux){
+function formidable_affiche_droite($flux) {
 	if ($e = trouver_objet_exec($flux['args']['exec'])
-		AND isset($e['type'])
-		AND $objet = $e['type']
-		AND isset($flux['args'][$e['id_table_objet']])
-	  AND $id = $flux['args'][$e['id_table_objet']]
-	  AND sql_countsel("spip_formulaires_liens","objet=".sql_quote($objet)." AND id_objet=".intval($id))){
-
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/formulaires_lies',array('objet'=>$objet,'id_objet'=>$id));
+		and isset($e['type'])
+		and $objet = $e['type']
+		and isset($flux['args'][$e['id_table_objet']])
+		and $id = $flux['args'][$e['id_table_objet']]
+		and sql_countsel('spip_formulaires_liens', 'objet='.sql_quote($objet).' AND id_objet='.intval($id))) {
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/formulaires_lies', array('objet' => $objet, 'id_objet' => $id));
 	}
 	return $flux;
 }
 
 /**
  * Optimiser la base de donnée en enlevant les liens de formulaires supprimés
- * 
+ *
  * @pipeline optimiser_base_disparus
  * @param array $flux
  *     Données du pipeline
  * @return array
  *     Données du pipeline
  */
-function formidable_optimiser_base_disparus($flux){
+function formidable_optimiser_base_disparus($flux) {
 	// Les formulaires qui sont à la poubelle
 	$res = sql_select(
 		'id_formulaire AS id',
@@ -140,12 +141,11 @@ function formidable_optimiser_base_disparus($flux){
 
 
 	# les reponses qui sont associees a un formulaire inexistant
-	$res = sql_select("R.id_formulaire AS id",
-		        "spip_formulaires_reponses AS R
-		        LEFT JOIN spip_formulaires AS F
-		          ON R.id_formulaire=F.id_formulaire",
-			 "R.id_formulaire > 0
-			 AND F.id_formulaire IS NULL");
+	$res = sql_select(
+		'R.id_formulaire AS id',
+		'spip_formulaires_reponses AS R LEFT JOIN spip_formulaires AS F ON R.id_formulaire=F.id_formulaire',
+		'R.id_formulaire > 0 AND F.id_formulaire IS NULL'
+	);
 
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses', 'id_formulaire', $res);
 
@@ -154,20 +154,19 @@ function formidable_optimiser_base_disparus($flux){
 	$res = sql_select(
 		'id_formulaires_reponse AS id',
 		'spip_formulaires_reponses',
-		sql_in('statut',array('refuse','poubelle'))
+		sql_in('statut', array('refuse', 'poubelle'))
 	);
-	
+
 	// On génère la suppression
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses', 'id_formulaires_reponse', $res);
 
 
 	// les champs des reponses associes a une reponse inexistante
-	$res = sql_select("C.id_formulaires_reponse AS id",
-		        "spip_formulaires_reponses_champs AS C
-		        LEFT JOIN spip_formulaires_reponses AS R
-		          ON C.id_formulaires_reponse=R.id_formulaires_reponse",
-			 "C.id_formulaires_reponse > 0
-			 AND R.id_formulaires_reponse IS NULL");
+	$res = sql_select(
+		'C.id_formulaires_reponse AS id',
+		'spip_formulaires_reponses_champs AS C LEFT JOIN spip_formulaires_reponses AS R ON C.id_formulaires_reponse=R.id_formulaires_reponse',
+		'C.id_formulaires_reponse > 0 AND R.id_formulaires_reponse IS NULL'
+	);
 
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses_champs', 'id_formulaires_reponse', $res);
 
@@ -182,7 +181,7 @@ function formidable_optimiser_base_disparus($flux){
 	if (!defined('_CNIL_PERIODE')) {
 		define('_CNIL_PERIODE', 3600*24*31*4);
 	}
-	
+
 	if (_CNIL_PERIODE) {
 		$critere_cnil = 'date<"'.date('Y-m-d', time()-_CNIL_PERIODE).'"'
 			. ' AND statut != "spam"'
@@ -193,8 +192,6 @@ function formidable_optimiser_base_disparus($flux){
 			sql_update('spip_formulaires_reponses', array('ip' => 'MD5(ip)'), $critere_cnil);
 		}
 	}
-	
+
 	return $flux;
 }
-
-?>

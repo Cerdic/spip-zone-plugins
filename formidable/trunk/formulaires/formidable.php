@@ -7,33 +7,38 @@
  **/
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/formidable');
 include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
-function formidable_id_formulaire($id){
+function formidable_id_formulaire($id) {
 	// on utilise une static pour etre sur que si l'appel dans verifier() passe, celui dans traiter() passera aussi
 	// meme si entre temps on perds la base
 	static $id_formulaires = array();
-	if (isset($id_formulaires[$id]))
+	if (isset($id_formulaires[$id])) {
 		return $id_formulaires[$id];
+	}
 
-	if (is_numeric($id))
+	if (is_numeric($id)) {
 		$where = 'id_formulaire = ' . intval($id);
-	elseif (is_string($id))
+	} elseif (is_string($id)) {
 		$where = 'identifiant = ' . sql_quote($id);
-	else
+	} else {
 		return 0;
+	}
 
-	$id_formulaire = intval(sql_getfetsel('id_formulaire','spip_formulaires',$where));
+	$id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires', $where));
 
 	if ($id_formulaire
-		AND !test_espace_prive()
-	  AND !objet_test_si_publie("formulaire",$id_formulaire))
+		and !test_espace_prive()
+		and !objet_test_si_publie('formulaire', $id_formulaire)) {
 		return $id_formulaires[$id] = 0;
+	}
 
 	return $id_formulaires[$id] = $id_formulaire;
 }
@@ -54,33 +59,32 @@ function formidable_id_formulaire($id){
  * @return array
  *     Contexte envoyé au squelette HTML du formulaire.
  **/
-function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$contexte = array();
 
 	// On peut donner soit un id soit un identifiant
-	if (!$id_formulaire = formidable_id_formulaire($id))
+	if (!$id_formulaire = formidable_id_formulaire($id)) {
 		return;
+	}
 
 	// On cherche si le formulaire existe
-	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))){
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))) {
 		// On ajoute un point d'entrée avec les infos de ce formulaire
 		// pour d'eventuels plugins qui en ont l'utilité
 		$contexte['_formidable'] = $formulaire;
 
 		// Est-ce que la personne a le droit de répondre ?
-		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))){
+		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {
 			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
 
 			// Si on est en train de réafficher les valeurs postées,
 			// ne pas afficher les saisies hidden
-			if (
-				$formulaire['apres'] == 'valeurs'
+			if ($formulaire['apres'] == 'valeurs'
 				and _request('formidable_afficher_apres') == 'valeurs'
-			){
-				foreach ($saisies as $k => $saisie){
-					if (
-						isset($saisie['saisie'])
+			) {
+				foreach ($saisies as $k => $saisie) {
+					if (isset($saisie['saisie'])
 						and $saisie['saisie'] == 'hidden'
 					) {
 						unset($saisies[$k]);
@@ -98,33 +102,34 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 			$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="' . $contexte['id'] . '"/>';
 
 			// S'il y a des valeurs par défaut dans l'appel, alors on pré-remplit
-			if ($valeurs){
+			if ($valeurs) {
 				// Si c'est une chaine on essaye de la parser
-				if (is_string($valeurs)){
+				if (is_string($valeurs)) {
 					$liste = explode(',', $valeurs);
 					$liste = array_map('trim', $liste);
 					$valeurs = array();
-					foreach ($liste as $i => $cle_ou_valeur){
-						if ($i%2==0)
+					foreach ($liste as $i => $cle_ou_valeur) {
+						if ($i%2 == 0) {
 							$valeurs[$liste[$i]] = $liste[$i+1];
+						}
 					}
 				}
 
-				// Si on a un tableau, alors on écrase avec les valeurs données depuis l'appel
-				if ($valeurs and is_array($valeurs)){
+				// Si on a un tableau,
+				// alors on écrase avec les valeurs données depuis l'appel
+				if ($valeurs and is_array($valeurs)) {
 					$contexte = array_merge($contexte, $valeurs);
 				}
 			}
 
 			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
-			if ($id_formulaires_reponse = intval($id_formulaires_reponse)){
+			if ($id_formulaires_reponse = intval($id_formulaires_reponse)) {
 				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-				if ($ok == false){
+				if ($ok == false) {
 					$contexte['editable'] = false;
 					$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
 				}
 			} else {
-
 				// calcul des paramètres d'anonymisation
 				$options = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
 
@@ -138,17 +143,16 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 					and !$options['multiple']
 					and $options['modifiable']
 					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'], $anonymisation)
-				){
+				) {
 					$id_formulaires_reponse = array_pop($reponses);
 					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
 				}
-
 			}
 		} else {
 			$contexte['editable'] = false;
 			// le formulaire a déjà été répondu.
 			// peut être faut il afficher les statistiques des réponses
-			if ($formulaire['apres']=='stats'){
+			if ($formulaire['apres']=='stats') {
 				// Nous sommes face à un sondage auquel on a déjà répondu !
 				// On remplace complètement l'affichage du formulaire
 				// par un affichage du résultat de sondage !
@@ -163,7 +167,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		$contexte['editable'] = false;
 		$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
 	}
-	if (!isset($contexte['_hidden'])){
+	if (!isset($contexte['_hidden'])) {
 		$contexte['_hidden'] = '';
 	}
 	$contexte['_hidden'] .= "\n" . '<input type="hidden" name="formidable_afficher_apres' /*.$formulaire['id_formulaire']*/ . '" value="' . $formulaire['apres'] . '"/>'; // marche pas
@@ -191,19 +195,15 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$erreurs = array();
 
 	// On peut donner soit un id soit un identifiant
-	if (!$id_formulaire = formidable_id_formulaire($id)){
-
+	if (!$id_formulaire = formidable_id_formulaire($id)) {
 		$erreurs['message_erreur'] = _T('formidable:erreur_base');
-
-	}
-	else {
-
+	} else {
 		// Sale bête !
-		if (_request('mechantrobot')!=''){
+		if (_request('mechantrobot')!='') {
 			$erreurs['hahahaha'] = 'hahahaha';
 			return $erreurs;
 		}
@@ -214,24 +214,30 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 		$erreurs = saisies_verifier($saisies);
 
 		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
-		if ($formulaire['unicite'] != "") {
+		if ($formulaire['unicite'] != '') {
 			if (!$erreurs[$formulaire['unicite']]) {
-				$reponses = sql_allfetsel('R.id_formulaire AS id', 'spip_formulaires_reponses AS R
-		        LEFT JOIN spip_formulaires AS F
-		          ON R.id_formulaire=F.id_formulaire
-                LEFT JOIN spip_formulaires_reponses_champs AS C
-		          ON R.id_formulaires_reponse=C.id_formulaires_reponse', 'R.id_formulaire = ' . $id_formulaire . ' AND C.nom='.sql_quote($formulaire['unicite']).' AND C.valeur='.sql_quote(_request($formulaire['unicite'])).' AND R.statut = "publie"');
+				$reponses = sql_allfetsel(
+					'R.id_formulaire AS id',
+					'spip_formulaires_reponses AS R
+						LEFT JOIN spip_formulaires AS F
+						ON R.id_formulaire=F.id_formulaire
+						LEFT JOIN spip_formulaires_reponses_champs AS C
+						ON R.id_formulaires_reponse=C.id_formulaires_reponse',
+					'R.id_formulaire = ' . $id_formulaire . '
+						AND C.nom='.sql_quote($formulaire['unicite']).'
+						AND C.valeur='.sql_quote(_request($formulaire['unicite'])).'
+						AND R.statut = "publie"'
+				);
 				if (is_array($reponses) && count($reponses) > 0) {
 					$erreurs[$formulaire['unicite']] = $formulaire['message_erreur_unicite'] ? _T($formulaire['message_erreur_unicite']) : _T('formidable:erreur_unicite');
 				}
 			}
 		}
 
-		if ($erreurs and !isset($erreurs['message_erreur']))
+		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('formidable:erreur_generique');
-
+		}
 	}
-
 	return $erreurs;
 }
 
@@ -259,17 +265,18 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	$retours = array();
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
-	include_spip("inc/json");
+	include_spip('inc/json');
 	$post = json_encode($_POST);
-	spip_log($post,"formidable_post"._LOG_INFO_IMPORTANTE);
+	spip_log($post, 'formidable_post'._LOG_INFO_IMPORTANTE);
 
 	// On peut donner soit un id soit un identifiant
-	if (!$id_formulaire = formidable_id_formulaire($id))
+	if (!$id_formulaire = formidable_id_formulaire($id)) {
 		return array('message_erreur'=>_T('formidable:erreur_base'));
+	}
 
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
@@ -280,12 +287,12 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	$retours['id_formulaire'] = $id_formulaire;
 
 	// Si on a une redirection valide
-	if (($formulaire['apres']=="redirige") AND ($formulaire['url_redirect']!="")){
+	if (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
 		refuser_traiter_formulaire_ajax();
 		// traiter les raccourcis artX, brX
-		include_spip("inc/lien");
+		include_spip('inc/lien');
 		$url_redirect = typer_raccourci($formulaire['url_redirect']);
-		if (count($url_redirect)>2){
+		if (count($url_redirect) > 2) {
 			$url_redirect = $url_redirect[0] . $url_redirect[2];
 		} else {
 			$url_redirect = $formulaire['url_redirect']; // URL classique
@@ -300,16 +307,16 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	// et que B n'est pas fait quand il est appele, il peut rendre la main sans rien faire au premier coup
 	// et sera rappele au second tour
 	$retours['traitements'] = array();
-	$erreur_texte = "";
+	$erreur_texte = '';
 
 	// Si on a des traitements
-	if (is_array($traitements) and !empty($traitements)){
+	if (is_array($traitements) and !empty($traitements)) {
 		$maxiter = 5;
 		do {
-			foreach ($traitements as $type_traitement => $options){
+			foreach ($traitements as $type_traitement => $options) {
 				// si traitement deja appele, ne pas le relancer
-				if (!isset($retours['traitements'][$type_traitement])){
-					if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)){
+				if (!isset($retours['traitements'][$type_traitement])) {
+					if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)) {
 						$retours = $appliquer_traitement(
 							array(
 								'formulaire' => $formulaire,
@@ -320,46 +327,42 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 							),
 							$retours
 						);
-					}
-					else {
+					} else {
 						// traitement introuvable, ne pas retenter
 						$retours['traitements'][$type_traitement] = true;
 					}
 				}
 			}
-		}
-		while (count($retours['traitements'])<count($traitements) AND $maxiter--);
+		} while (count($retours['traitements']) < count($traitements) and $maxiter--);
 
 		// si on ne peut pas traiter correctement, alerter le webmestre
-		if (count($retours['traitements'])<count($traitements)){
+		if (count($retours['traitements']) < count($traitements)) {
 			$erreur_texte = "Impossible de traiter correctement le formulaire $id\n"
-				. "Traitements attendus :".implode(',',array_keys($traitements))."\n"
-				. "Traitements realises :".implode(',',array_keys($retours['traitements']))."\n";
+				. 'Traitements attendus :'.implode(',', array_keys($traitements))."\n"
+				. 'Traitements realises :'.implode(',', array_keys($retours['traitements']))."\n";
 		}
 
 		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
-		if ($formulaire['message_retour']){
+		if ($formulaire['message_retour']) {
 			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
 		}
-	}
-	else {
+	} else {
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
 
 	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
-	if (!$erreur_texte AND !count($retours['traitements'])){
+	if (!$erreur_texte and !count($retours['traitements'])) {
 		$erreur_texte = "Aucun traitement pour le formulaire $id\n";
 	}
 
-	if ($erreur_texte){
+	if ($erreur_texte) {
 		$erreur_sujet = "[ERREUR] Traitement Formulaire $id";
 		// dumper la saisie pour ne pas la perdre
-		$erreur_texte .= "\n".var_export($_REQUEST,true);
-		$envoyer_mail = charger_fonction("envoyer_mail", "inc");
+		$erreur_texte .= "\n".var_export($_REQUEST, true);
+		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
 	}
 	unset($retours['traitements']);
-
 	return $retours;
 }
 
@@ -378,7 +381,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
  *     Contexte complète des nouvelles informations
  *
  **/
-function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok){
+function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
 	// On va chercher tous les champs
 	$champs = sql_allfetsel(
 		'nom, valeur',
@@ -388,7 +391,7 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 	$ok = count($champs) ? true : false;
 
 	// On remplit le contexte avec
-	foreach ($champs as $champ){
+	foreach ($champs as $champ) {
 		$test_array = unserialize($champ['valeur']);
 		$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
 	}

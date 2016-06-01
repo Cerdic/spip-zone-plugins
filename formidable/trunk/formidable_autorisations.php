@@ -7,7 +7,9 @@
 **/
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('action/editer_liens');
 include_spip('inc/config');
@@ -23,17 +25,19 @@ include_spip('inc/config');
  *
 */
 function formidable_autoriser_par_auteur($id, $id_auteur = 0) {
-	if ($id == 0) return true;
+	if ($id == 0) {
+		return true;
+	}
 
 	$retour = false;
 
-	if ($id_auteur == 0)
+	if ($id_auteur == 0) {
 		$id_auteur = session_get('id_auteur');
-
+	}
 	if ($id_auteur == null) {
 		$retour = false;
 	} else {
-		$autorisations = objet_trouver_liens(array('formulaire'=>$id),array('auteur'=>$id_auteur));
+		$autorisations = objet_trouver_liens(array('formulaire' => $id), array('auteur' => $id_auteur));
 		$retour = count($autorisations) > 0;
 	}
 
@@ -65,7 +69,8 @@ function formidable_auteur_admin_reponse($qui) {
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser
  */
-function formidable_autoriser(){}
+function formidable_autoriser() {
+}
 
 /**
  * Autorisation d'éditer un formulaire formidable
@@ -79,9 +84,9 @@ function formidable_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
 	$auteurs = lire_config('formidable/analyse/auteur');
-        
+
 	/* administrateur ? */
 	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (count($qui['restreint']) == 0)) {
 		return true;
@@ -91,15 +96,15 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
 	if ($auteurs == 'on') {
 		return formidable_autoriser_par_auteur($id);
 	}
-        
+
 	/* Test des autorisations pour un admin restreint */
 	if (count($qui['restreint'])) {
-		$autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint']) 
-				? $GLOBALS['autoriser_admin_restreint'] 
-					: lire_config('formidable/analyse/autoriser_admin_restreint') == 'on' 
-						? true 
+		$autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint'])
+				? $GLOBALS['autoriser_admin_restreint']
+					: lire_config('formidable/analyse/autoriser_admin_restreint') == 'on'
+						? true
 						: false;
-		
+
 		return $autoriser_admin_restreint;
 	}
 }
@@ -116,11 +121,10 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt){
-    if (isset($qui['statut']) and $qui['statut'] <= '1comite') {
+function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt) {
+	if (isset($qui['statut']) and $qui['statut'] <= '1comite') {
 		return true;
-	}
-    else {
+	} else {
 		return false;
 	}
 }
@@ -142,42 +146,37 @@ function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt){
+function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt) {
 	$id = intval($id);
-	
+
 	// On regarde si il y a déjà le formulaire dans les options
 	if (isset($opt['formulaire'])) {
 		$formulaire = $opt['formulaire'];
-	}
-	// Sinon on va le chercher
-	else {
+	} else {
+		// Sinon on va le chercher
 		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id);
 	}
 
 	$traitements = unserialize($formulaire['traitements']);
 
 	// S'il n'y a pas d'enregistrement, c'est forcément bon
-	if (!isset($traitements['enregistrement']) OR !($options = $traitements['enregistrement'])) {
+	if (!isset($traitements['enregistrement']) or !($options = $traitements['enregistrement'])) {
 		return true;
-	}
-	// Sinon faut voir les options
-	else {
+	} else {
+		// Sinon faut voir les options
 		// Si multiple = oui c'est bon
 		if ($options['multiple']) {
 			return true;
-		}
-		else {
+		} else {
 			// Si c'est modifiable, c'est bon
 			if ($options['modifiable']) {
 				return true;
-			}
-			else {
+			} else {
 				include_spip('inc/formidable');
 				// Si la personne n'a jamais répondu, c'est bon
 				if (!formidable_verifier_reponse_formulaire($id)) {
 					return true;
-				}
-				else {
+				} else {
 					return false;
 				}
 			}
@@ -218,7 +217,7 @@ function autoriser_formulaire_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulairesreponse_instituer_dist($faire, $type, $id, $qui, $opt){
+function autoriser_formulairesreponse_instituer_dist($faire, $type, $id, $qui, $opt) {
 	return formidable_auteur_admin_reponse($qui);
 }
 
@@ -234,7 +233,7 @@ function autoriser_formulairesreponse_instituer_dist($faire, $type, $id, $qui, $
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt){
+function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt);
 }
 
@@ -251,19 +250,21 @@ function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt){
-    $id = intval($id);
-    
-    if ($id_formulaire = intval(sql_getfetsel(
-		'id_formulaire',
-		'spip_formulaires_reponses',
-		"id_formulaires_reponse=$id"
-	))) {
+function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt) {
+	$id = intval($id);
+
+	if ($id_formulaire = intval(
+		sql_getfetsel(
+			'id_formulaire',
+			'spip_formulaires_reponses',
+			"id_formulaires_reponse=$id"
+		)
+	)) {
 		return
 			autoriser_formulaire_editer_dist($faire, $type, $id_formulaire, $qui, $opt)
 			and formidable_auteur_admin_reponse($qui);
 	}
-	
+
 	return false;
 }
 
@@ -281,6 +282,6 @@ function autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $o
 **/
 function autoriser_formulairesreponse_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	$retour = autoriser_formulairesreponse_modifier_dist($faire, $type, $id, $qui, $opt);
-	
+
 	return $retour;
 }

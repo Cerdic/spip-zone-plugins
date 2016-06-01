@@ -1,7 +1,9 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/config');
 
@@ -10,15 +12,16 @@ include_spip('inc/config');
  * @param unknown_type $arg
  * @return unknown_type
  */
-function action_dupliquer_formulaire_dist($arg=null) {
-	if (is_null($arg)){
+function action_dupliquer_formulaire_dist($arg = null) {
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
 	$id_formulaire = intval($arg);
 
 	// Si le formulaire existe bien
-	if ($id_formulaire > 0 and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)){
+	if ($id_formulaire > 0
+		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)) {
 		include_spip('action/editer_formulaire');
 		// On enlève les champs inutiles
 		unset($formulaire['id_formulaire']);
@@ -29,9 +32,10 @@ function action_dupliquer_formulaire_dist($arg=null) {
 		// On insère un nouveau formulaire
 		$id_formulaire = insert_formulaire();
 		// Si ça a marché on modifie les champs de base
-		if ($id_formulaire > 0 and !($erreur = formulaire_set($id_formulaire, $formulaire))){
+		if ($id_formulaire > 0
+			and !($erreur = formulaire_set($id_formulaire, $formulaire))) {
 			// Et ensuite les saisies et les traitements
-			$ok = sql_updateq(
+			sql_updateq(
 				'spip_formulaires',
 				array(
 					'saisies' => $formulaire['saisies'],
@@ -49,22 +53,23 @@ function action_dupliquer_formulaire_dist($arg=null) {
 			}
 			// Et on redirige vers la vue
 			$redirect = parametre_url(generer_url_ecrire('formulaire'), 'id_formulaire', $id_formulaire, '&');
-		}
-		// Sinon on reste sur la page qui liste tout
-		else{
+		} else {
+			// Sinon on reste sur la page qui liste tout
 			$redirect = generer_url_ecrire('formulaires');
 		}
 	}
 
 	// Si on a précisé une direction on va plutôt là
 	if (_request('redirect')) {
-		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_formulaire', $id_formulaire, '&') . $erreur;
+		$redirect = parametre_url(
+			urldecode(_request('redirect')),
+			'id_formulaire',
+			$id_formulaire,
+			'&'
+		) . $erreur;
 	}
-	
+
 	// On redirige
 	include_spip('inc/headers');
 	redirige_par_entete($redirect);
 }
-
-?>

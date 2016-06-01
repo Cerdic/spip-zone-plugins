@@ -1,19 +1,20 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // Importation d'un formulaire forms&table
 
-function echanger_formulaire_forms_importer_dist($fichier){
+function echanger_formulaire_forms_importer_dist($fichier) {
 	include_spip('inc/xml');
 	$arbre = spip_xml_load($fichier, false);
-	
-	if ($arbre and is_array($arbre) and isset($arbre['forms'])){
-		foreach($arbre['forms'] as $forms){
-			foreach ($forms['form'] as $form){
-				$formulaire = array();
 
+	if ($arbre and is_array($arbre) and isset($arbre['forms'])) {
+		foreach ($arbre['forms'] as $forms) {
+			foreach ($forms['form'] as $form) {
+				$formulaire = array();
 				$form_source = array(
 					'id_form' => intval(trim(spip_xml_aplatit($form['id_form']))),
 					'titre' => trim(spip_xml_aplatit($form['titre'])),
@@ -27,11 +28,11 @@ function echanger_formulaire_forms_importer_dist($fichier){
 				);
 
 				// configurer le formulaire (titre etc)
-				forms_configure_formulaire($form_source,$formulaire);
+				forms_configure_formulaire($form_source, $formulaire);
 
 				// ajouter les champs de saisies
-				foreach($form['fields'] as $fields){
-					foreach($fields['field'] as $field){
+				foreach ($form['fields'] as $fields) {
+					foreach ($fields['field'] as $field) {
 						$champ = array(
 							'champ'=>trim(spip_xml_aplatit($field['champ'])),
 							'titre'=>trim(spip_xml_aplatit($field['titre'])),
@@ -44,10 +45,10 @@ function echanger_formulaire_forms_importer_dist($fichier){
 						);
 
 						// Les choix pour les types select et multiple
-						if(isset($field['les_choix']) and is_array($field['les_choix'])){
+						if (isset($field['les_choix']) and is_array($field['les_choix'])) {
 							$champ['choix'] = array();
-							foreach($field['les_choix'] as $les_choix){
-								foreach($les_choix['un_choix'] as $un_choix){
+							foreach ($field['les_choix'] as $les_choix) {
+								foreach ($les_choix['un_choix'] as $un_choix) {
 									$champ['choix'][] = array(
 										'choix'=>trim(spip_xml_aplatit($un_choix['choix'])),
 										'titre'=>trim(spip_xml_aplatit($un_choix['titre'])),
@@ -56,22 +57,22 @@ function echanger_formulaire_forms_importer_dist($fichier){
 							}
 						}
 
-						if ($saisie = forms_champ_vers_saisie($champ))
+						if ($saisie = forms_champ_vers_saisie($champ)) {
 							$formulaire['saisies'][] = $saisie;
+						}
 					}
 				}
-				
+
 				// les traitements
-				forms_configure_traitement_formulaire($form_source,$formulaire);
+				forms_configure_traitement_formulaire($form_source, $formulaire);
 				$id_formulaire = forms_importe_en_base($formulaire);
 			}
 		}
 	}
-	
-	if ($id_formulaire){
+
+	if ($id_formulaire) {
 		return $id_formulaire;
-	}
-	else{
+	} else {
 		return _T('formidable:erreur_importer_forms');
 	}
 }
@@ -81,18 +82,20 @@ function echanger_formulaire_forms_importer_dist($fichier){
  * @param array $formulaire
  * @return bool|int
  */
-function forms_importe_en_base($formulaire){
+function forms_importe_en_base($formulaire) {
 	include_spip('action/editer_formulaire');
 	// On insère un nouveau formulaire
 	// cas utilise par l'installation/import f&t
-	if (isset($formulaire['id_formulaire']) AND !sql_countsel("spip_formulaires","id_formulaire=".intval($formulaire['id_formulaire']))){
+	if (isset($formulaire['id_formulaire'])
+		and !sql_countsel('spip_formulaires', 'id_formulaire='.intval($formulaire['id_formulaire']))) {
 		$champs = array(
 			'id_formulaire' => $formulaire['id_formulaire'],
 			'statut' => 'prop',
 			'date_creation' => date('Y-m-d H:i:s'),
 		);
 		// Envoyer aux plugins
-		$champs = pipeline('pre_insertion',
+		$champs = pipeline(
+			'pre_insertion',
 			array(
 				'args' => array(
 					'table' => 'spip_formulaires',
@@ -100,9 +103,10 @@ function forms_importe_en_base($formulaire){
 				'data' => $champs
 			)
 		);
-		$id_formulaire = sql_insertq("spip_formulaires", $champs);
+		$id_formulaire = sql_insertq('spip_formulaires', $champs);
 
-		pipeline('post_insertion',
+		pipeline(
+			'post_insertion',
 			array(
 				'args' => array(
 					'table' => 'spip_formulaires',
@@ -111,27 +115,28 @@ function forms_importe_en_base($formulaire){
 				'data' => $champs
 			)
 		);
-	}
-	else
+	} else {
 		$id_formulaire = formulaire_inserer();
+	}
 
 	$formulaire['saisies'] = forms_regroupe_saisies_fieldset($formulaire['saisies']);
 
-	if (is_array($formulaire['saisies']))
+	if (is_array($formulaire['saisies'])) {
 		$formulaire['saisies'] = serialize($formulaire['saisies']);
-	if (is_array($formulaire['traitements']))
+	}
+	if (is_array($formulaire['traitements'])) {
 		$formulaire['traitements'] = serialize($formulaire['traitements']);
+	}
 
 	// si l'identifiant existe deja (multiples imports du meme form)
 	// le dater
-	if (sql_countsel("spip_formulaires","identifiant=".sql_quote($formulaire['identifiant']))){
-		$formulaire['identifiant'] .= "_".date('Ymd_His');
+	if (sql_countsel('spip_formulaires', 'identifiant='.sql_quote($formulaire['identifiant']))) {
+		$formulaire['identifiant'] .= '_'.date('Ymd_His');
 	}
 
 	// Si ok on modifie les champs de base
-	if ($id_formulaire>0
-		AND !($erreur = formulaire_modifier($id_formulaire, $formulaire))){
-
+	if ($id_formulaire > 0
+		and !($erreur = formulaire_modifier($id_formulaire, $formulaire))) {
 		return $id_formulaire;
 	}
 
@@ -143,18 +148,17 @@ function forms_importe_en_base($formulaire){
  * @param array $form
  * @param array $formulaire
  */
-function forms_configure_formulaire($form,&$formulaire){
+function forms_configure_formulaire($form, &$formulaire) {
 
 	// Le titre
 	$formulaire['titre'] = ($form['titre'] ? $form['titre'] : _T('info_sans_titre'));
 
 	// Generer un identifiant
 	// si id_form fourni, on s'en sert
-	if (isset($form['id_form'])){
-		$formulaire['identifiant'] = "form_import_".$form['id_form'];
-	}
-	else {
-		$formulaire['identifiant'] = "form_import_".preg_replace(",\W,","_",strtolower($formulaire['titre']));
+	if (isset($form['id_form'])) {
+		$formulaire['identifiant'] = 'form_import_'.$form['id_form'];
+	} else {
+		$formulaire['identifiant'] = 'form_import_'.preg_replace(',\W,', '_', strtolower($formulaire['titre']));
 	}
 
 	// Le descriptif
@@ -163,11 +167,13 @@ function forms_configure_formulaire($form,&$formulaire){
 	// Le message de retour si ok
 	$formulaire['message_retour'] = (isset($form['texte']) ? $form['texte'] : '');
 
-	if (!isset($formulaire['traitements']))
+	if (!isset($formulaire['traitements'])) {
 		$formulaire['traitements'] = array();
+	}
 
-	if (!isset($formulaire['saisies']))
+	if (!isset($formulaire['saisies'])) {
 		$formulaire['saisies'] = array();
+	}
 }
 
 /**
@@ -176,28 +182,29 @@ function forms_configure_formulaire($form,&$formulaire){
  * @param array $form
  * @param array $formulaire
  */
-function forms_configure_traitement_formulaire($form,&$formulaire){
+function forms_configure_traitement_formulaire($form, &$formulaire) {
 	// Le traitement email
-	if ($form['champconfirm']){
-		if (!isset($formulaire['traitements']['email']))
+	if ($form['champconfirm']) {
+		if (!isset($formulaire['traitements']['email'])) {
 			$formulaire['traitements']['email'] = array();
+		}
 		$formulaire['traitements']['email']['champ_courriel_destinataire_form'] = $form['champconfirm'];
 	}
 
 	// $form['email'] est possiblement serialize
-	if (is_string($form['email']) AND $a=unserialize($form['email']))
+	if (is_string($form['email']) and $a=unserialize($form['email'])) {
 		$form['email'] = $a;
-	if (is_array($form['email'])){
-
-		if ($email_defaut = $form['email']['defaut']){
-			if (!isset($formulaire['traitements']['email']))
+	}
+	if (is_array($form['email'])) {
+		if ($email_defaut = $form['email']['defaut']) {
+			if (!isset($formulaire['traitements']['email'])) {
 				$formulaire['traitements']['email'] = array();
+			}
 			$formulaire['traitements']['email']['destinataires_plus'] = $email_defaut;
 		}
 
 		// TODO email route : feature qui n'existe pas dans formidable
-		if ($route = $form['email']['route']){
-
+		if ($route = $form['email']['route']) {
 		}
 	}
 
@@ -218,19 +225,20 @@ function forms_configure_traitement_formulaire($form,&$formulaire){
  * @param array $saisies
  * @return array
  */
-function forms_regroupe_saisies_fieldset($saisies){
+function forms_regroupe_saisies_fieldset($saisies) {
 	$s = array();
 	$ins = &$s;
 
-	foreach($saisies as $k=>$saisie){
-		if ($saisie['saisie']=='fieldset'){
-			if (!isset($saisies[$k]['saisies']))
+	foreach ($saisies as $k => $saisie) {
+		if ($saisie['saisie']=='fieldset') {
+			if (!isset($saisies[$k]['saisies'])) {
 				$saisies[$k]['saisies'] = array();
+			}
 			$ins = &$saisies[$k]['saisies'];
 			$s[] = &$saisies[$k];
-		}
-		else
+		} else {
 			$ins[] = &$saisies[$k];
+		}
 	}
 
 	return $s;
@@ -252,8 +260,7 @@ function forms_regroupe_saisies_fieldset($saisies){
  *     string titre
  * @return array|bool
  */
-function forms_champ_vers_saisie($champ){
-
+function forms_champ_vers_saisie($champ) {
 	// Le truc par défaut
 	$saisie = array(
 		'saisie' => 'input',
@@ -262,7 +269,7 @@ function forms_champ_vers_saisie($champ){
 
 	// On essaye de traduire tous les types de champs
 	$type = $champ['type'];
-	switch ($type){
+	switch ($type) {
 		case 'texte':
 			$saisie['saisie'] = 'textarea';
 			unset($saisie['options']['size']);
@@ -280,12 +287,11 @@ function forms_champ_vers_saisie($champ){
 			break;
 		case 'num':
 		case 'monnaie':
-			if (!isset($champ['taille']) OR !intval($taille = $champ['taille'])){
+			if (!isset($champ['taille']) or !intval($taille = $champ['taille'])) {
 				$saisie['verifier'] = array(
 					'type' => 'entier'
 				);
-			}
-			else {
+			} else {
 				$saisie['verifier'] = array(
 					'type' => 'decimal'
 				);
@@ -305,10 +311,11 @@ function forms_champ_vers_saisie($champ){
 		case 'select':
 			unset($saisie['options']['size']);
 			$liste = $champ['extra_info'];
-			if ($liste == 'radio')
+			if ($liste == 'radio') {
 				$saisie['saisie'] = 'radio';
-			else
+			} else {
 				$saisie['saisie'] = 'selection';
+			}
 			break;
 		case 'multiple':
 			$saisie['saisie'] = 'checkbox';
@@ -338,13 +345,14 @@ function forms_champ_vers_saisie($champ){
 	}
 
 	// On continue seulement si on a toujours une saisie
-	if (!$saisie)
+	if (!$saisie) {
 		return false;
+	}
 
 	// Les choix pour les types select et multiple
-	if(isset($champ['choix']) and is_array($champ['choix'])){
+	if (isset($champ['choix']) and is_array($champ['choix'])) {
 		$saisie['options']['datas'] = array();
-		foreach($champ['choix'] as $un_choix){
+		foreach ($champ['choix'] as $un_choix) {
 			$choix = $un_choix['choix'];
 			$titre = $un_choix['titre'];
 			$saisie['options']['datas'][$choix] = $titre;
@@ -355,18 +363,21 @@ function forms_champ_vers_saisie($champ){
 	$saisie['options']['nom'] = $champ['champ'];
 
 	// Le label
-	if (isset($champ['titre']) AND $champ['titre'])
+	if (isset($champ['titre']) and $champ['titre']) {
 		$saisie['options']['label'] = $champ['titre'];
+	}
 
 	// Obligatoire
-	if (isset($champ['obligatoire']) AND $champ['obligatoire'] == 'oui')
+	if (isset($champ['obligatoire']) and $champ['obligatoire'] == 'oui') {
 		$saisie['options']['obligatoire'] = 'on';
+	}
 
 	// Explication éventuelle
-	if (isset($champ['aide']) AND $explication = $champ['aide'])
+	if (isset($champ['aide']) and $explication = $champ['aide']) {
 		$saisie['options']['explication'] = $explication;
+	}
 
-	if (isset($champ['saisie']) AND $champ['saisie']=='non'){
+	if (isset($champ['saisie']) and $champ['saisie']=='non') {
 		$saisie['options']['disable'] = 'on';
 		// masquer en JS, fallback
 		$saisie['options']['afficher_si'] = 'false';

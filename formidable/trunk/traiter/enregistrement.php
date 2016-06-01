@@ -1,9 +1,11 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function traiter_enregistrement_dist($args, $retours){
+function traiter_enregistrement_dist($args, $retours) {
 	include_spip('inc/formidable');
 	include_spip('base/abstract_sql');
 	$options = $args['options'];
@@ -16,7 +18,7 @@ function traiter_enregistrement_dist($args, $retours){
 	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
 
 	// traitement de l'anonymisation
-	if ($options['anonymiser'] == 'on'){
+	if ($options['anonymiser'] == 'on') {
 		// mod de l'id_auteur
 		$variables_anonymisation =
 			$GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
@@ -26,10 +28,10 @@ function traiter_enregistrement_dist($args, $retours){
 
 	// On cherche le cookie et sinon on le crée
 	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
-	if (isset($_COOKIE[$nom_cookie]))
+	if (isset($_COOKIE[$nom_cookie])) {
 		$cookie = $_COOKIE[$nom_cookie];
-	else {
-		include_spip("inc/acces");
+	} else {
+		include_spip('inc/acces');
 		$cookie = creer_uniqid();
 	}
 
@@ -38,11 +40,11 @@ function traiter_enregistrement_dist($args, $retours){
 
 	// recherche d'éventuelles anciennes réponses
 	$reponses = formidable_verifier_reponse_formulaire(
-			$id_formulaire, 
-			$options['identification'], 
-			($options['anonymiser'] == 'on') 
-				? $options['anonymiser_variable'] 
-				: false
+		$id_formulaire,
+		$options['identification'],
+		($options['anonymiser'] == 'on')
+			? $options['anonymiser_variable']
+			: false
 	);
 
 	// pas d'id_formulaires_reponse : on cherche une éventuelle réponse en base
@@ -60,17 +62,21 @@ function traiter_enregistrement_dist($args, $retours){
 		}
 	} else {
 		// vérifier que l'auteur est bien l'auteur de la réponse, si non, on invalide l'id_formulaires_reponse
-		if (in_array($id_formulaires_reponse, $reponses) == false) $id_formulaires_reponse = false;
+		if (in_array($id_formulaires_reponse, $reponses) == false) {
+			$id_formulaires_reponse = false;
+		}
 	}
-	
+
 	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
-	if ($options['moderation'] == 'posteriori' or autoriser('instituer', 'formulaires_reponse', $id_formulaires_reponse, null, array('id_formulaire'=>$id_formulaire, 'nouveau_statut'=>'publie')))
+	if ($options['moderation'] == 'posteriori'
+		or autoriser('instituer', 'formulaires_reponse', $id_formulaires_reponse, null, array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie'))) {
 		$statut='publie';
-	else
+	} else {
 		$statut = 'prop';
+	}
 
 	// Si ce n'est pas une modif d'une réponse existante, on crée d'abord la réponse
-	if (!$id_formulaires_reponse){
+	if (!$id_formulaires_reponse) {
 		$id_formulaires_reponse = sql_insertq(
 			'spip_formulaires_reponses',
 			array(
@@ -82,9 +88,10 @@ function traiter_enregistrement_dist($args, $retours){
 				'statut' => $statut
 			)
 		);
-		// Si on a pas le droit de répondre plusieurs fois ou que les réponses seront modifiables, il faut poser un cookie
-		if (!$options['multiple'] or $options['modifiable']){
-			include_spip("inc/cookie");
+		// Si on a pas le droit de répondre plusieurs fois ou que les réponses seront modifiables,
+		// il faut poser un cookie
+		if (!$options['multiple'] or $options['modifiable']) {
+			include_spip('inc/cookie');
 			// Expiration dans 30 jours
 			spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);
 		}
@@ -98,16 +105,15 @@ function traiter_enregistrement_dist($args, $retours){
 	}
 
 	// Si l'id n'a pas été créé correctement alors erreur
-	if (!($id_formulaires_reponse > 0)){
+	if (!($id_formulaires_reponse > 0)) {
 		$retours['message_erreur'] .= "\n<br/>"._T('formidable:traiter_enregistrement_erreur_base');
-	}
-	// Sinon on continue à mettre à jour
-	else{
+	} else {
+		// Sinon on continue à mettre à jour
 		$champs = array();
 		$insertions = array();
-		foreach($saisies as $nom => $saisie){
+		foreach ($saisies as $nom => $saisie) {
 			// On ne prend que les champs qui ont effectivement été envoyés par le formulaire
-			if (($valeur = _request($nom)) !== null){
+			if (($valeur = _request($nom)) !== null) {
 				$champs[] = $nom;
 				$insertions[] = array(
 					'id_formulaires_reponse' => $id_formulaires_reponse,
@@ -118,7 +124,7 @@ function traiter_enregistrement_dist($args, $retours){
 		}
 
 		// S'il y a bien des choses à modifier
-		if ($champs){
+		if ($champs) {
 			// On supprime d'abord les champs
 			sql_delete(
 				'spip_formulaires_reponses_champs',
@@ -134,7 +140,9 @@ function traiter_enregistrement_dist($args, $retours){
 				$insertions
 			);
 		}
-		if (!isset($retours['message_ok'])) { $retours['message_ok'] = ''; }
+		if (!isset($retours['message_ok'])) {
+			$retours['message_ok'] = '';
+		}
 		$retours['message_ok'] .= "\n"._T('formidable:traiter_enregistrement_message_ok');
 		$retours['id_formulaires_reponse'] = $id_formulaires_reponse;
 	}
@@ -144,13 +152,13 @@ function traiter_enregistrement_dist($args, $retours){
 	return $retours;
 }
 
-function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles){
+function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles) {
 	include_spip('inc/saisies');
 	include_spip('base/abstract_sql');
 	$comparaison = saisies_comparer($saisies_anciennes, $saisies_nouvelles);
 
 	// Si des champs ont été supprimés, il faut supprimer les réponses à ces champs
-	if ($comparaison['supprimees']){
+	if ($comparaison['supprimees']) {
 		// On récupère les réponses du formulaire
 		$reponses = sql_allfetsel(
 			'id_formulaires_reponse',
@@ -172,5 +180,3 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 		);
 	}
 }
-
-?>

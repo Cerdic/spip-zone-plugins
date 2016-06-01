@@ -1,15 +1,17 @@
 <?php
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Action de création / Modification d'un formulaire
  * @param unknown_type $arg
  * @return unknown_type
  */
-function action_editer_formulaire_dist($arg=null) {
-	if (is_null($arg)){
+function action_editer_formulaire_dist($arg = null) {
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -20,17 +22,23 @@ function action_editer_formulaire_dist($arg=null) {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_formulaire > 0) $err = formulaire_modifier($id_formulaire);
+	if ($id_formulaire > 0) {
+		$err = formulaire_modifier($id_formulaire);
+	}
 
 	if (_request('redirect')) {
-		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_formulaire', $id_formulaire, '&') . $err;
+		$redirect = parametre_url(
+			urldecode(_request('redirect')),
+			'id_formulaire',
+			$id_formulaire,
+			'&'
+		) . $err;
 
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
-	}
-	else
+	} else {
 		return array($id_formulaire,$err);
+	}
 }
 
 /**
@@ -44,7 +52,8 @@ function formulaire_inserer() {
 		'date_creation' => date('Y-m-d H:i:s'),
 	);
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_formulaires',
@@ -52,9 +61,10 @@ function formulaire_inserer() {
 			'data' => $champs
 		)
 	);
-	$id_formulaire = sql_insertq("spip_formulaires", $champs);
+	$id_formulaire = sql_insertq('spip_formulaires', $champs);
 
-	pipeline('post_insertion',
+	pipeline(
+		'post_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_formulaires',
@@ -74,14 +84,14 @@ function formulaire_inserer() {
  * @param array|null $set
  * @return string
  */
-function formulaire_modifier($id_formulaire, $set=null) {
+function formulaire_modifier($id_formulaire, $set = null) {
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
 	$err = '';
 
 	$c = collecter_requests(
 		// white list
-		objet_info('formulaire','champs_editables'),
+		objet_info('formulaire', 'champs_editables'),
 		// black list
 		array('statut'),
 		// donnees eventuellement fournies
@@ -90,25 +100,33 @@ function formulaire_modifier($id_formulaire, $set=null) {
 
 
 	$invalideur = "id='id_formulaire/$id_formulaire'";
-	if ($err = objet_modifier_champs('formulaire', $id_formulaire,
+	if ($err = objet_modifier_champs(
+		'formulaire',
+		$id_formulaire,
 		array(
 			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 		),
-		$c))
+		$c
+	)) {
 		return $err;
+	}
 
 	// Modification de statut, changement de rubrique ?
-	$c = collecter_requests(array('statut'),array(),$set);
-	include_spip("action/editer_objet");
-	$err = objet_instituer('formulaire',$id_formulaire, $c);
+	$c = collecter_requests(array('statut'), array(), $set);
+	include_spip('action/editer_objet');
+	$err = objet_instituer('formulaire', $id_formulaire, $c);
 
 	return $err;
 }
 
-
-
-function revision_formulaire($id_formulaire, $c=false) { return formulaire_modifier($id_formulaire, $c);}
-function insert_formulaire() {	return formulaire_inserer();}
-function formulaire_set($id_formulaire, $set=null) {	return formulaire_modifier($id_formulaire, $set);}
+function revision_formulaire($id_formulaire, $c = false) {
+	return formulaire_modifier($id_formulaire, $c);
+}
+function insert_formulaire() {
+	return formulaire_inserer();
+}
+function formulaire_set($id_formulaire, $set = null) {
+	return formulaire_modifier($id_formulaire, $set);
+}

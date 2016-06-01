@@ -2,18 +2,20 @@
 
 /**
  * Déclarations relatives à la base de données
- * 
+ *
  * @package SPIP\Formidable\Pipelines
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Déclarer les interfaces des tables de formidable pour le compilateur
- * 
+ *
  * @pipeline declarer_tables_interfaces
- * 
+ *
  * @param array $interfaces
  *     Déclarations d'interface pour le compilateur
  * @return array
@@ -60,25 +62,25 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
 		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
 		'field' => array(
-			"id_formulaire" => "bigint(21) NOT NULL",
-			"identifiant" => "varchar(200)",
-			"titre" => "text NOT NULL default ''",
-			"descriptif" => "text",
-			"message_retour" => "text NOT NULL default ''",
-			"saisies" => "longtext NOT NULL default ''",
-			"traitements" => "text NOT NULL default ''",
-			"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
-			"apres" => "varchar(12) NOT NULL default ''",
-			"unicite" => "text NOT NULL default ''",
-			"message_erreur_unicite" => "text NOT NULL default ''",
-			"url_redirect" => "varchar(255)",
-			"statut" => "varchar(10) NOT NULL default ''",
-			"resume_reponse" => "text NOT NULL default ''",
-			"date_creation" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"maj" => "timestamp",
+			'id_formulaire' => 'bigint(21) NOT NULL',
+			'identifiant' => 'varchar(200)',
+			'titre' => "text NOT NULL default ''",
+			'descriptif' => 'text',
+			'message_retour' => "text NOT NULL default ''",
+			'saisies' => "longtext NOT NULL default ''",
+			'traitements' => "text NOT NULL default ''",
+			'public' => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
+			'apres' => "varchar(12) NOT NULL default ''",
+			'unicite' => "text NOT NULL default ''",
+			'message_erreur_unicite' => "text NOT NULL default ''",
+			'url_redirect' => 'varchar(255)',
+			'statut' => "varchar(10) NOT NULL default ''",
+			'resume_reponse' => "text NOT NULL default ''",
+			'date_creation' => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			'maj' => 'timestamp',
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_formulaire"
+			'PRIMARY KEY' => 'id_formulaire'
 		),
 		'join'=> array(
 			'id_formulaire' => 'id_formulaire'
@@ -124,20 +126,20 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'info_nb_objets' => 'formidable:info_nb_reponses',
 
 		'field' => array(
-			"id_formulaires_reponse" => "bigint(21) NOT NULL",
-			"id_formulaire" => "bigint(21) NOT NULL default 0",
-			"date" => "datetime NOT NULL default '0000-00-00 00:00:00'",
-			"ip" => "varchar(255) NOT NULL default ''",
-			"id_auteur" => "bigint(21) NOT NULL default 0",
-			"cookie" => "varchar(255) NOT NULL default ''",
-			"statut" => "varchar(10) NOT NULL default ''",
-			"maj" => "timestamp"
+			'id_formulaires_reponse' => 'bigint(21) NOT NULL',
+			'id_formulaire' => 'bigint(21) NOT NULL default 0',
+			'date' => "datetime NOT NULL default '0000-00-00 00:00:00'",
+			'ip' => "varchar(255) NOT NULL default ''",
+			'id_auteur' => 'bigint(21) NOT NULL default 0',
+			'cookie' => "varchar(255) NOT NULL default ''",
+			'statut' => "varchar(10) NOT NULL default ''",
+			'maj' => 'timestamp'
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_formulaires_reponse",
-			"KEY id_formulaire" => "id_formulaire",
-			"KEY id_auteur" => "id_auteur",
-			"KEY cookie" => "cookie"
+			'PRIMARY KEY' => 'id_formulaires_reponse',
+			'KEY id_formulaire' => 'id_formulaire',
+			'KEY id_auteur' => 'id_auteur',
+			'KEY cookie' => 'cookie'
 		),
 		'join' => array(
 			'id_formulaires_reponse' => 'id_formulaires_reponse',
@@ -180,27 +182,27 @@ function formidable_declarer_tables_objets_sql($tables) {
  * @return array
  *     Description complétée des tables
 **/
-function formidable_declarer_tables_principales($tables_principales){
+function formidable_declarer_tables_principales($tables_principales) {
 
-	// Table formulaires_reponses_champs 
+	// Table formulaires_reponses_champs
 	$formulaires_reponses_champs = array(
-		"id_formulaires_reponses_champ" => "bigint(21) NOT NULL",
-		"id_formulaires_reponse" => "bigint(21) NOT NULL default 0",
-		"nom" => "varchar(255) NOT NULL default ''",
-		"valeur" => "text NOT NULL DEFAULT ''",
-		"maj" => "timestamp"
+		'id_formulaires_reponses_champ' => 'bigint(21) NOT NULL',
+		'id_formulaires_reponse' => 'bigint(21) NOT NULL default 0',
+		'nom' => "varchar(255) NOT NULL default ''",
+		'valeur' => "text NOT NULL DEFAULT ''",
+		'maj' => 'timestamp'
 	);
 	$formulaires_reponses_champs_cles = array(
-		"PRIMARY KEY" => "id_formulaires_reponses_champ",
-		"KEY id_formulaires_reponse" => "id_formulaires_reponse",
-		"KEY nom" => "nom",
-		"UNIQUE reponse" => "id_formulaires_reponse,nom",
+		'PRIMARY KEY' => 'id_formulaires_reponses_champ',
+		'KEY id_formulaires_reponse' => 'id_formulaires_reponse',
+		'KEY nom' => 'nom',
+		'UNIQUE reponse' => 'id_formulaires_reponse,nom',
 	);
 	$tables_principales['spip_formulaires_reponses_champs'] = array(
 		'field' => &$formulaires_reponses_champs,
 		'key' => &$formulaires_reponses_champs_cles
 	);
-	
+
 	return $tables_principales;
 }
 
@@ -213,26 +215,22 @@ function formidable_declarer_tables_principales($tables_principales){
  * @return array
  *     Description complétée des tables
 **/
-function formidable_declarer_tables_auxiliaires($tables_auxiliaires){
+function formidable_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$formulaires_liens = array(
-		"id_formulaire"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL"
+		'id_formulaire'	=> "bigint(21) DEFAULT '0' NOT NULL",
+		'id_objet'	=> "bigint(21) DEFAULT '0' NOT NULL",
+		'objet'	=> "VARCHAR (25) DEFAULT '' NOT NULL"
 	);
 
 	$formulaires_liens_cles = array(
-		"PRIMARY KEY" => "id_formulaire,id_objet,objet",
-		"KEY id_formulaire" => "id_formulaire"
+		'PRIMARY KEY' => 'id_formulaire,id_objet,objet',
+		'KEY id_formulaire' => 'id_formulaire'
 	);
-	
+
 	$tables_auxiliaires['spip_formulaires_liens'] = array(
 		'field' => &$formulaires_liens,
 		'key' => &$formulaires_liens_cles
 	);
-	
+
 	return $tables_auxiliaires;
 }
-
-
-
-?>
