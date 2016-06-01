@@ -1,11 +1,13 @@
 <?php
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/config');
 
-function formulaires_configurer_sjcycle_saisies_dist(){
+function formulaires_configurer_sjcycle_saisies_dist() {
 	$config = lire_config('sjcycle');
 
 	return array(
@@ -272,18 +274,18 @@ function formulaires_configurer_sjcycle_saisies_dist(){
 	);
 }
 
-function formulaires_configurer_sjcycle_charger(){
+function formulaires_configurer_sjcycle_charger() {
 
 	$valeurs = lire_config('sjcycle');
-		
-	if (!lire_config('image_process')){
+
+	if (!lire_config('image_process')) {
 		$valeurs['message_erreur'] = _T('sjcycle:erreur_config_image_process');
 		return $valeurs;
 	}
-	
+
 	//Generation de miniatures des images inactive
 	if (lire_config('creer_preview')!='oui') {
-		$erreurs['message_erreur'] = _T('sjcycle:erreur_config_creer_preview');
+		$valeurs['message_erreur'] = _T('sjcycle:erreur_config_creer_preview');
 		return $valeurs;
 	}
 

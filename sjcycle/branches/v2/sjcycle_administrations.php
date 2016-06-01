@@ -1,15 +1,18 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/meta');
 
 // Installation et mise à jour
-function sjcycle_upgrade($nom_meta_version_base, $version_cible){
+function sjcycle_upgrade($nom_meta_version_base, $version_cible) {
 
 	$maj = array();
 
 	include_spip('inc/config');
-   $maj = array();
+	$maj = array();
 	$maj['create'] = array(
 			array('ecrire_config','sjcycle', array(
 				'tooltip' => '',
@@ -34,14 +37,11 @@ function sjcycle_upgrade($nom_meta_version_base, $version_cible){
 				'afficher_aide' => 'on'
 	)));
 	include_spip('base/upgrade');
-   maj_plugin($nom_meta_version_base, $version_cible, $maj);
+	maj_plugin($nom_meta_version_base, $version_cible, $maj);
 }
 
 // Désinstallation
-function sjcycle_vider_tables($nom_meta_version_base){
-
-   effacer_meta('sjcycle');
+function sjcycle_vider_tables($nom_meta_version_base) {
+	effacer_meta('sjcycle');
 	effacer_meta($nom_meta_version_base);
 }
-
-?>

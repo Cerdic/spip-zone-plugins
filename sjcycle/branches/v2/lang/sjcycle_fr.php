@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
@@ -9,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'configurer_titre' => 'Configurer jQuery Cycle',
-	
+
 	// E
 	'erreur_config_creer_preview' => 'Attention : la génération de miniatures des images est actuellement inactive, veuillez  l\'activer dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'erreur_config_image_process' => 'Attention : La méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
@@ -55,8 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_cssparams' => 'Paramètres styles SjCycle',
 	'legend_imgparams' => 'Traitements images SjCycle',
 	'legend_jsparams' => 'Paramètres javascript jQuery Cycle',
-	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',	
-	
+	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',
+
 	// N
 	'next' => 'suivant',
 	'noisette_alea_description' => 'Affiche un diaporama aléatoire jcycle des images du site',
@@ -76,11 +78,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Au Hasard',
 	'noisette_titre_noisette' => 'Titre :',
 	'noisette_titre_sites_defaut' => 'Liens',
-	
+
 	// P
 	'prev' => 'précédent',
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
 );
-?>

@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
@@ -21,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* their desired final size (width height)',
 	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://contrib.spip.net/MediaBox" target="_blank">Mediabox plugin</a>',
 	'explication_pause'=>'Enable pause of the slideshow on hover',
-	'explication_random'=>'true for random, false for sequence (not applicable to shuffle fx) ',	
+	'explication_random'=>'true for random, false for sequence (not applicable to shuffle fx) ',
 	'explication_speed'=>'speed of the transition in milliseconds',
 	'explication_sync'=>'Define if in/out transitions should occur simultaneously',
 	'explication_timeout'=>'Milliseconds between slide transitions (0 to disable auto advance)',
@@ -36,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_div_class' => 'Class name css',
 	'label_div_margin' => 'External margin',
 	'label_fx' => 'Effect',
-	'label_img_background' => 'Background color',	
+	'label_img_background' => 'Background color',
 	'label_img_bordure' => 'Border width',
 	'label_img_height' => 'Height',
 	'label_img_position' => 'Positioning',
@@ -76,11 +78,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Randomly',
 	'noisette_titre_noisette' => 'Title&nbsp;:',
 	'noisette_titre_sites_defaut' => 'Links',
-	
+
 	// P
 	'prev' => 'previous',
 
 	// T
 	'titre_menu' => 'jQuery Cycle',
 );
-?>
