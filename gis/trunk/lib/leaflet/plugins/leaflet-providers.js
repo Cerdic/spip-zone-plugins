@@ -48,8 +48,6 @@
 					url: variant.url || provider.url,
 					options: L.Util.extend({}, provider.options, variantOptions)
 				};
-			} else if (typeof provider.url === 'function') {
-				provider.url = provider.url(parts.splice(1, parts.length - 1).join('.'));
 			}
 
 			var forceHTTP = window.location.protocol === 'file:' || provider.options.forceHTTP;
@@ -118,7 +116,7 @@
 					}
 				},
 				France: {
-					url: 'http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+					url: '//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
 					options: {
 						attribution: '&copy; Openstreetmap France | {attribution.OpenStreetMap}'
 					}
@@ -140,7 +138,7 @@
 		OpenTopoMap: {
 			url: '//{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 			options: {
-				maxZoom: 16,
+				maxZoom: 17,
 				attribution: 'Map data: {attribution.OpenStreetMap}, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 			}
 		},
