@@ -91,7 +91,7 @@
 
 		<datalist id="saisies">
 			<BOUCLE_yaml(CONDITION){si #PLUGIN{yaml}}>
-				<BOUCLE_saisies(DATA){source tableau,(#VAL|saisies_lister_disponibles)}>
+				<BOUCLE_saisies(DATA){source tableau,(#VAL{'saisies'}|saisies_lister_disponibles)}>
 					<option label="#CLE" value="#CLE" />
 				</BOUCLE_saisies>
 			</BOUCLE_yaml>
