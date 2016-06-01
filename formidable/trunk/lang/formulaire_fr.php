@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// I
 	'icone_creer_formulaire' => 'Créer un nouveau formulaire',
 
@@ -13,8 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_formulaire' => 'Modifier ce formulaire',
 
 	// T
-	'titre_formulaires' => 'Formulaires',
-	'titre_logo_formulaire' => 'Logo de ce formulaire',
 	'titre_formulaire' => 'Formulaire',
-
+	'titre_formulaires' => 'Formulaires',
+	'titre_logo_formulaire' => 'Logo de ce formulaire'
 );
