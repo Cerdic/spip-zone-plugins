@@ -25,7 +25,6 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/owncloud.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/owncloud.php" />
 	<pipeline nom="affiche_gauche" inclure="owncloud_pipelines.php" />
-	<pipeline nom="supprimer_md5" inclure="owncloud_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="owncloud_pipelines.php" />
 
 	<menu nom="liste_owncloud" titre="owncloud:owncloud" parent="menu_edition" icone="images/owncloud-16.png" />	
