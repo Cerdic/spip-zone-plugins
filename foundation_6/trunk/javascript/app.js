@@ -31,3 +31,11 @@ $(".reveal-ajax").on('click', function (e) {
 	});
 
 });
+
+
+// Restaurer le deeplinking des tab Foundation
+// En attendant que la fonction soit de retour officiellement
+var link_tab = window.location.hash.substr(1);
+if (link_tab) {
+    $('[data-tabs]').eq(0).foundation('selectTab', $('#'+link_tab));
+}
