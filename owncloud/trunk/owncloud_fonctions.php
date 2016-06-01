@@ -107,8 +107,7 @@ function importer_media_owncloud($url) {
 /**
  * Fonction utiliser pour supprimer les fichier distant avec webdav
  * 
- * @param string $remote_directory répertoire distant
- * @return string
+ * @return boolean
  */
 function supprimer_fichier_distant() {
 
@@ -137,7 +136,7 @@ function supprimer_fichier_distant() {
 /**
  * Purger la base des médias dans spip_ownclouds
  * 
- * @return string
+ * @return boolean
  */
 function purger_media_spip() {
 
@@ -146,12 +145,13 @@ function purger_media_spip() {
 		foreach ($document_owncloud as $valeur) {
 			$nom_fichier = sql_getfetsel('fichier', 'spip_documents', 'md5=' . sql_quote($valeur['md5']));
 			if ($nom_fichier) {
-				unlink(_DIR_IMG . $nom_fichier);
 				$document_spip = sql_delete('spip_documents', 'md5=' . sql_quote($valeur['md5']));
 			}
 		}
 		// Supprime les données dans la base spip_ownclouds
 		$supprimer = sql_delete('spip_ownclouds');
+		// Supprimer fichier
+		unlink(_DIR_TMP . 'owncloud.json');
 	}
 
 	return false;

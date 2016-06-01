@@ -16,29 +16,34 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
-### Version 1.0.4 (17/05/2015)
+### Version 1.0.5 (01/06/2016)
+
+- Amélioration des erreurs lors de la récupération des fichiers
+- Récupérer seulement des fichiers et non les répertoires
+
+### Version 1.0.4 (17/05/2016)
 
 - On sécurise les URL pour ne pas voir apparaître le mot de passe de Owncloud
 
-### Version 1.0.3 (15/05/2015)
+### Version 1.0.3 (15/05/2016)
 
 - Gérer les sous-répertoires
 - Les champs obligatoires dans le formulaire de configuration fonctionnels
 - Ajout d'un lien pour accéder directement au document quand il est importé dans SPIP.
 
-### Version 1.0.2 (14/05/2015)
+### Version 1.0.2 (14/05/2016)
 
 - Ajout d'un test de connexion à webdav sur la liste
 - Ajoute la possibilité de purger les documents importer dans SPIP
 - Ajoute la possibilité d'activer ou desactiver la syncho vers owncloud
 - Ajoute la possibilité d'effacer ou non les documents distants du owncloud avec webdav
 
-### Version 1.0.1 (13/05/2015)
+### Version 1.0.1 (13/05/2016)
 
 - Detecter avec un md5 si le document est deja inséré dans SPIP
 - Ajout un crontab qui aspire les médias automatiquement et les importe dans SPIP
 
-### Version 1.0.0 (11/05/2015)
+### Version 1.0.0 (11/05/2016)
 
 - Configurer le plugins pour se connecter à owncloud
 - Récupérer les médias avec webdav du owncloud
@@ -49,5 +54,4 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## TODO
 
-- Tester le mime-type des documents dans la liste pour éviter de récupérer la racine du répertoire et pour éviter d'avoir une boite mediabox vide sur les documents autres que des images
-- Lors de la suppression d'un document dans SPIP on peut vérifier si il y a une md5 dans la base spip_ownclouds et le supprimer
+- Lors de la suppression d'un document dans SPIP on peut vérifier si il y a un md5 dans la base spip_ownclouds et le supprimer

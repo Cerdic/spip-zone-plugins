@@ -18,6 +18,20 @@
 	</thead>
 	<tbody>
 		<BOUCLE_liste_owncloud(DATA){si #GET{json}|file_exists}{source json, #GET{json}}{pagination #ENV{nb,10}}>
+		[(#SET{statut, [(#VALEUR|table_valeur{nom})]})]
+		<BOUCLE_condition_erreur(CONDITION){si #GET{statut}|=={404}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class='titre principale' colspan='5'>
+					<div class="liste-objets owncloud documents caption-wrap">
+						<p class="caption">
+							<:owncloud:pas_de_media:> <:owncloud:pas_de_media_erreur:>
+						</p>
+					</div>
+				</td>
+			</tr>
+		</BOUCLE_condition_erreur>
+
+		<BOUCLE_condition_ok(CONDITION){si #GET{statut}|!={404}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'></td>
 			<td class='titre principale'>
@@ -51,7 +65,8 @@
 				]
 			</td>
 		</tr>
-	</BOUCLE_liste_owncloud>
+		</BOUCLE_condition_ok>
+		</BOUCLE_liste_owncloud>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
