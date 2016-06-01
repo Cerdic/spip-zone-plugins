@@ -41,6 +41,26 @@ function owncloud_boite_info($flux, $pipeline) {
 }
 
 /**
+ * Supprimer le md5 de la table spip_ownclouds
+ *
+ * @pipeline post_edition
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function owncloud_post_edition($flux) {
+	if (isset($flux['args']['action'])
+		and $flux['args']['action'] == 'supprimer_document'
+		and $flux['args']['table'] == 'spip_documents'
+		and $id_objet = intval($flux['args']['id_objet'])
+	) {
+		sql_delete('spip_ownclouds', 'md5=' . intval($flux['args']['document']['md5']));
+	}
+
+	return $flux;
+}
+
+/**
  * Taches periodiques de syncro de owncloud 
  *
  * @param array $taches_generales

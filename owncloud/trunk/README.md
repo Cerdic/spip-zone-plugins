@@ -18,6 +18,9 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ### Version 1.0.5 (01/06/2016)
 
+- Ajout de la doc vers contrib dans le paquet.xml
+- Suppression du md5 dans la table spip_ownclouds lors de la suppression 
+  d'un document inséré dans SPIP.
 - Amélioration des erreurs lors de la récupération des fichiers
 - Récupérer seulement des fichiers et non les répertoires
 

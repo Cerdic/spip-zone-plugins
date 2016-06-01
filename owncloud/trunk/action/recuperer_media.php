@@ -26,7 +26,6 @@ function action_recuperer_media_dist() {
 	try {
 		$client = new Sabre\DAV\Client($settings);
 		$liste = $client->propfind($settings['baseUri'], array('{DAV:}displayname', '{DAV:}getcontentlength', '{DAV:}getlastmodified'), 1);
-		spip_log($liste, 'test.' . _LOG_ERREUR);
 	} catch (Exception $e) {
 		$code = $e->getHttpStatus();
 	}
