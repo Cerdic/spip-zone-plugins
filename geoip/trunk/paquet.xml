@@ -1,0 +1,21 @@
+<paquet
+	prefix="geoip"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/geoip-32.png"
+	documentation=""
+>
+
+	<nom>geoIP</nom>
+	<!--Ce plugin permet de récupérer la lib geoIP-->
+
+	<auteur>cyp</auteur>
+	<credit lien="https://github.com/maxmind/geoip-api-php/">Maxmind</credit>
+
+	<licence>GNU/GPL</licence>
+	
+	<lib nom="geoip-api-php" lien="https://github.com/maxmind/geoip-api-php/archive/master.zip" />
+	
+</paquet>
