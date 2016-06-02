@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - objet : type d'objet à dissocier
  *     - id_objet : identifiant de l'objet à dissocier
  */
-function action_dissocier_numero_dist($arg) {
+function action_dissocier_numero_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
@@ -44,6 +44,4 @@ function action_dissocier_numero_dist($arg) {
 		objet_dissocier(array('numero' => $id_numero), array($objet => $id_objet));
 	}
 }
-
-?>
 

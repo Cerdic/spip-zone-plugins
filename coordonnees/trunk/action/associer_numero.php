@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - objet : type d'objet à associer
  *     - id_objet : identifiant de l'objet à associer
  */
-function action_associer_numero_dist($arg) {
+function action_associer_numero_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
