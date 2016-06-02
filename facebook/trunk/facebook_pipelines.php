@@ -13,6 +13,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Afficher automatiquement la boite de publication d'article sur Facebook
+ *
+ * @param mixed $flux
+ * @access public
+ * @return mixed
+ */
 function facebook_affiche_gauche($flux) {
 
 	$config = lire_config('facebook');

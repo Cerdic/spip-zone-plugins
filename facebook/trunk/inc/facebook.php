@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('lib/facebook-php-sdk/src/Facebook/autoload');
 include_spip('inc/facebook_poster');
 
-// Cependant, il n'est pas foutu de faire lui même ce test.
+// Le SDK de facebook à besoin d'une session php mais n'est pas foutu de faire lui même ce test.
 if (!session_id()) {
     session_start();
 }
@@ -66,7 +66,7 @@ function facebook_lien_connection($action) {
 }
 
 /**
- * On récupère le token d'accès et on le stocke dans le config SPIP
+ * On récupère le token d'accès
  *
  * @access public
  * @return string Un message d'erreur au besoin
@@ -133,6 +133,12 @@ function facebook_access_token() {
 	return $accessToken;
 }
 
+/**
+ * Lister les page accessible par l'utilisateur
+ *
+ * @access public
+ * @return mixed
+ */
 function facebook_liste_pages() {
 
 	$fb = facebook();
@@ -158,6 +164,13 @@ function facebook_liste_pages() {
 }
 
 
+/**
+ * Récupérer le token d'une page
+ *
+ * @param int $id_page
+ * @access public
+ * @return mixed
+ */
 function facebook_page_token($id_page) {
 
 	$graphEdges = facebook_liste_pages();
@@ -193,6 +206,14 @@ function facebook_saisie_pages() {
 	return $datas;
 }
 
+/**
+ * Récupérer le profil facebook de la personne
+ * Si aucun token n'est passé, ce sera la configuration du site qui sera utilisée
+ *
+ * @param mixed $token
+ * @access public
+ * @return array
+ */
 function facebook_profil($token = null) {
 
 	$fb = facebook();
@@ -224,6 +245,16 @@ function facebook_profil($token = null) {
 	);
 }
 
+/**
+ * Récupérer l'image de profil
+ * Attention ! Il faut ajouter la permission Facebook `user_about_me`
+ *
+ * @param mixed $token
+ * @param int $width
+ * @param int $height
+ * @access public
+ * @return mixed
+ */
 function facebook_profil_picture($token = null, $width = 0, $height = 0) {
 
 	$fb = facebook();
