@@ -296,10 +296,10 @@ function facebook_profil_picture($token = null, $width = 0, $height = 0) {
  * ```
  *
  * @param mixed $token Token Facebook
- * @param int $width Largeur de l'image à demander à facebook
- * @param int $height Hauteur de l'image à demander à facebook
+ * @param int $width Largeur de l'image à demander à Facebook
+ * @param int $height Hauteur de l'image à demander à Facebook
  * @param string $alt attribut alt de l'image
- * @param string $class class de l'imahe
+ * @param string $class class de l'image
  * @access public
  * @return string Une balise img
  */
