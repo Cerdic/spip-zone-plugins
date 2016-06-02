@@ -97,3 +97,20 @@ function connecteur_update_token($id_auteur, $type, $token) {
 		)
 	);
 }
+
+/**
+ * Supprimer le token d'un utilisateur
+ *
+ * @param int $id_auteur
+ * @param string $type
+ * @access public
+ */
+function connecteur_delete_token($id_auteur, $type) {
+	sql_delete(
+		'spip_connecteur',
+		array(
+			'id_auteur='.intval($id_auteur),
+			'type='.sql_quote($type)
+		)
+	);
+}
