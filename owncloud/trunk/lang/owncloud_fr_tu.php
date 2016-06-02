@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'md5' => 'md5',
 	'message_activation_synchro' => 'La synchronisation est activé.',
-	'message_confirmation_purger_owncloud' => 'Tout les identifiants MD5 sont supprimés de la base',
+	'message_confirmation_purger_owncloud' => 'Tout les identifiants MD5 sont supprimés de la base', # MODIF
 	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
 
 	// O
@@ -58,11 +58,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'owncloud_peupler_explication' => 'En cliquant sur ce bouton, tu va récupérer les fichiers présent sur ton Owncloud.',
 	'owncloud_peupler_item' => 'Récupération des documents',
 	'owncloud_purger_avertissement' => '<p><strong>Attention :</strong> Tu as activé l’effacement des fichiers distants, il est probable que tes fichiers ne soient plus présents sur ton Owncloud, en cliquant sur ce bouton tu peux perdre tes documents.</p>',
-	'owncloud_purger_explication' => 'En cliquant sur ce bouton, tu supprime les identifiants MD5 permettant de t’indiquer si un fichier a déjà été importé dans SPIP et tu supprime également les fichiers importés précédemment dans SPIP.',
+	'owncloud_purger_explication' => 'En cliquant sur ce bouton, tu supprime les identifiants MD5 permettant de t’indiquer si un fichier a déjà été importé dans SPIP et tu supprime également les fichiers importés précédemment dans SPIP.', # MODIF
 	'owncloud_purger_item' => 'Purge les documents',
 
 	// P
-	'pas_de_media' => 'Aucuns documents n’est importés pour le moment, clique sur le bouton pour récupérer les documents depuis ton Owncloud',
+	'pas_de_media' => 'Aucuns documents n’est importés pour le moment, clique sur le bouton pour récupérer les documents depuis ton Owncloud', # MODIF
 
 	// T
 	'taille_fichier' => 'Taille du fichier',
