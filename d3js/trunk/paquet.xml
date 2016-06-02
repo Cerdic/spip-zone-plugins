@@ -1,7 +1,7 @@
 <paquet
 	prefix="d3js"
 	categorie="outil"
-	version="1.2.2"
+	version="1.2.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/d3js-64.png"

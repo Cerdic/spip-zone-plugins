@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	$('.[(#ENV{variable}|table_valeur{class})]').arcGauge({
+			colors: {
+				0:		'#003366', // 0
+				25: 	'#33cc00', // 25
+				50:		'#ffff66', // 50
+				75: 	'#ff9966', // 75
+				0.90:  	'#ff3333'  // 90
+			}
+			[, value: (#ENV{variable}|table_valeur{score})]
+	});
+</script>

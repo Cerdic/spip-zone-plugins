@@ -9,10 +9,17 @@ Intégrer d3.js dans SPIP
 * [d3-legend](https://github.com/susielu/d3-legend/)
 * [d3pie](https://github.com/benkeen/d3pie/)
 * [topojson](https://github.com/mbostock/topojson)
+* [crossfilter](http://square.github.io/crossfilter/)
+* [gauge simple](https://github.com/indrimuska/jquery-d3-arc-gauge)
 
 ## Changelog
 
 ### Version 1.2.x
+
+#### Version 1.2.3
+
+* Ajout de [crossfilter](http://square.github.io/crossfilter/)
+* Ajout de [gauge simple](https://github.com/indrimuska/jquery-d3-arc-gauge)
 
 #### Version 1.2.2
 
