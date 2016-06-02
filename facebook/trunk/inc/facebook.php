@@ -287,3 +287,26 @@ function facebook_profil_picture($token = null, $width = 0, $height = 0) {
 
 	return $picture;
 }
+
+/**
+ * Ce filtre va afficher l'image de profil facebook :
+ *
+ * ```
+ * [(#TOKEN_FACEBOOK|facebook_profil_picture{300,300, Image facebook})]
+ * ```
+ *
+ * @param mixed $token Token Facebook
+ * @param int $width Largeur de l'image à demander à facebook
+ * @param int $height Hauteur de l'image à demander à facebook
+ * @param string $alt attribut alt de l'image
+ * @param string $class class de l'imahe
+ * @access public
+ * @return string Une balise img
+ */
+function filtre_facebook_profil_picture_dist($token, $width = 0, $height = 0, $alt = '', $class = '') {
+
+	$picture = facebook_profil_picture($token, $width, $height);
+	$balise_img = charger_filtre('balise_img');
+
+	return $balise_img($picture['url'], $alt, $class);
+}
