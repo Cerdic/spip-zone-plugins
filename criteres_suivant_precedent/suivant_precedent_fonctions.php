@@ -12,9 +12,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // tester la presence des iterateurs...
 if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')
 	or defined('_DIR_PLUGIN_ITERATEURS')) {
-	define('avec_iterateur', true);
+	define('_AVEC_ITERATEUR', true);
 } else {
-	define('avec_iterateur', false);
+	define('_AVEC_ITERATEUR', false);
 }
 
 
@@ -24,7 +24,7 @@ if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')
  *
 **/
 function critere_suivant_dist($idb, &$boucles, $crit) {
-	if (avec_iterateur) {
+	if (_AVEC_ITERATEUR) {
 		calculer_critere_iterateur_suivant_precedent_dist($idb, $boucles, $crit, 'suivant');
 	} else {
 		calculer_critere_suivant_precedent_dist($idb, $boucles, $crit, 'suivant');
@@ -37,7 +37,7 @@ function critere_suivant_dist($idb, &$boucles, $crit) {
  *
 **/
 function critere_precedent_dist($idb, &$boucles, $crit) {
-	if (avec_iterateur) {
+	if (_AVEC_ITERATEUR) {
 		calculer_critere_iterateur_suivant_precedent_dist($idb, $boucles, $crit, 'precedent');
 	} else {
 		calculer_critere_suivant_precedent_dist($idb, $boucles, $crit, 'precedent');
