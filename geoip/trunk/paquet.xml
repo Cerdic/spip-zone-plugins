@@ -1,7 +1,7 @@
 <paquet
 	prefix="geoip"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/geoip-32.png"
@@ -17,5 +17,7 @@
 	<licence>GNU/GPL</licence>
 	
 	<lib nom="geoip-api-php" lien="https://github.com/maxmind/geoip-api-php/archive/master.zip" />
-	
+	<lib nom="GeoIP2-php" lien="https://github.com/maxmind/GeoIP2-php/archive/master.zip" />
+	<lib nom="MaxMind-DB-Reader-php" lien="https://github.com/maxmind/MaxMind-DB-Reader-php/archive/master.zip" />
+
 </paquet>
