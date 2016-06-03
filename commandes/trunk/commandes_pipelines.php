@@ -320,8 +320,10 @@ function commandes_bank_abos_decrire_echeance($flux) {
 		switch($echeances_type) {
 			case 'mois':
 				$flux['data']['freq'] = 'monthly';
+				break;
 			case 'annee':
 				$flux['data']['freq'] = 'yearly';
+				break;
 		}
 		
 		// Si c'est une seule valeur toute simple
