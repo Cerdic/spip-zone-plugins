@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_debut_debut_semaine_prec' => 'Begin van de voorafgaande week',
 	'label_affichage_debut_mois_passe' => '@mois@ vooraf',
 	'label_affichage_duree' => 'De evenementen opsommen op',
+	'label_articlepardefaut' => 'Standaardartikel (id)',
 	'label_descriptif' => 'Omschrijving',
 	'label_insert_head_css_1' => 'Automatisch de standaardstijlen van de agenda invoegen',
 	'label_titre' => 'Paginatitel',
