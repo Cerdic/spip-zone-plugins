@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_affichage_debut_debut_semaine_prec' => 'Beginning of the previous week',
 	'label_affichage_debut_mois_passe' => 'previous @mois@',
 	'label_affichage_duree' => 'List events on',
+	'label_articlepardefaut' => 'Identification of default article',
 	'label_descriptif' => 'Descriptive',
 	'label_insert_head_css_1' => 'Automatically insert the default styles of the agenda',
 	'label_titre' => 'Page title',
