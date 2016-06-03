@@ -64,6 +64,12 @@ function formulaires_configurer_geoip_traiter_dist() {
 				ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 			}
 		}
+
+		// On renomme un fichier de la librairie qui a pour extension .inc
+		$vieux_fichier = find_in_path('lib/geoip-api-php/src/geoip.inc');
+		$nouveau_fichier = '../lib/geoip-api-php/src/geoip.php';
+		rename($vieux_fichier, $nouveau_fichier);		
+
 	}
 
 	$res = array(

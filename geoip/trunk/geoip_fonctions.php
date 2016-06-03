@@ -98,6 +98,7 @@ function geoip_code_by_addr($ip, $version = false) {
 		include_spip('../lib/GeoIP2-php/src/Compat/JsonSerializable');
 		include_spip('../lib/GeoIP2-php/src/Record/AbstractRecord');
 		include_spip('../lib/GeoIP2-php/src/Record/AbstractPlaceRecord');
+		include_spip('../lib/GeoIP2-php/src/Record/Subdivision');
 		include_spip('../lib/GeoIP2-php/src/Record/MaxMind');
 		include_spip('../lib/GeoIP2-php/src/Record/Postal');
 		include_spip('../lib/GeoIP2-php/src/Record/Location');
