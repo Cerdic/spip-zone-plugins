@@ -1,7 +1,7 @@
 <paquet
 	prefix="villebe"
 	categorie="navigation"
-	version="1.0.3"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/villebe-64.png"
