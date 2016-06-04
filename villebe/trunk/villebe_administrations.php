@@ -42,6 +42,12 @@ function villebe_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_villes_belges'))
 	);
 
+	$maj['1.0.5'] = array(
+		// Vider la table
+		array('sql_query', 'TRUNCATE TABLE spip_villes_belges'),
+        array('peupler_base_villebe')
+	);
+
 	include_spip('base/upgrade');
     include_spip('base/villebe_peupler_base');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
