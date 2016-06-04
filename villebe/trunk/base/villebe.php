@@ -52,10 +52,12 @@ function villebe_declarer_tables_objets_sql($tables) {
 			'province'           => "varchar(255) NOT NULL DEFAULT ''",
 			'lat' => 'double NULL NULL',
 			'lon' => 'double NULL NULL',
+			'entite'    => "varchar(3) NOT NULL DEFAULT 'non'"
 		),
 		'key' => array(
 			'PRIMARY KEY'        => 'id_villes_belge',
-            'KEY'    => 'code_postal'
+            'KEY code_postal'    => 'code_postal',
+			'KEY entite'    => 'entite'
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		'champs_editables'  => array(),
