@@ -30,9 +30,12 @@ function villebe_upgrade($nom_meta_base_version, $version_cible) {
         array('maj_tables', array('spip_villes_belges', 'spip_villes_belges_liens')),
         array('peupler_base_villebe')
     );
-
 	$maj['1.0.1'] = array(
         array('maj_tables', array('spip_villes_belges_liens')),
+	);
+
+	$maj['1.0.3'] = array(
+		array('maj_tables', array('spip_villes_belges'))
 	);
 
 	include_spip('base/upgrade');

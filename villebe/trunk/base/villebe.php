@@ -43,17 +43,19 @@ function villebe_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_villes_belges'] = array(
 		'type' => 'villes_belge',
-		'principale' => "oui",
+		'principale' => 'oui',
 		'table_objet_surnoms' => array('villesbelge'), // table_objet('villes_belge') => 'villes_belges'
 		'field'=> array(
-			"id_villes_belge"    => "bigint(21) NOT NULL",
-			"code_postal"        => "varchar(4) NOT NULL DEFAULT ''",
-			"nom"                => "varchar(255) NOT NULL DEFAULT ''",
-            "province"           => "varchar(255) NOT NULL DEFAULT ''",
+			'id_villes_belge'    => 'bigint(21) NOT NULL',
+			'code_postal'        => "varchar(4) NOT NULL DEFAULT ''",
+			'nom'                => "varchar(255) NOT NULL DEFAULT ''",
+			'province'           => "varchar(255) NOT NULL DEFAULT ''",
+			'lat' => 'double NULL NULL',
+			'lon' => 'double NULL NULL',
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_villes_belge",
-            "KEY"    => "code_postal"
+			'PRIMARY KEY'        => 'id_villes_belge',
+            'KEY'    => 'code_postal'
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		'champs_editables'  => array(),
