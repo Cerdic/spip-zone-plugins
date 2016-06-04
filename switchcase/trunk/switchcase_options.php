@@ -3,18 +3,21 @@
 /**
  * Balises SPIP génériques supplémentaires, du genre Bonux
  *
- * @copyright  2015
+ * @copyright  2015-2016
  * @author     JLuc chez no-log.org
  * @licence    GPL
  */
 
 function balise_SWITCH_dist($p) {
 	$_val = interprete_argument_balise(1, $p);
-	if ($_val === NULL)
-		$p->code="'il faut 1 argument pour la balise #SWITCH et très exactement 1 pour l\'instant'";
+	if ($_val === NULL) {
+		$err = array('zbug_balise_sans_argument', array('balise' => ' #SWITCH'));
+		erreur_squelette($err, $p);
+	}
 	else
-		$p->code = $p->code = "vide(\$Pile['vars'][\$_zzz=(string)'_switch_'] = $_val)";
-		// #GET{_switch_} vaut maintenant la valeur testée
+		$p->code = $p->code = "(vide(\$Pile['vars']['_switch_'] = $_val).vide(\$Pile['vars']['_switch_matched_']=''))";
+		// #GET{_switch_} renvoie maintenant la valeur testée
+		// et #GET{_switch_matched_} indique si un test #CASE a déjà été satisfait
 
 	$p->interdire_script = false;
 	return $p;
@@ -24,17 +27,22 @@ function balise_SWITCH_dist($p) {
 
 function balise_CASE_dist($p) {
 	$tested = interprete_argument_balise(1, $p);
-	if ($tested === NULL)
-		$p->code="'il faut 1 ou 2 arguments pour la balise #CASE (1 seulement si on a fait # SWITCH(XXX) avant : todo)'";
+	if ($tested === NULL) {
+		$err = array('zbug_balise_sans_argument', array('balise' => ' #CASE'));
+		erreur_squelette($err, $p);
+	}
 	else {
-		$value = interprete_argument_balise(2, $p);
-		if ($value === NULL) {
-			$value=$tested;
-			$tested = "(\$Pile['vars'][\$_zzz=(string)'_switch_'])";
-		}
-		$p->code = "(($tested == $value) ? ' ' : '')";
-	};
+		$p->code = "(($tested == \$Pile['vars']['_switch_']) ? ' '.vide(\$Pile['vars']['_switch_matched_']=' ') : '')";
+	}; 
 	$p->interdire_script = false;
 	return $p;
 }
 
+if (!function_exists(balise_DEFAULT_dist)) {
+	function balise_DEFAULT_dist($p) {
+		$p->code = "(\$Pile['vars']['_switch_matched_'] ? '' : ' ')";
+	$p->interdire_script = false;
+	return $p;
+}
+
+}
