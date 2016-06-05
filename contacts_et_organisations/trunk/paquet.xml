@@ -1,7 +1,7 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.13.6"
+	version="2.13.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/contacts-128.png"
@@ -28,7 +28,8 @@
 	<pipeline nom="affiche_hierarchie" inclure="contacts_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="contacts_pipelines.php" />
 	<pipeline nom="autoriser" inclure="contacts_autoriser.php" />
-
+	<pipeline nom="ieconfig_metas" inclure="contacts_pipelines.php" />
+	
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />

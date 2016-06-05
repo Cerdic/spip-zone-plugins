@@ -12,6 +12,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+/*
+ * function contacts_ieconfig_metas
+ *
+ * export de configuration avec le plugin ieconfig
+ * 
+ * @param $table
+ */
+
+function contacts_ieconfig_metas($table) {
+    $table['contacts']['titre'] = _T('contacts:contacts');
+    $table['contacts']['icone'] = 'prive/themes/spip/images/contact-16.png';
+    $table['contacts']['metas_serialize'] = 'contacts_et_organisations';
+	
+	return $table;
+}
+
 /**
  * Ajoute un fil d'ariane sur les auteurs définis comme contacts ou organisation
  *
