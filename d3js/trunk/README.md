@@ -16,6 +16,11 @@ Intégrer d3.js dans SPIP
 
 ### Version 1.2.x
 
+#### Version 1.2.4
+
+* Mise à jour de la version de d3js
+* On ajoute la version minifier de d3js. Attention la version non minifié fait bugguer le javascript du site.  
+
 #### Version 1.2.3
 
 * Ajout de [crossfilter](http://square.github.io/crossfilter/)
