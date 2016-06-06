@@ -89,10 +89,10 @@ function & comarquage_compile_page_xml($parametres, $url_base) {
 		$parametres_xsl['MOTCLE'] = $parametres['motcle'];
 	}
 
-	/* R�glage pour l'URL */
+	/* Réglage pour l'URL */
 	$parametres_xsl['REFERER'] = self();
 	// spip_log("REFERER 1 : ".$parametres_xsl['REFERER'],"comarquage");
-	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'], "xml", '', '&'); // on enl�ve les param�tres d'url
+	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'], "xml", '', '&'); // on enlève les paramètres d'url
 	// spip_log("REFERER 2 : ".$parametres_xsl['REFERER'],"comarquage");
 	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'], "xsl", '', '&');
 	// spip_log("REFERER 3 : ".$parametres_xsl['REFERER'],"comarquage");
@@ -107,10 +107,10 @@ function & comarquage_compile_page_xml($parametres, $url_base) {
 
 	// MODIF VI :  REFERER / PICTOS / SITEURL / IMAGES / PIVOTS / XMLURL / CATEGORIE
 	$parametres_xsl['SITEURL'] = lire_meta("adresse_site");
-	$parametres_xsl['PICTOS'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE_IMAGES; // url des picto (web, t�l�phone, ...)
+	$parametres_xsl['PICTOS'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE_IMAGES; // url des picto (web, téléphone, ...)
 	$parametres_xsl['IMAGES'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE_IMAGES . '/'; // URL des images
 	$parametres_xsl['PIVOTS'] = 'mairie'; // pivots locaux
-	$parametres_xsl['XMLURL'] = 'http://lecomarquage.service-public.fr/vdd/2.3/part/xml/'; // url des donn�es XML du comarquage
+	$parametres_xsl['XMLURL'] = 'http://lecomarquage.service-public.fr/vdd/2.3/part/xml/'; // url des données XML du comarquage
 	$parametres_xsl['CATEGORIE'] = $parametres['categorie']; // particuliers, associations ou entreprises
 	$parametres_xsl['DONNEES'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE . 'xml';
 	//~ $parametres_xsl['CATEGORIE_NOM'] = $parametres_xsl['CATEGORIE'];
@@ -272,7 +272,7 @@ function comarquage_prepare_parametres_cache(& $parametres, $url_base) {
 
 	$parametres['cache_full_path'] = sous_repertoire(_DIR_CACHE, _DIR_CACHE_COMARQUAGE_CACHE) . basename($parametres['xml'], '.xml') . ($cache_id ? '.' . $cache_id : '') . '.cache';
 
-	spip_log("Param�tre APRES comarquage_prepare_parametres_cache", "comarquage");
+	spip_log("Paramètre APRES comarquage_prepare_parametres_cache", "comarquage");
 	spip_log($parametres, "comarquage");
 }
 
@@ -293,7 +293,7 @@ function & comarquage_lire_cache($parametres) {
 function & comarquage_lire_xml($parametres, &$ma_page) {
 	$fichier = $parametres['xml_full_path'];
 	// on ne recharge pas la page ici du moment qu'elle n'est pas trop vieille
-	// la reactualisation des pages est r�alis�e preferentiellement par tache cron
+	// la reactualisation des pages est réalisée preferentiellement par tache cron
 
 	if (($ok = file_exists($parametres['xml_full_path'])) && time() - filemtime($parametres['xml_full_path']) < $GLOBALS['meta']['comarquage_local_timeout']) {
 		$mise_a_jour = 10;

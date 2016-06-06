@@ -29,7 +29,7 @@ function genie_comarquage_update_xml_dist($t) {
 		// si liste existe pas, on la construit
 		// et on rend la main pour que ce soit pas trop long
 
-		// On a des dossiers cache diff�rents selon la cat�gorie
+		// On a des dossiers cache différents selon la catégorie
 		$categories = array('particuliers', 'associations', 'entreprises');
 		foreach ($categories as $cat) {
 			$table = preg_files(_DIR_CACHE . _DIR_CACHE_COMARQUAGE_XML . "_" . $cat, '[.]*\.xml$');
@@ -49,7 +49,7 @@ function genie_comarquage_update_xml_dist($t) {
 			//return (0 - $t); // revenir ...
 			return 1; // fini pour cette fois
 		} else {
-			spip_log("Pas de fichier pour la mise � jour", "comarquage_update");
+			spip_log("Pas de fichier pour la mise à jour", "comarquage_update");
 			effacer_meta('comarquage_xml_to_update');
 			ecrire_metas();
 
