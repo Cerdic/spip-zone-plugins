@@ -19,6 +19,7 @@ function comarquage_taches_generales_cron($taches_generales) {
 
 // insertion de la feuille de style utilisé par le comarquage
 function comarquage_insert_head_css($flux) {
+	include_spip('inc/utils');
 	$flux .= '<link rel="stylesheet" href="' . find_in_path('comarquage.css') . '" media="all" />';
 
 	return $flux;

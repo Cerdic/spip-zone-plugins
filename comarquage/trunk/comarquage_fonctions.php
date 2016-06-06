@@ -41,6 +41,9 @@ function & comarquage_parametres($defaut, &$urlbase) {
 		'motcle' => '',
 		'categorie' => '',
 	);
+	include_spip('inc/config');
+	include_spip('inc/flock');
+	include_spip('inc/utils');
 
 	foreach ($parametres_attendus as $k => $reg) {
 		$p = _request($k);

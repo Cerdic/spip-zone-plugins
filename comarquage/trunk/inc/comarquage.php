@@ -31,6 +31,8 @@ if (!defined('_DIR_TMP_XSLT_COMARQUAGE')) {
 }
 
 include_spip('inc/config');
+include_spip('inc/flock');
+include_spip('inc/utils');
 
 $local_refresh = lire_config('comarquage/local_refresh');
 if (!isset($local_refresh)) {
@@ -106,7 +108,7 @@ function & comarquage_compile_page_xml($parametres, $url_base) {
 	}
 
 	// MODIF VI :  REFERER / PICTOS / SITEURL / IMAGES / PIVOTS / XMLURL / CATEGORIE
-	$parametres_xsl['SITEURL'] = lire_meta("adresse_site");
+	$parametres_xsl['SITEURL'] = lire_config("adresse_site");
 	$parametres_xsl['PICTOS'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE_IMAGES; // url des picto (web, téléphone, ...)
 	$parametres_xsl['IMAGES'] = $parametres_xsl['SITEURL'] . '/' . _DIR_PLUGIN_COMARQUAGE_IMAGES . '/'; // URL des images
 	$parametres_xsl['PIVOTS'] = 'mairie'; // pivots locaux
@@ -318,6 +320,7 @@ function & comarquage_lire_xml($parametres, &$ma_page) {
 // retourne FALSE en cas d'echec
 // 20 en cas de telechargement correct
 function comarquage_recuperer_page_xml($parametres) {
+	include_spip('inc/filtres_mini');
 
 	// En fonction de la catégorie (particulier / associations / professionnels) l'url cible n'est pas la même
 	switch ($parametres['categorie']) {
