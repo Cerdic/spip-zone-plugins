@@ -23,7 +23,8 @@
 	<langue code="it" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="197" traduits="115" relire="0" modifs="3" nouveaux="79" pourcent="58.38">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=pt_br" total="197" traduits="189" relire="2" modifs="1" nouveaux="5" pourcent="95.94">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=pt_br" total="197" traduits="197" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="197" traduits="136" relire="0" modifs="3" nouveaux="58" pourcent="69.04">
