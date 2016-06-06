@@ -1,19 +1,21 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/cextras');
 
 /**
  * Fonction d'upgrade/maj
- * On crée une configuration par défaut
+ * On crÃ©e une configuration par dÃ©faut
  *
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function rubriquepreferee_upgrade($nom_meta_base_version,$version_cible){
+function rubriquepreferee_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	cextras_api_upgrade(rubriquepreferee_declarer_champs_extras(), $maj['create']);	
+	cextras_api_upgrade(rubriquepreferee_declarer_champs_extras(), $maj['create']);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -32,9 +34,10 @@ function rubriquepreferee_vider_tables($nom_meta_base_version) {
  * Declare le champ extra rubrique preferee
  *
  * @param array $champs
- * @return array le tableau des champs à déclarer
+ *
+ * @return array le tableau des champs Ã  dÃ©clarer
  */
-function rubriquepreferee_declarer_champs_extras($champs = array()){
+function rubriquepreferee_declarer_champs_extras($champs = array()) {
 	$champs['spip_auteurs']['rubrique_preferee'] = array(
 		'saisie' => 'selecteur_rubrique',
 		'options' => array(
@@ -43,8 +46,10 @@ function rubriquepreferee_declarer_champs_extras($champs = array()){
 			'explication' => _T('rubriquepreferee:explication'),
 			'obligatoire' => false,
 			'rechercher' => false,
-			'sql' => "varchar(255) NOT NULL DEFAULT ''"
-		));
+			'sql' => "varchar(255) NOT NULL DEFAULT ''",
+		),
+	);
+
 	return $champs;
 }
 
