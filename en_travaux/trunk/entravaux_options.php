@@ -140,6 +140,7 @@ function entravaux_affichage_final($flux){
 		position: fixed;
 		left: 40px;
 		top: 40px;
+		z-index: 10000;
 		">'
 		. http_img_pack(chemin_image('entravaux-64.png'), _T('entravaux:en_travaux'), '', _T('entravaux:en_travaux'))
 		. '</div>';
