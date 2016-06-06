@@ -467,11 +467,11 @@ function formulaires_configurer_ckeditor_p3_traiter_dist() {
 			}
 		}
 		ecrire_config("ckeditor/conversion", _request("conversion")) ;
-		ecrire_config("ckeditor/html2spip_limite", (bool) _request("html2spip_limite")) ;
+		ecrire_config("ckeditor/html2spip_limite",  _request("html2spip_limite")) ;
 		ecrire_config("ckeditor/html2spip_identite", _request("html2spip_identite")) ;
-		ecrire_config("ckeditor/spiplinks", (bool) _request("spiplinks")) ;
-		ecrire_config("ckeditor/insertall",(bool) _request("insertall")) ;
-		ecrire_config("ckeditor/pastetext",(bool) _request("pastetext")) ;
+		ecrire_config("ckeditor/spiplinks",  _request("spiplinks")) ;
+		ecrire_config("ckeditor/insertall", _request("insertall")) ;
+		ecrire_config("ckeditor/pastetext", _request("pastetext")) ;
 		ecrire_config("ckeditor/selecteurs_public", _request("selecteurs_public")) ;
 		ecrire_config("ckeditor/selecteurs_prive", _request("selecteurs_prive")) ;
 
