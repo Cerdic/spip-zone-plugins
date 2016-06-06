@@ -13,6 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 function genie_comarquage_update_xml_dist($t) {
 	include_spip('inc/comarquage');
+	include_spip('inc/config');
+	include_spip('inc/utils');
 
 	$file_liste = array();
 
@@ -21,8 +23,7 @@ function genie_comarquage_update_xml_dist($t) {
 		$file_liste = unserialize($GLOBALS['meta']['comarquage_xml_to_update']);
 		if (!is_array($file_liste)) {
 			$file_liste = array();
-			effacer_meta('comarquage_xml_to_update');
-			ecrire_metas();
+			effacer_config('comarquage_xml_to_update');
 		}
 	}
 	if (!isset($GLOBALS['meta']['comarquage_xml_to_update'])) {
@@ -42,16 +43,14 @@ function genie_comarquage_update_xml_dist($t) {
 			}
 		}
 		if (count($file_liste)) {
-			ecrire_meta('comarquage_xml_to_update', serialize($file_liste));
-			ecrire_metas();
+			ecrire_config('comarquage_xml_to_update', serialize($file_liste));
 			spip_log("[comarquage] " . count($file_liste) . " fichiers a mettre a jour ...", "comarquage_update");
 
 			//return (0 - $t); // revenir ...
 			return 1; // fini pour cette fois
 		} else {
 			spip_log("Pas de fichier pour la mise à jour", "comarquage_update");
-			effacer_meta('comarquage_xml_to_update');
-			ecrire_metas();
+			effacer_config('comarquage_xml_to_update');
 
 			return 1; // fini
 		}
@@ -81,15 +80,13 @@ function genie_comarquage_update_xml_dist($t) {
 	}
 
 	if (count($file_liste) && is_array($file_liste)) {
-		ecrire_meta('comarquage_xml_to_update', serialize($file_liste));
-		ecrire_metas();
+		ecrire_config('comarquage_xml_to_update', serialize($file_liste));
 		spip_log("[comarquage] " . count($file_liste) . " fichiers restant a mettre a jour ...", "comarquage_update");
 
 		//return (0 - $t); // revenir ...
 		return 1; // fini pour cette fois
 	} else {
-		effacer_meta('comarquage_xml_to_update');
-		ecrire_metas();
+		effacer_config('comarquage_xml_to_update');
 
 		return 1; // fini
 	}
