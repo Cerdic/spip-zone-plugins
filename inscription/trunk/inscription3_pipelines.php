@@ -347,7 +347,7 @@ function inscription3_formulaire_verifier($flux){
 		$config_i3 = lire_config('inscription3',array());
 		if($erreurs['message_erreur'] == NULL)
 			unset($erreurs['message_erreur']);
-		
+
 		/**
 		 * Vérifier le logo
 		 */
@@ -358,14 +358,14 @@ function inscription3_formulaire_verifier($flux){
 				$erreurs['logo'] = $erreur;
 			else
 				$source = deplacer_fichier_upload($_FILES['logo']['tmp_name'], $f);
-			
+
 			if ($source AND $f) {
 				global $formats_logos;
 				$size = @getimagesize($f);
 				$type = !$size ? '': ($size[2] > 3 ? '' : $formats_logos[$size[2]-1]);
 				if ($type) {
 					$poids = filesize($f);
-	
+
 					if (_LOGO_MAX_SIZE > 0
 					AND $poids > _LOGO_MAX_SIZE*1024) {
 						spip_unlink ($f);
@@ -373,7 +373,7 @@ function inscription3_formulaire_verifier($flux){
 											array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 											'actuel' => taille_en_octets($poids)));
 					}
-		
+
 					elseif (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
 					AND ($size[0] > _LOGO_MAX_WIDTH
 					OR $size[1] > _LOGO_MAX_HEIGHT)) {
@@ -588,7 +588,7 @@ function inscription3_formulaire_traiter($flux){
 			$id_auteur = $flux['data']['id_auteur'];
 			if(intval($id_auteur) > 0){
 				$chercher_logo = charger_fonction('chercher_logo', 'inc');
-				
+
 				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
 				include_spip('formulaires/editer_logo');
 				include_spip('action/editer_logo');
@@ -607,7 +607,7 @@ function inscription3_formulaire_traiter($flux){
 			$id_auteur = $flux['data']['id_auteur'];
 			if(intval($id_auteur) > 0){
 				$chercher_logo = charger_fonction('chercher_logo', 'inc');
-				
+
 				// supprimer l'ancien logo s'il existe
 				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
 			}
@@ -769,7 +769,7 @@ function inscription3_formulaire_traiter($flux){
 
 				// supprimer l'ancien logo
 				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
-				
+
 				include_spip('formulaires/editer_logo');
 				include_spip('action/editer_logo');
 				$sources = formulaire_editer_logo_get_sources();
@@ -858,7 +858,7 @@ function inscription3_recuperer_fond($flux){
 		$config = lire_config('inscription3',array());
 		if ($flux['args']['fond']=='formulaires/inscription'){
 			$insc = recuperer_fond('formulaires/inc-inscription-inscription3',$flux['data']['contexte']);
-			$flux['data']['texte'] = preg_replace(",(<li [^>]*class=[\"']editer saisie_mail_inscription.*<\/li>),Uims","\\1".$insc,$flux['data']['texte'],1);
+			$flux['data']['texte'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer saisie_mail_inscription.*<\/(li|div)>),Uims","\\1". $insc, $flux['data']['texte'], 1);
 			if(($texte_inscription = $config['inscription_texte']) && ($texte_inscription != 'origine')){
 				switch($texte_inscription){
 					case 'aucun' :
@@ -920,12 +920,12 @@ function inscription3_editer_contenu_objet($flux){
 		foreach($champs_spip as $champ){
 			if($config[$champ.'_fiche_mod'] != 'on'){
 				if($champ == 'login')
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ).*<\/li>),Uims","",$flux['data'],1);
+					$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>),Uims","",$flux['data'],1);
 				else if($champ == 'pass'){
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ).*<\/li>),Uims","",$flux['data'],1);
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_new_($champ)2.*<\/li>),Uims","",$flux['data'],1);
+					$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>),Uims","",$flux['data'],1);
+					$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_new_($champ)2.*<\/(li|div)>),Uims","",$flux['data'],1);
 				}else
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_($champ).*<\/li>),Uims","",$flux['data'],1);
+					$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_($champ).*<\/(li|div)>),Uims","",$flux['data'],1);
 				$champs_vires[] = $champ;
 				if(in_array($champ, array('nom','email')))
 					$inserer_saisie .= "<input type='hidden' name='$champ' value='".$flux['args']['contexte'][$champ]."' />\n";
@@ -936,10 +936,10 @@ function inscription3_editer_contenu_objet($flux){
 			 * Logiquement ce champs est rempli automatiquement via pre_insertion pour tous les auteurs
 			 */
 			if($config['creation'] == 'on'){
-				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_creation.*<\/li>),Uims","",$flux['data'],1);
+				$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_creation.*<\/(li|div)>),Uims","",$flux['data'],1);
 				if($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00')
 					$flux['args']['contexte']['creation'] = date('Y-m-d H:i:s');
-				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_cextra_creation.*<\/li>),Uims","",$flux['data'],1);
+				$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer editer_cextra_creation.*<\/(li|div)>),Uims","",$flux['data'],1);
 				$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
 			}
 		}
@@ -949,9 +949,9 @@ function inscription3_editer_contenu_objet($flux){
 			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1', $flux['data']);
 		}
 		if(in_array('url_site',$champs_vires) && in_array('nom_site',$champs_vires))
-			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_liens.*<\/li>),Uims","",$flux['data'],1);
+			$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer_liens.*<\/(li|div)>),Uims","",$flux['data'],1);
 		if(in_array('pass',$champs_vires) && in_array('login',$champs_vires))
-			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_identification.*<\/li>),Uims","",$flux['data'],1);
+			$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer_identification.*<\/(li|div)>),Uims","",$flux['data'],1);
 		if(strlen($inserer_saisie))
 			$flux['data'] = preg_replace('%(<!-- controles md5 -->)%is',$inserer_saisie."\n".'$1', $flux['data']);
 	}
