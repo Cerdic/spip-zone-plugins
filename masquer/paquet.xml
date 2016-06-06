@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="0.5.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="masquer.png"
 	documentation="http://contrib.spip.net/Plugin-masquer"
 >
