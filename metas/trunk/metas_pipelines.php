@@ -15,17 +15,17 @@ function metas_affiche_milieu($flux) {
 	$en_cours = trouver_objet_exec($flux['args']['exec']);
 
 	// Mode edition, affichage du formulaire.
-	if ($en_cours['edition'] == true // page visu
+	if ($en_cours['edition'] == true /* page visu */
 		and $type = $en_cours['type']
 			and $id_table_objet = $en_cours['id_table_objet']
-				and ($id = intval($flux['args'][$id_table_objet]))
+				and ($id = isset($flux['args'][$id_table_objet]) ? intval($flux['args'][$id_table_objet]) : 0)
 	) {
 		$texte = recuperer_fond(
 			'prive/squelettes/inclure/editer_metas',
 			array(
-				 'table_source' => 'metas',
-				 'objet' => $type,
-				 'id_objet' => $id,
+				'table_source' => 'metas',
+				'objet' => $type,
+				'id_objet' => $id,
 			)
 		);
 		// on affiche le texte des metas au niveau du commentaire affiche_milieu (et pas en fin de page)
