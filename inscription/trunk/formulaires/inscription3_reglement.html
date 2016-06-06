@@ -8,7 +8,7 @@
 	traduction dans la langue en cours
 	-* Sinon on affiche uniquement une case à cocher
 ]
-<li class="fieldset info_reglement">
+<[(#DIV|sinon{li})] class="fieldset info_reglement">
 	<h3 class="legend">
 		<:inscription3:legende_reglement:>
 	</h3>
@@ -16,7 +16,7 @@
 <BOUCLE_page_reglement(ARTICLES){reglement}{tout}{!par date}{0,1}{origine_traduction}>
 <BOUCLE_trad(ARTICLES){traduction}{lang}{0,1}>
 [(#REM) Si on a une traduction du reglement dans notre langue, on l'utilise]
-<ul>
+<[(#DIV|sinon{ul})]>
 	[(#SET{label,[(#VAL{inscription3:label_public_reglement_url}|_T{#ARRAY{url,#URL_ARTICLE}})]})]
 	[(#PLUGIN{mediabox}|et{#PLUGIN{Z}|ou{#PLUGIN{Zpip}}}|oui)
 		[(#SET{js,[onclick="if (jQuery.modalbox) {jQuery.modalbox('(#URL_ARTICLE|parametre_url{var_zajax,#PLUGIN{Zpip}|?{content,contenu}})');return false;}"]})]
@@ -25,10 +25,10 @@
 	[(#SAISIE{case,reglement,
 		label_case=#GET**{label},
 		obligatoire=oui})]
-</ul>
+</[(#DIV|sinon{ul})]>
 </BOUCLE_trad>
 [(#REM) On prend l'article original si pas de traduction]
-<ul>
+<[(#DIV|sinon{ul})]>
 	[(#SET{label,[(#VAL{inscription3:label_public_reglement_url}|_T{#ARRAY{url,#URL_ARTICLE}})]})]
 	[(#PLUGIN{mediabox}|et{#PLUGIN{Z}|ou{#PLUGIN{Zpip}}}|oui)
 		[(#SET{js,[onclick="if (jQuery.modalbox) {jQuery.modalbox('(#URL_ARTICLE|parametre_url{var_zajax,#PLUGIN{Zpip}|?{content,contenu}})');return false;}"]})]
@@ -37,15 +37,15 @@
 	[(#SAISIE{case,reglement,
 		label_case=#GET**{label},
 		obligatoire=oui})]
-</ul>
+</[(#DIV|sinon{ul})]>
 <//B_trad>
 </BOUCLE_page_reglement>
 </B_page_reglement>
 [(#REM) Si pas d'article, le label n'a pas de lien]
-<ul>
+<[(#DIV|sinon{ul})]>
 	[(#SAISIE{case,reglement,
 		label_case=<:inscription3:label_public_reglement:>,
 		obligatoire=oui})]
-</ul>
+</[(#DIV|sinon{ul})]>
 <//B_page_reglement>
-</li>
+</[(#DIV|sinon{li})]>

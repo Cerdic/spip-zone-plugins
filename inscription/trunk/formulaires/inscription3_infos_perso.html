@@ -21,14 +21,14 @@ On teste la présence d'au moins un des champs pour l'afficher]
 [(#GET{config_inscription3}|table_valeur{telephone}|=={on})]}|ou{
 [(#GET{config_inscription3}|table_valeur{mobile}|=={on})]}|ou{
 [(#GET{config_inscription3}|table_valeur{fax}|=={on})]}|oui)
-<li class="fieldset info_perso">
+<[(#DIV|sinon{li}) class="fieldset info_perso"]>
 	<h3 class="legend">
 		<:inscription3:legende_info_perso:>
 	</h3>
 
-	<ul>
+	<[(#DIV|sinon{ul}) class="editer_groupe"]>
 		[(#GET{config_inscription3}|table_valeur{sexe}|=={on}|oui)
-		<li class="editer editer_sexe[ (#GET{config_inscription3}|table_valeur{sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
+		<[(#DIV|sinon{li})] class="editer editer_sexe[ (#GET{config_inscription3}|table_valeur{sexe_obligatoire}|=={on}|oui)obligatoire][ (#ENV**{erreurs}|table_valeur{sexe}|oui)erreur]">
 			<label><:inscription3:label_civilite:></label>
 			[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{sexe})</p>]
 			<div class="choix">
@@ -39,7 +39,7 @@ On teste la présence d'au moins un des champs pour l'afficher]
 				<input class="radio" name="sexe" id="madame" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" />
 				<label for="madame"><:inscription3:choix_feminin:></label>
 			</div>
-		</li>]
+		</[(#DIV|sinon{li})]>]
 
 		[(#GET{config_inscription3}|table_valeur{nom_famille}|=={on}|oui)
 			[(#GET{config_inscription3}|table_valeur{nom_famille_obligatoire}|=={on}|oui)#SET{nom_famille_obligatoire,oui}]
@@ -58,11 +58,11 @@ On teste la présence d'au moins un des champs pour l'afficher]
 		]
 
 		[(#GET{config_inscription3}|table_valeur{logo}|=={on}|oui)
-		<li class="editer editer_logo[ (#GET{config_inscription3}|table_valeur{logo_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{logo}|oui)erreur]">
+		<[(#DIV|sinon{li})] class="editer editer_logo[ (#GET{config_inscription3}|table_valeur{logo_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{logo}|oui)erreur]">
 			<label for="logo"><:inscription3:label_logo_auteur:></label>
 			<input type="file" class="text" name="logo" id="logo" value="#ENV{logo}" />
 			[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo})</p>]
-		</li>]
+		</[(#DIV|sinon{li})]>]
 
 		[(#GET{config_inscription3}|table_valeur{surnom}|=={on}|oui)
 			[(#GET{config_inscription3}|table_valeur{surnom_obligatoire}|=={on}|oui)#SET{surnom_obligatoire,oui}]
@@ -137,7 +137,7 @@ On teste la présence d'au moins un des champs pour l'afficher]
 				size=30})]
 		]
 
-        [(#GET{config_inscription3}|table_valeur{pays}|=={on}|oui)
+		[(#GET{config_inscription3}|table_valeur{pays}|=={on}|oui)
 			[(#GET{config_inscription3}|table_valeur{pays_obligatoire}|=={on}|oui)#SET{pays_obligatoire,oui}]
 			[(#SAISIE{pays,pays,
 				label=<:inscription3:label_pays:>,
@@ -177,6 +177,6 @@ On teste la présence d'au moins un des champs pour l'afficher]
 				obligatoire=#GET{commentaire_obligatoire},
 				label=<:inscription3:label_commentaire:>})]
 		]
-    </ul>
-</li>]
+	</[(#DIV|sinon{ul})]>
+</[(#DIV|sinon{li})]>]
 #FILTRE{trim}
