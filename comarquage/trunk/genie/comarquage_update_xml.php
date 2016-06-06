@@ -1,11 +1,15 @@
 <?php
-/* Plugin Comarquage -flux V2- pour SPIP 2
+/* Plugin Comarquage -flux V2-
  * Copyright (C) 2006 Cedric Morin
  * Copyright (C) 2010 Vernalis Interactive
  *
  * Licence GPL
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function genie_comarquage_update_xml_dist($t) {
 	include_spip('inc/comarquage');
