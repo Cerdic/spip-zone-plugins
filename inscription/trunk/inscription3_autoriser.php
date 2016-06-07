@@ -7,9 +7,12 @@
  * Fichiers de fonctions d'autorisations spécifiques
  */
 
- if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function inscription3_autoriser(){}
+function inscription3_autoriser() {
+}
 
 /**
  * Autoriser les utilisateurs à modifier leur profil
@@ -27,23 +30,24 @@ function inscription3_autoriser(){}
  * @param array $opt
  */
 if (!function_exists('autoriser_auteur_modifier')) {
-function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
-	// Admin ou redacteur => On utilise la fonction par défaut
-	if (in_array($qui['statut'], array('0minirezo', '1comite')))
-		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
-	// Un utilisateur normal n'a jamais le droit de modifier son statut
-	// Ni les champs qui ne sont pas dans _fiche_mod
-	else if(isset($opt['champ'])){
-		return
-			!$opt['statut']
-			AND (lire_config('inscription3/'.$opt['champ'].'_fiche_mod','off') == 'on')
-			AND $qui['statut'] == '6forum'
-			AND $id == $qui['id_auteur'];
-	}else
-		return
-			!$opt['statut']
-			AND $qui['statut'] == '6forum'
-			AND $id == $qui['id_auteur'];
+	function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
+		// Admin ou redacteur => On utilise la fonction par défaut
+		if (in_array($qui['statut'], array('0minirezo', '1comite'))) {
+			return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
+		} elseif (isset($opt['champ'])) {
+			// Un utilisateur normal n'a jamais le droit de modifier son statut
+			// Ni les champs qui ne sont pas dans _fiche_mod
+			return
+				!$opt['statut']
+				and (lire_config('inscription3/'.$opt['champ'].'_fiche_mod', 'off') == 'on')
+				and $qui['statut'] == '6forum'
+				and $id == $qui['id_auteur'];
+		} else {
+			return
+				!$opt['statut']
+				and $qui['statut'] == '6forum'
+				and $id == $qui['id_auteur'];
+		}
 	}
 }
 
@@ -61,14 +65,14 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
  * @param array $qui
  * @param array $opt
  */
-if(!function_exists('autoriser_auteur_iconifier')){
+if (!function_exists('autoriser_auteur_iconifier')) {
 	function autoriser_auteur_iconifier($faire, $type, $id, $qui, $opt) {
-		if (in_array($qui['statut'], array('0minirezo')))
+		if (in_array($qui['statut'], array('0minirezo'))) {
 			return autoriser_auteur_iconifier_dist($faire, $type, $id, $qui, $opt);
-		else
+		} else {
 			return
-			in_array($qui['statut'],array('6forum','1comite'))
-			AND $id == $qui['id_auteur'];
+				in_array($qui['statut'], array('6forum','1comite'))
+				and $id == $qui['id_auteur'];
+		}
 	}
 }
-?>

@@ -5,7 +5,9 @@
  * Licence GPL v3
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction appelée par le génie de SPIP à intervalle régulier
@@ -17,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return
  * @param object $time
  */
-function genie_inscription3_taches_generales($time){
+function genie_inscription3_taches_generales($time) {
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('i3_inscriptionauteur', 0,
 			array('verifier_confirmer'=>'oui')
@@ -25,4 +27,3 @@ function genie_inscription3_taches_generales($time){
 	}
 	return 1;
 }
-?>
