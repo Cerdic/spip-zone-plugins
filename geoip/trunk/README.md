@@ -3,6 +3,8 @@ GeoIP
 
 Utiliser la bibiothèque GeoIP de Maxmind
 
+Attention, cette version n'est pas correct et introduit des failles de sécurité. Préfére utiliser la version 1 du plugin (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
+
 Lors de l'installation du plugins vous installez deux versions de la librairie, vous devez installer les bases de données dans la configuration du plugins.
 
 En installant la version 1 de la librairie, vous devez renommer le fichier src/geoip.inc en src/geoip.php
@@ -19,6 +21,10 @@ Version 2 : https://github.com/maxmind/GeoIP2-php/archive/master.zip
 Database version 2 : http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
 
 ## Changelog
+
+### Version 2.0.0
+
+Passage en version 2 suite à l'ajout sur le svn de la version 1
 
 ### Version 1.0.1
 
