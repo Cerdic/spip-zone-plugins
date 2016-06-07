@@ -1,0 +1,5 @@
+<h1 class="grostitre"><:geoip:titre_geoip:></h1>
+
+[(#SET{ip, [(#REM|recuperer_ip_local)]})]
+
+<p><:geoip:ip_code_pays{ip=#GET{ip}}:> : <strong>[(#GET{ip}|geoIP_exist)]</strong></p>
