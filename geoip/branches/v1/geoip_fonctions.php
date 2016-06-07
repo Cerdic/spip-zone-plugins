@@ -23,9 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function geoip_code_by_addr($ip) {
 
 	// Utilise le module libapache2-geoip
-	if (!function_exists('geoip_country_code_by_name')) {
+	if (function_exists('geoip_country_code_by_addr')) {
 
-		$resultat = geoip_country_code_by_name($ip);
+		$resultat = geoip_country_code_by_addr($ip);
 
 	} else {
 
