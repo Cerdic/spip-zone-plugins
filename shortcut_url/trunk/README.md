@@ -9,9 +9,15 @@ Ce plugins permet de stocker le nombre de click par URL, de consulter la provena
 
 ## Plugin SPIP
 
-* d3js (https://github.com/magikcypress/spip_d3js) [utilise]
+* geoip_lite (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip_lite) [necessite]
+* d3js (http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
 
 ## Changelog
+
+### Version 1.1.6 (05/06/2016)
+
+- Suppression de la lib geoip
+- Necessite le plugin geoip V1.0.0 (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
 
 ### Version 1.1.5 (02/05/2016)
 

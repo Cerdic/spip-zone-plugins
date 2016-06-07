@@ -51,18 +51,18 @@ function generer_chaine_aleatoire($length = 5) {
 function shortcut_compteur($id_shortcut_url) {
 	if (!defined('_IS_BOT')) {
 		define(
-			'_IS_BOT',
-			isset($_SERVER['HTTP_USER_AGENT'])
-			and preg_match(
-				// mots generiques
-				',bot|slurp|crawler|spider|webvac|yandex|'
-				// MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
-				.'MSIE 6\.0|'
-				// UA plus cibles
-				.'80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
-				.',i',
-				(string) $_SERVER['HTTP_USER_AGENT']
-			)
+						'_IS_BOT',
+						isset($_SERVER['HTTP_USER_AGENT'])
+						and preg_match(
+										// mots generiques
+										',bot|slurp|crawler|spider|webvac|yandex|'
+										// MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
+										.'MSIE 6\.0|'
+										// UA plus cibles
+										.'80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+										.',i',
+										(string) $_SERVER['HTTP_USER_AGENT']
+						)
 		);
 	}
 
@@ -80,7 +80,9 @@ function shortcut_compteur($id_shortcut_url) {
 		$referrer = $_SERVER['REMOTE_ADDR'];
 		$user_agent = get_user_agent();
 
-		$country_code = get_geoip($referrer);
+		if (function_exists('geoip_code_by_addr')) {
+			$country_code = geoip_code_by_addr($referrer);
+		}
 		$click = $shorturl['click'] + 1;
 		sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url='.intval($id_shortcut_url));
 
@@ -110,26 +112,4 @@ function get_user_agent() {
 	$ua = preg_replace('![^0-9a-zA-Z\':., /{}\(\)\[\]\+@&\!\?;_\-=~\*\#]!', '', $ua);
 
 	return $ua;
-}
-
-/**
- * Récupérer le le code pays de l'utilisateur.
- *
- * @param int $ip ip de l'utilisateur
- *
- * @return string
- */
-function get_geoip($ip = null) {
-	static $gi = null;
-	if (is_null($ip)) {
-		include_spip('lib/geoip/geoip');
-		geoip_close($gi);
-		return;
-	}
-	if (is_null($gi)) {
-		include_spip('lib/geoip/geoip');
-		$gi = geoip_open(find_in_path('lib/geoip/GeoIP.dat'), GEOIP_STANDARD);
-	}
-
-	return geoip_country_code_by_addr($gi, $ip);
 }
