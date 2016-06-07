@@ -1,4 +1,7 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 /**
  * Autorisation a administrer les societes
  *
@@ -9,9 +12,9 @@
  * @param unknown_type $opts
  * @return unknown
  */
-function autoriser_societe_administrer($faire,$quoi,$id,$qui,$opts){
-	if ($qui['statut']=='0minirezo' AND !$qui['restreint'])
+function autoriser_societe_administrer($faire, $quoi, $id, $qui, $opts) {
+	if ($qui['statut'] == '0minirezo' and !$qui['restreint']) {
 		return true;
+	}
 	return false;
 }
-?>

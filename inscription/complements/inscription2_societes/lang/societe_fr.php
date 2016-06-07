@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
@@ -18,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_cfg' => 'Ce plugin permet d\'ajouter une liste de soci&eacute;t&eacute; s&eacute;lectionnable dans le profil des membres du site',
-	
+
 	// F
 	'fax' => 'Fax',
 
@@ -26,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_supprimer_societe' => 'Supprimer cette soci&eacute;t&eacute;',
 	'id_societe' => 'Soci&eacute;t&eacute; (&agrave; choisir dans une liste)',
 	'info_page_liste' => 'Cette page liste l\'ensemble des entreprises disponibles.',
-	
+
 	// L
 	'liste_societes' => 'Liste des soci&eacute;t&eacute;s',
 
@@ -35,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'Nom',
-	
+
 	// P
 	'pays' => 'Pays',
 
@@ -44,10 +46,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'societes' => 'Soci&eacute;t&eacute;s',
 	'societe' => 'Soci&eacute;t&eacute;',
 	'societe_choisir' => 'Choisissez une soci&eacute;t&eacute;',
-	
+
 	// T
 	'telephone' => 'T&eacute;l&eacute;phone',
-	
+
 	// V
 	'ville' => 'Ville',
 	'voir_societes' => 'Visualiser les soci&eacute;t&eacute;s',
@@ -55,4 +57,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Z
 	'zzzz' => 'ZZZZ'
 );
-?>
