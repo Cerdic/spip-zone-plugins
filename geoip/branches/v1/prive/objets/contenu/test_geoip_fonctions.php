@@ -26,16 +26,3 @@ function recuperer_ip_local() {
 	return $ip;
 
 }
-
-/**
- * Récupérer le code pays par rapport à l'IP
- *
- * @param sting $ip
- * @return string
- */
-function geoIP_exist($ip) {
-
-	$resultat = geoip_code_by_addr($ip);
-	return $resultat;
-
-}

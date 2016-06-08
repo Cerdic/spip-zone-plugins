@@ -1613,6 +1613,7 @@ function geoip_country_name_by_name_v6($gi, $name)
 function geoip_country_name_by_name($gi, $name)
 {
     $country_id = geoip_country_id_by_name($gi, $name);
+    spip_log($country_id, 'test.' . _LOG_ERREUR);
     if ($country_id !== false) {
         return $gi->GEOIP_COUNTRY_NAMES[$country_id];
     }

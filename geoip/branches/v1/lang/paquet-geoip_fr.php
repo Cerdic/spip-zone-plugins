@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// G
-	'geoip_description' => 'geoIP version1',
+	'geoip_description' => 'Ce plugin permet d\'utiliser la librairie geoIP version1',
 	'geoip_slogan' => 'geoIP version1'
 );

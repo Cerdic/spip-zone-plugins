@@ -8,7 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'ip_code_pays' => 'L’ip @ip@ a le code pays :',
+	'ip_code_pays' => 'L’ip <strong>@ip@</strong> a le code pays :',
+
+	// N
+	'domaine_country_code_by_name' => 'Le domaine <strong>@domaine@</strong> a le code pays :',
 
 	// T
 	'titre_geoip' => 'Test de GeoIP'

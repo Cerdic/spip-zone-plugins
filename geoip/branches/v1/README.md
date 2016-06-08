@@ -12,6 +12,11 @@ Database version 1 : http://geolite.maxmind.com/download/geoip/database/GeoLiteC
 
 ## Changelog
 
+### Version 1.0.1
+
+- Permet d'utiliser les fonctions de la librairie
+- Documentation sur ?exec=test_geoip
+
 ### Version 1.0.0
 
 - Test si libapache2-geoip est installé sur le serveur

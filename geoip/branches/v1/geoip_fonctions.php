@@ -20,12 +20,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $ip
  * @return string
  */
-function geoip_code_by_addr($ip) {
+function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 
 	// Utilise le module libapache2-geoip
-	if (function_exists('geoip_country_code_by_addr')) {
+	if (function_exists($fonction) and $_SERVER['GEOIP_ADDR']) {
 
-		$resultat = geoip_country_code_by_addr($ip);
+		$resultat = $fonction($ip);
 
 	} else {
 
@@ -40,7 +40,8 @@ function geoip_code_by_addr($ip) {
 			$gi = geoip_open(find_in_path('lib/GeoIP.dat'), GEOIP_STANDARD);
 		}
 
-		$resultat = geoip_country_code_by_addr($gi, $ip);
+		spip_log($ip, 'test.' . _LOG_ERREUR);
+		$resultat = $fonction($gi, $ip);
 
 	}
 
