@@ -61,7 +61,7 @@ function statsobjets_formulaire_charger ($flux){
 
 	if ($flux['args']['form'] == 'configurer_compteur'){
 
-		include_spip('inc_config');
+		include_spip('inc/config');
 		include_spip('statsobjets_administrations');
 		// objets configurés
 		if ($objets = lire_config('activer_statistiques_objets')) {
