@@ -37,7 +37,7 @@ function statsobjets_formulaire_fond ($flux){
 			)
 		);
 		if ($ajouter){
-			$cherche = "/(<\/div>\s+<p[^>]*class=('|\")boutons.*<\/p>)/is";
+			$cherche = "/(<\/(?:div|ul)>\s+<p[^>]*class=('|\")boutons.*<\/p>)/is";
 			$remplace = "$ajouter$1";
 			$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 		}
