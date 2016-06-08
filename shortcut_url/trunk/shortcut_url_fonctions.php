@@ -80,8 +80,10 @@ function shortcut_compteur($id_shortcut_url) {
 		$referrer = $_SERVER['REMOTE_ADDR'];
 		$user_agent = get_user_agent();
 
-		if (function_exists('geoip_code_by_addr')) {
-			$country_code = geoip_code_by_addr($referrer);
+		if (function_exists('geoip_informations')) {
+			$country_code = geoip_informations($referrer, 'geoip_country_code_by_addr');
+		} else {
+			$country_code = '';
 		}
 		$click = $shorturl['click'] + 1;
 		sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url='.intval($id_shortcut_url));

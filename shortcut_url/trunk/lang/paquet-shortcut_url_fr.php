@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'shortcut_url_description' => 'Raccourcisseur d’URL pour SPIP',
+	'shortcut_url_description' => 'CE plugin permet de raccourcisseur les URL',
 	'shortcut_url_slogan' => 'Raccourcisseur d’URL pour SPIP'
 );
