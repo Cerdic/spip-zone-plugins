@@ -12,4 +12,7 @@
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/mailshot?lang_cible=pt_br" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/mailshot?lang_cible=ru" total="81" traduits="64" relire="0" modifs="0" nouveaux="17" pourcent="79.01">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 </traduction>
