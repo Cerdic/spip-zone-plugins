@@ -1,4 +1,4 @@
-<BOUCLE_ville_be_gis(VILLES_BELGES){","}{entite=non}>
+<BOUCLE_ville_be_gis(VILLES_BELGES){id_villes_belge ?}{","}{entite=non}>
   {"type": "Feature",
 	["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
 	"id":"#ID_VILLES_BELGE",
