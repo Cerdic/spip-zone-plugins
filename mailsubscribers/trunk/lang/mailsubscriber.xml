@@ -13,4 +13,7 @@
 		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/mailsubscriber?lang_cible=ru" total="81" traduits="65" relire="0" modifs="0" nouveaux="16" pourcent="80.25">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 </traduction>
