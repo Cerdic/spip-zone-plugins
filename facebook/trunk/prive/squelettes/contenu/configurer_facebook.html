@@ -6,9 +6,11 @@
 	#FORMULAIRE_CONFIGURER_FACEBOOK
 </div>
 
-[(#BOITE_OUVRIR{<:facebook:titre_compte_boite:>,'info'})]
-<INCLURE{fond=inclure/facebook_profil, env} />
+[(#CONFIG{facebook}|oui)
+	[(#BOITE_OUVRIR{<:facebook:titre_compte_boite:>,'info'})]
+	<INCLURE{fond=inclure/facebook_profil, env} />
 
-[(#REM) Connecteur facebook pour le site ]
-[(#CONNECTEUR_FACEBOOK{#SELF, oui}|icone_horizontale{<:facebook:titre_connecter_facebook:>,facebook})]
-#BOITE_FERMER
+	[(#REM) Connecteur facebook pour le site ]
+	[(#CONNECTEUR_FACEBOOK{#SELF, oui}|icone_horizontale{<:facebook:titre_connecter_facebook:>,facebook})]
+	#BOITE_FERMER
+]
