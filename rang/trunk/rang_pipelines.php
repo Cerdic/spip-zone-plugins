@@ -15,13 +15,14 @@ function rang_recuperer_fond($flux){
 
 	$exec 		= _request('exec');
 
-	// Gestion des contexte i.e. page ?exec=xxxx 
+	// Gestion du contexte i.e. page ?exec=xxxx 
 	// dans le futur, on doit pouvoir ajouter d'autres contextes 
-	// (mots-clefs, documents, 
-	// listes hors rubrique pour les objets sans rubrique)
-	// contextes spécifiques à certains plugins (ex : pages uniques, etc.)
+	// -> mots-clefs, documents, 
+	// -> listes hors rubrique pour les objets sans rubrique
+	// -> contextes spécifiques à certains plugins (ex : pages uniques, Albums, etc.)
 	$contextes	= array(0=> 'rubrique'); 
-	$sources	= get_sources();
+
+	$sources	= rang_get_sources();
 	
 
 	// faire archi gaffe à prendre le bon flux....pfiou compliqué :)
@@ -33,13 +34,14 @@ function rang_recuperer_fond($flux){
 			// récupérer le type de l'objet, quelle que soit le contexte
 			preg_match('/pagination_liste_([A-Za-z]+)/', $flux['data']['texte'], $result);
 			$objet = $result[1];
+			$suffixe_pagination = table_objet($objet);
+
 
 			// particularité des objets historiques
 			if ($objet == 'art') {
-					$prefixe = 'art';
 					$objet = 'articles';
-				}
-
+					$suffixe_pagination = 'art';
+			}
 
 			$id_rubrique = $flux['args']['contexte']['id_rubrique'];
 
@@ -49,7 +51,7 @@ function rang_recuperer_fond($flux){
 			// echo 'source : '.$flux['data']['source'].'<br>&nbsp;<br>';
 			//echo bel_env($flux);
 			
-			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array('prefixe' => $prefixe, 'objet' => $objet, 'id_rubrique' => $id_rubrique ));
+			$ajout_script = recuperer_fond('prive/squelettes/inclure/rang', array('suffixe_pagination' => $suffixe_pagination, 'objet' => $objet, 'id_rubrique' => $id_rubrique ));
 			$flux['data']['texte'] = str_replace('</table>', '</table>'. $ajout_script, $flux['data']['texte']);
 		
 	}
@@ -65,7 +67,7 @@ function rang_recuperer_fond($flux){
  *     les chemins sources vers les listes où activer Rang
  **/
 
-function get_sources() {
+function rang_get_sources() {
 	include_spip('inc/config');
 	$sources = array();
 	$objets_selectionnes = lire_config('rang_objets');

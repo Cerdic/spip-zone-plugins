@@ -23,14 +23,11 @@
 				var tab = $(this).sortable("toArray");
 				active = this;
 
-				var page = parseInt(window.location.search.split('&debut_liste_#ENV{prefixe}=')[1]);
+				var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
 
 				if (isNaN(page) === false) page < 0 ? page = 0 : page = page;
 				else page = 0;
 
-				console.log(tab);
-				console.log(page);
-				
 				$.post(url, {objet: "#ENV{objet}", id_rubrique: "#ENV{id_rubrique}", debut_liste: page, trier: tab})
 					.done(function(data){
 						// ici bidouille pour les nouveau rang
