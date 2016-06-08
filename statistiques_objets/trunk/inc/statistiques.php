@@ -82,12 +82,19 @@ function classement_populaires($type, $serveur = '') {
 	$id_table_objet = id_table_objet($type, $serveur);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_objet_sql);
-	$champ_statut = isset($desc['statut']['champ']) ? $desc['statut']['champ'] : 'statut';
-	$statut_publie = isset($desc['statut']['publie']) ? $desc['statut']['publie'] : 'publie';
+	$champ_statut = isset($desc['statut']['champ']) ? $desc['statut']['champ'] : '';
+	$statut_publie = isset($desc['statut']['publie']) ? $desc['statut']['publie'] : '';
+	$where = array('popularite > 0');
+	if (
+		$champ_statut
+		and $statut_publie
+	){
+		$where[] = $champ_statut.'='.sql_quote($statut_publie);
+	}
 	$classement[$type] = sql_allfetsel(
 		$id_table_objet,
 		$table_objet_sql,
-		$champ_statut.'='.sql_quote($statut_publie).' AND popularite > 0',
+		$where,
 		'',
 		"popularite DESC",
 		'',
