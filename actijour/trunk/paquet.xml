@@ -18,6 +18,6 @@
 	<pipeline nom="header_prive" inclure="actijour_pipelines.php" />
 
 	<menu nom="actijour" titre="actijour:activite_du_jour" parent="menu_activite" icone="images/activ_jour-16.png" action="actijour_pg" />
-	<necessite nom="grenier" compatibilite="[;]" />
+	<necessite nom="grenier" compatibilite="[0.2.1;]" />
 
 </paquet>
