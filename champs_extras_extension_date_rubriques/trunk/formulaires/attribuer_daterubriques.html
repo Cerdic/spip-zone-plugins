@@ -8,11 +8,10 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-
 		<fieldset>
 			<h3 class='legend'><:daterubriques:date_premier_article:></h3>
-			<ul>
-				<li>
+			<ul class="editer-groupe">
+				<li class="editer">
 					<label for="id_secteur"><:daterubriques:id_secteur:></label>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{id_secteur})</span>]
 					<p class='explication'>
@@ -26,11 +25,12 @@
 			<input type="submit" name="previsualiser" value = "<:daterubriques:bouton_previsualiser:>" />
 			<input type="submit" name="attribuer" value = "<:daterubriques:bouton_attribuer:>" />
 		</p>
-		
-[(#REM) visualisation]
-[(#ENV{id_secteur}|oui)
-<INCLURE{fond=prive/liste/rubriques_date,id_secteur=#ENV{id_secteur},sinon=<:daterubriques:aucune_rubrique_dans_secteur:>} />
-]
 
 	</div></form>
+
+	[(#REM) visualisation]
+	[(#ENV{id_secteur}|oui)
+	<INCLURE{fond=prive/liste/rubriques_date,id_secteur=#ENV{id_secteur},sinon=<:daterubriques:aucune_rubrique_dans_secteur:>} />
+	]
+
 </div>

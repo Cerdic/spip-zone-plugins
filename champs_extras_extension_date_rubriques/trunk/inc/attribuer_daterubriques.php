@@ -1,51 +1,59 @@
 <?php
+/**
+ * Plugin daterubriques
+ *
+ * @plugin     daterubriques
+ * @copyright  2011-2016
+ * @author     Touti, Yffic
+ * @licence    GPL 3
+ * @package    SPIP\daterubriques\inc
+ */
 
-// Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Action de attribuer date aux rubriques
- * @param unknown_type $id_secteur
- * @return unknown_type
+ *
+ * @param int $id_secteur
+ * @return bool
  */
- 
 function attribuer_date_rubriques($id_secteur) {
-spip_log("attribuer_date_rubriques $id_secteur",'rubriques');
+	spip_log("attribuer_date_rubriques $id_secteur", 'rubriques');
 
 	// si id_secteur n'est pas un nombre, stopper tout
 	if (!$id_secteur = intval($id_secteur)) {
-		return;
+		return false;
 	}
 
 	// Enregistre l'envoi dans la BD
 	if ($id_secteur > 0) {
-	modifier_date_rubriques($id_secteur);
-	return true;
+		modifier_date_rubriques($id_secteur);
+
+		return true;
 	}
 }
 
 /**
  *
- * @param array $champs Un tableau avec les champs par defaut
- * @return int id_secteur
+ * @param int $id_secteur
  */
 function modifier_date_rubriques($id_secteur) {
-	
+
 	//routine OK pour inserer en date_utile d'une rubrique la date de son premier article
-	$r = sql_select("id_rubrique", "spip_rubriques", "id_secteur=$id_secteur");
+	$r = sql_select("id_rubrique", "spip_rubriques", "id_secteur=".intval($id_secteur));
 
 	while ($row = sql_fetch($r)) {
 		//date de l'article le plus ancien = min, ou du plus recent = max
-		
-	$ru = sql_select("min(fille.date) AS date_art", "spip_articles AS fille","id_rubrique=".$row['id_rubrique']." AND fille.date >'0000-00-00 00:00:00'");
-			while ($rowu = sql_fetch($ru)){
-				if($rowu['date_art']>0){
-					//spip_log("pour rubrique ".$row['id_rubrique']." date_utile sera ".$rowu['date_art'],'rubriques');
-					sql_updateq("spip_rubriques", array("date_utile" => $rowu['date_art']), "id_rubrique=".$row['id_rubrique']);
-				}
+
+		$ru = sql_select("min(fille.date) AS date_art", "spip_articles AS fille",
+			"id_rubrique=" . $row['id_rubrique'] . " AND fille.date >'0000-00-00 00:00:00'");
+		while ($rowu = sql_fetch($ru)) {
+			if ($rowu['date_art'] > 0) {
+				//spip_log("pour rubrique ".$row['id_rubrique']." date_utile sera ".$rowu['date_art'],'rubriques');
+				sql_updateq("spip_rubriques", array("date_utile" => $rowu['date_art']), "id_rubrique=" . $row['id_rubrique']);
 			}
+		}
 	}
 
 }
 
-?>
