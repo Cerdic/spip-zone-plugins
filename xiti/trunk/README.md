@@ -34,6 +34,10 @@
 
 ### Version 1.x.x 
 
+#### Version 1.8.1
+
+* Amélioration de la liste des objets liés à un niveau deux de Xiti
+
 #### Version 1.8.0
 
 * Sur la page d'un objet, si un niveau 2 est utilisé pour le secteur ou pour une rubrique de la hiérarchie l'afficher quelque part
