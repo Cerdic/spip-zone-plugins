@@ -1,0 +1,20 @@
+<paquet
+	prefix="traddoc"
+	categorie="edition"
+	version="1.0.0"
+	schema="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="traddoc.png"
+	documentation=""
+>
+	<nom>Traduction de documents</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/traddoc.php" />
+	<pipeline nom="pre_insertion" inclure="base/traddoc.php" />
+	
+	<necessite nom="medias" compatibilite="[2.10.31;]" />
+</paquet>
