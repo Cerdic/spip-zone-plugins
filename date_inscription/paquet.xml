@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="0.2.0"
 	etat="stable"
-	compatibilite="[2.0.10;3.1.99]"
+	compatibilite="[2.0.10;3.1.*]"
 	schema="0.1.0"
 	logo="date_inscription-32.png"
 	documentation="http://contrib.spip.net/Date-d-inscription"
