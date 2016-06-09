@@ -1,9 +1,10 @@
 <plugin>
 	<nom><multi>[fr]Date d'inscription [en]Registration date [es]Fecha de inscripci&#243;n</multi></nom>
 	<auteur>b_b</auteur>
-	<version>0.1.2</version>
-	<version_base>0.1</version_base>
+	<version>0.2.0</version>
+	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
+	<icon>date_inscription-32.png</icon>
 	<prefix>date_inscription</prefix>
 	<slogan><multi>
 	[fr] Une date d'inscription pour les auteurs
@@ -21,7 +22,7 @@
 	<install>base/date_inscription.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/date_inscription.php</inclure>
+		<inclure>date_inscription_administrations.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_insertion</nom>

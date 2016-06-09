@@ -1,0 +1,22 @@
+<paquet
+	prefix="date_inscription"
+	categorie="auteur"
+	version="0.2.0"
+	etat="stable"
+	compatibilite="[2.0.10;3.1.99]"
+	schema="0.1.0"
+	logo="date_inscription-32.png"
+	documentation="http://contrib.spip.net/Date-d-inscription"
+>	
+
+	<nom>Date d'inscription</nom>
+	<!-- Une date d'inscription pour les auteurs -->
+
+	<auteur>b_b</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_principales" inclure="date_inscription_administrations.php" />
+	<pipeline nom="pre_insertion" inclure="date_inscription_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="date_inscription_pipelines.php" />
+</paquet>
