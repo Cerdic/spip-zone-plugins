@@ -6,21 +6,21 @@
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/arp-64.png"
 	documentation="http://contrib.spip.net/Acces-Restreint-Partiel"
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 	<!--
 		Paquet genere le 2014-08-01 15:50:11
-		(Vous pouvez bien entendu supprimer ces commentaires) 
+		(Vous pouvez bien entendu supprimer ces commentaires)
 	-->
 
 	<nom>Accès Restreint Partiel</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://www.bilp.fr/Bruno'>Bruno Caillard</auteur>
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="accesrestreint" />
+	<necessite nom="accesrestreint" compatibilite="[3.3.1;]" />
 <!--
 	<pipeline nom="post_boucle" inclure="arp_pipelines.php" />
 	<pipeline nom="pre_propre" inclure="arp_pipelines.php" />
@@ -30,7 +30,7 @@
 	<pipeline nom="pre_boucle" inclure="arp_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="arp_pipelines.php" />
 
-	<pipeline nom="autoriser" inclure="arp_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="arp_autorisations.php" />
 
 
 </paquet>

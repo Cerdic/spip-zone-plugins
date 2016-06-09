@@ -16,8 +16,8 @@
     <menu nom="chmlatex" titre="chmlatex:exporter_secteur" icone="images/chmlatex-16.png" parent="menu_publication"/>
 
     <necessite nom="latexwheel" compatibilite="[1.0.3;["/>
-    <necessite nom="yaml" />
-    <necessite nom="bellespuces" />
-    <necessite nom="saisies" />
+    <necessite nom="yaml" compatibilite="[1.5.1;]" />
+    <necessite nom="bellespuces" compatibilite="[0.1.1;]" />
+    <necessite nom="saisies" compatibilite="[1.14.0;]" />
 
 </paquet>

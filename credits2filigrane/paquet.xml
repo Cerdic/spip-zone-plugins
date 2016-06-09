@@ -2,11 +2,11 @@
 	prefix="c2f"
 	categorie="multimedia"
 	version="0.2.0"
-	schema="0.1.1"	
+	schema="0.1.1"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="images/c2f-64.png"
->	
+>
 
 	<nom>Cr&#233;dits en filigrane</nom>
 	<!-- Générer automatiquement un filigrane sur les documents images en utilisant le contenu du champ "Crédits" -->
@@ -19,5 +19,5 @@
 
 	<pipeline nom="post_edition" inclure="c2f_pipelines.php" />
 
-	<necessite nom="medias" />
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
 </paquet>

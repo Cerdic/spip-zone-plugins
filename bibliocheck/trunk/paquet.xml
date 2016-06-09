@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/bibliocheck-32.png"
 	schema="0.1.0"
 	documentation="http://contrib.spip.net/?article4310"
->	
+>
 
 	<nom>Biblio Check</nom>
 	<!-- Vérifiez votre base bibliographique Zotero -->
@@ -23,8 +23,8 @@
 	<pipeline nom="affiche_droite" inclure="bibliocheck_pipelines.php" />
 	<pipeline nom="autoriser" inclure="bibliocheck_pipelines.php"/>
 
-	<necessite nom="zotspip" />
+	<necessite nom="zotspip" compatibilite="[2.0.0;]" />
 	<necessite nom="tickets" compatibilite="[4.0.0;[" />
-	<necessite nom="medias" />
-	<necessite nom="forum" />
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+	<necessite nom="forum" compatibilite="[1.8.12;]" />
 </paquet>
