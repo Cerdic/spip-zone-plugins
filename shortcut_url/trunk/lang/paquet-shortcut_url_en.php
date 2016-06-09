@@ -10,6 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'shortcut_url_description' => 'This plugin allows to shorten URLs',
+	'shortcut_url_description' => 'Shortcut URL for SPIP', # MODIF
 	'shortcut_url_slogan' => 'Shortcut URL for SPIP'
 );
