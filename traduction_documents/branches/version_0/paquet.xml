@@ -4,7 +4,7 @@
 	version="0.0.1"
 	schema="1.0.0"
 	etat="test"
-	compatibilite="[3.0.22-dev;3.0.*]"
+	compatibilite="[3.0.22;3.0.*]"
 	logo="traddoc.png"
 	documentation=""
 >
