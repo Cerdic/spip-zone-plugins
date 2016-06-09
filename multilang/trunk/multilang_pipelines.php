@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline insert_head_css (SPIP)
@@ -9,16 +11,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $flux Le contenu du head CSS
  * @return string $flux Le contenu du head CSS modifié
  */
-function multilang_insert_head_css($flux){
-	if(!function_exists('lire_config'))
+function multilang_insert_head_css($flux) {
+	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
-	
-	$multilang_public = lire_config('multilang/multilang_public','off');
-	if($multilang_public == 'on'){
+	}
+
+	$multilang_public = lire_config('multilang/multilang_public', 'off');
+	if ($multilang_public == 'on') {
 		static $done = false;
 		if (!$done) {
 			$done = true;
-			$flux .= '<link rel="stylesheet" href="'.url_absolue(generer_url_public('multilang.css')).'" type="text/css" media="all" />';
+			$css = url_absolue(generer_url_public('multilang.css'));
+			$flux .= '<link rel="stylesheet" href="'.$css.'" type="text/css" media="all" />';
 		}
 	}
 	return $flux;
@@ -28,15 +32,16 @@ function multilang_insert_head_css($flux){
  * Insertion dans le pipeline insert_head_prive (SPIP)
  * Ajoute css et javascript dans le <head> privé
  *
- * @param string $flux 
+ * @param string $flux
  * 		Le contenu du head
- * @return string $flux 
+ * @return string $flux
  * 		Le contenu du head modifié
  */
-function multilang_insert_head_prive($flux){
-	if(!function_exists('lire_config'))
+function multilang_insert_head_prive($flux) {
+	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
-	$config = lire_config('multilang',array());
+	}
+	$config = lire_config('multilang', array());
 
 	$flux .= multilang_inserer_head($config);
 
@@ -47,17 +52,18 @@ function multilang_insert_head_prive($flux){
  * Insertion dans le pipeline insert_head (SPIP)
  * si on a configuré multilang pour s'insérer dans l'espace public
  *
- * @param string $flux 
+ * @param string $flux
  * 		Le contenu du head
- * @return string $flux 
+ * @return string $flux
  * 		Le contenu du head modifié
  */
-function multilang_insert_head($flux){
-	if(!function_exists('lire_config'))
+function multilang_insert_head($flux) {
+	if (!function_exists('lire_config')) {
 		include_spip('inc/config');
-	$config = lire_config('multilang',array());
+	}
+	$config = lire_config('multilang', array());
 
-	if(isset($config['multilang_public']) AND ($config['multilang_public'] == 'on')){
+	if (isset($config['multilang_public']) and ($config['multilang_public'] == 'on')) {
 		$flux .= multilang_insert_head_css(''); // au cas ou il n'est pas implemente
 		$flux .= multilang_inserer_head($config);
 	}
@@ -71,13 +77,13 @@ function multilang_insert_head($flux){
  * @param array $config La configuration du plugin
  * @return string $data Le contenu textuel qui sera inséré dans le head
  */
-function multilang_inserer_head($config=array()){
+function multilang_inserer_head($config = array()) {
 	/**
 	 * N'activer multilang que si plus d'une langue dans le site
 	 */
-	if(count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1){
+	if (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1) {
 		$data = '
-<script type="text/javascript" src="'.generer_url_public("multilang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
+<script type="text/javascript" src="'.generer_url_public('multilang.js', 'lang='.$GLOBALS['spip_lang']).'"></script>
 ';
 	}
 	return $data;
@@ -86,14 +92,14 @@ function multilang_inserer_head($config=array()){
 /**
  * Insertion dans le pipeline formulaire_traiter (SPIP)
  * On purge le cache js à chaque changement de la config de langue
- * 
+ *
  * @param $flux array
  * 		Le contexte du pipeline
  * @return $flux array
  * 		Le contexte du pipeline modifié
  */
-function multilang_formulaire_traiter($flux){
-	if($flux['args']['form'] == 'configurer_multilinguisme'){
+function multilang_formulaire_traiter($flux) {
+	if ($flux['args']['form'] == 'configurer_multilinguisme') {
 		include_spip('inc/invalideur');
 		$rep_js = _DIR_VAR.'cache-js/';
 		$rep_css = _DIR_VAR.'cache-css/';
@@ -106,36 +112,41 @@ function multilang_formulaire_traiter($flux){
 
 /**
  * Insertion dans le pipeline affichage_final (SPIP)
- * 
+ *
  * Sur la page crayons.js, on insère également notre javascript pour être utilisable
  * dans les crayons
- * 
+ *
  * @param string $flux Le contenu de la page
- * @return string $flux Le contenu de la page modifiée 
+ * @return string $flux Le contenu de la page modifiée
  */
-function multilang_affichage_final($flux){
-	if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js' && (count($langues = explode(',',$GLOBALS["meta"]["langues_multilingue"])) > 1)){
-		if(!function_exists('lire_config'))
+function multilang_affichage_final($flux) {
+	if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'crayons.js'
+		and (count(explode(',', $GLOBALS['meta']['langues_multilingue'])) > 1)) {
+		if (!function_exists('lire_config')) {
 			include_spip('inc/config');
-		$config = lire_config('multilang',array());
+		}
+		$config = lire_config('multilang', array());
 
 		/**
 		 * On n'utilise multilang que si l'espace public est activé ainsi que les crayons
 		 */
-		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
+		if (($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')) {
 			unset($config['multilang_public']);
 			unset($config['multilang_crayons']);
 			$root = array();
 
-			if(isset($config['siteconfig']) && $config['siteconfig']){
+			if (isset($config['siteconfig']) && $config['siteconfig']) {
 				$root[] = 'input[type=hidden][name*=name_][value|=meta-valeur]';
 				unset($config['siteconfig']);
 			}
 
-			foreach($config as $conf => $val){
-				if($conf == 'gis') // Les points gis sont traités bizarrement dans les crayons qui enlèvent purement et simplement leur 's'
+			foreach ($config as $conf => $val) {
+				if ($conf == 'gis') {
+					// Les points gis sont traités bizarrement dans les crayons qui enlèvent
+					// purement et simplement leur 's'
 					$conf = 'gi';
-				if($val == 'on') {
+				}
+				if ($val == 'on') {
 					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo]):not(input[value|='.$conf.'-vignette]):not(input[value|='.$conf.'-fichier])';
 					unset($config[$conf]);
 				}
@@ -143,12 +154,12 @@ function multilang_affichage_final($flux){
 			$texte = '
 				var crayons_multilang_init = function(){
 					if(typeof(multilang_init_lang) == "function"){
-						var crayons_root = ".formulaire_spip:has('.implode(",",$root).')",
+						var crayons_root = ".formulaire_spip:has('.implode(',', $root).')",
 							fields_selector = "textarea,input:text:not(input.date,input.heure,*.nomulti)",
 							forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']",
 							root_opt = "form:has(.multilang)",
 							fields_selector_opt = ".multilang";
-					multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
+						multilang_init_lang({fields:fields_selector,fields_opt:fields_selector_opt,root:crayons_root,root_opt:root_opt,forms:forms_selector,init_done:false});
 					}
 				}
 
@@ -161,4 +172,3 @@ function multilang_affichage_final($flux){
 	}
 	return $flux;
 }
-?>

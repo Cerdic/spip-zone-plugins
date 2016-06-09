@@ -3,7 +3,9 @@
  * Fichier d'installation / upgrade et désinstallation du plugin Multilang
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'upgrade/maj
@@ -12,10 +14,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function multilang_upgrade($nom_meta_base_version,$version_cible){
+function multilang_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
-	
+
 	$maj['create'] = array(
 		array('multilang_creer_config'),
 	);
@@ -24,11 +26,12 @@ function multilang_upgrade($nom_meta_base_version,$version_cible){
 
 }
 
-function multilang_creer_config(){
+function multilang_creer_config() {
 	include_spip('inc/config');
 		$config = lire_config('multilang');
-	if (!is_array($config))
+	if (!is_array($config)) {
 		$config = array();
+	}
 	$config_defaut = array_merge(array(
 			'siteconfig' => 'on',
 			'article' => '',
@@ -52,5 +55,3 @@ function multilang_vider_tables($nom_meta_base_version) {
 	effacer_meta('multilang');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
