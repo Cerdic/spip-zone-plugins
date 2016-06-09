@@ -22,8 +22,8 @@
 	<pipeline nom="autoriser" inclure="daterubriques_autoriser.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/daterubriques.php" />
 
-	<necessite nom="cextras" compatibilite="[2.0.0;[" />
-	<necessite nom="spip_bonux" compatibilite="[1.2;[" />
+	<necessite nom="cextras" compatibilite="[3.0.0;]" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
 
 	<menu nom="daterubriques" titre="daterubriques:bando_date_rubriques" parent="menu_configuration" icone="images/drextras-16.png" action="configurer_daterubriques" />
 </paquet>
