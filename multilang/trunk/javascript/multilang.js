@@ -372,13 +372,19 @@ function multilang_init_field(el,lang,force) {
 		if(el.name.match(/^content_[a-z0-9_]+_titre/)){
 			if($(el).parent().is('li'))
 				$(el).parent()
-					.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
+					.before('<li class="editer editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
 			else
 				$(el)
-					.before('<div class="editer_titre_numero"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br /></div>');
-		}else
+					.before('<div class="editer editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br /></div>');
+		}else{
+			/* Le formalisme des formulaires peut etre en li ou en div (SPIP 3.1) mais on a toujours un conteneur .editer */
+			var tag = 'div';
+			if($(el).parent().is('li')) {
+				tag = 'li';
+			}
 			$(el).parent()
-				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
+				.before('<'+tag+' class="editer editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></'+tag+'>');
+		}
 		$('#'+numid).totreat = false;
 	}
 }
