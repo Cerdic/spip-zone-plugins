@@ -1,9 +1,9 @@
 <paquet
 	prefix="actijour"
 	categorie="statistique"
-	version="3.0.0"
-	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
+	version="3.0.1"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/activ_jour.gif"
 	documentation="http://contrib.spip.net/Activite-du-jour"
 >	
@@ -18,4 +18,6 @@
 	<pipeline nom="header_prive" inclure="actijour_pipelines.php" />
 
 	<menu nom="actijour" titre="actijour:activite_du_jour" parent="menu_activite" icone="images/activ_jour-16.png" action="actijour_pg" />
+	<necessite nom="grenier" compatibilite="[;]" />
+
 </paquet>
