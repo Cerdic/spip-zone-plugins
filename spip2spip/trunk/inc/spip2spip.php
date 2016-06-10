@@ -68,8 +68,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
         $import_date_article = true;
     } else {
         $import_date_article = false;
-         //Date de l'article
-
     }
     if (lire_config('spip2spip/citer_source')) {
         $citer_source = true;
@@ -124,7 +122,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
 
         spip_log("syndication: " . $url_syndic, "spiptospip");
 
-        //$date =  date('Y-m-d H:i:s',time()); // utileser date OU NOW() ???
         sql_update("spip_spip2spips", array('maj' => 'NOW()'), "id_spip2spip=$id_site");
 
         // Aller chercher les donnees du flux RSS et les analyser
@@ -159,6 +156,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                             $article_importe = sql_fetsel('id_article,titre', 'spip_articles', 's2s_url=' . sql_quote($current_link));
                             $log_html.= "<span class='bloc_info'>" . _T('spip2spip:imported_already') . "</span><a href='$current_link' rel='external' class='h3'>$current_titre</a><br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n" . "<a href=" . generer_url_ecrire('article', 'id_article=' . $article_importe['id_article']) . ">" . _T('spip2spip:imported_view') . "</a>\n";
                             spip_log("deja importe: " . $current_link, "spiptospip");
+
                         } else {
 
                             // nouvel article à importer
@@ -209,11 +207,13 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                             $a['date'] = 'NOW()';
                                             $a['distant'] = 'oui';
 
-                                            //$a['mode'] = 'document';
+                                            $a['mode'] = 'document';
                                             $a['fichier'] = set_spip_doc($source);
 
+                                            unset($a['mime_type']);
+
                                             $a['titre'] = $titre;
-                                             // infos spip2spip, recuperer via le flux
+                                             // infos spip2spip, recupere via le flux
                                             $a['descriptif'] = $desc;
                                             $a['credits'] = $credits;
 
@@ -372,7 +372,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     $logosurvol_local = _DIR_RACINE . copie_locale($_logosurvol);
                                     if ($logosurvol_local) {
                                         $logosurvol_local_dest = _DIR_IMG . "artoff$id_nouvel_article." . substr($logosurvol_local, -3);
-                                        @rename($logosurvol_local, _DIR_RACINE . $logosurvol_local_dest);
+                                        @rename($logosurvol_local, _DIR_IMG . $logosurvol_local_dest);
                                     }
                                 }
 
