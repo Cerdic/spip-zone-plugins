@@ -35,7 +35,6 @@ function connecteur_save_token($id_auteur, $type, $token) {
 		} else {
 			// Sérializer le token
 			if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
-				echo "sqlite3";
 				$token = base64_encode(serialize($token));
 			} else {
 				$token = serialize($token);
@@ -80,7 +79,6 @@ function connecteur_get_token($id_auteur, $type) {
 		)
 	);
 	if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
-		echo "sqlite";
 		$token = unserialize(base64_decode($token));
 	} else {
 		$token = unserialize($token);
