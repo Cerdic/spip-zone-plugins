@@ -37,14 +37,13 @@ function spip2spip_declarer_tables_objets_sql($tables) {
 		),
 		 'titre' => "site_titre AS titre, '' AS lang",
 		// 'date' => "",
+        'page' => false,
+        'editable' => 'oui',
 		'champs_editables'  => array('site_titre', 'site_rss'),
-		'champs_versionnes' => array(),
-		'rechercher_champs' => array(),
+		'champs_versionnes' => array('site_titre', 'site_rss'),
+		'rechercher_champs' => array('site_titre' => 5),
 		'tables_jointures'  => array(), 
 	);
 
 	return $tables;
 }
-
-
-
