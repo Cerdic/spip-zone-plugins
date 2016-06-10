@@ -489,7 +489,7 @@ function multilang_mark_empty_langs(container,target) {
 
 /**
  * Action au changement de la langue
- * Lorsque l'on clique sur une le menu de langue
+ * Lorsque l'on clique sur le menu de langue
  * On affiche pour le champ "el" son contenu dans la langue "lang"
  *
  * @param el Un champ du formulaire (input ou textarea)
@@ -508,7 +508,7 @@ function multilang_set_lang(el,lang) {
 	el.value = (el.field_lang[lang] == undefined ? "" : el.field_lang[lang]);
 
 	el.titre_el.html(el.value);
-
+	
 	multilang_field_set_background(el,lang);
 }
 
@@ -524,33 +524,35 @@ function multilang_set_lang(el,lang) {
 function multilang_field_set_background(el,lang) {
 	if(lang != 'full'){
 		if(el.totreat){
-			$(el).removeAttr('readonly').removeClass('multilang_readonly');
+			$(el).removeAttr('readonly').removeClass('multilang_readonly').removeClass('multilang_ltr').removeClass('multilang_rtl');
 			if(typeof($(el).attr('class')) != 'undefined'){
 				$($(el).attr('class').split(' ')).each(function(){
 					var m = this.match(/^multi_lang_*/);
-					if(m!=null)
-						$(el).removeClass(m.input).addClass('multi_lang_'+lang);
+					if(m!=null) {
+						$(el).removeClass(m.input).removeClass('multilang_ltr').removeClass('multilang_rtl').addClass('multi_lang_'+lang).addClass('multi_lang_'+multilang_dir_langs[lang]).attr('dir',multilang_dir_langs[lang]);
+					}
 				});
 			}
-			$(el).addClass('multi_lang_'+(el.multi?lang:'no_multi'));
+			$(el).addClass('multi_lang_'+(el.multi?lang:'no_multi')).addClass('multi_lang_'+multilang_dir_langs[lang]).attr('dir',multilang_dir_langs[lang]);
 		}
 		else{
 			if(typeof($(el).attr('class')) != 'undefined'){
 				$($(el).attr('class').split(' ')).each(function(){
 					var m = this.match(/^multi_lang_*/);
 					if(m!=null)
-						$(el).removeClass(m.input);
+						$(el).removeClass(m.input).removeClass('multilang_ltr').removeClass('multilang_rtl');
 				});
 			}
-			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
+			align = multilang_dir_langs[lang] ? (multilang_dir_langs[lang] == 'ltr' ? 'right' : 'left') : 'right';
+			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat "+align+" top"});
 		}
 	}else{
-		$(el).attr('readonly','readonly').addClass('multilang_readonly');
+		$(el).attr('readonly','readonly').addClass('multilang_readonly').attr('dir','');
 		if(typeof($(el).attr('class')) != 'undefined'){
 			$($(el).attr('class').split(' ')).each(function(){
 				var m = this.match(/^multi_lang_*/);
 				if(m!=null)
-					$(el).removeClass(m.input);
+					$(el).removeClass(m.input).removeClass('multilang_ltr').removeClass('multilang_rtl');
 			});
 		}
 	}

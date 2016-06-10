@@ -37,8 +37,13 @@ function generer_multilang_init() {
 		if (is_array($langues_config = lire_config('multilang/langues_utilisees', 'aucune')) && count($langues_config) > 0) {
 			$langues = array_intersect($langues, $langues_config);
 		}
+		$langues_ltr = array();
+		foreach ($langues as $langue){
+			$langues_ltr[$langue] = lang_dir($langue);
+		}
 		$data = '
 	var multilang_avail_langs = "'.implode(',', $langues).'".split(\',\'),
+	multilang_dir_langs = '.json_encode($langues_ltr).',
 	multilang_def_lang = "'.$GLOBALS['meta']['langue_site'].'",
 	multilang_lang_courante = "'.$GLOBALS['spip_lang'].'",
 	multilang_dir_plugin = "'._DIR_PLUGIN_MULTILANG.'";
