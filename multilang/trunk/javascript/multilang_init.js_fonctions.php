@@ -61,7 +61,7 @@ function generer_multilang_init() {
 	jQuery(document).ready(function(){
 		function multilang_init(){
 			var root = "'.implode(',', $root).'";
-			var fields_selector = "textarea:not(textarea#adresses_secondaires,textarea#repetitions),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,#champ_geocoder,#champ_lat,#champ_lon,#champ_zoom,#places,*.nomulti),.multilang";
+			var fields_selector = "textarea:not(textarea#adresses_secondaires,textarea#repetitions),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,.rechercher_adresse input,#champ_geocoder,#champ_lat,#champ_lon,#champ_zoom,#places,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 			// Les div qui ont un formulaire de classe multilang (pour accélérer la recherche dans le DOM,
