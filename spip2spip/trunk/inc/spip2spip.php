@@ -122,7 +122,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
         $url_syndic = $row_site["site_rss"];
         $date_syndic = $row_site["maj"];
 
-        spip_log("spip2spip: syndication: " . $url_syndic);
+        spip_log("syndication: " . $url_syndic, "spiptospip");
 
         //$date =  date('Y-m-d H:i:s',time()); // utileser date OU NOW() ???
         sql_update("spip_spip2spips", array('maj' => 'NOW()'), "id_spip2spip=$id_site");
@@ -158,7 +158,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                             // article deja connu et present ds la base
                             $article_importe = sql_fetsel('id_article,titre', 'spip_articles', 's2s_url=' . sql_quote($current_link));
                             $log_html.= "<span class='bloc_info'>" . _T('spip2spip:imported_already') . "</span><a href='$current_link' rel='external' class='h3'>$current_titre</a><br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n" . "<a href=" . generer_url_ecrire('article', 'id_article=' . $article_importe['id_article']) . ">" . _T('spip2spip:imported_view') . "</a>\n";
-                            spip_log("spip2spip: deja importe: " . $current_link);
+                            spip_log("deja importe: " . $current_link, "spiptospip");
                         } else {
 
                             // nouvel article à importer
@@ -361,7 +361,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     $logo_local = _DIR_RACINE . copie_locale($_logo);
                                     if ($logo_local) {
                                         $logo_local_dest = _DIR_IMG . "arton$id_nouvel_article." . substr($logo_local, -3);
-                                        @rename($logo_local, _DIR_RACINE . $logo_local_dest);
+                                        @rename($logo_local, _DIR_IMG . $logo_local_dest);
                                     }
                                 }
 
@@ -615,7 +615,7 @@ function analyser_backend_spip2spip($rss) {
     if (preg_match_all(',<spip2spip version="(.*?)">,Uims', $rss, $r, PREG_SET_ORDER)) foreach ($r as $regs) {
         $version_flux = (float)$regs[1];
     }
-    spip_log("spip2spip - version flux: $version_flux");
+    spip_log("version flux: $version_flux", "spiptospip");
 
     // analyse de chaque item
     $items = array();
@@ -859,7 +859,7 @@ function spip2spip_insert_mode_article($id_objet, $mot_titre, $groupe_titre, $mo
 
         sql_insertq("spip_mots_liens", array('id_mot' => intval($id_mot), 'id_objet' => intval($id_objet), 'objet' => $objet_lie));
     } else {
-        spip_log("spip2spip pas de groupe-clé import specifie");
+        spip_log("pas de groupe-clé import specifie", "spiptospip");
     }
 }
 
