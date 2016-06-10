@@ -4,6 +4,10 @@ Ce fichier sert de changelog, il liste les modifications lors du changement de v
 
 ## Version 1.2.x
 
+### Version 1.2.1
+
+* ```z-index``` en mode flottant suffisant pour passer au dessus de leaflet sur GIS
+
 ### Version 1.2.0
 
 * nettoyage de code (PSR)

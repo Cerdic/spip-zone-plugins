@@ -83,7 +83,7 @@ function generer_multilang_init() {
 								menu_lang.addClass("menu_lang_flottant");
 							}
 							var menu_lang_width = menu_lang.width();
-							menu_lang.css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"999"});
+							menu_lang.css({"position": "fixed", "top": 0, "width": menu_lang_width+"px","z-index":"1001"});
 						}
 						if(($(window).scrollTop() < limite_multilang)||(pos_bas > limite_bas) )
 							menu_lang.removeClass("menu_lang_flottant").css({"position": "static", "width": "auto"});
