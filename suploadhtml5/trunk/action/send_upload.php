@@ -17,13 +17,14 @@ function action_send_upload_dist($arg = null) {
     $documents = uploadhtml5_uploader_document('', 0, $_FILES, 'new', 'auto');
 
     // Les document ne sont uploader que 1 par 1
-    $id_document = intval($documents[0]);
+    // On teste si le document a bien été uploadé
+    if($id_document = intval($documents[0])) {
+        // On force le passage en statut tmp.
+        // On ne passe pas par l'API pour contourner les autorisations
+        sql_update('spip_documents', array('statut' => sql_quote('tmp')), 'id_document=' . $id_document);
 
-    // On force le passage en statut tmp.
-    // On ne passe pas par l'API pour contourner les autorisations
-    sql_update('spip_documents', array('statut' => sql_quote('tmp')), 'id_document='.$id_document);
-
-    // On stock l'upload en session
-    include_spip('inc/saisie_upload');
-    saisie_upload_charger($id_document);
+        // On stock l'upload en session
+        include_spip('inc/saisie_upload');
+        saisie_upload_charger($id_document);
+    }
 }
