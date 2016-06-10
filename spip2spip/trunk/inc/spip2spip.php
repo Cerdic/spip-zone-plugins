@@ -41,6 +41,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     include_spip("inc/getdocument");
     include_spip("inc/ajouter_documents");
     include_spip("inc/config");
+    include_spip('inc/rubriques');
 
     $log_html = "";
     $log_email = "";
@@ -299,6 +300,12 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 $log_html.= "<br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n<a href='" . generer_url_ecrire('article', "id_article=$id_nouvel_article") . "'>" . _T('spip2spip:imported_view') . "</a>\n";
 
                                 $log_email.= $article['titre'] . "\n" . _T('spip2spip:imported_view') . ": " . generer_url_ecrire('article', "id_article=$id_nouvel_article", true, false) . "\n\n";
+
+                                // Au besoin, changer le statut de rubrique concernee
+                                if ($_statut == "publie")
+                            	   calculer_rubriques_if($_id_rubrique, array('statut' => $_statut));
+
+
 
                                 // ----------
                                 // gestion lien traduction
