@@ -338,7 +338,13 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 // ... dans la table auteurs
                                 // ----------
                                 if ($_id_auteur) {
-                                    $auteurs = explode(", ", $_id_auteur);
+
+                                    if ($version_flux <= "1.8") {
+                                            $auteurs = explode(", ", $_id_auteur);
+                                    }  else {
+                                            $auteurs = unserialize($_id_auteur);
+                                    }
+
                                     foreach ($auteurs as $auteur) {
                                         $id_auteur = spip2spip_get_id_auteur($auteur);
                                         if ($id_auteur) {
@@ -508,7 +514,7 @@ function analyser_backend_spip2spip($rss) {
     include_spip("inc_texte.php"); // pour couper()
     include_spip("inc_filtres.php"); // pour filtrer_entites()
 
-    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'link', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'virtuel', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
+    $xml_tags = array('surtitre', 'titre', 'soustitre', 'descriptif', 'chapo', 'texte', 'ps', 'auteur', 'auteurs', 'link', 'trad', 'date', 'date_redac', 'date_modif', 'statut', 'nom_site', 'url_site', 'virtuel', 'evenements', 'lang', 'logo', 'logosurvol', 'keyword', 'mots', 'licence', 'documents');
 
     $syndic_regexp = array(
         'item' => ',<item[>[:space:]],i',
@@ -521,7 +527,8 @@ function analyser_backend_spip2spip($rss) {
         'chapo' => ',<chapo[^>]*>(.*?)</chapo[^>]*>,ims',
         'texte' => ',<texte[^>]*>(.*?)</texte[^>]*>,ims',
         'ps' => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
-        'auteur' => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
+        'auteur' => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',        // spip2spip v1.8
+        'auteurs' => ',<auteurs[^>]*>(.*?)</auteurs[^>]*>,ims',     // spip2spip v1.9
         'link' => ',<link[^>]*>(.*?)</link[^>]*>,ims',
         'trad' => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
         'date' => ',<date[^>]*>(.*?)</date[^>]*>,ims',
@@ -559,6 +566,14 @@ function analyser_backend_spip2spip($rss) {
         'motfin' => '</mot>',
         'groupe' => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
         'titre' => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+    );
+
+    // auteurs
+    $xml_auteur_tags = array('auteur_item');
+    $auteur_regexp = array(
+        'auteur' => ',<auteur[>[:space:]],i',
+        'auteurfin' => '</auteur>',
+        'auteur_item' => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
     );
 
     // evenements
@@ -617,6 +632,15 @@ function analyser_backend_spip2spip($rss) {
     }
     spip_log("version flux: $version_flux", "spiptospip");
 
+    // differences des traitements selon les versions du flux
+    if ($version_flux <= "1.8") {
+            $key = array_search('auteurs', $xml_tags);
+            unset($xml_tags[$key]);
+    } else {
+            $key = array_search('auteur', $xml_tags);
+            unset($xml_tags[$key]);
+    }
+
     // analyse de chaque item
     $items = array();
     if (preg_match_all($syndic_regexp['item'], $rss, $r, PREG_SET_ORDER)) foreach ($r as $regs) {
@@ -649,8 +673,10 @@ function analyser_backend_spip2spip($rss) {
 
         // Recuperer les autres tags du xml
         foreach ($xml_tags as $xml_tag) {
-            if (preg_match($syndic_regexp[$xml_tag], $item, $match)) $data[$xml_tag] = $match[1];
-            else $data[$xml_tag] = "";
+            if (preg_match($syndic_regexp[$xml_tag], $item, $match))
+                    $data[$xml_tag] = $match[1];
+                else
+                    $data[$xml_tag] = "";
         }
 
         // On parse le noeud documents
@@ -766,7 +792,40 @@ function analyser_backend_spip2spip($rss) {
                 }
                 $data['mots'] = serialize($motcle);
             }
-        } //noeud mots
+        } // noeud mots
+
+        // On parse le noeud auteurs
+        if ($data['auteurs'] != "") {
+            $auteurs = array();
+            if (preg_match_all($auteur_regexp['auteur'], $data['auteurs'], $r2, PREG_SET_ORDER)) foreach ($r2 as $regs) {
+                $debut_item = strpos($data['auteurs'], $regs[0]);
+                $fin_item = strpos($data['auteurs'], $auteur_regexp['auteurfin']) + strlen($auteur_regexp['auteurfin']);
+                $auteurs[] = substr($data['auteurs'], $debut_item, $fin_item - $debut_item);
+                $debut_texte = substr($data['auteurs'], "0", $debut_item);
+                $fin_texte = substr($data['auteurs'], $fin_item, strlen($data['auteurs']));
+                $data['auteurs'] = $debut_texte . $fin_texte;
+            }
+
+            $auteurs_articles = array();
+            if (count($auteurs)) {
+                foreach ($auteurs as $auteur) {
+                    $data_node = array();
+                    foreach ($xml_auteur_tags as $xml_auteur_tag) {
+                        if (preg_match($auteur_regexp[$xml_auteur_tag], $auteur, $match)) $data_node[$xml_auteur_tag] = $match[1];
+                        else $data_node[$xml_auteur_tag] = "";
+                    }
+                    $auteurs_articles[] = $data_node;
+                }
+
+                $auteurs = array();
+                // on transforme en tableau simple
+                foreach($auteurs_articles as $auteurs_article)
+                        $auteurs[] = $auteurs_article['auteur_item'];
+
+                $data['auteur'] = serialize($auteurs);
+            }
+
+        }  // noeud auteurs
 
         // Nettoyer les donnees et remettre les CDATA et multi en place
         foreach ($data as $var => $val) {
@@ -779,7 +838,6 @@ function analyser_backend_spip2spip($rss) {
             $data[$var] = str_replace("@@@LIEN_INV@@@", "<-", $data[$var]);
         }
 
-        //$data['item'] = $item;  //utile pour spip2spip ?
         $articles[] = $data;
     }
 

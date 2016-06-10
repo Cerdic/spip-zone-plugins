@@ -7,7 +7,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 
 ]#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}#SET{evenement,oui}
 [(#ENV{evenement}|=={non}|oui)#SET{evenement,non}]
-<!-- backend utilisant SPIP2SPIP   --><spip2spip version="1.8">
+<!-- backend utilisant SPIP2SPIP   --><spip2spip version="1.9">
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
 	<!-- thématiques proposées --><BOUCLE_thema (MOTS){type=- spip2spip -}>
@@ -55,7 +55,9 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 		 </document>
 		</BOUCLE_doc>
 	</documents></B_doc>
-	<B_auteurs><auteur><BOUCLE_auteurs (AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs>
+	<B_auteurs><auteurs>
+    <BOUCLE_auteurs(AUTEURS){id_article}><auteur>[(#NOM|texte_backend)]</auteur></BOUCLE_auteurs>
+    </auteurs></B_auteurs>
 	<lang>#LANG</lang>
 	[<logo>#URL_SITE_SPIP/(#LOGO_ARTICLE_NORMAL|extraire_attribut{src})</logo>]
 	[<logosurvol>#URL_SITE_SPIP/(#LOGO_ARTICLE_SURVOL|extraire_attribut{src})</logosurvol>]
@@ -68,4 +70,3 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
 	</item>
 </BOUCLE_synchro_article>
 </spip2spip>
-[(#REM)Vous pouvez modifier ce fichier selon vos besoins (exclure des rubriques, ...)]
