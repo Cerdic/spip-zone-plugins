@@ -34,7 +34,12 @@ function connecteur_save_token($id_auteur, $type, $token) {
 			connecteur_update_token($id_auteur, $type, $token);
 		} else {
 			// Sérializer le token
-			$token = serialize($token);
+			if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
+				echo "sqlite3";
+				$token = base64_encode(serialize($token));
+			} else {
+				$token = serialize($token);
+			}
 			sql_insertq(
 				'spip_connecteur',
 				array(
@@ -74,8 +79,13 @@ function connecteur_get_token($id_auteur, $type) {
 			'type='.sql_quote($type)
 		)
 	);
-
-	return unserialize($token);
+	if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
+		echo "sqlite";
+		$token = unserialize(base64_decode($token));
+	} else {
+		$token = unserialize($token);
+	}
+	return $token;
 }
 
 /**
@@ -87,7 +97,11 @@ function connecteur_get_token($id_auteur, $type) {
  * @access public
  */
 function connecteur_update_token($id_auteur, $type, $token) {
-	$token = serialize($token);
+	if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
+		$token = base64_encode(serialize($token));
+	} else {
+		$token = serialize($token);
+	}
 	sql_updateq(
 		'spip_connecteur',
 		array('token' => $token),
