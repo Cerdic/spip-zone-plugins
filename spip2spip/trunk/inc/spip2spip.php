@@ -51,77 +51,64 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     // groupe mot cle "licence" installe ? (contrib: http://www.spip-contrib.net/Filtre-Licence )
     if (spip2spip_get_id_groupemot("licence")) {
         $isLicenceInstalled = true;
-    }
-    else {
+    } else {
         $isLicenceInstalled = false;
     }
 
     // on charge les valeurs de CFG
     if (lire_config('spip2spip/import_statut') == "publie") {
         $import_statut = "publie";
-    }
-    elseif (lire_config('spip2spip/import_statut') == "prop") {
+    } elseif (lire_config('spip2spip/import_statut') == "prop") {
         $import_statut = "prop";
-    }
-    else {
+    } else {
         $import_statut = "identique";
     }
     if (lire_config('spip2spip/import_date_article') == "oui") {
         $import_date_article = true;
-    }
-    else {
+    } else {
         $import_date_article = false;
          //Date de l'article
 
     }
     if (lire_config('spip2spip/citer_source')) {
         $citer_source = true;
-    }
-    else {
+    } else {
         $citer_source = false;
     }
     if (lire_config('spip2spip/creer_thematique_article') == "oui") {
         $creer_thematique_article = true;
-    }
-    else {
+    } else {
         $creer_thematique_article = false;
     }
     if (lire_config('spip2spip/email_alerte')) {
         $email_alerte = true;
-    }
-    else {
+    } else {
         $email_alerte = false;
     }
     if (lire_config('spip2spip/email_suivi') != "") {
         $email_suivi = lire_config('spip2spip/email_suivi');
-    }
-    else {
+    } else {
         $email_suivi = $GLOBALS['meta']['adresse_suivi'];
          // adresse de suivi editorial
-
     }
     if (lire_config('spip2spip/import_mot_article')) {
         $import_mot_article = true;
-    }
-    else {
+    } else {
         $import_mot_article = false;
     }
     if (lire_config('spip2spip/import_mot_evnt')) {
         $import_mot_evt = true;
-    }
-    else {
+    } else {
         $import_mot_evt = false;
     }
     if (lire_config('spip2spip/import_mot_groupe_creer') == "oui") {
         $import_mot_groupe_creer = true;
-    }
-    else {
+    } else {
         $import_mot_groupe_creer = false;
     }
     if (lire_config('spip2spip/import_mot_groupe')) {
         $id_import_mot_groupe = (int)lire_config('spip2spip/import_mot_groupe');
-    }
-    else {
+    } else {
         $id_import_mot_groupe = - 1;
     }
 
@@ -143,8 +130,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
         $rss = recuperer_page($url_syndic, true);
         if (!$rss) {
             $log_html.= "<div class='bloc_error'>" . _T('spip2spip:avis_echec_syndication') . "</div>";
-        }
-        else {
+        } else {
             $articles = analyser_backend_spip2spip($rss);
 
             //----*************
@@ -172,8 +158,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                             $article_importe = sql_fetsel('id_article,titre', 'spip_articles', 's2s_url=' . sql_quote($current_link));
                             $log_html.= "<span class='bloc_info'>" . _T('spip2spip:imported_already') . "</span><a href='$current_link' rel='external' class='h3'>$current_titre</a><br/>\n" . "<strong>" . _T('spip2spip:label_thematique') . ':</strong> ' . $article['keyword'] . "<br/>\n" . "<a href=" . generer_url_ecrire('article', 'id_article=' . $article_importe['id_article']) . ">" . _T('spip2spip:imported_view') . "</a>\n";
                             spip_log("spip2spip: deja importe: " . $current_link);
-                        }
-                        else {
+                        } else {
 
                             // nouvel article à importer
                             $log_html.= "<span class='bloc_success'>" . _T('spip2spip:imported_new') . "</span>\n" . "<a href='$current_link' rel='external' class='h3'>$current_titre</a>\n";
@@ -186,14 +171,12 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 if ($creer_thematique_article) {
                                     $id_thematique = spip2spip_set_thematique($article['keyword']);
                                     $thematique_complement = " (<a href=" . generer_url_ecrire('mot', 'id_mot=' . $id_thematique) . ">" . _T('spip2spip:voir_thematique') . "</a>)";
-                                }
-                                else {
+                                } else {
                                     $thematique_complement = '';
                                 }
 
                                 $log_html.= "<div class='bloc_notice'>" . _T('spip2spip:no_target') . " <strong>" . $article['keyword'] . "</strong>" . $thematique_complement . "</div>\n";
-                            }
-                            else {
+                            } else {
 
                                 // On a une rubrique cible
                                 // On importe les données
@@ -255,8 +238,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 if ($import_date_article == true) {
                                     $_date = $article['date'];
                                      // Date de l'article
-                                }
-                                else {
+                                } else {
                                     $_date = date('Y-m-d H:i:s', time());
                                      //Date de syndication
 
@@ -330,8 +312,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                         sql_updateq('spip_articles', array("id_trad" => $id_nouvel_article), "s2s_url_trad=" . sql_quote($_link));
                                          // maj article trad (si deja importe ds une session precedente)
 
-                                    }
-                                    else {
+                                    } else {
 
                                         // il s'agit d'un article traduit,
                                         // on cherche si on a l'article origine de trad en local
@@ -466,8 +447,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                          // On a traité l'article à importer.
 
 
-                    }
-                    else {
+                    } else {
 
                         // pas de link dans l'article du flux.
 
@@ -476,8 +456,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                  // Fin du traitement de chaque article.
                 // On ferme la liste.
                 $log_html.= "</ul>\n";
-            }
-            else {
+            } else {
 
                 // On n'a pas d'article dans le flux.
                 $log_html.= "<div class='bloc_notice'>" . _T('spip2spip:aucun_article') . "</div>";
@@ -856,8 +835,7 @@ function spip2spip_insert_mode_article($id_objet, $mot_titre, $groupe_titre, $mo
         // groupe existe ?
         if ($row = sql_fetsel("id_groupe", "spip_groupes_mots", "titre=" . sql_quote($groupe_titre))) {
             $id_groupe = $row['id_groupe'];
-        }
-        else {
+        } else {
             $id_groupe = sql_insertq('spip_groupes_mots', array('titre' => $groupe_titre, 'tables_liees' => $objet_lie . "s", 'minirezo' => 'oui', 'comite' => 'oui', 'forum' => 'non'));
         }
     }
@@ -867,15 +845,13 @@ function spip2spip_insert_mode_article($id_objet, $mot_titre, $groupe_titre, $mo
         // mot existe ?
         if ($row = sql_fetsel("id_mot", "spip_mots", "titre=" . sql_quote($mot_titre) . " AND id_groupe=" . intval($id_groupe))) {
             $id_mot = $row['id_mot'];
-        }
-        else {
+        } else {
             if ($row = sql_fetsel("titre", "spip_groupes_mots", "id_groupe=" . intval($id_groupe))) $type = $row['titre'];
             $id_mot = sql_insertq('spip_mots', array('titre' => $mot_titre, 'id_groupe' => intval($id_groupe), 'type' => $type));
         }
 
         sql_insertq("spip_mots_liens", array('id_mot' => intval($id_mot), 'id_objet' => intval($id_objet), 'objet' => $objet_lie));
-    }
-    else {
+    } else {
         spip_log("spip2spip pas de groupe-clé import specifie");
     }
 }
@@ -887,8 +863,7 @@ function spip2spip_set_thematique($titre) {
     if (!$mot) {
         $thematique_cree = sql_insertq('spip_mots', array('titre' => $titre, 'id_groupe' => $id_group_spip2spip));
         return $thematique_cree;
-    }
-    else {
+    } else {
         return $mot['id_mot'];
     }
 }
@@ -931,8 +906,11 @@ function spip2spip_convert_img($texte, $documents) {
 //
 // restaure le formatage des ln
 function spip2spip_convert_ln($texte, $version_flux = 1.6) {
-    if ($version_flux < 1.7) $texte = str_replace("__LN__", "\n\n", $texte);
-    else $texte = str_replace("__LN__", "\n", $texte);
+    if ($version_flux < 1.7) {
+        $texte = str_replace("__LN__", "\n\n", $texte);
+    } else {
+        $texte = str_replace("__LN__", "\n", $texte);
+    }
     return $texte;
 }
 
