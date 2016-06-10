@@ -1,43 +1,45 @@
 [(#SET{defaut_tri,#ARRAY{
-	site_titre,1, 
-	id_spip2spip,1,
-	points,-1
+site_titre,1,
+id_spip2spip,1,
+points,-1
 }})]<B_liste_spip2spips>
 #ANCRE_PAGINATION
 <div class="liste-objets spip2spips">
-<table class='spip liste'>
-  <thead>
-		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
-			<th class='site_titre' scope='col'>[(#TRI{site_titre,<:spip2spip:label_site_titre:>,ajax})]</th>
-      <th class='maj' scope='col'>[(#TRI{maj,<:spip2spip:label_maj:>,ajax})]</th>
-      <th></th>
-      <th class='id' scope='col'>[(#TRI{id_spip2spip,<:info_numero_abbreviation:>,ajax})]</th>
-		</tr>
-	</thead>
-	<tbody>
-	<BOUCLE_liste_spip2spips(SPIP2SPIPS){recherche?}{tri #ENV{par,site_titre},#GET{defaut_tri}}{par id_spip2spip}{pagination #ENV{nb,10}}>
-		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{spip2spip-16.png}|balise_img)]</td>
-			<td class='site_titre principale'><a href="[(#ID_SPIP2SPIP|generer_url_entite{spip2spip})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SPIP2SPIP">[(#RANG). ]#SITE_TITRE</a></td>
-			<td class='maj'>
-            <a href="[(#ID_SPIP2SPIP|generer_url_entite{spip2spip})]" ><img src="[(#CHEMIN{themes/spip/images/cache-empty-16.png})]" alt="<:spip2spip:action_syndic:>"/></a>
-            &nbsp;  #MAJ            
-      </td>			
-      <td><a href="[(#URL_ACTION_AUTEUR{spip2spip_supprimer,#ID_SPIP2SPIP,#SELF})]" ><img src="[(#CHEMIN{themes/spip/images/supprimer-16.png})]" alt="<:supprimer:>"/></a></td>	
-      <td class='id'>[(#AUTORISER{modifier,spip2spip,#ID_SPIP2SPIP}|?{
-				<a href="[(#URL_ECRIRE{spip2spip_edit,id_spip2spip=#ID_SPIP2SPIP})]">#ID_SPIP2SPIP</a>,
-				#ID_SPIP2SPIP
-			})]</td>
-		</tr>
-	</BOUCLE_liste_spip2spips>
-	</tbody>
-</table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
+    <table class='spip liste'>
+        <thead>
+            <tr class='first_row'>
+                <th class='picto' scope='col'></th>
+                <th class='site_titre' scope='col'>[(#TRI{site_titre,<:spip2spip:label_site_titre:>,ajax})]</th>
+                <th class='maj' scope='col'>[(#TRI{maj,<:spip2spip:label_maj:>,ajax})]</th>
+                <th></th>
+                <th class='id' scope='col'>[(#TRI{id_spip2spip,<:info_numero_abbreviation:>,ajax})]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <BOUCLE_liste_spip2spips (SPIP2SPIPS){recherche?}{tri #ENV{par,site_titre},#GET{defaut_tri}}{par id_spip2spip}{pagination #ENV{nb,10}}>
+            <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+                <td class='picto'>[(#CHEMIN_IMAGE{spip2spip-16.png}|balise_img)]</td>
+                <td class='site_titre principale'>
+                    <a href="[(#ID_SPIP2SPIP|generer_url_entite{spip2spip})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SPIP2SPIP">[(#RANG). ]#SITE_TITRE</a>
+                </td>
+                <td class='maj'>
+                    <a href="[(#ID_SPIP2SPIP|generer_url_entite{spip2spip})]" ><img src="[(#CHEMIN{themes/spip/images/cache-empty-16.png})]" alt="<:spip2spip:action_syndic:>"/></a> &nbsp;  #MAJ
+                </td>
+                <td>
+                    [(#BOUTON_ACTION{<:supprimer:>, [(#URL_ACTION_AUTEUR{spip2spip_supprimer,#ID_SPIP2SPIP,#SELF})], 'supprimer', <:spip2spip:confirmer_suppression:>})]
+                </td>
+                <td class='id'>[(#AUTORISER{modifier,spip2spip,#ID_SPIP2SPIP}|?{
+                    <a href="[(#URL_ECRIRE{spip2spip_edit,id_spip2spip=#ID_SPIP2SPIP})]">#ID_SPIP2SPIP</a>,
+                    #ID_SPIP2SPIP
+                })]</td>
+            </tr>
+            </BOUCLE_liste_spip2spips>
+        </tbody>
+    </table>
+    [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_spip2spips>[
-<div class="liste-objets spip2spips caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_spip2spips> 
-
-
-<:spip2spip:how_to:>
+<div class="liste-objets spip2spips caption-wrap">
+    <strong class="caption">(#ENV*{sinon,''})</strong>
+</div>
+]<//B_liste_spip2spips>

@@ -61,3 +61,4 @@ function formulaires_editer_spip2spip_traiter_dist($id_spip2spip='new', $retour=
 }
 
 
+?>

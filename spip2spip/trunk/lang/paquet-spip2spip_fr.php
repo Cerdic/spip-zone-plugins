@@ -15,3 +15,4 @@ et si vous utilisez agenda, <code>http://www.domaine.tld/spip.php?page=backend-s
 	'spip2spip_slogan' => 'Synchroniser le contenu de plusieurs sites SPIP entre eux',
 );
 
+?>
