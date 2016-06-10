@@ -46,6 +46,3 @@ function spip2spip_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
-
-
-?>

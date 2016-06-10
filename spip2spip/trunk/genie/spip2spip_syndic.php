@@ -13,4 +13,3 @@ function genie_spip2spip_syndic_dist($t){
   return 1;
 }
 
-?>
