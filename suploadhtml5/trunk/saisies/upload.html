@@ -1,4 +1,5 @@
-<INCLURE{fond=saisies/inc-saisie_upload, env, ajax=saisie_upload} />
+#SET{mode,#ENV{mode,grille}}
+<INCLURE{fond=saisies/inc-saisie_upload_#GET{mode}, env, ajax=saisie_upload} />
 
 [(#REM)
  On rend l'id unique pour éviter les conflics avec dropzone lorsque 2 formulaires identiques sont sur la même page.

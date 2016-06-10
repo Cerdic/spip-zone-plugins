@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-.tmp-upload {
+.tmp-upload-grille {
   clear: both;
   width: 100%;
 
@@ -35,5 +35,42 @@
       .supprimer {
         clear: both;
       }
+  }
+}
+
+.tmp-upload-liste {
+  clear: both;
+  width: 100%;
+
+  &:after {
+    content:    "\0020";
+    display:    block;
+    height:     0;
+    clear:      both;
+    visibility: hidden;
+    overflow:   hidden;
+  }
+
+  .fichier {
+    display:       table;
+    width:         100%;
+    border:        1px solid;
+    margin-bottom: 0.5em;
+    padding:       0.5em;
+    .fichier-logo,
+    .fichier-info {
+      display:        table-cell;
+      vertical-align: top;
+    }
+    .fichier-logo {
+      width: 100px;
+    }
+    .fichier-info {
+      padding:   0 1em;
+      overflow:  hidden;
+      p {
+        font-size: 90%;        
+      }
+    }
   }
 }
