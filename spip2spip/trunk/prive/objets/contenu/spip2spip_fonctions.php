@@ -21,4 +21,3 @@ function spip2spip_syndiquer_manuel($id_spip2spip) {
     }
     return $log;
 }
-?>

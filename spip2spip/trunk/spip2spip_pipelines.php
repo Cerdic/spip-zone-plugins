@@ -40,4 +40,3 @@ function spip2spip_header_prive($flux)
 	return $flux;
 }
 
-?>

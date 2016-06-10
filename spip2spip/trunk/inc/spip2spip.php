@@ -941,4 +941,3 @@ function spip2spip_convert_ln($texte, $version_flux = 1.6) {
 function spip2spip_update_mode_document($id_document, $mode = "vignette") {
     sql_updateq('spip_documents', array("mode" => $mode), "id_document=$id_document");
 }
-?>

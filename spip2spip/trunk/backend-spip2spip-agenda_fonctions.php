@@ -44,5 +44,3 @@ function spip2spip_respecte_img($texte) {
 	return $texte;
 }
 
-
-?>

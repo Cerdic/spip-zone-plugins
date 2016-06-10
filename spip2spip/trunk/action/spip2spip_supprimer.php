@@ -27,4 +27,3 @@ function action_spip2spip_supprimer($arg=null) {
 }
 	
 
-?>
