@@ -26,5 +26,12 @@ function action_send_upload_dist($arg = null) {
         // On stock l'upload en session
         include_spip('inc/saisie_upload');
         saisie_upload_charger($id_document);
-    }
+	} else if (defined('_AJAX') && _AJAX && is_string($documents[0])) {
+		// action_ajouter_document retourne une chaine ? 
+		// on renvoie un header 403 et le message d'erreur pour que dropzone le gère
+		// cf https://github.com/enyo/dropzone/wiki/FAQ#how-to-show-an-error-returned-by-the-server
+		http_status(403);
+		header("Content-Type: application/json; charset=" . $GLOBALS['meta']['charset']);
+		echo json_encode(array('error' => $documents[0]));
+	}
 }
