@@ -118,6 +118,6 @@ function cartes_recuperer_fond($flux) {
  * @return string 		Contenu de la balise modifié
  */
 function cartes_insert_head_css($flux) {
-	$flux .= "\n".'<link rel="stylesheet" href="'. find_in_path('css/leaflet.label.css') .'" />';
+	$flux .= "\n".'<link rel="stylesheet" href="'. direction_css(find_in_path('css/leaflet.label.css')) .'" />';
 	return $flux;
 }

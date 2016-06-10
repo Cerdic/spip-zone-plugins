@@ -89,11 +89,58 @@
        url(fonts/NotoSans-BoldItalic-webfont.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'noto_kufi';
+  font-style: normal;
+  font-weight: normal;
+  src: url(fonts/NotoKufiArabic-Regular.eot);
+  src: url(fonts/NotoKufiArabic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoKufiArabic-Regular.woff2) format('woff2'),
+       url(fonts/NotoKufiArabic-Regular.woff) format('woff'),
+       url(fonts/NotoKufiArabic-Regular.ttf) format('truetype');
+}
+/* Noto Bold */
+@font-face {
+  font-family: 'noto_kufi';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/NotoKufiArabic-Bold.eot);
+  src: url(fonts/NotoKufiArabic-Bold.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoKufiArabic-Bold.woff2) format('woff2'),
+       url(fonts/NotoKufiArabic-Bold.woff) format('woff'),
+       url(fonts/NotoKufiArabic-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'noto_naskh';
+  font-style: normal;
+  font-weight: normal;
+  src: url(fonts/NotoNaskhArabic-Regular.eot);
+  src: url(fonts/NotoNaskhArabic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoNaskhArabic-Regular.woff2) format('woff2'),
+       url(fonts/NotoNaskhArabic-Regular.woff) format('woff'),
+       url(fonts/NotoNaskhArabic-Regular.ttf) format('truetype');
+}
+/* Noto Bold */
+@font-face {
+  font-family: 'noto_naskh';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/NotoNaskhArabic-Bold.eot);
+  src: url(fonts/NotoNaskhArabic-Bold.eot?#iefix) format('embedded-opentype'),
+       url(fonts/NotoNaskhArabic-Bold.woff2) format('woff2'),
+       url(fonts/NotoNaskhArabic-Bold.woff) format('woff'),
+       url(fonts/NotoNaskhArabic-Bold.ttf) format('truetype');
+}
+
 body.page_carte {
 	margin:0;
 	font-family:"noto_sans", "Helvetica Neue", verdana, sans serif;
 }
 
+.ar body.page_carte{
+	font-family:"noto_naskh", "Helvetica Neue", verdana, sans serif;
+}
 .page_carte .page{
 	width:100%;
 }
@@ -107,6 +154,10 @@ body.page_carte {
 	padding: .5em 1em;
 	font-size: 1.5em;
 	text-align: center;
+}
+
+.ar .page_carte h1{
+	font-family:"noto_kufi", "Helvetica Neue", verdana, sans serif;
 }
 
 .page_carte .texte{
@@ -139,18 +190,18 @@ body.page_carte {
 	color:#fff;
 	text-decoration:none;
 }
-.page_carte .left{
+.page_carte .gauche{
 	float:left;
 }
 
-.page_carte .left *{
+.page_carte .gauche *{
 	display:inline-block;
 	vertical-align:middle;
 }
-.page_carte .left .logo{
+.page_carte .gauche .logo{
 	margin-right:1em;
 }
-.page_carte .right{
+.page_carte .droite{
 	float:right;
 }
 
@@ -174,6 +225,10 @@ body.page_carte {
 	font-size:1.4em;
 	font-weight:normal;
 }
+
+.ar .info.leaflet-popup-content-wrapper strong{
+	font-size:1.2em;
+}
 .carte_gis{
 	background:#474747;
 }
@@ -196,15 +251,31 @@ body.page_carte {
 	text-align:center;
 }
 
+.leaflet-container {
+	font: 12px/1.5 "noto_sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.ar .leaflet-container {
+	font-family: "noto_naskh", "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size:1.1em;
+}
+
+.ar .leaflet-container strong {
+	font-family: "noto_kufi", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
 .leaflet-label.informatif{
 	background:none;
 	border:none;
-	font: 1.2em/1.5em "noto_sans", "Helvetica Neue", verdana, sans serif;
+	font: 18px/1.5em "noto_sans", "Helvetica Neue", verdana, sans serif;
 	text-shadow:0px 0px .1em white;
 	padding:0;
 	font-weight:normal;
 }
 
+.leaflet-label.informatif{
+	font-family: "noto_naskh", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
 .leaflet-label:before, .leaflet-label:after,
 .leaflet-label.informatif:before, .leaflet-label.informatif:after{
 	content:none;
