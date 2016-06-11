@@ -14,6 +14,20 @@ function produits_ieconfig_metas($table){
 }
 
 /**
+ * Insertion dans le pipeline grappes_objets_lies (Plugin Grappes)
+ * Définis le tableau des objets pouvant être liés aux grappes, la clé est le type d'objet (au pluriel),
+ * la valeur, le label affiché dans le formulaire d'édition de grappe
+ * @param array $array
+ * 	Le tableau du pipeline
+ * @return array $array
+ * 	Le tableau complété
+ */
+function produits_grappes_objets_lies($array){
+	$array['produits'] = _T('produits:titre_page_configurer_produits');
+	return $array;
+}
+
+/**
  * produits_acceuil_encours
  *
  * Afficher les produits en cours de validation
