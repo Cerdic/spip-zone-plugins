@@ -3,11 +3,21 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Export de la config 
+function produits_ieconfig_metas($table){
+	
+	$table['produits']['titre'] = _T('produit:titre_produit');
+    $table['produits']['icone'] = 'prive/themes/spip/images/produit-16.png';
+    $table['produits']['metas_serialize'] = 'produits,produits_*';
+	
+	return $table;
+}
+
 /**
  * produits_acceuil_encours
  *
  * Afficher les produits en cours de validation
- * sur l'acceuil de l'expace privé
+ * sur l'acceuil de l'espace privé
  * 
 */
 function produits_accueil_encours($flux){
