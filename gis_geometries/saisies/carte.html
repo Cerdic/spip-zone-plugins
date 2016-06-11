@@ -553,7 +553,7 @@ var geocoder;]
 		]$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").on('click',function(){
 			var address = $("#champ_#ENV{nom}_geocoder").val();
 			annuler_geocoder_[(#ENV{nom})] = 0;
-			geocoder.geocode(address);;
+			geocoder.geocode(address);
 		});
 
 		[(#REM)
