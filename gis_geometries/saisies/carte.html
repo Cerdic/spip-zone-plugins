@@ -96,13 +96,22 @@ var geocoder;]
 			$('#champ_#ENV{champ_pays,pays}').val(query.country);
 			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);]
 			maj_inputs(form_map_[(#ENV{nom})], editableLayers_[(#ENV{nom})], query, 'geocoding');
+			[(#REM)
+				Ajouter un évènement (via Leaflet) si le geocoder retourne quelque chose
+			]
+			form_map_[(#ENV{nom})].fire('geocoder_ok', {query : query});
 		} else {
 			if (query.search == 'undefined') {
 				alert('<:gis:erreur_geocoder:>\n'+query.search);
 			} else {
 				alert('<:gis:erreur_geocoder:>');
 			}
+			[(#REM)
+				Ajouter un évènement (via Leaflet) si le geocoder retourne une erreur
+			]
+			form_map_[(#ENV{nom})].fire('geocoder_fail', {query : query});
 		}
+		return query;
 	}]
 
 	var init_map = function (callback) {
@@ -482,6 +491,13 @@ var geocoder;]
 			} else {
 				edited = false;
 			}
+		});
+		[(#REM)
+			
+			Si le geocoder renvoit quelque chose, on bloque la création de nouveaux éléments
+			
+		]form_map_[(#ENV{nom})].on('geocoder_ok', function(){
+			gisdraw_change_controls(drawOptionsBlocked);
 		});]
 		[(#ENV{nodraw}|oui)
 		[(#REM)
@@ -537,7 +553,7 @@ var geocoder;]
 		]$('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").on('click',function(){
 			var address = $("#champ_#ENV{nom}_geocoder").val();
 			annuler_geocoder_[(#ENV{nom})] = 0;
-			geocoder.geocode(address);
+			geocoder.geocode(address);;
 		});
 
 		[(#REM)
