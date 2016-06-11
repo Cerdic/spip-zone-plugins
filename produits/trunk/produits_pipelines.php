@@ -3,6 +3,23 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * produits_acceuil_encours
+ *
+ * Afficher les produits en cours de validation
+ * sur l'acceuil de l'expace privé
+ * 
+*/
+function produits_accueil_encours($flux){
+	$flux .= recuperer_fond('prive/objets/liste/produits', array(
+					'statut' => array('prepa','prop'),
+					'cacher_tri' => true,
+					'nb' => 5),
+					array('ajax' => true)
+				);
+	return $flux;
+}
+
 
 // Insérer les listes de produits et le bouton de création dans les pages rubriques
 function produits_affiche_enfants($flux){
