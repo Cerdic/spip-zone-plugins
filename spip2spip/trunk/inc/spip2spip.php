@@ -1,40 +1,23 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* - spip2spip_syndiquer()
-* - is_spip2spip_backend()
-* - analyser_backend_spip2spip()
-* - spip2spip_get_id_rubrique()
-* - spip2spip_get_id_groupemot()
-* - spip2spip_get_id_mot()
-* - spip2spip_get_id_secteur()
-* - spip2spip_get_id_auteur()
-* - spip2spip_insert_mode_article()
-* - spip2spip_set_thematique()
-* - spip2spip_convert_extra()
-* - spip2spip_convert_img()
-* - spip2spip_convert_ln()
-* - spip2spip_update_mode_document()
-* Classes list:
-*/
-
-/**
  * Plugin Spip2spip
  *
  * Licence GNU/GPL
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-//---------------------------------------
-// fonction principale: spip2spip_syndique
-//
-// effectue la syndication d'un site donnee
-// - id_site
-// - mode: cron (silencieux avec spip_log)
-//         html (log bavard)
-//---------------------------------------
+/**
+ * Effectue la syndication d'un flux backend-spip pour un site donnee et importe les données
+ *
+ * @param int $id_site identifiant du sitex du document
+ * @param string $mode *   null : la valeur configuree par defaut ou pour le provider est utilisee
+ *   'cron' : mode silencieux et spip_log
+ *   'html' : mode bavard
+ * @return array  tableau des articles importés
+ */
 function spip2spip_syndiquer($id_site, $mode = 'cron') {
     include_spip("inc/distant");
     include_spip("inc/syndic");
@@ -56,60 +39,17 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
         $isLicenceInstalled = false;
     }
 
-    // on charge les valeurs de CFG
-    if (lire_config('spip2spip/import_statut') == "publie") {
-        $import_statut = "publie";
-    } elseif (lire_config('spip2spip/import_statut') == "prop") {
-        $import_statut = "prop";
-    } else {
-        $import_statut = "identique";
-    }
-    if (lire_config('spip2spip/import_date_article') == "oui") {
-        $import_date_article = true;
-    } else {
-        $import_date_article = false;
-    }
-    if (lire_config('spip2spip/citer_source')) {
-        $citer_source = true;
-    } else {
-        $citer_source = false;
-    }
-    if (lire_config('spip2spip/creer_thematique_article') == "oui") {
-        $creer_thematique_article = true;
-    } else {
-        $creer_thematique_article = false;
-    }
-    if (lire_config('spip2spip/email_alerte')) {
-        $email_alerte = true;
-    } else {
-        $email_alerte = false;
-    }
-    if (lire_config('spip2spip/email_suivi') != "") {
-        $email_suivi = lire_config('spip2spip/email_suivi');
-    } else {
-        $email_suivi = $GLOBALS['meta']['adresse_suivi'];
-         // adresse de suivi editorial
-    }
-    if (lire_config('spip2spip/import_mot_article')) {
-        $import_mot_article = true;
-    } else {
-        $import_mot_article = false;
-    }
-    if (lire_config('spip2spip/import_mot_evnt')) {
-        $import_mot_evt = true;
-    } else {
-        $import_mot_evt = false;
-    }
-    if (lire_config('spip2spip/import_mot_groupe_creer') == "oui") {
-        $import_mot_groupe_creer = true;
-    } else {
-        $import_mot_groupe_creer = false;
-    }
-    if (lire_config('spip2spip/import_mot_groupe')) {
-        $id_import_mot_groupe = (int)lire_config('spip2spip/import_mot_groupe');
-    } else {
-        $id_import_mot_groupe = - 1;
-    }
+    // Lire config
+    $import_statut = lire_config('spip2spip/import_statut', 'identique');
+    $import_date_article = (lire_config('spip2spip/import_date_article', '') == 'oui') ? true : false;
+    $citer_source = (lire_config('spip2spip/citer_source', '') == 'on') ? true : false;
+    $creer_thematique_article  = (lire_config('spip2spip/creer_thematique_article', '') == 'oui') ? true : false;
+    $email_alerte = (lire_config('spip2spip/email_alerte', '') == 'on') ? true : false;
+    $email_suivi = lire_config('spip2spip/email_suivi', $GLOBALS['meta']['adresse_suivi']);
+    $import_mot_article = (lire_config('spip2spip/import_mot_article', '') == 'on') ? true : false;
+    $import_mot_evt = (lire_config('spip2spip/import_mot_evnt', '') == 'on') ? true : false;
+    $import_mot_groupe_creer = (lire_config('spip2spip/import_mot_groupe_creer', '') == 'on') ? true : false;
+    $id_import_mot_groupe = lire_config('spip2spip/import_mot_groupe_creer', -1);
 
     //-------------------------------
     // selection du site
