@@ -307,7 +307,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     $logo_local = _DIR_RACINE . copie_locale($_logo);
                                     if ($logo_local) {
                                         $logo_local_dest = _DIR_IMG . "arton$id_nouvel_article." . substr($logo_local, -3);
-                                        @rename($logo_local, _DIR_IMG . $logo_local_dest);
+                                        @rename($logo_local, $logo_local_dest);
                                     }
                                 }
 
@@ -318,7 +318,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                     $logosurvol_local = _DIR_RACINE . copie_locale($_logosurvol);
                                     if ($logosurvol_local) {
                                         $logosurvol_local_dest = _DIR_IMG . "artoff$id_nouvel_article." . substr($logosurvol_local, -3);
-                                        @rename($logosurvol_local, _DIR_IMG . $logosurvol_local_dest);
+                                        @rename($logosurvol_local, $logosurvol_local_dest);
                                     }
                                 }
 
