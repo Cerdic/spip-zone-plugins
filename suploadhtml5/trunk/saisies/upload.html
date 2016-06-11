@@ -1,10 +1,10 @@
-#SET{mode,#ENV{mode,grille}}
-<INCLURE{fond=saisies/inc-saisie_upload_#GET{mode}, env, ajax=saisie_upload} />
-
 [(#REM)
  On rend l'id unique pour éviter les conflics avec dropzone lorsque 2 formulaires identiques sont sur la même page.
 ]
 [(#SET{id, [(#ENV{id,#ENV{nom}|saisie_nom2classe})][_(#REM|uniqid)]})]
+
+#SET{mode,#ENV{mode,grille}}
+<INCLURE{fond=saisies/inc-saisie_upload_#GET{mode}, env, id=#GET{id}, ajax=dropzone-upload-#GET{id}} />
 
 [(#REM)
  L'url d'action ne peux pas contenir de &amp;

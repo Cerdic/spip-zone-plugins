@@ -1,7 +1,8 @@
 [(#REM)
 Ce fichier affiche les fichiers temporairement uploadés par la saisie "upload"
 ]
-<div class="dropzone-upload dropzone-upload-liste">
+[(#SESSION{upload}|dd)]
+<div class="dropzone-upload [dropzone-upload-(#ENV{id})] dropzone-upload-liste">
   <BOUCLE_saisie_upload(DOCUMENTS){id_document IN #SESSION{upload}}{statut=tmp}>
     <div class="fichier">
       <div class="fichier-logo">

@@ -22,7 +22,7 @@
    [acceptedFiles: "(#ENV{acceptedFiles})",]
 
    success: function(file, response) {
-     ajaxReload("saisie_upload");
+     ajaxReload("[dropzone-upload-(#ENV{id})]");
    },
 
    // Traduire dropzone
