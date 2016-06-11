@@ -307,6 +307,9 @@ function filtre_facebook_profil_picture_dist($token, $width = 0, $height = 0, $a
 
 	$picture = facebook_profil_picture($token, $width, $height);
 	$balise_img = charger_filtre('balise_img');
-
-	return $balise_img($picture['url'], $alt, $class);
+	if (!empty($picture['url'])) {
+		return $balise_img($picture['url'], $alt, $class);
+	} else {
+		return false;
+	}
 }
