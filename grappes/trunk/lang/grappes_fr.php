@@ -21,6 +21,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'delier' => 'Délier',
 	'delier_tout' => 'Tout délier',
+	
+	// E
+	'export_titre'=>'Exporter les Grappes',
+	'export_choix_label'=>'Sélectionnez les grappes a exporter',
+	
+	// F
+	'formulaire_ieconfig_grappe_meme_identifiant'	=> 'Une grappe porte le même identifiant',
+	'formulaire_ieconfig_ne_pas_importer'	=> 'Ne pas importer',
+	'formulaire_ieconfig_renommer'	=> 'Renommer la grappe',
+	'formulaire_ieconfig_remplacer'	=> 'Remplacer la grappe existante',
 
 	// I
 	'icone_creation_grappe' => 'Créer une nouvelle grappe',
@@ -42,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nom_grappe' => 'Titre de la grappe',
 	'info_qui_peut_lier' => 'Qui peut lier les objets à la grappe ?',
 	'info_rechercher' => 'Chercher',
+	'import_titre'=>'Importer des Grappes',
+	'import_choix'=>'Sélectionnez les grappes à importer',
 	'item_groupes_association_articles' => 'Les articles',
 	'item_groupes_association_auteurs' => 'Les auteurs',
 	'item_groupes_association_breves' => 'Les brèves',
@@ -68,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_grappe' => 'Logo de la grappe',
 	'titre_nouvelle_grappe' => 'Nouvelle Grappe',
 	'titre_page_grappes' => 'Grappes',
+
 
 	// V
 	'voir' => 'Voir'

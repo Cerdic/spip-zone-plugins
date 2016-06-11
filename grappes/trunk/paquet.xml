@@ -1,7 +1,7 @@
 <paquet
 	prefix="grappes"
 	categorie="divers"
-	version="1.1.3"
+	version="1.1.4"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
@@ -25,6 +25,7 @@
 	<pipeline nom="afficher_contenu_objet" inclure="grappes_pipelines.php" />
 	<pipeline nom="grappes_objets_lies" inclure="grappes_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="grappes_pipelines.php" action="jqueryui_forcer" />
+	<pipeline nom="ieconfig" inclure="grappes_ieconfig.php" />
 
 	<necessite nom="SelecteurGenerique" compatibilite="[0.8.3;[" />
 
