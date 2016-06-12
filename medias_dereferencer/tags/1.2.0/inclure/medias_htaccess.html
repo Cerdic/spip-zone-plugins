@@ -1,0 +1,8 @@
+# Généré le #ENV{date}
+<BOUCLE_disallow (DOCUMENTS) {statut='prepa'} {extension?} {par fichier}>
+<Files [(#ENV{extension}|?{[(#FICHIER**|replace{#ENV{extension}/,''})],[(#FICHIER**)]})]>
+    Order Deny,Allow
+    Deny from all[
+(#VAL|md_adresses_allow)]
+</Files>
+</BOUCLE_disallow>
