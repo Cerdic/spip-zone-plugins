@@ -1,0 +1,24 @@
+[(#REM)
+
+  1. logo contribué de la rubrique
+  2. image liée à la rubrique
+  3. logo de la rubrique parente
+
+]
+
+[(#REM) 1. recuperer le logo d'article de facon classique ]
+#SET{logo,#ENV*{logo_rubrique}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a la rubrique ;
+On teste "rubon" pour respecter l'ordre des priorités ]
+
+<BOUCLE_doc(DOCUMENTS documents_liens)
+  {si (#GET{logo}|match{rubon}|non)}
+  {id_rubrique}
+  {role=logo}
+  {0,1}
+>
+#SET{logo,#FICHIER|balise_img|inserer_attribut{class,spip_logo spip_logos}}
+</BOUCLE_doc>
+
+#GET{logo}
