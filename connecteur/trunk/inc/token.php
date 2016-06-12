@@ -10,6 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @access public
  */
 
+include_spip('inc/securiser_action');
 
 /**
  * Enregistrer un token d'auteur
@@ -34,17 +35,14 @@ function connecteur_save_token($id_auteur, $type, $token) {
 			connecteur_update_token($id_auteur, $type, $token);
 		} else {
 			// Sérializer le token
-			if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
-				$token = base64_encode(serialize($token));
-			} else {
-				$token = serialize($token);
-			}
+			$token = serialize($token);
 			sql_insertq(
 				'spip_connecteur',
 				array(
 					'id_auteur' => $id_auteur,
 					'type' => $type,
-					'token' => $token
+					'token' => $token,
+					'signature' => calculer_cle_action($token)
 				)
 			);
 		}
@@ -70,20 +68,26 @@ function connecteur_get_token($id_auteur, $type) {
 	}
 
 	// Récupérer le token
-	$token = sql_getfetsel(
-		'token',
+	$token = sql_fetsel(
+		'token, signature',
 		'spip_connecteur',
 		array(
 			'id_auteur='.intval($id_auteur),
 			'type='.sql_quote($type)
 		)
 	);
-	if ($GLOBALS['connexions'][0]['type'] == 'sqlite3'){
-		$token = unserialize(base64_decode($token));
-	} else {
-		$token = unserialize($token);
+
+	if (!is_null($token)) {
+		// On vérifie que la signature du token est toujours bonne
+		if (calculer_cle_action($token['token']) == $token['signature']) {
+			return unserialize($token['token']);
+		} else {
+			// Si la signature n'est pas valide, on active un minipres
+			include_spip('inc/minipres');
+			echo minipres(_T('info_acces_interdit'));
+			die();
+		}
 	}
-	return $token;
 }
 
 /**
@@ -102,7 +106,10 @@ function connecteur_update_token($id_auteur, $type, $token) {
 	}
 	sql_updateq(
 		'spip_connecteur',
-		array('token' => $token),
+		array(
+			'token' => $token,
+			'signature' => calculer_cle_action($token)
+		),
 		array(
 			'id_auteur='.intval($id_auteur),
 			'type='.sql_quote($type)
