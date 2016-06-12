@@ -32,6 +32,7 @@ function genie_medias_dereferencer_vu_dist($t) {
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
 	$message_log[] = "-----\n";
 	// Et maintenant on stocke les messages dans un fichier de log.
+	include_spip('inc/utils');
 	spip_log(implode("\n", $message_log), 'medias_dereferencer');
 
 	return true;

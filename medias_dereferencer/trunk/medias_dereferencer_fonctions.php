@@ -132,6 +132,7 @@ function medias_lister_medias_used_in_text() {
 function medias_maj_documents_lies() {
 	include_spip('base/abstract_sql');
 	include_spip('base/objets');
+	include_spip('inc/session');
 	$message_log = array();
 	$message_log[] = "\n-----";
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
@@ -173,6 +174,7 @@ function medias_maj_documents_lies() {
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
 	$message_log[] = "-----\n";
 	// Et maintenant on stocke les messages dans un fichier de log.
+	include_spip('inc/utils');
 	spip_log(implode("\n", $message_log), 'medias_dereferencer');
 
 	return true;
@@ -188,6 +190,7 @@ function medias_maj_documents_lies() {
 function medias_maj_documents_non_lies() {
 	include_spip('base/abstract_sql');
 	include_spip('base/objets');
+	include_spip('inc/session');
 	$documents_raccourcis = medias_lister_medias_used_in_text();
 	$message_log = array();
 	$message_log[] = "\n-----";
@@ -255,6 +258,7 @@ function medias_maj_documents_non_lies() {
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
 	$message_log[] = "-----\n";
 	// Et maintenant on stocke les messages dans un fichier de log.
+	include_spip('inc/utils');
 	spip_log(implode("\n", $message_log), 'medias_dereferencer');
 
 	return true;
@@ -267,7 +271,9 @@ function medias_maj_documents_non_lies() {
  * @return bool
  */
 function md_creation_htaccess_img() {
+	include_spip('base/abstract_sql');
 	include_spip('inc/config');
+	include_spip('inc/session');
 	$config_md = lire_config('medias_dereferencer');
 	$message_log = array();
 	$message_log[] = "\n-----";
@@ -312,6 +318,7 @@ function md_creation_htaccess_img() {
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
 	$message_log[] = "-----\n";
 	// Et maintenant on stocke les messages dans un fichier de log.
+	include_spip('inc/utils');
 	spip_log(implode("\n", $message_log), 'medias_dereferencer');
 
 	if (count($message_log) > 7) {
@@ -327,9 +334,9 @@ function md_creation_htaccess_img() {
  * @return bool
  */
 function md_suppression_htaccess_img() {
-	include_spip('inc/config');
 	include_spip('inc/flock');
-	$config_md = lire_config('medias_dereferencer');
+	include_spip('inc/session');
+	include_spip('inc/utils');
 	$message_log = array();
 	$message_log[] = "\n-----";
 	$message_log[] = date_format(date_create(), 'Y-m-d H:i:s');
@@ -374,7 +381,7 @@ function md_suppression_htaccess_img() {
 
 /**
  * Lister les adresses IP au format Apache/htaccess qui ont été renseignées dans le formulaire de configuration.
- * 
+ *
  * @return bool|string
  *         false : il n'y a pas d'adresses IP renseignées dans le formulaire de configuration
  *         string : liste des adresses IP autorisées formatées selon la version d'Apache.
