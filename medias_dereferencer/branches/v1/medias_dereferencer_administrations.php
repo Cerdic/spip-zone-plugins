@@ -38,6 +38,7 @@ function medias_dereferencer_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
  **/
 function medias_dereferencer_vider_tables($nom_meta_base_version) {
+	include_spip('inc/meta');
 	effacer_meta('medias_dereferencer');
 	effacer_meta($nom_meta_base_version);
 }
