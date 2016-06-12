@@ -9,10 +9,12 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function infos_ffmpeg(){
-	$infos_ffmpeg = charger_fonction('spipmotion_ffmpeg_infos','inc');
+function infos_ffmpeg() {
+	$infos_ffmpeg = charger_fonction('spipmotion_ffmpeg_infos', 'inc');
 	$infos = $infos_ffmpeg();
 	return $infos;
 }
@@ -23,7 +25,7 @@ function infos_ffmpeg(){
  * @param string $type
  * @return string La chaine de caractère lisible
  */
-function ffmpeg_codec_type_to_type($type=null){
+function ffmpeg_codec_type_to_type($type = null) {
 	$trans = array(
 		'A' => _T('spipmotion:codec_type_audio'),
 		'V' => _T('spipmotion:codec_type_video'),
@@ -32,4 +34,3 @@ function ffmpeg_codec_type_to_type($type=null){
 
 	return $trans[$type] ? $trans[$type] : $type;
 }
-?>

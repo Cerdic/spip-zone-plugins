@@ -9,14 +9,16 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 
 /**
  * Action de vérification des binaires
  */
-function action_spipmotion_verifier_binaires_dist(){
+function action_spipmotion_verifier_binaires_dist() {
 	global $visiteur_session;
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -24,13 +26,12 @@ function action_spipmotion_verifier_binaires_dist(){
 
 	include_spip('inc/autoriser');
 
-	if(autoriser('configurer','',$visiteur_session)){
-		$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
+	if (autoriser('configurer', '', $visiteur_session)) {
+		$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos', 'inc');
 		$ffmpeg_infos(true);
 	}
-	if(_request('redirect')){
-		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+	if (_request('redirect')) {
+		$redirect = str_replace('&amp;', '&', urldecode(_request('redirect')));
 		redirige_par_entete($redirect);
 	}
 }
-?>

@@ -9,12 +9,14 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction de vérification que les binaires utilisés soient correctement installés
  * et exécutables ainsi que quelques éléments de configuration de PHP :
- * 
+ *
  * -* l'état du safe_mode;
  * -* ffmpeg;
  * -* ffprobe;
@@ -25,58 +27,60 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Si le safe_mode est activé, on l'inscrit dans les metas ainsi que son exec_dir
  * afin de retrouver le script spipmotion.sh qui doit s'y trouver
- * 
+ *
  * Note : Les codes de retour normaux d'une application sont :
  * -* 0 en cas de réussite
  * -* 1 en cas d'échec (l'application est là mais retourne une erreur)
  * -* 127 en cas d'absence de l'application
- * 
+ *
  * @param unknown_type $valeurs
  * @param boolean $notif : On notifie ou pas?
  */
-function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
-	spip_log('SPIPmotion : Vérification des binaires','spipmotion');
+function inc_spipmotion_verifier_binaires_dist($valeurs = '', $notif = false) {
+	spip_log('SPIPmotion : Vérification des binaires', 'spipmotion');
 	$erreurs = array();
 	include_spip('inc/config');
 	/**
 	 * On vérifie que safe_mode soit activé ou pas
 	 */
 	$safe_mode = @ini_get('safe_mode');
-	if($safe_mode == 1){
-		ecrire_meta('spipmotion_safe_mode', 'oui','','spipmotion_metas');
+	if ($safe_mode == 1) {
+		ecrire_meta('spipmotion_safe_mode', 'oui', '', 'spipmotion_metas');
 		$safe_mode_path = @ini_get('safe_mode_exec_dir');
-		ecrire_meta('spipmotion_safe_mode_exec_dir', $safe_mode_path,'','spipmotion_metas');
-	}else{
-		effacer_meta('spipmotion_safe_mode','spipmotion_metas');
-		effacer_meta('spipmotion_safe_mode_exec_dir','spipmotion_metas');
+		ecrire_meta('spipmotion_safe_mode_exec_dir', $safe_mode_path, '', 'spipmotion_metas');
+	} else {
+		effacer_meta('spipmotion_safe_mode', 'spipmotion_metas');
+		effacer_meta('spipmotion_safe_mode_exec_dir', 'spipmotion_metas');
 	}
-	
-	if(!$valeurs)
-		$valeurs = lire_config('spipmotion',array());
 
-	if(!function_exists('exec')){
+	if (!$valeurs) {
+		$valeurs = lire_config('spipmotion', array());
+	}
+
+	if (!function_exists('exec')) {
 		ecrire_config('spipmotion_exec_casse', 'oui');
 		$erreurs[] = 'exec';
-	}
-	else{
+	} else {
 		/**
 		 * Tester flvtool++
 		 */
 		$chemin_flvtool = defined('_CHEMIN_FLVTOOLPLUS') ? _CHEMIN_FLVTOOLPLUS : 'flvtool++';
-		exec($chemin_flvtool,$retour_flvtoolplus,$retour_flvtoolplus_int);
-		if($retour_flvtoolplus_int != 0 && $retour_flvtoolplus_int != 255){
+		exec($chemin_flvtool, $retour_flvtoolplus, $retour_flvtoolplus_int);
+		if ($retour_flvtoolplus_int != 0 and $retour_flvtoolplus_int != 255) {
 			ecrire_config('spipmotion_flvtoolplus_casse', 'oui');
 			$erreurs[] = 'flvtool++';
-		}else
+		} else {
 			effacer_config('spipmotion_flvtoolplus_casse');
+		}
 
-		if(!in_array('flvtool++',$erreurs)){
-			foreach($erreurs as $erreur=>$soft){
-				if($soft == 'flvtool++')
+		if (!in_array('flvtool++', $erreurs)) {
+			foreach ($erreurs as $erreur => $soft) {
+				if ($soft == 'flvtool++') {
 					unset($erreurs[$erreur]);
+				}
 			}
 		}
-		
+
 		/**
 		 * Tester mediainfo
 		 * MediaInfo n'est pas indispensable au bon fonctionnement
@@ -84,12 +88,13 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		 * On ne bloquera pas les encodages
 		 */
 		$chemin_mediainfo = defined('_CHEMIN_MEDIAINFO') ? _CHEMIN_MEDIAINFO : 'mediainfo';
-		exec($chemin_mediainfo.' --help',$retour_mediainfo,$retour_mediainfo_int);
-		if(!in_array($retour_mediainfo_int,array(0,255)))
+		exec($chemin_mediainfo.' --help', $retour_mediainfo, $retour_mediainfo_int);
+		if (!in_array($retour_mediainfo_int, array(0,255))) {
 			ecrire_config('spipmotion_mediainfo_casse', 'oui');
-		else
+		} else {
 			effacer_config('spipmotion_mediainfo_casse');
-		
+		}
+
 		/**
 		 * Tester ffprobe
 		 * ffprobe n'est pas indispensable au bon fonctionnement
@@ -97,67 +102,76 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		 * On ne bloquera pas les encodages
 		 */
 		$chemin_ffprobe = defined('_CHEMIN_FFPROBE') ? _CHEMIN_FFPROBE : 'ffprobe';
-		exec($chemin_ffprobe.' --help',$retour_ffprobe,$retour_ffprobe_int);
-		if($retour_ffprobe_int != 0)
+		exec($chemin_ffprobe.' --help', $retour_ffprobe, $retour_ffprobe_int);
+		if ($retour_ffprobe_int != 0) {
 			ecrire_config('spipmotion_ffprobe_casse', 'oui');
-		else
+		} else {
 			effacer_config('spipmotion_ffprobe_casse');
-	
+		}
+
 		/**
 		 * Tester les scripts spipmotion.sh et spipmotion_vignette.sh présents dans script_bash/
 		 * Si le safe_mode est activé, il doivent se trouver dans le répertoire des scripts autorisés
 		 */
-		if(defined('_CHEMIN_SPIPMOTIONSH')){
+		if (defined('_CHEMIN_SPIPMOTIONSH')) {
 			$spipmotion_sh = _CHEMIN_SPIPMOTIONSH;
 		}
-			
-		if(defined('_CHEMIN_SPIPMOTION_VIGNETTESH')){
+
+		if (defined('_CHEMIN_SPIPMOTION_VIGNETTESH')) {
 			$spipmotion_vignette_sh = _CHEMIN_SPIPMOTION_VIGNETTESH;
 		}
-		if($safe_mode == 1){
-			if(!defined('_CHEMIN_SPIPMOTIONSH'))
+		if ($safe_mode == 1) {
+			if (!defined('_CHEMIN_SPIPMOTIONSH')) {
 				$spipmotion_sh = $safe_mode_path.'/spipmotion.sh';
-			if(!defined('_CHEMIN_SPIPMOTION_VIGNETTESH'))
+			}
+			if (!defined('_CHEMIN_SPIPMOTION_VIGNETTESH')) {
 				$spipmotion_vignette_sh = $safe_mode_path.'/spipmotion_vignette.sh';
-		}else{
-			if(!defined('_CHEMIN_SPIPMOTIONSH'))
+			}
+		} else {
+			if (!defined('_CHEMIN_SPIPMOTIONSH')) {
 				$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
-			if(!defined('_CHEMIN_SPIPMOTION_VIGNETTESH'))
+			}
+			if (!defined('_CHEMIN_SPIPMOTION_VIGNETTESH')) {
 				$spipmotion_vignette_sh = find_in_path('script_bash/spipmotion_vignette.sh');
+			}
 		}
 
-		exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
-		if($retour_spipmotionsh_int != 0){
+		exec($spipmotion_sh.' --help', $retour_spipmotionsh, $retour_spipmotionsh_int);
+		if ($retour_spipmotionsh_int != 0) {
 			ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
 			$erreurs[] = 'spipmotion.sh';
-		}else
+		} else {
 			effacer_config('spipmotion_spipmotionsh_casse');
-		
-		exec($spipmotion_vignette_sh." --help",$retour_spipmotion_vignettesh,$retour_spipmotion_vignettesh_int);
-		if($retour_spipmotion_vignettesh_int != 0){
+		}
+
+		exec($spipmotion_vignette_sh.' --help', $retour_spipmotion_vignettesh, $retour_spipmotion_vignettesh_int);
+		if ($retour_spipmotion_vignettesh_int != 0) {
 			ecrire_config('spipmotion_spipmotion_vignette_sh_casse', 'oui');
 			$erreurs[] = 'spipmotion_vignette.sh';
-		}else
+		} else {
 			effacer_config('spipmotion_spipmotion_vignette_sh_casse');
-		
+		}
+
 		/**
 		 * Tester ffmpeg
 		 */
-		if($valeurs['chemin'] != ''){
-			exec($spipmotion_sh." --p ".$valeurs['chemin']." --info '-version'",$retour_ffmpeg,$retour_int_ffmpeg);
-			if($retour_int_ffmpeg != 0){
+		if ($valeurs['chemin'] != '') {
+			exec($spipmotion_sh.' --p '.$valeurs['chemin']." --info '-version'", $retour_ffmpeg, $retour_int_ffmpeg);
+			if ($retour_int_ffmpeg != 0) {
 				ecrire_config('spipmotion_ffmpeg_casse', 'oui');
 				$erreurs[] = 'ffmpeg';
-			}else
+			} else {
 				effacer_config('spipmotion_ffmpeg_casse');
-		}else{
-			exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
-			if($retour_int_ffmpeg != 0){
+			}
+		} else {
+			exec($spipmotion_sh.' --info -version', $retour_ffmpeg, $retour_int_ffmpeg);
+			if ($retour_int_ffmpeg != 0) {
 				ecrire_config('ffmpeg_casse', 'oui');
 				$erreurs[] = 'ffmpeg';
-			}else{
-				if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
+			} else {
+				if ($GLOBALS['meta']['spipmotion_casse'] == 'oui') {
 					effacer_config('ffmpeg_casse');
+				}
 			}
 		}
 	}
@@ -165,12 +179,13 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	 * On ne met spipmotion cassé que si on n'a pas ffmpeg ou spipmotion.sh
 	 * Les autres restent facultatifs
 	 */
-	if(in_array('ffmpeg',$erreurs) OR in_array('spipmotion.sh',$erreurs))
+	if (in_array('ffmpeg', $erreurs) or in_array('spipmotion.sh', $erreurs)) {
 		ecrire_config('spipmotion_casse', 'oui');
-	else
+	} else {
 		effacer_config('spipmotion_casse');
+	}
 
-	if($notif){
+	if ($notif) {
 		if ($notifications = charger_fonction('notifications', 'inc')) {
 			$notifications('spipmotion_verifier_binaires', 1,
 				array(
@@ -181,4 +196,3 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	}
 	return $erreurs;
 }
-?>

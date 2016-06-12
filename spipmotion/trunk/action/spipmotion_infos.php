@@ -9,28 +9,27 @@
  *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function action_spipmotion_infos_dist(){
+function action_spipmotion_infos_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!intval($arg)){
-		spip_log("action_spipmotion_infos_dist incompris: " . $arg);
+	if (!intval($arg)) {
+		spip_log('action_spipmotion_infos_dist incompris: ' . $arg);
 		return;
-	}
-	else{
+	} else {
 		action_spipmotion_infos_post($arg);
-		if(_request('redirect')){
-			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		if (_request('redirect')) {
+			$redirect = str_replace('&amp;', '&', urldecode(_request('redirect')));
 			$GLOBALS['redirect'] = $redirect;
 		}
 	}
 }
 
-function action_spipmotion_infos_post($id_document){
-	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
+function action_spipmotion_infos_post($id_document) {
+	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos', 'inc');
 	$infos = $recuperer_infos($id_document);
 	return $infos;
 }
-
-?>

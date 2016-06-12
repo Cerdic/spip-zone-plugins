@@ -9,9 +9,10 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-function inc_spipmotion_erreurs_encodages_dist(){
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-?>
+
+function inc_spipmotion_erreurs_encodages_dist() {
+	return;
+}
