@@ -184,3 +184,26 @@ function selections_editoriales_jqueryui_plugins($plugins) {
     
 	return $plugins;
 }
+
+/**
+ * Pipeline chercher_logo pour trouver le logo du contenu choisi, si jamais ya pas de logo pour l'objet selections_cotenu
+ **/
+function selections_editoriales_chercher_logo($flux) {
+	// Si personne n'a trouvé de logo avant
+	if (
+		empty($flux['data'])
+		and $flux['args']['objet'] == 'selections_contenu'
+		and $selections_contenu = sql_fetsel('objet, id_objet', 'spip_selections_contenus', 'id_selections_contenu = '.intval($flux['args']['id_objet']))
+		and $objet = $selections_contenu['objet']
+		and ($id_objet = intval($selections_contenu['id_objet'])) > 0
+	) {
+		include_spip('base/objets');
+		
+		// On cherche le logo de l'objet si c'en est un
+		$chercher_logo = charger_fonction('chercher_logo', 'inc/');
+		
+		$flux['data'] = $chercher_logo($id_objet, id_table_objet($objet), $flux['args']['mode']);
+	}
+	
+	return $flux;
+}
