@@ -1,0 +1,20 @@
+<paquet
+	prefix="searchandreplace"
+	categorie="maintenance"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;["
+	logo=""
+	documentation=""
+>
+
+
+	<nom>Search and replace</nom>
+
+	<auteur lien='http://km.azerttyu.net'>azerttyu</auteur>
+	<auteur lien='https://interconnectit.com/products/search-and-replace-for-wordpress-databases/'>Interconnectit</auteur>
+
+	<licence>GNU/GPL</licence>
+
+    <lib nom="interconnectit_sar" lien="https://github.com/interconnectit/Search-Replace-DB/archive/master.zip" />
+</paquet>
