@@ -7,8 +7,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-
 /**
  * Ajout de contenu dans le bloc «actions» des documents
  *
@@ -129,5 +127,47 @@ function roles_documents_post_edition($flux) {
 		}
 	}
 
+	return $flux;
+}
+
+function roles_documents_chercher_logo($flux) {
+	// Si personne n'a trouvé de logo avant
+	if (empty($flux['data'])) {
+		// On cherche la première image avec un rôle "logo"
+		include_spip('base/abstract_sql');
+		
+		// Quel rôle va-t-on chercher ?
+		if ($flux['args']['mode'] === 'on') {
+			$role = 'logo';
+		} elseif ($flux['args']['mode'] === 'off') {
+			$role = 'logo_survol';
+		} else {
+			$role = $flux['args']['mode'];
+		}
+		
+		if ($image = sql_fetsel(
+			'fichier, extension',
+			'spip_documents as d inner join spip_documents_liens as l on d.id_document = l.id_document',
+			array(
+				'l.objet = '.sql_quote($flux['args']['objet']),
+				'l.id_objet = '.intval($flux['args']['id_objet']),
+				sql_in('extension', array('png', 'jpg', 'gif')),
+				'l.role='.sql_quote($role),
+			),
+			'', //group
+			'0+titre, titre'
+		)) {
+			$chemin_complet = _DIR_IMG . $image['fichier'];
+			
+			$flux['data'] = array(
+				$chemin_complet,
+				dirname($chemin_complet) . '/',
+				basename($chemin_complet, '.' . $image['extension']),
+				$image['extension'],
+				@filemtime($chemin_complet)
+			);
+		}
+	}
+	
 	return $flux;
 }
