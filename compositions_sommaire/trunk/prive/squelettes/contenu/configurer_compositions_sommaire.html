@@ -1,0 +1,16 @@
+[(#AUTORISER{configurer,_compositions_sommaire}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:compositions_sommaire:titre_page_configurer_compositions_sommaire:></h1>
+[(#SET{compositions_sommaire, #VAL{}|compositions_lister_disponibles{sommaire} })]
+[(#REM)<!-- 
+
+	[(#GET{compositions_sommaire})]
+	
+-->]
+<div class="ajax">
+	<BOUCLE_test(CONDITION){si #GET{compositions_sommaire}|count|>{0} }>
+	#FORMULAIRE_COMPOSITIONS_SOMMAIRE
+	</BOUCLE_test>
+	<:compositions_sommaire:info_creer_composition_sommaire:>
+	<//B_test>
+</div>

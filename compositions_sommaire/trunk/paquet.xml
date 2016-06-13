@@ -1,0 +1,20 @@
+<paquet
+	prefix="compositions_sommaire"
+	categorie="squelette"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo=""
+	documentation=""
+>
+	<nom>Compositions de sommaire</nom>
+
+	<auteur lien="http://www.mister-graphx.com">Arnaud B. (Mist. GraphX)</auteur>
+
+	<licence>GNU/GPL</licence>
+
+    <necessite nom="compositions" compatibilite="[3.5.3;[" />
+    
+    <utilise nom="zcore"/>
+
+</paquet>
