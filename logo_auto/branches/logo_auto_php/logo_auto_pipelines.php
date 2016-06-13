@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function logo_auto_chercher_logo($flux) {
+function logo_auto_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant et que c'est pas pour le survol
 	if (empty($flux['data']) and $flux['args']['mode'] !== 'off') {
 		// On cherche la première image jointe au contenu
@@ -23,11 +23,8 @@ function logo_auto_chercher_logo($flux) {
 			$chemin_complet = _DIR_IMG . $image['fichier'];
 			
 			$flux['data'] = array(
-				$chemin_complet,
-				dirname($chemin_complet) . '/',
-				basename($chemin_complet, '.' . $image['extension']),
-				$image['extension'],
-				@filemtime($chemin_complet)
+				'chemin' => $chemin_complet,
+				'timestamp' => @filemtime($chemin_complet),
 			);
 		}
 	}
