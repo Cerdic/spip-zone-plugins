@@ -188,7 +188,7 @@ function selections_editoriales_jqueryui_plugins($plugins) {
 /**
  * Pipeline chercher_logo pour trouver le logo du contenu choisi, si jamais ya pas de logo pour l'objet selections_cotenu
  **/
-function selections_editoriales_chercher_logo($flux) {
+function selections_editoriales_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant
 	if (
 		empty($flux['data'])
@@ -197,12 +197,7 @@ function selections_editoriales_chercher_logo($flux) {
 		and $objet = $selections_contenu['objet']
 		and ($id_objet = intval($selections_contenu['id_objet'])) > 0
 	) {
-		include_spip('base/objets');
-		
-		// On cherche le logo de l'objet si c'en est un
-		$chercher_logo = charger_fonction('chercher_logo', 'inc/');
-		
-		$flux['data'] = $chercher_logo($id_objet, id_table_objet($objet), $flux['args']['mode']);
+		$flux['data'] = quete_logo_objet($id_objet, $objet, $flux['args']['mode']);
 	}
 	
 	return $flux;
