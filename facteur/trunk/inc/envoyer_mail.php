@@ -117,10 +117,20 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$message_texte = facteur_mail_html2text($message_html);
 	}
 
+	$exceptions = false;
+	if (is_array($corps) AND isset($corps['exceptions'])){
+		$exceptions = $corps['exceptions'];
+	}
+	
 	// mode TEST : forcer l'email
 	if (defined('_TEST_EMAIL_DEST')) {
-		if (!_TEST_EMAIL_DEST)
+		if (!_TEST_EMAIL_DEST){
+			spip_log($e="Envois bloques par la constante _TEST_EMAIL_DEST", 'mail.' . _LOG_ERREUR);
+			if ($exceptions) {
+				throw new Exception($e);
+			}
 			return false;
+		}
 		else
 			$destinataire = _TEST_EMAIL_DEST;
 	}
@@ -141,12 +151,18 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				unset($destinataire[$key]);
 		}
 		if(count($destinataire) == 0) {
-			spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+			spip_log($e="Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+			if ($exceptions) {
+				throw new Exception($e);
+			}
 			return false;
 		}
 	}
 	else {
-		spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+		spip_log($e="Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+		if ($exceptions) {
+			throw new Exception($e);
+		}
 		return false;
 	}
 

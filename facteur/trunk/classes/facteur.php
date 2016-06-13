@@ -403,6 +403,9 @@ class Facteur extends PHPMailer {
 			}
 			return false;
 		}
+		if ($this->ErrorInfo){
+			spip_log($function."() : ".$this->ErrorInfo,'facteur.'._LOG_ERREUR);
+		}
 
 		return $retour;
 	}
