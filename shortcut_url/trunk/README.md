@@ -21,6 +21,7 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ### Version 1.2.0 (13/06/2016)
 
+- Traduction chaîne de langue et pétouille de commentaire
 - Nécessite le plugin [fulltext](http://plugins.spip.net/fulltext.html) sinon la recherche sur les urls ne fonctionne pas.
 - Ajout dans le README.md de la remarque concernant mod security 
 

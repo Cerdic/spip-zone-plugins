@@ -92,6 +92,13 @@ function shortcut_url_ajouter_menus($boutons_admin) {
 
 	return $boutons_admin;
 }
+
+/**
+ * Autoriser shortcut dans le menu  
+ *
+ * @param string $faire, $type, $id, $qui, $opt
+ * @return string
+ */
 function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('1comite', '0minirezo')) && count($qui['restreint']) == 0;
 }
