@@ -130,7 +130,7 @@ function roles_documents_post_edition($flux) {
 	return $flux;
 }
 
-function roles_documents_chercher_logo($flux) {
+function roles_documents_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant
 	if (empty($flux['data'])) {
 		// On cherche la première image avec un rôle "logo"
@@ -160,11 +160,8 @@ function roles_documents_chercher_logo($flux) {
 			$chemin_complet = _DIR_IMG . $image['fichier'];
 			
 			$flux['data'] = array(
-				$chemin_complet,
-				dirname($chemin_complet) . '/',
-				basename($chemin_complet, '.' . $image['extension']),
-				$image['extension'],
-				@filemtime($chemin_complet)
+				'chemin' => $chemin_complet,
+				'timestamp' => @filemtime($chemin_complet),
 			);
 		}
 	}
