@@ -35,10 +35,24 @@ function coordonnees_afficher_fiche_objet($flux) {
 	$e = trouver_objet_exec($exec);
 	$type = $flux['args']['type'];
 
-	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('coordonnees/objets'))) {
+	$id_objet = $flux['args']['id'];
+	$editable = (in_array(table_objet_sql($type),lire_config('coordonnees/objets'))?1:0);
+	$has = false;
+	if (!$editable){
+		if (
+		     sql_countsel('spip_adresses_liens','objet='.sql_quote($type).' AND id_objet='.intval($id_objet))
+		  OR sql_countsel('spip_numeros_liens','objet='.sql_quote($type).' AND id_objet='.intval($id_objet))
+		  OR sql_countsel('spip_emails_liens','objet='.sql_quote($type).' AND id_objet='.intval($id_objet))
+		) {
+			$has = true;
+		}
+	}
+
+	if (!$e['edition'] AND ($editable OR $has)) {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
+			'editable' => $editable,
 			),
 			array('ajax'=>'coordonnees')
 		);
@@ -54,26 +68,6 @@ function coordonnees_afficher_fiche_objet($flux) {
 	return $flux;
 }
 
-/**
- * Liste des coordonnées d'un auteur sur la page "infos_perso"
-**/
-function coordonnees_affiche_auteurs_interventions($flux) {
-   $texte = "";
-   $exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
-   if ($id_auteur = intval($flux['args']['id_auteur']) AND $exec != 'auteur') {
-       $texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
-           'objet' => 'auteur',
-           'id_objet' => $id_auteur,
-           ),
-           array('ajax'=>'coordonnees')
-       );
-   }
-   if ($texte) {
-       $flux['data'] .= $texte;
-   }
-
-   return $flux;
-}
 
 /**
  * Liaisons avec les objets
@@ -124,4 +118,3 @@ function coordonnees_optimiser_base_disparus($flux){
 function coordonnees_types_coordonnees($flux) { return $flux; }
 
 
-?>

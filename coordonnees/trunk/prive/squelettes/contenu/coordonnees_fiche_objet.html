@@ -8,7 +8,7 @@
 <a name='coordonnees'></a>
 
 [(#REM)  ICONES AJOUTER ]
-[(#ENV{coordonnee}|non)
+[(#ENV{coordonnee}|non|et{#ENV{editable,1}})
 <div class="icones-ajouter">
 	[(#SELF|parametre_url{coordonnee,adresse}|ancre_url{coordonnees}
 		|icone_horizontale{<:coordonnees:ajouter_adresse_court:>,adresse,new,'coordonnee ajouter ajax right'})]
