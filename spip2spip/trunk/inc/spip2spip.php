@@ -42,13 +42,13 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
     // Lire config
     $import_statut = lire_config('spip2spip/import_statut', 'identique');
     $import_date_article = (lire_config('spip2spip/import_date_article', '') == 'oui') ? true : false;
-    $citer_source = (lire_config('spip2spip/citer_source', '') == 'on') ? true : false;
+    $citer_source = lire_config('spip2spip/citer_source') ? true : false;
     $creer_thematique_article  = (lire_config('spip2spip/creer_thematique_article', '') == 'oui') ? true : false;
-    $email_alerte = (lire_config('spip2spip/email_alerte', '') == 'on') ? true : false;
+    $email_alerte = lire_config('spip2spip/email_alerte') ? true : false;
     $email_suivi = lire_config('spip2spip/email_suivi', $GLOBALS['meta']['adresse_suivi']);
-    $import_mot_article = (lire_config('spip2spip/import_mot_article', '') == 'on') ? true : false;
-    $import_mot_evt = (lire_config('spip2spip/import_mot_evnt', '') == 'on') ? true : false;
-    $import_mot_groupe_creer = (lire_config('spip2spip/import_mot_groupe_creer', '') == 'on') ? true : false;
+    $import_mot_article = lire_config('spip2spip/import_mot_article') ? true : false;
+    $import_mot_evt = lire_config('spip2spip/import_mot_evnt') ? true : false;
+    $import_mot_groupe_creer = lire_config('spip2spip/import_mot_groupe_creer') ? true : false;
     $id_import_mot_groupe = lire_config('spip2spip/import_mot_groupe_creer', -1);
 
     //-------------------------------
@@ -182,7 +182,6 @@ function spip2spip_syndiquer($id_site, $mode = 'cron') {
                                 } else {
                                     $_date = date('Y-m-d H:i:s', time());
                                      //Date de syndication
-
                                 }
                                 $_date_redac = $article['date_redac'];
                                 $_date_modif = $article['date_modif'];
