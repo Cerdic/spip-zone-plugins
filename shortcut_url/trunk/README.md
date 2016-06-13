@@ -7,17 +7,27 @@ Attention ce plugin supprime des boutons de navigation dans le backoffice de SPI
 
 Ce plugins permet de stocker le nombre de click par URL, de consulter la provenance des utilisateurs ...
 
-## Plugin SPIP
+## Notes serveur
 
-* geoip_lite (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip_lite) [necessite]
-* d3js (http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
+Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive 340162 si elle est activée, sinon vous ne pourrez pas faire de recherches sur les Urls.
+
+## Plugins SPIP
+
+* [geoip_lite](http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1) [nécessite]
+* [Fulltext](http://plugins.spip.net/fulltext.html) [nécessite]
+* [d3js](http://zone.spip.org/trac/spip-zone/browser/_plugins_/d3js) [utilise]
 
 ## Changelog
+
+### Version 1.2.0 (13/06/2016)
+
+- Nécessite le plugin [fulltext](http://plugins.spip.net/fulltext.html) sinon la recherche sur les urls ne fonctionne pas.
+- Ajout dans le README.md de la remarque concernant mod security 
 
 ### Version 1.1.6 (05/06/2016)
 
 - Suppression de la lib geoip
-- Necessite le plugin geoip V1.0.0 (http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
+- Necessite le plugin [geoip V1.0.0](http://zone.spip.org/trac/spip-zone/browser/_plugins_/geoip/branches/v1)
 
 ### Version 1.1.5 (02/05/2016)
 

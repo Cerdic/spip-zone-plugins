@@ -1,7 +1,7 @@
 <paquet
 	prefix="shortcut_url"
 	categorie="edition"
-	version="1.1.6"
+	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
@@ -18,6 +18,7 @@
 	<copyright>2015</copyright>
 
 	<necessite nom="geoip" compatibilite="[1.0.0;]" />
+	<necessite nom="fulltext" compatibilite="[1.1.12;]" />
 	<utilise nom="d3js" compatibilite="[1.2.0;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/shortcut_url.php" />
