@@ -45,7 +45,7 @@ function autoriser_xitiniveaux_menu_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_lierxitiniveau_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/config');
-	return (in_array(table_objet_sql($type), lire_config('xiti/xiti_niveaux_objets', '')))
+	return (in_array(table_objet_sql($type), lire_config('xiti/xiti_niveaux_objets', array())))
 		and (($id > 0 and autoriser('modifier', $type, $id, $qui, $opt)));
 }
 
