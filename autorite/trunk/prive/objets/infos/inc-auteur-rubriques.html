@@ -10,7 +10,12 @@
 	</div>
 </B_restreint>
 [(#STATUT|=={0minirezo}|oui)
-	[<p>(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:info_admin_gere_toutes_rubriques_2:>,<:info_admin_gere_toutes_rubriques:>})</p>]
+	[(#SPIP_VERSION|floatval|>={3.1}|oui)
+		[<p>(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:info_auteur_gere_toutes_rubriques_2:>,<:info_auteur_gere_toutes_rubriques:>})</p>]
+	]
+	[(#SPIP_VERSION|floatval|>={3.1}|non)
+		[<p>(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{<:info_admin_gere_toutes_rubriques_2:>,<:info_admin_gere_toutes_rubriques:>})</p>]
+	]
 ]
 <//B_restreint>
 </div>
