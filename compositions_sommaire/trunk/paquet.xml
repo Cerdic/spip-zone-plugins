@@ -15,6 +15,6 @@
 
     <necessite nom="compositions" compatibilite="[3.5.3;[" />
     
-    <utilise nom="zcore"/>
+    <utilise nom="zcore"compatibilite="[2.0.0;[" />
 
 </paquet>
