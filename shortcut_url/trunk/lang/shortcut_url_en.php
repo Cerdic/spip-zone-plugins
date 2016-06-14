@@ -79,10 +79,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'shortcut_url' => 'Shortcut URL',
 	'shortcut_url_logs' => 'Shortcut stats',
 	'shortcut_url_logs_export' => 'Export shortcuts',
-        'stats_afficher_logs' => 'Display Logs',
-        'stats_afficher_graphs_logs' => 'Display Graphs Logs',
-        'stats_afficher_bots' => 'Display Bots',
-        'stats_afficher_graphs_bots' => 'Display Graphs Bots',
 	'supprimer_confirmation' => 'Do you really want to delete this URL?',
 
 	// T

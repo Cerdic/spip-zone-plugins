@@ -83,10 +83,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'shortcut_url' => 'Raccourcis d’URL',
 	'shortcut_url_logs' => 'Stats des raccourcis',
 	'shortcut_url_logs_export' => 'Export des raccourcis',
-	'stats_afficher_logs' => 'Afficher Logs',
-	'stats_afficher_graphs_logs' => 'Afficher Graphs Logs',
 	'stats_afficher_bots' => 'Afficher Bots',
 	'stats_afficher_graphs_bots' => 'Afficher Graphs Bots',
+	'stats_afficher_graphs_logs' => 'Afficher Graphs Logs',
+	'stats_afficher_logs' => 'Afficher Logs',
 	'supprimer_confirmation' => 'Voulez-vous vraiment supprimer cet URL ?',
 
 	// T

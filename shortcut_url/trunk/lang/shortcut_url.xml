@@ -1,6 +1,6 @@
 <traduction module="shortcut_url" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/shortcut_url/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/shortcut_url?lang_cible=en" total="83" traduits="77" relire="0" modifs="0" nouveaux="6" pourcent="92.77">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/shortcut_url?lang_cible=en" total="87" traduits="77" relire="0" modifs="0" nouveaux="10" pourcent="88.51">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/shortcut_url?lang_cible=fr" total="83" traduits="83" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/shortcut_url?lang_cible=fr" total="87" traduits="87" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
