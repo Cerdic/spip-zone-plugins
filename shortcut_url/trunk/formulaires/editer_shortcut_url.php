@@ -79,35 +79,11 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new',
 function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', $objet = '', $id_objet = '', $retour = '', $ajaxload = 'oui', $options = '') {
 	include_spip('inc/distant');
 	$result = $set = array();
-	$recup = recuperer_page(_request('url'), true);
-	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs)) {
-		$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
-	}
-
-	if (defined('_TAILLE_RACCOURCI')) {
-		if (_TAILLE_RACCOURCI >= 5) {
-			$taille_raccourci = _TAILLE_RACCOURCI;
-		} else {
-			$taille_raccourci = 8;
-		}
-	} else {
-		$taille_raccourci = 8;
-	}
-
-	if (_request('titre')) {
-		$set['titre'] = _request('titre');
-	} else {
-		$set['titre'] = generer_chaine_aleatoire($taille_raccourci);
-	}
-	$set['description'] = $result['nom_site'];
-	// On supprime ?var_mode=recalcul et autres var_mode
-	$set['url'] = parametre_url(_request('url'), 'var_mode', '');
-	$set['ip_address'] = $_SERVER['REMOTE_ADDR'];
-	$set['date_modif'] = date('Y-m-d H:i:s');
 
 	if (intval($id_shortcut_url) > 0) {
 		sql_delete('spip_urls', 'type=' . sql_quote('shortcut_url') . ' AND id_objet=' . intval($id_shortcut_url));
 	}
+
 	$editer_objet = charger_fonction('editer_objet', 'action');
 	$editer_objet($id_shortcut_url, 'shortcut_url', $set);
 
