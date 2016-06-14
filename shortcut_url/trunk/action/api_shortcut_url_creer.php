@@ -22,19 +22,24 @@ function action_api_shortcut_url_creer($url = false) {
 			header('Content-Type: application/json');
 			die(json_encode(array('error' => '405', 'message' => 'Missing URL parameter')));
 		} else {
-			$shortcut_url = sql_getfetsel('titre', 'spip_shortcut_urls', 'url=' . sql_quote($url));
-			if ($shortcut_url) {
-				include_spip('inc/invalideur');
-				suivre_invalideur(0);
+			if (filter_var($url, FILTER_VALIDATE_URL) === false) {
 				header('Content-Type: application/json');
-				die(json_encode(array('url' => url_absolue($shortcut_url), 'new' => false)));
-			} else {
-				$editer_objet = charger_fonction('editer_objet', 'action');
-				list($id, $err) = $editer_objet('new', 'shortcut_url', $set);
-				include_spip('inc/invalideur');
-				suivre_invalideur(0);
-				header('Content-Type: application/json');
-				die(json_encode(array('url' => url_absolue(generer_url_entite($id, 'shortcut_url')), 'new' => true)));
+				die(json_encode(array('error' => '405', 'message' => 'Bad URL format')));
+			} else{
+				$shortcut_url = sql_getfetsel('titre', 'spip_shortcut_urls', 'url=' . sql_quote($url));
+				if ($shortcut_url) {
+					include_spip('inc/invalideur');
+					suivre_invalideur(0);
+					header('Content-Type: application/json');
+					die(json_encode(array('url' => url_absolue($shortcut_url), 'new' => false)));
+				} else {
+					$editer_objet = charger_fonction('editer_objet', 'action');
+					list($id, $err) = $editer_objet('new', 'shortcut_url', $set);
+					include_spip('inc/invalideur');
+					suivre_invalideur(0);
+					header('Content-Type: application/json');
+					die(json_encode(array('url' => url_absolue(generer_url_entite($id, 'shortcut_url')), 'new' => true)));
+				}
 			}
 		}
 	}
