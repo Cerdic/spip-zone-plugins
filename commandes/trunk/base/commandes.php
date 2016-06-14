@@ -155,7 +155,6 @@ function commandes_declarer_tables_objets_sql($tables) {
 				'champ'       => 'statut',
 				'publie'      => 'attente,envoye,retour',
 				'previsu'     => 'attente,envoye,retour',
-				'post_date'   => 'date', 
 				'exception'   => array('statut','tout')
 			)
 		),
