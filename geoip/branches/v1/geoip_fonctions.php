@@ -40,8 +40,6 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 			$gi = geoip_open(find_in_path('lib/GeoIP.dat'), GEOIP_STANDARD);
 		}
 
-		spip_log($ip, 'test.' . _LOG_ERREUR);
-		$resultat = $fonction($gi, $ip);
 
 	}
 
