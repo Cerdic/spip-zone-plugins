@@ -81,7 +81,7 @@ function inc_image_positionner_par_focus_dist($img, $largeur, $hauteur, $type = 
 	$h_centre = $h_img * $dy;
 	$l_centre = $l_img * $dx;
 
-	if ($align == "focus-center") {
+	if ($type == "focus-center") {
 		$top  = round($h_centre - ($h_dest*0.5));
 		$left = round($l_centre - ($l_dest*0.5));
 	} else {
