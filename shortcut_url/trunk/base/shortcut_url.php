@@ -24,7 +24,7 @@ function shortcut_url_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['shortcut_urls'] = 'shortcut_urls';
 	$interfaces['table_des_tables']['shortcut_urls_logs'] = 'shortcut_urls_logs';
 	$interfaces['table_des_tables']['shortcut_urls_bots'] = 'shortcut_urls_bots';
-	
+
 	return $interfaces;
 }
 
@@ -86,8 +86,8 @@ function shortcut_url_declarer_tables_objets_sql($tables) {
 			'id_shortcut_urls_bot' 	=> 'bigint(21) unsigned NOT NULL AUTO_INCREMENT',
 			'id_shortcut_url' 	=> 'bigint(21) NOT NULL',
 			'date_modif' 		=> 'TIMESTAMP',
-			'referrer' 			=> "varchar(200) NOT NULL default 'NUL'",
-			'user_agent' 		=> "varchar(255) NOT NULL default 'NUL'",
+			'referrer' 			=> "varchar(200) NOT NULL default ''",
+			'user_agent' 		=> "varchar(255) NOT NULL default ''",
 			'ip_address' 		=> 'varchar(41) default 0 NOT NULL'
 		),
 		'key' => array(
