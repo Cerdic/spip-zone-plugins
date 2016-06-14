@@ -20,31 +20,38 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function roles_documents_document_desc_actions($flux) {
 	include_spip('inc/autoriser');
 	
-	$texte = "";
-	$e = trouver_objet_exec(_request('exec'));
+	$texte               = "";
+	$exec                = trouver_objet_exec(_request('exec'));
+	$objet_exec          = $exec['type'];
+	$id_table_objet_exec = $exec['id_table_objet'];
+	$id_objet_exec       = intval(_request($id_table_objet_exec));
+	// soit objet et id_objet sont passés en paramètre, soit on prend l'objet édité sur la page
+	$objet               = !empty($flux['args']['objet']) ? $flux['args']['objet'] : $objet_exec;
+	$id_objet            = !empty($flux['args']['id_objet']) ? $flux['args']['id_objet'] : $id_objet_exec;
 
 	if (
-		$e !== false // page d'un objet éditorial
-		AND $e['edition'] === false // pas en mode édition
-		AND $id_document = intval($flux['args']['id_document'])
+		$exec !== false // page d'un objet éditorial
+		and $exec['edition'] === false // pas en mode édition
+		and $id_document = intval($flux['args']['id_document'])
 		// AND ($media=sql_getfetsel('media','spip_documents',"id_document=".$id_document)=='image') // que pour les images
-		AND $objet = $e['type'] // article
-		AND $id_table_objet = $e['id_table_objet'] // id_article
-		AND $id_objet = intval(_request($id_table_objet))
-		AND autoriser('modifier', 'document', $id_document)
+		and autoriser('modifier', 'document', $id_document)
+		and $objet
+		and $id_objet
 	) {
 		// description des roles
 		include_spip('inc/roles');
 		$roles = roles_presents('document', $objet);
+		// bloc à recharger
+		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '#documents';
 		// mini-formulaire
 		$form = recuperer_fond('prive/squelettes/inclure/editer_roles_objet_lie',
 			array(
-				'objet_source' => "document",
+				'objet_source'    => "document",
 				'id_objet_source' => $id_document,
-				'objet' => $objet,
-				'id_objet' => $id_objet,
+				'objet'           => $objet,
+				'id_objet'        => $id_objet,
 				'options' => array(
-					'ajaxReload' => '#documents',
+					'ajaxReload' => $ajaxreload,
 				),
 			)
 		);
