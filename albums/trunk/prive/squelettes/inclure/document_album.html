@@ -21,7 +21,7 @@
 ]
 <BOUCLE_document(DOCUMENTS documents_liens types_documents){id_document}{id_album}{tout}>
 #SET{editable, #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
-<div class="item[ (#GET{editable}|oui)editable][ (#DISTANT|=={oui}|oui)distant][ (#TITRE|non)sans-titre]"
+<div class="item clearfix[ (#GET{editable}|oui)editable][ (#DISTANT|=={oui}|oui)distant][ (#TITRE|non)sans-titre]"
 	id="document[(#ID_DOCUMENT)]-album[(#ID_ALBUM)]" data-id_document="#ID_DOCUMENT">
 
 	[(#REM) BOUTONS TOURNER ]
