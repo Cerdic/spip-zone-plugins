@@ -13,6 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function autoriser_shortcuturl_creer_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
 /**
  * Autorisation du menu d'entrée dans l'admin pour spip 3.1
  *
