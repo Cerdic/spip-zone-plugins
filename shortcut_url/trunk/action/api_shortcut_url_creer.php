@@ -18,23 +18,28 @@ function action_api_shortcut_url_creer($url = false) {
 			$url = _request('url');
 		}
 		$url = parametre_url(_request('url'), 'var_mode', '');
-		$shortcut_url = sql_getfetsel('titre', 'spip_shortcut_urls', 'url=' . sql_quote($url));
-		if ($shortcut_url) {
-			include_spip('inc/invalideur');
-			suivre_invalideur(0);
+		if(!$url or $url == './') {
 			header('Content-Type: application/json');
-			die(json_encode(array('url' => url_absolue($shortcut_url), 'new' => false)));
+			die(json_encode(array('error' => '405', 'message' => 'Missing URL parameter')));
 		} else {
-			$editer_objet = charger_fonction('editer_objet', 'action');
-			list($id, $err) = $editer_objet('new', 'shortcut_url', $set);
-			include_spip('inc/invalideur');
-			suivre_invalideur(0);
-			header('Content-Type: application/json');
-			die(json_encode(array('url' => url_absolue(generer_url_entite($id, 'shortcut_url')), 'new' => true)));
+			$shortcut_url = sql_getfetsel('titre', 'spip_shortcut_urls', 'url=' . sql_quote($url));
+			if ($shortcut_url) {
+				include_spip('inc/invalideur');
+				suivre_invalideur(0);
+				header('Content-Type: application/json');
+				die(json_encode(array('url' => url_absolue($shortcut_url), 'new' => false)));
+			} else {
+				$editer_objet = charger_fonction('editer_objet', 'action');
+				list($id, $err) = $editer_objet('new', 'shortcut_url', $set);
+				include_spip('inc/invalideur');
+				suivre_invalideur(0);
+				header('Content-Type: application/json');
+				die(json_encode(array('url' => url_absolue(generer_url_entite($id, 'shortcut_url')), 'new' => true)));
+			}
 		}
 	}
 	else{
 		header('Content-Type: application/json');
-		die(json_encode(array('error' => '403', 'message' => 'Authorization failed')));
+		die(json_encode(array('error' => '401', 'message' => 'Authorization failed')));
 	}
 }
