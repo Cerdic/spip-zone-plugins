@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_serveurs_api">
+				<label><:shortcut_url:label_serveurs_api:></label>
+				<p class="explication"><:shortcut_url:explication_serveurs_api:></p>[
+				<span class='erreur_message'>(#ENV{erreurs}|table_valeur{serveurs_api})</span>
+				]<input type="text" name="serveurs_api" class="text" id="serveurs_api" value="#ENV{serveurs_api}" placeholder="192.168.1.2, 127.0.0.1..." />
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form></BOUCLE_si_editable>
+</div>

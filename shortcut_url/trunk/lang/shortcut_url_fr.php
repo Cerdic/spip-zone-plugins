@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_exist' => 'Cette URL existe déjà',
 	'erreur_url_invalide' => 'Veuillez insérer une URL valide',
 	'erreur_url_raccourcis_exist' => 'Cette URL raccourcie existe déjà',
+	'explication_serveurs_api' => 'Adresses IPs de serveurs ou clients ayant accès à l\'API sans identification.',
 
 	// F
 	'form_click' => 'Nb clics',
@@ -62,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_annee' => 'Sélectionner une année',
 	'label_autres' => 'Autres',
 	'label_mois' => 'Sélectionner un mois',
+	'label_serveurs_api' => 'IPs de serveurs pour l\'API',
 
 	// M
 	'message_confirmation_shortcut_url' => 'Votre raccourci a été enregistré.',
@@ -93,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_afficher_bots_shortcut_url' => 'Afficher les bots',
 	'titre_afficher_logs_shortcut_url' => 'Afficher les logs',
 	'titre_ajouter_shortcut_url' => 'Ajouter un lien raccourci',
+	'titre_configurer_su' => 'Configurer Shortcut URL',
 	'titre_csv_export' => 'Données de @date@ extraite le @date_jour@',
 	'titre_details_url' => 'Détails de l’URL raccourcie',
 	'titre_export_logs_shortcut_url' => 'Exporter des raccourcis',

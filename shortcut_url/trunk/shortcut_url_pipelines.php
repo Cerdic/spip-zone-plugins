@@ -14,7 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function autoriser_shortcuturl_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+	include_spip('inc/config');
+	$ips = array_map('trim', explode(',', lire_config('shortcut_url/serveurs_api')));
+	return in_array($qui['statut'], array('0minirezo', '1comite')) or in_array($GLOBALS['ip'], $ips);
 }
 /**
  * Autorisation du menu d'entrée dans l'admin pour spip 3.1
@@ -97,7 +99,7 @@ function shortcut_url_ajouter_menus($boutons_admin) {
 }
 
 /**
- * Autoriser shortcut dans le menu  
+ * Autoriser shortcut dans le menu
  *
  * @param string $faire, $type, $id, $qui, $opt
  * @return string
