@@ -19,6 +19,12 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ## Changelog
 
+### Version 1.3.0 (14/06/2016)
+
+- Gérer la modification et l'insertion des liens dans ```action/editer_shortcut_url```
+- Faire fonctionner correctement l'API de création de liens
+- Permettre de configurer certaines IPs qui peuvent créer des liens sans identification
+
 ### Version 1.2.0 (13/06/2016)
 
 - Traduction chaîne de langue et pétouille de commentaire
