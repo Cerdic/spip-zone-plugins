@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_exist' => 'Cette URL existe déjà',
 	'erreur_url_invalide' => 'Veuillez insérer une URL valide',
 	'erreur_url_raccourcis_exist' => 'Cette URL raccourcie existe déjà',
-	'explication_serveurs_api' => 'Adresses IPs de serveurs ou clients ayant accès à l\'API sans identification.',
+	'explication_serveurs_api' => 'Adresses IPs de serveurs ou clients ayant accès à l’API sans identification.',
 
 	// F
 	'form_click' => 'Nb clics',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_annee' => 'Sélectionner une année',
 	'label_autres' => 'Autres',
 	'label_mois' => 'Sélectionner un mois',
-	'label_serveurs_api' => 'IPs de serveurs pour l\'API',
+	'label_serveurs_api' => 'IPs de serveurs pour l’API',
 
 	// M
 	'message_confirmation_shortcut_url' => 'Votre raccourci a été enregistré.',
