@@ -309,6 +309,7 @@ function identifiants_affiche_gauche($flux){
 		and $id_objet = intval($flux['args'][$id_table_objet])
 		and !sql_countsel('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet))
 		and autoriser('voir','identifiants')
+		and !empty($identifiants_utiles[$objet])
 	) {
 
 		// récupérer le squelette
