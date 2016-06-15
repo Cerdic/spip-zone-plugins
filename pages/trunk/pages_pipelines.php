@@ -21,9 +21,9 @@ function pages_affiche_milieu_ajouter_page($flux){
 			_request('modele') == 'page'
 			or
 			(
-				($id_article = $flux['args']['id_article']) > 0
-				and
-				(sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article)))
+				isset($flux['args']['id_article'])
+				and ($id_article = $flux['args']['id_article']) > 0
+				and (sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article)))
 			)
 		)
 		{
