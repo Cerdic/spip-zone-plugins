@@ -16,7 +16,7 @@ function shortcut_url_supprimer($id_shortcut_url) {
 	$valide = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
 	if ($valide && autoriser('supprimer', 'shortcut_url', $valide)) {
 		sql_delete('spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
-		sql_delete('spip_auteurs_liens', 'id_objet='.intval($id_shortcut_url));
+		sql_delete('spip_auteurs_liens', 'objet="shortcut_url" AND id_objet='.intval($id_shortcut_url));
 		sql_delete('spip_urls', 'id_objet=' . intval($id_shortcut_url) . ' AND type=' . sql_quote('shortcut_url'));
 		$id_shortcut_url = 0;
 		include_spip('inc/invalideur');
