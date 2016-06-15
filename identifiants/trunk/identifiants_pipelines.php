@@ -291,6 +291,7 @@ function identifiants_affiche_gauche($flux){
 	include_spip('inc/autoriser');
 	include_spip('base/objets');
 	$objets = lire_config('identifiants/objets', array());
+
 	// prendre en compte le pipeline identifiant_utiles
 	if (
 		is_array($identifiants_utiles = identifiants_utiles())
@@ -300,7 +301,8 @@ function identifiants_affiche_gauche($flux){
 	}
 
 	if (
-		$objet = $flux['args']['type-page']
+		isset($flux['args']['type-page'])
+		and $objet = $flux['args']['type-page']
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
 		and $id_table_objet = id_table_objet($objet)
