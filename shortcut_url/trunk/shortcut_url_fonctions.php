@@ -67,13 +67,37 @@ function shortcut_compteur($id_shortcut_url) {
 	}
 
 	$ip_address = $GLOBALS['ip'];
+	/**
+	 * Tester si on n'a pas déjà logué le lien dans les trente dernières secondes pour éviter
+	 * de loguer plusieurs fois pour rien
+	 */
 	if (_IS_BOT) {
-		$appele = sql_getfetsel('id_shortcut_urls_bot', 'spip_shortcut_urls_bots', 'ip_address = '.sql_quote($ip_address).' AND id_shortcut_url = '.intval($id_shortcut_url).' AND date_modif > '.sql_quote(date('Y-m-d H:i:s', strtotime('-30 seconds'))));
+		$appele = sql_getfetsel(
+			'id_shortcut_urls_bot',
+			'spip_shortcut_urls_bots',
+			'ip_address = '.sql_quote($ip_address).'
+				AND id_shortcut_url = '.intval($id_shortcut_url).'
+				AND date_modif > '.sql_quote(date('Y-m-d H:i:s', strtotime('-30 seconds')))
+		);
 	} else {
-		$appele = sql_getfetsel('id_shortcut_urls_log', 'spip_shortcut_urls_logs', 'ip_address = '.sql_quote($ip_address).' AND id_shortcut_url = '.intval($id_shortcut_url).' AND date_modif > '.sql_quote(date('Y-m-d H:i:s', strtotime('-30 seconds'))));
+		$appele = sql_getfetsel(
+			'id_shortcut_urls_log',
+			'spip_shortcut_urls_logs',
+			'ip_address = '.sql_quote($ip_address).'
+				AND id_shortcut_url = '.intval($id_shortcut_url).'
+				AND date_modif > '.sql_quote(date('Y-m-d H:i:s', strtotime('-30 seconds')))
+		);
 	}
+
+	/**
+	 * Si on n'a pas déjà logué
+	 *
+	 * On récupère le referer
+	 * On récupère le pays à partir de l'adresse IP
+	 * On incrémente le nombre de clicks sur le lien
+	 * On insère le click statistiqe
+	 */
 	if (!$appele) {
-		$date = sql_getfetsel('date_modif', 'spip_shortcut_urls_logs', 'ip_address = '.sql_quote($ip_address).' AND id_shortcut_url = '.intval($id_shortcut_url).' AND date_modif < '.sql_quote(date('Y-m-d H:i:s', strtotime('-30 seconds'))), '', 'date_modif DESC');
 		$shorturl = sql_fetsel('url, click', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
 
 		$date_modif = date('Y-m-d H:i:s');
@@ -84,11 +108,6 @@ function shortcut_compteur($id_shortcut_url) {
 		}
 		$user_agent = get_user_agent();
 
-		if (function_exists('geoip_informations')) {
-			$country_code = geoip_informations($ip_address, 'geoip_country_code_by_addr');
-		} else {
-			$country_code = '';
-		}
 		$click = $shorturl['click'] + 1;
 		sql_updateq('spip_shortcut_urls', array('click' => $click), 'id_shortcut_url='.intval($id_shortcut_url));
 
@@ -105,6 +124,11 @@ function shortcut_compteur($id_shortcut_url) {
 				)
 			);
 		} else {
+			if (function_exists('geoip_informations')) {
+				$country_code = geoip_informations($ip_address, 'geoip_country_code_by_addr');
+			} else {
+				$country_code = '';
+			}
 			$humain = 'oui';
 			sql_insertq(
 				'spip_shortcut_urls_logs',
