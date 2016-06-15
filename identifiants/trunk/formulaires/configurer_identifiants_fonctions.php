@@ -15,13 +15,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip('inc/config');
 
-if (
-	$objets = lire_config('identifiants/objets', array())
-	and is_array($identifiants_utiles = pipeline('identifiants_utiles'))
-	and $objets_utiles = array_map('table_objet_sql', array_keys($identifiants_utiles))
-	and array_diff($objets_utiles, $objets)
-) {
-	ecrire_config('identifiants/objets', array_merge($objets, $objets_utiles));
+/**
+ * Retourne les tables des objets suggérés non activés
+ * 
+ * @return array
+ */
+function identifiants_objets_manquants(){
+
+	include_spip('inc/config');
+	$tables_objets_utiles_manquants = array();
+
+	if (
+		$tables_objets = lire_config('identifiants/objets', array())
+		and is_array($identifiants_utiles = pipeline('identifiants_utiles'))
+		and $tables_objets_utiles = array_map('table_objet_sql', array_keys($identifiants_utiles))
+	) {
+		$tables_objets_utiles_manquants = array_diff($tables_objets_utiles, $tables_objets);
+	}
+
+	return $tables_objets_utiles_manquants;
 }
+

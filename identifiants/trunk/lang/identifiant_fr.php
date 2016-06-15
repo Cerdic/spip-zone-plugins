@@ -25,9 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_aucun_identifiant' => 'Aucun identifiant',
 	'identifiants_titre' => 'Identifiants',
-	'info_identifiant_objet_exclu' => 'L\'objet suivant a déjà un champ «identifiant»',
-	'info_identifiant_objets_exclus' => 'Les objets suivants ont déjà un champ «identifiant»',
-
+	'info_identifiants_objets_exclus' => 'Les objets suivants ont déjà un champ «identifiant» et ne sont donc pas affichés',
+	'info_identifiants_objets_manquants' => 'Les squelettes actuels du site suggèrent d\'activer les objets suivants',
+	
 	// T
 	'titre_page_configurer_identifiants' => 'Configuration des identifiants',
 

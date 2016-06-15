@@ -13,17 +13,22 @@
 		<div class="editer-groupe">
 
 			[(#REM) choix des objets sur lesquels l'ajout d'identifiants est possible ]
-			#SET{tables_exclues,#REM|tables_avec_identifiant|sinon{#ARRAY}}
-			<BOUCLE_objets_exclus(DATA){source table, #GET{tables_exclues}}>
-			#SET{objets_exclus,#GET{objets_exclus}|sinon{#ARRAY}|push{#VALEUR|objet_info{texte_objets}|_T}}
-			</BOUCLE_objets_exclus>
 			#SET{name,objets} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<p class="explication">
 					<:identifiant:champ_cfg_objets_explication:>
-					[<br>(#GET{tables_exclues}|count|singulier_ou_pluriel{'identifiant:info_identifiant_objets_exclus','identifiant:info_identifiant_objets_exclus'}|typo)
-					[: (#GET{objets_exclus}|implode{','})]
-					]
+					<B_objets_exclus><br>
+					<:identifiant:info_identifiants_objets_exclus:> :
+					<BOUCLE_objets_exclus(DATA){source table, #REM|tables_avec_identifiant|sinon{#ARRAY}}{","}>
+					[(#VALEUR|objet_info{texte_objets}|_T)]
+					</BOUCLE_objets_exclus>
+					</B_objets_exclus>
+					<B_objets_manquants><br>
+					<:identifiant:info_identifiants_objets_manquants:> :
+					<BOUCLE_objets_manquants(DATA){source table, #REM|identifiants_objets_manquants|sinon{#ARRAY}}{","}>
+					[(#VALEUR|objet_info{texte_objets}|_T)]
+					</BOUCLE_objets_manquants>
+				</B_objets_manquants>
 				</p>
 				<label><:identifiant:champ_cfg_objets_label:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
