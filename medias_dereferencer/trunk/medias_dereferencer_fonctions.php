@@ -192,6 +192,7 @@ function medias_maj_documents_non_lies() {
 	include_spip('base/objets');
 	include_spip('inc/session');
 	$documents_raccourcis = medias_lister_medias_used_in_text();
+	$liste_documents = array();
 	$message_log = array();
 	$message_log[] = "\n-----";
 	// On met l'heure de début de la procédure dans le message de log
@@ -248,6 +249,18 @@ function medias_maj_documents_non_lies() {
 					$message_log[] = 'Le statut du document #' . $document['id_document'] . ' lié à l\'objet ' . $document['objet'] . ' #' . $document['id_objet'] . ' a bien été mis à jour avec le statut \'' . $document['statut'] . '\'';
 				}
 			}
+			/**
+			 * On stocke par statut les documents pour faire une mise à jour par lot
+			 */
+			$liste_documents[$document['statut']][] = $document['id_document'];
+		}
+		if (is_array($liste_documents) and count($liste_documents) > 1) {
+			// Si un document est déjà dans 'publie', il ne doit pas être présent dans le tableau 'prepa'
+			$liste_documents['prepa'] = array_diff($liste_documents['prepa'], $liste_documents['publie']);
+			// On met à jour les documents en cours de préparation
+			sql_updateq('spip_documents', array('statut' => 'prepa'), 'id_document IN (' . implode(',', $liste_documents['prepa']) . ')');
+			// On met à jour les documents publiés
+			sql_updateq('spip_documents', array('statut' => 'publie'), 'id_document IN (' . implode(',', $liste_documents['publie']) . ')');
 		}
 	}
 	// Par défaut, le message de log a 4 entrées. Voir en début de la présente fonction.
