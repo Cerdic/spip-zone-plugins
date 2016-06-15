@@ -28,23 +28,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function identifiant_objet($objet, $id_objet) {
 
 	include_spip('base/connect_sql');
+	$identifiant = null;
 
-	// Cherchons d'abord si l'objet existe bien
 	if (
 		$objet
 		and $id_objet  = intval($id_objet)
 		and $objet     = objet_type($objet)
 		and $table_sql = table_objet_sql($objet)
 		and $cle_objet = id_table_objet($objet)
-		and $ligne     = sql_fetsel('*', $table_sql, "$cle_objet = $id_objet")
 	){
 		// soit c'est un champ normalisé de la table de l'objet
-		if (isset($ligne['identifiant'])) {
-			$identifiant = $ligne['identifiant'];
-		}
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if (
+			$desc = $trouver_table($table_sql)
+			and isset($desc['field']['identifiant'])
+		){
+			$identifiant = sql_getfetsel('identifiant', $table_sql, $cle_objet.' = '.intval($id_objet));
 		// sinon on cherche dans la table spip_identifiants
-		else {
-			$identifiant = sql_getfetsel('identifiant', 'spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.$id_objet);
+		} else {
+			$identifiant = sql_getfetsel('identifiant', 'spip_identifiants', 'objet = '.sql_quote($objet).' AND id_objet = '.intval($id_objet));
 		}
 	}
 
