@@ -306,6 +306,7 @@ function identifiants_affiche_gauche($flux){
 		and $table_objet_sql = table_objet_sql($objet)
 		and in_array($table_objet_sql, $objets)
 		and $id_table_objet = id_table_objet($objet)
+		and isset($flux['args'][$id_table_objet])
 		and $id_objet = intval($flux['args'][$id_table_objet])
 		and !sql_countsel('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet))
 		and autoriser('voir','identifiants')
