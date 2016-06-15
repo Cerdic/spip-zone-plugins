@@ -19,6 +19,10 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ## Changelog
 
+### Version 1.3.1 (15/06/2016)
+
+- Stocker vraiment le referer et non pas l'adresse IP une seconde fois
+
 ### Version 1.3.0 (14/06/2016)
 
 - Gérer la modification et l'insertion des liens dans ```action/editer_shortcut_url```

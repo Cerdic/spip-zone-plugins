@@ -54,14 +54,14 @@ function shortcut_compteur($id_shortcut_url) {
 			'_IS_BOT',
 			isset($_SERVER['HTTP_USER_AGENT'])
 			and preg_match(
-							// mots generiques
-							',bot|slurp|crawler|spider|webvac|yandex|'
-							// MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
-							.'MSIE 6\.0|'
-							// UA plus cibles
-							.'80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
-							.',i',
-							(string) $_SERVER['HTTP_USER_AGENT']
+				// mots generiques
+				',bot|slurp|crawler|spider|webvac|yandex|'
+				// MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
+				.'MSIE 6\.0|'
+				// UA plus cibles
+				.'80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+				.',i',
+				(string) $_SERVER['HTTP_USER_AGENT']
 			)
 		);
 	}
@@ -77,11 +77,15 @@ function shortcut_compteur($id_shortcut_url) {
 		$shorturl = sql_fetsel('url, click', 'spip_shortcut_urls', 'id_shortcut_url='.intval($id_shortcut_url));
 
 		$date_modif = date('Y-m-d H:i:s');
-		$referrer = $_SERVER['REMOTE_ADDR'];
+		if (isset($_SERVER['HTTP_REFERER'])) {
+			$referrer = $_SERVER['HTTP_REFERER'];
+		} elseif (isset($GLOBALS['HTTP_SERVER_VARS']['HTTP_REFERER'])) {
+			$referrer = $GLOBALS['HTTP_SERVER_VARS']['HTTP_REFERER'];
+		}
 		$user_agent = get_user_agent();
 
 		if (function_exists('geoip_informations')) {
-			$country_code = geoip_informations($referrer, 'geoip_country_code_by_addr');
+			$country_code = geoip_informations($ip_address, 'geoip_country_code_by_addr');
 		} else {
 			$country_code = '';
 		}
@@ -90,10 +94,31 @@ function shortcut_compteur($id_shortcut_url) {
 
 		if (_IS_BOT) {
 			$humain = 'bot';
-			sql_insertq('spip_shortcut_urls_bots', array('id_shortcut_url' => $id_shortcut_url, 'date_modif' => $date_modif, 'referrer' => $referrer, 'user_agent' => $user_agent, 'ip_address' => $ip_address));
+			sql_insertq(
+				'spip_shortcut_urls_bots',
+				array(
+					'id_shortcut_url' => $id_shortcut_url,
+					'date_modif' => $date_modif,
+					'referrer' => $referrer,
+					'user_agent' => $user_agent,
+					'ip_address' => $ip_address
+				)
+			);
 		} else {
 			$humain = 'oui';
-			sql_insertq('spip_shortcut_urls_logs', array('id_shortcut_url' => $id_shortcut_url, 'date_modif' => $date_modif, 'shorturl' => $shorturl['url'], 'referrer' => $referrer, 'user_agent' => $user_agent, 'ip_address' => $ip_address, 'country_code' => $country_code, 'humain' => $humain));
+			sql_insertq(
+				'spip_shortcut_urls_logs',
+				array(
+					'id_shortcut_url' => $id_shortcut_url,
+					'date_modif' => $date_modif,
+					'shorturl' => $shorturl['url'],
+					'referrer' => $referrer,
+					'user_agent' => $user_agent,
+					'ip_address' => $ip_address,
+					'country_code' => $country_code,
+					'humain' => $humain
+				)
+			);
 		}
 	}
 
