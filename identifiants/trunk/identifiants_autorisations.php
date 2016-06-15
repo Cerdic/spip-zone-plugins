@@ -31,8 +31,7 @@ function identifiants_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_identifiants_voir_dist($faire, $type, $id, $qui, $opts) {
-	$is_webmestre = ($qui['statut']=='0minirezo' and !$qui['restreint']);
-	$autoriser    = $is_webmestre;
+	$autoriser = autoriser('webmestre', '', '', $qui);
 	return $autoriser;
 }
 
@@ -50,7 +49,6 @@ function autoriser_identifiants_voir_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_identifiants_modifier_dist($faire, $type, $id, $qui, $opts) {
-	$is_webmestre = ($qui['statut']=='0minirezo' and !$qui['restreint']);
-	$autoriser    = $is_webmestre;
+	$autoriser = autoriser('webmestre', '', '', $qui);
 	return $autoriser;
 }
