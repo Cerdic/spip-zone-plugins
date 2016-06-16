@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_xiti_niveau' => 'Créer un nouveau niveau 2 pour Xiti',
 	'icone_modifier_xiti_niveau' => 'Modifier ce niveau 2',
-	'info_aucun_xiti_niveaux' => 'Aucun niveau 2 pour Xiti',
+	'info_aucun_xiti_niveau' => 'Aucun niveau 2 pour Xiti',
 	'info_1_xiti_niveaux' => 'Un niveau 2 pour Xiti',
 	'info_aucune_utilisation' => 'Ce niveau 2 n\'est pas utilisé par un objet éditorial.',
 	'info_nb_xiti_niveaux' => '@nb@ niveaux 2 pour Xiti',
