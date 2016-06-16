@@ -23,9 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function facebook_affiche_gauche($flux) {
 
 	$config = lire_config('facebook');
+	$token = sql_getfetsel('token','spip_connecteur',array('type=0','id_auteur=0'));
 
-	if ($flux['args']['exec'] == 'article'
-	    and (!empty($config['accessToken']))) {
+	if ($flux['args']['exec'] == 'article' and $token) {
 		$flux['data'] .= recuperer_fond('prive/squelettes/gauche/facebook_affiche_gauche', $flux['args']);
 	}
 
