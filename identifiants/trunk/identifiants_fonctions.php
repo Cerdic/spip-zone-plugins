@@ -93,7 +93,7 @@ function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '
 				' AND identifiant = '.sql_quote($new_identifiant).
 				' AND identifiant != \'\''
 		);
-		$deja_utilise = ($nb_identiques) > 0 ? true : false);
+		$deja_utilise = ($nb_identiques > 0) ? true : false;
 
 		// on définit ce qu'on doit faire
 		$action =
