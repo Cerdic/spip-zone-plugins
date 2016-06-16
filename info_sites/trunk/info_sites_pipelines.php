@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function info_sites_affiche_milieu($flux) {
+	include_spip('inc/utils');
 	$liste_objets = array(
 		'organisations',
 		'contacts',
@@ -38,6 +39,7 @@ function info_sites_affiche_milieu($flux) {
 
 /**
  * Insert header prive
+ *
  * @param $flux
  *
  * @return string
@@ -45,9 +47,7 @@ function info_sites_affiche_milieu($flux) {
 function info_sites_header_prive($flux) {
 	include_spip('inc/utils');
 	$css = find_in_path('lib/font-awesome/css/font-awesome.min.css');
-	$flux .= '<link rel="stylesheet" href="'
-	. $css
-	. '" type="text/css" />';
+	$flux .= '<link rel="stylesheet" href="' . $css . '" type="text/css" />';
 
 	return $flux;
 }

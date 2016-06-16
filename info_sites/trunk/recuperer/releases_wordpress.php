@@ -23,6 +23,7 @@ function recuperer_releases_wordpress_dist() {
 	if (is_array($matches) and count($matches) > 0) {
 		$releases = array_merge($releases, $matches[1]);
 	}
+	natsort($releases);
 
 	return $releases;
 }

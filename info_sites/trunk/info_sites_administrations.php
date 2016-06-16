@@ -48,6 +48,7 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
  **/
 function info_sites_vider_tables($nom_meta_base_version) {
+	include_spip('inc/meta');
 	// On efface la meta de menu du plugin
 	effacer_meta('info_sites_menu');
 	// Ici on efface tout le reste :
@@ -56,6 +57,8 @@ function info_sites_vider_tables($nom_meta_base_version) {
 
 
 function info_sites_menu_pages() {
+	include_spip('inc/utils');
+	include_spip('inc/meta');
 	// liste des pages par défaut fournie par le plugin
 	$liste_pages = array(
 		'organisations' => array(

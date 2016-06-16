@@ -6,7 +6,7 @@
 	etc.
 ]
 [(#SET{type-page,[(#ENV{type-page}|table_objet)]})]
-[(#GET{type-page}|in_array{#CONFIG{"info_sites_menu"}|array_keys}|non)
+[(#GET{type-page}|in_ismenu|non)
 	[(#REM)
 		Si le type-page n'est pas dans un élément du menu,
 		on regarde quel id est présent pour ainsi retrouver l'élément du menu.

@@ -7,7 +7,7 @@
  * @copyright  2014-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Info_Sites\Recuperer\ReleasesWordpress
+ * @package    SPIP\Info_Sites\Recuperer\ReleasesSpip
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -24,6 +24,7 @@ function recuperer_releases_spip_dist() {
 		$version_reformatee = preg_replace('/-/', '.', $version);
 		$releases[] = $version_reformatee;
 	}
+	natsort($releases);
 
 	return $releases;
 }

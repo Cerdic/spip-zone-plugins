@@ -16,6 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/filtres_ecrire');
 
 function lister_tables_liens() {
+	include_spip('base/objets');
 	$tables_auxilaires = lister_tables_auxiliaires();
 	$tables_auxilaires_objets = array();
 
@@ -204,6 +205,7 @@ function sites_projets_maj_plugins() {
  */
 function info_sites_lister_logiciels_sites() {
 	include_spip('base/objets');
+	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel("DISTINCT(logiciel_nom)", 'spip_projets_sites');
 
@@ -218,7 +220,7 @@ function info_sites_lister_logiciels_sites() {
 }
 
 function info_sites_lister_logiciels_projet($id_projet, $class = '') {
-	include_spip('base/bastract_sql');
+	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel('logiciel_nom', 'spip_projets_sites', "id_projets_site IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE id_objet=$id_projet AND objet='projet')");
 	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
@@ -237,7 +239,7 @@ function info_sites_lister_logiciels_projet($id_projet, $class = '') {
 
 function info_sites_nom_machine($subject) {
 	$nom_tmp = trim($subject); // On enlève les espaces indésirables
-	$nom_tmp = translitteration_complexe($nom_tmp); // On enlève les accents et cie
+	$nom_tmp = translitteration($nom_tmp); // On enlève les accents et cie
 	$nom_tmp = preg_replace("/(\/|[[:space:]])/", '_', $nom_tmp); // On enlève les espaces et les slashs
 	$nom_tmp = preg_replace("/(_+)/", '_', $nom_tmp); // pas de double underscores
 	$nom_tmp = strtolower($nom_tmp); // On met en minuscules
@@ -288,8 +290,11 @@ function info_sites_determine_source_lien_objet($a, $b, $c) {
 }
 
 function info_sites_lister_content_html() {
+	include_spip('inc/utils');
 	$resultats = find_all_in_path('content/', "\.html$");
-	$resultats = array_keys($resultats);
+	if (is_array($resultats) and count($resultats) > 0) {
+		$resultats = array_keys($resultats);
+	}
 
 	return $resultats;
 }
@@ -333,6 +338,8 @@ function info_sites_lister_roles_auteurs_tableaux() {
  * @return array
  */
 function info_sites_lister_projets_auteurs($id_auteur = '') {
+	include_spip('inc/session');
+	include_spip('base/abstract_sql');
 	if (is_null($id_auteur) or empty($id_auteur)) {
 		$id_auteur = session_get('id_auteur');
 	}
@@ -357,6 +364,7 @@ function info_sites_lister_projets_auteurs($id_auteur = '') {
  * @return array
  */
 function info_sites_lister_projets_sites_auteurs($id_auteur = '') {
+	include_spip('base/abstract_sql');
 	$liste_projets = info_sites_lister_projets_auteurs($id_auteur);
 	$projets_sites_id = array();
 	if (is_array($liste_projets) and count($liste_projets)) {
@@ -380,6 +388,7 @@ function info_sites_lister_projets_sites_auteurs($id_auteur = '') {
  * @return array|bool
  */
 function info_sites_lister_projets_auteurs_roles($id_projet) {
+	include_spip('base/abstract_sql');
 	if (is_null($id_projet) or empty($id_projet)) {
 		return false;
 	}
@@ -443,7 +452,9 @@ function recuperer_maj_plugins_auteurs($id_auteur = '') {
 	// Récupération de tous les sites à mettre à jour
 	$maj_plugins = recuperer_maj_plugins();
 	// On ne garde que les index
-	$maj_plugins = array_keys($maj_plugins);
+	if (is_array($maj_plugins) and count($maj_plugins) > 0) {
+		$maj_plugins = array_keys($maj_plugins);
+	}
 	// Lister les sites des projets de l'auteur
 	$projets_sites_auteurs = info_sites_lister_projets_sites_auteurs($id_auteur);
 	// Ne garder que ceux qui sont à mettre à jour
@@ -452,3 +463,32 @@ function recuperer_maj_plugins_auteurs($id_auteur = '') {
 	return $maj_plugins_auteurs;
 }
 
+/**
+ * Savoir si un type-page (cf. `needle`) est présent dans le menu d'info sites.
+ *
+ * @param $needle
+ *        Nom de l'élément à retrouver dans le menu d'info sites.
+ *
+ * @return bool
+ *         true si présent
+ *         false si absent
+ */
+function in_ismenu($needle) {
+	if (is_null($needle)) {
+		return false;
+	}
+
+	include_spip('inc/config');
+	$info_sites_menu = lire_config('info_sites_menu');
+	if (is_array($info_sites_menu) and count($info_sites_menu) > 0) {
+		$element_menus = array_keys($info_sites_menu);
+		$resultats = in_array($needle, $element_menus);
+		if ($resultats) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	return false;
+}

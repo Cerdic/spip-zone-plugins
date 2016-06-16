@@ -1312,6 +1312,20 @@ input[type="radio"], input[type="checkbox"] {
 	p.boutons {
 		float: right;
 	}
+	&.formulaire_forum {
+		ul, .editer-groupe {
+			li, .editer {
+				&.erreur {
+					.erreur_message {
+						display: block;
+						float: right;
+						width: 76%;
+						text-align: left;
+					}
+				}
+			}
+		}
+	}
 }
 
 .cadre-formulaire-editer {

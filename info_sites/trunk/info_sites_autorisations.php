@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+include_spip('inc/autoriser');
 
 /**
  * Fonction d'appel pour le pipeline
@@ -110,6 +111,7 @@ function autoriser_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
 
 	if ($type === 'auteur') {
 		include_spip('inc/autoriser');
+
 		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
 	}
 
