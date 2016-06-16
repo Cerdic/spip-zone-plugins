@@ -27,6 +27,7 @@ function formulaires_facebook_poster_saisies_dist() {
 			'saisie' => 'selection',
 			'options' => array(
 				'nom' => 'page',
+				'cacher_option_intro' => 'oui',
 				'label' => _T('facebook:page'),
 				'datas' => facebook_saisie_pages()
 			)
@@ -43,11 +44,6 @@ function formulaires_facebook_poster_traiter_dist() {
 	if (_request('page')) {
 		$erreur = facebook_poster_lien_page(
 			_request('page'),
-			_request('facebook_lien'),
-			_request('facebook_message')
-		);
-	} else {
-		$erreur = facebook_poster_lien(
 			_request('facebook_lien'),
 			_request('facebook_message')
 		);

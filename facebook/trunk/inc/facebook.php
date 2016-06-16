@@ -195,8 +195,11 @@ function facebook_saisie_pages() {
 	if (!is_string($graphEdges)) {
 		// Replir un tableau utilisable avec saisies
 		$datas = array();
+		// par defaut, on place id du "me"
+		$T_user = facebook_profil();
+		$datas[$T_user['id']] = $T_user['nom'];
 		foreach ($graphEdges as $graphEdge) {
-			$datas[$graphEdge['id']] = $graphEdge['name'];
+			$datas[$graphEdge['id']] = "Page : ".$graphEdge['name'];
 		}
 	} else {
 		// C'est une erreur, on la renvoie
@@ -312,4 +315,44 @@ function filtre_facebook_profil_picture_dist($token, $width = 0, $height = 0, $a
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Recuperation de la liste des posts
+ * Si aucun token n'est passé, ce sera la configuration du site qui sera utilisée
+ *
+ * @param mixed $token
+ * @access public
+ * @return array
+ *
+ **/
+function facebook_recup_posts($token = null) {
+
+	$fb = facebook();
+	if (empty($token)) {
+		include_spip('inc/token');
+		$token = connecteur_get_token(0, 'facebook');
+	}
+	$id_page = lire_config('facebook_compte_post');
+	try {
+		$response = $fb->get('/'.$id_page.'/posts?fields=message,picture,created_time', $token);
+	} catch (Facebook\Exceptions\FacebookResponseException $e) {
+		return 'Graph returned an error: ' . $e->getMessage();
+		exit;
+	} catch (Facebook\Exceptions\FacebookSDKException $e) {
+		return 'Facebook SDK returned an error: ' . $e->getMessage();
+		exit;
+	}
+
+	$graphObject = $response->getGraphEdge()->asArray();
+	$T_result = array();
+	foreach ($graphObject as $message) {
+		foreach ($message['created_time'] as $k =>$val) {
+			if ($k == 'date') $date_creation = $val;
+		}
+		$T_result[] = array("message" => $message['message'], "url_picture" => $message['picture'], "date_creation" => $date_creation);
+	}
+
+	return $T_result;
+
 }

@@ -12,6 +12,7 @@ function formulaires_facebook_publier_saisies_dist($objet, $id_objet) {
 			'options' => array(
 				'nom' => 'page',
 				'label' => _T('facebook:page'),
+				'cacher_option_intro' => 'oui',
 				'datas' => facebook_saisie_pages()
 			)
 		)
@@ -31,11 +32,6 @@ function formulaires_facebook_publier_traiter_dist($objet, $id_objet) {
 	if (_request('page')) {
 		$erreur = facebook_poster_lien_page(
 			_request('page'),
-			$lien,
-			$message
-		);
-	} else {
-		$erreur = facebook_poster_lien(
 			$lien,
 			$message
 		);

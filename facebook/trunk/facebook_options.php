@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // On demande aussi l'email de la personne pour les inscriptions d'auteur
 // via facebook
 if (!defined('_FACEBOOK_PERMISSION')) {
-	define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages, publish_pages, pages_show_list, email');
+	define('_FACEBOOK_PERMISSION', 'publish_actions, manage_pages,user_posts, publish_pages, pages_show_list, email');
 }
 
 // Définir ce que récupère la fonction facebook_profil
