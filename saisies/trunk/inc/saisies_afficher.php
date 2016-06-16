@@ -329,7 +329,12 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 								$class_li = 'explication_'.$saisie['options']['nom'];
 								break;
 							default:
-								$class_li = 'editer_'.$saisie['options']['nom'];
+								// Les [] dans le nom de la saisie sont transformés en _ dans le
+								// nom de la classe, il faut faire pareil
+								$class_li = 'editer_' . rtrim(
+									preg_replace('/[][]\[?/', '_', $saisie['options']['nom']),
+									'_'
+								);
 						}
 						$afficher_si = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
 						$afficher_si_remplissage = isset($saisie['options']['afficher_si_remplissage']) ? $saisie['options']['afficher_si_remplissage'] : '';
