@@ -13,3 +13,8 @@ function collectionjson_autoriser() {
 function autoriser_auteur_post_collection_dist($faire, $quoi, $id, $qui, $options) {
 	return true;
 }
+
+// Pour tester les infos de connexion, tout le monde peut le faire aussi
+function autoriser_credential_get_collection_dist($faire, $quoi, $id, $qui, $options) {
+	return true;
+}

@@ -7,6 +7,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Produit le contenu du JSON d'une collection
+ * - par un squelette
+ * - par un échafaudage générique
  * 
  * @param string $collection Nom de la collection à générer
  * @param array $contexte Tableau associatif de l'environnement (à priori venant du GET)
@@ -95,4 +97,18 @@ function collectionjson_get_collection($collection, $contexte) {
 	);
 	
 	return $json;
+}
+
+/**
+ * Produit le contenu du JSON d'une ressource
+ * - par une fonction dédiée au JSON
+ * - par un squelette
+ * - par un échafaudage générique
+ * 
+ * @param string $collection Nom de la collection à générer
+ * @param array $contexte Tableau associatif de l'environnement (à priori venant du GET)
+ * @return array Retourne un tableau associatif représentant la ressource suivant la grammaire Collection+JSON ou un tableau vide si erreur (générera une 404)
+ **/
+function collectionjson_get_ressource($collection, $contexte) {
+	
 }

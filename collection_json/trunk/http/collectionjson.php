@@ -143,21 +143,21 @@ function http_collectionjson_get_collection_dist($requete, $reponse) {
 				'data' => $json,
 			)
 		);
-	}
-	
-	// Si on finit avec un truc vide, on génère une 404
-	if (empty($json)) {
-		$fonction_erreur = charger_fonction('erreur', 'http/collectionjson/');
-		$response = $fonction_erreur(404, $requete, $reponse);
-	}
-	// Sinon on encode et on renvoie correctement la réponse
-	else {
-		$json = json_encode($json);
 		
-		$reponse->setStatusCode(200);
-		$reponse->setCharset('utf-8');
-		$reponse->headers->set('Content-Type', 'application/json');
-		$reponse->setContent($json);
+		// Si on finit avec un truc vide, on génère une 404
+		if (empty($json)) {
+			$fonction_erreur = charger_fonction('erreur', 'http/collectionjson/');
+			$response = $fonction_erreur(404, $requete, $reponse);
+		}
+		// Sinon on encode et on renvoie correctement la réponse
+		else {
+			$json = json_encode($json);
+			
+			$reponse->setStatusCode(200);
+			$reponse->setCharset('utf-8');
+			$reponse->headers->set('Content-Type', 'application/json');
+			$reponse->setContent($json);
+		}
 	}
 	
 	return $reponse;
@@ -218,7 +218,6 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			and $table_collection = table_objet_sql($collection)
 			and $objets = lister_tables_objets_sql()
 			and isset($objets[$table_collection])
-			and $description = $objets[$table_collection]
 		) {
 			$objet = objet_type($collection);
 			$id_objet = intval($ressource);
