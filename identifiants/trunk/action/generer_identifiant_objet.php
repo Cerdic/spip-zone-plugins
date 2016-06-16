@@ -15,14 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Action : générer (ou mettre à jour/supprimer) l'identifiant d'un objet
- * 
+ *
  * @param string|null $arg
  *     objet, id_objet et identifiant séparés par le charatère "-"
  * @return void
  */
-function action_generer_identifiant_objet_dist($arg=null) {
+function action_generer_identifiant_objet_dist($arg = null) {
 
-	if (!function_exists('maj_identifiant_objet')){
+	if (!function_exists('maj_identifiant_objet')) {
 		include_spip('identifiants_fonctions');
 	}
 

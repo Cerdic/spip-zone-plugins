@@ -1,7 +1,9 @@
 <?php
-// This is a SPIP language file	--	Ceci est un fichier langue de SPIP
+// This is a SPIP language file -- Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -27,15 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'identifiants_titre' => 'Identifiants',
 	'info_identifiants_objets_exclus' => 'Les objets suivants ont déjà un champ «identifiant» et ne sont donc pas affichés',
 	'info_identifiants_objets_manquants' => 'Les squelettes actuels du site suggèrent d\'activer les objets suivants',
-	
+
 	// T
 	'titre_page_configurer_identifiants' => 'Configuration des identifiants',
 
-	// U 
-	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser ces identifiants pour les @objets@.', 
-	'utiles_generer_identifiant' => 'Attribuer l\'identifiant <strong>@identifiant@</strong>', 
+	// U
+	'utiles_explication' => 'Les squelettes actuels du site peuvent utiliser ces identifiants pour les @objets@.',
+	'utiles_generer_identifiant' => 'Attribuer l\'identifiant <strong>@identifiant@</strong>',
 	'utiles_titre' => 'Identifiants utiles',
 
 );
-
-?>

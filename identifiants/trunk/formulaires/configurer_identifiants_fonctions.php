@@ -18,10 +18,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Retourne les tables des objets suggérés non activés
- * 
+ *
  * @return array
  */
-function identifiants_objets_manquants(){
+function identifiants_objets_manquants() {
 
 	include_spip('inc/config');
 	$tables_objets_utiles_manquants = array();

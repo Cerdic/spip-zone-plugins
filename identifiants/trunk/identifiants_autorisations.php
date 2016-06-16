@@ -9,13 +9,15 @@
  * @package    SPIP\Identifiants\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function identifiants_autoriser(){}
+function identifiants_autoriser() {
+}
 
 
 /**

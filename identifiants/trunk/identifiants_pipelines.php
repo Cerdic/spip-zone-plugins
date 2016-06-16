@@ -34,8 +34,8 @@ function identifiants_editer_contenu_objet($flux) {
 	if (
 		$objet = $flux['args']['type']
 		and $table_objet_sql = table_objet_sql($objet)
-		and in_array($table_objet_sql,$objets)
-		and autoriser('modifier','identifiants')
+		and in_array($table_objet_sql, $objets)
+		and autoriser('modifier', 'identifiants')
 	) {
 
 		// récupérer le squelette de la saisie
@@ -68,7 +68,7 @@ function identifiants_editer_contenu_objet($flux) {
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/
-function identifiants_boite_infos($flux){
+function identifiants_boite_infos($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -78,8 +78,8 @@ function identifiants_boite_infos($flux){
 		$objet = $flux['args']['type']
 		and $id_objet = intval($flux['args']['id'])
 		and $table_objet_sql = table_objet_sql($objet)
-		and in_array($table_objet_sql,$objets)
-		and autoriser('voir','identifiants')
+		and in_array($table_objet_sql, $objets)
+		and autoriser('voir', 'identifiants')
 	) {
 
 		// récupérer la valeur de l'identifiant
@@ -116,7 +116,7 @@ function identifiants_boite_infos($flux){
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/
-function identifiants_formulaire_charger($flux){
+function identifiants_formulaire_charger($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -126,8 +126,8 @@ function identifiants_formulaire_charger($flux){
 		preg_match('/^editer_(.*)/', $flux['args']['form'], $matches) // formulaire editer_xxx
 		and $objet = $matches[1]
 		and $table_objet_sql = table_objet_sql($objet)
-		and in_array($table_objet_sql,$objets)
-		and autoriser('modifier','identifiants')
+		and in_array($table_objet_sql, $objets)
+		and autoriser('modifier', 'identifiants')
 	) {
 
 		// on suppose que id_objet est le 1er paramètre du formulaire
@@ -157,7 +157,7 @@ function identifiants_formulaire_charger($flux){
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/
-function identifiants_formulaire_verifier($flux){
+function identifiants_formulaire_verifier($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -168,31 +168,37 @@ function identifiants_formulaire_verifier($flux){
 		and $objet = $matches[1]
 		and $id_objet = $flux['args']['args'][0] // on suppose que l'id est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
-		and in_array($table_objet_sql,$objets)
-		and autoriser('modifier','identifiants')
+		and in_array($table_objet_sql, $objets)
+		and autoriser('modifier', 'identifiants')
 	) {
 
 		if ($identifiant = _request('identifiant')) {
 			// nombre max de charactères (on ne sait jamais)
 			$nb_max = 255;
 			if (($nb = strlen($identifiant)) > $nb_max) {
-				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb'=>$nb, 'nb_max'=>$nb_max));
-			}
+				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb' => $nb, 'nb_max' => $nb_max));
 			// format : charactères alphanumériques en minuscules ou "_"
-			elseif (!preg_match('/^[a-z0-9_]+$/', $identifiant)) {
+			} elseif (!preg_match('/^[a-z0-9_]+$/', $identifiant)) {
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_format');
-			}
-			// doublon : on n'autorise qu'un seul identifiant par type d'objet
-			elseif (
+					// doublon : on n'autorise qu'un seul identifiant par type d'objet
+			} elseif (
 				// objet existant
 				(
 					intval($id_objet)
-					and sql_countsel('spip_identifiants', 'identifiant='.sql_quote($identifiant).' AND objet='.sql_quote($objet).' AND id_objet!='.intval($id_objet))
+					and sql_countsel(
+						'spip_identifiants',
+						'identifiant = '.sql_quote($identifiant).
+							' AND objet = '.sql_quote($objet).
+							' AND id_objet != '.intval($id_objet)
+					)
 				)
 				// nouvel objet
 				or (
 					!intval($id_objet)
-					and sql_countsel('spip_identifiants', 'identifiant='.sql_quote($identifiant).' AND objet='.sql_quote($objet))
+					and sql_countsel(
+						'spip_identifiants',
+						'identifiant = '.sql_quote($identifiant).' AND objet = '.sql_quote($objet)
+					)
 				)
 			) {
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_doublon');
@@ -218,7 +224,7 @@ function identifiants_formulaire_verifier($flux){
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/
-function identifiants_formulaire_traiter($flux){
+function identifiants_formulaire_traiter($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -229,8 +235,8 @@ function identifiants_formulaire_traiter($flux){
 		and $objet = $matches[1]
 		and $id_objet = intval($flux['args']['args'][0]) // on suppose que c'est le 1er paramètre
 		and $table_objet_sql = table_objet_sql($objet)
-		and in_array($table_objet_sql,$objets)
-		and autoriser('modifier','identifiants')
+		and in_array($table_objet_sql, $objets)
+		and autoriser('modifier', 'identifiants')
 	) {
 
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
@@ -254,7 +260,7 @@ function identifiants_formulaire_traiter($flux){
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function identifiants_post_insertion($flux){
+function identifiants_post_insertion($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -265,8 +271,8 @@ function identifiants_post_insertion($flux){
 		and $objet = objet_type($table_objet)
 		and $id_objet = $flux['args']['id_objet']
 		and in_array($table_objet, $objets)
-		and autoriser('modifier','identifiants')
-	){
+		and autoriser('modifier', 'identifiants')
+	) {
 
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
 
@@ -285,7 +291,7 @@ function identifiants_post_insertion($flux){
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/
-function identifiants_affiche_gauche($flux){
+function identifiants_affiche_gauche($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
@@ -296,7 +302,7 @@ function identifiants_affiche_gauche($flux){
 	if (
 		is_array($identifiants_utiles = identifiants_utiles())
 		and $objets_utiles = array_map('table_objet_sql', array_keys($identifiants_utiles))
-	){
+	) {
 		$objets = array_merge($objets, $objets_utiles);
 	}
 
@@ -308,14 +314,15 @@ function identifiants_affiche_gauche($flux){
 		and $id_table_objet = id_table_objet($objet)
 		and isset($flux['args'][$id_table_objet])
 		and $id_objet = intval($flux['args'][$id_table_objet])
-		and !sql_countsel('spip_identifiants', 'objet='.sql_quote($objet).' AND id_objet='.intval($id_objet))
-		and autoriser('voir','identifiants')
+		and !sql_countsel('spip_identifiants', 'objet = '.sql_quote($objet).' AND id_objet = '.intval($id_objet))
+		and autoriser('voir', 'identifiants')
 		and !empty($identifiants_utiles[$objet])
 	) {
 
 		// récupérer le squelette
 		$utiles = recuperer_fond(
-			'prive/squelettes/inclure/identifiants_utiles', array(
+			'prive/squelettes/inclure/identifiants_utiles',
+			array(
 				'objet' => $objet,
 				'id_objet' => $id_objet,
 				'identifiants_utiles' => $identifiants_utiles[$objet]
