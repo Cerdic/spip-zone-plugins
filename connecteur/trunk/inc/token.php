@@ -35,6 +35,7 @@ function connecteur_save_token($id_auteur, $type, $token) {
 			connecteur_update_token($id_auteur, $type, $token);
 		} else {
 			// Sérializer le token
+			$token = serialize($token);
 			sql_insertq(
 				'spip_connecteur',
 				array(
@@ -79,7 +80,7 @@ function connecteur_get_token($id_auteur, $type) {
 	if (!is_null($recup_token)) {
 		// On vérifie que la signature du token est toujours bonne
 		if (calculer_cle_action($recup_token['token']) == $recup_token['signature']) {
-			return $recup_token['token'];
+			return unserialize($recup_token['token']);
 		} else {
 			// Si la signature n'est pas valide, on active un minipres
 			include_spip('inc/minipres');
@@ -98,7 +99,7 @@ function connecteur_get_token($id_auteur, $type) {
  * @access public
  */
 function connecteur_update_token($id_auteur, $type, $token) {
-
+	$token = serialize($token);
 	sql_updateq(
 		'spip_connecteur',
 		array(
