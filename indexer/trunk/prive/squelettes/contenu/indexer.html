@@ -20,8 +20,8 @@ if (_request('run') || _request('continue')) {
 
     if (!$res) {
         echo "\n<br/><a id='recharger' href='[(#SELF|parametre_url{run,''}|parametre_url{continue,1})]'>Recharger la page pour continuer l'indexation</a>";
-        echo "<script type='text/javascript'>window.location.replace( $('#recharger').attr('href') );</script>";
+        echo "<script type='text/javascript'>setTimeout(function(){ $('#recharger').ajaxReload({\"href\":$('#recharger').attr('href')})},100);</script>";
     } else {
-        echo "\n<pre>"; print_r($res); echo "</pre>";
+        echo "\n<pre class='success'>"; print_r($res); echo "</pre>";
     }
 }

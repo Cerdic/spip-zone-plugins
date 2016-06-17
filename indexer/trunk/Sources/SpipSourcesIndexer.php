@@ -177,10 +177,11 @@ class SpipSourcesIndexer {
             $parts->next();
         }
 
-        echo "<hr /><strong>Temps pour $source :</strong><br />";
+        echo "<p class='success'><strong>Temps pour $source :</strong><br />";
         $t = spip_timer('source', true);
         $stats['sources'][$skey]['time']['total'] += $t;
         echo $this->getNiceTime( $stats['sources'][$skey]['time']['total'] );
+        echo "</p><hr />";
     }
 
     private function indexSourcePart($source, $skey, $part, &$stats) {
@@ -196,7 +197,7 @@ class SpipSourcesIndexer {
         $stats['sources'][$skey]['time']['documents'] += $t;
 
         if ($nb) {
-            echo "<br /><strong>Temps pour indexer $nb documents (ids $part[start] à $part[end])</strong>\n";
+            echo "<p><strong>Temps pour indexer $nb documents (ids $part[start] à $part[end])</strong>\n";
             echo "<br />Documents: " . $this->getNiceTime($t) . "\n";
 
             spip_timer('indexing');
@@ -206,6 +207,7 @@ class SpipSourcesIndexer {
             $stats['last']['time']['indexing'] += $t;
             $stats['sources'][$skey]['time']['indexing'] += $t;
             echo "<br />Enregistrement dans l'index: " . $this->getNiceTime($t) . "\n";
+            echo "</p>";
         }
     }
 
