@@ -39,5 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page' => 'Les logos',
 	'titre_page_configurer_lister_logos' => 'Les logos, on en fait quoi ?',
-	'titre_tous_logos' => 'Tous les logos'
+	'titre_tous_logos' => 'Tous les logos',
+	'titre_tous_logos_on' => 'Tous les logos normaux',
+	'titre_tous_logos_off' => 'Tous les logos de survol',
+
 );

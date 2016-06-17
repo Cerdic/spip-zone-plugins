@@ -8,7 +8,7 @@
 [(#SET{logo,#ENV{logo}|strlen|>{1}|?{#ENV{logo},''}})]
 <B_ls2>
 <div class="galerie[ media-(#ENV{logo,logos})]">
-	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],<:lister_logos:titre_tous_logos:>})][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
+	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],[(#ENV{etat}|?{[(#VAL{lister_logos:titre_tous_logos_}|concat{#ENV{etat}}|_T)],<:lister_logos:titre_tous_logos:>})]})][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
 	[(#ANCRE_PAGINATION)]
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 	<table>
@@ -61,7 +61,7 @@
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 </div>
 </B_ls2>
-	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],<:lister_logos:titre_tous_logos:>})]</h2>
+	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],[(#ENV{etat}|?{[(#VAL{lister_logos:titre_tous_logos_}|concat{#ENV{etat}}|_T)],<:lister_logos:titre_tous_logos:>})]})]</h2>
 	[(#ENV{controle}|=={max_size}|non)
 	<p><:lister_logos:pas_de_logos:></p>]
 	[(#ENV{controle}|=={max_size}|oui)
