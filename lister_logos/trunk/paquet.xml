@@ -13,7 +13,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="autoriser" inclure="lister_logos_autorisations.php" />
 	<menu nom="lister_logos" titre="lister_logos:info_logos" parent="menu_edition" icone="images/lister_logos-16.png" />
 
 </paquet>
