@@ -20,7 +20,9 @@ function indexer_jointure_auteurs_dist($objet, $id_objet, $infos) {
 				$infos['properties']['auteurs']['emails'][$auteur['id_auteur']] = $auteur['email'];
 			}
 		}
-		
+		// et on garde la property authors
+		$infos['properties']['authors'] = array_values($infos['properties']['auteurs']['noms']);
+
 		// On ajoute le nom des auteurs en fulltext à la fin
 		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['auteurs']['noms']);
 	}

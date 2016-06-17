@@ -1,4 +1,7 @@
 <?php
+/**
+ * CODE MORT, ne sert plus, tout passe par Sources/SpipDocuments
+ */
 
 namespace Spip\Indexer\Sources;
 

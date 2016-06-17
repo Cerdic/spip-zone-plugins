@@ -70,6 +70,8 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 			$infos['properties']['mots']['ids_hierarchie'] = array_merge($infos['properties']['mots']['ids_hierarchie'], $ids_hierarchie);
 			$infos['properties']['mots']['titres_hierarchie'] = array_merge($infos['properties']['mots']['titres_hierarchie'], $titres_hierarchie);
 		}
+		// et on garde la property tags
+		$infos['properties']['tags'] = array_values($infos['properties']['mots']['titres']);
 		
 		// On ajoute le nom des mots en fulltext à la fin
 		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['mots']['titres']);
