@@ -24,7 +24,7 @@
 			<a href="[(#SELF|parametre_url{controle,''})]"><:info_tout_afficher:></a>,
 			<strong class="on active"><:info_tout_afficher:></strong>
 			})]</li>
-		<BOUCLE_controles (DATA) {source table, #GET{controles}} {si #EVAL{_LOGO_MAX_SIZE}|ou{#EVAL{_LOGO_MAX_WIDTH}}|ou{#EVAL{_LOGO_MAX_HEIGHT}}}>
+		<BOUCLE_controles(DATA){source table, #GET{controles}} {si #EVAL{_LOGO_MAX_SIZE}|ou{#EVAL{_LOGO_MAX_WIDTH}}|ou{#EVAL{_LOGO_MAX_HEIGHT}}}>
 		[(#EVAL{[(#VAL{'_LOGO_'}|concat{#VALEUR|strtoupper})]}|oui)<li>[(#ENV{controle}|=={#VALEUR}|?{
 			<strong class="on active">[(#VAL{lister_logos:controle_}|concat{#VALEUR}|_T)]</strong>,
 			<a href="[(#SELF|parametre_url{controle,#VALEUR})]">[(#VAL{lister_logos:controle_}|concat{#VALEUR}|_T)]</a>
@@ -39,15 +39,17 @@
 <p>[(#VAL{lister_logos:controle_}|concat{#ENV{controle},'_explication'}|_T{#ARRAY{nb,#GET{nb}}})]</p>]
 ]
 [(#REM)
+
 on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux
+
 ][
 (#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys|array_diff{#GET{exclus}})]})]
 <div class="formulaire_spip formulaire_editer formulaire_editer_logo">
 	<form action="#SELF" role="form">
 	<ul class="editer-groupe">
 		[(#SELF
-		|parametre_url{logo,''}
-		|form_hidden)]
+			|parametre_url{logo,''}
+			|form_hidden)]
 		<B_objets>
 		<li class="editer editer_logo">
 			<label for="champ_logo"><:lister_logos:objets_label:></label>

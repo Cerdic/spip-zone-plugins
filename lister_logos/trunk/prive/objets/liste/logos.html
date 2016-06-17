@@ -1,11 +1,14 @@
 [(#REM)
-Maintenant qu'on a les types de logos de tous les objets éditoriaux de SPIP
-On scanne objet par objet les logos contenus dans le répertoire IMG/
-][(#SET{logo_max_size,[(#EVAL{_LOGO_MAX_SIZE})]})][(#SET{logo_max_height,[(#EVAL{_LOGO_MAX_HEIGHT})]})][(#SET{logo_max_width,[(#EVAL{_LOGO_MAX_WIDTH})]})]
 
+	Maintenant qu'on a les types de logos de tous les objets éditoriaux de SPIP
+	On scanne objet par objet les logos contenus dans le répertoire IMG/
+
+][(#SET{logo_max_size,[(#EVAL{_LOGO_MAX_SIZE})]})][(#SET{logo_max_height,[(#EVAL{_LOGO_MAX_HEIGHT})]})][(#SET{logo_max_width,[(#EVAL{_LOGO_MAX_WIDTH})]})]
+[(#SET{types_logo,#EVAL{$GLOBALS\['table_logos'\]}|array_flip})]
+[(#SET{logo,#ENV{logo}|strlen|>{1}|?{#ENV{logo},''}})]
 <B_ls2>
-<div class="galerie[ media-(#ENV{logo,spip_articles})]">
-	<h2>[(#ENV{logo,spip_articles}|objet_info{texte_objets}|_T)][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
+<div class="galerie[ media-(#ENV{logo,logos})]">
+	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],<:lister_logos:titre_tous_logos:>})][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
 	[(#ANCRE_PAGINATION)]
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 	<table>
@@ -19,10 +22,14 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
 			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_ls2 (DATA) {source table, #ENV{logo,spip_articles}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
+		<BOUCLE_ls2(DATA){source table, #GET{logo}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination 5 #ENV{logo,logos}}>[(#SET{logo_infos,[(#VALEUR|logo_infos)]})]
+		[(#GET{logo}|?{[(#SET{table,[(#ENV{logo})]})],[(#SET{table,[(#GET{types_logo}|table_valeur{[(#GET{logo_infos}|table_valeur{1})]}|sinon{[(#GET{logo_infos}|table_valeur{1})]}|table_objet_sql)]})]})]
+		[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#GET{table}|id_table_objet|sql_getfetsel{[(#GET{table})],[(#GET{table}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
 			<tr id="[(#GET{pathinfo/filename})]">
 				<td class="id">
-					<strong>[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">][(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
+					<strong>
+						[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#GET{types_logo}|table_valeur{[(#VALEUR|logo_infos{1})]}|table_objet)]})]">]
+						[(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
 				</td>
 				<td class='statut'>
 					[(#GET{brise,0}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
@@ -41,8 +48,8 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
 					<div class="dimensions">[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] pixels </div>
 					[<div class="taille">(#VALEUR|filesize|taille_en_octets)</div>]
 					[<div class="date">(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate{d/m/Y})</div>]
-					[<a class="[(#ENV{logo,spip_articles}|table_objet)]" href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]})</a>]
-					[(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]}|non)<em><:lister_logos:objet_supprime:></em>]
+					[<a class="[(#GET{table}|table_objet)]" href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#GET{table}|table_objet)]})]">(#INFO_TITRE{[(#GET{table}|table_objet)],[(#VALEUR|logo_infos{3})]})</a>]
+					[(#INFO_TITRE{[(#GET{table}|table_objet)],[(#VALEUR|logo_infos{3})]}|non)<em><:lister_logos:objet_supprime:></em>]
 				</td>
 				<td class="descriptif">
 					[<strong>(#VALEUR|logo_etat)</strong>]
@@ -54,7 +61,10 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 </div>
 </B_ls2>
-	<h2>[(#ENV{logo,spip_articles}|objet_info{texte_objets}|_T)]</h2>
-	<p><:lister_logos:pas_de_logos:></p>
+	<h2>[(#ENV{logo}|?{[(#ENV{logo}|objet_info{texte_objets}|_T)],<:lister_logos:titre_tous_logos:>})]</h2>
+	[(#ENV{controle}|=={max_size}|non)
+	<p><:lister_logos:pas_de_logos:></p>]
+	[(#ENV{controle}|=={max_size}|oui)
+	<p><:lister_logos:pas_de_logos_trop_lourd:></p>]
 <//B_ls2>
 

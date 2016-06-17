@@ -94,7 +94,7 @@ function lister_logos_fichiers($table = null, $mode = null, $constante = null, $
 	include_spip('base/abstract_sql');
 	include_spip('base/objets');
 
-	if (!is_null($table)) {
+	if (!is_null($table) && strlen($table) > 1) {
 		$tables_objets = array($table);
 	} else {
 		$tables_objets = array_keys(lister_tables_principales());

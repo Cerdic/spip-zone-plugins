@@ -34,8 +34,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_de_logos' => 'Il n\'y a pas de logos pour cet objet éditorial.',
+	'pas_de_logos_trop_lourd' => 'Il n\'y a pas de logos "trop lourd" pour cet objet éditorial.',
 
 	// T
 	'titre_page' => 'Les logos',
 	'titre_page_configurer_lister_logos' => 'Les logos, on en fait quoi ?',
+	'titre_tous_logos' => 'Tous les logos'
 );
