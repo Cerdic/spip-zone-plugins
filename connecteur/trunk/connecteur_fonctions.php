@@ -156,6 +156,8 @@ function balise_TOKEN__dist($p) {
 
 	if (!isset($id_auteur)) {
 		$id_auteur = session_get('id_auteur') ;
+	} else {
+		$id_auteur = intval($id_auteur);
 	}
 
 	$connecteur_type = strtolower(substr($p->nom_champ, 6));
