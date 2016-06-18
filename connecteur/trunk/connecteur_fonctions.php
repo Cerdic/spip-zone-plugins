@@ -160,7 +160,7 @@ function balise_TOKEN__dist($p) {
 
 	$connecteur_type = strtolower(substr($p->nom_champ, 6));
 
-	$p->code = "connecteur_get_token($id_auteur, $connecteur_type)";
+	$p->code = "connecteur_get_token($id_auteur, '$connecteur_type')";
 	$p->interdire_scripts = false;
 
 	return $p;
