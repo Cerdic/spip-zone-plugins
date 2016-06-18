@@ -31,9 +31,9 @@ function formulaires_facebook_publier_traiter_dist($objet, $id_objet) {
 
 	if (_request('page')) {
 		$erreur = facebook_poster_lien_page(
-			_request('page'),
 			$lien,
-			$message
+			$message,
+			_request('page')
 		);
 	}
 

@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @access public
  * @return string Token ou erreur facebook
  */
-function facebook_poster_lien_page($id_page, $lien, $message, $token = false) {
+function facebook_poster_lien_page($lien, $message, $id_page = 'me', $token = false) {
 
 	if (!$token) {
 		include_spip('inc/token');

@@ -43,9 +43,9 @@ function formulaires_facebook_poster_traiter_dist() {
 
 	if (_request('page')) {
 		$erreur = facebook_poster_lien_page(
-			_request('page'),
 			_request('facebook_lien'),
-			_request('facebook_message')
+			_request('facebook_message'),
+			_request('page')
 		);
 	}
 
