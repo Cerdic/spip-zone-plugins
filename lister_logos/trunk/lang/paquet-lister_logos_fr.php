@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/lister_logos/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'lister_logos_description' => 'Ce plugin vous permet de lister sur une page tous les logos présents dans le répertoire "IMG/". Vous pourrez retrouver l\'objet éditorial associé au logo.',
+	'lister_logos_description' => 'Ce plugin vous permet de lister sur une page tous les logos présents dans le répertoire "IMG/". Vous pourrez retrouver l’objet éditorial associé au logo.',
 	'lister_logos_nom' => 'Lister les logos',
-	'lister_logos_slogan' => 'En un coup d\'oeil, tous vos logos.',
+	'lister_logos_slogan' => 'En un coup d’oeil, tous vos logos.'
 );
