@@ -152,9 +152,15 @@ function connecteur_connecter($auteur_info) {
 include_spip('inc/token');
 function balise_TOKEN__dist($p) {
 
+	$id_auteur = intval($p->param[0][1][0]->texte);
+
+	if ( ! isset($id_auteur) ){
+		$id_auteur = session_get('id_auteur') ;
+	}
+
 	$connecteur_type = strtolower(substr($p->nom_champ, 6));
 
-	$p->code = "connecteur_get_token(session_get('id_auteur'), '$connecteur_type')";
+	$p->code = "connecteur_get_token($id_auteur, $connecteur_type)";
 	$p->interdire_scripts = false;
 
 	return $p;
