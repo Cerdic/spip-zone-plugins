@@ -152,7 +152,7 @@ function connecteur_connecter($auteur_info) {
 include_spip('inc/token');
 function balise_TOKEN__dist($p) {
 
-	$id_auteur = intval($p->param[0][1][0]->texte);
+	$id_auteur = interprete_argument_balise(1, $p);
 
 	if (!isset($id_auteur)) {
 		$id_auteur = session_get('id_auteur') ;
