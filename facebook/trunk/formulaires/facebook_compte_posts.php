@@ -1,5 +1,8 @@
 <?php
-if (!defined('_ECRIRE_INC_VERSION')) return;
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function formulaires_facebook_compte_posts_saisies_dist() {
 	include_spip('inc/facebook');
@@ -22,7 +25,7 @@ function formulaires_facebook_compte_posts_traiter_dist() {
 
 	$id = _request('page');
 	$retour = array();
-	if ( ecrire_config('facebook_compte_post',$id) ) {
+	if (ecrire_config('facebook_compte_post', $id)) {
 		$retour = array(
 			'message_ok' => _T('facebook:confirmer_enregistrer_compte_post')
 		);
