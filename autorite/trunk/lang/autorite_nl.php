@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_mots_cles' => 'Activeer het beheer per trefwoord',
+	'admin_complets' => 'De volledige beheerders',
 	'admin_restreints' => 'Beperkte beheerders?',
 	'admin_tous' => 'Alle beheerders (inclusief beperkte)',
 	'administrateur' => 'beheerder',
