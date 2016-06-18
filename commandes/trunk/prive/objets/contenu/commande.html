@@ -44,11 +44,6 @@
 	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
 	]
 
-	[(#REM) Adresses liées à la commande ou à défaut au contact ]
-	[(#PLUGIN{coordonnees}|oui)
-	<INCLURE{fond=prive/squelettes/inclure/commande_adresses, id_commande}>
-	]
-
 	[(#REM) Informations sur le client ]
 	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
 
