@@ -154,7 +154,7 @@ function balise_TOKEN__dist($p) {
 
 	$id_auteur = intval($p->param[0][1][0]->texte);
 
-	if ( ! isset($id_auteur) ){
+	if (!isset($id_auteur)) {
 		$id_auteur = session_get('id_auteur') ;
 	}
 
