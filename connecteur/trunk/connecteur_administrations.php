@@ -32,6 +32,10 @@ function connecteur_upgrade($nom_meta_base_version, $version_cible) {
 		array('connecteur_actualiser_signature')
 	);
 
+	$maj['1.0.13'] = array(
+		array('sql_alter', 'TABLE spip_connecteur CHANGE id_connecteur id_connecteur BIGINT(21) NOT NULL AUTO_INCREMENT')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
