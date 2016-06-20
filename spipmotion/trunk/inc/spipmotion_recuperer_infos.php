@@ -88,7 +88,7 @@ function inc_spipmotion_recuperer_infos($id_document = false, $fichier = null, $
 		$ffprobe = charger_fonction('spipmotion_ffprobe', 'inc');
 		$infos_ffprobe = $ffprobe($fichier);
 		foreach ($infos_ffprobe as $info => $valeur) {
-			if (!isset($infos[$info]) or !$infos[$info]) {
+			if (!isset($infos[$info]) or !$infos[$info] or ($infos[$info] == 'non' && $valeur != 'non')) {
 				$infos[$info] = $valeur;
 			}
 		}

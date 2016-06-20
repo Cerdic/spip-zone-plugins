@@ -2,6 +2,10 @@
 
 ## Versions 1.6.x
 
+### Version 1.6.3
+
+* Il arrive que mediainfo ne sache détecter les pistes vidéo et son. Ne pas empêcher ffprobe de les détecter et de les mettre à jour.
+
 ### Version 1.6.2
 
 * Ajout du m4a comme extension d'encodage audio possible (aac)
