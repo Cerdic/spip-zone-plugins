@@ -15,8 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Metadonnees par defaut
 'config_metas_defaut' => 'META-данные для главной страницы',
-'title_defaut_explication' => 'Если вы не хотите использовать <a href="?exec=configuration">название сайта</a>, введите тут другое&nbsp;:',
-'meta_description_defaut_explication' => 'Если вы не хотите использовать <a href="?exec=configuration">описание сайта</a>, введите его тут (не более 250 символов)&nbsp;:',
+'title_defaut_explication' => 'Если вы не хотите использовать <a href="?exec=configurer_identite">название сайта</a>, введите тут другое&nbsp;:',
+'meta_description_defaut_explication' => 'Если вы не хотите использовать <a href="?exec=configurer_identite">описание сайта</a>, введите его тут (не более 250 символов)&nbsp;:',
 'meta_keywords_defaut_explication' => 'Введите ключевые слова для главной страницы (до 1000 символов):',
 
 // Metadonnees par objet

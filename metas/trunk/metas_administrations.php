@@ -38,6 +38,9 @@ function metas_upgrade($nom_meta_base_version, $version_cible) {
 
 // fonction de desinstallation
 function metas_vider_tables($nom_meta_base_version) {
+	include_spip('base/abstract_sql');
+	include_spip('inc/meta');
+
 	sql_drop_table('spip_metas');
 	sql_drop_table('spip_metas_liens');
 	effacer_meta('spip_metas_title');

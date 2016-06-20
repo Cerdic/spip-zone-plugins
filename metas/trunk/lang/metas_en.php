@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Metadonnees par defaut
 'config_metas_defaut' => 'Default Meta tags',
-'title_defaut_explication' => 'If you do NOT wish to use your <a href="?exec=configuration">Website\'s name</a>, then choose another title&nbsp;:',
-'meta_description_defaut_explication' => 'If you do NOT wish to use the <a href="?exec=configuration">description of your website</a>, then write another one here (less than 250 characters)&nbsp;:',
+'title_defaut_explication' => 'If you do NOT wish to use your <a href="?exec=configurer_identite">Website\'s name</a>, then choose another title&nbsp;:',
+'meta_description_defaut_explication' => 'If you do NOT wish to use the <a href="?exec=configurer_identite">description of your website</a>, then write another one here (less than 250 characters)&nbsp;:',
 'meta_keywords_defaut_explication' => 'Add here the generic keywords for your website, coma separated (1000 characters max.)',
 
 // Metadonnees par objet

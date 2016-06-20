@@ -1,7 +1,7 @@
 <paquet
 	prefix="metas"
 	categorie="outil"
-	version="1.5.1"
+	version="1.6.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/metas-24.png"
@@ -18,11 +18,14 @@
 		<pipeline nom="pre_propre" inclure="metas_fonctions.php" />
 	-->
 	<pipeline nom="affiche_milieu" inclure="metas_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="metas_pipelines.php" />
+
 	<pipeline nom="declarer_tables_interfaces" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/metas.php" />
+
 	<pipeline nom="autoriser" inclure="metas_autorisations.php" />
 
-	<onglet nom="metas" titre="metas:configuration_metas" parent="menu_configuration" icone="images/metas-24.png" action="metas"/>
-	<menu nom="metas" titre="metas:configuration_metas" parent="menu_configuration" icone="images/metas-16.png" action="metas"/>
+	<onglet nom="configurer_metas" titre="metas:configuration_metas" parent="menu_configuration" icone="images/metas-24.png" action="configurer_metas"/>
+	<menu nom="configurer_metas" titre="metas:configuration_metas" parent="menu_configuration" icone="images/metas-16.png" action="configurer_metas"/>
 </paquet>
