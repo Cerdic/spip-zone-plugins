@@ -9,7 +9,8 @@ function formulaires_navigateur_a2a_charger($id_article){
 	return 
 		array(
 			'parents' => $parents,
-			'id_article_orig' => $id_article_orig
+			'id_article_orig' => $id_article_orig,
+			'type_liaison' => ''
 		);
 }
 
@@ -18,12 +19,17 @@ function formulaires_navigateur_a2a_verifier($id_article){
 	$types_liaions = array_keys(lister_types_liaisons());
 	if ($nv_type_liaison){
 		if (!in_array($nv_type_liaison,$types_liaions)){
-			return array('message_erreur'=>_T('a2a:type_inexistant'));
+			$erreurs = array('message_erreur'=>_T('a2a:type_inexistant'));
 		}
 	}
 	elseif(lire_config('a2a/type_obligatoire')){
-		return array('message_erreur'=>_T('a2a:type_inexistant'));
+		$erreurs = array('message_erreur'=>_T('a2a:type_inexistant'));
 	}
+	$parents = _request('parents');
+	if (!is_array($parents)){
+		$erreurs = array('message_erreur'=>_T('a2a:explication_navigateur'));
+	}
+	return $erreurs;
 }
 
 function formulaires_navigateur_a2a_traiter($id_article){
