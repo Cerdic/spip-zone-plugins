@@ -19,17 +19,22 @@
 				<th><:medias:logo:></th>
 				<th><:medias:infos:></th>
 				<th><:medias:descriptif:></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_ls2(DATA){source table, #GET{logo}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination 5 #ENV{logo,logos}}>[(#SET{logo_infos,[(#VALEUR|logo_infos)]})]
-		[(#GET{logo}|?{[(#SET{table,[(#ENV{logo})]})],[(#SET{table,[(#GET{types_logo}|table_valeur{[(#GET{logo_infos}|table_valeur{1})]}|sinon{[(#GET{logo_infos}|table_valeur{1})]}|table_objet_sql)]})]})]
-		[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#GET{table}|id_table_objet|sql_getfetsel{[(#GET{table})],[(#GET{table}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
+		<BOUCLE_ls2(DATA){source table, #GET{logo}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination #ENV{pagination,20} #ENV{logo,logos}}>[(#SET{logo_infos,[(#VALEUR|logo_infos)]})]
+		[(#SET{objet,[(#GET{types_logo}|table_valeur{[(#GET{logo_infos}|table_valeur{1})]}|sinon{[(#GET{logo_infos}|table_valeur{1})]}|objet_type)]})]
+		[(#SET{id_objet,[(#GET{logo_infos}|table_valeur{3})]})]
+		[(#SET{id_table_objet,[(#GET{objet}|id_table_objet)]})]
+		[(#SET{etat,[(#GET{logo_infos}|table_valeur{2})]})]
+		[(#GET{logo}|?{[(#SET{table,[(#ENV{logo})]})],[(#SET{table,[(#GET{objet}|table_objet_sql)]})]})]
+		[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#GET{id_table_objet}|sql_getfetsel{[(#GET{table})],[(#GET{id_table_objet}|concat{'=',[(#GET{id_objet}|sql_quote)]})]}|?{0,1})]})]
 			<tr id="[(#GET{pathinfo/filename})]">
 				<td class="id">
 					<strong>
-						[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#GET{types_logo}|table_valeur{[(#VALEUR|logo_infos{1})]}|table_objet)]})]">]
-						[(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
+						[(#GET{brise}|non)<a href="[(#GET{id_objet}|generer_url_entite{#GET{objet}})]">]
+						[(#GET{id_objet})][(#GET{brise}|non)</a>]</strong>
 				</td>
 				<td class='statut'>
 					[(#GET{brise,0}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
@@ -48,11 +53,17 @@
 					<div class="dimensions">[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] pixels </div>
 					[<div class="taille">(#VALEUR|filesize|taille_en_octets)</div>]
 					[<div class="date">(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate{d/m/Y})</div>]
-					[<a class="[(#GET{table}|table_objet)]" href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#GET{table}|table_objet)]})]">(#INFO_TITRE{[(#GET{table}|table_objet)],[(#VALEUR|logo_infos{3})]})</a>]
-					[(#INFO_TITRE{[(#GET{table}|table_objet)],[(#VALEUR|logo_infos{3})]}|non)<em><:lister_logos:objet_supprime:></em>]
+					[(#SET{titre,[(#INFO_TITRE{[(#GET{objet})],[(#GET{id_objet})]})]})]
+					[<a class="[(#GET{table}|table_objet)]" href="[(#GET{id_objet}|generer_url_entite{#GET{objet}})]">(#GET{titre})</a>]
+					[(#GET{titre}|non)<em><:lister_logos:objet_supprime:></em>]
 				</td>
 				<td class="descriptif">
 					[<strong>(#VALEUR|logo_etat)</strong>]
+				</td>
+				<td class="suppression">
+					[(#GET{brise,0}|oui)
+					[(#AUTORISER{modifier,[(#GET{objet})],[(#GET{id_objet})]}|oui)
+					<span class='supprimer'>[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,[(#URL_ACTION_AUTEUR{supprimer_logo,[(#GET{objet})]/[(#GET{id_objet})]/[(#GET{etat})],[(#SELF)]})],ajax})]</span>]]
 				</td>
 			</tr>
 		</BOUCLE_ls2>
