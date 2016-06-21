@@ -67,6 +67,12 @@
 					[(#GET{brise,0}|ou{#VALEUR|logo_etat|=={<:lister_logos:logo_bad:>}}|oui)
 					[(#AUTORISER{modifier,[(#GET{objet})],[(#GET{id_objet})]}|oui)
 					<span class='supprimer'>[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,[(#URL_ACTION_AUTEUR{supprimer_logo,[(#GET{objet})]/[(#GET{id_objet})]/[(#GET{etat})],[(#SELF)]})],ajax})]</span>]]
+					[(#GET{brise,0}|ou{#VALEUR|logo_etat|=={<:lister_logos:logo_bad:>}}|non)
+						[(#GET{etat}|=={off}|et{#GET{id_objet}|logo_on_existe{#GET{id_table_objet}}|non}|oui)
+						<:lister_logos:info_logo_on_inexistant:>
+						<span class='supprimer'>[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,[(#URL_ACTION_AUTEUR{supprimer_logo,[(#GET{objet})]/[(#GET{id_objet})]/[(#GET{etat})],[(#SELF)]})],ajax})]</span>
+						]
+					]
 				</td>
 			</tr>
 		</BOUCLE_ls2>

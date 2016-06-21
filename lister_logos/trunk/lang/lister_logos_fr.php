@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_logo' => 'Un logo',
+	'info_logo_on_inexistant' => 'Le logo normal n\'existe pas, vous pouvez supprimer celui de survol du coup.',
 	'info_logos' => 'Logos',
 	'info_nb_logos' => '@nb@ logos',
 
