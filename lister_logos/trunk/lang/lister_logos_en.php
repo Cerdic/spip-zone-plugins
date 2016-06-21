@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_de_logos' => 'There are no logos for this editorial object.',
+	'pas_de_logos_trop_lourd' => 'There are no "too heavy" logos for this editorial object.',
 
 	// T
 	'titre_page' => 'The logos',
