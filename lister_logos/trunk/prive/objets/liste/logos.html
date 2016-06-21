@@ -23,7 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_ls2(DATA){source table, #GET{logo}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination #ENV{pagination,20} #ENV{logo,logos}}>[(#SET{logo_infos,[(#VALEUR|logo_infos)]})]
+		<BOUCLE_ls2(DATA){source table, #GET{logo}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination #ENV{pagination,10} #ENV{logo,logos}}>[(#SET{logo_infos,[(#VALEUR|logo_infos)]})]
 		[(#SET{objet,[(#GET{types_logo}|table_valeur{[(#GET{logo_infos}|table_valeur{1})]}|sinon{[(#GET{logo_infos}|table_valeur{1})]}|objet_type)]})]
 		[(#SET{id_objet,[(#GET{logo_infos}|table_valeur{3})]})]
 		[(#SET{id_table_objet,[(#GET{objet}|id_table_objet)]})]

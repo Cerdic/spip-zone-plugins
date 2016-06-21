@@ -32,6 +32,12 @@
 	</ul>
 	</B_controles>
 </div>
+<div class="pagination">
+	<:medias:label_paginer_par:> 
+	[(#SELF|parametre_url{pagination,''}|lien_ou_expose{10,#ENV{pagination,10}|=={10},ajax})]
+	[<span class="sep">|</span> (#SELF|parametre_url{pagination,50}|lien_ou_expose{50,#ENV{pagination,10}|=={50},ajax})]
+	[<span class="sep">|</span> (#SELF|parametre_url{pagination,100}|lien_ou_expose{100,#ENV{pagination,10}|=={100},ajax})]
+</div>
 
 [(#ENV{controle}|oui)
 [(#SET{nb,[(#EVAL{[(#VAL{'_LOGO_'}|concat{#ENV{controle}|strtoupper})]})]})]
