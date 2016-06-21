@@ -48,7 +48,7 @@ function coordonnees_afficher_fiche_objet($flux) {
 		}
 	}
 
-	if (!$e['edition'] AND ($editable OR $has)) {
+	if (!$e['edition'] and ($editable OR $has)) {
 		$texte .= recuperer_fond('prive/squelettes/contenu/coordonnees_fiche_objet', array(
 			'objet' => $type,
 			'id_objet' => intval($flux['args']['id']),
