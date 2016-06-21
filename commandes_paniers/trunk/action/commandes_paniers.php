@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fonction du plugin Commandes de paniers
  *
@@ -8,27 +9,27 @@
  * @licence    GNU/GPL
  * @package    SPIP\Panier2commande\Action
  */
-
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
 
 include_spip('inc/base');
 
 /**
  * Créer une commande et remplir ses détails d'après le panier en cours du visiteur (ou d'après un panier donné).
  *
- * Pour créer une commande d'après le panier présent dans la session: 
+ * Pour créer une commande d'après le panier présent dans la session:
  *   #URL_ACTION{commandes_paniers,'',#SELF}
  * Pour créer une commande d'après un panier précis :
  *   #URL_ACTION{commandes_paniers,#ID_PANIER,#SELF}
- * Sans redirection explicite, la fonction redirige vers la page de la commande 
+ * Sans redirection explicite, la fonction redirige vers la page de la commande
  *
  * @param string $arg
  *     id_panier pour creer la commande et le detruire
  *     id_panier-1 pour creer la commande et le conserver
  * @return void
-**/
-function action_commandes_paniers_dist($arg=null){
+ * */
+function action_commandes_paniers_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)) {
@@ -36,7 +37,7 @@ function action_commandes_paniers_dist($arg=null){
 		$arg = $securiser_action();
 	}
 
-	$arg = explode("-",$arg);
+	$arg = explode("-", $arg);
 	$id_panier = 0;
 	if (count($arg))
 		$id_panier = intval(array_shift($arg));
@@ -55,7 +56,7 @@ function action_commandes_paniers_dist($arg=null){
 	if (!$id_panier)
 		return;
 
-	$id_auteur = sql_getfetsel("id_auteur","spip_paniers","id_panier=".intval($id_panier));
+	$id_auteur = sql_getfetsel("id_auteur", "spip_paniers", "id_panier=" . intval($id_panier));
 
 
 	include_spip('inc/commandes');
@@ -64,31 +65,29 @@ function action_commandes_paniers_dist($arg=null){
 	// plutot que de recreer N commandes pour un meme panier
 	// (cas de l'utilisateur qui revient en arriere puis retourne a la commande)
 	include_spip('inc/session');
-	$id_commande = sql_getfetsel("id_commande","spip_commandes",$w="statut=".sql_quote('encours')." AND date>".sql_quote(date('Y-m-d H:i:s',strtotime('-'.lire_config('paniers/limite_ephemere', 24).' hour')))." AND source=".sql_quote("panier#$id_panier")." AND id_commande=".session_get('id_commande'));
+	$id_commande = sql_getfetsel("id_commande", "spip_commandes", $w = "statut=" . sql_quote('encours') . " AND date>" . sql_quote(date('Y-m-d H:i:s', strtotime('-' . lire_config('paniers/limite_ephemere', 24) . ' hour'))) . " AND source=" . sql_quote("panier#$id_panier") . " AND id_commande=" . session_get('id_commande'));
 
 	// sinon on cree une commande "en cours"
-	if (!$id_commande){
+	if (!$id_commande) {
 		$id_commande = creer_commande_encours();
 	}
 
 	// et la remplir les details de la commande d'après le panier en session
-	if ($id_commande){
-		panier2commande_remplir_commande($id_commande,$id_panier,false);
+	if ($id_commande) {
+		panier2commande_remplir_commande($id_commande, $id_panier, false);
 	}
 
 	// Supprimer le panier ?
-	if (!$keep){
+	if (!$keep) {
 		$supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
 		$supprimer_panier();
 	}
 
 	// Sans redirection donnée, proposer une redirection par defaut vers la page de la commande créée
 	if (is_null(_request('redirect'))) {
-		$GLOBALS['redirect'] = generer_url_public('commande','id_commande='.$id_commande,true);
+		$GLOBALS['redirect'] = generer_url_public('commande', 'id_commande=' . $id_commande, true);
 	}
 }
-
-
 
 /**
  * Remplir une commande d'apres un panier
@@ -98,35 +97,33 @@ function action_commandes_paniers_dist($arg=null){
  * @param  bool $append
  *   true pour ajouter brutalement le panier a la commande, false pour verifier que commande==panier en ajoutant/supprimant uniquement les details necessaires
  */
-function panier2commande_remplir_commande($id_commande,$id_panier,$append=true){
+function panier2commande_remplir_commande($id_commande, $id_panier, $append = true) {
 
 	include_spip('action/editer_objet');
 	include_spip('inc/filtres');
 	include_spip('inc/paniers');
 
 	// noter le panier source dans le champ source de la commande
-	objet_modifier('commande',$id_commande,array('source'=>"panier#$id_panier"));
+	objet_modifier('commande', $id_commande, array('source' => "panier#$id_panier"));
 
 	// recopier le contenu du panier dans la commande
 	// On récupère le contenu du panier
 	$panier = sql_allfetsel(
-		'*',
-		'spip_paniers_liens',
-		'id_panier = '.intval($id_panier)
+			'*', 'spip_paniers_liens', 'id_panier = ' . intval($id_panier)
 	);
 
 	// Pour chaque élément du panier, on va remplir la commande
 	// (ou verifier que la ligne est deja dans la commande)
-	if ($panier and is_array($panier)){
+	if ($panier and is_array($panier)) {
 		$details = array();
 		include_spip('spip_bonux_fonctions');
 		$fonction_prix = charger_fonction('prix', 'inc/');
 		$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
-		foreach($panier as $emplette){
-			$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'],3);
-			$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'],3);
-			if($prix_ht > 0)
-				$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+		foreach ($panier as $emplette) {
+			$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'], 4);
+			$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'], 4);
+			if ($prix_ht > 0)
+				$taxe = round(($prix - $prix_ht) / $prix_ht, 4);
 			else
 				$taxe = 0;
 
@@ -141,13 +138,13 @@ function panier2commande_remplir_commande($id_commande,$id_panier,$append=true){
 				'statut' => 'attente'
 			);
 			$where = array();
-			foreach($set as $k=>$w){
-				if (in_array($k,array('id_commande','objet','id_objet'))){
-					$where[] = "$k=".sql_quote($w);
+			foreach ($set as $k => $w) {
+				if (in_array($k, array('id_commande', 'objet', 'id_objet'))) {
+					$where[] = "$k=" . sql_quote($w);
 				}
 			}
 			// est-ce que cette ligne est deja la ?
-			if ($append OR !$id_commandes_detail = sql_getfetsel("id_commandes_detail","spip_commandes_details",$where)){
+			if ($append OR ! $id_commandes_detail = sql_getfetsel("id_commandes_detail", "spip_commandes_details", $where)) {
 				// sinon création et renseignement du détail de la commande
 				$id_commandes_detail = objet_inserer('commandes_detail');
 			}
@@ -156,10 +153,9 @@ function panier2commande_remplir_commande($id_commande,$id_panier,$append=true){
 				$details[] = $id_commandes_detail;
 			}
 		}
-		if (!$append){
+		if (!$append) {
 			// supprimer les details qui n'ont rien a voir avec ce panier
-			sql_delete("spip_commandes_details","id_commande=".intval($id_commande)." AND ".sql_in('id_commandes_detail',$details,"NOT"));
+			sql_delete("spip_commandes_details", "id_commande=" . intval($id_commande) . " AND " . sql_in('id_commandes_detail', $details, "NOT"));
 		}
 	}
-
 }
