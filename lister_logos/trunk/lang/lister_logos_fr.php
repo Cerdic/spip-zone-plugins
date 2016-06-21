@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lister_logos_titre' => 'Lister les logos',
+	'logo_bad' => 'Mauvais format',
 	'logo_off' => 'Logo de survol',
 	'logo_on' => 'Logo normal',
 

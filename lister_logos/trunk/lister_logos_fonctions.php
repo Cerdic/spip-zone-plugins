@@ -54,9 +54,16 @@ function logo_infos($fichier, $index = null) {
 function logo_etat($fichier) {
 	$infos = logo_infos($fichier);
 	if ($infos[2] == 'on') {
-		return _T('lister_logos:logo_on');
+		$etat = _T('lister_logos:logo_on');
+	} elseif ($infos[2] == 'off') {
+		$etat = _T('lister_logos:logo_off');
 	}
-	return _T('lister_logos:logo_off');
+
+	global $formats_logos;
+	if (!in_array($infos[4], $formats_logos)) {
+		$etat = _T('lister_logos:logo_bad');
+	}
+	return $etat;
 }
 
 /**
@@ -102,8 +109,7 @@ function lister_logos_fichiers($table = null, $mode = null, $constante = null, $
 	sort($tables_objets);
 
 	global $formats_logos;
-	$docs_fichiers_on   = array();
-	$docs_fichiers_off  = array();
+	$docs_fichiers_on   = $docs_fichiers_off = $docs_fichiers_bad = array();
 
 	// On va chercher toutes les tables principales connues de SPIP
 	foreach ($tables_objets as $table_objet) {
@@ -130,13 +136,14 @@ function lister_logos_fichiers($table = null, $mode = null, $constante = null, $
 					$r
 				)) {
 					$docs_fichiers_on[] = preg_replace('/\/\//', '/', $fichier);
-				}
-				if (preg_match(
+				} elseif (preg_match(
 					'/('. $type_du_logo.')off(\d+).('. join('|', $formats_logos).')$/',
 					$fichier,
 					$r
 				)) {
 					$docs_fichiers_off[] = preg_replace('/\/\//', '/', $fichier);
+				} else {
+					$docs_fichiers_bad[] = preg_replace('/\/\//', '/', $fichier);
 				}
 			}
 		}
@@ -150,8 +157,11 @@ function lister_logos_fichiers($table = null, $mode = null, $constante = null, $
 		case 'off':
 			$docs_fichiers = array_unique($docs_fichiers_off);
 			break;
+		case 'bad':
+			$docs_fichiers = array_unique($docs_fichiers_bad);
+			break;
 		default:
-			$docs_fichiers = array_unique(array_merge($docs_fichiers_on, $docs_fichiers_off));
+			$docs_fichiers = array_unique(array_merge($docs_fichiers_on, $docs_fichiers_off, $docs_fichiers_bad));
 			break;
 	}
 

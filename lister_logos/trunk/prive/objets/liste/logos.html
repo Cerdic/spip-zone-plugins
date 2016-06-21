@@ -28,8 +28,10 @@
 		[(#SET{id_objet,[(#GET{logo_infos}|table_valeur{3})]})]
 		[(#SET{id_table_objet,[(#GET{objet}|id_table_objet)]})]
 		[(#SET{etat,[(#GET{logo_infos}|table_valeur{2})]})]
+		[(#SET{extension,[(#GET{logo_infos}|table_valeur{4})]})]
 		[(#GET{logo}|?{[(#SET{table,[(#ENV{logo})]})],[(#SET{table,[(#GET{objet}|table_objet_sql)]})]})]
-		[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#GET{id_table_objet}|sql_getfetsel{[(#GET{table})],[(#GET{id_table_objet}|concat{'=',[(#GET{id_objet}|sql_quote)]})]}|?{0,1})]})]
+		[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
+		[(#GET{id_objet}|intval|>{0}|?{[(#SET{brise,[(#GET{id_table_objet}|sql_getfetsel{[(#GET{table})],[(#GET{id_table_objet}|concat{'=',[(#GET{id_objet}|sql_quote)]})]}|?{0,1})]})],#SET{brise,oui}})]
 			<tr id="[(#GET{pathinfo/filename})]">
 				<td class="id">
 					<strong>
@@ -40,7 +42,8 @@
 					[(#GET{brise,0}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
 				</td>
 				<td class="logo">
-					<a href="[(#VALEUR)]"[ title='(#GET{pathinfo/basename}|attribut_html)'][ type="(#VALEUR|getimagesize|table_valeur{mime})"]>[(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,#VALEUR}|inserer_attribut{class,spip_logos})]</a>
+					[(#GET{extension}|in_array{[(#LISTE{jpg,png,gif,svg,bmp})]}|oui)
+					<a href="[(#VALEUR)]"[ title='(#GET{pathinfo/basename}|attribut_html)'][ type="(#VALEUR|getimagesize|table_valeur{mime})"]>[(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,#VALEUR}|inserer_attribut{class,spip_logos})]</a>]
 					[<div class="fichier">(#GET{pathinfo/basename})</div>]
 				</td>
 				<td class="exif">
@@ -61,7 +64,7 @@
 					[<strong>(#VALEUR|logo_etat)</strong>]
 				</td>
 				<td class="suppression">
-					[(#GET{brise,0}|oui)
+					[(#GET{brise,0}|ou{#VALEUR|logo_etat|=={<:lister_logos:logo_bad:>}}|oui)
 					[(#AUTORISER{modifier,[(#GET{objet})],[(#GET{id_objet})]}|oui)
 					<span class='supprimer'>[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,[(#URL_ACTION_AUTEUR{supprimer_logo,[(#GET{objet})]/[(#GET{id_objet})]/[(#GET{etat})],[(#SELF)]})],ajax})]</span>]]
 				</td>
