@@ -4,14 +4,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 function action_supprimer_logo_dist($objet = null, $id_objet = null, $etat = 'on') {
 	// appel direct depuis une url avec arg = "objet/id"
 	if (is_null($objet) or is_null($id_objet)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 		list($objet, $id_objet, $etat) = array_pad(explode('/', $arg, 3), 3, null);
-		spip_log(array_pad(explode('/', $arg, 3), 3, null),'test.'._LOG_ERREUR);
 	}
 
 	// appel incorrect ou depuis une url erronnée interdit
