@@ -76,12 +76,25 @@ var geocoder;]
 				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);]
 				map.panTo(data.point);
 				marker.setLatLng(data.point);
+				//marker_dragend(marker);
+				marker.options.editable = true;
+				marker.on('dragend', function (e) {
+					marker_dragend(e);
+				});
 				$('#champ_#ENV{champ_type,type}').val('Point');
 				$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(marker.toGeoJSON()));
 			}
 			if (!marker._map) {
 				layer.addLayer(marker);
 			}
+		},
+		marker_dragend = function (e) {
+			var layer = e;
+			if (e.target) {
+				layer = e.target;
+			}
+			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
+			maj_inputs(form_map_[(#ENV{nom})], editableLayers_[(#ENV{nom})], layer._latlng, 'click');
 		};
 
 	[(#GET{geocoder}|oui)
@@ -127,31 +140,23 @@ var geocoder;]
 
 		]$("#" + map_container).get(0).map = form_map_[(#ENV{nom})];
 
-		var marker_dragend = function (e) {
+		var layer_edit = function (e) {
 			var layer = e;
 			if (e.target) {
 				layer = e.target;
 			}
 			$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
-			maj_inputs(form_map_[(#ENV{nom})], editableLayers_[(#ENV{nom})], layer._latlng, 'click');
-		},
-			layer_edit = function (e) {
-				var layer = e;
-				if (e.target) {
-					layer = e.target;
-				}
-				$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(layer.toGeoJSON()));
-				[(#ENV{nomajinputs,non}|=={oui}|non)
-				var center = layer.getBounds().getCenter();
-				$('#champ_#ENV{champ_lat,lat}').val(center.lat);
-				$('#champ_#ENV{champ_lon,lon}').val(center.lng);]
-			}[,(#ENV{nodraw}|non)
-			gisdraw_change_controls = function (options) {
-				form_map_[(#ENV{nom})].removeControl(drawControl);
-				drawControl = new L.Control.Draw(options);
-				form_map_[(#ENV{nom})].addControl(drawControl);
-				form_map_[(#ENV{nom})].drawControl = drawControl;
-			}];
+			[(#ENV{nomajinputs,non}|=={oui}|non)
+			var center = layer.getBounds().getCenter();
+			$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+			$('#champ_#ENV{champ_lon,lon}').val(center.lng);]
+		}[,(#ENV{nodraw}|non)
+		gisdraw_change_controls = function (options) {
+			form_map_[(#ENV{nom})].removeControl(drawControl);
+			drawControl = new L.Control.Draw(options);
+			form_map_[(#ENV{nom})].addControl(drawControl);
+			form_map_[(#ENV{nom})].drawControl = drawControl;
+		}];
 		[(#REM)
 
 			appeler l'éventuelle fonction de callback
@@ -221,8 +226,8 @@ var geocoder;]
 					["geometry": (#GEOMETRY|wkt_to_json),]
 					"id":"#ENV{id_gis,oui}",
 					"properties": {
-						"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
-						"description":[(#ENV{descriptif,''}|json_encode)][
+						"title":[(#ENV{titre,''}|html2unicode|extraire_multi|json_encode)],
+						"description":[(#ENV{descriptif,''}|html2unicode|propre|json_encode)][
 						(#LOGO_GIS|gis_icon_properties)]
 					}
 				}]
@@ -410,11 +415,7 @@ var geocoder;]
 			Si on a un seul objet, on le rend éditable
 
 		]
-		if (Object.keys(editableLayers_[(#ENV{nom})]._layers).length == 1) {
-			editableLayers_[(#ENV{nom})].eachLayer(function (layer) {
-				layer.editing.enable();
-			});
-		}
+
 		form_map_[(#ENV{nom})].addControl(drawControl);
 		form_map_[(#ENV{nom})].drawControl = drawControl;
 		form_map_[(#ENV{nom})].on('draw:created', function (e) {
@@ -492,6 +493,12 @@ var geocoder;]
 				edited = false;
 			}
 		});
+		if (Object.keys(editableLayers_[(#ENV{nom})]._layers).length == 1) {
+			editableLayers_[(#ENV{nom})].eachLayer(function (layer) {
+				layer.editing.enable();
+				drawControl._toolbars.edit._modes.edit.handler.enable();
+			});
+		}
 		[(#REM)
 			
 			Si le geocoder renvoit quelque chose, on bloque la création de nouveaux éléments
