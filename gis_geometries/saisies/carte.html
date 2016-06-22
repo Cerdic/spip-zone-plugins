@@ -65,8 +65,8 @@ var geocoder;]
 				$('#champ_#ENV{champ_lat,lat}').val(data.lat);
 				$('#champ_#ENV{champ_lon,lon}').val(data.lng);]
 				annuler_geocoder_[(#ENV{nom})] = 1;
-				map.panTo(data);
 				marker.setLatLng(data);
+				map.panTo(data);
 			} else if (annuler_geocoder_[(#ENV{nom})] !== 1) {
 				if (data.point === 'undefined') {
 					data.point = data;
@@ -76,9 +76,8 @@ var geocoder;]
 				$('#champ_#ENV{champ_lon,lon}').val(data.point.lng);]
 				map.panTo(data.point);
 				marker.setLatLng(data.point);
-				//marker_dragend(marker);
 				marker.options.editable = true;
-				marker.on('dragend', function (e) {
+				marker.off('dragend').on('dragend', function (e) {
 					marker_dragend(e);
 				});
 				$('#champ_#ENV{champ_type,type}').val('Point');
@@ -273,7 +272,7 @@ var geocoder;]
 
 						surveiller les changements sur le point
 						
-					]layer.on('dragend', function (e) {
+					]layer.off('dragend').on('dragend', function (e) {
 						marker_dragend(e);
 					});
 				}
@@ -323,7 +322,7 @@ var geocoder;]
 
 						surveiller les changements sur le point
 
-					]layer.on('dragend', function (e) {
+					]layer.off('dragend').on('dragend', function (e) {
 						marker_dragend(e);
 					});
 				}
@@ -427,7 +426,7 @@ var geocoder;]
 				editableLayers_[(#ENV{nom})].addLayer(marker);
 				$('#champ_#ENV{champ_type,type}').val('Point');
 				marker_dragend(layer);
-				marker.on('dragend', function (e) {
+				marker.off('dragend').on('dragend', function (e) {
 					marker_dragend(e);
 				});
 			} else {
@@ -504,7 +503,11 @@ var geocoder;]
 			Si le geocoder renvoit quelque chose, on bloque la création de nouveaux éléments
 			
 		]form_map_[(#ENV{nom})].on('geocoder_ok', function(){
-			gisdraw_change_controls(drawOptionsBlocked);
+			if(drawControl._toolbars.draw) {
+				gisdraw_change_controls(drawOptionsBlocked);
+				marker.editing.enable();
+				drawControl._toolbars.edit._modes.edit.handler.enable();
+			}
 		});]
 		[(#ENV{nodraw}|oui)
 		[(#REM)
@@ -539,7 +542,7 @@ var geocoder;]
 
 			mettre à jour les coordonnées quand on déplace le marker
 
-		]marker.on('dragend', function (e) {
+		]marker.off('dragend').on('dragend', function (e) {
 			marker_dragend(e);
 		});]
 
