@@ -112,9 +112,3 @@ function coordonnees_optimiser_base_disparus($flux){
 }
 
 
-/**
- * Déclaration du pipeline qui liste les types des coordonnées
- */
-function coordonnees_types_coordonnees($flux) { return $flux; }
-
-
