@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_cfg_objets_label' => 'Objets',
 	'champ_cfg_objets_explication' => 'Choix des types d\'objets sur lesquels l\'ajout d\'un identifiant est possible.',
 	'champ_identifiant_label' => 'Identifiant',
-	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : charactères alphanumériques ou «_».',
+	'champ_identifiant_explication' => 'Identifiant unique pour cet objet. Il s\'agit d\'un nom informatique : caractères alphanumériques ou «_».',
 
 	// E
 	'erreur_champ_identifiant_format' => 'Format incorrect : n\'utilisez pas d\'espace, ni de majuscule, ni de caractères accentués ou spéciaux.',

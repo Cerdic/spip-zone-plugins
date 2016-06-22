@@ -173,11 +173,11 @@ function identifiants_formulaire_verifier($flux) {
 	) {
 
 		if ($identifiant = _request('identifiant')) {
-			// nombre max de charactères (on ne sait jamais)
+			// nombre max de caractères (on ne sait jamais)
 			$nb_max = 255;
 			if (($nb = strlen($identifiant)) > $nb_max) {
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb' => $nb, 'nb_max' => $nb_max));
-			// format : charactères alphanumériques en minuscules ou "_"
+			// format : caractères alphanumériques en minuscules ou "_"
 			} elseif (!preg_match('/^[a-z0-9_]+$/', $identifiant)) {
 				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_format');
 					// doublon : on n'autorise qu'un seul identifiant par type d'objet
