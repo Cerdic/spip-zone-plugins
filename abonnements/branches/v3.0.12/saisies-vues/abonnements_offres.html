@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_abonnements_offres_selectionnes>
+	<ul>
+	<BOUCLE_abonnements_offres_selectionnes(ABONNEMENTS_OFFRES){id_abonnement IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_ABONNEMENT)</li>
+	</BOUCLE_abonnements_offres_selectionnes>
+	</ul>
+	</B_abonnements_offres_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_abonnements_offres_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_abonnement_selectionne(ABONNEMENTS_OFFRES){id_abonnement=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_ABONNEMENT)</p>
+	</BOUCLE_abonnement_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_abonnement_selectionne>
+<//B_test_multiple>

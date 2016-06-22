@@ -1,0 +1,8 @@
+#BOITE_OUVRIR{'','simple'}
+<INCLURE{fond=prive/objets/liste/abonnements, masquer_auteur=oui, par=date_fin, env, ajax, sinon=<:abonnement:info_aucun_abonnement:>, id_auteur=#ENV{id_auteur}}>
+
+[(#AUTORISER{creer,abonnement})
+	[(#URL_ECRIRE{abonnement_edit,new=oui&id_auteur=#ENV{id_auteur}}|icone_horizontale{<:abonnement:icone_creer_abonnement:>,abonnement,new,left})]
+]
+#BOITE_FERMER
+<div class="nettoyeur"></div>

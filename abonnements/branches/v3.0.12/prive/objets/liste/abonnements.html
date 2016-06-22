@@ -1,0 +1,63 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,#ENV{date_debut_sens,-1},
+	date_fin,#ENV{date_fin_sens,-1},
+	id_abonnement,1,
+	id_auteur,1,
+	nom,1,
+	points,-1
+}})]<B_liste_abonnements>
+#ANCRE_PAGINATION
+<div class="liste-objets abonnements">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{titre_singulier,abonnement:info_1_abonnement},#ENV{titre_pluriel,abonnement:info_nb_abonnements}}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			[(#ENV{masquer_offre}|non)
+			<th class="id_abonnements_offre" scope="col">[(#TRI{id_abonnements_offre,<:abonnement:champ_id_abonnements_offre_label:>,ajax})]</th>
+			]
+			[(#ENV{masquer_auteur}|non)
+			<th class="nom" scope="col">[(#TRI{nom,<:abonnement:champ_id_auteur_label:>,ajax})]</th>
+			]
+			<th class="date date_debut" scope="col">[(#TRI{date_debut,<:abonnement:champ_date_debut_label:>,ajax})]</th>
+			<th class="date date_fin" scope="col">[(#TRI{date_fin,<:abonnement:champ_date_fin_label:>,ajax})]</th>  
+			<th class="id" scope="col">[(#TRI{id_abonnement,<:abonnement:info_numero_abbr_maj|attribut_html:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_abonnements(ABONNEMENTS auteurs)
+		{where?}
+		{id_abonnements_offre?}
+		{id_auteur?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,10}}
+	>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{abonnement,#ID_ABONNEMENT})]</td> 
+			[(#ENV{masquer_offre}|non)
+			<td class="id_abonnements_offre principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE}</a></td>
+			]
+			[(#ENV{masquer_auteur}|non)
+			<td class="nom principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#NOM</a></td>
+			]
+			#SET{horaires, #INFO_PERIODE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}|=={heures}|?{' ',''}}
+			<td class="date date_debut secondaire">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_DEBUT|affdate_heure)], [(#DATE_DEBUT|affdate_jourcourt)]})]})]</td>
+			<td class="date date_fin secondaire">[(#DATE_FIN|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_FIN|affdate_heure)], [(#DATE_FIN|affdate_jourcourt)]})]})]</td>  
+			<td class="id">[(#AUTORISER{modifier,abonnement,#ID_ABONNEMENT}|?{
+				<a href="[(#URL_ECRIRE{abonnement_edit,id_abonnement=#ID_ABONNEMENT})]" title="<:abonnement:icone_modifier_abonnement|attribut_html:>">#ID_ABONNEMENT</a>,
+				#ID_ABONNEMENT
+			})]</td>
+			<td class="action">[(#AUTORISER{modifier,abonnement,#ID_ABONNEMENT}|et{#INFO_DUREE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}}|?{
+				<a href="[(#URL_ACTION_AUTEUR{renouveler_abonnement,#ID_ABONNEMENT,#SELF})]" title="<:abonnement:icone_renouveler_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">[(#CHEMIN_IMAGE{arrow_refresh-16.png}|balise_img{<:abonnement:icone_renouveler_abonnement:>,''})]</a>
+			})]</td>
+		</tr>
+	</BOUCLE_liste_abonnements>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_abonnements>[
+<div class="liste-objets abonnements caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_abonnements>
