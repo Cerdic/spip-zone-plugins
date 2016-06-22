@@ -23,7 +23,7 @@
 							[(#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}})]
 						</td>
 						<td class="supprimer">
-							<button class="button link delete" name="supprimer[#ID_ABONNEMENTS_OFFRES_NOTIFICATION]" value="X">
+							<button type="submit" class="button link delete" name="supprimer[#ID_ABONNEMENTS_OFFRES_NOTIFICATION]" value="X">
 								<img src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12" alt="X" />
 								<:lien_supprimer|ucfirst:>
 							</button>
