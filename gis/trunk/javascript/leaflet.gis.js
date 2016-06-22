@@ -208,32 +208,30 @@ L.Map.Gis = L.Map.extend({
 				map.geojsons.push(geojson);
 			}
 		} else {
-			map.markers = L.markerClusterGroup(map.options.clusterOptions);
-
+			map.markerCluster = L.markerClusterGroup(map.options.clusterOptions).addTo(map);
+			var markers = [];
 			/* Pour chaque points présents, on crée un marqueur */
-			jQuery.each(data.features, function (i, feature) {
-				if (feature.geometry.coordinates[0]) {
+			jQuery.each(data.features, function(i, feature){
+				if (feature.geometry.coordinates[0]){
 					var marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
 
 					// Déclarer l'icone du point
-					if (feature.geometry.type == 'Point') {
-						map.setGeoJsonFeatureIcon(feature, marker);
-					}
+					map.setGeoJsonFeatureIcon(feature, marker);
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, marker);
 
 					marker.id = feature.id;
-					map.markers.addLayer(marker);
+					markers.push(marker);
 				}
 			});
 
-			map.addLayer(map.markers);
+			map.markerCluster.addLayers(markers);
 
-			if (map.options.autocenterandzoom) {
+			if (map.options.autocenterandzoom){
 				if (data.features.length > 1)
-					map.fitBounds(map.markers.getBounds());
+					map.fitBounds(map.markerCluster.getBounds());
 				else
-					map.setView(map.markers.getBounds().getCenter(), map.options.zoom);
+					map.setView(map.markerCluster.getBounds().getCenter(), map.options.zoom);
 			}
 		}
 	},
