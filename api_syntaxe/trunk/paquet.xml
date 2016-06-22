@@ -1,0 +1,17 @@
+<paquet
+	prefix="api_syntaxe"
+	categorie="outil"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo=""
+>
+	<nom>API pour accéder à la syntaxe de SPIP</nom>
+	
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GPL v3</licence>
+	
+	<necessite nom="http" compatibilite="[1.2.0;]" />
+	
+	<pipeline nom="autoriser" inclure="api_syntaxe_autorisations.php" />
+</paquet>
