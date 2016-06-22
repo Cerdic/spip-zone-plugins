@@ -53,9 +53,14 @@ function autoriser_intranet_dist()
 // dans le site public
 // si auteur pas autorise : placer sur un cache dedie
 if (!test_espace_prive()){
-	include_spip('inc/autoriser');
-	if (!autoriser('intranet'))
-		$GLOBALS['marqueur'].= ":intranet_out";
+  include_spip('inc/autoriser');
+  if (!autoriser('intranet')) {
+    if (isset($GLOBALS['marqueur'])) {
+      $GLOBALS['marqueur'].= ':intranet_out';
+    } else {
+      $GLOBALS['marqueur'] = 'intranet_out';
+    }
+  }
 }
 
 /**
