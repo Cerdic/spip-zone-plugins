@@ -1,40 +1,48 @@
 <?php
+
 /**
  * Plugin Abonnements
  * (c) 2012 Les Développements Durables
  * Licence GNU/GPL v3
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION'))
+	return;
 
 /**
  * Fonction d'installation du plugin et de mise à jour.
-**/
+ * */
 function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(array('maj_tables', array('spip_abonnements_offres', 'spip_abonnements_offres_liens', 'spip_abonnements', 'spip_abonnements_offres_notifications')));
-	
+
 	// Ajout de la config des notifications
 	$maj['2.1.0'] = array(
 		array('maj_tables', array('spip_abonnements_offres_notifications'))
 	);
-	
+
 	// Ajout de la date d'échéance possiblement différente avec la date de fin
 	$maj['2.2.0'] = array(
 		array('maj_tables', array('spip_abonnements')),
-		array('sql_update', 'spip_abonnements', array('date_echeance'=>'date_fin')),
+		array('sql_update', 'spip_abonnements', array('date_echeance' => 'date_fin'))
 	);
-	
+
+	// Ajout des champs taxe et prix_ht, on copie la valeur de prix dans prix_ht
+	$maj['2.2.2'] = array(
+		array('maj_tables', array('spip_abonnements_offres')),
+		array('sql_alter', 'TABLE spip_abonnements_offres ADD prix_ht float(10,2) not null default 0 AFTER periode'),
+		array('sql_alter', 'TABLE spip_abonnements_offres ADD taxe decimal(4,4) null default 0 AFTER prix_ht'),
+		array('sql_update', 'spip_abonnements_offres', array('prix_ht' => 'prix')),
+		array('sql_update', 'spip_abonnements_offres', array('prix' => '0'))
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-
 /**
  * Fonction de désinstallation du plugin.
-**/
+ * */
 function abonnements_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_abonnements_offres");
@@ -42,9 +50,9 @@ function abonnements_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_abonnements");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('abonnements_offre', 'abonnement')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('abonnements_offre', 'abonnement')));
-	sql_delete("spip_forum",                 sql_in("objet", array('abonnements_offre', 'abonnement')));
+	sql_delete("spip_versions", sql_in("objet", array('abonnements_offre', 'abonnement')));
+	sql_delete("spip_versions_fragments", sql_in("objet", array('abonnements_offre', 'abonnement')));
+	sql_delete("spip_forum", sql_in("objet", array('abonnements_offre', 'abonnement')));
 
 	effacer_meta($nom_meta_base_version);
 }

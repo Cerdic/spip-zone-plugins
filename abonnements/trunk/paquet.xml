@@ -1,15 +1,15 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="3.0.13"
-	schema="2.2.1"
+	version="3.1.0"
+	schema="2.2.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/abonnements-64.png"
 	documentation="http://contrib.spip.net/4607"
 >
 	<nom>Abonnements</nom>
-	
+
 	<credit lien="http://contrib.spip.net/BoOz,502">BoOz</credit>
 	<credit lien="http://www.elastick.net">Anne-lise Martenot</credit>
 	<credit lien="http://www.magraine.net/">Matthieu Marcillaud</credit>
@@ -18,12 +18,13 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence>GNU/GPL v3</licence>
-	<necessite nom="saisies" compatibilite="[1.28.1;]" /> 
-	<necessite nom="verifier" compatibilite="[1.0.0;]" /> 
+	<necessite nom="saisies" compatibilite="[1.28.1;]" />
+	<necessite nom="verifier" compatibilite="[1.0.0;]" />
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
 	<necessite nom="facteur" compatibilite="[3.0.1;]" />
+	<necessite nom="prix" compatibilite="[0.1.11;]" />
 	<utilise nom="commandes" compatibilite="[1.6.8;]" />
-	
+
 	<!-- Autorisations générales -->
 	<pipeline nom="autoriser" inclure="abonnements_autorisations.php" />
 	<!-- Modifications de la base -->
@@ -40,7 +41,8 @@
 	<pipeline nom="affiche_milieu" inclure="abonnements_pipelines.php" />
 	<!-- Pipelines ajoutés par ce plugin -->
 	<pipeline nom="abonnement_initialisation_dates" action="" />
+	<pipeline nom="header_prive" inclure="abonnements_pipelines.php" />
 
-	<menu nom="abonnements_offres" titre="abonnementsoffre:titre_abonnementsoffres" parent="menu_publication" icone="images/abonnement-16.png" action="abonnements_offres" /> 
-	<menu nom="abonnements" titre="abonnement:titre_abonnements_suivre" parent="menu_activite" icone="images/abonnement-16.png" action="abonnements" /> 
+	<menu nom="abonnements_offres" titre="abonnementsoffre:titre_abonnementsoffres" parent="menu_publication" icone="images/abonnement-16.png" action="abonnements_offres" />
+	<menu nom="abonnements" titre="abonnement:titre_abonnements_suivre" parent="menu_activite" icone="images/abonnement-16.png" action="abonnements" />
 </paquet>

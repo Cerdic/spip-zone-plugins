@@ -1,12 +1,12 @@
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	
+
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
+
 		<div class="liste-objets liste-objets-lies abonnements_offres_notifications">
 			<table class="spip liste">
 				<caption><strong class="caption"><:abonnementsoffre:configurer_notifications:></strong></caption>
@@ -37,14 +37,14 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<ul>
 			#GENERER_SAISIES{#ENV{_saisies}}
 		</ul>
-		
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		
+
 		<p class="boutons">
 			<span class="image_loading"></span>
 			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
