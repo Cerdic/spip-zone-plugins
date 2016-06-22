@@ -9,6 +9,9 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=it" total="106" traduits="53" relire="0" modifs="2" nouveaux="51" pourcent="50.00">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=nl" total="106" traduits="106" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=sk" total="106" traduits="81" relire="0" modifs="2" nouveaux="23" pourcent="76.42">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
