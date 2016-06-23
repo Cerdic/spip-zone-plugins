@@ -97,14 +97,14 @@ L.Map.Gis = L.Map.extend({
 
 	populateTileLayers: function () {
 		// Fond de carte par défaut
-		if(this.options.default_layer != 'none'){
+		if (this.options.default_layer != 'none') {
 			var default_layer = this.createTileLayer(this.options.default_layer);
 			this.addLayer(default_layer);
 		}
 		// Fonds de carte supplémentaires
 		if (this.options.layersControl && !this.options.noControl && this.options.affiche_layers.length>1) {
 			var layers_control = L.control.layers('','',this.options.layersControlOptions);
-			if(this.options.default_layer != "none"){
+			if (this.options.default_layer != 'none') {
 				layers_control.addBaseLayer(default_layer,this.options.gis_layers[this.options.default_layer].nom);
 			}
 			for (var l in this.options.affiche_layers) {
@@ -211,8 +211,8 @@ L.Map.Gis = L.Map.extend({
 			map.markerCluster = L.markerClusterGroup(map.options.clusterOptions).addTo(map);
 			var markers = [];
 			/* Pour chaque points présents, on crée un marqueur */
-			jQuery.each(data.features, function(i, feature){
-				if (feature.geometry.coordinates[0]){
+			jQuery.each(data.features, function (i, feature) {
+				if (feature.geometry.coordinates[0]) {
 					var marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
 
 					// Déclarer l'icone du point
@@ -227,7 +227,7 @@ L.Map.Gis = L.Map.extend({
 
 			map.markerCluster.addLayers(markers);
 
-			if (map.options.autocenterandzoom){
+			if (map.options.autocenterandzoom) {
 				if (data.features.length > 1)
 					map.fitBounds(map.markerCluster.getBounds());
 				else
