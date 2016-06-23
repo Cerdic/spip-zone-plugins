@@ -40,8 +40,10 @@ function inc_kml_infos($id_document) {
 			}
 		}
 		include_spip('inc/xml');
-		$ret = lire_fichier($chemin, $donnees);
+		$donnees = '';
+		lire_fichier($chemin, $donnees);
 		$arbre = spip_xml_parse($donnees);
+		$documents = $infos = array();
 		spip_xml_match_nodes(',^Document,', $arbre, $documents);
 		foreach ($documents as $document => $info) {
 			$infos['titre'] = $info[0]['name'][0];
@@ -55,12 +57,13 @@ function inc_kml_infos($id_document) {
 		 * on essaie de faire une moyenne des placemarks
 		 */
 		if (!$infos['longitude'] or !$infos['latitude']) {
+			$placemarks = array();
 			spip_xml_match_nodes(',^Placemark,', $arbre, $placemarks);
 			$latitude = 0;
 			$longitude = 0;
 			$compte = 0;
 			foreach ($placemarks as $places) {
-				foreach ($places as $placemark => $lieu) {
+				foreach ($places as $lieu) {
 					if ($compte > 500) {
 						break;
 					}
@@ -108,9 +111,10 @@ function inc_kml_infos($id_document) {
 		 * -* on regarde s'il n'y a qu'un seul Placemark et on récupère son nom;
 		 */
 		if (!$infos['titre'] or ($infos['titre'] == basename($chemin)) or (preg_match(',\.km.,', $infos['titre']) > 0)) {
+			$folders = array();
 			spip_xml_match_nodes(',^Folder,', $arbre, $folders);
 			if (count($folders['Folder']) == 1) {
-				foreach ($folders['Folder'] as $folder => $dossier) {
+				foreach ($folders['Folder'] as $dossier) {
 					if ($dossier['name'][0]) {
 						$infos['titre'] = $dossier['name'][0];
 					}
@@ -125,7 +129,7 @@ function inc_kml_infos($id_document) {
 				if (count($placemarks) == 1) {
 					foreach ($placemarks as $places) {
 						if (count($places) == 1) {
-							foreach ($places as $placemark => $lieu) {
+							foreach ($places as $lieu) {
 								if ($lieu['name'][0]) {
 									$infos['titre'] = $lieu['name'][0];
 								}
@@ -141,10 +145,12 @@ function inc_kml_infos($id_document) {
 	} elseif (in_array($extension, array('gpx'))) {
 		$supprimer_chemin = false;
 		include_spip('inc/xml');
-		$ret = lire_fichier($chemin, $donnees);
+		$donnees = '';
+		lire_fichier($chemin, $donnees);
 		$arbre = spip_xml_parse($donnees);
+		$metadatas = array();
 		spip_xml_match_nodes(',^metadata,', $arbre, $metadatas);
-		foreach ($metadatas as $metadata => $info) {
+		foreach ($metadatas as $info) {
 			$infos['titre'] = $info[0]['name'][0];
 			//$infos['date'] =  $info[0]['time'][0];
 			$infos['descriptif'] = $info[0]['description'][0];
@@ -169,12 +175,13 @@ function inc_kml_infos($id_document) {
 		 * on essaie de faire une moyenne des placemarks
 		 */
 		if (!$infos['longitude'] or !$infos['latitude']) {
+			$trackpoints = array();
 			spip_xml_match_nodes(',^trkpt,', $arbre, $trackpoints);
 			$latitude = 0;
 			$longitude = 0;
 			$compte = 0;
 			foreach ($trackpoints as $places => $place) {
-				foreach ($place as $placemark => $lieu) {
+				foreach ($place as $lieu) {
 					if ($compte > 10) {
 						break;
 					}
