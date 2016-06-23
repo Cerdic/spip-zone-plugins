@@ -184,18 +184,27 @@ function pages_editer_contenu_objet($flux){
 		$erreurs = $args['contexte']['erreurs'];
 		// On cherche et remplace l'édition de la rubrique
 		$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_parent.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
-		$remplace = '<\\2 class="editer editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
+		$remplace = '<\\2 class="editer editer_page obligatoire' . (empty($erreurs['champ_page']) ? '' : ' erreur') . '">';
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="modele" value="page" />';
 		$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
-		if ($erreurs['champ_page'])
-			$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
-		$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
+		if (!empty($erreurs['champ_page'])) {
+			$remplace .= '<span class="erreur_message">' . $erreurs['champ_page'] . '</span>';
+		}
+
+		if (!empty($args['contexte']['champ_page'])) {
+			$value = $args['contexte']['champ_page'];
+		} elseif (!empty($args['contexte']['page'])) {
+			$value = $args['contexte']['page'];
+		} else {
+			$value = '';
+		}
+
 		$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
 		$remplace .= '</\\2>$3';
-		if (preg_match($cherche,$flux['data'],$m)) {
-			$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
+		if (preg_match($cherche, $flux['data'], $m)) {
+			$flux['data'] = preg_replace($cherche, $remplace, $flux['data'], 1);
 			$flux['data'] = preg_replace($cherche, '', $flux['data']);
 		} else {
 			$cherche = "/(<(li|div)[^>]*class=(?:'|\")editer editer_soustitre.*?<\/\\2>)\s*(<(li|div)[^>]*class=(?:'|\")editer)/is";
