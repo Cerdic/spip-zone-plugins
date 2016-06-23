@@ -21,6 +21,7 @@ function exergue_pre_propre($letexte) {
 function exergue_post_propre($letexte) {
 	/* nettoyer les ancres  <p><a name="exergue"></a></p> */
 	$letexte = str_replace('<p><a name="exergue"></a></p>','<a name="exergue"></a>',$letexte);
+	$letexte = str_replace('<p><a id="exergue"></a></p>','<a id="exergue"></a>',$letexte);
 
 	return $letexte;
 }
@@ -37,11 +38,16 @@ function exergue_insert_head($flux) {
 		var exergue_tab = new Array();	
 		var nb_ancres = 0 ;
 
-		$("a[name^='exergue'], .spip_exergue").each(function(i){
+		$("a[name^='exergue'], a[id^='exergue'], .spip_exergue").each(function(i){
 			/* si c'est une ancre on sait que le prochain exergue a cette ancre */
 			if(!$(this).hasClass('spip_exergue')){
 				// a[name^='exergue']
-				var ancre_numerotee = $(this).attr('name').match(/[0-9]+/g) ;
+				if ($(this).attr('name')) {
+					var ancre_numerotee = $(this).attr('name').match(/[0-9]+/g);
+				}
+				if ($(this).attr('id')) {
+					var ancre_numerotee = $(this).attr('id').match(/[0-9]+/g);
+				}
  // var res = str.match(/ain/g); 
 				if(ancre_numerotee){
 					exergue_tab['exergue' + ancre_numerotee] = $(this);			
