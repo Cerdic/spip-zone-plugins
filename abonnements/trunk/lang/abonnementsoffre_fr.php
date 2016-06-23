@@ -1,5 +1,4 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -7,8 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
 	'ajouter_lien_abonnementsoffre' => 'Ajouter cette offre d’abonnement',
+
 	// C
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_duree_0' => 'Sans limite',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre_label' => 'Titre',
 	'configurer_notifications' => 'Configurer les notifications',
 	'configurer_notifications_quand' => 'Quand ?',
+
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
 	'icone_modifier_abonnementsoffre' => 'Modifier cette offre d’abonnement',
@@ -35,11 +37,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abonnementsoffres_auteur' => 'Les offres d’abonnement de cet auteur',
 	'info_aucun_abonnementsoffre' => 'Aucune offre d’abonnement',
 	'info_nb_abonnementsoffres' => '@nb@ offres d’abonnement',
+
 	// N
 	'nb_abonnements' => 'Nb. abo.',
+
 	// R
 	'retirer_lien_abonnementsoffre' => 'Retirer cette offre d’abonnement',
 	'retirer_tous_liens_abonnementsoffres' => 'Retirer toutes les offres d’abonnement',
+
 	// T
 	'texte_ajouter_abonnementsoffre' => 'Ajouter une offre d’abonnement',
 	'texte_changer_statut_abonnementsoffre' => 'Cette offre d’abonnement est :',
