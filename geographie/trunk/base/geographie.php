@@ -142,6 +142,13 @@ function geographie_declarer_tables_objets_sql($tables) {
 		'tables_jointures'  => array(),
 	);
 	
+	// Jointures pour tous les objets
+	$tables[]['tables_jointures'][] = 'geo_pays_liens';
+	$tables[]['tables_jointures'][] = 'geo_regions_liens';
+	$tables[]['tables_jointures'][] = 'geo_departements_liens';
+	$tables[]['tables_jointures'][] = 'geo_arrondissements_liens';
+	$tables[]['tables_jointures'][] = 'geo_communes_liens';
+	
 	return $tables;
 }
 
