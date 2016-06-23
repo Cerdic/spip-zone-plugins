@@ -3,7 +3,7 @@
 	<auteur>BoOz</auteur>
 	<icon></icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<etat>test</etat>
 	<description>Gérer des exergues avec l'ancre éventuelle [exergue&lt;-] et le raccourci &lt;exergue&gt; ... &lt;/exergue&gt; dans un texte</description>
 	<prefix>exergue</prefix>
