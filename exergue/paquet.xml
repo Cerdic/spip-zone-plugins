@@ -1,18 +1,19 @@
 <paquet
     prefix="exergue"
     categorie="outil"
-    version="0.1.0"
+    version="0.1.2"
     etat="test"
     compatibilite="[2.1.0;3.1.*]"
     logo=""
     >
-    <nom>Exergue pour SPIP</nom>
+    <nom>Exergue</nom>
     <!-- Gérer des exergues avec l'ancre éventuelle [exergue<-] et le raccourci <exergue> ... </exergue> dans un texte -->
      
     <auteur>BoOz</auteur>     
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
     <copyright>2013-2019</copyright>
 
+    <pipeline nom="insert_head_css" inclure="exergue_pipelines.php" />          
     <pipeline nom="insert_head" inclure="exergue_pipelines.php" />          
     <pipeline nom="pre_propre" inclure="exergue_pipelines.php" />
     <pipeline nom="post_propre" inclure="exergue_pipelines.php" />

@@ -1,9 +1,9 @@
 <plugin>
-	<nom>Exergue pour SPIP</nom>
+	<nom>Exergue</nom>
 	<auteur>BoOz</auteur>
 	<icon></icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<etat>test</etat>
 	<description>Gérer des exergues avec l'ancre éventuelle [exergue&lt;-] et le raccourci &lt;exergue&gt; ... &lt;/exergue&gt; dans un texte</description>
 	<prefix>exergue</prefix>
@@ -16,6 +16,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
+		<inclure>exergue_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
 		<inclure>exergue_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
