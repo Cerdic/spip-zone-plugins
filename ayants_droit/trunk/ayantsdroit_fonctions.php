@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function ayantsdroit_traiter_credits($texte) {
 	$valeurs = array(
 		'annee' => date('Y'),
+		'vide' => '',
 	);
 	
 	$texte = _L($texte, $valeurs);
