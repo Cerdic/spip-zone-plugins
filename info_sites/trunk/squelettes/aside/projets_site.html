@@ -6,7 +6,10 @@
 			<div class="list-group menu" role="menu">
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span>
 					<:info_sites:icone_modifier_projets_site:>
-				</a>[
+				</a>[(#AUTORISER{infositescreer, projetssite, #ID_PROJETS_SITE, [(#SESSION|unserialize)], #GET{opt}}|oui)
+				<a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{cloner_projets_site,#ID_PROJETS_SITE})]" class="list-group-item bouton modifier" rel="nofollow"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i></span>
+				<:info_sites:icone_cloner_projets_site:>
+			</a>][
 				(#WEBSERVICE*|strlen|oui)
 				<a role="menuitem" tabindex="-1" href="[(#URL_ACTION_AUTEUR{maj_projets_site,#ID_PROJETS_SITE,#SELF})]" class="list-group-item bouton website" onmouseover="$(this).find('i.fa-refresh').addClass('fa-spin')" onmouseout="$(this).find('i.fa-refresh').removeClass('fa-spin')"><span class="fa-stack text-info"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-refresh fa-stack-1x fa-inverse"></i></span>
 					<:projets_site:maj_projets_site:>

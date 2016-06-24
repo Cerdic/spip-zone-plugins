@@ -117,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtres_label' => 'Filtres',
 
 	// I
+	'icone_cloner_projets_site' => 'Cloner ce site',
 	'icone_creer_fiche_siste' => 'Créer une fiche de site',
 	'icone_modifier_auteur' => 'Modifier cet utilisateur',
 	'icone_modifier_contact' => 'Modifier ce contact',
@@ -172,6 +173,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mes_projets_label' => 'Mes projets',
 
 	// N
+	'nav_rapide_label' => 'Navigation rapide',
 	'non' => 'Non',
 
 	// O
