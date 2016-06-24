@@ -13,7 +13,7 @@
 </BOUCLE_test_multiple>
 	<BOUCLE_villes_belge_selectionne(VILLES_BELGES){id_villes_belge=#ENV{valeur}}
 		{par num nom, nom}{tout}>
-		<p>#NOM (#CODE_POSTAL #PROVINCE)</p>
+		#NOM (#CODE_POSTAL #PROVINCE)
 	</BOUCLE_villes_belge_selectionne>
    	[(#ENV*{sans_reponse}|propre)]
 	<//B_villes_belge_selectionne>
