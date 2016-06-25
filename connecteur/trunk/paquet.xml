@@ -6,7 +6,7 @@
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/connecteur-64.png"
 	documentation=""
-	schema="1.0.13"
+	schema="1.0.14"
 >
 
 	<nom>Connecteur universel</nom>
