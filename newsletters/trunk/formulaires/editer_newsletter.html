@@ -44,6 +44,12 @@
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 			</li>
 		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui)
+			<!--extra-->
+		]
+		
 		[(#ENV{statut}|in_array{#LISTE{'',prepa,prop}}|oui)
 		<ul class="editer-groupe">
 			#SET{name,baked}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -94,8 +100,6 @@
 			</li>
 		</ul>
 		</div>
-		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
