@@ -10,8 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @access public
  */
 
-include_spip('inc/securiser_action');
-
 /**
  * Enregistrer un token d'auteur
  *
@@ -41,8 +39,7 @@ function connecteur_save_token($id_auteur, $type, $token) {
 				array(
 					'id_auteur' => $id_auteur,
 					'type' => $type,
-					'token' => base64_encode($token),
-					'signature' => calculer_cle_action($token)
+					'token' => base64_encode($token)
 				)
 			);
 		}
@@ -68,8 +65,8 @@ function connecteur_get_token($id_auteur, $type) {
 	}
 
 	// Récupérer le token
-	$recup_token = sql_fetsel(
-		'token, signature',
+	$token = sql_getfetsel(
+		'token',
 		'spip_connecteur',
 		array(
 			'id_auteur='.intval($id_auteur),
@@ -77,16 +74,9 @@ function connecteur_get_token($id_auteur, $type) {
 		)
 	);
 
-	if ($recup_token) {
+	if ($token) {
 		// On vérifie que la signature du token est toujours bonne
-		if (calculer_cle_action(base64_decode($recup_token['token'])) == $recup_token['signature']) {
-			return unserialize(base64_decode($recup_token['token']));
-		} else {
-			// Si la signature n'est pas valide, on active un minipres
-			include_spip('inc/minipres');
-			echo minipres(_T('info_acces_interdit'));
-			die();
-		}
+		return unserialize(base64_decode($token));
 	}
 }
 
@@ -104,7 +94,6 @@ function connecteur_update_token($id_auteur, $type, $token) {
 		'spip_connecteur',
 		array(
 			'token' => base64_encode($token),
-			'signature' => calculer_cle_action($token)
 		),
 		array(
 			'id_auteur='.intval($id_auteur),
