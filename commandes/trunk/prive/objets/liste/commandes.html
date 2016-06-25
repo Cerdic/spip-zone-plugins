@@ -49,7 +49,7 @@
 		</thead>
 		<tbody>
 		<BOUCLE_liste_commandes(COMMANDES)
-			{id_auteur?}{id_commande?}{where?}{statut?}{annee?}{mois?}{mode?}
+			{id_auteur?}{id_commande?}{where?}{statut?}{annee?}{mois?}{mode?}{recherche?}
 			{statut!=#ENV{statut,''}|?{'x','poubelle'}}
 			{tri #ENV{order,date},#GET{defaut_tri}}
 			{pagination #ENV{nb,20}}>
