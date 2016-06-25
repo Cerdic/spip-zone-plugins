@@ -22,11 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_logo' => 'Een logo',
+	'info_logo_on_inexistant' => 'Het normale logo bestaat niet. Je mag dit alternatieve logo verwijderen.',
 	'info_logos' => 'Logo’s',
 	'info_nb_logos' => '@nb@ logo’s',
 
 	// L
 	'lister_logos_titre' => 'De logo’s weergeven',
+	'logo_bad' => 'Slecht formaat',
 	'logo_off' => 'Alternatieve logo',
 	'logo_on' => 'Standaard logo',
 
