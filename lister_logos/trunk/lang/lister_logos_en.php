@@ -22,11 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_logo' => 'One logo',
+	'info_logo_on_inexistant' => 'The standard logo does not exist. You may suppress this rollover logo.',
 	'info_logos' => 'Logos',
 	'info_nb_logos' => '@nb@ logos',
 
 	// L
 	'lister_logos_titre' => 'List logos',
+	'logo_bad' => 'Bad format',
 	'logo_off' => 'Rollover logo',
 	'logo_on' => 'Standard logo',
 
