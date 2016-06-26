@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_itineraires_etape' => 'Ajouter une étape',
 	'texte_changer_statut_itineraires_etape' => 'Cette étape est :',
 	'texte_creer_associer_itineraires_etape' => 'Créer et associer une étape',
+	'texte_supprimer_itineraires_etape' => 'Supprimer cette étape',
 	'titre_itineraires_etape' => 'Étape',
 	'titre_itineraires_etapes' => 'Étapes',
 	'titre_itineraires_etapes_rubrique' => 'Étapes de la rubrique',

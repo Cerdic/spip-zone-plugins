@@ -21,7 +21,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" data-etape="#ID_ITINERAIRES_ETAPE">
 			<td class="rang">#RANG</td>
 			<td class="titre principale">[(#LOGO_ITINERAIRES_ETAPE|image_reduire{20,26})]<a href="[(#ID_ITINERAIRES_ETAPE|generer_url_entite{itineraires_etape})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ITINERAIRES_ETAPE">#TITRE</a></td>
-			<td class="action">
+			<td class="action" style="width:120px;">
 				[(#AUTORISER{modifier,itineraires_etape,#ID_ITINERAIRES_ETAPE}|oui)
 					[(#BOUTON_ACTION{
 						[(#CHEMIN_IMAGE{etape_haut-16.png}|balise_img{<:itineraires_etape:deplacer_avant:>})],
@@ -31,6 +31,11 @@
 					[(#BOUTON_ACTION{
 						[(#CHEMIN_IMAGE{etape_bas-16.png}|balise_img{<:itineraires_etape:deplacer_apres:>})],
 						#URL_ACTION_AUTEUR{deplacer_itineraires_etape, #ID_ITINERAIRES_ETAPE-bas, #SELF},
+						ajax link
+					})]
+					[(#BOUTON_ACTION{
+						[(#CHEMIN_IMAGE{supprimer-16.png}|balise_img{<:itineraires_etape:texte_supprimer_itineraires_etape:>})],
+						#URL_ACTION_AUTEUR{supprimer_itineraires_etape, #ID_ITINERAIRES_ETAPE, #SELF},
 						ajax link
 					})]
 					
