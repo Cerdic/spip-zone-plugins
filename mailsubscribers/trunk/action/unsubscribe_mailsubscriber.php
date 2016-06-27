@@ -39,7 +39,7 @@ function action_unsubscribe_mailsubscriber_dist($email=null, $double_optin=true)
 	}
 	if (!$row){
 		include_spip('inc/minipres');
-		echo minipres(_T('info_email_invalide').'<br />'.$email);
+		echo minipres(_T('info_email_invalide').'<br />'.entites_html($email));
 		exit;
 	}
 

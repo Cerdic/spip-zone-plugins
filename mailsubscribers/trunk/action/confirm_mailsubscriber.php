@@ -38,7 +38,7 @@ function action_confirm_mailsubscriber_dist($email=null){
 	}
 	if (!$row){
 		include_spip('inc/minipres');
-		echo minipres(_T('info_email_invalide').'<br />'.$email);
+		echo minipres(_T('info_email_invalide').'<br />'.entites_html($email));
 		exit;
 	}
 
