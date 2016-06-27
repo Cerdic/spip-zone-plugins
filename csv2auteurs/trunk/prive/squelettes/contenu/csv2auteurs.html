@@ -31,10 +31,10 @@
 <script type="text/javascript" charset="utf-8">
 	jQuery(document).ready(function(){
 		export_import();
-		jQuery("input[type=radio][name=choix]").on("change", export_import); 
+		jQuery("input[type=radio][name=choix]").on("change", export_import);
 	});
 	function export_import() {
-		if (jQuery('input[value=importer]').attr('checked')){
+		if (jQuery('input[value=importer]').is(':checked')){
 			jQuery("#importer").show();
 			jQuery("#exporter").hide();
 		}
