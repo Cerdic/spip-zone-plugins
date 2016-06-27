@@ -49,10 +49,14 @@
 	env,ajax}>
 [(#INCLURE{fond=objets/liste/projets, id_projet_parent=#ID_PROJET}|strlen|>{0}|oui)<div class="clearfix"></div>]
 
+	<div class="afficher_complement_objet">
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET},data,'<div class="nettoyeur"></div>'}}
+	</div>
+	<div class="afficher_fiche_objet">
 	[(#SET{exec,#ARRAY{exec,projet}})]
 	[(#SET{contexte,#GET{exec}|array_merge{#ENV**|unserialize}})]
 	#PIPELINE{afficher_fiche_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET,contexte,#GET{contexte}},data,'<div class="nettoyeur"></div>'}}
+	</div>
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)

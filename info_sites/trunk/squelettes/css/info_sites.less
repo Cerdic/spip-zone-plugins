@@ -1185,8 +1185,10 @@ input[type="radio"], input[type="checkbox"] {
 				.erreur_message {
 					font-weight: bold;
 					color: @bg-danger;
-					text-align: right;
-					display: none;
+					display: block;
+					float: right;
+					width: 76%;
+					text-align: left;
 				}
 				input, select {
 					border: 1px solid @bg-danger;
@@ -1624,6 +1626,12 @@ input[type="radio"], input[type="checkbox"] {
 	display: inline-block;
 	padding: 2px;
 	margin-bottom: 5px;
+}
+
+.afficher_complement_objet, .afficher_fiche_objet {
+	display: block;
+	overflow: hidden;
+	clear: both;
 }
 
 // --------
