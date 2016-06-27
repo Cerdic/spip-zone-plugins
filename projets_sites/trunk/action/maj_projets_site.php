@@ -56,6 +56,10 @@ function action_maj_projets_site_dist($id = null) {
 				'webservice' => $webservice['webservice'],
 			)), 'projets_sites');
 		}
+		include_spip('inc/objets');
+		$objet = objet_type('spip_projets_sites');
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='$objet/$id_projets_site'");
 
 	} else {
 		spip_log(__FUNCTION__ . " $id pas compris");
