@@ -91,7 +91,7 @@ function cache_valide(&$page, $date) {
 
 	// controle de la signature
 	if ($page['sig'] !== cache_signature($page))
-		return 1;
+		return _IS_BOT?-1:1;
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
