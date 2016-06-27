@@ -55,8 +55,10 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 				$set['statut'] = 'clic';
 			break;
 		case 'spam':
-			if (in_array($row['statut'],array('todo','sent','fail','read')))
+			if (in_array($row['statut'],array('todo','sent','fail','read'))) {
 				$set['statut'] = 'spam';
+				$desabonner = true;
+			}
 			break;
 		case 'reject':
 		case 'hard_bounce':
