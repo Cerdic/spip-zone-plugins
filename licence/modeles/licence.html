@@ -20,7 +20,7 @@
 </B_article>
 <BOUCLE_document(DOCUMENTS){id_document}{tout}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_document>
 <//B_article>
-#SET{licences,#EVAL{$GLOBALS['licence_licences']}}
+#SET{licences,#VAL|licence_lister}
 <BOUCLE_selection(POUR){tableau #GET{licences}}{cle=#GET{id_licence}}>
 	#SET{name_licence,#VALEUR|table_valeur{name}}
 	#SET{link_licence,#VALEUR|table_valeur{link}}

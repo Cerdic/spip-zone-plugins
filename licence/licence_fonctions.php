@@ -17,14 +17,26 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  **/
 function licence_lister() {
 	include_spip('inc/licence');
-	$licences = $GLOBALS['licence_licences'];
+	static $licences = null;
 	
-	return $licences;
+	if (is_null($licences)) {
+		$licences = $GLOBALS['licence_licences'];
+		// Pipeline
+		$licences = pipeline('licence_licences', $licences);
+	}
+	
+	if (!is_null($id_licence) and isset($licences[$id_licence])) {
+		return $licences[$id_licence];
+	}
+	else {
+		return $licences;
+	}
 }
 
 function licence_affiche($id_licence,$logo_non,$lien_non){
 	include_spip('inc/licence');
-	$licence = $GLOBALS['licence_licences'][$id_licence];
+	$licence = licence_lister($id_licence);
+	
 	if (isset($licence['icon']) AND $logo_non != 'non')
 		$licence['icon'] = "img_pack/".$licence['icon'];
 	else
@@ -47,7 +59,8 @@ function licence_recuperer_texte($texte){
 	if(preg_match('/http:\/\/creativecommons.org\/licenses\/(.[a-z|-]*)\//',$texte,$matches)){
 		include_spip('inc/licence');
 		$licence_id = 'cc-'.$matches[1];
-		foreach($GLOBALS['licence_licences'] as $id_licence=>$licence_info){
+		$licences = licence_lister();
+		foreach($licences as $id_licence=>$licence_info){
 			if($licence_info['abbr'] == $licence_id){
 				return $id_licence;
 			}

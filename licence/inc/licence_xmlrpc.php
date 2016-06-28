@@ -11,8 +11,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function licence_liste_licences($args) {
 	global $spip_xmlrpc_serveur;
 	
-	include_spip('inc/licence');
-	$licences = $GLOBALS['licence_licences'];
+	include_spip('licence_fonctions');
+	$licences = licence_lister();
 	
 	foreach($licences as $licence => $values){
 		if (isset($values['icon'])){

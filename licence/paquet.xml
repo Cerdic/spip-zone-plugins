@@ -1,14 +1,13 @@
 <paquet
 	prefix="licence"
 	categorie="divers"
-	version="0.7.0"
+	version="0.8.0"
 	etat="stable"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="img_pack/licence_logo.png"
 	schema="0.2.0"
 	documentation="http://contrib.spip.net/2147"
 >
-
 	<nom>Licence</nom>
 	<!-- Une Licence pour articles et documents -->
 
@@ -28,5 +27,8 @@
 	<pipeline nom="xmlrpc_methodes" inclure="licence_pipelines3.php" />
 	<pipeline nom="xmlrpc_server_class" inclure="licence_pipelines3.php" />
 
+	<!-- Déclaration du pipeline proposé par le plugin -->
+	<pipeline nom="licence_licences" action="" />
+	
 	<utilise nom="medias" compatibilite="[2.7.27;]" />
 </paquet>

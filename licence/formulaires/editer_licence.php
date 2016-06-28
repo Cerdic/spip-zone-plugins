@@ -4,11 +4,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_licence_charger_dist($id_article='new', $retour=''){
 	include_spip('inc/autoriser');
-	include_spip('inc/licence');
+	include_spip('licence_fonctions');
 	
 	$id_licence = sql_getfetsel('id_licence','spip_articles','id_article='.intval($id_article));
 	
-	$valeurs['_licences'] = $GLOBALS['licence_licences'];
+	$valeurs['_licences'] = licence_lister();
 	$valeurs['id_licence'] = $id_licence;
 	$valeurs['id_article'] = $id_article;
 	
