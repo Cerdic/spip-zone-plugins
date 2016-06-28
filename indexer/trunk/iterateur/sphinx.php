@@ -227,6 +227,7 @@ class IterateurSPHINX implements Iterator {
 		$result = $this->sphinxQL->allfetsel($query);
 
 		// erreur de syntaxe ? correction de la requete
+		// TODO : lever une erreur_squelette() comme en SQL ?
 		if (isset($result['query']['meta']['error'])) {
 			spip_log($result['query'], 'indexer');
 			if (preg_match('/syntax error/', $result['query']['meta']['error'])) {

@@ -100,12 +100,20 @@ class SpipSourcesIndexer {
         $this->initTimeout();
 
         $stats = $this->loadIndexesStatsClean();
-        $this->resetIndexesStats();
+        // pas de reset, car ca met le brin en cas de processus concourants
+        // $this->resetIndexesStats();
 
         $sources = $this->sources->getIterator();
         // se replacer à la dernière source renseignée (cas d'une indexation non terminée)
+        // $sources->seek($stats['last']['source']) n'est pas bon visiblement, on le fait old school
         if ($stats['last']['source']) {
-            $sources->seek($stats['last']['source']);
+            while ($sources->valid()) {
+                $skey    = $sources->key();
+                if ($skey == $stats['last']['source']){
+                    break;
+                }
+                $sources->next();
+            }
         }
 
         while ($sources->valid()) {
