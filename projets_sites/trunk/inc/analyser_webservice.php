@@ -25,6 +25,12 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 
 	$valeurs = array();
 	$page = $recuperer_flux($url, $login, $password);
+	/* On vérifie qu'on a bien un content et que celui-ci n'est pas du code html */
+	if (isset($page['content']) and preg_match("/<html>/", $page['content'])) {
+		spip_log("La page $url ne renvoie pas un XML\nLogin : $login \nPassword : $password", 'projets_sites');
+		return false;
+	}
+	/* On a bien un content, on peut maintenant l'analyser */
 	$xml = $convertir($page['content']);
 	$parse_url = parse_url($url);
 	parse_str($parse_url['query'], $query);
@@ -36,6 +42,7 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 	}
 
 	if (is_array($xml)) {
+		spip_log(print_r($xml, true), 'projets_sites');
 		foreach ($xml as $key => $value) {
 			switch ($key) {
 				case 'nom_site':
@@ -76,12 +83,14 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 					$valeurs['serveur_logiciel'] = $xml[$key]['logiciel'];
 					break;
 				case 'apache':
+					/* L'index 0 contient les modules du serveur */
 					foreach ($xml[$key][0] as $key_module => $value_module) {
 						$valeurs['apache_modules'][] = $value_module['nom'];
 					}
 					$valeurs['apache_modules'] = implode(', ', $valeurs['apache_modules']);
 					break;
 				case 'php':
+					/* L'index 0 contient les extensions PHP du serveur */
 					foreach ($xml[$key][0] as $key_extension => $value_extension) {
 						$valeurs['php_extensions'][] = $value_extension['nom'];
 					}
@@ -91,39 +100,47 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 					$valeurs['php_timezone'] = $xml[$key]['timezone'];
 					break;
 				case 'administrateurs':
-					foreach ($xml[$key][0] as $key => $value) {
-						$value = array_filter($value);
-						$valeurs['auteurs_admin'][] = implode('|', $value);
+					foreach ($xml[$key][0] as $admin) {
+						$admin = array_filter($admin);
+						$valeurs['auteurs_admin'][] = implode('|', $admin);
 					}
 					$valeurs['auteurs_admin'] = implode("\n", $valeurs['auteurs_admin']);
 					// $valeurs['auteurs_admin_length'] = strlen($valeurs['auteurs_admin']);
 					break;
 				case 'webmestres':
-					foreach ($xml[$key][0] as $key => $value) {
-						$value = array_filter($value);
-						unset($value[0]);
-						$valeurs['auteurs_webmestres'][] = implode('|', $value);
+					foreach ($xml[$key][0] as $superadmin) {
+						$superadmin = array_filter($superadmin);
+						/* on ne garde pas la clé 0 qui correspondrait au contenu de la balise */
+						unset($superadmin[0]);
+						$valeurs['auteurs_webmestres'][] = implode('|', $superadmin);
 					}
 					$valeurs['auteurs_webmestres'] = implode("\n", $valeurs['auteurs_webmestres']);
 					// $valeurs['auteurs_webmestres_length'] = strlen($valeurs['auteurs_webmestres']);
 					break;
 				case 'plugins':
-					foreach ($xml[$key][0] as $key => $value) {
-						// $value = array_filter($value);
-						unset($value[0]);
-						$valeurs['logiciel_plugins'][] = implode('|', $value);
+					foreach ($xml[$key][0] as $plugins) {
+						// $plugins = array_filter($plugins);
+						/* On ne garde pas la clé 0 qui correspondrait au contenu de la balise */
+						unset($plugins[0]);
+						$valeurs['logiciel_plugins'][] = implode('|', $plugins);
 					}
 					$valeurs['logiciel_plugins'] = implode("\n", $valeurs['logiciel_plugins']);
 					break;
 				case 'sgbd':
-					$valeurs['sgbd_serveur'] = $xml[$key]['serveur'];
-					$valeurs['sgbd_port'] = $xml[$key]['port'];
-					$valeurs['sgbd_nom'] = $xml[$key]['nom'];
-					$valeurs['sgbd_type'] = $xml[$key]['type'];
-					$valeurs['sgbd_prefixe'] = $xml[$key]['prefixe'];
-					$valeurs['sgbd_version'] = $xml[$key]['version'];
-					$valeurs['sgbd_charset'] = $xml[$key]['charset'];
-					$valeurs['sgbd_collation'] = $xml[$key]['collation'];
+					/**
+					 * On identifie les informations attendues pour le SGBD
+					 * Le fait de les nommer et donc de les limiter évite de prendre
+					 * des champs non prévus dans la table spip_projets_sites
+					 */
+					$sgbd_wanted = array('serveur', 'port', 'nom', 'type', 'prefixe', 'version', 'charset', 'collation');
+					/* On utilise ces informations pour construire le tableau de valeurs de SGBD */
+					if (is_array($xml[$key]) and count($xml[$key]) > 0) {
+						foreach ($xml[$key] as $sgbd_field => $sgbd_value) {
+							if (in_array($sgbd_field, $sgbd_wanted)) {
+								$valeurs['sgbd_' . $sgbd_field] = $sgbd_value;
+							}
+						}
+					}
 					break;
 				default:
 					# code...

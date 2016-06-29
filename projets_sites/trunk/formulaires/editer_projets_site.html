@@ -14,7 +14,6 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_projets_site' value='#ENV{id_projets_site}' />
 			[(#ENV{id_projets_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
-			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
 			<fieldset class="editer editer_referencement_automatise fieldset">
 				<ul class="editer-groupe">
 					<li class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
@@ -26,7 +25,9 @@
 				<p class="boutons"><input type='submit' class='submit' name='ajoute_url_auto' value='<:bouton_ajouter:>' /></p>
 				<p class="explication"><:projets_site:texte_non_fonction_referencement:></p>
 			</fieldset>
-			]]
+			][(#ENV{id_projets_site}|intval|>{0}|oui)
+			<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+			]
 		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#GET{class_webservice}|=={'hidden invisible'}|oui)
 				[(#SAISIE{explication,webservice_active_explication,
@@ -101,7 +102,8 @@
 				[(#SAISIE{input, bo_url,
 					label=<:projets_site:bo_url_label:>,
 					size=255,
-					maxlength=255})]
+					maxlength=255,
+					conteneur_class=[(#GET{class_webservice})]})]
 
 				[(#SAISIE{input, bo_login,
 					label=<:projets_site:bo_login_label:>,
