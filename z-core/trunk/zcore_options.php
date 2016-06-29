@@ -7,24 +7,22 @@
  */
 
 // demander a SPIP de definir 'type-page' dans le contexte du premier squelette
-define('_DEFINIR_CONTEXTE_TYPE_PAGE',true);
-define('_ZPIP',true);
+define('_DEFINIR_CONTEXTE_TYPE_PAGE', true);
+define('_ZPIP', true);
 // differencier le cache,
 // la verification de credibilite de var_zajax sera faite dans public_styliser_dist
 // mais ici on s'assure que la variable ne permet pas de faire une inclusion arbitraire
 // avec un . ou un /
-if ($z = _request('var_zajax')
-  AND !preg_match(",[^\w-],",$z)) {
+if ($z = _request('var_zajax') AND !preg_match(",[^\w-],", $z)) {
 	if (!isset($GLOBALS['marqueur'])) {
 		$GLOBALS['marqueur'] = "$z:";
 	} else {
 		$GLOBALS['marqueur'] .= "$z:";
 	}
 	$GLOBALS['flag_preserver'] = true;
-}
-else {
+} else {
 	// supprimer cette variable dangereuse
-	set_request('var_zajax','');
+	set_request('var_zajax', '');
 }
 
 /**
@@ -33,13 +31,17 @@ else {
  *
  * @param string $path
  * @param string $base
+ *
  * @return string
  */
-function url_absolue_si($path, $base='') {
-	if (!$path) return "";
-	if (!function_exists('url_absolue')){
+function url_absolue_si($path, $base = '') {
+	if (!$path) {
+		return "";
+	}
+	if (!function_exists('url_absolue')) {
 		include_spip('inc/filtres_mini');
 	}
+
 	return url_absolue($path, $base);
 }
 
@@ -65,34 +67,39 @@ function url_absolue_si($path, $base='') {
  * .spip_logos {max-width:25%;float:right}
  *
  * @param $logo
+ *
  * @return string
  */
-function responsive_logo($logo){
-	if (!function_exists('extraire_balise'))
+function responsive_logo($logo) {
+	if (!function_exists('extraire_balise')) {
 		include_spip('inc/filtres');
-	if (!$logo
-	  OR !$img = extraire_balise($logo,"img"))
+	}
+	if (!$logo OR !$img = extraire_balise($logo, "img")) {
 		return $logo;
-	list($h,$w) = taille_image($img);
-	$src = extraire_attribut($img,"src");
-	$class = extraire_attribut($img,"class");
+	}
+	list($h, $w) = taille_image($img);
+	$src = extraire_attribut($img, "src");
+	$class = extraire_attribut($img, "class");
 
 	// timestamper l'url si pas deja fait
-	if (strpos($src,"?")==false)
+	if (strpos($src, "?") == false) {
 		$src = timestamp($src);
+	}
 
-	if (defined('_STATIC_IMAGES_DOMAIN'))
-		$src = url_absolue($src,_STATIC_IMAGES_DOMAIN);
+	if (defined('_STATIC_IMAGES_DOMAIN')) {
+		$src = url_absolue($src, _STATIC_IMAGES_DOMAIN);
+	}
 
 	$hover = "";
-	if ($hover_on = extraire_attribut($img,"onmouseover")){
-		$hover_off = extraire_attribut($img,"onmouseout");
-		$hover_on = str_replace("this.src=","jQuery(this).css('background-image','url('+",$hover_on)."+')')";
-		$hover_off = str_replace("this.src=","jQuery(this).css('background-image','url('+",$hover_off)."+')')";
+	if ($hover_on = extraire_attribut($img, "onmouseover")) {
+		$hover_off = extraire_attribut($img, "onmouseout");
+		$hover_on = str_replace("this.src=", "jQuery(this).css('background-image','url('+", $hover_on) . "+')')";
+		$hover_off = str_replace("this.src=", "jQuery(this).css('background-image','url('+", $hover_off) . "+')')";
 		$hover = " onmouseover=\"$hover_on\" onmouseout=\"$hover_off\"";
 	}
 
-	$ratio = round($h*100/$w,2);
+	$ratio = round($h * 100 / $w, 2);
+
 	return "<span class='$class' style=\"width:{$w}px;\"><span class=\"img\" style=\"display:block;position:relative;height:0;width:100%;padding-bottom:{$ratio}%;overflow:hidden;background:url($src) no-repeat center;background-size:100%;\"$hover> </span></span>";
 }
 
@@ -101,15 +108,19 @@ function responsive_logo($logo){
  * par un simple [(#TEXTE|adaptive_images)]
  * Avec le plugin adaptive_images cela produire des images adaptives
  */
-if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')){
+if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
 	// les images 1x sont au maximum en _ADAPTIVE_IMAGES_MAX_WIDTH_1x px de large dans la page
-	if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x')) define('_ADAPTIVE_IMAGES_MAX_WIDTH_1x',640);
+	if (!defined('_ADAPTIVE_IMAGES_MAX_WIDTH_1x')) {
+		define('_ADAPTIVE_IMAGES_MAX_WIDTH_1x', 640);
+	}
 
-	function adaptive_images($texte,$max_width_1x=_ADAPTIVE_IMAGES_MAX_WIDTH_1x){
-		if (!function_exists('filtrer'))
+	function adaptive_images($texte, $max_width_1x = _ADAPTIVE_IMAGES_MAX_WIDTH_1x) {
+		if (!function_exists('filtrer')) {
 			include_spip('inc/filtres');
-		$texte = filtrer('image_reduire',$texte,$max_width_1x,10000);
-		return filtrer('image_graver',$texte);
+		}
+		$texte = filtrer('image_reduire', $texte, $max_width_1x, 10000);
+
+		return filtrer('image_graver', $texte);
 	}
 }
 

@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/z-core-32.png"
 	documentation="http://www.yterium.net/108"
->	
+>
 
 	<nom>Z-core</nom>
 	<!-- Z Framework pour SPIP (Zpip) -->
