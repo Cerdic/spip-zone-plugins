@@ -50,10 +50,12 @@
 [(#REM)
 	Bouton voir en ligne
 ]
+[(#VAL{organisation}|objet_info{page}|oui)
 [(#VAL{redirect}
 	|generer_url_action{type=organisation&id=#ID_ORGANISATION}
 	|parametre_url{var_mode,calcul}
 	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+]
 [(#AUTORISER{supprimer, organisation, #ID_ORGANISATION}|oui)
 	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{organisation-del-24.png}
 		|balise_img{<:contacts:supprimer_organisation:>}|inserer_attribut{class,co_middle}
