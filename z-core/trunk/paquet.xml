@@ -1,10 +1,10 @@
 <paquet
 	prefix="Zcore"
 	categorie="outil"
-	version="2.5.0"
+	version="2.5.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="img/z-core-32.png"
+	logo="prive/themes/spip/images/z-core-32.png"
 	documentation="http://www.yterium.net/108"
 >
 

@@ -120,5 +120,3 @@ if (!function_exists('balise_BOITE_OUVRIR_dist')) {
 	}
 
 }
-
-?>

@@ -124,4 +124,3 @@ if (!defined('_DIR_PLUGIN_ADAPTIVE_IMAGES')) {
 	}
 }
 
-?>

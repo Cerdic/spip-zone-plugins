@@ -245,4 +245,3 @@ function zcore_echafaudable($type) {
 	}
 }
 
-?>
