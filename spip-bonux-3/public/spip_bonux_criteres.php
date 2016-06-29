@@ -175,3 +175,7 @@ function calcul_critere_fonctions($func, $idb, &$boucles, $crit) {
 		$boucle->select[]= "$f($sel) AS $as" . "_$champ";
 	}
 }
+
+function critere_fusion_supprimer_dist($idb, &$boucles, $crit){
+	$boucles[$idb]->group = array();
+}
