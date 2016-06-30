@@ -31,12 +31,27 @@ function action_cliquer_campagne_dist($arg=null) {
 		// On ajoute la date et la pub
 		$infos = array_merge($infos, array('id_campagne' => $id_campagne, 'id_encart' => $campagne['id_encart'], 'page' => $page, 'date' => 'NOW()'));
 		
-		// On enregistre le clic
-		$ok = sql_insertq(
+		// Commencer par chercher si ce qu'on veut insérer
+		// Attention, le champ date étant de type DATE, il faut réduire NOW à juste la DATE
+		$ok = sql_fetsel(
+			"id_campagne",
 			'spip_campagnes_clics',
-			$infos
-		);
-		
+			array(
+				"id_campagne=$id_campagne",
+				"id_encart=".$campagne['id_encart'],
+				"cookie=".sql_quote($infos['cookie']),
+				"date=DATE(NOW())"
+				)
+			);
+				
+		if ($ok === null){
+			// On enregistre le clic
+			$ok = sql_insertq(
+				'spip_campagnes_clics',
+				$infos
+			);
+		}
+				
 		// Si c'est bon on redirige
 		if ($ok !== false){
 			include_spip('inc/headers');
