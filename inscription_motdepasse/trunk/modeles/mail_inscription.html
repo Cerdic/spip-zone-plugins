@@ -12,10 +12,8 @@
 <p><:form_forum_bonjour{nom=#GET{nom}}:></p>
 
 
-
-<p><:notifications:form_forum_confirmer_email:></p>
 <div>
-[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_confirm}|url_absolue)],label=<:notifications:bouton_finir_inscription:>,width=250px})</center><br>]
+[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_confirm}|url_absolue)],label=<:form_auteur_confirmation:>,width=250px})</center><br>]
 </div>
 
 #SET{url_site,#URL_SITE_SPIP/}
