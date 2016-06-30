@@ -1,8 +1,11 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/produit?lang_cible=en
+// ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -15,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_produit' => 'One product',
 	'info_aucun_produit' => 'No product',
 	'info_nb_produits' => '@nb@ products',
-	'info_produits_auteur' => 'Author\'s products',
+	'info_produits_auteur' => 'Author’s products',
 
 	// L
 	'label_date_com' => 'Date',
@@ -25,10 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taxe' => 'Tax',
 	'label_texte' => 'Text',
 	'label_titre' => 'Title',
-	
+
 	// P
 	'produit_champ_taxe_explication' => 'Default value : @tax@. Safe to let empty.',
-
 
 	// R
 	'retirer_lien_produit' => 'Remove this product',
@@ -42,7 +44,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_produit' => 'Product’s logo',
 	'titre_produit' => 'Product',
 	'titre_produits' => 'Products',
-	'titre_produits_rubrique' => 'Produics of the section',
+	'titre_produits_rubrique' => 'Produics of the section'
 );
-
-?>

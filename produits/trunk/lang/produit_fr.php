@@ -1,8 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -25,10 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taxe' => 'Taxe',
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',
-	
+
 	// P
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
-
 
 	// R
 	'retirer_lien_produit' => 'Retirer ce produit',
@@ -42,7 +42,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_produit' => 'Logo de ce produit',
 	'titre_produit' => 'Produit',
 	'titre_produits' => 'Produits',
-	'titre_produits_rubrique' => 'Produits de la rubrique',
+	'titre_produits_rubrique' => 'Produits de la rubrique'
 );
-
-?>
