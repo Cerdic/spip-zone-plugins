@@ -27,6 +27,9 @@
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=ru" total="197" traduits="163" relire="2" modifs="0" nouveaux="32" pourcent="82.74">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="197" traduits="136" relire="0" modifs="3" nouveaux="58" pourcent="69.04">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
