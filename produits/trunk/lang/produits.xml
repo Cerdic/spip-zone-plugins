@@ -1,6 +1,7 @@
 <traduction module="produits" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/produits?lang_cible=en" total="41" traduits="32" relire="0" modifs="1" nouveaux="8" pourcent="78.05">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/produits?lang_cible=en" total="41" traduits="40" relire="1" modifs="0" nouveaux="0" pourcent="97.56">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="cerdic" lien="http://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/produits?lang_cible=fa" total="41" traduits="21" relire="0" modifs="0" nouveaux="20" pourcent="51.22">
