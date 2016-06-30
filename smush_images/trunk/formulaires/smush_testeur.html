@@ -13,7 +13,7 @@
 	<div class="smush_test_smushed">
 		<h3><:smush:titre_version_smushed:></h3>
 		<a href="[(#ENV{message_ok}|image_smush|extraire_attribut{src})]" title="<:bouton_telecharger:>">[(#ENV{message_ok}|image_smush)]</a>
-		[(#SET{taille_smushed,[(#ENV*{message_ok}|image_smush|extraire_attribut{src}|filesize)]})]
+		[(#SET{taille_smushed,[(#ENV*{message_ok}|image_smush|extraire_attribut{src}|appliquer_filtre{supprimer_timestamp,true}|filesize)]})]
 		[(#SET{taille_smushed_octets,#GET{taille_smushed}|taille_en_octets})]
 		<p><:smush:info_taille{taille=#GET{taille_smushed},octets=#GET{taille_smushed_octets}}:></p>
 	</div>
