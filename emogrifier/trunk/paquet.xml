@@ -1,7 +1,7 @@
 <paquet
 	prefix="emogrifier"
 	categorie="outil"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.5;3.1.*]"
 	documentation="https://github.com/bystrano/emogrifier"
@@ -16,7 +16,5 @@
 	<auteur lien='http://vertige.org'>Vertige ASBL</auteur>
 
 	<licence>GNU/GPL</licence>
-
-  <lib nom="emogrifier" lien="http://www.pelagodesign.com/emogrifier/emogrifier.zip" />
 
 </paquet>
