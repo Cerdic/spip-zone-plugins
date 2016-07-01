@@ -282,7 +282,7 @@ class AutoEmbed {
 
     $source = preg_replace(',^http:,', 'https:', $source);
 
-    return sprintf('<iframe type="text/html" width="%s" height="%s" src="%s" frameborder="0"></iframe>', $width, $height, $source);
+    return sprintf('<iframe type="text/html" width="%s" height="%s" src="%s" frameborder="0" allowFullScreen></iframe>', $width, $height, $source);
   }
 
   /**
