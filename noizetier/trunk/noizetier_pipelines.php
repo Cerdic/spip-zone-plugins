@@ -62,7 +62,17 @@ function noizetier_recuperer_fond($flux) {
 					$complements = recuperer_fond('noizetier-generer-bloc', $contexte, array('raw' => true));
 				}
 				
-				$flux['data']['texte'] .= $complements['texte'];
+				// S'il y a une indication d'insertion explicite
+				if (strpos($flux['data']['texte'], '<!--noisettes-->') !== false) {
+					$flux['data']['texte'] = preg_replace(
+						'%(<!--noisettes-->)%is',
+						"${complements['texte']}\n" . '$1',
+						$flux['data']['texte']
+					);
+				}
+				else {
+					$flux['data']['texte'] .= $complements['texte'];
+				}
 			}
 			// Il faut ajouter les blocs vides en mode voir=noisettes
 			elseif (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
