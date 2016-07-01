@@ -35,5 +35,6 @@
 	text-align: center;
 	opacity: 0.3;
 	line-height: 0.25em;
-
+    font-size: inherit;
+    text-align: inherit;
 }
