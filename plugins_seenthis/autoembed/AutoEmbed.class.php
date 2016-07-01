@@ -280,6 +280,8 @@ class AutoEmbed {
     $width = $this->_object_attribs['width'];
     $height = $this->_object_attribs['height'];
 
+    $source = preg_replace(',^http:,', 'https:', $source);
+
     return sprintf('<iframe type="text/html" width="%s" height="%s" src="%s" frameborder="0"></iframe>', $width, $height, $source);
   }
 
