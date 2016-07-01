@@ -1016,8 +1016,11 @@ function inscription3_recuperer_fond($flux) {
 		/**
 		 * On ajoute un vérificateur de complexité de mot de passe
 		 */
-		if (($config['inscription3/password_complexite'] == 'on')
-			and in_array($flux['args']['fond'], array('formulaires/mot_de_passe','formulaires/editer_auteur'))) {
+		if (
+			isset($config['inscription3/password_complexite']) 
+			and $config['inscription3/password_complexite'] == 'on'
+			and in_array($flux['args']['fond'], array('formulaires/mot_de_passe','formulaires/editer_auteur'))) 
+		{
 			$js = recuperer_fond('formulaires/inc-js_pass_verification', $flux['data']['contexte']);
 			$flux['data']['texte'] = preg_replace(',(<\/form>)(.*),Uims', "\\1".$js."\\2", $flux['data']['texte'], 1);
 		}
