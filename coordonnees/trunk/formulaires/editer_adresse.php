@@ -92,7 +92,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 				'obligatoire' => 'oui',
 				'class' => 'chosen',
 				'defaut' => 'FR',
-				'champs_pays' => 'code',
+				'code_pays' => 'oui'
 			)
 		),
 	);
