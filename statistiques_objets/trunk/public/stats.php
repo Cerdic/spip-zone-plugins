@@ -117,25 +117,12 @@ function public_stats_dist($contexte = null, $referer = null) {
 
 		// Identification de l'element
 		// [MODIF] : prise en compte de tous les objets (pas que les articles).
-		// Si on est sur une page `patate` et qu'il y a `id_patate` dans le contexte,
-		// c'est qu'on doit être sur la page d'un objet éditorial.
-		// Attention, avec z-core la page est dans la variable `type-page`.
-		include_spip('base/objets');
-		$page = (isset($contexte['page']) ?
-			$contexte['page'] :
-			(isset($contexte['type-page']) ? $contexte['type-page'] : ''));
-		if (
-			$objet = objet_type($page)
-			and $id_table_objet = id_table_objet($objet)
-			and isset($contexte[$id_table_objet])
-			and $id_objet = intval($contexte[$id_table_objet])
-		){
-			$log_type = $objet;
-			$log_type .= "\t" . $id_objet;
+		include_spip('inc/statistiques');
+		if ($objet_contexte = identifier_objet_contexte($contexte)) {
+			$log_type = $objet_contexte['objet']."\t".$objet_contexte['id_objet']; // patate 1
 		} else {
-			$log_type = "autre\t0";
+			$log_type = "autre\t0"; // autre 0
 		}
-
 		$log_type .= "\t" . trim($log_referer);
 		if (isset($content[$log_type])) {
 			$content[$log_type]++;

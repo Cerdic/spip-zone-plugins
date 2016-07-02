@@ -1,7 +1,7 @@
 <?php
 /**
  * Surcharge
- * 
+ *
  * Fonctions modifiées :
  * - classement_populaires()
  *
@@ -104,4 +104,91 @@ function classement_populaires($type, $serveur = '') {
 	$classement[$type] = array_map('reset', $classement[$type]);
 
 	return $classement[$type];
+}
+
+
+/**
+ * Identifier l'objet éditorial du contexte d'appel de la page en cours,
+ * s'il s'agit de la page d'un objet éditorial.
+ *
+ * Dans la plupart des cas, on peut le déduire d'après la clé `page` (ou `type-page` avec Zcore).
+ * Dans certains cas, on dispose juste d'une ou plusieurs clés `id_{objet}`, on tente de faire avec (cas des URLs arbos).
+ *
+ * @param array $contexte
+ *     Contexte d'appel de la page, retrouvé automatiquement sinon.
+ * @return array
+ *     - Couples ['objet' => 'patate'] ['id_objet' => N] si c'est la page d'un objet éditorial
+ *     - `false` si ce n'est pas la page d'un objet éditorial, ou qu'on n'a pas pu l'identifier
+ */
+function identifier_objet_contexte($contexte = array()) {
+
+	include_spip('base/objets');
+
+	// fallback si autre page, ou pas d'objet trouvé
+	$objet_contexte = false;
+
+	// fallback contexte
+	if (!$contexte
+		and isset($GLOBALS['contexte'])
+	) {
+		$contexte = $GLOBALS['contexte'];
+	}
+
+	// Page courante dans le contexte : clés `page` ou `type-page` (Zcore).
+	if (isset($contexte['page'])) {
+		$page = $contexte['page'];
+	} elseif (isset($contexte['type-page'])) {
+		$page = $contexte['type-page'];
+	}
+
+	// Cas 1 : le contexte indique la page courante.
+	// =============================================
+	// Si on trouve également la clé `id_{objet}`, alors c'est la page d'un objet éditorial.
+	if (isset($page)
+		and $objet = objet_type($page)
+		and $id_table_objet = id_table_objet($objet)
+		and isset($contexte[$id_table_objet])
+		and $id_objet = $contexte[$id_table_objet]
+	) {
+		$objet_contexte = array('objet' => $objet, 'id_objet' => $id_objet);
+	}
+
+	// Cas 2 : pas de chance, le contexte n'indique pas la page courante.
+	// ==================================================================
+	// On se base sur les clés `id_{objet}` trouvées dans le contexte.
+	// s'il y a 1 clé, ou 2 clés dont 1 id_rubrique, on peut en déduire `id_{objet}`.
+	// Dans les autres cas, on est coincés !
+	if (!isset($page)) {
+
+		// récupérer les clés `id_{objet}`, et identifier celle de l'objet si on peut.
+		$ids_tables_objets = preg_grep('/^id_(.*)/', array_keys($contexte));
+		$nb_ids = count($ids_tables_objets);
+		// 1 clé : c'est celle de l'objet
+		if ($nb_ids === 1) {
+			$id_table_objet = $ids_tables_objets[0];
+		}
+		// 2 clés : si l'une d'elle est `id_rubrique`, l'autre est celle de l'objet
+		if ($nb_ids === 2
+			and in_array('id_rubrique', $ids_tables_objets)
+		) {
+			$k_id_rubrique  = array_search('id_rubrique', $ids_tables_objets);
+			$k_ids          = array_keys($ids_tables_objets);
+			unset($k_ids[$k_id_rubrique]);
+			$k_ids          = array_values($k_ids); //raz des clés
+			$k_id_objet     = $k_ids[0];
+			$id_table_objet = $ids_tables_objets[$k_id_objet];
+		}
+
+		// On a identifié un `id_{objet}` : on peut en déduire l'objet
+		if (isset($id_table_objet)
+			and isset($contexte[$id_table_objet])
+		) {
+			$objet          = objet_type($id_table_objet);
+			$id_objet       = $contexte[$id_table_objet];
+			$objet_contexte = array('objet' => $objet, 'id_objet' => $id_objet);
+		}
+
+	}
+
+	return $objet_contexte;
 }
