@@ -88,15 +88,17 @@ function public_stats_dist($contexte = null, $referer = null) {
 
 	// Analyse du referer
 	$log_referer = '';
-	if (isset($referer)) {
-		$url_site_spip = preg_replace(',/$,', '',
-			preg_replace(',^(https?://)?(www\.)?,i', '',
-				url_de_base()));
-		if (!(($url_site_spip <> '')
-			and strpos('-' . strtolower($referer), strtolower($url_site_spip))
-			and strpos($referer, "recherche=") === false)
-		) {
-			$log_referer = $referer;
+	if (!isset($GLOBALS['meta']['activer_referers']) or $GLOBALS['meta']['activer_referers'] == "oui") {
+		if (isset($referer)) {
+			$url_site_spip = preg_replace(',/$,', '',
+				preg_replace(',^(https?://)?(www\.)?,i', '',
+					url_de_base()));
+			if (!(($url_site_spip <> '')
+				and strpos('-' . strtolower($referer), strtolower($url_site_spip))
+				and strpos($referer, "recherche=") === false)
+			) {
+				$log_referer = $referer;
+			}
 		}
 	}
 

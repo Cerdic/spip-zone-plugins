@@ -110,5 +110,24 @@ function inc_stats_visites_objet_to_array_dist($unite, $duree, $objet='', $id_ob
 	// projection
 	$data[$last]['prevision'] = $data[$last]['visites'] + intval(round($moyenne * $prorata));
 
+	/**
+	 * Compter les fichiers en attente de depouillement dans tmp/visites/
+	 * pour affiner la prediction.
+	 * A activer dans le mes_options si l'hebergement tient le coup en cas de gros pics de traffic
+	 */
+	if (!$id_objet and defined('_STATS_COMPTE_EN_ATTENTE') AND _STATS_COMPTE_EN_ATTENTE) {
+		// eviter un depassement memoire en mesurant un echantillon pour commencer
+		$n = count(glob(_DIR_RACINE . "tmp/visites/0*"));
+		if ($n < 10000) {
+			$n = count(glob(_DIR_RACINE . "tmp/visites/*"));
+		} else {
+			$n += count(glob(_DIR_RACINE . "tmp/visites/4*"));
+			$n += count(glob(_DIR_RACINE . "tmp/visites/8*"));
+			$n += count(glob(_DIR_RACINE . "tmp/visites/c*"));
+			$n = 4 * $n;
+		}
+		$data[$last]['prevision'] += $n;
+	}
+
 	return $data;
 }

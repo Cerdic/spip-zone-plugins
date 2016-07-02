@@ -3,7 +3,7 @@
 	Surcharge : prise en compte des différents objets éditoriaux
 
 ]
-[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+[(#AUTORISER{voirstats}|et{#CONFIG{activer_referers}|=={oui}}|sinon_interdire_acces)]
 
 <h1 class="grostitre"><:statistiques:onglet_origine_visites:></h1>
 
