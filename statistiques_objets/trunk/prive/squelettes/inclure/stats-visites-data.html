@@ -12,8 +12,8 @@
 <BOUCLE_expose(CONDITION){si #ENV{objet}|et{#ENV{id_objet}|intval}}>
 #SET{id_table_objet, #ENV{objet}|id_table_objet}
 #SET{table_objet_sql,#ENV{objet}|table_objet_sql}
-#SET{champ_titre,#ENV{objet}|objet_info{titre}|sinon{titre}}
-#SET{champ_date,#ENV{objet}|objet_info{date}|sinon{date}}
+#SET{champ_titre,#ENV{objet}|objet_info{titre}}
+#SET{champ_date,#ENV{objet}|objet_info{date}|sinon{maj}}
 [(#SET{req,SELECT [(#GET{id_table_objet})][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#ENV{id_objet}|intval)]})]
 <BOUCLE_objet(DATA){source sql, #GET{req}}>
 #BOITE_OUVRIR{'','note'}

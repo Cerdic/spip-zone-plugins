@@ -10,9 +10,9 @@
 #SET{id_objet,#ENV{id_objet,#ENV{id_article}}|intval}
 #SET{id_table_objet, #GET{objet}|id_table_objet}
 #SET{table_objet_sql,#GET{objet}|table_objet_sql}
-#SET{champ_titre,#GET{objet}|objet_info{titre}|sinon{titre}}
-#SET{champ_date,#GET{objet}|objet_info{date}|sinon{date}}
-[(#SET{req,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#GET{id_objet})]})]
+#SET{champ_titre,#GET{objet}|objet_info{titre}}
+#SET{champ_date,#GET{objet}|objet_info{date}|sinon{maj}}
+[(#SET{req,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#GET{id_objet}|intval)]})]
 #SET{c,#GET{objet}|?{#VAL{#GET{objet}|classement_populaires},#ARRAY}}
 #SET{duree,#ENV{duree,0}|duree_affiche{jour}}
 
