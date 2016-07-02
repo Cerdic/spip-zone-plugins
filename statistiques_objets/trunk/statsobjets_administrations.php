@@ -88,7 +88,8 @@ function statsobjets_vider_tables($nom_meta_base_version) {
 	include_spip('base/objets');
 
 	// tables
-	sql_drop_table('spip_visites_objets', 'spip_referers_objets');
+	sql_drop_table('spip_visites_objets');
+	sql_drop_table('spip_referers_objets');
 
 	// virer les colonnes, sauf pour les articles
 	$tables_objets = array_keys(lister_tables_objets_sql());
