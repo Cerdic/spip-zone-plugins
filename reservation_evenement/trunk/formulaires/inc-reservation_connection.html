@@ -1,12 +1,12 @@
 <div class="identifiants">
-[(#SESSION{id_auteur}|>{0}|non)
+[(#ENV{id_auteur}|>{0}|non)
 	<div class="login">
 		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
 		[(#SET{titre_login,<:lien_connecter:>})]
 		<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
 	</div>
 ]
-	[(#SESSION{id_auteur}|>{0}|oui)
+	[(#ENV{id_auteur}|>{0}|oui)
 	<div class="donnes_personnels">
 		<div class="nom">
 			<span class="label"><:reservation:label_nom:></span> <span>#NOM</span>
@@ -34,7 +34,7 @@
 
 
 	<!--extra_connection1-->
-[(#SESSION{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
+[(#ENV{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
 	<div class="fieldset">
 		[(#ENV{enregistrement_inscrit_obligatoire}|!={on}|?{
 			[(#SAISIE{checkbox,enregistrer,
@@ -85,7 +85,7 @@
 	</script>
 </BOUCLE_condition>
 
-<BOUCLE_condition2(CONDITION){si #SESSION{id_auteur}|>{0}|oui}>
+<BOUCLE_condition2(CONDITION){si #ENV{id_auteur}|>{0}|oui}>
 	<script type="text/javascript">
 		/*<![CDATA[*/
 			if (!$('input[name="modifier_donnees_auteur[]"]').is(':checked')) {
