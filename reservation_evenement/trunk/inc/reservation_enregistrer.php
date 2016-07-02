@@ -8,6 +8,7 @@ if (! defined ( '_ECRIRE_INC_VERSION' ))
 function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur = '', $champs_extras_auteurs = '') {
 	include_spip ( 'inc/config' );
 	include_spip ( 'inc/session' );
+	spip_log($id_auteur);
 	$config = lire_config ( 'reservation_evenement' );
 	$statut = $config ['statut_defaut'] ? $config ['statut_defaut'] : 'rien';
 	if ($statut == 'rien') {
@@ -28,7 +29,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 	if (_request ( 'enregistrer' )) {
 		include_spip ( 'actions/editer_auteur' );
 		
-		if (! $id_auteur) {
+		if (!$id_auteur) {
 			include_spip ( 'inc/auth' );
 			$res = formulaires_editer_objet_traiter ( 'auteur', 'new', '', '', $retour, $config_fonc, $row, $hidden );
 			$id_auteur = $res ['id_auteur'];
@@ -37,13 +38,14 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 			), 'id_auteur=' . $id_auteur );
 			$auteur = sql_fetsel ( '*', 'spip_auteurs', 'id_auteur=' . $id_auteur );
 			auth_loger ( $auteur );
+			set_request ( 'id_auteur', $id_auteur );
 		}
-	} elseif (intval ( $id_auteur )) {
+	} elseif (intval( $id_auteur ) and _request('modifier_donnees_auteur')) {
 		// les champs extras auteur
 		include_spip ( 'cextras_pipelines' );
 		$valeurs_extras = array ();
 		
-		if (! is_array ( $champs_extras_auteurs ) and function_exists ( 'champs_extras_objet' )) {
+		if (!is_array ( $champs_extras_auteurs ) and function_exists ( 'champs_extras_objet' )) {
 			// Charger les définitions pour la création des formulaires
 			$champs_extras_auteurs = champs_extras_objet ( table_objet_sql ( 'auteur' ) );
 		}
@@ -68,7 +70,6 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 		set_request ( 'email', '' );
 	}
 	
-	set_request ( 'id_auteur', $id_auteur );
 	
 	$id_reservation = $action ( 'new', 'reservation' );
 	
