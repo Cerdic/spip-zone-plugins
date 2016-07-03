@@ -209,6 +209,7 @@ function reservations_multiples_formulaire_traiter($flux) {
         $email = _request('email_' . $nr);
         set_request('nom', _request('nom_' . $nr));
         set_request('email', $email);
+        set_request('id_auteur', '');
         $noms[] = _request('nom');
 
         //Vérifier les champs extras
