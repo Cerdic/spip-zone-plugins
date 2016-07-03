@@ -49,7 +49,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 			// Charger les définitions pour la création des formulaires
 			$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
 		}
-		spip_log($champs_extras_auteurs, 'teste');
+
 		if (is_array($champs_extras_auteurs)) {
 			foreach ( $champs_extras_auteurs as $value ) {
 				$valeurs_extras [$value ['options'] ['nom']] = _request($value ['options'] ['nom']);
