@@ -29,7 +29,7 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 	if (_request('enregistrer')) {
 		include_spip('actions/editer_auteur');
 		
-		if (! $id_auteur) {
+		if (!$id_auteur) {
 			include_spip('inc/auth');
 			$res = formulaires_editer_objet_traiter('auteur', 'new', '', '', $retour, $config_fonc, $row, $hidden);
 			$id_auteur = $res ['id_auteur'];
@@ -45,14 +45,14 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
 		include_spip('cextras_pipelines');
 		$valeurs_extras = array ();
 		
-		if (! is_array($champs_extras_auteurs) and function_exists('champs_extras_objet')) {
+		if (!is_array($champs_extras_auteurs) and function_exists('champs_extras_objet')) {
 			// Charger les définitions pour la création des formulaires
 			$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
 		}
-		
+		spip_log($champs_extras_auteurs, 'teste');
 		if (is_array($champs_extras_auteurs)) {
 			foreach ( $champs_extras_auteurs as $value ) {
-				$valeurs_extras [$value ['options'] ['label']] = _request($value ['options'] ['nom']);
+				$valeurs_extras [$value ['options'] ['nom']] = _request($value ['options'] ['nom']);
 			}
 		}
 		// mettre les valeurs dans la session pour garder les éventuelles modifications
