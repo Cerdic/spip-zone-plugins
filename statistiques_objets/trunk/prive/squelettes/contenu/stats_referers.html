@@ -4,27 +4,26 @@
 	Surcharge : prise en compte des différents objets éditoriaux
 
 ]
-[(#AUTORISER{voirstats}|et{#CONFIG{activer_referers}|=={oui}}|sinon_interdire_acces)]
+[(#AUTORISER{voirstats}|et{#CONFIG{activer_referers,oui}|=={oui}}|sinon_interdire_acces)][
 
-[(#SET{objet,   #ENV{objet}|sinon{#ENV{id_article}|?{article}}})][
-(#SET{id_objet, #ENV{id_objet,#ENV{id_article}}|intval})]
+(#SET{url_propre, #SELF|parametre_url{objet|id_objet|id_article,''}})][
+(#SET{objet,      #ENV{objet,#ENV{id_article}|?{article}}})][
+(#SET{id_objet,   #ENV{id_objet,#ENV{id_article}}|intval})]
 
 <h1 class="grostitre"><:statistiques:onglet_origine_visites:></h1>
 
-[(#REM) onglets des objets ]
+[(#REM) onglets des objets activés ]
 <div class="onglets_simple clearfix">
 	<ul>
-		<li>[(#SELF|parametre_url{objet|id_objet,''}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_referers_tous:>,[(#GET{objet}|non)]})]</li>
-		<BOUCLE_menu_articles(visites_articles){0,1}>
-		<li>[(#SELF|parametre_url{objet,article}|lien_ou_expose{[(#VAL{article}|objet_icone{16}) ][(#VAL{article}|objet_info{texte_objets}|_T)],#GET{objet}|=={article}})]</li>
-		</BOUCLE_menu_articles>
-		<BOUCLE_menu_objets(referers_objets){fusion objet}>
-		<li>[(#SELF|parametre_url{objet,#OBJET}|parametre_url{id_objet,''}|lien_ou_expose{[(#OBJET|objet_icone{16}) ][(#OBJET|objet_info{texte_objets}|_T)],#OBJET|=={#GET{objet}}})]</li>
+		<li>[(#GET{url_propre}|lien_ou_expose{[(#CHEMIN_IMAGE{toggle_expand-16}|balise_img) ]<:statistiques:onglet_referers_tous:>,[(#GET{objet}|non)]})]</li>
+		<BOUCLE_menu_objets(DATA){source table, #CONFIG{activer_statistiques_objets,#ARRAY}|unserialize|array_filter}>
+		[(#SET{objet_menu,#VALEUR|objet_type})]
+		<li>[(#GET{url_propre}|parametre_url{objet,#GET{objet_menu}}|lien_ou_expose{[(#GET{objet_menu}|objet_icone{16}) ][(#GET{objet_menu}|objet_info{texte_objets}|_T)],#GET{objet_menu}|=={#GET{objet}}})]</li>
 		</BOUCLE_menu_objets>
 	</ul>
 </div>
 
-[(#REM) éventuel objet sélectionné ]
+[(#REM) Éventuel objet sélectionné ]
 <BOUCLE_expose(CONDITION){si #GET{objet}|et{#GET{id_objet}}}>
 #SET{id_table_objet,  #GET{objet}|id_table_objet}
 #SET{table_objet_sql, #GET{objet}|table_objet_sql}
@@ -37,10 +36,10 @@
 (#SET{req,            [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})]})]
 <BOUCLE_objet(DATA){source sql, #GET{req}}>
 #BOITE_OUVRIR{'','note'}
-	<a class='annule_filtre' href="[(#SELF|parametre_url{id_objet,''})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
+	<a class='annule_filtre' href="[(#GET{url_propre})]" title="<:info_tout_afficher|attribut_html:>">[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:info_tout_afficher:>})]</a>
 	<:statistiques:titre_liens_entrants:> <:info_pour:>
-	<h2 class='objet_titre'><a href='[(#ENV{id_objet}|generer_url_entite{#ENV{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
-	<a href="[(#VAL{stats_visites}|generer_url_ecrire{objet=#ENV{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_page_statistiques_visites:></a>
+	<h2 class='objet_titre'><a href='[(#GET{id_objet}|generer_url_entite{#GET{objet},'','',#EVAL{true}})]'>#VALEUR{titre}</a></h2>
+	<a href="[(#URL_ECRIRE{stats_visites}|parametre_url{objet,#GET{objet}}|parametre_url{id_objet,#VALEUR{#GET{id_table_objet}}})]"><:statistiques:titre_page_statistiques_visites:></a>
 #BOITE_FERMER
 </BOUCLE_objet>
 </BOUCLE_expose>
@@ -48,10 +47,10 @@
 [(#REM) menu ajourd'hui/hier ]
 <div class="onglets_simple second clearfix">
 	<ul>
-		<li>[(#URL_ECRIRE{stats_referers,jour=''}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{jour,''}|non)],ajax})]</li>
-		[(#ENV{objet}|non)
-		<li>[(#URL_ECRIRE{stats_referers,jour=jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
-		<li>[(#URL_ECRIRE{stats_referers,jour=veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>
+		<li>[(#SELF|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{jour,''}|non)],ajax})]</li>
+		[(#GET{objet}|non)
+		<li>[(#GET{url_propre}|parametre_url{jour,jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
+		<li>[(#GET{url_propre}|parametre_url{jour,veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>
 		]
 	</ul>
 </div>
