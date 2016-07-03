@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inscription' => 'inscription :',
 	'label_lang' => 'Langue :',
 	'label_maj' => 'maj :',
+	'label_modifier_identifiants_personnels' => 'Modifier les identifiants personnels :',
 	'label_mot_passe' => 'Mot de passe :',
 	'label_mot_passe2' => 'Répétez le mot de passe :',
 	'label_nom' => 'Nom :',
@@ -196,5 +197,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'votre_reservation_sur' => '@nom@ : votre réservation'
 );
-
-?>

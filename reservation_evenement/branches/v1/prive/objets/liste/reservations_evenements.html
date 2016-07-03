@@ -26,13 +26,15 @@
 			<td class='statut'>[(#STATUT|puce_statut{evenement,#ID_EVENEMENT})]</td>
 			<td class='date'>[(#DATE_DEBUT|affdate_jourcourt|unique{liste_evt})]</td>
 			<td class='article secondaire'>[<a (#ID_ARTICLE|oui) href="[(#ID_ARTICLE|generer_url_entite{article})]" title="[(#INFO_TITRE{article,#ID_ARTICLE}|attribut_html)]">[(#CHEMIN_IMAGE{article-16.png}|balise_img{#INFO_TITRE{article,#ID_ARTICLE}})]</a>]</td>
-			<td class='titre principale'><a href="[(#ID_EVENEMENT_SOURCE|?{#ID_EVENEMENT_SOURCE,#ID_EVENEMENT}|generer_url_entite{evenement})]"
-																																						title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT">[(#RANG). ]#TITRE</a>
+			<td class='titre principale'>
+				<a href="[(#ID_EVENEMENT_SOURCE|?{#ID_EVENEMENT_SOURCE,#ID_EVENEMENT}|generer_url_entite{evenement})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EVENEMENT">
+					[(#RANG). ]#TITRE
+				</a>
 				<p class="date">[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})]</p>
 			</td>
 			<td class='lieu secondaire'>#LIEU</td>
 			<td class='reservations'>
-			        <INCLURE{fond=inclure/compteur_reservation_detail,id_evenement,env}/> 
+				<INCLURE{fond=inclure/compteur_reservation_detail,id_evenement,env}/> 
 			</td>			
 			#SET{id_evenement,#ID_EVENEMENT_SOURCE|?{#ID_EVENEMENT_SOURCE,#ID_EVENEMENT}}
 			<td class='id'>[(#ID_EVENEMENT_SOURCE|oui)

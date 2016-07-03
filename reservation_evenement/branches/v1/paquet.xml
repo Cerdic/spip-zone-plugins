@@ -1,18 +1,18 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.21.23"
+	version="1.21.24"
 	etat="test"
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
-	schema="1.6.0"
+	schema="1.6.1"
 >
 
 	<nom>Réservation Événements</nom>
 	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
 	<licence>GNU/GPL</licence>
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.7.3;]" />
 	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 	<necessite nom="verifier" compatibilite="[1.0.5;]" />
 	<necessite nom="agenda" compatibilite="[3.14.5;]" />

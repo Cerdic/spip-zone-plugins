@@ -145,5 +145,3 @@ closed',
 	// V
 	'votre_reservation_sur' => '@nom@: your booking'
 );
-
-?>

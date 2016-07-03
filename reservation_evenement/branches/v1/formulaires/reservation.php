@@ -23,6 +23,13 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 	$enregistrement_inscrit = isset($config['enregistrement_inscrit']) ? $config['enregistrement_inscrit'] : '';
 	$enregistrement_inscrit_obligatoire = isset($config['enregistrement_inscrit_obligatoire']) ? $config['enregistrement_inscrit_obligatoire'] : '';
 
+	if (intval($GLOBALS['visiteur_session'])) {
+		$session = $GLOBALS['visiteur_session'];
+		$nom = $session['nom'];
+		$email = $session['email'];
+		$id_auteur = isset($session['id_auteur']) ? $session['id_auteur'] : '';
+	}
+	
 	//Si l'affichage n'est pas déjà définie on établit si une zone s'applique
 	if (!$id_article AND !$id) {
 		include_spip('inc/reservation_evenements');
@@ -89,14 +96,9 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 		'id_evenement' => $id
 	);
 
-	if (intval($GLOBALS['visiteur_session'])) {
-		$session = $GLOBALS['visiteur_session'];
-		$nom = $session['nom'];
-		$email = $session['email'];
-	}
-
 	$valeurs['id_objet_prix'] = _request('id_objet_prix') ? (is_array(_request('id_objet_prix')) ? _request('id_objet_prix') : array(_request('id_objet_prix'))) : array();
-
+	$valeurs['id_auteur'] = $id_auteur;
+	$valeurs['modifier_donnees_auteur'] = _request('modifier_donnees_auteur');
 	$valeurs['nom'] = $nom;
 	$valeurs['email'] = $email;
 	$valeurs['enregistrer'] = _request('enregistrer');
@@ -123,6 +125,9 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 
 	$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="' . $valeurs['statut'] . '"/>';
 	$valeurs['_hidden'] .= '<input type="hidden" name="lang" value="' . $valeurs['lang'] . '"/>';
+	if ($id_auteur) {
+		$valeurs['_hidden'] .= '<input type="hidden" name="id_auteur" value="' . $valeurs['id_auteur'] . '"/>';
+	}
 	if ($enregistrement_inscrit_obligatoire)
 		$valeurs['_hidden'] .= '<input type="hidden" name="enregistrer[]" value="1"/>';
 	return $valeurs;
@@ -131,7 +136,8 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 function formulaires_reservation_verifier_dist($id = '', $id_article = '', $retour = '') {
 	$erreurs = array();
 	$email = _request('email');
-	$id_auteur = '';
+	$id_auteur = _request('id_auteur');
+	$obligatoires = array();
 
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
@@ -167,24 +173,26 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
 			}
 		}
 	}
-	else {
+	elseif (!$id_auteur) {
 		include_spip('inc/config');
 		$email_reutilisable = lire_config('reservation_evenement/email_reutilisable','');
 		$obligatoires = array(
 			'nom',
 			'email'
 		);
-
-		if (test_plugin_actif('declinaisons'))
-			array_push($obligatoires, 'id_objet_prix');
-		else
-			array_push($obligatoires, 'id_evenement');
-
-		foreach ($obligatoires AS $champ) {
-			if (!_request($champ))
-				$erreurs[$champ] = _T("info_obligatoire");
-		}
 	}
+
+	
+	if (test_plugin_actif('declinaisons'))
+		array_push($obligatoires, 'id_objet_prix');
+	else
+		array_push($obligatoires, 'id_evenement');
+
+	foreach ($obligatoires AS $champ) {
+		if (!_request($champ))
+			$erreurs[$champ] = _T("info_obligatoire");
+	}
+	
 
 	if ($email) {
 		include_spip('inc/filtres');
@@ -217,9 +225,8 @@ function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retou
 		refuser_traiter_formulaire_ajax();
 	}
 	$enregistrer = charger_fonction('reservation_enregistrer', 'inc');
-	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-	}
+	$id_auteur = _request('id_auteur');
+
 
 	$retours = $enregistrer($id, $id_article, $id_auteur);
 
@@ -229,4 +236,3 @@ function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retou
 
 	return $retours;
 }
-?>
