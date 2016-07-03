@@ -8,10 +8,10 @@ include_spip('inc/presentation');
 
 /**
  * Compte le nombre de visites des objets d'une rubrique et de ses sous-rubriques
- * 
+ *
  * On peut passer en paramètre un ou plusieurs types d'objets pour n'afficher que les visites de ces objets,
  * sinon on retourne les visites de tous les types d'objets trouvés dans spip_visites_articles et spip_visites_objets
- * 
+ *
  * @param  integer $id_parent         Identifiant de la rubrique parente à partir de laquelle compter
  * @param  string  $critere           Critère pour le comptage : visites|popularite
  * @param  integer $nombre_branche    Nombre d'objets dans la branche
@@ -47,14 +47,13 @@ function enfants_objets($id_parent, $critere, &$nombre_branche, &$nombre_rub, $o
 
 /**
  * Affiche un tableau avec les pourcentages de visites par secteur
- * 
+ *
  * On peut passer en paramètre un ou plusieurs types d'objets pour n'afficher que les visites de ces objets,
  * sinon on retourne les visites de tous les types d'objets trouvés dans spip_visites_articles et spip_visites_objets
- * 
- * @param  array|string $objets       Un ou plusieurs types d'objets
+ *
  * @param  integer      $id_parent    Identifiant de la rubrique parente à partir de laquelle compter
- * @param  integer      $decalage     
- * @param  integer      $taille       
+ * @param  integer      $decalage     ?
+ * @param  integer      $taille       ?
  * @param  string       $critere      Critère pour le comptage : visites|popularite
  * @param  integer      $gauche       Décalage entre les pourcentages et les barres
  * @param  array        $objets       Types d'objets
@@ -63,24 +62,22 @@ function enfants_objets($id_parent, $critere, &$nombre_branche, &$nombre_rub, $o
 function enfants_objets_aff($id_parent, $decalage, $taille, $critere, $gauche = 0, $objets='') {
 
 	include_spip('base/objets'); // on ne sait jamais
-	
-	// sans objets demandés explicitement, on va chercher tous les types d'objets
-	// ayant un champ id_rubrique dans spip_visites_articles et spip_visites_objets
+
+	// Sans objets demandés explicitement, on va chercher tous les types d'objets
+	// ayant un champ id_rubrique dans spip_visites_articles et spip_visites_objets,
+	// à l'exclusion des rubriques.
 	if (!$objets) {
 		$objets = array();
-		if (sql_countsel('spip_visites_articles')){
+		if (sql_countsel('spip_visites_articles')) {
 			$objets[] = 'article';
 		}
-		if ($objets_visites = sql_fetsel('DISTINCT objet', 'spip_visites_objets')){
-			foreach($objets_visites as $objet){
+		if ($objets_visites = sql_fetsel('DISTINCT objet', 'spip_visites_objets', 'objet != '.sql_quote('rubrique'))) {
+			foreach($objets_visites as $objet) {
 				// on s'assure que l'objet ait un champ id_rubrique
 				$table_objet_sql = table_objet_sql($objet);
-				$trouver_table = charger_fonction('trouver_table','base');
-				$desc = $trouver_table($table_objet_sql);
-				if (
-					isset($desc['field'])
-					and in_array('id_rubrique', array_keys($desc['field']))
-				){
+				$trouver_table   = charger_fonction('trouver_table','base');
+				$desc            = $trouver_table($table_objet_sql);
+				if (isset($desc['field']['id_rubrique'])) {
 					$objets[] = $objet;
 				}
 			}

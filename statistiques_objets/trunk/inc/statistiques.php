@@ -111,8 +111,7 @@ function classement_populaires($type, $serveur = '') {
  * Identifier l'objet éditorial du contexte d'appel de la page en cours,
  * s'il s'agit de la page d'un objet éditorial.
  *
- * Dans la plupart des cas, on peut le déduire d'après la clé `page` (ou `type-page` avec Zcore).
- * Dans certains cas, on dispose juste d'une ou plusieurs clés `id_{objet}`, on tente de faire avec (cas des URLs arbos).
+ * On se repose sur la clé `page` (ou `type-page` avec Zcore), sinon sur les clés `id_{objet}`.
  *
  * @param array $contexte
  *     Contexte d'appel de la page, retrouvé automatiquement sinon.
@@ -161,7 +160,7 @@ function identifier_objet_contexte($contexte = array()) {
 	if (!isset($page)) {
 
 		// récupérer les clés `id_{objet}`, et identifier celle de l'objet si on peut.
-		$ids_tables_objets = preg_grep('/^id_(.*)/', array_keys($contexte));
+		$ids_tables_objets = preg_grep('/^id_.*/', array_keys($contexte));
 		$nb_ids = count($ids_tables_objets);
 		// 1 clé : c'est celle de l'objet
 		if ($nb_ids === 1) {

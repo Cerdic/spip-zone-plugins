@@ -25,6 +25,7 @@ include_spip('inc/referenceurs');
 function inc_stats_referers_objet_to_array_dist($limit, $jour, $objet, $id_objet, $options = array()) {
 
 	$visites = 'visites';
+	$table = "spip_referers";
 	$where = array();
 	$serveur = '';
 
@@ -34,23 +35,28 @@ function inc_stats_referers_objet_to_array_dist($limit, $jour, $objet, $id_objet
 	}
 	//$res = $referenceurs (0, "SUM(visites_$jour)", 'spip_referers', "visites_$jour>0", "referer", $limit);
 
-	// par défaut, on compte tous les referers dans spip_referers
-	$table = "spip_referers";
-	// pour un type d'objet ou un objet en particulier,
-	// on regarde dans spip_referers_objets ou spip_referers_articles
+	// Par défaut on cherche dans spip_referers.
+	// Pour un type d'objet ou un objet en particulier,
+	// on regarde dans spip_referers_objets ou spip_referers_articles.
 	if ($objet) {
-		if ($objet == 'article'){
-			$table = "spip_referers_articles";
-		} else {
-			$table = "spip_referers_objets";
-			$where[] = 'objet='.sql_quote($objet);
-		}
-		if (intval($id_objet)) {
-			if ($objet == 'article'){
-				$where[] = "id_article=" . intval($id_objet);
-			} else {
-				$where[] = 'id_objet='. intval($id_objet);
-			}
+		switch ($objet) {
+
+			// articles
+			case 'article':
+				$table = "spip_referers_articles";
+				if (intval($id_objet)) {
+					$where[] = "id_article = " . intval($id_objet);
+				}
+				break;
+
+			// tous les autres objets
+			default:
+				$table = "spip_referers_objets";
+				$where[] = 'objet='.sql_quote($objet);
+				if (intval($id_objet)) {
+					$where[] = "id_objet = " . intval($id_objet);
+				}
+
 		}
 	}
 
@@ -59,7 +65,7 @@ function inc_stats_referers_objet_to_array_dist($limit, $jour, $objet, $id_objet
 
 	$result = sql_select("referer_md5, referer, $visites AS vis", $table, $where, '', "maj DESC", $limit, '', $serveur);
 	//var_dump(sql_select("referer_md5, referer, $visites AS vis", $table, $where, '', "maj DESC", $limit, '', $serveur, false));
-	
+
 	$referers = array();
 	$trivisites = array(); // pour le tri
 	while ($row = sql_fetch($result, $serveur)) {
