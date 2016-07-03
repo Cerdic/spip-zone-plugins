@@ -11,30 +11,40 @@
 	- prive/squelettes/contenu/stats_visites.html
 
 ]
-#SET{objet,#ENV{objet}|sinon{#ENV{id_article}|?{article}}}
-#SET{id_objet,#ENV{id_objet,#ENV{id_article}}|intval}
-#SET{id_table_objet, #GET{objet}|id_table_objet}
-#SET{table_objet_sql,#GET{objet}|table_objet_sql}
-#SET{champ_titre,#GET{objet}|objet_info{titre}}
-#SET{champ_date,#GET{objet}|objet_info{date}|sinon{maj}}
-#SET{champ_statut,#GET{objet}|objet_info{statut}|table_valeur{0/champ}}
-#SET{statut_publie,#GET{objet}|objet_info{statut}|table_valeur{0/publie}}
+[(#SET{objet,          #ENV{objet}|sinon{#ENV{id_article}|?{article}}})][
+(#SET{id_objet,        #ENV{id_objet,#ENV{id_article}}|intval})][
+(#SET{id_table_objet,  #GET{objet}|id_table_objet})][
+(#SET{table_objet_sql, #GET{objet}|table_objet_sql})][
+(#SET{champ_titre,     #GET{objet}|objet_info{titre}})][
+(#SET{champ_date,      #GET{objet}|objet_info{date}|sinon{maj}})][
+(#SET{champ_statut,    #GET{objet}|objet_info{statut}|table_valeur{0/champ}})][
+(#SET{statut_publie,   #GET{objet}|objet_info{statut}|table_valeur{0/publie}})]
 
 #BOITE_OUVRIR{'','note'}
 <div class="stats-articles">
 
 	<div class="unit size1of2">
 
-		[(#REM) les 30 plus populaires ]
-		#SET{c,#GET{objet}|classement_populaires}
-		[(#SET{req_pluspop,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]] ORDER BY FIELD\([(#GET{id_table_objet})][,(#GET{c}|join{','})]\) LIMIT [(#VAL{'0,30'})]})]
-		#SET{ids_pluspop,#ARRAY}
+		[(#REM)
+		        ======================
+		        les 30 plus populaires
+		        ======================
+		]
+		[(#SET{c,      #GET{objet}|classement_populaires|sinon{#LISTE{0}}})][
+		(#SET{ids_pop, #ARRAY})][
+		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#SET{where,   [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\)[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, FIELD\([(#GET{id_table_objet})][,(#GET{c}|join{','})]\)})][
+		(#SET{limit,   '0,30'})][
+		(#SET{req_pop, [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
 
 		<h4><:statistiques:info_visites_objets_plus_populaires:></h4>
 		<B_pluspop>
 		<ol class="classement">
-			<BOUCLE_pluspop(DATA){source sql, #GET{req_pluspop}}>
-				#SET{ids_pluspop,#GET{ids_pluspop}|push{#VALEUR{#GET{id_table_objet}}}}
+			<BOUCLE_pluspop(DATA){source sql, #GET{req_pop}}>
+				#SET{ids_pop,#GET{ids_pop}|push{#VALEUR{#GET{id_table_objet}}}}
 				#SET{popularite,#VALEUR{popularite}|ceil}
 				<li[ (#GET{id_objet}|=={#VALEUR{#GET{id_table_objet}}}|?{class="on"})]>
 					<a
@@ -45,9 +55,18 @@
 				</li>
 			</BOUCLE_pluspop>
 		</ol>
-
-		[(#REM) les 10 derniers visités ]
-		[(#SET{req_derniers,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_date})][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pluspop}|join{','})]\)[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]] ORDER BY [(#GET{champ_date})] DESC LIMIT [(#VAL{'0,10'})]})]
+		[(#REM)
+		        =======================================================================
+		        les 10 derniers populaires publiés, pas en doublons avec les précédents
+		        =======================================================================
+		]
+		[(#SET{select, [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_date})][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#SET{where,   popularite > 0[(#GET{ids_pop}|count|oui) AND [(#GET{id_table_objet})] NOT IN \([(#GET{ids_pop}|join{','})]\)][(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, [(#GET{champ_date}) DESC]})][
+		(#SET{limit,   '0,10'})][
+		(#SET{req_derniers,[SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
 		<B_derniers>
 			<p class="center">[...]</p>
 			<h4><:statistiques:info_visites_objets_derniers:></h4>
@@ -68,12 +87,23 @@
 
 	</div>
 
-	[(#REM) les 30 plus visités depuis le début ]
+	[(#REM)
+	        ===================================
+	        les 30 plus visités depuis le début
+	        ===================================
+	]
 	<div class="unit lastUnit">
 
 		<h4><:statistiques:info_afficher_visites_objets_plus_visites:></h4>
-		#SET{c,#GET{objet}|classement_populaires}
-		[(#SET{req_plusvisites,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE popularite>0 AND [(#GET{id_table_objet})] IN \([(#GET{c}|join{','})]\) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)] ORDER BY visites DESC LIMIT [(#VAL{'0,30'})]})]
+		[(#SET{c,      #GET{objet}|classement_populaires})][
+		(#SET{select,  [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
+		(#SET{from,    #GET{table_objet_sql}})][
+		(#SET{where,   popularite > 0[(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+		(#SET{groupby, #GET{id_table_objet}})][
+		(#SET{orderby, 'visites DESC'})][
+		(#SET{limit,   '0,30'})][
+		(#SET{req_plusvisites,[SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})][ GROUP BY (#GET{groupby})][ ORDER BY (#GET{orderby})][ LIMIT (#GET{limit})]})]
+
 		<ol class='classement'>
 			<BOUCLE_plusvisites(DATA){source sql, #GET{req_plusvisites}}>
 			#SET{popularite,#VALEUR{popularite}|ceil}

@@ -1,24 +1,32 @@
 [(#REM)
 
+	Nombre de visites par jour
 	Surcharge : prise en compte des différents objets éditoriaux
 
 	Inclus dans :
 	- prive/squelettes/inclure/stats-visites-data.html
 
 ]
-#SET{objet,#ENV{objet}|sinon{#ENV{id_article}|?{article}}}
-#SET{id_objet,#ENV{id_objet,#ENV{id_article}}|intval}
-#SET{id_table_objet, #GET{objet}|id_table_objet}
-#SET{table_objet_sql,#GET{objet}|table_objet_sql}
-#SET{champ_titre,#GET{objet}|objet_info{titre}}
-#SET{champ_date,#GET{objet}|objet_info{date}|sinon{maj}}
-[(#SET{req,SELECT [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})] FROM [(#GET{table_objet_sql})] WHERE [(#GET{id_table_objet})]=[(#GET{id_objet}|intval)]})]
-#SET{c,#GET{objet}|?{#VAL{#GET{objet}|classement_populaires},#ARRAY}}
-#SET{duree,#ENV{duree,0}|duree_affiche{jour}}
+[(#SET{objet,          #ENV{objet}|sinon{#ENV{id_article}|?{article}}})][
+(#SET{id_objet,        #ENV{id_objet,#ENV{id_article}}|intval})][
+(#SET{duree,           #ENV{duree,0}|duree_affiche{jour}})]
+[(#REM) requête si objet sélectionné ]
+<BOUCLE_expose(CONDITION){si #GET{objet}|et{#GET{id_objet}}}>
+[(#SET{c,              #GET{objet}|classement_populaires|sinon{#LISTE{0}}})][
+(#SET{id_table_objet,  #GET{objet}|id_table_objet})][
+(#SET{table_objet_sql, #GET{objet}|table_objet_sql})][
+(#SET{champ_titre,     #GET{objet}|objet_info{titre}})][
+(#SET{champ_date,      #GET{objet}|objet_info{date}|sinon{maj}})]
+[(#REM) requête ]
+[(#SET{select,         [(#GET{id_table_objet}),visites,popularite][,(#GET{champ_titre})]})][
+(#SET{from,            #GET{table_objet_sql}})][
+(#SET{where,           [(#GET{id_table_objet})] = [(#GET{id_objet}|intval)][(#GET{champ_statut}|oui) AND [(#GET{champ_statut})]=[(#GET{statut_publie}|sql_quote)]]})][
+(#SET{req,             [SELECT (#GET{select})][ FROM (#GET{from})][ WHERE (#GET{where})]})]
+</BOUCLE_expose>
 
 <div class="pagination">
 	<span class="dl">
-		#SET{args,#ARRAY{objet,#GET{objet},id_objet,#ENV{id_objet},duree,#GET{duree}}}
+		#SET{args,#ARRAY{objet,#GET{objet},id_objet,#GET{id_objet},duree,#GET{duree}}}
 		<a href="[(#URL_PAGE{transmettre,[(#VAL{statistiques}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:statistiques:csv:></a>
 	</span>
 	|
@@ -61,7 +69,7 @@
 				<td class='num'>#GET{lastlast}</td>
 			</tr>
 			[(#REM) objet sélectionné ]
-			<BOUCLE_objet(DATA){source sql, #GET{req}}>
+			<BOUCLE_objet(DATA){source sql, #GET{req}}{si #GET{objet}|et{#GET{id_objet}}}>
 			[(#REM) popularité ]
 			<tr class="odd">
 				<th><:statistiques:info_popularite_5|trim{':'}|trim|ucfirst:></th>
