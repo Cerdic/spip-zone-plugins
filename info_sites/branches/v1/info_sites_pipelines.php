@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function info_sites_affiche_milieu($flux) {
+	include_spip('inc/utils');
 	$liste_objets = array(
 		'organisations',
 		'contacts',
@@ -23,7 +24,7 @@ function info_sites_affiche_milieu($flux) {
 
 	$liste_plugins = isset($GLOBALS['meta']['plugin']) ? unserialize($GLOBALS['meta']['plugin']) : array();
 
-	// rss_commits étant facultatif, on regarde s'il est actif.
+	// On regarde si le plugin rss_commits est actif.
 	if (in_array('rss_commits', $liste_plugins)) {
 		$liste_objets[] = 'commits';
 	}
@@ -36,7 +37,31 @@ function info_sites_affiche_milieu($flux) {
 	return $flux;
 }
 
-function info_sites_styliser($flux) {
+/**
+ * Insert header prive
+ *
+ * @param $flux
+ *
+ * @return string
+ */
+function info_sites_header_prive($flux) {
+	include_spip('inc/utils');
+	$css = find_in_path('lib/font-awesome/css/font-awesome.min.css');
+	$flux .= '<link rel="stylesheet" href="' . $css . '" type="text/css" />';
 
 	return $flux;
+}
+
+/**
+ * Ajouter les tâches de CRON du plugin Info Sites
+ *
+ * @param  array $taches Tableau des tâches et leur périodicité en seconde
+ *
+ * @return array         Tableau des tâches et leur périodicité en seconde
+ */
+function info_sites_taches_generales_cron($taches) {
+	$taches['maj_sites_plugins'] = 24 * 3600; // toutes les 24 heures
+	$taches['recuperer_releases'] = 24 * 3600; // toutes les 24 heures
+
+	return $taches;
 }

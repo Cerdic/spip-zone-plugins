@@ -1,0 +1,7 @@
+[(#AUTORISER{configurer,_plugins}|sinon_interdire_acces)]
+<h1><:info_sites:titre_page_controle_info_sites:></h1>
+
+[(#ENV{controle}|oui)
+[(#INCLURE{fond=prive/squelettes/inclure/controle/#ENV{controle}, env, ajax})]
+]
+[(#ENV{controle}non)<p class="explication"><:info_sites:controle_explication:></p>]

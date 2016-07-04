@@ -8,10 +8,6 @@
 				(#AUTORISER{infositescreer,contact})
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{contact_edit,new=oui}|parametre_url{associer_objet,organisation|#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton creer" rel="nofollow"><span class="fa-stack text-success"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-plus-circle fa-stack-1x fa-inverse"></i></span>
 					<:contacts:contact_creer:>
-				</a>][
-				(#AUTORISER{infositesassocier,contact})
-				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens_simples}|parametre_url{table_source,contacts}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION})]" class="list-group-item bouton editer_liens" rel="nofollow"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span>
-					<:info_sites:editer_liens_contact:>
 				</a>]
 				<a role="menuitem" tabindex="-1" href="[(#URL_PAGE{editer_liens}|parametre_url{table_source,projets}|parametre_url{objet,organisation}|parametre_url{id_objet,#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="list-group-item bouton editer_liens" rel="nofollow" title="<:info_sites:editer_liens_projet|attribut_html:>"><span class="fa-stack text-muted"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-link fa-stack-1x fa-inverse"></i></span>
 					<:info_sites:editer_liens_projet:>

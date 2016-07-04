@@ -6,7 +6,7 @@
 ]<B_liste_contacts>
 #ANCRE_PAGINATION
 
-<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
+<BOUCLE_test_annuaire (CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>
@@ -14,7 +14,7 @@
 			<:contacts:contacts_tout:>
 			[(#ENV{id_annuaire}|is_null|?{</strong>, </a>})]
 		</li>
-		<BOUCLE_filtre_annuaires(ANNUAIRES){par titre}>
+		<BOUCLE_filtre_annuaires (ANNUAIRES){par titre}>
 		<li>
 			<BOUCLE_comptage_contacts_annuaire(CONTACTS){id_annuaire}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_annuaire>
 			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,#ID_ANNUAIRE})]">})]
@@ -23,7 +23,7 @@
 		</li>
 		</BOUCLE_filtre_annuaires>
 		<li>
-			<BOUCLE_comptage_contacts_aucun(ORGANISATIONS){id_annuaire=0}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_aucun>
+			<BOUCLE_comptage_contacts_aucun (ORGANISATIONS){id_annuaire=0}/> #SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_aucun>
 			[(#ENV{id_annuaire}|=={0}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,0})]">})]
 			<:contacts:annuaire_aucun:> (#GET{nb_contacts})
 			[(#ENV{id_annuaire}|=={0}|?{</strong>, </a>})]
@@ -33,32 +33,35 @@
 </BOUCLE_test_annuaire>
 
 <div class="liste-objets contacts table-responsive">
-<table class='table table-striped table-bordered'>
-[<caption id="liste_objets_contacts" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
-	<thead>
-		<tr class='first_row'>
-			<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
-			<th class="organisation"><:contacts:label_organisation:></th>
-		</tr>
-	</thead>
-	<tbody>
-	<BOUCLE_liste_contacts (CONTACTS)
-		{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
-		{auteurs.statut ?= #ENV{statut,''}}
-		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<BOUCLE_lien_contact(contacts_liens){id_contact}>
-				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
-			</BOUCLE_lien_contact>
-				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
-			<//B_lien_contact>
-			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
-			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
-		</tr>
-	</BOUCLE_liste_contacts>
-	</tbody>
-</table>
-[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	<table class='spip liste table table-striped table-bordered'>
+	[<caption id="liste_objets_contacts[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
+		<thead>
+			<tr class='first_row'>
+				<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
+				<th class="organisation"><:contacts:label_organisation:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_liste_contacts (CONTACTS)
+			{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
+			{auteurs.statut?=#ENV{statut,''}}
+			{where?} {tri #ENV{order,nom},#GET{defaut_tri}} {pagination #ENV{nb,20} #ENV{pagination_id,'_liste_contacts'}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<BOUCLE_lien_contact(contacts_liens){id_contact}>
+					[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+				</BOUCLE_lien_contact>
+					[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
+				<//B_lien_contact>
+				<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
+				<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
+			</tr>
+		</BOUCLE_liste_contacts>
+		</tbody>
+	</table>
+	[(#REM|test_espace_prive|?{
+		[<div class="pagination">(#PAGINATION{prive})</div>],
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	})]
 </div>
 </B_liste_contacts>[
 <div class="liste-objets contacts"><strong class="caption">(#ENV*{sinon,<:contacts:aucun_contact:>})</strong></div>

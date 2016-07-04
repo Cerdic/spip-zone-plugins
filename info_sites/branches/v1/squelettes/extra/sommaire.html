@@ -26,5 +26,8 @@
 		]
 		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
 
+		[(#ID_AUTEUR|recuperer_maj_plugins_auteurs|count|>{0}|oui)
+			[(#INCLURE{fond=objets/liste/projets_sites,par=titre,id_projets_site=[(#ID_AUTEUR|recuperer_maj_plugins_auteurs)],env,ajax,titre=<:info_sites:auteur_vos_projets_sites_maj_label:>})]
+		]
 	</div>
 </BOUCLE_extra2_auteur>

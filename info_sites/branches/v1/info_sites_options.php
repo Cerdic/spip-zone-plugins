@@ -26,4 +26,12 @@ if (!isset($GLOBALS['z_blocs'])) {
 	);
 }
 
-define('_Z_AJAX_PARALLEL_LOAD', 'extra');
+if (!defined('_Z_AJAX_PARALLEL_LOAD')) {
+	define('_Z_AJAX_PARALLEL_LOAD', 'extra');
+}
+
+if (!defined('_FICHIER_MAJ_PLUGINS')) {
+	define('_FICHIER_MAJ_PLUGINS', _DIR_TMP.'maj_sites_plugins.txt');
+}
+
+define('_SELECTEUR_GENERIQUE_ACTIVER_PUBLIC', true);

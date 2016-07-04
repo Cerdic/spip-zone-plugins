@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.9.5"
+	version="1.12.2"
 	etat="test"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
@@ -31,8 +31,11 @@
 	<necessite nom="projets_sites" compatibilite="[1.7.8;]"/>
 	<necessite nom="roles_auteurs" compatibilite="[1.0.0;]"/>
 	<necessite nom="rss_commits" compatibilite="[0.6.0;]"/>
+	<necessite nom="selecteurgenerique" compatibilite="[1.0.0;]"/>
 
 	<utilise nom="info_spip" compatibilite="[0.8.0;]"/>
+
+	<menu nom="controle_info_sites" parent="menu_publication" icone="images/info_sites-16.png" action="controle_info_sites" titre="info_sites:titre_controle_info_sites" />
 
 	<lib nom="font-awesome" lien="https://github.com/FortAwesome/Font-Awesome/archive/v4.6.3.zip" />
 	<lib nom="bootstrap" lien="https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip" />
@@ -40,9 +43,11 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
 
 	<pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php"/>
+	<pipeline nom="header_prive" inclure="info_sites_pipelines.php"/>
+	<pipeline nom="taches_generales_cron" inclure="info_sites_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="info_sites_autorisations.php"/>
 
 	<chemin path="./" />
-	<chemin path="squelettes" type='public'/>
+	<chemin path="squelettes"/>
 </paquet>

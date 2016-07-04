@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+include_spip('inc/autoriser');
 
 /**
  * Fonction d'appel pour le pipeline
@@ -53,6 +54,44 @@ function autoriser_ecrire($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_creer($faire, $type, $id, $qui, $opt) {
 	return autoriser('infositescreer', $type, $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de joindre un document
+ *
+ * On ne peut joindre un document qu'a un objet qu'on a le droit d'editer
+ * mais il faut prevoir le cas d'une *creation* par un redacteur, qui correspond
+ * au hack id_objet = 0-id_auteur
+ *
+ * Il faut aussi que les documents aient ete actives sur les objets concernes
+ * ou que ce soit un article, sur lequel on peut toujours uploader des images
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_joindredocument($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/config');
+
+	// objet autorisé en upload ?
+	if ($type == 'article' or in_array(table_objet_sql($type), explode(',', lire_config('documents_objets', '')))) {
+		// sur un objet existant
+		if ($id > 0) {
+			/* On indique directement l'utilisation de l'autorisation infositesmodifier
+			 * pour aller plus vite sur le formulaire d'ajout de document.
+			 * Il faudrait voir peut-être par la suite s'il n'y a pas une autre source de lenteur.
+			 */
+			return autoriser('infositesmodifier', $type, $id, $qui, $opt);
+		} // sur un nouvel objet
+		elseif ($id < 0 and (abs($id) == $qui['id_auteur'])) {
+			return autoriser('ecrire', $type, $id, $qui, $opt);
+		}
+	}
+
+	return false;
 }
 
 // *****************************
@@ -110,6 +149,7 @@ function autoriser_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
 
 	if ($type === 'auteur') {
 		include_spip('inc/autoriser');
+
 		return autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt);
 	}
 

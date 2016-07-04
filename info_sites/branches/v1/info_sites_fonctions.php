@@ -16,6 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/filtres_ecrire');
 
 function lister_tables_liens() {
+	include_spip('base/objets');
 	$tables_auxilaires = lister_tables_auxiliaires();
 	$tables_auxilaires_objets = array();
 
@@ -143,29 +144,56 @@ function sites_webservices() {
 function sites_projets_maj_plugins() {
 	include_spip('base/abstract_sql');
 	include_spip('inc/utils');
+	include_spip('projets_sites_fonctions');
 	$sites_projets = sites_webservices();
 	$liste_plugins = array();
-	$sites_projets_maj = array();
 
 	if (is_array($sites_projets)) {
 		$liste_sites_projets_plugins = sql_allfetsel('id_projets_site, logiciel_nom, logiciel_version, logiciel_plugins', 'spip_projets_sites', 'id_projets_site IN (' . implode(',', $sites_projets) . ") AND logiciel_plugins!=''");
 		if (is_array($liste_sites_projets_plugins) and count($liste_sites_projets_plugins) > 0) {
 			foreach ($liste_sites_projets_plugins as $key => $site_projet) {
-				if ($key == 0) {
-					$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins'], 'plugins');
-					foreach ($liste_plugins_tmp as $key => $plugin) {
-						$logiciel = strtolower($site_projet['logiciel_nom']);
-						$info_plugin = charger_fonction('plugins_' . $logiciel, 'inc');
-						if ($info_plugin !== false) {
-							$a_mettre_jour = $info_plugin($plugin, $site_projet['logiciel_version']);
-
+				$liste_plugins[$site_projet['id_projets_site']] = array();
+				$liste_plugins_tmp = formater_tableau($site_projet['logiciel_plugins'], 'plugins');
+				foreach ($liste_plugins_tmp as $key => $plugin) {
+					$logiciel = strtolower($site_projet['logiciel_nom']);
+					$info_plugin = charger_fonction('plugins_' . $logiciel, 'inc');
+					/**
+					 * Si la fonction n'existe pas pour ce logiciel, on s'arrête là.
+					 */
+					if ($info_plugin !== false) {
+						$a_mettre_jour = $info_plugin($plugin, $site_projet['logiciel_version']);
+						/**
+						 * Si la fonction renvoie false, c'est que le plugin est à jour,
+						 * pas la peine d'aller plus loin
+						 */
+						if ($a_mettre_jour === false) {
+							unset($liste_plugins_tmp[$key]);
+						} else {
+							/**
+							 * Le plugin est à mettre à jour.
+							 * On reprend les infos issues de la fonction info_plugin
+							 * qui contient le numéro de version de la maj
+							 */
+							$liste_plugins_tmp[$key] = $a_mettre_jour;
 						}
 					}
-					$liste_plugins = array_merge($liste_plugins, $liste_plugins_tmp);
+				}
+				if (is_array($liste_plugins_tmp) or count($liste_plugins_tmp) > 0) {
+					/**
+					 * Les plugins de ce site sont à mettre à jour
+					 */
+					$liste_plugins_tmp = array_values($liste_plugins_tmp);
+					$liste_plugins[$site_projet['id_projets_site']] = $liste_plugins_tmp;
+				} else {
+					/**
+					 * Les plugins de ce site sont tous à jour
+					 */
+					unset($liste_plugins[$site_projet['id_projets_site']]);
 				}
 			}
 		}
 	}
+	echo _DIR_TMP;
 
 	return $liste_plugins;
 }
@@ -177,6 +205,7 @@ function sites_projets_maj_plugins() {
  */
 function info_sites_lister_logiciels_sites() {
 	include_spip('base/objets');
+	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel("DISTINCT(logiciel_nom)", 'spip_projets_sites');
 
@@ -191,7 +220,7 @@ function info_sites_lister_logiciels_sites() {
 }
 
 function info_sites_lister_logiciels_projet($id_projet, $class = '') {
-	include_spip('base/bastract_sql');
+	include_spip('base/abstract_sql');
 	$logiciels_nom = array();
 	$logiciels_base = sql_allfetsel('logiciel_nom', 'spip_projets_sites', "id_projets_site IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE id_objet=$id_projet AND objet='projet')");
 	if (is_array($logiciels_base) and count($logiciels_base) > 0) {
@@ -210,7 +239,7 @@ function info_sites_lister_logiciels_projet($id_projet, $class = '') {
 
 function info_sites_nom_machine($subject) {
 	$nom_tmp = trim($subject); // On enlève les espaces indésirables
-	$nom_tmp = translitteration_complexe($nom_tmp); // On enlève les accents et cie
+	$nom_tmp = translitteration($nom_tmp); // On enlève les accents et cie
 	$nom_tmp = preg_replace("/(\/|[[:space:]])/", '_', $nom_tmp); // On enlève les espaces et les slashs
 	$nom_tmp = preg_replace("/(_+)/", '_', $nom_tmp); // pas de double underscores
 	$nom_tmp = strtolower($nom_tmp); // On met en minuscules
@@ -261,8 +290,11 @@ function info_sites_determine_source_lien_objet($a, $b, $c) {
 }
 
 function info_sites_lister_content_html() {
+	include_spip('inc/utils');
 	$resultats = find_all_in_path('content/', "\.html$");
-	$resultats = array_keys($resultats);
+	if (is_array($resultats) and count($resultats) > 0) {
+		$resultats = array_keys($resultats);
+	}
 
 	return $resultats;
 }
@@ -298,7 +330,16 @@ function info_sites_lister_roles_auteurs_tableaux() {
 	return $roles_tableaux;
 }
 
+/**
+ * Réupérer les rôles de l'auteur sur les projets auxquels il est associé.
+ *
+ * @param string $id_auteur
+ *
+ * @return array
+ */
 function info_sites_lister_projets_auteurs($id_auteur = '') {
+	include_spip('inc/session');
+	include_spip('base/abstract_sql');
 	if (is_null($id_auteur) or empty($id_auteur)) {
 		$id_auteur = session_get('id_auteur');
 	}
@@ -315,7 +356,39 @@ function info_sites_lister_projets_auteurs($id_auteur = '') {
 	return $projets_id;
 }
 
+/**
+ * Récupérer la liste des sites des projets auxquels l'auteur est associé
+ *
+ * @param string $id_auteur
+ *
+ * @return array
+ */
+function info_sites_lister_projets_sites_auteurs($id_auteur = '') {
+	include_spip('base/abstract_sql');
+	$liste_projets = info_sites_lister_projets_auteurs($id_auteur);
+	$projets_sites_id = array();
+	if (is_array($liste_projets) and count($liste_projets)) {
+		$projets_sites_base = sql_allfetsel('id_projets_site', 'spip_projets_sites_liens', "objet='projet' AND id_objet IN (" . implode(',', $liste_projets) . ")");
+		if (is_array($projets_sites_base) and count($projets_sites_base) > 0) {
+			foreach ($projets_sites_base as $projets_site) {
+				$projets_sites_id[] = $projets_site['id_projets_site'];
+			}
+		}
+		$projets_sites_id = info_sites_nettoyer_tableau($projets_sites_id);
+	}
+
+	return $projets_sites_id;
+}
+
+/**
+ * Récupérer les auteurs par rôles sur les projets.
+ *
+ * @param $id_projet
+ *
+ * @return array|bool
+ */
 function info_sites_lister_projets_auteurs_roles($id_projet) {
+	include_spip('base/abstract_sql');
 	if (is_null($id_projet) or empty($id_projet)) {
 		return false;
 	}
@@ -328,7 +401,7 @@ function info_sites_lister_projets_auteurs_roles($id_projet) {
 		}
 	}
 
-	/*
+	/**
 	 * On ne passe pas par le nettoyeur pour ne pas réindexer le tableau car ici on a besoin des index rôle.
 	 * $projets_roles = info_sites_nettoyer_tableau($projets_roles);
 	 */
@@ -336,6 +409,13 @@ function info_sites_lister_projets_auteurs_roles($id_projet) {
 	return $projets_roles;
 }
 
+/**
+ * Avoir un tableau propre et bien indexé.
+ *
+ * @param array $tableau
+ *
+ * @return array
+ */
 function info_sites_nettoyer_tableau($tableau = array()) {
 	if (count($tableau) > 0) {
 		$tableau = array_unique($tableau); // Pas de doublons
@@ -344,4 +424,71 @@ function info_sites_nettoyer_tableau($tableau = array()) {
 	}
 
 	return $tableau;
+}
+
+/**
+ * Récupérer la liste des plugins à mettre à jour pour chaque site.
+ *
+ * @return array    liste des plugins ou un tableau vide si le fichier n'existe pas.
+ */
+function recuperer_maj_plugins() {
+	$fichier_maj_plugins = _FICHIER_MAJ_PLUGINS;
+	if (is_file($fichier_maj_plugins)) {
+		$liste_maj_plugins = file_get_contents($fichier_maj_plugins);
+		$liste_maj_plugins = unserialize($liste_maj_plugins);
+
+		return $liste_maj_plugins;
+	}
+
+	return array();
+}
+
+/**
+ * Récupérer la liste des plugins à mettre à jour pour chaque site.
+ *
+ * @return array    liste des plugins ou un tableau vide si le fichier n'existe pas.
+ */
+function recuperer_maj_plugins_auteurs($id_auteur = '') {
+	// Récupération de tous les sites à mettre à jour
+	$maj_plugins = recuperer_maj_plugins();
+	// On ne garde que les index
+	if (is_array($maj_plugins) and count($maj_plugins) > 0) {
+		$maj_plugins = array_keys($maj_plugins);
+	}
+	// Lister les sites des projets de l'auteur
+	$projets_sites_auteurs = info_sites_lister_projets_sites_auteurs($id_auteur);
+	// Ne garder que ceux qui sont à mettre à jour
+	$maj_plugins_auteurs = array_intersect($projets_sites_auteurs, $maj_plugins);
+
+	return $maj_plugins_auteurs;
+}
+
+/**
+ * Savoir si un type-page (cf. `needle`) est présent dans le menu d'info sites.
+ *
+ * @param $needle
+ *        Nom de l'élément à retrouver dans le menu d'info sites.
+ *
+ * @return bool
+ *         true si présent
+ *         false si absent
+ */
+function in_ismenu($needle) {
+	if (is_null($needle)) {
+		return false;
+	}
+
+	include_spip('inc/config');
+	$info_sites_menu = lire_config('info_sites_menu');
+	if (is_array($info_sites_menu) and count($info_sites_menu) > 0) {
+		$element_menus = array_keys($info_sites_menu);
+		$resultats = in_array($needle, $element_menus);
+		if ($resultats) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	return false;
 }

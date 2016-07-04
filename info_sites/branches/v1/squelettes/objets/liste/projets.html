@@ -10,10 +10,8 @@
 <B_liste_projets>
 	#ANCRE_PAGINATION
 	<div class="liste-objets projets table-responsive">
-		<table class='table table-striped table-bordered'>
-			[
-			<caption id="liste_objets_projets" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet:info_1_projet,projet:info_nb_projets}})</strong></caption>
-			]
+		<table class='spip liste table table-striped table-bordered'>
+			[<caption id="liste_objets_projets[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet:info_1_projet,projet:info_nb_projets}})</strong></caption>]
 			<thead>
 			<tr class='first_row'>
 				<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
@@ -24,7 +22,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_liste_projets (PROJETS) {id_projet_parent?} {id_projets_cadre?} {id_organisation ?} {contacts_liens.id_contact ?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,nom},#GET{defaut_tri}} {pagination #ENV{nb,10}}>
+			<BOUCLE_liste_projets (PROJETS) {id_projet_parent?} {id_projets_cadre?} {id_organisation ?} {contacts_liens.id_contact ?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,nom},#GET{defaut_tri}} {pagination #ENV{nb,10} #ENV{pagination_id,'_liste_projets'}}>
 			<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 				<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
 				<td class='statut'>[(#CHEMIN{prive/themes/spip/images/[(#VAL{projet}|objet_info{statut_images}|table_valeur{#STATUT**})]}|balise_img{[(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</td>
@@ -40,7 +38,10 @@
 			</BOUCLE_liste_projets>
 			</tbody>
 		</table>
+		[(#REM|test_espace_prive|?{
+		[<div class="pagination">(#PAGINATION{prive})</div>],
 		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		})]
 	</div>
 </B_liste_projets>[
 <div class="liste-objets projets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>

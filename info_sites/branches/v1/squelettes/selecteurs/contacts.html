@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}[(#REM)
+Menu de selection d'un contact a partir d'une valeur passee en parametre
+]\[
+<BOUCLE_s (CONTACTS) {nom LIKE %(#ENV*{q})%} {tout} {','}>
+\{"label":"[(#NOM)][, (#PRENOM)]", "value":"[(#NOM)][, (#PRENOM)]", "url":"[(#URL_CONTACT)]"}
+</BOUCLE_s>\]

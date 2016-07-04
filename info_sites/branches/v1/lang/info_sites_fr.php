@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_identifie_informations' => 'Vos informations',
 	'auteur_identifie_profil' => 'Votre profil',
 	'auteur_organisations_label' => 'Organisations de l’utilisateur',
-	'auteur_projets_attribuer' => 'Attribuer des projets à cet auteur',
+	'auteur_projets_attribuer' => 'Attribuer des projets à cet utilisateur',
 	'auteur_projets_cadres_label' => 'Cadres de projets de l’utilisateur',
 	'auteur_projets_label' => 'Projets de l’utilisateur',
 	'auteur_projets_sites_label' => 'Sites de l’utilisateur',
@@ -27,15 +27,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur_vos_projets_cadres_label' => 'Vos cadres de projets',
 	'auteur_vos_projets_label' => 'Vos projets',
 	'auteur_vos_projets_sites_label' => 'Vos sites',
+	'auteur_vos_projets_sites_maj_label' => 'Vos sites à mettre à jour',
 	'autres_label' => 'Autres',
 
 	// B
 	'btn_diagnostic' => 'Diagnostic',
-	'btn_diagnostic_maj' => 'Mettre à jour les plugins',
 	'btn_diagnostic_iso' => 'Diagnostic ISO',
+	'btn_diagnostic_maj' => 'Mettre à jour les plugins',
 	'btn_label_actions' => 'Actions',
-	'btn_webservice_consultation' => 'Consulter le webservice',
 	'btn_telecharger' => 'Télécharger',
+	'btn_webservice_consultation' => 'Consulter le webservice',
 
 	// C
 	'cfg_exemple' => 'Exemple',
@@ -43,9 +44,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'chef_projets_label' => 'Chef de projets',
 	'commercial_label' => 'Commercial',
+	'confirmer_cloner_projets_site' => 'Êtes-vous sûr de vouloir cloner ce site ?',
+	'controle_auteurs_menu' => 'Les utilisateurs',
+	'controle_auteurs_titre_page' => 'Les utilisateurs',
+	'controle_auteurs_projets_orphelins' => 'Utilisateurs sans projets',
+	'controle_auteurs_projets_orphelins_explication' => 'Les utilisateurs listés ci-dessous n’ont pas encore été rattaché à un projet. Merci d’y remédier le cas échéant.',
 	'controle_contacts_lies_aux_projets' => 'Est-ce que les contacts sont liés aux projets&nbsp;?',
+	'controle_contacts_menu' => 'Les contacts',
 	'controle_contacts_orphelins' => 'Contacts sans organisation',
+	'controle_contacts_orphelins_organisations' => 'Contacts sans organisations',
+	'controle_contacts_orphelins_projets' => 'Contacts sans projets',
+	'controle_contacts_titre_page' => 'Quelques points de contrôle sur les contacts',
 	'controle_coordonnees_liees_contacts' => 'Est-ce que les coordonnées sont activées pour les contacts&nbsp;?',
+	'controle_explication' => 'Veuillez sélectionner un point de contrôle dans le menu.',
 	'controle_extension_curl_actif' => 'Est-ce que l’extension cURL de PHP est activée&nbsp;?',
 	'controle_info_sites_menu_auteurs' => 'Est-ce que l’entrée <strong>"Utilisateurs"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_commits' => 'Est-ce que l’entrée <strong>"Commits"</strong> est présente dans le menu de navigation&nbsp;?',
@@ -55,9 +66,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controle_info_sites_menu_projets_cadres' => 'Est-ce que l’entrée <strong>"Cadres de projet"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_projets_sites' => 'Est-ce que l’entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
 	'controle_info_sites_menu_statistiques' => 'Est-ce que l’entrée <strong>"Statistiques"</strong> est présente dans le menu de navigation&nbsp;?',
+	'controle_ok' => 'Point de contrôle réussi',
+	'controle_organisations_menu' => 'Les organisations',
+	'controle_organisations_orphelins_auteurs' => 'Organisations sans utilisateurs',
+	'controle_organisations_orphelins_contacts' => 'Organisations sans contacts',
+	'controle_organisations_orphelins_projets' => 'Organisations sans projets',
+	'controle_organisations_titre_page' => 'Quelques points de contrôle sur les organisations',
+	'controle_projets_auteurs_orphelins' => 'Projets sans utilisateurs',
+	'controle_projets_auteurs_orphelins_explication' => 'Les projets qui seraient listés ci-dessous sont sans utilisateurs associés.',
+	'controle_projets_date_debut_vide' => 'Date de démarrage non-saisie',
+	'controle_projets_date_livraison_prevue_vide' => 'Date de livraison prévue, non-saisie',
+	'controle_projets_date_livraison_vide' => 'Date de livraison effective, non-saisie',
 	'controle_projets_lies_organisations' => 'Est-ce que les projets sont liés aux organisations&nbsp;?',
+	'controle_projets_menu' => 'Les projets',
+	'controle_projets_organisations_orphelins' => 'Projets sans organisations',
+	'controle_projets_organisations_orphelins_explication' => 'Les projets listés ci-dessous ne sont liés à aucune organisation.',
 	'controle_projets_orphelins' => 'Projets sans organisation',
+	'controle_projets_orphelins_sites' => 'Projets sans sites liés',
+	'controle_projets_sites_logiciel_nom_vide' => 'Nom du logiciel non-renseigné',
+	'controle_projets_sites_logiciel_version_vide' => 'Version du logiciel non-renseigné',
+	'controle_projets_sites_menu' => 'Les sites de projets',
 	'controle_projets_sites_orphelins' => 'Sites sans projet parent',
+	'controle_projets_sites_titre_page' => 'Quelques points de contrôle sur les sites de projets',
+	'controle_projets_sites_uniqid_vide' => 'Unique ID non-renseigné',
+	'controle_projets_sites_webservice_vide' => 'URL de webservice non-renseigné',
+	'controle_projets_titre_page' => 'Quelques points de contrôle sur les projets',
+	'controle_projets_url_site_vide' => 'Url du projet non-renseigné',
+	'controle_projets_versioning_path_vide' => 'Chemin du dépôt non-renseigné',
+	'controle_projets_versioning_rss_vide' => 'RSS des commits du dépôt non-renseigné',
+	'controle_projets_versioning_trac_vide' => 'Trac du dépôt non-renseigné',
+	'controle_projets_versioning_type_vide' => 'Type de versioning non-renseigné',
+	'controle_roles_auteurs_projets_explication' => 'Vérifier que tous les utilisateurs associés à un projet ont bien un rôle défini. Les utilisateurs qui seraient listés dans le tableau ci-dessous n’ont pas de rôle défini sur le projet auquel ils sont liés. Il faudra y remédier le cas échéant.',
+	'controle_roles_auteurs_projets_ok' => 'Tous les utilisateurs ont au moins un rôle défini sur les projets auxquels ils sont associés.',
+	'controle_roles_auteurs_projets_orphelins' => 'Utilisateurs sans rôle sur leur projet',
 	'creation_rapide_fiche' => 'Fiche condensée',
 
 	// D
@@ -66,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dir_projets_label' => 'Directeur de projets',
 
 	// E
-	'editer_liens_auteur' => 'Joindre un auteur',
+	'editer_liens_auteur' => 'Joindre un utilisateur',
 	'editer_liens_contact' => 'Joindre un contact',
 	'editer_liens_organisation' => 'Joindre une organisation',
 	'editer_liens_projet' => 'Joindre un projet',
@@ -77,7 +118,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'filtres_label' => 'Filtres',
 
 	// I
+	'icone_cloner_projets_site' => 'Cloner ce site',
 	'icone_creer_fiche_siste' => 'Créer une fiche de site',
+	'icone_modifier_auteur' => 'Modifier cet utilisateur',
 	'icone_modifier_contact' => 'Modifier ce contact',
 	'icone_modifier_organisation' => 'Modifier cette organisation',
 	'icone_modifier_projet' => 'Modifier ce projet',
@@ -86,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_auteur' => 'Un utilisateur',
 	'info_1_contact' => 'Un contact',
 	'info_1_organisation' => 'Une organisation',
+	'info_1_plugin_maj' => 'Un plugin à mettre à jour',
 	'info_1_projet' => 'Un projet',
 	'info_1_projets_site' => 'Un site',
 	'info_auteurs' => 'Les utilisateurs',
@@ -93,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_auteurs' => '@nb@ utilisateurs',
 	'info_nb_contacts' => '@nb@ contacts',
 	'info_nb_organisations' => '@nb@ organisations',
+	'info_nb_plugin_maj' => '@nb@ plugins à mettre à jour',
 	'info_nb_projets' => '@nb@ projets',
 	'info_nb_projets_sites' => '@nb@ sites',
 	'info_nombre_contacts' => 'Contacts liés',
@@ -129,14 +174,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mes_projets_label' => 'Mes projets',
 
 	// N
+	'nav_rapide_label' => 'Navigation rapide',
 	'non' => 'Non',
 
 	// O
 	'oui' => 'Oui',
 
 	// P
-	'page_diagnostic_iso' => 'Diagnostic ISO',
 	'page_diagnostic' => 'Diagnostic',
+	'page_diagnostic_iso' => 'Diagnostic ISO',
 	'page_diagnostic_maj' => 'Mise à jour des plugins',
 
 	// R
@@ -149,10 +195,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'techno_label' => 'Technologie',
+	'titre_controle_info_sites' => 'Contrôler Info Sites',
 	'titre_informations_annexes' => 'Informations annexes',
 	'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
 	'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
 	'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
+	'titre_page_controle_info_sites' => 'Contrôler le contenu d’Info Sites',
 	'titre_page_lister_projets_sites' => 'Lister les sites de projets',
 
 	// V

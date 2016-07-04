@@ -1,0 +1,22 @@
+<B_maj_plugins>
+	<div class="panel-group" id="maj_plugins">
+	<BOUCLE_maj_plugins (DATA) {source table, #REM|recuperer_maj_plugins}>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#maj_plugins" href="#maj_sites_plugins_#CLE">[(#INFO_TITRE{projets_site,#CLE})]</a>
+				</h4>[ ((#VAL{projets_site:type_site_}|concat{#INFO_TYPE_SITE{projets_site,#CLE},'_abbr'}|_T))] [(#VALEUR|count|singulier_ou_pluriel{info_sites:info_1_plugin_maj,info_sites:info_nb_plugin_maj})]
+			</div>
+			<div id="maj_sites_plugins_#CLE" class="panel-collapse collapse">
+				<div class="panel-body">
+				<B_plugins><ul>
+				<BOUCLE_plugins (DATA) {source tableau, #VALEUR}>
+					<li><strong>#VALEUR{titre}</strong> [(#VALEUR{version})] -> [(#VALEUR{maj})]</li>
+				</BOUCLE_plugins>
+				</ul></B_plugins>
+				</div>
+			</div>
+		</div>
+	</BOUCLE_maj_plugins>
+	</div>
+</B_maj_plugins>

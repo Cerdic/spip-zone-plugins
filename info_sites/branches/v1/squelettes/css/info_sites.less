@@ -217,12 +217,18 @@ h1.titre {
 		.item {
 			overflow: hidden;
 			display: block;
+			padding-top: 1em;
 			.actions, .mode {
 				margin-top: 0;
 				form, .editbox {
 					display: inline-block;
 					margin-right: 0.5em;
 					margin-top: 0;
+				}
+			}
+			.tourner {
+				form {
+					float: right;
 				}
 			}
 		}
@@ -327,10 +333,26 @@ table {
 	}
 }
 
+.list-group-item {
+	&.active {
+		background-image: none;
+		background-color: @main-color;
+		border-color: @main-color;
+		color: contrast(@main-color) !important;
+		text-shadow: none;
+		&:focus, &:hover {
+			background-image: none;
+			background-color: darken(@main-color, 5%);
+		}
+	}
+}
+
 .liste-objets {
 	margin-top: 1em;
 	border-top: 1px solid @gray-third;
-
+	&.caption-wrap {
+		margin-bottom: 3.5em;
+	}
 	&.projets {
 		.table {
 			tr {
@@ -351,6 +373,25 @@ table {
 	}
 }
 
+.page_controle_info_sites {
+	.liste-objets, .liste-objets.projets {
+		.table {
+			tr {
+				th, td {
+					&.picto, &.statut {
+						width: 20px;
+					}
+				}
+			}
+		}
+	}
+}
+.puce_objet_popup {
+	background-color: contrast(@main-color);
+	a {
+		padding: 0 2px;
+	}
+}
 .liste {
 	&.documents_joints {
 		ul {
@@ -998,6 +1039,14 @@ input[type="radio"], input[type="checkbox"] {
 				-webkit-box-shadow: @box-shadow;
 				-moz-box-shadow: @box-shadow;
 				box-shadow: @box-shadow;
+				&.formulaire_editer_logo {
+					h3.titrem {
+						display: block;
+						visibility: visible;
+						font-size: 18px;
+						margin-top: 0;
+					}
+				}
 			}
 			ul, .editer-groupe {
 				li, .editer {
@@ -1015,6 +1064,9 @@ input[type="radio"], input[type="checkbox"] {
 							background-repeat: no-repeat;
 							background-position: 4px center;
 						}
+					}
+					input {
+						width: 100%;
 					}
 					&.erreur {
 						.erreur_message {
@@ -1133,8 +1185,10 @@ input[type="radio"], input[type="checkbox"] {
 				.erreur_message {
 					font-weight: bold;
 					color: @bg-danger;
-					text-align: right;
-					display: none;
+					display: block;
+					float: right;
+					width: 76%;
+					text-align: left;
 				}
 				input, select {
 					border: 1px solid @bg-danger;
@@ -1259,6 +1313,20 @@ input[type="radio"], input[type="checkbox"] {
 
 	p.boutons {
 		float: right;
+	}
+	&.formulaire_forum {
+		ul, .editer-groupe {
+			li, .editer {
+				&.erreur {
+					.erreur_message {
+						display: block;
+						float: right;
+						width: 76%;
+						text-align: left;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -1402,7 +1470,7 @@ input[type="radio"], input[type="checkbox"] {
 		.liste-objets {
 			.liste {
 				.picto {
-					width: 30px;
+					width: 50px;
 					&:before {
 						display: block;
 						color: @black;
@@ -1415,8 +1483,11 @@ input[type="radio"], input[type="checkbox"] {
 						text-align: center;
 					}
 				}
+				.titre {
+					width: 150px;
+				}
 				.action {
-					width: 30px;
+					width: 50px;
 					> a {
 						&:before {
 							display: block;
@@ -1506,6 +1577,28 @@ input[type="radio"], input[type="checkbox"] {
 	}
 }
 
+// -------
+// Formulaire d'édition d'un document
+// -------
+.formulaire_editer_document, .formulaire_illustrer_document {
+	ul, .editer-groupe {
+		li, .editer {
+			padding-left: 20%;
+			label {
+				margin-left: -23%;
+			}
+			input, textarea {
+				width: 100%;
+			}
+			.tourner {
+				width: 12px;
+			}
+		}
+	}
+
+}
+
+
 [class*="page_diagnostic"], .page_diagnostic_iso, .page_webservice {
 	.breadcrumb {
 		display: block;
@@ -1533,6 +1626,28 @@ input[type="radio"], input[type="checkbox"] {
 	display: inline-block;
 	padding: 2px;
 	margin-bottom: 5px;
+}
+
+.afficher_complement_objet, .afficher_fiche_objet {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+// --------
+// Autocomplete jQuery UI
+// --------
+.ui-widget-content {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	.ui-menu-item {
+		padding: 0.5em;
+	}
+	.ui-state-focus {
+		border: 0 solid transparent;
+	}
 }
 
 // --------

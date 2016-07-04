@@ -1,0 +1,21 @@
+<h2><:info_sites:controle_projets_sites_titre_page:></h2>
+
+[(#SET{fields,#LISTE{logiciel_nom,logiciel_version,webservice,uniqid}})]
+<BOUCLE_fields (DATA) {source tableau, #GET{fields}}>
+	[(#SET{titre,<h3 class="legend" id="fields_[(#VALEUR)]_bloc">[(#VAL{info_sites:controle_projets_sites_}|concat{#VALEUR,'_vide'}|_T)]</h3>})]
+	#BOITE_OUVRIR{#GET{titre}, 'info'}
+	<div class="fields_#VALEUR">
+		[(#SET{where,[(#VALEUR)='']})]
+		<INCLURE{fond=objets/liste/projets_sites,where=#GET{where},sinon=<:info_sites:controle_ok:>,pagination_id=_#VALEUR,env}/>
+		<div class="nettoyeur"></div>
+	</div>
+	#BOITE_FERMER
+</BOUCLE_fields>
+
+[(#BOITE_OUVRIR{<h3 class="legend" id="projets_sites_orphelins_bloc"><:info_sites:controle_projets_sites_orphelins:></h3>, 'info'})]
+<div class="projets_sites_orphelins">
+	[(#SET{where,"id_projets_site NOT IN (SELECT id_projets_site FROM spip_projets_sites_liens WHERE objet='projet')"})]
+	<INCLURE{fond=objets/liste/projets_sites,where=#GET{where},pagination,sinon=<:info_sites:controle_ok:>,env}/>
+	<div class="nettoyeur"></div>
+</div>
+#BOITE_FERMER

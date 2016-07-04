@@ -10,8 +10,8 @@ points,-1
 	#SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
 	#ANCRE_PAGINATION
 	<div class="liste-objets auteurs">
-		<table class='table table-striped table-bordered spip liste'>
-			[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_auteur,info_sites:info_nb_auteurs}})</strong></caption>]
+		<table class='spip liste table table-striped table-bordered'>
+			[<caption id="liste_objets_auteurs[_(#REM|uniqid)]" class="legend"><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_auteur,info_sites:info_nb_auteurs}})</strong></caption>]
 			<thead>
 			<tr class='first_row'>
 				<th class='statut' scope='col'>[(#TRI{statut,<i class="fa fa-user"></i>,ajax})]</th>
@@ -24,7 +24,7 @@ points,-1
 			<BOUCLE_liste_aut (AUTEURS) {tout} {id_auteur?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,multi nom},#GET{defaut_tri}} {pagination #ENV{nb,10} aut}>
 			[(#LANG|changer_typo)]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|et{#ENV{i}}|?{on}|unique)]">
-				<td class='statut'><span class="#GET{statut_color/#STATUT}" title="[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#CLE)]})]})]"><i class="fa fa-lg [(#WEBMESTRE|=={oui}|?{fa-user-md,#GET{statut_fa/#STATUT}})]"></i> </span> </td>
+				<td class='statut'><span class="#GET{statut_color/#STATUT}" title="[(#WEBMESTRE|=={oui}|?{<:statut_webmestre:>,[(#VAL{auteurs}|statut_titre{[(#STATUT)]})]})]"><i class="fa fa-lg [(#WEBMESTRE|=={oui}|?{fa-user-md,#GET{statut_fa/#STATUT}})]"></i> </span> </td>
 				<td class="messagerie">[<a href="(#URL_AUTEUR)#formulaire_ecrire_auteur_[(#ID_AUTEUR)]">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
 				<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|trim|sinon{#BIO*|couper{80}|trim}|sinon{<:info_numero_abbreviation:>#ID_AUTEUR})]</a></td>
 				<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL)]</a>]</td>
@@ -33,7 +33,10 @@ points,-1
 			[(#REM|changer_typo)]
 			</tbody>
 		</table>
-		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		[(#REM|test_espace_prive|?{
+			[<div class="pagination">(#PAGINATION{prive})</div>],
+			[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+		})]
 	</div>
 	<div class="legendes">
 		<B_statut>
