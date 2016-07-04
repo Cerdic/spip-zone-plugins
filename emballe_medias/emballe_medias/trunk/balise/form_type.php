@@ -10,8 +10,10 @@
  *
  **/
 
- if (!defined("_ECRIRE_INC_VERSION")) return;
- 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 /**
  * La balise #FORM_TYPE
  * Elle récupère dans l'environnement le 'em_type'
@@ -21,11 +23,8 @@
  */
 function balise_FORM_TYPE_dist($p) {
 	$v = '@$Pile[0][\'em_type\']';
-	$test = interprete_argument_balise(1,$p);
-	$p->code = "emballe_medias_generer_extensions(".sinon($test,$v).")";
+	$test = interprete_argument_balise(1, $p);
+	$p->code = 'emballe_medias_generer_extensions('.sinon($test, $v).')';
 	//$p->interdire_scripts = false;
 	return $p;
 }
-
-
-?>

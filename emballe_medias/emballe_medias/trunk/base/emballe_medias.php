@@ -11,7 +11,9 @@
  * Ajouts dans les tables
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Insertion dans le pipeline declarer_tables_principales
@@ -20,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param array $tables_principales Tableau de description des tables
  * @return array $tables_principales Tableau de description des tables complété
  */
-function emballe_medias_declarer_tables_principales($tables_principales){
+function emballe_medias_declarer_tables_principales($tables_principales) {
 	// Extension de la table articles
 
 	$tables_principales['spip_articles']['field']['em_type'] = "VARCHAR(255) DEFAULT 'normal' NOT NULL";
@@ -31,13 +33,12 @@ function emballe_medias_declarer_tables_principales($tables_principales){
 /**
  * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
  * On ajoute notre champs dans les champs editables de la table spip_articles
- * 
+ *
  * @param array $tables : le tableau des tables des objets déclarés
- * @return array $tables : le tableau des tables complété 
+ * @return array $tables : le tableau des tables complété
  */
-function emballe_medias_declarer_tables_objets_sql($tables){
+function emballe_medias_declarer_tables_objets_sql($tables) {
 	$tables['spip_articles']['champs_editables'][] = 'em_type';
-	
+
 	return $tables;
 }
-?>
