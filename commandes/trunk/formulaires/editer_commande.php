@@ -36,7 +36,7 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 		$reference_defaut = $fonction_reference($id_auteur_defaut);
 	}
 	
-	return array(
+	$saisies = array(
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -82,6 +82,23 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 			)
 		),
 	);
+	
+	if (
+		$id_commande = intval($id_commande)
+		and $id_commande > 0
+		and $echeances_type = sql_getfetsel('echeances_type', 'spip_commandes', 'id_commande = '.$id_commande)
+	) {
+		$saisies[] = array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'bank_uid',
+				'label' => _T('commandes:label_bank_uid'),
+				'explication' => _T('commandes:explication_bank_uid'),
+			),
+		);
+	}
+	
+	return $saisies;
 }
 
 /**

@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_reference_inexistante' => 'Il n’existe pas de commande avec cette référence.',
 	'etat' => 'État',
 	'explication_accueil_encours' => 'Signaler les commandes actives sur la page d’accueil ?',
+	'explication_bank_uid' => 'Identifiant unique de l’abonnement chez le prestataire bancaire.', 
 	'explication_choix_statuts_actifs' => 'Statut(s) correspondant(s) aux commandes actives',
 	'explication_statuts_actifs' => 'Selon leur statut, certaines commandes peuvent requérir votre attention. Il s’agit des commandes « actives », nécessitant une action de votre part. Vous pouvez les faire apparaître dans la liste des éléments en attente de validation sur la page d’accueil.',
 	'explications_notifications_statuts' => 'État(s) déclenchant l’envoi d’une notification :',
@@ -125,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_actions' => 'Actions',
+	'label_bank_uid' => 'UID de l’abonnement bancaire',
 	'label_commande_dates' => 'Dates',
 	'label_dont_taxe' => 'dont taxe',
 	'label_filtre_clients' => 'Clients',
