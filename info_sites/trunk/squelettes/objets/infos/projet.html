@@ -2,10 +2,10 @@
 	<div class="block">
 		<div class="list-group">
 			<B_autresobjets>
-				<BOUCLE_autresobjets(projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
+				<BOUCLE_autresobjets (projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
 				<div class="list-group-item">
 					<div class="list-group-item-heading"><strong>[(#OBJET|objet_info{texte_objet}|_T)]</strong></div>
-					<div class="list-group-item-text" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
+					<div class="list-group-item-text" dir="#LANG_DIR"><BOUCLE_objets_liens (projets_liens) {id_projet} {objet} {', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_objets_liens></div>
 				</div>
 				</BOUCLE_autresobjets>
 			</B_autresobjets>

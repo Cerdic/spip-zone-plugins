@@ -4,7 +4,7 @@
 	#ANCRE_PAGINATION
 	<h2 class="h2"><:rubriques:> (#GRAND_TOTAL)</h2>
 	<ul class="liste-items">
-		<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+		<BOUCLE_rubriques(RUBRIQUES) {recherche} {!par points} {pagination}>
 		<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
 		</BOUCLE_rubriques>
 	</ul>

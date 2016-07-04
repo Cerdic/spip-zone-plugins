@@ -1,0 +1,13 @@
+[(#REM) Auteurs trouves ]
+<B_auteurs>
+	<div class="liste resultats auteurs">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:icone_auteurs:> (#GRAND_TOTAL)</h2>
+		<ul class="liste-items">
+			<BOUCLE_auteurs(AUTEURS) {tous} {recherche} {!par points} {pagination}>
+			<li class="item"><a href="#URL_AUTEUR">#NOM</a></li>
+			</BOUCLE_auteurs>
+		</ul>
+		[<div class="block_pagination">(#PAGINATION{page_precedent_suivant})</div>]
+	</div>
+</B_auteurs>

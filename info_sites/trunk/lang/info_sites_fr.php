@@ -184,6 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_diagnostic' => 'Diagnostic',
 	'page_diagnostic_iso' => 'Diagnostic ISO',
 	'page_diagnostic_maj' => 'Mise à jour des plugins',
+	'parlot_label' => 'Par lot',
 
 	// R
 	'ref_tech_label' => 'Référent technique',
