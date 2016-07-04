@@ -53,6 +53,15 @@ function mailsubscribers_pre_edition($flux){
 		  AND $statut != $statut_ancien
 		  AND ($statut=='valide' OR $statut_ancien=='valide')) {
 		  $modif_optin = _T('mailsubscriber:info_statut_' . $statut);
+		  
+		  if (!isset($flux['data']['email'])){
+			  include_spip('inc/mailsubscribers');
+			  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
+			  if ($statut=='refuse' and !mailsubscribers_test_email_obfusque($email)){
+				  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
+				  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
+			  }
+		  }
 	  }
 
 		if(isset($flux['data']['listes'])){

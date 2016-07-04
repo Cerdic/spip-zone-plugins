@@ -75,6 +75,19 @@ function mailsubscribers_test_email_obfusque($email){
 	return preg_match(",^[a-f0-9]+@example\.org$,",$email);
 }
 
+function mailsubscribers_obfusquer_mailsubscriber($id_mailsubscriber){
+	$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
+	if ($row
+	  and in_array($row['statut'],array('refuse','poubelle'))
+	  and !mailsubscribers_test_email_obfusque($row['email'])){
+		include_spip('inc/autoriser');
+		include_spip('action/editer_objet');
+		autoriser_exception("modifier","mailsubscriber",$id_mailsubscriber);
+		objet_modifier("mailsubscriber",$id_mailsubscriber,array('email'=>mailsubscribers_obfusquer_email($row['email'])));
+		autoriser_exception("modifier","mailsubscriber",$id_mailsubscriber,false);
+	}
+}
+
 /**
  * Compter les inscrits a une liste
  * @param string $liste
