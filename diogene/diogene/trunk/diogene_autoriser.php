@@ -118,15 +118,15 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
 		} else {
 			if ($qui['statut'] != '0minirezo') {
 				$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id));
-				$nb_attente = sql_getfetsel('nombre_attente', 'spip_diogenes', 'id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
-				if ($nb_attente > 0) {
+				$diogene = sql_fetsel('*', 'spip_diogenes', 'id_secteur='.intval($id_secteur).' AND objet IN ("article","emballe_media")');
+				if (intval($diogene['nombre_attente']) > 0) {
 					$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet', 'lien.id_auteur='.intval($qui['id_auteur']).' AND art.statut NOT IN ("poubelle","publie","refuse") AND art.id_secteur='.intval($id_secteur));
-					if (intval($nb_articles) >= intval($nb_attente)) {
+					if (intval($nb_articles) >= intval(intval($diogene['nombre_attente']))) {
 						return false;
 					}
 				}
 			}
-			return $qui['statut'] && autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
+			return $qui['statut'] and (($qui['statut'] <= $diogene['statut_auteur']) or autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt));
 		}
 	}
 }
