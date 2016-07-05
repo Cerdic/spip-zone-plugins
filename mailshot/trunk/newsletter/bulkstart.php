@@ -21,13 +21,23 @@ include_spip("inc/config");
  *   listes a qui on envoie (1 ou ++)
  * @param array $options
  *   string statut : statut par defaut
+ *   string date_start : date de debut d'envoi (dans le futur)
  * @return int
  *   0 si echec ou id de l'envoi sinon
  */
 function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	// TODO : recuperer la limite de rate d'apres la config
-	$options = array_merge(
-		array('statut'=>'processing'),$options);
+	$now = date('Y-m-d H:i:s');
+	$defaut = array('statut'=>'processing','date_start'=>$now);
+	if (isset($options['date_start'])){
+		if (strtotime($options['date_start'])>time()) {
+			$defaut['statut'] = 'init';
+		}
+		else {
+			unset($options['date_start']);
+		}
+	}
+	$options = array_merge($defaut ,$options);
 
 	if (!is_array($corps)){
 		$id = $corps;
@@ -42,7 +52,6 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	$subscribers = charger_fonction("subscribers","newsletter");
 	$count = $subscribers($listes, array('count'=>true));
 
-	$now = date('Y-m-d H:i:s');
 	$bulk = array(
 		'id' => $id,
 		'sujet' => $corps['sujet'],
@@ -53,7 +62,7 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 		'current' => 0,
 		'failed' => 0,
 		'date' => $now,
-		'date_start' => $now,
+		'date_start' => $options['date_start'],
 		'statut' => $options['statut'],
 	);
 
@@ -65,12 +74,14 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 		include_spip('inc/mailshot');
 		mailshot_update_meta_processing($options['statut']=='processing');
 
-		// initialiser le mailer si necessaire
-		// On cree l'objet Mailer (PHPMailer) pour le manipuler ensuite
-		if ($mailer = lire_config("mailshot/mailer")
-			AND charger_fonction($mailer,'bulkmailer',true)
-			AND $init = charger_fonction($mailer."_init",'bulkmailer',true)){
-			$init($id_mailshot);
+		if ($options['statut']!=='init'){
+			// initialiser le mailer si necessaire
+			// On cree l'objet Mailer (PHPMailer) pour le manipuler ensuite
+			if ($mailer = lire_config("mailshot/mailer")
+				AND charger_fonction($mailer,'bulkmailer',true)
+				AND $init = charger_fonction($mailer."_init",'bulkmailer',true)){
+				$init($id_mailshot);
+			}
 		}
 	}
 

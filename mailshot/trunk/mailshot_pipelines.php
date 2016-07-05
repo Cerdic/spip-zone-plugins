@@ -16,7 +16,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function mailshot_taches_generales_cron($taches_generales){
 
 	// on active la tache cron d'envoi uniquement si necessaire (un envoi en cours)
-	if (isset($GLOBALS['meta']['mailshot_processing'])){
+	if (isset($GLOBALS['meta']['mailshot_processing'])
+	  and (
+			$GLOBALS['meta']['mailshot_processing']==='oui' 
+			or $GLOBALS['meta']['mailshot_processing']<$_SERVER['REQUEST_TIME']
+		)){
 		include_spip('inc/mailshot');
 		list($periode,$nb) = mailshot_cadence();
 		$taches_generales['mailshot_bulksend'] = max(60,$periode-15);

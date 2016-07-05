@@ -61,6 +61,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 		'statut_images' => array(
+			'init'=>'puce-preparer-8.png',
 			'pause'=>'puce-preparer-8.png',
 			'processing'=>'puce-proposer-8.png',
 			'end'=>'puce-publier-8.png',
@@ -69,6 +70,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'archive'=>'puce-archiver-8.png',
 		),
 		'statut_titres' => array(
+			'init'=>'mailshot:info_statut_init',
 			'pause'=>'mailshot:info_statut_pause',
 			'processing'=>'mailshot:info_statut_processing',
 			'end'=>'mailshot:info_statut_end',

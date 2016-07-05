@@ -10,6 +10,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function genie_mailshot_bulksend_dist($t){
 	spip_log("bulksend:meta_processing:".$GLOBALS['meta']['mailshot_processing'],"mailshot");
+
+	// un mailshot programme dans le futur, en attente d'init
+	if ($id_mailshot = sql_getfetsel('id_mailshot','spip_mailshots','statut='.sql_quote('init').' AND date_start<'.sql_quote(date('Y-m-d H:i:s')),'','0,1')){
+		// passer en processing l'id_mailshot concerne et initialiser le mailer
+		sql_updateq('spip_mailshots',array('statut'=>'processing'),'id_mailshot='.intval($id_mailshot));
+		// initialiser le mailer si necessaire
+		// On cree l'objet Mailer (PHPMailer) pour le manipuler ensuite
+		if ($mailer = lire_config("mailshot/mailer")
+			AND charger_fonction($mailer,'bulkmailer',true)
+			AND $init = charger_fonction($mailer."_init",'bulkmailer',true)){
+			$init($id_mailshot);
+		}
+	}
+	
+	
 	// Rien a faire si la meta pas de mailshots en cours
 	// ne pas se fier a la meta ici pour des raisons de concurrence au demarrage d'un envoi
 	if (sql_countsel("spip_mailshots","statut=".sql_quote('processing'))){

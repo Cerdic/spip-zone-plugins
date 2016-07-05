@@ -105,15 +105,21 @@ function mailshot_cadence(){
  * @return bool
  */
 function mailshot_update_meta_processing($force = false){
-	$current = ((isset($GLOBALS['meta']['mailshot_processing']) AND $GLOBALS['meta']['mailshot_processing'])?true:false);
+	$current = ((isset($GLOBALS['meta']['mailshot_processing']) AND $GLOBALS['meta']['mailshot_processing'])?$GLOBALS['meta']['mailshot_processing']:false);
 
 	$new = false;
 	if ($force OR sql_countsel("spip_mailshots","statut=".sql_quote('processing')))
-		$new = true;
+		$new = 'oui';
+	if ($new===false and $next = sql_getfetsel('date_start','spip_mailshots',"statut=".sql_quote('init'),'','date_start','0,1')){
+		$new = strtotime($next);
+		if ($new>$_SERVER['REQUEST_TIME']){
+			$new = 'oui';
+		}
+	}
 
 	if ($new OR $new!==$current){
 		if ($new) {
-			ecrire_meta("mailshot_processing",'oui');
+			ecrire_meta("mailshot_processing",$new);
 			// reprogrammer le cron
 			include_spip('inc/genie');
 	    genie_queue_watch_dist();
