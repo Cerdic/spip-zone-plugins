@@ -5,11 +5,11 @@
 	<span dir='#LANG_DIR' class='#EDIT{sujet} sujet'>(#SUJET)[ \[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]]</span>
 </div>]
 
-[<div class="champ contenu_date_start[ (#DATE_START*|strlen|?{'',vide})]">
+[<div class="champ contenu_date_start[(#STATUT|=={init}|oui)notice][ (#DATE_START*|strlen|?{'',vide})]">
 	<div class='label'><:mailshot:label_date_start:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{date_start} date_start'>(#DATE_START|affdate_heure)</span>
 </div>]
-[(#STATUT|in_array{#LISTE{processing,pause}}|non)
+[(#STATUT|in_array{#LISTE{processing,pause,init}}|non)
 [<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
 	<div class='label'><:mailshot:label_date_fin:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{date} date'>(#DATE|affdate_heure)</span>

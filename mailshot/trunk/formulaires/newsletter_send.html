@@ -32,6 +32,17 @@
 					</select>
 					<input type="submit" name="envoi" class="submit" value="<:newsletter:bouton_envoyer:>" name="test" />
 				</li>
+				#SET{name,date_start}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">
+						<input type="checkbox" name="planifie" value="1" [(#ENV{planifie}|oui)checked="checked"] onchange="if (jQuery(this).is(':checked')) jQuery(this).parent().siblings().show(); else jQuery(this).parent().siblings().hide();"/>
+						[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<span [(#ENV{planifie}|non)style="display: none;"]>
+					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
+					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
+				</span>
+				</li>
 			</ul>
 		</fieldset>
 		][<p class="explication">(#ENV{_mode_test})</p>]
@@ -40,3 +51,4 @@
 
 	<INCLURE{fond=prive/objets/liste/mailshots,id=#ENV{_id_newsletter},env,ajax} />
 </div>
+<INCLURE{fond=formulaires/dateur/inc-dateur} />

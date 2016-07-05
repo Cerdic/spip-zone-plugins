@@ -16,6 +16,9 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 	$valeurs = array(
 		'email_test' => $GLOBALS['visiteur_session']['email'],
 		'liste' => '',
+		'planifie' => '',
+		'date_start_jour' => '',
+		'date_start_heure' => '',
 		'_mode_test' => $mode_test?$mode_test:'',
 		'_id_newsletter' => $id_newsletter,
 	);
@@ -44,6 +47,19 @@ function formulaires_newsletter_send_verifier_dist($id_newsletter,$mode_test=fal
 			$erreurs['email_test'] = _T('info_obligatoire');
 	}
 	elseif (_request('envoi')){
+		if (_request('planifie')){
+			if (!_request('date_start_jour') or !_request('date_start_heure')){
+				$erreurs['date_start'] = _T('info_obligatoire');
+			}
+			else {
+				include_spip('formulaires/dater');
+				if ($v = _request("date_start_jour") and !dater_recuperer_date_saisie($v)) {
+					$erreurs['date_start'] = _T('format_date_incorrecte');
+				} elseif ($v = _request("date_start_heure") and !dater_recuperer_heure_saisie($v)) {
+					$erreurs['date_start'] = _T('format_heure_incorrecte');
+				}
+			}
+		}
 		// evite le derapage
 		if (!_request('liste'))
 			$erreurs['liste'] = _T('info_obligatoire');
@@ -91,9 +107,15 @@ function formulaires_newsletter_send_traiter_dist($id_newsletter,$mode_test=fals
 			$listes = array($liste);
 		}
 
-		$bulkstart = charger_fonction("bulkstart","newsletter");
+		$options = array();
+		if (_request('planifie')){
+			$d = dater_recuperer_date_saisie(_request('date_start_jour'));
+			$h = dater_recuperer_heure_saisie(_request('date_start_heure'));
+			$options['date_start'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+		}
 
-		if ($id_mailshot = $bulkstart($id_newsletter, $listes)){
+		$bulkstart = charger_fonction("bulkstart","newsletter");
+		if ($id_mailshot = $bulkstart($id_newsletter, $listes, $options)){
 			$total = sql_getfetsel('total','spip_mailshots','id_mailshot='.intval($id_mailshot));
 			$res = array('message_ok'=>singulier_ou_pluriel($total,'mailshot:info_envoi_programme_1_destinataire','mailshot:info_envoi_programme_nb_destinataires'));
 			set_request('liste','');

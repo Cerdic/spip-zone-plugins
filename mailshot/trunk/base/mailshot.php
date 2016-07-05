@@ -79,6 +79,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 			'archive'=>'mailshot:info_statut_archive',
 		),
 		'statut_textes_instituer' => array(
+			'init'=>'mailshot:texte_statut_init',
 			'pause'=>'mailshot:texte_statut_pause',
 			'processing'=>'mailshot:texte_statut_processing',
 			'end'=>'mailshot:texte_statut_end',
