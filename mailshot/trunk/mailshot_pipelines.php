@@ -123,17 +123,20 @@ function mailshot_optimiser_base_disparus($flux){
 		sql_delete("spip_mailshots",sql_in('id_mailshot',$ids));
 	}
 	else {
-		// sinon purgeons un vieux (pas dans le meme appel pour pas etre trop long)
+		// sinon archivons les vieux (pas dans le meme appel pour pas etre trop long)
 		include_spip("inc/config");
 		if (lire_config("mailshot/purger_historique",'non')=='oui'
 		  AND $delai = intval(lire_config("mailshot/purger_historique_delai",0))){
 
 			// les envois finis depuis plus de $delai mois, les 2 plus anciens
+			// mais jamais le dernier envoi (on le garde meme si le site n'est plus tres actif en envois)
+			$id_last = sql_getfetsel('id_mailshot','spip_mailshots',sql_in('statut',array('end','cancel')),'','date DESC','0,1');
 			$vieux = date('Y-m-d H:i:s',strtotime("-$delai month"));
 			$ids = sql_allfetsel(
 				"id_mailshot",
 				"spip_mailshots",
 				"date<".sql_quote($vieux)
+				." AND id_mailshot<>".intval($id_last)
 				." AND (date_start<date OR date_start<".sql_quote($vieux).")"
 				." AND ".sql_in('statut',array('end','cancel')),"","id_mailshot","0,2");
 			$ids = array_map('reset',$ids);
