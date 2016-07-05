@@ -150,7 +150,7 @@ Merci',
 	'desinscription_validee' => 'Votre désinscription de la lettre « @lst_name@ » est validée. A bientôt.',
 
 	// E
-	'editer_lettre' => 'Editer la lettre d’information',
+	'editer_lettre' => 'Éditer la lettre d’information',
 	'email_administrateur' => 'E-mail administrateur',
 	'email_expediteur' => 'E-mail expéditeur (from et reply-to)',
 	'email_moderateur' => 'E-mail du modérateur',

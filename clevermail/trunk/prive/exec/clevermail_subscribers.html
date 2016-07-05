@@ -1,8 +1,10 @@
 <!--#hierarchie-->
-<ul id="chemin">
-  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
-  <li>&gt;  <:clevermail:abonnes_majuscule:></li>
-</ul>
+<div id=haut">
+	<div id="chemin">
+		<a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:administration:></a>
+		<strong class="on">&gt;  <:clevermail:abonnes_majuscule:></strong>
+	</div>
+</div>
 <!--/#hierarchie-->
 <h1><:clevermail:abonnes_majuscule:></h1>
 <form action="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{filtre_email,#ENV{filtre_email}}|parametre_url{lst_id,#ENV{lst_id}}|parametre_url{ok,#ENV{ok}})]" method="get">

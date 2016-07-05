@@ -2,11 +2,13 @@
 #SET{preview_html,#EVAL{_CLEVERMAIL_PREVIEW_HTML}}
 <BOUCLE_list(CM_LISTS){lst_id=#ENV{lst_id}}>
   <!--#hierarchie-->
-  <ul id="chemin">
-    <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
-    <li>&gt; <a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:liste_lettres:></a></li>
-    <li>&gt; <a href="#URL_ECRIRE{clevermail_lists}#lst#LST_ID">#LST_NAME</a></li>
-  </ul>
+<div id=haut">
+	<div id="chemin">
+		<a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:administration:></a>
+		&gt; <a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:liste_lettres:></a>
+		&gt; <strong class="on"><a href="#URL_ECRIRE{clevermail_lists}#lst#LST_ID">#LST_NAME</a></strong>
+	</div>
+</div>
   <!--/#hierarchie-->
   <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
   <h1><:clevermail:liste_messages:></h1>
