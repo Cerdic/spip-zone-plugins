@@ -80,6 +80,13 @@ class pdf2img extends Command {
 			else{
 				$output->writeln("<info>C'est parti pour une petite conversion de PDF en images !</info>");
 				
+				// Répertoire dest, ou arrivent les fichiers txt.
+				if(!is_dir($dest)){
+					$output->writeln("<error>Créer le répertoire $dest où exporter les fichiers de $source. spip pdf2img -d `repertoire` </error>");
+					exit();
+				}	
+
+				
 				# Conversion d'un pdf  ?
 				if($pdf !== ""){
 					$output->writeln("<info>conversion de $pdf dans $dest/</info>");
