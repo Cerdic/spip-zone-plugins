@@ -527,7 +527,7 @@ function ckeditor_preparescript($config) {
 				'peut_telecharger' => $peut_telecharger,
 				'est_admin' => $est_admin, 
 				'est_redac' => $est_redac,
-				'upload_url' => $site_url_components['path']."/".$url_path,
+				'upload_url' => ((isset($site_url_components['path']))?$site_url_components['path']:'')."/".$url_path,
 				'upload_dir' => realpath($uploaddir)
 			));
 			$cke_cfg['filebrowserBrowseUrl'] = $append_cfg['filebrowserBrowseUrl'] ;
