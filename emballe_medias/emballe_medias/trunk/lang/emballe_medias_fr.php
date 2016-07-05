@@ -206,7 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_notice_nb_articles_prepa_autres' => 'Vous avez @nb@ autres médias en préparation.',
 	'message_notice_voir_articles_prepa' => 'Voir <a href="@url@" class="@class_lien@">ces médias</a>.',
 	'message_selectionner_media_editer' => 'Sélectionnez un média dans la liste afin de l’éditer.',
-	'message_suppression_fichier_nok' => 'La suppression du fichier "@fichier@" n\'a pu être réalisée (peut-être un problème de droits ?).',
+	'message_suppression_fichier_nok' => 'La suppression du fichier "@fichier@" n’a pu être réalisée (peut-être un problème de droits ?).',
 	'message_type_mis_a_jour' => 'Le type de l’article a été mis à jour',
 	'message_type_pas_mis_a_jour' => 'Le type de l’article n’a pas été modifié',
 
