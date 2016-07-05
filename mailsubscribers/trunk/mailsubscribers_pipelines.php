@@ -86,6 +86,27 @@ function mailsubscribers_pre_edition($flux){
 			$flux['data']['optin'] = $optin;
 		}
 	}
+
+	// changement de mail d'un auteur : faire suivre son inscription si l'adresse email est unique dans les auteurs
+	if ($flux['args']['table']=='spip_auteurs'
+	  AND $id_auteur = $flux['args']['id_objet']
+	  AND isset($flux['data']['email'])
+	  AND $flux['data']['email']){
+
+		$old_email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($id_auteur));
+		if ($old_email
+			AND !sql_countsel('spip_auteurs','email='.sql_quote($old_email).' AND id_auteur<>'.intval($id_auteur).' AND statut<>'.sql_quote('5poubelle'))){
+			include_spip('action/editer_objet');
+			include_spip('inc/mailsubscribers');
+			if ($id_mailsubscriber = sql_getfetsel('id_mailsubscriber','spip_mailsubscribers','email='.sql_quote($old_email))){
+				objet_modifier('mailsubscriber', $id_mailsubscriber, array('email'=>$flux['data']['email']));
+			}
+			if ($id_mailsubscriber = sql_getfetsel('id_mailsubscriber','spip_mailsubscribers','email='.sql_quote(mailsubscribers_obfusquer_email($old_email)))){
+				objet_modifier('mailsubscriber', $id_mailsubscriber, array('email'=>mailsubscribers_obfusquer_email($flux['data']['email'])));
+			}
+		}
+	}
+
 	return $flux;
 }
 
@@ -233,4 +254,9 @@ function mailsubscribers_formulaire_traiter($flux){
 	return $flux;
 }
 
-?>
+function mailsubscribers_affiche_auteurs_interventions($flux){
+	if ($id_auteur = $flux['args']['id_auteur']){
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/auteur-subscription',array('id_auteur'=>$id_auteur));
+	}
+	return $flux;
+}

@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="1.8.1"
+	version="1.9.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
@@ -15,6 +15,7 @@
 
 	<pipeline nom="autoriser" inclure="mailsubscribers_autorisations.php" />
 
+	<pipeline nom="affiche_auteurs_interventions" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailsubscribers.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/mailsubscribers.php" />
 	<pipeline nom="pre_insertion" inclure="mailsubscribers_pipelines.php" />

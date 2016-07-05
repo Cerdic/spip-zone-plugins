@@ -30,7 +30,7 @@ include_spip('mailsubscribers_fonctions');
 function newsletter_subscriber_dist($email){
 
 	// chercher si un tel email est deja en base
-	$infos = sql_fetsel('email,nom,listes,lang,statut,jeton','spip_mailsubscribers','email='.sql_quote($email));
+	$infos = sql_fetsel('email,nom,listes,lang,statut,jeton','spip_mailsubscribers','email='.sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)));
 	if ($infos){
 		if ($infos['statut']=='valide')
 			$infos['status']='on';

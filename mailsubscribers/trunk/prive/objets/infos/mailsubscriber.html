@@ -1,0 +1,17 @@
+<BOUCLE_mailsubscriber(MAILSUBSCRIBERS){id_mailsubscriber=#ENV{id}}{statut?}>
+<div class='infos'>
+#SET{texte_objet,#VAL{mailsubscriber}|objet_info{texte_objet}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_MAILSUBSCRIBER</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{mailsubscriber,#ID_MAILSUBSCRIBER,'',#VAL{mailsubscriber}|objet_info{editable}})]
+	<B_auteurs>
+		<ul class="liste-items auteurs">
+	<BOUCLE_auteurs(AUTEURS){tout}{email=#EMAIL}>
+			<li class="item short"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
+				[(#CHEMIN_IMAGE{auteur-16}|balise_img)]
+				#NOM</a></li>
+	</BOUCLE_auteurs>
+		</ul>
+	</B_auteurs>
+</div>
+</BOUCLE_mailsubscriber>

@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse_a_importer' => '1 adresse à importer',
 	'info_1_mailsubscriber' => '1 inscrit aux envois',
 	'info_aucun_mailsubscriber' => 'Aucun inscrit aux envois',
+	'info_email_inscriptions' => 'Inscriptions pour @email@ :',
 	'info_email_limite_nombre' => 'Invitation limitée à 5 personnes.',
 	'info_email_obligatoire' => 'Email obligatoire',
 	'info_emails_invalide' => 'L’un des email est invalide',
