@@ -257,6 +257,7 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 	}
 }
 function critere_gis_tout_dist($idb, &$boucles, $crit) {
+	$crit->op = 'gis';
 	$critere_gis = charger_fonction('gis', 'critere/');
 	$critere_gis($idb, $boucles, $crit);
 	$boucle = &$boucles[$idb];
