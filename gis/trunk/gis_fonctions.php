@@ -81,6 +81,35 @@ function distance($from, $to, $miles = false) {
 }
 
 /**
+ * Afficher proprement une distance
+ * 
+ * @param float $distance
+ * 		Nombre indiquant une distance
+ * @param string $format_entree
+ * 		Format de distance donnée en entrée : par défaut en kilomètres, sinon en mètres avec "m"
+ * @return string
+ * 		Retourne une chaine composée d'un nombre arrondi et d'une unité de mesure de distance
+ **/
+function distance_en_metres($distance, $format_entree='km') {
+	if ($distance) {
+		// On passe toujours tout en kilomètres pour uniformiser
+		if ($format_entree == 'm') {
+			$distance = $distance / 1000;
+		}
+		
+		// Si c'est supérieur à 1, on reste en kilomètres
+		if ($distance > 1) {
+			$distance = number_format($distance, 2, ',', '') . ' km';
+		}
+		elseif (($distance = $distance*1000) > 1) {
+			$distance = number_format($distance, 2, ',', '') . ' m';
+		}
+	}
+	
+	return $distance;
+}
+
+/**
  * Compilation du critère {distancefrom}
  *
  * Critère {distancefrom} qui permet de ne sélectionner que les objets se trouvant à une distance comparée avec un point de repère.
