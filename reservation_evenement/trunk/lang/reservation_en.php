@@ -25,9 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
+	'erreur_pas_evenement' => 'There is currently no event open for booking',
 	'evenement_cloture' => 'Closed Event',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
-    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.', # MODIF
+    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
@@ -35,14 +36,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_cacher' => 'Hide',
 	'icone_creer_reservation' => 'Create a booking',
 	'icone_modifier_reservation' => 'Modify this booking',
+	'info_1_client' => 'One client',
 	'info_1_reservation' => 'One booking',
 	'info_aucun_reservation' => 'No booking',
 	'info_nb_reservations' => '@nb@ bookings',
 	'info_reservations_auteur' => 'This authors bookings',
 	'info_voir_reservations_poubelle' => 'View the Bookings in the dustbin',
+	'inscription' => 'Subscription',
+	'inscrire' => 'Subscribe',
 
 	// L
 	'label_action_cloture' => 'Automatical closure:',
+	'label_client' => 'Client:',
 	'label_date' => 'Date:',
 	'label_date_paiement' => 'Payment date:',
 	'label_donnees_auteur' => 'Information author:',
@@ -51,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_auteur' => 'Id auteur:',
 	'label_lang' => 'Language:',
 	'label_maj' => 'Update:',
+	'label_modifier_identifiants_personnels' => 'Modify your personal identifiers:',
 	'label_mot_passe' => 'Password:',
 	'label_mot_passe2' => 'Repeat the password:',
 	'label_nom' => 'Name:',
@@ -100,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_articles' => 'articles',
 	'par_evenements' => 'events',
 	'par_reservations' => 'bookings',
+	'places_disponibles' => 'Available spots:',
 
 	// R
 	'reaservation_montant' => 'Amount',
