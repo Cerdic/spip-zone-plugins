@@ -12,6 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
+/*
 function savecfg_install($action)
 {
     switch ($action) {
@@ -26,6 +27,8 @@ function savecfg_install($action)
             break;
     }
 }
+*/
+
 function savecfg_upgrade($nom_meta_base_version, $version_cible)
 {
     include_spip('inc/meta');
