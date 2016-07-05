@@ -37,7 +37,7 @@ function coordonnees_afficher_fiche_objet($flux) {
 	$type = $flux['args']['type'];
 
 	$id_objet = $flux['args']['id'];
-	$editable = (in_array(table_objet_sql($type), lire_config('coordonnees/objets'))?1:0);
+	$editable = (in_array(table_objet_sql($type), lire_config('coordonnees/objets', array())) ? 1 : 0);
 	$has = false;
 	if (!$editable) {
 		if (sql_countsel('spip_adresses_liens', 'objet='.sql_quote($type).' AND id_objet='.intval($id_objet))
