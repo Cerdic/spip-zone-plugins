@@ -85,12 +85,14 @@ function distance($from, $to, $miles = false) {
  * 
  * @param float $distance
  * 		Nombre indiquant une distance
+ * @param int $precision
+ * 		Précision des décimales du nombre final, par défaut 2
  * @param string $format_entree
  * 		Format de distance donnée en entrée : par défaut en kilomètres, sinon en mètres avec "m"
  * @return string
  * 		Retourne une chaine composée d'un nombre arrondi et d'une unité de mesure de distance
  **/
-function distance_en_metres($distance, $format_entree='km') {
+function distance_en_metres($distance, $precision=2, $format_entree='km') {
 	if ($distance) {
 		// On passe toujours tout en kilomètres pour uniformiser
 		if ($format_entree == 'm') {
@@ -99,11 +101,13 @@ function distance_en_metres($distance, $format_entree='km') {
 		
 		// Si c'est supérieur à 1, on reste en kilomètres
 		if ($distance > 1) {
-			$distance = number_format($distance, 2, ',', '') . ' km';
+			$unite = 'km';
 		}
 		elseif (($distance = $distance*1000) > 1) {
-			$distance = number_format($distance, 2, ',', '') . ' m';
+			$unite = 'm';
 		}
+		
+		$distance = number_format($distance, $precision, ',', '') . ' ' . $unite;
 	}
 	
 	return $distance;
