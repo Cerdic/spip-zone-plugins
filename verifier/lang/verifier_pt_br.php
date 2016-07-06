@@ -11,6 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Este Cep está incorreto.',
+	'erreur_comparaison_egal' => 'O valor deve ser igual ao campo "@nom_champ@"',
+	'erreur_comparaison_egal_type' => 'O valor deve ser igual e do mesmo tipo que o campo "@nom_champ@"',
+	'erreur_comparaison_grand' => 'O valor deve ser superior ao campo "@nom_champ@"',
+	'erreur_comparaison_grand_egal' => 'O valor deve ser superior ou igual ao campo "@nom_champ@"',
+	'erreur_comparaison_petit' => 'O valor deve ser inferior ao campo "@nom_champ@"',
+	'erreur_comparaison_petit_egal' => 'O valor deve ser inferior ou igual ao campo "@nom_champ@"',
+	'erreur_couleur' => 'O código de cor não é válido.',
 	'erreur_date' => 'A data não é válida.',
 	'erreur_date_format' => 'O formato da data não é aceitável.',
 	'erreur_decimal' => 'O valor deve ser um número decimal.',
@@ -21,7 +28,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_entre' => 'O valor dever ser entre @min@ e @max@.',
 	'erreur_entier_max' => 'O valor deve ser inferior a @max@.',
 	'erreur_entier_min' => 'O valor deve ser superior a @min@.',
+	'erreur_heure' => 'O horário indicado não existe.',
+	'erreur_heure_format' => 'O formato de hora não é aceitável.',
 	'erreur_id_document' => 'Esta extensão de documento não é válida.',
+	'erreur_inconnue_generique' => 'O formato não está correto.',
+	'erreur_isbn' => 'O número ISBN não é válido (ex: 978-2-1234-5680-3 ou 2-1234-5680-X)',
+	'erreur_isbn_13_X' => 'Um número ISBN-13 não pode terminar em X.',
+	'erreur_isbn_G' => 'O primeiro segmento deve ser igual a 978 ou 979.',
+	'erreur_isbn_nb_caracteres' => 'O número ISBN deve ter 10 ou 13 caractéres, sem contar os traços (atualmente @nb@).',
+	'erreur_isbn_nb_segments' => 'O número ISBN deve ter 4 ou 5 segmentos (atualmente @nb@).',
+	'erreur_isbn_segment' => 'O segmento "@segment@" tem @nb@ número(s) a mais.',
+	'erreur_isbn_segment_lettre' => 'O segmento "@segment@" não pode conter letras.',
 	'erreur_numerique' => 'O formato do número não é válido.',
 	'erreur_regex' => 'O formato da expressão não é válido.',
 	'erreur_siren' => 'O número SIREN não é válido.',
@@ -35,7 +52,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole' => 'O endereço informado <em>(@url@)</em> deve começar com @protocole@',
 	'erreur_url_protocole_exact' => 'O endereço informado <em>(@url@)</em> não começa com um protocolo válido (http:// por exemplo)',
 
+	// N
+	'normaliser_option_date' => 'Normalizar a data?',
+	'normaliser_option_date_aucune' => 'Não',
+	'normaliser_option_date_en_datetime' => 'No formato «Datetime» (para SQL)',
+
 	// O
+	'option_code_postal_pays_explication' => 'C´odigo de dois caractéres de país: BR, PT, FR etc.',
+	'option_code_postal_pays_label' => 'País',
+	'option_comparaison_champ_champ_explication' => 'Identificador do campos (atributo « nome »)',
+	'option_comparaison_champ_champ_label' => 'Campo',
 	'option_decimal_nb_decimales_label' => 'Número de décimais depois da vírgula',
 	'option_email_disponible_label' => 'Endereço disponível',
 	'option_email_disponible_label_case' => 'Verificar se o endereço já não está sendo utilizado por um usuário',
