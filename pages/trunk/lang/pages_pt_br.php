@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucune_page' => 'Nehuma página por enquanto.',
+	'aucune_page' => 'Nehuma página, ainda.',
 
 	// C
 	'convertir_article' => 'Converter em matéria',
@@ -18,9 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_page' => 'Criar uma nova página',
 
 	// E
-	'erreur_champ_page_doublon' => 'Este nome já existe',
-	'erreur_champ_page_format' => 'O nome só pode conter letras, números e traços',
-	'erreur_champ_page_taille' => 'Seqüências de 255 caracteres ao máximo',
+	'erreur_champ_page_doublon' => 'Este identificador já existe',
+	'erreur_champ_page_format' => 'Apenas caractéres alfanuméricos em minúsculas ou "_"',
+	'erreur_champ_page_taille' => 'Máximo de 255 caracteres',
 
 	// L
 	'label_champ_page' => 'Página:',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_page' => 'Alterar a página:',
 
 	// P
-	'pages_uniques' => 'Páginas individuais',
+	'pages_uniques' => 'Páginas únicas',
 
 	// T
 	'titre_page' => 'Página',
