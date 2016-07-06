@@ -1,8 +1,8 @@
 <traduction module="clevermail" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/clevermail/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=de" total="222" traduits="118" relire="0" modifs="0" nouveaux="104" pourcent="53.15">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=de" total="222" traduits="117" relire="0" modifs="1" nouveaux="104" pourcent="52.70">
 		<traducteur nom="kennethkeen" lien="http://trad.spip.net/auteur/kennethkeen" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=en" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=en" total="222" traduits="221" relire="0" modifs="1" nouveaux="0" pourcent="99.55">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
@@ -10,7 +10,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=fr" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=sk" total="222" traduits="222" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/clevermail?lang_cible=sk" total="222" traduits="221" relire="0" modifs="1" nouveaux="0" pourcent="99.55">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

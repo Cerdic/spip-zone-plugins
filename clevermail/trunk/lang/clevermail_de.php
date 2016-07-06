@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desinscription_validee' => 'Ihre abbestellen ’@lst_name@’ ist konfirmiert. Bis bald.',
 
 	// E
-	'editer_lettre' => 'Bearbeiten Sie den Info-Brief',
+	'editer_lettre' => 'Bearbeiten Sie den Info-Brief', # MODIF
 	'email_administrateur' => 'E-mail Verwaltung',
 	'email_expediteur' => 'E-Mail Absender (from und reply to) ',
 	'email_moderateur' => 'E-Mail vom Moderator ',
