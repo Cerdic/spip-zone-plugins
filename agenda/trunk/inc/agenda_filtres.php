@@ -83,7 +83,6 @@ function critere_agendafull_dist($idb, &$boucles, $crit) {
 		') ? $x : date("d"))';
 
 	$boucle = &$boucles[$idb];
-	$date = $boucle->id_table . ".$date";
 
 	$quote_end = ",'".$boucle->sql_serveur."','text'";
 
