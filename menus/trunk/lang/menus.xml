@@ -33,7 +33,7 @@
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/menus?lang_cible=pt_br" total="150" traduits="145" relire="0" modifs="0" nouveaux="5" pourcent="96.67">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/menus?lang_cible=pt_br" total="150" traduits="150" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>

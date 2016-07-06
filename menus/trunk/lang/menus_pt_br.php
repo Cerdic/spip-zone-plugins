@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_entrees_masquees_explication' => 'Selecione as entradas que você quer <strong> esconder</strong> na criação de um menu.',
 	'configurer_titre' => 'Configurar as entradas do plugin Menus',
 	'confirmer_supprimer_entree' => 'Deseja realmente excluir essa entrada ?',
+	'confirmer_supprimer_sous_menu' => 'Você quer realmente excluir este submenu?',
 
 	// D
 	'description_menu_accueil' => 'Link até a página inicial do site.',
@@ -166,5 +167,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_les_articles' => '... Todas as matérias',
-	'toutes_les_rubriques' => '... Todas as seções'
+	'toutes_les_rubriques' => '... Todas as seções',
+
+	// U
+	'utiles_explication' => 'Os templates atuais do site podem usar os seguintes menus.',
+	'utiles_generer_menu' => 'Criar o menu <strong>@titre@ (<em>@identifiant@</em>)</strong>',
+	'utiles_generer_menus' => 'Criar <strong>todos</strong> os menus úteis',
+	'utiles_titre' => 'Menus úteis'
 );
