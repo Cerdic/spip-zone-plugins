@@ -1,19 +1,23 @@
 [(#REM)<style>]
 
 .formulaire_newsletter_send fieldset,
-.formulaire_newsletter_send ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0}
-.formulaire_newsletter_send legend {font-weight: bold}
+.formulaire_newsletter_send ul,
+.formulaire_newsletter_send .editer-groupe {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0}
+.formulaire_newsletter_send legend {font-weight: bold;margin-bottom: 0;background:transparent;}
 
 .formulaire_newsletter_send .editer_email_test .text {width: 20em;}
 .formulaire_newsletter_send .editer_email_test .submit {float: #ENV{right}}
 
-.formulaire_newsletter_send legend {font-weight: bold;margin-bottom: 0;}
 .formulaire_newsletter_send .editer_liste .select {width: 20em;}
 .formulaire_newsletter_send .editer_liste .submit {float: #ENV{right}}
 
-.formulaire_newsletter_send .mailshots .sujet {display: none;}
-.formulaire_newsletter_send .editer-groupe {padding-top:0;padding-bottom:0;}
 .formulaire_newsletter_send .editer_date_start {padding-top:0;}
+.formulaire_newsletter_send .editer_date_start label {width: auto}
+.formulaire_newsletter_send .editer_date_start label input.checkbox {margin-left:0;}
+
+.formulaire_newsletter_send .liste-objets.mailshots {margin:1em 0;}
+.formulaire_newsletter_send .mailshots .sujet {display: none;}
+
 
 .mailshot #wysiwyg {margin-bottom: 2.0775em;padding:0;}
 .mailshot #wysiwyg .label {display: inline;}

@@ -14,6 +14,7 @@
 			<th class='id_mailshot' scope='col'>[(#TRI{id,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class='sujet' scope='col'>[(#TRI{email,<:mailshot:label_sujet:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='listes' scope='col'><:mailshot:label_listes:></th>
 			<th class='progress' scope='col'>%</th>
 			<th class='action' scope='col'></th>
 		</tr>
@@ -27,6 +28,7 @@
 				[<span class="small">\[<a href="(#ID|mailshot_url_newsletter)" title="<:info_numero_abbreviation|attribut_html:> #ID"><:mailshot:lien_voir_newsletter:></a>\]</span>]
 			</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='listes secondaire'>[(#LISTES|mailshot_affiche_nom_liste)]</td>
 			<td class='progress'>[(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})]</td>
 			<td class='action'>
 			[(#AUTORISER{instituer,mailshot,#ID_MAILSHOT}|oui)

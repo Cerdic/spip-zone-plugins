@@ -35,7 +35,7 @@
 				#SET{name,date_start}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">
-						<input type="checkbox" name="planifie" value="1" [(#ENV{planifie}|oui)checked="checked"] onchange="if (jQuery(this).is(':checked')) jQuery(this).parent().siblings().show(); else jQuery(this).parent().siblings().hide();"/>
+						<input type="checkbox" class="checkbox" name="planifie" value="1" [(#ENV{planifie}|oui)checked="checked"] onchange="if (jQuery(this).is(':checked')) jQuery(this).parent().siblings().show(); else jQuery(this).parent().siblings().hide();"/>
 						[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<span [(#ENV{planifie}|non)style="display: none;"]>

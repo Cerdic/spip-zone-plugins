@@ -86,4 +86,19 @@ function mailshot_puce_statut($statut,$objet,$id_objet=0,$id_parent=0){
 	return $puce_statut($id_objet, $statut, $id_parent, $objet, false, objet_info($objet,'editable')?_ACTIVER_PUCE_RAPIDE:false);
 }
 
-
+/**
+ * Affiche le nom d'une liste en clair, pour le tableau des envois
+ * @param $id_liste
+ * @return mixed
+ */
+function mailshot_affiche_nom_liste($id_liste){
+	static $listes;
+	if (is_null($listes)){
+		$lists = charger_fonction('lists','newsletter');
+		$l = $lists();
+		foreach($l as $id=>$infos){
+			$listes[$id] = $infos['titre'];
+		}
+	}
+	return (isset($listes[$id_liste])?$listes[$id_liste]:$id_liste);
+}
