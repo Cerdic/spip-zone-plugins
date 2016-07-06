@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_dupliquer_copie' => '(cópia)',
 	'construire_action_supprimer' => 'Excluir',
 	'construire_ajouter_champ' => 'Incluir um campo',
+	'construire_ajouter_groupe' => 'Incluir um grupo',
 	'construire_attention_enregistrer' => 'Lembre-se de gravar as suas alterações!',
 	'construire_attention_modifie' => 'O formulário abaixo é diferente do formulário inicial.Você tem a possibilidade de revertê-lo ao estado em que estava, antes das suas alterações.',
 	'construire_attention_supprime' => 'As suas alterações incluem exclusões de campos. Por favor, confirme a gravação desta nova versão do formulário.',
