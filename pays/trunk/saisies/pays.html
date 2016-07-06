@@ -23,7 +23,7 @@
 ]<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_pays(PAYS){par multi nom}>[
+	<BOUCLE_pays(PAYS){id_pays ?IN #ENV{id_pays}}{par multi nom}>[
 
 	(#REM) définition des valeurs et des labels correspondants à chaque champ. ][
 	(#SET{mapping_champs,#ARRAY{

@@ -1,8 +1,8 @@
 <paquet
 	prefix="pays"
 	categorie="divers"
-	version="3.1.7"
-	etat="stable"
+  version="3.1.8"
+  etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/pays-32.png"
 	schema="1.4.0"
@@ -25,6 +25,6 @@
 	<pipeline nom="autoriser" inclure="pays_autorisations.php"/>
 
 	<utilise nom='saisies' compatibilite='[1.0.0;[' />
-	<menu nom="pays" titre="pays:titre_pays" parent="menu_edition" icone="images/pays-16.png" action="pays_tous" /> 
+	<menu nom="pays" titre="pays:titre_pays" parent="menu_edition" icone="images/pays-16.png" action="pays_tous" />
 
 </paquet>
