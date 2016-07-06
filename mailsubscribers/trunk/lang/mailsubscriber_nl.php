@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse_a_importer' => '1 adres om te importeren',
 	'info_1_mailsubscriber' => '1 intekening voor de verzendlijst',
 	'info_aucun_mailsubscriber' => 'Geen abonnees',
+	'info_email_inscriptions' => 'Inschrijvingen voor @email@:',
 	'info_email_limite_nombre' => 'Uitnodiging beperkt tot 5 personen.',
 	'info_email_obligatoire' => 'E-mailadres verplicht',
 	'info_emails_invalide' => 'Een van de e-mailadressen is ongeldig',
