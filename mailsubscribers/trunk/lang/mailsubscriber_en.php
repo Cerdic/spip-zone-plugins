@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse_a_importer' => '1 address to import',
 	'info_1_mailsubscriber' => '1 subscriber',
 	'info_aucun_mailsubscriber' => 'No subscriber',
+	'info_email_inscriptions' => 'Inscriptions for @email@:',
 	'info_email_limite_nombre' => 'Invitation limited to 5 people.',
 	'info_email_obligatoire' => 'Email is mandatory.',
 	'info_emails_invalide' => 'One email of the list is not correct.',
@@ -51,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_valide' => 'subscribed',
 
 	// L
-	'label_desactiver_notif_1' => 'Disable notification of entries for this import', # MODIF
+	'label_desactiver_notif_1' => 'Disable notification of entries for this import',
 	'label_email' => 'Email',
 	'label_file_import' => 'File to import',
 	'label_from_email' => 'Invitation from email',
