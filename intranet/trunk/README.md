@@ -4,8 +4,19 @@ Intranet / Extranet est un plugin très simple permettant d’interdire l’acc�
 
 [Documentation](http://contrib.spip.net/Intranet-Extranet-4388)
 
+## Todo
+
+Ajouter une page listant l'ensemble des objets éditoriaux de sortis de l'intranet
 
 ## Changelog
+
+### Versions 0.6.x
+
+#### Version 0.6.0
+
+* Permettre de sortir des objets éditoriaux un à un de l'intranet, par exemple :
+  * l'article "31"
+  * la rubrique "12"
 
 ### Versions 0.5.x
 

@@ -7,6 +7,10 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 /**
  * Autoriser a voir le site en Intranet : par defaut toute personne identifiée
  * @return mixed
@@ -82,6 +86,14 @@ function intranet_styliser($flux) {
 			!in_array($flux['args']['fond'], $pages_ok)
 			and !in_array($flux['args']['contexte'][_SPIP_PAGE], $pages_ok))
 		) {
+			if (lire_config('intranet/intranet_ouverts', '') == 'on'
+				and table_objet_sql($flux['args']['fond'])
+				and isset($flux['args']['contexte'][id_table_objet($flux['args']['fond'])])) {
+				$existe = sql_getfetsel('objet', 'spip_intranet_ouverts', 'objet='.sql_quote($flux['args']['fond']). ' AND id_objet='.intval($flux['args']['contexte'][id_table_objet($flux['args']['fond'])]));
+				if($existe) {
+					return $flux;
+				}
+			}
 			$fond = trouver_fond('inclure/intranet', '', true);
 			$flux['data'] = $fond['fond'];
 	}

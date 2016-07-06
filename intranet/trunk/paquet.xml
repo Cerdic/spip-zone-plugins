@@ -1,12 +1,13 @@
 <paquet
 	prefix="intranet"
 	categorie="maintenance"
-	version="0.5.0"
+	version="0.6.0"
+	schema="0.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/intranet-64.png"
 	documentation="http://contrib.spip.net/?article4388"
->	
+>
 
 	<nom>Intranet</nom>
 
@@ -14,7 +15,9 @@
 	<copyright>2013-2016</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-
+	
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/intranet.php" />
+	<pipeline nom="boite_infos" inclure="intranet_pipelines.php" />
 	<pipeline nom="styliser" />
 	<pipeline nom="formulaire_traiter" />
 	<pipeline nom="intranet_pages_ok" action="" />
