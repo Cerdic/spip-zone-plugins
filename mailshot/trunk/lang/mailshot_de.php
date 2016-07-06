@@ -37,6 +37,7 @@ Dies führt bei zahlreichem Versenden zu einer großen Datenmenge, weshalb es ra
 	'info_nb_mailshots' => '@nb@ Auslieferungen',
 	'info_nb_mailshots_destinataires' => '@nb@ Empfänger',
 	'info_nb_mailsubscribers' => '@nb@ Abonnenten',
+	'info_statut_archive' => 'archiviert',
 	'info_statut_cancel' => 'Abgebrochen',
 	'info_statut_destinataire_clic' => 'Angeklickt',
 	'info_statut_destinataire_fail' => 'Fehlgeschlagen',
