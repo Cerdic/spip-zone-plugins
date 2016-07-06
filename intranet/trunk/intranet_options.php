@@ -90,7 +90,7 @@ function intranet_styliser($flux) {
 				and table_objet_sql($flux['args']['fond'])
 				and isset($flux['args']['contexte'][id_table_objet($flux['args']['fond'])])) {
 				$existe = sql_getfetsel('objet', 'spip_intranet_ouverts', 'objet='.sql_quote($flux['args']['fond']). ' AND id_objet='.intval($flux['args']['contexte'][id_table_objet($flux['args']['fond'])]));
-				if($existe) {
+				if ($existe) {
 					return $flux;
 				}
 			}
