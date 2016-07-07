@@ -100,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_ok' => 'Envois réussis',
 	'titre_envois_destinataires_todo' => 'Envois a venir',
 	'titre_envois_en_cours' => 'Envois en cours',
+	'titre_envois_planifies' => 'Envois planifiés',
 	'titre_envois_termines' => 'Envois terminés',
 	'titre_mailshot' => 'Envoi en nombre',
 	'titre_mailshots' => 'Envois en nombre',
