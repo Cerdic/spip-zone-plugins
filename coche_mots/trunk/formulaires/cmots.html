@@ -18,7 +18,7 @@
 		
 		<BOUCLE_parent(GROUPES_MOTS){id_groupe}{si #PLUGIN{gma}}>
 		<BOUCLE_sousgroupes(GROUPES_MOTS){id_parent}{par multi titre}>
-			<h4 style="margin-bottom: 0; margin-top: 20px;"><BOUCLE_hier(HIERARCHIE_GROUPES_MOTS){tous}{" > "}>#TITRE</BOUCLE_hier></h4>
+			<h4 style="margin-bottom: 0; margin-top: 20px;"><BOUCLE_hier(HIERARCHIE_GROUPES_MOTS?){tous}{" > "}>#TITRE</BOUCLE_hier></h4>
 			
 			<B_mots_sous>
 				<ul><li>
