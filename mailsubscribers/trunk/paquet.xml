@@ -1,12 +1,12 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="1.9.0"
-	etat="stable"
+	version="2.0.0-dev"
+	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
 	documentation="http://contrib.spip.net/mailsubscribers"
-	schema="0.3.0"
+	schema="1.0.0"
 >
 	<nom>MailSubscribers</nom>
 	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
@@ -18,6 +18,7 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/mailsubscribers.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/mailsubscribers.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/mailsubscribers.php" />
 	<pipeline nom="pre_insertion" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="mailsubscribers_pipelines.php" />

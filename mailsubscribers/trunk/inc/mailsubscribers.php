@@ -181,6 +181,8 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
 /**
  * Renvoi les listes de diffusion disponibles avec leur status
  * (open,close,?)
+ * 
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
  *
  * @param array $options
  *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)

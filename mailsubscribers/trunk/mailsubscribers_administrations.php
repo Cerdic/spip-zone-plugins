@@ -28,11 +28,131 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
         array('sql_alter',"TABLE spip_mailsubscribers ADD invite_email_text text NOT NULL DEFAULT '' " ),
     );
 
+	$maj['1.0.0'] = array(
+		array('maj_tables', array('spip_mailsubscribers','spip_mailsubscribinglists','spip_mailsubscriptions')),
+		array('mailsubscribers_migrate_mailsubscribinglists'),
+  );
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Migrer les listes et les subscription vers les tables spip_mailsubscribinglists/spip_mailsubscriptions
+ */
+function mailsubscribers_migrate_mailsubscribinglists(){
+	include_spip("inc/mailsubscribers");
+	$listes = mailsubscribers_old_listes_from_config();
+	$today = date('Y-m-d H:i:s');
 
+	$remap = array();
+	foreach ($listes as $identifiant=>$liste){
+		if (!$row = sql_fetsel('*','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))) {
+			$id_mailsubscribinglist = sql_insertq('spip_mailsubscribinglists',array('identifiant'=>$identifiant));
+		}
+		else {
+			$id_mailsubscribinglist = $row['id_mailsubscribinglist'];
+		}
+		if ($id_mailsubscribinglist){
+			$set = array(
+				'titre' => $liste['titre'],
+				'statut' => (($liste['status']=='open')?'ouverte':'fermee'),
+				'date' => $today,
+			);
+			$remap["newsletter::$identifiant"] = $id_mailsubscribinglist;
+			if (!$row or $row['statut']!==$set['statut'] or $row['titre']!==$set['titre']){
+				var_dump($set);
+				sql_updateq('spip_mailsubscribinglists', $set, 'id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+			}
+		}
+	}
+	#var_dump($remap,'<hr />');
+
+	// $remap nous donne la correspondance newsletter::xx => id_mailsubscribinglist
+	// on bascule tous les id_mailsubscriber qui ne sont pas deja dans spip_mailsubscriptions
+	$in = sql_get_select('DISTINCT id_mailsubscriber', 'spip_mailsubscriptions');
+	$in = "(SELECT * FROM ($in) AS S)";
+	do {
+		$all = sql_allfetsel('*','spip_mailsubscribers',
+			'listes like '.sql_quote('%newsletter::%')
+			.' AND statut IN (\'prop\',\'valide\',\'refuse\')'
+			.' AND id_mailsubscriber NOT IN '.$in,'','id_mailsubscriber','0,100');
+		foreach ($all as $a){
+			$ins = array();
+			$listes = explode(',',$a['listes']);
+			$listes = array_map('trim',$listes);
+			$listes = array_unique($listes);
+			foreach ($listes as $l){
+				if (isset($remap[$l])){
+					$ins[] = array(
+						'id_mailsubscriber' => $a['id_mailsubscriber'],
+						'id_mailsubscribinglist' => $remap[$l],
+						'statut' => $a['statut'],
+					);
+				}
+			}
+			#var_dump($a);
+			#var_dump($ins);
+			sql_insertq_multi('spip_mailsubscriptions',$ins);
+			#die('?');
+		}
+	} while (count($all));
+	die('?');
+}
+
+/**
+ * Renvoi les listes de diffusion disponibles avec leur status
+ * (open,close,?) stockees en configuration (ancienne structure de donnees)
+ *
+ * @return array
+ *   array
+ *     id : identifiant
+ *     titre : titre de la liste
+ *     status : status de la liste
+ */
+function mailsubscribers_old_listes_from_config(){
+	$filtrer_status = $filtrer_category = false;
+
+	$listes = array();
+	// d'abord les listes connues en config
+	if (!function_exists('lire_config'))
+		include_spip('inc/config');
+	if ($known_lists = lire_config("mailsubscribers/lists",array())
+		AND is_array($known_lists)
+		AND count($known_lists)){
+
+		foreach ($known_lists as $kl){
+			$id = $kl['id'];
+			if ($id = mailsubscribers_filtre_liste($id)){
+				$status = ($kl['status']=='open'?'open':'close');
+				$listes[$id] = array(
+					'id' => $id,
+					'titre' => $kl['titre'],
+					'status' => $status
+				);
+			}
+		}
+	}
+
+	// puis trouver toutes les listes qui existent en base et non connues en config
+	$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut!=".sql_quote('poubelle'));
+	foreach ($rows as $row){
+		$ll = explode(",",$row['listes']);
+		foreach($ll as $l){
+			if ($id=$l and $id=mailsubscribers_filtre_liste($l)){
+				if (!isset($listes[$id]))
+					$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'close');
+			}
+		}
+	}
+
+	return $listes;
+}
+
+/**
+ * Importer les donnees depuis SPIP Listes
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
+ */
 function mailsubscribers_import_from_spiplistes(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($desc = $trouver_table('spip_auteurs_elargis')
@@ -78,7 +198,10 @@ function mailsubscribers_import_from_spiplistes(){
 	}
 }
 
-
+/**
+ * Importer les donnees depuis MesAbonnes
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
+ */
 function mailsubscribers_import_from_mesabonnes(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($trouver_table('spip_mesabonnes')){
@@ -114,6 +237,10 @@ function mailsubscribers_import_from_mesabonnes(){
 }
 
 
+/**
+ * Importer les donnees depuis SPIP Lettres
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
+ */
 function mailsubscribers_import_from_spiplettres(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($trouver_table('spip_abonnes')
@@ -185,7 +312,10 @@ function mailsubscribers_import_from_spiplettres(){
 	}
 }
 
-
+/**
+ * Importer les donnees depuis CleverMail
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
+ */
 function mailsubscribers_import_from_clevermail(){
 	$trouver_table = charger_fonction("trouver_table","base");
 	if ($desc = $trouver_table('spip_cm_subscribers')
@@ -240,7 +370,12 @@ function mailsubscribers_import_from_clevermail(){
 	}
 }
 
-
+/**
+ * Importer un email
+ * @param $email
+ * @param $set
+ * @return bool|int|mixed
+ */
 function mailsubscriber_import_one($email,$set){
 	if (!$email) return false;
 	$GLOBALS['notification_instituermailsubscriber_status'] = false;
@@ -257,7 +392,10 @@ function mailsubscriber_import_one($email,$set){
 	}
 }
 
-
+/**
+ * finaliser l'import des listes
+ * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
+ */
 function mailsubscribers_finaliser_listes(){
 	include_spip("inc/mailsubscribers");
 	$listes = mailsubscribers_listes();
@@ -289,5 +427,3 @@ function mailsubscribers_vider_tables($nom_meta_base_version) {
 	effacer_meta('mailsubscribers');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

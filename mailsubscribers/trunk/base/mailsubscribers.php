@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function mailsubscribers_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['mailsubscribers'] = 'mailsubscribers';
+	$interfaces['table_des_tables']['mailsubscribinglists'] = 'mailsubscribinglists';
 
 	return $interfaces;
 }
@@ -86,9 +87,85 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 
 	);
 
+	$tables['spip_mailsubscribinglists'] = array(
+		'type' => 'mailsubscribinglist',
+		'page'=>'',
+		'principale' => "oui",
+		'field'=> array(
+			"id_mailsubscribinglist" => "bigint(21) NOT NULL",
+			"identifiant"            => "varchar(255) NOT NULL DEFAULT ''",
+			"titre"                  => "text NOT NULL DEFAULT ''",
+			"descriptif"             => "text DEFAULT '' NOT NULL",
+			"date"                   => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"statut"                 => "varchar(20)  DEFAULT 'prepa' NOT NULL",
+			"maj"                    => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"            => "id_mailsubscribinglist",
+			"UNIQUE identifiant"     => "identifiant(255)",
+			"KEY statut"             => "statut",
+		),
+		'titre' => "titre",
+		'date' => "date",
+		'champs_editables'  => array('identifiant', 'titre', 'descriptif', 'date', 'statut'),
+		'champs_versionnes' => array('identifiant', 'titre', 'descriptif'),
+		'rechercher_champs' => array('identifiant' => 1, 'titre' => 2, 'descriptif'=>1),
+		'tables_jointures'  => array(),
+		'statut_textes_instituer' => array(
+			'ouverte'    => 'mailsubscribinglist:texte_statut_ouverte',
+			'fermee'    => 'mailsubscribinglist:texte_statut_fermee',
+			'poubelle' => 'texte_statut_poubelle',
+		),
+		'statut_images' => array(
+			'ouverte'=>'puce-publier-8.png',
+			'fermee'=>'puce-refuser-8.png',
+			'poubelle'=>'puce-supprimer-8.png',
+		),
+		'statut_titres' => array(
+			'ouverte'=>'mailsubscribinglist:info_statut_ouverte',
+			'fermee'=>'mailsubscribinglist:info_statut_fermee',
+			'poubelle'=>'mailsubscribinglist:info_statut_poubelle',
+		),
+
+		'statut'=> array(
+			array(
+				'champ'     => 'statut',
+				'publie'    => 'ouverte',
+				'previsu'   => 'ouverte,fermee',
+				'exception' => array('statut','tout')
+			)
+		),
+		'texte_changer_statut' => 'mailsubscribinglist:texte_changer_statut_mailsubscribinglist',
+
+	);
+
 	return $tables;
 }
 
 
 
-?>
+/**
+ * Déclaration des tables secondaires (liaisons)
+ * @param array $tables
+ * @return array
+ */
+function mailsubscribers_declarer_tables_auxiliaires($tables) {
+
+	$tables['spip_mailsubscriptions'] = array(
+		'field' => array(
+			"id_mailsubscriber"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_mailsubscribinglist"      => "bigint(21) DEFAULT '0' NOT NULL",
+			"statut"                      => "varchar(20)  DEFAULT 'prop' NOT NULL",
+			"maj"                         => "TIMESTAMP",
+		),
+		'key' => array(
+			"PRIMARY KEY"                 => "id_mailsubscriber,id_mailsubscribinglist",
+			"KEY id_mailsubscriber"       => "id_mailsubscriber",
+			"KEY id_mailsubscribinglist"  => "id_mailsubscribinglist",
+			"KEY statut"                  => "statut"
+		)
+	);
+
+	return $tables;
+}
+
