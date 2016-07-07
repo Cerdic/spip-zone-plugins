@@ -20,12 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_intranet_texte' => 'Ce site n’est accessible qu’aux personnes identifiées.',
 
 	// L
-	'label_intranet_ouverts' => 'Permettre de sortir les objets éditoriaux un à un de l\'intranet',
+	'label_intranet_ouverts' => 'Permettre de sortir les objets éditoriaux un à un de l’intranet',
 	'label_message' => 'Personnalisation du message',
 	'label_pages_intranet' => 'Pages accessibles',
 	'label_plageip' => 'Plage IP',
 
 	// M
-	'message_intranet_remettre' => 'Remettre dans l\'intranet',
-	'message_intranet_sortir' => 'Sortir de l\'intranet'
+	'message_intranet_remettre' => 'Remettre dans l’intranet',
+	'message_intranet_sortir' => 'Sortir de l’intranet'
 );
