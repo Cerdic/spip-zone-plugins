@@ -12,6 +12,11 @@ Ajouter une page listant l'ensemble des objets éditoriaux de sortis de l'intran
 
 ### Versions 0.6.x
 
+#### Version 0.6.1
+
+* Problème lors de l'accès en local, tout était débrayé (cf ce [forum](http://contrib.spip.net/Intranet-Extranet-4388?var_mode=calcul#forum487356) et [celui-ci](http://contrib.spip.net/Intranet-Extranet-4388?var_mode=calcul#forum487794))
+* Accepter `::1`, `localhost` et `127.0.0.1` dans les ips comme hôte local (cf [ce forum]()).
+
 #### Version 0.6.0
 
 * Permettre de sortir des objets éditoriaux un à un de l'intranet, par exemple :
