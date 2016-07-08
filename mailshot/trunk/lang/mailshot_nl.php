@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envois_destinataires_ok' => 'Verzending geslaagd',
 	'titre_envois_destinataires_todo' => 'Toekomstige verzendingen',
 	'titre_envois_en_cours' => 'Bezig met verzenden',
+	'titre_envois_planifies' => 'Geplande verzendingen',
 	'titre_envois_termines' => 'Verzending beëindigd',
 	'titre_mailshot' => 'Bulk Mailing',
 	'titre_mailshots' => 'Bulk mailings',
