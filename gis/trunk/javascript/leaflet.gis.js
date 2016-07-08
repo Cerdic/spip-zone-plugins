@@ -162,7 +162,7 @@ L.Map.Gis = L.Map.extend({
 	// API setGeoJsonFeaturePopup : Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
 	setGeoJsonFeaturePopup: function (feature, layer) {
 		// Déclarer le contenu de la popup s'il y en a
-		if (feature.properties && (feature.properties.title || feature.properties.description)) {
+		if (feature.properties && !feature.properties.noclick && (feature.properties.title || feature.properties.description)) {
 			var popupContent = '';
 			var popupOptions = '';
 			if (feature.properties.title)
@@ -180,21 +180,27 @@ L.Map.Gis = L.Map.extend({
 		var map = this;
 		// Analyse des points et déclaration (sans regroupement des points en cluster)
 		if (!map.options.cluster) {
-			if (data.features.length > 0) {
+			if (data.features && data.features.length > 0) {
 				var geojson = L.geoJson('', {
 					style: this.options.pathStyles ? this.options.pathStyles : function (feature) {
-						return feature.properties.styles;
+						if (feature.properties && feature.properties.styles)
+							return feature.properties.styles;
+						else
+							return '';
 					},
 					onEachFeature: function (feature, layer) {
 						// Déclarer l'icone du point
 						if (feature.geometry.type == 'Point') {
 							map.setGeoJsonFeatureIcon(feature, layer);
 						}
+						if (feature.properties && feature.properties.styles) {
+							layer.setStyle(feature.properties.styles);
+						}
 						// Déclarer le contenu de la popup s'il y en a
 						map.setGeoJsonFeaturePopup(feature, layer);
 					}
 				}).addData(data).addTo(map);
-				
+
 				if (map.options.autocenterandzoom) {
 					if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
 						map.setView(geojson.getBounds().getCenter(), map.options.zoom);
