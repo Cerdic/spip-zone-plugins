@@ -11,7 +11,14 @@ function photoswipe_insert_head_css($flux) {
 	";
 }
 
-function photoswipe_insert_head($flux){
+function photoswipe_insert_head($flux) {
+	if ((include_spip('inc/config') or function_exists('lire_config')) and lire_config('photoswipe/selecteur')) {
+		$selecteur = addslashes(lire_config('photoswipe/selecteur'));
+	}
+	else {
+		$selecteur = 'img[data-photo], a[type]';
+	}
+	
 	$flux = photoswipe_insert_head_css($flux); // au cas ou il n'est pas implemente
 
 	$flux .='
@@ -22,7 +29,7 @@ function photoswipe_insert_head($flux){
 // configuration
 photoswipe = {
   path: "' . find_in_path('lib/photoswipe/'). '/",
-  selector: "img[data-photo],a[type]",
+  selector: "' . $selecteur . '",
   gallery: true, // galerie
   debug: false, // debug
 };
