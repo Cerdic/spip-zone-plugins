@@ -121,7 +121,8 @@ var jQgisloader;
 					ne_lat: (#GET{ne_lat})][,
 					sw_lon: (#GET{sw_lon})][,
 					ne_lon: (#GET{ne_lon})],
-					affiche_points: [(#ENV{point,''}|=={non}|?{false,true})],
+					affiche_points: [(#ENV{point,''}|=={non}|?{false,true})][,
+					langue:'(#ENV{langue})'],
 					json_points:{
 						url: '[(#URL_PAGE{gis_json}|parametre_url{lang,#ENV{langue},&}|url_absolue)]'[,
 						objets: '(#ENV{objets,#ENV{class}}|trim)'],

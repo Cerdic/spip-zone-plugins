@@ -45,7 +45,8 @@ L.Map.Gis = L.Map.extend({
 		kml: false,
 		gpx: false,
 		geojson: false,
-		topojson: false
+		topojson: false,
+		langue: false
 	},
 	
 	initialize: function (id,options) {
@@ -162,12 +163,26 @@ L.Map.Gis = L.Map.extend({
 	// API setGeoJsonFeaturePopup : Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
 	setGeoJsonFeaturePopup: function (feature, layer) {
 		// Déclarer le contenu de la popup s'il y en a
-		if (feature.properties && !feature.properties.noclick && (feature.properties.title || feature.properties.description)) {
-			var popupContent = '';
-			var popupOptions = '';
-			if (feature.properties.title)
+		if (feature.properties 
+			&& !feature.properties.noclick 
+			&& (feature.properties.title || feature.properties.description || 
+				(this.options.langue && (feature.properties['title_'+this.options.langue] || feature.properties['description_'+this.options.langue])))) {
+			var popupContent = '',
+				popupOptions = '',
+				description_ok = false;
+			if (this.options.langue) {
+				langue = this.options.langue;
+				if (feature.properties['title_'+langue]) {
+					popupContent = '<strong class="title">' + feature.properties['title_'+langue] + '</strong>';
+				} else if (feature.properties.title)
+					popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
+				if (feature.properties['description_'+langue]) {
+					popupContent = popupContent + feature.properties['description_'+langue];
+					description_ok = true;
+				}
+			} else if(feature.properties.title)
 				popupContent = '<strong class="title">' + feature.properties.title + '</strong>';
-			if (feature.properties.description)
+			if (!description_ok && feature.properties.description)
 				popupContent = popupContent + feature.properties.description;
 			if (feature.properties.popup_options)
 				popupOptions = feature.properties.popup_options;
