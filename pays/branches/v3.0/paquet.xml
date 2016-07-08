@@ -24,7 +24,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="pays_pipelines.php" />
 	<pipeline nom="autoriser" inclure="pays_autorisations.php"/>
 
-	<utilise nom='saisies' compatibilite='[1.0.0;[' />
+	<utilise nom='saisies' compatibilite='[1.14.0;[' />
 	<menu nom="pays" titre="pays:titre_pays" parent="menu_edition" icone="images/pays-16.png" action="pays_tous" />
 
 </paquet>
