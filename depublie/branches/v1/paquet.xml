@@ -30,6 +30,6 @@
 	<pipeline nom="taches_generales_cron" inclure="depublie_pipelines.php" />
 	<pipeline nom="autoriser" inclure="depublie_autoriser.php" />
   
-  <menu nom="depublies" titre="depublie:icone_voir_depublie" parent="bando_activite" icone="images/depublie-16.png" />
+	<menu nom="depublies" titre="depublie:icone_voir_depublie" parent="bando_activite" icone="images/depublie-16.png" />
 
 </paquet>
