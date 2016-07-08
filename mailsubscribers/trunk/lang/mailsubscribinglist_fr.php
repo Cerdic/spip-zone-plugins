@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_mailsubscribinglist' => 'Ajouter une liste',
 	'icone_modifier_mailsubscribinglist' => 'Modifier cette liste',
 	'info_1_mailsubscribinglist' => '1 liste de diffusion',
+	'info_nb_mailsubscribinglists' => '@nb@ listes de diffusion',
 	'info_aucun_mailsubscribinglist' => 'Aucune liste de diffusion',
 	'info_statut_poubelle' => 'poubelle',
 	'info_statut_ouverte' => 'ouverte',

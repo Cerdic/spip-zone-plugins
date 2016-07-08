@@ -19,11 +19,6 @@ function formulaires_configurer_mailsubscribers_charger_dist(){
 		'listes_auto_auteurs' => lire_config('mailsubscribers/listes_auto_auteurs',array()),
 	);
 
-	foreach ($valeurs['lists'] as $k => $v){
-		$valeurs['lists'][$k]['id'] = mailsubscribers_filtre_liste($v['id']);
-	}
-
-	$valeurs['_auteurs_possibles'] = mailsubscribers_liste_statut_auteur_possibles($valeurs['lists']);
 	return $valeurs;
 }
 
@@ -144,18 +139,19 @@ function formulaires_configurer_mailsubscribers_traiter_dist(){
 
 /**
  * Trouver les statuts auteur qui n'ont pas encore de liste automatique
- * @param $lists
  * @return array
  */
-function mailsubscribers_liste_statut_auteur_possibles($lists){
+function mailsubscribers_liste_statut_auteur_possibles(){
 	$possibles = array(
 		'0minirezo'=>'info_administrateurs',
 		'1comite'=>'info_redacteurs',
 		'6forum'=>'info_visiteurs'
 	);
-	foreach ($lists as $k => $v) {
-		if (isset($possibles[$v['id']])){
-			unset($possibles[$v['id']]);
+	$existing = sql_allfetsel('identifiant','spip_mailsubscribinglists',sql_in('identifiant',array_keys($possibles)));
+	$existing = array_map('reset',$existing);
+	foreach ($existing as $id) {
+		if (isset($possibles[$id])){
+			unset($possibles[$id]);
 		}
 	}
 

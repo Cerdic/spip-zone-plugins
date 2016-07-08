@@ -46,86 +46,6 @@
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
 			</li>
-			<li class="fieldset">
-				<fieldset>
-					<legend><:mailsubscriberscfg:legend_listes_diffusion:></legend>
-					#SET{tableau,#ARRAY{category,newsletter}|mailsubscribers_listes}
-					<BOUCLE_listes(POUR){tableau #GET{tableau}|array_merge{#ARRAY{new1,#LISTE,new2,#LISTE}}}>
-					#SET{index,#COMPTEUR_BOUCLE|moins{1}}
-					<div class="liste-diffusion [ (#ENV*{lists/#GET{index}/id,#VALEUR{id}}|sinon{new})]">
-						[<h3 class="legend">(#ENV*{lists/#GET{index}/titre,#VALEUR{titre}}|sinon{#ENV*{lists/#GET{index}/id,#VALEUR{id}}}|sinon{<:mailsubscriberscfg:info_nouvelle_liste:>})</h3>]
-						[<p class="explication">(#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_compte_inscrits|singulier_ou_pluriel{mailsubscriber:info_1_mailsubscriber,mailsubscriber:info_nb_mailsubscribers}
-							|concat{'. ',#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_trouver_fonction_synchro|?{<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>}}|ltrim{'.'}|trim)</p>]
-						<ul class="editer-groupe liste-diffusion-saisies">
-							#SET{name,id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
-							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
-								<span class='erreur_message'>(#GET{erreurs})</span>
-								]<input type="text" name="lists[#GET{index}][#GET{name}]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" id="lists_[(#GET{index})]_#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-								<input type="hidden" name="lists[#GET{index}][#GET{name}_bak]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" />
-							</li>
-							#SET{name,titre}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
-							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
-								<span class='erreur_message'>(#GET{erreurs})</span>
-								]<input type="text" name="lists[#GET{index}][#GET{name}]" class="text" value="#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}" id="lists_[(#GET{index})]_#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-							</li>
-							#SET{name,status}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
-							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
-								<span class='erreur_message'>(#GET{erreurs})</span>
-								]
-								#SET{val,open}
-								<span class="choix choix_#GET{val}">
-									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
-										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
-										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').hide();" />
-									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-								</span>
-								#SET{val,close}
-								<span class="choix choix_#GET{val}">
-									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
-										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
-										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').hide();" />
-									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-								</span>
-								#SET{val,delete}
-								<span class="choix right choix_#GET{val}">
-									<input type="radio" name="lists[#GET{index}][#GET{name}]" class="radio" id="lists_[(#GET{index})]_#GET{name}_#GET{val}"
-										value="#GET{val}"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|oui)checked="checked"]
-										onchange="if ($(this).prop('checked')) $(this).parent().nextAll('.choix_delete_explication').show();" />
-									<label for="lists_[(#GET{index})]_#GET{name}_#GET{val}" title="[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val},'_explication'}|_T|attribut_html)]">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-								</span>
-								<div class="clearfix choix_#GET{val}_explication explication"[(#ENV*{lists/#GET{index}/#GET{name},#VALEUR{#GET{name}}}|=={#GET{val}}|non)style="display:none"]>
-									[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val},'_explication'}|_T)]
-								</div>
-							</li>
-						</ul>
-					</div>
-					</BOUCLE_listes>
-				</fieldset>
-			</li>
-			#SET{name,listes_auto_auteurs}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<B_statuts>
-			<li class="fieldset">
-				<fieldset>
-					<legend><:mailsubscriberscfg:legend_listes_automatiques:></legend>
-					<ul class="editer-groupe">
-						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							<BOUCLE_statuts(POUR){tableau #ENV{_auteurs_possibles}}>
-							#SET{val,#CLE}
-							<div class="choix">
-								<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name}}|_T{#ARRAY{'statut',#VALEUR}})]</label>
-							</div>
-							</BOUCLE_statuts>
-						</li>
-					</ul>
-				</fieldset>
-			</li>
-			</B_statuts>
 		</ul>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
@@ -134,17 +54,4 @@
 </div>
 <style type="text/css">
 h3.legend {margin-top: 1.5em;margin-bottom: 0}
-.formulaire_spip ul.liste-diffusion-saisies {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;margin-left: 125px}
-.liste-diffusion.new {opacity: 0.7;}
-.liste-diffusion-saisies .editer {padding-top: 2px;padding-bottom: 2px;}
-.liste-diffusion-saisies .editer .choix.left {float: left}
-.liste-diffusion-saisies .editer .choix.right {float: right}
-.liste-diffusion-saisies .choix_close { margin-left:1em;}
-.liste-diffusion-saisies .choix_close label { margin-left:0;}
-.liste-diffusion-saisies .explication {clear: both}
 </style>
-<script type="text/javascript">
-jQuery(function(){
-	jQuery('.liste-diffusion.new input').bind('focus',function(){jQuery(this).closest('.liste-diffusion.new').removeClass('new')});
-})
-</script>

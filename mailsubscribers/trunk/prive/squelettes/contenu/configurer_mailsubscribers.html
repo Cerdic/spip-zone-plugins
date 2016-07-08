@@ -2,6 +2,13 @@
 
 <h1 class="grostitre"><:mailsubscriberscfg:titre_page_configurer_mailsubscriber:></h1>
 
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists,env,ajax} />
+
+[(#AUTORISER{creer,mailsubscribinglists})
+	[(#URL_ECRIRE{mailsubscribinglist_edit,new=oui}|icone_verticale{<:mailsubscribinglist:icone_creer_mailsubscribinglist:>,mailsubscribinglist,new,right})]
+]
+
+<div class="nettoyeur"></div>
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_MAILSUBSCRIBERS
 </div>
