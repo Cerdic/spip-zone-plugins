@@ -16,6 +16,7 @@ function balise_CAMPAGNE_COMPTER_VUES_dyn($id_campagne, $id_encart=false) {
 	
 	// On s'assure que le comptage d'une même pub n'est fait qu'une seule fois par hit et pas par un robot
 	if (!isset($fait[$id_campagne]) and !_IS_BOT){
+		$ok = false;
 		include_spip('inc/campagnes');
 		$infos = campagnes_recuperer_infos_visiteur();
 		
