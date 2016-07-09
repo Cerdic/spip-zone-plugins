@@ -152,7 +152,7 @@ Na potvrdenie registrácie na odoberanie tohto materiálu pre e-mailovú adresu 
 	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.',
 
 	// E
-	'editer_lettre' => 'Upraviť informačný materiál', # MODIF
+	'editer_lettre' => 'Upraviť informačný materiál',
 	'email_administrateur' => 'E-mail administrátora',
 	'email_expediteur' => 'E-mail odosielateľa (from a reply-to)',
 	'email_moderateur' => 'E-mail od moderátora',
