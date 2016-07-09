@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v5
- *   le 2013-11-02 14:12:26
+ *   le 2013-11-02 15:57:09
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -43,6 +43,11 @@ NE PAS ACTIVER EN PRODUCTION !',
     'schema' => '1.0.0',
     'formulaire_config' => '',
     'formulaire_config_titre' => '',
+    'fichiers' => 
+    array (
+      0 => 'autorisations',
+      1 => 'options',
+    ),
     'inserer' => 
     array (
       'paquet' => '',
