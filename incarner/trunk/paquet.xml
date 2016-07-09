@@ -16,6 +16,9 @@
 	<auteur>Michel Bystranowski</auteur>
 
 	<licence>GNU/GPL</licence>
+
 	<pipeline nom="autoriser" inclure="incarner_autorisations.php" /> 
+
+  <pipeline nom="boite_infos" inclure="incarner_pipelines.php" />
 
 </paquet>
