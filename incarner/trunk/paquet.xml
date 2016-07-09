@@ -1,0 +1,21 @@
+<paquet
+	prefix="incarner"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.11;3.0.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2013-11-02 14:12:26
+	-->
+
+	<nom>Incarner</nom>
+
+	<auteur>Michel Bystranowski</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+</paquet>
