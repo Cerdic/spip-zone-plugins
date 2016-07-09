@@ -11,5 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+$GLOBALS['liste_des_authentifications']['incarner'] = 'incarner';
 
 ?>

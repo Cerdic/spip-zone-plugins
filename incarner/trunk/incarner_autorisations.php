@@ -20,6 +20,7 @@ function incarner_autoriser(){}
 function autoriser_incarner_dist ($faire, $type, $id, $qui, $opt) {
 
   include_spip('inc/config');
+  include_spip('inc/cookie');
 
   $cle = lire_config('incarner/cle');
 
