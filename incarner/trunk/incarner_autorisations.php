@@ -19,14 +19,12 @@ function incarner_autoriser() {
 	 a un cookie connu. */
 function autoriser_incarner_dist($faire, $type, $id, $qui, $opt) {
 
-	include_spip('inc/config');
+	include_spip('incarner_fonctions');
 
-	$clefs = lire_config('incarner/cles');
-
-	if (($clefs and in_array($_COOKIE['spip_cle_incarner'], $clefs))
+	if (incarner_cle_valide($_COOKIE['spip_cle_incarner'])
 			or autoriser('webmestre')) {
 		return true;
+	} else {
+		return false;
 	}
-
-	return false;
 }

@@ -61,10 +61,14 @@ function incarner_affichage_final($html) {
 	include_spip('inc/config');
 	include_spip('inc/session');
 
-	$cles = lire_config('incarner/cles') ? lire_config('incarner/cles') : array();
+	if (! $cles = lire_config('incarner/cles')) {
+		$cles = array();
+	}
 
-	if ((! $cles) or (! $id_auteur = array_search($cle_actuelle, $cles))
-			or (session_get('id_auteur') == $id_auteur)) {
+	$id_auteur = array_search($cle_actuelle, $cles);
+
+	if ((! incarner_cle_valide($cle_actuelle))
+			or (session_get('id_auteur') === $id_auteur)) {
 		return $html;
 	}
 

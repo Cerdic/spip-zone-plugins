@@ -16,26 +16,7 @@ function auth_incarner_dist($login, $password, $serveur = '', $phpauth = false) 
 		return array();
 	}
 
-	include_spip('inc/config');
-	include_spip('inc/cookie');
-	include_spip('inc/session');
-
-	/* mise à jour de la clé aléatoire utilisée pour ce webmestre */
-	$cle_actuelle = $_COOKIE['spip_cle_incarner'];
-	$cles = lire_config('incarner/cles') ? lire_config('incarner/cles') : array();
-
-	$nouvelle_cle = urlencode(openssl_random_pseudo_bytes(16));
-
-	/* première incarnation */
-	if (! in_array($cle_actuelle, $cles)) {
-		$cles[session_get('id_auteur')] = $nouvelle_cle;
-	} else {
-		$i = array_search($cle_actuelle, $cles);
-		$cles[$i] = $nouvelle_cle;
-	}
-
-	ecrire_config('incarner/cles', $cles);
-	spip_setcookie('spip_cle_incarner', $nouvelle_cle);
+	incarner_renouveler_cle();
 
 	$row = sql_fetsel(
 		'*',
