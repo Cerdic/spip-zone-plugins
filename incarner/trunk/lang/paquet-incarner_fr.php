@@ -1,8 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
@@ -14,5 +12,3 @@ Ce plugin est un trou de sécurité, NE PAS ACTIVER EN PRODUCTION !",
 	'incarner_nom' => 'Incarner',
 	'incarner_slogan' => 'Changer rapidement d\'utilisateur durant le développement.',
 );
-
-?>

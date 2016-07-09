@@ -9,25 +9,22 @@
  * @package    SPIP\Incarner\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function incarner_autoriser(){}
+function incarner_autoriser() {
+}
 
-function autoriser_incarner_dist ($faire, $type, $id, $qui, $opt) {
+function autoriser_incarner_dist($faire, $type, $id, $qui, $opt) {
 
-  include_spip('inc/config');
+	include_spip('inc/config');
 
-  $cle = lire_config('incarner/cles');
+	$clefs = lire_config('incarner/cles');
 
-  if ( ($cle AND in_array($_COOKIE['spip_cle_incarner'], $cle))
-       OR autoriser('webmestre') ) {
+	if (($clefs and in_array($_COOKIE['spip_cle_incarner'], $clefs))
+			or autoriser('webmestre')) {
+		return true;
+	}
 
-    return True;
-  }
-
-  return False;
+	return false;
 }

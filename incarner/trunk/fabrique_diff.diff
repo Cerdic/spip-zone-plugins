@@ -1,7 +1,0 @@
-Only in ../plugins/fabrique_auto/.backup/incarner/: .git
-Only in ../plugins/fabrique_auto/incarner/: incarner_options.php
-diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_incarner.php ../plugins/fabrique_auto/.backup/incarner/paquet.xml ../plugins/fabrique_auto/incarner/paquet.xml
-11c11
-< 		Paquet genere le 2013-11-02 14:18:28
----
-> 		Paquet genere le 2013-11-02 15:57:09
