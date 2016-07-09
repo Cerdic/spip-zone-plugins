@@ -21,8 +21,9 @@ function autoriser_incarner_dist($faire, $type, $id, $qui, $opt) {
 
 	include_spip('incarner_fonctions');
 
-	if (incarner_cle_valide($_COOKIE['spip_cle_incarner'])
-			or autoriser('webmestre')) {
+	if (autoriser('webmestre')
+			or (isset($_COOKIE['spip_cle_incarner'])
+					and incarner_cle_valide($_COOKIE['spip_cle_incarner']))) {
 		return true;
 	} else {
 		return false;

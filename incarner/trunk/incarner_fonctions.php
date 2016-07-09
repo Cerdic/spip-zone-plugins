@@ -27,7 +27,7 @@ function incarner_cle_valide($cle) {
 	}
 
 	if ($cles and ($id_auteur = array_search($cle, $cles))
-			and ((time() - $maj[$id_auteur]) < _INCARNER_DUREE_VALIDITE)) {
+			and ((time() - $maj[$id_auteur]) < _INCARNER_DELAI_EXPIRATION)) {
 		$maj[$id_auteur] = time();
 		ecrire_config('incarner/maj', $maj);
 
