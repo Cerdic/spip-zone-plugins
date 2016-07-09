@@ -29,3 +29,9 @@ function autoriser_incarner_dist($faire, $type, $id, $qui, $opt) {
 		return false;
 	}
 }
+
+/* Le cookie d'incarnation donne droit aux fonctions de debug */
+function autoriser_debug($faire, $type, $id, $qui, $opt) {
+
+	return autoriser('incarner');
+}
