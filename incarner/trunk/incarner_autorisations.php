@@ -21,10 +21,10 @@ function autoriser_incarner_dist ($faire, $type, $id, $qui, $opt) {
 
   include_spip('inc/config');
 
-  $cle = lire_config('incarner/cle');
+  $cle = lire_config('incarner/cles');
 
-  if ( ($cle AND ($_COOKIE['spip_cle_incarner'] == $cle))
-       OR autoriser('webmestre')) {
+  if ( ($cle AND in_array($_COOKIE['spip_cle_incarner'], $cle))
+       OR autoriser('webmestre') ) {
 
     return True;
   }

@@ -16,13 +16,24 @@ function auth_incarner_dist ($login, $password, $serveur='', $phpauth=false) {
                     "login=" . sql_quote($login,$serveur,'text') .
                     " AND statut<>'5poubelle'",'','','','',$serveur);
 
-  $cle = base64_encode(openssl_random_pseudo_bytes(16));
-
+  /* mise à jour de la clé aléatoire utilisée pour ce webmestre */
   include_spip('inc/config');
   include_spip('inc/cookie');
 
-  ecrire_config('incarner/cle', $cle);
-  spip_setcookie('spip_cle_incarner', $cle);
+  $cle_actuelle = $_COOKIE['spip_cle_incarner'];
+  $cles = lire_config('incarner/cles') ? lire_config('incarner/cles') : array();
+
+  $nouvelle_cle = urlencode(openssl_random_pseudo_bytes(16));
+
+  if (autoriser('webmestre')) {
+    $cles[$row['id_auteur']] = $nouvelle_cle;
+  } else {
+    $i = array_search($cle_actuelle, $cles);
+    $cles[$i] = $nouvelle_cle;
+  }
+
+  ecrire_config('incarner/cles', $cles);
+  spip_setcookie('spip_cle_incarner', $nouvelle_cle);
 
 	return $row;
 }
