@@ -148,7 +148,7 @@ Thanks',
 	'desinscription_validee' => 'Your Deregistration to the letter « @lst_name@ » has been validated. See you soon.',
 
 	// E
-	'editer_lettre' => 'Edit the newsletter', # MODIF
+	'editer_lettre' => 'Edit the newsletter',
 	'email_administrateur' => 'Administrator E-mail',
 	'email_expediteur' => 'E-mail sender (from et reply-to)',
 	'email_moderateur' => 'Moderator E-mail',
