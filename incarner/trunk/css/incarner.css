@@ -1,0 +1,19 @@
+.menu-incarner {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+}
+
+a.bouton-incarner {
+    margin: 0;
+    padding: .4em 1em;
+    background: #666;
+    border: 0;
+    font-weight: bold;
+    border-radius: 0 0 .3em .3em;
+    opacity: .7;
+    color: #FFF;
+    text-decoration: none;
+}

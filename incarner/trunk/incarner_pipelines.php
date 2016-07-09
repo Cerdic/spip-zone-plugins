@@ -44,3 +44,64 @@ function incarner_boite_infos($flux) {
 
 	return $flux;
 }
+
+/**
+ * Ajouter un lien dans côté public pour redevenir webmestre
+ *
+ * @pipeline formulaire_admin
+ * @param  array $html Données du pipeline
+ * @return array       Données du pipeline
+ */
+function incarner_affichage_final($html) {
+
+	if (! $cle_actuelle = $_COOKIE['spip_cle_incarner']) {
+		return $html;
+	}
+
+	include_spip('inc/config');
+	include_spip('inc/session');
+
+	$cles = lire_config('incarner/cles') ? lire_config('incarner/cles') : array();
+
+	if ((! $cles) or (! $id_auteur = array_search($cle_actuelle, $cles))
+			or (session_get('id_auteur') == $id_auteur)) {
+		return $html;
+	}
+
+	include_spip('base/abstract_sql');
+
+	$login = sql_getfetsel(
+		'login',
+		'spip_auteurs',
+		'id_auteur=' . intval($id_auteur)
+	);
+
+	$self = urlencode(self());
+	$url = generer_url_action(
+		'incarner',
+		'login=' . $login . '&redirect=' . $self
+	);
+
+	$lien .= '<div class="menu-incarner" style="right: 60%;">';
+	$lien .= '<a class="bouton-incarner" href="' . $url . '">';
+	$lien .= _T('incarner:reset_incarner', array('login' => $login));
+	$lien .= '</a></div>';
+
+	$html = preg_replace('#(</body>)#', $lien . '$1', $html);
+
+	return $html;
+}
+
+/**
+ * Ajoute une feuille de styles à l'espace public
+ *
+ * @pipeline insert_head
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function incarner_insert_head($flux) {
+
+	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/incarner.css'). '" />';
+
+	return $flux;
+}
