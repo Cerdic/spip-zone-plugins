@@ -22,8 +22,15 @@ function incarner_cle_valide($cle) {
 	if (! $cles = lire_config('incarner/cles')) {
 		$cles = array();
 	}
+	if (! $maj = lire_config('incarner/maj')) {
+		$maj = array();
+	}
 
-	if ($cles and $id_auteur = array_search($cle, $cles)) {
+	if ($cles and ($id_auteur = array_search($cle, $cles))
+			and ((time() - $maj[$id_auteur]) < _INCARNER_DUREE_VALIDITE)) {
+		$maj[$id_auteur] = time();
+		ecrire_config('incarner/maj', $maj);
+
 		return true;
 	} else {
 		return false;
@@ -48,17 +55,24 @@ function incarner_renouveler_cle() {
 	if (! $cles = lire_config('incarner/cles')) {
 		$cles = array();
 	}
+	if (! $maj = lire_config('incarner/maj')) {
+		$maj = array();
+	}
 
 	$nouvelle_cle = urlencode(openssl_random_pseudo_bytes(16));
 
 	/* première incarnation */
 	if (! incarner_cle_valide($cle_actuelle)) {
-		$cles[session_get('id_auteur')] = $nouvelle_cle;
+		$id_auteur = session_get('id_auteur');
 	} else {
 		$id_auteur = array_search($cle_actuelle, $cles);
-		$cles[$id_auteur] = $nouvelle_cle;
 	}
 
+	$cles[$id_auteur] = $nouvelle_cle;
+	$maj[$id_auteur] = time();
+
 	ecrire_config('incarner/cles', $cles);
+	ecrire_config('incarner/maj', $maj);
+
 	spip_setcookie('spip_cle_incarner', $nouvelle_cle);
 }
