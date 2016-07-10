@@ -53,7 +53,6 @@ foreach ($resultats as $r) {
 			$v = new vcalendar($config);
 			$v->parse();
 
-			echo "almanach".$r["id_almanach"]."</br>";
 			while ($comp = $v->getComponent())
 			{
 		//les variables qui vont servir à vérifier l'existence et l'unicité 
