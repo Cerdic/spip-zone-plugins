@@ -41,7 +41,7 @@ foreach ($resultats as $r) {
 			ON E.id_evenement = L.id_objet AND L.id_almanach='.intval($r['id_almanach']));
 
 		//tableau des uid associés à cet almanach tiré du tableau précédent
-			$uid ="";
+			$uid =array();
 			foreach ($evenements_lies as $u ) {
 				$uid[] = $u['uid'];
 			};
