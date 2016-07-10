@@ -21,7 +21,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 	
-	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?}{!evenement_passe}{par date_debut} {0,60}>
+	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?}{id_mot ?}{!evenement_passe}{par date_debut} {0,60}>
 		<INCLURE{fond=inc-rss-item-evenement,id_evenement} />
 	</BOUCLE_evenement>
 
