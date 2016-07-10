@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return
  * 		Retourne le tableau de description des licences
  **/
-function licence_lister($id_licence) {
+function licence_lister($id_licence=null) {
 	include_spip('inc/licence');
 	static $licences = null;
 	
