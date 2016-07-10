@@ -127,7 +127,25 @@ function importation_evenement($objet_evenement,$tableau_almanach){
 	$id_almanach = $tableau_almanach['id_almanach'];
 
 	//insertion de l'evenement en bdd
-	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid_distante,'sequence'=>$sequence_distante,'notes'=>$url));
+	$id_evenement= sql_insertq('spip_evenements',
+	  array(
+	  'id_article' =>$id_article,
+		'date_debut'=>$date_debut,
+		'date_fin'=>$date_fin,
+		'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),
+		'descriptif'=>'<math>'.$descriptif_array["value"].'</math>',
+		'lieu'=>$lieu,
+		'adresse'=>'',
+		'inscription'=>'0',
+		'places'=>'0',
+		'horaire'=>'oui',
+		'statut'=>'publie',
+		'attendee'=>str_replace('MAILTO:', '', $attendee),
+		'id_evenement_source'=>'0',
+		'uid'=>$uid_distante,
+		'sequence'=>$sequence_distante,
+		'notes'=>$url)
+	);
 	//on associe l'événement à l'almanach
 	sql_insertq("spip_almanachs_liens",array('id_almanach'=>$id_almanach,'id_objet'=>$id_evenement,'objet'=>'evenement','vu'=>'oui'));
 	//on associe l'événement à son mot
