@@ -26,7 +26,6 @@ function massicot_chemin_image($objet, $id_objet, $role = null) {
 	include_spip('base/objets');
 
 	if (objet_type($objet) === 'document') {
-
 		$fichier = sql_getfetsel(
 			'fichier',
 			'spip_documents',
@@ -34,9 +33,7 @@ function massicot_chemin_image($objet, $id_objet, $role = null) {
 		);
 		return $fichier ?
 			find_in_path(_NOM_PERMANENTS_ACCESSIBLES . $fichier) : '';
-
 	} else {
-
 		if ($role === 'logo_survol') {
 			$type_logo = 'off';
 		} else {
@@ -187,7 +184,6 @@ function massicot_trouver_objet_logo($fichier) {
 	$row = explode('on', $fichier);
 
 	if (is_array($row) and (count($row) === 2)) {
-
 		return array(
 			'objet' => objet_type(
 				array_search($row[0], $GLOBALS['table_logos'])
@@ -352,7 +348,6 @@ function massicoter_logo_document($logo, $doc = array()) {
 	/* Si le document en question n'est pas une image, on ne fait rien */
 	if ((! $logo)
 		or (preg_match('/^(jpe?g|png|gif)$/i', $doc['extension']) === 0)) {
-
 		return $logo;
 	}
 
@@ -420,7 +415,6 @@ function massicoter_logo($logo, $objet_type = null, $id_objet = null, $role = nu
 	/* S'il n'y a pas d'id_objet, on essaie de le deviner avec le nom du
 	   fichier, c'est toujours mieux que rien. Sinon on abandonne… */
 	if (is_null($id_objet)) {
-
 		$objet = massicot_trouver_objet_logo($src);
 
 		/* Si le plugin roles_documents est activé, l'objet n'est pas forcément

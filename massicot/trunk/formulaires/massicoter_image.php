@@ -50,7 +50,6 @@ function formulaires_massicoter_image_saisies_dist($objet, $id_objet, $redirect,
 	);
 
 	if (isset($GLOBALS['presets_format_massicot'])) {
-
 		$datas = array();
 		foreach ($GLOBALS['presets_format_massicot'] as $preset) {
 			$cle = $preset['largeur'] . ':' . $preset['hauteur'];
@@ -110,7 +109,6 @@ function formulaires_massicoter_image_charger_dist($objet, $id_objet, $redirect,
 function formulaires_massicoter_image_traiter_dist($objet, $id_objet, $redirect, $forcer_dimensions = null, $role = null) {
 
 	if (! _request('annuler')) {
-
 		$parametres = array(
 			'zoom' => _request('zoom'),
 			'x1'   => _request('x1'),

@@ -98,9 +98,7 @@ function massicot_declarer_tables_interfaces($interfaces) {
 	/* Pour chaque objet éditorial existant, ajouter un traitement sur
 	   les logos */
 	foreach (lister_tables_objets_sql() as $table => $valeurs) {
-
 		if ($table !== 'spip_documents') {
-
 			$interfaces = ajouter_traitement_automatique(
 				$interfaces,
 				'massicoter_logo(%s, '.objet_type($table).', $Pile[1][\''.id_table_objet($table).'\'])',

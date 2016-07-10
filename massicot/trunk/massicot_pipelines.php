@@ -86,7 +86,6 @@ function massicot_post_edition($flux) {
 
 	if (($flux['args']['type'] === 'document')
 	    and isset($flux['data']['fichier'])) {
-
 		include_spip('base/abstract_sql');
 		include_spip('action/editer_liens');
 
@@ -128,7 +127,6 @@ function massicot_formulaire_traiter($flux) {
 
 	if (($flux['args']['form'] === 'editer_logo')
 	    and (_request('supprimer_logo_on'))) {
-
 		include_spip('base/abstract_sql');
 		include_spip('action/editer_liens');
 
