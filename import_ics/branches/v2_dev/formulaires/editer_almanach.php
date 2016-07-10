@@ -72,7 +72,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
 	$liens = sql_allfetsel('id_evenement, uid, sequence', 'spip_evenements');
 	// on definit un tableau des uid présentes dans la base
-	$uid ="";
+	$uid =array();
 	foreach ($liens as $u ) {
 		$uid[] = $u['uid'];
 	};
@@ -90,7 +90,6 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		$sequence = $liens[$cle]['sequence'];//sequence presente dans la base ayant le meme index
 
 		if ($sequence < $sequence_distante ){//si la sequecne de la bdd est plus petite, il y a eu mise à jour et il faut intervenir
-			echo "c'est pas pareil, il faut mettre à jour l'événement ".$liens[$cle]['id_evenement']."<br/>";
 		} 
 	} else {importation_evenement($comp,$id_almanach);};//l'evenement n'est pas dans la bdd, on va l'y mettre
  }
