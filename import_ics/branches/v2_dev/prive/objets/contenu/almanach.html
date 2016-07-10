@@ -17,11 +17,14 @@
 </span>
 </div>
 
+<B_mot_lie>
 <div class="champ contenu_id_mot[ (#ID_MOT*|strlen|?{'',vide})]">
 <BOUCLE_mot_lie(MOTS){id_mot=#ID_MOT}>
 	<label><strong><:almanach:label_id_mot:></strong></label>
 	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}">#TITRE (mot n°#ID_MOT)</a> </span>
 </BOUCLE_mot_lie>
+</div>
+</B_mot_lie>
 
 <div class="champ contenu_decalage[ (#DECALAGE*|strlen|?{'',vide})]">
 	<label><strong><:almanach:decalage:> : </strong></label>
