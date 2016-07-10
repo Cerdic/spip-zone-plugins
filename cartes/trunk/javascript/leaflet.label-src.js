@@ -195,7 +195,6 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 			L.DomUtil.removeClass(container, 'leaflet-label-right');
 
 			if (lang_direction === 'rtl') {
-				console.log(labelWidth);
 				pos = pos.add(L.point(-offset.x, offset.y));
 			} else {
 				pos = pos.add(L.point(-offset.x - labelWidth, offset.y));
