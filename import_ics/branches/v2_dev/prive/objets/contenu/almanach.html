@@ -41,7 +41,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='date' scope='col'><:date:></th>
-			<th class='orateur' scope='col'><:seminaire:attendee:></th>
+			<th class='orateur' scope='col'><:almanach:attendee:></th>
 			<th class='titre' scope='col'><:info_titre:></th>
 		</tr>
 	</thead>
@@ -54,7 +54,7 @@
 			<td class='titre principale'>
 				#SET{attendee,#ATTENDEE}[(#REM) on met attendee dans une variable pour pouvoir l'éliminer dans le titre si jamais il est présent ainsi que les espaces et le tiret suivant]
 				[<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE|replace{#GET{attendee}\h-\h})</a>]<br/>
-				[<strong><:seminaire:lieu:> : </strong>(#LIEU)]
+				[<strong><:almanach:lieu:> : </strong>(#LIEU)]
 			</td>
 		</BOUCLE_details_evenement>
 		</tr>

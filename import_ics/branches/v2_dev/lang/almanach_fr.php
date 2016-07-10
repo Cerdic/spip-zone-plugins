@@ -49,7 +49,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
+	'lieu'						 =>		'Lieu',
 
+  //N
+	'notes'						 =>		'Notes',
+
+  //O
+	'origin'					 => 	'Origine',
+  
 	//P
 	'pas_de_decalage' => 'Pas de décalage.',
 	'plusieurs_evenements' => '@nb@ événements',
