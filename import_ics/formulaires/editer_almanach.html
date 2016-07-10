@@ -32,7 +32,7 @@ function toggle(className, obj) {
 
 [(#REM)même chose avec les ressources mais on conditionne à la présence du plugin orr]
 #SET{tableau_ressources,#ARRAY}
-<BOUCLE_ressources(ORR_RESSOURCES){si #PLUGIN{orr}| }>
+<BOUCLE_ressources(ORR_RESSOURCES?)>
 #SET{tableau_ressources, #GET{tableau_ressources}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
 </BOUCLE_ressources>
 [(#SET{tableau_ressources, #GET{tableau_ressources}|array_flip})]
@@ -65,7 +65,7 @@ function toggle(className, obj) {
 			[(#SAISIE{selection, id_mot, obligatoire=oui,
 				label=<:seminaire:choix_mot:>,
 				explication=<:almanach:type_evenement:>,
-				datas=#GET{tableau_type_evenement}	
+				datas=#GET{tableau_type_evenement}
 			})]
 
 			[(#SAISIE{selection,decalage,
