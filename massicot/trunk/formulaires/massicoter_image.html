@@ -42,8 +42,11 @@
 <script type="text/javascript">
  $(function () {
    $('#formulaire_massicoter_image').formulaireMassicoterImage({
-	 zoom: #ENV{zoom,1}[,
-	 forcer_dimensions: (#ENV{forcer_dimensions}|json_encode)]
+     zoom: #ENV{zoom,1},
+     messages: {
+       'erreur_image_trop_petite': "<:massicot:erreur_image_trop_petite:>"
+     }[,
+	   forcer_dimensions: (#ENV{forcer_dimensions}|json_encode)]
    });
  });
 </script>

@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
+	'erreur_image_trop_petite' => 'Cette image est trop petite pour ce format.',
 	'erreur_parametre_manquant' => 'Le paramètre @parametre@ est obligatoire !',
 
 	// L

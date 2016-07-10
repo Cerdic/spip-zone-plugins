@@ -143,6 +143,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 
 		var format = e.target.value;
 
+		afficher_erreur('');
+
 		if (format) {
 			mode_dimensions_forcees = true;
 
@@ -150,37 +152,42 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			forcer_largeur = parseInt(format[0], 10);
 			forcer_hauteur = parseInt(format[1], 10);
 
-			slider.slider('option', 'min', calculer_zoom_min());
+			if ((largeur_image < forcer_largeur) || (hauteur_image < forcer_hauteur)) {
+				afficher_erreur(options.messages.erreur_image_trop_petite);
+			} else {
+				slider.slider('option', 'min', calculer_zoom_min());
 
-			imgAreaSelector.setOptions({
-				aspectRatio: forcer_largeur + ':' + forcer_hauteur,
-				minWidth: Math.round(forcer_largeur * zoom),
-				minHeight: Math.round(forcer_hauteur * zoom)
-			});
+				imgAreaSelector.setOptions({
+					aspectRatio: forcer_largeur + ':' + forcer_hauteur,
+					minWidth: Math.round(forcer_largeur * zoom),
+					minHeight: Math.round(forcer_hauteur * zoom)
+				});
 
-			selection_initiale = forcer_dimensions_selection(
-				imgAreaSelector.getSelection(),
-				zoom
-			);
+				selection_initiale = forcer_dimensions_selection(
+					imgAreaSelector.getSelection(),
+					zoom
+				);
 
-			maj_selection(selection_initiale);
+				maj_selection(selection_initiale);
 
-			maj_formulaire(selection_initiale, zoom);
+				maj_formulaire(selection_initiale, zoom);
 
-		} else {
-			mode_dimensions_forcees = false;
-
-			forcer_largeur = null;
-			forcer_hauteur = null;
-
-			slider.slider('option', 'min', 0.01);
-
-			imgAreaSelector.setOptions({
-				aspectRatio: '',
-				minWidth: 1,
-				minHeight: 1
-			});
+				return;
+			}
 		}
+
+		mode_dimensions_forcees = false;
+
+		forcer_largeur = null;
+		forcer_hauteur = null;
+
+		slider.slider('option', 'min', 0.01);
+
+		imgAreaSelector.setOptions({
+			aspectRatio: '',
+			minWidth: 1,
+			minHeight: 1
+		});
 	});
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
@@ -208,6 +215,19 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 	/*************/
 	/* Fonctions */
 	/*************/
+
+	/* Une fonction pour afficher les erreurs */
+	function afficher_erreur (msg) {
+
+		$('#formulaire_massicoter_image .erreur_message').remove();
+
+		if (msg) {
+			$('#formulaire_massicoter_image ul')
+				.before('<div class="erreur_message">' + msg + '</div>');
+		}
+
+		imgAreaSelector.update();
+	}
 
 	/* Mise à jour du formulaire */
 	function maj_formulaire (selection, zoom) {
