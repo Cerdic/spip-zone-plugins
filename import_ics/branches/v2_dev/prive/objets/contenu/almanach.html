@@ -52,9 +52,14 @@
 			<td class='date secondaire'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})]</td>
 			<td class="orateur">#ATTENDEE</td>
 			<td class='titre principale'>
-				#SET{attendee,#ATTENDEE}[(#REM) on met attendee dans une variable pour pouvoir l'éliminer dans le titre si jamais il est présent ainsi que les espaces et le tiret suivant]
-				[<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE|replace{#GET{attendee}\h-\h})</a>]<br/>
+				[(#ATTENDEE|?{
+				 [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE|replace{#ATTENDEE\h-\h})</a>],
+			   [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE)</a>]
+				 }
+				)]
+				<br />
 				[<strong><:almanach:lieu:> : </strong>(#LIEU)]
+
 			</td>
 		</BOUCLE_details_evenement>
 		</tr>
