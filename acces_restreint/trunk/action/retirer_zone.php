@@ -19,6 +19,8 @@ function action_retirer_zone_dist() {
 		include_spip('action/editer_zone');
 		if ($id_objet=='-1') {
 			zone_lier($id_zone, $type, array(), 'set');
+		} elseif ($id_zone=='-1') {
+			zone_lier(array(), $type, $id_objet, 'set');
 		} else {
 			zone_lier($id_zone, $type, $id_objet, 'del');
 		}
