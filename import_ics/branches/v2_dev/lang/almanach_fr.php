@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_almanach' => 'Ajouter cet almanach',
 	'appliquer_decalage' => 'Appliquer le décalage',
-	'appliquer_decalage_explication' => 'Voulez-vous applliquer le décalage à tous les événements associés à cet almanach (il est préférable de supprimer l\'ancien décalage puis d\'appliquer le nouveau) ?',
+	'appliquer_decalage_explication' => 'Voulez-vous appliquer le décalage à tous les événements associés à cet almanach (il est préférable de supprimer l\'ancien décalage puis d\'appliquer le nouveau) ?',
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.
 ',
 	//C
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'URL',
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 
-	//P 
+	//P
 	'pas_de_decalage' => 'Pas de décalage.',
 	'plusieurs_evenements' => '@nb@ événements',
 	'purger_almanach' => 'Si vous voulez supprimer cet almanach, vous devez tout d\'abord en supprimer le contenu.',
