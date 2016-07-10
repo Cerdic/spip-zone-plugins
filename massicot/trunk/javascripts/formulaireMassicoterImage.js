@@ -188,7 +188,8 @@ $.fn.formulaireMassicoterImage = function ( options ) {
 			minWidth: 1,
 			minHeight: 1
 		});
-	});
+	})
+		.trigger('change');
 
 	/* Et enfin on s'occupe du bouton de réinitialisation */
 	$('#formulaire_massicoter_image_reset').click(function (e) {
