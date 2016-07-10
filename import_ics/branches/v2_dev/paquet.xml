@@ -1,0 +1,39 @@
+<paquet
+	prefix="import_ics"
+	categorie="date"
+	version="1.2.4"
+	etat="test"
+	compatibilite="[3.0.7;3.1.*]"
+	logo="prive/themes/spip/images/import_ics-64.png"
+	documentation="http://contrib.spip.net/Import-ICS"
+	schema="1.0.2"
+>
+	<!--
+		Paquet genere le 2013-04-15 14:09:23
+	-->
+
+	<nom>Import_ics</nom>
+
+	<auteur>Amaury</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="agenda" compatibilite="[3.0.0;]" />
+	<necessite nom="icalendar" compatibilite="[0.2.1;]" />
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
+	<necessite nom="seminaire" compatibilite="[2.1.10;]" />
+
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+
+	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/import_ics.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="import_ics_pipelines.php"/>
+
+
+	<menu nom="almanachs" titre="almanach:titre_almanachs" parent="menu_edition" icone="images/almanach-16.png" action="almanachs" />
+	<menu nom="almanach_creer" titre="almanach:icone_creer_almanach" parent="outils_rapides" icone="images/almanach-new-16.png" action="almanach_edit" parametres="new=oui" />
+</paquet>
