@@ -61,7 +61,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 		'statut_images' => array(
-			'init'=>'puce-preparer-8.png',
+			'init'=>'puce-planifier-8.png',
 			'pause'=>'puce-preparer-8.png',
 			'processing'=>'puce-proposer-8.png',
 			'end'=>'puce-publier-8.png',
