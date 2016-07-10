@@ -6,7 +6,7 @@
 	compatibilite="[3.0.7;3.1.*]"
 	logo="prive/themes/spip/images/import_ics-64.png"
 	documentation="http://contrib.spip.net/Import-ICS"
-	schema="1.0.2"
+	schema="1.0.3"
 >
 	<!--
 		Paquet genere le 2013-04-15 14:09:23
@@ -30,6 +30,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/import_ics.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/import_ics.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="import_ics_pipelines.php"/>
 
