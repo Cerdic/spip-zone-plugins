@@ -44,6 +44,15 @@
 		</div>
 	</div>
 	<div class="map_wrapper">
+		<BOUCLE_kml(DOCUMENTS){id_carte}{extension=kml}{0,1}>
+		#SET{kml,#ID_DOCUMENT}
+		</BOUCLE_kml>
+		<BOUCLE_geojson(DOCUMENTS){id_carte}{extension=json}{0,1}>
+		#SET{geojson,#ID_DOCUMENT}
+		</BOUCLE_geojson>
+		<BOUCLE_gpx(DOCUMENTS){id_carte}{extension=gpx}{0,1}>
+		#SET{gpx,#ID_DOCUMENT}
+		</BOUCLE_gpx>
 		[(#SET{minzoom,[(#ZOOM_MIN|sinon{2})]})]
 		[(#SET{maxzoom,[(#ZOOM_MAX|sinon{12})]})]
 		[(#SET{zoom_defaut,[(#ZOOM_DEFAUT|sinon{#GET{minzoom}})]})]
@@ -71,7 +80,10 @@
 			langue=#ENV{lang},
 			id_objet=#ID_CARTE,
 			height=100%,
-			options=#GET{options}})]
+			options=#GET{options},
+			kml=#GET{kml},
+			gpx=#GET{gpx},
+			geojson=#GET{geojson}})]
 	</div>
 	[(#SET{footer,footer_carte/[(#FOOTER|sinon{footer})]})]
 	<INCLURE{fond=#GET{footer},id_carte,self=#SELF} />
