@@ -56,7 +56,7 @@ foreach ($resultats as $r) {
 			while ($comp = $v->getComponent())
 			{
 		//les variables qui vont servir à vérifier l'existence et l'unicité 
-			   	$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
+			  $sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 				$uid_distante = $comp->getProperty("UID");#uid de l'evenement;
 				//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
 				if (!is_int($sequence_distante)){$sequence_distante="0";}
@@ -70,7 +70,10 @@ foreach ($resultats as $r) {
 					if ($sequence < $sequence_distante) {
 						importation_evenement($comp,$r);
 					}
-				} else {importation_evenement($comp,$r);}
+				}
+				else{
+					importation_evenement($comp,$r);
+				}
 			}
 		}
 }
