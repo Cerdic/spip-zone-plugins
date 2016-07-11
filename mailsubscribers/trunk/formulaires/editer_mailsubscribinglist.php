@@ -37,8 +37,8 @@ function formulaires_editer_mailsubscribinglist_verifier_dist($id_mailsubscribin
 	if (!isset($erreurs['titre'])){
 		$id = _request('identifiant');
 		if (!$id){
-			$id = preg_replace(',\W+,Uims','_',_request('titre'));
-			$id = strtolower($id);
+			$id = preg_replace(',\W+,Uims','_',trim(_request('titre')));
+			$id = trim(strtolower($id),'_');
 			$suff = 0;
 			$id_suff = $id;
 			while(sql_countsel('spip_mailsubscribinglists','identifiant='.sql_quote($id_suff).' AND id_mailsubscribinglist!='.intval($id_mailsubscribinglist))){
@@ -50,7 +50,7 @@ function formulaires_editer_mailsubscribinglist_verifier_dist($id_mailsubscribin
 		}
 		if ($id!==strtolower($id) or preg_match(',\W,', $id)) {
 			$id = preg_replace(',\W+,Uims', '_', $id);
-			$id = strtolower($id);
+			$id = trim(strtolower($id),'_');
 			set_request('identifiant',$id);
 			$erreurs['identifiant'] = _T('mailsubscribinglist:erreur_identifiant_corrige');
 		}
