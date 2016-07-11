@@ -57,7 +57,8 @@ function incarner_boite_infos($flux) {
  */
 function incarner_affichage_final($html) {
 
-	if (! $cle_actuelle = $_COOKIE['spip_cle_incarner']) {
+	if ((! isset($_COOKIE['spip_cle_incarner']))
+			or (! $cle_actuelle = $_COOKIE['spip_cle_incarner'])) {
 		return $html;
 	}
 
