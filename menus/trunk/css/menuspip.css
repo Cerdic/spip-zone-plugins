@@ -40,6 +40,7 @@
 .formulaire_spip ul.menus_entrees .titre{
 	font-weight:bold;
 	line-height:29px;
+	min-height:2em; /* si jamais une entrée est vide/ne contient qu'un seul espace, permet de faire apparaître les boutons admin pour la supprimer */
 }
 .formulaire_spip ul.menus_entrees .infos{
 	font-size:0.9em;
