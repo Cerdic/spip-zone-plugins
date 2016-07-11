@@ -3,6 +3,6 @@
 
 <INCLURE{fond=prive/objets/liste/mailsubscribinglists, env, ajax, sinon=<:mailsubscribinglist:info_aucun_mailsubscribinglist:>}>
 
-[(#AUTORISER{creer,mailsubscribinglists})
+[(#AUTORISER{creer,mailsubscribinglist})
 	[(#URL_ECRIRE{mailsubscribinglist_edit,new=oui}|icone_verticale{<:mailsubscribinglist:icone_creer_mailsubscribinglist:>,mailsubscribinglist,new,right})]
 ]

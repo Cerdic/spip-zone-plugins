@@ -7,7 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	
+	// E
+	'erreur_identifiant_corrige' => 'L\'identifiant a été corrigé',
+	'erreur_identifiant_existe_deja' => 'Cet identifiant existe déjà pour une autre liste',
+
 	// I
 	'icone_creer_mailsubscribinglist' => 'Ajouter une liste',
 	'icone_modifier_mailsubscribinglist' => 'Modifier cette liste',

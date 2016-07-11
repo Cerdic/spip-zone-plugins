@@ -26,7 +26,11 @@
 			<td class='titre principale'>[(#LOGO_MAILSUBSCRIBINGLIST|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBINGLIST">[(#RANG). ]#TITRE</a></td>
 			<td class='identifiant secondaire'>[<tt>(#IDENTIFIANT)</tt>]</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='inscrits secondaire'>[(#IDENTIFIANT|mailsubscribers_compte_inscrits)]</td>
+			<td class='inscrits secondaire'>[(#IDENTIFIANT|mailsubscribers_compte_inscrits)]
+				[(#IDENTIFIANT|mailsubscribers_liste_synchronisee|oui)
+				[(#CHEMIN_IMAGE{resync-10.png}|balise_img{<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>}|inserer_attribut{title,<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>})]
+				]
+			</td>
 			<td class='id'>[(#AUTORISER{modifier,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|?{
 				<a href="[(#URL_ECRIRE{mailsubscribinglist_edit,id_mailsubscribinglist=#ID_MAILSUBSCRIBINGLIST})]">#ID_MAILSUBSCRIBINGLIST</a>,
 				#ID_MAILSUBSCRIBINGLIST
