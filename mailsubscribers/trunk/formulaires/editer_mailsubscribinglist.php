@@ -37,7 +37,9 @@ function formulaires_editer_mailsubscribinglist_verifier_dist($id_mailsubscribin
 	if (!isset($erreurs['titre'])){
 		$id = _request('identifiant');
 		if (!$id){
-			$id = preg_replace(',\W+,Uims','_',trim(_request('titre')));
+			include_spip("inc/charsets");
+			$id = translitteration(trim(_request('titre')));
+			$id = preg_replace(',\W+,Uims','_',$id);
 			$id = trim(strtolower($id),'_');
 			$suff = 0;
 			$id_suff = $id;
@@ -49,6 +51,8 @@ function formulaires_editer_mailsubscribinglist_verifier_dist($id_mailsubscribin
 			set_request('identifiant',$id);
 		}
 		if ($id!==strtolower($id) or preg_match(',\W,', $id)) {
+			include_spip("inc/charsets");
+			$id = translitteration(trim($id));
 			$id = preg_replace(',\W+,Uims', '_', $id);
 			$id = trim(strtolower($id),'_');
 			set_request('identifiant',$id);

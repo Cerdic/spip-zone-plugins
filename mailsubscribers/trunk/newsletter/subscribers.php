@@ -26,8 +26,8 @@ include_spip('mailsubscribers_fonctions');
 function newsletter_subscribers_dist($listes = array(),$options = array()){
 	static $count = null;
 
-	$select = "email,nom,listes,lang,'on' AS status,jeton";
-	$where = array('statut='.sql_quote('valide'));
+	$select = "email,nom,'' as listes,lang,'on' AS status,jeton,id_mailsubscriber";
+	$where = array();
 	$limit = "";
 
 	// si pas de liste precisee : liste newsletter par defaut (newsletter::newsletter)
@@ -35,48 +35,21 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 		$listes = array(mailsubscribers_normaliser_nom_liste());
 	}
 
-	// si simple comptage d'une seule liste, faisons plus rapidement pour eviter les regexp sur une grosse base
-	// on en profite pour tout compter pour ne le faire qu'une fois
+	// si simple comptage d'une seule liste, faisons avec la fonction mailsubscribers_compte_inscrits
+	// qui compte chaque liste en un seul coup et memoize
 	if (isset($options['count']) AND $options['count'] AND count($listes)==1){
-		if (is_null($count)
-			AND !_request('var_mode')
-		  AND isset($GLOBALS['meta']['newsletter_subscribers_count'])
-		  AND $c = unserialize($GLOBALS['meta']['newsletter_subscribers_count'])){
-			// si beaucoup d'inscrits on utilise le cache,
-			// sinon on fait un calcul peu couteux pour eviter les bugs, notamment au demarrage
-			if (array_sum($c)>10000){
-				$count = $c;
-			}
-		}
-		if (is_null($count)){
-			$rows = sql_allfetsel("listes,count(id_mailsubscriber) as n","spip_mailsubscribers",$where,"listes");
-			foreach($rows as $row){
-				$ls = explode(",",$row["listes"]);
-				$ls = array_filter($ls);
-				$ls = array_unique($ls);
-				foreach($ls as $l){
-					if (!isset($count[$l])) $count[$l] = 0;
-					$count[$l] += $row['n'];
-				}
-			}
-			// si beaucoup d'inscrits on met en cache
-			if (array_sum($count)>10000){
-				ecrire_meta("newsletter_subscribers_count",serialize($count));
-			}
-		}
 		$liste = mailsubscribers_normaliser_nom_liste(reset($listes));
-		return (isset($count[$liste])?$count[$liste]:0);
+		return mailsubscribers_compte_inscrits($liste);
 	}
 
-	$sous_where = array();
-	foreach ($listes as $l){
-		$l = mailsubscribers_normaliser_nom_liste($l);
-		$sous_where[] = "listes REGEXP ".sql_quote('(,|^)'.$l.'(,|$)');
-	}
-	if (count($sous_where)){
-		$sous_where = "(".implode(" OR ",$sous_where).")";
-		$where[] = $sous_where;
-	}
+
+	$identifiants = array_map('mailsubscribers_normaliser_nom_liste',$listes);
+	$ids = sql_allfetsel('id_mailsubscribinglist','spip_mailsubscribinglists',sql_in('identifiant',$identifiants));
+	$ids = array_map('reset',$ids);
+
+	$sous_where = sql_get_select('id_mailsubscriber','spip_mailsubscriptions','statut='.sql_quote('valide').' AND '.sql_in('id_mailsubscribinglist',$ids));
+	$sous_where = "(SELECT * FROM ($sous_where) AS S)";
+	$where[] = "id_mailsubscriber IN $sous_where";
 
 	// si simple comptage de plusieurs listes, on arrive ici
 	if (isset($options['count']) AND $options['count'])

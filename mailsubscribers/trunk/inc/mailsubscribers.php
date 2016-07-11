@@ -52,7 +52,7 @@ function mailsubscribers_normaliser_nom_liste($liste='', $category="newsletter")
 	$category = strtolower(trim(preg_replace(",\W,","",$category)));
 
 	if (!$liste)
-		return "$category::$category"; // valeur fixe en cas de reantrance
+		return "$category"; // valeur fixe en cas de reantrance
 
 	if (strpos($liste,"::")!==false){
 		$liste = explode("::",$liste);
@@ -63,7 +63,6 @@ function mailsubscribers_normaliser_nom_liste($liste='', $category="newsletter")
 	$liste = strtolower($liste);
 
 	$liste = trim(preg_replace(",[^\w-],","",$liste));
-	$liste = "$category::$liste";
 	return $liste;
 }
 
@@ -156,11 +155,47 @@ function mailsubscribers_trouver_fonction_synchro($liste){
  * @return array mixed
  */
 function mailsubscribers_informe_subscriber($infos){
-	$infos['listes'] = explode(',',$infos['listes']);
-	$infos['listes'] = array_map('mailsubscribers_filtre_liste',$infos['listes']);
-	$infos['listes'] = array_filter($infos['listes']);
+	static $identifiants;
+	$infos['listes'] = array();
+	$infos['subscriptions'] = array();
+	if (isset($infos['id_mailsubscriber'])){
+		$infos['status'] = 'off';
+		if (is_null($identifiants)){
+			$identifiants = array();
+			$rows = sql_allfetsel('id_mailsubscribinglist,identifiant','spip_mailsubscribinglists');
+			foreach ($rows as $row){
+				$identifiants[$row['id_mailsubscribinglist']] = $row['identifiant'];
+			}
+		}
+		$subs = sql_allfetsel('id_mailsubscribinglist,statut','spip_mailsubscriptions','id_mailsubscriber='.intval($infos['id_mailsubscriber']));
+		foreach ($subs as $sub){
+			if (isset($identifiants[$sub['id_mailsubscribinglist']])){
+				$id = $identifiants[$sub['id_mailsubscribinglist']];
+				$status = 'off';
+				if ($sub['statut']=='valide'){
+					$infos['listes'][] = $id;
+					$status = 'on';
+					$infos['status'] = 'on';
+				}
+				elseif(in_array($sub['statut'],array('prepa','prop'))) {
+					$status = 'pending';
+					if ($infos['status']=='off'){
+						$infos['status'] = 'pending';
+					}
+				}
+				$url_unsubscribe = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']."-".$sub['id_mailsubscribinglist']);
+				$infos['subscriptions'][$id] = array(
+					'status'=>$status,
+					'url_unsubscribe'=>$url_unsubscribe
+				);
+			}
+		}
+		unset($infos['id_mailsubscriber']);
+	}
 
+	// URL unscubscribe generale (a toutes les inscriptions)
 	$infos['url_unsubscribe'] = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']);
+
 	unset($infos['jeton']);
 	return $infos;
 }
