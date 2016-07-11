@@ -1,0 +1,8 @@
+[(#AUTORISER{voir,mailsubscriber}|sinon_interdire_acces)]
+<h1 class="grostitre"><:mailsubscribinglist:titre_mailsubscribinglists:></h1>
+
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists, env, ajax, sinon=<:mailsubscribinglist:info_aucun_mailsubscribinglist:>}>
+
+[(#AUTORISER{creer,mailsubscribinglists})
+	[(#URL_ECRIRE{mailsubscribinglist_edit,new=oui}|icone_verticale{<:mailsubscribinglist:icone_creer_mailsubscribinglist:>,mailsubscribinglist,new,right})]
+]

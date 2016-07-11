@@ -92,32 +92,34 @@ function mailsubscribers_obfusquer_mailsubscriber($id_mailsubscriber){
  * Compter les inscrits a une liste
  * @param string $liste
  * @param string $statut
- * @return mixed
+ * @return array|int
  */
 function mailsubscribers_compte_inscrits($liste,$statut='valide'){
 	static $count = null;
 
 	if (is_null($count)){
-		$count_meta = array();
-		$rows = sql_allfetsel("listes,statut,count(id_mailsubscriber) as n","spip_mailsubscribers",'',"listes,statut");
+		$rows = sql_allfetsel('id_mailsubscribinglist,statut,count(id_mailsubscriber) as n','spip_mailsubscriptions','','id_mailsubscribinglist,statut');
+
+		// recuperer les correspondance id_mailsubscribinglist <=> identifiant
+		$ids = array_map('reset',$rows);
+		$listes = sql_allfetsel('id_mailsubscribinglist,identifiant','spip_mailsubscribinglists',sql_in('id_mailsubscribinglist',$ids));
+		$ids = array();
+		foreach ($listes as $l){
+			$ids[$l['id_mailsubscribinglist']] = $l['identifiant'];
+		}
+
 		foreach($rows as $row){
-			$ls = explode(",",$row["listes"]);
-			$ls = array_filter($ls);
-			$ls = array_unique($ls);
-			foreach($ls as $l){
-				if (!isset($count[$l][$row['statut']])) $count[$l][$row['statut']] = 0;
-				$count[$l][$row['statut']] += $row['n'];
-				if ($row['statut']=='valide'){
-					$count_meta[$l] += $row['n'];
-				}
-			}
+			$l = $ids[$row['id_mailsubscribinglist']];
+			if (!isset($count[$l][$row['statut']])) $count[$l][$row['statut']] = 0;
+			$count[$l][$row['statut']] += $row['n'];
+		}
+
+		$rows = sql_allfetsel('statut,count(DISTINCT id_mailsubscriber) as n','spip_mailsubscriptions','','statut');
+		foreach($rows as $row){
 			if (!isset($count[''][$row['statut']])) $count[''][$row['statut']] = 0;
 			$count[''][$row['statut']] += $row['n'];
 		}
-		// si beaucoup d'inscrits on met en cache
-		if (array_sum($count_meta)>10000){
-			ecrire_meta("newsletter_subscribers_count",serialize($count_meta));
-		}
+
 	}
 
 	if ($statut=='all'){
@@ -182,10 +184,7 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  * Renvoi les listes de diffusion disponibles avec leur status
  * (open,close,?)
  * 
- * TODO : brancher sur les spip_mailsubscribinglists/spip_mailsubscriptions
- *
  * @param array $options
- *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)
  *   status : filtrer les listes sur le status
  * @return array
  *   array
@@ -194,69 +193,22 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  *     status : status de la liste
  */
 function mailsubscribers_listes($options = array()){
-	$filtrer_status = $filtrer_category = false;
+	$filtrer_status = false;
 	if (isset($options['status']))
 		$filtrer_status = $options['status'];
-	if (isset($options['category']))
-		$filtrer_category = $options['category'];
 
+	$where = array();
+	$where[] = 'statut!='.sql_quote('poubelle');
+	if ($filtrer_status){
+		$where[] = 'statut='.sql_quote($filtrer_status);
+	}
+	$rows = sql_allfetsel('identifiant as id,titre,statut as status','spip_mailsubscribinglists',$where,'','statut DESC,0+titre,titre');
 	$listes = array();
-
-	// d'abord les listes connues en config
-	if (!function_exists('lire_config'))
-		include_spip('inc/config');
-	if ($known_lists = lire_config("mailsubscribers/lists",array())
-		AND is_array($known_lists)
-		AND count($known_lists)){
-
-		foreach ($known_lists as $kl){
-			$id = $kl['id'];
-			if (!$filtrer_category OR $id=mailsubscribers_filtre_liste($id,$filtrer_category)){
-				$status = ($kl['status']=='open'?'open':'close');
-				if (!$filtrer_status OR $filtrer_status==$status) {
-					$listes[$id] = array(
-						'id' => $id,
-						'titre' => $kl['titre'],
-						'status' => $status
-					);
-				}
-			}
-		}
+	foreach ($rows as $row) {
+		$listes[$row['id']] = $row;
 	}
 
-	// puis trouver toutes les listes qui existent en base et non connues en config
-	// pas la peine si on a demande de filtrer les listes open ou close
-	if ($filtrer_status!=='?') {
-		$rows = sql_allfetsel("DISTINCT listes","spip_mailsubscribers","statut!=".sql_quote('poubelle'));
-		foreach ($rows as $row){
-			$ll = explode(",",$row['listes']);
-			foreach($ll as $l){
-				if ($id=$l
-					AND (
-						!$filtrer_category OR $id=mailsubscribers_filtre_liste($l,$filtrer_category)
-					)){
-					if (!isset($listes[$id]))
-						$listes[$id] = array('id'=>$id,'titre'=>$id,'status'=>'?');
-				}
-			}
-		}
-	}
-	
-	// Trier les résultats par le champ Status (d'abord open, puis close)
-	$status = array();
-	foreach ($listes as $key => $row)
-	{
-		$status[$key] = $row['status'];
-	}
-
-	array_multisort($status, SORT_DESC, $listes);
-	// array_multisort reindex les cle numeriques :(
-	$listes_ok = array();
-	foreach($listes as $liste){
-		$listes_ok[$liste['id']] = $liste;
-	}
-	
-	return $listes_ok;
+	return $listes;
 }
 
 /**

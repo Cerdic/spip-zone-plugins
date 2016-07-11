@@ -52,7 +52,10 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('email', 'nom', 'listes', 'lang'),
 		'champs_versionnes' => array('email', 'nom', 'listes', 'lang'),
 		'rechercher_champs' => array("email" => 1, "nom" => 1),
-		'tables_jointures'  => array(),
+		'tables_jointures' => array(
+			'mailsubscriptions',
+			'mailsubscribinglists',
+		),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'mailsubscriber:texte_statut_pas_encore_inscrit',
 			'prop'    => 'mailsubscriber:texte_statut_en_attente_confirmation',
@@ -110,7 +113,10 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('identifiant', 'titre', 'descriptif', 'date', 'statut'),
 		'champs_versionnes' => array('identifiant', 'titre', 'descriptif'),
 		'rechercher_champs' => array('identifiant' => 1, 'titre' => 2, 'descriptif'=>1),
-		'tables_jointures'  => array(),
+		'tables_jointures' => array(
+			'mailsubscriptions',
+			'mailsubscribers',
+		),
 		'statut_textes_instituer' => array(
 			'ouverte'    => 'mailsubscribinglist:texte_statut_ouverte',
 			'fermee'    => 'mailsubscribinglist:texte_statut_fermee',

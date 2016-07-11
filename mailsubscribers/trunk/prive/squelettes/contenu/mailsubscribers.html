@@ -2,7 +2,7 @@
 <h1 class="grostitre"><:mailsubscriber:titre_mailsubscribers:></h1>
 
 #SET{self,#SELF|parametre_url{debut_mailsubscribers,''}}
-#SET{compte,#ENV{liste,''}|trim|mailsubscribers_compte_inscrits{all}}
+#SET{compte,#ENV{id_mailsubscribinglist}|?{#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST},''}|mailsubscribers_compte_inscrits{all}}
 #SET{defaut,#GET{compte}|table_valeur{valide}|?{valide,''}}
 #SET{statut,#ENV{s}|sinon{#GET{defaut}}|replace{all,''}}
 

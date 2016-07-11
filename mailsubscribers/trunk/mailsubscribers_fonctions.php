@@ -7,6 +7,10 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function filtre_mailsubscribers_compte_inscrits_dist($liste,$statut='valide'){
+	include_spip('inc/mailsubscribers');
+	return mailsubscribers_compte_inscrits($liste,$statut);
+}
 
 function mailsubscriber_cle_action($action,$email,$jeton){
 	$arg = "$action-$email-$jeton";

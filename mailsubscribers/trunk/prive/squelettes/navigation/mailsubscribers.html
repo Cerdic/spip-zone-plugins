@@ -2,20 +2,23 @@
 <B_listes>
 	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
 	<ul class="liste-items">
-		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
-	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
-		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]
-		([(#CLE|mailsubscribers_compte_inscrits)])
+		<li class="item[(#ENV{id_mailsubscribinglist}|intval|non)on]">[(#SELF|parametre_url{id_mailsubscribinglist,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{id_mailsubscribinglist}|intval|non})]</li>
+	<BOUCLE_listes(MAILSUBSCRIBINGLISTS){statut!=poubelle}{par num titre,titre}>
+		<li class="item[(#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}|oui)on]">[(#SELF|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|lien_ou_expose{#TITRE,#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}})]
+		([(#IDENTIFIANT|mailsubscribers_compte_inscrits)])
 		</li>
 	</BOUCLE_listes>
 	</ul>
+
+	[(#URL_ECRIRE{mailsubscribinglists}|icone_horizontale{<:mailsubscribinglist:titre_mailsubscribinglists:>,mailsubscribinglist-24})]
+
 	#BOITE_FERMER
 </B_listes>
 
 [(#AUTORISER{exporter,_mailsubscribers}|oui)
 #BOITE_OUVRIR{'','raccourcis'}
 [(#AUTORISER{configurer,_mailsubscribers}|oui)
-[(#URL_ECRIRE{configurer_mailsubscribers}|icone_horizontale{<:mailsubscriberscfg:cfg_titre_parametrages:>,mailsubscriber-24})]
+[(#URL_ECRIRE{configurer_mailsubscribers}|icone_horizontale{<:mailsubscriberscfg:cfg_titre_parametrages:>,mailsubscribinglist-24})]
 <hr />
 ]
 
