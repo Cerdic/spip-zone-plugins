@@ -123,7 +123,7 @@ var base = '".$base_root."';
 var bookData = {
 	getComponents: function () {
 		return [
-			' . $components . '
+			$components
 		];
 	},
 	getContents: function () {
@@ -132,7 +132,8 @@ var bookData = {
 		]
 	},
 	getComponent: function (componentId) {
-		 return this.getViaAjax(componentId);
+		console.log(componentId);
+		return this.getViaAjax(componentId);
 	},
 	getMetaData: function(key) {
 		return {
@@ -150,7 +151,7 @@ var bookData = {
 	}
 }
 //Resize height
-$('#".$id."').height(parseInt(".$hauteur."));
+$('#".$id."').height(parseInt(".$hauteur.")).width('auto');
 
 // Initialize the reader element.
 Monocle.Reader('".$id."', bookData, { panels: Monocle.Panels.IMode });
@@ -175,7 +176,7 @@ Monocle.Reader('".$id."', bookData, { panels: Monocle.Panels.IMode });
 function epubreader_unzip($id_document = false, $fichier = false) {
 	include_spip('inc/documents');
 	if (intval($id_document)) {
-		$document = sql_fetsel('*', 'spip_documents', 'id_document=' . intval($id_document));
+		$document = sql_getfetsel('fichier', 'spip_documents', 'id_document=' . intval($id_document));
 
 		$fichier = get_spip_doc($document['fichier']);
 		if (!file_exists($fichier)) {

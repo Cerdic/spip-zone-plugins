@@ -1,7 +1,7 @@
 <paquet
 	prefix="epubreader"
 	categorie="multimedia"
-	version="0.5.0"
+	version="0.6.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/epub-256.png"
