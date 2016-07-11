@@ -254,9 +254,25 @@ function mailsubscribers_formulaire_traiter($flux){
 	return $flux;
 }
 
+/**
+ * Afficher les inscriptions d'un auteur (et pouvoir les modifier)
+ * @param $flux
+ * @return mixed
+ */
 function mailsubscribers_affiche_auteurs_interventions($flux){
 	if ($id_auteur = $flux['args']['id_auteur']){
 		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/auteur-subscription',array('id_auteur'=>$id_auteur));
 	}
 	return $flux;
+}
+
+/**
+ * Proteger les formulaires subscriber/unsubscribe
+ * @param $formulaires
+ * @return array
+ */
+function mailsubscribers_nospam_lister_formulaires($formulaires){
+	$formulaires[] = 'newsletter_subscribe';
+	$formulaires[] = 'newsletter_unsubscribe';
+	return $formulaires;
 }

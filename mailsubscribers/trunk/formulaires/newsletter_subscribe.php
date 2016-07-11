@@ -7,9 +7,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-$GLOBALS['formulaires_no_spam'][] = 'newsletter_subscribe';
-
-
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
