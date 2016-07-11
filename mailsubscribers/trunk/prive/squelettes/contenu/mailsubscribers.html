@@ -1,31 +1,7 @@
 [(#AUTORISER{voir,mailsubscriber}|sinon_interdire_acces)]
 <h1 class="grostitre"><:mailsubscriber:titre_mailsubscribers:></h1>
 
-#SET{self,#SELF|parametre_url{debut_mailsubscribers,''}}
-#SET{compte,#ENV{id_mailsubscribinglist}|?{#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST},''}|mailsubscribers_compte_inscrits{all}}
-#SET{defaut,#GET{compte}|table_valeur{valide}|?{valide,''}}
-#SET{statut,#ENV{s}|sinon{#GET{defaut}}|replace{all,''}}
-
-<div class='onglets_simple clearfix'>
-<ul class="statut statut_mailsubscribers">
-	<li>[(#GET{self}|parametre_url{s,all}|lien_ou_expose{<:mailsubscriber:mailsubscribers_tous:>,#GET{statut}|=={''},ajax})]</li>
-	<BOUCLE_st(POUR){tableau #LISTE{valide,prepa,prop,refuse}}>
-	[(#GET{compte}|table_valeur{#VALEUR}|oui)
-	<li class='#VALEUR'>[(#GET{self}|parametre_url{s,#VALEUR}|lien_ou_expose{#VAL{mailsubscriber:mailsubscribers_#VALEUR}|_T|concat{' (',#GET{compte}|table_valeur{#VALEUR},')'},#GET{statut}|=={#VALEUR},'ajax'})]</li>
-	]
-	</BOUCLE_st>
-
-	</ul>
-</div>
-
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/mailsubscribers, par=num email, statut=#GET{statut}, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
-
-[(#AUTORISER{creer,mailsubscriber})
-	[(#URL_ECRIRE{mailsubscriber_edit,new=oui}|icone_verticale{<:mailsubscriber:icone_creer_mailsubscriber:>,mailsubscriber,new,right})]
-]
+<INCLURE{fond=prive/squelettes/inclure/mailsubscribers-filtre,env,ajax} />
 
 [(#ENV{importer,''}|oui)
 <div class="nettoyeur"></div>
