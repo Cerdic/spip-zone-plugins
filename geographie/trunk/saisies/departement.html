@@ -14,15 +14,15 @@
 ]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro,<:departement:label_selectionnez:>})]</option>]
-<BOUCLE_dept1(geo_departements){par abbr}{abbr<21}{doublons}>
+<BOUCLE_dept1(geo_departements){id_deparement?}{par abbr}{abbr<21}{doublons}>
 	#SET{dept,#ABBR}
 	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
 </BOUCLE_dept1>
-<BOUCLE_dept2(geo_departements){par abbr}{abbr IN 2A,2B}{doublons}>
+<BOUCLE_dept2(geo_departements){id_deparement?}{par abbr}{abbr IN 2A,2B}{doublons}>
 	#SET{dept,#ABBR}
 	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
 </BOUCLE_dept2>
-<BOUCLE_dept3(geo_departements){par abbr}{doublons}>
+<BOUCLE_dept3(geo_departements){id_deparement?}{par abbr}{doublons}>
 	#SET{dept,#ABBR}
 	<option value="#GET{dept}"[(#GET{dept}|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#ABBR. #NOM</option>
 </BOUCLE_dept3>
