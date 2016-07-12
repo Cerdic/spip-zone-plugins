@@ -101,7 +101,14 @@ function cartes_pre_boucle($boucle) {
  */
 function cartes_recuperer_fond($flux) {
 	if ($flux['args']['fond'] == 'javascript/gis.js') {
-		$ajouts = "\n". spip_file_get_contents(find_in_path('javascript/leaflet.label-src.js'));
+		if (!function_exists('lire_config')) {
+			include_spip('inc/config');
+		}
+		if (lire_config('auto_compress_js') == 'oui' && function_exists('compacte')) {
+			$ajouts = "\n". compacte(spip_file_get_contents(find_in_path('javascript/leaflet.label-src.js')), 'js');
+		} else {
+			$ajouts = "\n". spip_file_get_contents(find_in_path('javascript/leaflet.label-src.js'));
+		}
 		$flux['data']['texte'] .= $ajouts;
 	}
 	return $flux;
