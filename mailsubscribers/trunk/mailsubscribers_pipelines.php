@@ -40,6 +40,22 @@ function mailsubscribers_pre_insertion($flux){
  * @return mixed
  */
 function mailsubscribers_pre_edition($flux){
+	if ($flux['args']['table']=='spip_mailsubscribers'
+	  AND $id_mailsubscriber = $flux['args']['id_objet']){
+
+	  if ($flux['args']['action']=='instituer'
+		  AND $statut_ancien = $flux['args']['statut_ancien']
+		  AND isset($flux['data']['statut'])
+		  AND $statut = $flux['data']['statut']
+		  AND $statut != $statut_ancien) {
+
+		  // on ne peut jamais passer en prepa, c'est un statut reserve a la creation
+		  if ($statut=='prepa') {
+	      unset($flux['data']['statut']);
+		  }
+	  }
+	}
+
 
 	// changement de mail d'un auteur : faire suivre son inscription si l'adresse email est unique dans les auteurs
 	if ($flux['args']['table']=='spip_auteurs'

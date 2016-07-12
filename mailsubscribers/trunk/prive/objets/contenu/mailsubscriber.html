@@ -10,15 +10,33 @@
 	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
 </div>]
 
-[<div class="champ contenu_listes[ (#LISTES*|strlen|?{'',vide})]">
-	<div class='label'><:mailsubscriber:label_listes:> : </div>
-	<span dir='#LANG_DIR' class='#EDIT{listes} listes'>(#LISTES)</span>
-</div>]
-
 [<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
 	<div class='label'><:mailsubscriber:label_lang:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{lang} lang'>(#LANG|traduire_nom_langue)</span>
 </div>]
+
+<B_sub>
+<div class="liste-objets mailsubscriptions">
+<table class="spip">
+	<thead>
+	<tr>
+		<th><:mailsubscriber:label_listes:></th>
+		<th><:mailsubscriber:label_inscription:></th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_sub(mailsubscriptions){id_mailsubscriber}>
+	<tr>
+		<td>#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}[ \(<tt>(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</tt>\)]</td>
+		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber:texte_statut_}|concat{#STATUT}|_T)]</td>
+		<td></td>
+	</tr>
+</BOUCLE_sub>
+	</tbody>
+</table>
+</div>
+</B_sub>
 
 [<div class="champ contenu_optin[ (#OPTIN*|strlen|?{'',vide})]">
 	<div class='label'><:mailsubscriber:label_optin:> : </div>

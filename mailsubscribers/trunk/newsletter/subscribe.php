@@ -23,7 +23,8 @@ include_spip('inc/autoriser');
  *
  * Quand aucune liste n'est indiquee :
  *   si l'email n'est inscrit a rien, on l'inscrit a la liste generale 'newsletter'
- *   si l'email est deja inscrit, on ne change pas ses inscriptions, mais on modifie ses informations (nom, lang)
+ *   si l'email est deja inscrit, on modifie ses informations (nom, lang) on ne change pas ses inscriptions sauf si force=true,
+ *     dans ce cas on valide les inscriptions en attente
  *
  * @param $email
  *   champ obligatoire
@@ -33,6 +34,7 @@ include_spip('inc/autoriser');
  *   lang : string
  *   force : bool permet de forcer une inscription sans doubleoptin (passe direct en valide)
  *   graceful : bool permet a contrario de ne pas inscrire quelqu'un qui s'est desabonne (utilise lors de l'import en nombre, l'utilisateur est ignore dans ce cas)
+ *   notify : bool
  *   invite_email_from : text . utilisé par le formulaire #NEWSLETTER_INVITE, permet de renseigner la personne qui invite à s'inscrire à la newsletter
  *   invite_email_text : text . utilisé par le formulaire #NEWSLETTER_INVITE, permet de renseigner le message personnalisé d'invitation
  * @return bool

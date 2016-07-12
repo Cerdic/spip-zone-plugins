@@ -29,8 +29,9 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
     );
 
 	$maj['1.0.0'] = array(
-		array('maj_tables', array('spip_mailsubscribers','spip_mailsubscribinglists','spip_mailsubscriptions')),
+		array('maj_tables', array('spip_mailsubscribinglists','spip_mailsubscriptions')),
 		array('mailsubscribers_migrate_mailsubscribinglists'),
+		array('maj_tables', array('spip_mailsubscribers')),
   );
 
 	include_spip('base/upgrade');

@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom' => 'Nom',
 	'label_optin' => 'Opt-in',
 	'label_statut' => 'Statut',
+	'label_inscription' => 'Inscription',
 	'label_to_email' => 'Email à inviter',
 	'label_toutes_les_listes' => 'Toutes',
 	'label_valid_subscribers_1' => 'Valider directement les inscriptions sans demande de confirmation',
