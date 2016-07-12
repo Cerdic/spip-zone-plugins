@@ -24,8 +24,6 @@ function mailsubscribers_pre_insertion($flux){
 		include_spip("inc/acces");
 		$flux['data']['jeton'] = creer_uniqid();
 		include_spip("inc/mailsubscribers");
-		if (!isset($flux['data']['listes']))
-			$flux['data']['listes'] = mailsubscribers_normaliser_nom_liste();
 		if (!isset($flux['data']['email'])){
 			include_spip("inc/acces");
 			$flux['data']['email'] = creer_uniqid(); // eviter l'eventuel echec unicite sur email vide
@@ -45,46 +43,23 @@ function mailsubscribers_pre_edition($flux){
 	if ($flux['args']['table']=='spip_mailsubscribers'
 	  AND $id_mailsubscriber = $flux['args']['id_objet']){
 
-		$modif_optin = "";
 	  if ($flux['args']['action']=='instituer'
 		  AND $statut_ancien = $flux['args']['statut_ancien']
 		  AND isset($flux['data']['statut'])
 		  AND $statut = $flux['data']['statut']
 		  AND $statut != $statut_ancien
-		  AND ($statut=='valide' OR $statut_ancien=='valide')) {
-		  $modif_optin = _T('mailsubscriber:info_statut_' . $statut);
-		  
+		  AND $statut=='refuse') {
+
 		  if (!isset($flux['data']['email'])){
 			  include_spip('inc/mailsubscribers');
 			  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
-			  if ($statut=='refuse' and !mailsubscribers_test_email_obfusque($email)){
+			  if (!mailsubscribers_test_email_obfusque($email)){
 				  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
 				  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
 			  }
 		  }
 	  }
 
-		if(isset($flux['data']['listes'])){
-			$modif_optin .= ' ' . $flux['data']['listes'];
-		}
-
-		if ($modif_optin) {
-			// on change le statut : logons date et par qui dans le champ optin
-			$optin = sql_getfetsel("optin", "spip_mailsubscribers", "id_mailsubscriber=" . intval($id_mailsubscriber));
-			$optin = trim($optin);
-			$optin .=
-				"\n"
-				. $modif_optin . " : "
-				. date('Y-m-d H:i:s') . ", "
-				. _T('public:par_auteur') . ' '
-				. (isset($GLOBALS['visiteur_session']['id_auteur']) ? "#" . $GLOBALS['visiteur_session']['id_auteur'] . ' ' : '')
-				. (isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] . ' ' : '')
-				. (isset($GLOBALS['visiteur_session']['session_nom']) ? $GLOBALS['visiteur_session']['session_nom'] . ' ' : '')
-				. (isset($GLOBALS['visiteur_session']['session_email']) ? $GLOBALS['visiteur_session']['session_email'] . ' ' : '')
-				. '(' . $GLOBALS['ip'] . ')';
-			$optin = trim($optin);
-			$flux['data']['optin'] = $optin;
-		}
 	}
 
 	// changement de mail d'un auteur : faire suivre son inscription si l'adresse email est unique dans les auteurs
@@ -123,11 +98,20 @@ function mailsubscribers_optimiser_base_disparus($flux){
 	$mydate = $flux['args']['date'];
 
 
-	# passer en refuser les inscriptions en attente non confirmees
-	sql_updateq("spip_mailsubscribers",array("statut"=>"refuse"), "statut=".sql_quote('prepa')." AND date < ".sql_quote($mydate));
+	# passer en poubelle les inscriptions en attente jamais confirmees (ce sont des bots)
+	sql_updateq("spip_mailsubscribers",array("statut"=>"poubelle",'date'=>date('Y-m-d H:i:s')), "statut=".sql_quote('prepa')." AND date < ".sql_quote($mydate));
 
-	# supprimer les inscriptions a la poubelle
+	# supprimer les inscrits a la poubelle
 	sql_delete("spip_mailsubscribers", "statut=".sql_quote('poubelle')." AND date < ".sql_quote($mydate));
+
+	# supprimer les inscriptions liees a rien
+	$res = sql_select("S.id_mailsubscriber AS id",
+		"spip_mailsubscriptions AS S
+		      	LEFT JOIN spip_mailsubscribers AS M
+		          ON M.id_mailsubscriber=S.id_mailsubscriber",
+		"M.id_auteur IS NULL");
+	$n += optimiser_sansref('spip_mailsubscriptions', 'id_mailsubscriber', $res);
+
 
 	return $flux;
 

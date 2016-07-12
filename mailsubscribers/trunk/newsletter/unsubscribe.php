@@ -32,9 +32,10 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 
 	// chercher si un tel email est deja en base
 	$row = sql_fetsel('*','spip_mailsubscribers','email='.sql_quote($email));
-	if ($row ){
+	if ($row){
 
 		$set = array();
+		$trace_optin = '';
 
 		$where = array();
 		$where[] = 'id_mailsubscriber='.intval($row['id_mailsubscriber']);
@@ -47,15 +48,34 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			$where[] = sql_in('id_mailsubscribinglist',$ids);
 		}
 
+		// les inscriptions pas deja en refusees pour la trace
+		$pas_encore = sql_allfetsel('id_mailsubscribinglist','spip_mailsubscriptions','statut!='.sql_quote('refuse').' AND '.implode(' AND ',$where));
+		$pas_encore = array_map('reset',$pas_encore);
+
 		// on met a jour les inscriptions pour les listes demandees (ou pour toutes les listes en cours)
 		sql_updateq('spip_mailsubscriptions', array('statut'=>'refuse'), $where);
 		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
+
+		if ($pas_encore){
+			$changes = sql_allfetsel('id_mailsubscribinglist','spip_mailsubscriptions','statut='.sql_quote('refuse').' AND '.implode(' AND ',$where));
+			$changes = array_map('reset',$changes);
+			$changes = array_intersect($changes, $pas_encore);
+			if ($changes) {
+				$changes = sql_allfetsel('identifiant','spip_mailsubscribinglists',sql_in('id_mailsubscribinglist',$changes));
+				$changes = array_map('reset',$changes);
+				$trace_optin .= '['.implode(',',$changes).':'._T('mailsubscriber:info_statut_refuse').'] ';
+			}
+		}
 
 		// on regarde les inscriptions en cours : si aucune prop ou valide, l'abonne passe en refuse, mail obfusque
 		$encore = sql_countsel('spip_mailsubscriptions','id_mailsubscriber='.intval($row['id_mailsubscriber']).' AND '.sql_in('statut',array('prop','valide')));
 		if (!$encore) {
 			$set['statut'] = "refuse";
-			$set['email'] = mailsubscribers_obfusquer_email($email);
+			// pris en charge par pipeline + cron
+			//$set['email'] = mailsubscribers_obfusquer_email($email);
+		}
+		if ($trace_optin){
+			$set['optin'] = mailsubscribers_trace_optin($trace_optin, sql_getfetsel('optin','spip_mailsubscribers','id_mailsubscriber='.intval($row['id_mailsubscriber'])));
 		}
 
 		if (count($set)){

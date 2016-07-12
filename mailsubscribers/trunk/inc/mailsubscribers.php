@@ -88,6 +88,31 @@ function mailsubscribers_obfusquer_mailsubscriber($id_mailsubscriber){
 }
 
 /**
+ * Mise en forme de la trace des abonnements/desabonnements dans le champ optin
+ * @param string $actions
+ *   nouvelles actions tracees
+ * @param string $trace
+ *   trace existante
+ * @return string
+ */
+function mailsubscribers_trace_optin($actions, $trace){
+	$trace = trim($trace);
+	$trace .=
+		"\n"
+		. trim($actions) . ' : '
+		. date('Y-m-d H:i:s') . " "
+		. _T('public:par_auteur') . ''
+		. (isset($GLOBALS['visiteur_session']['id_auteur']) ? "#" . $GLOBALS['visiteur_session']['id_auteur'] . ' ' : '')
+		. (isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] . ' ' : '')
+		. (isset($GLOBALS['visiteur_session']['session_nom']) ? $GLOBALS['visiteur_session']['session_nom'] . ' ' : '')
+		. (isset($GLOBALS['visiteur_session']['session_email']) ? $GLOBALS['visiteur_session']['session_email'] . ' ' : '')
+		. '(' . $GLOBALS['ip'] . ')'
+		;
+
+	return $trace;
+}
+
+/**
  * Compter les inscrits a une liste
  * @param string $liste
  * @param string $statut

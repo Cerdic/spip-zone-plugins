@@ -49,6 +49,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 
 	$set = array();
 	$listes = false;
+	$trace_optin = '';
 	foreach (array('lang', 'nom','invite_email_from','invite_email_text') as $k){
 		if (isset($options[$k]))
 			$set[$k] = $options[$k];
@@ -122,14 +123,17 @@ function newsletter_subscribe_dist($email,$options = array()){
 		and $id_mailsubscriber = $row['id_mailsubscriber']){
 		foreach ($listes as $identifiant){
 			if ($id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))){
+				$sub_prev = $sub = sql_fetsel('*','spip_mailsubscriptions','id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
 				$ins = array(
 					'id_mailsubscriber' => $id_mailsubscriber,
 					'id_mailsubscribinglist' => $id_mailsubscribinglist,
 					'statut' => $statut_defaut,
 				);
-				sql_insertq('spip_mailsubscriptions',$ins);
-				// on verifie l'inscription, car elle existait peut etre avec un status resilie ou autre
-				$sub = sql_fetsel('*','spip_mailsubscriptions','id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+				if (!$sub_prev){
+					sql_insertq('spip_mailsubscriptions',$ins);
+					// on verifie l'inscription, en cas de concurrence
+					$sub = sql_fetsel('*','spip_mailsubscriptions','id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+				}
 				// le statut doit etre celui qu'on a voulu mettre - ou mieux : deja valide
 				if ($sub['statut']!==$ins['statut'] and $sub['statut']!=='valide'){
 					// si c'est graceful on ne reinscrit pas quelqu'un qui s'est desinscrit
@@ -138,16 +142,25 @@ function newsletter_subscribe_dist($email,$options = array()){
 						$sub['statut'] = $ins['statut'];
 					}
 				}
-				if ($sub['statut']=='prop' and $set['statut']!=='valide'){
+				// une adresse en prepa reste en prepa tant qu'un email n'a pas ete valide
+				if ($sub['statut']=='prop'
+					and (!isset($set['statut']) or !in_array($set['statut'],array('prepa','valide')))
+				  and !in_array($row['statut'],array('prepa','valide'))){
 					$set['statut'] = 'prop';
 					$set['email'] = $email; // si email obfusque
 				} elseif ($sub['statut']=='valide'){
 					$set['statut'] = 'valide';
 					$set['email'] = $email; // si email obfusque
 				}
+				if (!$sub_prev or $sub['statut']!==$sub_prev['statut']){
+					$trace_optin .= '['.$identifiant.':'._T('mailsubscriber:info_statut_' . $sub['statut']).'] ';
+				}
 				$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 			}
 		}
+	}
+	if ($trace_optin){
+		$set['optin'] = mailsubscribers_trace_optin($trace_optin, sql_getfetsel('optin','spip_mailsubscribers','id_mailsubscriber='.intval($row['id_mailsubscriber'])));
 	}
 
 	if (count($set)){
