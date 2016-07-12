@@ -55,5 +55,5 @@ L.geocoderConfig = {
 [(#INCLURE{javascript/leaflet.gis.js})]
 
 [(#CONFIG{auto_compress_js}|=={oui}|oui)
-#FILTRE{compacte}
-]
+// gis.js
+#FILTRE{trim|compacte,js}]
