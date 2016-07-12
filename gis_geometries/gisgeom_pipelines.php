@@ -38,7 +38,14 @@ function gisgeom_recuperer_fond($flux) {
 		$flux['data']['texte'] = preg_replace('%<!--extragis-->%is', '$0'.$saisie, $flux['data']['texte']);
 	}
 	if ($flux['args']['fond'] == 'javascript/gis.js') {
-		$ajouts = "\n". spip_file_get_contents(find_in_path('lib/leaflet-draw/leaflet.draw-src.js'));
+		if (!function_exists('lire_config')) {
+			include_spip('inc/config');
+		}
+		if (lire_config('auto_compress_js') == 'oui' && function_exists('compacte')) {
+			$ajouts = "\n". compacte(spip_file_get_contents(find_in_path('lib/leaflet-draw/leaflet.draw-src.js')), 'js');
+		} else {
+			$ajouts = "\n". spip_file_get_contents(find_in_path('lib/leaflet-draw/leaflet.draw-src.js'));
+		}
 		$flux['data']['texte'] .= $ajouts;
 	}
 	return $flux;
