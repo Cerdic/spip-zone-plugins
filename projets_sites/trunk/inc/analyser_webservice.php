@@ -135,15 +135,19 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 					$sgbd_wanted = array('serveur', 'port', 'nom', 'type', 'prefixe', 'version', 'charset', 'collation');
 					/* On utilise ces informations pour construire le tableau de valeurs de SGBD */
 					if (is_array($xml[$key]) and count($xml[$key]) > 0) {
+						spip_log("sgbd \n" . print_r($xml[$key], true), 'projets_sites');
 						foreach ($xml[$key] as $sgbd_field => $sgbd_value) {
-							if (in_array($sgbd_field, $sgbd_wanted)) {
+							/* Si l'index n'est pas dans les valeurs voulues `sgbd_wanted` et n'est pas un chiffre
+							 * on construit notre index de $valeurs['sgbd_*']
+							 */
+							if (in_array($sgbd_field, $sgbd_wanted) and !is_int($sgbd_field)) {
 								$valeurs['sgbd_' . $sgbd_field] = $sgbd_value;
 							}
 						}
 					}
 					break;
 				default:
-					# code...
+					# code..
 					break;
 			}
 		}
