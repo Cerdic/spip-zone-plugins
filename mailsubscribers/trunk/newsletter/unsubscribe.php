@@ -70,7 +70,9 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 		// on regarde les inscriptions en cours : si aucune prop ou valide, l'abonne passe en refuse, mail obfusque
 		$encore = sql_countsel('spip_mailsubscriptions','id_mailsubscriber='.intval($row['id_mailsubscriber']).' AND '.sql_in('statut',array('prop','valide')));
 		if (!$encore) {
-			$set['statut'] = "refuse";
+			if (!in_array($row['statut'],array('refuse','poubelle'))){
+				$set['statut'] = "refuse";
+			}
 			// pris en charge par pipeline + cron
 			//$set['email'] = mailsubscribers_obfusquer_email($email);
 		}

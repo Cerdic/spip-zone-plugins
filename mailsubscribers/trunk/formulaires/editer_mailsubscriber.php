@@ -53,8 +53,13 @@ function formulaires_editer_mailsubscriber_verifier_dist($id_mailsubscriber='new
 			$erreurs['email'] = _T('info_email_invalide');
 		else {
 			// verifier que l'email n'est pas deja dans la base si c'est une tentative de creation
-			if (!intval($id_mailsubscriber) AND sql_countsel('spip_mailsubscribers','email='.sql_quote($email))>0)
+			if (sql_countsel('spip_mailsubscribers','email='.sql_quote($email).' AND id_mailsubscriber!='.intval($id_mailsubscriber))>0)
 				$erreurs['email'] = _T('mailsubscriber:erreur_adresse_existante');
+		}
+		if (!isset($erreurs['email'])
+			and mailsubscribers_test_email_obfusque($email)
+		  and _request('listes')){
+			$erreurs['email'] = _T('info_email_invalide');
 		}
 	}
 
@@ -74,28 +79,31 @@ function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new'
 
 	$res = formulaires_editer_objet_traiter('mailsubscriber',$id_mailsubscriber,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	$email = sql_getfetsel('email','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
-	$subscriber = charger_fonction('subscriber','newsletter');
-	$infos = $subscriber($email);
-	$listes = _request('listes');
-	$add = $remove = false;
-	$add = array_diff($listes,array_keys($infos['subscriptions']));
-	foreach ($infos['subscriptions'] as $sub) {
-		if (in_array($sub['id'],$listes) AND $sub['status']=='off'){
-			$add[] = $sub['id'];
+
+	if (!mailsubscribers_test_email_obfusque($email)){
+		$subscriber = charger_fonction('subscriber','newsletter');
+		$infos = $subscriber($email);
+		$listes = _request('listes');
+		$add = $remove = false;
+		$add = array_diff($listes,array_keys($infos['subscriptions']));
+		foreach ($infos['subscriptions'] as $sub) {
+			if (in_array($sub['id'],$listes) AND $sub['status']=='off'){
+				$add[] = $sub['id'];
+			}
+			elseif (!in_array($sub['id'],$listes) AND $sub['status']!=='off'){
+				$remove[] = $sub['id'];
+			}
 		}
-		elseif (!in_array($sub['id'],$listes) AND $sub['status']!=='off'){
-			$remove[] = $sub['id'];
+		// les ajouts sont directement en valide, sans notification
+		if ($add){
+			$subscribe = charger_fonction('subscribe','newsletter');
+			$subscribe($email,array('listes'=>$add,'force'=>true,'notify'=>false));
 		}
-	}
-	// les ajouts sont directement en valide, sans notification
-	if ($add){
-		$subscribe = charger_fonction('subscribe','newsletter');
-		$subscribe($email,array('listes'=>$add,'force'=>true,'notify'=>false));
-	}
-	// les ajouts sont directement en valide, sans notification
-	if ($remove){
-		$unsubscribe = charger_fonction('unsubscribe','newsletter');
-		$unsubscribe($email,array('listes'=>$remove,'notify'=>false));
+		// les ajouts sont directement en valide, sans notification
+		if ($remove){
+			$unsubscribe = charger_fonction('unsubscribe','newsletter');
+			$unsubscribe($email,array('listes'=>$remove,'notify'=>false));
+		}
 	}
 
 	return $res;

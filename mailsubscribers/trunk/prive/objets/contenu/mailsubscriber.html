@@ -29,7 +29,7 @@
 <BOUCLE_sub(mailsubscriptions){id_mailsubscriber}>
 	<tr>
 		<td>#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}[ \(<tt>(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</tt>\)]</td>
-		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber:texte_statut_}|concat{#STATUT}|_T)]</td>
+		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber}|statut_titre{#STATUT})]</td>
 		<td></td>
 	</tr>
 </BOUCLE_sub>

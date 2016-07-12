@@ -49,9 +49,23 @@ function mailsubscribers_pre_edition($flux){
 		  AND $statut = $flux['data']['statut']
 		  AND $statut != $statut_ancien) {
 
+		  include_spip('inc/mailsubscribers');
+		  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
 		  // on ne peut jamais passer en prepa, c'est un statut reserve a la creation
 		  if ($statut=='prepa') {
 	      unset($flux['data']['statut']);
+		  }
+		  // on ne peut jamais passer en prop, c'est un statut intermediaire automatique
+		  if ($statut=='prop') {
+	      unset($flux['data']['statut']);
+		  }
+		  // on ne peut jamais passer en valide que si on etait en prop
+		  if ($statut=='valide' and $statut_ancien!=='prop') {
+	      unset($flux['data']['statut']);
+		  }
+		  // un subscriber avec email obfusque ne peut que passer en poubelle ou refuse
+		  elseif (mailsubscribers_test_email_obfusque($email) and !in_array($statut,array('poubelle','refuse'))){
+			  unset($flux['data']['statut']);
 		  }
 	  }
 	}
@@ -95,17 +109,34 @@ function mailsubscribers_post_edition($flux){
 		  AND $statut_ancien = $flux['args']['statut_ancien']
 		  AND isset($flux['data']['statut'])
 		  AND $statut = $flux['data']['statut']
-		  AND $statut != $statut_ancien
-		  AND $statut=='refuse') {
+		  AND $statut != $statut_ancien) {
 
 		  include_spip('inc/mailsubscribers');
 		  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
 		  if (!mailsubscribers_test_email_obfusque($email)){
-			  $unsubscribe = charger_fonction('unsubscribe','newsletter');
-			  $unsubscribe($email);
 
-			  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
-			  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
+			  if ($statut=='valide'){
+				  $subscriber = charger_fonction('subscriber','newsletter');
+				  $infos = $subscriber($email);
+				  $add = array();
+				  foreach ($infos['subscriptions'] as $sub){
+					  if ($sub['status']=='pending'){
+						  $add[] = $sub['id'];
+					  }
+				  }
+				  if ($add){
+					  $subscribe = charger_fonction('subscribe','newsletter');
+					  $subscribe($email,array('listes'=>$add,'force'=>true,'notify'=>false));
+				  }
+			  }
+
+			  if (in_array($statut,array('refuse','poubelle'))){
+				  $unsubscribe = charger_fonction('unsubscribe','newsletter');
+				  $unsubscribe($email,array('notify'=>false));
+
+				  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
+				  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
+			  }
 		  }
 	  }
 
