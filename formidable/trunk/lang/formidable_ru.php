@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Ответили',
+	'analyse_exclure_champs_explication' => 'Укажите названия полей, которіе необходимо выводить в статистике ответов. Используйте разделитель <code>|</code>. Не надо использовать символ <code>@</code>.',
 	'analyse_exclure_champs_label' => 'Исключить поля',
 	'analyse_exporter' => 'Экспортировать',
 	'analyse_longueur_moyenne' => 'Средняя длина в словах',
@@ -22,9 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_formulaires' => 'Формы',
+	'bouton_revert_formulaire' => 'Вернуться к последней сохраненной версии',
 
 	// C
 	'cfg_titre_page_configurer_formidable' => 'Настройки Formidable',
+	'cfg_titre_parametrages_analyse' => 'Настройки просмотра ответов',
 	'champs' => 'Поля',
 	'changer_statut' => 'Статус формы:',
 
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_descriptif_explication' => 'Описание формы а административной части.',
 	'editer_identifiant' => 'ID',
 	'editer_identifiant_explication' => 'Укажите текстовый ID, который позволяет быстро вызывать форму.',
+	'editer_menu_auteurs' => 'Настроить авторов',
 	'editer_menu_champs' => 'Настройка полей',
 	'editer_menu_formulaire' => 'Настройка формы',
 	'editer_menu_traitements' => 'Настройка обработчиков',
@@ -60,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_unicite_label' => 'Проверять уникальность значения для поля',
 	'erreur_autorisation' => 'У Вас нет прав на редактирование форм сайта.',
 	'erreur_base' => 'Произошла техническая ошибка при сохранении.',
-	'erreur_generique' => '* - обязательные поля!',
+	'erreur_generique' => 'Вы не заполнили все обязательные поля. (*) - обязательные поля!',
 	'erreur_identifiant' => 'Этот ID уже используется.',
 	'erreur_importer_forms' => 'Ошибка при импорте формы Forms&Tables',
 	'erreur_importer_wcs' => 'Ошибка при импорте формы W.C.S',
@@ -72,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'formulaires_aucun' => 'Пока нет ни одной формы.',
+	'formulaires_aucun_champ' => 'У формы нет полей для ввода информации.',
 	'formulaires_dupliquer' => 'Дублировать форму',
 	'formulaires_dupliquer_copie' => '(копия)',
 	'formulaires_introduction' => 'Создание и настройка форм сайта.',
@@ -91,6 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_formulaire' => 'Форм нет',
 	'info_aucune_reponse' => 'Нет ответов',
 	'info_formulaire_refuse' => 'Архив',
+	'info_formulaire_utilise_par' => 'Форма используется:',
 	'info_nb_formulaires' => '@nb@ форм(ы)',
 	'info_nb_reponses' => '@nb@ ответов',
 	'info_reponse_proposee' => 'На проверке',
@@ -100,6 +106,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Удаленные',
 	'info_reponse_supprimees' => 'Удаленные',
 	'info_reponse_toutes' => 'Все',
+	'info_utilise_1_formulaire' => 'Форма использует:',
+	'info_utilise_nb_formulaires' => 'Формы используют:',
 
 	// M
 	'modele_label_formulaire_formidable' => 'Какая форма ?',
@@ -114,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_aucune' => 'Нет ответов',
 	'reponse_intro' => '@auteur@ ответил на форму @formulaire@',
 	'reponse_numero' => 'Ответ номер:',
-	'reponse_statut' => 'Этот ответ :',
+	'reponse_statut' => 'Статус ответа:',
 	'reponse_supprimer' => 'Удалить ответ',
 	'reponse_supprimer_confirmation' => 'Вы действительно хотите удалить этот ответ ?',
 	'reponse_une' => '1 ответ',
@@ -133,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste_publie' => 'Все проверенные ответы',
 	'reponses_nb' => '@nb@ ответа(ов)',
 	'reponses_supprimer' => 'Удалить все ответы',
+	'reponses_supprimer_confirmation' => 'Вы уверенны, что хотите удалить ВСЕ ответы этой формы ?',
 	'reponses_voir_detail' => 'Посмотреть ответ',
 	'retour_aucun_traitement' => 'Ваш ответ был отправолен на обработку, но ни один обработчик не был выбран для этой формы. Эта форма попросту ничего не делает :)',
 
@@ -158,6 +167,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Ваше сообщение было отправлено.',
 	'traiter_email_option_activer_accuse_label' => 'Подтверждение',
 	'traiter_email_option_activer_accuse_label_case' => 'Кроме указанных получателей, отправить отправителю сообщение с подтверждением.',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Уведомление электронной почтой',
+	'traiter_email_option_destinataires_champ_form_label' => 'Емейл получатель указывается в одном из полей формы',
 	'traiter_email_option_destinataires_explication' => 'Выберите поле, которое соответствует получателям сообщения.',
 	'traiter_email_option_destinataires_label' => 'Получатели',
 	'traiter_email_option_destinataires_plus_explication' => 'Список адресов, разделенных запятыми.',
@@ -169,6 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_sujet_accuse_label' => 'Тема подтверждающего сообщения',
 	'traiter_email_option_sujet_explication' => 'Можно создать тему с использованием @ярлыков@. Если оставить пустым, тема будет создана автоматически.',
 	'traiter_email_option_sujet_label' => 'Тема сообщения',
+	'traiter_email_option_vrai_envoyeur_label' => 'Использовать емейл отправителя для поля "From"',
 	'traiter_email_page' => '<a href="@url@">На этой странице</a>.',
 	'traiter_email_sujet' => '@nom@ вы написали.',
 	'traiter_email_sujet_accuse' => 'Спасибо за ваш ответ.',
@@ -181,6 +193,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_message_ok' => 'Спасибо. Ваш ответ был сохранен',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Анонимные ответы (не сохранять идентифицирующую пользователя информацию)',
 	'traiter_enregistrement_option_anonymiser_label' => 'Анонимизировать форму',
+	'traiter_enregistrement_option_anonymiser_variable_label' => 'Переменные, при помощи которых анонимизируется ответ',
+	'traiter_enregistrement_option_auteur' => 'Использовать авторов в форме',
+	'traiter_enregistrement_option_auteur_explication' => 'Назначить одного или нескольких авторов форме. Если эта настройка включена, то только назначенные автора будут иметь к ней доступ',
 	'traiter_enregistrement_option_choix_select_label' => 'Выберите значение из предложенных вариантов',
 	'traiter_enregistrement_option_identification_explication' => 'Если можно изменять ответы, выберите метод аутентификации пользователя',
 	'traiter_enregistrement_option_identification_label' => 'ID',
