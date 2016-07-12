@@ -40,27 +40,6 @@ function mailsubscribers_pre_insertion($flux){
  * @return mixed
  */
 function mailsubscribers_pre_edition($flux){
-	if ($flux['args']['table']=='spip_mailsubscribers'
-	  AND $id_mailsubscriber = $flux['args']['id_objet']){
-
-	  if ($flux['args']['action']=='instituer'
-		  AND $statut_ancien = $flux['args']['statut_ancien']
-		  AND isset($flux['data']['statut'])
-		  AND $statut = $flux['data']['statut']
-		  AND $statut != $statut_ancien
-		  AND $statut=='refuse') {
-
-		  if (!isset($flux['data']['email'])){
-			  include_spip('inc/mailsubscribers');
-			  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
-			  if (!mailsubscribers_test_email_obfusque($email)){
-				  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
-				  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
-			  }
-		  }
-	  }
-
-	}
 
 	// changement de mail d'un auteur : faire suivre son inscription si l'adresse email est unique dans les auteurs
 	if ($flux['args']['table']=='spip_auteurs'
@@ -80,6 +59,40 @@ function mailsubscribers_pre_edition($flux){
 				objet_modifier('mailsubscriber', $id_mailsubscriber, array('email'=>mailsubscribers_obfusquer_email($flux['data']['email'])));
 			}
 		}
+	}
+
+	return $flux;
+}
+
+/**
+ * Quand le statut de l'abonnement est change, tracer par qui (date, ip, #id si auteur loge, nom/email si en session)
+ * Permet d'opposer l'optin d'un internaute a son abonnement
+ * (et a contrario de tracer que l'abonnement n'a pas ete fait par lui si c'est le cas...)
+ * @param $flux
+ * @return mixed
+ */
+function mailsubscribers_post_edition($flux){
+	if ($flux['args']['table']=='spip_mailsubscribers'
+	  AND $id_mailsubscriber = $flux['args']['id_objet']){
+
+	  if ($flux['args']['action']=='instituer'
+		  AND $statut_ancien = $flux['args']['statut_ancien']
+		  AND isset($flux['data']['statut'])
+		  AND $statut = $flux['data']['statut']
+		  AND $statut != $statut_ancien
+		  AND $statut=='refuse') {
+
+		  include_spip('inc/mailsubscribers');
+		  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
+		  if (!mailsubscribers_test_email_obfusque($email)){
+			  $unsubscribe = charger_fonction('unsubscribe','newsletter');
+			  $unsubscribe($email);
+
+			  $id_job = job_queue_add('mailsubscribers_obfusquer_mailsubscriber',"Obfusquer email #$id_mailsubscriber",array($id_mailsubscriber),'inc/mailsubscribers',false,time()+300);
+			  job_queue_link($id_job, array('objet'=>'mailsubscriber', 'id_objet'=>$id_mailsubscriber));
+		  }
+	  }
+
 	}
 
 	return $flux;
