@@ -96,7 +96,8 @@ function mailsubscribers_obfusquer_mailsubscriber($id_mailsubscriber){
 function mailsubscribers_compte_inscrits($liste,$statut='valide'){
 	static $count = null;
 
-	if (is_null($count)){
+	if (is_null($count) OR isset($GLOBALS['mailsubscribers_recompte_inscrits'])){
+		$count = array();
 		$rows = sql_allfetsel('id_mailsubscribinglist,statut,count(id_mailsubscriber) as n','spip_mailsubscriptions','','id_mailsubscribinglist,statut');
 
 		// recuperer les correspondance id_mailsubscribinglist <=> identifiant
@@ -185,6 +186,7 @@ function mailsubscribers_informe_subscriber($infos){
 				}
 				$url_unsubscribe = mailsubscriber_url_unsubscribe($infos['email'],$infos['jeton']."-".$sub['id_mailsubscribinglist']);
 				$infos['subscriptions'][$id] = array(
+					'id' => $id,
 					'status'=>$status,
 					'url_unsubscribe'=>$url_unsubscribe
 				);

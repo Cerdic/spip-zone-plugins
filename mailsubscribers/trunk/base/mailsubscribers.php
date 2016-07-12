@@ -56,6 +56,9 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 			'mailsubscriptions',
 			'mailsubscribinglists',
 		),
+		// le statut de cette table ne pilote pas les abonnements mais les reflete
+		// quand un abonnement de spip_mailsubscriptions il est mis a jour pour donner une info globale
+		// (cet abonne n'est plus abonne a rien, est en attente de confirmation de son email, est ok)
 		'statut_textes_instituer' => array(
 			'prepa'    => 'mailsubscriber:texte_statut_pas_encore_inscrit',
 			'prop'    => 'mailsubscriber:texte_statut_en_attente_confirmation',
@@ -161,6 +164,9 @@ function mailsubscribers_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			"id_mailsubscriber"           => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_mailsubscribinglist"      => "bigint(21) DEFAULT '0' NOT NULL",
+			// prop : en attente confirmation
+			// valide : subscription active
+			// refuse : desinscrit
 			"statut"                      => "varchar(20)  DEFAULT 'prop' NOT NULL",
 			"maj"                         => "TIMESTAMP",
 		),

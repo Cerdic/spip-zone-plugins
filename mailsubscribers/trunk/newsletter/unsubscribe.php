@@ -18,7 +18,7 @@ include_spip('inc/autoriser');
  * si une ou plusieurs listes precisees, le subscriber est desinscrit de ces seules listes
  * si il n'en reste aucune, le statut du subscriber est suspendu
  *
- * si aucune liste precisee, le subscriber est desinscrit de toutes les listes newsletter*
+ * si aucune liste precisee, le subscriber est desinscrit de toutes les listes
  *
  * @param $email
  *   champ obligatoire
@@ -32,39 +32,30 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 
 	// chercher si un tel email est deja en base
 	$row = sql_fetsel('*','spip_mailsubscribers','email='.sql_quote($email));
-	if ($row AND $row['statut']!=='poubelle'){
+	if ($row ){
 
 		$set = array();
-		$listes = explode(",",$row['listes']);
-		$listes = array_map('trim',$listes);
-		$listes = array_unique($listes);
-		$listes = array_filter($listes);
 
-		if (isset($options['listes'])){
-			$retire = array_map('mailsubscribers_normaliser_nom_liste',$options['listes']);
-			$listes = array_diff($listes,$retire);
-			$set['listes'] = implode(",",$listes);
-			if (!count($listes)){
-				$set['statut'] = "refuse";
-				$set['email'] = mailsubscribers_obfusquer_email($email);
-			}
+		$where = array();
+		$where[] = 'id_mailsubscriber='.intval($row['id_mailsubscriber']);
+
+		if (isset($options['listes'])
+		  AND is_array($options['listes'])){
+			$listes = array_map('mailsubscribers_normaliser_nom_liste',$options['listes']);
+			$ids = sql_allfetsel('id_mailsubscribinglist','spip_mailsubscribinglists',sql_in('identifiant',$listes));
+			$ids = array_map('reset',$ids);
+			$where[] = sql_in('id_mailsubscribinglist',$ids);
 		}
-		else {
-			// aucune liste precisee : on veut desabonner de toutes les newsletter
-			// si il n'y a que des newsletter:: on y touche pas et on change simplement le statut
-			// si il y a d'autres inscriptions, on ne laisse que celles-ci
-			$restantes = array();
-			foreach ($listes as $l){
-				if (strncmp($l,'newsletter::',12)!==0)
-					$restantes[] = $l;
-			}
-			if (count($restantes)){
-				$set['listes'] = implode(",",$restantes);
-			}
-			else {
-				$set['statut'] = "refuse";
-				$set['email'] = mailsubscribers_obfusquer_email($email);
-			}
+
+		// on met a jour les inscriptions pour les listes demandees (ou pour toutes les listes en cours)
+		sql_updateq('spip_mailsubscriptions', array('statut'=>'refuse'), $where);
+		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
+
+		// on regarde les inscriptions en cours : si aucune prop ou valide, l'abonne passe en refuse, mail obfusque
+		$encore = sql_countsel('spip_mailsubscriptions','id_mailsubscriber='.intval($row['id_mailsubscriber']).' AND '.sql_in('statut',array('prop','valide')));
+		if (!$encore) {
+			$set['statut'] = "refuse";
+			$set['email'] = mailsubscribers_obfusquer_email($email);
 		}
 
 		if (count($set)){
@@ -83,7 +74,6 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
 		}
 	}
-	effacer_meta("newsletter_subscribers_count");
 
 	return true;
 }
