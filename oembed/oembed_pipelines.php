@@ -205,7 +205,7 @@ function oembed_pre_propre($texte) {
 		and stripos($texte, 'auto') !== false
 		and stripos($texte, 'spip_out') !== false
 		and lire_config('oembed/embed_auto', 'oui') != 'non'
-		and strpos($texte, '\n') !== false) {
+		and strpos($texte, "\n") !== false) {
 		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims", trim($texte), $matches, PREG_SET_ORDER);
 		if (count($matches)) {
 			$replace = array();
