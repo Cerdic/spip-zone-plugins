@@ -40,72 +40,78 @@ include_spip('inc/autoriser');
  * @return bool
  *   true si inscrit comme demande, false sinon
  */
-function newsletter_subscribe_dist($email,$options = array()){
+function newsletter_subscribe_dist($email, $options = array()) {
 
-	if (!$email = trim($email)) return false;
+	if (!$email = trim($email)) {
+		return false;
+	}
 	// on abonne pas un email invalide ou obfusque !
-	if (!email_valide($email) OR mailsubscribers_test_email_obfusque($email)){
-		spip_log("email invalide pour abonnement : $email","mailsubscribers."._LOG_INFO_IMPORTANTE);
+	if (!email_valide($email) OR mailsubscribers_test_email_obfusque($email)) {
+		spip_log("email invalide pour abonnement : $email", "mailsubscribers." . _LOG_INFO_IMPORTANTE);
+
 		return false;
 	}
 
 	$set = array();
 	$listes = false;
 	$trace_optin = '';
-	foreach (array('lang', 'nom','invite_email_from','invite_email_text') as $k){
-		if (isset($options[$k]))
+	foreach (array('lang', 'nom', 'invite_email_from', 'invite_email_text') as $k) {
+		if (isset($options[$k])) {
 			$set[$k] = $options[$k];
+		}
 	}
 
 	if (isset($options['listes'])
-	  AND is_array($options['listes'])){
-		$listes = array_map('mailsubscribers_normaliser_nom_liste',$options['listes']);
+		AND is_array($options['listes'])
+	) {
+		$listes = array_map('mailsubscribers_normaliser_nom_liste', $options['listes']);
 	}
 
 	// chercher si un tel email est deja en base
-	$row = sql_fetsel('*','spip_mailsubscribers','email='.sql_quote($email)." OR email=".sql_quote(mailsubscribers_obfusquer_email($email)));
+	$row = sql_fetsel('*', 'spip_mailsubscribers',
+		'email=' . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)));
 
 	// Si c'est une creation d'inscrit
-	if (!$row){
-		if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])){
-	    spip_log("Invitation ". $options['invite_email_from'] . " invite $email a s'inscrire " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
+	if (!$row) {
+		if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
+			spip_log("Invitation " . $options['invite_email_from'] . " invite $email a s'inscrire ",
+				"mailsubscribers." . _LOG_INFO_IMPORTANTE);
+		} else {
+			spip_log("Inscription liste $email ", "mailsubscribers." . _LOG_INFO_IMPORTANTE);
 		}
-  	else {
-			spip_log("Inscription liste $email " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
-	  }
 		// email unique
 		$set['email'] = $email;
-		if (!isset($set['lang']))
+		if (!isset($set['lang'])) {
 			$set['lang'] = $GLOBALS['meta']['langue_site'];
-		if (!$listes)
+		}
+		if (!$listes) {
 			$listes = array(mailsubscribers_normaliser_nom_liste());
+		}
 		// date par defaut
 		$set['statut'] = 'prepa';
 		$set['date'] = date('Y-m-d H:i:s');
 
-		if ($id = objet_inserer("mailsubscriber",0,$set)){
-			$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id));
+		if ($id = objet_inserer("mailsubscriber", 0, $set)) {
+			$row = sql_fetsel('*', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($id));
 			// test de securite car $set pas forcement pris en charge dans objet_inserer
-			if ($row['email']!==$set['email']){
-				autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
-				autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
-				objet_modifier("mailsubscriber",$row['id_mailsubscriber'],$set);
-				autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
-				autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
-				$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id));
+			if ($row['email'] !== $set['email']) {
+				autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber']);
+				autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber']);
+				objet_modifier("mailsubscriber", $row['id_mailsubscriber'], $set);
+				autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber'], false);
+				autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
+				$row = sql_fetsel('*', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($id));
 			}
 			$set = array();
-		}
+		} else {
+			spip_log("Impossible de creer un mailsubscriber : " . var_export($set, true), "mailsubscribers." . _LOG_ERREUR);
 
-		else {
-			spip_log("Impossible de creer un mailsubscriber : ".var_export($set,true),"mailsubscribers."._LOG_ERREUR);
 			return false;
 		}
-	}
-	else {
-		if (!$listes){
+	} else {
+		if (!$listes) {
 			// voir si l'abonne est abonne a quelque chose
-			if (!sql_countsel('spip_mailsubscriptions','id_mailsubscriber='.intval($row['id_mailsubscriber']))){
+			if (!sql_countsel('spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']))) {
 				// sinon l'abonner a la liste par defaut
 				$listes = array(mailsubscribers_normaliser_nom_liste());
 			}
@@ -117,64 +123,73 @@ function newsletter_subscribe_dist($email,$options = array()){
 	// statut d'inscription en prop (doubleoptin) ou valide (simpleoptin)
 	$statut_defaut = 'prop';
 	if (
-		(isset($options['force']) AND $options['force']===true)
-		OR !lire_config('mailsubscribers/double_optin',0)){
-		if (!isset($options['force']) or $options['force']!==-1){
+		(isset($options['force']) AND $options['force'] === true)
+		OR !lire_config('mailsubscribers/double_optin', 0)
+	) {
+		if (!isset($options['force']) or $options['force'] !== -1) {
 			$statut_defaut = 'valide';
 		}
 	}
-	if ($listes 
-		and $id_mailsubscriber = $row['id_mailsubscriber']){
-		foreach ($listes as $identifiant){
-			if ($id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))){
-				$sub_prev = $sub = sql_fetsel('*','spip_mailsubscriptions','id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+	if ($listes
+		and $id_mailsubscriber = $row['id_mailsubscriber']
+	) {
+		foreach ($listes as $identifiant) {
+			if ($id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist', 'spip_mailsubscribinglists',
+				'identifiant=' . sql_quote($identifiant))
+			) {
+				$sub_prev = $sub = sql_fetsel('*', 'spip_mailsubscriptions',
+					'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 				$ins = array(
 					'id_mailsubscriber' => $id_mailsubscriber,
 					'id_mailsubscribinglist' => $id_mailsubscribinglist,
 					'statut' => $statut_defaut,
 				);
-				if (!$sub_prev){
-					sql_insertq('spip_mailsubscriptions',$ins);
+				if (!$sub_prev) {
+					sql_insertq('spip_mailsubscriptions', $ins);
 					// on verifie l'inscription, en cas de concurrence
-					$sub = sql_fetsel('*','spip_mailsubscriptions','id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+					$sub = sql_fetsel('*', 'spip_mailsubscriptions',
+						'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 				}
 				// le statut doit etre celui qu'on a voulu mettre - ou mieux : deja valide
-				if ($sub['statut']!==$ins['statut'] and $sub['statut']!=='valide'){
+				if ($sub['statut'] !== $ins['statut'] and $sub['statut'] !== 'valide') {
 					// si c'est graceful on ne reinscrit pas quelqu'un qui s'est desinscrit
-					if (!isset($options['graceful']) or $options['graceful']!==true){
-						sql_updateq('spip_mailsubscriptions', $ins,'id_mailsubscriber='.intval($id_mailsubscriber).' AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+					if (!isset($options['graceful']) or $options['graceful'] !== true) {
+						sql_updateq('spip_mailsubscriptions', $ins,
+							'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 						$sub['statut'] = $ins['statut'];
 					}
 				}
 				// une adresse en prepa reste en prepa tant qu'un email n'a pas ete valide
-				if ($sub['statut']=='prop'
-					and (!isset($set['statut']) or !in_array($set['statut'],array('prepa','valide')))
-				  and !in_array($row['statut'],array('prepa','valide'))){
+				if ($sub['statut'] == 'prop'
+					and (!isset($set['statut']) or !in_array($set['statut'], array('prepa', 'valide')))
+					and !in_array($row['statut'], array('prepa', 'valide'))
+				) {
 					$set['statut'] = 'prop';
 					$set['email'] = $email; // si email obfusque
-				} elseif ($sub['statut']=='valide'){
+				} elseif ($sub['statut'] == 'valide') {
 					$set['statut'] = 'valide';
 					$set['email'] = $email; // si email obfusque
 				}
-				if (!$sub_prev or $sub['statut']!==$sub_prev['statut']){
-					$trace_optin .= '['.$identifiant.':'._T('mailsubscriber:info_statut_' . $sub['statut']).'] ';
+				if (!$sub_prev or $sub['statut'] !== $sub_prev['statut']) {
+					$trace_optin .= '[' . $identifiant . ':' . _T('mailsubscriber:info_statut_' . $sub['statut']) . '] ';
 				}
 				$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 			}
 		}
 	}
-	if ($trace_optin){
-		$set['optin'] = mailsubscribers_trace_optin($trace_optin, sql_getfetsel('optin','spip_mailsubscribers','id_mailsubscriber='.intval($row['id_mailsubscriber'])));
+	if ($trace_optin) {
+		$set['optin'] = mailsubscribers_trace_optin($trace_optin,
+			sql_getfetsel('optin', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($row['id_mailsubscriber'])));
 	}
 
-	if (count($set)){
-		autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
-		autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
-		autoriser_exception("superinstituer","mailsubscriber",$row['id_mailsubscriber']);
-		objet_modifier("mailsubscriber",$row['id_mailsubscriber'],$set);
-		autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
-		autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
-		autoriser_exception("superinstituer","mailsubscriber",$row['id_mailsubscriber'],false);
+	if (count($set)) {
+		autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber']);
+		autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber']);
+		autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber']);
+		objet_modifier("mailsubscriber", $row['id_mailsubscriber'], $set);
+		autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber'], false);
+		autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
+		autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 	}
 
 	return true;

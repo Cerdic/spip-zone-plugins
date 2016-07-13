@@ -8,7 +8,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // declaration vide pour ce pipeline.
-function mailsubscribers_autoriser(){}
+function mailsubscribers_autoriser() { }
 
 
 // -----------------
@@ -16,19 +16,19 @@ function mailsubscribers_autoriser(){}
 
 
 // bouton de menu
-function autoriser_mailsubscribers_menu_dist($faire, $type, $id, $qui, $opts){
-        return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
-} 
+function autoriser_mailsubscribers_menu_dist($faire, $type, $id, $qui, $opts) {
+	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+}
 
 // superinstituer : permet de passer outre les restrictions de changement de statut manuel
 function autoriser_mailsubscriber_superinstituer_dist($faire, $type, $id, $qui, $opt) {
-	return false; 
+	return false;
 }
 
 
 // creer
 function autoriser_mailsubscriber_creer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo'; 
+	return $qui['statut'] == '0minirezo';
 }
 
 // iconifier

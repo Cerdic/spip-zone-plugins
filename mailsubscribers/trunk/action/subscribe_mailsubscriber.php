@@ -14,69 +14,72 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $email
  * @param null|bool $double_optin
  */
-function action_subscribe_mailsubscriber_dist($email=null, $double_optin=null){
+function action_subscribe_mailsubscriber_dist($email = null, $double_optin = null) {
 	include_spip('mailsubscribers_fonctions');
 	include_spip('inc/mailsubscribers');
 	include_spip('inc/config');
-	if (is_null($email)){
-		list($email,$arg) = mailsubscribers_args_action();
+	if (is_null($email)) {
+		list($email, $arg) = mailsubscribers_args_action();
 
 		$row = false;
 		if (!$email
-			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email))){
-			spip_log("subscribe_mailsubscriber : email $email pas dans la base spip_mailsubscribers","mailsubscribers");
-		}
-		else {
-			$cle = mailsubscriber_cle_action("subscribe",$row['email'],$row['jeton']);
-			if ($arg!==$cle){
-				spip_log("subscribe_mailsubscriber : cle $arg incorrecte pour email $email","mailsubscribers");
+			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut', 'spip_mailsubscribers',
+				'email=' . sql_quote($email))
+		) {
+			spip_log("subscribe_mailsubscriber : email $email pas dans la base spip_mailsubscribers", "mailsubscribers");
+		} else {
+			$cle = mailsubscriber_cle_action("subscribe", $row['email'], $row['jeton']);
+			if ($arg !== $cle) {
+				spip_log("subscribe_mailsubscriber : cle $arg incorrecte pour email $email", "mailsubscribers");
 				$row = false;
 			}
 		}
 
+	} else {
+		$row = sql_fetsel('id_mailsubscriber,email,jeton,statut', 'spip_mailsubscribers', 'email=' . sql_quote($email));
 	}
-	else {
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,statut','spip_mailsubscribers','email='.sql_quote($email));
-	}
-	if (!$row){
+	if (!$row) {
 		include_spip('inc/minipres');
-		echo minipres(_T('info_email_invalide').'<br />'.entites_html($email));
+		echo minipres(_T('info_email_invalide') . '<br />' . entites_html($email));
 		exit;
 	}
 
 	include_spip("inc/lang");
 	changer_langue($row['lang']);
 	include_spip("inc/autoriser");
-	autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
-	autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
+	autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber']);
+	autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber']);
 
-	if ($row['statut']!='valide'){
+	if ($row['statut'] != 'valide') {
 		// OK l'email est connu et valide
 		include_spip("action/editer_objet");
 		// si doubleoptin, envoyer un mail de confirmation
-		if (is_null($double_optin))
-			$double_optin = lire_config('mailsubscribers/double_optin',0);
-		if ($double_optin){
+		if (is_null($double_optin)) {
+			$double_optin = lire_config('mailsubscribers/double_optin', 0);
+		}
+		if ($double_optin) {
 			// on passe en prop qui declenche l'envoi d'un mail
-			objet_modifier("mailsubscriber",$row['id_mailsubscriber'],array('statut'=>'prop'));
-			$titre = _T('mailsubscriber:confirmsubscribe_texte_email_1',array('email'=>$row['email'],'nom_site_spip'=>$GLOBALS['meta']['nom_site'],'url_site_spip'=>$GLOBALS['meta']['adresse_site']));
-			$titre .= "<br />"._T('mailsubscriber:confirmsubscribe_texte_email_envoye');
-		}
-		// sinon inscrire directement
+			objet_modifier("mailsubscriber", $row['id_mailsubscriber'], array('statut' => 'prop'));
+			$titre = _T('mailsubscriber:confirmsubscribe_texte_email_1', array(
+				'email' => $row['email'],
+				'nom_site_spip' => $GLOBALS['meta']['nom_site'],
+				'url_site_spip' => $GLOBALS['meta']['adresse_site']
+			));
+			$titre .= "<br />" . _T('mailsubscriber:confirmsubscribe_texte_email_envoye');
+		} // sinon inscrire directement
 		else {
-			objet_modifier("mailsubscriber",$row['id_mailsubscriber'],array('statut'=>'valide'));
-			$titre = _T('mailsubscriber:subscribe_texte_email_1',array('email'=>$row['email']));
+			objet_modifier("mailsubscriber", $row['id_mailsubscriber'], array('statut' => 'valide'));
+			$titre = _T('mailsubscriber:subscribe_texte_email_1', array('email' => $row['email']));
 		}
-	}
-	else {
-		$titre = _T('mailsubscriber:subscribe_deja_texte',array('email'=>$row['email']));
+	} else {
+		$titre = _T('mailsubscriber:subscribe_deja_texte', array('email' => $row['email']));
 	}
 
-	autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
-	autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
+	autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber'], false);
+	autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 
 	// Dans tous les cas on finit sur un minipres qui dit si ok ou echec
 	include_spip('inc/minipres');
-	echo minipres($titre,"","",true);
+	echo minipres($titre, "", "", true);
 
 }

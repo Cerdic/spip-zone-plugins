@@ -13,13 +13,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param null|string $statut
  */
-function action_mailsubscribers_export_dist($statut=null){
-	if (is_null($statut)){
-		$securiser_action = charger_fonction('securiser_action','inc');
+function action_mailsubscribers_export_dist($statut = null) {
+	if (is_null($statut)) {
+		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$statut = $securiser_action();
 	}
 
-	if (!autoriser('exporter','_mailsubscribers')){
+	if (!autoriser('exporter', '_mailsubscribers')) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
@@ -27,10 +27,11 @@ function action_mailsubscribers_export_dist($statut=null){
 
 	$where = array();
 	// '' ou 'all' pour tout exporter (sauf poubelle)
-	if (in_array($statut,array('','all')))
-		$where[] = "statut<>".sql_quote('poubelle');
-	else
-		$where[] = "statut=".sql_quote($statut);
+	if (in_array($statut, array('', 'all'))) {
+		$where[] = "statut<>" . sql_quote('poubelle');
+	} else {
+		$where[] = "statut=" . sql_quote($statut);
+	}
 
 
 	$entetes = array(
@@ -42,9 +43,9 @@ function action_mailsubscribers_export_dist($statut=null){
 		'listes',
 	);
 
-	$titre = _T('mailsubscriber:titre_mailsubscribers')."-".$GLOBALS['meta']['nom_site']."-".date('Y-m-d');
-	$exporter_csv = charger_fonction("exporter_csv","inc");
-	$res = sql_select("email,nom,lang,date,statut,listes","spip_mailsubscribers",$where);
+	$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . date('Y-m-d');
+	$exporter_csv = charger_fonction("exporter_csv", "inc");
+	$res = sql_select("email,nom,lang,date,statut,listes", "spip_mailsubscribers", $where);
 	$exporter_csv($titre, $res, ',', $entetes);
 
 }

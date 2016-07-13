@@ -14,33 +14,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string $email
  */
-function action_confirm_unsubscribe_mailsubscriber_dist($email=null){
+function action_confirm_unsubscribe_mailsubscriber_dist($email = null) {
 	include_spip('mailsubscribers_fonctions');
-	if (is_null($email)){
-		$securiser_action = charger_fonction("securiser_action","inc");
+	if (is_null($email)) {
+		$securiser_action = charger_fonction("securiser_action", "inc");
 		$email = $securiser_action();
-		$email = explode("-",$email);
+		$email = explode("-", $email);
 		$arg = array_pop($email);
-		$email = mailsubscriber_base64url_decode(implode("-",$email));
+		$email = mailsubscriber_base64url_decode(implode("-", $email));
 
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
+		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut', 'spip_mailsubscribers',
+			'email=' . sql_quote($email));
 		if (!$row
-			OR $arg!==mailsubscriber_cle_action("unsubscribe",$row['email'],$row['jeton'])){
+			OR $arg !== mailsubscriber_cle_action("unsubscribe", $row['email'], $row['jeton'])
+		) {
 			$row = false;
 		}
 	}
 
-	if (!$row){
+	if (!$row) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 
 	// il suffit de rejouer subscribe en forcant le simple-optin
-	$unsubscribe_mailsubscriber = charger_fonction("unsubscribe_mailsubscriber","action");
-	$unsubscribe_mailsubscriber ($email,false);
+	$unsubscribe_mailsubscriber = charger_fonction("unsubscribe_mailsubscriber", "action");
+	$unsubscribe_mailsubscriber ($email, false);
 }
 
 function mailsubscriber_base64url_decode($data) {
-  return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+	return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 }

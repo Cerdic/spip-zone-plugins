@@ -23,9 +23,9 @@ include_spip('mailsubscribers_fonctions');
  *   chaque liste est decrite par :
  *   id => array(titre=>'','status'=>'')
  */
-function newsletter_lists_dist($options = array()){
+function newsletter_lists_dist($options = array()) {
 
-	$options['category']='newsletter';
+	$options['category'] = 'newsletter';
 	$res = mailsubscribers_listes($options);
 
 	return $res;
