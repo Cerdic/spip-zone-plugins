@@ -38,6 +38,8 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 			"statut" => "varchar(20)  DEFAULT 'prepa' NOT NULL",
 			"jeton" => "char(25)  DEFAULT '' NOT NULL",
 			"lang" => "VARCHAR(10) NOT NULL DEFAULT ''",
+			"invite_email_from" => "text NOT NULL DEFAULT ''",
+			"invite_email_text" => "text NOT NULL DEFAULT ''",
 			"maj" => "TIMESTAMP"
 		),
 		'key' => array(
