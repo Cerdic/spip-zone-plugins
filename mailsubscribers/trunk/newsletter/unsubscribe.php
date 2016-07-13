@@ -36,6 +36,7 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 
 		$set = array();
 		$trace_optin = '';
+		$notify = array();
 
 		$where = array();
 		$where[] = 'id_mailsubscriber=' . intval($row['id_mailsubscriber']);
@@ -50,30 +51,35 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 		}
 
 		// les inscriptions pas deja en refusees pour la trace
-		$pas_encore = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscriptions',
-			'statut!=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
-		$pas_encore = array_map('reset', $pas_encore);
+		$pas_encore = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions', 'statut!=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
 
 		// on met a jour les inscriptions pour les listes demandees (ou pour toutes les listes en cours)
 		sql_updateq('spip_mailsubscriptions', array('statut' => 'refuse'), $where);
 		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 
 		if ($pas_encore) {
-			$changes = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscriptions',
-				'statut=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
+			$changes = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscriptions', 'statut=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
 			$changes = array_map('reset', $changes);
-			$changes = array_intersect($changes, $pas_encore);
-			if ($changes) {
-				$changes = sql_allfetsel('identifiant', 'spip_mailsubscribinglists',
-					sql_in('id_mailsubscribinglist', $changes));
-				$changes = array_map('reset', $changes);
-				$trace_optin .= '[' . implode(',', $changes) . ':' . _T('mailsubscriber:info_statut_refuse') . '] ';
+			$changes_identifiants = array();
+			foreach ($pas_encore as $sub_prev){
+				if (in_array($sub_prev['id_mailsubscribinglist'], $changes)){
+					$identifiant = sql_getfetsel('identifiant', 'spip_mailsubscribinglists', 'id_mailsubscribinglist='.intval($sub_prev['id_mailsubscribinglist']));
+					$changes_identifiants[] = $identifiant;
+					$notify[] = array(
+						'identifiant' => $identifiant,
+						'id_mailsubscribinglist' => $sub_prev['id_mailsubscribinglist'],
+						'statut' => 'refuse',
+						'statut_ancien' => $sub_prev['statut'],
+					);
+				}
+			}
+			if ($changes_identifiants) {
+				$trace_optin .= '[' . implode(',', $changes_identifiants) . ':' . _T('mailsubscriber:info_statut_refuse') . '] ';
 			}
 		}
 
 		// on regarde les inscriptions en cours : si aucune prop ou valide, l'abonne passe en refuse, mail obfusque
-		$encore = sql_countsel('spip_mailsubscriptions',
-			'id_mailsubscriber=' . intval($row['id_mailsubscriber']) . ' AND ' . sql_in('statut', array('prop', 'valide')));
+		$encore = sql_countsel('spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']) . ' AND ' . sql_in('statut', array('prop', 'valide')));
 		if (!$encore) {
 			if (!in_array($row['statut'], array('refuse', 'poubelle'))) {
 				$set['statut'] = "refuse";
@@ -105,6 +111,14 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 			autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 			autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 		}
+
+		if ($notify and (!isset($options['notify']) or $options['notify'])){
+			$notifications = charger_fonction('notifications','inc');
+			foreach ($notify as $option){
+				$notifications('instituermailsubscription',$row['id_mailsubscriber'],$option);
+			}
+		}
+
 	}
 
 	return true;

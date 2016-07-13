@@ -10,7 +10,7 @@
 [(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
 <p><:mailsubscriber:confirmsubscribe_texte_email_1{email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
 
-[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_confirm{#JETON*}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_confirm{#JETON*[+(#ID_MAILSUBSCRIBINGLIST)]}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
 <p><:mailsubscriber:confirmsubscribe_texte_email_2{url_confirmsubscribe=#GET{url}}:></p>
 
 <br />

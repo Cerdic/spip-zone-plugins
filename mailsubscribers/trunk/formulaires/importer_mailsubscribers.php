@@ -271,7 +271,7 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 		// mais graceful (sans forcer le reabonnement d'un desabonne)
 		$email = trim($d['email']);
 		if ($email AND email_valide($email) AND !mailsubscribers_test_email_obfusque($email)) {
-			$set = array();
+			$set = array('notify'=>false);
 			if (isset($d['nom'])) {
 				$set['nom'] = $d['nom'];
 			}

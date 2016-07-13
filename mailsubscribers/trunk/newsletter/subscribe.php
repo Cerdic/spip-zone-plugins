@@ -74,8 +74,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 	// Si c'est une creation d'inscrit
 	if (!$row) {
 		if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
-			spip_log("Invitation " . $options['invite_email_from'] . " invite $email a s'inscrire ",
-				"mailsubscribers." . _LOG_INFO_IMPORTANTE);
+			spip_log("Invitation " . $options['invite_email_from'] . " invite $email a s'inscrire ", "mailsubscribers." . _LOG_INFO_IMPORTANTE);
 		} else {
 			spip_log("Inscription liste $email ", "mailsubscribers." . _LOG_INFO_IMPORTANTE);
 		}
@@ -122,6 +121,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 	// proceder aux inscriptions
 	// statut d'inscription en prop (doubleoptin) ou valide (simpleoptin)
 	$statut_defaut = 'prop';
+	$notify = array();
 	if (
 		(isset($options['force']) AND $options['force'] === true)
 		OR !lire_config('mailsubscribers/double_optin', 0)
@@ -173,6 +173,12 @@ function newsletter_subscribe_dist($email, $options = array()) {
 				if (!$sub_prev or $sub['statut'] !== $sub_prev['statut']) {
 					$trace_optin .= '[' . $identifiant . ':' . _T('mailsubscriber:info_statut_' . $sub['statut']) . '] ';
 				}
+				$notify[] = array(
+					'identifiant' => $identifiant,
+					'id_mailsubscribinglist' => $id_mailsubscribinglist,
+					'statut' => $sub['statut'],
+					'statut_ancien' => (isset($sub_prev['statut'])?$sub_prev['statut']:'prepa'),
+				);
 				$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 			}
 		}
@@ -192,5 +198,17 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 	}
 
+	if ($notify and (!isset($options['notify']) or $options['notify'])){
+		$notifications = charger_fonction('notifications','inc');
+		foreach ($notify as $option){
+			if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])) {
+				$option = $options['invite_email_from'];
+				if (isset($options['invite_email_text'])){
+					$option = $options['invite_email_text'];
+				}
+			}
+			$notifications('instituermailsubscription',$row['id_mailsubscriber'],$option);
+		}
+	}
 	return true;
 }

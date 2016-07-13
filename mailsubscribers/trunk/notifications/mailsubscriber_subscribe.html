@@ -13,7 +13,7 @@
 
 <br />
 <br />
-[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_unsubscribe{#JETON*}|url_absolue)],label=<:newsletter:bouton_unsubscribe:>,width=250px,bgcolor=#aaaaaa,bordercolor=#888888})</center>]})]
+[(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL*|mailsubscriber_url_unsubscribe{#JETON*[+(#ID_MAILSUBSCRIBINGLIST)]}|url_absolue)],label=<:newsletter:bouton_unsubscribe:>,width=250px,bgcolor=#aaaaaa,bordercolor=#888888})</center>]})]
 <p><small><:mailsubscriber:subscribe_texte_email_3{url_unsubscribe=#GET{url}}:></small></p>
 </body>
 </BOUCLE_susc>
