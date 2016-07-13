@@ -252,21 +252,26 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  *   array
  *     id : identifiant
  *     titre : titre de la liste
+ *     descriptif : descriptif de la liste
  *     status : status de la liste
  */
 function mailsubscribers_listes($options = array()){
 	$filtrer_status = false;
 	if (isset($options['status']))
 		$filtrer_status = $options['status'];
+	if ($filtrer_status=='open') $filtrer_status = 'ouverte';
+	if ($filtrer_status=='close') $filtrer_status = 'fermee';
 
 	$where = array();
 	$where[] = 'statut!='.sql_quote('poubelle');
 	if ($filtrer_status){
 		$where[] = 'statut='.sql_quote($filtrer_status);
 	}
-	$rows = sql_allfetsel('identifiant as id,titre,statut as status','spip_mailsubscribinglists',$where,'','statut DESC,0+titre,titre');
+	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status','spip_mailsubscribinglists',$where,'','statut DESC,0+titre,titre');
 	$listes = array();
 	foreach ($rows as $row) {
+		if ($row['status']=='ouverte') $row['status'] = 'open';
+		if ($row['status']=='fermee') $row['status'] = 'close';
 		$listes[$row['id']] = $row;
 	}
 

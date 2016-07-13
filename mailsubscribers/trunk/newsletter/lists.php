@@ -27,9 +27,6 @@ function newsletter_lists_dist($options = array()){
 
 	$options['category']='newsletter';
 	$res = mailsubscribers_listes($options);
-	foreach ($res as $k=>$r){
-		if ($r['status']=='ouverte') $res[$k]['status'] = 'open';
-		if ($r['status']=='fermee') $res[$k]['status'] = 'close';
-	}
+
 	return $res;
 }

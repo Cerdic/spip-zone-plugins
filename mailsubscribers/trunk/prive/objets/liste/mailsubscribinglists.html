@@ -23,7 +23,9 @@
 	<BOUCLE_mailsubscribinglists(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist?}{identifiant?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='statut'>[(#STATUT|puce_statut{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})]</td>
-			<td class='titre principale'>[(#LOGO_MAILSUBSCRIBINGLIST|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBINGLIST">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_MAILSUBSCRIBINGLIST|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBINGLIST">[(#RANG). ]#TITRE</a>
+			[<span class="soustitre">(#DESCRIPTIF|PtoBR)</span>]
+			</td>
 			<td class='identifiant secondaire'>[<tt>(#IDENTIFIANT)</tt>]</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='inscrits secondaire'>[(#IDENTIFIANT|mailsubscribers_compte_inscrits)]
