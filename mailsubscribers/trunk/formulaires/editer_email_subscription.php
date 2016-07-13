@@ -52,8 +52,6 @@ function formulaires_editer_email_subscription_verifier_dist($email){
  */
 function formulaires_editer_email_subscription_traiter_dist($email){
 
-	$GLOBALS['notification_instituermailsubscriber_status'] = false; // pas de notification depuis l'edition du form
-
 	$listes = _request('listes');
 	if (!$listes)
 		$listes = array();

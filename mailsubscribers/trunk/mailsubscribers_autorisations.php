@@ -20,6 +20,11 @@ function autoriser_mailsubscribers_menu_dist($faire, $type, $id, $qui, $opts){
         return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 } 
 
+// superinstituer : permet de passer outre les restrictions de changement de statut manuel
+function autoriser_mailsubscriber_superinstituer_dist($faire, $type, $id, $qui, $opt) {
+	return false; 
+}
+
 
 // creer
 function autoriser_mailsubscriber_creer_dist($faire, $type, $id, $qui, $opt) {
@@ -47,6 +52,3 @@ function autoriser_mailsubscriber_supprimer_dist($faire, $type, $id, $qui, $opt)
 }
 
 
-
-
-?>

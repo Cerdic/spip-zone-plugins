@@ -168,7 +168,7 @@ function mailsubscribers_compte_inscrits($liste,$statut='valide'){
  */
 function mailsubscribers_trouver_fonction_synchro($liste){
 	$f = mailsubscribers_normaliser_nom_liste($liste);
-	$f = str_replace("::","_",$f);
+	$f = 'newsletter_'.$f;
 	include_spip("public/parametrer"); // fichier mes_fonctions.php
 	if (function_exists($f="mailsubscribers_synchro_list_$f"))
 		return $f;
@@ -427,31 +427,30 @@ function mailsubscribers_synchro_list_newsletter_6forum(){
  */
 function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array()){
 	$listes = array($liste);
+	$id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($liste));
+	if (!$id_mailsubscribinglist) return;
+
 	if (is_bool($options)){
 		$options = array('addonly'=>$options);
 	}
-	$options = array_merge(array('addonly'=>false,'graceful'=>false),$options);
-
-	// desactiver toutes les notifications pendant cette operation
-	// on ne veut pas envoyer de mail a ceux qu'on ajoute/retire de la liste
-	$GLOBALS['notification_instituermailsubscriber_status'] = false;
+	$options = array_merge(array('addonly'=>false,'graceful'=>true),$options);
 
 	$abonnes_emails = array();
 	while(count($abonnes)){
 		$abonne = array_shift($abonnes);
 		if (isset($abonne['email'])
-		  AND strlen(trim($abonne['email']))){
-			$abonnes_emails[$abonne['email']] = $abonne;
+		  AND strlen($e=trim($abonne['email']))){
+			$abonnes_emails[$e] = $abonne;
 		}
 	}
 
-	$subscribers = charger_fonction('subscribers','newsletter');
 	$subscribe = charger_fonction('subscribe','newsletter');
 	$unsubscribe = charger_fonction('unsubscribe','newsletter');
 
 	// d'abord on prend la liste de tous les abonnes en base
 	// et on retire ceux qui ne sont plus dans le tableau $abonnes
-	$subs = $subscribers($listes);
+	$subs = sql_allfetsel('S.email','spip_mailsubscribers as S JOIN spip_mailsubscriptions as L ON S.id_mailsubscriber=L.id_mailsubscriber','L.id_mailsubscribinglist='.intval($id_mailsubscribinglist).' AND L.statut='.sql_quote('valide'));
+	spip_log("mailsubscribers_synchronise_liste $liste: ".count($subs)." abonnes deja dans la liste","mailsubscribers"._LOG_DEBUG);
 	foreach($subs as $sub){
 		// OK il est toujours dans les abonnes
 		if (isset($abonnes_emails[$sub['email']])){
@@ -460,10 +459,11 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		// il n'est plus dans les abonnes on l'enleve sauf si flag $addonly==true
 		elseif(!$options['addonly']) {
 			//echo "unsubscribe ".$sub['email']."<br />";
-			$unsubscribe($sub['email'],array('listes'=>$listes));
+			$unsubscribe($sub['email'],array('listes'=>$listes,'notify'=>false));
 		}
 	}
 
+	spip_log("mailsubscribers_synchronise_liste $liste: ".count($abonnes_emails)." a abonner dans la liste","mailsubscribers"._LOG_DEBUG);
 	// si il reste du monde dans $abonnes, c'est ceux qui ne sont pas en base
 	// on les subscribe
 	foreach($abonnes_emails as $email=>$abonne){
@@ -474,9 +474,14 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 			'nom' => trim($nom),
 			'listes' => $listes,
 			'force' => true,
+			'notify'=>false,
 			'graceful' => $options['graceful'],
 		));
 	}
 
-	$GLOBALS['notification_instituermailsubscriber_status'] = true;
+	// baisser les drapeaux edition de tout ce qu'on vient de faire
+	if (function_exists('debloquer_tous')){
+		$id_a = (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:$GLOBALS['ip']);
+		debloquer_tous($id_a);
+	}
 }

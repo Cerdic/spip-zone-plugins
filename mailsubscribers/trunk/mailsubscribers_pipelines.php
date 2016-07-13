@@ -52,15 +52,15 @@ function mailsubscribers_pre_edition($flux){
 		  include_spip('inc/mailsubscribers');
 		  $email = sql_getfetsel('email','spip_mailsubscribers', "id_mailsubscriber=" . intval($id_mailsubscriber));
 		  // on ne peut jamais passer en prepa, c'est un statut reserve a la creation
-		  if ($statut=='prepa') {
+		  if ($statut=='prepa' and !autoriser('superinstituer','mailsubscriber',$id_mailsubscriber)) {
 	      unset($flux['data']['statut']);
 		  }
 		  // on ne peut jamais passer en prop, c'est un statut intermediaire automatique
-		  if ($statut=='prop') {
+		  if ($statut=='prop' and !autoriser('superinstituer','mailsubscriber',$id_mailsubscriber)) {
 	      unset($flux['data']['statut']);
 		  }
 		  // on ne peut jamais passer en valide que si on etait en prop
-		  if ($statut=='valide' and $statut_ancien!=='prop') {
+		  if ($statut=='valide' and $statut_ancien!=='prop' and !autoriser('superinstituer','mailsubscriber',$id_mailsubscriber)) {
 	      unset($flux['data']['statut']);
 		  }
 		  // un subscriber avec email obfusque ne peut que passer en poubelle ou refuse
