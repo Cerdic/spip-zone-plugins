@@ -102,7 +102,7 @@ function formulaires_newsletter_invite_traiter_dist($listes = ''){
 	$options['invite_email_text'] = _request('message_invite_email_subscribe');
 
 	// pour une invitation on force le double optin
-	$options['status'] = 'prop';
+	$options['force'] = -1;
 
 
 	if ($listes AND is_string($listes))
@@ -143,5 +143,3 @@ function formulaires_newsletter_invite_traiter_dist($listes = ''){
 	set_request('email');
 	return $res;
 }
-
-?>
