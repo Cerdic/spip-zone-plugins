@@ -28,7 +28,7 @@
 	<tbody>
 <BOUCLE_sub(mailsubscriptions){id_mailsubscriber}>
 	<tr>
-		<td>#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}[ \(<tt>(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</tt>\)]</td>
+		<td><a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]">#INFO_TITRE{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}</a>[ \(<tt>(#INFO_IDENTIFIANT{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})</tt>\)]</td>
 		<td>[(#STATUT|puce_statut{mailsubscriber}) ][(#VAL{mailsubscriber}|statut_titre{#STATUT})]</td>
 		<td></td>
 	</tr>
