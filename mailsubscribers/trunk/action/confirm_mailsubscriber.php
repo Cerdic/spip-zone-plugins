@@ -8,41 +8,31 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Confirmer l'inscription d'un email deja en base
+ * Confirmer l'inscription d'un email a une liste (inscription deja en base)
  * (appelle lors du double-optin : delegue a subscribe le changement de statut en valide)
  *
  * @param string $email
+ * @param string $identifiant
  */
-function action_confirm_mailsubscriber_dist($email = null) {
+function action_confirm_mailsubscriber_dist($email = null, $identifiant = null) {
+	
 	include_spip('mailsubscribers_fonctions');
 	include_spip('inc/mailsubscribers');
-	if (is_null($email)) {
-		list($email, $arg) = mailsubscribers_args_action();
 
-		$row = false;
-		if (!$email
-			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut', 'spip_mailsubscribers',
-				'email=' . sql_quote($email))
-		) {
-			spip_log("confirm_mailsubscriber : email $email pas dans la base spip_mailsubscribers", "mailsubscribers");
-		} else {
-			$cle = mailsubscriber_cle_action("confirm", $row['email'], $row['jeton']);
-			if ($arg !== $cle) {
-				spip_log("confirm_mailsubscriber : cle $arg incorrecte pour email $email", "mailsubscribers");
-				$row = false;
-			}
+	if (is_null($email)) {
+		$arg = mailsubscribers_verifier_args_action('confirm');
+		if ($arg){
+			list($email, $identifiant) = $arg;
 		}
-	} else {
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,statut', 'spip_mailsubscribers', 'email=' . sql_quote($email));
 	}
-	if (!$row) {
+
+	if (!$email) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_email_invalide') . '<br />' . entites_html($email));
 		exit;
 	}
 
-	// il suffit de rejouer subscribe en forcant le simple-optin
-	$subscribe_mailsubscriber = charger_fonction("subscribe_mailsubscriber", "action");
-	$subscribe_mailsubscriber($email, false);
+	$subscribe_mailsubscriber = charger_fonction('subscribe_mailsubscriber', 'action');
+	$subscribe_mailsubscriber($email, $identifiant, false);
 
 }

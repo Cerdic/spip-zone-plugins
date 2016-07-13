@@ -2,7 +2,12 @@
 <title>[(#VAL{mailsubscriber:unsubscribe_sujet_email}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
 <body>
 <div class="header">
+	<BOUCLE_titreliste(MAILSUBSCRIBINGLISTS){id_mailsubscribinglist}>
+	<p><:mailsubscriber:unsubscribe_titre_email_liste{titre_liste=#TITRE}:></p>
+	</BOUCLE_titreliste>
 	<p><:mailsubscriber:unsubscribe_titre_email:></p>
+	<//B_titreliste>
+
 </div>
 <p><:mailsubscriber:titre_bonjour:>[ (#NOM)],</p>
 

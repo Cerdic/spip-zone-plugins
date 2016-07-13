@@ -8,78 +8,82 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Inscrire un email deja en base
+ * Inscrire un email a une liste (inscription deja en base)
  * (mise a jour du statut en prop ou valide selon l'option double-optin)
  *
  * @param string $email
+ * @param string $identifiant
  * @param null|bool $double_optin
  */
-function action_subscribe_mailsubscriber_dist($email = null, $double_optin = null) {
+function action_subscribe_mailsubscriber_dist($email = null, $identifiant = null, $double_optin = null) {
 	include_spip('mailsubscribers_fonctions');
 	include_spip('inc/mailsubscribers');
 	include_spip('inc/config');
+
 	if (is_null($email)) {
-		list($email, $arg) = mailsubscribers_args_action();
-
-		$row = false;
-		if (!$email
-			OR !$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut', 'spip_mailsubscribers',
-				'email=' . sql_quote($email))
-		) {
-			spip_log("subscribe_mailsubscriber : email $email pas dans la base spip_mailsubscribers", "mailsubscribers");
-		} else {
-			$cle = mailsubscriber_cle_action("subscribe", $row['email'], $row['jeton']);
-			if ($arg !== $cle) {
-				spip_log("subscribe_mailsubscriber : cle $arg incorrecte pour email $email", "mailsubscribers");
-				$row = false;
-			}
+		$arg = mailsubscribers_verifier_args_action('subscribe');
+		if ($arg){
+			list($email, $identifiant) = $arg;
 		}
-
-	} else {
-		$row = sql_fetsel('id_mailsubscriber,email,jeton,statut', 'spip_mailsubscribers', 'email=' . sql_quote($email));
 	}
-	if (!$row) {
+
+	$subscriber = charger_fonction('subscriber','newsletter');
+	if (!$email or !$infos = $subscriber($email)) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_email_invalide') . '<br />' . entites_html($email));
 		exit;
 	}
+	
+	$titre_liste = '';
+	$status = $infos['status'];
+	if ($identifiant){
+		$status = (isset($infos['subscriptions'][$identifiant]['status'])?$infos['subscriptions'][$identifiant]['status']:'');
+		$titre_liste = sql_getfetsel('titre', 'spip_mailsubscribinglists', 'identifiant=' . sql_quote($identifiant));
+		include_spip('inc/texte');
+		$titre_liste = supprimer_numero(typo($titre_liste));
+	}
 
-	include_spip("inc/lang");
-	changer_langue($row['lang']);
-	include_spip("inc/autoriser");
-	autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber']);
-	autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber']);
-
-	if ($row['statut'] != 'valide') {
-		// OK l'email est connu et valide
-		include_spip("action/editer_objet");
-		// si doubleoptin, envoyer un mail de confirmation
+	if ($status == 'on') {
+		$titre = _T('mailsubscriber:subscribe_deja_texte', array('email' => $email));
+	}
+	else {
+		$subscribe = charger_fonction('subscribe','newsletter');
+		$options = array();
 		if (is_null($double_optin)) {
 			$double_optin = lire_config('mailsubscribers/double_optin', 0);
 		}
-		if ($double_optin) {
-			// on passe en prop qui declenche l'envoi d'un mail
-			objet_modifier("mailsubscriber", $row['id_mailsubscriber'], array('statut' => 'prop'));
-			$titre = _T('mailsubscriber:confirmsubscribe_texte_email_1', array(
-				'email' => $row['email'],
-				'nom_site_spip' => $GLOBALS['meta']['nom_site'],
-				'url_site_spip' => $GLOBALS['meta']['adresse_site']
-			));
-			$titre .= "<br />" . _T('mailsubscriber:confirmsubscribe_texte_email_envoye');
-		} // sinon inscrire directement
-		else {
-			objet_modifier("mailsubscriber", $row['id_mailsubscriber'], array('statut' => 'valide'));
-			$titre = _T('mailsubscriber:subscribe_texte_email_1', array('email' => $row['email']));
-		}
-	} else {
-		$titre = _T('mailsubscriber:subscribe_deja_texte', array('email' => $row['email']));
-	}
 
-	autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber'], false);
-	autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
+		$env = array(
+			'email' => "<b>$email</b>",
+			'titre_liste' => $titre_liste,
+			'nom_site_spip' => $GLOBALS['meta']['nom_site'],
+			'url_site_spip' => $GLOBALS['meta']['adresse_site']
+		);
+		if ($double_optin) {
+			if ($titre_liste) {
+				$titre = _T('mailsubscriber:confirmsubscribe_texte_email_liste_1', $env);
+			} else {
+				$titre = _T('mailsubscriber:confirmsubscribe_texte_email_1', $env);
+			}
+			$titre .= "<br /><br />" . _T('mailsubscriber:confirmsubscribe_texte_email_envoye');
+		}
+		else {
+			$options['force'] = true;
+			if ($titre_liste) {
+				$titre = _T('mailsubscriber:subscribe_texte_email_liste_1', $env);
+			} else {
+				$titre = _T('mailsubscriber:subscribe_texte_email_1', $env);
+			}
+		}
+
+		if ($identifiant){
+			$options['listes'] = array($identifiant);
+		}
+		$subscribe($email, $options);
+	}
 
 	// Dans tous les cas on finit sur un minipres qui dit si ok ou echec
 	include_spip('inc/minipres');
-	echo minipres($titre, "", "", true);
+	echo minipres($titre, "<style>h1{font-weight: normal}</style>", "", true);
 
 }
