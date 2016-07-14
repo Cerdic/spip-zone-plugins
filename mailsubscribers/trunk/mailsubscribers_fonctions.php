@@ -7,6 +7,33 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	//$crit->cond
+	$_statut = '@$Pile[0]["statut"]';
+	$_id_mailsubscribinglist = '@$Pile[0]["id_mailsubscribinglist"]';
+	$_mailsubscriber_statut = $boucle->id_table.'.statut';
+	$_mailsubscription_statut = $_mailsubscriber_statut;
+	foreach ($boucle->from as $cle=>$table){
+		if ($table=='spip_mailsubscriptions'){
+			$_mailsubscription_statut = $cle.".statut";
+		}
+	}
+	$where = "($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut').'='.sql_quote($_statut)";
+	if ($crit->cond){
+		$where = "($_statut?$where:'1=1')";
+	}
+	$boucle->where[] = $where;
+	$boucles[$idb]->modificateur['criteres']['statut'] = true;
+	$boucle->select[] = "$_mailsubscription_statut as statut_subscription";
+}
+
+function balise_STATUT_SUBSCRIPTION_dist($p) {
+	return rindex_pile($p, 'statut_subscription', 'filtre_statut_subscription');
+}
+
+
+
 /**
  * @param string $liste
  * @param string $statut

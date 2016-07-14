@@ -2,9 +2,9 @@
 <B_listes>
 	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
 	<ul class="liste-items">
-		<li class="item[(#ENV{id_mailsubscribinglist}|intval|non)on]">[(#SELF|parametre_url{id_mailsubscribinglist,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{id_mailsubscribinglist}|intval|non})]</li>
+		<li class="item[(#ENV{id_mailsubscribinglist}|intval|non)on]">[(#SELF|parametre_url{id_mailsubscribinglist|s,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{id_mailsubscribinglist}|intval|non})]</li>
 	<BOUCLE_listes(MAILSUBSCRIBINGLISTS){statut!=poubelle}{par num titre,titre}>
-		<li class="item[(#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}|oui)on]">[(#SELF|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|lien_ou_expose{#TITRE,#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}})]
+		<li class="item[(#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}|oui)on]">[(#SELF|parametre_url{s,''}|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}|lien_ou_expose{#TITRE,#ENV{id_mailsubscribinglist}|=={#ID_MAILSUBSCRIBINGLIST}})]
 		([(#IDENTIFIANT|mailsubscribers_compte_inscrits)])
 		</li>
 	</BOUCLE_listes>
