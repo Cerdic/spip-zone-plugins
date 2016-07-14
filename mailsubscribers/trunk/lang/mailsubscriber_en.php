@@ -17,13 +17,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ invite you to subscribe to Newsletter from @nom_site_spip@ with the email @email@.',
 	'confirmsubscribe_invite_texte_email_3' => 'If this is a mistake from our side, you can safely ignore this mail: this invitation will be automaticily canceled.',
+	'confirmsubscribe_invite_texte_email_liste_1' => '@invite_email_from@ invites you to subscribe the « @titre_liste@ » of @nom_site_spip@ with email address @email@.',
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation of subscription to the Newsletter',
 	'confirmsubscribe_texte_email_1' => 'You asked to subscribe to the newsletter @nom_site_spip@ with the address @email@.',
 	'confirmsubscribe_texte_email_2' => 'To confirm your subscription, click on the following link:
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'If there is a mistake from our side or if you have changed your mind , you can safely ignore this mail: this request will automatically be canceled.',
 	'confirmsubscribe_texte_email_envoye' => 'An email was sent to this address for confirmation.',
+	'confirmsubscribe_texte_email_liste_1' => 'You have asked for a subscription to the list « @titre_liste@ » of @nom_site_spip@ with email address @email@.',
 	'confirmsubscribe_titre_email' => 'Confirmation of subscription to the Newsletter',
+	'confirmsubscribe_titre_email_liste' => 'Confirmation of your subscription to list « <b>@titre_liste@</b> »',
 
 	// D
 	'defaut_message_invite_email_subscribe' => 'Hello, I subscribed to newsletter from @nom_site_spip@ and I invite you to join me and subscribe too.',
@@ -56,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email',
 	'label_file_import' => 'File to import',
 	'label_from_email' => 'Invitation from email',
+	'label_inscription' => 'Subscription',
 	'label_lang' => 'Language',
 	'label_listes' => 'Lists',
 	'label_listes_import_subscribers' => 'Subscribe to lists',
@@ -84,7 +88,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'subscribe_texte_email_2' => 'Thank you for the interest you have shown in @nom_site_spip@.',
 	'subscribe_texte_email_3' => 'In case of error, or if you change your mind, you can unsubscribe at any time using the following link :
 @url_unsubscribe@',
+	'subscribe_texte_email_liste_1' => 'We have taken you subscription to list « @titre_liste@ » with email address @email@ into account.',
 	'subscribe_titre_email' => 'Subscribe to Newsletter',
+	'subscribe_titre_email_liste' => 'Subscription to list « <b>@titre_liste@</b> »',
 
 	// T
 	'texte_ajouter_mailsubscriber' => 'Add subscriber to the newsletter',
@@ -108,9 +114,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unsubscribe_deja_texte' => 'The email address @email@ is not in our mailing list.',
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Unsubscribe from Newsletter',
 	'unsubscribe_texte_confirmer_email_1' => 'Please click on button to confirm unsubscribe of email @email@: ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Please confirm your request to remove @email@ from the list « @titre_liste@ » by clicking this button: ',
 	'unsubscribe_texte_email_1' => 'The email address @email@ has been removed from our mailing list.',
 	'unsubscribe_texte_email_2' => 'We hope to see you soon on @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In case of error, or if you change your mind, you can re-subscribe at any time using the following link :
 @url_subscribe@',
-	'unsubscribe_titre_email' => 'Unsubscribe from Newsletter'
+	'unsubscribe_texte_email_liste_1' => 'Email address @email@ has been removed from our distribution list « @titre_liste@ ».',
+	'unsubscribe_titre_email' => 'Unsubscribe from Newsletter',
+	'unsubscribe_titre_email_liste' => 'Removal from list « <b>@titre_liste@</b> »'
 );
