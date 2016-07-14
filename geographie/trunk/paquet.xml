@@ -1,8 +1,8 @@
 <paquet
 	prefix="geographie"
 	categorie="divers"
-	version="1.0.6"
-	schema="1.0.0" 
+	version="1.0.7"
+	schema="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/geographie-32.png"
