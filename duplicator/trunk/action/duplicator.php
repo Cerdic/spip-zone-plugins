@@ -44,7 +44,7 @@ function action_duplicator_dist($args=null) {
 		include_spip('inc/headers');
 		if ($redirect = _request('redirect'))
 			redirige_par_entete(str_replace('&amp;','&',$redirect));
-		redirige_par_entete(generer_url_ecrire("articles","id_article=".$nouvel_article, "&"));
+		redirige_par_entete(generer_url_ecrire("article","id_article=".$nouvel_article, "&"));
 	}
 
 }
