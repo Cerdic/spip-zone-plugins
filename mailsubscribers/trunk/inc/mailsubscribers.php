@@ -187,7 +187,8 @@ function mailsubscribers_compte_inscrits($liste, $statut = 'valide') {
 			$count[$l][$row['statut']] += $row['n'];
 		}
 
-		$rows = sql_allfetsel('statut,count(DISTINCT id_mailsubscriber) as n', 'spip_mailsubscriptions', '', 'statut');
+		// pour le compte sans liste, on prends le statut des mailsubscribers
+		$rows = sql_allfetsel('statut,count(id_mailsubscriber) as n', 'spip_mailsubscribers', '', 'statut');
 		foreach ($rows as $row) {
 			if (!isset($count[''][$row['statut']])) {
 				$count[''][$row['statut']] = 0;

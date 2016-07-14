@@ -19,7 +19,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/mailsubscribers, par=num email, statut=#GET{statut}, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+<INCLURE{fond=prive/objets/liste/mailsubscribers, par=num email, statut=#GET{statut}, nb=20, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
 
 [(#AUTORISER{creer,mailsubscriber})
 	[(#URL_ECRIRE{mailsubscriber_edit,new=oui}|parametre_url{retour,#ENV{retour}}|icone_verticale{<:mailsubscriber:icone_creer_mailsubscriber:>,mailsubscriber,new,right})]
