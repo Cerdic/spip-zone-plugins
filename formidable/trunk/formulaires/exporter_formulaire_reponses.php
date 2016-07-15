@@ -73,6 +73,15 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				$titres[] = sinon($options['label_case'], sinon($options['label'], $nom));
 			}
 		}
+		
+		// On passe la ligne des titres de colonnes dans un pipeline
+		$titres = pipeline(
+			'formidable_exporter_formulaire_reponses_titres',
+			array(
+				'args' => array('id_formulaire'=>$id_formulaire, 'formulaire'=>$formulaire),
+				'data' => $titres,
+			)
+		);
 		$reponses_completes[] = $titres;
 
 		// On parcourt chaque réponse
@@ -122,6 +131,15 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 					);
 				}
 			}
+			
+			// On passe la ligne de réponse dans un pipeline
+			$reponse_complete = pipeline(
+				'formidable_exporter_formulaire_reponses_reponse',
+				array(
+					'args' => array('id_formulaire'=>$id_formulaire, 'formulaire'=>$formulaire, 'reponse'=>$reponse),
+					'data' => $reponse_complete,
+				)
+			);
 
 			// On ajoute la ligne à l'ensemble des réponses
 			$reponses_completes[] = $reponse_complete;
