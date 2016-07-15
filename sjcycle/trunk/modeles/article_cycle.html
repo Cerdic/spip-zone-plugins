@@ -63,10 +63,6 @@ cf http://www.spip.net/fr_article3454.html et /squelettes-dist/modeles/article_m
 </BOUCLE_contexte_article>
 
 <B_img>
-<style type="text/css" scoped>
-.cycle-paused:after {[ content:'(#GET{pauseonhovercontent})';][(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
-.texte_infobulle { text-align:left; }
-</style>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 $(document).ready(function() {
 	[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
@@ -186,6 +182,10 @@ $(document).ready(function() {
 	[(#GET{overlay}|=={.cycle-overlay}|oui)
 	<div class="cycle-overlay"></div>]
 
+<style type="text/css" scoped>
+.cycle-paused:after {[ content:'(#GET{pauseonhovercontent})';][(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
+.texte_infobulle { text-align:left; }
+</style>
 </div><!-- .cycle-slideshow -->
 
 </B_img>
