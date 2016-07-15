@@ -7,6 +7,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Critere {filtre_statut_subscription?} qui s'applique sur le statut de mailsubscriber ou de mailsubscription
+ * @param $idb
+ * @param $boucles
+ * @param $crit
+ */
 function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	//$crit->cond
@@ -28,6 +34,11 @@ function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles
 	$boucle->select[] = '".'."($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut')".'." as statut_subscription';
 }
 
+/**
+ * #STATUT_SUBSCRIPTION dans la boucle qui utilise {filtre_statut_subscription?}
+ * @param $p
+ * @return mixed
+ */
 function balise_STATUT_SUBSCRIPTION_dist($p) {
 	return rindex_pile($p, 'statut_subscription', 'filtre_statut_subscription');
 }
@@ -70,6 +81,11 @@ function mailsubscribers_liste_statut_auteur_possibles() {
 	return $possibles;
 }
 
+/**
+ * Tester si une liste est synchronisee
+ * @param $identifiant
+ * @return string
+ */
 function mailsubscribers_liste_synchronisee($identifiant) {
 	include_spip('inc/mailsubscribers');
 	if (mailsubscribers_trouver_fonction_synchro($identifiant)) {
@@ -79,7 +95,16 @@ function mailsubscribers_liste_synchronisee($identifiant) {
 	return '';
 }
 
-
+/**
+ * Cle action pour les URLs subscribe/unsubscribe/confirm
+ * pour avoir une cle utilisable sur une liste precise,
+ * l'id de liste est fourni en suffixe du jeton
+ * sous la forme "+".$id_mailsubscribinglist
+ * @param $action
+ * @param $email
+ * @param $jeton
+ * @return string
+ */
 function mailsubscriber_cle_action($action, $email, $jeton) {
 	$arg = "$action-$email-$jeton";
 	include_spip("inc/securiser_action");
@@ -88,6 +113,15 @@ function mailsubscriber_cle_action($action, $email, $jeton) {
 	return $hash;
 }
 
+/**
+ * URL unsubscribe
+ * pour unsubscribe sur une liste precise, l'id de liste est fourni en suffixe du jeton
+ * sous la forme "+".$id_mailsubscribinglist
+ * @param string $email
+ * @param string $jeton
+ * @param string $sep
+ * @return string
+ */
 function mailsubscriber_url_subscribe($email, $jeton, $sep = "&amp;") {
 	$url = generer_url_action("subscribe_mailsubscriber", "email=" . urlencode($email), false, true);
 	$url = parametre_url($url, "arg", mailsubscriber_cle_action("subscribe", $email, $jeton), $sep);
@@ -95,6 +129,15 @@ function mailsubscriber_url_subscribe($email, $jeton, $sep = "&amp;") {
 	return $url;
 }
 
+/**
+ * URL subscribe
+ * pour subscribe sur une liste precise, l'id de liste est fourni en suffixe du jeton
+ * sous la forme "+".$id_mailsubscribinglist
+ * @param string $email
+ * @param string $jeton
+ * @param string $sep
+ * @return string
+ */
 function mailsubscriber_url_unsubscribe($email, $jeton, $sep = "&amp;") {
 	$url = generer_url_action("unsubscribe_mailsubscriber", "email=" . urlencode($email), false, true);
 	$url = parametre_url($url, "arg", mailsubscriber_cle_action("unsubscribe", $email, $jeton), $sep);
@@ -102,6 +145,15 @@ function mailsubscriber_url_unsubscribe($email, $jeton, $sep = "&amp;") {
 	return $url;
 }
 
+/**
+ * URL confirm
+ * pour confirm sur une liste precise, l'id de liste est fourni en suffixe du jeton
+ * sous la forme "+".$id_mailsubscribinglist
+ * @param string $email
+ * @param string $jeton
+ * @param string $sep
+ * @return string
+ */
 function mailsubscriber_url_confirm($email, $jeton, $sep = "&amp;") {
 	$url = generer_url_action("confirm_mailsubscriber", "email=" . urlencode($email), false, true);
 	$url = parametre_url($url, "arg", mailsubscriber_cle_action("confirm", $email, $jeton), $sep);
