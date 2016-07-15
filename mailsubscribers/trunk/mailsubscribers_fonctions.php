@@ -25,7 +25,7 @@ function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles
 	}
 	$boucle->where[] = $where;
 	$boucles[$idb]->modificateur['criteres']['statut'] = true;
-	$boucle->select[] = "$_mailsubscription_statut as statut_subscription";
+	$boucle->select[] = '".'."($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut')".'." as statut_subscription';
 }
 
 function balise_STATUT_SUBSCRIPTION_dist($p) {
