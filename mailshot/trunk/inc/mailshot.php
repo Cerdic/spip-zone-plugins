@@ -155,6 +155,7 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 		// verifier que la liste des destinataires est OK
 		mailshot_initialiser_destinataires($shoot);
 		if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
+		$listes = explode(',',$shoot['listes']);
 
 		// chercher les N prochains destinataires
 		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"$offset,$nb_max");
@@ -165,7 +166,7 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 			$corps = array("sujet"=>&$shoot['sujet'],"html"=>&$shoot['html'],"texte"=>&$shoot['texte']);
 			foreach($dests as $d){
 				if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
-				$s = $subscriber($d['email']);
+				$s = $subscriber($d['email'],array('listes'=>$listes));
 				$erreur = $send($s, $corps, $options);
 				$try = $d['try']+1;
 				if ($erreur){
