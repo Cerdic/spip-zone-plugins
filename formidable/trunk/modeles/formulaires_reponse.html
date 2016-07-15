@@ -5,7 +5,7 @@
 #SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize}}
 </BOUCLE_champs>
 
-<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_formulaire(FORMULAIRES){tout}{id_formulaire}>
 #VOIR_SAISIES{(#SAISIES|unserialize), #GET{valeurs}}
 </BOUCLE_formulaire>
 
