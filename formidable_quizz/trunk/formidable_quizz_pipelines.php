@@ -127,3 +127,35 @@ function formidable_quizz_formulaire_traiter($flux) {
 	
 	return $flux;
 }
+
+function formidable_quizz_formidable_affiche_resume_reponse($flux) {
+	// On ne refait pas le test pour chaque réponse…
+	static $test_bareme = array();
+	
+	// Si le formulaire a au moins un champ avec barème
+	if (
+		$id_formulaire = intval($flux['args']['id_formulaire'])
+		and $id_formulaires_reponse = intval($flux['args']['id_formulaires_reponse'])
+		and (
+			// On a déjà testé et il y a un barème
+			(isset($test_bareme[$id_formulaire]) and $test_bareme[$id_formulaire])
+			or
+			// On a jamais testé et on cherche s'il y a un barème
+			(
+				!isset($test_bareme[$id_formulaire])
+				and $saisies = sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)
+				and $saisies = unserialize($saisies)
+				and $test_bareme[$id_formulaire] = saisies_lister_avec_option('bareme', $saisies)
+			)
+		)
+	) {
+		$reponse = sql_fetsel('quizz_score, quizz_total', 'spip_formulaires_reponses', 'id_formulaires_reponse = '.$id_formulaires_reponse);
+		$quizz_score = intval($reponse['quizz_score']);
+		$quizz_total = intval($reponse['quizz_total']);
+		$pourcent = $quizz_total ? round(100*$quizz_score/$quizz_total, 1) : 0;
+		$affichage = array($flux['data'], "<strong>${quizz_score}/${quizz_total} (${pourcent}%)</strong>");
+		$flux['data'] = join('<br/>', $affichage);
+	}
+	
+	return $flux;
+}
