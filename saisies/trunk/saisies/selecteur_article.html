@@ -32,7 +32,7 @@
 [(#REM) Donner a manger a CFG ou CVT-configurer si aucune valeur definie ]
 <!--keepme: <input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
 [(#INCLURE{fond=formulaires/selecteur/articles,
-	selected=#GET{val},
+	selected=#LISTE{article|#GET{val}},
 	name=#ENV{nom},
 	afficher_langue=#ENV{afficher_langue,''},
 	filtrer_langue_article=#GET{filtrer_langue_article,''},
