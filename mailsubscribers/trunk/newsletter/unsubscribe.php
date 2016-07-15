@@ -29,6 +29,8 @@ include_spip('inc/autoriser');
  *   true si inscrit, false sinon
  */
 function newsletter_unsubscribe_dist($email, $options = array()) {
+	static $dejala = false;
+	if ($dejala) {return false;}
 
 	// chercher si un tel email est deja en base
 	$row = sql_fetsel('*', 'spip_mailsubscribers', 'email=' . sql_quote($email));
@@ -93,6 +95,7 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 		}
 
 		if (count($set)) {
+			$dejala = true; // ne pas accepter la reentrance de validation des inscriptions quand on valide l'inscrit
 			autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber']);
 			autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber']);
 			autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber']);
@@ -110,6 +113,7 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 			autoriser_exception("modifier", "mailsubscriber", $row['id_mailsubscriber'], false);
 			autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 			autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber'], false);
+			$dejala = false;
 		}
 
 		if ($notify and (!isset($options['notify']) or $options['notify'])){
