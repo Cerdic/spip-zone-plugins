@@ -136,18 +136,7 @@ function formidable_quizz_formidable_affiche_resume_reponse($flux) {
 	if (
 		$id_formulaire = intval($flux['args']['id_formulaire'])
 		and $id_formulaires_reponse = intval($flux['args']['id_formulaires_reponse'])
-		and (
-			// On a déjà testé et il y a un barème
-			(isset($test_bareme[$id_formulaire]) and $test_bareme[$id_formulaire])
-			or
-			// On a jamais testé et on cherche s'il y a un barème
-			(
-				!isset($test_bareme[$id_formulaire])
-				and $saisies = sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)
-				and $saisies = unserialize($saisies)
-				and $test_bareme[$id_formulaire] = saisies_lister_avec_option('bareme', $saisies)
-			)
-		)
+		and formidable_quizz_tester_bareme($id_formulaire)
 	) {
 		$reponse = sql_fetsel('quizz_score, quizz_total', 'spip_formulaires_reponses', 'id_formulaires_reponse = '.$id_formulaires_reponse);
 		$quizz_score = intval($reponse['quizz_score']);
@@ -158,4 +147,28 @@ function formidable_quizz_formidable_affiche_resume_reponse($flux) {
 	}
 	
 	return $flux;
+}
+
+/**
+ * Tester si un formulaire contient au moins un barème
+ * 
+ * Ne teste le formulaire qu'une fois par hit
+ * 
+ * @param int $id_formulaire
+ * 		Identifiant du formulaire à tester
+ * @return bool
+ * 		Retourne true si c'est le cas, false sinon
+ **/
+function formidable_quizz_tester_bareme($id_formulaire) {
+	static $test_bareme = array();
+	
+	if (!isset($test_bareme[$id_formulaire])) {
+		$test_bareme[$id_formulaire] = (
+			$saisies = sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)
+			and $saisies = unserialize($saisies)
+			and saisies_lister_avec_option('bareme', $saisies)
+		);
+	}
+	
+	return $test_bareme[$id_formulaire];
 }
