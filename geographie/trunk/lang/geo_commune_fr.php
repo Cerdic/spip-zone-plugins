@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_nom_label' => 'Nom',
 	'confirmer_supprimer_geo_commune' => 'Confirmez-vous la suppression de cette commune ?',
-	
+
 	// I
 	'icone_creer_geo_commune' => 'Créer une commune',
 	'icone_modifier_geo_commune' => 'Modifier cette commune',

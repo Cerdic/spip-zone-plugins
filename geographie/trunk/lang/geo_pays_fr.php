@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirmer_supprimer_geo_pays' => 'Confirmez-vous la suppression de ce pays ?',
-	
+
 	// I
 	'icone_creer_geo_pays' => 'Créer un pays',
 	'icone_modifier_geo_pays' => 'Modifier ce pays',

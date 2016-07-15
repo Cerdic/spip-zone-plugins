@@ -9,18 +9,20 @@
  * @package    SPIP\Geoculture_core\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
-function geographie_autoriser(){}
-
+ *
+ * @pipeline autoriser
+ */
+function geographie_autoriser() {
+}
 
 // -----------------
 // Objet geo_communes
-
 
 /**
  * Autorisation de voir un élément de menu (geocommunes)
@@ -30,12 +32,12 @@ function geographie_autoriser(){}
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_geocommunes_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_geocommunes_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
-} 
-
+}
 
 /**
  * Autorisation de voir le bouton d'accès rapide de création (geocommune)
@@ -45,11 +47,12 @@ function autoriser_geocommunes_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_geocommunecreer_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_geocommunecreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'geoculture_artiste', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (geocommune)
@@ -59,10 +62,11 @@ function autoriser_geocommunecreer_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_geocommune_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -73,8 +77,9 @@ function autoriser_geocommune_creer_dist($faire, $type, $id, $qui, $opt) {
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_geocommune_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
@@ -87,8 +92,9 @@ function autoriser_geocommune_voir_dist($faire, $type, $id, $qui, $opt) {
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_geocommune_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
@@ -101,12 +107,12 @@ function autoriser_geocommune_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_geocommune_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
 
 /**
  * Autorisation de lier/délier l'élément (geocommunes)
@@ -116,8 +122,9 @@ function autoriser_geocommune_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @param  int    $id    Identifiant de l'objet
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opt   Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_associergeocommunes_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }

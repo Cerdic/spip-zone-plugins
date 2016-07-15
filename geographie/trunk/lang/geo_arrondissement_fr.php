@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'confirmer_supprimer_geo_arrondissement' => 'Confirmez-vous la suppression de cet arrondissement ?',
-	
+
 	// I
 	'icone_creer_geo_arrondissement' => 'Créer un arrondissement',
 	'icone_modifier_geo_arrondissement' => 'Modifier cet arrondissement',
