@@ -149,6 +149,25 @@ function formidable_quizz_formidable_affiche_resume_reponse($flux) {
 	return $flux;
 }
 
+function formidable_quizz_recuperer_fond($flux) {
+	if ($flux['args']['fond'] == 'prive/objets/contenu/formulaires_reponse') {
+		$reponse = sql_fetsel('*', 'spip_formulaires_reponses', 'id_formulaires_reponse = '.$flux['args']['contexte']['id_formulaires_reponse']);
+		
+		if (formidable_quizz_tester_bareme($reponse['id_formulaire'])) {
+			$quizz_score = intval($reponse['quizz_score']);
+			$quizz_total = intval($reponse['quizz_total']);
+			$pourcent = $quizz_total ? round(100*$quizz_score/$quizz_total, 1) : 0;
+			
+			$flux['data']['texte'] .= '<div class="champ contenu_date">';
+			$flux['data']['texte'] .= '	<div class="label">' . _T('formidable_quizz:resultats_score_label') . '</div>';
+			$flux['data']['texte'] .= "	<strong>${quizz_score}/${quizz_total} (${pourcent}%)</strong>";
+			$flux['data']['texte'] .= '</div>';
+		}
+	}
+	
+	return $flux;
+}
+
 function formidable_quizz_formidable_exporter_formulaire_reponses_titres($flux) {
 	if (formidable_quizz_tester_bareme($flux['args']['id_formulaire'])) {
 		$flux['data'][] = _T('formidable_quizz:resultats_score_label');
