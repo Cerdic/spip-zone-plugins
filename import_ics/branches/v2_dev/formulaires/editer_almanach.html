@@ -1,19 +1,8 @@
-<script language="JavaScript">
-$( document ).ready(function() {
-  $('.editer_id_ressource').hide();
-});
-function toggle(className, obj) {
-    var $input = $(obj);
-    if ($input.prop('checked')) $(className).show();
-    else $(className).hide();
-}
-</script>
+
 
 <div class="ajax">
+
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
-	[(#REM) titre pour un formulaire en plusieurs étapes
-	<h3> Création d'un almanach et importation d'événements : étape #ENV{_etape}/#ENV{_etapes}</h3>]
-	<h3> Création d'un almanach et importation d'événements</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -32,6 +21,17 @@ function toggle(className, obj) {
 
 [(#REM)même chose avec les ressources mais on conditionne à la présence du plugin orr]
 #SET{tableau_ressources,#ARRAY}
+<B_ressources>
+  <script language="JavaScript">
+  $( document ).ready(function() {
+    $('.editer_id_ressource').hide();
+  });
+  function toggle(className, obj) {
+      var $input = $(obj);
+      if ($input.prop('checked')) $(className).show();
+      else $(className).hide();
+  }
+  </script>
 <BOUCLE_ressources(ORR_RESSOURCES?)>
 #SET{tableau_ressources, #GET{tableau_ressources}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
 </BOUCLE_ressources>
@@ -44,8 +44,7 @@ function toggle(className, obj) {
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
-		<input type='hidden' name='id_article' value='#ENV{id_article}' />
-		<ul>
+		[<(#DIV|sinon{ul})>]
 
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:almanach:label_titre:>,
@@ -56,9 +55,9 @@ function toggle(className, obj) {
 				explication=<:almanach:explication_url:>,
 				verifier => array('type' => 'url',),
 			})]
-
-			[(#SAISIE{input, id_article, obligatoire=oui,
+			[(#SAISIE{selecteur_article, le_id_article, obligatoire=oui,
 				label=<:agenda:evenement_article:>,
+        defaut=#ID_ARTICLE,
 				explication=<:almanach:explication_id_article:>
 			})]
 
@@ -87,7 +86,7 @@ function toggle(className, obj) {
 				datas=#GET{tableau_ressources}
 			})]
 			]
-		</ul>
+		[</(#DIV|sinon{ul})>]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		[(#REM)<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p> ça ce sera quand le formulaire en deux parties sera correct pour l'instant on fait un formulaire en une partie]
