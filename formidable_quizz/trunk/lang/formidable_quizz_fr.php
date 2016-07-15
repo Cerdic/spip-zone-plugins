@@ -9,4 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_bareme_explication' => 'Liste des réponses possibles et les points associés. Une réponse par ligne sous la forme "valeur|N" où N est un entier. Vous pouvez associer des nombres négatifs aussi. Si une réponse n’a pas de point, elle vaudra 0 par défaut.',
 	'config_bareme_label' => 'Barème des points',
 	'config_quizz_label' => 'Quizz',
+	
+	'resultats_score_label' => 'Score',
+	'resultats_total_label' => 'Total',
 );

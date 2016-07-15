@@ -20,6 +20,8 @@
 	<pipeline nom="formulaire_verifier" inclure="formidable_quizz_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="formidable_quizz_pipelines.php" />
 	<pipeline nom="formidable_affiche_resume_reponse" inclure="formidable_quizz_pipelines.php" />
+	<pipeline nom="formidable_exporter_formulaire_reponses_titres" inclure="formidable_quizz_pipelines.php" />
+	<pipeline nom="formidable_exporter_formulaire_reponses_reponse" inclure="formidable_quizz_pipelines.php" />
 	
 	<necessite nom="formidable" compatibilite="[2.9.15;[" />
 </paquet>

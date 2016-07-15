@@ -149,6 +149,24 @@ function formidable_quizz_formidable_affiche_resume_reponse($flux) {
 	return $flux;
 }
 
+function formidable_quizz_formidable_exporter_formulaire_reponses_titres($flux) {
+	if (formidable_quizz_tester_bareme($flux['args']['id_formulaire'])) {
+		$flux['data'][] = _T('formidable_quizz:resultats_score_label');
+		$flux['data'][] = _T('formidable_quizz:resultats_total_label');
+	}
+	
+	return $flux;
+}
+
+function formidable_quizz_formidable_exporter_formulaire_reponses_reponse($flux) {
+	if (formidable_quizz_tester_bareme($flux['args']['id_formulaire'])) {
+		$flux['data'][] = $flux['args']['reponse']['quizz_score'];
+		$flux['data'][] = $flux['args']['reponse']['quizz_total'];
+	}
+	
+	return $flux;
+}
+
 /**
  * Tester si un formulaire contient au moins un barème
  * 
