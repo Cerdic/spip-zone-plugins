@@ -120,6 +120,34 @@ function formidable_affiche_droite($flux) {
 }
 
 /**
+ * Afficher l'édition des liens sur les objets configurés
+ **/
+function formidable_affiche_milieu($flux) {
+	include_spip('inc/config');
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
+	
+	if (!$e['edition'] and in_array($e['table_objet_sql'], lire_config('formidable/analyse/objets', array()))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'formulaires',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}
+	
+	if ($texte) {
+		if ($p=strpos($flux['data'], '<!--affiche_milieu-->')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		}
+		else {
+			$flux['data'] .= $texte;
+		}
+	}
+	
+	return $flux;
+}
+
+/**
  * Optimiser la base de donnée en enlevant les liens de formulaires supprimés
  *
  * @pipeline optimiser_base_disparus

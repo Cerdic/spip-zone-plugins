@@ -34,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		sur le conteneur de chaque graphique, tel que <code>gray</code>,<code>blue</code>,
 		<code>orange</code>, <code>green</code> ou tout ce qui vous plairait !',
 	'cfg_analyse_classe_label' => 'Classe CSS de la barre de progression',
+	'cfg_objets_explication' => 'Choisir les contenus auxquels pourront être liés les formulaires.',
+	'cfg_objets_label' => 'Lier les formulaires aux contenus',
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l’analyse des réponses',
 	'champs' => 'Champs',
@@ -119,7 +121,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_toutes' => 'Toutes',
 	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
 	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
-
+	
+	// L
+	'liens_ajouter' => 'Ajouter un formulaire',
+	'liens_ajouter_lien' => 'Ajouter ce formulaire',
+	'liens_creer_associer' => 'Créer et associer un formulaire',
+	'liens_retirer_lien_formulaire' => 'Retirer ce formulaire',
+	'liens_retirer_tous_liens_formulaires' => 'Retirer tous les formulaires',
+	
 	// M
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',
 	'modele_nom_formulaire' => 'un formulaire',

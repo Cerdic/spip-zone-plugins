@@ -8,10 +8,10 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-
-		[(#SAISIE{input,classe,
-			label=<:formidable:cfg_analyse_classe_label:>,
-			explication=<:formidable:cfg_analyse_classe_explication:>
+		
+		[(#SAISIE{choisir_objets,objets,
+			label=<:formidable:cfg_objets_label:>,
+			explication=<:formidable:cfg_objets_explication:>
 			})]
 		[(#SAISIE{case,auteur,
 			li_class='pleine_largeur',
@@ -32,6 +32,10 @@
 			li_class='pleine_largeur',
 			label_case=<:formidable:autoriser_admin_restreint:>,
 			explication=<:formidable:autoriser_admin_restreint_explication:>
+			})]
+		[(#SAISIE{input,classe,
+			label=<:formidable:cfg_analyse_classe_label:>,
+			explication=<:formidable:cfg_analyse_classe_explication:>
 			})]
 
 		<input type="hidden" name="_meta_casier" value="formidable/analyse" />

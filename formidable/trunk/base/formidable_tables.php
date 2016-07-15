@@ -58,6 +58,8 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'info_aucun_objet'=> 'formidable:info_aucun_formulaire',
 		'info_1_objet' => 'formidable:info_1_formulaire',
 		'info_nb_objets' => 'formidable:info_nb_formulaires',
+		'texte_creer_associer' => 'formidable:liens_creer_associer',
+		'texte_ajouter' => 'formidable:liens_ajouter',
 
 		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
 		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
