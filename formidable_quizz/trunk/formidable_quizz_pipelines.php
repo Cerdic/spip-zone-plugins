@@ -123,6 +123,13 @@ function formidable_quizz_formulaire_traiter($flux) {
 			array('quizz_score' => $score_reponse, 'quizz_total' => $total),
 			'id_formulaires_reponse = '.$id_formulaires_reponse
 		);
+		
+		// On ajoute l'affichage possible du score DANS le message de retour
+		$pourcent = $total ? round(100*$score_reponse/$total, 1) : 0;
+		$flux['data']['message_ok'] = _L(
+			$flux['data']['message_ok'],
+			array('score'=>$score_reponse, 'score_total'=>$total, 'score_pourcent'=>$pourcent)
+		);
 	}
 	
 	return $flux;
