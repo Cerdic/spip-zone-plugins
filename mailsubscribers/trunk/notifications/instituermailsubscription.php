@@ -56,6 +56,7 @@ function notifications_instituermailsubscription_dist($quoi, $id_mailsubscriber,
 		if (count($destinataires)) {
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc'); // pour nettoyer_titre_email
 			$env = $options;
+			unset($env['statut']);
 			$env['id_mailsubscriber'] = $id_mailsubscriber;
 			$texte = recuperer_fond($modele, $env);
 			notifications_envoyer_mails($destinataires, $texte);
