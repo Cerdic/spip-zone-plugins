@@ -83,7 +83,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		if (!isset($set['lang'])) {
 			$set['lang'] = $GLOBALS['meta']['langue_site'];
 		}
-		if (!$listes) {
+		if (!is_array($listes)) {
 			$listes = array(mailsubscribers_normaliser_nom_liste());
 		}
 		// date par defaut
@@ -108,7 +108,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 			return false;
 		}
 	} else {
-		if (!$listes) {
+		if (!is_array($listes)) {
 			// voir si l'abonne est abonne a quelque chose
 			if (!sql_countsel('spip_mailsubscriptions', 'id_mailsubscriber=' . intval($row['id_mailsubscriber']))) {
 				// sinon l'abonner a la liste par defaut

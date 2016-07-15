@@ -32,6 +32,7 @@ function formulaires_importer_mailsubscribers_charger_dist() {
  */
 function formulaires_importer_mailsubscribers_verifier_dist() {
 	$erreurs = array();
+	$filename = '';
 	if (_request('go')) {
 		$filename = session_get('importer_mailsubscribers::filename');
 	} else {
@@ -54,9 +55,9 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 		$test = importer_mailsubscribers_data($filename);
 		$head = array_keys(reset($test));
 
-		$erreurs['test'] = "";
+		$erreurs['test'] = "\n";
 		if (in_array("statut", $head) AND in_array("listes", $head)) {
-			$erreurs['test'] .= "<p class='notice'>" . _T('mailsubscriber:texte_avertissement_import') . "</p>";
+			$erreurs['test'] .= "<p class='notice'>" . _T('mailsubscriber:texte_avertissement_import') . "</p>\n\n";
 		}
 		$erreurs['test'] .= "|{{" . implode("}}|{{", $head) . "}}|\n";
 		$nbmax = 10;
@@ -64,7 +65,7 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 		while ($row = array_shift($test) AND $nbmax--) {
 			$erreurs['test'] .= "|" . implode("|", $row) . "|\n";
 		}
-		$erreurs['test'] .= "\n";
+		$erreurs['test'] .= "\n\n";
 		$erreurs['test'] .= "<p class='explication'>{{" . singulier_ou_pluriel($count,
 				'mailsubscriber:info_1_adresse_a_importer', 'mailsubscriber:info_nb_adresses_a_importer') . "}}</p>";
 
@@ -74,6 +75,7 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 		if (!in_array("listes", $head)) {
 			$erreurs['demander_listes'] = ' ';
 		}
+		$erreurs['message_erreur'] = '';
 	}
 
 	return $erreurs;
@@ -85,12 +87,10 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 function formulaires_importer_mailsubscribers_traiter_dist() {
 	refuser_traiter_formulaire_ajax();// pour recharger toute la page
 
-	if (_request('desactiver_notif')) {
-		$GLOBALS['notification_instituermailsubscriber_status'] = false;
-	} // pas de notification pour cet import
 	if (_request('vider_table') AND autoriser('detruire')) {
 		include_spip('base/abstract_sql');
 		sql_delete("spip_mailsubscribers");
+		sql_delete("spip_mailsubscriptions");
 	}
 
 	$res = array('editable' => true);
@@ -101,6 +101,11 @@ function formulaires_importer_mailsubscribers_traiter_dist() {
 	if ($l = _request('listes_import_subscribers')) {
 		$options['listes'] = $l;
 	}
+	// pas de notification pour cet import
+	if (_request('desactiver_notif')) {
+		$options['notify'] = false;
+	}
+
 	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'), $options);
 
 	$message =
@@ -259,10 +264,15 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 
 	$data = importer_mailsubscribers_data($filename);
 	$newsletter_subscribe = charger_fonction('subscribe', 'newsletter');
+	$newsletter_unsubscribe = charger_fonction('unsubscribe', 'newsletter');
 	include_spip('inc/filtres'); // email_valide
 	include_spip('action/editer_objet');
 	include_spip('inc/mailsubscribers');
 	set_request('id_auteur', ''); // pas d'auteur associe a nos inscrits
+	$notify = true;
+	if (isset($options['notify'])){
+		$notify = $options['notify'];
+	}
 
 	foreach ($data as $d) {
 		// strategie d'import en fonction de la qualite des donnees
@@ -270,8 +280,9 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 		// si pas de colonne email explicite, on prend la premiere colonne et on importe en mail si valide, tel quel
 		// mais graceful (sans forcer le reabonnement d'un desabonne)
 		$email = trim($d['email']);
-		if ($email AND email_valide($email) AND !mailsubscribers_test_email_obfusque($email)) {
-			$set = array('notify'=>false);
+		if ($email AND email_valide($email)) {
+			// abonner directement, sans passer par demande de confirmation
+			$set = array('notify'=>$notify, 'force'=>true);
 			if (isset($d['nom'])) {
 				$set['nom'] = $d['nom'];
 			}
@@ -289,30 +300,39 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 				$set['listes'] = $options['listes'];
 			}
 
-			if (!isset($d['statut'])) {
-				$set['graceful'] = true;
-				$newsletter_subscribe($email, $set);
-				spip_log("Importer $email " . var_export($set, true), "mailsubscribers");
-				$res['count']++;
+			if (!isset($d['statut']) or !isset($d['listes'])) {
+				if (!mailsubscribers_test_email_obfusque($email)){
+					$set['graceful'] = true; // ne pas reabonner un desabonne
+					$newsletter_subscribe($email, $set);
+					spip_log("Importer $email " . var_export($set, true), "mailsubscribers");
+					$res['count']++;
+				}
 			} // si statut explicite, il faut importer a la main pour respecter le statut demande
 			else {
-				if (isset($set['listes'])) {
-					$set['listes'] = implode(',', $set['listes']);
+				unset($set['notify']);
+				unset($set['force']);
+				$listes = $set['listes'];
+				unset($set['listes']);
+				$razlistes = false;
+				// si la liste vient des options on la merge avec l'existante
+				if (!isset($d['listes']) AND is_array($listes)) {
+					$razlistes = true;
 				}
+
 				if (isset($d['date'])) {
 					$set['date'] = $d['date'];
 				}
-				if ($row = sql_fetsel("id_mailsubscriber,listes", "spip_mailsubscribers",
+				if($razlistes){
+					$set['optin'] = mailsubscribers_trace_optin('raz par import csv','');
+				}
+				// d'abord on cree/update les donnees dans spip_mailsubscribers
+				$id = 0;
+				if ($row = sql_fetsel("id_mailsubscriber", "spip_mailsubscribers",
 						"email=" . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)))
 					AND $id = $row["id_mailsubscriber"]
 				) {
 					$set['email'] = $email; // si mail obfusque
 					$set['statut'] = $d['statut'];
-					// si la liste vient des options on la merge avec l'existante
-					if (!isset($d['listes']) AND isset($set['listes']) AND $row['listes']) {
-						$l = array_unique(array_merge(explode(",", $row['listes']), explode(",", $set['listes'])));
-						$set['listes'] = implode(",", $l);
-					}
 					objet_modifier("mailsubscriber", $id, $set);
 					$res['count']++;
 				} else {
@@ -324,6 +344,26 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 						$res['count']++;
 					} else {
 						$res['erreurs'][] = "erreur import \"<tt>$email</tt>\"";
+					}
+				}
+				// et on appelle subscribe juste pour les listes
+				if ($id){
+					if ($razlistes){
+						sql_delete('spip_mailsubscriptions','id_mailsubscriber='.intval($id));
+					}
+					if (in_array($d['statut'],array('prop','valide','refuse'))){
+						$set = array('listes'=>$listes,'notify'=>false);
+						if ($d['statut']=='valide') {
+							$set['force'] = true;
+						}
+						else {
+							$set['force'] = -1;
+						}
+						$newsletter_subscribe($email, $set);
+						if ($d['statut'] == 'refuse') {
+							$set['force'] = true;
+							$newsletter_unsubscribe($email, $set);
+						}
 					}
 				}
 			}

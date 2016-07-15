@@ -31,6 +31,7 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_mailsubscribinglists', 'spip_mailsubscriptions')),
 		array('mailsubscribers_migrate_mailsubscribinglists'),
 		array('maj_tables', array('spip_mailsubscribers')),
+		array('sql_alter','TABLE spip_mailsubscribers DROP listes'),
 	);
 
 	include_spip('base/upgrade');
@@ -96,7 +97,6 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 			#die('?');
 		}
 	} while (count($all));
-	die('?');
 }
 
 /**
