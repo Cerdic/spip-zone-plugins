@@ -1,28 +1,35 @@
-<div class="identifiants">
-[(#ENV{id_auteur}|>{0}|non)
-	<div class="login">
-		#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
-		[(#SET{titre_login,<:lien_connecter:>})]
-		<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
-	</div>
-]
-	[(#ENV{id_auteur}|>{0}|oui)
-	<div class="donnes_personnels">
-		<div class="nom">
-			<span class="label"><:reservation:label_nom:></span> <span>#NOM</span>
+<ul class="identifiants">
+	<li>
+	[(#ENV{id_auteur}|>{0}|non)
+		<div class="login">
+			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+			[(#SET{titre_login,<:lien_connecter:>})]
+			<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
 		</div>
-		<div class="nom">
-			<span class="label"><:reservation:label_email:></span> <span>#EMAIL</span>
-		</div>
-	</div>
-
-	[(#SAISIE{checkbox,modifier_donnees_auteur,
-		label=<:reservation:label_modifier_identifiants_personnels:>,
-		datas=#ARRAY{1,<:reservation:ok:>}
-		})]
 	]
+
+	<BOUCLE_connecte(CONDITION){si #ENV{id_auteur}|>{0}}>
+		<ul class="donnes_personnels">
+			<li class="nom">
+				<span class="label"><:reservation:label_nom:></span> <span>#NOM</span>
+			</li>
+			<li class="nom">
+				<span class="label"><:reservation:label_email:></span> <span>#EMAIL</span>
+			</li>
+			<BOUCLE_extras(DATA){source tableau, #ENV{champs_extras_auteurs}}>
+				#SET{nom,#OPTIONS|table_valeur{nom}}
+				<li class="#GET{nom}">
+					<span class="label">[(#OPTIONS|table_valeur{label})]</span> <span>#ENV{#GET{nom}}</span>
+				</li>
+			</BOUCLE_extras>
+		</ul>
+		[(#SAISIE{checkbox,modifier_donnees_auteur,
+			label=<:reservation:label_modifier_identifiants_personnels:>,
+			datas=#ARRAY{1,<:reservation:ok:>}
+			})]
+	</BOUCLE_connecte>
 	
-	<div class="fieldset donnees_auteur">
+	<ul class="fieldset donnees_auteur">
 		[(#SAISIE{input,#ENV{name_nom,nom},label=<:reservation:label_nom:>,obligatoire=oui})]
 	
 		[(#SAISIE{input,#ENV{name_email,email},label=<:reservation:label_email:>,obligatoire=oui})]
@@ -30,12 +37,12 @@
 		[(#REM)Géneration des champs extras auteurs]
 	
 		#GENERER_SAISIES{#ENV{champs_extras_auteurs}}
-	</div>
+	</ul>
 
 
 	<!--extra_connection1-->
 [(#ENV{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
-	<div class="fieldset">
+	<ul class="fieldset">
 		[(#ENV{enregistrement_inscrit_obligatoire}|!={on}|?{
 			[(#SAISIE{checkbox,enregistrer,
 				class=enregistrer,
@@ -45,29 +52,30 @@
 			,
 			#SET{obligatoire,oui}
 		})]
-
-		<div class="block_mp">
-			[(#SAISIE{input,#ENV{name_new_login,new_login},
-				label=<:item_login:>,
-				obligatoire=#GET{obligatoire}
-			})]
-			[(#SAISIE{input,#ENV{name_new_pass,new_pass},
-				type="password",
-				label=<:reservation:label_mot_passe:>,
-				obligatoire=#GET{obligatoire},
-				class=password,explication=<:info_plus_cinq_car:>
-			})]
-			[(#SAISIE{input,#ENV{name_new_pass2,new_pass2},
-				type="password",
-				label=<:reservation:label_mot_passe2:>,
-				obligatoire=#GET{obligatoire},
-				class=password
-			})]
-		</div>
-
-	</div>
+		<li>
+			<ul class="block_mp">
+				[(#SAISIE{input,#ENV{name_new_login,new_login},
+					label=<:item_login:>,
+					obligatoire=#GET{obligatoire}
+				})]
+				[(#SAISIE{input,#ENV{name_new_pass,new_pass},
+					type="password",
+					label=<:reservation:label_mot_passe:>,
+					obligatoire=#GET{obligatoire},
+					class=password,explication=<:info_plus_cinq_car:>
+				})]
+				[(#SAISIE{input,#ENV{name_new_pass2,new_pass2},
+					type="password",
+					label=<:reservation:label_mot_passe2:>,
+					obligatoire=#GET{obligatoire},
+					class=password
+				})]
+			</ul>
+		</li>
+	</ul>
 ]
-</div>
+	</li>
+</ul>
 
 <!--extra_connection2-->
 <BOUCLE_condition(CONDITION){si #ENV{enregistrement_inscrit_obligatoire}|!={on}|oui}>
