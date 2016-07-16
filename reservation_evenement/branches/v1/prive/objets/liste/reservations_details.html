@@ -34,12 +34,12 @@
 							[(#PRIX**|>{0}|ou{#PRIX_HT**|>{0}}|oui)
 								<div class="champ contenu_prix">
 									<label><:reservation:montant:> : </label>
-									<span>[(#PRIX|appliquer_filtre{prix_formater,#GET{total}|})]</span>
+									<span>#PRIX</span>
 								</div>]
-							[(#REM) Champ vebant du plugin Réservation Bank]
+							[(#REM) Champ venant du plugin Réservation Bank]
 							[<div class="champ contenu_montant_paye">
 									<label><:reservation_bank:montant_paye:></label>
-									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater,#MONTANT_PAYE})</span>
+									<span>(#MONTANT_PAYE|appliquer_filtre{prix_formater})</span>
 								</div>]
 						</td>
 						<BOUCLE_reservation(RESERVATIONS){id_reservation}{tout}>
