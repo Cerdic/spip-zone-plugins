@@ -121,14 +121,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_toutes' => 'Toutes',
 	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
 	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
-	
+
 	// L
 	'liens_ajouter' => 'Ajouter un formulaire',
 	'liens_ajouter_lien' => 'Ajouter ce formulaire',
 	'liens_creer_associer' => 'Créer et associer un formulaire',
 	'liens_retirer_lien_formulaire' => 'Retirer ce formulaire',
 	'liens_retirer_tous_liens_formulaires' => 'Retirer tous les formulaires',
-	
+
 	// M
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',
 	'modele_nom_formulaire' => 'un formulaire',
