@@ -36,7 +36,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_almanach' value='#ENV{id_almanach}' />
 		[<(#DIV|sinon{ul})>]
@@ -86,6 +86,6 @@
 		<!--extra-->
 		[(#REM)<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p> ça ce sera quand le formulaire en deux parties sera correct pour l'instant on fait un formulaire en une partie]
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>
+	</form>
 	]
 </div>
