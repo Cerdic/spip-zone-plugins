@@ -1,6 +1,24 @@
 
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
+		[<(#DIV|sinon{ul})>]
+			[(#SAISIE{groupe_mots,groupes,
+				label=<:import_ics:groupe_mots:>,
+				explication=<:import_ics:groupe_mots_explication:>,
+				table_liaison=evenements})] 
+
+				[(#SAISIE{mot,mot,
+					label=<:import_ics:mot:>,
+					explication=<:import_ics:mot_explication:>,
+					table_liaison=evenements})] 
+
+		[</(#DIV|sinon{ul})>]
+		<p class="boutons">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>	
 	</form>
 </div>

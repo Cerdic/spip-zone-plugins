@@ -7,8 +7,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   // C
 	"cfg_configurer"   => "Configurer l'import de fichiers ICS",
+	
+	//G
+	"groupe_mots"			=> "Groupe de mots",
+	"groupe_mots_explication" =>"Lors de la création d'un almanach, forcer à choisir un mot clef dans le groupe.",
+	
 	// I
 	'import_ics_titre' => 'Import_ics',
+	
+	// M
+	"mot" 		=> "Mot",
+	"mot_explication" => "Vous pouvez aussi, alternativement, forcer l'association à un mot clef particulier."
 );
 
 ?>
