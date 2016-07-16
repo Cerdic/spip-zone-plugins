@@ -1,14 +1,13 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.10.0"
+	version="2.11.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/formidable-64.png"
 	schema="0.6.6"
 	documentation="http://contrib.spip.net/Formidable-le-generateur-de-formulaires"
 >
-
 	<nom>Formidable</nom>
 	<!-- Générateur de formulaires -->
 
@@ -38,6 +37,7 @@
 	<necessite nom="verifier" compatibilite="[0.1.11;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="facteur" compatibilite="[3.0.3;[" />
+	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>
