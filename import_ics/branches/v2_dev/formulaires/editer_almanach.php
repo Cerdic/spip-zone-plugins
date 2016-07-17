@@ -54,6 +54,9 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 	else{
 		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
 	}
+
+	$erreurs["le_id_article"]=$erreurs["id_article"];
+	unset($erreurs["id_article"]);
 	//verification supplementaires
 	return $erreurs;
 }
