@@ -2,7 +2,9 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-
+	<p class="explication">
+		<em class="attention"><:import_ics:cfg_attention:></em>
+	</p>
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<(#DIV|sinon{ul})>]
