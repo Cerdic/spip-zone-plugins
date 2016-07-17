@@ -50,15 +50,16 @@
 				explication=<:almanach:explication_id_article:>
 			})]
 
+      #SET{id_groupe,#EVAL{'_IMPORT_ICS_ID_GROUPE'}|sinon{#CONFIG{import_ics/id_groupe}}}
       [(#CONFIG{import_ics/id_mot}|non)
         [(#SAISIE{mot,id_mot,
           label=<:almanach:mot:>,
           explication=<:almanach:mot_explication:>,
-          id_groupe=#CONFIG{import_ics/id_groupe},
+          id_groupe=#GET{id_groupe},
           forcer_select=oui,
           table_liaison=evenements})] 
       ]
-
+      
       [(#CONFIG{import_ics/id_mot}|oui)
         [(#SAISIE{mot,id_mot,
           label=<:almanach:mot:>,

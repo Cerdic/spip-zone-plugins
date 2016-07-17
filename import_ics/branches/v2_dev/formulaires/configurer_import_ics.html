@@ -25,11 +25,20 @@
 			})] 
 	  })]
 
+		[(#EVAL{_IMPORT_ICS_ID_GROUPE}|?{
+			[(#SAISIE{groupe_mots,id_groupe,
+				label=<:import_ics:groupe_mots:>,
+				disable=disable,
+				valeur_forcee=#EVAL{_IMPORT_ICS_GROUPE_MOTS},
+				explication=<:import_ics:groupe_mots_explication:> <:import_ics:v_php:>,
+				table_liaison=evenements})] 
+			,
 			[(#SAISIE{groupe_mots,id_groupe,
 				label=<:import_ics:groupe_mots:>,
 				explication=<:import_ics:groupe_mots_explication:>,
 				table_liaison=evenements})] 
-
+		}
+		)]
 				[(#SAISIE{mot,id_mot,
 					label=<:import_ics:mot:>,
 					explication=<:import_ics:mot_explication:>,
