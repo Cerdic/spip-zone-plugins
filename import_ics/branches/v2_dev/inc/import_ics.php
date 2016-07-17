@@ -42,17 +42,18 @@ function importation_evenement($objet_evenement,$id_almanach){
     			}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
-	#on insere les infos des événements dans la base 
-	# ca ce sera pour quand j'arriverai à faire fonctionner le selecteur d'articles $id_article = preg_replace('(article\|)','',_request('id_article')); #le selecteur d'article fournit un tableau, on se débarasse du mot article dedans et on appellera ensuite la première valeur (il pourrait y avoir des saisies multiples même si ici on ne les autorise pas)
-	$id_mot = _request('id_mot');
-	$id_article = _request('id_article'); 
+
+  // récup des id_article et id_mot lié 
+	$id_mot,$id_article=
+
+
 	$id_evenement= sql_insertq('spip_evenements',
 	  array(
 			'id_article' =>$id_article,
 		  'date_debut'=>$date_debut,
 		  'date_fin'=>$date_fin,
 			'titre'=>$titre_evt,
-			'descriptif'=>'<math>'.$descriptif_array["value"].'</math>',
+			'descriptif'=>$descriptif_array["value"],
 			'lieu'=>$lieu,'adresse'=>'',
 			'inscription'=>'0',
 			'places'=>'0',
