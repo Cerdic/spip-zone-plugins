@@ -44,9 +44,9 @@ function importation_evenement($objet_evenement,$id_almanach){
     		$date_fin = $endDate.$endTime;
 
   // récup des id_article et id_mot lié 
-	$id_mot,$id_article=
-
-
+	$result=sql_fetsel("id_mot,id_article","spip_almanachs","id_almanach=$id_almanach");
+	$id_mot=$result["id_mot"];
+	$id_article=$result["id_article"];
 	$id_evenement= sql_insertq('spip_evenements',
 	  array(
 			'id_article' =>$id_article,
