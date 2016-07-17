@@ -68,12 +68,12 @@
 				datas=#GET{tableau_decalage}
 			})]
 			[(#PLUGIN{orr}|oui)
-			<li class="editer_resa_auto">
+			[<(#DIV|sinon{li}) class="editer_resa_auto">]
 				<div class="choix">
 					<input type='checkbox' onclick="toggle('.editer_id_ressource', this)" class="checkbox" name='resa_auto' value='oui' id='resa_auto_oui'[ (#ENV{resa_auto}oui{non}|oui)checked="checked"] />
 					<label for='resa_auto_oui'>Activer les réservations automatiques</label>
 				</div>
-			</li>
+			[</(#DIV|sinon{li})>]
 
 			[(#SAISIE{selection, id_ressource, obligatoire=non,
 				label=<:almanach:resa_auto:>,
