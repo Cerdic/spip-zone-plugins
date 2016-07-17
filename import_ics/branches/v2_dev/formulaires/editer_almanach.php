@@ -83,6 +83,8 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			)
 		);
 	}
+	
+	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
@@ -94,24 +96,25 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	foreach ($liens as $u ) {
 		$uid[] = $u['uid'];
 	};
- while ($comp = $cal->getComponent())
- {
-#les variables qui vont servir à vérifier l'existence et l'unicité 
+  while ($comp = $cal->getComponent()){
+			#les variables qui vont servir à vérifier l'existence et l'unicité 
 	   	$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 	    $uid_distante = $comp->getProperty("UID");#uid de l'evenement
-		if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
-//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
+			if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
+			//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
 
-//On commence à vérifier l'existence et l'unicité  maintenant et on met à jour ou on importe selon le cas
-	if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd
-		$cle = array_search($uid_distante, $uid); // on utilise le fait que les deux tableaux ont le même index pour le récupérer
-		$sequence = $liens[$cle]['sequence'];//sequence presente dans la base ayant le meme index
+			//On commence à vérifier l'existence et l'unicité  maintenant et on met à jour ou on importe selon le cas
+			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd
+					$cle = array_search($uid_distante, $uid); // on utilise le fait que les deux tableaux ont le même index pour le récupérer
+					$sequence = $liens[$cle]['sequence'];//sequence presente dans la base ayant le meme index
 
-		if ($sequence < $sequence_distante ){//si la sequecne de la bdd est plus petite, il y a eu mise à jour et il faut intervenir
-		} 
-	} else {importation_evenement($comp,$id_almanach);};//l'evenement n'est pas dans la bdd, on va l'y mettre
- }
-
+					if ($sequence < $sequence_distante ){//si la sequecne de la bdd est plus petite, il y a eu mise à jour et il faut intervenir
+					} 
+				} 
+			else {
+				importation_evenement($comp,$id_almanach);
+			};//l'evenement n'est pas dans la bdd, on va l'y mettre
+ 	}
 	return $chargement;
 }
 
