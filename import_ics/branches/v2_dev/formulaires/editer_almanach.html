@@ -4,17 +4,11 @@
 #SET{tableau_decalage,#ARRAY{-24,-24h,-23,-23h,-22,-22h,-21,-21h,-20,-20h,-19,-19h,-18,-18h,-17,-17h,-16,-16h,-15,-15h,-14,-14h,-13,-13h,-12,-12h,-11,-11h,-10,-10h,-9,-9h,-8,-8h,-7,-7h,-6,-6h,-5,-5h,-4,-4h,-3,-3h,-2,-2h,-1,-1h,0,'aucun decalage',1,+1h,2,+2h,3,+3h,4,+4h,5,+5h,6,+6h,7,+7h,8,+8h,9,+9h,10,+10h,11,+11h,12,+12h,13,+13h,14,+14h,15,+15h,16,+16h,17,+17h,18,+18h,19,+19h,20,+20h,21,+21h,22,+22h,23,+23h,24,+24h}}
 
 [(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie. on fait la même chose pour les ressources]
-#SET{tableau_type_evenement, #ARRAY}
 
-[(#REM)Attention astuce inside pour que les clés numériques ne soient pas réindexées, on inverse l'ordre d'intégration dasn le tableau et ensuite on flip le tableau]
-<BOUCLE_groupe(GROUPES_MOTS){titre=Type}>
-<BOUCLE_mots(MOTS){id_groupe}>
-#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_merge{#ARRAY{#TITRE,#ID_MOT}}
-</BOUCLE_mots>
-</BOUCLE_groupe>
-[(#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_flip})]
 
-[(#REM)même chose avec les ressources mais on conditionne à la présence du plugin orr]
+
+
+[(#REM)utilisation des ressources, si on utilise ORR]
 #SET{tableau_ressources,#ARRAY}
 <B_ressources>
   <script language="JavaScript">
@@ -56,11 +50,24 @@
 				explication=<:almanach:explication_id_article:>
 			})]
 
-			[(#SAISIE{selection, id_mot, obligatoire=oui,
-				label=<:seminaire:choix_mot:>,
-				explication=<:almanach:type_evenement:>,
-				datas=#GET{tableau_type_evenement}
-			})]
+      [(#CONFIG{import_ics/id_mot}|non)
+        [(#SAISIE{mot,id_mot,
+          label=<:almanach:mot:>,
+          explication=<:almanach:mot_explication:>,
+          id_groupe=#CONFIG{import_ics/id_groupe},
+          forcer_select=oui,
+          table_liaison=evenements})] 
+      ]
+
+      [(#CONFIG{import_ics/id_mot}|oui)
+        [(#SAISIE{mot,id_mot,
+          label=<:almanach:mot:>,
+          explication=<:almanach:mot_explication_verrouille:>,
+          id_mot=#CONFIG{import_ics/id_mot},
+          disable=oui,
+          forcer_select=oui,
+          table_liaison=evenements})] 
+      ]
 
 			[(#SAISIE{selection,decalage,
 				label=<:almanach:decalage:>,

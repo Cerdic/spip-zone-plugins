@@ -6,12 +6,12 @@
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<(#DIV|sinon{ul})>]
-			[(#SAISIE{groupe_mots,groupes,
+			[(#SAISIE{groupe_mots,id_groupe,
 				label=<:import_ics:groupe_mots:>,
 				explication=<:import_ics:groupe_mots_explication:>,
 				table_liaison=evenements})] 
 
-				[(#SAISIE{mot,mot,
+				[(#SAISIE{mot,id_mot,
 					label=<:import_ics:mot:>,
 					explication=<:import_ics:mot_explication:>,
 					table_liaison=evenements})] 

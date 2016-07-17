@@ -54,6 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 	'lieu'						 =>		'Lieu',
 
+  //
+	'mot' 						 =>   'Mot associé aux évènements de cet almanach',
+	'mot_explication'  =>   'Le mot sélectionné sera automatiquement associé aux évènements de cet almanach.',
+	'mot_explication_verrouille'  =>   'Le mot sélectionné sera automatiquement associé aux évènements de cet almanach. Le choix du mot a été verrouillé dans la configuration du plugin.',
   //N
 	'notes'						 =>		'Notes',
 
