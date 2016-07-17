@@ -8,6 +8,13 @@
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<(#DIV|sinon{ul})>]
+
+		[(#SAISIE{checkbox,mot_facultatif,
+			label=<:import_ics:mot_facultatif:>,
+			explication=<:import_ics:mot_facultatif_explication:>,
+			datas=#ARRAY{mot_facultatif,<:import_ics:mot_facultatif:>}
+		})] 
+
 			[(#SAISIE{groupe_mots,id_groupe,
 				label=<:import_ics:groupe_mots:>,
 				explication=<:import_ics:groupe_mots_explication:>,

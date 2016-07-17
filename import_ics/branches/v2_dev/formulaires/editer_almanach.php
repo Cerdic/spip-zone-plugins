@@ -47,7 +47,13 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 	$le_id_article=_request("le_id_article");//id_article est protégé pour ne prendre que des int avec l'ecran securite, mais comme on utilise le selecteur, on a un tableau
 	$id_article=str_replace("article|","",$le_id_article[0]);
 	set_request("id_article",$id_article);
-	$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article', 'id_mot'));
+	
+	if (lire_config("import_ics/mot_facultatif/0")==null){
+		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article', 'id_mot'));
+	}
+	else{
+		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
+	}
 	//verification supplementaires
 	return $erreurs;
 }
@@ -65,10 +71,18 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
+	
 	#on associe le mot à l'almanach
-	$id_mot = _request('id_mot');
-	// if (_request('resa_auto')=='oui') $resa_auto=1;
-	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
+	if ($id_mot = _request('id_mot') and lire_config("import_ics/mot_facultatif/0")==null){
+		sql_insertq(
+			"spip_mots_liens",
+			array(
+				'id_mot'=>$id_mot,
+				'id_objet'=>$id_almanach,
+				'objet'=>'almanach'
+			)
+		);
+	}
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
