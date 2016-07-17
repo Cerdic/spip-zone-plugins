@@ -39,11 +39,19 @@
 				table_liaison=evenements})] 
 		}
 		)]
+		[(#EVAL{_IMPORT_ICS_ID_MOT}|?{
+				[(#SAISIE{mot,id_mot,
+					label=<:import_ics:mot:>,
+					disable=disable,
+					valeur_forcee=#EVAL{_IMPORT_ICS_ID_MOT},
+					explication=<:import_ics:mot_explication:> <:import_ics:v_php:>,
+					table_liaison=evenements})] 
+			,
 				[(#SAISIE{mot,id_mot,
 					label=<:import_ics:mot:>,
 					explication=<:import_ics:mot_explication:>,
 					table_liaison=evenements})] 
-
+    })]
 		[</(#DIV|sinon{ul})>]
 		<p class="boutons">
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
