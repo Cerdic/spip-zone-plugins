@@ -60,12 +60,11 @@
           forcer_select=oui,
           table_liaison=evenements})] 
       ]
-      
       [(#GET{id_mot}|oui)
         [(#SAISIE{mot,id_mot,
           label=<:almanach:mot:>,
           explication=<:almanach:mot_explication_verrouille:>,
-          id_mot=#CONFIG{import_ics/id_mot},
+          valeur_forcee=#GET{id_mot},
           disable=oui,
           forcer_select=oui,
           table_liaison=evenements})] 
