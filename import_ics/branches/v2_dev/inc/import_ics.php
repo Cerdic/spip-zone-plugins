@@ -69,7 +69,7 @@ function importation_evenement($objet_evenement,$id_almanach){
 	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
 	sql_insertq("spip_almanachs_liens",array('id_almanach'=>$id_almanach,'id_objet'=>$id_evenement,'objet'=>'evenement','vu'=>'oui'));
 	#on associe l'événement à son mot
-	if ($id_mot and lire_config("import_ics/mot_facultatif/0")==null){
+	if ($id_mot){
 	  sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
   }
 	#on ajoute la resa si on le doit

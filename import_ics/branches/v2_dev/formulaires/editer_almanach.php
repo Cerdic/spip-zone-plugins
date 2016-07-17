@@ -73,7 +73,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_almanach = $chargement['id_almanach'];
 	
 	#on associe le mot à l'almanach
-	if ($id_mot = _request('id_mot') and lire_config("import_ics/mot_facultatif/0")==null){
+	if ($id_mot = _request('id_mot')){
 		sql_insertq(
 			"spip_mots_liens",
 			array(
