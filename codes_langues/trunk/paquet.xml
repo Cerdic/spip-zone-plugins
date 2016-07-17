@@ -8,8 +8,8 @@
 	schema="1"
 >
 
-	<nom>Codes de Langue</nom>
-	<!-- Un outil pour convertir les codes de langue ISO -->
+	<nom>Codes et étiquettes de Langue</nom>
+	<!-- Comprendre les codes ISO et les étiquettes de langue -->
 
 	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
 

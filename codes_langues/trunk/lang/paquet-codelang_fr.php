@@ -7,9 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'codelang_description' => 'Ce plugin installe la base des codes de langue ISO-639-3 et permet via une API dédiée de convertir les codes d\'un système ISO à un autre et aussi de faire la correspondance avec les codes SPIP et de quelques autres services web.',
-	'codelang_nom' => 'Codes de Langue',
-	'codelang_slogan' => 'Un outil pour convertir les codes de langue ISO'
+	'codelang_description' => 'Ce plugin installe la base des divers codes de langue ISO-639 et permet via une API dédiée de consulter les codes d\'un système ISO et aussi de faire la correspondance avec les étiquettes SPIP et de quelques autres services web.',
+	'codelang_nom' => 'Codes et étiquettes de Langue',
+	'codelang_slogan' => 'Comprendre les codes ISO et les étiquettes de langue'
 );
 
 ?>

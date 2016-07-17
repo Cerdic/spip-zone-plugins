@@ -19,7 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - `spip_iso639names`, qui contient les noms de langue,
  * - `spip_iso639macros`, qui contient le mapping des macrolangues,
  * - `spip_iso639retirements`, qui contient les langues retirées de la liste officielle,
- * - `spip_iso639families`, qui contient les familles et groupes de langues,
+ * - `spip_iso639families`, qui contient les familles et groupes de langues ISO-639-5,
+ *
+ * une table `spip_iso15924scripts` qui contient les codets d'écriture à 4 lettres et leur définition en
+ * français et en anglais.
  *
  * et une table `spip_codes_langues` qui contient les codes de langues de certains services
  * comme spip et leur correspondance avec les codes ISO-639.
@@ -128,6 +131,25 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639families'] =
 		array('field' => &$table_families, 'key' => &$table_families_key);
 
+	// -------------------------------------------------
+	// Table principale des codes ISO : spip_iso15924scripts
+	$table_scripts = array(
+		'code_15924'  => "char(4) DEFAULT '' NOT NULL",                  // The four-letter identifier
+		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",             // English script name
+		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",             // french script name
+		'code_num'    => "char(3) DEFAULT '' NOT NULL",                  // Numeric identifier
+		'alias_en'    => "varchar(32) DEFAULT '' NOT NULL",              // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
+		'date_ref' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
+		'maj'         => 'timestamp'
+	);
+
+	$table_scripts_key = array(
+		'PRIMARY KEY' => 'code_15924'
+	);
+
+	$tables_principales['spip_iso15924scripts'] =
+		array('field' => &$table_scripts, 'key' => &$table_scripts_key);
+
 	// ------------------------------------------------------------
 	// Tables des codes de langues des services web, spip y compris
 	$table_langues = array(
@@ -135,7 +157,7 @@ function codelang_declarer_tables_principales($tables_principales) {
 		'code_langue'   => "varchar(16) DEFAULT '' NOT NULL", // code de langue pour le service concerné
 		'code_639_3'    => "char(3) DEFAULT '' NOT NULL",     // The corresponding three-letter 639-3 identifier
 		'nom_langue'    => "varchar(75) DEFAULT '' NOT NULL", // Nom de la langue tel que défini par le service
-		'descriptif' 	=> "text DEFAULT '' NOT NULL" , // The inverted form of this Print_Name form
+		'descriptif' 	=> "text DEFAULT '' NOT NULL" ,       // The inverted form of this Print_Name form
 		'maj'           => 'timestamp'
 	);
 
@@ -145,7 +167,6 @@ function codelang_declarer_tables_principales($tables_principales) {
 
 	$tables_principales['spip_codes_langues'] =
 		array('field' => &$table_langues, 'key' => &$table_langues_key);
-
 
 	return $tables_principales;
 }
@@ -172,6 +193,7 @@ function codelang_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639macros'] = 'iso639macros';
 	$interfaces['table_des_tables']['iso639retirements'] = 'iso639retirements';
 	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
+	$interfaces['table_des_tables']['iso15924scripts'] = 'iso15924scripts';
 	$interfaces['table_des_tables']['codes_langues'] = 'codes_langues';
 
 	// Les traitements

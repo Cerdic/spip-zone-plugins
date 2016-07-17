@@ -26,8 +26,8 @@ if (!defined('_CODELANG_LOC_ISO639_5_HIERARCHY')) {
 
 
 $GLOBALS['iso_service'] = array(
-	'basic_fields'	=> 	array(
-		'iso639codes' => array(
+	'iso639codes' => array(
+		'basic_fields' => array(
 			'Id'            => 'code_639_3',
 			'Part2B' 		=> 'code_639_2b',
 			'Part2T' 		=> 'code_639_2t',
@@ -37,17 +37,29 @@ $GLOBALS['iso_service'] = array(
 			'Ref_Name' 		=> 'ref_name',
 			'Comment' 		=> 'comment'
 		),
-		'iso639names' => array(
+		'delimiter'    => "\t",
+		'extension'    => '.tab'
+	),
+	'iso639names' => array(
+		'basic_fields'	=> array(
 			'Id' 			=> 'code_639_3',
 			'Print_Name' 	=> 'print_name',
 			'Inverted_Name' => 'inverted_name'
 		),
-		'iso639macros' => array(
+		'delimiter'    => "\t",
+		'extension'    => '.tab'
+	),
+	'iso639macros' => array(
+		'basic_fields'	=> array(
 			'M_Id' 			=> 'macro_639_3',
 			'I_Id' 			=> 'code_639_3',
 			'I_Status' 		=> 'status'
 		),
-		'iso639retirements' => array(
+		'delimiter'    => "\t",
+		'extension'    => '.tab'
+	),
+	'iso639retirements' => array(
+		'basic_fields'	=> array(
 			'Id' 			=> 'code_639_3',
 			'Ref_Name' 		=> 'ref_name',
 			'Ret_Reason' 	=> 'ret_reason',
@@ -55,15 +67,17 @@ $GLOBALS['iso_service'] = array(
 			'Ret_Remedy' 	=> 'ret_remedy',
 			'Effective' 	=> 'effective_date'
 		),
-		'iso639families' => array(
+		'delimiter'    => "\t",
+		'extension'    => '.tab'
+	),
+	'iso639families' => array(
+		'basic_fields'	=> array(
 			'URI' 			  => 'uri',
 			'code' 			  => 'code_639_5',
 			'Label (English)' => 'label_en',
 			'Label (French)'  => 'label_fr'
-		)
-	),
-	'add_fields'	=> 	array(
-		'iso639families' => array(
+		),
+		'add_fields'	=> array(
 			'sil'			=> array(
 				'Equivalent'	=> 'code_639_1',
 				'Code set'	    => 'code_set',
@@ -73,8 +87,22 @@ $GLOBALS['iso_service'] = array(
 			'loc'			=> array(
 				'Hierarchy'	    => 'hierarchy'
 			)
-		)
-	)
+		),
+		'delimiter'    => "\t",
+		'extension'    => '.tab'
+	),
+	'iso15924scripts' => array(
+		'basic_fields'	=> array(
+			'Code' 			=> 'code_15924',
+			'English Name' 	=> 'label_en',
+			'Nom français'  => 'label_fr',
+			'N°'            => 'code_num',
+			'PVA'           => 'alias_en',
+			'Date'          => 'date_ref',
+		),
+		'delimiter'    => ";",
+		'extension'    => '.txt'
+	),
 );
 
 // ----------------------------------------------------------------------------
@@ -82,14 +110,14 @@ $GLOBALS['iso_service'] = array(
 // ----------------------------------------------------------------------------
 
 /**
- * Lit le fichier .tab contenant les enregistrements d'une des tables ISO et renvoie un tableau
+ * Lit le fichier .tab ou .txt contenant les enregistrements d'une des tables ISO et renvoie un tableau
  * prêt pour une insertion en base de données.
  *
  * @api
  *
  * @param string $table
  *      Nom de la table ISO incluse dans la base de données spip (sans le préfixe) à savoir,
- * 		`iso639codes`, `iso639names`, `iso639macros`, `iso639retirements`, `iso639families`.
+ * 		`iso639codes`, `iso639names`, `iso639macros`, `iso639retirements`, `iso639families` ou `iso15924scripts`.
  * @param int    $sha_file
  *      Sha calculé à partir du fichier .tab des enregistrements de la table concernée. Le sha est retourné
  *      par la fonction afin d'être stocké par le plugin.
@@ -104,20 +132,22 @@ function iso_read_table($table, &$sha_file) {
 	$sha_file = false;
 	$f_complete_record = "${table}_complete_by_record";
 	$f_complete_table = "${table}_complete_by_table";
-	$file_to_spip = $GLOBALS['iso_service']['basic_fields'][$table];
+	$file_to_spip = $GLOBALS['iso_service'][$table]['basic_fields'];
+	$delimiter = $GLOBALS['iso_service'][$table]['delimiter'];
+	$extension = $GLOBALS['iso_service'][$table]['extension'];
 
-	if (in_array($table, array_keys($GLOBALS['iso_service']['basic_fields']))) {
+	if (in_array($table, array_keys($GLOBALS['iso_service']))) {
 		// Ouvrir le fichier des enregistrements de la table spécifiée.
-		$file = find_in_path("services/iso/${table}.tab");
+		$file = find_in_path("services/iso/${table}${extension}");
 		if (file_exists($file) and ($sha_file = sha1_file($file))) {
-			// Lecture du fichier .tab comme un fichier texte sachant que :
-			// - le délimiteur de colonne est une tabulation
+			// Lecture du fichier .tab ou .txt comme un fichier texte sachant que :
+			// - le délimiteur de colonne est une tabulation ou une virgule
 			// - pas de caractère d'enclosure
 			$lines = file($file);
 			if ($lines) {
 				$headers = array();
 				foreach ($lines as $_number => $_line) {
-					$values = explode("\t", trim($_line, "\r\n"));
+					$values = explode($delimiter, trim($_line, "\r\n"));
 					if ($_number == 0) {
 						// Stockage des noms de colonnes car la première ligne contient toujours le header
 						$headers = $values;
@@ -153,7 +183,7 @@ function iso_read_table($table, &$sha_file) {
 function iso639families_complete_by_record($fields) {
 
 	// Initialisation des champs additionnels
-	$sil_to_spip = $GLOBALS['iso_service']['add_fields']['iso639families']['sil'];
+	$sil_to_spip = $GLOBALS['iso_service']['iso639families']['add_fields']['sil'];
 	foreach($sil_to_spip as $_label => $_field) {
 		$fields[$_field] = '';
 	}
@@ -212,7 +242,7 @@ function iso639families_complete_by_table($records) {
 
 	// Initialisation des champs additionnels
 	$hierarchies =array();
-	$loc_to_spip = $GLOBALS['iso_service']['add_fields']['iso639families']['loc'];
+	$loc_to_spip = $GLOBALS['iso_service']['iso639families']['add_fields']['loc'];
 
 	// On récupère la page de description de la famille sur le site SIL.
 	include_spip('inc/distant');

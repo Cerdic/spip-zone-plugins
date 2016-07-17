@@ -30,7 +30,7 @@ function codelang_charger_tables_iso($tables_iso = array()) {
 	// On récupère la liste des tables spip implémentant la base iso
 	include_spip('services/iso/iso_api');
 	if (!$tables_iso) {
-		$tables_iso = array_keys($GLOBALS['iso_service']['basic_fields']);
+		$tables_iso = array_keys($GLOBALS['iso_service']);
 	}
 
 	// On charge chacune de ces tables avec le fichier .tab extrait du site iso.
