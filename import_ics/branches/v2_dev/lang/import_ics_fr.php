@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//G
 	"groupe_mots"			=> "Groupe de mots",
 	"groupe_mots_explication" =>"Lors de la création d'un almanach, forcer à choisir un mot clef dans le groupe.",
-	
 	// I
 	'import_ics_titre' => 'Import_ics',
 	
@@ -20,8 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"mot" 		=> "Mot",
 	"mot_explication" => "Vous pouvez aussi, alternativement, forcer l'association à un mot clef particulier.",
 	"mot_facultatif"  => "Permettre de pas choisir de mot-clef",
-	"mot_facultatif_explication" =>"Par défaut, un mot-clef doit doit être associé à un almanach et aux évènement liés. Cette option permet de rendre cela facultatif."
+	"mot_facultatif_explication" =>"Par défaut, un mot-clef doit doit être associé à un almanach et aux évènement liés. Cette option permet de rendre cela facultatif.",
 
+  //V
+	"v_php" => "Réglage verrouillé en PHP."
 );
 
 ?>
