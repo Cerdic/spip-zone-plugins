@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decalage' => 'Décalage',
-
+	'decalage_explication'=>"Vous pouvez tenter un décalage global des horaires s'ils n'apparaissent pas à la bonne heure.", 
 	// E
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_titre' => 'Titre de l\'almanach',
