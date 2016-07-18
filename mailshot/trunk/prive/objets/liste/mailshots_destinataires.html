@@ -20,7 +20,7 @@
 	<BOUCLE_mailshot_dest(mailshots_destinataires){id_mailshot?}{email?}{where?}{statut?}{email LIKE #GET{recherche}}{tri #ENV{par,email},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='id_mailshot'><a href="[(#ID_MAILSHOT|generer_url_entite{mailshot})]">#ID_MAILSHOT</a></td>
-			<td class='email'>#EMAIL</td>
+			<td class='email'>[(#EMAIL|mailshot_link_admin_email)]</td>
 			<td class='date secondaire'>[(#DATE|affdate_heure)]</td>
 			<td class='statut'>[(#VAL{mailshot:info_statut_destinataire_}|concat{#STATUT}|_T)]</td>
 		</tr>

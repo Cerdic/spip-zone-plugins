@@ -12,7 +12,7 @@ function genie_mailshot_bulksend_dist($t){
 	spip_log("bulksend:meta_processing:".$GLOBALS['meta']['mailshot_processing'],"mailshot");
 
 	// un mailshot programme dans le futur, en attente d'init
-	if ($id_mailshot = sql_getfetsel('id_mailshot','spip_mailshots','statut='.sql_quote('init').' AND date_start<'.sql_quote(date('Y-m-d H:i:s')),'','0,1')){
+	if ($id_mailshot = sql_getfetsel('id_mailshot','spip_mailshots','statut='.sql_quote('init').' AND date_start<'.sql_quote(date('Y-m-d H:i:s')),'','','0,1')){
 		// passer en processing l'id_mailshot concerne et initialiser le mailer
 		sql_updateq('spip_mailshots',array('statut'=>'processing'),'id_mailshot='.intval($id_mailshot));
 		// initialiser le mailer si necessaire

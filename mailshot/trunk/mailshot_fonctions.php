@@ -53,6 +53,23 @@ function mailshot_url_newsletter($id){
 }
 
 /**
+ * Trouver le lien vers la page d'admin de l'email si possible
+ * @param string $email
+ * @return string
+ */
+function mailshot_link_admin_email($email) {
+	static $subscriber;
+	if (is_null($subscriber)) {
+		$subscriber = charger_fonction('subscriber','newsletter');
+	}
+	$info = $subscriber($email);
+	if (!isset($info['url_admin']) or !$info['url_admin']){
+		return $email;
+	}
+	return '<a href="'.$info['url_admin'].'">'.$email.'</a>';
+}
+
+/**
  * Afficher l'avancement de l'envoi
  * @param int $current
  * @param int $total
