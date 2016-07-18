@@ -70,9 +70,9 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 	// on bascule tous les id_mailsubscriber qui ne sont pas deja dans spip_mailsubscriptions
 	sql_alter("TABLE spip_mailsubscribers ADD imported tinyint NOT NULL DEFAULT 0");
 	$where = 'listes like ' . sql_quote('%newsletter::%') . ' AND statut IN (\'prop\',\'valide\',\'refuse\')' . ' AND imported=0';
+	$n = sql_countsel('spip_mailsubscribers', $where);
+	spip_log("mailsubscribers_migrate_mailsubscribinglists: $n restant",'maj');
 	do {
-		$n = sql_countsel('spip_mailsubscribers', $where);
-		spip_log("mailsubscribers_migrate_mailsubscribinglists: $n restant",'maj');
 		$all = sql_allfetsel('*', 'spip_mailsubscribers', $where, '', 'id_mailsubscriber', '0,100');
 		foreach ($all as $a) {
 			$ins = array();
