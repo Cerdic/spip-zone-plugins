@@ -30,6 +30,7 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.0'] = array(
 		array('maj_tables', array('spip_mailsubscribinglists', 'spip_mailsubscriptions')),
 		array('mailsubscribers_migrate_mailsubscribinglists'),
+		array('sql_alter','TABLE spip_mailsubscribers DROP imported'),
 		array('maj_tables', array('spip_mailsubscribers')),
 		array('sql_alter','TABLE spip_mailsubscribers DROP listes'),
 	);
@@ -97,7 +98,6 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 		}
 	} while (count($all));
 
-	sql_alter("TABLE spip_mailsubscribers DROP imported");
 }
 
 /**
