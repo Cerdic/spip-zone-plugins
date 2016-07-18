@@ -61,18 +61,15 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 			);
 			$remap["newsletter::$identifiant"] = $id_mailsubscribinglist;
 			if (!$row or $row['statut'] !== $set['statut'] or $row['titre'] !== $set['titre']) {
-				//var_dump($set);
 				sql_updateq('spip_mailsubscribinglists', $set, 'id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 			}
 		}
 	}
-	#var_dump($remap,'<hr />');
 
 	// $remap nous donne la correspondance newsletter::xx => id_mailsubscribinglist
 	// on bascule tous les id_mailsubscriber qui ne sont pas deja dans spip_mailsubscriptions
-	$in = sql_get_select('DISTINCT id_mailsubscriber', 'spip_mailsubscriptions');
-	$in = "(SELECT * FROM ($in) AS S)";
-	$where = 'listes like ' . sql_quote('%newsletter::%') . ' AND statut IN (\'prop\',\'valide\',\'refuse\')' . ' AND id_mailsubscriber NOT IN ' . $in;
+	sql_alter("TABLE spip_mailsubscribers ADD imported tinyint NOT NULL DEFAULT 0");
+	$where = 'listes like ' . sql_quote('%newsletter::%') . ' AND statut IN (\'prop\',\'valide\',\'refuse\')' . ' AND imported=0';
 	do {
 		$n = sql_countsel('spip_mailsubscribers', $where);
 		spip_log("mailsubscribers_migrate_mailsubscribinglists: $n restant",'maj');
@@ -91,15 +88,16 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 					);
 				}
 			}
-			#var_dump($a);
-			#var_dump($ins);
 			sql_insertq_multi('spip_mailsubscriptions', $ins);
-			#die('?');
+			sql_updateq("spip_mailsubscribers", array('imported' => 1), "id_mailsubscriber=" . intval($a['id_mailsubscriber']));
+
 			if (time() >= _TIME_OUT) {
 				return;
 			}
 		}
 	} while (count($all));
+
+	sql_alter("TABLE spip_mailsubscribers DROP imported");
 }
 
 /**
