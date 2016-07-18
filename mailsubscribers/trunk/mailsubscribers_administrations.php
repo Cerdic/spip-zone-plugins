@@ -95,6 +95,9 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 			#var_dump($ins);
 			sql_insertq_multi('spip_mailsubscriptions', $ins);
 			#die('?');
+			if (time() >= _TIME_OUT) {
+				return;
+			}
 		}
 	} while (count($all));
 }
