@@ -61,7 +61,7 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 			);
 			$remap["newsletter::$identifiant"] = $id_mailsubscribinglist;
 			if (!$row or $row['statut'] !== $set['statut'] or $row['titre'] !== $set['titre']) {
-				var_dump($set);
+				//var_dump($set);
 				sql_updateq('spip_mailsubscribinglists', $set, 'id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 			}
 		}
@@ -72,11 +72,11 @@ function mailsubscribers_migrate_mailsubscribinglists() {
 	// on bascule tous les id_mailsubscriber qui ne sont pas deja dans spip_mailsubscriptions
 	$in = sql_get_select('DISTINCT id_mailsubscriber', 'spip_mailsubscriptions');
 	$in = "(SELECT * FROM ($in) AS S)";
+	$where = 'listes like ' . sql_quote('%newsletter::%') . ' AND statut IN (\'prop\',\'valide\',\'refuse\')' . ' AND id_mailsubscriber NOT IN ' . $in;
 	do {
-		$all = sql_allfetsel('*', 'spip_mailsubscribers',
-			'listes like ' . sql_quote('%newsletter::%')
-			. ' AND statut IN (\'prop\',\'valide\',\'refuse\')'
-			. ' AND id_mailsubscriber NOT IN ' . $in, '', 'id_mailsubscriber', '0,100');
+		$n = sql_countsel('spip_mailsubscribers', $where);
+		spip_log("mailsubscribers_migrate_mailsubscribinglists: $n restant",'maj');
+		$all = sql_allfetsel('*', 'spip_mailsubscribers', $where, '', 'id_mailsubscriber', '0,100');
 		foreach ($all as $a) {
 			$ins = array();
 			$listes = explode(',', $a['listes']);
