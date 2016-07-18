@@ -249,8 +249,7 @@ function mailsubscribers_informe_subscriber($infos) {
 				$identifiants[$row['id_mailsubscribinglist']] = $row['identifiant'];
 			}
 		}
-		$subs = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions',
-			'id_mailsubscriber=' . intval($infos['id_mailsubscriber']));
+		$subs = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions', 'id_mailsubscriber=' . intval($infos['id_mailsubscriber']));
 		foreach ($subs as $sub) {
 			if (isset($identifiants[$sub['id_mailsubscribinglist']])) {
 				$id = $identifiants[$sub['id_mailsubscribinglist']];

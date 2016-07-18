@@ -37,7 +37,9 @@ function newsletter_subscriber_dist($email, $options = array()) {
 	$infos = sql_fetsel("email,nom,'' as listes,lang,'' as status,jeton,id_mailsubscriber", 'spip_mailsubscribers',
 		'email=' . sql_quote($email) . " OR email=" . sql_quote(mailsubscribers_obfusquer_email($email)));
 	if ($infos) {
+		$id_mailsubscriber = $infos['id_mailsubscriber'];
 		$infos = mailsubscribers_informe_subscriber($infos);
+		$infos['url_admin'] = generer_url_entite($id_mailsubscriber, 'mailsubscriber');
 
 		// si on est dans le contexte d'une liste unique connue, modifier l'url_unsubscribe
 		if (isset($options['listes'])
