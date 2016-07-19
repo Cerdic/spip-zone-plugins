@@ -15,7 +15,7 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip("inc/mailsubscribers");
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_mailsubscribers')),
+		array('maj_tables', array('spip_mailsubscribers','spip_mailsubscribinglists', 'spip_mailsubscriptions')),
 		array('mailsubscribers_import_from_spiplistes'),
 		array('mailsubscribers_import_from_mesabonnes'),
 		array('mailsubscribers_import_from_spiplettres'),
