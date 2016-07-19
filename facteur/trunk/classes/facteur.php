@@ -396,7 +396,7 @@ class Facteur extends PHPMailer {
 			$this->exceptions = $exceptions;
 		}
 		catch (phpmailerException $exc) {
-			spip_log($function."() : ".$exc->getMessage(),'facteur.'._LOG_ERREUR);
+			spip_log((is_array($function)?implode('::',$function):$function)."() : ".$exc->getMessage(),'facteur.'._LOG_ERREUR);
 			$this->exceptions = $exceptions;
 			if ($this->exceptions) {
 				throw $exc;
