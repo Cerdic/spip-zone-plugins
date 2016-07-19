@@ -153,8 +153,8 @@ function accesrestreint_liste_zones_appartenance_auteur($id_auteur) {
 		if (
 			$id_auteur > 0
 			and $trouver_table = charger_fonction('trouver_table', 'base')
-			and $spip_zone = $trouver_table('spip_zone')
-			and isset($spip_zone['field']['autoriser_si_connexion'])
+			and $spip_zones = $trouver_table('spip_zones')
+			and isset($spip_zones['field']['autoriser_si_connexion'])
 		) {
 			$zones_si_connexion = sql_allfetsel('id_zone', 'spip_zones', 'autoriser_si_connexion = "oui"');
 			$zones_si_connexion = array_map('reset', $zones_si_connexion);
