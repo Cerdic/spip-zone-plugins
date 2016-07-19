@@ -18,7 +18,7 @@ function logo_auto_quete_logo_objet($flux) {
 				sql_in('extension', array('png', 'jpg', 'gif')),
 			),
 			'', //group
-			'0+titre, id_document'
+			'0+titre, d.id_document'
 		)) {
 			$chemin_complet = _DIR_IMG . $image['fichier'];
 			
