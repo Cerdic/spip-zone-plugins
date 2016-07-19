@@ -25,6 +25,7 @@ function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles
 			$_mailsubscription_statut = $cle.".statut";
 		}
 	}
+	$boucle->where[] = "'$_mailsubscriber_statut!='.sql_quote('poubelle')";
 	$where = "($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut').'='.sql_quote($_statut)";
 	if ($crit->cond){
 		$where = "($_statut?$where:'1=1')";
