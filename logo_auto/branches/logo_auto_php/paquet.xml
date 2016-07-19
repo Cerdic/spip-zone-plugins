@@ -1,7 +1,7 @@
 <paquet
 	prefix="logo_auto"
 	categorie="multimedia"
-	version="1.0.1"
+	version="1.0.2"
 	etat="experimental"
 	compatibilite="[3.1.1-dev;3.1.*]"
 	logo="logo_auto.png"
