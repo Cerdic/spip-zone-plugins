@@ -90,7 +90,7 @@ function incarner_affichage_final($html) {
 		'login=' . $login . '&redirect=' . $self
 	);
 
-	$lien .= '<div class="menu-incarner" style="right: 60%;">';
+	$lien = '<div class="menu-incarner" style="right: 60%;">';
 	$lien .= '<a class="bouton-incarner" href="' . $url . '">';
 	$lien .= _T('incarner:reset_incarner', array('login' => $login));
 	$lien .= '</a></div>';
