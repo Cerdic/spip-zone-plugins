@@ -149,7 +149,13 @@ function accesrestreint_liste_zones_appartenance_auteur($id_auteur) {
 		$liste_zones[$id_auteur] = array_map('reset', $liste_zones[$id_auteur]);
 		
 		// On ajoute toutes les zones qui ont l'option "autoriser_si_connexion" si id_auteur ok
-		if ($id_auteur > 0) {
+		// On teste si le champ existe bien (car c'est appelé partout dans le options.php)
+		if (
+			$id_auteur > 0
+			and $trouver_table = charger_fonction('trouver_table', 'base')
+			and $spip_zone = $trouver_table('spip_zone')
+			and isset($spip_zone['field']['autoriser_si_connexion'])
+		) {
 			$zones_si_connexion = sql_allfetsel('id_zone', 'spip_zones', 'autoriser_si_connexion = "oui"');
 			$zones_si_connexion = array_map('reset', $zones_si_connexion);
 			$liste_zones[$id_auteur] = array_unique(array_merge($liste_zones[$id_auteur], $zones_si_connexion));
