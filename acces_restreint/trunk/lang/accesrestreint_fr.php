@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_zone' => 'Aucune zone',
 	'auteur' => '@nb@ auteur',
 	'auteurs' => '@nb@ auteurs',
+	'auteurs_tous' => 'Toutes les personnes connectées',
 
 	// B
 	'bouton_configurer_acces' => 'Configuration des accès .htaccess',
@@ -94,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'ZONE NUMÉRO :',
+	'zone_restreinte_autoriser_si_connexion_label' => 'Autoriser l’accès à cette zone à toute personne connectée',
 	'zone_restreinte_espace_prive' => 'Restreindre l’accès à cette zone dans l’espace privé',
 	'zone_restreinte_publique' => 'Restreindre l’accès à cette zone dans la partie publique'
 );

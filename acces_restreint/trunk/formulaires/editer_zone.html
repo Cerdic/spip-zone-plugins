@@ -14,7 +14,7 @@
 				]<input type="text" class="text" name="titre" id="titre" value="#ENV{titre}" />
 		</li>
 		[(#ENV{id_zone}|intval|non|et{#AUTORISER{modifier,zone}})
-		<li class="editer editer_droit_admin">
+		<li class="editer editer_droits_admin">
 			<div class="choix"><input type="checkbox" name="droits_admin" value="oui" id="droits_admin" checked="checked" />
 			<label for="droits_admin"><:accesrestreint:ajouter_droits_auteur:></label></div>
 		</li>]
@@ -23,6 +23,10 @@
 			<label for="publique"><:accesrestreint:zone_restreinte_publique:></label></div>
 			<div class="choix"><input type="checkbox" name="privee" value="oui" id="privee"[ (#PRIVEE|=={oui}|oui)checked="checked"] />
 			<label for="privee"><:accesrestreint:zone_restreinte_espace_prive:></label></div>
+		</li>
+		<li class="editer editer_autoriser_si_connexion">
+			<div class="choix"><input type="checkbox" name="autoriser_si_connexion" value="oui" id="autoriser_si_connexion"[ (#AUTORISER_SI_CONNEXION|=={oui}|oui)checked="checked"] />
+			<label for="autoriser_si_connexion"><:accesrestreint:zone_restreinte_autoriser_si_connexion_label:></label></div>
 		</li>
 		<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:accesrestreint:descriptif:></label>[

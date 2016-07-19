@@ -49,6 +49,9 @@ function formulaires_editer_zone_traiter_dist($id_zone = 'new', $retour = '', $a
 	if (_request('privee') !== 'oui') {
 		set_request('privee', 'non');
 	}
+	if (_request('autoriser_si_connexion') !== 'oui') {
+		set_request('autoriser_si_connexion', 'non');
+	}
 
 	$res = formulaires_editer_objet_traiter('zone', $id_zone, 0, 0, $retour, $config_fonc, $row, $hidden);
 

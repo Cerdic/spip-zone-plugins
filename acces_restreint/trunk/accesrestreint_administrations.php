@@ -61,7 +61,11 @@ function accesrestreint_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.4.2'] = array(
 		array('accesrestreint_upgrade_protection_documents'),
 	);
-
+	// autoriser_si_connexion
+	$maj['0.5.0'] = array(
+		array('maj_tables', array('spip_zones')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

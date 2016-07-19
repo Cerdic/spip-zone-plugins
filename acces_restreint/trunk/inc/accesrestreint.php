@@ -140,14 +140,22 @@ function accesrestreint_liste_parentee_zone_rub($id_zone_ou_where) {
  */
 function accesrestreint_liste_zones_appartenance_auteur($id_auteur) {
 	static $liste_zones = array();
-
+	
 	if (!isset($liste_zones[$id_auteur])) {
 		include_spip('base/abstract_sql');
-
+		
+		// On ajoute les zones liées directement à l'utilisateurice
 		$liste_zones[$id_auteur] = sql_allfetsel('id_zone', 'spip_zones_liens', "objet='auteur' AND id_objet=".intval($id_auteur));
 		$liste_zones[$id_auteur] = array_map('reset', $liste_zones[$id_auteur]);
+		
+		// On ajoute toutes les zones qui ont l'option "autoriser_si_connexion" si id_auteur ok
+		if ($id_auteur > 0) {
+			$zones_si_connexion = sql_allfetsel('id_zone', 'spip_zones', 'autoriser_si_connexion = "oui"');
+			$zones_si_connexion = array_map('reset', $zones_si_connexion);
+			$liste_zones[$id_auteur] = array_unique(array_merge($liste_zones[$id_auteur], $zones_si_connexion));
+		}
 	}
-
+	
 	return $liste_zones[$id_auteur];
 }
 

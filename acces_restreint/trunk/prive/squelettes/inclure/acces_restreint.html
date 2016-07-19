@@ -18,9 +18,9 @@
 <BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}{recherche ?}>
 <li class='item zone[ (#ID_ZONE|accesrestreint_acces_zone|?{ok,interdit})][ (#EXPOSE)]'><h3>#TITRE</h3>
 <span class='contenu'>
-[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count|singulier_ou_pluriel{accesrestreint:rubrique,accesrestreint:rubriques})
-, ]
-[(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count|singulier_ou_pluriel{accesrestreint:auteur,accesrestreint:auteurs})]
+[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count|singulier_ou_pluriel{accesrestreint:rubrique,accesrestreint:rubriques})][,
+(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count|singulier_ou_pluriel{accesrestreint:auteur,accesrestreint:auteurs})][, 
+(#AUTORISER_SI_CONNEXION|=={oui}|oui)<:accesrestreint:auteurs_tous:>]
 
 </span>
 <span class='descriptif'>#DESCRIPTIF</span>
