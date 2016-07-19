@@ -3,6 +3,8 @@
 /***
 
 Importer en masse des fichiers txt dans spip_articles.
+Les articles sont ajoutés avec leurs info sauf id_article dans des rubriques créées si besoin. 
+Les documents <docxxx> sont gérés
 
 Pour ajouter des champs à la rache :
 // sql_query("alter table spip_articles add signature MEDIUMTEXT NOT NULL DEFAULT ''");
@@ -89,19 +91,8 @@ class fichiersImporter extends Command {
 				
 				$show = sql_showtable("spip_documents");
 				$champs_documents = array_keys($show['field']);
-
-				/*
-				if(!in_array('signature', $champs))
-					sql_query("alter table spip_articles add signature MEDIUMTEXT NOT NULL DEFAULT ''");
 				
-				if(!in_array('pages', $champs))
-					sql_query("alter table spip_articles add pages TINYTEXT NOT NULL DEFAULT ''");
-
-				if(!in_array('free', $champs))
-					sql_query("alter table spip_articles add free TINYTEXT NOT NULL DEFAULT ''");
-				*/
-				
-				// Ajout d'un champ la premiere fois pour stocker les éventuelles ins qui n'ont pas de champs (peut-être long).
+				// Ajout d'un champ la premiere fois pour stocker les éventuelles <ins> qui n'ont pas de champs (peut-être long).
 				if(!in_array('metadonnees', $champs)){
 					$output->writeln("MAJ BDD : alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add metadonnees MEDIUMTEXT NOT NULL DEFAULT ''");
@@ -178,8 +169,9 @@ class fichiersImporter extends Command {
 					if($hierarchie){
 						$titre_parent = $hierarchie[0] ;
 						$titre_rubrique = $hierarchie[1] ;
-
-						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); // perso diplo 2006/02 => 02 ou 2006-02 => 02
+						
+						// hack perso diplo 2006/02 => 02 ou 2006-02 => 02
+						$titre_rubrique = preg_replace(",^(\d{4})(?:/|-)(\d{2})$,", "\\2", $titre_rubrique); 
 
 					}else{
 						$titre_parent = $annee ;
@@ -213,11 +205,20 @@ class fichiersImporter extends Command {
 							foreach($auteurs as $auteur){
 								
 								list($nom_auteur,$bio_auteur) = explode("::", $auteur);
+								// On essaie de trouver un nom*prénom dans les auteurs
+								$a_nom = explode(" ", $nom_auteur);
+								$prenom_nom = array_pop($a_nom) . "*" . join(" ", $a_nom);
 								
-								$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
+								// echo "\n$prenom_nom\n" ;
+								
+								if($id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($prenom_nom))){
+									
+								}else	
+									$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "nom=" . sql_quote($nom_auteur));
+								
 								if(!$id_auteur){
 									$id_auteur = sql_insertq("spip_auteurs", array(
-    										"nom" => $auteur,
+    										"nom" => $nom_auteur,
     										"statut" => "1comite",
     										"bio" => $bio_auteur
     								));
