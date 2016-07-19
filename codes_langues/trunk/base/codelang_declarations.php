@@ -150,6 +150,24 @@ function codelang_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso15924scripts'] =
 		array('field' => &$table_scripts, 'key' => &$table_scripts_key);
 
+	// -------------------------------------------------
+	// Table principale des codes ISO : spip_iso3166countries
+	$table_countries = array(
+		'code_alpha2' => "char(2) DEFAULT '' NOT NULL",                  // The two-letter identifier
+		'code_alpha3' => "char(2) DEFAULT '' NOT NULL",                  // The three-letter identifier
+		'code_num'    => "char(3) DEFAULT '' NOT NULL",                  // Numeric identifier
+		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",             // English name
+		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",             // french name
+		'maj'         => 'timestamp'
+	);
+
+	$table_countries_key = array(
+		'PRIMARY KEY' => 'code_alpha2'
+	);
+
+	$tables_principales['spip_iso3166countries'] =
+		array('field' => &$table_countries, 'key' => &$table_countries_key);
+
 	// ------------------------------------------------------------
 	// Tables des codes de langues des services web, spip y compris
 	$table_langues = array(
@@ -194,6 +212,7 @@ function codelang_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639retirements'] = 'iso639retirements';
 	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
 	$interfaces['table_des_tables']['iso15924scripts'] = 'iso15924scripts';
+	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
 	$interfaces['table_des_tables']['codes_langues'] = 'codes_langues';
 
 	// Les traitements

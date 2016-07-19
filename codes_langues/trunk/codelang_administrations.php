@@ -35,6 +35,7 @@ function codelang_upgrade($nom_meta_base_version, $version_cible) {
 				'spip_iso639retirements',
 				'spip_iso639families',
 				'spip_iso15924scripts',
+				'spip_iso3166countries',
 				'spip_codes_langues'
 			)
 		),
@@ -68,6 +69,7 @@ function codelang_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_iso639retirements');
 	sql_drop_table('spip_iso639families');
 	sql_drop_table('spip_iso15924scripts');
+	sql_drop_table('spip_iso3166countries');
 	sql_drop_table('spip_codes_langues');
 
 	// Effacer la meta de configuration du plugin et la meta des tables iso

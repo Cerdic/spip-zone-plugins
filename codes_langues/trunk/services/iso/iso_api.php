@@ -103,6 +103,17 @@ $GLOBALS['iso_service'] = array(
 		'delimiter'    => ";",
 		'extension'    => '.txt'
 	),
+	'iso3166countries' => array(
+		'basic_fields'	=> array(
+			'English name' 	=> 'label_en',
+			'French name'   => 'label_fr',
+			'Alpha-2' 		=> 'code_alpha2',
+			'Alpha-3' 	    => 'code_alpha3',
+			'Numeric'       => 'code_num',
+		),
+		'delimiter'    => ";",
+		'extension'    => '.txt'
+	),
 );
 
 // ----------------------------------------------------------------------------
