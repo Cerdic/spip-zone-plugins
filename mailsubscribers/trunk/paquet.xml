@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
@@ -29,6 +29,8 @@
 	<pipeline nom="formulaire_verifier" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="mailsubscribers_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="mailsubscribers_pipelines.php" />
+
+	<pipeline nom="mailsubscriber_informations_liees" inclure="mailsubscribers_pipelines.php" action="" />
 
 	<menu nom="mailsubscribers" titre="mailsubscriber:titre_mailsubscribers" parent="menu_activite" icone="images/mailsubscriber-16.png" action="mailsubscribers" />
 	<necessite nom="facteur" compatibilite="[2.4.5;]" />

@@ -38,6 +38,8 @@
 </div>
 </B_sub>
 
+[(#ID_MAILSUBSCRIBER|mailsubscriber_afficher_informations_liees{#EMAIL*})]
+
 [<div class="champ contenu_optin[ (#OPTIN*|strlen|?{'',vide})]">
 	<div class='label'><:mailsubscriber:label_optin:> : </div>
 	<span dir='#LANG_DIR' class='#EDIT{optin} optin'><pre>(#OPTIN|nl2br)</pre></span>

@@ -25,7 +25,7 @@ function critere_MAILSUBSCRIBERS_filtre_statut_subscription_dist($idb, &$boucles
 			$_mailsubscription_statut = $cle.".statut";
 		}
 	}
-	$boucle->where[] = "'$_mailsubscriber_statut!='.sql_quote('poubelle')";
+	$boucle->where[] = "($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut').'!='.sql_quote('poubelle')";
 	$where = "($_id_mailsubscribinglist?'$_mailsubscription_statut':'$_mailsubscriber_statut').'='.sql_quote($_statut)";
 	if ($crit->cond){
 		$where = "($_statut?$where:'1=1')";
@@ -160,4 +160,80 @@ function mailsubscriber_url_confirm($email, $jeton, $sep = "&amp;") {
 	$url = parametre_url($url, "arg", mailsubscriber_cle_action("confirm", $email, $jeton), $sep);
 
 	return $url;
+}
+
+/**
+ * @pipeline mailsubscriber_informations_liees
+ * @param $id_mailsubscriber
+ * @param $email
+ * @return string
+ */
+function mailsubscriber_afficher_informations_liees($id_mailsubscriber, $email) {
+
+	$out = "";
+	// Appeler une premiere fois le pipeline avec declarer=true
+	// data contient une entree par type d'information, avec les entrees titre et valeurs
+	$flux = array(
+		'args' => array(
+			'declarer' => true,
+		),
+		'data' => array(
+			/*
+			'info' => array(
+				'titre' => "titre de l'information",
+				'valeurs' => array(
+					'id' => 'titre'
+				)
+			)
+			*/
+		)
+	);
+
+	if ($declaration = pipeline('mailsubscriber_informations_liees', $flux)) {
+		// Appeler avec la reference du subscriver
+		$flux = array(
+			'args' => array(
+				'email' => $email,
+				'id_mailsubscriber' => $id_mailsubscriber
+			),
+			'data' => array(
+
+			)
+		);
+
+		$infos = pipeline('mailsubscriber_informations_liees', $flux);
+
+		foreach($infos as $k=>$v) {
+			$out .= mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration);
+		}
+		if ($out) {
+			$out = "<table class='spip'><tbody>$out</tbody></table>";
+		}
+
+	}
+
+	return $out;
+
+}
+
+/**
+ * Afficher une valeur des informations liees, eventuellement traduite d'apres la declaration
+ * @param string $k
+ * @param string $v
+ * @param $declaration
+ * @return string
+ */
+function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration){
+	$titre = $k;
+	if (isset($declaration[$k]['titre'])){
+		$titre = typo(supprimer_numero($declaration[$k]['titre']));
+	}
+	$valeur = $v;
+	if (!is_array($valeur)) $valeur = array($valeur);
+	foreach ($valeur as $i=>$va){
+		if (isset($declaration[$k]['valeurs'][$va])) {
+			$valeur[$i] = typo(supprimer_numero($declaration[$k]['valeurs'][$va]));
+		}
+	}
+	return "<tr><td>$titre</td><td>".implode(', ',$valeur)."</td></tr>";
 }
