@@ -14,6 +14,13 @@ function action_incarner_dist() {
 	if ($login  = _request('login')) {
 		$auteur = auth_identifier_login($login, '');
 		auth_loger($auteur);
+
+		/* Si on vient de se loger dans l'espace privé avec un login qui n'y est
+		 * pas autorisé, on redirige vers la page d'accueil, pour éviter un
+		 * message d'erreur inutile. */
+		if (test_espace_prive() and (! autoriser('ecrire'))) {
+			redirige_par_entete(url_de_base());
+		}
 	} elseif (_request('logout')) {
 		redirige_par_entete(
 			html_entity_decode(
@@ -21,5 +28,4 @@ function action_incarner_dist() {
 			)
 		);
 	}
-
 }
