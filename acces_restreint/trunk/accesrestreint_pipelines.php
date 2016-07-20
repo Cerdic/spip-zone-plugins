@@ -115,3 +115,46 @@ function accesrestreint_page_indisponible($contexte) {
 	}
 	return $contexte;
 }
+
+/**
+ * Garder en mémoire dans une meta la liste des zones qui sont accessibles à toutes les personnes connectées
+ * 
+ * @pipeline post_edition
+ * @param array $flux
+ * 		Contenu fourni par le pipeline
+ * @return array
+ * 		Retourne le flux du pipeline possiblement modifié
+ **/
+function accesrestreint_post_edition($flux) {
+	// Si on vient de modifier une zone et qu'elle a l'option autoriser_si_connexion
+	if (
+		$flux['args']['type'] == 'zone'
+		and $id_zone = $flux['args']['id_objet']
+	) {
+		include_spip('inc/config');
+		
+		// On cherche les zones déjà gardées en mémoire
+		$zones_si_connexion = lire_config('accesrestreint_zones_si_connexion');
+		if ($zones_si_connexion) {
+			$zones_si_connexion = explode(',', $zones_si_connexion);
+		}
+		else {
+			$zones_si_connexion = array();
+		}
+		
+		// Si on a coché la case, on ajoute cette zone là
+		if ($flux['data']['autoriser_si_connexion'] == 'oui') {
+			array_push($zones_si_connexion, $id_zone);
+		}
+		// Sinon on la retire
+		else {
+			$zones_si_connexion = array_diff($zones_si_connexion, array($id_zone));
+		}
+		
+		// On remet tout dans les métas
+		$zones_si_connexion = implode(',', array_unique($zones_si_connexion));
+		ecrire_config('accesrestreint_zones_si_connexion', $zones_si_connexion);
+	}
+	
+	return $flux;
+}

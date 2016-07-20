@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.15.1"
+	version="3.15.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/zone-32.png"
@@ -29,6 +29,7 @@
 	<pipeline nom="affiche_gauche" inclure="accesrestreint_pipelines.php" />
 	<pipeline nom="page_indisponible" inclure="accesrestreint_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/accesrestreint_autoriser.php" />
+	<pipeline nom="post_edition" inclure="accesrestreint_pipelines.php" />
 	
 	<!-- Permettre de modifier la liste des contenus restreints pour un visiteur donné -->
 	<pipeline nom="accesrestreint_liste_objets_exclus" action="" />
