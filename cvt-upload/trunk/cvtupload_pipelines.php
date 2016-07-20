@@ -4,18 +4,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Age maximum des fichiers dans le dossier temporaire
- **/
-if (!defined('_CVTUPLOAD_AGE_MAX')) {
-	define('_CVTUPLOAD_AGE_MAX', 6*3600);
-}
-/**
- * Nombre maximum de fichiers dans le dossier temporaire
- **/
-if (!defined('_CVTUPLOAD_MAX_FILES')) {
-	define('_CVTUPLOAD_MAX_FILES', 200);
-}
-
+ * Chercher si des champs fichiers ont été déclarés dans le fichier formulaires/xxx.php
+ * Sert de condition preliminaire pour les pipelines formulaire_charger, formulaire_verifier et formulaire_fond du plugin
+ *
+ * @param string $form
+ *     le nom du formulaire
+ * @param array $args
+ *     - l'id du
+ * 
+ * @return array
+ *     valeur(s) de l'attribut 'name' du ou des input de type file dans formulaires/xxx.html
+ */
 function cvtupload_chercher_fichiers($form, $args){
 	$fichiers = array();
 	
@@ -33,10 +32,6 @@ function cvtupload_chercher_fichiers($form, $args){
 	return $fichiers;
 }
 
-function cvtupload_hash(){
-	include_spip('inc/session');
-	return session_get('hash_env').'_'._request('hash');
-}
 
 function cvtupload_formulaire_charger($flux){
 	// S'il y a des champs fichiers de déclarés
@@ -163,19 +158,6 @@ function cvtupload_formulaire_fond($flux){
 				}
 			}
 		}
-	}
-	
-	return $flux;
-}
-
-function cvtupload_formulaire_traiter($flux){
-	// S'il y a des champs fichiers de déclarés
-	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])){
-		$hash = cvtupload_hash();
-		// On supprime le répertoire unique comportant les fichiers du visiteur
-		$repertoire = _DIR_TMP.'cvtupload/'.$hash.'/';
-		supprimer_repertoire($repertoire);
-		session_set($hash.'_fichiers', null);
 	}
 	
 	return $flux;
