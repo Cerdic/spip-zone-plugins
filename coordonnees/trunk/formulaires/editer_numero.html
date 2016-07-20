@@ -7,9 +7,9 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_numero' value='#ENV{id_numero}' />
-		<ul>
+		<[(#DIV|sinon{ul})] class='editer-groupe'>
 			#GENERER_SAISIES{#ENV{_saisies}}
-		</ul>
+		</[(#DIV|sinon{ul})]>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
