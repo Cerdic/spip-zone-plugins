@@ -199,12 +199,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
 	// Les traitements spécifiques
 	// Notifications
-	if ((!$statut_ancien OR $statut != $statut_ancien) 
-			&& (isset($config['activer'])) 
-			&& (isset($config['quand']) 
-					&& is_array($config['quand']) 
-					&& in_array($statut, $config['quand'])) 
-			&& ($notifications = charger_fonction('notifications', 'inc', true))) {
+	if ((!$statut_ancien OR $statut != $statut_ancien) && (isset($config['activer'])) && (isset($config['quand']) && is_array($config['quand']) && in_array($statut, $config['quand'])) && ($notifications = charger_fonction('notifications', 'inc', true))) {
 		//Déterminer la langue pour les notifications
 		$lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
 		lang_select($lang);

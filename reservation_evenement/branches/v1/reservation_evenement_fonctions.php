@@ -117,11 +117,10 @@ function prix_formater_devise($montant, $devise) {
 	include_spip('inc/config');
 	include_spip('inc/cookie');
 
-	$montant = number_format($montant, 2);
+	$montant = number_format($montant, 2, '.', '');
 
 	//On détermine la langue du contexte
 	$lang = $GLOBALS['spip_lang'];
-
 	// Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
 	if (function_exists('numfmt_create')) {
 		$fmt = numfmt_create($lang, NumberFormatter::CURRENCY);
