@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/prix_objets/trunk/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selection_objet_prix' => 'Ajouter un prix aux objets suivants :',
 
 	// P
-	'prix_choisis' => 'Prix choisi',
 	'prix' => 'Prix',
+	'prix_choisis' => 'Prix choisi',
 	'prix_ht' => 'Prix HT',
 	'prix_ttc' => 'Prix TTC',
 

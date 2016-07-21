@@ -18,7 +18,10 @@ function formulaires_prix_charger_dist($id_objet,$objet='article'){
 	$prix_choisis =array();	
 	if(is_array($id_objet))$id_objet_produit=implode(',',$id_objet);
 	
-	$d=sql_select('*','spip_prix_objets','id_objet IN('.$id_objet.') AND objet ='.sql_quote($objet));
+	if ($id_objet) {
+		$d=sql_select('*','spip_prix_objets','id_objet IN('.$id_objet.') AND objet ='.sql_quote($objet));
+	}
+	
 	
 	//établit les devises diponible moins ceux déjà utilisés
 		
