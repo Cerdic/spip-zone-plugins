@@ -61,13 +61,14 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'texte_creer_associer' => 'formidable:liens_creer_associer',
 		'texte_ajouter' => 'formidable:liens_ajouter',
 
-		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
-		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
+		'champs_editables' => array('titre', 'identifiant', 'descriptif', 'css', 'message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
+		'champs_versionnes' => array('titre', 'identifiant', 'descriptif', 'css', 'message_retour', 'saisies', 'traitements', 'public','apres','unicite','message_erreur_unicite','url_redirect','resume_reponse'),
 		'field' => array(
 			'id_formulaire' => 'bigint(21) NOT NULL',
 			'identifiant' => 'varchar(200)',
 			'titre' => "text NOT NULL default ''",
 			'descriptif' => 'text',
+			'css' => 'varchar(255) not null default ""',
 			'message_retour' => "text NOT NULL default ''",
 			'saisies' => "longtext NOT NULL default ''",
 			'traitements' => "text NOT NULL default ''",

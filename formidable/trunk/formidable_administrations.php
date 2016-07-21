@@ -49,12 +49,10 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.5.3'] = array(array('sql_alter','TABLE spip_formulaires ADD date_crea datetime NOT NULL DEFAULT "0000-00-00 00:00:00"'));
 	// Renommer la date de création (pas d'abbréviations dans les noms)
 	$maj['0.5.5'] = array(array('sql_alter','TABLE spip_formulaires CHANGE date_crea date_creation datetime NOT NULL DEFAULT "0000-00-00 00:00:00"'));
-
 	// statut publie sur les formulaires sans statut
 	$maj['0.5.6'] = array(
 		array('sql_updateq', 'spip_formulaires', array('statut'=>'publie'), 'statut='.sql_quote('')),
 	);
-
 	$maj['0.6.0'] = array(
 		array('sql_alter','TABLE spip_formulaires_reponses_champs RENAME TO spip_formulaires_reponses_champs_bad'),
 		array('maj_tables',array('spip_formulaires_reponses_champs')),
@@ -76,9 +74,12 @@ function formidable_upgrade($nom_meta_base_version, $version_cible) {
 		// champ resume_reponse
 		array('maj_tables',array('spip_formulaires')),
 	);
-
 	$maj['0.6.6'] = array(
 		array('sql_updateq', 'spip_formulaires_reponses', array('statut' => 'refuse'), 'statut='.sql_quote('poubelle')),
+	);
+	// Ajouter un champ "css" sur les formulaires
+	$maj['0.7.0'] = array(
+		array('maj_tables', array('spip_formulaires')),
 	);
 
 	include_spip('base/upgrade');

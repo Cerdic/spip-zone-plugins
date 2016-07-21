@@ -72,6 +72,9 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		// On ajoute un point d'entrée avec les infos de ce formulaire
 		// pour d'eventuels plugins qui en ont l'utilité
 		$contexte['_formidable'] = $formulaire;
+		
+		// Classes CSS 
+		$contexte['_css'] = $formulaire['css'];
 
 		// Est-ce que la personne a le droit de répondre ?
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {

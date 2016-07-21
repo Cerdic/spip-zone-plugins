@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_apres_choix_valeurs' => 'Les valeurs saisies',
 	'editer_apres_explication' => 'Après validation, afficher à la place du formulaire :',
 	'editer_apres_label' => 'Afficher ensuite',
+	'editer_css' => 'Classes CSS',
 	'editer_descriptif' => 'Descriptif',
 	'editer_descriptif_explication' => 'Une explication du formulaire destinée à l’espace privé.',
 	'editer_identifiant' => 'Identifiant',
