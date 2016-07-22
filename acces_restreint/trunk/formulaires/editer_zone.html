@@ -7,7 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	<input type="hidden" name="id_zone" value="#ENV{id_zone}" />
-		<ul>
+		<ul class='editer-groupe'>
 			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:accesrestreint:titre_zones_acces:></label>[
 					<span class="erreur_message">(#ENV**{erreurs}|table_valeur{titre})</span>
