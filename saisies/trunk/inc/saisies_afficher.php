@@ -169,7 +169,8 @@ function saisies_generer_html($champ, $env = array()) {
 
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	// Si le nom du champ est un tableau indexé, il faut parser !
-	if (isset($contexte['nom']) and preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
+	if (isset($contexte['nom']) and preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)
+			and isset($env[$separe[1]])) {
 		$contexte['valeur'] = $env[$separe[1]];
 		preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
 		// On va chercher au fond du tableau
