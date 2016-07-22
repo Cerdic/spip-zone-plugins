@@ -261,6 +261,11 @@ L.Map.Gis = L.Map.extend({
 	
 	// API Compat GIS3
 	removeAllMarkers: function () {
+		// virer les éléments du cluster s'il est utilisé
+		if (this.options.cluster) {
+			this.markerCluster.clearLayers();
+		}
+		// virer les points de la carte
 		if (typeof this.geojsons=='undefined') this.geojsons = [];
 		for (var i in this.geojsons) {
 			this.geojsons[i].clearLayers();
