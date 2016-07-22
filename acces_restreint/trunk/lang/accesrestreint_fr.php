@@ -58,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Accès aux documents joints par leur URL',
 	'label_creer_htaccess_non' => 'autoriser la lecture',
 	'label_creer_htaccess_oui' => 'interdire la lecture',
+	'label_droits_acces' => 'Droits d’accès',
+	'label_titre_zone' => 'Titre',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',
