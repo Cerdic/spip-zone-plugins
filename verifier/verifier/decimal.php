@@ -48,7 +48,7 @@ function verifier_decimal_dist($valeur, $options = array()) {
 	}
 
 	// On vérifie le nombre de décimales après la virgule
-	if ($nb_decimales = $options['nb_decimales'] and round($valeur, $nb_decimales) != $valeur) {
+	if (isset($options['nb_decimales']) and $nb_decimales = $options['nb_decimales'] and round($valeur, $nb_decimales) != $valeur) {
 		$erreur = _T('verifier:erreur_decimal_nb_decimales', array('nb_decimales' => $nb_decimales));
 	}
 
