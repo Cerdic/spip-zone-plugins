@@ -217,23 +217,35 @@ function mailsubscriber_afficher_informations_liees($id_mailsubscriber, $email) 
  * @param $declaration
  * @return string
  */
-function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration, $table=true){
+function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration, $html=true){
 	$titre = $k;
 	if (isset($declaration[$k]['titre'])){
 		$titre = typo(supprimer_numero($declaration[$k]['titre']));
 	}
-	$valeur = $v;
-	if (!is_array($valeur)) $valeur = array($valeur);
-	foreach ($valeur as $i=>$va){
-		if (isset($declaration[$k]['valeurs'][$va])) {
-			$valeur[$i] = typo(supprimer_numero($declaration[$k]['valeurs'][$va]));
-		}
-	}
-	if ($table) {
-		$out = "<tr><td>$titre</td><td>".implode(', ',$valeur)."</td></tr>";
+	$vue = "";
+	if (isset($declaration[$k]['saisie'])){
+		$saisie = array(
+			'saisie' => $declaration[$k]['saisie'],
+			'options' => $declaration[$k]['options'],
+		);
+		$saisie['options']['label'] = ' ';
+		$vue = saisies_generer_vue($saisie,array($k=>$v));
 	}
 	else {
-		$out = "$titre&nbsp;: ".implode(', ',$valeur);
+		$valeur = $v;
+		if (!is_array($valeur)) $valeur = array($valeur);
+		foreach ($valeur as $i=>$va){
+			if (isset($declaration[$k]['valeurs'][$va])) {
+				$valeur[$i] = typo(supprimer_numero($declaration[$k]['valeurs'][$va]));
+			}
+		}
+		$vue = implode(', ',$valeur);
+	}
+	if ($html) {
+		$out = "<tr><td>$titre</td><td>".$vue."</td></tr>";
+	}
+	else {
+		$out = "$titre&nbsp;: ".strip_tags($vue);
 	}
 	return $out;
 }

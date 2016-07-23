@@ -293,12 +293,65 @@ function mailsubscribers_informe_subscriber($infos) {
 
 /**
  * Recuperer la declaration des informations liees
+ * prend nativement en charge 
+ *   - les champs extras sur mailsubscribers
+ *   - les mots cles associes aux mailsubscribers 
  * @pipeline mailsubscriber_informations_liees
  * @return array
  */
 function mailsubscriber_declarer_informations_liees() {
 	static $declaration;
 	if (is_null($declaration)){
+
+		$infos = array(
+			/*
+			'info' => array(
+				'titre' => "titre de l'information",
+				'valeurs' => array(
+					'id' => 'titre'
+				),
+			  // declaration de la saisie de cette info pour la creation de segments
+			  'saisie' => 'pays',
+			  'options' => array(
+			  )
+			)
+			*/
+		);
+
+		// des champs extras ?
+		if (test_plugin_actif('cextras')) {
+			$saisies_tables = pipeline('declarer_champs_extras', array());
+			if (isset($saisies_tables['spip_mailsubscribers'])) {
+				foreach ($saisies_tables['spip_mailsubscribers'] as $saisie){
+					$champ = array(
+						'titre' => $saisie['options']['label'],
+						'saisie' => $saisie['saisie'],
+						'options' => $saisie['options'],
+						'auto_field' => true, // internal : pour remplissage automatique a partir de la table
+					);
+					$id = $saisie['options']['nom'];
+					$infos[$id] = $champ;
+				}
+			}
+		}
+
+		// des groupes de mots ?
+		$groupes = sql_allfetsel('*','spip_groupes_mots','tables_liees like '.sql_quote('%mailsubscribers%'));
+		foreach ($groupes as $groupe) {
+			$infos['groupemots_'.$groupe['id_groupe']] = array(
+				'titre' => $groupe['titre'],
+				'saisie' => 'mot',
+				'options' => array(
+					'id_groupe' => $groupe['id_groupe'],
+					'forcer_select' => 'oui',
+					'nom' => 'groupemots_'.$groupe['id_groupe'],
+					'label' => $groupe['titre'],
+					'class' => 'chosen',
+				),
+				'auto_mot' => true, // internal : pour remplissage automatique a partir de liens mots-mailsubscribers
+			);
+		}
+
 		// Appeler le pipeline avec declarer=true
 		// data contient une entree par type d'information, avec les entrees titre et valeurs
 		// + la declaration de saisies si option saisable pour la definition d'un segment de liste
@@ -306,20 +359,7 @@ function mailsubscriber_declarer_informations_liees() {
 			'args' => array(
 				'declarer' => true,
 			),
-			'data' => array(
-				/*
-				'info' => array(
-					'titre' => "titre de l'information",
-					'valeurs' => array(
-						'id' => 'titre'
-					),
-				  // declaration de la saisie de cette info pour la creation de segments
-				  'saisie' => 'pays',
-				  'options' => array(
-				  )
-				)
-				*/
-			)
+			'data' => $infos
 		);
 		$declaration = pipeline('mailsubscriber_informations_liees', $flux);
 	}
@@ -336,6 +376,28 @@ function mailsubscriber_declarer_informations_liees() {
 function mailsubscriber_recuperer_informations_liees($id_mailsubscriber, $email){
 	$infos = array();
 	if ($declaration = mailsubscriber_declarer_informations_liees()) {
+
+		$row = null;
+		foreach ($declaration as $nom => $champ){
+			if (isset($champ['auto_field']) and $champ['auto_field']){
+				if (is_null($row)) {
+					$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
+				}
+				$infos[$nom] = $row[$nom];
+			}
+			elseif (isset($champ['auto_mot']) and $champ['auto_mot']
+			  and strncmp($nom,'groupemots_',11)==0
+			  and $id_groupe = $champ['options']['id_groupe']){
+				$mots = sql_allfetsel('M.id_mot','spip_mots as M JOIN spip_mots_liens as L on L.id_mot=M.id_mot','L.objet='.sql_quote('mailsubscriber').' AND L.id_objet='.intval($id_mailsubscriber).' AND M.id_groupe='.intval($id_groupe));
+				foreach($mots as $mot) {
+					if (!isset($flux['data'][$nom])){
+						$infos[$nom] = array();
+					}
+					$infos[$nom][] = $mot['id_mot'];
+				}
+			}
+		}
+
 		// Appeler avec la reference du subscriber
 		$flux = array(
 			'args' => array(
