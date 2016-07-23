@@ -160,15 +160,16 @@ function mailsubscribers_trace_optin($actions, $trace) {
  *
  * @param string $liste
  * @param string $statut
+ * @param int $id_segment
  * @return array|int
  */
-function mailsubscribers_compte_inscrits($liste, $statut = 'valide') {
+function mailsubscribers_compte_inscrits($liste, $statut = 'valide', $id_segment=0) {
 	static $count = null;
 
 	if (is_null($count) OR isset($GLOBALS['mailsubscribers_recompte_inscrits'])) {
 		$count = array();
-		$rows = sql_allfetsel('id_mailsubscribinglist,statut,count(id_mailsubscriber) as n', 'spip_mailsubscriptions', '',
-			'id_mailsubscribinglist,statut');
+		$rows = sql_allfetsel('id_mailsubscribinglist,statut,id_segment,count(id_mailsubscriber) as n', 'spip_mailsubscriptions', '',
+			'id_mailsubscribinglist,statut,id_segment');
 
 		// recuperer les correspondance id_mailsubscribinglist <=> identifiant
 		$ids = array_map('reset', $rows);
@@ -181,19 +182,25 @@ function mailsubscribers_compte_inscrits($liste, $statut = 'valide') {
 
 		foreach ($rows as $row) {
 			$l = $ids[$row['id_mailsubscribinglist']];
-			if (!isset($count[$l][$row['statut']])) {
-				$count[$l][$row['statut']] = 0;
+			if (!isset($count[$l])) {
+				$count[$l] = array();
 			}
-			$count[$l][$row['statut']] += $row['n'];
+			if (!isset($count[$l][$row['statut']])) {
+				$count[$l][$row['statut']] = array();
+			}
+			if (!isset($count[$l][$row['statut']][$row['id_segment']])) {
+				$count[$l][$row['statut']][$row['id_segment']] = 0;
+			}
+			$count[$l][$row['statut']][$row['id_segment']] += $row['n'];
 		}
 
 		// pour le compte sans liste, on prends le statut des mailsubscribers
 		$rows = sql_allfetsel('statut,count(id_mailsubscriber) as n', 'spip_mailsubscribers', '', 'statut');
 		foreach ($rows as $row) {
 			if (!isset($count[''][$row['statut']])) {
-				$count[''][$row['statut']] = 0;
+				$count[''][$row['statut']] = array(0=>0);
 			}
-			$count[''][$row['statut']] += $row['n'];
+			$count[''][$row['statut']][0] += $row['n'];
 		}
 
 	}
@@ -205,8 +212,8 @@ function mailsubscribers_compte_inscrits($liste, $statut = 'valide') {
 
 		return array();
 	}
-	if (isset($count[$liste][$statut])) {
-		return $count[$liste][$statut];
+	if (isset($count[$liste][$statut][$id_segment])) {
+		return $count[$liste][$statut][$id_segment];
 	}
 
 	return 0;
@@ -283,6 +290,66 @@ function mailsubscribers_informe_subscriber($infos) {
 	return $infos;
 }
 
+
+/**
+ * Recuperer la declaration des informations liees
+ * @pipeline mailsubscriber_informations_liees
+ * @return array
+ */
+function mailsubscriber_declarer_informations_liees() {
+	static $declaration;
+	if (is_null($declaration)){
+		// Appeler le pipeline avec declarer=true
+		// data contient une entree par type d'information, avec les entrees titre et valeurs
+		// + la declaration de saisies si option saisable pour la definition d'un segment de liste
+		$flux = array(
+			'args' => array(
+				'declarer' => true,
+			),
+			'data' => array(
+				/*
+				'info' => array(
+					'titre' => "titre de l'information",
+					'valeurs' => array(
+						'id' => 'titre'
+					),
+				  // declaration de la saisie de cette info pour la creation de segments
+				  'saisie' => 'pays',
+				  'options' => array(
+				  )
+				)
+				*/
+			)
+		);
+		$declaration = pipeline('mailsubscriber_informations_liees', $flux);
+	}
+	return $declaration;
+}
+
+/**
+ * Recuperer les informations liees a un subscriber, utiles pour la segmentation
+ * @pipeline mailsubscriber_informations_liees
+ * @param $id_mailsubscriber
+ * @param $email
+ * @return array|mixed|null
+ */
+function mailsubscriber_recuperer_informations_liees($id_mailsubscriber, $email){
+	$infos = array();
+	if ($declaration = mailsubscriber_declarer_informations_liees()) {
+		// Appeler avec la reference du subscriber
+		$flux = array(
+			'args' => array(
+				'email' => $email,
+				'id_mailsubscriber' => $id_mailsubscriber
+			),
+			'data' => $infos
+		);
+
+		$infos = pipeline('mailsubscriber_informations_liees', $flux);
+	}
+	return $infos;
+}
+
 /**
  * Filtrer une liste a partir de sa category
  *
@@ -306,6 +373,7 @@ function mailsubscribers_filtre_liste($liste, $category = "newsletter") {
  *
  * @param array $options
  *   status : filtrer les listes sur le status
+ *   segments : fournir le detail des segments avec un identifant de la forme xxxx+nn
  * @return array
  *   array
  *     id : identifiant
@@ -330,10 +398,12 @@ function mailsubscribers_listes($options = array()) {
 	if ($filtrer_status) {
 		$where[] = 'statut=' . sql_quote($filtrer_status);
 	}
-	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status', 'spip_mailsubscribinglists', $where, '',
+	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status,segments', 'spip_mailsubscribinglists', $where, '',
 		'statut DESC,0+titre,titre');
 	$listes = array();
 	foreach ($rows as $row) {
+		$segments = $row['segments'];
+		unset($row['segments']);
 		if ($row['status'] == 'ouverte') {
 			$row['status'] = 'open';
 		}
@@ -341,6 +411,18 @@ function mailsubscribers_listes($options = array()) {
 			$row['status'] = 'close';
 		}
 		$listes[$row['id']] = $row;
+		if (isset($options['segments']) AND $options['segments']){
+			$segments = unserialize($segments);
+			if ($segments AND count($segments)){
+				$id = $row['id'];
+				$t = $row['titre'];
+				foreach ($segments as $id_segment=>$segment){
+					$row['id'] = $id . '+' . $id_segment;
+					$row['titre'] = '&nbsp;— '.$t . ' > ' . $segment['titre'];
+					$listes[$row['id']] = $row;
+				}
+			}
+		}
 	}
 
 	return $listes;

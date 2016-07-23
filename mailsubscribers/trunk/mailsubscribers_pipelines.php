@@ -10,6 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function mailsubscribers_taches_generales_cron($taches) {
 	// a peu pres tous les jours mais en se decalant un peu
 	$taches['mailsubscribers_synchro_lists'] = 23 * 3600;
+	if (isset($GLOBALS['meta']['mailsubscriptions_update_segments'])){
+		$taches['mailsubscribers_update_segments'] = 90;
+	}
 
 	return $taches;
 }

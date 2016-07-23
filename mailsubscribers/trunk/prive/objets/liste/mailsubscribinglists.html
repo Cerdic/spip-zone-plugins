@@ -25,6 +25,9 @@
 			<td class='statut'>[(#STATUT|puce_statut{mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})]</td>
 			<td class='titre principale'>[(#LOGO_MAILSUBSCRIBINGLIST|image_reduire{20,26})]<a href="[(#ID_MAILSUBSCRIBINGLIST|generer_url_entite{mailsubscribinglist})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MAILSUBSCRIBINGLIST">[(#RANG). ]#TITRE</a>
 			[<span class="soustitre">(#DESCRIPTIF|PtoBR)</span>]
+				[(#SEGMENTS**|unserialize|oui)
+				[<div class="small"><i>(#SEGMENTS**|unserialize|count|singulier_ou_pluriel{mailsubscribinglist:info_1_segment,mailsubscribinglist:info_nb_segments})</i></div>]
+				]
 			</td>
 			<td class='identifiant secondaire'>[<tt>(#IDENTIFIANT)</tt>]</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>

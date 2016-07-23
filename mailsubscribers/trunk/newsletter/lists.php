@@ -26,6 +26,7 @@ include_spip('mailsubscribers_fonctions');
 function newsletter_lists_dist($options = array()) {
 
 	$options['category'] = 'newsletter';
+	$options['segments'] = true;
 	$res = mailsubscribers_listes($options);
 
 	return $res;

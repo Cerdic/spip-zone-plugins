@@ -52,3 +52,28 @@ function autoriser_mailsubscriber_supprimer_dist($faire, $type, $id, $qui, $opt)
 }
 
 
+// -----------------
+// Objet mailsubscribinglists
+// creer
+
+function autoriser_mailsubscribinglist_creer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+}
+
+function autoriser_mailsubscribinglist_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+}
+
+function autoriser_mailsubscribinglist_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+}
+
+function autoriser_mailsubscribinglist_segmenter_dist($faire, $type, $id, $qui, $opt) {
+	if (!function_exists('mailsubscriber_declarer_informations_liees')) {
+		include_spip('inc/mailsubscribers');
+	}
+	$declaration = mailsubscriber_declarer_informations_liees();
+	if (!$declaration) return false;
+
+	return autoriser('modifier', $type, $id, $qui, $opt);
+}

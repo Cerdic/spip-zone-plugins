@@ -53,14 +53,14 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 		}
 
 		// les inscriptions pas deja en refusees pour la trace
-		$pas_encore = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions', 'statut!=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
+		$pas_encore = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions', 'statut!=' . sql_quote('refuse') . ' AND id_segment=0 AND ' . implode(' AND ', $where));
 
 		// on met a jour les inscriptions pour les listes demandees (ou pour toutes les listes en cours)
 		sql_updateq('spip_mailsubscriptions', array('statut' => 'refuse'), $where);
 		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 
 		if ($pas_encore) {
-			$changes = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscriptions', 'statut=' . sql_quote('refuse') . ' AND ' . implode(' AND ', $where));
+			$changes = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscriptions', 'statut=' . sql_quote('refuse') . ' AND id_segment=0 AND ' . implode(' AND ', $where));
 			$changes = array_map('reset', $changes);
 			$changes_identifiants = array();
 			foreach ($pas_encore as $sub_prev){
@@ -114,6 +114,10 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 			autoriser_exception("instituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 			autoriser_exception("superinstituer", "mailsubscriber", $row['id_mailsubscriber'], false);
 			$dejala = false;
+
+			// actualiser les segments en auto_update
+			include_spip('inc/mailsubscribinglists');
+			mailsubscribers_actualise_segments($row['id_mailsubscriber']);
 		}
 
 		if ($notify and (!isset($options['notify']) or $options['notify'])){

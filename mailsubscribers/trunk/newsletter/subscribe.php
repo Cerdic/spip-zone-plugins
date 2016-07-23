@@ -140,7 +140,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 				'identifiant=' . sql_quote($identifiant))
 			) {
 				$sub_prev = $sub = sql_fetsel('*', 'spip_mailsubscriptions',
-					'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
+					'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 				$ins = array(
 					'id_mailsubscriber' => $id_mailsubscriber,
 					'id_mailsubscribinglist' => $id_mailsubscribinglist,
@@ -150,7 +150,7 @@ function newsletter_subscribe_dist($email, $options = array()) {
 					sql_insertq('spip_mailsubscriptions', $ins);
 					// on verifie l'inscription, en cas de concurrence
 					$sub = sql_fetsel('*', 'spip_mailsubscriptions',
-						'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
+						'id_mailsubscriber=' . intval($id_mailsubscriber) . ' AND id_segment=0 AND id_mailsubscribinglist=' . intval($id_mailsubscribinglist));
 				}
 				// le statut doit etre celui qu'on a voulu mettre - ou mieux : deja valide
 				if ($sub['statut'] !== $ins['statut'] and $sub['statut'] !== 'valide') {
@@ -202,6 +202,11 @@ function newsletter_subscribe_dist($email, $options = array()) {
 		$dejala = false;
 	}
 
+	// actualiser les segments en auto_update
+	include_spip('inc/mailsubscribinglists');
+	mailsubscribers_actualise_segments($row['id_mailsubscriber']);
+
+	// notifier
 	if ($notify and (!isset($options['notify']) or $options['notify'])){
 		$notifications = charger_fonction('notifications','inc');
 		foreach ($notify as $option){

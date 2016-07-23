@@ -38,18 +38,32 @@ function newsletter_subscribers_dist($listes = array(), $options = array()) {
 	// si simple comptage d'une seule liste, faisons avec la fonction mailsubscribers_compte_inscrits
 	// qui compte chaque liste en un seul coup et memoize
 	if (isset($options['count']) AND $options['count'] AND count($listes) == 1) {
-		$liste = mailsubscribers_normaliser_nom_liste(reset($listes));
-
-		return mailsubscribers_compte_inscrits($liste);
+		$id_segment = 0;
+		$l = explode('+',reset($listes));
+		$liste = array_shift($l);
+		$liste = mailsubscribers_normaliser_nom_liste($liste);
+		if ($l) $id_segment = intval(array_shift($l));
+		return mailsubscribers_compte_inscrits($liste, 'valide', $id_segment);
 	}
 
+	$w = array();
+	foreach ($listes as $l){
+		$id_segment = 0;
+		$l = explode('+',$l);
+		$identifiant = mailsubscribers_normaliser_nom_liste(array_shift($l));
+		if ($l) $id_segment = intval(reset($l));
+		if ($id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))){
+			$w[] = "(id_mailsubscribinglist=".intval($id_mailsubscribinglist).' AND id_segment='.intval($id_segment).')';
+		}
+	}
+	if (!$w) {
+		$w = '0=1';
+	}
+	else {
+		$w = '('.implode(' OR ',$w).')';
+	}
 
-	$identifiants = array_map('mailsubscribers_normaliser_nom_liste', $listes);
-	$ids = sql_allfetsel('id_mailsubscribinglist', 'spip_mailsubscribinglists', sql_in('identifiant', $identifiants));
-	$ids = array_map('reset', $ids);
-
-	$sous_where = sql_get_select('id_mailsubscriber', 'spip_mailsubscriptions',
-		'statut=' . sql_quote('valide') . ' AND ' . sql_in('id_mailsubscribinglist', $ids));
+	$sous_where = sql_get_select('id_mailsubscriber', 'spip_mailsubscriptions', 'statut=' . sql_quote('valide') . ' AND ' . $w);
 	$sous_where = "(SELECT * FROM ($sous_where) AS S)";
 	$where[] = "id_mailsubscriber IN $sous_where";
 

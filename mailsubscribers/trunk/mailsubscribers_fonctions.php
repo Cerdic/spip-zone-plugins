@@ -49,12 +49,13 @@ function balise_STATUT_SUBSCRIPTION_dist($p) {
 /**
  * @param string $liste
  * @param string $statut
+ * @param int $id_segment
  * @return array|int
  */
-function filtre_mailsubscribers_compte_inscrits_dist($liste, $statut = 'valide') {
+function filtre_mailsubscribers_compte_inscrits_dist($liste, $statut = 'valide', $id_segment=0) {
 	include_spip('inc/mailsubscribers');
 
-	return mailsubscribers_compte_inscrits($liste, $statut);
+	return mailsubscribers_compte_inscrits($liste, $statut, $id_segment);
 }
 
 /**
@@ -162,6 +163,25 @@ function mailsubscriber_url_confirm($email, $jeton, $sep = "&amp;") {
 	return $url;
 }
 
+
+function mailsubscriber_afficher_filtre_segment($segment) {
+	$out = array();
+	if (!function_exists('mailsubscriber_declarer_informations_liees')) {
+		include_spip('inc/mailsubscribers');
+	}
+	if ($declaration = mailsubscriber_declarer_informations_liees()) {
+		foreach($segment as $filtre_k=>$v){
+			if (strncmp($filtre_k,'filtre_',7)==0){
+				$k = substr($filtre_k,7);
+				if (isset($declaration[$k]) and $v) {
+					$out[] = mailsubscribers_afficher_valeur_informations_liees($k,$v,$declaration,false);
+				}
+			}
+		}
+	}
+	return implode('<br />',$out);
+}
+
 /**
  * @pipeline mailsubscriber_informations_liees
  * @param $id_mailsubscriber
@@ -171,37 +191,11 @@ function mailsubscriber_url_confirm($email, $jeton, $sep = "&amp;") {
 function mailsubscriber_afficher_informations_liees($id_mailsubscriber, $email) {
 
 	$out = "";
-	// Appeler une premiere fois le pipeline avec declarer=true
-	// data contient une entree par type d'information, avec les entrees titre et valeurs
-	$flux = array(
-		'args' => array(
-			'declarer' => true,
-		),
-		'data' => array(
-			/*
-			'info' => array(
-				'titre' => "titre de l'information",
-				'valeurs' => array(
-					'id' => 'titre'
-				)
-			)
-			*/
-		)
-	);
-
-	if ($declaration = pipeline('mailsubscriber_informations_liees', $flux)) {
-		// Appeler avec la reference du subscriver
-		$flux = array(
-			'args' => array(
-				'email' => $email,
-				'id_mailsubscriber' => $id_mailsubscriber
-			),
-			'data' => array(
-
-			)
-		);
-
-		$infos = pipeline('mailsubscriber_informations_liees', $flux);
+	if (!function_exists('mailsubscriber_declarer_informations_liees')) {
+		include_spip('inc/mailsubscribers');
+	}
+	if ($declaration = mailsubscriber_declarer_informations_liees()) {
+		$infos = mailsubscriber_recuperer_informations_liees($id_mailsubscriber, $email);
 
 		foreach($infos as $k=>$v) {
 			$out .= mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration);
@@ -223,7 +217,7 @@ function mailsubscriber_afficher_informations_liees($id_mailsubscriber, $email) 
  * @param $declaration
  * @return string
  */
-function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration){
+function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration, $table=true){
 	$titre = $k;
 	if (isset($declaration[$k]['titre'])){
 		$titre = typo(supprimer_numero($declaration[$k]['titre']));
@@ -235,5 +229,34 @@ function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration
 			$valeur[$i] = typo(supprimer_numero($declaration[$k]['valeurs'][$va]));
 		}
 	}
-	return "<tr><td>$titre</td><td>".implode(', ',$valeur)."</td></tr>";
+	if ($table) {
+		$out = "<tr><td>$titre</td><td>".implode(', ',$valeur)."</td></tr>";
+	}
+	else {
+		$out = "$titre&nbsp;: ".implode(', ',$valeur);
+	}
+	return $out;
+}
+
+function mailsubscribers_is_updating_segment($id_mailsubscribinglist, $id_segment) {
+	static $update_segments;
+	static $progress = array();
+	if (is_null($update_segments)) {
+		if (isset($GLOBALS['meta']['mailsubscriptions_update_segments'])) {
+			$update_segments = unserialize($GLOBALS['meta']['mailsubscriptions_update_segments']);
+			if (!$update_segments){
+				$update_segments = array();
+			}
+		}
+	}
+	if (isset($update_segments[$id_mailsubscribinglist])
+	  and in_array($id_segment,$update_segments[$id_mailsubscribinglist])){
+		if (!isset($progress[$id_mailsubscribinglist])){
+			$tot = sql_countsel('spip_mailsubscriptions','id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+			$n = sql_countsel('spip_mailsubscriptions','actualise_segments=1 AND id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+			$progress[$id_mailsubscribinglist] = intval(round(($tot-$n)*100/$tot)).'%';
+		}
+		return $progress[$id_mailsubscribinglist];
+	}
+	return '';
 }

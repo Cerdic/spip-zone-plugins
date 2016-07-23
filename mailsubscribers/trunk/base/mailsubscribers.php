@@ -105,6 +105,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 			"descriptif" => "text DEFAULT '' NOT NULL",
 			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut" => "varchar(20)  DEFAULT 'prepa' NOT NULL",
+			"segments" => "text DEFAULT '' NOT NULL",
 			"maj" => "TIMESTAMP"
 		),
 		'key' => array(
@@ -165,16 +166,23 @@ function mailsubscribers_declarer_tables_auxiliaires($tables) {
 		'field' => array(
 			"id_mailsubscriber" => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_mailsubscribinglist" => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_segment" => "smallint DEFAULT '0' NOT NULL",
 			// prop : en attente confirmation
 			// valide : subscription active
 			// refuse : desinscrit
 			"statut" => "varchar(20)  DEFAULT 'prop' NOT NULL",
+			// 0 : rien a faire
+			// 1 : actualiser les segments de cette subscription
+			//       qui sont en auto_update
+			//       qui sont dans la meta mailsubscriptions_update_segments (tableau serialize)
+			"actualise_segments" => "tinyint DEFAULT '0' NOT NULL",
 			"maj" => "TIMESTAMP",
 		),
 		'key' => array(
-			"PRIMARY KEY" => "id_mailsubscriber,id_mailsubscribinglist",
+			"PRIMARY KEY" => "id_mailsubscriber,id_mailsubscribinglist,id_segment",
 			"KEY id_mailsubscriber" => "id_mailsubscriber",
 			"KEY id_mailsubscribinglist" => "id_mailsubscribinglist",
+			"KEY id_segment" => "id_segment",
 			"KEY statut" => "statut"
 		)
 	);

@@ -14,4 +14,14 @@
 <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
 </div>
 
+<div class="nettoyeur"></div>
+<INCLURE{fond=prive/objets/liste/mailsubscribinglists-segments,id_mailsubscribinglist=#ID_OBJET,env,ajax} />
+[(#AUTORISER{segmenter,mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST})
+	[(#URL_ECRIRE{mailsubscribinglist-segment_edit}
+		|parametre_url{id_mailsubscribinglist,#ID_MAILSUBSCRIBINGLIST}
+		|parametre_url{id_segment,new}
+		|icone_verticale{<:mailsubscribinglist:icone_creer_segment:>,[(#VAL{mailsubscribinglist}|objet_info{icone_objet})],new,left})]
+]
+
+
 </BOUCLE_mailsubscribinglist>
