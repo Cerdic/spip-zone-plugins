@@ -304,19 +304,29 @@ function mailsubscriber_declarer_informations_liees() {
 	if (is_null($declaration)){
 
 		$infos = array(
-			/*
-			'info' => array(
-				'titre' => "titre de l'information",
-				'valeurs' => array(
+			'lang' => array(
+				'titre' => $s = _T('mailsubscriber:label_lang'),
+				/* Optionnel : utile si on veut uniquement afficher mais pas fournir de saisie pour les segments
+ 				'valeurs' => array(
 					'id' => 'titre'
 				),
+				*/
 			  // declaration de la saisie de cette info pour la creation de segments
-			  'saisie' => 'pays',
+			  'saisie' => 'selection',
 			  'options' => array(
-			  )
+				  'label' => $s,
+				  'nom' => 'lang',
+				  'datas' => array()
+			  ),
+				'auto_field' => true, // internal : pour remplissage automatique a partir de la table
 			)
-			*/
 		);
+		// les valeurs des langues
+		$langues = $GLOBALS['meta']['langues_proposees'];
+		$langues = explode(',',$langues);
+		foreach ($langues as $langue){
+			$infos['lang']['options']['datas'][$langue] = traduire_nom_langue($langue);
+		}
 
 		// des champs extras ?
 		if (test_plugin_actif('cextras')) {

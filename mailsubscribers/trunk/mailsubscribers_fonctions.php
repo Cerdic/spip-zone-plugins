@@ -201,7 +201,10 @@ function mailsubscriber_afficher_informations_liees($id_mailsubscriber, $email) 
 			$out .= mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration);
 		}
 		if ($out) {
-			$out = "<table class='spip'><tbody>$out</tbody></table>";
+			$out = "<table class='spip infos-liees'>"
+				. "<caption>"._T('mailsubscriber:label_informations_liees')."</caption>"
+				. "<tbody>$out</tbody>"
+				. "</table>";
 		}
 
 	}
@@ -242,7 +245,7 @@ function mailsubscribers_afficher_valeur_informations_liees($k, $v, $declaration
 		$vue = implode(', ',$valeur);
 	}
 	if ($html) {
-		$out = "<tr><td>$titre</td><td>".$vue."</td></tr>";
+		$out = "<tr><th scope='row'>$titre</th><td>".$vue."</td></tr>";
 	}
 	else {
 		$out = "$titre&nbsp;: ".strip_tags($vue);
