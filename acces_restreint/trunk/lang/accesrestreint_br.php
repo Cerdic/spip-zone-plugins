@@ -41,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Lemel kuit eus an takad',
 	'info_retirer_zones' => 'Lemel kuit eus an holl dakadoù',
 
+	// L
+	'label_titre_zone' => 'Titl',
+
 	// M
 	'modifier_zone' => 'Kemmañ an takad',
 

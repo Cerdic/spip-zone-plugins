@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Zugriff auf die angehängten Dokumente über ihren URL',
 	'label_creer_htaccess_non' => 'Zugriff erlauben',
 	'label_creer_htaccess_oui' => 'Zugriff verhindern',
+	'label_titre_zone' => 'Titel',
 
 	// M
 	'modifier_zone' => 'Bereich ändern',

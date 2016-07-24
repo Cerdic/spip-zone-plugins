@@ -41,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Retirar da zona',
 	'info_retirer_zones' => 'Retirar de todas as zonas',
 
+	// L
+	'label_titre_zone' => 'Título',
+
 	// M
 	'modifier_zone' => 'Modificar a zona',
 

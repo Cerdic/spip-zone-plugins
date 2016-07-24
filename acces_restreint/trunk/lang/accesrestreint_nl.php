@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Toegang tot bijgevoegde documenten via hun URL',
 	'label_creer_htaccess_non' => 'laten lezen',
 	'label_creer_htaccess_oui' => 'lezen verbieden',
+	'label_titre_zone' => 'Titel',
 
 	// M
 	'modifier_zone' => 'De zone wijzigen',

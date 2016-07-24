@@ -41,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Bölgeden kaldır',
 	'info_retirer_zones' => 'Tüm bölgelerden kaldır',
 
+	// L
+	'label_titre_zone' => 'Başlık',
+
 	// M
 	'modifier_zone' => 'Bölümü (Zone) değiştir',
 

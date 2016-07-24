@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Prístup k pripojeným súborom podľa ich URL',
 	'label_creer_htaccess_non' => 'Povoliť čítanie',
 	'label_creer_htaccess_oui' => 'Zakázať čítanie',
+	'label_titre_zone' => 'Titulok',
 
 	// M
 	'modifier_zone' => 'Upraviť oblasť',

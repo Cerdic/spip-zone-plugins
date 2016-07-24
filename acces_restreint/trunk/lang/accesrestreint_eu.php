@@ -33,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Aretik kendu',
 	'info_retirer_zones' => 'Are guzietarik kendu',
 
+	// L
+	'label_titre_zone' => 'Titulu',
+
 	// P
 	'page_zones_acces' => 'Sarbide murriztua',
 	'privee' => 'Pribatua',

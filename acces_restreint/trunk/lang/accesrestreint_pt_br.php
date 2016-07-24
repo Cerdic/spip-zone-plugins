@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Acesso aos documentos anexados pelo seu URL',
 	'label_creer_htaccess_non' => 'autorizar a leitura',
 	'label_creer_htaccess_oui' => 'restringir a leitura',
+	'label_titre_zone' => 'Título',
 
 	// M
 	'modifier_zone' => 'Alterar a área',

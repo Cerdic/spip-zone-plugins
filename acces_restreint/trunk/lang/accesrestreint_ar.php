@@ -47,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zone' => 'هذا القسم هو ضمن المنطقة:',
 	'info_rubrique_dans_zones' => 'هذا القسم هو ضمن المناطق:',
 
+	// L
+	'label_titre_zone' => 'الاسم',
+
 	// M
 	'modifier_zone' => 'تعديل المنطقة',
 

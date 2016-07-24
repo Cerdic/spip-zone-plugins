@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_creer_htaccess_non' => 'autourisà la letura',
 	'label_creer_htaccess_oui' => 'prouhibì la letura',
+	'label_titre_zone' => 'Titre',
 
 	// M
 	'modifier_zone' => 'Moudificà la zona',

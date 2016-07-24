@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Zougang op verlinkten Dokumenter iwwert d’Url', # MODIF
 	'label_creer_htaccess_non' => 'Liesen erlaaben',
 	'label_creer_htaccess_oui' => 'Liesen verbidden',
+	'label_titre_zone' => 'Titel',
 
 	// M
 	'modifier_zone' => 'Zone änneren',

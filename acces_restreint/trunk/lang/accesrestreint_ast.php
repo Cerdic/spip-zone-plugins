@@ -44,6 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_zone' => 'Quitar de la estaya',
 	'info_retirer_zones' => 'Quitar de toes les estayes',
 
+	// L
+	'label_titre_zone' => 'Títulu',
+
 	// M
 	'modifier_zone' => 'Iguar la zona',
 

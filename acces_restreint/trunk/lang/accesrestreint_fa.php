@@ -47,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rubrique_dans_zone' => 'اين بخش در اين منطقه قرار دارد:',
 	'info_rubrique_dans_zones' => 'اين بخش در اين مناطق قرار دارد:',
 
+	// L
+	'label_titre_zone' => 'تيتر ',
+
 	// M
 	'modifier_zone' => 'اصلاح منطقه',
 

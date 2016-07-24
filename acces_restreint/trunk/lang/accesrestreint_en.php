@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Access to the attached document by their URL',
 	'label_creer_htaccess_non' => 'allow read',
 	'label_creer_htaccess_oui' => 'forbid the reading',
+	'label_titre_zone' => 'Title',
 
 	// M
 	'modifier_zone' => 'Edit the area',
