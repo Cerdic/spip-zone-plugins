@@ -6,7 +6,7 @@
 	compatibilite="[3.0.5;3.1.*]"
 	logo=""
 	documentation=""
-	schema="1.4.1" 
+	schema="1.4.1"
 >
 
 	<nom>Prix Objets</nom>
@@ -15,16 +15,15 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
-	<utilise nom="shop" compatibilite="[1.2.0;]" /> 	
-	<necessite nom="prix" compatibilite="[0.1.8;]" /> 
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="prix" compatibilite="[0.1.8;]" />
 
-		
-	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" /> 
-	<pipeline nom="declarer_tables_principales" inclure="base/prix_objets.php" /> 
+	<utilise nom="shop" compatibilite="[1.2.0;]" />
+	
+	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/prix_objets.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets.php" />
-	<pipeline nom="affiche_milieu" inclure="prix_objets_pipelines.php" /> 
-	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" /> 
-
+	<pipeline nom="affiche_milieu" inclure="prix_objets_pipelines.php" />
+	<pipeline nom="shop_objets" inclure="prix_objets_pipelines.php" />
 
 </paquet>
