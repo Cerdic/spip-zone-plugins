@@ -2,9 +2,9 @@
 		[(#REM) ---------------------- CONFIGURATION DU SITE -------------------- ]
 		<fieldset>
 			<legend><:autorite:config_site:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,configurer}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:config_site_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -15,7 +15,7 @@
 					</select>
 				</li>
 				#SET{name,configurer_plugin}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:config_plugin_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -26,7 +26,7 @@
 					</select>
 				</li>
 				#SET{name,sauvegarder}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:sauvegarde_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -41,7 +41,7 @@
 					</select>
 				</li>
 				#SET{name,detruire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:effacer_base_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -54,7 +54,7 @@
 					</select>
 				</li>
 				#SET{name,redacteur_mod_article}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label><:rubriques:></label>
 					<p class="explication"><:autorite:interdire_admin:></p>
 					#SET{name,interdire_creer_secteur}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}

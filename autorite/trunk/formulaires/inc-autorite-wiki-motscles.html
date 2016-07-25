@@ -1,9 +1,9 @@
 		[(#REM) ------------------------ ESPACE WIKI MOTS CLEF------------------------ ]
 		<fieldset>
 			<legend><:autorite:espace_wiki_mots_cles:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,espace_wiki_motsclef}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
@@ -11,12 +11,12 @@
 						<label for="#GET{name}"><:autorite:activer_mots_cles:></label>
 					</div>
 				</li>
-				<li class="fieldset" id="espace_wiki_motsclef_qui">
+				<li class="editer fieldset" id="espace_wiki_motsclef_qui">
 					<fieldset>
 					<p><:autorite:espace_wiki_mots_cles_qui:></p>
-					<ul>
+					<ul class="editer-groupe">
 						#SET{name,espace_wiki_motsclef_redacteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:autorite:ouvrir_redacs:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
@@ -32,7 +32,7 @@
 							</select>
 						</li>
 						#SET{name,espace_wiki_motsclef_visiteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:autorite:ouvrir_visiteurs_enregistres:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}
@@ -48,7 +48,7 @@
 							</select>
 						</li>
 						#SET{name,espace_wiki_motsclef_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							<label for="#GET{name}"><:autorite:ouvrir_visiteurs_tous:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]#SET{selected,#CONFIG{autorite/espace_wiki_motsclef_redacteurs,#ARRAY}}

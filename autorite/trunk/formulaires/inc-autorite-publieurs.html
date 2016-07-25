@@ -2,9 +2,9 @@
 		[(#REM) ------------------------ ESPACE PUBLIEUR ------------------------ ]
 		<fieldset>
 			<legend><:autorite:espace_publieur:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{name,espace_publieur}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:espace_publieur_detail:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]#SET{selected,#CONFIG{autorite/espace_publieur,#ARRAY}}
@@ -19,7 +19,7 @@
 				</li>
 
 				#SET{name,espace_publieur_qui}
-				<li class="pleine_largeur editer_#GET{name}" id="#GET{name}">
+				<li class="editer pleine_largeur editer_#GET{name}" id="#GET{name}">
 					<label><:autorite:espace_publieur_qui:></label>
 					#SET{name,espace_publieur_redacteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">

@@ -1,9 +1,9 @@
 [(#REM) ---------------------- CONFIGURATION DES AUTEURS ----------------- ]
 <fieldset>
 	<legend><:autorite:config_auteurs:></legend>
-	<ul>
+	<ul class="editer-groupe">
 		#SET{name,statut_auteur_creation}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:config_auteurs_statut:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -16,7 +16,7 @@
 			</select>
 		</li>
 		#SET{name,statut_auteur_rubrique}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:config_auteurs_rubriques:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -31,7 +31,7 @@
 			</select>
 		</li>
 		#SET{name,statut_ignorer_admins_restreints}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:admin_restreints:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<p class="explication"><:autorite:admins_rubriques:></p>
@@ -46,7 +46,7 @@
 </fieldset>
 <fieldset>
 	<legend><:autorite:publication:></legend>
-	<ul>
+	<ul class="editer-groupe">
 		[(#REM)
 			Publication :
 			1 : webmestre
@@ -57,7 +57,7 @@
 		]
 
 		#SET{name,publierdans}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:publication_qui:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<select name="#GET{name}" class="select" id="#GET{name}">
