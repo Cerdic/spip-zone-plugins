@@ -47,6 +47,9 @@ function formulaires_editer_mailsubscriber_charger_dist(
 		$valeurs['_listes_dispo'] = $v['_listes_dispo'];
 		$valeurs['listes'] = $v['listes'];
 	}
+	else {
+		$valeurs['_listes_dispo'] = mailsubscribers_listes();
+	}
 
 	return $valeurs;
 }
@@ -109,14 +112,16 @@ function formulaires_editer_mailsubscriber_traiter_dist(
 		$id_mailsubscriber = $id;
 	}
 
-	$res = formulaires_editer_objet_traiter('mailsubscriber', $id_mailsubscriber, '', $lier_trad, $retour, $config_fonc,
-		$row, $hidden);
-	$email = sql_getfetsel('email', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($id_mailsubscriber));
-
-	if (!mailsubscribers_test_email_obfusque($email)) {
-		$editer_email_subscription_traiter = charger_fonction('traiter', 'formulaires/editer_email_subscription');
-		$editer_email_subscription_traiter($email);
+	$res = formulaires_editer_objet_traiter('mailsubscriber', $id_mailsubscriber, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	// recuperer l'id cree eventuellement
+	if ($id_mailsubscriber = $res['id_mailsubscriber']) {
+		$email = sql_getfetsel('email', 'spip_mailsubscribers', 'id_mailsubscriber=' . intval($id_mailsubscriber));
+		if (!mailsubscribers_test_email_obfusque($email)) {
+			$editer_email_subscription_traiter = charger_fonction('traiter', 'formulaires/editer_email_subscription');
+			$editer_email_subscription_traiter($email);
+		}
 	}
+
 
 	return $res;
 }

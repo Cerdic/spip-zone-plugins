@@ -67,7 +67,9 @@ function formulaires_editer_email_subscription_traiter_dist($email) {
 	$subscriber = charger_fonction('subscriber', 'newsletter');
 	$infos = $subscriber($email);
 	$remove = false;
-	$add = array_diff($listes, array_keys($infos['subscriptions']));
+	if ($infos['subscriptions']){
+		$add = array_diff($listes, array_keys($infos['subscriptions']));
+	}
 	foreach ($infos['subscriptions'] as $sub) {
 		if (in_array($sub['id'], $listes) AND $sub['status'] == 'off') {
 			$add[] = $sub['id'];

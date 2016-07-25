@@ -72,6 +72,7 @@ function autoriser_mailsubscribinglist_segmenter_dist($faire, $type, $id, $qui, 
 	if (!function_exists('mailsubscriber_declarer_informations_liees')) {
 		include_spip('inc/mailsubscribers');
 	}
+	if (!test_plugin_actif('saisies')) return false;
 	$declaration = mailsubscriber_declarer_informations_liees();
 	if (!$declaration) return false;
 
