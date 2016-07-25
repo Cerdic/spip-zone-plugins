@@ -67,14 +67,15 @@ function formulaires_editer_email_subscription_traiter_dist($email) {
 	$subscriber = charger_fonction('subscriber', 'newsletter');
 	$infos = $subscriber($email);
 	$remove = false;
-	if ($infos['subscriptions']){
-		$add = array_diff($listes, array_keys($infos['subscriptions']));
-	}
-	foreach ($infos['subscriptions'] as $sub) {
-		if (in_array($sub['id'], $listes) AND $sub['status'] == 'off') {
-			$add[] = $sub['id'];
-		} elseif (!in_array($sub['id'], $listes) AND $sub['status'] !== 'off') {
-			$remove[] = $sub['id'];
+	$add = $listes;
+	if ($infos['subscriptions']) {
+		$add = array_diff($add, array_keys($infos['subscriptions']));
+		foreach ($infos['subscriptions'] as $sub) {
+			if (in_array($sub['id'], $listes) AND $sub['status'] == 'off') {
+				$add[] = $sub['id'];
+			} elseif (!in_array($sub['id'], $listes) AND $sub['status'] !== 'off') {
+				$remove[] = $sub['id'];
+			}
 		}
 	}
 	// les ajouts sont directement en valide, sans notification
