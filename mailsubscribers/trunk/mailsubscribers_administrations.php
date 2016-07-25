@@ -482,11 +482,13 @@ function mailsubscribers_importer_listes($listes){
 function mailsubscribers_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_mailsubscribers");
+	sql_drop_table("spip_mailsubscribinglists");
+	sql_drop_table("spip_mailsubscriptions");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions", sql_in("objet", array('mailsubscriber')));
-	sql_delete("spip_versions_fragments", sql_in("objet", array('mailsubscriber')));
-	sql_delete("spip_forum", sql_in("objet", array('mailsubscriber')));
+	sql_delete("spip_versions", sql_in("objet", array('mailsubscriber','mailsubscribinglist')));
+	sql_delete("spip_versions_fragments", sql_in("objet", array('mailsubscriber','mailsubscribinglist')));
+	sql_delete("spip_forum", sql_in("objet", array('mailsubscriber','mailsubscribinglist')));
 
 	effacer_meta('mailsubscribers');
 	effacer_meta($nom_meta_base_version);
