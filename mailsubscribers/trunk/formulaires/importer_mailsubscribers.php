@@ -291,6 +291,7 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 			}
 			if (isset($d['listes'])) {
 				$set['listes'] = explode(',', $d['listes']);
+				$set['listes'] = importer_mailsubscribers_listes($set['listes']);
 			}
 
 			if (!isset($d['statut']) AND isset($options['statut'])) {
@@ -383,3 +384,41 @@ function importer_mailsubscribers_importe($filename, $options = array()) {
 
 	return $res;
 }
+
+/**
+ * Importer les listes
+ * @param array $listes
+ * @return array
+ */
+function importer_mailsubscribers_listes($listes){
+	static $existing;
+
+	if (is_null($existing)){
+		$existing = sql_allfetsel('identifiant','spip_mailsubscribinglists');
+		$existing = array_map('reset',$existing);
+	}
+
+	foreach ($listes as $k=>$liste) {
+		$listes[$k] = $liste = mailsubscribers_normaliser_nom_liste($liste);
+		if (!in_array($liste, $existing)){
+			$statut = 'fermee';
+			$identifiant = $liste;
+			if (!$id = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))) {
+				$ins = array(
+					'titre' => 'Liste ' . $identifiant,
+					'descriptif' => 'Import CSV',
+					'identifiant' => $identifiant,
+					'statut' => $statut,
+					'date' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
+				);
+				$id = sql_insertq('spip_mailsubscribinglists', $ins);
+			}
+			if ($id) {
+				$existing[] = $liste;
+			}
+		}
+	}
+
+	return $listes;
+}
+
