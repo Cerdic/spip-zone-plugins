@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email',
 	'label_file_import' => 'File to import',
 	'label_from_email' => 'Invitation from email',
+	'label_informations_liees' => 'Segmentable information',
 	'label_inscription' => 'Subscription',
 	'label_lang' => 'Language',
 	'label_listes' => 'Lists',
