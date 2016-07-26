@@ -82,7 +82,7 @@ function distance($from, $to, $miles = false) {
 
 /**
  * Afficher proprement une distance
- * 
+ *
  * @param float $distance
  * 		Nombre indiquant une distance
  * @param int $precision
@@ -98,7 +98,7 @@ function distance_en_metres($distance, $precision=2, $format_entree='km') {
 		if ($format_entree == 'm') {
 			$distance = $distance / 1000;
 		}
-		
+
 		// Si c'est supérieur à 1, on reste en kilomètres
 		if ($distance > 1) {
 			$unite = 'km';
@@ -106,10 +106,10 @@ function distance_en_metres($distance, $precision=2, $format_entree='km') {
 		elseif (($distance = $distance*1000) > 1) {
 			$unite = 'm';
 		}
-		
+
 		$distance = number_format($distance, $precision, ',', '') . ' ' . $unite;
 	}
-	
+
 	return $distance;
 }
 
@@ -464,10 +464,11 @@ function gis_icon_properties($img = '') {
 		 */
 		if ($w == $h) {
 			$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2, $h/2)).',';
+			$props .= "\n\t\t\t\"popup_anchor\": ". json_encode(array(0,0));
 		} else {
 			$props .= "\n\t\t\t\"icon_anchor\": ". json_encode(array($w/2, $h)).',';
+			$props .= "\n\t\t\t\"popup_anchor\": ". json_encode(array(1, -round($h/1.2, 2)));
 		}
-		$props .= "\n\t\t\t\"popup_anchor\": ". json_encode(array(1, -round($h/1.2, 2)));
 	}
 
 	if ($shadow = find_in_path('images/marker_defaut_shadow.png')) {
