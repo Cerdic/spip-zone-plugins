@@ -31,10 +31,10 @@ function extracteur_preparer_insertion($item){
 		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
 
 	if($item['auteurs'])
-		$texte .= "\n\n@@AUTEUR\n\n" . trim($item['auteurs']) . "\n\n" ;
+		$texte .= "<ins class='auteurs'>" . trim($item['auteurs']) . "</ins>\n\n" ;
 
 	if($item['affiliations'])
-		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['affiliations']) . "\n\n" ;
+		$texte .= "<ins class='signature'>" . trim($item['affiliations']) . "</ins>\n\n" ;
 
 	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
 	
