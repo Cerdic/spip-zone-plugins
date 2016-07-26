@@ -44,7 +44,7 @@ $(document).ready(function () {
 			resized = map1;
 			map1.on('viewreset',function(){
 				map1.invalidateSize();
-				informatifs.forEach(function(e){console.log(e);e.label._updatePosition();})
+				informatifs.forEach(function(e){e.label._updatePosition();})
 			});
 		}
 		resizemap(resized);
