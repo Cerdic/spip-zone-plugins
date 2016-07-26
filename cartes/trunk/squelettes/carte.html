@@ -1,10 +1,10 @@
 <BOUCLE_principale(CARTES){id_carte}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 [(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
-]<!--[if lt IE 7 ]> <html dir="#LANG" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[([(#LANG|lang_dir)])][ (#LANG)] no-js ie ie6"> <![endif]-->
-<!--[if IE 7 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[([(#LANG|lang_dir)])][ (#LANG)] no-js ie ie7"> <![endif]-->
-<!--[if IE 8 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[([(#LANG|lang_dir)])][ (#LANG)] no-js ie ie8"> <![endif]-->
-<!--[if IE 9 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[([(#LANG|lang_dir)])][ (#LANG)] no-js ie ie9"> <![endif]-->
+]<!--[if lt IE 7 ]> <html dir="#LANG" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG|lang_dir)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG|lang_dir)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG|lang_dir)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG|lang_dir)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="[(#LANG|lang_dir)]" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG|lang_dir)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
 	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
@@ -12,7 +12,7 @@
 	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
 	[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
 	<INCLURE{fond=inclure/head_map} />
-	[(#SET{style,[css_carte/(#STYLE_CARTE|sinon{carte.css})]})]
+	[(#SET{style,[(#CHEMIN{[css_carte/(#STYLE_CARTE|sinon{carte.css})]})]})]
 	[(#SET{js,[js_carte/(#STYLE_CARTE|sinon{carte.js})]})]
 	[<script type="text/javascript" src="(#CHEMIN{#GET{js}})"></script>]
 	[(#SET{geometry_map,[(#GEOMETRY_MAP|wkt_to_json|trim)]})]
@@ -29,7 +29,7 @@
 		var geojson_bounds,bounds;
 	</script>
 	</BOUCLE_si_bounds>
-	[<link rel="stylesheet" href="(#CHEMIN{#GET{style}}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#GET{style}|direction_css{[(#LANG|lang_dir)]})" type="text/css" />]
 </head>
 
 <body class="pas_surlignable page_carte">
@@ -73,6 +73,8 @@
 			zoom=#GET{zoom_defaut},
 			minZoom=#GET{minzoom},
 			maxZoom=#GET{maxzoom},
+			latitude=#LAT,
+			longitude=#LON,
 			fullscreen=#GET{fullscreen},
 			overview=#GET{overview},
 			scale=#GET{scale},
