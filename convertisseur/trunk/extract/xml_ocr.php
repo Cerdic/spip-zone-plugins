@@ -87,7 +87,7 @@ function convertir_xml_ocr($u) {
 		}
 		$l = strtolower($t) . "s" ;
 		$aa = array_unique($aa);
-		$item[$l] = join(", " , $aa) ;
+		$item[$l] = join("@@" , $aa) ;
 	}	
 
 	# notes
