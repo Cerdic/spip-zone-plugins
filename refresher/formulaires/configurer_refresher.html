@@ -1,0 +1,190 @@
+<form method="post" enctype="multipart/form-data" action="#ENV{action}">
+
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<div>    
+    <br>
+    <strong><:refresher:invalideur_spip:></strong>
+    <br><br>
+    <?php  
+      if(!extension_loaded('curl')){
+  			echo "<font style='color:red;'><:refresher:warning_curl:></font><br><br>";
+			}
+    ?>
+    <input type="radio" name="use_refresher_spip" value="no" [(#ENV{use_refresher_spip}|!={yes}?{'checked'})]> <:refresher:no:><br>
+    <input type="radio" name="use_refresher_spip" value="yes" [(#ENV{use_refresher_spip}|=={yes}?{'checked'})]> <:refresher:yes:><br><br>
+    <hr><br>
+    
+    <strong><:refresher:invalideur_cdn:></strong>
+    <br><br>
+    <?php  
+	      if(!extension_loaded('curl')){
+	  			echo "<font style='color:red;'><:refresher:warning_curl:></font>";
+				}
+	    ?>
+    <br><br>
+    <input type="radio" name="use_invalideur_cdn" value="no" onclick="$('#akamai-div, #edgecast-div', #cloudflare-div').hide();" [(#ENV{use_invalideur_cdn}|!={edgecast}|et{[(#ENV{use_invalideur_cdn}|!={akamai})]}|et{[(#ENV{use_invalideur_cdn}|!={cloudflare})]} ? {'checked', ''})]> <:refresher:no_cdn:><br>
+    <input type="radio" name="use_invalideur_cdn" value="akamai" onclick="$('#edgecast-div').hide();$('#cloudflare-div').hide();$('#akamai-div').show();" [(#ENV{use_invalideur_cdn}|=={akamai} ? {'checked', ''})]> <:refresher:akamai:><br>
+    <input type="radio" name="use_invalideur_cdn" value="cloudflare" onclick="$('#edgecast-div').hide();$('#akamai-div').hide();$('#cloudflare-div').show();" [(#ENV{use_invalideur_cdn}|=={cloudflare} ? {'checked', ''})]> <:refresher:cloudflare:><br>
+    <input type="radio" name="use_invalideur_cdn" value="edgecast" onclick="$('#akamai-div').hide();$('#cloudflare-div').hide();$('#edgecast-div').show();" [(#ENV{use_invalideur_cdn}|=={edgecast} ? {'checked', ''})]> <:refresher:edgecast:><br><br>
+    
+    <div id="cloudflare-div" [(#ENV{use_invalideur_cdn}|!={cloudflare} ? {'style="display:none;"', ''})]>
+    	<hr><br>
+    	<strong><:refresher:cloudflare_info:></strong>
+	    <br><br>
+    	<label for="cloudflare_email" style="width:150px;display:block;float:left;"><:refresher:email:>:</label><input type="text" name="cloudflare_email" id="cloudflare_email" size="10" value="[(#ENV{cloudflare_email})]"><br><br>
+    	<label for="cloudflare_token" style="width:150px;display:block;float:left;"><:refresher:token:>:</label><input type="text" name="cloudflare_token" id="cloudflare_token" size="30" value="[(#ENV{cloudflare_token})]"><br><br>
+    	<label for="cloudflare_zone_id" style="width:150px;display:block;float:left;"><:refresher:zone_id:>:</label><input type="text" name="cloudflare_zone_id" id="cloudflare_zone_id" size="30" value="[(#ENV{cloudflare_zone_id})]"><br><br>
+    </div>
+    <div id="akamai-div" [(#ENV{use_invalideur_cdn}|!={akamai} ? {'style="display:none;"', ''})]>
+    	<hr><br>
+    	<strong><:refresher:akamai_info:></strong>
+    	<br><br>
+    	<label for="cdn_akamai_user" style="width:150px;display:block;float:left;"><:refresher:user:>:</label><input type="text" name="akamai_user" id="akamai_user" size="30" value="[(#ENV{akamai_user})]"><br><br>
+    	<label for="cdn_akamai_password" style="width:150px;display:block;float:left;"><:refresher:password:>:</label><input type="text" name="akamai_password" id="akamai_password" size="30" value="[(#ENV{akamai_password})]"><br><br>
+    </div>
+    <div id="edgecast-div" [(#ENV{use_invalideur_cdn}|!={edgecast} ? {'style="display:none;"', ''})]>
+	    <hr><br>
+    	<strong><:refresher:edgecast_info:></strong>
+	    <br><br>
+    	<label for="cdn_edgecast_account" style="width:150px;display:block;float:left;"><:refresher:account_number:>:</label><input type="text" name="edgecast_account" id="edgecast_account" size="10" value="[(#ENV{edgecast_account})]"><br><br>
+    	<label for="cdn_edgecast_token" style="width:150px;display:block;float:left;"><:refresher:token:>:</label><input type="text" name="edgecast_token" id="edgecast_token" size="30" value="[(#ENV{edgecast_token})]"><br><br>	
+    </div>
+    <hr><br>
+    
+    <strong><:refresher:groupes_mots_liste:></strong>
+    <br><br>
+    <:refresher:please_select_groups:>
+    <br><br>
+    <ul style="list-style: none outside none;margin: 20px 0;padding: 0;width: 100%;-moz-column-count:2;-webkit-column-count:2;column-count:2;-webkit-column-gap:20px;-moz-column-gap:20px;column-gap:20px;">
+      <BOUCLE_groupes(GROUPES_MOTS){par titre}>
+      	<li>
+      		<input type="checkbox" name="refresher_groupes_mots[[(#ID_GROUPE)]]" [(#ENV{refresher_groupes_mots}|table_valeur{#ID_GROUPE}|oui) checked]> [(#TITRE|substr{0,20})]
+      	</li>
+      </BOUCLE_groupes>
+    </ul><br><br>
+    
+	  <hr><br>   
+    <strong><:refresher:who_recalcul:></strong>
+    <br><br>
+    <input type="radio" name="who_recalculates" value="all" [(#ENV{who_recalculates}|=={all} ? {'checked', ''})] [(#ENV{who_recalculates}|=={''}|?{'checked'})]> <:refresher:everyone:><br>
+    <input type="radio" name="who_recalculates" value="authors" [(#ENV{who_recalculates}|=={authors} ? {'checked', ''})]> <:refresher:authors_only:><br>
+    <input type="radio" name="who_recalculates" value="webmasters" [(#ENV{who_recalculates}|=={webmasters} ? {'checked', ''})]> <:refresher:webmasters_only:><br>
+    <input type="radio" name="who_recalculates" value="none" [(#ENV{who_recalculates}|=={none} ? {'checked', ''})]> <:refresher:no_one:><br><br>
+    
+    <hr><br> 
+    <strong><:refresher:pause_question:></strong>
+    <br><br>
+    <:refresher:pause_explanation:>
+    <br><br>
+    <input type="text" name="refresher_delay" size="5" value="[(#ENV{refresher_delay})]"> <:refresher:seconds:><br><br>
+    <br><br>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:article_publication:>&nbsp;</strong>
+	    </legend>
+	    <br>
+	    <:refresher:article_publication_explication:>
+      <br><br>
+      <input type="radio" name="article_instituer_rubrique" value="branch" [(#ENV{article_instituer_rubrique}|=={branch} ? {'checked', ''})]> <:refresher:rubrique_hierarchie:><br>
+      <input type="radio" name="article_instituer_rubrique" value="parent" [(#ENV{article_instituer_rubrique}|=={parent} ? {'checked', ''})]> <:refresher:rubrique_parent:><br>
+      <input type="radio" name="article_instituer_rubrique" value="none" [(#ENV{article_instituer_rubrique}|=={none} ? {'checked', ''})] [(#ENV{article_instituer_rubrique}|=={''}|?{'checked'})]> <:refresher:rubrique_rien:><br>
+      <br><br>
+      <input type="checkbox" name="article_instituer_homepage" [(#ENV{article_instituer_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br>
+      <input type="checkbox" name="article_instituer_mots" [(#ENV{article_instituer_mots}|=={on}|oui) checked]> <:refresher:recalcul_mots:><br>
+      <input type="checkbox" name="article_instituer_auteurs" [(#ENV{article_instituer_auteurs}|=={on}|oui) checked]> <:refresher:recalcul_auteurs:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:article_modification:>&nbsp;</strong>
+	    </legend>
+      <br>
+	    <:refresher:article_modification_explication:>
+      <br><br>
+      <input type="radio" name="article_modifier_rubrique" value="branch" [(#ENV{article_modifier_rubrique}|=={branch} ? {'checked', ''})]> <:refresher:rubrique_hierarchie:><br>
+      <input type="radio" name="article_modifier_rubrique" value="parent" [(#ENV{article_modifier_rubrique}|=={parent} ? {'checked', ''})]> <:refresher:rubrique_parent:><br>
+      <input type="radio" name="article_modifier_rubrique" value="none" [(#ENV{article_modifier_rubrique}|=={none} ? {'checked', ''})] [(#ENV{article_modifier_rubrique}|=={''}|?{'checked'})]> <:refresher:rubrique_rien:><br>
+      <br><br>
+      <input type="checkbox" name="article_modifier_article" [(#ENV{article_modifier_article}|=={on}|oui) checked]> <:refresher:recalcul_article:><br>
+      <input type="checkbox" name="article_modifier_homepage" [(#ENV{article_modifier_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br>
+      <input type="checkbox" name="article_modifier_mots" [(#ENV{article_modifier_mots}|=={on}|oui) checked]> <:refresher:recalcul_mots:><br>
+      <input type="checkbox" name="article_modifier_auteurs" [(#ENV{article_modifier_auteurs}|=={on}|oui) checked]> <:refresher:recalcul_auteurs:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:forum_post:>&nbsp;</strong>
+	    </legend>
+      <br>
+      <input type="checkbox" name="forum_insert_article" [(#ENV{forum_insert_article}|=={on}|oui) checked]> <:refresher:recalcul_article_instant:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:document_article:>&nbsp;</strong>
+	    </legend>
+      <br>
+	    <:refresher:document_article_explication:>
+      <br><br>
+      <input type="radio" name="document_article_rubrique" value="branch" [(#ENV{document_article_rubrique}|=={branch} ? {'checked', ''})]> <:refresher:rubrique_hierarchie:><br>
+      <input type="radio" name="document_article_rubrique" value="parent" [(#ENV{document_article_rubrique}|=={parent} ? {'checked', ''})]> <:refresher:rubrique_parent:><br>
+      <input type="radio" name="document_article_rubrique" value="none" [(#ENV{document_article_rubrique}|=={none} ? {'checked', ''})] [(#ENV{document_article_rubrique}|=={''}|?{'checked'})]> <:refresher:rubrique_rien:><br>
+      <br><br>
+      <input type="checkbox" name="document_article_article" [(#ENV{document_article_article}|=={on}|oui) checked]> <:refresher:recalcul_article:><br>
+      <input type="checkbox" name="document_article_documents" [(#ENV{document_article_documents}|=={on}|oui) checked]> <:refresher:recalcul_documents:><br>
+      <input type="checkbox" name="document_article_homepage" [(#ENV{document_article_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br>
+      <input type="checkbox" name="document_article_mots" [(#ENV{document_article_mots}|=={on}|oui) checked]> <:refresher:recalcul_mots2:><br>
+      <input type="checkbox" name="document_article_auteurs" [(#ENV{document_article_auteurs}|=={on}|oui) checked]> <:refresher:recalcul_auteurs:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:document_modification:>&nbsp;</strong>
+	    </legend>
+      <br>
+      <input type="checkbox" name="document_modifier_document" [(#ENV{document_modifier_document}|=={on}|oui) checked]> <:refresher:recalcul_home:><br>
+      <input type="checkbox" name="document_modifier_article" [(#ENV{document_modifier_article}|=={on}|oui) checked]> <:refresher:recalcul_article:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:mot_article:>&nbsp;</strong>
+	    </legend>
+      <br>
+	    <:refresher:mot_article_explication:>
+      <br><br>
+      <input type="radio" name="mot_article_rubrique" value="branch" [(#ENV{mot_article_rubrique}|=={branch} ? {'checked', ''})]> <:refresher:rubrique_hierarchie:><br>
+      <input type="radio" name="mot_article_rubrique" value="parent" [(#ENV{mot_article_rubrique}|=={parent} ? {'checked', ''})]> <:refresher:rubrique_parent:><br>
+      <input type="radio" name="mot_article_rubrique" value="none" [(#ENV{mot_article_rubrique}|=={none} ? {'checked', ''})] [(#ENV{mot_article_rubrique}|=={''}|?{'checked'})]> <:refresher:rubrique_rien:><br>
+      <br><br>
+      <input type="checkbox" name="mot_article_article" [(#ENV{mot_article_article}|=={on}|oui) checked]> <:refresher:recalcul_article:><br>
+      <input type="checkbox" name="mot_article_homepage" [(#ENV{mot_article_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br>
+      <input type="checkbox" name="mot_article_mot" [(#ENV{mot_article_mot}|=={on}|oui) checked]> <:refresher:recalcul_mot:><br>
+      <input type="checkbox" name="mot_article_auteurs" [(#ENV{mot_article_auteurs}|=={on}|oui) checked]> <:refresher:recalcul_auteurs:><br><br>
+		</fieldset>
+		
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:mot_modification:>&nbsp;</strong>
+	    </legend>
+      <br>
+      <input type="checkbox" name="mot_modifier_mot" [(#ENV{mot_modifier_mot}|=={on}|oui) checked]> <:refresher:recalcul_mot:><br>
+      <input type="checkbox" name="mot_modifier_homepage" [(#ENV{mot_modifier_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br><br>
+		</fieldset>
+			
+		<fieldset style="border: 1px solid;padding:10px;">
+	    <legend>
+	        <strong>&nbsp;<:refresher:rubrique_modification:>&nbsp;</strong>
+	    </legend>
+      <br>
+      <input type="checkbox" name="rubrique_modifier_rubrique" [(#ENV{rubrique_modifier_rubrique}|=={on}|oui) checked]> <:refresher:recalcul_rubrique:><br>
+      <input type="checkbox" name="rubrique_modifier_homepage" [(#ENV{rubrique_modifier_homepage}|=={on}|oui) checked]> <:refresher:recalcul_home:><br><br>
+		</fieldset>
+		
+    <div>
+        <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+    </div>
+</div>
+</form>

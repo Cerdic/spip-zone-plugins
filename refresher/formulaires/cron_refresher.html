@@ -1,0 +1,39 @@
+
+<p>
+	<:refresher:refresher_cron_explanation:>
+</p>
+<br>
+</B_refresher_cron>
+<h3><:refresher:refresher_cron_list_title:></h3>
+<form method="post" enctype="multipart/form-data" action="/spip.php">
+	<input type="hidden" name="action" value="refresher" />
+	<input type="hidden" name="refresher_action" value="remove_url_cron" />
+<ul style="margin: 20px 0;">
+<BOUCLE_refresher_cron(refresher_cron){par frequence}> 
+	<li style="height:35px;"><span style="width:75%;display:block;float:left;"><input type="checkbox" name="urls[]" value="#URL">&nbsp;#URL</span><span style="text-align:right;width:25%;display:block;float:left;"><:refresher:every:> #FREQUENCE min</span></li>
+</BOUCLE_refresher_cron>
+</ul>
+#TOTAL_BOUCLE <:refresher:count_cron_jobs:><br><br>
+<input type="submit" value='<:refresher:remove_selected_cron_jobs:>' />
+</form>
+</B_refresher_cron>
+<br><:refresher:refresher_cron_is_empty:>
+<//B_refresher_cron>
+<br><br><br>
+
+<fieldset style="border: 1px solid;padding:10px;">
+  <legend>
+      <strong>&nbsp;<:refresher:add_cron_job:>&nbsp;</strong>
+  </legend>
+  <p><:refresher:add_cron_explanation:></p>
+  <form method="post" enctype="multipart/form-data" action="/spip.php">
+		<input type="hidden" name="action" value="refresher" />
+		<input type="hidden" name="refresher_action" value="add_url_cron" />
+		<label><:refresher:full_url:>: </label><input type="text" name="url" size="38" value="">
+		<br><br>
+		<label><:refresher:frequence:>: </label><input type="text" name="frequence" size="6" value=""> <:refresher:minutes:>
+		<br><br>
+		<input type="submit" value='<:refresher:add_url:>' />
+	</form>
+	<br><br>
+</fieldset>

@@ -1,0 +1,154 @@
+<fieldset style="border: 1px solid;padding:10px;">
+  <legend>
+      <strong>&nbsp;<:refresher:empty_queue:>&nbsp;</strong>
+  </legend>
+  <p>
+		<:refresher:empty_queue_explanation:>
+	</p>
+	<br>
+	<BOUCLE_count_invalideur(spip_jobs){fonction=refresh_url}> </BOUCLE_count_invalideur>
+		<:refresher:count_rows1:> #TOTAL_BOUCLE <:refresher:count_rows2:>
+		<br/><br/>
+	  <form method="post" enctype="multipart/form-data" action="/spip.php">
+			<input type="hidden" name="action" value="refresher" />
+			<input type="hidden" name="refresher_action" value="vider_refresher" />
+			<input type="submit" value='<:refresher:empty_table:>' />
+		</form>
+	</B_count_invalideur>
+	<:refresher:queue_is_empty:>
+	<//B_count_invalideur>
+	<br><br>
+</fieldset>
+
+<fieldset style="border: 1px solid;padding:10px;">
+  <legend>
+      <strong>&nbsp;<:refresher:delete_spip_cache_by_name:>&nbsp;</strong>
+  </legend>
+  <p>
+		<:refresher:delete_spip_cache_by_name_explanation:>
+		<br><br><:refresher:examples:>
+	</p>
+	<br>
+  <form method="post" enctype="multipart/form-data" action="/spip.php">
+		
+		<input type="hidden" name="action" value="refresher" />
+		<input type="hidden" name="refresher_action" value="remove_spip_cache" />
+		<label><:refresher:file:>: </label><input type="text" name="file_to_delete" size="40" value="">
+		<br><br>
+		<input type="submit" value='<:refresher:remove_files2:>' />
+	</form>
+	<br><br>
+</fieldset>
+
+<fieldset style="border: 1px solid;padding:10px;">
+  <legend>
+      <strong>&nbsp;<:refresher:delete_spip_cache_by_date:>&nbsp;</strong>
+  </legend>
+  <p>
+		<:refresher:delete_spip_cache_by_date_explanation:> [(#DATE|substr{0,10})]
+	</p>
+	<br>
+	<form method="post" enctype="multipart/form-data" action="/spip.php">
+		<input type="hidden" name="action" value="refresher" />
+		<input type="hidden" name="refresher_action" value="remove_spip_cache_period" />
+		<:refresher:from:>: <input type="text" class="text date" name="date_jour_from" id="date_jour_from" value="[(#DATE|substr{0,10})]" size="12"/>
+		<input type="text" class="text heure time" name="date_heure_from" id="date_heure_from" value="00:00" size="5"/>
+		<:refresher:to:>: <input type="text" class="text date" name="date_jour_to" id="date_jour_to" value="[(#DATE|substr{0,10})]" size="12"/>
+		<input type="text" class="text heure time" name="date_heure_to" id="date_heure_to" value="00:00" size="5"/>
+		<br><br>
+		<input type="submit" value='<:refresher:remove_files:>' />
+	</form>
+	<script type='text/javascript'>/*<![CDATA[*/
+		function date_picker_options(){
+			return {
+				buttonText: 'Show the calendar',
+				buttonImage: '../plugins/refresher/img_pack/calendrier-16.png',
+				buttonImageOnly: true,
+				closeText: 'Close',
+				prevText: 'previous',
+				nextText: 'next',
+				currentText: 'today',
+				closeText: 'Close',
+				monthNames: [
+					'January','February','March','April','May','June',
+					'July','August','September','October','November','December'],
+				monthNamesShort: [
+					'Jan','Feb','Mar','Apr','May','Jun',
+					'Jul','Aug','Sep','Oct','Nov','Dec'],
+				dayNames: [
+					'Sunday','Monday','Tuesday','Wednesday',
+					'Thursday','Friday','Saturday'],
+				dayNamesShort: [
+					'Sun.','Mon.','Tue.','Wed.',
+					'Thu.','Fri.','Sat.'],
+				dayNamesMin: [
+					'S.','M.','T.','W.',
+					'T.','F.','S.'],
+				dateFormat: 'yy-mm-dd',
+				firstDay: 1,
+				isRTL: false,
+				changeMonth: true,
+				changeYear: true,
+				showOtherMonths: true,
+				selectOtherMonths: true
+			};
+		}
+		function date_picker_init(){
+			jQuery('input.date').not('.datePicker')
+				.addClass('datePicker').each(function(){
+					var options = {showOn: 'button'};
+					if (jQuery(this).attr('data-startDate'))
+						options.minDate = jQuery(this).attr('data-startDate');
+					if (jQuery(this).attr('data-endDate'))
+						options.maxDate = jQuery(this).attr('data-endDate');
+					jQuery(this)
+						.datepicker(jQuery.extend(date_picker_options(),options))
+						.trigger('datePickerLoaded');
+				});
+			jQuery("input.heure").not('.timePicker').addClass('timePicker').timePicker({step:30});
+		}
+		var date_picker_loading;
+		if (window.jQuery){
+			jQuery(function(){
+				if (jQuery('input.date,input.heure').length && !date_picker_loading){
+					date_picker_loading = true; // inutile de loader deux fois
+					jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}').done(function(){
+						date_picker_init();
+						onAjaxLoad(date_picker_init);
+					});
+				}
+			});
+		}
+		/*]]>*/</script>
+		<style type="text/css">
+		div.time-picker{position:absolute;height:200px;width:4em;overflow:auto;background:#fff;border:1px solid #000;z-index:99998}
+		div.time-picker-12hours{width:6em}
+		div.time-picker ul{list-style-type:none;margin:0;padding:0}
+		div.time-picker li{padding:1px;cursor:pointer}
+		div.time-picker li.selected{background:#316AC5;color:#fff}
+		img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; }
+		div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
+		.formulaire_spip input.date {width:9em;padding-right:25px;}
+		.formulaire_spip input.heure {width:7em;}
+		</style>
+		<br><br>
+</fieldset>
+
+<fieldset style="border: 1px solid;padding:10px;">
+  <legend>
+      <strong>&nbsp;<:refresher:rafraichir_url_manuellement:>&nbsp;</strong>
+  </legend>
+  <p>
+		<:refresher:rafraichir_url_manuellement_explication:>
+	</p>
+	<br>
+  <form method="post" enctype="multipart/form-data" action="/spip.php">
+		
+		<input type="hidden" name="action" value="refresher" />
+		<input type="hidden" name="refresher_action" value="delete_cache_cdn" />
+		<label>URL: </label><input type="text" name="url_to_delete" size="50" value="">
+		<br><br>
+		<input type="submit" value='<:refresher:delete_on_cdn:>' />
+	</form>
+	<br><br>
+</fieldset>

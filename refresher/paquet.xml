@@ -1,0 +1,18 @@
+<paquet
+	prefix="refresher"
+	categorie="outil"
+	version="1.4.0"
+	schema="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.*]"
+	logo="img_pack/refresher.png"
+	documentation=""
+>	
+	<nom>refresher</nom>
+	<auteur>Benoit Aubert</auteur>
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/refresher.php" />
+	<pipeline nom="taches_generales_cron" inclure="refresher_pipelines.php" />
+	<pipeline nom="post_edition" inclure="refresher_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="refresher_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="refresher_pipelines.php" />
+</paquet>
