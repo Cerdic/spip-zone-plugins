@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/offres, env, ajax, sinon=<:offre:info_aucun_offre:>}>
+
+[(#AUTORISER{creer,offre})
+	[(#URL_ECRIRE{offre_edit,new=oui}|icone_verticale{<:offre:icone_creer_offre:>,offre,new,right})]
+]

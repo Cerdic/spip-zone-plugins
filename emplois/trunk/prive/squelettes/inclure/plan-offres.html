@@ -1,0 +1,40 @@
+<BOUCLE_nb_items(OFFRES)
+	{id_rubrique}
+	{statut == .*}{statut ?} 
+	{pagination 1}>
+	#SET{total,#GRAND_TOTAL}
+	#SET{lister,#PLAN_AFFICHER_LISTE}
+</BOUCLE_nb_items>
+
+[(#ENV{conteneur}|=={non}|non)
+	<ul class="menu-items offres">
+		<li id="offres-rubrique-#ID_RUBRIQUE"
+			class="item group[ (#GET{lister}|non)jstree-closed]"
+			data-jstree='{"type":"box_offre"}' data-objet="offre">
+			<strong>[(#GET{total}|objet_afficher_nb{offre})]</strong>
+]
+
+			<B_items>
+				<ul class="menu-items offres">
+			<BOUCLE_items(OFFRES)
+				{id_rubrique}
+				{par titre}
+				{statut == .*}{statut ?} 
+				{si #GET{lister}}
+				>
+				<li id="offre-#ID_OFFRE" class="item" data-jstree='{"type":"offre"}' data-objet="offre">
+					<a href="[(#ID_OFFRE|generer_url_entite{offre})]"
+						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+						title="[(#VAL{offre}|objet_info{texte_objet}|_T) #ID_OFFRE]">
+						 [(#STATUT|puce_statut{offre}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]
+					</a>
+				</li>
+			</BOUCLE_items>
+			</ul>
+			</B_items>
+
+[(#ENV{conteneur}|=={non}|non)
+		</li>
+	</ul>
+]
+</B_nb_items>

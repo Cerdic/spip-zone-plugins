@@ -1,0 +1,49 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_cv'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_cv" value="#ENV{id_cv}" />
+		<input type="hidden" name="id_auteur" value="#SESSION{id_auteur}" />
+		<input type="hidden" name="nom" value="#SESSION{nom}" />
+		<input type="hidden" name="date_debut" value="#ENV{date_debut,#DATE}" />
+
+		<div class="editer-groupe">
+
+			[(#REM|test_espace_prive|oui)
+			<div class="editer editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+				][<p class='explication'>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:emplois:entree_prenom_nom:>,<:emplois:entree_prenom_nom2:>})</p>]
+				<input type='text' class='text' name='nom' id='nom' placeholder="<:emplois:entree_prenom_nom:>" value="[(#ENV**{nom})]">
+			</div>
+			]
+
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+				<!--extra-->
+
+			[(#REM|test_espace_prive|non)
+				<INCLURE{fond=formulaires/inc-pdf_joint,env, nom_input=cv_pdf, type_objet=cv, id_document=#ENV{id_document_cv}, id=#ENV{id_cv},ajax=pdf_upload}>
+				
+				[(#REM) Piege a robots spammeurs ]
+				<p style="display: none;">
+					<label for="nobot"><:antispam_champ_vide:></label>
+					<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+				</p>
+
+			]
+
+		</div>
+		
+		[(#REM|test_espace_prive|oui)
+			<p class="boutons"><button type="submit" class="submit boutons"><:bouton_enregistrer:></button></p>
+		]
+		[(#REM|test_espace_prive|non)
+			<div class="m-top-16"><input type="submit" class="submit btn btn-bleu" value="<:bouton_enregistrer:>" /></div>
+		]
+
+	</div></form>
+	]
+</div>

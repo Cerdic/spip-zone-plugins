@@ -1,0 +1,40 @@
+<BOUCLE_nb_items(CVS)
+	{id_rubrique}
+	{statut == .*}{statut ?} 
+	{pagination 1}>
+	#SET{total,#GRAND_TOTAL}
+	#SET{lister,#PLAN_AFFICHER_LISTE}
+</BOUCLE_nb_items>
+
+[(#ENV{conteneur}|=={non}|non)
+	<ul class="menu-items cvs">
+		<li id="cvs-rubrique-#ID_RUBRIQUE"
+			class="item group[ (#GET{lister}|non)jstree-closed]"
+			data-jstree='{"type":"box_cv"}' data-objet="cv">
+			<strong>[(#GET{total}|objet_afficher_nb{cv})]</strong>
+]
+
+			<B_items>
+				<ul class="menu-items cvs">
+			<BOUCLE_items(CVS)
+				{id_rubrique}
+				{par nom}
+				{statut == .*}{statut ?} 
+				{si #GET{lister}}
+				>
+				<li id="cv-#ID_CV" class="item" data-jstree='{"type":"cv"}' data-objet="cv">
+					<a href="[(#ID_CV|generer_url_entite{cv})]"
+						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+						title="[(#VAL{cv}|objet_info{texte_objet}|_T) #ID_CV]">
+						 [(#STATUT|puce_statut{cv}) ][(#NOM|couper{80}|sinon{<:info_sans_titre:>})]
+					</a>
+				</li>
+			</BOUCLE_items>
+			</ul>
+			</B_items>
+
+[(#ENV{conteneur}|=={non}|non)
+		</li>
+	</ul>
+]
+</B_nb_items>
