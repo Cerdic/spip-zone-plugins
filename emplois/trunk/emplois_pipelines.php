@@ -172,16 +172,15 @@ function emplois_ajouter_menus($flux) {
  * @return string       Données du pipeline
 **/
 function emplois_post_insertion($flux) {
-	
+	$email_webmaster = lire_config('email_webmaster');
 	if ($flux['args']['table'] == 'spip_offres' AND $flux['data']['statut'] =='prepa') {
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 
-		$email_to = "nils.gouisset@techxv.org, marion.pelissie@techxv.org";
-		$email_from = "infos@techxv.org";
+		$email_to = $email_webmaster;
 		$sujet = "Nouveau dépot Offre Emploi";
 		$message = "une nouvelle offre d'emploi vient d'être posté sur le site Tech XV";
 
-		$send = $envoyer_mail($email_to,$sujet,$message,$email_from);
+		$send = $envoyer_mail($email_to,$sujet,$message);
 	}
 
 }
