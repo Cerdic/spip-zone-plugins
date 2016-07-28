@@ -103,5 +103,7 @@ function cartes_declarer_tables_objets_sql($tables) {
 		'texte_changer_statut' => 'carte:texte_changer_statut_carte',
 	);
 
+	$tables['spip_gis']['roles_titres']['label_nohide'] = 'carte:role_label_nohide';
+	$tables['spip_gis']['roles_objets']['cartes']['choix'][] = 'label_nohide';
 	return $tables;
 }

@@ -264,6 +264,15 @@ body.page_carte {
 	font-family: "noto_kufi", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
+.leaflet-label {
+	font-family: "noto_kufi", "Helvetica Neue", Arial, Helvetica, sans-serif;
+	border-width:1px;
+}
+
+.leaflet-label:hover {
+	color:#fff;
+	background:rgba(0,0,0,.8);
+}
 .leaflet-label.informatif{
 	background:none;
 	border:none;
@@ -279,4 +288,8 @@ body.page_carte {
 .leaflet-label:before, .leaflet-label:after,
 .leaflet-label.informatif:before, .leaflet-label.informatif:after{
 	content:none;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+	padding-right:4px;
 }

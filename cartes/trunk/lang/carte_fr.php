@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_carte' => 'Retirer cette carte',
 	'retirer_tous_liens_cartes' => 'Retirer toutes les cartes',
+	'role_label_nohide' => 'Label toujours visible',
 
 	// S
 	'supprimer_carte' => 'Supprimer cette carte',

@@ -1,4 +1,4 @@
-		<BOUCLE_art(CARTES){gis}{id_carte ?}{0, #ENV{limit}}{","}>
+		<BOUCLE_art(CARTES){gis}{id_carte ?}{0, #ENV{limit}}{","}>#SET{id_gis,#ID_GIS}
 		{"type": "Feature",
 		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
 		"id":"#ID_GIS",
@@ -6,6 +6,6 @@
 			"title":[(#URL_CARTE|lien_ou_expose{[(#TITRE_GIS*|sinon{#TITRE*}|extraire_multi|supprimer_numero)],#ID_CARTE|=={#ENV{id_carte,#ENV{id_objet}}}}|json_encode)],
 			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
 			(#LOGO_GIS|gis_icon_properties)][,
-			"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})][,
-			"role": (#ROLE|explode{','}|json_encode)]
+			"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})]<B_roles>,
+			"role": [<BOUCLE_roles(gis_liens){id_gis=#GET{id_gis}}{objet=carte}{id_objet=#ID_CARTE}{par role}{', '}>[(#ROLE|json_encode)]</BOUCLE_roles>]</B_roles>
 		}}</BOUCLE_art>

@@ -11,7 +11,7 @@
 	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
 	[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
-	<INCLURE{fond=inclure/head_map} />
+	<INCLURE{fond=inclure/head_map, lang=#LANG} />
 	[(#SET{style,[(#CHEMIN{[css_carte/(#STYLE_CARTE|sinon{carte.css})]})]})]
 	[(#SET{js,[js_carte/(#STYLE_CARTE|sinon{carte.js})]})]
 	[<script type="text/javascript" src="(#CHEMIN{#GET{js}})"></script>]
