@@ -31,13 +31,16 @@ function extracteur_preparer_insertion($item){
 		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
 
 	if($item['url'])
-		$texte .= "<ins class='url_site'>" . trim($item['url_site']) . "</ins>\n\n" ;
+		$texte .= "<ins class='url_site'>" . trim($item['url']) . "</ins>\n\n" ;
 
 	if($item['auteurs'])
-		$texte .= "\n\n@@AUTEUR\n\n" . trim($item['auteurs']) . "\n\n" ;
+		$texte .= "<ins class='auteurs_de'>" . trim($item['auteurs']) . "</ins>\n\n" ;
 
-	if($item['affiliations'])
-		$texte .= "\n\n@@SIGNATURE\n\n" . trim($item['affiliations']) . "\n\n" ;
+	if($item['signature'])
+		$texte .= "<ins class='signature'>" . trim($item['signature']) . "</ins>\n\n" ;
+
+	if($item['traducteur'])
+		$texte .= "<ins class='traduction'>" . trim($item['traducteur']) . "</ins>\n\n" ;
 
 	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
 	
@@ -58,7 +61,13 @@ function convertir_xml_de($u) {
 
 	// chopper les metas données
 	$metas = extraire_balise($u,'kopf');
-	$m['pages'] = extraire_attribut($metas, 'Seite');
+	$m['pages'] = str_replace(","," ", extraire_attribut($metas, 'Seite'));
+	
+	$p = explode(" ",$m['pages']) ;
+	if($p[0] < 10 and !preg_match("/^0/", $m['pages']))
+		$m['pages'] = "0" . $m['pages'] ;
+	
+		
 	$m['date'] = extraire_attribut($metas, 'Edat');
 	$m["url"] = "http://monde-diplomatique.de/artikel/!".  extraire_attribut($metas, 'DatNr') ;
 
@@ -110,14 +119,30 @@ function convertir_xml_de($u) {
 	$u = preg_replace('/<\/?red>/','',$u);
 	$u = preg_replace('/<\/?zInitial>/','',$u);
 	
-	// copy
-	$u = preg_replace('/\(c\)\s*<Kursiv>Le\s*Monde diplomatique,<\/Kursiv>\s*Berlin/Us','',$u);
+	// copyright
+	// $u = preg_replace('/(?:\(c\)|©)*\s*<Kursiv>Le\s*Monde\sdiplomatique,*\s*<\/Kursiv>,*\s*Berlin/ums','',$u);
+		
 	//	<Fett>Fußnoten:</Fett><br/>
 	// <Fett>Fußnoten: <br/></Fett>
 	//	<Fett>Fußnoten:<br/></Fett>
-	$u = preg_replace('/<Fett>\s*Fußnote(n)*\s*:*\s*(<br\s*\/>)*\s*<\/Fett>(\s*<br\s*\/>)*/Us','',$u);
-	$u = preg_replace("/\(c\) {Le Monde diplomatique,} Berlin/Us","",$u);
-		
+	$u = preg_replace('/<Fett>\s*Fu(ß|ss)note(n)*\s*:*\s*(<br\s*\/>)*\s*<\/Fett>(\s*<br\s*\/>)*/Us','',$u);
+
+	// menage
+	$u = preg_replace('~<Fussnote>\s+</Fussnote>~Uums','',$u);
+
+
+	// liens
+	// <URL href="http://www.un.org/terrorism">www.un.org/terrorism</URL>
+	
+	// Liens
+	$l = extraire_balises($u,"URL");
+	//var_dump($l);
+	foreach($l as $a){
+		$txt=textebrut($a);
+		$href=extraire_attribut($a, "href");
+		$u = str_replace($a,'[' . $txt .'->' . $href .']',$u);
+	}
+
 	// Nettoyer les auteurs qui peuvent être dans le sous-titre
 	// On les connait déjà et ils ont parfois des Von
 	// <zAutor>von Hubert Prolongeau</zAutor>	
@@ -153,16 +178,28 @@ function convertir_xml_de($u) {
 
 	// <Kursiv>	dt. Bodo Schulze</Kursiv>
 	// <FettKursiv>Aus dem Englischen von Niels Kadritzke <br/></FettKursiv>
-	if(preg_match("%<Kursiv>(\s*dt\..*)</Kursiv>%Us",$u,$matches)
-		OR preg_match("%<FettKursiv>(\s*Aus de.*)</FettKursiv>%Us",$u,$matches)
-		OR preg_match("%<Kursiv>(\s*deutsch von.*)</Kursiv>%Us",$u,$matches)		
+	if(preg_match("%<Kursiv>(\s*dt\..*)</Kursiv>%Ums",$u,$matches)
+		OR preg_match("%<(?:(?:Fett)*Kursiv|Fussnote)>(\s*Aus de.*)</*(?:(?:Fett)*Kursiv|Fussnote)/*>%Uums",$u,$matches)
+		OR preg_match("%<Kursiv>(\s*deutsch von.*)</Kursiv>%Ums",$u,$matches)		
 	){
 		$m['traducteur'] = trim(textebrut($matches[1])) ;
 		$m['traducteur'] = preg_replace("/^\s*dt\.\s*|^\s*deutsch von\s*/Uims","",$matches[1]) ;
-		$m['logs'][] = "Suppression de (trad): " . entites_html($matches[0]) ;		
+		$m['logs'][] = "Suppression de (trad): " . entites_html($matches[0]) ;
+		
+		//echo(htmlspecialchars($matches[0]));
+		
+		// parenthese pour chercher une bio en fin de notes apres le traducteur
+		// voir aussi plus bas
+		if(preg_match("~" . preg_quote($matches[0]) . "(.{2}.+)</Fussnote>~Uuims", $u , $b)){
+			if($b[1]){
+				$m['signature'] .= $b[1] ;
+				$u = str_replace($b[1],'',$u);
+				$flag_signature = false ;				
+			}
+		}		
 		$u = str_replace($matches[0],'',$u);
 	}
-
+	
 	// pas de <br /> dans un <brot> 1996_05_10/art299.xml
 	if(preg_match_all("%<Brot>(.*)</Brot>%Us",$u,$matches)){
 		for($i=0 ; $i < sizeof($matches[1]) ; $i++){
@@ -175,35 +212,51 @@ function convertir_xml_de($u) {
 	// il peut y avoir plusieurs <Fussnote>
 	// <Fussnote>(.*)</Fussnote>
 	// <Fussnote>* Journalist, Jerusalem.</Fussnote>
+	
+	//<Fussnote>
+//José López Mazz ist Professor für Anthropologie an der Universidad de la República, Montevideo.</Fussnote>
+
+	//var_dump($m['note_signature'],htmlspecialchars($u));
+
 
 	if(preg_match_all("%<Fussnote>(.*)</Fussnote>%Us",$u,$matches)){
+		
+		//var_dump($matches[1]);
+		
 		for($i=0 ; $i < sizeof($matches[1]) ; $i++){
-			if (!preg_match(',<hoch>,i', $matches[1][$i])
+			// si pas de balise note et *
+			if (!preg_match(',<hoch>,ims', $matches[1][$i])
 				 //AND !preg_match("%^\d%Uims",$matches[1][$i]) // 2004_11_12/art052.xml
-				 AND preg_match("%^\s*\*%Uims",$matches[1][$i]) // 1995_09_15/art299.xml
+				 //AND preg_match("%^\s*\*%Uims",$matches[1][$i]) // 1995_09_15/art299.xml
 				){
-				//var_dump($matches[1][$i]);
-				$note_signature = preg_replace('/^\s*\*\s*/','',$matches[1][$i]) ;
-				$m['note_signature'] = $note_signature ;
-				$u = str_replace($matches[0][$i],'',$u);
-				$flag_signature = false ;	
-			}
+				//var_dump(htmlspecialchars($u),$matches[1][$i]);
+				$note_signature = trim(preg_replace('/^\s*\*\s*/','',$matches[1][$i])) ;
+				if($note_signature !== ""){
+					$m['signature'] .= $note_signature . "\n\n" ;
+					$u = str_replace($matches[0][$i],'',$u);
+					$flag_signature = false ;	
+				}	
+			}			
 		}	
 	}
+
+	//var_dump($m['signature']);
 	
 	// une note signature dans un brot peut-être ? 1996_08_16/art256.xml
 	if($flag_signature
 		AND preg_match("%^<Brot>\*(.*)</Brot>%Uims",$u,$n)
 	){
-		$m['note_signature'] = $n[1] ;
+		$m['signature'] = $n[1] ;
 		$u = str_replace($matches[0][$i],'',$u);
 		$flag_signature = false ;
 	}
 	
 	if($flag_signature)
 		$m['Alertes'][] = "Signature non trouvée" ;
+
 		
-	$u = preg_replace('/<\/?Fussnote>/Us',"\n\n",$u);
+//	$u = preg_replace('/<Fussnote>/Us',"\n",$u);
+//	$u = preg_replace('/<\/Fussnote>/Us',"\n",$u);
 
 	// sous titre ou chapo
 	// <Unterzeile> court = sous titre
@@ -212,8 +265,11 @@ function convertir_xml_de($u) {
 	if(preg_match_all("%<Unterzeile>(.*)</Unterzeile>%Us",$u,$matches)){
 		for($i=0 ; $i < sizeof($matches[0]) ; $i++){
 			//$m['logs'][] = $matches[0][$i] ;		
-			if(strlen($matches[1][$i]) < 100){	
-				$m['sous-titre'] = trim(textebrut($matches[1][$i])) ;
+			if(strlen($matches[1][$i]) < 100){
+				if($m['titre'] == "edito")
+					$m['titre'] = trim(textebrut($matches[1][$i])) ;
+				else
+					$m['soustitre'] = trim(textebrut($matches[1][$i])) ;
 			}
 			if(strlen($matches[1][$i]) >= 100){
 				if($m['chapo'])
@@ -245,7 +301,6 @@ function convertir_xml_de($u) {
 	// notes avec des espaces dedans...
 	// <Hoch>3 </Hoch>
 	
-	// note de bas de page :
 	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
 
 	
@@ -254,12 +309,6 @@ function convertir_xml_de($u) {
 	$u = preg_replace(',^\s+\(,',"(",$u);
 	$u = str_replace(') .',").",$u);
 	
-	// liens
-	// <URL href="http://www.un.org/terrorism">www.un.org/terrorism</URL>
-	if(preg_match_all("%<URL href=\"(.*)\">\s*(.*)</URL>%Us",$u,$matches)){
-		for($i=0 ; $i < sizeof($matches[0]) ; $i++)
-			$u = str_replace($matches[0][$i],'[' . $matches[2][$i] .'->' . $matches[1][$i] .']',$u);
-	}
 
 	// inters
 	$u = str_replace("<Zwischentitel>","\n\n{{{",$u);
@@ -276,18 +325,7 @@ function convertir_xml_de($u) {
 	// <Zitat>
 	$u = str_replace("<Zitat>","<quote>",$u);
 	$u = str_replace("</Zitat>","</quote>",$u);
- 	
-	// texte spip
-	
-	// itals
-	$u = str_replace("<Kursiv>","{",$u);
-	$u = str_replace("</Kursiv>","}",$u);	
-
-	// gras
-	$u = str_replace("<Fett>","{{",$u);
-	$u = str_replace("</Fett>","}}",$u);	
-	
-	
+ 		
 	// images des pages.
 	$images_balises = extraire_balises($u,"PdfFile");
 	foreach($images_balises as $imageb){
@@ -298,6 +336,24 @@ function convertir_xml_de($u) {
 	$u = trim($u);
 	$m['texte'] = $u ;
 
+	foreach($champs  = array("texte", "chapo", "signature") as $t){
+			// texte spip
+	
+			// itals
+			$m[$t] = str_replace("<Kursiv>","{",$m[$t]);
+			$m[$t] = str_replace("</Kursiv>","}",$m[$t]);	
+		
+			// gras
+			$m[$t] = str_replace("<Fett>","{{",$m[$t]);
+			$m[$t] = str_replace("</Fett>","}}",$m[$t]);
+			
+			// menage
+			// notes de bas de page :
+			$m[$t] = preg_replace(',</?Fussnote>,U',"\n\n",$m[$t]); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+			
+
+	}
+	
 
 	return $m ;
 }
