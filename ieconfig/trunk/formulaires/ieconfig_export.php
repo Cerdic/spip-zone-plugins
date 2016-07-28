@@ -4,8 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function ieconfig_saisies_export()
-{
+function ieconfig_saisies_export() {
 	$saisies = array(
 		// Options d'export
 		array(
@@ -22,7 +21,7 @@ function ieconfig_saisies_export()
 						'nom' => 'ieconfig_export_nom',
 						'label' => '<:ieconfig:label_ieconfig_export_nom:>',
 						'obligatoire' => 'oui',
-						'defaut' => $GLOBALS['meta']['nom_site'].' - '.date('Y/m/d'),
+						'defaut' => $GLOBALS['meta']['nom_site'] . ' - ' . date('Y/m/d'),
 					),
 				),
 				array(
@@ -65,12 +64,12 @@ function ieconfig_saisies_export()
 				$icone = find_in_path($data['icone']);
 			}
 			if ($icone) {
-				$icone = '<img src="'.$icone.'" alt="" style="margin-left:0px; margin-right:0.5em;" />';
+				$icone = '<img src="' . $icone . '" alt="" style="margin-left:0px; margin-right:0.5em;" />';
 			}
 		} else {
 			$icone = '';
 		}
-		$ieconfig_metas[$prefixe] = $icone.(isset($data['titre']) ? $data['titre'] : $prefixe);
+		$ieconfig_metas[$prefixe] = $icone . (isset($data['titre']) ? $data['titre'] : $prefixe);
 	}
 	ksort($ieconfig_metas);
 	if (count($ieconfig_metas) > 0) {
@@ -106,8 +105,7 @@ function ieconfig_saisies_export()
 	return $saisies;
 }
 
-function formulaires_ieconfig_export_charger_dist()
-{
+function formulaires_ieconfig_export_charger_dist() {
 	$saisies = ieconfig_saisies_export();
 	$contexte = array(
 		'_saisies' => $saisies,
@@ -116,15 +114,13 @@ function formulaires_ieconfig_export_charger_dist()
 	return array_merge(saisies_charger_champs($saisies), $contexte);
 }
 
-function formulaires_ieconfig_export_verifier_dist()
-{
+function formulaires_ieconfig_export_verifier_dist() {
 	include_spip('inc/saisies');
 
 	return saisies_verifier(ieconfig_saisies_export());
 }
 
-function formulaires_ieconfig_export_traiter_dist()
-{
+function formulaires_ieconfig_export_traiter_dist() {
 	$export = array();
 	$export['nom'] = _request('ieconfig_export_nom');
 	if (_request('ieconfig_export_description') != '') {
@@ -190,23 +186,25 @@ function formulaires_ieconfig_export_traiter_dist()
 
 	// Nom du fichier
 	include_spip('inc/texte');
-	$site = isset($GLOBALS['meta']['nom_site'])
-	  ? preg_replace(array(",\W,is", ',_(?=_),', ',_$,'), array('_', '', ''), couper(translitteration(trim($GLOBALS['meta']['nom_site'])), 30, ''))
-	  : 'spip';
-	$filename = $site.'_'.date('Y-m-d_H-i').'.yaml';
+	$site = isset($GLOBALS['meta']['nom_site']) ? preg_replace(array(",\W,is", ',_(?=_),', ',_$,'), array(
+		'_',
+		'',
+		'',
+	), couper(translitteration(trim($GLOBALS['meta']['nom_site'])), 30, '')) : 'spip';
+	$filename = $site . '_' . date('Y-m-d_H-i') . '.yaml';
 
 	// Si telechargement
 	if (_request('ieconfig_export_choix') == 'telecharger') {
 		refuser_traiter_formulaire_ajax();
-		set_request('action', 'courcircuiter_affichage_usage_memoire'); // Pour empêcher l'extension dev d'ajouter un div avec l'usage mémoire.
-		Header('Content-Type: text/x-yaml;');
-		Header("Content-Disposition: attachment; filename=$filename");
-		Header('Content-Length: '.strlen($export));
+		set_request('action', 'courcircuiter_affichage_usage_memoire'); // Pour empÃªcher l'extension dev d'ajouter un div avec l'usage mÃ©moire.
+		header('Content-Type: text/x-yaml;');
+		header("Content-Disposition: attachment; filename=$filename");
+		header('Content-Length: ' . strlen($export));
 		echo $export;
 		exit;
 	} else {
 		sous_repertoire(_DIR_TMP, 'ieconfig');
-		if (ecrire_fichier(_DIR_TMP.'ieconfig/'.$filename, $export)) {
+		if (ecrire_fichier(_DIR_TMP . 'ieconfig/' . $filename, $export)) {
 			return array('message_ok' => _T('ieconfig:message_ok_export', array('filename' => $filename)));
 		} else {
 			return array('message_erreur' => _T('ieconfig:message_erreur_export', array('filename' => $filename)));
