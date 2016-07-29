@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function emplois_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_offres')), array('emplois_init_metas'));
+	$maj['create'] = array(array('maj_tables', array('spip_offres', 'spip_cvs')), array('emplois_init_metas'));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -36,6 +36,7 @@ function emplois_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function emplois_init_metas() {
 	// metas pour le formulaire Offres
+	ecrire_config("emplois/offres/activer_offres", 'non');
 	ecrire_config("emplois/offres/email", 'oui');
 	ecrire_config("emplois/offres/telephone", 'non');
 	
@@ -46,6 +47,7 @@ function emplois_init_metas() {
 
 	// metas pour le formulaire CVs
 	ecrire_config("emplois/cvs/activer_cvs", 'non');
+	ecrire_config("emplois/cvs/cv_pdf", 'non');
 
 	// metas pour le formulaire Affichage Public
 	ecrire_config("emplois/affichage_public/placeholder", 'non');
