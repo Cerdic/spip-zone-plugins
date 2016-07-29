@@ -20,7 +20,7 @@
 					[(#CONFIG{emplois/offres/email}|=={oui}|oui)checked="checked"] /><label for="email_oui"><:item_oui:></label>
 					&nbsp;&nbsp;
 					<input type="radio" name="email" id="email_non" value="non"
-					[(#CONFIG{emplois/offres/email}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					[(#CONFIG{emplois/offres/email}|=={oui}|non)checked="checked"] /><label for="email_non"><:item_non:></label>
 				</div>
 			</div>
 
@@ -79,7 +79,7 @@
 				</div>
 
 				<div class="editer long_label editer_offre_pdf[ (#ENV**{erreurs}|table_valeur{offre_pdf}|oui)erreur]">
-					<label for="offre_pdf"><:offre:champ_joindre_pdf_label:></label>[
+					<label for="offre_pdf"><:emplois:champ_joindre_pdf_label:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{offre_pdf})</span>
 					]<p class="explication">Pouvoir joindre un PDF depuis le formulaire publique</p>
 					<div class="choix">

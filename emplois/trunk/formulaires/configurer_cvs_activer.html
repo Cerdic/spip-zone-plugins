@@ -10,7 +10,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<div class="editer-groupe">
-			<div class="editer long_label editer_activer_cvs[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer long_label editer_activer_cvs[ (#ENV**{erreurs}|table_valeur{activer_cvs}|oui)erreur]">
 				<label for="activer_cvs"><:emplois:cfg_label_activer_cvs:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{activer_cvs})</span>
 				]<div class="choix">
