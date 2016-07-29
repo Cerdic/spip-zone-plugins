@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     de l'action sécurisée.
  * @return bool
  */
-function emploi_afficher_public($attribut) {
+function emplois_afficher_public($attribut) {
 	include_spip('inc/config');
 	$val = lire_config('emplois/affichage_public/placeholder');
 	if (!test_espace_prive() AND $val == 'oui') 
@@ -34,8 +34,8 @@ function emploi_afficher_public($attribut) {
  * @return string|int
  *	new si pas de CV, $id du CV sinon
  */
-function emploi_get_id_cv($id_auteur){
-	$id_cv = sql_getfetsel('id_cv', 'spip_cvs', "id_auteur=$id_auteur");
+function emplois_get_id_cv($id_auteur){
+	$id_cv = sql_getfetsel('id_cv', 'spip_cvs', 'id_auteur='.intval($id_auteur));
 	if (is_null($id_cv))
 		$id_cv = 'new';
 	return $id_cv;
@@ -47,7 +47,7 @@ function emploi_get_id_cv($id_auteur){
  * @param int $id_auteur
  * @return bool
  */
-function emploi_pdf_deja_depose($id_auteur) {
+function emplois_pdf_deja_depose($id_auteur) {
 	$id_document_cv = sql_getfetsel('id_document_cv', 'spip_cvs', "id_auteur=$id_auteur");
 	if (!is_null($id_document_cv))
 		return true;
