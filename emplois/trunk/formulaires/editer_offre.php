@@ -212,17 +212,22 @@ function formulaires_editer_offre_traiter_dist($id_offre='new', $id_rubrique=0, 
 		   // sql_updateq('spip_documents', array('titre' => _L('Affiche') . ' "' . _request('titre') . '"'), 'id_document = ' . $id_document_cree);
 
 		}
+		// renvoyer id_document au cas où le formulaire est dans un bloc ajax 
 		if (isset($id_document_cree)) {
 			set_request('id_document_offre', $id_document_cree);
 		}
 		
 	}
 
-	// Important : passer id_offre dans l'environnement
+	// Important : passer id_offre dans l'environnement au cas ou le formulaire est dans un bloc ajax
 	set_request('id_offre', $id_offre);
+
 	// si on n'est pas dans l'espace privé, on reste en mode editable i.e. affichage du formulaire après validation
 	if (!test_espace_prive()) {
-		$retours['message_ok'] = "Votre offre d'emploi vient d'être enregistrée et nous vous en remercions. Elle sera publiée dès que nos services l'auront validée.";
+		$retours['message_ok'] = "Votre offre d'emploi vient d'être enregistrée et nous vous en remercions.
+		<br>Vous pouvez vérifier / modifier cette offre tant que vous restez sur cette page.
+		<br>Ensuite, elle sera publiée dès que nos services l'auront validée.";
 	}
+	
 	return $retours;
 }
