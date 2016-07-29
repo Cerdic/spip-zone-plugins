@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_placeholder' => 'Afficher le placeholder',
 	'cfg_label_activer_cvs' => 'Activer les CVs ?',
 	'cfg_label_activer_offres' => 'Activer les Offres d\'emplois ?',
+	'champ_joindre_pdf_label' => 'Joindre un PDF',
 
 	// E
 	'emplois_titre' => 'Emplois',
@@ -34,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_emplois' => 'Emplois',
 	'cfg_titre_configurer_affichage_public' => 'Affichage des formulaires dans l\'espace public',
 	'cfg_titre_configurer_offres_contenus' => 'Contenu des offres d\'emploi',
+	'cfg_titre_configurer_cvs_contenus' => 'Contenu des CVs',
 	'cfg_titre_configurer_cvs' => 'LES CVs',
 	'cfg_titre_configurer_offres' => 'LES OFFRES D\'EMPLOIS',
 	'cfg_legend_contenu_offre_deposant' => 'Déposant',

@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone_label' => 'Téléphone',
 	'champ_telephone_label_cours' => 'Tél. : ',
 	'champ_titre_label' => 'Titre',
-	'champ_joindre_pdf_label' => 'Joindre un PDF',
 	'confirmer_supprimer_offre' => 'Confirmez-vous la suppression de cette offre ?',
 
 	// I
