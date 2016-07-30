@@ -25,12 +25,13 @@ $arg = $securiser_action();
 		 return;
 	}
 	$id_almanach = $r[1];
-	$result = sql_fetsel("url,id_article,id_mot","spip_almanachs",array("id_almanach"=>$id_almanach));
+	$result = sql_fetsel("url,id_article,id_mot,decalage","spip_almanachs",array("id_almanach"=>$id_almanach));
 	importer_almanach(
 		$id_almanach,
 		$result["url"],
 		$result["id_article"],
-		$result["id_mot"]
+		$result["id_mot"],
+		$result["decalage"]
 	);
 }
 

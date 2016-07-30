@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 
 
-function importer_almanach($id_almanach,$url,$id_article,$id_mot){
+function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 
 
 	// Début de la récupération des évènements
@@ -38,7 +38,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot){
 					} 
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$id_mot);
+				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 }
@@ -46,10 +46,8 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
 
-	#on recupère les données de décalage
-		$decalage = _request('decalage');
 	#on recupere les infos de l'evenement dans des variables
 	    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
 	    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
