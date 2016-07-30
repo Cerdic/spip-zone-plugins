@@ -1,6 +1,48 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
+* Importation ou synchronisation d'un almanach
+**/
+
+include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
+
+
+function importation_almanach($id_almanach){
+	// Début de la récupération des évènements
+	#configuration nécessaire à la récupération
+	$url = sql_getfetsel("url","spip_almanachs",array("id_almanach"=>$id_almanach));
+	$config = array("unique_id"=>"","url"=>$url);
+	$cal = new vcalendar($config);
+	$cal->parse();
+	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
+	$liens = sql_allfetsel('id_evenement, uid, sequence', 'spip_evenements');
+	// on definit un tableau des uid présentes dans la base
+	$uid =array();
+	foreach ($liens as $u ) {
+		$uid[] = $u['uid'];
+	};
+	while ($comp = $cal->getComponent()){
+			#les variables qui vont servir à vérifier l'existence et l'unicité 
+			$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
+			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
+			if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
+			//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
+
+			//On commence à vérifier l'existence et l'unicité  maintenant et on met à jour ou on importe selon le cas
+			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd
+					$cle = array_search($uid_distante, $uid); // on utilise le fait que les deux tableaux ont le même index pour le récupérer
+					$sequence = $liens[$cle]['sequence'];//sequence presente dans la base ayant le meme index
+
+					if ($sequence < $sequence_distante ){//si la sequecne de la bdd est plus petite, il y a eu mise à jour et il faut intervenir
+					} 
+				} 
+			else {
+				importation_evenement($comp,$id_almanach);
+			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
+		}
+}
+
+/**
 * Importation d'un événement dans la base
 **/
 function importation_evenement($objet_evenement,$id_almanach){
