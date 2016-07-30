@@ -13,7 +13,7 @@
 			[(#SAISIE{case,mot_facultatif,
  		  	label=<:import_ics:mot_facultatif:>,
 				disable=disabled,
-				valeur_forcee=#EVAL{'_IMPORT_ICS_MOT_FACULTATIF'},
+				valeur_forcee=#EVAL{_IMPORT_ICS_MOT_FACULTATIF},
  			  explication=<:import_ics:mot_facultatif_explication:> <:import_ics:v_php:>,
  				label_case<=:import_ics:mot_facultatif:>
  			})] 
@@ -25,7 +25,7 @@
 			})] 
 	  })]
 
-		[(#EVAL{_IMPORT_ICS_ID_GROUPE}|?{
+		[(#EVAL{defined("_IMPORT_ICS_ID_GROUPE")}|?{
 			[(#SAISIE{groupe_mots,id_groupe,
 				label=<:import_ics:groupe_mots:>,
 				disable=disable,
@@ -39,7 +39,7 @@
 				table_liaison=evenements})] 
 		}
 		)]
-		[(#EVAL{_IMPORT_ICS_ID_MOT}|?{
+		[(#EVAL{defined("_IMPORT_ICS_ID_MOT")}|?{
 				[(#SAISIE{mot,id_mot,
 					label=<:import_ics:mot:>,
 					disable=disable,

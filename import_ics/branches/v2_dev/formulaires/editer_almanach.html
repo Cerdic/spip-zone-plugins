@@ -50,9 +50,8 @@
         defaut=#ID_ARTICLE,
 				explication=<:almanach:explication_id_article:>
 			})]
-
-      #SET{id_groupe,#EVAL{'_IMPORT_ICS_ID_GROUPE'}|sinon{#CONFIG{import_ics/id_groupe}}}
-      #SET{id_mot,#EVAL{'_IMPORT_ICS_ID_MOT'}|sinon{#CONFIG{import_ics/id_mot}}}
+      #SET{id_groupe,#EVAL{defined('_IMPORT_ICS_ID_GROUPE')}|?{#EVAL{_IMPORT_ICS_ID_MOT},#CONFIG{import_ics/id_groupe}}}
+      #SET{id_mot,#EVAL{defined('_IMPORT_ICS_ID_MOT')}|?{#EVAL{_IMPORT_ICS_ID_MOT},#CONFIG{import_ics/id_mot}}}
       [(#GET{id_mot}|non)
         [(#SAISIE{mot,id_mot,
           label=<:almanach:mot:>,
