@@ -30,6 +30,7 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables',array('spip_evenements')),
 		array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL"),
 		array('sql_alter',"TABLE spip_evenements ADD sequence bigint(21) DEFAULT '0' NOT NULL"),
+		array('sql_alter',"TABLE spip_evenements ADD last_modified_distant text NOT NULL"),
 	);
 
 	$maj['1.0.1'] = array(
@@ -41,6 +42,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	$maj["1.0.3"] = array(
 		cextras_api_upgrade(import_ics_declarer_champs_extras(), $maj['1.0.3']),
+	);
+	$maj["1.0.4"] = array(
+		array('sql_alter',"TABLE spip_evenements ADD last_modified_distant text NOT NULL"),
 	);
 
 	include_spip('base/upgrade');
@@ -62,6 +66,7 @@ function import_ics_vider_tables($nom_meta_base_version) {
 
 	sql_alter("TABLE spip_evenements DROP COLUMN uid");
 	sql_alter("TABLE spip_evenements DROP COLUMN sequence");
+	sql_alter("TABLE spip_evenements DROP COLUMN last_modified_distant");
   cextras_api_vider_tables(import_ics_declarer_champs_extras());
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('almanach')));
