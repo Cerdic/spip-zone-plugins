@@ -603,15 +603,15 @@ function ckeditor_preparescript($config) {
 
 	if (!$init_done) {
 		$script = "
-	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
-	<script type=\"text/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
-	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
-	<script type=\"text/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
+	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JS)."\"></script>
+	<script type=\"application/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
+	<script type=\"application/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
+	<script type=\"application/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
 		if (isset($load_extra_js)) { 
-			$script .= "	<script type=\"text/javascript\" src=\"$load_extra_js\"></script>\n" ;
+			$script .= "	<script type=\"application/javascript\" src=\"$load_extra_js\"></script>\n" ;
 		}
 		if (isset($extra_js)) {
-			$script .= "	<script type=\"text/javascript\">$extra_js</script>\n" ;
+			$script .= "	<script type=\"application/javascript\">$extra_js</script>\n" ;
 		}
 	} else {
 		$script = '' ;
@@ -620,7 +620,7 @@ function ckeditor_preparescript($config) {
 	foreach($config['ajaxload'] as $ndx => $row) {
 		$config['ajaxload'][$ndx][3] = md5($row[0]) ;
 	}
-	$script .= "	<script type=\"text/javascript\">
+	$script .= "	<script type=\"application/javascript\">
 $(document).ready(function(){
 	function loadCKEditor() {
 		// la configuration de ckeditor :
