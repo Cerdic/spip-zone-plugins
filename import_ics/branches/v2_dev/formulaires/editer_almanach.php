@@ -42,8 +42,6 @@ function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour=''
  *
  */
 function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	//version de base de la fabrique
-	//return formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
 	$le_id_article=_request("le_id_article");//id_article est protégé pour ne prendre que des int avec l'ecran securite, mais comme on utilise le selecteur, on a un tableau
 	$id_article=str_replace("article|","",$le_id_article[0]);
 	set_request("id_article",$id_article);
@@ -59,7 +57,6 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 		$erreurs["le_id_article"]=$erreurs["id_article"];
 		unset($erreurs["id_article"]);
 	}
-	//verification supplementaires
 	return $erreurs;
 }
 
@@ -72,7 +69,6 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  *
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	//set_request("id_article",str_replace("article|","",_request("id_article")));
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
