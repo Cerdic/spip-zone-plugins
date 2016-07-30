@@ -47,6 +47,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot){
 * Importation d'un événement dans la base
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
+
 	#on recupère les données de décalage
 		$decalage = _request('decalage');
 	#on recupere les infos de l'evenement dans des variables
@@ -69,9 +70,14 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
    			$startDate = "{$dtstart["year"]}-{$dtstart["month"]}-{$dtstart["day"]}";
    			$startTime = '';#on initialise l'heure' de début
    			$heure_debut = $dtstart["hour"]+$decalage;
-    		if (!in_array("DATE", $dtstart_array["params"])) {
+    		
+				if (!in_array("DATE", $dtstart_array["params"])) {
        			 $startTime = " $heure_debut:{$dtstart["min"]}:{$dtstart["sec"]}";
+						 $start_all_day = False;
     			}
+				else{
+					$start_all_day = True;
+				}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_debut = $startDate.$startTime;
 	#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
@@ -82,11 +88,21 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
    			$heure_fin = $dtend["hour"]+$decalage;
     		if (!in_array("DATE", $dtend_array["params"])) {
        			$endTime = " $heure_fin:{$dtend["min"]}:{$dtend["sec"]}";
+						$end_all_day = False;
     			}
+				else{
+					$end_all_day = True;			
+				}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
 
-
+		// Est-ce que l'evt dure toute la journée?
+		if ($end_all_day and $start_all_day){
+			$horaire = "non";
+		}
+		else{
+			$horaire = "oui";
+		}
 	  $id_evenement= sql_insertq('spip_evenements',
 	  array(
 			'id_article' =>$id_article,
@@ -97,7 +113,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
 			'lieu'=>$lieu,'adresse'=>'',
 			'inscription'=>'0',
 			'places'=>'0',
-			'horaire'=>'oui',
+			'horaire'=>$horaire,
 			'statut'=>'publie',
 			'attendee'=>str_replace('MAILTO:', '', $attendee),
 			'id_evenement_source'=>'0',
