@@ -26,18 +26,18 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 			#les variables qui vont servir à vérifier l'existence et l'unicité 
 			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
 			$last_modified_distant = $comp->getProperty("LAST-MODIFIED");
+			$sequence_distant = $comp->getProperty("SEQUENCE");
 			//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
 
 			//vérifier l'existence et l'unicité
 			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd, alors on teste si l'evenement a été modifié à distance
-				
-				$last_modified_local = unserialize(
-					sql_getfetsel("last_modified_distant",
-					  "spip_evenements",
-						"`uid`=".sql_quote($uid_distante)
-						)
-			  );
-				if ($last_modified_local!=$last_modified_distant){
+				$test_variation = sql_fetsel("last_modified_distant,sequence",
+					"spip_evenements",
+					"`uid`=".sql_quote($uid_distante)
+				);
+				$last_modified_local = unserialize($test_variation["last_modified_local"]);
+				$sequence_local = $test_variation["sequence"];
+				if ($last_modified_local!=$last_modified_distant or $sequence_local!=$sequence_distant){
 						$champs_sql = evenement_ical_to_sql($comp);
 						sql_updateq("spip_evenements",$champs_sql,	"`uid`=".sql_quote($uid_distante));
 					}
@@ -88,7 +88,10 @@ function evenement_ical_to_sql($objet_evenement){
 		    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
 		    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
 				$last_modified_distant = serialize($objet_evenement->getProperty("LAST-MODIFIED"));
-
+				$sequence_distante = $objet_evenement->getProperty("SEQUENCE");
+				if (is_null($sequence_distante)){
+					$sequence_distante = 0;
+				}
 		#données de localisation de l'évenement
 		    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 		    $latitude = $localisation['latitude'];
