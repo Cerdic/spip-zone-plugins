@@ -441,6 +441,14 @@ function ckeditor_preparescript($config) {
 
 			// définition des CSS en correspondance avec les polices utilisables
 			$cssContent = (($csssite=ckeditor_lire_config("csssite"))?preg_split("#\s*[,; ]\s*#",$csssite):array()) ;
+			foreach ($cssContent as $key => &$value) {
+				$value = url_absolue(find_in_path($value));
+				if ($value == '') {
+					unset($cssContent[$key]);
+				}
+			}
+			unset($value); // Détruit la référence sur le dernier élément
+
 			$cssContent[] = url_absolue(find_in_path('prive/spip_style.css')) ;
 			$cssContent[] = url_absolue(find_in_path('css/cked-editor.css')) ;
 			$webfonts = array('serif','sans serif','monospace','cursive','fantasy') ;
