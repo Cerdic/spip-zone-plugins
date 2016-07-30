@@ -24,13 +24,18 @@ function genie_import_ics_synchro_dist($t){
 
 //on recupère toutes les infos sur les almanachs
 if(
-	$resultats = sql_allfetsel('id_almanach,url', 'spip_almanachs')
+	$resultats = sql_allfetsel('id_almanach,url,id_article,id_mot', 'spip_almanachs')
 	and is_array($resultats)
 )
 	{
 		//pour chacun des almanachs, on va importer les evenements
 	foreach ($resultats as $r) {
-			importation_almanach($r["id_almanach"],$r["url"]);
+			importer_almanach(
+			  $r["id_almanach"],
+				$r["url"],
+				$r["id_article"],
+				$r["id_mot"]
+			);
 		}
 		return 1;
 	}

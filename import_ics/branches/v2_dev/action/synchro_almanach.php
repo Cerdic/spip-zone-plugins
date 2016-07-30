@@ -25,8 +25,13 @@ $arg = $securiser_action();
 		 return;
 	}
 	$id_almanach = $r[1];
-	$url = sql_getfetsel("url","spip_almanachs",array("id_almanach"=>$id_almanach));
-	importation_almanach($id_almanach,$url);
+	$result = sql_fetsel("url,id_article,id_mot","spip_almanachs",array("id_almanach"=>$id_almanach));
+	importer_almanach(
+		$id_almanach,
+		$result["url"],
+		$result["id_article"],
+		$result["id_mot"]
+	);
 }
 
 ?>

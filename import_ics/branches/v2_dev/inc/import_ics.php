@@ -7,7 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 
 
-function importation_almanach($id_almanach,$url){
+function importer_almanach($id_almanach,$url,$id_article,$id_mot){
+
+
 	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
@@ -36,7 +38,7 @@ function importation_almanach($id_almanach,$url){
 					} 
 				} 
 			else {
-				importation_evenement($comp,$id_almanach);
+				importer_evenement($comp,$id_almanach,$id_article,$id_mot);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 }
@@ -44,7 +46,7 @@ function importation_almanach($id_almanach,$url){
 /**
 * Importation d'un événement dans la base
 **/
-function importation_evenement($objet_evenement,$id_almanach){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot){
 	#on recupère les données de décalage
 		$decalage = _request('decalage');
 	#on recupere les infos de l'evenement dans des variables
@@ -84,11 +86,8 @@ function importation_evenement($objet_evenement,$id_almanach){
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
 
-  // récup des id_article et id_mot lié 
-	$result=sql_fetsel("id_mot,id_article","spip_almanachs","id_almanach=$id_almanach");
-	$id_mot=$result["id_mot"];
-	$id_article=$result["id_article"];
-	$id_evenement= sql_insertq('spip_evenements',
+
+	  $id_evenement= sql_insertq('spip_evenements',
 	  array(
 			'id_article' =>$id_article,
 		  'date_debut'=>$date_debut,
