@@ -7,10 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 
 
-function importation_almanach($id_almanach){
+function importation_almanach($id_almanach,$url){
 	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
-	$url = sql_getfetsel("url","spip_almanachs",array("id_almanach"=>$id_almanach));
 	$config = array("unique_id"=>"","url"=>$url);
 	$cal = new vcalendar($config);
 	$cal->parse();

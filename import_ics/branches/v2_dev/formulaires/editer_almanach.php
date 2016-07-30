@@ -72,7 +72,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
-	
+	$url = _request("url");
 	#on associe le mot à l'almanach
 	if ($id_mot = _request('id_mot')){
 		sql_insertq(
@@ -84,7 +84,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			)
 		);
 	}
-	importation_almanach($id_almanach);
+	importation_almanach($id_almanach,$url);
 	return $chargement;
 }
 
