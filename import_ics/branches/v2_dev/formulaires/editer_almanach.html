@@ -62,6 +62,7 @@
           table_liaison=evenements})] 
       ]
       [(#GET{id_mot}|oui)
+        #SAISIE{hidden,id_mot,valeur=#GET{id_mot}}
         [(#SAISIE{mot,id_mot,
           label=<:almanach:mot:>,
           explication=<:almanach:mot_explication_verrouille:>,
