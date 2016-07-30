@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 
 
-function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
+function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_ressource=null){
 
 
 	// Début de la récupération des évènements
@@ -43,7 +43,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 					}
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
+				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 }
@@ -52,7 +52,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource=null){
     $champs_sql = array_merge(
 			evenement_ical_to_sql($objet_evenement),// les infos distante
 			array("id_article"=>$id_article)
@@ -68,8 +68,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 	  sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
   }
 	#on ajoute la resa si on le doit
-	if ((_request("id_ressource"))>0) {
-		$id_ressource=_request("id_ressource");
+	if ($id_ressource) {
 		ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin);
 	}
 }
@@ -163,7 +162,5 @@ function evenement_ical_to_sql($objet_evenement){
 function ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin){
 	$id_orr_reservation = sql_insertq("spip_orr_reservations",array('orr_reservation_nom'=>$titre_evt,'orr_date_debut'=>$date_debut,'orr_date_fin'=>$date_fin));
 	sql_insertq("spip_orr_reservations_liens",array('id_orr_reservation'=>$id_orr_reservation,'id_objet'=>$id_ressource,'objet'=>'orr_ressource','vu'=>'non'));
-echo "ajout résa";
-
 }
 ?>

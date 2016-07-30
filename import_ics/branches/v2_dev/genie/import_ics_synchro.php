@@ -24,7 +24,7 @@ function genie_import_ics_synchro_dist($t){
 
 //on recupère toutes les infos sur les almanachs
 if(
-	$resultats = sql_allfetsel('id_almanach,url,id_article,id_mot,decalage', 'spip_almanachs')
+	$resultats = sql_allfetsel('*', 'spip_almanachs')
 	and is_array($resultats)
 )
 	{
@@ -35,7 +35,8 @@ if(
 				$r["url"],
 				$r["id_article"],
 				$r["id_mot"],
-				$r["decalage"]
+				$r["decalage"],
+				$r["id_ressource"],
 			);
 		}
 		return 1;

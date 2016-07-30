@@ -76,6 +76,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_article = _request("id_article");
 	$id_mot = _request("id_mot");
 	$decalage = _request("decalage");
+	$id_ressource = _request("id_ressource");
 	#on associe le mot à l'almanach
 	if ($id_mot){
 		sql_insertq(
@@ -87,7 +88,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			)
 		);
 	}
-	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
+	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_ressource);
 	return $chargement;
 }
 
