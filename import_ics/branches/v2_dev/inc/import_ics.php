@@ -56,6 +56,8 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 			$url = $objet_evenement->getProperty( "URL");#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
 	    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
 	    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
+			$last_modified_distant = serialize($objet_evenement->getProperty("LAST-MODIFIED"));
+
 	#données de localisation de l'évenement
 	    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 	    $latitude = $localisation['latitude'];
@@ -117,6 +119,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 			'id_evenement_source'=>'0',
 			'uid'=>$uid_distante,
 			'sequence'=>$sequence_distante,
+			'last_modified_distant'=>$last_modified_distant,
 			'notes'=>$url));
 
 	#on associe l'événement à l'almanach
