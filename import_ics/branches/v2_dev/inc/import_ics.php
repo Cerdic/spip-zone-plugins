@@ -16,7 +16,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 	$cal = new vcalendar($config);
 	$cal->parse();
 	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
-	$liens = sql_allfetsel('id_evenement, uid, sequence', 'spip_evenements');
+	$liens = sql_allfetsel('uid', 'spip_evenements');
 	// on definit un tableau des uid présentes dans la base
 	$uid =array();
 	foreach ($liens as $u ) {
