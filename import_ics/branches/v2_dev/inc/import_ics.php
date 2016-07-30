@@ -43,84 +43,17 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 		}
 }
 
+
 /**
 * Importation d'un événement dans la base
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
-
-	#on recupere les infos de l'evenement dans des variables
-	    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
-	    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
-	    $summary_array = $objet_evenement->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
-			$titre_evt=str_replace('SUMMARY:', '', $summary_array["value"]);
-			$url = $objet_evenement->getProperty( "URL");#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
-	    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
-	    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
-			$last_modified_distant = serialize($objet_evenement->getProperty("LAST-MODIFIED"));
-
-	#données de localisation de l'évenement
-	    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
-	    $latitude = $localisation['latitude'];
-	    $longitude = $localisation['longitude'];
-	//un petit coup avec l'uid
-	    $uid_distante = $objet_evenement->getProperty("UID");#uid de l'evenement
-	#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
-	    $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
-	    	$dtstart = $dtstart_array["value"];
-   			$startDate = "{$dtstart["year"]}-{$dtstart["month"]}-{$dtstart["day"]}";
-   			$startTime = '';#on initialise l'heure' de début
-   			$heure_debut = $dtstart["hour"]+$decalage;
-    		
-				if (!in_array("DATE", $dtstart_array["params"])) {
-       			 $startTime = " $heure_debut:{$dtstart["min"]}:{$dtstart["sec"]}";
-						 $start_all_day = False;
-    			}
-				else{
-					$start_all_day = True;
-				}
-    		#on fait une variable qui contient le résultat des deux précédentes actions
-    		$date_debut = $startDate.$startTime;
-	#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
-  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
-   			$dtend = $dtend_array["value"];
-    		$endDate = "{$dtend["year"]}-{$dtend["month"]}-{$dtend["day"]}";
-    		$endTime = '';#on initialise l'heure' de fin
-   			$heure_fin = $dtend["hour"]+$decalage;
-    		if (!in_array("DATE", $dtend_array["params"])) {
-       			$endTime = " $heure_fin:{$dtend["min"]}:{$dtend["sec"]}";
-						$end_all_day = False;
-    			}
-				else{
-					$end_all_day = True;			
-				}
-    		#on fait une variable qui contient le résultat des deux précédentes actions
-    		$date_fin = $endDate.$endTime;
-
-		// Est-ce que l'evt dure toute la journée?
-		if ($end_all_day and $start_all_day){
-			$horaire = "non";
-		}
-		else{
-			$horaire = "oui";
-		}
-	  $id_evenement= sql_insertq('spip_evenements',
-	  array(
-			'id_article' =>$id_article,
-		  'date_debut'=>$date_debut,
-		  'date_fin'=>$date_fin,
-			'titre'=>$titre_evt,
-			'descriptif'=>$descriptif_array["value"],
-			'lieu'=>$lieu,'adresse'=>'',
-			'inscription'=>'0',
-			'places'=>'0',
-			'horaire'=>$horaire,
-			'statut'=>'publie',
-			'attendee'=>str_replace('MAILTO:', '', $attendee),
-			'id_evenement_source'=>'0',
-			'uid'=>$uid_distante,
-			'sequence'=>$sequence_distante,
-			'last_modified_distant'=>$last_modified_distant,
-			'notes'=>$url));
+    $champs_sql = array_merge(
+			evenement_ical_to_sql($objet_evenement),// les infos distante
+			array("id_article"=>$id_article)
+		);
+		
+	  $id_evenement= sql_insertq('spip_evenements',$champs_sql);
 
 	#on associe l'événement à l'almanach
 	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
@@ -136,6 +69,84 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 	}
 }
 
+/* 
+** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
+*/
+function evenement_ical_to_sql($objet_evenement){
+	
+		#on recupere les infos de l'evenement dans des variables
+		    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
+		    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
+		    $summary_array = $objet_evenement->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
+				$titre_evt=str_replace('SUMMARY:', '', $summary_array["value"]);
+				$url = $objet_evenement->getProperty( "URL");#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
+		    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
+		    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
+				$last_modified_distant = serialize($objet_evenement->getProperty("LAST-MODIFIED"));
+
+		#données de localisation de l'évenement
+		    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
+		    $latitude = $localisation['latitude'];
+		    $longitude = $localisation['longitude'];
+		//un petit coup avec l'uid
+		    $uid_distante = $objet_evenement->getProperty("UID");#uid de l'evenement
+		#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
+		    $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
+		    	$dtstart = $dtstart_array["value"];
+	   			$startDate = "{$dtstart["year"]}-{$dtstart["month"]}-{$dtstart["day"]}";
+	   			$startTime = '';#on initialise l'heure' de début
+	   			$heure_debut = $dtstart["hour"]+$decalage;
+	    		
+					if (!in_array("DATE", $dtstart_array["params"])) {
+	       			 $startTime = " $heure_debut:{$dtstart["min"]}:{$dtstart["sec"]}";
+							 $start_all_day = False;
+	    			}
+					else{
+						$start_all_day = True;
+					}
+	    		#on fait une variable qui contient le résultat des deux précédentes actions
+	    		$date_debut = $startDate.$startTime;
+		#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
+	  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
+	   			$dtend = $dtend_array["value"];
+	    		$endDate = "{$dtend["year"]}-{$dtend["month"]}-{$dtend["day"]}";
+	    		$endTime = '';#on initialise l'heure' de fin
+	   			$heure_fin = $dtend["hour"]+$decalage;
+	    		if (!in_array("DATE", $dtend_array["params"])) {
+	       			$endTime = " $heure_fin:{$dtend["min"]}:{$dtend["sec"]}";
+							$end_all_day = False;
+	    			}
+					else{
+						$end_all_day = True;			
+					}
+	    		#on fait une variable qui contient le résultat des deux précédentes actions
+	    		$date_fin = $endDate.$endTime;
+
+			// Est-ce que l'evt dure toute la journée?
+			if ($end_all_day and $start_all_day){
+				$horaire = "non";
+			}
+			else{
+				$horaire = "oui";
+			}
+		
+		return array(
+		  'date_debut'=>$date_debut,
+		  'date_fin'=>$date_fin,
+			'titre'=>$titre_evt,
+			'descriptif'=>$descriptif_array["value"],
+			'lieu'=>$lieu,'adresse'=>'',
+			'inscription'=>'0',
+			'places'=>'0',
+			'horaire'=>$horaire,
+			'statut'=>'publie',
+			'attendee'=>str_replace('MAILTO:', '', $attendee),
+			'id_evenement_source'=>'0',
+			'uid'=>$uid_distante,
+			'sequence'=>$sequence_distante,
+			'last_modified_distant'=>$last_modified_distant,
+			'notes'=>$url);
+}
 
 /**
 *ajout d'une reservation à l'événement si c'est coché
