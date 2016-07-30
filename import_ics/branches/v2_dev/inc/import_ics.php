@@ -24,18 +24,23 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 	};
 	while ($comp = $cal->getComponent()){
 			#les variables qui vont servir à vérifier l'existence et l'unicité 
-			$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
-			if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
+			$last_modified_distant = $comp->getProperty("LAST-MODIFIED");
 			//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
 
-			//On commence à vérifier l'existence et l'unicité  maintenant et on met à jour ou on importe selon le cas
-			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd
-					$cle = array_search($uid_distante, $uid); // on utilise le fait que les deux tableaux ont le même index pour le récupérer
-					$sequence = $liens[$cle]['sequence'];//sequence presente dans la base ayant le meme index
-
-					if ($sequence < $sequence_distante ){//si la sequecne de la bdd est plus petite, il y a eu mise à jour et il faut intervenir
-					} 
+			//vérifier l'existence et l'unicité
+			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd, alors on teste si l'evenement a été modifié à distance
+				
+				$last_modified_local = unserialize(
+					sql_getfetsel("last_modified_distant",
+					  "spip_evenements",
+						"`uid`=".sql_quote($uid_distante)
+						)
+			  );
+				if ($last_modified_local!=$last_modified_distant){
+						$champs_sql = evenement_ical_to_sql($comp);
+						sql_updateq("spip_evenements",$champs_sql,	"`uid`=".sql_quote($uid_distante));
+					}
 				} 
 			else {
 				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
