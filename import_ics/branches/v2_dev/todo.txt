@@ -1,1 +1,0 @@
-- supprimer dépendance aux mots / trouver une manière pour proposer de rendre obligatoire le choix d'un mot
