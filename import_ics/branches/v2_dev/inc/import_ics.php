@@ -53,12 +53,12 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_r
 * Importation d'un événement dans la base
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource=null){
-    $champs_sql = array_merge(
-			evenement_ical_to_sql($objet_evenement),// les infos distante
-			array("id_article"=>$id_article)
-		);
-		
-	  $id_evenement= sql_insertq('spip_evenements',$champs_sql);
+  $champs_sql = array_merge(
+		evenement_ical_to_sql($objet_evenement),// les infos distante
+		array("id_article"=>$id_article)
+	);
+	
+  $id_evenement= sql_insertq('spip_evenements',$champs_sql);
 
 	#on associe l'événement à l'almanach
 	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
