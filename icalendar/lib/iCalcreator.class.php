@@ -800,7 +800,7 @@ class vcalendar {
       case 'URL':
             /* remote file - URL */
         $value     = str_replace( array( 'HTTP://', 'WEBCAL://', 'webcal://' ), 'http://', trim( $value ));
-        if( 'http://' != substr( $value, 0, 7 ))
+        if( 'http://' != substr( $value, 0, 7 ) and 'https://' != substr( $value, 0, 8 )) // https = hack de Maïeul
           return FALSE;
         $s1        = $this->url;
         $this->url = $value;
