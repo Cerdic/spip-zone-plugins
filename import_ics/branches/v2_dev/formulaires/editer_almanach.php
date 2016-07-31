@@ -31,8 +31,6 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	//$valeurs[_etapes]=2;//on rajoute  un couple clé/valeur pour le nombre d'étapes du formulaire (pas la peine tant que je n'arrive pas à avoir un résutat correct)
-	$valeurs['resa_auto']='non';
 	return $valeurs;
 
 }
@@ -76,7 +74,6 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_article = _request("id_article");
 	$id_mot = _request("id_mot");
 	$decalage = _request("decalage");
-	$id_ressource = _request("id_ressource");
 	#on associe le mot à l'almanach
 	if ($id_mot){
 		sql_insertq(
@@ -88,7 +85,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			)
 		);
 	}
-	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_ressource);
+	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
 	return $chargement;
 }
 

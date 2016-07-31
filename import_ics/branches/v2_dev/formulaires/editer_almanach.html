@@ -6,26 +6,6 @@
 [(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie. on fait la même chose pour les ressources]
 
 
-
-
-[(#REM)utilisation des ressources, si on utilise ORR]
-#SET{tableau_ressources,#ARRAY}
-<B_ressources>
-  <script language="JavaScript">
-  $( document ).ready(function() {
-    $('.editer_id_ressource').hide();
-  });
-  function toggle(className, obj) {
-      var $input = $(obj);
-      if ($input.prop('checked')) $(className).show();
-      else $(className).hide();
-  }
-  </script>
-<BOUCLE_ressources(ORR_RESSOURCES?)>
-#SET{tableau_ressources, #GET{tableau_ressources}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
-</BOUCLE_ressources>
-[(#SET{tableau_ressources, #GET{tableau_ressources}|array_flip})]
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 
@@ -76,24 +56,9 @@
 				explication=<:almanach:explication:>,
 				datas=#GET{tableau_decalage}
 			})]
-			[(#PLUGIN{orr}|oui)
-			[<(#DIV|sinon{li}) class="editer_resa_auto">]
-				<div class="choix">
-					<input type='checkbox' onclick="toggle('.editer_id_ressource', this)" class="checkbox" name='resa_auto' value='oui' id='resa_auto_oui'[ (#ENV{resa_auto}oui{non}|oui)checked="checked"] />
-					<label for='resa_auto_oui'>Activer les réservations automatiques</label>
-				</div>
-			[</(#DIV|sinon{li})>]
-
-			[(#SAISIE{selection, id_ressource, obligatoire=non,
-				label=<:almanach:resa_auto:>,
-				explication=<:almanach:choix_salle:>,
-				datas=#GET{tableau_ressources}
-			})]
-			]
 		[</(#DIV|sinon{ul})>]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
-		[(#REM)<p class="boutons"><input type='submit' class='submit' value='Suivant' /></p> ça ce sera quand le formulaire en deux parties sera correct pour l'instant on fait un formulaire en une partie]
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</form>
 	]

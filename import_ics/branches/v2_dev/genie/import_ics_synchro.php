@@ -35,8 +35,7 @@ if(
 				$r["url"],
 				$r["id_article"],
 				$r["id_mot"],
-				$r["decalage"],
-				$r["id_ressource"],
+				$r["decalage"]
 			);
 		}
 		return 1;

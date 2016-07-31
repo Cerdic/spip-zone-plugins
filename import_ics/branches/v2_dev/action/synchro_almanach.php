@@ -32,7 +32,6 @@ $arg = $securiser_action();
 		$result["id_article"],
 		$result["id_mot"],
 		$result["decalage"],
-		$result["id_ressource"]
 	);
 }
 

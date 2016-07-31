@@ -9,7 +9,7 @@ include_spip('inc/autoriser');
 include_spip('action/editer_objet');
 include_spip('action/editer_liens');
 
-function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_ressource=null){
+function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 
 
 	// Début de la récupération des évènements
@@ -48,7 +48,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_r
 					}
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource);
+				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 }
@@ -57,7 +57,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_r
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource=null){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
   $champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement),
 		array("id_article"=>$id_article)
@@ -82,10 +82,6 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 	  autoriser_exception('associermots','evenement',$id_evenement);
 		objet_associer(array("mot"=>$id_mot),array("evenement"=>$id_evenement));
 		autoriser_exception('associermots','evenement',$id_evenement,false);
-	}
-	#on ajoute la resa si on le doit
-	if ($id_ressource) {
-		ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin);
 	}
 }
 
@@ -170,12 +166,4 @@ function evenement_ical_to_sql($objet_evenement){
 			'notes'=>$url);
 }
 
-/**
-*ajout d'une reservation à l'événement si c'est coché
-**/
-
-function ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin){
-	$id_orr_reservation = sql_insertq("spip_orr_reservations",array('orr_reservation_nom'=>$titre_evt,'orr_date_debut'=>$date_debut,'orr_date_fin'=>$date_fin));
-	sql_insertq("spip_orr_reservations_liens",array('id_orr_reservation'=>$id_orr_reservation,'id_objet'=>$id_ressource,'objet'=>'orr_ressource','vu'=>'non'));
-}
 ?>

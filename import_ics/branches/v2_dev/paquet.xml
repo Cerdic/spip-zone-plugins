@@ -20,8 +20,6 @@
 	<necessite nom="agenda" compatibilite="[3.0.0;]" />
 	<necessite nom="icalendar" compatibilite="[0.2.1;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<utilise nom="seminaire" compatibilite="[2.1.10;]" />
-
 
 	<necessite nom="saisies" compatibilite="[2.7.4;]" />
 
