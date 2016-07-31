@@ -1,0 +1,33 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+
+<body dir="#LANG_DIR">
+<div id="container">
+<?php
+?>
+
+	<h1>SERVICE SPIP</h1>
+
+	<h2>Verifier les codes</h2>
+<?php
+
+	include_spip('services/iso/iso_api');
+	$fields = iso639families_complete(array('code_639_5' => 'eng'), $GLOBALS['iso_service']['fields']['iso639families']);
+	var_dump($fields);
+	$fields = iso639families_complete(array('code_639_5' => 'bih'), $GLOBALS['iso_service']['fields']['iso639families']);
+	var_dump($fields);
+	$fields = iso639families_complete(array('code_639_5' => 'aav'), $GLOBALS['iso_service']['fields']['iso639families']);
+	var_dump($fields);
+	die();
+
+	$codes = isocode_verifier_codes_spip();
+	if (isset($codes['ok']['iso6395'])) var_dump('SPIP 5', count($codes['ok']['iso6395']), $codes['ok']['iso6395']);
+	if (isset($codes['nok']['iso6391'])) var_dump('SPIP 1', count($codes['nok']['iso6391']), $codes['nok']['iso6391']);
+	if (isset($codes['nok']['iso6393'])) var_dump('SPIP 3', count($codes['nok']['iso6393']), $codes['nok']['iso6393']);
+	if (isset($codes['nok']['spip'])) var_dump('SPIP 0', count($codes['nok']['spip']), $codes['nok']['spip']);
+?>
+
+</div>
+</body>
+</html>

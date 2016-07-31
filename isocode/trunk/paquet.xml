@@ -1,0 +1,20 @@
+<paquet
+	prefix="isocode"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="isocode_logo-64.png"
+	schema="1"
+>
+
+	<nom>Codes ISO</nom>
+	<!-- Codes ISO pour les langues, les pays et autres objets -->
+
+	<auteur lien="http://blog.smellup.net/">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/isocode_declarations.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/isocode_declarations.php" />
+</paquet>
