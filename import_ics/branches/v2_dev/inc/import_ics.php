@@ -29,7 +29,6 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
 			$last_modified_distant = $comp->getProperty("LAST-MODIFIED");
 			$sequence_distant = $comp->getProperty("SEQUENCE");
-			//est-ce que c'est un googlecal ? Dans ce cas, on a un traitement un peu particulier
 
 			//vérifier l'existence et l'unicité
 			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd, alors on teste si l'evenement a été modifié à distance
