@@ -341,7 +341,7 @@ function bible_tableau($i,$lang=''){
 		'at'=> true	
 					),
 	'nachricht'		=> array(
-		
+		'domaine_public' => false,
 		'wissen'=>'gute-nachricht-bibel',
 		'traduction'=> 'Gute Nachricht Bibel ',
 		'lang'		=>'de',
@@ -350,7 +350,7 @@ function bible_tableau($i,$lang=''){
 		'deutero'=> true
 			),
 	'menge'		=> array(
-		
+		'domaine_public' => false,
 		'wissen'=>'Menge Bibel',
 		'traduction'=> 'Menge Bibel',
 		'lang'		=>'de',
@@ -359,7 +359,7 @@ function bible_tableau($i,$lang=''){
 		'deutero'=> true
 			),
 	'luther1984'		=> array(
-		
+		'domaine_public' => false,
 		'wissen'=>'LU',
 		'traduction'=> 'Bibel von Luther (1984)',
 		'lang'		=>'de',
@@ -437,6 +437,7 @@ function bible_tableau($i,$lang=''){
 		'gateway'	=> false,
 		'traduction'=> 'Septante',
 		'lang'		=>'grc',
+		'domaine_public' => false,
 		'at'=> true,
 		'isaie'=>'Is',
 		'deutero'=> true
@@ -444,6 +445,7 @@ function bible_tableau($i,$lang=''){
 	'vulg'		=> array(
 		'wissen' 	=> 'VULG',
 		'gateway'	=> false,
+		'domaine_public' => false,
 		'traduction'=> 'Biblia Sacra Vulgata',
 		'lang'		=>'la',
 		'nt'=> true,
@@ -454,6 +456,7 @@ function bible_tableau($i,$lang=''){
     'nvulg'		=> array(
 		'unbound' 	=> 'latin_nova_vulgata_ucs2',
 		'gateway'	=> false,
+		'domaine_public' => false,
 		'traduction'=> 'Nova Vulgata',
 		'lang'		=>'la',
 		'nt'=> true,
@@ -487,6 +490,7 @@ Editio Typica Altera ',
 		'wissen' 	=> 'BHS',
 		'gateway'	=> false,
 		'traduction'=> 'Biblia Hebra&iuml;ca Stuttgartensia',
+		'domaine_public' => false,
 		'lang'		=>'hbo',
 		'isaie'=>'Is',
 		'at'=> true
@@ -494,12 +498,14 @@ Editio Typica Altera ',
 	'na27'		=> array(
 		'traduction'=> 'Nestl&eacute;-Aland (27<sup>e</sup>&nbsp;éd.)',
 		'gateway'	=> false,
+		'domaine_public' => false,
 		'lang'		=>'grc',
 		'wissen'	=>'NA27',
 		'nt'=> true),
 	'na28'		=> array(
 		'traduction'=> 'Nestl&eacute;-Aland (28<sup>e</sup>&nbsp;éd.)',
 		'gateway'	=> false,
+		'domaine_public' => false,
 		'lang'		=>'grc',
 		'wissen'	=>'NA',
 		'nt'=> true)
@@ -515,7 +521,7 @@ Editio Typica Altera ',
 		'isaie'=>'Is',
 		'domaine_public' => false,
 		'historique'=>'[Voir ici->http://fr.wikipedia.org/wiki/Bible_de_Jérusalem]'),
-    'darb_fr' => array(
+  'darb_fr' => array(
 		'traduction'=> 'Darby',
 		'gateway'	=> false,
 		'unbound'   => 'french_darby_ucs2',
@@ -526,7 +532,7 @@ Editio Typica Altera ',
 		'deutero'=> false,
 		'isaie'=>'Es',
 		),
-    'martin' => array(
+  'martin' => array(
 		'traduction'=> 'Martin',
 		'gateway'	=> false,
 		'unbound'   => 'french_martin_1744_ucs2',
@@ -537,11 +543,11 @@ Editio Typica Altera ',
 		'deutero'=> false,
 		'isaie'=>'Es',
 		),
-    'ost96' => array(
+  'ost96' => array(
 		'traduction'=> 'Ostervald (R&eacute;vision de 1996)',
 		'gateway'	=> false,
 		'unbound'   => 'french_ostervald_1996_ucs2',
-        'domaine_public' => true,                           // Je pense, mais ce n'est pas clair
+    'domaine_public' => true,                           // Je pense, mais ce n'est pas clair
 		'lang'		=> 'fr',
 		'nt'=> true,
 		'at'=> true,
@@ -551,14 +557,14 @@ Editio Typica Altera ',
 	'lsg' => array(
 		'traduction'=> 'Louis Segond 1910',
 		'gateway'	=> 'LSG',
-        'domaine_public' => true,
+    'domaine_public' => true,
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
 		'nt'=> true,
 		'at'=> true),
 	'bds' => array(
 		'traduction'=> 'Bible du Semeur',
-        'domaine_public' => false,
+    'domaine_public' => false,
 		'gateway'	=> 'BDS',
 		'lang'		=> 'fr',
 		'isaie'     => 'Es',
@@ -566,21 +572,21 @@ Editio Typica Altera ',
 		'at'=> true),
 	'kj21' => array(
 		'traduction'=> 'The 21st Century King James',
-        'domaine_public' => false,
+    'domaine_public' => false,
 		'gateway'	=> 'KJ21',
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'darb_en' => array(
 		'traduction'=> 'Darby',
-        'domaine_public' => true,
+    'domaine_public' => true,
 		'gateway'	=> 'DARBY',
 		'lang'		=> 'en',
 		'nt'=> true,
 		'at'=> true),
 	'kj'		=> array(
 		'traduction'=>'King Jame',
-        'domaine_public' => true,
+    'domaine_public' => true,
 		'gateway'	=>'KJV',
 		'lang'		=>'en',
 		'nt'=> true,

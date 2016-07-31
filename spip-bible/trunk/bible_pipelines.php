@@ -16,10 +16,18 @@ function bible_affiche_droite($flux){
             return $flux;
     }
 
-    $type = str_replace('s_edit','',$flux['args']['exec']);
-    $id   = 'id_'.$type;
-
-    $fond = recuperer_fond('fonds/bible_presse_papier', array($id=>$flux['args'][$id],'id_syndic'=>$flux['args']['id_syndic']));
+    $type = str_replace('_edit','',$flux['args']['exec']);
+    if ($type="site"){//vieille exception historique: l'objet s'appelle site, mais on a id_syndic
+			$id = "id_syndic";
+		}
+		else{
+			$id   = 'id_'.$type;
+		};
+		$param = array();
+		if (array_key_exists($id,$flux['args'])){
+			$param[$id] = $flux['args'][$id];
+		}
+    $fond = recuperer_fond('fonds/bible_presse_papier',$param);
     $flux['data'] .= $fond;
     return $flux;
 }
