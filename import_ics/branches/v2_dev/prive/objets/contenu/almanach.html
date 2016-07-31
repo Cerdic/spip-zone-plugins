@@ -47,7 +47,7 @@
 	<tbody>
 		<BOUCLE_liste_evenements(spip_almanachs_liens evenements){id_almanach=#ID_ALMANACH}{objet=evenement}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<BOUCLE_details_evenement(EVENEMENTS){id_evenement=#ID_OBJET}>
+		<BOUCLE_details_evenement(EVENEMENTS){id_evenement=#ID_OBJET}{tout}>
 			<td class='date secondaire'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})]</td>
 			<td class="orateur">#ATTENDEE</td>
 			<td class='titre principale'>
