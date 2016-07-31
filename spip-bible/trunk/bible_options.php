@@ -1,8 +1,8 @@
 <?php
 include_spip('inc/bible_tableau');
 function balise_INFO_BIBLE_TRADUCTION($p){
-	$trad = str_replace("'",'',interprete_argument_balise(1,$p));
-	$info = str_replace("'",'',interprete_argument_balise(2,$p));
+	$trad = interprete_argument_balise(1,$p);
+	$info = interprete_argument_balise(2,$p);
 	$i = info_bible_version($trad,$info);
 	$p->code = "info_bible_version($trad,$info)";
 	
