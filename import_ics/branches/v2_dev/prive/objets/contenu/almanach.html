@@ -1,4 +1,8 @@
 <BOUCLE_almanach(ALMANACHS){id_almanach}{statut?}>
+[(#SET{defaut_tri,#ARRAY{
+	date_debut,#ENV{date_sens,-1},
+	num titre,1,
+}})]
 
 [<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
 	<label><:almanach:label_titre:> : </label>
@@ -31,48 +35,7 @@
 	<span dir='#LANG_DIR' class='#EDIT{decalage} decalage'>[ [(#DECALAGE|>={0}|?{+})](#DECALAGE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
 </div>
 
-<B_liste_evenements>
-#ANCRE_PAGINATION
-<div class="liste-objets">
-	[(#REM) On boucle sur la table de liens pour récupérer l'id de l'objet evenement voulu puis on boucle sur la table evenement pour recuperer les détails de l'événement ]
-	<table class='spip liste'>
-	<caption><span class="image_loading"></span><strong class="caption"><:almanach:info_evenement_almanach:></strong></caption>
-	<thead>
-		<tr class='first_row'>
-			<th class='date' scope='col'><:date:></th>
-			<th class='orateur' scope='col'><:almanach:attendee:></th>
-			<th class='titre' scope='col'><:info_titre:></th>
-		</tr>
-	</thead>
-	<tbody>
-		<BOUCLE_liste_evenements(spip_almanachs_liens evenements){id_almanach=#ID_ALMANACH}{objet=evenement}{pagination 10}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		<BOUCLE_details_evenement(EVENEMENTS){id_evenement=#ID_OBJET}{tout}>
-			<td class='date secondaire'>[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})]</td>
-			<td class="orateur">#ATTENDEE</td>
-			<td class='titre principale'>
-				[(#ATTENDEE|?{
-				 [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE|replace{#ATTENDEE\h-\h})</a>],
-			   [<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">(#TITRE)</a>]
-				 }
-				)]
-				<br />
-				[<strong><:almanach:lieu:> : </strong>(#LIEU)]
-
-			</td>
-		</BOUCLE_details_evenement>
-		</tr>
-		</BOUCLE_liste_evenements>
-	</tbody>
-</table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
-</div>
-</B_liste_evenements>
-
-<p><:almanach:aucun_evenement:></p>
-[(#BOUTON_ACTION{<:almanach:retour_liste:>,#URL_ECRIRE{almanachs}})]
-<p><:almanach:regenerer_almanach:></p>
-<//B_liste_evenements>
+  #INCLURE{fond=prive/objets/liste/evenements_almanach,env,ajax}
 
 
 	[(#MAJ|oui)
