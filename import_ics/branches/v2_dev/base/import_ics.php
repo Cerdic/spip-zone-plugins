@@ -22,7 +22,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function import_ics_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['almanachs'] = 'almanachs';
-
 	return $interfaces;
 }
 
@@ -85,6 +84,13 @@ function import_ics_declarer_tables_objets_sql($tables) {
 
 	);
 	
+	// les jointures automatiques
+	$tables['spip_evenements']['tables_jointures'][] = 'almanachs_liens';
+	$tables['spip_evenements']['tables_jointures'][] = 'almanachs';
+	$tables['spip_almanachs']['tables_jointures'][] = 'almanachs_liens';
+	$tables['spip_almanachs']['tables_jointures'][] = 'almanachs_liens';
+
+
 	// ajout du statut archive sur les evenements
 	$tables["spip_evenements"]["statut_titres"]["archive"] = "import_ics:archive";
 	$tables["spip_evenements"]["statut_textes_instituer"]["archive"] = "import_ics:archiver";
