@@ -31,7 +31,7 @@ $arg = $securiser_action();
 		$result["url"],
 		$result["id_article"],
 		$result["id_mot"],
-		$result["decalage"],
+		$result["decalage"]
 	);
 }
 
