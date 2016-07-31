@@ -12,6 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"cfg_attention"    => "Attention: les modifications effectuées sur ce formulaire n'affecteront pas les almanachs déjà créés et les évènements associés.", 
 	"cfg_configurer"   => "Configurer l'import de fichiers ICS",	
 	
+	// D
+	"depublier_anciens_evts" => "Dépublier les anciens évènements",
+	"depublier_anciens_evts_explication" => "Cocher cette case si vous souhaitez que les évènements qui ne sont plus présents dans un flux distant soient automatiquement basculés à en «&nbsp;archivés&nbsp;»",
+	
 	//G
 	"groupe_mots"			=> "Groupe de mots",
 	"groupe_mots_explication" =>"Lors de la création d'un almanach, forcer à choisir un mot clef dans le groupe.",

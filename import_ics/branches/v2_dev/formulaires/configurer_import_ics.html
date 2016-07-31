@@ -9,6 +9,19 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<(#DIV|sinon{ul})>]
 
+		[(#EVAL{_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS}|in_array{#LISTE{on,off}}|?{
+			#SAISIE{case,depublier_anciens_evts,
+				label=<:import_ics:depublier_anciens_evts:>,
+				valeur_forcee=#EVAL{_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS},
+				explication=<:import_ics:depublier_anciens_evts_explication:> <:import_ics:v_php:>,
+				label_case=<:import_ics:depublier_anciens_evts:>
+				disable=disabled},
+			#SAISIE{case, depublier_anciens_evts,
+					label=<:import_ics:depublier_anciens_evts:>,
+					explication=<:import_ics:depublier_anciens_evts:>,
+					label_case=<:import_ics:depublier_anciens_evts:>}
+			}
+			)]
 		[(#EVAL{_IMPORT_ICS_MOT_FACULTATIF}|in_array{#LISTE{on,off}}|?{
 			[(#SAISIE{case,mot_facultatif,
  		  	label=<:import_ics:mot_facultatif:>,
