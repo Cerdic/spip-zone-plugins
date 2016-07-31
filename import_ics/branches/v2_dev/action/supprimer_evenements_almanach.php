@@ -1,7 +1,8 @@
 <?php
-#tout est pompé du tutoriel de marcimat "chat"
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip("action/editer_liens");
+include_spip("inc/autoriser");
 function action_supprimer_evenements_almanach_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -17,12 +18,18 @@ function action_supprimer_evenements_almanach_post($id_almanach) {
 	//recuperer tous les evenemments lies à l'almanach en cours
 	$all = sql_allfetsel('id_objet', 'spip_almanachs_liens','id_almanach='.intval($id_almanach));
 	//pour chacun d'entre eux supprimer l'entree correspondante dans la table evenement
+	$les_evenements=array();
 	foreach ($all as $id_evenement_array) {
 		$id_evenement=$id_evenement_array['id_objet'];
+		$les_evenements[]=$id_evenement;
 		sql_delete("spip_evenements","id_evenement=".intval($id_evenement));
 	}
-	//on supprime les entrees de la table de liaison
-	sql_delete("spip_almanachs_liens","id_almanach=".intval($id_almanach));
+	//on supprime les liaisons
+	
+	objet_dissocier(
+		array("mot"=>"*","almanach"=>$id_almanach),
+		array("evenement"=>$les_evenements)
+	);
 	
 	include_spip('inc/invalideur');
 	suivre_invalideur(1);

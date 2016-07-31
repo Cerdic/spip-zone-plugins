@@ -5,7 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 
 include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
-
+include_spip('inc/autoriser');
+include_spip('action/editer_objet');
+include_spip('action/editer_liens');
 
 function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_ressource=null){
 
@@ -31,15 +33,18 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_r
 
 			//vérifier l'existence et l'unicité
 			if (in_array($uid_distante, $uid)){//si l'uid_distante est présente dans la bdd, alors on teste si l'evenement a été modifié à distance
-				$test_variation = sql_fetsel("last_modified_distant,sequence",
+				$test_variation = sql_fetsel("last_modified_distant,sequence,id_evenement",
 					"spip_evenements",
 					"`uid`=".sql_quote($uid_distante)
 				);
 				$last_modified_local = unserialize($test_variation["last_modified_local"]);
 				$sequence_local = $test_variation["sequence"];
+				$id_evenement = $test_variation["id_evenement"];
 				if ($last_modified_local!=$last_modified_distant or $sequence_local!=$sequence_distant){
 						$champs_sql = evenement_ical_to_sql($comp);
-						sql_updateq("spip_evenements",$champs_sql,	"`uid`=".sql_quote($uid_distante));
+						autoriser_exception('evenement','modifier',$id_evenement);
+						objet_modifier('evenement',$id_evenement,$champs_sql);
+						autoriser_exception('evenement','modifier',$id_evenement,false);
 					}
 				} 
 			else {
@@ -54,19 +59,30 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage,$id_r
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$id_ressource=null){
   $champs_sql = array_merge(
-		evenement_ical_to_sql($objet_evenement),// les infos distante
+		evenement_ical_to_sql($objet_evenement),
 		array("id_article"=>$id_article)
 	);
 	
-  $id_evenement= sql_insertq('spip_evenements',$champs_sql);
+	# création de l'evt
+	autoriser_exception('creer','evenement','');
+  $id_evenement= objet_inserer('spip_evenements',$id_article,$champs_sql);
+	autoriser_exception('creer','evenement','',false);
+	
+	autoriser_exception('instituer','evenement',$id_evenement);
+	autoriser_exception('modifier','article',$id_article);
+	objet_instituer('evenement',$id_evenement,array("statut"=>'publie'));
+	autoriser_exception('instituer','evenement',$id_evenement,false);
+	autoriser_exception('modifier','article',$id_article,false);
 
+	
 	#on associe l'événement à l'almanach
-	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
-	sql_insertq("spip_almanachs_liens",array('id_almanach'=>$id_almanach,'id_objet'=>$id_evenement,'objet'=>'evenement','vu'=>'oui'));
+	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));	
 	#on associe l'événement à son mot
 	if ($id_mot){
-	  sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
-  }
+	  autoriser_exception('associermots','evenement',$id_evenement);
+		objet_associer(array("mot"=>$id_mot),array("evenement"=>$id_evenement));
+		autoriser_exception('associermots','evenement',$id_evenement,false);
+	}
 	#on ajoute la resa si on le doit
 	if ($id_ressource) {
 		ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin);
@@ -146,7 +162,6 @@ function evenement_ical_to_sql($objet_evenement){
 			'inscription'=>'0',
 			'places'=>'0',
 			'horaire'=>$horaire,
-			'statut'=>'publie',
 			'attendee'=>str_replace('MAILTO:', '', $attendee),
 			'id_evenement_source'=>'0',
 			'uid'=>$uid_distante,
