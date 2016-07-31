@@ -84,6 +84,16 @@ function import_ics_declarer_tables_objets_sql($tables) {
 		
 
 	);
+	
+	// ajout du statut archive sur les evenements
+	$tables["spip_evenements"]["statut_titres"]["archive"] = "import_ics:archive";
+	$tables["spip_evenements"]["statut_textes_instituer"]["archive"] = "import_ics:archiver";
+	$tables["spip_evenements"]["statut_images"] = array(
+		"archive"=>"puce-refuser-8.png",
+		"publie"=>"puce-publier-8.png",
+		"prop"=>"puce-proposer-8.png",
+		"poubelle"=>"puce-supprimer-8.png"
+	);
 
 	return $tables;
 }
