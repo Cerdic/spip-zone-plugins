@@ -18,15 +18,20 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 	$cal = new vcalendar($config);
 	$cal->parse();
 	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
-	$liens = sql_allfetsel('uid', 'spip_evenements');
+	$liens = sql_allfetsel('E.uid, E.id_evenement',
+	                        'spip_evenements AS E
+	                        INNER JOIN spip_almanachs_liens AS L
+	                        ON E.id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach),"E.statut!=".sql_quote("archive"));
 	// on definit un tableau des uid présentes dans la base
 	$uid =array();
 	foreach ($liens as $u ) {
-		$uid[] = $u['uid'];
+		$uid[$u["id_evenement"]] = $u['uid'];
 	};
+	$les_uid_distant = array();
 	while ($comp = $cal->getComponent()){
 			#les variables qui vont servir à vérifier l'existence et l'unicité 
 			$uid_distante = $comp->getProperty("UID");#uid de l'evenement
+			$les_uid_distant[] = 	$uid_distante;
 			$last_modified_distant = $comp->getProperty("LAST-MODIFIED");
 			$sequence_distant = $comp->getProperty("SEQUENCE");
 
@@ -50,9 +55,24 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
+		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
+			depublier_ancients_evts($uid,$les_uid_distant,$id_article);
+		}
 }
 
-
+/**
+* Dépublier (archiver) les anciens évènements
+**/
+function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
+	$diff = array_diff ($les_uid_local,$les_uid_distant);
+	foreach ($diff as $id_evenement =>$uid){
+		autoriser_exception('instituer','evenement',$id_evenement);
+		autoriser_exception('modifier','article',$id_article);
+		objet_instituer('evenement',$id_evenement,array("statut"=>'archive'));
+		autoriser_exception('instituer','evenement',$id_evenement,false);
+		autoriser_exception('modifier','article',$id_article,false);		
+	}
+}
 /**
 * Importation d'un événement dans la base
 **/
