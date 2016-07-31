@@ -7,9 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'isocode_description' => 'Ce plugin installe la base des divers codes de langue ISO-639 et permet via une API dédiée de consulter les codes d\'un système ISO et aussi de faire la correspondance avec les étiquettes SPIP et de quelques autres services web.',
-	'isocode_nom' => 'Codes et étiquettes de Langue',
-	'isocode_slogan' => 'Comprendre les codes ISO et les étiquettes de langue'
+	'isocode_description' => 'Ce plugin installe la base de divers codes standard comme les codes de langues ISO-639, les codes d\'écritures ISO-15924, les codes des pays ISO-3166... Le plugin fournit aussi une API ainsi qu\'un serice web pour la consultation des données.',
+	'isocode_nom' => 'Codes ISO',
+	'isocode_slogan' => 'Codes ISO pour les langues, les pays et autres objets'
 );
 
 ?>
