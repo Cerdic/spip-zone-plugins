@@ -49,6 +49,13 @@ class fichiersImporter extends Command {
 				'path ajouté devant le `fichier` des documents joints importés',
 				''
 			)
+			->addOption(
+				'copier_mots',
+				'm',
+				InputOption::VALUE_OPTIONAL,
+				'oui si on doit importer les mots_clés',
+				''
+			)
 		;
 	}
 
@@ -61,7 +68,8 @@ class fichiersImporter extends Command {
 		
 		$source = $input->getOption('source') ;
 		$id_parent = $input->getOption('dest') ;
-		$racine_documents = $input->getOption('racine_documents') ;		
+		$racine_documents = $input->getOption('racine_documents') ;	
+		$copier_mots = $input->getOption('copier_mots') ;		
 				
 		// Répertoire source
 		if(!is_dir($source)){
@@ -245,7 +253,7 @@ class fichiersImporter extends Command {
 						}
 				
 						// Créer des mots clés ?
-						if($mots_cles){
+						if($mots_cles AND $copier_mots == "oui"){
 							foreach($mots_cles as $mot){
 								// groupe mot-clé
 								list($type_mot,$titre_mot) = explode("::", $mot);
