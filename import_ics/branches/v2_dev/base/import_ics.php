@@ -46,12 +46,10 @@ function import_ics_declarer_tables_objets_sql($tables) {
 			"url"                => "text NOT NULL DEFAULT ''",
 			"id_article"         => "bigint(21) NOT NULL DEFAULT 0",
 			"id_mot"             => "bigint(21) NOT NULL DEFAULT 0",
-			"resa_auto"          => "bigint(21) NOT NULL DEFAULT 0",
 			"decalage"           => "bigint(21) NOT NULL DEFAULT 0",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20) DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP",
-			"statut_maj"         => "varchar(20) DEFAULT '0' NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_almanach",
