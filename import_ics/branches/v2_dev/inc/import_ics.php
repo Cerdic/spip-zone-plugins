@@ -58,6 +58,8 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
 			depublier_ancients_evts($uid,$les_uid_distant,$id_article);
 		}
+		// mettre à jour les infos de synchronisation. Le champ derniere_synchro n'est pas un champ éditable, donc on passe par sql_update et pas par editer_objet
+		sql_update("spip_almanachs",array("derniere_synchro"=>"NOW()"),"id_almanach=".intval($id_almanach));
 }
 
 /**

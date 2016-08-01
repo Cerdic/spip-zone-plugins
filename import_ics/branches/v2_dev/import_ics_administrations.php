@@ -46,6 +46,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj["1.0.4"] = array(
 		array('sql_alter',"TABLE spip_evenements ADD last_modified_distant text NOT NULL"),
 	);
+	$maj["1.0.5"] = array(
+		array('sql_alter',"TABLE spip_almanachs ADD derniere_synchro datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

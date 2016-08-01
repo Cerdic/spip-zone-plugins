@@ -41,7 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_almanachs_auteur' => 'Les almanachs de cet auteur',
 	'info_evenement_almanach' => 'Les événements de cet almanach',
 	'info_aucun_almanach' => 'Aucun almanach',
-	'info_derniere_synchronisation' => 'La dernière synchronisation de cet almanach a été effectuée le ',
+	'info_derniere_synchronisation' => 'La dernière synchronisation de cet almanach a été effectuée le',
+	'info_jamais_synchro' => 'Cet almanach n\'a jamais été synchronisé',
+
 	'info_nb_almanachs' => '@nb@ almanachs',
 	'info_supprimer_almanach' => 'Supprimer',
 	'info_supprimer_evenements' => 'Supprimer ces événements',
