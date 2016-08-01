@@ -20,11 +20,9 @@
 	<necessite nom="agenda" compatibilite="[3.0.0;]" />
 	<necessite nom="icalendar" compatibilite="[0.4.3;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-
 	<necessite nom="saisies" compatibilite="[2.7.4;]" />
 
 	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
-
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/import_ics.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/import_ics.php" />
