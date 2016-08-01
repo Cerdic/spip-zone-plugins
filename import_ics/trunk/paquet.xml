@@ -17,6 +17,11 @@
 	<auteur>Amaury</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 	<licence>GNU/GPL</licence>
+	
+	<traduire module="almanach" reference="fr" />
+	<traduire module="import_ics" reference="fr" />
+	<traduire module="paquet-import_ics" reference="fr" />
+	
 	<necessite nom="agenda" compatibilite="[3.0.0;]" />
 	<necessite nom="icalendar" compatibilite="[0.4.3;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
