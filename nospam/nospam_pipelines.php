@@ -67,16 +67,17 @@ function nospam_inserer_nobot(&$texte){
 	if ((false === strpos($texte, 'name="email_nobot"'))
 		AND (false !== $pos = strpos($texte, '</form>'))
 	) {
-		// essayer de s'inserer au hasard entre 2 li du form
-		if (preg_match_all(",<li\b[^>]*class=['\"]editer[^>]*,ims",$texte,$m)
-		  AND $p = strpos($texte,$m[0][rand(0,count($m[0])-1)])){
-			$nobot = recuperer_fond("inclure/nobot", array('email_nobot' => '','div'=>'li'));
+		// essayer de s'inserer au hasard entre 2 div/li du form
+		if (preg_match_all(",<(div|li)\b[^>]*class=['\"]editer[^>]*,ims",$texte,$m)
+			AND $i = rand(0,count($m[0])-1)
+		  AND $p = strpos($texte,$m[0][$i])){
+			$nobot = recuperer_fond("inclure/nobot", array('email_nobot' => '','div'=>$m[1][$i]));
 			$texte = substr_replace($texte, $nobot, $p, 0);
 		}
-		// et sinon a la fin
+		// et sinon a la fin juste avant la(les) balise(s) </form>
 		else {
 			$nobot = recuperer_fond("inclure/nobot", array('email_nobot' => ''));
-			$texte = substr_replace($texte, $nobot, $pos, 0);
+			$texte = str_replace('</form>', $nobot . '</form>', $texte);
 		}
 	}
 	if (_SPAM_ENCRYPT_NAME){
