@@ -13,7 +13,7 @@
   - afficher_art_dans_langue_interface : si oui, on n'affiche que les articles de la langue de l'interface
   - limite_branche : branche dans laquelle on limite le selecteur
   - defaut : valeur par defaut si pas présente dans l'environnement
-  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement. Doit être de type #ARRAY{'article|3','article|9',etc}
 	 
   Exemple d'appel :
 	[(#SAISIE{selecteur_article,id_article,
@@ -32,7 +32,7 @@
 [(#REM) Donner a manger a CFG ou CVT-configurer si aucune valeur definie ]
 <!--keepme: <input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
 [(#INCLURE{fond=formulaires/selecteur/articles,
-	selected=#LISTE{article|#GET{val}},
+	selected=#GET{val},
 	name=#ENV{nom},
 	afficher_langue=#ENV{afficher_langue,''},
 	filtrer_langue_article=#GET{filtrer_langue_article,''},
