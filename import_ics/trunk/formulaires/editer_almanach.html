@@ -27,7 +27,7 @@
 			[(#SAISIE{selecteur_article, le_id_article, obligatoire=oui,
 				label=<:agenda:evenement_article:>,
 				li_class=editer_parent, 
-        defaut=#ID_ARTICLE,
+        defaut=#LISTE{article|#ID_ARTICLE},
 				explication=<:almanach:explication_id_article:>
 			})]
       #SET{id_groupe,#EVAL{defined('_IMPORT_ICS_ID_GROUPE')}|?{#EVAL{_IMPORT_ICS_ID_MOT},#CONFIG{import_ics/id_groupe}}}
