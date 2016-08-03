@@ -3,7 +3,7 @@
 			<legend><:autorite:droits_des_auteurs:></legend>
 			<ul class="editer-groupe">
 				#SET{name,auteur_mod_article}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
@@ -12,7 +12,7 @@
 					</div>
 				</li>
 				#SET{name,auteur_modere_forum}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
@@ -21,7 +21,7 @@
 					</div>
 				</li>
 				#SET{name,auteur_modere_petition}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
