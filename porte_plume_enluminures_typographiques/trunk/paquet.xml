@@ -1,13 +1,13 @@
 <paquet
 	prefix="typoenluminee"
 	categorie="edition"
-	version="3.5.7"
+	version="3.5.8"
 	etat="stable"
 	compatibilite="[2.0.3;3.1.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
 	documentation="http://contrib.spip.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
 	schema="0.1.0"
->	
+>
 
 	<nom>Enluminures typographiques</nom>
 	<!-- Plein de raccourcis pour la mise en forme ! -->
@@ -30,7 +30,7 @@
 	<pipeline nom="header_prive" inclure="typoenluminee_pipelines.php" />
 	<pipeline nom="porte_plume_barre_pre_charger" inclure="enluminures_typo_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="enluminures_typo_pipelines.php" />
-	
+
 	<menu nom="configurer_typoenluminee" titre="enlumtypo:configuration_typoenluminee" parent="menu_squelette" icone="images/typoenluminee-16.png" />
 
 	<necessite nom="porte_plume" compatibilite="[1.2.2;[" />
