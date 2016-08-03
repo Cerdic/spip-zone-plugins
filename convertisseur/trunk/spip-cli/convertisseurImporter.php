@@ -183,7 +183,7 @@ class fichiersImporter extends Command {
 					$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 					
 					if($up)
-						$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
+						$progress->setMessage(" Rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
 					
 					$progress->setMessage("", 'docs');											
 					$progress->setMessage("", 'mot');
