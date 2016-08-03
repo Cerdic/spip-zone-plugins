@@ -6,7 +6,7 @@
 
 	<form method="post" action="#SELF"><div>
 		#ACTION_FORMULAIRE
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,objets}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:compositions:label_activer_composition_objets:></label>[
@@ -15,7 +15,7 @@
 				#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name},#LISTE{spip_articles,spip_rubriques}}}
 			</li>
 
-			<li class='configurer_chemin_compositions'>
+			<li class='editer configurer_chemin_compositions'>
 				<label for="chemin_compositions"><:compositions:label_chemin_compositions:></label>
 				[(#PLUGIN{z}|ou{#PLUGIN{zcore}}|non)<div class='explication'><:compositions:label_chemin_compositions_details:></div>]
 				<input type="text" name="chemin_compositions" value="[(#REM|compositions_chemin|entites_html)]" id="chemin_compositions" class="text" [(#PLUGIN{z}|ou{#PLUGIN{zcore}}|oui)disabled="true"] />
@@ -28,14 +28,14 @@
 				</div>
 			</li>
 			]
-			<li class='configurer_masquer_formulaire'>
+			<li class='editer configurer_masquer_formulaire'>
 				<label><:compositions:label_masquer_formulaire:></label>
 				<div class="choix">
 					<input type="checkbox" name="masquer_formulaire" [checked="(#ENV{masquer_formulaire}|=={oui}|?{checked})"] id="masquer_formulaire" value='oui' />
 					<label for="masquer_formulaire"><:compositions:label_masquer_formulaire_composition:></label>
 				</div>
 			</li>
-			<li class='configurer_tout_verrouiller'>
+			<li class='editer configurer_tout_verrouiller'>
 				<label><:compositions:label_tout_verrouiller:></label>
 				<div class="choix">
 					<input type="checkbox" name="tout_verrouiller" [checked="(#ENV{tout_verrouiller}|=={oui}|?{checked})"] id="tout_verrouiller" value='oui' />

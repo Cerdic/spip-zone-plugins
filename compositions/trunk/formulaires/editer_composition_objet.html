@@ -37,19 +37,19 @@
 	</div>
 
 	[(#ENV{editable})
-	<ul>
+	<ul class="editer-groupe">
 		#SET{fl,compositions}
 		#SET{name,composition}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
-		[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		[<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions}{composition_heritee})
 		</li>]
-		
+
 		#SET{lock,''}
 		[(#AUTORISER{webmestre}|et{#ENV{verrou_branche}|non}|et{#CONFIG{compositions/tout_verrouiller}|non}|oui)
 			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs/#GET{name}}}#SET{obli,''}
-			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<label><:compositions:label_composition_explication:></label>
 				[(#ENV{_compositions}|is_array|oui)
@@ -71,13 +71,13 @@
 			#SET{lock,'oui'}
 		]
 		[(#ENV{verrou_branche}|oui)
-		<li>
+		<li class="editer editer_branche_verrouillee">
 			<label><:compositions:label_information:></label>
 			<:compositions:label_branche_verrouillee:>
 		</li>
 		]
 		[(#CONFIG{compositions/tout_verrouiller}|oui)
-		<li>
+		<li class="editer editer_toutes_verouillees">
 			<label><:compositions:label_information:></label>
 			<:compositions:label_toutes_verrouilles:>
 		</li>

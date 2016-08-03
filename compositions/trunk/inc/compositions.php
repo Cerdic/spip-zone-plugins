@@ -19,9 +19,9 @@ include_spip('compositions_fonctions');
 function compositions_decomposer_nom($nom){
 	$reg = ",^([a-z][^-.]*)("._COMPOSITIONS_MATCH.")?$,i";
 	if (
-		// recuperer le type et la composition
+		/* recuperer le type et la composition */
 	  preg_match($reg,$nom,$matches)
-	  // il y a bien un type
+	  /* il y a bien un type */
 	  AND $type=$matches[1]
 	){
 		$composition = isset($matches[3])?$matches[3]:'';
@@ -38,7 +38,7 @@ function compositions_decomposer_nom($nom){
  * @return array|string
  */
 function compositions_charger_infos($nom,$info=""){
-		// on peut appeller avec le nom du squelette
+		/* on peut appeller avec le nom du squelette */
 		$nom = preg_replace(',[.]html$,i','',$nom).".xml";
 		include_spip('inc/xml');
 		$composition = array();
@@ -70,7 +70,7 @@ function compositions_charger_infos($nom,$info=""){
 		}
 		if (!$info)
 			return $composition;
-		else 
+		else
 			return isset($composition[$info])?$composition[$info]:"";
 }
 
@@ -89,12 +89,12 @@ function compositions_charger_infos($nom,$info=""){
  * @param array $liste
  */
 function compositions_cacher($liste=null){
-	// lister les compositions vraiment utilisees
+	/* lister les compositions vraiment utilisees */
 	if (!is_array($liste)){
 		include_spip('compositions_fonctions');
 		$liste = compositions_lister_disponibles('',false);
 	}
-	// lister les objets dont on a active la composition dans la configuration
+	/* lister les objets dont on a active la composition dans la configuration */
 	$config = compositions_objets_actives();
 
 	$liste = array_intersect($config,array_keys($liste));
