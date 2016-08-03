@@ -177,7 +177,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 	spip_log("src=$src","modeles_media");
 
 	$src_imgsize = str_replace('https://', 'http://', $src); // No https for getimagesize
-	list($width, $height) = getimagesize($src_imgsize);
+	list($width, $height) = @getimagesize($src_imgsize);
 	// hauteur du redimensionnement
 	if (is_numeric($hauteur) && intval($hauteur)>0)
 		$hauteur = intval($hauteur);
