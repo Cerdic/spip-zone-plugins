@@ -49,13 +49,6 @@ class fichiersImporter extends Command {
 				'path ajouté devant le `fichier` des documents joints importés',
 				''
 			)
-			->addOption(
-				'copier_mots',
-				'm',
-				InputOption::VALUE_OPTIONAL,
-				'oui si on doit importer les mots_clés',
-				''
-			)
 		;
 	}
 
@@ -69,7 +62,6 @@ class fichiersImporter extends Command {
 		$source = $input->getOption('source') ;
 		$id_parent = $input->getOption('dest') ;
 		$racine_documents = $input->getOption('racine_documents') ;	
-		$copier_mots = $input->getOption('copier_mots') ;		
 				
 		// Répertoire source
 		if(!is_dir($source)){
@@ -188,7 +180,7 @@ class fichiersImporter extends Command {
 					
 					include_spip("inc/rubriques");
 					$id_rubrique = creer_rubrique_nommee("$titre_parent/$titre_rubrique", $id_parent);
-					$up = sql_update('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
+					$up = sql_updateq('spip_rubriques', array('statut' => 'publie'), "id_rubrique=$id_rubrique");
 					
 					if($up)
 						$progress->setMessage(" Création de rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
@@ -253,7 +245,7 @@ class fichiersImporter extends Command {
 						}
 				
 						// Créer des mots clés ?
-						if($mots_cles AND $copier_mots == "oui"){
+						if($mots_cles){
 							foreach($mots_cles as $mot){
 								// groupe mot-clé
 								list($type_mot,$titre_mot) = explode("::", $mot);

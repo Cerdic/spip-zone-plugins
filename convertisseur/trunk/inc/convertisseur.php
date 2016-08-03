@@ -671,9 +671,12 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 
 	$r = array();
 	foreach ($c as $var => $val)
-		$r[$var] = sql_quote(trim($val));
+		$r[$var] = trim($val);
 
-	sql_update("spip_articles", $r, "id_article=" . $id_article);
+	//var_dump($r,$id_article);
+	//exit ;
+
+	sql_updateq("spip_articles", $r, "id_article=" . $id_article);
 	
 	return $id_article;
 }
