@@ -8,7 +8,7 @@
 	// On l'appelle de plusieurs facons
 	1) mode un PDF (une ou plusieurs pages) spip pdf2img path/to/fichier.pdf
 	2) un pdf multipages avec format de pages particulier en destination : spip pdf2img -d path/to/pdf_%02d.jpg path/to/fichier.pdf
-	3) traitements par lot des pdf d'un repertoire source vers un repertoire dest : spip pdf2img -s path -d path
+	3) traitements par lot des pdf (une page) d'un repertoire source vers un repertoire dest : spip pdf2img -s path -d path
 	
 	On peut aussi rogner en haut ou sur les cotés avec l'option shave : -c XxY. (exemples : -c 40x40 ou bien -c x40, ou encore -c 40x)
 	
@@ -57,7 +57,7 @@ class pdf2img extends Command {
 				'c',
 				InputOption::VALUE_OPTIONAL,
 				'Rogner en hauteur ou largeur avec -c XxY. (exemples : -c 40x40 ou bien -c x40, ou encore -c 40x)',
-				''
+				'0'
 			)
 		;
 	}
@@ -101,6 +101,9 @@ class pdf2img extends Command {
 					exit();
 				}	
 
+				//var_dump($dirdest, $pdf, $shave);
+				//exit ;
+
 				
 				# Conversion d'un pdf  ?
 				if($pdf !== ""){
@@ -108,7 +111,7 @@ class pdf2img extends Command {
 
 					// var_dump('plugins/convertisseur/scripts/pdf2img.sh ' . "$pdf" . ' ' . $dest  . ' ' . $shave);
 					// Conversion imagemagick
-					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($pdf) . ' ' . $dest . ' ' . $shave);
+					passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($pdf) . ' ' . escapeshellarg($dest) . ' ' . escapeshellarg($shave));
 
 				}else{	
 					$fichiers_pdf = preg_files($source . "/", "\.pdf$");
@@ -116,7 +119,7 @@ class pdf2img extends Command {
 
 					foreach($fichiers_pdf as $f){
 						// Conversion imagemagick
-						passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($f) . ' ' . $dest . ' ' . $shave);
+						passthru('plugins/convertisseur/scripts/pdf2img.sh ' . escapeshellarg($f) . ' ' . escapeshellarg($dest) . ' ' . escapeshellarg($shave));
 					}
 				}
 			}
