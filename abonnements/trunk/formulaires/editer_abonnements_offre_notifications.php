@@ -15,7 +15,7 @@ function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abo
 			'verifier' => array(
 				'type' => 'entier',
 				'options' => array(
-					'min' => 1,
+					'min' => (_request('periode') == 'jours') ? 0 : 1,
 				),
 			),
 		),
@@ -52,7 +52,7 @@ function formulaires_editer_abonnements_offre_notifications_verifier_dist($id_ab
 	$erreurs = array();
 	
 	if (!$supprimer = _request('supprimer')){
-		if (!_request('duree')){
+		if (!strlen(_request('duree'))){
 			$erreurs['duree'] = _T('info_obligatoire');
 		}
 	}
