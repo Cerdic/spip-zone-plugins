@@ -8,9 +8,8 @@ include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse d
 include_spip('inc/autoriser');
 include_spip('action/editer_objet');
 include_spip('action/editer_liens');
-
+include_spip('inc/config');
 function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
-
 
 	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
