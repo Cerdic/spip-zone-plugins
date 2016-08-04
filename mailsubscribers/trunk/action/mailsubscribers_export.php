@@ -45,7 +45,7 @@ function action_mailsubscribers_export_dist($statut = null) {
 
 	$titre = _T('mailsubscriber:titre_mailsubscribers') . "-" . $GLOBALS['meta']['nom_site'] . "-" . date('Y-m-d');
 	$exporter_csv = charger_fonction("exporter_csv", "inc");
-	$listes = sql_get_select('group_concat(L.identifiant)','spip_mailsubscriptions as S JOIN spip_mailsubscribinglists as L ON L.id_mailsubscribinglist=S.id_mailsubscribinglist','S.id_mailsubscriber=M.id_mailsubscriber');
+	$listes = sql_get_select('group_concat(L.identifiant)','spip_mailsubscriptions as S JOIN spip_mailsubscribinglists as L ON L.id_mailsubscribinglist=S.id_mailsubscribinglist','S.id_segment=0 AND S.id_mailsubscriber=M.id_mailsubscriber');
 	$res = sql_select("M.email,M.nom,M.lang,M.date,M.statut,($listes) as listes", "spip_mailsubscribers AS M", $where);
 	$exporter_csv($titre, $res, ',', $entetes);
 
