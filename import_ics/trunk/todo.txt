@@ -1,0 +1,5 @@
+- ajouter lien vers almanach sur un evenement particulier
+- option pour que les evenements soient proposés et non pas publiés
+- bug signalé en privé par Thiébaut
+- debug fonction de décalage horaire
+- mieux gérer suppression des almanachs
