@@ -256,7 +256,7 @@ class fichiersImporter extends Command {
 									$id_groupe_mot = sql_insertq("spip_groupes_mots", array("titre" => $type_mot));								
 
 								$id_mot = sql_getfetsel("id_mot", "spip_mots", "titre=" . sql_quote($titre_mot));
-								if(!$id_mot){
+								if(!$id_mot AND $titre_mot !=""){
 									$id_mot = sql_insertq("spip_mots", array(
     									"titre" => $titre_mot,
     									"type" => $type_mot,
