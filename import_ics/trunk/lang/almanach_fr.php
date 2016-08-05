@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_almanach' => 'Ajouter cet almanach',
+	'almanach'					=> "Almanach",
 	'appliquer_decalage' => 'Appliquer le décalage',
 	'appliquer_decalage_explication' => 'Voulez-vous appliquer le décalage à tous les événements associés à cet almanach (il est préférable de supprimer l’ancien décalage puis d’appliquer le nouveau) ?',
 	'attendee' => 'Intervenant(e)',

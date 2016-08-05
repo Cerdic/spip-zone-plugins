@@ -30,4 +30,9 @@ function import_ics_taches_generales_cron($taches_generales){
 	$taches_generales['import_ics_synchro'] = 3600*24;/*mettre à jour toutes les 24 heures parait bien*/
 	return $taches_generales;
 }
+
+function import_ics_evenement_liaisons_colonne_gauche($flux){
+	$flux["data"]= $flux["data"].recuperer_fond("prive/objets/infos/evenement_liaisons_almanach",$flux['args']);
+	return $flux;
+}
 ?>
