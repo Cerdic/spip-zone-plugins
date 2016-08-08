@@ -3,7 +3,7 @@
 	<slogan>Affiche un menu d&#233;roulant</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.3</version>
+	<version>0.5.4</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>prive/themes/spip/images/jquerysuperfish-32.png</icon>
@@ -41,7 +41,7 @@
 		<titre>jquerysuperfish:titre_menu</titre>
 		<url>configurer_jquerysuperfish</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="saisies" version="[1.25.5;]" />
 	<necessite id="YAML" version="[1.5;]" />
