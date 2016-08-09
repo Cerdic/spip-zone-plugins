@@ -128,7 +128,8 @@ function accesrestreint_page_indisponible($contexte) {
 function accesrestreint_post_edition($flux) {
 	// Si on vient de modifier une zone et qu'elle a l'option autoriser_si_connexion
 	if (
-		$flux['args']['type'] == 'zone'
+		isset($flux['args']['type'])
+		and $flux['args']['type'] == 'zone'
 		and $id_zone = $flux['args']['id_objet']
 	) {
 		include_spip('inc/config');
