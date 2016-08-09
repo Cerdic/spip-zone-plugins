@@ -344,7 +344,7 @@ function cextras_formulaire_verifier($flux){
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
 **/ 
-function cextras_revisions_chercher_label($flux){
+function cextras_revisions_chercher_label($flux) {
 	$table = table_objet_sql($flux['args']['objet']);
 	$saisies_tables = champs_extras_objet($table);
 	foreach($saisies_tables as $champ){
@@ -352,6 +352,42 @@ function cextras_revisions_chercher_label($flux){
 			$flux['data'] = $champ['options']['label'];
 			break;
 		}
+	}
+	return $flux;
+}
+
+
+/**
+ * Ajouter les saisies de champs extras sur des formulaires spécifiques
+ * 
+ * Les champs extras s'ajoutent déjà automatiquement sur les formulaires d'édition
+ * des objets éditoriaux. Pour d'autres formulaires plus spécifiques, tel
+ * que des formulaires d'inscriptions, il est possible d'envoyer,
+ * dans la partie 'charger' du formulaire en question la clé
+ * `_champs_extras_saisies`, listant les saisies à afficher dedans.
+ * 
+ * Elles seront ajoutées automatiquement à l'endroit où le code
+ * html `<!--extra-->` est présent dans le formulaire.
+ *
+ * @see cextras_obtenir_saisies_champs_extras() qui aide à récupérer les saisies.
+ * 
+ * @param array $flux
+ * @return array
+**/
+function cextras_formulaire_fond($flux) {
+	if (!empty($flux['args']['contexte']['_champs_extras_saisies'])) {
+		$saisies = $flux['args']['contexte']['_champs_extras_saisies'];
+
+		// ajouter au formulaire
+		$ajout = recuperer_fond('inclure/generer_saisies', array_merge($flux['args']['contexte'], array('saisies' => $saisies)));
+
+		// div par défaut en 3.1+, mais avant ul / li
+		$balise = saisie_balise_structure_formulaire('ul');
+		$flux['data'] = preg_replace(
+			'%(<!--extra-->)%is',
+			"<$balise class='editer-groupe champs_extras'>$ajout</$balise>\n" . '$1',
+			$flux['data']
+		);
 	}
 	return $flux;
 }

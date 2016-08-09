@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     ```
  *     <BOUCLE_x(TABLE)>
  *     - #CHAMP_EXTRA{nom_du_champ}
- *     - #CHAMP_EXTRA{nom_du_champ,label}
+ *     - #CHAMP_EXTRA{nom_du_champ, label}
  *     </BOUCLE_x>
  *     ```
  *

@@ -414,3 +414,83 @@ function extras_champs($table, $connect) {
 		return array();
 	}
 }
+
+
+
+/**
+ * Retourne les saisies de champs extras d'un objet éditorial indiqué
+ * 
+ * Les saisies sont filtrées, par défaut par l'autorisation de modifier chaque champs extras.
+ * Des options peuvent modifier le comportement.
+ *
+ * @param string $objet 
+ *     Type de l'objet éditorial
+ * @param array $options {
+ *     @var int|null $id_auteur 
+ *         L'auteur testé pour les autorisations : null (par défaut) utilise l'auteur courant en session
+ *     @var string $autoriser 
+ *         'voir' ou 'modifier' (par défaut) : type d'autorisation testé, appellera voirextra ou modifierextra…
+ *     @var string[] $whitelist
+ *         Liste blanche de noms de champs : ces champs seront à afficher, et uniquement eux (modulo l'autorisation sur chaque champ)
+ *     @var string[] $blacklist
+ *         Liste noire de noms de champs : ces champs ne seront pas affichés (quelque soit l'autorisation sur chaque champ)
+ * }
+ * @return array 
+ *     Liste de saisies, les champs extras sur l'objet indiqué
+**/
+function cextras_obtenir_saisies_champs_extras($objet, $options = array()) {
+
+	$options += array(
+		'id_auteur' => null, 
+		'autoriser' => 'modifier',
+		'whitelist' => array(),
+		'blacklist' => array(),
+	);
+
+	include_spip('cextras_pipelines');
+	if ($saisies = champs_extras_objet( table_objet_sql($objet) )) {
+
+		// l'auteur pour l'autorisation
+		$id_auteur = is_null($options['id_auteur']) ? session_get('id_auteur') : $options['id_auteur'];
+
+		// type d'autorisation
+		if (!in_array($options['autoriser'], array('voir', 'modifier'))) {
+			$options['autoriser'] = 'modifier';
+		}
+
+		// listes inclusions et exclusions
+		$whitelist = array_unique(array_filter($options['whitelist']));
+		$blacklist = array_unique(array_filter($options['blacklist']));
+
+		// Conserver uniquement les saisies souhaitées
+		if (count($whitelist)) {
+			foreach ($saisies as $i => $saisie) {
+				if (empty($saisie['options']['nom']) or !in_array($saisie['options']['nom'], $whitelist)) {
+					unset($saisies[$i]);
+				}
+			}
+		}
+
+		// Enlever les saisies non souhaitées
+		if (count($blacklist)) {
+			foreach ($saisies as $i => $saisie) {
+				if (in_array($saisie['options']['nom'], $blacklist)) {
+					unset($saisies[$i]);
+				}
+			}
+		}
+
+		// filtrer simplement les saisies que la personne en cours peut voir
+		$saisies = champs_extras_autorisation($options['autoriser'], $objet, $saisies, array('id_objet' => $id_auteur));
+
+		if ($saisies) {
+			// pour chaque saisie presente, de type champs extras (hors fieldset et autres) ajouter un flag d'edition
+			$saisies = champs_extras_ajouter_drapeau_edition($saisies);
+			$valeurs['_saisies'] = $saisies;
+		}
+
+	}
+
+	return $saisies;
+}
+
