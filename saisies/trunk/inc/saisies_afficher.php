@@ -264,7 +264,7 @@ function saisies_generer_vue($saisie, $env = array(), $env_obligatoire = array()
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 
 	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
-	if ($env['valeurs'] and is_array($env['valeurs']) and isset($env['valeurs'][$contexte['nom']])) {
+	if (!empty($env['valeurs']) and is_array($env['valeurs']) and isset($env['valeurs'][$contexte['nom']])) {
 		$contexte['valeur'] = $env['valeurs'][$contexte['nom']];
 	} elseif (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)) {
 		// Si le nom du champ est un tableau indexé, il faut parser !
