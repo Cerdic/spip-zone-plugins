@@ -425,9 +425,9 @@ function extras_champs($table, $connect) {
  *
  * @param string $objet 
  *     Type de l'objet éditorial
+ * @param int|null $id_objet 
+ *     Identifiant de l'objet (si connu) peut servir aux autorisations.
  * @param array $options {
- *     @var int|null $id_auteur 
- *         L'auteur testé pour les autorisations : null (par défaut) utilise l'auteur courant en session
  *     @var string $autoriser 
  *         'voir' ou 'modifier' (par défaut) : type d'autorisation testé, appellera voirextra ou modifierextra…
  *     @var string[] $whitelist
@@ -438,10 +438,9 @@ function extras_champs($table, $connect) {
  * @return array 
  *     Liste de saisies, les champs extras sur l'objet indiqué
 **/
-function cextras_obtenir_saisies_champs_extras($objet, $options = array()) {
+function cextras_obtenir_saisies_champs_extras($objet, $id_objet = null, $options = array()) {
 
 	$options += array(
-		'id_auteur' => null, 
 		'autoriser' => 'modifier',
 		'whitelist' => array(),
 		'blacklist' => array(),
@@ -449,9 +448,6 @@ function cextras_obtenir_saisies_champs_extras($objet, $options = array()) {
 
 	include_spip('cextras_pipelines');
 	if ($saisies = champs_extras_objet( table_objet_sql($objet) )) {
-
-		// l'auteur pour l'autorisation
-		$id_auteur = is_null($options['id_auteur']) ? session_get('id_auteur') : $options['id_auteur'];
 
 		// type d'autorisation
 		if (!in_array($options['autoriser'], array('voir', 'modifier'))) {
@@ -481,7 +477,7 @@ function cextras_obtenir_saisies_champs_extras($objet, $options = array()) {
 		}
 
 		// filtrer simplement les saisies que la personne en cours peut voir
-		$saisies = champs_extras_autorisation($options['autoriser'], $objet, $saisies, array('id_objet' => $id_auteur));
+		$saisies = champs_extras_autorisation($options['autoriser'], $objet, $saisies, array('id_objet' => $id_objet));
 
 		if ($saisies) {
 			// pour chaque saisie presente, de type champs extras (hors fieldset et autres) ajouter un flag d'edition

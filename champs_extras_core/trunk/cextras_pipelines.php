@@ -158,11 +158,9 @@ function cextras_pre_edition($flux){
 	include_spip('inc/saisies_lister');
 	$table = $flux['args']['table'];
 	if ($saisies = champs_extras_objet( $table )) {
-
 		// Restreindre les champs postés en fonction des autorisations de les modifier
 		// au cas où un malin voudrait en envoyer plus que le formulaire ne demande
 		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
-
 		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 		foreach ($saisies as $saisie) {
 			$nom = $saisie['options']['nom'];
