@@ -17,7 +17,7 @@
 	<tbody>
 	<BOUCLE_liste_encarts(ENCARTS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='titre principale'>[(#LOGO_ENCART|image_reduire{20,26})]<a href="[(#ID_ENCART|generer_url_entite{encart})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ENCART">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_ENCART|image_reduire{20,26})]<a href="[(#ID_ENCART|generer_url_entite{encart})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ENCART (#IDENTIFIANT)">[(#RANG). ]#TITRE</a></td>
 			<td class="nb"><BOUCLE_nbpub(CAMPAGNES){id_encart}/><strong>#TOTAL_BOUCLE</strong><//B_nbpub><BOUCLE_nbpubtotal(CAMPAGNES){id_encart}{tout}/>[ (#TOTAL_BOUCLE|>{0}|oui)\(#TOTAL_BOUCLE\)]<//B_nbpubtotal></td>
 			<td class='id'>[(#AUTORISER{modifier,encart,#ID_ENCART}|?{
 				<a href="[(#URL_ECRIRE{encart_edit,id_encart=#ID_ENCART})]">#ID_ENCART</a>,
