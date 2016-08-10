@@ -118,11 +118,12 @@
 				France: {
 					url: '//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
 					options: {
+						maxZoom: 20,
 						attribution: '&copy; Openstreetmap France | {attribution.OpenStreetMap}'
 					}
 				},
 				HOT: {
-					url: 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+					url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
 					options: {
 						attribution: '{attribution.OpenStreetMap}, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
 					}
@@ -198,7 +199,7 @@
 			}
 		},
 		Hydda: {
-			url: 'http://{s}.tile.openstreetmap.se/hydda/{variant}/{z}/{x}/{y}.png',
+			url: '//{s}.tile.openstreetmap.se/hydda/{variant}/{z}/{x}/{y}.png',
 			options: {
 				variant: 'full',
 				attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data {attribution.OpenStreetMap}'
@@ -207,39 +208,6 @@
 				Full: 'full',
 				Base: 'base',
 				RoadsAndLabels: 'roads_and_labels'
-			}
-		},
-		MapQuestOpen: {
-			/* Mapquest does support https, but with a different subdomain:
-			 * https://otile{s}-s.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}
-			 * which makes implementing protocol relativity impossible.
-			 */
-			url: 'http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}',
-			options: {
-				type: 'map',
-				ext: 'jpg',
-				attribution:
-					'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-					'Map data {attribution.OpenStreetMap}',
-				subdomains: '1234'
-			},
-			variants: {
-				OSM: {},
-				Aerial: {
-					options: {
-						type: 'sat',
-						attribution:
-							'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-							'Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
-					}
-				},
-				HybridOverlay: {
-					options: {
-						type: 'hyb',
-						ext: 'png',
-						opacity: 0.9
-					}
-				}
 			}
 		},
 		MapBox: {
@@ -281,17 +249,15 @@
 				Terrain: {
 					options: {
 						variant: 'terrain',
-						minZoom: 4,
-						maxZoom: 18,
-						bounds: [[22, -132], [70, -56]]
+						minZoom: 0,
+						maxZoom: 18
 					}
 				},
 				TerrainBackground: {
 					options: {
 						variant: 'terrain-background',
-						minZoom: 4,
-						maxZoom: 18,
-						bounds: [[22, -132], [70, -56]]
+						minZoom: 0,
+						maxZoom: 18
 					}
 				},
 				TopOSMRelief: {

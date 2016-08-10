@@ -92,14 +92,6 @@ $gis_layers = array (
 		'nom' => 'Hydda Base',
 		'layer' => 'L.tileLayer.provider("Hydda.Base")'
 	),
-	'mapquestopen_osm' => array(
-		'nom' => 'Mapquest Open',
-		'layer' => 'L.tileLayer.provider("MapQuestOpen.OSM")'
-	),
-	'mapquestopen_aerial' => array(
-		'nom' => 'Mapquest Open Aerial',
-		'layer' => 'L.tileLayer.provider("MapQuestOpen.Aerial")'
-	),
 	'stamen_toner' => array(
 		'nom' => 'Stamen Toner',
 		'layer' => 'L.tileLayer.provider("Stamen.Toner")'
