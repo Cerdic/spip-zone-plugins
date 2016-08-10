@@ -1,6 +1,6 @@
 
 [(#REM) Lister les statuts de l'objet ]
-#SET{statuts, #ENV{table}|objet_info{statut_titres}}
+#SET{statuts, #ENV{table}|objet_info{statut_titres}|sinon{#ENV{table}|objet_info{statut_textes_instituer}}}
 <B_statut>
 <li class="editer">
 	<label><:indexer:configurer_statuts_ignores_label:></label>
