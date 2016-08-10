@@ -269,6 +269,11 @@ function orthotypo_espaces_fines_post_typo($t='') {
 		$nbsp,
 	),
 	$t);
+	
+	// CKEditor double les fines chaque fois que l'on passe en mode source puis retour
+	while (strpos($t, $fine.$fine) !== false) {
+		$t = str_replace($fine.$fine, $fine, $t);
+	}
 
 	return $t;
 }
