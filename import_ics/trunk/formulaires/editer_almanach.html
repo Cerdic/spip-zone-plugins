@@ -33,12 +33,21 @@
       #SET{id_groupe,#EVAL{defined('_IMPORT_ICS_ID_GROUPE')}|?{#EVAL{_IMPORT_ICS_ID_GROUPE},#CONFIG{import_ics/id_groupe}}}
       #SET{id_mot,#EVAL{defined('_IMPORT_ICS_ID_MOT')}|?{#EVAL{_IMPORT_ICS_ID_MOT},#CONFIG{import_ics/id_mot}}}
       [(#GET{id_mot}|non)
-        [(#SAISIE{mot,id_mot,
-          label=<:almanach:mot:>,
-          explication=<:almanach:mot_explication:>,
-          id_groupe=#GET{id_groupe},
-          forcer_select=oui,
-          table_liaison=evenements})] 
+        [(#GET{id_groupe}|non)
+			[(#SAISIE{mot,id_mot,
+			  label=<:almanach:mot:>,
+			  explication=<:almanach:mot_explication:>,
+			  forcer_select=oui,
+			  table_liaison=evenements})]
+		]
+        [(#GET{id_groupe}|oui)
+			[(#SAISIE{mot,id_mot,
+			  label=<:almanach:mot:>,
+			  explication=<:almanach:mot_explication:>,
+			  id_groupe=#GET{id_groupe},
+			  forcer_select=oui,
+			  table_liaison=evenements})]
+		]
       ]
       [(#GET{id_mot}|oui)
         #SAISIE{hidden,id_mot,valeur=#GET{id_mot}}
