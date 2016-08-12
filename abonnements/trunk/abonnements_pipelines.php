@@ -39,6 +39,9 @@ function abonnements_optimiser_base_disparus($flux) {
  */
 
 function abonnements_post_edition($flux) {
+	if (empty($flux['args']['table'])) {
+		return $flux;
+	}
 	// Si on modifie un abonnement
 	if ($flux['args']['table'] == 'spip_abonnements') {
 		include_spip('inc/abonnements');
