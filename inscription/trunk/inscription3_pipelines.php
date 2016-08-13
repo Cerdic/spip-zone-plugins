@@ -1268,7 +1268,8 @@ function inscription3_openid_inscrire_redirect($flux) {
  * 		Le contexte du pipeline modifié
  */
 function inscription3_post_edition($flux) {
-	if ($flux['args']['action'] == 'instituer'
+	if (isset($flux['args']['action'])
+		and $flux['args']['action'] == 'instituer'
 		and $flux['args']['table'] == 'spip_auteurs'
 		and $flux['args']['statut_ancien'] == '8aconfirmer') {
 		if ($notifications = charger_fonction('notifications', 'inc')) {
