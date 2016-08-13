@@ -122,7 +122,9 @@ function mailsubscribers_pre_edition($flux) {
  * @return mixed
  */
 function mailsubscribers_post_edition($flux) {
-	if ($flux['args']['table'] == 'spip_mailsubscribers'
+	if (
+		isset($flux['args']['table'])
+		AND $flux['args']['table'] == 'spip_mailsubscribers'
 		AND $id_mailsubscriber = $flux['args']['id_objet']
 	) {
 
