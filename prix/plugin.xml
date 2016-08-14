@@ -9,9 +9,9 @@
 	<icon>images/prix-128.png</icon>
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="prix" reference="fr" />
-	
+
 	<prefix>prix</prefix>
-	
+
 	<fonctions>prix_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
@@ -26,5 +26,5 @@
 		<action>priiix</action>
 		<inclure>prix_pipelines.php</inclure>
 	</pipeline>
-    <necessite id="SPIP" version="[2.1.8;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.8;3.1.99]" />
 </plugin>
