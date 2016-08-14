@@ -1,7 +1,7 @@
 <paquet
 	prefix="sjcycle"
 	categorie="multimedia"
-	version="3.4.14"
+	version="3.4.15"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
@@ -10,7 +10,7 @@
 >
 
 	<nom>Cycle2</nom>
-	<!--  Un diaporama param&#233;trable pour Spip  -->
+	<!--  Un diaporama paramétrable pour Spip  -->
 
 	<auteur>chankalan</auteur>
 	<credit>Minimalteck</credit><!-- pour les versions precedentes -->
