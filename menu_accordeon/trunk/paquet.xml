@@ -20,9 +20,9 @@
 	<pipeline nom="autoriser" inclure="inc/accordeon_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="accordeon_ieconfig_metas.php" />
 
-	<necessite nom="jqueryui" />
+	<necessite nom="jqueryui" compatibilite="[1.8.20;]" />
 
-	<utilise nom="menus" compatibilite="[0.8.10;[" />
+	<utilise nom="menus" compatibilite="[0.8.19;[" />
 
 	<menu nom="accordeon" titre="accordeon:titre_menu" parent="bando_squelette" icone="images/accordeon-16.png" action="configurer_accordeon" />
 </paquet>
