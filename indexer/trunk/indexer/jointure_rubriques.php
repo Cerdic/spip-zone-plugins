@@ -50,9 +50,9 @@ function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
 			$infos['content'] .= "\n\n".join(' | ', $titres_de_cette_branche);
 			
 			// On ajoute cette branche dans les infos
-			$infos['properties']['rubriques']['ids'] = array_unique(array_merge($infos['properties']['rubriques']['ids'], $ids_de_cette_branche));
+			$infos['properties']['rubriques']['ids'] = array_values(array_unique(array_merge($infos['properties']['rubriques']['ids'], $ids_de_cette_branche)));
 			$infos['properties']['rubriques']['titres'] = array_merge($infos['properties']['rubriques']['titres'], $titres_de_cette_branche);
-			$infos['properties']['rubriques']['ids_hierarchie'] = array_unique(array_merge($infos['properties']['rubriques']['ids_hierarchie'], $ids_hierarchie_de_cette_branche));
+			$infos['properties']['rubriques']['ids_hierarchie'] = array_values(array_unique(array_merge($infos['properties']['rubriques']['ids_hierarchie'], $ids_hierarchie_de_cette_branche)));
 			$infos['properties']['rubriques']['titres_hierarchie'] = array_merge($infos['properties']['rubriques']['titres_hierarchie'], $titres_hierarchie_de_cette_branche);
 		}
 	}
