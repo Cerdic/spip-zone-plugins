@@ -150,7 +150,11 @@ function oembed_renseigner_document_distant($flux) {
  * @return array
  */
 function oembed_post_edition($flux) {
-	if ($flux['args']['action']=='ajouter_document' and !empty($flux['data']['oembed'])) {
+	if (
+		isset($flux['args']['action'])
+		and $flux['args']['action'] == 'ajouter_document' 
+		and !empty($flux['data']['oembed'])
+	) {
 		$id_document = $flux['args']['id_objet'];
 		if ($data = oembed_recuperer_data($flux['data']['oembed'])) {
 			// vignette disponible ? la recupérer et l'associer au document
