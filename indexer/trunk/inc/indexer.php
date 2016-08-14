@@ -226,8 +226,8 @@ function indexer_lister_blocs_indexation($bloc = 100) {
 // suggerer des mots (si aspell est installee)
 // code adapté de https://github.com/splitbrain/dokuwiki-plugin-spellcheck/blob/master/spellcheck.php
 function indexer_suggestions($mot) {
-
 	include_spip('lib/aspell');
+	
 	if (!class_exists('Aspell')) {
 		spip_log('pas trouvé aspell.php', 'indexer');
 		return array();
@@ -245,9 +245,8 @@ function indexer_suggestions($mot) {
 		return null;
 	}
 
-
 	// go through the result
-	$lines = split("\n",$out);
+	$lines = explode("\n",$out);
 	$rcnt  = count($lines)-1;    // aspell result count
 	for($i=$rcnt; $i>=0; $i--){
 		$line = trim($lines[$i]);
