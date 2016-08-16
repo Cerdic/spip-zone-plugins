@@ -114,4 +114,3 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 	return $resultats;
 }
 
-?>

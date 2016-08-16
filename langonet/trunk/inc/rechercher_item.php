@@ -101,4 +101,3 @@ function inc_rechercher_item($pattern, $correspondance, $modules) {
 	return $resultats;
 }
 
-?>

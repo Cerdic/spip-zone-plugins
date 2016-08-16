@@ -241,4 +241,3 @@ function lister_dossiers_plugins($racine_arborescence=null) {
 	return $dossiers;
 }
 
-?>

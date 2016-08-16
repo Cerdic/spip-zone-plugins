@@ -86,4 +86,3 @@ function inc_lister_items($module, $langue, $ou_langue) {
 	return $resultats;
 }
 
-?>

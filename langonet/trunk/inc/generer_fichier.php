@@ -247,7 +247,7 @@ if (!defined(\'_ECRIRE_INC_VERSION\')) return;
 $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 ' .
 	  join("\n", $contenu)  .
-	  "\n);\n?".'>';
+	  "\n);\n";
 }
 
 
@@ -277,4 +277,3 @@ function entite2utf($texte) {
 	return $texte_utf8;
 }
 
-?>

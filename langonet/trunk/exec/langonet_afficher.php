@@ -32,4 +32,3 @@ function exec_langonet_afficher_dist(){
  	ajax_retour(recuperer_fond('prive/contenu/langonet_afficher',  $contexte));
 }
 
-?>

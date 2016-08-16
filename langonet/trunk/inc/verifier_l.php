@@ -82,4 +82,3 @@ function inc_verifier_l($ou_fichier) {
 
 	return $resultats;
 }
-?>

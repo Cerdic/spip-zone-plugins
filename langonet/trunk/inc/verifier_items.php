@@ -632,4 +632,3 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 			);
 }
 
-?>

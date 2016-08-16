@@ -47,4 +47,3 @@ function formulaires_langonet_generer_traiter() {
 	return $retour;
 }
 
-?>

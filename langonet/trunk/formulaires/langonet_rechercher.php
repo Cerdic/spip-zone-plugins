@@ -98,4 +98,3 @@ function formulaires_langonet_rechercher_traiter($type) {
 	return $retour;
 }
 
-?>

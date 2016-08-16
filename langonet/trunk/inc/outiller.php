@@ -282,4 +282,3 @@ function langonet_trouver_reference($module, $ou_langue, $force=true) {
 	return array($langue_reference, $tradlang);
 }
 
-?>

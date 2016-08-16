@@ -66,4 +66,3 @@ function formulaires_langonet_verifier_l_traiter() {
 	return $retour;
 }
 
-?>

@@ -28,4 +28,3 @@ function action_langonet_telecharger_dist(){
 
 }
 
-?>

@@ -80,4 +80,3 @@ function formulaires_langonet_verifier_doublon_traiter() {
 	return $retour;
 }
 
-?>

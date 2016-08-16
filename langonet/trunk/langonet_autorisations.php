@@ -17,4 +17,3 @@ function autoriser_langonet_lister_onglet_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_langonet_rechercher_onglet_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('webmestre');
 }
-?>

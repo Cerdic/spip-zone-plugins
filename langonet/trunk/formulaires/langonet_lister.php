@@ -52,4 +52,3 @@ function formulaires_langonet_lister_traiter() {
 	return $retour;
 }
 
-?>

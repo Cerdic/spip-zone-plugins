@@ -111,4 +111,3 @@ function inc_verifier_doublon($verification, $modules) {
 	return $resultats;
 }
 
-?>
