@@ -171,7 +171,7 @@ function notifications_notifications_destinataires($flux){
 
 			// Qui va-t-on prevenir en plus ?
 			$result_email = sql_select(
-				"auteurs.email",
+				array('auteurs.email', 'auteurs.id_auteur'),
 				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
 				"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
 
