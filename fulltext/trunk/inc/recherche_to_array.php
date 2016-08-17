@@ -461,6 +461,9 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$results[$id] = array();
 				}
 				if (isset($joint['score']) and $joint['score']) {
+					if (!isset($results[$id]['score'])) {
+						$results[$id]['score'] = 0;
+					}
 					$results[$id]['score'] += $joint['score'];
 				}
 				if (isset($joint['champs']) and $joint['champs']) {
