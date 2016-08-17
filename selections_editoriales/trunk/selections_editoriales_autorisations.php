@@ -225,8 +225,8 @@ function autoriser_selectionscontenu_voir_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_selectionscontenu_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$ok = (
 		(
-			$id_selection = intval($opt['id_selection'])
-			or $id_selection = sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.intval($id))
+			(isset($opt['id_selection']) and $id_selection = intval($opt['id_selection']))
+			or $id_selection = sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = ' . intval($id))
 		)
 		and autoriser('modifier', 'selection', $id_selection, $qui, $opt)
 	);
