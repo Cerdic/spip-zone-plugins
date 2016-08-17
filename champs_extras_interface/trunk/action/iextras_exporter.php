@@ -267,8 +267,22 @@ EOF;
 			$nom = $champ['options']['nom'];
 			$desc = var_export($champ, true);
 			$desc = explode("\n", $desc);
-			$desc = implode("\n\t\t", $desc);
-			$contenu .= "\n\t\$champs['$table']['$nom'] = $desc;\n";
+			// remplacer les espaces par des tabulations
+			foreach ($desc as $i => $l) {
+				$l = str_replace("  ", "\t", $l);
+				$desc[$i] = str_replace("array (", "array(", $l);
+			}
+			// mettre des tabulations en début de chaque ligne
+			// sauf 'array(' que l'on laisse sur la même ligne que le signe =>
+			$d = "";
+			foreach ($desc as $i => $l) {
+				if (strpos(ltrim($l, "\t"), 'array(') === 0) {
+					$d .= ltrim($l, "\t");
+				} else {
+					$d .= "\n\t\t" . $l;
+				}
+			}
+			$contenu .= "\n\t\$champs['$table']['$nom'] = $d;\n";
 		}
 	}
 
