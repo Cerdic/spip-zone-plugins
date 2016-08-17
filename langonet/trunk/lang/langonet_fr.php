@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_lister' => 'Afficher',
 	'bouton_rechercher' => 'Rechercher',
 	'bouton_verifier' => 'Vérifier',
+	'bouton_traduire' => 'OK',
+	'bouton_editer' => 'OK',
 	'bulle_afficher_fichier_lang' => 'Afficher le fichier de langue généré le @date@',
 	'bulle_afficher_fichier_log' => 'Afficher le log du @date@',
 	'bulle_corriger' => 'Télécharger le fichier de langue corrigé',
@@ -74,6 +76,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_verifier_doublon' => 'Cette option vous permet de vérifier soit les raccourcis soit les traductions en doublon dans les fichiers de langue du site. Seuls les fichiers de langue française sont utilisés',
 	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
+	'info_editer' => 'Cette option vous permet d\'éditer les items d\'un fichier de langue. Le fichier généré n\'écrase pas le fichier original mais il est stocké dans le répertoire temporaire de tmp/langonet.',
+	'info_fichier_liste_editer' => 'Choisissez le fichier de langue dont vous voulez éditer les items, parmi ceux présents dans le site.',
+	'info_traduire' => 'Cette option vous permet de générer une traduction d\'un fichier de langue.',
 
 	// L
 	'label_affichage' => 'Mode d\'affichage de la traduction',
@@ -150,6 +155,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_utilises_peut_etre_0' => 'Aucun item de langue potentiellement obsolète n\'a été détecté',
 	'message_ok_utilises_peut_etre_1' => 'Un seul item de langue potentiellement obsolète',
 	'message_ok_utilises_peut_etre_n' => '@nberr@ items de langue potentiellement obsolètes',
+	'message_ok_fichier_edite' => 'Le fichier modifié a été crée avec succès à l\'adresse: @fichier@',
+	'message_ok_fichier_traduit' => 'Le fichier traduction a été crée avec succès à l\'adresse: @fichier@',
+	'menu_traductions' => 'Traductions',
+	'menu_recherches' => 'Recherches',
+	'menu_verifications' => 'Vérifications',
 
 	// O
 	'onglet_generer' => 'Générer une langue',
@@ -159,6 +169,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_verifier_doublon' => 'Vérifier les doublons',
 	'onglet_verifier_item' => 'Vérifier une langue',
 	'onglet_verifier_l' => 'Vérifier la fonction _L()',
+	'onglet_traduire' => 'Traduire une langue',
+	'onglet_editer' => 'Éditer une langue',
 	'option_affichage_brut' => 'Texte brut avec les balises HTML',
 	'option_affichage_final' => 'Texte produit sans balise HTML',
 	'option_aucun_dossier' => 'aucune arborescence sélectionnée',
@@ -179,6 +191,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_verifier_doublon' => 'Vérification des doublons de langue',
 	'titre_form_verifier_l' => 'Vérification de l\'utilisation de la fonction _L()',
 	'titre_form_verifier' => 'Vérification des fichiers de langue',
+	'titre_form_traduire' => 'Génération d\'une traduction',
+	'titre_form_editer' => 'Édition d\'une langue',
 	'titre_plugin' => 'LangOnet',
 );
 

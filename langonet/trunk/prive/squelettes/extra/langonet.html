@@ -22,3 +22,15 @@
 	titre=<:langonet:titre_bloc_langues_generees:>,
 	env} />
 ]
+
+[(#ENV{operation, editer}|=={editer}|oui)
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
+	titre=<:langonet:titre_bloc_langues_generees:>,
+	env} />
+]
+
+[(#ENV{operation, traduire}|=={traduire}|oui)
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
+	titre=<:langonet:titre_bloc_langues_generees:>,
+	env} />
+]
