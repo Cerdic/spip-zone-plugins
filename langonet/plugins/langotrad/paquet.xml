@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
     logo="prive/themes/spip/images/langotrad-64.png"
-	documentation="http://contrib.spip.net/xxx"
+	documentation="http://contrib.spip.net/4820"
 >
 
 	<nom>LangOnet Traduction</nom>
