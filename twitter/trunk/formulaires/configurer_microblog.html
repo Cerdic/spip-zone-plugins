@@ -84,23 +84,23 @@
 					<label><:twitter:notifications_publiques:></label>
 					<div class="choix">
 						<input type="checkbox" name="evt_forumposte" id="evt_forumposte" [
-							(#ENV{evt_forumposte}|?{checked="checked"})] />
+							(#ENV{evt_forumposte}|oui)checked="checked"] />
 						<label for="evt_forumposte"><:twitter:poster_forums:></label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="evt_proposerarticles" id="evt_proposerarticles"[
-							(#ENV{evt_proposerarticles}|?{checked="checked"})]  />
+							(#ENV{evt_proposerarticles}|oui)checked="checked"]  />
 						<label for="evt_proposerarticles"><:twitter:proposer_articles:></label>
 					</div>
 					<hr />
 					<div class="choix">
 						<input type="checkbox" name="evt_forumvalide" id="evt_forumvalide" [
-							(#ENV{evt_forumvalide}|?{checked="checked"})] />
+							(#ENV{evt_forumvalide}|oui)checked="checked"] />
 						<label for="evt_forumvalide"><:twitter:publier_forums:></label>
 					</div>
 					<div class="choix">
 						<input type="checkbox" name="evt_publierarticles" id="evt_publierarticles"[
-							(#ENV{evt_publierarticles}|?{checked="checked"})] />
+							(#ENV{evt_publierarticles}|oui)checked="checked"] />
 						<label for="evt_publierarticles"><:twitter:publier_articles:></label>
 					</div>
 					<ul class="suite[(#ENV{evt_publierarticles}|non)none]" id="evt_publierarticles_options">
@@ -151,7 +151,7 @@
 				<li class="editer editer_invite">
 					<div class="choix">
 						<input type="checkbox" name="invite"[
-							(#ENV{invite}|?{checked="checked"})] id="invite" />
+							(#ENV{invite}|oui)checked="checked"})] id="invite" />
 						<label for="invite"><:twitter:invite_afficher:></label>
 					</div>
 				</li>
