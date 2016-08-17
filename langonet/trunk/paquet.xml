@@ -1,7 +1,7 @@
 <paquet
 	prefix="langonet"
 	categorie="outil"
-	version="1.3.13"
+	version="1.3.14"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="langonet_logo-64.png"
@@ -21,7 +21,7 @@
 	<pipeline nom="autoriser" inclure="langonet_autorisations.php" />
 
 	<menu nom="langonet" titre="langonet:titre_plugin" parent="menu_developpement" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
-	<spip compatibilite="[3.0.0;3.1.*]">
+	<spip compatibilite="[3.0.0;3.0.*]">
 		<menu nom="langonet" titre="langonet:titre_plugin" parent="bando_administration" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
 	</spip>
 </paquet>
