@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aide_creation_squelette_fabrique' => 'Aide à la création de squelettes Fabrique',
 	'autorisation_administrateur' => 'Être au moins administrateur complet',
 	'autorisation_administrateur_restreint' => 'Être au moins administrateur restreint',
+	'autorisation_auteur_objet' => 'Être auteur de l’objet ou au moins administrateur complet (ou restreint si l’objet a le champ id_rubrique)',
 	'autorisation_defaut' => 'Par défaut (@defaut@)',
 	'autorisation_jamais' => 'Jamais',
 	'autorisation_redacteur' => 'Être au moins rédacteur',

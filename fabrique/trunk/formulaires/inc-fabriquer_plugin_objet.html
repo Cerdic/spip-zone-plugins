@@ -448,17 +448,23 @@
 	}>
 	[(#SET{defaut,[(#VAL{fabrique:autorisation_}|concat{[(#VALEUR|fabrique_autorisation_defaut)]}|_T)]})]
 	[(#SET{defaut,[(#VAL{fabrique:autorisation_defaut}|_T{#ARRAY{defaut,#GET{defaut}}})]})]
+	[(#SET{choix,[(#ARRAY{
+		'',#GET{defaut},
+		toujours,<:fabrique:autorisation_toujours:>,
+		auteur_objet,<:fabrique:autorisation_auteur_objet:>,
+		redacteur,<:fabrique:autorisation_redacteur:>,
+		administrateur_restreint,<:fabrique:autorisation_administrateur_restreint:>,
+		administrateur,<:fabrique:autorisation_administrateur:>,
+		webmestre,<:fabrique:autorisation_webmestre:>,
+		jamais,<:fabrique:autorisation_jamais:>})]})]
+
+	[(#REM) Pas de choix "Auteur de l'objet" à la création… ]
+	[(#VALEUR|=={objet_creer}|oui) [(#SET{choix,#GET{choix}|array_diff_key{#ARRAY{auteur_objet,0}}})] ]
+
 	[(#SAISIE{selection, objets/#_objet:CLE/autorisations/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
 		cacher_option_intro=oui,
-		datas=[(#ARRAY{
-			'',#GET{defaut},
-			toujours,<:fabrique:autorisation_toujours:>,
-			redacteur,<:fabrique:autorisation_redacteur:>,
-			administrateur_restreint,<:fabrique:autorisation_administrateur_restreint:>,
-			administrateur,<:fabrique:autorisation_administrateur:>,
-			webmestre,<:fabrique:autorisation_webmestre:>,
-			jamais,<:fabrique:autorisation_jamais:>})]})]
+		datas=#GET{choix}})]
 	</BOUCLE_autorisations>
 	</div>
 	<div class='clear'>

@@ -2,7 +2,20 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.1.0 le 18 08 2016
+-------------------
 
+* Possibilité de définir en autorisation d'un objet un type 'auteur_objet'
+  qui permet aux auteurs liés à l'objet et aux administrateurs d'avoir
+  l'autorisation en question.
+  
+  Si l'objet est affectable à une rubrique, un administrateur restreint
+  à cette rubrique a le droit d'éditer l'objet aussi.
+  
+  Le code généré actuellement ne s'occupe pas de la présence d'un champ statut.
+  Il faudrait peut être un autre type d'autorisation encore plus fin pour ça,
+  qui ressemblerait du coup fortement à l'autorisation de modifier un article.
+  
 2.0.27 le 09 02 2016
 --------------------
 

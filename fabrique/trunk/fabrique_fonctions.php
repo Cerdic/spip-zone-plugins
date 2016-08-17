@@ -1159,11 +1159,16 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
  * Retourne le code pour tester un type d'autorisation
  *
  * @param string $type
- * 		Quelle type d'autorisation est voulue
+ *     Quelle type d'autorisation est voulue
+ * @param string $prefixe
+ *     Préfixe du plugin généré
+ * @param array $objet
+ *     Description de l'objet dans la Fabrique
  * @return string
- * 		Code de test de l'autorisation
+ *     Code de test de l'autorisation
 **/
-function fabrique_code_autorisation($type) {
+function fabrique_code_autorisation($type, $prefixe, $objet) {
+
 	switch($type) {
 
 		case "jamais":
@@ -1172,6 +1177,16 @@ function fabrique_code_autorisation($type) {
 
 		case "toujours":
 			return "true";
+			break;
+
+		case "auteur_objet":
+			$auteurs_objet = '$auteurs = ' . $prefixe . '_auteurs_objet(\'' . $objet['type'] . '\', $id) and in_array($qui[\'id_auteur\'], $auteurs)';
+			if (champ_present($objet, 'id_rubrique')) {
+				$admin = $prefixe . '_autoriser_admins(\'' . $objet['type'] . '\', $id, $qui)';
+			} else {
+				$admin = '$qui[\'statut\'] == \'0minirezo\' and !$qui[\'restreint\']';
+			}
+			return "(($admin) or ($auteurs_objet))";
 			break;
 
 		case "redacteur":
@@ -1227,13 +1242,17 @@ function fabrique_autorisation_defaut($autorisation) {
  * sinon celui par defaut pour une fonction d'autorisation
  *
  * @param array $autorisations
- * 		Les autorisations renseignees par l'interface pour un objet
+ *     Les autorisations renseignees par l'interface pour un objet
  * @param string $autorisation
- * 		Le nom de l'autorisation souhaitee
+ *     Le nom de l'autorisation souhaitee
+ * @param string $prefixe
+ *     Préfixe du plugin généré
+ * @param array $objet
+ *     Description le l'objet dans la Fabrique
  * @return string
- * 		Code de l'autorisation
+ *     Code de l'autorisation
 **/
-function fabrique_code_autorisation_defaut($autorisations, $autorisation) {
+function fabrique_code_autorisation_defaut($autorisations, $autorisation, $prefixe, $objet) {
 	if (!$autorisation) return "";
 
 	// trouver le type d'autorisation souhaitee, soit indiquee, soit par defaut
@@ -1242,7 +1261,48 @@ function fabrique_code_autorisation_defaut($autorisations, $autorisation) {
 	}
 
 	// retourner le code PHP correspondant
-	return fabrique_code_autorisation($type);
+	return fabrique_code_autorisation($type, $prefixe, $objet);
+}
+
+/**
+ * Retourne vrai si un test d'autorisation est d'un type spécifié
+ * dans l'ensemble des autorisations à configurer de tous les objets
+ * 
+ * @param array $objets
+ * 		Descriptions des objets de la Fabrique
+ * @param string $recherche
+ * 		Le type d'autorisation recherché
+ * @return bool
+**/
+function objets_autorisation_presente($objets, $recherche) {
+	foreach ($objets as $objet) {
+		if (autorisation_presente($objet, $recherche)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * Retourne vrai si un test d'autorisation est d'un type spécifié
+ * dans l'ensemble des autorisations à configurer d'un objet
+ *
+ * @param array $objet
+ * 		Description d'un objet de la Fabrique
+ * @param string $recherche
+ * 		Le type d'autorisation recherché
+ * @return bool
+**/
+function autorisation_presente($objet, $recherche) {
+	foreach ($objet['autorisations'] as $autorisation => $type) {
+		if (!$type) { 
+			$type = fabrique_autorisation_defaut($autorisation);
+		}
+		if ($type == $recherche) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /**
