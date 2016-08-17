@@ -1159,7 +1159,7 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
  * Retourne le code pour tester un type d'autorisation
  *
  * @param string $type
- *     Quelle type d'autorisation est voulue
+ *     Quel type d'autorisation est voulue
  * @param string $prefixe
  *     Préfixe du plugin généré
  * @param array $objet
