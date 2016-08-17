@@ -55,6 +55,21 @@ function autoriser_gis_creer_dist($faire, $quoi, $id, $qui, $opts) {
 }
 
 /**
+ * Autorisation d'associer un point à un objet
+ * Un auteur peut lier un point à un autre objet que s'il peut modifier l'objet à lier en question
+ *
+ * @param string $faire L'action
+ * @param string $type Le type d'objet
+ * @param int $id L'identifiant numérique de l'objet
+ * @param array $qui Les informations de session de l'auteur
+ * @param array $opt Des options
+ * @return boolean true/false
+ */
+function autoriser_associergis_dist($faire, $quoi, $id, $qui, $opts) {
+	return autoriser('lier', 'gis', $id, $qui, $opts);
+}
+
+/**
  * Autorisation a lier un point d'un objet
  * Un auteur peut lier un point à un autre objet que s'il peut modifier l'objet à lier en question
  *
