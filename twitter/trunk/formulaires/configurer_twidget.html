@@ -22,77 +22,77 @@
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},30000}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- title -->
 				#SET{name,title}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},Du nouveau sur Twitter}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- subject -->
 				#SET{name,subject}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},SPIP}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- subject -->
 				#SET{name,footer}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},Rejoignez nous}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- width-->
 				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},250}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- height -->
 				#SET{name,height}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},300}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- shell_background-->
 				#SET{name,shell_background}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#8ec1da}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- shell_color-->
 				#SET{name,shell_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- tweets_background-->
 				#SET{name,tweets_background}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!--tweets_color -->
 				#SET{name,tweets_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#444444}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- tweets_link -->
 				#SET{name,tweets_links}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#1986b5}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 			</ul>
 
@@ -108,7 +108,7 @@
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#spip}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 			</ul>
 			#INCLURE{fond=inclure/twidget_search}
@@ -124,14 +124,14 @@
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},4}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				<!-- user -->
 				#SET{name,user}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer  long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},spip}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 			</ul>
 			#INCLURE{fond=inclure/twidget_profile}
