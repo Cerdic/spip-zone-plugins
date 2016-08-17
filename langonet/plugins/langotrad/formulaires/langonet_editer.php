@@ -64,26 +64,6 @@ function formulaires_langonet_editer_traiter() {
 	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	} else {
-        /*
-        $items = $resultats['items'];
-        $items_simples = array();
-
-        // Etape éditions ?
-        if ($nouvelle_edition) {
-             // Traitements
-             // On re-construit le tableau items
-             $items = array();
-             foreach ($resultats_cible['items'] as $item_cle => $item_valeur ) {
-                   $items[$item_cle] = array('traduction' =>  _request('champ-' . $item_cle ), 'etat' => 'ok' );
-                   $items_simples[$item_cle] = _request('champ-' . $item_cle );
-             }
-
-             // On enregistre cette version
-             include_spip("inc/generer_fichier");
-             $fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue, $module, $items_simples, $bandeau = '', $langue);
-        }
-        */
-
         $items = $resultats['items'];
         $items_simples = array();
 
