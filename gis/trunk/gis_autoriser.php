@@ -66,7 +66,7 @@ function autoriser_gis_creer_dist($faire, $quoi, $id, $qui, $opts) {
  * @return boolean true/false
  */
 function autoriser_associergis_dist($faire, $quoi, $id, $qui, $opts) {
-	return autoriser('lier', 'gis', $id, $qui, $opts);
+	return autoriser('lier', 'gis', '', $qui, array('objet' => $quoi,'id_objet'=>$id));
 }
 
 /**
