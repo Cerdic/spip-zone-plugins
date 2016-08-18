@@ -148,8 +148,8 @@ function autoriser_associer#GET{objet}_dist($faire, $type, $id, $qui, $opt) {
 	return [(#AUTORISATIONS|fabrique_code_autorisation_defaut{associerobjet, #OBJET, #VALEUR|champ_present{id_rubrique}})];
 }</BOUCLE_associer_objets>[(#REM)
 ]</BOUCLE_objets>[(#REM)
-]<BOUCLE_aide_auteur(CONDITION){si #OBJETS|objets_autorisation_presente{auteur_objet}}>[(#REM)
-]/**
+]<BOUCLE_aide_auteur(CONDITION){si #OBJETS|objets_autorisations_presentes{#LISTE{auteur_objet,auteur_objet_statut}}}>
+/**
  * Lister les auteurs liés à un objet
  *
  * @param int $objet Type de l'objet
@@ -163,7 +163,10 @@ function [(#PREFIXE)]_auteurs_objet($objet, $id_objet) {
 	}
 	return array();
 }
-<BOUCLE_aide_auteur_rubrique(CONDITION){si #OBJETS|objets_champ_present{id_rubrique}}>
+</BOUCLE_aide_auteur>[(#REM)
+]<BOUCLE_aide_auteur_rubrique(CONDITION)
+	{si #OBJETS|objets_autorisations_presentes{#LISTE{auteur_objet,auteur_objet_statut,admin_restreint_objet}}}
+	{si #OBJETS|objets_champ_present{id_rubrique}}>
 /**
  * Tester si on est administrateur complet ou admin restreint sur cette rubrique
  *
@@ -177,4 +180,23 @@ function [(#PREFIXE)]_autoriser_admins($objet, $id_objet, $qui) {
 	return ($qui['statut'] == '0minirezo') and (!$qui['restreint'] or !$id or in_array($id, $qui['restreint']));
 }
 </BOUCLE_aide_auteur_rubrique>[(#REM)
-]</BOUCLE_aide_auteur>
+]<BOUCLE_aide_objet_statut(CONDITION)
+	{si #OBJETS|objets_autorisation_presente{auteur_objet_statut}}
+	{si #OBJETS|objets_champ_present{statut}}>
+/**
+ * Tester si le statut de l'objet autorise des changements, en fonction du statut de l'auteur. 
+ *
+ * @param  string $objet    Type d'objet
+ * @param  int    $id_objet Identifiant de l'objet
+ * @param  array  $qui      Description de l'auteur demandant l'autorisation
+ * @param  array  $opt      Options de l'autorisation
+ * @return bool             true s'il a le droit, false sinon
+ **/
+function [(#PREFIXE)]_autoriser_statuts($objet, $id_objet, $qui, $opt) {
+	$statut = sql_getfetsel('statut', table_objet_sql($objet), id_table_objet($objet) . ' = ' . intval($id_objet));
+	return (!isset($opt['statut']) or $opt['statut'] !== 'publie')
+		and in_array($qui['statut'], array('0minirezo', '1comite'))
+		and in_array($statut, array('prop', 'prepa', 'poubelle'));
+}
+</BOUCLE_aide_objet_statut>[(#REM)
+]

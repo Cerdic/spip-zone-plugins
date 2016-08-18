@@ -69,6 +69,10 @@ function #ENV{prefixe}_vider_tables($nom_meta_base_version) {<BOUCLE_si_exemples
 <BOUCLE_tables(DATA) {si #OBJETS} {source tableau,#LES_TABLES}>
 	sql_drop_table("#VALEUR");</BOUCLE_tables>
 <BOUCLE_objets_autres_nettoyages(CONDITION){si #OBJETS}>
+	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens), 
+	[(#VAL{'sql_delete("spip_documents_liens",'}   |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{'sql_delete("spip_mots_liens",'}        |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{'sql_delete("spip_auteurs_liens",'}     |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
 	# Nettoyer les versionnages et forums
 	[(#VAL{'sql_delete("spip_versions",'}          |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
 	[(#VAL{'sql_delete("spip_versions_fragments",'}|espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));

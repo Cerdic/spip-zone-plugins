@@ -20,7 +20,7 @@
 
 
 <h3><a href="#description"><:fabrique:legend_description:></a></h3>
-<div>
+<div class='sous_parties'>
 	<div class='editer-groupe'>
 	[(#SAISIE{input, objets/#CLE/nom,
 		label=<:fabrique:label_nom_pluriel:>,
@@ -45,7 +45,7 @@
 
 
 <h3><a href="#description"><:fabrique:legend_logo:></a></h3>
-<div>
+<div class='sous_parties'>
 	<div class='editer-groupe'>
 	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
 	[(#SAISIE{input, objets/#CLE/logo/0,
@@ -217,7 +217,7 @@
 
 
 <h3><a href="#champs_speciaux"><:fabrique:legend_champs_speciaux:></a></h3>
-<div>
+<div class='sous_parties'>
 
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_champs_sql:></legend>
@@ -394,7 +394,7 @@
 
 
 <h3><a href="#fichiers_supplementaires"><:fabrique:legend_fichiers_supplementaires:></a></h3>
-<div>
+<div class='sous_parties'>
 	<div class='editer-groupe'>
 		[(#SET{data,[(#ARRAY{
 			prive/squelettes/contenu/objets.html,prive/squelettes/contenu/objets.html,
@@ -436,7 +436,29 @@
 
 
 <h3><a href="#autorisations"><:fabrique:legend_autorisations:></a></h3>
-<div>
+<div class='sous_parties'>
+
+	<div class='explication'>
+		<p><:fabrique:legend_autorisations_explication:></p>
+		<B_types_autorisations>
+			<dl>
+		<BOUCLE_types_autorisations(DATA){liste 
+			toujours,
+			auteur_objet,
+			auteur_objet_statut,
+			redacteur,
+			administrateur_restreint_objet,
+			administrateur_restreint,
+			administrateur,
+			webmestre,
+			jamais}>
+				<dt>[(#VAL{fabrique:autorisation_}|concat{#VALEUR}|_T)]</dt>
+				<dl>[(#VAL{fabrique:autorisation_}|concat{#VALEUR}|concat{_explication}|_T)]</dl>
+		</BOUCLE_types_autorisations>
+			</dl>
+		</B_types_autorisations>
+	</div>
+
 	<B_autorisations>
 	<div class='editer-groupe'>
 	<BOUCLE_autorisations(DATA){si #ENV{objets/#CLE/nom}}{liste
@@ -452,14 +474,16 @@
 		'',#GET{defaut},
 		toujours,<:fabrique:autorisation_toujours:>,
 		auteur_objet,<:fabrique:autorisation_auteur_objet:>,
+		auteur_objet_statut,<:fabrique:autorisation_auteur_objet_statut:>,
 		redacteur,<:fabrique:autorisation_redacteur:>,
+		administrateur_restreint_objet,<:fabrique:autorisation_administrateur_restreint_objet:>,
 		administrateur_restreint,<:fabrique:autorisation_administrateur_restreint:>,
 		administrateur,<:fabrique:autorisation_administrateur:>,
 		webmestre,<:fabrique:autorisation_webmestre:>,
 		jamais,<:fabrique:autorisation_jamais:>})]})]
 
 	[(#REM) Pas de choix "Auteur de l'objet" à la création… ]
-	[(#VALEUR|=={objet_creer}|oui) [(#SET{choix,#GET{choix}|array_diff_key{#ARRAY{auteur_objet,0}}})] ]
+	[(#VALEUR|=={objet_creer}|oui) [(#SET{choix,#GET{choix}|array_diff_key{#LISTE{auteur_objet,auteur_objet_statut}|array_flip}})] ]
 
 	[(#SAISIE{selection, objets/#_objet:CLE/autorisations/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
@@ -480,7 +504,7 @@
 
 
 <h3><a href="#options"><:fabrique:legend_options:></a></h3>
-<div>
+<div class='sous_parties'>
 	<div class='editer-groupe'>
 	[(#REM)
 		Cette saisie possede par defaut les boutons edition et outils rapide

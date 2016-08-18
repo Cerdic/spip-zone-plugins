@@ -1179,18 +1179,47 @@ function fabrique_code_autorisation($type, $prefixe, $objet) {
 			return "true";
 			break;
 
+		// au moins auteur de l'objet, ou administrateur complet ou admin restreint sur rubrique de l'objet
 		case "auteur_objet":
 			$auteurs_objet = '$auteurs = ' . $prefixe . '_auteurs_objet(\'' . $objet['type'] . '\', $id) and in_array($qui[\'id_auteur\'], $auteurs)';
 			if (champ_present($objet, 'id_rubrique')) {
 				$admin = $prefixe . '_autoriser_admins(\'' . $objet['type'] . '\', $id, $qui)';
 			} else {
-				$admin = '$qui[\'statut\'] == \'0minirezo\' and !$qui[\'restreint\']';
+				$admin = '($qui[\'statut\'] == \'0minirezo\' and !$qui[\'restreint\'])';
 			}
-			return "(($admin) or ($auteurs_objet))";
+			return "$admin\n\t\tor ($auteurs_objet)";
+			break;
+
+		// au moins auteur de l'objet si l'objet n'est pas publié, ou administrateur complet ou admin restreint sur la rubrique de l'objet
+		// Note : normalement statut doit forcément être présent pour ce test !
+		case "auteur_objet_statut":
+			$auteurs_objet = '$auteurs = ' . $prefixe . '_auteurs_objet(\'' . $objet['type'] . '\', $id) and in_array($qui[\'id_auteur\'], $auteurs)';
+			$test_statut = $prefixe . '_autoriser_statuts(\'' . $objet['type'] . '\', $id, $qui, $opt)';
+			if (champ_present($objet, 'id_rubrique')) {
+				$admin = $prefixe . '_autoriser_admins(\'' . $objet['type'] . '\', $id, $qui)';
+			} else {
+				$admin = '($qui[\'statut\'] == \'0minirezo\' and !$qui[\'restreint\'])';
+			}
+			if (champ_present($objet, 'statut')) {
+				return "$admin\n\t\tor ($test_statut\n\t\t\tand $auteurs_objet)";
+			} else {
+				return "$admin\n\t\tor ($auteurs_objet)";
+			}
 			break;
 
 		case "redacteur":
 			return "in_array(\$qui['statut'], array('0minirezo', '1comite'))";
+			break;
+
+		// Au moins administrateur complet ou restreint sur la rubrique sur l'objet
+		// Note : normalement id_rubrique doit forcément être présent pour ce test !
+		case "administrateur_restreint_objet":
+			if (champ_present($objet, 'id_rubrique')) {
+				$admin = $prefixe . '_autoriser_admins(\'' . $objet['type'] . '\', $id, $qui)';
+			} else {
+				$admin = '$qui[\'statut\'] == \'0minirezo\' and !$qui[\'restreint\']';
+			}
+			return $admin;
 			break;
 
 		case "administrateur_restreint":
@@ -1277,6 +1306,26 @@ function fabrique_code_autorisation_defaut($autorisations, $autorisation, $prefi
 function objets_autorisation_presente($objets, $recherche) {
 	foreach ($objets as $objet) {
 		if (autorisation_presente($objet, $recherche)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+/**
+ * Retourne vrai si au moins une autorisation est d'un des types spécifiés
+ * dans l'ensemble des autorisations à configurer de tous les objets
+ * 
+ * @param array $objets
+ * 		Descriptions des objets de la Fabrique
+ * @param string[] $recherches
+ * 		Les types d'autorisations recherchés
+ * @return bool
+**/
+function objets_autorisations_presentes($objets, $recherches) {
+	foreach ($recherches as $autorisation) {
+		if (objets_autorisation_presente($objets, $autorisation)) {
 			return true;
 		}
 	}

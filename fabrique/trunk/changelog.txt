@@ -2,6 +2,26 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.2.0 le 18 08 2016
+-------------------
+
+* Possibilité de définir en autorisation d'un objet les types 'auteur_objet_statut' 
+  et 'admin_restreint_objet'. 
+  
+  Le premier complète 'auteur_objet' ajouté en version
+  2.1.0 par un test supplémentaire sur le statut de l'objet, de sorte qu'un
+  objet publié refuse l'autorisation pour un rédacteur lié à l'objet.
+  On a du coup le même comportement que pour l'autorisation de 'modifier'
+  un article dans SPIP. Cela sous-entend que l'objet gère le champ 'statut'.
+  
+  Le second complète 'admin_restreint' qui ne s'occupe pas de tester la 
+  rubrique en cours. Le nouveau donne l'autorisation si l'objet
+  est contenu dans une rubrique gérée par l'administrateur restreint.
+  Cela sous entend que l'objet gère le champ 'id_rubrique'.
+  
+* Lors de la désinstallation, nettoyer quelques tables de liens assez communes
+  (auteurs, documents, mots).
+
 2.1.0 le 18 08 2016
 -------------------
 
