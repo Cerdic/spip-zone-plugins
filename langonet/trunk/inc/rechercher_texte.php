@@ -46,8 +46,9 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 			// forcément unique.
 			$traductions[$nom_module][$plugin] = $items_langue;
 
-			// On contruit le tableau d'association entre le répertoire d'accueil du fichier et le nom du fichier
-			$fichiers_langue[$plugin] = $fichier_langue;
+			// On contruit le tableau parallèle de celui des traductions permettant de connaitre le nom du fichier
+			// de langue contenant chaque traduction.
+			$fichiers_langue[$nom_module][$plugin] = $fichier_langue;
 
 			ksort($traductions[$nom_module][$plugin]);
 		}
@@ -83,15 +84,15 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 					}
 
 					if ($egal) {
-						$trouve['egal'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['egal'][$_item]['fichier'][] = $fichiers_langue[$_module][$_plugin];
 						$trouve['egal'][$_item]['traduction'][] = $_texte;
 					}
 					else if ($commence_par) {
-						$trouve['commence'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['commence'][$_item]['fichier'][] = $fichiers_langue[$_module][$_plugin];
 						$trouve['commence'][$_item]['traduction'][] = $_texte;
 					}
 					else if ($contient) {
-						$trouve['contient'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['contient'][$_item]['fichier'][] = $fichiers_langue[$_module][$_plugin];
 						$trouve['contient'][$_item]['traduction'][] = $_texte;
 					}
 				}
