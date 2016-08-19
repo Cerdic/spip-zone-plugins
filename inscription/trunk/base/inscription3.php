@@ -79,7 +79,7 @@ function inscription3_declarer_champs_extras($champs = array()) {
 						$array['saisie'] = isset($definitions_champs[$cle]['saisie']) ?
 							$definitions_champs[$cle]['saisie'] : $array_defaut['saisie'];
 						$array['options'] = array_merge($array_defaut['options'], is_array($definitions_champs[$cle]['options']) ? $definitions_champs[$cle]['options'] : array());
-						$array['verifier'] = array_merge($array_defaut['verifier'], is_array($definitions_champs[$cle]['verifier']) ? $definitions_champs[$cle]['verifier'] : array());
+						$array['verifier'] = array_merge($array_defaut['verifier'], (isset($definitions_champs[$cle]['verifier']) and is_array($definitions_champs[$cle]['verifier'])) ? $definitions_champs[$cle]['verifier'] : array());
 						$array['source'] = 'inscription3';
 						$champs['spip_auteurs'][$cle] = $array;
 					} else {
