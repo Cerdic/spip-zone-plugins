@@ -10,21 +10,21 @@
 ]#SET{saisies,#ARRAY}
 <B_objets>
 <BOUCLE_objets(DATA){si #PLUGIN{cextras}|oui}{source tableau,#VAL{spip_auteurs}|champs_extras_objet}>
-[(#CONFIG{inscription3/[(#VALEUR|table_valeur{options}|table_valeur{nom})]_nocreation}|=={on}|oui)
+[(#CONFIG{inscription3/[(#VALEUR{options/nom})]_nocreation}|=={on}|oui)
 	[(#REM)
 		On enlève l'option obligatoire si elle n'est pas dans la conf d'inscription3
 	]
 	[(#SET{valeur,#VALEUR})]
-	[(#VALEUR|table_valeur{options}|table_valeur{obligatoire}|=={on}|oui)
-		[(#CONFIG{inscription3/[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire_nocreation}|!={on}|oui)
-			#SET{options,#VALEUR|table_valeur{options}}
+	[(#VALEUR{options/obligatoire}|=={on}|oui)
+		[(#CONFIG{inscription3/[(#VALEUR{options/nom})]_obligatoire_nocreation}|!={on}|oui)
+			#SET{options,#VALEUR{options}}
 			#SET{array,#ARRAY{options,#GET{options}|array_merge{#ARRAY{obligatoire,non}}}}
 			#SET{valeur,#VALEUR|array_merge{#GET{array}}}
 		]
 	]
-	[(#VALEUR|table_valeur{options}|table_valeur{obligatoire}|=={on}|non)
-		[(#CONFIG{inscription3/[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire_nocreation}|=={on}|oui)
-			#SET{options,#VALEUR|table_valeur{options}}
+	[(#VALEUR{options/obligatoire}|=={on}|non)
+		[(#CONFIG{inscription3/[(#VALEUR{options/nom})]_obligatoire_nocreation}|=={on}|oui)
+			#SET{options,#VALEUR{options}}
 			#SET{array,#ARRAY{options,#GET{options}|array_merge{#ARRAY{obligatoire,oui}}}}
 			#SET{valeur,#VALEUR|array_merge{#GET{array}}}
 		]
