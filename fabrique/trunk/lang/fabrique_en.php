@@ -15,14 +15,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'aide_creation_squelette_fabrique' => 'Support to the creation of skeletons Fabrique',
 	'autorisation_administrateur' => 'To be at least full administrator 
-',
+', # MODIF
 	'autorisation_administrateur_restreint' => 'To be at least restricted administrator
-',
+', # MODIF
 	'autorisation_defaut' => 'By default  (@defaut@)',
 	'autorisation_jamais' => 'Never',
-	'autorisation_redacteur' => 'To be at least editor',
+	'autorisation_redacteur' => 'To be at least editor', # MODIF
 	'autorisation_toujours' => 'Always',
-	'autorisation_webmestre' => 'To be webmaster',
+	'autorisation_webmestre' => 'To be webmaster', # MODIF
 	'avertissement_champs' => 'Do not insert here the primary key (@id_objet@),
 		
 nor any special fields (id_rubrique, lang, etc.) proposed in the next section.',
