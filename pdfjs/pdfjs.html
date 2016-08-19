@@ -26,9 +26,9 @@
     <script type="text/javascript" src="#CHEMIN{lib/pdfjs/web/viewer.js}"></script>
     <script type="text/javascript">
         PDFJS.workerSrc = '#CHEMIN{lib/pdfjs/build/pdf.worker.js}';
-        DEFAULT_URL = '[(#URL_DOCUMENT|copie_locale)]';
+        DEFAULT_URL = '[(#DISTANT|=={oui}|?{[(#URL_DOCUMENT|copie_locale)],[(#URL_DOCUMENT)]})]';
         //IMAGE_DIR = '#CHEMIN{lib/pdfjs/web/images/}';
-        PDFJS.getDocument('[(#URL_DOCUMENT|copie_locale)]');
+        PDFJS.getDocument('[(#DISTANT|=={oui}|?{[(#URL_DOCUMENT|copie_locale)],[(#URL_DOCUMENT)]})]');
     </script>
     <style type="text/css">#secondaryOpenFile {display:none;}</style>
 	]
