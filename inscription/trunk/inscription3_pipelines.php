@@ -1091,20 +1091,21 @@ function inscription3_editer_contenu_objet($flux) {
 		 */
 		if (isset($config['creation']) and $config['creation'] == 'on') {
 			$flux['data'] = preg_replace(
-				",(<(li|div) [^>]*class=[\"']editer editer_creation.*<\/(li|div)>),Uims",
+				inscription3_regexp_capturer_balise('class', 'editer editer_creation', true),
 				'',
 				$flux['data'],
 				1
 			);
+			$flux['data'] = preg_replace(
+				inscription3_regexp_capturer_balise('class', 'editer editer_cextra_creation', true),
+				'',
+				$flux['data'],
+				1
+			);
+
 			if ($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00') {
 				$flux['args']['contexte']['creation'] = date('Y-m-d H:i:s');
 			}
-			$flux['data'] = preg_replace(
-				",(<(li|div) [^>]*class=[\"']editer editer_cextra_creation.*<\/(li|div)>),Uims",
-				'',
-				$flux['data'],
-				1
-			);
 			$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
 		}
 
@@ -1124,6 +1125,93 @@ function inscription3_editer_contenu_objet($flux) {
 		}
 	}
 	return $flux;
+}
+
+
+/**
+ * Retourne une expression régulière complexe de capture d'une balise spécifique
+ * ayant un attribut à une certaine valeur.
+ * 
+ * Cette balise (une div par défaut) au milieu d'un code HTML peut contenir 
+ * d'autres balises à l'intérieur.
+ * 
+ * @example `inscription3_regexp_capturer_balise('id', 'content')
+ * @example `inscription3_regexp_capturer_balise('class', 'editer editer_truc', true)
+ * 
+ * @link http://mac-blog.org.ua/regex-for-div-and-it-content/ pour l'inspiration
+ * @link http://php.net/manual/fr/regexp.reference.recursive.php#95568
+ * 
+ * @note
+ *     Les expressions régulières ne sont pas adaptées pour traiter du html…
+ *     Mais on tente un miracle.
+ * @note
+ *     Mélange adapté entre 3 expressions :
+ *     ```
+ *     ",(<div [^>]*class=[\"']editer editer_creation.*<\/div>),Uims"
+ *     '#<div\s+class="s"[^>]*>((?:(?:(?!<div[^>]*>|</div>).)+|<div[^>]*>[\s\S]*?</div>)*)</div>#six'
+ *     "/<([\w]+)([^>]*?)(([\s]*\/>)|" . "(>((([^<]*?|<\!\-\-.*?\-\->)|(?R))*)<\/\\1[\s]*>))/sm";
+ *     ```
+ * 
+ * @param string $attr   
+ *     Attribut à chercher (exemple: class)
+ * @param string $valeur 
+ *     Valeur à chercher (exemple: editer editer_truc)
+ * @param bool $flou        
+ *     True si l'attribut peut avoir d'autres éléments avant ou après la valeur cherchée
+ * @param string $balise
+ *     La balise qu'on recherche
+ * @param string $modificateurs
+ *     Modificateurs de l'expression (pas de modificateur U qui provoquerait un echec).
+ * @return string Expression régulière
+**/
+function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $balise = 'div', $modificateurs = 'ims') {
+	$regexp = 
+		# une balise indiquée avec un attribut ouvrant avec soit " ou ' (info capturée en \1)
+		'#<' . $balise . ' [^>]*' . $attr . '=(["\'])' 
+		# la valeur cherchée, avec ou sans flou autour
+		. ($flou ? '(?:(?!\1).)*' . $valeur . '(?:(?!\1).)*': $valeur) 
+		# la fin de guillement de l'attribut trouvé
+		. '\1'
+		# juste à la fin de la div ouvrante trouvée
+		. '[^>]*>' 
+		# autant de couples de balises (dont autofermantes) et commentaires qu'on veut
+			// des balises imbriquées ou non
+			. '(?<balises>('
+				// pas de début de balise
+				. '([^<]*?)('
+					// une balise qui s'ouvre
+					. '<(?<tag>[\w]+)([^>]*?)'
+					// et soit
+					. '(' 
+						// 'une balise autofermante'
+						. '([\s]*\/>)'
+						// 'une fermeture de balise et soit
+						. '|(>((' 
+							. '('
+								// pas de balise ouvrante
+								. '[^<]*?' 
+								// ou commentaire html
+								. '|<\!\-\-.*?\-\->'
+								// ou script html
+								. '|<script[^>]*>.*?<\/script>'
+							.')'
+							// ou recursion sur balise
+							. '|(?&balises)'
+						// 0 ou plusieurs fois
+						. ')*)'
+						// et la fin de la balise
+						. '<\/(?&tag)[\s]*>)'
+					. ')'
+				. ')'
+			. ')*)'
+			// pas de début de balise
+			. '([^<]*?)'
+		# la fin de notre balise
+		. '</' . $balise . '>'
+		# les modificateurs
+		. '#' . $modificateurs;
+
+	return $regexp;
 }
 
 /**
