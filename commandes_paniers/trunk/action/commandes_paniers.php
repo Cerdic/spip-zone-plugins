@@ -122,6 +122,24 @@ function panier2commande_remplir_commande($id_commande, $id_panier, $append = tr
 		foreach ($panier as $emplette) {
 			$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'], 4);
 			$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'], 4);
+
+			// On déclenche un pipeline pour pouvoir éditer le prix avant la création de la commande
+			// Utile par exemple pour appliquer une réduction automatique lorsque la commande est crée
+			$prix_pipeline = pipeline(
+				'panier2commande_prix',
+				array(
+					'args' => $emplette,
+					'data' => array(
+						'prix' => $prix,
+						'prix_ht' => $prix_ht
+					)
+				)
+			);
+
+			// On ne récupère que le prix_ht dans le pipeline
+			$prix_ht = $prix_pipeline['prix_ht'];
+			$prix = $prix_pipeline['prix'];
+
 			if ($prix_ht > 0)
 				$taxe = round(($prix - $prix_ht) / $prix_ht, 4);
 			else
