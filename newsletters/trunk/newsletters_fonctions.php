@@ -147,7 +147,7 @@ function newsletters_inline_base64src($texte, $type="text/html"){
  * @param string $page
  * @return string
  */
-function newsletter_affiche_version_enligne($page){
+function newsletter_affiche_version_enligne($page, $inline=true){
 
 	// contextualiser !
 	$contextualize = charger_fonction("contextualize","newsletter");
@@ -160,15 +160,17 @@ function newsletter_affiche_version_enligne($page){
 	);
 	$page = $contextualize($page, $infos);
 
-	// css-izer
-	if ($f = find_in_path("css/newsletter_inline.css")){
-		lire_fichier($f,$css);
-		$css = '<style type="text/css">'.$css.'</style>';
-		$p = stripos($page,"</head>");
-		if ($p)
-			$page = substr_replace($page,$css,$p,0);
-		else
-			$page .= $css;
+	if ($inline) {
+		// css-izer
+		if ($f = find_in_path("css/newsletter_inline.css")){
+			lire_fichier($f,$css);
+			$css = '<style type="text/css">'.$css.'</style>';
+			$p = stripos($page,"</head>");
+			if ($p)
+				$page = substr_replace($page,$css,$p,0);
+			else
+				$page .= $css;
+		}
 	}
 	return $page;
 }
