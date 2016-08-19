@@ -1048,7 +1048,7 @@ function inscription3_editer_contenu_objet($flux) {
 		$champs_vires = array();
 		$inserer_saisie = '';
 		foreach ($champs_spip as $champ) {
-			if ($config[$champ.'_fiche_mod'] != 'on') {
+			if (isset($config[$champ.'_fiche_mod']) and $config[$champ.'_fiche_mod'] != 'on') {
 				if ($champ == 'login') {
 					$flux['data'] = preg_replace(
 						",(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>),Uims",
@@ -1082,31 +1082,33 @@ function inscription3_editer_contenu_objet($flux) {
 					$inserer_saisie .= "<input type='hidden' name='$champ' value='".$flux['args']['contexte'][$champ]."' />\n";
 				}
 			}
-			/**
-			 * On vire le champs création du formulaire (ne doit pas être modifié manuellement)
-			 * Si on n'a pas ce champs rempli, on utilise la date actuelle pour le remplir
-			 * Logiquement ce champs est rempli automatiquement via pre_insertion pour tous les auteurs
-			 */
-			if ($config['creation'] == 'on') {
-				$flux['data'] = preg_replace(
-					",(<(li|div) [^>]*class=[\"']editer editer_creation.*<\/(li|div)>),Uims",
-					'',
-					$flux['data'],
-					1
-				);
-				if ($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00') {
-					$flux['args']['contexte']['creation'] = date('Y-m-d H:i:s');
-				}
-				$flux['data'] = preg_replace(
-					",(<(li|div) [^>]*class=[\"']editer editer_cextra_creation.*<\/(li|div)>),Uims",
-					'',
-					$flux['data'],
-					1
-				);
-				$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
-			}
 		}
-		if (!test_espace_prive() and $config['logo_fiche_mod'] == 'on') {
+
+		/**
+		 * On vire le champs création du formulaire (ne doit pas être modifié manuellement)
+		 * Si on n'a pas ce champs rempli, on utilise la date actuelle pour le remplir
+		 * Logiquement ce champs est rempli automatiquement via pre_insertion pour tous les auteurs
+		 */
+		if (isset($config['creation']) and $config['creation'] == 'on') {
+			$flux['data'] = preg_replace(
+				",(<(li|div) [^>]*class=[\"']editer editer_creation.*<\/(li|div)>),Uims",
+				'',
+				$flux['data'],
+				1
+			);
+			if ($flux['args']['contexte']['creation'] == '0000-00-00 00:00:00') {
+				$flux['args']['contexte']['creation'] = date('Y-m-d H:i:s');
+			}
+			$flux['data'] = preg_replace(
+				",(<(li|div) [^>]*class=[\"']editer editer_cextra_creation.*<\/(li|div)>),Uims",
+				'',
+				$flux['data'],
+				1
+			);
+			$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
+		}
+
+		if (!test_espace_prive() and isset($config['logo_fiche_mod']) and $config['logo_fiche_mod'] == 'on') {
 			$flux['data'] = preg_replace(',<(form.*[^>])>,Uims', '<\\1 enctype=\'multipart/form-data\'>', $flux['data'], 1);
 			$saisie_logo = recuperer_fond('formulaires/inscription_logo', $flux['args']['contexte']);
 			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1', $flux['data']);

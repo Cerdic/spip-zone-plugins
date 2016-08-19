@@ -62,7 +62,8 @@ function inc_inscription3_champs_formulaire_dist($id_auteur = null, $type_formul
 		 * -* ne pas être déjà présent dans l'array qui sera retourné
 		 * -* ne pas être dans les pipelines de restrictions au dessus
 		 */
-		if (($config_i3[$clef.$suffixe] == 'on')
+		if (isset($config_i3[$clef.$suffixe])
+			and ($config_i3[$clef.$suffixe] == 'on')
 			and !in_array($clef, $valeurs)
 			and !in_array($clef, $exceptions_des_champs)) {
 			$valeurs[] = $clef;
