@@ -13,7 +13,7 @@ foreach($cke_tags as $tagname => $tagdesc) {
 		case 'num-obligatoire': $num = '\\d+' ; break ;
 		case 'num-facultatif': $num = '\\d*' ; break ;
 		default: $num = '' ; break ;
-	} 
+	}
 	$protectedtags[] = $tagname.$num ;
 	if (isset($tagdesc['fermante']) && $tagdesc['fermante']) { $protectedtags[] = '\\/'.$tagname ; $closedtags[] = $tagname ; }
 }
@@ -22,11 +22,11 @@ define( 'CLOSED_PROTECTED_SPIP_TAGS', "(?:".join('|', $closedtags).")" );unset($
 
 function ckeditor_efface_repertoire($dir) {
    $files = array_diff(scandir($dir), array('.','..'));
-    foreach ($files as $file) {
-      (is_dir("$dir/$file")) ? ckeditor_efface_repertoire("$dir/$file") : unlink("$dir/$file");
-    }
-    return rmdir($dir);
-  } 
+	foreach ($files as $file) {
+	  (is_dir("$dir/$file")) ? ckeditor_efface_repertoire("$dir/$file") : unlink("$dir/$file");
+	}
+	return rmdir($dir);
+  }
 
 function ckeditor_ecrire_protectedtags($tags=null) {
 		if (! is_array($tags)) { $tags = lire_config('ckeditor/tags') ; }
@@ -57,26 +57,26 @@ function ckeditor_dump($var, $html = true ) { // pour afficher le contenu d'une 
 		var_dump($var);
 		$content = ob_get_contents() ;
 	ob_end_clean() ;
-	if ($html) 
+	if ($html)
 		return "<pre>".htmlentities($content)."</pre>" ;
-	else 
+	else
 		return $content ;
 }
 
 function ckeditor_traite_lien_html($texte, $lien, $avant, $apres) {
-	/* 
+	/*
 	 * Recuperation d'un eventuel title="whatever"
 	 */
 	$titre = '';
 	$title_regex = "/\s?title=[\"']([^\"']*)[\"']\s?/i";
 
 	if (($avant && preg_match($title_regex, stripslashes($avant), $m)) ||
-	    ($apres && preg_match($title_regex, stripslashes($apres), $m))) {
+		($apres && preg_match($title_regex, stripslashes($apres), $m))) {
 		$titre = "|".htmlspecialchars_decode(str_replace("\\'",
 								 "'", $m[1]),
-						     ENT_QUOTES);
-		/* 
-		 * Et si le avant/apres ne contenait que 
+							 ENT_QUOTES);
+		/*
+		 * Et si le avant/apres ne contenait que
 		 * ca, on purge pour eviter le cas 2 dans
 		 * le test qui suit.
 		 */
@@ -150,9 +150,9 @@ function ckeditor_traite_img_data($data, $avant, $apres) {
 
 function ckeditor_traite_lien_spip($texte,$lien,$titre = '') {
 	if ($titre)
-		$titre = sprintf(" title='%s'", 
-				 htmlspecialchars(str_replace('\\\'', "'", 
-							      $titre),
+		$titre = sprintf(" title='%s'",
+				 htmlspecialchars(str_replace('\\\'', "'",
+								  $titre),
 						  ENT_QUOTES));
 
 	$texte = preg_replace("~\\\'~","'",$texte);
@@ -161,7 +161,7 @@ function ckeditor_traite_lien_spip($texte,$lien,$titre = '') {
 			case 'rub':
 				$type = 'rubrique' ;
 				break ;
-	 		case 'art':
+			case 'art':
 				$type = 'article' ;
 				break ;
 			case 'br':
@@ -193,7 +193,7 @@ function ckeditor_traite_img_spip($doctype, $docid, $align) {
 			break ;
 		default:
 			$f = charger_fonction('vignette','inc');
-                        $v = $f($row['extension'], true);
+						$v = $f($row['extension'], true);
 			if ($v[0]) {
 				$row['fichier'] = url_absolue($v[0]) ;
 				if (!$row['largeur'])
@@ -209,7 +209,7 @@ function ckeditor_traite_img_spip($doctype, $docid, $align) {
 			$larg = ' width="'.$preview.'px"' ;
 			$haut = sprintf(" height=\"%.0dpx\"",$preview * $row['hauteur'] / $row['largeur']) ;
 		} else
-	  	if (($row['largeur'] < $row['hauteur']) && ($row['hauteur'] > $preview))	{
+		if (($row['largeur'] < $row['hauteur']) && ($row['hauteur'] > $preview))	{
 			$haut = ' height="'.$preview.'px"' ;
 			$larg = sprintf(" width=\"%.0dpx\"",$preview * $row['largeur'] / $row['hauteur']) ;
 		} else {
@@ -225,7 +225,7 @@ function ckeditor_traite_img_spip($doctype, $docid, $align) {
 	$docparams = array() ;
 	foreach($params as $param) {
 		switch ($param) {
-			case 'center': 
+			case 'center':
 				$align = 'middle' ;
 				$center= ' style="display: block; margin-left: auto; margin-right: auto;"' ;
 				break ;
@@ -305,7 +305,7 @@ function ckeditor_tag_unprotect($code,$tag,$params) {
 	global $cke_tags ;
 
 	$prefix = '<p>' ; $postfix = '</p>' ;
-		
+
 	if (preg_match_all( /* on recherche les tags imbriqués */
 		"#&lt;((".CLOSED_PROTECTED_SPIP_TAGS.")-protected)(.*?)&gt;(.*?)&lt;/\\1&gt;#se",
 		$stripcode = stripslashes($code), $matches, PREG_OFFSET_CAPTURE)) {
@@ -327,71 +327,72 @@ function ckeditor_tag_unprotect($code,$tag,$params) {
 }
 
 function ckeditor_html2spip($texte) {
-	$ckeditor_html2spip_pre = charger_fonction('ckeditor_html2spip_pre','');
-	$texte = $ckeditor_html2spip_pre($texte);
+  $ckeditor_html2spip_pre = charger_fonction('ckeditor_html2spip_pre','');
+  $texte = $ckeditor_html2spip_pre($texte);
 
-	$search[] = "~<br/?>(\s|\r|\n)*</li>(\s|\r|\n)*~" ; // fix: http://contrib.spip.net/CKeditor-3-0#forum468504
-	$replace[] = "</li>" ;
+  $search[] = "~<br/?>(\s|\r|\n)*</li>(\s|\r|\n)*~" ; // fix: http://contrib.spip.net/CKeditor-3-0#forum468504
+  $replace[] = function($m) {return "</li>";};
 
-	if (PROTECTED_SPIP_TAGS) {
-		$search[] = "#&lt;(".PROTECTED_SPIP_TAGS.".*?)&gt;#s" ;
-		$replace[] = "<$1>" ;
+  if (PROTECTED_SPIP_TAGS) {
+	$search[] = "#&lt;(".PROTECTED_SPIP_TAGS.".*?)&gt;#s" ;
+	$replace[] = function($m) {return "<$m[1]>";};
+  }
+  if (CLOSED_PROTECTED_SPIP_TAGS) {
+	$search[] = "#<(".CLOSED_PROTECTED_SPIP_TAGS.")([^>]*)>(.*?)</\\1>#s" ;
+	$replace[] = function($m) {return ckeditor_tag_protect($m[3],$m[1],$m[2]);};
+  }
+
+  if (ckeditor_tweaks_actifs('decoupe')) {
+	$search[] = "#\s*<div\s*style=\"page-break-after:\s*always\s*;\s*\">.*?</div>\s*#si" ; // saut de page
+	if (ckeditor_lire_config("html2spip", _CKE_HTML2SPIP_DEF)) {
+	  $replace[] = function($m) {return "\n\n<p>++++</p>\n";};
+	} else {
+	  $replace[] = function($m) {return "\n\n++++\n\n";};
 	}
-	if (CLOSED_PROTECTED_SPIP_TAGS) {
-		$search[] = "#<(".CLOSED_PROTECTED_SPIP_TAGS.")([^>]*)>(.*?)</\\1>#se" ;
-		$replace[] = "ckeditor_tag_protect('$3','$1','$2')" ;
-	}
+  }
 
-	if (ckeditor_tweaks_actifs('decoupe')) {
-		$search[] = "#\s*<div\s*style=\"page-break-after:\s*always\s*;\s*\">.*?</div>\s*#si" ; // saut de page
-		if (ckeditor_lire_config("html2spip", _CKE_HTML2SPIP_DEF)) {
-			$replace[] = "\n\n<p>++++</p>\n" ;
-		} else {
-			$replace[] = "\n\n++++\n\n" ;
-		}
-	}
+  $search[] = "#<a\s+([^>]*?)\s*href=(\"|')(.*?)\\2\s*([^>]*?)\s*>(.*?)</a>#si" ; // les liens
+  $replace[] = function($m) {return ckeditor_traite_lien_html($m[5],$m[3],$m[1],$m[4]);};
 
-	$search[] = "#<a\s+([^>]*?)\s*href=(\"|')(.*?)\\2\s*([^>]*?)\s*>(.*?)</a>#sei" ; // les liens
-	$replace[] = "ckeditor_traite_lien_html('$5','$3','$1','$4')" ;
+  $search[] = "#<a[^>]+name=(\"|')(.*?)\\1[^>]*></a>#si" ; // les ancres
+  $replace[] = function($m) {return "[#$m[2]<-]";};
 
-	$search[] = "#<a[^>]+name=(\"|')(.*?)\\1[^>]*></a>#si" ; // les ancres
-	$replace[] = '[#$2<-]' ;
+  $search[] = "#<img\s*([^>]*?)\s*src=\"([^\"]*?)\?docid=(\d+)(?:&amp;|&)doctype=(\w+)(?:(?:&amp;|&)docparam=([^\"]*))?\"\s*([^>]*?)\s*>#si" ; // les images
+  $replace[] = function($m) {return ckeditor_traite_img_html($m[3],$m[4],$m[5],$m[1],$m[6]);};
 
-	$search[] = "#<img\s*([^>]*?)\s*src=\"([^\"]*?)\?docid=(\d+)(?:&amp;|&)doctype=(\w+)(?:(?:&amp;|&)docparam=([^\"]*))?\"\s*([^>]*?)\s*>#sei" ; // les images
-	$replace[] = "ckeditor_traite_img_html('$3','$4','$5','$1','$6')" ;
+  $search[] = "#<img\s*([^>]*?)\s*src=\"data:([^\"]*?)\"\s*([^>]*?)\s*>#si" ; // les images incorporées/encodées en base64
+  $replace[] = function($m) {return ckeditor_traite_img_data($m[2],$m[1],$m[3]);};
 
-	$search[] = "#<img\s*([^>]*?)\s*src=\"data:([^\"]*?)\"\s*([^>]*?)\s*>#sei" ; // les images incorporées/encodées en base64
-	$replace[] = "ckeditor_traite_img_data('$2','$1','$3')" ;
+  // nettoyage des attribus ajoutés par ckeditor
+  $search[] = "#(<\w+\s*[^>]*\b)data-cke-saved-\w+=([\"']).*?\\2([^>]*>)#si" ;
+  $replace[] = function($m) {return "$m[1]$m[3]";};
 
-	// nettoyage des attribus ajoutés par ckeditor
-	$search[] = "#(<\w+\s*[^>]*\b)data-cke-saved-\w+=([\"']).*?\\2([^>]*>)#si" ;
-	$replace[] = "$1$3" ;
-	
-	if (ckeditor_tweaks_actifs('smileys')) {
-		$cs_path = preg_split("~/~", _DIR_PLUGIN_COUTEAU_SUISSE) ;
-		$search[] = "#<img[^>]+src=\"[^\"]*".$cs_path[count($cs_path)-1]."/img/smileys/[^\"]*\"[^>]+title=\"([^\"]*)\"[^>]+/>#si" ;
-		$replace[] = "$1" ;
-	}
+  if (ckeditor_tweaks_actifs('smileys')) {
+	$cs_path = preg_split("~/~", _DIR_PLUGIN_COUTEAU_SUISSE) ;
+	$search[] = "#<img[^>]+src=\"[^\"]*".$cs_path[count($cs_path)-1]."/img/smileys/[^\"]*\"[^>]+title=\"([^\"]*)\"[^>]+/>#si" ;
+	$replace[] = function($m) {return "$m[1]";};
+  }
 
-	if (ckeditor_lire_config("spiplinks")) {
-		$search[] = "#(\[[^\]]*?-)&gt;([^\]]*?\])#s" ; // les liens spip
-		$replace[] = "$1>$2" ;
+  if (ckeditor_lire_config("spiplinks")) {
+	$search[] = "#(\[[^\]]*?-)&gt;([^\]]*?\])#s" ; // les liens spip
+	$replace[] = function($m) {return "$m[1]>$m[2]";};
 
-		$search[] = "#(\[.*?)&lt;(-\])#s" ; // les ancres spip
-		$replace[] = "$1<$2" ;
-	}
+	$search[] = "#(\[.*?)&lt;(-\])#s" ; // les ancres spip
+	$replace[] = function($m) {return "$m[1]<$m[2]";};
+  }
 
-	$search[] = "#<br/?>(\r|\n|\s)*<(td|caption|tr|tbody|/td|/caption|/tr|/tbody)[^>]*>(\r|\n|\s)*#si" ;
-	$replace[] = "<$2>" ;
+  $search[] = "#<br/?>(\r|\n|\s)*<(td|caption|tr|tbody|/td|/caption|/tr|/tbody)[^>]*>(\r|\n|\s)*#si" ;
+  $replace[] = function($m) {return "<$m[2]>";};
 
-	/* plus de nettoyage : */
-	$search[] = "#(\s*<p>\s*</p>)*\s*$#s" ;
-	$replace[] = '' ;
+  /* plus de nettoyage : */
+  $search[] = "#(\s*<p>\s*</p>)*\s*$#s" ;
+  $replace[] = function($m) {return '';};
 
-	$search[] = '~<br/?>$~' ;
-	$replace[] = '' ;
+  $search[] = '~<br/?>$~' ;
+  $replace[] = function($m) {return '';};
 
-	$texte = preg_replace($search, $replace, $texte) ;
+  foreach($search as $k => $v)
+	$texte = preg_replace_callback($v, $replace[$k], $texte) ;
 
 	if (ckeditor_lire_config("conversion", _CKE_CONVERSION_DEF) == 'complete') {
 		/*
@@ -401,8 +402,8 @@ function ckeditor_html2spip($texte) {
 		 */
 		$search_regex = sprintf("#<%s[^>]*>#s", PROTECTED_SPIP_TAGS);
 		$texte = preg_replace_callback($search_regex,
-					       ckeditor_wrap_callback,
-					       $texte);
+						   ckeditor_wrap_callback,
+						   $texte);
 
 		/*
 		 * Reconversion HTML vers typo SPIP
@@ -427,8 +428,8 @@ function ckeditor_html2spip($texte) {
 		 */
 		$search_regex = '|<script type="ckeditor_wrap">([^>]*)</script>|si';
 		$texte = preg_replace_callback($search_regex,
-				      	       ckeditor_unwrap_callback,
-					       $texte);
+							   ckeditor_unwrap_callback,
+						   $texte);
 	}
 
 	$ckeditor_html2spip_post = charger_fonction('ckeditor_html2spip_post','');
@@ -443,48 +444,49 @@ function ckeditor_spip2html_pre_dist($texte) {
 
 function ckeditor_spip2html_post_dist($texte) {
 	return $texte;
-}     
+}
 
 function ckeditor_spip2html($texte) {
 	$ckeditor_spip2html_pre = charger_fonction('ckeditor_spip2html_pre','');
 	$texte = $ckeditor_spip2html_pre($texte);
 
-	$search[] = "#(?:(?:&amp;|&)lt;|<)(img|doc|emb|video|audio|text)(\d+)\|(.*?)(?:(?:&amp;|&)gt;|>)#se" ;
-	$replace[] = "ckeditor_traite_img_spip('$1','$2','$3')" ;
+	$search[] = "#(?:(?:&amp;|&)lt;|<)(img|doc|emb|video|audio|text)(\d+)\|(.*?)(?:(?:&amp;|&)gt;|>)#s" ;
+	$replace[] = function($m) {return ckeditor_traite_img_spip($m[1],$m[2],$m[3]);};
 
 	/* Cas de modele sans option, ex: <img1> */
-	$search[] = "#(?:(?:&amp;|&)lt;|<)(img|doc|emb|video|audio|text)(\d+)(?:(?:&amp;|&)gt;|>)#se" ;
-	$replace[] = "ckeditor_traite_img_spip('$1','$2','')" ;
+	$search[] = "#(?:(?:&amp;|&)lt;|<)(img|doc|emb|video|audio|text)(\d+)(?:(?:&amp;|&)gt;|>)#s" ;
+	$replace[] = function($m) {return ckeditor_traite_img_spip($m[1],$m[2],'');};
 
 	if (PROTECTED_SPIP_TAGS) {
 		$search[] = "#(?:<|&lt;)(".PROTECTED_SPIP_TAGS.")(.*?)(?:>|&gt;)#s" ;
-		$replace[] = "&lt;$1-protected$2&gt;" ; // les tags protégés ne doivent pas être traités par la fonction propre
+		$replace[] = function($m) {return "&lt;$m[1]-protected$m[2]&gt;";}; // les tags protégés ne doivent pas être traités par la fonction propre
 	}
 
 	/* Version avec bulle: [texte|bulle->lien] */
-	$search[] = "#\[([^|\]]+?)\|([^\]]*?)-(?:&gt;|>)([^\]]*?)\]#se" ;
-	$replace[] = "ckeditor_traite_lien_spip('$1','$3','$2')" ;
+	$search[] = "#\[([^|\]]+?)\|([^\]]*?)-(?:&gt;|>)([^\]]*?)\]#s" ;
+	$replace[] = function($m) {return ckeditor_traite_lien_spip($m[1],$m[3],$m[2]);};
 
 	/* Version sans bulle: [texte->lien] */
-	$search[] = "#\[([^\]]*?)-(?:&gt;|>)([^\]]*?)\]#se" ;
-	$replace[] = "ckeditor_traite_lien_spip('$1','$2')" ;
+	$search[] = "#\[([^\]]*?)-(?:&gt;|>)([^\]]*?)\]#s" ;
+	$replace[] = function($m) {return ckeditor_traite_lien_spip($m[1],$m[2]);};
 
 	$search[] = "~\[#?([^\]]*)(?:&lt;|<)-\]~s" ;
-	$replace[] = "<a name='$1'></a>" ;
+	$replace[] = function($m){return "<a name='$m[1]'></a>";};
 
 	$search[] = "~\[\[~" ; // on protège les notes de bas de page : on a un moyen de les afficher dans ckeditor ...
-	$replace[] = "[*[*" ;
+	$replace[] = function($m) {return "[*[*";};
 
 	$search[] = "~@~" ; // protection de @ : pour que Mailcrypt ne casse pas les liens
-	$replace[] = "&#64;" ;
+	$replace[] = function($m) {return "&#64;";};
 
 	if (CLOSED_PROTECTED_SPIP_TAGS) {
-		$search[] = "#&lt;((".CLOSED_PROTECTED_SPIP_TAGS.")-protected)(.*?)&gt;(.*?)&lt;/\\1&gt;#se" ;
-		$replace[] = "ckeditor_tag_unprotect('$4','$2','$3')" ;
+		$search[] = "#&lt;((".CLOSED_PROTECTED_SPIP_TAGS.")-protected)(.*?)&gt;(.*?)&lt;/\\1&gt;#s" ;
+		$replace[] = function($m) {return ckeditor_tag_unprotect($m[4],$m[2],$m[3]);};
 	}
 
-	$texte = propre(preg_replace($search, $replace, $texte)) ; // utilisation du filtre 'propre' : conseil de http://www.spip-contrib.net/RealET,411
-	
+	foreach($search as $k => $v)
+		$texte = propre(preg_replace_callback($v, $replace[$k], $texte)) ; // utilisation du filtre 'propre' : conseil de http://www.spip-contrib.net/RealET,411
+
 	$texte = preg_replace("~\[\*\[\*~", "[[", $texte) ; // on déprotège ...
 	if (PROTECTED_SPIP_TAGS) {
 		$texte = preg_replace("#&lt;(".PROTECTED_SPIP_TAGS.")(-protected)#s", '&lt;$1', $texte);
@@ -507,8 +509,7 @@ function ckeditor_convert_couleur($couleur) {
 function ckeditor_fix_default_values() {
 	// fix : valeur par défaut pas lisible depuis un squelette
 	// 1. nécessaire pour l'insertion d'image en mode spip
-	ecrire_config("ckeditor/insertall", ckeditor_lire_config("insertall", _CKE_INSERTALL_DEF)) ; 
+	ecrire_config("ckeditor/insertall", ckeditor_lire_config("insertall", _CKE_INSERTALL_DEF)) ;
 	// 2. nécessaire pour le plugin spipmodeles
 	ckeditor_ecrire_protectedtags() ;
 }
-?>

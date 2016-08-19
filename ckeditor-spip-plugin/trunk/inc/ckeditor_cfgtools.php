@@ -11,13 +11,13 @@
 	}
 
 	/*
-	 * fonction parse_spipcss 
+	 * fonction parse_spipcss
 	 * 	@$spip : le contenu d'un textarea, servant à la configuration des styles CKEditor
 	 *
 	 * 	retour: le contenu d'un styles.js pour CKEditor
 	 */
 	function parse_spipcss($spip) {
-		if (preg_match_all("#(^|\n)\s*(.*?)\s*:\s*(\w+)(?:\.(\w+))?(?:\s*{\s*(.*?)\s*})?#s", $spip, $matches, PREG_SET_ORDER)) {
+		if (preg_match_all("#(^|\n)\s*(.*?)\s*:\s*(\w+)(?:\.([\w -]+))?(?:\s*{\s*(.*?)\s*})?#s", $spip, $matches, PREG_SET_ORDER)) {
 			$js = array() ;
 			foreach($matches as $match) {
 				if ($match[5]) {
@@ -39,8 +39,6 @@
 				$js[] = "{".join(", " , $ajs)."}" ;
 			}
 			return "CKEDITOR.addStylesSet('spip-styles',\n\t[\n".join(",\n",$js)."\n\t]\n);" ;
-		} else 
+		} else
 			return '' ;
 	}
-	
-?>
