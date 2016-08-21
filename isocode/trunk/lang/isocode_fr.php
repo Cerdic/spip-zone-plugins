@@ -20,6 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_action_charger_table' => 'Charger une table',
 	'label_action_table' => 'Action à exécuter',
 	'label_action_vider_table' => 'Vider une table',
+	'label_colonne_actualisation' => 'Actualisé le',
+	'label_colonne_libelle' => 'Description',
+	'label_colonne_service' => 'Service',
+	'label_colonne_statistiques' => 'Enregistrements',
+	'label_colonne_table' => 'Table',
 	'label_table_iana5646subtags' => 'table reproduisant le registre IANA des sous-étiquettes de langues (RFC 5646)',
 	'label_table_iso15924scripts' => 'table des indicatifs d\'écritures (ISO 15924)',
 	'label_table_iso3166countries' => 'table des indicatifs des pays (ISO-3166)',
@@ -31,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tables' => 'Tables sur lesquelles appliquer l\'action',
 
 // N
-	'notice_liste_aucune_table' => '<LANGONET_DEFINITION_MANQUANTE>',
+	'notice_liste_aucune_table' => 'Aucune table de codes ISO n\'a encore été chargée en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
 
 // S
 	'succes_charger_table' => 'Les tables choisies ont bien été chargées',
@@ -39,6 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 	'titre_form_gerer_table' => 'Vider ou charger des tables',
-	'titre_liste_tables' => 'Liste des tables chargées en base de données',
+	'titre_liste_tables' => 'Liste des tables de codes ISO chargées en base de données',
 	'titre_page' => 'Gestion des tables de codes ISO',
 );

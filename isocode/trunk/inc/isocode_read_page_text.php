@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return array
  */
-function isocode_read_page_text($service, $table) {
+function inc_isocode_read_page_text($service, $table) {
 
 	// Initialisations
 	$records = array();

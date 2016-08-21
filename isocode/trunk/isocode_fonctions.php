@@ -138,11 +138,12 @@ function isocode_decharger_tables($tables = array()) {
 
 	// On boucle sur la liste des tables et on vide chaque table référencée.
 	if ($tables) {
+		include_spip('inc/config');
 		foreach ($tables as $_table) {
 			$sql_ok = sql_delete("spip_${_table}");
 			if ($sql_ok !== false) {
-				// Supprimer la meta propre au règne.
-				effacer_meta("isocode/tables/${_table}");
+				// Supprimer la meta propre à la table.
+				effacer_config("isocode/tables/${_table}");
 			} else {
 				$retour[0] = false;
 				$retour[1][] = $_table;
@@ -233,7 +234,8 @@ function isocode_service_disponible($service) {
 
 
 /**
- * Retourne la liste de toutes les tables ou celle associée à un ou plusieurs services donnés.
+ * Retourne la liste de toutes les tables gérées par le plugin ou de celles associées à un ou plusieurs
+ * services donnés.
  *
  * @param array $services
  * 		Liste des services pour lesquels la liste des tables associées est demandée.
@@ -265,6 +267,31 @@ function isocode_lister_tables($services = array()) {
 		if (isocode_service_disponible($_service)) {
 			include_spip("services/${_service}/${_service}_api");
 			$tables = array_merge($tables, array_keys($GLOBALS['isocode'][$_service]['tables']));
+		}
+	}
+
+	return $tables;
+}
+
+
+/**
+ * Informe sur la liste des tables déjà chagées en base de données.
+ * Les informations de la meta de chaque table sont complétées et renvoyées.
+ *
+ * @return array
+ * 		Liste des tables de codes ISO sans le préfixe `spip_` et leurs informations de chargement.
+ */
+function isocode_informer_tables_chargees() {
+
+	// On initialise la liste des tables en lisant la meta idoine.
+	include_spip('inc/config');
+	$tables = lire_config("isocode/tables", array());
+
+	// On complète chaque bloc d'informations par le nom de la table et son libéllé.
+	if ($tables) {
+		foreach ($tables as $_table => $_informations) {
+			$tables[$_table]['nom'] = $_table;
+			$tables[$_table]['libelle'] = _T("isocode:label_table_${_table}");
 		}
 	}
 
