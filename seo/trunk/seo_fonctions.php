@@ -107,7 +107,8 @@ function seo_insere_remplace_metas($head, $contexte) {
 
 			// remplacer la meta si on la trouve
 			if ($preg and preg_match($preg, $head, $match)) {
-				$head = str_replace($match[0], $meta, $head);
+				if (stristr($match[0], "data-strict") === FALSE)
+					$head = str_replace($match[0], $meta, $head);
 			} else {
 				$append .= "$meta\n";
 			}
@@ -311,6 +312,15 @@ function seo_calculer_meta_tags($contexte = null) {
 	} elseif ($i['objet'] == 'sommaire') {
 		$meta_tags = isset($config['meta_tags']['tag'])?$config['meta_tags']['tag']:array();
 	}
+	$meta_tags = pipeline('post_seo', array
+		(
+			'args' => array(
+				'contexte' => $contexte,
+				'config' => $config
+			),
+			'data' => $meta_tags
+		)
+	);
 	return $meta_tags;
 }
 
