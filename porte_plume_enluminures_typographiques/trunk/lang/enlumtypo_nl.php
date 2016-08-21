@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_petitescapitales' => 'Zet de tekst in &lt;sc&gt;kleine kapitalen&lt;/sc&gt;',
 	'barre_poesie' => 'Formatteren als &lt;poesie&gt;poesie&lt;/poesie&gt;',
 	'barre_tableau' => 'Een tabel invoegen/aanpassen (eerst kiezen)',
+	'bouton_reinitialiser' => 'Herinitialiseren',
 
 	// C
 	'cfg_insertcss' => 'CSS invoegen',
