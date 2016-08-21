@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_zone' => 'Geen zone',
 	'auteur' => '@nb@ auteur',
 	'auteurs' => '@nb@ auteurs',
+	'auteurs_tous' => 'Alle aangesloten personen',
 
 	// B
 	'bouton_configurer_acces' => 'Toegang .htaccess configureren',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Toegang tot bijgevoegde documenten via hun URL',
 	'label_creer_htaccess_non' => 'laten lezen',
 	'label_creer_htaccess_oui' => 'lezen verbieden',
+	'label_droits_acces' => 'Toegangsrechten',
 	'label_titre_zone' => 'Titel',
 
 	// M
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'ZONE NUMMER:',
+	'zone_restreinte_autoriser_si_connexion_label' => 'Autoriseer de toegang tot deze zone voor alle aangemelde personen',
 	'zone_restreinte_espace_prive' => 'De toegang tot deze zone in de particuliere ruimte beperken',
 	'zone_restreinte_publique' => 'De toegang tot deze zone in het openbare deel beperken'
 );
