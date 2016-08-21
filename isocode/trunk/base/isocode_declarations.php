@@ -37,8 +37,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function isocode_declarer_tables_principales($tables_principales) {
 
-	// -------------------------------------------------
-	// Table principale des codes ISO : spip_iso639codes
+	// ---------------------------------------------------------------
+	// Table principale des codes de langue ISO-639 : spip_iso639codes
 	$table_codes = array(
 		'code_639_3'  => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-3 identifier
 		'code_639_2b' => 'char(3)',                          // Equivalent 639-2 identifier of the bibliographic applications code set, if there is one
@@ -131,7 +131,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso639families'] =
 		array('field' => &$table_families, 'key' => &$table_families_key);
 
-	// -------------------------------------------------
+	// -------------------------------------------------------------------
 	// Table des indicatifs d'écritures (ISO 15924) : spip_iso15924scripts
 	$table_scripts = array(
 		'code_15924'  => "char(4) DEFAULT '' NOT NULL",                  // The four-letter identifier
@@ -150,8 +150,8 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso15924scripts'] =
 		array('field' => &$table_scripts, 'key' => &$table_scripts_key);
 
-	// -------------------------------------------------
-	// Table principale des codes ISO : spip_iso3166countries
+	// --------------------------------------------------------------
+	// Table des indicatifs des pays ISO-3166 : spip_iso3166countries
 	$table_countries = array(
 		'code_alpha2' => "char(2) DEFAULT '' NOT NULL",                  // The two-letter identifier
 		'code_alpha3' => "char(2) DEFAULT '' NOT NULL",                  // The three-letter identifier
@@ -176,6 +176,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'description' 	 => "text DEFAULT '' NOT NULL" ,       // Descriptions of subtags separated by comma
 		'date_ref'       => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // Subtag creation date
 		'no_script'      => "char(4) DEFAULT '' NOT NULL",     // The four letter script identifier not to be used for the subtag
+		'scope'          => "varchar(32) DEFAULT '' NOT NULL", // Scope indication : collection, macrolanguage...
 		'macro_language' => "char(3) DEFAULT '' NOT NULL",     // Macrolanguage to which subtag is refering to
 		'deprecated'     => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // Deprecated date if any
 		'preferred_tag'  => "char(3) DEFAULT '' NOT NULL",     // Preferred tag to be used instead the current subtag

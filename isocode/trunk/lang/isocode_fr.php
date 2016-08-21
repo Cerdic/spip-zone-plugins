@@ -1,23 +1,44 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/plugonet/trunk/lang/
-if (!defined('_ECRIRE_INC_VERSION')) {
-	return;
-}
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
+// B
 	'bouton_isocode' => 'Codes ISO',
 
-	// O
-	'onglet_generer' => 'Générer paquet.xml',
-	'onglet_valider' => 'Valider paquet.xml',
-	'onglet_verifier' => 'Vérifier plugin.xml',
+// E
+	'erreur_charger_table' => 'Une erreur s\'est produite lors du chargement des tables @tables@',
+	'erreur_vider_table' => 'Une erreur s\'est produite lors du vidage des tables @tables@',
+	'explication_action_table' => 'Si la table est déjà chargée en base de données elle sera vidée avant le chargement.',
 
-	// R
+// I
+	'info_table_chargee' => 'chargée',
 
-	// T
+// L
+	'label_action_charger_table' => 'Charger une table',
+	'label_action_table' => 'Action à exécuter',
+	'label_action_vider_table' => 'Vider une table',
+	'label_table_iana5646subtags' => 'table reproduisant le registre IANA des sous-étiquettes de langues (RFC 5646)',
+	'label_table_iso15924scripts' => 'table des indicatifs d\'écritures (ISO 15924)',
+	'label_table_iso3166countries' => 'table des indicatifs des pays (ISO-3166)',
+	'label_table_iso639codes' => 'table principale des codes de langue (ISO-639-1,2 et 3)',
+	'label_table_iso639families' => 'table des familles et groupes de langues (ISO-639-5)',
+	'label_table_iso639macros' => 'table des macrolangues',
+	'label_table_iso639names' => 'table des noms de langues',
+	'label_table_iso639retirements' => 'table des langues supprimées',
+	'label_tables' => 'Tables sur lesquelles appliquer l\'action',
+
+// N
+	'notice_liste_aucune_table' => '<LANGONET_DEFINITION_MANQUANTE>',
+
+// S
+	'succes_charger_table' => 'Les tables choisies ont bien été chargées',
+	'succes_vider_table' => 'Les tables choisies ont bien été vidées',
+
+// T
 	'titre_form_gerer_table' => 'Vider ou charger des tables',
+	'titre_liste_tables' => 'Liste des tables chargées en base de données',
 	'titre_page' => 'Gestion des tables de codes ISO',
 );

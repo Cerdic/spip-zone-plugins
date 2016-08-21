@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		- `_actions_tables`		: (affichage) alias et libellés des actions possibles sur une table, `charger` et `vider`
  * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
  * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`
- * 		- `_tables`				: (affichage) noms des tables sans spip
+ * 		- `_tables`				: (affichage) noms des tables sans le préfixe `spip_`
  */
 function formulaires_isocode_gerer_table_charger() {
 	$valeurs = array();
@@ -29,10 +29,24 @@ function formulaires_isocode_gerer_table_charger() {
 		'vider' => _T('isocode:label_action_vider_table')
 	);
 
-	// Acquérir la liste des tables par service et leur statut de chargement
+	// Acquérir la liste des tables et leur statut de chargement
 	$tables = isocode_lister_tables();
+	$aucune_table_charge = true;
+	if ($tables) {
+		foreach ($tables as $_table) {
+			$valeurs['_tables'][$_table] = "<em>${_table}</em>, " . _T("isocode:label_table_${_table}");
+			if (isocode_table_chargee($_table, $meta_regne)) {
+				$valeurs['_tables'][$_table] .= ' - [' . _T('isocode:info_table_chargee') . ']';
+				$aucune_table_charge = false;
+			}
+		}
+	}
 
 	// Désactiver l'action vider si aucun table n'est chargée
+	if ($aucune_table_charge) {
+		$valeurs['_actions_disable'] = array('vider' => 'oui');
+		$valeurs['_action_defaut'] = 'charger';
+	}
 
 	return $valeurs;
 }
@@ -57,50 +71,43 @@ function formulaires_isocode_gerer_table_verifier() {
 }
 
 /**
- * Exécution du formulaire : le règne choisi est soit vidé, soit chargé jusqu'au rang minimal
- * choisi en y intégrant les traductions des noms communs sélectionnées.
+ * Exécution du formulaire : les tables choisies sont soit vidées, soit chargées.
  *
- * @uses taxonomie_regne_existe()
- * @uses taxonomie_vider_regne()
- * @uses taxonomie_charger_regne()
+ * @uses isocode_charger_tables()
+ * @uses isocode_decharger_tables()
  *
  * @return array
  * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
  * 		d'erreur. L'indicateur editable est toujours à vrai.
  */
 function formulaires_isocode_gerer_table_traiter() {
+
 	$retour = array();
 
+	// Acquisition des saisies: comme elles sont obligatoires, il existe toujours une action et une
+	// table.
 	$action = _request('action_table');
-	$regne = _request('tables');
+	$tables = _request('tables');
 
-	$ok = true;
-	$item = '';
-	$table_existe = true;
+	// Pour chaque table, on génère l'action demandée
 	if ($action == 'vider') {
-		if ($table_existe) {
-//			$ok = taxonomie_vider_regne($regne);
-//			$item = $ok ? 'isocode:succes_vider_table' : 'isocode:erreur_vider_table';
-		}
-		else {
-			// Inutile de vider un règne non encore chargé
-			$ok = false;
-			$item = 'isocode:notice_vider_table_non_chargee';
-		}
+		list($action_ok, $tables_nok) = isocode_decharger_tables($tables);
+		$message = $action_ok
+			? _T('isocode:succes_vider_table')
+			: _T('isocode:erreur_vider_table', array('tables' => implode(', ', $tables_nok)));
 	}
 	else {
-		// La fonction de chargement du règne lance un vidage préalable si le règne
-		// demandé est déjà chargé. Un mécanisme de sauvegarde interne permet aussi de
-		// restituer les modifications manuelles des taxons
-//		$ok = taxonomie_charger_regne($regne, $rang_feuille, $langues);
-		$item = $ok ? 'isocode:succes_charger_table' : 'isocode:erreur_charger_table';
+		// La fonction de chargement de la table lance un vidage préalable si la table
+		// demandé est déjà chargée.
+		list($action_ok, $tables_nok) = isocode_charger_tables($tables);
+		$message = $action_ok
+			? _T('isocode:succes_charger_table')
+			: _T('isocode:erreur_charger_table', array('tables' => implode(', ', $tables_nok)));
 	}
 
-	$message = $ok ? 'message_ok' : 'message_erreur';
-	$retour[$message] = _T($item);
+	$type_message = $action_ok ? 'message_ok' : 'message_erreur';
+	$retour[$type_message] = $message;
 	$retour['editable'] = true;
 
 	return $retour;
 }
-
-?>

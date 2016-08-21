@@ -10,96 +10,90 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Charge tout ou partie des tables de codes ISO dans la base de données.
- * Les tables sont regroupées par service.
+ * Charge en base de données une liste de tables de codes ISO donnée.
+ * Si la liste est vide, la fonction charge toutes les tables disponibles.
  *
  * @api
  * @filtre
- * @uses iso_read_table()
- * @uses iana_read_table()
  *
- * @param array	$tables
- *      Tableau, par service, des tables à charger. Si le tableau est vide ou si la liste des tables
- *      d'un service donné est vide, l'ensemble des tables du ou des services concernés seront chargées.
+ * @uses isocode_trouver_service()
+ * @uses isocode_decharger_tables()
+ *
+ * @param array $tables
+ *      Liste des tables à charger. Si le tableau est vide l'ensemble des tables
+ *      seront chargées.
  *      Les tables doivent être libellées sans le préfixe `spip_`.
- * 		Les services disponibles actuellement sont `iso` et `iana`.
  *
-* @return bool
- *        `true` si le chargement a réussi, `false` sinon
+ * @return array
+ *      Tableau résultat de l'action de vidage:
+ *      - index 0 : `true` si le vidage a réussi, `false` sinon.
+ *      - index 1 : liste des tables en erreur ou tableau vide sinon.
  */
 function isocode_charger_tables($tables = array()) {
 
-	$retour = true;
+	$retour = array(true, array());
 
 	// Suivant le tableau fourni en argument, on détermine la liste exacte des tables à charger.
 	// Le cas où le service existe mais que la liste de tables associées est vide est traité dans
 	// la boucle des services ci-après.
 	if (!$tables) {
 		// Le tableau est vide : il faut charger toutes les tables de tous les services supportés.
-		$tables_a_charger = isocode_lister_tables();
+		$tables = isocode_lister_tables();
 	} elseif (is_string($tables)) {
 		// L'argument n'est pas un tableau mais une chaine, on considère que l'appelant a demandé
-		// le chargement de toutes les tables du service identifié par cette chaine.
-		$tables_a_charger = isocode_lister_tables($tables);
-	} elseif (is_array($tables)) {
-		$cles = array_keys($tables);
-		if (is_numeric($cles[0])) {
-			// On traite le cas où le tableau est de la forme ('iso', 'iana')
-			// au lieu de ('iso' => array(...), 'iana' => array(...)).
-			$tables_a_charger = isocode_lister_tables($tables);
-		} else {
-			$tables_a_charger = $tables;
-		}
-	} else {
-		$tables_a_charger = array();
+		// le chargement d'une table identifiée par cette chaine.
+		$tables = array($tables);
+	} elseif (!is_array($tables)) {
+		$tables = array();
 	}
 
-	// On charge, service par service, chacune des tables spécifiées pour chaque service concerné.
+	// On charge chacune des tables spécifiées en identifiant au préalable le service concerné.
 	// -- Pour éviter d'avoir une mise à jour bancale, il faudrait inclure les requêtes SQL dans
 	// une transaction ce qui n'est pas possible avec spip aujourd'hui.
 	// De fait, on ne peut pas assurer que si une erreur se produit le résultat soit cohérent et
 	// on renvoie juste l'erreur --
-	if ($tables_a_charger) {
+	if ($tables) {
 		include_spip('inc/config');
-		include_spip('inc/isocode_outils');
-		foreach ($tables_a_charger as $_service => $_tables) {
-			// Si le service est bien disponible on charge les tables concernées.
-			if (isocode_service_disponible($_service)) {
-				// Vérification et finalisation de la liste des tables à charger
-				if (!$_tables) {
-					// La liste des tables est vide : il faut charger toutes les tables du service concerné.
-					$_tables = isocode_lister_tables($_service);
-				} elseif (is_string($_tables)) {
-					// La liste des tables n'est pas un tableau mais une chaine, on considère la chaine est
-					// le nom de table à charger.
-					$_tables = array($_tables);
-				} elseif (!is_array($_tables)) {
-					// La liste des tables n'est ni une chaine ni un tableau : c'est une erreur.
-					$_tables = array();
-				}
+		foreach ($tables as $_table) {
+			$erreur_table = false;
 
-				if ($_tables) {
-					include_spip("services/${_service}/${_service}_api");
-					foreach ($_tables as $_table) {
-						// Détermination de la fonction de lecture de la table et lecture des données contenues
-						// soit dans un fichier soit dans une page web.
-						$lire_table = "isocode_read_{$GLOBALS['isocode'][$_service]['tables'][$_table]['populating']}";
-						list($records, $sha) = $lire_table($_service, $_table);
-						if ($records) {
-							// Suppression des éléments éventuels déjà chargés.
-							sql_delete("spip_${_table}");
+			// On détermine le service qui supporte le chargement de la table
+			$service = isocode_trouver_service($_table);
+			if ($service) {
+				include_spip("services/${service}/${service}_api");
+				// Détermination de la fonction de lecture de la table et lecture des données contenues
+				// soit dans un fichier soit dans une page web.
+				$lire_table = charger_fonction("isocode_read_{$GLOBALS['isocode'][$service]['tables'][$_table]['populating']}", 'inc');
+				list($records, $sha) = $lire_table($service, $_table);
+				if ($records) {
+					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
+					// sur ce traitement car elle sera forcément détectée sur l'insert qui suit.
+					isocode_decharger_tables($_table);
 
-							// Insertion dans la base de données des éléments extraits
-							sql_insertq_multi("spip_${_table}", $records);
-							// On stocke les informations de chargement de la table dans une meta.
-							$meta = array(
-								'sha' => $sha,
-								'nbr' => count($records),
-								'maj' => date('Y-m-d H:i:s'));
-							ecrire_config("isocode/tables/${_table}", $meta);
-						}
+					// Insertion dans la base de données des éléments extraits
+					$sql_ok = sql_insertq_multi("spip_${_table}", $records);
+					if ($sql_ok !== false) {
+						// On stocke les informations de chargement de la table dans une meta.
+						$meta = array(
+							'service' => $service,
+							'sha'     => $sha,
+							'nbr'     => count($records),
+							'maj'     => date('Y-m-d H:i:s')
+						);
+						ecrire_config("isocode/tables/${_table}", $meta);
+					} else {
+						$erreur_table = true;
 					}
+				} else {
+					$erreur_table = true;
 				}
+			} else {
+				$erreur_table = true;
+			}
+
+			if ($erreur_table) {
+				$retour[0] = false;
+				$retour[1][] = $_table;
 			}
 		}
 	}
@@ -108,6 +102,102 @@ function isocode_charger_tables($tables = array()) {
 }
 
 
+/**
+ * Supprime en base de données, le contenu des tables de codes ISO choisies.
+ * Si la liste des tables est vide la fonction considère que toutes les tables doivent être vidées.
+ * La meta concernant les informations de chargement de chaque table est aussi effacée.
+ *
+ * @api
+ * @filtre
+ *
+ * @param array $tables
+ *        Liste des noms de table sans le préfixe `spip_`.
+ *
+ * @return array
+ *         Tableau résultat de l'action de vidage:
+ *         - index 0 : `true` si le vidage a réussi, `false` sinon.
+ *         - index 1 : liste des tables en erreur ou tableau vide sinon.
+ */
+function isocode_decharger_tables($tables = array()) {
+
+	$retour = array(true, array());
+
+	// Suivant le tableau fourni en argument, on détermine la liste exacte des tables à charger.
+	// Le cas où le service existe mais que la liste de tables associées est vide est traité dans
+	// la boucle des services ci-après.
+	if (!$tables) {
+		// Le tableau est vide : il faut charger toutes les tables de tous les services supportés.
+		$tables = isocode_lister_tables();
+	} elseif (is_string($tables)) {
+		// L'argument n'est pas un tableau mais une chaine, on considère que l'appelant a demandé
+		// le chargement d'une table identifiée par cette chaine.
+		$tables = array($tables);
+	} elseif (!is_array($tables)) {
+		$tables = array();
+	}
+
+	// On boucle sur la liste des tables et on vide chaque table référencée.
+	if ($tables) {
+		foreach ($tables as $_table) {
+			$sql_ok = sql_delete("spip_${_table}");
+			if ($sql_ok !== false) {
+				// Supprimer la meta propre au règne.
+				effacer_meta("isocode/tables/${_table}");
+			} else {
+				$retour[0] = false;
+				$retour[1][] = $_table;
+			}
+		}
+	}
+
+	return $retour;
+}
+
+
+/**
+ * Détermine le service associé au chargement de la table de codes ISO choisie.
+ * Si la table est vide ou invalide, la fonction renvoie une chaine vide.
+ *
+ * @param $table
+ *        Nom d'une table de codes ISO sans le préfixe `spip_`.
+ *
+ * @return string
+ * 		Nom du service permettant le chargement de la table.
+ */
+function isocode_trouver_service($table) {
+
+	static $services = array();
+	static $tables = array();
+	$service = '';
+
+	if (is_string($table) and $table) {
+		if (!$services) {
+			$services = isocode_lister_services();
+		}
+
+		foreach ($services as $_service) {
+			if (!isset($tables[$_service])) {
+				include_spip("services/${_service}/${_service}_api");
+				$tables[$_service] = array_keys($GLOBALS['isocode'][$_service]['tables']);
+			}
+			if (in_array(strtolower($table), $tables[$_service])) {
+				$service = $_service;
+				break;
+			}
+		}
+	}
+
+	return $service;
+}
+
+
+/**
+ * Retourne la liste des services disponibles pour le chargement des tables de codes ISO.
+ * La fonction lit les sous-répertoires du répertoire `services/` du plugin.
+ *
+ * @return array
+ * 		La liste des services disponibles.
+ */
 function isocode_lister_services() {
 
 	$services = array();
@@ -122,17 +212,36 @@ function isocode_lister_services() {
 }
 
 
+/**
+ * Vérifie si le service demandé est fait bien partie de la liste des services disponibles.
+ *
+ * @param $service
+ * 		Nom du service à vérifier.
+ *
+ * @return bool
+ *      `true` si le service est disponible, `false` sinon.
+ */
 function isocode_service_disponible($service) {
 
-	$autorisation = false;
+	$disponible = false;
 	if ($service and in_array(strtolower($service), isocode_lister_services())) {
-		$autorisation = true;
+		$disponible = true;
 	}
 
-	return $autorisation;
+	return $disponible;
 }
 
 
+/**
+ * Retourne la liste de toutes les tables ou celle associée à un ou plusieurs services donnés.
+ *
+ * @param array $services
+ * 		Liste des services pour lesquels la liste des tables associées est demandée.
+ * 		Si la liste est vide la fonction renvoie les tables de tous les services dsponibles.
+ *
+ * @return array
+ * 		Liste des tables de codes ISO sans le préfixe `spip_`.
+ */
 function isocode_lister_tables($services = array()) {
 
 	$tables = array();
@@ -155,7 +264,7 @@ function isocode_lister_tables($services = array()) {
 	foreach ($services as $_service) {
 		if (isocode_service_disponible($_service)) {
 			include_spip("services/${_service}/${_service}_api");
-			$tables[$_service] = array_keys($GLOBALS['isocode'][$_service]['tables']);
+			$tables = array_merge($tables, array_keys($GLOBALS['isocode'][$_service]['tables']));
 		}
 	}
 
@@ -163,65 +272,64 @@ function isocode_lister_tables($services = array()) {
 }
 
 
-function isocode_verifier_codes_spip() {
+/**
+ * Indique si une table de codes ISO est déjà chargée ou pas en base de données.
+ * La fonction scrute la table `spip_${table}` et non la meta propre à la table.
+ *
+ * @api
+ * @filtre
+ *
+ * @param string $table
+ *        Nom de la table sans le préfixe `spip_`.
+ * @param array  $meta_table
+ *        Meta propre à la table, créée lors du chargement de celle-ci et retournée si la table
+ *        est déjà chargée.
+ *
+ * @return bool
+ *        `true` si la table est chargée, `false` sinon.
+ */
+function isocode_table_chargee($table, &$meta_table) {
+	$meta_table = array();
+	$table_chargee = false;
 
-	$codes_verifies = array();
-	
-	include_spip('inc/lang_liste');
-	if ($GLOBALS['codes_langues']) {
-		foreach ($GLOBALS['codes_langues'] as $_code => $_nom) {
-			$from = array('spip_iso639codes');
-			$select = array('*');
-			if (strlen($_code) == 2) {
-				// Si le code a une taille de 2 caractères on recherche de suite dans la table iso639codes
-				// un élément dont le code ISO639-1 est égal.
-				$where = array('code_639_1=' . sql_quote($_code));
-				$codes_iso = sql_allfetsel($select, $from, $where);
-				if ($codes_iso) {
-					$codes_verifies['ok']['iso6391'][$_code] = $codes_iso;
-				} else {
-					$codes_verifies['nok']['iso6391'][$_code] = array('nom_spip' => $_nom);
-				}
-			} elseif (strlen($_code) == 3) {
-				// Si le code a une taille de 3 caractères on recherche :
-				// - dans la table iso639codes un élément dont le code ISO639-3 est égal.
-				// - et sinon dans la table iso639families un élément dont le code ISO639-5 est égal.
-				$where = array('code_639_3=' . sql_quote($_code));
-				$codes_iso = sql_allfetsel($select, $from, $where);
-				if ($codes_iso) {
-					$codes_verifies['ok']['iso6393'][$_code] = $codes_iso;
-				} else {
-					$where = array('code_639_5=' . sql_quote($_code));
-					$code_famille = sql_fetsel($select, array('spip_iso639families'), $where);
-					if ($code_famille) {
-						$codes_verifies['ok']['iso6395'][$_code] = array('nom_spip' => $_nom);
-					} else {
-						$codes_verifies['nok']['iso6393'][$_code] = array('nom_spip' => $_nom);
-					}
-				}
-			} else {
-				$codes_verifies['nok']['spip'][$_code] = array('nom_spip' => $_nom);
-			}
-		}
+	$retour = sql_countsel("spip_${table}");
+	if ($retour) {
+		// Récupérer la meta propre au règne afin de la retourner.
+		include_spip('inc/config');
+		$meta_table = lire_config("isocode/tables/${table}");
+		$table_chargee = true;
 	}
 
-	return $codes_verifies;
+	return $table_chargee;
 }
 
-function isocode_verifier_iso639_5() {
 
-	$codes_verifies = array();
+/**
+ * Compare le sha passé en argument pour la table concernée avec le sha stocké dans la meta
+ * pour cette même table.
+ *
+ * @api
+ *
+ * @param string $sha
+ * 		Sha à comparer à celui de la table.
+ * @param string $table
+ * 		Nom de la table de code ISO (sans préfixe `spip_`) dont il faut comparer le sha
+ * 		stoké dans sa meta de chargement.
+ *
+ * @return bool
+ *      `true` si le sha passé en argument est identique au sha stocké pour la table choisie, `false` sinon.
+ */
+function isocode_comparer_sha($sha, $table) {
 
-	$codes_639_5 = sql_allfetsel('*', 'spip_iso639families');
-	if ($codes_639_5) {
-		foreach($codes_639_5 as $_code) {
-			if (sql_countsel('spip_iso639macros', 'code_639_3=' . sql_quote($_code['code_639_5']))) {
-				$codes_verifies['ok'][] = $_code['code_639_5'];
-			} else {
-				$codes_verifies['nok'][] = $_code['code_639_5'];
-			}
-		}
+	$sha_identique = false;
+
+	// On récupère le sha de la table dans les metas si il existe (ie. la table a été chargée)
+	include_spip('inc/config');
+	$sha_stocke = lire_config("isocode/tables/${table}/sha", '');
+
+	if ($sha_stocke and ($sha == $sha_stocke)) {
+		$sha_identique = true;
 	}
 
-	return $codes_verifies;
+	return $sha_identique;
 }

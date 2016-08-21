@@ -25,19 +25,17 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 
 //	$config_defaut = configurer_isocode();
 
+	// Liste des tables créées par le plugin
+	include_spip('isocode_fonctions');
+	$tables = array();
+	foreach (isocode_lister_tables() as $_table) {
+		$tables[] = "spip_${_table}";
+	}
+
 	$maj['create'] = array(
 		array(
 			'maj_tables',
-			array(
-				'spip_iso639codes',
-				'spip_iso639names',
-				'spip_iso639macros',
-				'spip_iso639retirements',
-				'spip_iso639families',
-				'spip_iso15924scripts',
-				'spip_iso3166countries',
-				'spip_iana5646subtags'
-			)
+			$tables
 		),
 		//		array('ecrire_config', 'isocode', $config_defaut)
 	);
@@ -47,7 +45,6 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 
 	// Ajout systématique des données iso dans la base de données, quelque soit l'action en cours.
 	// Ces données n'étant pas modifiables, il n'y a pas de risque à recharger ces tables.
-	include_spip('isocode_fonctions');
 //	isocode_charger_tables();
 }
 
@@ -62,15 +59,14 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
  **/
 function isocode_vider_tables($nom_meta_base_version) {
 
+	// Liste des tables créées par le plugin
+	include_spip('isocode_fonctions');
+	$tables = isocode_lister_tables();
+
 	// Supprimer les tables ISO créées par le plugin
-	sql_drop_table('spip_iso639codes');
-	sql_drop_table('spip_iso639names');
-	sql_drop_table('spip_iso639macros');
-	sql_drop_table('spip_iso639retirements');
-	sql_drop_table('spip_iso639families');
-	sql_drop_table('spip_iso15924scripts');
-	sql_drop_table('spip_iso3166countries');
-	sql_drop_table('spip_iana5646subtags');
+	foreach ($tables as $_table) {
+		sql_drop_table("spip_${_table}");
+	}
 
 	// Effacer la meta de configuration et de stockage du plugin
 	effacer_meta('isocode');

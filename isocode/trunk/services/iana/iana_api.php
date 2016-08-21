@@ -14,6 +14,7 @@ $GLOBALS['isocode']['iana']['tables'] = array(
 		'basic_fields' => array(
 			'Type'            => 'type',
 			'Subtag'          => 'subtag',
+			'Tag'             => 'subtag',
 			'Description'     => 'description',
 			'Added' 	      => 'date_ref',
 			'Suppress-Script' => 'no_script',
@@ -33,7 +34,7 @@ $GLOBALS['isocode']['iana']['tables'] = array(
 			),
 			'field'        => array(
 				'method'    => 'regexp',
-				'regexp'    => '%(\w+):\s+(.*)%i'
+				'regexp'    => '%^([a-z]+-*[a-z]*):\s+(.*)%im'
 			)
 		)
 	)
