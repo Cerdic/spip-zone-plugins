@@ -70,4 +70,3 @@ function formulaires_configurer_a2a_traiter(){
 	return $cfg;
 }
 
-?>

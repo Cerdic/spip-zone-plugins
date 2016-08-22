@@ -55,4 +55,3 @@ function formulaires_navigateur_a2a_traiter($id_article){
 	return $retour;
 }
 
-?>

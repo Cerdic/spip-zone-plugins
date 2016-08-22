@@ -41,4 +41,4 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
-?>
+

@@ -30,4 +30,3 @@ function formulaires_a2a_changer_typeliaison_traiter_dist($id_article,$id_articl
 	return array('message_ok'=>$nv_type_liaison,'editable'=>false);
 }	
 
-?>

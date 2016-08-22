@@ -23,4 +23,3 @@ function formulaires_recherche_a2a_traiter($id_article){
 	return true; // permettre d'editer encore le formulaire
 }
 
-?>

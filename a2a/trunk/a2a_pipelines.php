@@ -36,4 +36,3 @@ function a2a_affiche_milieu($flux){
 	return $flux;
 }
 
-?>

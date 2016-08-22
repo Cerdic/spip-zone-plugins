@@ -148,4 +148,3 @@ function action_a2a_modifier_rang_dist($id_article_cible, $id_article, $type_lia
 	return true;
 }
 
-?>

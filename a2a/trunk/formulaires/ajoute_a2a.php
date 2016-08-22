@@ -43,4 +43,4 @@ function formulaires_ajoute_a2a_traiter($id_article_orig,$id_article_dest){
 	return array("message_ok"=>"ok");
 }
 
-?>
+

@@ -74,4 +74,4 @@ function balise_TYPES_LIAISONS($p){
 	return $p;
 }
 
-?>
+
