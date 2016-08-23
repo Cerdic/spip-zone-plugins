@@ -4,6 +4,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
+function inserer_modeles_header_prive($flux){
+    $js = find_in_path('javascript/autosize.min.js');
+    $flux .= "\n<script type='text/javascript' src='$js'></script>\n";
+    return $flux;
+}
+
 function inserer_modeles_affiche_droite($flux)
 {
     $config_meta = inserer_modeles_configuration();
