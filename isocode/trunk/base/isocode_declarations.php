@@ -154,7 +154,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// Table des indicatifs des pays ISO-3166 : spip_iso3166countries
 	$table_countries = array(
 		'code_alpha2' => "char(2) DEFAULT '' NOT NULL",                  // The two-letter identifier
-		'code_alpha3' => "char(2) DEFAULT '' NOT NULL",                  // The three-letter identifier
+		'code_alpha3' => "char(3) DEFAULT '' NOT NULL",                  // The three-letter identifier
 		'code_num'    => "char(3) DEFAULT '' NOT NULL",                  // Numeric identifier
 		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",             // English name
 		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",             // french name
