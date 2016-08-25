@@ -411,6 +411,34 @@ function gis_modele_url_json_env($env) {
 	return $contexte;
 }
 
+
+/**
+ * Transforme un paramètre d'entrée en tableau
+ * s'il n'en est pas déjà un.
+ * 
+ * Permet d'utiliser dans l'appel au modèle de carte gis
+ * depuis un texte d'article des paramètres tabulaires,
+ * tel que des identifiants de documents de tracés kml,
+ * tel que `<carte_gis|kml=10,11,12>`
+ * 
+ * @example `#ENV{kml}|gis_param_to_array`
+ *
+ * @param string|int|array $param
+ *     Le paramètre à transformer en tableau
+ * @param string $sep
+ *     Le séparateur utilisé
+ * @return array
+**/
+function gis_param_to_array($param, $sep = ',') {
+	if (is_array($param)) {
+		return $param;
+	}
+	// enlever les espaces et exploser
+	$tab = explode($sep, trim((string)$param));
+	// enlever les champs vides, les espaces sur chaques champs.
+	return array_map('trim', array_filter($tab));
+}
+
 /**
  * Transformer le tableau de kml en tableau d'urls :
  *   si numerique c'est un id de document
