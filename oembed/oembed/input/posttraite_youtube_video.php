@@ -28,6 +28,20 @@ function oembed_input_posttraite_youtube_video_dist($data, $url_orig) {
 		$data['html'] = str_replace('feature=oembed', 'feature=oembed&wmode=Opaque', $data['html']);
 	}
 
+	// recuperer la duree si possible, ruse de sioux
+	// http://stackoverflow.com/questions/10066638/get-youtube-information-via-json-for-single-video-not-feed-in-javascript
+	if (defined('_OEMBED_VIDEO_DURATION') and _OEMBED_VIDEO_DURATION
+		and $v = parametre_url($url_orig, 'v')){
+		$oembed_recuperer_url = charger_fonction('oembed_recuperer_url', 'inc');
+		if ($infos = $oembed_recuperer_url("http://www.youtube.com/get_video_info?html5=1&video_id=".$v)){
+			$infos = explode('length_seconds=',$infos);
+			if ($duree = intval(end($infos))){
+				$data['duration'] = $duree;
+			}
+			unset($infos);
+		}
+	}
+
 	// un bug chez youtube ?
 	$data['html'] = rtrim($data['html'], ')');
 	return $data;
