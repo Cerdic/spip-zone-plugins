@@ -268,7 +268,7 @@ function evenement_instituer($id_evenement, $c) {
 
 	// Verifier que l'article demande existe et est different
 	// de l'article actuel
-	if ($c['id_parent']
+	if (isset($c['id_parent'])
 		and $c['id_parent'] != $id_parent
 		and (sql_countsel('spip_articles', 'id_article='.intval($c['id_parent'])))) {
 		$id_parent = $champs['id_article'] = $c['id_parent'];

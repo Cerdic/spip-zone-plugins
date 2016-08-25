@@ -83,10 +83,10 @@ function formulaires_editer_evenement_verifier_dist($id_evenement = 'new', $id_a
 	include_spip('inc/date_gestion');
 
 	$horaire = _request('horaire') == 'non' ? false : true;
-	if (!$erreurs['date_debut']) {
+	if (empty($erreurs['date_debut'])) {
 		$date_debut = verifier_corriger_date_saisie('debut', $horaire, $erreurs);
 	}
-	if (!$erreurs['date_fin']) {
+	if (empty($erreurs['date_fin'])) {
 		$date_fin = verifier_corriger_date_saisie('fin', $horaire, $erreurs);
 	}
 
