@@ -178,7 +178,7 @@ function emplois_post_insertion($flux) {
 
 		$email_to = $email_webmaster;
 		$sujet = "Nouveau dépot Offre Emploi";
-		$message = "une nouvelle offre d'emploi vient d'être posté sur le site Tech XV";
+		$message = "une nouvelle offre d'emploi vient d'être postée sur le site.";
 
 		$send = $envoyer_mail($email_to,$sujet,$message);
 	}
