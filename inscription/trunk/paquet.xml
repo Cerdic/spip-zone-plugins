@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.6.4"
+	version="3.6.5"
 	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/inscription3-64.png"

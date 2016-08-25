@@ -990,7 +990,7 @@ function inscription3_recuperer_fond($flux) {
 			}
 		}
 		if ($flux['args']['fond']=='formulaires/login') {
-			if (($type_affordance = $config['affordance_form']) and ($type_affordance != 'login')) {
+			if (isset($config['affordance_form']) and ($type_affordance = $config['affordance_form']) and ($type_affordance != 'login')) {
 				switch ($type_affordance) {
 					case 'email':
 						$label = _T('inscription3:votre_mail');
