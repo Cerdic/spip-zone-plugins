@@ -56,13 +56,14 @@
 	</fieldset>
     <fieldset>
    		<legend><:comments:cfg_forum_champs_obligatoires:></legend>
-        <p class="explication"><:comments:cfg_explication_nom_obligatoire:></p>
         <ul>
-            #SET{name,email_obli}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-            <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-                <span class='erreur_message'>(#GET{erreurs})</span>
-                ]
-                #SET{val,1}
+            <li class="editer editer_champs_obligatoires">
+                #SET{name,nom_obli}#SET{val,1}
+                <div class="choix">
+                    <input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|!={0}|oui)checked="checked"] />
+                    <label for="#GET{name}_#GET{val}"><:comments:cfg_label_nom_obligatoire:></label>
+                </div>
+                #SET{name,email_obli}#SET{val,1}
                 <div class="choix">
                     <input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
                     <label for="#GET{name}_#GET{val}"><:comments:cfg_label_email_obligatoire:></label>

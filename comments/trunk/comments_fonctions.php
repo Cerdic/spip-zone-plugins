@@ -102,17 +102,20 @@ function comments_formulaire_charger($flux){
 function comments_formulaire_verifier($flux){
 
 	if ($flux['args']['form']=='forum'){
-		// on doit indiquer un login au moins
+		// vérifier le champ nom et email si la conf le demande
 		if (!isset($GLOBALS['visiteur_session']['statut'])){
-			if (!_request('session_nom') AND
-				(!isset($GLOBALS['visiteur_session']['session_nom']) OR !strlen($GLOBALS['visiteur_session']['session_nom']))){
-				$flux['data']['session_nom'] = _T('info_obligatoire');
-				unset($flux['data']['previsu']);
+			include_spip('inc/config');
+			if (lire_config('comments/nom_obli',1)
+				AND !_request('session_nom')
+				AND (!isset($GLOBALS['visiteur_session']['session_nom']) OR !strlen($GLOBALS['visiteur_session']['session_nom']))
+			){
+					$flux['data']['session_nom'] = _T('info_obligatoire');
+					unset($flux['data']['previsu']);
 			}
-			include_spip("inc/config");
-			if (lire_config("comments/email_obli",'')
+			if (lire_config('comments/email_obli','')
 				AND !_request('session_email')
-				AND (!isset($GLOBALS['visiteur_session']['session_email']) OR !strlen($GLOBALS['visiteur_session']['session_email']))){
+				AND (!isset($GLOBALS['visiteur_session']['session_email']) OR !strlen($GLOBALS['visiteur_session']['session_email']))
+			){
 				$flux['data']['session_email'] = _T('info_obligatoire');
 				unset($flux['data']['previsu']);
 			}

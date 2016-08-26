@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La saisie d’un nom ou pseudo est obligatoire pour déposer un commentaire. Vous pouvez choisir de rendre également obligatoire la saisie d’un courriel.',
 	'cfg_forum_champs_obligatoires' => 'Champs obligatoires',
 	'cfg_forum_format_fil' => 'Liste ou thread ?',
 	'cfg_forum_longueur' => 'Longueur des messages',
@@ -21,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_diese' => 'Dièse (#)',
 	'cfg_label_apparence_permalien_picto' => 'Picto',
 	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d’un courriel',
+	'cfg_label_nom_obligatoire' => 'Rendre obligatoire la saisie d’un nom ou pseudo',
 	'cfg_label_presentation_fil' => 'Présentation du fil de discussion',
 	'cfg_label_presentation_fil_liste' => 'Liste de commentaires (à plat)',
 	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)',
