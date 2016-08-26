@@ -16,9 +16,9 @@
 	* mixed from all sources
 * [KML.js](https://github.com/shramov/leaflet-plugins/blob/master/layer/vector/KML.js)
 * leaflet.markercluster.css
-	* [MarkerCluster.css](https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.css)
-	* [MarkerCluster.Default.css](https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.css)
-* [leaflet.markercluster-src.js](https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/leaflet.markercluster-src.js)
+	* [MarkerCluster.css](https://github.com/Leaflet/Leaflet.markercluster/blob/leaflet-0.7/dist/MarkerCluster.css)
+	* [MarkerCluster.Default.css](https://github.com/Leaflet/Leaflet.markercluster/blob/leaflet-0.7/dist/MarkerCluster.Default.css)
+* [leaflet.markercluster-src.js](https://github.com/Leaflet/Leaflet.markercluster/blob/leaflet-0.7/dist/leaflet.markercluster-src.js)
 * leaflet-plugins.css
 	* [Control.FullScreen.css](https://github.com/brunob/leaflet.fullscreen/blob/master/Control.FullScreen.css)
 	* [Control.MiniMap.css](https://github.com/Norkart/Leaflet-MiniMap/blob/master/src/Control.MiniMap.css)
