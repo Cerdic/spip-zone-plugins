@@ -7,6 +7,7 @@
 	<parametre nom="id_objet" label="menus:entree_id_objet" obligatoire="oui" />
 	<parametre nom="titre" class="multilang" label="menus:entree_titre" />
 	<parametre nom="css" label="menus:entree_css" />
+	<parametre nom="css_lien" label="menus:entree_css_lien" />
 	<parametre nom="connexion" label="menus:entree_connexion_objet" />
 	<parametre nom="trad" label="menus:entree_traduction_objet" />
 </entree>
