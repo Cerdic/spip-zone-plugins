@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La sesida d’un noum o psèudounime es oubligatori per depousà un coumentari. Poudès finda chausì da rendre oubligatori la sesida d’un e-mail.',
 	'cfg_forum_champs_obligatoires' => 'Camp oubligatori',
 	'cfg_forum_format_fil' => 'Lista o thread ?',
 	'cfg_forum_longueur' => 'Lounguessa dei message',

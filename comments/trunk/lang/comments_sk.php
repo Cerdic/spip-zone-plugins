@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Na to, aby mohol byť odoslaný komentár, je povinné zadanie mena alebo prezývky. Ako povinné môžete nastaviť aj zadávanie e-mailovej adresy.',
 	'cfg_forum_champs_obligatoires' => 'Povinné polia',
 	'cfg_forum_format_fil' => 'Zoznam alebo vlákno?',
 	'cfg_forum_longueur' => 'Dĺžka správ',

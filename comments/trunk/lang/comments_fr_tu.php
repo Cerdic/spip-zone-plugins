@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'La saisie d’un nom ou pseudo est obligatoire pour déposer un commentaire. Tu peux choisir de rendre également obligatoire la saisie d’un courriel.',
 	'cfg_forum_champs_obligatoires' => 'Champs obligatoires',
 	'cfg_forum_format_fil' => 'Liste ou thread ?',
 	'cfg_forum_longueur' => 'Longueur des messages',

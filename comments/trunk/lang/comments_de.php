@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Angabe eines Namesn ode Pseudonyms ist obligatorisch. Sie können ebenfalls die Angabe einer Mailadresse vorschreiben.',
 	'cfg_forum_champs_obligatoires' => 'Pflichtfelder',
 	'cfg_forum_format_fil' => 'Liste oder Thread ?',
 	'cfg_forum_longueur' => 'Länge der Nachricht',

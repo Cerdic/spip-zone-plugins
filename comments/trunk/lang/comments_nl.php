@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Het invoeren van een naam of pseudoniem is verplicht bij het plaatsen van een commentaar. Je kunt er ook voor kiezen een emailadres verplicht te maken.',
 	'cfg_forum_champs_obligatoires' => 'Verplichte velden',
 	'cfg_forum_format_fil' => 'Lijst of draad?',
 	'cfg_forum_longueur' => 'Lengte van berichten',

@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'إدخال اسم او لقب إجباري لإضافة تعليق. يمكن أيضاً اختيار جعل إدخال البريد الإلكتروني إجباري.',
 	'cfg_forum_champs_obligatoires' => 'حقول إجبارية',
 	'cfg_forum_format_fil' => 'لائحة أم خيط؟',
 	'cfg_forum_longueur' => 'طول المشاركات',

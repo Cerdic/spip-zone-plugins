@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Для того, что бы оставить комментарий необходимо указать имя. Также можно требовать обязательное наличие емейла.',
 	'cfg_forum_champs_obligatoires' => 'Обязательные поля',
 	'cfg_forum_format_fil' => 'Список или дерево ?',
 	'cfg_forum_longueur' => 'Длинна комментария (символов)',

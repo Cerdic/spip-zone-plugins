@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Es obligatorio indicar un nombre o pseudónimo para dejar un comentario. Puede elegir asimismo que sea obligatorio indicar un correo electrónico.',
 	'cfg_forum_champs_obligatoires' => 'Campos obligatorios',
 	'cfg_forum_format_fil' => '¿Lista o hilo?',
 	'cfg_forum_longueur' => 'Longitud de los mensajes',

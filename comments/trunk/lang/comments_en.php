@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_explication_nom_obligatoire' => 'Entering a name or nickname is required to post a comment. You can also choose to make email mention compulsory.',
 	'cfg_forum_champs_obligatoires' => 'Mandatory fields',
 	'cfg_forum_format_fil' => 'List or thread?',
 	'cfg_forum_longueur' => 'Length of messages',
