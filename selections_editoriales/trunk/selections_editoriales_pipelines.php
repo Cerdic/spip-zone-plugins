@@ -202,3 +202,25 @@ function selections_editoriales_quete_logo_objet($flux) {
 	
 	return $flux;
 }
+
+/**
+ * Met à jour les liens de selections après l'édition d'un objet
+ *
+ * @pipeline post_edition
+ * @param array $flux
+ *     Données du pipeline
+ * @return array
+ *     Données du pipeline
+ **/
+function selections_editoriales_post_edition($flux) {
+	// le serveur n'est pas toujours la
+	$serveur = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
+	if (isset($flux['args']['table']) and $flux['args']['table'] !== 'spip_selections') {
+		$marquer_doublons_selection = charger_fonction('marquer_doublons_selection', 'inc');
+		$marquer_doublons_selection($flux['data'], $flux['args']['id_objet'], $flux['args']['type'],
+			id_table_objet($flux['args']['type'], $serveur), $flux['args']['table_objet'],
+			$table_objet, $flux['args']['table'], '', $serveur);
+	}
+
+	return $flux;
+}
