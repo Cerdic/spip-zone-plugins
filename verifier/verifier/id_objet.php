@@ -21,11 +21,11 @@ function verifier_id_objet_dist($valeur, $options = array()) {
 		// On vérifie déjà qu'il s'agit d'un nombre
 		if (!is_numeric($valeur)) {
 			$erreur = _T('verifier:erreur_id_objet');
-		} elseif (isset($options['objet'])){
+		} elseif (isset($options['objet'])) {
 			$id_table_objet = id_table_objet($options['objet']);
 			$table = table_objet_sql($options['objet']);
 			if ($id_table_objet && $table) {
-				if(!sql_countsel($table, $id_table_objet.'='.intval($valeur))){
+				if (!sql_countsel($table, $id_table_objet.'='.intval($valeur))) {
 					$erreur = _T('verifier:erreur_id_objet');
 				}
 			} else {
