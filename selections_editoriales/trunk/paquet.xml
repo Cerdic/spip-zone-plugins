@@ -1,7 +1,7 @@
 <paquet
 	prefix="selections_editoriales"
 	categorie="navigation"
-	version="1.6.5"
+	version="1.6.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/selections_editoriales-64.png"
@@ -29,6 +29,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="quete_logo_objet" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="post_edition" inclure="selections_editoriales_pipelines.php" />
 
 	<menu nom="selections" titre="selection:titre_selections" parent="menu_edition" icone="images/selections_contenu-16.png" action="selections" />
 	<menu nom="selection_creer" titre="selection:icone_creer_selection" parent="outils_rapides" icone="images/selections_contenu-new-16.png" action="selection_edit" parametres="new=oui" />
