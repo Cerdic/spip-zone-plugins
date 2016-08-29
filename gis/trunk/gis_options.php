@@ -150,19 +150,19 @@ $gis_layers = array (
 	),
 	'cartodb_positron' => array(
 		'nom' => 'CartoDB Positron',
-		'layer' => 'L.tileLayer.provider("CartoDB.Positron")'
+		'layer' => substr($GLOBALS['meta']['adresse_site'], 0, 5) == 'https' ? 'L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png")' : 'L.tileLayer.provider("CartoDB.Positron")'
 	),
 	'cartodb_positron_base' => array(
 		'nom' => 'CartoDB Positron Base',
-		'layer' => 'L.tileLayer.provider("CartoDB.PositronNoLabels")'
+		'layer' => substr($GLOBALS['meta']['adresse_site'], 0, 5) == 'https' ? 'L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png")' : 'L.tileLayer.provider("CartoDB.PositronNoLabels")'
 	),
 	'cartodb_darkmatter' => array(
 		'nom' => 'CartoDB DarkMatter',
-		'layer' => 'L.tileLayer.provider("CartoDB.DarkMatter")'
+		'layer' => substr($GLOBALS['meta']['adresse_site'], 0, 5) == 'https' ? 'L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png")' : 'L.tileLayer.provider("CartoDB.DarkMatter")'
 	),
 	'cartodb_darkmatter_base' => array(
 		'nom' => 'CartoDB DarkMatter Base',
-		'layer' => 'L.tileLayer.provider("CartoDB.DarkMatterNoLabels")'
+		'layer' => substr($GLOBALS['meta']['adresse_site'], 0, 5) == 'https' ? 'L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}.png")' : 'L.tileLayer.provider("CartoDB.DarkMatterNoLabels")'
 	)
 );
 
