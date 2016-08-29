@@ -46,7 +46,6 @@ function verifier_url_dist($valeur, $options = array()) {
 	$fonction_verif = $fonctions_disponibles[$mode];
 
 	return $fonction_verif($valeur,$type_protocole,$protocole) ;
-
 }
 
 /**
