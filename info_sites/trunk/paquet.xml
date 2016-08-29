@@ -1,12 +1,12 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.12.2"
+	version="1.13.0"
 	etat="test"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
 	documentation="http://info-sites.readthedocs.io/"
-	schema="1.0.8"
+	schema="1.1.0"
 >
 	<nom>Info Sites</nom>
 
@@ -32,6 +32,7 @@
 	<necessite nom="roles_auteurs" compatibilite="[1.0.0;]"/>
 	<necessite nom="rss_commits" compatibilite="[0.6.0;]"/>
 	<necessite nom="selecteurgenerique" compatibilite="[1.0.0;]"/>
+	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 
 	<utilise nom="info_spip" compatibilite="[0.8.0;]"/>
 
@@ -41,6 +42,7 @@
 	<lib nom="bootstrap" lien="https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/info_sites_extras.php" />
 
 	<pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php"/>
 	<pipeline nom="header_prive" inclure="info_sites_pipelines.php"/>
