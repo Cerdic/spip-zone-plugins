@@ -255,12 +255,13 @@ function saisies_comparer_rappel($a, $b) {
  *
  * @param array $saisies_anciennes Un tableau décrivant des saisies
  * @param array $saisies_nouvelles Un autre tableau décrivant des saisies
- * @param bool  $avec_conteneur    Indique si on veut prendre en compte dans la comparaison les conteneurs comme les fieldsets
+ * @param bool  $avec_conteneur    Indique si on veut prendre en compte dans la comparaison
+ * les conteneurs comme les fieldsets
  *
  * @return array Retourne le tableau des saisies supprimées, ajoutées et modifiées
  */
 function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles, $avec_conteneur = true) {
-	return saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur, $tri = 'identifiant');
+	return saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur, 'identifiant');
 }
 
 /**
@@ -268,7 +269,7 @@ function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles
  *
  * @return array Un tableau listant des saisies et leurs options
  */
-function saisies_lister_disponibles($saisies_repertoire = "saisies") {
+function saisies_lister_disponibles($saisies_repertoire = 'saisies') {
 	static $saisies = null;
 
 	if (is_null($saisies)) {
@@ -299,7 +300,7 @@ function saisies_lister_disponibles($saisies_repertoire = "saisies") {
  *
  * @return array Un tableau listant des saisies et leurs options
  */
-function saisies_groupes_lister_disponibles($saisies_repertoire = "saisies") {
+function saisies_groupes_lister_disponibles($saisies_repertoire = 'saisies') {
 	static $saisies = null;
 
 	if (is_null($saisies)) {
@@ -311,7 +312,7 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = "saisies") {
 				$type_saisie = preg_replace(',[.]yaml$,i', '', $fichier);
 				$dossier = str_replace($fichier, '', $chemin);
 				// On ne garde que les saisies qui ont bien le HTML avec !
-				if (is_array($saisie = saisies_charger_infos($type_saisie,$saisies_repertoire))) {
+				if (is_array($saisie = saisies_charger_infos($type_saisie, $saisies_repertoire))) {
 					$saisies[$type_saisie] = $saisie;
 				}
 			}
@@ -325,7 +326,7 @@ function saisies_groupes_lister_disponibles($saisies_repertoire = "saisies") {
  *
  * @return array Un tableau listant des saisies et leurs options
  */
-function saisies_lister_disponibles_sql($saisies_repertoire = "saisies") {
+function saisies_lister_disponibles_sql($saisies_repertoire = 'saisies') {
 	$saisies = array();
 	$saisies_disponibles = saisies_lister_disponibles($saisies_repertoire);
 	foreach ($saisies_disponibles as $type => $saisie) {
@@ -344,7 +345,7 @@ function saisies_lister_disponibles_sql($saisies_repertoire = "saisies") {
  *
  * @return array Un tableau contenant le YAML décodé
  */
-function saisies_charger_infos($type_saisie,$saisies_repertoire = "saisies") {
+function saisies_charger_infos($type_saisie, $saisies_repertoire = 'saisies') {
 	if (defined('_DIR_PLUGIN_YAML')) {
 		include_spip('inc/yaml');
 		$fichier = find_in_path("$saisies_repertoire/$type_saisie.yaml");
