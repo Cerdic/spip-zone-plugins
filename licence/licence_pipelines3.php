@@ -68,7 +68,7 @@ function licence_pre_insertion($flux){
  */
 function licence_editer_contenu_objet($flux){
 	if(in_array($flux['args']['type'],array('document'))){
-		if(preg_match(",<li [^>]*class=[\"']editer editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
+		if(preg_match(",<(li|div) [^>]*class=[\"']editer editer_credits.*>(.*)<\/(li|div)>,Uims",$flux['data'],$regs)){
 			include_spip('inc/licence');
 			$licences = licence_lister();
 			$ajouts = recuperer_fond('prive/licence_document_saisies',array('id_document'=>$flux['args']['id'],'licences' => $licences));

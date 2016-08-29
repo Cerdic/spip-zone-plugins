@@ -1,7 +1,7 @@
 <paquet
 	prefix="licence"
 	categorie="divers"
-	version="0.8.1"
+	version="0.9.0"
 	etat="stable"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="img_pack/licence_logo.png"

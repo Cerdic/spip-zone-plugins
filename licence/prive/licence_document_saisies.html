@@ -1,5 +1,5 @@
 <BOUCLE_doc(DOCUMENTS){id_document}{tous}>
-<li class="editer_licence[ (#ENV**{erreurs}|table_valeur{id_licence}|oui)erreur]">
+<[(#SPIP_VERSION|spip_version_compare{3.1,<}|?{li,div})] class="editer editer_licence[ (#ENV**{erreurs}|table_valeur{id_licence}|oui)erreur]">
 	<label for="id_licence"><:licence:label_select_licence:></label>
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_licence})</span>]
 	<select name="id_licence" id="id_licence">
@@ -10,5 +10,5 @@
 		<option value="#GET{id_licence}"[(#GET{id_licence}|=={[(#ID_LICENCE|sinon{#CONFIG{licence/licence_defaut}})]}|oui) selected="selected"]>#GET{name_licence}</option>
 	</BOUCLE_selection>
 	</select>
-</li>
+</[(#SPIP_VERSION|spip_version_compare{3.1,<}|?{li,div})]>
 </BOUCLE_doc>
