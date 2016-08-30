@@ -45,7 +45,7 @@ if ($pos   !== false) {
 */
 /*********************************************************************************/
 /*         version, do NOT remove!!                                              */
-define( 'ICALCREATOR_VERSION', 'iCalcreator 2.16.12' );
+define( 'ICALCREATOR_VERSION', 'iCalcreator 2.16.12 (forké par Maïeul)' );
 /*********************************************************************************/
 /*********************************************************************************/
 /**
@@ -1661,8 +1661,21 @@ class vcalendar {
       if( FALSE === ( $filename = $this->getConfig( 'url' )))
         $filename = $this->getConfig( 'dirfile' );
             /* READ FILE */
-      if( FALSE === ( $rows = file_get_contents( $filename )))
-        return FALSE;                 /* err 1 */
+      // Hack ajouté par Maïeul pour Facebook qui bloque si pas de bon http header
+      if (stripos($filename,"facebook") === False){
+        if( FALSE === ( $rows = file_get_contents( $filename )))
+          return FALSE;                 /* err 1 */
+      }
+      else{
+        $opts = array(
+          "http" => array(
+              "user_agent" => "facebookexternalhit/"
+          )
+        );
+        $context = stream_context_create($opts);
+        if ( FALSE === ($rows = file_get_contents($filename, false, $context)))
+          return FALSE; /* errr 1 */
+      }
     }
     elseif( is_array( $unparsedtext ))
       $rows =  implode( '\n'.$nl, $unparsedtext );
