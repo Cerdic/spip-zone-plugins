@@ -1,0 +1,43 @@
+<B_calendrier>
+#ANCRE_PAGINATION
+<BOUCLE_calendrier(DATA)
+ {source ics, #ENV{ics}}
+ {par dtstart/str}{pagination 10}
+ >
+
+  [(#VALEUR{dtend/str}|strtotime|>={#DATE|strtotime}|oui)
+       [(#VALEUR{dtstart/value/hour}|>{00}|?{
+       [(#VALEUR{dtstart/value/month}|=={#VALEUR{dtend/value/month}}|?{
+       [(#VALEUR{dtstart/value/day}|=={#VALEUR{dtend/value/day}}|?{
+       <dt>
+        [(#SET{date_debut,#VALEUR{dtstart/str}})]
+    [(#SET{date_fin,#VALEUR{dtend/str}})]
+    Le [(#GET{date_debut}|jour) ][(#GET{date_debut}|nom_mois) ][(#GET{date_debut}|annee) ]<span> de [(#GET{date_debut}|affdate{'G'})]:[(#GET{date_debut}|minutes )] à [(#GET{date_fin}|heures)]:[(#GET{date_fin}|minutes )]</span>
+  </dt>
+  <dd>[(#VALEUR{summary/value})<p>#VALEUR{description/0/value}]</p></dd>
+  ,
+       <dt>
+        [(#SET{date_debut,#VALEUR{dtstart/str}})]
+    [(#SET{date_fin,#VALEUR{dtend/str}})]
+   Du [(#GET{date_debut}|jour) ][(#GET{date_debut}|nom_mois) ][(#GET{date_debut}|annee) ]
+     au [(#GET{date_fin}|jour) ][(#GET{date_fin}|nom_mois) ][(#GET{date_fin}|annee)]<span> de [(#GET{date_debut}|affdate{'G'})]:[(#GET{date_debut}|minutes )] à [(#GET{date_fin}|affdate{'G'})]:[(#GET{date_fin}|minutes)]</span>
+  </dt>
+  <dd>[(#VALEUR{summary/value})<p>#VALEUR{description/0/value}]</p></dd>
+  ,
+       <dt>
+        [(#SET{date_debut,#VALEUR{dtstart/str}})])
+    Du [(#GET{date_debut}|jour) ][(#GET{date_debut}|nom_mois)]
+    [(#SET{date_fin,#VALEUR{dtend/str}})]
+    [ au (#GET{date_fin}|jour) ][(#GET{date_fin}|nom_mois) ][(#GET{date_fin}|annee)] <span> [(#GET{date_debut}|heures)]:[(#GET{date_debut}|minutes )]</span>
+  </dt>
+  <dd> [(#VALEUR{summary/value})<p>#VALEUR{description/0/value}]</p></dd>})]  })]
+  ,
+  <dt>[(#SET{date_debut,#VALEUR{dtstart/str}})]
+    Le [(#GET{date_debut}|jour) ][(#GET{date_debut}|nom_mois) ][(#GET{date_debut}|annee)]
+  </dt>
+  <dd>[(#VALEUR{summary/value})<p>#VALEUR{description/0/value}]</p></dd>})]
+  ]
+   
+</BOUCLE_calendrier>
+#PAGINATION{precedent_suivant}
+</B_calendrier>
