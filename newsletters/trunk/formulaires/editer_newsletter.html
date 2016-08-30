@@ -46,7 +46,7 @@
 		</ul>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui)
+		[(#ENV{statut}|non|ou{#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui})                
 			<!--extra-->
 		]
 		
