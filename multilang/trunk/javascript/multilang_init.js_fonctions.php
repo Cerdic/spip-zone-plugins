@@ -38,7 +38,7 @@ function generer_multilang_init() {
 			$langues = array_intersect($langues, $langues_config);
 		}
 		$langues_ltr = array();
-		foreach ($langues as $langue){
+		foreach ($langues as $langue) {
 			$langues_ltr[$langue] = lang_dir($langue);
 		}
 		$data = '
