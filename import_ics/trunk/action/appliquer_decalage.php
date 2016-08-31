@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('lib/iCalcreator.class'); /*pour la librairie icalcreator incluse dans le plugin icalendar*/
 include_spip('action/editer_objet');
 function action_appliquer_decalage_dist() {
 
