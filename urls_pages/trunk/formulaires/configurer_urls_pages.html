@@ -10,7 +10,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<p><:urls_pages:explication_formulaire_1:></p>
-
+		
 		<ul>
 
 		<B_pages>
@@ -19,9 +19,10 @@
 
 			[(#REM) liste des squelettes de page ]
 			<legend><:urls_pages:label_liste_pages:></legend>
+			
 			<ul>
 
-				<BOUCLE_pages(DATA){source table, #ENV**{pages}}{!par valeur, cle}>
+				<BOUCLE_pages(DATA){source table, #ENV**{liste_pages}}{!par valeur, cle}>
 				#SET{name,#CLE} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				#SET{actif, #CONFIG{urls_pages/#CLE}|?{on}}
 				<li class="long_label editer editer_url_page editer_url_page_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{actif})]">

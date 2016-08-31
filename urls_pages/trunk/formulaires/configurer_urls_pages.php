@@ -17,7 +17,7 @@ function formulaires_configurer_urls_pages_charger_dist(){
 	$config = lire_config('urls_pages');
 	$valeurs['rewritebase'] = $config['rewritebase'];
 	$pages = urls_pages_lister_pages();
-	$valeurs['pages'] = $pages;
+	$valeurs['liste_pages'] = $pages;
 	if ( is_array($pages) and count($pages) ) {
 		// pages répertoriées
 		foreach ( $pages as $page => $dossier )
