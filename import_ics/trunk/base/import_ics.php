@@ -58,8 +58,8 @@ function import_ics_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'url', 'id_article', 'id_mot'),
-		'champs_versionnes' => array('titre', 'url', 'id_article', 'id_mot'),
+		'champs_editables'  => array('titre', 'url', 'id_article', 'id_mot',"decalage"),
+		'champs_versionnes' => array('titre', 'url', 'id_article', 'id_mot',"decalage"),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_almanachs_liens'),
 		'statut_textes_instituer' => array(
