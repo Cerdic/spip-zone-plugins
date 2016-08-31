@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+	<h3 class="titrem"><:deplacer_rubriques:titre_deplacer_rubriques:></h3>
+
+	[(#ENV{dry_run}|non)
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{confirmation}|oui)Les rubriques ont été déplacées. Le résultat a été consigné dans le fichier de log "deplacer_rubriques".</p>]
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	]
+	[(#ENV{dry_run}|oui|et{#ENV{erreurs}|non})
+		[<p class="reponse_formulaire reponse_formulaire_ok">
+			Vous êtes sur le point de déplacer (#ENV{rubriques_a_deplacer}|explode{","}|count) rubriques vers la rubrique "#INFO_TITRE{rubrique,#ENV{rubrique_cible}}[ ((#ENV{rubrique_cible}))]".
+		</p>]
+	]
+	<p class='boutons'[(#ENV{dry_run}|non|ou{#ENV*{message_erreur}|oui}) style="display:none;"]>
+		<a class="submit" href="#SELF">Annuler</a>
+		<a class="submit" href="[(#URL_ACTION_AUTEUR{deplacer_rubriques,#ENV{rubriques_a_deplacer}:#ENV{rubrique_cible},#URL_ECRIRE{configurer_deplacer_rubriques,confirmation=oui}})]">Confirmer le déplacement</a>
+	</p>
+
+	<form id='deplacer_rubriques' method="post" action="#ENV{action}">
+	    #ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#REM)SAISIE{selecteur_rubrique, rubriques_a_deplacer,
+				label=<:deplacer_rubriques:label_restreindre_val_deplacer_rubriques:>,
+				multiple=oui,
+				obligatoire=oui})
+			]
+			[(#REM)SAISIE{selecteur_rubrique,rubriques_menu,
+				multiple=non,
+				label=<:deplacer_rubriques:label_cible_deplacer_rubriques:>,obligatoire=oui})] 
+
+
+			[(#SAISIE{input,rubriques_a_deplacer,
+				label=<:deplacer_rubriques:label_restreindre_val_deplacer_rubriques:>,
+				size=7,
+				datas=#ARRAY{
+						0,valeur0,
+						1,valeur1,
+						2,valeur2}})]
+
+			[(#SAISIE{input,rubrique_cible,
+				label=<:deplacer_rubriques:label_cible_deplacer_rubriques:>,
+				size=7,
+				datas=#ARRAY{
+						0,valeur0,
+						1,valeur1,
+						2,valeur2}})]
+		</ul>
+
+		[(#ENV{dry_run}|non|ou{#ENV{erreurs}|oui})
+			<p class='boutons'><input class="submit" type='submit' name='dry_run' value='Déplacer les rubriques' /></p>
+		]
+
+	</form>
+</div>
