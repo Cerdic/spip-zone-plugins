@@ -57,6 +57,10 @@ function archive_post_edition($flux) {
 			),
 			id_table_objet($flux['args']['table']).'='.intval($flux['args']['id_objet'])
 		);
+		/**
+		 * Libérer les Urls de cet objet
+		 */
+		sql_delete('spip_urls', 'type='.objet_type($flux['args']['table']).' AND id_objet='.intval($flux['args']['id_objet']));
 	}
 	return $flux;
 }
