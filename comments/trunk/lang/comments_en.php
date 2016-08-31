@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_diese' => 'Sharp (#)',
 	'cfg_label_apparence_permalien_picto' => 'Pictogram',
 	'cfg_label_email_obligatoire' => 'Make mandatory the email mention',
+	'cfg_label_nom_obligatoire' => 'Make input of a name or pseudonym mandatory',
 	'cfg_label_presentation_fil' => 'Thread presentation',
 	'cfg_label_presentation_fil_liste' => 'Comments list (flat)',
 	'cfg_label_presentation_fil_thread' => 'Threaded comments',
