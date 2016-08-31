@@ -51,7 +51,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 				$sequence_local = $test_variation["sequence"];
 				$id_evenement = $test_variation["id_evenement"];
 				if ($last_modified_local!=$last_modified_distant or $sequence_local!=$sequence_distant){
-						$champs_sql = evenement_ical_to_sql($comp);
+						$champs_sql = evenement_ical_to_sql($comp,$decalage);
 						autoriser_exception('evenement','modifier',$id_evenement);
 						objet_modifier('evenement',$id_evenement,$champs_sql);
 						autoriser_exception('evenement','modifier',$id_evenement,false);
@@ -86,7 +86,7 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 **/
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
   $champs_sql = array_merge(
-		evenement_ical_to_sql($objet_evenement),
+		evenement_ical_to_sql($objet_evenement,$decalage),
 		array("id_article"=>$id_article)
 	);
 	
@@ -115,7 +115,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 /* 
 ** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
 */
-function evenement_ical_to_sql($objet_evenement){
+function evenement_ical_to_sql($objet_evenement,$decalage){
 	
 		#on recupere les infos de l'evenement dans des variables
 		    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
@@ -136,37 +136,12 @@ function evenement_ical_to_sql($objet_evenement){
 		    $longitude = $localisation['longitude'];
 		//un petit coup avec l'uid
 		    $uid_distante = $objet_evenement->getProperty("UID");#uid de l'evenement
-		#les 3 lignes suivantes servent à récupérer la date de début et à la mettre dans le bon format
-		    $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
-		    	$dtstart = $dtstart_array["value"];
-	   			$startDate = "{$dtstart["year"]}-{$dtstart["month"]}-{$dtstart["day"]}";
-	   			$startTime = '';#on initialise l'heure' de début
-	   			$heure_debut = $dtstart["hour"]+$decalage;
-	    		
-					if (!in_array("DATE", $dtstart_array["params"])) {
-	       			 $startTime = " $heure_debut:{$dtstart["min"]}:{$dtstart["sec"]}";
-							 $start_all_day = False;
-	    			}
-					else{
-						$start_all_day = True;
-					}
-	    		#on fait une variable qui contient le résultat des deux précédentes actions
-	    		$date_debut = $startDate.$startTime;
+		# récupérer la date de début et la formater correctement
+		      $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
+				  list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage) ; 
 		#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
-	  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
-	   			$dtend = $dtend_array["value"];
-	    		$endDate = "{$dtend["year"]}-{$dtend["month"]}-{$dtend["day"]}";
-	    		$endTime = '';#on initialise l'heure' de fin
-	   			$heure_fin = $dtend["hour"]+$decalage;
-	    		if (!in_array("DATE", $dtend_array["params"])) {
-	       			$endTime = " $heure_fin:{$dtend["min"]}:{$dtend["sec"]}";
-							$end_all_day = False;
-	    			}
-					else{
-						$end_all_day = True;			
-					}
-	    		#on fait une variable qui contient le résultat des deux précédentes actions
-	    		$date_fin = $endDate.$endTime;
+	  		  $dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
+	   			list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage) ; 
 
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
@@ -175,7 +150,6 @@ function evenement_ical_to_sql($objet_evenement){
 			else{
 				$horaire = "oui";
 			}
-		
 		return array(
 		  'date_debut'=>$date_debut,
 		  'date_fin'=>$date_fin,
@@ -193,4 +167,31 @@ function evenement_ical_to_sql($objet_evenement){
 			'notes'=>$url);
 }
 
-?>
+/*
+** À partir d'un tavleau de propriété de date ical, retourne deux infos: 1. Date formatée en sql 2. booleen pour savoir si toute la journée
+*/
+function date_ical_to_sql($date,$decalage){
+	$value = $date["value"];
+	$params = $date["params"];
+	if (in_array("DATE",$params)){
+		$all_day = True;
+		$date_sql = sql_format_date(
+			$value["year"],
+			$value["month"],
+			$value["day"]
+		);
+	}
+	else{
+		$all_day = False;
+		$date_sql = sql_format_date(
+			$value["year"],
+			$value["month"],
+			$value["day"],
+			$value["hour"],
+			$value["min"],
+			$value["sec"]
+		);
+	}
+	$date_sql = "DATE_ADD('$date_sql', INTERVAL $decalage HOUR)";
+	return array($date_sql,$all_day);
+}
