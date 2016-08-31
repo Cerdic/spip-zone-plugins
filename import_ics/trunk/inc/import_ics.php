@@ -47,7 +47,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 					"spip_evenements",
 					"`uid`=".sql_quote($uid_distante)
 				);
-				$last_modified_local = unserialize($test_variation["last_modified_local"]);
+				$last_modified_local = unserialize($test_variation["last_modified_distant"]);
 				$sequence_local = $test_variation["sequence"];
 				$id_evenement = $test_variation["id_evenement"];
 				if ($last_modified_local!=$last_modified_distant or $sequence_local!=$sequence_distant){
