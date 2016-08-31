@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_bing' => 'De Bing Aerial layer heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de Bing website</a>.',
 	'cfg_inf_geocoder' => 'Maak geocoder functies mogelijk (adres zoeken, adres vinden aan de hand van coördinaten).',
 	'cfg_inf_geolocaliser_user_html5' => 'Als de browser het toestaat, wordt de geografische locatie gebruikt als default positie bij het aanmaken van een nieuw punt.',
-	'cfg_inf_google' => 'Deze API heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de GoogleMaps website</a>.', # MODIF
+	'cfg_inf_google' => 'Deze API heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de Google Maps website</a>.',
 	'cfg_inf_styles' => 'Toon de aanvullend stijlvelden (kleur, opaciteit, dikte...)',
 	'cfg_lbl_activer_objets' => 'Maak geotagging mogelijk van inhoud:',
 	'cfg_lbl_adresse' => 'Toon adresvelden',
