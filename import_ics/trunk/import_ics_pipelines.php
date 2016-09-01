@@ -25,6 +25,8 @@ function import_ics_optimiser_base_disparus($flux){
 
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('almanach'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('mot'=>'*'), array('almanach' => '*'));
+
 	return $flux;
 }
 
