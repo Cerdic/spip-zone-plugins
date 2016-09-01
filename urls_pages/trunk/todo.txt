@@ -5,4 +5,4 @@ Plugin URLs pages personnalisées : A faire
   Il faudrait peut-être les enregistrer dans la table spip_urls pour éviter les doublons.
 - Lorsqu'on désactive le plugin, on se retrouve avec un message d'erreur lié à l'absence de la fonction url_perso.
   On est obligé de faire un ?var_mode=recalcul
-- Les squelettes de type compositions sont pris en compte, ils devraient êtres ajoutés dans les exclusions.
+

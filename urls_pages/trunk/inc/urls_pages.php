@@ -123,8 +123,7 @@ function urls_pages_lister_pages () {
 	if ( $objets_sql = lister_tables_objets_sql() and is_array($objets_sql) )
 		foreach ( $objets_sql as $objet)
 			$exclure_objets[] = $objet['type'];
-
-
+			
 	// 3: lister tous les squelettes dans les répertoires trouvés
 	// retourne un tableau de la forme array(dossier1 => array(squelette1,squelette2), dossier2 => (...))
 	$pattern_html = '[\w-=_\.]*\.html$';
@@ -149,7 +148,6 @@ function urls_pages_lister_pages () {
 		}
 	}
 
-
 	// 4: lister les pages en filtrant les squelettes inadéquats
 	if ( is_array($squelettes) ) {
 		foreach ( $squelettes as $dossier => $squelettes_dossier ) {
@@ -172,7 +170,9 @@ function urls_pages_lister_pages () {
 				// cf. http://plugins.spip.net/variantesarticles.html
 				if ( is_array($exclure_objets) ) {
 					foreach ( $exclure_objets as $objet ) {
-						if ( preg_match("/^$objet((-|=|_)\d*)?((\.)[a-zA-Z]{2})?$/", $squelette) ) {
+						if ( preg_match("/^$objet((-|=|_)\d*)?((\.)[a-zA-Z]{2})?$/", $squelette)
+							// cas des compositions
+							OR preg_match("/$objet-?/", $squelette)) {
 							$exclure = true;
 							break;
 						}
