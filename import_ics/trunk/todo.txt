@@ -1,3 +1,2 @@
-- option pour que les evenements soient proposés et non pas publiés
 - mieux gérer suppression des almanachs
 - gérer les répetitions d'evt
