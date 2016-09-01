@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'decalage' => 'Décalage',
-	'decalage_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d\'heures à ajouter à l\'horaire fournie par le site distant.',
+	'decalage_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant.',
 
 	// E
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
