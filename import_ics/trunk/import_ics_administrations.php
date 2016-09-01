@@ -12,6 +12,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/cextras');
 include_spip('base/import_ics');
+include_spip('action/editer_objet');
+include_spip('inc/autoriser');
 
 /**
  * Fonction d'installation et de mise à jour du plugin Import_ics.
@@ -49,6 +51,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj["1.0.5"] = array(
 		array('sql_alter',"TABLE spip_almanachs ADD derniere_synchro datetime NOT NULL DEFAULT '0000-00-00 00:00:00'"),
 	);
+	$maj["1.0.6"] = array(
+		array('publier_almanachs_tous')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -78,5 +83,18 @@ function import_ics_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
+/**
+* Lors du passage en 3.0, on publie tout les almanachs, 
+* pour que la rupture de compat ne soit pas trop forte
+**/
+function publier_almanachs_tous(){
+	if ($almanachs = sql_select('id_almanach','spip_almanachs')){
+		while ($res = sql_fetch($almanachs)){
+			$id_almanach = $res['id_almanach'];
+			autoriser_exception('instituer','almanach',$id_almanach);
+			objet_instituer('almanach',$id_almanach,array("statut"=>'publie'));
+			autoriser_exception('instituer','almanach',$id_almanach,false);
+		}
+	}
+	sql_free($almanachs);
+}
