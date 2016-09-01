@@ -1,2 +1,1 @@
-- mieux gérer suppression des almanachs
 - gérer les répetitions d'evt
