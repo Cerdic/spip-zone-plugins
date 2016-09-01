@@ -35,11 +35,11 @@ function linkcheck_chiffre() {
 	$tab_chiffre = array();
 	$tab_chiffre['nb_lien'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks');
 	if ($tab_chiffre['nb_lien'] > 0) {
-		$tab_chiffre['nb_lien_mort']=sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('mort'));
-		$tab_chiffre['nb_lien_malade']=sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('malade'));
-		$tab_chiffre['nb_lien_deplace']=sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('deplace'));
-		$tab_chiffre['nb_lien_ok']=sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('ok'));
-		$tab_chiffre['nb_lien_inconnu']=sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat=\'\'');
+		$tab_chiffre['nb_lien_mort'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('mort'));
+		$tab_chiffre['nb_lien_malade'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('malade'));
+		$tab_chiffre['nb_lien_deplace'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('deplace'));
+		$tab_chiffre['nb_lien_ok'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat='.sql_quote('ok'));
+		$tab_chiffre['nb_lien_inconnu'] = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat=\'\'');
 		$tab_chiffre['pct_lien_mort'] = $tab_chiffre['nb_lien_mort']*100/$tab_chiffre['nb_lien'];
 		$tab_chiffre['pct_lien_malade'] = $tab_chiffre['nb_lien_malade']*100/$tab_chiffre['nb_lien'];
 		$tab_chiffre['pct_lien_deplace'] = $tab_chiffre['nb_lien_deplace']*100/$tab_chiffre['nb_lien'];
