@@ -63,7 +63,6 @@ function import_ics_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_almanachs_liens'),
 		'statut_textes_instituer' => array(
-			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
 			'publie'   => 'texte_statut_publie',
 			'refuse'   => 'texte_statut_refuse',
