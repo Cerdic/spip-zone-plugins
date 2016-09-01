@@ -45,10 +45,12 @@ function import_ics_evenement_liaisons_colonne_gauche($flux){
 
 /**
  * Synchroniser le statut des evenements lorsqu'on publie/depublie un almanach
+ * Synchroniser le statut des almanaches lorsqu'on publie/depublie un evt
  * @param array $flux
  * @return array
  */
 function import_ics_post_edition($flux) {
+	/* Première cas: le statut de l'almanach est modifié*/
 	if (isset($flux['args']['table'])
 		and $flux['args']['table']=='spip_almanachs'
 		and $flux['args']['action'] == 'instituer'
@@ -84,6 +86,51 @@ function import_ics_post_edition($flux) {
 			sql_free($res);
 		}
 	}
+	// Second cas: modification du statut d'un article
+	
+	if (isset($flux['args']['table'])
+		and $flux['args']['table']=='spip_articles'
+		and $flux['args']['action'] == 'instituer'
+		and $id_article = $flux['args']['id_objet']
+		and isset($flux['data']['statut'])
+		and $statut = $flux['data']['statut']
+		and $statut_ancien = $flux['args']['statut_ancien']
+		and $statut != $statut_ancien) {
+		$set = array();
+		// les almanachs associes a cet article
+		$where = array('id_article='.intval($id_article));
+		switch ($statut) {
+			case 'poubelle':
+				// on passe aussi tous les almanachs associes a la poubelle, sans distinction
+				$set['statut'] = 'poubelle';
+				break;
+			case 'publie':
+				// on passe aussi tous les almanachs prop en publie
+				$set['statut'] = 'publie';
+				$where[] = "statut='prop'";
+				break;
+			default:// c'est à dire lors de la bascule de l'article vers refuse / en cours de modification / proposé
+				if ($statut_ancien=='publie') {
+					// on depublie aussi tous les almanachs publie
+					$set['statut'] = 'prop';
+					$where[] = "statut='publie'";
+				}
+				break;
+		}
+		if (count($set)) {
+			include_spip('inc/autoriser');
+			include_spip('action/editer_objet');
+			$res = sql_select('id_almanach', 'spip_almanachs', $where);
+			// et on applique a tous les evenements lies a l'article
+			while ($row = sql_fetch($res)) {
+				$id_almanach = $row['id_almanach'];
+				autoriser_exception('instituer','almanach',$id_almanach);
+				objet_instituer('almanach',$id_almanach,$set);
+				autoriser_exception('instituer','almanach',$id_almanach,false);
+			}
+		}
+	}
+	
 	return $flux;
 }
 
