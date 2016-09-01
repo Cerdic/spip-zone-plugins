@@ -27,6 +27,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 	$config = array("unique_id"=>"","url"=>$url);
 	$cal = new vcalendar($config);
 	$cal->parse();
+	$statut = sql_getfetsel('statut','spip_almanachs',"`id_almanach`=$id_almanach");
 	$liens = trouver_evenements_almanach($id_almanach);
 	// on definit un tableau des uid présentes dans la base
 	$uid =array();
@@ -58,7 +59,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 					}
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage);
+				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage,$statut);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
@@ -84,7 +85,7 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$statut){
   $champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement,$decalage),
 		array("id_article"=>$id_article)
@@ -97,7 +98,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 	
 	autoriser_exception('instituer','evenement',$id_evenement);
 	autoriser_exception('modifier','article',$id_article);
-	objet_instituer('evenement',$id_evenement,array("statut"=>'publie'));
+	objet_instituer('evenement',$id_evenement,array("statut"=>$statut));
 	autoriser_exception('instituer','evenement',$id_evenement,false);
 	autoriser_exception('modifier','article',$id_article,false);
 
