@@ -86,3 +86,31 @@ function import_ics_post_edition($flux) {
 	}
 	return $flux;
 }
+
+
+/**
+ * Inserer les infos d'almach sur les articles
+ *
+ * @param array $flux
+ * @return array
+ */
+function import_ics_affiche_milieu($flux){
+	$e = trouver_objet_exec($flux['args']['exec']);
+	$out = False;
+	if ($e["type"]=="article" and $e['edition']==false){
+		$out = recuperer_fond('prive/objets/contenu/article-almanachs', $flux['args']);
+		
+	}
+	
+	if ($out) {
+		if ($p = strpos($flux['data'],'<div id="agenda">')){
+			$flux['data'] = substr_replace($flux['data'], $out, $p, 0);
+		}
+		elseif ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
+			$flux['data'] = substr_replace($flux['data'], $out, $p, 0);
+		} else {
+			$flux['data'] .= $out;
+		}
+	}
+	return $flux;
+}
