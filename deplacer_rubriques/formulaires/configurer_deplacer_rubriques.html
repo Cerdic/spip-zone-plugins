@@ -1,11 +1,11 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 	
 	<h3 class="titrem"><:deplacer_rubriques:titre_deplacer_rubriques:></h3>
-
-	[(#ENV{dry_run}|non)
-		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{confirmation}|oui)Les rubriques ont été déplacées. Le résultat a été consigné dans le fichier de log "deplacer_rubriques".</p>]
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{dry_run}|non)
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{confirmation}|oui)Les rubriques ont été déplacées. Le résultat a été consigné dans le fichier de log "deplacer_rubriques".</p>]
+
 	]
 	[(#ENV{dry_run}|oui|et{#ENV{erreurs}|non})
 		[<p class="reponse_formulaire reponse_formulaire_ok">

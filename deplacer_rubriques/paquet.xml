@@ -1,7 +1,7 @@
 <paquet
 	prefix="deplacer_rubriques"
 	categorie="edition"
-	version="0.0.1"
+	version="0.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/dossier.png"
