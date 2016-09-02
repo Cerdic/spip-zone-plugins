@@ -22,7 +22,8 @@ function action_linkcheck_parcours_dist() {
 	$branche=_request('branche', 0);
 
 	if (autoriser('webmestre')) {
-		//si la fonction n'a pas encore été effectué completement | Dans le cas ou on ne peux effectuer cette action qu'une fois ...
+		//si la fonction n'a pas encore été effectué completement |
+		//Dans le cas ou on ne peux effectuer cette action qu'une fois ...
 		//if(!lire_config('linkcheck_etat_parcours')){
 
 			//on regarde si la fonction a déjà été effectuée partiellement en récupérant les ids de reprise
@@ -48,7 +49,8 @@ function action_linkcheck_parcours_dist() {
 						if (empty($tab_champs_a_traiter)) {
 							break;
 						}
-						$champs_a_traiter=is_array($tab_champs_a_traiter)?implode(',', array_keys($tab_champs_a_traiter)):'*';
+						$champs_a_traiter = is_array($tab_champs_a_traiter) ?
+							implode(',', array_keys($tab_champs_a_traiter)) : '*';
 
 						// Recommencer à l'endroit ou l'on s'est arrêté
 						$where  = $nom_champ_id.'>'.intval($dio);
@@ -74,7 +76,8 @@ function action_linkcheck_parcours_dist() {
 						}
 						// On réduit la recherche à une branche du site
 
-						$where .= ($branche > 0) ? ' AND (id_rubrique IN(' . implode(',', linkcheck_marmots($branche)) . '))' : '';
+						$where .= ($branche > 0) ?
+							' AND (id_rubrique IN(' . implode(',', linkcheck_marmots($branche)) . '))' : '';
 
 						// On exclus de la selection, les objet dont le status est refuse ou poubelle
 
@@ -82,13 +85,19 @@ function action_linkcheck_parcours_dist() {
 							$where .= ' AND '.sql_in('statut', array('publie', 'prop', 'prepa'));
 						}
 
-						$sql = sql_allfetsel($nom_champ_id.','.$champs_a_traiter, $table_sql, $where, '', $nom_champ_id.' ASC');
+						$sql = sql_allfetsel(
+							$nom_champ_id.','.$champs_a_traiter,
+							$table_sql,
+							$where,
+							'',
+							$nom_champ_id.' ASC'
+						);
 
 						//echo(sql_get_select($nom_champ_id.','.$champs_a_traiter, $table_sql, $where,'',$nom_champ_id.' ASC'));
 						//exit();
 						//pour chaque objet
 						$table_objet = objet_type($table_sql);
-						foreach ($sql as $id => $res) {
+						foreach ($sql as $res) {
 							//on créé les variables à envoyer
 							$id_objet = $res[$nom_champ_id];
 							unset($res[$nom_champ_id]);
