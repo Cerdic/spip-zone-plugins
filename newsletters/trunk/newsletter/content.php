@@ -45,6 +45,8 @@ function newsletter_content_dist($id){
 	  AND preg_match(",<title[^>]*>(.*)</title>,Uims",$corps['html'],$match)){
 		include_spip('inc/filtres');
 		if ($sujet = textebrut($match[1])){
+			$sujet = filtrer_entites($sujet);
+			$sujet = str_replace('&amp;','&', $sujet);
 			$corps['sujet'] = $sujet;
 		}
 	}
