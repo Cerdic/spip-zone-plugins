@@ -6,7 +6,7 @@
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/linkcheck-64.png"
 	documentation="http://contrib.spip.net/article4605"
-	schema="1.0.0"
+	schema="1.0.1"
 >
 
 	<nom>LinkCheck</nom>

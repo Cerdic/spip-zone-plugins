@@ -30,6 +30,7 @@ function linkcheck_declarer_tables_principales($tables_principales) {
 			'distant'            => 'boolean',
 			'etat'               => "varchar(10) NOT NULL DEFAULT ''",
 			'code'				 => "varchar(10) NOT NULL DEFAULT ''",
+			'redirection'		 => "text NOT NULL DEFAULT ''",
 			'essais'			 => 'int(1) DEFAULT 0',
 			'date'               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			'maj'                => 'TIMESTAMP');

@@ -31,6 +31,13 @@ function linkcheck_upgrade($nom_meta_base_version, $version_cible) {
 		array('ecrire_config', 'linkcheck/afficher_alerte', 'on')
 	);
 
+	/**
+	 * Ajout du champ redirection sur spip_linkchecks
+	 */
+	$maj['1.0.1'] = array(
+		array('maj_tables', array('spip_linkchecks', 'spip_linkchecks_liens'))
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
