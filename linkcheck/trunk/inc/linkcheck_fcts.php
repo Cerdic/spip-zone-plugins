@@ -157,15 +157,21 @@ function linkcheck_tester_lien_externe($url) {
 
 	$ret['etat'] = $tabStatus[0][4];
 	$ret['code'] = 'no-code';
+
 	/**
 	 * Fixer le timeout d'une page à 30
+	 * Faire croire que l'on est un navigateur normal (pas un bot)
 	 */
-	stream_context_set_default(
-		array(
+	$contexte = array(
 			'http' => array(
-				'timeout' => 30
+				'timeout' => 30,
+				'header' => 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16'
 			)
-		)
+		);
+	define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
+
+	stream_context_set_default(
+		$contexte
 	);
 	$head = @get_headers($url);
 
@@ -181,7 +187,11 @@ function linkcheck_tester_lien_externe($url) {
 				foreach ($head as $line) {
 					if (preg_match('/Location/Uims', $line, $matches)) {
 						$ret['redirection'] = trim(str_replace('Location:', '', $line));
-						break;
+					}
+					if (preg_match('/HTTP\/1.1 (404)/Uims', $line, $status)) {
+						$ret['etat'] = 'mort';
+						$ret['code'] = $status[1];
+						unset($ret['redirection']);
 					}
 				}
 			}
@@ -192,6 +202,7 @@ function linkcheck_tester_lien_externe($url) {
 			$ret['etat'] = isset($tabStatus[0][$statut]) ? $tabStatus[0][$statut] : 'malade';
 		}
 	}
+
 	return $ret;
 }
 
