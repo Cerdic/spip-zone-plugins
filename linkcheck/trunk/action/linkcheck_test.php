@@ -16,7 +16,7 @@ function action_linkcheck_test_dist() {
 		return;
 	}
 
-	$sel = sql_fetsel('url, distant, etat, id_linkcheck', 'spip_linkchecks', 'id_linkcheck = ' . intval($r[1]));
+	$sel = sql_fetsel('*', 'spip_linkchecks', 'id_linkcheck = ' . intval($r[1]));
 
 	linkcheck_maj_etat($sel);
 }
