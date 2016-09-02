@@ -85,7 +85,7 @@ function linkcheck_lister_liens($champs) {
 				}
 			}
 			// Ajout au tableau du lien
-			$url_site = trim($url_site, '/');
+			$url_site = trim($url_site);
 			if (!empty($tab_temp)) {
 				$liens=array_unique($tab_temp);
 			}
