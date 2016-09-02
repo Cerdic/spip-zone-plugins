@@ -5,6 +5,8 @@
 	</td>
 	<td>
 		[(#URL|linkcheck_en_url{#DISTANT}|inserer_attribut{target,_blank})]
+		[<br /><br /><:linkcheck:redirection:><br />
+		(#REDIRECTION|linkcheck_en_url{1}|inserer_attribut{target,_blank}|trim)]
 	</td>
 	<td>
 		<B_liens>
@@ -20,10 +22,8 @@
 		</B_liens>
 	</td>
 	<td>
-		[(#VAL{linkcheck:etat_}|concat{#ETAT}|_T)]
-	</td>
-	<td>
-		#REDIRECTION
+		[(#VAL{linkcheck:etat_}|concat{#ETAT}|_T)] <br />
+		<a href="[(#URL_ACTION_AUTEUR{linkcheck_test,#ID_LINKCHECK,#SELF|parametre_url{id_test,#ID_LINKCHECK}})]" class="ajax"><:linkcheck:bouton_tester_lien:></a>
 	</td>
 	<td>
 		<a href="#URL_ACTION_AUTEUR{linkcheck_test,#ID_LINKCHECK,#SELF}" class="ajax">[(#MAJ|date_interface)]</a>
