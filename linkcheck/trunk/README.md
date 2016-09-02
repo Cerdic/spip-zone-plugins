@@ -7,6 +7,19 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.2.x
 
+### Version 1.2.3
+
+* Mettre url et redirection dans la même case de tableau pour faciliter la lecture des liens
+* Ajouter un bouton de vérification sur chaque lien dans les listes
+* Utiliser un User Agent de navigateur lors de la récupération des entêtes pour éviter les anti-bots
+* En cas de redirection, on récupère le dernier `Location:` et non le premier (cas de redirections multiples)
+* En cas de redirection, on vérifie si la finale ne renvoie pas une 404
+* Mettre l'url de redirection détectée dans l'export CSV
+* Améliorer les entêtes de colonnes dans l'export CSV
+* `linkcheck_en_url()` renvoie false si l'url fournie est vide
+
+
+
 ### Version 1.2.2
 
 * Un peu de refactoring
