@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'poursuivre_verification_liens' => 'Poursuivre la vérification',
 
 	// R
+	'redirection' => 'Redirection',
 	'reinitialiser' => 'Réinitialiser',
 	'reinitialiser_la_base' => 'Vous souhaitez refaire toutes les opérations de recherche et de vérification des liens, vous pouvez le faire en appuyant sur le bouton "Réinitialiser". Cette action videra les tables spip_linkchecks et spip_linkchecks_liens',
 	'rescensement_incomplet' => 'Le recensement des liens du site est incomplet ! ',
