@@ -7,6 +7,17 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.2.x
 
+### Version 1.2.2
+
+* Un peu de refactoring
+* Ajout d'un champ `redirection` dans la table `spip_linkckecks` afin de stocker l'adresse de redirection si s'en est une
+* Affichage des redirections dans les tableaux de liens
+* Utiliser les fonctions SPIP de `inc/distant` pour analyser les entêtes des liens au lieu d'avoir une fonction personnelle
+* Lors de l'analyse totale des liens, les traiter de 5 en 5
+* Utiliser `set_time_limit()` pour essayer d'éviter de planter avec un max execution time
+* Mettre un timeout de 30 secondes pour la récupération des entêtes
+* Si c'est une redirection, analyser les entêtes afin de stocker l'URL finale dans le champ redirection
+
 ### Version 1.2.1
 
 * Eviter que les tableaux ne cassent à cause de liens longs
