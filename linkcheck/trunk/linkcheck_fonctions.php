@@ -17,10 +17,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  */
 function linkcheck_en_url($url, $distant) {
-	if ($distant==0) {
-		$retour = ptobr(propre("[$url".' ('.supprimer_tags(propre("[->$url]")).')|'._T('linkcheck:ouvrenouvelonglet')."->$url]"));
-	} else {
-		$retour = ptobr(propre("[$url|"._T('linkcheck:ouvrenouvelonglet')."->$url]"));
+	$retour = false;
+	if(strlen($url) > 0) {
+		if ($distant==0) {
+			$retour = ptobr(propre("[$url".' ('.supprimer_tags(propre("[->$url]")).')|'._T('linkcheck:ouvrenouvelonglet')."->$url]"));
+		} else {
+			$retour = ptobr(propre("[$url|"._T('linkcheck:ouvrenouvelonglet')."->$url]"));
+		}
 	}
 	return $retour;
 }
