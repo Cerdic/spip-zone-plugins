@@ -104,6 +104,8 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 		$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email()
 
 	$sujet = nettoyer_titre_email($corps_cont['sujet']);
+	$sujet = filtrer_entites($sujet);
+	$sujet = str_replace('&amp;','&', $sujet);
 	$dest_email = $destinataire['email'];
 
 	// mode TEST : forcer l'email
