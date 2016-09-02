@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'afficher_alerte' => 'Afficher les alertes',
 	'analyser_site_linkchecks' => 'Analyser les liens de mon site',
 
+	// B
+	'bouton_tester_lien' => 'Tester ce lien',
+
 	// C
 	'commencer_parcours' => 'Commencer la recherche',
 	'commencer_verification' => 'Les liens ont été trouvés, appuyer sur le bouton pour la vérification de ces liens',
