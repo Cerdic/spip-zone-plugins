@@ -11,5 +11,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'piwik_description' => 'Добавляет код системы веб-аналитики Piwik на все страницы сайта.',
-	'piwik_slogan' => 'Объединяет [SPIP->http://www.spip.net] и [Piwik->http://www.piwik.org]'
+	'piwik_slogan' => 'Объединяет SPIP и Piwik'
 );
