@@ -7,6 +7,11 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-E-learning  #
 #-----------------------------------------------------------------#
 
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 function elearning_jeux_caracteristiques($jeux_caracteristiques){
 
 	// Le séparateur qui défini le jeu
@@ -19,5 +24,3 @@ function elearning_jeux_caracteristiques($jeux_caracteristiques){
 	return $jeux_caracteristiques;
 
 }
-
-?>

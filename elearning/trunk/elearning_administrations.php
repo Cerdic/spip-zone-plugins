@@ -7,8 +7,13 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-E-learning  #
 #-----------------------------------------------------------------#
 
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 // La fonction de base appelée par le gestionnaire de plugins
-function elearning_upgrade($nom_meta_version_base, $version_cible){
+function elearning_upgrade($nom_meta_version_base, $version_cible) {
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
 	
@@ -27,9 +32,6 @@ function elearning_upgrade($nom_meta_version_base, $version_cible){
 
 // Supprimer les tables du plugin
 function elearning_vider_tables($nom_meta_version_base) {
-	//include_spip('base/abstract_sql');
 	/* Blabla effacer les tables */
 	effacer_meta($nom_meta_version_base);
 }
-
-?>

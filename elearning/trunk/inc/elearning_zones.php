@@ -7,6 +7,11 @@
 #  Documentation : http://www.spip-contrib.net/Plugin-E-learning  #
 #-----------------------------------------------------------------#
 
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 include_spip('inc/config');
 include_spip('inc/cfg_config');
 
@@ -335,5 +340,3 @@ function elearning_liste_zones_autorisees_auteur($id_auteur=null){
 	return $zones_modules;
 
 }
-
-?>
