@@ -33,9 +33,9 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, v
 	<categorie>divers</categorie>
 	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<!-- Le e-learning dans SPIP nécessite les plugins suivant -->
-	<necessite id='cfg' version="[1.10.5;]" />
-	<necessite id='AccesRestreint' version="[0.3.0.3;]" />
-	<necessite id='bigbrother' version="[0.3;]" />
+	<necessite id='cfg' version="[1.16.1;]" />
+	<necessite id='AccesRestreint' version="[3.3.4;]" />
+	<necessite id='bigbrother' version="[0.3.0;]" />
 	<necessite id='jeux' version="[2.5.0;]" />
-	<necessite id='crayons' version="[1.3;]" />
+	<necessite id='crayons' version="[1.11.2;]" />
 </plugin>
