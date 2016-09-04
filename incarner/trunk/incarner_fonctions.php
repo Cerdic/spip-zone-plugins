@@ -59,7 +59,7 @@ function incarner_renouveler_cle() {
 		$maj = array();
 	}
 
-	$nouvelle_cle = urlencode(openssl_random_pseudo_bytes(16));
+	$nouvelle_cle = urlencode(bin2hex(openssl_random_pseudo_bytes(16)));
 
 	/* première incarnation */
 	if (! incarner_cle_valide($cle_actuelle)) {
