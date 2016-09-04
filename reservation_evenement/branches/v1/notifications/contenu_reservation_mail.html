@@ -42,9 +42,11 @@
 	</BOUCLE_champs_extras>
 	
 	<p><:reservation:details_reservation:></p>
-	<INCLURE{fond=inclure/reservation,id_reservation,format_envoi=#ENV{format_envoi},statut=#GET{statut},id_reservations_detail=#ENV{id_reservations_detail}}/>
+	<INCLURE{fond=inclure/reservation,id_reservation,env,statut=#GET{statut}}/>
 	
-	<p><:reservation:remerciement:></p>
+	[(#ENV{qui}|=={client}|oui)
+		<p><:reservation:remerciement:></p>
+	]
 
 </BOUCLE_test_statut>
 	<BOUCLE_detail(RESERVATIONS_DETAILS evenements){id_reservations_detail}{tout}>
