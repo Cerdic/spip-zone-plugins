@@ -11,7 +11,7 @@ function action_incarner_dist() {
 	}
 
 	include_spip('inc/auth');
-	if ($login  = _request('login')) {
+	if ($login = _request('login')) {
 		$auteur = auth_identifier_login($login, '');
 		auth_loger($auteur);
 
