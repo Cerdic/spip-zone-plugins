@@ -7,7 +7,7 @@
 }
 
 a.bouton-incarner {
-    margin: 0;
+    margin: 0 0 0 10px;
     padding: .4em 1em;
     background: #666;
     border: 0;
@@ -16,4 +16,9 @@ a.bouton-incarner {
     opacity: .7;
     color: #FFF;
     text-decoration: none;
+}
+
+a.bouton-incarner:hover {
+    background-color: black;
+    opacity: 1;
 }
