@@ -113,3 +113,19 @@ function incarner_insert_head($flux) {
 
 	return $flux;
 }
+
+/**
+ * Donner un cookie d'incarnation aux webmestre dès le login
+ *
+ * @pipeline formulaire_traiter
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function incarner_formulaire_traiter($flux) {
+
+	if (($flux['args']['form'] === 'login') and autoriser('webmestre')) {
+		incarner_renouveler_cle();
+	}
+
+	return $flux;
+}
