@@ -76,3 +76,27 @@ function incarner_renouveler_cle() {
 
 	spip_setcookie('spip_cle_incarner', $nouvelle_cle);
 }
+
+function incarner_invalider_cle() {
+
+	include_spip('inc/config');
+	include_spip('inc/cookie');
+
+	$cle_actuelle = $_COOKIE['spip_cle_incarner'];
+
+	if (! $cles = lire_config('incarner/cles')) {
+		$cles = array();
+	}
+	if (! $maj = lire_config('incarner/maj')) {
+		$maj = array();
+	}
+
+	$index_cle_actuelle = array_search($cle_actuelle, $cles);
+
+	unset($cles[$index_cle_actuelle]);
+	unset($maj[$index_cle_actuelle]);
+	ecrire_config('incarner/cles', $cles);
+	ecrire_config('incarner/maj', $maj);
+
+	spip_setcookie('spip_cle_incarner', '');
+}

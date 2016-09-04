@@ -90,10 +90,20 @@ function incarner_affichage_final($html) {
 		'login=' . $login . '&redirect=' . $self
 	);
 
-	$lien = '<div class="menu-incarner" style="right: 60%;">';
+	$url_logout = generer_url_action(
+		'incarner',
+		'logout=oui&redirect=' . $self
+	);
+
+	$lien = '<div class="menu-incarner">';
+	$lien .= '<a class="bouton-incarner" href="' . $url_logout . '">';
+	$lien .= _T('incarner:logout_definitif');
+	$lien .= '</a>';
 	$lien .= '<a class="bouton-incarner" href="' . $url . '">';
 	$lien .= _T('incarner:reset_incarner', array('login' => $login));
-	$lien .= '</a></div>';
+	$lien .= '</a>';
+	$lien .= '</div>';
+
 
 	$html = preg_replace('#(</body>)#', $lien . '$1', $html);
 

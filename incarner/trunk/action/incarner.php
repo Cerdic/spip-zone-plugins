@@ -22,6 +22,7 @@ function action_incarner_dist() {
 			redirige_par_entete(url_de_base());
 		}
 	} elseif (_request('logout')) {
+		incarner_invalider_cle();
 		redirige_par_entete(
 			html_entity_decode(
 				generer_url_action('logout', 'logout=public', false, true)
