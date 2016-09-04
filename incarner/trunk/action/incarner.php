@@ -5,8 +5,10 @@ function action_incarner_dist() {
 	include_spip('inc/headers');
 
 	if (! autoriser('incarner')) {
-		include_spip('inc/headers');
 		http_status(403);
+		incarner_invalider_cle();
+		include_spip('inc/minipres');
+		echo minipres();
 		exit();
 	}
 
