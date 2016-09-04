@@ -223,6 +223,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 	
 	return $tables;
 }
+
 function reservation_evenement_declarer_tables_principales($tables_principales) {
 	$tables_principales ['spip_articles'] ['field'] ['action_cloture'] = "tinyint(1) NOT NULL";
 	$tables_principales ['spip_evenements'] ['field'] ['action_cloture'] = "tinyint(1) NOT NULL";
