@@ -83,9 +83,9 @@
 		<url>journal_stats</url>
 	</bouton>
 
-	<necessite id='cfg' version="[1.10.5;]" />
-	<necessite id='saisies' version="[1.2;]" />
-	<necessite id='spip_bonux' version='[1.9.1;]' />
+	<necessite id='cfg' version="[1.16.1;]" />
+	<necessite id='saisies' version="[1.14.0;]" />
+	<necessite id='spip_bonux' version='[2.3.1;]' />
 	<necessite id='SPIP' version="[2.0.10;2.1.99]" />
 	<necessite id="lib:flot" src="http://www.flotcharts.org/downloads/flot-0.6.zip" />
 	<categorie>statistique</categorie>
