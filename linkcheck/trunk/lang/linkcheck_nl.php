@@ -13,6 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'afficher_alerte' => 'Waarschuwingen tonen',
 	'analyser_site_linkchecks' => 'Analyseer de links op mijn site',
 
+	// B
+	'bouton_tester_lien' => 'Test deze link',
+
 	// C
 	'commencer_parcours' => 'Start met zoeken',
 	'commencer_verification' => 'De links zijn gevonden, je kunt nu met de verificatie ervan beginnen',
@@ -79,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'poursuivre_verification_liens' => 'Verificatie uitvoeren',
 
 	// R
+	'redirection' => 'Doorverwijzing',
 	'reinitialiser' => 'Herinitialiseren',
 	'reinitialiser_la_base' => 'Om alle handelingen te resetten, druk je op "Herinitialiseren". De tabellen spip_linkchecks en spip_linkchecks_liens worden geledigd',
 	'rescensement_incomplet' => 'De raadpleging is onvolledig! ',
