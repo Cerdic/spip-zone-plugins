@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function linkcheck_en_url($url, $distant) {
 	$retour = false;
-	if(strlen($url) > 0) {
+	if (strlen($url) > 0) {
 		if ($distant==0) {
 			$retour = ptobr(propre("[$url".' ('.supprimer_tags(propre("[->$url]")).')|'._T('linkcheck:ouvrenouvelonglet')."->$url]"));
 		} else {

@@ -206,13 +206,13 @@ function linkcheck_tester_lien_externe($url) {
 						if (strlen($end_redirection) > 0) {
 							$redirection = str_replace($url_finale['query'], '', str_replace($url_finale['path'], '', $redirection));
 						}
-						$ret['redirection'] = rtrim($redirection,'/').'/'.$end_redirection;
-						$domaine = rtrim(str_replace($url_finale['query'], '', str_replace($url_finale['path'], '', $ret['redirection'])),'?');
+						$ret['redirection'] = rtrim($redirection, '/').'/'.$end_redirection;
+						$domaine = rtrim(str_replace($url_finale['query'], '', str_replace($url_finale['path'], '', $ret['redirection'])), '?');
 						/**
 						 * Cas où c'est une redirection chez nous depuis un site externe (bit.ly...)
 						 */
-						if (str_replace(array('https://', 'http://', '//'), '', rtrim($domaine,'/')) == str_replace(array('https://', 'http://', '//'), '', rtrim($GLOBALS['meta']['adresse_site'],'/'))) {
-							$redir_chez_nous = str_replace($domaine,'',$ret['redirection']);
+						if (str_replace(array('https://', 'http://', '//'), '', rtrim($domaine, '/')) == str_replace(array('https://', 'http://', '//'), '', rtrim($GLOBALS['meta']['adresse_site'], '/'))) {
+							$redir_chez_nous = str_replace($domaine, '', $ret['redirection']);
 							include_spip('inc/urls');
 							$url_dans_site = urls_decoder_url($redir_chez_nous);
 							if (is_array($url_dans_site) && isset($url_dans_site[0])) {
@@ -224,13 +224,13 @@ function linkcheck_tester_lien_externe($url) {
 					/**
 					 * Si pas de redirection ou la redirection n'a pas de http... et que l'on a un end_redirection
 					 */
-					if ((!isset($ret['redirection']) OR strpos($ret['redirection'], '//') === false) && strlen($end_redirection) > 0) {
+					if ((!isset($ret['redirection']) or strpos($ret['redirection'], '//') === false) && strlen($end_redirection) > 0) {
 						$url_finale = parse_url($url);
-						$domaine = rtrim(str_replace($url_finale['query'], '', str_replace((($url_finale['path'] == '/') ? '' : $url_finale['path']), '', $url)),'?');
+						$domaine = rtrim(str_replace($url_finale['query'], '', str_replace((($url_finale['path'] == '/') ? '' : $url_finale['path']), '', $url)), '?');
 						$domaine = rtrim($domaine, '/');
 						/**
-						 * Soit on est sur notre propre domaine et dans ce cas on essaie de retrouver l'url de l'objet si possible
-						 * pour faire un lien interne
+						 * Soit on est sur notre propre domaine et dans ce cas on essaie de retrouver
+						 * l'url de l'objet si possible pour faire un lien interne
 						 * Sinon on récupère le domaine de l'url d'origine
 						 */
 						if (str_replace(array('https://', 'http://', '//'), '', $domaine) == rtrim(str_replace(array('https://', 'http://', '//'), '', $GLOBALS['meta']['adresse_site']), '/')) {
@@ -239,16 +239,15 @@ function linkcheck_tester_lien_externe($url) {
 							if (is_array($url_dans_site) && isset($url_dans_site[0])) {
 								$ret['redirection'] = $url_dans_site[0].$url_dans_site[1][id_table_objet($url_dans_site[0])];
 							} else {
-								$ret['redirection'] = $domaine.'/'.ltrim($end_redirection,'/');
+								$ret['redirection'] = $domaine.'/'.ltrim($end_redirection, '/');
 							}
 						} else {
-							$ret['redirection'] = $domaine.'/'.ltrim($end_redirection,'/');
+							$ret['redirection'] = $domaine.'/'.ltrim($end_redirection, '/');
 						}
 					}
 				}
 			}
-		}
-		else{
+		} else {
 			$statut = 200;
 			$ret['code'] = $statut;
 			$ret['etat'] = isset($tabStatus[0][$statut]) ? $tabStatus[0][$statut] : 'malade';
@@ -266,7 +265,7 @@ function linkcheck_get_headers($url) {
 	include_spip('inc/distant');
 	list($f, $fopen) = init_http('GET', $url, false);
 
-	if (!$f){
+	if (!$f) {
 		spip_log("ECHEC init_http $url", 'linkcheck.'._LOG_ERREUR);
 		return false;
 	}
