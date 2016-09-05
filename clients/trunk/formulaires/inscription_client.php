@@ -201,7 +201,9 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 
 	// Le pseudo SPIP est construit
 	set_request('nom_inscription', trim(_request('prenom').' '._request('nom')));
-
+	
+	include_spip('inc/session');
+	
 	// On active le traitement du formulaire d'inscription classique, donc on crée un nouvel utilisateur
 	if (!($id_auteur = verifier_session())) {
 		$mode = tester_config(0);
