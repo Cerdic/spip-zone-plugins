@@ -28,7 +28,7 @@
 
 	<!-- Sites de decouverte des realisations SPIP -->
 	<groupe type="decouverte">
-		<site alias="info" src="http://www.spip-info.net/" actif="oui" />
+		<site alias="info" src="http://info.spip.net/" actif="oui" />
 		<site alias="herbier" src="http://herbier.spip.net/" actif="oui" />
 		<site alias="video" src="http://medias.spip.net/" actif="oui" />
 		<site alias="demo" src="http://demo.spip.net/" actif="oui" />
