@@ -4,6 +4,15 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 [Documentation](http://contrib.spip.net/LinkCheck-verificateur-de-liens)
 
+## Versions 1.3.x
+
+### Version 1.3.0
+
+* Ne pas enlever le dernier `/` des urls pour éviter des liens déplacés pour rien.
+* Si plusieurs redirections successives, il se peut que l'entête `Location` montre un path local, on récupère donc le domaine
+* Bien supprimer `Location:`, `location:` et `content-location` des urls de redirection
+* Si la redirection mène sur notre site, afficher les liens internes en redirection, du coup on décode l'url avec `inc/urls`
+* Afficher correctement la redirection qu'elle soit interne ou externe dans les détails d'un lien
 
 ## Versions 1.2.x
 
@@ -93,3 +102,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 ### Version 1.0.1
 
 Version d'origine
+
+## Todo
+
+* Ajouter la possibilité de remplacer automatiquement (via un bouton) les liens déplacés par la redirection découverte
