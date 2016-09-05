@@ -31,7 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_civ' => 'Type de civilité',	
 
 	// T
-	'texte_exp1' => 'Par défaut, les éléments obligatoires demandés sont : prénom, nom, email, adresse, code postal et ville. La liste suivante permet de compléter ces informations.'
+	'texte_exp1' => 'Par défaut, les éléments obligatoires demandés sont : prénom, nom, email, adresse, code postal et ville. La liste suivante permet de compléter ces informations.',
+
+	//V
+	'vous_etes_deja_inscrit' => 'Vous êtes déjà inscrit sous ce mail !',
 );
 
-?>
+

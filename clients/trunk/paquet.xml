@@ -1,7 +1,7 @@
 <paquet
 	prefix="clients"
 	categorie="auteur"
-	version="1.0.1"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/clients-32.png"

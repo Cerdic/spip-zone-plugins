@@ -192,6 +192,12 @@ function formulaires_inscription_client_verifier_dist($retour=''){
 	$inscription_dist = charger_fonction('verifier', 'formulaires/inscription');
 	$erreurs = $inscription_dist($mode,'');
 	
+	$id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')));
+	if($id_auteur){
+		$url_renvoi_mdp = '<p><a href="'.generer_url_public('spip_pass').'">'._T('pass_mot_oublie')."</a></p>";
+		$erreurs['mail_inscription'] = _T('clients:vous_etes_deja_inscrit')." ".$url_renvoi_mdp;
+	}
+	
 	return $erreurs;
 }
 
@@ -282,5 +288,3 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 
 	return $retours;
 }
-
-?>
