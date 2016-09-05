@@ -6,7 +6,7 @@
 	<td>
 		[(#URL|linkcheck_en_url{#DISTANT}|inserer_attribut{target,_blank})]
 		[<br /><br /><:linkcheck:redirection:><br />
-		(#REDIRECTION|linkcheck_en_url{1}|inserer_attribut{target,_blank}|trim)]
+		(#REDIRECTION|match{'//'}|?{[(#REDIRECTION|linkcheck_en_url{1})],[(#REDIRECTION|linkcheck_en_url{0})]}|inserer_attribut{target,_blank}|trim)]
 	</td>
 	<td>
 		<B_liens>
