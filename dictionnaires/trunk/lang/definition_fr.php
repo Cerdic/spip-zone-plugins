@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bulledaide_definitions' => 'Consulter le glossaire du site (sigles et définitions)',
+	'bulledaide_definitions' => 'Consulter le glossaire du site',
 
 	// C
 	'champ_casse_label' => 'Sensibilité de la casse',
