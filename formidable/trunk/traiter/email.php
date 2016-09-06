@@ -119,7 +119,8 @@ function traiter_email_dist($args, $retours) {
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'traitements' => $traitements,
 				'saisies' => $saisies,
-				'valeurs' => $valeurs
+				'valeurs' => $valeurs,
+				'ip' => $GLOBALS['ip']
 			)
 		);
 
