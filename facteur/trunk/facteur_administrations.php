@@ -6,10 +6,11 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function facteur_upgrade($nom_meta_base_version, $version_cible){
-
+function facteur_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
@@ -28,7 +29,7 @@ function facteur_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-function facteur_vieil_upgrade(){
+function facteur_vieil_upgrade() {
 	// migration depuis tres ancienne version, a la main
 	if (isset($GLOBALS['meta']['spip_notifications_version'])) {
 		ecrire_meta('facteur_smtp', $GLOBALS['meta']['spip_notifications_smtp']);
@@ -77,7 +78,3 @@ function facteur_vider_tables($nom_meta_base_version) {
 	effacer_meta('facteur_bcc');
 	effacer_meta($nom_meta_base_version);
 }
-
-
-
-?>

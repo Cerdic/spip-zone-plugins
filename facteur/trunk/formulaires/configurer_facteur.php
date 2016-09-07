@@ -1,14 +1,16 @@
 <?php
-/*
+/**
  * Plugin Facteur 2
  * (c) 2009-2011 Collectif SPIP
  * Distribue sous licence GPL
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_configurer_facteur_charger_dist(){
+function formulaires_configurer_facteur_charger_dist() {
 	include_spip('inc/config');
 	$valeurs = array(
 		'facteur_adresse_envoi'       => lire_config('facteur_adresse_envoi'),
@@ -29,88 +31,92 @@ function formulaires_configurer_facteur_charger_dist(){
 		'facteur_cc'                  => lire_config('facteur_cc'),
 		'facteur_bcc'                 => lire_config('facteur_bcc'),
 		'_enable_smtp_secure'         => (intval(phpversion()) == 5)?' ':'',
-		'email_test'                  => lire_config('facteur_adresse_envoi')=='oui'?lire_config('facteur_adresse_envoi_email'):$GLOBALS['meta']['email_webmaster'],
+		'email_test'                  => lire_config('facteur_adresse_envoi') == 'oui' ? lire_config('facteur_adresse_envoi_email') : $GLOBALS['meta']['email_webmaster'],
 		'tester'                      => '',
 	);
 
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
 	include_spip('classes/facteur');
-	$facteur = new Facteur('test@example.org','Test','','',array('adresse_envoi'=>'non'));
+	$facteur = new Facteur('test@example.org', 'Test', '', '', array('adresse_envoi' => 'non'));
 	$valeurs['_from_defaut'] = $facteur->From;
-	if ($facteur->FromName){
+	if ($facteur->FromName) {
 		$valeurs['_from_defaut'] = $facteur->FromName . ' &lt;'.$valeurs['_from_defaut'].'&gt;';
 	}
 
 	return $valeurs;
 }
 
-function formulaires_configurer_facteur_verifier_dist(){
+function formulaires_configurer_facteur_verifier_dist() {
 	$erreurs = array();
 	include_spip('inc/config');
 	if ($email = _request('facteur_adresse_envoi_email')
-	  AND !email_valide($email)) {
+		and !email_valide($email)) {
 		$erreurs['facteur_adresse_envoi_email'] = _T('form_email_non_valide');
-		set_request('facteur_adresse_envoi','oui');
+		set_request('facteur_adresse_envoi', 'oui');
 	}
-	if (_request('facteur_smtp')=='oui'){
-		if (!($h=_request('facteur_smtp_host')))
+	if (_request('facteur_smtp') == 'oui') {
+		if (!($h = _request('facteur_smtp_host'))) {
 			$erreurs['facteur_smtp_host'] = _T('info_obligatoire');
-		else {
+		} else {
 			$h = trim($h);
-			$regexp_ip_valide = '#^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$#'; 
+			$regexp_ip_valide = '#^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$#';
 			// Source : http://www.d-sites.com/2008/10/09/regex-ipv4-et-ipv6/
-			if (!preg_match($regexp_ip_valide,$h)){ // ce n'est pas une IP
-				if(!preg_match(';^([^.\s/?:]+[.])*[^.\s/?:]+$;',$h)
-				  OR gethostbyname($h)==$h)
+			if (!preg_match($regexp_ip_valide, $h)) { // ce n'est pas une IP
+				if (!preg_match(';^([^.\s/?:]+[.])*[^.\s/?:]+$;', $h)
+					or gethostbyname($h) == $h) {
 					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
-			}
-			else {
-				if (gethostbyaddr($h)==$h)
+				}
+			} else {
+				if (gethostbyaddr($h) == $h) {
 					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
+				}
 			}
-			set_request('facteur_smtp_host',$h);
+			set_request('facteur_smtp_host', $h);
 		}
-		if (!($p=_request('facteur_smtp_port')))
+		if (!($p=_request('facteur_smtp_port'))) {
 			$erreurs['facteur_smtp_port'] = _T('info_obligatoire');
-		elseif(!preg_match(';^[0-9]+$;',$p) OR !intval($p))
+		} elseif (!preg_match(';^[0-9]+$;', $p) or !intval($p)) {
 			$erreurs['facteur_smtp_port'] = _T('facteur:erreur_invalid_port');
+		}
 
-		if (!_request('facteur_smtp_auth'))
+		if (!_request('facteur_smtp_auth')) {
 			$erreurs['facteur_smtp_auth'] = _T('info_obligatoire');
+		}
 
-		if (_request('facteur_smtp_auth')=='oui'){
-			if (!_request('facteur_smtp_username'))
+		if (_request('facteur_smtp_auth')=='oui') {
+			if (!_request('facteur_smtp_username')) {
 				$erreurs['facteur_smtp_username'] = _T('info_obligatoire');
-			if (!_request('facteur_smtp_password') AND !lire_config('facteur_smtp_password'))
+			}
+			if (!_request('facteur_smtp_password') and !lire_config('facteur_smtp_password')) {
 				$erreurs['facteur_smtp_password'] = _T('info_obligatoire');
+			}
 		}
 	}
 	if ($emailcc = _request('facteur_cc')
-	  AND !email_valide($emailcc)) {
+		and !email_valide($emailcc)) {
 		$erreurs['facteur_cc'] = _T('form_email_non_valide');
 	}
 	if ($emailbcc = _request('facteur_bcc')
-	  AND !email_valide($emailbcc)) {
+		and !email_valide($emailbcc)) {
 		$erreurs['facteur_bcc'] = _T('form_email_non_valide');
 	}
 
-	if (_request('tester')){
-		if (!$email = _request('email_test')){
+	if (_request('tester')) {
+		if (!$email = _request('email_test')) {
 			$erreurs['email_test'] = _T('info_obligatoire');
-		}
-		elseif (!email_valide($email)) {
+		} elseif (!email_valide($email)) {
 			$erreurs['email_test'] = _T('form_email_non_valide');
 		}
 	}
 
-	
-	if(count($erreurs)>0){
+
+	if (count($erreurs) > 0) {
 		$erreurs['message_erreur'] = _T('facteur:erreur_generale');
 	}
 	return $erreurs;
 }
 
-function formulaires_configurer_facteur_traiter_dist(){
+function formulaires_configurer_facteur_traiter_dist() {
 	include_spip('inc/meta');
 
 	$facteur_adresse_envoi = _request('facteur_adresse_envoi');
@@ -146,7 +152,7 @@ function formulaires_configurer_facteur_traiter_dist(){
 
 	if (intval(phpversion()) == 5) {
 		$facteur_smtp_secure = _request('facteur_smtp_secure');
-		ecrire_meta('facteur_smtp_secure', in_array($facteur_smtp_secure,array('non','ssl','tls'))?$facteur_smtp_secure:'non');
+		ecrire_meta('facteur_smtp_secure', in_array($facteur_smtp_secure, array('non', 'ssl', 'tls')) ? $facteur_smtp_secure : 'non');
 	}
 
 	$facteur_smtp_sender = _request('facteur_smtp_sender');
@@ -160,23 +166,22 @@ function formulaires_configurer_facteur_traiter_dist(){
 
 	$facteur_bcc = _request('facteur_bcc');
 	ecrire_meta('facteur_bcc', $facteur_bcc?$facteur_bcc:'');
-	
-	
-	$res = array('message_ok'=>_T('facteur:config_info_enregistree'));
+
+
+	$res = array('message_ok' => _T('facteur:config_info_enregistree'));
 
 	// faut-il envoyer un message de test ?
-	if (_request('tester')){
+	if (_request('tester')) {
 		$res = array();
 		$destinataire = _request('email_test');
-		$err = facteur_envoyer_mail_test($destinataire,_T('facteur:corps_email_de_test'));
+		$err = facteur_envoyer_mail_test($destinataire, _T('facteur:corps_email_de_test'));
 		if ($err) {
 			$res['message_erreur'] = $err;
-		}
-		else {
+		} else {
 			$res['message_ok'] = _T('facteur:email_test_envoye');
 		}
 	}
-	
+
 	return $res;
 }
 
@@ -188,7 +193,7 @@ function formulaires_configurer_facteur_traiter_dist(){
  * @return string
  *   message erreur ou vide si tout est OK
  */
-function facteur_envoyer_mail_test($destinataire,$titre){
+function facteur_envoyer_mail_test($destinataire, $titre) {
 
 	include_spip('classes/facteur');
 	$message_html	= recuperer_fond('emails/test_email_html', array());
@@ -200,11 +205,10 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 	);
 
 	// passer par envoyer_mail pour bien passer par les pipeline et avoir tous les logs
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	try {
 		$retour = $envoyer_mail($destinataire, $titre, $corps);
-	}
-	catch (Exception $e) {
+	} catch (Exception $e) {
 		return $e->getMessage();
 	}
 
@@ -214,6 +218,5 @@ function facteur_envoyer_mail_test($destinataire,$titre){
 	}
 
 	// tout est OK, pas d'erreur
-	return "";
+	return '';
 }
-?>
