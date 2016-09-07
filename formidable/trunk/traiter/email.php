@@ -120,7 +120,7 @@ function traiter_email_dist($args, $retours) {
 				'traitements' => $traitements,
 				'saisies' => $saisies,
 				'valeurs' => $valeurs,
-				'ip' => $GLOBALS['ip']
+				'ip' => $options['activer_ip']?$GLOBALS['ip']:''
 			)
 		);
 
