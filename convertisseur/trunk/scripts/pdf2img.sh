@@ -15,7 +15,7 @@ repdest=${dest}
 regex="\.jpg$"
 if [[ "$dest" =~ $regex ]] ; then 
 	fichier_dest="$dest"
-	repdest=${pdf%/*}	
+	repdest=${dest%/*}	
 	format=" ($repdest)"
 fi
 
@@ -25,8 +25,6 @@ fi
 #Si pas de dest
 if [[ $dest == 0 ]] || [[ $dest = "" ]] ; then
 	fichier_dest=${pdf/.pdf/.jpg}
-	repdest=${pdf%/*}
-	format=" ($repdest)"
 fi
 
 echo "Conversion (shave $shave) de $pdf dans $fichier_dest $format"
@@ -44,8 +42,8 @@ convert -verbose -colorspace RGB -resize 1500 -interlace none -density 300 -back
 
 if [ -d "$repdest" ] ; then
 	# si on a affaire a un fichier multi pages on renumérote +1 pour ne pas démarrer à 0
-	find "$repdest" -iname "*0.jpg" | while read f ; do
-		rep="${f%/*}"
+	echo "renommage..."
+	find "$repdest" -iname "*0.jpg" | head -1 | while read f ; do
 		# lister les fichiers à l'envers et les décaler de 1
 		find "$repdest" -iname "*.jpg" | sort -r | while read i ; do
 			page=$(echo "$i" | grep -Eo "\d+\.jpg" | grep -Eo "\d+")
@@ -53,6 +51,7 @@ if [ -d "$repdest" ] ; then
 			pagep=$((pagep+1))
 			((pagep<10)) && pagep="0$pagep"
 			image=$(echo $i | sed "s/${page}.jpg/${pagep}.jpg/")
+			#echo "mv $i $image"
 			mv "$i" "$image"
 		done
 	done
