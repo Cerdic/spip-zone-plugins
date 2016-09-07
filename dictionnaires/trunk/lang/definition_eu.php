@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bulledaide_definitions' => 'Gunearen glosarioa konsultatu (siglak eta definizioak)',
+	'bulledaide_definitions' => 'Gunearen glosarioa konsultatu (siglak eta definizioak)', # MODIF
 
 	// C
 	'champ_casse_label' => 'Maiuskula/minuskula sentikortasuna',
