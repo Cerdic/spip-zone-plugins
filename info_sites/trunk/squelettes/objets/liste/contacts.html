@@ -39,6 +39,9 @@
 			<tr class='first_row'>
 				<th class="nom">[(#TRI{nom,<:info_sites:label_nom_prenom:>,ajax})]</th>
 				<th class="organisation"><:contacts:label_organisation:></th>
+				<th class="fonction"><:contacts:label_fonction:></th>
+				<th class="numeros"><:contacts:label_telephone:></th>
+				<th class="emails"><:contacts:label_email:></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,6 +57,17 @@
 				<//B_lien_contact>
 				<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[(#NOM)][, (#PRENOM)]</a></td>
 				<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
+				<td class="fonction">[(#FONCTION|sinon{-})]</td>
+				<td class="numeros"><B_tel><BOUCLE_tel (NUMEROS) {id_contact}>
+					<address class="small">
+						[<strong>(#TYPE|coordonnees_lister_types_numeros) :</strong> ][(#NUMERO|sinon{-})]
+					</address>
+				</BOUCLE_tel></B_tel></td>
+				<td class="email"><B_email><BOUCLE_email (EMAILS) {id_contact}>
+					<address class="small">
+						[<strong>(#TYPE|coordonnees_lister_types_emails) :</strong> ][<a href="mailto:#EMAIL">(#EMAIL|sinon{-})</a>]
+					</address>
+				</BOUCLE_email></B_email></td>
 			</tr>
 		</BOUCLE_liste_contacts>
 		</tbody>
