@@ -30,6 +30,9 @@ function inc_analyser_rss_commits_dist($url) {
 		$page = preg_replace("/content:encoded\>/", "texte>", $page);
 		// Merci _Eric_ pour ce code.
 		// var_dump($page);
+		include_spip('inc/xml');
+		$xml_test = preg_replace("/\&lt\;/g", "<", $page);
+		spip_log(print_r($xml_test, true), 'rss_commits');
 		$xml = json_decode(json_encode(simplexml_load_string($page, null, LIBXML_NOCDATA)), true);
 	}
 

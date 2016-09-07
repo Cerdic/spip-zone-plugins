@@ -53,7 +53,8 @@ function action_maj_commits_projet_dist($id = null) {
 			}
 		}
 
-		$commits = lister_rss_commits($id_projet);
+		$commits = lister_rss_commits($id_projet, false);
+		spip_log(print_r($commits, true), 'rss_commits');
 		if (count($commits) > 0) {
 			foreach ($commits as $key => $value) {
 				if (!in_array($value['id_projet'] . '|' . $value['url_revision'], $commits_anciens)) {
