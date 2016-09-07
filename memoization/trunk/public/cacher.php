@@ -119,11 +119,17 @@ function cache_valide(&$page, $date) {
 					#spip_log("Cache refresh systematique : REFRESH", "dbgcache");
 				}
 				else {
-					$coeff = (1-$dt/_DUREE_INVALIDATION_PROGRESSIVE_CACHE);
-					$seuil = 15; // 15% de probabilite au depart
-					$prob = mt_rand(1, $seuil+(100-$seuil)*$coeff);
-					$refresh_ok = ($prob<$seuil ? 1 : 0);
-					#spip_log("Cache refresh progresif dt=$dt coeff=$coeff p=$prob" . ($refresh_ok ? " : REFRESH" : ""), "dbgcache");
+					if (_DUREE_INVALIDATION_PROGRESSIVE_CACHE){
+						$coeff = (1-$dt/_DUREE_INVALIDATION_PROGRESSIVE_CACHE);
+						$seuil = 15; // 15% de probabilite au depart
+						$prob = mt_rand(1, $seuil+(100-$seuil)*$coeff);
+						$refresh_ok = ($prob<$seuil ? 1 : 0);
+						#spip_log("Cache refresh progresif dt=$dt coeff=$coeff p=$prob" . ($refresh_ok ? " : REFRESH" : ""), "dbgcache");
+					}
+ 					else {
+						$refresh_ok = 1;
+						#spip_log("Cache refresh PAS progresif REQUEST_TIME=${_SERVER['REQUEST_TIME']}, derniere_modif=${GLOBALS['meta']['derniere_modif']} dt=$dt", "erreur_memoization");
+					};
 				}
 			}
 
