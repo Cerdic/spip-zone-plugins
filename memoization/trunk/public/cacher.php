@@ -128,7 +128,7 @@ function cache_valide(&$page, $date) {
 					}
  					else {
 						$refresh_ok = 1;
-						#spip_log("Cache refresh PAS progresif REQUEST_TIME=${_SERVER['REQUEST_TIME']}, derniere_modif=${GLOBALS['meta']['derniere_modif']} dt=$dt", "erreur_memoization");
+						# spip_log("Cache refresh PAS progresif REQUEST_TIME=".$_SERVER['REQUEST_TIME'].", derniere_modif=".$GLOBALS['meta']['derniere_modif']." dt=$dt", "erreur_memoization");
 					};
 				}
 			}
