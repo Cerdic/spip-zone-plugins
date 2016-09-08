@@ -167,6 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Ваше сообщение было отправлено.',
 	'traiter_email_option_activer_accuse_label' => 'Подтверждение',
 	'traiter_email_option_activer_accuse_label_case' => 'Кроме указанных получателей, отправить отправителю сообщение с подтверждением.',
+	'traiter_email_option_activer_ip_label' => 'IP адрес',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Уведомление электронной почтой',
 	'traiter_email_option_destinataires_champ_form_label' => 'Емейл получатель указывается в одном из полей формы',
 	'traiter_email_option_destinataires_explication' => 'Выберите поле, которое соответствует получателям сообщения.',

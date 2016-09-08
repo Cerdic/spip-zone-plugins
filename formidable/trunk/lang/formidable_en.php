@@ -184,6 +184,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label' => 'Acknowledgement of receipt',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
+	'traiter_email_option_activer_ip_label' => 'IP address',
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. Otherwise, the recipient will be the sender.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
 	'traiter_email_option_destinataires_champ_form_explication' => 'If one of the fields is an email address and you want to send the form to this address, select the field.',

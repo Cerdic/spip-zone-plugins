@@ -94,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Ihre Nachricht wurde per Mail gesendet.',
 	'traiter_email_option_activer_accuse_label' => 'Empfangsbestätigung',
 	'traiter_email_option_activer_accuse_label_case' => 'Ebenfalls eine Empfangsbestätigung an Absender senden.',
+	'traiter_email_option_activer_ip_label' => 'IP-Adresse',
 	'traiter_email_option_destinataires_explication' => 'Legen sie das Feld fest, das die Empfängeradresse enthält.',
 	'traiter_email_option_destinataires_label' => 'Empfänger',
 	'traiter_email_option_destinataires_plus_explication' => 'Eine kommagetrennte Empfängerliste.',

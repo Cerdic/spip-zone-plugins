@@ -130,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Vaša správa bola odoslaná.',
 	'traiter_email_option_activer_accuse_label' => 'Potvrdenie o prijatí správy',
 	'traiter_email_option_activer_accuse_label_case' => 'Poslať e-mail aj na adresu odosielateľa so žiadosťou o potvrdenie.',
+	'traiter_email_option_activer_ip_label' => 'IP adresa',
 	'traiter_email_option_destinataires_explication' => 'Vyberte si pole, v ktorom budú príjemcovia správy.',
 	'traiter_email_option_destinataires_label' => 'Príjemcovia',
 	'traiter_email_option_destinataires_plus_explication' => 'Zoznam adries oddelený čiarkami.',

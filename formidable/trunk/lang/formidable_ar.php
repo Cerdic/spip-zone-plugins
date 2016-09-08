@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_description' => 'يرسل نتيجة الاستمارة بالبريد الإلكتروني الى لائحة من المتلقين.',
 	'traiter_email_option_activer_accuse_label' => 'إقرار بالاستلام',
 	'traiter_email_option_activer_accuse_label_case' => 'أيضاً إرسال بريد الى عنوان المرسِل يحتوي على رسالة تأكيد الاستلام.',
+	'traiter_email_option_activer_ip_label' => 'عنوان IP',
 	'traiter_email_option_destinataires_explication' => 'اختيار الحقل المناسب للمرسَل اليهم.',
 	'traiter_email_option_destinataires_label' => 'المرسَل اليهم',
 	'traiter_email_option_destinataires_plus_explication' => 'لائحة عناوين بريد تفصل بينها فواصل.',

@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Tu mensaje ha sido enviado por correo electrónico.',
 	'traiter_email_option_activer_accuse_label' => 'Acuse de recibo',
 	'traiter_email_option_activer_accuse_label_case' => 'También enviar un correo electrónico al remitente con un mensaje de confirmación.',
+	'traiter_email_option_activer_ip_label' => 'Dirección IP',
 	'traiter_email_option_destinataires_champ_form_explication' => 'Si uno de sus campos es una dirección de correo electrónico y si desea mandar el formulario a esta dirección, seleccione el campo.',
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinatario presente en uno de los campos de los formularios',
 	'traiter_email_option_destinataires_explication' => 'Elige el campo que corresponde a los destinatarios del mensaje.',

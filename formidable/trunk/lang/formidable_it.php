@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Il tuo messaggio è stato inviato per posta elettronica.',
 	'traiter_email_option_activer_accuse_label' => 'Conferma di ricezione',
 	'traiter_email_option_activer_accuse_label_case' => 'Invia anche una email all’indirizzo del mittente con un messaggio di conferma.',
+	'traiter_email_option_activer_ip_label' => 'Indirizzo IP',
 	'traiter_email_option_destinataires_explication' => 'Scegli il campo che corrisponde al destinatario del messaggio.',
 	'traiter_email_option_destinataires_label' => 'Destinatari',
 	'traiter_email_option_destinataires_plus_explication' => 'Un elenco di indirizzi separati da virgole.',
