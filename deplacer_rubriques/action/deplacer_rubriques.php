@@ -33,7 +33,7 @@ function action_deplacer_rubriques_dist($arguments=null) {
 	if (intval($arguments[1])){
 		foreach ($rubriques_a_deplacer as $key => $value) {
 			if (intval($value)){
-				spip_log("On déplace $value vers ".$arguments[1], "deplacer_rubriques"._LOG_INFO);
+				spip_log("On déplace $value vers ".$arguments[1], "deplacer_rubriques8");
 				rubrique_instituer($value, array("id_parent"=>$arguments[1]));
 			}
 		}
