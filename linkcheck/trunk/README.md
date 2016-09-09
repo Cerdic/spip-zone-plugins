@@ -4,6 +4,24 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 [Documentation](http://contrib.spip.net/LinkCheck-verificateur-de-liens)
 
+## Todo
+
+[ ] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
+
+[ ] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
+
+[ ] ajout d’un lien vers archive.org sur les articles morts
+
+[ ] export CSV (à finaliser avec generer_url_objet)
+
+[ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
+
+[ ] ajout d’un picto lien mort optionnel dans propre() [+ éventuellement lien sur archive.org le cas échéant]
+
+[ ] vérifier/traiter automagiquement les migrations http⟹https
+
+[ ] améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)
+
 ## Versions 1.3.x
 
 ### Version 1.3.0
