@@ -116,17 +116,17 @@
 ]
 
 [(#INCLURE{fond=inclure/marqueur_js,
-	xtnv=[(#GET{xtnv})],
-	xtsd=[(#GET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]})],
-	xtsite=[(#GET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]})],
-	xtn2=[(#GET{xtn2})],
-	xtpage=[(#GET{xtpage})],
-	xtdi=[(#GET{xtdi})],
-	xt_multc=[(#GET{xt_multc})],
-	xt_an=[(#GET{xt_an})],
-	xt_ac=[(#GET{xt_ac})],
-	xtdmc=[(#GET{xtdmc})],
-	xtprm=[(#GET{xtprm})],
-	xtergo=[(#GET{xtergo})]})]
+	xtnv=[(#GET{xtnv}|trim)],
+	xtsd=[(#GET{xtsd,[(#CONFIG{xiti/xtsd_xiti})]}|trim)],
+	xtsite=[(#GET{xtsite,[(#CONFIG{xiti/xtsite_xiti})]}|trim)],
+	xtn2=[(#GET{xtn2}|trim)],
+	xtpage=[(#GET{xtpage}|trim)],
+	xtdi=[(#GET{xtdi}|trim)],
+	xt_multc=[(#GET{xt_multc}|trim)],
+	xt_an=[(#GET{xt_an}|trim)],
+	xt_ac=[(#GET{xt_ac}|trim)],
+	xtdmc=[(#GET{xtdmc}|trim)],
+	xtprm=[(#GET{xtprm}|trim)],
+	xtergo=[(#GET{xtergo}|trim)]})]
 </BOUCLE_si_activer>
 #FILTRE{trim}

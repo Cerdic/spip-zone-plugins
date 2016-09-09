@@ -34,6 +34,10 @@
 
 ### Version 1.x.x 
 
+#### Version 1.8.2
+
+* Trim sur les éléments de configuration qui peuvent couper les stats en cas d'espaces ou de retour ligne
+
 #### Version 1.8.1
 
 * Amélioration de la liste des objets liés à un niveau deux de Xiti
@@ -76,7 +80,6 @@
   * son identifiant `xtsite` (fourni dans l'interface de Xiti)
 * Ajout d'une table de liens `xiti_niveaux_liens` et d'un formulaire permettant de lier des niveaux deux aux différents
 * Prise en compte des niveaux deux dans le marqueur
-
 
 #### Version 1.4.0
 
