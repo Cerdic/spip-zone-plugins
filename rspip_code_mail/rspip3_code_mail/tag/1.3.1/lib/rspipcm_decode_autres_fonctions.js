@@ -32,8 +32,8 @@ var check=100,r=101,i=0,r1,r2,email;
       r1=Math.round(Math.random()*4)+1;
       r2=Math.round(Math.random()*4)+1;
       r=r1+r2;
-      if (i==0) {invite="$entrez_resultat_addition";} 
-         else {invite="$erreur_entrez_resultat_addition";}
+      if (i==0) {invite=entrez_resultat_addition;} 
+         else {invite=erreur_entrez_resultat_addition;}
       check = prompt(invite+" "+r1+" + "+r2+" ?","");
       i++;
       }

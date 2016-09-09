@@ -1,6 +1,6 @@
 <?php
 
-/*  Copyright 2010  Robert Sebille 
+/*  Copyright 2010  Robert Sebille  (email : robert -AT- sebille -DOT- be)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ function rspipcm_encode($adr) {
 
    for ($i = (mb_strlen($adr) - 1); $i > -1; $i--) {
       $ch = mb_substr($adr, $i, 1);
-      if ($ch=="@") {$ch="__µ__";} //:
+      if ($ch=="@") {$ch="__@__";} //:
       if ($ch=="?") {$ch="__?__";} //!
       if ($ch=="&") {$ch="__&__";} //#
       $email .= $ch;
@@ -105,7 +105,7 @@ function rspipcm_filtre_email($texte) {
 function rspipcm_affichage_final($texte_final) {
 	if ($GLOBALS['html']) {
 		$texte_final = str_replace("RSPIPCM_JS_MDECODE", "javascript:mdecode", $texte_final);
-		$texte_final = str_replace("__µ__", ":", $texte_final);
+		$texte_final = str_replace("__@__", ":", $texte_final);
 		$texte_final = str_replace("__?__", "!", $texte_final);
 		$texte_final = str_replace("__&amp;__", "#", $texte_final);
 	}
