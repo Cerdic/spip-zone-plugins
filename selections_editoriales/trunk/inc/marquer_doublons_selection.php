@@ -124,8 +124,6 @@ function inc_marquer_doublons_selection_dist(
 
 	// il y a des nouvelles selections vus dans le texte
 	$nouveaux = array_diff($texte_selections_vus, $bdd_selections_vus['oui']);
-	spip_log('Nouveaux !!!','test.'._LOG_ERREUR);
-	spip_log($nouveaux,'test.'._LOG_ERREUR);
 	// il y a des anciennes selections vus dans la bdd
 	$anciens = array_diff($bdd_selections_vus['oui'], $texte_selections_vus);
 
