@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_almanach' => 'Ajouter cet almanach',
 	'almanach' => 'Almanach',
 	'attendee' => 'Intervenant(e)',
-	'aucun_decalage' => "Aucun décalage",
+	'aucun_decalage' => 'Aucun décalage',
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.',
 
 	// C
