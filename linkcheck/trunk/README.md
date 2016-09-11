@@ -24,6 +24,11 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.3.x
 
+### Version 1.3.1
+
+* Ne plus analyser `spip_plugins`, ce n'est pas un objet édito du site réellement, [cf ce message sur contrib](https://contrib.spip.net/LinkCheck-verificateur-de-liens?var_mode=calcul#forum488940)
+* Petites améliorations de chaînes de langue
+
 ### Version 1.3.0
 
 * Ne pas enlever le dernier `/` des urls pour éviter des liens déplacés pour rien.
