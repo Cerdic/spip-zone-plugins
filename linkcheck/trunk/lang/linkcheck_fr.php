@@ -24,7 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif' => 'Ce plugin vérifie, en tâche de fond, si les liens présents dans les objets SPIP de votre site, pointent toujours vers des ressources en ligne.',
-	'dont' => 'dont',
 
 	// E
 	'etat' => 'État',
@@ -39,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_linkcheck' => 'Un lien',
 	'info_aucun_lien' => 'Aucun lien n’est encore recensé.',
 	'info_aucun_linkcheck' => 'Aucun lien détecté',
+	'info_dont_non_verifie' => 'dont <span id="nb_lien_inconnu">@nb@</span> non-verifié',
+	'info_dont_non_verifies' => 'dont <span id="nb_lien_inconnu">@nb@</span> non-verifiés',
 	'info_nb_linkchecks' => '@nb@ liens',
 
 	// L
@@ -66,8 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirmation_reinitialiser' => 'Êtes-vous sûres de vouloir vider les tables spip_linkchecks et spip_linkchecks_liens',
 
 	// N
-	'non_verifie' => 'non-verifié',
-	'non_verifies' => 'non-verifiés',
 	'notifier_par_courriel' => 'Notifier par courriel',
 
 	// O

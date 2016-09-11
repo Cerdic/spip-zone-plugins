@@ -19,9 +19,11 @@
 	#BOITE_PIED
 	<a href="#URL_ACTION_AUTEUR{linkcheck_parcours,'',#URL_ECRIRE{linkchecks}}"><:linkcheck:continuer_parcours:></a>]
 
-[(#GET{tab_avt}|table_valeur{nb_lien}|>{0}|oui)
+[(#GET{tab_avt}|table_valeur{nb_lien}|>{0}|et{#GET{tab_avt}|table_valeur{nb_lien_inconnu}|>{0}|non}|oui)
+<strong>[(#GET{tab_avt}|table_valeur{nb_lien}|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks})]</strong>]
+[(#GET{tab_avt}|table_valeur{nb_lien}|>{0}|et{#GET{tab_avt}|table_valeur{nb_lien_inconnu}|>{0}}|oui)
 <strong>[(#GET{tab_avt}|table_valeur{nb_lien}|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks})]</strong>
-[(#GET{tab_avt}|table_valeur{nb_lien_inconnu}|>{0}|oui)[<small><:linkcheck:dont:> <span id="nb_lien_inconnu">(#GET{tab_avt}|table_valeur{nb_lien_inconnu})</span>[ (#GET{tab_avt}|table_valeur{nb_lien_inconnu}|singulier_ou_pluriel{<:linkcheck:non_verifie:>,<:linkcheck:non_verifies:>})]</small>]]]
+[<small>(#GET{tab_avt}|table_valeur{nb_lien_inconnu}|singulier_ou_pluriel{linkcheck:info_dont_non_verifie,linkcheck:info_dont_non_verifies})</small>]]]
 <div class="progress">
 	<div id="bar_lien_mort" class="bar bar-mort" style="width: [(#GET{tab_avt}|table_valeur{pct_lien_mort})]%;"></div>
 	<div id="bar_lien_malade" class="bar bar-malade" style="width: [(#GET{tab_avt}|table_valeur{pct_lien_malade})]%;"></div>
