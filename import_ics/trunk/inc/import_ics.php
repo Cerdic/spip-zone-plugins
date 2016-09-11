@@ -174,7 +174,7 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 function date_ical_to_sql($date,$decalage){
 	$value = $date["value"];
 	$params = $date["params"];
-	if (in_array("DATE",$params)){
+	if (is_array($params) and in_array("DATE",$params)){
 		$all_day = True;
 		$date_sql = sql_format_date(
 			$value["year"],
