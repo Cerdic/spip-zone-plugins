@@ -1,1 +1,1 @@
-- gérer les répetitions d'evt
+- gérer les répetitions d'evt. C'est complexe. cf http://www.kanzaki.com/docs/ical/recur.html
