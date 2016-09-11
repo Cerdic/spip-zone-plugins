@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'appliquer_decalage' => 'Appliquer le décalage',
 	'appliquer_decalage_explication' => 'Voulez-vous appliquer le décalage à tous les événements associés à cet almanach (il est préférable de supprimer l’ancien décalage puis d’appliquer le nouveau) ?',
 	'attendee' => 'Intervenant(e)',
-	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.
-',
+	'aucun_decalage' => "Aucun décalage",
+	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.',
 
 	// C
 	'choix_salle' => 'Tous les événements se verront attribuer cette salle dans le gestionnaire de ressources.',

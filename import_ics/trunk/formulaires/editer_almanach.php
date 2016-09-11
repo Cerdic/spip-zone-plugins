@@ -31,6 +31,28 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
  */
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs['tableau_decalage'] = array();
+	$i = -24;
+	while ($i < 0){
+		if (abs($i) !=1){
+			$valeurs['tableau_decalage'][strval($i)] = strval($i)." "._T("date_heures");
+		}
+		else {
+			$valeurs['tableau_decalage'][strval($i)] = strval($i)." "._T("date_une_heure");		
+		}
+		$i++;
+	}
+	$valeurs['tableau_decalage'][0] = _T("almanach:aucun_decalage");
+	$i++;
+	while ($i <= 24){
+		if (abs($i) !=1){
+			$valeurs['tableau_decalage'][strval($i)] = "+".strval($i)." "._T("date_heures");
+		}
+		else {
+			$valeurs['tableau_decalage'][strval($i)] = "+".strval($i)." "._T("date_une_heure");		
+		}
+		$i++;		
+	}
 	return $valeurs;
 
 }
