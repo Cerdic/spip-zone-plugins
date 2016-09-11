@@ -43,11 +43,14 @@ function action_linkcheck_parcours_dist() {
 				//si on en est bien a cette table
 				if (($do && $do<$key_table) || !$do) {
 					foreach ($table as $table_sql => $info_table) {
+						if (in_array($table_sql, array('spip_plugins'))) {
+							continue;
+						}
 						$nom_champ_id=id_table_objet($table_sql);
 						// Récuperer la liste des champs suivant le type d'objet
 						$tab_champs_a_traiter = linkcheck_champs_a_traiter($info_table);
 						if (empty($tab_champs_a_traiter)) {
-							break;
+							continue;
 						}
 						$champs_a_traiter = is_array($tab_champs_a_traiter) ?
 							implode(',', array_keys($tab_champs_a_traiter)) : '*';
