@@ -89,6 +89,12 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  *
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	if ($id_almanach!='new'){
+		$ancien_decalage = sql_getfetsel("decalage","spip_almanachs","id_almanach=$id_almanach");
+	}
+	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
+		$ancien_decalage = _request("decalage");
+	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
@@ -96,6 +102,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_article = _request("id_article");
 	$id_mot = _request("id_mot");
 	$decalage = _request("decalage");
+	
 	#on associe le mot à l'almanach
 	if ($id_mot){
 		sql_insertq(
@@ -107,9 +114,33 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 			)
 		);
 	}
+	
+	# on corrige le décalage sur les evts existant (cas de modif d'un article)
+	corriger_decalage($id_almanach,$decalage,$ancien_decalage);
+	
+	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
+	
 	return $chargement;
 }
 
-
-?>
+function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
+	$decalage = intval($nouveau_decalage) - intval($ancien_decalage);
+	if ($decalage !=0){
+		$liens = sql_allfetsel('E.uid, E.id_evenement',
+															"spip_evenements AS E
+															INNER JOIN spip_almanachs_liens AS L
+															ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
+		
+		$champs_sql = array(
+			"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
+			"date_fin" => "DATE_ADD(date_fin, INTERVAL  $decalage HOUR)",
+		);
+		foreach ($liens as $l){
+			$id_evenement = intval($l["id_evenement"]);
+			autoriser_exception('evenement','modifier',$id_evenement);
+			objet_modifier('evenement',$id_evenement,$champs_sql);
+			autoriser_exception('evenement','modifier',$id_evenement,false);
+		}
+  }
+}
