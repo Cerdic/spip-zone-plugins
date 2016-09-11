@@ -186,9 +186,10 @@ function linkcheck_tester_lien_externe($url) {
 			$redirections = array();
 			$codes = array();
 			if (is_array($head) && $ret['etat'] == 'deplace') {
+				spip_log($head, 'test.'._LOG_ERREUR);
 				foreach ($head as $line) {
 					if (preg_match('/Location/Uims', $line, $matches)) {
-						$redirections[] = parametre_url(parametre_url(parametre_url(trim(str_replace(array('Content-location:', 'content-location:', 'Location:', 'location:'), '', $line)), 'utm_source', ''), 'utm_medium', ''), 'utm_campaign', '');
+						$redirections[] = parametre_url(parametre_url(parametre_url(trim(str_replace(array('Content-Location:', 'Content-location:', 'content-location:', 'Location:', 'location:'), '', $line)), 'utm_source', ''), 'utm_medium', ''), 'utm_campaign', '');
 					}
 					if (preg_match('/HTTP\/1\.1 (404)/Uims', $line, $status)) {
 						$ret['etat'] = 'mort';
