@@ -1,0 +1,18 @@
+<paquet
+	prefix="rubriques_virtuelles"
+	categorie="navigation"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+	schema="0.0.1"
+>
+
+	<nom>Rubriques virtuelles</nom>
+
+	<auteur lien="http://www.kent1.info/">kent1</auteur>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/rubriques_virtuelles.php" />
+	<pipeline nom="affiche_gauche" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="styliser" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="rubriques_virtuelles_pipelines.php" />
+</paquet>

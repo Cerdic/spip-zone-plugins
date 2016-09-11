@@ -1,0 +1,84 @@
+<?php
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+/**
+ * Insertion dans le pipeline affiche_gauche (SPIP)
+ *
+ * Insertion du bloc de redirection sur les rubriques
+ *
+ * @param array $flux
+ * @return array
+ */
+function rubriques_virtuelles_affiche_gauche($flux) {
+	if (in_array($flux['args']['exec'], array('rubrique'))
+		and $id = $flux['args']['id_rubrique']) {
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/rubriques_virtuelles', array('id_rubrique'=>$id));
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline styliser (SPIP)
+ *
+ * si le champ virtuel est non vide c'est une redirection.
+ * avec un eventuel raccourci Spip
+ * si le raccourci a un titre il sera pris comme corps du 302
+ *
+ * @param string $fond
+ * @param array $contexte
+ * @param string $connect
+ * @return array|bool
+ */
+function rubriques_virtuelles_styliser($flux) {
+	// uniquement si un squelette a ete trouve
+	if (($flux['args']['fond'] == 'rubrique') && $id_rubrique = $flux['args']['id_rubrique']) {
+		$m = sql_getfetsel('virtuel', 'spip_rubriques', array('id_rubrique='.intval($id_rubrique)));
+		if (strlen($m)) {
+			include_spip('inc/texte');
+			// les navigateurs pataugent si l'URL est vide
+			if ($url = virtuel_redirige($m, true)) {
+				// passer en url absolue car cette redirection pourra
+				// etre utilisee dans un contexte d'url qui change
+				// y compris url arbo
+				$status = 302;
+				if (defined('_STATUS_REDIRECTION_VIRTUEL')) {
+					$status=_STATUS_REDIRECTION_VIRTUEL;
+				}
+				if (!preg_match(',^\w+:,', $url)) {
+					include_spip('inc/filtres_mini');
+					$url = url_absolue($url);
+				}
+				$url = str_replace('&amp;', '&', $url);
+				include_spip('inc/headers');
+				redirige_par_entete(texte_script($url), '', $status);
+				return;
+			}
+		}
+	}
+
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline objet_compte_enfants (SPIP)
+ *
+ * Une rubrique est considérée comme vide lorsqu'elle n'a pas d'objets liés (articles, rubriques, documents).
+ *
+ * Ici on impose que le champ "virtuel" doit être vide pour que la rubrique soit considérée comme vide.
+ *
+ * @param unknown $flux
+ * @return number
+ */
+function rubriques_virtuelles_objet_compte_enfants($flux) {
+	if ($flux['args']['objet'] == 'rubrique') {
+		$id_rubrique = $flux['args']['id_objet'];
+		$virtuel = sql_getfetsel('virtuel', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+		if (strlen(trim($virtuel)) > 1) {
+			$flux['data']['redirection'] = 1;
+		}
+	}
+	return $flux;
+}
