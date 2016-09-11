@@ -165,7 +165,8 @@ function linkcheck_tester_lien_externe($url) {
 	$contexte = array(
 			'http' => array(
 				'timeout' => 30,
-				'header' => 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16'
+				'header' => "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16\r\n".
+						    "Accept-Encoding: gzip, deflate"
 			)
 		);
 	define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
@@ -186,7 +187,6 @@ function linkcheck_tester_lien_externe($url) {
 			$redirections = array();
 			$codes = array();
 			if (is_array($head) && $ret['etat'] == 'deplace') {
-				spip_log($head, 'test.'._LOG_ERREUR);
 				foreach ($head as $line) {
 					if (preg_match('/Location/Uims', $line, $matches)) {
 						$redirections[] = parametre_url(parametre_url(parametre_url(trim(str_replace(array('Content-Location:', 'Content-location:', 'content-location:', 'Location:', 'location:'), '', $line)), 'utm_source', ''), 'utm_medium', ''), 'utm_campaign', '');
