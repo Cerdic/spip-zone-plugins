@@ -123,6 +123,8 @@ function pages_formulaire_charger($flux){
 /**
  * Vérifications de l'identifiant d'une page
  * 
+ * L'identifiant doit être unique, sauf en cas de traduction
+ * 
  * @param array $flux
  * 		Le contexte du pipeline
  * @return array $flux
@@ -145,6 +147,8 @@ function pages_formulaire_verifier($flux){
 		$id_page = $flux['args']['args'][0];
 		// champ vide
 		$lang = sql_getfetsel('lang','spip_articles','id_article='.intval($id_page));
+		if (!$lang)
+			$lang = $GLOBALS['spip_lang'];
 		if (!$page)
 			$erreur .= _T('info_obligatoire');
 		// nombre de charactères : 40 max
@@ -154,7 +158,7 @@ function pages_formulaire_verifier($flux){
 		elseif (!preg_match('/^[a-z0-9_]+$/', $page))
 			 $erreur = _T('pages:erreur_champ_page_format');
 		// doublon
-		elseif (sql_countsel(table_objet_sql('article'), "page=".sql_quote($page) . " AND id_article!=".intval($id_page)." AND lang=".sql_quote($lang)))
+		elseif (sql_countsel('spip_articles', "page=".sql_quote($page) . " AND id_article!=".intval($id_page)." AND lang=".sql_quote($lang)).' AND statut != "poubelle"')
 			$erreur = _T('pages:erreur_champ_page_doublon');
 
 		if ($erreur)
