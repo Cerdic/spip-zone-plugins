@@ -26,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif' => 'This plugin checks if hyperlinks on your site still refer to an existing page.',
-	'dont' => 'of which',
 
 	// E
 	'etat' => 'Status',
@@ -68,8 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirmation_reinitialiser' => 'Are you sure to empty the spip_linkchecks and spip_linkchecks_liens tables',
 
 	// N
-	'non_verifie' => 'not validated',
-	'non_verifies' => 'not validated',
 	'notifier_par_courriel' => 'Email message',
 
 	// O

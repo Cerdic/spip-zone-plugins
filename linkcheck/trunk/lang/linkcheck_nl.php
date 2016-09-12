@@ -26,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'descriptif' => 'Deze plugin controleert of links op deze site nog steeds naar een bestaande pagina verwijzen.',
-	'dont' => 'waarvan',
 
 	// E
 	'etat' => 'Status',
@@ -68,8 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirmation_reinitialiser' => 'Ben je zeker dat je de tabellen spip_linkchecks en spip_linkchecks_liens wilt ledigen',
 
 	// N
-	'non_verifie' => 'niet gecontroleerd',
-	'non_verifies' => 'niet gecontroleerd',
 	'notifier_par_courriel' => 'Bericht per email',
 
 	// O
