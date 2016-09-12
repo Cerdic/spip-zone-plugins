@@ -14,6 +14,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/rubriques_virtuelles.php" />
 	<pipeline nom="affiche_gauche" inclure="rubriques_virtuelles_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="rubriques_virtuelles_pipelines.php" />
+	<pipeline nom="autoriser" inclure="rubriques_virtuelles_pipelines.php" />
 	<pipeline nom="styliser" inclure="rubriques_virtuelles_pipelines.php" />
 	<pipeline nom="objet_compte_enfants" inclure="rubriques_virtuelles_pipelines.php" />
 </paquet>

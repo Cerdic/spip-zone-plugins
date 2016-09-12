@@ -103,3 +103,16 @@ function rubriques_virtuelles_objet_compte_enfants($flux) {
 	}
 	return $flux;
 }
+
+function autoriser_rubriques_virtuelles() {
+}
+
+if (!function_exists('autoriser_rubrique_supprimer')) {
+	function autoriser_rubrique_supprimer($faire, $type, $id, $qui, $opt) {
+		$virtuel = sql_getfetsel('virtuel', 'spip_rubriques', 'id_rubrique='.intval($id));
+		if (strlen($virtuel) > 4) {
+			return false;
+		}
+		return autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt);
+	}
+}
