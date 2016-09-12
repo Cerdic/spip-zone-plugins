@@ -1,7 +1,7 @@
 <paquet
 	prefix="rubriques_virtuelles"
 	categorie="navigation"
-	version="0.0.1"
+	version="0.0.2"
 	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	schema="0.0.1"

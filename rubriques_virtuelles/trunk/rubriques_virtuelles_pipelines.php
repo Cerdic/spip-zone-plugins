@@ -97,7 +97,7 @@ function rubriques_virtuelles_objet_compte_enfants($flux) {
 	if ($flux['args']['objet'] == 'rubrique') {
 		$id_rubrique = $flux['args']['id_objet'];
 		$virtuel = sql_getfetsel('virtuel', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
-		if (strlen(trim($virtuel)) > 1) {
+		if (strlen(trim($virtuel)) > 0) {
 			$flux['data']['redirection'] = 1;
 		}
 	}
@@ -110,7 +110,7 @@ function autoriser_rubriques_virtuelles() {
 if (!function_exists('autoriser_rubrique_supprimer')) {
 	function autoriser_rubrique_supprimer($faire, $type, $id, $qui, $opt) {
 		$virtuel = sql_getfetsel('virtuel', 'spip_rubriques', 'id_rubrique='.intval($id));
-		if (strlen($virtuel) > 4) {
+		if (strlen($virtuel) > 0) {
 			return false;
 		}
 		return autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt);
