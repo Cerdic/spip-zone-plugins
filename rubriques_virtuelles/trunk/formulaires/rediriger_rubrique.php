@@ -50,7 +50,7 @@ function formulaires_rediriger_rubrique_traiter_dist($id_rubrique, $retour = '')
 	if (_AJAX) {
 		$js = '
 			<script type="text/javascript">
-				if (window.ajaxReload) ajaxReload("wysiwyg");
+				if (window.ajaxReload) $("#rubrique_virtuelle").ajaxReload({args:{virtuel:"'.$url.'"}});
 				ajaxReload("navigation");
 			</script>';
 	}

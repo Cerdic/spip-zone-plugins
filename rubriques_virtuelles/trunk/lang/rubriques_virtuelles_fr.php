@@ -6,7 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	// I
+	'info_renvoi_rubrique' => 'Cette rubrique renvoie à la page :',
 	// T
 	'texte_rubrique_virtuel' => 'Rubrique virtuelle',
 	'texte_rubrique_reference_mais_redirige' => 'rubrique référencée dans votre site, mais redirigée vers une autre URL.'

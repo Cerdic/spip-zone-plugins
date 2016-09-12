@@ -21,6 +21,27 @@ function rubriques_virtuelles_affiche_gauche($flux) {
 }
 
 /**
+ * Insertion dans le pipeline affiche_milieu (SPIP)
+ *
+ * Insertion du bloc indiquant la redirection eu centre de la rubrique
+ *
+ * @param array $flux
+ * @return array
+ */
+function rubriques_virtuelles_affiche_milieu($flux) {
+	if (in_array($flux['args']['exec'], array('rubrique'))
+		and $id = $flux['args']['id_rubrique']) {
+		$texte = recuperer_fond('prive/squelettes/inclure/rubriques_virtuelles_centre', array('id_rubrique' => $id), array('ajax' => true));
+		if ($p = strpos($flux['data'], '<div id="wys')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
+			$flux['data'] .= $texte;
+		}
+	}
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline styliser (SPIP)
  *
  * si le champ virtuel est non vide c'est une redirection.
