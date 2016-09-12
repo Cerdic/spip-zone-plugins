@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bulledaide_definitions' => 'Consult the site’s glossary',
+
 	// C
 	'champ_casse_label' => 'Case sensitive',
 	'champ_casse_label_case' => 'Detection of this term will be case sensitive.',
@@ -30,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_definition' => 'Definition number:',
 
 	// T
-	'titre_definition' => 'Definition', # MODIF
+	'titre_definition' => 'Definition',
 	'titre_definition_creer' => 'Create a new definition',
 	'titre_definitions' => 'Definitions',
 	'titre_logo_definition' => 'Logo of this definition'
