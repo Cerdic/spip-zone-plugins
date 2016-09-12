@@ -4,13 +4,15 @@
  *
  * @plugin     Pages
  * @copyright  2013
- * @author     RastaPopoulos 
+ * @author     RastaPopoulos
  * @licence    GNU/GPL
  * @package    SPIP\Pages\Installation
  * @link       http://contrib.spip.net/Pages-uniques
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -48,8 +50,6 @@ function pages_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function pages_vider_tables($nom_meta_base_version) {
-	sql_alter("TABLE spip_articles DROP page");
+	sql_alter('TABLE spip_articles DROP page');
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

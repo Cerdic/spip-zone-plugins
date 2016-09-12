@@ -4,7 +4,8 @@
  *
  * @return
  */
-function pages_autoriser() {}
+function pages_autoriser() {
+}
 
 
 /* ----------------------- AUTORISATIONS DE L'OBJET PAGE UNIQUE ----------------------- */
@@ -177,7 +178,5 @@ function autoriser_page_convertir_dist($faire, $type, $id, $qui, $opt) {
 
 function pages_autorisation_defaut_dist($qui) {
 	return (($qui['statut'] == '0minirezo')
-			AND !$qui['restreint']);
+			and !$qui['restreint']);
 }
-
-?>
