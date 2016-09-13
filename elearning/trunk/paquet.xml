@@ -2,7 +2,7 @@
 	prefix="elearning"
 	categorie="divers"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	schema="1.0.0"
 	documentation="http://contrib.spip.net/Plugin-E-learning"
@@ -10,7 +10,7 @@
 	<nom>E-Learning</nom>
 	<!-- Plate-forme simple de E-Learning -->
 
-	<auteur>RastaPopoulos</auteur>
+	<auteur url="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -18,7 +18,7 @@
 	<pipeline nom="accesrestreint_liste_zones_autorisees" action="liste_zones_autorisees" inclure="inc/elearning_zones.php" />
 
 	<necessite nom="accesrestreint" compatibilite="[3.15.4;[" />
-	<necessite nom="bigbrother" compatibilite="[0.3.8;[" />
+	<necessite nom="bigbrother" compatibilite="[0.3.9;[" />
 	<necessite nom="jeux" compatibilite="[3.4.0;[" />
 	<necessite nom="crayons" compatibilite="[1.22.0;[" />
 </paquet>
