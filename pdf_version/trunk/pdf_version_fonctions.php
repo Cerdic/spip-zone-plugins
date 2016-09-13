@@ -102,6 +102,7 @@ function pdf_version_boite_infos($flux) {
 		if (trouver_fond('pdf_version/'.$objet)
 		  and objet_test_si_publie($objet, $id_objet)) {
 			if (autoriser('voirpdfversion', $objet, $id_objet)){
+				include_spip('inc/presentation');
 				$url = generer_url_pdf_version($id_objet, $objet);
 				$url = parametre_url($url, 'var_mode', 'recalcul'); // forcer la mise a jour
 				$flux['data'] .= icone_horizontale(_T('pdf_version:icone_voir_pdf_version'), $url, 'pdf_version', $fonction="", $dummy="", $javascript="");
