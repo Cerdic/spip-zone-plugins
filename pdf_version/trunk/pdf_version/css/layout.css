@@ -1,0 +1,15 @@
+/* --------------------------------------------------------------
+
+   layout.css
+   Disposition des blocs principaux
+   cf.: http://romy.tetue.net/structure-html-de-base
+
+-------------------------------------------------------------- */
+
+/* Elements principaux
+------------------------------------------ */
+body { text-align: center; background:#fff;}
+.page { position: relative; width: 100%;margin:0 auto; text-align: left;  }
+.header {}
+.main { padding: 1.5em 0; }
+

@@ -1,0 +1,97 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul class="editer-groupe">
+
+			#SET{fl,pdf_version}
+			#SET{name,methode}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,exec}
+				<div class="choix">
+					<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				#SET{val,http}
+				<div class="choix">
+					<input type="radio" name="#GET{name}" class="radio" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+			</li>
+			<li class="fieldset suite suite_exec" style="display:[(#ENV{methode}|=={exec}|?{block,none})]">
+				<fieldset>
+					<legend><:pdf_version:legend_config_exec:></legend>
+					<p class="explication"><:pdf_version:explication_installer_wkhtmltopdf:></p>
+					<ul class="editer-groupe">
+						#SET{name,wkhtmltopdf_path}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+							placeholder="/usr/local/bin/wkhtmltopdf"/>
+						</li>
+						#SET{name,api_wkhtmltopdf_actif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							<div class="choix">
+								#SET{val,0}
+								<input type="hidden" name="#GET{name}" value="#GET{val}" />
+								#SET{val,1}
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+							</div>
+						</li>
+						#SET{name,api_keys}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<textarea name="#GET{name}" id="#GET{name}" class="textarea">
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+							[(#SET{url,#EVAL{_DIR_RACINE}|concat{wkhtmltopdf.api/}|url_absolue})]
+							<p class="explication"><:pdf_version:explication_api_keys{url=#GET{url}}:></p>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset suite suite_http" style="display:[(#ENV{methode}|=={http}|?{block,none})]">
+				<fieldset>
+					<legend><:pdf_version:legend_config_http:></legend>
+					<ul class="editer-groupe">
+						#SET{name,wkhtmltopdf_api_url}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+							placeholder="http://www.example.org/wkhtmltopdf.api/0123456789abcdef"/>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
+<script type="text/javascript">
+	function update_visibility(){
+		var val = jQuery('.formulaire_#FORM').find('input[name=methode]:checked').attr('value');
+		console.log(val);
+		jQuery('.formulaire_#FORM').find('.suite:not(.suite_'+val+'):visible').hide('fast');
+		jQuery('.formulaire_#FORM').find('.suite.suite_'+val+':hidden').show('fast');
+	}
+	jQuery(function() {
+		jQuery('.formulaire_#FORM').find('input[name=methode]').bind('change',update_visibility);
+		update_visibility();
+	});
+	onAjaxLoad(update_visibility);
+</script>

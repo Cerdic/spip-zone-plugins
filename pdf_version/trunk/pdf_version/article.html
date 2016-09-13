@@ -1,0 +1,43 @@
+#CACHE{0}
+<BOUCLE_contenu(ARTICLES){id_article}{lang_select}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+	<head>
+		<title>[(#TITRE|textebrut|typo)]</title>
+		#INCLURE{fond=pdf_version/inclure/head}
+
+	</head>
+	<body>
+		<div class="page">
+			<header>
+				<div class="nom_site_spip h3 font2">#NOM_SITE_SPIP</div>
+
+				[<p class="h3 surtitre">(#SURTITRE)</p>]
+				<h1 class="titre">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{150,*}) ]#TITRE</h1>
+				[<h2 class="soustitre">(#SOUSTITRE)</h2>]
+
+				<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[<span class="sep">, </span><span class="auteurs"><:par_auteur:> (#LESAUTEURS)</span>]</p>
+
+			</header>
+
+			<div class="main">
+				[<div class="chapo h3">(#CHAPO|image_reduire{1024,*})</div>]
+
+				[<div class="texte">(#TEXTE|image_reduire{1024,*})</div>]
+
+				[<p class="hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				[<div class="ps"><span class="h3"><:info_ps:></span>
+				(#PS|image_reduire{1024,*})</div>]
+			</div>
+
+			<footer>
+				[<div class="notes">
+					(#NOTES)
+				</div>]
+			</footer>
+		</div>
+	</body>
+</html>
+</BOUCLE_contenu>
+#FILTRE{liens_absolus}

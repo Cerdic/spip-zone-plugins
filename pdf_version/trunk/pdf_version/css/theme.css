@@ -1,0 +1,33 @@
+body {padding: 0 0.5em;}
+.page {margin:0 auto;padding:0;width: 100%;}
+
+.page header {margin-bottom: 1.5em;border-bottom: 2px solid #5c3566;margin-bottom: 1.5em;overflow: hidden;}
+.page header .nom_site_spip {text-align: center;padding: 0.5em 0;background: #F1F1E9;}
+
+
+.page header .surtitre {margin-bottom: 0.25em;}
+
+.page header .titre { font-weight: normal;color: #5c3566;}
+.page header .titre .spip_logos { float: right;margin-left: 1em;margin-bottom: 1em;}
+
+.page header .titre + .soustitre {margin-top: -1em;}
+.page header .soustitre {font-weight: normal;}
+
+.main .chapo {font-weight: bold;}
+
+.main .hyperlien {background: #F1F1E9; padding: 0.75em;}
+.main .ps {background: #F1F1E9; padding: 0.75em;}
+
+.page footer {}
+.page footer .notes { margin-top: 4.5em;width: 80%; font-size: 0.9em;padding-top: 1.5em;line-height: 1.25em;}
+
+
+#header {font-size: 0.7em;}
+#header {}
+
+#footer {font-size: 0.7em;}
+#footer .copyright {font-size: 0.75em;line-height: 1.25;margin:0;}
+#footer .cartouche {border-top:1px solid #888; padding-top: 0em;margin-top: 0.5em;}
+#footer .cartouche table {border: 0;}
+#footer .cartouche table tr {border: 0;padding: 0;}
+#footer .cartouche td {font-style: italic;padding: 0;}

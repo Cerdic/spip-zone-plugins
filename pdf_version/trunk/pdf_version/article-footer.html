@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js">
+	<head>
+		#INCLURE{fond=pdf_version/inclure/head}
+		<script>
+		  function subst_vars() {
+		    var vars={};
+		    var x=window.location.search.substring(1).split('&');
+		    for (var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+		    var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+		    for (var i in x) {
+		      var y = document.getElementsByClassName('var_' + x[i]);
+		      for (var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+		    }
+		  }
+	  </script>
+	</head>
+	<body onload="subst_vars();">
+		<div id="footer">
+			<div class="cartouche">
+				<table width="100%" class="cartouche" cellpadding="0" cellspacing="0">
+					<tr>
+						<td style="text-align: left">#NOM_SITE_SPIP</td>
+						<td style="text-align: center">
+							<BOUCLE_art(ARTICLES){id_article}>[(#TITRE|couper{80})]</BOUCLE_art>
+						</td>
+						<td style="text-align: right">Page <span class="var_page"></span>/<span class="var_topage"></span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
+#FILTRE{liens_absolus}
