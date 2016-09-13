@@ -1,9 +1,9 @@
 <paquet
 	prefix="bigbrother"
 	categorie="statistique"
-	version="0.3.8"
+	version="0.3.9"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/bigbrother.png"
 	schema="0.2"
 	documentation="http://contrib.spip.net/Plugin-Big-Brother"
