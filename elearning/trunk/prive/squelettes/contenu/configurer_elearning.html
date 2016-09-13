@@ -1,0 +1,52 @@
+
+<h1><:elearning:configuration_titre:></h1>
+<p><:elearning:configuration_description:></p>
+
+#FORMULAIRE_CONFIGURER_ELEARNING
+
+<BOUCLE_modules(RUBRIQUES){tous}{id_parent=#CONFIG{elearning/rubrique_elearning,10000}}{par num titre}>
+<h2>#TITRE</h2>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_ELEARNING_MODULE{#ID_RUBRIQUE}
+</div>
+</BOUCLE_modules>
+<p class="explication"><:elearning:pas_de_modules:></p>
+<//B_modules>
+
+<script type="text/javascript">
+	function elearning_champ_score(){
+		$('select[name^="modules"]')
+			.each(function(){
+				if (!$(this).val() || $(this).val() == 0) {
+					$(this)
+						.siblings('input[name^="modules"]')
+							.val(0)
+							.attr('disabled', 'disabled');
+				}
+				else {
+					$(this)
+						.siblings('input[name^="modules"]')
+							.removeAttr('disabled');
+				}
+			})
+			.change(function(){
+				if (!$(this).val() || $(this).val() == 0) {
+					$(this)
+						.siblings('input[name^="modules"]')
+							.val(0)
+							.attr('disabled', 'disabled');
+				}
+				else {
+					$(this)
+						.siblings('input[name^="modules"]')
+							.removeAttr('disabled');
+				}
+			});
+	
+	}
+	
+	$(function(){
+		elearning_champ_score();
+		onAjaxLoad(elearning_champ_score);
+	});
+</script>
