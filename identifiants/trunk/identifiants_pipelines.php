@@ -238,7 +238,8 @@ function identifiants_formulaire_traiter($flux) {
 		and in_array($table_objet_sql, $objets)
 		and autoriser('modifier', 'identifiants')
 	) {
-
+		if (!function_exists('maj_identifiant_objet')) 
+			include_spip('identifiants_fonctions');
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
 
 	}
@@ -273,7 +274,8 @@ function identifiants_post_insertion($flux) {
 		and in_array($table_objet, $objets)
 		and autoriser('modifier', 'identifiants')
 	) {
-
+		if (!function_exists('maj_identifiant_objet')) 
+			include_spip('identifiants_fonctions');
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
 
 	}
