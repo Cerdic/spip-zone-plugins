@@ -1,19 +1,19 @@
 <paquet
 	prefix="bigbrother"
 	categorie="statistique"
-	version="0.3.9"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/bigbrother.png"
 	schema="0.2"
 	documentation="http://contrib.spip.net/Plugin-Big-Brother"
 >
-
 	<nom>Big Brother</nom>
 	<!-- Ce plugin permet de stocker en base de donnée la réalisation d'actions prédéfinies -->
 
-	<auteur>RastaPopoulos</auteur>
-
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="bigbrother_journaliser" action="" />
