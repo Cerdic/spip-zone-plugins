@@ -164,6 +164,9 @@ function pages_formulaire_verifier($flux) {
 		}
 
 		if ($erreur) {
+			if (!isset($flux['data']['champ_page'])) {
+				$flux['data']['champ_page'] = '';
+			}
 			$flux['data']['champ_page'] .= $erreur;
 		}
 	}
