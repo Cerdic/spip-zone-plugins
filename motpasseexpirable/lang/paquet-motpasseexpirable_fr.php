@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'motpasseexpirable_slogan' => 'Mettre à jour les mots de passe régulièrement',
 );
 
-?>

@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Mots de passe expirables
  *
  * @plugin     Mots de passe expirables
- * @copyright  2013
+ * @copyright  2016
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Motpasseexpirable\Installation
@@ -47,4 +47,3 @@ function motpasseexpirable_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>

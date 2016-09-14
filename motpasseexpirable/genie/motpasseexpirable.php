@@ -3,7 +3,7 @@
  * Déclaration des tâches du génie
  *
  * @plugin     Mots de passe expirables
- * @copyright  2013
+ * @copyright  2016
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Motpasseexpirable\Genie
@@ -55,4 +55,3 @@ function genie_motpasseexpirable_dist($t){
   return 1;
 }
 
-?>
