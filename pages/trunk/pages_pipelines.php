@@ -158,7 +158,8 @@ function pages_formulaire_verifier($flux) {
 		} elseif (!preg_match('/^[a-z0-9_]+$/', $page)) {
 			// format : charactères alphanumériques en minuscules ou "_"
 			 $erreur = _T('pages:erreur_champ_page_format');
-		} elseif ($x = sql_countsel('spip_articles', array(
+		// doublon ?
+		} elseif (sql_countsel('spip_articles', array(
 				'page=' . sql_quote($page),
 				'id_article != ' . intval($id_page),
 				'lang = ' . sql_quote($lang),
