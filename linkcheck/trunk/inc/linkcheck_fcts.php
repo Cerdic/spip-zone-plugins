@@ -284,6 +284,7 @@ function linkcheck_get_headers($url) {
  */
 function linkcheck_tester_lien_interne($url) {
 	include_spip('inc/lien');
+	include_spip('base/objets');
 	include_spip('inc/linkcheck_vars');
 	$ret = array();
 	$tabStatus = linkcheck_etats_liens();
@@ -298,6 +299,12 @@ function linkcheck_tester_lien_interne($url) {
 	if (count($rac) && !empty($rac[0]) && !empty($rac[2])) {
 		$type_objet = $rac[0];
 		$id_objet = $rac[2];
+		$objet = objet_type(table_objet($type_objet));
+		if (objet_test_si_publie($objet, $id_objet)) {
+			$ret['etat'] = 'ok';
+			$ret['code'] = 200;
+			return $ret;
+		}
 		$table_sql = table_objet_sql($type_objet);
 		$nom_champ_id = id_table_objet($type_objet);
 		$statut_objet = sql_getfetsel('statut', $table_sql, $nom_champ_id.'='.$id_objet);
