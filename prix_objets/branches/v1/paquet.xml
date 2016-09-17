@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="1.6.9"
+	version="1.7.0"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo=""
@@ -19,7 +19,7 @@
 	<necessite nom="prix" compatibilite="[0.1.8;]" />
 
 	<utilise nom="shop" compatibilite="[1.2.0;]" />
-	
+
 	<pipeline nom="autoriser" inclure="prix_objets_autorisations.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/prix_objets.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets.php" />

@@ -163,7 +163,7 @@ function prix_defaut($id_objet, $objet = 'article') {
 	
 	$req = sql_select('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
 	
-	while ( $row = sql_fetch($req) ) {
+	while ($row = sql_fetch($req)) {
 		
 		$prix = $row['prix'] . ' ' . traduire_devise($row['code_devise']);
 		
@@ -179,41 +179,46 @@ function prix_defaut($id_objet, $objet = 'article') {
 	return $defaut;
 }
 function devise_defaut_prix($prix = '', $traduire = true) {
-	if ($_COOKIE['spip_devise'])
+	if ($_COOKIE['spip_devise']) {
 		$devise_defaut = $_COOKIE['spip_devise'];
-	elseif (lire_config('prix_objets/devise_default'))
-		$devise_defaut = lire_config('prix_objets/devise_default');
-	else
-		$devise_defaut = 'EUR';
+	}
+	else {
+		$devise_defaut = $devise_defaut = prix_objets_devise_defaut();
+		;
+	}
 	$devise_defaut = traduire_devise($devise_defaut);
+	
 	if ($prix)
 		$devise_defaut = $prix . ' ' . $devise_defaut;
 	
 	return $devise_defaut;
 }
-function devise_defaut($id_objet, $objet = 'article') {
+function devise_defaut_objet($id_objet, $objet = 'article') {
 	include_spip('inc/config');
 	$config = lire_config('prix_objets');
 	
-	if (! $devise_defaut = $_COOKIE['geo_devise'])
+	if (! $devise_defaut = $_COOKIE['devise_selectionnee']) {
 		$devise_defaut = $config['devise_default'];
-	else
-		$devise_defaut = 'EUR';
+	}
+	else {
+		$devise_defaut = prix_objets_devise_defaut($config);
+	}
 	
 	$req = sql_select('code_devise,prix', 'spip_prix_objets', 'id_objet=' . $id_objet . ' AND objet=' . sql_quote($objet));
 	
-	while ( $row = sql_fetch($req) ) {
-		
+	while ($row = sql_fetch($req)) {
 		$prix = $row['prix'] . ' ' . traduire_devise($row['code_devise']);
-		
-		if ($row['code_devise'] == $devise_defaut)
+		if ($row['code_devise'] == $devise_defaut) {
 			$defaut = $row['code_devise'];
+		}
 	}
 	
-	if ($defaut)
+	if ($defaut) {
 		$defaut = $defaut;
-	else
+	}
+	else {
 		$defaut = $prix;
+	}
 	
 	return $defaut;
 }
@@ -236,15 +241,18 @@ function rubrique_prix($id = '', $objet = 'article', $sousrubriques = false) {
 		
 		if (! $sousrubriques) {
 			$rubriques = $id_parent;
-		} else
+		}
+		else
 			$rubriques = array ();
 		
 		$rubriques = rubriques_enfant($id_parent, $rubriques);
 		if ($id) {
 			$retour = sql_getfetsel('id_' . $objet, 'spip_' . $objet . 's', 'id_' . $objet . '=' . $id . ' AND id_rubrique IN (' . implode(',', $rubriques) . ')');
-		} else
+		}
+		else
 			$retour = $rubriques;
-	} else
+	}
+	else
 		return false;
 	return $retour;
 }
@@ -257,7 +265,7 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
 		$sql = sql_select('id_rubrique', 'spip_rubriques', 'id_parent IN (' . $id_parent . ')');
 	
 	$id_p = array ();
-	while ( $row = sql_fetch($sql) ) {
+	while ($row = sql_fetch($sql)) {
 		$id_p[] = $row['id_rubrique'];
 		$rubriques[] = $row['id_rubrique'];
 	}
@@ -271,24 +279,22 @@ function rubriques_enfant($id_parent, $rubriques = array()) {
 function filtres_prix_formater($prix) {
 	include_spip('inc/config');
 	include_spip('inc/cookie');
+	
 	$config = lire_config('prix_objets');
 	$devises = isset($config['devises']) ? $config['devises'] : array ();
 	
-	// Si il y a un cookie 'geo_devise' et qu'il figure parmis les devises disponibles on le prend
-	if (isset($_COOKIE['geo_devise']) and in_array($_COOKIE['geo_devise'], $devises))
-		$devise = $_COOKIE['geo_devise'];
-		// Sinon on regarde si il ya une devise defaut valable
-	elseif ($config['devise_default'] and in_array($config['devise_default'], $devises))
-		$devise = $config['devise_default'];
-		// Sinon on prend la première des devises choisies
-	elseif (isset($devises[0]))
-		$devise = $devises[0];
-		// Sinon on met l'Euro
-	else
-		$devise = 'EUR';
-		
-		// On met le cookie
-	spip_setcookie('geo_devise', $devise, time() + 3660 * 24 * 365, '/');
+	// Si il y a un cookie 'devise_selectionnee' et qu'il figure parmis les devises disponibles on le prend
+	if (isset($_COOKIE['devise_selectionnee']) and in_array($_COOKIE['devise_selectionnee'], $devises)) {
+		$devise = $_COOKIE['devise_selectionnee'];
+		$GLOBALS['devise_defaut'] = $devise;
+	}
+	// Sinon on regarde si il ya une devise defaut valable
+	else {
+		$devise = prix_objets_devise_defaut($config);
+	}
+	
+	// On met le cookie
+	spip_setcookie('devise_selectionnee', $devise, time() + 3660 * 24 * 365, '/');
 	
 	// On détermine la langue du contexte
 	if (isset($_COOKIE['spip_lang']))
@@ -300,11 +306,39 @@ function filtres_prix_formater($prix) {
 	if (function_exists('numfmt_create')) {
 		$fmt = numfmt_create($lang, NumberFormatter::CURRENCY);
 		$prix = numfmt_format_currency($fmt, $prix, $devise);
-	} 	// Sino on formate à la française
+	} // Sino on formate à la française
 	else
 		$prix = $prix . '&nbsp;' . traduire_devise($devise);
 	
 	return $prix;
 }
 
-?>
+/**
+ * Détermine la devise par défaut
+ *
+ * @param array $config
+ *        	Les donnes de configuration de prix_objets
+ * @return string Code de la devise
+ */
+function prix_objets_devise_defaut($config = '') {
+
+		if (! $config) {
+			include_spip('inc/config');
+			$config = lire_config('prix_objets');
+		}
+		$devises = isset($config['devises']) ? $config['devises'] : array ();
+		// Sinon on regarde si il ya une devise defaut valable
+		if ($config['devise_default']) {
+			$devise_defaut = $config['devise_default'];
+		}
+		// Sinon on prend la première des devises choisies
+		elseif (isset($devises[0])) {
+			$devise_defaut = $devises[0];
+		}
+		// Sinon on met l'Euro
+		else {
+			$devise_defaut = 'EUR';
+		}
+
+	return $devise_defaut;
+}

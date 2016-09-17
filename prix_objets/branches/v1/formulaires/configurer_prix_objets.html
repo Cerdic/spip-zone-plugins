@@ -19,7 +19,7 @@
         #SET{devise_default,#VALEUR}
 </BOUCLE_defaut>
 
-[(#VAL{geo_devise}|spip_setcookie{#GET{devise_default},#VAL|time|plus{3660*24*365},/}|oui)]
+[(#VAL{devise_selectionnee}|spip_setcookie{#GET{devise_default},#VAL|time|plus{3660*24*365},/}|oui)]
 
 [(#REM)Les objets spip disponibles]
 <BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>

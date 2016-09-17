@@ -12,5 +12,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'prix_objets_nom' => 'Prix Objets',
 	'prix_objets_slogan' => 'Attribuer des prix à vos objets'
 );
-
-?>

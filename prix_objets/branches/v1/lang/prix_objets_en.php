@@ -52,5 +52,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_prix_objets' => 'Price',
 	'ttc' => 'inc VAT'
 );
-
-?>
