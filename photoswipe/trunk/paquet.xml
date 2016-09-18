@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.3.2"
 	etat="test"
- 	compatibilite="[3.0.0;3.1.*]"
+ 	compatibilite="[2.0.0;3.1.*]"
 	logo="photoswipe-128.png"
 	documentation="https://contrib.spip.net/4825"
 >	
