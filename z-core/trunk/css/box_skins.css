@@ -24,12 +24,6 @@
 .basic .inner .hd {}
 .basic b{}
 
-/* ----- basic (extends box) ----- */
-.basic {overflow: hidden;}
-.basic .inner {padding-bottom: 1px;margin-bottom: -1px;}
-.basic .inner .hd {}
-.basic b{}
-
 /* ----- error, success, notice (extends box) ----- */
 .error .inner,.success .inner,.notice .inner{border:2px solid;font-weight: normal;color:#333;padding-left:40px;min-height:24px;background-repeat:no-repeat;background-position: 5px 5px;}
 .success .inner{color: #264409;border-color: #C6D880;background-color:#E6EFC2;background-image:url(img/box/message_ok-24.png);}
