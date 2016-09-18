@@ -4,8 +4,8 @@
 	<icon>images/switchcase-32.png</icon>
 	<auteur>JLuc</auteur>
 	<licence>GPL</licence>
-	<version>0.2.0</version>
-	<etat>test</etat>
+	<version>0.2.1</version>
+	<etat>stable</etat>
 	<description>
 	Définition des balises #SWITCH, #CASE et #DEFAULT pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
 	</description>
