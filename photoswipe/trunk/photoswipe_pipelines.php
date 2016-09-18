@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function photoswipe_insert_head_css($flux) {
 
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("lib/photoswipe/photoswipe.css")."'>\n";
@@ -66,4 +68,4 @@ function filtre_photoswipe_preparer($texte) {
 	return $texte;
 }
 
-?>
+
