@@ -1,7 +1,7 @@
 <paquet
 	prefix="switchcase"
 	categorie="outil"
-	version="0.2.1"
+	version="0.3.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="images/switchcase-32.png"
@@ -9,7 +9,7 @@
 >
 
 	<nom>Balises #SWITCH #CASE</nom>
-	<!-- Définition de balises #SWITCH, #CASE et #DEFAULT pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
+	<!-- Définition de balises #SWITCH, #CASE et et #CASE_DEFAULT pour les créateurs de squelette, pour comparer une valeur à plusieurs autres.
  -->
 
 	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>

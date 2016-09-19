@@ -38,11 +38,9 @@ function balise_CASE_dist($p) {
 	return $p;
 }
 
-if (!function_exists(balise_DEFAULT_dist)) {
-	function balise_DEFAULT_dist($p) {
-		$p->code = "(\$Pile['vars']['_switch_matched_'] ? '' : ' ')";
-	$p->interdire_script = false;
-	return $p;
-}
+function balise_CASE_DEFAULT_dist($p) {
+	$p->code = "(\$Pile['vars']['_switch_matched_'] ? '' : ' ')";
+$p->interdire_script = false;
+return $p;
 
 }
