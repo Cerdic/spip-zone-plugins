@@ -28,7 +28,7 @@
 		</td>]
 		[(#AUTORISER{modifier,numero,#ID_NUMERO}|et{#ENV{boutons_actions}}|oui)
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});return false;" href="[(#URL_ECRIRE{numero_edit,id_numero=#ID_NUMERO})]" title="<:coordonnees:modifier_numero:>">
 			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
 			</a>
 			[(#AUTORISER{associernumero,#ID_NUMERO}|oui)

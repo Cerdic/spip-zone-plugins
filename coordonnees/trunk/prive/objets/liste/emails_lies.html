@@ -10,10 +10,7 @@
 		<BOUCLE_email(EMAILS){id_email}>
 		<td class='titre principale'>
 			<div>
-				[<a href="[(#URL_ECRIRE{email_edit,id_email=#ID_EMAIL})]">
-					<span><small><:info_numero_abbreviation:>(#ID_EMAIL)</small></span>
-				</a>]
-				[ - <a href="[(#INFO_URL{email,#ID_EMAIL})]">
+				[<a href="[(#INFO_URL{email,#ID_EMAIL})]" title="<:info_numero_abbreviation:> #ID_NUMERO">
 					<span class="#EDIT{titre} titre">(#TITRE)</span>
 				</a>]
 			</div>
@@ -29,7 +26,7 @@
 		</td>]
 		[(#AUTORISER{modifier,email,#ID_EMAIL}|et{#ENV{boutons_actions}}|oui)
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:coordonnees:modifier_email:>">
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});return false;" href="[(#URL_ECRIRE{email_edit,id_email=#ID_EMAIL})]" title="<:coordonnees:modifier_email:>">
 			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
 			</a>
 			[(#AUTORISER{associeremail,#ID_EMAIL}|oui)

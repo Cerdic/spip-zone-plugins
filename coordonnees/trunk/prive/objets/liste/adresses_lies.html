@@ -10,10 +10,7 @@
 		<BOUCLE_adresse(ADRESSES){id_adresse}>
 		<td class='titre principale'>
 			<div>
-				[<a href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]">
-					<span><small><:info_numero_abbreviation:>(#ID_ADRESSE)</small></span>
-				</a>]
-				[ - <a href="[(#INFO_URL{adresse,#ID_ADRESSE})]">
+				[<a href="[(#INFO_URL{adresse,#ID_ADRESSE})]" title="<:info_numero_abbreviation:> #ID_ADRESSE">
 					<span class="#EDIT{titre} titre">(#TITRE)</span>
 				</a>]
 			</div>
@@ -34,7 +31,7 @@
 		[<td class="extra">(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})</td>]
 		[(#AUTORISER{modifier,adresse,#ID_ADRESSE}|et{#ENV{boutons_actions}}|oui)
 		<td class='action'>
-			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'adresse', id_coordonnee:'[(#ID_ADRESSE)]'}});" href="#coordonnees" title="<:coordonnees:modifier_adresse:>">
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'adresse', id_coordonnee:'[(#ID_ADRESSE)]'}});return false;" href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]" title="<:coordonnees:modifier_adresse:>">
 			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
 			</a>
 			[(#AUTORISER{associeradresse,#ID_ADRESSE}|oui)
