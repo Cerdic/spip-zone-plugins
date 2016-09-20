@@ -2,12 +2,8 @@
 
 [(#SET{ip, [(#REM|recuperer_ip_local)]})]
 
-<h2><:geoip:titre_version{version=1}:></h2>
+<h2><:geoip:titre_geoip:></h2>
 
 <p><:geoip:ip_code_pays{ip=#GET{ip}}:> : <strong>[(#GET{ip}|geoIP_exist)]</strong></p>
 
-<h2><:geoip:titre_version{version=2}:></h2>
-
-<p><:geoip:ip_code_pays{ip=#GET{ip}}:> : <strong>[(#GET{ip}|geoIP_exist{true})]</strong></p>
-
-<i>* Si vous avez installé la librairie depuis le module apache sur votre serveur, le résultat du test corresponds à la version 1</i>
+<i><:geoip:avertissement:></i>

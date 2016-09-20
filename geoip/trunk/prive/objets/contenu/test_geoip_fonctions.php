@@ -28,14 +28,14 @@ function recuperer_ip_local() {
 }
 
 /**
- * Récupérer le code pays par rapport à l'IP avec la version 1 ou 2
+ * Récupérer le code pays par rapport à l'IP
  *
- * @param boolean $version true/false (true pour la version 2) 
+ * @param string $ip
  * @return string
  */
-function geoIP_exist($ip, $version = false) {
+function geoIP_exist($ip) {
 
-	$resultat = geoip_code_by_addr($ip, $version);
+	$resultat = geoip_informations($ip);
 
 	return $resultat;
 }
