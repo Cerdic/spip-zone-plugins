@@ -32,6 +32,19 @@ function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abo
 				'defaut' => 'mois',
 			),
 		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'quand',
+				'label' => _T('abonnementsoffre:champ_quand_label'),
+				'cacher_option_intro' => 'oui',
+				'datas' => array(
+					'apres' => _T('abonnementsoffre:champ_quand_choix_apres'),
+					'avant' => _T('abonnementsoffre:champ_quand_choix_avant'),
+				),
+				'defaut' => 'avant',
+			),
+		),
 	);
 }
 

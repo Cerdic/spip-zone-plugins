@@ -17,13 +17,18 @@ function genie_abonnements_verifier_notifications_dist($time){
 	){
 		// Pour chaque notification on va chercher les abonnés dont c'est le moment
 		foreach ($notifications as $notification){
+			
+			//avant ou après la date de fin de l'abonnement?
+			if($relance['quand'] == "apres") $operateur = " - "; 
+			else $operateur = " + ";
+			
 			// De combien doit-on modifier la date
 			switch ($notification['periode']){
 				case 'jours':
-					$ajout = " + ${notification['duree']} days";
+					$ajout = " $operateur ${notification['duree']} days";
 					break;
 				case 'mois':
-					$ajout = " + ${notification['duree']} months";
+					$ajout = " $operateur ${notification['duree']} months";
 					break;
 				default:
 					$ajout ='';
