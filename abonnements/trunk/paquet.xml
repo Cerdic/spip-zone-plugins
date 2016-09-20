@@ -1,8 +1,8 @@
 <paquet
 	prefix="abonnements"
 	categorie="auteur"
-	version="3.1.3"
-	schema="2.2.2"
+	version="3.1.4"
+	schema="2.2.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/abonnements-64.png"

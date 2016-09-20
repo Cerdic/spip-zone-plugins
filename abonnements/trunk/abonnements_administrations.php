@@ -35,6 +35,11 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_update', 'spip_abonnements_offres', array('prix_ht' => 'prix')),
 		array('sql_update', 'spip_abonnements_offres', array('prix' => '0'))
 	);
+	
+	//Nettoyage
+	$maj[2.2.3] = array(
+		array('sql_alter',"TABLE spip_contacts_abonnements DROP prix"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
