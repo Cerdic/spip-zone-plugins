@@ -139,6 +139,7 @@ function abonnements_declarer_tables_principales($tables) {
 			'id_abonnements_offre' => 'bigint(21) DEFAULT 0 NOT NULL',
 			'duree' => 'int(11) NOT NULL DEFAULT 0',
 			'periode' => 'varchar(25) NOT NULL DEFAULT ""',
+			'quand' => 'ENUM("avant","apres") DEFAULT "avant" NOT NULL',
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_abonnements_offres_notification',
@@ -168,5 +169,3 @@ function abonnements_declarer_tables_auxiliaires($tables) {
 
 	return $tables;
 }
-
-?>
