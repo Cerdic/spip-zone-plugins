@@ -7,7 +7,7 @@ function targetLinks() {
 
 	jQuery("area[href*='://']").add("a[href*='://']").filter(":not([href^='"+links_site+"']):not([href^='javascript:']):not([href^='mailto:'])")
 	  .attr('target',where)
-		.attr('rel','external')
+		.attr('rel','external noopener noreferrer')
 		.addClass('external')
 		.each(function(){
 			if(jQuery(this).text()){
