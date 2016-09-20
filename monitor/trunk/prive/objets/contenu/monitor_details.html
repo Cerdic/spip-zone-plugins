@@ -1,0 +1,44 @@
+<B_monitor_active>
+<BOUCLE_monitor_active(MONITOR){id_syndic}{si type=={ping}}{si type=={poids}}{statut="oui"}>
+    [(#SET{activer_action, #STATUT})]
+</BOUCLE_monitor_active>
+
+<BOUCLE_si_activer(CONDITION){si #CONFIG{monitor/activer_monitor}|=={oui}}{si #GET{activer_action}|=={oui}}>
+
+<B_liste_monitor>
+<div class="liste-objets sites syndic">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_site,info_nb_sites}})</strong></caption>]
+    <thead>
+        <tr class='first_row'>
+            <th class='statut' scope='col'><span title="<:lien_trier_statut|attribut_html:>">#</span></th>
+            <th class='url_site' scope='col'><:monitor:form_url_site:></th>
+            <th class='date_ping' scope='col'><:monitor:form_date_ping:></th>
+            <th class='latence' scope='col'>[(#ENV*{type}|=={ping}|?{<:monitor:form_ping:>,<:monitor:form_poids:>})]</th>
+            <th class='id' scope='col'><:info_numero_abbreviation:></th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_liste_monitor(MONITOR){type=#ENV{type}}{statut="oui"}{id_syndic}>
+    <BOUCLE_site_monitor(SYNDIC){id_syndic}{statut IN prop,publie}>
+        <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+            <td class='statut'>[(#STATUT_LOG|puce_statut{monitor,#ID_SYNDIC})]</td>
+            <td class='url_site principale'>                
+                <a href="[(#ID_SYNDIC|generer_url_entite{site})]"
+                    title="<:info_numero_abbreviation|attribut_html:> #ID_SYNDIC">#NOM_SITE</a> [<span class='visiter'>&#91;<a href='(#URL_SITE)'><:lien_visite_site:></a>&#93;</span>]</td>
+            <td class='date_ping secondaire'>[(#MAJ|affdate_jourcourt)]</td>
+            [(#ENV*{type}|=={ping}|?{[(#SET{valeur, #VALEUR_COURANT|round{4}})],[(#SET{valeur, #VALEUR_COURANT|div{1024}|round{2}})]})]
+            <td class='latence'>[(#GET{valeur})]</td>
+            <td class='id'>
+                <a href="[(#URL_ECRIRE{site_edit,id_syndic=#ID_SYNDIC})]">#ID_SYNDIC</a></td>
+        </tr>
+    </BOUCLE_site_monitor>
+    </BOUCLE_liste_monitor>
+    </tbody>
+</table>
+</div>
+</B_liste_monitor>[
+<div class="liste-objets sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_monitor>
+
+</BOUCLE_si_activer>
