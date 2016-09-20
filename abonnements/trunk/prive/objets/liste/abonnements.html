@@ -40,7 +40,7 @@
 			<td class="id_abonnements_offre principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE}</a></td>
 			]
 			[(#ENV{masquer_auteur}|non)
-			<td class="nom principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#NOM</a></td>
+			<td class="nom principale"><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR})]">#NOM</a></td>
 			]
 			#SET{horaires, #INFO_PERIODE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}|=={heures}|?{' ',''}}
 			<td class="date date_debut secondaire">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_DEBUT|affdate_heure)], [(#DATE_DEBUT|affdate_jourcourt)]})]})]</td>
