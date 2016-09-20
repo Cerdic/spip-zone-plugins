@@ -37,8 +37,13 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	
 	//Nettoyage
-	$maj[2.2.3] = array(
+	$maj['2.2.3'] = array(
 		array('sql_alter',"TABLE spip_contacts_abonnements DROP prix"),
+	);
+	
+	// relancer des abonnements après échéance
+	$maj['2.2.4'] = array(
+		array('sql_alter',"TABLE spip_abonnements_offres_notifications ADD `quand` ENUM('avant','apres') DEFAULT 'avant' NOT NULL AFTER `periode`"),
 	);
 
 	include_spip('base/upgrade');
