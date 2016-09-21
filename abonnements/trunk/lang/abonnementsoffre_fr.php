@@ -25,13 +25,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_ht_label' => 'Prix HT',
 	'champ_prix_label' => 'Prix',
 	'champ_prix_ttc_label' => 'Prix TTC',
+	'champ_quand_choix_apres' => 'Après',
+	'champ_quand_choix_avant' => 'Avant',
+	'champ_quand_label' => 'Quand ?',
 	'champ_taxe_label' => 'Tva (%)',
 	'champ_titre_label' => 'Titre',
 	'configurer_notifications' => 'Configurer les notifications',
 	'configurer_notifications_quand' => 'Quand ?',
-	'champ_quand_label' => 'Quand ?',
-	'champ_quand_choix_apres' => 'Après',
-	'champ_quand_choix_avant' => 'Avant',
 
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',

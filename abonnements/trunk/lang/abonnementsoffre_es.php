@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_periode_nb_mois' => '@nb@ mes(es)',
 	'champ_prix_0' => 'Gratuito',
 	'champ_prix_label' => 'Precio',
+	'champ_quand_label' => '¿Cuándo?',
 	'champ_titre_label' => 'Título',
 	'configurer_notifications' => 'Configurar las notificaciones',
 	'configurer_notifications_quand' => '¿Cuándo?',
