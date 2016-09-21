@@ -84,8 +84,8 @@ function photoshow_identify(me) {
     // 2. dl/dt (modèle spip…)
     if (!a.title) {
       me
-      .parent('dt')
-      .parent('dl')
+      .parents('dt')
+      .parents('dl')
       .find('dt.spip_doc_titre, dd.spip_doc_descriptif')
       .each(function(i,e) {
         a.title += e.outerHTML; 
