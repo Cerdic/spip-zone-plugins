@@ -1,10 +1,20 @@
 <BOUCLE_doc(DOCUMENTS) {id_document=#ENV{id}} {tout}>
 [(#REM)
+
+** Pour utiliser ce modèle, supprimer -figure du nom de fichier, 
+et déplacer-le dans squelettes/modeles (créer le dossier /modeles s'il n'eexiste pas) **
+
+** Pour ceux qui utilisent le plugin multimedia : mettre un modèle doc dans son dossier squelettes 
+provoque un conflit : voir http://www.baroug.net/Plugin-multimedia-et-modele-doc
         
 	Modele pour <doc> en <figure> une balise à utiliser en html5
 
 	La largeur de la legende est egale a la largeur de l'image
 	avec un minimum de 120px
+	
+	Ce modele possède les attributs necessaires pour fonctionner avec Photoswipe
+	De plus, il supprime la logique de largeur maximale des legendes (titre et descriptif)
+	pour la rétablir si besoin (?), mettre la valeur voulue dans max{} (oui ça aussi c'est bizarre)
 
 	Dans le cas d'une simple image (mode=image), on affiche
 	le document lui-meme, sans lien de telechargement

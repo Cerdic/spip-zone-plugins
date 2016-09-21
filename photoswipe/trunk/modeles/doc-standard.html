@@ -7,59 +7,6 @@ et déplacer-le dans squelettes/modeles (créer le dossier /modeles s'il n'eexis
 ** Pour ceux qui utilisent le plugin multimedia : mettre un modèle doc dans son dossier squelettes 
 provoque un conflit : voir http://www.baroug.net/Plugin-multimedia-et-modele-doc
 
-[(#REM)
-    
-    Sinon cas "standard" :
-    
-	Modele pour <doc> en dl/dt/dd
-	cf. http://pompage.net/pompe/listesdefinitions/
-
-	La largeur de la legende est egale a la largeur de l'image
-	avec un minimum de 120px
-
-	Dans le cas d'une simple image (mode=image), on affiche
-	le document lui-meme, sans lien de telechargement
-]
-[(#MODE|=={image}|oui)
-	#SET{fichier,#URL_DOCUMENT}
-	#SET{width,#LARGEUR}
-	#SET{height,#HAUTEUR}
-	#SET{url,#ENV{lien}}
-]
-[(#MODE|=={image}|non)
-	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
-	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
-	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
-	#SET{url,#ENV{lien,#URL_DOCUMENT}}
-	#SET{vraielargeur,#LARGEUR}
-	#SET{vraiehauteur,#HAUTEUR}
-	[(#SET{urlabs,[(#GET{url}|url_absolue)]})]
-
-]
-
-[(#ENV{align}|=={center}|ou{#ENV{align}|=={''}}oui)
-[(#GET{width}|<{650}|oui) 
-[(#SET{largeurcol, justecol})]
-#SET{boxwidth, 650}
-]
-]
-[(#GET{width}|=={650}|oui) [(#SET{largeurcol, justecol})]]
-[(#GET{width}|=={890}|oui) [(#SET{largeurcol, xl})]]
-[(#GET{width}|=={810}|oui) [(#SET{largeurcol, colmargedroite})]]
-[(#GET{width}|=={730}|oui) [(#SET{largeurcol, colmargegauche})]]
-
-<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][(#ENV{align}|non) spip_documents_center][ (#ENV{class})] spip_lien_ok[ (#GET{largeurcol})]'[ style='[float:(#ENV{align}|match{left|right}); ]width:(#GET{boxwidth}|sinon{#GET{width}}|min{890}|max{120})px;']>
-<div class="limage">
-[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' class='spip_logos[(#GET{url}|oui)photoshow' data-photo='#GET{urlabs}' data-photo-w='#GET{vraielargeur}' data-photo-h='#GET{vraiehauteur}]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]
-</div>
-<figcaption>
-    [<div class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{890}|max{120})px;']>(#TITRE)</div>]
-    [<div class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{890}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
-</figcaption>
-</BOUCLE_doc>
-</figure>
-<//B_docmp3>
-
 	Modele pour <doc> en dl/dt/dd
 	cf. http://pompage.net/pompe/listesdefinitions/
 
