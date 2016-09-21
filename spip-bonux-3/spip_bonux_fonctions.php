@@ -28,8 +28,9 @@ function tag_img($img, $alt = '', $class = '') {
 	return $balise_img($img, $alt, $class);
 }
 
+define('_PREVISU_TEMPORAIRE_VALIDITE', 12);
 function previsu_verifier_cle_temporaire($cle) {
-	$validite = 12; // validite de 12h maxi
+	$validite = _PREVISU_TEMPORAIRE_VALIDITE; // validite de 12h maxi par défaut
 	$old = 0;
 
 	do {
