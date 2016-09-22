@@ -3,10 +3,11 @@
 #SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
 <B_choix>
 <ul>
-	<BOUCLE_choix(POUR){tableau #GET{valeur}}>
+	<BOUCLE_choix(POUR){tableau #GET{valeur}}{si #ENV{valeur_uniquement}|=={''}}>
 		[<li class="choix">(#GET{datas/#VALEUR})</li>]
 	</BOUCLE_choix>
 
 	[<li class="choix"><em>#ENV{choix_alternatif_label}</em> : (#GET{valeur/choix_alternatif})</li>]
 </ul>
 </B_choix>
+<BOUCLE_choixvaleur(POUR){tableau #GET{valeur}}{si #ENV{valeur_uniquement}|!={''}}{"|"}>[(#GET{datas/#VALEUR})]</BOUCLE_choixvaleur>[, (#GET{valeur/choix_alternatif})]</B_choixvaleur>
