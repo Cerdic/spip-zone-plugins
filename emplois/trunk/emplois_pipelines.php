@@ -182,6 +182,37 @@ function emplois_post_insertion($flux) {
 
 		$send = $envoyer_mail($email_to,$sujet,$message);
 	}
-
 }
+
+/**
+ * Gestion de l'ajout d'un document depuis le back-office dans les offres 
+ * - Insertion : on force le statut du document à "publie" et on copie l'id_document dans la table spip_offres
+ * - suppression : on met la valeur "0" dans la champ id_document_offre de la table spip_offres
+ *
+ * @pipeline post_edition_lien
+ * @param  string $flux Données du pipeline
+ * @return string       Données du pipeline
+**/
+function emplois_post_edition_lien($flux) {
+
+	if ($flux['args']['table_lien'] == 'spip_documents_liens' AND $flux['args']['objet'] == 'offre') {
+
+		$id_doc = $flux['args']['id_objet_source'];
+		$id_offre = $flux['args']['id_objet'];
+
+		if ($flux['args']['action'] == 'insert') {
+			// forcer le statut du document à "publié"
+			sql_updateq('spip_documents', array('statut' => 'publie'), 'id_document='.intval($id_doc));
+
+			// copier l'id_document dans la table spip_offres
+			sql_updateq('spip_offres', array('id_document_offre' => $id_doc), "id_offre =".intval($id_offre));
+		}
+
+		if ($flux['args']['action'] == 'delete') {
+			// en cas de suppression, mettre l'id_document à "0" dans la table spip_offres
+			sql_updateq('spip_offres', array('id_document_offre' => '0'), "id_offre =".intval($id_offre));
+		}
+	}
+}
+
 
