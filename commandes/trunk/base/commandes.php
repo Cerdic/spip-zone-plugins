@@ -77,7 +77,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'auteur' => array('nom' => 1),
 		'commandes_detail' => array('descriptif' => 4)
 	    ),
-	    'tables_jointures' => array(),
+	    'tables_jointures' => array('spip_commandes_liens'),
 	    'statut_textes_instituer' => array(
 		'encours' => 'commandes:statut_encours',
 		'attente' => 'commandes:statut_attente',
