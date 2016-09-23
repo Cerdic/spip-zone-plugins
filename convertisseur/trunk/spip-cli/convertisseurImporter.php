@@ -5,10 +5,7 @@
 Importer en masse des fichiers txt dans spip_articles.
 Les articles sont ajoutés avec leurs info sauf id_article dans des rubriques créées si besoin. 
 Les documents <docxxx> sont gérés
-
-Pour ajouter des champs à la rache :
-// sql_query("alter table spip_articles add signature MEDIUMTEXT NOT NULL DEFAULT ''");
-
+Les raccourcis de liens [xxx->12345] sont gérés
 
 */
 
@@ -107,7 +104,7 @@ class fichiersImporter extends Command {
 					$output->writeln("MAJ BDD : alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
 					sql_query("alter table spip_articles add fichier_source MEDIUMTEXT NOT NULL DEFAULT ''");
 				}
-				// on prends tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
+				// on prend tous les fichiers txt dans la source, sauf si metadata.txt a la fin.
 				$fichiers = preg_files($source . "/", "(?:(?<!\.metadata\.)txt$)", 100000);
 
 				// start and displays the progress bar
@@ -301,6 +298,7 @@ class fichiersImporter extends Command {
 									$id_document = sql_insertq("spip_documents", $document_a_inserer);
    									$progress->setMessage("Création du document " . $d['titre'] . " (" . $d['fichier'] .")", 'docs');
 								}
+								
 								if($id_document AND !sql_getfetsel("id_document", "spip_documents_liens", "id_document=$id_document and id_objet=$id_article and objet='article'"))
 									sql_insertq("spip_documents_liens", array(
 	    									"id_document" => $id_document,
@@ -351,24 +349,30 @@ class fichiersImporter extends Command {
 								if(preg_match("/^[0-9]+$/", $l[4])){	
 									// trouver l'article dont l'id_source est $l[4] dans le secteur
 									if($id_dest = sql_getfetsel("id_article", "spip_articles", "id_source=" . trim($l[4]) . " and id_secteur=$id_parent")){
-										$lien = escapeshellarg("$id_article : " . $l[0] . " => " . str_replace($l[4], $id_dest, $l[0]));
+										$lien_actuel = $l[0] ;
+										$lien_corrige = str_replace($l[4], $id_dest, $l[0]) ;
+										
+										$lien = escapeshellarg("$id_article : $lien_actuel => $lien_corrige");
 										passthru("echo $lien >> liens_corriges.txt");
+										// maj le texte
+										$texte_corrige = str_replace($lien_actuel, $lien_corrige, $texte);
+										sql_update("spip_articles", array("texte" => sql_quote($texte_corrige)), "id_article=$id_article");
+										// attention s'il y a plusieurs liens
+										$texte = $texte_corrige ;
 									}else{
 										$commande = escapeshellarg("Dans $id_article (source $id_source)" . $l[0] . " : lien vers " . $l[4] . " non trouvé") ;
 										passthru("echo $commande >> liens_non_corriges.txt");
 									}	
 									
 								}
-							}	
-						}		
-												
+							}
+						}
 					}
 				}
-
+				
 				$output->writeln("");
 				if(is_file("liens_a_corriger.txt"))
 					unlink("liens_a_corriger.txt");
-
 			}
 		}
 		else{
