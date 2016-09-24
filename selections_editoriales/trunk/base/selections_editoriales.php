@@ -60,8 +60,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
 		'modeles' => array('selection_edito'),
-		'champs_editables'  => array('titre', 'descriptif', 'identifiant', 'limite'),
-		'champs_versionnes' => array('titre', 'descriptif', 'identifiant', 'limite'),
+		'champs_editables'  => array('titre', 'descriptif', 'identifiant', 'css', 'limite'),
+		'champs_versionnes' => array('titre', 'descriptif', 'identifiant', 'css', 'limite'),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 4, "identifiant" => 8),
 		'tables_jointures'  => array('spip_selections_liens'),
 		
