@@ -10,13 +10,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_prix_ht' => 'Preço HT',
-	'label_prix_ttc' => 'Preço TTC',
+	'label_prix_ht' => 'Preço sem impostos',
+	'label_prix_ttc' => 'Preço com todos os impostos',
 	'label_taxes' => 'Taxas',
-	'label_total_ht' => 'Total HT',
-	'label_total_ttc' => 'Total TTC',
+	'label_total_ht' => 'Total sem impostos',
+	'label_total_ttc' => 'Total com todos os impostos',
 
 	// P
-	'prix_ht' => '@prix@ HT',
-	'prix_ttc' => '@prix@ TTC'
+	'prix_ht' => '@prix@ sem impostos',
+	'prix_ttc' => '@prix@ com todos os impostos',
+
+	// T
+	'titre_prix' => 'Preço'
 );
