@@ -45,6 +45,11 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 		array('selections_editoriales_maj_1_5_0'),
 	);
 	
+	// Ajouter un champ "css" sur les selections
+	$maj['1.5.1'] = array(
+		array('maj_tables', array('spip_selections')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

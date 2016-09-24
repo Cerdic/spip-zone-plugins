@@ -49,6 +49,7 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 			"id_selection"       => "bigint(21) NOT NULL",
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
+			'css' 				 => 'varchar(255) not null default ""',
 			"identifiant"        => "varchar(255) NOT NULL DEFAULT ''",
 			"limite"             => "int(6) NOT NULL DEFAULT 0",
 			"maj"                => "TIMESTAMP"
