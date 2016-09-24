@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_label_apparence_permalien_diese' => 'Cerquilha (#)',
 	'cfg_label_apparence_permalien_picto' => 'Ícone',
 	'cfg_label_email_obligatoire' => 'Tornar informação de e-mail obrigatória',
+	'cfg_label_nom_obligatoire' => 'Tornar obrigatório informar um nome ou apelido',
 	'cfg_label_presentation_fil' => 'Apresentação do tópico de discussão',
 	'cfg_label_presentation_fil_liste' => 'Lista de comentários (linear)',
 	'cfg_label_presentation_fil_thread' => 'Comentários agrupados (em tópicos)',
