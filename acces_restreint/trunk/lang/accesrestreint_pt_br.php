@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_zone' => 'Nenhuma área',
 	'auteur' => '@nb@ autor',
 	'auteurs' => '@nb@ autores',
+	'auteurs_tous' => 'Todas as pessoas conectadas',
 
 	// B
 	'bouton_configurer_acces' => 'Configuração dos acessos .htaccess',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_creer_htaccess' => 'Acesso aos documentos anexados pelo seu URL',
 	'label_creer_htaccess_non' => 'autorizar a leitura',
 	'label_creer_htaccess_oui' => 'restringir a leitura',
+	'label_droits_acces' => 'Direitos de acesso',
 	'label_titre_zone' => 'Título',
 
 	// M
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'ÁREA NÚMERO:',
+	'zone_restreinte_autoriser_si_connexion_label' => 'Autorizar o acesso a esta zona a qualquer pessoa conectada',
 	'zone_restreinte_espace_prive' => 'Restringir o acesso a esta área no espaço privado',
 	'zone_restreinte_publique' => 'restringir o acesso a esta área na área pública'
 );
