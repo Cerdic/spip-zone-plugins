@@ -44,7 +44,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 			"code_postal"      => "varchar(40) NOT NULL DEFAULT ''",
 			"ville"            => "tinytext NOT NULL",
 			"region"           => "varchar(40) NOT NULL DEFAULT ''",
-			"province"         => "varchar(40) NOT NULL DEFAULT ''",
+			"etat_federal"     => "varchar(40) NOT NULL DEFAULT ''",
 			"pays"             => "varchar(3) NOT NULL DEFAULT ''",
 			"maj"              => "TIMESTAMP"
 		),
@@ -54,9 +54,9 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 			"KEY zip"          => "region, code_postal"
 		),
 		'titre' => "titre AS titre, '' AS lang",
-		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'province', 'pays'),
+		'champs_editables'       => array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'etat_federal', 'pays'),
 		'champs_versionnes'      => array(),
-		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'region' => 3, 'province' => 3, 'ville' => 3),
+		'rechercher_champs'      => array('pays' => 8, 'titre' => 5, 'voie' => 3, 'region' => 3, 'etat_federal' => 3, 'ville' => 3),
 		'tables_jointures'       => array('spip_adresses_liens'),
 		/* Les textes standard */
 		'texte_modifier'         => 'coordonnees:modifier_adresse',

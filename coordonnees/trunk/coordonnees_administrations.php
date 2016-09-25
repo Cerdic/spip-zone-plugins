@@ -110,7 +110,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_emails_liens ADD INDEX (objet)'),
 	);
 	
-	//ajout du champ province
+	//ajout du champ etat_federal
 	$maj['1.8.4'] = array(
 		array('maj_tables', array('spip_adresses')),
 	);
