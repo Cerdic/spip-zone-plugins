@@ -332,6 +332,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	);
 
 	// S'il n'y a pas d'adresse principale, on la crée
+	set_request('titre', _request('nom'));
 	if (!$id_adresse){
 		$id_adresse = 'oui';
 		set_request('objet', 'auteur');
