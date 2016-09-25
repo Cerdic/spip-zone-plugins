@@ -10,13 +10,14 @@
 		<BOUCLE_adresse(ADRESSES){id_adresse}>
 		<td class='titre principale'>
 			<div>
+				
 				[<a href="[(#INFO_URL{adresse,#ID_ADRESSE})]" title="<:info_numero_abbreviation:> #ID_ADRESSE">
-					<span class="#EDIT{titre} titre">(#TITRE)</span>
+					[(#TYPE|logo_type_adresse) ](#TYPE|coordonnees_lister_types_adresses)
 				</a>]
 			</div>
-			<div>[(#TYPE|logo_type_adresse) ][(#TYPE|coordonnees_lister_types_adresses)]</div>
 		</td>
 		<td class='adresse'>
+		[<div class="#EDIT{titre} titre">(#TITRE)</div>]
 			[<div class="#EDIT{voie} voie">(#VOIE)</div>]
 			[<div class="#EDIT{complement} complement">(#COMPLEMENT)</div>]
 			[<div class="#EDIT{boite_postale} boite_postale">(#BOITE_POSTALE)</div>]
