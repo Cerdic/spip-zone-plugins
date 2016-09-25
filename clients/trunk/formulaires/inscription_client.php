@@ -93,6 +93,18 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		);
 	}
 	
+	$etat_federal=array();
+	if (in_array("etat_federal", $conf)) {
+		$etat_federal=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'etat_federal',
+				'label' => _T('coordonnees:label_etat_federal'),
+				'obligatoire' => in_array("obli_etat_federal", $conf) ? 'oui' : '',
+			)
+		);
+	}
+	
 	$pays=array();
 	if (in_array("pays", $conf)) {
 		$pays=array(
@@ -163,6 +175,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'obligatoire' => 'oui'
 			)
 		),
+		$etat_federal,
 		$pays
 	);
 }

@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Plugin Clients
+ *
+ *
+ */
+ 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
@@ -39,6 +44,8 @@ return array(
 									'fax' => _T('clients:label_fax'),
 									'obli_fax' => _T('clients:label_obligatoire'),
 									'complement' => _T('coordonnees:label_complement'),
+									'etat_federal' => _T('coordonnees:label_etat_federal'),
+									'obli_etat_federal' => _T('clients:label_obligatoire'),
 									'pays' => _T('coordonnees:label_pays'),
 									'obli_pays' => _T('clients:label_obligatoire')
 									)
@@ -79,5 +86,3 @@ function formulaires_configurer_clients_charger_dist($retour=''){
 
 	return $contexte;
 }
-
-?>
