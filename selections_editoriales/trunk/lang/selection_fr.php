@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_selection' => 'Ajouter cette sélection éditoriale',
 
 	// C
-	'champ_descriptif_label' => 'Descriptif',
-	'champ_css_explication'	=> 'Classes css ajoutées a cette sélection.',
+	'champ_css_explication' => 'Classes css ajoutées a cette sélection.',
 	'champ_css_label' => 'Css',
+	'champ_descriptif_label' => 'Descriptif',
 	'champ_identifiant_explication' => 'Un identifiant textuel unique qui permet d’appeler plus facilement cette sélection.',
 	'champ_identifiant_label' => 'Identifiant',
 	'champ_limite_explication' => 'Nombre maximum de contenus dans la sélection.',
