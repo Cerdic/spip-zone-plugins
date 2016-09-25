@@ -109,6 +109,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_emails_liens ADD INDEX (id_objet)'),
 		array('sql_alter', 'TABLE spip_emails_liens ADD INDEX (objet)'),
 	);
+	
+	//ajout du champ province
+	$maj['1.8.4'] = array(
+		array('maj_tables', array('spip_adresses')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

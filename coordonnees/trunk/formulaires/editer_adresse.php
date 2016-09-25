@@ -85,6 +85,13 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 			)
 		),
 		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'province',
+				'label' => _T('coordonnees:label_province')
+			)
+		),
+		array(
 			'saisie' => 'pays',
 			'options' => array(
 				'nom' => 'pays',

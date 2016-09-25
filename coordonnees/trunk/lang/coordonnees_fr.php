@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_numero' => 'Numéro',
 	'label_objets_actifs' => 'Objets',
 	'label_pays' => 'Pays',
+	'label_province' => 'Province',
 	'label_region' => 'Région',
 	'label_telephone' => 'Téléphone',
 	'label_titre' => 'Titre',
