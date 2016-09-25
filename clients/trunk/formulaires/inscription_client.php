@@ -243,6 +243,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 
 
 		// On crée l'adresse
+		set_request('titre', trim(_request('prenom').' '._request('nom')));
 		$editer_adresse = charger_fonction('editer_adresse', 'action/');
 		$editer_adresse('oui');
 
