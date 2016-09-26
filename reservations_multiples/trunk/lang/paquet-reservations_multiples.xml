@@ -1,4 +1,7 @@
 <traduction module="paquet-reservations_multiples" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservations_multiples/trunk/lang/" reference="fr">
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-reservations_multiples?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/paquet-reservations_multiples?lang_cible=pt_br" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 </traduction>
