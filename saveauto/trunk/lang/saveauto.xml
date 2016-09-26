@@ -17,6 +17,9 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=pt_br" total="71" traduits="71" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=sk" total="71" traduits="66" relire="0" modifs="2" nouveaux="3" pourcent="92.96">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
