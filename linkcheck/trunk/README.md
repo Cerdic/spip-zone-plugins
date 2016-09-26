@@ -20,9 +20,15 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 [ ] vérifier/traiter automagiquement les migrations http⟹https
 
-[ ] améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)
+[x] <strike>améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)</strike>
 
 ## Versions 1.3.x
+
+### Version 1.3.3
+
+* Accepter les caractères `:` et `,` dans une Url (cf [post sur spip-contrib->http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489081])
+* Accepter les accents dans le nom de domaine
+* Accepter des extensions de noms de domaine jusqu'à 7 caractères (du type `.website` par exemple)
 
 ### Version 1.3.1
 

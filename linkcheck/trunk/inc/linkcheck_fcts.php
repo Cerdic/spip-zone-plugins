@@ -60,7 +60,7 @@ function linkcheck_lister_liens($champs) {
 
 	$classe_alpha = 'a-zA-Z0-9âäéèëêïîôöùüû²';
 	$tab_expreg = array(
-	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([a-zA-Z0-9\-]*\.)?))([a-zA-Z0-9\-]*\.)+[a-zA-Z0-9]{2,4}(/[".$classe_alpha."=.?&_\-/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
+	"('|\"| |\.|\->|\]|,|;|\s)(((((http|https|ftp|ftps)://)?www\.)|((http|https|ftp|ftps)://([".$classe_alpha."\-]*\.)?))([".$classe_alpha."0-9\-]*\.)+[a-zA-Z0-9]{2,7}(/[".$classe_alpha."=.?&_\-\:\,/%#]*)?)('|\"| |\.|\->|\]|,|;|\s)?",
 	'(\->)([a-zA-Z]{3,10}[0-9]{1,})\]');
 
 	foreach ($champs as $champ_value) {
