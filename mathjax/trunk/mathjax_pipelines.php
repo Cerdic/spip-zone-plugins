@@ -31,5 +31,3 @@ function mathjax_flux(){
 	}
 	return $flux;
 }
-
-?>
