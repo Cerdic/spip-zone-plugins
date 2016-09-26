@@ -98,14 +98,14 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 		);
 	}
 	
-	$etat_federal=array();
-	if (in_array("etat_federal", $conf)) {
-		$etat_federal=array(
+	$etat_federe=array();
+	if (in_array("etat_federe", $conf)) {
+		$etat_federe=array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'etat_federal',
-				'label' => _T('coordonnees:label_etat_federal'),
-				'obligatoire' => in_array("obli_etat_federal", $conf) ? 'oui' : '',
+				'nom' => 'etat_federe',
+				'label' => _T('coordonnees:label_etat_federe'),
+				'obligatoire' => in_array("obli_etat_federe", $conf) ? 'oui' : '',
 			)
 		);
 	}
@@ -180,7 +180,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 				'obligatoire' => 'oui'
 			)
 		),
-		$etat_federal,
+		$etat_federe,
 		$pays
 	);
 }

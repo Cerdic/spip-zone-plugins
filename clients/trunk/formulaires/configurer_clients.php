@@ -44,8 +44,8 @@ return array(
 									'fax' => _T('clients:label_fax'),
 									'obli_fax' => _T('clients:label_obligatoire'),
 									'complement' => _T('coordonnees:label_complement'),
-									'etat_federal' => _T('coordonnees:label_etat_federal'),
-									'obli_etat_federal' => _T('clients:label_obligatoire'),
+									'etat_federe' => _T('coordonnees:label_etat_federe'),
+									'obli_etat_federe' => _T('clients:label_obligatoire'),
 									'pays' => _T('coordonnees:label_pays'),
 									'obli_pays' => _T('clients:label_obligatoire')
 									)
