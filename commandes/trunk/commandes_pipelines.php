@@ -355,7 +355,7 @@ function commandes_bank_abos_decrire_echeance($flux) {
 function commandes_bank_abos_activer_abonnement($flux){
 	// Si on a une transaction
 	if ($id_transaction = intval($flux['args']['id_transaction'])) {
-		$were = 'id_transaction = '.$id_transaction;
+		$where = 'id_transaction = '.$id_transaction;
 	}
 	// Sinon on cherche par l'identifiant d'abonnement bancaire
 	elseif ($abo_uid = $flux['args']['abo_uid']) {
@@ -363,7 +363,7 @@ function commandes_bank_abos_activer_abonnement($flux){
 	}
 	
 	// On gère d'abord les erreurs possibles si on ne trouve pas la bonne transaction
-	if (!$transaction = sql_fetsel('*', 'spip_transactions', $where)) {
+	if (!$where or !$transaction = sql_fetsel('*', 'spip_transactions', $where)) {
 		spip_log("Impossible de trouver la transaction ($id_transaction / $abo_uid).", 'commandes.'._LOG_ERREUR);
 		$flux['data'] = false;
 	}
