@@ -1,8 +1,8 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.3.20"
-	schema="1.8.4"
+	version="2.3.21"
+	schema="1.8.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"

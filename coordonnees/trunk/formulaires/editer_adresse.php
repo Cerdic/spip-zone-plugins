@@ -87,8 +87,8 @@ function formulaires_editer_adresse_saisies_dist($id_adresse = 'new', $retour = 
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'etat_federal',
-				'label' => _T('coordonnees:label_etat_federal')
+				'nom' => 'etat_federe',
+				'label' => _T('coordonnees:label_etat_federe')
 			)
 		),
 		array(

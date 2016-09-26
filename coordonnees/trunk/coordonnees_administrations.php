@@ -114,6 +114,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.8.4'] = array(
 		array('maj_tables', array('spip_adresses')),
 	);
+	
+	//etat_federal est remplace par etat_federe
+	$maj['1.8.5'] = array(
+		array('sql_alter', 'TABLE spip_adresses CHANGE etat_federal etat_federe varchar(40) NOT NULL DEFAULT ""'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
