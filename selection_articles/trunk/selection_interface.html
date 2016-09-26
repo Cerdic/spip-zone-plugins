@@ -37,7 +37,7 @@
 		</td>
 		<td class="arial2" style="width: 100%;"><a href="?exec=article&amp;id_article=#ID_ARTICLE">[(#SURTITRE|supprimer_tags|trim)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
 		<td class="arial1" style="white-space:nowrap;">[(#DATE|affdate)]</td>
-		<td style='vertical-align: middle; text-align: center; padding: 0px 20px; width:70px;'>[<a href="?exec=article&amp;id_article=#ID_ARTICLE" [style="display: block; height:(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{height})px]"><img src="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{src}|url_absolue)" style="height:60px;" /></a>]</td>
+		<td style='vertical-align: middle; text-align: center; padding: 0px 20px; width:70px;'>[<a href="?exec=article&amp;id_article=#ID_ARTICLE" [style="display: block; height:(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{height})px]"><img src="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{src}|url_absolue)" style="[height:(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{height})px]" /></a>]</td>
 		<td class="arial1"><b style="white-space: nowrap;">N°#ID_ARTICLE</b></td>
 		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
 		<td>
