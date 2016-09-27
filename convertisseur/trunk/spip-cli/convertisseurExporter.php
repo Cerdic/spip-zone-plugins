@@ -176,7 +176,7 @@ class fichiersExporter extends Command {
 					}
 
 					// documents joints
-					$documents = sql_allfetsel("*", "spip_documents d", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
+					$documents = sql_allfetsel("*", "spip_documents d, spip_documents_liens dl", "dl.id_objet=$id_article and dl.objet='article' and dl.id_document=d.id_document");
 					foreach($documents as $doc)
 							$ins_doc[] = json_encode($doc) ;
 					if(is_array($ins_doc)){
