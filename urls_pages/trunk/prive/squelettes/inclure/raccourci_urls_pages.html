@@ -1,0 +1,11 @@
+[(#REM)
+
+	Raccourci vers la gestion des URLs pages, affiché sur la page de gestion des URLs
+
+]
+[(#BOITE_OUVRIR{<:urls_pages:titre_urls_pages:>, 'raccourcis'})]
+
+<p><:urls_pages:explication_raccourci_urls_pages:></p>
+[(#URL_ECRIRE{controler_urls_pages}|icone_horizontale{<:urls_pages:titre_menu_urls_pages:>,url,edit})]
+
+#BOITE_FERMER

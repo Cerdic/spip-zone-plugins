@@ -1,0 +1,31 @@
+[(#REM)
+
+	Menu pour basculer entre la liste des URLs classiques et la gestion des URLs des pages.
+	Squelette inséré en colonne de gauche via le pipeline affiche_gauche
+
+]
+<div class="barre_onglet clearfix">
+	<ul>
+		<li>
+			[(#CHEMIN_IMAGE{url_objet-24}|balise_img{'','cadre-icone'})]
+			[(#URL_ECRIRE{controler_urls}|lien_ou_expose{<:urls_pages:menu_urls_objets:>,#VAL{exec}|_request|=={controler_urls}})]
+		</li>
+		<li>
+			[(#CHEMIN_IMAGE{url_page-24}|balise_img{'','cadre-icone'})]
+			[(#URL_ECRIRE{controler_urls_pages}|lien_ou_expose{<:urls_pages:menu_urls_pages:>,#VAL{exec}|_request|=={controler_urls_pages}})]
+		</li>
+	</ul>
+</div>
+
+[(#REM)
+<div class="navigation">
+	<ul class="liste_items sous_navigation">
+		<li class="item[ (#VAL{exec}|_request|=={controler_urls}|oui)on]">
+			[<a href="(#URL_ECRIRE{controler_urls})" class="bando2_configurer_urls"><:urls_pages:titre_menu_urls_objets:></a>]
+		</li>
+		<li class="item[ (#VAL{exec}|_request|=={controler_urls_pages}|oui)on]">
+			[<a href="(#URL_ECRIRE{controler_urls_pages})" class="bando2_configurer_urls"><:urls_pages:titre_menu_urls_pages:></a>]
+		</li>
+	</ul>
+</div
+]

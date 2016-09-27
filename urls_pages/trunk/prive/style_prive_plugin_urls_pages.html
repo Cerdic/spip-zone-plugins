@@ -4,6 +4,14 @@
 #SET{claire,##ENV{couleur_claire,c5e41c}}
 #SET{foncee,##ENV{couleur_foncee,9dba00}}
 
-.formulaire_spip .editer_url_page .url		{ margin-#ENV{left}:.66em; float:#ENV{right}; font-size:.8em; font-weight:normal; }
-.formulaire_spip .editer_url_page.on		{ background-color:[#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.formulaire_spip .editer_url_page.on .text	{ border-color:#GET{foncee}; }
+.liste-objets.urls_pages .liste .erreur {color: red; vertical-align: middle;}
+/*.liste-objets.fonds_pages tbody .dossier {border-right: 1px solid #dfdfdf}*/
+.liste-objets.urls_pages .page,
+.liste-objets.fonds_pages .page {font-weight: bold}
+/*.liste-objets.urls_pages tbody .fond,
+.liste-objets.fonds_pages tbody .dossier {font-family: mono}*/
+.pseudo.bouton_action_post .submit {display: inline-block}
+
+/* formulaire d'édition */
+.formulaire_editer_url_page .editer_page {position: relative}
+.formulaire_editer_url_page #choisir_page {z-index: 2; position: absolute; bottom: 10px; #ENV{right}: 15px;}

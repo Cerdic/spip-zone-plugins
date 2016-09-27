@@ -6,26 +6,67 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_titre_parametrages' => 'URLs pages personnalisées',
-
-	// L
-	'label_liste_pages' => 'Pages et urls correspondantes',
-	'label_code_htaccess' => 'Code .htaccess',
+	'champ_page_label' => 'Page',
+	'champ_page_tri' => 'Page',
+	'champ_page_explication' => 'Indiquez le nom de fichier du squelette correspondant à la page, sans l\'extension .html et en respectant la casse : unePage.html &rarr; unePage.
+	Les objets éditoriaux et leurs déclinaisons sont proscris !',
+	'champ_page_explication_fond' => 'Squelette de la page : @fond@',
+	'champ_fond_label' => 'Fond',
+	'champ_statut' => 'Statut',
+	'champ_url_label' => 'URL',
+	'champ_url_explication' => 'N\'indiquez que la partie après la racine du site : @racine@',
+	'champ_dossier_tri' => 'Dossier',
+	'champ_action' => 'Action',
 
 	// E
-	'explication_formulaire_1' => 'Ce formulaire permet de mettre en place des urls personnalisées pour les squelettes ne correspondant à aucun objet éditorial : les pages. Leurs urls seront prises en charge par la balise <tt>#URL_PAGE</tt>.',
-	'explication_code_htacess' => 'Après validation du formulaire, copiez le code ci-dessous dans le fichier <tt>.htaccess</tt>.',
-	'explication_rewritebase' => 'Si votre fichier <tt>.htaccess</tt> comporte une directive RewriteBase, indiquez la ici.',
 	'explication_dossier' => 'Dossier contenant les squelettes',
-	'erreur_url_non_libre' => 'Cette url est déjà utilisée',
-	'erreur_url_doublon' => 'Une url doit être unique',
-	'erreur_pages_obsoletes' => 'Les pages suivantes sont enregistrées en configuration mais ne sont plus actives. Les squelettes correspondants ont du être renommés, supprimés, ou le plugin d\'où ils proviennent désactivé. Il est recommandé de vider ces champs.',
+	'explication_generale' => 'Les « pages » sont des squelettes ne correspondant à aucun objet éditorial.
+
+	Gérez ici leurs URLs, elles sont prises en compte par la balise <tt>#URL_PAGE</tt>.
+
+	L\'onglet « fonds des pages » contient une liste des pages sans URL personnalisée, à titre indicatif.
+	Si une page n\'y figure pas, vous pouvez tout de même lui en attribuer une en saisissant la page manuellement.',
+	'erreur_fond_absent' => 'Fond absent !',
+	'erreur_page_fond_absent' => 'Aucun squelette ne correspond à cette page !',
+	'erreur_page_fond_objet_editorial' => 'Il s\'agit d\'un objet éditorial. Utilisez la méthode habituelle pour éditer leurs URLs.',
+	'erreur_page_mauvais_format' => 'Le nom de la page est incorrect. Il doit s\'agir du nom de fichier d\'un squelette, sans l\'extension .html',
+	'erreur_url_doublon' => 'Cette URL est déjà utilisée',
+	'erreur_page_doublon_url' => 'Une URL existe déjà pour cette page : « @url@ »',
 
 	// I
-	'info_aucun_squelette' => 'Aucun squelette n\'a été trouvé',
+	'info_0_url_page' => 'Aucune URL de page',
+	'info_1_url_page' => '1 URL de page',
+	'info_nb_urls_pages' => '@nb@ URLs de pages',
+	'info_0_fond_page' => 'Aucun fond de page',
+	'info_1_fond_page' => '1 fond de page',
+	'info_nb_fonds_pages' => '@nb@ fonds de pages',
+	'info_fonds_pages' => 'Fonds de pages',
+	'info_0_fond' => 'Aucun squelette n\'a été trouvé',
+	'icone_ajouter_url_page' => 'Ajouter l\'URL d\'une page',
+	'icone_attribuer_url_page' => 'Attribuer une URL',
+	'icone_supprimer_url_page' => 'Supprimer l\'URL de cette page',
+	'icone_editer_url_page' => 'Éditer l\'URL de cette page',
+	'icone_choisir_page' => 'Choisir une page',
+	'icone_supprimer' => 'Supprimer',
+	'icone_editer' => 'Éditer',
+	'icone_choisir' => 'Choisir',
+	'icone_retour' => 'Retour',
 
 	// M
-	'message_ok_code' => '. <br>N\'oubliez pas de copier le code présent en fin du formulaire dans le fichier .htaccess'
+	'message_url_update_ok' => 'L\'URL a été mise à jour',
+	'message_url_insert_ok' => 'L\'URL a été enregistrée',
+	'menu_onglet_pages' => 'URLs des pages',
+	'menu_onglet_fonds' => 'Fonds des pages',
+	'menu_urls_pages' => 'URLs des pages',
+	'menu_urls_objets' => 'URLs des objets éditoriaux',
+
+	// T
+	'titre_pages_detectees' => 'Pages détectées',
+	'titre_urls_pages' => 'URLs des pages',
+	'titre_editer_url_page' => 'Éditer l\'URL d\'une page',
+	'titre_creer_url_page' => 'Créer l\'URL d\'une page',
+	'titre_nouvelle_url' => 'Nouvelle URL',
+
 );
 
 ?>

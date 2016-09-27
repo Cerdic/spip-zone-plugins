@@ -2,14 +2,15 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     urls_pages
- * @copyright  2013
- * @author     Charles Razack
+ * @plugin     URLs Pages Personnalisées
+ * @copyright  2016
+ * @author     tcharlss
  * @licence    GNU/GPL
- * @package    SPIP\urls_pages\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -22,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Déclarations d'interface pour le compilateur
  */
 function urls_pages_declarer_tables_interfaces($interfaces) {
-	$interfaces['table_des_traitements']['URL_PAGE'][]= 'url_perso(%s)';
+	$interfaces['table_des_traitements']['URL_PAGE'][]= 'url_page_personnalisee(%s)';
 	return $interfaces;
 }
 

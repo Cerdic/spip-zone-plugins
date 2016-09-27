@@ -1,17 +1,18 @@
 <paquet
 	prefix="urls_pages"
 	categorie="statistique"
-	version="0.1.13"
+	version="1.0.0"
+	schema="1.0.0"
 	etat="experimental"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/urls_pages.png"
-	documentation="http://contrib.spip.net/URLs-pages-personnalisees"
+	documentation="http://contrib.spip.net/4345"
 >
 
-	<nom>URLs pages personnalisées</nom>
-	<!-- Gestion des variantes d'URL des pages (squelettes ne correspondant à aucun objet éditorial) -->
+	<nom>URLs Pages Personnalisées</nom>
+	<!-- Gestion des variantes des URLs des pages (squelettes ne correspondant à aucun objet éditorial) -->
 
-	<auteur>Charles Razack</auteur>
+	<auteur lien="http://www.bravecassine.com">tcharlss</auteur>
 
 	<credit lien="http://www.openstudio.fr/Pages-personnalisees-et-reecriture.html">OpenStudio pour le tutoriel d'origine</credit>
 
@@ -19,7 +20,8 @@
 
 	<necessite nom="urls" compatibilite="[1.4.0;]" />
 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/urls_pages.php" /><!-- traitement balise #URL_PAGE -->
-	<pipeline nom="affiche_milieu" inclure="urls_pages_pipelines.php" /><!-- formulaire page configurer_urls -->
+	<pipeline nom="declarer_tables_interfaces" inclure="base/urls_pages.php" />
+	<pipeline nom="affiche_milieu" inclure="urls_pages_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="urls_pages_pipelines.php" />
 
 </paquet>
