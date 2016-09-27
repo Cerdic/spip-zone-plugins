@@ -19,7 +19,7 @@ function mathjax_latex_flux(){
 
 	$flux = '<script type="text/x-mathjax-config">';
 	$flux .= "MathJax.Hub.Config({";
-	$flux .= "tex2jax: {inlineMath: [['$$$','$$$'], ['\(','\)']]},";
+	$flux .= "tex2jax: {inlineMath: [['$$$','$$$']]},";
 	$flux .= "CommonHTML: {scale:90},";
 	$flux .= "});";
 	$flux .= '</script>';
