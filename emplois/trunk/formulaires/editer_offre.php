@@ -91,14 +91,7 @@ function formulaires_editer_offre_charger_dist($id_offre='new', $id_rubrique=0, 
 function formulaires_editer_offre_verifier_dist($id_offre='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$erreurs = array();
 
-	// Honeypot
-	if (strlen(_request('nobot')) > 0) {
-		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
-	}
-
 	$verifier = charger_fonction('verifier', 'inc');
-
-	
 
 	// vérifier la date de fin
 	foreach (array('date_fin') AS $champ) {
@@ -123,17 +116,25 @@ function formulaires_editer_offre_verifier_dist($id_offre='new', $id_rubrique=0,
 		$erreurs['email'] = "email non valide";
 	}
 
-	// Gestion de l'upload de fichier
-	// tester le type de fichier : on teste $_FILES et pas _request('_fichiers') car sinon, on le teste à chaque passage et pas au premier upload
-	$offre_pdf = lire_config('emplois/offres/offre_pdf');
-	if (!test_espace_prive() AND $offre_pdf == 'oui') {
-		if (!empty($_FILES['offre_pdf']['tmp_name']) AND $_FILES['offre_pdf']['type'] != 'application/pdf') {
-			//unset le fichier qui a quand même été chargé
-			if (isset($_FILES['offre_pdf']))
-				unset($_FILES['offre_pdf']);
-			// envoi erreur
-			$erreurs['offre_pdf'] = 'Vous devez choisir un fichier au format PDF';
-			$erreurs['message_erreur'] .= "\n Vous devez choisir un fichier au format PDF";
+	// le formulaire d'upload de fichier n'a lieu que dans l'espace publique
+	if (!test_espace_prive()) {
+		// Honeypot
+		if (strlen(_request('nobot')) > 0) {
+			$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
+		}
+
+		// Gestion de l'upload de fichier
+		// tester le type de fichier : on teste $_FILES et pas _request('_fichiers') car sinon, on le teste à chaque passage et pas au premier upload
+		$offre_pdf = lire_config('emplois/offres/offre_pdf');
+		if ($offre_pdf == 'oui') {
+			if (!empty($_FILES['offre_pdf']['tmp_name']) AND $_FILES['offre_pdf']['type'] != 'application/pdf') {
+				//unset le fichier qui a quand même été chargé
+				if (isset($_FILES['offre_pdf']))
+					unset($_FILES['offre_pdf']);
+				// envoi erreur
+				$erreurs['offre_pdf'] = 'Vous devez choisir un fichier au format PDF';
+				$erreurs['message_erreur'] .= "\n Vous devez choisir un fichier au format PDF";
+			}
 		}
 	}
 
