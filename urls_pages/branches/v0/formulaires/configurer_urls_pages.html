@@ -1,0 +1,103 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem">[(#CHEMIN_IMAGE{urls_pages-24.png}|balise_img{'',cadre-icone})]<:urls_pages:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}) <:urls_pages:message_ok_code:></p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p><:urls_pages:explication_formulaire_1:></p>
+		
+		<ul>
+
+		<B_pages>
+		<li class="editer_urls_pages fieldset">
+		<fieldset>
+
+			[(#REM) liste des squelettes de page ]
+			<legend><:urls_pages:label_liste_pages:></legend>
+			
+			<ul>
+
+				<BOUCLE_pages(DATA){source table, #ENV**{liste_pages}}{!par valeur, cle}>
+				#SET{name,#CLE} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				#SET{actif, #CONFIG{urls_pages/#CLE}|?{on}}
+				<li class="long_label editer editer_url_page editer_url_page_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{actif})]">
+					<label for="#GET{name}">
+						[<span title="[(#VALEUR)/#CLE.html]">(#CLE)</span>]
+						[<span class="url">(#URL_SITE_SPIP)/</span>]
+					</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input
+						type="text"
+						name="#GET{name}"
+						class="text"
+						value="#ENV*{#GET{name},#GET{defaut}}"
+						id="#GET{name}"[
+						(#HTML5|oui)placeholder="[(#URL_PAGE{#CLE}|replace{../})]"] />
+				</li>
+				</BOUCLE_pages>
+
+				[(#REM) page obsolètes ]
+				<B_obsoletes>
+				<li class="erreur pleine_largeur"><strong><:urls_pages:erreur_pages_obsoletes:></strong></li>
+				<BOUCLE_obsoletes(DATA){source table, #ENV**{obsoletes}}{!par valeur, cle}>
+				#SET{name,#VALEUR} #SET{defaut,''}
+				<li class="erreur long_label editer editer_url_page editer_[(#GET{name})]">
+					<label for="#GET{name}">
+						[(#URL_SITE_SPIP|strlen|>{40}|oui)<small>][(#URL_SITE_SPIP)/][(#URL_SITE_SPIP|strlen|>{40}|oui)</small>]
+					</label>
+					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" />
+				</li>
+				</BOUCLE_obsoletes>
+				</B_obsoletes>
+
+			</ul>
+		</fieldset>
+		</li><!-- .editer_urls_pages -->
+
+		<li class="editer_htaccess fieldset">
+		<fieldset>
+			<legend><:urls_pages:label_code_htaccess:></legend>
+			<ul>
+
+				[(#REM) rewritebase ]
+				#SET{name,rewritebase} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="pleine_largeur editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<p class="explication"><:urls_pages:explication_rewritebase:></p>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" />
+				</li>
+
+				[(#REM) code à copier dans le .htaccess ]
+				<B_code>
+				#SET{name,code} #SET{obli,''} #SET{defaut,''}
+				<li class="pleine_largeur editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<p class="explication"><:urls_pages:explication_code_htacess:></p>
+					<small>
+					<textarea readonly="readonly" name="#GET{name}" class="textarea" id="#GET{name}" style="height:[(#TOTAL_BOUCLE|mult{2})em;]"><BOUCLE_code(DATA)
+						{source table, #CONFIG{urls_pages}|unserialize}{cle != rewritebase}{valeur != ''}
+					>RewriteRule ^#VALEUR(\.html)?$  spip.php?page=#CLE [QSA,E=url_propre:$0,L][
+(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)]</BOUCLE_code></textarea>
+					</small>
+				</li>
+				</B_code>
+
+			</ul>
+		</fieldset>
+		</li>
+
+		</B_pages>
+		[(#REM) message si aucun squelette de page trouvé ]
+		<li><p class="explication"><:urls_pages:info_aucun_squelette:></p></li>
+		<//B_pages>
+
+		</ul>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
