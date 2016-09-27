@@ -42,7 +42,7 @@ function autoriser_article_creerevenementdans_dist($faire, $quoi, $id, $qui, $op
 	if (autoriser('modifier', 'article', $id, $qui)) {
 		$afficher = true;
 		// un article avec des evenements a toujours le droit
-		if (!sql_countsel('spip_evenements', array('id_article='.intval($id)), "statut IN 'prop','publie'")) {
+		if (!sql_countsel('spip_evenements', array('id_article='.intval($id)), "statut IN ('prop','publie')")) {
 			// si au moins une rubrique a le flag agenda
 			if (sql_countsel('spip_rubriques', 'agenda=1')) {
 				// alors il faut le flag agenda dans cette branche !
