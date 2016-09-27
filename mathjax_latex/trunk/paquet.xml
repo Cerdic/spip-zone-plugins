@@ -1,7 +1,7 @@
 <paquet
 	prefix="mathjax_latex"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	logo="prive/themes/spip/images/mathjax_latex-32.png"
 	documentation="http://contrib.spip.net/4827"
