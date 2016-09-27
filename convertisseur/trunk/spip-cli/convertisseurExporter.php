@@ -47,7 +47,7 @@ class fichiersExporter extends Command {
 				'branche',
 				'b',
 				InputOption::VALUE_OPTIONAL,
-				'branche à exporter (id_secteur)',
+				'branche à exporter (id_secteur ou id_rubrique)',
 				'0'
 			)
 		;
@@ -62,11 +62,23 @@ class fichiersExporter extends Command {
 		
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;	
-		$id_secteur = $input->getOption('branche') ;
+		$branche = $input->getOption('branche') ;
+
+		// Secteur ou rubrique à exporter.
+		if(!$branche OR !intval($branche)){
+			$output->writeln("<error>Préciser l'id du secteur ou de la rubrique à exporter. spip export -b 123 </error>");
+			exit();
+		}	
+
 		
-		if(intval($id_secteur) > 0)
-			$secteur = "where id_secteur=" . intval($id_secteur) ;		
-				
+		// demande t'on un secteur ou une rubrique ?
+		$parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=$branche");
+		
+		if($parent == 0)
+			$critere_export = "where id_secteur=" . intval($branche) ;		
+		else
+			$critere_export = "where id_rubrique=" . intval($branche) ;
+		
 		// Répertoire dest, ou arrivent les fichiers txt.
 		if(!is_dir($dest)){
 			$output->writeln("<error>Préciser le répertoire où exporter les fichiers de $source au format txt. spip export -d `repertoire` </error>");
@@ -84,7 +96,7 @@ class fichiersExporter extends Command {
 			else{
 
 				// chopper les articles en sql.
-				$query = sql_query("select * from spip_articles $secteur order by date_redac asc"); 
+				$query = sql_query("select * from spip_articles $critere_export order by date_redac asc"); 
 
 				// start and displays the progress bar
 				$progress = new ProgressBar($output, sql_count($query));
