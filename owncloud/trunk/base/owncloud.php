@@ -37,7 +37,7 @@ function owncloud_declarer_tables_objets_sql($tables) {
 		'titre' 			=> 'titre',
 		'principale' 		=> 'oui',
 		'field'=> array(
-			'id_owncloud' 	=> 'bigint(21) unsigned NOT NULL AUTO_INCREMENT',
+			'id_owncloud' 	=> 'bigint(21) NOT NULL',
 			'titre' 		=> "varchar(255) NOT NULL default 'NUL'",
 			'md5' 			=> "varchar(255) NOT NULL default 'NUL'",
 			'date_modif' 	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
@@ -47,7 +47,7 @@ function owncloud_declarer_tables_objets_sql($tables) {
 			'PRIMARY KEY' 	=> 'id_owncloud',
 		),
 		'join' => array(
-				'id_owncloud' => 'id_owncloud'
+			'id_owncloud' => 'id_owncloud'
 		),
 		'champs_editables'  => array('titre'),
 	);

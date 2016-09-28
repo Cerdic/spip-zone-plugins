@@ -31,6 +31,11 @@ function owncloud_upgrade($nom_meta_base_version, $version_cible) {
 	// Creation du champs md5 dans spip_documents
 	cextras_api_upgrade(owncloud_declarer_champs_extras(), $maj['create']);
 
+	$maj['0.1.1'] = array(
+		// Suppression de unsigned et auto incremente pour compat sqlite
+		array('sql_alter', 'TABLE spip_ownclouds MODIFY id_owncloud BIGINT(21) NOT NULL AUTO_INCREMENT')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

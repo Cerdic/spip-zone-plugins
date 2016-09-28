@@ -16,6 +16,10 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
+### Version 1.0.6 (28/10/2016)
+
+- Modification de déclaration des champs de id_owncloud dans les tables, suppression de unsigned pour la compat avec sqlite
+
 ### Version 1.0.5 (01/06/2016)
 
 - Ajout de la doc vers contrib dans le paquet.xml
