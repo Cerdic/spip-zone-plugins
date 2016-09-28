@@ -15,5 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* seções;
 -* sites
 
-Permite definir, em função de um setor particular, uma máscara de formulário por objeto, incluindo ou excluindo campos, para adequar o formulário de edição ao que se pretende realmente publicar nesses setores, mas igualmente agrupar num mesmo formulário de edição todas as informações necessárias para publicar com rapidez.'
+Permite definir, em função de um setor particular, uma máscara de formulário por objeto, incluindo ou excluindo campos, para adequar o formulário de edição ao que se pretende realmente publicar nesses setores, mas igualmente agrupar num mesmo formulário de edição todas as informações necessárias para publicar com rapidez.',
+	'diogene_slogan' => 'Criação de templates de formulários para os objetos'
 );
