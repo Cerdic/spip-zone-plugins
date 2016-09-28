@@ -1,0 +1,212 @@
+/*Rose claire : f7c2dc
+Rose foncé : ea5885*/
+
+/* @charset "utf-8"; */
+
+@media all {
+	html {
+		font-size:100%;
+		border-top:.1em solid #fff;
+		background:#f7c2dc url('../ground.gif') repeat fixed;
+		margin:0 2em
+	}
+	body {
+		max-width:800px;
+		font-family:verdana, helvetica, arial, sans-serif;
+		line-height:2em;
+		color:#ea5885;
+		background:#fff;
+		padding:3.5em 3em 1em 3em;
+		margin:3em auto;
+		box-shadow:0 0 4px #ea5885
+	}
+	header, main, section, footer {display:block}
+	abbr[title] {
+		border-bottom:.1em dotted;
+		cursor:help
+	}
+	a abbr[title] {
+		border:0;
+		cursor:pointer
+	}
+	a {
+		color:#ea5885;
+		border-top:0 solid transparent;
+		border-bottom:1px dashed #f7c2dc;
+		padding:.05em 0 .1em 0;
+		text-decoration:none;
+		outline:none;
+		transition:all 0.4s ease-in-out
+	}
+	a:hover,
+	a:focus,
+	a:active {
+		color:#f7c2dc;
+		border-bottom-color:transparent
+	}
+	a:focus {
+		border-top:1px solid #f7c2dc;
+		border-bottom:1px solid #f7c2dc;
+		background:#ea5885
+	}
+	h1, h2, h3 { font-weight:normal }
+	h1 {
+		font-family:Tahoma;
+		font-size:2.8em;
+		line-height:1.2em;
+		color:#ea5885;
+		margin:0 0 .8em 0;
+		text-shadow:1px 1px 2px #f7c2dc
+	}
+	h3, .explication { display: none }
+	p { margin:0 0 0.8em 0 }
+	ul {
+		padding:0 0 0 1em;
+		margin:0 0 1.8em 0
+	}
+	li {
+		list-style-type:circle;
+		padding:0 0 0 .3em;
+		margin:0 0 .4em 0
+	}
+	header[role="banner"] h1 {
+		float:left;
+		font-size:3em;
+		line-height:.5em
+	}
+	header[role="banner"] h1 span {
+		font-size:.5em;
+		line-height:1em
+	}
+	header[role="banner"] ul {
+		float:right;
+		text-align:right;
+		background:#f8f8f8;
+		border:1px solid #eee;
+		border-radius:.3em;
+		padding:.5em .6em .7em .9em;
+		margin-top:-15px;
+		margin-bottom:2.5em;
+		margin-left:3em
+	}
+	header[role="banner"] ul li {
+		list-style-type:none;
+		padding:0;
+		margin:0
+	}
+	main {clear:both}
+	main h1 {
+		border-bottom:1px dashed #ddd;
+		padding:0 0 .2em 0
+	}
+	section {margin:1em 0 0 0}
+	section section {margin:0 0 4em 0}
+	caption { width: 100%; }
+	p.boutons { text-align: center; }
+	.formulaire_spip ul li { list-style: none; }
+	.formulaire_spip label { display: none; }
+	.formulaire_spip input { background-color:#FFF3F3; color:#ea5885; }
+	.formulaire_spip input { 
+		padding:3px; 
+		border:1px solid #f7c2dc; 
+		border-radius:5px; 
+		width:95%; 
+		height: 50px; 
+		font-size: 2em; 
+		box-shadow:1px 1px 2px #ea5885 inset; 
+	}
+	.formulaire_spip input[type=submit] { 
+		font-size: 1.5em; 
+		width:50%; 
+		margin:1em auto; 
+		box-shadow:1px 1px 1px #ea5885; 
+		cursor:pointer; 
+	}
+	.formulaire_spip p.reponse_formulaire.reponse_formulaire_erreur { 
+		width:100%; 
+		padding: .5em; 
+		font-size: 1.2em; 
+		background-color: #f7c2dc; 
+	}
+	.formulaire_spip p.reponse_formulaire.reponse_formulaire_ok { 
+		padding: .5em; 
+		font-size: 1.2em; 
+		background-color: #f7c2dc; 
+	}
+	tr.row_odd{
+		background-color:#fff;
+	}
+	tr.row_even{
+		background-color:#f6e8ef;
+	}
+	 tr.couleur1{
+		background-color:#f7c2dc;
+		color:#fff;
+	}
+	tr.couleur2{
+		background-color:#ea5885;
+		color:#fff;
+	}
+	table, thead, tbody, th, td, tr {
+		width: 100%;
+		display: block;
+	}
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr { text-align: left; }
+	td {
+		position: relative;
+		padding-left: 50%;
+	}
+	td:before {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+	td:nth-of-type(1):before { content: "[(#VAL{petitcochon:form_nom}|_T)]" }
+	td:nth-of-type(2):before { content: "[(#VAL{petitcochon:form_date}|_T)]" }
+	td:nth-of-type(3):before { content: "[(#VAL{petitcochon:form_poids}|_T)]" }
+}
+@media screen and (max-width: 955px) {
+	header[role="banner"] h1 {
+		float:none;
+	}
+	header[role="banner"] ul {
+		float:none;
+		text-align:center;
+		margin-top:-15px;
+		margin-left:0
+	}
+	header[role="banner"] ul li {
+		display:inline;
+		margin:0 1.8em
+	}
+}
+@media screen and (max-width: 768px) {
+	body { 
+		margin: 0;
+		padding: 1em 0.2em
+	}
+	ul { padding: 0 }
+	header[role="banner"] h1 { font-size:1.5em }
+	h1.grostitre { 
+		font-size: 1.1em; 
+		line-height:1.2em 
+	}
+	h2 { font-size:.9em }
+	.formulaire_spip input { 
+		font-size: .8em;
+		height: 20px; 
+	}
+	.formulaire_spip input[type=submit] { font-size: 1em }
+}
+@media print {
+	a { color: #ea5885; }
+	body {background-color: #ffffff}
+}

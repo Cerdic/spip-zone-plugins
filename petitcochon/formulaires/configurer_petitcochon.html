@@ -1,0 +1,40 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{petitcochon-24.png}" class="cadre-icone" /><:petitcochon:cfg_petitcochon:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p><:petitcochon:cfg_petitcochon:></p>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,poids_cochon}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:petitcochon:cfg_poids_cochon:></label>
+				<div class="choix">
+					<input type="input" name="#GET{name}" id="#GET{name}" value="[(#ENV{#GET{name}})]" placeholder="20.2" /><label for="#GET{name}"><:petitcochon:cfg_poids_cochon_item:></label>
+				</div>
+			</li>
+			#SET{name,precision_poids}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:petitcochon:cfg_precision_poids:></label>
+				<div class="choix">
+					<input type="input" name="#GET{name}" id="#GET{name}" value="[(#ENV{#GET{name}})]" placeholder="0.1" /><label for="#GET{name}"><:petitcochon:cfg_precision_poids_item:></label>
+				</div>
+			</li>
+			#SET{name,resultat}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:petitcochon:form_resultat:></label>
+				<p class="explication"><:petitcochon:form_petitcochon_resultat_explication:></p>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="checkbox" name="#GET{name}" id="#GET{name}" value="oui" [(#ENV{#GET{name},non}|=={oui}|oui)checked="checked"] /><label for="#GET{name}"></label>
+			</li>
+		</ul>
+
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

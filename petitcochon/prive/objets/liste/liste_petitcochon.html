@@ -1,0 +1,36 @@
+[(#SET{defaut_tri,#ARRAY{
+    maj,#ENV{date_sens,-1},
+    poids,-1
+}})]
+<head>
+    <h1 class="grostitre"><:petitcochon:liste_utilisateurs:></h1>
+</head>
+
+<p>[(#VAL{petitcochon:poids_courant}|_T{#ARRAY{poids, #CONFIG{petitcochon/poids_cochon}}})]</p>
+<p>La précision est à [(#CONFIG{petitcochon/precision_poids}|number_format{3})] grammes près.</p>
+
+<B_petitcochon>
+<div class="liste-objets petitcochon">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre, [(#GRAND_TOTAL|singulier_ou_pluriel{petitcochon:info_1_utilisateur,petitcochon:info_nb_utilisateur})]})</strong></caption>]
+    <thead>
+        <tr class='first_row'>
+            <th class='nom' scope='col'><:petitcochon:form_nom:></th>
+            <th class='date' scope='col'>[(#TRI{maj,<:petitcochon:form_date:>,ajax})]</th>
+            <th class='poids' scope='col'>[(#TRI{poids,<:petitcochon:form_poids:>,ajax})]</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_petitcochon(PETITCOCHON){tri #ENV{par,maj},#GET{defaut_tri}}>
+        <tr[ class="(#POIDS|gagnant_cochon{#NOM}|sinon{#COMPTEUR_BOUCLE|alterner{row_odd,row_even}})"]>
+            <td class='nom principale'>#NOM</td>
+            <td class='date secondaire'>[(#MAJ|date_relative)]</td>
+            <td class='poids'>#POIDS</td>
+        </tr>
+    </BOUCLE_petitcochon>
+    </tbody>
+</table>
+</div>
+</B_petitcochon>
+    <div class="liste-objets petitcochon caption-wrap"><strong class="caption"><:petitcochon:aucun_utilisateur:></strong></div>
+<//B_petitcochon>

@@ -1,0 +1,23 @@
+<body data-country="#LANG" data-language="#LANG">
+<header role="banner">
+	<h1>#NOM_SITE_SPIP</h1>
+</header>
+
+<main role="main">
+	<h2>#SLOGAN_SITE_SPIP</h2>
+
+	<BOUCLE_resultat_non(CONDITION){si #CONFIG{petitcochon/resultat}|=={''}}>
+		<section>
+			#FORMULAIRE_EDITER_PETITCOCHON
+		</section>
+	</BOUCLE_resultat_non>
+
+	<BOUCLE_resultat_oui(CONDITION){si #CONFIG{petitcochon/resultat}|=={oui}}>
+		<section>
+			<INCLURE{fond=prive/squelettes/contenu/liste_petitcochon, env}>
+		</section>
+	</BOUCLE_resultat_oui>
+
+</main>
+ 
+</body>

@@ -1,0 +1,26 @@
+<paquet
+	prefix="petitcochon"
+	categorie="communication"
+	version="1.0.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/petitcochon-32.png"
+	schema="1.0"
+>
+
+	<nom>Petit Cochon</nom>
+	<!--Ce plugin permet de jour au poids du petit cochon-->
+
+	<auteur mail="cyp@rouquin.me">cyp</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="Zcore" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/petitcochon.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/petitcochon.php" />
+	<pipeline nom="affiche_gauche" inclure="petitcochon_pipelines.php" />
+	
+	<menu nom="liste_petitcochon" titre="petitcochon:icone_petitcochon_score" parent="menu_edition" icone="images/petitcochon-16.png" action="liste_petitcochon" />
+
+</paquet>
