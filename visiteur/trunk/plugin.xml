@@ -1,0 +1,16 @@
+<plugin>
+	<nom>visiteur</nom>
+	<slogan>Outils pour squelettes personnalisés selon le visiteur</slogan>
+	<icon></icon>
+	<auteur>JLuc, marcimat</auteur>
+	<licence>GPL</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<description>
+		Macro #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette (Développement, test de concepts, exploration de code).
+	</description>
+	<prefix>visiteur</prefix>
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<categorie>outil</categorie>
+	<options>visiteurs_options.php</options>
+</plugin>

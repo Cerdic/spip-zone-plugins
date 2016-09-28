@@ -1,0 +1,17 @@
+<paquet
+	prefix="visiteur"
+	categorie="outil"
+	version="0.2.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.*]"
+	documentation="http://contrib.spip.net/4823"
+>
+	<nom>Outils pour squelettes personnalisés selon le visiteur</nom>
+	<!-- 
+	macro #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette. 
+	Développement, test, explorations
+	-->
+	<auteur lien="http://contrib.spip.net/JLuc">JLuc</auteur>
+	<auteur lien="http://contrib.spip.net/Matthieu-Marcillaud">marcimat</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>
