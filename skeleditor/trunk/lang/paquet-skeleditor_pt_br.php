@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'skeleditor_description' => 'Editor de templates, css, js, na área restrita'
+	'skeleditor_description' => 'Editor de templates, css, js, na área restrita',
+	'skeleditor_slogan' => 'Editor de templates'
 );
