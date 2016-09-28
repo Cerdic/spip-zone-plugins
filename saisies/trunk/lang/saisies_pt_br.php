@@ -110,6 +110,8 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 	'option_label_case_label' => 'Rótulo localizado ao lado do checkbox',
 	'option_label_explication' => 'O titulo que será exibido.',
 	'option_label_label' => 'Rótulo',
+	'option_limite_branche_explication' => 'Limita a escolha a um ramo específico do site',
+	'option_limite_branche_label' => 'Limitar a um ramo',
 	'option_maxlength_explication' => 'O usuário não poderá digitar mais do que esse número de caracteres.',
 	'option_maxlength_label' => 'Número máximo de caracteres.',
 	'option_multiple_explication' => 'O usuário poderá selecionar vários valores.',
