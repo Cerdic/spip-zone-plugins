@@ -26,6 +26,15 @@ options:
     verifier:
       type: 'email'
   -
+    saisie: 'textarea'
+    options:
+      nom: 'destinataires_selon_champ'
+      label: '<:formidable:traiter_email_option_destinataires_selon_champ_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_selon_champ_explication:>'
+      placeholder: "@selection_1@/choix1 : mail1@example.tld, mail2@example.tld"
+      conteneur_class: 'pleine_largeur'
+      rows: 4
+  -
     saisie: 'champ'
     options:
       nom: 'champ_courriel'

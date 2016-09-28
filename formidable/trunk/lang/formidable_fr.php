@@ -196,6 +196,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_champ_form_label' => 'Destinaire présent dans un des champ des formulaires',
 	'traiter_email_option_destinataires_explication' => 'Choisissez le champ qui correspondra aux destinataires du message.',
 	'traiter_email_option_destinataires_label' => 'Destinataires',
+	'traiter_email_option_destinataires_selon_champ_explication' => 'Permet d’indiquer un ou plusieurs destinataires en fonction de la valeur d’un champ. 
+		Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests : 1 par ligne.',
+	'traiter_email_option_destinataires_selon_champ_label' => 'Destinataires en fonction d’un champ',
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l’envoyeur.',

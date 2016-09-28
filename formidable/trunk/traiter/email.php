@@ -11,14 +11,19 @@ function traiter_email_dist($args, $retours) {
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
+	$destinataires = array();
 
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
 		$destinataires = _request($options['champ_destinataires']);
-		if (!is_array($destinataires) and intval($destinataires)) {
-			$destinataires = array($destinataires);
+		if (!is_array($destinataires)) {
+			if (intval($destinataires)) {
+				$destinataires = array($destinataires);
+			} else {
+				$destinataires = array();
+			}
 		}
-		if (is_array($destinataires)) {
+		if (count($destinataires)) {
 			// On récupère les mails des destinataires
 			$destinataires = array_map('intval', $destinataires);
 			$destinataires = sql_allfetsel(
@@ -29,9 +34,7 @@ function traiter_email_dist($args, $retours) {
 			$destinataires = array_map('reset', $destinataires);
 		}
 	}
-	if (!$destinataires) {
-		$destinataires = array();
-	}
+
 	if ($options['champ_courriel_destinataire_form']) {
 		$courriel_champ_form = _request($options['champ_courriel_destinataire_form']);
 		$destinataires[] = $courriel_champ_form;
@@ -44,6 +47,16 @@ function traiter_email_dist($args, $retours) {
 		$destinataires_plus = array_map('trim', $destinataires_plus);
 		$destinataires = array_merge($destinataires, $destinataires_plus);
 		$destinataires = array_unique($destinataires);
+	}
+	
+	// On ajoute les destinataires en fonction des choix de saisie dans le formulaire
+	// @selection_1@/choix1 : mail@domain.tld
+	// @selection_1@/choix2 : autre@domain.tld, lapin@domain.tld
+	if (!empty($options['destinataires_selon_champ'])) {
+		if ($destinataires_selon_champ = formidable_traiter_email_destinataire_selon_champ($options['destinataires_selon_champ'])) {
+			$destinataires = array_merge($destinataires, $destinataires_selon_champ);
+			$destinataires = array_unique($destinataires);
+		}
 	}
 
 	// On récupère le courriel de l'envoyeur s'il existe
@@ -236,4 +249,65 @@ function traiter_email_dist($args, $retours) {
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['email'] = true;
 	return $retours;
+}
+
+
+/**
+ * Retourne la liste des destinataires sélectionnés en fonction
+ * de l'option 'destinataires_selon_champ' du traitement email.
+ * 
+ * @param string $description
+ *     Description saisie dans l'option du traitement du formulaire,
+ *     qui respecte le schéma prévu, c'est à dire : 1 description par ligne,
+ *     tel que `@champ@/valeur : mail@domain.tld, mail@domain.tld, ...`
+ *     {@example : `@selection_2@/choix_1 : toto@domain.tld`}
+ * @return array 
+ *     Liste des destinataires, s'il y en a.
+**/
+function formidable_traiter_email_destinataire_selon_champ($description) {
+	$destinataires = array();
+
+	// 1 test à rechercher par ligne
+	$descriptions = explode("\n", trim($description));
+	$descriptions = array_map('trim', $descriptions);
+	$descriptions = array_filter($descriptions);
+
+	// pour chaque test, s'il est valide, ajouter les courriels indiqués
+	foreach ($descriptions as $test) {
+		// Un # est un commentaire
+		if ($test[0] == '#') {
+			continue;
+		}
+		// Le premier caractère est toujours un @
+		if ($test[0] != '@') {
+			continue;
+		}
+
+
+		list($champ, $reste) = explode('/', $test, 2);
+		$champ = substr(trim($champ), 1, -1); // enlever les @
+
+		if ($reste) {
+			list($valeur, $mails) = explode(':', $reste, 2);
+			$valeur = trim($valeur);
+			$mails = explode(',', $mails);
+			$mails = array_map('trim', $mails);
+			$mails = array_filter($mails);
+			if ($mails) {
+				// obtenir la valeur du champ saisi dans le formulaire.
+				// cela peut être un tableau.
+				$champ = _request($champ);
+				if (!is_null($champ)) {
+					$ok = is_array($champ) ? in_array($valeur, $champ) : ($champ == $valeur);
+
+					if ($ok) {
+						$destinataires = array_merge($destinataires, $mails);
+						$destinataires = array_unique($destinataires);
+					}
+				}
+			}
+		}
+	}
+
+	return $destinataires;
 }
