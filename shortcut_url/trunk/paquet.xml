@@ -1,12 +1,12 @@
 <paquet
 	prefix="shortcut_url"
 	categorie="edition"
-	version="1.3.1"
+	version="1.3.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/shortcut_url-24.png"
 	documentation="https://contrib.spip.net/Raccourcisseur-d-URL"
-	schema="0.0.4"
+	schema="0.0.5"
 >
 
 	<nom>Shortcut URL</nom>

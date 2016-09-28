@@ -40,7 +40,7 @@ function shortcut_url_declarer_tables_objets_sql($tables) {
 		'titre' 			=> 'titre',
 		'principale' 		=> 'oui',
 		'field'=> array(
-			'id_shortcut_url' 	=> 'bigint(21) unsigned NOT NULL AUTO_INCREMENT',
+			'id_shortcut_url' 	=> 'bigint(21) NOT NULL',
 			'titre' 			=> "varchar(255) NOT NULL default 'NUL'",
 			'description' 		=> "varchar(255) NOT NULL default 'NUL'",
 			'url' 				=> "text default '' NOT NULL",
@@ -65,7 +65,7 @@ function shortcut_url_declarer_tables_objets_sql($tables) {
 	$tables['spip_shortcut_urls_logs'] = array(
 		'principale' => 'non',
 		'field'=> array(
-			'id_shortcut_urls_log' 	=> 'bigint(21) unsigned NOT NULL AUTO_INCREMENT',
+			'id_shortcut_urls_log' 	=> 'bigint(21) NOT NULL',
 			'id_shortcut_url' 	=> 'bigint(21) NOT NULL',
 			'date_modif' 		=> 'TIMESTAMP',
 			'shorturl'			=> "varchar(200) NOT NULL default 'NUL'",
@@ -83,7 +83,7 @@ function shortcut_url_declarer_tables_objets_sql($tables) {
 	$tables['spip_shortcut_urls_bots'] = array(
 		'principale' => 'non',
 		'field'=> array(
-			'id_shortcut_urls_bot' 	=> 'bigint(21) unsigned NOT NULL AUTO_INCREMENT',
+			'id_shortcut_urls_bot' 	=> 'bigint(21) NOT NULL',
 			'id_shortcut_url' 	=> 'bigint(21) NOT NULL',
 			'date_modif' 		=> 'TIMESTAMP',
 			'referrer' 			=> "varchar(200) NOT NULL default ''",

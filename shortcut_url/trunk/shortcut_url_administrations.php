@@ -46,6 +46,12 @@ function shortcut_url_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_shortcut_urls_logs ADD INDEX (ip_address)'),
 		array('sql_alter', 'TABLE spip_shortcut_urls_bots ADD INDEX (ip_address)'));
 
+	$maj['0.0.5'] = array(
+		// Suppression de unsigned et auto incremente pour compat sqlite
+		array('sql_alter', 'TABLE spip_shortcut_urls MODIFY id_shortcut_url BIGINT(21) NOT NULL AUTO_INCREMENT'),
+		array('sql_alter', 'TABLE spip_shortcut_urls_logs MODIFY id_shortcut_urls_log BIGINT(21) NOT NULL AUTO_INCREMENT')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -19,6 +19,10 @@ Si vous utilisez mod_security ou mod_security2, il faut désactiver la directive
 
 ## Changelog
 
+## Version 1.3.2 (28/10/2016)
+
+- Modification de déclaration des champs de id_shortcut_url dans les tables, suppression de unsigned pour la compat avec sqlite
+
 ### Version 1.3.1 (15/06/2016)
 
 - Stocker vraiment le referer et non pas l'adresse IP une seconde fois
