@@ -12,4 +12,7 @@
 	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=oc_ni_mis" total="19" traduits="12" relire="0" modifs="0" nouveaux="7" pourcent="63.16">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=pt_br" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 </traduction>
