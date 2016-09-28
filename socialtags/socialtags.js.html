@@ -32,7 +32,7 @@
 			[(#CONFIG{socialtags/ifreferer}|?{"
 			if ($.cookie('social_'+this.a)!=1) return;"})]
 
-			$('<a rel="nofollow"><img class="socialtags-hovers" src="'+ this.i +'" alt="'+this.a+'"\/><\/a>')
+			$('<a rel="nofollow"[ (#CONFIG{socialtags/wopen, 'non'}|=={oui}?{ onclick="window.open(this.href, &quot;_blank&quot;, &quot;screenX=50,left=50,screenY=50,top=50, width=550, height=450,toolbar=no, location=no,resizable=yes, scrollbars=yes&quot;);return false;"})]><img class="socialtags-hovers" src="'+ this.i +'" alt="'+this.a+'"\/><\/a>')
 			.attr('href',
 				this.u
 				.replace(/%u/g, esc(url))
@@ -40,7 +40,7 @@
 				.replace(/%d/g, esc(description))
 				.replace(/%u_site/g, esc(this.u_site))
 			)
-			.attr('title', this.n)[(#CONFIG{socialtags/wopen, 'non'}|=={oui}?{.attr('onclick','window.open(this.href, "_blank", "screenX=50,left=50,screenY=50,top=50, width=550, height=450,toolbar=no, location=no,resizable=yes, scrollbars=yes");return false;')})].wrap('<li class="'+this.a+'"><\/li>')
+			.attr('title', this.n).wrap('<li class="'+this.a+'"><\/li>')
 			.parent().appendTo(ul);
 		}});
 		selector.after(ul.wrap('<div class="socialtags"><\/div>').parent());
