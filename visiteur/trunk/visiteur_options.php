@@ -13,6 +13,16 @@
 
 include_spip('inc/session');
 
+function balise__VISITEUR_dist($p) {
+	$_nom = interprete_argument_balise(1, $p);
+	if (!$_nom) {
+		$_nom = "'id_auteur'";
+	}
+	$p->code="'<'.'" . '?php echo session_get("\' . ' . $_nom . ' . \'"); ?' . "'.'>'";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 function balise__VISITEUR_SI_dist($p) {
 	$_champ = interprete_argument_balise(1, $p);
 	if (!$_champ) {
