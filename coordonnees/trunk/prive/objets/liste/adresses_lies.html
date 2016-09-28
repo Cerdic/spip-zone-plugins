@@ -4,7 +4,7 @@
 <div class="liste-objets adresses coordonnees lies">
 <table class='spip liste'>
 	<tbody>
-	<BOUCLE_liste_adresses(adresses_liens){id_adresse != #GET{id_adresse_exclus}}{objet}{id_objet}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_adresses(adresses_liens){id_adresse != #GET{id_adresse_exclus}?}{objet}{id_objet}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
 		<BOUCLE_adresse(ADRESSES){id_adresse}>
