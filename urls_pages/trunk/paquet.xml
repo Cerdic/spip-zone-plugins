@@ -18,7 +18,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="urls" compatibilite="[1.4.0;]" />
+	<necessite nom="urls" compatibilite="[1.5.6;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/urls_pages.php" />
 	<pipeline nom="affiche_milieu" inclure="urls_pages_pipelines.php" />
