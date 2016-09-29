@@ -120,6 +120,7 @@ function identifiants_formulaire_charger($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
+	include_spip('base/objets');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -161,6 +162,7 @@ function identifiants_formulaire_verifier($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
+	include_spip('base/objets');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -173,38 +175,43 @@ function identifiants_formulaire_verifier($flux) {
 	) {
 
 		if ($identifiant = _request('identifiant')) {
-			// nombre max de caractères (on ne sait jamais)
+
+			// 1) Nombre max de caractères
 			$nb_max = 255;
 			if (($nb = strlen($identifiant)) > $nb_max) {
-				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_taille', array('nb' => $nb, 'nb_max' => $nb_max));
-			// format : caractères alphanumériques en minuscules ou "_"
+				$erreur = _T('identifiant:erreur_champ_identifiant_taille', array('nb' => $nb, 'nb_max' => $nb_max));
+
+			// 2) Format : caractères alphanumériques en minuscules ou "_"
 			} elseif (!preg_match('/^[a-z0-9_]+$/', $identifiant)) {
-				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_format');
-					// doublon : on n'autorise qu'un seul identifiant par type d'objet
+				$erreur = _T('identifiant:erreur_champ_identifiant_format');
+
+			// 3) Doublon : on interdit les doublons pour le type de l'objet,
+			// sauf si l'objet avec l'identifiant en doublon n'existe pas,
+			// car dans ce cas l'identifiant sera réattribué dans le traiter.
 			} elseif (
-				// objet existant
-				(
-					intval($id_objet)
-					and sql_countsel(
-						'spip_identifiants',
-						'identifiant = '.sql_quote($identifiant).
-							' AND objet = '.sql_quote($objet).
-							' AND id_objet != '.intval($id_objet)
-					)
+				$where_doublon = array(
+					'identifiant = ' . sql_quote($identifiant),
+					'objet = ' . sql_quote($objet),
+					intval($id_objet) ? 'id_objet != ' . intval($id_objet) : '1 = 1',
 				)
-				// nouvel objet
-				or (
-					!intval($id_objet)
-					and sql_countsel(
-						'spip_identifiants',
-						'identifiant = '.sql_quote($identifiant).' AND objet = '.sql_quote($objet)
-					)
+				and $doublon = sql_fetsel(
+					'objet, id_objet',
+					'spip_identifiants',
+					$where_doublon
 				)
+				and $table_doublon = table_objet_sql($doublon['objet'])
+				and $id_table_doublon = id_table_objet($doublon['objet'])
+				and sql_countsel($table_doublon, $id_table_doublon.' = '.intval($doublon['id_objet']))
 			) {
-				$flux['data']['identifiant'] = _T('identifiant:erreur_champ_identifiant_doublon');
+				$erreur = _T('identifiant:erreur_champ_identifiant_doublon_objet', array('objet' => $doublon['objet'], 'id_objet' => $doublon['id_objet']));
+			}
+
+			if (isset($erreur)
+				and $erreur
+			) {
+				$flux['data']['identifiant'] = $erreur;
 			}
 		}
-
 	}
 
 	return $flux;
@@ -228,6 +235,7 @@ function identifiants_formulaire_traiter($flux) {
 
 	include_spip('inc/config');
 	include_spip('inc/autoriser');
+	include_spip('base/objets');
 	$objets = lire_config('identifiants/objets', array());
 
 	if (
@@ -238,10 +246,10 @@ function identifiants_formulaire_traiter($flux) {
 		and in_array($table_objet_sql, $objets)
 		and autoriser('modifier', 'identifiants')
 	) {
-		if (!function_exists('maj_identifiant_objet')) 
+		if (!function_exists('maj_identifiant_objet')) {
 			include_spip('identifiants_fonctions');
+		}
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
-
 	}
 
 	return $flux;
@@ -274,10 +282,10 @@ function identifiants_post_insertion($flux) {
 		and in_array($table_objet, $objets)
 		and autoriser('modifier', 'identifiants')
 	) {
-		if (!function_exists('maj_identifiant_objet')) 
+		if (!function_exists('maj_identifiant_objet')) {
 			include_spip('identifiants_fonctions');
+		}
 		maj_identifiant_objet($objet, $id_objet, _request('identifiant'));
-
 	}
 
 	return $flux;
@@ -333,6 +341,61 @@ function identifiants_affiche_gauche($flux) {
 
 		$flux['data'] .= $utiles;
 
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Supprimer les lignes obsolètes de la BDD
+ *
+ * On supprime les identifiants des objets inexistants
+ *
+ * @param array $flux
+ */
+function identifiants_optimiser_base_disparus($flux){
+
+	$n = &$flux['data'];
+
+	// Il faut transmettre une ressource SQL.
+	// Ne connaissant pas d'office les tables et clés primaires des objets,
+	// on ne peut pas faire directement le select.
+	// Donc on cherche d'abord les identifiants orphelins, puis après on fait le select avec un IN.
+	if ($objets_identifiants = sql_allfetsel('DISTINCT(objet)', 'spip_identifiants')) {
+		include_spip('base/objets');
+		$identifiants = array();
+		foreach($objets_identifiants as $obj) {
+			$objet           = objet_type($obj['objet']);
+			$id_table_objet  = id_table_objet($objet);
+			$table_objet_sql = table_objet_sql($objet);
+			// Attention aux objets inconnus (plugins désactivés par ex)
+			// table_objet_sql() renvoie un mauvais nom de table pour ceux là
+			$table_ok = (ltrim($table_objet_sql, $GLOBALS['table_prefix'].'_') == $table_objet_sql);
+			if ($table_ok
+				and $orphelins = sql_allfetsel(
+				'I.identifiant',
+				'spip_identifiants AS I' .
+				" LEFT JOIN $table_objet_sql AS B" .
+					" ON I.id_objet = B.$id_table_objet",
+				array(
+					"I.objet = " . sql_quote($objet),
+					"B.$id_table_objet IS NULL"
+				)
+			)){
+				foreach ($orphelins as $orphelin) {
+					$identifiants[] = $orphelin['identifiant'];
+				}
+			}
+		}
+		if (count($identifiants)) {
+			$select = sql_select(
+				'identifiant AS id',
+				'spip_identifiants',
+				sql_in('identifiant', $identifiants)
+			);
+			$n+= optimiser_sansref('spip_identifiants', 'identifiant', $select);
+		}
 	}
 
 	return $flux;

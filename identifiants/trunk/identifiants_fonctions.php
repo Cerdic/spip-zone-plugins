@@ -66,7 +66,8 @@ function identifiant_objet($objet, $id_objet) {
  * @param int $id_objet
  *     Identifiant numérique de l'objet
  * @return bool | string
- *     False si problème, sinon retour des fonctions sql_insertq, sql_updateq ou sql_delete.
+ *     Retour des fonctions sql_insertq(), sql_updateq() ou sql_delete().
+ *     False en cas de problème.
  */
 function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '') {
 
@@ -75,31 +76,51 @@ function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '
 
 	if (
 		$objet
-		and $id_objet = intval($id_objet)
+		and $id_objet = $where_id_objet = intval($id_objet)
 	) {
 
-		// on récupère l'ancien identifiant
+		// On récupère l'ancien identifiant éventuel
 		$old_identifiant = sql_getfetsel(
 			'identifiant',
 			'spip_identifiants',
-			'objet = '.sql_quote($objet).' AND id_objet = '.intval($id_objet)
+			array(
+				'objet = ' . sql_quote($objet),
+				'id_objet = ' . intval($id_objet),
+			)
 		);
 
-		// regardons si le nouvel identifiant est déjà utilisé ailleurs
-		$nb_identiques = sql_countsel(
+		// Regardons si le nouvel identifiant est déjà utilisé pour un même type d'objet
+		// Si l'objet qui a déjà l'identifiant n'existe plus, on l'attribue au nouvel objet.
+		$deja_utilise = false;
+		$identifiant_doublon = sql_fetsel(
+			'objet, id_objet, identifiant',
 			'spip_identifiants',
-			'objet = '.sql_quote($objet).
-				' AND id_objet != '.intval($id_objet).
-				' AND identifiant = '.sql_quote($new_identifiant).
-				' AND identifiant != \'\''
+			array(
+				'objet = ' . sql_quote($objet),
+				'id_objet != ' . intval($id_objet),
+				'identifiant = ' . sql_quote($new_identifiant),
+				'identifiant != \'\'',
+			)
 		);
-		$deja_utilise = ($nb_identiques > 0) ? true : false;
+		if ($identifiant_doublon) {
+			$table_objet_sql_doublon = table_objet_sql($identifiant_doublon['objet']);
+			$id_table_objet_doublon  = id_table_objet($identifiant_doublon['objet']);
+			if (sql_countsel($table_objet_sql_doublon, $id_table_objet_doublon.' = '.$identifiant_doublon['id_objet'])) {
+				$deja_utilise = true;
+			} else {
+				// réattribuer l'identifiant si l'objet en doublon n'existe pas
+				$where_id_objet  = $identifiant_doublon['id_objet'];
+				$old_identifiant = $identifiant_doublon['identifiant'];
+				$deja_utilise    = false;
+			}
+		}
 
-		// on définit ce qu'on doit faire
+		// On définit l'action à effectuer : créer, mettre à jour, ou supprimer
 		$action =
 			(!$old_identifiant and $new_identifiant)  ? 'creer' :
 			(($old_identifiant and $new_identifiant)  ? 'maj' :
-			(($old_identifiant and !$new_identifiant) ? 'supprimer' : ''));
+			(($old_identifiant and !$new_identifiant) ? 'supprimer' :
+			''));
 
 		switch ($action) {
 
@@ -108,7 +129,11 @@ function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '
 					!$deja_utilise) {
 					$resultat = sql_insertq(
 						'spip_identifiants',
-						array('objet' => $objet, 'id_objet' => $id_objet, 'identifiant' => $new_identifiant)
+						array(
+							'objet'       => $objet,
+							'id_objet'    => $id_objet,
+							'identifiant' => $new_identifiant,
+						)
 					);
 				}
 				break;
@@ -117,10 +142,15 @@ function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '
 				if (!$deja_utilise) {
 					$resultat = sql_updateq(
 						'spip_identifiants',
-						array('identifiant' => $new_identifiant),
-						'objet = '.sql_quote($objet).
-							' AND id_objet = '.intval($id_objet).
-							' AND identifiant = '.sql_quote($old_identifiant)
+						array(
+							'identifiant' => $new_identifiant,
+							'id_objet'    => intval($id_objet),
+						),
+						array(
+							'objet = ' . sql_quote($objet),
+							'id_objet = ' . intval($where_id_objet),
+							'identifiant = ' . sql_quote($old_identifiant),
+						)
 					);
 				}
 				break;
@@ -128,9 +158,11 @@ function maj_identifiant_objet($objet = '', $id_objet = '', $new_identifiant = '
 			case 'supprimer':
 				$resultat = sql_delete(
 					'spip_identifiants',
-					'objet = '.sql_quote($objet).
-						' AND id_objet = '.intval($id_objet).
-						' AND identifiant = '.sql_quote($old_identifiant)
+					array(
+						'objet = ' . sql_quote($objet),
+						'id_objet = ' . intval($where_id_objet),
+						'identifiant = ' . sql_quote($old_identifiant),
+					)
 				);
 				break;
 

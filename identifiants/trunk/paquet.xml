@@ -1,7 +1,7 @@
 <paquet
 	prefix="identifiants"
 	categorie="divers"
-	version="1.1.8"
+	version="1.1.9"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/identifiants.png"
@@ -27,5 +27,6 @@
 	<pipeline nom="boite_infos" inclure="identifiants_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="identifiants_pipelines.php" />
 	<pipeline nom="identifiants_utiles" action="" />
+	<pipeline nom="optimiser_base_disparus" action="identifiants_pipelines.php" />
 
 </paquet>

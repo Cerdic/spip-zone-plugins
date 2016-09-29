@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_champ_identifiant_format' => 'Format incorrect : n\'utilisez pas d\'espace, ni de majuscule, ni de caractères accentués ou spéciaux.',
 	'erreur_champ_identifiant_doublon' => 'Cet identifiant existe déjà pour ce type d\'objet',
+	'erreur_champ_identifiant_doublon_objet' => 'Cet identifiant est déjà utilisé par un même type d\'objet : @objet@ @id_objet@',
 	'erreur_champ_identifiant_taille' => '@nb_max@ caractères au maximum (actuellement @nb@)',
 
 	// I
