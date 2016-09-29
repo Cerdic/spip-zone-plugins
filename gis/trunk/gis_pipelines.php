@@ -39,7 +39,7 @@ function gis_insert_head($flux) {
 
 	// insertion des scripts pour google si nécessaire
 	if (count(array_intersect(array('google_roadmap', 'google_satellite', 'google_terrain'), $config['layers'])) > 0) {
-		$flux .="\n".'<script type="text/javascript" src="//maps.google.com/maps/api/js?language='.$GLOBALS['spip_lang'].'&amp;key='.$config['api_key_google'].'"></script>';
+		$flux .="\n".'<script type="text/javascript" src="//maps.google.com/maps/api/js?language='.$GLOBALS['spip_lang'].'&amp;key='.(isset($config['api_key_google']) ? $config['api_key_google'] : '').'"></script>';
 	}
 
 	return $flux;
