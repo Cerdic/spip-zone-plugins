@@ -317,14 +317,21 @@ function identifiants_affiche_gauche($flux) {
 	}
 
 	if (
-		isset($flux['args']['type-page'])
-		and $objet = $flux['args']['type-page']
-		and $table_objet_sql = table_objet_sql($objet)
+		$objets
+		and isset($flux['args']['type-page'])
+		and $exec = trouver_objet_exec($flux['args']['type-page'])
+		and isset($exec['edition'])
+		and !$exec['edition']
+		and isset($exec['table_objet_sql'])
+		and $table_objet_sql = $exec['table_objet_sql']
+		and isset($exec['type'])
+		and $objet = $exec['type']
+		and isset($exec['id_table_objet'])
+		and $id_table_objet = $exec['id_table_objet']
 		and in_array($table_objet_sql, $objets)
-		and $id_table_objet = id_table_objet($objet)
 		and isset($flux['args'][$id_table_objet])
 		and $id_objet = intval($flux['args'][$id_table_objet])
-		and !sql_countsel('spip_identifiants', 'objet = '.sql_quote($objet).' AND id_objet = '.intval($id_objet))
+		and !sql_countsel('spip_identifiants', array('objet = '.sql_quote($objet), 'id_objet = '.intval($id_objet)))
 		and autoriser('voir', 'identifiants')
 		and !empty($identifiants_utiles[$objet])
 	) {
