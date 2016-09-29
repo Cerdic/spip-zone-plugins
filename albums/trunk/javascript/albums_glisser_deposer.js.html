@@ -45,7 +45,7 @@
 ]jQuery(document).ready(function($) {
 
 	// variable globale qui contient la liste des déplacements
-	var deplacements = {}; 
+	var deplacements = {};
 
 	// Lancement du bouzin + relance en cas d'évènement ajax
 	$(deplacerDocuments);
@@ -71,7 +71,10 @@
 				scroll:      true,
 				zIndex:      10
 			});
-		} else {
+		} else if (
+			nb_albums === 0
+			&& $("[(#GET{conteneurs_documents})]").sortable("instance") !== undefined
+		) {
 			$("[(#GET{conteneurs_documents})]").sortable("destroy");
 		}
 	}
@@ -328,7 +331,7 @@
 	 * Renvoie le conteneur principal (album ou portfolios) d'un objet
 	 *
 	 * @param object $objet
-	 * @return object objet conteneur (album ou portfolios) 
+	 * @return object objet conteneur (album ou portfolios)
 	 */
 	function trouverConteneur(objet){
 		var conteneurObjet = false;
