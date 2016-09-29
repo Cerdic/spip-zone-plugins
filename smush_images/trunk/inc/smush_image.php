@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_smush_image_dist($im){
 	if(!_IS_BOT){
-		if(defined(_SMUSH_API) && _SMUSH_API){
+		if(defined('_SMUSH_API') && _SMUSH_API){
 			$image = _image_valeurs_trans($im, "smush");
 			$im = $image["fichier"];
 			$dest = $image["fichier_dest"];
