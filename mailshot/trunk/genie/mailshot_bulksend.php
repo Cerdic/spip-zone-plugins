@@ -67,9 +67,9 @@ function genie_mailshot_bulksend_dist($t){
 		// si mode boost est qu'on a *beaucoup* de destinataires, lancer des actions concourantes
 		if ($boost){
 			$next = sql_fetsel("*","spip_mailshots","statut=".sql_quote('processing'),'','id_mailshot','0,1');
-			if (($total = $next['total'])>10000){
-				$x = $total/1000.0;
-				$nb_process = floor($x/log($x)/6);
+			if (!defined('_MAILSHOT_SEND_PER_PROCESS')) define('_MAILSHOT_SEND_PER_PROCESS',10000);
+			if (($total = $next['total'])>_MAILSHOT_SEND_PER_PROCESS){
+				$nb_process = floor($total/_MAILSHOT_SEND_PER_PROCESS);
 				$nb_process = max($nb_process,0);
 				$nb_process = min($nb_process,defined('_MAILSHOT_MAX_PROCESS')?_MAILSHOT_MAX_PROCESS:10);
 
