@@ -10,6 +10,7 @@
 .album.vignettes li a           { display: block; }
 /* squelettes de la dist : albums après le portfolio */
 .portfolio-albums               { clear: both; }
+.portfolio-albums .album ul li  { float: none; margin: 0 }
 
 /* -----------------------
    Compatibilité Bootstrap

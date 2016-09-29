@@ -2,8 +2,6 @@
 
 	Albumothèque : page de gestion des albums
 
-][(#REM)
-
 	Utilise :
 		prive/objets/liste/albums.html
 		javascript/albums_edit.js
@@ -17,10 +15,10 @@
 
 	#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 
-	[(#INCLURE{fond=prive/objets/liste/albums,
+	<INCLURE{fond=prive/objets/liste/albums,
 		nb=10,
 		env,
-		ajax=liste_albums})]
+		ajax=liste_albums}>
 
 	[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
 	[(#AUTORISER{deplacerdocumentsalbums}|oui)

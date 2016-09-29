@@ -4,8 +4,6 @@
 	- liste des albums liés (portfolio d'albums)
 	- formulaire d'ajout d'albums
 
-][(#REM)
-
 	Appelé par le pipeline «afficher_complement_objet»
 	Utilise :
 		prive/squelettes/inclure/portfolio_albums.html
@@ -17,11 +15,11 @@
 <div id='albums' class='albums-lies'>
 
 [(#REM) PORTFOLIO DES ALBUMS LIÉS ]
-[(#INCLURE{fond=prive/squelettes/inclure/portfolio_albums,
+<INCLURE{fond=prive/squelettes/inclure/portfolio_albums,
 	objet,
 	id_objet,
 	nb=10,
-	ajax=liste_albums})]
+	ajax=liste_albums}>
 
 [(#REM) formulaire pour déplacer les documents par glisser-déposer ]
 [(#AUTORISER{deplacerdocumentsalbums,#ENV{objet},#ENV{id_objet}}|oui)
@@ -29,11 +27,11 @@
 ]
 
 [(#REM) AJOUTER : ICONE ET FORMULAIRE ]
-[(#INCLURE{fond=prive/squelettes/inclure/ajouter_albums,
+<INCLURE{fond=prive/squelettes/inclure/ajouter_albums,
 	objet,
 	id_objet,
 	ajouter,
 	lier_trad,
-	ajax=ajouter_albums})]
+	ajax=ajouter_albums}>
 
 </div><!-- #albums -->

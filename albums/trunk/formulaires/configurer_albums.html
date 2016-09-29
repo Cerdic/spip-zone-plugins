@@ -32,7 +32,7 @@
 			<[(#GET{li})] class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:album:label_activer_album_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}
+				]<INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}>
 			</[(#GET{li})]>
 
 			[(#REM) utiliser un titre par défaut pour les nouveaux albums ]

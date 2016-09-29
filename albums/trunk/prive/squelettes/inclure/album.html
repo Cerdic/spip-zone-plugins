@@ -2,15 +2,12 @@
 
 	Bloc complet d'un album : titre, descriptif, documents, et boutons d'actions.
 
-][(#REM)
-
 	Inclus dans :
 		prive/objets/liste/albums.html
 		prive/objets/liste/albums_lies.html
+
 	Utilise :
 		prive/squelettes/inclure/documents_album.html
-
-][(#REM)
 
 	Paramètres (*obligatoire):
 		*id_album    identifiant de l'album
@@ -69,7 +66,7 @@
 	</div><!-- .header-album -->
 
 	[(#REM) DOCUMENTS ]
-	[(#INCLURE{fond=prive/squelettes/inclure/documents_album, id_album, editable, pagination_documents, ajax=documents-album#ID_ALBUM})]
+	<INCLURE{fond=prive/squelettes/inclure/documents_album, id_album, editable, pagination_documents, ajax=documents-album#ID_ALBUM}>
 
 	[(#REM) FOOTER ]
 	<B_album_boutons_actions>

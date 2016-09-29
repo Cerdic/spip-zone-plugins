@@ -6,10 +6,8 @@
 
 	Il y a 3 cas de figure :
 	- seulement documents activés : on affiche les docs comme d'habitude.
-	- seulement albums activés : on affiche les albums à la place des docs. 
-	- documents + albums activés : ajout d'un menu pour basculer entre les 2.
-
-][(#REM)
+	- seulement albums activés    : on affiche les albums à la place des docs.
+	- documents + albums activés  : ajout d'un menu pour basculer entre les 2.
 
 	Utilise :
 		medias/prive/squelettes/inclure/colonne-documents.html
@@ -59,7 +57,7 @@
 <div class='ajax'>
 	#FORMULAIRE_JOINDRE_DOCUMENT{new,#ENV{id_objet},#ENV{objet}}
 </div>
-<INCLURE{fond=prive/squelettes/inclure/colonne-documents,env,ajax=documents} />
+<INCLURE{fond=prive/squelettes/inclure/colonne-documents, env, ajax=documents} />
 ][
 
 
@@ -71,7 +69,7 @@
 	<div class='ajax'>
 		#FORMULAIRE_AJOUTER_ALBUM{#ENV{objet},#ENV{id_objet},'',#ENV{lier_trad}}
 	</div>
-	[(#INCLURE{fond=prive/squelettes/inclure/portfolio_albums_colonne,objet,id_objet,ajax=liste_albums})]
+	<INCLURE{fond=prive/squelettes/inclure/portfolio_albums_colonne, objet, id_objet, ajax=liste_albums}>
 	[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
 	[(#AUTORISER{deplacerdocumentsalbums,#ENV{objet},#ENV{objet}}|oui)
 	<div class='ajax'>

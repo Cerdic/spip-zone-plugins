@@ -56,7 +56,7 @@
 		{tri #ENV{par,date},#GET{defaut_tri}}
 		{pagination #ENV{nb,10}}>
 
-	[(#INCLURE{fond=prive/squelettes/inclure/album, id_album, env, ajax=#VAL{album}|concat{#ID_ALBUM}})]
+	<INCLURE{fond=prive/squelettes/inclure/album, id_album, env, ajax=#VAL{album}|concat{#ID_ALBUM}}>
 
 	</BOUCLE_liste_albums>
 </div><!-- .liste_albums -->

@@ -4,8 +4,6 @@
 	Il ne s'agit pas de liens type 'lien_ou_expose', mais bien de filtres qu'on peut activer et désactiver.
 	Un clic sur l'icone «loupe» fait apparaître un champ de recherche pour trouver un élément précis.
 
-][(#REM)
-
 	Utilise :
 		prive/squelettes/navigation/inc-albums_filtres_medias.html
 		prive/squelettes/navigation/inc-albums_filtres_objets.html
@@ -18,25 +16,25 @@
 <BOUCLE_albums(ALBUMS){tout}{0,1}>
 
 	[(#REM) FICHIERS ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_documents, env, ajax})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_documents, env, ajax}>
 
 	[(#REM) MEDIAS ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_medias, env, ajax})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_medias, env, ajax}>
 
 	[(#REM) EXTENSIONS ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_extensions, env, ajax})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_extensions, env, ajax}>
 
 	[(#REM) OBJETS ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_objets, env, ajax})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_objets, env, ajax}>
 
 	[(#REM) UTILISATIONS ]
-	[(#REM)[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_utilisations, env, ajax})]]
+	[(#REM)<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_utilisations, env, ajax}>]
 
 	[(#REM) MOTS CLES ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_mots, env, ajax, nb=10})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_mots, env, ajax, nb=10}>
 
 	[(#REM) AUTEURS ]
-	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_auteurs, env, ajax, nb=10})]
+	<INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_auteurs, env, ajax, nb=10}>
 
 	[(#REM) JS pour l'autocomplétion des champs de recherche des objets liés aux albums :
 	documents, mot-clés et auteurs ]

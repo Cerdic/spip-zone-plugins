@@ -2,8 +2,6 @@
 
 	Portfolio des albums liés à un objet.
 
-][(#REM)
-
 	Inclus dans :
 		prive/squelettes/contenu/portfolio_albums.html
 	Utilise :
@@ -11,8 +9,6 @@
 		javascript/albums_edit.js
 		javascript/medias_edit.js
 		javascript/jquery.multifile.js
-
-][(#REM)
 
 	Paramètres (*obligatoire):
 		*objet          type d'objet sur lequel porte l'association
@@ -30,7 +26,7 @@
 <div class="liste-albums lies">
 
 	<BOUCLE_albums_lies(ALBUMS){objet}{id_objet}{!par date}{statut == #ENV{statut,.*}}{pagination #ENV{nb,10}}>
-	[(#INCLURE{fond=prive/squelettes/inclure/album, id_album, objet, id_objet})]
+	<INCLURE{fond=prive/squelettes/inclure/album, id_album, objet, id_objet}>
 	</BOUCLE_albums_lies>
 
 	[<p class='pagination'>(#PAGINATION{prive})</p>]

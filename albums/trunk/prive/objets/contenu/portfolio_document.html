@@ -11,7 +11,7 @@
 (#REM) Documents des albums
 
 ][(#ENV{objet}|=={album}|oui)
-[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=#VAL{documents-album}|concat{#ENV{id_objet}}, pagination_documents=30})<br>]
+<INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=#VAL{documents-album}|concat{#ENV{id_objet}}, pagination_documents=30}>
 <script type="text/javascript">/*<!\[CDATA\[*/
 var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
 [(#INCLURE{javascript/medias_edit.js}|compacte{js})]
@@ -20,10 +20,8 @@ var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
 
 (#REM) Documents des autres objets
 
-][(#ENV{objet}|=={album}|non)[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})]][
+][(#ENV{objet}|=={album}|non)<INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents}>][
 
 (#REM) Formulaire d'ajout de documents
 
-][
-(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})
-]
+]<INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax}>

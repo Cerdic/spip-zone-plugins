@@ -54,14 +54,13 @@
 			[(#REM) documents ]
 			<div class="documents">
 				<strong>[(#CHEMIN_IMAGE{document-12.png}|balise_img) ]<:medias:info_documents:></strong>
-				[(#INCLURE{fond=formulaires/inc-upload_document,
+				<INCLURE{fond=formulaires/inc-upload_document,
 					env,
 					objet=album,
 					id_objet=#ENV{_id_temporaire},
 					mediatheque=oui,
 					mode=document}
-					|replace{value="<:bouton_upload:>"|value="<:medias:bouton_attacher_document:>"|value="<:bouton_choisir:>",value="<:bouton_enregistrer:>"}
-				)]
+					|replace{value="<:bouton_upload:>"|value="<:medias:bouton_attacher_document:>"|value="<:bouton_choisir:>",value="<:bouton_enregistrer:>"}>
 			</div>
 
 		</div><!-- #creer-album -->
