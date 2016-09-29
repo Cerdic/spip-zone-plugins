@@ -116,19 +116,41 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	    array('maj_tables', array('spip_commandes')),
 	);
 
-	// ajout du champ source
+	// Ajout du champ source
 	$maj['0.7.1'] = array(
 	    array('maj_tables', array('spip_commandes'))
 	);
 
-	// tva à taux réduit 1,05% pour les DOM, il faut 4 décimales pour le champ taxe
+	// TVA à taux réduit 1,05% pour les DOM, il faut 4 décimales pour le champ taxe
 	$maj['0.7.2'] = array(
 	    array('maj_tables', array('spip_commandes')),
 	    array('sql_alter', 'TABLE spip_commandes_details CHANGE taxe taxe DECIMAL(4,4) NULL DEFAULT NULL')
 	);
+	
+	// Corriger les UID bancaires manquant dans les commandes
+	$maj['0.7.3'] = array(
+		array('commandes_maj_0_7_3'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+// Replacer les UID bancaires dans les commandes à partir des transactions
+function commandes_maj_0_7_3() {
+	// On récupère toutes les commandes qui ont un renouvellement récurent
+	if ($commandes_recurentes = sql_allfetsel('id_commande', 'spip_commandes', 'echeances_type!=""')) {
+		$commandes_recurentes = array_map('reset', $commandes_recurentes);
+		
+		foreach ($commandes_recurentes as $id_commande) {
+			$id_commande = intval($id_commande);
+			// On récupère l'UID chez le prestataire
+			if ($bank_uid = sql_getfetsel('bank_uid', 'spip_transactions', 'id_commande = '.$id_commande)) {
+				// On le copie dans la commande
+				sql_updateq('spip_commandes', array('abo_uid'=>$bank_uid), 'id_commande = '.$id_commande);
+			}
+		}
+	}
 }
 
 /**
@@ -147,5 +169,3 @@ function commandes_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
