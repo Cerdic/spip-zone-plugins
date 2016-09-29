@@ -30,7 +30,7 @@ function critere_ALBUMS_orphelins_dist($idb, &$boucles, $crit) {
 	$not = $crit->not?"":"NOT";
 
 	$select = sql_get_select("DISTINCT id_album","spip_albums_liens as oooo");
-	$where = "'" .$boucle->id_table.".id_album $not IN ($select)'";
+	$where = "'" .$boucle->id_table.".id_album $not IN (SELECT * FROM($select) AS subquery)'";
 	if ($cond){
 		$_quoi = '@$Pile[0]["orphelins"]';
 		$where = "($_quoi) ? $where : ''";
