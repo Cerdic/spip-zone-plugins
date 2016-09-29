@@ -128,8 +128,8 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	
 	// Corriger les UID bancaires manquant dans les commandes
-	$maj['0.7.3'] = array(
-		array('commandes_maj_0_7_3'),
+	$maj['0.7.4'] = array(
+		array('commandes_maj_0_7_4'),
 	);
 
 	include_spip('base/upgrade');
@@ -137,7 +137,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 // Replacer les UID bancaires dans les commandes à partir des transactions
-function commandes_maj_0_7_3() {
+function commandes_maj_0_7_4() {
 	// On récupère toutes les commandes qui ont un renouvellement récurent
 	if ($commandes_recurentes = sql_allfetsel('id_commande', 'spip_commandes', 'echeances_type!=""')) {
 		$commandes_recurentes = array_map('reset', $commandes_recurentes);
@@ -145,9 +145,9 @@ function commandes_maj_0_7_3() {
 		foreach ($commandes_recurentes as $id_commande) {
 			$id_commande = intval($id_commande);
 			// On récupère l'UID chez le prestataire
-			if ($bank_uid = sql_getfetsel('bank_uid', 'spip_transactions', 'id_commande = '.$id_commande)) {
+			if ($abo_uid = sql_getfetsel('abo_uid', 'spip_transactions', 'id_commande = '.$id_commande)) {
 				// On le copie dans la commande
-				sql_updateq('spip_commandes', array('abo_uid'=>$bank_uid), 'id_commande = '.$id_commande);
+				sql_updateq('spip_commandes', array('bank_uid'=>$abo_uid), 'id_commande = '.$id_commande);
 			}
 		}
 	}
