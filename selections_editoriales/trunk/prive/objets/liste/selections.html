@@ -12,6 +12,7 @@
 		<tr class='first_row'>
 			<th class='titre' scope='col'>[(#TRI{titre,<:selection:champ_titre_label:>,ajax})]</th>
 			<th class='identifiant' scope='col'>[(#TRI{identifiant,<:selection:champ_identifiant_label:>,ajax})]</th>
+			<th class='nb_contenus' scope='col'><:selection:champ_nombre_contenus:></th>
 			<th class='id' scope='col'>[(#TRI{id_selection,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -20,6 +21,7 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'>[(#LOGO_SELECTION|image_reduire{20,26})]<a href="[(#ID_SELECTION|generer_url_entite{selection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTION">[(#RANG). ]#TITRE</a></td>
 			<td class='identifiant principale'>#IDENTIFIANT</td>
+			<td class='nb_contenus id'><BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}> </BOUCLE_contenus>#TOTAL_BOUCLE</B_contenus>0<//B_contenus></td>
 			<td class='id'>[(#AUTORISER{modifier,selection,#ID_SELECTION}|?{
 				<a href="[(#URL_ECRIRE{selection_edit,id_selection=#ID_SELECTION})]">#ID_SELECTION</a>,
 				#ID_SELECTION
