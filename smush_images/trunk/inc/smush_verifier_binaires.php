@@ -75,8 +75,13 @@ function tester_jpegtran(){
  * 		true si présents, sinon false
  */
 function tester_convert(){
-	exec('convert -version',$out,$int1);
-	exec('identify -version',$out,$int2);
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		$magick = 'magick ';
+	} else {
+		$magick = '';
+	}
+	exec($magick.'convert -version',$out,$int1);
+	exec($magick.'identify -version',$out,$int2);
 	if(($int1 == 0) && ($int2 == 0)){
 		effacer_config('imagick_casse');
 		return true;

@@ -70,7 +70,12 @@ function image_smush($im) {
 	// resultat plus beau, mais tres lourd
 	// Et: indispensable pour preserver transparence!
 	if ($creer) {
-		$format = trim(exec('identify -format %m '.$im));
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			$magick = 'magick ';
+		} else {
+			$magick = '';
+		}
+		$format = trim(exec($magick.'identify -format %m '.$im));
 		/**
 		 * On récupère le nom de fichier sans extension
 		 */
@@ -84,7 +89,7 @@ function image_smush($im) {
 		 */
 		if ($format == 'GIF') {
 			$dest = $tmp.'.png';
-			exec('convert '.$im.' '.$dest);
+			exec($magick.'convert '.$im.' '.$dest);
 			$im = $dest;
 			$format = 'PNG';
 		}
