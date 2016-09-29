@@ -671,4 +671,57 @@ function albums_album_boutons_actions($flux){
 	return $flux;
 }
 
-?>
+
+/**
+ * Modifier le résultat du calcul d'un squelette
+ *
+ * - Squelette «inc-upload_documents» : si utilisé pour un album,
+ * ajout d'un suffixe unique à l'id du conteneur principal (et à ses références dans le js et cie),
+ * afin de pouvoir utiliser le formulaire plusieurs fois sur une même page.
+ * Quand utilisé dans le formulaire d'ajout d'album, on change le texte des boutons.
+ *
+ * @pipeline recuperer_fond
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function albums_recuperer_fond($flux) {
+
+	if (isset($flux['args']['fond'])
+		and $fond = $flux['args']['fond']
+		and $fond == 'formulaires/inc-upload_document'
+		and isset($flux['args']['contexte']['objet'])
+		and $flux['args']['contexte']['objet'] == 'album'
+		//and isset($flux['args']['contexte']['form'])
+		//and in_array($flux['args']['contexte']['form'], array('joindre_document', 'ajouter_album'))
+	){
+
+		// Changer l'identifiant du conteneur
+		// Définition de l'identifiant dans le squelette : _#ENV{mode}|concat{'_',#ENV{id,new}}
+		$texte = $flux['data']['texte'];
+		$mode = isset($flux['args']['contexte']['mode']) ?
+			$flux['args']['contexte']['mode'] :
+			'';
+		$id = (isset($flux['args']['contexte']['id']) and intval($flux['args']['contexte']['id']) > 0) ?
+			$flux['args']['contexte']['id'] :
+			'new';
+		$domid = '_' . $mode . '_' . $id;
+		$dom_uniqid = $domid . uniqid('_');
+		$flux['data']['texte'] = str_replace($domid, $dom_uniqid, $texte);
+
+		// Remplacer le texte des boutons dans le formulaire « ajouter_album »
+		if (isset($flux['args']['contexte']['form'])
+			and $flux['args']['contexte']['form'] == 'ajouter_album'
+		){
+			$enregistrer = _T('bouton_enregistrer');
+			$cherche = array(
+				_T('bouton_upload'),
+				_T('medias:bouton_attacher_document'),
+				_T('bouton_choisir'),
+			);
+			$flux['data']['texte'] = str_replace($cherche, $enregistrer, $texte);
+		}
+	}
+
+	return $flux;
+}

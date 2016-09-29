@@ -1,7 +1,7 @@
 <paquet
 	prefix="albums"
 	categorie="multimedia"
-	version="3.3.27"
+	version="3.3.28"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -34,6 +34,7 @@
 	<pipeline nom="formulaire_traiter" inclure="albums_pipelines.php" />
 	<pipeline nom="compagnon_messages" inclure="albums_pipelines.php" />
 	<pipeline nom="album_boutons_actions" inclure="albums_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="albums_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[2.7.27;]" />
 	<utilise nom="saisies" compatibilite="[1.40.0;]" />
