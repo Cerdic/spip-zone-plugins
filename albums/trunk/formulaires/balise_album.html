@@ -3,6 +3,8 @@
 	Formulaire pour générer le code des balises du modèle «album»
 
 ]
+#SET{ul,#SPIP_VERSION|floatval|>={3.1}|?{div,ul}}
+#SET{li,#SPIP_VERSION|floatval|>={3.1}|?{div,li}}
 #SET{edition,#ENV{_etape,1}|!={1}|et{#ENV{fini}|is_null|?{1}}}
 <div class='balise-album formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_album,nouveau}[ (#GET{edition}|oui)edition]'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -19,7 +21,9 @@
 		[(#GET{edition}|oui)<strong><:album:texte_personnaliser_balise_album:></strong>]
 
 		[(#ENV{fini}|non)
-		[<ul>(#GENERER_SAISIES{#ENV{_saisies}})</ul>]
+		[<[(#GET{ul})] class="editer-groupe">
+			(#GENERER_SAISIES{#ENV{_saisies}})
+		</[(#GET{ul})]>]
 		]
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

@@ -3,34 +3,36 @@
 	Formulaire pour convertir des articles faisant office de pseudo-albums en vrais albums
 
 ]
+#SET{ul,#SPIP_VERSION|floatval|>={3.1}|?{div,ul}}
+#SET{li,#SPIP_VERSION|floatval|>={3.1}|?{div,li}}
 <div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
 	<h3 class="titrem"><:migreralbums:titre_migrer_albums:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 	<form method='post' action='#ENV{action}'><div>
-		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
-		paramètre : url d'action ]
+		[(#REM) dÃ©clarer les hidden qui dÃ©clencheront le service du formulaire
+		paramÃ¨tre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,migreralbums}
 
 		<p class="explication"><:migreralbums:explication_migration_albums_article_1:></p>
 		<p class="explication"><:migreralbums:explication_migration_albums_article_2:></p>
-		<ul>
+		<[(#GET{ul})] class="editer-groupe">
 
 			[(#REM) Select: choix de la rubrique ]
 			#SET{id_parent,#ENV{id_parent}}
 			[(#ENV{id_parent}|=={-1000}|oui) #SET{id_parent,0} ]
-			[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+			[<[(#GET{li})] class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 				<label for="id_parent"><:migreralbums:label_rubrique_source:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 				]
 				(#VAL|chercher_rubrique{0,#GET{id_parent},'article',0,0,0,form_simple}|replace{value=("|')0("|'),value="-1000"}|replace{\(<option\[^>\]*value="-1000"\[^>\]*>\),$1<:migreralbums:label_tout_le_site:>})
-			 </li>]
+			 </[(#GET{li})]>]
 
 			[(#REM) Checkbox : inclure les sous-rubriques ? ]
 			#SET{name,toute_la_branche} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<[(#GET{li})] class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,oui}
@@ -38,11 +40,11 @@
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
-			</li>
+			</[(#GET{li})]>
 
-			[(#REM) Checkbox: passer les articles en "refusé" ? ]
+			[(#REM) Checkbox: passer les articles en "refusï¿½" ? ]
 			#SET{name,refuser_articles} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<[(#GET{li})] class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,oui}
@@ -50,11 +52,11 @@
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
-			</li>
-			
-			[(#REM) Checkbox: lier les albums aux rubriques des articles migrés ? ]
+			</[(#GET{li})]>
+
+			[(#REM) Checkbox: lier les albums aux rubriques des articles migrï¿½s ? ]
 			#SET{name,lier_rubriques} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<[(#GET{li})] class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,oui}
@@ -62,12 +64,12 @@
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
-			</li>
-			
+			</[(#GET{li})]>
+
 			[(#REM) Select: choix des groupes de mots ]
 			#SET{name,groupes_mots} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<B_gr>
-			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<[(#GET{li})] class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
@@ -78,12 +80,12 @@
 					<label for="#GET{name}_#GET{val}">#TITRE (<:info_numero_abbreviation:> #ID_GROUPE)</label>
 				</div>
 				</BOUCLE_gr>
-			</li>
+			</[(#GET{li})]>
 			</B_gr>
 
-		</ul>
+		</[(#GET{ul})]>
 
-		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+		[(#REM) ajouter les saisies supplï¿½mentaires : extra et autre, ï¿½ cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
 		<input type='submit' class='submit' value='<:migreralbums:bouton_migrer|attribut_html:>' /></p>
