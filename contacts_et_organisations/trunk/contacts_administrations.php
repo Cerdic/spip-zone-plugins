@@ -197,6 +197,15 @@ function contacts_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', "TABLE spip_organisations ADD COLUMN url_site text not null default ''"),
 	);
 
+	$maj['1.12.0'] = array(
+		array('sql_alter', 'TABLE spip_contacts_liens ADD COLUMN tocheck TINYINT NOT NULL default 1'),
+		array('conctacts_maj_1_12_0_step1'),
+		array('sql_alter', 'TABLE spip_contacts_liens DROP COLUMN tocheck'),
+		array('sql_alter', 'TABLE spip_organisations_liens ADD COLUMN tocheck TINYINT NOT NULL default 1'),
+		array('conctacts_maj_1_12_0_step2'),
+		array('sql_alter', 'TABLE spip_organisations_liens DROP COLUMN tocheck'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -319,5 +328,73 @@ function contacts_maj_1_10_0() {
 	// Si l'option était activée, on la réactive autre part
 	if ($lier_organisations_rubriques){
 		ecrire_config('contacts_et_organisations/lier_organisations_objets', array('spip_rubriques'));
+	}
+}
+
+/**
+ * MAJ 1.12.0 : supprimer les liens contacts-auteur de spip_contacts_liens
+ * lorsqu'ils sont redondants avec le champ id_auteur de spip_contacts
+ */
+function conctacts_maj_1_12_0_step1() {
+
+	$res = sql_select('*','spip_contacts_liens','objet='.sql_quote('auteur').' AND tocheck='.intval(1));
+	$nb = sql_count($res);
+	spip_log($s="conctacts_maj_1_12_0_step1 : $nb restants","maj");
+	echo "$s<br />";
+	while($row = sql_fetch($res)) {
+		$where = 'id_contact=' . intval($row['id_contact'])
+			. ' AND id_objet=' . intval($row['id_objet'])
+			. ' AND objet=' . sql_quote($row['objet']);
+
+		// si le id_contact n'existe pas,
+		// ou bien a le id_contact a le meme id_auteur
+		// ou bien id_autur n'existe pas
+		// => on supprime le lien qui ne sert pas
+		if (!$contact = sql_fetsel('id_contact,id_auteur','spip_contacts','id_contact='.intval($row['id_contact']))
+		  or $contact['id_auteur']==$row['id_objet']
+		  or !sql_countsel('spip_auteurs','id_auteur=' . intval($row['id_objet']))){
+			sql_delete('spip_contacts_liens', $where);
+		}
+		// sinon on marque le lien comme verifie pour ne pas y revenir
+		else {
+			sql_updateq('spip_contacts_liens', array('tocheck' => 0), $where);
+		}
+		if (time()>_TIME_OUT){
+			return;
+		}
+	}
+}
+
+/**
+ * MAJ 1.12.0 : supprimer les liens contacts-auteur de spip_organisations_liens
+ * lorsqu'ils sont redondants avec le champ id_auteur de spip_organisations
+ */
+function conctacts_maj_1_12_0_step2() {
+
+	$res = sql_select('*','spip_organisations_liens','objet='.sql_quote('auteur').' AND tocheck='.intval(1));
+	$nb = sql_count($res);
+	spip_log($s="conctacts_maj_1_12_0_step2 : $nb restants","maj");
+	echo "$s<br />";
+	while($row = sql_fetch($res)) {
+		$where = 'id_organisation=' . intval($row['id_organisation'])
+			. ' AND id_objet=' . intval($row['id_objet'])
+			. ' AND objet=' . sql_quote($row['objet']);
+
+		// si le id_contact n'existe pas,
+		// ou bien a le id_contact a le meme id_auteur
+		// ou bien id_autur n'existe pas
+		// => on supprime le lien qui ne sert pas
+		if (!$org = sql_fetsel('id_organisation,id_auteur','spip_organisations','id_organisation='.intval($row['id_organisation']))
+		  or $org['id_auteur'] == $row['id_objet']
+		  or !sql_countsel('spip_auteurs','id_auteur=' . intval($row['id_objet']))){
+			sql_delete('spip_organisations_liens', $where);
+		}
+		// sinon on marque le lien comme verifie pour ne pas y revenir
+		else {
+			sql_updateq('spip_organisations_liens', array('tocheck' => 0), $where);
+		}
+		if (time()>_TIME_OUT){
+			return;
+		}
 	}
 }

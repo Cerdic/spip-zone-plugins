@@ -63,7 +63,9 @@ function exporter_organisations_dist($id_annuaire = null) {
 	if (!is_null($id_annuaire)) {
 		$where[] = array('=', 'id_annuaire', intval($id_annuaire));
 	}
-	
+	$w = sql_get_select('id_parent','spip_organisations');
+	$w = "id_organisation NOT IN (SELECT * FROM ($w) AS S)";
+
 	$lignes = array();
 	
 	if ($organisations = sql_allfetsel('*', 'spip_organisations', $where)) {
