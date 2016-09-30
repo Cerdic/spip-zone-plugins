@@ -82,6 +82,14 @@ function formulaires_editer_organisation_traiter_dist($id_organisation = 'new', 
 		$res['redirect'] = $redirect;
 	}
 	
+	include_spip('inc/config');
+	if (!intval($id_organisation)
+	  and lire_config('contacts_et_organisations/associer_aux_auteurs','') == 'obli'
+		and $id_organisation = $res['id_organisation']){
+		$creer_auteur_lie = charger_fonction('creer_auteur_lie', 'action');
+		$id_auteur = $creer_auteur_lie("organisation/$id_organisation");
+	}
+	
 	// Un lien contact ou autre a prendre en compte ?
 	if ($associer_objet and $id_organisation = $res['id_organisation']){
 		$objet = '';

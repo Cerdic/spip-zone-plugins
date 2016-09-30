@@ -79,6 +79,14 @@ function formulaires_editer_contact_verifier_dist($id_contact = 'new', $id_organ
 function formulaires_editer_contact_traiter_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
 	$res = formulaires_editer_objet_traiter('contact', $id_contact, $id_organisation, 0, $redirect);
 
+	include_spip('inc/config');
+	if (!intval($id_contact)
+		and lire_config('contacts_et_organisations/associer_aux_auteurs','') == 'obli'
+		and $id_contact = $res['id_contact']){
+		$creer_auteur_lie = charger_fonction('creer_auteur_lie', 'action');
+		$id_auteur = $creer_auteur_lie("contact/$id_contact");
+	}
+
 	// Un lien organisation ou autre a prendre en compte ?
 	if ($associer_objet and $id_contact = $res['id_contact']){
 		$objet = '';
