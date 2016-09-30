@@ -83,52 +83,48 @@ em.crayon-contactliaison { cursor: pointer; border:0; }
 
 .changer_selection_organisation {float:right;}
 
-body.contact #contenu .fiche_objet #wysiwyg .champ,
-body.organisation #contenu .fiche_objet #wysiwyg .champ {
-    margin-bottom: 1em;
-    overflow: hidden;
-    padding-top: 0.5em;
-    border-top: 1px solid #GET{claire};
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ {
+	display:block;
+  margin-bottom: 1em;
+  overflow: hidden;
+  padding-top: 0.5em;
+  border-top: 1px solid #GET{claire};
 }
-body.contact #contenu .fiche_objet #wysiwyg .champ .label.visible,
-body.organisation #contenu .fiche_objet #wysiwyg .champ .label.visible {
-    display: block;
-    width: 30%;
-    margin-top:0;
-    float: left;
-    font-weight: bold;
-    color: #GET{color};
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ .label.visible,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ .label.visible {
+  display: block;
+  width: 30%;
+  margin-top:0;
+  float: left;
+  font-weight: bold;
+  color: #GET{color};
 }
-body.contact #contenu .fiche_objet #wysiwyg .champ .span,
-body.organisation #contenu .fiche_objet #wysiwyg .champ .span {
-    display:block;
-    width: 69%;
-    float: right;
-}
-body.contact #contenu .fiche_objet #wysiwyg .fieldset,
-body.organisation #contenu .fiche_objet #wysiwyg .fieldset {
-    margin-top: 2em;
-}
-body.contact #contenu .fiche_objet #wysiwyg .fieldset + .liste-objets,
-body.organisation #contenu .fiche_objet #wysiwyg .fieldset + .liste-objets {
-    margin-top: 1em;
-}
-body.contact #contenu .fiche_objet #wysiwyg .fieldset .titrem,
-body.organisation #contenu .fiche_objet #wysiwyg .fieldset .titrem {
-    display: block;
-    font-weight: bold;
-    padding: 7px 5px 7px 10px;
-    border-top: 1px solid #GET{color};
-    background-color: #GET{background-color};
-    color: #GET{foncee};
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ.contenu_nom {
+	display: none;
 }
 
-.navigation_avec_icones .bando2_organisations {
-	background-image: url("[(#CHEMIN{prive/themes/spip/images/organisation-16.png}|abs_url)]");
+#contenu .fiche_objet #wysiwyg .contenu-contact .champ .span,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .champ .span {
+  display:block;
+  width: 69%;
+  float: right;
 }
-.navigation_avec_icones .bando2_contacts {
-	background-image: url("[(#CHEMIN{prive/themes/spip/images/contact-16.png}|abs_url)]");
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset {
+  margin-top: 2em;
 }
-.navigation_avec_icones .bando2_annuaires {
-	background-image: url("[(#CHEMIN{prive/themes/spip/images/annuaire-16.png}|abs_url)]");
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset + .liste-objets,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset + .liste-objets {
+  margin-top: 1em;
 }
+#contenu .fiche_objet #wysiwyg .contenu-contact .fieldset .titrem,
+#contenu .fiche_objet #wysiwyg .contenu-organisation .fieldset .titrem {
+  display: block;
+  font-weight: bold;
+  padding: 7px 5px 7px 10px;
+  border-top: 1px solid #GET{color};
+  background-color: #GET{background-color};
+  color: #GET{foncee};
+}
+
