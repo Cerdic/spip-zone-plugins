@@ -260,7 +260,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_docume
 	else $l = calculer_url($lien, $titre_lien, 'tout', $connect);
 	
 	if (!$l['url']) 
-		return $object;
+		return $objet;
 	$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
