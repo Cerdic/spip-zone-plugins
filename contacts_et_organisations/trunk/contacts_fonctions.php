@@ -12,7 +12,27 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function redirige_conditionnel_vers_auteur($id_auteur, $objet = '', $id_objet = 0){
+	if (!function_exists('lire_config')) {
+		include_spip('inc/config');
+	}
+	$config = lire_config('contacts_et_organisations/associer_aux_auteurs','');
+	if ($config == 'obli'){
+		// si pas d'auteur le creer a la volee si on sait faire
+		if (!$id_auteur and $objet and $id_objet
+		  and in_array($objet,array('contact','organisation'))){
+			$creer_auteur_lie = charger_fonction('creer_auteur_lie', 'action');
+			$id_auteur = $creer_auteur_lie("$objet/$id_objet");
+		}
+		if ($id_auteur) {
+			$url = generer_url_entite($id_auteur, 'auteur');
+			$url = str_replace('&amp;' , '&', $url);
+			return sinon_interdire_acces(false, $url, 301);
+		}
+	}
 
+	return '';
+}
 
 /**
  * Calcul de la balise `#LESORGANISATIONS`

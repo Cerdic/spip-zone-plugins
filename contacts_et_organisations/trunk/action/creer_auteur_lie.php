@@ -38,6 +38,7 @@ function action_creer_auteur_lie_dist($arg = null) {
 	// on attend le type ($arg[0]) et l'id ($arg[1])
 	$arg = explode('/', $arg);
 
+	$id_auteur = 0;
 	if ($arg[0] and is_numeric($arg[1])) {
 
 		switch($arg[0]) {
@@ -84,4 +85,6 @@ function action_creer_auteur_lie_dist($arg = null) {
 	} else {
 		spip_log("erreur creation auteur lie a l objet ".$arg[0], "contacts");
 	}
+
+	return $id_auteur;
 }

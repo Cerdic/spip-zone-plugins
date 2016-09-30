@@ -25,9 +25,13 @@
 		<fieldset>
 			<legend><:contacts:cfg_relations_avec_auteurs:></legend>
 			<ul>
-				[(#SAISIE{oui_non,associer_aux_auteurs,
+				[(#SAISIE{radio,associer_aux_auteurs,
 					label=<:contacts:cfg_associer_aux_auteurs:>,
-					explication=<:contacts:cfg_associer_aux_auteurs_explication:>})]
+					explication=<:contacts:cfg_associer_aux_auteurs_explication:>,
+					datas=[(#ARRAY{
+								obli,[(#VAL{info_obligatoire_02}|_T|trim|trim{'()'}|ucfirst)],
+								on,<:item_oui:>,
+								'',<:item_non:>})]})]
 
 				[(#SAISIE{oui_non,afficher_infos_sur_auteurs,
 					label=<:contacts:cfg_afficher_infos_sur_auteurs:>,

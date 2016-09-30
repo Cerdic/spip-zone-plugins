@@ -1,4 +1,5 @@
 <BOUCLE_contact(CONTACTS){id_contact}{tous}{si #ENV{exec}|=={contact}}>
+[(#ID_AUTEUR|redirige_conditionnel_vers_auteur{contact,#ID_CONTACT})]
 [(#BOITE_OUVRIR{[
 
 	[(#AUTORISER{modifier,contact,#ID_CONTACT})

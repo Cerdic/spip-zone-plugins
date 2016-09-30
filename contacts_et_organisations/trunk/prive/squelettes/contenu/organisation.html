@@ -1,4 +1,5 @@
 <BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}{si #ENV{exec}|=={organisation}}>
+[(#ID_AUTEUR|redirige_conditionnel_vers_auteur{organisation,#ID_ORGANISATION})]
 [(#BOITE_OUVRIR{[
 
 	[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
