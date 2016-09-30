@@ -1,0 +1,61 @@
+<INCLURE{fond=test/co_inc-entete,page,titre=C&O : Modèles} />
+
+
+
+<h1>Le modèle <code>lesorganisations</code></h1>
+
+<div class='description'>
+<p>Ce modèle, à l'instar de 'lesauteurs' dans SPIP liste les organisations
+d'un contact, séparés par des virgules, avec un lien vers leur page.</p>
+
+<p>Il sera néanmoins plus pertinent d'utiliser la balise <code>\#LESORGANISATIONS</code> directement,
+qui appelle ce modèle.</p>
+
+<pre>
+\#LESORGANISATIONS ou
+\[(\#MODELE{lesorganisations, id_contact})\]
+</pre>
+</div>
+
+<B_lesorgas>
+	<div class='exemple'>
+<BOUCLE_lesorgas(CONTACTS){par hasard}{0,1}>
+	<p>Pour le contact #ID_CONTACT (#PRENOM #NOM) :</p>
+	[(#MODELE{lesorganisations, id_contact})]
+</BOUCLE_lesorgas>
+	</div>
+</B_lesorgas>
+
+
+
+
+
+
+<h1>Le modèle <code>co_auteur</code></h1>
+
+<div class='description'>
+<p>Ce modèle n'est qu'un outil pour vérifier certaines informations d'auteur.
+Il permet de voir si un auteur est un contact, une organisation ou rien de cela, et
+teste si cet auteur possède des adresses
+(adresses liées à l'auteur — non à son contact ou organisation)
+</p>
+<p>Ici on tire 3 auteurs au hasard :</p>
+<pre>
+&lt;BOUCLE_a(AUTEURS){par hasard}{0,3}{tout}>
+\[(\#MODELE{co_auteur, id_auteur})\]
+</pre>
+</div>
+
+<B_a>
+	<div class='exemple'>
+<BOUCLE_a(AUTEURS){par hasard}{0,3}{tout}>
+	<div style="width:30%; display:block; float:left; margin-top:1em;">
+	[(#MODELE{co_auteur, id_auteur})]
+	</div>
+</BOUCLE_a>
+	</div>
+</B_a>
+
+<br class='clearfix' />
+
+<INCLURE{fond=test/co_inc-pied} />

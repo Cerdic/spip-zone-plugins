@@ -1,0 +1,15 @@
+
+[(#VAL{contacts}|barre_onglets{organisations})]
+
+<h1 class="grostitre"><:contacts:organisations:></h1>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class='nettoyeur'></div>
+
+<INCLURE{fond=prive/objets/liste/organisations,env,ajax,sinon=<:contacts:aucune_organisation:>}>
+
+
+[(#AUTORISER{creer,organisation})
+	[(#URL_ECRIRE{organisation_edit,new=oui}
+		|icone_verticale{<:contacts:organisation_creer:>,organisation,new,right})]
+]
