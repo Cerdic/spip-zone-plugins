@@ -257,15 +257,26 @@ function contacts_optimiser_base_disparus($flux) {
 
 
 function contacts_formulaire_fond($flux) {
-	if ($flux['args']['form'] == 'editer_auteur'
-		and isset($flux['args']['contexte']['id_contact'])){
-		$contexte = $flux['args']['contexte'];
-		$contexte['prefixe'] = 'contact_';
-		if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)){
-			$contexte['tag'] = $m[1];
-			$p = strpos($flux['data'], $m[0]);
-			$ins = recuperer_fond('formulaires/editer_auteur_contact', $contexte);
-			$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
+	if ($flux['args']['form'] == 'editer_auteur') {
+		if (isset($flux['args']['contexte']['id_contact'])) {
+			$contexte = $flux['args']['contexte'];
+			$contexte['prefixe'] = 'contact_';
+			if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)) {
+				$contexte['tag'] = $m[1];
+				$p = strpos($flux['data'], $m[0]);
+				$ins = recuperer_fond('formulaires/editer_auteur_contact', $contexte);
+				$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
+			}
+		}
+		if (isset($flux['args']['contexte']['id_organisation'])) {
+			$contexte = $flux['args']['contexte'];
+			$contexte['prefixe'] = 'organisation_';
+			if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)) {
+				$contexte['tag'] = $m[1];
+				$p = strpos($flux['data'], $m[0]);
+				$ins = recuperer_fond('formulaires/editer_auteur_organisation', $contexte);
+				$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
+			}
 		}
 	}
 	return $flux;
@@ -283,6 +294,13 @@ function contacts_formulaire_charger($flux) {
 				$flux['data']['contact_'.$k] = $v;
 			}
 		}
+		elseif ($organisation = sql_fetsel('*','spip_organisations','id_auteur='.intval($id_auteur))){
+			$flux['data']['id_organisation'] = $organisation['id_organisation'];
+			unset($organisation['id_organisation']);
+			foreach($organisation as $k=>$v){
+				$flux['data']['organisation_'.$k] = $v;
+			}
+		}
 	}
 	return $flux;
 }
@@ -290,20 +308,33 @@ function contacts_formulaire_traiter($flux) {
 	if ($flux['args']['form'] == 'editer_auteur'
 	  and $id_auteur = intval($flux['data']['id_auteur'])){
 
+		$prefixe = $objet = $id_objet = '';
 		if ($id_contact = intval(_request('id_contact'))
 		  and sql_countsel('spip_contacts','id_auteur='.intval($id_auteur).' AND id_contact='.intval($id_contact))) {
+			$prefixe = 'contact_';
+			$objet = 'contact';
+			$id_objet = $id_contact;
+		}
+		elseif ($id_organisation = intval(_request('id_organisation'))
+		  and sql_countsel('spip_organisations','id_auteur='.intval($id_auteur).' AND id_organisation='.intval($id_organisation))) {
+			$prefixe = 'organisation_';
+			$objet = 'organisation';
+			$id_objet = $id_organisation;
+		}
+		if ($prefixe and $objet and $id_objet){
+			$l = strlen($prefixe);
 			foreach ($_REQUEST as $k=>$v) {
-				if (strncmp($k, 'contact_' , 8) !==0
+				if (strncmp($k, $prefixe , $l) !==0
 					and strncmp($k, 'var_' , 4) !==0 ){
 					set_request($k);
 				}
 			}
 			foreach ($_REQUEST as $k=>$v) {
-				if (strncmp($k, 'contact_' , 8) ==0 ){
-					set_request(substr($k,8),$v);
+				if (strncmp($k, $prefixe , $l) ==0 ){
+					set_request(substr($k,$l), $v);
 				}
 			}
-			formulaires_editer_objet_traiter('contact', $id_contact, 0, 0, '');
+			formulaires_editer_objet_traiter($objet, $id_objet, 0, 0, '');
 		}
 	}
 	return $flux;

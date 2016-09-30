@@ -4,7 +4,7 @@
 ]
 <BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}>
 
-[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,organisation,#ID_ORGANISATION}})
 	[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
 		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
 			|parametre_url{redirect,#SELF}

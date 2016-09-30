@@ -8,62 +8,7 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_organisation' value='#ENV{id_organisation}' />
 			<[(#DIV|sinon{ul})] class="editer-groupe">
-				[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
-				[(#SAISIE{annuaires, id_annuaire,
-					defaut=#ENV{id_annuaire},
-					label=<:contacts:annuaire:>,
-					option_intro=<:contacts:annuaire_aucun:>})]
-				]
-
-				[(#SAISIE{input, nom,
-					label=<:contacts:label_nom:>})]
-
-				[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|oui)
-				[(#SAISIE{organisations, id_parent,
-					id_organisation=#ENV{id_organisation},
-					label=<:contacts:label_organisation_parente:>})]
-				]
-
-				[(#SAISIE{input, statut_juridique,
-					label=<:contacts:label_statut_juridique:>,
-					explication=<:contacts:explication_statut_juridique:>})]
-
-				[(#SAISIE{input, identification,
-					label=<:contacts:label_identification:>,
-					explication=<:contacts:explication_identification:>})]
-				
-				[(#SET{liste_activite,#ARRAY})]<BOUCLE_activite(ORGANISATIONS){par activite} {fusion activite}>[(#SET{liste_activite, #GET{liste_activite}|push{#ACTIVITE}})]</BOUCLE_activite>
-				[(#SAISIE{input, activite,
-					label=<:contacts:label_activite:>,
-					explication=<:contacts:explication_activite:>,
-					datas=#GET{liste_activite}})]
-				
-				[(#SAISIE{input, url_site,
-					label=<:contacts:label_url_site:>,
-					placeholder="http://…"})]
-				
-				[(#SAISIE{date_jour_mois_annee, date_creation,
-					label=<:contacts:label_date_creation:>})]
-
-				[(#SAISIE{textarea, descriptif,
-					label=<:contacts:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
-					rows=10,
-					class='inserer_barre_edition inserer_previsualisation',
-					li_class=pleine_largeur})]
-				
-				[(#SAISIE{textarea, ouvertures,
-					label=<:contacts:label_ouvertures:>,
-					explication=<:contacts:explication_ouvertures:>,
-					rows=5,
-					class='inserer_barre_edition inserer_previsualisation',
-					li_class=pleine_largeur})]
-				
-				[(#SAISIE{textarea, tarifs,
-					label=<:contacts:label_tarifs:>,
-					rows=5,
-					class='inserer_barre_edition inserer_previsualisation',
-					li_class=pleine_largeur})]
-
+				<INCLURE{fond=formulaires/inc-editer_organisation,env} />
 			</[(#DIV|sinon{ul})]>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
