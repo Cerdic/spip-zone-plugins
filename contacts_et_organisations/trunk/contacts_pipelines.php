@@ -125,13 +125,35 @@ function contacts_afficher_contenu_objet($flux) {
 	return $flux;
 }
 
+/**
+ * Pipeline boite_infos pour afficher clairement quand un auteur est un CONTACT ou une ORGANISATION
+ * @param $flux
+ * @return mixed
+ */
+function contacts_boite_infos($flux){
+	if ($flux['args']['type']=='auteur'
+	  and $id_auteur = intval($flux['args']['id'])){
+		$html = recuperer_fond('prive/objets/infos/auteur-contact-organisation', array(
+						'id_auteur' => $id_auteur
+					));
+
+		if ($p = strpos($flux['data'], '</p>')
+		  and $p = strpos($flux['data'], '<p>', $p)){
+			$flux['data'] = substr_replace($flux['data'], $html , $p, 0);
+		}
+		else {
+			$flux['data'] .= $html;
+		}
+	}
+	return $flux;
+}
 
 
 /**
  * Utilisation du pipeline affiche gauche
  *
  * - Affichage du formulaire de choix Contact/Organisation
- *   dans la colonne de vue d'un auteur
+ *   qui permet de creer un contact ou une organisation a partir d'un auteur qui n'est ni l'un ni l'autre
  *
  * @pipeline affiche_gauche
  *

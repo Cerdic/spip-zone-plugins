@@ -23,6 +23,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/contacts.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/contacts.php" />
 	<pipeline nom="affiche_gauche" inclure="contacts_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="contacts_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="contacts_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="contacts_pipelines.php" />
 	<pipeline nom="affiche_hierarchie" inclure="contacts_pipelines.php" />
