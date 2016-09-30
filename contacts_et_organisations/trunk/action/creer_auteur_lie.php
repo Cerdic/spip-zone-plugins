@@ -53,7 +53,7 @@ function action_creer_auteur_lie_dist($arg = null) {
 				autoriser_exception('modifier', 'auteur', $id_auteur);
 				objet_modifier('auteur', $id_auteur, array(
 						"nom"    =>  $nom,
-						"statut" => "1comite"
+						"statut" => "6forum"
 				));
 				autoriser_exception('modifier', 'auteur', $id_auteur, false);
 
@@ -73,7 +73,7 @@ function action_creer_auteur_lie_dist($arg = null) {
 				autoriser_exception('modifier', 'auteur', $id_auteur);
 				objet_modifier('auteur', $id_auteur, array(
 						"nom"    =>  $nom,
-						"statut" => "1comite"
+						"statut" => "6forum"
 				));
 				autoriser_exception('modifier', 'auteur', $id_auteur, false);
 
