@@ -1,5 +1,9 @@
 <BOUCLE_organisation(ORGANISATIONS){id_organisation?}{id_auteur?}>
 <div class="contenu-organisation">
+	[<div class="champ contenu_id_parent[ (#ID_PARENT*|intval|?{'',vide})]">
+		<div class="label visible"><:contacts:label_organisation_parente:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{id_parent} id_parent'><a href="[(#ID_PARENT|generer_url_entite{organisation})]">(#INFO_NOM{organisation,#ID_PARENT})</a></div>
+	</div>]
 	[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:contacts:label_nom:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{nom} nom'>(#NOM)</div>
