@@ -53,6 +53,9 @@ function action_editer_organisation_dist($arg = null) {
  */
 function organisation_inserer($id_parent = null, $champs = array()) {
 
+	if ($id_parent = intval($id_parent)){
+		$champs['id_parent'] = $id_parent;
+	}
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
 		array(
@@ -144,7 +147,7 @@ function organisation_instituer($id_organisation, $c, $calcul_rub = true) {
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 	
-	$row = sql_fetsel("id_parent", "spip_organisations", "id_organisation=$id_organisation");
+	$row = sql_fetsel("id_parent", "spip_organisations", "id_organisation=".intval($id_organisation));
 	$id_parent_actuel = $row['id_parent'];
 	$champs = array();
 
@@ -153,8 +156,7 @@ function organisation_instituer($id_organisation, $c, $calcul_rub = true) {
 	if (isset($c['id_parent'])
 		and $id_parent = intval($c['id_parent'])
 		and $id_parent != $id_parent_actuel
-		and sql_getfetsel('1', 'spip_organisations', 'id_organisation='.$id_parent))
-	{
+		and sql_countsel('spip_organisations', 'id_organisation='.intval($id_parent))) {
 		$champs['id_parent'] = $id_parent;
 	}
 	
@@ -174,7 +176,7 @@ function organisation_instituer($id_organisation, $c, $calcul_rub = true) {
 	if (!count($champs)) return;
 
 	// sauver les changements
-	sql_updateq('spip_organisations', $champs, "id_organisation=$id_organisation");
+	sql_updateq('spip_organisations', $champs, "id_organisation=".intval($id_organisation));
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');
