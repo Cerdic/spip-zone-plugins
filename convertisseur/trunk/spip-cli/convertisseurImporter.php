@@ -146,7 +146,7 @@ class fichiersImporter extends Command {
 					$hierarchie = "" ;
 					$auteurs = "" ;
 					$mots_cles = "" ;
-					$documents = "" ;					
+					$documents = "" ;
 
 					if (preg_match_all(",<ins[^>]+class='(.*?)'[^>]*?>(.*?)</ins>,ims", $texte, $z, PREG_SET_ORDER)){ 
 						foreach($z as $d){ 
@@ -182,7 +182,7 @@ class fichiersImporter extends Command {
 					if($up)
 						$progress->setMessage(" Rubrique $titre_parent/$titre_rubrique => $id_rubrique ", 'inforub');
 					
-					$progress->setMessage("", 'docs');											
+					$progress->setMessage("", 'docs');
 					$progress->setMessage("", 'mot');
 					$progress->setMessage("", 'auteur');
 					
@@ -285,6 +285,8 @@ class fichiersImporter extends Command {
 								$d = json_decode($doc, true);
 								$id_doc = $d['id_document'] ;
 								unset($d['id_document']);
+								if(strlen($racine_documents) > 0 AND !preg_match(",/$,",$racine_documents))
+									$racine_documents = $racine_documents . "/" ;
 								$d['fichier'] = $racine_documents . $d['fichier'] ;
 								
 								// champs ok dans les documents ?
