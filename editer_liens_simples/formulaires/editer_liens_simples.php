@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * La différence avec #FORMULAIRE_EDITER_LIENS
+ * La diffÃ©rence avec #FORMULAIRE_EDITER_LIENS
  * est que ce formulaire #FORMULAIRE_EDITER_LIENS_SIMPLES
  * porte sur des tables de liaisons 'spip_x_y' et non 'spip_x_liens'
  *
@@ -24,13 +24,13 @@ include_spip('formulaires/editer_liens');
 
 /**
  * #FORMULAIRE_EDITER_LIENS_SIMPLES{auteurs,article,23}
- *   pour associer des auteurs à l'article 23, sur la table pivot spip_auteurs_articles
+ *   pour associer des auteurs Ã  l'article 23, sur la table pivot spip_auteurs_articles
  * #FORMULAIRE_EDITER_LIENS_SIMPLES{article,23,auteurs}
- *   pour associer des auteurs à l'article 23, sur la table pivot spip_articles_auteurs
+ *   pour associer des auteurs Ã  l'article 23, sur la table pivot spip_articles_auteurs
  * #FORMULAIRE_EDITER_LIENS_SIMPLES{articles,auteur,12}
- *   pour associer des articles à l'auteur 12, sur la table pivot spip_articles_auteurs
+ *   pour associer des articles Ã  l'auteur 12, sur la table pivot spip_articles_auteurs
  * #FORMULAIRE_EDITER_LIENS_SIMPLES{auteur,12,articles}
- *   pour associer des articles à l'auteur 12, sur la table pivot spip_auteurs_articles
+ *   pour associer des articles Ã  l'auteur 12, sur la table pivot spip_auteurs_articles
  *
  * @param string $a
  * @param string|int $b
