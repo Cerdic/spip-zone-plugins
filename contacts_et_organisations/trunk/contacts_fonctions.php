@@ -137,8 +137,7 @@ function critere_compteur_contacts_dist($idb, &$boucles, $crit) {
 		$not = ", 'NOT'";
 	$boucle->from['LOC'] = 'spip_organisations_liens';
 	$boucle->from_type['LOC'] = 'LEFT';
-	$boucle->join['LOC'] = array("'organisations'","'id_organisation'","'id_organisation'");
-	$boucle->where[] = "'LOC.objet='.sql_quote('contact')";
+	$boucle->join['LOC'] = array("'organisations'","'id_organisation'","'id_organisation'", "'LOC.objet='.sql_quote('contact')");
 
 	$boucle->select[] = "COUNT(LOC.id_objet) AS compteur_contacts";
 	$boucle->group[] = 'organisations.id_organisation';
