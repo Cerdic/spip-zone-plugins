@@ -7,7 +7,7 @@
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_annuaire' value='#ENV{id_annuaire}' />
-			<ul>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 			[(#SAISIE{input, titre,
 				obligatoire=oui, label=<:contacts:annuaire_champ_titre_label:>})]
 
@@ -17,7 +17,7 @@
 			[(#SAISIE{textarea, descriptif,
 				rows=5, inserer_barre=edition, label=<:contacts:annuaire_champ_descriptif_label:> <em class="aide">[(#AIDER{raccourcis})]</em>})]
 
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
 			<p class="boutons">

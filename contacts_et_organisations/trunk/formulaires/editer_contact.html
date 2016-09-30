@@ -11,7 +11,7 @@
 			[(#ENV{id_contact}|=={oui}|oui)
 				[<input type='hidden' name='id_parent' value='(#ENV{id_parent})' />]
 			]
-			<ul>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
 				[(#SAISIE{annuaires, id_annuaire,
 					defaut=#ENV{id_annuaire},
@@ -38,7 +38,7 @@
 					label=<:contacts:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
 					class='inserer_barre_edition inserer_previsualisation',
 					li_class=haut})]
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
 			<p class='boutons'>

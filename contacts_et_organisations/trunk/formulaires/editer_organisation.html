@@ -7,7 +7,7 @@
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_organisation' value='#ENV{id_organisation}' />
-			<ul>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#CONFIG{contacts_et_organisations/utiliser_annuaires}|oui)
 				[(#SAISIE{annuaires, id_annuaire,
 					defaut=#ENV{id_annuaire},
@@ -64,7 +64,7 @@
 					class='inserer_barre_edition inserer_previsualisation',
 					li_class=pleine_largeur})]
 
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->
 			<p class='boutons'>

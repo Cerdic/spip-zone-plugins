@@ -6,9 +6,9 @@
 	[(#ENV{editable}|oui)
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
+			<[(#DIV|sinon{ul})] class="editer-groupe">
 				[(#SAISIE{input, recherche_organisation, label=<:contacts:label_recherche_organisations:>})]
-			</ul>
+			</[(#DIV|sinon{ul})]>
 			<p class='boutons'>
 				<input type='submit' name='rechercher' value='<:contacts:bouton_rechercher:>' />
 			</p>
