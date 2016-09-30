@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_identifiant_label' => 'Identifiant',
 	'champ_limite_explication' => 'Nombre maximum de contenus dans la sélection.',
 	'champ_limite_label' => 'Limite',
-	'champ_nombre_contenus' => 'Nombre d\'éléments',
+	'champ_nombre_contenus' => 'Nombre d’éléments',
 	'champ_titre_label' => 'Titre',
 
 	// E
