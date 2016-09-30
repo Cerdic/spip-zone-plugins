@@ -1,8 +1,8 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.13.9"
-	etat="stable"
+	version="3.0.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/contacts-128.png"
 	schema="1.11.1"
