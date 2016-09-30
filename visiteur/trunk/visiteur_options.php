@@ -13,12 +13,22 @@
 
 include_spip('inc/session');
 
+function extended_session_get ($champ) {
+	if ((!defined('_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE')
+			or !_VISITEUR_SESSION_GLOBALE_NON_PRIORITAIRE)
+		and isset($GLOBALS['visiteur_session'][$champ]))
+		return $GLOBALS['visiteur_session'][$champ];
+	if (function_exists ('_visiteur_session_get'))
+		return _visiteur_session_get($champ);
+	return null;
+};
+
 function balise__VISITEUR_dist($p) {
 	$_nom = interprete_argument_balise(1, $p);
 	if (!$_nom) {
 		$_nom = "'id_auteur'";
 	}
-	$p->code="'<'.'" . '?php echo session_get("\' . ' . $_nom . ' . \'"); ?' . "'.'>'";
+	$p->code="'<'.'" . '?php echo extended_session_get("\' . ' . $_nom . ' . \'"); ?' . "'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -28,11 +38,11 @@ function balise__VISITEUR_SI_dist($p) {
 	if (!$_champ) {
 		$_champ = "'id_auteur'";
 	}
-	$p->code="'<'.'" . '?php if (session_get("\' . ' . $_champ . ' . \'")) { ?' . "'.'>'";
+	$p->code="'<'.'" . '?php if (extended_session_get("\' . ' . $_champ . ' . \'")) { ?' . "'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
- 
+
 function balise__VISITEUR_FINSI_dist($p) {
 	$p->code="'<'.'" . '?php }; ?' . "'.'>'";
 	$p->interdire_scripts = false;
@@ -56,7 +66,7 @@ function balise__VISITEUR_SI_EGAL_dist($p) {
 	if (!$_champ) {
 		$_champ = "'id_auteur'";
 	}
-	$p->code="'<'.'" . '?php if (session_get("\' . ' . $_champ . ' . \'") == "\' . ' . $_val . '.\'") { ?' . "'.'>'";
+	$p->code="'<'.'" . '?php if (extended_session_get("\' . ' . $_champ . ' . \'") == "\' . ' . $_val . '.\'") { ?' . "'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }

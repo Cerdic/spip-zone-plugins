@@ -4,7 +4,7 @@
 	<icon></icon>
 	<auteur>JLuc, marcimat</auteur>
 	<licence>GPL</licence>
-	<version>0.2.1</version>
+	<version>0.3.0</version>
 	<etat>dev</etat>
 	<description>
 		Macro #_VISITEUR, #_VISITEUR_SI, #_VISITEUR_SINON, #_VISITEUR_FINSI pour accéder aux données de la session du visiteur courant et les tester efficacement dans un squelette (Développement, test de concepts, exploration de code).
