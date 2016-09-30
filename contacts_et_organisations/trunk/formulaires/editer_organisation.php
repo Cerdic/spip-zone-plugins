@@ -29,11 +29,12 @@ include_spip('inc/editer');
  *     Environnement du formulaire
 **/
 function formulaires_editer_organisation_charger_dist($id_organisation = 'new', $id_parent = 0, $redirect = '', $associer_objet = '') {
-	$contexte = formulaires_editer_objet_charger('organisation', $id_organisation, $id_parent, 0, $redirect, '');
+	$valeurs = formulaires_editer_objet_charger('organisation', $id_organisation, $id_parent, 0, $redirect, '');
 	if (!intval($id_organisation) and $id_annuaire = _request('id_annuaire')){
-		$contexte['id_annuaire'] = $id_annuaire;
+		$valeurs['id_annuaire'] = $id_annuaire;
 	}
-	return $contexte;
+
+	return $valeurs;
 }
 
 /**
@@ -75,7 +76,12 @@ function formulaires_editer_organisation_verifier_dist($id_organisation = 'new',
  *     Retour des traitements
 **/
 function formulaires_editer_organisation_traiter_dist($id_organisation = 'new', $id_parent = 0, $redirect = '', $associer_objet = '') {
+
+	if (!intval($id_organisation) and intval($id_parent) and !_request('id_parent')){
+		set_request('id_parent', intval($id_parent));
+	}
 	$res = formulaires_editer_objet_traiter('organisation', $id_organisation, $id_parent, 0, $redirect);
+
 	// eviter le changement de id_organisation si on veut rediriger sur le parent
 	// au moment d'une creation d'une organisation fille.
 	if (_request('id_parent')) {
