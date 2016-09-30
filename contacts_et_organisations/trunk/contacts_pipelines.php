@@ -254,3 +254,57 @@ function contacts_optimiser_base_disparus($flux) {
 
 	return $flux;
 }
+
+
+function contacts_formulaire_fond($flux) {
+	if ($flux['args']['form'] == 'editer_auteur'
+		and isset($flux['args']['contexte']['id_contact'])){
+		$contexte = $flux['args']['contexte'];
+		$contexte['prefixe'] = 'contact_';
+		if (preg_match(",<(li|div)[^>]*editer_bio[^>]*>,Uims", $flux['data'], $m)){
+			$contexte['tag'] = $m[1];
+			$p = strpos($flux['data'], $m[0]);
+			$ins = recuperer_fond('formulaires/editer_auteur_contact', $contexte);
+			$flux['data'] = substr_replace($flux['data'], $ins, $p, 0);
+		}
+	}
+	return $flux;
+}
+
+function contacts_formulaire_charger($flux) {
+	if ($flux['args']['form'] == 'editer_auteur'
+		and isset($flux['data']['id_auteur'])
+		and $id_auteur = intval($flux['data']['id_auteur'])
+	  and contacts_edition_integree_auteur()){
+		if ($contact = sql_fetsel('*','spip_contacts','id_auteur='.intval($id_auteur))){
+			$flux['data']['id_contact'] = $contact['id_contact'];
+			unset($contact['id_contact']);
+			foreach($contact as $k=>$v){
+				$flux['data']['contact_'.$k] = $v;
+			}
+		}
+	}
+	return $flux;
+}
+function contacts_formulaire_traiter($flux) {
+	if ($flux['args']['form'] == 'editer_auteur'
+	  and $id_auteur = intval($flux['data']['id_auteur'])){
+
+		if ($id_contact = intval(_request('id_contact'))
+		  and sql_countsel('spip_contacts','id_auteur='.intval($id_auteur).' AND id_contact='.intval($id_contact))) {
+			foreach ($_REQUEST as $k=>$v) {
+				if (strncmp($k, 'contact_' , 8) !==0
+					and strncmp($k, 'var_' , 4) !==0 ){
+					set_request($k);
+				}
+			}
+			foreach ($_REQUEST as $k=>$v) {
+				if (strncmp($k, 'contact_' , 8) ==0 ){
+					set_request(substr($k,8),$v);
+				}
+			}
+			formulaires_editer_objet_traiter('contact', $id_contact, 0, 0, '');
+		}
+	}
+	return $flux;
+}

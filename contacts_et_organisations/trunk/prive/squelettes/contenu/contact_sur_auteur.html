@@ -4,7 +4,7 @@
 ]
 <BOUCLE_contact(CONTACTS){id_contact}{tous}>
 
-[(#AUTORISER{modifier,contact,#ID_CONTACT})
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,contact,#ID_CONTACT}})
 	[(#ID_CONTACT|afficher_qui_edite{contact}|non)
 		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}
 			|parametre_url{redirect,#SELF}
@@ -31,7 +31,7 @@
 </div>
 
 
-[(#AUTORISER{modifier,contact,#ID_CONTACT})
+[(#REM|contacts_edition_integree_auteur|non|et{#AUTORISER{modifier,contact,#ID_CONTACT}})
 
 	[(#ID_CONTACT|afficher_qui_edite{contact}|non)
 		[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|icone_verticale{<:contacts:contact_editer:>,contact,edit,right ajax})]

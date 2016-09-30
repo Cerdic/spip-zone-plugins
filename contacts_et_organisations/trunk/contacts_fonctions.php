@@ -34,6 +34,17 @@ function redirige_conditionnel_vers_auteur($id_auteur, $objet = '', $id_objet = 
 	return '';
 }
 
+function contacts_edition_integree_auteur(){
+	if (!function_exists('lire_config')) {
+		include_spip('inc/config');
+	}
+	if (lire_config('contacts_et_organisations/associer_aux_auteurs') and
+		lire_config('contacts_et_organisations/afficher_infos_sur_auteurs')) {
+		return ' ';
+	}
+	return '';
+}
+
 /**
  * Calcul de la balise `#LESORGANISATIONS`
  *
