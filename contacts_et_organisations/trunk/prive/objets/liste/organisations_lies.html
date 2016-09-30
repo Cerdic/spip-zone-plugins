@@ -46,24 +46,16 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 
 			[(#REM) sur boucle pour le crayon, en fonction de la table de liaison ]
-			<BOUCLE_liaison_sur_contact(organisations_contacts)
-				{si (#ENV{objet}|=={contact})}
-				{id_contact=#ENV{id_objet}}{id_organisation}>
+			<BOUCLE_liaison(organisations_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
 				<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
-			</BOUCLE_liaison_sur_contact>
-				<BOUCLE_liaison_autre(organisations_liens)
-					{si #ENV{_objet_lien}|=={organisation}}
-					{id_objet=#ENV{id_objet}}{objet=#ENV{objet}}{id_organisation}>
-					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
-				</BOUCLE_liaison_autre>
-					[(#REM)
-						Ici, on liste les organisations mais elles sont liées
-						sur autre chose que sur spip_organisations_liens
-						On ne peut savoir si la table a un type de liaison...
-						<td class='type'></td>
-					]
-				<//B_liaison_autre>
-			<//B_liaison_sur_contact>
+			</BOUCLE_liaison>
+				[(#REM)
+					Ici, on liste les organisations mais elles sont liées
+					sur autre chose que sur spip_organisations_liens
+					On ne peut savoir si la table a un type de liaison...
+					<td class='type'></td>
+				]
+			<//B_liaison>
 
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)

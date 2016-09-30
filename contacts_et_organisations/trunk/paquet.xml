@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/contacts-128.png"
-	schema="1.12.0"
+	schema="1.13.0"
 	documentation="http://contrib.spip.net/Plugin-Contacts-Organisations"
 >
 	<nom>Contacts &#38; Organisations</nom>
@@ -32,7 +32,6 @@
 	
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
-	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.1.0;[" />
 
 	<utilise nom="coordonnees" compatibilite="[2.1.0;[" />

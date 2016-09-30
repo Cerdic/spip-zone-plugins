@@ -11,7 +11,7 @@ Affiché si un contact est demandé
 <BOUCLE_Contact(CONTACTS){id_contact}>
 	<p class='ariane'>
 		<a href="#URL_PAGE{test/co_annuaire}">Annuaire</a>
-		<BOUCLE_OrganisationContact(ORGANISATIONS organisations_contacts){id_contact}>
+		<BOUCLE_OrganisationContact(ORGANISATIONS organisations_liens){id_contact}>
 			<BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
 				<BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />
 				[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]

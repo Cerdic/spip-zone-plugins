@@ -28,11 +28,10 @@ function contacts_declarer_tables_interfaces($interface) {
 	$interface['table_des_tables']['organisations_liens'] = 'organisations_liens';
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['contacts_liens'] = 'contacts_liens';
-	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
-	
+
 	// -- Liaisons organisations/contacts
-	$interface['tables_jointures']['spip_organisations_contacts'][] = 'contacts';
-	$interface['tables_jointures']['spip_organisations_contacts'][] = 'organisations';
+	$interface['tables_jointures']['spip_organisations_liens'][] = 'contacts';
+	$interface['tables_jointures']['spip_organisations_liens'][] = 'organisations';
 
 	/**
 	 * Objectif : autoriser les traitements SPIP sur certains champs texte...
@@ -156,7 +155,6 @@ function contacts_declarer_tables_objets_sql($tables) {
 		),
 		'tables_jointures' => array(
 			'auteurs', 'annuaires',
-			'organisations_contacts',
 			'organisations_liens',
 		),
 		'rechercher_champs' => array(
@@ -217,7 +215,7 @@ function contacts_declarer_tables_objets_sql($tables) {
 		),
 		'tables_jointures' => array(
 			'auteurs', 'annuaires',
-			'organisations_contacts',
+			'organisations_liens',
 			'contacts_liens',
 		),
 		'rechercher_champs' => array(
@@ -252,21 +250,6 @@ function contacts_declarer_tables_objets_sql($tables) {
  *     Description complétée des tables
  */
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires) {
-
-	//-- Table organisations_contacts -------------------------------------
-	$organisations_contacts = array(
-		"id_organisation" => "BIGINT(21) NOT NULL",
-		"id_contact"      => "BIGINT(21) NOT NULL",
-		"type_liaison"    => "tinytext NOT NULL DEFAULT ''",
-	);
-	$organisations_contacts_key = array(
-		"PRIMARY KEY"          => "id_organisation, id_contact",
-		"KEY id_organisation"  => "id_organisation",
-		"KEY id_contact"       => "id_contact"
-	);
-	$tables_auxiliaires['spip_organisations_contacts'] =
-		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
-
 
 	//-- Table organisations_liens -------------------------------------
 	$organisations_liens = array(

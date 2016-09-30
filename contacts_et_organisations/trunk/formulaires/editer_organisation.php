@@ -93,14 +93,8 @@ function formulaires_editer_organisation_traiter_dist($id_organisation = 'new', 
 			list($objet, $id_objet) = explode('|', $associer_objet);
 		}
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
-			// contact sur spip_organisations_contacts
-			if ($objet == 'contact') {
-				include_spip('action/editer_liens_simples');
-				objet_associer_simples(array('organisation' => $id_organisation), array($objet => $id_objet));
-			} else {
-				include_spip('action/editer_liens');
-				objet_associer(array('organisation' => $id_organisation), array($objet => $id_objet));
-			}
+			include_spip('action/editer_liens');
+			objet_associer(array('organisation' => $id_organisation), array($objet => $id_objet));
 			if (isset($res['redirect']))
 				$res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_organisation, '&');
 		}

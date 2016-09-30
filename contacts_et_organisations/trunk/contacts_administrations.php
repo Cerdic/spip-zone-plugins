@@ -206,6 +206,15 @@ function contacts_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_organisations_liens DROP COLUMN tocheck'),
 	);
 
+	/*
+	On supprime enfin spip_organisations_contacts pour le mettre dans spip_organisations_liens
+	ce qui est fonctionnel en SPIP 3.x+
+	*/
+	$maj['1.13.0'] = array(
+		array('conctacts_maj_1_13_0'),
+		array('sql_drop_table','spip_organisations_contacts'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -223,7 +232,6 @@ function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations");
 	sql_drop_table("spip_contacts");
 	sql_drop_table("spip_contacts_liens");
-	sql_drop_table("spip_organisations_contacts");
 	sql_drop_table("spip_organisations_liens");
 
 	# Nettoyer les versionnages, forums et urls
@@ -398,3 +406,31 @@ function conctacts_maj_1_12_0_step2() {
 		}
 	}
 }
+
+/**
+ * MAJ 1.13.0 : transferer de spip_organisations_contacts dans spip_organisations_liens
+ */
+function conctacts_maj_1_13_0() {
+
+	$res = sql_select('*','spip_organisations_contacts');
+	$nb = sql_count($res);
+	spip_log($s="conctacts_maj_1_13_0 : $nb restants","maj");
+	echo "$s<br />";
+	while($row = sql_fetch($res)) {
+		$where = 'id_organisation=' . intval($row['id_organisation'])
+			. ' AND id_contact=' . intval($row['id_contact'])
+		  . ' AND type_liaison=' . sql_quote($row['type_liaison']);
+
+		$ins = $row;
+		$ins['id_objet'] = $row['id_contact'];
+		$ins['objet'] = 'contact';
+		unset($ins['id_contact']);
+		sql_insertq('spip_organisations_liens', $ins);
+		sql_delete('spip_organisations_contacts', $where);
+
+		if (time()>_TIME_OUT){
+			return;
+		}
+	}
+}
+

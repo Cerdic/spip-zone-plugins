@@ -90,12 +90,11 @@ function formulaires_editer_contact_traiter_dist($id_contact = 'new', $id_organi
 			list($objet, $id_objet) = explode('|', $associer_objet);
 		}
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
-			// organisation sur spip_organisations_contacts
+			include_spip('action/editer_liens');
+			// organisation sur spip_organisations_liens
 			if ($objet == 'organisation') {
-				include_spip('action/editer_liens_simples');
-				objet_associer_simples(array($objet => $id_objet), array('contact' => $id_contact));
+				objet_associer(array($objet => $id_objet), array('contact' => $id_contact));
 			} else {
-				include_spip('action/editer_liens');
 				objet_associer(array('contact' => $id_contact), array($objet => $id_objet));
 			}
 			if (isset($res['redirect']))

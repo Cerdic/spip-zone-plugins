@@ -204,7 +204,7 @@ function contacts_optimiser_base_disparus($flux) {
 			$id_contact = $row['id_contact'];
 			sql_delete("spip_contacts_liens", "id_contact=" . sql_quote($id_contact));
 			sql_delete("spip_contacts", "id_contact=" . sql_quote($id_contact));
-			sql_delete("spip_organisations_contacts", "id_contact=" . sql_quote($id_contact));
+			sql_delete("spip_organisations_liens", "objet=".sql_quote('contact')." AND id_objet=" . sql_quote($id_contact));
 			$n++;
 		}
 
@@ -224,7 +224,6 @@ function contacts_optimiser_base_disparus($flux) {
 			$id_organisation = $row['id_organisation'];
 			sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));
 			sql_delete("spip_organisations", "id_organisation=" . sql_quote($id_organisation));
-			sql_delete("spip_organisations_contacts", "id_organisation=" . sql_quote($id_organisation));
 			$n++;
 		}
 

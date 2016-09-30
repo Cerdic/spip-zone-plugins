@@ -60,3 +60,6 @@
 
 2.12.6 (2015-12-16)
     - Ajout de squelettes de pagination alphabétique pour les contacts et les organisations.
+
+3.0.0 (2016-09-30)
+    - tous les liens sur spip_organisations_liens et spip_contacts_lien, utilisation uniquement de #FORMULAIRE_EDITER_LIENS
