@@ -1,6 +1,7 @@
 <traduction module="contacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
 	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="184" traduits="171" relire="0" modifs="13" nouveaux="0" pourcent="92.93">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="cerdic" lien="http://trad.spip.net/auteur/cerdic" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />

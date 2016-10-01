@@ -105,8 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'est_un_contact' => 'This author is set as a contact.',
 	'est_une_organisation' => 'This author is set as an organization.',
 	'explication_activite' => 'Activity of the organization : NGO, education, edition...',
-	'explication_contacts_ou_organisations' => 'You can set this author as a contact or as an organization.Vous pouvez définir cet auteur
-  Additional fields can be then filled from the author modification page.', # MODIF
+	'explication_contacts_ou_organisations' => 'You can set this author as a contact or as an organization.', # MODIF
 	'explication_identification' => 'Organisation identification : VAT, etc.',
 	'explication_ouvertures' => 'Days, times, seasons...',
 	'explication_statut_juridique' => 'company, organisation, ...',
