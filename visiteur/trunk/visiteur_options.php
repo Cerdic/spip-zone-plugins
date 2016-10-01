@@ -35,7 +35,7 @@ if (!function_exists('existe_argument_balise')) {
 
 // une fonction pour le code de |? 
 // (n'existe t elle pas déjà ? c'est l'inverse de choixsivide)
-function choix_selon ($test, $sioui, $sinon) {
+function siouisinon ($test, $sioui, $sinon) {
 	return $test ? $sioui : $sinon;
 }
 
@@ -50,7 +50,7 @@ function compile_appel_visiteur ($p, $champ) {
 	if (existe_argument_balise(2, $p)) {
 		$filtre = interprete_argument_balise (2, $p);
 		if ($filtre=="'?'")
-			$filtre = "'choix_selon'";
+			$filtre = "'siouisinon'";
 
 		// le filtre peut être appelé avec 0, un ou 2 arguments
 		$arg_gauche = $arg_droite = '';
