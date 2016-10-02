@@ -29,7 +29,7 @@
 	titre=<:contacts:info_organisations_filles:>,
 	ajax}>
 
-[(#AUTORISER{creer,organisation})
+[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|et{#AUTORISER{creer,organisation}})
 	[(#URL_ECRIRE{organisation_edit,id_parent=#ID_ORGANISATION}
 		|parametre_url{redirect,#SELF}
 		|icone_verticale{<:contacts:organisation_creer_fille:>,organisation,add,right})]
