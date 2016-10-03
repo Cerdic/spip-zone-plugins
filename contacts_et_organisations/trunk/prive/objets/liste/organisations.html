@@ -31,10 +31,10 @@
 	</ul>
 </div>
 </BOUCLE_test_annuaire>
-
+#SET{has_filiales,''}
 <B_liste_orga>
 #ANCRE_PAGINATION
-<div class="liste-objets organisations">
+<div class="liste-objets organisations[(#GET{has_filiales}|non) sans-filiales]">
 <INCLURE{fond=inclure/pagination_alpha_organisations, env} />
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:organisation_un,contacts:organisations_nb}})</strong></caption>]
@@ -43,7 +43,8 @@
 			<th class="picto"></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
-            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
+      <th class="nb_filiales"><:contacts:info_nb_filiales:></th>
+      <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
 			<th class='id' scope='col'>[(#TRI{id_organisation,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -58,14 +59,14 @@
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20} #ENV{pagination_id,'_liste_orga'}}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="organisation#ID_ORGANISATION">
-			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
-				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
-			</BOUCLE_lien_organisation>
-				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
-			<//B_lien_organisation>
+			[(#SET{url,#ID_AUTEUR|intval|?{#ID_AUTEUR|generer_url_entite{auteur},#ID_ORGANISATION|generer_url_entite{organisation}}})]
 			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
-			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
+			<td class="statut_juridique">[(#STATUT_JURIDIQUE)]</td>
+			<td class='nb_filiales'>
+				[(#IDS_ORGANISATION_BRANCHE|array_diff{#LISTE{#ID_ORGANISATION}}|count|singulier_ou_pluriel{contacts:nb_filiale,contacts:nb_filiales})
+				#SET{has_filiales,' '}]
+			</td>
 			<td class='nb_contacts'>
 				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}|sinon{-})]
 			</td>
