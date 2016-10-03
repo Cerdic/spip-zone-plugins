@@ -6,27 +6,27 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Todo
 
-[ ] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
+* [ ] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
+* [ ] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
+* [ ] ajout d’un lien vers archive.org sur les articles morts
+* [ ] export CSV (à finaliser avec generer_url_objet)
+* [ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
+* [ ] ajout d’un picto lien mort optionnel dans propre() [+ éventuellement lien sur archive.org le cas échéant]
+* [ ] vérifier/traiter automagiquement les migrations http⟹https
 
-[ ] bloc des liens trop visible sur les pages d'objets (articles, rubriques, il devrait être dans la marge car il ne s’agit pas d’un contenu éditable)
+## Done
 
-[ ] ajout d’un lien vers archive.org sur les articles morts
-
-[ ] export CSV (à finaliser avec generer_url_objet)
-
-[ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
-
-[ ] ajout d’un picto lien mort optionnel dans propre() [+ éventuellement lien sur archive.org le cas échéant]
-
-[ ] vérifier/traiter automagiquement les migrations http⟹https
-
-[x] <strike>améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)</strike>
+* [x] améliorer la détection des liens (ex de bugs : "gazogène.com", ou "lacite.website" sont coupés bizarrement, les urls terminant par une virgule sont aussi coupés)
 
 ## Versions 1.3.x
 
+### Version 1.3.4
+
+* Accepter le caractère `+` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489212)
+
 ### Version 1.3.3
 
-* Accepter les caractères `:` et `,` dans une Url (cf [post sur spip-contrib->http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489081])
+* Accepter les caractères `:` et `,` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489081)
 * Accepter les accents dans le nom de domaine
 * Accepter des extensions de noms de domaine jusqu'à 7 caractères (du type `.website` par exemple)
 

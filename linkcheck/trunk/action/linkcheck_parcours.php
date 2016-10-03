@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function action_linkcheck_parcours_dist() {
-
+	set_time_limit(0);
 	include_spip('inc/autoriser');
 	include_spip('inc/linkcheck_fcts');
 
@@ -82,10 +82,12 @@ function action_linkcheck_parcours_dist() {
 						$where .= ($branche > 0) ?
 							' AND (id_rubrique IN(' . implode(',', linkcheck_marmots($branche)) . '))' : '';
 
-						// On exclus de la selection, les objet dont le status est refuse ou poubelle
-
-						if (isset($info_table['field']['statut'])) {
-							$where .= ' AND '.sql_in('statut', array('publie', 'prop', 'prepa'));
+						if (isset($info_table['statut'][0]['previsu'])) {
+							$statuts = explode(',', str_replace('/auteur', '', $info_table['statut'][0]['previsu']));
+							$where .= ' AND '.sql_in('statut', $statuts);
+						} else if (isset($info_table['field']['statut'])) {
+							// On exclus de la selection, les objet dont le status est refuse ou poubelle
+							$where .= ' AND '.sql_in('statut', array('refuse', 'poubelle'), true);
 						}
 
 						$sql = sql_allfetsel(
@@ -96,8 +98,6 @@ function action_linkcheck_parcours_dist() {
 							$nom_champ_id.' ASC'
 						);
 
-						//echo(sql_get_select($nom_champ_id.','.$champs_a_traiter, $table_sql, $where,'',$nom_champ_id.' ASC'));
-						//exit();
 						//pour chaque objet
 						$table_objet = objet_type($table_sql);
 						foreach ($sql as $res) {
