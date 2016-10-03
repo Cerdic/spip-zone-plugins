@@ -51,7 +51,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='statut'>[(#STATUT|puce_statut{produit})]</td> 
 			<td class='titre'>[(#LOGO_PRODUIT|image_reduire{20,20})]<a href="[(#ID_PRODUIT|generer_url_entite{produit})]">#TITRE</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[produit-#ID_PRODUIT-#OBJET-#ID_OBJET\]" value="+"><:produit:ajouter_lien_produit:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\[produit-#ID_PRODUIT-#OBJET-#ID_OBJET\]" value="+"><:produit:ajouter_lien_produit:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_produits>

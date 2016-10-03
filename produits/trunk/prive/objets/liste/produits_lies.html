@@ -46,7 +46,7 @@ a mis a jour la valeur avec la page reelle]
 
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[produit-#ID_PRODUIT-#OBJET-#ID_OBJET\]" value="X"><:produit:retirer_lien_produit:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\[produit-#ID_PRODUIT-#OBJET-#ID_OBJET\]" value="X"><:produit:retirer_lien_produit:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
@@ -54,7 +54,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[produit-*-#OBJET-#ID_OBJET\]" value="X"><:produit:retirer_tous_liens_produits:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[produit-*-#OBJET-#ID_OBJET\]" value="X"><:produit:retirer_tous_liens_produits:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_produits>
 <div class="liste-objets liste-objets-lies PRODUITS caption-wrap">
