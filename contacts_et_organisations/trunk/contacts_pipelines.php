@@ -42,16 +42,16 @@ function contacts_ieconfig_metas($table) {
 function contacts_affiche_hierarchie($flux)
 {
 	if ($flux['args']['objet'] == 'auteur'
-	  and isset($flux["args"]["id_auteur"])
-	  and $id = $flux["args"]["id_auteur"]) {
+	  and isset($flux["args"]["id_objet"])
+	  and $id = $flux["args"]["id_objet"]) {
 		if (lire_config('contacts_et_organisations/associer_aux_auteurs')) {
 			$id = intval($flux['args']['id_objet']);
 			// cherchons un contact
-			if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.$id)) {
-				$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/contact', array('id_contact' => $id_contact)) . '<br />' . $flux['data'];
+			if ($id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur ='.intval($id))) {
+				$flux['data'] .= '<br />' . recuperer_fond('prive/squelettes/hierarchie/contact', array('id_contact' => $id_contact));
 			// sinon une organisation
-			} elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.$id)) {
-				$flux['data'] = recuperer_fond('prive/squelettes/hierarchie/organisation', array('id_organisation' => $id_organisation)) . '<br />' . $flux['data'];
+			} elseif ($id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur ='.intval($id))) {
+				$flux['data'] .= '<br />' . recuperer_fond('prive/squelettes/hierarchie/organisation', array('id_organisation' => $id_organisation));
 			}
 		}
 	}
