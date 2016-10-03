@@ -34,7 +34,9 @@
 <B_liste_contacts>
 #ANCRE_PAGINATION
 <div class="liste-objets contacts">
-<INCLURE{fond=inclure/pagination_alpha_contacts, env} />
+	[(#GRAND_TOTAL|>{20}|oui)
+	<INCLURE{fond=inclure/pagination_alpha_contacts, env} />
+	]
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
 	<thead>

@@ -15,7 +15,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:organisation_un,contacts:organisations_nb}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(ORGANISATIONS){tout}{id_organisation IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_organisation==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(ORGANISATIONS){si #_liste_orga:GRAND_TOTAL|>{20}}{tout}{id_organisation IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_organisation==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutcol,@#ID_ORGANISATION}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}

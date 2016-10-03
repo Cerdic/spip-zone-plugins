@@ -22,7 +22,7 @@ a mis a jour la valeur avec la page reelle]
 </caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(ORGANISATIONS){tout}{!id_organisation IN #GET{exclus}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_organisation==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(ORGANISATIONS){si #_liste_orga:GRAND_TOTAL|>{20}}{tout}{!id_organisation IN #GET{exclus}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_organisation==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutcoa,@#ID_ORGANISATION}|ancre_url{paginationcoa}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}

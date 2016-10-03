@@ -15,7 +15,7 @@ a mis a jour la valeur avec la page reelle]
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(CONTACTS){tout}{id_contact IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(CONTACTS){si #_contacts:GRAND_TOTAL|>{20}}{tout}{id_contact IN #GET{selection}}{where?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_contact==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
 		#SELF|parametre_url{debutcol,@#ID_CONTACT}|ancre_url{paginationcol}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
