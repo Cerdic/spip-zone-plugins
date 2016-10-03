@@ -252,6 +252,46 @@ function contacts_optimiser_base_disparus($flux) {
 		$flux['data'] += $n;
 	}
 
+	# supprimer les liens contacts_liens dont les contacts ont disparu
+	$res = sql_select(
+		"CL.id_contact",
+		"spip_contacts_liens AS CL
+			LEFT JOIN spip_contacts AS C
+			ON CL.id_contact=C.id_contact",
+		"C.id_contact IS NULL"
+	);
+	while ($row = sql_fetch($res)) {
+		$id_contact = $row['id_contact'];
+		sql_delete("spip_contacts_liens", "id_contact=" . sql_quote($id_contact));
+	}
+
+	# supprimer les liens organisations_liens dont les organisations ont disparues
+	$res = sql_select(
+		"OL.id_organisation",
+		"spip_organisations_liens AS OL
+			LEFT JOIN spip_organisations AS O
+			ON OL.id_organisation=O.id_organisation",
+		"O.id_organisation IS NULL"
+	);
+	while ($row = sql_fetch($res)) {
+		$id_organisation = $row['id_organisation'];
+		sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));
+	}
+
+	# supprimer les liens organisations_liens dont les contacts ont disparus
+	$res = sql_select(
+		"OL.id_objet",
+		"spip_organisations_liens AS OL
+			LEFT JOIN spip_contacts AS C
+			ON (OL.id_objet=C.id_contact AND OL.objet='contact')",
+		"OL.objet='contact' AND C.id_contact IS NULL"
+	);
+	while ($row = sql_fetch($res)) {
+		$id_contact = $row['id_objet'];
+		sql_delete("spip_organisations_liens", "objet='contact' AND id_objet=" . sql_quote($id_contact));
+	}
+
+
 	return $flux;
 }
 
