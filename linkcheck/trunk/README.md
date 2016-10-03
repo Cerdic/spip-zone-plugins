@@ -23,6 +23,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 ### Version 1.3.4
 
 * Accepter le caractère `+` dans une Url (cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489212)
+* Détecter les liens sur les statuts d'objets que l'on peut prévisualiser et qui sont publiés et non pas seulement sur une sélection arbitraitre de statuts
 
 ### Version 1.3.3
 
