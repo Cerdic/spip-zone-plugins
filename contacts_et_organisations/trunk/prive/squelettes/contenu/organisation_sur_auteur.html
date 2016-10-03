@@ -40,6 +40,10 @@
 <div class="ajax">
 	#FORMULAIRE_EDITER_LIENS{organisation,#ID_ORGANISATION,contacts,#AUTORISER{modifier,organisation,#ID_ORGANISATION}}
 </div>
+#SET{ids,#IDS_ORGANISATION_BRANCHE|array_diff{#LISTE{#ID_ORGANISATION}}}
+[(#GET{ids}|count|oui)
+<INCLURE{fond=prive/objets/liste/contacts,id_organisation=#GET{ids},env,ajax,titre=<:contacts:contacts_filiales:>} />
+]
 
 [(#VAL{spip_rubriques}|in_any{#CONFIG{contacts_et_organisations/lier_organisations_objets}}|oui)
 <div class="ajax">

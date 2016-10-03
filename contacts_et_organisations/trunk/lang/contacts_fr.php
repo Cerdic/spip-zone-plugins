@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_un' => 'Un contact',
 	'contact_voir' => 'Voir',
 	'contacts' => 'Contacts',
+	'contacts_filiales' => 'Contacts filiales',
 	'contacts_nb' => '@nb@ contacts',
 	'contacts_tout' => 'Tous les contacts',
 	'creer_auteur_contact' => 'Créer un nouvel auteur et le lier à ce contact',
