@@ -55,6 +55,9 @@ function formulaires_editer_contact_charger_dist($id_contact = 'new', $id_organi
 **/
 function formulaires_editer_contact_verifier_dist($id_contact = 'new', $id_organisation = 0, $redirect = '', $associer_objet = '') {
 	$erreurs = formulaires_editer_objet_verifier('contact', $id_contact);
+	if ($editer_contact_verifier = charger_fonction('editer_contact_verifier', 'inc', true)){
+		$erreurs = array_merge($erreurs, $editer_contact_verifier($id_contact, $id_organisation));
+	}
 	return $erreurs;
 }
 

@@ -54,6 +54,11 @@ function formulaires_editer_organisation_charger_dist($id_organisation = 'new', 
 **/
 function formulaires_editer_organisation_verifier_dist($id_organisation = 'new', $id_parent = 0, $redirect = '', $associer_objet = '') {
 	$erreurs = formulaires_editer_objet_verifier('organisation', $id_organisation);
+
+	if ($editer_organisation_verifier = charger_fonction('editer_organisation_verifier', 'inc', true)){
+		$erreurs = array_merge($erreurs, $editer_organisation_verifier($id_organisation, $id_parent));
+	}
+	
 	return $erreurs;
 }
 

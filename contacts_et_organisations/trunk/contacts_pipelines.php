@@ -344,6 +344,28 @@ function contacts_formulaire_charger($flux) {
 	}
 	return $flux;
 }
+
+function contacts_formulaire_verifier($flux) {
+	if ($flux['args']['form'] == 'editer_auteur'
+	  and $id_auteur = intval($flux['args']['args'][0])) {
+		if ($id_contact = intval(_request('id_contact'))
+		  and sql_countsel('spip_contacts','id_auteur='.intval($id_auteur).' AND id_contact='.intval($id_contact))) {
+			if ($editer_contact_verifier = charger_fonction('editer_contact_verifier', 'inc', true)){
+				$prefixe = 'contact_';
+				$flux['data'] = array_merge($flux['data'], $editer_contact_verifier($id_contact, 0, $prefixe));
+			}
+		}
+		elseif ($id_organisation = intval(_request('id_organisation'))
+		  and sql_countsel('spip_organisations','id_auteur='.intval($id_auteur).' AND id_organisation='.intval($id_organisation))) {
+			if ($editer_organisation_verifier = charger_fonction('editer_organisation_verifier', 'inc', true)){
+				$prefixe = 'organisation_';
+				$flux['data'] = array_merge($flux['data'], $editer_organisation_verifier($id_organisation, 0, $prefixe));
+			}
+		}
+	}
+	return $flux['data'];
+}
+
 function contacts_formulaire_traiter($flux) {
 	if ($flux['args']['form'] == 'editer_auteur'
 	  and $id_auteur = intval($flux['data']['id_auteur'])){
