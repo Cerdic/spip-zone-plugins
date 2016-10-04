@@ -62,7 +62,7 @@ function action_linkcheck_parcours_dist() {
 						// @todo Tester pour oracle et sqlite
 						if ($db_ok['type'] === 'mysql') {
 							$tab_expreg_mysql = array(
-								'(((https?|ftps?)://)|(((https?|ftps?)://)?[A-Za-z0-9\-]*\.))[A-Za-z0-9\-]+\.[a-zA-Z]{2,4}/?',
+								'(((https?|ftps?)://)|(((https?|ftps?)://)?[A-Za-z0-9\-]*\.))[A-Za-z0-9\-\+]+\.[a-zA-Z]{2,9}/?',
 								'->[^\]]\]'	);
 
 							$where_reg = array();

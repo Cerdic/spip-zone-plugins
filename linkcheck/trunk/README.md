@@ -12,6 +12,7 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * [ ] gestion des autoriser() pas très claire (permettre d'ouvrir le plugin aux rédacteurices)
 * [ ] ajout d’un picto lien mort optionnel dans propre() [+ éventuellement lien sur archive.org le cas échéant]
 * [ ] vérifier/traiter automagiquement les migrations http⟹https
+* [ ] trouver une meilleure regexp pour la détection de lien, ça doit bien exister sous forme de lib
 
 ## Done
 
@@ -19,6 +20,11 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 * [x] présence du lien sur toutes les pages : ce message pourrait être plus informatif en précisant le nombre de liens
 
 ## Versions 1.3.x
+
+### Version 1.3.6
+
+* `.brussels` c'est 8 caractères, on en autorise 9 maintenant (cf [post sur spip-contrib](cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
+
 
 ### Version 1.3.5
 
