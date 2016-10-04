@@ -122,7 +122,9 @@ function linkcheck_taches_generales_cron($taches) {
 
 /**
  * Pipeline qui des alertes au webmestre du site, pour l'informer et
- * l'insiter à corriger les liens défectueux du site
+ * l'inciter à corriger les liens défectueux du site
+ *
+ * On n'affiche le message que lorsqu'il y a au moins un lien mort ou malade dans le site
  *
  * @param array $flux
  * @return array
@@ -133,9 +135,18 @@ function linkcheck_alertes_auteur($flux) {
 		include_spip('inc/autoriser');
 		if (autoriser('webmestre', $flux['args']['id_auteur'])) {
 			include_spip('inc/linkcheck_fcts');
-			$res = sql_getfetsel('count(id_linkcheck)', 'spip_linkchecks', 'etat<>\'ok\' AND etat!=\'\'');
+			$res = sql_getfetsel('id_linkcheck', 'spip_linkchecks', sql_in('etat', array('mort', 'malade')));
 			if ($res>0) {
-				$flux['data'][] = _T('linkcheck:liens_invalides')." <a href='" . generer_url_ecrire('linkchecks') . "'>"._T('linkcheck:linkcheck').'</a>';
+				$comptes = linkcheck_chiffre();
+				$texte = _T(
+					'linkcheck:liens_invalides',
+					array(
+						'mort' => (isset($comptes['nb_lien_mort']) ? $comptes['nb_lien_mort'] : '0'),
+						'malade' => (isset($comptes['nb_lien_malade']) ? $comptes['nb_lien_malade'] : '0'),
+						'deplace' => (isset($comptes['nb_lien_deplace']) ? $comptes['nb_lien_deplace'] : '0')
+					)
+				);
+				$flux['data'][] = $texte." <a href='" . generer_url_ecrire('linkchecks') . "'>"._T('linkcheck:linkcheck').'</a>';
 			}
 		}
 	}
