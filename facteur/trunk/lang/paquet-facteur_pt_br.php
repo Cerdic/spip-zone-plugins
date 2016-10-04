@@ -12,5 +12,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'facteur_description' => 'O Carteiro cuida da distribuição de e-mails no formato HTML, texto ou misto; via SMTP ou não',
 	'facteur_nom' => 'Carteiro',
-	'facteur_slogan' => 'Distribui os seus e-mails'
+	'facteur_slogan' => 'Distribue os seus e-mails'
 );
