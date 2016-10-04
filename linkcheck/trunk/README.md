@@ -21,10 +21,13 @@ Ce plugin permet de chercher et tester l’ensemble des liens présents dans les
 
 ## Versions 1.3.x
 
+### Version 1.3.7
+
+* Correction d'un bug mysql dans le parcours
+
 ### Version 1.3.6
 
 * `.brussels` c'est 8 caractères, on en autorise 9 maintenant (cf [post sur spip-contrib](cf [post sur spip-contrib](http://contrib.spip.net/LinkCheck-verificateur-de-liens#forum489219)
-
 
 ### Version 1.3.5
 
