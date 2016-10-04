@@ -10,7 +10,9 @@
  */
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -39,31 +41,31 @@ function albums_declarer_tables_interfaces($interfaces) {
  * @return array
  *     Description complétée des tables
  */
-function albums_declarer_tables_objets_sql($tables){
+function albums_declarer_tables_objets_sql($tables) {
 
 	/* ALBUMS */
 	$tables['spip_albums'] = array(
-		'type'                  => "album",
-		'principale'            => "oui",
+		'type'                  => 'album',
+		'principale'            => 'oui',
 		'field'=> array(
-			"id_album"          => "bigint(21) NOT NULL",
-			"titre"             => "text DEFAULT '' NOT NULL",
-			"descriptif"        => "text DEFAULT '' NOT NULL",
-			"date"              => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"statut"            => "varchar(10) DEFAULT '' NOT NULL",
-			"lang"              => "VARCHAR(10) DEFAULT '' NOT NULL",
-			"langue_choisie"    => "VARCHAR(3) DEFAULT 'non'",
-			"id_trad"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"maj"               => "TIMESTAMP"
+			'id_album'          => 'bigint(21) NOT NULL',
+			'titre'             => "text DEFAULT '' NOT NULL",
+			'descriptif'        => "text DEFAULT '' NOT NULL",
+			'date'              => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			'statut'            => "varchar(10) DEFAULT '' NOT NULL",
+			'lang'              => "VARCHAR(10) DEFAULT '' NOT NULL",
+			'langue_choisie'    => "VARCHAR(3) DEFAULT 'non'",
+			'id_trad'           => "bigint(21) DEFAULT '0' NOT NULL",
+			'maj'               => 'TIMESTAMP'
 		),
 		'key' => array(
-			"PRIMARY KEY"       => "id_album",
-			"KEY lang"          => "lang", 
-			"KEY id_trad"       => "id_trad", 
-			"KEY statut"        => "statut", 
+			'PRIMARY KEY'       => 'id_album',
+			'KEY lang'          => 'lang',
+			'KEY id_trad'       => 'id_trad',
+			'KEY statut'        => 'statut',
 		),
-		'titre'                 => "titre, lang AS lang",
-		'date'                  => "date",
+		'titre'                 => 'titre, lang AS lang',
+		'date'                  => 'date',
 		'champs_editables'      => array('titre', 'descriptif'),
 		'champs_versionnes'     => array('titre', 'descriptif'),
 		'rechercher_champs'     => array(
@@ -112,18 +114,16 @@ function albums_declarer_tables_auxiliaires($tables) {
 
 	$tables['spip_albums_liens'] = array(
 		'field' => array(
-			"id_album"     => "bigint(21) DEFAULT '0' NOT NULL",
-			"id_objet"     => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"        => "VARCHAR (25) DEFAULT '' NOT NULL",
-			"vu"           => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL"
+			'id_album'     => "bigint(21) DEFAULT '0' NOT NULL",
+			'id_objet'     => "bigint(21) DEFAULT '0' NOT NULL",
+			'objet'        => "VARCHAR (25) DEFAULT '' NOT NULL",
+			'vu'           => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"  => "id_album,id_objet,objet",
-			"KEY id_album" => "id_album",
+			'PRIMARY KEY'  => 'id_album,id_objet,objet',
+			'KEY id_album' => 'id_album',
 		)
 	);
 
 	return $tables;
 }
-
-?>
