@@ -23,9 +23,9 @@ function fusion_spip_lister_tables_principales_dist($connect, $skip_non_existing
 
 
 	// zapper les tables de l'hote qui ne sont pas dans la base importée
-	if( $skip_non_existing ) {
-		foreach($tables as $table => $shema){
-			if( !sql_showtable($table, false, $connect)){
+	if ($skip_non_existing) {
+		foreach ($tables as $table => $shema) {
+			if (!sql_showtable($table, false, $connect)) {
 				unset($tables[$table]);
 			}
 		}
@@ -66,9 +66,9 @@ function fusion_spip_lister_tables_auxiliaires_dist($connect, $skip_non_existing
 	}
 
 	// zapper les tables de l'hote qui ne sont pas dans la base importée
-	if( $skip_non_existing ) {
-		foreach($tables as $table => $shema){
-			if( !sql_showtable($table, false, $connect)){
+	if ($skip_non_existing) {
+		foreach ($tables as $table => $shema) {
+			if (!sql_showtable($table, false, $connect)) {
 				unset($tables[$table]);
 			}
 		}
@@ -131,36 +131,35 @@ function fusion_spip_comparer_shemas_dist($connect, $principales, $auxiliaires) 
  * @param string $connect nom du connecteur
  */
 function fusion_spip_inserer_table_principale_dist($nom_table, $shema, $secteur, $connect) {
-	if(isset($shema['field']) && is_array($shema['field'])){
+	if (isset($shema['field']) && is_array($shema['field'])) {
 		$time_start = microtime(true);
-	
+
 		// liste des champs à recopier
 		// $champs_select = array_keys($shema['field']);
-	
+
 		// on a déjà signalé par un warning que des champs manquaient dans la table source
 		// on va travailler sur l'intersection des champs de la table source et hote
 		$shema_source = sql_showtable($nom_table, false, $connect);
-		if(is_array($shema_source['field'])){
+		if (is_array($shema_source['field'])) {
 			$champs_select = array_intersect(array_keys($shema['field']), array_keys($shema_source['field']));
-	
+
 			// Retrouve la clé primaire à partir du nom d'objet ou de table
 			$nom_id_objet = id_table_objet($nom_table);
 			// Retrouve le type d'objet à partir du nom d'objet ou de table
 			$objet = objet_type($nom_table);
-		
+
 			// selectionner tous les objets d'une table à importer
 			$res = sql_select($champs_select, $nom_table, '', '', '', '', '', $connect);
 			$count = sql_count($res, $connect);
 			$fusion_spips = array();
 			while ($obj_import = sql_fetch($res, $connect)) {
-		
 				// garder l'id original
 				$id_origine = $obj_import[$nom_id_objet];
-		
+
 				// mais ne pas l'insérer dans l'objet importé
 				// (sinon doublon sur la clé primaire)
 				unset($obj_import[$nom_id_objet]);
-		
+
 				// réaffecter les secteurs et mettre à jour la profondeur
 				if ($secteur) {
 					if (in_array('id_secteur', array_keys($shema['field']))) {
@@ -173,34 +172,31 @@ function fusion_spip_inserer_table_principale_dist($nom_table, $shema, $secteur,
 						$obj_import['profondeur']++;
 					}
 				}
-		
+
 				// inserer localement l'objet
 				$id_final = sql_insertq($nom_table, $obj_import);
-		
+
 				$fusion_spips[] = array(
 					'site_origine' => $connect,
 					'objet' => $objet,
 					'id_origine' => $id_origine,
 					'id_final' => $id_final,
 				);
-		
 			}
 			// garder les traces id_origine / id_final
 			if (count($fusion_spips)) {
 				sql_insertq_multi('spip_fusion_spip', $fusion_spips);
 			}
-	
+
 			$time_end = microtime(true);
 			$time = $time_end - $time_start;
 			fusion_spip_log('Table '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 		} else {
 			fusion_spip_log('Table '.$nom_table.' inexistante sur le site distant)', 'fusion_spip_'.$connect);
 		}
-	}
-	else{
+	} else {
 		fusion_spip_log('Schema '.$nom_table.' n est pas un tableau)', 'fusion_spip_'.$connect);
 	}
-
 }
 
 /**
@@ -221,7 +217,6 @@ function fusion_spip_inserer_table_auxiliaire_dist($nom_table, $shema, $cles_pri
 	$res = sql_select($champs_select, $nom_table, '', '', '', '', '', $connect);
 	$count = sql_count($res, $connect);
 	while ($obj_import = sql_fetch($res, $connect)) {
-
 		$skip_import_objet = false;
 
 		// pour chaque champ de la table, et si ce champ est une clé primaire d'un objet principal,
@@ -278,13 +273,11 @@ function fusion_spip_inserer_table_auxiliaire_dist($nom_table, $shema, $cles_pri
 				sql_insertq($nom_table, $obj_import);
 			}
 		}
-
 	}
 
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 	fusion_spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
-
 }
 
 /**
@@ -307,7 +300,7 @@ function fusion_spip_liaisons_table_principale_dist($nom_table, $shema, $cles_pr
 	// (on ne met pas à jour id_auteur dans la table spip_auteurs)
 	unset($shema['field'][$cleprimaire]);
 
-	$mettre_a_jour_liaisons = charger_fonction('mettre_a_jour_liaisons','fusion_spip');
+	$mettre_a_jour_liaisons = charger_fonction('mettre_a_jour_liaisons', 'fusion_spip');
 
 	// pour chaque champ de la table, et si ce champ est une clé primaire d'un autre objet,
 	// on met à jour les liaisons (par exemple mettre à jour id_rubrique dans spip_articles)
@@ -322,7 +315,7 @@ function fusion_spip_liaisons_table_principale_dist($nom_table, $shema, $cles_pr
 	// si la table utilise une liaison par id_objet / objet
 	// mettre à jour les liaisons (par exemple spip_forum)
 	if ($shema['field']['id_objet'] && $shema['field']['objet']) {
-		$mettre_a_jour_liaisons_par_objet = charger_fonction('mettre_a_jour_liaisons_par_objet','fusion_spip');
+		$mettre_a_jour_liaisons_par_objet = charger_fonction('mettre_a_jour_liaisons_par_objet', 'fusion_spip');
 		$mettre_a_jour_liaisons_par_objet($nom_table, $objet, $cleprimaire, $connect);
 	}
 
@@ -340,7 +333,6 @@ function fusion_spip_liaisons_table_principale_dist($nom_table, $shema, $cles_pr
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 	fusion_spip_log('Liaisons '.$nom_table.' traitées : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
-
 }
 
 /**
@@ -430,7 +422,7 @@ function fusion_spip_maj_perma_urls_dist($connect) {
 
 /**
  * Mettre à jour les liens entre les documents et leurs vignettes
- * 
+ *
  * @param string $connect base source
  */
 function fusion_spip_vignettes_documents_dist($connect) {
@@ -503,11 +495,9 @@ function fusion_spip_import_documents_dist($img_dir, $connect) {
 				$documents_importes++;
 			} else {
 				fusion_spip_log(_DIR_IMG.$ext.'/'.basename($source_doc), 'fusion_spip_documents_'.$connect);
-				
-				if(file_exists(_DIR_IMG.$ext.'/'.basename($source_doc))){
+				if (file_exists(_DIR_IMG.$ext.'/'.basename($source_doc))) {
 					fusion_spip_log('Document échec : le document existe déjà '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
-				}
-				else{
+				} else {
 					fusion_spip_log('Document échec : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
 				}
 			}
@@ -567,7 +557,7 @@ function fusion_spip_maj_liens_internes_dist($principales, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$determiner_champs_texte = charger_fonction('determiner_champs_texte','fusion_spip');
+	$determiner_champs_texte = charger_fonction('determiner_champs_texte', 'fusion_spip');
 	$objets_sources = $determiner_champs_texte($principales);
 
 	// liens possibles et objets auxquels ils se rapportent
@@ -596,8 +586,7 @@ function fusion_spip_maj_liens_internes_dist($principales, $connect) {
 		$cle_primaire = id_table_objet($objet);
 
 		// uniquement pour les clés primaires simples
-		if(strpos($cle_primaire,',')===false){
-
+		if (strpos($cle_primaire, ',') === false) {
 			// selectionner les objets contenant des liens
 			$select = array();
 			$where = array();
@@ -648,7 +637,6 @@ function fusion_spip_maj_liens_internes_dist($principales, $connect) {
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 	fusion_spip_log('Liens internes mis à jour ('.$objets_mis_a_jour.' objets) : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
-
 }
 
 /** Mise à jour des modèles <docXX> <imgXX> <embXX> ...
@@ -660,7 +648,7 @@ function fusion_spip_maj_modeles_dist($principales, $connect) {
 	$time_start = microtime(true);
 	$objets_mis_a_jour = 0;
 
-	$determiner_champs_texte = charger_fonction('determiner_champs_texte','fusion_spip');
+	$determiner_champs_texte = charger_fonction('determiner_champs_texte', 'fusion_spip');
 	$objets_sources = $determiner_champs_texte($principales);
 
 	if (function_exists('medias_declarer_tables_objets_sql')) {
@@ -680,7 +668,7 @@ function fusion_spip_maj_modeles_dist($principales, $connect) {
 		$cle_primaire = id_table_objet($objet);
 
 		// uniquement pour les clés primaires simples
-		if(strpos($cle_primaire,',')===false){
+		if (strpos($cle_primaire, ',') === false) {
 			// selectionner les objets contenant les modèles recherchés
 			$select = array();
 			$where = array();
@@ -753,6 +741,6 @@ function fusion_spip_determiner_champs_texte_dist($tables) {
 	return $objets;
 }
 
-function fusion_spip_log($message, $fichier){
+function fusion_spip_log($message, $fichier) {
 	spip_log($message, 'fusion_spip_'.$fichier);
 }

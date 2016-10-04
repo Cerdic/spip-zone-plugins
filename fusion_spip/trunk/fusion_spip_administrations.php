@@ -1,5 +1,7 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function fusion_spip_upgrade($nom_meta_base_version, $version_cible) {
 
@@ -13,6 +15,6 @@ function fusion_spip_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 function fusion_spip_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_fusion_spip");
+	sql_drop_table('spip_fusion_spip');
 	effacer_meta($nom_meta_base_version);
 }

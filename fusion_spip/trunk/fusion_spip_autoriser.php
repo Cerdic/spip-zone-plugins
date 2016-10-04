@@ -1,12 +1,15 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser
  */
-function fusion_spip_autoriser() { }
+function fusion_spip_autoriser() {
+}
 
 /**
  * Par défaut seuls les webmestres peuvent fusionner
