@@ -51,9 +51,13 @@ function urls_propres($i, $entite, $args = '', $ancre = '') {
 		and $ligne = sql_fetsel('page, url', 'spip_urls', array('url = ' . sql_quote($i), 'page != \'\''))
 	) {
 		$fond = $page = $ligne['page'];
-		$contexte = array(
-			'page' => $page
-		);
+		// récupérer le contexte
+		if (is_array($args)){
+			$contexte = $args;
+		} else {
+			$contexte = array();
+		}
+		$contexte['page'] = $page;
 		$retour = array(
 			$contexte,
 			$entite,
