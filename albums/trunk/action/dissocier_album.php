@@ -10,7 +10,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Dissocier un ou tous les albums liés à un objet éditorial
@@ -31,10 +33,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - id_objet   : identifiant de l'objet à dissocier
  * @return void
  */
-function action_dissocier_album_dist($arg=null){
+function action_dissocier_album_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -42,37 +44,35 @@ function action_dissocier_album_dist($arg=null){
 
 	// si l'identifiant de l'objet est négatif, vérifier qu'il correspondant à celui du visiteur,
 	// (cas d'un album lié à un objet pas encore enregistré en base).
-	if (
-		$id_objet = intval($id_objet)
-		AND (
-			($id_objet<0 AND $id_objet==-$GLOBALS['visiteur_session']['id_auteur'])
-			OR autoriser('modifier',$objet,$id_objet)
+	if ($id_objet = intval($id_objet)
+		and (
+			($id_objet<0 and $id_objet == -$GLOBALS['visiteur_session']['id_auteur'])
+			or autoriser('modifier', $objet, $id_objet)
 		)
 	) {
 		include_spip('action/editer_liens');
 		switch ($album) {
-			case 'tous' :
+			case 'tous':
 				// Ne dissocier que les albums non insérés dans le texte.
 				// = autorisation à dissocier un album d'un objet,
 				// sauf qu'on économise des requêtes.
-				if (is_array($liens = objet_trouver_liens(array('album'=>'*'),array($objet=>$id_objet)))){
-					foreach($liens as $lien) {
-						if ($lien['vu'] == 'non')
+				if (is_array($liens = objet_trouver_liens(array('album'=>'*'), array($objet=>$id_objet)))) {
+					$ids_albums = array();
+					foreach ($liens as $lien) {
+						if ($lien['vu'] == 'non') {
 							$ids_albums[] = $lien['id_album'];
+						}
 					}
-					objet_dissocier(array('album'=>$ids_albums),array($objet=>$id_objet));
+					objet_dissocier(array('album' => $ids_albums), array($objet => $id_objet));
 				}
 				break;
-			default :
-				if (
-					$id_album = intval($album)
-					AND autoriser('dissocier','album',$id_album,'',array('objet'=>$objet,'id_objet'=>$id_objet))
-				){
-					objet_dissocier(array('album'=>$id_album),array($objet=>$id_objet));
+			default:
+				if ($id_album = intval($album)
+					and autoriser('dissocier', 'album', $id_album, '', array('objet' => $objet, 'id_objet' => $id_objet))
+				) {
+					objet_dissocier(array('album' => $id_album), array($objet => $id_objet));
 				}
 				break;
 		}
 	}
 }
-
-?>

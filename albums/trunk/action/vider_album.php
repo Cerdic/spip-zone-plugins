@@ -10,7 +10,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * «Vider» un album : dissocier tous ses documents
@@ -45,10 +47,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - supprimer : pour supprimer l'album à la fin de l'opération
  * @return void
  */
-function action_vider_album_dist($arg=null){
+function action_vider_album_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -58,8 +60,6 @@ function action_vider_album_dist($arg=null){
 
 	if ($id_album = intval($id_album)) {
 		include_spip('inc/albums');
-		vider_albums($id_album,$supprimer_orphelins);
+		vider_albums($id_album, $supprimer_orphelins);
 	}
 }
-
-?>

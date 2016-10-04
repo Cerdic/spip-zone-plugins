@@ -10,7 +10,9 @@
  */
 
 // Sécurité
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Supprime un album proprement
@@ -31,10 +33,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     - orphelins : «orphelins» pour supprimer les documents rendus orphelins
  * @return void
  */
-function action_supprimer_album_dist($arg=null) {
+function action_supprimer_album_dist($arg = null) {
 
 	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -44,8 +46,6 @@ function action_supprimer_album_dist($arg=null) {
 	// suppression
 	if ($id_album = intval($id_album)) {
 		include_spip('inc/albums');
-		supprimer_albums($id_album,$supprimer_docs_orphelins);
+		supprimer_albums($id_album, $supprimer_docs_orphelins);
 	}
 }
-
-?>
