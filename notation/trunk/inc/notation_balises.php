@@ -44,7 +44,7 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 	{
 		for ($i=1; $i<=$max_note; $i++){
 			$checked = ($i<=$nb) ? " star-rating-on" : "";
-			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$nb</a></div>";
+			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$i</a></div>";
 		}
 	}
 	return "<div class='notation_note$needjs' ".($microdatas ? 'itemprop="aggregateRating" itemscope itemtype="http://schema.org/aggregateRating"':'').">$ret</div>";
