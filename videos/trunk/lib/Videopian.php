@@ -88,7 +88,6 @@ class Videopian {
     # ================================================================================
     # Process the URL to extract the service and the video id
     private static function processUrl() {
-
         self::$url = preg_replace('#\#.*$#', '', trim(self::$url));
 
         if (!preg_match('#http://#', self::$url)) self::$url = 'http://' . self::$url;
@@ -108,7 +107,7 @@ class Videopian {
             '#viddler\.com/explore/.*/videos/(?P<id>[0-9]*)/?#i'       => 'viddler',
             '#vimeo\.com\/(?P<id>[0-9]*)[\/\?]?#i'                     => 'vimeo',
             '#youtu\.be\/(?P<id>[a-zA-Z0-9_-]*)[\/\?]?#i'               => 'youtube',
-            '#youtube\.[a-z]{0,5}/.*[\?&]?v(?:\/|=)?(?P<id>[^&]*)#i'   => 'youtube'
+            '#youtube\.[a-z]{0,5}/.*[\?&]?v(?:\/|=)?(?P<id>[^&]{10,12})#i'   => 'youtube'
         );
         // avant (rev 83853) était utilisé ===> '#vimeo\.com\/([0-9]*)#i' => 'vimeo',
 
@@ -117,7 +116,6 @@ class Videopian {
             if (preg_match($pattern, self::$url, $matches)) {
                 self::$service = $service;
                 self::$id = $matches['id'];
-//var_dump($matches);
             }
         }
     }
@@ -1056,13 +1054,15 @@ class Videopian {
         # Thumbnails
         $thumbnails = $video_infos['thumbnails'];
         
-        foreach ($thumbnails as $t) {
-            $thumbnail = new stdClass;
-            $thumbnail_query = $t;
-            $thumbnail->url = strval($thumbnail_query['url']);
-            $thumbnail->width = intval($thumbnail_query['width']);
-            $thumbnail->height = intval($thumbnail_query['height']);
-            self::$video->thumbnails[] = $thumbnail;
+        if ($thumbnails) {
+            foreach ($thumbnails as $t) {
+                $thumbnail = new stdClass;
+                $thumbnail_query = $t;
+                $thumbnail->url = strval($thumbnail_query['url']);
+                $thumbnail->width = intval($thumbnail_query['width']);
+                $thumbnail->height = intval($thumbnail_query['height']);
+                self::$video->thumbnails[] = $thumbnail;
+            }
         }
         
         
