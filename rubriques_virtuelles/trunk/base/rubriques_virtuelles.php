@@ -29,6 +29,6 @@ function rubriques_virtuelles_declarer_tables_objets_sql($tables) {
 	$tables['spip_rubriques']['field']['virtuel'] = "VARCHAR(255) DEFAULT '' NOT NULL";
 	$tables['spip_rubriques']['champs_editables'][] = 'virtuel';
 	$tables['spip_rubriques']['champs_versionnes'][] = 'virtuel';
-	$tables['spip_rubriques']['rechercher_champs'][] = 'virtuel';
+	$tables['spip_rubriques']['rechercher_champs']['virtuel'] = 3;
 	return $tables;
 }
