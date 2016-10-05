@@ -42,5 +42,4 @@ function extracteur_pptx($fichier, &$charset, $bin = '', $opt = '') {
 		spip_log('Extraction PPTX a echoue : : la class SimplePPTX (lib/simplepptx.class.php) ne semble pas etre disponible', 'extract');
 		return false;
 	}
-
 }

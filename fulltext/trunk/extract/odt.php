@@ -42,5 +42,4 @@ function extracteur_odt($fichier, &$charset, $bin = '', $opt = '') {
 	} else {
 		return false;
 	}
-
 }
