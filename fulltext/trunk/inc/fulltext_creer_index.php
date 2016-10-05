@@ -56,5 +56,4 @@ function fulltext_creer_index($table, $nom, $vals) {
 	} else {
 		return array('', "$table : "._T('spip:erreur'));
 	}
-
 }

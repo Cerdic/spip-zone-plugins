@@ -173,5 +173,4 @@ function formulaires_configurer_document_fulltext_traiter_dist() {
 	ecrire_meta('fulltext', $fulltext);
 	$res = array('message_ok'=>_T('fulltext:message_ok_configuration'));
 	return $res;
-
 }
