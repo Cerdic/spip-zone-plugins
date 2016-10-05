@@ -58,6 +58,9 @@ function inc_marquer_doublons_selection_dist(
 	$desc = array(),
 	$serveur = ''
 ) {
+	if (!$champs) {
+		return;
+	}
 
 	// On conserve uniquement les champs qui modifient le calcul des doublons de selections
 	// S'il n'y en a aucun, les doublons ne sont pas impactés, donc rien à faire d'autre..
