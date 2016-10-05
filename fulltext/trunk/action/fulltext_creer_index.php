@@ -24,5 +24,4 @@ function action_fulltext_creer_index_dist($arg = null) {
 	if (!empty($erreur)) {
 		$GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'], 'erreur', $erreur);
 	}
-
 }

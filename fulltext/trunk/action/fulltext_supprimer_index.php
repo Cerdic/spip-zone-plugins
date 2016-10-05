@@ -30,11 +30,10 @@ function action_fulltext_supprimer_index_dist($arg = null) {
 	if ($erreur) {
 		$GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'], 'erreur', $erreur);
 	}
-
 }
 
 function fulltext_supprimer_index($table, $nom = 'tout') {
-	if (!$s = sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' DROP INDEX ' . $nom)) {
+	if (!sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' DROP INDEX ' . $nom)) {
 		spip_log($query, 'fulltext'._LOG_ERREUR);
 		return array('', "$table : ". _T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
 	} else {

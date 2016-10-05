@@ -34,18 +34,16 @@ function action_fulltext_regenerer_index_dist($table = null) {
 	if ($erreur) {
 		$GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'], 'erreur', $erreur);
 	}
-
 }
-
 
 function fulltext_regenerer_index($table, $keys) {
 	if (count($keys) > 0) {
 		foreach ($keys as $key => $vals) {
-			if (!$s = sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' DROP INDEX ' . $key)) {
+			if (!sql_alter($query = 'TABLE '.table_objet_sql($table).' DROP INDEX '.$key)) {
 				spip_log($query, 'fulltext'._LOG_ERREUR);
 				return array('', "$table :" . _T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
 			}
-			if (!$s = sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' ADD FULLTEXT ' . $key . ' (' . $vals . ')')) {
+			if (!sql_alter($query = 'TABLE '.table_objet_sql($table).' ADD FULLTEXT '.$key.' ('.$vals.')')) {
 				spip_log($query, 'fulltext'._LOG_ERREUR);
 				return array('', "$table :" . _T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
 			}
