@@ -1,5 +1,5 @@
-
 <div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+<h3 class="titrem"><:import_ics:titre_configuration:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	<p class="explication">
@@ -9,6 +9,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[<(#DIV|sinon{ul})>]
 
+		[(#SAISIE{input,articlepardefaut,
+		  	label=<:configureragenda:label_articlepardefaut:>,
+			})] 
+			
 		[(#EVAL{_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS}|in_array{#LISTE{on,off}}|?{
 			#SAISIE{case,depublier_anciens_evts,
 				label=<:import_ics:depublier_anciens_evts:>,
