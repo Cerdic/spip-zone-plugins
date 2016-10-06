@@ -91,6 +91,7 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	if ($id_almanach!='new'){
 		$ancien_decalage = sql_getfetsel("decalage","spip_almanachs","id_almanach=$id_almanach");
+		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
 	}
 	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
 		$ancien_decalage = _request("decalage");
@@ -121,6 +122,9 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
 	
+	# on modifie au besoin l'article de références sur les evts
+	changer_article_referent($id_almanach,$id_article,$ancien_id_article);
+	
 	return $chargement;
 }
 
@@ -143,5 +147,27 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 			objet_modifier('evenement',$id_evenement,$champs_sql);
 			autoriser_exception('evenement','modifier',$id_evenement,false);
 		}
-  }
+	}
+}
+
+function changer_article_referent($id_almanach,$id_article,$ancien_id_article){
+	if($id_article != $ancien_id_article){
+		
+		include_spip('action/editer_evenement');
+		$liens = sql_allfetsel('E.uid, E.id_evenement',
+			"spip_evenements AS E
+			INNER JOIN spip_almanachs_liens AS L
+			ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach");
+		
+		$c = array(
+			"id_parent" => $id_article,
+		);
+		
+		foreach ($liens as $l){
+			$id_evenement = intval($l["id_evenement"]);
+			autoriser_exception('article','modifier',$id_article);
+			evenement_instituer($id_evenement,$c);
+			autoriser_exception('article','modifier',$id_article,false);
+		}
+	}
 }
