@@ -91,7 +91,6 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	if ($id_almanach!='new'){
 		$ancien_decalage = sql_getfetsel("decalage","spip_almanachs","id_almanach=$id_almanach");
-		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
 	}
 	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
 		$ancien_decalage = _request("decalage");
@@ -123,9 +122,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
 	
 	# on modifie au besoin l'article de références sur les evts
-	if(_request("changer_id_parent")!=''){
-		changer_article_referent($id_almanach,$id_article,$ancien_id_article);
-	}
+	changer_article_referent($id_almanach,$id_article);
 	
 	return $chargement;
 }
@@ -152,9 +149,9 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 	}
 }
 
-function changer_article_referent($id_almanach,$id_article,$ancien_id_article){
-	if($id_article != $ancien_id_article){
-		
+function changer_article_referent($id_almanach,$id_article){
+	//uniquement si la case est cochée
+	if(_request("changer_id_parent")==true){	
 		include_spip('action/editer_evenement');
 		$liens = sql_allfetsel('E.uid, E.id_evenement',
 			"spip_evenements AS E
