@@ -127,10 +127,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 	$decalage = intval($nouveau_decalage) - intval($ancien_decalage);
 	if ($decalage !=0){
+		include_spip('action/editer_evenement');
 		$liens = sql_allfetsel('E.uid, E.id_evenement',
-															"spip_evenements AS E
-															INNER JOIN spip_almanachs_liens AS L
-															ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
+			"spip_evenements AS E
+			INNER JOIN spip_almanachs_liens AS L
+			ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
 		
 		$champs_sql = array(
 			"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
