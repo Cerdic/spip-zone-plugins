@@ -110,7 +110,7 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 		else
 			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_PATH, $plat);
 		if ($erreur == 0){
-				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
+				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur"._LOG_ERREUR);
 				
 			}
 		$fichiers  =count($array) ;
@@ -127,7 +127,7 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 			passthru("7za a -tzip ".$chemin." ".$fichier_liste." -mx5 >/dev/null",$result);
 			if($result!=0)
 			{
-				spip_log($fichier_liste." -- code d'erreur 7z: ".$result,"zippeur_erreur");
+				spip_log($fichier_liste." -- code d'erreur 7z: ".$result,"zippeur_erreur"._LOG_ERREUR);
 			}
 			else{
 				//$fichiers++;
@@ -145,14 +145,14 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 			passthru("zip -jq9 ".$chemin." ".$fichier_liste." >/dev/null",$result);
 			if($result!=0)
 			{
-				spip_log($fichier_liste." -- code d'erreur zip: ".$result,"zippeur_erreur");
+				spip_log($fichier_liste." -- code d'erreur zip: ".$result,"zippeur_erreur"._LOG_ERREUR);
 			}
 			else{
 				//$fichiers++;
 			}
 	}
 	if ($fichiers !=count($array)){
-		spip_log("$chemin : $fichiers fichiers présents mais ".count($array)." prévus",'zippeur_erreur');
+		spip_log("$chemin : $fichiers fichiers présents mais ".count($array)." prévus",'zippeur_erreur'._LOG_ERREUR);
 		return false;		
 	}else{
 		$temps_deux=explode(" ",microtime());
