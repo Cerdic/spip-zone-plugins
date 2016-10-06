@@ -123,7 +123,9 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
 	
 	# on modifie au besoin l'article de références sur les evts
-	changer_article_referent($id_almanach,$id_article,$ancien_id_article);
+	if(_request("changer_id_parent")!=''){
+		changer_article_referent($id_almanach,$id_article,$ancien_id_article);
+	}
 	
 	return $chargement;
 }

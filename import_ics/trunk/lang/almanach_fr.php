@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.',
 
 	// C
+	'changer_id_parent' => 'Article parent',
 	'choix_salle' => 'Tous les événements se verront attribuer cette salle dans le gestionnaire de ressources.',
 	'confirmation_appliquer_decalage' => 'Êtes-vous bien certain de vouloir appliquer ce décalage ?',
 	'confirmation_mise_a_jour_evenements' => 'Voulez-vous réellement mettre à jour la liste des événements de l’almanach \\"@titre_almanach@\\" ?\\nCela peut prendre un certain temps.',
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decalage_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant.',
 
 	// E
+	'explication_changer_id_parent' => 'Associer l\'article parent à tous les évènements',
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_resa_auto' => 'On peut réserver automatiquement une salle pour tous les événements d’un même almanach (modifiable individuellement ensuite).',
 	'explication_titre' => 'Titre de l’almanach',
