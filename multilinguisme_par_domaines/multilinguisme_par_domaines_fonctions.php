@@ -57,7 +57,7 @@ function balise_URL_($p) {
 			$p->code = "vider_url($code)";
 		}
 		if (substr($nom, 4) == "rubrique" || substr($nom, 4) == "article")
-			$p->code = '($GLOBALS[\'lang\'] != $Pile[$P][\'lang\']) ? multilinguisme_par_domaines_trouver_url_lang($Pile[$SP][\'lang\']).'.$p->code.' : '.$p->code;
+			$p->code = '(($GLOBALS[\'lang\'] != $Pile[$P][\'lang\']) ? multilinguisme_par_domaines_trouver_url_lang($Pile[$SP][\'lang\']).'.$p->code.' : '.$p->code.')';
 		$p->interdire_scripts = false;
 
 		return $p;
