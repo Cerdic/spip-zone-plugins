@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mot_explication' => 'Vous pouvez aussi, alternativement, forcer l’association à un mot clef particulier.',
 	'mot_facultatif' => 'Permettre de pas choisir de mot-clef',
 	'mot_facultatif_explication' => 'Par défaut, un mot-clef doit doit être associé à un almanach et aux évènement liés. Cette option permet de rendre cela facultatif.',
-	
-	//T
+
+	// T
 	'titre_configuration' => 'Configurer les almanachs',
-	
+
 	// V
 	'v_php' => 'Réglage verrouillé en PHP.'
 );
