@@ -59,4 +59,18 @@
 	]
 	</B_nb_evenement>
 	</div>
+	
+	[(#REM) tenter une réparation si aucun évènement, peut-être du à une désinstallation du plugin agenda]
+	<BOUCLE_aucun_evenement(EVENEMENTS){0,1}>
+	</BOUCLE_aucun_evenement>
+	[(#CONFIG{import_ics_forcer_deja}|=={'oui'}|oui)
+		[(#AUTORISER{webmestre}|oui)
+		<hr>
+		<div class="forcer_install_import_ics"><p class="explication"><:almanach:forcer_install_import_ics_explication:></p>
+			[(#BOUTON_ACTION{<:almanach:forcer_install_import_ics:>,#URL_ACTION_AUTEUR{forcer_install_import_ics,#ID_ALMANACH,#URL_ECRIRE{admin_plugin}},noajax,<:almanach:confirmation_forcer_install_import_ics:>})]
+		</div>
+		]
+	]
+	<//B_aucun_evenement>
+	
 </BOUCLE_almanach>

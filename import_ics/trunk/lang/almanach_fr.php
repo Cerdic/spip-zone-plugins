@@ -19,8 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_salle' => 'Tous les événements se verront attribuer cette salle dans le gestionnaire de ressources.',
 	'confirmation_appliquer_decalage' => 'Êtes-vous bien certain de vouloir appliquer ce décalage ?',
 	'confirmation_mise_a_jour_evenements' => 'Voulez-vous réellement mettre à jour la liste des événements de l’almanach \\"@titre_almanach@\\" ?\\nCela peut prendre un certain temps.',
-	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer les événements de l’almanach \\"@titre_almanach@\\" ?',
-
+	'confirmation_suppression_evenements' => 'Êtes vous certain·e de vouloir supprimer les événements de l’almanach \\"@titre_almanach@\\" ?',
+	'confirmation_forcer_install_import_ics' => 'Êtes vous certain·e de vouloir forcer la réinstallation ?',
 	// D
 	'decalage' => 'Décalage',
 	'decalage_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant.',
@@ -32,6 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_titre' => 'Titre de l’almanach',
 	'explication_url' => 'URL d’origine du calendrier',
 
+	//F
+	'forcer_install_import_ics_titre' => 'Il semble que des tables manquent',
+	'forcer_install_import_ics_explication' => 'Il n\'y a aucun évènement, voulez vous forcer la réinstallation des tables ?',
+	'forcer_install_import_ics' => 'Forcer la réinstallation',
+	
 	// H
 	'heure' => '@nb@ heure',
 	'heures' => '@nb@ heures',
