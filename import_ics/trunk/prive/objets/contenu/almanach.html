@@ -61,7 +61,7 @@
 	</div>
 	
 	[(#REM) tenter une réparation si aucun évènement, peut-être du à une désinstallation du plugin agenda]
-	<BOUCLE_aucun_evenement(EVENEMENTS){0,1}>
+	<BOUCLE_aucun_evenement(EVENEMENTS){tout}{0,1}>
 	</BOUCLE_aucun_evenement>
 	[(#CONFIG{import_ics_forcer_deja}|=={'oui'}|oui)
 		[(#AUTORISER{webmestre}|oui)
