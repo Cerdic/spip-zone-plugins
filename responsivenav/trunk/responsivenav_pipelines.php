@@ -34,4 +34,3 @@ function responsivenav_insert_head($flux) {
 	$flux .= '}); }); })(jQuery); /*]]>*/ </script>';
 	return $flux;
 }
-?>
