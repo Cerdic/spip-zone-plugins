@@ -1,4 +1,5 @@
 <?php
+define('_AUTORISER_ACTION_ABS_REDIRECT', true);
 // on ajoute la langue d'origine dans le contexte systematiquement.
 if (!$langue = _request('lang')) {
 	include_spip('inc/lang');

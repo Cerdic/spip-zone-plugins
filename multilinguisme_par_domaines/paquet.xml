@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilinguisme_par_domaines"
 	categorie="outil"
-	version="1.0.0"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/logo_mpd_48.png"
