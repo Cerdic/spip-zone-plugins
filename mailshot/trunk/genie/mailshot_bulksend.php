@@ -65,26 +65,41 @@ function genie_mailshot_bulksend_dist($t){
 		}
 
 		// si mode boost est qu'on a *beaucoup* de destinataires, lancer des actions concourantes
-		if ($boost){
-			$next = sql_fetsel("*","spip_mailshots","statut=".sql_quote('processing'),'','id_mailshot','0,1');
-			if (!defined('_MAILSHOT_SEND_PER_PROCESS')) define('_MAILSHOT_SEND_PER_PROCESS',10000);
-			if (($total = $next['total'])>_MAILSHOT_SEND_PER_PROCESS){
-				$nb_process = floor($total/_MAILSHOT_SEND_PER_PROCESS);
-				$nb_process = max($nb_process,0);
-				$nb_process = min($nb_process,defined('_MAILSHOT_MAX_PROCESS')?_MAILSHOT_MAX_PROCESS:10);
+		// si on est sur de pas ecrouler le serveur
+		if ($boost
+		  and function_exists('sys_getloadavg')
+		  and $load = sys_getloadavg()
+		  and is_array($load)
+		  and $load = array_shift($load)) {
+			if (!defined('_ECRAN_SECURITE_LOAD')) {
+				define('_ECRAN_SECURITE_LOAD', 4);
+			}
+			if ($load < _ECRAN_SECURITE_LOAD) {
 
-				$decalage = 5*$nb;
-				$restant = $next['total']-$next['current'];
-				$nb_process = min($nb_process,floor(($restant-$nb)/$decalage));
-				spip_log("BOOST : $total destinataires, lancement de $nb_process processus supplementaires","mailshot");
-				if ($nb_process>0){
-					include_spip('inc/actions');
-					while($nb_process){
-						$offset = $nb_process * $decalage;
-						$arg = $next['id_mailshot']."-$nb-".$offset;
-						$url = generer_action_auteur("mailshot_boost_send",$arg,"",true,0);
-						mailshot_call_url_async($url);
-						$nb_process--;
+				$next = sql_fetsel("*", "spip_mailshots", "statut=" . sql_quote('processing'), '', 'id_mailshot', '0,1');
+				if (!defined('_MAILSHOT_SEND_PER_PROCESS')) {
+					define('_MAILSHOT_SEND_PER_PROCESS', 10000);
+				}
+				// si le total est superieur au seuil configure, ET que la liste des destinataires est initialisee
+				if (($total = $next['total']) > _MAILSHOT_SEND_PER_PROCESS
+				  and sql_countsel('spip_mailshots_destinataires','id_mailshot='.intval($next['id_mailshot'])) >= $total) {
+					$nb_process = floor($total / _MAILSHOT_SEND_PER_PROCESS);
+					$nb_process = max($nb_process, 0);
+					$nb_process = min($nb_process, defined('_MAILSHOT_MAX_PROCESS') ? _MAILSHOT_MAX_PROCESS : 10);
+
+					$decalage = 5 * $nb;
+					$restant = $next['total'] - $next['current'];
+					$nb_process = min($nb_process, floor(($restant - $nb) / $decalage));
+					spip_log("BOOST : $total destinataires, lancement de $nb_process processus supplementaires", "mailshot");
+					if ($nb_process > 0) {
+						include_spip('inc/actions');
+						while ($nb_process) {
+							$offset = $nb_process * $decalage;
+							$arg = $next['id_mailshot'] . "-$nb-" . $offset;
+							$url = generer_action_auteur("mailshot_boost_send", $arg, "", true, 0);
+							mailshot_call_url_async($url);
+							$nb_process--;
+						}
 					}
 				}
 			}
