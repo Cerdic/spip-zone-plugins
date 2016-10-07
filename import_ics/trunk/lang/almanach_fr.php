@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decalage_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant.',
 
 	// E
-	'explication_changer_id_parent' => 'Associer l\'article parent à tous les évènements',
+	'explication_changer_id_parent' => 'Associer l’article parent à tous les évènements',
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_resa_auto' => 'On peut réserver automatiquement une salle pour tous les événements d’un même almanach (modifiable individuellement ensuite).',
 	'explication_titre' => 'Titre de l’almanach',
