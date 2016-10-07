@@ -21,7 +21,7 @@ function mots_techniques_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_spip_groupes_mots_voirextra_technique_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_groupe_mots_voirextra_technique_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
@@ -37,9 +37,10 @@ function autoriser_spip_groupes_mots_voirextra_technique_dist($faire,$type,$id,$
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_spip_groupes_mots_modifierextra_technique_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_groupe_mots_modifierextra_technique_dist($faire, $type, $id, $qui, $opt) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table('spip_groupes_mots');
+
 	if (!isset($desc['field']['id_groupe_racine'])) {
 		return true;
 	}
