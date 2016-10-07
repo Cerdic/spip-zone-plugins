@@ -2,7 +2,6 @@
 function multilinguisme_par_domaines_trouver_url_lang($lang) {
 	include_spip('inc/config');
 	$url_base = url_de_base();
-	var_dump($lang);
 	if ($t_domaines = lire_config('multilinguisme_par_domaines/domaines_'.$lang)) {
 		$domaines = explode("\n", $t_domaines);
 		if (strlen($domaines[0]) > 1) {
