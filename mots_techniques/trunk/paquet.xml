@@ -1,12 +1,12 @@
 <paquet 
-		prefix="mots_techniques"
-		categorie="outil"
-		version="1.0.2"
-		etat="stable"
-		compatibilite="[3.0.0;3.1.*]"
-		logo="prive/themes/spip/images/mots-techniques-48.png"
-		schema="0.3"
-		documentation="http://contrib.spip.net/?article3726"
+	prefix="mots_techniques"
+	categorie="outil"
+	version="1.0.2"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/mots-techniques-48.png"
+	schema="0.3"
+	documentation="http://contrib.spip.net/?article3726"
 >
 
 	<nom>Mots techniques</nom>
@@ -14,7 +14,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur>Joseph</auteur>
 	<licence>GNU/GPL</licence>
-	
+
 	<credit lien="http://www.iconfinder.com/icondetails/10622/48/orange_tag_icon">MidTone Design (logo)</credit>
 
 	<necessite nom="cextras" compatibilite="[3.0.0;[" />
