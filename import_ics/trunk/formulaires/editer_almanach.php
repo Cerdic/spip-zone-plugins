@@ -140,11 +140,13 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 			"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
 			"date_fin" => "DATE_ADD(date_fin, INTERVAL  $decalage HOUR)",
 		);
-		foreach ($liens as $l){
-			$id_evenement = intval($l["id_evenement"]);
-			autoriser_exception('evenement','modifier',$id_evenement);
-			objet_modifier('evenement',$id_evenement,$champs_sql);
-			autoriser_exception('evenement','modifier',$id_evenement,false);
+		if(is_array($liens) and count($liens)>0){
+			foreach ($liens as $l){
+				$id_evenement = intval($l["id_evenement"]);
+				autoriser_exception('evenement','modifier',$id_evenement);
+				objet_modifier('evenement',$id_evenement,$champs_sql);
+				autoriser_exception('evenement','modifier',$id_evenement,false);
+			}
 		}
 	}
 }
@@ -162,11 +164,13 @@ function changer_article_referent($id_almanach,$id_article){
 			"id_parent" => $id_article,
 		);
 		
-		foreach ($liens as $l){
-			$id_evenement = intval($l["id_evenement"]);
-			autoriser_exception('article','modifier',$id_article);
-			evenement_instituer($id_evenement,$c);
-			autoriser_exception('article','modifier',$id_article,false);
+		if(is_array($liens) and count($liens)>0){
+			foreach ($liens as $l){
+				$id_evenement = intval($l["id_evenement"]);
+				autoriser_exception('article','modifier',$id_article);
+				evenement_instituer($id_evenement,$c);
+				autoriser_exception('article','modifier',$id_article,false);
+			}
 		}
 	}
 }
