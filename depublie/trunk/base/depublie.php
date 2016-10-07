@@ -61,4 +61,3 @@ function depublie_declarer_tables_auxiliaires($tables_auxiliaires){
 }
 
 
-?>

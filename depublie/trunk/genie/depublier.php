@@ -39,4 +39,4 @@ function genie_depublier_dist($time) {
 	return 1;
 }
 
-?>
+

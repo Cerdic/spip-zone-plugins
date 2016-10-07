@@ -38,4 +38,3 @@ function autoriser_depublierafficher($faire,$type,$id,$qui,$opt){
 	return false;
 }
 
-?>
