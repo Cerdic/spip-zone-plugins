@@ -21,4 +21,4 @@ function corbeille_icone_poubelle($total_table) {
 }
 
 
-?>
+

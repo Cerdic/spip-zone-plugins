@@ -1,7 +1,7 @@
 <paquet
 	prefix="corbeille"
 	categorie="maintenance"
-	version="3.0.6"
+	version="3.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/trash-full-32.png"
@@ -14,7 +14,7 @@
 	<auteur lien="http://www.japanim.net/">Matthieu Onfray (Japanim)</auteur>
 	<credit>adapté en plugin avec tendresse par la communauté</credit>
 
-	<copyright>2005-2014</copyright>
+	<copyright>2005-2016</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 

@@ -125,4 +125,4 @@ function corbeille_vider($table, $ids=array()) {
 	return $ids;
 }
 
-?>
+
