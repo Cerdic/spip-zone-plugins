@@ -111,7 +111,7 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 		$data = file_get_contents('php://input');
 	}
 
-	spip_log("bulkmailer_sparkpost_webhook_dist $data","mailshot");
+	spip_log("bulkmailer_sparkpost_webhook_dist $data","mailshot_feedback");
 
 	// HEAD de test ? (a priori pas utilise par SparkPost)
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD' OR !strlen($data)){
@@ -152,7 +152,7 @@ function bulkmailer_sparkpost_webhook_dist($arg){
 				$tracking_id = explode('/#', $tracking_id);
 				if (reset($tracking_id) == protocole_implicite($GLOBALS['meta']['adresse_site'])) {
 					$tracking_id = end($tracking_id);
-					spip_log("tracking $quoi $email $tracking_id", 'mailshot');
+					spip_log("tracking $quoi $email $tracking_id", 'mailshot_feedback');
 					// appeler l'api webhook mailshot
 					$feedback = charger_fonction("feedback", "newsletter");
 					$feedback($quoi, $email, $tracking_id);

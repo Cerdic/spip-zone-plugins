@@ -59,12 +59,12 @@ function bulkmailer_mandrill_webhook_dist($arg){
 	}
 
 	$events = _request('mandrill_events');
-	spip_log("bulkmailer_mandrill_webhook_dist $events","mailshot");
+	spip_log("bulkmailer_mandrill_webhook_dist $events","mailshot_feedback");
 
 	include_spip("inc/json");
 	$events = json_decode($events, true);
 
-	#spip_log("bulkmailer_mandrill_webhook_dist ".var_export($events,true),"mailshot");
+	#spip_log("bulkmailer_mandrill_webhook_dist ".var_export($events,true),"mailshot_feedback");
 
 	foreach ($events as $event){
 		$quoi = $event['event'];

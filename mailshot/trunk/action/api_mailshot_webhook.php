@@ -13,7 +13,7 @@ function action_api_mailshot_webhook($arg=null){
 	if (is_null($arg))
 		$arg =_request('arg');
 
-	spip_log("action_api_mailshot_webhook $arg","mailshot");
+	spip_log("action_api_mailshot_webhook $arg","mailshot_feedback");
 
 	$mailer = explode("/",$arg);
 	$mailer = reset($mailer);

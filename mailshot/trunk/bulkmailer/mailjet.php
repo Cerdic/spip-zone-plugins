@@ -112,7 +112,7 @@ function bulkmailer_mailjet_webhook_dist($arg){
 	else {
 		$data = file_get_contents('php://input');
 	}
-	spip_log("bulkmailer_mailjet_webhook_dist $data","mailshot");
+	spip_log("bulkmailer_mailjet_webhook_dist $data","mailshot_feedback");
 
 	include_spip('inc/json');
 	if (!$data OR !$events = json_decode($data, true)){
@@ -139,7 +139,7 @@ function bulkmailer_mailjet_webhook_dist($arg){
 			$tracking_id = explode('/#',$tracking_id);
 			if (reset($tracking_id)==protocole_implicite($GLOBALS['meta']['adresse_site'])){
 				$tracking_id = end($tracking_id);
-				spip_log("tracking $quoi $email $tracking_id",'mailshot');
+				spip_log("tracking $quoi $email $tracking_id",'mailshot_feedback');
 				// appeler l'api webhook mailshot
 				$feedback = charger_fonction("feedback","newsletter");
 				$feedback($quoi,$email,$tracking_id);
