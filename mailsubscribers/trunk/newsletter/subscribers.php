@@ -26,7 +26,7 @@ include_spip('mailsubscribers_fonctions');
 function newsletter_subscribers_dist($listes = array(), $options = array()) {
 	static $count = null;
 
-	$select = "email,nom,'' as listes,lang,'on' AS status,jeton,id_mailsubscriber";
+	$select = "S.email,S.nom,'' as listes,S.lang,'on' AS status,S.jeton,S.id_mailsubscriber";
 	$where = array();
 	$limit = "";
 
@@ -53,7 +53,7 @@ function newsletter_subscribers_dist($listes = array(), $options = array()) {
 		$identifiant = mailsubscribers_normaliser_nom_liste(array_shift($l));
 		if ($l) $id_segment = intval(reset($l));
 		if ($id_mailsubscribinglist = sql_getfetsel('id_mailsubscribinglist','spip_mailsubscribinglists','identifiant='.sql_quote($identifiant))){
-			$w[] = "(id_mailsubscribinglist=".intval($id_mailsubscribinglist).' AND id_segment='.intval($id_segment).')';
+			$w[] = "(L.id_mailsubscribinglist=".intval($id_mailsubscribinglist).' AND L.id_segment='.intval($id_segment).')';
 		}
 	}
 	if (!$w) {
@@ -63,13 +63,13 @@ function newsletter_subscribers_dist($listes = array(), $options = array()) {
 		$w = '('.implode(' OR ',$w).')';
 	}
 
-	$sous_where = sql_get_select('id_mailsubscriber', 'spip_mailsubscriptions', 'statut=' . sql_quote('valide') . ' AND ' . $w);
-	$sous_where = "(SELECT * FROM ($sous_where) AS S)";
-	$where[] = "id_mailsubscriber IN $sous_where";
+	$where[] = $w;
+	$where[] = 'L.statut=' . sql_quote('valide');
+	$from = "spip_mailsubscribers as S JOIN spip_mailsubscriptions AS L ON (L.id_mailsubscriber = S.id_mailsubscriber)";
 
 	// si simple comptage de plusieurs listes, on arrive ici
 	if (isset($options['count']) AND $options['count']) {
-		return sql_countsel("spip_mailsubscribers", $where);
+		return sql_countsel($from, $where,'S.id_mailsubscriber');
 	}
 
 	if (isset($options['limit']) AND $options['limit']) {
@@ -79,7 +79,7 @@ function newsletter_subscribers_dist($listes = array(), $options = array()) {
 	// selection, par date
 	// ca permet ainsi que les derniers inscrits (en cours de diffusion) se retrouvent dans le dernier lot
 	// et premier inscrits, premiers servis
-	$rows = sql_allfetsel($select, "spip_mailsubscribers", $where, "", "date", $limit);
+	$rows = sql_allfetsel($select, $from, $where, 'S.id_mailsubscriber', "S.date", $limit);
 	$rows = array_map('mailsubscribers_informe_subscriber', $rows);
 
 	return $rows;
