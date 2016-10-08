@@ -124,3 +124,18 @@ function uploadhtml5_formulaire_fond($flux) {
 
     return $flux;
 }
+
+/*
+ * function uploadhtml5_ieconfig_metas
+ * Pipeline ieconfig pour l'import/export des metas du plugin uploadhtml5
+ * 
+ * @param array $table
+ * @return array
+ * 
+ */
+function uploadhtml5_ieconfig_metas($table) {
+    $table['uploadhtml5_meta']['titre'] = _T('paquet-uploadhtml5:uploadhtml5_nom');
+	$table['uploadhtml5_meta']['icone'] = 'prive/themes/spip/images/uploadhtml5-16.png';
+	$table['uploadhtml5_meta']['metas_serialize'] = 'uploadhtml5';
+	return $table;
+}
