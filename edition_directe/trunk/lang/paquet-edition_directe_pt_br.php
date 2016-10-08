@@ -10,5 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'edition_directe_description' => 'Editar diretamente os objetos SPIP a partir das suas páginas, na área restrita. Os objetos a serem editados diretamente devem ser ativados na Configuração'
+	'edition_directe_description' => 'Editar diretamente os objetos SPIP a partir das suas páginas, na área restrita. Os objetos a serem editados diretamente devem ser ativados na Configuração',
+	'edition_directe_slogan' => 'Editar diretamente os objetos SPIP a partir da sua página'
 );
