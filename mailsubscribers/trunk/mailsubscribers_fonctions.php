@@ -269,8 +269,13 @@ function mailsubscribers_is_updating_segment($id_mailsubscribinglist, $id_segmen
 	  and in_array($id_segment,$update_segments[$id_mailsubscribinglist])){
 		if (!isset($progress[$id_mailsubscribinglist])){
 			$tot = sql_countsel('spip_mailsubscriptions','id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
-			$n = sql_countsel('spip_mailsubscriptions','actualise_segments=1 AND id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
-			$progress[$id_mailsubscribinglist] = intval(round(($tot-$n)*100/$tot)).'%';
+			if ($tot > 0) {
+				$n = sql_countsel('spip_mailsubscriptions','actualise_segments=1 AND id_segment=0 AND id_mailsubscribinglist='.intval($id_mailsubscribinglist));
+				$progress[$id_mailsubscribinglist] = intval(round(($tot-$n)*100/$tot)).'%';
+			}
+			else {
+				$progress[$id_mailsubscribinglist] = '100%';
+			}
 		}
 		return $progress[$id_mailsubscribinglist];
 	}
