@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_droits_contrat' => 'Ce contrat de cession est :',
 	'texte_creer_associer_droits_contrat' => 'Créer et associer un contrat de cession',
 	'texte_definir_comme_traduction_droits_contrat' => 'Ce contrat de cession est une traduction du contrat de cession numéro :',
+	'titre_calendrier' => 'Calendrier de suivi',
 	'titre_droits_contrat' => 'Contrat de cession',
 	'titre_droits_contrats' => 'Contrats de cession',
 	'titre_droits_contrats_cloture' => 'Contrats de cession clôturés',

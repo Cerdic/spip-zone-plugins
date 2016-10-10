@@ -1,0 +1,31 @@
+<BOUCLE0(AUTEURS){tout}{id_auteur}{lang_select}><?php
+if ('[(#ID_AUTEUR|securiser_acces{#ENV{arg},ical})]' OR /* spip < 1.9 */
+	'[(#ID|securiser_acces{#ENV{cle},ical})]') {
+?>#HTTP_HEADER{Content-Type: text/calendar}
+#HTTP_HEADER{Content-Disposition: attachment; filename=#NOM_SITE_SPIP|textebrut|replace{\W,'_'}|concat{_droits_contrats.ics}}
+#CACHE{0}
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID: SPIP http://www.spip.net
+VERSION:2.0
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|concat{ - <:droits_contrat:titre_droits_contrats:>}|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]_droits_contrats
+<?php
+	if ('#0:STATUT' == '0minirezo') {
+?><BOUCLE_droits_contrats(DROITS_CONTRATS?){par date_fin}{inverse}{tout}{statut!="poubelle"}>
+BEGIN:VEVENT
+SUMMARY:[(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}|concat{" / ", <:droits_contrat:champ_date_fin_label:>}|filtrer_ical)]
+DESCRIPTION:[(#COMMENTAIRES|filtrer_ical)]
+UID:droits_contrat#ID_DROITS_CONTRAT @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_FIN|date_ical)]
+DTSTART:[(#DATE_FIN|date_ical{-60})]
+DTEND:[(#DATE_FIN|date_ical)]
+CATEGORIES:#STATUT
+URL:[(#URL_ECRIRE*{droits_contrat_edit, id_droits_contrat=#ID_DROITS_CONTRAT})]
+END:VEVENT</BOUCLE_droits_contrats>
+<?php } ?>
+END:VCALENDAR
+<?php } else {
+include_spip('inc/minipres'); 
+echo minipres();
+}?></BOUCLE0>

@@ -8,3 +8,8 @@
 <INCLURE{fond=prive/objets/liste/droits_contrats, titre=<:droits_contrat:titre_droits_contrats_refuse:>, statut=#LISTE{refuse}, env, ajax}>
 
 <INCLURE{fond=prive/objets/liste/droits_contrats, titre=<:droits_contrat:titre_droits_contrats_cloture:>, statut=#LISTE{cloture}, env, ajax}>
+
+<h2><:droits_contrat:titre_calendrier:></h2>
+#SET{url,#URL_PAGE{ical_droits_contrats,id_auteur=#SESSION{id_auteur}}|parametre_url{arg,#SESSION{id_auteur}|afficher_low_sec{ical}}}
+[(#GET{url}|url_absolue|icone_horizontale{<:ical_methode_http:>,agenda-24.png})]
+[(#GET{url}|url_absolue|replace{'https?:\/\/','webcal://'}|icone_horizontale{<:ical_methode_webcal:>,agenda-24.png})]
