@@ -625,6 +625,7 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		$nom .= (isset($abonne['prenom']) ? $abonne['prenom'] . ' ' : '');
 		$subscribe($email, array(
 			'nom' => trim($nom),
+			'lang' => (isset($abonne['lang']) ? $abonne['lang'] : $GLOBALS['meta']['langue_site']),
 			'listes' => $listes,
 			'force' => true,
 			'notify' => false,
