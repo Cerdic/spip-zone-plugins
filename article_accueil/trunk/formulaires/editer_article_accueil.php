@@ -6,7 +6,9 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement des donnees du formulaire
@@ -15,11 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param int $id
  * @return array
  */
-function formulaires_editer_article_accueil_charger($id_rubrique){
+function formulaires_editer_article_accueil_charger($id_rubrique) {
 	$valeurs = array();
 	$valeurs['id_rubrique'] = $id_rubrique;
 	include_spip('base/abstract_sql');
-	$valeurs['id_article_accueil'] = sql_getfetsel('id_article_accueil','spip_rubriques','id_rubrique='.intval($id_rubrique));
+	$valeurs['id_article_accueil'] = sql_getfetsel('id_article_accueil', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 	return $valeurs;
 }
 
@@ -30,13 +32,13 @@ function formulaires_editer_article_accueil_charger($id_rubrique){
  * @param int $id
  * @return array
  */
-function formulaires_editer_article_accueil_traiter($id_rubrique){
+function formulaires_editer_article_accueil_traiter($id_rubrique) {
 	$update = array();
-	if (!is_null($id_accueil=_request('id_article_accueil'))){
+	if (!is_null($id_accueil = _request('id_article_accueil'))) {
 		include_spip('base/abstract_sql');
 		$update['id_article_accueil'] = $id_accueil;
-		sql_updateq('spip_rubriques',$update,'id_rubrique='.intval($id_rubrique));
+		sql_updateq('spip_rubriques', $update, 'id_rubrique='.intval($id_rubrique));
 	}
-	
+
 	return array('message_ok'=>'','editable'=>true);
 }
