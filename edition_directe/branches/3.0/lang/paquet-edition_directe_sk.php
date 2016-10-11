@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-edition_directe?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,5 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'edition_directe_description' => 'Priama úprava objektov spipu z ich stránky v súkromnej zóne. Objekty na priame upravovanie musia byť aktivované v konfigurácii',
 	'edition_directe_slogan' => 'Priama úprava objektov spipu z ich stránky'
 );
-
-?>

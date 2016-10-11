@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/edir?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,5 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'vider_cache' => 'لطفاً حافظه‌ي دم‌دستي را خالي كنيد'
 );
-
-?>
