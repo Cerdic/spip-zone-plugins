@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	"label_email_test" => "to the email address",
 	"label_liste" => "to subscribers of",
+	"label_date_start" => "Schedule sending" , 
+
 
 );
 
