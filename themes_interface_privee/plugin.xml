@@ -2,7 +2,7 @@
 	<nom>Th&#232;mes interface priv&#233;e</nom>
 	<slogan>Des interfaces alternatives pour SPIP 2.1.</slogan>
 	<auteur>ARNO*</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet &#224; chaque participant &#224; l’espace priv&#233; de s&#233;lectionner sa propre interface graphique en fonction de ses go&#251;ts ou de ses crit&#232;res pour son confort de lecture &#224; l’&#233;cran. Un s&#233;lecteur d’interfaces est ajout&#233; dans le menu de configuration de l’interface. Une collection d’interfaces est livr&#233;e avec le plugin.
 
