@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.3.25"
+	version="2.3.26"
 	schema="1.8.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
