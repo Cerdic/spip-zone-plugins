@@ -14,6 +14,11 @@ function inscriptionmotdepasse_formulaire_charger($flux){
 		$flux['data']['password'] = '';
 		$flux['data']['password_confirmation'] = '';
 	}
+
+    else if ($flux['args']['form'] == 'login' and $GLOBALS["visiteur_session"] and $GLOBALS["visiteur_session"]['statut'] == 'nouveau'){
+        $flux['data']['_deja_loge'] = '';
+        $flux['data']['editable'] = ' ';
+    }	
 	
 	return $flux;
 }
@@ -59,7 +64,22 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 			$flux['data']['password_confirmation'] = _T('info_obligatoire');
 		}
 	}
-	
+
 	return $flux;
 }
 
+
+
+/**
+ * Interdit la connexion à un auteur avec le statut "nouveau"
+ *
+ * @param array $flux
+ * @return array
+ */
+function inscriptionmotdepasse_formulaire_traiter($flux){
+    if ($flux['args']['form'] == 'login' and $GLOBALS["visiteur_session"]['statut'] == 'nouveau'){
+        supprimer_sessions($GLOBALS["visiteur_session"]["id_auteur"], true, true);
+        $flux['data']['message_erreur'] = _T('inscriptionmotdepasse:erreur_email_non_confirme');
+    }
+    return $flux;
+}
