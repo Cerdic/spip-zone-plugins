@@ -1,7 +1,7 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="0.0.3"
+	version="0.0.4"
 	etat="experimental"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/rang-64.png"
@@ -15,11 +15,12 @@
 	<nom>Rang</nom>
 	<!-- Permet de réordonner les tables de SPIP par drag&amp;drop -->
 
-	<auteur lien='http://www.akilia.net'>Pierre Miquel</auteur>
+	<auteur>Pierre Miquel</auteur>
 
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="rang_autorisations.php" />
 	<pipeline nom="recuperer_fond" inclure="rang_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="rang_pipelines.php" />
 
 </paquet>

@@ -11,6 +11,25 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+/**
+ * Declaration du champ Rang sur les objets sélectionnés
+ *
+ * @param array $tables
+ * @return array
+ */
+function rang_declarer_tables_objets_sql($tables){
+	include_spip('inc/config');
+
+	$rang_objets = substr(lire_config('rang_objets'), 0,-1);
+	$liste_objets = explode(',', $rang_objets);
+
+	foreach ($liste_objets as  $table) {
+		$tables[$table]['field']['rang'] = "SMALLINT NOT NULL";
+	}
+	return $tables;
+}
+
 function rang_recuperer_fond($flux){
 
 	$exec 		= _request('exec');
