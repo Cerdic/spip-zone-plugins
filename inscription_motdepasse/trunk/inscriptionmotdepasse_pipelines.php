@@ -14,11 +14,9 @@ function inscriptionmotdepasse_formulaire_charger($flux){
 		$flux['data']['password'] = '';
 		$flux['data']['password_confirmation'] = '';
 	}
-
-    if ($flux['args']['form'] == 'login' and $GLOBALS["visiteur_session"] and $GLOBALS["visiteur_session"]['statut'] == 'nouveau'){
+    else if ($flux['args']['form'] == 'login' and $GLOBALS["visiteur_session"] and $GLOBALS["visiteur_session"]['statut'] == 'nouveau'){
         $flux['data']['_deja_loge'] = '';
         $flux['data']['editable'] = ' ';
-        $flux['data']['var_login'] = 'erreur';
     }
 	return $flux;
 }
