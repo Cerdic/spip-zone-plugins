@@ -40,5 +40,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'voir_traductions' => 'بنگريد به جزئيات ترجمه‌ها'
 );
-
-?>

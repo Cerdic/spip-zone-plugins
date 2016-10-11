@@ -18,5 +18,3 @@ Y para poder aprovechar de un sistema de traducción en el sentido del presente 
 	'taa_nom' => 'Traducción de articulos de otra manera',
 	'taa_slogan' => 'Hacer que la traducción de artículos sea fácil.'
 );
-
-?>
