@@ -61,23 +61,21 @@ function insert_email() {
 // Enregistrer certaines modifications d'un email
 function revisions_emails($id_email, $c = false) {
 
+	include_spip('inc/modifier');
+
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
-		$c = array();
-		foreach (array(
-				'email', 'titre') as $champ
-		) {
-			if (($a = _request($champ)) !== null) {
-				$c[$champ] = $a;
-			}
-		}
+		$c = collecter_requests(
+			objet_info('emails', 'champs_editables'),
+			array('maj')
+		);
 	}
 
-	include_spip('inc/modifier');
-	modifier_contenu('email', $id_email, array(
+	objet_modifier_champs('email', $id_email, array(
 			'invalideur' => "id='id_email/$id_email'"
 		),
 		$c);
+
 	sql_update("spip_emails_liens", array(
 			'type' => sql_quote(_request('type'))
 		), "id_email=".intval($id_email)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));

@@ -60,23 +60,21 @@ function insert_numero($c = '') {
 // Enregistrer certaines modifications d'un numero
 function revisions_numeros($id_numero, $c = false) {
 
+	include_spip('inc/modifier');
+
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
-		$c = array();
-		foreach (array(
-				'numero', 'titre') as $champ
-		) {
-			if (($a = _request($champ)) !== null) {
-				$c[$champ] = $a;
-			}
-		}
+		$c = collecter_requests(
+			objet_info('numeros', 'champs_editables'),
+			array('maj')
+		);
 	}
 
-	include_spip('inc/modifier');
-	modifier_contenu('numero', $id_numero, array(
+	objet_modifier_champs('numero', $id_numero, array(
 			'invalideur' => "id='id_numero/$id_numero'"
 		),
 		$c);
+
 	sql_update("spip_numeros_liens", array(
 			'type' => sql_quote(_request('type'))
 		), "id_numero=".intval($id_numero)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));

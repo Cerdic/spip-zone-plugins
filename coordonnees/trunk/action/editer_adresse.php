@@ -6,6 +6,7 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 function action_editer_adresse_dist($arg = null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -60,25 +61,23 @@ function insert_adresse($c = '') {
 // Enregistrer certaines modifications d'une adresse
 function revisions_adresses($id_adresse, $c = false) {
 
+	include_spip('inc/modifier');
+
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
-		$c = array();
-		foreach (array(
-				'voie', 'complement', 'boite_postale',
-				'code_postal', 'ville', 'region', 'etat_federe', 'pays', 'titre') as $champ
-		) {
-			if (($a = _request($champ)) !== null) {
-				$c[$champ] = $a;
-			}
-		}
+		$c = collecter_requests(
+			objet_info('adresses', 'champs_editables'),
+			array('maj')
+		);
 	}
 
-	include_spip('inc/modifier');
-	modifier_contenu('adresse', $id_adresse, array(
+	objet_modifier_champs('adresse', $id_adresse, array(
 			'invalideur' => "id='id_adresse/$id_adresse'"
 		),
 		$c);
+
 	sql_update("spip_adresses_liens", array(
 			'type' => sql_quote(_request('type'))
 		), "id_adresse=".intval($id_adresse)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));
+
 }
