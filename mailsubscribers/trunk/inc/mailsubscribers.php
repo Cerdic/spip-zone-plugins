@@ -623,14 +623,17 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		//echo "subscribe ".$email."<br />";
 		$nom = (isset($abonne['nom']) ? $abonne['nom'] . ' ' : '');
 		$nom .= (isset($abonne['prenom']) ? $abonne['prenom'] . ' ' : '');
-		$subscribe($email, array(
+		$data_subscriber = array(
 			'nom' => trim($nom),
-			'lang' => (isset($abonne['lang']) ? $abonne['lang'] : $GLOBALS['meta']['langue_site']),
 			'listes' => $listes,
 			'force' => true,
 			'notify' => false,
 			'graceful' => $options['graceful'],
-		));
+		);
+		if (isset($abonne['lang'])) {
+			$data_subscriber['lang'] = $abonne['lang'];
+		}
+		$subscribe($email, $data_subscriber);
 	}
 
 	// baisser les drapeaux edition de tout ce qu'on vient de faire
