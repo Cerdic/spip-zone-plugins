@@ -13,3 +13,38 @@ input.hasDatepicker {
 		margin-left: 0;
 	}
 }
+
+// Cosmétique sur la page de login
+body.page_login {
+	padding: 5%;
+
+	#minipres {
+		width: 30rem;
+	}
+
+	h1 {
+		margin: 0 auto 1.5em;
+		font-size: 1.3em;
+		font-weight: 700;
+		text-align: center;
+		color: #5c3566;
+	}
+
+	h3 {
+		font-size: 1em;
+		font-weight: 700;
+	}
+
+	.formulaire_menu_lang {
+		padding: 0 3em;
+	}
+
+	.choix label {
+		position: relative;
+		top: -4px;
+	}
+
+	input[type="submit"] {
+		border-radius: inherit;
+	}
+}
