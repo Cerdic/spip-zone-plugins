@@ -44,7 +44,7 @@ function action_fulltext_convert_myisam_dist($table = null) {
 
 function fulltext_conversion_myisam($table) {
 	if (!sql_alter('TABLE ' . table_objet_sql($table) . ' ENGINE=MyISAM')) {
-		return array('', "$table : "._T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
+		return array('', "$table : "._T('spip:erreur') . ' ' . sql_errno() . ' ' . sql_error());
 	} else {
 		return array("$table : "._T('fulltext:table_convertie'), '');
 	}

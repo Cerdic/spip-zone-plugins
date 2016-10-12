@@ -35,7 +35,7 @@ function action_fulltext_supprimer_index_dist($arg = null) {
 function fulltext_supprimer_index($table, $nom = 'tout') {
 	if (!sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' DROP INDEX ' . $nom)) {
 		spip_log($query, 'fulltext'._LOG_ERREUR);
-		return array('', "$table : ". _T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
+		return array('', "$table : ". _T('spip:erreur') . ' ' . sql_errno() . ' ' . sql_error());
 	} else {
 		if ($table == 'document' && $nom == 'tout') {
 			// Plus besoin des donnees extraites des fichiers

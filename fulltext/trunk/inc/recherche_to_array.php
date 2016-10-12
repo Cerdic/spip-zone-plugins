@@ -323,7 +323,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	);
 
 	if (!$s) {
-		spip_log(mysql_errno().' '.mysql_error()."\n".$recherche, 'recherche');
+		spip_log(sql_errno() . ' ' . sql_error() . "\n" . $recherche, 'recherche');
 	}
 
 	while ($t = sql_fetch($s, $serveur)

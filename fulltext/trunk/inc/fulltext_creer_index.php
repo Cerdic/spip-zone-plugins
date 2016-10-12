@@ -45,7 +45,7 @@ function fulltext_creer_index($table, $nom, $vals) {
 	}
 	if (!$s = sql_alter($query = 'TABLE ' . table_objet_sql($table) . ' ADD FULLTEXT ' . $index)) {
 		spip_log($query, 'fulltext'._LOG_ERREUR);
-		return array('', "$table : " . _T('spip:erreur') . ' ' . mysql_errno() . ' ' . mysql_error());
+		return array('', "$table : " . _T('spip:erreur') . ' ' . sql_errno() . ' ' . sql_error());
 	}
 	sql_optimize(table_objet_sql($table));
 
