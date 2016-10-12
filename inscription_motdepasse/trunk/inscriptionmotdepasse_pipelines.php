@@ -61,7 +61,7 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 	}
 	
     if ($flux['args']['form'] == 'login'){
-        $statut = sql_getfetsel('statut', 'spip_auteurs', 'email=' .sql_quote(_request('var_login')) );
+        $statut = sql_getfetsel('statut', 'spip_auteurs', 'login='.sql_quote(_request('var_login')).' OR email=' .sql_quote(_request('var_login')) );
         if ( $statut == 'nouveau'){
             $flux['data']['message_erreur'] = _T('inscriptionmotdepasse:erreur_email_non_confirme');        
         }        
