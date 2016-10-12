@@ -1,5 +1,5 @@
-﻿(function ($) {
-
+(function ($) {
+ 
     $.fn.html5Uploader = function (options) {
 
         var crlf = '\r\n';
