@@ -78,6 +78,7 @@ function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agen
 	curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 	curl_setopt($ch, CURLOPT_ENCODING, '');
 	curl_setopt($ch, CURLOPT_URL, $href);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	if ($add_agent) {
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; spip/; +http://www.spip.net)');
 	}
