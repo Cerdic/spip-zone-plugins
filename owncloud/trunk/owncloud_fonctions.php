@@ -41,6 +41,51 @@ function construire_url() {
 	return array('url_courte' => $url_courte, 'url' => $url);
 }
 
+/**
+ * Regroupement de curl_init(), curl_exec et curl_close()
+ *
+ * @param string $href
+ * @param boolean $header Retourne l'entête
+ * @param boolean $body Retourne le corps
+ * @param int $timeout connection timeout en secondes
+ * @param boolean $add_agent Ajout d'un user agent
+ * @return string cURL resultat
+ */
+function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agent = true, $status = false, $post = false, $params = '') {
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_HEADER, $header);
+	curl_setopt($ch, CURLOPT_NOBODY, (!$body));
+
+	if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	} else {
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+	}
+
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+	curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+	curl_setopt($ch, CURLOPT_ENCODING, '');
+	curl_setopt($ch, CURLOPT_URL, $href);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	if ($add_agent) {
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; spip/; +http://www.spip.net)');
+	}
+
+	if (!$result = curl_exec($ch)) {
+		// logger dans les logs de SPIP les erreurs de connexion curl
+		spip_log(curl_error($ch) . ' ' . $href, 'owncloud.' . _LOG_ERREUR);
+	}
+
+	if ($status) {
+		$result = curl_getinfo($ch, $status);
+	}
+
+	curl_close($ch);
+
+	return $result;
+}
 
 /**
  * Sécurise les URL pour éviter de voir le mot de passe dans le HTML

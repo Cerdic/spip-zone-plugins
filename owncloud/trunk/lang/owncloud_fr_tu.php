@@ -47,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'importer_image' => 'Importe un fichier',
 
+	// F
+	'fichier' => 'Fichier',
+
 	// M
 	'md5' => 'md5',
 	'message_activation_synchro' => 'La synchronisation est activé.',

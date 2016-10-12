@@ -10,7 +10,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>#</th>
-			<th class='titre' scope='col'><:medias:logo:></th>
+			<th class='titre' scope='col'><:owncloud:fichier:></th>
 			<th class='date principale' scope='col'><:date:></th>
 			<th class='taille' scope='col'><:owncloud:taille_fichier:></th>
 			<th class='action' scope='col'><:owncloud:action:></th>
@@ -37,7 +37,7 @@
 			<td class='titre principale'>
 				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|oui)
 				<a href="[(#URL_ACTION_AUTEUR{securise_media, [(#VALEUR|table_valeur{'document'})]})]" type="[(#VALEUR|table_valeur{'body/mime_type'})]" title="[(#VALEUR|table_valeur{nom}|basename)] - [(#VALEUR|table_valeur{'body/mime_type'})]" class='mediabox'>
-					[(#VALEUR|table_valeur{document}|securise_identifiants{true}|balise_img|image_reduire{42,42})]
+					[(#VALEUR|table_valeur{body/fichier}|balise_img|image_reduire{42,42})]
 				</a>
 				]
 				[(#VALEUR|table_valeur{body/extension}|in_array{#LISTE{jpg,png,gif}}|non)

@@ -16,7 +16,11 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
-### Version 1.0.6 (28/10/2016)
+### Version 1.0.7 (12/10/2016)
+
+- Ajout de la fonction curl pour accélérer la récupération des fichiers distants et accessoirement passer https
+
+### Version 1.0.6 (28/09/2016)
 
 - Modification de déclaration des champs de id_owncloud dans les tables, suppression de unsigned pour la compat avec sqlite
 
@@ -62,3 +66,4 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 ## TODO
 
 - Lors de la suppression d'un document dans SPIP on peut vérifier si il y a un md5 dans la base spip_ownclouds et le supprimer
+- La modification (12/10/2016) dans liste_owncloud.html est à tester 

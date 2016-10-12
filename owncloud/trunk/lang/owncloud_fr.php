@@ -42,6 +42,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fichier_recuperer' => 'Liste des fichiers récupérés le :',
 	'document_deja_importe' => 'Document déjà importé',
 
+	// F
+	'fichier' => 'Fichier',
+
 	// I
 	'importer_image' => 'Importer un fichier',
 
