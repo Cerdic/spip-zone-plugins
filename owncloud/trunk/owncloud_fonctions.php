@@ -88,6 +88,36 @@ function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agen
 }
 
 /**
+ * Récupérer infos distantes avec curl pour afficher la liste des fichiers
+ * 
+ * @param string $document l'URL cible
+ * @return array
+ */
+function recuperer_infos_distantes_curl($document) {
+		
+		$body = curl_get($document, false, true, 10, false, '');
+		
+		$pathinfo = pathinfo($document);
+		$fichier = $pathinfo['basename'];
+		$extension = strtolower($pathinfo['extension']);
+
+		$fichier = _DIR_RACINE . nom_fichier_copie_locale($document, $extension);
+		ecrire_fichier($fichier, $body);
+		$size_image = @getimagesize($fichier);
+		$taille = filesize($fichier);
+		$type_image = true;
+
+		return array(
+			'extension' => $extension,
+			'taille' => $taille,
+			'fichier' => $fichier,
+			'largeur' => intval($size_image[0]),
+			'hauteur' => intval($size_image[1]),
+			'type_image' => $type_image,
+			'mime_type' => $size_image['mime']);
+}
+
+/**
  * Sécurise les URL pour éviter de voir le mot de passe dans le HTML
  * 
  * @param string $document l'URL cible
