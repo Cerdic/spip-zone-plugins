@@ -285,6 +285,16 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible) {
 		),
 	);
 
+	$maj['1.5.2'] = array(
+		array(
+			'maj_tables',
+			array(
+				'spip_projets_sites',
+				'spip_projets_sites_liens',
+			),
+		),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

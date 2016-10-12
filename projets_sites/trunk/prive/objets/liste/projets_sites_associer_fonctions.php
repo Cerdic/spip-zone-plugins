@@ -3,7 +3,7 @@
  * Fonctions du squelette associé
  *
  * @plugin     Sites pour projets
- * @copyright  2013-2014
+ * @copyright  2013-2016
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Projets_sites\Fonctions

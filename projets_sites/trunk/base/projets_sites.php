@@ -37,10 +37,14 @@ function projets_sites_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_traitements']['AUTEURS_ADMIN'][] = _TRAITEMENT_RACCOURCIS;
 	$interfaces['table_des_traitements']['AUTEURS_WEBMESTRES'][] = _TRAITEMENT_RACCOURCIS;
 
+	$interfaces['tables_jointures']['spip_projets'][] = 'projets_sites_liens';
+
+	/*
 	$interfaces['exceptions_des_jointures']['id_projets_site'] = array(
 		'spip_projets_sites_liens',
 		'id_projets_site',
 	);
+	*/
 
 	return $interfaces;
 }
