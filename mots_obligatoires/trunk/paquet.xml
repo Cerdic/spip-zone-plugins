@@ -1,0 +1,15 @@
+<paquet
+	prefix="mots_obligatoires"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.1.*]"
+>
+	<nom>Mots obligatoires</nom>
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence>GNU/GPL</licence>
+	
+	
+	<necessite nom="mots" compatibilite="[2.7.8;]" />
+</paquet>
