@@ -1,4 +1,8 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 function multilinguisme_par_domaines_trouver_url_lang($lang) {
 	include_spip('inc/config');
 	$url_base = url_de_base();
@@ -19,24 +23,6 @@ function multilinguisme_par_domaines_trouver_url_lang($lang) {
 }
 
 // Surcharges
-
-function action_converser() {
-	include_spip('action/converser');
-	$update_session = false;
-	if (_request('arg') and spip_connect()) {
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$securiser_action();
-		$update_session = true;
-	}
-
-	$lang = action_converser_changer_langue($update_session);
-	$redirect = rawurldecode(_request('redirect'));
-
-	if (!$redirect) {
-		$redirect = _DIR_RESTREINT_ABS;
-	}
-	redirige_par_entete($redirect, true);
-}
 
 function balise_URL_($p) {
 	include_spip('balise/url_');
