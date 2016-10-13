@@ -6,7 +6,7 @@
 		</multi>
 	</nom>
 	<auteur>BoOz</auteur>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<prefix>sm</prefix>
@@ -31,5 +31,5 @@
 		<inclure>sm_pipelines.php</inclure>
 	</pipeline>
 	<categorie>multimedia</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 </plugin>
