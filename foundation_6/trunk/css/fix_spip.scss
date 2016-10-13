@@ -15,12 +15,9 @@ input.hasDatepicker {
 }
 
 // Cosmétique sur la page de login
-body.page_login {
-	padding: 5%;
-
-	#minipres {
-		width: 30rem;
-	}
+.page_login #minipres {
+	margin: 5% auto;
+	width: 30rem;
 
 	h1 {
 		margin: 0 auto 1.5em;
