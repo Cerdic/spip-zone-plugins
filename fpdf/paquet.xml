@@ -1,7 +1,7 @@
 <paquet
 	prefix="fpdf"
 	categorie="outil"
-	version="1.0.2"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/logo-64.png"
@@ -14,6 +14,6 @@
 	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
 	<auteur>Olivier PLATHEY</auteur>
 
-	<copyright>2004-2011</copyright>
+	<copyright>2004-2016</copyright>
 	<licence lien="http://www.apache.org/licenses/LICENSE-2.0">Apache Licence, Version 2.0</licence>
 </paquet>

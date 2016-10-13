@@ -3,21 +3,10 @@ require('../fpdf.php');
 
 class PDF extends FPDF
 {
-var $B;
-var $I;
-var $U;
-var $HREF;
-
-function PDF($orientation='P', $unit='mm', $size='A4')
-{
-	// Appel au constructeur parent
-	$this->FPDF($orientation,$unit,$size);
-	// Initialisation
-	$this->B = 0;
-	$this->I = 0;
-	$this->U = 0;
-	$this->HREF = '';
-}
+protected $B = 0;
+protected $I = 0;
+protected $U = 0;
+protected $HREF = '';
 
 function WriteHTML($html)
 {

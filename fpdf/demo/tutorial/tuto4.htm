@@ -15,12 +15,10 @@ colonnes.
 
 class </span>PDF <span class="kw">extends </span>FPDF
 <span class="kw">{
-</span><span class="cmt">// Colonne courante
-</span><span class="kw">var </span>$col <span class="kw">= </span>0<span class="kw">;
-</span><span class="cmt">// Ordonnée du début des colonnes
-</span><span class="kw">var </span>$y0<span class="kw">;
+protected </span>$col <span class="kw">= </span>0<span class="kw">; </span><span class="cmt">// Colonne courante
+</span><span class="kw">protected </span>$y0<span class="kw">;      </span><span class="cmt">// Ordonnée du début des colonnes
 
-function </span>Header<span class="kw">()
+</span><span class="kw">function </span>Header<span class="kw">()
 {
     </span><span class="cmt">// En-tête
     </span><span class="kw">global </span>$titre<span class="kw">;

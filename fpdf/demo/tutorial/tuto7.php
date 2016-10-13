@@ -2,7 +2,7 @@
 define('FPDF_FONTPATH','.');
 require('../fpdf.php');
 
-$pdf=new FPDF();
+$pdf = new FPDF();
 $pdf->AddFont('Calligrapher','','calligra.php');
 $pdf->AddPage();
 $pdf->SetFont('Calligrapher','',35);

@@ -3,10 +3,8 @@ require('../fpdf.php');
 
 class PDF extends FPDF
 {
-// Colonne courante
-var $col = 0;
-// Ordonnée du début des colonnes
-var $y0;
+protected $col = 0; // Colonne courante
+protected $y0;      // Ordonnée du début des colonnes
 
 function Header()
 {

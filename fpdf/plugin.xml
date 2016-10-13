@@ -6,8 +6,8 @@
 		Adapter le en vous servant des tutoriaux du dossier demo.
 	</description>
 	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Olivier PLATHEY</auteur>
-	<version>1.0.2</version> 
-	<licence>Apache license - (c) 2004-2011</licence>
+	<version>1.1.0</version> 
+	<licence>Apache license - (c) 2004-2016</licence>
 	<etat>stable</etat>
 	<prefix>fpdf</prefix>
 	<icon>prive/themes/spip/images/logo-64.png</icon>
