@@ -12,4 +12,5 @@
 	
 	
 	<necessite nom="mots" compatibilite="[2.7.8;]" />
+	<pipeline nom="formulaire_verifier" inclure="mots_obligatoires_pipelines.php" />
 </paquet>
