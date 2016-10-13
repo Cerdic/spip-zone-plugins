@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.0.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.*]"
 	logo="skins/soundmanager.png"
 	demonstration="http://www.monde-diplomatique.fr/carnet/2013-07-02-La-bas-si-j-y-suis"
 >
