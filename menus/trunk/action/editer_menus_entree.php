@@ -1,13 +1,15 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Action de création / Modification d'une entrée de menu
  * @param unknown_type $arg
  * @return unknown_type
  */
-function action_editer_menus_entree_dist($arg=null) {
+function action_editer_menus_entree_dist($arg = null) {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -15,24 +17,24 @@ function action_editer_menus_entree_dist($arg=null) {
 	// si id_menus_entree n'est pas un nombre, c'est une creation
 	if (!$id_menus_entree = intval($arg)) {
 		$id_menu = _request('id_menu_nouvelle_entree') ? _request('id_menu_nouvelle_entree') : _request('id_menu');
-		if(intval($id_menu)){
+		if (intval($id_menu)) {
 			$id_menus_entree = insert_menus_entree($id_menu);
 		}
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_menus_entree > 0)
+	if ($id_menus_entree > 0) {
 		$err = menus_entree_set($id_menus_entree);
+	}
 
 	if (_request('redirect')) {
-		$redirect = parametre_url(urldecode(_request('redirect')),
-			'id_menus_entree', $id_menus_entree, '&') . $err;
+		$redirect = parametre_url(urldecode(_request('redirect')), 'id_menus_entree', $id_menus_entree, '&') . $err;
 
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
-	}
-	else
+	} else {
 		return array($id_menus_entree,$err);
+	}
 }
 
 /**
@@ -44,7 +46,8 @@ function insert_menus_entree($id_menu) {
 	// Envoyer aux plugins
 	$champs = array();
 	$champs['id_menu'] = $id_menu;
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_menus_entrees',
@@ -53,7 +56,7 @@ function insert_menus_entree($id_menu) {
 		)
 	);
 
-	$id_menus_entree = sql_insertq("spip_menus_entrees",array('id_menu'=>$id_menu));
+	$id_menus_entree = sql_insertq('spip_menus_entrees', array('id_menu' => $id_menu));
 
 	return $id_menus_entree;
 }
@@ -65,18 +68,15 @@ function insert_menus_entree($id_menu) {
  * @param unknown_type $set
  * @return $err
  */
-function menus_entree_set($id_menus_entree, $set=null) {
+function menus_entree_set($id_menus_entree, $set = null) {
 	$err = '';
 
 	$c = array();
 	$c['id_menu'] = _request('id_menu_nouvelle_entree');
 
-	foreach (array(
-		'rang',
-		'type_entree',
-		'parametres'
-	) as $champ)
+	foreach (array('rang','type_entree','parametres') as $champ) {
 		$c[$champ] = _request($champ, $set);
+	}
 
 	$c['parametres'] = is_array($c['parametres']) ? $c['parametres'] : array();
 	$c['parametres'] = serialize($c['parametres']);
@@ -98,15 +98,17 @@ function menus_entree_set($id_menus_entree, $set=null) {
  * @param array $c
  * @return
  */
-function revision_menus_entree ($id_menus_entree, $c=false) {
+function revision_menus_entree($id_menus_entree, $c = false) {
 	$invalideur = "id='id_menus_entree/$id_menus_entree'";
 
-	modifier_contenu('menus_entree', $id_menus_entree,
+	modifier_contenu(
+		'menus_entree',
+		$id_menus_entree,
 		array(
 			'invalideur' => $invalideur
 		),
-		$c);
+		$c
+	);
 
 	return ''; // pas d'erreur
 }
-?>
