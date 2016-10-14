@@ -17,7 +17,7 @@ function mots_obligatoires_formulaire_verifier($flux){
 			array("obligatoire=".sql_quote('oui'),
 			"tables_liees LIKE ".sql_quote("$objet%")
 		));
-		while ($groupe = sql_fetch ($groupes)){
+		while ($groupe = sql_fetch($groupes)){
 			$id_groupe = $groupe['id_groupe'];
 			$mots = sql_select("mots.id_mot",'spip_mots AS `mots` INNER JOIN spip_mots_liens AS L1 ON (L1.id_mot = mots.id_mot)',
 				array(
