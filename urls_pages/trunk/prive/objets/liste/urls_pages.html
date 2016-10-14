@@ -23,7 +23,7 @@
 	<BOUCLE_liste_urls(spip_urls){tout}{page != ''}{where?}{url like #ENV{recherche,%}}{tri #ENV{par,page},#GET{defaut_tri}}{par page}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='page principale'>[(#PAGE*)]</td>
-			<td class='url'><a href="[(#URL_PAGE{#PAGE*})]">[(#URL*)]</a></td>
+			<td class='url'><a href="[(#URL_PAGE{#PAGE*}|url_absolue{#URL_SITE_SPIP/})]">[(#URL*)]</a></td>
 			<td class='fond secondaire'>
 				[(#PAGE|trouver_fond_page|sinon{#CHEMIN_IMAGE{erreur-16}|balise_img{'X','erreur'}|concat{' ',<span class="erreur"><:urls_pages:erreur_fond_absent:></span>}})]
 			</td>

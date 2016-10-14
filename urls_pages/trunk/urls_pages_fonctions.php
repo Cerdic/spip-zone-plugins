@@ -22,24 +22,27 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @see http://www.openstudio.fr/Pages-personnalisees-et-reecriture.html
  *
  * @param string $url
- *     URL de base : spip.php?page=X
+ *     URL de base : spip.php?page=X, ou spip.php?page=X&amp;truc=machin
  * @return string $url
  *     URL personnalisée si elle existe,
  *     sinon l'URL de base
  */
 function url_page_personnalisee($url) {
 
-	if (!function_exists('url_de_base')){
-		include_spip('inc/utils');
-	}
-	$url_de_base = url_de_base();
-	// retrouver la page d'après spip.php?page=X
-	$query = parse_url($url, PHP_URL_QUERY);
-	parse_str(parse_str($query));
-	if (isset($page)
-		and $url_personnalisee = sql_getfetsel('url', 'spip_urls', array('page = ' . sql_quote($page)))
+	// On parse les query strings pour retrouver la page
+	// Attention aux entités HTML, convertir les ampersands en '&'
+	$rawurl = html_entity_decode($url);
+	$query  = parse_url($rawurl, PHP_URL_QUERY);
+	parse_str($query, $queries);
+	if (isset($queries['page'])
+		and $url_personnalisee = sql_getfetsel('url', 'spip_urls', array('page = ' . sql_quote($queries['page'])))
 	){
-		$url = rtrim($url_de_base, '/') . '/' . $url_personnalisee;
+		$url = $url_personnalisee;
+		// Remettre les query strings éventuelles
+		unset($queries['page']);
+		foreach($queries as $k => $v){
+			$url = parametre_url($url, $k, $v, '&amp;');
+		}
 	}
 
 	return $url;
