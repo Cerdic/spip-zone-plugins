@@ -7,6 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function mots_obligatoires_formulaire_verifier($flux){
 	$statut = _request ('statut');
 	if ($flux['args']['form'] == 'instituer_objet' and $statut == 'publie'){// seulement si on publie
+		$groupes_erreur = array();// stocker les groupes qui posent problème
 		$objet = $flux['args']['args'][0];
 		$id_objet = $flux['args']['args'][1];
 		
@@ -26,8 +27,29 @@ function mots_obligatoires_formulaire_verifier($flux){
 					"mots.id_groupe=$id_groupe"
 				)
 			);
-			if (sql_count ($mots) < 1){
-				pass; // a completer ici pour remplir les erreurs
+			if (sql_count($mots) < 1){
+				$groupes_erreurs[] = $groupe['titre'];
+			}
+		}
+		if (count($groupes_erreurs)>0){
+			include_spip('inc/texte');
+			set_request('statut',_request('statut_old'));
+			if (count($groupes_erreurs)==1){
+				$erreur = _T("mots_obligatoires:mot_manquant")."\n";
+			}
+			else{
+				$erreur = _T("mots_obligatoires:mots_manquants")."\n";
+			}
+			$erreur .= "<ul class='erreur_mots_obligatoires'>\n";
+			foreach ($groupes_erreurs as $titre){
+				$erreur .= "<li>".typo(supprimer_numero($titre))."</li>\n";
+			}
+			$erreur .= "</ul>\n";
+			if (isset($flux['data'])){
+				$flux['data']['statut'] = $erreur;
+			}
+			else{
+				$flux['data'] = array('statut'=>$erreur);
 			}
 		}
 	}
