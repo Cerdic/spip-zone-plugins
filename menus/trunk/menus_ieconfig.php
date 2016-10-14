@@ -1,17 +1,22 @@
 <?php
+/**
+ * Plugin Menus
+ */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /*
  * function menus_ieconfig_metas
  * Pipeline ieconfig pour l'import/export desmetas du plugin menu
- * 
+ *
  * @param array $table
  * @return array
- * 
+ *
  */
 function menus_ieconfig_metas($table) {
-    $table['menus_meta']['titre'] = _T('paquet-menus:menus_titre');
+	$table['menus_meta']['titre'] = _T('paquet-menus:menus_titre');
 	$table['menus_meta']['icone'] = 'prive/themes/spip/images/menu-16.png';
 	$table['menus_meta']['metas_serialize'] = 'menus';
 	return $table;
@@ -23,10 +28,10 @@ function menus_ieconfig_metas($table) {
  * @param array $flux
  * @return array
  */
-function menus_ieconfig($flux){
+function menus_ieconfig($flux) {
 	include_spip('inc/texte');
 	$action = $flux['args']['action'];
-	
+
 	// Formulaire d'export
 	if ($action=='form_export') {
 		$saisies = array(
@@ -49,25 +54,26 @@ function menus_ieconfig($flux){
 				)
 			)
 		);
-		$flux['data'] = array_merge($flux['data'],$saisies);
+		$flux['data'] = array_merge($flux['data'], $saisies);
 	}
-	
+
 	// Tableau d'export
 	if ($action=='export' && is_array(_request('menus_a_exporter')) && count(_request('menus_a_exporter'))>0) {
 		$flux['data']['menus'] = array();
 		include_spip('base/abstract_sql');
 		include_spip('action/exporter_menu');
 		foreach (_request('menus_a_exporter') as $identifiant) {
-			$menu = sql_fetsel(array('id_menu','titre','css'),'spip_menus','identifiant = '.sql_quote($identifiant));
+			$menu = sql_fetsel(array('id_menu','titre','css'), 'spip_menus', 'identifiant = '.sql_quote($identifiant));
 			$id_menu = $menu['id_menu'];
 			unset($menu['id_menu']);
 			$menu['entrees'] = exporter_menu_recursif($id_menu);
 			$flux['data']['menus'][$identifiant] = $menu;
 		}
 	}
-	
+
 	// Formulaire d'import
-	if ($action=='form_import' && isset($flux['args']['config']['menus']) && is_array($flux['args']['config']['menus']) && count($flux['args']['config']['menus'])>0) {
+	if ($action=='form_import' && isset($flux['args']['config']['menus'])
+		&& is_array($flux['args']['config']['menus']) && count($flux['args']['config']['menus']) > 0) {
 		$saisies = array(
 			array(
 				'saisie' => 'fieldset',
@@ -88,7 +94,7 @@ function menus_ieconfig($flux){
 			)
 		);
 		foreach ($flux['args']['config']['menus'] as $identifiant => $menu) {
-			if (sql_countsel('spip_menus','identifiant = '.sql_quote($identifiant))>0) {
+			if (sql_countsel('spip_menus', 'identifiant = '.sql_quote($identifiant)) > 0) {
 				$saisies[0]['saisies'][] = array(
 					'saisie' => 'selection',
 					'options' => array(
@@ -118,37 +124,40 @@ function menus_ieconfig($flux){
 				);
 			}
 		}
-		$flux['data'] = array_merge($flux['data'],$saisies);
+		$flux['data'] = array_merge($flux['data'], $saisies);
 	}
-	
+
 	// Import de la configuration
-	if ($action=='import' && isset($flux['args']['config']['menus']) && is_array($flux['args']['config']['menus']) && count($flux['args']['config']['menus'])>0) {
+	if ($action=='import' && isset($flux['args']['config']['menus'])
+		&& is_array($flux['args']['config']['menus']) && count($flux['args']['config']['menus']) > 0) {
 		foreach ($flux['args']['config']['menus'] as $identifiant => $menu) {
 			$choix = _request('menus_importer_'.$identifiant);
 			include_spip('base/abstract_sql');
 			include_spip('inc/menus');
 			include_spip('action/editer_menu');
 			if ($choix == 'remplacer') {
-				$id_menu = intval(sql_getfetsel('id_menu','spip_menus','identifiant = '.sql_quote($identifiant)));
-				menus_supprimer_menu($id_menu);
+				$id_menu = sql_getfetsel('id_menu', 'spip_menus', 'identifiant = '.sql_quote($identifiant));
+				menus_supprimer_menu(intval($id_menu));
 			}
-			if ($choix == 'renommer')
+			if ($choix == 'renommer') {
 				$identifiant = $identifiant.'_'.time();
-			if (in_array($choix,array('importer','remplacer','renommer'))) {
+			}
+			if (in_array($choix, array('importer','remplacer','renommer'))) {
 				$titre = isset($menu['titre']) ? $menu['titre'] : '';
 				$css = isset($menu['css']) ? $menu['css'] : '';
-				$id_menu = sql_insertq('spip_menus',array(
-					'identifiant' => $identifiant,
-					'titre' => $titre,
-					'css' => $css
-				));
-				if (isset($menu['entrees']))
+				$id_menu = sql_insertq(
+					'spip_menus',
+					array(
+						'identifiant' => $identifiant,
+						'titre' => $titre,
+						'css' => $css
+					)
+				);
+				if (isset($menu['entrees'])) {
 					menus_importer($menu['entrees'], $id_menu);
+				}
 			}
 		}
 	}
-	
 	return($flux);
 }
-
-?>
