@@ -54,22 +54,25 @@ function edition_directe_recuperer_fond($flux) {
 					'ajax' => true 
 				));
 				$icone = '
-				<span class="icone_edition_directe icone active">
-					<a href="' . generer_action_auteur('edition_directe_auteur', 'inactive-' . $objet, generer_url_ecrire($objet, $id . '=' . $contexte['id_objet'], false)) . '" title="' . _T('edir:desactiver_edition_directe_objet') . $objet . '">
-						<img src="' . find_in_path('prive/themes/spip/images/edir-24.png') . '"/>
-						<b>' . _T('edir:titre_plugin') . '</b>
-					</a>
-				</span>';
+					<span class="icone_edition_directe icone active">
+						<a href="' . generer_action_auteur('edition_directe_auteur', 'inactive-' . $objet, generer_url_ecrire($objet, $id . '=' . $contexte['id_objet'], false)) . '" title="' . _T('edir:desactiver_edition_directe_objet') . $objet . '">
+							<img src="' . find_in_path('prive/themes/spip/images/edir-24.png') . '"/>
+							<b>' . _T('edir:titre_plugin') . '</b>
+						</a>
+					</span>';
 				$patterns = array (
 					'/class=\'icone/',
 					'/<!--\/hd-->/',
-					'/<h1>/'
+					'/<h1>/',
+					'/<h1 class="crayon rubrique-titre-1 ">/',
 				);
 				$replacements = array (
 					'class="icone invisible',
 					$edition . '<!--/hd-->',
-					$icone . '<h1>' 
+					$icone . '<h1>',
+					$icone . '<h1 class="crayon rubrique-titre-1 ">',
 				);
+				$flux['data']['texte'] = preg_replace($patterns, $replacements, $texte, 1);
 			}
 			// Suppression de la prévisualisation
 			if ($fond == 'prive/objets/contenu/' . $objet) {
@@ -85,10 +88,12 @@ function edition_directe_recuperer_fond($flux) {
 						</a>
 					</span>';
 			$patterns = array (
-				'/<h1>/' 
+				'/<h1>/',
+				'/<h1 class="crayon rubrique-titre-1 ">/',
 			);
 			$replacements = array (
-				$icone . '<h1>' 
+				$icone . '<h1>',
+				$icone . '<h1 class="crayon rubrique-titre-1 ">',
 			);
 			$flux['data']['texte'] = preg_replace($patterns, $replacements, $texte, 1);
 		}
