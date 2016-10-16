@@ -63,14 +63,14 @@ function edition_directe_recuperer_fond($flux) {
 				$patterns = array (
 					'/class=\'icone/',
 					'/<!--\/hd-->/',
-					'/<h1>/',
-					'/<h1 class="crayon rubrique-titre-1 ">/',
+					'/<h1(.*?)">/',
 				);
+
 				$replacements = array (
 					'class="icone invisible',
 					$edition . '<!--/hd-->',
-					$icone . '<h1>',
-					$icone . '<h1 class="crayon rubrique-titre-1 ">',
+					$icone . '<h1 $1">',
+
 				);
 				$flux['data']['texte'] = preg_replace($patterns, $replacements, $texte, 1);
 			}
@@ -88,12 +88,10 @@ function edition_directe_recuperer_fond($flux) {
 						</a>
 					</span>';
 			$patterns = array (
-				'/<h1>/',
-				'/<h1 class="crayon rubrique-titre-1 ">/',
+				'/<h1(.*?)">/',
 			);
 			$replacements = array (
-				$icone . '<h1>',
-				$icone . '<h1 class="crayon rubrique-titre-1 ">',
+				$icone . '<h1 $1">',
 			);
 			$flux['data']['texte'] = preg_replace($patterns, $replacements, $texte, 1);
 		}
