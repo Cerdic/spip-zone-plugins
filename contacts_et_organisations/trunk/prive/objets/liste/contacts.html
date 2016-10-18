@@ -49,10 +49,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_contacts(CONTACTS)
+	<BOUCLE_liste_contacts(CONTACTS spip_mots_liens)
 		{id_annuaire?}
 		{id_organisation?}{recherche ?}
 		{auteurs.statut ?= #ENV{statut,''}}
+		{id_mot?}
 		{where?}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20} #ENV{pagination_id,'_liste_contacts'}}
 	>
