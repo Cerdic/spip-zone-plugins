@@ -7,7 +7,7 @@
 <form method="post" action="#ENV{action}#formulaire_contact_libre#ENV{id}">
 	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
-	
+
 	[(#REM) Previsualisation... ]
 	[(#ENV*{erreurs}|table_valeur{previsu}|oui)
 	<fieldset class="previsu">
@@ -19,7 +19,7 @@
 		<p class="boutons"><input type="submit" class="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" /></p>
 	</fieldset>
 	]
-	
+
 	[(#REM) Sinon, formulaire normal ]
 	<fieldset>
 		<legend><:envoyer_message:></legend>
