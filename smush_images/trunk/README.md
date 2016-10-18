@@ -70,7 +70,15 @@ Puis elle est optimisée au maximum.
 
 ## CHANGELOG
 
-### Versions 0.6.0
+### Versions 0.6.x
+
+#### Version 0.6.1
+
+Dans certains cas une copie en jpg d'un png pourrait être mieux optimisée (dans les cas où il n'y a pas de canal Alpha bien sûr)
+
+On test et on compare, si le jpg est plus intéressant, on le conserve.
+
+#### Version 0.6.0
 
 * Garder dans les metas si un logiciel est ok ou cassé (valeur `oui` si cassé, `non` si fonctionnel)
 * Intégration de Jpegoptim qui permet de compresser avec perte les images de type JPEG (85% est un bon ratio pour équilibrer qualité et poids).

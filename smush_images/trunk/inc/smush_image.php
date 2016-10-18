@@ -63,7 +63,7 @@ function inc_smush_image_dist($im) {
  */
 function image_smush($im) {
 	include_spip('inc/config');
-	$fonction = array('smush', func_get_args());
+	$fonction = array('smush', array());
 	$image = _image_valeurs_trans($im, 'smush', false, $fonction);
 
 	if (!$image) {
@@ -106,8 +106,44 @@ function image_smush($im) {
 			/**
 			 * On est sur un PNG
 			 */
+			$out_alpha = array();
+			exec('identify -verbose '.$im.' |grep lpha', $out_alpha);
+			/**
+			 * Si l'image n'a pas de canal alpha, il est peut être intéressant de la convertir en jpg
+			 */
+			if (count($out_alpha) == 0) {
+				$dest_jpg = $tmp.'.jpg';
+				exec($magick.'convert '.$im.' '.$dest_jpg);
+				if (lire_config('jpegoptim_casse', 'oui') != 'oui') {
+					$compression = '';
+					if (intval(lire_config('smush/jpeg_qualite')) > 0) {
+						$compression = ' -m'.intval(lire_config('smush/jpeg_qualite'));
+					}
+					exec("jpegoptim$compression --strip-all $dest_jpg");
+				}
+				$fsize = filesize($dest_jpg);
+				if ($fsize < 10*1024) {
+					exec('jpegtran -copy none -optimize -outfile '.$dest_jpg.' '.$dest_jpg);
+				} else {
+					exec('jpegtran -copy none -optimize -progressive -outfile '.$dest_jpg.' '.$dest_jpg);
+				}
+				$file_size_jpg = filesize($dest_jpg);
+			}
+			/**
+			 * Conversion en PNG
+			 */
 			$nq = substr($im, 0, -4).'-nq8.png';
 			exec('pngnq -f '.$im.' && optipng -o5 '.$nq.' -out '.$dest);
+
+			/**
+			 * Comparaison des version jpg et png si cela est le cas
+			 */
+			if ($dest_jpg && $file_size_jpg && filesize($dest) > $file_size_jpg) {
+				spip_unlink($dest);
+				$dest = $dest_jpg;
+			} elseif ($dest_jpg && file_exists($dest_jpg)) {
+				spip_unlink($dest_jpg);
+			}
 			if (file_exists($nq)) {
 				spip_unlink($nq);
 			}
