@@ -41,7 +41,7 @@ function is_entravaux(){
 	return entravaux_check_verrou("accesferme");
 }
 
-if (is_entravaux()){
+if ((_request('exec') !== 'mutualisation') and is_entravaux()){
 	include_spip('inc/autoriser');
 
 	// dans le site public
