@@ -51,6 +51,10 @@ function inscriptionmotdepasse_formulaire_verifier($flux){
 			$flux['data']['password_confirmation'] = _T('info_passes_identiques');
 		}
 		
+		if ( strlen(_request('password')) < _PASS_LONGUEUR_MINI ){
+			$flux['data']['password'] = _T('info_passe_trop_court_car_pluriel',                              array('nb' => _PASS_LONGUEUR_MINI));
+		}
+		
 		// Mais si l'un des deux champs n'est pas rempli, cette erreur prend le dessus
 		if (!_request('password')){
 			$flux['data']['password'] = _T('info_obligatoire');

@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionmotdepasse"
 	categorie="auteur"
-	version="1.0.6"
+	version="1.0.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="inscriptionmotdepasse.png"
