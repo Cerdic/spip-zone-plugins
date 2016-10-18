@@ -1,0 +1,42 @@
+<form action='[(#ENV{action})]' method="post" id="formulaire_recherche_par_mot" class="formulaire_spip formulaire_recherche_par_mot">
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<BOUCLE_Tagshidden(MOTS){id_mot IN #ENV{mots}}>
+	<input type="hidden" name="mots[]" value="#ID_MOT" />
+	</BOUCLE_Tagshidden>
+	[(#REM) N'afficher le choix du groupe que s'il y en a plusieurs ]
+	<BOUCLE_PlusieursGroupes(GROUPES_MOTS){id_groupe ?IN #ENV**{id_groupe}}{1,1}>
+	[(#ENV{le_groupe}|non)<input type="hidden" name="choixmot" value="1" />]
+	
+	<label for="recherchegroupe"><:mots:titre_mots_tous:></label>
+	<select id="recherchegroupe" name="le_groupe" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{le_groupe}))]) { $('#formulaire_recherche_par_mot').submit();}">
+		[(#ENV{le_groupe}|non)<option value=""><:mots:info_dans_groupe:></option>]
+		<BOUCLE_RechercheMot(GROUPES_MOTS){par num titre, titre}{id_groupe ?IN #ENV**{id_groupe}}>
+		<option value="#ID_GROUPE"[ (#ID_GROUPE|=={#ENV{le_groupe}}|?{'selected="selected"'})]>[(#TITRE|supprimer_tags)]</option>
+		</BOUCLE_RechercheMot>
+	</select>
+	</BOUCLE_PlusieursGroupes>
+	<BOUCLE_LeGroupe(GROUPES_MOTS){id_groupe ?IN #ENV**{id_groupe}}>
+	<input type="hidden" name="legroupe" value="#ID_GROUPE" />
+	#SET{legroupe,#ID_GROUPE}
+	</BOUCLE_LeGroupe>
+	<input type="hidden" name="choixmot" value="1" />
+	<//B_PlusieursGroupes>
+	<B_MotsDuGroupe>
+	<select id="recherchemot" name="mots[]" class="searchfield" onchange="if ((this.value != '')[ && (this.value != (#ENV{id_mot}))]) {$('#formulaire_recherche_par_mot').submit();}">
+		<option value="">[(#GET{legroupe}|?{<:mots:titre_mots_tous:>,<:mots:mots_clefs_meme_groupe:>})]</option>
+		<BOUCLE_MotsDuGroupe(MOTS){id_groupe=#ENV{le_groupe,#GET{legroupe}}}{par titre}{id_mot !IN #ENV{mots, #ARRAY{}}}>
+		#SET{avecunmotdeplus, #ARRAY{}}
+		[(#SET{avecunmotdeplus,[(#ENV{mots, #ARRAY{}}|push{#ID_MOT})]})]
+		<INCLURE{fond=formulaires/recherche_par_mots_compteur, mots=#GET{avecunmotdeplus}, id_mot=#_MotsDuGroupe:ID_MOT, titre=(#_MotsDuGroupe:TITRE|supprimer_tags)}>
+		</BOUCLE_MotsDuGroupe>
+	</select>
+	</B_MotsDuGroupe>
+	<noscript><div style="display:inline;"><input type="submit" id="sendsearchmc" class="okfield form_submit" value="<:pass_ok:>" /></div></noscript>
+</div>
+</form>
+<B_Tags>
+<div id="postDetailInfos" class="clearfix">
+<BOUCLE_Tags(MOTS){id_mot IN #ENV{mots}}{par titre}{" "}>[(#SET{lesautresmots,[(#ENV{mots}|critere_mots_enleve_mot_de_liste{#ID_MOT})]})]<a href="[(#ENV{action}|parametre_url{mots,#GET{lesautresmots}})]"title="<:mots:info_supprimer_mot|ucfirst|attribut_html:> ([(#TITRE|ucfirst|textebrut|attribut_html)])" class="tags">[(#TITRE|ucfirst)]</a></BOUCLE_Tags>
+</div><!-- #postDetailInfos -->
+</B_Tags>
