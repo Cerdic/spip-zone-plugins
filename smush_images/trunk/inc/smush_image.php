@@ -53,9 +53,8 @@ function inc_smush_image_dist($im) {
  * -* pngnq : apt-get install pngnq
  * -* pngoptim : apt-get install pngoptim
  * -* jpegtran : apt-get install libjpeg-turbo-progs
- * -* gifsicle : apt-get install gifsicle
  * -* jpegoptim : apt-get install jpegoptim
- * -* advPNG : apt-get install advancecomp
+ * -* gifsicle : apt-get install gifsicle
  *
  * @param string $im
  * 		Le tag image (<img src...>) à réduire
@@ -63,6 +62,7 @@ function inc_smush_image_dist($im) {
  * 		Le nouveau tag image
  */
 function image_smush($im) {
+	include_spip('inc/config');
 	$fonction = array('smush', func_get_args());
 	$image = _image_valeurs_trans($im, 'smush', false, $fonction);
 
@@ -115,6 +115,13 @@ function image_smush($im) {
 			/**
 			 * On est sur un JPEG
 			 */
+			if (lire_config('jpegoptim_casse', 'oui') != 'oui') {
+				$compression = '';
+				if (intval(lire_config('smush/jpeg_qualite')) > 0) {
+					$compression = ' -m'.intval(lire_config('smush/jpeg_qualite'));
+				}
+				exec("jpegoptim$compression --strip-all $im");
+			}
 			$fsize = filesize($im);
 			$dest = $tmp.'.jpg';
 			if ($fsize < 10*1024) {

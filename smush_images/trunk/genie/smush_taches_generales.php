@@ -27,6 +27,7 @@ function genie_smush_taches_generales($time) {
 	tester_pngnq();
 	tester_optipng();
 	tester_jpegtran();
+	tester_jpegoptim();
 	tester_convert();
 	tester_gifsicle();
 	tester_global();

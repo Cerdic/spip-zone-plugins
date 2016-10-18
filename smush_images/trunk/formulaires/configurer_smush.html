@@ -16,9 +16,14 @@
 		[(#REM|tester_global|oui)
 		<li class="editer editer_eviter_traitement_auto">
 			<div class="choix">
-				<input type="checkbox" id="eviter_traitement_auto" name="eviter_traitement_auto" class="checkbox" value="on"[(#ENV{eviter_traitement_auto}|=={on}|oui)checked="checked"]>
+				<input type="checkbox" id="eviter_traitement_auto" name="eviter_traitement_auto" class="checkbox" value="on"[(#ENV{eviter_traitement_auto}|=={on}|oui)checked="checked"] />
 				<label for="eviter_traitement_auto"><:smush:label_eviter_traitement_auto:></label>
 			</div>
+		</li>]
+		[(#REM|tester_jpegoptim|oui) 
+		<li class="editer editer_jpeg_qualite">
+			<label for="jpeg_qualite"><:smush:label_jpeg_qualite:></label>
+			<input type="text" class="text" id="jpeg_qualite" name="jpeg_qualite" class="checkbox" value="#ENV{jpeg_qualite}" />
 		</li>]
 		<B_logiciels_casses>
 		<li class="editer erreur">

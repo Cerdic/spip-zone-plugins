@@ -28,6 +28,10 @@ function smush_upgrade($nom_meta_base_version, $version_cible) {
 		array('smush_install_recuperer_infos',array())
 	);
 
+	$maj['0.2.0'] = array(
+		array('smush_install_recuperer_infos',array())
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -48,6 +52,8 @@ function smush_vider_tables($nom_meta_base_version) {
 	effacer_meta('pngnq_casse');
 	effacer_meta('optipng_casse');
 	effacer_meta('jpegtran_casse');
+	effacer_meta('jpegoptim_casse');
+	effacer_meta('gifsicle_casse');
 	effacer_meta('smush_casse');
 	effacer_meta('smush');
 	effacer_meta($nom_meta_base_version);
@@ -61,14 +67,18 @@ function smush_install_recuperer_infos() {
 	effacer_meta('pngnq_casse');
 	effacer_meta('optipng_casse');
 	effacer_meta('jpegtran_casse');
+	effacer_meta('jpegoptim_casse');
+	effacer_meta('gifsicle_casse');
 	effacer_meta('smush_casse');
 
 	include_spip('inc/smush_verifier_binaires');
 
 	tester_convert();
 	tester_jpegtran();
+	tester_jpegoptim();
 	tester_optipng();
 	tester_pngnq();
+	tester_gifsicle();
 	tester_global();
 
 	/**

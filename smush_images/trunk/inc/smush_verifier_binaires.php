@@ -23,7 +23,7 @@ include_spip('inc/config');
 function tester_pngnq() {
 	exec('pngnq -V', $out, $int);
 	if ($int == 0) {
-		effacer_config('pngnq_casse');
+		ecrire_config('pngnq_casse', 'non');
 		return true;
 	} else {
 		ecrire_config('pngnq_casse', 'oui');
@@ -41,7 +41,7 @@ function tester_pngnq() {
 function tester_optipng() {
 	exec('optipng -v', $out, $int);
 	if ($int == 0) {
-		effacer_config('optipng_casse');
+		ecrire_config('optipng_casse', 'non');
 		return true;
 	} else {
 		ecrire_config('optipng_casse', 'oui');
@@ -61,10 +61,30 @@ function tester_jpegtran() {
 	exec('jpegtran -verbose -h 2> '.$ret);
 	$contenu = '';
 	if (lire_fichier($ret, $contenu) && strlen($contenu) > 0) {
-		effacer_config('jpegtran_casse');
+		ecrire_config('jpegtran_casse', 'non');
 		return true;
 	} else {
 		ecrire_config('jpegtran_casse', 'oui');
+		return false;
+	}
+}
+
+/**
+ * Vérifier si jpegoptim est présent
+ * apt-get install jpegoptim
+ *
+ * @return bool true|false
+ * 		true si présent, sinon false
+ */
+function tester_jpegoptim() {
+	$ret = _DIR_CACHE.'jpegoptim.txt';
+	exec('jpegoptim -verbose -h 2> '.$ret);
+	$contenu = '';
+	if (lire_fichier($ret, $contenu) && strlen($contenu) > 0) {
+		ecrire_config('jpegoptim_casse', 'non');
+		return true;
+	} else {
+		ecrire_config('jpegoptim_casse', 'oui');
 		return false;
 	}
 }
@@ -85,7 +105,7 @@ function tester_convert() {
 	exec($magick.'convert -version', $out, $int1);
 	exec($magick.'identify -version', $out, $int2);
 	if (($int1 == 0) && ($int2 == 0)) {
-		effacer_config('imagick_casse');
+		ecrire_config('imagick_casse', 'non');
 		return true;
 	} else {
 		ecrire_config('imagick_casse', 'oui');
@@ -103,7 +123,7 @@ function tester_convert() {
 function tester_gifsicle() {
 	exec('gifsicle --version', $out, $int);
 	if (($int == 0)) {
-		effacer_config('gifsicle_casse');
+		ecrire_config('gifsicle_casse', 'non');
 		return true;
 	} else {
 		ecrire_config('gifsicle_casse', 'oui');

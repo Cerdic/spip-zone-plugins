@@ -1,4 +1,4 @@
-<?php
+	<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/smush_images/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_eviter_traitement_auto' => 'Éviter le traitement automatique de toutes les images générées par SPIP',
+	'label_jpeg_qualite' => 'Qualité maximale de l\'image JPEG (entre 0 et 100)',
 	'label_url_test' => 'Url de votre image à tester',
 
 	// S
