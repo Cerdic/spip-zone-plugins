@@ -17,7 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_maintenance_en_cours' => 'Le site est en construction ! Seuls les auteurs identiés peuvent voir le site public et accèder à l\'espace privé.',
 	
 	// P
-	'paravent' => 'Paravent'
-);
+	'paravent' => 'Paravent',
+	
+	// V
+	'visiteurs' => 'Visiteurs',
+	'visiteurs_autoriser' => 'Autoriser les visiteurs à accéder au site public'
+
+	);
 
 ?>
