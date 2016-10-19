@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paravent' => 'Paravent',
 	
 	// V
-	'visiteurs' => 'Visiteurs',
 	'visiteurs_autoriser' => 'Autoriser les visiteurs à accéder au site public'
 
 	);
