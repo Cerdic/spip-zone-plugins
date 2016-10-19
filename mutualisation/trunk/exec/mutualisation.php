@@ -383,10 +383,17 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
                 }
             }
             $nouvelle_version_plugin_base = (isset($info_plugin['schema'])) ? trim($info_plugin['schema']) : '0.0.0';
-            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and ($cfg[$plugin]['version'] != $info_plugin['version'] or (!is_null($info_plugin['version']) and (spip_version_compare($vplugin_base, $nouvelle_version_plugin_base, '<'))))) {
+			
+            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and 
+				(
+					($cfg[$plugin]['version'] != $info_plugin['version']) 
+					or 
+					(spip_version_compare($vplugin_base, $nouvelle_version_plugin_base, '<'))
+				)
+			) {
                 $secret = $meta['version_installee'].'-'.$meta['popularite_total'];
                 $secret = md5($secret);
-                $vplugin = $vplugin_base.' &rarr; '.$nouvelle_version_plugin_base;
+                $vplugin = $vplugin_base.' / '.$cfg[$plugin]['version'].' &rarr; '.$nouvelle_version_plugin_base.' / '.$info_plugin['version'];
 
                 return <<<EOF
 <form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='post' class='upgrade' target='_blank'>
