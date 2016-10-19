@@ -15,17 +15,21 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function recuperer_releases_drupal_dist() {
-	$url_page_releases = 'https://www.drupal.org/project/drupal/releases';
-	$content_page = file_get_contents($url_page_releases);
-	preg_match("/<a title=\"Go to last page\" href=\"\/project\/drupal\/releases\?&amp;page=(\d+)\">last/", $content_page, $nb_page);
-	$releases = array();
-	$i = 0;
-	while ($i <= $nb_page[1]) {
-		$content_page = file_get_contents($url_page_releases . "?&page=" . $i);
-		preg_match_all("/(<div class=\"field-label\">Official release from tag:&nbsp;<\/div><div class=\"field-items\"><div class=\"field-item even\">)(.*)(<\/div><\/div><\/div>)/", $content_page, $matches);
-		$releases = array_merge($releases, $matches[2]);
-	}
+	// url page des releases = 'https://www.drupal.org/project/drupal/releases';
+	$releases = recuperer_fond('recuperer/releases_drupal');
+	$releases = explode(";", $releases);
+	$releases = array_filter($releases);
+	$releases = array_unique($releases);
 	natsort($releases);
+	/**
+	 * On ne va pas garder les versions dev, alpha, beta et rc pour ne garder que les versions stabilisées
+	 */
+	foreach ($releases as $index => $version) {
+		if (preg_match('/(dev|alpha|beta|rc)/', $version)) {
+			unset($releases[$index]);
+		}
+	}
+	$releases = array_values($releases);
 
 	return $releases;
 }

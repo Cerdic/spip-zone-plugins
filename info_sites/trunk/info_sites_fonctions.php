@@ -529,3 +529,17 @@ function in_ismenu($needle) {
 
 	return false;
 }
+
+function info_sites_lister_doublons_versioning_rss() {
+	include_spip('base/abstract_sql');
+	$doublons = sql_allfetsel("COUNT(versioning_rss) as nbr_doublon, versioning_rss", 'spip_projets', "versioning_rss!=''", 'versioning_rss', '', '', "nbr_doublon > 1");
+
+	var_dump($doublons);
+}
+
+function info_sites_lister_doublons_commits() {
+	include_spip('base/abstract_sql');
+	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '', "nbr_doublon > 1");
+
+	var_dump($doublons);
+}
