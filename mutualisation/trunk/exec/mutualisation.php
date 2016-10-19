@@ -383,13 +383,13 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
                 }
             }
             $nouvelle_version_plugin_base = (isset($info_plugin['schema'])) ? $info_plugin['schema'] : '0.0.0';
-            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and $cfg[$plugin]['version'] != $info_plugin['version'] and !is_null($info_plugin['version']) and ($vplugin_base != $nouvelle_version_plugin_base)) {
+            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and ($cfg[$plugin]['version'] != $info_plugin['version'] or (!is_null($info_plugin['version']) and ($vplugin_base != $nouvelle_version_plugin_base)))) {
                 $secret = $meta['version_installee'].'-'.$meta['popularite_total'];
                 $secret = md5($secret);
                 $vplugin = $vplugin_base.' &rarr; '.$nouvelle_version_plugin_base;
 
                 return <<<EOF
-<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
+<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='post' class='upgrade' target='_blank'>
 <div>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
@@ -400,6 +400,20 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
 EOF;
             }
         }
+		if (defined('_MUTUALISATION_UPGRADE_FORCE')) {
+			$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
+			$secret = md5($secret);
+			return <<<EOF
+<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='post' class='upgrade' target='_blank'>
+<div>
+<input type='hidden' name='secret' value='$secret' />
+<input type='hidden' name='exec' value='mutualisation' />
+<input type='hidden' name='upgradeplugins' value='oui' />
+<input type='submit' value='Upgrade plugins (forcé)' />
+</div>
+</form>
+EOF;
+		}
     }
 
     return '';
