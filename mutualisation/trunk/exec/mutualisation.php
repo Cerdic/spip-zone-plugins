@@ -376,14 +376,14 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
         $repertoires_plugins = array('_DIR_PLUGINS', '_DIR_PLUGINS_DIST', '_DIR_RESTREINT');
         foreach ($plugins as $plugin) {
             $vplugin_base = $nouvelle_version_plugin_base = $info_plugin = '';
-            $vplugin_base = (isset($meta[strtolower($plugin).'_base_version'])) ? $meta[strtolower($plugin).'_base_version'] : '0.0.0';
+            $vplugin_base = (isset($meta[strtolower($plugin).'_base_version'])) ? trim($meta[strtolower($plugin).'_base_version']) : '0.0.0';
             foreach ($repertoires_plugins as $repertoire) {
                 if (isset($liste_plug_compat[$repertoire][strtolower($plugin)])) {
                     $info_plugin = $liste_plug_compat[$repertoire][strtolower($plugin)];
                 }
             }
-            $nouvelle_version_plugin_base = (isset($info_plugin['schema'])) ? $info_plugin['schema'] : '0.0.0';
-            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and ($cfg[$plugin]['version'] != $info_plugin['version'] or (!is_null($info_plugin['version']) and ($vplugin_base != $nouvelle_version_plugin_base)))) {
+            $nouvelle_version_plugin_base = (isset($info_plugin['schema'])) ? trim($info_plugin['schema']) : '0.0.0';
+            if ((isset($cfg[$plugin]['version']) and isset($info_plugin['version'])) and ($cfg[$plugin]['version'] != $info_plugin['version'] or (!is_null($info_plugin['version']) and (spip_version_compare($vplugin_base, $nouvelle_version_plugin_base, '<'))))) {
                 $secret = $meta['version_installee'].'-'.$meta['popularite_total'];
                 $secret = md5($secret);
                 $vplugin = $vplugin_base.' &rarr; '.$nouvelle_version_plugin_base;
