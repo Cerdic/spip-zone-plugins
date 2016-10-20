@@ -262,13 +262,21 @@ function mutualisation_traiter_exec($site)
             die;
         }
         if (_request('dirliste') == 'oui') {
-            require_once dirname(__FILE__).'/inc/dirliste.php';
-            echo dirliste($_GET['dir']);
+			if (isset($_GET['dir'])) {
+				require_once dirname(__FILE__).'/inc/dirliste.php';
+				echo dirliste($_GET['dir']);
+			} else {
+				echo '-1';
+			}
 			die;
         }
         if (_request('dirsize') == 'oui') {
-            require_once dirname(__FILE__).'/inc/dirsize.php';
-            echo dirsize($_GET['dir'], $_GET['taille_max']);
+			if (isset($_GET['dir'])) {
+				require_once dirname(__FILE__).'/inc/dirsize.php';
+				echo dirsize($_GET['dir'], $_GET['taille_max']);
+			} else {
+				echo '-1';
+			}
 			die;
         }
     }
