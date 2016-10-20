@@ -1,0 +1,21 @@
+[(#REM) 
+  Saisie permettant de sélectionner une selction éditoriale par son identifiant
+	
+  Parametres :
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  - id_auteur : uniquement les collections de l'utilisateurice
+  
+  Exemple d'appel :
+	[(#SAISIE{favoris_collection,nom,id_auteur=#ID_AUTEUR,
+		label=<:plugin:label:>,
+	})] 
+]
+
+<select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_collection(FAVORIS_COLLECTIONS){par titre}{id_auteur?}>
+	<option value="#ID_FAVORIS_COLLECTION" [(#ID_FAVORIS_COLLECTION|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>[(#TITRE|typo)]</option>
+</BOUCLE_collection>
+</select>

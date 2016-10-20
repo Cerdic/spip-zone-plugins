@@ -1,0 +1,24 @@
+<paquet
+	prefix="mesfavoris_collections"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="mesfavoris_collections.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<nom>Mes favoris : collections de favoris</nom>
+
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="mesfavoris" compatibilite="[2.5.2;]" />
+	<necessite nom="saisies" compatibilite="[2.7.12;]" />
+
+	<pipeline nom="autoriser" inclure="mesfavoris_collections_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mesfavoris_collections.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mesfavoris_collections.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/mesfavoris_collections.php" />
+</paquet>
