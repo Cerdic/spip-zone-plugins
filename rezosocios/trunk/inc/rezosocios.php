@@ -4,6 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+
 function rezosocios_liste() {
 	$rezosocios = array(
 					'facebook' => array(
@@ -19,9 +20,13 @@ function rezosocios_liste() {
 									'url' => 'https://plus.google.com/+'
 								),
 					'youtube' => array(
-									'nom' => 'Youtube',
+									'nom' => _T('rezosocios:youtube_user'),
 									'url' => 'https://www.youtube.com/user/'
 								),
+					'youtube_channel' => array(
+									'nom' => _T('rezosocios:youtube_channel'),
+									'url' => 'https://www.youtube.com/channel/'
+					),
 					'dailymotion' => array(
 									'nom' => 'Dailymotion',
 									'url' => 'http://www.dailymotion.com/'
