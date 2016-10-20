@@ -79,15 +79,17 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 				$prepare_mots_where = charger_fonction(\'prepare_mots_where\', \'inc\');
 				$mots_where = $prepare_mots_where('.$quoi.', "'.$crit->cond.'","'.$id_ou_titre.'");
 				$prepare_mots_having = charger_fonction(\'prepare_mots_having\', \'inc\');
-				$mots_having = $prepare_mots_having('.$quoi.', '.$score.');
+				$mots_having = $prepare_mots_having('.$quoi.', '.$score.', "'.$crit->cond.'");
+				$prepare_mots_group = charger_fonction(\'prepare_mots_group\', \'inc\');
+				$mots_group = $prepare_mots_group('.$quoi.',"'.$table.'","'.$objet_delatable.'","'.$crit->cond.'");
 				';
-			$boucle->from['mots_liens'] = "spip_mots_liens";
-			$boucle->join["mots_liens"] = array(
-			    "'$_table'",
-			    "'id_objet'",
-			    "'id_$objet_delatable'",
-			    "'mots_liens.objet='.sql_quote('$objet_delatable')");
-			$boucle->group[] = "$_table.id_$objet_delatable";
+			 $boucle->from['mots_liens'] = "spip_mots_liens";
+			 $boucle->join["mots_liens"] = array(
+			     "'$_table'",
+			     "'id_objet'",
+			     "'id_$objet_delatable'",
+			     "'mots_liens.objet='.sql_quote('$objet_delatable')");
+			$boucle->group[] = '$mots_group';
 			$boucle->having[] = '$mots_having';
 			$boucle->where[] = '$mots_where';
 			if ($tri==True){
@@ -97,13 +99,35 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 						$boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
 			}
 			// Pseudo critère "Si"
-			$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
-			$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
+			//$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
+			//$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
 	}
 
 }
 
-function inc_prepare_mots_having_dist($mots,$score='100%') {
+function inc_prepare_mots_group_dist($mots,$table,$objet_delatable,$cond='') {
+	if (!is_array($mots)
+	OR !$mots = array_filter($mots)) {
+		// traiter le cas {mots?}
+		if ($cond)
+			return '';
+		else
+		// {mots} mais pas de mot dans l'url
+			return '0=1';
+	}
+	return $table.'id_'.$objet_delatable;
+}
+
+function inc_prepare_mots_having_dist($mots,$score='100%',$cond='') {
+	if (!is_array($mots)
+	OR !$mots = array_filter($mots)) {
+		// traiter le cas {mots?}
+		if ($cond)
+			return '';
+		else
+		// {mots} mais pas de mot dans l'url
+			return '0=1';
+	}
 	$score = trim ($score);
 	$i = count ($mots);
 	// si on a un % dans le score, c'est que c'est un %age
