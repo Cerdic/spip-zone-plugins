@@ -31,40 +31,41 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	} else {
 		$quoi = '@$Pile[0]["mots"]';
 	}
+	if (strpos($score,'100%')===false){
+		$boucle->hash .= '
+		// {MOTS}
+		$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
+		$mots_where = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '","'.$id_ou_titre.'");
+		';
 
-	$boucle->hash .= '
-	// {MOTS}
-	$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
-	$mots_where = $prepare_mots('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'", '.$score.', "' . $boucle->sql_serveur . '","'.$id_ou_titre.'");
-	';
+		$t = $boucle->id_table . '.' . $boucle->primary;
+		if (!in_array($t, $boucles[$idb]->select)) {
+			$boucle->select[]= $t; # pour postgres, neuneu ici
+		}
 
-	$t = $boucle->id_table . '.' . $boucle->primary;
-	if (!in_array($t, $boucles[$idb]->select)) {
-		$boucle->select[]= $t; # pour postgres, neuneu ici
-	}
-
-	$boucle->where[] = "\n\t\t".'$mots_where';
-	if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")) {
-		$_table = table_objet($boucle->id_table);
-		$objet_delatable=objet_type($_table);
-		$id_objet = id_table_objet($boucle->id_table);
-		$boucle->jointures[]="mots_liens" ;
-		$boucle->from['mots_liens'] = "spip_mots_liens";
-		$boucle->join["mots_liens"] = array(
-		    "'$boucle->id_table'",
-		    "'id_objet'",
-		    "'$id_objet'",
-		    "'mots_liens.objet='.sql_quote('$objet_delatable')");
-		$boucle->where[] = "\n\t\t".'sql_in(\'mots_liens.id_mot\',sql_quote('.$quoi.'))';
-		$boucle->group[] = "mots_liens.id_objet";
-		if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
-		    $boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
-		else
-		    $boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
-		
-		// Pseudo critère "Si"
-		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
-		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
+		$boucle->where[] = "\n\t\t".'$mots_where';
+		if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")) {
+			$_table = table_objet($boucle->id_table);
+			$objet_delatable=objet_type($_table);
+			$id_objet = id_table_objet($boucle->id_table);
+			$boucle->jointures[]="mots_liens" ;
+			$boucle->from['mots_liens'] = "spip_mots_liens";
+			$boucle->join["mots_liens"] = array(
+			    "'$boucle->id_table'",
+			    "'id_objet'",
+			    "'$id_objet'",
+			    "'mots_liens.objet='.sql_quote('$objet_delatable')");
+			$boucle->where[] = "\n\t\t".'sql_in(\'mots_liens.id_mot\',sql_quote('.$quoi.'))';
+			$boucle->group[] = "mots_liens.id_objet";
+			if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
+			    $boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
+			else
+			    $boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
+			
+			// Pseudo critère "Si"
+			$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
+			$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
+		}
 	}
 }
 
