@@ -77,7 +77,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 			$boucle->hash .= '
 				// {MOTS}
 				$prepare_mots_where = charger_fonction(\'prepare_mots_where\', \'inc\');
-				$mots_where = $prepare_mots_where('.$quoi.', "'.$_table.'", "'.$crit->cond.'","'.$id_ou_titre.'");
+				$mots_where = $prepare_mots_where('.$quoi.', "'.$crit->cond.'","'.$id_ou_titre.'");
 				$prepare_mots_having = charger_fonction(\'prepare_mots_having\', \'inc\');
 				$mots_having = $prepare_mots_having('.$quoi.', '.$score.');
 				';
