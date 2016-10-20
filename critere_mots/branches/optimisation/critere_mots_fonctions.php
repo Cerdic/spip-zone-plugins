@@ -79,7 +79,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 				$prepare_mots_where = charger_fonction(\'prepare_mots_where\', \'inc\');
 				$mots_where = $prepare_mots_where('.$quoi.', "'.$_table.'", "'.$crit->cond.'","'.$id_ou_titre.'");
 				$prepare_mots_having = charger_fonction(\'prepare_mots_having\', \'inc\');
-				$mots_having = $prepare_mots_having('.$quoi.', "'.$_table.'", "'.$objet_delatable.'",'.$score.');
+				$mots_having = $prepare_mots_having('.$quoi.', '.$score.');
 				';
 			$boucle->from['mots_liens'] = "spip_mots_liens";
 			$boucle->join["mots_liens"] = array(
@@ -103,7 +103,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
 }
 
-function inc_prepare_mots_having_dist($mots, $table, $objet_delatable='article',$score='100%') {
+function inc_prepare_mots_having_dist($mots,$score='100%') {
 	$score = trim ($score);
 	$i = count ($mots);
 	// si on a un % dans le score, c'est que c'est un %age
@@ -118,7 +118,7 @@ function inc_prepare_mots_having_dist($mots, $table, $objet_delatable='article',
 		  pass ;
 		 }
 	
-	return ("SUM($table.id_$objet_delatable) >= $score"); 
+	return ("COUNT(mots_liens.id_objet) >= $score"); 
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
