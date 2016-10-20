@@ -21,6 +21,6 @@ function action_supprimer_favoris_collection_dist($id_favoris_collection=null) {
 		mesfavoris_supprimer(array('id_favoris_collection' => $id_favoris_collection));
 		
 		// Puis on supprime la collection elle-même
-		sql_delete('favoris_collection', 'id_favoris_collection = '.$id_favoris_collection);
+		sql_delete('spip_favoris_collections', 'id_favoris_collection = '.$id_favoris_collection);
 	}
 }
