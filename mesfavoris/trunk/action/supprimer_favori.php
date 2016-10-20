@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function action_supprimer_favori_dist($id_favori) {
+function action_supprimer_favori_dist($id_favori=null) {
 	if (is_null($id_favori)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$id_favori = $securiser_action();
