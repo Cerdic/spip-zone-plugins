@@ -229,21 +229,6 @@
 		</div>
 	</fieldset>
 
-
-	<fieldset>
-		<legend class='legend'><:fabrique:legend_rubriques:></legend>
-		<div class='editer-groupe'>
-		[(#SAISIE{checkbox, objets/#CLE/rubriques,
-			label=<:fabrique:label_champ_rubriques:>,
-			explication=<:fabrique:label_champ_rubriques_explication:>,
-			datas=[(#ARRAY{
-				id_rubrique,<:fabrique:label_champ_id_rubrique:>,
-				id_secteur,<:fabrique:label_champ_id_secteur:>,
-				vue_rubrique,<:fabrique:label_champ_vue_rubrique:>, 
-				statut_rubrique,<:fabrique:label_champ_statut_rubrique:>,
-				plan,<:fabrique:label_champ_plan_rubrique:>})]})]
-		</div>
-	</fieldset>
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_langues_et_traductions:></legend>
 		<div class='editer-groupe'>
@@ -335,10 +320,26 @@
 
 
 
+<h3><a href="#liaisons_directes"><:fabrique:legend_liaisons_directes:></a></h3>
+<div class='sous_parties'>
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_rubriques:></legend>
+		<div class='editer-groupe'>
+		[(#SAISIE{checkbox, objets/#CLE/rubriques,
+			label=<:fabrique:label_champ_rubriques:>,
+			explication=<:fabrique:label_champ_rubriques_explication:>,
+			datas=[(#ARRAY{
+				id_rubrique,<:fabrique:label_champ_id_rubrique:>,
+				id_secteur,<:fabrique:label_champ_id_secteur:>,
+				vue_rubrique,<:fabrique:label_champ_vue_rubrique:>, 
+				statut_rubrique,<:fabrique:label_champ_statut_rubrique:>,
+				plan,<:fabrique:label_champ_plan_rubrique:>})]})]
+		</div>
+	</fieldset>
+</div>
 
 
-
-<h3><a href="#liaisons"><:fabrique:legend_liaisons:></a></h3>
+<h3><a href="#liaisons_indirectes"><:fabrique:legend_liaisons_indirectes:></a></h3>
 <div class='sous_parties'>
 	<fieldset>[(#SET{o,[(#GET{objets}|sinon{objets})]})]
 		<legend class='legend'><:fabrique:legend_liaisons_objet_liens{objet=#GET{o}}:></legend>

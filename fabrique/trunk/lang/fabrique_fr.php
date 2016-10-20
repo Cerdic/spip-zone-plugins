@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorisation_webmestre' => 'Webmestre',
 	'autorisation_webmestre_explication' => 'Être webmestre sur le site.',
 	'avertissement_champs' => 'N’insérez pas ici la clé primaire (@id_objet@),
-		ni aucun des champs spéciaux (id_rubrique, lang, etc.) proposés dans la partie suivante.',
+		ni aucun des champs spéciaux (id_rubrique, lang, etc.) proposés dans la partie « Champs Spéciaux » ou dans les parties « Liaisons ».',
 
 	// B
 	'bouton_ajouter_champ' => 'Ajouter un champ',
@@ -369,7 +369,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_insertion_code' => 'Insertion de code',
 	'legend_installation' => 'Installation',
 	'legend_langues_et_traductions' => 'Langues et traductions',
-	'legend_liaisons' => 'Liaisons',
+	'legend_liaisons_directes' => 'Liaisons directes',
+	'legend_liaisons_indirectes' => 'Liaisons indirectes',
 	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
 	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
 	'legend_logo' => 'Logos',
