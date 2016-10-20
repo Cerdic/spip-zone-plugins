@@ -4,7 +4,7 @@
 <div class="choix">
 	<input
 		type="checkbox"
-		name=#ENV{nom}[actives][]"
+		name="#ENV{nom}[actives][]"
 		id="#ENV{nom}_actives_#CLE"
 		value="#CLE"
 		onchange="javascript:if (jQuery(this).is(':checked')){jQuery(this).siblings('.duree').show().removeClass('none');} else{jQuery(this).siblings('.duree').hide().addClass('none');}"
