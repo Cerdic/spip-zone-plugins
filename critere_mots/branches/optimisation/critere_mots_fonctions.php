@@ -74,7 +74,7 @@ function critere_mots_selon_titre_dist($idb, &$boucles, $crit){
 
 function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='',$id_ou_titre=false) {
 
-    $score = trim($score);
+  $score = trim($score);
 	if (!is_array($mots)
 	OR !$mots = array_filter($mots)) {
 		// traiter le cas {mots?}
@@ -86,23 +86,22 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	}
 
 
-    $_table = table_objet($table);
-    $objet_delatable=objet_type($_table);
-    //
+  $_table = table_objet($table);
+  $objet_delatable=objet_type($_table);
 
 	$_id_table = id_table_objet($table);
 	$where = array();
     
-    //selon le cas, on sélèctionne sur les titres ou sur les id
-    if (!$id_ou_titre){
-        foreach($mots as $mot) {
-            if (preg_match(',^[1-9][0-9]*$,', $mot))
-                $id_mot = $mot;
-            else
-                $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
-            $where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
-        }
-    }
+  //selon le cas, on sélectionne sur les titres ou sur les id
+  if (!$id_ou_titre){
+      foreach($mots as $mot) {
+          if (preg_match(',^[1-9][0-9]*$,', $mot))
+              $id_mot = $mot;
+          else
+              $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
+          $where[] = 'id_mot='.sql_quote($id_mot).' and objet='.sql_quote($objet_delatable);
+      }
+  }
 	elseif($id_ou_titre == 'id'){
 	   foreach($mots as $mot) {
 	       $where[] = 'id_mot='.sql_quote($mot).' and objet='.sql_quote($objet_delatable);
