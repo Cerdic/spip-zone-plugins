@@ -10,13 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
-$retour = dirsize($_GET['dir'], $_GET['taille_max']);
-if (is_numeric($retour)) {
-    echo round($retour / 1024 / 1024, 2);
-} else {
-    echo $retour;
-}
-
 /**
  * Calculate the size of a directory by iterating its contents.
  *
@@ -82,6 +75,10 @@ function dirsize($path, $taille_max = 0)
             unset($dir);
         }
     }
+	
+	if (is_numeric($size)) {
+		$size = round($size / 1024 / 1024, 2);
+	}
 
     return $size;
 }

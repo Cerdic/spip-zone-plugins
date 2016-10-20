@@ -261,6 +261,16 @@ function mutualisation_traiter_exec($site)
             renouvelle_alea();
             die;
         }
+        if (_request('dirliste') == 'oui') {
+            require_once dirname(__FILE__).'/inc/dirliste.php';
+            echo dirliste($_GET['dir']);
+			die;
+        }
+        if (_request('dirsize') == 'oui') {
+            require_once dirname(__FILE__).'/inc/dirsize.php';
+            echo dirsize($_GET['dir'], $_GET['taille_max']);
+			die;
+        }
     }
 }
 

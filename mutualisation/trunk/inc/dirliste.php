@@ -9,8 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
-echo dirliste($_GET['dir']);
-
 function dirliste($path)
 {
     $liste = '';

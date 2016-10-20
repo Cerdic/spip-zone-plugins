@@ -142,7 +142,7 @@ function exec_mutualisation_dist()
 		}
         $page .= '<script type="text/javascript">
         //<![CDATA[
-        tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
+        tableau_sites.push(["../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
         //]]>
         </script>
         ';

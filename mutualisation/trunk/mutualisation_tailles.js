@@ -19,7 +19,7 @@ function rechercher_tailles(rep) {
 		if(rep=="cache") cible="tmp/cache" ;
 		else cible=rep ;
 		// Recherche des sous-répertoires
-		$.get("../mutualisation/inc/dirliste.php",{
+		$.get("../ecrire/?exec=mutualisation&dirliste=oui",{
 			dir: site+"/"+cible
 		},function(liste){
 			id="#"+rep+(num_site+1) ;
@@ -58,7 +58,7 @@ function gerer_liste(liste,site,cible,taille_max,ident){
 		$.each(tableau_file,function(k,file){
 			$(ident).addClass("loading")
 			nb_demandes[ident] ++ ;
-			$.get("../mutualisation/inc/dirsize.php",{
+			$.get("../ecrire/?exec=mutualisation&dirsize=oui",{
 				dir: site+"/"+cible+"/"+file,
 				taille_max: taille_max
 			},function(taille){gerer_taille(taille,site,cible,taille_max,ident);});
@@ -88,7 +88,7 @@ function gerer_taille(taille,site,cible,taille_max,ident){
 		// mais en mettant une taille max a 0 (soit pas de limite)
 		site=(retour[1])+"..";
 		cible="";
-		$.get("../mutualisation/inc/dirliste.php",{
+		$.get("../ecrire/?exec=mutualisation&dirliste=oui",{
 			dir: site+"/"+cible
 		},function(liste){gerer_liste(liste,site,cible,0,ident);});
 	} else {
