@@ -864,6 +864,12 @@ function fabrique_renseigner_objet($objet) {
 			$objet['rubriques'][] = 'id_rubrique';
 		}
 		unset($fields['id_rubrique']);
+
+		// & id_secteur ?
+		if (!in_array('id_secteur', $objet['rubriques'])) {
+			$objet['rubriques'][] = 'id_secteur';
+		}
+		unset($fields['id_secteur']);
 	}
 
 	// lang
