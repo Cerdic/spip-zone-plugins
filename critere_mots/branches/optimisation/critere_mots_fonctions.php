@@ -90,12 +90,12 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 			$boucle->group[] = "$_table.id_$objet_delatable";
 			$boucle->having[] = '$mots_having';
 			$boucle->where[] = '$mots_where';
-			
-			if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
-					$boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
-			else
-					$boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
-			
+			if ($tri==True){
+				if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
+						$boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
+				else
+						$boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
+			}
 			// Pseudo critère "Si"
 			$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
 			$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
