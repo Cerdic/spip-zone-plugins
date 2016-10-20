@@ -59,6 +59,12 @@ function exec_mutualisation_dist()
         </tr>
     </thead>
     <tbody>";
+	$page .= '<script type="text/javascript">
+        //<![CDATA[
+        tableau_sites = new Array();
+        //]]>
+        </script>
+        ';
 
     $nsite = 1;
 
