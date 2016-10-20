@@ -1118,6 +1118,12 @@ function filtre_fabrique_miniature_image($fichier, $taille=256) {
  * 		Tableau table_sql => Nom
 **/
 function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=array(), $exclus=array()) {
+	if (!is_array($inclus)) {
+		$inclus = $inclus ? array($inclus) : array();
+	}
+	if (!is_array($exclus)) {
+		$exclus = $exclus ? array($exclus) : array();
+	}
 
 	// les objets existants
 	$objets = lister_tables_objets_sql();
