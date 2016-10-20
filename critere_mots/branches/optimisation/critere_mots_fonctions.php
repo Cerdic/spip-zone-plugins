@@ -109,7 +109,7 @@ function inc_prepare_mots_having_dist($mots, $table, $objet_delatable='article',
 	// si on a un % dans le score, c'est que c'est un %age
 	if (substr($score,-1)=='%'){
 		 $score = str_replace('%','',$score);
-		 $score = ceil($score/100 * count($i)) ;
+		 $score = ceil($score/100 * $i) ;
 	}
 	elseif ((0 < $score) and ($score < 1)){
 		 $score = ceil($score * $i) ;
