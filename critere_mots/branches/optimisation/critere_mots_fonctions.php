@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 // Critere {mots} : "l'article est lie a tous les mots demandes"
 // {mots?} ne s'applique que si au moins un mot est demande
 // on passe dans l'url &mots[]=titre1&mots[]=titre2
