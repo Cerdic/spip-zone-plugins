@@ -4,6 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+define ('_CRITERE_MOTS_OPTIMISE',1);// pour pouvoir revenir aux anciennes requetes si besoin
 // Critere {mots} : "l'article est lie a tous les mots demandes"
 // {mots?} ne s'applique que si au moins un mot est demande
 // on passe dans l'url &mots[]=titre1&mots[]=titre2
@@ -19,7 +20,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
 	$boucle = &$boucles[$idb];
-
+	$_table = table_objet($boucle->id_table);
+	$objet_delatable=objet_type($_table);
+	$id_objet = id_table_objet($boucle->id_table);
+	if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")){
+			$tri = true;
+	}
+	
 	if (isset($crit->param[0][0])) {
 		$score = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
 	} else {
@@ -31,7 +38,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	} else {
 		$quoi = '@$Pile[0]["mots"]';
 	}
-	if (strpos($score,'100%')===false){
+	if (!_CRITERE_MOTS_OPTIMISE){
 		$boucle->hash .= '
 		// {MOTS}
 		$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
@@ -44,10 +51,8 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		}
 
 		$boucle->where[] = "\n\t\t".'$mots_where';
-		if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")) {
-			$_table = table_objet($boucle->id_table);
-			$objet_delatable=objet_type($_table);
-			$id_objet = id_table_objet($boucle->id_table);
+		if ($tri==True) {
+
 			$boucle->jointures[]="mots_liens" ;
 			$boucle->from['mots_liens'] = "spip_mots_liens";
 			$boucle->join["mots_liens"] = array(
@@ -67,6 +72,53 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 			$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
 		}
 	}
+	else{
+
+			$boucle->hash .= '
+				// {MOTS}
+				$prepare_mots_where = charger_fonction(\'prepare_mots_where\', \'inc\');
+				$mots_where = $prepare_mots_where('.$quoi.', "'.$_table.'", "'.$crit->cond.'","'.$id_ou_titre.'");
+				$prepare_mots_having = charger_fonction(\'prepare_mots_having\', \'inc\');
+				$mots_having = $prepare_mots_having('.$quoi.', "'.$_table.'", "'.$objet_delatable.'",'.$score.');
+				';
+			$boucle->from['mots_liens'] = "spip_mots_liens";
+			$boucle->join["mots_liens"] = array(
+			    "'$_table'",
+			    "'id_objet'",
+			    "'id_$objet_delatable'",
+			    "'mots_liens.objet='.sql_quote('$objet_delatable')");
+			$boucle->group[] = "$_table.id_$objet_delatable";
+			$boucle->having[] = '$mots_having';
+			$boucle->where[] = '$mots_where';
+			
+			if ($crit->param[0][2]->texte == "tri") // si dans le sens ascendant
+					$boucle->order[] = "'COUNT(mots_liens.id_objet) ASC'";
+			else
+					$boucle->order[] = "'COUNT(mots_liens.id_objet) DESC'";
+			
+			// Pseudo critère "Si"
+			$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
+			$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
+	}
+
+}
+
+function inc_prepare_mots_having_dist($mots, $table, $objet_delatable='article',$score='100%') {
+	$score = trim ($score);
+	$i = count ($mots);
+	// si on a un % dans le score, c'est que c'est un %age
+	if (substr($score,-1)=='%'){
+		 $score = str_replace('%','',$score);
+		 $score = ceil($score/100 * count($i)) ;
+	}
+	elseif ((0 < $score) and ($score < 1)){
+		 $score = ceil($score * $i) ;
+	}
+	else{
+		  pass ;
+		 }
+	
+	return ("SUM($table.id_$objet_delatable) >= $score"); 
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
@@ -76,9 +128,45 @@ function critere_mots_selon_titre_dist($idb, &$boucles, $crit){
     critere_mots_dist($idb, $boucles, $crit,'titre');
 }
 
+function inc_prepare_mots_where_dist($mots, $cond=false,$id_ou_titre=false) {
+	$score = trim($score);
+	if (!is_array($mots)
+	OR !$mots = array_filter($mots)) {
+		// traiter le cas {mots?}
+		if ($cond)
+			return '';
+		else
+		// {mots} mais pas de mot dans l'url
+			return '0=1';
+	}
+	
+	$wh = [];
+  //selon le cas, on sélectionne sur les titres ou sur les id
+  if (!$id_ou_titre){
+      foreach($mots as $mot) {
+          if (preg_match(',^[1-9][0-9]*$,', $mot))
+              $id_mot = $mot;
+          else
+              $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
+          		$wh[] = "(mots_liens.id_mot=".sql_quote($id_mot).")";
+      }
+  }
+	  elseif($id_ou_titre == 'id'){
+	   	foreach($mots as $id_mot) {
+			$wh[] = "(mots_liens.id_mot=".sql_quote($id_mot).")";
+	   }
+	}
+	elseif($id_ou_titre == 'titre'){
+		foreach($mots as $mot) {
+	        $id_mot = sql_getfetsel('id_mot', 'spip_mots', 'titre='.sql_quote($mot));
+					$wh[] = "(mots_liens.id_mot=".sql_quote($id_mot).")";	   
+				}
+	}
+  $str = implode($wh,' OR ');
+  return "($str)";
+}
 
 function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $serveur='',$id_ou_titre=false) {
-
   $score = trim($score);
 	if (!is_array($mots)
 	OR !$mots = array_filter($mots)) {
@@ -145,7 +233,6 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 
 	return $wh;
 }
-
 
 function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
 	if (!is_array($listemots) OR !$listemots)
