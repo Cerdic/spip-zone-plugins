@@ -81,7 +81,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 				$prepare_mots_having = charger_fonction(\'prepare_mots_having\', \'inc\');
 				$mots_having = $prepare_mots_having('.$quoi.', '.$score.', "'.$crit->cond.'");
 				$prepare_mots_group = charger_fonction(\'prepare_mots_group\', \'inc\');
-				$mots_group = $prepare_mots_group('.$quoi.',"'.$table.'","'.$objet_delatable.'","'.$crit->cond.'");
+				$mots_group = $prepare_mots_group('.$quoi.',"'.$_table.'","'.$objet_delatable.'","'.$crit->cond.'");
 				';
 			 $boucle->from['mots_liens'] = "spip_mots_liens";
 			 $boucle->join["mots_liens"] = array(
@@ -115,7 +115,7 @@ function inc_prepare_mots_group_dist($mots,$table,$objet_delatable,$cond='') {
 		// {mots} mais pas de mot dans l'url
 			return '0=1';
 	}
-	return $table.'id_'.$objet_delatable;
+	return $table.'.id_'.$objet_delatable;
 }
 
 function inc_prepare_mots_having_dist($mots,$score='100%',$cond='') {
