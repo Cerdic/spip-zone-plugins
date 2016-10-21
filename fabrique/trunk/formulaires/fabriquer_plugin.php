@@ -373,7 +373,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// créer le formulaire d'edition
 			fabriquer_fichier("formulaires/editer_objet.html", $data);
 			fabriquer_fichier("formulaires/editer_objet.php", $data);
-			
+
 			// créer la vue du contenu d'un objet
 			fabriquer_fichier("prive/objets/contenu/objet.html", $data);
 
@@ -398,6 +398,12 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 					fabriquer_fichier("prive/objets/liste/objets_roles_lies_fonctions.php", $data); // pff
 					fabriquer_fichier("prive/objets/liste/objets_roles_associer.html", $data);
 					fabriquer_fichier("prive/objets/liste/objets_roles_associer_fonctions.php", $data); // pff
+				}
+
+				// lister aussi les liaisons sur la vue de cet objet
+				if (option_presente($objet, 'afficher_liens')) {
+					fabriquer_fichier("prive/objets/liste/\objets_lies_objet.html", $data);
+					fabriquer_fichier("prive/squelettes/contenu/objet.html", $data); // fichier habituellement échaffaudé
 				}
 			}
 
@@ -545,6 +551,7 @@ function fabriquer_fichier($chemin, $data) {
 
 	// on retrouve le nom du fichier et la base du chemin de destination
 	$dest = explode('/', $chemin);
+	$chemin = str_replace("\o", "o", $chemin); // enlever l'échappement \objet
 	$nom = array_pop($dest);
 	$chemin_dest = implode('/', $dest);
 
@@ -557,11 +564,14 @@ function fabriquer_fichier($chemin, $data) {
 	// on modifie le nom de destination :
 	// 'prefixe' => $prefixe.
 	// 'objet'   => $objet.
+	// mais on conserve si '\objets'
+	$nom = str_replace("\o", "\1o\\", $nom);
 	$nom = str_replace('prefixe', $data['paquet']['prefixe'], $nom);
 	if (isset($data['objet'])) {
 		$nom = str_replace('objets',  $data['objet']['lobjet'], $nom);
 		$nom = str_replace('objet',   $data['objet']['type'], $nom);
 	}
+	$nom = str_replace("\1o\\", "o", $nom);
 
 	// calcul du squelette et copie a destination du contenu.
 	$contenu = recuperer_fond(FABRIQUE_SKEL_SOURCE . $chemin, $data);

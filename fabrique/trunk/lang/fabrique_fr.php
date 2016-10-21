@@ -129,6 +129,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chaine_titre_objet_feminin' => '@mtype@',
 	'chaine_titre_objets' => '@mobjets@',
 	'chaine_titre_objets_feminin' => '@mobjets@',
+	'chaine_titre_objets_lies_objet' => 'Liés à ce @type@',
+	'chaine_titre_objets_lies_objet_feminin' => 'Liés à cette @type@',
 	'chaine_titre_objets_rubrique' => '@mobjets@ de la rubrique',
 	'chaine_titre_objets_rubrique_feminin' => '@mobjets@ de la rubrique',
 	'champ_ajoute' => 'Un champ a été ajouté',
@@ -207,6 +209,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	',
 
 	// L
+	'label_afficher_liens' => 'Afficher les différentes liaisons sur la vue de votre objet ?',
+	'label_afficher_liens_explication' => 'Vous pouvez sur la vue de votre objet, lister les objets (sélectionnés au dessus) qui lui sont liés. 
+		Note: il est possible que ces listes ne fonctionnent pas parfaitement, affichant l’ensemble des objets, au lieu de seulement ceux liés au votre ; 
+		il faudra alors surcharger le fichier de liste utilisé (prive/objets/liste/xxx.html) pour ajouter un critère `{xxx_liens.id_xxx ?}` supplémentaire.',
 	'label_auteur' => 'Nom de l’auteur',
 	'label_auteur_lien' => 'URL vers l’auteur',
 	'label_auteurs_liens' => 'Lier des auteurs ?',

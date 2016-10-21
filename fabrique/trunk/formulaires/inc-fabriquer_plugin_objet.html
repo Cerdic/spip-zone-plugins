@@ -288,6 +288,7 @@
 		titre_logo_objet,
 		titre_langue_objet,
 		texte_definir_comme_traduction_objet,
+		titre_\objets_lies_objet,
 		titre_objets_rubrique,
 		info_objets_auteur,
 		retirer_lien_objet,
@@ -302,7 +303,7 @@
 	[(#SAISIE{input, objets/#_objet:CLE/chaines/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
 		conteneur_class=pleine_largeur,
-		defaut=[(#VAL{fabrique:chaine_#VALEUR[(#_objet:GENRE|=={feminin}|?{_feminin})]}|_T{[(#ARRAY{
+		defaut=[(#VAL{fabrique:chaine_}|concat{#VALEUR|replace{'\[\\\]',''}}|concat{#_objet:GENRE|=={feminin}|?{_feminin}}|_T{[(#ARRAY{
 				objets,#GET{langue_objets},
 				mobjets,[(#GET{langue_objets}|ucfirst)],
 				type,#GET{langue_type},
@@ -362,6 +363,10 @@
 			explication=<:fabrique:label_vue_liens_explication:>,
 			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
 			conteneur_class=saisie_choisir_objets})]
+
+		[(#SAISIE{oui_non, objets/#CLE/afficher_liens,
+			label=<:fabrique:label_afficher_liens:>,
+			explication=<:fabrique:label_afficher_liens_explication:>})]
 		</div>
 
 
