@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -55,10 +55,9 @@ function formulaires_changer_statut_articles_traiter_dist() {
 		include_spip('inc/rubriques');
 		calculer_rubriques();
 		propager_les_secteurs();
-		
+
 		$retour['message_ok'] = _T('statut_articles:statut_articles_modifies');
-	}
-	else {
+	} else {
 		$retour['editable'] = 1;
 	}
 

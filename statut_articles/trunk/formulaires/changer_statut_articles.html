@@ -11,7 +11,7 @@
 		[(#SAISIE{date, filtre_date_debut, label=<:statut_articles:champ_date_debut:>})]
 		[(#SAISIE{selection, filtre_statut, label=<:statut_articles:champ_statut:>, datas=#ENV{statuts}})]
 		[(#SAISIE{hidden, recherche, valeur=1})]
-					
+
 		<p class='boutons'>
 			<span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:info_rechercher:>'/>
 		</p>
@@ -26,7 +26,7 @@
 				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,filtre_date_debut,filtre_date_fin,filtre_statut,statuts=#ENV{statuts}}>
 			</BOUCLE_rubrique>
 
-			[(#REM) aucun rubrique chsoisie ? critère racine ]
+			[(#REM) aucune rubrique choisie ? critère racine ]
 			<BOUCLE_racine(RUBRIQUES){si #GET{id_rubrique}|non} {racine} {par num titre}{!par date} {tout}>
 				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,filtre_date_debut,filtre_date_fin,filtre_statut,statuts=#ENV{statuts}}>
 			</BOUCLE_racine>
@@ -38,7 +38,6 @@
 			</p>
 		</div>
 		</BOUCLE_preview>
-
 	</div>
 	</form>
 </div>

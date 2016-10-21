@@ -9,14 +9,17 @@
  * @package    SPIP\Statut_articles\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
-function statut_articles_autoriser(){}
-
+ * @pipeline autoriser
+ **/
+function statut_articles_autoriser() {
+}
 
 /**
  * Autorisation de voir un élément de menu (changer_statut_articles)
@@ -30,6 +33,5 @@ function statut_articles_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_changerstatutarticles_menu_dist($faire, $type, $id, $qui, $opt) {
-	return( $qui['statut'] == '0minirezo' );
-
+	return ($qui['statut'] == '0minirezo' );
 }
