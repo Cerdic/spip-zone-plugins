@@ -380,14 +380,17 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// créer la liste d'un objet
 			fabriquer_fichier("prive/objets/liste/objets.html", $data);
 
+			// appel du formulaire d'édition, si liens ou parenté directe autre que rubrique
+			if (option_presente($objet, 'vue_liens') or option_presente($objet, 'liaison_directe')) {
+				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
+			}
+
 			// créer les listes de liaison
 			if (option_presente($objet, 'vue_liens')) {
 				fabriquer_fichier("prive/objets/liste/objets_lies.html", $data);
 				fabriquer_fichier("prive/objets/liste/objets_lies_fonctions.php", $data); // pff
 				fabriquer_fichier("prive/objets/liste/objets_associer.html", $data);
 				fabriquer_fichier("prive/objets/liste/objets_associer_fonctions.php", $data); // pff
-				// ce fichier est nécessaire
-				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
 
 				// la meme chose avec des roles s'il y en a
 				if (option_presente($objet, 'roles')) {
