@@ -18,8 +18,8 @@
 
 	<licence>GNU/GPL</licence>
 
-  <pipeline nom="jquery_plugins" inclure="format_phone_pipelines.php" />
-  <pipeline nom="header_prive"   inclure="format_phone_pipelines.php" />
-  <pipeline nom="insert_head"    inclure="format_phone_pipelines.php" />
+	<pipeline nom="jquery_plugins" inclure="format_phone_pipelines.php" />
+	<pipeline nom="header_prive"   inclure="format_phone_pipelines.php" />
+	<pipeline nom="insert_head"    inclure="format_phone_pipelines.php" />
 
 </paquet>
