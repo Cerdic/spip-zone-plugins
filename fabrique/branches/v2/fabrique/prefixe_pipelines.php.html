@@ -1,0 +1,254 @@
+#PHP
+[(#INCLURE{fond=fabrique/entetes/php,env,
+	description=Utilisations de pipelines par #ENV{paquet/nom},
+	package=Pipelines})]
+
+<BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
+/*
+ * Un fichier de pipelines permet de regrouper
+ * les fonctions de branchement de votre plugin
+ * sur des pipelines existants.
+ */
+
+</BOUCLE_si_exemples>[
+(#REM)
+
+
+
+	AFFICHE ENFANTS
+
+
+
+]<BOUCLE_si_affiche_enfants(CONDITION){si #OBJETS|fabrique_necessite_pipeline{affiche_enfants}}>
+/**
+ * Ajouter les objets sur les vues de rubriques
+ *
+ * @pipeline affiche_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function [(#PREFIXE)]_affiche_enfants($flux) {
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+		AND $e['type'] == 'rubrique'
+		AND $e['edition'] == false) {
+
+		$id_rubrique = $flux['args']['id_rubrique'];
+		$lister_objets = charger_fonction('lister_objets', 'inc');
+<BOUCLE_objets_affiche_enfants(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
+		$bouton = '';
+		if (autoriser('creer#TYPEdans', 'rubrique', $id_rubrique)) {
+			$bouton .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "id_rubrique=$id_rubrique"), "#TYPE-24.png", "new", "right")
+					. "<br class='nettoyeur' />";
+		}
+
+		$flux['data'] .= $lister_objets('#OBJET', array('titre'=>_T('#TYPE:titre_[(#OBJET)]_rubrique') , 'id_rubrique'=>$id_rubrique));
+		$flux['data'] .= $bouton;
+</BOUCLE_objets_affiche_enfants>
+	}
+	return $flux;
+}
+</BOUCLE_si_affiche_enfants>[
+(#REM)
+
+
+
+	AFFICHE MILIEU
+
+
+
+]<BOUCLE_si_affiche_milieu(CONDITION){si #OBJETS|fabrique_necessite_pipeline{affiche_milieu}}>
+
+/**
+ * Ajout de contenu sur certaines pages,
+ * notamment des formulaires de liaisons entre objets
+ *
+ * @pipeline affiche_milieu
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function [(#PREFIXE)]_affiche_milieu($flux) {
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
+<BOUCLE_si_affiche_milieu_auteurs(CONDITION){si (#OBJETS|objets_option_presente{auteurs_liens})}>
+	// auteurs sur les [(#OBJETS|objets_option_presente{auteurs_liens, objet}|implode{', '})]
+	if (!$e['edition'] AND in_array($e['type'], array('[(#OBJETS|objets_option_presente{auteurs_liens, type}|implode{"', '"})]'))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'auteurs',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}</BOUCLE_si_affiche_milieu_auteurs>
+
+<BOUCLE_objet_liens_sur_objet(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}})}>
+	// #LOBJET sur les [(#VAL{table_objet}|array_map{#VUE_LIENS}|implode{', '})]
+	if (!$e['edition'] AND in_array($e['type'], array('[(#VAL{objet_type}|array_map{#VUE_LIENS}|implode{"', '"})]'))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => '#LOBJET',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}</BOUCLE_objet_liens_sur_objet>
+
+	if ($texte) {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+</BOUCLE_si_affiche_milieu>[
+(#REM)
+
+
+
+	AFFICHE AUTEURS INTERVENTIONS
+
+
+
+]<BOUCLE_si_affiche_auteurs_interventions(CONDITION){si (#OBJETS|fabrique_necessite_pipeline{affiche_auteurs_interventions})}>
+
+/**
+ * Ajout de liste sur la vue d'un auteur
+ *
+ * @pipeline affiche_auteurs_interventions
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function [(#PREFIXE)]_affiche_auteurs_interventions($flux) {
+	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+<BOUCLE_affiche_auteurs_interventions(DATA){source tableau,(#OBJETS|objets_option_presente{vue_auteurs_liens})}>
+		$flux['data'] .= recuperer_fond('prive/objets/liste/#OBJET', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('#TYPE:info_[(#OBJET)]_auteur')
+		), array('ajax' => true));
+</BOUCLE_affiche_auteurs_interventions>
+	}
+	return $flux;
+}
+</BOUCLE_si_affiche_auteurs_interventions>[
+(#REM)
+
+
+
+	AFFICHER CONTENU OBJET
+
+
+
+]<BOUCLE_si_afficher_contenu_objet(CONDITION){si #OBJETS|fabrique_necessite_pipeline{afficher_contenu_objet}}>
+
+/**
+ * Ajout de formulaires de liens
+ *
+ * @pipeline affiche_contenu_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function [(#PREFIXE)]_afficher_contenu_objet($flux) {
+
+	$type = $flux['args']['type'];
+	$id   = $flux['args']['id_objet'];
+
+	return $flux;
+}
+</BOUCLE_si_afficher_contenu_objet>[
+(#REM)
+
+
+
+	OBJET COMPTE ENFANT
+
+
+
+]
+<B_objet_compte_enfants>
+/**
+ * Compter les enfants d'une rubrique
+ *
+ * @pipeline objets_compte_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function [(#PREFIXE)]_objet_compte_enfants($flux) {
+	if ($flux['args']['objet']=='rubrique' AND $id_rubrique=intval($flux['args']['id_objet'])) {
+<BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>[(#REM)
+
+][		// juste les publiés ?
+		if (array_key_exists('statut', $flux\['args'\]) and ($flux\['args'\]\['statut'\] == 'publie')) {
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+		} else {
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+		}(#STATUT|oui)][(#REM)
+
+][		$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique));(#STATUT|non)][(#REM)
+
+]</BOUCLE_objet_compte_enfants>
+	}
+	return $flux;
+}
+</B_objet_compte_enfants>[
+(#REM)
+
+
+
+	OPTIMISER BASE DISPARUS
+
+
+
+]<BOUCLE_si_optimiser_base_disparus(CONDITION){si #OBJETS|fabrique_necessite_pipeline{optimiser_base_disparus}}>
+
+/**
+ * Optimiser la base de données 
+ * <BOUCLE_desc_objets_optimiser_liens(DATA){source tableau,(#OBJETS|objets_options_presentes{table_liens})}{0,1}>
+ * Supprime les liens orphelins de l'objet vers quelqu'un et de quelqu'un vers l'objet.[(#REM)
+]</BOUCLE_desc_objets_optimiser_liens>[(#REM)
+]<BOUCLE_desc_objets_poubelle(DATA){source tableau,(#OBJETS|objets_champ_present{statut})}{0,1}>
+ * Supprime les objets à la poubelle.[(#REM)
+]</BOUCLE_desc_objets_poubelle>
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function [(#PREFIXE)]_optimiser_base_disparus($flux){
+<B_objets_optimiser_liens>
+	include_spip('action/editer_liens');
+	$flux['data'] += objet_optimiser_liens(array(<BOUCLE_objets_optimiser_liens(DATA){source tableau,(#OBJETS|objets_options_presentes{table_liens})}{', '}>'#TYPE'=>'*'</BOUCLE_objets_optimiser_liens>),'*');
+</B_objets_optimiser_liens>[(#REM)
+]<B_objets_optimiser_poubelle>[(#REM)
+]<BOUCLE_objets_optimiser_poubelle(DATA){source tableau,(#OBJETS|objets_champ_present{statut})}>
+	sql_delete("#TABLE", "statut='poubelle' AND maj < " . $flux['args']['date']);
+</BOUCLE_objets_optimiser_poubelle>
+	return $flux;
+}</BOUCLE_si_optimiser_base_disparus>[
+(#REM)
+
+
+
+	TRIG PROPAGER LES SECTEURS
+
+
+
+]
+<B_trig_propager_les_secteurs>
+/**
+ * Synchroniser la valeur de id secteur
+ *
+ * @pipeline trig_propager_les_secteurs
+ * @param  string $flux Données du pipeline
+ * @return string       Données du pipeline
+**/
+function [(#PREFIXE)]_trig_propager_les_secteurs($flux) {
+<BOUCLE_trig_propager_les_secteurs(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{id_rubrique,id_secteur}})}>
+	// synchroniser #TABLE
+	$r = sql_select("A.#ID_OBJET AS id, R.id_secteur AS secteur", "#TABLE AS A, spip_rubriques AS R",
+		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+	while ($row = sql_fetch($r)) {
+		sql_update("#TABLE", array("id_secteur" => $row['secteur']), "#ID_OBJET=" . $row['id']);
+	}
+</BOUCLE_trig_propager_les_secteurs>
+	return $flux;
+}
+</B_trig_propager_les_secteurs>
+

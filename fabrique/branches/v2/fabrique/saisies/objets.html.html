@@ -1,0 +1,31 @@
+[(#SET{titre,#ENV{objet/champ_titre}})][
+(#SET{mtitre,#GET{titre}|strtoupper})][
+(#REM)
+
+Squelette de saisie simple
+Convient uniquement pour des tables peu peuplees.
+
+On se dit que si une table possede un champ id_parent,
+on applique {racine} sur la boucle et on propose un parametre recursif
+]
+
+\[(\#ENV{multiple}|oui)
+	\[(\#SET{valeur,\[(\#ENV*{valeur}|is_array|?{\[(\#ENV*{valeur})\],\[(\#ENV*{valeur}|explode{','})\]})\]})\]
+\]
+<select name="\#ENV{nom}\[(\#ENV{multiple}|?{\\[\\]})\]" id="champ_\[(\#ENV{nom}|saisie_nom2classe)\]"\[ class="(\#ENV{class})"\]\[(\#ENV{multiple}|oui) multiple="multiple" size="\#ENV{size,10}"\]\[ disabled="(\#ENV{disable})"\]>
+	\[(\#ENV{cacher_option_intro}|ou{\#ENV{multiple}}|non)
+		<option value="">\[(\#ENV{option_intro})\]</option>\]
+	\<BOUCLE_#LOBJET\(#MOBJET\){par num #GET{titre}, #GET{titre}}[(#OBJET|champ_present{id_rubrique}
+		|?{'{id_rubrique?}'})][(#OBJET|champ_present{id_secteur}
+		|?{'{id_secteur?}'})][(#OBJET|champ_present{statut}
+		|?{'{statut?}'})][(#OBJET|champ_present{id_parent}
+		|?{'{racine}'})][(#OBJET|criteres_champs_id)]{recherche?}{tout}>
+		\[(\#ENV{multiple}|oui)
+		<option value="\##MID_OBJET"\[(\##MID_OBJET|in_array{\#ENV{valeur_forcee,\#GET{valeur,\#ENV{defaut,\#ARRAY}}}}|oui) selected="selected"\]>\##GET{mtitre}</option>\]
+		\[(\#ENV{multiple}|non)
+		<option value="\##MID_OBJET"\[(\##MID_OBJET|=={\#ENV{valeur_forcee,\#ENV{valeur,\#ENV{defaut}}}}|oui) selected="selected"\]>\##GET{mtitre}</option>\][
+		(#OBJET|champ_present{id_parent})
+		\[(\#ENV{recursif}|oui)
+		\<INCLURE{fond=saisies/_[(#LOBJET)]_recurs,valeur=\#ENV{valeur_forcee,\#ENV{valeur,\#ENV{defaut}}},id_parent=\##MID_OBJET,multiple} />\]]
+	\</BOUCLE_#LOBJET>
+</select>

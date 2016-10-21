@@ -1,0 +1,35 @@
+\<BOUCLE_#TYPE\(#MOBJET\){#ID_OBJET=\#ENV{id}}[(#OBJET|champ_present{statut}|?{'{statut?}'})]>
+<div class="infos">
+\[(\#SET\{texte_objet,\<:#TYPE:titre_#TYPE:>\})\]
+<div class="numero">\<:titre_cadre_numero_objet{objet=\#GET{texte_objet}}:><p>\##MID_OBJET</p></div>
+<BOUCLE_statut(CONDITION){si (#OBJET|champ_present{statut})}>
+\[(\#FORMULAIRE_INSTITUER_OBJET{#LOBJET,\##MID_OBJET})\]
+
+\[(\#REM)
+
+	Bouton voir en ligne
+
+\]
+\<BOUCLE_publie\(#MOBJET\){#ID_OBJET}>
+	\[(\#VAL{redirect}
+		|generer_url_action{type=#LOBJET&id=\##MID_OBJET}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{\<:icone_voir_en_ligne:>,racine})\]
+\</BOUCLE_publie>
+	\[(\#AUTORISER{previsualiser,#LOBJET,\##MID_OBJET,'',\#ARRAY{statut,\#STATUT}})
+		\[(\#VAL{redirect}
+			|generer_url_action{type=#LOBJET&id=\##MID_OBJET}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{\<:previsualiser:>,preview})\]
+	\]
+\<//B_publie>
+</BOUCLE_statut>
+	[(\#AUTORISER{supprimer, #TYPE, \##MID_OBJET}|oui)
+		[(\#BOUTON_ACTION{
+			[(\#CHEMIN_IMAGE{#TYPE-del-24.png}|balise_img{\<:#TYPE:supprimer_#TYPE:>}|concat{' ',\#VAL{\<:#TYPE:supprimer_#TYPE:>}|wrap{<b>}}|trim)],
+			\#URL_ACTION_AUTEUR{supprimer_#TYPE, \##MID_OBJET, \#URL_ECRIRE{#LOBJET}},
+			icone s24 horizontale danger #TYPE-del-24, \<:#TYPE:confirmer_supprimer_#TYPE:>})]
+	]
+<//B_statut>
+</div>
+\</BOUCLE_#TYPE>

@@ -1,0 +1,7 @@
+<traduction module="paquet-fabrique" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fabrique/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-fabrique?lang_cible=en" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-fabrique?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>

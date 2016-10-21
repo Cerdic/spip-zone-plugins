@@ -1,0 +1,13 @@
+[(#REM) <!-- Barre d'onglets de premier niveau --> ]
+[(#VAL{fabrique}|barre_onglets{fabrique})]
+
+<h1><:fabrique:fabrique_titre:></h1>
+[(#SET{plugin,[(#SESSION{#EVAL{FABRIQUE_ID}}|table_valeur{paquet/nom})]})]
+<p><:fabrique:fabrique_intro:></p>
+
+[(#GET{plugin}|oui)<h2><:fabrique:fabrique_plugin{plugin=#GET{plugin}}:></h2>]
+
+
+<div class='ajax'>
+#FORMULAIRE_FABRIQUER_PLUGIN
+</div>

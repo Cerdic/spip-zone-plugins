@@ -1,0 +1,18 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM'>
+	<h3 class="titrem"><:fabrique:reititialiser:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[<p class="notice"><:fabrique:explication_reinitialiser:></p>(#ENV{message_ok,#ENV{message_erreur}}|non)]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p class="boutons">
+			<input type='submit' name='reset' class='submit' value='<:fabrique:bouton_reset:>' />
+		</p>
+	</div></form>
+	]
+</div>
