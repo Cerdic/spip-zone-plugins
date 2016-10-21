@@ -227,7 +227,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_champ_langues' => 'Gestion des langues',
 	'label_champ_langues_explication' => 'Ajouter des champs pour gérer les langues de l’objet (lang et langue_choisie) et les traductions (id_trad) ?',
 	'label_champ_plan_rubrique' => 'Lister l’objet dans le plan du site ?',
-	'label_champ_rubriques' => 'id_rubrique',
+	'label_champ_rubriques' => 'Cet objet est un enfant direct d’une rubrique ?',
 	'label_champ_rubriques_explication' => 'Permet d’affecter cet objet dans une rubrique',
 	'label_champ_statut' => 'Champ <strong>statut</strong>',
 	'label_champ_statut_explication' => 'Permet d’utiliser des statuts de publication (proposé à publication, publié, poubelle…)',
@@ -290,6 +290,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_inserer_administrations_maj' => 'Compléter <code>$maj</code> dans la fonction <code>upgrade()</code>',
 	'label_inserer_base_tables_fin' => 'À la fin du fichier pour insérer de nouvelles fonctions',
 	'label_inserer_paquet' => 'Au niveau des dépendances',
+	'label_liaison_directe' => 'Cet objet est un enfant direct d’un autre objet ?',
+	'label_liaison_directe_explication' => 'Permet d’affecter cet objet dans  un autre objet parent. 
+		Cet objet intégrera dans sa table la clé primaire de l’objet parent sélectionné ici.
+		Ces objets seront listés sur la fiche de l’objet parent. 
+		Une saisie doit exister pour l’objet parent ainsi sélectionné.',
 	'label_libelle' => 'Libellé',
 	'label_libelle_champ_explication' => 'Un nom de champ pour les humains. Exemple « Post-Scriptum »',
 	'label_licence' => 'Licence',
@@ -371,6 +376,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_langues_et_traductions' => 'Langues et traductions',
 	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
 	'legend_liaisons_directes' => 'Liaisons directes',
+	'legend_liaison_directe_autre_objet' => 'Sur un autre objet éditorial',
 	'legend_liaisons_indirectes' => 'Liaisons indirectes',
 	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
 	'legend_logo' => 'Logos',

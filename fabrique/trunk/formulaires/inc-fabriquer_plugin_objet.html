@@ -336,6 +336,16 @@
 				plan,<:fabrique:label_champ_plan_rubrique:>})]})]
 		</div>
 	</fieldset>
+	<fieldset>
+		<legend class='legend'><:fabrique:legend_liaison_directe_autre_objet:></legend>
+		<div class='editer-groupe'>
+			[(#SAISIE{selection, objets/#CLE/liaison_directe,
+				label=<:fabrique:label_liaison_directe:>,
+				explication=<:fabrique:label_liaison_directe_explication:>,
+				datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/liaison_directe, #ARRAY}, #LISTE{#TABLE,spip_rubriques}})],
+				conteneur_class=saisie_choisir_objets})]
+		</div>
+	</fieldset>
 </div>
 
 
