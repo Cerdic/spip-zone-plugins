@@ -32,14 +32,16 @@ function [(#PREFIXE)]_declarer_tables_interfaces($interfaces) {
  */
 function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 <BOUCLE_objets_editoriaux(DATA) {source tableau, #OBJETS}>
-	$tables['#TABLE'] = array(
+[(#SET{_id_parent,#LIAISON_DIRECTE|?{#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS}}})
+]	$tables['#TABLE'] = array(
 		'type' => '#TYPE',
 		'principale' => "oui",[(#OBJETS_SURNOMS|oui)
 		'table_objet_surnoms' => [(#OBJETS_SURNOMS|ecrire_tableau)], // table_objet('#TYPE') => '#LOBJET' ]
 		'field'=> array(
 			[(#VAL{['(#ID_OBJET)']}   |espacer)] => '#CLE_PRIMAIRE_SQL',[
 			[(#VAL{"'id_rubrique'"}   |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_rubrique})][
-			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
+			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})][
+			[(#GET{_id_parent}|_q     |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#GET{_id_parent}|oui)]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
 			[(#VAL{['(#CHAMP)']}      |espacer)] => '[(#SQL|replace{"'",'"'})]',</BOUCLE_def_champs>[
 			[(#VAL{['(#CHAMP_DATE)']} |espacer)] => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',(#CHAMP_DATE|oui)][
 			[(#VAL{"'statut'"}        |espacer)] => 'varchar(20)  DEFAULT "0" NOT NULL',(#STATUT|oui)][
@@ -52,14 +54,15 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 			[(#VAL{"'PRIMARY KEY'"}    |espacer)] => '#ID_OBJET',[
 			[(#VAL{"'KEY id_rubrique'"}|espacer)] => 'id_rubrique',(#VALEUR|champ_present{id_rubrique})][
 			[(#VAL{"'KEY id_secteur'"} |espacer)] => 'id_secteur',(#VALEUR|champ_present{id_secteur})][
+			[(#VAL{"'KEY "}|concat{#GET{_id_parent}}|concat{"'"}      |espacer)] => '(#GET{_id_parent})',][
 			[(#VAL{"'KEY lang'"}       |espacer)] => 'lang',(#VALEUR|champ_present{lang})][
 			[(#VAL{"'KEY id_trad'"}    |espacer)] => 'id_trad',(#VALEUR|champ_present{id_trad})][
 			[(#VAL{"'KEY statut'"}     |espacer)] => 'statut',(#VALEUR|champ_present{statut})]
 		),
 		'titre' => '[(#CHAMP_TITRE|sinon{'""'})] AS titre, [(#VALEUR|champ_present{lang}|?{lang,'""'})] AS lang',
 		[(#CHAMP_DATE|non)#]'date' => '[(#CHAMP_DATE)]',
-		'champs_editables'  => [(#CHAMPS|champs_option_presente{editable,  champ}|ecrire_tableau)],
-		'champs_versionnes' => [(#CHAMPS|champs_option_presente{versionne, champ}|ecrire_tableau)],
+		'champs_editables'  => [(#VALEUR|fabrique_lister_objet_champs{editable, #OBJETS}|ecrire_tableau)],
+		'champs_versionnes' => [(#VALEUR|fabrique_lister_objet_champs{versionne, #OBJETS}|ecrire_tableau)],
 		'rechercher_champs' => array(<BOUCLE_recherches(DATA){source tableau,#CHAMPS}{recherche >=1 }{", "}>["(#VALEUR{champ})"] => #VALEUR{recherche}</BOUCLE_recherches>),
 		'tables_jointures'  => array(['(#NOM_TABLE_LIENS)']),[
 		'statut_textes_instituer' => array(
@@ -79,7 +82,7 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => '#TYPE:texte_changer_statut_#TYPE',(#STATUT|oui)]
-		#SET{roles,#VALEUR|fabrique_description_roles}<BOUCLE_roles(CONDITION){si #GET{roles}}>
+#SET{roles,#VALEUR|fabrique_description_roles}<BOUCLE_roles(CONDITION){si #GET{roles}}>
 		'roles_colonne' => '#GET{roles/roles_colonne}',
 		'roles_titres' => array(<BOUCLE_rtitres(DATA){source table,#GET{roles/roles_titres}}>
 			'#CLE'=>'#VALEUR',</BOUCLE_rtitres>
