@@ -2,7 +2,7 @@
 	prefix="critere_mots"
 	categorie="navigation"
 	version="3.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
 	documentation="http://contrib.spip.net/Critere-mots"
