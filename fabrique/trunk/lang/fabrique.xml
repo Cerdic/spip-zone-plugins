@@ -1,7 +1,7 @@
 <traduction module="fabrique" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fabrique/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/fabrique?lang_cible=en" total="315" traduits="295" relire="2" modifs="5" nouveaux="13" pourcent="93.65">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/fabrique?lang_cible=en" total="316" traduits="293" relire="2" modifs="6" nouveaux="15" pourcent="92.72">
 		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/fabrique?lang_cible=fr" total="315" traduits="315" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/fabrique?lang_cible=fr" total="316" traduits="316" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>

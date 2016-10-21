@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autorisation_webmestre' => 'To be webmaster', # MODIF
 	'avertissement_champs' => 'Do not insert here the primary key (@id_objet@),
 		
-nor any special fields (id_rubrique, lang, etc.) proposed in the next section.',
+nor any special fields (id_rubrique, lang, etc.) proposed in the next section.', # MODIF
 
 	// B
 	'bouton_ajouter_champ' => 'Add a field',
@@ -352,7 +352,6 @@ By default the same name as the source table.',
 	'legend_insertion_code' => 'Code insertion',
 	'legend_installation' => 'Installation',
 	'legend_langues_et_traductions' => 'Langs and translations',
-	'legend_liaisons' => 'Liaisons',
 	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
 	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
 	'legend_logo' => 'Logos',
