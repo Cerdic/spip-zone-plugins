@@ -21,30 +21,52 @@
 
 ]<BOUCLE_si_affiche_enfants(CONDITION){si #OBJETS|fabrique_necessite_pipeline{affiche_enfants}}>
 /**
- * Ajouter les objets sur les vues de rubriques
+ * Ajouter les objets sur les vues des parents directs
  *
  * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_affiche_enfants($flux) {
-	if ($e = trouver_objet_exec($flux['args']['exec'])
-		AND $e['type'] == 'rubrique'
-		AND $e['edition'] == false) {
+	if ($e = trouver_objet_exec($flux['args']['exec']) AND $e['edition'] == false) {
+		$id_objet = $flux['args']['id_objet'];
+<B_objets_affiche_enfants_rubrique>
+		if ($e['type'] == 'rubrique') {
+<BOUCLE_objets_affiche_enfants_rubrique(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
+			$flux['data'] .= recuperer_fond(
+				'prive/objets/liste/#OBJET',
+				array(
+					'titre' => _T('#TYPE:titre_[(#OBJET)]_rubrique'),
+					'id_rubrique' => $id_objet
+				)
+			);
 
-		$id_rubrique = $flux['args']['id_rubrique'];
-		$lister_objets = charger_fonction('lister_objets', 'inc');
-<BOUCLE_objets_affiche_enfants(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
-		$bouton = '';
-		if (autoriser('creer#TYPEdans', 'rubrique', $id_rubrique)) {
-			$bouton .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "id_rubrique=$id_rubrique"), "#TYPE-24.png", "new", "right")
-					. "<br class='nettoyeur' />";
+			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', 'rubrique', $id_objet)) {
+				include_spip('inc/presentation');
+				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "id_rubrique=$id_objet"), "#TYPE-24.png", "new", "right")
+						. "<br class='nettoyeur' />";
+			}
+</BOUCLE_objets_affiche_enfants_rubrique>
 		}
+</B_objets_affiche_enfants_rubrique>[(#REM)
+]<BOUCLE_objets_affiche_enfants_directs(DATA){source tableau,(#OBJETS|objets_option_presente{liaison_directe})}>
+		if ($e['type'] == '[(#LIAISON_DIRECTE|fabrique_objet_type{#OBJETS})]') {
+			$flux['data'] .= recuperer_fond(
+				'prive/objets/liste/#OBJET',
+				array(
+					'titre' => _T('#TYPE:titre_[(#OBJET)]'),
+					'[(#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS})]' => $id_objet
+				)
+			);
 
-		$flux['data'] .= $lister_objets('#OBJET', array('titre'=>_T('#TYPE:titre_[(#OBJET)]_rubrique') , 'id_rubrique'=>$id_rubrique));
-		$flux['data'] .= $bouton;
-</BOUCLE_objets_affiche_enfants>
-	}
+			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', '[(#LIAISON_DIRECTE|fabrique_table_objet{#OBJETS})]', $id_objet)) {
+				include_spip('inc/presentation');
+				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "[(#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS})]=$id_objet"), "#TYPE-24.png", "new", "right")
+						. "<br class='nettoyeur' />";
+			}
+		}
+</BOUCLE_objets_affiche_enfants_directs>[(#REM)
+]	}
 	return $flux;
 }
 </BOUCLE_si_affiche_enfants>[
