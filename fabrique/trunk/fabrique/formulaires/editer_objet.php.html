@@ -24,7 +24,7 @@ include_spip('inc/editer');
 	Il faut qu'il soit obligatoire et dispose d'une saisie
 
 ][(#SET{obligatoires,[(#ENV{objet/champs}|champs_options_presentes{#LISTE{obligatoire,saisie},champ})]})][    (#REM)
-][(#OBJET|option_presente{liaison_directe}|?{#SET_PUSH{obligatoires,#GET{id_parent}}})][   (#REM)
+][(#OBJET|option_presente{liaison_directe}|?{#SET{obligatoires,#GET{obligatoires}|push{#GET{id_parent}}}})][   (#REM)
 
 
 	Fonctions de chargement de l'objet

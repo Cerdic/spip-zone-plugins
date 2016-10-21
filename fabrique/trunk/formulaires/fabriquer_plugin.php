@@ -403,7 +403,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				// lister aussi les liaisons sur la vue de cet objet
 				if (option_presente($objet, 'afficher_liens')) {
 					fabriquer_fichier("prive/objets/liste/\objets_lies_objet.html", $data);
-					fabriquer_fichier("prive/squelettes/contenu/objet.html", $data); // fichier habituellement échaffaudé
+					fabriquer_fichier("prive/squelettes/contenu/objet.html", $data); // fichier habituellement échafaudé
 				}
 			}
 
