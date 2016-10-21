@@ -9,7 +9,7 @@ function mutualiser_upgradeplugins() {
     include_spip('inc/minipres');
 
     // verif securite
-    if (_request('secret') != md5($GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['popularite_total'])) {
+    if (_request('secret') != md5($GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['secret_du_site'])) {
         include_spip('inc/headers');
         redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS.'?exec=admin_plugin');
         exit;
@@ -43,8 +43,13 @@ function mutualiser_upgradeplugins() {
 		purger_repertoire(_DIR_VAR . 'cache-css');
 		purger_repertoire(_DIR_VAR . 'cache-js');
 		purger_repertoire(_DIR_SKELS);
-			
-		echo minipres(_T('titre_page_upgrade'), _L('Mise &agrave; jour des plugins').'<br/>'._L('Aller dans <a href="@ecrire@">ecrire/</a>', array('ecrire' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS.'?exec=admin_plugin')));
+		
+		if (_request('ajax') != 'oui') {
+			echo minipres(_T('titre_page_upgrade'), _L('Mise &agrave; jour des plugins').'<br/>'._L('Aller dans <a href="@ecrire@">ecrire/</a>', array('ecrire' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS.'?exec=admin_plugin')));
+		} else {
+			header('Access-Control-Allow-Origin: *');
+			echo _request('up');
+		}
 		exit;
 	}
 }

@@ -53,7 +53,8 @@ function exec_mutualisation_dist()
             <td id='cache'>cache<span class='unite'>&nbsp;(Mo)</span><br />
                 <input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");' /></td>
             <td title='Popularit&eacute; totale du site'>Stats</td>
-            <td>Plugins</td>
+            <td>Plugins<br />
+                <input type='button' name='pluginsupgrade' id='pluginsupgrade' value='Upgrader tout' onclick='plugins_upgrade();' /></td>
             <td>Compression</td>
             <td>Date</td>
         </tr>
@@ -62,6 +63,7 @@ function exec_mutualisation_dist()
 	$page .= '<script type="text/javascript">
         //<![CDATA[
         tableau_sites = new Array();
+        tableau_upgrade = new Array();
         //]]>
         </script>
         ';
@@ -300,6 +302,7 @@ function exec_mutualisation_dist()
         <link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
         <script src="../prive/javascript/jquery.js" type="text/javascript"></script>
         <script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
+        <script src="../mutualisation/mutualisation_upgrade.js" type="text/javascript"></script>
         <script src="../mutualisation/mutualisation_toolbar.js" type="text/javascript"></script>
         </head>
         ', $page);
@@ -397,39 +400,41 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base)
 					(spip_version_compare($vplugin_base, $nouvelle_version_plugin_base, '<'))
 				)
 			) {
-                $secret = $meta['version_installee'].'-'.$meta['popularite_total'];
-                $secret = md5($secret);
                 $vplugin = $vplugin_base.' / '.$cfg[$plugin]['version'].' &rarr; '.$nouvelle_version_plugin_base.' / '.$info_plugin['version'];
-
-                return <<<EOF
-<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='post' class='upgrade' target='_blank'>
-<div>
-<input type='hidden' name='secret' value='$secret' />
-<input type='hidden' name='exec' value='mutualisation' />
-<input type='hidden' name='upgradeplugins' value='oui' />
-<input type='submit' value='Upgrade plugins ($plugin $vplugin)' />
-</div>
-</form>
-EOF;
+				return upgrade_placeholder($meta,"$plugin $vplugin");
             }
         }
 		if (defined('_MUTUALISATION_UPGRADE_FORCE')) {
-			$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
-			$secret = md5($secret);
-			return <<<EOF
-<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='post' class='upgrade' target='_blank'>
-<div>
-<input type='hidden' name='secret' value='$secret' />
-<input type='hidden' name='exec' value='mutualisation' />
-<input type='hidden' name='upgradeplugins' value='oui' />
-<input type='submit' value='Upgrade plugins (forcé)' />
-</div>
-</form>
-EOF;
+			return upgrade_placeholder($meta);
 		}
     }
 
     return '';
+}
+
+function upgrade_placeholder($meta, $buttontxt='Upgrade plugins (forcé)') {
+	static $id = 0;
+	$id++;
+	$secret = $meta['version_installee'].'-'.$meta['secret_du_site'];
+	$secret = md5($secret);
+	$upgrade = '<script type="text/javascript">
+	//<![CDATA[
+	tableau_upgrade.push(["'.$meta[adresse_site].'/ecrire/?exec=mutualisation&secret='.$secret.'&upgradeplugins=oui&ajax=oui"]);
+	//]]>
+	</script>
+	';
+
+	return <<<EOF
+$upgrade
+<form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='get' class='upgrade' target='_blank'>
+<div id='upgrade$id' class='taille loading'>
+<input type='hidden' name='secret' value='$secret' />
+<input type='hidden' name='exec' value='mutualisation' />
+<input type='hidden' name='upgradeplugins' value='oui' />
+<input type='submit' value='Upgrade plugins ($buttontxt)' />
+</div>
+</form>
+EOF;
 }
 
 function date_creation_repertoire_site($v)
