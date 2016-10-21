@@ -1,33 +1,45 @@
 [(#SET{titre,#ENV{objet/champ_titre,#ENV{objet/champs/0/champ, titre}}})][
-(#SET{mtitre,#GET{titre}|strtoupper})][(#REM)
+(#SET{mtitre,#GET{titre}|strtoupper})]#SET{parent,''}[(#REM)
 
-
-]<BOUCLE_si_rub(CONDITION){si (#OBJET|champ_present{id_rubrique})}>#SET{rub,oui}
-\[(\#ID_OBJET|oui)
+]\[(\##MID_OBJET|oui)
 	\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET}|sinon_interdire_acces)\]
-\]\[(\#ID_OBJET|non)
-	\#SET{id_rubrique,\#ENV{id_rubrique,\#ENV{id_parent}}|trouver_rubrique_creer_objet{#LOBJET}}
-	\[(\#GET{id_rubrique}|non|ou{\[(\#AUTORISER{[creer(#TYPE)dans],rubrique,\#GET{id_rubrique}})\]}|sinon_interdire_acces)\]
+\]
+<BOUCLE_si_rub(CONDITION){si (#OBJET|champ_present{id_rubrique})}>#SET{parent,oui}
+\[(\##MID_OBJET|non)
+	\#SET{id_parent,\#ENV{id_rubrique,\#ENV{id_parent}}|trouver_rubrique_creer_objet{#LOBJET}}
+	\[(\#GET{id_parent}|non|ou{\[(\#AUTORISER{[creer(#TYPE|fabrique_type_autorisation)dans], rubrique, \#GET{id_parent}})\]}|sinon_interdire_acces)\]
 \]
 [(#OBJET|champ_present{id_trad}|oui)
-\#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\#ID_OBJET}|?{\#ENV{lier_trad,\#ID_OBJET}|generer_url_entite{#TYPE},\#GET{id_rubrique}|?{\#GET{id_rubrique}|generer_url_entite{rubrique},\#URL_ECRIRE{rubriques}}}}}
+\#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\#ID_OBJET}|?{\#ENV{lier_trad,\#ID_OBJET}|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{rubrique},\#URL_ECRIRE{rubriques}}}}}
 ][(#OBJET|champ_present{id_trad}|non)
-\#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#GET{id_rubrique}|?{\#GET{id_rubrique}|generer_url_entite{rubrique},\#URL_ECRIRE{rubriques}}}}}
-]</BOUCLE_si_rub>#SET{rub,''}
-\[(\#ID_OBJET|oui)
-	\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET}|sinon_interdire_acces)\]
-\]\[(\#ID_OBJET|non)
+\#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{rubrique},\#URL_ECRIRE{rubriques}}}}}
+]
+</BOUCLE_si_rub>
+<BOUCLE_si_liaison_directe(CONDITION){si (#OBJET|option_presente{liaison_directe})}>#SET{parent,oui}
+\[(\##MID_OBJET|non)
+	\#SET{id_parent,\#ENV{[(#ENV{objet/liaison_directe}|fabrique_id_table_objet{#OBJETS})],\#ENV{id_parent}}}
+	\[(\#GET{id_parent}|non|ou{\[(\#AUTORISER{[creer(#TYPE|fabrique_type_autorisation)dans], [(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})], \#GET{id_parent}})\]}|sinon_interdire_acces)\]
+\]
+[(#OBJET|champ_present{id_trad}|oui)
+\#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\#ID_OBJET}|?{\#ENV{lier_trad,\#ID_OBJET}|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]},\#URL_ECRIRE{[(#ENV{objet/liaison_directe}|fabrique_table_objet{#OBJETS})]}}}}}
+][(#OBJET|champ_present{id_trad}|non)
+\#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]},\#URL_ECRIRE{[(#ENV{objet/liaison_directe}|fabrique_table_objet{#OBJETS})]}}}}}
+]
+</BOUCLE_si_liaison_directe>
+\[(\##MID_OBJET|non)
 	\[(\#AUTORISER{creer,#TYPE}|sinon_interdire_acces)\]
 \]
 [(#OBJET|champ_present{id_trad}|oui)
 \#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\##MID_OBJET}|?{\#ENV{lier_trad,\##MID_OBJET}|generer_url_entite{#TYPE},\#URL_ECRIRE{#LOBJET}}}}
 ][(#OBJET|champ_present{id_trad}|non)
 \#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#URL_ECRIRE{#LOBJET}}}}
-]<//B_si_rub>
+]
+<//B_si_liaison_directe>
+<//B_si_rub>
 <div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
 	\[(\##MID_OBJET|oui)
-	\[(\#GET{redirect}|icone_verticale{<:icone_retour:>,#TYPE,'',left retour\[(\#ENV{retourajax,''}|oui)ajax preload\]})\]
+	\[(\#GET{redirect}|icone_verticale{\<:icone_retour:>,#TYPE,'',left retour\[(\#ENV{retourajax,''}|oui)ajax preload\]})\]
 	\]
 	\[
 		\[(\##MID_OBJET|?{\<:#TYPE:icone_modifier_#TYPE:>,\<:#TYPE:icone_creer_#TYPE:>})]
@@ -40,7 +52,7 @@
 	\#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 \]
-		\[(\#FORMULAIRE_EDITER_#MTYPE\{\#ENV{#ID_OBJET,oui}[,(#GET{rub}|oui)\#GET{id_rubrique}], \#GET{redirect}[,(#OBJET|option_presente{vue_liens}|oui)\#ENV{associer_objet}][,(#OBJET|champ_present{id_trad}|oui)\#ENV{lier_trad}]})\]
+		\[(\#FORMULAIRE_EDITER_#MTYPE\{\#ENV{#ID_OBJET,oui}[,(#GET{parent}|oui)\#GET{id_parent}], \#GET{redirect}[,(#OBJET|option_presente{vue_liens}|oui)\#ENV{associer_objet}][,(#OBJET|champ_present{id_trad}|oui)\#ENV{lier_trad}]})\]
 \[(\#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('\#ENV{exec}');/*\\]\\]>*/</script>
