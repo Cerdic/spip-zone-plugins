@@ -787,8 +787,8 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
  * Tous les champs déclarés commençant par `id_x` sont retournés
  * sous forme d'une écriture de critère, tel que `{id_parent?}{id_documentation?}`
  * 
- * Cela ne concerne pas les champs speciaux (id_rubrique, id_secteur, id_trad)
- * qui ne seront pas inclus. 
+ * Les champs indirects `{B_liens.id_B ?}` sont aussi ajoutés s'ils sont déclarés
+ * dans la Fabrique en même temps.
  *
  * @param array $objet
  *     Description de l'objet dans la fabrique
@@ -799,12 +799,16 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 **/
 function criteres_champs_id($objet, $objets) {
 	$ids = array();
+
+	// parenté directe sur Rubrique ?
 	if (champ_present($objet, 'id_rubrique')) {
 		$ids[] = 'id_rubrique';
 	}
 	if (champ_present($objet, 'id_secteur')) {
 		$ids[] = 'id_secteur';
 	}
+
+	// parenté directe sur un autre objet ?
 	if (option_presente($objet, 'liaison_directe') and $_id = fabrique_id_table_objet($objet['liaison_directe'], $objets)) {
 		$ids[] = $_id;
 	}
@@ -815,6 +819,20 @@ function criteres_champs_id($objet, $objets) {
 			}
 		}
 	}
+
+	// Liaisons indirectes via table de liens déclarée dans la Fabrique ?
+	// D'autres objets peuvent avoir une table de liens et demander à être lié sur cet objet.
+	// On ajoute leurs champs de liaison. 
+	foreach ($objets as $autre_objet) {
+		if ($autre_objet !== $objet) {
+			if (options_presentes($autre_objet, array('table_liens', 'vue_liens'))) {
+				if (in_array($objet['table'], $autre_objet['vue_liens'])) {
+					$ids[] = $autre_objet['objet'] . '_liens.' . $autre_objet['id_objet'];
+				}
+			}
+		}
+	}
+
 	if (!$ids) {
 		return "";
 	}
