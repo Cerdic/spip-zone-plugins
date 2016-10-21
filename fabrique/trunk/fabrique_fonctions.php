@@ -792,11 +792,22 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
  *
  * @param array $objet
  *     Description de l'objet dans la fabrique
+ * @param array $objets
+ *     Description de tous les objets dans la fabrique
  * @return string
  *     L'écriture des critères de boucle
 **/
-function criteres_champs_id($objet) {
+function criteres_champs_id($objet, $objets) {
 	$ids = array();
+	if (champ_present($objet, 'id_rubrique')) {
+		$ids[] = 'id_rubrique';
+	}
+	if (champ_present($objet, 'id_secteur')) {
+		$ids[] = 'id_secteur';
+	}
+	if (option_presente($objet, 'liaison_directe') and $_id = fabrique_id_table_objet($objet['liaison_directe'], $objets)) {
+		$ids[] = $_id;
+	}
 	if (is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
 			if (substr($info['champ'], 0, 3) == 'id_') {
@@ -856,6 +867,43 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 
 
 /**
+ * Retourne la liste des noms de certains champs pour cet objet
+ * 
+ * Champs déclarés complétés des champs spéciaux (editable, versionne, obligatoire)
+ *
+ * @param array $objet
+ *     Description de l'objet concerné
+ * @param string $option
+ *     Option souhaitée.
+ * @param array $objets
+ *     Description de l'ensemble des objets générés par la Fabrique.
+ * @return array
+ *     Liste des champs concernés
+**/
+function fabrique_lister_objet_champs($objet, $option, $objets) {
+	if (!$objet) {
+		return array();
+	}
+	$liste = array();
+	if (is_array($objet['champs'])) {
+		$liste = champs_option_presente($objet['champs'], $option, 'champ');
+	}
+	if (champ_present($objet, 'id_rubrique')) {
+		$liste[] = 'id_rubrique';
+	}
+	if (champ_present($objet, 'id_secteur')) {
+		$liste[] = 'id_secteur';
+	}
+	if (option_presente($objet, 'liaison_directe')) {
+		if ($_id_parent = fabrique_id_table_objet($objet['liaison_directe'], $objets)) {
+			$liste[] = $_id_parent;
+		}
+	}
+	return $liste;
+}
+
+
+/**
  * Indique si un des objets a besoin du pipeline demandé
  *
  * @param array $objets
@@ -881,7 +929,8 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			break;
 
 		case "affiche_enfants":
-			if (objets_option_presente($objets, 'vue_rubrique')) {
+			if (objets_option_presente($objets, 'vue_rubrique')
+				OR objets_option_presente($objets, 'liaison_directe')) {
 				return true;
 			}
 			break;
@@ -1158,6 +1207,84 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
 	asort($liste);
 
 	return $liste;
+}
+
+/**
+ * Retrouve la clé primaire d'un objet éditorial
+ * 
+ * D'abord en cherchant dans les déclaration de la Fabrique,
+ * sinon en cherchant dans les objets actifs sur ce SPIP.
+ *
+ * @param string $table 
+ *     Table SQL
+ * @param array $objets
+ *     Description des objets générés par la Fabrique.
+ * @return string
+**/
+function fabrique_id_table_objet($table, $objets) {
+	if (!$table) {
+		return '';
+	}
+	// déclaré dans la Fabrique
+	foreach ($objets as $objet) {
+		if ($objet['table'] == $table) {
+			return $objet['id_objet'];
+		}
+	}
+	// déclaré dans SPIP
+	return id_table_objet($table);
+}
+
+/**
+ * Retrouve le nom d'objet d'un objet éditorial
+ * 
+ * D'abord en cherchant dans les déclaration de la Fabrique,
+ * sinon en cherchant dans les objets actifs sur ce SPIP.
+ *
+ * @param string $table 
+ *     Table SQL
+ * @param array $objets
+ *     Description des objets générés par la Fabrique.
+ * @return string
+**/
+function fabrique_table_objet($table, $objets) {
+	if (!$table) {
+		return '';
+	}
+	// déclaré dans la Fabrique
+	foreach ($objets as $objet) {
+		if ($objet['table'] == $table) {
+			return $objet['objet'];
+		}
+	}
+	// déclaré dans SPIP
+	return table_objet($table);
+}
+
+/**
+ * Retrouve le type d'un objet éditorial
+ * 
+ * D'abord en cherchant dans les déclaration de la Fabrique,
+ * sinon en cherchant dans les objets actifs sur ce SPIP.
+ *
+ * @param string $table 
+ *     Table SQL
+ * @param array $objets
+ *     Description des objets générés par la Fabrique.
+ * @return string
+**/
+function fabrique_objet_type($table, $objets) {
+	if (!$table) {
+		return '';
+	}
+	// déclaré dans la Fabrique
+	foreach ($objets as $objet) {
+		if ($objet['table'] == $table) {
+			return $objet['type'];
+		}
+	}
+	// déclaré dans SPIP
+	return objet_type($table);
 }
 
 
