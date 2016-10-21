@@ -9,4 +9,6 @@
  * @package    SPIP\Format_phone\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (! defined('FORMAT_PHONE_PAYS')) {
+	define('FORMAT_PHONE_PAYS', 'BE');
+}

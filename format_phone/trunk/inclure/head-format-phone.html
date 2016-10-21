@@ -2,7 +2,7 @@
  $(function () {
    $('.autoformat-numero').keyup(function (e) {
      if (e.keyCode !== 8) {
-       $(this).val(formatInternational("BE", $(this).val()));
+       $(this).val(formatInternational("#EVAL{FORMAT_PHONE_PAYS}", $(this).val()));
      }
    });
  });
