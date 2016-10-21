@@ -12,6 +12,9 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 	<licence>GNU/GPL</licence>
 	
+
+	<traduire module="mots_obligatoires" reference="fr" />
+	<traduire module="paquet-mots_obligatoires" reference="fr" />
 	
 	<necessite nom="mots" compatibilite="[2.7.8;]" />
 	<utilise nom="motus" compatibilite="[1.1.4;]" />
