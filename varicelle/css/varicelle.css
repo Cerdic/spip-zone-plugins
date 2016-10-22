@@ -122,6 +122,10 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .submit.danger 			{ background-color: #E62623; }
 .submit.danger:hover	{ background-color: #b81e1c; }
 
+/* light */
+.submit.light 			{ background: transparent; box-shadow: 0 0 0; border: 0; border-radius: 0; text-shadow: 0 0 0; color: inherit; font-weight: normal; }
+.submit.light:hover		{ background: transparent; color: inherit; text-decoration: underline; }
+
 /* disabled */
 .submit.disabled,
 .submit.disabled:focus,
