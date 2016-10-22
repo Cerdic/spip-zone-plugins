@@ -8,6 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'mot_manquant' => 'Pour publier, ajouter un mot-clef pour le groupe suivant&nbsp;:',
-	'mots_manquants' => 'Pour publier, ajouter un mot-clef pour le groupes suivants&nbsp'
+	'mot_manquant' => 'Pour publier, ajouter un mot-clef du groupe suivant&nbsp;:',
+	'mots_manquants' => 'Pour publier, ajouter un mot-clef des groupes suivants&nbsp'
 );
