@@ -1,7 +1,7 @@
 <paquet
 	prefix="mots_obligatoires"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/mots_obligatoires-32.png"

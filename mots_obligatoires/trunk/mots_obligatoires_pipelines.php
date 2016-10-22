@@ -51,17 +51,10 @@ function mots_obligatoires_formulaire_verifier($flux){
 			else{
 				$erreur = _T("mots_obligatoires:mots_manquants")."\n";
 			}
-			$erreur .= "<ul class='erreur_mots_obligatoires'>\n";
 			foreach ($groupes_erreurs as $titre){
-				$erreur .= "<li>".typo(supprimer_numero($titre))."</li>\n";
+				$erreur .= "<br />- ".typo(supprimer_numero($titre))."\n";//on ne pas utiliser de <li> ici parce que instituer_objet.html entoure le message d'erreur de <p>
 			}
-			$erreur .= "</ul>\n";
-			if (isset($flux['data'])){
-				$flux['data']['statut'] = $erreur;
-			}
-			else{
-				$flux['data'] = array('statut'=>$erreur);
-			}
+			$flux['message_erreur'] = $erreur;
 		}
 	}
 	return $flux;
