@@ -107,6 +107,21 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .spip-admin .submit:focus,
 .spip-admin .submit:active	 { background-color: #F57900 !important; border-color: #F57900 !important; }
 
+/* system */
+.submit.primary 		{ background-color: #222; }
+.submit.primary:hover	{ background-color: #000; }
+.submit.secondary 		{} /* = default */
+.submit.secondary 		{} /* = default */
+
+.submit.success 		{ background-color: #91BD09; }
+.submit.success:hover	{ background-color: #737B4C; }
+.submit.info 			{ background-color: #2673E5; }
+.submit.info:hover		{ background-color: #1a50a0; }
+.submit.warning 		{ background-color: #FFB515; }
+.submit.warning:hover	{ background-color: #FC9200; }
+.submit.danger 			{ background-color: #E62623; }
+.submit.danger:hover	{ background-color: #b81e1c; }
+
 /* disabled */
 .submit.disabled,
 .submit.disabled:focus,
