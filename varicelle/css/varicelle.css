@@ -20,7 +20,7 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 	cursor: pointer;
 	-webkit-user-select: none;
 
-	background: #888 url(img/sprite/varicelle.png) left top repeat-x;
+	background: #767676 url(img/sprite/varicelle.png) left top repeat-x;
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
@@ -44,7 +44,7 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .submit * { color: #FFF; text-decoration: none; }
 
 .submit:hover {
-	background-color: #777;
+	background-color: #555;
 	color: #FFF;
 	text-decoration: none;
 }
@@ -70,23 +70,25 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 						-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 
 /* couleurs */
-.submit.pink			{ background-color: #e22092; }
-.submit.pink:hover		{ background-color: #c81e82; }
-.submit.red.submit		{ background-color: #e62727; }
-.submit.red:hover		{ background-color: #cf2525; }
+.submit.purple			{ background-color: #8c198c; }
+.submit.purple:hover	{ background-color: #730073; }
+.submit.pink			{ background-color: #E20B8D; }
+.submit.pink:hover		{ background-color: #b40870; }
+.submit.red				{ background-color: #E62623; }
+.submit.red:hover		{ background-color: #b81e1c; }
 .submit.orange			{ background-color: #ff5c00; }
 .submit.orange:hover	{ background-color: #D45500; }
 .submit.yellow			{ background-color: #FFB515; }
 .submit.yellow:hover	{ background-color: #FC9200; }
 .submit.green			{ background-color: #91BD09; }
-.submit.green:hover		{ background-color: #749A02; }
-.submit.blue			{ background-color: #2981e4; }
-.submit.blue:hover		{ background-color: #2575cf; }
+.submit.green:hover		{ background-color: #737B4C; }
+.submit.blue			{ background-color: #2673E5; }
+.submit.blue:hover		{ background-color: #1a50a0; }
 .submit.black			{ background-color: #222; }
-.submit.black:hover		{ background-color: #111; }
-.submit.gray			{ background-color: #888; }
-.submit.gray:hover		{ background-color: #777; }
-.submit.white			{ background-color: #FFF; border: 1px solid #CCC; color: #666; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.submit.black:hover		{ background-color: #000; }
+.submit.gray			{ background-color: #767676; }
+.submit.gray:hover		{ background-color: #555; }
+.submit.white			{ background-color: #FFF; border: 1px solid #CCC; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
 .submit.white:hover		{ background-color: #EEE; }
 
 /* styles */
