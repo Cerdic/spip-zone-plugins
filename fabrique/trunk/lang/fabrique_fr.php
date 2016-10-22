@@ -211,8 +211,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_afficher_liens' => 'Afficher les différentes liaisons sur la vue de votre objet ?',
 	'label_afficher_liens_explication' => 'Vous pouvez sur la vue de votre objet, lister les objets (sélectionnés au dessus) qui lui sont liés. 
-		Note: il est possible que ces listes ne fonctionnent pas parfaitement, affichant l’ensemble des objets, au lieu de seulement ceux liés au votre ; 
-		il faudra alors surcharger le fichier de liste utilisé (prive/objets/liste/xxx.html) pour ajouter un critère `{xxx_liens.id_xxx ?}` supplémentaire.',
+		Note : il est possible que ces listes ne fonctionnent pas parfaitement, affichant l’ensemble des objets, au lieu de seulement ceux liés au votre ; 
+		il faudra alors surcharger le fichier de liste utilisé (prive/objets/liste/xxx.html) pour ajouter un critère `{xxx_liens.id_xxx ?}` supplémentaire.',
 	'label_auteur' => 'Nom de l’auteur',
 	'label_auteur_lien' => 'URL vers l’auteur',
 	'label_auteurs_liens' => 'Lier des auteurs ?',
@@ -380,9 +380,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_insertion_code' => 'Insertion de code',
 	'legend_installation' => 'Installation',
 	'legend_langues_et_traductions' => 'Langues et traductions',
+	'legend_liaison_directe_autre_objet' => 'Sur un autre objet éditorial',
 	'legend_liaisons_auteurs_liens' => 'spip_auteurs_liens',
 	'legend_liaisons_directes' => 'Liaisons directes',
-	'legend_liaison_directe_autre_objet' => 'Sur un autre objet éditorial',
 	'legend_liaisons_indirectes' => 'Liaisons indirectes',
 	'legend_liaisons_objet_liens' => 'spip_@objet@_liens',
 	'legend_logo' => 'Logos',
