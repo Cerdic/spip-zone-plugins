@@ -48,7 +48,6 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 	color: #FFF;
 	text-decoration: none;
 }
-.submit:focus,
 .submit:active {
 	-webkit-transform: translateY(1px);
 	-moz-transform: translateY(1px);
@@ -107,5 +106,21 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .spip-admin .submit:hover	{ background-color: purple; }
 .spip-admin .submit:focus,
 .spip-admin .submit:active	 { background-color: #F57900 !important; border-color: #F57900 !important; }
+
+/* disabled */
+.submit.disabled,
+.submit.disabled:focus,
+.submit.disabled:hover,
+.submit.disabled:active {
+	background: #F7F7F7 !important;
+	box-shadow: 0 0 0;
+	border: 1px solid #D6D6D6 !important;
+	color: #666 !important;
+	text-shadow: 0 0 0;
+	font-weight: normal;
+	opacity: .5;
+	cursor: default;
+	transform: none;
+}
 
 /* end */
