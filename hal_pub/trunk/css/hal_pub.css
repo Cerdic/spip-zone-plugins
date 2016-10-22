@@ -1,0 +1,60 @@
+/*
+  habillage minimum du listing du plugin HAL_PUB
+*/
+
+
+/* formulaire de recherche
+--------------------------------------------------------------------*/
+.hal-wrapper {}
+
+
+/* formulaire de recherche
+--------------------------------------------------------------------*/
+.hal-form-recherche-wrapper {}
+.hal-form-recherche {}
+.hal-recherche {width:30rem;}
+.hal-filtre {}
+.hal-filtre ul {list-style:none;margin:0;padding:0;}
+.hal-filtre li {display:inline-block;margin:1em 1em 1em 0em;}
+.hal-filtre label {display:block;}
+.hal-opacity {
+	opacity:0.6;
+    transition:opacity 1s;
+}
+
+/* nb-resultats +  pagination
+--------------------------------------------------------------------*/
+.hal-nb-resultats-wrapper {}
+.hal-nb- resultats {}
+.hal-pagination {list-style:none;margin:1em 0;padding:0;}
+.hal-pagination li {float:left;width:2em;}
+.hal-pagination a {display:block;text-align:center;text-decoration:none;border:1px solid #aaa;}
+.hal-pagination .active a {background:#aaa;}
+
+/* resultats 
+--------------------------------------------------------------------*/
+.hal-resultats {clear:both;padding-top:.5em;}
+.hal-resultat {margin:1em 0;background:#efefef;padding:.5em;}
+
+/* les champs */
+.hal-type-pub {margin-bottom:.2em;}
+.hal-type-pub span {display:inline-block;background:#aaaaaa;color:#fff;font-size:.88em;padding:0 .5em;border-radius:.5em;}
+.hal-auteur {font-weight:bold;}
+.hal-titre {font-style:italic;}
+.hal-ref-pub {}
+.hal-depot-annee {}
+
+/* les liens vers les portails */
+.hal-ref {}
+.hal-hal, 
+.hal-doi, 
+.hal-arxiv {display:inline-block;}
+
+.hal-ref span {display:none;}
+.hal-ref a {display:block;width:32px;height:20px;}
+.hal-hal a {background:transparent url(../img/picto_hal.png) no-repeat;}
+.hal-hal a:hover {background:transparent url(../img/picto_hal_on.png) no-repeat;}
+.hal-doi a {background:transparent url(../img/picto_doi.png) no-repeat;}
+.hal-doi a:hover {background:transparent url(../img/picto_doi_on.png) no-repeat;}
+.hal-arxiv a {background:transparent url(../img/picto_arxiv.png) no-repeat;}
+.hal-arxiv a:hover {background:transparent url(../img/picto_arxiv_on.png) no-repeat;}

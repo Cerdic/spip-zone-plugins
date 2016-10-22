@@ -1,0 +1,17 @@
+[(#REM)
+	Modele pour afficher un listing HAL
+
+	parametres
+	- q (facultatif)        	   requete de recherche  sur l'API HAL
+                        		   https://api.archives-ouvertes.fr/docs/search
+	- pub (facultatif)             ajout un filtre sur le champs docType_s
+	- annee(facultatif)            ajout un filtre sur le champs producedDateY_i
+
+	- cacher_formulaire            cache le formulaire
+	- cacher_q                     cache recherche libre
+	- cacher_pub                   cache filtre publication
+    - cacher_annee                 cache filtre annee
+
+	si une parametre est passe, il est force dans on faut mieux cacher le champs par cacher_*
+
+]<INCLURE{fond=public/hal_pub,env}>
