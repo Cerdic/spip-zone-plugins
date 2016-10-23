@@ -64,6 +64,7 @@
 .submit.big				{ font-size: 130%; }
 .submit.super			{ font-size: 200%;
 						-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+.submit.expand 			{ width: 100%; }
 
 /* couleurs */
 .submit.purple			{ background-color: #8c198c; }
