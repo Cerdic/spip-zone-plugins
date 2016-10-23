@@ -10,7 +10,7 @@ include_spip('inc/editer');
 
 	Y a t'il un champ de parent à prendre en compte ?
 
-][(#SET{id_parent,[(#OBJET|champ_present{id_rubrique}|sinon{[(#OBJET|option_presente{liaison_directe}|?{[(#ENV{objet/liaison_directe}|fabrique_id_table_objet{#OBJETS})]})]})]})][    (#REM)
+][(#SET{id_parent,#ENV{parent/id_objet}})][    (#REM)
 ][(#SET{id_parent_param,#GET{id_parent}|?{#VAL{'$'}|concat{#GET{id_parent}}|concat{'=0,'}}})][     (#REM)
 ][(#SET{id_parent_val,#GET{id_parent}|?{$#GET{id_parent}, "''"}})][    (#REM)
 

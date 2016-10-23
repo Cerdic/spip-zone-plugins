@@ -50,12 +50,12 @@ function [(#PREFIXE)]_affiche_enfants($flux) {
 		}
 </B_objets_affiche_enfants_rubrique>[(#REM)
 ]<BOUCLE_objets_affiche_enfants_directs(DATA){source tableau,(#OBJETS|objets_option_presente{liaison_directe})}>
-		if ($e['type'] == '[(#LIAISON_DIRECTE|fabrique_objet_type{#OBJETS})]') {
+		if ($e['type'] == '[(#VALEUR{parent/type})]') {
 			$flux['data'] .= recuperer_fond(
 				'prive/objets/liste/#OBJET',
 				array(
 					'titre' => _T('#TYPE:titre_[(#OBJET)]'),
-					'[(#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS})]' => $id_objet
+					'[(#VALEUR{parent/id_objet})]' => $id_objet
 				)
 			);
 

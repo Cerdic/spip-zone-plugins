@@ -32,7 +32,7 @@ function [(#PREFIXE)]_declarer_tables_interfaces($interfaces) {
  */
 function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 <BOUCLE_objets_editoriaux(DATA) {source tableau, #OBJETS}>
-[(#SET{_id_parent,#LIAISON_DIRECTE|?{#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS}}})
+[(#SET{_id_parent,#VALEUR{parent/id_objet}})
 ]	$tables['#TABLE'] = array(
 		'type' => '#TYPE',
 		'principale' => "oui",[(#OBJETS_SURNOMS|oui)
