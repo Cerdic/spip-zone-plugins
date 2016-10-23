@@ -39,8 +39,8 @@
 ]<BOUCLE_si_liaison_directe(CONDITION){si #OBJET|option_presente{liaison_directe}}>[(#REM)
 ]
 
-			\[(\#SAISIE{[(#ENV{objet/liaison_directe}|fabrique_table_objet{#OBJETS})], [(#ENV{objet/liaison_directe}|fabrique_id_table_objet{#OBJETS})], obligatoire=oui,
-				label=\<:[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]:titre_[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]:>})\]
+			\[(\#SAISIE{[(#ENV{parent/objet})], [(#ENV{parent/id_objet})], obligatoire=oui,
+				label=\<:[(#ENV{parent/type})]:titre_[(#ENV{parent/type})]:>})\]
 </BOUCLE_si_liaison_directe>[(#REM)
 ]</BOUCLE_si_parent>
 </BOUCLE_saisies>
