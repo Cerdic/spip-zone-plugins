@@ -59,9 +59,9 @@ function [(#PREFIXE)]_affiche_enfants($flux) {
 				)
 			);
 
-			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', '[(#LIAISON_DIRECTE|fabrique_table_objet{#OBJETS})]', $id_objet)) {
+			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', '[(#VALEUR{parent/objet})]', $id_objet)) {
 				include_spip('inc/presentation');
-				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "[(#LIAISON_DIRECTE|fabrique_id_table_objet{#OBJETS})]=$id_objet"), "#TYPE-24.png", "new", "right")
+				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "[(#VALEUR{parent/id_objet})]=$id_objet"), "#TYPE-24.png", "new", "right")
 						. "<br class='nettoyeur' />";
 			}
 		}

@@ -17,13 +17,13 @@
 </BOUCLE_si_rub>
 <BOUCLE_si_liaison_directe(CONDITION){si (#OBJET|option_presente{liaison_directe})}>#SET{parent,oui}
 \[(\##MID_OBJET|non)
-	\#SET{id_parent,\#ENV{[(#ENV{objet/liaison_directe}|fabrique_id_table_objet{#OBJETS})],\#ENV{id_parent}}}
-	\[(\#GET{id_parent}|non|ou{\[(\#AUTORISER{[creer(#TYPE|fabrique_type_autorisation)dans], [(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})], \#GET{id_parent}})\]}|sinon_interdire_acces)\]
+	\#SET{id_parent,\#ENV{[(#ENV{parent/id_objet})],\#ENV{id_parent}}}
+	\[(\#GET{id_parent}|non|ou{\[(\#AUTORISER{[creer(#TYPE|fabrique_type_autorisation)dans], [(#ENV{parent/type})], \#GET{id_parent}})\]}|sinon_interdire_acces)\]
 \]
 [(#OBJET|champ_present{id_trad}|oui)
-\#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\#ID_OBJET}|?{\#ENV{lier_trad,\#ID_OBJET}|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]},\#URL_ECRIRE{[(#ENV{objet/liaison_directe}|fabrique_table_objet{#OBJETS})]}}}}}
+\#SET{redirect,\#ENV{redirect}|sinon{\#ENV{lier_trad,\#ID_OBJET}|?{\#ENV{lier_trad,\#ID_OBJET}|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{parent/type})]},\#URL_ECRIRE{[(#ENV{parent/objet})]}}}}}
 ][(#OBJET|champ_present{id_trad}|non)
-\#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{objet/liaison_directe}|fabrique_objet_type{#OBJETS})]},\#URL_ECRIRE{[(#ENV{objet/liaison_directe}|fabrique_table_objet{#OBJETS})]}}}}}
+\#SET{redirect,\#ENV{redirect}|sinon{\##MID_OBJET|?{\#[(#MID_OBJET)]|generer_url_entite{#TYPE},\#GET{id_parent}|?{\#GET{id_parent}|generer_url_entite{[(#ENV{parent/type})]},\#URL_ECRIRE{[(#ENV{parent/objet})]}}}}}
 ]
 </BOUCLE_si_liaison_directe>
 \[(\##MID_OBJET|non)
