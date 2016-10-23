@@ -3,8 +3,8 @@
 <prefix>varicelle</prefix>
 <icon>icon/varicelle.png</icon>
 
-<version>1.1.2</version>
-<etat>stable</etat>
+<version>2.0.0</version>
+<etat>experimental</etat>
 <categorie>outil</categorie>
 
 <slogan><multi>[fr]De jolis boutons&nbsp;![en]Pretty buttons![es]¡Botones bonitos!</multi></slogan>
