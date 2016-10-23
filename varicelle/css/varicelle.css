@@ -2,12 +2,9 @@
 
    varicelle.css
    Style des boutons (a, input, button)
-   by Tetue - 2010
+   by Tetue - 2010-2016
 
 -------------------------------------------------------------- */
-
-/* D'apres : http://speckyboy.com/2010/02/15/20-css3-tutorials-and-techiques-for-creating-buttons/
-et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/ */
 
 .submit {
 	position: relative;
@@ -80,7 +77,7 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .submit.yellow			{ background-color: #FFB515; }
 .submit.yellow:hover	{ background-color: #FC9200; }
 .submit.green			{ background-color: #91BD09; }
-.submit.green:hover		{ background-color: #737B4C; }
+.submit.green:hover		{ background-color: #22891F; }
 .submit.blue			{ background-color: #2673E5; }
 .submit.blue:hover		{ background-color: #1a50a0; }
 .submit.black			{ background-color: #222; }
@@ -114,7 +111,7 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 .submit.secondary 		{} /* = default */
 
 .submit.success 		{ background-color: #91BD09; }
-.submit.success:hover	{ background-color: #737B4C; }
+.submit.success:hover	{ background-color: #22891F; }
 .submit.info 			{ background-color: #2673E5; }
 .submit.info:hover		{ background-color: #1a50a0; }
 .submit.warning 		{ background-color: #FFB515; }
@@ -138,8 +135,14 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 	text-shadow: 0 0 0;
 	font-weight: normal;
 	opacity: .5;
-	cursor: default;
+	cursor: not-allowed;
 	transform: none;
 }
+
+/* D'apres :
+http://speckyboy.com/2010/02/15/20-css3-tutorials-and-techiques-for-creating-buttons/
+et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/
+sans oublier : http://v4-alpha.getbootstrap.com/components/buttons/
+*/
 
 /* end */
