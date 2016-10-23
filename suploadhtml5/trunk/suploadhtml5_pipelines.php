@@ -13,8 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  */
 function suploadhtml5_taches_generales_cron($taches) {
-    $taches['nettoyer_document_temporaire'] = 24*3600;
-    return $taches;
+	$taches['nettoyer_document_temporaire'] = 24*3600;
+	return $taches;
 }
 
 /**
@@ -47,7 +47,6 @@ function suploadhtml5_formulaire_verifier($flux) {
 	// Une saisie upload obligatoire a été trouvée,
 	// il faut donc la vérifier
 	if (isset($saisie['options']['obligatoire'])) {
-
 		// On commence par supprimer l'erreur générique.
 		// Comme la dropzone n'est pas un <input> classique,
 		// l'erreur générique sera toujours présente.
