@@ -6,7 +6,7 @@
 
 -------------------------------------------------------------- */
 
-.submit {
+.btn {
 	position: relative;
 	display: inline-block;
 	width: auto;
@@ -35,19 +35,19 @@
 	/*font-weight: bold;*/
 	text-shadow: 0 1px rgba(0,0,0,0.25);
 }
-* html .submit { background-image: none; border: none; } /*IE6*/
-.submit,
-.submit:visited { color: #666; text-decoration: none; }
-/*.submit * { color: inherit; }*/
+* html .btn { background-image: none; border: none; } /*IE6*/
+.btn,
+.btn:visited { color: #666; text-decoration: none; }
+/*.btn * { color: inherit; }*/
 
-.submit:hover {
+.btn:hover {
 	background-color: #777;
 	border-color: #777;
 	color: #FFF;
 	text-decoration: none;
 	/*outline: none !important;*/
 }
-.submit:active {
+.btn:active {
 	-webkit-transform: translateY(1px);
 	-moz-transform: translateY(1px);
 	transform: translateY(1px);
@@ -56,78 +56,78 @@
 	box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
  	/*IE*/ border-bottom: 0\9; border-top: 1px solid #666\9;
  }
-.submit::-moz-focus-inner { border: 0 none; padding: 0; }
+.btn::-moz-focus-inner { border: 0 none; padding: 0; }
 
 /* tailles */
-.submit.small			{ font-size: 80%; }
-.submit.big				{ font-size: 130%; }
-.submit.super			{ font-size: 200%;
+.btn.small			{ font-size: 80%; }
+.btn.big				{ font-size: 130%; }
+.btn.super			{ font-size: 200%;
 						-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
-.submit.expand 			{ width: 100%; }
+.btn.expand 			{ width: 100%; }
 
 /* couleurs */
-.submit.purple			{ background-color: #8c198c; color: #FFF; }
-.submit.purple:hover	{ background-color: #730073; }
-.submit.pink			{ background-color: #E20B8D; color: #FFF; }
-.submit.pink:hover		{ background-color: #b40870; }
-.submit.red				{ background-color: #E62623; color: #FFF; }
-.submit.red:hover		{ background-color: #b81e1c; }
-.submit.orange			{ background-color: #ff5c00; color: #FFF; }
-.submit.orange:hover	{ background-color: #D45500; }
-.submit.yellow			{ background-color: #FFB515; color: #FFF; }
-.submit.yellow:hover	{ background-color: #FC9200; }
-.submit.green			{ background-color: #91BD09; color: #FFF; }
-.submit.green:hover		{ background-color: #22891F; }
-.submit.blue			{ background-color: #2673E5; color: #FFF; }
-.submit.blue:hover		{ background-color: #1a50a0; }
-.submit.black			{ background-color: #333; color: #FFF; }
-.submit.black:hover		{ background-color: #000; }
-.submit.gray			{ background-color: #767676; color: #FFF; }
-.submit.gray:hover		{ background-color: #555; }
-.submit.white			{ background-color: #FFF; border: 1px solid #CCC; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
-.submit.white:hover		{ background-color: #EEE; color: #666; }
+.btn.purple			{ background-color: #8c198c; color: #FFF; }
+.btn.purple:hover	{ background-color: #730073; }
+.btn.pink			{ background-color: #E20B8D; color: #FFF; }
+.btn.pink:hover		{ background-color: #b40870; }
+.btn.red				{ background-color: #E62623; color: #FFF; }
+.btn.red:hover		{ background-color: #b81e1c; }
+.btn.orange			{ background-color: #ff5c00; color: #FFF; }
+.btn.orange:hover	{ background-color: #D45500; }
+.btn.yellow			{ background-color: #FFB515; color: #FFF; }
+.btn.yellow:hover	{ background-color: #FC9200; }
+.btn.green			{ background-color: #91BD09; color: #FFF; }
+.btn.green:hover		{ background-color: #22891F; }
+.btn.blue			{ background-color: #2673E5; color: #FFF; }
+.btn.blue:hover		{ background-color: #1a50a0; }
+.btn.black			{ background-color: #333; color: #FFF; }
+.btn.black:hover		{ background-color: #000; }
+.btn.gray			{ background-color: #767676; color: #FFF; }
+.btn.gray:hover		{ background-color: #555; }
+.btn.white			{ background-color: #FFF; border: 1px solid #CCC; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.btn.white:hover		{ background-color: #EEE; color: #666; }
 
 /* styles */
-.submit.metal			{ background: #FFF url(img/sprite/varicelle.png) repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
-.submit.metal:focus,
-.submit.metal:hover,
-.submit.metal:active	{ background-color: #EEE; border-color: #999; color: #444; }
+.btn.metal			{ background: #FFF url(img/sprite/varicelle.png) repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+.btn.metal:focus,
+.btn.metal:hover,
+.btn.metal:active	{ background-color: #EEE; border-color: #999; color: #444; }
 
-.submit.spip			{ background-color: #75507B; color: #FFF; }
-.submit.spip:hover		{ background-color: purple; }
-.submit.spip:focus,
-.submit.spip:active		{ background-color: #F57900 !important; border-color: #F57900 !important; }
+.btn.spip			{ background-color: #75507B; color: #FFF; }
+.btn.spip:hover		{ background-color: purple; }
+.btn.spip:focus,
+.btn.spip:active		{ background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* boutons d'admin SPIP */
-.spip-admin .submit			{ background-color: #75507B; color: #FFF; }
-.spip-admin .submit:hover	{ background-color: purple; }
-.spip-admin .submit:focus,
-.spip-admin .submit:active	 { background-color: #F57900 !important; border-color: #F57900 !important; }
+.spip-admin .btn			{ background-color: #75507B; color: #FFF; }
+.spip-admin .btn:hover	{ background-color: purple; }
+.spip-admin .btn:focus,
+.spip-admin .btn:active	 { background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* system */
-.submit.primary 		{ background-color: #333; color: #FFF; }
-.submit.primary:hover	{ background-color: #000; }
-.submit.secondary 		{} /* = default */
-.submit.secondary 		{} /* = default */
+.btn.primary 		{ background-color: #333; color: #FFF; }
+.btn.primary:hover	{ background-color: #000; }
+.btn.secondary 		{} /* = default */
+.btn.secondary 		{} /* = default */
 
-.submit.success 		{ background-color: #91BD09; color: #FFF; }
-.submit.success:hover	{ background-color: #22891F; }
-.submit.info 			{ background-color: #2673E5; color: #FFF; }
-.submit.info:hover		{ background-color: #1a50a0; }
-.submit.warning 		{ background-color: #FFB515; color: #FFF; }
-.submit.warning:hover	{ background-color: #FC9200; }
-.submit.danger 			{ background-color: #E62623; color: #FFF; }
-.submit.danger:hover	{ background-color: #b81e1c; }
+.btn.success 		{ background-color: #91BD09; color: #FFF; }
+.btn.success:hover	{ background-color: #22891F; }
+.btn.info 			{ background-color: #2673E5; color: #FFF; }
+.btn.info:hover		{ background-color: #1a50a0; }
+.btn.warning 		{ background-color: #FFB515; color: #FFF; }
+.btn.warning:hover	{ background-color: #FC9200; }
+.btn.danger 			{ background-color: #E62623; color: #FFF; }
+.btn.danger:hover	{ background-color: #b81e1c; }
 
 /* light */
-.submit.light 			{ background: transparent; box-shadow: 0 0 0; border: 0; border-radius: 0; color: inherit; text-shadow: 0 0; }
-.submit.light:hover		{ background: transparent; color: inherit; text-decoration: underline; }
+.btn.light 			{ background: transparent; box-shadow: 0 0 0; border: 0; border-radius: 0; color: inherit; text-shadow: 0 0; }
+.btn.light:hover		{ background: transparent; color: inherit; text-decoration: underline; }
 
 /* disabled */
-.submit.disabled,
-.submit.disabled:focus,
-.submit.disabled:hover,
-.submit.disabled:active {
+.btn.disabled,
+.btn.disabled:focus,
+.btn.disabled:hover,
+.btn.disabled:active {
 	background: #F7F7F7 !important;
 	box-shadow: 0 0 0;
 	border: 1px solid #D6D6D6 !important;
