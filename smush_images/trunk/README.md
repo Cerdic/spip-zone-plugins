@@ -72,6 +72,10 @@ Puis elle est optimisée au maximum.
 
 ### Versions 0.6.x
 
+#### Version 0.6.2 (2016-10-23)
+
+Si une copie en jpg d'un png peut être mieux optimisée ne pas tester la taille d'un fichier n'existant pas, l'image d'origine devient la copie jpg.
+
 #### Version 0.6.1
 
 Dans certains cas une copie en jpg d'un png pourrait être mieux optimisée (dans les cas où il n'y a pas de canal Alpha bien sûr)

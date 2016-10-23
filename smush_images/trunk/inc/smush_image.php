@@ -77,7 +77,7 @@ function image_smush($im) {
 	// Methode precise
 	// resultat plus beau, mais tres lourd
 	// Et: indispensable pour preserver transparence!
-	if ($creer) {
+	if (file_exists($im) && $creer) {
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$magick = 'magick ';
 		} else {
@@ -140,7 +140,7 @@ function image_smush($im) {
 			 */
 			if ($dest_jpg && $file_size_jpg && filesize($dest) > $file_size_jpg) {
 				spip_unlink($dest);
-				$dest = $dest_jpg;
+				$im = $dest = $dest_jpg;
 			} elseif ($dest_jpg && file_exists($dest_jpg)) {
 				spip_unlink($dest_jpg);
 			}
