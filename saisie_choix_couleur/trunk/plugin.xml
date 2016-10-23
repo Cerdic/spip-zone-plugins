@@ -2,8 +2,8 @@
     <nom>Choix parmi des couleurs</nom>
     <auteur>[Maïeul Rouquette->http://www.maieul.net]</auteur>
     <licence>GNU/GPL</licence>
-    <version>0.7.0</version>
-    <etat>test</etat>
+    <version>0.7.1</version>
+    <etat>stable</etat>
     <categorie>outil</categorie>
     <slogan>Formidable : vous avez le choix de la couleur !</slogan>
 	<description>
@@ -20,6 +20,6 @@
 		<inclure>saisie_choix_couleur_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>saisie_choix_couleur_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<necessite id="saisies" version="[1.33.0;]" />
 </plugin>
