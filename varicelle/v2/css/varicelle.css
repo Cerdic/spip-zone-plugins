@@ -17,13 +17,13 @@
 	cursor: pointer;
 	-webkit-user-select: none;
 
-	background: #767676 url(img/sprite/varicelle.png) left top repeat-x;
+	background: #DDD url(img/sprite/varicelle.png) left top repeat-x;
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 
 	border: 0;
-	border-bottom: 1px solid rgba(0,0,0,0.25);
+	/*border: 1px solid #AAA;*/
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -32,26 +32,25 @@
 	font-size: 100%;
 	line-height: 1;
 
-	font-weight: bold;
-	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	/*font-weight: bold;*/
+	text-shadow: 0 1px rgba(0,0,0,0.25);
 }
-* html .submit { background-image: none; border: none; color: #FFF !important; } /*IE6*/
+* html .submit { background-image: none; border: none; } /*IE6*/
 .submit,
-.submit:visited,
-.submit * { color: #FFF; text-decoration: none; }
+.submit:visited { color: #666; text-decoration: none; }
+/*.submit * { color: inherit; }*/
 
 .submit:hover {
-	background-color: #555;
+	background-color: #777;
+	border-color: #777;
 	color: #FFF;
 	text-decoration: none;
+	/*outline: none !important;*/
 }
 .submit:active {
 	-webkit-transform: translateY(1px);
 	-moz-transform: translateY(1px);
 	transform: translateY(1px);
-	/*outline: none !important;*/
-}
-.submit:active {
 	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
 	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
@@ -67,26 +66,26 @@
 .submit.expand 			{ width: 100%; }
 
 /* couleurs */
-.submit.purple			{ background-color: #8c198c; }
+.submit.purple			{ background-color: #8c198c; color: #FFF; }
 .submit.purple:hover	{ background-color: #730073; }
-.submit.pink			{ background-color: #E20B8D; }
+.submit.pink			{ background-color: #E20B8D; color: #FFF; }
 .submit.pink:hover		{ background-color: #b40870; }
-.submit.red				{ background-color: #E62623; }
+.submit.red				{ background-color: #E62623; color: #FFF; }
 .submit.red:hover		{ background-color: #b81e1c; }
-.submit.orange			{ background-color: #ff5c00; }
+.submit.orange			{ background-color: #ff5c00; color: #FFF; }
 .submit.orange:hover	{ background-color: #D45500; }
-.submit.yellow			{ background-color: #FFB515; }
+.submit.yellow			{ background-color: #FFB515; color: #FFF; }
 .submit.yellow:hover	{ background-color: #FC9200; }
-.submit.green			{ background-color: #91BD09; }
+.submit.green			{ background-color: #91BD09; color: #FFF; }
 .submit.green:hover		{ background-color: #22891F; }
-.submit.blue			{ background-color: #2673E5; }
+.submit.blue			{ background-color: #2673E5; color: #FFF; }
 .submit.blue:hover		{ background-color: #1a50a0; }
-.submit.black			{ background-color: #222; }
+.submit.black			{ background-color: #333; color: #FFF; }
 .submit.black:hover		{ background-color: #000; }
-.submit.gray			{ background-color: #767676; }
+.submit.gray			{ background-color: #767676; color: #FFF; }
 .submit.gray:hover		{ background-color: #555; }
-.submit.white			{ background-color: #FFF; border: 1px solid #CCC; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
-.submit.white:hover		{ background-color: #EEE; }
+.submit.white			{ background-color: #FFF; border: 1px solid #CCC; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.submit.white:hover		{ background-color: #EEE; color: #666; }
 
 /* styles */
 .submit.metal			{ background: #FFF url(img/sprite/varicelle.png) repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
@@ -94,34 +93,34 @@
 .submit.metal:hover,
 .submit.metal:active	{ background-color: #EEE; border-color: #999; color: #444; }
 
-.submit.spip			{ background-color: #75507B; }
+.submit.spip			{ background-color: #75507B; color: #FFF; }
 .submit.spip:hover		{ background-color: purple; }
 .submit.spip:focus,
 .submit.spip:active		{ background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* boutons d'admin SPIP */
-.spip-admin .submit			{ background-color: #75507B; }
+.spip-admin .submit			{ background-color: #75507B; color: #FFF; }
 .spip-admin .submit:hover	{ background-color: purple; }
 .spip-admin .submit:focus,
 .spip-admin .submit:active	 { background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* system */
-.submit.primary 		{ background-color: #222; }
+.submit.primary 		{ background-color: #333; color: #FFF; }
 .submit.primary:hover	{ background-color: #000; }
 .submit.secondary 		{} /* = default */
 .submit.secondary 		{} /* = default */
 
-.submit.success 		{ background-color: #91BD09; }
+.submit.success 		{ background-color: #91BD09; color: #FFF; }
 .submit.success:hover	{ background-color: #22891F; }
-.submit.info 			{ background-color: #2673E5; }
+.submit.info 			{ background-color: #2673E5; color: #FFF; }
 .submit.info:hover		{ background-color: #1a50a0; }
-.submit.warning 		{ background-color: #FFB515; }
+.submit.warning 		{ background-color: #FFB515; color: #FFF; }
 .submit.warning:hover	{ background-color: #FC9200; }
-.submit.danger 			{ background-color: #E62623; }
+.submit.danger 			{ background-color: #E62623; color: #FFF; }
 .submit.danger:hover	{ background-color: #b81e1c; }
 
 /* light */
-.submit.light 			{ background: transparent; box-shadow: 0 0 0; border: 0; border-radius: 0; text-shadow: 0 0 0; color: inherit; font-weight: normal; }
+.submit.light 			{ background: transparent; box-shadow: 0 0 0; border: 0; border-radius: 0; color: inherit; text-shadow: 0 0; }
 .submit.light:hover		{ background: transparent; color: inherit; text-decoration: underline; }
 
 /* disabled */
@@ -133,17 +132,10 @@
 	box-shadow: 0 0 0;
 	border: 1px solid #D6D6D6 !important;
 	color: #666 !important;
-	text-shadow: 0 0 0;
-	font-weight: normal;
+	text-shadow: 0 0;
 	opacity: .5;
 	cursor: not-allowed;
 	transform: none;
 }
-
-/* D'apres :
-http://speckyboy.com/2010/02/15/20-css3-tutorials-and-techiques-for-creating-buttons/
-et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/
-sans oublier : http://v4-alpha.getbootstrap.com/components/buttons/
-*/
 
 /* end */
