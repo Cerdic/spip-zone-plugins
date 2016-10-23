@@ -392,6 +392,11 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("prive/squelettes/hierarchie/objet_edit.html", $data);
 			}
 
+			// s'il a des enfants connus ici, créer le fichier d'info pour avoir le nombre d'enfants affichés
+			if (fabrique_objets_enfants_directs($objet, $objets)) {
+				fabriquer_fichier("prive/objets/infos/objet.html", $data);
+			}
+
 			// créer les listes de liaison
 			if (option_presente($objet, 'vue_liens')) {
 				fabriquer_fichier("prive/objets/liste/objets_lies.html", $data);
