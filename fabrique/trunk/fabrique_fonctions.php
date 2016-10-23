@@ -780,6 +780,28 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
 	return $res;
 }
 
+/**
+ * Retrouve si cet objet a des enfants déclarés dans un autre objet
+ *
+ * @param array $objet
+ *     Description de l'objet dans la fabrique
+ * @param array $objets
+ *     Description de tous les objets dans la fabrique
+ * @return 
+**/
+function fabrique_objets_enfants_directs($objet, $objets) {
+	$liste = array();
+	foreach ($objets as $autre_objet) {
+		if ($autre_objet !== $objet) {
+			if (option_presente($autre_objet, 'liaison_directe')) {
+				if ($objet['table'] == $autre_objet['liaison_directe']) {
+					$liste[] = $autre_objet;
+				}
+			}
+		}
+	}
+	return $liste;
+}
 
 /**
  * Retourne une ecriture de criteres `{id_xxx}`

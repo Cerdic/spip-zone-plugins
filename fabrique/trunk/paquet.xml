@@ -2,7 +2,7 @@
 	prefix="fabrique"
 	categorie="outil"
 	version="2.3.0"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
 	documentation="http://contrib.spip.net/?article4134"
