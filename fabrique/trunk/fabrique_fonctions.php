@@ -898,7 +898,7 @@ function fabrique_lister_tables($objets, $quoi='tout') {
  * @return array
  *     Liste des champs concernés
 **/
-function fabrique_lister_objet_champs($objet, $option, $objets) {
+function fabrique_lister_objet_champs($objet, $option) {
 	if (!$objet) {
 		return array();
 	}
@@ -913,9 +913,7 @@ function fabrique_lister_objet_champs($objet, $option, $objets) {
 		$liste[] = 'id_secteur';
 	}
 	if (option_presente($objet, 'liaison_directe')) {
-		if ($_id_parent = fabrique_id_table_objet($objet['liaison_directe'], $objets)) {
-			$liste[] = $_id_parent;
-		}
+		$liste[] = $objet['parent']['id_objet'];
 	}
 	return $liste;
 }

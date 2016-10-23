@@ -61,8 +61,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => '[(#CHAMP_TITRE|sinon{'""'})] AS titre, [(#VALEUR|champ_present{lang}|?{lang,'""'})] AS lang',
 		[(#CHAMP_DATE|non)#]'date' => '[(#CHAMP_DATE)]',
-		'champs_editables'  => [(#VALEUR|fabrique_lister_objet_champs{editable, #OBJETS}|ecrire_tableau)],
-		'champs_versionnes' => [(#VALEUR|fabrique_lister_objet_champs{versionne, #OBJETS}|ecrire_tableau)],
+		'champs_editables'  => [(#VALEUR|fabrique_lister_objet_champs{editable}|ecrire_tableau)],
+		'champs_versionnes' => [(#VALEUR|fabrique_lister_objet_champs{versionne}|ecrire_tableau)],
 		'rechercher_champs' => array(<BOUCLE_recherches(DATA){source tableau,#CHAMPS}{recherche >=1 }{", "}>["(#VALEUR{champ})"] => #VALEUR{recherche}</BOUCLE_recherches>),
 		'tables_jointures'  => array(['(#NOM_TABLE_LIENS)']),[
 		'statut_textes_instituer' => array(
