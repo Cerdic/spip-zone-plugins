@@ -337,7 +337,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 	}
 
 	// creer le fichier d'administrations
-	if ($paquet['administrations']) {
+	if ($paquet['administrations'] or count($data['objets']) {
 		fabriquer_fichier("prefixe_administrations.php", $data);
 	}
 
