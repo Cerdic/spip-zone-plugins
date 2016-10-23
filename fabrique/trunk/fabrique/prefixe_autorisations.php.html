@@ -135,7 +135,7 @@ function autoriser_rubrique_creer#GET{type}dans_dist($faire, $type, $id, $qui, $
 }</BOUCLE_creer_objet_dans_rubrique>
 <BOUCLE_creer_objet_dans_autre_parent_direct(CONDITION){si (#VALEUR|option_presente{liaison_directe})}>
 /**
- * Autorisation de créer l'élément \(#GET{type}\) dans un [(#LIAISON_DIRECTE|fabrique_table_objet{#OBJETS})]
+ * Autorisation de créer l'élément \(#GET{type}\) dans un [(#VALEUR{parent/objet})]
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -144,8 +144,8 @@ function autoriser_rubrique_creer#GET{type}dans_dist($faire, $type, $id, $qui, $
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_[(#LIAISON_DIRECTE|fabrique_objet_type{#OBJETS})]_creer#GET{type}dans_dist($faire, $type, $id, $qui, $opt) {
-	return ($id AND autoriser('voir', '[(#LIAISON_DIRECTE|fabrique_objet_type{#OBJETS})]', $id) AND autoriser('creer', '[(#TYPE)]', $id));
+function autoriser_[(#VALEUR{parent/type}|fabrique_type_autorisation)]_creer#GET{type}dans_dist($faire, $type, $id, $qui, $opt) {
+	return ($id AND autoriser('voir', '[(#VALEUR{parent/objet})]', $id) AND autoriser('creer', '[(#TYPE)]'));
 }</BOUCLE_creer_objet_dans_autre_parent_direct>
 <BOUCLE_associer_objets(CONDITION){si #TABLE_LIENS}>
 /**

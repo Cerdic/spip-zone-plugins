@@ -1227,6 +1227,43 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
 	return $liste;
 }
 
+
+/**
+ * Indique si cet objet a un parent direct déclaré
+ *
+ * @param array $objet 
+ *     Déclaration d'un objet dans la Fabrique
+ * @param array $objet s
+ *     Déclaration de tous les objets dans la Fabrique
+ * @return array
+ *     Description du parent
+**/
+function fabrique_parent($objet, $objets) {
+	$table = '';
+	if (champ_present($objet, 'id_rubrique')) {
+		$table = 'spip_rubriques';
+	}
+	if (option_presente($objet, 'liaison_directe')) {
+		$table = $objet['liaison_directe'];
+	}
+	if (!$table) {
+		return array();
+	}
+
+	$desc = array(
+		'table' => $table,
+		'id_objet' => fabrique_id_table_objet($table, $objets),
+		'type' => fabrique_objet_type($table, $objets),
+		'objet' => fabrique_table_objet($table, $objets),
+	);
+	$desc['mid_objet'] = strtoupper($desc['id_objet']);
+	$desc['mobjet'] = strtoupper($desc['objet']);
+	$desc['lobjet'] = $desc['objet'];
+	$desc['mtype'] = strtoupper($desc['type']);
+
+	return $desc;
+}
+
 /**
  * Retrouve la clé primaire d'un objet éditorial
  * 

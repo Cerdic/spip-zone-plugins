@@ -366,6 +366,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			$data['lobjet']      = $objet['objet'];  // l = lower, minuscule, car on ne peut pas utiliser 'objet'
 			$data['mtype']       = $objet['mtype'];  // m = majuscule
 			$data['mid_objet']   = $objet['mid_objet']; // m = majuscule
+			$data['parent']      = $objet['parent'];
 
 			// creer les langues
 			fabriquer_fichier("lang/objet_fr.php", $data);
@@ -383,6 +384,12 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// appel du formulaire d'édition, si liens ou parenté directe autre que rubrique
 			if (option_presente($objet, 'vue_liens') or option_presente($objet, 'liaison_directe')) {
 				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
+			}
+
+			// si parenté autre que rubrique, créer des squelettes de hiérarchie
+			if (option_presente($objet, 'liaison_directe')) {
+				fabriquer_fichier("prive/squelettes/hierarchie/objet.html", $data);
+				fabriquer_fichier("prive/squelettes/hierarchie/objet_edit.html", $data);
 			}
 
 			// créer les listes de liaison
@@ -752,6 +759,10 @@ function fabrique_completer_contexte($data) {
 				}
 			}
 		}
+	}
+	// indiquer les parentés
+	foreach($data['objets'] as $c => $o) {
+		$data['objets'][$c]['parent'] = fabrique_parent($o, $data['objets']);
 	}
 	// fabrique_lister_tables() apres avoir ajoute les infos en plus sur les objets
 	// pour pouvoir les utiliser dedans.
