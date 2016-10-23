@@ -15,14 +15,13 @@
 [es]Botones bonitos: seductor, ligero y potente, para estilizar todos los botones en el sitio. Se aplica a cualquier cosa con el selector <code>.submit</code> (incluyendo: <code>button, input, a</code>).
 </multi>
 </description>
-<lien>http://contrib.spip.net/?article3484</lien>
-<auteur>[Tetue->http://spip.tetue.net] - 2010</auteur>
+<lien>http://contrib.spip.net/?article4838</lien>
+<auteur>[Tetue->http://spip.tetue.net] - 2010-2016</auteur>
 
 <pipeline>
 	<nom>insert_head_css</nom>
 	<inclure>varicelle_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[1.9.1;3.1.99]" />
-<utilise id="Z" version="[1.0.0;]" />
 
 </plugin>
