@@ -124,9 +124,13 @@
 .btn.light:hover	{ background: transparent; color: inherit; text-decoration: underline; }
 
 /* disabled */
+.btn[disabled],
 .btn.disabled,
+.btn[disabled]:focus,
 .btn.disabled:focus,
+.btn[disabled]:hover,
 .btn.disabled:hover,
+.btn[disabled]:active,
 .btn.disabled:active {
 	background: #F7F7F7 !important;
 	box-shadow: 0 0 0;
