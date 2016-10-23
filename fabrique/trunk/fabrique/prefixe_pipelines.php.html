@@ -179,6 +179,40 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 
 
 
+	BOITE INFOS
+
+
+
+]
+<BOUCLE_si_boite_infos(CONDITION){si #OBJETS|fabrique_necessite_pipeline{boite_infos}}>[(#REM)
+]/**
+ * Afficher le nombre d'éléments dans les parents
+ *
+ * @pipeline boite_infos
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function [(#PREFIXE)]_boite_infos($flux) {[(#REM)
+]<B_boite_infos>
+	if (isset($flux['args']['type']) and isset($flux['args']['id']) and $id = intval($flux['args']['id'])) {
+		$nb = "";
+<BOUCLE_boite_infos(DATA){source tableau,(#OBJETS|objets_options_presentes{parent})}>[(#REM)
+]		if ($flux['args']['type'] == '#VALEUR{parent/type}' and $nb = sql_countsel('#VALEUR{table}', array([(#STATUT|?{"statut='publie'"}), ]"#VALEUR{parent/id_objet}=" . $id))) {
+			$nb .= "<div>" . singulier_ou_pluriel($nb, "#TYPE:info_1_#TYPE", "#TYPE:info_nb_#LOBJET") . "</div>\n";
+		}
+</BOUCLE_boite_infos>[(#REM)
+]		if ($nb and $p = strpos($flux['data'], "<!--nb_elements-->")) {
+			$flux['data'] = substr_replace($flux['data'], $nb, $p, 0);
+		}
+	}
+	return $flux;
+}
+</B_boite_infos>
+</BOUCLE_si_boite_infos>[
+(#REM)
+
+
+
 	OBJET COMPTE ENFANT
 
 

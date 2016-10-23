@@ -968,9 +968,16 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			return false;
 			break;
 
+		case "boite_infos":
+			if (objets_option_presente($objets, 'id_rubrique')
+				or objets_option_presente($objets, 'liaison_directe')) {
+				return true;
+			}
+			break;
+
 		case "objet_compte_enfants":
 			if (objets_options_presentes($objets, array('id_rubrique', 'statut_rubrique'))
-				or objets_options_presentes($objets, 'liaison_directe')) {
+				or objets_option_presente($objets, 'liaison_directe')) {
 				return true;
 			}
 			break;
