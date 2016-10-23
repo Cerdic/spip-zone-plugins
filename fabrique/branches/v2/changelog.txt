@@ -2,6 +2,21 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+2.3.0 le 23 10 2016
+-------------------
+
+* Possibilité de définir un parent direct pour un objet autre que Rubrique.
+  Si cet objet est déclaré en même temps dans la Fabrique (en déclarant
+  l'objet A, l'objet B, et indiquant que B est enfant direct de A),
+  le squelette de liste de A (prive/objets/liste/A.html) sera amélioré. 
+
+  Si on utilise un autre objet (déjà présent dans SPIP) il faudra adapter
+  le squelette de liste utilisé (prive/objets/liste/xxx.html
+
+* Correction de nommage d'une autorisation.
+
+
+
 2.2.0 le 18 08 2016
 -------------------
 

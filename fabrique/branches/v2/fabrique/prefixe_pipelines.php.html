@@ -21,30 +21,52 @@
 
 ]<BOUCLE_si_affiche_enfants(CONDITION){si #OBJETS|fabrique_necessite_pipeline{affiche_enfants}}>
 /**
- * Ajouter les objets sur les vues de rubriques
+ * Ajouter les objets sur les vues des parents directs
  *
  * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_affiche_enfants($flux) {
-	if ($e = trouver_objet_exec($flux['args']['exec'])
-		AND $e['type'] == 'rubrique'
-		AND $e['edition'] == false) {
+	if ($e = trouver_objet_exec($flux['args']['exec']) AND $e['edition'] == false) {
+		$id_objet = $flux['args']['id_objet'];
+<B_objets_affiche_enfants_rubrique>
+		if ($e['type'] == 'rubrique') {
+<BOUCLE_objets_affiche_enfants_rubrique(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
+			$flux['data'] .= recuperer_fond(
+				'prive/objets/liste/#OBJET',
+				array(
+					'titre' => _T('#TYPE:titre_[(#OBJET)]_rubrique'),
+					'id_rubrique' => $id_objet
+				)
+			);
 
-		$id_rubrique = $flux['args']['id_rubrique'];
-		$lister_objets = charger_fonction('lister_objets', 'inc');
-<BOUCLE_objets_affiche_enfants(DATA){source tableau,(#OBJETS|objets_option_presente{vue_rubrique})}>
-		$bouton = '';
-		if (autoriser('creer#TYPEdans', 'rubrique', $id_rubrique)) {
-			$bouton .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "id_rubrique=$id_rubrique"), "#TYPE-24.png", "new", "right")
-					. "<br class='nettoyeur' />";
+			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', 'rubrique', $id_objet)) {
+				include_spip('inc/presentation');
+				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "id_rubrique=$id_objet"), "#TYPE-24.png", "new", "right")
+						. "<br class='nettoyeur' />";
+			}
+</BOUCLE_objets_affiche_enfants_rubrique>
 		}
+</B_objets_affiche_enfants_rubrique>[(#REM)
+]<BOUCLE_objets_affiche_enfants_directs(DATA){source tableau,(#OBJETS|objets_option_presente{liaison_directe})}>
+		if ($e['type'] == '[(#VALEUR{parent/type})]') {
+			$flux['data'] .= recuperer_fond(
+				'prive/objets/liste/#OBJET',
+				array(
+					'titre' => _T('#TYPE:titre_[(#OBJET)]'),
+					'[(#VALEUR{parent/id_objet})]' => $id_objet
+				)
+			);
 
-		$flux['data'] .= $lister_objets('#OBJET', array('titre'=>_T('#TYPE:titre_[(#OBJET)]_rubrique') , 'id_rubrique'=>$id_rubrique));
-		$flux['data'] .= $bouton;
-</BOUCLE_objets_affiche_enfants>
-	}
+			if (autoriser('creer[(#TYPE|fabrique_type_autorisation)]dans', '[(#VALEUR{parent/objet})]', $id_objet)) {
+				include_spip('inc/presentation');
+				$flux['data'] .= icone_verticale(_T("#TYPE:icone_creer_#TYPE"), generer_url_ecrire("[(#TYPE)]_edit", "[(#VALEUR{parent/id_objet})]=$id_objet"), "#TYPE-24.png", "new", "right")
+						. "<br class='nettoyeur' />";
+			}
+		}
+</BOUCLE_objets_affiche_enfants_directs>[(#REM)
+]	}
 	return $flux;
 }
 </BOUCLE_si_affiche_enfants>[
@@ -157,37 +179,70 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 
 
 
+	BOITE INFOS
+
+
+
+]
+<BOUCLE_si_boite_infos(CONDITION){si #OBJETS|fabrique_necessite_pipeline{boite_infos}}>[(#REM)
+]/**
+ * Afficher le nombre d'éléments dans les parents
+ *
+ * @pipeline boite_infos
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function [(#PREFIXE)]_boite_infos($flux) {[(#REM)
+]<B_boite_infos>
+	if (isset($flux['args']['type']) and isset($flux['args']['id']) and $id = intval($flux['args']['id'])) {
+		$nb = "";
+<BOUCLE_boite_infos(DATA){source tableau,(#OBJETS|objets_options_presentes{parent})}>[(#REM)
+]		if ($flux['args']['type'] == '#VALEUR{parent/type}' and $nb = sql_countsel('#VALEUR{table}', array([(#STATUT|?{"statut='publie'"}), ]"#VALEUR{parent/id_objet}=" . $id))) {
+			$nb .= "<div>" . singulier_ou_pluriel($nb, "#TYPE:info_1_#TYPE", "#TYPE:info_nb_#LOBJET") . "</div>\n";
+		}
+</BOUCLE_boite_infos>[(#REM)
+]		if ($nb and $p = strpos($flux['data'], "<!--nb_elements-->")) {
+			$flux['data'] = substr_replace($flux['data'], $nb, $p, 0);
+		}
+	}
+	return $flux;
+}
+</B_boite_infos>
+</BOUCLE_si_boite_infos>[
+(#REM)
+
+
+
 	OBJET COMPTE ENFANT
 
 
 
 ]
-<B_objet_compte_enfants>
-/**
- * Compter les enfants d'une rubrique
+<BOUCLE_objet_compte_enfants(CONDITION){si #OBJETS|fabrique_necessite_pipeline{objet_compte_enfants}}>[(#REM)
+]/**
+ * Compter les enfants d'un objet
  *
  * @pipeline objets_compte_enfants
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
 **/
 function [(#PREFIXE)]_objet_compte_enfants($flux) {
-	if ($flux['args']['objet']=='rubrique' AND $id_rubrique=intval($flux['args']['id_objet'])) {
-<BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>[(#REM)
+<BOUCLE_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}}|array_merge{#OBJETS|objets_option_presente{liaison_directe}})}>[(#REM)
 
-][		// juste les publiés ?
+]	if ($flux['args']['objet'] == '#VALEUR{parent/type}' AND $[(#VALEUR{parent/id_objet})] = intval($flux['args']['id_objet'])) {
+[		// juste les publiés ?
 		if (array_key_exists('statut', $flux\['args'\]) and ($flux\['args'\]\['statut'\] == 'publie')) {
-			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "#VALEUR{parent/id_objet} = " . intval($#VALEUR{parent/id_objet}) . " AND (statut = 'publie')");
 		} else {
-			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+			$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "#VALEUR{parent/id_objet} = " . intval($#VALEUR{parent/id_objet}) . " AND (statut <> 'poubelle')");
 		}(#STATUT|oui)][(#REM)
 
-][		$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "id_rubrique = ".intval($id_rubrique));(#STATUT|non)][(#REM)
-
-]</BOUCLE_objet_compte_enfants>
+][		$flux\['data'\]\['#OBJET'\] = sql_countsel('#TABLE', "#VALEUR{parent/id_objet} = " . intval($#VALEUR{parent/id_objet}));(#STATUT|non)]
 	}
+</BOUCLE_compte_enfants>
 	return $flux;
 }
-</B_objet_compte_enfants>[
+</BOUCLE_objet_compte_enfants>[
 (#REM)
 
 

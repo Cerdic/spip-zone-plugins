@@ -337,7 +337,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 	}
 
 	// creer le fichier d'administrations
-	if ($paquet['administrations']) {
+	if ($paquet['administrations'] or count($data['objets'])) {
 		fabriquer_fichier("prefixe_administrations.php", $data);
 	}
 
@@ -366,6 +366,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			$data['lobjet']      = $objet['objet'];  // l = lower, minuscule, car on ne peut pas utiliser 'objet'
 			$data['mtype']       = $objet['mtype'];  // m = majuscule
 			$data['mid_objet']   = $objet['mid_objet']; // m = majuscule
+			$data['parent']      = $objet['parent'];
 
 			// creer les langues
 			fabriquer_fichier("lang/objet_fr.php", $data);
@@ -373,12 +374,28 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			// créer le formulaire d'edition
 			fabriquer_fichier("formulaires/editer_objet.html", $data);
 			fabriquer_fichier("formulaires/editer_objet.php", $data);
-			
+
 			// créer la vue du contenu d'un objet
 			fabriquer_fichier("prive/objets/contenu/objet.html", $data);
 
 			// créer la liste d'un objet
 			fabriquer_fichier("prive/objets/liste/objets.html", $data);
+
+			// appel du formulaire d'édition, si liens ou parenté directe autre que rubrique
+			if (option_presente($objet, 'vue_liens') or option_presente($objet, 'liaison_directe')) {
+				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
+			}
+
+			// si parenté autre que rubrique, créer des squelettes de hiérarchie
+			if (option_presente($objet, 'liaison_directe')) {
+				fabriquer_fichier("prive/squelettes/hierarchie/objet.html", $data);
+				fabriquer_fichier("prive/squelettes/hierarchie/objet_edit.html", $data);
+			}
+
+			// s'il a des enfants connus ici, créer le fichier d'info pour avoir le nombre d'enfants affichés
+			if (fabrique_objets_enfants_directs($objet, $objets)) {
+				fabriquer_fichier("prive/objets/infos/objet.html", $data);
+			}
 
 			// créer les listes de liaison
 			if (option_presente($objet, 'vue_liens')) {
@@ -386,8 +403,6 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 				fabriquer_fichier("prive/objets/liste/objets_lies_fonctions.php", $data); // pff
 				fabriquer_fichier("prive/objets/liste/objets_associer.html", $data);
 				fabriquer_fichier("prive/objets/liste/objets_associer_fonctions.php", $data); // pff
-				// ce fichier est nécessaire
-				fabriquer_fichier("prive/squelettes/contenu/objet_edit.html", $data);
 
 				// la meme chose avec des roles s'il y en a
 				if (option_presente($objet, 'roles')) {
@@ -395,6 +410,12 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 					fabriquer_fichier("prive/objets/liste/objets_roles_lies_fonctions.php", $data); // pff
 					fabriquer_fichier("prive/objets/liste/objets_roles_associer.html", $data);
 					fabriquer_fichier("prive/objets/liste/objets_roles_associer_fonctions.php", $data); // pff
+				}
+
+				// lister aussi les liaisons sur la vue de cet objet
+				if (option_presente($objet, 'afficher_liens')) {
+					fabriquer_fichier("prive/objets/liste/\objets_lies_objet.html", $data);
+					fabriquer_fichier("prive/squelettes/contenu/objet.html", $data); // fichier habituellement échafaudé
 				}
 			}
 
@@ -542,6 +563,7 @@ function fabriquer_fichier($chemin, $data) {
 
 	// on retrouve le nom du fichier et la base du chemin de destination
 	$dest = explode('/', $chemin);
+	$chemin = str_replace("\o", "o", $chemin); // enlever l'échappement \objet
 	$nom = array_pop($dest);
 	$chemin_dest = implode('/', $dest);
 
@@ -554,11 +576,14 @@ function fabriquer_fichier($chemin, $data) {
 	// on modifie le nom de destination :
 	// 'prefixe' => $prefixe.
 	// 'objet'   => $objet.
+	// mais on conserve si '\objets'
+	$nom = str_replace("\o", "\1o\\", $nom);
 	$nom = str_replace('prefixe', $data['paquet']['prefixe'], $nom);
 	if (isset($data['objet'])) {
 		$nom = str_replace('objets',  $data['objet']['lobjet'], $nom);
 		$nom = str_replace('objet',   $data['objet']['type'], $nom);
 	}
+	$nom = str_replace("\1o\\", "o", $nom);
 
 	// calcul du squelette et copie a destination du contenu.
 	$contenu = recuperer_fond(FABRIQUE_SKEL_SOURCE . $chemin, $data);
@@ -739,6 +764,10 @@ function fabrique_completer_contexte($data) {
 				}
 			}
 		}
+	}
+	// indiquer les parentés
+	foreach($data['objets'] as $c => $o) {
+		$data['objets'][$c]['parent'] = fabrique_parent($o, $data['objets']);
 	}
 	// fabrique_lister_tables() apres avoir ajoute les infos en plus sur les objets
 	// pour pouvoir les utiliser dedans.

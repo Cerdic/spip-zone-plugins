@@ -43,7 +43,20 @@
 		\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
 	\]
 \]
+<BOUCLE_afficher_liens(CONDITION){si #OBJET|option_presente{afficher_liens}}>
+<div class="nettoyeur"></div>
+<div class="liste">
+	\<BOUCLE_objetslies([(#TABLE)]_liens){#ID_OBJET}{0,1}><h3>\<:#TYPE:titre_objets_lies_#TYPE:></h3>\</BOUCLE_objetslies>
 
+	\<BOUCLE_listeobjets([(#TABLE)]_liens){#ID_OBJET}{fusion objet}{par objet}>
+		\#SET{table,\#OBJET|table_objet}
+		\[(\#SET{titre,\[\#OBJET:info_(\#GET{table})_liees_#TYPE\]})\]
+		\[(\#SET{liste,\#VAL{prive/objets/liste/\#GET{table}}|trouver_fond|?{\#GET{table},objets_lies_#TYPE}})\]
+		\<INCLURE{fond=prive/objets/liste/\#GET{liste},objet,#ID_OBJET,ajax,env} />
+	\</BOUCLE_listeobjets>
+</div>
+</BOUCLE_afficher_liens>[(#REM)
+]
 \#PIPELINE{afficher_complement_objet,\#ARRAY{args,\#ARRAY{type,#TYPE,id,\##MID_OBJET},data,'<div class="nettoyeur"></div>'}}
 
 \#BOITE_FERMER

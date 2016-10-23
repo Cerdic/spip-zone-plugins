@@ -5,13 +5,14 @@
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+
 [(#REM)
 
-	Y a t'il un champ de rubrique a prendre en compte ?
+	Y a t'il un champ de parent à prendre en compte ?
 
-][(#SET{id_rubrique,[(#OBJET|champ_present{id_rubrique})]})][    (#REM)
-][(#SET{id_rubrique_param,#GET{id_rubrique}|?{'$id_rubrique=0,'}})][     (#REM)
-][(#SET{id_rubrique_val,#GET{id_rubrique}|?{'$id_rubrique', "''"}})][    (#REM)
+][(#SET{id_parent,#ENV{parent/id_objet}})][    (#REM)
+][(#SET{id_parent_param,#GET{id_parent}|?{#VAL{'$'}|concat{#GET{id_parent}}|concat{'=0,'}}})][     (#REM)
+][(#SET{id_parent_val,#GET{id_parent}|?{$#GET{id_parent}, "''"}})][    (#REM)
 
 	Y a t'il une association a prendre en compte ?
 
@@ -22,7 +23,8 @@ include_spip('inc/editer');
 	Y a t'il des champs obligatoire a verifier ?
 	Il faut qu'il soit obligatoire et dispose d'une saisie
 
-][(#SET{obligatoires,[(#ENV{objet/champs}|champs_options_presentes{#LISTE{obligatoire,saisie},champ})]})][   (#REM)
+][(#SET{obligatoires,[(#ENV{objet/champs}|champs_options_presentes{#LISTE{obligatoire,saisie},champ})]})][    (#REM)
+][(#OBJET|option_presente{liaison_directe}|?{#SET{obligatoires,#GET{obligatoires}|push{#GET{id_parent}}}})][   (#REM)
 
 
 	Fonctions de chargement de l'objet
@@ -34,8 +36,8 @@ include_spip('inc/editer');
  *
  * @param int|string $#ID_OBJET
  *     Identifiant du #TYPE. 'new' pour un nouveau #TYPE.[
- * @param int $(#GET{id_rubrique}|?{id_rubrique})
- *     Identifiant de la rubrique parente (si connue)]
+ * @param int $(#GET{id_parent}|?{#GET{id_parent}})
+ *     Identifiant de l'objet parent (si connu)]
  * @param string $retour
  *     URL de redirection après le traitement[
  * @param string $(#GET{associer}|?{associer_objet})
@@ -52,7 +54,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return serialize(array(intval($#ID_OBJET)[, (#GET{associer_val})]));
 }
 
@@ -65,8 +67,8 @@ function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{i
  *
  * @param int|string $#ID_OBJET
  *     Identifiant du #TYPE. 'new' pour un nouveau #TYPE.[
- * @param int $(#GET{id_rubrique}|?{id_rubrique})
- *     Identifiant de la rubrique parente (si connue)]
+ * @param int $(#GET{id_parent}|?{#GET{id_parent}})
+ *     Identifiant de l'objet parent (si connu)]
  * @param string $retour
  *     URL de redirection après le traitement[
  * @param string $(#GET{associer}|?{associer_objet})
@@ -83,9 +85,11 @@ function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{i
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('#TYPE', $#ID_OBJET, #GET{id_rubrique_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);
-	
+function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$valeurs = formulaires_editer_objet_charger('#TYPE', $#ID_OBJET, #GET{id_parent_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);[(#OBJET|option_presente{liaison_directe}|oui)
+	if (![(#VAL{"$valeurs\['"}|concat{#GET{id_parent}}|concat{"'\]"})]) {
+		[(#VAL{"$valeurs\['"}|concat{#GET{id_parent}}|concat{"'\] = "}|concat{#GET{id_parent_val};})]
+	}]
 	return $valeurs;
 }
 
@@ -98,8 +102,8 @@ function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_r
  *
  * @param int|string $#ID_OBJET
  *     Identifiant du #TYPE. 'new' pour un nouveau #TYPE.[
- * @param int $(#GET{id_rubrique}|?{id_rubrique})
- *     Identifiant de la rubrique parente (si connue)]
+ * @param int $(#GET{id_parent}|?{#GET{id_parent}})
+ *     Identifiant de l'objet parent (si connu)]
  * @param string $retour
  *     URL de redirection après le traitement[
  * @param string $(#GET{associer}|?{associer_objet})
@@ -116,7 +120,7 @@ function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_r
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$erreurs = array();
 <BOUCLE_si_saisie_date(CONDITION){si #ENV{objet/champs}|champs_saisie_presente{date}}>
 	$verifier = charger_fonction('verifier', 'inc');
@@ -150,8 +154,8 @@ function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_
  *
  * @param int|string $#ID_OBJET
  *     Identifiant du #TYPE. 'new' pour un nouveau #TYPE.[
- * @param int $(#GET{id_rubrique}|?{id_rubrique})
- *     Identifiant de la rubrique parente (si connue)]
+ * @param int $(#GET{id_parent}|?{#GET{id_parent}})
+ *     Identifiant de l'objet parent (si connu)]
  * @param string $retour
  *     URL de redirection après le traitement[
  * @param string $(#GET{associer}|?{associer_objet})
@@ -168,8 +172,8 @@ function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_[(#TYPE)]_traiter_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$retours = formulaires_editer_objet_traiter('#TYPE', $#ID_OBJET, #GET{id_rubrique_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);[
+function formulaires_editer_[(#TYPE)]_traiter_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$retours = formulaires_editer_objet_traiter('#TYPE', $#ID_OBJET, #GET{id_parent_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);[
 (#GET{associer}|oui)
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $#ID_OBJET = $retours\['#ID_OBJET'\]) {

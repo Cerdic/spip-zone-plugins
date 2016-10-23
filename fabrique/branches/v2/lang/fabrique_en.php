@@ -213,7 +213,7 @@ you must complete certain information below.',
 	'label_champ_langues' => 'Language administration',
 	'label_champ_langues_explication' => 'Add fields to manage the languages of the object (lang and langue_choisie) and translations (id_trad)?',
 	'label_champ_plan_rubrique' => 'List the object in the sitemap?',
-	'label_champ_rubriques' => 'id_rubrique',
+	'label_champ_rubriques' => 'id_rubrique', # MODIF
 	'label_champ_rubriques_explication' => 'Enables to allocate this item to a section',
 	'label_champ_statut' => 'Field <strong>statut</strong>',
 	'label_champ_statut_explication' => 'Allows the use of publication status (proposed to publication, published, trash ...)',
