@@ -5,6 +5,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
+
+function suploadhtml5_insert_head_css($flux) {
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('css/saisie_upload.css').'" type="text/css" media="screen" />';
+
+	return $flux;
+}
+
 /**
  * Lacher le cron de nettoyage des fichiers media temporaire toute les 24 heures
  *
