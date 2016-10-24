@@ -64,6 +64,7 @@
 .btn.super			{ font-size: 200%;
 					-webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 .btn.expand 		{ width: 100%; }
+.btn.circle			{ padding: 1em; border-radius: 50%; }
 
 /* couleurs */
 .btn.purple			{ background-color: #8c198c; color: #FFF; }
