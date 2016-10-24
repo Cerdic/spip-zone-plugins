@@ -16,8 +16,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function formulaires_editer_url_page_charger($page = '', $redirect = '') {
 
 	// Valeurs de base
+	// Si ZPIP est activé, on retire le préfixe «page-» du nom de la page
 	$valeurs    = array();
 	$page       = trim($page);
+	if ($page
+		and defined('_DIR_PLUGIN_Z')
+		and substr($page, 0, strlen('page-')) == 'page-'
+	) {
+		$page = substr($page, strlen('page-'));
+	}
 	$mode       = ($page ? 'modifier' : 'creer');
 	$page_loked = false;
 
@@ -34,7 +41,7 @@ function formulaires_editer_url_page_charger($page = '', $redirect = '') {
 			$fond        = trouver_fond_page($page);
 			$page_locked = true; // interdire de modifier le champ page
 			if (!$fond ){
-				$message_erreur = _T('urls_pages:erreur_fond_absent_page', array('page' => $page));
+				$message_erreur = _T('urls_pages:erreur_page_fond_absent', array('page' => $page));
 			}
 			break;
 

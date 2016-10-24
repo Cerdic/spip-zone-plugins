@@ -60,16 +60,30 @@ function url_page_personnalisee($url) {
  */
 function trouver_fond_page($page) {
 
-	// D'abord dans les dossiers de ZCore/ZPIP
+	// Cherchons d'abord dans les dossiers de ZCore/ZPIP
+	$zcore     = defined('_DIR_PLUGIN_ZCORE');
+	$z         = defined('_DIR_PLUGIN_Z');
 	$dossier_z =
-		(defined('_DIR_PLUGIN_ZCORE') ? 'content' :
-		(defined('_DIR_PLUGIN_ZPIP') ? 'contenu' :
+		($zcore ? 'content' :
+		($z ? 'contenu' :
 		false));
 	if ($dossier_z) {
+		// ajouter le préfixe 'page-' pour Zpip si nécessaire
+		if ($z
+			and substr($page, 0, strlen('page-')) != 'page-'
+		) {
+			$page = "page-$page";
+		}
 		$fond = trouver_fond($page, $dossier_z);
 	}
-	// Sinon dans le dossier des squelettes
+	// Sinon cherchons dans le dossier des squelettes
 	if (!$fond) {
+		// Supprimer le préfixe « page- » pour Zpip
+		if ($z
+			and substr($page, 0, strlen('page-')) == 'page-'
+		) {
+			$page = substr($page, strlen('page-'));
+		}
 		$fond = trouver_fond($page);
 	}
 
