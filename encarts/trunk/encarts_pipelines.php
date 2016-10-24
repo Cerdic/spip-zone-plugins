@@ -30,6 +30,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array       Données du pipeline
  */
 function encarts_affiche_milieu($flux) {
+	include_spip('inc/pipelines_ecrire');
+	include_spip('inc/utils');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
@@ -66,6 +68,46 @@ function encarts_affiche_milieu($flux) {
 function encarts_optimiser_base_disparus($flux) {
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('encart' => '*'), '*');
+
+	return $flux;
+}
+
+/**
+ * Traiter les textes contenant des <encart> .... </encart>
+ * ou des <marge>...</marge>
+ * en les remplaçant par un span...
+ *
+ * @param string $texte à analyser
+ * @return texte modifié
+ **/
+function encarts_pre_propre($texte) {
+	if (false !== strpos($texte, '<')) {
+		if (preg_match_all(',<(' . _TYPES_ENCARTS . ')>(.*?)</\1>,is', $texte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $reg) {
+				$css = 'encart';
+				if ($reg[1] != 'encart') {
+					$css .= " " . $reg[1];
+				}
+				$texte = str_replace($reg[0], "<span class='$css'>" . $reg[2] . "</span>", $texte);
+			}
+		}
+	}
+
+	return $texte;
+}
+
+/**
+ * Mettre les vu=oui lorsque l'on met un modèle
+ * d'encart dans un texte.
+ *
+ **/
+function encarts_post_edition($flux) {
+	include_spip('inc/utils');
+	include_spip('base/objets');
+	if (!in_array($flux['args']['type'], array('forum', 'signature'))) {
+		$marquer_doublons_encart = charger_fonction('marquer_doublons_encart', 'inc');
+		$marquer_doublons_encart($flux['data'], $flux['args']['id_objet'], $flux['args']['type'], id_table_objet($flux['args']['type'], $flux['args']['serveur']), $flux['args']['table_objet'], $flux['args']['spip_table_objet'], '', $flux['args']['serveur']);
+	}
 
 	return $flux;
 }

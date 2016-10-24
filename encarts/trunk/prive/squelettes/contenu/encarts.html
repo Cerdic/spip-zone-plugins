@@ -1,6 +1,9 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+[(#AUTORISER{voir,encarts}|sinon_interdire_acces)]
+<h1 class="grostitre"><:encart:titre_encarts:></h1>
 <div class="nettoyeur"></div>
 
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
 <INCLURE{fond=prive/objets/liste/encarts, par=titre, env, ajax, sinon=<:encart:info_aucun_encart:>}>
 
 [(#AUTORISER{creer,encart})

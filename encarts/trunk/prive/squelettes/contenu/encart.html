@@ -37,6 +37,19 @@
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,encart,id,#ID_ENCART},data,'<div class="nettoyeur"></div>'}}
 
+<div class="liste">
+	<BOUCLE_objetslies(spip_encarts_liens){id_encart}{0,1}><h3><:encart:titre_objets_lies_encart:></h3></BOUCLE_objetslies>
+
+	<INCLURE{fond=prive/objets/liste/articles_encart,id_encart,par=date,statut=(#SESSION{statut}|statuts_articles_visibles),ajax,env} />
+
+	<BOUCLE_autresobjets(spip_encarts_liens){id_encart}{objet !IN article}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_encart]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_encart}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_encart,ajax,env} />
+	</BOUCLE_autresobjets>
+</div>
+
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>

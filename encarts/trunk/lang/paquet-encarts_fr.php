@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'encarts_description' => 'Permet aux rédacteurs d\'ajouter des encarts (ou encadrés) dans leurs articles, et aux graphistes de les placer n\'importe où dans leurs mises-en-page.',
-	'encarts_nom' => 'encarts',
+	'encarts_nom' => 'Encarts',
 	'encarts_slogan' => 'Pour ajouter des encadrés à vos articles SPIP !',
 );
 

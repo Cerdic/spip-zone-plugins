@@ -2,6 +2,12 @@
 <div class='infos'>
 [(#SET{texte_objet,<:encart:titre_encart:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ENCART</p></div>
-
 </div>
+[(#AUTORISER{supprimer, encart, #ID_ENCART}|oui)
+[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{encart-del-24.png}
+	|balise_img{<:encart:supprimer_encart:>}|inserer_attribut{class,co_middle}
+	|concat{' ',<:encart:supprimer_encart:>})],
+	[(#URL_ACTION_AUTEUR{supprimer_encart,#ID_ENCART,#URL_ECRIRE{encarts}})],
+	icone s24 horizontale danger encart-del-24,<:encart:supprimer_encart_confirmer:>\n\n<:encart:supprimer_encart_explication:>})]
+]
 </BOUCLE_encart>

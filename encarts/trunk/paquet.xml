@@ -1,7 +1,7 @@
 <paquet
 	prefix="encarts"
 	categorie="edition"
-	version="2.1.3"
+	version="2.2.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/encarts-64.png"
@@ -16,7 +16,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="saisies" compatibilite="[2.5.29;]" />
 
 	<pipeline nom="autoriser" inclure="encarts_autorisations.php" />
 
@@ -25,6 +25,8 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/encarts.php" />
 	<pipeline nom="affiche_milieu" inclure="encarts_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="encarts_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="encarts_pipelines.php" />
+	<pipeline nom="post_edition" inclure="encarts_pipelines.php" />
 
 	<menu nom="encarts" titre="encart:titre_encarts" parent="menu_edition" icone="images/encart-16.png" action="encarts" />
 	<menu nom="encart_creer" titre="encart:icone_creer_encart" parent="outils_rapides" icone="images/encart-new-16.png" action="encart_edit" parametres="new=oui" />

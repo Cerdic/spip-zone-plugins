@@ -69,6 +69,7 @@ function autoriser_encarts_menu_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_encartcreer_menu_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/autoriser');
 	return autoriser('creer', 'encart', '', $qui, $opt);
 }
 
@@ -149,7 +150,7 @@ function autoriser_encart_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_encart_associer_dist($faire, $type, $id, $qui, $opts) {
-
+	include_spip('inc/autoriser');
 	$autoriser = (
 		($qui['statut'] == '0minirezo' AND !$qui['restreint'])
 		OR (autoriser('modifier', $opts['objet'], $opts['id_objet'], $qui))
@@ -179,7 +180,8 @@ function autoriser_encart_associer_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_encart_dissocier_dist($faire, $type, $id, $qui, $opts) {
-
+	include_spip('base/abstract_sql');
+	include_spip('inc/autoriser');
 	$autoriser = (
 		autoriser('associer', 'encart', $id, $qui, $opts)
 		AND (sql_getfetsel('vu', "spip_encarts_liens", "id_encart=" . intval($id) . " AND objet=" . sql_quote($opts['objet']) . " AND id_objet=" . intval($opts['id_objet'])) == 'non')
