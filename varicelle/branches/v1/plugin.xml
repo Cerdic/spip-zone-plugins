@@ -10,9 +10,9 @@
 <slogan><multi>[fr]De jolis boutons&nbsp;![en]Pretty buttons![es]¡Botones bonitos!</multi></slogan>
 <description>
 <multi>
-[fr]De jolis boutons&nbsp;: s&#233;duisants, l&#233;gers et performants, pour styler tous les boutons du site. S'applique &#224; tout ce qui porte le s&#233;lecteur <code>.submit</code> (notamment&nbsp;: <code>button, input, a</code>).
-[en]Pretty buttons: seductive, light and powerful, to stylize all buttons on the site. Applies to anything with the <code>.submit</code> selector (including: <code>button, input, a</code>).
-[es]Botones bonitos: seductor, ligero y potente, para estilizar todos los botones en el sitio. Se aplica a cualquier cosa con el selector <code>.submit</code> (incluyendo: <code>button, input, a</code>).
+[fr]De jolis boutons&nbsp;: s&#233;duisants, l&#233;gers et performants, pour styler tous les boutons du site. S'applique &#224; tout ce qui porte le s&#233;lecteur <code>.submit</code>, dont les boutons des formulaires SPIP.
+[en]Pretty buttons: seductive, light and powerful, to stylize all buttons on the site. Applies to anything with the <code>.submit</code> selector, including SPIP forms buttons.
+[es]Botones bonitos: seductor, ligero y potente, para estilizar todos los botones en el sitio. Se aplica a cualquier cosa con el selector <code>.submit</code> incluyendo los botones SPIP formas.
 </multi>
 </description>
 <lien>http://contrib.spip.net/?article3484</lien>
