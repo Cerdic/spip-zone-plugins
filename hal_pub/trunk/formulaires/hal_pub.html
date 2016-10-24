@@ -50,7 +50,7 @@
 <!-- type de publication -->
 <div class="hal-form-recherche-wrapper">
 			<form action="#SELF" method="get" class="hal-form-recherche"><div>
-                [(#SELF|form_hidden)]
+                [(#SELF|parametre_url{q|start|annee|pub,''}|form_hidden)]
                 <input type="hidden" value="[(#ENV{start}|intval)]" name="start"  />
 
     			[(#ENV{cacher_q}|non)

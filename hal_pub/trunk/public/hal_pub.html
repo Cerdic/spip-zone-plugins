@@ -57,7 +57,7 @@
         <B_pagination>
 		<ul class="hal-pagination">
         [(#GET{page_debut}|>{0}|oui)
-			<li class="glyphicon glyphicon-fast-backward">
+			<li class="hal-fast-backward">
 			<a href="[(#SELF|parametre_url{start,0})]">&lt;&lt;</a>
 			</li>
 		]
@@ -69,7 +69,7 @@
 		</BOUCLE_pagination>
         [(#GET{page_debut}|plus{10}|<{#GET{nb_pages}}|oui)
             #SET{start,#GET{nb_pages}|mult{#GET{pagination}}}
-			<li class="glyphicon glyphicon-fast-forward">
+			<li class="hal-fast-forward">
 			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&gt;&gt;</a>
 			</li>
 		]
