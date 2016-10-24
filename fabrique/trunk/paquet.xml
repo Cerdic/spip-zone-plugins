@@ -1,7 +1,7 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="2.3.2-dev"
+	version="2.3.3-dev"
 	etat="stable"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
@@ -15,7 +15,7 @@
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 
-	<utilise nom="skeleditor" compatibilite="[2.7.9;]" />
+	<utilise nom="skeleditor" compatibilite="[2.7.10;]" />
 	<utilise nom="coloration_code" compatibilite="[0.8.3;]" />
 	<utilise nom="yaml" compatibilite="[1.5.2;]" />
 
