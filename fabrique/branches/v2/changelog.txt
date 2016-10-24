@@ -1,6 +1,10 @@
 Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
+2.3.1 le 24 10 2016
+-------------------
+
+* Correction sur le comptage des objets dans la boîte info.
 
 2.3.0 le 23 10 2016
 -------------------
@@ -15,6 +19,12 @@ Ce plugin génère d'autres plugins !
 
 * Correction de nommage d'une autorisation.
 
+* Permettre d'afficher les liaisons d'un objet sur l'objet lui-même.
+  ie: soit 2 objets A et B avec une table de liens B_liens, il était
+  possible de dire d'ajouter le formulaire de liens B sur la vue A.
+  Il est maintenant en plus possible de dire que sur la vue B, on liste
+  aussi les A liés de cette manière (comme les objets liés sur la 
+  page d'un mot-clé). 
 
 
 2.2.0 le 18 08 2016

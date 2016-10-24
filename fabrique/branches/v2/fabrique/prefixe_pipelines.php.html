@@ -195,14 +195,14 @@ function [(#PREFIXE)]_afficher_contenu_objet($flux) {
 function [(#PREFIXE)]_boite_infos($flux) {[(#REM)
 ]<B_boite_infos>
 	if (isset($flux['args']['type']) and isset($flux['args']['id']) and $id = intval($flux['args']['id'])) {
-		$nb = "";
+		$texte = "";
 <BOUCLE_boite_infos(DATA){source tableau,(#OBJETS|objets_options_presentes{parent})}>[(#REM)
 ]		if ($flux['args']['type'] == '#VALEUR{parent/type}' and $nb = sql_countsel('#VALEUR{table}', array([(#STATUT|?{"statut='publie'"}), ]"#VALEUR{parent/id_objet}=" . $id))) {
-			$nb .= "<div>" . singulier_ou_pluriel($nb, "#TYPE:info_1_#TYPE", "#TYPE:info_nb_#LOBJET") . "</div>\n";
+			$texte .= "<div>" . singulier_ou_pluriel($nb, "#TYPE:info_1_#TYPE", "#TYPE:info_nb_#LOBJET") . "</div>\n";
 		}
 </BOUCLE_boite_infos>[(#REM)
-]		if ($nb and $p = strpos($flux['data'], "<!--nb_elements-->")) {
-			$flux['data'] = substr_replace($flux['data'], $nb, $p, 0);
+]		if ($texte and $p = strpos($flux['data'], "<!--nb_elements-->")) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
 		}
 	}
 	return $flux;
