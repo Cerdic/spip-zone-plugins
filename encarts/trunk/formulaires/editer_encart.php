@@ -3,23 +3,26 @@
  * Gestion du formulaire de d'édition de encart
  *
  * @plugin     encarts
- * @copyright  2013
+ * @copyright  2013-2016
  * @author     Cyril
  * @licence    GNU/GPL
  * @package    SPIP\Encarts\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
  * Définir les saisies à afficher pour le formulaire
+ *
  * @return array
  *     Liste des saisies
  */
-function formulaires_editer_encart_saisies_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
+function formulaires_editer_encart_saisies_dist($id_encart = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$saisies = array(
 		array(
 			'saisie' => 'input',
@@ -39,6 +42,7 @@ function formulaires_editer_encart_saisies_dist($id_encart='new', $retour='', $a
 			)
 		)
 	);
+
 	return $saisies;
 }
 
@@ -64,7 +68,7 @@ function formulaires_editer_encart_saisies_dist($id_encart='new', $retour='', $a
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_encart_identifier_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_encart_identifier_dist($id_encart = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($id_encart), $associer_objet));
 }
 
@@ -93,8 +97,9 @@ function formulaires_editer_encart_identifier_dist($id_encart='new', $retour='',
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_encart_charger_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('encart',$id_encart,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_encart_charger_dist($id_encart = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$valeurs = formulaires_editer_objet_charger('encart', $id_encart, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
 	return $valeurs;
 }
 
@@ -123,8 +128,9 @@ function formulaires_editer_encart_charger_dist($id_encart='new', $retour='', $a
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_encart_verifier_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('encart',$id_encart);
+function formulaires_editer_encart_verifier_dist($id_encart = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$erreurs = formulaires_editer_objet_verifier('encart', $id_encart);
+
 	return $erreurs;
 }
 
@@ -153,9 +159,9 @@ function formulaires_editer_encart_verifier_dist($id_encart='new', $retour='', $
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_encart_traiter_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$res = formulaires_editer_objet_traiter('encart',$id_encart,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
+function formulaires_editer_encart_traiter_dist($id_encart = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$res = formulaires_editer_objet_traiter('encart', $id_encart, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_encart = $res['id_encart']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
@@ -164,13 +170,12 @@ function formulaires_editer_encart_traiter_dist($id_encart='new', $retour='', $a
 			include_spip('action/editer_liens');
 			objet_associer(array('encart' => $id_encart), array($objet => $id_objet));
 			if (isset($res['redirect'])) {
-				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_encart, '&');
+				$res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_encart, '&');
 			}
 		}
 	}
+
 	return $res;
 
 }
 
-
-?>

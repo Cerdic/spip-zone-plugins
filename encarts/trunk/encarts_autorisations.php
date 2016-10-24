@@ -3,13 +3,15 @@
  * Définit les autorisations du plugin encarts
  *
  * @plugin     encarts
- * @copyright  2013
+ * @copyright  2013-2016
  * @author     Cyril
  * @licence    GNU/GPL
  * @package    SPIP\Encarts\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /*
@@ -19,8 +21,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
-function encarts_autoriser(){}
+ *
+ * @pipeline autoriser
+ */
+function encarts_autoriser() { }
 
 
 /* Exemple
@@ -43,13 +47,13 @@ function autoriser_configurer_encarts_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de voir un élément de menu (encarts)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_encarts_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_encarts_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
@@ -58,13 +62,13 @@ function autoriser_encarts_menu_dist($faire, $type, $id, $qui, $opt){
  * Autorisation de voir le bouton d'accès rapide de création (encart)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_encartcreer_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_encartcreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'encart', '', $qui, $opt);
 }
 
@@ -72,12 +76,12 @@ function autoriser_encartcreer_menu_dist($faire, $type, $id, $qui, $opt){
  * Autorisation de créer (encart)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_encart_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
@@ -86,12 +90,12 @@ function autoriser_encart_creer_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de voir (encart)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_encart_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
@@ -100,12 +104,12 @@ function autoriser_encart_voir_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de modifier (encart)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_encart_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
@@ -114,12 +118,12 @@ function autoriser_encart_modifier_dist($faire, $type, $id, $qui, $opt) {
  * Autorisation de supprimer (encart)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_encart_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
@@ -136,14 +140,14 @@ function autoriser_encart_supprimer_dist($faire, $type, $id, $qui, $opt) {
  *     ```
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet auquel on veut associer un encart
- * @param  int    $id    Identifiant de l'objet auquel on veut associer un encart
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opts  Options de cette autorisation
+ * @param  string $type Type d'objet auquel on veut associer un encart
+ * @param  int $id Identifiant de l'objet auquel on veut associer un encart
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opts Options de cette autorisation
  *                       Doit contenir les clés `objet` et `id_objet`
  *                       pour rensigner le type et l'identifiant de l'objet
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_encart_associer_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
@@ -166,10 +170,10 @@ function autoriser_encart_associer_dist($faire, $type, $id, $qui, $opts) {
  *     ```
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opts  Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opts Options de cette autorisation
  *                       Doit contenir les clés `objet` et `id_objet`
  *                       pour renseigner le type et l'identifiant de l'objet
  * @return bool          true s'il a le droit, false sinon
@@ -178,7 +182,7 @@ function autoriser_encart_dissocier_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
 		autoriser('associer', 'encart', $id, $qui, $opts)
-		AND (sql_getfetsel('vu', "spip_encarts_liens", "id_encart=".intval($id)." AND objet=".sql_quote($opts['objet'])." AND id_objet=".intval($opts['id_objet']))=='non')
+		AND (sql_getfetsel('vu', "spip_encarts_liens", "id_encart=" . intval($id) . " AND objet=" . sql_quote($opts['objet']) . " AND id_objet=" . intval($opts['id_objet'])) == 'non')
 	) ? true : false;
 
 	return $autoriser;
@@ -189,15 +193,13 @@ function autoriser_encart_dissocier_dist($faire, $type, $id, $qui, $opts) {
  * Autorisation de lier/délier l'élément (encarts)
  *
  * @param  string $faire Action demandée
- * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_associerencarts_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
-
-?>

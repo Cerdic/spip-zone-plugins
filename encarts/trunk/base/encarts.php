@@ -3,13 +3,15 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     encarts
- * @copyright  2013-2015
+ * @copyright  2013-2016
  * @author     Cyril
  * @licence    GNU/GPL
  * @package    SPIP\Encarts\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -43,30 +45,30 @@ function encarts_declarer_tables_objets_sql($tables) {
 	$tables['spip_encarts'] = array(
 		'type' => 'encart',
 		'principale' => "oui",
-		'field'=> array(
-			"id_encart"          => "bigint(21) NOT NULL",
-			"titre"              => "tinytext NOT NULL",
-			"texte"              => "text NOT NULL",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"maj"                => "TIMESTAMP"
+		'field' => array(
+			"id_encart" => "bigint(21) NOT NULL",
+			"titre" => "tinytext NOT NULL",
+			"texte" => "text NOT NULL",
+			"date" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"maj" => "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_encart",
+			"PRIMARY KEY" => "id_encart",
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
 		'page' => false,
-		'champs_editables'  => array('titre','texte'),
+		'champs_editables' => array('titre', 'texte'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
-		'tables_jointures'  => array('spip_encarts_liens'),
+		'tables_jointures' => array('spip_encarts_liens'),
 
 
 	);
 
 	// jointures sur les encarts pour tous les objets
-	$tables[]['tables_jointures'][]= 'encarts_liens';
-	$tables[]['tables_jointures'][]= 'encarts';
+	$tables[]['tables_jointures'][] = 'encarts_liens';
+	$tables[]['tables_jointures'][] = 'encarts';
 
 	return $tables;
 }
@@ -85,19 +87,16 @@ function encarts_declarer_tables_auxiliaires($tables) {
 
 	$tables['spip_encarts_liens'] = array(
 		'field' => array(
-			"id_encart"          => "bigint(21) DEFAULT '0' NOT NULL",
-			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
-			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+			"id_encart" => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet" => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet" => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu" => "VARCHAR(6) DEFAULT 'non' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_encart,id_objet,objet",
-			"KEY id_encart"      => "id_encart"
+			"PRIMARY KEY" => "id_encart,id_objet,objet",
+			"KEY id_encart" => "id_encart"
 		)
 	);
 
 	return $tables;
 }
-
-
-?>

@@ -3,13 +3,15 @@
  * Fichier gérant l'installation et désinstallation du plugin encarts
  *
  * @plugin     encarts
- * @copyright  2013
+ * @copyright  2013-2016
  * @author     Cyril
  * @licence    GNU/GPL
  * @package    SPIP\Encarts\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -20,19 +22,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - créer la structure SQL,
  * - insérer du pre-contenu,
  * - installer des valeurs de configuration,
- * - mettre à jour la structure SQL 
+ * - mettre à jour la structure SQL
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
-**/
+ **/
 function encarts_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	# quelques exemples
 	# (que vous pouvez supprimer !)
-	# 
+	#
 	# $maj['create'] = array(array('creer_base'));
 	#
 	# include_spip('inc/config')
@@ -58,16 +60,16 @@ function encarts_upgrade($nom_meta_base_version, $version_cible) {
 
 /**
  * Fonction de désinstallation du plugin encarts.
- * 
+ *
  * Vous devez :
  *
  * - nettoyer toutes les données ajoutées par le plugin et son utilisation
- * - supprimer les tables et les champs créés par le plugin. 
+ * - supprimer les tables et les champs créés par le plugin.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
-**/
+ **/
 function encarts_vider_tables($nom_meta_base_version) {
 	# quelques exemples
 	# (que vous pouvez supprimer !)
@@ -78,11 +80,10 @@ function encarts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_encarts_liens");
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('encart')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('encart')));
-	sql_delete("spip_forum",                 sql_in("objet", array('encart')));
+	sql_delete("spip_versions", sql_in("objet", array('encart')));
+	sql_delete("spip_versions_fragments", sql_in("objet", array('encart')));
+	sql_delete("spip_forum", sql_in("objet", array('encart')));
 
 	effacer_meta($nom_meta_base_version);
 }
 
-?>
