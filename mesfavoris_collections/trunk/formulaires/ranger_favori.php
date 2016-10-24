@@ -89,8 +89,15 @@ function formulaires_ranger_favori_traiter_dist($objet, $id_objet, $redirect='')
 					'id_favori = '.$id_favori
 				);
 			}
-			// Sinon on crée un nouveau favori dans la collection
-			else {
+			// Sinon on crée un nouveau favori dans la collection s'il n'y en a pas déjà
+			elseif (
+				!sql_getfetsel('id_favori', 'spip_favoris', array(
+					'id_auteur = '.$id_auteur,
+					'objet = '.sql_quote($objet),
+					'id_objet = '.intval($id_objet),
+					'id_favoris_collection = '.$id_favoris_collection,
+				))
+			) {
 				sql_insertq(
 					'spip_favoris',
 					array(
