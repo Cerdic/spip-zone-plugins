@@ -1,9 +1,13 @@
 <?php
 /**
- * Plugin projets
- * (c) 2012 Cyril Marion
- * Licence GNU/GPL
- */
+ * Plugin Projets
+ *
+ * @plugin  Projets
+ * @license GPL (c) 2009 - 2016
+ * @author  Cyril Marion, Matthieu Marcillaud, RastaPopoulos
+ *
+ * @package SPIP\Projets\EditerProjetsCadre
+ **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

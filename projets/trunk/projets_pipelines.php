@@ -1,13 +1,18 @@
 <?php
 /**
- * Plugin projets
- * (c) 2012-2016 Cyril Marion
- * Licence GNU/GPL
- */
-
+ * Plugin Projets
+ *
+ * @plugin  Projets
+ * @license GPL (c) 2009 - 2016
+ * @author  Cyril Marion, Matthieu Marcillaud, RastaPopoulos
+ *
+ * @package SPIP\Projets\Pipelines
+ **/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+
+include_spip('inc/utils');
 
 /*
  * Un fichier de pipelines permet de regrouper
@@ -20,6 +25,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * notamment des formulaires de liaisons entre objets
  */
 function projets_affiche_milieu($flux) {
+	include_spip('inc/pipelines_ecrire');
+	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 	$objets_selectionnes = lire_config('projets/objets', array());
@@ -33,11 +40,19 @@ function projets_affiche_milieu($flux) {
 
 	// auteurs sur les projets et cadres de projet
 	if (!$e['edition'] AND in_array($e['type'], array('projet', 'projets_cadre'))) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array('table_source' => 'auteurs', 'objet' => $e['type'], 'id_objet' => $flux['args'][$e['id_table_objet']]));
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'auteurs',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
 	}
 
 	if (!$e['edition'] AND in_array($e['type'], $objets_selectionnes)) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array('table_source' => 'projets', 'objet' => $e['type'], 'id_objet' => $flux['args'][$e['id_table_objet']]));
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'projets',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
 	}
 
 	if ($texte) {
@@ -57,9 +72,15 @@ function projets_affiche_milieu($flux) {
 function projets_affiche_auteurs_interventions($flux) {
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
 
-		$flux['data'] .= recuperer_fond('prive/objets/liste/projets', array('id_auteur' => $id_auteur, 'titre' => _T('projet:info_projets_auteur')), array('ajax' => true));
+		$flux['data'] .= recuperer_fond('prive/objets/liste/projets', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('projet:info_projets_auteur')
+		), array('ajax' => true));
 
-		$flux['data'] .= recuperer_fond('prive/objets/liste/projets_cadres', array('id_auteur' => $id_auteur, 'titre' => _T('projets_cadre:info_projets_cadres_auteur')), array('ajax' => true));
+		$flux['data'] .= recuperer_fond('prive/objets/liste/projets_cadres', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('projets_cadre:info_projets_cadres_auteur')
+		), array('ajax' => true));
 
 	}
 

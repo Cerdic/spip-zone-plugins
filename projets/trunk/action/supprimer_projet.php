@@ -21,6 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     `id` : son identifiant. En absence de `id` utilise l'argument de l'action sécurisée.
  **/
 function action_supprimer_projet_dist($id = null) {
+	include_spip('inc/utils');
+	include_spip('base/abstract_sql');
 	if (is_null($id)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$id = $securiser_action();
