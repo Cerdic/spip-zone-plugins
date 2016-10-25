@@ -102,4 +102,3 @@ function projets_optimiser_base_disparus($flux) {
 	return $flux;
 }
 
-?>

@@ -43,5 +43,3 @@ function formulaires_editer_projets_cadre_traiter_dist($id_projets_cadre='new', 
 	return formulaires_editer_objet_traiter('projets_cadre',$id_projets_cadre,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
-
-?>

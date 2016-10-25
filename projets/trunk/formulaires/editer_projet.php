@@ -87,5 +87,3 @@ function formulaires_editer_projet_traiter_dist($id_projet = 'new', $retour = ''
 
 }
 
-
-?>
