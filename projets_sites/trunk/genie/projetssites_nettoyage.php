@@ -75,4 +75,3 @@ function genie_projetssites_nettoyage_dist($t) {
 
 }
 
-?>

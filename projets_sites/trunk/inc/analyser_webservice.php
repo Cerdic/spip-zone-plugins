@@ -157,4 +157,3 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '') {
 	return $valeurs;
 }
 
-?>

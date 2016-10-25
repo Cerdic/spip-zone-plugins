@@ -431,4 +431,3 @@ function projets_sites_maj150() {
 	}
 }
 
-?>

@@ -337,5 +337,3 @@ function projets_sites_declarer_tables_auxiliaires($tables) {
 	return $tables;
 }
 
-
-?>

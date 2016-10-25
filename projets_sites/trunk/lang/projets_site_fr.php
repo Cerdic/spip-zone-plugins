@@ -214,4 +214,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'webservice_label' => 'Url du Web Service&nbsp;:',
 );
 
-?>

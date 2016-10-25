@@ -13,4 +13,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'projets_sites_slogan' => 'Ayez sous la main vos infos de sites en production, récette et développement',
 );
 
-?>

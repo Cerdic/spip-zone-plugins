@@ -62,10 +62,10 @@ function inc_recuperer_flux_dist($url, $login = '', $password = '') {
 		$header['content'] = $content;
 
 	} else {
+		include_spip('inc/distant');
 		$header['content'] = recuperer_page($url);
 	}
 
 	return $header;
 }
 
-?>

@@ -44,4 +44,3 @@ function genie_maj_webservice_dist($t) {
 	return $t;
 }
 
-?>
