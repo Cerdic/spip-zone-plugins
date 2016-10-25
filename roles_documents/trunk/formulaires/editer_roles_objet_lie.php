@@ -5,7 +5,9 @@
  *
  * @package SPIP\Formulaires
  **/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement du formulaire d'édition de rôles de liens
@@ -17,13 +19,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     objet étant associé
  * @param string|int $id_objet_source
  *     identifiant de l'objet associé
- * @param string $objet 
+ * @param string $objet
  * @param int|string $id_objet
  * @param array $options
  *     tableau d'options, à toutes fins utiles
  * @return array
  */
-function formulaires_editer_roles_objet_lie_charger_dist($objet_source, $id_objet_source, $objet, $id_objet, $options=array()){
+function formulaires_editer_roles_objet_lie_charger_dist($objet_source, $id_objet_source, $objet, $id_objet, $options = array()) {
 
 	// retourner les valeurs de editer_liens
 	$table_source = table_objet($objet_source);
@@ -45,17 +47,17 @@ function formulaires_editer_roles_objet_lie_charger_dist($objet_source, $id_obje
  *     objet étant associé
  * @param string|int $id_objet_source
  *     identifiant de l'objet associé
- * @param string $objet 
+ * @param string $objet
  * @param int|string $id_objet
  * @param array $options
  *     tableau d'options, à toutes fins utiles
  * @return array
  */
-function formulaires_editer_roles_objet_lie_traiter_dist($objet_source, $id_objet_source, $objet, $id_objet, $options=array()){
+function formulaires_editer_roles_objet_lie_traiter_dist($objet_source, $id_objet_source, $objet, $id_objet, $options = array()) {
 
 	// retourner les traitements de editer_liens
 	$table_source = table_objet($objet_source);
-	$editer_liens_traiter = charger_fonction('traiter','formulaires/editer_liens');
+	$editer_liens_traiter = charger_fonction('traiter', 'formulaires/editer_liens');
 	$res = $editer_liens_traiter($table_source, $objet, $id_objet); // documents, article, 2
 
 	// pour rechercher un ou plusieurs blocs après modification des roles
@@ -74,6 +76,4 @@ function formulaires_editer_roles_objet_lie_traiter_dist($objet_source, $id_obje
 	}
 
 	return $res;
-
 }
-

@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -17,18 +19,18 @@ function roles_documents_upgrade($nom_meta_base_version, $version_cible) {
 	// Ajout des rôles à la table de liens des documents
 	$maj['create'] = array(
 		// supprimer la clé primaire actuelle pour pouvoir en changer en ajoutant la colonne rôle
-		array('sql_alter', "TABLE spip_documents_liens DROP PRIMARY KEY"),
+		array('sql_alter', 'TABLE spip_documents_liens DROP PRIMARY KEY'),
 		// ajout de la colonne role
 		array('maj_tables', array('spip_documents_liens')),
 		// la nouvelle colonne est la, mettre sa nouvelle clé primaire
-		array('sql_alter', "TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet,role)"),
+		array('sql_alter', 'TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet,role)'),
 		// Mettre un rôle 'document' par défaut aux liens dépourvus de rôle
-		array('sql_update', "spip_documents_liens", array('role' => sql_quote('document')), "role=" . sql_quote('')),
+		array('sql_update', 'spip_documents_liens', array('role' => sql_quote('document')), 'role=' . sql_quote('')),
 	);
 
 	// Mettre un rôle 'document' par défaut aux liens dépourvus de rôle
 	$maj['1.0.1'] = array(
-		array('sql_update', "spip_documents_liens", array('role' => sql_quote('document')), "role=" . sql_quote('')),
+		array('sql_update', 'spip_documents_liens', array('role' => sql_quote('document')), 'role=' . sql_quote('')),
 	);
 
 	include_spip('base/upgrade');
@@ -45,13 +47,17 @@ function roles_documents_vider_tables($nom_meta_base_version) {
 	// sinon on ne pourra pas modifier la cle primaire ensuite
 	// cet algo est certainement a optimiser
 	while ($doublons = sql_allfetsel(
-				array('id_document', 'id_objet', 'objet', 'role'),
-				array('spip_documents_liens'),
-				'', 'id_document,id_objet,objet', '', '', 'COUNT(*) > 1'))
-	{
+		array('id_document', 'id_objet', 'objet', 'role'),
+		array('spip_documents_liens'),
+		'',
+		'id_document,id_objet,objet',
+		'',
+		'',
+		'COUNT(*) > 1'
+	)) {
 		foreach ($doublons as $d) {
 			$where = array();
-			foreach ($d as $cle=>$valeur) {
+			foreach ($d as $cle => $valeur) {
 				$where[] = "$cle=".sql_quote($valeur);
 			}
 			sql_delete('spip_documents_liens', $where);
@@ -59,10 +65,9 @@ function roles_documents_vider_tables($nom_meta_base_version) {
 	}
 
 	// supprimer la clé primaire, la colonne rôle, et remettre l'ancienne clé primaire
-	sql_alter("TABLE spip_documents_liens DROP PRIMARY KEY");
-	sql_alter("TABLE spip_documents_liens DROP COLUMN role");
-	sql_alter("TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet)");
+	sql_alter('TABLE spip_documents_liens DROP PRIMARY KEY');
+	sql_alter('TABLE spip_documents_liens DROP COLUMN role');
+	sql_alter('TABLE spip_documents_liens ADD PRIMARY KEY (id_document,id_objet,objet)');
 
 	effacer_meta($nom_meta_base_version);
 }
-

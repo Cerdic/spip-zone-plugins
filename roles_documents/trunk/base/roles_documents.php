@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -20,7 +22,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  * 		Description complétée des tables
  */
-function roles_documents_declarer_tables_objets_sql($tables){
+function roles_documents_declarer_tables_objets_sql($tables) {
 
 	// On propose 2 rôles en plus du rôle par défaut : 'logo' et 'logo de survol'
 	$roles_documents = array(
@@ -31,9 +33,9 @@ function roles_documents_declarer_tables_objets_sql($tables){
 	$choix = array_keys($roles_documents);
 
 	array_set_merge($tables, 'spip_documents', array(
-		"roles_colonne" => "role",
-		"roles_titres" => $roles_documents,
-		"roles_objets" => array(
+		'roles_colonne' => 'role',
+		'roles_titres' => $roles_documents,
+		'roles_objets' => array(
 			'*' => array(
 				'choix' => $choix,
 				'defaut' => 'document'
@@ -54,7 +56,6 @@ function roles_documents_declarer_tables_objets_sql($tables){
 **/
 function roles_documents_declarer_tables_auxiliaires($tables) {
 	$tables['spip_documents_liens']['field']['role']        = "varchar(30) NOT NULL DEFAULT ''";
-	$tables['spip_documents_liens']['key']['PRIMARY KEY']   = "id_document,id_objet,objet,role";
+	$tables['spip_documents_liens']['key']['PRIMARY KEY']   = 'id_document,id_objet,objet,role';
 	return $tables;
 }
-?>

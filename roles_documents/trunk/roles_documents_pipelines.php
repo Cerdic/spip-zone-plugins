@@ -5,7 +5,9 @@
  * Licence GNU/GPL
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajout de contenu dans le bloc «actions» des documents
@@ -19,8 +21,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function roles_documents_document_desc_actions($flux) {
 	include_spip('inc/autoriser');
-	
-	$texte               = "";
+
+	$texte               = '';
 	$exec                = trouver_objet_exec(_request('exec'));
 	$objet_exec          = $exec['type'];
 	$id_table_objet_exec = $exec['id_table_objet'];
@@ -44,9 +46,10 @@ function roles_documents_document_desc_actions($flux) {
 		// bloc à recharger
 		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '#documents';
 		// mini-formulaire
-		$form = recuperer_fond('prive/squelettes/inclure/editer_roles_objet_lie',
+		$form = recuperer_fond(
+			'prive/squelettes/inclure/editer_roles_objet_lie',
 			array(
-				'objet_source'    => "document",
+				'objet_source'    => 'document',
 				'id_objet_source' => $id_document,
 				'objet'           => $objet,
 				'id_objet'        => $id_objet,
@@ -86,10 +89,19 @@ function roles_documents_post_edition_lien($flux) {
 		and $id_document = intval($flux['args']['id_objet_source'])
 		and $objet = $flux['args']['objet']
 		and $id_objet = intval($flux['args']['id_objet'])
-		and $vu = sql_getfetsel('vu', 'spip_documents_liens', 'id_document=' .$id_document .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND '.$colonne_role.'='.sql_quote('document'))
+		and $vu = sql_getfetsel(
+			'vu',
+			'spip_documents_liens',
+			'id_document=' .$id_document .' AND objet='.sql_quote($objet) .'
+				AND id_objet='.$id_objet .' AND '.$colonne_role.'='.sql_quote('document')
+		)
 	) {
 		include_spip('action/editer_liens');
-		objet_qualifier_liens(array('document'=>$id_document), array($objet=>$id_objet), array($colonne_role=>$role, 'vu'=>$vu));
+		objet_qualifier_liens(
+			array('document'=>$id_document),
+			array($objet=>$id_objet),
+			array($colonne_role => $role, 'vu' => $vu)
+		);
 	}
 
 	return $flux;
@@ -112,23 +124,25 @@ function roles_documents_post_edition($flux) {
 		and $flux['args']['table'] !== 'spip_documents'  // mais pas un document
 		and $objet = $flux['args']['type']
 		and $id_objet = intval($flux['args']['id_objet'])
-	){
+	) {
 		include_spip('action/editer_liens');
 
 		// on regarde s'il y a des documents liés à l'objet modifié
-		if (count($liens = objet_trouver_liens(array('document'=>'*'),array($objet=>$id_objet)))) {
+		if (count($liens = objet_trouver_liens(array('document'=>'*'), array($objet=>$id_objet)))) {
 			foreach ($liens as $l) {
 				// on récupère le champ "vu" du lien avec le rôle par défaut
 				$vu = sql_getfetsel(
 					'vu',
 					'spip_documents_liens',
-					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role='.sql_quote('document')
+					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .'
+						AND id_objet='.$id_objet .' AND role='.sql_quote('document')
 				);
 				// on met à jour tous les autres liens avec rôle
 				sql_updateq(
 					'spip_documents_liens',
 					array('vu'=>$vu),
-					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role!='.sql_quote('document')
+					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .'
+						AND id_objet='.$id_objet .' AND role!='.sql_quote('document')
 				);
 			}
 		}
@@ -142,7 +156,7 @@ function roles_documents_quete_logo_objet($flux) {
 	if (empty($flux['data'])) {
 		// On cherche la première image avec un rôle "logo"
 		include_spip('base/abstract_sql');
-		
+
 		// Quel rôle va-t-on chercher ?
 		if ($flux['args']['mode'] === 'on') {
 			$role = 'logo';
@@ -151,7 +165,7 @@ function roles_documents_quete_logo_objet($flux) {
 		} else {
 			$role = $flux['args']['mode'];
 		}
-		
+
 		if ($image = sql_fetsel(
 			'fichier, extension',
 			'spip_documents as d inner join spip_documents_liens as l on d.id_document = l.id_document',
@@ -165,13 +179,12 @@ function roles_documents_quete_logo_objet($flux) {
 			'0+titre, titre'
 		)) {
 			$chemin_complet = _DIR_IMG . $image['fichier'];
-			
+
 			$flux['data'] = array(
 				'chemin' => $chemin_complet,
 				'timestamp' => @filemtime($chemin_complet),
 			);
 		}
 	}
-	
 	return $flux;
 }
