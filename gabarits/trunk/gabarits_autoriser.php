@@ -1,10 +1,8 @@
 <?php
-/**
- * Plugin gabarits pour Spip 2.0
- * Licence GPL
- * 
- *
- */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /* pour que le pipeline ne rale pas ! */
 function gabarits_autoriser($flux){return $flux;}
@@ -39,5 +37,3 @@ function autoriser_gabarit_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_gabarit_bouton_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
-
-?>

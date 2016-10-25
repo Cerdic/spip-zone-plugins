@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
 // Ajout du bouton permettant de se rendre sur la page de gestion des gabarits
 function gabarits_ajouter_boutons($boutons_admin) {
 	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)
@@ -22,5 +26,3 @@ function gabarits_editer_contenu_objet($flux){
 	}
 	return $flux;
 }
-
-?>
