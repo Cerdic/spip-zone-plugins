@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="2.0.0"
 	etat="dev"
-	compatibilite="[3.0.*;3.1.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/gabarits-64.png"
 	schema="0.2"
 	documentation="http://contrib.spip.net/Gabarits"
@@ -22,8 +22,6 @@
 	<pipeline nom="ajouter_boutons" action="ajouter_boutons" inclure="gabarits_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="gabarits_pipelines.php" />
 	<pipeline nom="editer_contenu_objet" inclure="gabarits_pipelines.php" />
-
-	<necessite nom="spip_bonux" compatibilite="[2.2.21;[" />
 
 	<menu nom="gabarits" titre="gabarits:gabarits" parent="bando_edition" icone="images/gabarits-16.png" action="gabarits_tous" />
 </paquet>
