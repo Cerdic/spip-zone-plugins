@@ -1,12 +1,10 @@
 <?php
-/**
- * Plugin Gabarits pour Spip 2.0
- * Licence GPL
- * 
- *
- */
 
-function gabarits_declarer_tables_interfaces($interface){
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+function gabarits_declarer_tables_interfaces($interface) {
 	// 'spip_' dans l'index de $tables_principales
 	// pour pouvoir faires des BOUCLES(GABARITS)
 	$interface['table_des_tables']['gabarits']='gabarits';
@@ -14,7 +12,7 @@ function gabarits_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function gabarits_declarer_tables_principales($tables_principales){
+function gabarits_declarer_tables_principales($tables_principales) {
 	//-- Table GABARITS ------------------------------------------
 	$gabarits = array(
 		"id_gabarit"	=> "bigint(21) NOT NULL",
@@ -41,5 +39,3 @@ function gabarits_declarer_tables_principales($tables_principales){
 
 	return $tables_principales;
 }
-
-?>
