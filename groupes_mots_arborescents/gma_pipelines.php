@@ -324,11 +324,13 @@ function gma_pre_edition($flux) {
 function gma_post_edition($flux) {
 	// lors de l'édition d'un groupe
 	$table = 'spip_groupes_mots';
-	if ($flux['args']['table']  == $table
-	and $flux['args']['action'] == 'modifier'
-	// soit le parent a change, soit le groupe racine est modifie
-	and (_request('gma_definir_heritages') OR empty($flux['data']['id_parent'])))
-	{
+	if (
+		isset($flux['args']['table'])
+		and $flux['args']['table']  == $table
+		and $flux['args']['action'] == 'modifier'
+		// soit le parent a change, soit le groupe racine est modifie
+		and (_request('gma_definir_heritages') OR empty($flux['data']['id_parent']))
+	) {
 		$id_groupe = $flux['args']['id_objet'];
 		include_spip('gma_fonctions');
 		// ne mettre à jour les mots que lorsque le parent a change
