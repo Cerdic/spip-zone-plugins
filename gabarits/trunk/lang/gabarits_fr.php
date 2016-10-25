@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_objets' => 'Sur quels objets souhaitez vous utiliser les gabarits ?',
 	'cfg_label_objets' => 'Types d\'objets',
 	'cfg_label_objets_article' => 'les articles',
-	'cfg_label_objets_breve' => 'les br&egrave;ves',
-	'cfg_label_objets_mot' => 'les mots-cl&eacute;s',
+	'cfg_label_objets_breve' => 'les brèves',
+	'cfg_label_objets_mot' => 'les mots-clés',
 	'cfg_label_objets_rubrique' => 'les rubriques',
 	'cfg_titre_page' => 'Configuration du plugin Gabarits',
 	'cree_le' => 'Créé le',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'label_autres_gabarits' => 'Gabarits publics',
 	'label_objet' => 'Objet',
-	'label_previsu_gabarits' => 'Pr&eacute;visualisation',
+	'label_previsu_gabarits' => 'Prévisualisation',
 	'label_select_gabarits' => 'S&eacute;lectionnez un gabarit',
 	'label_statut' => 'Statut',
 	'liste_tous' => 'Tous les gabarits',
@@ -38,13 +38,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_vos_gabarits' => 'Vos gabarits',
 
 	'nombre_gabarits' => '@nb@ gabarits',
-	'numero_gabarit' => 'Gabarit num&eacute;ro',
+	'numero_gabarit' => 'Gabarit numéro',
 
 	'objet_type' => '@type@',
 
 	'par' => 'Par',
 
-	'statut_prive' => 'Priv&eacute;',
+	'statut_prive' => 'Privé',
 	'statut_public' => 'Public',
 	'supprimer_confirmation' => 'Souhaitez vraiment supprimer ce gabarit ?',
 
