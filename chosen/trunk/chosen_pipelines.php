@@ -64,7 +64,7 @@ function chosen_header_prive($texte) {
  */
 function chosen_header_prive_css($texte) {
 
-	$css = find_in_path('lib/chosen/chosen.css');
+	$css = sinon(find_in_path('css/chosen.css'), find_in_path('lib/chosen/chosen.css'));
 	$texte .= "<link rel='stylesheet' type='text/css' media='all' href='".direction_css($css)."' />\n";
 	$css = find_in_path('css/spip.chosen.css');
 	$texte .= "<link rel='stylesheet' type='text/css' media='all' href='".direction_css($css)."' />\n";
@@ -82,7 +82,7 @@ function chosen_insert_head_css($flux) {
 	include_spip('inc/config');
 	$config = lire_config('chosen', array());
 	if (isset($config['active']) and $config['active']=='oui') {
-		$css = find_in_path('lib/chosen/chosen.css');
+		$css = sinon(find_in_path('css/chosen.css'), find_in_path('lib/chosen/chosen.css'));
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />';
 		$css = find_in_path('css/spip.chosen.css');
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />';
