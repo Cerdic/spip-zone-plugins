@@ -1,6 +1,6 @@
 #HTTP_HEADER{Content-type:text/javascript}
 
-[(#INCLURE{lib/leaflet/dist/[(#CONFIG{auto_compress_js}|=={oui}|?{'leaflet','leaflet-src'})].js})]
+[(#INCLURE{lib/leaflet/dist/leaflet-src.js})]
 
 [(#REM) Déprécié avec Leaflet 1.0, mais nécessaire si le site utilise compresseur_embarquer_images_css ]
 [L.Icon.Default.imagePath = '(#CHEMIN{lib/leaflet/dist/images/}|url_absolue)';]
