@@ -72,6 +72,12 @@ Puis elle est optimisée au maximum.
 
 ### Versions 0.6.x
 
+#### Version 0.6.3 (2016-10-25)
+
+Bien tester l'existence des fichiers avant de tester leur taille (notices PHP).
+
+Ce plugin est pour SPIP > 3.0 et donc nécessite PHP > 5.2 normalement, la compatibilité pour vieux PHP (absence de `json_decode()` et `json_encode()`) n'est donc plus nécessaire.
+
 #### Version 0.6.2 (2016-10-23)
 
 Si une copie en jpg d'un png peut être mieux optimisée ne pas tester la taille d'un fichier n'existant pas, l'image d'origine devient la copie jpg.
