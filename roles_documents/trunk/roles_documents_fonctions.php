@@ -1,4 +1,13 @@
 <?php
+/**
+ * Plugin Rôles de documents
+ * (c) 2015
+ * Licence GNU/GPL
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 function document_vu($id_objet, $objet, $id_document) {
 	include_spip('action/editer_liens');
