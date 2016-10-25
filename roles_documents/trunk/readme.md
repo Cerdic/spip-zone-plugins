@@ -13,7 +13,7 @@ Pour ajouter vos rôles aux documents, il faut utiliser le pipeline `declarer_ta
 Par exemple, mettons qu'on ait besoin de 3 rôles supplémentaires pour des documents liés à des livres : `couverture`, `4ème de couverture` et `extrait`.
 Dans un plugin de squelettes, le pipeline pourrait ressembler à ça :
 
-````
+````php
 function skel_declarer_tables_objets_sql($tables){
 
 	// 3 nouveaux roles à utiliser pour un objet 'livre'
