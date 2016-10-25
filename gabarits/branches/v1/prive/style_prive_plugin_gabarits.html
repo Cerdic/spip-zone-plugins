@@ -1,0 +1,28 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* pages exec */
+
+ul.gabarits li.item.court p { display: none; }
+.gabarits p.actions { text-align: right; font-size: 0.9em; margin: 5px 0 0;}
+
+.gabarits_tous #navigation h2 { font-size: 12px; }
+.gabarits_tous #navigation ul { list-style: none; margin: 0; padding: 0; }
+.gabarits_tous #navigation ul li a { display: block; color: #666; font-weight: bold; font-size: 10px; }
+.gabarits_tous #navigation ul li a:hover { color: #000; }
+.gabarits_tous #navigation ul li.creer a { padding: 10px 0 10px 30px;
+	background:transparent url([(#CHEMIN{prive/themes/spip/images/gabarits-24.png}|image_masque{images/creer.gif,mode=normal}|extraire_attribut{src})]) 3px center no-repeat; }
+.gabarits_tous #contenu .liste-elements.gabarits .caption  { background-image: url([(#CHEMIN{prive/themes/spip/images/gabarits-24.png})]); }
+
+/* formulaire gabarits_select */
+
+.formulaire_spip li.fieldset.editer_gabarits { border-bottom: 1px solid [(#GET{foncee})]; }
+.formulaire_spip li.editer_gabarits fieldset { border: 0; }
+.formulaire_spip li.editer_gabarits .gabarits_liste {  }
+.formulaire_spip li.editer_gabarits .gabarits_previsu #texte_previsu { width: 93%; padding: 5px; border: 1px solid #ddd; background: #fff; }
