@@ -50,7 +50,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='date_publication'>[(#DATE_PUBLICATION|affdate)]</td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[projet-#ID_PROJET-#OBJET-#ID_OBJET\]" value="X"><:projet:retirer_lien_projet:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}projet-#ID_PROJET-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projet:retirer_lien_projet:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
@@ -58,7 +58,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<div class='pagination'>(#PAGINATION{prive})</div>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[projet-*-#OBJET-#ID_OBJET\]" value="X"><:projet:retirer_tous_liens_projets:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}projet-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projet:retirer_tous_liens_projets:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_projets>
 <div class="nettoyeur"></div>
