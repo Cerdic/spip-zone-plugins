@@ -1,7 +1,7 @@
 <paquet 
 	prefix="mots_techniques"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mots-techniques-48.png"
