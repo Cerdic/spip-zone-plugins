@@ -26,12 +26,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	L\'onglet « fonds des pages » contient une liste des pages sans URL personnalisée, à titre indicatif.
 	Si une page n\'y figure pas, vous pouvez tout de même lui en attribuer une en saisissant la page manuellement.',
-	'erreur_fond_absent' => 'Fond absent !',
-	'erreur_page_fond_absent' => 'Aucun squelette ne correspond à cette page !',
-	'erreur_page_fond_objet_editorial' => 'Il s\'agit d\'un objet éditorial. Utilisez la méthode habituelle pour éditer leurs URLs.',
 	'erreur_page_mauvais_format' => 'Le nom de la page est incorrect. Il doit s\'agir du nom de fichier d\'un squelette, sans l\'extension .html',
 	'erreur_url_doublon' => 'Cette URL est déjà utilisée',
-	'erreur_page_doublon_url' => 'Une URL existe déjà pour cette page : « @url@ »',
+	'erreur_fond_doublon' => 'Cette page est déjà enregistrée dans la base',
+	'erreur_fond_doublon_url' => 'Cette page est déjà enregistrée dans la base avec l\'URL « @url@ »',
+	'erreur_fond_prive' => 'Il s\'agit d\'une page de l\'espace privé',
+	'erreur_fond_code_http' => 'Cette page correspond à une erreur HTTP',
+	'erreur_fond_technique' => 'Il s\'agit d\'une page technique',
+	'erreur_fond_pseudo_fichier' => 'Il s\'agit de la page d\'un pseudo-fichier',
+	'erreur_fond_absent' => 'Aucun squelette pour cette page !',
+	'erreur_fond_absent_page' => 'Aucun squelette trouvé pour la page « @page@ » !',
+	'erreur_fond_objet_editorial' => 'Il s\'agit d\'une page d\'un objet éditorial',
 
 	// I
 	'info_0_url_page' => 'Aucune URL de page',

@@ -40,9 +40,9 @@ function formulaires_editer_url_page_charger($page = '', $redirect = '') {
 			));
 			$fond        = trouver_fond_page($page);
 			$page_locked = true; // interdire de modifier le champ page
-			if (!$fond ){
-				$message_erreur = _T('urls_pages:erreur_page_fond_absent', array('page' => $page));
-			}
+			/*if (!$fond ){
+				$message_erreur = _T('urls_pages:erreur_fond_absent_page', array('page' => $page));
+			}*/
 			break;
 
 		case 'creer' :
@@ -82,6 +82,7 @@ function formulaires_editer_url_page_verifier($page = '', $redirect = '') {
 	$erreurs = array();
 
 	include_spip('action/editer_url');
+	$verifier_fond_page = charger_fonction('fond_page', 'verifier');
 	$creation = !strlen($page);
 	$page     = trim(_request('page'));
 	$url      = trim(_request('url'));
@@ -92,27 +93,22 @@ function formulaires_editer_url_page_verifier($page = '', $redirect = '') {
 	if (!$page) {
 		$erreurs['page'] = _T('info_obligatoire');
 	}
-	// Format de la page incorrect
-	elseif (!preg_match('/^([-\.\w]+)$/', $page)) {
+	// Création : format de la page incorrect
+	elseif ($creation
+		and !preg_match('/^([-\.\w]+)$/', $page)
+	) {
 		$erreurs['page'] = _T('urls_pages:erreur_page_mauvais_format');
 	}
-	// Page correspondant à objet éditorial
-	elseif ($objets = lister_objets_types()
-		and $objets_split = join('|', $objets)
-		and $regex_objets = "/^($objets_split)([\-=_][0-9a-zA-Z]+)?$/"
-		and preg_match($regex_objets, $page)
-	) {
-		$erreurs['page'] = _T('urls_pages:erreur_page_fond_objet_editorial');
-	}
-	// Création : URL de la page déjà enregistrée
+	// Création : vérifications diverses
 	elseif ($creation
-		and $url_bdd = sql_getfetsel('url', 'spip_urls', array('page = '.sql_quote($page)))
-	) {
-		$erreurs['page'] = _T('urls_pages:erreur_page_doublon_url', array('url' => $url_bdd));
-	}
-	// Squelette de la page absent
-	elseif (!$fond = trouver_fond_page($page)) {
-		$erreurs['page'] = _T('urls_pages:erreur_page_fond_absent');
+		and $erreur_page = $verifier_fond_page(
+			"$page.html",
+			array(
+				'type' => array('objet', 'fichier', 'technique', 'code_http', 'pseudo_fichier', 'doublon', 'fichier')
+			)
+		)
+	){
+		$erreurs['page'] = $erreur_page;
 	}
 
 	// URL
