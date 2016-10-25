@@ -19,7 +19,6 @@
 	<pipeline nom="autoriser" inclure="gabarits_autoriser.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/gabarits.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/gabarits.php" />
-	<pipeline nom="ajouter_boutons" action="ajouter_boutons" inclure="gabarits_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="gabarits_pipelines.php" />
 	<pipeline nom="editer_contenu_objet" inclure="gabarits_pipelines.php" />
 
