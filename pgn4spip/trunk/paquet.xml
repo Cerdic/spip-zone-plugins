@@ -1,7 +1,7 @@
 <paquet
 	prefix="pgn4spip"
 	categorie="divers"
-	version="2.61.9"
+	version="2.7.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="pgn4spip.png"
@@ -15,7 +15,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<credit lien="http://pgn4web.casaschi.net">Paolo Casaschi's pgn4web 2.61</credit>
 
-	    <lib nom="pgn4web" lien="http://test.jack31.org/IMG/zip/pgn4web.zip" />
+	    <lib nom="pgn4web" lien="http://ressources.jack31.org/IMG/zip/pgn4web.zip" />
 	
 	<pipeline nom="pre_propre" action="prepropre" inclure="pgn4spip_fonctions.php" />
 	<pipeline nom="post_propre" action="postpropre" inclure="pgn4spip_postpropre.php" />
