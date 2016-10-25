@@ -1,10 +1,8 @@
 <?php
-/**
- * Plugin Gabarits pour Spip 2.0
- * Licence GPL
- * 
- *
- */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/meta');
 
@@ -47,5 +45,3 @@ function gabarits_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_gabarits');
 	effacer_meta($nom_meta_base_version);
 }
-	
-?>
