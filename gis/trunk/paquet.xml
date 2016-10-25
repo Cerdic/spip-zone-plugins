@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.41.3"
+	version="4.42.0"
 	schema="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -17,6 +17,7 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<credit lien="http://leafletjs.com/">Leaflet</credit>
 	<credit lien="https://github.com/shramov/leaflet-plugins">Leaflet plugins</credit>
+	<credit lien="https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant">Leaflet.GridLayer.GoogleMutant</credit>
 	<credit lien="https://github.com/leaflet-extras/leaflet-providers">Leaflet providers</credit>
 	<credit lien="https://github.com/brunob/leaflet.fullscreen">Leaflet fullscreen</credit>
 	<credit lien="https://github.com/Norkart/Leaflet-MiniMap">Leaflet minimap</credit>

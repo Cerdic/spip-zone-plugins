@@ -2,8 +2,6 @@
 
 [(#INCLURE{lib/leaflet/dist/[(#CONFIG{auto_compress_js}|=={oui}|?{'leaflet','leaflet-src'})].js})]
 
-[L.Icon.Default.imagePath = '(#CHEMIN{lib/leaflet/dist/images}|url_absolue)';]
-
 (function() {
 
 L.gisConfig = {
@@ -43,7 +41,7 @@ L.geocoderConfig = {
 ]
 
 [(#LISTE{google_roadmap,google_satellite,google_terrain}|array_intersect{#GET{layers}}|count|>{0}|oui)
-[(#INCLURE{lib/leaflet/plugins/Google.js})]
+[(#INCLURE{lib/leaflet/plugins/Leaflet.GoogleMutant.js})]
 ]
 
 [(#VAL{bing_aerial}|in_array{#GET{layers}}|oui)

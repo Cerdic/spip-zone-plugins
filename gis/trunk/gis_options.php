@@ -34,15 +34,15 @@ $gis_layers = array (
 	),
 	'google_roadmap' => array(
 		'nom' => 'Google Roadmap',
-		'layer' => 'L.Google("ROADMAP")'
+		'layer' => 'L.gridLayer.googleMutant({type:"roadmap"})'
 	),
 	'google_satellite' => array(
 		'nom' => 'Google Satellite',
-		'layer' => 'L.Google("SATELLITE")'
+		'layer' => 'L.gridLayer.googleMutant({type:"satellite"})'
 	),
 	'google_terrain' => array(
 		'nom' => 'Google Terrain',
-		'layer' => 'L.Google("TERRAIN")'
+		'layer' => 'L.gridLayer.googleMutant({type:"terrain"})'
 	),
 	'bing_aerial' => array(
 		'nom' => 'Bing Aerial',
