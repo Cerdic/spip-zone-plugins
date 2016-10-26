@@ -530,7 +530,7 @@ function inscription3_formulaire_verifier($flux) {
 				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 				$saisies = champs_extras_autorisation(
 					'modifier',
-					$objet,
+					'auteur',
 					$saisies,
 					array_merge(
 						$flux['args'],
