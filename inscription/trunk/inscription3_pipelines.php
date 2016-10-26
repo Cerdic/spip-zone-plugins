@@ -371,7 +371,7 @@ function inscription3_formulaire_verifier($flux) {
 		 * Vérifier le logo
 		 */
 		if (isset($_FILES['logo']) and ($_FILES['logo']['error'] == 0)) {
-			$f =_DIR_LOGOS . $arg . '.tmp';
+			$f =_DIR_LOGOS . rand() . '.tmp';
 			include_spip('inc/documents');
 			if ($erreur = check_upload_error($_FILES['logo']['error'], '', $f)) {
 				$erreurs['logo'] = $erreur;
