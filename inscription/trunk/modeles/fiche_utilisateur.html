@@ -17,7 +17,8 @@
 		[<span class="given-name #EDIT{prenom}" itemprop="givenName">(#PRENOM|et{#GET{conf_i3}|table_valeur{prenom_fiche}|=={on}}|?{#PRENOM})</span>][ <span class="family-name widget #EDIT{nom_famille}" itemprop="familyName">(#NOM_FAMILLE|et{#GET{conf_i3}|table_valeur{nom_famille_fiche}|=={on}}|?{#NOM_FAMILLE})</span>]
 	[(#GET{fullname}|=={ok}|oui)</span>]
 
-	[<div class="#EDIT{bio} chapo bio" itemprop="description">(#BIO)</div>]
+	[(#BIO|et{#ENV{forcer_infos}|=={oui}|ou{#GET{conf_i3}|table_valeur{bio}|=={on}|oui)
+	[<div class="#EDIT{bio} chapo bio" itemprop="description">(#BIO)</div>]]
 
 	[(#REM) Un test pour voir si on a au moins un champs d'adresse]
 	[(#ADRESSE|et{#ENV{forcer_infos}|=={oui}|ou{#GET{conf_i3}|table_valeur{adresse_fiche}|=={on}}}|?{#SET{adresse,ok},' '})
