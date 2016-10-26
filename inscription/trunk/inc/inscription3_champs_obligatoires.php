@@ -41,6 +41,7 @@ function inc_inscription3_champs_obligatoires_dist($id_auteur = null, $form = 'e
 		} else {
 			$fin_suffixe = '';
 		}
+		$resultat = array();
 		preg_match('/^(.*)_obligatoire/i', $clef, $resultat);
 
 		if ((!empty($resultat[0]))

@@ -18,8 +18,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function inscription3_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('inc/config');
 
-	$exceptions_des_champs_auteurs_elargis = pipeline('i3_exceptions_des_champs_auteurs_elargis', array());
-
 	/**
 	 *  A t on une meta d'installation déjà?
 	 */

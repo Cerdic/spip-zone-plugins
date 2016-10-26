@@ -60,7 +60,7 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 		}
 	}
 
-	if ($modele or $texte) {
+	if ($modele) {
 		$options['type'] = 'user';
 		$destinataires = array();
 
@@ -99,6 +99,6 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 }
 
 function email_notification_auteur_pass($id_auteur, $modele, $pass) {
-	$envoyer_mail = charger_fonction('envoyer_mail', 'inc'); // pour nettoyer_titre_email
+	charger_fonction('envoyer_mail', 'inc'); // pour nettoyer_titre_email
 	return recuperer_fond($modele, array('id_auteur' => $id_auteur, 'pass' => $pass));
 }
