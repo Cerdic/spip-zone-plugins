@@ -56,18 +56,30 @@
 
         <B_pagination>
 		<ul class="hal-pagination">
-        [(#GET{page_debut}|>{0}|oui)
+        [(#GET{page_courante}|>{1}|oui)
 			<li class="hal-fast-backward">
 			<a href="[(#SELF|parametre_url{start,0})]">&lt;&lt;</a>
 			</li>
 		]
-	    <BOUCLE_pagination(DATA){enum #GET{page_debut},#GET{page_debut}|plus{10}}{si #VALEUR{numFound}|oui}{si #GET{nb_pages}|>{1}|oui}>
+        [(#GET{page_courante}|>{0}|oui)
+            #SET{start,#GET{page_courante}|moins{1}|mult{#GET{pagination}}}
+			<li class="hal-backward">
+			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&lt;</a>
+			</li>
+		]
+	    <BOUCLE_pagination(DATA){enum #GET{page_debut},#GET{page_debut}|plus{10}}{si #VALEUR{numFound}|oui}{si #GET{nb_pages}|>{0}|oui}>
 		[(#VALEUR|<={#GET{nb_pages}}|oui)
 			#SET{start,#VALEUR|mult{#GET{pagination}}}
 		    <li[(#VALEUR|=={#GET{page_courante}}|oui) class="active"]><a href="[(#SELF|parametre_url{start,#GET{start}})]">[(#VALEUR|plus{1})]</a></li>
 		]
 		</BOUCLE_pagination>
-        [(#GET{page_debut}|plus{10}|<{#GET{nb_pages}}|oui)
+        [(#GET{page_courante}|<{#GET{nb_pages}}|oui)
+            #SET{start,#GET{page_courante}|plus{1}|mult{#GET{pagination}}}
+			<li class="hal-forward">
+			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&gt;</a>
+			</li>
+		]
+        [(#GET{page_courante}|plus{1}|<{#GET{nb_pages}}|oui)
             #SET{start,#GET{nb_pages}|mult{#GET{pagination}}}
 			<li class="hal-fast-forward">
 			<a href="[(#SELF|parametre_url{start,#GET{start}})]">&gt;&gt;</a>
