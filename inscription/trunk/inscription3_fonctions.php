@@ -151,7 +151,7 @@ function critere_reglement_dist($idb, &$boucles, $crit) {
 	}
 }
 
-function envoyer_inscription3($desc, $nom, $mode, $id) {
+function envoyer_inscription3($desc, $nom, $mode) {
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']['nom_site']);
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
 	if ($mode == '6forum') {

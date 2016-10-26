@@ -917,7 +917,7 @@ function inscription3_formulaire_traiter($flux) {
 					if (function_exists('envoyer_inscription3')) {
 						$mode = $config_i3['statut_nouveau'];
 						$f = 'envoyer_inscription3';
-						list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode, $id);
+						list($sujet,$msg,$from,$head) = $f($desc, $nom, $mode);
 					}
 					if ($desc) {
 						if (!$envoyer_mail($mail, $sujet, $msg, $from, $head)) {
