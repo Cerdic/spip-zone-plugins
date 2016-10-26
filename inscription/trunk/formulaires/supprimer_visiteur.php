@@ -67,7 +67,6 @@ function formulaires_supprimer_visiteur_charger_dist() {
 	}
 
 	return $valeurs;
-
 }
 
 /**
@@ -80,7 +79,7 @@ function formulaires_supprimer_visiteur_verifier_dist() {
 		if (sql_getfetsel(
 			'id_auteur',
 			'spip_auteurs',
-			array('cookie_oubli='.sql_quote($p),"statut='0minirezo'")
+			'cookie_oubli='.sql_quote($p). ' AND '.sql_in('statut', array('0minirezo','1comite'))
 		)) {
 			$erreurs['oubli'] =  _T('inscription3:erreur_effacement_auto_impossible');
 		}
@@ -95,24 +94,13 @@ function formulaires_supprimer_visiteur_verifier_dist() {
  * Traitement du formulaire
  */
 function formulaires_supprimer_visiteur_traiter_dist() {
-	if ($p=_request('s')) {
-		if ($id_auteur = sql_getfetsel(
-			'id_auteur',
-			'spip_auteurs',
-			array('cookie_oubli='.sql_quote($p), "statut<>'0minirezo'")
-		)) {
-			$erreurs['oubli'] = _T('inscription3:erreur_effacement_auto_impossible');
-		}
-	} else {
-		$erreurs['inconnu'] = _T('inscription3:erreur_effacement_auto_impossible');
-	}
+	$auteur = sql_fetsel(
+		'id_auteur, statut',
+		'spip_auteurs',
+		'cookie_oubli='.sql_quote(_request('s')." AND statut<>'0minirezo' AND statut<>'1comite'")
+	);
 
-	//supprimer un auteur
-	$row = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.intval($id_auteur));
-
-	if ($row['statut'] !='0minirezo' and $row['statut'] !='1comite') {
-		sql_delete('spip_auteurs', 'id_auteur='.intval($id_auteur));
-	}
+	sql_delete('spip_auteurs', 'id_auteur='.intval($auteur['id_auteur']));
 
 	$message = _T('inscription3:message_compte_efface');
 	return array('message_ok' => $message);
