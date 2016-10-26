@@ -53,7 +53,7 @@ function balise_URL_($p) {
 }
 
 function balise_URL_ARTICLE($p) {
-
+	include_spip('balise/url_');
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($p->type_requete == 'syndic_articles') {
 		$code = champ_sql('url', $p);
