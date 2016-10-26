@@ -272,6 +272,7 @@ function inscription3_formulaire_charger($flux) {
 			}
 			$valeurs[$valeur] = trim($valeurs[$valeur]);
 			if ($valeur == 'naissance') {
+				$date_naissance = array();
 				if (_request('naissance')
 					and preg_match('/([0-9]{4})-([0-9]{2})-([0-9]{2})/', _request('naissance'), $date_naissance)) {
 					$valeurs['naissance_annee'] = $date_naissance[1];
@@ -990,7 +991,9 @@ function inscription3_recuperer_fond($flux) {
 			}
 		}
 		if ($flux['args']['fond']=='formulaires/login') {
-			if (isset($config['affordance_form']) and ($type_affordance = $config['affordance_form']) and ($type_affordance != 'login')) {
+			if (isset($config['affordance_form'])
+				and ($type_affordance = $config['affordance_form'])
+				and ($type_affordance != 'login')) {
 				switch ($type_affordance) {
 					case 'email':
 						$label = _T('inscription3:votre_mail');
@@ -1017,10 +1020,9 @@ function inscription3_recuperer_fond($flux) {
 		 * On ajoute un vérificateur de complexité de mot de passe
 		 */
 		if (
-			isset($config['inscription3/password_complexite']) 
+			isset($config['inscription3/password_complexite'])
 			and $config['inscription3/password_complexite'] == 'on'
-			and in_array($flux['args']['fond'], array('formulaires/mot_de_passe','formulaires/editer_auteur'))) 
-		{
+			and in_array($flux['args']['fond'], array('formulaires/mot_de_passe','formulaires/editer_auteur'))) {
 			$js = recuperer_fond('formulaires/inc-js_pass_verification', $flux['data']['contexte']);
 			$flux['data']['texte'] = preg_replace(',(<\/form>)(.*),Uims', "\\1".$js."\\2", $flux['data']['texte'], 1);
 		}
@@ -1110,15 +1112,34 @@ function inscription3_editer_contenu_objet($flux) {
 		}
 
 		if (!test_espace_prive() and isset($config['logo_fiche_mod']) and $config['logo_fiche_mod'] == 'on') {
-			$flux['data'] = preg_replace(',<(form.*[^>])>,Uims', '<\\1 enctype=\'multipart/form-data\'>', $flux['data'], 1);
+			$flux['data'] = preg_replace(
+				',<(form.*[^>])>,Uims',
+				'<\\1 enctype=\'multipart/form-data\'>',
+				$flux['data'],
+				1
+			);
 			$saisie_logo = recuperer_fond('formulaires/inscription_logo', $flux['args']['contexte']);
-			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1', $flux['data']);
+			$flux['data'] = preg_replace(
+				'%(<!--extra-->)%is',
+				'<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1',
+				$flux['data']
+			);
 		}
 		if (in_array('url_site', $champs_vires) and in_array('nom_site', $champs_vires)) {
-			$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer_liens.*<\/(li|div)>),Uims", '', $flux['data'], 1);
+			$flux['data'] = preg_replace(
+				",(<(li|div) [^>]*class=[\"']editer_liens.*<\/(li|div)>),Uims",
+				'',
+				$flux['data'],
+				1
+			);
 		}
 		if (in_array('pass', $champs_vires) and in_array('login', $champs_vires)) {
-			$flux['data'] = preg_replace(",(<(li|div) [^>]*class=[\"']editer_identification.*<\/(li|div)>),Uims", '', $flux['data'], 1);
+			$flux['data'] = preg_replace(
+				",(<(li|div) [^>]*class=[\"']editer_identification.*<\/(li|div)>),Uims",
+				'',
+				$flux['data'],
+				1
+			);
 		}
 		if (strlen($inserer_saisie)) {
 			$flux['data'] = preg_replace('%(<!-- controles md5 -->)%is', $inserer_saisie."\n".'$1', $flux['data']);
@@ -1131,16 +1152,16 @@ function inscription3_editer_contenu_objet($flux) {
 /**
  * Retourne une expression régulière complexe de capture d'une balise spécifique
  * ayant un attribut à une certaine valeur.
- * 
- * Cette balise (une div par défaut) au milieu d'un code HTML peut contenir 
+ *
+ * Cette balise (une div par défaut) au milieu d'un code HTML peut contenir
  * d'autres balises à l'intérieur.
- * 
+ *
  * @example `inscription3_regexp_capturer_balise('id', 'content')
  * @example `inscription3_regexp_capturer_balise('class', 'editer editer_truc', true)
- * 
+ *
  * @link http://mac-blog.org.ua/regex-for-div-and-it-content/ pour l'inspiration
  * @link http://php.net/manual/fr/regexp.reference.recursive.php#95568
- * 
+ *
  * @note
  *     Les expressions régulières ne sont pas adaptées pour traiter du html…
  *     Mais on tente un miracle.
@@ -1151,12 +1172,12 @@ function inscription3_editer_contenu_objet($flux) {
  *     '#<div\s+class="s"[^>]*>((?:(?:(?!<div[^>]*>|</div>).)+|<div[^>]*>[\s\S]*?</div>)*)</div>#six'
  *     "/<([\w]+)([^>]*?)(([\s]*\/>)|" . "(>((([^<]*?|<\!\-\-.*?\-\->)|(?R))*)<\/\\1[\s]*>))/sm";
  *     ```
- * 
- * @param string $attr   
+ *
+ * @param string $attr
  *     Attribut à chercher (exemple: class)
- * @param string $valeur 
+ * @param string $valeur
  *     Valeur à chercher (exemple: editer editer_truc)
- * @param bool $flou        
+ * @param bool $flou
  *     True si l'attribut peut avoir d'autres éléments avant ou après la valeur cherchée
  * @param string $balise
  *     La balise qu'on recherche
@@ -1165,15 +1186,15 @@ function inscription3_editer_contenu_objet($flux) {
  * @return string Expression régulière
 **/
 function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $balise = 'div', $modificateurs = 'ims') {
-	$regexp = 
+	$regexp =
 		# une balise indiquée avec un attribut ouvrant avec soit " ou ' (info capturée en \1)
-		'#<' . $balise . ' [^>]*' . $attr . '=(["\'])' 
+		'#<' . $balise . ' [^>]*' . $attr . '=(["\'])'
 		# la valeur cherchée, avec ou sans flou autour
-		. ($flou ? '(?:(?!\1).)*' . $valeur . '(?:(?!\1).)*': $valeur) 
+		. ($flou ? '(?:(?!\1).)*' . $valeur . '(?:(?!\1).)*': $valeur)
 		# la fin de guillement de l'attribut trouvé
 		. '\1'
 		# juste à la fin de la div ouvrante trouvée
-		. '[^>]*>' 
+		. '[^>]*>'
 		# autant de couples de balises (dont autofermantes) et commentaires qu'on veut
 			// des balises imbriquées ou non
 			. '(?<balises>('
@@ -1182,14 +1203,14 @@ function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $bal
 					// une balise qui s'ouvre
 					. '<(?<tag>[\w]+)([^>]*?)'
 					// et soit
-					. '(' 
+					. '('
 						// 'une balise autofermante'
 						. '([\s]*\/>)'
 						// 'une fermeture de balise et soit
-						. '|(>((' 
+						. '|(>(('
 							. '('
 								// pas de balise ouvrante
-								. '[^<]*?' 
+								. '[^<]*?'
 								// ou commentaire html
 								. '|<\!\-\-.*?\-\->'
 								// ou script html
@@ -1249,7 +1270,11 @@ function inscription3_notifications_destinataires($flux) {
 			 */
 			if (is_array(lire_config('inscription3/admin_notifications'))) {
 				$id_admins = lire_config('inscription3/admin_notifications');
-				$admins = sql_allfetsel('email', 'spip_auteurs', 'statut="0minirezo" and ' . sql_in('id_auteur', $id_admins));
+				$admins = sql_allfetsel(
+					'email',
+					'spip_auteurs',
+					'statut="0minirezo" and ' . sql_in('id_auteur', $id_admins)
+				);
 			} else {
 				$admins = sql_allfetsel('email', 'spip_auteurs', 'statut="0minirezo" and webmestre="oui"');
 			}
