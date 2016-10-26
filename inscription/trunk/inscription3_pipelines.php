@@ -670,7 +670,7 @@ function inscription3_formulaire_traiter($flux) {
 				$sources = formulaire_editer_logo_get_sources();
 				foreach ($sources as $etat => $file) {
 					if ($file and $file['error'] == 0) {
-						logo_modifier('auteur', $user['id_auteur'], $etat, $file);
+						logo_modifier('auteur', $id_auteur, $etat, $file);
 						set_request('logo_up', ' ');
 					}
 				}
