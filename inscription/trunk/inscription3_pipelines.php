@@ -962,7 +962,7 @@ function inscription3_recuperer_fond($flux) {
 		if ($flux['args']['fond']=='formulaires/inscription') {
 			$insc = recuperer_fond('formulaires/inc-inscription-inscription3', $flux['data']['contexte']);
 			$flux['data']['texte'] = preg_replace(
-				",(<(li|div) [^>]*class=[\"']editer saisie_mail_inscription.*<\/(li|div)>),Uims",
+				"/(<(li|div) [^>]*class=[\"']editer saisie_mail_inscription.*<\/(li|div)>)/Uims",
 				"\\1". $insc,
 				$flux['data']['texte'],
 				1
@@ -971,7 +971,7 @@ function inscription3_recuperer_fond($flux) {
 				switch ($texte_inscription) {
 					case 'aucun':
 						$flux['data']['texte'] = preg_replace(
-							",<p [^>]*class=[\"']explication.*<\/p>,Uims",
+							"/<p [^>]*class=[\"']explication.*<\/p>/Uims",
 							'',
 							$flux['data']['texte'],
 							1
@@ -980,7 +980,7 @@ function inscription3_recuperer_fond($flux) {
 					case 'libre':
 						$texte = PtoBR(propre($config['inscription_texte_libre']));
 						$flux['data']['texte'] = preg_replace(
-							",(<p class=[\"']explication mode[\"']>)(.*)(<\/p>),Uims",
+							"/(<p class=[\"']explication mode[\"']>)(.*)(<\/p>)/Uims",
 							"\\1".$texte."\\3",
 							$flux['data']['texte'],
 							1
@@ -1007,7 +1007,7 @@ function inscription3_recuperer_fond($flux) {
 				}
 				if ($label) {
 					$flux['data']['texte'] = preg_replace(
-						',(<label.*for="var_login">)(.*)(<\/label>),Uims',
+						'/(<label.*for="var_login">)(.*)(<\/label>)/Uims',
 						"\\1".$label."\\3",
 						$flux['data']['texte'],
 						1
@@ -1023,7 +1023,7 @@ function inscription3_recuperer_fond($flux) {
 			and $config['inscription3/password_complexite'] == 'on'
 			and in_array($flux['args']['fond'], array('formulaires/mot_de_passe','formulaires/editer_auteur'))) {
 			$js = recuperer_fond('formulaires/inc-js_pass_verification', $flux['data']['contexte']);
-			$flux['data']['texte'] = preg_replace(',(<\/form>)(.*),Uims', "\\1".$js."\\2", $flux['data']['texte'], 1);
+			$flux['data']['texte'] = preg_replace('/(<\/form>)(.*)/Uims', "\\1".$js."\\2", $flux['data']['texte'], 1);
 		}
 	}
 	return $flux;
@@ -1052,27 +1052,27 @@ function inscription3_editer_contenu_objet($flux) {
 			if (isset($config[$champ.'_fiche_mod']) and $config[$champ.'_fiche_mod'] != 'on') {
 				if ($champ == 'login') {
 					$flux['data'] = preg_replace(
-						",(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>),Uims",
+						"/(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>)/Uims",
 						'',
 						$flux['data'],
 						1
 					);
 				} elseif ($champ == 'pass') {
 					$flux['data'] = preg_replace(
-						",(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>),Uims",
+						"/(<(li|div) [^>]*class=[\"']editer editer_new_($champ).*<\/(li|div)>)/Uims",
 						'',
 						$flux['data'],
 						1
 					);
 					$flux['data'] = preg_replace(
-						",(<(li|div) [^>]*class=[\"']editer editer_new_($champ)2.*<\/(li|div)>),Uims",
+						"/(<(li|div) [^>]*class=[\"']editer editer_new_($champ)2.*<\/(li|div)>)/Uims",
 						'',
 						$flux['data'],
 						1
 					);
 				} else {
 					$flux['data'] = preg_replace(
-						",(<(li|div) [^>]*class=[\"']editer editer_($champ).*<\/(li|div)>),Uims",
+						"/(<(li|div) [^>]*class=[\"']editer editer_($champ).*<\/(li|div)>)/Uims",
 						'',
 						$flux['data'],
 						1
@@ -1112,21 +1112,21 @@ function inscription3_editer_contenu_objet($flux) {
 
 		if (!test_espace_prive() and isset($config['logo_fiche_mod']) and $config['logo_fiche_mod'] == 'on') {
 			$flux['data'] = preg_replace(
-				',<(form.*[^>])>,Uims',
+				'/<(form.*[^>])>/Uims',
 				'<\\1 enctype=\'multipart/form-data\'>',
 				$flux['data'],
 				1
 			);
 			$saisie_logo = recuperer_fond('formulaires/inscription_logo', $flux['args']['contexte']);
 			$flux['data'] = preg_replace(
-				'%(<!--extra-->)%is',
+				'/(<!--extra-->)/is',
 				'<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1',
 				$flux['data']
 			);
 		}
 		if (in_array('url_site', $champs_vires) and in_array('nom_site', $champs_vires)) {
 			$flux['data'] = preg_replace(
-				",(<(li|div) [^>]*class=[\"']editer_liens.*<\/(li|div)>),Uims",
+				"/(<(li|div) [^>]*class=[\"']editer_liens.*<\/(li|div)>)/Uims",
 				'',
 				$flux['data'],
 				1
@@ -1134,14 +1134,14 @@ function inscription3_editer_contenu_objet($flux) {
 		}
 		if (in_array('pass', $champs_vires) and in_array('login', $champs_vires)) {
 			$flux['data'] = preg_replace(
-				",(<(li|div) [^>]*class=[\"']editer_identification.*<\/(li|div)>),Uims",
+				"/(<(li|div) [^>]*class=[\"']editer_identification.*<\/(li|div)>)/Uims",
 				'',
 				$flux['data'],
 				1
 			);
 		}
 		if (strlen($inserer_saisie)) {
-			$flux['data'] = preg_replace('%(<!-- controles md5 -->)%is', $inserer_saisie."\n".'$1', $flux['data']);
+			$flux['data'] = preg_replace('/(<!-- controles md5 -->)/is', $inserer_saisie."\n".'$1', $flux['data']);
 		}
 	}
 	return $flux;
@@ -1187,7 +1187,7 @@ function inscription3_editer_contenu_objet($flux) {
 function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $balise = 'div', $modificateurs = 'ims') {
 	$regexp =
 		# une balise indiquée avec un attribut ouvrant avec soit " ou ' (info capturée en \1)
-		'#<' . $balise . ' [^>]*' . $attr . '=(["\'])'
+		'/<' . $balise . ' [^>]*' . $attr . '=(["\'])'
 		# la valeur cherchée, avec ou sans flou autour
 		. ($flou ? '(?:(?!\1).)*' . $valeur . '(?:(?!\1).)*': $valeur)
 		# la fin de guillement de l'attribut trouvé
@@ -1229,7 +1229,7 @@ function inscription3_regexp_capturer_balise($attr, $valeur, $flou = false, $bal
 		# la fin de notre balise
 		. '</' . $balise . '>'
 		# les modificateurs
-		. '#' . $modificateurs;
+		. '/' . $modificateurs;
 
 	return $regexp;
 }
