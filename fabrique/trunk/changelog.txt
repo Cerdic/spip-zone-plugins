@@ -1,6 +1,16 @@
 Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
+
+
+
+2.3.2 le 26 10 2016
+-------------------
+
+* Mise à jour des bornes des plugins nécessaires à la Fabrique
+* mise à jour des bornes des plugins nécessaires au plugin généré par la Fabrique
+* Activer le menu développement à l'installation de la Fabrique, pour l'auteur en cours
+
 2.3.1 le 24 10 2016
 -------------------
 
