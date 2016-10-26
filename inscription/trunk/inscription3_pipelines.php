@@ -788,7 +788,6 @@ function inscription3_formulaire_traiter($flux) {
 				$val['alea_actuel']  = creer_uniqid();
 				$val['alea_futur'] = creer_uniqid();
 				$val['pass'] = _nano_sha256($val['alea_actuel'].$new_pass);
-				$val['htpass'] = $htpass;
 				$val['low_sec'] = '';
 			}
 			$val['statut'] = (strlen($flux['args']['args'][0]) > 1) ?
