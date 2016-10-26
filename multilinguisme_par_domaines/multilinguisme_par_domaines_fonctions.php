@@ -27,12 +27,14 @@ function multilinguisme_par_domaines_trouver_url_lang($lang) {
 function balise_URL_($p) {
 	include_spip('balise/url_');
 	$nom = $p->nom_champ;
+
 	if ($nom === 'URL_') {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
 		erreur_squelette($msg, $p);
 		$p->interdire_scripts = false;
 		return $p;
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
+
 		return $f($p);
 	} else {
 		$nom = strtolower($nom);
@@ -43,9 +45,28 @@ function balise_URL_($p) {
 			$p->code = "vider_url($code)";
 		}
 		if (substr($nom, 4) == "rubrique" || substr($nom, 4) == "article")
-			$p->code = '(($GLOBALS[\'lang\'] != $Pile[$P][\'lang\']) ? multilinguisme_par_domaines_trouver_url_lang($Pile[$SP][\'lang\']).'.$p->code.' : '.$p->code.')';
+			$p->code = '(($GLOBALS[\'lang\'] != $Pile[$SP][\'lang\']) ? multilinguisme_par_domaines_trouver_url_lang($Pile[$SP][\'lang\']).'.$p->code.' : '.$p->code.')';
 		$p->interdire_scripts = false;
 
 		return $p;
 	}
+}
+
+function balise_URL_ARTICLE($p) {
+
+	// Cas particulier des boucles (SYNDIC_ARTICLES)
+	if ($p->type_requete == 'syndic_articles') {
+		$code = champ_sql('url', $p);
+	} else {
+		$code = generer_generer_url('article', $p);
+	}
+
+	$p->code = $code;
+	if (!$p->etoile) {
+		$p->code = "vider_url($code)";
+	}
+	$p->code = '(($GLOBALS[\'lang\'] != $Pile[$SP][\'lang\']) ? multilinguisme_par_domaines_trouver_url_lang($Pile[$SP][\'lang\']).'.$p->code.' : '.$p->code.')';
+	$p->interdire_scripts = false;
+
+	return $p;
 }

@@ -11,9 +11,9 @@
 				<legend><:multilinguisme_par_domaines:configuration_domaines:></legend>
 				<p class="explication"><:multilinguisme_par_domaines:configuration_domaines_explication:></p>
 				<ul>
-					<BOUCLE_secteurs(RUBRIQUES){id_parent=0}>
+					<BOUCLE_secteurs(RUBRIQUES){racine}>
 						[(#SAISIE{textarea, domaines_#LANG,
-							label=[(#LANG|traduire_nom_langue)]})]
+							label=[(#LANG|traduire_nom_langue)]}|unique)]
 					</BOUCLE_secteurs>
 				</ul>
 			</fieldset>
