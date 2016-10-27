@@ -104,7 +104,7 @@ function formulaires_editer_url_page_verifier($page = '', $redirect = '') {
 		and $erreur_page = $verifier_fond_page(
 			"$page.html",
 			array(
-				'type' => array('objet', 'fichier', 'technique', 'code_http', 'pseudo_fichier', 'doublon', 'fichier')
+				'type' => array('objet', 'fichier', 'technique', 'code_http', 'pseudo_fichier', 'doublon')
 			)
 		)
 	){

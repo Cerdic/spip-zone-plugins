@@ -4,12 +4,10 @@
 #SET{claire,##ENV{couleur_claire,c5e41c}}
 #SET{foncee,##ENV{couleur_foncee,9dba00}}
 
+/* liste des pages et des fonds de pages */
 .liste-objets.urls_pages .liste .erreur {color: red; vertical-align: middle;}
-/*.liste-objets.fonds_pages tbody .dossier {border-right: 1px solid #dfdfdf}*/
-.liste-objets.urls_pages .page,
-.liste-objets.fonds_pages .page {font-weight: bold}
-/*.liste-objets.urls_pages tbody .fond,
-.liste-objets.fonds_pages tbody .dossier {font-family: mono}*/
+.liste-objets.urls_pages .page {font-weight: bold}
+.liste-objets.fonds_pages .dossier {padding-top: 1em; padding-bottom: 1em; text-align: center; background-color: [#(#GET{claire}|couleur_eclaircir{0.8})]}
 .pseudo.bouton_action_post .submit {display: inline-block}
 
 /* formulaire d'édition */

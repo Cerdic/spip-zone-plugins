@@ -14,16 +14,20 @@
 [<caption><strong class="caption">(#ENV*{titre,<:urls_pages:info_fonds_pages:>})</strong></caption>]
 <thead>
 	<tr class='first_row'>
-		<th class="dossier secondaire"><:urls_pages:champ_dossier_tri:></th>
 		<th class='page principale' scope='col'><:urls_pages:champ_page_tri:></th>
 		<th class="action"><:urls_pages:champ_action:></th>
 	</tr>
 </thead>
 <tbody>
+	#SET{compteur,0}
 	<BOUCLE_dossiers_pages(DATA){source fonds_pages, exclure_pages_bdd, groupby_dossier}{par cle}>
+	#SET{compteur,#GET{compteur}|plus{1}}
+	<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
+		<th class="dossier" colspan="2">#CLE</th>
+	</tr>
 	<BOUCLE_liste_pages(DATA){source table, #VALEUR}{par cle}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-		[<td rowspan="#TOTAL_BOUCLE" class="dossier secondaire">(#_dossiers_pages:CLE|unique)</td>]
+	#SET{compteur,#GET{compteur}|plus{1}}
+	<tr class="[(#GET{compteur}|alterner{row_odd,row_even})][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)close]">
 		<td class='page principale'>#CLE</td>
 		<td class='action'>
 			[(#VAL{choisir}|in_any{#GET{boutons}}|oui)

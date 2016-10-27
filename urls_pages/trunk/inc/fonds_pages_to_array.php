@@ -21,9 +21,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Les pages sont les squelette qui ne correspondent à aucun objet éditorial.
  * On cherche dans les dossiers squelettes utilisateur et dist, et ceux des plugins de squelettes activés.
  *
- * On ne retourne volontairement pas certains squelettes, cf. valider_fond_page()
+ * On ne retourne volontairement pas certains squelettes techniques, comme les 404, les inc-machin.html, etc.
  *
- * @uses valider_fond_page()
+ * @uses verifier_fond_page_dist()
  *
  * @param string $exclure_pages_bdd
  *    Pour ne pas retourner les pages ayant des URLs enregistrées en base

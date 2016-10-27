@@ -58,8 +58,8 @@ function verifier_fond_page_dist($chemin, $options = array()) {
 		'technique',
 		'pseudo_fichier',
 		'prive',
-		isset($options['doublon']) ? 'doublon' : '',
-		isset($options['fichier']) ? 'fichier' : '',
+		(isset($options['doublon']) and $options['doublon'] === true) ? 'doublon' : '',
+		(isset($options['fichier']) and $options['fichier'] === true) ? 'fichier' : '',
 	);
 	$verifier = array_filter($verifier);
 	if (isset($options['type'])

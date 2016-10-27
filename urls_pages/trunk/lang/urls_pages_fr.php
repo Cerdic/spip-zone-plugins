@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_statut' => 'Statut',
 	'champ_url_label' => 'URL',
 	'champ_url_explication' => 'N\'indiquez que la partie après la racine du site : @racine@',
-	'champ_dossier_tri' => 'Dossier',
+	'champ_dossier' => 'Dossier',
 	'champ_action' => 'Action',
 
 	// E
