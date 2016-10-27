@@ -39,9 +39,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 		'table_objet_surnoms' => [(#OBJETS_SURNOMS|ecrire_tableau)], // table_objet('#TYPE') => '#LOBJET' ]
 		'field'=> array(
 			[(#VAL{['(#ID_OBJET)']}   |espacer)] => '#CLE_PRIMAIRE_SQL',[
-			[(#VAL{"'id_rubrique'"}   |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_rubrique})][
-			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})][
-			[(#GET{_id_parent}|_q     |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#GET{_id_parent}|oui)]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
+			[(#GET{_id_parent}|_q     |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#GET{_id_parent}|oui)][
+			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
 			[(#VAL{['(#CHAMP)']}      |espacer)] => '[(#SQL|replace{"'",'"'})]',</BOUCLE_def_champs>[
 			[(#VAL{['(#CHAMP_DATE)']} |espacer)] => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',(#CHAMP_DATE|oui)][
 			[(#VAL{"'statut'"}        |espacer)] => 'varchar(20)  DEFAULT "0" NOT NULL',(#STATUT|oui)][
