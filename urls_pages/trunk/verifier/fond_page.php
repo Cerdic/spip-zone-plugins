@@ -168,9 +168,9 @@ function verifier_fond_page_dist($chemin, $options = array()) {
 	}
 	// Squelette inexistant
 	elseif (in_array('fichier', $verifier)
-		and trouver_fond_page($fond) == false
+		and trouver_fond_page($type_page) == false
 	) {
-		$erreur = _T('urls_pages:erreur_page_fond_absent');
+		$erreur = _T('urls_pages:erreur_fond_absent');
 	}
 
 	return $erreur;

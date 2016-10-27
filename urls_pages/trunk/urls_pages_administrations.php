@@ -53,9 +53,6 @@ function urls_pages_vider_tables($nom_meta_base_version) {
 	// Suppression meta
 	effacer_meta($nom_meta_base_version);
 
-	// Invalider le cache pour éviter une erreur undefined function url_page_personnalisee
-	include_spip('inc/invalideur');
-	suivre_invalideur(1);
 }
 
 

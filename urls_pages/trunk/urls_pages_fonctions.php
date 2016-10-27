@@ -54,6 +54,8 @@ function url_page_personnalisee($url) {
  *
  * @uses trouver_fond()
  *
+ * @param string $page
+ *     Nom de la page (sans chemin, ni extension .html)
  * @return string | boolean
  *     Chemin du squelette s'il existe
  *     False sinon

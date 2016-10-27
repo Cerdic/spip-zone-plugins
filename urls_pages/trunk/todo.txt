@@ -1,4 +1,0 @@
-Plugin URLs Pages Personnalisées : choses à faire
-
-- Lorsqu'on désactive le plugin, on se retrouve avec un message d'erreur lié à l'absence de la fonction url_perso.
-  On est obligé de faire un ?var_mode=recalcul
