@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#EDITABLE|oui)
+	[(#ENV{editable})
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="id_offre" value="#ENV{id_offre}" />
@@ -78,8 +78,7 @@
 				]
 	 
 	 			[(#CONFIG{emplois/offres/date_fin}|=={oui}|oui)
-					[(#SAISIE{date, date_fin,
-						label=<:offre:champ_date_fin_label:>})]
+					[(#SAISIE{date, date_fin, label=<:offre:champ_date_fin_label:>})]
 				]
 			</div>
  		</fieldset>
