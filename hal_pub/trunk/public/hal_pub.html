@@ -17,8 +17,8 @@
 [(#REM)<!-- etape 1: construction de la requete vers l'API HAL -->]
 [(#ENV{q}|oui)  	 	#SET{url_depot,#GET{url_depot}|concat{?q=#ENV{q}|urlencode} ]
 [(#ENV{q}|non)  	 	#SET{url_depot,#GET{url_depot}|concat{?q=*} ]
-[(#ENV{pub}|oui)  		#SET{url_depot,#GET{url_depot}|concat{&fq=docType_s:#ENV{pub}} ]
-[(#ENV{annee}|oui)  	#SET{url_depot,#GET{url_depot}|concat{&fq=producedDateY_i:#ENV{annee}} ]
+[(#ENV{pub}|oui)  		#SET{url_depot,#GET{url_depot}|concat{&fq=docType_s:#ENV{pub}|urlencode} ]
+[(#ENV{annee}|oui)  	#SET{url_depot,#GET{url_depot}|concat{&fq=producedDateY_i:#ENV{annee}|urlencode} ]
 
 [(#SET{start,#ENV{start}|sinon{0}|intval})]
 [(#SET{url_depot,#GET{url_depot}|concat{&start=#GET{start}&rows=#GET{pagination}}})]
