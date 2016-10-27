@@ -29,11 +29,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Pour ne pas retourner les pages ayant des URLs enregistrées en base
  * @param string $groupby_dossier
  *    pour ranger les pages par dossier
+ * @param string $filtrer_prioritaires
+ *    Pour ne pas renvoyer les squelettes non prioritaires,
+ *    Par exemple quand le même squelette est présent dans squelettes/ et squelettes-dist/,
+ *    On ne renvoie que celui contenu dans squelettes/ car il est prioritaire.
  * @return array
  *     [page => chemin du squelette]
  *     ou avec l'option $groupby_dossier : [dossier][page => chemin du quelette]
  */
-function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier = '') {
+function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier = '', $filtrer_prioritaires = '') {
 
 	// ====================================================
 	// 1) Répertorier les dossiers contenant les squelettes
@@ -133,17 +137,27 @@ function inc_fonds_pages_to_array_dist($exclure_pages_bdd = '', $groupby_dossier
 			if ($z == 'z'
 				and substr($page, 0, strlen('page-')) == 'page-'
 			) {
-				$nom_page = substr($page, strlen('page-'));
+				$type_page = substr($page, strlen('page-'));
 			} else {
-				$nom_page = $page;
+				$type_page = $page;
 			}
-			$is_fond_page = (!strlen($verifier_fond_page($chemin, array('doublon' => $exclure_pages_bdd))));
+			// Si nécessaire, filtrer les squelettes non prioritaires
+			if ($filtrer_prioritaires
+				and trouver_fond_page($type_page) !== $chemin
+			) {
+				$is_fond_page = false;
+			}
+			// Vérifier que le squelette correspond à une page
+			else {
+				$is_fond_page = (!strlen($verifier_fond_page($chemin, array('doublon' => $exclure_pages_bdd))));
+			}
+			// Si c'est bon, on l'ajoute au tableau
 			if ($is_fond_page) {
 				// On organise le tableau différemment en fonction de $groupby_dossier
 				if (!$groupby_dossier){
-					$pages[$nom_page] = $chemin;
+					$pages[$type_page] = $chemin;
 				} else {
-					$pages[$dossier][$nom_page] = $chemin;
+					$pages[$dossier][$type_page] = $chemin;
 				}
 			}
 		}

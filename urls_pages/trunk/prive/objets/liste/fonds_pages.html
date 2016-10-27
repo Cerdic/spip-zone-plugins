@@ -20,7 +20,7 @@
 </thead>
 <tbody>
 	#SET{compteur,0}
-	<BOUCLE_dossiers_pages(DATA){source fonds_pages, exclure_pages_bdd, groupby_dossier}{par cle}>
+	<BOUCLE_dossiers_pages(DATA){source fonds_pages, exclure_pages_bdd, groupby_dossier, filtrer_prioritaires}{par cle}>
 	#SET{compteur,#GET{compteur}|plus{1}}
 	<tr class="[(#GET{compteur}|alterner{row_odd,row_even})]">
 		<th class="dossier" colspan="2">#CLE</th>
