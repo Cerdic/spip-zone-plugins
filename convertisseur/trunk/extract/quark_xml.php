@@ -78,6 +78,7 @@ function convertir_quark_xml($c) {
 	foreach($sequences as $s){
 		// est-on dans une illustration ?
 		if(extraire_balise($s , 'PICTURE')){
+			$images = array();
 			// on cherche dans plusieurs box des images des legendes et des crédits de meme nom
 			// <ID NAME="USA_Img_2" UID="2817"/>
 			foreach(extraire_balises($s, "BOX") as $box_content){
@@ -115,18 +116,18 @@ function convertir_quark_xml($c) {
 				}
 				
 				if($src)
-					$item["images"][$id_article][$numero_balise]["source"] = $src ;
+					$images[$id_article][$numero_balise]["source"] = $src ;
 				if($type_balise == "Legende")
-					$item["images"][$id_article][$numero_balise]["legende"] = $txt ;
+					$images[$id_article][$numero_balise]["legende"] = $txt ;
 				if($type_balise == "Credit")
-					$item["images"][$id_article][$numero_balise]["credit"] = $txt ;
+					$images[$id_article][$numero_balise]["credit"] = $txt ;
 			}
 			
 			//var_dump($item["images"]);
 			
-			foreach($item["images"] as $art)
+			foreach($images as $art)
 				foreach($art as $image)
-					$item["texte"] .= "//// \n IMAGE \nSource : " . $image['source'] . " \n Légende : " . $image['legende'] . "\n Crédit : " . $image['credit'] . " \n//// \n\n" ;
+					$item["images"] .= "\nSource : " . $image['source'] . " \n Légende : " . $image['legende'] . "\n Crédit : " . $image['credit'] . "\n\n" ;
 
 			//$item["texte"] .= "//// IMAGE $src // \n <img src='$src' /> \n $legende\n $credit \n\n" ;
 
