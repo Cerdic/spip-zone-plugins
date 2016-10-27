@@ -280,3 +280,22 @@ function agenda_revisions_chercher_label($flux) {
 
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline accueil_encours (SPIP)
+ * 
+ * Afficher les événements en attente de validation sur la page d'acceuil de l'espace privé
+ * 
+ * @param array $flux Le contexte d'environnement du pipeline
+ * @return array $flux Le contexte d'environnement modifié
+ */
+function agenda_accueil_encours($flux){
+	$flux .= recuperer_fond('prive/objets/liste/evenements',
+		array(
+			'statut' => array('prop'),
+			'nb' => 5
+		),
+		array('ajax' => true)
+	);
+	return $flux;
+}
