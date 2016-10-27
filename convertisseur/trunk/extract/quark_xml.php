@@ -73,42 +73,64 @@ function convertir_quark_xml($c) {
 
 
 	// L'article et son illustration sont dans des <spread>
+	// Il peut y avoir plusieurs illustrations dans un même spread
 	$sequences = extraire_balises($u, "SPREAD") ;
 	foreach($sequences as $s){
 		// est-on dans une illustration ?
 		if(extraire_balise($s , 'PICTURE')){
-			$image = extraire_balise($s, "CONTENT");
-			//var_dump($image);
-			$src = textebrut($image) ;
-			$src = array_pop(explode(":", $src));
-
-			$paragraphes = extraire_balises($s, "PARAGRAPH") ;
-		
-			foreach($paragraphes as $p){
-							
-				$paragraphe = extraire_balise($p, "PARAGRAPH");
-				$type = extraire_attribut($paragraphe, "PARASTYLE");
-				$texte = textebrut($paragraphe);
-				$tech["styles"][$type] = 1 ;
+			// on cherche dans plusieurs box des images des legendes et des crédits de meme nom
+			// <ID NAME="USA_Img_2" UID="2817"/>
+			foreach(extraire_balises($s, "BOX") as $box_content){
+				$id = $src = $txt = "" ;
+				$id = extraire_attribut(extraire_balise($box_content, "ID"),"NAME");
 				
-				// Légende
-				if(preg_match("/Légende-Photo/", $type)){
-					$legende = $texte ;
-					continue ;
+				$details = explode("_", $id);
+				
+				$id_article = $details[0];
+				$type_balise = $details[1];
+				$numero_balise = $details[2];
+				
+				$image = extraire_balise($box_content, "CONTENT");
+				//var_dump($image);
+				$src = textebrut($image) ;
+				$src = array_pop(explode(":", $src));
+				
+				$paragraphes = extraire_balises($box_content, "PARAGRAPH") ;
+				
+				foreach($paragraphes as $p){
+					
+					$paragraphe = extraire_balise($p, "PARAGRAPH");
+					$type = extraire_attribut($paragraphe, "PARASTYLE");
+					
+					// nettoyer un peu
+					$texte = textebrut(nettoyer_xml_quark($paragraphe));
+					
+					$tech["styles"][$type] = 1 ;
+					
+					// Légende
+					if(preg_match("/Légende|crédit/ui", $type)){
+						$txt .= $texte ;
+						continue ;
+					}
 				}
-
-				// Crédit
-				if(preg_match("/Crédit-photo/", $type)){
-					$credit = $texte ;
-					continue ;
-				}
+				
+				if($src)
+					$item["images"][$id_article][$numero_balise]["source"] = $src ;
+				if($type_balise == "Legende")
+					$item["images"][$id_article][$numero_balise]["legende"] = $txt ;
+				if($type_balise == "Credit")
+					$item["images"][$id_article][$numero_balise]["credit"] = $txt ;
 			}
 			
-			$item["images"][] = array('src' => $src, 'legende' => $legende, 'credits' => $credit) ;
-							
-			$item["texte"] .= "// IMAGE $src // \n <img src='$src' /> \n $legende\n $credit \n\n" ;
+			//var_dump($item["images"]);
+			
+			foreach($item["images"] as $art)
+				foreach($art as $image)
+					$item["texte"] .= "//// \n IMAGE \nSource : " . $image['source'] . " \n Légende : " . $image['legende'] . "\n Crédit : " . $image['credit'] . " \n//// \n\n" ;
 
+			//$item["texte"] .= "//// IMAGE $src // \n <img src='$src' /> \n $legende\n $credit \n\n" ;
 
+			
 		}else{
 			// On est dans du texte	
 			// Parcourir les paragraphes en séparant les éléments trouvés selon leur feuille de style.
@@ -298,19 +320,18 @@ function nettoyer_xml_quark($xml){
 		
 	// entites inventées
 	// espaces fines ou insécables
-	$texte = str_replace("&amp;flexSpace;", "~", $texte);
-	$texte = str_replace("&amp;sixPerEmSpace;", "~", $texte);
-	$texte = str_replace("&amp;punctSpace;", "~", $texte);
-	$texte = str_replace("&amp;thinsp;", "~", $texte);
-	$texte = str_replace("&amp;nbsp;", "~", $texte);
+	$texte = preg_replace(",&(amp;)?flexSpace;,", "~", $texte);
+	$texte = preg_replace(",&(amp;)?sixPerEmSpace;,", "~", $texte);
+	$texte = preg_replace(",&(amp;)?punctSpace;,", "~", $texte);
+	$texte = preg_replace(",&(amp;)?thinsp;,", "~", $texte);
+	$texte = preg_replace(",&(amp;)?nbsp;,", "~", $texte);
 	$texte = str_replace("&nbsp;", "~", $texte);
 	
 	// cesures
-	$texte = str_replace("&amp;discHyphen;", "", $texte);
+	$texte = preg_replace(",&(amp;)?discHyphen;,", "", $texte);
 	// autre
-	$texte = str_replace("&amp;ndash;", "—", $texte);
-	$texte = str_replace("&amp;softReturn;", " ", $texte); // ou bien par "" ? commence-&softReturn;t-on
-	
+	$texte = preg_replace(",&(amp;)?ndash;,", "—", $texte);
+	$texte = preg_replace(",&(amp;)?softReturn;,", " ", $texte); // ou bien par "" ? commence-&softReturn;t-on
 
 	// espaces en gras.
 	$texte = str_replace(" }}","}} ",$texte);
