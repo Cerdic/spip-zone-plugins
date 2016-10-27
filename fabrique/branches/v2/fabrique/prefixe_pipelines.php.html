@@ -197,7 +197,7 @@ function [(#PREFIXE)]_boite_infos($flux) {[(#REM)
 	if (isset($flux['args']['type']) and isset($flux['args']['id']) and $id = intval($flux['args']['id'])) {
 		$texte = "";
 <BOUCLE_boite_infos(DATA){source tableau,(#OBJETS|objets_options_presentes{parent})}>[(#REM)
-]		if ($flux['args']['type'] == '#VALEUR{parent/type}' and $nb = sql_countsel('#VALEUR{table}', array([(#STATUT|?{"statut='publie'"}), ]"#VALEUR{parent/id_objet}=" . $id))) {
+]		if ($flux['args']['type'] == '#VALEUR{parent/type}' and $nb = sql_countsel('#VALEUR{table}', array(["(#STATUT|?{statut='publie'})", ]"#VALEUR{parent/id_objet}=" . $id))) {
 			$texte .= "<div>" . singulier_ou_pluriel($nb, "#TYPE:info_1_#TYPE", "#TYPE:info_nb_#LOBJET") . "</div>\n";
 		}
 </BOUCLE_boite_infos>[(#REM)
