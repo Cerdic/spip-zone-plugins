@@ -10,8 +10,8 @@
 [(#SET{hal_annee,#GET{url_depot}?rows=0&facet=true&facet.field=producedDateY_i})]
 [(#ENV{q}|oui)  	 	#SET{hal_annee,#GET{hal_annee}|concat{&q=#ENV{q}|urlencode} ]
 [(#ENV{q}|non)  	 	#SET{hal_annee,#GET{hal_annee}|concat{&q=*%3A*} ]
-[(#ENV{equipe}|oui) 	#SET{hal_annee,#GET{hal_annee}|concat{&fq=rteamStructId_i:#ENV{equipe}} ]
-[(#ENV{pub}|oui)  		#SET{hal_annee,#GET{hal_annee}|concat{&fq=docType_s:#ENV{pub}} ]
+[(#ENV{equipe}|oui) 	#SET{hal_annee,#GET{hal_annee}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
+[(#ENV{pub}|oui)  		#SET{hal_annee,#GET{hal_annee}|concat{&fq=docType_s:#ENV{pub}|urlencode} ]
 #SET{annee,#ARRAY}
 <BOUCLE_json_annee(DATA){source json,#GET{hal_annee}}{cle=facet_counts}>
 		#SET{annee_json,#VALEUR{facet_fields/producedDateY_i}}
@@ -31,8 +31,8 @@
 [(#SET{hal_pub,#GET{url_depot}?rows=0&facet=true&facet.field=docType_s})]
 [(#ENV{q}|oui)  	 	#SET{hal_pub,#GET{hal_pub}|concat{&q=#ENV{q}|urlencode} ]
 [(#ENV{q}|non)  	 	#SET{hal_pub,#GET{hal_pub}|concat{&q=*%3A*} ]
-[(#ENV{equipe}|oui) 	#SET{hal_pub,#GET{hal_pub}|concat{&fq=rteamStructId_i:#ENV{equipe}} ]
-[(#ENV{annee}|oui)  	#SET{hal_pub,#GET{hal_pub}|concat{&fq=producedDateY_i:#ENV{annee}} ]
+[(#ENV{equipe}|oui) 	#SET{hal_pub,#GET{hal_pub}|concat{&fq=rteamStructId_i:#ENV{equipe}|urlencode} ]
+[(#ENV{annee}|oui)  	#SET{hal_pub,#GET{hal_pub}|concat{&fq=producedDateY_i:#ENV{annee}|urlencode} ]
 #SET{pub,#ARRAY}
 <BOUCLE_json_pub(DATA){source json,#GET{hal_pub}}{cle=facet_counts}>
 		#SET{pub_json,#VALEUR{facet_fields/docType_s}}
@@ -47,7 +47,7 @@
 </BOUCLE_json_pub>
 
 
-<!-- type de publication -->
+<!-- formulaire de recherche HAL -->
 <div class="hal-form-recherche-wrapper">
 			<form action="#SELF" method="get" class="hal-form-recherche"><div>
                 [(#SELF|parametre_url{q|start|annee|pub,''}|form_hidden)]
