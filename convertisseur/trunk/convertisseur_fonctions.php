@@ -58,11 +58,16 @@ function convertisseur_texte_spip($texte, $format, $options=array()) {
 
 /**
  * Itérateurs de conversion.
- * Pour faire des <BOUCLE_conversion(DATA){source, extracteur, fichier}>
+ * Pour faire des <BOUCLE_conversion(DATA){source extracteur, fichier}>
  */
 
 // Extracteurs qui renvoient des tableaux 
-$GLOBALS['extracteurs_connus'] = array('quark_xml', 'xml_ocr', 'xml_de') ;
+$GLOBALS['extracteurs_connus'] = array('indesign_xml', 'quark_xml', 'xml_ocr', 'xml_de') ;
+
+// Iterateur pour l'extracteur quark_xml
+function inc_indesign_xml_to_array_dist($u){
+	return activer_iterateur('indesign_xml', $u) ;
+}
 
 // Iterateur pour l'extracteur quark_xml
 function inc_quark_xml_to_array_dist($u){
@@ -96,3 +101,29 @@ function activer_iterateur($extracteur, $u){
 	$m[] = $item ;
 	return $m ;
 }
+
+// Transformer le tableau de valeurs en format d'insertion
+function extracteur_preparer_insertion($item){
+		
+	$texte = "" ;
+	
+	if($item['surtitre'])
+		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
+
+	if($item['titre'])
+		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
+	
+	if($item['chapo'])
+		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
+
+	if($item['auteurs'])
+		$texte .= "<ins class='auteurs'>" . trim($item['auteurs']) . "</ins>\n\n" ;
+
+	if($item['affiliations'])
+		$texte .= "<ins class='signature'>" . trim($item['affiliations']) . "</ins>\n\n" ;
+
+	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
+	
+	return $texte ;
+
+} 

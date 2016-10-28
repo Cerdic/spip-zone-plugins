@@ -16,39 +16,7 @@ function convertir_extraction_xml_de($c) {
 		
 	return $texte ;
 }
- 
-function extracteur_preparer_insertion($item){
-		
-	$texte = "" ;
-	
-	if($item['surtitre'])
-		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
 
-	if($item['titre'])
-		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
-	
-	if($item['chapo'])
-		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
-
-	if($item['url'])
-		$texte .= "<ins class='url_site'>" . trim($item['url']) . "</ins>\n\n" ;
-
-	if($item['auteurs'])
-		$texte .= "<ins class='auteurs_de'>" . trim($item['auteurs']) . "</ins>\n\n" ;
-
-	if($item['signature'])
-		$texte .= "<ins class='signature'>" . trim($item['signature']) . "</ins>\n\n" ;
-
-	if($item['traducteur'])
-		$texte .= "<ins class='traduction'>" . trim($item['traducteur']) . "</ins>\n\n" ;
-
-	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
-	
-	return $texte ;
-
-} 
- 
- 
 function convertir_xml_de($u) {
 
 	include_spip('inc/charsets');

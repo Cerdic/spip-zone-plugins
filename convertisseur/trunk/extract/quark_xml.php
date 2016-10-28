@@ -17,35 +17,7 @@ function convertir_extraction_quark_xml($c) {
 	$texte = extracteur_preparer_insertion($item);
 	return $texte ;
 }
- 
-function extracteur_preparer_insertion($item){
-	
-	$texte = "" ;
-	$champs_article = array("surtitre", "titre", "chapo");
 
-	# Champs articles
-	# Baliser les champs articles
-	
-	foreach($item as $k => $v)	
-		if(in_array($k, $champs_article))
-			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
-
-	# autres champs
-	foreach($item as $k => $v)	
-		if($k != "texte" and !in_array($k, $champs_article))
-			if(is_array($v))
-				$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n" ;
-			else
-				$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
-					
-	# texte
-	$texte .=  "\n" . trim($item['texte']) . "\n" ;
-	
-	return $texte ;
-
-} 
- 
- 
 function convertir_quark_xml($c) {
 	
 	// surcharge nettoyage perso ?

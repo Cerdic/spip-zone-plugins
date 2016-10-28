@@ -16,33 +16,7 @@ function convertir_extraction_xml_ocr($c) {
 		
 	return $texte ;
 }
- 
-function extracteur_preparer_insertion($item){
-		
-	$texte = "" ;
-	
-	if($item['surtitre'])
-		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
 
-	if($item['titre'])
-		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
-	
-	if($item['chapo'])
-		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
-
-	if($item['auteurs'])
-		$texte .= "<ins class='auteurs'>" . trim($item['auteurs']) . "</ins>\n\n" ;
-
-	if($item['affiliations'])
-		$texte .= "<ins class='signature'>" . trim($item['affiliations']) . "</ins>\n\n" ;
-
-	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
-	
-	return $texte ;
-
-} 
- 
- 
 function convertir_xml_ocr($u) {
 
 	include_spip("inc/filtres");
