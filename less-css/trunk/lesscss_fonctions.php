@@ -36,7 +36,7 @@ function lesscss_compile($style, $contexte = array()){
 	$parser->relativeUrls = true;
 
 	try {
-		$url_absolue = ($contexte['file']?protocole_implicite(url_absolue($contexte['file'])):null);
+		$url_absolue = (!empty($contexte['file'])?protocole_implicite(url_absolue($contexte['file'])):null);
 		$parser->parse($style,$url_absolue);
 		$out = $parser->getCss();
 
