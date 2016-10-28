@@ -56,4 +56,43 @@ function convertisseur_texte_spip($texte, $format, $options=array()) {
 	return $texte_converti;
 }
 
-?>
+/**
+ * Itérateurs de conversion.
+ * Pour faire des <BOUCLE_conversion(DATA){source, extracteur, fichier}>
+ */
+
+// Extracteurs qui renvoient des tableaux 
+$GLOBALS['extracteurs_connus'] = array('quark_xml', 'xml_ocr', 'xml_de') ;
+
+// Iterateur pour l'extracteur quark_xml
+function inc_quark_xml_to_array_dist($u){
+	return activer_iterateur('quark_xml', $u) ;
+}
+
+// Iterateur pour l'extracteur xml_ocr
+function inc_xml_ocr_to_array_dist($u){
+	return activer_iterateur('xml_ocr', $u) ;
+}
+
+// Iterateur pour l'extracteur xml_de
+function inc_xml_de_to_array_dist($u){
+	return activer_iterateur('xml_de', $u) ;
+}
+
+function activer_iterateur($extracteur, $u){
+	
+	$item = array();
+	
+	// convertir en tableau
+	include_spip("extract/" . $extracteur);
+	$item = call_user_func('convertir_' . $extracteur, $u);
+	
+	include_spip("inc/convertisseur");
+	foreach($item as &$i)
+		$i = nettoyer_format($i);
+	
+	$item['extracteur'] = extracteur_preparer_insertion($item);
+	
+	$m[] = $item ;
+	return $m ;
+}
