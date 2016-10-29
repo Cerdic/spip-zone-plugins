@@ -1,15 +1,13 @@
 <?php
 /**********************************************************************************
  * @Subject Read conf. Init default values. Check new value of an option.
- * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP 2.x or 3.x article
- * @version 2.61.0
+ * @package pgn4spip plugin to embed pgn4web Chessboard in SPIP 
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
  * @language PHP
  *
  * @history: Shared module
  * SPIP 3: pgn4spip_fonctions.php, plugins\pgn4spip\formulaires\configurer_pgn4spip.php
- * SPIP 2: pgn4spip_options.php
  *
  * @Design
  * SPIP 3:
@@ -18,12 +16,7 @@
  * plugins\pgn4spip\prive\squelettes\contenu\configurer_pgn4spip.html cfg-16.png icon in "Manage plugins"
  * http://www.spip.net/fr_article5414.html
  * http://contrib.spip.net/CFG-comment-s-en-passer
- * Does not need the CFG 3 plugin for SPIP 3. Does not use pgn4spip_options.php
- *
- * SPIP 2:
- * plugins\pgn4spip\fonds\cfg_pgn4spip.html Design of the form in SPIP and HTML for CFG plugin
- * pgn4spip_options.php calls ReadCurrentConfiguration()
- * Need CFG plugin 1.15 or more for SPIP 2
+ 
  **********************************************************************************/
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
 
