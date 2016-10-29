@@ -1,4 +1,4 @@
-#HTTP_HEADER{Content-type:application/json;}
+#HTTP_HEADER{Content-type:application/json;charset=#CHARSET}
 [<BOUCLE_evenements(EVENEMENTS){', '}{par date_debut}	
 {agendafull date_debut,date_fin, periode,
 	#VAL{Y}|date{#ENV{start}}, #VAL{m}|date{#ENV{start}},     #VAL{d}|date{#ENV{start}},
