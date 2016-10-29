@@ -1,0 +1,17 @@
+<paquet
+	prefix="fullcalendar_facile"
+	categorie="date"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/fullcalendarfacile-32.png"
+>
+	<nom>Agenda Fullcalendar Facile</nom>
+
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence>GNU/GPL</licence>
+	
+	
+	<necessite nom="agenda" compatibilite="[3.16.0;]" />
+	<necessite nom="organiseur" compatibilite="[0.8.5;]" />
+</paquet>
