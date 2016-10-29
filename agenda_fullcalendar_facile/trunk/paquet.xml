@@ -3,7 +3,7 @@
 	categorie="date"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.1.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/fullcalendarfacile-32.png"
 >
 	<nom>Agenda Fullcalendar Facile</nom>
@@ -14,4 +14,7 @@
 	
 	<necessite nom="agenda" compatibilite="[3.16.0;]" />
 	<necessite nom="organiseur" compatibilite="[0.8.5;]" />
+
+	<script source="lib/fullcalendar/fullcalendar.min.js" />
+	<style source="lib/fullcalendar/fullcalendar.css" />
 </paquet>
