@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_isocode' => 'Codes ISO',
 
 // E
-	'erreur_charger_table' => 'Une erreur s\'est produite lors du chargement des tables @tables@.',
-	'erreur_vider_table' => 'Une erreur s\'est produite lors du vidage des tables @tables@.',
+	'erreur_charger_table' => 'Une erreur s\'est produite lors du chargement de la ou des tables @tables@.',
+	'erreur_vider_table' => 'Une erreur s\'est produite lors du vidage de la ou des tables @tables@.',
 	'explication_action_table' => 'Si la table est déjà chargée en base de données elle sera vidée avant le chargement.',
 
 // I
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tables' => 'Tables sur lesquelles appliquer l\'action',
 
 // N
-	'notice_charger_table' => 'Aucune mise à jour n\'est nécessaire sur les tables @tables@.',
+	'notice_charger_table' => 'Aucune mise à jour n\'est nécessaire sur la ou les tables @tables@.',
 	'notice_liste_aucune_table' => 'Aucune table de codes ISO n\'a encore été chargée en base de données. Utiliser le formulaire ci-dessous pour y remédier.',
 
 // S

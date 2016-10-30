@@ -150,15 +150,23 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso15924scripts'] =
 		array('field' => &$table_scripts, 'key' => &$table_scripts_key);
 
-	// --------------------------------------------------------------
-	// Table des indicatifs des pays ISO-3166 : spip_iso3166countries
+	// -------------------------------------------------------------------------------------
+	// Table des indicatifs des pays ISO-3166 et autres informations : spip_iso3166countries
 	$table_countries = array(
-		'code_alpha2' => "char(2) DEFAULT '' NOT NULL",                  // The two-letter identifier
-		'code_alpha3' => "char(3) DEFAULT '' NOT NULL",                  // The three-letter identifier
-		'code_num'    => "char(3) DEFAULT '' NOT NULL",                  // Numeric identifier
-		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",             // English name
-		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",             // french name
-		'maj'         => 'timestamp'
+		'code_alpha2'    => "char(2) DEFAULT '' NOT NULL",       // The two-letter identifier
+		'code_alpha3'    => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'       => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'capital'        => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
+		'area'           => "int DEFAULT 0 NOT NULL",            // Area in squared km
+		'population'     => "int DEFAULT 0 NOT NULL",            // Inhabitants count
+		'continent_code' => "char(2) DEFAULT '' NOT NULL",       // Continent code
+		'tld'            => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
+		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
+		'currency_en'    => "varchar(255) DEFAULT '' NOT NULL",  // Currency English name
+		'phone_id'       => "varchar(16) DEFAULT '' NOT NULL",   // Phone id
+		'maj'            => 'timestamp'
 	);
 
 	$table_countries_key = array(

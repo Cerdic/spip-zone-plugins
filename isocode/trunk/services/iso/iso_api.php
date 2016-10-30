@@ -117,11 +117,24 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'Alpha-3'      => 'code_alpha3',
 			'Numeric'      => 'code_num',
 		),
+		'addon_fields'   => array(
+			'geonames' => array(
+				'Capital'        => 'capital',
+				'Area(in sq km)' => 'area',
+				'Population'     => 'population',
+				'Continent'      => 'code_continent',
+				'tld'            => 'tld',
+				'CurrencyCode'   => 'code_4217_3',
+				'CurrencyName'   => 'currency_en',
+				'Phone'          => 'phone_id'
+			)
+		),
 		'populating'   => 'file_csv',
 		'delimiter'    => ';',
 		'extension'    => '.txt'
 	),
 );
+
 
 // ----------------------------------------------------------------------------
 // ----------------- API du service ISO - Actions spécifiques -----------------
@@ -237,6 +250,57 @@ function iso639families_complete_by_table($records) {
 			}
 		} else {
 			$records[$_cle][$loc_to_spip['Hierarchy']] = '';
+		}
+	}
+
+	return $records;
+}
+
+
+function iso3166countries_complete_by_table($records) {
+
+	// Initialisation des champs additionnels
+	$add_columns = array();
+	$geo_to_spip = $GLOBALS['isocode']['iso']['tables']['iso3166countries']['addon_fields']['geonames'];
+
+	// Lecture du fichier CSV geonames-countryInfo.txt pour récupérer les informations additionnelles.
+	// Le délimiteur est une tabulation.
+	$file = find_in_path("services/iso/iso3166countries-geonames-info.txt");
+	$delimiter = "\t";
+	$lines = file($file);
+	if ($lines) {
+		$headers = array();
+		foreach ($lines as $_number => $_line) {
+			$values = explode($delimiter, trim($_line, "\r\n"));
+			if ($_number == 0) {
+				// Stockage des noms de colonnes car la première ligne contient toujours le header et de
+				// l'index correspondant au code ISO-3166 alpha2 du pays qui se nomme ISO dans le fichier CSV.
+				$headers = $values;
+				$index_iso3166_alpha2 = array_search('ISO', $headers);
+			} else {
+				// On extrait de chaque ligne les informations additionnelles ainsi que le code alpha2 du pays
+				// qui servira d'index du tableau constitué.
+				// On ne sélectionne que les colonnes correspondant à des champs additionnels.
+				$fields = array();
+				foreach ($headers as $_cle => $_header) {
+					if (array_key_exists($_header, $geo_to_spip)) {
+						$fields[$geo_to_spip[trim($_header)]] = isset($values[$_cle]) ? trim($values[$_cle]) : '';
+					}
+				}
+				if (isset($values[$index_iso3166_alpha2])) {
+					$add_columns[$values[$index_iso3166_alpha2]] = $fields;
+				}
+			}
+		}
+	}
+
+
+	// On complète maintenant le tableau des enregistrements avec la colonne additionnelle hierarchy et la colonne
+	// dérivée parent qui ne contient que le code alpha-3 de la famille parente si elle existe.
+	foreach ($records as $_cle => $_record) {
+		$code = $_record['code_alpha2'];
+		if (isset($add_columns[$code])) {
+			$records[$_cle] = array_merge($records[$_cle], $add_columns[$code]);
 		}
 	}
 
