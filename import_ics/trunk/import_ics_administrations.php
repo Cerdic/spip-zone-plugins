@@ -54,6 +54,9 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj["1.0.6"] = array(
 		array('publier_almanachs_tous')
 	);
+	$maj["1.0.7"] = array(
+		array('dupliquer_decalage')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -83,6 +86,16 @@ function import_ics_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
+
+/**
+* Lors du passage en 3.4.0, on duplique la colonne decalage en fonction d'heure d'été / heure d'hiver
+**/
+function dupliquer_decalage(){
+	sql_alter("TABLE spip_almanachs CHANGE decalage decalage_ete tinyint NOT NULL DEFAULT 0");
+	sql_alter("TABLE spip_almanachs ADD decalage_hiver tinyint NOT NULL DEFAULT 0 AFTER decalage_ete");
+	sql_update("spip_almanachs",array('decalage_hiver'=>'decalage_ete'));
+}
+
 /**
 * Lors du passage en 3.0, on publie tout les almanachs, 
 * pour que la rupture de compat ne soit pas trop forte
