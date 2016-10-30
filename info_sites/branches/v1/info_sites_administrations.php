@@ -13,7 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
  * Fonction d'installation et de mise à jour du plugin Info Sites.
  *
@@ -33,11 +32,17 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.0.7'][] = array('info_sites_menu_pages');
 	$maj['1.0.7'][] = array('info_sites_menu_pages');
 	$maj['1.0.8'][] = array('info_sites_maj_108');
+	$maj['1.1.0'][] = array(
+		'maj_tables',
+		array(
+			'spip_projets',
+		),
+	);
+	cextras_api_upgrade(info_sites_declarer_champs_extras(), $maj['1.1.0']);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
-
 
 /**
  * Fonction de désinstallation du plugin Info Sites.
@@ -49,12 +54,12 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
  **/
 function info_sites_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');
+	cextras_api_vider_tables(info_sites_declarer_champs_extras());
 	// On efface la meta de menu du plugin
 	effacer_meta('info_sites_menu');
 	// Ici on efface tout le reste :
 	effacer_meta($nom_meta_base_version);
 }
-
 
 function info_sites_menu_pages() {
 	include_spip('inc/utils');
@@ -119,7 +124,6 @@ function info_sites_menu_pages() {
 	}
 }
 
-
 function info_sites_maj_108() {
 	include_spip('inc/config');
 
@@ -141,3 +145,4 @@ function info_sites_maj_108() {
 	ecrire_config('svp', $config_svp);
 
 }
+

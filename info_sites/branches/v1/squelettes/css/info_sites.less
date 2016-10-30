@@ -371,6 +371,15 @@ table {
 			padding-bottom: 0.5em;
 		}
 	}
+	&.contacts {
+		tr {
+			td {
+				address {
+					margin-bottom: 5px;
+				}
+			}
+		}
+	}
 }
 
 .page_controle_info_sites {
@@ -381,6 +390,17 @@ table {
 					&.picto, &.statut {
 						width: 20px;
 					}
+				}
+			}
+		}
+	}
+}
+.page_organisation {
+	.liste-objets {
+		&.contacts {
+			tr {
+				.organisation {
+					display: none;
 				}
 			}
 		}
@@ -1156,6 +1176,17 @@ input[type="radio"], input[type="checkbox"] {
 	}
 	.formulaire_editer_liens {
 		overflow: auto;
+		.liste-objets-associer {
+			span {
+				&.recherche {
+					float: right;
+				}
+			}
+			.pagination {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 
@@ -1358,7 +1389,14 @@ input[type="radio"], input[type="checkbox"] {
 	}
 
 	.entete-formulaire {
+		overflow: hidden;
 		.icone {
+			display: block;
+			margin: 0;
+			padding: 0;
+			position: relative;
+			text-align: center;
+			z-index: 2;
 			margin-right: 1em;
 		}
 	}

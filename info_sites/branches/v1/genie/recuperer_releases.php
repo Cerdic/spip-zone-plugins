@@ -30,8 +30,8 @@ function genie_recuperer_releases_dist($t) {
 				$releases_logiciel = charger_fonction('releases_' . $logiciel, 'recuperer');
 				$versions_logiciel = $releases_logiciel();
 				if (is_array($versions_logiciel) and count($versions_logiciel) > 0) {
-					spip_log(_DIR_RACINE . _DIR_TMP . 'releases_' . $logiciel, 'info_sites');
-					ecrire_fichier(_DIR_RACINE . _DIR_TMP . 'releases_' . $logiciel . '.txt', serialize($versions_logiciel));
+					spip_log(_DIR_TMP . 'releases_' . $logiciel, 'info_sites');
+					ecrire_fichier(_DIR_TMP . 'releases_' . $logiciel . '.txt', serialize($versions_logiciel));
 				}
 			}
 		}

@@ -15,14 +15,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function recuperer_releases_spip_dist() {
-	$url_page_releases = 'https://core.spip.net/projects/spip/wiki';
+	$url_page_releases = 'http://files.spip.org/spip/archives/';
 	$content_page = file_get_contents($url_page_releases);
-	preg_match_all("/>SPIP-v(.*)\.zip</", $content_page, $matches);
+	preg_match_all("/>SPIP-v(.*)<\/a>/", $content_page, $matches);
 	$releases = array();
 
 	foreach ($matches[1] as $version) {
-		$version_reformatee = preg_replace('/-/', '.', $version);
-		$releases[] = $version_reformatee;
+		if (preg_match('/^\d/', $version)) {
+			$version_reformatee = preg_replace('/-/', '.', $version);
+			$releases[] = $version_reformatee;
+		}
 	}
 	natsort($releases);
 

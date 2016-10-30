@@ -15,6 +15,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/filtres_ecrire');
 
+/**
+ * Lister des tables de liens des différents objets de SPIP
+ * On récupère toutes les tables auxiliaires référencées et on ne garde que les tables ayant un champ `objet`. Ce qui présuppose dans SPIP que la table est de type 'liens' entre objets.
+ *
+ * @example array('spip_auteurs_liens', 'spip_mots_liens')
+ * @see     lister_tables_auxiliaires()
+ * @return array Liste des tables de liens des différents objets de SPIP
+ */
 function lister_tables_liens() {
 	include_spip('base/objets');
 	$tables_auxilaires = lister_tables_auxiliaires();
@@ -29,8 +37,37 @@ function lister_tables_liens() {
 	return $tables_auxilaires_objets;
 }
 
+if (!function_exists('lister_tables_objets')) {
+	/**
+	 * Lister les noms d’objet référencés dans SPIP.
+	 *
+	 * @example array('articles', 'rubriques', 'mots', 'auteurs');
+	 * @see     lister_tables_principales()
+	 * @see     table_objet()
+	 * @return array|bool Si on a bien des tables principales, on retourne la liste des objets de SPIP
+	 *                    Sinon, on envoie un false.
+	 */
+	function lister_tables_objets() {
+		include_spip('bas/objets');
+		/* récupérer les tables principales */
+		$tables_principales = lister_tables_principales();
+		/* Ne garder que les noms de tables */
+		$tables_principales = array_keys($tables_principales);
+		if (is_array($tables_principales) and count($tables_principales)) {
+			$liste_objets = array();
+			foreach ($tables_principales as $table) {
+				$liste_objets[] = table_objet($table);
+			}
+			natsort($liste_objets);
+			return $liste_objets;
+	}
+
+		return false;
+	}
+}
+
 /**
- * Cette fonction compte les éléments enregistrés dans une table.
+ * Compter les éléments enregistrés dans une table.
  *
  * @param        $table Le nom de la table à compter.
  * @param string $where Cibler des éléments en particulier
@@ -491,4 +528,18 @@ function in_ismenu($needle) {
 	}
 
 	return false;
+}
+
+function info_sites_lister_doublons_versioning_rss() {
+	include_spip('base/abstract_sql');
+	$doublons = sql_allfetsel("COUNT(versioning_rss) as nbr_doublon, versioning_rss", 'spip_projets', "versioning_rss!=''", 'versioning_rss', '', '', "nbr_doublon > 1");
+
+	var_dump($doublons);
+}
+
+function info_sites_lister_doublons_commits() {
+	include_spip('base/abstract_sql');
+	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '', "nbr_doublon > 1");
+
+	var_dump($doublons);
 }
