@@ -89,11 +89,16 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  *
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$decalage = array();
+	$ancien_decalage = array();
 	if ($id_almanach!='new'){
-		$ancien_decalage = sql_getfetsel("decalage","spip_almanachs","id_almanach=$id_almanach");
+		$ancien_decalage['ete'] = sql_getfetsel("decalage_ete","spip_almanachs","id_almanach=$id_almanach");
+		$ancien_decalage['hiver'] = sql_getfetsel("decalage_hiver","spip_almanachs","id_almanach=$id_almanach");
+
 	}
 	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
-		$ancien_decalage = _request("decalage");
+		$ancien_decalage['ete'] = _request("decalage_ete");
+		$ancien_decalage['hiver'] = _request("decalage_ete_hiver");
 	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
@@ -101,7 +106,8 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$url = _request("url");
 	$id_article = _request("id_article");
 	$id_mot = _request("id_mot");
-	$decalage = _request("decalage");
+	$decalage['ete'] = _request("decalage_ete");
+	$decalage['hiver'] = _request("decalage_hiver");
 	
 	#on associe le mot à l'almanach
 	if ($id_mot){
@@ -115,7 +121,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		);
 	}
 	
-	# on corrige le décalage sur les evts existant (cas de modif d'un article)
+	# on corrige le décalage sur les evts existant (cas de modif d'un almanach)
 	corriger_decalage($id_almanach,$decalage,$ancien_decalage);
 	
 	# on importe les autres évènement
@@ -128,25 +134,42 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 }
 
 function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
-	$decalage = intval($nouveau_decalage) - intval($ancien_decalage);
-	if ($decalage !=0){
-		include_spip('action/editer_evenement');
-		$liens = sql_allfetsel('E.uid, E.id_evenement',
-			"spip_evenements AS E
-			INNER JOIN spip_almanachs_liens AS L
-			ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
-		
-		$champs_sql = array(
-			"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
-			"date_fin" => "DATE_ADD(date_fin, INTERVAL  $decalage HOUR)",
-		);
-		if(is_array($liens) and count($liens)>0){
-			foreach ($liens as $l){
-				$id_evenement = intval($l["id_evenement"]);
-				autoriser_exception('evenement','modifier',$id_evenement);
-				objet_modifier('evenement',$id_evenement,$champs_sql);
-				autoriser_exception('evenement','modifier',$id_evenement,false);
+	include_spip('action/editer_evenement');
+	$decalage_ete = intval($nouveau_decalage['ete']) - intval($ancien_decalage['ete']);
+	$decalage_hiver = intval($nouveau_decalage['hiver']) - intval($ancien_decalage['hiver']);
+	$liens = sql_allfetsel('E.uid, E.id_evenement, E.date_debut, E.date_fin',
+		"spip_evenements AS E
+		INNER JOIN spip_almanachs_liens AS L
+		ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
+	
+	//$champs_sql = array(
+	//	"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
+	//	"date_fin" => "DATE_ADD(date_fin, INTERVAL  $decalage HOUR)",
+	//);
+	if(is_array($liens) and count($liens)>0){
+		foreach ($liens as $l){
+			$champs_sql = array();
+			$id_evenement = intval($l["id_evenement"]);
+			$heure_ete_debut = intval(affdate($l['date_debut'],'I'));//Est-ce que la date de début se trouve en période d'heure d'été?
+			$heure_ete_fin = intval(affdate($l['date_fin'],'I'));// Est-ce que la date de fin se trouve en période d'heure d'été?
+			
+			if ($heure_ete_debut){
+				$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_ete HOUR)";
 			}
+			else {
+				$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_hiver HOUR)";
+			}
+
+			if ($heure_ete_fin){
+				$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_ete HOUR)";
+			}
+			else {
+				$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_hiver HOUR)";
+			}
+		
+			autoriser_exception('evenement','modifier',$id_evenement);
+			objet_modifier('evenement',$id_evenement,$champs_sql);
+			autoriser_exception('evenement','modifier',$id_evenement,false);
 		}
 	}
 }
