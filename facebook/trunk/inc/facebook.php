@@ -9,7 +9,7 @@ include_spip('inc/facebook_poster');
 
 // Le SDK de facebook à besoin d'une session php mais n'est pas foutu de faire lui même ce test.
 if (!session_id()) {
-    session_start();
+	session_start();
 }
 
 /**
@@ -199,7 +199,7 @@ function facebook_saisie_pages() {
 		$T_user = facebook_profil();
 		$datas[$T_user['id']] = $T_user['nom'];
 		foreach ($graphEdges as $graphEdge) {
-			$datas[$graphEdge['id']] = "Page : ".$graphEdge['name'];
+			$datas[$graphEdge['id']] = 'Page : '.$graphEdge['name'];
 		}
 	} else {
 		// C'est une erreur, on la renvoie
@@ -324,7 +324,6 @@ function filtre_facebook_profil_picture_dist($token, $width = 0, $height = 0, $a
  * @param mixed $token
  * @access public
  * @return array
- *
  **/
 function facebook_recup_posts($token = null) {
 
@@ -347,12 +346,17 @@ function facebook_recup_posts($token = null) {
 	$graphObject = $response->getGraphEdge()->asArray();
 	$T_result = array();
 	foreach ($graphObject as $message) {
-		foreach ($message['created_time'] as $k =>$val) {
-			if ($k == 'date') $date_creation = $val;
+		foreach ($message['created_time'] as $k => $val) {
+			if ($k == 'date') {
+				$date_creation = $val;
+			}
 		}
-		$T_result[] = array("message" => $message['message'], "url_picture" => $message['picture'], "date_creation" => $date_creation);
+		$T_result[] = array(
+			'message' => $message['message'],
+			'url_picture' => $message['picture'],
+			'date_creation' => $date_creation
+		);
 	}
 
 	return $T_result;
-
 }
