@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
-	'connexion_facebook' => 'Ce connectez avec Facebook',
+	'connexion_facebook' => 'Se connecter avec Facebook',
 	// T
 	'titre_page_configurer_connecteur' => 'Configurer les connexions',
 );
