@@ -31,7 +31,10 @@ $arg = $securiser_action();
 		$result["url"],
 		$result["id_article"],
 		$result["id_mot"],
-		$result["decalage"]
+		array(
+			'ete' => $result["decalage_ete"],
+			'hiver' => $result["decalage_hiver"]
+		)
 	);
 }
 

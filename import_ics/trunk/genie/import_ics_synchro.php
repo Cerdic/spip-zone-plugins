@@ -35,7 +35,10 @@ if(
 				$r["url"],
 				$r["id_article"],
 				$r["id_mot"],
-				$r["decalage"]
+				array(
+					'ete' => $result["decalage_ete"],
+					'hiver' => $result["decalage_hiver"]
+				)
 			);
 		}
 		return 1;

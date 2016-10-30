@@ -168,6 +168,7 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			'notes'=>$url);
 }
 
+include_spip('inc/filtres');
 /*
 ** À partir d'un tavleau de propriété de date ical, retourne deux infos: 1. Date formatée en sql 2. booleen pour savoir si toute la journée
 */
@@ -192,6 +193,13 @@ function date_ical_to_sql($date,$decalage){
 			$value["min"],
 			$value["sec"]
 		);
+	}
+	$date_ete = intval(affdate($date_sql,'I'));//Est-on en heure d'été?
+	if ($date_ete){
+		$decalage = $decalage['ete'];
+	}
+	else{
+		$decalage = $decalage['hiver'];
 	}
 	$date_sql = "DATE_ADD('$date_sql', INTERVAL $decalage HOUR)";
 	return array($date_sql,$all_day);
