@@ -20,7 +20,6 @@ function connecteur_declarer_tables_auxiliaires($tables_auxiliaires) {
 			'token' => 'blob NOT NULL'
 		),
 		'key' => array(
-			'PRIMARY KEY' => 'id_connecteur',
 			'KEY id_auteur' => 'id_auteur',
 			'KEY type' => 'type'
 		)
