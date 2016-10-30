@@ -21,11 +21,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - `spip_iso639retirements`, qui contient les langues retirées de la liste officielle,
  * - `spip_iso639families`, qui contient les familles et groupes de langues ISO-639-5,
  *
- * une table `spip_iso15924scripts` qui contient les codets d'écriture à 4 lettres et leur définition en
- * français et en anglais.
- *
- * et une table `spip_iana5646subtags` qui contient les codes des sous-étiquettes des étiquettes de langue
+ * Le plugin déclare aussi une table `spip_iso15924scripts` qui contient les codets d'écriture à 4 lettres et leur définition en
+ * français et en anglais et une table `spip_iana5646subtags` qui contient les codes des sous-étiquettes des étiquettes de langue
  * construites selon la RFC 5646.
+ *
+ * Enfin, la plugin déclare une table `spip_iso15924countries` qui contient les indicatifs ISO-3166 des pays.
  *
  * @pipeline declarer_tables_principales
  *
@@ -134,11 +134,11 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// -------------------------------------------------------------------
 	// Table des indicatifs d'écritures (ISO 15924) : spip_iso15924scripts
 	$table_scripts = array(
-		'code_15924'  => "char(4) DEFAULT '' NOT NULL",                  // The four-letter identifier
-		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",             // English script name
-		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",             // french script name
-		'code_num'    => "char(3) DEFAULT '' NOT NULL",                  // Numeric identifier
-		'alias_en'    => "varchar(32) DEFAULT '' NOT NULL",              // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
+		'code_15924'  => "char(4) DEFAULT '' NOT NULL",                     // The four-letter identifier
+		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",                // English script name
+		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",                // french script name
+		'code_num'    => "char(3) DEFAULT '' NOT NULL",                     // Numeric identifier
+		'alias_en'    => "varchar(32) DEFAULT '' NOT NULL",                 // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
 		'date_ref'    => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
 		'maj'         => 'timestamp'
 	);
@@ -168,7 +168,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso3166countries'] =
 		array('field' => &$table_countries, 'key' => &$table_countries_key);
 
-	// ------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------
 	// Table reproduisant le registre IANA des sous-étiquettes de langues : spip_iana5646subtags
 	$table_subtags = array(
 		'type'	         => "varchar(16) DEFAULT '' NOT NULL", // Subtag type as language, variant, extlang, region, script...

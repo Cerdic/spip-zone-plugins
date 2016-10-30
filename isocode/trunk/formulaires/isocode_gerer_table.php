@@ -99,10 +99,19 @@ function formulaires_isocode_gerer_table_traiter() {
 	else {
 		// La fonction de chargement de la table lance un vidage préalable si la table
 		// demandé est déjà chargée.
-		list($action_ok, $tables_nok) = isocode_charger_tables($tables);
-		$message = $action_ok
-			? _T('isocode:succes_charger_table')
-			: _T('isocode:erreur_charger_table', array('tables' => implode(', ', $tables_nok)));
+		list($action_ok, $tables_nok, $tables_inchangees) = isocode_charger_tables($tables);
+		if ($action_ok) {
+			$message = _T('isocode:succes_charger_table');
+		} else {
+			$message = '';
+			if ($tables_inchangees) {
+				$message .= _T('isocode:notice_charger_table', array('tables' => implode(', ', $tables_inchangees)));
+			}
+			if ($tables_nok) {
+				$message .= $message ? '<br/>' : '';
+				$message .= _T('isocode:erreur_charger_table', array('tables' => implode(', ', $tables_nok)));
+			}
+		}
 	}
 
 	$type_message = $action_ok ? 'message_ok' : 'message_erreur';

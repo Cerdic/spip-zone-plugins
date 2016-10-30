@@ -1,6 +1,6 @@
 <?php
 /**
- * Fichier gérant l'installation et la désinstallation du plugin Code de Langues
+ * Fichier gérant l'installation et la désinstallation du plugin
  *
  * @package    SPIP\ISOCODE\ADMINISTRATION
  */
