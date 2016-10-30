@@ -12,7 +12,7 @@ include_spip('inc/config');
 
 
 function trouver_evenements_almanach($id_almanach){
-	//On fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
+	//On fait un appel dans la base de spip pour pouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
 	$liens = sql_allfetsel('E.uid, E.id_evenement',
 	                        'spip_evenements AS E
 	                        INNER JOIN spip_almanachs_liens AS L
@@ -21,7 +21,6 @@ function trouver_evenements_almanach($id_almanach){
 }
 
 function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
-
 	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
@@ -117,7 +116,6 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 ** Récupérer les propriétés d'un evenements de sorte qu'on puisse en faire la requete sql
 */
 function evenement_ical_to_sql($objet_evenement,$decalage){
-	
 		#on recupere les infos de l'evenement dans des variables
 		    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
 		    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
@@ -137,12 +135,13 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 		    $longitude = $localisation['longitude'];
 		//un petit coup avec l'uid
 		    $uid_distante = $objet_evenement->getProperty("UID");#uid de l'evenement
+
 		# récupérer la date de début et la formater correctement
-		      $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
-				  list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage) ; 
+		  	$dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE);
+				list ($date_debut,$start_all_day) = date_ical_to_sql($dtstart_array,$decalage);
 		#les 3 lignes suivantes servent à récupérer la date de fin et à la mettre dans le bon format
-	  		  $dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
-	   			list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage) ; 
+	  		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
+	   		list ($date_fin,$end_all_day) = date_ical_to_sql($dtend_array,$decalage);
 
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
@@ -170,7 +169,7 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 
 include_spip('inc/filtres');
 /*
-** À partir d'un tavleau de propriété de date ical, retourne deux infos: 1. Date formatée en sql 2. booleen pour savoir si toute la journée
+** À partir d'un tableau de propriété de date ical, retourne deux infos: 1. Date formatée en sql 2. booleen pour savoir si toute la journée
 */
 function date_ical_to_sql($date,$decalage){
 	$value = $date["value"];
