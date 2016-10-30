@@ -164,7 +164,7 @@ function inc_prepare_mots_where_dist($mots, $cond=false,$id_ou_titre=false) {
 			return '0=1';
 	}
 	
-	$wh = [];
+	$wh = array();
   //selon le cas, on sélectionne sur les titres ou sur les id
   if (!$id_ou_titre){
       foreach($mots as $mot) {
