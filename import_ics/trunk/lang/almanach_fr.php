@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'almanach' => 'Almanach',
 	'attendee' => 'Intervenant(e)',
 	'aucun_decalage' => 'Aucun décalage',
-	'aucun_evenement' => 'Cet almanach ne contient aucun événement. Si vous le désirez, vous pouvez le supprimer dans la liste des almanachs.',
+	'aucun_evenement' => 'Cet almanach ne contient aucun événement.',
 
 	// C
 	'changer_id_parent' => 'Article parent',
@@ -87,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation' => 'Choix de la salle à réserver',
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
-	'retour_liste' => 'Retour à la liste',
 
 	// T
 	'texte_ajouter_almanach' => 'Ajouter un almanach',
