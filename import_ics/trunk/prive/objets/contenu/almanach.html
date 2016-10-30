@@ -30,9 +30,14 @@
 </div>
 </B_mot_lie>
 
-<div class="champ contenu_decalage[ (#DECALAGE*|strlen|?{'',vide})]">
-	<label><strong><:almanach:decalage:> : </strong></label>
-	<span dir='#LANG_DIR' class='#EDIT{decalage} decalage'>[ [(#DECALAGE|>={0}|?{+})](#DECALAGE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
+<div class="champ contenu_decalage_ete[ (#DECALAGE_ETE*|strlen|?{'',vide})]">
+	<label><strong><:almanach:decalage_ete:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{decalage_ete} decalage'>[ [(#DECALAGE_ETE|>={0}|?{+})](#DECALAGE_ETE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_ETE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
+</div>
+
+<div class="champ contenu_decalage_hiver[ (#DECALAGE_HIVER*|strlen|?{'',vide})]">
+	<label><strong><:almanach:decalage_hiver:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{decalage_hiver} decalage'>[ [(#DECALAGE_HIVER|>={0}|?{+})](#DECALAGE_HIVER|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_HIVER|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
 </div>
 
   #INCLURE{fond=prive/objets/liste/evenements_almanach,env,ajax}

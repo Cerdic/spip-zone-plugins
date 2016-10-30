@@ -68,9 +68,14 @@
           table_liaison=evenements})] 
       ]
 
-			[(#SAISIE{selection,decalage,
-				label=<:almanach:decalage:>,
-				explication=<:almanach:decalage_explication:>,
+			[(#SAISIE{selection,decalage_ete,
+				label=<:almanach:decalage_ete:>,
+				explication=<:almanach:decalage_ete_explication:>,
+				datas=#ENV{tableau_decalage}
+			})]
+			[(#SAISIE{selection,decalage_hiver,
+				label=<:almanach:decalage_hiver:>,
+				explication=<:almanach:decalage_hiver_explication:>,
 				datas=#ENV{tableau_decalage}
 			})]
 		[</(#DIV|sinon{ul})>]
