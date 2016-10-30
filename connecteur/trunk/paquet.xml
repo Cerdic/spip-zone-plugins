@@ -1,12 +1,12 @@
 <paquet
 	prefix="connecteur"
 	categorie="auteur"
-	version="1.0.9"
+	version="1.0.10"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/connecteur-64.png"
 	documentation=""
-	schema="1.0.14"
+	schema="1.0.15"
 >
 
 	<nom>Connecteur universel</nom>

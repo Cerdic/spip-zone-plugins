@@ -41,6 +41,10 @@ function connecteur_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_connecteur DROP COLUMN signature')
 	);
 
+	$maj['1.0.15'] = array(
+		array('sql_alter', 'TABLE spip_connecteur DROP COLUMN id_connecteur')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
