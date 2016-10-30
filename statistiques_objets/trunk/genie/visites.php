@@ -89,10 +89,10 @@ function compte_fichier_visite($fichier, &$visites, &$visites_objets, &$referers
 			}
 			$visites_objets[$objet][$id_objet]++;
 			if ($log_referer) {
-				if (!isset($referers_objets[$id_objet][$log_referer])) {
-					$referers_objets[$id_objet][$log_referer] = 0;
+				if (!isset($referers_objets[$objet][$id_objet][$log_referer])) {
+					$referers_objets[$objet][$id_objet][$log_referer] = 0;
 				}
-				$referers_objets[$id_objet][$log_referer]++;
+				$referers_objets[$objet][$id_objet][$log_referer]++;
 			}
 		}
 
