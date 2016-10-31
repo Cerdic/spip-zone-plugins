@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression_evenements' => 'Êtes vous certain·e de vouloir supprimer les événements de l’almanach \\"@titre_almanach@\\" ?',
 
 	// D
-	'decalage_ete' => 'Décalage pour l\'heure d\'été',
-	'decalage_ete_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l\'heure d\'été est en vigueur.',
-	'decalage_hiver' => 'Décalage pour l\'heure d\'hiver',
-	'decalage_hiver_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l\'heure d\'hiver est en vigueur.',
+	'decalage_ete' => 'Décalage pour l’heure d’été',
+	'decalage_ete_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l’heure d’été est en vigueur.',
+	'decalage_hiver' => 'Décalage pour l’heure d’hiver',
+	'decalage_hiver_explication' => 'Vous pouvez tenter un décalage global des horaires s’ils n’apparaissent pas à la bonne heure, pour des raisons de fuseaux horaires. La valeur choisie correspond au nombre d’heures à ajouter à l’horaire fournie par le site distant. Ce champ concerne les évènements ayant lieu lorsque l’heure d’hiver est en vigueur.',
 
 	// E
 	'explication_changer_id_parent' => 'Associer l’article parent à tous les évènements',
