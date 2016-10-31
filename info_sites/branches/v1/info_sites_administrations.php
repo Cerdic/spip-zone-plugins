@@ -56,6 +56,8 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
  **/
 function info_sites_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');
+	include_spip('inc/cextras');
+	include_spip('base/info_sites_extras');
 	cextras_api_vider_tables(info_sites_declarer_champs_extras());
 	// On efface la meta de menu du plugin
 	effacer_meta('info_sites_menu');
