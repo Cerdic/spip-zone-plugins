@@ -1,4 +1,6 @@
+[(#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|non)
 [<h3 class="legend">(#ENV{label})</h3>]
+]
 
 [(#ENV{saisies}|is_array|oui)
 	#INCLURE{fond=inclure/voir_saisies, env, from_fieldset='on'}
