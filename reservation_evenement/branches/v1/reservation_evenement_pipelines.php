@@ -1,8 +1,8 @@
 <?php
 /**
- * Utilisations de pipelines par Réservation Événements
+ * Utilisations de pipelines par Réservation Evénements
  *
- * @plugin     Réservation Événements
+ * @plugin     Réservation événements
  * @copyright  2013
  * @author     Rainer Müller
  * @licence    GNU/GPL
@@ -36,7 +36,7 @@ function reservation_evenement_affiche_gauche($flux) {
     $rubrique_reservation = picker_selected($config, 'rubrique');
     $zone = rubrique_reservation($id, $exec, $rubrique_reservation);
 
-    //Si l'objet se trouve dans la zone Reservation Evènement, on affiche
+    //Si l'objet se trouve dans la zone Reservation Evénement, on affiche
     if ($zone) {
       $flux['data'] .= recuperer_fond('inclure/reservations', $contexte);
     }
@@ -95,7 +95,7 @@ function reservation_evenement_taches_generales_cron($taches) {
   include_spip('inc/config');
   $config = lire_config('reservation_evenement', array());
   if (isset($config['cron'])) {
-    //La périodicité
+    //La p��riodicit��
     if (isset($config['periodicite_cron']) AND $config['periodicite_cron'] >= 600)
       $periodicite = $config['periodicite_cron'];
     else
@@ -161,7 +161,8 @@ function reservation_evenement_recuperer_fond($flux) {
     $id = _request('id_' . $type);
     $zone = rubrique_reservation($id, $type, $rubrique_reservation);
     $cron = isset($config['cron']) ? $config['cron'] : '';
-    //Si cron activé et l'objet se trouve dans la zone Reservation Evènement, on affiche
+
+    //Si cron activé et l'objet se trouve dans la zone Reservation Evénement, on affiche
     if ($cron AND $zone) {
       $action_cloture = '<ul>' . recuperer_fond('formulaires/inc-action_cloture', $contexte) . '</ul>';
       $flux['data']['texte'] = str_replace('<!--extra-->', $action_cloture . '<!--extra-->', $flux['data']['texte']);
@@ -189,7 +190,7 @@ function reservation_evenement_afficher_contenu_objet($flux) {
     $zone = rubrique_reservation($id, $type, $rubrique_reservation);
     $cron = isset($config['cron']) ? $config['cron'] : '';
 
-    //Si cron activé et l'objet se trouve dans la zone Reservation Evènement, on affiche
+    //Si cron activé et l'objet se trouve dans la zone Reservation Evénement, on affiche
     if ($cron AND $zone) {
       $etats = array(
         1 => _T('item:oui'),
