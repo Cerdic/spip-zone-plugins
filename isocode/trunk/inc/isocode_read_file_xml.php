@@ -47,6 +47,11 @@ function inc_isocode_read_file_xml($service, $table) {
 	// Initialisations des données de configuration propre au service et à la table
 	$file_extension = $GLOBALS['isocode'][$service]['tables'][$table]['extension'];
 	$fields_config = $GLOBALS['isocode'][$service]['tables'][$table]['basic_fields'];
+	$base = $GLOBALS['isocode'][$service]['tables'][$table]['base'];
+
+	// Détermination de la clé primaire de la table
+	include_spip('base/objets');
+	$primary_key = id_table_objet($table);
 
 	// Ouvrir le fichier des enregistrements de la table spécifiée.
 	$file = find_in_path("services/${service}/${table}${file_extension}");
@@ -60,23 +65,45 @@ function inc_isocode_read_file_xml($service, $table) {
 			lire_fichier($file, $xml);
 			$entries = json_decode(json_encode(simplexml_load_string($xml)), true);
 
-			if ($entries) {
-				$headers = array();
-				foreach ($entries as $_entry) {
+			include_spip('inc/filtres');
+			if (table_valeur($entries, $base, '')) {
+				// Enregistrer les clés priamires afin d'éviter de lister des doublons et donc
+				// d'avoir une erreur SQL à l'INSERT.
+				$primary_key_values = array();
+				foreach (table_valeur($entries, $base, '') as $_entry) {
 					// Création de chaque enregistrement de la table
 					$fields = array();
-					foreach ($headers as $_cle => $_header) {
+					$primary_key_exists = false;
+					$primary_key_value = '';
+					foreach ($_entry as $_tag => $_value) {
+						$tag = trim($_tag);
 						// Seuls les champs identifiés dans la configuration sont récupérés dans le fichier
-						if (isset($fields_config[trim($_header)])) {
-							$fields[$fields_config[trim($_header)]] = isset($_entry[$_cle]) ? trim($_entry[$_cle]) : '';
+						if (isset($fields_config[$tag])) {
+							$fields[$fields_config[$tag]] = $_value ? trim($_value) : '';
+							if ($fields_config[$tag] == $primary_key) {
+								$primary_key_exists = true;
+								$primary_key_value = $fields[$fields_config[$tag]];
+							}
 						}
 					}
-					// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter
-					if (function_exists($f_complete_record)) {
-						$fields = $f_complete_record($fields);
+					// On ajoute l'élément que si la clé primaire a bien été trouvée
+					if ($primary_key_exists) {
+						if (!in_array($primary_key_value, $primary_key_values)) {
+							// On rajoute cette clé dans la liste
+							$primary_key_values[] = $primary_key_value;
+							// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter
+							if (function_exists($f_complete_record)) {
+								$fields = $f_complete_record($fields);
+							}
+							$records[] = $fields;
+						} else {
+							spip_log("L'entrée <" . implode(',', $_entry) . "> de la table <${table}> est en doublon", "isocode" . _LOG_ERREUR);
+						}
+					} else {
+						spip_log("L'entrée <" . implode(',', $_entry) . "> de la table <${table}> n'a pas de clé primaire", "isocode" . _LOG_ERREUR);
 					}
-					$records[] = $fields;
 				}
+
 				// Si besoin on appelle une fonction pour toute la table
 				if (function_exists($f_complete_table)) {
 					$records = $f_complete_table($records);

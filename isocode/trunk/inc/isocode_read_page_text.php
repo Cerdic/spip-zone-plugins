@@ -81,10 +81,13 @@ function inc_isocode_read_page_text($service, $table) {
 					$fields = $empty_record;
 					$invalid_field = false;
 					foreach ($matches[1] as $_cle => $_header) {
+						// Si on détecte pour un élément un champ non configuré on le trace
+						// et on exclut l'élément de la table.
 						if (isset($fields_config[trim($_header)])) {
 							$fields[$fields_config[trim($_header)]] = isset($matches[2][$_cle]) ? $matches[2][$_cle] : '';
 						} else {
 							$invalid_field =true;
+							spip_log("Le champ <${_header}> n'existe pas dans la configuration de la table ${table}", "isocode" . _LOG_ERREUR);
 							break;
 						}
 					}

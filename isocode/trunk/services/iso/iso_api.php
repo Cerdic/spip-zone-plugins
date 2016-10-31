@@ -142,9 +142,9 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 	),
 	'iso4217currencies'   => array(
 		'basic_fields' => array(
-			'CcyNm'      => 'label_en',
 			'Ccy'        => 'code_4217_3',
 			'CcyNbr'     => 'code_num',
+			'CcyNm'      => 'label_en',
 			'CcyMnrUnts' => 'minor_unit',
 		),
 		'addon_fields'   => array(
@@ -154,8 +154,8 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			)
 		),
 		'populating'   => 'file_xml',
-		'delimiter'    => '',
-		'extension'    => '.xml'
+		'extension'    => '.xml',
+		'base'         => 'CcyTbl/CcyNtry'
 	),
 );
 
