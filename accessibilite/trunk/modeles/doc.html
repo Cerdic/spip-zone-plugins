@@ -33,10 +33,10 @@
 	#SET{height,#GET{fichier}|hauteur}
 	#SET{fichier,#GET{fichier}|extraire_attribut{src}}
 ][(#ENV{mode_force,#MODE}|=={image}|non)
-	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}|sinon{<:info_document:>}}}|attribut_html)[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]"]})]
+	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}|sinon{<:info_document:>}}}|attribut_html)[(#ENV{lien}|?{'',' - '})][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|non)[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]][(#MIME_TYPE|match{^image/(gif|jpg|jpeg|png)}|oui)<:accessibilite:voir_grand:>]]})]
 ]
 [(#ENV{mode_force,#MODE}|=={image}|oui)
-	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}}}|attribut_html)"]})]
+	[(#SET{alternative,[(#ENV{alt}|sinon{#TITRE|sinon{#ENV{lien}}}|attribut_html)]})]
 ]
 <dl class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[
 	style="float:(#ENV{align}|match{left|right});"]>
