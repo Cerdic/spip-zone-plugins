@@ -43,6 +43,4 @@ function spip_foundation() {
 }
 
 spip_foundation();
-onAjaxLoad(function () {
-	spip_foundation();
-});
+onAjaxLoad(spip_foundation);
