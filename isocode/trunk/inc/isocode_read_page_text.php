@@ -64,7 +64,7 @@ function inc_isocode_read_page_text($service, $table) {
 				// On récupére donc un tableau des éléments à lire en utilisant la fonction explode
 				$elements = explode($parsing_config['element']['delimiter'], $flux['page']);
 			} else {
-				// C'est une regexp... à compléter TODO
+				// TODO : C'est une regexp... à compléter
 			}
 
 			// Initialisation d'un enregistrement vide (tous les champs sont des chaines ou des dates)

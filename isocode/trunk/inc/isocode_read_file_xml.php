@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient la fonction générique de lecture d'un fichier CSV en un tableau d'éléments d'une
+ * Ce fichier contient la fonction générique de lecture d'un fichier XML en un tableau d'éléments d'une
  * table de la base de données.
  *
  * @package SPIP\ISOCODE\OUTILS
@@ -11,10 +11,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 /**
- * Constitue, à partir d'un fichier CSV donné, un tableau des éléments prêt à être inséré dans une table
+ * Constitue, à partir d'un fichier XML donné, un tableau des éléments prêt à être inséré dans une table
  * de la base de données.
  * La fonction utilise le service et le nom de table pour récupérer la configuration permettant l'analyse
- * du fichier et sa traduction en élements de la table (délimiteur, nom des colonnes...).
+ * du fichier et sa traduction en élements de la table (nom des colonnes...).
  * Il est possible, pour chaque élément ou pour l'ensemble d'appliquer une fonction spécifique à la table
  * qui complète l'élément.
  *
@@ -23,16 +23,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param string $service
  * 		Nom du service associé à la lecture de la table.
  * @param string $table
- * 		Nom de la table concernée par la lecture du fichier CSV.
+ * 		Nom de la table concernée par la lecture du fichier XML.
  * @param string $sha_stocke
- * 		SHA du fichier CSV stocké dans la meta associée à la table ou `false` si la table n'est pas chargée.
+ * 		SHA du fichier XML stocké dans la meta associée à la table ou `false` si la table n'est pas chargée.
  *
  * @return array
  * 		Tableau à deux éléments:
  * 		- index 0 : la liste des éléments à enregistrer dans la table concernée
- * 		- index 1 : le sha256 du fichier CSV source des éléments de la table
+ * 		- index 1 : le sha256 du fichier XML source des éléments de la table
  */
-function inc_isocode_read_file_csv($service, $table) {
+function inc_isocode_read_file_xml($service, $table) {
 
 	// Initialisations
 	$records = array();
@@ -46,7 +46,6 @@ function inc_isocode_read_file_csv($service, $table) {
 
 	// Initialisations des données de configuration propre au service et à la table
 	$file_extension = $GLOBALS['isocode'][$service]['tables'][$table]['extension'];
-	$delimiter = $GLOBALS['isocode'][$service]['tables'][$table]['delimiter'];
 	$fields_config = $GLOBALS['isocode'][$service]['tables'][$table]['basic_fields'];
 
 	// Ouvrir le fichier des enregistrements de la table spécifiée.
@@ -55,32 +54,28 @@ function inc_isocode_read_file_csv($service, $table) {
 		// On ne lit le fichier que si celui-ci a changé.
 		include_spip('isocode_fonctions');
 		if (!isocode_comparer_sha($sha_file, $table)) {
-			// Lecture du fichier au format CSV comme un fichier texte sachant :
-			// - que le délimiteur de colonne est configuré pour chaque table
-			// - et qu'il n'y a jamais de caractère d'enclosure dans ces fichiers csv
-			$lines = file($file);
-			if ($lines) {
+			// Lecture du fichier au format XML en utilisant le décodage JSON afin d'améliorer la performance
+			// ainsi que la lisibilité du tableau obtenu.
+			include_spip('inc/flock');
+			lire_fichier($file, $xml);
+			$entries = json_decode(json_encode(simplexml_load_string($xml)), true);
+
+			if ($entries) {
 				$headers = array();
-				foreach ($lines as $_number => $_line) {
-					$values = explode($delimiter, trim($_line, "\r\n"));
-					if ($_number == 0) {
-						// Stockage des noms de colonnes car la première ligne contient toujours le header
-						$headers = $values;
-					} else {
-						// Création de chaque enregistrement de la table
-						$fields = array();
-						foreach ($headers as $_cle => $_header) {
-							// Seuls les champs identifiés dans la configuration sont récupérés dans le fichier
-							if (isset($fields_config[trim($_header)])) {
-								$fields[$fields_config[trim($_header)]] = isset($values[$_cle]) ? trim($values[$_cle]) : '';
-							}
+				foreach ($entries as $_entry) {
+					// Création de chaque enregistrement de la table
+					$fields = array();
+					foreach ($headers as $_cle => $_header) {
+						// Seuls les champs identifiés dans la configuration sont récupérés dans le fichier
+						if (isset($fields_config[trim($_header)])) {
+							$fields[$fields_config[trim($_header)]] = isset($_entry[$_cle]) ? trim($_entry[$_cle]) : '';
 						}
-						// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter
-						if (function_exists($f_complete_record)) {
-							$fields = $f_complete_record($fields);
-						}
-						$records[] = $fields;
 					}
+					// Si besoin on appelle une fonction pour chaque enregistrement afin de le compléter
+					if (function_exists($f_complete_record)) {
+						$fields = $f_complete_record($fields);
+					}
+					$records[] = $fields;
 				}
 				// Si besoin on appelle une fonction pour toute la table
 				if (function_exists($f_complete_table)) {

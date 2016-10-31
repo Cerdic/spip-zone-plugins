@@ -23,6 +23,13 @@ if (!defined('_ISOCODE_LOC_ISO639_5_HIERARCHY')) {
 	 */
 	define('_ISOCODE_LOC_ISO639_5_HIERARCHY', 'https://www.loc.gov/standards/iso639-5/hier.php');
 }
+if (!defined('_ISOCODE_IOTA_ISO4217_SYMBOL')) {
+	/**
+	 * URL de base pour charger la page du tableau des devises ISO-4217 sur le site
+	 * de IOTA Finance qui permet de compléter les informations de base de l'ISO-4217.
+	 */
+	define('_ISOCODE_IOTA_ISO4217_SYMBOL', 'http://www.iotafinance.com/Codes-ISO-Devises.html');
+}
 
 
 $GLOBALS['isocode']['iso']['tables'] = array(
@@ -126,12 +133,29 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'tld'            => 'tld',
 				'CurrencyCode'   => 'code_4217_3',
 				'CurrencyName'   => 'currency_en',
-				'Phone'          => 'phone_id'
+				'Phone'          => 'phone_id',
 			)
 		),
 		'populating'   => 'file_csv',
 		'delimiter'    => ';',
 		'extension'    => '.txt'
+	),
+	'iso4217currencies'   => array(
+		'basic_fields' => array(
+			'CcyNm'      => 'label_en',
+			'Ccy'        => 'code_4217_3',
+			'CcyNbr'     => 'code_num',
+			'CcyMnrUnts' => 'minor_unit',
+		),
+		'addon_fields'   => array(
+			'iota' => array(
+				'Symbol devise' => 'symbol',
+				'Devise'        => 'label_fr',
+			)
+		),
+		'populating'   => 'file_xml',
+		'delimiter'    => '',
+		'extension'    => '.xml'
 	),
 );
 
@@ -283,7 +307,7 @@ function iso3166countries_complete_by_table($records) {
 				// On ne sélectionne que les colonnes correspondant à des champs additionnels.
 				$fields = array();
 				foreach ($headers as $_cle => $_header) {
-					if (array_key_exists($_header, $geo_to_spip)) {
+					if (isset($geo_to_spip[trim($_header)])) {
 						$fields[$geo_to_spip[trim($_header)]] = isset($values[$_cle]) ? trim($values[$_cle]) : '';
 					}
 				}

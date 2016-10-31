@@ -176,6 +176,25 @@ function isocode_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_iso3166countries'] =
 		array('field' => &$table_countries, 'key' => &$table_countries_key);
 
+	// ------------------------------------------------------------------
+	// Table des indicatifs des devises ISO-4217 : spip_iso4217currencies
+	$table_currencies = array(
+		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'       => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'symbol'         => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
+		'minor_unit'     => "int DEFAULT 0 NOT NULL",            // Minor units
+		'maj'            => 'timestamp'
+	);
+
+	$table_currencies_key = array(
+		'PRIMARY KEY' => 'code_4217_3'
+	);
+
+	$tables_principales['spip_iso4217currencies'] =
+		array('field' => &$table_currencies, 'key' => &$table_currencies_key);
+
 	// -----------------------------------------------------------------------------------------
 	// Table reproduisant le registre IANA des sous-étiquettes de langues : spip_iana5646subtags
 	$table_subtags = array(
@@ -227,6 +246,7 @@ function isocode_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['iso639families'] = 'iso639families';
 	$interfaces['table_des_tables']['iso15924scripts'] = 'iso15924scripts';
 	$interfaces['table_des_tables']['iso3166countries'] = 'iso3166countries';
+	$interfaces['table_des_tables']['iso4217currencies'] = 'iso4217currencies';
 	$interfaces['table_des_tables']['iana5646subtags'] = 'iana5646subtags';
 
 	// Les traitements
