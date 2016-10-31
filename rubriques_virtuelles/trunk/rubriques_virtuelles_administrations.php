@@ -17,6 +17,10 @@ function rubriques_virtuelles_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['create'] = array(
 		array('maj_tables', array('spip_rubriques'))
 	);
+
+	$maj['0.0.3'] = array(
+		array('sql_alter', "TABLE spip_rubriques CHANGE virtuel virtuel text DEFAULT '' NOT NULL"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

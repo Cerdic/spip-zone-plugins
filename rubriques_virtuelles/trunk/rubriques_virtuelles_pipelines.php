@@ -31,7 +31,11 @@ function rubriques_virtuelles_affiche_gauche($flux) {
 function rubriques_virtuelles_affiche_milieu($flux) {
 	if (in_array($flux['args']['exec'], array('rubrique'))
 		and $id = $flux['args']['id_rubrique']) {
-		$texte = recuperer_fond('prive/squelettes/inclure/rubriques_virtuelles_centre', array('id_rubrique' => $id), array('ajax' => true));
+		$texte = recuperer_fond(
+			'prive/squelettes/inclure/rubriques_virtuelles_centre',
+			array('id_rubrique' => $id),
+			array('ajax' => true)
+		);
 		if ($p = strpos($flux['data'], '<div id="wys')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
 		} else {
