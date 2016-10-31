@@ -214,6 +214,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// W
 	'webservice_consultation' => 'Consultation du webservice',
+	'werbservice_inaccessible' => 'Webservice innaccessible',
 
 	// Z
 	'zone_restreinte' => 'Vous n’avez pas les droits suffisants pour accéder à cette page.',

@@ -38,6 +38,8 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 			'spip_projets',
 		),
 	);
+	include_spip('inc/cextras');
+	include_spip('base/info_sites_extras');
 	cextras_api_upgrade(info_sites_declarer_champs_extras(), $maj['1.1.0']);
 
 	include_spip('base/upgrade');
