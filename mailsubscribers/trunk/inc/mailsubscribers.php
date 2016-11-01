@@ -599,9 +599,9 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 
 	// d'abord on prend la liste de tous les abonnes en base
 	// et on retire ceux qui ne sont plus dans le tableau $abonnes
-	$subs = sql_allfetsel('DISTINCT S.email',
+	$subs = sql_allfetsel('S.email',
 		'spip_mailsubscribers as S JOIN spip_mailsubscriptions as L ON S.id_mailsubscriber=L.id_mailsubscriber',
-		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.statut=' . sql_quote('valide'));
+		'L.id_mailsubscribinglist=' . intval($id_mailsubscribinglist) . ' AND L.id_segment=0 AND L.statut=' . sql_quote('valide'));
 	spip_log("mailsubscribers_synchronise_liste $liste: " . count($subs) . " abonnes deja dans la liste",
 		"mailsubscribers" . _LOG_DEBUG);
 	foreach ($subs as $sub) {
