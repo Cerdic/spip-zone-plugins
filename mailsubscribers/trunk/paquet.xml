@@ -1,12 +1,12 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="2.1.8"
+	version="2.2.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
 	documentation="http://contrib.spip.net/mailsubscribers"
-	schema="1.1.0"
+	schema="1.1.1"
 >
 	<nom>MailSubscribers</nom>
 	<auteur lien='http://nursit.com'>Cédric Morin</auteur>

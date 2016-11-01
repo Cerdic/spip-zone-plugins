@@ -39,6 +39,9 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_mailsubscriptions DROP PRIMARY KEY'),
 		array('sql_alter','TABLE spip_mailsubscriptions ADD PRIMARY KEY (id_mailsubscriber,id_mailsubscribinglist,id_segment)'),
 	);
+	$maj['1.1.1'] = array(
+		array('maj_tables', array('spip_mailsubscribinglists')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

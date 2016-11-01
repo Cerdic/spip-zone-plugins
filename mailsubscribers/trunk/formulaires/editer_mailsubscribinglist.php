@@ -54,7 +54,12 @@ function formulaires_editer_mailsubscribinglist_verifier_dist(
 	$hidden = ''
 ) {
 
-	$erreurs = formulaires_editer_objet_verifier('mailsubscribinglist', $id_mailsubscribinglist, array('titre'));
+	$oblis = array('titre');
+	if (_request('adresse_envoi_nom')) {
+		$oblis[] = 'adresse_envoi_email';
+	}
+
+	$erreurs = formulaires_editer_objet_verifier('mailsubscribinglist', $id_mailsubscribinglist, $oblis);
 
 	if (!isset($erreurs['titre'])) {
 		$id = _request('identifiant');

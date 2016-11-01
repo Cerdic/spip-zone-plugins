@@ -452,6 +452,8 @@ function mailsubscribers_filtre_liste($liste, $category = "newsletter") {
  *     titre : titre de la liste
  *     descriptif : descriptif de la liste
  *     status : status de la liste
+ *     from_name : nom de l'envoyeur (optionnel)
+ *     from_email : nom de l'envoyeur (optionnel)
  */
 function mailsubscribers_listes($options = array()) {
 	$filtrer_status = false;
@@ -470,7 +472,7 @@ function mailsubscribers_listes($options = array()) {
 	if ($filtrer_status) {
 		$where[] = 'statut=' . sql_quote($filtrer_status);
 	}
-	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status,segments', 'spip_mailsubscribinglists', $where, '',
+	$rows = sql_allfetsel('identifiant as id,titre,descriptif,statut as status,adresse_envoi_nom as from_name,adresse_envoi_email as from_email,segments', 'spip_mailsubscribinglists', $where, '',
 		'statut DESC,0+titre,titre');
 	$listes = array();
 	foreach ($rows as $row) {
