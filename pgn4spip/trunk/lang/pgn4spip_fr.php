@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Only lowercase in the key. In the value, french accents must be in HTML format &...;
 'ok'			=> 'OK',
 'reinit'		=> 'Remettre les valeurs par d&eacute;faut',
-'config_reinit'	=> 'La configuration a &eacute;t&eacute; remise avec les valeurs par d&eacute;faut',
+'config_reinit'	=> 'La configuration a été remise avec les valeurs par défaut',
 
-'boxtitle'		=> 'Configuration g&eacute;n&eacute;rale de l\'&eacute;chiquier et du PGN',
+'boxtitle'		=> 'Configuration générale de l'échiquier et du PGN',
 
 'squareclick'	=> <<<EOT
 Chaque case de l'&eacute;chiquier a une infobulle et une fonction.<br />
@@ -34,7 +34,7 @@ EOT
 'white'			=> 'blanche',
 'black'			=> 'noire',
 
-'piece'			=> 'Taille pi&egrave;ce :',
+'piece'			=> 'Taille pièce :',
 'default'		=> 'auto',
 'font'			=> 'Police :',
 'alpha'			=> 'alpha',
@@ -47,21 +47,21 @@ EOT
 'background'	=> 'Fond',
 
 'pgn'			=> 'PGN',
-'pgnheader'		=> 'Ent&ecirc;te',
+'pgnheader'		=> 'Entête',
 'pgnmove'		=> 'Coup',
 'pgncomment'	=> 'Commentaire',
 'pgnfocus'		=> 'Focus',
-'pgndelay'		=> 'D&eacute;lai (ms)',
+'pgndelay'		=> 'Délai (ms)',
 
 'showmoves'		=> 'Notation',
 'figurine'		=> 'figurine',
 'text'			=> 'texte',
 'puzzle'		=> 'puzzle',
-'hidden'		=> 'cach&eacute;e',
+'hidden'		=> 'cachée',
 'live'			=> 'live',
 
 'ctrlbrowse'	=> 'Bouton',
-'ctrlarrow'		=> 'Fl&egrave;che',
+'ctrlarrow'		=> 'Flèche',
 'ctrlbckgrnd'	=> 'Fond',
 
 'custom'		=> 'plat',
@@ -69,7 +69,7 @@ EOT
 
 'newline'		=> 'bloc',
 'inline'		=> 'suite',
-'hidden2'		=> 'cach&eacute;',
+'hidden2'		=> 'caché;',
 
 'focusborder'	=> 'bord',
 'focussquare'	=> 'case',
@@ -82,12 +82,12 @@ EOT
 'loop'			=> 'boucle',
 
 'conflocalpgn'	=> <<<EOT
-<legend>Configuration <i>particuli&egrave;re</i> d'un PGN dans un article SPIP</legend>
+<legend>Configuration <i>particulière</i> d'un PGN dans un article SPIP</legend>
 <fieldset><legend>Syntaxe</legend>
-<b>[pgn</b> <i>prm1</i><b>=</b><i>valeur1</i> <i>prm2</i></i><b>=</b><i>valeur2</i> ...</i><b>]</b> <i>notation alg&eacute;brique <a href="http://fr.wikipedia.org/wiki/Portable_Game_Notation" target="_blank">PGN</a> US</i> <b>[<font color="red">/</font>pgn]</b>
+<b>[pgn</b> <i>prm1</i><b>=</b><i>valeur1</i> <i>prm2</i></i><b>=</b><i>valeur2</i> ...</i><b>]</b> <i>notation algébrique <a href="http://fr.wikipedia.org/wiki/Portable_Game_Notation" target="_blank">PGN</a> US</i> <b>[<font color="red">/</font>pgn]</b>
 </fieldset>
 <br />
-Liste des <a href="../plugins/pgn4spip/pgn4web/board.html?help=true" target="_blank">param&egrave;tres</a> optionnels (" | " = "ou"; [] = par d&eacute;faut; () = initiale) :
+Liste des <a href="../plugins/pgn4spip/pgn4web/board.html?help=true" target="_blank">paramètres</a> optionnels (" | " = "ou"; [] = par d&eacute;faut; () = initiale) :
 <table cellspacing="5">
 <tr><td><b><u>f</u></b>rame<b><u>H</u></b>eight=[""] | <i>nombre</i><br />
 		fh=[""] | <i>nombre</i><br />
@@ -106,15 +106,14 @@ Liste des <a href="../plugins/pgn4spip/pgn4web/board.html?help=true" target="_bl
 	</td>
 </tr>
 </table>
-Exemple dans le corps d'un article SPIP consacr&eacute; &agrave; la <a href="http://fr.wikipedia.org/wiki/D%C3%A9fense_Alekhine" target="_blank">d&eacute;fense Alekhine</a> :<br />
+Exemple dans le corps d'un article SPIP consacré à la <a href="http://fr.wikipedia.org/wiki/D%C3%A9fense_Alekhine" target="_blank">défense Alekhine</a> :<br />
 <textarea rows=6 cols=55>
 Avant
 [pgn frameHeight=500 squareSize=46 pieceSize=40 pf=m
  movesDisplay=figurine layout=vertical am=loop]
 1. e4 Nf6 2.e5 Nd5 3.c4 Nb6
 [/pgn]
-Apr&egrave;s
+Après
 </textarea>
 EOT
 );
-?>

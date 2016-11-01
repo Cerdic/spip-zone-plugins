@@ -37,10 +37,8 @@ It does not require the CFG 3.x plug-in for its configuration in SPIP 3.x
 It requires the CFG 1.x plug-in for its configuration in SPIP 2.x
 http://plugins.spip.net/cfg.html
 
-pgn4spip is compatible with the plug-in Swiss Knife 1.8.x, 
-tool "Curly inverted commas" << French double quotes >>
-pgn4spip must be enabled AFTER Swiss Knife.
-pgn4spip does not require Swiss Knife.
+In case you use the tool "Curly inverted commas" << French double quotes >> of the plug-in Swiss Knife, then pgn4spip must be enabled AFTER Swiss Knife.
+
 ________________
 
 1. Setup of the plug-in
@@ -132,7 +130,6 @@ This allows pgn4spip to be enabled after Swiss Knife.
 Solution 2: if the problem persists, try again emptying the SPIP cache
 between disabling and reenabling the pgn4spip plugin.
 SPIP 3 : Maintenance > Empty the cache > Click "Empty the cache" in Current cache size
-SPIP 2 : Configuration > Empty the cache > Click "Empty the cache" in Current size of the cache
 
 Solution 3: if the problem persists, try again emptying equally the browser cache otherwise
 disable Swiss Knife or its tool "Curly inverted commas".

@@ -39,10 +39,8 @@ Il ne nécessite pas le plug-in CFG 3.x pour sa configuration dans SPIP 3.x
 Il nécessite le plug-in CFG 1.x pour sa configuration dans SPIP 2.x
 http://plugins.spip.net/cfg.html
 
-pgn4spip est compatible avec le plug-in Couteau Suisse 1.8.x, 
-lame "Améliorations des textes : Guillemets typographiques"
-pgn4spip doit être activé APRES le Couteau Suisse.
-pgn4spip ne nécessite pas le Couteau Suisse.
+En cas d'usage de la lame "Améliorations des textes : Guillemets typographiques" du  plugin Couteau Suisse, pgn4spip doit être activé APRES le Couteau Suisse.
+
 ________________
 
 1. Installation du plug-in
@@ -134,7 +132,6 @@ Cela permet d'activer pgn4spip après le Couteau Suisse.
 Solution 2: si le problème persiste, essayer à nouveau en vidant le cache de SPIP
 entre la désactivation et la réactivation du plugin pgn4spip.
 SPIP 3 : Maintenance > Vider le cache > Cliquer "Vider le cache" dans Taille du répertoire cache.
-SPIP 2 : Configuration > Vider le cache > Cliquer "Vider le cache" dans Taille du répertoire cache.
 
 Solution 3: si le problème persiste, essayer à nouveau en vidant également le cache du navigateur sinon
 désactiver le Couteau Suisse ou sa lame "Améliorations des textes : Guillemets typographiques".
