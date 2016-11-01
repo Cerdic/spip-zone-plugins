@@ -21,6 +21,12 @@
 	<span dir='#LANG_DIR' class='#EDIT{listes} listes'>(#LISTES|mailshot_affiche_nom_liste)</span>
 </div>]
 
+<div class="champ contenu_from[ (#FROM_EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:mailshot:label_from:> : </div>
+	<span dir='#LANG_DIR' class=''>[(#FROM_NAME|sinon{#FROM_EMAIL}) ][&lt;(#FROM_EMAIL)&gt;]</span>
+</div>
+
+
 [<div class="champ contenu_avancement">
 	<div class='label'><:mailshot:label_avancement:> : </div>
 	<span dir='#LANG_DIR' class='avancement'>(#CURRENT|mailshot_afficher_avancement{#TOTAL,#FAILED})</span>

@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sparkpost_api_key' => 'Sparkpost API Key',
 	'label_sujet' => 'Sujet',
 	'label_texte' => 'Version Texte',
+	'label_from' => 'Envoyeur',
 	'legend_configuration_adresse_envoi' => 'Adresse d’envoi',
 	'legend_configuration_historique' => 'Historique des envois',
 	'legend_configuration_mailer' => 'Service d’envoi des mails',
