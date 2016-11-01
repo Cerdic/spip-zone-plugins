@@ -1,0 +1,51 @@
+<paquet
+	prefix="agenda"
+	categorie="date"
+	version="3.16.5"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/evenement-32.png"
+	schema="0.27.0"
+	documentation="http://contrib.spip.net/article2858"
+>
+
+	<nom>Agenda</nom>
+	<!-- Agenda Evenementiel -->
+
+	<auteur lien="http://www.yterium.net">Cedric MORIN</auteur>
+	<auteur lien="http://contrib.spip.net/b_b">b_b</auteur>
+	<auteur lien="http://spip.tetue.net">Tetue</auteur>
+	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
+
+	<copyright>2006-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="agenda" reference="fr" gestionnaire="salvatore" />
+	<traduire module="configureragenda" reference="fr" gestionnaire="salvatore" />
+	<traduire module="migreragenda" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="autoriser" inclure="agenda_autoriser.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/agenda_evenements.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/agenda_evenements.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/agenda_evenements.php" />
+
+	<pipeline nom="affiche_milieu" inclure="agenda_pipelines.php" />
+	<pipeline nom="compositions_declarer_heritage"  inclure="agenda_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="agenda_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="agenda_pipelines.php" />
+	<pipeline nom="post_edition" inclure="agenda_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="agenda_pipelines.php" />
+	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="agenda_pipelines.php" />
+
+	<utilise nom="Fulltext" compatibilite="[1.0.0;[" />
+	<utilise nom="mots" compatibilite="[2.4.6;[" />
+	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
+
+	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
+	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" action="evenement_edit" icone="images/evenement-new-16.png" />
+
+	<chemin path="./" />
+	<chemin path="squelettes" type='public'/>
+</paquet>
