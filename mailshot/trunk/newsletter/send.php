@@ -134,9 +134,14 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 		return _T('mailshot:erreur_aucun_service_configure',array('url'=>$url_config));
 	}
 
-	# Regler le From
-	# TODO : reglage specifique mailshot
-	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
+	# Regler le From si fourni dans $corps a l'appel
+	if (isset($corps['from']) and $corps['from']){
+		$from = $corps['from'];
+		if (isset($corps['nom_envoyeur']) and $corps['nom_envoyeur']){
+			$nom_envoyeur = $corps['nom_envoyeur'];
+		}
+	}
+	// Un from par defaut sinon ?
 	if (empty($from) AND empty($mailer->From)) {
 		$from = $GLOBALS['meta']["email_envoi"];
 		if (empty($from) OR !email_valide($from)) {

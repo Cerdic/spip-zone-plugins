@@ -35,10 +35,12 @@ function mailshot_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_mailshot"   => "bigint(21) NOT NULL",
 			"id" => "varchar(32)  DEFAULT '' NOT NULL",
-			"sujet" => "text NOT NULL",
+			"sujet" => "text NOT NULL DEFAULT ''",
 			"html" => "longtext NOT NULL DEFAULT ''",
 			"texte" => "longtext NOT NULL DEFAULT ''",
 			"listes" => "text NOT NULL DEFAULT ''",
+			"from_name" => "text NOT NULL DEFAULT ''",
+			"from_email" => "text NOT NULL DEFAULT ''",
 			"total"   => "bigint(21) NOT NULL",
 			"current" => "bigint(21) NOT NULL",
 			"failed" => "bigint(21) NOT NULL",

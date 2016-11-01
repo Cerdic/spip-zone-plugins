@@ -163,10 +163,17 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 			$options = array('tracking_id'=>"mailshot".intval($shoot['id_mailshot'])."-".date('Ym',strtotime($shoot['date_start'])));
 			$subscriber = charger_fonction("subscriber","newsletter");
 			$send = charger_fonction("send","newsletter");
-			$corps = array("sujet"=>&$shoot['sujet'],"html"=>&$shoot['html'],"texte"=>&$shoot['texte']);
+			$corps = array(
+				'sujet' => &$shoot['sujet'],
+				'html' => &$shoot['html'],
+				'texte' => &$shoot['texte'],
+				'from' => $shoot['from_email'],
+				'nom_envoyeur' => $shoot['from_name'],
+			);
 			foreach($dests as $d){
 				if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 				$s = $subscriber($d['email'],array('listes'=>$listes));
+				spip_log("mailshot_envoyer_lot #".$shoot['id_mailshot']."/".$d['email']." send","mailshot");
 				$erreur = $send($s, $corps, $options);
 				$try = $d['try']+1;
 				if ($erreur){

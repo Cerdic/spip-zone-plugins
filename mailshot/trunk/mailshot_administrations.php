@@ -57,6 +57,9 @@ function mailshot_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.3.4'] = array(
 		array('maj_tables', array('spip_mailshots')),
 	);
+	$maj['0.3.5'] = array(
+		array('maj_tables', array('spip_mailshots')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
