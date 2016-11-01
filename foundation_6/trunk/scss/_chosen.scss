@@ -17,3 +17,8 @@
 .chosen-choices li {
   clear: none;
 }
+
+// Chosen dans un reveal
+.reveal .chosen-container {
+  width: 100% !important;
+}
