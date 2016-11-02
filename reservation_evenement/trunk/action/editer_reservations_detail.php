@@ -83,6 +83,7 @@ function reservations_detail_modifier($id_reservations_detail, $set = null) {
 	
 	return $err;
 }
+
 function reservations_detail_inserer($id_parent = null, $set = null) {
 	$objet = 'reservations_detail';
 	
@@ -130,6 +131,7 @@ function reservations_detail_inserer($id_parent = null, $set = null) {
 	
 	return $id;
 }
+
 function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub = true) {
 	include_spip ( 'inc/autoriser' );
 	include_spip ( 'inc/rubriques' );
