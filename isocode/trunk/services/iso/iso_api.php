@@ -88,7 +88,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'Label (English)' => 'label_en',
 			'Label (French)'  => 'label_fr'
 		),
-		'addon_fields'   => array(
+		'addon_fields' => array(
 			'sil' => array(
 				'Equivalent' => 'code_639_1',
 				'Code set'   => 'code_set',
@@ -124,7 +124,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'Alpha-3'      => 'code_alpha3',
 			'Numeric'      => 'code_num',
 		),
-		'addon_fields'   => array(
+		'addon_fields' => array(
 			'geonames' => array(
 				'Capital'        => 'capital',
 				'Area(in sq km)' => 'area',
@@ -140,14 +140,14 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 		'delimiter'    => ';',
 		'extension'    => '.txt'
 	),
-	'iso4217currencies'   => array(
+	'iso4217currencies' => array(
 		'basic_fields' => array(
 			'Ccy'        => 'code_4217_3',
 			'CcyNbr'     => 'code_num',
 			'CcyNm'      => 'label_en',
 			'CcyMnrUnts' => 'minor_unit',
 		),
-		'addon_fields'   => array(
+		'addon_fields' => array(
 			'iota' => array(
 				'Symbol devise' => 'symbol',
 				'Devise'        => 'label_fr',
@@ -155,7 +155,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 		),
 		'populating'   => 'file_xml',
 		'extension'    => '.xml',
-		'base'         => 'CcyTbl/CcyNtry'
+		'base'         => 'CcyTbl/CcyNtry'      // clé à laquelle débute la liste des éléments
 	),
 );
 
@@ -289,7 +289,7 @@ function iso3166countries_complete_by_table($records) {
 
 	// Lecture du fichier CSV geonames-countryInfo.txt pour récupérer les informations additionnelles.
 	// Le délimiteur est une tabulation.
-	$file = find_in_path("services/iso/iso3166countries-geonames-info.txt");
+	$file = find_in_path('services/iso/iso3166countries-geonames-info.txt');
 	$delimiter = "\t";
 	$lines = file($file);
 	if ($lines) {

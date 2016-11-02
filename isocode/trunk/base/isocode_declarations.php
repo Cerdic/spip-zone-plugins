@@ -21,9 +21,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * - `spip_iso639retirements`, qui contient les langues retirées de la liste officielle,
  * - `spip_iso639families`, qui contient les familles et groupes de langues ISO-639-5,
  *
- * Le plugin déclare aussi une table `spip_iso15924scripts` qui contient les codets d'écriture à 4 lettres et leur définition en
- * français et en anglais et une table `spip_iana5646subtags` qui contient les codes des sous-étiquettes des étiquettes de langue
- * construites selon la RFC 5646.
+ * Le plugin déclare aussi une table `spip_iso15924scripts` qui contient les codets d'écriture à 4 lettres et leur
+ * définition en français et en anglais et une table `spip_iana5646subtags` qui contient les codes des sous-étiquettes
+ * des étiquettes de langue construites selon la RFC 5646.
  *
  * Enfin, la plugin déclare une table `spip_iso15924countries` qui contient les indicatifs ISO-3166 des pays.
  *
@@ -112,16 +112,16 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// ---------------------------------------------------------------------------
 	// Tables des familles et groupes de langues (ISO-639-5) : spip_iso639families
 	$table_families = array(
-		'code_639_5'     => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-5 identifier
-		'uri'		     => "varchar(150) DEFAULT '' NOT NULL", // Description page
-		'label_en'       => "text DEFAULT '' NOT NULL",         // English label for the family
-		'label_fr'       => "text DEFAULT '' NOT NULL",         // French label for the family
-		'code_639_1'     => 'char(2)',                          // Equivalent 639-1 identifier, if there is one
-		'scope'          => "char(1) DEFAULT '' NOT NULL",      // C(ollective) always
-		'code_set'       => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
-		'hierarchy'      => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
-		'parent'         => "char(3) DEFAULT '' NOT NULL",      // The parent three-letter 639-5 identifier
-		'maj'            => 'timestamp'
+		'code_639_5' => "char(3) DEFAULT '' NOT NULL",      // The three-letter 639-5 identifier
+		'uri'        => "varchar(150) DEFAULT '' NOT NULL", // Description page
+		'label_en'   => "text DEFAULT '' NOT NULL",         // English label for the family
+		'label_fr'   => "text DEFAULT '' NOT NULL",         // French label for the family
+		'code_639_1' => 'char(2)',                          // Equivalent 639-1 identifier, if there is one
+		'scope'      => "char(1) DEFAULT '' NOT NULL",      // C(ollective) always
+		'code_set'   => "varchar(32) DEFAULT '' NOT NULL",  // Any combinaison of 639-5 and 639-2 separed by comma
+		'hierarchy'  => "varchar(32) DEFAULT '' NOT NULL",  // List of 639-5 identifiers separated by comma
+		'parent'     => "char(3) DEFAULT '' NOT NULL",      // The parent three-letter 639-5 identifier
+		'maj'        => 'timestamp'
 	);
 
 	$table_families_key = array(
@@ -134,13 +134,13 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// -------------------------------------------------------------------
 	// Table des indicatifs d'écritures (ISO 15924) : spip_iso15924scripts
 	$table_scripts = array(
-		'code_15924'  => "char(4) DEFAULT '' NOT NULL",                     // The four-letter identifier
-		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",                // English script name
-		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",                // french script name
-		'code_num'    => "char(3) DEFAULT '' NOT NULL",                     // Numeric identifier
-		'alias_en'    => "varchar(32) DEFAULT '' NOT NULL",                 // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
-		'date_ref'    => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
-		'maj'         => 'timestamp'
+		'code_15924' => "char(4) DEFAULT '' NOT NULL",                     // The four-letter identifier
+		'label_en'   => "varchar(255) DEFAULT '' NOT NULL",                // English script name
+		'label_fr'   => "varchar(255) DEFAULT '' NOT NULL",                // french script name
+		'code_num'   => "char(3) DEFAULT '' NOT NULL",                     // Numeric identifier
+		'alias_en'   => "varchar(32) DEFAULT '' NOT NULL",                 // Unicode alias showing how ISO 15924 code relate to script names defined in Unicode.
+		'date_ref'   => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // The reference date to follow changes
+		'maj'        => 'timestamp'
 	);
 
 	$table_scripts_key = array(
@@ -159,8 +159,8 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
 		'capital'        => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
-		'area'           => "int DEFAULT 0 NOT NULL",            // Area in squared km
-		'population'     => "int DEFAULT 0 NOT NULL",            // Inhabitants count
+		'area'           => 'int DEFAULT 0 NOT NULL',            // Area in squared km
+		'population'     => 'int DEFAULT 0 NOT NULL',            // Inhabitants count
 		'code_continent' => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
 		'tld'            => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
 		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
@@ -179,13 +179,13 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// ------------------------------------------------------------------
 	// Table des indicatifs des devises ISO-4217 : spip_iso4217currencies
 	$table_currencies = array(
-		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
-		'code_num'       => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
-		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
-		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
-		'symbol'         => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
-		'minor_unit'     => "int DEFAULT 0 NOT NULL",            // Minor units
-		'maj'            => 'timestamp'
+		'code_4217_3' => "char(3) DEFAULT '' NOT NULL",       // The three-letter identifier
+		'code_num'    => "char(3) DEFAULT '' NOT NULL",       // Numeric identifier
+		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",  // English name
+		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
+		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
+		'minor_unit'  => 'int DEFAULT 0 NOT NULL',            // Minor units
+		'maj'         => 'timestamp'
 	);
 
 	$table_currencies_key = array(
@@ -198,9 +198,9 @@ function isocode_declarer_tables_principales($tables_principales) {
 	// -----------------------------------------------------------------------------------------
 	// Table reproduisant le registre IANA des sous-étiquettes de langues : spip_iana5646subtags
 	$table_subtags = array(
-		'type'	         => "varchar(16) DEFAULT '' NOT NULL", // Subtag type as language, variant, extlang, region, script...
+		'type'           => "varchar(16) DEFAULT '' NOT NULL", // Subtag type as language, variant, extlang, region, script...
 		'subtag'         => "varchar(32) DEFAULT '' NOT NULL", // Subtag value
-		'description' 	 => "text DEFAULT '' NOT NULL" ,       // Descriptions of subtags separated by comma
+		'description'    => "text DEFAULT '' NOT NULL",       // Descriptions of subtags separated by comma
 		'date_ref'       => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // Subtag creation date
 		'no_script'      => "char(4) DEFAULT '' NOT NULL",     // The four letter script identifier not to be used for the subtag
 		'scope'          => "varchar(32) DEFAULT '' NOT NULL", // Scope indication : collection, macrolanguage...

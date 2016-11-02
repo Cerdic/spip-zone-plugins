@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *      Tableau résultat de l'action de vidage:
  *      - index 0 : `true` si le vidage a réussi, `false` sinon.
  *      - index 1 : liste des tables en erreur ou tableau vide sinon.
- * 		- index 2 : liste des tables inchangées ou tableau vide sinon.
+ *        - index 2 : liste des tables inchangées ou tableau vide sinon.
  */
 function isocode_charger_tables($tables = array()) {
 
@@ -68,7 +68,7 @@ function isocode_charger_tables($tables = array()) {
 				// lecture ne renvoie aucun élément pour éviter des traitements inutiles. Il faut donc distinguer
 				// ce cas d'une erreur de lecture.
 				include_spip("services/${service}/${service}_api");
-				$lire_table = charger_fonction("isocode_read_{$GLOBALS['isocode'][$service]['tables'][$_table]['populating']}", 'inc');
+				$lire_table = charger_fonction('isocode_read', 'inc');
 				list($records, $sha) = $lire_table($service, $_table);
 				if ($records) {
 					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
@@ -179,7 +179,7 @@ function isocode_decharger_tables($tables = array()) {
  *        Nom d'une table de codes ISO sans le préfixe `spip_`.
  *
  * @return string
- * 		Nom du service permettant le chargement de la table ou chaine vide si aucun service n'est trouvé.
+ *        Nom du service permettant le chargement de la table ou chaine vide si aucun service n'est trouvé.
  */
 function isocode_trouver_service($table) {
 
@@ -215,7 +215,7 @@ function isocode_trouver_service($table) {
  * @api
  *
  * @return array
- * 		La liste des services disponibles ou tableau vide aucun service n'est détecté.
+ *        La liste des services disponibles ou tableau vide aucun service n'est détecté.
  */
 function isocode_lister_services() {
 
@@ -237,7 +237,7 @@ function isocode_lister_services() {
  * @api
  *
  * @param $service
- * 		Nom du service à vérifier.
+ *        Nom du service à vérifier.
  *
  * @return bool
  *      `true` si le service est disponible, `false` sinon.
@@ -258,11 +258,11 @@ function isocode_service_disponible($service) {
  * services donnés.
  *
  * @param array $services
- * 		Liste des services pour lesquels la liste des tables associées est demandée.
- * 		Si la liste est vide la fonction renvoie les tables de tous les services dsponibles.
+ *        Liste des services pour lesquels la liste des tables associées est demandée.
+ *        Si la liste est vide la fonction renvoie les tables de tous les services dsponibles.
  *
  * @return array
- * 		Liste des tables de codes ISO sans le préfixe `spip_`.
+ *        Liste des tables de codes ISO sans le préfixe `spip_`.
  */
 function isocode_lister_tables($services = array()) {
 
@@ -301,13 +301,13 @@ function isocode_lister_tables($services = array()) {
  * @api
  *
  * @return array
- * 		Liste des tables de codes ISO sans le préfixe `spip_` et leurs informations de chargement.
+ *        Liste des tables de codes ISO sans le préfixe `spip_` et leurs informations de chargement.
  */
 function isocode_informer_tables_chargees() {
 
 	// On initialise la liste des tables en lisant la meta idoine.
 	include_spip('inc/config');
-	$tables = lire_config("isocode/tables", array());
+	$tables = lire_config('isocode/tables', array());
 
 	// On complète chaque bloc d'informations par le nom de la table et son libéllé.
 	if ($tables) {
@@ -360,10 +360,10 @@ function isocode_table_chargee($table, &$meta_table) {
  * @api
  *
  * @param string $sha
- * 		Sha à comparer à celui de la table.
+ *        Sha à comparer à celui de la table.
  * @param string $table
- * 		Nom de la table de code ISO (sans préfixe `spip_`) dont il faut comparer le sha
- * 		stoké dans sa meta de chargement.
+ *        Nom de la table de code ISO (sans préfixe `spip_`) dont il faut comparer le sha
+ *        stoké dans sa meta de chargement.
  *
  * @return bool
  *      `true` si le sha passé en argument est identique au sha stocké pour la table choisie, `false` sinon.

@@ -4,20 +4,22 @@
  *
  * @package    SPIP\ISOCODE\OBJET
  */
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement des données : le formulaire propose les actions possibles sur les tables de codes ISO,
  * à savoir, charger ou vider et la liste des tables regroupées par service.
  *
  * @return array
- * 		Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
- * 		champ de saisie, celle-ci sont systématiquement remises à zéro.
- * 		- `_actions_tables`		: (affichage) alias et libellés des actions possibles sur une table, `charger` et `vider`
- * 		- `_actions_disable`	: (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
- * 		- `_action_defaut`		: (affichage) action sélectionnée par défaut, `charger`
- * 		- `_tables`				: (affichage) noms des tables sans le préfixe `spip_`
+ *        Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
+ *        champ de saisie, celle-ci sont systématiquement remises à zéro.
+ *        - `_actions_tables`        : (affichage) alias et libellés des actions possibles sur une table, `charger` et
+ *        `vider`
+ *        - `_actions_disable`    : (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
+ *        - `_action_defaut`        : (affichage) action sélectionnée par défaut, `charger`
+ *        - `_tables`                : (affichage) noms des tables sans le préfixe `spip_`
  */
 function formulaires_isocode_gerer_table_charger() {
 	$valeurs = array();
@@ -26,7 +28,7 @@ function formulaires_isocode_gerer_table_charger() {
 	// Lister les actions sur les tables
 	$valeurs['_actions_tables'] = array(
 		'charger' => _T('isocode:label_action_charger_table'),
-		'vider' => _T('isocode:label_action_vider_table')
+		'vider'   => _T('isocode:label_action_vider_table')
 	);
 
 	// Acquérir la liste des tables et leur statut de chargement
@@ -56,15 +58,16 @@ function formulaires_isocode_gerer_table_charger() {
  * une table.
  *
  * @return array
- * 		Tableau des erreurs sur l'action et/ou la table ou tableau vide si aucune erreur.
+ *        Tableau des erreurs sur l'action et/ou la table ou tableau vide si aucune erreur.
  */
 function formulaires_isocode_gerer_table_verifier() {
 	$erreurs = array();
 
 	$obligatoires = array('action_table', 'tables');
 	foreach ($obligatoires as $_obligatoire) {
-		if (!_request($_obligatoire))
+		if (!_request($_obligatoire)) {
 			$erreurs[$_obligatoire] = _T('info_obligatoire');
+		}
 	}
 
 	return $erreurs;
@@ -77,8 +80,8 @@ function formulaires_isocode_gerer_table_verifier() {
  * @uses isocode_decharger_tables()
  *
  * @return array
- * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
- * 		d'erreur. L'indicateur editable est toujours à vrai.
+ *        Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
+ *        d'erreur. L'indicateur editable est toujours à vrai.
  */
 function formulaires_isocode_gerer_table_traiter() {
 
@@ -95,8 +98,7 @@ function formulaires_isocode_gerer_table_traiter() {
 		$message = $action_ok
 			? _T('isocode:succes_vider_table')
 			: _T('isocode:erreur_vider_table', array('tables' => implode(', ', $tables_nok)));
-	}
-	else {
+	} else {
 		// La fonction de chargement de la table lance un vidage préalable si la table
 		// demandé est déjà chargée.
 		list($action_ok, $tables_nok, $tables_inchangees) = isocode_charger_tables($tables);

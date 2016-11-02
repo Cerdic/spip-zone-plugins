@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function isocode_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-//	$config_defaut = configurer_isocode();
+	//	$config_defaut = configurer_isocode();
 
 	// Liste des tables créées par le plugin
 	include_spip('isocode_fonctions');
@@ -45,7 +45,7 @@ function isocode_upgrade($nom_meta_base_version, $version_cible) {
 
 	// Ajout systématique des données iso dans la base de données, quelque soit l'action en cours.
 	// Ces données n'étant pas modifiables, il n'y a pas de risque à recharger ces tables.
-//	isocode_charger_tables();
+	//	isocode_charger_tables();
 }
 
 
