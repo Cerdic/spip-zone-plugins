@@ -142,7 +142,7 @@ function exec_mutualisation_dist()
 
         $page .= "<tr class='tr".$nsite % 2 ."'"
             ." style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>
-			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$credential$version_installee</td>
+			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;width:16px;height:16px;' />$v$erreur$credential$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a><br />
 				<a href='${url}$url_admin_plugin'>plugins</a><br />
