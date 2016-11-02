@@ -58,10 +58,10 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	if (count($listes)){
 		$lists = charger_fonction("lists","newsletter");
 		$desc_lists = $lists();
-		foreach($listes as $id) {
-			if (isset($desc_lists[$id]['from_email']) and $desc_lists[$id]['from_email']){
-				$from_email = $desc_lists[$id]['from_email'];
-				$from_name = $desc_lists[$id]['from_name'];
+		foreach($listes as $i) {
+			if (isset($desc_lists[$i]['from_email']) and $desc_lists[$i]['from_email']){
+				$from_email = $desc_lists[$i]['from_email'];
+				$from_name = $desc_lists[$i]['from_name'];
 				break;
 			}
 		}
