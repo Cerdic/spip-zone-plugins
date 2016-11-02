@@ -9,13 +9,17 @@
 	ip, 1,
 	pid, 1
 }})]
+
+[(#REM) verifier que le fichier passé en parametre est bein dans _DIR_LOG ]
+<BOUCLE_control(DATA){source ls, #EVAL{_DIR_LOG}|concat{*.log*}} {file==#ENV{fic}}>
+#SET{fic,#EVAL{_DIR_LOG}|concat{#FILE}}
 <B_lecture_log>
 	#ANCRE_PAGINATION
 	<div class="spip_code">
 		<div class="pagination tri">
 			[(#TRI{'>', <:simplog:tri_croissant:>}) | ]
 			[(#TRI{'<', <:simplog:tri_decroissant:>}) ]
-		[(#ENV{fic}|oui)
+		[(#GET{fic}|oui)
 				|
 			<a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax" style="text-align: right">
 				<:simplog:clic_rafraichir:>
@@ -25,10 +29,10 @@
 		<table class="spip liste">
 			[<caption>
 				<strong class="caption">
-					(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:>
-					[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{telecharger_log,#ENV{fic}}, '', '', ''})]
+					(#GET{fic}|oui)<:simplog:fichier{fichier=#GET{fic}}:>
+					[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{telecharger_log,#GET{fic}}, '', '', ''})]
 					&nbsp;|&nbsp;
-					[(#BOUTON_ACTION{<:lien_supprimer|ucfirst:>, #URL_ACTION_AUTEUR{supprimer_log,#ENV{fic}}, '', '', ''})]
+					[(#BOUTON_ACTION{<:lien_supprimer|ucfirst:>, #URL_ACTION_AUTEUR{supprimer_log,#GET{fic}}, '', '', ''})]
 				</strong>
 			</caption>]
 			<thead>
@@ -42,7 +46,7 @@
 				</tr>
 			</thead>
 			<tbody>
-<BOUCLE_lecture_log(DATA){source table, #ENV{fic}|simplog_phraser_log}{tri #ENV{par, index}, #GET{defaut_tri}}{pagination 100}>
+<BOUCLE_lecture_log(DATA){source table, #GET{fic}|simplog_phraser_log}{tri #ENV{par, index}, #GET{defaut_tri}}{pagination 100}>
 				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 					<td class="date secondaire">[(#DATE)]</td>
 					<td class="ip">[(#IP)]</td>
@@ -57,11 +61,12 @@
 	</div>
 	[<p class="pagination">(#PAGINATION{prive})</p>]
 </B_lecture_log>
-[(#ENV{fic}|oui)
+[(#GET{fic}|oui)
 	#BOITE_OUVRIR{'','error'}
-		<:simplog:message_fichier_inconnu{fichier=#ENV{fic}}:>
+		<:simplog:message_fichier_inconnu{fichier=#GET{fic}}:>
 	#BOITE_FERMER]
 <//B_lecture_log>
+</BOUCLE_control>
 
 [(#ENV{fic}|non)
 	#BOITE_OUVRIR{'','notice'}
