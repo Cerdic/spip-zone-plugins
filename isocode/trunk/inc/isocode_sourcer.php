@@ -1,9 +1,9 @@
 <?php
 /**
- * Ce fichier contient la fonction générique de lecture d'un fichier CSV en un tableau d'éléments d'une
- * table de la base de données.
+ * Ce fichier contient la fonction générique de lecture d'un fichier ou d'une page HTML source
+ * en un tableau d'éléments prêt à être inséré dans une table de la base de données.
  *
- * @package SPIP\ISOCODE\OUTILS
+ * @package SPIP\ISOCODE\LECTURE
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
@@ -18,23 +18,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Il est possible, pour chaque élément ou pour l'ensemble d'appliquer une fonction spécifique à la table
  * qui complète l'élément.
  *
+ * @api
+ *
  * @param string $service
- *        Nom du service associé à la lecture de la table.
+ *      Nom du service associé à la lecture de la table.
  * @param string $table
- *        Nom de la table concernée par la lecture de la source.
+ *      Nom de la table concernée par la lecture de la source.
  *
  * @return array
- *        Tableau à deux éléments:
- *        - index 0 : la liste des éléments à enregistrer dans la table concernée
- *        - index 1 : le sha256 du fichier CSV source des éléments de la table
+ *      Tableau à deux éléments:
+ *      - index 0 : la liste des éléments à enregistrer dans la table concernée
+ *      - index 1 : le sha256 de la source des éléments de la table
  */
-function inc_isocode_read($service, $table) {
+function isocode_lire($service, $table) {
 
 	// Initialisations
 	$records = array();
-	$sha_file = false;
 	$f_complete_record = "${table}_complete_by_record";
 	$f_complete_table = "${table}_complete_by_table";
+	$sha_identique = true;
 
 	// Inclusion des configurations et des fonctions spécifiques au service qui fournit les données
 	// de la table à remplir.
@@ -43,21 +45,21 @@ function inc_isocode_read($service, $table) {
 	// Acquisition de la configuration de lecture pour la table concernée.
 	$config = $GLOBALS['isocode'][$service]['tables'][$table];
 
-	// Détermination de la clé primaire de la table
+	// Détermination de la clé primaire de la table.
 	$primary_key_table = get_primary_key($table);
 
-	// Initialisation d'un élément de la table par défaut (uniquement les champs de base)
+	// Initialisation d'un élément de la table par défaut (uniquement les champs de base).
 	// Cela permet de s'assurer que chaque élément du tableau de sortie aura la même structure
 	// quelque soit les données lues dans la source.
 	$default_fields = init_element_fields($table, $config['basic_fields']);
 
 	// Récupération du contenu du fichier ou de la page HTML source et du sha associé. Pour les fichiers CSV
-	// on renvoie aussi la liste des titres des colonnes.
+	// on renvoie aussi la liste des titres des colonnes qui existe toujours.
 	list($content, $header, $sha) = get_source_content($service, $table, $config);
 	if ($content and $sha and $default_fields) {
 		// On n'analyse le contenu que si celui-ci a changé (sha différent de celui stocké).
-		include_spip('isocode_fonctions');
 		if (!isocode_comparer_sha($sha, $table)) {
+			$sha_identique = false;
 			$primary_key_values = array();
 			foreach ($content as $_element) {
 				// Pour chaque élément on récupère un tableau associatif [titre colonne] = valeur colonne.
@@ -69,13 +71,13 @@ function inc_isocode_read($service, $table) {
 				foreach ($values as $_key => $_value) {
 					$key = trim($_key);
 					// Seuls les champs identifiés dans la configuration sont récupérés dans le fichier
-					if (isset($fields_config[$key])) {
-						$fields[$fields_config[$key]] = $_value ? trim($_value) : '';
+					if (isset($config['basic_fields'][$key])) {
+						$fields[$config['basic_fields'][$key]] = $_value ? trim($_value) : '';
 						// Vérifier si le champ en cours fait partie de la clé primaire et élaborer la clé
 						// primaire de l'élément en cours
-						if (in_array($fields_config[$key], $primary_key_table['list'])) {
-							$pkey_element[$fields_config[$key]] = $_value;
-							if (count($pkey_element) == $primary_key_table['count']) {
+						if (in_array($config['basic_fields'][$key], $primary_key_table)) {
+							$pkey_element[$config['basic_fields'][$key]] = $_value;
+							if (count($pkey_element) == count($primary_key_table)) {
 								$pkey_element_exists = true;
 							}
 						}
@@ -110,7 +112,7 @@ function inc_isocode_read($service, $table) {
 		}
 	}
 
-	return array($records, $sha_file);
+	return array($records, $sha, $sha_identique);
 }
 
 
@@ -126,12 +128,9 @@ function get_primary_key($table) {
 
 	if ($id_key = id_table_objet($table)) {
 		// On stocke la clé sous forme de liste pour les tests d'appartenance.
-		$primary_key['list'] = explode(',', $id_key);
+		$primary_key = explode(',', $id_key);
 		// On trie la liste et on recompose la clé sous forme de chaine pour la gestion des doublons.
-		sort($primary_key['list']);
-		$primary_key['name'] = implode(',', $primary_key['list']);
-		// On stocke le nombre de champs de la clé.
-		$primary_key['count'] = count($primary_key['list']);
+		sort($primary_key);
 	}
 
 	return $primary_key;
@@ -143,10 +142,10 @@ function get_primary_key($table) {
  * la déclaration de la base ou avec une valeur prédéfinie par type.
  *
  * @param string $table
- *        Nom de la table concernée par la lecture sans le préfixe `spip_`.
+ *      Nom de la table concernée par la lecture sans le préfixe `spip_`.
  * @param array  $fields_config
- *        Configuration de la correspondance entre le nom de la donnée dans la source
- *        et celui du champ dans la table.
+ *      Configuration de la correspondance entre le nom de la donnée dans la source
+ *      et celui du champ dans la table.
  *
  * @return array
  */
@@ -210,7 +209,7 @@ function init_element_fields($table, $fields_config) {
  * @param $service
  * @param $table
  * @param $config
- *        Configuration de la méthode de lecture de la source pour la table concernée.
+ *      Configuration de la méthode de lecture de la source pour la table concernée.
  *
  * @return array
  */
@@ -232,7 +231,7 @@ function get_source_content($service, $table, $config) {
 				// On récupére donc un tableau des éléments à lire en utilisant la fonction explode
 				$content = explode($config['parsing']['element']['delimiter'], $flux['page']);
 			} else {
-				// TODO : C'est une regexp... à compléter
+				// TODO : c'est une regexp... à compléter
 			}
 		}
 	} else {
@@ -302,4 +301,35 @@ function get_element_values($element, $header, $config) {
 	}
 
 	return $values;
+}
+
+
+/**
+ * Compare le sha passé en argument pour la table concernée avec le sha stocké dans la meta
+ * pour cette même table.
+ *
+ * @api
+ *
+ * @param string $sha
+ *      SHA à comparer à celui de la table.
+ * @param string $table
+ *      Nom de la table de code ISO (sans préfixe `spip_`) dont il faut comparer le sha
+ *      stoké dans sa meta de chargement.
+ *
+ * @return bool
+ *      `true` si le sha passé en argument est identique au sha stocké pour la table choisie, `false` sinon.
+ */
+function isocode_comparer_sha($sha, $table) {
+
+	$sha_identique = false;
+
+	// On récupère le sha de la table dans les metas si il existe (ie. la table a été chargée)
+	include_spip('inc/config');
+	$sha_stocke = lire_config("isocode/tables/${table}/sha", false);
+
+	if ($sha_stocke and ($sha == $sha_stocke)) {
+		$sha_identique = true;
+	}
+
+	return $sha_identique;
 }
