@@ -55,15 +55,14 @@
 		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_mise_a_jour_evenements{titre_almanach=#TITRE}:>,})]
 	</div>
 
-	<div class='purger_almanach'>
+	
 	<BOUCLE_nb_evenement(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>
 	</BOUCLE_nb_evenement>
-	<div class='purge'><:almanach:purger_almanach:></div>
+	<div class='purger_almanach'><:almanach:purger_almanach:></div>
 	[(#AUTORISER{supprimer, almanach, #ID_ALMANACH}|oui)
 		[(#BOUTON_ACTION{<:almanach:info_supprimer_evenements:>,#URL_ACTION_AUTEUR{supprimer_evenements_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_suppression_evenements{titre_almanach=#TITRE}:>,'','(function(me){$(me).parents("tr").animateRemove();return true;})(this)'})]
 	]
 	</B_nb_evenement>
-	</div>
 	
 	[(#REM) tenter une réparation si aucun évènement, peut-être du à une désinstallation du plugin agenda]
 	<BOUCLE_aucun_evenement(EVENEMENTS){tout}{0,1}>
