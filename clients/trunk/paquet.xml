@@ -1,7 +1,7 @@
 <paquet
 	prefix="clients"
 	categorie="auteur"
-	version="1.0.8"
+	version="1.0.9"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/clients-32.png"
@@ -18,7 +18,7 @@
 	<pipeline nom="header_prive" inclure="clients_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.24.0;[" />
-	<necessite nom="contacts" compatibilite="[2.10.2;2.*.*]" />
+	<necessite nom="contacts" compatibilite="[2.10.2;3.0.*]" />
 	<necessite nom="coordonnees" compatibilite="[2.3.19;[" />
 
 	<menu nom="configurer_clients" titre="clients:clients_titre" parent="menu_configuration" icone="images/clients-16.png" action="configurer_clients" />
