@@ -15,11 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *      Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  *      champ de saisie, celle-ci sont systématiquement remises à zéro.
- *      - `_actions_tables`        : (affichage) alias et libellés des actions possibles sur une table, `charger` et
+ *      - `_actions_tables`  : (affichage) alias et libellés des actions possibles sur une table, `charger` et
  *        `vider`
- *      - `_actions_disable`    : (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
- *      - `_action_defaut`        : (affichage) action sélectionnée par défaut, `charger`
- *      - `_tables`                : (affichage) noms des tables sans le préfixe `spip_`
+ *      - `_actions_disable` : (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
+ *      - `_action_defaut`   : (affichage) action sélectionnée par défaut, `charger`
+ *      - `_tables`          : (affichage) noms des tables sans le préfixe `spip_`
  */
 function formulaires_isocode_gerer_table_charger() {
 	$valeurs = array();
