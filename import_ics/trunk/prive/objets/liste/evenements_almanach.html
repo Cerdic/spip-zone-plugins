@@ -1,3 +1,8 @@
+#SET{defaut_tri,#ARRAY{
+statut,-1,
+titre,1,
+date_debut,-1
+}}
 <B_details_evenement>
 #ANCRE_PAGINATION
 <div class="liste-objets">
@@ -7,7 +12,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class="statut">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_debut,<:date:>,ajax})]</th>
 			<th class='orateur' scope='col'><:almanach:attendee:></th>
 		</tr>
