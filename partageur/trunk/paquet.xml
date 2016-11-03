@@ -17,8 +17,8 @@
 	<pipeline nom="autoriser" inclure="partageur_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/partageur.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/partageur.php" />
-  <pipeline nom="header_prive_css" action="insert_head_prive_css" inclure="partageur_pipelines.php" />
-  <pipeline nom="affiche_enfants" inclure="partageur_pipelines.php" />
+	<pipeline nom="header_prive_css" action="insert_head_prive_css" inclure="partageur_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="partageur_pipelines.php" />
 
 	<menu nom="partageurs" titre="partageur:titre_partageurs" parent="menu_edition" icone="images/partageur-16.png" action="partageurs" />
 </paquet>
