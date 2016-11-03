@@ -1,7 +1,7 @@
 <paquet
 	prefix="partageur"
 	categorie="edition"
-	version="1.0.4"
+	version="1.0.5"
 	etat="stable"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/partageur-64.png"
@@ -10,15 +10,15 @@
 >
 	<nom>Partageur</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>
-  <licence>GNU/GPL</licence>
+	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
 	<pipeline nom="autoriser" inclure="partageur_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/partageur.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/partageur.php" />
-  <pipeline nom="header_prive_css" action="insert_head_prive_css"  inclure="partageur_pipelines.php" /> 
+  <pipeline nom="header_prive_css" action="insert_head_prive_css" inclure="partageur_pipelines.php" />
   <pipeline nom="affiche_enfants" inclure="partageur_pipelines.php" />
 
-	<menu nom="partageurs" titre="partageur:titre_partageurs" parent="menu_edition" icone="images/partageur-16.png" action="partageurs" /> 
+	<menu nom="partageurs" titre="partageur:titre_partageurs" parent="menu_edition" icone="images/partageur-16.png" action="partageurs" />
 </paquet>

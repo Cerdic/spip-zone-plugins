@@ -756,4 +756,3 @@ function partageur_update_mode_document($id_document,$mode="vignette") {
 
 
 
-?>

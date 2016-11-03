@@ -46,4 +46,3 @@ function autoriser_partageur_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 
 
-?>

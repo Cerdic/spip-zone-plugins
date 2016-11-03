@@ -52,4 +52,3 @@ function partageur_affiche_enfants($flux) {
 
 
 
-?>

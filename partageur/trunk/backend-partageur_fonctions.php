@@ -37,4 +37,3 @@ function partageur_respecte_img($texte) {
 }
 
 
-?>

@@ -71,4 +71,3 @@ function partageur_declarer_tables_objets_sql($tables) {
 
 
 
-?>

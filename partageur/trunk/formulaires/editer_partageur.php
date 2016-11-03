@@ -66,4 +66,3 @@ function formulaires_editer_partageur_traiter_dist($id_partageur='new', $retour=
 }
 
 
-?>

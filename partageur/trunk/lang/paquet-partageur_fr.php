@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'partageur_slogan' => 'Partage manuel à l\'identique d\'articles entre sites SPIP.',
 );
 
-?>
