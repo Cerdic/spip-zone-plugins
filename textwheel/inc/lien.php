@@ -333,7 +333,7 @@ function virtuel_redirige($virtuel, $url=false){
 
 /* Compatibilite avec SPIP 2.1 */
 function chapo_redirige($chapo, $url=false) {
-	virtuel_redirige($chapo, $url);
+	return virtuel_redirige($chapo, $url);
 }
 
 // Ne pas afficher le chapo si article virtuel
