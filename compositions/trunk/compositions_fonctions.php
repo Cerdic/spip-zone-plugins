@@ -387,9 +387,12 @@ function compositions_heriter($type, $id, $id_parent = null, $serveur = '') {
 		if (strlen($compo_parent) and is_null($infos)) {
 			$infos = compositions_lister_disponibles('');
 		}
-	} while ($id_parent = $row['id_parent']
+	} while (
+		isset($row['id_parent'])
+		and $id_parent = $row['id_parent']
 		and
-		(!strlen($compo_parent) or !isset($infos[$type_parent][$compo_parent]['branche'][$type])));
+		(!strlen($compo_parent) or !isset($infos[$type_parent][$compo_parent]['branche'][$type]))
+	);
 
 	if (strlen($compo_parent) and isset($infos[$type_parent][$compo_parent]['branche'][$type])) {
 		return $infos[$type_parent][$compo_parent]['branche'][$type];
