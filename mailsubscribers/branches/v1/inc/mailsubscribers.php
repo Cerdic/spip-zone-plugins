@@ -105,9 +105,14 @@ function mailsubscribers_compte_inscrits($liste,$statut='valide'){
 			$ls = array_filter($ls);
 			$ls = array_unique($ls);
 			foreach($ls as $l){
-				if (!isset($count[$l][$row['statut']])) $count[$l][$row['statut']] = 0;
+				if (!isset($count[$l][$row['statut']])) {
+					$count[$l][$row['statut']] = 0;
+				}
 				$count[$l][$row['statut']] += $row['n'];
-				if ($row['statut']=='valide'){
+				if ($row['statut']=='valide') {
+					if (!isset($count_meta[$l])) {
+						$count_meta[$l] = 0;
+					}
 					$count_meta[$l] += $row['n'];
 				}
 			}
