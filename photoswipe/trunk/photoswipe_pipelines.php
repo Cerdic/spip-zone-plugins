@@ -26,7 +26,7 @@ function photoswipe_insert_head($flux) {
 	$flux .='
 <script src="'.(find_in_path('lib/photoswipe/photoswipe.min.js')).'" type="text/javascript"></script>
 <script src="'.(find_in_path('lib/photoswipe/photoswipe-ui-default.min.js')).'" type="text/javascript"></script>
-<script src="'.(find_in_path('photoswipe_insert.js')).'" type="text/javascript"></script>
+<script src="'.(find_in_path('photoswipe_insert.js')).'?'.filemtime(find_in_path('photoswipe_insert.js')).'" type="text/javascript"></script>
 <script type="text/javascript">
 // configuration
 photoswipe = {

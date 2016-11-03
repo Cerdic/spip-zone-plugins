@@ -97,7 +97,8 @@ function photoshow_identify(me) {
     }
 
     // on verifie que la taille du fichier grand est superieure a celle du fichier petit
-    if (a.w > me.width() || a.w > $(window).width() || a.h > $(window).height()) {
+    // -> dans tous les cas, si c'est un lien hypertexte, il faut l'activer
+    if ( me.is('a') || a.w > me.width() || a.w > $(window).width() || a.h > $(window).height()) {
         return a;
     }
 }
