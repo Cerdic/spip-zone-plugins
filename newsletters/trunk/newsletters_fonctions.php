@@ -242,18 +242,21 @@ function newsletter_fixer_image($src,$id_newsletter){
 
 	// hack : mettre un #fixed sur une url d'image pour indiquer qu'elle a deja ete fixee
 	// on ne fait plus rien dans ce cas
-	if ($url['fragment']=='fixed') return false;
+	if (isset($url['fragment']) and $url['fragment'] == 'fixed') {
+		return false;
+	}
 
 	$path_parts = pathinfo($url['path']);
 	$dest = $dir[$id_newsletter].md5($src).".".$path_parts['extension'];
 
-	if (!$url['scheme']
-		AND !$url['host']
-	  AND file_exists($url['path'])){
+	if (
+		empty($url['scheme'])
+		and empty($url['host'])
+		and file_exists($url['path'])
+	) {
 		// on copie le fichier
 		deplacer_fichier_upload($url['path'], $dest, false);
-	}
-	else {
+	} else {
 		include_spip("inc/distant");
 		recuperer_page($src,$dest);
 	}
