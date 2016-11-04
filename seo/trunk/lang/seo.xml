@@ -1,4 +1,7 @@
 <traduction module="seo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/seo/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/seo?lang_cible=de" total="41" traduits="41" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/seo?lang_cible=en" total="41" traduits="41" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
