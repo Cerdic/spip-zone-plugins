@@ -102,7 +102,7 @@ function activer_iterateur($extracteur, $u){
 	return $m ;
 }
 
-// Transformer le tableau de valeurs en format d'insertion
+// Transformer le tableau de valeurs converties par un extracteur en format d'insertion pour spip
 function extracteur_preparer_insertion($item){ 
 
 	$texte = "" ; 
@@ -115,9 +115,10 @@ function extracteur_preparer_insertion($item){
 		if(in_array($k, $champs_article)) 
 			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ; 
 
-		# autres champs 
+		# autres champs
+		# en plus des champs de données converties, un extracteur peut envoyer des champs techniques (xml, logs, alertes), on ne les insert pas.
 		foreach($item as $k => $v)       
-			if(!in_array($k,array("texte","xml","logs")) and !in_array($k, $champs_article)) 
+			if(!in_array($k,array("texte","xml","logs","alertes")) and !in_array($k, $champs_article)) 
 				if(is_array($v)) 
 					$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n"; 
 				else 

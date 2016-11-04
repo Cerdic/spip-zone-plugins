@@ -230,7 +230,7 @@ function convertir_xml_de($u) {
 
 	
 	// notes dans le texte
-	$u = preg_replace(',(?:\.|\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
+	$u = preg_replace(',(?:\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
 	$u = preg_replace(',^\s+\(,',"(",$u);
 	$u = str_replace(') .',").",$u);
 
