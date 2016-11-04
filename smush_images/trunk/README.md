@@ -72,6 +72,10 @@ Puis elle est optimisée au maximum.
 
 ### Versions 0.6.x
 
+#### Version 0.6.4 (2016-11-04)
+
+Amélioration des performances et de bugs sur la génération des images.
+
 #### Version 0.6.3 (2016-10-25)
 
 Bien tester l'existence des fichiers avant de tester leur taille (notices PHP).

@@ -69,14 +69,15 @@ function image_smush($im) {
 		return $im;
 	}
 
-	$im = $image['fichier'];
-	$dest = $image['fichier_dest'];
 	$creer = $image['creer'];
 
 	// Methode precise
 	// resultat plus beau, mais tres lourd
 	// Et: indispensable pour preserver transparence!
-	if (file_exists($im) && $creer) {
+	if (file_exists($image['fichier']) && $creer) {
+		$im = $image['fichier'];
+		$dest = $image['fichier_dest'];
+
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 			$magick = 'magick ';
 		} else {
@@ -95,9 +96,9 @@ function image_smush($im) {
 		 * On utilise la commande convert pour cela
 		 */
 		if ($format == 'GIF') {
-			$dest = $tmp.'.png';
-			exec($magick.'convert '.$im.' '.$dest);
-			$im = $dest;
+			$dest_png = $tmp.'-convert.png';
+			exec($magick.'convert '.$im.' '.$dest_png);
+			$im = $dest_png;
 			$format = 'PNG';
 		}
 
@@ -132,6 +133,9 @@ function image_smush($im) {
 			 * Conversion en PNG
 			 */
 			$nq = substr($im, 0, -4).'-nq8.png';
+			if (file_exists($dest)) {
+				spip_unlink($dest);
+			}
 			exec('pngnq -f '.$im.' && optipng -o5 '.$nq.' -out '.$dest);
 
 			/**
@@ -142,6 +146,10 @@ function image_smush($im) {
 				$im = $dest = $dest_jpg;
 			} elseif ($dest_jpg && file_exists($dest_jpg)) {
 				spip_unlink($dest_jpg);
+			}
+
+			if ($dest_png && file_exists($dest_png)) {
+				spip_unlink($dest_png);
 			}
 			if (file_exists($nq)) {
 				spip_unlink($nq);
@@ -180,6 +188,8 @@ function image_smush($im) {
 			spip_unlink($dest);
 			$dest = $im;
 		}
+	} else {
+		return $im;
 	}
 	return _image_ecrire_tag($image, array('src' => $dest));
 }
