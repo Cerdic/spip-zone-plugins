@@ -34,7 +34,7 @@ function archive_declarer_tables_objets_sql($tables) {
 	if (lire_config('archive/archiver_publier', 'non') == 'oui') {
 		$tables['spip_articles']['statut'][0]['publie'] .= ',archive';
 	}
-	if (!is_array($tables['spip_articles']['statut_images'])) {
+	if (!isset($tables['spip_articles']['statut_images']) || !is_array($tables['spip_articles']['statut_images'])) {
 		$tables['spip_articles']['statut_images'] = array(
 			'prepa' => 'puce-preparer-8.png',
 			'prop' => 'puce-proposer-8.png',
