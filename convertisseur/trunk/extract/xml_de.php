@@ -223,7 +223,18 @@ function convertir_xml_de($u) {
 	if($flag_signature)
 		$m['Alertes'][] = "Signature non trouvée" ;
 
-		
+	// notes avec des espaces dedans...
+	// <Hoch>3 </Hoch>
+	
+	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+
+	
+	// notes dans le texte
+	$u = preg_replace(',(?:\.|\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
+	$u = preg_replace(',^\s+\(,',"(",$u);
+	$u = str_replace(') .',").",$u);
+
+
 //	$u = preg_replace('/<Fussnote>/Us',"\n",$u);
 //	$u = preg_replace('/<\/Fussnote>/Us',"\n",$u);
 
@@ -265,19 +276,6 @@ function convertir_xml_de($u) {
 		$m['logs'][] = "Suppression de (chapo): " . entites_html($matches[0]) ;		
 			
 	}	
-
-
-	// notes avec des espaces dedans...
-	// <Hoch>3 </Hoch>
-	
-	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
-
-	
-	// notes dans le texte
-	$u = preg_replace(',(?:\.|\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
-	$u = preg_replace(',^\s+\(,',"(",$u);
-	$u = str_replace(') .',").",$u);
-	
 
 	// inters
 	$u = str_replace("<Zwischentitel>","\n\n{{{",$u);
