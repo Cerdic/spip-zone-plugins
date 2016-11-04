@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @uses isocode_lister_tables()
  * @uses isocode_trouver_service()
- * @uses isocode_lire()
+ * @uses lire_source()
  * @uses isocode_vider_tables()
  *
  * @param array $tables
@@ -69,7 +69,7 @@ function isocode_charger_tables($tables = array()) {
 		include_spip('inc/config');
 		foreach ($tables as $_table) {
 			$erreur_table = true;
-			$sha_identique = false;
+			$source_identique = false;
 
 			// On détermine le service qui supporte le chargement de la table
 			$service = isocode_trouver_service($_table);
@@ -80,20 +80,20 @@ function isocode_charger_tables($tables = array()) {
 				// lecture ne renvoie aucun élément pour éviter des traitements inutiles mais renvoie un indicateur
 				// sur le SHA.
 				include_spip('inc/isocode_sourcer');
-				list($records, $sha, $sha_identique) = isocode_lire($service, $_table);
-				if ($records) {
+				list($enregistrements, $sha, $source_identique) = lire_source($service, $_table);
+				if ($enregistrements) {
 					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
 					// sur ce traitement car elle sera forcément détectée lors de l'insertion qui suit.
 					isocode_vider_tables($_table);
 
 					// Insertion dans la base de données des éléments extraits
-					$sql_ok = sql_insertq_multi("spip_${_table}", $records);
+					$sql_ok = sql_insertq_multi("spip_${_table}", $enregistrements);
 					if ($sql_ok !== false) {
 						// On stocke les informations de chargement de la table dans une meta.
 						$meta = array(
 							'service' => $service,
 							'sha'     => $sha,
-							'nbr'     => count($records),
+							'nbr'     => count($enregistrements),
 							'maj'     => date('Y-m-d H:i:s')
 						);
 						ecrire_config("isocode/tables/${_table}", $meta);
@@ -107,7 +107,7 @@ function isocode_charger_tables($tables = array()) {
 			// Si le traitement est ok on stocke juste la table.
 			if ($erreur_table) {
 				$retour['ok'] = false;
-				if ($sha_identique) {
+				if ($source_identique) {
 					$retour['tables_sha'][] = $_table;
 				} else {
 					$retour['tables_nok'][] = $_table;

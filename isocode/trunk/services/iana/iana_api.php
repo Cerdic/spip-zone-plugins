@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des constantes et fonctions implémentant les services IANA.
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service IANA.
  *
  * @package SPIP\ISOCODE\SERVICES\IANA
  */
