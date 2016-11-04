@@ -81,7 +81,6 @@ function convertir_xml_de($u) {
 	
 	if($surtitre = trim(textebrut(extraire_balise($u,'Dach'))))
 		$m['surtitre'] = $surtitre ;
-	
 	$u = preg_replace('/<Dach>.*<\/Dach>/Us','',$u);
 
 	// Nettoyage
