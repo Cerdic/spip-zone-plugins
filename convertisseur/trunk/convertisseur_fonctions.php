@@ -103,27 +103,28 @@ function activer_iterateur($extracteur, $u){
 }
 
 // Transformer le tableau de valeurs en format d'insertion
-function extracteur_preparer_insertion($item){
-		
-	$texte = "" ;
-	
-	if($item['surtitre'])
-		$texte .= "<ins class='surtitre'>" . trim($item['surtitre']) . "</ins>\n\n" ;
+function extracteur_preparer_insertion($item){ 
 
-	if($item['titre'])
-		$texte .= "<ins class='titre'>" . trim($item['titre']) . "</ins>\n\n" ;
-	
-	if($item['chapo'])
-		$texte .= "<ins class='chapo'>" . trim($item['chapo']) . "</ins>\n\n" ;
+	$texte = "" ; 
+	$champs_article = array("surtitre", "titre", "chapo"); 
 
-	if($item['auteurs'])
-		$texte .= "<ins class='auteurs'>" . trim($item['auteurs']) . "</ins>\n\n" ;
+	# Champs articles 
+	# Baliser les champs articles 
 
-	if($item['affiliations'])
-		$texte .= "<ins class='signature'>" . trim($item['affiliations']) . "</ins>\n\n" ;
+	foreach($item as $k => $v)
+		if(in_array($k, $champs_article)) 
+			$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ; 
 
-	$texte .=  "\n\n" . trim($item['texte']) . "\n" ;
-	
-	return $texte ;
+		# autres champs 
+		foreach($item as $k => $v)       
+			if(!in_array($k,array("texte","xml","logs")) and !in_array($k, $champs_article)) 
+				if(is_array($v)) 
+					$texte .= "<ins class='$k'>" . trim(join(",", $v)) . "</ins>\n"; 
+				else 
+					$texte .= "<ins class='$k'>" . trim($v) . "</ins>\n" ;
 
-} 
+		# texte 
+		$texte .=  "\n" . trim($item['texte']) . "\n" ;
+
+	return $texte ; 
+}

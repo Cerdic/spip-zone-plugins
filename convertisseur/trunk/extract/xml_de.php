@@ -79,7 +79,9 @@ function convertir_xml_de($u) {
 	$u = str_replace( "</Kasten>", "</quote>", $u);
 	
 	
-	$m['surtitre'] = trim(textebrut(extraire_balise($u,'Dach')));
+	if($surtitre = trim(textebrut(extraire_balise($u,'Dach'))))
+		$m['surtitre'] = $surtitre ;
+	
 	$u = preg_replace('/<Dach>.*<\/Dach>/Us','',$u);
 
 	// Nettoyage
