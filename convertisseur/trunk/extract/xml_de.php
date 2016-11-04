@@ -58,7 +58,7 @@ function convertir_xml_de($u) {
 	//$u = str_replace("\n",'',$u);
 
 	if( ($ti = trim(textebrut(extraire_balise($u,'Titel')))) != $m['titre'])
-		$m['Alertes'][] = "Embrouille sur le titre : $ti >> " . $m['titre'] ;
+		$m['alertes'][] = "Embrouille sur le titre : $ti >> " . $m['titre'] ;
  
  	// attention il peut y avoir un encadré plus bas avec un second titre.
  	// donc on vire le premier titre mais pas les suivants.
@@ -221,7 +221,7 @@ function convertir_xml_de($u) {
 	}
 	
 	if($flag_signature)
-		$m['Alertes'][] = "Signature non trouvée" ;
+		$m['alertes'][] = "Signature non trouvée" ;
 
 	// notes avec des espaces dedans...
 	// <Hoch>3 </Hoch>

@@ -96,7 +96,7 @@ function activer_iterateur($extracteur, $u){
 	foreach($item as &$i)
 		$i = nettoyer_format($i);
 	
-	$item['extracteur'] = extracteur_preparer_insertion($item);
+	$item['insertion'] = extracteur_preparer_insertion($item);
 	
 	$m[] = $item ;
 	return $m ;
