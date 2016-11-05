@@ -79,9 +79,12 @@ function isocode_charger_tables($tables = array()) {
 				// Si la table est déjà chargée et que le fichier ou la page source n'a pas changé, la fonction de
 				// lecture ne renvoie aucun élément pour éviter des traitements inutiles mais renvoie un indicateur
 				// sur le SHA.
+				spip_timer('lire');
 				include_spip('inc/isocode_sourcer');
 				list($enregistrements, $sha, $source_identique) = lire_source($service, $_table);
+				$t_lire = spip_timer('lire');
 				if ($enregistrements) {
+					spip_timer('ecrire');
 					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
 					// sur ce traitement car elle sera forcément détectée lors de l'insertion qui suit.
 					isocode_vider_tables($_table);
@@ -99,6 +102,8 @@ function isocode_charger_tables($tables = array()) {
 						ecrire_config("isocode/tables/${_table}", $meta);
 						$erreur_table = false;
 					}
+					$t_ecrire = spip_timer('ecrire');
+					spip_log("La table <${_table}> a été chargée (lecture: ${t_lire} - ecriture: ${t_ecrire})", 'isocode' . _LOG_DEBUG);
 				}
 			}
 
