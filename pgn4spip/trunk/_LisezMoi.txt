@@ -1,5 +1,5 @@
-Le plug-in pgn4spip 2.61.0 pour SPIP 2 et 3 affiche l'échiquier et la partie de jeu d'échecs
-saisie au format PGN américain à l'intérieur d'un article entre les balises [pgn] et [/pgn]
+Le plug-in pgn4spip affiche l'échiquier et la partie de jeu d'échecs
+saisie au format PGN à l'intérieur d'un article entre les balises [pgn] et [/pgn]
 ou [PGN] et [/PGN].
 
 Usage dans le corps d'un article :
@@ -8,15 +8,11 @@ Avant
 [pgn] 1. e4 Nf6 [/pgn]
 Après
 
-
 pgn4spip est l'interface pour SPIP de pgn4web de Paolo Casaschi
 http://pgn4web.casaschi.net/home.html
 
 Démo en ligne
 http://pgn4web.casaschi.net/demo.html
-
-Démo en local
-http://localhost/spip/plugins/pgn4spip/pgn4web/demo.html
 
 pgn4spip a été développé par Matt Chesstale en PHP, Javascript, HTML, CSS, CFG et SPIP.
 matteo.chesstale@gmail.com
@@ -35,30 +31,17 @@ Licence : GNU GPL 3.0 (c) 2012
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Il ne nécessite pas le plug-in CFG 3.x pour sa configuration dans SPIP 3.x
-Il nécessite le plug-in CFG 1.x pour sa configuration dans SPIP 2.x
-http://plugins.spip.net/cfg.html
-
 En cas d'usage de la lame "Améliorations des textes : Guillemets typographiques" du  plugin Couteau Suisse, pgn4spip doit être activé APRES le Couteau Suisse.
 
 ________________
 
 1. Installation du plug-in
 
-Déziper pgn4spip-2.61.0.zip dans le répertoire des plug-ins SPIP.
-Exemple : D:\Xampp\Xampp177\htdocs\spip\plugins\
+Comme tous les plugins, en auto via svp si on créé :
+- un dossier plugins/auto/
+- un dossier lib/
 
-Télécharger la dernière version de pgn4web: pgn4web-2.61.zip
-http://code.google.com/p/pgn4web/downloads/list
-
-Déziper pgn4web-2.61.zip dans le répertoire de pgn4spip
-Exemple : D:\Xampp\Xampp177\htdocs\spip\plugins\pgn4spip
-
-Le nom du répertoire du plug-in est toujours en minuscule.
-
-Enlever le numéro de version :
-renommer pgn4spip\pgn4web-2.61 en pgn4spip\pgn4web
-Exemple : D:\Xampp\Xampp177\htdocs\spip\plugins\pgn4spip\pgn4web
+Le plugin pgn4web sera automatiquement téléchargé dans le dossier lib/.
 
 Le répertoire pgn4web a une taille de 13 Mo.
 Dans le cas de site ayant une place disque réduite,
@@ -69,24 +52,19 @@ ________________
 
 2. Configuration du plugin
 
-http://localhost/spip/ecrire/?exec=admin_plugin
+http://monsite.tld/ecrire/?exec=admin_plugin
 SPIP Configuration > Gestion des plugins
 
 Cliquer [x] pour activer le plug-in.
-Dans SPIP 3, confirmer en cliquant sur "Valider" même grisé.
+Confirmer en cliquant sur "Valider".
 
 Cliquer sur le nom "pgn4spip" pour avoir l'aide.
 
-Cliquer sur l'icône du tournevis et de la clef (cfg-16.png) à droite en face du nom pgn4spip
-
-Le répertoire doc\ n'est pas nécessaire à l'exécution du plugin.
-Il n'est pas utile de le copier sur le site SPIP en ligne.
+Cliquer sur l'icône du tournevis et de la clef à droite en face du nom pgn4spip
 
 La configuration peut être facultativement testée en anglais en ligne dans
 http://pgn4web.casaschi.net/board-generator.html
 
-ou en local
-http://localhost/spip/plugins/pgn4spip/pgn4web/board-generator.html
 ________________
 
 3. Usage avancé
@@ -102,7 +80,6 @@ Exemple dans le corps d'un article :
 Avant
 [pgn height=500 autoplayMode=loop] 1. e4 Nf6 [/pgn]
 Après
-
 
 Fichier texte exemple de test à copier-coller dans un article SPIP 2 ou SPIP 3 :
 

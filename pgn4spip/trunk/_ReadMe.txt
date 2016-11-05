@@ -1,4 +1,4 @@
-The pgn4spip 2.61.0 plug-in for SPIP 2 and 3 displays the chessboard and the chess game 
+The pgn4spip plug-in displays the chessboard and the chess game 
 in PGN format inside an article between [pgn] and [/pgn] tags or [PGN] and [/PGN] tags.
 
 Usage in the body of an article:
@@ -12,9 +12,6 @@ http://pgn4web.casaschi.net/home.html
 
 Demo on-line
 http://pgn4web.casaschi.net/demo.html
-
-Demo off-line
-http://localhost/spip/plugins/pgn4spip/pgn4web/demo.html
 
 pgn4spip has been developed by Matt Chesstale in PHP, Javascript, HTML, CSS, CFG and SPIP.
 matteo.chesstale@gmail.com
@@ -43,20 +40,9 @@ ________________
 
 1. Setup of the plug-in
 
-Unzip pgn4spip-2.61.0.zip in the folder of SPIP plug-ins.
-For example: D:\Xampp\Xampp177\htdocs\spip\plugins\
-
-Download the latest version of pgn4web: pgn4web-2.61.zip
-http://code.google.com/p/pgn4web/downloads/list
-
-Unzip pgn4web-2.61.zip in the pgn4spip folder
-For example: D:\Xampp\Xampp177\htdocs\spip\plugins\pgn4spip
-
-The name of plug-in folder is always in lowercase.
-
-Remove the version number:
-rename pgn4spip\pgn4web-2.61 into pgn4spip\pgn4web
-For example: D:\Xampp\Xampp177\htdocs\spip\plugins\pgn4spip\pgn4web
+As all plugins once you have first created:
+- a folder plugins/auto/
+- a folder lib/
 
 The pgn4web folder has a size of 13 MB.
 In the case of site having a limited hard disk,
@@ -67,24 +53,19 @@ ________________
 
 2. Configuration of the plugin
 
-http://localhost/spip/ecrire/?exec=admin_plugin
+http://mysite.tld/ecrire/?exec=admin_plugin
 SPIP Configuration > Manage plugins
 
 Click [x] to activate the plug-in.
-In SPIP 3, confirm clicking to "SUBMIT" even grayed.
+Confirm clicking to "SUBMIT".
 
 Click to the name "pgn4spip" to get help.
 
-Click to cfg-16.png icon on the right at the level of the name pgn4spip
-
-The folder doc\ is not required at run-time for the plugin.
-You do not need to upload it in your on-line SPIP web site.
+Click to the tools icon on the right at the level of the name pgn4spip
 
 The configuration can be optionally tested on-line in
 http://pgn4web.casaschi.net/board-generator.html
 
-or off-line
-http://localhost/spip/plugins/pgn4spip/pgn4web/board-generator.html
 ________________
 
 3. Advanced usage
