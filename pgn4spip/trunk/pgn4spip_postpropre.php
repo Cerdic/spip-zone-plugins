@@ -57,4 +57,3 @@ function pgn4spip_postpropre($flux)
 	}
 	return $flux;
 }
-?>

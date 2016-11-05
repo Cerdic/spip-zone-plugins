@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reinit'		=> 'Remettre les valeurs par d&eacute;faut',
 'config_reinit'	=> 'La configuration a été remise avec les valeurs par défaut',
 
-'boxtitle'		=> 'Configuration générale de l'échiquier et du PGN',
+'boxtitle'		=> 'Configuration générale de l’échiquier et du PGN',
 
 'squareclick'	=> <<<EOT
 Chaque case de l'&eacute;chiquier a une infobulle et une fonction.<br />
