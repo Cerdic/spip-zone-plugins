@@ -11,7 +11,7 @@
  * - éléments        : liste des éléments constitutifs du contenu de la source.
  * - enregistrement  : un tableau de couples (champ, valeur) pour un sous-ensemble des champs d'une table.
  * - enregistrements : la liste des enregistrements à insérer dans la table concernée.
- * - titre ou nom    : le libellé de la donnée dans la source (par ex, le titre d'une colonne dans un fichier CSV).
+ * - titre           : le libellé de la donnée dans la source (par ex, le titre d'une colonne dans un fichier CSV).
  *
  * @package SPIP\ISOCODE\SOURCE
  */
@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Constitue, à partir, d'un fichier CSV ou XML ou d'une page HTML au format texte, un tableau des éléments
  * prêt à être inséré dans une table de la base de données.
  * La fonction utilise le service et le nom de table pour récupérer la configuration permettant l'analyse
- * du fichier et sa traduction en élements de la table (délimiteur ou regexp, nom des colonnes...).
+ * du fichier et sa traduction en éléments de la table (délimiteur ou regexp, nom des colonnes...).
  * Il est possible, pour chaque élément ou pour l'ensemble d'appliquer une fonction spécifique à la table
  * qui complète l'élément.
  *
@@ -143,8 +143,6 @@ function obtenir_cle_primaire($table) {
 	if ($id_table = id_table_objet($table)) {
 		// On stocke la clé sous forme de liste pour les tests d'appartenance.
 		$cle_primaire = explode(',', $id_table);
-		// On trie la liste et on recompose la clé sous forme de chaine pour la gestion des doublons.
-//		sort($cle_primaire);
 	}
 
 	return $cle_primaire;

@@ -49,8 +49,8 @@ function isocode_charger_tables($tables = array()) {
 		// Le tableau est vide : il faut charger toutes les tables de tous les services supportés.
 		$tables = isocode_lister_tables();
 	} elseif (is_string($tables)) {
-		// L'argument n'est pas un tableau mais une chaine, on considère que l'appelant a demandé
-		// le chargement d'une table identifiée par cette chaine.
+		// L'argument n'est pas un tableau mais une chaîne, on considère que l'appelant a demandé
+		// le chargement d'une table identifiée par cette chaîne.
 		$tables = array($tables);
 	} elseif (!is_array($tables)) {
 		// L'argument n'est pas compréhensible, on met la liste à vide pour sortir sans traitement
@@ -82,7 +82,7 @@ function isocode_charger_tables($tables = array()) {
 				spip_timer('lire');
 				include_spip('inc/isocode_sourcer');
 				list($enregistrements, $sha, $source_identique) = lire_source($service, $_table);
-				$t_lire = spip_timer('lire');
+				$duree_lire = spip_timer('lire');
 				if ($enregistrements) {
 					spip_timer('ecrire');
 					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
@@ -102,8 +102,8 @@ function isocode_charger_tables($tables = array()) {
 						ecrire_config("isocode/tables/${_table}", $meta);
 						$erreur_table = false;
 					}
-					$t_ecrire = spip_timer('ecrire');
-					spip_log("La table <${_table}> a été chargée (lecture: ${t_lire} - ecriture: ${t_ecrire})", 'isocode' . _LOG_DEBUG);
+					$duree_ecrire = spip_timer('ecrire');
+					spip_log("La table <${_table}> a été chargée (lecture source: ${duree_lire} - insertion BD: ${duree_ecrire})", 'isocode' . _LOG_DEBUG);
 				}
 			}
 
@@ -197,7 +197,7 @@ function isocode_decharger_tables($tables = array()) {
 
 /**
  * Détermine le service associé au chargement de la table de codes ISO choisie.
- * Si la table est vide ou invalide, la fonction renvoie une chaine vide.
+ * Si la table est vide ou invalide, la fonction renvoie une chaîne vide.
  *
  * @api
  * @filtre
@@ -208,7 +208,7 @@ function isocode_decharger_tables($tables = array()) {
  *      Nom d'une table sans le préfixe `spip_`.
  *
  * @return string
- *      Nom du service permettant le chargement de la table ou chaine vide si aucun service n'est trouvé.
+ *      Nom du service permettant le chargement de la table ou chaîne vide si aucun service n'est trouvé.
  */
 function isocode_trouver_service($table) {
 

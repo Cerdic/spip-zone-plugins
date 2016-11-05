@@ -1,6 +1,9 @@
 <?php
 /**
  * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service ISO.
+ * Etant donné que la lecture des sources est réalisée par une fonction générique `lire_source` ce
+ * fichier ne contient que les fonctions spécifiques permettant de compléter les champs de base fournis
+ * par la source.
  *
  * @package SPIP\ISOCODE\SERVICES\ISO
  */
@@ -204,7 +207,7 @@ function iso639families_completer_enregistrement($enregistrement, $config) {
 		$lignes = extraire_balises($table, 'tr');
 		if ($lignes) {
 			foreach ($lignes as $_ligne) {
-				// Chaque ligne de la table est composée de deux colonnes, le première le libellé
+				// Chaque ligne de la table est composée de deux colonnes, la première le libellé
 				// et la deuxième la valeur.
 				$colonnes = extraire_balises($_ligne, 'td');
 				$colonnes = array_map('supprimer_tags', $colonnes);
@@ -282,7 +285,7 @@ function iso639families_completer_table($enregistrements, $config) {
 		$code = $_enregistrement['code_639_5'];
 		if (isset($hierarchies[$code])) {
 			$enregistrements[$_cle][$config_champs_loc['Hierarchy']] = $hierarchies[$code];
-			// Calcul du parent : si la hierarchie ne contient qu'un code c'est qu'il n'y a pas de parent.
+			// Calcul du parent : si la hiérarchie ne contient qu'un code c'est qu'il n'y a pas de parent.
 			// Sinon, le parent est le premier code qui précède le code du record.
 			$parents = explode(',', $hierarchies[$code]);
 			if (count($parents) > 1) {
