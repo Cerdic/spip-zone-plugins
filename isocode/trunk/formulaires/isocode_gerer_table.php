@@ -11,13 +11,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Chargement des données : le formulaire propose les actions possibles sur les tables de codes ISO,
  * à savoir, charger ou vider et la liste des tables regroupées par service.
+ * L'action vider s'appelle décharger car il existe dékà une fonction d'administration de vidage des tables.
  *
  * @return array
  *      Tableau des données à charger par le formulaire (affichage). Aucune donnée chargée n'est un
  *      champ de saisie, celle-ci sont systématiquement remises à zéro.
  *      - `_actions_tables`  : (affichage) alias et libellés des actions possibles sur une table, `charger` et
- *        `vider`
- *      - `_actions_disable` : (affichage) liste des actions désactivées (`vider` si aucune table n`est chargée)
+ *        `decharger`
+ *      - `_actions_disable` : (affichage) liste des actions désactivées (`decharger` si aucune table n`est chargée)
  *      - `_action_defaut`   : (affichage) action sélectionnée par défaut, `charger`
  *      - `_tables`          : (affichage) noms des tables sans le préfixe `spip_`
  */
@@ -28,7 +29,7 @@ function formulaires_isocode_gerer_table_charger() {
 	// Lister les actions sur les tables
 	$valeurs['_actions_tables'] = array(
 		'charger' => _T('isocode:label_action_charger_table'),
-		'vider'   => _T('isocode:label_action_vider_table')
+		'decharger'   => _T('isocode:label_action_decharger_table')
 	);
 
 	// Acquérir la liste des tables et leur statut de chargement
@@ -46,7 +47,7 @@ function formulaires_isocode_gerer_table_charger() {
 
 	// Désactiver l'action vider si aucun table n'est chargée
 	if ($aucune_table_charge) {
-		$valeurs['_actions_disable'] = array('vider' => 'oui');
+		$valeurs['_actions_disable'] = array('decharger' => 'oui');
 		$valeurs['_action_defaut'] = 'charger';
 	}
 
@@ -54,7 +55,7 @@ function formulaires_isocode_gerer_table_charger() {
 }
 
 /**
- * Vérification des saisies : il est indispensable de choisir une action (`vider` ou `charger`) et
+ * Vérification des saisies : il est indispensable de choisir une action (`decharger` ou `charger`) et
  * une table.
  *
  * @return array
@@ -77,7 +78,7 @@ function formulaires_isocode_gerer_table_verifier() {
  * Exécution du formulaire : les tables choisies sont soit vidées, soit chargées.
  *
  * @uses isocode_charger_tables()
- * @uses isocode_vider_tables()
+ * @uses isocode_decharger_tables()
  * @uses formater_message()
   *
  * @return array
@@ -110,7 +111,7 @@ function formulaires_isocode_gerer_table_traiter() {
  *
  * @param string $action
  *      Action venant d'être appliquée à certaines tables. Peut prendre les valeurs `charger` et
- *      `vider`.
+ *      `decharger`.
  * @param array  $statut
  * 		Tableau résultant de l'action sur les tables choisies:
  *      - `ok`         : `true` si le vidage a réussi, `false` sinon.

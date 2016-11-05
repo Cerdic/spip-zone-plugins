@@ -144,7 +144,7 @@ function obtenir_cle_primaire($table) {
 		// On stocke la clé sous forme de liste pour les tests d'appartenance.
 		$cle_primaire = explode(',', $id_table);
 		// On trie la liste et on recompose la clé sous forme de chaine pour la gestion des doublons.
-		sort($cle_primaire);
+//		sort($cle_primaire);
 	}
 
 	return $cle_primaire;

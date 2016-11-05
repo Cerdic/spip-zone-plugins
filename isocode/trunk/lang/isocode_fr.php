@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_charger_table'          => 'Une erreur s\'est produite lors du chargement de la ou des tables « @tables@ ».',
-	'erreur_vider_table'            => 'Une erreur s\'est produite lors du vidage de la ou des tables « @tables@ ».',
+	'erreur_decharger_table'        => 'Une erreur s\'est produite lors du vidage de la ou des tables « @tables@ ».',
 	'explication_action_table'      => 'Si la table est déjà chargée en base de données elle sera vidée avant le chargement.',
 
 	// I
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_action_charger_table'    => 'Charger une table',
 	'label_action_table'            => 'Action à exécuter',
-	'label_action_vider_table'      => 'Vider une table',
+	'label_action_decharger_table'  => 'Vider une table',
 	'label_colonne_actualisation'   => 'Actualisé le',
 	'label_colonne_libelle'         => 'Description',
 	'label_colonne_service'         => 'Service',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'succes_charger_table'          => 'La ou les tables « @tables@ » ont bien été chargées.',
-	'succes_vider_table'            => 'La ou les tables « @tables@ » ont bien été vidées.',
+	'succes_decharger_table'        => 'La ou les tables « @tables@ » ont bien été vidées.',
 
 	// T
 	'titre_form_gerer_table'        => 'Vider ou charger des tables',

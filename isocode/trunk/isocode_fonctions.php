@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @uses isocode_lister_tables()
  * @uses isocode_trouver_service()
  * @uses lire_source()
- * @uses isocode_vider_tables()
+ * @uses isocode_decharger_tables()
  *
  * @param array $tables
  *      Liste des tables à charger. Si le tableau est vide l'ensemble des tables
@@ -87,7 +87,7 @@ function isocode_charger_tables($tables = array()) {
 					spip_timer('ecrire');
 					// Suppression des éléments éventuels déjà chargés. On ne gère pas d'erreur
 					// sur ce traitement car elle sera forcément détectée lors de l'insertion qui suit.
-					isocode_vider_tables($_table);
+					isocode_decharger_tables($_table);
 
 					// Insertion dans la base de données des éléments extraits
 					$sql_ok = sql_insertq_multi("spip_${_table}", $enregistrements);
@@ -148,7 +148,7 @@ function isocode_charger_tables($tables = array()) {
  *      - index `tables_ok`  : liste des tables vidées avec succès ou tableau vide sinon.
  *      - index `tables_nok` : liste des tables en erreur ou tableau vide sinon.
  */
-function isocode_vider_tables($tables = array()) {
+function isocode_decharger_tables($tables = array()) {
 
 	$retour = array(
 		'ok'         => true,
