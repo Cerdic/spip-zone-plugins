@@ -16,5 +16,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 	'pgn4spip_slogan' => '[pgn prm1=valeur1 ...] 1. e4 Nf6 [/pgn] dans vos articles.',
-	'pgn4spip_description' => 'Aide : cliquer sur l'échiquier.'
+	'pgn4spip_description' => 'Aide : cliquer sur l/'&eacute;chiquier.'
 );
