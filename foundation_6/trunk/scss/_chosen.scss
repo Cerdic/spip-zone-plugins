@@ -12,6 +12,16 @@
 	div b {
 		background: none;
 	}
+
+
+  // Lorsque l'option chosen allow_single_deselect est activée, une croix est
+  // placée dans le formulaire. On la repostionne.
+  // On désactive aussi certain style foundation de la balise abbr
+  .search-choice-close {
+    cursor: pointer;
+    border-bottom: none;
+    top: 13px;
+  }
 }
 
 .chosen-choices li {
