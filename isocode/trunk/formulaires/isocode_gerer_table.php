@@ -86,8 +86,6 @@ function formulaires_isocode_gerer_table_verifier() {
  */
 function formulaires_isocode_gerer_table_traiter() {
 
-	$retour = array();
-
 	// Acquisition des saisies: comme elles sont obligatoires, il existe toujours une action et une
 	// table.
 	$action = _request('action_table');

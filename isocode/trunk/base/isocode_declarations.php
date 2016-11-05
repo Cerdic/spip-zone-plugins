@@ -159,8 +159,8 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'label_en'       => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr'       => "varchar(255) DEFAULT '' NOT NULL",  // french name
 		'capital'        => "varchar(255) DEFAULT '' NOT NULL",  // Capital name
-		'area'           => 'int DEFAULT 0 NOT NULL',            // Area in squared km
-		'population'     => 'int DEFAULT 0 NOT NULL',            // Inhabitants count
+		'area'           => "int DEFAULT 0 NOT NULL",            // Area in squared km
+		'population'     => "int DEFAULT 0 NOT NULL",            // Inhabitants count
 		'code_continent' => "char(2) DEFAULT '' NOT NULL",       // Continent code alpha2
 		'tld'            => "char(3) DEFAULT '' NOT NULL",       // Tld - Top-Level Domain
 		'code_4217_3'    => "char(3) DEFAULT '' NOT NULL",       // Currency code ISO-4217
@@ -184,7 +184,7 @@ function isocode_declarer_tables_principales($tables_principales) {
 		'label_en'    => "varchar(255) DEFAULT '' NOT NULL",  // English name
 		'label_fr'    => "varchar(255) DEFAULT '' NOT NULL",  // french name
 		'symbol'      => "char(8) DEFAULT '' NOT NULL",       // Currency symbol
-		'minor_unit'  => 'int DEFAULT 0 NOT NULL',            // Minor units
+		'minor_units' => "int DEFAULT 0 NOT NULL",            // Minor units
 		'maj'         => 'timestamp'
 	);
 

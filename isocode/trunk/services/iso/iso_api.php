@@ -104,7 +104,8 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 				'Scope'      => 'scope'
 			),
 			'loc' => array(
-				'Hierarchy' => 'hierarchy'
+				'Hierarchy' => 'hierarchy',
+				'parent'    => 'parent'			// Colonne est calculée à partir de la hiérarchie
 			)
 		),
 		'populating'   => 'file_csv',
@@ -153,7 +154,7 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 			'Ccy'        => 'code_4217_3',
 			'CcyNbr'     => 'code_num',
 			'CcyNm'      => 'label_en',
-			'CcyMnrUnts' => 'minor_unit',
+			'CcyMnrUnts' => 'minor_units',
 		),
 		'addon_fields' => array(
 			'iota' => array(
@@ -174,12 +175,17 @@ $GLOBALS['isocode']['iso']['tables'] = array(
 
 function iso639families_completer_enregistrement($enregistrement, $config) {
 
-	// Initialisation des champs additionnels qui sont tous de type chaine dans l'enregistrement
-	// passé en argument (qui contient déjà les champs de base).
+	// Initialisation
+	static $enregistrement_sil_defaut = array();
+
+	// Initialisation des champs additionnels dans l'enregistrement passé en argument
+	// (qui contient déjà les champs de base).
 	$config_champs_sil = $config['addon_fields']['sil'];
-	foreach ($config_champs_sil as $_champ) {
-		$enregistrement[$_champ] = '';
+	if (!$enregistrement_sil_defaut) {
+		include_spip('inc/isocode_sourcer');
+		$enregistrement_sil_defaut = initialiser_enregistrement('iso639families', $config_champs_sil);
 	}
+	$enregistrement = array_merge($enregistrement, $enregistrement_sil_defaut);
 
 	// On récupère la page de description de la famille sur le site SIL.
 	include_spip('inc/distant');
@@ -237,6 +243,8 @@ function iso639families_completer_table($enregistrements, $config) {
 	// Initialisation des champs additionnels
 	$hierarchies = array();
 	$config_champs_loc = $config['addon_fields']['loc'];
+	include_spip('inc/isocode_sourcer');
+	$enregistrement_loc_defaut = initialiser_enregistrement('iso639families', $config_champs_loc);
 
 	// On récupère la page de description de la famille sur le site SIL.
 	include_spip('inc/distant');
@@ -270,8 +278,8 @@ function iso639families_completer_table($enregistrements, $config) {
 	// On complète maintenant le tableau des enregistrements avec la colonne additionnelle hierarchy et la colonne
 	// dérivée parent qui ne contient que le code alpha-3 de la famille parente si elle existe.
 	foreach ($enregistrements as $_cle => $_enregistrement) {
+		$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrement_loc_defaut);
 		$code = $_enregistrement['code_639_5'];
-		$enregistrements[$_cle]['parent'] = '';
 		if (isset($hierarchies[$code])) {
 			$enregistrements[$_cle][$config_champs_loc['Hierarchy']] = $hierarchies[$code];
 			// Calcul du parent : si la hierarchie ne contient qu'un code c'est qu'il n'y a pas de parent.
@@ -279,10 +287,8 @@ function iso639families_completer_table($enregistrements, $config) {
 			$parents = explode(',', $hierarchies[$code]);
 			if (count($parents) > 1) {
 				array_pop($parents);
-				$enregistrements[$_cle]['parent'] = array_pop($parents);
+				$enregistrements[$_cle][$config_champs_loc['parent']] = array_pop($parents);
 			}
-		} else {
-			$enregistrements[$_cle][$config_champs_loc['Hierarchy']] = '';
 		}
 	}
 
@@ -295,6 +301,8 @@ function iso3166countries_completer_table($enregistrements, $config) {
 	// Initialisation des champs additionnels
 	$enregistrements_geo = array();
 	$config_champs_geo = $config['addon_fields']['geonames'];
+	include_spip('inc/isocode_sourcer');
+	$enregistrement_geo_defaut = initialiser_enregistrement('iso3166countries', $config_champs_geo);
 
 	// Lecture du fichier CSV geonames-countryInfo.txt pour récupérer les informations additionnelles.
 	// Le délimiteur est une tabulation.
@@ -304,6 +312,7 @@ function iso3166countries_completer_table($enregistrements, $config) {
 	if ($lignes) {
 		$titres = array();
 		$index_code_pays = null;
+		include_spip('inc/isocode_sourcer');
 		foreach ($lignes as $_numero => $_ligne) {
 			$valeurs = explode($separateur, trim($_ligne, "\r\n"));
 			if ($_numero == 0) {
@@ -315,7 +324,7 @@ function iso3166countries_completer_table($enregistrements, $config) {
 				// On extrait de chaque ligne les informations additionnelles du pays ainsi que le code alpha2 du pays
 				// qui servira d'index du tableau constitué.
 				// On ne sélectionne que les colonnes correspondant à des champs additionnels.
-				$enregistrement_geo = initialiser_enregistrement('iso3166countries', $config_champs_geo);
+				$enregistrement_geo = $enregistrement_geo_defaut;
 				foreach ($titres as $_cle => $_titre) {
 					$titre = trim($_titre);
 					if (isset($config_champs_geo[$titre]) and !empty($valeurs[$_cle])) {
@@ -344,6 +353,68 @@ function iso3166countries_completer_table($enregistrements, $config) {
 
 function iso4217currencies_completer_table($enregistrements, $config) {
 
+	// Initialisation des champs additionnels
+	$enregistrements_iota = array();
+	$config_champs_iota = $config['addon_fields']['iota'];
+	include_spip('inc/isocode_sourcer');
+	$enregistrement_iota_defaut = initialiser_enregistrement('iso4217currencies', $config_champs_iota);
+
+	// On récupère la page de description de la famille sur le site SIL.
+	include_spip('inc/distant');
+	$url = _ISOCODE_IOTA_ISO4217_SYMBOL;
+	$flux = recuperer_url($url, array('transcoder' => true));
+
+	include_spip('inc/filtres');
+	$table = extraire_balise($flux['page'], 'table');
+	if ($table) {
+		// On extrait la première table de la page qui contient les données voulues
+		$lignes = extraire_balises($table, 'tr');
+		if ($lignes) {
+			$cles_iota = array();
+			$index_code_devise = null;
+			foreach ($lignes as $_numero => $_ligne) {
+				$balise_colonne = $_numero == 0 ? 'th' : 'td';
+				$colonnes = extraire_balises($_ligne, $balise_colonne);
+				$colonnes = array_map('supprimer_tags', $colonnes);
+				$colonnes = array_map('trim', $colonnes);
+				if ($_numero == 0) {
+					// La première ligne du tableau est celle des titres de colonnes.
+					// On détermine les index de colonnes correspondant aux champs additionnels configurés.
+					foreach ($colonnes as $_cle => $_titre) {
+						if (array_key_exists($_titre, $config_champs_iota)) {
+							$cles_iota[$_titre] = $_cle;
+						}
+					}
+					// On détermine l'index de la colonne qui porte le code alpha3 ISO-4217 nommé
+					$index_code_devise = array_search('ISO devise', $colonnes);
+				} else {
+					// Chaque ligne de la table est composée de plusieurs colonnes, la première étant le code alpha3
+					// de la devise selon l'ISO-4217
+					$enregistrement_iota = $enregistrement_iota_defaut;
+					foreach ($cles_iota as $_titre => $_cle) {
+						if ($colonnes[$_cle]) {
+							$enregistrement_iota[$config_champs_iota[$_titre]] = $colonnes[$_cle];
+						}
+					}
+					$code = $colonnes[$index_code_devise];
+					$enregistrements_iota[$code] = $enregistrement_iota;
+				}
+			}
+		}
+	}
+
+	// On complète maintenant le tableau des enregistrements avec les colonne additionnelles symbole
+	// et devise en français.
+	// Etant donné qu'il faut que tous les enregistrements possèdent la même structure, si une devise ne
+	// possède pas d'informations complémentaires IOTA on lui adjoint des colonnes par défaut.
+	foreach ($enregistrements as $_cle => $_enregistrement) {
+		$code = $_enregistrement['code_4217_3'];
+		if (isset($enregistrements_iota[$code])) {
+			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrements_iota[$code]);
+		} else {
+			$enregistrements[$_cle] = array_merge($enregistrements[$_cle], $enregistrement_iota_defaut);
+		}
+	}
 
 	return $enregistrements;
 }
