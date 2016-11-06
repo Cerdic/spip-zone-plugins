@@ -1,16 +1,13 @@
 <plugin>
-	<prefix>varicelle</prefix>
-	<categorie>outil</categorie>
-	<version>2.2.4</version>
-	<etat>test</etat>
-	<necessite id="SPIP" version="[1.9.1;3.1.99]" />
-	<icon>icon/varicelle.png</icon>
-	<lien>https://contrib.spip.net/Varicelle-2?var_mode=preview</lien>
-	
 	<nom>
 		<multi>[fr]Varicelle[en]Varicella[es]Varicela</multi>
 	</nom>
-	<auteur>[Tetue->http://spip.tetue.net] - 2010-2016</auteur>
+	<prefix>varicelle</prefix>
+	<icon>icon/varicelle.png</icon>
+
+	<version>2.2.4</version>
+	<etat>test</etat>
+	<categorie>outil</categorie>
 	
 	<slogan>
 		<multi>[fr]De jolis boutons&nbsp;![en]Pretty buttons![es]¡Botones bonitos!</multi>
@@ -22,10 +19,14 @@
 			[es]Botones bonitos: seductor, ligero y potente, para estilizar todos los botones en el sitio. Se aplica a cualquier cosa con el selector <code>.btn</code> incluyendo los botones SPIP formas.
 		</multi>
 	</description>
+	<lien>https://contrib.spip.net/Varicelle-2?var_mode=preview</lien>
+	<auteur>[Tetue->http://spip.tetue.net] - 2010-2016</auteur>
+
 	<options>varicelle_options.php</options>
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>varicelle_pipelines.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[1.9.1;3.1.99]" />
 </plugin>
