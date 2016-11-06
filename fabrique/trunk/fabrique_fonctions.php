@@ -334,9 +334,9 @@ function champ_present($objet, $champ) {
 	if (!$objet) {
 		return false;
 	}
-	if (is_array($objet['champs'])) {
+	if (isset($objet['champs']) and is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
-			if ($info['champ'] == $champ) {
+			if (isset($info['champ']) and $info['champ'] == $champ) {
 				return " "; // true
 			}
 		}
