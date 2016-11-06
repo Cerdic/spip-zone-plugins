@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('indexer_fonctions');
 
-function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
+function indexer_jointure_mots($objet, $id_objet, $infos) {
 	$where = array('l.objet='.sql_quote($objet), 'l.id_objet='.intval($id_objet));
 	
 	// On cherche s'il y a des groupes à ignorer
@@ -26,6 +26,13 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		$infos['properties']['mots']['titres_hierarchie'] = array();
 		
 		foreach ($mots as $mot) {
+			$id_groupe = $mot['id_groupe'];
+			if (!array_key_exists('tags'.$id_groupe,$infos['properties'])){
+				$infos['properties']['tags'.$id_groupe] = array(); // créer le tableau de groupe le cas échéant
+			}
+			//ajouter le mot à la propriété tagsID_GROUPE
+			$infos['properties']['tags'.$id_groupe][] = supprimer_numero($mot['titre']); 
+			
 			$id_mot = intval($mot['id_mot']);
 			$infos['properties']['mots']['titres'][$id_mot] = supprimer_numero($mot['titre']);
 			$infos['properties']['mots']['ids'][] = $id_mot;
@@ -72,7 +79,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		}
 		// et on garde la property tags
 		$infos['properties']['tags'] = array_values($infos['properties']['mots']['titres']);
-		
+
 		// On ajoute le nom des mots en fulltext à la fin
 		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['mots']['titres']);
 	}
