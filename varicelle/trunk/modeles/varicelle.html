@@ -1,28 +1,33 @@
 <br class="clear">
 
 <style type="text/css">
-/*#varicelle { font-family: 'Lucida Grande'; }
-#varicelle .btn.light { color: blue; text-decoration: underline; }*/
-#varicelle .btn { margin: 3px; }
+#varicelle { font-family: 'Lucida Grande'; }
+#varicelle .btn.light { color: blue; text-decoration: underline; }
+#varicelle .btn { margin: 0 5px 10px 0; }
 #varicelle table { border-spacing: 0; }
 #varicelle th,
 #varicelle td { padding: 5px; text-align: left; }
 #varicelle td.white { background: white !important; }
 #varicelle td.black { background: black !important; }
+#varicelle td .btn { margin: 3px; }
 </style>
 
 <div id="varicelle">
 
-<button class="btn">Default</button>
-<br><br>
-<button class="btn">Button</button>
-<input type="button" class="btn" value="Input">
-<input type="submit" class="btn" value="Submit">
-<input type="reset" class="btn" value="Reset">
-<a href="#" class="btn">Link</a>
-<br><br>
+<button class="btn">btn</button>
+<button class="btn" disabled>disabled</button>
+<input class="btn disabled" type="button" value="(input)">
 
-<h2>Palette</h2>Couleurs :<br>
+<br><br>
+<button class="btn primary">primary</button>
+<button class="btn secondary" title="Secondary button = default button">(secondary)</button><br>
+<button class="btn success">success</button>
+<input class="btn info" type="button" value="info">
+<input class="btn warning" type="submit" value="warning">
+<input class="btn danger" type="reset" value="danger">
+<button class="btn light" title="Light button like a link">light</button>
+
+<br><br>Couleurs :<br>
 <button class="btn purple">purple</button>
 <button class="btn pink">pink</button>
 <button class="btn red">red</button>
@@ -33,26 +38,15 @@
 <button class="btn black">black</button>
 <button class="btn gray">gray</button>
 <button class="btn white">white</button>
-<br><br>Spécial :<br>
 <button class="btn metal">metal</button>
 <button class="btn spip">spip</button>
-<br><br>Sémantique :<br>
-<button class="btn primary">primary</button>
-<button class="btn secondary" title="Secondary button = default button">(secondary)</button>
-<button class="btn" disabled>disabled</button>
-<input class="btn disabled" type="button" value="(input)">
-<br>
-<button class="btn success">success</button>
-<input class="btn info" type="button" value="info">
-<input class="btn warning" type="submit" value="warning">
-<input class="btn danger" type="reset" value="danger">
-<button class="btn light" title="Light button like a link">light</button>
+
 <br><br>Tailles et formes :<br>
 <button class="btn small">small</button>
 <button class="btn">(default)</button>
 <button class="btn big">big</button>
 <button class="btn super">super</button>
-<button class="btn circle">circle</button>
+<a href="#" class="btn circle" style="width: 4em; height: 4em; line-height: 4em;"> circle</a>
 <button class="btn expand">expand</button>
 <br><br>
 
@@ -61,14 +55,19 @@
 <a href="#" class="btn small green">Small green</a>
 <input type="button" class="btn blue" value="Blue input" />
 <a href="#" class="btn red">Red link</a>
-<a href="#" class="btn big orange">Big orange link</a>
-<a href="#" class="btn purple">Purple rain</a>
+<a href="#" class="btn big orange">Big orange link ►</a>
+<a href="#" class="btn purple">Purple rain »</a>
 <button class="btn yellow">Yellow button</button>
 <button class="btn small black">OK</button>
 <br><br>
 <a href="#" class="btn white big">Big white link</a>
 <button class="btn metal">Metal button</button>
 <input type="button" class="btn spip small" value="Small SPIP input" />
+<br><br>
+<button class="btn success">Cliquez ici !</button>
+<input class="btn info" type="button" value="Continuer">
+<input class="btn warning" type="submit" value="Me connecter">
+<input class="btn danger" type="reset" value="Annuler">
 <br><br>
 
 <h2>Tableau de test</h2>
@@ -257,15 +256,6 @@
 		<td class="black"><button type="button" class="btn secondary">button</button></td>
 	</tr>
 	<tr>
-		<td class="white">.disabled</td>
-		<td class="white"><a href="#" class="btn disabled">a.btn</a></td>
-		<td class="white"><input type="button" class="btn disabled" value="input" /></td>
-		<td class="white"><button type="button" class="btn disabled">button</button></td>
-		<td class="black"><a href="#" class="btn disabled">a.btn</a></td>
-		<td class="black"><input type="button" class="btn disabled" value="input" /></td>
-		<td class="black"><button type="button" class="btn disabled">button</button></td>
-	</tr>
-	<tr>
 		<td class="white">.success</td>
 		<td class="white"><a href="#" class="btn success">a.btn</a></td>
 		<td class="white"><input type="button" class="btn success" value="input" /></td>
@@ -310,5 +300,25 @@
 		<td class="black"><input type="button" class="btn light" value="input" /></td>
 		<td class="black"><button type="button" class="btn light">button</button></td>
 	</tr>
+	<tr>
+		<td class="white">.disabled</td>
+		<td class="white"><a href="#" class="btn disabled">a.btn</a></td>
+		<td class="white"><input type="button" class="btn disabled" value="input" /></td>
+		<td class="white"><button type="button" class="btn disabled">button</button></td>
+		<td class="black"><a href="#" class="btn disabled">a.btn</a></td>
+		<td class="black"><input type="button" class="btn disabled" value="input" /></td>
+		<td class="black"><button type="button" class="btn disabled">button</button></td>
+	</tr>
 </table>
+
+<br><br>
+
+<button class="btn">Button</button>
+<input type="button" class="btn" value="Input">
+<input type="submit" class="btn" value="Submit">
+<input type="reset" class="btn" value="Reset">
+<a href="#" class="btn">Link</a>
+<span class="btn">Span</span>
+<div class="btn">Div</div>
+
 </div>
