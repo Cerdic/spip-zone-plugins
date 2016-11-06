@@ -1,66 +1,67 @@
 <div class="formulaire_spip formulaire_#FORM">
-	<h3 class="titrem"><:fusion_spip:titre_fusion_spip:></h3>
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<ul class="editer-groupe">
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{base}}
-			<li class="editer_base obligatoire[ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_base obligatoire[(#GET{erreurs}|oui)erreur][(#GET{versions_bases}|oui)erreur]">
 				<label for="base"><:fusion_spip:base:></label>
 				#SET{versions_bases,#ENV**{erreurs}|table_valeur{versions_bases}}
 				[<span class='erreur_message'>(#GET{versions_bases})</span>]
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:base_desc:></p>
 				<select name="base" id="base">
 					<option value=""></option>
 					<BOUCLE_bases(DATA){source tableau,#ENV{bases}}>
 					<option value="[(#CLE|plus{1})]" [(#ENV{base}|=={[(#CLE|plus{1})]}|oui)selected="selected"] >#VALEUR</option>
 					</BOUCLE_bases>
 				</select>
-				<p><:fusion_spip:base_desc:></p>
 			</li>
-
 			#SET{warning_shema,#ENV**{erreurs}|table_valeur{warning_shema}}
-			[<li class="editer_confirme_warning [ (#GET{warning_shema}|oui)erreur]">
+			[<li class="editer editer_confirme_warning [ (#GET{warning_shema}|oui)erreur]">
 				<span class='erreur_message'>(#GET{warning_shema})</span>
-				<input type="checkbox" name="confirme_warning" id="confirme_warning" />
-				<label for="confirme_warning"><:fusion_spip:confirme_warning:></label>
+				<div class="choix">
+					<input type="checkbox" name="confirme_warning" id="confirme_warning" />
+					<label for="confirme_warning"><:fusion_spip:confirme_warning:></label>
+				</div>
 			</li>]
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{img_dir}}
-			<li class="editer_img_dir [ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_img_dir [ (#GET{erreurs}|oui)erreur]">
 				<label for="img_dir"><:fusion_spip:img_dir:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:img_dir_desc:></p>
 				<input type="text" name="img_dir" class="text" id="img_dir" value="#ENV{img_dir}" />
-				<p><:fusion_spip:img_dir_desc:></p>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{secteur}}
-			<li class="editer_secteur [ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_secteur [ (#GET{erreurs}|oui)erreur]">
 				<label for="secteur"><:fusion_spip:secteur:></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:fusion_spip:secteur_desc:></p>
 				<select name="secteur" id="secteur">
 					<option value=""></option>
 					<BOUCLE_secteurs(RUBRIQUES){racine} {par titre} {tout}>
 					<option value="#ID_RUBRIQUE" [(#ENV{secteur}|=={#ID_RUBRIQUE}|oui)selected="selected"] >#TITRE</option>
 					</BOUCLE_secteurs>
 				</select>
-				<p><:fusion_spip:secteur_desc:></p>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{stats}}
-			<li class="editer_stats [ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_stats [ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type="checkbox" name="stats" id="stats" [(#ENV{stats}|=={on}|oui) checked="checked" ] />
-				<label for="stats"><:fusion_spip:stats:></label>
+				<div class="choix">
+					<input type="checkbox" name="stats" id="stats" [(#ENV{stats}|=={on}|oui) checked="checked" ] />
+					<label for="stats"><:fusion_spip:stats:></label>
+				</div>
 			</li>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{referers}}
-			<li class="editer_referers [ (#GET{erreurs}|oui)erreur]">
+			<li class="editer editer_referers [ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
-				<label for="referers"><:fusion_spip:referers:></label>
+				<div class="choix">
+					<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
+					<label for="referers"><:fusion_spip:referers:></label>
+				</div>
 			</li>
 		</ul>
-
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:fusion_spip:bouton_importer:>' />
 		</p>
