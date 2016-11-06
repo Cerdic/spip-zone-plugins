@@ -24,14 +24,14 @@ function indexer_jointure_mots($objet, $id_objet, $infos) {
 	)) {
 		$infos['properties']['mots']['ids_hierarchie'] = array();
 		$infos['properties']['mots']['titres_hierarchie'] = array();
-		
+		$infos['properties']['tagsbygroups'] = array();
 		foreach ($mots as $mot) {
 			$id_groupe = $mot['id_groupe'];
-			if (!array_key_exists('tags'.$id_groupe,$infos['properties'])){
-				$infos['properties']['tags'.$id_groupe] = array(); // créer le tableau de groupe le cas échéant
+			if (!array_key_exists($id_groupe,$infos['properties']['tagsbygroups'])){
+				$infos['properties']['tagsbygroups'][$id_groupe] = array(); // créer le tableau de groupe le cas échéant
 			}
 			//ajouter le mot à la propriété tagsID_GROUPE
-			$infos['properties']['tags'.$id_groupe][] = supprimer_numero($mot['titre']); 
+			$infos['properties']['tagsbygroups'][$id_groupe][] = supprimer_numero($mot['titre']); 
 			
 			$id_mot = intval($mot['id_mot']);
 			$infos['properties']['mots']['titres'][$id_mot] = supprimer_numero($mot['titre']);
