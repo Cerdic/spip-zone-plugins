@@ -315,7 +315,7 @@ function compositions_determiner($type, $id, $serveur = '', $etoile = false) {
 		$select = 'composition';
 
 		$heritage = compositions_recuperer_heritage($type);
-		if (isset($desc['field'][$heritage['nom_id_parent']])) {
+		if ($heritage and isset($desc['field'][$heritage['nom_id_parent']])) {
 			$select .= ', '.$heritage['nom_id_parent'].' as id_parent';
 		}
 
