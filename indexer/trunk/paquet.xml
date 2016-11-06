@@ -1,7 +1,7 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="2.8.2"
+	version="2.9.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
@@ -16,6 +16,7 @@
 	<licence>GNU/GPL</licence>
 	
 	<pipeline nom="post_edition" inclure="indexer_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="indexer_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="indexer_pipelines.php" />
 	
 	<!-- Pipelines ajoutés par le plugin -->

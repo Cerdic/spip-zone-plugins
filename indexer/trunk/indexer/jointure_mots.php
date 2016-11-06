@@ -76,6 +76,5 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		// On ajoute le nom des mots en fulltext à la fin
 		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['mots']['titres']);
 	}
-	
 	return $infos;
 }
