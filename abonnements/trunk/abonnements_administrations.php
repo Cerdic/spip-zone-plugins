@@ -58,6 +58,7 @@ function abonnements_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_abonnements_offres");
 	sql_drop_table("spip_abonnements_offres_liens");
 	sql_drop_table("spip_abonnements");
+	sql_drop_table("spip_abonnements_offres_notifications");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions", sql_in("objet", array('abonnements_offre', 'abonnement')));
