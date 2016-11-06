@@ -331,6 +331,9 @@ function fabrique_description_roles($objet) {
  *     - Chaîne vide sinon
 **/
 function champ_present($objet, $champ) {
+	if (!$objet) {
+		return false;
+	}
 	if (is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
 			if ($info['champ'] == $champ) {
