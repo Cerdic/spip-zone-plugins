@@ -27,7 +27,10 @@
 				<table class="spip liste">
 					<thead>
 						<tr class="first_row">
-							<th class="tri" colspan="6">
+							<th class="navigation" colspan="5">
+								[<p class="pagination">(#PAGINATION{prive})</p>]
+							</th>
+							<th class="sens" colspan="1">
 								<div class="pagination tri">
 									[(#TRI{'>', <:simplog:tri_croissant:>})]
 									[ | (#TRI{'<', <:simplog:tri_decroissant:>}) ]
@@ -55,13 +58,13 @@
 						</tr>
 		</BOUCLE_lecture_log>
 					</tbody>
-					<tfoot>
-						<tr class="first_row">
-							<td class="tri" colspan="6">
-								[<p class="pagination">(#PAGINATION{prive})</p>]
+					[<tfoot>
+						<tr>
+							<td class="navigation" colspan="6">
+								<p class="pagination">(#PAGINATION{prive})</p>
 							</td>
 						</tr>
-					</tfoot>
+					</tfoot>]
 				</table>
 			</div>
 		</B_lecture_log>

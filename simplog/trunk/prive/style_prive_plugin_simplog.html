@@ -32,12 +32,17 @@
 /* -- les filtres sur les enregistrements du log */
 .simplog .caption .filtre {text-align: right;}
 
-/* Les boutons de sens de tri (thead) et la pagination (tfoot) */
-.simplog th.tri,
-.simplog td.tri {padding: 0;}
-.simplog .pagination {text-align: #GET{left}; margin: 0; border: 0; padding: 0.5em; background-color: [#(#ENV{claire}|couleur_eclaircir{0.4})];}
+/* Les boutons de sens de tri (thead) et la pagination (thead et tfoot) */
+.simplog .pagination {margin: 0; border: 0; padding: 0.5em; background-color: [#(#ENV{claire}|couleur_eclaircir{0.4})];}
 .simplog .pagination .on {background-color: #ENV{foncee}; font-style: normal;}
 .simplog .pagination .sep,
 .simplog .pagination a {font-style: normal;}
+
+.simplog .navigation,
+.simplog .sens {padding: 0;}
+.simplog .navigation .pagination {text-align: #GET{left};}
+.simplog .first_row .navigation {border-right: 0;}
+.simplog .sens .pagination {text-align: #GET{right};}
+.simplog .first_row .sens {border-left: 0;}
 
 [(#REM)	</style>]
