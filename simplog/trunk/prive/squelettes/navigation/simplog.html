@@ -6,10 +6,10 @@
 	<ul class="liste-items">
         <BOUCLE_logs(DATA){source glob, #EVAL{_DIR_LOG}|concat{*.log*}}{par valeur}{valeur != ''}>
 		[<li class="item">
-			(#URL_ECRIRE{#ENV{exec}}|parametre_url{fic,#VALEUR|basename}|parametre_url{senstri,#ENV{senstri,0}}
+			(#URL_ECRIRE{#ENV{exec}}|parametre_url{log, #VALEUR|basename}|parametre_url{senstri, #ENV{senstri,0}}
 				|lien_ou_expose{
 					[(#VALEUR|basename)],
-					[(#ENV{fic}|=={#VALEUR})]})
+					[(#ENV{log}|=={#VALEUR})]})
 		</li>]
         </BOUCLE_logs>
     </ul>

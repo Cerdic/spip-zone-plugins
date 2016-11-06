@@ -1,7 +1,5 @@
 [(#AUTORISER{voir, simplog}|sinon_interdire_acces)]
 
-<h1 class="grostitre"><:simplog:logs:></h1>
-
 [(#SET{defaut_tri, #ARRAY{
 	index, -1,
 	gravite, 1,
@@ -9,67 +7,80 @@
 	ip, 1,
 	pid, 1
 }})]
+#SET{fichier_log, ''}
 
-[(#REM) verifier que le fichier passé en parametre est bein dans _DIR_LOG ]
-<BOUCLE_control(DATA){source ls, #EVAL{_DIR_LOG}|concat{*.log*}} {file==#ENV{fic}}>
-#SET{fic,#EVAL{_DIR_LOG}|concat{#FILE}}
-<B_lecture_log>
-	#ANCRE_PAGINATION
-	<div class="spip_code">
-		<div class="pagination tri">
-			[(#TRI{'>', <:simplog:tri_croissant:>}) | ]
-			[(#TRI{'<', <:simplog:tri_decroissant:>}) ]
-		[(#GET{fic}|oui)
-				|
-			<a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax" style="text-align: right">
-				<:simplog:clic_rafraichir:>
-			</a>
-		]
-		</div>
-		<table class="spip liste">
-			[<caption>
-				<strong class="caption">
-					(#GET{fic}|oui)<:simplog:fichier{fichier=#GET{fic}}:>
-					[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{telecharger_log,#GET{fic}}, '', '', ''})]
-					&nbsp;|&nbsp;
-					[(#BOUTON_ACTION{<:lien_supprimer|ucfirst:>, #URL_ACTION_AUTEUR{supprimer_log,#GET{fic}}, '', '', ''})]
-				</strong>
-			</caption>]
-			<thead>
-				<tr class="first_row">
-					<th class="date secondaire" scope="col">[(#TRI{index, <:simplog:colonne_date:>, ajax})]</th>
-					<th class="ip" scope="col">[(#TRI{ip, <:simplog:colonne_ip:>, ajax})]</th>
-					<th class="pid" scope="col">[(#TRI{pid, <:simplog:colonne_pid:>, ajax})]</th>
-					<th class="hit" scope="col">[(#TRI{hit, <:simplog:colonne_hit:>, ajax})]</th>
-					<th class="gravite" scope="col">[(#TRI{gravite, <:simplog:colonne_gravite:>, ajax})]</th>
-					<th class="texte principale" scope="col"><:simplog:colonne_texte:></th>
-				</tr>
-			</thead>
-			<tbody>
-<BOUCLE_lecture_log(DATA){source table, #GET{fic}|simplog_phraser_log}{tri #ENV{par, index}, #GET{defaut_tri}}{pagination 100}>
-				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
-					<td class="date secondaire">[(#DATE)]</td>
-					<td class="ip">[(#IP)]</td>
-					<td class="pid">[(#PID)]</td>
-					<td class="hit">[(#HIT)]</td>
-					<td class="gravite">[(#GRAVITE)]</td>
-					<td class="texte principale">[(#TEXTE)]</td>
-				</tr>
-</BOUCLE_lecture_log>
-			</tbody>
-		</table>
-	</div>
-	[<p class="pagination">(#PAGINATION{prive})</p>]
-</B_lecture_log>
-[(#GET{fic}|oui)
-	#BOITE_OUVRIR{'','error'}
-		<:simplog:message_fichier_inconnu{fichier=#GET{fic}}:>
-	#BOITE_FERMER]
-<//B_lecture_log>
-</BOUCLE_control>
+<h1 class="grostitre"><:simplog:logs:></h1>
 
-[(#ENV{fic}|non)
-	#BOITE_OUVRIR{'','notice'}
+[(#REM) On vérifie qu'un log a bien été fourni en paramètre de l'url ]
+<BOUCLE_parametre_log(CONDITION) {si #ENV{log}|oui}>
+	[(#REM) On vérifie que le log passé en parametre est bien dans _DIR_LOG ]
+	<BOUCLE_controle_log(DATA){source ls, #EVAL{_DIR_LOG}|concat{*.log*}} {file = #ENV{log}}>
+		[(#REM) On construit le chemin complet du fichier de log ]
+		#SET{fichier_log, #EVAL{_DIR_LOG}|concat{#FILE}}
+		<B_lecture_log>
+			<INCLURE{fond=prive/squelettes/inclure/inc-caption,
+				log=#FILE,
+				fichier=#GET{fichier_log},
+				gravite=#ENV{gravite}} />
+			#ANCRE_PAGINATION
+			<div class="spip_code">
+				<table class="spip liste">
+					<thead>
+						<tr class="first_row">
+							<th class="tri" colspan="6">
+								<div class="pagination tri">
+									[(#TRI{'>', <:simplog:tri_croissant:>})]
+									[ | (#TRI{'<', <:simplog:tri_decroissant:>}) ]
+								</div>
+							</th>
+						</tr>
+						<tr class="first_row">
+							<th class="date secondaire" scope="col">[(#TRI{index, <:simplog:colonne_date:>, ajax})]</th>
+							<th class="ip" scope="col">[(#TRI{ip, <:simplog:colonne_ip:>, ajax})]</th>
+							<th class="pid" scope="col">[(#TRI{pid, <:simplog:colonne_pid:>, ajax})]</th>
+							<th class="hit" scope="col">[(#TRI{hit, <:simplog:colonne_hit:>, ajax})]</th>
+							<th class="gravite" scope="col">[(#TRI{gravite, <:simplog:colonne_gravite:>, ajax})]</th>
+							<th class="texte principale" scope="col"><:simplog:colonne_texte:></th>
+						</tr>
+					</thead>
+					<tbody>
+		<BOUCLE_lecture_log(DATA){source table, #GET{fichier_log}|simplog_phraser_log}{gravite?}{tri #ENV{par, index}, #GET{defaut_tri}}{pagination 100}>
+						<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+							<td class="date secondaire">[(#DATE)]</td>
+							<td class="ip">[(#IP)]</td>
+							<td class="pid">[(#PID)]</td>
+							<td class="hit">[(#HIT)]</td>
+							<td class="gravite">[(#GRAVITE)]</td>
+							<td class="texte principale">[(#TEXTE)]</td>
+						</tr>
+		</BOUCLE_lecture_log>
+					</tbody>
+					<tfoot>
+						<tr class="first_row">
+							<td class="tri" colspan="6">
+								[<p class="pagination">(#PAGINATION{prive})</p>]
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</B_lecture_log>
+			<INCLURE{fond=prive/squelettes/inclure/inc-caption,
+				log=#FILE,
+				fichier=#GET{fichier_log},
+				gravite=#ENV{gravite}} />
+			#BOITE_OUVRIR{'', notice}
+				[(#GRAVITE|non)<:simplog:message_fichier_vide:>]
+				[(#GRAVITE|oui)<:simplog:message_fichier_filtre_vide{gravite=#GRAVITE}:>]
+			#BOITE_FERMER
+		<//B_lecture_log>
+	</BOUCLE_controle_log>
+		#BOITE_OUVRIR{'', error}
+			<:simplog:message_fichier_non_log{fichier=#ENV{log}}:>
+		#BOITE_FERMER
+	<//B_controle_log>
+</BOUCLE_parametre_log>
+	#BOITE_OUVRIR{'', notice}
 		<:simplog:message_fichier_choisir:>
 	#BOITE_FERMER
-]
+<//B_parametre_log>
