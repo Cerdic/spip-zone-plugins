@@ -18,19 +18,21 @@
 				[(#TEXTE|creer_deckjs{article})]
 			</BOUCLE_article>
 
-			[(#REM) la presentation = les articles d'une rubrique]
-			<BOUCLE_titre_rub(RUBRIQUES){id_rubrique}>
-				[<section class="slide">
-					<h1>(#TITRE)</h1>
-				</section>]
-			</BOUCLE_titre_rub>
+				[(#REM) la presentation = les articles d'une rubrique]
+				<BOUCLE_titre_rub(RUBRIQUES){id_rubrique}>
+					[<section class="slide">
+						<h1>(#TITRE)</h1>
+					</section>]
+				</BOUCLE_titre_rub>
 
-			<BOUCLE_articles(ARTICLES){id_rubrique}>
-				<section class="slide alignement">
-					<h2 class="spip">#TITRE</h2>
-					[(#TEXTE|creer_deckjs{rubrique})]
-				</section>
-			</BOUCLE_articles>
+				<BOUCLE_articles(ARTICLES){id_rubrique}>
+					<section class="slide alignement">
+						<h2 class="spip">#TITRE</h2>
+						[(#TEXTE|creer_deckjs{rubrique})]
+					</section>
+				</BOUCLE_articles>
+			
+			<//B_article>
 
 			<!-- Begin extension snippets. Add or remove as needed. -->
 
