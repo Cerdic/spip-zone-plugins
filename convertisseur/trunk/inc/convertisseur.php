@@ -325,10 +325,13 @@ function nettoyer_format($t) {
   // http://www.macworld.com/downloads/magazine/XPressTagsList.pdf   
   // cf. extract/quark.php
   $conv_formats['XTG_SPIP'] = 'quark'; // function extract/
-  $conv_formats['Quark_SPIP'] = 'quark_xml'; // function extract/
-  $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
-  $conv_formats['XML_OCR'] = 'xml_ocr'; // function extract/
   
+  $conv_formats['html_SPIP'] = 'html'; // function sale ou HTML2SPIP
+  $conv_formats['Quark_SPIP'] = 'quark_xml'; // function extract/
+  $conv_formats['Indesign_SPIP'] = 'indesign_xml'; // function extract/
+  $conv_formats['XMLOCR_SPIP'] = 'xml_ocr'; // function extract/
+  $conv_formats['XMLDE_SPIP'] = 'xml_de'; // function extract/
+
   //
   //  Les conversions SPIP vers qqchose ....
   //
