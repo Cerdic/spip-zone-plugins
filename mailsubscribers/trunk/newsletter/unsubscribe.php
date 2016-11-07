@@ -56,7 +56,13 @@ function newsletter_unsubscribe_dist($email, $options = array()) {
 		$pas_encore = sql_allfetsel('id_mailsubscribinglist,statut', 'spip_mailsubscriptions', 'statut!=' . sql_quote('refuse') . ' AND id_segment=0 AND ' . implode(' AND ', $where));
 
 		// on met a jour les inscriptions pour les listes demandees (ou pour toutes les listes en cours)
-		sql_updateq('spip_mailsubscriptions', array('statut' => 'refuse'), $where);
+		// l'option remove est utilisee pour la synchro des listes : un abonnement retire lors de la synchro n'est pas conserve en refuse (car ce n'est pas une desinscription)
+		if (isset($options['remove']) and $options['remove']){
+			sql_delete('spip_mailsubscriptions', $where);
+		}
+		else {
+			sql_updateq('spip_mailsubscriptions', array('statut' => 'refuse'), $where);
+		}
 		$GLOBALS['mailsubscribers_recompte_inscrits'] = true;
 
 		if ($pas_encore) {

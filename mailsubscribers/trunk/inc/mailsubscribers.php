@@ -613,12 +613,11 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array())
 		} // il n'est plus dans les abonnes on l'enleve sauf si flag $addonly==true
 		elseif (!$options['addonly']) {
 			//echo "unsubscribe ".$sub['email']."<br />";
-			$unsubscribe($sub['email'], array('listes' => $listes, 'notify' => false));
+			$unsubscribe($sub['email'], array('listes' => $listes, 'notify' => false, 'remove' => true));
 		}
 	}
 
-	spip_log("mailsubscribers_synchronise_liste $liste: " . count($abonnes_emails) . " a abonner dans la liste",
-		"mailsubscribers" . _LOG_DEBUG);
+	spip_log("mailsubscribers_synchronise_liste $liste: " . count($abonnes_emails) . " a abonner dans la liste", "mailsubscribers" . _LOG_DEBUG);
 	// si il reste du monde dans $abonnes, c'est ceux qui ne sont pas en base
 	// on les subscribe
 	foreach ($abonnes_emails as $email => $abonne) {
