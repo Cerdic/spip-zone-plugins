@@ -6,7 +6,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 function action_fulltext_convert_myisam_dist($table = null) {
 	if (is_null($table)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -25,7 +24,7 @@ function action_fulltext_convert_myisam_dist($table = null) {
 			foreach ($tables as $table => $desc) {
 				$engine = fulltext_trouver_engine_table($table);
 				if (strtolower($engine) !== 'myisam') {
-					list(,) = fulltext_conversion_myisam($table);
+					list($ok,$erreur) = fulltext_conversion_myisam($table);
 				}
 			}
 		}
