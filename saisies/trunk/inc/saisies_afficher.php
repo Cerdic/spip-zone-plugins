@@ -387,8 +387,24 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						} else {
 							$sel = ".$class_li";
 						}
-						$code .= "\tif (".$condition.') {$(form).find("'.$sel.'").show(400);} '."\n\t";
-						$code .= 'else {if (chargement==true) {$(form).find("'.$sel.'").hide(400).css("display","none");} else {$(form).find("'.$sel.'").hide(400);};} '."\n";
+						$code .= "\tif (".$condition.') {
+											$(form).find("'.$sel.'").show(400);
+											';
+						if (html5_permis()) {
+						$code .=	'$(form).find("'.$sel.'.obligatoire > input, '.$sel.'.obligatoire > textearea").attr("required",true);';
+						}
+						$code .=	'} '."\n\t";
+						$code .= 'else {';
+						if (html5_permis()) {
+							$code .= '$(form).find("'.$sel.' > input,'.$sel.' > textearea").attr("required",false);';
+						}					
+						$code .=	'if (chargement==true) {
+												$(form).find("'.$sel.'").hide(400).css("display","none");
+												} 
+											else {
+												$(form).find("'.$sel.'").hide(400);
+												};
+										  } '."\n";
 					}
 	}
 	$code .= '};';
@@ -396,7 +412,8 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$code .= '$("#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
 	$code .= 'chargement=false;})';
 	$code .= '})(jQuery);';
-
+	$code = str_replace("\n",'',$code);//concatener
+	$code = str_replace("\t",'',$code);//concatener
 	return $i > 0 ? $code : '';
 }
 
