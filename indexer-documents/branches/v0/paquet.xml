@@ -1,11 +1,11 @@
 <paquet
-    prefix="indexerdoc"
-    categorie="navigation"
-    version="0.0.3"
-    etat="dev"
-    compatibilite="[2.1.0;3.1.*]"
-    logo=""
-    documentation="http://contrib.spip.net/Sphinx-Indexer"
+	prefix="indexerdoc"
+	categorie="navigation"
+	version="0.0.3"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.*]"
+	logo=""
+	documentation="http://contrib.spip.net/Sphinx-Indexer"
 >
 	<nom>Indexer documents</nom>
 
@@ -14,13 +14,13 @@
 	<auteur>Fil</auteur>
 	<auteur>Azerttyu</auteur>
 
-    <licence>GNU/GPL</licence>
+	<licence>GNU/GPL</licence>
 
-    <necessite nom="indexer" compatibilite="[1.1;]" />
+	<necessite nom="indexer" compatibilite="[1.1.0;]" />
 
-    <utilise nom="extrairedoc" compatibilite="[0.0.4;]" />
+	<utilise nom="extrairedoc" compatibilite="[0.0.4;]" />
 
-    <pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
+	<pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
 
 
 </paquet>

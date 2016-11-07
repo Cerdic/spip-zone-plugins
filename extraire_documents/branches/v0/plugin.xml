@@ -1,25 +1,25 @@
 <plugin>
-    <nom>Extracteurs Documents</nom>
-    <slogan>Extraire le contenu des documents</slogan>
+	<nom>Extracteurs Documents</nom>
+	<slogan>Extraire le contenu des documents</slogan>
 
 	<auteur>Fil</auteur>
 	<auteur>Gael Chareyre</auteur>
 	<auteur>Azerttyu</auteur>
 
-    <icon></icon>
+	<icon></icon>
 
-    <licence>GNU/GPL</licence>
-    <version>0.0.5</version>
-    <etat>test</etat>
-    <description>Extraire le contenu des documents </description>
-    <prefix>extrairedoc</prefix>
+	<licence>GNU/GPL</licence>
+	<version>0.0.5</version>
+	<etat>test</etat>
+	<description>Extraire le contenu des documents </description>
+	<prefix>extrairedoc</prefix>
 
-    <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 
-    <necessite id="lib:TCPDF-6.2.6" src="https://github.com/tecnickcom/TCPDF/archive/6.2.6.zip" />
-    <necessite id="lib:pdfparser-0.9.22" src="https://github.com/smalot/pdfparser/archive/v0.9.22.zip" />
+	<necessite id="lib:TCPDF-6.2.6" src="https://github.com/tecnickcom/TCPDF/archive/6.2.6.zip" />
+	<necessite id="lib:pdfparser-0.9.22" src="https://github.com/smalot/pdfparser/archive/v0.9.22.zip" />
 
-    <categorie>navigation</categorie>
+	<categorie>navigation</categorie>
 
-    <lien></lien>
+	<lien></lien>
 </plugin>
