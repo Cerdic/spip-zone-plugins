@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actualiser' => 'Refresh the list',
 
 	// C
-	'clic_rafraichir' => 'Refresh the file',
+	'clic_rafraichir' => 'Refresh the file', # MODIF
 	'colonne_date' => 'Date',
 	'colonne_gravite' => 'Severity',
 	'colonne_hit' => 'Hit',
@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Choose a file to analyze.',
-	'message_fichier_inconnu' => 'The file "@fichier@" is not available.',
 
 	// T
 	'tri_croissant' => 'Ascending sort',

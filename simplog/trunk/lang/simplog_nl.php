@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actualiser' => 'Werk de lijst bij',
 
 	// C
-	'clic_rafraichir' => 'Het bestand herladen',
+	'clic_rafraichir' => 'Het bestand herladen', # MODIF
 	'colonne_date' => 'Datum',
 	'colonne_gravite' => 'Ernst',
 	'colonne_hit' => 'Hit',
@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Kies een te analyseren bestand.',
-	'message_fichier_inconnu' => 'Het bestand "@fichier@" is niet beschikbaar.',
 
 	// T
 	'tri_croissant' => 'Oplopend sorteren',

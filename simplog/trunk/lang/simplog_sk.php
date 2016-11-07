@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actualiser' => 'Aktualizovať zoznam',
 
 	// C
-	'clic_rafraichir' => 'Obnoviť súbor',
+	'clic_rafraichir' => 'Obnoviť súbor', # MODIF
 	'colonne_date' => 'Dátum',
 	'colonne_gravite' => 'Dôležitosť',
 	'colonne_hit' => 'Počet klikov',
@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_fichier_choisir' => 'Vyberte súbor, ktorý chcete analyzovať.',
-	'message_fichier_inconnu' => 'Súbor "@fichier@" nie je dostupný.',
 
 	// T
 	'tri_croissant' => 'Zotriediť vzostupne',
