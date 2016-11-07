@@ -440,8 +440,14 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 		return array();
 	}
 	foreach ($saisies as $cle => $saisie) {
-		if (isset($saisie['options']['afficher_si'])) {
-			$condition = $saisie['options']['afficher_si'];
+		if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
+			$condition = '';
+			if (isset($saisie['options']['afficher_si_remplissage'])){
+				 $condition .= $saisie['options']['afficher_si_remplissage'];
+			}
+			if (isset($saisie['options']['afficher_si'])){
+				 $condition .= $saisie['options']['afficher_si'];
+			}
 			// On gère le cas @plugin:non_plugin@
 			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
 			foreach ($matches[1] as $plug) {
