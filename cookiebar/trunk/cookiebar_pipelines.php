@@ -39,9 +39,13 @@ function cookiebar_insert_head_css($flux) {
  */
 function cookiebar_insert_head($flux) {
 	include_spip('inc/filtres');
-
+	include_spip('inc/config');
+	
+	// On fait un md5 de la config pour que le squelette change dès que la config change
+	$signature = md5(serialize(lire_config('cookiebar')));
+	
 	$lang = (isset($GLOBALS['spip_lang']) ? $GLOBALS['spip_lang'] : 'fr');
-	$js_cookiebar = produire_fond_statique('jquery.cookiebar.js', array('lang' => $lang));
+	$js_cookiebar = produire_fond_statique('jquery.cookiebar.js', array('lang' => $lang, 'signature' => $signature));
 
 	$flux .= "<script type='text/javascript' src='$js_cookiebar'></script>\n";
 	$flux .= "<script type='text/javascript' src='".find_in_path('js/jquery.cookiebar.call.js')."'></script>";
