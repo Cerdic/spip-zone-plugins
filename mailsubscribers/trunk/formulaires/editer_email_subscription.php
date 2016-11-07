@@ -19,7 +19,7 @@ function formulaires_editer_email_subscription_charger_dist($email) {
 	if (!$email) {
 		return false;
 	}
-	$listes_dispos = mailsubscribers_listes();
+	$listes_dispos = mailsubscribers_listes(array('status' => 'open'));
 	if (!$listes_dispos) {
 		return false;
 	}
