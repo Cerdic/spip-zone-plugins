@@ -65,3 +65,23 @@ function info_sites_taches_generales_cron($taches) {
 
 	return $taches;
 }
+
+
+function info_sites_compiler_branches_logiciel($flux) {
+	if (is_array($flux['data']) and count($flux['data'])) {
+		if (isset($flux['data']['drupal']) and count($flux['data']['drupal'])) {
+			foreach ($flux['data']['drupal'] as $index => $branche) {
+				$flux['data']['drupal'][$index] = strval(intval($branche));
+			}
+			$flux['data']['drupal'] = array_unique($flux['data']['drupal']);
+		}
+		if (isset($flux['data']['wordpress']) and count($flux['data']['wordpress'])) {
+			foreach ($flux['data']['wordpress'] as $index => $branche) {
+				$flux['data']['wordpress'][$index] = strval(intval($branche));
+			}
+			$flux['data']['wordpress'] = array_unique($flux['data']['wordpress']);
+		}
+	}
+
+	return $flux;
+}

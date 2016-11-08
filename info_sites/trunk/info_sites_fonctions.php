@@ -59,8 +59,9 @@ if (!function_exists('lister_tables_objets')) {
 				$liste_objets[] = table_objet($table);
 			}
 			natsort($liste_objets);
+
 			return $liste_objets;
-	}
+		}
 
 		return false;
 	}
@@ -542,4 +543,12 @@ function info_sites_lister_doublons_commits() {
 	$doublons = sql_allfetsel("COUNT(guid) as nbr_doublon, guid", 'spip_commits', "guid!=''", 'guid', '', '', "nbr_doublon > 1");
 
 	var_dump($doublons);
+}
+
+
+function filtre_compiler_branches_logiciel_dist($logiciel_nom = null) {
+	include_spip('inc/info_sites_outiller');
+	$f = compiler_branches_logiciel($logiciel_nom);
+
+	return $f;
 }

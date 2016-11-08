@@ -15,7 +15,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function compiler_branches_logiciel($logiciel_nom = null) {
-
 	include_spip('base/abstract_sql');
 	$branches = array();
 
@@ -36,7 +35,10 @@ function compiler_branches_logiciel($logiciel_nom = null) {
 	}
 	$branches = array_map('array_unique', $branches);
 
-	if (is_null($logiciel_nom) or empty($logiciel_nom)) {
+	$branches = pipeline('compiler_branches_logiciel', array('args' => array(), 'data' => $branches));
+	$branches = array_map('array_values', $branches);
+
+	if (!is_null($logiciel_nom) and !empty($logiciel_nom)) {
 		return (isset($branches[$logiciel_nom]) ? $branches[$logiciel_nom] : null);
 	}
 
