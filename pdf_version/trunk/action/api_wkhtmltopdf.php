@@ -95,7 +95,7 @@ function action_api_wkhtmltopdf_dist(){
 		$html_file = $tmpfile;
 	}
 
-	if (!$html_file) {
+	if ($html_file) {
 		$exec_wkhtmltopdf = charger_fonction('exec_wkhtmltopdf','inc');
 		$exec_wkhtmltopdf($html_file, $pdf_file, $args);
 	}

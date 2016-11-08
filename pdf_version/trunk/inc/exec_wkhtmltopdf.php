@@ -7,8 +7,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_WKHTMLTOPDF_API_URL')) define('_WKHTMLTOPDF_API_URL','https://www.nursit.com/wkhtmltopdf.api/');
-
 /**
  * Appel de wkhtml, soit par ligne de commande, soit par API HTTP sur un site qui en dispose en ligne de commande
  * @param $html_file
