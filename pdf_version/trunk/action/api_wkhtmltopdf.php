@@ -22,6 +22,10 @@ include_spip('inc/pdf_version');
  */
 function action_api_wkhtmltopdf_dist(){
 
+	if (!function_exists('lire_config')) {
+		include_spip('inc/config');
+	}
+
 	// verifier que la fonction API wkhtmltopdf a bien ete activee
 	if (lire_config('pdf_version/methode','exec')!=='exec'
 	  or !lire_config('pdf_version/api_wkhtmltopdf_actif','1')) {
