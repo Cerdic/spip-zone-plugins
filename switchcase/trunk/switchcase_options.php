@@ -23,8 +23,6 @@ function balise_SWITCH_dist($p) {
 	return $p;
 }
 
-
-
 function balise_CASE_dist($p) {
 	$tested = interprete_argument_balise(1, $p);
 	if ($tested === NULL) {
@@ -40,7 +38,6 @@ function balise_CASE_dist($p) {
 
 function balise_CASE_DEFAULT_dist($p) {
 	$p->code = "(\$Pile['vars']['_switch_matched_'] ? '' : ' ')";
-$p->interdire_script = false;
-return $p;
-
+	$p->interdire_script = false;
+	return $p;
 }

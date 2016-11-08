@@ -10,5 +10,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'switchcase_nom' => 'Balises #SWITCH et #CASE',
-	'switchcase_slogan' => 'Les balises #SWITCH, #CASE ET #DEFAULT implémentent les contrôles switch... case... default... du php et du C'
+	'switchcase_slogan' => 'Les balises #SWITCH, #CASE ET #CASE_DEFAULT implémentent les contrôles switch... case... default... du php et du C'
 );
