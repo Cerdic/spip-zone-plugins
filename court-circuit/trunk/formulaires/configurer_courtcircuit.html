@@ -7,8 +7,8 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<h3 class="titrem"><:courtcircuit:label_exceptions:></h3>
-		<ul>
-			<li class="editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
 				<label><:courtcircuit:label_variantes_squelettes:></label>
 				<p class="explication"><:courtcircuit:explication_variantes_squelettes:></p>
 				<div class="choix">
@@ -21,7 +21,7 @@
 				</div>
 			</li>
 			[(#PLUGIN{compositions}|oui)
-			<li class="editer_composition_rubrique[ (#ENV**{erreurs}|table_valeur{composition_rubrique}|oui)erreur]">
+			<li class="editer editer_composition_rubrique[ (#ENV**{erreurs}|table_valeur{composition_rubrique}|oui)erreur]">
 				<label><:courtcircuit:label_composition_rubrique:></label>
 				<div class="choix">
 					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_oui" value="oui" [(#ENV{composition_rubrique,oui}|=={oui}|oui) checked="checked"] />
@@ -35,8 +35,8 @@
 		</ul>
 		
 		<h3 class="titrem"><:courtcircuit:label_regles:></h3>
-		<ul>
-			<li class="editer_restreindre_langue[ (#ENV**{erreurs}|table_valeur{restreindre_langue}|oui)erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_restreindre_langue[ (#ENV**{erreurs}|table_valeur{restreindre_langue}|oui)erreur]">
 				<label><:courtcircuit:label_restreindre_langue:></label>
 				<p class="explication"><:courtcircuit:explication_restreindre_langue:></p>
 				<div class="choix">
@@ -50,7 +50,7 @@
 			</li>
 			<li class="explication"><:courtcircuit:explication_regles:></li>
 			#SET{ordre,1}
-			<li class="editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
+			<li class="editer editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_un_article:></label>
 				<div class="choix">
 					<input type="radio" name="un_article" class="radio" id="un_article_oui" value="oui" [(#ENV{un_article,oui}|=={oui}|oui) checked="checked"] />
@@ -63,7 +63,7 @@
 				#SET{ordre,#GET{ordre}|plus{1}}
 			</li>
 			[(#PLUGIN{article_accueil}|oui)
-			<li class="editer_article_accueil[ (#ENV**{erreurs}|table_valeur{article_accueil}|oui)erreur]">
+			<li class="editer editer_article_accueil[ (#ENV**{erreurs}|table_valeur{article_accueil}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_article_accueil:></label>
 				<div class="choix">
 					<input type="radio" name="article_accueil" class="radio" id="article_accueil_oui" value="oui" [(#ENV{article_accueil,oui}|=={oui}|oui) checked="checked"] />
@@ -75,7 +75,7 @@
 				</div>
 				#SET{ordre,#GET{ordre}|plus{1}}
 			</li>]
-			<li class="editer_rang_un[ (#ENV**{erreurs}|table_valeur{rang_un}|oui)erreur]">
+			<li class="editer editer_rang_un[ (#ENV**{erreurs}|table_valeur{rang_un}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_rang_un:></label>
 				<div class="choix">
 					<input type="radio" name="rang_un" class="radio" id="rang_un_oui" value="oui" [(#ENV{rang_un,oui}|=={oui}|oui) checked="checked"] />
@@ -87,7 +87,7 @@
 				</div>
 				#SET{ordre,#GET{ordre}|plus{1}}
 			</li>
-			<li class="editer_plus_recent[ (#ENV**{erreurs}|table_valeur{plus_recent}|oui)erreur]">
+			<li class="editer editer_plus_recent[ (#ENV**{erreurs}|table_valeur{plus_recent}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_plus_recent:></label>
 				<div class="choix">
 					<input type="radio" name="plus_recent" class="radio" id="plus_recent_oui" value="oui" [(#ENV{plus_recent,oui}|=={oui}|oui) checked="checked"] />
@@ -99,7 +99,7 @@
 				</div>
 				#SET{ordre,#GET{ordre}|plus{1}}
 			</li>
-			<li class="editer_plus_recent_branche[ (#ENV**{erreurs}|table_valeur{plus_recent_branche}|oui)erreur]">
+			<li class="editer editer_plus_recent_branche[ (#ENV**{erreurs}|table_valeur{plus_recent_branche}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_plus_recent_branche:></label>
 				<div class="choix">
 					<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_oui" value="oui" [(#ENV{plus_recent_branche,non}|=={oui}|oui) checked="checked"] />
@@ -111,7 +111,7 @@
 				</div>
 				#SET{ordre,#GET{ordre}|plus{1}}
 			</li>
-			<li class="editer_sousrubrique[ (#ENV**{erreurs}|table_valeur{sousrubrique}|oui)erreur]">
+			<li class="editer editer_sousrubrique[ (#ENV**{erreurs}|table_valeur{sousrubrique}|oui)erreur]">
 				<label>#GET{ordre}) <:courtcircuit:label_sousrubrique:></label>
 				<p class="explication"><:courtcircuit:explication_sousrubrique:></p>
 				<div class="choix">
@@ -141,8 +141,8 @@
 		
 		
 		<h3 class="titrem"><:courtcircuit:label_liens:></h3>
-		<ul>
-			<li class="editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
 				<label><:courtcircuit:label_liens_rubriques:></label>
 				<p class="explication"><:courtcircuit:explication_liens_rubriques:></p>
 				<div class="choix">
