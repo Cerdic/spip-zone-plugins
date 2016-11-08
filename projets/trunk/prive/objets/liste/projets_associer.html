@@ -56,7 +56,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='nom'>[(#LOGO_PROJET|image_reduire{20,20})]<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a></td>
 			<td class='date_publication'>[(#DATE_PUBLICATION|affdate)]</td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien#EVAL{chr(91)}projet-#ID_PROJET-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="+"><:projet:ajouter_lien_projet:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button type="submit" class="button link add" name="ajouter_lien#EVAL{chr(91)}projet-#ID_PROJET-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="+"><:projet:ajouter_lien_projet:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_projets>
