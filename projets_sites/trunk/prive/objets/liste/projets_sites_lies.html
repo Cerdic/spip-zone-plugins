@@ -48,7 +48,7 @@ a mis a jour la valeur avec la page reelle]
 
 			<td class='action'>
 				[(#AUTORISER{modifier, projets_site, #ID_PROJETS_SITE}|oui)[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}projets_site-#ID_PROJETS_SITE-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projets_site:retirer_lien_projets_site:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien#EVAL{chr(91)}projets_site-#ID_PROJETS_SITE-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projets_site:retirer_lien_projets_site:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]]
 			</td>
 		</tr>
@@ -56,7 +56,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<div class='pagination'>(#PAGINATION{prive})</div>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}projets_site-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projets_site:retirer_tous_liens_projets_sites:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}projets_site-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:projets_site:retirer_tous_liens_projets_sites:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_projets_sites>
 <div class="nettoyeur"></div>

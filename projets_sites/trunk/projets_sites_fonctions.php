@@ -79,8 +79,12 @@ function url_webservice_xml($url, $login = '', $password = '') {
 	$recuperer_flux = charger_fonction('recuperer_flux', 'inc');
 
 	$page = $recuperer_flux($url, $login, $password);
+	if (isset($page['content']) and !empty($page['content'])) {
+		return $page['content'];
+	}
 
-	return $page['content'];
+	return false;
+
 }
 
 function version2branche($version) {
