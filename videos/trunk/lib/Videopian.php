@@ -129,13 +129,10 @@ class Videopian {
     */
     private static function checkAvailability($url) {
 
-        $headers = @get_headers($url, 1);
-        if(!$headers) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE);
-        for($i = 0; $i < 20; $i++) {
-            if(array_key_exists($i, $headers)) $http_status = $headers[$i];
-            else break; 
-        }
-        $http_status_code = intval(substr($http_status, 9, 3));
+        include_spip('inc/distant');
+        $headers = @recuperer_url($url, array('taille_max' => 0));
+        if(!$headers['status']) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE);
+        $http_status_code = $headers['status'];
         if($http_status_code > 300) throw new Videopian_Exception(Videopian_Exception::INFO_FILE_UNAVAILABLE . " ($http_status)");
         return true;
     }
