@@ -996,6 +996,7 @@ function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
 		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
 		. (isset($crit->param[3]) ? "\t\t\t'type'        => $type,\n" : '')
+		. ($crit->not ? "\t\t\t'not'                     => 'true',\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test
