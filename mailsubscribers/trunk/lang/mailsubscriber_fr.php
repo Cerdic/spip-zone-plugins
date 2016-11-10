@@ -113,12 +113,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unsubscribe_deja_texte' => 'L’adresse email @email@ n’est pas dans notre liste de diffusion.',
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Désinscription de la Newsletter',
 	'unsubscribe_texte_confirmer_email_1' => 'Veuillez confirmer la désinscription de l’adresse email @email@ en cliquant sur le bouton : ',
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Veuillez confirmer la désinscription de l’adresse email @email@ de la liste « @titre_liste@ » en cliquant sur le bouton : ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Veuillez confirmer la désinscription de l’adresse email @email@ de la liste <b>@titre_liste@</b> en cliquant sur le bouton : ',
 	'unsubscribe_texte_email_1' => 'L’adresse email @email@ a bien été retirée de notre liste de diffusion.',
 	'unsubscribe_texte_email_2' => 'Nous espérons vous revoir bientôt sur @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'En cas d’erreur de notre part, ou si vous changez d’avis, vous pouvez vous réinscrire à tout moment au moyen du lien suivant :
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'L’adresse email @email@ a bien été retirée de notre liste de diffusion « @titre_liste@ ».',
+	'unsubscribe_texte_email_liste_1' => 'L’adresse email @email@ a bien été retirée de notre liste de diffusion <b>@titre_liste@</b>.',
 	'unsubscribe_titre_email' => 'Désinscription de la Newsletter',
-	'unsubscribe_titre_email_liste' => 'Désinscription de la liste « <b>@titre_liste@</b> »'
+	'unsubscribe_titre_email_liste' => 'Désinscription de la liste <b>@titre_liste@</b>'
 );
