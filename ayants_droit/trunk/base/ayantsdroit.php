@@ -47,6 +47,7 @@ function ayantsdroit_declarer_tables_objets_sql($tables) {
 	$tables['spip_droits_ayants'] = array(
 		'type' => 'droits_ayant',
 		'principale' => "oui", 
+		'page' => '',
 		'table_objet_surnoms' => array('droitsayant'), // table_objet('droits_ayant') => 'droits_ayants' 
 		'field'=> array(
 			"id_droits_ayant"    => "bigint(21) NOT NULL",
