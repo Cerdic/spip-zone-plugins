@@ -115,12 +115,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unsubscribe_deja_texte' => 'The email address @email@ is not in our mailing list.',
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Unsubscribe from Newsletter',
 	'unsubscribe_texte_confirmer_email_1' => 'Please click on button to confirm unsubscribe of email @email@: ',
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Please confirm your request to remove @email@ from the list « @titre_liste@ » by clicking this button: ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Please confirm your request to remove @email@ from the list « @titre_liste@ » by clicking this button: ', # MODIF
 	'unsubscribe_texte_email_1' => 'The email address @email@ has been removed from our mailing list.',
 	'unsubscribe_texte_email_2' => 'We hope to see you soon on @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In case of error, or if you change your mind, you can re-subscribe at any time using the following link :
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'Email address @email@ has been removed from our distribution list « @titre_liste@ ».',
+	'unsubscribe_texte_email_liste_1' => 'Email address @email@ has been removed from our distribution list « @titre_liste@ ».', # MODIF
 	'unsubscribe_titre_email' => 'Unsubscribe from Newsletter',
-	'unsubscribe_titre_email_liste' => 'Removal from list « <b>@titre_liste@</b> »'
+	'unsubscribe_titre_email_liste' => 'Removal from list « <b>@titre_liste@</b> »' # MODIF
 );

@@ -115,12 +115,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unsubscribe_deja_texte' => 'Het e-mailadres @email@ staat niet in onze mailinglijst.',
 	'unsubscribe_sujet_email' => '[@nom_site_spip@] Afmelden nieuwsbrief',
 	'unsubscribe_texte_confirmer_email_1' => 'Wil je het uitschrijven van het e-mailadres @email@ bevestigen door op de knop te klikken: ',
-	'unsubscribe_texte_confirmer_email_liste_1' => 'Bevestig de verwijdering van e-mailadres @email@ uit lijst « @titre_liste@ » door op de knop te klikken: ',
+	'unsubscribe_texte_confirmer_email_liste_1' => 'Bevestig de verwijdering van e-mailadres @email@ uit lijst « @titre_liste@ » door op de knop te klikken: ', # MODIF
 	'unsubscribe_texte_email_1' => 'Het e-mailadres @email@ is verwijderd uit onze mailinglijst.',
 	'unsubscribe_texte_email_2' => 'We hopen je snel terug te zien op @nom_site_spip@.',
 	'unsubscribe_texte_email_3' => 'In geval van een fout van onze kant, of wanneer je van gedachten verandert, kun je je op elk gewenst moment opnieuw inschrijven via de volgende link:
 @url_subscribe@',
-	'unsubscribe_texte_email_liste_1' => 'Het e-mailadres @email@ is verwijderd uit onze distributielijst « @titre_liste@ ».',
+	'unsubscribe_texte_email_liste_1' => 'Het e-mailadres @email@ is verwijderd uit onze distributielijst « @titre_liste@ ».', # MODIF
 	'unsubscribe_titre_email' => 'Afmelding Nieuwsbrief',
-	'unsubscribe_titre_email_liste' => 'Uitschrijving uit lijst « <b>@titre_liste@</b> »'
+	'unsubscribe_titre_email_liste' => 'Uitschrijving uit lijst « <b>@titre_liste@</b> »' # MODIF
 );
