@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_albumotheque_filtres' => 'Mit den seitlichen Filtern können sie Kriterien bestimmen, um die Auswahl der Alben einzuschränken.
 Ein Klick auf einen Eintrag aktiviert den Filter, ein weiterer deaktiviert ihn.Durch Kombination können Sie einfach Alben finden.
 Zusätzlich gibt es auch noch ein Suchfeld mit dem sie nach einem bestimmten Objekt suchen können.',
-	'c_albumotheque_presentation' => 'Willkommen in der a«albumothèque»!<br>
+	'c_albumotheque_presentation' => 'Willkommen in der «albumothèque»!<br>
 		Sie können objektunabhängige Alben von diese Seite oder von der Toolbar aus erstellen, oder von der Seite eines Objekts aus ein zum Objekt gehöriges Album erstellen. <br>
 		Jedes Album ist von der Seite des Objekts oder von dieser Seite aus bearbeitbar.',
 	'c_albumotheque_titre_filtres' => 'Filterauswahl',
@@ -137,7 +137,7 @@ Wenn die Dokumente verschoben wurden erscheint am Ende ders Liste ein Formular u
 	'texte_personnaliser_balise_album' => 'Tag personalisieren',
 	'texte_statut_poubelle' => 'in den Mülleimer',
 	'texte_statut_prepa' => 'unveröffentlicht',
-	'texte_statut_publie' => 'veröffetnlicht',
+	'texte_statut_publie' => 'veröffentlicht',
 	'titre_album' => 'Album',
 	'titre_albums' => 'Alben',
 	'titre_documents_deplaces' => 'Dokumente verschoben',
