@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -25,5 +27,3 @@ Once the necessary plugins are activated, simply determine the language of the s
 	'multilingue_nom' => 'Easy Multilingual web-site',
 	'multilingue_slogan' => 'Create easily a multilingual site'
 );
-
-?>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-multilingue?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -26,5 +28,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'multilingue_nom' => 'Sitio multilingüe fácil',
 	'multilingue_slogan' => 'Crear fácilmente un sitio multilingüe'
 );
-
-?>
