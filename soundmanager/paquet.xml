@@ -1,7 +1,7 @@
 <paquet
 	prefix="sm"
 	categorie="multimedia"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="skins/soundmanager.png"
@@ -17,6 +17,6 @@
 	<credit>BoOz</credit>
 	<pipeline nom="insert_head" inclure="sm_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="sm_pipelines.php" />
-	<pipeline nom="pre_lien" inclure="sm_pipelines.php" />
+	<pipeline nom="pre_liens" inclure="sm_pipelines.php" />
 	<utilise nom="medias" compatibilite="[2.7.27;]" />
 </paquet>
