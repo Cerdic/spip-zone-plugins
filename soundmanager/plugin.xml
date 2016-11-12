@@ -6,7 +6,7 @@
 		</multi>
 	</nom>
 	<auteur>BoOz</auteur>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<version_base>0.1.0</version_base>
 	<etat>stable</etat>
 	<prefix>sm</prefix>
@@ -18,10 +18,6 @@
 		</multi>
 	</description>
 	<lien>http://www.monde-diplomatique.fr/carnet/2013-07-02-La-bas-si-j-y-suis</lien>
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>sm_pipelines.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>pre_liens</nom>
 		<inclure>sm_pipelines.php</inclure>
