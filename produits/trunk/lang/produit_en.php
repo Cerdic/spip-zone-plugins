@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_titre' => 'Title',
 
 	// P
-	'produit_champ_taxe_explication' => 'Default value : @tax@. Safe to let empty.',
+	'produit_champ_taxe_explication' => 'Default value : @tax@. Safe to let empty.', # MODIF
 
 	// R
 	'retirer_lien_produit' => 'Remove this product',
