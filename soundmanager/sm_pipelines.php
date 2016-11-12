@@ -1,10 +1,8 @@
 <?php
 
-function sm_insert_head($flux){
-
-	return $flux;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
-
 
 // Ajouter soundmanager s'il n'y est pas déjà et qu'on a des enclosures dans la page
 function sm_affichage_final($page) {
@@ -107,10 +105,3 @@ function sm_pre_liens($texte) {
 
 	return $texte;
 }
-
-//
-function sm_styliser($flux){
-	
-	return $flux;
-}
-
