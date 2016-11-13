@@ -39,6 +39,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_jour_previsions' => 'Le service @service@ ne fournit pas de prévision météorologique pour le @date@.',
 	'erreur_jour_conseil' => 'Ce service ne fournit que @max@ jours de prévisions.',
 
+	// G
+	'groupe_donnees_observation' => 'Données d\'observation',
+	'groupe_donnees_astronomiques' => 'Données astronomiques',
+	'groupe_donnees_temperatures' => 'Températures',
+	'groupe_donnees_anemometriques' => 'Données anémométriques',
+	'groupe_donnees_atmospheriques' => 'Données atmosphériques',
+	'groupe_donnees_etats_natifs' => 'États météorologiques natifs',
+	'groupe_donnees_etats_calcules' => 'États météorologiques calculés',
+	'groupe_donnees_lieu' => 'Lieu',
+	'groupe_donnees_coordonnees' => 'Coordonnées géographiques',
+
 	// H
 	'humidite' => 'humidité',
 

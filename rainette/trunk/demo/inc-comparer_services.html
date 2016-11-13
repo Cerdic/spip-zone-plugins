@@ -8,7 +8,7 @@
 
 <B_comparer>
 <table class="spip">
-	<caption><strong>Comparaisons des donn&#233;es de type #ENV{mode}</strong></caption>
+	<caption><strong>Comparaisons des donn&#233;es de #ENV{mode}</strong></caption>
 	<thead>
 		<tr>
 			<th>Donn&#233;es</th>
@@ -19,17 +19,29 @@
 	</thead>
 	<tbody>
 <BOUCLE_comparer(DATA) {source table, #ENV{donnees}}>
-	<tr>
-		<td><strong>#CLE</strong></td>
-		<BOUCLE_valeur(DATA) {source table, #ENV{jeu}}>
+	<BOUCLE_valeur(DATA) {source table, #ENV{jeu}}>
+	[(#_comparer:VALEUR|table_valeur{#CLE/groupe}|unique|oui)
+		<tr>
+			<td[ colspan=(#ENV{jeu}|count|plus{1})] class="groupe">
+				[-- (#VAL{rainette:groupe_}|concat{#_comparer:VALEUR|table_valeur{#CLE/groupe}}|_T) --]
+			</td>
+		</tr>
+	]
+	[(#COMPTEUR_BOUCLE|=={1}|oui)
+		<tr>
+			<td><strong>#_comparer:CLE</strong></td>
+	]
 			<td[ class="(#_comparer:VALEUR|table_valeur{#CLE/erreur})"]>
 				[(#_comparer:CLE|rainette_dbg_afficher_donnee{
 					#_comparer:VALEUR|table_valeur{#CLE/valeur},
-					#_comparer:VALEUR|table_valeur{#CLE/type},
+					#_comparer:VALEUR|table_valeur{#CLE/type_php},
+					#_comparer:VALEUR|table_valeur{#CLE/type_unite},
 					#CLE})]
 			</td>
-		</BOUCLE_valeur>
-	</tr>
+	[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)
+		</tr>
+	]
+	</BOUCLE_valeur>
 </BOUCLE_comparer>
 	</tbody>
 </table>

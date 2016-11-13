@@ -211,19 +211,22 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = 
 /**
  * Affiche toute donnée météorologique au format numérique avec son unité.
  *
- *
  * @package    RAINETTE/AFFICHAGE
  * @api
  *
- * @param        int /float    $valeur            La valeur à afficher
- * @param string $type_valeur Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression',
- *                                    'distance', 'vitesse', 'population', 'precipitation'
- * @param int    $precision Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut
- * @param string $service
+ * @param int/float $valeur
+ * 		La valeur à afficher
+ * @param string    $type_donnee
+ *      Type de données à afficher parmi 'temperature', 'pourcentage', 'angle', 'pression',
+ *      'distance', 'vitesse', 'population', 'precipitation'.
+ * @param int       $precision
+ *      Nombre de décimales à afficher pour les réels uniquement ou -1 pour utiliser le défaut.
+ * @param string	$service
  *
- * @return string    La chaine calculée ou le texte désignant une valeur indéterminée
+ * @return string
+ *      La chaine calculée ou le texte désignant une valeur indéterminée ou vide si la valeur est null.
  */
-function rainette_afficher_unite($valeur, $type_valeur = '', $precision = -1, $service = 'weather') {
+function rainette_afficher_unite($valeur, $type_donnee = '', $precision = -1, $service = 'weather') {
 
 	static $precision_defaut = array(
 		'temperature'   => 0,
@@ -243,28 +246,28 @@ function rainette_afficher_unite($valeur, $type_valeur = '', $precision = -1, $s
 	include_spip('inc/config');
 	$unite = lire_config("rainette/${service}/unite", 'm');
 
-	// On distingue la valeur NULL qui indique que la donnée météo n'est pas fournie par le service avec
+	// On distingue la valeur null qui indique que la donnée météo n'est pas fournie par le service avec
 	// la valeur '' qui indique que la valeur n'est pas disponible temporairement
-	// Dans le cas NULL on n'affiche pas la valeur, dans le cas '' on affiche la non disponibilité
+	// Dans le cas null on n'affiche pas la valeur, dans le cas '' on affiche la non disponibilité
 	if ($valeur === null) {
 		$valeur_affichee = '';
 	} else {
 		$valeur_affichee = _T('rainette:valeur_indeterminee');
 		if ($valeur !== '') {
 			// Détermination de l'arrondi si la donnée est stockée sous format réel
-			if (array_key_exists($type_valeur, $precision_defaut)) {
-				$precision = ($precision < 0) ? $precision_defaut[$type_valeur] : $precision;
+			if (array_key_exists($type_donnee, $precision_defaut)) {
+				$precision = ($precision < 0) ? $precision_defaut[$type_donnee] : $precision;
 				$valeur = round($valeur, $precision);
 			}
 
 			// Construction de la valeur affichée en fonction de son type. Un indice ne possède pas d'unité.
 			$valeur_affichee = strval($valeur);
-			if ($type_valeur != 'indice') {
-				$suffixe = ($type_valeur == 'population')
+			if ($type_donnee != 'indice') {
+				$suffixe = ($type_donnee == 'population')
 					? ''
 					: (($unite == 'm') ? 'metrique' : 'standard');
-				$espace = in_array($type_valeur, array('temperature', 'pourcentage', 'angle')) ? '' : '&nbsp;';
-				$item = 'rainette:unite_' . $type_valeur . ($suffixe ? '_' . $suffixe : '');
+				$espace = in_array($type_donnee, array('temperature', 'pourcentage', 'angle')) ? '' : '&nbsp;';
+				$item = 'rainette:unite_' . $type_donnee . ($suffixe ? '_' . $suffixe : '');
 				$valeur_affichee .= $espace . _T($item);
 			}
 		}

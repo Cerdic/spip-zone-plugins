@@ -8,56 +8,28 @@ if (!defined('_RAINETTE_DEBUG')) {
 	define('_RAINETTE_DEBUG', false);
 }
 
-if (!defined('_RAINETTE_DEBUG_PREVISIONS')) {
-	define('_RAINETTE_DEBUG_PREVISIONS',
-		'Donn&#233;es d\'observation:date/heure
-		|Donn&#233;es astronomiques:lever_soleil/coucher_soleil
-		|Temp&#233;ratures:temperature:temperature_max:temperature_min
-		|Donn&#233;es an&#233;mom&#233;triques:vitesse_vent/angle_vent/direction_vent
-		|Donn&#233;es atmosph&#233;riques:risque_precipitation/precipitation/humidite/point_rosee/pression/visibilite/indice_uv/risque_uv
-		|&#201;tats m&#233;t&#233orologiques natifs:code_meteo/icon_meteo/desc_meteo
-		|&#201;tats m&#233;t&#233orologiques calcul&#233;s:periode/icone/resume');
-}
-if (!defined('_RAINETTE_DEBUG_CONDITIONS')) {
-	define('_RAINETTE_DEBUG_CONDITIONS',
-		'Donn&#233;es d\'observation:derniere_maj/station
-		|Temp&#233;ratures:temperature_reelle/temperature_ressentie
-		|Donn&#233;es an&#233;mom&#233;triques:vitesse_vent/angle_vent/direction_vent
-		|Donn&#233;es atmosph&#233;riques:precipitation/humidite/point_rosee/pression/tendance_pression/visibilite/indice_uv/risque_uv
-		|&#201;tats m&#233;t&#233orologiques natifs:code_meteo/icon_meteo/desc_meteo
-		|&#201;tats m&#233;t&#233orologiques calcul&#233;s:icone/resume/periode');
-}
-if (!defined('_RAINETTE_DEBUG_INFOS')) {
-	define('_RAINETTE_DEBUG_INFOS',
-		'Lieu:ville/pays/pays_iso/region
-		|Coordonn&#233;es:longitude/latitude');
-}
-if (!defined('_RAINETTE_DEBUG_TYPE_UNITE')) {
-	define('_RAINETTE_DEBUG_TYPE_UNITE',
-		'temperature:temperature_reelle,temperature_ressentie,point_rosee,temperature,temperature_max,temperature_min
-		|vitesse:vitesse_vent
-		|angle:angle_vent,longitude,latitude
-		|pourcentage:risque_precipitation,humidite
-		|pression:pression
-		|distance:visibilite
-		|precipitation:precipitation
-		|indice:indice_uv');
-}
 
-
+/**
+ * @param string $lieu
+ * @param string $mode
+ * @param int    $periodicite
+ * @param string $service
+ *
+ * @return string
+ */
 function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $periodicite = 0, $service = 'weather') {
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
-	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
+	if (_RAINETTE_DEBUG) {
 		$charger = charger_fonction('charger_meteo', 'inc');
-		$nom_fichier = $charger($lieu, $mode, $periodicite, $service);
-		if ($nom_fichier) {
+		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
+		if ($nom_cache) {
 			$contenu = '';
-			lire_fichier($nom_fichier, $contenu);
+			lire_fichier($nom_cache, $contenu);
 			$tableau = unserialize($contenu);
 
-			$debug = bel_env(serialize($tableau));
+			$debug = afficher_tableau(serialize($tableau));
 		}
 	}
 
@@ -65,17 +37,24 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $periodicite =
 }
 
 
-function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array(), $periodicite = 0) {
+/**
+ * @param string $mode
+ * @param array  $jeu
+ *
+ * @return array
+ */
+function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 	$debug = array();
 
 	if (!$mode) {
 		$mode = 'conditions';
 	}
 
-	$donnees = constant('_RAINETTE_DEBUG_' . strtoupper($mode));
-	$donnees = explode(':', $donnees);
+	// On acquiert la structure exact des tableaux de données standard
+	include_spip('inc/rainette_normaliser');
+	$config_donnees = $GLOBALS['rainette_config'][$mode];
 
-	if ($donnees) {
+	if ($config_donnees) {
 		if (!$jeu) {
 			$jeu = array(
 				'weather'      => 'FRXX0076',
@@ -85,23 +64,56 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array(), $p
 			);
 		}
 
-		// Recuperation du tableau des conditions courantes
+		// On boucle sur chaque jeu de demo
+		include_spip('inc/utils');
+		$periodicite = 0;
 		foreach ($jeu as $_service => $_lieu) {
+			// Si on est en mode prévisions, on impose la périodicité à la valeur par défaut pour le service
+			if ($mode == 'previsions') {
+				include_spip("services/${_service}");
+				$configurer = "${_service}_service2configuration";
+				$configuration = $configurer($mode);
+				$periodicite = $configuration['periodicite_defaut'];
+			}
+
+			// Chargement des données
 			$charger = charger_fonction('charger_meteo', 'inc');
 			$nom_cache = $charger($_lieu, $mode, $periodicite, $_service);
 			lire_fichier($nom_cache, $contenu_cache);
 			$tableau = unserialize($contenu_cache);
 
 			if (!$tableau['extras']['erreur']) {
-				$tableau =$tableau['donnees'];
-				foreach ($tableau as $_donnee => $_valeur) {
-					$type = gettype($tableau[$_donnee]);
-					$debug[$_donnee][$_service]['valeur'] = $_valeur;
-					$debug[$_donnee][$_service]['type'] = $type;
-					if ($_donnee != 'erreur') {
-						$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($_valeur === '' ? 'erreur' : '');
+				// Suivant le mode on extrait les données à afficher. Pour le mode prévisions, on choisit le
+				// jour suivant le jour courant et pour les données heures l'index 0 qui existe toujours.
+				// En outre, il faut tenir compte pour les prévisions qu'il existe des données "jour" et
+				// des données "heure" alors que pour les autres modes ll n'existe que des données "jour".
+				$tableau_jour = ($mode == 'previsions') ? $tableau['donnees'][1] : $tableau['donnees'];
+				foreach ($config_donnees as $_donnee => $_config) {
+					// On détermine la valeur et le type PHP de la données dans le tableau standard et
+					// on stocke les informations de configuration rangement pour les prévisions
+					if (isset($_config['rangement']) and ($_config['rangement'] == 'heure')) {
+						$valeur = $tableau_jour['heure'][0][$_donnee];
+						$type_php = gettype($tableau_jour['heure'][0][$_donnee]);
+						$rangement = $_config['rangement'];
 					} else {
-						$debug[$_donnee][$_service]['erreur'] = $_valeur ? 'erreur' : '';
+						$valeur = $tableau_jour[$_donnee];
+						$type_php = gettype($tableau_jour[$_donnee]);
+						$rangement = '';
+					}
+
+					// On construit le tableau de debug
+					$debug[$_donnee][$_service]['valeur'] = $valeur;
+					if (($_donnee == 'icon_meteo') and tester_url_absolue($valeur)) {
+						$debug[$_donnee][$_service]['valeur'] = dirname($valeur) . '/<br />' . basename($valeur);
+					}
+					$debug[$_donnee][$_service]['type_php'] = $type_php;
+					$debug[$_donnee][$_service]['rangement'] = $rangement;
+					$debug[$_donnee][$_service]['groupe'] = $_config['groupe'];
+					$debug[$_donnee][$_service]['type_unite'] = $_config['type_unite'];
+					if ($_donnee != 'erreur') {
+						$debug[$_donnee][$_service]['erreur'] = ($type_php === 'NULL') ? 'nonapi' : ($valeur === '' ? 'erreur' : '');
+					} else {
+						$debug[$_donnee][$_service]['erreur'] = $valeur ? 'erreur' : '';
 					}
 				}
 			}
@@ -112,24 +124,21 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array(), $p
 }
 
 
-function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $service = 'weather') {
-	static $types_unite = array();
+/**
+ * @param string $donnee
+ * @param mixed  $valeur
+ * @param string $type_php
+ * @param string $type_unite
+ * @param string $service
+ *
+ * @return string
+ */
+function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, $service = 'weather') {
 	$texte = '';
-
-	if (!$types_unite) {
-		$config_types = explode('|', _RAINETTE_DEBUG_TYPE_UNITE);
-		foreach ($config_types as $_config_type) {
-			list($type, $donnees) = explode(':', trim($_config_type));
-			foreach (explode(',', $donnees) as $_donnee) {
-				$types_unite[$_donnee] = $type;
-			}
-		}
-	}
-	$type_donnee = isset($types_unite[$donnee]) ? $types_unite[$donnee] : '';
 
 	if ($type_php === 'NULL') {
 		$texte = '<del>API</del>';
-		$type_php = '';
+		$type_php = 'null';
 	} elseif ($valeur === '') {
 		if ($donnee != 'erreur') {
 			$texte = 'Indisponible';
@@ -141,9 +150,50 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $service = 'w
 			$texte .= ($texte ? '<br />' : '') . "<strong>${_cle}</strong> : " . ((gettype($_valeur) === null) ? '<del>API</del>' : $_valeur);
 		}
 	} else {
-		$texte = $type_donnee ? rainette_afficher_unite($valeur, $type_donnee, -1, $service) : $valeur;
+		$texte = $type_unite ? rainette_afficher_unite($valeur, $type_unite, -1, $service) : $valeur;
 	}
 	$texte .= "<br /><em>${type_php}</em>";
 
 	return $texte;
+}
+
+/**
+ * Une fonction récursive pour joliment afficher #ENV, #GET, #SESSION...
+ *		en squelette : [(#ENV|bel_env)], [(#GET|bel_env)], [(#SESSION|bel_env)]
+ *		ou encore [(#ARRAY{0,1, a,#SESSION, 1,#ARRAY{x,y}}|bel_env)]
+ *
+ * @param string|array $env
+ *		si une string est passée elle doit être le serialize d'un array
+ *
+ * @return string
+ *		une chaîne html affichant une <table>
+**/
+function afficher_tableau($env) {
+//	$env = str_replace(array('&quot;', '&#039;'), array('"', '\''), $env);
+	if (is_array($env_tab = @unserialize($env))) {
+		$env = $env_tab;
+	}
+	if (!is_array($env)) {
+		return '';
+	}
+	$style = " style='border:1px solid #ddd;'";
+	$res = "<table style='border-collapse:collapse;'>\n";
+	foreach ($env as $nom => $val) {
+		if (is_array($val) || is_array(@unserialize($val))) {
+			$val = bel_env($val);
+		}
+		elseif ($val === null) {
+			$val = '<i>null</i>';
+		}
+		elseif ($val === '') {
+			$val = "<i>''</i>";
+		}
+		else {
+			$val = entites_html($val);
+		}
+		$res .= "<tr>\n<td$style><strong>". entites_html($nom).
+				"&nbsp;:&nbsp;</strong></td><td$style>" .$val. "</td>\n</tr>\n";
+	}
+	$res .= "</table>";
+	return $res;
 }

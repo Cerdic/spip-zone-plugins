@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des constantes et fonctions implémentant le service l'ancien service Weather.com (weather).
+ * Ce fichier contient l'ensemble des constantes et fonctions implémentant l'ancien service Weather.com (weather).
  * Ce service fournit des données au format XML uniquement.
  *
  * @package SPIP\RAINETTE\SERVICES\WEATHER

@@ -6,79 +6,77 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS['rainette_config']['infos'] = array(
 	// Lieu
-	'ville'          => array('origine' => 'service', 'type_php' => 'string'),
-	'pays'           => array('origine' => 'service', 'type_php' => 'string'),
-	'pays_iso2'      => array('origine' => 'service', 'type_php' => 'string'),
-	'region'         => array('origine' => 'service', 'type_php' => 'string'),
-	// Coordonnées
-	'longitude'      => array('origine' => 'service', 'type_php' => 'float'),
-	'latitude'       => array('origine' => 'service', 'type_php' => 'float'),
-	// Informations complémentaires
+	'ville'          => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'pays'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'pays_iso2'      => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'region'         => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	// Coordonnées géographiques
+	'longitude'      => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
+	'latitude'       => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
 );
 
 $GLOBALS['rainette_config']['conditions'] = array(
 	// Données d'observation
-	'derniere_maj'          => array('origine' => 'service', 'type_php' => 'date'),
-	'station'               => array('origine' => 'service', 'type_php' => 'string'),
+	'derniere_maj'          => array('origine' => 'service', 'type_php' => 'date', 'type_unite' => '', 'groupe' => 'donnees_observation'),
+	'station'               => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_observation'),
 	// Températures
-	'temperature_reelle'    => array('origine' => 'service', 'type_php' => 'float'),
-	'temperature_ressentie' => array('origine' => 'service', 'type_php' => 'float'),
+	'temperature_reelle'    => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'temperature', 'groupe' => 'donnees_temperatures'),
+	'temperature_ressentie' => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'temperature', 'groupe' => 'donnees_temperatures'),
 	// Données anémométriques
-	'vitesse_vent'          => array('origine' => 'service', 'type_php' => 'float'),
-	'angle_vent'            => array('origine' => 'service', 'type_php' => 'int'),
-	'direction_vent'        => array('origine' => 'service', 'type_php' => 'string'),
+	'vitesse_vent'          => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'vitesse', 'groupe' => 'donnees_anemometriques'),
+	'angle_vent'            => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'angle', 'groupe' => 'donnees_anemometriques'),
+	'direction_vent'        => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_anemometriques'),
 	// Données atmosphériques
-	'precipitation'         => array('origine' => 'service', 'type_php' => 'float'),
-	'humidite'              => array('origine' => 'service', 'type_php' => 'int'),
-	'point_rosee'           => array('origine' => 'service', 'type_php' => 'int'),
-	'pression'              => array('origine' => 'service', 'type_php' => 'float'),
-	'tendance_pression'     => array('origine' => 'service', 'type_php' => 'string'),
-	'visibilite'            => array('origine' => 'service', 'type_php' => 'float'),
-	'indice_uv'             => array('origine' => 'service', 'type_php' => 'int'),
-	'risque_uv'             => array('origine' => 'calcul', 'type_php' => 'string'),
+	'precipitation'         => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'precipitation', 'groupe' => 'donnees_atmospheriques'),
+	'humidite'              => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'groupe' => 'donnees_atmospheriques'),
+	'point_rosee'           => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'temperature', 'groupe' => 'donnees_atmospheriques'),
+	'pression'              => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'groupe' => 'donnees_atmospheriques'),
+	'tendance_pression'     => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_atmospheriques'),
+	'visibilite'            => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'distance', 'groupe' => 'donnees_atmospheriques'),
+	'indice_uv'             => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'indice', 'groupe' => 'donnees_atmospheriques'),
+	'risque_uv'             => array('origine' => 'calcul', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_atmospheriques'),
 	// Etats météorologiques natifs
-	'code_meteo'            => array('origine' => 'service', 'type_php' => 'string'),
-	'icon_meteo'            => array('origine' => 'service', 'type_php' => 'string'),
-	'desc_meteo'            => array('origine' => 'service', 'type_php' => 'string'),
+	'code_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
+	'icon_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
+	'desc_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
-	'resume'                => array('origine' => 'calcul', 'type_php' => 'mixed'),
-	'icone'                 => array('origine' => 'calcul', 'type_php' => 'mixed'),
-	'periode'               => array('origine' => 'calcul', 'type_php' => 'int'),
+	'icone'                 => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
+	'resume'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
+	'periode'               => array('origine' => 'calcul', 'type_php' => 'int', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
 );
 
 $GLOBALS['rainette_config']['previsions'] = array(
 	// Données d'observation
-	'date'                 => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
-	'heure'                => array('origine' => 'service', 'type_php' => 'heure', 'rangement' => 'heure'),
+	'date'                 => array('origine' => 'service', 'type_php' => 'date', 'type_unite' => '', 'rangement' => 'jour', 'groupe' => 'donnees_observation'),
+	'heure'                => array('origine' => 'service', 'type_php' => 'heure', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_observation'),
 	// Données astronomiques
-	'lever_soleil'         => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
-	'coucher_soleil'       => array('origine' => 'service', 'type_php' => 'date', 'rangement' => 'jour'),
+	'lever_soleil'         => array('origine' => 'service', 'type_php' => 'date', 'type_unite' => '', 'rangement' => 'jour', 'groupe' => 'donnees_astronomiques'),
+	'coucher_soleil'       => array('origine' => 'service', 'type_php' => 'date', 'type_unite' => '', 'rangement' => 'jour', 'groupe' => 'donnees_astronomiques'),
 	// Températures
-	'temperature'          => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'temperature_max'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'jour'),
-	'temperature_min'      => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'jour'),
+	'temperature'          => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'temperature', 'rangement' => 'heure', 'groupe' => 'donnees_temperatures'),
+	'temperature_max'      => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'temperature', 'rangement' => 'jour', 'groupe' => 'donnees_temperatures'),
+	'temperature_min'      => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'temperature', 'rangement' => 'jour', 'groupe' => 'donnees_temperatures'),
 	// Données anémométriques
-	'vitesse_vent'         => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'angle_vent'           => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
-	'direction_vent'       => array('origine' => 'service', 'type_php' => 'string', 'rangement' => 'heure'),
+	'vitesse_vent'         => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'vitesse', 'rangement' => 'heure', 'groupe' => 'donnees_anemometriques'),
+	'angle_vent'           => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'angle', 'rangement' => 'heure', 'groupe' => 'donnees_anemometriques'),
+	'direction_vent'       => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_anemometriques'),
 	// Données atmosphériques
-	'risque_precipitation' => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
-	'precipitation'        => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'humidite'             => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
-	'point_rosee'          => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
-	'pression'             => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'visibilite'           => array('origine' => 'service', 'type_php' => 'float', 'rangement' => 'heure'),
-	'indice_uv'            => array('origine' => 'service', 'type_php' => 'int', 'rangement' => 'heure'),
-	'risque_uv'            => array('origine' => 'calcul', 'type_php' => 'string', 'rangement' => 'heure'),
+	'risque_precipitation' => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'precipitation'        => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'precipitation', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'humidite'             => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'pourcentage', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'point_rosee'          => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'temperature', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'pression'             => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'pression', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'visibilite'           => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'distance', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'indice_uv'            => array('origine' => 'service', 'type_php' => 'int', 'type_unite' => 'indice', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
+	'risque_uv'            => array('origine' => 'calcul', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_atmospheriques'),
 	// Etats météorologiques natifs
-	'code_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'rangement' => 'heure'),
-	'icon_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'rangement' => 'heure'),
-	'desc_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'rangement' => 'heure'),
+	'code_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
+	'icon_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
+	'desc_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
-	'icone'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'rangement' => 'heure'),
-	'resume'               => array('origine' => 'calcul', 'type_php' => 'mixed', 'rangement' => 'heure'),
-	'periode'              => array('origine' => 'calcul', 'type_php' => 'int', 'rangement' => 'heure'),
-	// Informations complémentaires
+	'icone'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
+	'resume'               => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
+	'periode'              => array('origine' => 'calcul', 'type_php' => 'int', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
 );
 
 $GLOBALS['rainette_config']['periodicite'] = array(
