@@ -1,7 +1,7 @@
 <paquet
 	prefix="sm"
 	categorie="multimedia"
-	version="1.0.2"
+	version="1.0.3"
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="skins/soundmanager.png"

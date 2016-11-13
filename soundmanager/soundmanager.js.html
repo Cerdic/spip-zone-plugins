@@ -22,8 +22,8 @@ $(document).ready(function(){
 
 function sound_manager_init(){
 
-	// indexer les liens mp3
-	$("a[rel='enclosure'][href$=mp3]").each(
+	// indexer les liens mp3 et ogg
+	$("a[rel='enclosure'][href$=mp3],a[rel='enclosure'][href$=ogg]").each(
 		function(i) {	 
 			$(this).attr('data-soundId',i);
 	});
