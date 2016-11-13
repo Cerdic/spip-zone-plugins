@@ -30,16 +30,15 @@ function sound_manager_init(){
 	
 	// animation des boutons		
 	$(".play")
+	.html("<span class='ui-icon-play'>play</span>")
 	.unbind('click')
 	.click( function() {
 
 		$(".playing").removeClass("playing");
-		
-		if ( $( this ).text() === "play" || $(this).is("button") ) {
-			$( this ).html("<span class='ui-icon-pause'>pause</span>");
+		if ($(this).text() === "play") {
+			$(this).html("<span class='ui-icon-pause'>pause</span>");
 		} else {
-			if ($(this).is("button"))
-				$( this ).html("<span class='ui-icon-play'>play</span>");
+			$(this).html("<span class='ui-icon-play'>play</span>");
 		}
 		
 		var media_index = $(this).index();
