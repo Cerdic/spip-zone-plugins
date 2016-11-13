@@ -17,19 +17,36 @@ if (!defined('_RAINETTE_DEBUG')) {
  *
  * @return string
  */
-function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $periodicite = 0, $service = 'weather') {
+function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
 	if (_RAINETTE_DEBUG) {
+		// Si on est en mode prévisions, on impose la périodicité à la valeur par défaut pour le service
+		$periodicite = 0;
+		if ($mode == 'previsions') {
+			include_spip("services/${service}");
+			$configurer = "${service}_service2configuration";
+			$configuration = $configurer($mode);
+			$periodicite = $configuration['periodicite_defaut'];
+		}
+		// Chargement du cache
 		$charger = charger_fonction('charger_meteo', 'inc');
 		$nom_cache = $charger($lieu, $mode, $periodicite, $service);
 		if ($nom_cache) {
 			$contenu = '';
 			lire_fichier($nom_cache, $contenu);
 			$tableau = unserialize($contenu);
-
-			$debug = afficher_tableau(serialize($tableau));
+			// Pour le mode prévisions, on supprime tous les jours postérieur au lendemain pour éviter d'avoir un
+			// affichage trop conséquent.
+			if ($mode == 'previsions') {
+				foreach ($tableau['donnees'] as $_jour => $_valeurs) {
+					if ($_jour != 1) {
+						unset($tableau['donnees'][$_jour]);
+					}
+				}
+			}
+			$debug = dbg_afficher_tableau(serialize($tableau));
 		}
 	}
 
@@ -168,7 +185,7 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, 
  * @return string
  *		une chaîne html affichant une <table>
 **/
-function afficher_tableau($env) {
+function dbg_afficher_tableau($env) {
 //	$env = str_replace(array('&quot;', '&#039;'), array('"', '\''), $env);
 	if (is_array($env_tab = @unserialize($env))) {
 		$env = $env_tab;

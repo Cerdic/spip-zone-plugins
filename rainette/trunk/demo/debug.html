@@ -76,21 +76,13 @@
 	</div>
 	<div id="wrapper">
 		<div id="content">
-			<h2 class="h2">2.0 - COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
-			<a name="comparaison" href="#"></a>
-			<p>
-				L&eacute;gende du tableau :
-				<ul>
-					<li><strong><del>API</del></strong>&nbsp;: indique que la donn&eacute;e ne fait pas partie des informations fournies par le service</li>
-					<li><strong>Indisponible</strong>&nbsp;: indique que la donn&eacute;e est fournie par le service mais indisponible pour le moment</li>
-				</ul>
-			</p>
+			<h2 class="h2">1.3 - UTILISATIONS DES PREVISIONS METEO</h2>
+			<a name="previsions" href="#"></a>
 			<div class="clearfix">
-				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}}}
-				#INCLURE{fond=demo/inc-comparer_services,
-					jeu=#GET{jeu},
-					donnees=#GET{donnees},
-					mode=#GET{mode}}
+				<div class="clearfix">
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les 5 jours suivants le jour courant (premier_jour=1, nombre_jours=5)</h3>
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=1,sous_modele=previsions_24h, service=#GET{service}})]
+				</div>
 			</div>
 		</div>
 	</div>

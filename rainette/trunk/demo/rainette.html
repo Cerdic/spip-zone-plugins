@@ -30,6 +30,7 @@
 		div#extra{background:#fff;}
 		div#footer{padding:2em;}
 		.h2{text-align:center;border-bottom:2px solid #798f74;color:#798f74}
+		.h3{color:#798f74}
 		table{border:1px solid #000000;border-collapse:collapse;}
 		caption {background:#333;color:#eee;}
 		th {font-weight: bold;border-bottom:1px solid #000}
@@ -81,15 +82,15 @@
 			<a name="infos" href="#"></a>
 			<div class="clearfix">
 				<div class="clearfix">
-					<h3>Utilisation du mod&eacute;le <strong>rainette_infos</strong></h3>
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_infos</strong></h3>
 					[(#MODELE{rainette_infos,lieu=#GET{lieu},sous_modele=infos_ville, service=#GET{service}})]
 					[<div class="clearfix">
-						<h3>Affichage debug du tableau des informations</h3>
-						(#GET{lieu}|rainette_dbg_afficher_cache{infos, 0, #GET{service}})
+						<h3 class="h3">Affichage debug du tableau des informations</h3>
+						(#GET{lieu}|rainette_dbg_afficher_cache{infos, #GET{service}})
 					</div>]
 				</div>
 				<div class="clearfix">
-					<h3>Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
+					<h3 class="h3">Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
 					<ul>
 						<li>Ville observ&eacute;e:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, ville, #GET{service}})</strong>]</li>
 						<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, longitude, #GET{service}})</strong>]</li>
@@ -103,11 +104,11 @@
 			<h2 class="h2">1.2 - UTILISATIONS DES CONDITIONS METEO</h2>
 			<a name="conditions" href="#"></a>
 			<div class="clearfix">
-				<h3>Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
+				<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
 				[(#MODELE{rainette_conditions,lieu=#GET{lieu},sous_modele=conditions_tempsreel, service=#GET{service}})]
 				[<div class="clearfix">
-					<h3>Affichage debug du tableau des conditions</h3>
-					(#GET{lieu}|rainette_dbg_afficher_cache{conditions, 0, #GET{service}})
+					<h3 class="h3">Affichage debug du tableau des conditions</h3>
+					(#GET{lieu}|rainette_dbg_afficher_cache{conditions, #GET{service}})
 				</div>]
 			</div>
 
@@ -116,13 +117,19 @@
 			<a name="previsions" href="#"></a>
 			<div class="clearfix">
 				<div class="clearfix">
-					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les 5 jours suivants le jour courant (premier_jour=1, nombre_jours=5)</h3>
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les 5 jours suivants le jour courant (premier_jour=1, nombre_jours=5)</h3>
 					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=5,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
-					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour du jour courant au maximum des pr&eacute;visions (premier_jour=0)</h3>
+					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour du jour courant au maximum des pr&eacute;visions (premier_jour=0)</h3>
 					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=0,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
+				[<div class="clearfix">
+					<h3 class="h3">Affichage debug du tableau des pr&eacute;visions</h3>
+					<p>Seul le jour suivant le jour courant est affich&eacute; \(index \[1\] du sous-tableau \[donnees\]\). La p&eacute;riodicit&eacute; utilis&eacute;e est celle par d&eacute;faut pour le service concern&eacute;.</p>
+					<br />
+					(#GET{lieu}|rainette_dbg_afficher_cache{previsions, #GET{service}})
+				</div>]
 			</div>
 
 			<h2 class="h2">2.0 - COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
