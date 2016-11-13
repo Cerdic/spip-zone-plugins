@@ -15,6 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_forums_publics' => 'Forums Publics',
 	'cfg_titre_afficher_logos' => 'Désactiver les logos par contenu',
 	'cfg_titre_restriction_par_rubrique' => 'Restreindre les contenus par rubrique',
+	'cfg_select_objets' => 'sélectionner les objets',
+
+	'info_creer_dans_rubrique_non_autorise' => 'Vous ne pouvez pas créer dans cette rubrique',
+	'info_deplacer_dans_rubrique_non_autorise' => 'Vous ne pouvez pas déplacer dans cette rubrique',
 
 	// L
 	'label_activer_logo_objets' => 'Cocher les contenus où désactiver le formulaire Logo',

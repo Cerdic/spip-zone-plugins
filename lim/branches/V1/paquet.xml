@@ -1,12 +1,12 @@
 <paquet
 	prefix="lim"
 	categorie="maintenance"
-	version="1.0.7"
+	version="1.1.16"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lim-64.png"
 	documentation="http://contrib.spip.net/LIM"
-	schema="1.0.0" 
+	schema="1.1.0" 
 >
 	<!--
 		Paquet genere le 2015-03-09 17:30:45
@@ -23,6 +23,8 @@
 
 	<pipeline nom="autoriser" inclure="lim_autorisations.php" />
 	<pipeline nom="afficher_config_objet" inclure="lim_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="lim_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="lim_pipelines.php" />
 
 	<onglet nom="configurer_lim" titre="lim:onglet_lim" parent="configurer_lim"  icone="images/lim-24.png" />
 	<onglet nom="configurer_lim_logos" titre="lim:onglet_lim_logo" parent="configurer_lim"  icone="images/image-lim-24.png" />

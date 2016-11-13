@@ -1,4 +1,5 @@
 ﻿Todo
 
-gestion de la taille des logos
+1- récursivité dans les choix des restrictions par rubriques
+2- rubriques pliables/dépliables dans la gestion des restrictions par rubriques
 

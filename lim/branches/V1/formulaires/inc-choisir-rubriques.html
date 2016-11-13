@@ -1,41 +1,89 @@
-<B_rubriques>
-<p class='lim_info'><:lim:label_desactiver_article_par_rubrique:>'[(#VAL{#NAME}|objet_info{texte_creer}|_T)]'.<br>
-Note : les rubriques marquées d'un <img src='#CHEMIN_IMAGE{del-24.png}' /> contiennent déjà des [(#VAL{#NAME}|objet_info{icone_objet}|_T|textebrut)s].</p>
+[(#REM) Récupérer les objets sélectionnés. ex. spip_articles -> article ]
 
-<ul class='creneaux'>
-<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}{tout}>
-	<li class='li_long secteur'>
-	<div class='choix secteur[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
-			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked'][(#ID_RUBRIQUE|lim_verifier_presence_objets{#NAME}|oui)disabled='disabled']/>
-		<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE[(#ID_RUBRIQUE|lim_verifier_presence_objets{#NAME}|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
+#SET{objets,#ARRAY}
+<BOUCLE_objets_selectionnes(DATA){liste #CONFIG{lim_objets}}>#SET{objets,#GET{objets}|push{#VALEUR}} #SET{nbre_col,#TOTAL_BOUCLE|moins{1}}</BOUCLE_objets_selectionnes>
+#SET{objets,#GET{objets}|array_flip}
+
+[(#GET{nbre_col}|in_array{#ARRAY{0,1,1,2,2,3}}|oui) 
+	#SET{width_rub,450}
+	#SET{width_obj,448}
+]
+
+[(#GET{nbre_col}|>{3}|oui) 
+	#SET{width_rub,320}
+	#SET{width_obj,580}
+]
+
+[(#REM) multilinguisme : pour les objets sélectionnés, récupérer le nom traduit et les afficher dans l'ordre alphabétique ]
+#SET{traductions,#ARRAY}<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}>[(#EDITABLE|oui)
+[(#SET{traductions,#GET{traductions}|array_merge{#ARRAY{#CLE,#TEXTE_OBJETS|_T}}})]
+]</BOUCLE_objets>
+[(#SET{traductions,#GET{traductions}|array_intersect_key{#GET{objets}}})]
+
+[(#REM) Récupérer le tableau des types d'objets sélectionnés. ex. spip_articles -> article ]
+#SET{type, #ARRAY}
+[(#SET{type, #GET{traductions}|lim_type})]
+
+<style>
+	.tab.rub {display:inline-block; width:#GET{width_rub}px; font-weight:bold; }
+	.sousrub .tab.rub { width:[(#GET{width_rub}|moins{15})px]; font-weight:normal; }
+	.sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{30})px]; }
+	.sousrub .sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{45})px]; }
+	.sousrub .sousrub .sousrub .sousrub .tab.rub { width:[(#GET{width_rub}|moins{60})px]; }
+	.check { display:inline-block; width:[(#GET{width_obj}|div{#GET{nbre_col}})px]; text-align: center;}
+	.check[rub_secteur=oui] {position:relative;}
+	.check[rub_secteur=oui] label {position:absolute; top:-14px; left:30%; }
+</style>
+
+<div class="tab rub"></div>
+<BOUCLE_entete(DATA){source tableau,#GET{traductions}}{par cle}>
+	#SET{type_obj, #CLE|objet_type}
+	<div class="check entete center"><img src='#CHEMIN_IMAGE{#GET{type_obj}-24.png}'><br>#VALEUR</div>
+</BOUCLE_entete>
+
+<BOUCLE_titre_rubrique(RUBRIQUES){racine}{par num titre,titre}{tout}>
+	<div class='pin'><img src='#CHEMIN_IMAGE{rubrique-16.png}'></div>
+	<div class='secteur'>
+		<div class="tab rub">#TITRE</div>
+		<BOUCLE_par_traduction1(DATA){source tableau,#GET{type}}{par cle}>
+			[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE}{secteur=oui})]
+		</BOUCLE_par_traduction1>
+		<B_enfants_rubriques>
+			<div class='sousrub'>
+			<BOUCLE_enfants_rubriques(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
+				<div class=''>
+					<div class="tab rub">#TITRE</div><BOUCLE_par_traduction2(DATA){source tableau,#GET{type}}{par cle}>
+					[(#INCLURE{fond=formulaires/inc-input-rub,env,name=#VALEUR}{#VALEUR=#ENV{#VALEUR}}{id_rubrique=#ID_RUBRIQUE})]
+					</BOUCLE_par_traduction2><BOUCLE_rec(BOUCLE_enfants_rubriques)/>
+				</div>
+			</BOUCLE_enfants_rubriques>
+			</div>
+		</B_enfants_rubriques>
 	</div>
-	<B_enfants>
-	<ul>
-	<BOUCLE_enfants(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
-	<li class='li_long'>
-		<div class='choix[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
-			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked'][(#ID_RUBRIQUE|lim_verifier_presence_objets{#NAME}|oui)disabled='disabled']/>
-			<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE[(#ID_RUBRIQUE|lim_verifier_presence_objets{#NAME}|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
-		</div><BOUCLE_rec(BOUCLE_enfants)/>
-	</li>
-	</BOUCLE_enfants>
-	</ul>
-	</B_enfants>
-</li>
-</BOUCLE_rubriques>
-</ul>
-</B_rubriques>
+</BOUCLE_titre_rubrique>
 
-<script type="text/javascript">/*<![CDATA[*/
-jQuery("input:checkbox").change(function(){
-	if (jQuery(this).is(":checked")) {
-		jQuery.each( jQuery(this).parent().next().find('input:checkbox:not(:disabled)'), function(index,item) {
-			jQuery(item).prop('checked',true);
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+
+		jQuery("input:checkbox").change(function(){
+			var type = $(this).attr('name').slice(0,-2);
+			var $check = "div.check." + type;
+			console.log($check);
+			if (jQuery(this).is(":checked")) {
+				jQuery.each( jQuery(this).parent().parent().find($check), function(index,item) {
+					console.log(item);
+					jQuery(item).find('input').prop('checked',true);
+					jQuery(item).find('.lim_icon').removeClass('icon-on').addClass('icon-off');
+				});
+			} else {
+				jQuery.each( jQuery(this).parent().parent().find($check), function(index,item) {
+					console.log(item);
+					jQuery(item).find('input').prop('checked',false);
+					jQuery(item).find('.lim_icon').removeClass('icon-off').addClass('icon-on');
+				});
+			}
 		});
-	} else {
-		jQuery.each( jQuery(this).parent().next().find('input:checkbox'), function(index,item) {
-			jQuery(item).prop('checked',false);
-		});
-	}
-});
-/*]]>*/</script>
+	});
+})(jQuery);
+</script>
