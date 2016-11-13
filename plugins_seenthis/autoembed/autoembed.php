@@ -102,6 +102,10 @@ function embed_url($url) {
 			$html = str_replace('{dewplayer}', $url_dewplayer, $html);
 			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 		}
+		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.|ogg(\?.*)?$,i", $url)) {
+			$html = "<div class='audio'><audio controls><source src='$url' rel='enclosure'></audio></div>";
+			if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
+		}
 		else {
 			require_once "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
