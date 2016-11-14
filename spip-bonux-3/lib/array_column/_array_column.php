@@ -9,7 +9,7 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-if (!function_exists('array_column')) {
+if (!function_exists('_array_column')) {
     /**
      * Returns the values from a single column of the input array, identified by
      * the $columnKey.
@@ -27,7 +27,7 @@ if (!function_exists('array_column')) {
      *                        of the column, or it may be the string key name.
      * @return array
      */
-    function array_column($input = null, $columnKey = null, $indexKey = null)
+    function _array_column($input = null, $columnKey = null, $indexKey = null)
     {
         // Using func_get_args() in order to check for proper number of
         // parameters and trigger errors exactly as the built-in array_column()

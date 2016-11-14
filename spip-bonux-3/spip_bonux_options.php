@@ -7,8 +7,16 @@
  *
  */
 
-// On inclu une bonne fois pour toutes array_column
-include_spip('lib/array_column/array_column');
+// Proposer array_column 
+if (!function_exists('array_column')) {
+	function array_column($input = null, $columnKey = null, $indexKey = null) {
+		if (!function_exists('_array_column')) {
+			include_spip('lib/array_column/_array_column');
+		}
+		return _array_column($input, $columnKey, $indexKey);
+	}
+}
+
 
 if (!defined('_PREVISU_TEMPORAIRE_ACTIVE')) define('_PREVISU_TEMPORAIRE_ACTIVE', true);
 
