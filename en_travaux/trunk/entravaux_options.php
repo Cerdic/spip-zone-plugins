@@ -41,7 +41,7 @@ function is_entravaux(){
 	return entravaux_check_verrou("accesferme");
 }
 
-if ((_request('exec') !== 'mutualisation') and is_entravaux()){
+if (is_entravaux()){
 	include_spip('inc/autoriser');
 
 	// dans le site public
@@ -63,7 +63,7 @@ if ((_request('exec') !== 'mutualisation') and is_entravaux()){
 	else {
 		if (
 		  !in_array(_request('action'),array('logout'))
-		  AND !in_array(_request('exec'),array('install'))
+		  AND !in_array(_request('exec'),array('install', 'mutualisation'))
 		){
 			if (!autoriser('travaux')){
 				spip_initialisation_suite();
