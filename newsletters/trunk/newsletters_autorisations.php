@@ -55,7 +55,36 @@ function autoriser_newsletter_modifier_dist($faire, $type, $id, $qui, $opt) {
 		if ($baked[$id])
 			return false;
 	}
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
+	if (!isset($opt['statut']))
+		$statut = sql_getfetsel("statut", "spip_newsletters", "id_newsletter=".intval($id));
+	else
+		$statut = $opt['statut'];
+
+	if ($statut === 'publie') {
+		return ($qui['statut'] === '0minirezo' and !$qui['restreint']);
+	}
+	else {
+		return in_array($qui['statut'], array('0minirezo', '1comite'));
+	}
+}
+
+// instituer
+function autoriser_newsletter_instituer_dist($faire, $type, $id, $qui, $opt) {
+	if (isset($opt['statut']) and $opt['statut'] === 'publie'){
+		return ($qui['statut'] === '0minirezo' and !$qui['restreint']);
+	}
+	return autoriser('modifier', $type, $id, $qui, $opt);
+}
+
+// envoyer
+function autoriser_newsletter_envoyer_dist($faire, $type, $id, $qui, $opt) {
+	// en mode test, tous ceux qui peuvent la modifier
+	if (isset($opt['test']) and $opt['test']) {
+		return autoriser('modifier', $type, $id, $qui, $opt);
+	}
+
+	// en vrai, seuls les admins
+	return ($qui['statut'] === '0minirezo' and !$qui['restreint']);
 }
 
 // supprimer
