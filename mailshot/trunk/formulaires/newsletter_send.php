@@ -21,7 +21,12 @@ function formulaires_newsletter_send_charger_dist($id_newsletter,$mode_test=fals
 		'date_start_heure' => '',
 		'_mode_test' => $mode_test?$mode_test:'',
 		'_id_newsletter' => $id_newsletter,
+		'editable' => ' ',
 	);
+	include_spip('inc/autoriser');
+	if (!autoriser('envoyer', 'newsletter', $id_newsletter, null, array('test'=>$mode_test))) {
+		$valeurs['editable'] = '';
+	}
 
 	if (!$mode_test){
 		$lists = charger_fonction('lists','newsletter');

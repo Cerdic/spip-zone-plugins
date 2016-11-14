@@ -3,6 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -48,6 +49,7 @@
 		][<p class="explication">(#ENV{_mode_test})</p>]
 	</div>
 	</form>
+	]
 
 	<INCLURE{fond=prive/objets/liste/mailshots,id=#ENV{_id_newsletter},env,ajax} />
 </div>
