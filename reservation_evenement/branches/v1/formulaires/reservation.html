@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,#ENV{id_evenement}}">
 	[(#ENV{evenements}|count|?{#SET{evenement,1},#SET{evenement,0}})]
 	[(#GET{evenement}|?{
-		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div]
+		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 		[(#ENV{editable})
 			<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
@@ -17,7 +17,7 @@
 							[(#PLUGIN{declinaisons}|?{
 								[(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons,env})]
 								,
-								[(#INCLURE{fond=formulaires/inc-reservation_evenements,env})] 
+								[(#INCLURE{fond=formulaires/inc-reservation_evenements,env})]
 							})]
 						</ul>
 					</fieldset>

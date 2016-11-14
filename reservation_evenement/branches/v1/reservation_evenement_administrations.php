@@ -34,105 +34,105 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	if ($version_cible == '1.3.3') {
 		include_spip('inc/config');
 		$config = lire_config('reservation_evenement');
-		if (isset($config ['envoi_separe'])) {
-			$config ['envoi_separe'] = $config ['envoi_separe'];
-			unset($config ['envoi_separe']);
+		if (isset($config['envoi_separe'])) {
+			$config['envoi_separe'] = $config['envoi_separe'];
+			unset($config['envoi_separe']);
 		}
 	}
 	
-	$maj ['create'] = array (
+	$maj['create'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations',
-							'spip_reservations_details',
-							'spip_articles',
-							'spip_evenements' 
-					) 
+				'spip_reservations',
+				'spip_reservations_details',
+				'spip_articles',
+				'spip_evenements' 
 			) 
+		) 
 	);
-	$maj ['1.1.0'] = array (
+	$maj['1.1.0'] = array (
+		array (
+			'sql_alter',
+			'TABLE spip_reservations_details CHANGE prix_unitaire_ht prix_ht float NOT NULL DEFAULT 0' 
+		),
+		array (
+			'maj_tables',
 			array (
-					'sql_alter',
-					'TABLE spip_reservations_details CHANGE prix_unitaire_ht prix_ht float NOT NULL DEFAULT 0' 
-			),
-			array (
-					'maj_tables',
-					array (
-							'spip_reservations_details' 
-					) 
+				'spip_reservations_details' 
 			) 
+		) 
 	);
-	$maj ['1.2.0'] = array (
+	$maj['1.2.0'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations_details' 
-					) 
+				'spip_reservations_details' 
 			) 
+		) 
 	);
-	$maj ['1.3.1'] = array (
+	$maj['1.3.1'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations' 
-					) 
+				'spip_reservations' 
 			) 
+		) 
 	);
-	$maj ['1.3.3'] = array (
-			array (
-					'ecrire_config',
-					'reservation_evenement',
-					$config 
-			) 
+	$maj['1.3.3'] = array (
+		array (
+			'ecrire_config',
+			'reservation_evenement',
+			$config 
+		) 
 	);
-	$maj ['1.4.1'] = array (
+	$maj['1.4.1'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_articles',
-							'spip_evenements' 
-					) 
+				'spip_articles',
+				'spip_evenements' 
 			) 
+		) 
 	);
 	include_spip('inc/reservation_evenement_administrations');
-	$maj ['1.4.2'] = array (
-			array (
-					'sql_alter',
-					'TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1' 
-			),
-			array (
-					'update_donnees_auteurs' 
-			) 
+	$maj['1.4.2'] = array (
+		array (
+			'sql_alter',
+			'TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1' 
+		),
+		array (
+			'update_donnees_auteurs' 
+		) 
 	);
-	$maj ['1.5.2'] = array (
+	$maj['1.5.2'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations' 
-					) 
-			),
-			array (
-					'sql_alter',
-					'TABLE spip_reservations ADD INDEX `id_reservation_source` (`id_reservation_source`)' 
+				'spip_reservations' 
 			) 
+		),
+		array (
+			'sql_alter',
+			'TABLE spip_reservations ADD INDEX `id_reservation_source` (`id_reservation_source`)' 
+		) 
 	);
-	$maj ['1.6.0'] = array (
+	$maj['1.6.0'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations_details' 
-					) 
+				'spip_reservations_details' 
 			) 
+		) 
 	);
 	
-	$maj ['1.6.1'] = array (
+	$maj['1.6.1'] = array (
+		array (
+			'maj_tables',
 			array (
-					'maj_tables',
-					array (
-							'spip_reservations' 
-					) 
+				'spip_reservations' 
 			) 
+		) 
 	);
 	
 	include_spip('base/upgrade');
@@ -158,16 +158,16 @@ function reservation_evenement_vider_tables($nom_meta_base_version) {
 	
 	// Nettoyer les versionnages et forums
 	sql_delete("spip_versions", sql_in("objet", array (
-			'reservation',
-			'reservations_detail' 
+		'reservation',
+		'reservations_detail' 
 	)));
 	sql_delete("spip_versions_fragments", sql_in("objet", array (
-			'reservation',
-			'reservations_detail' 
+		'reservation',
+		'reservations_detail' 
 	)));
 	sql_delete("spip_forum", sql_in("objet", array (
-			'reservation',
-			'reservations_detail' 
+		'reservation',
+		'reservations_detail' 
 	)));
 	
 	effacer_meta($nom_meta_base_version);

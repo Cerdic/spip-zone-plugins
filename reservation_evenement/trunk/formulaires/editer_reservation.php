@@ -2,7 +2,7 @@
 /**
  * Gestion du formulaire de d'édition de reservation
  *
- * @plugin	 Réservation Événements
+ * @plugin	 Réservation évènements
  * @copyright  2013
  * @author	 Rainer Müller
  * @licence	GNU/GPL
@@ -33,21 +33,21 @@ include_spip ( 'inc/editer' );
  */
 function formulaires_editer_reservation_identifier_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize ( array (
-			intval ( $id_reservation ) 
+			intval ( $id_reservation )
 	) );
 }
 
 /**
  * Chargement du formulaire d'édition de reservation
  *
- * Déclarer les champs postés et y intégrer les valeurs par défaut
+ * D��clarer les champs postés et y intégrer les valeurs par défaut
  *
  * @uses formulaires_editer_objet_charger()
- *      
+ *
  * @param int|string $id_reservation
  *        	Identifiant du reservation. 'new' pour un nouveau reservation.
  * @param string $retour
- *        	URL de redirection après le traitement
+ *        	URL de redirection aprês le traitement
  * @param int $lier_trad
  *        	Identifiant éventuel d'un reservation source d'une traduction
  * @param string $config_fonc
@@ -66,26 +66,26 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
 		$fonction_reference = charger_fonction ( 'reservation_reference', 'inc/' );
 		$valeurs ['reference'] = $fonction_reference ();
 	}
-	
+
 	$valeurs ['quantite'] = _request ( 'quantite' ) ? _request ( 'quantite' ) : 1;
-	
+
 	// les champs extras auteur
 	include_spip ( 'cextras_pipelines' );
-	
+
 	if (function_exists ( 'champs_extras_objet' )) {
-		// Charger les définitions pour la création des formulaires
-		
+		// Charger les d��finitions pour la cr��ation des formulaires
+
 		$valeurs ['champs_extras_auteurs'] = champs_extras_objet ( table_objet_sql ( 'auteur' ) );
 		foreach ( $valeurs ['champs_extras_auteurs'] as $key => $value ) {
 			$donnees_auteur = unserialize ( $valeurs ['donnees_auteur'] );
-			
+
 			$valeurs [$value ['options'] ['nom']] = isset ( $donnees_auteur [$value ['options'] ['nom']] ) ? $donnees_auteur [$value ['options'] ['nom']] : $donnees_auteur [$value ['options'] ['label']];
 			$valeurs ['champs_extras_auteurs'] [$key] ['options'] ['label'] = extraire_multi ( $value ['options'] ['label'] );
 		}
 	}
-	
+
 	$valeurs ['_hidden'] .= '<input type="hidden" name="quantite" value="' . $valeurs ['quantite'] . '"/>';
-	
+
 	return $valeurs;
 }
 
@@ -95,7 +95,7 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
  * Vérifier les champs postés et signaler d'éventuelles erreurs
  *
  * @uses formulaires_editer_objet_verifier()
- *      
+ *
  * @param int|string $id_reservation
  *        	Identifiant du reservation. 'new' pour un nouveau reservation.
  * @param string $retour
@@ -113,20 +113,20 @@ function formulaires_editer_reservation_charger_dist($id_reservation = 'new', $r
 function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$email = _request ( 'email' );
 	$obligatoire = array (
-			'reference' 
+			'reference'
 	);
 	$enregistrer_compte = TRUE;
 	if (! _request ( 'id_auteur' ) and (_request ( 'nom' ) or $email)) {
 		$obligatoire = Array_merge ( $obligatoire, array (
 				'nom',
-				'email' 
+				'email'
 		) );
 		$enregistrer_compte = FALSE;
 	} else
 		$obligatoire = array_merge ( $obligatoire, array (
-				'id_auteur' 
+				'id_auteur'
 		) );
-	
+
 	$erreurs = formulaires_editer_objet_verifier ( 'reservation', $id_reservation, $obligatoire );
 	if ($email) {
 		include_spip ( 'inc/filtres' );
@@ -139,13 +139,13 @@ function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $
 				$erreurs ['email'] = _T ( 'reservation:erreur_email_utilise' );
 		}
 	}
-	
+
 	// verifier et changer en datetime sql la date envoyee
 	$verifier = charger_fonction ( 'verifier', 'inc' );
 	$champ = 'date_paiement';
 	$normaliser = null;
 	if ($erreur = $verifier ( _request ( $champ ), 'date', array (
-			'normaliser' => 'datetime' 
+			'normaliser' => 'datetime'
 	), $normaliser )) {
 		$erreurs [$champ] = $erreur;
 		// si une valeur de normalisation a ete transmis, la prendre.
@@ -153,11 +153,11 @@ function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $
 		set_request ( $champ, $normaliser );
 	} else
 		set_request ( $champ, '0000-00-00 00:00:00' );
-	
+
 	if (! $enregistrer_compte) {
 		// les champs extras auteur
 		include_spip ( 'cextras_pipelines' );
-		
+
 		if (function_exists ( 'champs_extras_objet' )) {
 			include_spip ( 'inc/saisies' );
 			// Charger les définitions
@@ -174,7 +174,7 @@ function formulaires_editer_reservation_verifier_dist($id_reservation = 'new', $
  * Traiter les champs postés
  *
  * @uses formulaires_editer_objet_traiter()
- *      
+ *
  * @param int|string $id_reservation
  *        	Identifiant du reservation. 'new' pour un nouveau reservation.
  * @param string $retour

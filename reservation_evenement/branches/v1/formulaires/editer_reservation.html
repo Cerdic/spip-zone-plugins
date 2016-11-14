@@ -1,7 +1,7 @@
 #SET{langues,#ARRAY}
 
 <BOUCLE_langues(DATA){source tableau,#CONFIG{langues_utilisees}|explode{','}}>
-    #SET{langues,#GET{langues}|array_merge{#ARRAY{#VALEUR,#VALEUR|traduire_nom_langue}}}
+		#SET{langues,#GET{langues}|array_merge{#ARRAY{#VALEUR,#VALEUR|traduire_nom_langue}}}
 </BOUCLE_langues>
 
 
@@ -23,35 +23,35 @@
 				<fieldset><h3 class="legend"><:reservation:legend_donnees_auteur:></h3>
 				<ul>
 					[(#SAISIE{input, nom,label=<:reservation:label_nom:>})]
-						
+
 					[(#SAISIE{input, email,label=<:reservation:label_email:>})]
-						
+
 					[(#REM)Géneration des champs extras auteurs]
-		    
-		    		#GENERER_SAISIES{#ENV{champs_extras_auteurs}}		
+
+						#GENERER_SAISIES{#ENV{champs_extras_auteurs}}
 				</ul>
 				</fieldset>
 			</li>
-			
+
 			<li class="fieldset fieldset_donnees_reservation saisie_fieldset">
 				<fieldset><h3 class="legend"><:reservation:legend_donnees_reservation:></h3>
-				<ul>		
+				<ul>
 					[(#SAISIE{date, date_paiement,
 						label=<:reservation:label_date_paiement:>})]
-						
+
 					[(#SAISIE{input, reference,
 						label=<:reservation:label_reference:>})]
-		
+
 					[(#SAISIE{selection, lang,
 						label=<:reservation:label_lang:>,
 						datas=#GET{langues},
 						defaut=#LANGUE,
 						cacher_option_intro=true,
-						})]				
+						})]
 				</ul>
 				</fieldset>
 			</li>
-			
+
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
@@ -62,9 +62,9 @@
 <script type="text/javascript">
 
 	function hide_fieldset($field, $speed){
-		$($field).hide($speed);	
+		$($field).hide($speed);
 		$($field+' input').each(function() {
-            $(this).removeAttr('required');
+						$(this).removeAttr('required');
 		});
 	}
 
@@ -80,9 +80,9 @@
 			else {
 				$(".fieldset_donnees_auteur").show(800);
 				$(".fieldset_donnees_auteur .obligatoire input").each(function() {
-		            $(this).prop('required','true');
+								$(this).prop('required','true');
 				});
-			} 
+			}
 		});
 
 </script>
