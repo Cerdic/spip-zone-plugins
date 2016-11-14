@@ -197,7 +197,7 @@ function dbg_afficher_tableau($env) {
 	$res = "<table style='border-collapse:collapse;'>\n";
 	foreach ($env as $nom => $val) {
 		if (is_array($val) || is_array(@unserialize($val))) {
-			$val = bel_env($val);
+			$val = dbg_afficher_tableau($val);
 		}
 		elseif ($val === null) {
 			$val = '<i>null</i>';
