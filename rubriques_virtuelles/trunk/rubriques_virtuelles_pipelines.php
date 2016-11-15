@@ -108,6 +108,27 @@ function rubriques_virtuelles_objet_compte_enfants($flux) {
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline calculer_rubriques (SPIP)
+ * (cf calculer_rubriques_publiees() dans inc/rubriques)
+ *
+ * Évite de dépublier une rubrique avec une redirection
+ *
+ * @param null $flux
+ * @return null
+ */
+function rubriques_virtuelles_calculer_rubriques($flux) {
+	$rubriques_virtuelles_non_publiees = sql_allfetsel(
+		'id_rubrique, statut, id_parent',
+		'spip_rubriques',
+		'statut_tmp != "publie" AND virtuel != ""'
+	);
+	foreach ($rubriques_virtuelles_non_publiees as $rub) {
+		sql_updateq('spip_rubriques', array('statut_tmp'=> 'publie'), 'id_rubrique='.intval($rub['id_rubrique']));
+	}
+	return $flux;
+}
+
 function autoriser_rubriques_virtuelles() {
 }
 
