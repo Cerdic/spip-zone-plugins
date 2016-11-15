@@ -6,7 +6,7 @@ Convertir des fichiers par lots.
 
 Mettre les fichiers dans le repertoire /conversion_source/%COLLECTION%/%NUMERO%/[fichiers] du SPIP par défaut, ou dans un autre répertoire.
 
-Lancer la commande spip-cli : spip convert
+Lancer la commande spip-cli : spip conversion
 
 Les fichiers convertis sont placés dans le repertoire /conversion_spip/%COLLECTION%/%NUMERO% du SPIP
 
@@ -23,7 +23,7 @@ class Convert extends Command {
 	protected function configure() {
 		$this
 			->setName('convertisseur:convertir')
-			->setDescription('Conversion de fichiers divers au format SPIP txt. `spip convert -e %extracteur% -s %source% -d %dest%`.')
+			->setDescription('Conversion de fichiers divers au format SPIP txt. `spip conversion -e %extracteur% -s %source% -d %dest%`.')
 			->setAliases(array(
 				'conversion' // abbréviation commune pour "conversion"
 			))
@@ -66,7 +66,7 @@ class Convert extends Command {
 		$extracteurs_dispos = join(", ",$GLOBALS['extracteurs_disponibles']);
 
 		if($extracteur == "" || !in_array($extracteur, $GLOBALS['extracteurs_disponibles'])){
-			$output->writeln("<error>Définir un extracteur `spip convert -e %extracteur%`. Extracteurs disponibles : $extracteurs_dispos</error>");
+			$output->writeln("<error>Définir un extracteur `spip conversion -e %extracteur%`. Extracteurs disponibles : $extracteurs_dispos</error>");
 			exit ;
 		}
 		
@@ -79,7 +79,7 @@ class Convert extends Command {
 			
 			// Répertoire de destination ou l'on enregistre les fichiers spip (/convertion_spip par défaut).
 			if(!is_dir($source)){
-				$output->writeln("<error>Préciser où sont les fichiers à convertir `spip convert -s %repertoire%` ou créer un repertoire conversion_source/</error>");
+				$output->writeln("<error>Préciser où sont les fichiers à convertir `spip conversion -s %repertoire%` ou créer un repertoire conversion_source/</error>");
 				exit ;
 			}
 	
@@ -88,13 +88,13 @@ class Convert extends Command {
 				mkdir($dest);
 			
 			if(!is_dir($dest)){
-				$output->writeln("<error>Préciser où placer les fichiers convertis `spip convert -d %repertoire%` ou créer un repertoire conversion_spip/</error>");
+				$output->writeln("<error>Préciser où placer les fichiers convertis `spip conversion -d %repertoire%` ou créer un répertoire conversion_spip/</error>");
 				exit ;
 			}
 			
 			// Si c'est bon on continue
 			else{
-				$output->writeln("<info>C'est parti pour la convertion `$extracteur` des fichiers de $source/ dans $dest/ !</info>");
+				$output->writeln("<info>C'est parti pour la conversion `$extracteur` des fichiers de $source/ dans $dest/ !</info>");
 
 				// trouve t'on un repertoire trunk/collections dans $dest ?
 				if($ls_depot = inc_ls_to_array_dist($dest ."/trunk/collections")){
