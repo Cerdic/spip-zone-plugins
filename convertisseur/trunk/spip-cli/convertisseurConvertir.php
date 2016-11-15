@@ -105,82 +105,83 @@ class Convert extends Command {
 				// plugin convertisseur
 				include_spip("extract/$extracteur");				
 				$fonction_extraction = $GLOBALS['extracteur'][$extracteur] ;
-													
+				
 				// chopper des fichiers xml mais pas xxx_metatada.xml
 				$fichiers = preg_files($source ."/", "(?:(?<!_metadata\.)xml$)");
 									
 				// ou a défaut n'importe quel fichier trouvé
 				if(sizeof($fichiers) == 0)
 					$fichiers = preg_files($source, ".*");
-																	
+				
 				foreach($fichiers as $f){
 					
 					//var_dump($f);
 					
 					$fn = str_replace("$source/","", $f);
 				
-					// Répertoires publication et numero ?
+					// Déterminer l'organisation des fichiers
 					$classement = explode("/", $fn);
-					
+					// Répertoires publication et numero ?
 					if(sizeof($classement) >= 3){
-						$collection = $classement[0] ;
-						$numero = $classement[1] ;
-					}elseif(sizeof($classement) == 2){
+						$collection = $classement[0] . "/";
+						$numero = $classement[1] . "/";
+					}// Répertoires de numeros ?
+					elseif(sizeof($classement) == 2){
 						$collection = "";
-						$numero=$classement[0] ;
+						$numero=$classement[0] . "/" ;
 					}else{
 						# on recopie l'arbo de la source
 						preg_match(",.*/([^/]+)/([^/]+)/[^/]+$,", $f, $m);
-						$collection = $m[1] ;
-						$numero = $m[2] ;
+						$collection = $m[1] ."/ ";
+						$numero = $m[2] . "/" ;
 						// var_dump($m, $collection, $numero);
 					}
 					
 					$article = basename($f);
 
 					// pour le chemin des documents.
-					set_request('fichier', "$collection/$numero/fichier.xml");
-				
+					set_request('fichier', $collection . $numero . "fichier.xml");
+					
 					$contenu = $fonction_extraction($f,$charset);
-										
+					
 					include_spip("inc/convertisseur");
-					$contenu = nettoyer_format($contenu);					
+					$contenu = nettoyer_format($contenu);
 
 					// Générer des noms de fichiers valides
 					include_spip("inc/charsets");
 					$article = translitteration($article);					
 					$article = preg_replace(',[^\w-]+,', '_', $article);
 					$article = preg_replace(',_xml$,', '.txt', $article);
-										
+					
 					$c = array(
-						"fichier_source" => $f,					
+						"fichier_source" => $f,
 						"dest" => $dest,
 						"collection" => $collection,
 						"numero" => $numero,
 						"contenu" => $contenu,
 						"basename" => $article ,
-						"fichier_dest" => $dest . "/" . $collection  . "/" . $numero . "/" . $article
+						"fichier_dest" => $dest . "/" . $collection . $numero . $article
 					);
-											
+					
+					// traitements persos sur $c avant d'écrire le fichier converti ?
 					if(find_in_path('convertisseur_perso.php'))
 						include_spip("convertisseur_perso");
-
 					if (function_exists('nettoyer_conversion_cli')){
-						$c = nettoyer_conversion_cli($c);			
+						$c = nettoyer_conversion_cli($c);
 					}
-													
+					
 					if(!is_dir($c["dest"] . "/" .  $c["collection"])){
 						mkdir($c["dest"]  . "/" . $c["collection"]) ;
 					}
-					if(!is_dir($c["dest"]  . "/" . $c["collection"]  . "/" . $c["numero"])){
-						mkdir($c["dest"]  . "/" . $c["collection"]  . "/" . $c["numero"]) ;
+					if(!is_dir($c["dest"]  . "/" . $c["collection"] . $c["numero"])){
+						mkdir($c["dest"]  . "/" . $c["collection"] . $c["numero"]) ;
 					}
 					
 					include_spip("inc/flock");
 					ecrire_fichier($c["fichier_dest"], $c["contenu"]);
-								
+					
 					$output->writeln("Nouvelle conversion : " . $c["fichier_dest"]);
-																
+
 				}
 				
 			}
