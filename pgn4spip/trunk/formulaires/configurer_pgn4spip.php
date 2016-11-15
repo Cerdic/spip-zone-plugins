@@ -17,7 +17,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 define('PLUGIN_Form', "configurer_pgn4spip" );
 
-
 // Implement "Reinit" and "Save" buttons
 function formulaires_configurer_pgn4spip_traiter()
 {
@@ -27,7 +26,7 @@ function formulaires_configurer_pgn4spip_traiter()
 	if (_request('reinit'))
 	{	// The user clicks to the "reinit" button in the configuration form
 		InitOptionValueByDefault($optValue); // Initial values of options
-		effacer_meta(PLUGIN_Name); // Deleting the configuration restores default settings in the form
+		effacer_meta(pgn4spip); // Deleting the configuration restores default settings in the form
 		return array('message_ok'=>_T('pgn4spip:config_reinit'), 'editable'=>true);
 	}
 	else // The user clicks to the "Save" button
