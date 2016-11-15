@@ -52,21 +52,22 @@ function newsletter_bulkstart_dist($corps,$listes = array(),$options=array()){
 	$subscribers = charger_fonction("subscribers","newsletter");
 	$count = $subscribers($listes, array('count'=>true));
 
-	// from ?
-	$from_name = '';
-	$from_email = '';
-	if (count($listes)){
-		$lists = charger_fonction("lists","newsletter");
-		$desc_lists = $lists();
-		foreach($listes as $i) {
-			if (isset($desc_lists[$i]['from_email']) and $desc_lists[$i]['from_email']){
-				$from_email = $desc_lists[$i]['from_email'];
-				$from_name = $desc_lists[$i]['from_name'];
-				break;
+	// from fourni par la newsletter ou par une des listes de diffusion ?
+	$from_name = (isset($corps['from_name'])?$corps['from_name']:'');
+	$from_email = (isset($corps['from_email'])?$corps['from_email']:'');
+	if (!$from_name and !$from_email) {
+		if (count($listes)){
+			$lists = charger_fonction("lists","newsletter");
+			$desc_lists = $lists();
+			foreach($listes as $i) {
+				if (isset($desc_lists[$i]['from_email']) and $desc_lists[$i]['from_email']){
+					$from_email = $desc_lists[$i]['from_email'];
+					$from_name = $desc_lists[$i]['from_name'];
+					break;
+				}
 			}
 		}
 	}
-
 
 	$bulk = array(
 		'id' => $id,

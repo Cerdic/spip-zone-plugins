@@ -67,6 +67,12 @@ function newsletter_send_dist($destinataire,$corps,$options=array()){
 		if (!$corps OR !is_array($corps)){
 			return _T('mailshot:erreur_generation_newsletter');
 		}
+		if (isset($corps['from_email'])) {
+			$corps['from'] = $corps['from_email'];
+			if (isset($corps['from_name'])) {
+				$corps['nom_envoyeur'] = $corps['from_name'];
+			}
+		}
 	}
 	$corps = array_merge(array('html'=>'','texte'=>'','sujet'=>''),$corps);
 
