@@ -10,7 +10,9 @@
 			otherwise you will get empty slogan or pgn4spip_description as slogan.
  **********************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

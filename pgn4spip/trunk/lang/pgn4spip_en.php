@@ -6,6 +6,9 @@
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
  **********************************************************************************/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

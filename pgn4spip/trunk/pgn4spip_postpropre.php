@@ -20,7 +20,9 @@
 	define('_AUTOBR', ''); // Do not translate "\n" as "<p><br class='autobr' /></p>"
 	?> 
  **********************************************************************************/
-if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 define('AUTOBR_BEFORE', "</textarea>\n");
 define('CLS_AUTOBR', "<br class='autobr' />");

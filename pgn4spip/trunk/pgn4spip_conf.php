@@ -18,7 +18,9 @@
  * http://contrib.spip.net/CFG-comment-s-en-passer
  
  **********************************************************************************/
-if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 define('DEFAULT_Val', "d"); // (d)efault value
 define('TRANSPARENT', 't'); // (t)ransparent color

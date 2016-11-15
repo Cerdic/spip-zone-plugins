@@ -11,7 +11,9 @@
  * 			 plugins-dist\mediabox\formulaires\configurer_mediabox.php
  * @see		 http://permalink.gmane.org/gmane.comp.web.spip.devel/62805
  **********************************************************************************/
-if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 define('PLUGIN_Form', "configurer_pgn4spip" );
 

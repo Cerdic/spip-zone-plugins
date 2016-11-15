@@ -33,7 +33,9 @@
 	[pgn autoplayMode=loop initialHalfmove=end] 1. e4 Nf6 2. e5 Nd5 [/pgn]
 	After
  **********************************************************************************/
-if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // in old version of pgn4spip this 2 lines below where in pgn4spip_options.php, now deleted.
 define('PATH_Conf', 'find_in_path(pgn4spip_conf.php)');
