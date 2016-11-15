@@ -13,9 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function metas_affiche_milieu($flux) {
 	$en_cours = trouver_objet_exec($flux['args']['exec']);
+	$page_vue = false;
+	if ($en_cours) {
+		$table_objet = lister_tables_objets_sql($en_cours['table_objet_sql']);
+		$page_vue = $table_objet['page'];
+	}
 
 	// Mode edition, affichage du formulaire.
-	if ($en_cours['edition'] == true /* page visu */ and $type = $en_cours['type'] and $id_table_objet = $en_cours['id_table_objet'] and ($id = isset($flux['args'][$id_table_objet]) ? intval($flux['args'][$id_table_objet]) : 0)) {
+	if ($page_vue and $en_cours['edition'] == true /* page visu */ and $type = $en_cours['type'] and $id_table_objet = $en_cours['id_table_objet'] and ($id = isset($flux['args'][$id_table_objet]) ? intval($flux['args'][$id_table_objet]) : 0)) {
 		$texte = recuperer_fond('prive/squelettes/inclure/editer_metas', array(
 				'table_source' => 'metas',
 				'objet' => $type,
