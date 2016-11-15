@@ -30,7 +30,7 @@
 			</li>
 			<li class="fieldset">
 				<fieldset>
-					<legend><:mailsubscribinglist:legend_configuration_adresse_envoi:></legend>
+					<legend><:mailsubscribinglist:legend_configuration_adresse_envoi:> <:newsletter:info_optionnel:></legend>
 					<ul class="editer-groupe">
 						#SET{name,adresse_envoi_nom}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">

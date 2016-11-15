@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_identifiant' => 'Id',
 	'label_auto_update_oui' => 'Automatic update',
-	'legend_configuration_adresse_envoi' => 'Sending Address when sending to this list (optional)',
+	'legend_configuration_adresse_envoi' => 'Sending Address when sending to this list',
 
 	// T
 	'texte_ajouter_mailsubscribinglist' => 'Add a mailing list',
