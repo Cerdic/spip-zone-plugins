@@ -15,6 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   string sujet
  *   string html
  *   string texte
+ *   string from_name
+ *   string from_email
  */
 function newsletter_content_dist($id){
 	// generer une version a jour (ne fera rien si deja cuite)
@@ -26,7 +28,7 @@ function newsletter_content_dist($id){
 	$fixer_newsletter($id);
 
 	// recuperer les messages
-	$corps = sql_fetsel('titre as sujet,html_email as html,texte_email as texte','spip_newsletters','id_newsletter='.intval($id));
+	$corps = sql_fetsel('titre as sujet,html_email as html,texte_email as texte,adresse_envoi_nom as from_name,adresse_envoi_email as from_email','spip_newsletters','id_newsletter='.intval($id));
 	if (!$corps)
 		return false;
 	if (!$corps['texte'] AND !$corps['html'])

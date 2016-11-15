@@ -48,6 +48,9 @@ function newsletters_declarer_tables_objets_sql($tables) {
 			"recurrence"         => "text NOT NULL DEFAULT ''",
 			"email_test"         => "text NOT NULL DEFAULT ''",
 			"liste"              => "text NOT NULL DEFAULT ''",
+			// pour une adresse d'envoi specifique
+			"adresse_envoi_nom" => "text DEFAULT '' NOT NULL",
+			"adresse_envoi_email" => "text DEFAULT '' NOT NULL",
 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL",
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
@@ -60,8 +63,8 @@ function newsletters_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre','chapo','texte','date_redac','patron','baked','html_email','texte_email','html_page','recurrence','email_test','liste'),
-		'champs_versionnes' => array(),
+		'champs_editables'  => array('titre','chapo','texte','date_redac','patron','baked','html_email','texte_email','html_page','recurrence','email_test','liste','adresse_envoi_nom', 'adresse_envoi_email'),
+		'champs_versionnes' => array('titre','chapo','texte','date_redac','patron','recurrence','email_test','liste','adresse_envoi_nom', 'adresse_envoi_email'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(
 			'mots_liens',

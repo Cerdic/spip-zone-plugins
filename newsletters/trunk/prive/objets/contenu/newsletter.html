@@ -39,6 +39,22 @@
 </div>]
 
 ]
+
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+[(#BOITE_OUVRIR{<:newsletter:legend_configuration_adresse_envoi:>,simple})]
+]
+<div class="champ contenu_adresse_envoi_nom[ (#ADRESSE_ENVOI_NOM*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_nom:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_nom} adresse_envoi_nom'>#ADRESSE_ENVOI_NOM</span>
+</div>
+<div class="champ contenu_adresse_envoi_email[ (#ADRESSE_ENVOI_EMAIL*|strlen|?{'',vide})]">
+	<div class='label'><:facteur:facteur_adresse_envoi_email:></div>
+	<span dir='#LANG_DIR' class='#EDIT{adresse_envoi_email} adresse_envoi_email'>#ADRESSE_ENVOI_EMAIL</span>
+</div>
+[(#ADRESSE_ENVOI_NOM|ou{#ADRESSE_ENVOI_EMAIL}|oui)
+#BOITE_FERMER
+]
+
 [(#BAKED|oui)
 
 [<div class="champ contenu_html_email[ (#HTML_EMAIL*|strlen|?{'',vide})]">

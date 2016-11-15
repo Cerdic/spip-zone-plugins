@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_newsletters_prog' => '@nb@ Programmed newsletters',
 	'info_newsletter_generer' => 'Generate Newsletter (HTML Version Text Version)',
 	'info_newsletters_auteur' => 'The newsletters by this author',
+	'info_optionnel' => '(optional)',
 	'info_preview_version_html_email' => 'HTML email version',
 	'info_preview_version_html_page' => 'HTML online version',
 	'info_preview_version_html_page_noiframe' => '(display without iframe)',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Text',
 	'label_texte_email' => 'Text Version',
 	'label_titre' => 'Title',
+	'legend_configuration_adresse_envoi' => 'Sending Address when sending this newsletter',
 	'lien_lire_en_ligne' => 'Read online',
 
 	// R

@@ -63,6 +63,10 @@ function formulaires_editer_newsletter_verifier_dist($id_newsletter='new', $reto
 	else
 		$obli = array('titre','html_email');
 
+	if (_request('adresse_envoi_nom')) {
+		$oblis[] = 'adresse_envoi_email';
+	}
+
 	return formulaires_editer_objet_verifier('newsletter',$id_newsletter,$obli);
 }
 

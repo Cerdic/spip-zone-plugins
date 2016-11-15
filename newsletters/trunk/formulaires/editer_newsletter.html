@@ -50,8 +50,27 @@
 			<!--extra-->
 		]
 		
-		[(#ENV{statut}|in_array{#LISTE{'',prepa,prop}}|oui)
 		<ul class="editer-groupe">
+			<li class="fieldset">
+				<fieldset>
+					<legend><:newsletter:legend_configuration_adresse_envoi:> <:newsletter:info_optionnel:></legend>
+					<ul class="editer-groupe">
+						#SET{name,adresse_envoi_nom}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:facteur:facteur_adresse_envoi_nom:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						</li>
+						#SET{name,adresse_envoi_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:facteur:facteur_adresse_envoi_email:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" class="email text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			[(#ENV{statut}|in_array{#LISTE{'',prepa,prop}}|oui)
 			#SET{name,baked}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
@@ -66,8 +85,8 @@
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
 			</li>
+			]
 		</ul>
-		]
 		<div class="baked[(#ENV{baked}|non)none]">
 		[(#ENV{statut}|in_array{#LISTE{prepa,prop}}|oui)
 		<p class="explication"><:newsletter:explication_baked:></p>

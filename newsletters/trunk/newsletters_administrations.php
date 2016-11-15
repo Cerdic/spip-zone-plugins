@@ -30,6 +30,9 @@ function newsletters_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', "table spip_newsletters ADD email_test text NOT NULL DEFAULT ''"),
 		array('sql_alter', "table spip_newsletters ADD liste text NOT NULL DEFAULT ''"),
 	);
+	$maj['0.3.0'] = array(
+		array('maj_tables', array('spip_newsletters')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

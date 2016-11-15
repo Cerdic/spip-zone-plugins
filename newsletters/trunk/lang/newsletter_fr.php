@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_newsletters_prog' => '@nb@ infolettres programmées',
 	'info_newsletter_generer' => 'Générer l’infolettre (Version HTML et version texte)',
 	'info_newsletters_auteur' => 'Les infolettres de cet auteur',
+	'info_optionnel' => '(optionnel)',
 	'info_preview_version_html_email' => 'Version HTML email',
 	'info_preview_version_html_page' => 'Version HTML en ligne',
 	'info_preview_version_html_page_noiframe' => '(afficher sans iframe)',
@@ -56,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Texte',
 	'label_texte_email' => 'Version Texte',
 	'label_titre' => 'Titre',
+	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi pour les envois de cette infolettre ',
 	'lien_lire_en_ligne' => 'Lire en ligne',
 
 	// R
