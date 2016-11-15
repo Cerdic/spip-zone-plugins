@@ -61,9 +61,6 @@ function convertisseur_texte_spip($texte, $format, $options=array()) {
  * Pour faire des <BOUCLE_conversion(DATA){source extracteur, fichier}>
  */
 
-// Extracteurs qui renvoient des tableaux (TODO voir spip-cli convertir ligne 69 pour dynamiser)
-$GLOBALS['extracteurs_connus'] = array('indesign_xml', 'quark_xml', 'xml_ocr', 'xml_de') ;
-
 // Iterateur pour l'extracteur quark_xml
 function inc_indesign_xml_to_array_dist($u){
 	return activer_iterateur('indesign_xml', $u) ;
@@ -129,3 +126,10 @@ function extracteur_preparer_insertion($item){
 
 	return $texte ; 
 }
+
+// Définir les extracteur disponibles (pour d'autres plugins ou pour spip-cli)
+include_spip("inc/convertisseur");
+global $conv_formats ;
+foreach($conv_formats as $f)
+	if(!is_array($f))
+		$GLOBALS['extracteurs_disponibles'][] = $f ;

@@ -25,7 +25,7 @@ class Convert extends Command {
 			->setName('convertisseur:convertir')
 			->setDescription('Conversion de fichiers divers au format SPIP txt. `spip convert -e %extracteur% -s %source% -d %dest%`.')
 			->setAliases(array(
-				'convert' // abbréviation commune pour "conversion"
+				'conversion' // abbréviation commune pour "conversion"
 			))
 			->addOption(
 				'extracteur',
@@ -61,15 +61,11 @@ class Convert extends Command {
 		
 		include_spip("iterateur/data");
 		include_spip("inc/utils");
-		
-		include_spip("inc/convertisseur");
-		global $conv_formats ;
-		foreach($conv_formats as $v)
-			if(!is_array($v))
-				$extracteurs_disponibles[] = $v ;
-		$extracteurs_dispos = join(", ",$extracteurs_disponibles);		
-						
-		if($extracteur == "" || !in_array($extracteur, $extracteurs_disponibles)){
+		include_spip(_DIR_PLUGIN_CONVERTISSEUR . "convertisseur_fonctions");
+
+		$extracteurs_dispos = join(", ",$GLOBALS['extracteurs_disponibles']);
+
+		if($extracteur == "" || !in_array($extracteur, $GLOBALS['extracteurs_disponibles'])){
 			$output->writeln("<error>Définir un extracteur `spip convert -e %extracteur%`. Extracteurs disponibles : $extracteurs_dispos</error>");
 			exit ;
 		}
