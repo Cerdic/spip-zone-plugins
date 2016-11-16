@@ -31,6 +31,7 @@ function accesrestreintip_lister_zones_par_ip($ip=null) {
 		foreach ($zones as $zone) {
 			$ranges = explode(',', $zone['ips']);
 			foreach ($ranges as $range) {
+				$range = trim($range);
 				// Range d'IP contenant - comme séparateur
 				if (preg_match ("/-/",$range))  {
 					$ranges_2 = explode ('-', $range) ;
