@@ -1,11 +1,9 @@
 <?php
 /**********************************************************************************
  * @Subject English resources: this is a SPIP 3 language file for paquet.xml
- * @package pgn4spip plugin to embed pgn4web chessboard in a SPIP 2.x or 3.x article
- * @version 2.61.0
+ * @package pgn4spip plugin to embed pgn4web chessboard in a SPIP article
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
- * Language PHP for SPIP 3
  * @Design	do not use '[xxx] ...' as value for pgn4spip_slogan
 			otherwise you will get empty slogan or pgn4spip_description as slogan.
  **********************************************************************************/

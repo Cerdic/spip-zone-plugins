@@ -2,14 +2,10 @@
 /**********************************************************************************
  * @Subject "OK" and "Reinit" buttons for the configurer_pgn4spip.html config form 
  * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP 3.x article
- * @version 2.61.0
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
  * @language PHP for SPIP 3
  *
- * @history: Based on formulaires_configurer_mediabox_traiter_dist() in
- * 			 plugins-dist\mediabox\formulaires\configurer_mediabox.php
- * @see		 http://permalink.gmane.org/gmane.comp.web.spip.devel/62805
  **********************************************************************************/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

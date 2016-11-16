@@ -1,8 +1,7 @@
 <?php
 /**********************************************************************************
  * @Subject French resources: this is a SPIP 2 or 3 language file
- * @package pgn4spip plugin to embed pgn4web chessboard in a SPIP 2.x or 3.x article
- * @version 2.61.0
+ * @package pgn4spip plugin to embed pgn4web chessboard in a SPIP article
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
  **********************************************************************************/
@@ -12,9 +11,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// Only lowercase in the key. In the value, french accents must be in HTML format &...;
 'ok'			=> 'OK',
-'reinit'		=> 'Remettre les valeurs par d&eacute;faut',
+'reinit'		=> 'Remettre les valeurs par défaut',
 'config_reinit'	=> 'La configuration a été remise avec les valeurs par défaut',
 
 'boxtitle'		=> 'Configuration générale de l’échiquier et du PGN',

@@ -1,25 +1,17 @@
 <?php
 /**********************************************************************************
  * @Subject Parse options and generate HTML iframe to run board.html
- * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP 2.x or 3.x article
- * @version 2.61.0
+ * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP article
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
- * @compatible SPIP 2.x and CFG 1.15 or SPIP 3.x
- * Penknife or Swiss Army Knife 1.8 if pgn4spip is enabled after Swiss Knife
  * If you see .pgn header with French double quotes, disable and reenable pgn4spip.
- * @language PHP for SPIP 2 or 3
- *
- * @history:
- * 2.61.0: Initial version for SPIP 2.1
  * @credits: Paolo Casaschi
  * @reference: http://pgn4web.casaschi.net
  * @tutorial: http://code.google.com/p/pgn4web/wiki/User_Notes_joomla
  * @Usage
 	In a SPIP article, enter the following tag:
 	[pgn parameter1=value1 prm2=value2 ...] chess games notation in PGN format [/pgn]
-	
-	Tag parameters: see the configuration of the module in CFG for the help
+		Tag parameters: see the configuration of the module in CFG for the help
 	layout=horizontal|vertical
 	height=auto|'number'
 	movesDisplay=figurine|text|puzzle|hidden

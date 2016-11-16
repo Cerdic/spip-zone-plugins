@@ -4,19 +4,6 @@
  * @package pgn4spip plugin to embed pgn4web Chessboard in SPIP 
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
- * @language PHP
- *
- * @history: Shared module
- * SPIP 3: pgn4spip_fonctions.php, plugins\pgn4spip\formulaires\configurer_pgn4spip.php
- *
- * @Design
- * SPIP 3:
- * plugins\pgn4spip\formulaires\configurer_pgn4spip.html Design of the form in SPIP and HTML
- * plugins\pgn4spip\formulaires\configurer_pgn4spip.php Implement "Reinit" and "Save" buttons
- * plugins\pgn4spip\prive\squelettes\contenu\configurer_pgn4spip.html cfg-16.png icon in "Manage plugins"
- * http://www.spip.net/fr_article5414.html
- * http://contrib.spip.net/CFG-comment-s-en-passer
- 
  **********************************************************************************/
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;

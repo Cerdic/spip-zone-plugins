@@ -1,15 +1,9 @@
 <?php
 /**********************************************************************************
  * @Subject Fix _AUTOBR when the plugin is embedded in a table (see Test\SPIP3\Test08)
- * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP 3.x article
- * @version 2.61.0
+ * @package pgn4spip plugin to embed pgn4web Chessboard in a SPIP article
  * @copyright copyright (c) 2012 Matt Chesstale 
  * @license GNU General Public License version 3
- * @compatible SPIP 3.x and SPIP 2.x
- * @language PHP for SPIP 3 and SPIP 2
- *
- * @history:
- * 2.61.0: Initial version for SPIP 3
  * @reference: _AUTOBR in http://www.spip.net/en_article5533.html
  * pipeline "post_propre" happens after the HTML iframe generation by pgn4spip_fonctions.php
  * and after spip3\plugins-dist\textwheel\inc\texte.php replaces "\n" with "<p><br class='autobr' /></p>"
