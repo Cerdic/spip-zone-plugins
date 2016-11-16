@@ -9,32 +9,34 @@
  * Pour plus de details voir le fichier COPYING.txt.
  **/
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
-function savecfg_declarer_tables_interfaces($interface)
-{
-    // 'spip_' dans l'index de $tables_principales
-    $interface['table_des_tables']['savecfg'] = 'savecfg';
+function savecfg_declarer_tables_interfaces($interface) {
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['savecfg'] = 'savecfg';
 
-    return $interface;
+	return $interface;
 }
-function savecfg_declarer_tables_principales($tables_principales)
-{
-    $spip_savecfg = array(
-        'id_savecfg' => 'INT(10) NOT NULL AUTO_INCREMENT',
-        'fond' => 'text NOT NULL',
-        'valeur' => 'text NOT NULL',
-        'titre' => 'text NOT NULL',
-        'version' => "VARCHAR(100) NOT NULL DEFAULT '1'",
-        'date' => 'DATETIME', );
 
-    $spip_savecfg_key = array(
-        'PRIMARY KEY' => 'id_savecfg', );
+function savecfg_declarer_tables_principales($tables_principales) {
+	$spip_savecfg = array(
+		'id_savecfg' => 'INT(10) NOT NULL AUTO_INCREMENT',
+		'fond' => 'text NOT NULL',
+		'valeur' => 'text NOT NULL',
+		'titre' => 'text NOT NULL',
+		'version' => "VARCHAR(100) NOT NULL DEFAULT '1'",
+		'date' => 'DATETIME',
+	);
 
-    $tables_principales['spip_savecfg'] = array(
-        'field' => &$spip_savecfg,
-        'key' => &$spip_savecfg_key, );
+	$spip_savecfg_key = array(
+		'PRIMARY KEY' => 'id_savecfg',
+	);
 
-    return $tables_principales;
+	$tables_principales['spip_savecfg'] = array(
+		'field' => &$spip_savecfg,
+		'key' => &$spip_savecfg_key,
+	);
+
+	return $tables_principales;
 }

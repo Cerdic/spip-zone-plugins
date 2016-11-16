@@ -8,7 +8,9 @@
 // Date: 04-06-2015 16:40:09
 // Items: 2
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

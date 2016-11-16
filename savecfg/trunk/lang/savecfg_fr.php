@@ -1,6 +1,8 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_restauration' => 'Aucune restauration disponible',
