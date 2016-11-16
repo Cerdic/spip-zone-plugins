@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Texte',
 	'label_texte_email' => 'Version Texte',
 	'label_titre' => 'Titre',
-	'legend_configuration_adresse_envoi' => 'Adresse d\'envoi pour les envois de cette infolettre ',
+	'legend_configuration_adresse_envoi' => 'Adresse d’envoi pour les envois de cette infolettre ',
 	'lien_lire_en_ligne' => 'Lire en ligne',
 
 	// R
