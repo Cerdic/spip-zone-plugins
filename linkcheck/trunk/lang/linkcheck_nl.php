@@ -40,6 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_linkcheck' => 'Een link',
 	'info_aucun_lien' => 'Nog geen enkele link werd beoordeeld.',
 	'info_aucun_linkcheck' => 'Geen enkele link gevonden',
+	'info_dont_non_verifie' => 'waarvan <span id="nb_lien_inconnu">@nb@</span> niet gecontroleerd',
+	'info_dont_non_verifies' => 'waarvan <span id="nb_lien_inconnu">@nb@</span> niet gecontroleerd',
 	'info_nb_linkchecks' => 'links',
 
 	// L
@@ -51,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ok' => 'Geldig',
 	'liens' => 'links',
 	'liens_deplaces' => 'verplaatste links',
-	'liens_invalides' => 'Er bestaan ongeldige links in de inhoud van je site!', # MODIF
+	'liens_invalides' => 'Er bestaan ongeldige links in de inhoud van je site (dood: @mort@ / slecht: @malade@ / verplaatst: @deplace@) !!',
 	'liens_malades' => 'niet te controleren links',
 	'liens_morts' => 'ongeldige links',
 	'liens_oks' => 'gevalideerde links',
