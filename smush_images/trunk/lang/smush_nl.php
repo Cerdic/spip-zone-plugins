@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_eviter_traitement_auto' => 'Voorkom een automatische verwerking van alle door SPIP gegenereerde afbeeldingen',
+	'label_jpeg_qualite' => 'Maximale kwaliteit van de JPEG afbeelding (tussen 0 en 100)',
 	'label_url_test' => 'URL van de testafbeelding',
 
 	// S
