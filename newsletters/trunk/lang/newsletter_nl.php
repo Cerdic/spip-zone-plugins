@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_newsletters_prog' => '@nb@ Geprogrammeerde nieuwsbrieven',
 	'info_newsletter_generer' => 'Genereerde Nieuwsbrief (HTML Version Text Version)',
 	'info_newsletters_auteur' => 'De nieuwsbrieven van deze auteur',
+	'info_optionnel' => '(optioneel)',
 	'info_preview_version_html_email' => 'HTML Version e-mail',
 	'info_preview_version_html_page' => 'HTML-versie online',
 	'info_preview_version_html_page_noiframe' => '(weergave zonder iframe)',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte' => 'Tekst',
 	'label_texte_email' => 'Tekst versie',
 	'label_titre' => 'Titel',
+	'legend_configuration_adresse_envoi' => 'Verzendadres voor de verzending van deze nieuwsbrief',
 	'lien_lire_en_ligne' => 'Lees online',
 
 	// R
