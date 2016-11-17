@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_fin' => 'Einddatum verzending',
 	'label_date_start' => 'Datum van verzending',
 	'label_envoi' => 'Bezig met verzenden',
+	'label_from' => 'Verzender',
 	'label_html' => 'HTML-versie',
 	'label_listes' => 'Lijsten',
 	'label_mailer_defaut' => 'Gebruik dezelfde dienst als voor andere emails',
