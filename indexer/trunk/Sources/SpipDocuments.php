@@ -115,15 +115,27 @@ class SpipDocuments implements SourceInterface {
 			// Pour la source du site : config explicite sinon l'URL du site
 			$doc['properties']['source'] = lire_config('indexer/source', lire_config('adresse_site'));
 			
-			// Pour le titre (TODO : mieux détecter, mais la déclaration de l'API est faite pour une requête SQL)
-			if (isset($contenu['titre'])) {
+			// detecter le titre
+			$champ_titre = 'titre';
+			// Extraire le champ titre SI on a "as titre" dedans
+			// car sinon ça veut dire que c'est le champ titre tout court
+			$info_titre = objet_info($this->objet, 'titre');
+			if (
+				$info_titre
+				and stripos($info_titre, 'as titre') !== false
+			) {
+				// On récupère ce qui est avant le "as titre"
+				if (preg_match('/(^|,)([\w\s]+)\s+as titre/i', $info_titre, $trouve)) {
+					$champ_titre = trim($trouve[2]);
+				}
+				else {
+					// On a pas trouvé, l'objet n'est donc pas titrable
+					$champ_titre = '';
+				}
+			}
+
+			if ($champ_titre and isset($contenu[$champ_titre])) {
 				$doc['title'] = supprimer_numero($contenu['titre']);
-			}
-			elseif (isset($contenu['nom'])) {
-				$doc['title'] = supprimer_numero($contenu['nom']);
-			}
-			elseif (isset($contenu['nom_site'])) {
-				$doc['title'] = supprimer_numero($contenu['nom_site']);
 			}
 			else {
 				$doc['title'] = '';
@@ -159,6 +171,9 @@ class SpipDocuments implements SourceInterface {
 			$descriptif = isset($contenu['descriptif']) ? $contenu['descriptif'] : ''; // on s'assure que le descriptif soit bien une chaine
 			if ($fonction_introduction = chercher_filtre('introduction')) {
 				$doc['summary'] = $fonction_introduction($descriptif, $doc['content'], 400, '');
+			}
+			else {
+				$doc['summary'] = couper($doc['content'], 400);
 			}
 			
 			// Pour la date
@@ -250,7 +265,7 @@ class SpipDocuments implements SourceInterface {
 				}
 				
 				// On ajoute la branche dans le fulltext
-				$doc['content'] .= "\n\n".join(' | ', $doc['properties']['parents']['titres']);
+				$doc['content'] .= "\n\n".join(' / ', $doc['properties']['parents']['titres']);
 			}
 			
 			// On cherche les jointures pour cet objet
@@ -269,10 +284,26 @@ class SpipDocuments implements SourceInterface {
 			}
 			
 			// Transformation UTF-8
-			include_spip('inc/charsets');
+			if (!function_exists('html2unicode')) {
+				include_spip('inc/charsets');
+			}
 			$doc['title'] = unicode_to_utf_8(html2unicode($doc['title']));
 			$doc['content'] = unicode_to_utf_8(html2unicode($doc['content']));
 			$doc['summary'] = unicode_to_utf_8(html2unicode($doc['summary']));
+
+			if (!function_exists('nettoyer_raccourcis_typo')) {
+				include_spip('inc/lien');
+			}
+			if (strpos($doc['content'],'[') !== false
+			  or strpos($doc['content'],'{') !== false
+			  or strpos($doc['content'],'|') !== false) {
+				$doc['content'] = nettoyer_raccourcis_typo($doc['content']);
+			}
+			if (strpos($doc['summary'],'[') !== false
+			  or strpos($doc['summary'],'{') !== false
+			  or strpos($doc['summary'],'|') !== false) {
+				$doc['summary'] = nettoyer_raccourcis_typo($doc['summary']);
+			}
 		}
 		
 		// On crée le Document avec les infos
