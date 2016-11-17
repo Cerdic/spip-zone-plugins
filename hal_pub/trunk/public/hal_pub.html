@@ -31,11 +31,11 @@
 	]
 ]
 
+[(#REM)<!-- etape 3: quel tri ? -->]
+#SET{url_depot,#GET{url_depot}|concat{&sort=producedDate_tdate%20desc}
 
-
-[(#REM))<!-- etape 3: ajout des champs que l'on souhaite lister -->]
+[(#REM))<!-- etape 4: ajout des champs que l'on souhaite lister -->]
 [(#SET{url_depot,#GET{url_depot}|hal_fields})]
-
 
 
 <!-- Requete generee:  #GET{url_depot} -->
