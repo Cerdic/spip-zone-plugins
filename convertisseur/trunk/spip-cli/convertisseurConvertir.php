@@ -163,7 +163,7 @@ class Convert extends Command {
 						"fichier_dest" => $dest . "/" . $collection . $numero . $article
 					);
 					
-					// traitements persos sur $c avant d'écrire le fichier converti ?
+					// traitements persos sur $c avant d'écrire le fichier converti
 					if(find_in_path('convertisseur_perso.php'))
 						include_spip("convertisseur_perso");
 					if (function_exists('nettoyer_conversion_cli')){

@@ -56,9 +56,9 @@ function convertir_xml_de($u) {
 
 	$u = extraire_balise($u,'red');
 	//$u = str_replace("\n",'',$u);
-
-	if( ($ti = trim(textebrut(extraire_balise($u,'Titel')))) != $m['titre'])
-		$m['alertes'][] = "Embrouille sur le titre : $ti >> " . $m['titre'] ;
+	$ti = trim(textebrut(extraire_balise($u,'Titel'))) ;
+	if( ($ti != trim($m['titre'])))
+		$m['alertes'][] = "Embrouille sur le titre : >$ti< != > " . trim($m['titre']) . "<";
  
  	// attention il peut y avoir un encadré plus bas avec un second titre.
  	// donc on vire le premier titre mais pas les suivants.
@@ -95,11 +95,6 @@ function convertir_xml_de($u) {
 	// <Fett>Fußnoten: <br/></Fett>
 	//	<Fett>Fußnoten:<br/></Fett>
 	$u = preg_replace('/<Fett>\s*Fu(ß|ss)note(n)*\s*:*\s*(<br\s*\/>)*\s*<\/Fett>(\s*<br\s*\/>)*/Us','',$u);
-
-	// menage
-	$u = preg_replace('~<Fussnote>\s+</Fussnote>~Uums','',$u);
-
-
 	// liens
 	// <URL href="http://www.un.org/terrorism">www.un.org/terrorism</URL>
 	
@@ -145,6 +140,8 @@ function convertir_xml_de($u) {
 	//<Korrespondent>Von IGNACIO RAMONET</Korrespondent> 2003_01_17/art005.xml
 	$u = preg_replace('%<Korrespondent>[^<]*</Korrespondent>%Us','',$u);
 
+	// Traducteur // signature // crédit 1)
+
 	// <Kursiv>	dt. Bodo Schulze</Kursiv>
 	// <FettKursiv>Aus dem Englischen von Niels Kadritzke <br/></FettKursiv>
 	if(preg_match("%<Kursiv>(\s*dt\..*)</Kursiv>%Ums",$u,$matches)
@@ -156,18 +153,38 @@ function convertir_xml_de($u) {
 		$m['logs'][] = "Suppression de (trad): " . entites_html($matches[0]) ;
 		
 		//echo(htmlspecialchars($matches[0]));
-		
+		//echo(htmlspecialchars($u));
+
 		// parenthese pour chercher une bio en fin de notes apres le traducteur
 		// voir aussi plus bas
 		if(preg_match("~" . preg_quote($matches[0]) . "(.{2}.+)</Fussnote>~Uuims", $u , $b)){
 			if($b[1]){
+				//echo(htmlspecialchars($b[1]));
+				// signature avec un crédit en prime ?
+				if(preg_match("/©.*/", $b[1], $cre)){
+					//echo(htmlspecialchars($cre[0]));
+					$credit = $cre[0] ;
+					$b[1] = str_replace($credit, "", $b[1]);
+					$u = str_replace($credit,"",$u);
+				}
 				$m['signature'] .= $b[1] ;
-				$u = str_replace($b[1],'',$u);
-				$flag_signature = false ;				
+				$u = str_replace($b[1],"",$u);
+				$flag_signature = false ;
 			}
-		}		
-		$u = str_replace($matches[0],'',$u);
+		}
+		
+		// On vire le traducteur, et on remet le crédit le cas échéant pour la suite
+		if($credit)
+			$repl = trim($credit) ;
+		else
+			$repl = "";
+		$u = str_replace($matches[0],$repl,$u);
+		//echo(htmlspecialchars($u));
 	}
+
+		//echo(htmlspecialchars($u));
+
+
 	
 	// pas de <br /> dans un <brot> 1996_05_10/art299.xml
 	if(preg_match_all("%<Brot>(.*)</Brot>%Us",$u,$matches)){
@@ -181,7 +198,7 @@ function convertir_xml_de($u) {
 	// il peut y avoir plusieurs <Fussnote>
 	// <Fussnote>(.*)</Fussnote>
 	// <Fussnote>* Journalist, Jerusalem.</Fussnote>
-	
+	// <Fussnote>© Le Monde diplomatique, Berlin</Fussnote>
 	//<Fussnote>
 //José López Mazz ist Professor für Anthropologie an der Universidad de la República, Montevideo.</Fussnote>
 
@@ -190,7 +207,7 @@ function convertir_xml_de($u) {
 
 	if(preg_match_all("%<Fussnote>(.*)</Fussnote>%Us",$u,$matches)){
 		
-		//var_dump($matches[1]);
+		//var_dump("<textarea>", $u, "</textarea>", "<pre>", $matches, "</pre>");
 		
 		for($i=0 ; $i < sizeof($matches[1]) ; $i++){
 			// si pas de balise note et *
@@ -199,13 +216,21 @@ function convertir_xml_de($u) {
 				 //AND preg_match("%^\s*\*%Uims",$matches[1][$i]) // 1995_09_15/art299.xml
 				){
 				//var_dump(htmlspecialchars($u),$matches[1][$i]);
-				$note_signature = trim(preg_replace('/^\s*\*\s*/','',$matches[1][$i])) ;
-				if($note_signature !== ""){
-					$m['signature'] .= $note_signature . "\n\n" ;
-					$u = str_replace($matches[0][$i],'',$u);
-					$flag_signature = false ;	
-				}	
-			}			
+				
+				// Crédit ou signature ?
+				if(preg_match("/©.*/", $matches[1][$i])){
+					$credit = $matches[1][$i] ;
+					// On met le crédit en note non numérotée
+					$u = str_replace($matches[0][$i],"\n[[<> $credit]]\n",$u);
+				}else{
+					$note_signature = trim(preg_replace('/^\s*\*\s*/','',$matches[1][$i])) ;
+					if($note_signature !== ""){
+						$m['signature'] .= $note_signature . "\n\n" ;
+						$u = str_replace($matches[0][$i],'',$u);
+						$flag_signature = false ;	
+					}
+				}
+			}
 		}	
 	}
 
@@ -271,7 +296,7 @@ function convertir_xml_de($u) {
 
 	// Chapo <Initial>
 	if(preg_match("%<Initial>(.*)</Initial>%Us",$u,$matches)){
-		$m['chapo'] .= trim(textebrut($matches[1])) ;
+		$m['chapo'] .= trim($matches[1]) ;
 		$u = str_replace($matches[0],'',$u);
 		$m['logs'][] = "Suppression de (chapo): " . entites_html($matches[0]) ;		
 			
@@ -292,7 +317,7 @@ function convertir_xml_de($u) {
 	// <Zitat>
 	$u = str_replace("<Zitat>","<quote>",$u);
 	$u = str_replace("</Zitat>","</quote>",$u);
- 		
+
 	// images des pages.
 	$images_balises = extraire_balises($u,"PdfFile");
 	foreach($images_balises as $imageb){
@@ -314,14 +339,13 @@ function convertir_xml_de($u) {
 			$m[$t] = str_replace("<Fett>","{{",$m[$t]);
 			$m[$t] = str_replace("</Fett>","}}",$m[$t]);
 			
+			//  Pas d'indice ou exposant
+			$m[$t] = preg_replace(',</?Tief>,U',"",$m[$t]); // sinon on mettrait <sub> et <exp>
+			
 			// menage
 			// notes de bas de page :
 			$m[$t] = preg_replace(',</?Fussnote>,U',"\n\n",$m[$t]); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
-			
-
 	}
-	
-
 	return $m ;
 }
 
