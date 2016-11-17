@@ -26,6 +26,10 @@ index spip {
 	dict = keywords
 
 	morphology = stem_en, libstemmer_fr
+
+	<?php
+		echo _CHARSET_INDEXATION_FR ;
+	?>
 }
 
 ```
