@@ -56,6 +56,7 @@ function action_unsubscribe_mailsubscriber_dist($email = null, $identifiant = nu
 			'url_site_spip' => $GLOBALS['meta']['adresse_site']
 		);
 		if ($double_optin) {
+			include_spip('inc/filtres');
 			if ($titre_liste) {
 				$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_liste_1', $env);
 			} else {
