@@ -27,7 +27,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		
 		foreach ($mots as $mot) {
 			$id_mot = intval($mot['id_mot']);
-			$infos['properties']['mots']['titres'][$id_mot] = supprimer_numero($mot['titre']);
+			$infos['properties']['mots']['titres'][$id_mot] = trim(supprimer_numero($mot['titre']));
 			$infos['properties']['mots']['ids'][] = $id_mot;
 			
 			// On s'occupe de la hiérarchie de chaque mot
@@ -47,7 +47,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 				'spip_groupes_mots',
 				'id_groupe = '.$id_parent
 			)){
-				$titre_actuel = supprimer_numero($f['titre']);
+				$titre_actuel = trim(supprimer_numero($f['titre']));
 				
 				// On ajoute ce parent suivant au début du tableau
 				$titres = array_merge(array($id_parent=>$titre_actuel), $titres);
@@ -74,7 +74,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		$infos['properties']['tags'] = array_values($infos['properties']['mots']['titres']);
 		
 		// On ajoute le nom des mots en fulltext à la fin
-		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['mots']['titres']);
+		$infos['content'] .= "\n\n".join(' / ', $infos['properties']['mots']['titres']);
 	}
 	return $infos;
 }

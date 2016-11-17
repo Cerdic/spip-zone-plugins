@@ -17,7 +17,7 @@ function indexer_jointure_geo_communes_dist($objet, $id_objet, $infos) {
 		}
 
 		// On ajoute le nom des geo_communes en fulltext à la fin
-		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['geo_communes']['noms']);
+		$infos['content'] .= "\n\n".join(' / ', $infos['properties']['geo_communes']['noms']);
 	}
 	
 	return $infos;

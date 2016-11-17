@@ -12,7 +12,7 @@ function indexer_jointure_auteurs_dist($objet, $id_objet, $infos) {
 	)) {
 		foreach ($auteurs as $auteur) {
 			$id_auteur = intval($auteur['id_auteur']);
-			$infos['properties']['auteurs']['noms'][$id_auteur] = $auteur['nom'];
+			$infos['properties']['auteurs']['noms'][$id_auteur] = trim(supprimer_numero($auteur['nom']));
 			$infos['properties']['auteurs']['ids'][] = $id_auteur;
 			
 			// Peut-être indexer l'email de chaque auteur⋅e ?
@@ -24,7 +24,7 @@ function indexer_jointure_auteurs_dist($objet, $id_objet, $infos) {
 		$infos['properties']['authors'] = array_values($infos['properties']['auteurs']['noms']);
 
 		// On ajoute le nom des auteurs en fulltext à la fin
-		$infos['content'] .= "\n\n".join(' | ', $infos['properties']['auteurs']['noms']);
+		$infos['content'] .= "\n\n".join(', ', $infos['properties']['auteurs']['noms']);
 	}
 	
 	return $infos;

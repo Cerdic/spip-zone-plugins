@@ -29,7 +29,7 @@ function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
 				'spip_rubriques',
 				'id_rubrique = '.$id_rubrique_enfant
 			)){
-				$titre_actuel = supprimer_numero($f['titre']);
+				$titre_actuel = trim(supprimer_numero($f['titre']));
 				$id_parent = intval($f['id_parent']);
 				
 				// On ajoute ce parent suivant au début du tableau
@@ -47,7 +47,7 @@ function indexer_jointure_rubriques_dist($objet, $id_objet, $infos) {
 			}
 			
 			// On ajoute la branche dans le fulltext
-			$infos['content'] .= "\n\n".join(' | ', $titres_de_cette_branche);
+			$infos['content'] .= "\n\n".join(' / ', $titres_de_cette_branche);
 			
 			// On ajoute cette branche dans les infos
 			$infos['properties']['rubriques']['ids'] = array_values(array_unique(array_merge($infos['properties']['rubriques']['ids'], $ids_de_cette_branche)));
