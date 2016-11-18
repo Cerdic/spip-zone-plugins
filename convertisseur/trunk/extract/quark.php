@@ -174,5 +174,3 @@ function extracteur_quark($fichier, &$charset) {
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
 $GLOBALS['extracteur']['quark'] = 'extracteur_quark';
-
-?>

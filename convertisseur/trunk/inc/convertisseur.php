@@ -670,7 +670,9 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 	}
 	
 	$c['texte'] = preg_replace("/\n\n+/m", "\n\n", $c['texte']);
-	$c['id_source'] = $id_source ;
+	
+	if(in_array("id_source", $champs_article))
+		$c['id_source'] = $id_source ;
 
 	$r = array();
 	foreach ($c as $var => $val)
