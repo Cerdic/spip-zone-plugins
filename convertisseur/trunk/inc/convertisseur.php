@@ -663,7 +663,7 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 				$c['texte'] = "@@" . strtoupper($d[1]) . "\n" . $d[2] . "\n\n" . $c['texte'] ;
 				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
 			}else{
-				$c['metadonnees'] = $d[0] . "\n\n" . $c['metadonnees'] ;
+				$c['metadonnees'] = $d[0] . "\n" . $c['metadonnees'] ;
 				$c['texte'] = substr_replace($c['texte'], '', strpos($c['texte'], $d[0]), strlen($d[0]));
 			}
 		}
