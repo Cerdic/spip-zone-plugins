@@ -10,7 +10,7 @@
 	<div class="liste">
 	<h4><:commandes:texte_statut_transaction_commande:></h4>
 	<ul class="liste-items">
-<BOUCLE_transaction(transactions){id_commande}{tout}{si #VAL{bank}|test_plugin_actif}>
+<BOUCLE_transaction(TRANSACTIONS?){id_commande}{tout}>
 	<li class="item">
 		[(#STATUT|match{echec|ok|rembourse}|et{#MESSAGE|trim|strlen}|?{[<abbr title="[(#MESSAGE|attribut_html)[ - (#ERREUR|attribut_html)]]">(#STATUT)</abbr>],En #STATUT})][(#STATUT|in_array{#LISTE{commande,attente}}|et{#AUTORISER{regler,transaction,#ID_TRANSACTION}}) : <a href="[(#URL_ECRIRE{payer,id_transaction=#ID_TRANSACTION}|parametre_url{transaction_hash,#TRANSACTION_HASH})]"><:bank:payer:></a>]
 	</li>
