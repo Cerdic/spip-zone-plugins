@@ -2,7 +2,26 @@
 <div class='infos'>
 <div class='numero'><:commandes:info_numero:><p>#ID_COMMANDE</p></div>
 
-[(#FORMULAIRE_INSTITUER_OBJET{commande,#ID_COMMANDE})]
+[(#REM) si le plugin Bank est activé, le statut d'une commande ne doit évoluer qu'en fonction des infos sur les transactions.
+	-> ne pas afficher le formulaire statut de la commande du plugin Commandes
+	-> activer l'info sur le statut de la transaction liée à cette commande, avec lien vers réglement si nécessaire.
+]
+<B_transaction>
+	<div class="liste">
+	<h4><:commandes:texte_statut_transaction_commande:></h4>
+	<ul class="liste-items">
+<BOUCLE_transaction(transactions){id_commande}{tout}{si #VAL{bank}|test_plugin_actif}>
+	<li class="item">
+		[(#STATUT|match{echec|ok|rembourse}|et{#MESSAGE|trim|strlen}|?{[<abbr title="[(#MESSAGE|attribut_html)[ - (#ERREUR|attribut_html)]]">(#STATUT)</abbr>],En #STATUT})][(#STATUT|in_array{#LISTE{commande,attente}}|et{#AUTORISER{regler,transaction,#ID_TRANSACTION}}) : <a href="[(#URL_ECRIRE{payer,id_transaction=#ID_TRANSACTION}|parametre_url{transaction_hash,#TRANSACTION_HASH})]"><:bank:payer:></a>]
+	</li>
+</BOUCLE_transaction>
+</ul>
+</div>
+</B_transaction>
+
+[(#VAL{bank}|test_plugin_actif|non)
+	[(#FORMULAIRE_INSTITUER_OBJET{commande,#ID_COMMANDE})]
+]
 
 [(#REM) Notifications lors des changements de statut
 ]<div class='notifications'>
