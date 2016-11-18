@@ -1,7 +1,7 @@
 <paquet
 	prefix="dictionnaires"
 	categorie="divers"
-	version="1.1.4"
+	version="1.1.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/dictionnaire-32.png"
@@ -26,6 +26,8 @@
 	<pipeline nom="post_propre" inclure="dictionnaires_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.20.0;[" />
+
+	<utilise nom="inserer_modeles" compatibilite="[1.2.11;[" />
 
 	<menu nom="dictionnaires" titre="dictionnaire:titre_dictionnaires" parent="bando_edition" icone="images/dictionnaire-16.png" action="dictionnaires" />
 	<menu nom="definition_creer" titre="definition:titre_definition_creer" parent="outils_rapides" icone="images/definition-add-16.png" action="definition_edit" parametres="new=oui&amp;id_dictionnaire=@id_dictionnaire@" />
