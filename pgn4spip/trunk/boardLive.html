@@ -261,7 +261,7 @@ if ((pieceFontRoot = gup("pieceFontRoot")) !== "") {
   if (pieceFontRoot.charAt(pieceFontRoot.length - 1) != "/") { pieceFontRoot += "/"; }
 }
 else
-	pieceFontRoot = "('find_in_path(lib/pgn4web/)";
+	pieceFontRoot = "(find_in_path('lib/pgn4web/'))";
 
 SetImagePath("" + pieceFontRoot + pieceFont + "/" + pieceSize);
 if (pieceFont == "svgchess") {

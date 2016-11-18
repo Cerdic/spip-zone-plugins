@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // in older versions of pgn4spip this 2 lines below where in pgn4spip_options.php, now deleted.
-define('PATH_Conf', 'find_in_path(pgn4spip_conf.php)');
+define('PATH_Conf', find_in_path('pgn4spip_conf.php'));
 if (!function_exists('ReadCurrentConfiguration')) require 'pgn4spip_conf.php';
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
