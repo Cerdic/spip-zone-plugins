@@ -130,7 +130,7 @@ class fichiersImporter extends Command {
 					$annee = $m[1] ;
 					
 					// chopper l'id_parent dans le fichier ?
-					include_spip("inc/flock");										
+					include_spip("inc/flock");
 					lire_fichier($f, $texte);
 					
 					// menage
