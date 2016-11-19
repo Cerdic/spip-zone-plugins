@@ -70,8 +70,12 @@ function calculer_infos($lieu, $type, $service) {
 	return $info;
 }
 
-// Filtres du plugin utilisables dans les squelettes et modeles
 /**
+ *
+ * @package    RAINETTE/AFFICHAGE
+ * @api
+ * @filtre
+ *
  * @param        $meteo
  * @param string $taille
  * @param string $chemin
@@ -127,6 +131,11 @@ function rainette_afficher_icone($meteo, $taille = 'petit', $chemin = '', $exten
 }
 
 /**
+ *
+ * @package    RAINETTE/AFFICHAGE
+ * @api
+ * @filtre
+ *
  * @param $meteo
  *
  * @return string
@@ -147,15 +156,19 @@ function rainette_afficher_resume($meteo) {
 }
 
 /**
- * Conversion une indication de direction en une chaine traduite pour
+ * Conversion d'une indication de direction en une chaine traduite pour
  * l'affichage dans les modèles.
  *
- * @param    mixed $direction
+ * @package    RAINETTE/AFFICHAGE
+ * @api
+ * @filtre
+ *
+ * @param mixed $direction
  *        La direction soit sous forme d'une valeur numérique entre 0 et 360, soit sous forme
  *        d'une chaine. Certains services utilisent la chaine "V" pour indiquer une direction
  *        variable.
  *
- * @return    string
+ * @return string
  *        La chaine traduite indiquant la direction du vent.
  */
 function rainette_afficher_direction($direction) {
@@ -171,10 +184,25 @@ function rainette_afficher_direction($direction) {
 }
 
 /**
- * @param        $tendance_en
+ * Affiche la tendance de pression selon la méthode demandée (texte en clair, symbole de flèche ou
+ * icone).
+ *
+ * @package    RAINETTE/AFFICHAGE
+ * @api
+ * @filtre
+ *
+ * @param string $tendance_en
+ * 		Texte anglais représentant la tendance et récupérée par le service.
  * @param string $methode
+ * 		Methode d'affichage de la tendancequi prend les valeurs:
+ * 		- `texte`   : pour afficher un texte en clair décrivant la tendance (méthode par défaut).
+ * 		- `symbole` : pour afficher un symbole de flèche (1 caractère) décrivant la tendance.
+ * 		- `icone`   : pour afficher un icone spécifique décrivant la tendance avec une infobulle
+ *                    fournissant le texte en clair.
  * @param string $chemin
+ * 		Chemin pour rechercher les icones.
  * @param string $extension
+ * 		Extension du fichier de l'icone.
  *
  * @return string
  */
@@ -182,9 +210,11 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = 
 
 	$tendance = '';
 
-	if (($tendance_en)
-		and ($texte = _T("rainette:tendance_texte_$tendance_en", array(), array('force' => false)))
-	) {
+	// Certains textes sont composés de plusieurs mots comme "falling rapidly".
+	// On en fait un texte unique en remplaçant les espaces par des underscores.
+	$tendance_en = str_replace(' ', '_', trim($tendance_en));
+
+	if (($tendance_en) and ($texte = _T("rainette:tendance_texte_$tendance_en", array(), array('force' => false)))) {
 		if ($methode == 'texte') {
 			$tendance = $texte;
 		} elseif ($methode == 'symbole') {
@@ -201,7 +231,7 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = 
 			}
 
 			list($largeur, $hauteur) = @getimagesize($source);
-			$tendance = "<img src=\"$source\" alt=\"$texte\" title=\"$texte\" width=\"$largeur\" height=\"$hauteur\" />";
+			$tendance = "<img src=\"${source}\" alt=\"${texte}\" title=\"${texte}\" width=\"${largeur}\" height=\"${hauteur}\" />";
 		}
 	}
 
@@ -213,6 +243,7 @@ function rainette_afficher_tendance($tendance_en, $methode = 'texte', $chemin = 
  *
  * @package    RAINETTE/AFFICHAGE
  * @api
+ * @filtre
  *
  * @param int/float $valeur
  * 		La valeur à afficher

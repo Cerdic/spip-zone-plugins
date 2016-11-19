@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 if (!defined('_RAINETTE_DEBUG')) {
 	define('_RAINETTE_DEBUG', false);
 }
+if (!defined('_RAINETTE_DEBUG_CLES_PREVISIONS')) {
+	define('_RAINETTE_DEBUG_CLES_PREVISIONS', '1');
+}
 
 
 /**
@@ -18,10 +21,11 @@ if (!defined('_RAINETTE_DEBUG')) {
  * @return string
  */
 function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'weather') {
+	static $cles_previsions = array();
 	$debug = '';
 
 	// Recuperation du tableau des conditions courantes
-	if (_RAINETTE_DEBUG) {
+	if (_RAINETTE_DEBUG and function_exists('bel_env')) {
 		// Si on est en mode prévisions, on impose la périodicité à la valeur par défaut pour le service
 		$periodicite = 0;
 		if ($mode == 'previsions') {
@@ -40,13 +44,17 @@ function rainette_dbg_afficher_cache($lieu, $mode = 'previsions', $service = 'we
 			// Pour le mode prévisions, on supprime tous les jours postérieur au lendemain pour éviter d'avoir un
 			// affichage trop conséquent.
 			if ($mode == 'previsions') {
+				// Récupérer les index de prévisions à afficher
+				if (!$cles_previsions) {
+					$cles_previsions = explode(',', _RAINETTE_DEBUG_CLES_PREVISIONS);
+				}
 				foreach ($tableau['donnees'] as $_jour => $_valeurs) {
-					if ($_jour != 1) {
+					if (!in_array($_jour, $cles_previsions)) {
 						unset($tableau['donnees'][$_jour]);
 					}
 				}
 			}
-			$debug = dbg_afficher_tableau(serialize($tableau));
+			$debug = bel_env(serialize($tableau), true);
 		}
 	}
 
@@ -172,45 +180,4 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, 
 	$texte .= "<br /><em>${type_php}</em>";
 
 	return $texte;
-}
-
-/**
- * Une fonction récursive pour joliment afficher #ENV, #GET, #SESSION...
- *		en squelette : [(#ENV|bel_env)], [(#GET|bel_env)], [(#SESSION|bel_env)]
- *		ou encore [(#ARRAY{0,1, a,#SESSION, 1,#ARRAY{x,y}}|bel_env)]
- *
- * @param string|array $env
- *		si une string est passée elle doit être le serialize d'un array
- *
- * @return string
- *		une chaîne html affichant une <table>
-**/
-function dbg_afficher_tableau($env) {
-//	$env = str_replace(array('&quot;', '&#039;'), array('"', '\''), $env);
-	if (is_array($env_tab = @unserialize($env))) {
-		$env = $env_tab;
-	}
-	if (!is_array($env)) {
-		return '';
-	}
-	$style = " style='border:1px solid #ddd;'";
-	$res = "<table style='border-collapse:collapse;'>\n";
-	foreach ($env as $nom => $val) {
-		if (is_array($val) || is_array(@unserialize($val))) {
-			$val = dbg_afficher_tableau($val);
-		}
-		elseif ($val === null) {
-			$val = '<i>null</i>';
-		}
-		elseif ($val === '') {
-			$val = "<i>''</i>";
-		}
-		else {
-			$val = entites_html($val);
-		}
-		$res .= "<tr>\n<td$style><strong>". entites_html($nom).
-				"&nbsp;:&nbsp;</strong></td><td$style>" .$val. "</td>\n</tr>\n";
-	}
-	$res .= "</table>";
-	return $res;
 }

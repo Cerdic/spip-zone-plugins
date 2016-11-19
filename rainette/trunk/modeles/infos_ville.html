@@ -1,14 +1,17 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
-	Il est appelee par le filtre rainette_coasser.
-	Il n'est pas besoin d'utiliser des valeurs par défaut pour la balise #ENV car cela est géré en amont par le filtre.
+	Il est appelee par le modèle rainette_infos.
+
+	Pour les valeurs devant être afficher avec une unité (filtre |rainette_afficher_unite) il est nécessaire
+	d'utiliser la fonction table_valeur avec l'option de conservation de la valeur null sur l'index le plus
+	profond.
  -->
 ]
 <div class="rainette_infos">
 	<h2 class="ville">[(#ENV{donnees/ville})[, (#ENV{donnees/pays})]]</h2>
 	<ul class="coordonnees">
-		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/longitude}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
-		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees/latitude}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
+		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{longitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
+		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{latitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
 		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/region})</li>]
 	</ul>
 

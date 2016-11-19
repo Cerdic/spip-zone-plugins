@@ -1,7 +1,12 @@
 [(#REM)<!-- 
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions 24h d'une ville.
-	Il est appelee par le filtre rainette_coasser.
-	Les données heure sont toujours rangées dans l'index horaire 0
+	Il est appelee par le modèle rainette_previsions.
+	Les données heure sont toujours rangées dans l'index horaire 0.
+
+	Pour les valeurs devant être afficher avec une unité (filtre |rainette_afficher_unite) il est nécessaire
+	d'utiliser la fonction table_valeur avec l'option de conservation de la valeur null sur l'index le plus
+	profond.
+
  -->]
 #SET{index_heure, 0}
 #SET{periode, 0}
@@ -14,30 +19,31 @@
 		<div class="resume">[(#VALEUR{heure/#GET{index_heure}/resume}|rainette_afficher_resume)]</div>
 		<div class="t_reelle">
 			[[(#GET{periode}|=={0}|?{<:rainette:temperature_max|ucfirst:>, <:rainette:nuit|ucfirst:>})]
-			&nbsp;(#VALEUR{temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})<br/>]
+			&nbsp;(#VALEUR|table_valeur{temperature_max, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})<br/>]
 			[<:rainette:temperature_min|ucfirst:>
-			&nbsp;(#VALEUR{temperature_min}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})<br/>]
+			&nbsp;(#VALEUR|table_valeur{temperature_min, '', #EVAL{true}}|rainette_afficher_unite{temperature, -1, #ENV{extras/service}})<br/>]
 		</div>
 		<div class="details">
 			<ul>
 				[<li>
 					<span><:rainette:vent|ucfirst:></span><br />
-					(#VALEUR{heure/#GET{index_heure}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{vitesse_vent, '', #EVAL{true}}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})
 				</li>]
+				[(#REM) <!-- On affiche les précipitations si elle existe sinon le risque de précipitations à minima -->]
 				#SET{pluie, non}
 				[<li>
 					<span><:rainette:precipitation|ucfirst:></span><br />
-					(#VALEUR{heure/#GET{index_heure}/precipitation}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})
+				(#VALEUR{heure/#GET{index_heure}}|table_valeur{precipitation, '', #EVAL{true}}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})
 				</li>
 				#SET{pluie, oui}]
 				[(#GET{pluie}|non)
 				[<li>
 					<span><:rainette:risque_precipitation|ucfirst:></span><br />
-					(#VALEUR{heure/#GET{index_heure}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{risque_precipitation, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
 				</li>]]
 				[<li>
 					<span><:rainette:humidite|ucfirst:></span><br />
-					(#VALEUR{heure/#GET{index_heure}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{humidite, '', #EVAL{true}}|rainette_afficher_unite{pourcentage, -1, #ENV{extras/service}})
 				</li>]
 			</ul>
 		</div>
