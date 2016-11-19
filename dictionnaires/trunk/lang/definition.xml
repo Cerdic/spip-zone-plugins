@@ -1,9 +1,9 @@
 <traduction module="definition" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/dictionnaires/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/definition?lang_cible=en" total="25" traduits="21" relire="0" modifs="0" nouveaux="4" pourcent="84.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/definition?lang_cible=en" total="26" traduits="21" relire="0" modifs="0" nouveaux="5" pourcent="80.77">
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 	</langue>
-	<langue code="eu" url="http://trad.spip.net/tradlang_module/definition?lang_cible=eu" total="25" traduits="18" relire="0" modifs="2" nouveaux="5" pourcent="72.00">
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/definition?lang_cible=eu" total="26" traduits="18" relire="0" modifs="2" nouveaux="6" pourcent="69.23">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/definition?lang_cible=fr" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/definition?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
