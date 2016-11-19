@@ -1,7 +1,9 @@
 /* Styles generaux  */
 .rainette_titre {margin: 0.5em 0 0.5em 1em; 	padding:0 0 0 0;}
 .rainette_credits {margin: 0.5em 0 0; text-align: center; clear:both; font-size: 10px;}
-.rainette_credits.infos {float: left; margin-left: 0.85em; margin-bottom: 0.5em;}
+.rainette_credits a {padding: 10px 5px;}
+.rainette_credits.infos {margin-left: 0.85em; margin-bottom: 0.5em;}
+.rainette_credits.infos a {padding-left: 0; padding-right: 0; text-align: left;}
 .rainette_credits.condtr {}
 .rainette_credits.prev24h {margin-bottom: 0.5em;}
 .rainette_credits.prev2x12h {}

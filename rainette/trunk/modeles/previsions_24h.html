@@ -8,9 +8,12 @@
 	profond.
 
  -->]
-#SET{index_heure, 0}
-#SET{periode, 0}
 <BOUCLE_previsions_24h(DATA) {source table, #ENV{donnees}}{par cle}{#ENV{premier_jour}, #ENV{nombre_jours}}>
+#SET{index_heure, 0}
+[(#ENV{extras/service}|=={weather}|et{#CLE|=={0}}|et{#VALEUR{heure/#GET{index_heure}/icone}|=={''}}|oui)
+	#SET{index_heure, 1}
+]
+#SET{periode, #VALEUR{heure/#GET{index_heure}/periode}}
 <div class="rainette_previsions_24h">
 	<div class="jour">[(#VALEUR{date}|nom_jour|ucfirst)]</div>
 	<div class="date">[(#VALEUR{date}|affdate_jourcourt)]</div>

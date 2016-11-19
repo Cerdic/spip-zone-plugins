@@ -253,7 +253,7 @@ function etat2resume_weather(&$tableau, $configuration) {
 	if ($tableau['code_meteo']) {
 		// A priori la période de nuit commence à 14h et se termine à 5h.
 		// Cette donnée n'est pas utile pour les conditions de ce service, on la positionne à null : TODO
-		$tableau['periode'] = null;
+		$tableau['periode'] = 0;
 
 		$tableau['icone'] = $tableau['code_meteo'];
 		$tableau['resume'] = $tableau['code_meteo'];
