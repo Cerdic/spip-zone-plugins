@@ -123,7 +123,7 @@ function rainette_dbg_comparer_services($mode = 'conditions', $jeu = array()) {
 					} else {
 						$valeur = $tableau_jour[$_donnee];
 						$type_php = gettype($tableau_jour[$_donnee]);
-						$rangement = '';
+						$rangement = isset($_config['rangement']) ? $_config['rangement'] : '';
 					}
 
 					// On construit le tableau de debug

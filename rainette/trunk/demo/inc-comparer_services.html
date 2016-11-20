@@ -29,7 +29,10 @@
 	]
 	[(#COMPTEUR_BOUCLE|=={1}|oui)
 		<tr>
-			<td><strong>#_comparer:CLE</strong></td>
+			<td>
+				<strong>#_comparer:CLE</strong>
+				[<br :><i>(#_comparer:VALEUR|table_valeur{#CLE/rangement})</i>]
+			</td>
 	]
 			<td[ class="(#_comparer:VALEUR|table_valeur{#CLE/erreur})"]>
 				[(#_comparer:CLE|rainette_dbg_afficher_donnee{
