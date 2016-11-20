@@ -163,20 +163,15 @@ function owm_service2configuration($mode) {
  * @return string
  */
 function owm_service2cache($lieu, $mode, $periodicite, $configuration) {
-	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dir = sous_repertoire($dir, 'owm');
 
 	// Identification de la langue du resume.
 	$code_langue = ($configuration['condition'] == 'owm')
 		? langue2code_owm($GLOBALS['spip_lang'])
 		: $configuration['langue_service'];
 
-	$fichier_cache = $dir
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', trim($lieu))
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . '_' . strtolower($code_langue)
-					 . '.txt';
+	// Construction du chemin du fichier cache
+	include_spip('inc/rainette_normaliser');
+	$fichier_cache = normaliser_cache('owm', $lieu, $mode, $periodicite, $code_langue);
 
 	return $fichier_cache;
 }
@@ -204,9 +199,21 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 		? langue2code_owm($GLOBALS['spip_lang'])
 		: $configuration['langue_service'];
 
+	// On normalise le lieu et on récupère son format.
+	// Le service accepte la format ville,pays et le format latitude,longitude
+	include_spip('inc/rainette_normaliser');
+	list($lieu_normalise, $format_lieu) = normaliser_lieu($lieu);
+	if ($format_lieu == 'latitude_longitude') {
+		list($latitude, $longitude) = explode(',', $lieu_normalise);
+		$query = "lat=${latitude}&lon=${longitude}";
+	} else {
+		// Format ville,pays
+		$query = "q=${lieu_normalise}";
+	}
+
 	$url = _RAINETTE_OWM_URL_BASE_REQUETE
 		   . $demande . '?'
-		   . 'q=' . str_replace(' ', '+', trim($lieu))
+		   . $query
 		   . '&mode=' . $configuration['format_flux']
 		   . '&units=' . ($configuration['unite'] == 'm' ? 'metric' : 'imperial')
 		   . ((($mode == 'previsions') and ($periodicite == 24))

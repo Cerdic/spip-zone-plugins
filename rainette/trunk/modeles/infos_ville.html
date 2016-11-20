@@ -10,8 +10,8 @@
 <div class="rainette_infos">
 	<h2 class="ville">[(#ENV{donnees/ville})[, (#ENV{donnees/pays})]]</h2>
 	<ul class="coordonnees">
-		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{longitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
 		<li><:rainette:latitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{latitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
+		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{longitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
 		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/region})</li>]
 	</ul>
 

@@ -222,7 +222,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pression' => 'pression',
 
 	// R
-	'region' => 'region',
+	'region' => 'région',
 	'risque_precipitation' => 'risque de précip.',
 
 	// S

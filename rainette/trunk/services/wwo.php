@@ -171,8 +171,8 @@ function wwo_service2configuration($mode) {
  *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
  * @param int    $periodicite
  *        La périodicité horaire des prévisions :
- *            - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
- *            - `0`, pour les modes `conditions` et `infos`
+ *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ *        - `0`, pour les modes `conditions` et `infos`
  * @param array  $configuration
  *        Configuration complète du service, statique et utilisateur.
  *
@@ -180,20 +180,15 @@ function wwo_service2configuration($mode) {
  *        Chemin complet du fichier cache.
  */
 function wwo_service2cache($lieu, $mode, $periodicite, $configuration) {
-	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dir = sous_repertoire($dir, 'wwo');
 
 	// Identification de la langue du resume.
 	$code_langue = ($configuration['condition'] == 'wwo')
 		? langue2code_wwo($GLOBALS['spip_lang'])
 		: $configuration['langue_service'];
 
-	$fichier_cache = $dir
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', trim($lieu))
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . '_' . strtolower($code_langue)
-					 . '.txt';
+	// Construction du chemin du fichier cache
+	include_spip('inc/rainette_normaliser');
+	$fichier_cache = normaliser_cache('wwo', $lieu, $mode, $periodicite, $code_langue);
 
 	return $fichier_cache;
 }
@@ -207,13 +202,13 @@ function wwo_service2cache($lieu, $mode, $periodicite, $configuration) {
  * @uses langue2code_wwo()
  *
  * @param string $lieu
- *        Lieu pour lequel requiert les données météorologiques.
+ *        Lieu pour lequel on acquiert les données météorologiques.
  * @param string $mode
  *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
  * @param int    $periodicite
  *        La périodicité horaire des prévisions :
- *            - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
- *            - `0`, pour les modes `conditions` et `infos`
+ *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ *        - `0`, pour les modes `conditions` et `infos`
  * @param array  $configuration
  *        Configuration complète du service, statique et utilisateur.
  *
@@ -227,12 +222,18 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 		? langue2code_wwo($GLOBALS['spip_lang'])
 		: $configuration['langue_service'];
 
+	// On normalise le lieu et on récupère son format.
+	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
+	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
+	include_spip('inc/rainette_normaliser');
+	list($lieu_normalise,) = normaliser_lieu($lieu);
+
 	$url = _RAINETTE_WWO_URL_BASE
 		   . '?key=' . $configuration['inscription']
 		   . '&format=' . $configuration['format_flux']
 		   . '&extra=localObsTime'
 		   . '&lang=' . $code_langue
-		   . '&q=' . str_replace(' ', '+', trim($lieu));
+		   . '&q=' . $lieu_normalise;
 
 	if ($mode == 'infos') {
 		$url .= '&includeLocation=yes&cc=no&fx=no';

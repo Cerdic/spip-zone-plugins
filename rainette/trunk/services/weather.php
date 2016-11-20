@@ -28,7 +28,7 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'logo'  => null,
 		'lien'  => 'http://www.weather.com/',
 	),
-	'langue_service' => ''
+	'langue_service' => 'en'
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -151,16 +151,15 @@ function weather_service2configuration($mode) {
  * @return string
  */
 function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
-	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dir = sous_repertoire($dir, 'weather');
 
-	$f = $dir
-		 . strtoupper(trim($lieu))
-		 . '_' . $mode
-		 . ($periodicite ? strval($periodicite) : '')
-		 . '.txt';
+	// Identification de la langue du resume : pas de traduction pour ce service
+	// le résumé est toujours en anglais.
+	$code_langue = $configuration['langue_service'];
 
-	return $f;
+	// Construction du chemin du fichier cache
+	include_spip('inc/rainette_normaliser');
+	$fichier_cache = normaliser_cache('weather', $lieu, $mode, $periodicite, $code_langue);
+	return $fichier_cache;
 }
 
 
@@ -174,8 +173,15 @@ function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
  */
 function weather_service2url($lieu, $mode, $periodicite, $configuration) {
 
+
+	// On normalise le lieu et on récupère son format.
+	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
+	// Néanmoins, la query a toujours la même forme; il n'est donc pas nécessaire de gérer le format.
+	include_spip('inc/rainette_normaliser');
+	list($lieu_normalise,) = normaliser_lieu($lieu);
+
 	$url = _RAINETTE_WEATHER_URL_BASE
-	   . strtoupper(trim($lieu))
+	   . $lieu_normalise
 	   . '?unit='
 	   . $configuration['unite'];
 

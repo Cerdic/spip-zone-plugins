@@ -4,6 +4,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+if (!defined('_RAINETTE_REGEXP_LIEU_IP')) {
+	/**
+	 * Regexp permettant de reconnaitre un lieu au format adresse IP
+	 */
+	define('_RAINETTE_REGEXP_LIEU_IP', '#(?:\d{1,3}\.){3}\d{1,3}#');
+}
+if (!defined('_RAINETTE_REGEXP_LIEU_COORDONNEES')) {
+	/**
+	 * Regexp permettant de reconnaitre un lieu au format coordonnées géographiques latitude,longitude
+	 */
+	define('_RAINETTE_REGEXP_LIEU_COORDONNEES', '#([\-\+]?\d+(?:\.\d+)?)\s*,\s*([\-\+]?\d+(?:\.\d+)?)#');
+}
+if (!defined('_RAINETTE_REGEXP_LIEU_WEATHER_ID')) {
+	/**
+	 * Regexp permettant de reconnaitre un lieu au format Weather ID
+	 */
+	define('_RAINETTE_REGEXP_LIEU_WEATHER_ID', '#[a-zA-Z]{4}\d{4}#i');
+}
+
 $GLOBALS['rainette_config']['infos'] = array(
 	// Lieu
 	'ville'          => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
@@ -276,3 +295,50 @@ function periodicite_compatible($type_modele, $periodicite) {
 	return $compatible;
 }
 
+
+function normaliser_lieu($lieu) {
+
+	$lieu_normalise = trim($lieu);
+
+	if (preg_match(_RAINETTE_REGEXP_LIEU_WEATHER_ID, $lieu_normalise, $match)) {
+		$format_lieu = 'weather_id';
+		$lieu_normalise = $match[0];
+	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_COORDONNEES, $lieu_normalise, $match)) {
+		$format_lieu = 'latitude_longitude';
+		$lieu_normalise = "{$match[1]},{$match[2]}";
+	} elseif (preg_match(_RAINETTE_REGEXP_LIEU_IP, $lieu_normalise, $match)) {
+		$format_lieu = 'adresse_ip';
+		$lieu_normalise = $match[0];
+	} else {
+		$format_lieu = 'ville_pays';
+		// On détermine la ville et éventuellement le pays (ville[,pays])
+		// et on élimine les espaces par un seul +
+		$elements = explode(',', $lieu_normalise);
+		$lieu_normalise = trim($elements[0]) . (!empty($elements[1]) ? ',' . trim($elements[1]) : '');
+		$lieu_normalise = preg_replace('#\s{1,}#', '+', $lieu_normalise);
+	}
+
+	return array($lieu_normalise, $format_lieu);
+}
+
+
+function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
+
+	// Création et/ou détermination du dossier de destination du cache en fonction du service
+	$dossier_cache = sous_repertoire(_DIR_CACHE, 'rainette');
+	$dossier_cache = sous_repertoire($dossier_cache, $service);
+
+	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
+	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
+	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
+	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
+	list($lieu_normalise,) = normaliser_lieu($lieu);
+	$fichier_cache = $dossier_cache
+					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
+					 . '_' . $mode
+					 . ($periodicite ? strval($periodicite) : '')
+					 . ($code_langue ? '_' . strtolower($code_langue) : '')
+					 . '.txt';
+
+	return $fichier_cache;
+}

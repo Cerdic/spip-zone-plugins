@@ -179,20 +179,15 @@ function wunderground_service2configuration($mode) {
  *        Chemin complet du fichier cache.
  */
 function wunderground_service2cache($lieu, $mode, $periodicite, $configuration) {
-	$dir = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dir = sous_repertoire($dir, 'wunderground');
 
 	// Identification de la langue du resume.
 	$code_langue = ($configuration['condition'] == 'wunderground')
 		? langue2code_wunderground($GLOBALS['spip_lang'])
 		: $configuration['langue_service'];
 
-	$fichier_cache = $dir
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', trim($lieu))
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . '_' . strtolower($code_langue)
-					 . '.txt';
+	// Construction du chemin du fichier cache
+	include_spip('inc/rainette_normaliser');
+	$fichier_cache = normaliser_cache('wunderground', $lieu, $mode, $periodicite, $code_langue);
 
 	return $fichier_cache;
 }
@@ -232,18 +227,23 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 			break;
 	}
 
-	// Identification et formatage du lieu.
-	// Le service Wunderground permet d'utiliser les codes de Weather comme FRXX0076 pour Paris.
-	// On détecte donc le format du lieu.
-	$query = str_replace(array(' ', ','), array('', '/'), trim($lieu));
-	if (preg_match('#[a-zA-Z]{4}[0-9]{4}#', $query)) {
-		$query = 'locid:' . strtoupper($query);
-	} else {
-		$index = strpos($query, '/');
-		if ($index !== false) {
-			$ville = substr($query, 0, $index);
-			$pays = substr($query, $index + 1, strlen($query) - $index - 1);
-			$query = $pays . '/' . $ville;
+	// On normalise le lieu et on récupère son format.
+	// Le service accepte la format ville,pays, le format latitude,longitude, le format adresse IP
+	// et le format weather ID (comme FRXX0076 pour Paris).
+	include_spip('inc/rainette_normaliser');
+	list($lieu_normalise, $format_lieu) = normaliser_lieu($lieu);
+	if ($format_lieu == 'weather_id') {
+		$query = "locid:${lieu_normalise}";
+	} elseif ($format_lieu == 'adresse_ip') {
+		$query = "autoip.json?geo_ip=${lieu_normalise}";
+	} elseif ($format_lieu == 'latitude_longitude') {
+		$query = $lieu_normalise;
+	} else { // Format ville,pays
+		$query = $lieu_normalise;
+		$elements = explode(',', $lieu_normalise);
+		if (count($elements) == 2) {
+			// Le pays est précisé, il faut alors le positionner avant la ville et le séparer par un slash.
+			$query = $elements[1] . '/' . $elements[0];
 		}
 	}
 
