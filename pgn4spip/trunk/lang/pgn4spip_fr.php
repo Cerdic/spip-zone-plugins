@@ -57,7 +57,7 @@ Pour inverser l’échiquier, cliquer sur la case <b>e7</b> ou appuyer sur touch
 'standard'			=>	'3D',
 'newline'			=>	'bloc',
 'inline'			=>	'suite',
-'hidden2'			=>	'caché;',
+'hidden2'			=>	'caché',
 'focusborder'		=>	'bord',
 'focussquare'		=>	'case',
 'liverate'			=>	'live (mn)',
