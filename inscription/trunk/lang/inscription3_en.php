@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_suppression_compte_webmestre' => 'The account to delete is the one of a webmaster, you can’t delete it.',
 	'erreur_suppression_comptes_impossible' => 'Deleting account failed',
 	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
+	'explication_admin_notifications' => 'Adnministrators who will receive alerts.',
 	'explication_affordance_form' => 'Label displayed on the forms of identification (#LOGIN_PUBLIC)',
 	'explication_auto_login' => 'If the password is filled in the form, the user will beautomatically connected to the website after validating the account creation form.',
 	'explication_creation' => 'Store in the database the date of the creation of the account.',
@@ -96,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_afficher_utilisateurs' => 'The users',
+	'icone_configurer_inscription3' => 'Configure inscription3',
 	'info_aconfirmer' => 'to be confirmed',
 	'info_cextras_desc' => 'Extras fields already created in the database.',
 	'info_connection' => 'Login information',
@@ -109,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Personal information',
 
 	// L
+	'label_admin_notifications' => 'Who shall receive signup alerts ?',
 	'label_adresse' => 'Address',
 	'label_affordance_form' => 'Settings for identification forms',
 	'label_affordance_form_libre' => 'Text in case of open choice',
@@ -149,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sexe' => 'Gender',
 	'label_societe' => 'Company / Association ...',
 	'label_statut' => 'Status',
+	'label_supprimer_logo' => 'Erase present logo',
 	'label_surnom' => 'Nickname',
 	'label_telephone' => 'Phone:',
 	'label_travail' => 'work',
@@ -184,6 +188,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_auteur_inscription_pass' => 'your account has been correctly activated. You’ve chosen your own password.',
 	'message_auteur_inscription_pass_rappel_login' => 'Reminder: your login is "@login@".',
 	'message_auteur_inscription_pass_titre_user' => '[@nom_site_spip@] Your account has been created',
+	'message_auteur_inscription_valider_contenu_user' => 'Your account has bee approved by a site administrator.',
+	'message_auteur_inscription_valider_titre_user' => '[@nom_site_spip@] Your account has been approved.',
 	'message_auteur_inscription_verifier_contenu_plusieurs' => 'Several accounts are pending validation:',
 	'message_auteur_inscription_verifier_contenu_un' => 'One account is pending validation:',
 	'message_auteur_inscription_verifier_titre_plusieurs' => '[@nom_site_spip@] Some user accounts to validate',
