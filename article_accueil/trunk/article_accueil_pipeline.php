@@ -34,7 +34,7 @@ function article_accueil_affiche_milieu($flux) {
 						'id_rubrique'=>$id
 					)
 				);
-				if (($p = strpos($flux['data'], '<!--affiche_milieu-->'))!==false) {
+				if (($p = strpos($flux['data'], '<!--affiche_milieu-->')) !== false) {
 					$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
 				} else {
 					$flux['data'] .= $texte;
