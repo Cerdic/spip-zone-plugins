@@ -1,7 +1,7 @@
 <paquet
 	prefix="d3js"
 	categorie="outil"
-	version="1.2.4"
+	version="1.2.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/d3js-64.png"
@@ -12,8 +12,8 @@
 	<auteur>cyp</auteur>
 
 	<licence>GNU/GPL</licence>
+	<pipeline nom="d3js_plugins" action='' />
 	<pipeline nom="jquery_plugins" inclure="d3js_pipelines.php" />
 	<pipeline nom="header_prive_css" action="header_prive_css" inclure="d3js_pipelines.php" />
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="d3js_pipelines.php" />
-
 </paquet>
