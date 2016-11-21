@@ -145,15 +145,15 @@ $(document).ready(function() {
 						}
 						this_response = $.trim(this_response);
 						if (this_response.length) {
-							lignes = this_response.match(/\[^\r\n\]+/g);
+							var lignes = this_response.match(/\[^\r\n\]+/g);
 							$.each(lignes, function(i, ligne) {
 								ligne = $.trim(ligne);
 								var message = $.parseJSON(ligne);
 								$log.append(message.log);
 							});
 						}
-						if ($log.length) {
-							$log.scrollTop($log.eq(0).scrollHeight - $log.height());
+						if ($log.length && $log.prop('scrollHeight')) {
+							$log.scrollTop($log.prop('scrollHeight'));
 						}
 					}
 				}
@@ -162,8 +162,8 @@ $(document).ready(function() {
 				$log.append("\nJS: Action terminée...\n");
 				//console.log('Complete response = ' + data);
 				$.migrateur_close($this);
-				if ($log.length) {
-					$log.scrollTop($log.eq(0).scrollHeight - $log.height());
+				if ($log.length && $log.prop('scrollHeight')) {
+					$log.scrollTop($log.prop('scrollHeight'));
 				}
 			})
 			.fail(function(data) {
