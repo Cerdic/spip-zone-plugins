@@ -249,12 +249,13 @@ class Client {
 
 		spip_timer('fichier');
 		$context = stream_context_create($options);
-
 		$fp = @fopen($this->url_source, 'rb', false, $context);
+
 		if (!$fp) {
 			$this->log("Serveur source indisponible.");
 			return false;
 		}
+
 		stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur));
 		file_put_contents($chemin, $fp);
 
