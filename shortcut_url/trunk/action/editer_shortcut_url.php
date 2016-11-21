@@ -39,7 +39,8 @@ function shortcut_url_inserer($set = null) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_insertion',
+	$champs = pipeline(
+		'pre_insertion',
 		array(
 			'args' => array(
 				'table' => 'spip_shortcut_urls',
@@ -48,10 +49,11 @@ function shortcut_url_inserer($set = null) {
 		)
 	);
 
-	$id_shortcut_url = sql_insertq("spip_shortcut_urls", $champs);
+	$id_shortcut_url = sql_insertq('spip_shortcut_urls', $champs);
 
-	if($id_shortcut_url) {
-		pipeline('post_insertion',
+	if ($id_shortcut_url) {
+		pipeline(
+			'post_insertion',
 			array(
 				'args' => array(
 					'table' => 'spip_shortcut_urls',
@@ -68,7 +70,7 @@ function shortcut_url_inserer($set = null) {
 function shortcut_url_modifier($id_shortcut_url, $set = null) {
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
-	spip_log(objet_info('shortcut_url', 'champs_editables'),'test.'._LOG_ERREUR);
+
 	$c = collecter_requests(
 		objet_info('shortcut_url', 'champs_editables'),
 		array(),
@@ -84,7 +86,9 @@ function shortcut_url_modifier($id_shortcut_url, $set = null) {
 	$c['url'] = parametre_url($c['url'], 'var_mode', '');
 	$recup = recuperer_page($c['url'], true);
 	if (preg_match(',<title[^>]*>(.*),i', $recup, $regs)) {
-		$c['description'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
+		$c['description'] = filtrer_entites(
+			supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1]))
+		);
 	}
 
 	if (defined('_TAILLE_RACCOURCI')) {
@@ -97,7 +101,7 @@ function shortcut_url_modifier($id_shortcut_url, $set = null) {
 		$taille_raccourci = 8;
 	}
 
-	if(!isset($c['titre']) or $c['titre'] == '') {
+	if (!isset($c['titre']) or $c['titre'] == '') {
 		$c['titre'] = generer_chaine_aleatoire($taille_raccourci);
 	}
 

@@ -19,5 +19,4 @@ function action_api_shortcut_url($arg = null) {
 		$shortcut_url = sql_getfetsel('url', 'spip_shortcut_urls', 'id_shortcut_url=' . intval($arg));
 		return $shortcut_url;
 	}
-
 }
