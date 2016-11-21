@@ -9,7 +9,9 @@
  * @package    SPIP\Selections_editoriales\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -32,7 +34,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_selection_identifier_dist($id_selection='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_selection_identifier_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($id_selection)));
 }
 
@@ -58,8 +60,8 @@ function formulaires_editer_selection_identifier_dist($id_selection='new', $reto
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_selection_charger_dist($id_selection='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('selection',$id_selection,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_selection_charger_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$valeurs = formulaires_editer_objet_charger('selection', $id_selection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 	return $valeurs;
 }
 
@@ -85,9 +87,9 @@ function formulaires_editer_selection_charger_dist($id_selection='new', $retour=
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_selection_verifier_dist($id_selection='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('selection',$id_selection, array('titre'));
-	
+function formulaires_editer_selection_verifier_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$erreurs = formulaires_editer_objet_verifier('selection', $id_selection, array('titre'));
+
 	// L'identifiant doit être unique s'il existe
 	if (
 		$identifiant = _request('identifiant')
@@ -99,7 +101,7 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
 	) {
 		$erreurs['identifiant'] = _T('selection:erreur_identifiant_existant', array('selection' => "<a href=\"$url_selection\">$titre_selection</a>"));
 	}
-	
+
 	// Vérifier que la limite est bien un entier
 	if (
 		$limite = _request('limite')
@@ -111,7 +113,7 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
 	) {
 		$erreurs['limite'] = _T('selection:erreur_limite_entier');
 	}
-	
+
 	return $erreurs;
 }
 
@@ -137,9 +139,6 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_selection_traiter_dist($id_selection='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('selection',$id_selection,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_selection_traiter_dist($id_selection = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	return formulaires_editer_objet_traiter('selection', $id_selection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 }
-
-
-?>

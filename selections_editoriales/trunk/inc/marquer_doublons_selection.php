@@ -5,7 +5,7 @@
  * @package SPIP\SelectionsEditoriales\Fonctions
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -106,7 +106,7 @@ function inc_marquer_doublons_selection_dist(
 	$GLOBALS['doublons_selections_inclus'] = array();
 
 	// detecter les doublons dans ces textes
-	traiter_modeles(implode(" ", $champs), array('selections' => $modeles), '', '', null, array(
+	traiter_modeles(implode(' ', $champs), array('selections' => $modeles), '', '', null, array(
 		'objet' => $type,
 		'id_objet' => $id,
 		$id_table_objet => $id
@@ -132,7 +132,7 @@ function inc_marquer_doublons_selection_dist(
 
 	if ($nouveaux) {
 		// on vérifie que les selections indiqués vus existent réellement tout de même (en cas d'erreur de saisie)
-		$ids = sql_allfetsel("id_selection", "spip_selections", sql_in('id_selection', $nouveaux));
+		$ids = sql_allfetsel('id_selection', 'spip_selections', sql_in('id_selection', $nouveaux));
 		$ids = array_map('reset', $ids);
 		if ($ids) {
 			// Creer le lien s'il n'existe pas déjà
@@ -144,5 +144,4 @@ function inc_marquer_doublons_selection_dist(
 	if ($anciens) {
 		objet_qualifier_liens(array('selection' => $anciens), array($type => $id), array('vu' => 'non'));
 	}
-
 }

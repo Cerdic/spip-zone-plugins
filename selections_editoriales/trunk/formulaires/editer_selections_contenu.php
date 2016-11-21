@@ -9,7 +9,9 @@
  * @package    SPIP\Selections_editoriales\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -32,7 +34,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_selections_contenu_identifier_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_selections_contenu_identifier_dist($id_selections_contenu = 'new', $id_selection = 0, $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($id_selections_contenu)));
 }
 
@@ -58,16 +60,16 @@ function formulaires_editer_selections_contenu_identifier_dist($id_selections_co
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_selections_contenu_charger_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_selections_contenu_charger_dist($id_selections_contenu = 'new', $id_selection = 0, $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
 	// Si c'est une création et qu'il n'y a pas de sélection parente explicite, on arrête
-	if (intval($id_selections_contenu) <= 0 and intval($id_selection) <= 0){
-		return false;		
+	if (intval($id_selections_contenu) <= 0 and intval($id_selection) <= 0) {
+		return false;
 	}
-	
-	$valeurs = formulaires_editer_objet_charger('selections_contenu',$id_selections_contenu,'',0,$retour,$config_fonc,$row,$hidden);
+
+	$valeurs = formulaires_editer_objet_charger('selections_contenu', $id_selections_contenu, '', 0, $retour, $config_fonc, $row, $hidden);
 	unset($valeurs['id_selections_contenu']);
 	unset($valeurs['id_selection']);
-	
+
 	return $valeurs;
 }
 
@@ -93,34 +95,33 @@ function formulaires_editer_selections_contenu_charger_dist($id_selections_conte
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_selections_contenu_verifier_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('selections_contenu',$id_selections_contenu, array('url'));
-	
+function formulaires_editer_selections_contenu_verifier_dist($id_selections_contenu = 'new', $id_selection = 0, $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
+	$erreurs = formulaires_editer_objet_verifier('selections_contenu', $id_selections_contenu, array('url'));
+
 	// S'il n'y a pas d'erreurs et que le titre est vide, on va lancer des incantations magiques
 	if (!$erreurs and !_request('titre')) {
 		include_spip('inc/lien');
 		$url = _request('url');
-		
+
 		// Si on ne trouve pas d'objet SPIP
 		if (!$infos = traiter_lien_implicite($url, '', 'tout')) {
 			// On cherche le <title> de l'URL
 			include_spip('inc/distant');
 			$infos = recuperer_infos_distantes($url);
 		}
-		
+
 		// Si on a trouvé un bon titre
 		if ($infos and isset($infos['titre']) and $infos['titre']) {
 			$titre = $infos['titre'];
-		}
-		// Sinon on le remplit par une chaîne moche qui donnera envie de la changer
-		else {
+		} else {
+			// Sinon on le remplit par une chaîne moche qui donnera envie de la changer
 			$titre = _T('info_sans_titre');
 		}
-		
+
 		// On  génère le titre
 		set_request('titre', $titre);
 	}
-	
+
 	return $erreurs;
 }
 
@@ -146,17 +147,24 @@ function formulaires_editer_selections_contenu_verifier_dist($id_selections_cont
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_selections_contenu_traiter_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_selections_contenu_traiter_dist($id_selections_contenu = 'new', $id_selection = 0, $retour = '', $config_fonc = '', $row = array(), $hidden = '') {
 	$id_selection = intval($id_selection);
-	
+
 	// Si création, on met en mémoire la sélection parente et on génère le dernier rang
-	if (intval($id_selections_contenu) <= 0 and $id_selection > 0){
+	if (intval($id_selections_contenu) <= 0 and $id_selection > 0) {
 		set_request('id_selection', $id_selection);
-		
-		$dernier_rang = sql_getfetsel('rang', 'spip_selections_contenus', 'id_selection = '.$id_selection, '', 'rang desc', '0,1');
+
+		$dernier_rang = sql_getfetsel(
+			'rang',
+			'spip_selections_contenus',
+			'id_selection = '.$id_selection,
+			'',
+			'rang desc',
+			'0,1'
+		);
 		set_request('rang', $dernier_rang + 1);
 	}
-	
+
 	// On défini l'objet et id_objet
 	if (
 		$url = _request('url')
@@ -164,49 +172,46 @@ function formulaires_editer_selections_contenu_traiter_dist($id_selections_conte
 		and $trouve = typer_raccourci($url)
 	) {
 		include_spip('base/objets');
-		
+
 		@list($objet, , $id_objet, , $args, , $ancre) = $trouve;
 		$objet = objet_type(table_objet($objet));
-		
+
 		if ($objet and $id_objet) {
 			set_request('objet', $objet);
 			set_request('id_objet', $id_objet);
 		}
-	}
-	// Sinon il faut être sûr de les vider !
-	else {
+	} else {
+		// Sinon il faut être sûr de les vider !
 		set_request('objet', '');
 		set_request('id_objet', '');
 	}
-	
+
 	// On appelle le traitement générique
-	$retours = formulaires_editer_objet_traiter('selections_contenu',$id_selections_contenu,'',0,$retour,$config_fonc,$row,$hidden);
-	
+	$retours = formulaires_editer_objet_traiter('selections_contenu', $id_selections_contenu, '', 0, $retour, $config_fonc, $row, $hidden);
+
 	// On va chercher la vraie sélection si on a bien un contenu
 	if ($id_contenu = intval($retours['id_selections_contenu'])) {
 		$id_selection = intval(sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_contenu));
 	}
-	
+
 	// Si pas de $retour, on vide le redirect et on recharge le bloc parent
 	if ($retours['id_selections_contenu'] and !$retour) {
 		$retours['redirect'] = null;
-		
+
 		// Animation de ce qu'on vient de modifier
 		$callback = "jQuery('#selection$id_selection-contenu$id_contenu').animateAppend();";
 		// Rechargement du conteneur de la sélection
 		$js = "if (window.jQuery) jQuery(function(){ajaxReload('selection$id_selection', {args:{editer_contenu:'non'}, callback:function(){ $callback }});});";
 		$js = "<script type='text/javascript'>$js</script>";
-		if (isset($retours['message_erreur']))
+		if (isset($retours['message_erreur'])) {
 			$retours['message_erreur'].= $js;
-		else
+		} else {
 			$retours['message_ok'] .= $js;
+		}
 	}
-	
+
 	// Contournement de bug pour garder le bon URL
 	$retours['id_selection'] = $id_selection;
-	
+
 	return $retours;
 }
-
-
-?>
