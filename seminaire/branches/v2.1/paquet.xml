@@ -1,7 +1,7 @@
 <paquet
 	prefix="seminaire"
 	categorie="date"
-	version="2.1.14"
+	version="2.1.15"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
