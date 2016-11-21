@@ -174,16 +174,18 @@ class DumpDatabase extends ActionBase {
 			$this->log("Sur tables : " . implode(", ", $this->tables));
 		}
 
-		$gz = function_exists("gzopen");
+		$gz = false;
+		if ($this->gzip_si_possible) {
+			$gz = function_exists("gzopen");
+		}
 
 		include_spip('lib/mysqldump-php/src/Ifsnop/Mysqldump/Mysqldump');
 
 		$dump = new Mysqldump(
-			$this->source->sql->bdd,
+			// mysql:host=localhost;dbname=spip
+			$this->source->sql->req . ':host=' . $this->source->sql->serveur . ';dbname=' . $this->source->sql->bdd,
 			$this->source->sql->user,
 			$this->source->sql->pass,
-			$this->source->sql->serveur,
-			$this->source->sql->req,
 			array(
 				'compress' => $gz ? Mysqldump::GZIP : Mysqldump::NONE,
 				'include-tables' => $this->tables,

@@ -11,13 +11,24 @@ MySQLDump - PHP
 [License](https://github.com/ifsnop/mysqldump-php#license) |
 [Credits](https://github.com/ifsnop/mysqldump-php#credits)
 
-[![Build Status](https://travis-ci.org/ifsnop/mysqldump-php.png?branch=master)](https://travis-ci.org/ifsnop/mysqldump-php)
+[![Build Status](https://travis-ci.org/ifsnop/mysqldump-php.svg?branch=devel)](https://travis-ci.org/ifsnop/mysqldump-php)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ifsnop/mysqldump-php/badges/quality-score.png?s=d02891e196a3ca1298619032a538ce8ae8cafd2b)](https://scrutinizer-ci.com/g/ifsnop/mysqldump-php/)
 [![Latest Stable Version](https://poser.pugx.org/ifsnop/mysqldump-php/v/stable.png)](https://packagist.org/packages/ifsnop/mysqldump-php)
 
-This is a php version of linux's mysqldump in terminal "$ mysqldump -u username -p...", without dependencies, output compression and sane defaults.
+This is a php version of mysqldump cli that comes with MySQL, without dependencies, output compression and sane defaults.
 
 Out of the box, MySQLDump-PHP supports backing up table structures, the data itself, views and triggers.
+
+MySQLDump-PHP is the only library that supports:
+* output binary blobs as hex.
+* resolves view dependencies (using Stand-In tables).
+* output compared against original mysqldump. Linked to travis-ci testing system.
+* dumps stored procedures.
+* does extended-insert and/or complete-insert.
+
+## Important
+
+From version 2.0, connections to database are made using the standard DSN, documented in [PDO connection string](http://php.net/manual/en/ref.pdo-mysql.connection.php).
 
 ## Requirements
 
@@ -30,7 +41,7 @@ Out of the box, MySQLDump-PHP supports backing up table structures, the data its
 Using [Composer](http://getcomposer.org):
 
 ```
-$ composer require ifsnop/mysqldump-php:1.*
+$ composer require ifsnop/mysqldump-php:2.*
 
 ```
 
@@ -38,14 +49,14 @@ Or via json file:
 
 ````
 "require": {
-        "ifsnop/mysqldump-php":"1.*"
+        "ifsnop/mysqldump-php":"2.*"
 }
 ````
 
 Using [Curl](http://curl.haxx.se):
 
 ```
-$ curl --silent --location https://github.com/ifsnop/mysqldump-php/archive/v1.4.1.tar.gz | tar xvfz -
+$ curl --silent --location https://github.com/ifsnop/mysqldump-php/archive/v2.0.0.tar.gz | tar xvfz -
 ```
 
 ## Getting started
@@ -58,7 +69,7 @@ With [Autoloader](http://www.php-fig.org/psr/psr-4/)/[Composer](http://getcompos
 use Ifsnop\Mysqldump as IMysqldump;
 
 try {
-    $dump = new IMysqldump\Mysqldump('database', 'username', 'password');
+    $dump = new IMysqldump\Mysqldump('mysql:host=localhost;dbname=testdb', 'username', 'password');
     $dump->start('storage/work/dump.sql');
 } catch (\Exception $e) {
     echo 'mysqldump-php error: ' . $e->getMessage();
@@ -72,8 +83,8 @@ Plain old PHP:
 ```
 <?php
 
-    include_once(dirname(__FILE__) . '/mysqldump-php-1.4.1/src/Ifsnop/Mysqldump/Mysqldump.php');
-    $dump = new Ifsnop\Mysqldump\Mysqldump( 'database', 'username', 'password');
+    include_once(dirname(__FILE__) . '/mysqldump-php-2.0.0/src/Ifsnop/Mysqldump/Mysqldump.php');
+    $dump = new Ifsnop\Mysqldump\Mysqldump('mysql:host=localhost;dbname=testdb', 'username', 'password');
     $dump->start('storage/work/dump.sql');
 
 ?>
@@ -82,27 +93,20 @@ Plain old PHP:
 Refer to the [wiki](https://github.com/ifsnop/mysqldump-php/wiki/full-example) for some examples and a comparision between mysqldump and mysqldump-php dumps.
 
 ## Constructor and default parameters
-
     /**
      * Constructor of Mysqldump. Note that in the case of an SQLite database
      * connection, the filename must be in the $db parameter.
      *
-     * @param string $db         Database name
+     * @param string $dsn        PDO DSN connection string
      * @param string $user       SQL account username
      * @param string $pass       SQL account password
-     * @param string $host       SQL server to connect to
-     * @param string $type       SQL database type ('mysql', 'sqlite', ...)
      * @param array  $dumpSettings SQL database settings
      * @param array  $pdoSettings  PDO configured attributes
-     *
-     * @return null
      */
     public function __construct(
-        $db = '',
+        $dsn = '',
         $user = '',
         $pass = '',
-        $host = 'localhost',
-        $type = 'mysql',
         $dumpSettings = array(),
         $pdoSettings = array()
     )
@@ -117,11 +121,13 @@ Refer to the [wiki](https://github.com/ifsnop/mysqldump-php/wiki/full-example) f
         'lock-tables' => false,
         'add-locks' => true,
         'extended-insert' => true,
+        'complete-insert' => false,
         'disable-keys' => true,
         'where' => '',
         'no-create-info' => false,
         'skip-triggers' => false,
         'add-drop-trigger' => true,
+        'routines' => false,
         'hex-blob' => true,
         'databases' => false,
         'add-drop-database' => false,
@@ -145,9 +151,9 @@ Refer to the [wiki](https://github.com/ifsnop/mysqldump-php/wiki/full-example) f
 ## Dump Settings
 
 - **include-tables**
-  - Only include these tables (array of table names)
+  - Only include these tables (array of table names), include all if empty
 - **exclude-tables**
-  - Exclude these tables (array of table names)
+  - Exclude these tables (array of table names), include all if empty, supports regexps
 - **compress**
   - Gzip, Bzip2, None.
   - Could be specified using the declared consts: IMysqldump\Mysqldump::GZIP, IMysqldump\Mysqldump::BZIP2 or IMysqldump\Mysqldump::NONE
@@ -163,6 +169,8 @@ Refer to the [wiki](https://github.com/ifsnop/mysqldump-php/wiki/full-example) f
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_add-locks
 - **extended-insert**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_extended-insert
+- **complete-insert**
+  - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_complete-insert
 - **disable-keys**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_disable-keys
 - **where**
@@ -173,13 +181,15 @@ Refer to the [wiki](https://github.com/ifsnop/mysqldump-php/wiki/full-example) f
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_triggers
 - **add-drop-triggers**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_add-drop-trigger
+- **routines**
+  - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_routines
 - **hex-blob**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_hex-blob
 - **databases**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_databases
 - **add-drop-database**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_add-drop-database
-- **skip-tz-utz**
+- **skip-tz-utc**
   - http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html#option_mysqldump_tz-utc
 - **no-autocommit**
   - Option to disable autocommit (faster inserts, no problems with index keys)
@@ -227,9 +237,17 @@ Use **SHOW GRANTS FOR user@host;** to know what privileges user has. See the fol
 
 [Which are the minimum privileges required to get a backup of a MySQL database schema?](http://dba.stackexchange.com/questions/55546/which-are-the-minimum-privileges-required-to-get-a-backup-of-a-mysql-database-sc/55572#55572)
 
+## Tests
+
+Current code for testing is an ugly hack. Probably there are much better ways
+of doing them using PHPUnit, so PR's are welcomed. The testing script creates
+and populates a database using all possible datatypes. Then it exports it
+using both mysqldump-php and mysqldump, and compares the output. Only if
+it is identical tests are OK.
+
 ## TODO
 
-- Write unit tests.
+...
 
 ## Contributing
 
