@@ -9,7 +9,9 @@
  * @package    SPIP\Selections_editoriales\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -27,29 +29,29 @@ function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) 
 	$maj['create'] = array(
 		array('maj_tables', array('spip_selections', 'spip_selections_liens', 'spip_selections_contenus')),
 	);
-	
+
 	// Ajout d'un champ pour ajouter des classes CSS à un contenu sélectionné
 	$maj['1.1.0'] = array(
 		array('maj_tables', array('spip_selections_contenus')),
 	);
-	
+
 	// Ajouter un vrai champ "rang" et le peupler
 	$maj['1.4.0'] = array(
 		array('maj_tables', array('spip_selections_contenus')),
 		array('selections_editoriales_maj_1_4_0'),
 	);
-	
+
 	// Ajouter les champs objet/id_objet et les peupler
 	$maj['1.5.0'] = array(
 		array('maj_tables', array('spip_selections_contenus')),
 		array('selections_editoriales_maj_1_5_0'),
 	);
-	
+
 	// Ajouter un champ "css" sur les selections
 	$maj['1.5.1'] = array(
 		array('maj_tables', array('spip_selections')),
 	);
-	
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -59,10 +61,10 @@ function selections_editoriales_maj_1_4_0() {
 	// On cherche toutes les sélections
 	if ($selections = sql_allfetsel('id_selection', 'spip_selections')) {
 		include_spip('inc/filtres');
-		
+
 		foreach ($selections as $selection) {
 			$id_selection = intval($selection['id_selection']);
-			
+
 			// On cherche tous les contenus, déjà classés dans le bon ordre
 			if ($contenus = sql_allfetsel(
 				'id_selections_contenu, titre, 0+titre as num',
@@ -74,7 +76,7 @@ function selections_editoriales_maj_1_4_0() {
 				$rang = 1;
 				foreach ($contenus as $contenu) {
 					$id_selections_contenu = intval($contenu['id_selections_contenu']);
-					
+
 					// On met à jour le rang et le titre sans l'ancien numéro
 					sql_updateq(
 						'spip_selections_contenus',
@@ -84,7 +86,7 @@ function selections_editoriales_maj_1_4_0() {
 						),
 						'id_selections_contenu = '.$id_selections_contenu
 					);
-					
+
 					$rang++;
 				}
 			}
@@ -98,11 +100,11 @@ function selections_editoriales_maj_1_5_0() {
 	if ($contenus = sql_allfetsel('id_selections_contenu, url', 'spip_selections_contenus')) {
 		include_spip('inc/lien');
 		include_spip('base/objets');
-		
+
 		foreach ($contenus as $contenu) {
 			$trouve = typer_raccourci($contenu['url']);
 			@list($objet, , $id_objet, , $args, , $ancre) = $trouve;
-			
+
 			if ($objet and $id_objet and $objet = objet_type(table_objet($objet))) {
 				sql_updateq(
 					'spip_selections_contenus',
@@ -126,17 +128,15 @@ function selections_editoriales_maj_1_5_0() {
 **/
 function selections_editoriales_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_selections");
-	sql_drop_table("spip_selections_liens");
-	sql_drop_table("spip_selections_contenus");
-	
+	sql_drop_table('spip_selections');
+	sql_drop_table('spip_selections_liens');
+	sql_drop_table('spip_selections_contenus');
+
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('selection', 'selections_contenu')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('selection', 'selections_contenu')));
-	sql_delete("spip_forum",                 sql_in("objet", array('selection', 'selections_contenu')));
-	
+	sql_delete('spip_versions', sql_in('objet', array('selection', 'selections_contenu')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('selection', 'selections_contenu')));
+	sql_delete('spip_forum', sql_in('objet', array('selection', 'selections_contenu')));
+
 	effacer_meta($nom_meta_base_version);
 	effacer_meta('selections_editoriales');
 }
-
-?>

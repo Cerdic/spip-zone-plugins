@@ -9,7 +9,9 @@
  * @package    SPIP\Selections_editoriales\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Pas de logo de survol pour les contenus sélectionés
@@ -21,12 +23,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function selections_editoriales_formulaire_charger($flux) {
 	if (
 		$flux['args']['form'] == 'editer_logo'
-		AND $flux['args']['args'][0] == 'selections_contenu'
+		and $flux['args']['args'][0] == 'selections_contenu'
 	) {
 		$flux['data']['logo_survol'] = false;
 		$flux['data']['logo_off'] = false;
 	}
-	
+
 	return $flux;
 }
 
@@ -45,7 +47,11 @@ function selections_editoriales_formulaire_fond($flux) {
 		and $flux['args']['je_suis_poste']
 	) {
 		// On cherche la sélection parente
-		$id_selection = intval(sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_selections_contenu));
+		$id_selection = intval(sql_getfetsel(
+			'id_selection',
+			'spip_selections_contenus',
+			'id_selections_contenu = '.$id_selections_contenu
+		));
 		// Animation de ce qu'on vient de modifier
 		$callback = "jQuery('#selection$id_selection-contenu$id_selections_contenu').animateAppend();";
 		// Rechargement du conteneur de la sélection
@@ -53,7 +59,7 @@ function selections_editoriales_formulaire_fond($flux) {
 		$js = "<script type='text/javascript'>$js</script>";
 		$flux['data'] .= $js;
 	}
-	
+
 	return $flux;
 }
 
@@ -66,11 +72,11 @@ function selections_editoriales_formulaire_fond($flux) {
  * @return array       Données du pipeline
  */
 function selections_editoriales_affiche_milieu($flux) {
-	$texte = "";
+	$texte = '';
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 	// auteurs sur les selections
-	if (!$e['edition'] AND in_array($e['type'], array('selection'))) {
+	if (!$e['edition'] and in_array($e['type'], array('selection'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
 			'objet' => $e['type'],
@@ -78,13 +84,12 @@ function selections_editoriales_affiche_milieu($flux) {
 		));
 	}
 
-
-
 	if ($texte) {
-		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
-			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-		else
+		if ($p=strpos($flux['data'], '<!--affiche_milieu-->')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
 			$flux['data'] .= $texte;
+		}
 	}
 
 	return $flux;
@@ -106,7 +111,8 @@ function selections_editoriales_boite_infos($flux) {
 		and include_spip('inc/filtres')
 		and include_spip('inc/actions')
 	) {
-		$flux['data'] .= filtrer('bouton_action_horizontal',
+		$flux['data'] .= filtrer(
+			'bouton_action_horizontal',
 			generer_action_auteur('supprimer_selection', $id_selection, generer_url_ecrire('selections')),
 			_T('lien_supprimer'),
 			'selection-24.png',
@@ -114,22 +120,22 @@ function selections_editoriales_boite_infos($flux) {
 			'link'
 		);
 	}
-	
+
 	return $flux;
 }
 
 /**
  * Ajoute des sélections sous les objets configurés pour ça
- * 
- * 
+ *
+ *
  * @pipeline afficher_complement_objet
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function selections_editoriales_afficher_complement_objet($flux){
+function selections_editoriales_afficher_complement_objet($flux) {
 	$exec = trouver_objet_exec($flux['args']['type']);
 	$id = intval($flux['args']['id']);
-	
+
 	if (
 		$exec !== false // page d'un objet éditorial
 		and $exec['edition'] === false // pas en mode édition
@@ -159,9 +165,9 @@ function selections_editoriales_afficher_complement_objet($flux){
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function selections_editoriales_optimiser_base_disparus($flux){
+function selections_editoriales_optimiser_base_disparus($flux) {
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('selection'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('selection' => '*'), '*');
 	return $flux;
 }
 
@@ -173,33 +179,37 @@ function selections_editoriales_optimiser_base_disparus($flux){
  */
 function selections_editoriales_jqueryui_plugins($plugins) {
 	// On envoie que si on est dans l'espace prive
-    if(test_espace_prive()) {
-		$plugins[] = "jquery.ui.core";
-		$plugins[] = "jquery.ui.widget";
-		$plugins[] = "jquery.ui.mouse";
-		$plugins[] = "jquery.ui.sortable";
-		$plugins[] = "jquery.ui.droppable";
-		$plugins[] = "jquery.ui.draggable";
-    }
-    
+	if (test_espace_prive()) {
+		$plugins[] = 'jquery.ui.core';
+		$plugins[] = 'jquery.ui.widget';
+		$plugins[] = 'jquery.ui.mouse';
+		$plugins[] = 'jquery.ui.sortable';
+		$plugins[] = 'jquery.ui.droppable';
+		$plugins[] = 'jquery.ui.draggable';
+	}
+
 	return $plugins;
 }
 
 /**
- * Pipeline chercher_logo pour trouver le logo du contenu choisi, si jamais ya pas de logo pour l'objet selections_cotenu
+ * Pipeline chercher_logo pour trouver le logo du contenu choisi,
+ * si jamais ya pas de logo pour l'objet selections_cotenu
  **/
 function selections_editoriales_quete_logo_objet($flux) {
 	// Si personne n'a trouvé de logo avant
 	if (
 		empty($flux['data'])
 		and $flux['args']['objet'] == 'selections_contenu'
-		and $selections_contenu = sql_fetsel('objet, id_objet', 'spip_selections_contenus', 'id_selections_contenu = '.intval($flux['args']['id_objet']))
-		and $objet = $selections_contenu['objet']
+		and $selections_contenu = sql_fetsel(
+			'objet, id_objet',
+			'spip_selections_contenus',
+			'id_selections_contenu = '.intval($flux['args']['id_objet'])
+		) and $objet = $selections_contenu['objet']
 		and ($id_objet = intval($selections_contenu['id_objet'])) > 0
 	) {
 		$flux['data'] = quete_logo_objet($id_objet, $objet, $flux['args']['mode']);
 	}
-	
+
 	return $flux;
 }
 
@@ -219,13 +229,13 @@ function selections_editoriales_post_edition($flux) {
 		$type = objet_type($flux['args']['table']);
 		$marquer_doublons_selection = charger_fonction('marquer_doublons_selection', 'inc');
 		$marquer_doublons_selection(
-			$flux['data'], 
-			$flux['args']['id_objet'], 
+			$flux['data'],
+			$flux['args']['id_objet'],
 			$type,
-			id_table_objet($type, $serveur), 
+			id_table_objet($type, $serveur),
 			table_objet($type, $serveur),
-			$flux['args']['table'], 
-			'', 
+			$flux['args']['table'],
+			'',
 			$serveur
 		);
 	}
