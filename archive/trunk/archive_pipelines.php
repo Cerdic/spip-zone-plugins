@@ -46,7 +46,8 @@ function archive_taches_generales_cron($taches_generales) {
  * 	Le contexte du pipeline modifié
  */
 function archive_post_edition($flux) {
-	if ($flux['args']['action'] == 'instituer'
+	if (isset($flux['args']['action']) &&
+		$flux['args']['action'] == 'instituer'
 		&& $flux['args']['statut_ancien'] != 'archive'
 		&& $flux['args']['statut_nouveau'] == 'archive') {
 		sql_updateq(
