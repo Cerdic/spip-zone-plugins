@@ -47,6 +47,9 @@ div.notice > p:last-child { margin-bottom:0; }
 #logs_last pre, #logs_now pre { max-height: 500px; overflow-y: scroll; }
 #logs_last pre code, #logs_now pre code { color:#A37247; }
 #logs_last pre em, #logs_now pre em { color:#1490CB; font-style:normal; }
+/* balises non html… mais pratique dans ce cas là */
+#logs_last pre error, #logs_now pre error { color:#D60500; }
+#logs_last pre warning, #logs_now pre warning { color:#E29800; }
 #logs_now { display:none; }
 #logs_now.actif .inner .hd { background-color: #fce201; }
 
@@ -144,12 +147,15 @@ $(document).ready(function() {
 							last_response_len = response.length;
 						}
 						this_response = $.trim(this_response);
+						console.log(this_response)
 						if (this_response.length) {
 							var lignes = this_response.match(/\[^\r\n\]+/g);
 							$.each(lignes, function(i, ligne) {
 								ligne = $.trim(ligne);
 								var message = $.parseJSON(ligne);
-								$log.append(message.log);
+								if (message) {
+									$log.append(message.log);
+								} 
 							});
 						}
 						if ($log.length && $log.prop('scrollHeight')) {

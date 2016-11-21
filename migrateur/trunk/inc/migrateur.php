@@ -53,7 +53,14 @@ function migrateur_infos() {
 }
 
 
-
+/**
+ * Loge une erreur 
+ *
+ * @param string $msg
+**/
+function migrateur_log_error($msg) {
+	migrateur_log('<error>' . $msg . '</error>');
+}
 
 /**
  * Ajoute un message de log dans tmp/migrateur/migrateur.log

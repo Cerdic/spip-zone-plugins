@@ -23,7 +23,7 @@ class GetFile extends ActionBase {
 		$reponse = $this->client->ask('GetFile', $file, 'file');
 		if ($reponse) {
 			if ($hash !== $reponse['message']['data']['hash']) {
-				$this->log("Hash différents, suppression du fichier par sécurité");
+				$this->error("Hash différents, suppression du fichier par sécurité");
 				$chemin = $this->destination->dir . DIRECTORY_SEPARATOR . $file;
 				unlink($chemin);
 				return false;

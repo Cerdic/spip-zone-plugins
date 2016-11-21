@@ -185,7 +185,7 @@ class SyncDirectory extends ActionBase {
 			));
 
 			if (!$reponse) {
-				migrateur_log("Échec de récupération du fichier");
+				migrateur_log_error("Échec de récupération du fichier");
 				return false;
 			}
 

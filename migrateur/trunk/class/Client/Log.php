@@ -140,6 +140,14 @@ class Log implements LoggerInterface {
 			include_spip('inc/migrateur');
 			$done = true;
 		}
+		switch ($level) {
+			case Log::WARNING:
+				$message = '<warning>' . $message . '</warning>';
+				break;
+			case Log::ERROR:
+				$message = '<error>' . $message . '</error>';
+				break;
+		}
 		return migrateur_log($message);
 	}
 

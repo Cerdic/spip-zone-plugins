@@ -12,7 +12,7 @@ function migrateur_mig_bdd_source_make_and_get_dump_sql($options = array()) {
 	$reponse = $client->action('DumpDatabase', $options);
 
 	if (!$reponse) {
-		migrateur_log("Échec de la sauvegarde");
+		migrateur_log_error("Échec de la sauvegarde");
 		return;
 	}
 
@@ -31,7 +31,7 @@ function migrateur_mig_bdd_source_make_and_get_dump_sql($options = array()) {
 	));
 
 	if (!$reponse) {
-		migrateur_log("Échec de récupération du fichier");
+		migrateur_log_error("Échec de récupération du fichier");
 		return;
 	} 
 

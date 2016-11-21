@@ -73,6 +73,30 @@ class ActionBase implements ActionInterface
 	}
 
 	/**
+	 * Log an error message
+	 * 
+	 * @param string message
+	 */
+	public function error($message)
+	{
+		if ($this->logger) {
+			$this->logger->error($message);
+		}
+	}
+
+	/**
+	 * Log a warning message
+	 * 
+	 * @param string message
+	 */
+	public function warning($message)
+	{
+		if ($this->logger) {
+			$this->logger->warning($message);
+		}
+	}
+
+	/**
 	 * Log a start run message
 	 * 
 	 * @param string message

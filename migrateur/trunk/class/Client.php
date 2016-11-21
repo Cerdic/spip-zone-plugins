@@ -26,14 +26,14 @@ class Client {
 
 	public function action($action, $args = null) {
 		if (!is_string($action)) {
-			$this->log("Action incomprise");
+			$this->warning("Action incomprise");
 			return false;
 		}
 
 		$ActionClass = "SPIP\\Migrateur\\Client\\Action\\" . $action;
 
 		if (!class_exists($ActionClass)) {
-			$this->log("Action inconnue");
+			$this->warning("Action inconnue");
 			return false;
 		}
 
@@ -70,25 +70,25 @@ class Client {
 	**/
 	private function analyser_reponse($reponse, $decrypt = true) {
 		if (!$reponse) {
-			$this->log("Réponse en échec");
+			$this->warning("Réponse en échec");
 			return false;
 		}
 
 		if (!is_array($reponse)) {
-			$this->log("Type de réponse erroné");
+			$this->warning("Type de réponse erroné");
 			var_dump($reponse);
 			#print_r($reponse);
 			return false;
 		}
 
 		if (isset($reponse['error'])) {
-			$this->log("Retour d'erreur indiqué");
-			$this->log($reponse['error']);
+			$this->warning("Retour d'erreur indiqué");
+			$this->error($reponse['error']);
 			return false;
 		}
 
 		if (!isset($reponse['message'])) {
-			$this->log("Retour incompris ou absence de message");
+			$this->warning("Retour incompris ou absence de message");
 			return false;
 		}
 
@@ -145,7 +145,7 @@ class Client {
 	**/
 	private function prepare_json_request_message($action, $data) {
 		if (!$this->auth_key OR !$this->url_source) {
-			$this->log("Clé d'authentification ou URL du site source non défini");
+			$this->warning("Clé d'authentification ou URL du site source non défini");
 			return false;
 		}
 
@@ -190,7 +190,7 @@ class Client {
 
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		if ($code != 200) {
-			$this->log("Réponse erronée du serveur. Code d'erreur : $code // " . curl_error($curl));
+			$this->warning("Réponse erronée du serveur. Code d'erreur : $code // " . curl_error($curl));
 			throw new \RuntimeException('HTTP error: ' . $code . " // " . curl_error($curl));
 		}
 
@@ -242,7 +242,7 @@ class Client {
 
 		if (!in_array('crypteur.decrypt', stream_get_filters())) {
 			if (!stream_filter_register('crypteur.decrypt', '\SPIP\Migrateur\Crypteur\DecryptFilter')) {
-				$this->log("Filtre de decryptage introuvable");
+				$this->error("Filtre de decryptage introuvable");
 				return false;
 			}
 		}
@@ -252,11 +252,17 @@ class Client {
 		$fp = @fopen($this->url_source, 'rb', false, $context);
 
 		if (!$fp) {
-			$this->log("Serveur source indisponible.");
+			$this->warning("Serveur source indisponible.");
 			return false;
 		}
 
-		stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur));
+
+		if (!@stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur))) {
+			$this->error('Décrypteur inutilisable : ' . error_get_last()['message']);
+			fclose($fp);
+			return false;
+		}
+
 		file_put_contents($chemin, $fp);
 
 		$t = spip_timer('fichier');
@@ -300,6 +306,30 @@ class Client {
 	{
 		if ($this->logger) {
 			$this->logger->info($message);
+		}
+	}
+
+	/**
+	 * Log an error message
+	 * 
+	 * @param string message
+	 */
+	public function error($message)
+	{
+		if ($this->logger) {
+			$this->logger->error($message);
+		}
+	}
+
+	/**
+	 * Log a warning message
+	 * 
+	 * @param string message
+	 */
+	public function warning($message)
+	{
+		if ($this->logger) {
+			$this->logger->warning($message);
 		}
 	}
 }
