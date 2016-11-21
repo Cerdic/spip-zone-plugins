@@ -143,8 +143,11 @@ $(document).ready(function() {
 							this_response = response.substring(last_response_len);
 							last_response_len = response.length;
 						}
-
-						$log.append(this_response);
+						var message = $.trim(this_response);
+						if (message.length) {
+							message = $.parseJSON(message);
+							$log.append(message.log);
+						}
 						if ($log.length) {
 							$log.scrollTop($log.eq(0).scrollHeight - $log.height());
 						}

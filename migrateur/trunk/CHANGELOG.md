@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+Version 3.0.8
+-------------
+
+Le streaming des logs avec MAMP Pro / Apache 2.4 / PHP 7 ne fonctionnait pas. 
+On tente de passer outre les buffers.
+
 Version 3.0.5
 -------------
 

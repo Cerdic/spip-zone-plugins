@@ -69,11 +69,13 @@ function migrateur_log($msg, $type="", $set_stream = null) {
 	static $done   = false;
 	static $stream = false;
 
+	/* Forcer un echo sur les logs */
 	if (!is_null($set_stream)) {
 		$stream = (bool)$set_stream;
 		return true;
 	}
 
+	/* créer le répertoire de log */
 	$dir = _DIR_TMP . 'migrateur';
 	if (!$done) {
 		sous_repertoire(_DIR_TMP . 'migrateur');
@@ -81,17 +83,69 @@ function migrateur_log($msg, $type="", $set_stream = null) {
 	}
 
 	if ($type) {
-		$message = '[' . $type . '] ' . $message;
+		$msg = '[' . $type . '] ' . $msg;
 	}
 
-	file_put_contents($dir . "/migrateur.log", date("Y:m:d H:i:s") . " | " . $msg . "\n", FILE_APPEND);
-	file_put_contents($dir . "/etape.log", $msg . "\n", FILE_APPEND);
+	file_put_contents($dir . "/migrateur.log", date("Y:m:d H:i:s") . " | " . $msg . PHP_EOL, FILE_APPEND);
+	file_put_contents($dir . "/etape.log", $msg . PHP_EOL, FILE_APPEND);
 	spip_log($msg, 'migrateur');
 
 	if ($stream) {
-		echo $msg . "\n";
-		flush();
+		migrateur_stream_log($msg);
 	}
+}
+
+/**
+ * Envoie un log (json) au navigateur
+ * 
+ * Certaines configurations sont ennuyantes, pour passer outre la mise en buffer,
+ * entre php, mod_xxx d'apache, apache, le navigateur. 
+ * 
+ * La fonction `migrateur_preparer_streaming()` fait tout son possible pour
+ * les désactiver, mais cela ne suffit pas toujours.
+ * 
+ * On force donc l'envoi d'un paquet assez gros (8ko) pour qu'il soit envoyé
+ * à chaque fois au navigateur. Mais pas trop rapidement entre chaque 
+ * message, sinon, là encore, les messages peuvent se cumuler avant d'arriver
+ * au navigateur (ce qui fait que le json n'est plus valide)…
+ *
+ * @param string $msg 
+ *    Le message à envoyer
+**/
+function migrateur_stream_log($msg) {
+	/** 
+	 * Si stream, forcer gros message, pour passer outre différents buffers…
+	 * Tristement…
+	 */
+	static $buffer_size = 8 * 1024;
+
+	/**
+	 * Si stream, il faut un délai minimal entre 2 envois :/
+	 * Tristement…
+	 */
+	static $delai_minimal_ms = 20; // 16 semble passer… soyons prudents
+
+	/**
+	 * Pour calculer le temps écoulé depuis le dernier envoi d'un log
+	 */
+	static $chronometre = false;
+
+	if ($chronometre) {
+		$last = intval(spip_timer('stream_log', true));
+	} else {
+		$last = 0;
+	}
+
+	$message = json_encode(array('log' => $msg . PHP_EOL));
+	echo str_pad($message, $buffer_size) . PHP_EOL;
+	flush();
+
+	if ($last < $delai_minimal_ms) {
+		usleep(($delai_minimal_ms-$last) * 1000);
+	}
+
+	spip_timer('stream_log');
+	$chronometre = true;
 }
 
 

@@ -6,6 +6,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Lance une action de migration
  *
+ * Si streaming des logs demandé, prépare le serveur pour.
+ * 
  * Charge la fonction migrateur_$arg() dans migrateur/$arg.php
 **/
 function action_migrateur_dist() {
@@ -21,36 +23,7 @@ function action_migrateur_dist() {
 	/* En cas de demande de flux continue des logs, préparer ce qu'il faut */
 	$stream = (bool) _request('stream');
 	if ($stream) {
-		// forcer les logs à faire des echos
-		migrateur_log("", "", true);
-		// forcer l'absence de redirection ajax
-		$GLOBALS['redirect'] = "";
-
-		header('Content-type: text/html; charset=utf-8');
-		#header('Content-type: application/octet-stream;');
-
-		// Turn off output buffering
-		ini_set('output_buffering', 'off');
-		// Turn off PHP output compression
-		ini_set('zlib.output_compression', false);
-		// Implicitly flush the buffer(s)
-		ini_set('implicit_flush', true);
-		ob_implicit_flush(true);
-		// Clear, and turn off output buffering
-		while (ob_get_level() > 0) {
-			// Get the curent level
-			$level = ob_get_level();
-			// End the buffering
-			ob_end_clean();
-			// If the current level has not changed, abort
-			if (ob_get_level() == $level) break;
-		}
-
-		// Disable apache output buffering/compression
-		if (function_exists('apache_setenv')) {
-			apache_setenv('no-gzip', '1');
-			apache_setenv('dont-vary', '1');
-		}
+		migrateur_preparer_streaming();
 	}
 
 	if (function_exists($func)) {
@@ -101,3 +74,56 @@ function action_migrateur_dist() {
 }
 
 
+/**
+ * Prépare le serveur pour envoyer des informations en streaming
+ * 
+ * Tente de squizer les buffers, compressions, à différents endroits (php, apache, nginx…)
+ * 
+ * @link http://stackoverflow.com/questions/7740646/jquery-ajax-read-the-stream-incrementally
+ * @link http://www.jeffgeerling.com/blog/2016/streaming-php-disabling-output-buffering-php-apache-nginx-and-varnish
+ * @link https://phpfashion.com/everything-about-output-buffering-in-php
+**/
+function migrateur_preparer_streaming() {
+	// forcer les logs à faire des echos
+	migrateur_log("", "", true);
+
+	// forcer l'absence de redirection ajax
+	$GLOBALS['redirect'] = "";
+
+	header('Content-type: text/html; charset=utf-8');
+	#header('Content-type: application/octet-stream;');
+
+	// Explicitly disable caching so Varnish and other upstreams won't cache.
+	header("Cache-Control: no-cache, must-revalidate");
+
+	// Setting this header instructs Nginx to disable fastcgi_buffering and disable gzip for this request.
+	header('X-Accel-Buffering: no');
+
+	// Turn off output buffering
+	ini_set('output_buffering', 'Off');
+
+	// Turn off PHP output compression
+	ini_set('zlib.output_compression', false);
+
+	// Implicitly flush the buffer(s)
+	ini_set('implicit_flush', true);
+	ob_implicit_flush(true);
+
+	// Clear, and turn off output buffering
+	while (ob_get_level() > 0) {
+		// Get the curent level
+		$level = ob_get_level();
+		// End the buffering
+		ob_end_clean();
+		// If the current level has not changed, abort
+		if (ob_get_level() == $level) {
+			break;
+		}
+	}
+
+	// Disable apache output buffering/compression
+	if (function_exists('apache_setenv')) {
+		apache_setenv('no-gzip', '1');
+		apache_setenv('dont-vary', '1');
+	}
+}
