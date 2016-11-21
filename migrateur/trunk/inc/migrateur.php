@@ -122,8 +122,11 @@ function migrateur_stream_log($msg) {
 	/**
 	 * Si stream, il faut un délai minimal entre 2 envois :/
 	 * Tristement…
+	 * 
+	 * ~ 16ms / ligne requis, mais je JS est tolérant et peut recevoir
+	 * plusieurs lignes d'un coup. 
 	 */
-	static $delai_minimal_ms = 20; // 16 semble passer… soyons prudents
+	static $delai_minimal_ms = 5;
 
 	/**
 	 * Pour calculer le temps écoulé depuis le dernier envoi d'un log
