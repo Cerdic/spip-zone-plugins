@@ -13,6 +13,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+/**
+ * Autorisation à créer une URL raccourcie
+ *
+ * Les administrateurs, les rédacteurs, les ips autorisées depuis la configuration
+ *
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return bool
+ */
 function autoriser_shortcuturl_creer_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/config');
 	$ips = array_map('trim', explode(',', lire_config('shortcut_url/serveurs_api')));
@@ -21,11 +33,23 @@ function autoriser_shortcuturl_creer_dist($faire, $type, $id, $qui, $opt) {
 /**
  * Autorisation du menu d'entrée dans l'admin pour spip 3.1
  *
- * @param string $faire, $type, $id, $qui, $opt
- * @return string
+ * On supprime l'accès à tous les menus non utiles
+ *
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return bool
  */
 function autoriser_menugrandeentree($faire, $type, $id, $qui, $opt) {
-	if (!in_array($type, array('menuaccueil', 'menuedition', 'menupublication', 'menuadministration', 'menuconfiguration', 'menushortcuturl'))) {
+	if (!in_array($type, array(
+		'menuaccueil',
+		'menuedition',
+		'menupublication',
+		'menuadministration',
+		'menuconfiguration',
+		'menushortcuturl'))) {
 		return false;
 	}
 
@@ -35,8 +59,12 @@ function autoriser_menugrandeentree($faire, $type, $id, $qui, $opt) {
 /**
  * Autorisation du menu d'entrée dans l'admin pour spip 3.0
  *
- * @param string $faire, $type, $id, $qui, $opt
- * @return string
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return bool
  */
 function autoriser_revisions_menu($faire, $type, $id, $qui, $opt) {
 	return true;
@@ -79,17 +107,35 @@ function autoriser_voirrevisions($faire, $type, $id, $qui, $opt) {
 }
 
 /**
+ * Autoriser shortcut dans le menu
+ *
+ * @param string $faire
+ * @param string $type
+ * @param int $id
+ * @param array $qui
+ * @param array $opt
+ * @return bool
+ */
+function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('1comite', '0minirezo')) && count($qui['restreint']) == 0;
+}
+
+/**
  * Ajouter un bouton stats
  *
- * @param string $faire, $type, $id, $qui, $opt
- * @return string
+ * @param array $boutons_admin
+ * @return array
  */
 function shortcut_url_ajouter_menus($boutons_admin) {
 	include_spip('inc/autoriser');
 	if (autoriser('menu', '_menu_shortcut_url')) {
 		$pages = array('shortcut_url_logs', 'shortcut_url_logs_export');
 		foreach ($pages as $page) {
-			$boutons_admin['menu_shortcut_url']->sousmenu[] = new Bouton(find_in_theme('images/shortcut_url-16.png'), 'shortcut_url:' . $page, $page);
+			$boutons_admin['menu_shortcut_url']->sousmenu[] = new Bouton(
+				find_in_theme('images/shortcut_url-16.png'),
+				'shortcut_url:' . $page,
+				$page
+			);
 		}
 	} else {
 		unset($boutons_admin['menu_shortcut_url']);
@@ -99,20 +145,10 @@ function shortcut_url_ajouter_menus($boutons_admin) {
 }
 
 /**
- * Autoriser shortcut dans le menu
- *
- * @param string $faire, $type, $id, $qui, $opt
- * @return string
- */
-function autoriser_menushortcuturl_menu($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('1comite', '0minirezo')) && count($qui['restreint']) == 0;
-}
-
-/**
  * Affiche les URL publié par un auteur dans sa fiche
  *
- * @param string $flux
- * @return string
+ * @param array $flux Le contexte du pipeline
+ * @return array
  */
 function shortcut_url_affiche_milieu($flux) {
 	if (trouver_objet_exec($flux['args']['exec'] == 'auteur') && $flux['args']['id_auteur']) {
@@ -132,7 +168,7 @@ function shortcut_url_affiche_milieu($flux) {
  * Ajoute les css pour shortcut_url chargées dans le privé
  *
  * @param string $flux Contenu du head HTML concernant les CSS
- * @return string       Contenu du head HTML concernant les CSS
+ * @return string      Contenu du head HTML concernant les CSS modifié
  */
 function shortcut_url_header_prive_css($flux) {
 	$css = find_in_path('css/shortcut_url.css');
