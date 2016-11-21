@@ -10,13 +10,16 @@
  */
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function albums_autoriser(){}
+function albums_autoriser() {
+}
 
 
 /**
@@ -33,10 +36,9 @@ function albums_autoriser(){}
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_albumcreer_menu_dist($faire, $type, $id, $qui, $opts){
-	return autoriser('creer','album',$id,$qui,$opts);
+function autoriser_albumcreer_menu_dist($faire, $type, $id, $qui, $opts) {
+	return autoriser('creer', 'album', $id, $qui, $opts);
 }
-
 
 /**
  * Autorisation de voir les albums dans le menu d'édition.
@@ -52,10 +54,9 @@ function autoriser_albumcreer_menu_dist($faire, $type, $id, $qui, $opts){
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_albums_menu_dist($faire, $type, $id, $qui, $opts){
-	return autoriser('administrer','albumotheque',$id,$qui,$opts);
+function autoriser_albums_menu_dist($faire, $type, $id, $qui, $opts) {
+	return autoriser('administrer', 'albumotheque', $id, $qui, $opts);
 }
-
 
 /**
  * Autorisation de créer un album
@@ -73,7 +74,6 @@ function autoriser_album_creer_dist($faire, $type, $id, $qui, $opts) {
 	$autoriser = (in_array($qui['statut'], array('0minirezo', '1comite'))) ? true : false;
 	return $autoriser;
 }
-
 
 /**
  * Autorisation à voir les fiches complètes.
@@ -148,34 +148,34 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
 	$autoriser = (
 		(
 			// objet activé
-			in_array(table_objet_sql($type),array_filter($config))
+			in_array(table_objet_sql($type), array_filter($config))
 		)
-		AND
+		and
 		(
 			// identifiant positif : cas «normal»
 			(
 				$id>0
-				AND
+				and
 				(
-					($qui['statut'] == '0minirezo' AND !$qui['restreint'])
+					($qui['statut'] == '0minirezo' and !$qui['restreint'])
 					// il faut être autorisé à modifier l'objet...
-					OR autoriser('modifier', $type, $id, $qui, $opts)
+					or autoriser('modifier', $type, $id, $qui, $opts)
 					// ...mais ça donne un faux négatif depuis le pipeline «post_insertion» (cf. note),
 					// dans ce cas là on vérifie si l'objet est récent et qu'on a le droit d'écrire.
-					OR (
-						(time()-strtotime(generer_info_entite($id,$type,'date'))) < (60*1) // age < 1 min, cf. note
-						AND autoriser('ecrire', $type, $id, $qui, $opts)
+					or (
+						(time()-strtotime(generer_info_entite($id, $type, 'date'))) < (60*1) // age < 1 min, cf. note
+						and autoriser('ecrire', $type, $id, $qui, $opts)
 					)
 				)
 			)
 			// identifiant négatif : objet nouveau pas encore enregistré en base (cf. note)
-			OR
+			or
 			(
 				$id<0
-				AND
+				and
 				(
 					abs($id) == $qui['id_auteur']
-					AND autoriser('ecrire', $type, $id, $qui, $opts)
+					and autoriser('ecrire', $type, $id, $qui, $opts)
 				)
 			)
 		)
@@ -191,7 +191,8 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
  * Il faut être l'auteur et avoir le droit de modifier tous les objets auxquels l'album est lié,
  * ou qu'il s'agisse d'un album en cours de création (vide, pas d'auteur et récent, cf. note),
  * ou être admin complet,
- * ou que l'album soit lié à une rubrique wiki/ouverte ou un de ses article et utilisé une seule fois (plugin autorité).
+ * ou que l'album soit lié à une rubrique wiki/ouverte ou un de ses article
+ * et utilisé une seule fois (plugin autorité).
  *
  * @note
  * Hack pénible : quand on ajoute des documents à un nouvel album pas encore enregistré en base,
@@ -220,23 +221,24 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 
 	// être un des auteurs de l'album
 	$auteurs_album = array();
-	if (is_array($liens_auteurs = objet_trouver_liens(array('auteur'=>'*'),array('album'=>$id))))
-		foreach($liens_auteurs as $a)
+	if (is_array($liens_auteurs = objet_trouver_liens(array('auteur'=>'*'), array('album'=>$id)))) {
+		foreach ($liens_auteurs as $a) {
 			$auteurs_album[] = $a['id_auteur'];
-	$auteur_album = in_array($qui['id_auteur'],$auteurs_album) ? true : false;
+		}
+	}
+	$auteur_album = in_array($qui['id_auteur'], $auteurs_album) ? true : false;
 
 	// droit de modifier tous les objets auxquels l'album est lié
 	// l'album peut être lié à un nouvel objet pas encore enregistré en base,
 	// dans ce cas id_objet est négatif
 	$autoriser_modifier_objets_lies = true;
-	$liens_objets = objet_trouver_liens(array('album'=>$id),'*');
-	if (is_array($liens_objets) AND count($liens_objets)){
-		foreach($liens_objets as $l) {
+	$liens_objets = objet_trouver_liens(array('album'=>$id), '*');
+	if (is_array($liens_objets) and count($liens_objets)) {
+		foreach ($liens_objets as $l) {
 			$objet = $l['objet'];
 			$id_objet = $l['id_objet'];
-			if (
-				($id_objet>0 AND !autoriser('modifier',$objet,$id_objet))
-				OR ($id_objet<0 AND !autoriser('ecrire',$objet,$id_objet))
+			if (($id_objet > 0 and !autoriser('modifier', $objet, $id_objet))
+				or ($id_objet < 0 and !autoriser('ecrire', $objet, $id_objet))
 			) {
 				$autoriser_modifier_objets_lies = false;
 				break;
@@ -249,71 +251,64 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$nouvel_album =
 		(
 			!count($auteurs_album)
-			AND !sql_countsel("spip_documents_liens", "objet='album' AND id_objet=".$id) // vide
-			AND ((time()-strtotime(sql_getfetsel("date","spip_albums","id_album=".$id))) < (60*1)) // age < 1 min
+			and !sql_countsel('spip_documents_liens', "objet='album' AND id_objet=".$id) // vide
+			and ((time()-strtotime(sql_getfetsel('date', 'spip_albums', 'id_album='.$id))) < (60*1)) // age < 1 min
 		) ?
 		true : false;
 
 	// les admins complets ont tous les droits !
-	$admin_complet = ($qui['statut'] == '0minirezo' AND !$qui['restreint']) ?
+	$admin_complet = ($qui['statut'] == '0minirezo' and !$qui['restreint']) ?
 		true : false;
 
 	// plugin autorité
 	// album utilisé une seule fois et situé dans un secteur wiki/ouvert.
 	// on vérifie que l'objet auquel il est lié possède un champ `id_secteur`, et qu'on a le droit de publier dedans.
 	$album_wiki = false;
-	if (defined('_DIR_PLUGIN_AUTORITE')){
-		if (
-			// album utilisé une seule fois...
-			is_array($liens_objets)
-			AND count($liens_objets) == 1
+	if (defined('_DIR_PLUGIN_AUTORITE')) {
+		if (is_array($liens_objets) // album utilisé une seule fois...
+			and count($liens_objets) == 1
 			// ...et lié à un objet...
-			AND $objet = $liens_objets[0]['objet']
-			AND $id_objet = $liens_objets[0]['id_objet']
+			and $objet = $liens_objets[0]['objet']
+			and $id_objet = $liens_objets[0]['id_objet']
 			// ...qui possède un champ `id_secteur`
-			AND is_array($infos_objet = lister_tables_objets_sql(table_objet_sql($objet)))
-			AND
-			(
-				(
+			and is_array($infos_objet = lister_tables_objets_sql(table_objet_sql($objet)))
+			and
+			((
 				isset($infos_objet['field']['id_secteur'])
-				AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
-				)
-				OR
-				(
-				isset($infos_objet['field']['id_rubrique'])
-				AND $id_rubrique = sql_getfetsel('id_rubrique',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
-				AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql('rubrique'),'id_rubrique='.intval($id_rubrique))
-				)
-			)
+				and $id_secteur = sql_getfetsel('id_secteur', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet)))
+				or
+				(isset($infos_objet['field']['id_rubrique'])
+				and $id_rubrique = sql_getfetsel('id_rubrique', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet))
+				and $id_secteur = sql_getfetsel('id_secteur', table_objet_sql('rubrique'), 'id_rubrique='.intval($id_rubrique))
+			))
 		) {
 			// on cherche à savoir si le secteur est wiki/ouvert.
 			// faute de fonction générique, on reprend une partie du code de l'autorisation 'rubrique_publierdans'.
 			// cf. inc/autoriser.php L291 à 317
-			if (
-				(
+			if ((
 					$GLOBALS['autorite']['espace_publieur']
-					AND autorisation_publie_visiteur($qui, $id_secteur)
-					AND $qui['statut']
+					and autorisation_publie_visiteur($qui, $id_secteur)
+					and $qui['statut']
 				)
-				OR (
+				or (
 					$GLOBALS['autorite']['espace_wiki']
-					AND autorisation_wiki_visiteur($qui, $id_secteur)
-					AND (
+					and autorisation_wiki_visiteur($qui, $id_secteur)
+					and (
 						$GLOBALS['autorite']['espace_wiki_rubrique_anonyme']
-						OR $qui['statut']
+						or $qui['statut']
 					)
 				)
-			){
+			) {
 				$album_wiki = true;
 			}
 		}
 	}
 
 	$autoriser = (
-		($auteur_album AND $autoriser_modifier_objets_lies)
-		OR $nouvel_album
-		OR $admin_complet
-		OR $album_wiki
+		($auteur_album and $autoriser_modifier_objets_lies)
+		or $nouvel_album
+		or $admin_complet
+		or $album_wiki
 	) ? true : false;
 
 	return $autoriser;
@@ -335,22 +330,22 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opts) {
 
 	$id = intval($id);
-	$statut = sql_getfetsel("statut", "spip_albums", "id_album=$id");
-	$documents = sql_countsel("spip_documents_liens", "objet=".sql_quote($type)."AND id_objet=$id");
-	$liaisons = sql_countsel("spip_albums_liens", "id_album=$id");
+	$statut = sql_getfetsel('statut', 'spip_albums', "id_album=$id");
+	$documents = sql_countsel('spip_documents_liens', 'objet='.sql_quote($type)."AND id_objet=$id");
+	$liaisons = sql_countsel('spip_albums_liens', "id_album=$id");
 
 	$autoriser = (
 		!$liaisons # inutilisé
-		AND !$documents # vide
-		AND
+		and !$documents # vide
+		and
 		(
 			(
 				($statut != 'publie') #non publié
-				AND (autoriser('modifier', $type, $id, $qui)) #auteur ou admin
+				and (autoriser('modifier', $type, $id, $qui)) #auteur ou admin
 			)
-			OR
+			or
 			(
-				$qui['statut'] == '0minirezo' AND !$qui['restreint'] #admin complet
+				$qui['statut'] == '0minirezo' and !$qui['restreint'] #admin complet
 			)
 		)
 	) ? true : false;
@@ -385,8 +380,8 @@ function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opts) {
 function autoriser_album_associer_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
-		($qui['statut'] == '0minirezo' AND !$qui['restreint'])
-		OR (autoriser('modifier', $opts['objet'], $opts['id_objet'], $qui))
+		($qui['statut'] == '0minirezo' and !$qui['restreint'])
+		or (autoriser('modifier', $opts['objet'], $opts['id_objet'], $qui))
 	) ? true : false;
 
 	return $autoriser;
@@ -420,7 +415,7 @@ function autoriser_album_dissocier_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
 		autoriser('associer', 'album', $id, $qui, $opts)
-		AND (sql_getfetsel('vu', "spip_albums_liens", "id_album=".intval($id)." AND objet=".sql_quote($opts['objet'])." AND id_objet=".intval($opts['id_objet']))=='non')
+		and (sql_getfetsel('vu', 'spip_albums_liens', 'id_album='.intval($id).' AND objet='.sql_quote($opts['objet']).' AND id_objet='.intval($opts['id_objet']))=='non')
 	) ? true : false;
 
 	return $autoriser;
@@ -461,29 +456,28 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 
 	include_spip('inc/config');
 	// dans le contexte d'un objet, on doit pouvoir modifier tous les albums liés
-	if ($type AND intval($id)>0) {
+	if ($type and intval($id) > 0) {
 		$autoriser_modifier_albums = true;
 		include_spip('action/editer_liens');
-		if (is_array($liens_albums=objet_trouver_liens(array('album'=>'*'),array($type=>$id))) AND count($liens_albums)){
-			foreach($liens_albums as $l) {
-				if (!autoriser('modifier','album',$l['id_album'])) {
+		if (is_array($liens_albums = objet_trouver_liens(array('album' => '*'), array($type => $id))) and count($liens_albums)) {
+			foreach ($liens_albums as $l) {
+				if (!autoriser('modifier', 'album', $l['id_album'])) {
 					$autoriser_modifier_albums = false;
 					break;
 				}
 			}
 		}
-	}
-	// sinon, il faut qu'il y ait au moins 2 albums
-	else {
-		$autoriser_modifier_albums = sql_countsel('spip_albums')>1;
+	} else {
+		// sinon, il faut qu'il y ait au moins 2 albums
+		$autoriser_modifier_albums = sql_countsel('spip_albums') > 1;
 	}
 
 	$autoriser = (
-		lire_config('albums/deplacer_documents','')=='on'
-		AND
+		lire_config('albums/deplacer_documents', '') == 'on'
+		and
 		(
-			$qui['statut'] == '0minirezo' AND !$qui['restreint']
-			OR $autoriser_modifier_albums
+			$qui['statut'] == '0minirezo' and !$qui['restreint']
+			or $autoriser_modifier_albums
 		)
 	) ? true : false;
 
@@ -506,9 +500,9 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 function autoriser_album_vider_dist($faire, $type, $id, $qui, $opts) {
 
 	include_spip('action/editer_liens');
-	$rempli = count(objet_trouver_liens(array('document'=>'*'),array('album'=>$id)))>0;
-	$admin = $qui['statut']=='0minirezo' AND !$qui['restreint'];
-	$autoriser = ($admin AND $rempli) ? true : false;
+	$rempli = count(objet_trouver_liens(array('document'=>'*'), array('album'=>$id))) > 0;
+	$admin = $qui['statut']=='0minirezo' and !$qui['restreint'];
+	$autoriser = ($admin and $rempli) ? true : false;
 
 	return $autoriser;
 }
@@ -517,7 +511,7 @@ function autoriser_album_vider_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation de transvaser les documents d'un album
  *
- * Il faut que l'album soit lié à l'objet et 
+ * Il faut que l'album soit lié à l'objet et
  * avoir le droit de modifier l'album et d'ajouter des documents ou être admin complet.
  *
  * @param  string $faire Action demandée
@@ -534,26 +528,23 @@ function autoriser_album_transvaser_dist($faire, $type, $id, $qui, $opts) {
 	include_spip('action/editer_liens');
 	$objet = $opts['objet'];
 	$id_objet = $opts['id_objet'];
-	$liaison = (count(objet_trouver_liens(array('album'=>$id),array($objet=>$id_objet)))>0) ? true : false;
-	$autoriser_modifier = autoriser('modifier','album',$id);
-	$autoriser_joindredocument = autoriser('joindredocument',$objet,$id_objet);
-	$admin = $qui['statut']=='0minirezo' AND !$qui['restreint'];
+	$liaison = (count(objet_trouver_liens(array('album'=>$id), array($objet=>$id_objet))) > 0) ? true : false;
+	$autoriser_modifier = autoriser('modifier', 'album', $id);
+	$autoriser_joindredocument = autoriser('joindredocument', $objet, $id_objet);
+	$admin = $qui['statut']=='0minirezo' and !$qui['restreint'];
 
 	$autoriser = (
 		$liaison
-		AND
+		and
 		(
 			(
 			$autoriser_modifier
-			AND $autoriser_joindredocument
+			and $autoriser_joindredocument
 			)
-			OR
+			or
 			$admin
 		)
 	) ? true : false;
 
 	return $autoriser;
 }
-
-
-?>

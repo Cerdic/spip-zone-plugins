@@ -10,7 +10,9 @@
  */
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Retourne une liste d'objets, correspondants éventuellement à un terme de recherche.
@@ -31,7 +33,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param string $type
  *     Type d'objet recherché
-  * @param string $type2
+ * @param string $type2
  *     Type d'objet lié
  * @param bool $pivot2
  *     `true` pour définir l'objet secondaire comme pivot.
@@ -49,25 +51,28 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     tableau contenant une sélection des objets avec leur identifiant et leur titre.
  */
-function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$champ='',$nb=''){
+function filtre_albums_autocomplete($type = '', $type2 = '', $pivot2 = false, $terme = '', $champ = '', $nb = '') {
 
 	// vérifications préliminaires
-	if (
-		(!$type = objet_info($type,'type')) // type d'objet valide
-		OR ($type2 AND !$type2 = objet_info($type2,'type')) // type d'objet secondaire valide
-	)
+	if ((!$type = objet_info($type, 'type')) // type d'objet valide
+		or ($type2 and !$type2 = objet_info($type2, 'type')) // type d'objet secondaire valide
+	) {
 		return;
+	}
 
 	// Objet principal (celui recherché)
 	$table_objet_sql = table_objet_sql($type); // ex. spip_mots
 	$table_objet = table_objet($type); // ex. mots
 	// champ contenant le titre d'après la déclaration sql de la table (une chaîne du genre «titre, '' AS lang»)
-	$champ_titre = objet_info($type,'titre');
+	$champ_titre = objet_info($type, 'titre');
 	// champ utilisé pour la recherche : s'il est donné on vérifie qu'il est valide, sinon on prend le champ de titre
-	$champ = ($champ and in_array($champ,array_keys(objet_info($type,'field')))) ? $champ.' AS titre' : $champ_titre;
+	$champ = ($champ and in_array($champ, array_keys(objet_info($type, 'field')))) ? $champ.' AS titre' : $champ_titre;
 	// nombre maximal de résultats
-	if (!intval($nb) OR is_null($nb)) $nb = 20;
-	else $nb = intval($nb);
+	if (!intval($nb) or is_null($nb)) {
+		$nb = 20;
+	} else {
+		$nb = intval($nb);
+	}
 
 	// Objet secondaire (optionnel)
 	if ($type2) {
@@ -80,8 +85,7 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 	// on fait des sous-requêtes.
 	$pivot = ($type2) ? ($pivot2) ? 'secondaire' : 'principal' : '';
 	$res = array();
-	switch ($pivot){
-
+	switch ($pivot) {
 		/*
 		1) pas de pivot : on cherche des `$type` tout simplement
 		exemple: des albums...
@@ -108,10 +112,10 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 					array('OR', "$alias.titre LIKE ".sql_quote("%$terme%"), "$alias.id=".$id)
 					: "$alias.titre LIKE ".sql_quote("%$terme%");
 			}
-			$groupby = "id";
+			$groupby = 'id';
 			$orderby = '';
 			$limit = "0,$nb";
-			$res = sql_allfetsel('titre,id',$getselect,$where,$groupby,$orderby,$limit);
+			$res = sql_allfetsel('titre,id', $getselect, $where, $groupby, $orderby, $limit);
 			//var_dump(sql_allfetsel('titre,id',$getselect,$where,'','','','','',false));
 			break;
 
@@ -130,7 +134,9 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 		case 'principal':
 			// clé primaire de l'objet (id_xxx) et sa table de liens
 			include_spip('action/editer_liens');
-			if (!$a = objet_associable($type)) return;
+			if (!$a = objet_associable($type)) {
+				return;
+			}
 			list($id_table_objet, $table_objet_sql_liens) = $a;
 			// préparer la requête
 			$alias = 'sub'; // alias de la sous-requête
@@ -141,21 +147,21 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 			$from = "$table_objet_sql AS T1"
 				." INNER JOIN $table_objet_sql_liens AS L1"
 				." ON (L1.$id_table_objet = T1.$id_table_objet)";
-			$where_sub[] = "L1.objet=".sql_quote($type2);
+			$where_sub[] = 'L1.objet='.sql_quote($type2);
 			$getselect = '('.sql_get_select($select, $from, $where_sub).') '.$alias;
 			if ($terme) {
 				$where[] = ($id=intval($terme)) ?
 					array('OR', "$alias.titre LIKE ".sql_quote("%$terme%"), "$alias.id=".$id)
 					: "$alias.titre LIKE ".sql_quote("%$terme%");
 			}
-			$groupby = "id";
+			$groupby = 'id';
 			$orderby = '';
 			$limit = "0,$nb";
 			// requête
-			$res = sql_allfetsel('titre,id',$getselect,$where,$groupby,$orderby,$limit);
+			$res = sql_allfetsel('titre,id', $getselect, $where, $groupby, $orderby, $limit);
 			//var_dump(sql_allfetsel('titre,id',$getselect,$where,'','','','','',false));
 			break;
- 
+
 		/*
 		3) l'objet secondaire sert de pivot : on cherche des `$type` auxquels sont liés des `$type2`
 		exemple: articles auxquels sont liés des albums
@@ -170,7 +176,9 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 		case 'secondaire':
 			// clé primaire de l'objet (id_xxx) et sa table de liens
 			include_spip('action/editer_liens');
-			if (!$a = objet_associable($type2)) return;
+			if (!$a = objet_associable($type2)) {
+				return;
+			}
 			list($id_table_objet2, $table_objet_sql_liens2) = $a;
 			$id_table_objet = id_table_objet($type);
 			// préparer la requête
@@ -181,24 +189,21 @@ function filtre_albums_autocomplete($type='',$type2='',$pivot2=false,$terme='',$
 			);
 			$from = "$table_objet_sql AS T1"
 				." INNER JOIN $table_objet_sql_liens2 AS L2"
-				." ON ( L2.objet = ".sql_quote($type)." AND L2.id_objet = T1.$id_table_objet )";
+				.' ON ( L2.objet = '.sql_quote($type)." AND L2.id_objet = T1.$id_table_objet )";
 			$getselect = '('.sql_get_select($select, $from).') '.$alias;
 			if ($terme) {
 				$where[] = ($id=intval($terme)) ?
 					array('OR', "$alias.titre LIKE ".sql_quote("%$terme%"), "$alias.id=".$id)
 					: "$alias.titre LIKE ".sql_quote("%$terme%");
 			}
-			$groupby = "id";
+			$groupby = 'id';
 			$orderby = '';
 			$limit = "0,$nb";
 			// requête
-			$res = sql_allfetsel('titre,id',$getselect,$where,$groupby,$orderby,$limit);
+			$res = sql_allfetsel('titre,id', $getselect, $where, $groupby, $orderby, $limit);
 			//var_dump(sql_allfetsel('titre,id',$getselect,$where,'','','','','',false));
 			break;
-
 	}
 
 	return $res;
 }
-
-?>

@@ -20,7 +20,9 @@
  * @package    SPIP\Albums\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Chargement du formulaire d'insertion de balise d'un album
@@ -32,15 +34,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_balise_album_charger_dist($id_album=0){
+function formulaires_balise_album_charger_dist($id_album = 0) {
 
 	// sans les plugins adéquats, ni la liste des modèles, on peut pas test
 	// mais il faut quand même afficher la balise de base
 	include_spip('inc/albums');
-	if (
-		!defined('_DIR_PLUGIN_YAML') OR !_DIR_PLUGIN_YAML
-		OR !defined('_DIR_PLUGIN_SAISIES') OR !_DIR_PLUGIN_SAISIES
-		OR !count($liste_modeles = albums_lister_modeles())
+	if (!defined('_DIR_PLUGIN_YAML')
+		or !_DIR_PLUGIN_YAML
+		or !defined('_DIR_PLUGIN_SAISIES')
+		or !_DIR_PLUGIN_SAISIES
+		or !count($liste_modeles = albums_lister_modeles())
 	) {
 		$balise = htmlspecialchars('<album'.$id_album.'>');
 		$js_balise = js_balise($balise);
@@ -54,17 +57,17 @@ function formulaires_balise_album_charger_dist($id_album=0){
 	$valeurs['_etapes'] = 3;
 
 	switch ($etape) {
-
 		// étape 0 : balise de base
-		case 1;
+		case 1:
 			$valeurs['_balise'] = $balise = htmlspecialchars('<album'.$id_album.'>');
 			$valeurs['_js_balise'] = js_balise($balise);
 			break;
-
 		// étape 1 : choix du modèle
-		case 2;
-			foreach($liste_modeles as $modele=>$infos)
+		case 2:
+			$datas_modeles = array();
+			foreach ($liste_modeles as $modele => $infos) {
 				$datas_modeles[$modele] = $infos['alias'];
+			}
 			$saisies_modeles = array(
 				array(
 					'saisie' => 'radio',
@@ -78,35 +81,34 @@ function formulaires_balise_album_charger_dist($id_album=0){
 			);
 			$valeurs['_saisies'] = $saisies_modeles;
 			break;
-
 		// étape 3 : choix des paramètres puis affichage
-		case 3;
+		case 3:
 			// choix des paramètres
 			if (_request('choisir')) {
 				$modele = _request('modele');
 				// déclarer les champs du modèle choisi
-				if (
-					$infos = infos_modele_album($modele)
-					AND isset($infos['parametres'])
-					AND is_array($saisies = $infos['parametres'])
+				if ($infos = infos_modele_album($modele)
+					and isset($infos['parametres'])
+					and is_array($saisies = $infos['parametres'])
 				) {
 					$valeurs['_saisies'] = $saisies;
 					include_spip('inc/config');
 					// valeurs des saisies
-					foreach($saisies as $saisie=>$params) {
+					foreach ($saisies as $params) {
 						$nom = $params['options']['nom'];
 						$valeurs[$nom] = '';
 						// on récupère éventuellement la valeur par défaut dans un meta
-						if (isset($params['options']['config']))
+						if (isset($params['options']['config'])) {
 							$valeurs[$nom] = lire_config($params['options']['config']);
-						// on donne une valeur par défaut à « id_album » afin de cacher le champ « id_modele » (via afficher_si),
+						}
+						// on donne une valeur par défaut à « id_album » afin de cacher le champ « id_modele »
+						// (via afficher_si),
 						// qui n'est là que pour compatibilité avec le plugin « Insérer modèles »
 						$valeurs['id_album'] = $id_album;
 					}
 				}
-			}
-			// affichage de la balise
-			elseif(_request('generer')) {
+			} elseif (_request('generer')) {
+				// affichage de la balise
 				$valeurs['_balise'] = _request('_balise');
 				$valeurs['_js_balise'] = _request('_js_balise');
 				$valeurs['fini'] = true;
@@ -115,7 +117,6 @@ function formulaires_balise_album_charger_dist($id_album=0){
 	}
 
 	return $valeurs;
-
 }
 
 /**
@@ -128,7 +129,7 @@ function formulaires_balise_album_charger_dist($id_album=0){
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_balise_album_verifier_3_dist($id_album=0){
+function formulaires_balise_album_verifier_3_dist($id_album = 0) {
 
 	$erreurs = array();
 	include_spip('inc/saisies');
@@ -151,7 +152,7 @@ function formulaires_balise_album_verifier_3_dist($id_album=0){
  * @return array
  *     Retours des traitements
  */
-function formulaires_balise_album_traiter_dist($id_album=0){
+function formulaires_balise_album_traiter_dist($id_album = 0) {
 
 	$res = array();
 	$res['editable'] = true;
@@ -160,47 +161,50 @@ function formulaires_balise_album_traiter_dist($id_album=0){
 	$modele = _request('modele');
 	$infos = infos_modele_album($modele);
 	$champs = array();
-	if (
-		$infos = infos_modele_album($modele)
-		AND isset($infos['parametres'])
-		AND is_array($saisies = $infos['parametres'])
+	if ($infos = infos_modele_album($modele)
+		and isset($infos['parametres'])
+		and is_array($saisies = $infos['parametres'])
 	) {
-		foreach($saisies as $saisie=>$params)
-			$champs[] = $params['options']['nom'];
+		foreach ($saisies as $params) {
+			if (isset($params['options']) and $params['options']['nom']) {
+				$champs[] = $params['options']['nom'];
+			}
+		}
 	}
 
 	$balise = '<album'.$id_album;
 	// d'abord les options connues : variante, classe, align
-	if (_request('variante') && _request('variante')!='')
+	if (_request('variante') && _request('variante') != '') {
 		$balise .= '|'._request('variante');
-	if (_request('classe') && _request('classe')!='')
+	}
+	if (_request('classe') && _request('classe') != '') {
 		$balise .= '|'._request('classe');
-	if (_request('align') && _request('align')!='')
+	}
+	if (_request('align') && _request('align') != '') {
 		$balise .= '|'._request('align');
+	}
 	// puis les options propres au modèle
 	foreach ($champs as $champ) {
-		if(
-			!in_array($champ,array('modele','id_modele','id_album','classe','align','variante'))
-			&& _request($champ) && _request($champ)!=''
+		if (!in_array($champ, array('modele', 'id_modele', 'id_album', 'classe', 'align', 'variante'))
+			&& _request($champ) && _request($champ) != ''
 		) {
-			if($champ == _request($champ))
+			if ($champ == _request($champ)) {
 				$balise .= "|$champ";
-			// On transforme les tableaux en une liste
-			elseif (is_array(_request($champ)))
-				$balise .= "|$champ=".implode(',',_request($champ));
-			else
+			} elseif (is_array(_request($champ))) {
+				// On transforme les tableaux en une liste
+				$balise .= "|$champ=".implode(',', _request($champ));
+			} else {
 				$balise .= "|$champ="._request($champ);
+			}
 		}
 	}
 	$balise .= '>';
 	// ajout de <wbr> pour des retours à la ligne corrects
-	$balise_txt = preg_replace("/([\|,])/","<wbr>$1",htmlspecialchars($balise));
-	set_request('_balise',$balise_txt);
-	set_request('_js_balise',js_balise($balise));
+	$balise_txt = preg_replace('/([\|,])/', '<wbr>$1', htmlspecialchars($balise));
+	set_request('_balise', $balise_txt);
+	set_request('_js_balise', js_balise($balise));
 	//$res['message_ok'] = _T('album:texte_double_clic_inserer_balise');
-
 	return $res;
-
 }
 
 /**
@@ -212,5 +216,3 @@ function formulaires_balise_album_traiter_dist($id_album=0){
 function js_balise($balise) {
 	return "barre_inserer('".texte_script($balise)."', $('textarea[name=texte]')[0]);";
 }
-
-?>

@@ -10,7 +10,9 @@
 **/
 
 // Sécurité
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -22,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
  */
-function albums_upgrade($nom_meta_base_version, $version_cible){
+function albums_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	// Création des tables + options de configuration
@@ -69,27 +71,26 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 function albums_vider_tables($nom_meta_base_version) {
 
 	# Supression des tables
-	sql_drop_table("spip_albums");
-	sql_drop_table("spip_albums_liens");
+	sql_drop_table('spip_albums');
+	sql_drop_table('spip_albums_liens');
 
 	# Suppression des liens des documents liés aux albums
-	sql_delete("spip_documents_liens",    sql_in("objet", array('album')));
+	sql_delete('spip_documents_liens', sql_in('objet', array('album')));
 
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",           sql_in("objet", array('album')));
-	sql_delete("spip_versions_fragments", sql_in("objet", array('album')));
-	sql_delete("spip_forum",              sql_in("objet", array('album')));
+	sql_delete('spip_versions', sql_in('objet', array('album')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('album')));
+	sql_delete('spip_forum', sql_in('objet', array('album')));
 
 	# Suppression meta
 	effacer_meta($nom_meta_base_version);
 	effacer_meta('albums');
 
 	# Retirer les albums de la liste des objets où téléverser des documents
-	if (in_array('spip_albums', $objets=@array_filter(explode(',',$GLOBALS['meta']['documents_objets'])))){
-		$objets = array_diff($objets,array('spip_albums'));
-		ecrire_meta('documents_objets',implode(',',$objets));
+	if (in_array('spip_albums', $objets = @array_filter(explode(',', $GLOBALS['meta']['documents_objets'])))) {
+		$objets = array_diff($objets, array('spip_albums'));
+		ecrire_meta('documents_objets', implode(',', $objets));
 	}
-
 }
 
 
@@ -100,11 +101,9 @@ function albums_vider_tables($nom_meta_base_version) {
  * @return void
  */
 function meta_documents_albums() {
-	if (!in_array('spip_albums', $e = explode(',',$GLOBALS['meta']['documents_objets']))){
+	if (!in_array('spip_albums', $e = explode(',', $GLOBALS['meta']['documents_objets']))) {
 		$e = array_filter($e);
 		$e[] = 'spip_albums';
-		ecrire_meta('documents_objets',implode(',',$e));
+		ecrire_meta('documents_objets', implode(',', $e));
 	}
 }
-
-?>
