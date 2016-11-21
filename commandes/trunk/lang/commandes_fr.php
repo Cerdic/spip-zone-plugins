@@ -215,7 +215,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
 	'texte_changer_statut_commande_detail' => 'Ce détail de commande est :',
-	'texte_statut_transaction_commande' => 'La transaction liée à cette commande est :',
 	'titre_adresse_client' => 'Adresse du client',
 	'titre_adresse_commande' => 'Adresse associée à la commande',
 	'titre_adresse_contact' => 'Adresse du contact',

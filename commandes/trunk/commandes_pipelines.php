@@ -453,3 +453,29 @@ function commandes_bank_abos_resilier($flux){
 	
 	return $flux;
 }
+
+/**
+ * Si le plugin Bank est activé, un changement de statut vers Payée redirige vers la page de paiement de la transaction
+ * 
+ * @pipeline pre_edition
+ **/
+
+function commandes_pre_edition($flux){
+	if (test_plugin_actif('bank')
+		AND $flux['args']['table'] == 'spip_commandes'
+		AND $flux['args']['action'] == 'instituer'
+		AND $flux['data']['statut'] == 'paye') {
+
+		$id_commande = $flux['args']['id_objet'];
+
+		$transaction = sql_fetsel('id_transaction, transaction_hash, statut', 'spip_transactions', 'id_commande='.intval($id_commande));
+
+		if (!is_null($transaction) AND $transaction['statut'] != 'ok') {
+			$arguments = "id_transaction=".$transaction['id_transaction']."&transaction_hash=".$transaction['transaction_hash'];
+
+			include_spip('inc/headers');
+			redirige_url_ecrire('payer' , $arguments);
+		}
+	}
+	return $flux;
+}

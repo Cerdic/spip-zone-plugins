@@ -153,14 +153,3 @@
 </B_liste_commandes>[
 <div class="liste-elements commandes"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_commandes>
-
-[(#REM) si le plugin Bank est activé, on ne peut changer le statut d'une commande que si on a une info sur le paiement. Du coup rendre inactif le js de changement de statut au survol de la puce statut]
-[(#VAL{bank}|test_plugin_actif|oui)
-	<script type="text/javascript">
-	(function($){
-		$(document).ready(function(){
-			$('td.etat span.commande').removeClass('puce_objet');
-		});
-	})(jQuery);
-	</script>
-]
