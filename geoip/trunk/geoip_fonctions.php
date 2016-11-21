@@ -23,12 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 
 	// Utilise le module libapache2-geoip
-	if (function_exists($fonction) and $_SERVER['GEOIP_ADDR']) {
-
+	if (function_exists($fonction) and isset($_SERVER['GEOIP_ADDR'])) {
 		$resultat = $fonction($ip);
-
 	} else {
-
 		include_spip('lib/vendor/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder');
 		include_spip('lib/vendor/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException');
 		include_spip('lib/vendor/maxmind-db/reader/src/MaxMind/Db/Reader/Metadata');
@@ -80,7 +77,5 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 			$resultat_lat,
 			$resultat_lon);
 	}
-
 	return $resultat;
-
 }
