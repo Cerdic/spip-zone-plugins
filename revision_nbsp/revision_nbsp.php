@@ -111,13 +111,14 @@
 
 		//  Cas deux : on recherche des notes en derniers paragraphes,
 		// commencant par (1), on les reinjecte en [[<> ... ]] et on
-		// relance la fonction sur cette onstruction.
+		// relance la fonction sur cette construction.
 		else {
 			$texte = trim($texte);
 			if (preg_match_all(',^[(](\d+)[)].*$,UmS', $texte, $regs)
-			AND preg_match(',^(.*\n)([(]1[)].*)$,UmsS', $texte, $u)) {
+			AND preg_match(',^(.*\n)([(]1[)].*)$,Us', $texte, $u)) {
 				$notes = $u[2];
 				$texte = $u[1];
+				//var_dump($notes);
 				return notes_automatiques("$texte\n\n[[<> $notes ]]");
 			} 
 		}
