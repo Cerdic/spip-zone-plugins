@@ -145,7 +145,7 @@ function convertir_xml_de($u) {
 	// <Kursiv>	dt. Bodo Schulze</Kursiv>
 	// <FettKursiv>Aus dem Englischen von Niels Kadritzke <br/></FettKursiv>
 	if(preg_match("%<Kursiv>(\s*dt\..*)</Kursiv>%Ums",$u,$matches)
-		OR preg_match("%<(?:(?:Fett)*Kursiv|Fussnote)>(\s*Aus de.*)</*(?:(?:Fett)*Kursiv|Fussnote)/*>%Uums",$u,$matches)
+		OR preg_match("%<(?:(?:Fett)*Kursiv|Fussnote|Fett)>(\s*Aus de.*)</*(?:(?:Fett)*Kursiv|Fussnote|Fett)/*>%Uums",$u,$matches)
 		OR preg_match("%<Kursiv>(\s*deutsch von.*)</Kursiv>%Ums",$u,$matches)		
 	){
 		$m['traducteur'] = trim(textebrut($matches[1])) ;
