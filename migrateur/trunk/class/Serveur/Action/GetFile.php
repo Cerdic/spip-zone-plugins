@@ -29,7 +29,7 @@ class GetFile extends ActionBase {
 		//output file with generic binary mime type
 		header('Content-type: application/octet-stream');
 		$fp = fopen($chemin, 'rb');
-		stream_filter_append($fp, 'crypteur.encrypt', STREAM_FILTER_READ, array('crypteur' => $this->serveur->getCrypteur()));
+		stream_filter_append($fp, 'crypteur.encrypt', STREAM_FILTER_WRITE, array('crypteur' => $this->serveur->getCrypteur()));
 		fpassthru($fp);
 
 		exit;

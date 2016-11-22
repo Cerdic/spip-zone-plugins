@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+Version 3.?.?
+-------------
+
+Compatibilité PHP7 du téléchargement des fichiers.
+Corrections autour du log des buffers ; rendre visible les erreurs.
+
+
 Version 3.0.8
 -------------
 

@@ -257,7 +257,7 @@ class Client {
 		}
 
 
-		if (!@stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur))) {
+		if (!@stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_WRITE, array('crypteur' => $this->crypteur))) {
 			$this->error('Décrypteur inutilisable : ' . error_get_last()['message']);
 			fclose($fp);
 			return false;
@@ -278,7 +278,7 @@ class Client {
 					'fichier' => $file,
 					'chemin'  => $chemin,
 					'taille'  => $taille,
-					'taille_octets' => taille_en_octets($taille),
+					'taille_octets' => $to,
 					'hash'  => hash_file('sha256', $chemin)
 				)
 			)
