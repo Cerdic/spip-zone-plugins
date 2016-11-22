@@ -220,8 +220,9 @@ function convertir_xml_de($u) {
 				// Crédit ou signature ?
 				if(preg_match("/©.*/", $matches[1][$i])){
 					$credit = $matches[1][$i] ;
-					// On met le crédit en note non numérotée
-					$u = str_replace($matches[0][$i],"\n[[<> $credit]]\n",$u);
+					// On ne met pas le crédit en note non numérotée car ca pète la correction des notes ensuite.
+					$m['credit'] = $credit ;
+					$u = str_replace($matches[0][$i],"",$u);
 				}else{
 					$note_signature = trim(preg_replace('/^\s*\*\s*/','',$matches[1][$i])) ;
 					if($note_signature !== ""){
@@ -248,18 +249,21 @@ function convertir_xml_de($u) {
 	if($flag_signature)
 		$m['alertes'][] = "Signature non trouvée" ;
 
-	// notes avec des espaces dedans...
-	// <Hoch>3 </Hoch>
-	
-	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
 
+	// notes en fin de texte avec des espaces dedans...
+	// <Hoch>3 </Hoch>
+	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
 	
 	// notes dans le texte
 	$u = preg_replace(',(?:\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
+	// avec virgule
+	$u = preg_replace('~<Hoch>\s*,*(\d+)\s*,*</Hoch>\s*~Um'," (\\1), ",$u);
+	// avec .
+	$u = preg_replace('~<Hoch>\s*\.*(\d+)\s*\.*</Hoch>\s*~Um'," (\\1). ",$u);
 	$u = preg_replace(',^\s+\(,',"(",$u);
 	$u = str_replace(') .',").",$u);
-
-
+	$u = str_replace(') ,',"),",$u);
+	
 //	$u = preg_replace('/<Fussnote>/Us',"\n",$u);
 //	$u = preg_replace('/<\/Fussnote>/Us',"\n",$u);
 
@@ -313,6 +317,10 @@ function convertir_xml_de($u) {
 	$u = preg_replace('/<\/?Brot>/',"\n\n",$u);
 	$u = str_replace("\n\n\n\n","\n\n",$u);
 
+	// notes encore
+	// . (4) => (4).
+	$u = preg_replace('~\. (\(\d+\))\s*~Um'," \\1. ",$u);
+
 	// Citations
 	// <Zitat>
 	$u = str_replace("<Zitat>","<quote>",$u);
@@ -328,23 +336,24 @@ function convertir_xml_de($u) {
 	$u = trim($u);
 	$m['texte'] = $u ;
 
-	foreach($champs  = array("texte", "chapo", "signature") as $t){
+	foreach($champs  = array("texte", "chapo", "signature", "credit") as $t){
 			// texte spip
-	
-			// itals
-			$m[$t] = str_replace("<Kursiv>","{",$m[$t]);
-			$m[$t] = str_replace("</Kursiv>","}",$m[$t]);	
-		
-			// gras
-			$m[$t] = str_replace("<Fett>","{{",$m[$t]);
-			$m[$t] = str_replace("</Fett>","}}",$m[$t]);
+			if($m[$t]){
+				// itals
+				$m[$t] = str_replace("<Kursiv>","{",$m[$t]);
+				$m[$t] = str_replace("</Kursiv>","}",$m[$t]);	
 			
-			//  Pas d'indice ou exposant
-			$m[$t] = preg_replace(',</?Tief>,U',"",$m[$t]); // sinon on mettrait <sub> et <exp>
-			
-			// menage
-			// notes de bas de page :
-			$m[$t] = preg_replace(',</?Fussnote>,U',"\n\n",$m[$t]); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+				// gras
+				$m[$t] = str_replace("<Fett>","{{",$m[$t]);
+				$m[$t] = str_replace("</Fett>","}}",$m[$t]);
+				
+				//  Pas d'indice ou exposant
+				$m[$t] = preg_replace(',</?Tief>,U',"",$m[$t]); // sinon on mettrait <sub> et <exp>
+				
+				// menage
+				// notes de bas de page :
+				$m[$t] = preg_replace(',</?Fussnote>,U',"\n\n",$m[$t]); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+			}
 	}
 	return $m ;
 }
