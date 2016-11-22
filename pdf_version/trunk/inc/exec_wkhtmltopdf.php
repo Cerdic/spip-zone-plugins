@@ -63,11 +63,16 @@ function inc_exec_wkhtmltopdf_dist($html_file, $pdf_file, $args = array()) {
 		}
 
 		include_spip('inc/distant');
-		$res = recuperer_url($wkhtmltopdf_api_url, array(
-			'methode' => 'POST',
-			'datas' => $args,
-			'file' => $pdf_file,
-		));
+		if(function_exists('recuperer_url')) {
+			$res = recuperer_url($wkhtmltopdf_api_url, array(
+				'methode' => 'POST',
+				'datas' => $args,
+				'file' => $pdf_file,
+			));
+		}
+		else {
+			$res = recuperer_page($wkhtmltopdf_api_url, $pdf_file, false, null, $args);
+		}
 
 		spip_log($wkhtmltopdf_api_url . " $html_file -> $pdf_file : " . var_export($res, true), "wkhtmltopdf");
 
