@@ -48,6 +48,13 @@ class Convert extends Command {
 				'Répertoire de destination',
 				'conversion_spip'
 			)
+			->addOption(
+				'notes',
+				'b',
+				InputOption::VALUE_OPTIONAL,
+				'Convertir les notes de bas de pages (mettre -b oui)',
+				''
+			)
 		;
 	}
 
@@ -58,6 +65,7 @@ class Convert extends Command {
 		$source = $input->getOption('source') ;
 		$dest = $input->getOption('dest') ;
 		$extracteur = $input->getOption('extracteur') ;
+		$corriger_notes = $input->getOption('notes') ;
 		
 		include_spip("iterateur/data");
 		include_spip("inc/utils");
@@ -152,6 +160,17 @@ class Convert extends Command {
 					$article = translitteration($article);					
 					$article = preg_replace(',[^\w-]+,', '_', $article);
 					$article = preg_replace(',_xml$,', '.txt', $article);
+					
+					// recaler les notes avec le plugin revision nbsp si dispo
+					if(_DIR_PLUGIN_REVISIONNBSP AND $corriger_notes == "oui"){
+						include_spip('revision_nbsp');
+						if($c = notes_automatiques($contenu))
+							$contenu = $c ;
+						//global $nb_notes;
+						//echo "***** $f : $nb_notes notes ******\n\n" ;
+					}else{
+						die("Pour convertir automatiquement les notes de bas de pages, installez le plugin revision_nbsp : svn co svn://zone.spip.org/spip-zone/_plugins_/revision_nbsp");
+					}
 					
 					$c = array(
 						"fichier_source" => $f,
