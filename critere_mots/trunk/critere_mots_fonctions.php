@@ -142,13 +142,23 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 	   $having = ' HAVING SUM(1) >= '. $score;
 	   }
 	
-	$wh = "$_table.$_id_table IN (
-		SELECT id_objet FROM spip_mots_liens WHERE "
-		. join(' OR ', $where)
-		. ' GROUP BY id_objet,objet '
-		. $having
-		. "\n\t)";
-
+	$in = array();
+	// Normalement on devrait faire un sous-select, mais mysql 5* a un bug (ttp://bugs.mysql.com/bug.php?id=32665)
+	// du coup on calcule d'abord le résultat de la sous-select, et on intègre cela inc_prepare_mots_dist
+  $s = sql_query("SELECT id_objet as i FROM spip_mots_liens WHERE "
+    . join(' OR ', $where)
+    . ' GROUP BY id_objet,objet'
+    . $having);
+  while($t = sql_fetch($s)){
+			$in[] = $t['i'];
+	}
+	var_dump($in);
+	if ($in){
+	  $wh = sql_in("$_table.$_id_table", $in);
+  }
+	else{
+		$wh = '22=0';//1=0 est automatiquement filtré par le compilateur
+	}
 	return $wh;
 }
 
