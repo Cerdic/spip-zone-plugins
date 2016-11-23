@@ -18,7 +18,7 @@
 	<INCLURE{fond=prive/objets/liste/albums,
 		nb=10,
 		env,
-		ajax=liste_albums}>
+		ajax=liste_albums, sinon=<:album:info_aucun_album:>}>
 
 	[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
 	[(#AUTORISER{deplacerdocumentsalbums}|oui)

@@ -62,9 +62,6 @@
 </div><!-- .liste_albums -->
 
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-</B_liste_albums>
-
-<div class='entete clearfix'>
-	[<h2>(#ENV*{sinon,#ENV{recherche}|?{<:album:info_resultat_recherche_aucun:>,<:album:info_aucun_album:>}})</h2>]
-</div>
-<//B_liste_albums>
+</B_liste_albums>[
+<div class="liste-objets albums caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_albums>
