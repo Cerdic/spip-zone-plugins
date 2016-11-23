@@ -3,6 +3,19 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.3.5 le 23 11 2016
+-------------------
+* Ajoute du critère `{id_xxx}` (clé primaire) sur les listes d'objets créés
+  afin que la recherche du privé sur un identifiant de retourne pas tous
+  les éléments.
+* Entêtes php conformes aux règles de codage
+* Correction sur les objets éditoriaux avec rubrique et statuts (suite)
+
+
+2.3.4 le 27 10 2016
+-------------------
+
+* Correction sur les objets éditoriaux avec rubrique et statuts
 
 2.3.3 le 26 10 2016
 -------------------
