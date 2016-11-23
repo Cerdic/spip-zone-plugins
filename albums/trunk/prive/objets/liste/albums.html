@@ -47,7 +47,7 @@
 </div>
 
 <div class="liste-albums">
-	<BOUCLE_liste_albums(ALBUMS documents)
+	<BOUCLE_liste_albums(ALBUMS documents){id_album?}
 		{documents.id_document?}{documents.media?}{documents.extension?}
 		{albums_liens.objet?}{albums_liens.id_objet?}{albums_liens.vu?}{orphelins?}
 		{auteurs_liens.id_auteur?}{mots_liens.id_mot?}
