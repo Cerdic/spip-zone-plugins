@@ -39,9 +39,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 		'table_objet_surnoms' => [(#OBJETS_SURNOMS|ecrire_tableau)], // table_objet('#TYPE') => '#LOBJET' ]
 		'field'=> array(
 			[(#VAL{['(#ID_OBJET)']}   |espacer)] => '#CLE_PRIMAIRE_SQL',[
-			[(#VAL{"'id_rubrique'"}   |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_rubrique})][
-			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})][
-			[(#GET{_id_parent}|_q     |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#GET{_id_parent}|oui)]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
+			[(#GET{_id_parent}|_q     |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#GET{_id_parent}|oui)][
+			[(#VAL{"'id_secteur'"}    |espacer)] => 'bigint(21) NOT NULL DEFAULT 0',(#VALEUR|champ_present{id_secteur})]<BOUCLE_def_champs(DATA) {source tableau,#CHAMPS}>
 			[(#VAL{['(#CHAMP)']}      |espacer)] => '[(#SQL|replace{"'",'"'})]',</BOUCLE_def_champs>[
 			[(#VAL{['(#CHAMP_DATE)']} |espacer)] => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',(#CHAMP_DATE|oui)][
 			[(#VAL{"'statut'"}        |espacer)] => 'varchar(20)  DEFAULT "0" NOT NULL',(#STATUT|oui)][
@@ -52,9 +51,8 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			[(#VAL{"'PRIMARY KEY'"}    |espacer)] => '#ID_OBJET',[
-			[(#VAL{"'KEY id_rubrique'"}|espacer)] => 'id_rubrique',(#VALEUR|champ_present{id_rubrique})][
-			[(#VAL{"'KEY id_secteur'"} |espacer)] => 'id_secteur',(#VALEUR|champ_present{id_secteur})][
 			[(#VAL{"'KEY "}|concat{#GET{_id_parent}}|concat{"'"}      |espacer)] => '(#GET{_id_parent})',][
+			[(#VAL{"'KEY id_secteur'"} |espacer)] => 'id_secteur',(#VALEUR|champ_present{id_secteur})][
 			[(#VAL{"'KEY lang'"}       |espacer)] => 'lang',(#VALEUR|champ_present{lang})][
 			[(#VAL{"'KEY id_trad'"}    |espacer)] => 'id_trad',(#VALEUR|champ_present{id_trad})][
 			[(#VAL{"'KEY statut'"}     |espacer)] => 'statut',(#VALEUR|champ_present{statut})]

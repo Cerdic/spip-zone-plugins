@@ -15,9 +15,9 @@ on applique {racine} sur la boucle et on propose un parametre recursif
 <select name="\#ENV{nom}\[(\#ENV{multiple}|?{\\[\\]})\]" id="champ_\[(\#ENV{nom}|saisie_nom2classe)\]"\[ class="(\#ENV{class})"\]\[(\#ENV{multiple}|oui) multiple="multiple" size="\#ENV{size,10}"\]\[ disabled="(\#ENV{disable})"\]>
 	\[(\#ENV{cacher_option_intro}|ou{\#ENV{multiple}}|non)
 		<option value="">\[(\#ENV{option_intro})\]</option>\]
-	\<BOUCLE_#LOBJET\(#MOBJET\){par num #GET{titre}, #GET{titre}}[(#OBJET|criteres_champs_id{#OBJETS})][(#OBJET|champ_present{statut}
+	\<BOUCLE_#LOBJET\(#MOBJET\)[(#OBJET|criteres_champs_id{#OBJETS})][(#OBJET|champ_present{statut}
 		|?{'{statut?}'})][(#OBJET|champ_present{id_parent}
-		|?{'{racine}'})]{recherche?}{tout}>
+		|?{'{racine}'})]{recherche?}{tout}{par num #GET{titre}, #GET{titre}}>
 		\[(\#ENV{multiple}|oui)
 		<option value="\##MID_OBJET"\[(\##MID_OBJET|in_array{\#ENV{valeur_forcee,\#GET{valeur,\#ENV{defaut,\#ARRAY}}}}|oui) selected="selected"\]>\##GET{mtitre}</option>\]
 		\[(\#ENV{multiple}|non)

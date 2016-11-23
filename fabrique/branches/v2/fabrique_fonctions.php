@@ -331,9 +331,12 @@ function fabrique_description_roles($objet) {
  *     - Chaîne vide sinon
 **/
 function champ_present($objet, $champ) {
-	if (is_array($objet['champs'])) {
+	if (!$objet) {
+		return false;
+	}
+	if (isset($objet['champs']) and is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
-			if ($info['champ'] == $champ) {
+			if (isset($info['champ']) and $info['champ'] == $champ) {
 				return " "; // true
 			}
 		}
@@ -804,10 +807,12 @@ function fabrique_objets_enfants_directs($objet, $objets) {
 }
 
 /**
- * Retourne une ecriture de criteres `{id_xxx}`
+ * Retourne une écriture de critères `{id_xxx ?}`
  * 
  * Tous les champs déclarés commençant par `id_x` sont retournés
  * sous forme d'une écriture de critère, tel que `{id_parent?}{id_documentation?}`
+ * 
+ * La clé primaire est également ajoutée, sauf contre indication.
  * 
  * Les champs indirects `{B_liens.id_B ?}` sont aussi ajoutés s'ils sont déclarés
  * dans la Fabrique en même temps.
@@ -816,11 +821,17 @@ function fabrique_objets_enfants_directs($objet, $objets) {
  *     Description de l'objet dans la fabrique
  * @param array $objets
  *     Description de tous les objets dans la fabrique
+ * @param bool $avec_cle_primaire
+ *     Ajouter la clé primaire de la table également
  * @return string
  *     L'écriture des critères de boucle
 **/
-function criteres_champs_id($objet, $objets) {
+function criteres_champs_id($objet, $objets, $avec_cle_primaire = true) {
 	$ids = array();
+
+	if ($avec_cle_primaire) {
+		$ids[] = $objet['id_objet'];
+	}
 
 	// parenté directe sur Rubrique ?
 	if (champ_present($objet, 'id_rubrique')) {
