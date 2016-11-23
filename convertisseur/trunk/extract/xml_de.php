@@ -22,6 +22,9 @@ function convertir_xml_de($u) {
 	include_spip('inc/charsets');
 	include_spip('inc/filtres');
 
+	// espaces utf-8
+	//$u = str_replace("\xC2\xA0", " ", $u);
+
 	// debug xml
 	// pas de saut de lignes
 	$m['xml'] = entites_html(preg_replace("/>\s*</Us",">\n\n\n\n<",$u));
@@ -87,6 +90,9 @@ function convertir_xml_de($u) {
 	$u = preg_replace('/<\/?kopf[^>]*>/','',$u);
 	$u = preg_replace('/<\/?red>/','',$u);
 	$u = preg_replace('/<\/?zInitial>/','',$u);
+	$u = str_replace("<Kursiv/>", "", $u);
+	$u = str_replace("<Fett/>", "", $u);
+	
 	
 	// copyright
 	// $u = preg_replace('/(?:\(c\)|©)*\s*<Kursiv>Le\s*Monde\sdiplomatique,*\s*<\/Kursiv>,*\s*Berlin/ums','',$u);
@@ -120,6 +126,9 @@ function convertir_xml_de($u) {
 				$flag_signature = "Note d'auteur a check" ;
 			$m['logs'][] = "Suppression de (auteur chapo) : " . entites_html($matches[0][$i]) ;
 			$u = str_replace($matches[0][$i],'',$u);
+			// on rechoppe l'auteur si on l'avait en fait pas : 2016_09_08/art00812340.xml
+			if(!$m['auteurs'])
+				$m['auteurs'] = textebrut($matches[0][$i]);
 		}
 	}
 	
@@ -157,7 +166,7 @@ function convertir_xml_de($u) {
 
 		// parenthese pour chercher une bio en fin de notes apres le traducteur
 		// voir aussi plus bas
-		if(preg_match("~" . preg_quote($matches[0]) . "(.{2}.+)</Fussnote>~Uuims", $u , $b)){
+		if(preg_match("~" . preg_quote($matches[0]) . "(?!</Fussnote>)(.{2}.+)</Fussnote>~Uuims", $u , $b)){
 			if($b[1]){
 				//echo(htmlspecialchars($b[1]));
 				// signature avec un crédit en prime ?
@@ -251,18 +260,27 @@ function convertir_xml_de($u) {
 
 
 	// notes en fin de texte avec des espaces dedans...
-	// <Hoch>3 </Hoch>
-	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Um',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+	// <Hoch>3 </Hoch>	
+	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
 	
 	// notes dans le texte
-	$u = preg_replace(',(?:\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,U'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
-	// avec virgule
-	$u = preg_replace('~<Hoch>\s*,*(\d+)\s*,*</Hoch>\s*~Um'," (\\1), ",$u);
+	$u = preg_replace(',(?:\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uu'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
+	// avec virgule ou :
+	$u = preg_replace('~<Hoch>\s*,*\s*(\d+)\s*,*\s*</Hoch>\s*~Uum'," (\\1), ",$u);
+	$u = preg_replace('~<Hoch>\s*:*\s*(\d+)\s*:*\s*</Hoch>\s*~Uum'," (\\1) : ",$u);
 	// avec .
-	$u = preg_replace('~<Hoch>\s*\.*(\d+)\s*\.*</Hoch>\s*~Um'," (\\1). ",$u);
+	$u = preg_replace('~<Hoch>\s*\.*\s*(\d+)\s*\.*\s*</Hoch>\s*~Uum'," (\\1). ",$u);
+	// 	<Hoch>“6</Hoch>
+	$u = preg_replace('~<Hoch>\s*“*\s*(\d+)\s*“*\s*</Hoch>\s*~Uum',"“ (\\1) ",$u);
+	$u = preg_replace('~<Hoch>\s*\)*\s*(\d+)\s*\)*\s*</Hoch>\s*~Uum',") (\\1) ",$u);
+	
 	$u = preg_replace(',^\s+\(,',"(",$u);
 	$u = str_replace(') .',").",$u);
 	$u = str_replace(') ,',"),",$u);
+	
+	// vides ou avec un . dedans
+	$u = preg_replace('~<Hoch>\s*</Hoch>~Uum',"",$u);
+	$u = preg_replace('~<Hoch>\s*\.\s*</Hoch>~Uum',". ",$u);
 	
 //	$u = preg_replace('/<Fussnote>/Us',"\n",$u);
 //	$u = preg_replace('/<\/Fussnote>/Us',"\n",$u);
@@ -323,6 +341,10 @@ function convertir_xml_de($u) {
 
 	// Citations
 	// <Zitat>
+	// virer les exergue qui sont en fin de texte par erreur.
+	$u = preg_replace('~<Zitat>[^<]+</Zitat>$~Ums',"",$u);
+	
+	// faire un quote avec les autres
 	$u = str_replace("<Zitat>","<quote>",$u);
 	$u = str_replace("</Zitat>","</quote>",$u);
 
