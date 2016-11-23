@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_offres(OFFRES){id_offre}{id_rubrique?}{id_secteur?}{id_document_offre?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_offres(OFFRES){id_offre?}{id_rubrique?}{id_secteur?}{id_document_offre?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{offre-16.png}|balise_img)]</td>
 			<td class="statut">[(#STATUT|puce_statut{offre,#ID_OFFRE,#ID_RUBRIQUE})]</td> 
