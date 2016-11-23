@@ -4,6 +4,10 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=en" total="82" traduits="65" relire="0" modifs="14" nouveaux="3" pourcent="79.27">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 	</langue>
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=eu" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ixab" lien="http://trad.spip.net/auteur/ixab" />
+		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=fr" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/jeux?lang_cible=it" total="82" traduits="34" relire="0" modifs="37" nouveaux="11" pourcent="41.46">
