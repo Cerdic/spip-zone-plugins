@@ -22,9 +22,6 @@ function convertir_xml_de($u) {
 	include_spip('inc/charsets');
 	include_spip('inc/filtres');
 
-	// espaces utf-8
-	//$u = str_replace("\xC2\xA0", " ", $u);
-
 	// debug xml
 	// pas de saut de lignes
 	$m['xml'] = entites_html(preg_replace("/>\s*</Us",">\n\n\n\n<",$u));
@@ -77,10 +74,15 @@ function convertir_xml_de($u) {
  	foreach($titres[1] as $t)
 		$u = str_replace('<Titel>'. $t . '</Titel>', '{{{'.$t.'}}}',$u);
 	
-	// on on remplace les kast par des quote
-	$u = str_replace( "<Kasten>", "<quote>", $u);
-	$u = str_replace( "</Kasten>", "</quote>", $u);
-	
+		if(preg_match(",^01,", $m['pages'])){
+			// tourne de une 2016/10art00817520.xml
+			$u = str_replace( "<Kasten>", "", $u);
+			$u = str_replace( "</Kasten>", "", $u);
+		}else{
+			// sous-papiers
+			$u = str_replace( "<Kasten>", "<quote>", $u);
+			$u = str_replace( "</Kasten>", "</quote>", $u);
+		}
 	
 	if($surtitre = trim(textebrut(extraire_balise($u,'Dach'))))
 		$m['surtitre'] = $surtitre ;
@@ -89,10 +91,11 @@ function convertir_xml_de($u) {
 	// Nettoyage
 	$u = preg_replace('/<\/?kopf[^>]*>/','',$u);
 	$u = preg_replace('/<\/?red>/','',$u);
-	$u = preg_replace('/<\/?zInitial>/','',$u);
+	$u = preg_replace('/<\/?z?Initial>/','',$u);
 	$u = str_replace("<Kursiv/>", "", $u);
 	$u = str_replace("<Fett/>", "", $u);
-	
+	$u = str_replace("<Hoch/>", "", $u);
+	$u = str_replace("<zAutor/>", "", $u);
 	
 	// copyright
 	// $u = preg_replace('/(?:\(c\)|©)*\s*<Kursiv>Le\s*Monde\sdiplomatique,*\s*<\/Kursiv>,*\s*Berlin/ums','',$u);
@@ -258,16 +261,24 @@ function convertir_xml_de($u) {
 	if($flag_signature)
 		$m['alertes'][] = "Signature non trouvée" ;
 
+	// espaces utf-8 , inutile car on à l'option /u
+	//$u = str_replace("\xC2\xA0", " ", $u);
 
-	// notes en fin de texte avec des espaces dedans...
-	// <Hoch>3 </Hoch>	
-	$u = preg_replace(',^<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum',"<br />(\\1) ",$u); //pb d'espace fine ? en fin de hoch 2002_07_12/art002.xml
+	// sauf que dans un squelette spip qui passe par mes_fonctions et une boucle data on a bien /u qui matche le demi-cadrat \u2002 et l'espace fine \u2009
+	// mais pas en spip-cli qui fait un lire fichier...
+	// donc on les remplace là à défaut d'y comprendre quelque chose.
+	$u = str_replace(" ", " ", $u);
+	$u = str_replace(" ", " ", $u);
 	
-	// notes dans le texte
-	$u = preg_replace(',(?:\s)*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uu'," (\\1) ",$u); // galere sur la note 1 2015_07_09/art00746197.xml
+	// notes en début de ligne sans fussnote
+	$u = preg_replace(',^\s*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum',"\n\n(\\1) ", $u); // 2009_04_03/art00485576.xml
+	
+	// notes avec espaces le cas échéant
+	$u = preg_replace(',\s*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum'," (\\1) ", $u); // galere sur la note 1 2015_07_09/art00746197.xml
 	// avec virgule ou :
 	$u = preg_replace('~<Hoch>\s*,*\s*(\d+)\s*,*\s*</Hoch>\s*~Uum'," (\\1), ",$u);
-	$u = preg_replace('~<Hoch>\s*:*\s*(\d+)\s*:*\s*</Hoch>\s*~Uum'," (\\1) : ",$u);
+	$u = preg_replace('~<Hoch>\s*:*\s*(\d+)\s*:*\s*</Hoch>\s*~Uum'," (\\1): ",$u);
+	$u = preg_replace('~<Hoch>\s*;*\s*(\d+)\s*;*\s*</Hoch>\s*~Uum'," (\\1); ",$u);
 	// avec .
 	$u = preg_replace('~<Hoch>\s*\.*\s*(\d+)\s*\.*\s*</Hoch>\s*~Uum'," (\\1). ",$u);
 	// 	<Hoch>“6</Hoch>
@@ -277,13 +288,14 @@ function convertir_xml_de($u) {
 	$u = preg_replace(',^\s+\(,',"(",$u);
 	$u = str_replace(') .',").",$u);
 	$u = str_replace(') ,',"),",$u);
+	$u = preg_replace(',^ *(\(\d+\))\s+,ums',"\\1 ",$u); // 2009_04_03/art00485576.xml
 	
 	// vides ou avec un . dedans
 	$u = preg_replace('~<Hoch>\s*</Hoch>~Uum',"",$u);
 	$u = preg_replace('~<Hoch>\s*\.\s*</Hoch>~Uum',". ",$u);
-	
-//	$u = preg_replace('/<Fussnote>/Us',"\n",$u);
-//	$u = preg_replace('/<\/Fussnote>/Us',"\n",$u);
+	$u = preg_replace('~<Hoch>\s*,\s*</Hoch>~Uum',", ",$u);
+	$u = preg_replace('~<Hoch>\s*:\s*</Hoch>~Uum',": ",$u);
+	//var_dump("<textarea>$u</textarea>");
 
 	// sous titre ou chapo
 	// <Unterzeile> court = sous titre
@@ -364,10 +376,13 @@ function convertir_xml_de($u) {
 				// itals
 				$m[$t] = str_replace("<Kursiv>","{",$m[$t]);
 				$m[$t] = str_replace("</Kursiv>","}",$m[$t]);	
-			
+				
 				// gras
 				$m[$t] = str_replace("<Fett>","{{",$m[$t]);
 				$m[$t] = str_replace("</Fett>","}}",$m[$t]);
+
+				$m[$t] = str_replace("<FettKursiv>","{{ {",$m[$t]);
+				$m[$t] = str_replace("</FettKursiv>","} }}",$m[$t]);
 				
 				//  Pas d'indice ou exposant
 				$m[$t] = preg_replace(',</?Tief>,U',"",$m[$t]); // sinon on mettrait <sub> et <exp>
