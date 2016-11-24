@@ -13,25 +13,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function formulaires_configurer_facteur_charger_dist() {
 	include_spip('inc/config');
 	$valeurs = array(
-		'facteur_adresse_envoi'       => lire_config('facteur_adresse_envoi'),
-		'facteur_adresse_envoi_nom'   => lire_config('facteur_adresse_envoi_nom'),
-		'facteur_adresse_envoi_email' => lire_config('facteur_adresse_envoi_email'),
-		'facteur_forcer_from'         => lire_config('facteur_forcer_from'),
-		'facteur_smtp'                => lire_config('facteur_smtp'),
-		'facteur_smtp_host'           => lire_config('facteur_smtp_host'),
-		'facteur_smtp_port'           => lire_config('facteur_smtp_port', 25),
-		'facteur_smtp_auth'           => lire_config('facteur_smtp_auth'),
-		'facteur_smtp_username'       => lire_config('facteur_smtp_username'),
-		'facteur_smtp_password'       => '',
-		'_facteur_smtp_password'       => lire_config('facteur_smtp_password'),
-		'facteur_smtp_secure'         => lire_config('facteur_smtp_secure'),
-		'facteur_smtp_sender'         => lire_config('facteur_smtp_sender'),
-		'facteur_filtre_images'       => lire_config('facteur_filtre_images'),
-		'facteur_filtre_iso_8859'     => lire_config('facteur_filtre_iso_8859'),
-		'facteur_cc'                  => lire_config('facteur_cc'),
-		'facteur_bcc'                 => lire_config('facteur_bcc'),
-		'email_test'                  => lire_config('facteur_adresse_envoi') == 'oui' ? lire_config('facteur_adresse_envoi_email') : $GLOBALS['meta']['email_webmaster'],
-		'tester'                      => '',
+		'facteur_adresse_envoi'             => lire_config('facteur_adresse_envoi'),
+		'facteur_adresse_envoi_nom'         => lire_config('facteur_adresse_envoi_nom'),
+		'facteur_adresse_envoi_email'       => lire_config('facteur_adresse_envoi_email'),
+		'facteur_forcer_from'               => lire_config('facteur_forcer_from'),
+		'facteur_smtp'                      => lire_config('facteur_smtp'),
+		'facteur_smtp_host'                 => lire_config('facteur_smtp_host'),
+		'facteur_smtp_port'                 => lire_config('facteur_smtp_port', 25),
+		'facteur_smtp_auth'                 => lire_config('facteur_smtp_auth'),
+		'facteur_smtp_username'             => lire_config('facteur_smtp_username'),
+		'facteur_smtp_password'             => '',
+		'_facteur_smtp_password'            => lire_config('facteur_smtp_password'),
+		'facteur_smtp_secure'               => lire_config('facteur_smtp_secure'),
+		'facteur_smtp_tls_allow_self_signed'=> lire_config('facteur_smtp_tls_allow_self_signed'),
+		'facteur_smtp_sender'               => lire_config('facteur_smtp_sender'),
+		'facteur_filtre_images'             => lire_config('facteur_filtre_images'),
+		'facteur_filtre_iso_8859'           => lire_config('facteur_filtre_iso_8859'),
+		'facteur_cc'                        => lire_config('facteur_cc'),
+		'facteur_bcc'                       => lire_config('facteur_bcc'),
+		'email_test'                        => lire_config('facteur_adresse_envoi') == 'oui' ? lire_config('facteur_adresse_envoi_email') : $GLOBALS['meta']['email_webmaster'],
+		'tester'                            => '',
 	);
 
 	// recuperer le from par defaut actuel pour l'indiquer dans le formulaire
@@ -151,6 +152,9 @@ function formulaires_configurer_facteur_traiter_dist() {
 
 	$facteur_smtp_secure = _request('facteur_smtp_secure');
 	ecrire_meta('facteur_smtp_secure', in_array($facteur_smtp_secure, array('non', 'ssl', 'tls')) ? $facteur_smtp_secure : 'non');
+
+	$facteur_smtp_tls_allow_self_signed = _request('facteur_smtp_tls_allow_self_signed');
+	ecrire_meta('facteur_smtp_tls_allow_self_signed', ($facteur_smtp_tls_allow_self_signed=='oui')?'oui':'non');
 
 	$facteur_smtp_sender = _request('facteur_smtp_sender');
 	ecrire_meta('facteur_smtp_sender', $facteur_smtp_sender);

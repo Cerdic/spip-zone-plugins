@@ -116,6 +116,18 @@
 								<label for="facteur_smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
 							</div>
 						</li>
+						<li class="editer editer_facteur_smtp_tls_allow_self_signed [ (#ENV**{erreurs}|table_valeur{facteur_smtp_tls_allow_self_signed}|oui)erreur]">
+							<label><:facteur:configuration_facteur_smtp_tls_allow_self_signed:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_tls_allow_self_signed})</span>]
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_tls_allow_self_signed" class="radio" value="non" id="facteur_smtp_tls_allow_self_signed_non"[(#ENV{facteur_smtp_tls_allow_self_signed,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="facteur_smtp_tls_allow_self_signed_non"><:facteur:facteur_smtp_tls_allow_self_signed_non:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_tls_allow_self_signed" class="radio" value="oui" id="facteur_smtp_tls_allow_self_signed_oui"[(#ENV{facteur_smtp_tls_allow_self_signed,'non'}|=={oui}|oui)checked="checked"]/>
+								<label for="facteur_smtp_tls_allow_self_signed_oui"><:facteur:facteur_smtp_tls_allow_self_signed_oui:></label>
+							</div>
+						</li>
 						<li class="editer editer_facteur_smtp_sender [ (#ENV**{erreurs}|table_valeur{facteur_smtp_sender}|oui)erreur]">
 							<label for="facteur_smtp_sender"><:facteur:facteur_smtp_sender:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_sender})</span>]
@@ -202,6 +214,12 @@ jQuery(function(){
 				jQuery('.editer_facteur_smtp_param').show('fast');
 			else
 				jQuery('.editer_facteur_smtp_param').hide('fast');
+	});
+	jQuery('input[name=facteur_smtp_secure]').change(function(){
+		if (jQuery(this).attr('value')=='tls')
+			jQuery('.editer_facteur_smtp_tls_allow_self_signed').show('fast');
+		else
+			jQuery('.editer_facteur_smtp_tls_allow_self_signed').hide('fast');
 	});
 	jQuery('input[name=facteur_smtp_auth]').change(function(){
 			if (jQuery(this).attr('value')=='oui')

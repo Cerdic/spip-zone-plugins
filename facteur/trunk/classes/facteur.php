@@ -57,7 +57,7 @@ class Facteur extends PHPMailer {
 			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom', 'forcer_from',
 			'cc', 'bcc',
 			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
-			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender',
+			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender', 'smtp_tls_allow_self_signed',
 			'filtre_images', 'filtre_iso_8859',
 		) as $config) {
 			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
@@ -164,6 +164,12 @@ class Facteur extends PHPMailer {
 			}
 			if ($options['smtp_secure'] == 'tls') {
 				$this->SMTPSecure = 'tls';
+			}
+
+			if ( $options['smtp_secure'] == 'tls' && $options['smtp_tls_allow_self_signed'] == 'oui' ) {
+				$this->SMTPOptions = array(
+					'ssl' => array('allow_self_signed' => true)
+				);
 			}
 
 			// Pour le moment on remet l'ancien fonctionnement :

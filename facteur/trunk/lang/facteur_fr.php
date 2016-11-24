@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_mailer' => 'Méthode d’envoi',
 	'configuration_smtp' => 'Choix de la méthode d’envoi de mail',
 	'configuration_smtp_descriptif' => 'Si vous n’êtes pas sûrs, choisissez la fonction mail de PHP.',
+	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validation du certificat SSL',
 	'corps_email_de_test' => 'Ceci est un email de test accentué',
 
 	// E
@@ -51,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_tls' => 'TLS (recommandé)',
 	'facteur_smtp_sender' => 'Adresse de retour des erreurs (optionnel)',
 	'facteur_smtp_sender_descriptif' => 'Définit dans l’entête du mail l’adresse email de retour des erreurs (ou Return-Path)',
+	'facteur_smtp_tls_allow_self_signed_non' => 'le certificat SSL du serveur SMTP est émis par une Autorité de Certification (recommandé).',
+	'facteur_smtp_tls_allow_self_signed_oui' => 'le certificat SSL du serveur SMTP est auto-signé.',
 	'facteur_smtp_username' => 'Nom d’utilisateur :',
 
 	// L
