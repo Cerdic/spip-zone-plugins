@@ -100,7 +100,6 @@
 								</li>
 							</ul>
 						</li>
-						[(#ENV{_enable_smtp_secure}|oui)
 						<li class="editer editer_facteur_smtp_param editer_facteur_smtp_secure [ (#ENV**{erreurs}|table_valeur{facteur_smtp_secure}|oui)erreur]"[(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
 							<label><:facteur:facteur_smtp_secure:></label>
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_secure})</span>]
@@ -116,7 +115,7 @@
 								<input type="radio" name="facteur_smtp_secure" class="radio" value="ssl" id="facteur_smtp_secure_ssl"[(#ENV{facteur_smtp_secure,'non'}|=={ssl}|oui)checked="checked"]/>
 								<label for="facteur_smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
 							</div>
-						</li>]
+						</li>
 						<li class="editer editer_facteur_smtp_sender [ (#ENV**{erreurs}|table_valeur{facteur_smtp_sender}|oui)erreur]">
 							<label for="facteur_smtp_sender"><:facteur:facteur_smtp_sender:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_sender})</span>]

@@ -30,7 +30,6 @@ function formulaires_configurer_facteur_charger_dist() {
 		'facteur_filtre_iso_8859'     => lire_config('facteur_filtre_iso_8859'),
 		'facteur_cc'                  => lire_config('facteur_cc'),
 		'facteur_bcc'                 => lire_config('facteur_bcc'),
-		'_enable_smtp_secure'         => (intval(phpversion()) == 5)?' ':'',
 		'email_test'                  => lire_config('facteur_adresse_envoi') == 'oui' ? lire_config('facteur_adresse_envoi_email') : $GLOBALS['meta']['email_webmaster'],
 		'tester'                      => '',
 	);
@@ -150,10 +149,8 @@ function formulaires_configurer_facteur_traiter_dist() {
 		ecrire_meta('facteur_smtp_password', $facteur_smtp_password);
 	}
 
-	if (intval(phpversion()) == 5) {
-		$facteur_smtp_secure = _request('facteur_smtp_secure');
-		ecrire_meta('facteur_smtp_secure', in_array($facteur_smtp_secure, array('non', 'ssl', 'tls')) ? $facteur_smtp_secure : 'non');
-	}
+	$facteur_smtp_secure = _request('facteur_smtp_secure');
+	ecrire_meta('facteur_smtp_secure', in_array($facteur_smtp_secure, array('non', 'ssl', 'tls')) ? $facteur_smtp_secure : 'non');
 
 	$facteur_smtp_sender = _request('facteur_smtp_sender');
 	ecrire_meta('facteur_smtp_sender', $facteur_smtp_sender);
