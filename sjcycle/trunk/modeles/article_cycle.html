@@ -147,13 +147,13 @@ $(document).ready(function() {
 		#INCLURE{fond=inclure/lien_parent,id_document}
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={article}|oui)
-		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="[(#TITRE|attribut_html)]">
+		<a[(#DESCRIPTIF|oui) href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}"] data-cycle-title="[(#TITRE|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={rubrique}|oui)
-		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="[(#TITRE|attribut_html)]">
+		<a[(#DESCRIPTIF|oui) href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"] data-cycle-title="[(#TITRE|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={externe}|oui)
-		<a href="[(#DESCRIPTIF|supprimer_tags)]" data-cycle-title="[(#TITRE|attribut_html)]">
+		<a[(#DESCRIPTIF|oui) href="[(#DESCRIPTIF|supprimer_tags)]"] data-cycle-title="[(#TITRE|attribut_html)]">
 		#SET{fermer_a,oui}]
 		[(#GET{id_article_a_lier}|oui)
 		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" data-cycle-title="#GET{titre_article_a_lier}" data-cycle-desc="[(#DESCRIPTIF|attribut_html)]">
