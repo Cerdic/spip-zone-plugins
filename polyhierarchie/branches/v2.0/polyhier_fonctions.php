@@ -298,11 +298,14 @@ function balise_URL_POLYHIER_dist($p) {
 
 /**
  * Generer l'URL polyhierarchique d'un objet relativement a une rubrique parente secondaire
- * Si l'URL contient celle de la rubrique parente, on remplace par l'URL de la rubrique parente secondaire (URLs arbo)
- * sinon on ajoute un ?id_rubrique=xxx dans l'URL
- * a charge pour les squelettes de gerer dans les 2 cas
+ * on cherche le parent secondaire qui est dans la branche de la rubrique fournie et on le passe en argument
+ * de l'URL. Si le module URL le gere (arbopoly) l'URL reposera sur l'URL de ce parent secondaire,
+ * sinon elle restera en argument
  *
- * Ne fonctionne que pour les rattachements simples a une autre rubrique
+ * a charge pour les squelettes de gerer la presence du id_rubrique=xxx dans le contexte de la page de l'objet concerne
+ *
+ * Ne fonctionne que si l'objet est lui même rattache en polyhierarchie,
+ * pas si il est enfant direct d'une rubrique enfant secondaire
  *
  * @param int $id_objet
  * @param string $objet
@@ -314,12 +317,22 @@ function balise_URL_POLYHIER_dist($p) {
 function generer_url_polyhier_entite($id_objet, $objet, $id_rubrique=null, $args='', $ancre='') {
 
 	// si id_rubrique contextuel passe en argument et si c'est bien un parent polyhierarchique
-	if ($id_rubrique
-	  and $id_rubrique = sql_getfetsel('id_parent','spip_rubriques_liens', 'id_parent='.intval($id_rubrique). ' AND objet='.sql_quote($objet). ' AND id_objet='.intval($id_objet))
-	) {
+	$parents_poly = sql_allfetsel('id_parent','spip_rubriques_liens', 'objet='.sql_quote($objet). ' AND id_objet='.intval($id_objet));
+	$parents_poly = array_map('reset',$parents_poly);
+
+	$maxiter = 100;
+	$branche = $r = array($id_rubrique);
+	while (!($id_parent = array_intersect($parents_poly, $r))
+	  and $maxiter--
+	  and $filles = sql_allfetsel('id_rubrique','spip_rubriques',sql_in('id_parent', $r) . " AND " . sql_in('id_rubrique', $branche, 'NOT'))) {
+		$r = array_map('reset', $filles);
+		$branche = array_merge($branche, $r);
+	}
+
+	if ($id_parent = reset($id_parent)) {
 		// le vrai parent
 		$champ_parent = ($objet == 'rubrique' ? 'id_parent' : 'id_rubrique');
-		$args .= ($args?'&':'')."$champ_parent=$id_rubrique";
+		$args .= ($args?'&':'')."$champ_parent=$id_parent";
 	}
 	$url = generer_url_entite($id_objet, $objet, $args, $ancre, true);
 	return $url;
