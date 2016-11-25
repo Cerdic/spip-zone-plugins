@@ -56,11 +56,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_album' => 'Créer un nouvel album',
 	'icone_modifier_album' => 'Modifier cet album',
 	'info_1_album' => '1 album',
-	'info_1_utilisation' => '1 Utilisation',
+	'info_1_doclie' => '1 document lié',
+	'info_1_utilisation' => '1 utilisation',
 	'info_aucun_album' => 'Aucun album',
+	'info_docslies' => 'Document(s) lié(s)',
 	'info_nb_albums' => '@nb@ albums',
+	'info_nb_docslies' => '@nb@ documents liés',
 	'info_nb_utilisations' => '@nb@ utilisations',
 	'info_nouvel_album' => 'Nouvel album',
+	'info_utilisation' => 'Utilisation(s)',
 
 	// L
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',

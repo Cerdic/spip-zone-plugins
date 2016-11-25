@@ -5,7 +5,7 @@
 
 ]
 <B_liens>
-<h4>[(#TOTAL_BOUCLE|singulier_ou_pluriel{album:info_1_utilisation,album:info_nb_utilisations})]</h4>
+[(#BOITE_OUVRIR{[(#TOTAL_BOUCLE|singulier_ou_pluriel{album:info_1_utilisation,album:info_nb_utilisations})], 'album utilisations simple'})]
 <ul class='liste_items utilisations-albums'>
 	<BOUCLE_liens(albums_liens){id_album}{par objet}{!par vu}{si #ENV{exec}|!={album_edit}}>
 	<li class='item #OBJET'>
@@ -24,4 +24,5 @@
 	</li>
 	</BOUCLE_liens>
 </ul>
+[(#BOITE_FERMER)]
 </B_liens>

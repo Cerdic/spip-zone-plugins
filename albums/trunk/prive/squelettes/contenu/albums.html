@@ -3,7 +3,7 @@
 	Albumothèque : page de gestion des albums
 
 	Utilise :
-		prive/objets/liste/albums.html
+		prive/objets/liste/albums_complets.html
 		javascript/albums_edit.js
 		javascript/medias_edit.js
 		javascript/jquery.multifile.js
@@ -15,7 +15,7 @@
 
 	#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 
-	<INCLURE{fond=prive/objets/liste/albums,
+	<INCLURE{fond=prive/objets/liste/albums_complets,
 		nb=10,
 		env,
 		ajax=liste_albums, sinon=<:album:info_aucun_album:>}>
