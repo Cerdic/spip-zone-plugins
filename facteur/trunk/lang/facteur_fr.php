@@ -11,10 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_enregistree' => 'La configuration du facteur a bien été enregistrée',
 	'configuration_adresse_envoi' => 'Adresse d’envoi par défaut',
 	'configuration_facteur' => 'Facteur',
+	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validation du certificat SSL',
 	'configuration_mailer' => 'Méthode d’envoi',
 	'configuration_smtp' => 'Choix de la méthode d’envoi de mail',
 	'configuration_smtp_descriptif' => 'Si vous n’êtes pas sûrs, choisissez la fonction mail de PHP.',
-	'configuration_facteur_smtp_tls_allow_self_signed' => 'Validation du certificat SSL',
 	'corps_email_de_test' => 'Ceci est un email de test accentué',
 
 	// E
