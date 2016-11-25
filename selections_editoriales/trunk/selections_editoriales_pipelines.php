@@ -242,3 +242,17 @@ function selections_editoriales_post_edition($flux) {
 
 	return $flux;
 }
+
+/**
+ * Affiche le nombre d'utilisation d'une sélection sur sa page
+ *
+ * @param array $flux
+ *    Données du pipeline
+ * @return array
+ */
+function selections_editoriales_afficher_config_objet($flux) {
+	if ($flux['args']['type'] == 'selection') {
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/selection_infos', array('id_selection' => $flux['args']['id']));
+	}
+	return $flux;
+}

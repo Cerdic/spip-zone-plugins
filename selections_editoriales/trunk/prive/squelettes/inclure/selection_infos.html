@@ -1,0 +1,16 @@
+#BOITE_OUVRIR{'', 'selection utilisations simple'}
+<B_liens>
+	<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{selections_editoriales:info_une_utilisation,selections_editoriales:info_des_utilisations})]</h3>
+	<ul class='liste_items'>
+		<BOUCLE_liens(selections_liens){id_selection}>
+		<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_lien_entite{#OBJET})]
+		[(#VU|=={oui}|oui)
+		[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:selections_editoriales:selection_vue:>}|inserer_attribut{alt,<:selections_editoriales:selection_vue:>})</span>]
+		]
+		</li>
+		</BOUCLE_liens>
+	</ul>
+</B_liens>
+<h3><:selections_editoriales:info_aucune_utilisation:></h3>
+<//B_liens>
+#BOITE_FERMER
