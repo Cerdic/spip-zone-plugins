@@ -89,7 +89,24 @@ function formulaires_editer_sql_requete_charger_dist($id_sql_requete = 'new', $r
  */
 function formulaires_editer_sql_requete_verifier_dist($id_sql_requete = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 
-	return formulaires_editer_objet_verifier('sql_requete', $id_sql_requete, array('titre', 'requetesql'));
+	$erreurs = formulaires_editer_objet_verifier('sql_requete', $id_sql_requete, array('titre', 'requetesql'));
+
+	$requete = _request('requetesql');
+
+	$regex_mots_dangereux = '/(ALTER|CREATE|DROP|RENAME|TRUNCATE|DELETE|CALL|INSERT|REPLACE|UPDATE)/i';
+
+	$matches = array();
+	if ((! _request('chuis_un_ouf')) and
+			preg_match($regex_mots_dangereux, $requete, $matches)) {
+		$erreurs['requetesql'] = _T(
+			'sql_requete:message_erreur_requete_dangereuse',
+			array('mot' => $matches[0])
+		);
+
+		$erreurs['requetesql'] .= '<br><label for="chuis_un_ouf">' . _T('sql_requete:label_confirmation_danger') . '</label><input type="checkbox" name="chuis_un_ouf" />';
+	}
+
+	return $erreurs;
 }
 
 /**

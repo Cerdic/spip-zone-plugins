@@ -21,9 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_sql_requetes_auteur' => 'Les requêtes de cet auteur',
 
     // L
+    'label_confirmation_danger' => 'Je prends quand même le risque',
     'label_description' => 'Description de la requête',
     'label_requetesql' => 'Requête SQL',
     'label_titre' => 'Titre de la requête',
+
+    // M
+    'message_erreur_requete_dangereuse' => "La requête contient le mot « @mot@ », et est donc susceptible de modifier ou d'effacer des données dans la base. Vous ne devriez pas continuer à moins d'être absolument certain(e) de ce que vous faites !!",
 
     // N
     'not_exist' => 'Cette requête n\'existe pas',
