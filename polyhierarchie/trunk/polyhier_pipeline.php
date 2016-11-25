@@ -20,9 +20,22 @@ function polyhier_affiche_hierarchie($flux){
 		$id_objet = $flux['args']['id_objet'];
 		include_spip('inc/polyhier');
 		$parents = polyhier_get_parents($id_objet,$objet,$serveur='');
+		if (!function_exists('lire_config')) {
+			include_spip('inc/config');
+		}
+		$profondeur = lire_config('polyhier/profondeur_chemin', 1);
 		$out = array();
-		foreach($parents as $p)
-			$out[] = "[->rubrique$p]";
+		foreach($parents as $p) {
+			$c = array($profondeur==1?"[->rubrique$p]":"<b>[->rubrique$p]</b>");
+			$i=1;
+			while (($i++<$profondeur or !$profondeur) and $p) {
+				if ($p = quete_parent_lang('spip_rubriques', $p)
+				  and $p = $p['id_parent']) {
+					array_unshift($c, "[->rubrique$p]");
+				}
+			}
+			$out[] = implode("&gt;", $c);
+		}
 		if (count($out)){
 			$out = implode(', ',$out);
 			$out = (count($out) > 1) ? _T('polyhier:label_autres_parents')." ".$out : _T('polyhier:label_autre_parent')." ".$out;
