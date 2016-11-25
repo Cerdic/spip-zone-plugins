@@ -9,7 +9,9 @@
  * @package    SPIP\Requeteursql\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -32,8 +34,8 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_sql_requete_identifier_dist($id_sql_requete='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-    return serialize(array(intval($id_sql_requete)));
+function formulaires_editer_sql_requete_identifier_dist($id_sql_requete = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	return serialize(array(intval($id_sql_requete)));
 }
 
 /**
@@ -58,9 +60,9 @@ function formulaires_editer_sql_requete_identifier_dist($id_sql_requete='new', $
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_sql_requete_charger_dist($id_sql_requete='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-    $valeurs = formulaires_editer_objet_charger('sql_requete',$id_sql_requete,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-    return $valeurs;
+function formulaires_editer_sql_requete_charger_dist($id_sql_requete = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$valeurs = formulaires_editer_objet_charger('sql_requete', $id_sql_requete, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	return $valeurs;
 }
 
 /**
@@ -85,9 +87,9 @@ function formulaires_editer_sql_requete_charger_dist($id_sql_requete='new', $ret
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_sql_requete_verifier_dist($id_sql_requete='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_sql_requete_verifier_dist($id_sql_requete = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 
-    return formulaires_editer_objet_verifier('sql_requete',$id_sql_requete, array('titre', 'requetesql'));
+	return formulaires_editer_objet_verifier('sql_requete', $id_sql_requete, array('titre', 'requetesql'));
 }
 
 /**
@@ -112,9 +114,6 @@ function formulaires_editer_sql_requete_verifier_dist($id_sql_requete='new', $re
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_sql_requete_traiter_dist($id_sql_requete='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-    return formulaires_editer_objet_traiter('sql_requete',$id_sql_requete,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_sql_requete_traiter_dist($id_sql_requete = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	return formulaires_editer_objet_traiter('sql_requete', $id_sql_requete, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 }
-
-
-?>
