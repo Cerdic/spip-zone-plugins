@@ -41,7 +41,7 @@ function verifier_image_upload_dist($valeur, $options) {
 	}
 
 	// vérifier les dimensions
-	if ($imagesize = @getimagesize($valeur['tmp_name'])) {
+	if ($imagesize = @getimagesize($valeur['tmp_name']) and (isset($options['largeur_max']) or defined('_IMG_MAX_WIDTH') or isset($options['hauteur_max']) or defined('_IMG_MAX_HEIGHT'))) {
 		$largeur_max = (isset($options['largeur_max']) ? $options['largeur_max'] : (defined('_IMG_MAX_WIDTH') ? _IMG_MAX_WIDTH : 0));
 		$hauteur_max = (isset($options['hauteur_max']) ? $options['hauteur_max'] : (defined('_IMG_MAX_HEIGHT') ? _IMG_MAX_HEIGHT : 0));
 		if ($imagesize[0] > $largeur_max || $imagesize[1] > $hauteur_max) {
