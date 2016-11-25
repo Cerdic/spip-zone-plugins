@@ -47,12 +47,21 @@ function convertir_xml_de($u) {
 	// passer en utf-8 en nettoyant les entites
 	$u = unicode2charset(html2unicode($u)) ;
 
+	// espaces utf-8 , inutile car on à l'option /u
+	//$u = str_replace("\xC2\xA0", " ", $u);
+
+	// sauf que dans un squelette spip qui passe par mes_fonctions et une boucle data on a bien /u qui matche le demi-cadrat \u2002 et l'espace fine \u2009
+	// mais pas en spip-cli qui fait un lire fichier...
+	// donc on les remplace là à défaut d'y comprendre quelque chose.
+	$u = str_replace(" ", " ", $u);
+	$u = str_replace(" ", " ", $u);
+
 	$auteur = extraire_attribut($metas, 'Autor');
 	$auteur = preg_replace('/^von\s*/Uims','',$auteur);
 	if(strlen($auteur) > 1) 
 		$m['auteurs'] = $auteur ;
 
-	$m['titre'] = extraire_attribut($metas, 'Titel');
+	$m['titre'] = str_replace("\n", " ", extraire_attribut($metas, 'Titel'));
 
 	$u = extraire_balise($u,'red');
 	//$u = str_replace("\n",'',$u);
@@ -73,17 +82,7 @@ function convertir_xml_de($u) {
  	// on change en gras les suivants
  	foreach($titres[1] as $t)
 		$u = str_replace('<Titel>'. $t . '</Titel>', '{{{'.$t.'}}}',$u);
-	
-		if(preg_match(",^01,", $m['pages'])){
-			// tourne de une 2016/10art00817520.xml
-			$u = str_replace( "<Kasten>", "", $u);
-			$u = str_replace( "</Kasten>", "", $u);
-		}else{
-			// sous-papiers
-			$u = str_replace( "<Kasten>", "<quote>", $u);
-			$u = str_replace( "</Kasten>", "</quote>", $u);
-		}
-	
+		
 	if($surtitre = trim(textebrut(extraire_balise($u,'Dach'))))
 		$m['surtitre'] = $surtitre ;
 	$u = preg_replace('/<Dach>.*<\/Dach>/Us','',$u);
@@ -96,7 +95,17 @@ function convertir_xml_de($u) {
 	$u = str_replace("<Fett/>", "", $u);
 	$u = str_replace("<Hoch/>", "", $u);
 	$u = str_replace("<zAutor/>", "", $u);
-	
+
+	if(preg_match(",^01,", $m['pages'])){
+		// tourne de une 2016/10art00817520.xml
+		$u = str_replace( "<Kasten>", "", $u);
+		$u = str_replace( "</Kasten>", "", $u);
+	}else{
+		// sous-papiers
+		$u = str_replace( "<Kasten>", "<quote>", $u);
+		$u = str_replace( "</Kasten>", "</quote>", $u);
+	}
+
 	// copyright
 	// $u = preg_replace('/(?:\(c\)|©)*\s*<Kursiv>Le\s*Monde\sdiplomatique,*\s*<\/Kursiv>,*\s*Berlin/ums','',$u);
 		
@@ -260,15 +269,10 @@ function convertir_xml_de($u) {
 	
 	if($flag_signature)
 		$m['alertes'][] = "Signature non trouvée" ;
-
-	// espaces utf-8 , inutile car on à l'option /u
-	//$u = str_replace("\xC2\xA0", " ", $u);
-
-	// sauf que dans un squelette spip qui passe par mes_fonctions et une boucle data on a bien /u qui matche le demi-cadrat \u2002 et l'espace fine \u2009
-	// mais pas en spip-cli qui fait un lire fichier...
-	// donc on les remplace là à défaut d'y comprendre quelque chose.
-	$u = str_replace(" ", " ", $u);
-	$u = str_replace(" ", " ", $u);
+	
+	// recaler les note avec hinweis
+	// var_dump("<textarea>$u</textarea>");
+	$u = preg_replace(',<Hinweis>(<Hoch>.*)</Hinweis>,Uums',"<Fussnote>\\1</Fussnote>", $u);
 	
 	// notes en début de ligne sans fussnote
 	$u = preg_replace(',^\s*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum',"\n\n(\\1) ", $u); // 2009_04_03/art00485576.xml
