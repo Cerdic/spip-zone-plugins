@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 # donner un exemple d'url pour le formulaire de choix
 define('URLS_ARBOPOLY_EXEMPLE', '/article/titre');
 # specifier le form de config utilise pour ces urls
-define('URLS_ARBOPOLY_CONFIG', 'arbopoly');
+define('URLS_ARBOPOLY_CONFIG', 'arbo');
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
