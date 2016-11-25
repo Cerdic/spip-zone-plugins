@@ -275,11 +275,11 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 			and
 			((
 				isset($infos_objet['field']['id_secteur'])
-				and $id_secteur = sql_getfetsel('id_secteur', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet)))
+					and $id_secteur = sql_getfetsel('id_secteur', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet)))
 				or
-				(isset($infos_objet['field']['id_rubrique'])
-				and $id_rubrique = sql_getfetsel('id_rubrique', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet))
-				and $id_secteur = sql_getfetsel('id_secteur', table_objet_sql('rubrique'), 'id_rubrique='.intval($id_rubrique))
+					(isset($infos_objet['field']['id_rubrique'])
+					and $id_rubrique = sql_getfetsel('id_rubrique', table_objet_sql($objet), id_table_objet($objet).'='.intval($id_objet))
+					and $id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique))
 			))
 		) {
 			// on cherche à savoir si le secteur est wiki/ouvert.
@@ -415,7 +415,9 @@ function autoriser_album_dissocier_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
 		autoriser('associer', 'album', $id, $qui, $opts)
-		and (sql_getfetsel('vu', 'spip_albums_liens', 'id_album='.intval($id).' AND objet='.sql_quote($opts['objet']).' AND id_objet='.intval($opts['id_objet']))=='non')
+		and (sql_getfetsel('vu', 'spip_albums_liens', 'id_album='.intval($id).'
+			AND objet='.sql_quote($opts['objet']).'
+			AND id_objet='.intval($opts['id_objet']))=='non')
 	) ? true : false;
 
 	return $autoriser;
@@ -459,7 +461,8 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 	if ($type and intval($id) > 0) {
 		$autoriser_modifier_albums = true;
 		include_spip('action/editer_liens');
-		if (is_array($liens_albums = objet_trouver_liens(array('album' => '*'), array($type => $id))) and count($liens_albums)) {
+		if (is_array($liens_albums = objet_trouver_liens(array('album' => '*'), array($type => $id)))
+			and count($liens_albums)) {
 			foreach ($liens_albums as $l) {
 				if (!autoriser('modifier', 'album', $l['id_album'])) {
 					$autoriser_modifier_albums = false;
