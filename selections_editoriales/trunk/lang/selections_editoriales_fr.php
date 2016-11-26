@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_objets_label' => 'Activer l’ajout de sélections sur les contenus :',
 
 	// I
-	'info_aucune_utilisation' => 'Cette sélection n\'est liée à aucun objet.',
+	'info_aucune_utilisation' => 'Cette sélection n’est liée à aucun objet.',
 	'info_des_utilisations' => '@nb@ utilisations',
 	'info_une_utilisation' => '1 utilisation',
 
 	// S
-	'selections_editoriales_titre' => 'Sélections éditoriales',
 	'selection_vue' => 'Sélection vue dans le texte',
+	'selections_editoriales_titre' => 'Sélections éditoriales',
 
 	// T
 	'titre_page_configurer_selections_editoriales' => 'Configuration des séléctions éditoriales'
