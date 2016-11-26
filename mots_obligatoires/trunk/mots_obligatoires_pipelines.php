@@ -18,7 +18,7 @@ function mots_obligatoires_formulaire_verifier($flux){
 		// Récupérer les groupes de mot clefs 
 		// 1. Liés à cet objet 
 		// 2. Marqués comme important
-		// 3. Si MOTUS chargé, concerné par la rubrique en cours
+		// 3. Concernés par la rubrique en cours, si motus chargé
 		$groupes = sql_select('id_groupe,titre','spip_groupes_mots',
 			array("obligatoire=".sql_quote('oui'),
 			"tables_liees LIKE ".sql_quote("$objet%")
