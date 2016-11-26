@@ -31,7 +31,30 @@ $GLOBALS['rainette_owm_config']['service'] = array(
 		'logo'  => null,
 		'lien'  => 'http://openweathermap.org/',
 	),
-	'langue_service' => 'EN'
+	'langues' => array(
+		'disponibles' => array(
+			'bg' => 'bg',
+			'ca' => 'ca',
+			'de' => 'de',
+			'en' => 'en',
+			'es' => 'es',
+			'fi' => 'fi',
+			'fr' => 'fr',
+			'hr' => 'hr',
+			'it' => 'it',
+			'nl' => 'nl',
+			'pl' => 'pl',
+			'pt' => 'pt',
+			'ro' => 'ro',
+			'ru' => 'ru',
+			'sv' => 'sv',
+			'tr' => 'tr',
+			'uk' => 'uk',
+			'zh' => 'zh',
+			'zh_tw' => 'zh_tw',
+		),
+		'defaut'      => 'en'
+	)
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -154,27 +177,6 @@ function owm_service2configuration($mode) {
 	return $config;
 }
 
-/**
- * @param string $lieu
- * @param string $mode
- * @param        $periodicite
- * @param        $configuration
- *
- * @return string
- */
-function owm_service2cache($lieu, $mode, $periodicite, $configuration) {
-
-	// Identification de la langue du resume.
-	$code_langue = ($configuration['condition'] == 'owm')
-		? langue2code_owm($GLOBALS['spip_lang'])
-		: $configuration['langue_service'];
-
-	// Construction du chemin du fichier cache
-	include_spip('inc/rainette_normaliser');
-	$fichier_cache = normaliser_cache('owm', $lieu, $mode, $periodicite, $code_langue);
-
-	return $fichier_cache;
-}
 
 /**
  * @param $lieu
@@ -195,13 +197,11 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Identification de la langue du resume.
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas le cas
 	// on ne la precise pas et on laisse l'API renvoyer la langue par defaut
-	$code_langue = ($configuration['condition'] == 'owm')
-		? langue2code_owm($GLOBALS['spip_lang'])
-		: $configuration['langue_service'];
+	include_spip('inc/rainette_normaliser');
+	$code_langue = trouver_langue_service('owm', $configuration);
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays et le format latitude,longitude
-	include_spip('inc/rainette_normaliser');
 	list($lieu_normalise, $format_lieu) = normaliser_lieu($lieu);
 	if ($format_lieu == 'latitude_longitude') {
 		list($latitude, $longitude) = explode(',', $lieu_normalise);
@@ -225,6 +225,7 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 	return $url;
 }
 
+
 /**
  * @param array $tableau
  * @param       $configuration
@@ -236,6 +237,7 @@ function owm_complement2infos($tableau, $configuration) {
 	// TODO : remplir le nom du pays à partir du code ISO 3166-1 alpha 2.
 	return $tableau;
 }
+
 
 /**
  * Complète par des données spécifiques au service le tableau des conditions issu
@@ -390,217 +392,4 @@ function meteo_owm2weather($meteo, $periode = 0) {
 	}
 
 	return $icone;
-}
-
-/**
- * @param $langue
- *
- * @return string
- */
-function langue2code_owm($langue) {
-	static $langue2owm = array(
-		'aa'           => array('', ''),      // afar
-		'ab'           => array('', ''),      // abkhaze
-		'af'           => array('', ''),      // afrikaans
-		'am'           => array('', ''),      // amharique
-		'an'           => array('', 'sp'),    // aragonais
-		'ar'           => array('', ''),      // arabe
-		'as'           => array('', ''),      // assamais
-		'ast'          => array('', 'sp'),    // asturien - iso 639-2
-		'ay'           => array('', ''),      // aymara
-		'az'           => array('', 'ru'),    // azeri
-		'ba'           => array('', ''),      // bashkir
-		'be'           => array('', 'ru'),    // bielorusse
-		'ber_tam'      => array('', ''),      // berbère
-		'ber_tam_tfng' => array('', ''),      // berbère tifinagh
-		'bg'           => array('bg', ''),    // bulgare
-		'bh'           => array('', ''),      // langues biharis
-		'bi'           => array('', ''),      // bichlamar
-		'bm'           => array('', ''),      // bambara
-		'bn'           => array('', ''),      // bengali
-		'bo'           => array('', ''),      // tibétain
-		'br'           => array('', 'fr'),    // breton
-		'bs'           => array('', ''),      // bosniaque
-		'ca'           => array('', 'sp'),    // catalan
-		'co'           => array('', 'fr'),    // corse
-		'cpf'          => array('', 'fr'),    // créole réunionais
-		'cpf_dom'      => array('', 'sp'),    // créole ???
-		'cpf_hat'      => array('', 'fr'),    // créole haïtien
-		'cs'           => array('cz', ''),    // tchèque
-		'cy'           => array('', 'en'),    // gallois
-		'da'           => array('', ''),      // danois
-		'de'           => array('de', ''),    // allemand
-		'dz'           => array('', ''),      // dzongkha
-		'el'           => array('', ''),      // grec moderne
-		'en'           => array('en', ''),    // anglais
-		'en_hx'        => array('', 'en'),    // anglais hacker
-		'en_sm'        => array('', 'en'),    // anglais smurf
-		'eo'           => array('', ''),      // esperanto
-		'es'           => array('sp', ''),    // espagnol
-		'es_co'        => array('', 'sp'),    // espagnol colombien
-		'es_mx_pop'    => array('', 'sp'),    // espagnol mexicain
-		'et'           => array('', ''),      // estonien
-		'eu'           => array('', 'fr'),    // basque
-		'fa'           => array('', ''),      // persan (farsi)
-		'ff'           => array('', ''),      // peul
-		'fi'           => array('fi', ''),    // finnois
-		'fj'           => array('', 'en'),    // fidjien
-		'fo'           => array('', ''),      // féroïen
-		'fon'          => array('', ''),      // fon
-		'fr'           => array('fr', ''),    // français
-		'fr_sc'        => array('', 'fr'),    // français schtroumpf
-		'fr_lpc'       => array('', 'fr'),    // français langue parlée
-		'fr_lsf'       => array('', 'fr'),    // français langue des signes
-		'fr_spl'       => array('', 'fr'),    // français simplifié
-		'fr_tu'        => array('', 'fr'),    // français copain
-		'fy'           => array('', 'de'),    // frison occidental
-		'ga'           => array('', 'en'),    // irlandais
-		'gd'           => array('', 'en'),    // gaélique écossais
-		'gl'           => array('', 'sp'),    // galicien
-		'gn'           => array('', ''),      // guarani
-		'grc'          => array('', ''),      // grec ancien
-		'gu'           => array('', ''),      // goudjrati
-		'ha'           => array('', ''),      // haoussa
-		'hac'          => array('', ''),      // Kurdish-Horami
-		'hbo'          => array('', ''),      // hebreu classique ou biblique
-		'he'           => array('', ''),      // hébreu
-		'hi'           => array('', ''),      // hindi
-		'hr'           => array('', ''),      // croate
-		'hu'           => array('', ''),      // hongrois
-		'hy'           => array('', ''),      // armenien
-		'ia'           => array('', ''),      // interlingua (langue auxiliaire internationale)
-		'id'           => array('', ''),      // indonésien
-		'ie'           => array('', ''),      // interlingue
-		'ik'           => array('', ''),      // inupiaq
-		'is'           => array('', ''),      // islandais
-		'it'           => array('it', ''),    // italien
-		'it_fem'       => array('', 'it'),    // italien féminin
-		'iu'           => array('', ''),      // inuktitut
-		'ja'           => array('', ''),      // japonais
-		'jv'           => array('', ''),      // javanais
-		'ka'           => array('', ''),      // géorgien
-		'kk'           => array('', ''),      // kazakh
-		'kl'           => array('', ''),      // groenlandais
-		'km'           => array('', ''),      // khmer central
-		'kn'           => array('', ''),      // Kannada
-		'ko'           => array('', ''),      // coréen
-		'ks'           => array('', ''),      // kashmiri
-		'ku'           => array('', ''),      // kurde
-		'ky'           => array('', ''),      // kirghiz
-		'la'           => array('', ''),      // latin
-		'lb'           => array('', 'fr'),    // luxembourgeois
-		'ln'           => array('', ''),      // lingala
-		'lo'           => array('', ''),      // lao
-		'lt'           => array('', ''),      // lituanien
-		'lu'           => array('', ''),      // luba-katanga
-		'lv'           => array('', ''),      // letton
-		'man'          => array('', ''),      // mandingue
-		'mfv'          => array('', ''),      // manjaque - iso-639-3
-		'mg'           => array('', ''),      // malgache
-		'mi'           => array('', ''),      // maori
-		'mk'           => array('', ''),      // macédonien
-		'ml'           => array('', ''),      // malayalam
-		'mn'           => array('', ''),      // mongol
-		'mo'           => array('', 'ro'),    // moldave ??? normalement c'est ro comme le roumain
-		'mos'          => array('', ''),      // moré - iso 639-2
-		'mr'           => array('', ''),      // marathe
-		'ms'           => array('', ''),      // malais
-		'mt'           => array('', 'en'),    // maltais
-		'my'           => array('', ''),      // birman
-		'na'           => array('', ''),      // nauruan
-		'nap'          => array('', 'it'),    // napolitain - iso 639-2
-		'ne'           => array('', ''),      // népalais
-		'nqo'          => array('', ''),      // n’ko - iso 639-3
-		'nl'           => array('nl', ''),    // néerlandais
-		'no'           => array('', ''),      // norvégien
-		'nb'           => array('', ''),      // norvégien bokmål
-		'nn'           => array('', ''),      // norvégien nynorsk
-		'oc'           => array('', 'fr'),    // occitan
-		'oc_lnc'       => array('', 'fr'),    // occitan languedocien
-		'oc_ni'        => array('', 'fr'),    // occitan niçard
-		'oc_ni_la'     => array('', 'fr'),    // occitan niçard
-		'oc_prv'       => array('', 'fr'),    // occitan provençal
-		'oc_gsc'       => array('', 'fr'),    // occitan gascon
-		'oc_lms'       => array('', 'fr'),    // occitan limousin
-		'oc_auv'       => array('', 'fr'),    // occitan auvergnat
-		'oc_va'        => array('', 'fr'),    // occitan vivaro-alpin
-		'om'           => array('', ''),      // galla
-		'or'           => array('', ''),      // oriya
-		'pa'           => array('', ''),      // pendjabi
-		'pbb'          => array('', ''),      // Nasa Yuwe (páez) - iso 639-3
-		'pl'           => array('pl', ''),    // polonais
-		'ps'           => array('', ''),      // pachto
-		'pt'           => array('pt', ''),    // portugais
-		'pt_br'        => array('', 'pt'),    // portugais brésilien
-		'qu'           => array('', ''),      // quechua
-		'rm'           => array('', ''),      // romanche
-		'rn'           => array('', ''),      // rundi
-		'ro'           => array('ro', ''),    // roumain
-		'roa'          => array('', 'fr'),    // langues romanes (ch'ti) - iso 639-2
-		'ru'           => array('ru', ''),    // russe
-		'rw'           => array('', ''),      // rwanda
-		'sa'           => array('', ''),      // sanskrit
-		'sc'           => array('', 'it'),    // sarde
-		'scn'          => array('', 'it'),    // sicilien - iso 639-2
-		'sd'           => array('', ''),      // sindhi
-		'sg'           => array('', ''),      // sango
-		'sh'           => array('', ''),      // serbo-croate
-		'sh_latn'      => array('', ''),      // serbo-croate latin
-		'sh_cyrl'      => array('', ''),      // serbo-croate cyrillique
-		'si'           => array('', ''),      // singhalais
-		'sk'           => array('', ''),      // slovaque
-		'sl'           => array('', ''),      // slovène
-		'sm'           => array('', 'en'),    // samoan
-		'sn'           => array('', ''),      // shona
-		'so'           => array('', ''),      // somali
-		'sq'           => array('', ''),      // albanais
-		'sr'           => array('', ''),      // serbe
-		'src'          => array('', 'it'),    // sarde logoudorien - iso 639-3
-		'sro'          => array('', 'it'),    // sarde campidanien - iso 639-3
-		'ss'           => array('', ''),      // swati
-		'st'           => array('', ''),      // sotho du Sud
-		'su'           => array('', ''),      // soundanais
-		'sv'           => array('se', ''),    // suédois
-		'sw'           => array('', ''),      // swahili
-		'ta'           => array('', ''),      // tamoul
-		'te'           => array('', ''),      // télougou
-		'tg'           => array('', ''),      // tadjik
-		'th'           => array('', ''),      // thaï
-		'ti'           => array('', ''),      // tigrigna
-		'tk'           => array('', ''),      // turkmène
-		'tl'           => array('', ''),      // tagalog
-		'tn'           => array('', ''),      // tswana
-		'to'           => array('', ''),      // tongan (Îles Tonga)
-		'tr'           => array('tr', ''),    // turc
-		'ts'           => array('', ''),      // tsonga
-		'tt'           => array('', ''),      // tatar
-		'tw'           => array('', ''),      // twi
-		'ty'           => array('', 'fr'),    // tahitien
-		'ug'           => array('', ''),      // ouïgour
-		'uk'           => array('ua', ''),    // ukrainien
-		'ur'           => array('', ''),      // ourdou
-		'uz'           => array('', ''),      // ouszbek
-		'vi'           => array('', ''),      // vietnamien
-		'vo'           => array('', ''),      // volapük
-		'wa'           => array('', 'fr'),    // wallon
-		'wo'           => array('', ''),      // wolof
-		'xh'           => array('', ''),      // xhosa
-		'yi'           => array('', ''),      // yiddish
-		'yo'           => array('', ''),      // yoruba
-		'za'           => array('', 'zh_cn'), // zhuang
-		'zh'           => array('zh_cn', ''), // chinois (ecriture simplifiee)
-		'zh_tw'        => array('zh_tw', ''), // chinois taiwan (ecriture traditionnelle)
-		'zu'           => array('', '')       // zoulou
-	);
-
-	$code = $GLOBALS['rainette_owm_config']['service']['langue_service'];
-	if (array_key_exists($langue, $langue2owm)) {
-		if ($c0 = $langue2owm[$langue][0]) {
-			$code = strtolower($c0);
-		} elseif ($c1 = $langue2owm[$langue][1]) {
-			$code = strtolower($c1);
-		}
-	}
-
-	return $code;
 }

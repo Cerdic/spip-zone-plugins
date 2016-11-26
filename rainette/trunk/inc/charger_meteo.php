@@ -18,6 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * et stocké les données collectées et transcodées dans un tableau standardisé. L'appelant doit s'assurer que la
  * périodicité est compatible avec le service; cette fonction ne retourne donc que des erreurs de chargement.
  *
+ * @uses service2cache()
  * @uses service2donnees()
  * @uses indice2risque_uv()
  *
@@ -88,8 +89,8 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 	}
 
 	// Construire le nom du fichier cache
-	$cacher = "${service}_service2cache";
-	$cache = $cacher($lieu, $mode, $periodicite, $configuration);
+	include_spip('inc/rainette_normaliser');
+	$cache = service2cache($service, $lieu, $mode, $periodicite, $configuration);
 
 	// Déterminer le système d'unité utilisé dans le cache et celui requis par la configuration.
 	// Si ces systèmes d'unité diffèrent il faut renouveler le cache sinon on affichera des données
@@ -147,7 +148,6 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 			// -1- initialisation du tableau standard à partir uniquement des données reçues du service
 			// -2- complément du tableau avec les données propres à chaque service
 			// -3- complément du tableau avec les données communes à tous les services
-			include_spip('inc/rainette_normaliser');
 			foreach ($flux as $_index_jour => $_flux_jour) {
 				// Pour les informations et les conditions les données récupérées concernent toute la même "période".
 				// Par contre, pour les prévisions on distingue 2 type de données :

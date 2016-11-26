@@ -28,7 +28,10 @@ $GLOBALS['rainette_weather_config']['service'] = array(
 		'logo'  => null,
 		'lien'  => 'http://www.weather.com/',
 	),
-	'langue_service' => 'en'
+	'langues' => array(
+		'disponibles' => array(),
+		'defaut'      => 'en'
+	)
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -139,27 +142,6 @@ function weather_service2configuration($mode) {
 	$config = array_merge($rainette_weather_config[$mode], $rainette_weather_config['service']);
 
 	return $config;
-}
-
-
-/**
- * @param $lieu
- * @param $mode
- * @param $periodicite
- * @param $configuration
- *
- * @return string
- */
-function weather_service2cache($lieu, $mode, $periodicite, $configuration) {
-
-	// Identification de la langue du resume : pas de traduction pour ce service
-	// le résumé est toujours en anglais.
-	$code_langue = $configuration['langue_service'];
-
-	// Construction du chemin du fichier cache
-	include_spip('inc/rainette_normaliser');
-	$fichier_cache = normaliser_cache('weather', $lieu, $mode, $periodicite, $code_langue);
-	return $fichier_cache;
 }
 
 

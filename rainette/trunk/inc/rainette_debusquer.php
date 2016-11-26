@@ -181,3 +181,14 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $type_unite, 
 
 	return $texte;
 }
+
+
+function trouver_langue_manquante() {
+	include_spip('inc/lang_liste');
+	include_spip('inc/rainette_normaliser');
+	foreach ($GLOBALS['codes_langues'] as $code => $langue) {
+		if (!array_key_exists($code, $GLOBALS['rainette_config']['langues_alternatives'])) {
+			echo "code manquant $code<br />";
+		}
+	}
+}

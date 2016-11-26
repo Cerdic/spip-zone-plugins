@@ -26,18 +26,96 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wunderground_config']['service'] = array(
-	'defauts'        => array(
+	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
 		'condition'   => 'wundergound',
 		'theme'       => 'a',
 	),
-	'credits'        => array(
-		'titre' => null,
-		'logo'  => 'wunderground-126.png',
-		'lien'  => 'http://www.wunderground.com/',
+	'credits' => array(
+		'titre'       => null,
+		'logo'        => 'wunderground-126.png',
+		'lien'        => 'http://www.wunderground.com/',
 	),
-	'langue_service' => 'EN'
+	'langues' => array(
+		'disponibles' => array(
+			'AF' => 'af',
+			'AR' => 'ar',
+			'AZ' => 'az',
+			'BY' => 'be',
+			'BU' => 'bg',
+			'CA' => 'ca',
+			'HT' => 'cpf_hat',
+			'CZ' => 'cs',
+			'CY' => 'cy',
+			'DK' => 'da',
+			'DL' => 'de',
+			'GR' => 'el',
+			'EN' => 'en',
+			'EO' => 'eo',
+			'SP' => 'es',
+			'ET' => 'et',
+			'EU' => 'eu',
+			'FA' => 'fa',
+			'FI' => 'fi',
+			'FR' => 'fr',
+			'IR' => 'ga',
+			'GZ' => 'gl',
+			'GU' => 'gu',
+			'IL' => 'he',
+			'HI' => 'hi',
+			'CR' => 'hr',
+			'HU' => 'hu',
+			'HY' => 'hy',
+			'ID' => 'id',
+			'IS' => 'is',
+			'IT' => 'it',
+			'JP' => 'ja',
+			'JW' => 'jv',
+			'KA' => 'ka',
+			'KM' => 'km',
+			'KR' => 'ko',
+			'KU' => 'ku',
+			'LA' => 'la',
+			'LT' => 'lt',
+			'LV' => 'lv',
+			'GM' => 'man',
+			'MI' => 'mi',
+			'MK' => 'mk',
+			'MN' => 'mn',
+			'MR' => 'mr',
+			'MT' => 'mt',
+			'MY' => 'my',
+			'NL' => 'nl',
+			'NO' => 'no',
+			'OC' => 'oc',
+			'PA' => 'pa',
+			'PL' => 'pl',
+			'PS' => 'ps',
+			'BR' => 'pt',
+			'RO' => 'ro',
+			'RU' => 'ru',
+			'SK' => 'sk',
+			'SL' => 'sl',
+			'AL' => 'sq',
+			'SR' => 'sr',
+			'SW' => 'sv',
+			'SI' => 'sw',
+			'TH' => 'th',
+			'TK' => 'tk',
+			'TL' => 'tl',
+			'TR' => 'tr',
+			'TT' => 'tt',
+			'UA' => 'uk',
+			'UZ' => 'uz',
+			'VU' => 'vi',
+			'SN' => 'wo',
+			'YI' => 'yi',
+			'CN' => 'zh',
+			'TW' => 'zh_tw',
+		),
+		'defaut'      => 'EN'
+	)
 );
 
 // Configuration des données fournies par le service wunderground pour le mode 'infos'.
@@ -160,39 +238,6 @@ function wunderground_service2configuration($mode) {
 
 
 /**
- * Construit le nom du cache en fonction du lieu, du type de données et de la langue utilisée par le site.
- *
- * @api
- *
- * @param string $lieu
- *        Lieu pour lequel on requiert le nom du cache.
- * @param string $mode
- *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
- * @param int    $periodicite
- *        La périodicité horaire des prévisions :
- *            - `24`, ou `1`, pour le mode `previsions`
- *            - `0`, pour les modes `conditions` et `infos`
- * @param array  $configuration
- *        Configuration complète du service, statique et utilisateur.
- *
- * @return string
- *        Chemin complet du fichier cache.
- */
-function wunderground_service2cache($lieu, $mode, $periodicite, $configuration) {
-
-	// Identification de la langue du resume.
-	$code_langue = ($configuration['condition'] == 'wunderground')
-		? langue2code_wunderground($GLOBALS['spip_lang'])
-		: $configuration['langue_service'];
-
-	// Construction du chemin du fichier cache
-	include_spip('inc/rainette_normaliser');
-	$fichier_cache = normaliser_cache('wunderground', $lieu, $mode, $periodicite, $code_langue);
-
-	return $fichier_cache;
-}
-
-/**
  * Contruit l'url de la requête en fonction du lieu, du mode et de la périodicité demandés.
  *
  * @api
@@ -250,9 +295,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Identification de la langue du resume.
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas
 	// le cas on demande à l'API de renvoyer la langue par defaut
-	$code_langue = ($configuration['condition'] == 'wunderground')
-		? langue2code_wunderground($GLOBALS['spip_lang'])
-		: $configuration['langue_service'];
+	$code_langue = trouver_langue_service('wunderground', $configuration);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		   . '/' . $configuration['inscription']
@@ -450,217 +493,4 @@ function meteo_wunderground2weather($meteo, $periode = 0) {
 	}
 
 	return $icone;
-}
-
-/**
- * @param $langue
- *
- * @return string
- */
-function langue2code_wunderground($langue) {
-	static $langue2wunderground = array(
-		'aa'           => array('', ''),     // afar
-		'ab'           => array('', ''),     // abkhaze
-		'af'           => array('AF', ''),   // afrikaans
-		'am'           => array('', ''),     // amharique
-		'an'           => array('', 'SP'),   // aragonais
-		'ar'           => array('AR', ''),   // arabe
-		'as'           => array('', ''),     // assamais
-		'ast'          => array('', 'SP'),   // asturien - iso 639-2
-		'ay'           => array('', ''),     // aymara
-		'az'           => array('AZ', ''),   // azeri
-		'ba'           => array('', ''),     // bashkir
-		'be'           => array('BY', ''),   // bielorusse
-		'ber_tam'      => array('', ''),     // berbère
-		'ber_tam_tfng' => array('', ''),     // berbère tifinagh
-		'bg'           => array('BU', ''),   // bulgare
-		'bh'           => array('', ''),     // langues biharis
-		'bi'           => array('', ''),     // bichlamar
-		'bm'           => array('', ''),     // bambara
-		'bn'           => array('', ''),     // bengali
-		'bo'           => array('', ''),     // tibétain
-		'br'           => array('', 'FR'),   // breton
-		'bs'           => array('', ''),     // bosniaque
-		'ca'           => array('CA', ''),   // catalan
-		'co'           => array('', 'FR'),   // corse
-		'cpf'          => array('', 'FR'),   // créole réunionais
-		'cpf_dom'      => array('', 'FR'),   // créole ???
-		'cpf_hat'      => array('HT', ''),   // créole haïtien
-		'cs'           => array('CZ', ''),   // tchèque
-		'cy'           => array('CY', ''),   // gallois
-		'da'           => array('DK', ''),   // danois
-		'de'           => array('DL', ''),   // allemand
-		'dz'           => array('', ''),     // dzongkha
-		'el'           => array('GR', ''),   // grec moderne
-		'en'           => array('EN', ''),   // anglais
-		'en_hx'        => array('', 'EN'),   // anglais hacker
-		'en_sm'        => array('', 'EN'),   // anglais smurf
-		'eo'           => array('EO', ''),   // esperanto
-		'es'           => array('SP', ''),   // espagnol
-		'es_co'        => array('', 'SP'),   // espagnol colombien
-		'es_mx_pop'    => array('', 'SP'),   // espagnol mexicain
-		'et'           => array('ET', ''),   // estonien
-		'eu'           => array('EU', ''),   // basque
-		'fa'           => array('FA', ''),   // persan (farsi)
-		'ff'           => array('', ''),     // peul
-		'fi'           => array('FI', ''),   // finnois
-		'fj'           => array('', 'EN'),   // fidjien
-		'fo'           => array('', 'DK'),   // féroïen
-		'fon'          => array('', ''),     // fon
-		'fr'           => array('FR', ''),   // français
-		'fr_sc'        => array('', 'FR'),   // français schtroumpf
-		'fr_lpc'       => array('', 'FR'),   // français langue parlée
-		'fr_lsf'       => array('', 'FR'),   // français langue des signes
-		'fr_spl'       => array('', 'FR'),   // français simplifié
-		'fr_tu'        => array('', 'FR'),   // français copain
-		'fy'           => array('', 'DL'),   // frison occidental
-		'ga'           => array('IR', ''),   // irlandais
-		'gd'           => array('', 'EN'),   // gaélique écossais
-		'gl'           => array('GZ', ''),   // galicien
-		'gn'           => array('', ''),     // guarani
-		'grc'          => array('', 'GR'),   // grec ancien
-		'gu'           => array('GU', ''),   // goudjrati
-		'ha'           => array('', ''),     // haoussa
-		'hac'          => array('', 'KU'),   // Kurdish-Horami
-		'hbo'          => array('', 'IL'),   // hebreu classique ou biblique
-		'he'           => array('IL', ''),   // hébreu
-		'hi'           => array('HI', ''),   // hindi
-		'hr'           => array('CR', ''),   // croate
-		'hu'           => array('HU', ''),   // hongrois
-		'hy'           => array('HY', ''),   // armenien
-		'ia'           => array('', ''),     // interlingua (langue auxiliaire internationale)
-		'id'           => array('ID', ''),   // indonésien
-		'ie'           => array('', ''),     // interlingue
-		'ik'           => array('', ''),     // inupiaq
-		'is'           => array('IS', ''),   // islandais
-		'it'           => array('IT', ''),   // italien
-		'it_fem'       => array('', 'IT'),   // italien féminin
-		'iu'           => array('', ''),     // inuktitut
-		'ja'           => array('JP', ''),   // japonais
-		'jv'           => array('JW', ''),   // javanais
-		'ka'           => array('KA', ''),   // géorgien
-		'kk'           => array('', ''),     // kazakh
-		'kl'           => array('', 'DK'),   // groenlandais
-		'km'           => array('KM', ''),   // khmer central
-		'kn'           => array('', ''),     // Kannada
-		'ko'           => array('KR', ''),   // coréen
-		'ks'           => array('', ''),     // kashmiri
-		'ku'           => array('KU', ''),   // kurde
-		'ky'           => array('', ''),     // kirghiz
-		'la'           => array('LA', ''),   // latin
-		'lb'           => array('', 'FR'),   // luxembourgeois
-		'ln'           => array('', ''),     // lingala
-		'lo'           => array('', ''),     // lao
-		'lt'           => array('LT', ''),   // lituanien
-		'lu'           => array('', ''),     // luba-katanga
-		'lv'           => array('LV', ''),   // letton
-		'man'          => array('GM', ''),   // mandingue
-		'mfv'          => array('', ''),     // manjaque - iso-639-3
-		'mg'           => array('', ''),     // malgache
-		'mi'           => array('MI', ''),   // maori
-		'mk'           => array('MK', ''),   // macédonien
-		'ml'           => array('', ''),     // malayalam
-		'mn'           => array('MN', ''),   // mongol
-		'mo'           => array('', 'RO'),   // moldave ??? normalement c'est ro comme le roumain
-		'mos'          => array('', ''),     // moré - iso 639-2
-		'mr'           => array('MR', ''),   // marathe
-		'ms'           => array('', ''),     // malais
-		'mt'           => array('MT', ''),   // maltais
-		'my'           => array('MY', ''),   // birman
-		'na'           => array('', ''),     // nauruan
-		'nap'          => array('', 'IT'),   // napolitain - iso 639-2
-		'ne'           => array('', ''),     // népalais
-		'nqo'          => array('', ''),     // n’ko - iso 639-3
-		'nl'           => array('NL', ''),   // néerlandais
-		'no'           => array('NO', ''),   // norvégien
-		'nb'           => array('', 'NO'),   // norvégien bokmål
-		'nn'           => array('', 'NO'),   // norvégien nynorsk
-		'oc'           => array('OC', ''),   // occitan
-		'oc_lnc'       => array('', 'OC'),   // occitan languedocien
-		'oc_ni'        => array('', 'OC'),   // occitan niçard
-		'oc_ni_la'     => array('', 'OC'),   // occitan niçard
-		'oc_prv'       => array('', 'OC'),   // occitan provençal
-		'oc_gsc'       => array('', 'OC'),   // occitan gascon
-		'oc_lms'       => array('', 'OC'),   // occitan limousin
-		'oc_auv'       => array('', 'OC'),   // occitan auvergnat
-		'oc_va'        => array('', 'OC'),   // occitan vivaro-alpin
-		'om'           => array('', ''),     // galla
-		'or'           => array('', ''),     // oriya
-		'pa'           => array('PA', ''),   // pendjabi
-		'pbb'          => array('', ''),     // Nasa Yuwe (páez) - iso 639-3
-		'pl'           => array('PL', ''),   // polonais
-		'ps'           => array('PS', ''),   // pachto
-		'pt'           => array('BR', ''),   // portugais
-		'pt_br'        => array('', 'BR'),   // portugais brésilien
-		'qu'           => array('', ''),     // quechua
-		'rm'           => array('', ''),     // romanche
-		'rn'           => array('', ''),     // rundi
-		'ro'           => array('RO', ''),   // roumain
-		'roa'          => array('chti', ''), // langues romanes (ch'ti) - iso 639-2
-		'ru'           => array('RU', ''),   // russe
-		'rw'           => array('', ''),     // rwanda
-		'sa'           => array('', ''),     // sanskrit
-		'sc'           => array('', 'IT'),   // sarde
-		'scn'          => array('', 'IT'),   // sicilien - iso 639-2
-		'sd'           => array('', ''),     // sindhi
-		'sg'           => array('', ''),     // sango
-		'sh'           => array('', 'SR'),   // serbo-croate
-		'sh_latn'      => array('', 'SR'),   // serbo-croate latin
-		'sh_cyrl'      => array('', 'SR'),   // serbo-croate cyrillique
-		'si'           => array('', ''),     // singhalais
-		'sk'           => array('SK', ''),   // slovaque
-		'sl'           => array('SL', ''),   // slovène
-		'sm'           => array('', ''),     // samoan
-		'sn'           => array('', ''),     // shona
-		'so'           => array('', ''),     // somali
-		'sq'           => array('AL', ''),   // albanais
-		'sr'           => array('SR', ''),   // serbe
-		'src'          => array('', 'IT'),   // sarde logoudorien - iso 639-3
-		'sro'          => array('', 'IT'),   // sarde campidanien - iso 639-3
-		'ss'           => array('', ''),     // swati
-		'st'           => array('', ''),     // sotho du Sud
-		'su'           => array('', ''),     // soundanais
-		'sv'           => array('SW', ''),   // suédois
-		'sw'           => array('SI', ''),   // swahili
-		'ta'           => array('', ''),     // tamoul
-		'te'           => array('', ''),     // télougou
-		'tg'           => array('', ''),     // tadjik
-		'th'           => array('TH', ''),   // thaï
-		'ti'           => array('', ''),     // tigrigna
-		'tk'           => array('TK', ''),   // turkmène
-		'tl'           => array('TL', ''),   // tagalog
-		'tn'           => array('', ''),     // tswana
-		'to'           => array('', ''),     // tongan (Îles Tonga)
-		'tr'           => array('TR', ''),   // turc
-		'ts'           => array('', ''),     // tsonga
-		'tt'           => array('TT', ''),   // tatar
-		'tw'           => array('', ''),     // twi
-		'ty'           => array('', 'FR'),   // tahitien
-		'ug'           => array('', ''),     // ouïgour
-		'uk'           => array('UA', ''),   // ukrainien
-		'ur'           => array('', ''),     // ourdou
-		'uz'           => array('UZ', ''),   // ouszbek
-		'vi'           => array('VU', ''),   // vietnamien
-		'vo'           => array('', ''),     // volapük
-		'wa'           => array('', 'FR'),   // wallon
-		'wo'           => array('SN', ''),   // wolof
-		'xh'           => array('', ''),     // xhosa
-		'yi'           => array('YI', ''),   // yiddish
-		'yo'           => array('', ''),     // yoruba
-		'za'           => array('', 'CN'),   // zhuang
-		'zh'           => array('CN', ''),   // chinois (ecriture simplifiee)
-		'zh_tw'        => array('TW', ''),   // chinois taiwan (ecriture traditionnelle)
-		'zu'           => array('', '')      // zoulou
-	);
-
-	$code = $GLOBALS['rainette_wunderground_config']['service']['langue_service'];
-	if (array_key_exists($langue, $langue2wunderground)) {
-		if ($c0 = $langue2wunderground[$langue][0]) {
-			$code = strtoupper($c0);
-		} elseif ($c1 = $langue2wunderground[$langue][1]) {
-			$code = strtoupper($c1);
-		}
-	}
-
-	return $code;
 }

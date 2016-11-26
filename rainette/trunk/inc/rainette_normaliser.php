@@ -25,13 +25,13 @@ if (!defined('_RAINETTE_REGEXP_LIEU_WEATHER_ID')) {
 
 $GLOBALS['rainette_config']['infos'] = array(
 	// Lieu
-	'ville'          => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
-	'pays'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
-	'pays_iso2'      => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
-	'region'         => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'ville'     => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'pays'      => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'pays_iso2' => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
+	'region'    => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_lieu'),
 	// Coordonnées géographiques
-	'longitude'      => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
-	'latitude'       => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
+	'longitude' => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
+	'latitude'  => array('origine' => 'service', 'type_php' => 'float', 'type_unite' => 'angle', 'groupe' => 'donnees_coordonnees'),
 );
 
 $GLOBALS['rainette_config']['conditions'] = array(
@@ -101,9 +101,207 @@ $GLOBALS['rainette_config']['previsions'] = array(
 $GLOBALS['rainette_config']['periodicite'] = array(
 	24 => array(24, 12),
 	12 => array(12),
-	1  => array(1,3,6)
+	1  => array(1, 3, 6)
 );
 
+$GLOBALS['rainette_config']['langues_alternatives'] = array(
+	'aa'           => array(),     // afar
+	'ab'           => array(),     // abkhaze
+	'af'           => array('en'), // afrikaans
+	'am'           => array(),     // amharique
+	'an'           => array('es'), // aragonais
+	'ar'           => array(),     // arabe
+	'as'           => array(),     // assamais
+	'ast'          => array('es'), // asturien - iso 639-2
+	'ay'           => array(),     // aymara
+	'az'           => array('ru'), // azeri
+	'ba'           => array(),     // bashkir
+	'be'           => array('ru'), // bielorusse
+	'ber_tam'      => array('ar'), // berbère
+	'ber_tam_tfng' => array('ar'), // berbère tifinagh
+	'bg'           => array(),     // bulgare
+	'bh'           => array(),     // langues biharis
+	'bi'           => array(),     // bichlamar
+	'bm'           => array(),     // bambara
+	'bn'           => array(),     // bengali
+	'bo'           => array(),     // tibétain
+	'br'           => array('fr'), // breton
+	'bs'           => array(),     // bosniaque
+	'ca'           => array('es'), // catalan
+	'co'           => array('fr'), // corse
+	'cpf'          => array('fr'), // créole réunionais
+	'cpf_dom'      => array('es'), // créole ???
+	'cpf_hat'      => array('fr'), // créole haïtien
+	'cs'           => array(),     // tchèque
+	'cy'           => array('en'), // gallois
+	'da'           => array(),     // danois
+	'de'           => array(),     // allemand
+	'dz'           => array(),     // dzongkha
+	'el'           => array(),     // grec moderne
+	'en'           => array(),     // anglais
+	'en_hx'        => array('en'), // anglais hacker
+	'en_sm'        => array('en'), // anglais smurf
+	'eo'           => array(),     // esperanto
+	'es'           => array(),     // espagnol
+	'es_co'        => array('es'), // espagnol colombien
+	'es_mx_pop'    => array('es'), // espagnol mexicain
+	'et'           => array(),     // estonien
+	'eu'           => array('fr'), // basque
+	'fa'           => array(),     // persan (farsi)
+	'ff'           => array(),     // peul
+	'fi'           => array('sv'), // finnois
+	'fj'           => array('en'), // fidjien
+	'fo'           => array('da'), // féroïen
+	'fon'          => array(),     // fon
+	'fr'           => array(),     // français
+	'fr_fem'       => array('fr'), // français féminin
+	'fr_sc'        => array('fr'), // français schtroumpf
+	'fr_lpc'       => array('fr'), // français langue parlée
+	'fr_lsf'       => array('fr'), // français langue des signes
+	'fr_spl'       => array('fr'), // français simplifié
+	'fr_tu'        => array('fr'), // français copain
+	'fy'           => array('de'), // frison occidental
+	'ga'           => array('en'), // irlandais
+	'gd'           => array('en'), // gaélique écossais
+	'gl'           => array('es'), // galicien
+	'gn'           => array(),     // guarani
+	'grc'          => array('el'), // grec ancien
+	'gu'           => array(),     // goudjrati
+	'ha'           => array(),     // haoussa
+	'hac'          => array('ku'), // Kurdish-Horami
+	'hbo'          => array('il'), // hebreu classique ou biblique
+	'he'           => array(),     // hébreu
+	'hi'           => array(),     // hindi
+	'hr'           => array(),     // croate
+	'hu'           => array(),     // hongrois
+	'hy'           => array(),     // armenien
+	'ia'           => array(),     // interlingua (langue auxiliaire internationale)
+	'id'           => array(),     // indonésien
+	'ie'           => array(),     // interlingue
+	'ik'           => array(),     // inupiaq
+	'is'           => array(),     // islandais
+	'it'           => array(),     // italien
+	'it_fem'       => array('it'), // italien féminin
+	'iu'           => array(),     // inuktitut
+	'ja'           => array(),     // japonais
+	'jv'           => array(),     // javanais
+	'ka'           => array(),     // géorgien
+	'kk'           => array(),     // kazakh
+	'kl'           => array('da'), // groenlandais
+	'km'           => array(),     // khmer central
+	'kn'           => array(),     // Kannada
+	'ko'           => array(),     // coréen
+	'kok'          => array(),     // konkani (macrolangage)
+	'ks'           => array(),     // kashmiri
+	'ku'           => array(),     // kurde
+	'ky'           => array(),     // kirghiz
+	'la'           => array('fr'), // latin
+	'lb'           => array('fr'), // luxembourgeois
+	'ln'           => array(),     // lingala
+	'lo'           => array(),     // lao
+	'lt'           => array(),     // lituanien
+	'lu'           => array(),     // luba-katanga
+	'lv'           => array(),     // letton
+	'man'          => array(),     // mandingue
+	'mfv'          => array(),     // manjaque - iso-639-3
+	'mg'           => array('fr'), // malgache
+	'mi'           => array(),     // maori
+	'mk'           => array(),     // macédonien
+	'ml'           => array(),     // malayalam
+	'mn'           => array('zh'), // mongol
+	'mo'           => array('ro'), // moldave ??? normalement c'est ro comme le roumain
+	'mos'          => array(),     // moré - iso 639-2
+	'mr'           => array(),     // marathe
+	'ms'           => array(),     // malais
+	'mt'           => array('en'), // maltais
+	'my'           => array(),     // birman
+	'na'           => array(),     // nauruan
+	'nap'          => array('it'), // napolitain - iso 639-2
+	'ne'           => array(),     // népalais
+	'nqo'          => array(),     // n’ko - iso 639-3
+	'nl'           => array(),     // néerlandais
+	'no'           => array(),     // norvégien
+	'nb'           => array('no'), // norvégien bokmål
+	'nn'           => array('no'), // norvégien nynorsk
+	'oc'           => array('fr'), // occitan
+	'oc_lnc'       => array('oc', 'fr'), // occitan languedocien
+	'oc_ni'        => array('oc', 'fr'), // occitan niçard
+	'oc_ni_la'     => array('oc', 'fr'), // occitan niçard larg
+	'oc_ni_mis'    => array('oc', 'fr'), // occitan niçard mistralenc
+	'oc_prv'       => array('oc', 'fr'), // occitan provençal
+	'oc_gsc'       => array('oc', 'fr'), // occitan gascon
+	'oc_lms'       => array('oc', 'fr'), // occitan limousin
+	'oc_auv'       => array('oc', 'fr'), // occitan auvergnat
+	'oc_va'        => array('oc', 'fr'), // occitan vivaro-alpin
+	'om'           => array(),     // galla
+	'or'           => array(),     // oriya
+	'pa'           => array(),     // pendjabi
+	'pbb'          => array(),     // Nasa Yuwe (páez) - iso 639-3
+	'pl'           => array(),     // polonais
+	'prs'          => array(),     // Dari (Afghanistan) - iso 639-3
+	'ps'           => array(),     // pachto
+	'pt'           => array(),     // portugais
+	'pt_br'        => array('pt'), // portugais brésilien
+	'qu'           => array('es'), // quechua
+	'rm'           => array('fr'), // romanche
+	'rn'           => array(),     // rundi
+	'ro'           => array(),     // roumain
+	'roa'          => array('fr'), // langues romanes (ch'ti) - iso 639-2
+	'ru'           => array(),     // russe
+	'rw'           => array(),     // rwanda
+	'sa'           => array(),     // sanskrit
+	'sc'           => array('it'), // sarde
+	'scn'          => array('it'), // sicilien - iso 639-2
+	'sd'           => array(),     // sindhi
+	'sg'           => array(),     // sango
+	'sh'           => array('sh'), // serbo-croate
+	'sh_latn'      => array('sh'), // serbo-croate latin
+	'sh_cyrl'      => array('sh'), // serbo-croate cyrillique
+	'si'           => array(),     // singhalais
+	'sk'           => array(),     // slovaque
+	'sl'           => array(),     // slovène
+	'sm'           => array('en'), // samoan
+	'sn'           => array(),     // shona
+	'so'           => array(),     // somali
+	'sq'           => array(),     // albanais
+	'sr'           => array(),     // serbe
+	'src'          => array('it'), // sarde logoudorien - iso 639-3
+	'sro'          => array('it'), // sarde campidanien - iso 639-3
+	'ss'           => array(),     // swati
+	'st'           => array(),     // sotho du Sud
+	'su'           => array(),     // soundanais
+	'sv'           => array(),     // suédois
+	'sw'           => array(),     // swahili
+	'ta'           => array(),     // tamoul
+	'te'           => array(),     // télougou
+	'tg'           => array(),     // tadjik
+	'th'           => array(),     // thaï
+	'ti'           => array(),     // tigrigna
+	'tk'           => array(),     // turkmène
+	'tl'           => array(),     // tagalog
+	'tn'           => array(),     // tswana
+	'to'           => array('en'), // tongan (Îles Tonga)
+	'tr'           => array(),     // turc
+	'ts'           => array(),     // tsonga
+	'tt'           => array(),     // tatar
+	'tw'           => array(),     // twi
+	'ty'           => array('fr'), // tahitien
+	'ug'           => array(),     // ouïgour
+	'uk'           => array('ru'), // ukrainien
+	'ur'           => array(),     // ourdou
+	'uz'           => array(),     // ouszbek
+	'vi'           => array(),     // vietnamien
+	'vo'           => array(),     // volapük
+	'wa'           => array('fr'), // wallon
+	'wo'           => array(),     // wolof
+	'xh'           => array(),     // xhosa
+	'yi'           => array('he'), // yiddish
+	'yo'           => array(),     // yoruba
+	'za'           => array('zh'), // zhuang
+	'zh'           => array(),     // chinois (ecriture simplifiee)
+	'zh_tw'        => array('zh'), // chinois taiwan (ecriture traditionnelle)
+	'zu'           => array()      // zoulou
+);
 
 
 /**
@@ -124,9 +322,10 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 		// utiles à cette période.
 		foreach (array_keys($GLOBALS['rainette_config'][$mode]) as $_donnee) {
 			if ((($periode == -1)
-				and (empty($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'])
-					or ($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'] == 'jour')))
-			or (($periode > -1)	and ($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'] == 'heure'))) {
+				 and (empty($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'])
+					  or ($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'] == 'jour')))
+				or (($periode > -1) and ($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'] == 'heure'))
+			) {
 				if ($GLOBALS['rainette_config'][$mode][$_donnee]['origine'] == 'service') {
 					// La donnée est fournie par le service. Elle n'est jamais calculée par le plugin
 					// Néanmoins, elle peut-être indisponible temporairement
@@ -288,11 +487,103 @@ function periodicite_compatible($type_modele, $periodicite) {
 	$compatible = false;
 
 	if (isset($GLOBALS['rainette_config']['periodicite'][$type_modele])
-	and in_array($periodicite, $GLOBALS['rainette_config']['periodicite'][$type_modele])) {
+		and in_array($periodicite, $GLOBALS['rainette_config']['periodicite'][$type_modele])
+	) {
 		$compatible = true;
 	}
 
 	return $compatible;
+}
+
+
+/**
+ * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
+ *
+ * @param string $service
+ *        Le nom abrégé du service :
+ *        - `weather` pour le weather.com, la valeur par défaut car elle ne nécessite aucune inscription
+ *        - `wwo` pour World Weather Online
+ *        - `wunderground` pour Wunderground
+ *        - `owm` pour Open Weather Map
+ * @param string $lieu
+ *        Lieu pour lequel on requiert le nom du cache.
+ * @param string $mode
+ *        Type de données météorologiques. Les valeurs possibles sont `infos`, `conditions` ou `previsions`.
+ * @param int    $periodicite
+ *        La périodicité horaire des prévisions :
+ *        - `24`, `12`, `6`, `3` ou `1`, pour le mode `previsions`
+ *        - `0`, pour les modes `conditions` et `infos`
+ * @param array  $config_service
+ *        Configuration complète du service, statique et utilisateur.
+ *
+ * @return string
+ *        Chemin complet du fichier cache.
+ */
+function service2cache($service, $lieu, $mode, $periodicite, $config_service) {
+
+	// Identification de la langue du resume.
+	$code_langue = trouver_langue_service($service, $config_service);
+
+	// Construction du chemin du fichier cache
+	$fichier_cache = normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue);
+
+	return $fichier_cache;
+}
+
+
+function trouver_langue_service($service, $config_service) {
+
+	if ($config_service['condition'] == $service) {
+		// Langue SPIP : soit celle de la page soit celle en cours pour l'affichage
+		// TODO : cela a-t-il du sens ?
+		$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
+
+		// On cherche si le service fournit la langue utilisée par le site.
+		// -- Pour cela on utilise la configuration du service qui fournit un tableau des langues disponibles
+		//    sous le format [code de langue du service] = code de langue spip.
+		$langue_service = array_search($langue_spip, $config_service['langues']['disponibles']);
+		if ($langue_service === false) {
+			// La langue utilisée par SPIP n'est pas supportée par le service.
+			// -- On cherche si il existe une langue SPIP utilisable meilleure que la langue par défaut du service.
+			// -- Pour ce faire on a défini pour chaque code de langue spip, un ou deux codes de langue SPIP à utiliser
+			//    en cas d'absence de la langue concernée dans un ordre de priorité (index 0, puis index 1).
+			$langue_service = $config_service['langues']['defaut'];
+			if ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip]) {
+				foreach ($GLOBALS['rainette_config']['langues_alternatives'][$langue_spip] as $_langue_alternative) {
+					$langue_service = array_search($_langue_alternative, $config_service['langues']['disponibles']);
+					if ($langue_service !== false) {
+						break;
+					}
+				}
+			}
+		}
+	} else {
+		$langue_service = $config_service['langues']['defaut'];
+	}
+
+	return $langue_service;
+}
+
+
+function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
+
+	// Création et/ou détermination du dossier de destination du cache en fonction du service
+	$dossier_cache = sous_repertoire(_DIR_CACHE, 'rainette');
+	$dossier_cache = sous_repertoire($dossier_cache, $service);
+
+	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
+	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
+	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
+	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
+	list($lieu_normalise,) = normaliser_lieu($lieu);
+	$fichier_cache = $dossier_cache
+					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
+					 . '_' . $mode
+					 . ($periodicite ? strval($periodicite) : '')
+					 . ($code_langue ? '_' . strtolower($code_langue) : '')
+					 . '.txt';
+
+	return $fichier_cache;
 }
 
 
@@ -319,26 +610,4 @@ function normaliser_lieu($lieu) {
 	}
 
 	return array($lieu_normalise, $format_lieu);
-}
-
-
-function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
-
-	// Création et/ou détermination du dossier de destination du cache en fonction du service
-	$dossier_cache = sous_repertoire(_DIR_CACHE, 'rainette');
-	$dossier_cache = sous_repertoire($dossier_cache, $service);
-
-	// Le nom du fichier cache est composé comme suit, chaque élement étant séparé par un underscore :
-	// -- le nom du lieu normalisé (sans espace et dont tous les caractères non alphanumériques sont remplacés par un tiret
-	// -- le nom du mode (infos, conditions ou previsions) accolé à la périodicité du cache pour les prévisions uniquement
-	// -- la langue du résumé si il existe ou rien si aucune traduction n'est fournie par le service
-	list($lieu_normalise,) = normaliser_lieu($lieu);
-	$fichier_cache = $dossier_cache
-					 . str_replace(array(' ', ',', '+', '.', '/'), '-', $lieu_normalise)
-					 . '_' . $mode
-					 . ($periodicite ? strval($periodicite) : '')
-					 . ($code_langue ? '_' . strtolower($code_langue) : '')
-					 . '.txt';
-
-	return $fichier_cache;
 }
