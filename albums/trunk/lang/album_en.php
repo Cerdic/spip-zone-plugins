@@ -56,7 +56,7 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'icone_creer_album' => 'Create a new album',
 	'icone_modifier_album' => 'Edit this album',
 	'info_1_album' => '1 album',
-	'info_1_utilisation' => '1 Use',
+	'info_1_utilisation' => '1 Use', # MODIF
 	'info_aucun_album' => 'No album',
 	'info_nb_albums' => '@nb@ albums',
 	'info_nb_utilisations' => '@nb@ uses',

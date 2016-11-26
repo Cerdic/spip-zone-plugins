@@ -48,7 +48,7 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'icone_creer_album' => 'Crear un nuevo álbum',
 	'icone_modifier_album' => 'Modificar este álbum',
 	'info_1_album' => '1 álbum',
-	'info_1_utilisation' => '1 Uso',
+	'info_1_utilisation' => '1 Uso', # MODIF
 	'info_aucun_album' => 'Ningún álbum',
 	'info_nb_albums' => '@nb@ álbumes',
 	'info_nb_utilisations' => '@nb@ usos',

@@ -1,8 +1,8 @@
 <traduction module="album" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/album?lang_cible=de" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/album?lang_cible=de" total="115" traduits="110" relire="0" modifs="1" nouveaux="4" pourcent="95.65">
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="115" traduits="110" relire="0" modifs="1" nouveaux="4" pourcent="95.65">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
@@ -10,13 +10,13 @@
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/album?lang_cible=es" total="111" traduits="68" relire="21" modifs="8" nouveaux="14" pourcent="61.26">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/album?lang_cible=es" total="115" traduits="67" relire="21" modifs="9" nouveaux="18" pourcent="58.26">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/album?lang_cible=fr" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/album?lang_cible=fr" total="115" traduits="115" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/album?lang_cible=nl" total="111" traduits="111" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/album?lang_cible=nl" total="115" traduits="110" relire="0" modifs="1" nouveaux="4" pourcent="95.65">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 </traduction>
