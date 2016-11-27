@@ -1,7 +1,7 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.0.13"
+	version="2.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/notation-32.png"
@@ -29,7 +29,9 @@
 	<pipeline nom="afficher_config_objet" inclure="notation_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="notation_pipelines.php" />
 	<pipeline nom="configurer_liste_metas" inclure="notation_pipelines.php" />
-
+	<pipeline nom="indexer_document" inclure="notation_pipelines.php" />
+	
+	<utilise nom="indexer" compatibilite="[2.10.0;[" />
 	<menu nom="notation" titre="notation:notation" parent="menu_activite" icone="images/notation-16.png" />
 
 	<onglet nom="notation" titre="notation:afficher_tables" parent="notation" icone="images/notation-24.png" />

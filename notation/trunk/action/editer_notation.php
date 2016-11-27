@@ -208,6 +208,14 @@ function notation_recalculer_total($objet,$id_objet){
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='notation/$objet/$id_objet'");
 		}
+		// si on utilise indexer, on dit de reindexer l'objet (c'est pas possible de modifier juste une propriété de l'objet?)
+		$info_plugin = chercher_filtre('info_plugin');
+		$indexer = $info_plugin('indexer','est_actif');
+		
+		if ($indexer){
+			include_spip('indexer_pipelines');
+			indexer_redindex_objet($objet,$id_objet);
+		}
 	}
 }
 

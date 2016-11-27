@@ -79,4 +79,19 @@ function notation_configurer_liste_metas($metas){
 
 	return $metas;
 }
-?>
+
+/**
+ * Si le plugin indexer est disponible, insérer la note dans l'indexation
+ * @param string $flux
+ * @return string
+ */
+function notation_indexer_document($flux){
+	$objet = $flux['args']['objet'];
+	$id_objet = $flux['args']['id_objet'];
+	$notes = sql_fetsel('note,note_ponderee,nombre_votes','spip_notations_objets',"`id_objet`=$id_objet and `objet`=".sql_quote($objet));
+	if (is_array($notes)){
+		$flux['data']->properties['notes'] = $notes;
+		var_dump($flux);
+	}
+	return $flux;
+}
