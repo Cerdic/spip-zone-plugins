@@ -90,7 +90,7 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 
 	// Construire le nom du fichier cache
 	include_spip('inc/rainette_normaliser');
-	$cache = service2cache($service, $lieu, $mode, $periodicite, $configuration);
+	$cache = service2cache($lieu, $mode, $periodicite, $configuration);
 
 	// Déterminer le système d'unité utilisé dans le cache et celui requis par la configuration.
 	// Si ces systèmes d'unité diffèrent il faut renouveler le cache sinon on affichera des données

@@ -58,6 +58,7 @@ $GLOBALS['rainette_config']['conditions'] = array(
 	'code_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	'icon_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	'desc_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
+	'trad_meteo'            => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
 	'icone'                 => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
 	'resume'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'groupe' => 'donnees_etats_calcules'),
@@ -92,6 +93,7 @@ $GLOBALS['rainette_config']['previsions'] = array(
 	'code_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	'icon_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	'desc_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
+	'trad_meteo'           => array('origine' => 'service', 'type_php' => 'string', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_natifs'),
 	// Etats météorologiques calculés
 	'icone'                => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
 	'resume'               => array('origine' => 'calcul', 'type_php' => 'mixed', 'type_unite' => '', 'rangement' => 'heure', 'groupe' => 'donnees_etats_calcules'),
@@ -105,125 +107,125 @@ $GLOBALS['rainette_config']['periodicite'] = array(
 );
 
 $GLOBALS['rainette_config']['langues_alternatives'] = array(
-	'aa'           => array(),     // afar
-	'ab'           => array(),     // abkhaze
-	'af'           => array('en'), // afrikaans
-	'am'           => array(),     // amharique
-	'an'           => array('es'), // aragonais
-	'ar'           => array(),     // arabe
-	'as'           => array(),     // assamais
-	'ast'          => array('es'), // asturien - iso 639-2
-	'ay'           => array(),     // aymara
-	'az'           => array('ru'), // azeri
-	'ba'           => array(),     // bashkir
-	'be'           => array('ru'), // bielorusse
-	'ber_tam'      => array('ar'), // berbère
-	'ber_tam_tfng' => array('ar'), // berbère tifinagh
-	'bg'           => array(),     // bulgare
-	'bh'           => array(),     // langues biharis
-	'bi'           => array(),     // bichlamar
-	'bm'           => array(),     // bambara
-	'bn'           => array(),     // bengali
-	'bo'           => array(),     // tibétain
-	'br'           => array('fr'), // breton
-	'bs'           => array(),     // bosniaque
-	'ca'           => array('es'), // catalan
-	'co'           => array('fr'), // corse
-	'cpf'          => array('fr'), // créole réunionais
-	'cpf_dom'      => array('es'), // créole ???
-	'cpf_hat'      => array('fr'), // créole haïtien
-	'cs'           => array(),     // tchèque
-	'cy'           => array('en'), // gallois
-	'da'           => array(),     // danois
-	'de'           => array(),     // allemand
-	'dz'           => array(),     // dzongkha
-	'el'           => array(),     // grec moderne
-	'en'           => array(),     // anglais
-	'en_hx'        => array('en'), // anglais hacker
-	'en_sm'        => array('en'), // anglais smurf
-	'eo'           => array(),     // esperanto
-	'es'           => array(),     // espagnol
-	'es_co'        => array('es'), // espagnol colombien
-	'es_mx_pop'    => array('es'), // espagnol mexicain
-	'et'           => array(),     // estonien
-	'eu'           => array('fr'), // basque
-	'fa'           => array(),     // persan (farsi)
-	'ff'           => array(),     // peul
-	'fi'           => array('sv'), // finnois
-	'fj'           => array('en'), // fidjien
-	'fo'           => array('da'), // féroïen
-	'fon'          => array(),     // fon
-	'fr'           => array(),     // français
-	'fr_fem'       => array('fr'), // français féminin
-	'fr_sc'        => array('fr'), // français schtroumpf
-	'fr_lpc'       => array('fr'), // français langue parlée
-	'fr_lsf'       => array('fr'), // français langue des signes
-	'fr_spl'       => array('fr'), // français simplifié
-	'fr_tu'        => array('fr'), // français copain
-	'fy'           => array('de'), // frison occidental
-	'ga'           => array('en'), // irlandais
-	'gd'           => array('en'), // gaélique écossais
-	'gl'           => array('es'), // galicien
-	'gn'           => array(),     // guarani
-	'grc'          => array('el'), // grec ancien
-	'gu'           => array(),     // goudjrati
-	'ha'           => array(),     // haoussa
-	'hac'          => array('ku'), // Kurdish-Horami
-	'hbo'          => array('il'), // hebreu classique ou biblique
-	'he'           => array(),     // hébreu
-	'hi'           => array(),     // hindi
-	'hr'           => array(),     // croate
-	'hu'           => array(),     // hongrois
-	'hy'           => array(),     // armenien
-	'ia'           => array(),     // interlingua (langue auxiliaire internationale)
-	'id'           => array(),     // indonésien
-	'ie'           => array(),     // interlingue
-	'ik'           => array(),     // inupiaq
-	'is'           => array(),     // islandais
-	'it'           => array(),     // italien
-	'it_fem'       => array('it'), // italien féminin
-	'iu'           => array(),     // inuktitut
-	'ja'           => array(),     // japonais
-	'jv'           => array(),     // javanais
-	'ka'           => array(),     // géorgien
-	'kk'           => array(),     // kazakh
-	'kl'           => array('da'), // groenlandais
-	'km'           => array(),     // khmer central
-	'kn'           => array(),     // Kannada
-	'ko'           => array(),     // coréen
-	'kok'          => array(),     // konkani (macrolangage)
-	'ks'           => array(),     // kashmiri
-	'ku'           => array(),     // kurde
-	'ky'           => array(),     // kirghiz
-	'la'           => array('fr'), // latin
-	'lb'           => array('fr'), // luxembourgeois
-	'ln'           => array(),     // lingala
-	'lo'           => array(),     // lao
-	'lt'           => array(),     // lituanien
-	'lu'           => array(),     // luba-katanga
-	'lv'           => array(),     // letton
-	'man'          => array(),     // mandingue
-	'mfv'          => array(),     // manjaque - iso-639-3
-	'mg'           => array('fr'), // malgache
-	'mi'           => array(),     // maori
-	'mk'           => array(),     // macédonien
-	'ml'           => array(),     // malayalam
-	'mn'           => array('zh'), // mongol
-	'mo'           => array('ro'), // moldave ??? normalement c'est ro comme le roumain
-	'mos'          => array(),     // moré - iso 639-2
-	'mr'           => array(),     // marathe
-	'ms'           => array(),     // malais
-	'mt'           => array('en'), // maltais
-	'my'           => array(),     // birman
-	'na'           => array(),     // nauruan
-	'nap'          => array('it'), // napolitain - iso 639-2
-	'ne'           => array(),     // népalais
-	'nqo'          => array(),     // n’ko - iso 639-3
-	'nl'           => array(),     // néerlandais
-	'no'           => array(),     // norvégien
-	'nb'           => array('no'), // norvégien bokmål
-	'nn'           => array('no'), // norvégien nynorsk
-	'oc'           => array('fr'), // occitan
+	'aa'           => array(),           // afar
+	'ab'           => array(),           // abkhaze
+	'af'           => array('en'),       // afrikaans
+	'am'           => array(),           // amharique
+	'an'           => array('es'),       // aragonais
+	'ar'           => array(),           // arabe
+	'as'           => array(),           // assamais
+	'ast'          => array('es'),       // asturien - iso 639-2
+	'ay'           => array(),           // aymara
+	'az'           => array('ru'),       // azeri
+	'ba'           => array(),           // bashkir
+	'be'           => array('ru'),       // bielorusse
+	'ber_tam'      => array('ar'),       // berbère
+	'ber_tam_tfng' => array('ar'),       // berbère tifinagh
+	'bg'           => array(),           // bulgare
+	'bh'           => array(),           // langues biharis
+	'bi'           => array(),           // bichlamar
+	'bm'           => array(),           // bambara
+	'bn'           => array(),           // bengali
+	'bo'           => array(),           // tibétain
+	'br'           => array('fr'),       // breton
+	'bs'           => array(),           // bosniaque
+	'ca'           => array('es'),       // catalan
+	'co'           => array('fr'),       // corse
+	'cpf'          => array('fr'),       // créole réunionais
+	'cpf_dom'      => array('es'),       // créole ???
+	'cpf_hat'      => array('fr'),       // créole haïtien
+	'cs'           => array(),           // tchèque
+	'cy'           => array('en'),       // gallois
+	'da'           => array(),           // danois
+	'de'           => array(),           // allemand
+	'dz'           => array(),           // dzongkha
+	'el'           => array(),           // grec moderne
+	'en'           => array(),           // anglais
+	'en_hx'        => array('en'),       // anglais hacker
+	'en_sm'        => array('en'),       // anglais smurf
+	'eo'           => array(),           // esperanto
+	'es'           => array(),           // espagnol
+	'es_co'        => array('es'),       // espagnol colombien
+	'es_mx_pop'    => array('es'),       // espagnol mexicain
+	'et'           => array(),           // estonien
+	'eu'           => array('fr'),       // basque
+	'fa'           => array(),           // persan (farsi)
+	'ff'           => array(),           // peul
+	'fi'           => array('sv'),       // finnois
+	'fj'           => array('en'),       // fidjien
+	'fo'           => array('da'),       // féroïen
+	'fon'          => array(),           // fon
+	'fr'           => array(),           // français
+	'fr_fem'       => array('fr'),       // français féminin
+	'fr_sc'        => array('fr'),       // français schtroumpf
+	'fr_lpc'       => array('fr'),       // français langue parlée
+	'fr_lsf'       => array('fr'),       // français langue des signes
+	'fr_spl'       => array('fr'),       // français simplifié
+	'fr_tu'        => array('fr'),       // français copain
+	'fy'           => array('de'),       // frison occidental
+	'ga'           => array('en'),       // irlandais
+	'gd'           => array('en'),       // gaélique écossais
+	'gl'           => array('es'),       // galicien
+	'gn'           => array(),           // guarani
+	'grc'          => array('el'),       // grec ancien
+	'gu'           => array(),           // goudjrati
+	'ha'           => array(),           // haoussa
+	'hac'          => array('ku'),       // Kurdish-Horami
+	'hbo'          => array('il'),       // hebreu classique ou biblique
+	'he'           => array(),           // hébreu
+	'hi'           => array(),           // hindi
+	'hr'           => array(),           // croate
+	'hu'           => array(),           // hongrois
+	'hy'           => array(),           // armenien
+	'ia'           => array(),           // interlingua (langue auxiliaire internationale)
+	'id'           => array(),           // indonésien
+	'ie'           => array(),           // interlingue
+	'ik'           => array(),           // inupiaq
+	'is'           => array(),           // islandais
+	'it'           => array(),           // italien
+	'it_fem'       => array('it'),       // italien féminin
+	'iu'           => array(),           // inuktitut
+	'ja'           => array(),           // japonais
+	'jv'           => array(),           // javanais
+	'ka'           => array(),           // géorgien
+	'kk'           => array(),           // kazakh
+	'kl'           => array('da'),       // groenlandais
+	'km'           => array(),           // khmer central
+	'kn'           => array(),           // Kannada
+	'ko'           => array(),           // coréen
+	'kok'          => array(),           // konkani (macrolangage)
+	'ks'           => array(),           // kashmiri
+	'ku'           => array(),           // kurde
+	'ky'           => array(),           // kirghiz
+	'la'           => array('fr'),       // latin
+	'lb'           => array('fr'),       // luxembourgeois
+	'ln'           => array(),           // lingala
+	'lo'           => array(),           // lao
+	'lt'           => array(),           // lituanien
+	'lu'           => array(),           // luba-katanga
+	'lv'           => array(),           // letton
+	'man'          => array(),           // mandingue
+	'mfv'          => array(),           // manjaque - iso-639-3
+	'mg'           => array('fr'),       // malgache
+	'mi'           => array(),           // maori
+	'mk'           => array(),           // macédonien
+	'ml'           => array(),           // malayalam
+	'mn'           => array('zh'),       // mongol
+	'mo'           => array('ro'),       // moldave ??? normalement c'est ro comme le roumain
+	'mos'          => array(),           // moré - iso 639-2
+	'mr'           => array(),           // marathe
+	'ms'           => array(),           // malais
+	'mt'           => array('en'),       // maltais
+	'my'           => array(),           // birman
+	'na'           => array(),           // nauruan
+	'nap'          => array('it'),       // napolitain - iso 639-2
+	'ne'           => array(),           // népalais
+	'nqo'          => array(),           // n’ko - iso 639-3
+	'nl'           => array(),           // néerlandais
+	'no'           => array(),           // norvégien
+	'nb'           => array('no'),       // norvégien bokmål
+	'nn'           => array('no'),       // norvégien nynorsk
+	'oc'           => array('fr'),       // occitan
 	'oc_lnc'       => array('oc', 'fr'), // occitan languedocien
 	'oc_ni'        => array('oc', 'fr'), // occitan niçard
 	'oc_ni_la'     => array('oc', 'fr'), // occitan niçard larg
@@ -233,74 +235,74 @@ $GLOBALS['rainette_config']['langues_alternatives'] = array(
 	'oc_lms'       => array('oc', 'fr'), // occitan limousin
 	'oc_auv'       => array('oc', 'fr'), // occitan auvergnat
 	'oc_va'        => array('oc', 'fr'), // occitan vivaro-alpin
-	'om'           => array(),     // galla
-	'or'           => array(),     // oriya
-	'pa'           => array(),     // pendjabi
-	'pbb'          => array(),     // Nasa Yuwe (páez) - iso 639-3
-	'pl'           => array(),     // polonais
-	'prs'          => array(),     // Dari (Afghanistan) - iso 639-3
-	'ps'           => array(),     // pachto
-	'pt'           => array(),     // portugais
-	'pt_br'        => array('pt'), // portugais brésilien
-	'qu'           => array('es'), // quechua
-	'rm'           => array('fr'), // romanche
-	'rn'           => array(),     // rundi
-	'ro'           => array(),     // roumain
-	'roa'          => array('fr'), // langues romanes (ch'ti) - iso 639-2
-	'ru'           => array(),     // russe
-	'rw'           => array(),     // rwanda
-	'sa'           => array(),     // sanskrit
-	'sc'           => array('it'), // sarde
-	'scn'          => array('it'), // sicilien - iso 639-2
-	'sd'           => array(),     // sindhi
-	'sg'           => array(),     // sango
-	'sh'           => array('sh'), // serbo-croate
-	'sh_latn'      => array('sh'), // serbo-croate latin
-	'sh_cyrl'      => array('sh'), // serbo-croate cyrillique
-	'si'           => array(),     // singhalais
-	'sk'           => array(),     // slovaque
-	'sl'           => array(),     // slovène
-	'sm'           => array('en'), // samoan
-	'sn'           => array(),     // shona
-	'so'           => array(),     // somali
-	'sq'           => array(),     // albanais
-	'sr'           => array(),     // serbe
-	'src'          => array('it'), // sarde logoudorien - iso 639-3
-	'sro'          => array('it'), // sarde campidanien - iso 639-3
-	'ss'           => array(),     // swati
-	'st'           => array(),     // sotho du Sud
-	'su'           => array(),     // soundanais
-	'sv'           => array(),     // suédois
-	'sw'           => array(),     // swahili
-	'ta'           => array(),     // tamoul
-	'te'           => array(),     // télougou
-	'tg'           => array(),     // tadjik
-	'th'           => array(),     // thaï
-	'ti'           => array(),     // tigrigna
-	'tk'           => array(),     // turkmène
-	'tl'           => array(),     // tagalog
-	'tn'           => array(),     // tswana
-	'to'           => array('en'), // tongan (Îles Tonga)
-	'tr'           => array(),     // turc
-	'ts'           => array(),     // tsonga
-	'tt'           => array(),     // tatar
-	'tw'           => array(),     // twi
-	'ty'           => array('fr'), // tahitien
-	'ug'           => array(),     // ouïgour
-	'uk'           => array('ru'), // ukrainien
-	'ur'           => array(),     // ourdou
-	'uz'           => array(),     // ouszbek
-	'vi'           => array(),     // vietnamien
-	'vo'           => array(),     // volapük
-	'wa'           => array('fr'), // wallon
-	'wo'           => array(),     // wolof
-	'xh'           => array(),     // xhosa
-	'yi'           => array('he'), // yiddish
-	'yo'           => array(),     // yoruba
-	'za'           => array('zh'), // zhuang
-	'zh'           => array(),     // chinois (ecriture simplifiee)
-	'zh_tw'        => array('zh'), // chinois taiwan (ecriture traditionnelle)
-	'zu'           => array()      // zoulou
+	'om'           => array(),           // galla
+	'or'           => array(),           // oriya
+	'pa'           => array(),           // pendjabi
+	'pbb'          => array(),           // Nasa Yuwe (páez) - iso 639-3
+	'pl'           => array(),           // polonais
+	'prs'          => array(),           // Dari (Afghanistan) - iso 639-3
+	'ps'           => array(),           // pachto
+	'pt'           => array(),           // portugais
+	'pt_br'        => array('pt'),       // portugais brésilien
+	'qu'           => array('es'),       // quechua
+	'rm'           => array('fr'),       // romanche
+	'rn'           => array(),           // rundi
+	'ro'           => array(),           // roumain
+	'roa'          => array('fr'),       // langues romanes (ch'ti) - iso 639-2
+	'ru'           => array(),           // russe
+	'rw'           => array(),           // rwanda
+	'sa'           => array(),           // sanskrit
+	'sc'           => array('it'),       // sarde
+	'scn'          => array('it'),       // sicilien - iso 639-2
+	'sd'           => array(),           // sindhi
+	'sg'           => array(),           // sango
+	'sh'           => array('sh'),       // serbo-croate
+	'sh_latn'      => array('sh'),       // serbo-croate latin
+	'sh_cyrl'      => array('sh'),       // serbo-croate cyrillique
+	'si'           => array(),           // singhalais
+	'sk'           => array(),           // slovaque
+	'sl'           => array(),           // slovène
+	'sm'           => array('en'),       // samoan
+	'sn'           => array(),           // shona
+	'so'           => array(),           // somali
+	'sq'           => array(),           // albanais
+	'sr'           => array(),           // serbe
+	'src'          => array('it'),       // sarde logoudorien - iso 639-3
+	'sro'          => array('it'),       // sarde campidanien - iso 639-3
+	'ss'           => array(),           // swati
+	'st'           => array(),           // sotho du Sud
+	'su'           => array(),           // soundanais
+	'sv'           => array(),           // suédois
+	'sw'           => array(),           // swahili
+	'ta'           => array(),           // tamoul
+	'te'           => array(),           // télougou
+	'tg'           => array(),           // tadjik
+	'th'           => array(),           // thaï
+	'ti'           => array(),           // tigrigna
+	'tk'           => array(),           // turkmène
+	'tl'           => array(),           // tagalog
+	'tn'           => array(),           // tswana
+	'to'           => array('en'),       // tongan (Îles Tonga)
+	'tr'           => array(),           // turc
+	'ts'           => array(),           // tsonga
+	'tt'           => array(),           // tatar
+	'tw'           => array(),           // twi
+	'ty'           => array('fr'),       // tahitien
+	'ug'           => array(),           // ouïgour
+	'uk'           => array('ru'),       // ukrainien
+	'ur'           => array(),           // ourdou
+	'uz'           => array(),           // ouszbek
+	'vi'           => array(),           // vietnamien
+	'vo'           => array(),           // volapük
+	'wa'           => array('fr'),       // wallon
+	'wo'           => array(),           // wolof
+	'xh'           => array(),           // xhosa
+	'yi'           => array('he'),       // yiddish
+	'yo'           => array(),           // yoruba
+	'za'           => array('zh'),       // zhuang
+	'zh'           => array(),           // chinois (ecriture simplifiee)
+	'zh_tw'        => array('zh'),       // chinois taiwan (ecriture traditionnelle)
+	'zu'           => array()            // zoulou
 );
 
 
@@ -319,7 +321,9 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 	if ($flux !== null) {
 		// Le service a renvoyé des données, on boucle sur les clés du tableau normalisé
 		// Néanmoins, en fonction de la période fournie en argument on filtre les données uniquement
-		// utiles à cette période.
+		// utiles à cette période:
+		// - si période = -1 on traite les données jour
+		// - si période > -1 on traite les données heure
 		foreach (array_keys($GLOBALS['rainette_config'][$mode]) as $_donnee) {
 			if ((($periode == -1)
 				 and (empty($GLOBALS['rainette_config'][$mode][$_donnee]['rangement'])
@@ -331,12 +335,16 @@ function service2donnees($config_service, $mode, $flux, $periode) {
 					// Néanmoins, elle peut-être indisponible temporairement
 					if ($cle_service = $config_service['donnees'][$_donnee]['cle']) {
 						// La donnée est normalement fournie par le service car elle possède une configuration de clé
-						// On traite le cas où le nom de la clé varie suivant le système d'unité choisi.
+						// On traite le cas où le nom de la clé varie suivant le système d'unité choisi ou la langue.
 						// La clé de base peut être vide, le suffixe contenant dès lors toute la clé.
-						if (!empty($config_service['donnees'][$_donnee]['suffixe'])) {
+						if (!empty($config_service['donnees'][$_donnee]['suffixe_unite'])) {
 							$systeme_unite = $config_service['unite'];
-							$id_suffixee = $config_service['donnees'][$_donnee]['suffixe']['id_cle'];
-							$cle_service[$id_suffixee] .= $config_service['donnees'][$_donnee]['suffixe'][$systeme_unite];
+							$id_suffixee = $config_service['donnees'][$_donnee]['suffixe_unite']['id_cle'];
+							$cle_service[$id_suffixee] .= $config_service['donnees'][$_donnee]['suffixe_unite'][$systeme_unite];
+						} elseif (!empty($config_service['donnees'][$_donnee]['suffixe_langue'])) {
+							$langue = trouver_langue_service($config_service);
+							$id_suffixee = $config_service['donnees'][$_donnee]['suffixe_langue']['id_cle'];
+							$cle_service[$id_suffixee] .= $langue;
 						}
 
 						// On utilise donc la clé pour calculer la valeur du service.
@@ -455,6 +463,12 @@ function donnee2heure($donnee) {
 	return $heure;
 }
 
+/**
+ * @param $type_modele
+ * @param $service
+ *
+ * @return int
+ */
 function trouver_periodicite($type_modele, $service) {
 
 	// Périodicité initialisée à "non trouvée"
@@ -481,6 +495,12 @@ function trouver_periodicite($type_modele, $service) {
 }
 
 
+/**
+ * @param $type_modele
+ * @param $periodicite
+ *
+ * @return bool
+ */
 function periodicite_compatible($type_modele, $periodicite) {
 
 	// Périodicité initialisée à "non trouvée"
@@ -499,12 +519,6 @@ function periodicite_compatible($type_modele, $periodicite) {
 /**
  * Construit le nom du cache en fonction du servide, du lieu, du type de données et de la langue utilisée par le site.
  *
- * @param string $service
- *        Le nom abrégé du service :
- *        - `weather` pour le weather.com, la valeur par défaut car elle ne nécessite aucune inscription
- *        - `wwo` pour World Weather Online
- *        - `wunderground` pour Wunderground
- *        - `owm` pour Open Weather Map
  * @param string $lieu
  *        Lieu pour lequel on requiert le nom du cache.
  * @param string $mode
@@ -519,21 +533,26 @@ function periodicite_compatible($type_modele, $periodicite) {
  * @return string
  *        Chemin complet du fichier cache.
  */
-function service2cache($service, $lieu, $mode, $periodicite, $config_service) {
+function service2cache($lieu, $mode, $periodicite, $config_service) {
 
 	// Identification de la langue du resume.
-	$code_langue = trouver_langue_service($service, $config_service);
+	$code_langue = trouver_langue_service($config_service);
 
 	// Construction du chemin du fichier cache
-	$fichier_cache = normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue);
+	$fichier_cache = normaliser_cache($config_service['alias'], $lieu, $mode, $periodicite, $code_langue);
 
 	return $fichier_cache;
 }
 
 
-function trouver_langue_service($service, $config_service) {
+/**
+ * @param $config_service
+ *
+ * @return mixed
+ */
+function trouver_langue_service($config_service) {
 
-	if ($config_service['condition'] == $service) {
+	if ($config_service['condition'] == $config_service['alias']) {
 		// Langue SPIP : soit celle de la page soit celle en cours pour l'affichage
 		// TODO : cela a-t-il du sens ?
 		$langue_spip = $GLOBALS['lang'] ? $GLOBALS['lang'] : $GLOBALS['spip_lang'];
@@ -565,6 +584,15 @@ function trouver_langue_service($service, $config_service) {
 }
 
 
+/**
+ * @param $service
+ * @param $lieu
+ * @param $mode
+ * @param $periodicite
+ * @param $code_langue
+ *
+ * @return string
+ */
 function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
 
 	// Création et/ou détermination du dossier de destination du cache en fonction du service
@@ -587,6 +615,11 @@ function normaliser_cache($service, $lieu, $mode, $periodicite, $code_langue) {
 }
 
 
+/**
+ * @param $lieu
+ *
+ * @return array
+ */
 function normaliser_lieu($lieu) {
 
 	$lieu_normalise = trim($lieu);

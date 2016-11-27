@@ -17,6 +17,7 @@ if (!defined('_RAINETTE_WEATHER_URL_BASE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_weather_config']['service'] = array(
+	'alias'   => 'weather',
 	'defauts'        => array(
 		'inscription' => '',
 		'unite'       => 'm',
@@ -82,6 +83,7 @@ $GLOBALS['rainette_weather_config']['conditions'] = array(
 		'code_meteo'            => array('cle' => array('icon', 0, 'text')),
 		'icon_meteo'            => array('cle' => array()),
 		'desc_meteo'            => array('cle' => array('t', 0, 'text')),
+		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -125,6 +127,7 @@ $GLOBALS['rainette_weather_config']['previsions'] = array(
 		'code_meteo'           => array('cle' => array('children', 'icon', 0, 'text')),
 		'icon_meteo'           => array('cle' => array()),
 		'desc_meteo'           => array('cle' => array('children', 't', 0, 'text')),
+		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );

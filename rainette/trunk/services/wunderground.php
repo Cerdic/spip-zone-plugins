@@ -17,7 +17,7 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_REQUETE')) {
 }
 if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 	/**
-	 * UEL de base des icônes fournis par le service Wunderground
+	 * URL de base des icônes fournis par le service Wunderground
 	 */
 	define('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE', 'http://icons.wxug.com/i/c');
 }
@@ -26,6 +26,7 @@ if (!defined('_RAINETTE_WUNDERGROUND_URL_BASE_ICONE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wunderground_config']['service'] = array(
+	'alias'   => 'wunderground',
 	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
@@ -148,24 +149,25 @@ $GLOBALS['rainette_wunderground_config']['conditions'] = array(
 		'derniere_maj'          => array('cle' => array('observation_time_rfc822')),
 		'station'               => array('cle' => array('observation_location', 'full')),
 		// Températures
-		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
-		'temperature_ressentie' => array('cle' => array('feelslike_'), 'suffixe' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
+		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
+		'temperature_ressentie' => array('cle' => array('feelslike_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('wind_'), 'suffixe' => array('id_cle' => 0, 'm' => 'kph', 's' => 'mph')),
+		'vitesse_vent'          => array('cle' => array('wind_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'kph', 's' => 'mph')),
 		'angle_vent'            => array('cle' => array('wind_degrees')),
 		'direction_vent'        => array('cle' => array()),
 		// Données atmosphériques : risque_uv est calculé
-		'precipitation'         => array('cle' => array('precip_today_'), 'suffixe' => array('id_cle' => 0, 'm' => 'metric', 's' => 'in')),
+		'precipitation'         => array('cle' => array('precip_today_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'metric', 's' => 'in')),
 		'humidite'              => array('cle' => array('relative_humidity')),
-		'point_rosee'           => array('cle' => array('dewpoint_'), 'suffixe' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
-		'pression'              => array('cle' => array('pressure_'), 'suffixe' => array('id_cle' => 0, 'm' => 'mb', 's' => 'in')),
+		'point_rosee'           => array('cle' => array('dewpoint_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'c', 's' => 'f')),
+		'pression'              => array('cle' => array('pressure_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'mb', 's' => 'in')),
 		'tendance_pression'     => array('cle' => array('pressure_trend')),
-		'visibilite'            => array('cle' => array('visibility_'), 'suffixe' => array('id_cle' => 0, 'm' => 'km', 's' => 'mi')),
+		'visibilite'            => array('cle' => array('visibility_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'km', 's' => 'mi')),
 		'indice_uv'             => array('cle' => array('UV')),
 		// Etats météorologiques natifs
 		'code_meteo'            => array('cle' => array('icon')),
 		'icon_meteo'            => array('cle' => array('icon_url')),
 		'desc_meteo'            => array('cle' => array('weather')),
+		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -192,15 +194,15 @@ $GLOBALS['rainette_wunderground_config']['previsions'] = array(
 		'coucher_soleil'       => array('cle' => array()),
 		// Températures
 		'temperature'          => array('cle' => array()),
-		'temperature_max'      => array('cle' => array('high', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
-		'temperature_min'      => array('cle' => array('low', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
+		'temperature_max'      => array('cle' => array('high', ''), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
+		'temperature_min'      => array('cle' => array('low', ''), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'celsius', 's' => 'fahrenheit')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('avewind', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'kph', 's' => 'mph')),
+		'vitesse_vent'         => array('cle' => array('avewind', ''), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'kph', 's' => 'mph')),
 		'angle_vent'           => array('cle' => array('avewind', 'degrees')),
 		'direction_vent'       => array('cle' => array()),
 		// Données atmosphériques
 		'risque_precipitation' => array('cle' => array()),
-		'precipitation'        => array('cle' => array('qpf_allday', ''), 'suffixe' => array('id_cle' => 1, 'm' => 'mm', 's' => 'in')),
+		'precipitation'        => array('cle' => array('qpf_allday', ''), 'suffixe_unite' => array('id_cle' => 1, 'm' => 'mm', 's' => 'in')),
 		'humidite'             => array('cle' => array('avehumidity')),
 		'point_rosee'          => array('cle' => array()),
 		'pression'             => array('cle' => array()),
@@ -210,6 +212,7 @@ $GLOBALS['rainette_wunderground_config']['previsions'] = array(
 		'code_meteo'           => array('cle' => array('icon')),
 		'icon_meteo'           => array('cle' => array('icon_url')),
 		'desc_meteo'           => array('cle' => array('conditions')),
+		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -295,7 +298,7 @@ function wunderground_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Identification de la langue du resume.
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas
 	// le cas on demande à l'API de renvoyer la langue par defaut
-	$code_langue = trouver_langue_service('wunderground', $configuration);
+	$code_langue = trouver_langue_service($configuration);
 
 	$url = _RAINETTE_WUNDERGROUND_URL_BASE_REQUETE
 		   . '/' . $configuration['inscription']
@@ -426,7 +429,7 @@ function etat2resume_wunderground(&$tableau, $configuration) {
 		}
 
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		if ($configuration['condition'] == 'wunderground') {
+		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
 			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
 			$tableau['icone']['code'] = $tableau['code_meteo'];

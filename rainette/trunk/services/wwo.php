@@ -18,56 +18,57 @@ if (!defined('_RAINETTE_WWO_URL_BASE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_wwo_config']['service'] = array(
-	'defauts'        => array(
+	'alias'   => 'wwo',
+	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
 		'condition'   => 'wwo',
 		'theme'       => '',
 	),
-	'credits'        => array(
-		'titre' => 'Free local weather content provider',
-		'logo'  => null,
-		'lien'  => 'http://www.worldweatheronline.com/',
+	'credits' => array(
+		'titre'       => 'Free local weather content provider',
+		'logo'        => null,
+		'lien'        => 'http://www.worldweatheronline.com/',
 	),
 	'langues' => array(
 		'disponibles' => array(
-			'ar' => 'ar',
-			'bg' => 'bg',
-			'bn' => 'bn',
-			'cs' => 'cs',
-			'da' => 'da',
-			'de' => 'de',
-			'el' => 'el',
-			'en' => 'en',
-			'es' => 'es',
-			'fi' => 'fi',
-			'fr' => 'fr',
-			'hi' => 'hi',
-			'hu' => 'hu',
-			'it' => 'it',
-			'ja' => 'ja',
-			'jv' => 'jv',
-			'ko' => 'ko',
-			'mr' => 'mr',
-			'nl' => 'nl',
-			'pa' => 'pa',
-			'pl' => 'pl',
-			'pt' => 'pt',
-			'ro' => 'ro',
-			'ru' => 'ru',
-			'si' => 'si',
-			'sk' => 'sk',
-			'sr' => 'sr',
-			'sv' => 'sv',
-			'ta' => 'ta',
-			'te' => 'te',
-			'tr' => 'tr',
-			'uk' => 'uk',
-			'ur' => 'ur',
-			'vi' => 'vi',
-			'zh' => 'zh',
+			'ar'    => 'ar',
+			'bg'    => 'bg',
+			'bn'    => 'bn',
+			'cs'    => 'cs',
+			'da'    => 'da',
+			'de'    => 'de',
+			'el'    => 'el',
+			'en'    => 'en',
+			'es'    => 'es',
+			'fi'    => 'fi',
+			'fr'    => 'fr',
+			'hi'    => 'hi',
+			'hu'    => 'hu',
+			'it'    => 'it',
+			'ja'    => 'ja',
+			'jv'    => 'jv',
+			'ko'    => 'ko',
+			'mr'    => 'mr',
+			'nl'    => 'nl',
+			'pa'    => 'pa',
+			'pl'    => 'pl',
+			'pt'    => 'pt',
+			'ro'    => 'ro',
+			'ru'    => 'ru',
+			'si'    => 'si',
+			'sk'    => 'sk',
+			'sr'    => 'sr',
+			'sv'    => 'sv',
+			'ta'    => 'ta',
+			'te'    => 'te',
+			'tr'    => 'tr',
+			'uk'    => 'uk',
+			'ur'    => 'ur',
+			'vi'    => 'vi',
+			'zh'    => 'zh',
 			'zh_tw' => 'zh_tw',
-			'zu' => 'zu',
+			'zu'    => 'zu',
 		),
 		'defaut'      => 'en'
 	)
@@ -103,10 +104,10 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 		'derniere_maj'          => array('cle' => array('localObsDateTime')),
 		'station'               => array('cle' => array()),
 		// Températures
-		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_ressentie' => array('cle' => array('FeelsLike'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature_reelle'    => array('cle' => array('temp_'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature_ressentie' => array('cle' => array('FeelsLike'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		// Données anémométriques
-		'vitesse_vent'          => array('cle' => array('windspeed'), 'suffixe' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
+		'vitesse_vent'          => array('cle' => array('windspeed'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
 		'angle_vent'            => array('cle' => array('winddirDegree')),
 		'direction_vent'        => array('cle' => array('winddir16Point')),
 		// Données atmosphériques : risque_uv est calculé
@@ -121,6 +122,7 @@ $GLOBALS['rainette_wwo_config']['conditions'] = array(
 		'code_meteo'            => array('cle' => array('weatherCode')),
 		'icon_meteo'            => array('cle' => array('weatherIconUrl', 0, 'value')),
 		'desc_meteo'            => array('cle' => array('weatherDesc', 0, 'value')),
+		'trad_meteo'            => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -151,18 +153,18 @@ $GLOBALS['rainette_wwo_config']['previsions'] = array(
 		'lever_soleil'         => array('cle' => array('astronomy', 0, 'sunrise')),
 		'coucher_soleil'       => array('cle' => array('astronomy', 0, 'sunset')),
 		// Températures
-		'temperature'          => array('cle' => array('temp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_max'      => array('cle' => array('maxtemp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
-		'temperature_min'      => array('cle' => array('mintemp'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature'          => array('cle' => array('temp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature_max'      => array('cle' => array('maxtemp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'temperature_min'      => array('cle' => array('mintemp'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		// Données anémométriques
-		'vitesse_vent'         => array('cle' => array('windspeed'), 'suffixe' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
+		'vitesse_vent'         => array('cle' => array('windspeed'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'Kmph', 's' => 'Miles')),
 		'angle_vent'           => array('cle' => array('winddirDegree')),
 		'direction_vent'       => array('cle' => array('winddir16Point')),
 		// Données atmosphériques : risque_uv est calculé
 		'risque_precipitation' => array('cle' => array('chanceofrain')),
 		'precipitation'        => array('cle' => array('precipMM')),
 		'humidite'             => array('cle' => array('humidity')),
-		'point_rosee'          => array('cle' => array('DewPoint'), 'suffixe' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
+		'point_rosee'          => array('cle' => array('DewPoint'), 'suffixe_unite' => array('id_cle' => 0, 'm' => 'C', 's' => 'F')),
 		'pression'             => array('cle' => array('pressure')),
 		'visibilite'           => array('cle' => array('visibility')),
 		'indice_uv'            => array('cle' => array('uvIndex')),
@@ -170,6 +172,7 @@ $GLOBALS['rainette_wwo_config']['previsions'] = array(
 		'code_meteo'           => array('cle' => array('weatherCode')),
 		'icon_meteo'           => array('cle' => array('weatherIconUrl', 0, 'value')),
 		'desc_meteo'           => array('cle' => array('weatherDesc', 0, 'value')),
+		'trad_meteo'           => array('cle' => array('lang_', 0, 'value'), 'suffixe_langue' => array('id_cle' => 0)),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -226,7 +229,7 @@ function wwo_service2url($lieu, $mode, $periodicite, $configuration) {
 
 	// Identification de la langue du resume.
 	include_spip('inc/rainette_normaliser');
-	$code_langue = trouver_langue_service('wwo', $configuration);
+	$code_langue = trouver_langue_service($configuration);
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays, le format latitude,longitude et le format adresse IP.
@@ -368,14 +371,13 @@ function etat2resume_wwo(&$tableau, $configuration) {
 		}
 
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		if ($configuration['condition'] == 'wwo') {
+		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
-			// TODO le dessous est faux : c'est désormais disponible
-			// Pour le resume, wwo ne fournit pas de traduction : on stocke donc le code meteo afin
-			// de le traduire à partir des fichiers de langue SPIP.
+			// Pour le resume, wwo fournit la traduction dans un item différent que pour les autres services.
+			// Cet item est stocké dans trad_meteo.
 			$tableau['icone']['code'] = $tableau['code_meteo'];
 			$tableau['icone']['url'] = copie_locale($tableau['icon_meteo']);
-			$tableau['resume'] = $tableau['code_meteo'];
+			$tableau['resume'] = ucfirst($tableau['trad_meteo']);
 		} else {
 			// On affiche les conditions traduites dans le systeme weather.com
 			$meteo = meteo_wwo2weather($tableau['code_meteo'], $tableau['periode']);

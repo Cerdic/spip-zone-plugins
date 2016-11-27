@@ -20,16 +20,17 @@ if (!defined('_RAINETTE_OWM_URL_BASE_ICONE')) {
 // Configuration des valeurs par défaut des éléments de la configuration dynamique.
 // Ces valeurs sont applicables à tous les modes.
 $GLOBALS['rainette_owm_config']['service'] = array(
-	'defauts'        => array(
+	'alias'   => 'owm',
+	'defauts' => array(
 		'inscription' => '',
 		'unite'       => 'm',
 		'condition'   => 'owm',
 		'theme'       => '',
 	),
-	'credits'        => array(
-		'titre' => null,
-		'logo'  => null,
-		'lien'  => 'http://openweathermap.org/',
+	'credits' => array(
+		'titre'       => null,
+		'logo'        => null,
+		'lien'        => 'http://openweathermap.org/',
 	),
 	'langues' => array(
 		'disponibles' => array(
@@ -106,6 +107,7 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 		'code_meteo'            => array('cle' => array('weather', 0, 'attributes', 'number')),
 		'icon_meteo'            => array('cle' => array('weather', 0, 'attributes', 'icon')),
 		'desc_meteo'            => array('cle' => array('weather', 0, 'attributes', 'value')),
+		'trad_meteo'            => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -116,8 +118,8 @@ $GLOBALS['rainette_owm_config']['conditions'] = array(
 //    pas disponibles en JSON
 $GLOBALS['rainette_owm_config']['previsions'] = array(
 	'periodicites'       => array(
-		24 => array('max_jours' => 16),
-		//		3  => array('max_jours' => 5)
+		24                     => array('max_jours' => 16),
+//		3                      => array('max_jours' => 5)
 	),
 	'periodicite_defaut' => 24,
 	'periode_maj'        => 7200,
@@ -152,6 +154,7 @@ $GLOBALS['rainette_owm_config']['previsions'] = array(
 		'code_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'number')),
 		'icon_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'var')),
 		'desc_meteo'           => array('cle' => array('children', 'symbol', 0, 'attributes', 'name')),
+		'trad_meteo'           => array('cle' => array()),
 		// Etats météorologiques calculés : icone, resume, periode sont calculés
 	),
 );
@@ -198,7 +201,7 @@ function owm_service2url($lieu, $mode, $periodicite, $configuration) {
 	// Le choix de la langue n'a d'interet que si on utilise le resume natif du service. Si ce n'est pas le cas
 	// on ne la precise pas et on laisse l'API renvoyer la langue par defaut
 	include_spip('inc/rainette_normaliser');
-	$code_langue = trouver_langue_service('owm', $configuration);
+	$code_langue = trouver_langue_service($configuration);
 
 	// On normalise le lieu et on récupère son format.
 	// Le service accepte la format ville,pays et le format latitude,longitude
@@ -339,7 +342,7 @@ function etat2resume_owm(&$tableau, $configuration) {
 		}
 
 		// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
-		if ($configuration['condition'] == 'owm') {
+		if ($configuration['condition'] == $configuration['alias']) {
 			// On affiche les conditions natives fournies par le service.
 			// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
 			$tableau['icone']['code'] = $tableau['code_meteo'];
