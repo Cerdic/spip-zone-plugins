@@ -16,7 +16,7 @@ function slick_insert_head($flux) {
     include_spip('inc/config');
     $config = lire_config('slick');
 
-    $flux .= '<script type="text/javascript" id="slick_js" src="'.find_in_path('lib/slick/slick.min.js').'"></script>';
+    $flux .= '<script type="text/javascript" id="slick_js" src="'.find_in_path('lib/slick/slick.js').'"></script>';
 
     if ($config['charger']) {
         $flux .= '<script type="text/javascript" src="'.produire_fond_statique('javascript/slick.spip.js').'"></script>';
