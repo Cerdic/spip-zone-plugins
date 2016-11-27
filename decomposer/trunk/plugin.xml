@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Décomposer</nom>
+	<auteur>Teddy Payet</auteur>
+	<icon>prive/themes/spip/images/decomposer-64.png</icon>
+	<licence>(c) 2016 GPL</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<description>Ce plugin a pour but de répertorier les squelettes qui sont utilisés sur le site.</description>
+	<lien></lien>
+	<fonctions>decomposer_fonctions.php</fonctions>
+	<options>decomposer_options.php</options>
+	<prefix>decomposer</prefix>
+	<necessite id='SPIP' version='[2.0.0;3.1.99]' />
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>decomposer_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outil</categorie>
+</plugin>

@@ -1,0 +1,11 @@
+<h1><:decomposer:titre_page_decomposer_chemin:></h1>
+<p class="explication"><:decomposer:decomposer_chemin_explication:></p>
+
+<B_squelettes>
+	<strong>[(#TOTAL_BOUCLE) éléments]</strong>
+	<ul class="spip">
+		<BOUCLE_squelettes (DATA) {source table, (#REM|lister_chemin)}>
+			<li class="item">#VALEUR</li>
+		</BOUCLE_squelettes>
+	</ul>
+</B_squelettes>

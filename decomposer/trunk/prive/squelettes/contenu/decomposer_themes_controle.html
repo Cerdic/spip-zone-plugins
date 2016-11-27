@@ -1,0 +1,14 @@
+<h1><:decomposer:titre_page_decomposer_themes_controle:></h1>
+<p class="explication"><:decomposer:decomposer_themes_controle_explication:></p>
+
+[(#SET{lister_themes_perso,[(#REM|lister_themes_perso)]})]
+[(#SET{img_ok,[(#CHEMIN_IMAGE{ok-16.png}|balise_img)]})]
+[(#SET{img_ko,[(#CHEMIN_IMAGE{supprimer-16.png}|balise_img)]})]
+<B_squelettes>
+	<strong>[(#TOTAL_BOUCLE) éléments]</strong>
+	<ul class="spip">
+		<BOUCLE_squelettes (DATA) {source table, (#REM|lister_themes_repertoire)}>
+			<li class="item">[(#VALEUR|in_array{#GET{lister_themes_perso}}|?{#GET{img_ok},#GET{img_ko}}) ]#VALEUR</li>
+		</BOUCLE_squelettes>
+	</ul>
+</B_squelettes>

@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="1.0.0"
 	etat="dev"
-	compatibilite="[3.0.9;3.0.*]"
+	compatibilite="[3.0.9;3.1.*]"
 	logo="prive/themes/spip/images/unsplash-64.png"
 	documentation=""
 	schema="0.1.0"
@@ -17,7 +17,7 @@
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
 	<necessite nom="spip_bonux"  compatibilite="[3.2.0;]" />
 
-	<lib nom="font-awesome" lien="https://fortawesome.github.io/Font-Awesome/assets/font-awesome-4.5.0.zip" />
+	<lib nom="font-awesome" lien="https://github.com/FortAwesome/Font-Awesome/archive/v4.6.3.zip" />
 
 	<pipeline nom="autoriser" inclure="unsplash_autorisations.php" />
 
