@@ -16,6 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_autre_parent' => 'Also in the section',
 	'label_autres_parents' => 'Also in the sections',
 	'label_parents' => 'In the sections',
+	'label_profondeur_chemin' => 'Depth of polyhierarchical breadcrumb in backoffice',
+	'label_profondeur_chemin_0' => 'Full breadcrumb',
+	'label_profondeur_chemin_1' => 'Indirect parent section only',
+	'label_profondeur_chemin_2' => '2 sections',
+	'label_profondeur_chemin_3' => '3 sections',
 
 	// P
 	'parent_obligatoire' => 'You should at least specify a section',
