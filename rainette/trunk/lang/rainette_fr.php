@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'demain' => 'demain',
 	'derniere_maj' => 'mise à jour',
+	'description' => 'description',
 	'direction_E' => 'est',
 	'direction_ENE' => 'est nord-est',
 	'direction_ESE' => 'est sud-est',
@@ -69,6 +70,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_configurer_theme' => 'Choisissez le thème d\'icônes utilisé dans les affichages.',
 	'info_page_configurer' => 'Rainette propose une configuration pour chacun des services de météorologie intégré au plugin. Néanmoins, seuls les services utilisés dans votre site nécessitent d\'être configurés.',
 	'info_credits' => 'Données fournies par @service@',
+
+	// I
+	'indice_uv' => 'Indice UV',
 
 	// J
 	'jour' => 'jour',
@@ -240,12 +244,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tendance_texte_falling' => 'en baisse',
 	'tendance_texte_rising' => 'en hausse',
 	'tendance_texte_steady' => 'stable',
-
 	'titre_service_owm' => 'Open Weather Map',
 	'titre_service_weather' => 'weather.com&reg;',
 	'titre_service_wwo' => 'World Weather Online',
 	'titre_service_wunderground' => 'Weather Underground',
-	'titre_service_yahoo' => 'Yahoo! Weather',
 	'titre_page_configurer' => 'Configuration du plugin Rainette',
 
 	// U
@@ -271,7 +273,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'visibilite' => 'visibilité',
 
 	// Z
-	'zone_dvd' => 'Zone DVD',
 );
 
 ?>

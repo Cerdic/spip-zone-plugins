@@ -219,7 +219,10 @@ function inc_charger_meteo_dist($lieu, $mode = 'conditions', $periodicite = 0, $
 		// 4- Compléments standard à tous les services et tous les modes
 		$extras = array();
 		$extras['credits'] = $configuration['credits'];
-		$extras['config'] = $configuration_utilisateur;
+		$extras['config'] = array_merge(
+			$configuration_utilisateur,
+			array('source' => normaliser_config_donnees($mode, $configuration))
+		);
 		$extras['erreur'] = '';
 		$extras['lieu'] = $lieu;
 		$extras['mode'] = $mode;

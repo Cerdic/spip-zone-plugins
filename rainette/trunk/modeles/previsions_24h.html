@@ -39,10 +39,10 @@
 					(#VALEUR{heure/#GET{index_heure}}|table_valeur{vitesse_vent, '', #EVAL{true}}|rainette_afficher_unite{vitesse, -1, #ENV{extras/service}})
 				</li>]
 				[(#REM) <!-- On affiche les précipitations si elle existe sinon le risque de précipitations à minima -->]
-				#SET{pluie, non}
+				#SET{pluie, ''}
 				[<li>
 					<span><:rainette:precipitation|ucfirst:></span><br />
-				(#VALEUR{heure/#GET{index_heure}}|table_valeur{precipitation, '', #EVAL{true}}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})
+					(#VALEUR{heure/#GET{index_heure}}|table_valeur{precipitation, '', #EVAL{true}}|rainette_afficher_unite{precipitation, -1, #ENV{extras/service}})
 				</li>
 				#SET{pluie, oui}]
 				[(#GET{pluie}|non)

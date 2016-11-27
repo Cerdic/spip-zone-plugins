@@ -644,3 +644,17 @@ function normaliser_lieu($lieu) {
 
 	return array($lieu_normalise, $format_lieu);
 }
+
+
+function normaliser_config_donnees($mode, $config_service) {
+
+	$config_donnees = array();
+
+	foreach ($GLOBALS['rainette_config'][$mode] as $_donnee => $_config) {
+		if ($_config['origine'] == 'service') {
+			$config_donnees[$_donnee] = !empty($config_service['donnees'][$_donnee]['cle']) ? true : false;
+		}
+	}
+
+	return $config_donnees;
+}

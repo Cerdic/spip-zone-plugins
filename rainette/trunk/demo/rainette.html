@@ -73,6 +73,9 @@
 					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=5,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
+					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=1,nombre_jours=5,sous_modele=previsions_24h_table, service=#GET{service}})]
+				</div>
+				<div class="clearfix">
 					<h3 class="h3">Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour du jour courant au maximum des pr&eacute;visions (premier_jour=0)</h3>
 					[(#MODELE{rainette_previsions,lieu=#GET{lieu},premier_jour=0,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
