@@ -91,7 +91,6 @@ function notation_indexer_document($flux){
 	$notes = sql_fetsel('note,note_ponderee,nombre_votes','spip_notations_objets',"`id_objet`=$id_objet and `objet`=".sql_quote($objet));
 	if (is_array($notes)){
 		$flux['data']->properties['notes'] = $notes;
-		var_dump($flux);
 	}
 	return $flux;
 }
