@@ -13,6 +13,8 @@
 
 [(#SET{afficher_articles, #ENV{afficher_articles}|=={oui}|?{'on',''}})]
 [(#SET{masquer_articles_uniques, #ENV{masquer_articles_uniques}|=={oui}|?{'on',''}})]
+[(#SET{lien_direct_articles_uniques, #ENV{lien_direct_articles_uniques}|=={oui}|?{'on',''}})]
+
 [(#SET{articles_max, #ENV{articles_max}|intval|?{#ENV{articles_max},10000}})]
 [(#SET{articles_max_plus_un, #GET{articles_max}|plus{1}})]
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
@@ -71,7 +73,18 @@
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">
-			<a href="#URL_RUBRIQUE">#TITRE</a>
+			[(#REM) si articles uniques masqués
+				faire le lien vers l'article quand il est seul dans la rubrique ? 
+			]
+			<BOUCLE_cpt_art(ARTICLES){id_rubrique}{lang}{si #GET{masquer_articles_uniques}}{si #GET{lien_direct_articles_uniques}}> #SET{id_article_unique, #ID_ARTICLE}</BOUCLE_cpt_art>
+				[(#TOTAL_BOUCLE|>{1}|?{
+					<a href="#URL_RUBRIQUE">#TITRE</a>
+					,
+					<a href="[(#URL_ARTICLE{#GET{id_article_unique}})]">#TITRE</a>
+				})]
+			</B_cpt_art>
+				<a href="#URL_RUBRIQUE">#TITRE</a>
+			<//B_cpt_art>	
 
 			[(#REM) Doit-on descendre plus loin ? ]
 			[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]

@@ -13,6 +13,7 @@
 	<parametre nom="tri" label="menus:entree_tri" />
 	<parametre nom="afficher_articles" label="menus:entree_afficher_articles" />
 	<parametre nom="masquer_articles_uniques" label="menus:entree_masquer_articles_uniques" />
+	<parametre nom="lien_direct_articles_uniques" label="menus:entree_lien_direct_articles_uniques" />
 	<parametre nom="articles_max" label="menus:entree_articles_max" />
 	<parametre nom="articles_max_affiches" label="menus:entree_articles_max_affiches" />
 	<parametre nom="tri_articles" label="menus:entree_tri_articles" />
