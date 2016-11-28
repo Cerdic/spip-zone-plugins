@@ -98,6 +98,7 @@ function image_smush($im) {
 		if ($format == 'GIF') {
 			$dest_png = $tmp.'-convert.png';
 			exec($magick.'convert '.$im.' '.$dest_png);
+			$im_original = $im;
 			$im = $dest_png;
 			$format = 'PNG';
 		}
@@ -184,7 +185,7 @@ function image_smush($im) {
 		 * Si la taille du résultat est supérieure à l'original,
 		 * on retourne l'original en supprimant le fichier temporaire créé
 		 */
-		if (!file_exists($dest) || (filesize($dest) > filesize($im))) {
+		if (!file_exists($dest) || (filesize($dest) > filesize(isset($im_original) ? $im_original : $im))) {
 			spip_unlink($dest);
 			$dest = $im;
 		}

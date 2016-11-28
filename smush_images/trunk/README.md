@@ -72,6 +72,10 @@ Puis elle est optimisée au maximum.
 
 ### Versions 0.6.x
 
+#### Version 0.6.5 (2016-11-28)
+
+Lorsqu'un gif n'est pas animé, on test si la copie en png puis en jpg ne peut être mieux optimisée, ne pas se tromper entre image originale et version optimisée, on évite un warning et un affichage non fonctionnel d'image.
+
 #### Version 0.6.4 (2016-11-04)
 
 Amélioration des performances et de bugs sur la génération des images.
@@ -84,7 +88,7 @@ Ce plugin est pour SPIP > 3.0 et donc nécessite PHP > 5.2 normalement, la compa
 
 #### Version 0.6.2 (2016-10-23)
 
-Si une copie en jpg d'un png peut être mieux optimisée ne pas tester la taille d'un fichier n'existant pas, l'image d'origine devient la copie jpg.
+Si une copie en jpg d'un png peut être mieux optimisée, ne pas tester la taille d'un fichier n'existant pas, l'image d'origine devient la copie jpg.
 
 #### Version 0.6.1
 
