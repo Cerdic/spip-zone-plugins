@@ -166,7 +166,7 @@ function convertir_xml_de($u) {
 	// <Kursiv>	dt. Bodo Schulze</Kursiv>
 	// <FettKursiv>Aus dem Englischen von Niels Kadritzke <br/></FettKursiv>
 	if(preg_match("%<Kursiv>(\s*dt\..*)</Kursiv>%Ums",$u,$matches)
-		OR preg_match("%<(?:(?:Fett)*Kursiv|Fussnote|Fett)>(\s*Aus de.*)</*(?:(?:Fett)*Kursiv|Fussnote|Fett)/*>%Uums",$u,$matches)
+		OR preg_match("%<(?:(?:Fett)*Kursiv|Fussnote|Fett|Hinweis|SpitzQuelle)>(\s*Aus de.*)</*(?:(?:Fett)*Kursiv|Fussnote|Fett|Hinweis|SpitzQuelle)/*>%Uums",$u,$matches)
 		OR preg_match("%<Kursiv>(\s*deutsch von.*)</Kursiv>%Ums",$u,$matches)		
 	){
 		$m['traducteur'] = trim(textebrut($matches[1])) ;
@@ -225,6 +225,16 @@ function convertir_xml_de($u) {
 
 	//var_dump($m['note_signature'],htmlspecialchars($u));
 
+	// recaler les note avec hinweis
+	// var_dump("<textarea>$u</textarea>");
+	$u = preg_replace(',<Hinweis>(<Hoch>.*)</Hinweis>,Uums',"<Fussnote>\\1</Fussnote>", $u);
+
+	// un petit credit en Hinweis ?
+	preg_match(",<Hinweis>(.*)</Hinweis>,Uums", $u, $hinweis);
+	if($hinweis[1]){
+		$m['credit'] = $hinweis[1] . "\n\n" ;
+		$u = str_replace($hinweis, "", $u);
+	}	
 
 	if(preg_match_all("%<Fussnote>(.*)</Fussnote>%Us",$u,$matches)){
 		
@@ -242,7 +252,7 @@ function convertir_xml_de($u) {
 				if(preg_match("/©.*/", $matches[1][$i])){
 					$credit = $matches[1][$i] ;
 					// On ne met pas le crédit en note non numérotée car ca pète la correction des notes ensuite.
-					$m['credit'] = $credit ;
+					$m['credit'] .= $credit ;
 					$u = str_replace($matches[0][$i],"",$u);
 				}else{
 					$note_signature = trim(preg_replace('/^\s*\*\s*/','',$matches[1][$i])) ;
@@ -269,10 +279,6 @@ function convertir_xml_de($u) {
 	
 	if($flag_signature)
 		$m['alertes'][] = "Signature non trouvée" ;
-	
-	// recaler les note avec hinweis
-	// var_dump("<textarea>$u</textarea>");
-	$u = preg_replace(',<Hinweis>(<Hoch>.*)</Hinweis>,Uums',"<Fussnote>\\1</Fussnote>", $u);
 	
 	// notes en début de ligne sans fussnote
 	$u = preg_replace(',^\s*<Hoch>\s*(\d+)\s*</Hoch>\s*,Uum',"\n\n(\\1) ", $u); // 2009_04_03/art00485576.xml
