@@ -41,7 +41,6 @@ function action_diogene_recup_doc_trad_dist() {
 
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('&amp;', '&', $redirect));
-
 }
 
 function diogene_recuperer_docs_trad($id_article, $id_trad) {
@@ -50,7 +49,15 @@ function diogene_recuperer_docs_trad($id_article, $id_trad) {
 	 */
 	$docs = sql_afffetsel('*', 'spip_documents_liens', 'objet="article" AND id_objet='.intval($id_trad));
 	foreach ($docs as $doc) {
-		sql_insertq('spip_documents_liens', array('id_objet' => intval($id_article), 'objet' => 'article', 'id_document' => intval($doc['id_document']), 'vu' => $doc['vu']));
+		sql_insertq(
+			'spip_documents_liens',
+			array(
+				'id_objet' => intval($id_article),
+				'objet' => 'article',
+				'id_document' => intval($doc['id_document']),
+				'vu' => $doc['vu']
+			)
+		);
 		pipeline(
 			'post_edition',
 			array(
