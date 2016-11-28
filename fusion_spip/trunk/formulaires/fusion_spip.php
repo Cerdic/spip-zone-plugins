@@ -111,6 +111,7 @@ function formulaires_fusion_spip_traiter_dist() {
 
 	// préventif
 	@ini_set('max_execution_time', 0);
+	@ini_set('memory_limit', '-1');
 
 	$base = _request('base')-1;
 	$img_dir = _request('img_dir');
@@ -162,7 +163,7 @@ function formulaires_fusion_spip_traiter_dist() {
 			)
 		);
 		//commençons par vider la table de traitement fusion_spip pour pouvoir faire le comptage en fin de traiter
-		sql_delete('spip_fusion_spip');
+		sql_delete('spip_fusion_spip', 'site_origine='.sql_quote($connect));
 		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
 		$lister_tables_principales = charger_fonction('lister_tables_principales', 'fusion_spip');
@@ -231,7 +232,7 @@ function formulaires_fusion_spip_traiter_dist() {
 		fusion_spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
 		// Un résumé des objets importés
-		$res = sql_select('objet, count(*) as count', 'spip_fusion_spip', '', 'objet');
+		$res = sql_select('objet, count(*) as count', 'spip_fusion_spip', 'site_origine='.sql_quote($connect), 'objet');
 		$resume_imports = array();
 		while ($ligne = sql_fetch($res)) {
 			if ($ligne['count'] > 0) {
