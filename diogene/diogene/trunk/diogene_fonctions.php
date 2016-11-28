@@ -69,19 +69,30 @@ function diogene_nombre_attente($id_diogene) {
 		return 'infinite';
 	}
 
-	$diogene = sql_fetsel('id_secteur,nombre_attente', 'spip_diogenes', 'id_diogene='.intval($id_diogene).' AND objet IN ("article","emballe_media")');
+	$diogene = sql_fetsel(
+		'id_secteur,nombre_attente',
+		'spip_diogenes',
+		'id_diogene='.intval($id_diogene).' AND objet IN ("article","emballe_media")'
+	);
 
 	if ($diogene['nombre_attente'] == 0) {
 		return 'infinite';
 	}
 
-	$nb_articles = sql_countsel('spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article" AND art.id_article=lien.id_objet', 'lien.id_auteur='.intval($id_auteur).' AND art.id_secteur='.intval($diogene['id_secteur']).' AND statut NOT IN ("publie","poubelle")');
+	$nb_articles = sql_countsel(
+		'spip_articles as art LEFT JOIN spip_auteurs_liens as lien ON lien.objet="article"
+			AND art.id_article=lien.id_objet',
+		'lien.id_auteur='.intval($id_auteur).'
+			AND art.id_secteur='.intval($diogene['id_secteur']).'
+			AND statut NOT IN ("publie","poubelle")'
+	);
+
 	$nombre_attente = ($diogene['nombre_attente'] - $nb_articles);
 	if ($nombre_attente < 0) {
 		$nombre_attente = 0;
 	}
-	return intval($nombre_attente);
 
+	return intval($nombre_attente);
 }
 
 // TODO : passer le define dans une valeur de config
@@ -134,6 +145,7 @@ function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $f
 			return generer_url_entite($id, $objet);
 		}
 	}
+	$objets = array();
 	$objets[] = $objet;
 	if ($objet == 'article') {
 		$objets[] = 'emballe_media';
@@ -141,7 +153,11 @@ function generer_url_publier($id = null, $objet = 'article', $id_secteur = 0, $f
 	}
 
 	if ($forcer_ecrire == 'prive') {
-		$type_objet = sql_getfetsel('type', 'spip_diogenes', 'id_secteur='.intval($id_secteur).' AND '.sql_in('objet', $objets));
+		$type_objet = sql_getfetsel(
+			'type',
+			'spip_diogenes',
+			'id_secteur='.intval($id_secteur).' AND '.sql_in('objet', $objets)
+		);
 	}
 
 	if (isset($type_objet) and $type_objet) {
@@ -230,14 +246,14 @@ if (!function_exists('puce_statut_rubrique')) {
 				case 'publie':
 					$img = 'puce-verte.gif';
 					$alt = _T('diogene:info_rubrique_publie');
-					return http_img_pack($img, $alt, $atts);
+					return http_img_pack($img, $alt);
 				/**
 				 * Nouvelle rubrique cr&eacute;&eacute;e
 				 */
 				case 'new':
 					$img = 'puce-blanche.gif';
 					$alt = _T('diogene:info_rubrique_new');
-					return http_img_pack($img, $alt, $atts);
+					return http_img_pack($img, $alt);
 				/**
 				 * Rubrique qui a été dépubliée
 			 	 * cf depublier_rubrique_if() dans inc/rubriques
@@ -245,7 +261,7 @@ if (!function_exists('puce_statut_rubrique')) {
 				case '0':
 					$img = 'puce-blanche.gif';
 					$alt = _T('diogene:info_rubrique_new');
-					return http_img_pack($img, $alt, $atts);
+					return http_img_pack($img, $alt);
 				default:
 					return $statut;
 			}
