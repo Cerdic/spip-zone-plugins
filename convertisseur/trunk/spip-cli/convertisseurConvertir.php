@@ -168,8 +168,6 @@ class Convert extends Command {
 							$contenu = $c ;
 						//global $nb_notes;
 						//echo "***** $f : $nb_notes notes ******\n\n" ;
-					}else{
-						die("Pour convertir automatiquement les notes de bas de pages, installez le plugin revision_nbsp : svn co svn://zone.spip.org/spip-zone/_plugins_/revision_nbsp");
 					}
 					
 					$c = array(
