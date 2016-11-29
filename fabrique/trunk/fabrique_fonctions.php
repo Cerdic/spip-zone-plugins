@@ -9,6 +9,27 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+// Liste des categories de plugin
+function filtre_svp_categories_fallback_dist(){
+	$categories = array(
+		'communication',
+		'edition',
+		'multimedia',
+		'navigation',
+		'date',
+		'divers',
+		'auteur',
+		'statistique',
+		'performance',
+		'maintenance',
+		'outil',
+		'theme',
+		'squelette',
+		'aucune'
+	);
+	return array_combine($categories, $categories);
+}
+
 /**
  * Déterminer le répertoire de travail
  * de la Fabrique.
