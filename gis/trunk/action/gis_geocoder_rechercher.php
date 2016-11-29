@@ -5,12 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/distant');
 
 /**
- * Proxy vers le service Nomatim d'OpenStreetMap.
+ * Proxy vers le service du geocoder
  *
  * Cette fonction permet de transmettre une requete auprès du service
- * de recherche d'adresse d'OpenStreetMap (Nomatim).
+ * de recherche d'adresse d'OpenStreetMap (Nomatim ou Photon).
  *
- * Seuls les arguments spécifiques à Nomatim sont transmis.
+ * Seuls les arguments spécifiques au service sont transmis.
  */
 function action_gis_geocoder_rechercher_dist() {
 	include_spip('inc/modifier');
