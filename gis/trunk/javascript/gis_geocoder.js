@@ -181,6 +181,7 @@ L.Geocoder = L.Class.extend({
 				return_location.point = new L.LatLng(place.lat, place.lon);
 			}
 		}
+		this.fire('complete', {result: return_location});
 		this._user_callback(return_location);
 	}
 });
