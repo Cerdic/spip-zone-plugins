@@ -1,16 +1,16 @@
 <plugin>
-<nom>Metas +</nom>
-<prefix>metasplus</prefix>
-<icon>opengraph.png</icon>
+	<nom>Metas +</nom>
+	<prefix>metasplus</prefix>
+	<icon>opengraph.png</icon>
 
-<version>1.1.0</version>
-<etat>dev</etat>
-<categorie>divers</categorie>
+	<version>1.1.0</version>
+	<etat>dev</etat>
+	<categorie>divers</categorie>
 
-<slogan>Métadonnées pour Open Graph, Duclin Core et Twitter</slogan>
-<description>Améliorez l'indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.</description>
-<auteur>[tetue->http://spip.tetue.net] - 2016</auteur>
+	<slogan>Métadonnées pour Open Graph, Duclin Core et Twitter</slogan>
+	<description>Améliorez l'indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.</description>
+	<auteur>[tetue->http://spip.tetue.net] - 2016</auteur>
 
-<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-<lien>https://contrib.spip.net/4845</lien>
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<lien>https://contrib.spip.net/4845</lien>
 </plugin>
