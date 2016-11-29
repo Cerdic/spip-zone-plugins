@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  (Dailymotion, Vimeo, Youtube, CultureBox), mittels einfachem Copy&Paste der URL.
 Es ermöglicht auch die HTML5- Anzeige von Videos
 in den Formaten MP4, H264, Ogg,
-WebM und Mkv sogra auf mobilen Endgeräten.',
+WebM und Mkv sogar auf mobilen Endgeräten.',
 	'videos_nom' => 'Video(s)',
 	'videos_slogan' => 'Verwaltungsoberfläche und Modell zum Einfügen von Videos'
 );
