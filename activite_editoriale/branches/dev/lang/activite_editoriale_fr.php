@@ -1,55 +1,48 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
-	//A
-	'activite_editoriale' =>'Activité éditoriale',
-	'article_pas_maj' => 'Votre attention est nécessaire, votre article n\'a pas été mise à jour depuis @jours@ jours.',
+    //A
+    'activite_editoriale'   			=>'Activité éditoriale',
 	
 	//D
-	'derniere_maj' => 'Dernière MàJ',
-	'du' => 'Du ',
-	'date' => 'Date',
+	'delai' 							=> 'D&eacute;lai',
+	'delai_precisions' 					=> '(en nombre de jours)',
+	'derniere_maj'     					=> 'Dernière MàJ',
+	'du'								=> 'Du ',
+	'date'								=> 'Date',
 	
 	//E
-	'editer' => 'Éditer l\'article',
-	'extras_delai_label' => 'D&eacute;lai',
-	'extras_delai_explications' => '(en nombre de jours)',
-	'extras_identifiants_label' => 'Identifiants ou email des auteurs &agrave; alerter',
-	'extras_identifiants_explications' => '(s&eacute;par&eacute;s par des ",")',
-	'extras_frequence_label' => 'Fréquence de relance de l\'alerte',
-	'extras_frequence_explications' => 'Si la mise à jour n\'a pas été faite, au bout de combien de jours l\'alerte sera à nouveau envoyée.',
+	'editer'							=> 'Éditer l\'article',
+	
+	//G
+	'gestionnaire'     					=> 'Vous êtes identifié comme un gestionnaire de la rubrique',
+
+	//I
+	'identifiants' 						=> 'Identifiants ou email  des auteurs &agrave; alerter',
+	'identifiants_precisions' 			=> '(s&eacute;par&eacute;s par des ",")',
 	
 	//J
-	'jours' => 'jour(s)',
-	'jusqua' => 'Jusqu\'au',
-	
-	//L
-	'label_alerter_auteur' => 'Alerter les auteurs des articles',
-	'label_oui_alerter_auteur' => 'oui',
-	'label_cfg_champ' => 'Quel est le champ analysé pour savoir la MAJ ?',
+	'jours'        						=> 'jour(s)',
+	'jusqua'							=> 'Jusqu\'au',
 	
 	//P
-	'prevenir_responsable' => 'Vous êtes identifié comme responsable de l\'activité éditoriale de la rubrique “ @titre@ ”.',
-	'prevenir_auteur' => 'Vous êtes identifié comme auteur d\'un article de la rubrique “ @titre@ ”.',
 	
 	//R
-	'responsables' => 'Responsables',
-	'rubriques_a_suivre' => 'Rubriques à suivre',
-	'rubrique_doit_maj' => 'Une rubrique doit être mise a jour',
-	'rubrique_pas_maj' => 'Votre attention est nécessaire, la rubrique n\'a pas été mise à jour depuis @jours@ jours.',
-	'rubriques_pas_a_jour' => 'Rubriques n\'ayant pas été mises à jour à temps',
-	'rubrique'			=> 'RUBRIQUE: ',
-	
+	'responsables'             			=> 'Responsables',
+	'rubriques_a_suivre'       			=> 'Rubriques à suivre',
+	'rubrique_doit_maj'        			=> 'Une rubrique doit être mise a jour',
+	'rubrique_pas_maj'         			=> 'Attention, la rubrique “ @titre@ ” n\'a pas été mise à jour depuis @jours@ jours',
+	'rubriques_pas_a_jour'     			=> 'Rubriques n\'ayant pas été mises à jour à temps',
+	'rubrique'							=> 'RUBRIQUE: ',	
 	//S
-	'secteur' => 'Secteur:',
+	'secteur'							=> 'Secteur:',
 	
-	//T
-	'titre_message' => 'Ceci est un message automatique.',
 	
 	//CFG
-	'cfg' => 'Configurer le plugin Activité éditoriale',
-	'cfg_maj_rubrique' => 'Le champ MAJ de la rubrique',
-	'cfg_date_modif_branche' => 'Le champ DATE_MODIF des articles (breves) de la branche',
-	'cfg_date_modif_rubrique' => 'Le champ DATE_MODIF des articles (breves) de la rubrique',
+	'cfg'                      			=> 'Configurer le plugin Activité éditoriale',
+	'cfg_champ'                			=> 'Quel est le champ analysé pour savoir la MAJ ?',
+	'cfg_maj_rubrique'         			=> 'Le champ MAJ de la rubrique',
+	'cfg_date_modif_branche'   			=> 'Le champ DATE_MODIF des articles (breves) de la branche',
+	'cfg_date_modif_rubrique' 			=> 'Le champ DATE_MODIF des articles (breves) de la rubrique'
 	
+
 );

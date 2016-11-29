@@ -3,7 +3,7 @@
 		<td><a href='#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}' dir='ltr'>#TITRE</a></td>
 		<td>
 			#SET{liste_auteur, #EXTRAS_IDENTIFIANTS|explode{','}}
-			<BOUCLE_auteurs(AUTEURS) {id_auteur IN #GET{liste_auteur}}{tout}{", "}><a href='#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>[ (#EXTRAS_IDENTIFIANTS|activite_editoriale_emails)]
+			<BOUCLE_auteurs(AUTEURS) {id_auteur IN #GET{liste_auteur}}{tout}{", "}><a href='#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}'>#NOM</a></BOUCLE_auteurs>
 		</td>
 		<td style="text-align: right">#EXTRAS_DELAI <:activite_editoriale:jours:></td>
 		<td style="text-align: right">[(#ENV{maj}|affdate)]</td>
