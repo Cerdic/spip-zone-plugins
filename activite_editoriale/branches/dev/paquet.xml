@@ -1,10 +1,10 @@
 <paquet
 	prefix="activite_editoriale"
 	categorie="edition"
-	version="2.0.4"
-	etat="stable"
+	version="2.1.0"
+	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="activite_editoriale.png"
+	logo="images/activite_editoriale.png"
 	schema="0.1"
 	documentation="http://contrib.spip.net/Activite-editoriale"
 >	
@@ -22,5 +22,5 @@
 
 	<necessite nom="cextras" compatibilite="[3.4.1;[" />
 
-	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_configuration" icone="activite_editoriale.png" />
+	<menu nom="activite_editoriale" titre="activite_editoriale:activite_editoriale" parent="menu_activite" icone="images/activite_editoriale.png" />
 </paquet>
