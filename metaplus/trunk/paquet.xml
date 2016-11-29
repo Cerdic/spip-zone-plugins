@@ -5,6 +5,7 @@
 	etat="dev"
 	compatibilite="[2.1.0;3.1.99]"
 	logo="opengraph.png"
+	documentation="https://contrib.spip.net/4845"
 >	
 
 	<nom>Métas +</nom>
