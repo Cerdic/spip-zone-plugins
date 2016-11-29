@@ -1,0 +1,14 @@
+<paquet
+	prefix="metasplus"
+	categorie="divers"
+	version="1.1.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.99]"
+	logo="opengraph.png"
+>	
+
+	<nom>Métas +</nom>
+	<!-- Métadonnées pour booster vos articles -->
+
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+</paquet>
