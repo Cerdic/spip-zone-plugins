@@ -1,5 +1,5 @@
 <traduction module="newsletter" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/newsletters/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=de" total="55" traduits="0" relire="0" modifs="53" nouveaux="2" pourcent="0.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=de" total="55" traduits="55" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/newsletter?lang_cible=en" total="55" traduits="53" relire="0" modifs="0" nouveaux="2" pourcent="96.36">
