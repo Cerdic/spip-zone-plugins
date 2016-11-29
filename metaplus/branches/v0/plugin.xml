@@ -1,0 +1,15 @@
+<plugin>
+<nom>Metas +</nom>
+<prefix>metasplus</prefix>
+<icon>opengraph.png</icon>
+
+<version>1.0.0</version>
+<etat>dev</etat>
+<categorie>divers</categorie>
+
+<slogan>Métadonnées pour booster vos articles</slogan>
+<description>Améliorez l'indexation de vos articles dans les moteurs et leur affichage sur les réseaux sociaux grâce aux métadonnées Dublin Core, Open Graph et Twitter Card.</description>
+<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
+
+<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+</plugin>

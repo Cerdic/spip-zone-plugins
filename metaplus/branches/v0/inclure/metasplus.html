@@ -1,0 +1,78 @@
+<BOUCLE_article(ARTICLES){id_article}>
+
+[(#REM)
+	
+	1. D'abord rassembler les informations
+	et les formater
+
+]
+
+[(#SET{title,[(#TITRE|attribut_html)]})]
+[(#SET{lang,[(#LANG|attribut_html)]})]
+[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|PtoBR|attribut_html)]})]
+[(#SET{author,[(#LESAUTEURS|attribut_html)]})]
+[(#SET{date,[(#DATE|affdate{Y-m-d})]})]
+[(#SET{url,[(#URL_ARTICLE|url_absolue|attribut_html)]})]
+
+<BOUCLE_doc(DOCUMENTS){id_article}{extension IN jpg,gif,png}{largeur>=160}{hauteur>=160}{vu?}{!par date}{0,1}>
+[(#SET{logo,[(#FICHIER
+	|image_passe_partout{160,160}
+	|image_recadre{160,160,top center}
+	)]
+})]</BOUCLE_doc>
+[(#SET{logo,[(#LOGO_ARTICLE|image_reduire{160,160})]})]
+[(#SET{logo,[(#GET{logo}
+	|image_aplatir{jpg,ffffff}
+	)]
+})]
+
+
+[(#REM)
+	
+	2. Ensuite les injecter en metas :
+
+]
+
+[(#REM)
+	metas Dublin Core
+	http://dublincore.org
+
+]
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
+<meta name="DC.Format" content="text/html">
+<meta name="dc.Type" content="text">
+<meta name="dc.Title" lang="#LANG" content="#GET{title}">
+<meta name="dc.Language" scheme="rfc1766" content="#LANG">
+[<meta name="dc.Description" lang="#LANG" content="(#GET{desc}|couper{200,'…'}|attribut_html)">
+][<meta name="dc.Creator" content="(#GET{author})">
+][<meta name="dc.Date" scheme="DCTERMS.W3CDTF" content="(#GET{date})">]
+[<meta name="DC.Identifier" scheme="URI" content="(#GET{url})">]
+[<meta name="dc.Publisher" content="(#NOM_SITE_SPIP|attribut_html)">]
+
+[(#REM)
+	metas Open Graph
+	http://ogp.me
+
+]<meta property="og:type" content="article">
+<meta property="og:title" content="#GET{title}">
+<meta property="og:locale" content="#LANG[_(#LANG|strtoupper)]">
+[<meta property="og:url" content="(#GET{url})">]
+[<meta property="og:description" content="(#GET{desc})">
+][<meta property="article:published_time" content="(#GET{date})">]
+[<meta property="article:author" content="(#GET{author})">
+][<meta property="og:image" content="(#GET{logo}|extraire_attribut{src}|url_absolue|attribut_html)">
+][<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)">]
+
+[(#REM)
+	metas Twitter Card
+	https://dev.twitter.com/cards/types/summary
+
+]<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="#GET{title}">
+[<meta name="twitter:description" content="(#GET{desc})">]
+[<meta name="twitter:image" content="(#GET{logo}|extraire_attribut{src}|url_absolue|attribut_html)">]
+
+</BOUCLE_article>
+
+#FILTRE{trim}
