@@ -1,7 +1,9 @@
 <?php
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+
 include_spip('inc/distant');
 
 /**
@@ -23,7 +25,7 @@ function action_gis_geocoder_rechercher_dist() {
 	/* On filtre les arguments à renvoyer à Nomatim (liste blanche) */
 	$arguments = collecter_requests(array('json_callback', 'format', 'q', 'limit', 'addressdetails', 'accept-language', 'lat', 'lon'), array());
 
-	$geocoder = defined('_GIS_GEOCODER') ? _GIS_GEOCODER : 'nominatim';
+	$geocoder = defined('_GIS_GEOCODER') ? _GIS_GEOCODER : 'photon';
 
 	if (!empty($arguments) && in_array($geocoder, array('photon','nominatim'))) {
 		header('Content-Type: application/json; charset=UTF-8');
