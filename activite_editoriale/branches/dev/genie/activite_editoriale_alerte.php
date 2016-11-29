@@ -94,6 +94,26 @@ function activite_editoriale_envoyer_mail($list){
 	            }
 	    	}
     }
+	// envoyer mail a l'auteur de l'article, systematiquement si configure
+	if (function_exists('lire_config')) {
+		$alerter_auteur = lire_config('activite_editoriale/alerter_auteur');
+		if ($alerter_auteur == 'oui') {
+			$auteur = trim(recuperer_fond('inclure/auteurs_article',array('id_rubrique' => $list['id_rubrique'])));
+			$to = $auteur;
+			if ($to != '') {
+				$body = '';
+				$body = _T('activite_editoriale:titre_message')."\n\n";
+				$body = $body._T('activite_editoriale:prevenir_auteur',array('titre'=>$list['titre']))."\n\n";
+				$body = $body._T('activite_editoriale:article_pas_maj',array('jours' => age_rubrique($list['maj'])))."\n\n";
+				$body = $body.$url;
+				if ($envoyer_mail($to, $subject, $body)) {
+					spip_log('Message envoyé à '.$to, 'activite_editoriale');
+				} else {
+					spip_log('Message n\'a pu être envoyé à '.$to, 'activite_editoriale'._LOG_ERREUR);
+				}
+			}
+		}
+	}
 
 
 }
@@ -103,4 +123,3 @@ function activite_editoriale_emails($champ){
 	$champ = preg_replace('#,[0-9]*,#',',',$champ);
 	return $champ;
 }
-?>
