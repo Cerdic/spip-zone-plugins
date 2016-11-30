@@ -1,4 +1,4 @@
-[(#E{NV{multiple}|oui)
+[(#ENV{multiple}|oui)
 	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
 ]
 
