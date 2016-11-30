@@ -34,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cfg_champ' => 'Quel est le champ analysé pour savoir la MAJ ?',
 	
 	//P
-	'pour_chaque_article' => 'pour chaque article',
 	'prevenir_responsable' => 'Vous êtes identifié comme responsable de l\'activité éditoriale de la rubrique “ @titre@ ”.',
 	'prevenir_auteur' => 'Vous êtes identifié comme auteur d\'un article de la rubrique “ @titre@ ”.',
 	
