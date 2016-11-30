@@ -75,7 +75,7 @@ function activite_editoriale_envoyer_mail($list) {
 	$body = $body._T('activite_editoriale:rubrique_pas_maj',array('jours' => age_rubrique($list['maj'])))."\n\n";
 	$body = $body.$url;
 	
-	if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".activite_editoriale_id_auteurs($list['extras_identifiants']).")")) {
+	if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".$list['extras_identifiants'].")")) {
 		while($auteurs = sql_fetch($auteurLists)) {
 			var_dump($auteurs);
 			$to = $auteurs['email'];
@@ -122,9 +122,5 @@ function activite_editoriale_emails($champ) {
 	$champ = ','.str_replace(' ','',$champ).',';
 	$champ = preg_replace('#,[0-9]*,#',',',$champ);
 	return $champ;
-}	
-function activite_editoriale_id_auteurs($champ) {
-	$champ = ','.str_replace(' ','',$champ).',';
-	$champ = preg_replace('#,[a-zA-Z0-9]*@[a-zA-Z0-9]*.[a-zA-Z0-9]{2,3},#',',',$champ);
-	return $champ;
 }
+

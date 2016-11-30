@@ -20,6 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'extras_frequence_label' => 'Fréquence de relance de l\'alerte',
 	'extras_frequence_explications' => 'Si la mise à jour n\'a pas été faite, au bout de combien de jours l\'alerte sera à nouveau envoyée.',
 	
+	//F
+	'frequence_de_relance' => 'Fréquence de relance',
+	
 	//J
 	'jours' => 'jour(s)',
 	'jusqua' => 'Jusqu\'au',
@@ -30,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cfg_champ' => 'Quel est le champ analysé pour savoir la MAJ ?',
 	
 	//P
+	'pour_chaque_article' => 'pour chaque article',
 	'prevenir_responsable' => 'Vous êtes identifié comme responsable de l\'activité éditoriale de la rubrique “ @titre@ ”.',
 	'prevenir_auteur' => 'Vous êtes identifié comme auteur d\'un article de la rubrique “ @titre@ ”.',
 	
