@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_pas_maj' => 'Votre attention est nécessaire, votre article n\'a pas été mis à jour depuis @jours@ jours.',
 	
 	//D
+	'delai' => 'Délai',
 	'derniere_maj' => 'Dernière MàJ',
 	'du' => 'Du ',
 	'date' => 'Date',
