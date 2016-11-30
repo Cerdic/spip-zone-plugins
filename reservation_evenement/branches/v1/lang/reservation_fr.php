@@ -27,13 +27,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
-	'erreur_pas_evenement' => 'Il n’y a actuellment pas d’événement ouvert à l’inscription.',
+	'erreur_pas_evenement' => 'Il n’y a actuellement pas d’événement ouvert à l’inscription.',
 	'evenement_cloture' => 'Évenement clôturé',
 	'explication_client' => 'Choissisez un client parmis les auteurs ou saisissez les données du client ci-bas',
 	'explication_email_reutilisable' => 'Permettre de réutiliser un email d’un auteur spip lors d’une réservation sans enregistrement',
 	'explication_enregistrement_inscrit' => 'L’enregistrer en tant que auteur spip',
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers
-    <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
+		<div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
 	'explication_nombre_evenements' => 'Le nombre nécessaire d’événements réservés  pour que la promotion s’applique.',
