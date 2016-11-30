@@ -193,6 +193,10 @@ function demarrer_site($site = '', $options = array())
         include $f;
     } // attention cet include n'est pas en globals
 
+    if (isset($options['avant_initialisation']) && is_callable($options['avant_initialisation'])) {
+        $options['avant_initialisation']();
+    }
+
     $init = function_exists('spip_initialisation_core')
         ? 'spip_initialisation_core' // mieux pour la 2.0, mais absente avant...
         : 'spip_initialisation';
@@ -262,22 +266,22 @@ function mutualisation_traiter_exec($site)
             die;
         }
         if (_request('dirliste') == 'oui') {
-			if (isset($_GET['dir'])) {
-				require_once dirname(__FILE__).'/inc/dirliste.php';
-				echo dirliste($_GET['dir']);
-			} else {
-				echo '-1';
-			}
-			die;
+            if (isset($_GET['dir'])) {
+                require_once dirname(__FILE__).'/inc/dirliste.php';
+                echo dirliste($_GET['dir']);
+            } else {
+                echo '-1';
+            }
+            die;
         }
         if (_request('dirsize') == 'oui') {
-			if (isset($_GET['dir'])) {
-				require_once dirname(__FILE__).'/inc/dirsize.php';
-				echo dirsize($_GET['dir'], $_GET['taille_max']);
-			} else {
-				echo '-1';
-			}
-			die;
+            if (isset($_GET['dir'])) {
+                require_once dirname(__FILE__).'/inc/dirsize.php';
+                echo dirsize($_GET['dir'], $_GET['taille_max']);
+            } else {
+                echo '-1';
+            }
+            die;
         }
     }
 }

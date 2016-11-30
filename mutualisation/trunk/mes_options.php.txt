@@ -136,7 +136,9 @@
 										 // C'est la que la mutualisation va ecrire les regles de redirection automatiques pour les images de chaque site
 			# 'utiliser_panel' => false, // Utiliser une table externe pour recuperer des identifiants ... (code, user, pass) permettant a un utilisateur d'installer le site (false)
 			# 'annonce' => '<p>Un service propos&eacute; par <a href="http://www.spip.net/">la communaut&eacute; SPIP</a></p>', // Texte a afficher en bas du formulaire d'activation de la mutualisation
-			'url_creer_base' => ''       // Creer la base de donnees via une URL (methode AlternC)
+			'url_creer_base' => '',       // Creer la base de donnees via une URL (methode AlternC)
+			// fonction qui sera appelée avant l'initialisation de SPIP
+			'avant_initialisation' => ''
 		)
 	);
 
