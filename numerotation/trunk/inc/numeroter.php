@@ -224,24 +224,26 @@ function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true)
  * @return array
  */
 function numero_lister_fratrie($objet,$id_objet){
+	$fratrie = array();
 	// recuperer le titre/parent de l'objet
 	$d = numero_info_objet($objet,$id_objet);
 	$cond = array($d['primary']."=".intval($id_objet));
 	$res = numero_requeter_titre($objet,$cond);
-	$row = sql_fetch($res);
-	$cond = array();
-	if ($d['parent'])
-		$cond = array($d['parent']."=".$row['id_parent']);
+	if ($row = sql_fetch($res)) {
+		$cond = array();
+		if ($d['parent'])
+			$cond = array($d['parent']."=".$row['id_parent']);
 
-	// si plus de 1000 on n'affiche plus rien
-	$n = numero_requeter_titre($objet,$cond, true);
-	if ($n>1000)
-		return array();
+		// si plus de 1000 on n'affiche plus rien
+		$n = numero_requeter_titre($objet,$cond, true);
+		if ($n>1000)
+			return array();
 
-	$res = numero_requeter_titre($objet,$cond);
-	$fratrie = array();
-	while($row = sql_fetch($res)){
-		$fratrie[$row['id']] = $row['titre'];
+		$res = numero_requeter_titre($objet,$cond);
+		$fratrie = array();
+		while($row = sql_fetch($res)){
+			$fratrie[$row['id']] = $row['titre'];
+		}
 	}
 	return $fratrie;
 }
