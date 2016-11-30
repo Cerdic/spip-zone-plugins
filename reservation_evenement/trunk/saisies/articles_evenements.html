@@ -15,10 +15,11 @@
 	<BOUCLE_articles(ARTICLES)
 		{id_article ?IN #ENV{id_article}}
 		{id_rubrique ?IN #ENV{id_rubrique}}
-		{statut?}{recherche?}
+		{statut?}
+		{recherche?}
 		{tout}
 		{par num titre, titre}
-		{inscription}>
+		{inscription = 1}>
 		#SET{evenements_source,#ARRAY}
 		<B_evenements>
 			<optgroup label="#TITRE">
