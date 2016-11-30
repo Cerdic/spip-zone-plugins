@@ -57,11 +57,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_album' => 'Een nieuw album maken',
 	'icone_modifier_album' => 'Dit album aanpassen',
 	'info_1_album' => '1 album',
-	'info_1_utilisation' => '1 toepassing', # MODIF
+	'info_1_doclie' => '1 gekoppeld document',
+	'info_1_utilisation' => '1 toepassing',
 	'info_aucun_album' => 'Geen enkel album',
+	'info_docslies' => 'Gekoppeld(e) document(en)',
 	'info_nb_albums' => '@nb@ albums',
+	'info_nb_docslies' => '@nb@ gekoppelde documenten',
 	'info_nb_utilisations' => '@nb@ toepassingen',
 	'info_nouvel_album' => 'Nieuw album',
+	'info_utilisation' => 'Toepassing(en)',
 
 	// L
 	'label_activer_album_objets' => 'Activeer de volgende inhoud voor albums:',
