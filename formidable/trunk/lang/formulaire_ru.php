@@ -17,5 +17,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_formulaire' => 'Форма',
-	'titre_formulaires' => 'Формы'
+	'titre_formulaires' => 'Формы',
+	'titre_logo_formulaire' => 'Логотип формы'
 );
