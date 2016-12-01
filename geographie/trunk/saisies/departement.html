@@ -14,7 +14,7 @@
 	[(#SAISIE{departement, departement,
 		label=<:plugin:info_departement:>})]
 ]
-<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})] >
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro,<:departement:label_selectionnez:>})]</option>]
 <BOUCLE_dept1(geo_departements){id_departement?}{par abbr}{abbr<21}{doublons}>
 	#SET{dept,#ABBR}
