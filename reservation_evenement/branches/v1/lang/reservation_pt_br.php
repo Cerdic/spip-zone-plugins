@@ -29,14 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Esse email já está cadastrado. Favor conectar-se, ou inserir outro endereço de email',
-	'erreur_pas_evenement' => 'Não há nenhum evento com inscrição aberta, no momento.',
+	'erreur_pas_evenement' => 'Não há nenhum evento com inscrição aberta, no momento.', # MODIF
 	'evenement_cloture' => 'Evento encerrado',
 	'explication_client' => 'Escolha um cliente entre os autores ou informe os dados do cliente, abaixo',
 	'explication_email_reutilisable' => 'Permitir reutilizar um e-mail de um autor Spip no momento de uma reserva sem registro',
 	'explication_enregistrement_inscrit' => 'Registrar como autor Spip',
 	'explication_envoi_separe' => 'A troca de status de um Detalhe da Reserva para 
 <div><b>"@statuts@"</b></div> 
-gerará o envio de uma notificação!',
+gerará o envio de uma notificação!', # MODIF
 	'explication_envoi_separe_detail' => 'A troca do status para <div><strong>"@statuts@"</strong></div> gerará o envio de uma notificação!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Conecte-se</a> se você já tem cadastro no site',
 	'explication_nombre_evenements' => 'O número mínimo de reservas para que a promoção seja disponibilizada.',
