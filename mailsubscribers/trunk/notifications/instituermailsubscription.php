@@ -16,6 +16,13 @@ function notifications_instituermailsubscription_dist($quoi, $id_mailsubscriber,
 		spip_log("instituermailsubscription #$id_mailsubscriber : statut inchange", 'notifications'._LOG_INFO_IMPORTANTE);
 		return;
 	}
+
+	// @deprecated : il faut normalement utiliser l'option notify de subscribe et unsubscribe
+	// pour eviter l'envoi des notifications d'inscription/desincription
+	if (isset($GLOBALS['notification_instituermailsubscriber_status']) AND !$GLOBALS['notification_instituermailsubscriber_status'])
+		return;
+
+
 	if (!isset($options['id_mailsubscribinglist'])){
 		spip_log("instituermailsubscription #$id_mailsubscriber : id_mailsubscribinglist inconnu", 'notifications'._LOG_INFO_IMPORTANTE);
 	}
