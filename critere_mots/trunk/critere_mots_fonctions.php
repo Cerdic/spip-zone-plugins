@@ -152,7 +152,6 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
   while($t = sql_fetch($s)){
 			$in[] = $t['i'];
 	}
-	var_dump($in);
 	if ($in){
 	  $wh = sql_in("$_table.$_id_table", $in);
   }
