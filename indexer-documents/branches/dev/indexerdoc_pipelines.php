@@ -65,3 +65,18 @@ function indexerdoc_indexer_document($flux) {
 	
 	return $flux;
 }
+
+/**
+ * Réindexer un objet lorsque la liaison d'un document à cet objet est ajouté ou supprimé
+ * @pipeline post_edition_lien
+ * @param array $flux Arguments et contenu du pipeline "post_edition"
+ * @return Retourne le flux d'origine mais possiblement modifié
+ */
+function indexerdoc_post_edition_lien($flux){
+	if ($flux['args']['objet_source']){ // si on modifie la liaison d'un document
+		$objet = $flux['args']['objet'];
+		$id_objet = $flux['args']['objet'];
+		indexer_redindex_objet($objet,$id_objet);
+	}
+	return $flux;
+}
