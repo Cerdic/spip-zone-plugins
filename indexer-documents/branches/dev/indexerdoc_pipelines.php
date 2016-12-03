@@ -1,6 +1,6 @@
 <?php
 include_spip('inc/config');
-
+include_spip('action/editer_liens');
 define (_INDEXERDOC_OBJETS_LIES,0);// A mettre sur 1 dans mes_options.php si on veut que le contenu du document soit également indexé dans l'objet lié
 /**
  * Modifier la source pour l'objet "document"
@@ -41,6 +41,25 @@ function indexerdoc_indexer_document($flux) {
 			if ($extraire['contenu']) {
 				$document->content .= "\n\n" . $extraire['contenu'];
 			}
+		}
+	}
+	
+	if (_INDEXERDOC_OBJETS_LIES and $flux['args']['objet'] != 'document')// si on a demandé à indexer le documents dans l'objet lié
+	{
+		if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
+			include_spip('inc/extraire_document');
+		}
+		$id_objet = $flux['args']['id_objet'];
+		$objet = $flux['args']['objet'];
+		$documents_lies = objet_trouver_liens(
+			array('document'=>'*'),
+			array($objet=>$id_objet)
+		);// récuperer tous les documents liés
+		foreach ($documents_lies as $document){// les parcourir tous
+			$id_document = $document['id_document'];
+			$tableau_doc = array('id_document'=>$id_document);
+			$extraire = inc_extraire_document($tableau_doc); // on refait l'extrait plutot que de prendre dans ce qui existe en sphinx, parce qu'on ne sait pas quand le document a été indexé par rapport à l'objet (et en plus la requete sphinx, je sais pas la faire en php)
+			$flux['data']->content  .= "\n\n" . $extraire['contenu'];
 		}
 	}
 	
