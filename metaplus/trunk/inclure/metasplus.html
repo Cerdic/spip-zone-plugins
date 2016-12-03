@@ -47,7 +47,9 @@
 [<meta property="article:author" content="(#ENV{author}|attribut_html)">
 ][<meta property="og:image" content="(#ENV{logo}|url_absolue)">
 ][<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)">]
-]
+[(#REM) Prise en charge du plugin facebook : s'il est présent, on envoie la méta fb:app_id
+][(#PLUGIN{facebook}|oui)[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]]]
+
 
 [(#REM)
 	metas Twitter Card
