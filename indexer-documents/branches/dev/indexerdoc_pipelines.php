@@ -1,6 +1,7 @@
 <?php
 include_spip('inc/config');
 
+define (_INDEXERDOC_OBJETS_LIES,0);// A mettre sur 1 dans mes_options.php si on veut que le contenu du document soit également indexé dans l'objet lié
 /**
  * Modifier la source pour l'objet "document"
  *
