@@ -32,6 +32,7 @@ include_spip('urls/arbo');
  * @param string $type
  * @param int $id_objet
  * @param array $contexte
+ *   id_parent : rubrique parent
  * @return bool|null|array
  */
 function renseigner_url_arbopoly($type, $id_objet, $contexte = array()) {
@@ -56,8 +57,9 @@ function renseigner_url_arbopoly($type, $id_objet, $contexte = array()) {
 	if ($champ_parent) {
 		// si un parent est fourni est qu'il est polyhierarchique, on recherche une URL pour ce parent
 		if ($id_parent
-			and reset($champ_parent) == 'id_rubrique'
-			and sql_getfetsel('id_parent','spip_rubriques_liens','id_parent='.intval($id_parent).' AND objet='.sql_quote($type).' AND id_objet='.intval($id_objet))) {
+			and $type_parent = end($champ_parent)
+			and $url_verifier_parent_objet = charger_fonction('url_verifier_parent_objet', 'inc', true)
+			and $url_verifier_parent_objet($type, $id_objet, $type_parent, $id_parent)) {
 			$sel_parent = ", ".intval($id_parent) . ' as parent';
 			// trouver l'url qui matche le parent en premier
 			$order_by_parent = "U.id_parent=".intval($id_parent)." DESC, ";
