@@ -1,0 +1,24 @@
+<paquet
+	prefix="indexerdoc"
+	categorie="navigation"
+	version="1.2.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo=""
+	documentation="http://contrib.spip.net/Sphinx-Indexer"
+>
+	<nom>Indexer documents</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Rastapopoulos</auteur>
+	<auteur>Fil</auteur>
+	<auteur>Azerttyu</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="indexer" compatibilite="[2.0.0;]" />
+
+	<utilise nom="extrairedoc" compatibilite="[0.0.4;]" />
+
+	<pipeline nom="indexer_document" inclure="indexerdoc_pipelines.php" />
+</paquet>
