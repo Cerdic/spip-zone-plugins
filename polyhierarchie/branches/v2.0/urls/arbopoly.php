@@ -31,10 +31,10 @@ include_spip('urls/arbo');
  *
  * @param string $type
  * @param int $id_objet
- * @param int $id_parent
+ * @param array $contexte
  * @return bool|null|array
  */
-function renseigner_url_arbopoly($type, $id_objet, $id_parent=null) {
+function renseigner_url_arbopoly($type, $id_objet, $contexte = array()) {
 	$urls = array();
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
@@ -44,6 +44,8 @@ function renseigner_url_arbopoly($type, $id_objet, $id_parent=null) {
 		return false;
 	} // Quand $type ne reference pas une table
 	$id_objet = intval($id_objet);
+
+	$id_parent = (isset($contexte['id_parent'])?$contexte['id_parent']:null);
 
 	$champ_titre = $desc['titre'] ? $desc['titre'] : 'titre';
 
@@ -86,15 +88,18 @@ function renseigner_url_arbopoly($type, $id_objet, $id_parent=null) {
  *
  * @param string $type
  * @param int $id_objet
- * @param int $id_rubrique_parent
+ * @param array $contexte
+ *   id_parent : rubrique parent
  * @return string
  */
-function declarer_url_arbopoly($type, $id_objet, $id_rubrique_parent=null) {
+function declarer_url_arbopoly($type, $id_objet, $contexte = array()) {
 	static $urls = array();
 	// utiliser un cache memoire pour aller plus vite
 	if (!is_null($C = Cache())) {
 		return $C;
 	}
+	ksort($contexte);
+	$hash = json_encode($contexte);
 
 	// Se contenter de cette URL si elle existe ;
 	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
@@ -104,23 +109,23 @@ function declarer_url_arbopoly($type, $id_objet, $id_rubrique_parent=null) {
 	// qui requetent en base
 	$modifier_url = (defined('_VAR_URLS') and _VAR_URLS);
 
-	if (!isset($urls[$type][$id_objet][$id_rubrique_parent]) or $modifier_url) {
-		$r = renseigner_url_arbopoly($type, $id_objet, $id_rubrique_parent);
+	if (!isset($urls[$type][$id_objet][$hash]) or $modifier_url) {
+		$r = renseigner_url_arbopoly($type, $id_objet, $contexte);
 		// Quand $type ne reference pas une table
 		if ($r === false) {
 			return false;
 		}
 
 		if (!is_null($r)) {
-			$urls[$type][$id_objet][$id_rubrique_parent] = $r;
+			$urls[$type][$id_objet][$hash] = $r;
 		}
 	}
 
-	if (!isset($urls[$type][$id_objet][$id_rubrique_parent])) {
+	if (!isset($urls[$type][$id_objet][$hash])) {
 		return "";
 	} # objet inexistant
 
-	$u = &$urls[$type][$id_objet][$id_rubrique_parent];
+	$u = &$urls[$type][$id_objet][$hash];
 	$url_propre = $u['url'];
 
 	// si on a trouve l'url
@@ -225,13 +230,15 @@ function _generer_url_arbopoly($type, $id, $args = '', $ancre = '') {
 	}
 
 	// Mode propre
-	$propre = declarer_url_arbopoly($type, $id);
+	$c = array();
+	$propre = declarer_url_arbopoly($type, $id, $c);
 	parse_str($args, $contexte);
 	$champ_parent = url_arbo_parent($type);
 	if ($champ_parent
 	  and $champ_parent = reset($champ_parent)
 	  and isset($contexte[$champ_parent]) and $contexte[$champ_parent]) {
-		$propre_contexte = declarer_url_arbopoly($type, $id, $contexte[$champ_parent]);
+		$c['id_parent'] = $contexte[$champ_parent];
+		$propre_contexte = declarer_url_arbopoly($type, $id, $c);
 		if ($propre_contexte !== $propre) {
 			$propre = $propre_contexte;
 			unset($contexte[$champ_parent]);
@@ -469,7 +476,11 @@ function urls_arbopoly_dist($i, $entite, $args = '', $ancre = '') {
 				}
 			} else {
 				foreach ($url_arbo_new as $k => $o) {
-					if ($s = declarer_url_arbopoly($o['objet'], $o['id_objet'], (isset($parents_vus['rubrique'])?$parents_vus['rubrique']:null))) {
+					$c = array();
+					if (isset($parents_vus['rubrique'])) {
+						$c['id_parent'] = $parents_vus['rubrique'];
+					}
+					if ($s = declarer_url_arbopoly($o['objet'], $o['id_objet'], $c)) {
 						$url_arbo_new[$k] = $s;
 					} else {
 						$url_arbo_new[$k] = implode('/', $o['segment']);
