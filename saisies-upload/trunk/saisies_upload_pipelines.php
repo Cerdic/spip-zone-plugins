@@ -12,7 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function saisies_upload_saisies_verifier($flux){
 	foreach ($flux['args']['saisies'] as $saisie){ // chercher le type de saisie du présent plugins, pour faire nos propres vérifications
 		if (in_array($saisie['saisie'], array('upload'))){//si saisie de type upload, ou apparenté (pour le moment que upload)
-			var_dump($saisie);
 			$nom = $saisie['options']['nom'];
 			
 			// supprimer l'éventuelle erreur envoyée par la fonction saisies_veirifer
