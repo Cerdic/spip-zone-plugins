@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisies_upload_description' => 'Fournit une saisie pour charger des fichiers proprement depuis un formulaire CVT ou avec Formidable.',
 	'saisies_upload_slogan' => 'Télécharger proprement des fichiers depuis un formulaire avec #SAISIE',
 );
-?>
