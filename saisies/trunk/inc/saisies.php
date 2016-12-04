@@ -251,7 +251,17 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true) {
 			}
 		}
 	}
-
+	// Last but not least, on passe nos résultats à un pipeline
+	$erreurs = pipeline(
+		'saisies_verifier',
+			array(
+				'args'=>array(
+					'formulaire' => $formulaire,
+					'saisies' => $saisies
+				),
+				'data' => $erreurs
+			)
+		);
 	return $erreurs;
 }
 
