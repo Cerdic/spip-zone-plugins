@@ -104,8 +104,10 @@ function cvtupload_formulaire_fond($flux) {
 		and $champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])
 	) {
 		include_spip('inc/filtres');
-		if ($fichiers = isset($flux['args']['contexte']['_fichiers_precedents_html'])) {
-		
+		if (
+			isset($flux['args']['contexte']['_fichiers_precedents_html'])
+			and $fichiers = $flux['args']['contexte']['_fichiers_precedents_html']
+		) {
 			foreach ($champs_fichiers as $champ) {
 				// Si le visiteur a bien réussi a charger un ou plusieurs fichiers dans ce champ
 				if (isset($fichiers[$champ])) {
