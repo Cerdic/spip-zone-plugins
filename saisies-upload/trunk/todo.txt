@@ -6,3 +6,5 @@
 - Par ailleurs, si on utilise formidable:
 	- si on enregistre les réponses, on lie le document à la réponse
 	- si on envoie l'info par courriel, on ajoute un lien vers le fichiers distant
+
+- Gérer les validations partielles : si on répond au formulaire en uploadant un fichier mais que un autres des champs ne valide pas, il faut réafficher le formulaire en indiquant dans le champ d'upload que le fichier a bien été enregistré, avec une vignette (si c'est une image) ou le nom du fichier, par exemple. Pour ne pas obliger à ré-uploader.
