@@ -17,6 +17,5 @@
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
 	<necessite nom="verifier" compatibilite="[0.1.10;]" />
-	<necessite nom="cvtupload" compatibilite="[1.0.11;]" />
-
+	<necessite nom="cvtupload" compatibilite="[1.1.0;]" />
 </paquet>
