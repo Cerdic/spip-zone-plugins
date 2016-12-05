@@ -23,7 +23,7 @@
 <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
 <meta name="DC.Format" content="text/html">
 <meta name="dc.Type" content="text">
-[<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|attribut_html)">]
+[<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|supprimer_tags|textebrut|attribut_html)">]
 [<meta name="dc.Language" scheme="rfc1766" content="(#LANG)">]
 [<meta name="dc.Description" lang="#LANG" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
 ][<meta name="dc.Creator" content="(#ENV{author}|attribut_html)">
@@ -39,7 +39,7 @@
 ][(#CONFIG{metasplus/opengraph}|non)
 <!-- Open Graph -->
 [<meta property="og:type" content="(#ENV{og-type}|sinon{article}|attribut_html)">]
-[<meta property="og:title" content="(#ENV{titre}|attribut_html)">]
+[<meta property="og:title" content="(#ENV{titre}|supprimer_tags|textebrut|attribut_html)">]
 <meta property="og:locale" content="#LANG[_(#LANG|strtoupper)]">
 [<meta property="og:url" content="(#ENV{url}|url_absolue)">]
 [<meta property="og:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
