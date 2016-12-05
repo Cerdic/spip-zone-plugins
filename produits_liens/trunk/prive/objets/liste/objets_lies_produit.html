@@ -1,0 +1,30 @@
+<B_liste_objets_lies_produit>
+#ANCRE_PAGINATION
+<div class="liste-objets produits">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{produits_liens:info_1_produits_liens,produits_liens:info_nb_produits_liens}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="statut" scope="col'"><span title="<:lien_trier_statut|attribut_html:>">#</span></th> 
+			<th class="titre" scope="col'"><:produits_liens:champ_titre_label:></th>
+			<th class="id" scope="col'"><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_objets_lies_produit(PRODUITS_LIENS){id_produit}{pagination #ENV{nb,10}}>	
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#STATUT|puce_statut{produit,#ID_PRODUIT})]</td> 
+			<td class="titre principale">[(#LOGO_PRODUIT|image_reduire{20,26})]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="<:info_numero_abbreviation|attribut_html:> #ID_OBJET"> #OBJET[ (#RANG). ]#INFO_TITRE{#OBJET,#ID_OBJET}</a></td>
+			<td class="id">[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{#OBJET_edit,id_#OBJET=#ID_OBJET})]">#ID_OBJET</a>,
+				#ID_OBJET
+			})]</td>
+		</tr>
+	</BOUCLE_liste_objets_lies_produit>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_objets_lies_produit>[
+<div class="liste-objets produits caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_objets_lies_produit>

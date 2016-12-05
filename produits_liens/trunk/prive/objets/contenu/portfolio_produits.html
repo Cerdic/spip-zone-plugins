@@ -1,0 +1,21 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+  Utilisé par le pipeline afficher_complement_objet
+  pour Afficher les produits et permettre leur ajout
+
+]
+[(#REM) <!-- todo alm changer la css pour renommer id=portfolios_produits -->]
+<div id="portfolios">
+[
+(#INCLURE{fond=prive/squelettes/inclure/portfolio-produits, env, ajax=produits})
+]
+
+[(#AUTORISER{lierproduit,#OBJET,#ID_OBJET})
+[
+(#INCLURE{fond=prive/squelettes/inclure/lier_produit, env})
+]
+]
+</div>
