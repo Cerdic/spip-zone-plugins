@@ -1,0 +1,75 @@
+[(#HTTP_HEADER{Content-type:application/javascript[; charset=(#CHARSET)]})]
+
+[//(#REM) equivalent de $.get en pur js]
+var getAjax = function(url, success) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+    };
+    xhr.send();
+    return xhr;
+}
+[//(#REM) lister les zblocs bien arrivés ]
+var collectZaplList = function(bloc) {
+if(!window.zapl_list) {
+	window.zapl_list = new Array();
+}
+	window.zapl_list.push(bloc);
+};
+
+[//(#REM) Peupler le zbloc et dire qu'il est prêt ]
+function getZapl(bloc) {
+	var myurl = window.location + "";
+	myurl = myurl.split('#');
+	myurl = myurl[0] + ((myurl[0].indexOf("?")>0)?"&":"?") + "var_zajax=" + bloc;
+	getAjax(myurl, function(data){
+		var el = document.querySelector("#zapl-"+ bloc);	
+		var newEl = document.createElement('div');
+		newEl.innerHTML = data;
+		el.parentNode.replaceChild(newEl, el);
+		collectZaplList("#"+bloc);
+	});
+};
+
+[//(#REM) combien de zBloc attendus ? ]
+var zapl_lmax = [(#EVAL{_Z_AJAX_PARALLEL_LOAD}|explode{","}|count)];
+
+[//(#REM) attendre jQuery et les zblocs pour déclencher AjaxLoad ]
+window.zapl_loop_index = 0;
+zapl_loop = setInterval(function() {
+[//(#REM) DEBUG 
+		// console.log("loop :" +  window.zapl_loop_index);
+		// console.log("function :" + (typeof jQuery.spip.triggerAjaxLoad !== 'undefined'));
+		// console.log("Array :" + (typeof window.zapl_list !== 'undefined'));
+		// console.log("Length :" + (window.zapl_list.length == zapl_lmax));
+//]
+    if ((typeof jQuery.spip === 'object') 
+    		&& (typeof jQuery.spip.triggerAjaxLoad === 'function')
+    		&& (typeof window.zapl_list !== 'undefined') 
+    		&& (window.zapl_list.length == zapl_lmax) ) {
+	        clearInterval(zapl_loop);
+	    		jQuery.spip.triggerAjaxLoad();
+					var h = window.location.hash;
+					if (h) {
+	      		[//(#REM) $b = correspond à la selection jQuery des zbloc ]	
+	      		var $b = $();
+    				window.zapl_list.forEach(function(e){
+    					$b=$b.add(e);
+    				});
+						if ($b.find(h)[0]) {
+							jQuery(h).positionner(true);
+						}		
+					}
+	        return;
+    }
+    [//(#REM) Au dela de 20 sec ... ]
+    else if (window.zapl_loop_index < 200){
+    	 window.zapl_loop_index++;
+    }
+    [//(#REM) ... auto-débraillage ]
+    else {
+    	clearInterval(zapl_loop);
+    }
+
+}, 100);

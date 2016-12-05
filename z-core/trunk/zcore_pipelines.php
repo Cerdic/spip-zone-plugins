@@ -165,6 +165,7 @@ function zcore_pre_propre($flux) {
 }
 
 /**
+ * Ajouter les scripts pour getZaplBloc() dans head, directement, sans src
  * Ajouter le inc-insert-head du theme si il existe
  *
  * @param string $flux
@@ -172,6 +173,11 @@ function zcore_pre_propre($flux) {
  * @return string
  */
 function zcore_insert_head($flux) {
+	// on utilise recuperer_fond()  car on veut pouvoir s'affranchir de jQl pour agir plus tôt
+	if ( defined('_Z_AJAX_PARALLEL_LOAD_OK') AND $fond = recuperer_fond('javascript/zapl.scripts.js', array(), array('ajax' => false) )) {
+		$flux = "\n<script type=\"text/javascript\">\n" . compacte($fond,"js") . "</script>\n". $flux;
+	}
+
 	if (find_in_path('inc-insert-head.html')) {
 		$flux .= recuperer_fond('inc-insert-head', array());
 	}
