@@ -46,5 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_mailsubscribinglist' => 'Mailing list logo',
 	'titre_mailsubscribinglist' => 'Mailing list',
 	'titre_mailsubscribinglists' => 'Mailing lists',
+	'titre_copie' => 'Copy of: ',
 
 );

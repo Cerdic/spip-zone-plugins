@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_segment' => 'Ajouter un segment',
 	'icone_modifier_segment' => 'Modifier ce segment',
 	'icone_supprimer_segment' => 'Supprimer ce segment',
+	'icone_dupliquer_mailsubscribinglist' => 'Dupliquer cette liste',
 	'info_1_mailsubscribinglist' => '1 liste de diffusion',
 	'info_nb_mailsubscribinglists' => '@nb@ listes de diffusion',
 	'info_aucun_mailsubscribinglist' => 'Aucune liste de diffusion',
@@ -46,5 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_mailsubscribinglist' => 'Logo de cette liste',
 	'titre_mailsubscribinglist' => 'Liste de diffusion',
 	'titre_mailsubscribinglists' => 'Listes de diffusion',
+	'titre_copie' => 'Copie de : ',
 
 );
