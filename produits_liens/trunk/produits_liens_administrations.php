@@ -55,5 +55,3 @@ function produits_liens_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 	effacer_config('produits/produits_liens');
 }
-
-?>

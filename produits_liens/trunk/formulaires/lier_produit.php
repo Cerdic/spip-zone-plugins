@@ -39,4 +39,3 @@ function formulaires_lier_produit_traiter_dist($id_produit='new',$id_objet=0,$ob
 	
 }
 
-?>

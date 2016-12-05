@@ -35,4 +35,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_les_produits' => 'Tous les produits',
 );
 
-?>

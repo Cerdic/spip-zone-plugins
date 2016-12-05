@@ -20,7 +20,7 @@ function produits_liens_autoriser(){}
  * On ne peut joindre un produit qu'a un objet qu'on a le droit d'editer
  * mais il faut prevoir le cas d'une *creation* par un redacteur, qui correspond
  * au hack id_objet = 0-id_auteur
- * Il faut aussi que les produits aient ete actives sur les objets concernes
+ * Il faut aussi que les liens de produits aient ete actives sur les objets concernes
  *
  * http://code.spip.net/@autoriser_joindredocument_dist
  *

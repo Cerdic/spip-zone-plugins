@@ -45,6 +45,3 @@ function action_lier_produit_post($id_produit,$id_objet,$objet,$rang=0) {
 		suivre_invalideur("id='id_produit/$id_produit'");
 	}
 }
-
-
-?>

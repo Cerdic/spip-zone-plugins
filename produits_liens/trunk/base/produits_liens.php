@@ -38,5 +38,3 @@ function produits_liens_declarer_tables_auxiliaires($tables){
 	
 	return $tables;
 }
-
-?>
