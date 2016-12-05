@@ -1,16 +1,33 @@
-<ul class="editer-groupe">
-<li class="fieldset fieldset_fieldset_parametres saisie_fieldset">
-	
-	<ul>
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:produits_liens:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<fieldset>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul class="editer-groupe">
 			#SET{name,produits_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}, exclus=produits_liens}
 			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:produits_liens:label_activer_liaison_produits_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}}}
 			</li>
-	</ul>
-</li>
-</ul>
-
+		</ul>
+	</fieldset>
+	
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	
+	</form>	
+</div>
 
 

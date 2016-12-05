@@ -29,7 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_produit'=>'Erreur : aucun produit',
 	
 	//configurer
-	'label_activer_liaison_produits_objets' => 'Lier des produits aux contenus',
+	'titre_page_configurer_produits_liens' => 'Configuration des liaisons de produits',
+	'cfg_titre_parametrages' => 'Paramétrages',
+	'label_activer_liaison_produits_objets' => 'Lier des produits aux contenus suivants',
 	'tous_les_produits' => 'Tous les produits',
 );
 
