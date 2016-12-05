@@ -25,7 +25,7 @@
 	})]
 ]
 <BOUCLE_illus(DOCUMENTS){id_article}{extension IN jpg,gif,png}
-						{largeur>=160}{hauteur>=160}{!par date}{0,1}
+						{largeur>=200}{hauteur>=200}{!par date}{0,1}
 						{si #LOGO_ARTICLE|non}>
 [(#SET{logo,[(#FICHIER
 	|image_passe_partout{1200,1200}
