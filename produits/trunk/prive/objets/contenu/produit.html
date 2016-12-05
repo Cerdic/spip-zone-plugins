@@ -24,6 +24,10 @@
 	<div class='label'><:info_texte:></div>
 	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
 </div>
+<div class="champ contenu_immateriel[ (#IMMATERIEL*|intval|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_immateriel_label:></div>
+</div>
+[(#IMMATERIEL|non)
 <div class="champ contenu_poids[ (#POIDS*|intval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_poids_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{poids} poids'>#POIDS</div>
@@ -40,4 +44,6 @@
 	<div class='label'><:produits:produit_champ_hauteur_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{hauteur} hauteur'>#HAUTEUR</div>
 </div>
+]
+<style>.fiche_objet #wysiwyg .label {display: inline-block}</style>
 </BOUCLE_afficher_contenu>
