@@ -6,11 +6,11 @@
 	compatibilite="[2.1.0;3.1.*]"
 	logo="opengraph.png"
 	documentation="https://contrib.spip.net/4845"
->	
+>
 
 	<nom>Métas +</nom>
 	<!-- Métadonnées pour booster vos articles -->
 
 	<auteur lien="http://spip.tetue.net">tetue</auteur>
-   	<auteur lien="https://www.erational.org">erational</auteur>
+	<auteur lien="https://www.erational.org">erational</auteur>
 </paquet>
