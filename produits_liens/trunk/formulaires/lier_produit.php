@@ -1,7 +1,9 @@
 <?php
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 function formulaires_lier_produit_charger_dist($id_produit='new',$id_objet=0,$objet='',$rang=0){
 	return 
