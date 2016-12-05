@@ -11,7 +11,7 @@
 	<groupe type="extension">
 		<site alias="plugin" src="http://plugins.spip.net/" actif="oui" />
 		<site alias="plugincode" src="http://code.plugins.spip.net/" actif="oui" />
-		<site alias="contrib" src="http://contrib.spip.net/" actif="oui" />
+		<site alias="contrib" src="https://contrib.spip.net/" actif="oui" />
 		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
 		<site alias="core" src="http://core.spip.net/" actif="oui" />
 		<site alias="zone" src="http://zone.spip.org/" actif="oui" />
@@ -38,7 +38,7 @@
 
 	<!-- Sites des actualites SPIP -->
 	<groupe type="actualite">
-		<site alias="blog" src="http://blog.spip.net/" actif="oui" />
+		<site alias="blog" src="https://blog.spip.net/" actif="oui" />
 		<site alias="twit" src="http://spip.org/" actif="non" />
 		<site alias="sedna" src="http://sedna.spip.net/" actif="oui" />
 		<site alias="zine" src="http://zine.spip.net/" actif="non" />
