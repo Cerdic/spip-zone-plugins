@@ -9,13 +9,17 @@
  * @package    SPIP\Jqvmap\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
-function jqvmap_autoriser(){}
+ *
+ * @pipeline autoriser
+ */
+function jqvmap_autoriser() { }
 
 
 // -----------------
@@ -27,14 +31,15 @@ function jqvmap_autoriser(){}
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_maps_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_maps_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
-} 
+}
 
 
 /**
@@ -42,27 +47,29 @@ function autoriser_maps_menu_dist($faire, $type, $id, $qui, $opt){
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_mapcreer_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_mapcreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'map', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (map)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_map_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -70,11 +77,12 @@ function autoriser_map_creer_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_map_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
@@ -84,11 +92,12 @@ function autoriser_map_voir_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_map_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
@@ -98,11 +107,12 @@ function autoriser_map_modifier_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_map_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
@@ -117,14 +127,15 @@ function autoriser_map_supprimer_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_vectors_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_vectors_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
-} 
+}
 
 
 /**
@@ -132,27 +143,29 @@ function autoriser_vectors_menu_dist($faire, $type, $id, $qui, $opt){
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
-function autoriser_vectorcreer_menu_dist($faire, $type, $id, $qui, $opt){
+ **/
+function autoriser_vectorcreer_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('creer', 'vector', '', $qui, $opt);
-} 
+}
 
 /**
  * Autorisation de créer (vector)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_vector_creer_dist($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
@@ -160,11 +173,12 @@ function autoriser_vector_creer_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_vector_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
@@ -174,11 +188,12 @@ function autoriser_vector_voir_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_vector_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
@@ -188,16 +203,15 @@ function autoriser_vector_modifier_dist($faire, $type, $id, $qui, $opt) {
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
- * @param  int    $id    Identifiant de l'objet
- * @param  array  $qui   Description de l'auteur demandant l'autorisation
- * @param  array  $opt   Options de cette autorisation
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
  * @return bool          true s'il a le droit, false sinon
-**/
+ **/
 function autoriser_vector_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
-
 
 
 ?>

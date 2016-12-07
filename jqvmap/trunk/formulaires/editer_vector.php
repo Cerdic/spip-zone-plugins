@@ -10,7 +10,7 @@
  * @licence    GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 include_spip('inc/actions');
@@ -21,23 +21,29 @@ include_spip('inc/editer');
  *
  * @param int|string $id_vector
  *                                Identifiant du vector. 'new' pour un nouveau vector.
- * @param string     $retour
+ * @param string $retour
  *                                URL de redirection après le traitement
- * @param int        $lier_trad
+ * @param int $lier_trad
  *                                Identifiant éventuel d'un vector source d'une traduction
- * @param string     $config_fonc
+ * @param string $config_fonc
  *                                Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array      $row
+ * @param array $row
  *                                Valeurs de la ligne SQL du vector, si connu
- * @param string     $hidden
+ * @param string $hidden
  *                                Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  *
  * @return string
  *                Hash du formulaire
  */
-function formulaires_editer_vector_identifier_dist($id_vector = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
-{
-    return serialize(array(intval($id_vector)));
+function formulaires_editer_vector_identifier_dist(
+	$id_vector = 'new',
+	$retour = '',
+	$lier_trad = 0,
+	$config_fonc = '',
+	$row = array(),
+	$hidden = ''
+) {
+	return serialize(array(intval($id_vector)));
 }
 
 /**
@@ -49,28 +55,35 @@ function formulaires_editer_vector_identifier_dist($id_vector = 'new', $retour =
  *
  * @param int|string $id_vector
  *                                Identifiant du vector. 'new' pour un nouveau vector.
- * @param string     $retour
+ * @param string $retour
  *                                URL de redirection après le traitement
- * @param int        $lier_trad
+ * @param int $lier_trad
  *                                Identifiant éventuel d'un vector source d'une traduction
- * @param string     $config_fonc
+ * @param string $config_fonc
  *                                Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array      $row
+ * @param array $row
  *                                Valeurs de la ligne SQL du vector, si connu
- * @param string     $hidden
+ * @param string $hidden
  *                                Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  *
  * @return array
  *               Environnement du formulaire
  */
-function formulaires_editer_vector_charger_dist($id_vector = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
-{
-    $valeurs = formulaires_editer_objet_charger('vector', $id_vector, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
-    if (isset($valeurs['id_map']) and $valeurs['id_map'] == '') {
-        $valeurs['id_map'] = (_request('id_map')) ? _request('id_map') : '';
-    }
+function formulaires_editer_vector_charger_dist(
+	$id_vector = 'new',
+	$retour = '',
+	$lier_trad = 0,
+	$config_fonc = '',
+	$row = array(),
+	$hidden = ''
+) {
+	$valeurs = formulaires_editer_objet_charger('vector', $id_vector, '', $lier_trad, $retour, $config_fonc, $row,
+		$hidden);
+	if (isset($valeurs['id_map']) and $valeurs['id_map'] == '') {
+		$valeurs['id_map'] = (_request('id_map')) ? _request('id_map') : '';
+	}
 
-    return $valeurs;
+	return $valeurs;
 }
 
 /**
@@ -82,23 +95,29 @@ function formulaires_editer_vector_charger_dist($id_vector = 'new', $retour = ''
  *
  * @param int|string $id_vector
  *                                Identifiant du vector. 'new' pour un nouveau vector.
- * @param string     $retour
+ * @param string $retour
  *                                URL de redirection après le traitement
- * @param int        $lier_trad
+ * @param int $lier_trad
  *                                Identifiant éventuel d'un vector source d'une traduction
- * @param string     $config_fonc
+ * @param string $config_fonc
  *                                Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array      $row
+ * @param array $row
  *                                Valeurs de la ligne SQL du vector, si connu
- * @param string     $hidden
+ * @param string $hidden
  *                                Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  *
  * @return array
  *               Tableau des erreurs
  */
-function formulaires_editer_vector_verifier_dist($id_vector = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
-{
-    return formulaires_editer_objet_verifier('vector', $id_vector, array('id_map', 'titre', 'path'));
+function formulaires_editer_vector_verifier_dist(
+	$id_vector = 'new',
+	$retour = '',
+	$lier_trad = 0,
+	$config_fonc = '',
+	$row = array(),
+	$hidden = ''
+) {
+	return formulaires_editer_objet_verifier('vector', $id_vector, array('id_map', 'titre', 'path'));
 }
 
 /**
@@ -110,21 +129,27 @@ function formulaires_editer_vector_verifier_dist($id_vector = 'new', $retour = '
  *
  * @param int|string $id_vector
  *                                Identifiant du vector. 'new' pour un nouveau vector.
- * @param string     $retour
+ * @param string $retour
  *                                URL de redirection après le traitement
- * @param int        $lier_trad
+ * @param int $lier_trad
  *                                Identifiant éventuel d'un vector source d'une traduction
- * @param string     $config_fonc
+ * @param string $config_fonc
  *                                Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array      $row
+ * @param array $row
  *                                Valeurs de la ligne SQL du vector, si connu
- * @param string     $hidden
+ * @param string $hidden
  *                                Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  *
  * @return array
  *               Retours des traitements
  */
-function formulaires_editer_vector_traiter_dist($id_vector = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
-{
-    return formulaires_editer_objet_traiter('vector', $id_vector, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_vector_traiter_dist(
+	$id_vector = 'new',
+	$retour = '',
+	$lier_trad = 0,
+	$config_fonc = '',
+	$row = array(),
+	$hidden = ''
+) {
+	return formulaires_editer_objet_traiter('vector', $id_vector, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 }
