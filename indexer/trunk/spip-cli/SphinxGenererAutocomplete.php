@@ -94,7 +94,7 @@ class SphinxGenererAutocomplete extends Command {
 					if ($_ab !== $ab) {
 						$this->save($ab, $mots, $rep);
 						$ab = $_ab;
-						$mots = [];
+						$mots = array();
 					}
 					// conserver les mots ayant un nombre suffisant d'occurrences
 					if ($hits >= 3) {

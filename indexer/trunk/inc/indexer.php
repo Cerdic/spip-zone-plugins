@@ -161,7 +161,7 @@ function indexer_statistiques_indexes_depuis($date_reference = null) {
 	OR !is_array($all['query']['docs'])) {
 		echo "<p class=error>" . _L('Erreur Sphinx')."</p>";
 	} else {
-		$liste = [];
+		$liste = array();
 		foreach ($all['query']['docs'] as $l) {
 			$liste[$l['source']][table_objet($l['objet'])][$l['recent']] = intval($l['c']);
 		}
@@ -195,7 +195,7 @@ function indexer_lister_blocs_indexation($bloc = 100) {
 	// On récupère toutes les sources compatibles avec l'indexation
 	$sources = indexer_sources();
 
-	$liste = [];
+	$liste = array();
 
 	foreach ($sources as $alias => $source) {
 		// Si une méthode pour définir explicitement existe, on l'utilise
@@ -209,7 +209,7 @@ function indexer_lister_blocs_indexation($bloc = 100) {
 
 		// alias = mots, objet_source = mot
 		// alias = hierarchie_rubriques, objet_source = rubrique
-		$liste[$alias] = [];
+		$liste[$alias] = array();
 
 		$parts = new \ArrayIterator($source->getParts($bloc));
 		
@@ -298,7 +298,7 @@ function indexer_suggestions($mot) {
 // et supprimer ceux qui n'y figurent pas
 // on se base sur la forme exacte (=mot) ; et sans espaces ni tirets !
 function indexer_motiver_mots($mots) {
-	$liste = [];
+	$liste = array();
 	foreach($mots as $i => $m) {
 		$mots[$i] = '='.preg_replace('/\W/', '', $m);
 	}
@@ -394,7 +394,7 @@ function indexer_dumpsql($index = null, $format = 'sphinx', $dest = null, $bloc 
 
 CREATE TABLE `' . $index . '` (
 ';
-		$fields = [];
+		$fields = array();
 		foreach($all['query']['docs'] as $doc) {
 			if ($format == 'sphinx') {
 				$fields[] = "\t" . '`' . $doc['Field'] .'` ' . $doc['Type'] ;

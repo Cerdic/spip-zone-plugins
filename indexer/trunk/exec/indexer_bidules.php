@@ -16,7 +16,7 @@ function exec_indexer_bidules() {
 
 			if (is_array($stats[$source])) {
 				$u = $stats[$source][$alias];
-			} else $u = [];
+			} else $u = array();
 
 			// todo : ajouter statut='publie' pour les objets pertinents
 			$total = sql_fetsel('COUNT(*) AS c', 'spip_'.table_objet($alias));
