@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_ECRIRE_INC_VERSION')) {
-    return;
+	return;
 }
 
 /*
@@ -14,14 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  */
 // sur le repertoire $dir (sites/truc/local/)
-function mutualisation_verifier_htaccess($url, $dir)
-{
-    // lire le .htaccess existant
-    lire_fichier($url._ACCESS_FILE_NAME, $htaccess);
-    $source = $htaccess;
+function mutualisation_verifier_htaccess($url, $dir) {
+	// lire le .htaccess existant
+	lire_fichier($url . _ACCESS_FILE_NAME, $htaccess);
+	$source = $htaccess;
 
-    // verifier notre bloc init
-    $bloc = '####
+	// verifier notre bloc init
+	$bloc = '####
 ## ce fichier .htaccess est gere par le plugin *mutualisation*
 ##
 ## ne le modifiez pas : en cas de besoin editez ce plugin,
@@ -32,29 +31,29 @@ RewriteEngine On
 RewriteBase /
 ';
 
-    if (strpos($htaccess, $bloc) === false) {
-        $htaccess = $bloc;
-    }
+	if (strpos($htaccess, $bloc) === false) {
+		$htaccess = $bloc;
+	}
 
-    $host = $_SERVER['HTTP_HOST'];
-    $racine = dirname($_SERVER['SCRIPT_NAME']); // profondeur_url();
-    if ($racine == '/' OR $racine == '\\') {
-        $racine = '';
-    }
-    $site = basename(dirname($dir));
-    $bloc = "
+	$host = $_SERVER['HTTP_HOST'];
+	$racine = dirname($_SERVER['SCRIPT_NAME']); // profondeur_url();
+	if ($racine == '/' OR $racine == '\\') {
+		$racine = '';
+	}
+	$site = basename(dirname($dir));
+	$bloc = "
 
 #### 'http://$host$racine/' = 'sites/$site/'
-RewriteCond %{HTTP_HOST}%{REQUEST_URI} ^".preg_quote("$host$racine/", ',')."
+RewriteCond %{HTTP_HOST}%{REQUEST_URI} ^" . preg_quote("$host$racine/", ',') . "
 RewriteRule .* $racine/$dir\$0 [L]
 ";
 
-    if (strpos($htaccess, $bloc) === false) {
-        $htaccess .= $bloc;
-    }
+	if (strpos($htaccess, $bloc) === false) {
+		$htaccess .= $bloc;
+	}
 
-    return ($htaccess === $source
-                or ecrire_fichier($url._ACCESS_FILE_NAME, $htaccess));
+	return ($htaccess === $source
+		or ecrire_fichier($url . _ACCESS_FILE_NAME, $htaccess));
 }
 
 /**
@@ -63,25 +62,25 @@ RewriteRule .* $racine/$dir\$0 [L]
  *
  * @param string $flux
  */
-function mutualisation_traiter_url_img_courtes($flux)
-{
-    // IMG
-    if (!defined('_URL_IMG')) {
-        define('_URL_IMG', _DIR_RACINE._NOM_PERMANENTS_ACCESSIBLES);
-    }
-    // local
-    if (!defined('_URL_VAR')) {
-        define('_URL_VAR', _DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES);
-    }
+function mutualisation_traiter_url_img_courtes($flux) {
+	// IMG
+	if (!defined('_URL_IMG')) {
+		define('_URL_IMG', _DIR_RACINE . _NOM_PERMANENTS_ACCESSIBLES);
+	}
+	// local
+	if (!defined('_URL_VAR')) {
+		define('_URL_VAR', _DIR_RACINE . _NOM_TEMPORAIRES_ACCESSIBLES);
+	}
 
-    if (mutualisation_verifier_htaccess(_URL_VAR, _DIR_VAR)
-    and mutualisation_verifier_htaccess(_URL_IMG, _DIR_IMG)) {
-        return str_replace(
-            array(_DIR_VAR, _DIR_IMG),
-            array(_URL_VAR, _URL_IMG),
-            $flux
-        );
-    } else {
-        return $flux;
-    }
+	if (mutualisation_verifier_htaccess(_URL_VAR, _DIR_VAR)
+		and mutualisation_verifier_htaccess(_URL_IMG, _DIR_IMG)
+	) {
+		return str_replace(
+			array(_DIR_VAR, _DIR_IMG),
+			array(_URL_VAR, _URL_IMG),
+			$flux
+		);
+	} else {
+		return $flux;
+	}
 }
