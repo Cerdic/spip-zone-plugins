@@ -160,7 +160,7 @@ function exec_mutualisation_dist() {
             <td><div id='local$nsite' class='taille loading'></div></td>\n
             <td><div id='cache$nsite' class='taille loading'></div></td>\n
             <td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>\n
-            <td>$adminplugin<a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>\n
+            <td>$adminplugin<div class='liste-plugins'><a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></div></td>\n
             <td><a href='${url}$url_compresseur'>$compression</a></td>\n
             <td style='text-align:right;'>" . date_creation_repertoire_site($v) . "</td>\n
             </tr>\n";
@@ -439,11 +439,11 @@ function upgrade_placeholder($meta, $buttontxt = 'Upgrade plugins (forcé)') {
 	return <<<EOF
 $upgrade
 <form action='$meta[adresse_site]/ecrire/?exec=mutualisation' method='get' class='upgrade' target='_blank'>
-<div id='upgrade$id' class='taille loading'>
+<div id='upgrade$id' class='taille'>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
 <input type='hidden' name='upgradeplugins' value='oui' />
-<input type='submit' value='Upgrade plugins ($buttontxt)' />
+<button type='submit' value='Upgrade plugins'>$buttontxt</button>
 </div>
 </form>
 EOF;

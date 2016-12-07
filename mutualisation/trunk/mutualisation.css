@@ -52,12 +52,16 @@ td em {
 	padding: 0 .5em;
 	display: inline;
 }
+form.upgrade {
+	padding: 0.5em 0;
+	margin: 0;
+	display: inline;
+}
 
 .upgrade div {
 	display: inline;
 }
-
-.upgrade input {
+.upgrade input, .upgrade button[type="submit"] {
 	border: 2px solid red;
 	color: red;
 	background-color: #fff;
@@ -75,6 +79,13 @@ td em {
 
 .loading {
 	background: url(images/loading.gif) left center no-repeat
+}
+
+.liste-plugins {
+	display: block;
+}
+form.upgrade + .liste-plugins {
+	margin-top: 0.5em;
 }
 
 p {
