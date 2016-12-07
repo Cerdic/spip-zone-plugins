@@ -4,12 +4,12 @@
 
 	Parametres:
 	- titre	 (obligatoire)		titre
-	- lang	 (obligatoire)		langue en format iso : FR
+	- lang	 (obligatoire)		langue en format iso : FR - FIXME gerer les pbs en_US
 	- desc						description
 	- auteur					les auteurs
 	- date						la date en format Y-m-d
 	- url						url  de la ressource
-	- logo						image de la ressource (url)
+	- logo						image de la ressource (url)    - l'image doit faire  au minimum 200x200 px   et moins d'un 1 Mo
 	- og-type					open graph : type de la ressource : article, website, ....
 
 ]
@@ -50,14 +50,13 @@
 [(#REM) Prise en charge du plugin facebook : s'il est présent, on envoie la méta fb:app_id
 ][(#PLUGIN{facebook}|oui)[<meta property="fb:app_id" content="(#CONFIG{facebook/cle})" />]]]
 
-
 [(#REM)
 	metas Twitter Card
 	https://dev.twitter.com/cards/types/summary
 
 ][(#CONFIG{metasplus/twitter}|non)
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="[(#ENV{logo}|?{summary_large_image,summary})]">
 [<meta name="twitter:title" content="(#ENV{titre}|attribut_html)">]
 [<meta name="twitter:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">]
 [<meta name="twitter:image" content="(#ENV{logo}|url_absolue)">]
