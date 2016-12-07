@@ -588,7 +588,7 @@ function fabriquer_fichier($chemin, $data) {
 	// calcul du squelette et copie a destination du contenu.
 	$contenu = recuperer_fond(FABRIQUE_SKEL_SOURCE . $chemin, $data);
 	// Enlever les espaces de fins de ligne et toujours finir un fichier avec un saut de ligne
-	$contenu = str_replace("} \n", "}\n", str_replace("; \n", ";\n", $contenu))."\n";
+	$contenu = str_replace("\n \n", "\n\n", str_replace("} \n", "}\n", str_replace("; \n", ";\n", $contenu)))."\n";
 
 	ecrire_fichier($destination . $chemin_dest . '/' . $nom, $contenu);
 }

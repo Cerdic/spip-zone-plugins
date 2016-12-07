@@ -11,13 +11,13 @@ include_spip('inc/editer');
 	Y a t'il un champ de parent à prendre en compte ?
 
 ][(#SET{id_parent,#ENV{parent/id_objet}})][    (#REM)
-][(#SET{id_parent_param,#GET{id_parent}|?{#VAL{'$'}|concat{#GET{id_parent}}|concat{'=0,'}}})][     (#REM)
+][(#SET{id_parent_param,#GET{id_parent}|?{#VAL{'$'}|concat{#GET{id_parent}}|concat{' = 0,'}}})][     (#REM)
 ][(#SET{id_parent_val,#GET{id_parent}|?{$#GET{id_parent}, "''"}})][    (#REM)
 
 	Y a t'il une association a prendre en compte ?
 
 ][(#SET{associer,[(#OBJET|option_presente{vue_liens})]})][     (#REM)
-][(#SET{associer_param,#GET{associer}|?{"$associer_objet='',"}})][   (#REM)
+][(#SET{associer_param,#GET{associer}|?{"$associer_objet = '',"}})][   (#REM)
 ][(#SET{associer_val,#GET{associer}|?{'$associer_objet'}})][    (#REM)
 
 	Y a t'il des champs obligatoire a verifier ?
@@ -54,7 +54,7 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET = 'new',[ (#GET{id_parent_param})] $retour = '',[ (#GET{associer_param})] $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	return serialize(array(intval($#ID_OBJET)[, (#GET{associer_val})]));
 }
 
@@ -85,7 +85,7 @@ function formulaires_editer_[(#TYPE)]_identifier_dist($#ID_OBJET='new',[ (#GET{i
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET = 'new',[ (#GET{id_parent_param})] $retour = '',[ (#GET{associer_param})] $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('#TYPE', $#ID_OBJET, #GET{id_parent_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);[(#OBJET|option_presente{liaison_directe}|oui)
 	if (![(#VAL{"$valeurs\['"}|concat{#GET{id_parent}}|concat{"'\]"})]) {
 		[(#VAL{"$valeurs\['"}|concat{#GET{id_parent}}|concat{"'\] = "}|concat{#GET{id_parent_val};})]
@@ -120,7 +120,7 @@ function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_p
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET = 'new',[ (#GET{id_parent_param})] $retour = '',[ (#GET{associer_param})] $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = array();
 <BOUCLE_si_saisie_date(CONDITION){si #ENV{objet/champs}|champs_saisie_presente{date}}>
 	$verifier = charger_fonction('verifier', 'inc');
@@ -172,20 +172,20 @@ function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_[(#TYPE)]_traiter_dist($#ID_OBJET='new',[ (#GET{id_parent_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_[(#TYPE)]_traiter_dist($#ID_OBJET = 'new',[ (#GET{id_parent_param})] $retour = '',[ (#GET{associer_param})] $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$retours = formulaires_editer_objet_traiter('#TYPE', $#ID_OBJET, #GET{id_parent_val}, $lier_trad, $retour, $config_fonc, $row, $hidden);[
 (#GET{associer}|oui)
 	// Un lien a prendre en compte ?
-	if ($associer_objet AND $#ID_OBJET = $retours\['#ID_OBJET'\]) {
+	if ($associer_objet and $#ID_OBJET = $retours\['#ID_OBJET'\]) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
 
-		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
 			
 			objet_associer(array('#TYPE' => $#ID_OBJET), array($objet => $id_objet));
 			
 			if (isset($retours\['redirect'\])) {
-				$retours\['redirect'\] = parametre_url($retours\['redirect'\], "id_lien_ajoute", $#ID_OBJET, '&');
+				$retours\['redirect'\] = parametre_url($retours\['redirect'\], 'id_lien_ajoute', $#ID_OBJET, '&');
 			}
 		}
 	}
