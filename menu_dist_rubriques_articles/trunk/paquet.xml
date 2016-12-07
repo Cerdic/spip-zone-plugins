@@ -1,0 +1,15 @@
+<paquet
+	prefix="mvdra"
+	categorie="squelette"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.1.0;3.1.*]"
+	logo="mvdra.jpg"
+>	
+	<nom>Menu Vertical de squelettes-Dist avec Rubriques + Articles</nom>
+	<!-- les articles au milieu des rubriques... -->
+	<auteur>chankalan</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+</paquet>
