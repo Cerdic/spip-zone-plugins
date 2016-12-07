@@ -35,7 +35,7 @@ function [(#PREFIXE)]_declarer_tables_objets_sql($tables) {
 [(#SET{_id_parent,#VALEUR{parent/id_objet}})
 ]	$tables['#TABLE'] = array(
 		'type' => '#TYPE',
-		'principale' => "oui",[(#OBJETS_SURNOMS|oui)
+		'principale' => 'oui',[(#OBJETS_SURNOMS|oui)
 		'table_objet_surnoms' => [(#OBJETS_SURNOMS|ecrire_tableau)], // table_objet('#TYPE') => '#LOBJET' ]
 		'field'=> array(
 			[(#VAL{['(#ID_OBJET)']}   |espacer)] => '#CLE_PRIMAIRE_SQL',[
