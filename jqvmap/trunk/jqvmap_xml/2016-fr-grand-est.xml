@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map>
-  <titre>Champagne-Ardenne-Lorraine-Alsace</titre>
+  <titre>Grand-Est</titre>
   <descriptif></descriptif>
   <width>650</width>
   <height>550</height>
-  <code_map>fr-champarloal</code_map>
+  <code_map>fr-grand-est</code_map>
   <background_color></background_color>
   <border_color></border_color>
   <border_opacity>1.00</border_opacity>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map>
-  <titre>Nord-Pas-De-Calais-Picardie</titre>
+  <titre>Hauts-de-France</titre>
   <descriptif></descriptif>
   <width>687.5</width>
   <height>812.5</height>
-  <code_map>fr-npdcp</code_map>
+  <code_map>fr-hauts-de-france</code_map>
   <background_color></background_color>
   <border_color></border_color>
   <border_opacity>1.00</border_opacity>

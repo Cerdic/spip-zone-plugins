@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map>
-  <titre>Languedoc-Roussillon-Midi-Pyrénées</titre>
+  <titre>Occitanie</titre>
   <descriptif></descriptif>
   <width>812.5</width>
   <height>606.25</height>
-  <code_map>fr-lrmp</code_map>
+  <code_map>fr-occitanie</code_map>
   <background_color></background_color>
   <border_color></border_color>
   <border_opacity>1.00</border_opacity>

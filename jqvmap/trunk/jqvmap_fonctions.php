@@ -83,11 +83,11 @@ function map_importer_bdd($fichier_xml) {
  *               Retourne le tableau contenant le xml formaté
  *               en array('map' => array(), 'vectors' => array())
  */
-function map_xml_formater($fichier_xml) {
+function map_xml_formater($fichier_xml, $dir = 'jqvmap_xml/') {
 	include_spip('inc/utils');
 	include_spip('inc/xml');
 	$contenu_xml = array('map' => array(), 'vectors' => array());
-	$chemin_fichier = find_all_in_path('jqvmap_xml/', $fichier_xml);
+	$chemin_fichier = find_all_in_path($dir, $fichier_xml);
 	$chemin_fichier = $chemin_fichier[$fichier_xml];
 	$contenu_xml_tmp = spip_xml_load($chemin_fichier);
 	foreach ($contenu_xml_tmp['map'][0] as $key => $value) {
