@@ -74,7 +74,7 @@ function formulaires_fabriquer_plugin_charger_dist() {
 	$contexte['destination'] = $destination;
 	if (!$prefixe = $contexte['paquet']['prefixe']) {
 		$prefixe = 'prefixe';
-	} 
+	}
 	$contexte['destination_plugin']        = $destination  . $prefixe . '/';
 	$contexte['destination_ancien_plugin'] = $destination  . '.backup/' . $prefixe . '/';
 
@@ -250,7 +250,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 			'message_erreur' => _T('fabrique:erreur_suppression_sauvegarde', array('dir'=>$_destination_ancien_plugin))
 		);
 	}
-	
+
 	if (is_dir($_destination_plugin)) {
 		// try ne fonctionne pas sur rename()
 		if (!@rename($_destination_plugin, $_destination_ancien_plugin)) {
@@ -301,7 +301,7 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 
 
 	// cas particulier data (+images) pour l'export.
-	fabriquer_fichier("fabrique_prefixe.php", array_merge($data, array('data'=>array_merge($data, array('images' => $images))))); 
+	fabriquer_fichier("fabrique_prefixe.php", array_merge($data, array('data'=>array_merge($data, array('images' => $images)))));
 	fabrique_sauvegarde_tournante_export($destination_plugin . "fabrique_$prefixe.php", $destination_backup);
 
 	// pour tous les autres, on ajoute des informations dans notre tableau de données
@@ -587,6 +587,8 @@ function fabriquer_fichier($chemin, $data) {
 
 	// calcul du squelette et copie a destination du contenu.
 	$contenu = recuperer_fond(FABRIQUE_SKEL_SOURCE . $chemin, $data);
+	// Enlever les espaces de fins de ligne et toujours finir un fichier avec un saut de ligne
+	$contenu = str_replace("} \n", "}\n", str_replace("; \n", ";\n", $contenu))."\n";
 
 	ecrire_fichier($destination . $chemin_dest . '/' . $nom, $contenu);
 }
@@ -596,7 +598,7 @@ function fabriquer_fichier($chemin, $data) {
 /**
  * Réduit une image dont l'adresse est donnée,
  * et la place dans prive/themes/spip/images du futur plugin
- * 
+ *
  * @param string $prefixe
  *     Préfixe du plugin
  * @param string $src
@@ -643,7 +645,7 @@ function fabriquer_miniature($prefixe, $src, $nom, $taille=128, $variante='') {
 /**
  * Complète la description du paquet des fichiers indispensables
  * pour les objets demandés
- * 
+ *
  * @param array $data
  *     Informations sur le plugin à construire
  * @return array
@@ -654,7 +656,7 @@ function fabrique_fichiers_paquets($data) {
 	if (isset($data['paquet']['fichiers']) AND is_array($data['paquet']['fichiers'])) {
 		$fichiers = $data['paquet']['fichiers'];
 	}
-	
+
 	// si tout est coche deja, on sort !
 	if (count($fichiers) == 4) {
 		return $fichiers;
@@ -681,7 +683,7 @@ function fabrique_fichiers_paquets($data) {
 
 /**
  * Remet les infos de contexte dans l'environnement
- * 
+ *
  * Certaines infos sont remises dans l'environnement
  * - parce qu'on en ajoute par rapport à ce qui est posté -
  * afin de réafficher correctement le formulaire si on a des erreurs
@@ -702,10 +704,10 @@ function fabrique_remettre_contexte($data) {
 
 /**
  * Complète les données connues avec des données qui servent souvent
- * 
+ *
  * Ceci pour se simplifier (un peu) les squelettes, et éviter de multiples calculs
  * (type, table, id_objet, objet...)
- * 
+ *
  * @param array $data
  *     Les infos du plugin à construire connues
  * @return array
@@ -781,7 +783,7 @@ function fabrique_completer_contexte($data) {
 
 /**
  * Complète les données connues avec les noms des fichiers d'images
- * 
+ *
  * @param array $data
  *     Les infos du plugin à construire connues
  * @return array
