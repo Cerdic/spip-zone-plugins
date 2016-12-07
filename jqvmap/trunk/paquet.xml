@@ -2,7 +2,7 @@
 	prefix="jqvmap"
 	categorie="multimedia"
 	version="0.8.0"
-	etat="experimental"
+	etat="stable"
 	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/jqvmap-64.png"
 	documentation="http://contrib.spip.net/?article4724"
