@@ -1,16 +1,19 @@
 [(#REM)
 	Metas plus: génére les métas pour dublin core, open core, twitter
 	Vous devez renseigner les parametres par la boucle appelante
+	Les parametres doivent préablement en format simple texte  - HTML sans tags |supprimer_tags|textebrut  
 
 	Parametres:
 	- titre	 (obligatoire)		titre
-	- lang	 (obligatoire)		langue en format iso : FR - FIXME gerer les pbs en_US
-	- desc						description
-	- auteur					les auteurs
-	- date						la date en format Y-m-d
-	- url						url  de la ressource
-	- logo						image de la ressource (url)    - l'image doit faire  au minimum 200x200 px   et moins d'un 1 Mo
-	- og-type					open graph : type de la ressource : article, website, ....
+	- lang	 (obligatoire)		langue :en format iso. ex fr
+	- territoire (facultatif)	territoire : permet de renseigner le duet langue_territoire, ex. UK
+					si rien n'est renseigné, on tente un lang_LANG
+	- desc				description
+	- auteur			les auteurs
+	- date				la date en format Y-m-d
+	- url				URL de la ressource
+	- logo				image de la ressource (URL) - image doit faire  au minimum 200x200px et moins d'un 1 Mo
+	- og-type			open graph : type de la ressource : article, website, ....
 
 ]
 [(#REM)
@@ -23,7 +26,7 @@
 <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
 <meta name="DC.Format" content="text/html">
 <meta name="dc.Type" content="text">
-[<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|supprimer_tags|textebrut|attribut_html)">]
+[<meta name="dc.Title" lang="#LANG" content="(#ENV{titre}|attribut_html)">]
 [<meta name="dc.Language" scheme="rfc1766" content="(#LANG)">]
 [<meta name="dc.Description" lang="#LANG" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
 ][<meta name="dc.Creator" content="(#ENV{author}|attribut_html)">
@@ -37,10 +40,14 @@
 	http://ogp.me
 
 ][(#CONFIG{metasplus/opengraph}|non)
-<!-- Open Graph -->
+[(#ENV{territoire}|oui) [(#SET{lang_territoire,[(#ENV{lang})]_[(#ENV{territoire}|strtoupper)]})]
+][(#ENV{territoire}|non)
+	[(#LANG|=={en}|oui) [(#SET{lang_territoire,en_UK})]]
+	[(#LANG|=={en}|non) [(#SET{lang_territoire,#LANG[_(#LANG|strtoupper)]})]]
+]<!-- Open Graph --> 
 [<meta property="og:type" content="(#ENV{og-type}|sinon{article}|attribut_html)">]
-[<meta property="og:title" content="(#ENV{titre}|supprimer_tags|textebrut|attribut_html)">]
-<meta property="og:locale" content="#LANG[_(#LANG|strtoupper)]">
+[<meta property="og:title" content="(#ENV{titre}|attribut_html)">]
+<meta property="og:locale" content="#GET{lang_territoire}">
 [<meta property="og:url" content="(#ENV{url}|url_absolue)">]
 [<meta property="og:description" content="(#ENV{desc}|couper{200,'…'}|attribut_html)">
 ][<meta property="article:published_time" content="(#ENV{date}|affdate{Y-m-d})">]

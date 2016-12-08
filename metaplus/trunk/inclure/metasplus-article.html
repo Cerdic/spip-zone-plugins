@@ -11,10 +11,10 @@
 	et les formater
 
 ]
-[(#SET{titre, #TITRE})]
+[(#SET{titre, #TITRE|supprimer_tags|textebrut})]
 [(#SET{lang, #LANG})]
-[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|PtoBR)]})]
-[(#SET{author,#LESAUTEURS})]
+[(#SET{desc,[(#CHAPO|sinon{#INTRODUCTION}|supprimer_tags|textebrut)]})]
+[(#SET{author,#LESAUTEURS|supprimer_tags|textebrut})]
 [(#SET{date,#DATE})]
 [(#SET{url,#URL_ARTICLE})]
 [(#SET{logo,''})]
