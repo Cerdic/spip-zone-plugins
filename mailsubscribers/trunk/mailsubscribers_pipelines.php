@@ -190,13 +190,24 @@ function mailsubscribers_optimiser_base_disparus($flux) {
 	# supprimer les inscrits a la poubelle
 	sql_delete("spip_mailsubscribers", "statut=" . sql_quote('poubelle') . " AND date < " . sql_quote($mydate));
 
-	# supprimer les inscriptions liees a rien
+	# supprimer les listes a la poubelle
+	sql_delete("spip_mailsubscribinglists", "statut=" . sql_quote('poubelle') . " AND date < " . sql_quote($mydate). " AND maj < " . sql_quote($mydate));
+
+	# supprimer les inscriptions dont le subscriber n'existe plus
 	$res = sql_select("S.id_mailsubscriber AS id",
 		"spip_mailsubscriptions AS S
 		      	LEFT JOIN spip_mailsubscribers AS M
 		          ON M.id_mailsubscriber=S.id_mailsubscriber",
-		"M.id_auteur IS NULL");
+		"M.id_mailsubscriber IS NULL");
 	$n += optimiser_sansref('spip_mailsubscriptions', 'id_mailsubscriber', $res);
+
+	# supprimer les inscriptions dont la liste n'existe plus
+	$res = sql_select("S.id_mailsubscribinglist AS id",
+		"spip_mailsubscriptions AS S
+		      	LEFT JOIN spip_mailsubscribinglists AS L
+		          ON L.id_mailsubscribinglist=S.id_mailsubscribinglist",
+		"L.id_mailsubscribinglist IS NULL");
+	$n += optimiser_sansref('spip_mailsubscriptions', 'id_mailsubscribinglist', $res);
 
 
 	return $flux;
