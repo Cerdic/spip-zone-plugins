@@ -90,18 +90,15 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$decalage = array();
-	$ancien_decalage = array();
+	// Si besoin, on récupère les anciennes versions de certains champs
 	if ($id_almanach!='new'){
+		$ancien_decalage = array();
 		$ancien_decalage['ete'] = sql_getfetsel("decalage_ete","spip_almanachs","id_almanach=$id_almanach");
 		$ancien_decalage['hiver'] = sql_getfetsel("decalage_hiver","spip_almanachs","id_almanach=$id_almanach");
 		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
 	}
-	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
-		$ancien_decalage['ete'] = _request("decalage_ete");
-		$ancien_decalage['hiver'] = _request("decalage_ete_hiver");
-		$ancien_id_article = 'new';
-	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
 	$url = _request("url");
@@ -109,6 +106,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_mot = _request("id_mot");
 	$decalage['ete'] = _request("decalage_ete");
 	$decalage['hiver'] = _request("decalage_hiver");
+	
 	
 	#on associe le mot à l'almanach
 	if ($id_mot){
@@ -122,12 +120,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		);
 	}
 	
-	# on corrige le décalage sur les evts existant (cas de modif d'un almanach)
-	corriger_decalage($id_almanach,$decalage,$ancien_decalage);
-	
-	# on corrige les id_article sur les evts existant
-	corriger_article_referent($id_almanach,$id_article,$ancien_id_article);
-
+	// Corriger les évènements existants si certaines propriétés de l'almanache sont modifiés
+	if ($id_almanach!='new'){
+		corriger_decalage($id_almanach,$decalage,$ancien_decalage);
+		corriger_article_referent($id_almanach,$id_article,$ancien_id_article);
+	}
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
 	
@@ -172,9 +169,8 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 }
 
 function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
-	if($id_article != $ancien_id_article and $ancien_id_article!='new'){
+	if($id_article != $ancien_id_article){
 		
-		include_spip('action/editer_evenement');
 		$liens = sql_allfetsel('E.uid, E.id_evenement',
 			"spip_evenements AS E
 			INNER JOIN spip_almanachs_liens AS L
@@ -186,9 +182,9 @@ function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
 		
 		foreach ($liens as $l){
 			$id_evenement = intval($l["id_evenement"]);
-			autoriser_exception('article','modifier',$id_article);
+			autoriser_exception('evenement','modifier',$id_article);
 			objet_modifier('evenement',$id_evenement,$c);
-			autoriser_exception('article','modifier',$id_article,false);
+			autoriser_exception('evenement','modifier',$id_article,false);
 		}
 	}
 }
