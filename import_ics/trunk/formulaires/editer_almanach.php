@@ -169,7 +169,7 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 }
 
 function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
-	if($id_article != $ancien_id_article){
+	if ($id_article != $ancien_id_article){
 		
 		$liens = sql_allfetsel('E.uid, E.id_evenement',
 			"spip_evenements AS E
