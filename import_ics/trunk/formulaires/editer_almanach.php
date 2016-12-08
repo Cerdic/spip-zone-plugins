@@ -65,7 +65,6 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 	$le_id_article=_request("le_id_article");//id_article est protégé pour ne prendre que des int avec l'ecran securite, mais comme on utilise le selecteur, on a un tableau
 	$id_article=str_replace("article|","",$le_id_article[0]);
 	set_request("id_article",$id_article);
-	
 	if ((lire_config("import_ics/mot_facultatif")==null) and !(_IMPORT_ICS_MOT_FACULTATIF=='off')){
 		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article', 'id_mot'));
 	}
@@ -122,8 +121,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	
 	// Corriger les évènements existants si certaines propriétés de l'almanache sont modifiés
 	if ($id_almanach!='new'){
-		corriger_decalage($id_almanach,$decalage,$ancien_decalage);
-		corriger_article_referent($id_almanach,$id_article,$ancien_id_article);
+		$evenements = trouver_evenements_almanach($id_almanach,'id_evenement,date_debut,date_fin',true);
+		if(is_array($evenements) and count($evenements)>0){
+			corriger_decalage($id_almanach,$decalage,$ancien_decalage,$evenements);
+			corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$evenements);
+		}
 	}
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
@@ -131,50 +133,40 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	return $chargement;
 }
 
-function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
+function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage,$liens){
 	include_spip('action/editer_evenement');
 	$decalage_ete = intval($nouveau_decalage['ete']) - intval($ancien_decalage['ete']);
 	$decalage_hiver = intval($nouveau_decalage['hiver']) - intval($ancien_decalage['hiver']);
-	$liens = sql_allfetsel('E.uid, E.id_evenement, E.date_debut, E.date_fin',
-		"spip_evenements AS E
-		INNER JOIN spip_almanachs_liens AS L
-		ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
 	
-	if(is_array($liens) and count($liens)>0){
-		foreach ($liens as $l){
-			$champs_sql = array();
-			$id_evenement = intval($l["id_evenement"]);
-			$heure_ete_debut = intval(affdate($l['date_debut'],'I'));//Est-ce que la date de début se trouve en période d'heure d'été?
-			$heure_ete_fin = intval(affdate($l['date_fin'],'I'));// Est-ce que la date de fin se trouve en période d'heure d'été?
-			
-			if ($heure_ete_debut){
-				$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_ete HOUR)";
-			}
-			else {
-				$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_hiver HOUR)";
-			}
-
-			if ($heure_ete_fin){
-				$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_ete HOUR)";
-			}
-			else {
-				$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_hiver HOUR)";
-			}
+	foreach ($liens as $l){
+		$champs_sql = array();
+		$id_evenement = intval($l["id_evenement"]);
+		$heure_ete_debut = intval(affdate($l['date_debut'],'I'));//Est-ce que la date de début se trouve en période d'heure d'été?
+		$heure_ete_fin = intval(affdate($l['date_fin'],'I'));// Est-ce que la date de fin se trouve en période d'heure d'été?
 		
-			autoriser_exception('evenement','modifier',$id_evenement);
-			objet_modifier('evenement',$id_evenement,$champs_sql);
-			autoriser_exception('evenement','modifier',$id_evenement,false);
+		if ($heure_ete_debut){
+			$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_ete HOUR)";
 		}
+		else {
+			$champs_sql['date_debut'] = "DATE_ADD(date_debut, INTERVAL  $decalage_hiver HOUR)";
+		}
+
+		if ($heure_ete_fin){
+			$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_ete HOUR)";
+		}
+		else {
+			$champs_sql['date_fin'] = "DATE_ADD(date_fin, INTERVAL  $decalage_hiver HOUR)";
+		}
+	
+		autoriser_exception('evenement','modifier',$id_evenement);
+		objet_modifier('evenement',$id_evenement,$champs_sql);
+		autoriser_exception('evenement','modifier',$id_evenement,false);
+		spip_log ("Application du nouveau décalage pour l'évènenement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
   }
 }
 
-function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
+function corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$liens){
 	if ($id_article != $ancien_id_article){
-		
-		$liens = sql_allfetsel('E.uid, E.id_evenement',
-			"spip_evenements AS E
-			INNER JOIN spip_almanachs_liens AS L
-			ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach");
 		
 		$c = array(
 			"id_parent" => $id_article,
@@ -185,6 +177,7 @@ function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
 			autoriser_exception('evenement','modifier',$id_article);
 			objet_modifier('evenement',$id_evenement,$c);
 			autoriser_exception('evenement','modifier',$id_article,false);
+			spip_log ("Mise à jour de l'article pour l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 		}
 	}
 }

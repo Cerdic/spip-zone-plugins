@@ -11,14 +11,23 @@ include_spip('action/editer_liens');
 include_spip('inc/config');
 include_spip('import_ics_fonctions');
 
-
-function trouver_evenements_almanach($id_almanach){
-	//On fait un appel dans la base de spip pour pouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
-	$liens = sql_allfetsel('E.uid, E.id_evenement',
-	                        'spip_evenements AS E
-	                        INNER JOIN spip_almanachs_liens AS L
-	                        ON E.id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach),"E.statut!=".sql_quote("archive"));	
-  return $liens;
+/**
+* Fonction qui trouve tous les évènements associés à un almanach, sauf les archivés (sauf si on demande explicitement)
+**/
+function trouver_evenements_almanach($id_almanach,$champs='uid,id_evenement',$tous=false){
+	if ($tous){
+		$liens = sql_allfetsel($champs,
+			'spip_evenements
+			INNER JOIN spip_almanachs_liens AS L
+			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach));	
+	}
+	else{
+		$liens = sql_allfetsel($champs,
+			'spip_evenements
+			INNER JOIN spip_almanachs_liens AS L
+			ON id_evenement = L.id_objet AND L.id_almanach='.intval($id_almanach),"statut!=".sql_quote("archive"));	
+  }
+	return $liens;
 }
 
 function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
