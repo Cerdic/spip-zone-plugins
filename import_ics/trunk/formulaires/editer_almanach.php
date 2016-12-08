@@ -94,11 +94,13 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	if ($id_almanach!='new'){
 		$ancien_decalage['ete'] = sql_getfetsel("decalage_ete","spip_almanachs","id_almanach=$id_almanach");
 		$ancien_decalage['hiver'] = sql_getfetsel("decalage_hiver","spip_almanachs","id_almanach=$id_almanach");
+		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
 
 	}
 	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
 		$ancien_decalage['ete'] = _request("decalage_ete");
 		$ancien_decalage['hiver'] = _request("decalage_ete_hiver");
+		$ancien_id_article = 'new';
 	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
@@ -124,11 +126,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	# on corrige le décalage sur les evts existant (cas de modif d'un almanach)
 	corriger_decalage($id_almanach,$decalage,$ancien_decalage);
 	
+	# on corrige les id_article sur les evts existant
+	corriger_article_referent($id_almanach,$id_article,$ancien_id_article);
+
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
-	
-	# on modifie au besoin l'article de références sur les evts
-	changer_article_referent($id_almanach,$id_article);
 	
 	return $chargement;
 }
@@ -171,12 +173,12 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 			objet_modifier('evenement',$id_evenement,$champs_sql);
 			autoriser_exception('evenement','modifier',$id_evenement,false);
 		}
-	}
+  }
 }
 
-function changer_article_referent($id_almanach,$id_article){
-	//uniquement si la case est cochée
-	if(_request("changer_id_parent")==true){	
+function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
+	if($id_article != $ancien_id_article and $ancien_id_article!='new'){
+		
 		include_spip('action/editer_evenement');
 		$liens = sql_allfetsel('E.uid, E.id_evenement',
 			"spip_evenements AS E
@@ -187,13 +189,11 @@ function changer_article_referent($id_almanach,$id_article){
 			"id_parent" => $id_article,
 		);
 		
-		if(is_array($liens) and count($liens)>0){
-			foreach ($liens as $l){
-				$id_evenement = intval($l["id_evenement"]);
-				autoriser_exception('article','modifier',$id_article);
-				evenement_instituer($id_evenement,$c);
-				autoriser_exception('article','modifier',$id_article,false);
-			}
+		foreach ($liens as $l){
+			$id_evenement = intval($l["id_evenement"]);
+			autoriser_exception('article','modifier',$id_article);
+			evenement_instituer($id_evenement,$c);
+			autoriser_exception('article','modifier',$id_article,false);
 		}
 	}
 }
