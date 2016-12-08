@@ -30,8 +30,10 @@ if(
 	{
 		//pour chacun des almanachs, on va importer les evenements
 	foreach ($resultats as $r) {
+			$id_almanach = $r["id_almanach"];
+			spip_log ("Import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
 			importer_almanach(
-			  $r["id_almanach"],
+			  $id_almanach,
 				$r["url"],
 				$r["id_article"],
 				$r["id_mot"],
@@ -40,6 +42,7 @@ if(
 					'hiver' => $result["decalage_hiver"]
 				)
 			);
+			spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
 		}
 		return 1;
 	}

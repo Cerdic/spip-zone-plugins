@@ -15,6 +15,7 @@ function action_supprimer_evenements_almanach_dist() {
 }
 
 function action_supprimer_evenements_almanach_post($id_almanach) {
+	spip_log ("Suppression des évènements de l'almanach $id_almanach","import_ics"._LOG_INFO);
 	//recuperer tous les evenemments lies à l'almanach en cours
 	$all = sql_allfetsel('id_objet', 'spip_almanachs_liens','id_almanach='.intval($id_almanach));
 	//pour chacun d'entre eux supprimer l'entree correspondante dans la table evenement

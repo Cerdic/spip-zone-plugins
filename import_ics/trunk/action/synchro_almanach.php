@@ -26,6 +26,7 @@ $arg = $securiser_action();
 	}
 	$id_almanach = $r[1];
 	$result = sql_fetsel("*","spip_almanachs","id_almanach=$id_almanach");
+	spip_log ("Import manuel de l'almanach $id_almanach","import_ics"._LOG_INFO);
 	importer_almanach(
 		$id_almanach,
 		$result["url"],
@@ -36,6 +37,7 @@ $arg = $securiser_action();
 			'hiver' => $result["decalage_hiver"]
 		)
 	);
+	spip_log ("Fin de l'import manuel de l'almanach $id_almanach","import_ics"._LOG_INFO);
 }
 
 ?>

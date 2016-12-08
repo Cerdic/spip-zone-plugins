@@ -56,6 +56,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 						autoriser_exception('evenement','modifier',$id_evenement);
 						objet_modifier('evenement',$id_evenement,$champs_sql);
 						autoriser_exception('evenement','modifier',$id_evenement,false);
+						spip_log ("Mise à jour de l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 					}
 				} 
 			else {
@@ -78,6 +79,7 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 		autoriser_exception('instituer','evenement',$id_evenement);
 		autoriser_exception('modifier','article',$id_article);
 		objet_instituer('evenement',$id_evenement,array("statut"=>'archive'));
+		spip_log ("Archivage de l'évènement $id_evenement","import_ics"._LOG_INFO);
 		autoriser_exception('instituer','evenement',$id_evenement,false);
 		autoriser_exception('modifier','article',$id_article,false);		
 	}
@@ -114,6 +116,7 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 		objet_associer(array("mot"=>$id_mot),array("evenement"=>$id_evenement));
 		autoriser_exception('associermots','evenement',$id_evenement,false);
 	}
+	spip_log ("Import de l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 }
 
 /* 
