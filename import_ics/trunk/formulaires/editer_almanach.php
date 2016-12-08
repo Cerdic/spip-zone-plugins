@@ -187,7 +187,7 @@ function corriger_article_referent($id_almanach,$id_article,$ancien_id_article){
 		foreach ($liens as $l){
 			$id_evenement = intval($l["id_evenement"]);
 			autoriser_exception('article','modifier',$id_article);
-			evenement_instituer($id_evenement,$c);
+			objet_modifier('evenement',$id_evenement,$c);
 			autoriser_exception('article','modifier',$id_article,false);
 		}
 	}
