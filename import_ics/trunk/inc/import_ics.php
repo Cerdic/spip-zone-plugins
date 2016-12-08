@@ -88,7 +88,10 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$statut){
   $champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement,$decalage),
-		array("id_article"=>$id_article)
+		array(
+				"id_article"=>$id_article,
+				"date_creation"=>date('Y-m-d H:i:s')
+		)
 	);
 	
 	# création de l'evt
