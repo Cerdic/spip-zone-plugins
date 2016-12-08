@@ -12,6 +12,7 @@
 
 	<auteur>Amaury</auteur>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<auteur>Touti</auteur>
 	<licence>GNU/GPL</licence>
 	
 	<traduire module="almanach" reference="fr" />
