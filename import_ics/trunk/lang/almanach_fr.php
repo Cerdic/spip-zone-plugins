@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_id_mot' => 'Type des événements de cet almanach :',
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
+	'last_modified_distant' =>'Dernière modification distante',
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 	'lieu' => 'Lieu',
 
@@ -87,7 +88,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation' => 'Choix de la salle à réserver',
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
-
+	
+	// S
+	'sequence' => 'Version distante',
+	
 	// T
 	'texte_ajouter_almanach' => 'Ajouter un almanach',
 	'texte_changer_statut_almanach' => 'Cet almanach est :',
@@ -100,5 +104,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_evenement' => 'Tous les événements de l’almanach auront le même type. Vous pourrez modifier cela individuellement.',
 
 	// U
+	'uid'	=> 'Identifiant distant',
 	'un_evenement' => '@nb@ événement'
 );

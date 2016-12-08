@@ -171,7 +171,43 @@ function import_ics_declarer_champs_extras($champs = array()){
 			'traitements' => '_TRAITEMENT_RACCOURCIS',
 			'class'	=>'inserer_barre_edition',
 	));
-	
+	$champs['spip_evenements']['uid'] = array(
+		'saisie' => 'hidden',
+		'options' => array(
+			'nom' => 'uid', // nom sql
+			'label' => _T('almanach:uid'), 
+			'sql' => "text NOT NULL", // declaration sql
+			'rechercher'=>false,
+			'defaut' => '',	
+			'rows' => 4,
+			'versionner' => true,
+			'modifier' => array()
+	));
+	$champs['spip_evenements']['sequence'] = array(
+		'saisie' => 'hidden',
+		'options' => array(
+			'nom' => 'sequence', // nom sql
+			'label' => _T('almanach:sequence'), 
+			'sql' => "bigint(21) DEFAULT '0' NOT NULL", // declaration sql
+			'rechercher'=>false,
+			'defaut' => '',	
+			'rows' => 4,
+			'versionner' => true,
+			'modifier' => array()
+	));	
+	$champs['spip_evenements']['last_modified_distant'] = array(
+		'saisie' => 'hidden',
+		'options' => array(
+			'nom' => 'last_modified_distant', // nom sql
+			'label' => _T('almanach:last_modified_distant'), 
+			'sql' => "last_modified_distant text NOT NULL", // declaration sql
+			'rechercher'=>false,
+			'defaut' => '',	
+			'rows' => 4,
+			'versionner' => true,
+			'modifier' => array(),
+			'traitements' => 'affdate_heure(date_ical_to_sql(unserialize(%s),"",True))'
+	));	
 	return $champs;
 }
 

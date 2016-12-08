@@ -9,6 +9,7 @@ include_spip('inc/autoriser');
 include_spip('action/editer_objet');
 include_spip('action/editer_liens');
 include_spip('inc/config');
+include_spip('import_ics_fonctions');
 
 
 function trouver_evenements_almanach($id_almanach){
@@ -167,39 +168,4 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			'notes'=>$url);
 }
 
-include_spip('inc/filtres');
-/*
-** À partir d'un tableau de propriété de date ical, retourne deux infos: 1. Date formatée en sql 2. booleen pour savoir si toute la journée
-*/
-function date_ical_to_sql($date,$decalage){
-	$value = $date["value"];
-	$params = $date["params"];
-	if (is_array($params) and in_array("DATE",$params)){
-		$all_day = True;
-		$date_sql = sql_format_date(
-			$value["year"],
-			$value["month"],
-			$value["day"]
-		);
-	}
-	else{
-		$all_day = False;
-		$date_sql = sql_format_date(
-			$value["year"],
-			$value["month"],
-			$value["day"],
-			$value["hour"],
-			$value["min"],
-			$value["sec"]
-		);
-	}
-	$date_ete = intval(affdate($date_sql,'I'));//Est-on en heure d'été?
-	if ($date_ete){
-		$decalage = $decalage['ete'];
-	}
-	else{
-		$decalage = $decalage['hiver'];
-	}
-	$date_sql = "DATE_ADD('$date_sql', INTERVAL $decalage HOUR)";
-	return array($date_sql,$all_day);
-}
+
