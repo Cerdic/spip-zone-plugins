@@ -95,7 +95,6 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		$ancien_decalage['ete'] = sql_getfetsel("decalage_ete","spip_almanachs","id_almanach=$id_almanach");
 		$ancien_decalage['hiver'] = sql_getfetsel("decalage_hiver","spip_almanachs","id_almanach=$id_almanach");
 		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
-
 	}
 	else{// si jamais il n'y avait pas encore d'article, on considère que le décalage ne change pas
 		$ancien_decalage['ete'] = _request("decalage_ete");
@@ -144,10 +143,6 @@ function corriger_decalage($id_almanach,$nouveau_decalage,$ancien_decalage){
 		INNER JOIN spip_almanachs_liens AS L
 		ON E.id_evenement = L.id_objet AND L.id_almanach=$id_almanach","E.horaire!=".sql_quote("non"));	
 	
-	//$champs_sql = array(
-	//	"date_debut" => "DATE_ADD(date_debut, INTERVAL  $decalage HOUR)",
-	//	"date_fin" => "DATE_ADD(date_fin, INTERVAL  $decalage HOUR)",
-	//);
 	if(is_array($liens) and count($liens)>0){
 		foreach ($liens as $l){
 			$champs_sql = array();
