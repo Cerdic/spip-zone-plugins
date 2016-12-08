@@ -57,6 +57,10 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj["1.0.7"] = array(
 		array('dupliquer_decalage')
 	);
+	$maj["1.0.8"] = array(
+		array("recreer_champs_versionnage_distant"),
+		array("mettre_a_jour_date_creation")
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -110,4 +114,32 @@ function publier_almanachs_tous(){
 		}
 	}
 	sql_free($almanachs);
+}
+
+/**
+* Lors du passage en 3.4.5, on crée les champs uid, sequence et last_modified_distant,
+* qu'on avait oublié de déclarer en champs extra
+**/
+function recreer_champs_versionnage_distant(){
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table('evenements');
+	$field = $desc['field'];
+	if (!isset($field['sequence'])){
+		array('sql_alter',"TABLE spip_evenements ADD sequence bigint(21) DEFAULT '0' NOT NULL");
+	}
+	if (!isset($field['uid'])){
+		array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL");
+	}
+	if (!isset($field['last_modified_distant'])){
+		array('sql_alter',"TABLE spip_evenements ADD last_modified_distant text NOT NULL");
+	}
+}
+
+
+
+/** Lors du passage en 3.4.5, mettre à jour le champs date_creation s'il est égale à 0000-00-00 00:00:00
+*
+**/
+function mettre_a_jour_date_creation(){
+	sql_update('spip_evenements', array('date_creation' => 'maj'),'date_creation="0000-00-00 00:00:00"');
 }
