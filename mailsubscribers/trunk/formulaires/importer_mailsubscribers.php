@@ -16,9 +16,9 @@ include_spip('inc/mailsubscribers');
 function formulaires_importer_mailsubscribers_charger_dist() {
 	$valeurs = array(
 		'file_import' => '',
-		'valid_subscribers' => '',
+		'valid_subscribers' => 1,
 		'listes_import_subscribers' => '',
-		'desactiver_notif' => '',
+		'desactiver_notif' => 1,
 		'vider_table' => '',
 	);
 
@@ -34,7 +34,7 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 	$erreurs = array();
 	$filename = '';
 	if (_request('go')) {
-		$filename = session_get('importer_mailsubscribers::filename');
+		$filename = session_get('importer_mailsubscribers::tmpfilename');
 	} else {
 		$files = importer_mailsubscribers_file();
 		if (is_string($files)) // erreur
@@ -44,7 +44,8 @@ function formulaires_importer_mailsubscribers_verifier_dist() {
 			$files = reset($files);
 			$filename = _DIR_TMP . basename($files['tmp_name']);
 			move_uploaded_file($files['tmp_name'], $filename);
-			session_set('importer_mailsubscribers::filename', $filename);
+			session_set('importer_mailsubscribers::tmpfilename', $filename);
+			session_set('importer_mailsubscribers::filename', $files['name']);
 		}
 	}
 
@@ -94,7 +95,7 @@ function formulaires_importer_mailsubscribers_traiter_dist() {
 	}
 
 	$res = array('editable' => true);
-	$options = array();
+	$options = array('listes' => array());
 	if (_request('valid_subscribers')) {
 		$options['statut'] = 'valide';
 	}
@@ -106,7 +107,19 @@ function formulaires_importer_mailsubscribers_traiter_dist() {
 		$options['notify'] = false;
 	}
 
-	$r = importer_mailsubscribers_importe(session_get('importer_mailsubscribers::filename'), $options);
+	$filename = session_get('importer_mailsubscribers::tmpfilename');
+	// creer une liste de diffusion correspondant a cet import (automatique)
+	$set = array(
+		'titre' => basename(session_get('importer_mailsubscribers::filename')),
+		'identifiant' => 'import_'.substr(md5(session_get('importer_mailsubscribers::filename').$filename.date('Y-m-d H:i:s')),0,7).'_'.date('Ymd'),
+	);
+	include_spip('action/editer_objet');
+	$id_mailsubscribinglist = objet_inserer('mailsubscribinglist');
+	objet_modifier('mailsubscribinglist', $id_mailsubscribinglist, $set);
+	// et inscrire les emails a cette liste
+	$options['listes'][] = $set['identifiant'];
+
+	$r = importer_mailsubscribers_importe($filename, $options);
 
 	$message =
 		sinon(
