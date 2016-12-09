@@ -27,7 +27,7 @@ em.crayon-img-changed { cursor: pointer; border:0; }
 .formulaire_crayon .crayon-active { padding: 1px; border: 1px inset; font: inherit; display:block; }
 .crayon-html .formulaire_crayon { max-width: 703px; }
 .crayon-html textarea { overflow: auto; font: inherit; }
-.crayon-html { z-index:5000; }
+.crayon-html { z-index:1000; }
 .crayon-html .crayon-boutons { position:absolute; right:0px; }
 .crayon-html .small .crayon-boutons {position: relative;}
 
