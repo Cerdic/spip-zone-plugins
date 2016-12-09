@@ -1,3 +1,19 @@
+[(#REM)
+
+Parametres :
+** : obligatoire
+* : fortement conseille
+
+- ** nom : nom du parametre
+- * label : nom joli
+- * valeur : valeur actuelle du parametre
+- valeur_uniquement : si présent, n'affichera pas le label ni le bloc englobant la valeur
+
+Hors option 'valeur_uniquement' :
+- conteneur_class : pour ajouter une classe CSS sur le conteneur
+- vue_class : pour ajouter une classe CSS sur le bloc englobant la valeur
+
+]
 [(#SET{sans_reponse,#ENV{sans_reponse}|is_null|?{<:saisies:vue_sans_reponse:>,#ENV{sans_reponse}}})]
 
 #SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|oui}
@@ -23,7 +39,7 @@
 	]
 	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
 		[<strong class="label">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
-		<div class="valeur">
+		<div class="valeur #ENV{vue_class}">
 		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
 		</div>
 	]
