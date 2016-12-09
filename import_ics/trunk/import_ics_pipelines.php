@@ -161,3 +161,40 @@ function import_ics_affiche_milieu($flux){
 	}
 	return $flux;
 }
+
+/**
+* Modifier les mots-clé liés à un évènement 
+* lorsque l'almanach de cet évènement voit ses mot-clé modifiés
+* @param array $flux
+* @return array
+*/
+function import_ics_post_edition_lien($flux){
+	if ($flux['args']['objet_source'] == 'mot' and $flux['args']['objet'] == 'almanach'){//si on modifie la liaison mot/objet
+		// ce qui a été modifié
+		$id_mot = $flux['args']['id_objet_source'];
+		$id_almanach = $flux['args']['id_objet'];
+		$action = $flux['args']['action'];
+		
+		// chercher les evenement liés à l'almanach
+		include_spip('inc/import_ics');
+		$evenements = trouver_evenements_almanach($id_almanach,'id_evenement',true);
+		foreach ($evenements as $evt){
+			$id_evenement = $evt['id_evenement'];
+			if ($action == 'delete'){
+				objet_dissocier(
+					array('mot'=>$id_mot),
+					array('evenement'=>$id_evenement)
+				);
+				spip_log ("Dissociation du mot-clef $id_mot de l'évènement $id_evenement suite à modif de l'almanach $id_almanach","import_ics"._LOG_INFO);
+			}
+			elseif ($action == 'insert'){
+				objet_associer(
+					array('mot'=>$id_mot),
+					array('evenement'=>$id_evenement)
+				);
+				spip_log ("Association du mot-clef $id_mot de l'évènement $id_evenement suite à modif de l'almanach $id_almanach","import_ics"._LOG_INFO);					
+			}
+		}
+	}
+	return $flux;
+}
