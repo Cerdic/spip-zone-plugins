@@ -61,6 +61,13 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 		array("recreer_champs_versionnage_distant"),
 		array("mettre_a_jour_date_creation")
 	);
+	$maj["1.0.9"] = array(
+		array('sql_alter','TABLE spip_almanachs DROP id_mot'),
+		array('effacer_config','import_ics/mot_facultatif'),
+		array('effacer_config','import_ics/groupe_mots'),
+		array('effacer_config','import_ics/id_mot'),
+		array('effacer_config','import_ics/id_groupe')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
