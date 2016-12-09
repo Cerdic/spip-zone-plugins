@@ -462,12 +462,15 @@ function cextras_crayons_controleur($flux) {
 	// Il n'existe pas de controleur spécifique pour ce champ. Voyons si ce champ est un champs extra
 	$saisies = champs_extras_objet($table);
 	// Restreindre aux vrais champs en bdd
-	$saisies = champs_extras_saisies_lister_avec_sql($saisies);
-	// Trouver notre saisie, si le champ est bien un champs extras
-	$saisie = saisies_chercher($saisies, $champ);
-
-	if ($saisie) {
+	$saisies_sql = champs_extras_saisies_lister_avec_sql($saisies);
+	if (!empty($saisies_sql[$champ])) {
 		$flux['data'] = charger_fonction('champs_extras', 'controleurs');
+	} else {
+		// Ou un fieldset de champs extras
+		$saisies_fieldset = saisies_lister_avec_type($saisies, 'fieldset');
+		if (!empty($saisies_fieldset[$champ])) {
+			$flux['data'] = charger_fonction('champs_extras_fieldset', 'controleurs');
+		}
 	}
 
 	return $flux;
@@ -496,7 +499,6 @@ function cextras_crayons_verifier($flux) {
 
 	foreach ($valeurs as $champ => $valeur) {
 		if ($saisie = saisies_chercher($saisies, $champ)) {
-			spip_log($saisie, 'mm');
 			$nom = $saisie['options']['nom'];
 
 			// Crayons applatit les name envoyés sous forme de tableau (lorsque name="truc[]").
@@ -515,6 +517,5 @@ function cextras_crayons_verifier($flux) {
 		}
 	}
 
-	spip_log($flux, 'mm');
 	return $flux;
 }
