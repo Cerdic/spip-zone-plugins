@@ -32,7 +32,7 @@ function trouver_evenements_almanach($id_almanach,$champs='uid,id_evenement',$to
 
 function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	// Début de la récupération des évènements
-	#configuration nécessaire à la récupération
+	//configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
 	$cal = new vcalendar($config);
 	$cal->parse();
