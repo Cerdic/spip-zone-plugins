@@ -21,15 +21,6 @@
 </span>
 </div>
 
-<B_mot_lie>
-<div class="champ contenu_id_mot[ (#ID_MOT*|strlen|?{'',vide})]">
-<BOUCLE_mot_lie(MOTS){id_mot=#ID_MOT}>
-	<label><strong><:almanach:label_id_mot:></strong></label>
-	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}">#TITRE (mot n°#ID_MOT)</a> </span>
-</BOUCLE_mot_lie>
-</div>
-</B_mot_lie>
-
 <div class="champ contenu_decalage_ete[ (#DECALAGE_ETE*|strlen|?{'',vide})]">
 	<label><strong><:almanach:decalage_ete:> : </strong></label>
 	<span dir='#LANG_DIR' class='#EDIT{decalage_ete} decalage'>[ [(#DECALAGE_ETE|>={0}|?{+})](#DECALAGE_ETE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE_ETE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>

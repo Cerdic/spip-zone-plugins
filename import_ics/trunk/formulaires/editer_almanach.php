@@ -65,12 +65,7 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 	$le_id_article=_request("le_id_article");//id_article est protégé pour ne prendre que des int avec l'ecran securite, mais comme on utilise le selecteur, on a un tableau
 	$id_article=str_replace("article|","",$le_id_article[0]);
 	set_request("id_article",$id_article);
-	if ((lire_config("import_ics/mot_facultatif")==null) and !(_IMPORT_ICS_MOT_FACULTATIF=='off')){
-		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article', 'id_mot'));
-	}
-	else{
-		$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
-	}
+	$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
 
   if ($erreurs["id_article"]){
 		$erreurs["le_id_article"]=$erreurs["id_article"];
@@ -102,22 +97,10 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_almanach = $chargement['id_almanach'];
 	$url = _request("url");
 	$id_article = _request("id_article");
-	$id_mot = _request("id_mot");
 	$decalage['ete'] = _request("decalage_ete");
 	$decalage['hiver'] = _request("decalage_hiver");
 	
 	
-	#on associe le mot à l'almanach
-	if ($id_mot){
-		sql_insertq(
-			"spip_mots_liens",
-			array(
-				'id_mot'=>$id_mot,
-				'id_objet'=>$id_almanach,
-				'objet'=>'almanach'
-			)
-		);
-	}
 	
 	// Corriger les évènements existants si certaines propriétés de l'almanache sont modifiés
 	if ($id_almanach!='new'){
@@ -128,7 +111,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		}
 	}
 	# on importe les autres évènement
-	importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage);
+	importer_almanach($id_almanach,$url,$id_article,$decalage);
 	
 	return $chargement;
 }

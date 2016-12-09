@@ -30,7 +30,7 @@ function trouver_evenements_almanach($id_almanach,$champs='uid,id_evenement',$to
 	return $liens;
 }
 
-function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
+function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	// Début de la récupération des évènements
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>$url);
@@ -69,7 +69,7 @@ function importer_almanach($id_almanach,$url,$id_article,$id_mot,$decalage){
 					}
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$id_mot,$decalage,$statut);
+				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
@@ -96,7 +96,7 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$decalage,$statut){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut){
   $champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement,$decalage),
 		array(
@@ -119,12 +119,6 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$id_mot,$d
 	
 	#on associe l'événement à l'almanach
 	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));	
-	#on associe l'événement à son mot
-	if ($id_mot){
-	  autoriser_exception('associermots','evenement',$id_evenement);
-		objet_associer(array("mot"=>$id_mot),array("evenement"=>$id_evenement));
-		autoriser_exception('associermots','evenement',$id_evenement,false);
-	}
 	spip_log ("Import de l'évènement $id_evenement, almanach $id_almanach","import_ics"._LOG_INFO);
 }
 

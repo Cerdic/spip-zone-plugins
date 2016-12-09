@@ -36,7 +36,6 @@ if(
 			  $id_almanach,
 				$r["url"],
 				$r["id_article"],
-				$r["id_mot"],
 				array(
 					'ete' => $result["decalage_ete"],
 					'hiver' => $result["decalage_hiver"]

@@ -31,7 +31,6 @@ $arg = $securiser_action();
 		$id_almanach,
 		$result["url"],
 		$result["id_article"],
-		$result["id_mot"],
 		array(
 			'ete' => $result["decalage_ete"],
 			'hiver' => $result["decalage_hiver"]

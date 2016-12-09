@@ -1,10 +1,4 @@
-
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
-
-	
-
-[(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie. on fait la même chose pour les ressources]
-
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
@@ -30,36 +24,6 @@
 				defaut=#LISTE{article|#ID_ARTICLE|sinon{#CONFIG{import_ics/articlepardefaut}}},
 				explication=<:almanach:explication_id_article:>
 			})]
-      #SET{id_groupe,#EVAL{defined('_IMPORT_ICS_ID_GROUPE')}|?{#EVAL{_IMPORT_ICS_ID_GROUPE},#CONFIG{import_ics/id_groupe}}}
-      #SET{id_mot,#EVAL{defined('_IMPORT_ICS_ID_MOT')}|?{#EVAL{_IMPORT_ICS_ID_MOT},#CONFIG{import_ics/id_mot}}}
-      [(#GET{id_mot}|non)
-        [(#GET{id_groupe}|non)
-			[(#SAISIE{mot,id_mot,
-			  label=<:almanach:mot:>,
-			  explication=<:almanach:mot_explication:>,
-			  forcer_select=oui,
-			  table_liaison=evenements})]
-		]
-        [(#GET{id_groupe}|oui)
-			[(#SAISIE{mot,id_mot,
-			  label=<:almanach:mot:>,
-			  explication=<:almanach:mot_explication:>,
-			  id_groupe=#GET{id_groupe},
-			  forcer_select=oui,
-			  table_liaison=evenements})]
-		]
-      ]
-      [(#GET{id_mot}|oui)
-        #SAISIE{hidden,id_mot,valeur=#GET{id_mot}}
-        [(#SAISIE{mot,id_mot,
-          label=<:almanach:mot:>,
-          explication=<:almanach:mot_explication_verrouille:>,
-          valeur_forcee=#GET{id_mot},
-          disable=oui,
-          forcer_select=oui,
-          table_liaison=evenements})] 
-      ]
-
 			[(#SAISIE{selection,decalage_ete,
 				label=<:almanach:decalage_ete:>,
 				explication=<:almanach:decalage_ete_explication:>,

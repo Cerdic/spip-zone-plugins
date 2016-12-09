@@ -57,18 +57,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_id_article' => 'Article d’accueil de l’almanach',
-	'label_id_mot' => 'Type des événements de cet almanach :',
 	'label_titre' => 'Titre',
 	'label_url' => 'URL',
 	'last_modified_distant' => 'Dernière modification distante',
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 	'lieu' => 'Lieu',
-
-	// M
-	'mot' => 'Mot associé aux évènements de cet almanach',
-	'mot_explication' => 'Le mot sélectionné sera automatiquement associé aux évènements de cet almanach.',
-	'mot_explication_verrouille' => 'Le mot sélectionné sera automatiquement associé aux évènements de cet almanach. Le choix du mot a été verrouillé dans la configuration du plugin.',
-
 	// N
 	'notes' => 'Notes',
 
