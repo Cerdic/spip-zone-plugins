@@ -129,11 +129,11 @@ function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 	}
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if ($saisie['saisie'] == $type) {
-			$saisies_option[$nom_ou_id] = $saisie;
+			$saisies_type[$nom_ou_id] = $saisie;
 		}
 	}
 
-	return $saisies_option;
+	return $saisies_type;
 }
 
 /**
