@@ -86,7 +86,8 @@ function crayons_store($options = array()) {
 
 	$postees = post_crayons();
 
-	$modifs = $updates = array();
+	$invalides = $modifs = $updates = array();
+
 	if (!is_array($postees)) {
 		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
 	} else {
@@ -122,18 +123,49 @@ function crayons_store($options = array()) {
 							}
 						}
 
-						$modifs[] = array($type, $modele, $id, $content, $wid);
-
-						/* aiguillage pour verification de la saisie
-						Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
-						 $invalides[wid_champ]['msg'] -> message de saisie invalide
-						 $invalides[wid_champ]['retour'] -> caracteres invalides */
+						// Aiguillage pour verification de la saisie
+						// Pour traitement ulterieur les fonctions de verifications doivent renvoyer $invalides :
+						// $invalides[wid_champ]['msg'] -> message de saisie invalide
+						// $invalides[wid_champ]['retour'] -> caracteres invalides
 						$f = 'verifier_'.$type.'_'.$modele;
 						if (function_exists($f)) {
-							if (count($invalides = $f($modifs))) {
-								$return['$invalides'] = $invalides;
+							$_invalides = $f($modifs);
+							if ($_invalides and is_array($invalides)) {
+								$invalides = array_merge($invalides, $_invalides);
 							}
 						}
+
+						// Fonctionnement plus simple, en retournant presque comme le pipeline formulaire_verifier
+						// On permet aussi de modifier la valeur soumise, si une valeur est retournée dans normaliser.
+
+						$data = pipeline(
+							'crayons_verifier',
+							array(
+								'args' => array(
+									'type' => $type,
+									'modele' => $modele,
+									'id' => $id,
+									'content' => $content,
+									'wid' => $wid,
+								),
+								'data' => array(
+									'erreurs' => array(), // couples : champ => texte d'erreur
+									'normaliser' => array(), // couples : champ => valeur à utiliser
+								),
+							)
+						);
+
+						if (count($data['normaliser'])) {
+							$content = $data['normaliser'] + $content;
+						}
+
+						if ($data['erreurs']) {
+							foreach ($data['erreurs'] as $c => $e) {
+								$invalides[$wid . '_' . $c]['msg'] = $e;
+							}
+						}
+
+						$modifs[] = array($type, $modele, $id, $content, $wid);
 					}
 				}
 			}
@@ -146,7 +178,8 @@ function crayons_store($options = array()) {
 	}
 
 	// un champ invalide ... ou rien ==> on ne fait rien !
-	if (isset($return['$invalides']) and $return['$invalides']) {
+	if (count($invalides)) {
+		$return['$invalides'] = $invalides;
 		return $return;
 	}
 

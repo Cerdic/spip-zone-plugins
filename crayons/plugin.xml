@@ -16,7 +16,7 @@
 		&#169; 2006-2013 - GNU/GPL
 	</licence>
 	<version>
-	1.25.1
+	1.26.0
 	</version>
 	<etat>
 	stable
@@ -50,6 +50,14 @@ _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#157
 		<nom>header_prive</nom>
 		<action>insert_head</action>
 		<inclure>crayons_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>crayons_controleur</nom>
+		<action></action>
+	</pipeline>
+	<pipeline>
+		<nom>crayons_verifier</nom>
+		<action></action>
 	</pipeline>
 	<chemin dir='' />
 	<categorie>edition</categorie>

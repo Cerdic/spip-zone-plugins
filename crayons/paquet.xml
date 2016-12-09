@@ -1,7 +1,7 @@
 <paquet
 	prefix="crayons"
 	categorie="edition"
-	version="1.25.1"
+	version="1.26.0"
 	etat="stable"
 	compatibilite="[1.9.0;3.*.*]"
 	logo="images/crayon-32.png"
@@ -18,4 +18,6 @@
 	
 	<pipeline nom="affichage_final" inclure="crayons_fonctions.php" />
 	<pipeline nom="header_prive" inclure="crayons_fonctions.php" action="insert_head" />
+	<pipeline nom="crayons_controleur" action="" />
+	<pipeline nom="crayons_verifier" action="" />
 </paquet>

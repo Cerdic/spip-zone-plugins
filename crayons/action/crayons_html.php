@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Affiche le controleur (formulaire) d'un crayon
- * suivant la classe CSS décrivant le champ à éditer (produit par #EDIT)
+ * suivant la classe CSS décrivant le champ à éditer (produit par `#EDIT`)
  *
  * @param string $class
  *   Class CSS décrivant le champ
@@ -35,10 +35,23 @@ function affiche_controleur($class, $c = null) {
 		if (!autoriser('crayonner', $type, $id, null, array('modele'=>$champ))) {
 			$return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
 		} else {
+			// Trouver la fonction de controleur PHP à utiliser
 			$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
 			or $f = charger_fonction($champ, 'controleurs', true)
 			or $f = charger_fonction($type, 'controleurs', true)
 			or $f = 'controleur_dist';
+
+			$f = pipeline('crayons_controleur', array(
+				'args' => array(
+					'nomcrayon' => $nomcrayon,
+					'type' => $type,
+					'champ' => $champ,
+					'id' => $id,
+					'class' => $class,
+				),
+				'data' => $f,
+			));
+
 			list($html,$status) = $f($regs, $c);
 			if ($status) {
 				$return['$erreur'] = $html;
@@ -53,6 +66,18 @@ function affiche_controleur($class, $c = null) {
 	return $return;
 }
 
+/**
+ * Contrôleur par défaut.
+ *
+ * Il recherche la présence d'un contrôleur au format html pour éditer le champ ou type de crayon demandé.
+ *
+ * S'il n'en trouve pas crée un contrôleur en se basant sur le type de champ dans la base de données,
+ * mais se limite à afficher soit un 'textarea' (contrôleur texte), soit un 'input' (contrôleur ligne).
+ *
+ * @param array $regs
+ * @param null $c
+ * @return array Liste : HTML, erreur
+ */
 function controleur_dist($regs, $c = null) {
 	list( , $nomcrayon, $type, $champ, $id, $class) = $regs;
 	$options = array(
@@ -162,6 +187,8 @@ class Crayon {
 	var $key;
 	// un md5 associe aux valeurs pour verifier et detecter si elles changent
 	var $md5;
+	// classe css
+	var $class;
 	// dimensions indicatives
 	var $largeurMini = 170;
 	var $largeurMaxi = 700;
@@ -244,13 +271,13 @@ class Crayon {
 	function code() {
 		return
 		 '<input type="hidden" class="crayon-id" name="crayons[]"'
-		.' value="'.$this->key.'" />'."\n"
+		.' value="' . $this->key .'" />'."\n"
 		. '<input type="hidden" name="name_'.$this->key
-		.'" value="'.$this->name.'" />'."\n"
+		.'" value="' . $this->name .'" />'."\n"
 		. '<input type="hidden" name="class_' . $this->key
 		. '" value="' . $this->class . '" />' . "\n"
 		. '<input type="hidden" name="md5_'.$this->key
-		.'" value="'.$this->md5.'" />'."\n"
+		.'" value="' . $this->md5 . '" />'."\n"
 		. '<input type="hidden" name="fields_'.$this->key
 		.'" value="'.join(',', array_keys($this->texts)).'" />'
 		."\n"
@@ -447,7 +474,9 @@ function action_crayons_html_dist() {
 
 	$return = affiche_controleur(_request('class'));
 	if (!_request('type') or _request('type') == 'crayon') {
-		$return['$html'] = crayons_formulaire($return['$html']);
+		if (!empty($return['$html'])) {
+			$return['$html'] = crayons_formulaire($return['$html']);
+		}
 	}
 
 	$json = trim(crayons_json_encode($return));
