@@ -10,6 +10,7 @@ include_spip('action/editer_objet');
 include_spip('action/editer_liens');
 include_spip('inc/config');
 include_spip('import_ics_fonctions');
+include_spip('inc/filtres_ecrire');
 
 /**
 * Fonction qui trouve tous les évènements associés à un almanach, sauf les archivés (sauf si on demande explicitement)
@@ -38,6 +39,11 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 	$cal->parse();
 	$statut = sql_getfetsel('statut','spip_almanachs',"`id_almanach`=$id_almanach");
 	$liens = trouver_evenements_almanach($id_almanach);
+	
+	// rechercher les mots clefs lié à un objet_modifier
+	$mots = lister_objets_lies('mot','almanach',$id_almanach,'spip_mots_liens');
+	
+	
 	// on definit un tableau des uid présentes dans la base
 	$uid =array();
 	foreach ($liens as $u ) {
@@ -69,12 +75,13 @@ function importer_almanach($id_almanach,$url,$id_article,$decalage){
 					}
 				} 
 			else {
-				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut);
+				importer_evenement($comp,$id_almanach,$id_article,$decalage,$statut,$mots);
 			};//l'evenement n'est pas dans la bdd, on va l'y mettre	
 		}
 		if (_IMPORT_ICS_DEPUBLIER_ANCIENS_EVTS == 'on' or  lire_config("import_ics/depublier_anciens_evts") == 'on'){
 			depublier_ancients_evts($uid,$les_uid_distant,$id_article);
 		}
+		
 		// mettre à jour les infos de synchronisation. Le champ derniere_synchro n'est pas un champ éditable, donc on passe par sql_update et pas par editer_objet
 		sql_update("spip_almanachs",array("derniere_synchro"=>"NOW()"),"id_almanach=".intval($id_almanach));
 }
@@ -96,7 +103,7 @@ function depublier_ancients_evts($les_uid_local,$les_uid_distant,$id_article){
 /**
 * Importation d'un événement dans la base
 **/
-function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut){
+function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,$statut,$mots){
   $champs_sql = array_merge(
 		evenement_ical_to_sql($objet_evenement,$decalage),
 		array(
@@ -116,6 +123,11 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 	autoriser_exception('instituer','evenement',$id_evenement,false);
 	autoriser_exception('modifier','article',$id_article,false);
 
+	// lier les mots
+	objet_associer(
+		array('mot'=>$mots),
+		array('evenement'=>$id_evenement)
+	);
 	
 	#on associe l'événement à l'almanach
 	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));	
