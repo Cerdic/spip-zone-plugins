@@ -42,7 +42,7 @@ function controleurs_champs_extras_fieldset_dist($regs, $c = null) {
 	}
 
 	$n = new Crayon(
-		$type . '-champs_extras-' . $id,
+		$type . '-champs_extras_fieldset-' . $id,
 		$valeurs,
 		array('controleur' => 'controleurs/champs_extras')
 	);

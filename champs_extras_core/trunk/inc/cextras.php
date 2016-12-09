@@ -94,6 +94,7 @@ function saisies_lister_avec_traitements($saisies, $tri = 'nom') {
  * Déclarer la classe spécifique à crayons, permettant l'édition d'un champ
  *
  * On complète (ou crée) l'option 'vue_class' avec la classe pour crayonner.
+ * On utilise 'conteneur_class' pour les fieldset.
  *
  * @param array $saisies
  * @param string $type
@@ -103,11 +104,15 @@ function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 	include_spip('crayons_fonctions');
 	if (function_exists('classe_boucle_crayon')) {
 		foreach ($saisies as $cle => $saisie) {
-			if (!isset($saisie['options']['vue_class'])) {
-				$saisie['options']['vue_class'] = '';
+			$opt_class = 'vue_class';
+			if ($saisie['saisie'] == 'fieldset') {
+				$opt_class = 'conteneur_class';
 			}
-			$saisie['options']['vue_class'] = trim(
-				$saisie['options']['vue_class']
+			if (!isset($saisie['options'][$opt_class])) {
+				$saisie['options'][$opt_class] = '';
+			}
+			$saisie['options'][$opt_class] = trim(
+				$saisie['options'][$opt_class]
 				. ' '
 				. classe_boucle_crayon($type, $saisie['options']['nom'], $id)
 			);

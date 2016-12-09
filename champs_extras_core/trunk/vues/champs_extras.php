@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Retourner le code HTML de la vue d'un champ (ou plusieurs) champs extras pour Crayons
+ *
+ * @uses champs_extras_objet()
+ * @uses champs_extras_saisies_lister_avec_sql()
+ * @uses cextras_appliquer_traitements_saisies()
+ * @uses cextras_preparer_vue()
+ *
  * @param string $type
  *     Type d'objet
  * @param string $modele
@@ -25,10 +32,7 @@ function vues_champs_extras_dist($type, $modele, $id, $content, $wid) {
 	$valeurs = cextras_appliquer_traitements_saisies($saisies, $content);
 
 	// Réduire l'affichage au minimum s'il n'y a qu'un champ à afficher
-	foreach ($saisies as $champ => $saisie) {
-		$saisies[$champ]['options']['valeur_uniquement'] = (count($valeurs) <= 1 ? 'oui' : '');
-		$saisies[$champ]['options']['sans_reponse'] = '';
-	}
+	$saisies = cextras_preparer_vue($saisies, count($valeurs) <= 1);
 
 	$contexte = array(
 		'saisies' => $saisies,
@@ -36,4 +40,22 @@ function vues_champs_extras_dist($type, $modele, $id, $content, $wid) {
 	);
 
 	return recuperer_fond('inclure/voir_saisies', $contexte);
+}
+
+/**
+ * Préparer le tableau de saisie pour l'affichage
+ *
+ * @param array $saisies
+ * @param bool $affichage_reduit
+ * @return array
+ */
+function cextras_preparer_vue($saisies, $affichage_reduit = false){
+	foreach ($saisies as $cle => $saisie) {
+		$saisies[$cle]['options']['valeur_uniquement'] = ($affichage_reduit ? 'oui' : '');
+		$saisies[$cle]['options']['sans_reponse'] = '';
+		if (!empty($saisie['saisies'])) {
+			$saisies[$cle]['saisies'] = cextras_preparer_vue($saisie['saisies'], $affichage_reduit);
+		}
+	}
+	return $saisies;
 }
