@@ -1,7 +1,7 @@
 <paquet
 	prefix="cextras"
 	categorie="outil"
-	version="3.8.0"
+	version="3.9.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/cextras-64.png"
@@ -19,12 +19,15 @@
 	<pipeline nom="autoriser" inclure="inc/cextras_autoriser.php" />
 	<pipeline nom="editer_contenu_objet" inclure="cextras_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
+	<pipeline nom="crayons_controleur" inclure="cextras_pipelines.php" />
+	<pipeline nom="crayons_verifier" inclure="cextras_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="cextras_pipelines.php" />
 	<pipeline nom="revisions_chercher_label" inclure="cextras_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
+	<necessite nom="saisies" compatibilite="[2.11.0;]" />
 	<utilise nom="verifier" compatibilite="[0.1.12;]" />
+	<utilise nom="crayons" compatibilite="[1.26.0;]" />
 
 </paquet>

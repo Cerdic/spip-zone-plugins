@@ -200,24 +200,7 @@ function cextras_afficher_contenu_objet($flux){
 		if (!$valeurs) {
 			$valeurs = array();
 		} else {
-			// on applique les eventuels traitements definis
-			// /!\ La saisies-vues/_base applique |propre par defaut si elle ne trouve pas de saisie
-			// Dans ce cas, certains traitements peuvent être effectués 2 fois !
-			$saisies_traitees = saisies_lister_avec_traitements($saisies_sql);
-			unset($saisies_sql);
-
-			// Fournir $connect et $Pile[0] au traitement si besoin (l'evil eval)
-			$connect = '';
-			$Pile = array(0 => (isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array()));
-
-			foreach ($saisies_traitees as $saisie) {
-				$traitement = $saisie['options']['traitements'];
-				$traitement = defined($traitement) ? constant($traitement) : $traitement;
-				$nom = $saisie['options']['nom'];
-				list($avant, $apres) = explode('%s', $traitement);
-				eval('$val = ' . $avant . ' $valeurs[$nom] ' . $apres . ';');
-				$valeurs[$nom] = $val;
-			}
+			$valeurs = cextras_appliquer_traitements_saisies($saisies_sql, $valeurs);
 		}
 
 		$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array();
@@ -225,6 +208,8 @@ function cextras_afficher_contenu_objet($flux){
 
 		// restreindre la vue selon les autorisations
 		$saisies = champs_extras_autorisation('voir', $objet, $saisies, $flux['args']);
+		// insérer la classe CSS pour crayons
+		$saisies = champs_extras_saisies_inserer_classe_crayons($saisies, $objet, $flux['args']['id_objet']);
 
 		// ajouter les vues
 		$flux['data'] .= recuperer_fond('inclure/voir_saisies', array_merge($contexte, array(
@@ -234,6 +219,46 @@ function cextras_afficher_contenu_objet($flux){
 	}
 
 	return $flux;
+}
+
+/**
+ * Pour les saisies transmises, appliquer les traitements sur leurs contenus
+ *
+ * On applique les eventuels traitements definis pour chaque saisie,
+ * dans l'option 'traitements'. Si la valeur de l'option correspond
+ * à une constante connue (tel que `_TRAITEMENTS_RACCOURCIS`), ce
+ * sera la valeur de la constante qui sera utilisée, sinon
+ * directement le texte écrit. Il faut absolument `%s` pour que cela fonctionne.
+ *
+ * @note
+ *     La `saisies-vues/_base` applique le filtre `|propre` par défaut si
+ *     elle ne trouve pas de saisie. Dans ce cas, certains traitements peuvent
+ *     être effectués 2 fois !
+ *
+ * @param array $saisies
+ *      Liste décrivant les saisies
+ * @param array $valeurs
+ *      Couples (champ => valeur)
+ * @return array
+ *      Couples (champ => valeur traitée, le cas échéant)
+ */
+function cextras_appliquer_traitements_saisies($saisies, $valeurs) {
+	$saisies = saisies_lister_avec_traitements($saisies);
+
+	// Fournir $connect et $Pile[0] au traitement si besoin (l'evil eval)
+	$connect = '';
+	$Pile = array(0 => (isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array()));
+
+	foreach ($saisies as $saisie) {
+		$traitement = $saisie['options']['traitements'];
+		$traitement = defined($traitement) ? constant($traitement) : $traitement;
+		$nom = $saisie['options']['nom'];
+		list($avant, $apres) = explode('%s', $traitement);
+		eval('$val = ' . $avant . ' $valeurs[$nom] ' . $apres . ';');
+		$valeurs[$nom] = $val;
+	}
+
+	return $valeurs;
 }
 
 /**
@@ -268,64 +293,14 @@ function cextras_formulaire_verifier($flux){
 		// restreindre les vérifications aux saisies enregistrables
 		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 
-		$verifier = charger_fonction('verifier', 'inc', true);
-
 		foreach ($saisies as $saisie) {
-			// verifier obligatoire
 			$nom = $saisie['options']['nom'];
-			if (isset($saisie['options']['obligatoire']) and $saisie['options']['obligatoire']
-			and !_request($nom))
-			{
-				$flux['data'][$nom] = _T('info_obligatoire');
-			
-			// verifier (api) + normalisation
-			} elseif ($verifier
-			   AND isset($saisie['verifier']['type'])
-			   AND $verif = $saisie['verifier']['type'])
-			{
-				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
-				$normaliser = null;
-				$valeur = _request($nom);
-				if ($erreur = $verifier($valeur, $verif, $options, $normaliser)) {
-					$flux['data'][$nom] = $erreur;
-				// si une valeur de normalisation a ete transmis, la prendre.
-				} elseif (!is_null($normaliser)) {
-					set_request($nom, $normaliser);
-				} else {
-
-					// [FIXME] exceptions connues de vérifications (pour les dates entre autres)
-					// en attendant une meilleure solution !
-					//
-					// Lorsque le champ n'est pas rempli dans le formulaire
-					// alors qu'une normalisation est demandée,
-					// verifier() sort sans indiquer d'erreur (c'est normal).
-					// 
-					// Sauf que la donnée alors soumise à SQL sera une chaine vide,
-					// ce qui ne correspond pas toujours à ce qui est attendu.
-					if ((is_string($valeur) and !strlen($valeur) or (is_array($valeur) and $saisie['saisie']=='date'))
-					  and isset($options['normaliser'])
-					  and $norme = $options['normaliser']) {
-						// Charger la fonction de normalisation théoriquement dans verifier/date
-						// et si on en trouve une, obtenir la valeur normalisée
-						// qui est théoriquement la valeur par défaut, puisque $valeur est vide
-						include_spip("verifier/$verif");
-						if ($normaliser = charger_fonction("${verif}_${norme}", "normaliser", true)) {
-							$erreur = null;
-							$defaut = $normaliser($valeur, $options, $erreur);
-							if (is_null($erreur)) {
-								set_request($nom, $defaut);
-							} else {
-								// on affecte l'erreur, mais il est probable que
-								// l'utilisateur ne comprenne pas grand chose
-								$flux['data'][$nom] = $erreur;
-							}
-						} else {
-							include_spip('inc/cextras');
-							extras_log("Fonction de normalisation pour ${verif}_${norme} introuvable");
-						}
-
-					}
-				}
+			$normaliser = null;
+			$erreur = cextras_verifier_saisie($saisie, _request($nom), $normaliser);
+			if ($erreur) {
+				$flux['data'][$nom] = $erreur;
+			} elseif (!is_null($normaliser)) {
+				set_request($nom, $normaliser);
 			}
 		}
 	}
@@ -333,15 +308,95 @@ function cextras_formulaire_verifier($flux){
 }
 
 /**
+ * Vérifie qu'une valeur est acceptée par la déclaration de saisie transmise.
+ *
+ * Peut aussi normaliser (la formater d'une certaine manière pour le format attendu
+ * dans la base de donnée). Dans ce cas la valeur normalisée est placée dans `$normaliser`
+ *
+ * @param array $saisie
+ * @param mixed $valeur
+ * @param mixed $normaliser Valeur normalisée, le cas échéant
+ * @param bool $depuis_crayons true si en provenance d'une vérification par Crayons.
+ * @return false|string Message d'erreur, le cas echéant.
+ */
+function cextras_verifier_saisie($saisie, $valeur, &$normaliser = null, $depuis_crayons = false) {
+	static $verifier = null;
+
+	// Si le plugin verifier est présent.
+	if (is_null($verifier)) {
+		$verifier = charger_fonction('verifier', 'inc', true);
+	}
+
+	// verifier obligatoire
+	if (
+		isset($saisie['options']['obligatoire'])
+		and $saisie['options']['obligatoire']
+		and !$valeur
+	) {
+		return _T('info_obligatoire');
+	}
+
+	// verifier (api) + normalisation
+	if (
+		$verifier
+		AND isset($saisie['verifier']['type'])
+		AND $verif = $saisie['verifier']['type']
+	) {
+		$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
+		$erreur = $verifier($valeur, $verif, $options, $normaliser);
+		if ($erreur) {
+			return $erreur;
+		}
+
+		// Si une valeur normalisée a ete transmise, c'est tout bon.
+		if (!is_null($normaliser)) {
+			return false;
+		}
+
+		// [FIXME] exceptions connues de vérifications (pour les dates entre autres)
+		// en attendant une meilleure solution !
+		//
+		// Lorsque le champ n'est pas rempli dans le formulaire
+		// alors qu'une normalisation est demandée,
+		// verifier() sort sans indiquer d'erreur (c'est normal).
+		//
+		// Sauf que la donnée alors soumise à SQL sera une chaine vide,
+		// ce qui ne correspond pas toujours à ce qui est attendu.
+		if ((is_string($valeur) and !strlen($valeur) or (is_array($valeur) and $saisie['saisie']=='date'))
+			and isset($options['normaliser'])
+			and $norme = $options['normaliser']) {
+			// Charger la fonction de normalisation théoriquement dans verifier/date
+			// et si on en trouve une, obtenir la valeur normalisée
+			// qui est théoriquement la valeur par défaut, puisque $valeur est vide
+			include_spip("verifier/$verif");
+			if ($f_normaliser = charger_fonction("${verif}_${norme}", "normaliser", true)) {
+				$erreur = null;
+				$normaliser = $f_normaliser($valeur, $options, $erreur);
+				if (!is_null($erreur)) {
+					return $erreur;
+				}
+				// On suppose la normalisation OK.
+				return false;
+			} else {
+				include_spip('inc/cextras');
+				extras_log("Fonction de normalisation pour ${verif}_${norme} introuvable");
+			}
+		}
+	}
+	return false;
+}
+
+
+/**
  * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
  * Trouver le bon label à afficher sur les champs dans les listes de révisions
- * 
+ *
  * Si un champ est un champ extra, son label correspond au label défini du champs extra
- * 
+ *
  * @pipeline revisions_chercher_label
  * @param array $flux Données du pipeline
  * @return array      Données du pipeline
-**/ 
+**/
 function cextras_revisions_chercher_label($flux) {
 	$table = table_objet_sql($flux['args']['objet']);
 	$saisies_tables = champs_extras_objet($table);
@@ -368,7 +423,8 @@ function cextras_revisions_chercher_label($flux) {
  * html `<!--extra-->` est présent dans le formulaire.
  *
  * @see cextras_obtenir_saisies_champs_extras() qui aide à récupérer les saisies.
- * 
+ *
+ * @pipeline formulaire_fond
  * @param array $flux
  * @return array
 **/
@@ -387,5 +443,99 @@ function cextras_formulaire_fond($flux) {
 			$flux['data']
 		);
 	}
+	return $flux;
+}
+
+
+/**
+ * Définir une fonction de contrôleur pour Crayons si on tente d'éditer un champs extras.
+ *
+ * Si on édite un champs extras avec Crayons, sans avoir créé manuellement de contrôleur spécifique
+ * pour le champ en question, Crayons propose soit un textarea, soit un input.
+ *
+ * Vu que l'on connaît les déclarations de nos champs extras, on va les utiliser pour créer
+ * un formulaire d'édition plus adapté à notre champ.
+ *
+ * @pipeline crayons_controleur
+ * @param array $flux
+ * @return array
+ */
+function cextras_crayons_controleur($flux) {
+	// si Crayons a déjà trouvé de contrôleur PHP, on ne fait rien
+	if ($flux['data'] != 'controleur_dist') {
+		return $flux;
+	}
+
+	$type = $flux['args']['type'];
+	$champ = $flux['args']['champ'];
+
+	// controleur_dist teste aussi la présence des controleurs html…
+	if (find_in_path(($controleur = 'controleurs/' . $type . '_' . $champ) . '.html')) {
+		return $flux;
+	}
+	if (find_in_path(($controleur = 'controleurs/' . $champ) .'.html')) {
+		return $flux;
+	}
+
+	$id = $flux['args']['id'];
+	$table = table_objet_sql($type);
+
+	// Il n'existe pas de controleur spécifique pour ce champ. Voyons si ce champ est un champs extra
+	$saisies = champs_extras_objet($table);
+	// Restreindre aux vrais champs en bdd
+	$saisies = champs_extras_saisies_lister_avec_sql($saisies);
+	// Trouver notre saisie, si le champ est bien un champs extras
+	$saisie = saisies_chercher($saisies, $champ);
+
+	if ($saisie) {
+		$flux['data'] = charger_fonction('champs_extras', 'controleurs');
+	}
+
+	return $flux;
+}
+
+/**
+ * Vérifier une saisie envoyée depuis un formulaire de Crayons.
+ *
+ * @pipeline crayons_verifier
+ * @param array $flux
+ * @return array
+ */
+function cextras_crayons_verifier($flux) {
+	// Le nom du modèle envoyé par le controleur/champs_extras.
+	if ($flux['args']['modele'] != 'champs_extras') {
+		return $flux;
+	}
+
+	$type = $flux['args']['type'];
+	$table = table_objet_sql($type);
+	$valeurs = $flux['args']['content'];
+
+	// Récupérer les saisies SQL de la table
+	$saisies = champs_extras_objet($table);
+	$saisies = champs_extras_saisies_lister_avec_sql($saisies);
+
+	foreach ($valeurs as $champ => $valeur) {
+		if ($saisie = saisies_chercher($saisies, $champ)) {
+			spip_log($saisie, 'mm');
+			$nom = $saisie['options']['nom'];
+
+			// Crayons applatit les name envoyés sous forme de tableau (lorsque name="truc[]").
+			// On récupère les véritables valeurs dans ce cas. Autrement la saisie 'date'
+			// n'arrive pas à retrouver ses petits
+			$key = 'content_' . $flux['args']['wid'] . '_' . $champ;
+			$valeur = _request($key);
+
+			$normaliser = null;
+			$erreur = cextras_verifier_saisie($saisie, $valeur, $normaliser, true);
+			if ($erreur) {
+				$flux['data']['erreurs'][$nom] = $erreur;
+			} elseif (!is_null($normaliser)) {
+				$flux['data']['normaliser'][$nom] = $normaliser;
+			}
+		}
+	}
+
+	spip_log($flux, 'mm');
 	return $flux;
 }

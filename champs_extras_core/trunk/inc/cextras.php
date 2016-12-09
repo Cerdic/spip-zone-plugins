@@ -73,7 +73,6 @@ function champs_extras_saisies_lister_avec_sql($saisies) {
 }
 
 
-
 /**
  * Liste les saisies ayant des traitements
  *
@@ -91,6 +90,32 @@ function saisies_lister_avec_traitements($saisies, $tri = 'nom') {
 	return saisies_lister_avec_option('traitements', $saisies, $tri);
 }
 
+/**
+ * Déclarer la classe spécifique à crayons, permettant l'édition d'un champ
+ *
+ * On complète (ou crée) l'option 'vue_class' avec la classe pour crayonner.
+ *
+ * @param array $saisies
+ * @param string $type
+ * @param int $id
+ */
+function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
+	include_spip('crayons_fonctions');
+	if (function_exists('classe_boucle_crayon')) {
+		foreach ($saisies as $i => $saisie) {
+			if (!isset($saisie['options']['vue_class'])) {
+				$saisie['options']['vue_class'] = '';
+			}
+			$saisie['options']['vue_class'] = trim(
+				$saisie['options']['vue_class']
+				. ' '
+				. classe_boucle_crayon($type, $saisie['options']['nom'], $id)
+			);
+			$saisies[$i] = $saisie;
+		}
+	}
+	return $saisies;
+}
 
 
 /**
