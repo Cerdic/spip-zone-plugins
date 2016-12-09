@@ -109,6 +109,34 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
 }
 
 /**
+ * Liste les saisies d'un certain type
+ *
+ * @example `$saisies_date = saisies_lister_avec_type($saisies, 'date')`
+ *
+ * @param Array  $saisies liste de saisies
+ * @param string $type Type de la saisie
+ * @param String $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom', 'identifiant')
+ *
+ * @return liste de ces saisies triees par nom ayant une option sql définie
+ */
+function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
+	$saisies_type = array();
+	// tri par nom si ce n'est pas le cas
+	$s = array_keys($saisies);
+	if (is_int(array_shift($s))) {
+		$trier = 'saisies_lister_par_'.$tri;
+		$saisies = $trier($saisies);
+	}
+	foreach ($saisies as $nom_ou_id => $saisie) {
+		if ($saisie['saisie'] == $type) {
+			$saisies_option[$nom_ou_id] = $saisie;
+		}
+	}
+
+	return $saisies_option;
+}
+
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * les saisies "à plat" classées par type de saisie.
  * $saisie['input']['input_1'] = $saisie.
