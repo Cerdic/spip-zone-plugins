@@ -192,32 +192,11 @@ function cextras_pre_edition($flux){
 function cextras_afficher_contenu_objet($flux){
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
-	include_spip('inc/cextras');
-	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
-		// ajouter au contexte les noms et valeurs des champs extras
-		$saisies_sql = champs_extras_saisies_lister_avec_sql($saisies);
-		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($flux['args']['id_objet']));
-		if (!$valeurs) {
-			$valeurs = array();
-		} else {
-			$valeurs = cextras_appliquer_traitements_saisies($saisies_sql, $valeurs);
-		}
-
-		$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array();
-		$contexte = array_merge($contexte, $valeurs);
-
-		// restreindre la vue selon les autorisations
-		$saisies = champs_extras_autorisation('voir', $objet, $saisies, $flux['args']);
-		// insérer la classe CSS pour crayons
-		$saisies = champs_extras_saisies_inserer_classe_crayons($saisies, $objet, $flux['args']['id_objet']);
-
-		// ajouter les vues
-		$flux['data'] .= recuperer_fond('inclure/voir_saisies', array_merge($contexte, array(
-					'saisies' => $saisies,
-					'valeurs' => $valeurs,
-		)));
+	include_spip('cextras_fonctions');
+	$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array();
+	if ($html = champs_extras_voir_saisies($objet, $flux['args']['id_objet'], $contexte)) {
+		$flux['data'] .= $html;
 	}
-
 	return $flux;
 }
 

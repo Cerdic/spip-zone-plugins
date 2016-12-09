@@ -305,3 +305,72 @@ function calculer_balise_LISTER_VALEURS($objet, $colonne, $cles) {
 	// et voici les valeurs !
 	return $vals ? $vals : $cles;
 }
+
+
+/**
+ * Retourne le HTML de la vue des champs extras de la table
+ *
+ * @example
+ *     ```
+ *     <BOUCLE_x(TABLE)>
+ *     #VOIR_CHAMPS_EXTRAS
+ *     </BOUCLE_x>
+ *     ```
+ *
+ * @balise
+ * @param Champ $p
+ *     AST au niveau de la balise
+ * @return Champ
+ *     AST complété par le code PHP de la balise
+ **/
+function balise_VOIR_CHAMPS_EXTRAS_dist($p) {
+	// prendre nom de la cle primaire de l'objet pour calculer sa valeur
+	$id_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$objet = $p->boucles[$id_boucle]->id_table;
+	$_id_objet = $p->boucles[$id_boucle]->primary;
+	$id_objet = champ_sql($_id_objet, $p);
+
+	$p->code = "champs_extras_voir_saisies('$objet', $id_objet)";
+	return $p;
+}
+
+/**
+ * Retourne le HTML des vues des champs extras d'un objet
+ *
+ * @param string $objet Type d'objet
+ * @param int $id_objet Identifiant de l'objet
+ * @param array $contexte Contexte éventuel
+ * @return string Code HTML
+ */
+function champs_extras_voir_saisies($objet, $id_objet, $contexte = array()) {
+	include_spip('cextras_pipelines');
+	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
+		include_spip('inc/cextras');
+		// ajouter au contexte les noms et valeurs des champs extras
+		$saisies_sql = champs_extras_saisies_lister_avec_sql($saisies);
+		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($id_objet));
+		if (!$valeurs) {
+			$valeurs = array();
+		} else {
+			$valeurs = cextras_appliquer_traitements_saisies($saisies_sql, $valeurs);
+		}
+
+		// restreindre la vue selon les autorisations
+		$saisies = champs_extras_autorisation('voir', $objet, $saisies, array(
+			'objet' => $objet,
+			'id_objet' => $id_objet,
+			'contexte' => $contexte,
+		));
+		// insérer la classe CSS pour crayons
+		$saisies = champs_extras_saisies_inserer_classe_crayons($saisies, $objet, $id_objet);
+
+		$contexte = array_merge($contexte, $valeurs, array(
+			'saisies' => $saisies,
+			'valeurs' => $valeurs,
+		));
+
+		// ajouter les vues
+		return recuperer_fond('inclure/voir_saisies', $contexte);
+	}
+	return '';
+}
