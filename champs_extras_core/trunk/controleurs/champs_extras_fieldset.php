@@ -27,6 +27,20 @@ function controleurs_champs_extras_fieldset_dist($regs, $c = null) {
 		return array("cextras > $type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
 	}
 
+	// Éviter que le style CSS du label du fieldset soit utilisé pour les champs
+	foreach (array(
+		'color',
+		'font-size',
+		'font-family',
+		'font-weight',
+	    'line-height',
+		'min-height',
+		'text-align',
+		'background-color'
+	) as $property) {
+		set_request($property, null);
+	}
+
 	$n = new Crayon(
 		$type . '-champs_extras-' . $id,
 		$valeurs,
