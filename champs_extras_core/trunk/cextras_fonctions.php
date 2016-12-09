@@ -361,6 +361,7 @@ function champs_extras_voir_saisies($objet, $id_objet, $contexte = array()) {
 			'id_objet' => $id_objet,
 			'contexte' => $contexte,
 		));
+
 		// insérer la classe CSS pour crayons
 		$saisies = champs_extras_saisies_inserer_classe_crayons($saisies, $objet, $id_objet);
 

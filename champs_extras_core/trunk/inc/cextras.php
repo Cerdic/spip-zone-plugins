@@ -102,7 +102,7 @@ function saisies_lister_avec_traitements($saisies, $tri = 'nom') {
 function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 	include_spip('crayons_fonctions');
 	if (function_exists('classe_boucle_crayon')) {
-		foreach ($saisies as $i => $saisie) {
+		foreach ($saisies as $cle => $saisie) {
 			if (!isset($saisie['options']['vue_class'])) {
 				$saisie['options']['vue_class'] = '';
 			}
@@ -111,7 +111,10 @@ function champs_extras_saisies_inserer_classe_crayons($saisies, $type, $id) {
 				. ' '
 				. classe_boucle_crayon($type, $saisie['options']['nom'], $id)
 			);
-			$saisies[$i] = $saisie;
+			if (!empty($saisie['saisies'])) {
+				$saisie['saisies'] = champs_extras_saisies_inserer_classe_crayons($saisie['saisies'], $type, $id);
+			}
+			$saisies[$cle] = $saisie;
 		}
 	}
 	return $saisies;

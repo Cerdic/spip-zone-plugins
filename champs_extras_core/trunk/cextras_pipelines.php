@@ -49,7 +49,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 	if (!$saisies) return array();
 	include_spip('inc/autoriser');
 
-	foreach ($saisies as $cle=>$saisie) {
+	foreach ($saisies as $cle => $saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
 		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
 			'type' => $quoi,
@@ -66,8 +66,8 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 		{
 			// on est autorise
 			// on teste les sous-elements
-			if (isset($saisie['saisies']) and $saisie['saisies']) {
-				$saisies['saisies'] = champs_extras_autorisation($faire, $quoi, $saisie['saisies'], $args);
+			if (!empty($saisie['saisies'])) {
+				$saisies[$cle]['saisies'] = champs_extras_autorisation($faire, $quoi, $saisie['saisies'], $args);
 			}
 		}
 	}
