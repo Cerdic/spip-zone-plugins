@@ -120,14 +120,14 @@ function importer_evenement($objet_evenement,$id_almanach,$id_article,$decalage,
 	autoriser_exception('instituer','evenement',$id_evenement);
 	autoriser_exception('modifier','article',$id_article);
 	objet_instituer('evenement',$id_evenement,array("statut"=>$statut));
-	autoriser_exception('instituer','evenement',$id_evenement,false);
-	autoriser_exception('modifier','article',$id_article,false);
-
 	// lier les mots
 	objet_associer(
 		array('mot'=>$mots),
 		array('evenement'=>$id_evenement)
 	);
+	autoriser_exception('instituer','evenement',$id_evenement,false);
+	autoriser_exception('modifier','article',$id_article,false);
+
 	
 	#on associe l'événement à l'almanach
 	objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));	

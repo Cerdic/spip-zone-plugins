@@ -136,7 +136,7 @@ function import_ics_post_edition($flux) {
 
 
 /**
- * Inserer les infos d'almach sur les articles
+ * Inserer les infos d'almanach sur les articles
  *
  * @param array $flux
  * @return array
