@@ -268,7 +268,7 @@ function saisies_transformer_noms_auto($formulaire, $saisies) {
 			unset($new['saisies']);
 			$formulaire[] = $new;
 
-			if (is_array($saisie['saisies'])) {
+			if (isset($saisie['saisies']) and is_array($saisie['saisies'])) {
 				$saisies[$cle]['saisies'] = saisies_transformer_noms_auto($formulaire, $saisie['saisies']);
 			}
 		}
