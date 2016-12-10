@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'import_ics_titre' => 'Import_ics',
+
 	// T
 	'titre_configuration' => 'Configurer les almanachs',
 
