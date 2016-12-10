@@ -99,9 +99,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	// Si besoin, on récupère les anciennes versions de certains champs
 	if ($id_almanach!='new'){
 		$ancien_decalage = array();
-		$ancien_decalage['ete'] = sql_getfetsel("decalage_ete","spip_almanachs","id_almanach=$id_almanach");
-		$ancien_decalage['hiver'] = sql_getfetsel("decalage_hiver","spip_almanachs","id_almanach=$id_almanach");
-		$ancien_id_article = sql_getfetsel("id_article","spip_almanachs","id_almanach=$id_almanach");
+		$anciens_champs = sql_fetsel("decalage_ete,decalage_hiver,id_article,url","spip_almanachs","id_almanach=$id_almanach");
+		$ancien_decalage['ete'] = $anciens_champs['decalage_ete'];
+		$ancien_decalage['hiver'] = $anciens_champs['decalage_hiver'];
+		$ancien_id_article = $anciens_champs['id_article'];
+		$ancien_url = $anciens_champs['url'];
 	}
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	
@@ -120,6 +122,10 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 		if(is_array($evenements) and count($evenements)>0){
 			corriger_decalage($id_almanach,$decalage,$ancien_decalage,$evenements);
 			corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$evenements);
+		}
+		if ($url!=$ancien_url){// si jamais on a changé l'url => du passé faisons table rase
+			include_spip('action/supprimer_evenements_almanach');
+			action_supprimer_evenements_almanach_post($id_almanach);
 		}
 	}
 	# on importe les autres évènement
