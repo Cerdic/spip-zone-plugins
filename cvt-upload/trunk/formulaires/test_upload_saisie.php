@@ -10,7 +10,8 @@ function formulaires_test_upload_saisie_charger(){
 			'saisie'=>'input',
 			'options'=>array(
 				'nom'=>'tromperie',
-				'label'=>'Si c\'est rempli, on se trompe'
+				'label'=>'Si c\'est rempli, on se trompe',
+				'defaut'=>_request('tromperie')
 			)
 		),
 		array(
