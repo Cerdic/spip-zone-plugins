@@ -112,8 +112,8 @@ function [(#PREFIXE)]_affiche_milieu($flux) {
 	}</BOUCLE_si_affiche_milieu_auteurs>
 
 <BOUCLE_objet_liens_sur_objet(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}})}>
-	// #LOBJET sur les [(#VAL{table_objet}|array_map{#VUE_LIENS}|implode{', '})]
-	if (!$e['edition'] and in_array($e['type'], array('[(#VAL{objet_type}|array_map{#VUE_LIENS}|implode{"', '"})]'))) {
+	// #LOBJET sur les [(#VUE_LIENS|fabrique_array_map{table_objet, #OBJETS}|implode{', '})]
+	if (!$e['edition'] and in_array($e['type'], array('[(#VUE_LIENS|fabrique_array_map{objet_type, #OBJETS}|implode{"', '"})]'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => '#LOBJET',
 			'objet' => $e['type'],

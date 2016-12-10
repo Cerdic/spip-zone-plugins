@@ -1327,6 +1327,25 @@ function fabrique_parent($objet, $objets) {
 }
 
 /**
+ * Appliquer un équivalent d'array_map sur une des fonctions de la fabrique
+ *
+ * @param array $tableau
+ * @param string $fonction
+ * @param array $objets
+ * @return array
+ */
+function fabrique_array_map($tableau, $fonction, $objets) {
+	if (function_exists($f = 'fabrique_' . $fonction)) {
+		foreach ($tableau as $i => $valeur) {
+			$tableau[$i] = $f($valeur, $objets);
+		}
+	} elseif (function_exists($fonction)) {
+		$tableau = array_map($fonction, $tableau);
+	}
+	return $tableau;
+}
+
+/**
  * Retrouve la clé primaire d'un objet éditorial
  *
  * D'abord en cherchant dans les déclaration de la Fabrique,
