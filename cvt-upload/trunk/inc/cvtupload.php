@@ -69,18 +69,20 @@ function cvtupload_generer_html($infos_fichiers = null) {
 }
 
 /**
- * Déplace un fichier uploadé dans un endroit temporaire et retourne des informations dessus
- *
+ * Déplace un fichier uploadé dans un endroit temporaire et retourne des informations dessus.
+ * Modifie également $_FILES pour que ce soit transparent pour les traitements qui viennent ensuite.
  * @param array $fichier
  * 		Le morceau de $_FILES concernant le ou les fichiers
  * @param string $repertoire
  * 		Chemin de destination des fichiers
  * @param string $form
  * 		Formulaire d'où ça vient
+ * @param string $champ
+ *		Champ HTML d'où ca vient
  * @return array
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  **/
-function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
+function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $champ) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	
@@ -109,6 +111,9 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
 					$infos[$cle]['mime'] = $fichier['type'][$cle];
 					$infos[$cle]['form'] = $form;
 					$infos[$cle]['infos_encodees'] = encoder_contexte_ajax($infos[$cle], $form);
+					//On modifie $_FILES 
+					$_FILES[$champ]['name'][$cle] = $nom;
+					$_FILES[$champ]['tmp_name'][$cle] = $chemin_aleatoire;
 				}
 			}
 		}
@@ -134,6 +139,9 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
 				$infos['mime'] = $fichier['type'];
 				$infos['form'] = $form;
 				$infos['infos_encodees'] = encoder_contexte_ajax($infos, $form);
+				//Et on modifie $_FILES
+				$_FILES[$champ]['tmp_name'] = $chemin_aleatoire;
+				$_FILES[$champ]['name'] = $nom;
 			}
 		}
 	}

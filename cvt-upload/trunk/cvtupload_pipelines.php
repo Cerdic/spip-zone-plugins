@@ -75,11 +75,11 @@ function cvtupload_formulaire_verifier($flux) {
 				}
 			}
 			
-			// On déplace le fichier dans notre dossier tmp de SPIP
-			// Et on met à jour les infos par rapport aux anciennes
+			// On déplace le(s) fichier(s) dans notre dossier tmp de SPIP
+			// Et on met à jour les infos par rapport aux anciennes versions
 			if (
 				isset($_FILES[$champ])
-				and $infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp, $flux['args']['form'])
+				and $infos = cvtupload_deplacer_fichier($_FILES[$champ], $repertoire_tmp, $flux['args']['form'],$champ)
 			){
 				if (isset($infos_fichiers[$champ])) {
 					$infos_fichiers[$champ] = array_merge($infos_fichiers[$champ], $infos);
