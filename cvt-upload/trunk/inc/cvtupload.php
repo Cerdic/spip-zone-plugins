@@ -33,7 +33,7 @@ function cvtupload_chercher_fichiers($form, $args) {
 }
 
 /**
- * Génére le HTML de chaque fichier déjà uploadés
+ * Génére le HTML de chaque fichier déjà uploadé
  * 
  * @param array $infos_fichiers
  * 		Talbeau contenant les informations pour chaque champ de fichier
