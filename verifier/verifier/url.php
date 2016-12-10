@@ -32,7 +32,7 @@ function verifier_url_dist($valeur, $options = array()) {
 	}
 
 	// Choix du type de protocole à vérifier
-	if (!$options['type_protocole'] or !in_array($options['type_protocole'], array('tous','web','mail','ftp','exact'))) {
+	if (!$options['type_protocole'] or !in_array($options['type_protocole'], array('tous','web','mail','ftp','webcal_souple','webcal_strict','exact'))) {
 		$type_protocole = 'web';
 	} else {
 		$type_protocole = $options['type_protocole'];
@@ -52,7 +52,7 @@ function verifier_url_dist($valeur, $options = array()) {
  * Vérifier uniquement la présence d'un protocole
  *
  * @param string $valeur La valeur à vérifier
- * @param string $type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), exact
+ * @param string $type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), webcal (webcal, http, https), exact
  * @param string $protocole : nom du protocole (si type_protocole=exact)
  * @return boolean Retourne true uniquement lorsque l'url est valide
  */
@@ -63,6 +63,7 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
 		'web' => '#^(https?)\:\/\/.*$# i',
 		'ftp' => '#^(s?ftp)\:\/\/.*$# i',
 		'mail' => '#^(pop3|smtp|imap)\:\/\/.*$# i',
+		'webcal' => '#^(webcal|https?)\:\/\/.*$# i',
 		'exact' => '#^(".$protocole.")\:\/\/.*$# i'
 	);
 
@@ -71,6 +72,7 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
 		'web' => 'http://, https://',
 		'ftp' => '^ftp://, sftp://',
 		'mail' => 'pop3://, smtp://, imap://',
+		'webcal' => 'webcal://, http://, https://',
 		'exact' => $protocole.'://'
 	);
 
@@ -89,7 +91,7 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
  * Vérifier uniquement la présence d'un protocole
  *
  * @param string $valeur La valeur à vérifier
- * @param string $type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), exact
+ * @param string $type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), webcal (webcal, http, https), exact
  * @param string $protocole : nom du protocole (si type_protocole=exact)
  * @return boolean Retourne true uniquement lorsque l'url est valide
  */
@@ -108,7 +110,7 @@ function verifier_php_filter($url, $type_protocole, $protocole) {
  * <http[s]|ftp> :// [user[:pass]@] hostname [port] [/path] [?getquery] [anchor]
  *
  * @param string $valeur La valeur à vérifier
- * @param string $type_protocole : web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), exact
+ * @param string $type_protocole : web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), webcal (webcal, http, https), exact
  * @param string $protocole : nom du protocole (si type_protocole=exact)
  * @return boolean Retourne true uniquement lorsque l'url est valide
  */

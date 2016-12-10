@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp',
 	'option_url_type_protocole_tous' => 'Tous protocoles acceptés',
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https',
-
+	'option_url_type_protocole_webcal' => 'Protocoles webcal : webcal, http ou https',
 	// T
 	'type_code_postal' => 'Code postal',
 	'type_code_postal_description' => 'Vérifie que la valeur est un code postal valide.',

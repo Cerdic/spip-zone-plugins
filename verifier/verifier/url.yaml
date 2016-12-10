@@ -22,6 +22,7 @@ options:
         web: '<:verifier:option_url_type_protocole_web:>'
         mail: '<:verifier:option_url_type_protocole_mail:>'
         ftp: '<:verifier:option_url_type_protocole_ftp:>'
+        webcal: '<:verifier:option_url_type_protocole_webcal:>'
         exact: '<:verifier:option_url_type_protocole_exact:>'
       defaut: 'web'
   -
