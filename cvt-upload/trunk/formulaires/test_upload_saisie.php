@@ -77,6 +77,7 @@ function formulaires_test_upload_saisie_traiter(){
 	$retours = array('message_ok' => 'Il ne se passe rien.');
 	
 	$fichiers = _request('_fichiers');
+	var_dump($_FILES);
 	var_dump($fichiers);
 	
 	return $retours;
