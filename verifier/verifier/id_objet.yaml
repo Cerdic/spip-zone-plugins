@@ -1,3 +1,9 @@
 
-titre: '<:verifier:type_id_document:>'
-description: '<:verifier:type_id_document_description:>'
+titre: '<:verifier:type_id_objet:>'
+description: '<:verifier:type_id_objet_description:>'
+options:
+  -
+    saisie: 'input'
+    options:
+      nom: 'objet'
+      label: '<:verifier:option_id_objet_objet_label:>'
