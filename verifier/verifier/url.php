@@ -44,7 +44,6 @@ function verifier_url_dist($valeur, $options = array()) {
 
 	$fonctions_disponibles = array('protocole_seul' => 'verifier_url_protocole', 'php_filter' => 'verifier_php_filter', 'complet' => 'verifier_url_complet');
 	$fonction_verif = $fonctions_disponibles[$mode];
-
 	return $fonction_verif($valeur,$type_protocole,$protocole) ;
 }
 
@@ -97,7 +96,7 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
  * @return boolean Retourne true uniquement lorsque l'url est valide
  */
 function verifier_php_filter($url, $type_protocole, $protocole) {
-	if ($msg = verifier_url_protocole($url, $type_protocole, $protocole) != '') {
+	if ($msg = verifier_url_protocole($url, $type_protocole, $protocole)) {
 		return $msg;
 	}
 	if (!filter_var($url, FILTER_VALIDATE_URL)) {
@@ -119,7 +118,7 @@ function verifier_php_filter($url, $type_protocole, $protocole) {
  */
 function verifier_url_complet($url, $type_protocole, $protocole) {
 
-	if ($msg = verifier_url_protocole($url, $type_protocole, $protocole) != '') {
+	if ($msg = verifier_url_protocole($url, $type_protocole, $protocole)) {
 		return $msg;
 	}
 	// SCHEME
