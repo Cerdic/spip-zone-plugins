@@ -70,19 +70,16 @@ function cvtupload_generer_html($infos_fichiers = null) {
 
 /**
  * Déplace un fichier uploadé dans un endroit temporaire et retourne des informations dessus.
- * Modifie également $_FILES pour que ce soit transparent pour les traitements qui viennent ensuite.
  * @param array $fichier
  * 		Le morceau de $_FILES concernant le ou les fichiers
  * @param string $repertoire
  * 		Chemin de destination des fichiers
  * @param string $form
  * 		Formulaire d'où ça vient
- * @param string $champ
- *		Champ HTML d'où ca vient
  * @return array
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  **/
-function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $champ) {
+function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	
@@ -109,11 +106,10 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $champ) {
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 					//On récupère le type MIME du fichier aussi
 					$infos[$cle]['mime'] = $fichier['type'][$cle];
+					$infos[$cle]['taille'] = $fichier['size'][$cle];
+					// On stocke des infos sur le formulaire
 					$infos[$cle]['form'] = $form;
 					$infos[$cle]['infos_encodees'] = encoder_contexte_ajax($infos[$cle], $form);
-					//On modifie $_FILES 
-					$_FILES[$champ]['name'][$cle] = $nom;
-					$_FILES[$champ]['tmp_name'][$cle] = $chemin_aleatoire;
 				}
 			}
 		}
@@ -135,18 +131,72 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $champ) {
 				// On en déduit l'extension et du coup la vignette
 				$infos['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name']));
 				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
-				//On récupère le type MIME du fichier aussi
+				//On récupère le type MIME du fichier aussi, ainsi que la taille
 				$infos['mime'] = $fichier['type'];
+				$infos['taille'] = $fichier['size'];
+				// On stocke des infos sur le formulaire
 				$infos['form'] = $form;
 				$infos['infos_encodees'] = encoder_contexte_ajax($infos, $form);
-				//Et on modifie $_FILES
-				$_FILES[$champ]['tmp_name'] = $chemin_aleatoire;
-				$_FILES[$champ]['name'] = $nom;
 			}
 		}
 	}
 	
 	return $infos;
+}
+
+/**
+ * Modifier $_FILES pour que le nom et le chemin du fichier temporaire 
+ * correspondent à ceux qu'on a défini dans cvtupload_deplacer_fichier().
+ * Cela permet aux traitements ultérieurs 
+ * de ne pas avoir à se préoccuper de l'emploi ou non de cvtupload.
+ *
+ * @param $infos_fichiers 
+ *  Information sur les fichiers tels que déplacés par cvtupload_deplacer_fichier()
+ * @return void
+**/
+function cvtupload_modifier_files($infos_fichiers) {
+	foreach ($infos_fichiers as $champ => $description) {
+		if (isset($description['tmp_name'])){//Upload unique
+			 $_FILES[$champ] = array();//On surcharge tout la description $_FILES pour ce champ.  Dans tous les cas les infos ont été stockées dans $description
+			 $_FILES[$champ]['name'] = $description['name'];
+			 $_FILES[$champ]['tmp_name'] = $description['tmp_name'];
+			 $_FILES[$champ]['type'] = $description['mime'];
+			 $_FILES[$champ]['error'] = 0; //on fait comme s'il n'y avait pas d'erreur, ce qui n'est pas forcément vrai…
+			 $_FILES[$champ]['size'] = $description['taille']; 
+		}
+		else {//Upload multiple
+			//On surcharge tout la description $_FILES pour ce champ. Dans tous les cas les infos ont été stockées dans $description
+			$old_FILES_champ = $_FILES[$champ];
+			$_FILES[$champ]['name'] = array();
+			$_FILES[$champ]['tmp_name'] = array();
+			$_FILES[$champ]['type'] = array();
+			$_FILES[$champ]['error'] = array();
+			$_FILES[$champ]['size'] = array();
+			// Et on re-rempli à partir de $description
+			foreach ($description as $fichier_individuel => $description_fichier_individuel) {
+				$_FILES[$champ]['name'][$fichier_individuel] = $description_fichier_individuel['name'];
+				$_FILES[$champ]['tmp_name'][$fichier_individuel] = $description_fichier_individuel['tmp_name'];
+				$_FILES[$champ]['type'][$fichier_individuel] = $description_fichier_individuel['mime'];
+				$_FILES[$champ]['error'][$fichier_individuel] = 0; //on fait comme s'il n'y avait pas d'erreur, ce qui n'est pas forcément vrai…
+				$_FILES[$champ]['size'][$fichier_individuel] = $description_fichier_individuel['taille']; 		
+			}
+			// Si on vient d'envoyer un ou plusieur $champ[] vide, on les rajoute dans notre nouveau $FILES
+			foreach ($old_FILES_champ['error'] as $id_fichier_individuel => $error_fichier_individuel){
+				if ($error_fichier_individuel!=0){//Uniquement les erreurs
+					$_FILES[$champ]['name'][$id_fichier_individuel] = $old_FILES_champ['name'][$id_fichier_individuel];
+					$_FILES[$champ]['tmp_name'][$id_fichier_individuel] = $old_FILES_champ['tmp_name'][$id_fichier_individuel];
+					$_FILES[$champ]['type'][$id_fichier_individuel] = $old_FILES_champ['type'][$id_fichier_individuel];
+					$_FILES[$champ]['error'][$id_fichier_individuel] = $old_FILES_champ['error'][$id_fichier_individuel];
+					$_FILES[$champ]['size'][$id_fichier_individuel] = $old_FILES_champ['size'][$id_fichier_individuel];
+				}
+			}
+			// On remet de l'ordre dans champ dans chaque tableau correspondant à une propriété de $_FILES, histoire d'avoir 0,1,2,3 et pas 3,1,0,2
+			foreach ($_FILES[$champ] as $propriete => $valeurs_propriete) {
+				ksort($valeurs_propriete);
+				$_FILES[$champ][$propriete] = $valeurs_propriete;
+			}
+		}
+	}
 }
 
 /**
