@@ -199,7 +199,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true) {
 	foreach ($saisies as $saisie) {
 		$obligatoire = isset($saisie['options']['obligatoire']) ? $saisie['options']['obligatoire'] : '';
 		$champ = $saisie['options']['nom'];
-		$file = ($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file');
+		$file = (($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file') or $saisie['saisie'] == 'fichiers');
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
 
 		// Si le nom du champ est un tableau indexé, il faut parser !
