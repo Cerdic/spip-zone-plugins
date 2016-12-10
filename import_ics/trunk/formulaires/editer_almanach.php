@@ -66,7 +66,19 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 	$id_article=str_replace("article|","",$le_id_article[0]);
 	set_request("id_article",$id_article);
 	$erreurs = formulaires_editer_objet_verifier('almanach',$id_almanach, array('titre', 'url', 'id_article'));
-
+	
+	$verifier = charger_fonction('verifier', 'inc/');
+	$erreur_url = $verifier(
+			_request('url'),
+			'url',
+			array(
+				'mode'=>'php_filter',
+				'type_protocole'=>'webcal'
+			)
+		);
+  if ($erreur_url){
+		$erreurs['url'] = $erreur_url;
+	}
   if ($erreurs["id_article"]){
 		$erreurs["le_id_article"]=$erreurs["id_article"];
 		unset($erreurs["id_article"]);
