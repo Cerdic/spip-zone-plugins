@@ -1,8 +1,7 @@
 - Lorsqu'un fichier est uploadé, il est ajouté comme document, comme un fichier classique
-- On stocke dans des champs extras des métas-données tel que:
+- On stocke dans un champs extra des métas-données tel que: (finalement si
 	- le nom du formulaire qui a envoyé le fichier 
 	- le champ concerné
-	- la date d'envoie
 - Par ailleurs, si on utilise formidable:
 	- si on enregistre les réponses, on lie le document à la réponse
 	- si on envoie l'info par courriel, on ajoute un lien vers le fichiers distant
