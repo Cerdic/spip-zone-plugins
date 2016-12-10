@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'last_modified_distant' => 'Dernière modification distante',
 	'lien_synchro_almanach' => 'Mettre à jour cet almanach maintenant',
 	'lieu' => 'Lieu',
+
 	// N
 	'notes' => 'Notes',
 
