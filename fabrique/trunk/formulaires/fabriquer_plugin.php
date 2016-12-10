@@ -469,7 +469,8 @@ function formulaires_fabriquer_plugin_traiter_dist(){
 	// creer les images
 	// logo du plugin
 	$images = session_get(FABRIQUE_ID_IMAGES);
-	if ($i = $images['paquet']['logo'][0]['fichier']) {
+	if (!empty($images['paquet']['logo'][0]['fichier'])) {
+		$i = $images['paquet']['logo'][0]['fichier'];
 		fabriquer_miniature($prefixe, $i, $prefixe, 128);
 		fabriquer_miniature($prefixe, $i, $prefixe, 64);
 		fabriquer_miniature($prefixe, $i, $prefixe, 32);
