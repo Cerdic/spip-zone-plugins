@@ -88,7 +88,8 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
 }
 
 /**
- * Vérifier uniquement la présence d'un protocole
+ * Vérifier la présence d'un protocole,
+ * puis utilise le filtre FILTER_VALIDATE_URL de PHP pour s'assurer que l'url est complète
  *
  * @param string $valeur La valeur à vérifier
  * @param string $type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), webcal (webcal, http, https), exact
@@ -96,7 +97,9 @@ function verifier_url_protocole($url, $type_protocole, $protocole) {
  * @return boolean Retourne true uniquement lorsque l'url est valide
  */
 function verifier_php_filter($url, $type_protocole, $protocole) {
-
+	if ($msg = verifier_url_protocole($url, $type_protocole, $protocole) != '') {
+		return $msg;
+	}
 	if (!filter_var($url, FILTER_VALIDATE_URL)) {
 		return _T('verifier:erreur_url', array('url' => echapper_tags($valeur)));
 	}
