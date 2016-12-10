@@ -122,12 +122,25 @@ function cvtupload_formulaire_fond($flux) {
 					// Sinon c'est un multiple
 					else {
 						foreach ($fichiers[$champ] as $cle=>$html) {
+							$regexp_par_cle = "#<input[^>]*name=['\"]${champ}(?:\&\#91;|\[)${cle}(?:\&\#93;|\])[^>]*>#i";// cherche les <input name="champ[cle]"> ou <input name="champ#91;cle#93;">
+							$regexp_alternative = "#<input[^>]*name=['\"]${champ}[^>]*>#i";
+							
+							// On commence par chercher si on a un name avec clé numérique explicite
 							$flux['data'] = preg_replace(
-								"#<input[^>]*name=['\"]${champ}[^>]*>#i",
+								$regexp_par_cle,
 								$html,
 								$flux['data'],
-								1 // seul le premier trouvé est remplacé
+								1, // seul le premier trouvé est remplacé
+								$remplacement_effectue
 							);
+							if ($remplacement_effectue==0) {// Si pas de name avec clef numérique correspondante, on modifie le premier name avec clé implicite
+								$flux['data'] = preg_replace(
+									$regexp_alternative,
+									$html,
+									$flux['data'],
+									1 // seul le premier trouvé est remplacé
+								);
+							}
 						}
 					}
 				}
