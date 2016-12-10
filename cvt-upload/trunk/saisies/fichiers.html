@@ -2,6 +2,6 @@
 <BOUCLE_input(DATA) {enum 1,#ENV{nb_fichiers}}>
 <div class="choix">
   <label for="#ENV{nom}_[(#VALEUR|moins{1})]">[(#ENV{nb_fichiers}|=={1}|?{<:cvtupload:saisie_fichiers_unseul_label:>,<:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:>})]</label>
-  <input type="file" class="file" name="#ENV{nom}[[(#VALEUR|moins{1})]]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40" />
+  <input type="file" class="file" name="#ENV{nom}\[[(#VALEUR|moins{1})]\]" id="#ENV{nom}_[(#VALEUR|moins{1})]" size="40" />
 </div>
 </BOUCLE_input>
