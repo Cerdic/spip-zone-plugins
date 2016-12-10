@@ -6,8 +6,31 @@
  * @package SPIP\Fabrique\Fonctions
 **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
+
+// Liste des categories de plugin
+function filtre_svp_categories_fallback_dist() {
+	$categories = array(
+		'communication',
+		'edition',
+		'multimedia',
+		'navigation',
+		'date',
+		'divers',
+		'auteur',
+		'statistique',
+		'performance',
+		'maintenance',
+		'outil',
+		'theme',
+		'squelette',
+		'aucune'
+	);
+	return array_combine($categories, $categories);
+}
 
 /**
  * Déterminer le répertoire de travail
@@ -39,11 +62,11 @@ function fabrique_destination() {
  *
  * Crée tous les répertoires manquants dans une arborescence donnée.
  * Les répertoires sont séparés par des '/'
- * 
- * @example 
+ *
+ * @example
  *     sous_repertoire_complet('a/b/c/d');
  *     appelle sous_repertoire() autant de fois que nécéssaire.
- * 
+ *
  * @param string $arbo
  *     Arborescence, tel que 'prive/squelettes/contenu'
  * @return void
@@ -67,7 +90,7 @@ function sous_repertoire_complet($arbo) {
 
 
 /**
- * Concatène en utilisant implode, un tableau, de maniere récursive 
+ * Concatène en utilisant implode, un tableau, de maniere récursive
  *
  * @param array $tableau
  *     Tableau à transformer
@@ -94,7 +117,7 @@ function fabrique_implode_recursif($tableau, $glue='') {
 
 /**
  * Écrit une ouverture de code PHP
- * 
+ *
  * Fait écrire '<?php' sans que ce php soit executé par SPIP !
  *
  * @param Champ $p
@@ -113,14 +136,14 @@ function balise_PHP_dist($p) {
  *
  * Permet d'insérer un texte comme valeur d'une clé de langue, lorsqu'on
  * crée un fichier de langue avec la fabrique.
- * 
+ *
  * Transforme les caractères &# et échappe les apostrophes :
  * - &#xxx => le bon caractère
- * - ' => \' 
+ * - ' => \'
  *
  * @example
  *     '#ENV{prefixe}_description' => '[(#ENV{paquet/description}|chaine_de_langue)]',
- * 
+ *
  * @link http://www.php.net/manual/fr/function.html-entity-decode.php#104617
  * @param string $texte
  *     Le texte à écrire dans la chaîne de langue
@@ -129,7 +152,7 @@ function balise_PHP_dist($p) {
 **/
 function chaine_de_langue($texte) {
 	$texte = html_entity_decode($texte, ENT_QUOTES, 'UTF-8');
-	# egalement 
+	# egalement
 	# http://www.php.net/manual/fr/function.html-entity-decode.php#104617
 
 	return addslashes($texte);
@@ -145,7 +168,7 @@ function chaine_de_langue($texte) {
  * @note
  *     Cette fonction ne sert pas uniquement à définir des clés pour
  *     les fichiers de chaînes de langue, et pourrait être renommée
- * 
+ *
  * @example
  *     ```
  *     cle_de_langue('titre_objets') => titre_chats
@@ -172,7 +195,7 @@ function cle_de_langue($cle, $desc_objet) {
 }
 
 /**
- * Identique à |cle_de_langue sur toutes les valeurs d'un tableau 
+ * Identique à |cle_de_langue sur toutes les valeurs d'un tableau
  *
  * @see cle_de_langue()
  * @param array $tableau
@@ -217,7 +240,7 @@ function tab_cle_traduite_ajoute_dans_valeur($tableau, $prefixe_cle="", $sep = "
 
 /**
  * Équivalent de wrap() sur les valeurs du tableau
- * 
+ *
  * @param array $tableau
  *     Tableau cle => texte
  * @param string $balise
@@ -337,37 +360,37 @@ function champ_present($objet, $champ) {
 	if (isset($objet['champs']) and is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
 			if (isset($info['champ']) and $info['champ'] == $champ) {
-				return " "; // true
+				return ' '; // true
 			}
 		}
 	}
 	// id_rubrique, id_secteur
-	if (isset($objet['rubriques']) AND is_array($objet['rubriques'])) {
+	if (isset($objet['rubriques']) and is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 	// lang, langue_choisie, id_trad
-	if (isset($objet['langues']) AND is_array($objet['langues'])) {
+	if (isset($objet['langues']) and is_array($objet['langues'])) {
 		if (in_array($champ, $objet['langues'])) {
-			return " "; // true
+			return ' '; // true
 		}
 		if (isset($objet['langues']['lang'])
 			and ($objet['langues']['lang'])
 			and ($champ == 'langue_choisie')) {
-				return " "; // true
+				return ' '; // true
 		}
 	}
 	// date
 	if ($objet['champ_date']) {
 		if ($champ == $objet['champ_date']) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 	// statut
 	if ($objet['statut']) {
 		if ($champ == 'statut') {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 
@@ -377,7 +400,7 @@ function champ_present($objet, $champ) {
 
 /**
  * Indique si toutes les options sont présentes dans l'objet
- * 
+ *
  * Option au sens de clé de configuration, pas un nom de champ SQL
  *
  * @param array $objet
@@ -397,13 +420,13 @@ function options_presentes($objet, $champs) {
 			return ""; // false
 		}
 	}
-	return " "; // true
+	return ' '; // true
 
 }
 
 /**
  * Indique si une option est présente dans l'objet
- * 
+ *
  * Option au sens de clé de configuration, pas un nom de champ SQL
  *
  * @param array $objet
@@ -418,27 +441,27 @@ function options_presentes($objet, $champs) {
 function option_presente($objet, $champ) {
 	// a la racine
 	if (isset($objet[$champ]) and $objet[$champ]) {
-		return " "; // true
+		return ' '; // true
 	}
 
 	// id_rubrique, vue_rubrique, plan
-	if (isset($objet['rubriques']) AND is_array($objet['rubriques'])) {
+	if (isset($objet['rubriques']) and is_array($objet['rubriques'])) {
 		if (in_array($champ, $objet['rubriques'])) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 
 	// lang, id_trad
-	if (isset($objet['langues']) AND is_array($objet['langues'])) {
+	if (isset($objet['langues']) and is_array($objet['langues'])) {
 		if (in_array($champ, $objet['langues'])) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
-	
+
 	// menu_edition, outils_rapides
-	if (isset($objet['boutons']) AND is_array($objet['boutons'])) {
+	if (isset($objet['boutons']) and is_array($objet['boutons'])) {
 		if (in_array($champ, $objet['boutons'])) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 
@@ -448,7 +471,7 @@ function option_presente($objet, $champ) {
 
 /**
  * Indique si une saisie est présente dans l'objet
- * 
+ *
  * @param array $objet
  *     Descrption de l'objet
  * @param array $saisie
@@ -462,7 +485,7 @@ function saisie_presente($objet, $saisie) {
 	if (isset($objet['champs']) and is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $champ) {
 			if (isset($champ['saisie']) and $champ['saisie'] == $saisie) {
-				return " "; // true
+				return ' '; // true
 			}
 		}
 	}
@@ -485,13 +508,13 @@ function saisie_presente($objet, $saisie) {
  */
 function champ_option_presente($champ, $option) {
 	if (isset($champ[$option]) and $champ[$option]) {
-		return " "; // true
+		return ' '; // true
 	}
 
 	// editable, versionne, obligatoire
 	if (isset($champ['caracteristiques']) and is_array($champ['caracteristiques'])) {
 		if (in_array($option, $champ['caracteristiques'])) {
-			return " "; // true
+			return ' '; // true
 		}
 	}
 
@@ -514,7 +537,7 @@ function champ_option_presente($champ, $option) {
  */
 function champ_saisie_presente($champ, $saisie) {
 	if (isset($champ['saisie']) and $champ['saisie'] == $saisie) {
-		return " "; // true
+		return ' '; // true
 	}
 	return false;
 }
@@ -522,7 +545,7 @@ function champ_saisie_presente($champ, $saisie) {
 
 /**
  * Retourne les objets possédant un certain champ SQL
- * 
+ *
  * Cela simplifie des boucles DATA
  *
  * @example
@@ -552,7 +575,7 @@ function objets_champ_present($objets, $champ, $type='') {
  *
  * Option au sens des clés du formulaire de configuration de l'objet
  *
- * @example 
+ * @example
  *     - `#OBJETS|objets_option_presente{vue_rubrique}`
  *     - `#OBJETS|objets_option_presente{auteurs_liens}`
  *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
@@ -577,8 +600,8 @@ function objets_option_presente($objets, $option, $type='') {
 
 /**
  * Retourne les objets possédant une certaine saisie
- * 
- * @example 
+ *
+ * @example
  *     - `#OBJETS|objets_saisie_presente{date}`
  *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
  *       `#OBJETS|objets_saisie_presente{date, objet}` // chats,souris
@@ -602,14 +625,14 @@ function objets_saisie_presente($objets, $saisie, $type='') {
 
 /**
  * Retourne les objets possédant plusieurs options
- * 
+ *
  * Option au sens des clés du formulaire de configuration de l'objet
  *
  * @example
  *     - `#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}}`
  *     - On peut ne retourner qu'une liste de type de valeur (objet, type, id_objet)
  *       `#OBJETS|objets_options_presentes{#LISTE{table_liens,vue_liens}, objet}` // chats,souris
- * 
+ *
  * @param array $objets
  *     Liste des descriptions d'objets créés avec la fabrique
  * @param array $options
@@ -790,7 +813,7 @@ function _tableau_options_presentes($func, $tableau, $options, $type='') {
  *     Description de l'objet dans la fabrique
  * @param array $objets
  *     Description de tous les objets dans la fabrique
- * @return 
+ * @return
 **/
 function fabrique_objets_enfants_directs($objet, $objets) {
 	$liste = array();
@@ -808,12 +831,12 @@ function fabrique_objets_enfants_directs($objet, $objets) {
 
 /**
  * Retourne une écriture de critères `{id_xxx ?}`
- * 
+ *
  * Tous les champs déclarés commençant par `id_x` sont retournés
  * sous forme d'une écriture de critère, tel que `{id_parent?}{id_documentation?}`
- * 
+ *
  * La clé primaire est également ajoutée, sauf contre indication.
- * 
+ *
  * Les champs indirects `{B_liens.id_B ?}` sont aussi ajoutés s'ils sont déclarés
  * dans la Fabrique en même temps.
  *
@@ -855,7 +878,7 @@ function criteres_champs_id($objet, $objets, $avec_cle_primaire = true) {
 
 	// Liaisons indirectes via table de liens déclarée dans la Fabrique ?
 	// D'autres objets peuvent avoir une table de liens et demander à être lié sur cet objet.
-	// On ajoute leurs champs de liaison. 
+	// On ajoute leurs champs de liaison.
 	foreach ($objets as $autre_objet) {
 		if ($autre_objet !== $objet) {
 			if (options_presentes($autre_objet, array('table_liens', 'vue_liens'))) {
@@ -892,7 +915,7 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 	if (!$objets) return array();
 
 	$hash = md5(serialize($objets));
-	
+
 	if (!isset($tables[$hash])) {
 		$tables[$hash] = array(
 			'tout' => array(),
@@ -912,14 +935,14 @@ function fabrique_lister_tables($objets, $quoi='tout') {
 			}
 		}
 	}
-	
+
 	return $tables[$hash][$quoi];
 }
 
 
 /**
  * Retourne la liste des noms de certains champs pour cet objet
- * 
+ *
  * Champs déclarés complétés des champs spéciaux (editable, versionne, obligatoire)
  *
  * @param array $objet
@@ -1015,7 +1038,7 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 			}
 			break;
 
-		
+
 		case "optimiser_base_disparus":
 			# nettoie depuis spip_{objet}_liens
 			# mais aussi les liaisions vers spip_{objet} (uniquement si une table de liens existe)
@@ -1027,7 +1050,7 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 				return true;
 			}
 			break;
-			
+
 		case "trig_propager_les_secteurs":
 			if (objets_options_presentes($objets, array('id_rubrique', 'id_secteur'))) {
 				return true;
@@ -1040,9 +1063,9 @@ function fabrique_necessite_pipeline($objets, $pipeline) {
 
 /**
  * Crée le code PHP de création d'un tableau
- * 
+ *
  * Fonction un peu équivalente à var_export()
- * 
+ *
  * @param array $tableau
  *     Le tableau dont on veut obtenir le code de création array( ... )
  * @param bool $quote
@@ -1069,10 +1092,10 @@ function ecrire_tableau($tableau, $quote = false, $defaut = "array()") {
 
 /**
  * Crée le code PHP de création d'un tableau sauf s'il est vide
- * 
+ *
  * Identique à ecrire_tableau() mais ne retourne rien si le tableau est vide
  * @see ecrire_tableau()
- * 
+ *
  * @param array $tableau
  *     Le tableau dont on veut obtenir le code de création array( ... )
  * @param bool $quote
@@ -1087,7 +1110,7 @@ function ecrire_tableau_sinon_rien($tableau, $quote = false) {
 
 /**
  * Ajoute autant des espaces à la fin d'une chaîne jusqu'à la taille indiquée
- * 
+ *
  * Fonction un peu equivalente à str_pad() mais avec une valeur par défaut
  * définie par la constante `_FABRIQUE_ESPACER`
  *
@@ -1137,7 +1160,7 @@ function fabrique_tabulations($texte, $nb_tabulations) {
 
 /**
  * Passer en majuscule en utilisant mb de préférence
- * s'il est disponible. 
+ * s'il est disponible.
  *
  * @param string $str
  *     La chaine à passer en majuscule
@@ -1154,7 +1177,7 @@ function fabrique_mb_strtoupper($str) {
 
 /**
  * Passer en minuscule en utilisant mb de préférence
- * s'il est disponible. 
+ * s'il est disponible.
  *
  * @param string $str
  * 		La chaine à passer en minuscule
@@ -1173,9 +1196,9 @@ function fabrique_mb_strtolower($str) {
 /**
  * Crée une balise HTML <img> à partir d'un fichier,
  * réactualisée à chaque calcul, selon une réduction donnée.
- * 
+ *
  * Cela évite un |array_shift qui ne passe pas en PHP 5.4
- * 
+ *
  * Attention à bien rafraîchir l'image réduite lorsqu'on change de logo.
  *
  * @example
@@ -1270,7 +1293,7 @@ function filtre_fabrique_lister_objets_editoriaux($objets_fabrique, $inclus=arra
 /**
  * Indique si cet objet a un parent direct déclaré
  *
- * @param array $objet 
+ * @param array $objet
  *     Déclaration d'un objet dans la Fabrique
  * @param array $objet s
  *     Déclaration de tous les objets dans la Fabrique
@@ -1304,12 +1327,31 @@ function fabrique_parent($objet, $objets) {
 }
 
 /**
+ * Appliquer un équivalent d'array_map sur une des fonctions de la fabrique
+ *
+ * @param array $tableau
+ * @param string $fonction
+ * @param array $objets
+ * @return array
+ */
+function fabrique_array_map($tableau, $fonction, $objets) {
+	if (function_exists($f = 'fabrique_' . $fonction)) {
+		foreach ($tableau as $i => $valeur) {
+			$tableau[$i] = $f($valeur, $objets);
+		}
+	} elseif (function_exists($fonction)) {
+		$tableau = array_map($fonction, $tableau);
+	}
+	return $tableau;
+}
+
+/**
  * Retrouve la clé primaire d'un objet éditorial
- * 
+ *
  * D'abord en cherchant dans les déclaration de la Fabrique,
  * sinon en cherchant dans les objets actifs sur ce SPIP.
  *
- * @param string $table 
+ * @param string $table
  *     Table SQL
  * @param array $objets
  *     Description des objets générés par la Fabrique.
@@ -1331,11 +1373,11 @@ function fabrique_id_table_objet($table, $objets) {
 
 /**
  * Retrouve le nom d'objet d'un objet éditorial
- * 
+ *
  * D'abord en cherchant dans les déclaration de la Fabrique,
  * sinon en cherchant dans les objets actifs sur ce SPIP.
  *
- * @param string $table 
+ * @param string $table
  *     Table SQL
  * @param array $objets
  *     Description des objets générés par la Fabrique.
@@ -1357,11 +1399,11 @@ function fabrique_table_objet($table, $objets) {
 
 /**
  * Retrouve le type d'un objet éditorial
- * 
+ *
  * D'abord en cherchant dans les déclaration de la Fabrique,
  * sinon en cherchant dans les objets actifs sur ce SPIP.
  *
- * @param string $table 
+ * @param string $table
  *     Table SQL
  * @param array $objets
  *     Description des objets générés par la Fabrique.
@@ -1454,7 +1496,7 @@ function fabrique_code_autorisation($type, $prefixe, $objet) {
 			break;
 
 		case "administrateur":
-			return "\$qui['statut'] == '0minirezo' AND !\$qui['restreint']";
+			return "\$qui['statut'] == '0minirezo' and !\$qui['restreint']";
 			break;
 
 		case "webmestre":
@@ -1468,7 +1510,7 @@ function fabrique_code_autorisation($type, $prefixe, $objet) {
 
 /**
  * Retourne la valeur de type d'autorisation
- * qui s'applique par defaut pour une autorisation donnee 
+ * qui s'applique par defaut pour une autorisation donnee
  *
  * @param string $autorisation
  * 		Nom de l'autorisation (objet et objets remplacent le veritable type et nom d'objet)
@@ -1476,19 +1518,19 @@ function fabrique_code_autorisation($type, $prefixe, $objet) {
  * 		Type d'autorisation par defaut (jamais, toujours, redacteur, ...)
 **/
 function fabrique_autorisation_defaut($autorisation) {
-	switch($autorisation) {
+	switch ($autorisation) {
 		case 'objet_voir':
-			return "toujours";
+			return 'toujours';
 			break;
 
 		case 'objet_creer':
 		case 'objet_modifier':
-			return "redacteur";
+			return 'redacteur';
 			break;
 
 		case 'objet_supprimer':
 		case 'associerobjet':
-			return "administrateur";
+			return 'administrateur';
 			break;
 	}
 }
@@ -1509,10 +1551,12 @@ function fabrique_autorisation_defaut($autorisation) {
  *     Code de l'autorisation
 **/
 function fabrique_code_autorisation_defaut($autorisations, $autorisation, $prefixe, $objet) {
-	if (!$autorisation) return "";
+	if (!$autorisation) {
+		return '';
+	}
 
 	// trouver le type d'autorisation souhaitee, soit indiquee, soit par defaut
-	if (!isset($autorisations[$autorisation]) OR !$type = $autorisations[$autorisation]) {
+	if (!isset($autorisations[$autorisation]) or !$type = $autorisations[$autorisation]) {
 		$type = fabrique_autorisation_defaut($autorisation);
 	}
 
@@ -1523,7 +1567,7 @@ function fabrique_code_autorisation_defaut($autorisations, $autorisation, $prefi
 /**
  * Retourne vrai si un test d'autorisation est d'un type spécifié
  * dans l'ensemble des autorisations à configurer de tous les objets
- * 
+ *
  * @param array $objets
  * 		Descriptions des objets de la Fabrique
  * @param string $recherche
@@ -1543,7 +1587,7 @@ function objets_autorisation_presente($objets, $recherche) {
 /**
  * Retourne vrai si au moins une autorisation est d'un des types spécifiés
  * dans l'ensemble des autorisations à configurer de tous les objets
- * 
+ *
  * @param array $objets
  * 		Descriptions des objets de la Fabrique
  * @param string[] $recherches
@@ -1571,7 +1615,7 @@ function objets_autorisations_presentes($objets, $recherches) {
 **/
 function autorisation_presente($objet, $recherche) {
 	foreach ($objet['autorisations'] as $autorisation => $type) {
-		if (!$type) { 
+		if (!$type) {
 			$type = fabrique_autorisation_defaut($autorisation);
 		}
 		if ($type == $recherche) {
@@ -1582,10 +1626,10 @@ function autorisation_presente($objet, $recherche) {
 }
 
 /**
- * Retourne le type pour le nom d'une fonction d'autorisation 
+ * Retourne le type pour le nom d'une fonction d'autorisation
  * 'article' => 'article'
  * 'truc_muche' => 'trucmuche'
- * 
+ *
  * @param string $type
  * 		Type ou objet
  * @return string

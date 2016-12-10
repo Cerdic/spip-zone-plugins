@@ -10,7 +10,7 @@
 /**
  * Extrait toutes les données d'une table
  * et essaie de leur faire prendre moins de place
- * en n'ecrivant qu'une seule fois leurs noms de colonne. 
+ * en n'ecrivant qu'une seule fois leurs noms de colonne.
  *
  * @param string $table
  *     Nom de la table SQL a extraire
@@ -32,7 +32,7 @@ function fabrique_extraire_les_donnees_table($table, $connect) {
 	// extraire les cles
 	$un = current($data);
 	$cles = array_keys($un);
-	
+
 	// recalculer les valeurs
 	foreach ($data as $c => $d) {
 		$data[$c] = array_values($d);
@@ -43,4 +43,3 @@ function fabrique_extraire_les_donnees_table($table, $connect) {
 		'valeurs' => $data
 	);
 }
-

@@ -3,6 +3,12 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.3.7 le 10 12 2016
+-------------------
+* Correction d'un souci de calcul du type d'objet pour ajouter le formulaire de liaisons, dans certains cas.
+* Génerer un plugin avec un code PHP plus proche des règles de codages (PSR)
+* Permettre de géréner un Plugin même si SVP n'est pas présent
+
 2.3.5 le 23 11 2016
 -------------------
 * Ajoute du critère `{id_xxx}` (clé primaire) sur les listes d'objets créés

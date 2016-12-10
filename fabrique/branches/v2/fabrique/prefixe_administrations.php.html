@@ -64,23 +64,24 @@ function #ENV{prefixe}_upgrade($nom_meta_base_version, $version_cible) {
 function #ENV{prefixe}_vider_tables($nom_meta_base_version) {<BOUCLE_si_exemples2(CONDITION){si #EXEMPLES}>
 	# quelques exemples
 	# (que vous pouvez supprimer !)
-	# sql_drop_table("spip_xx");
-	# sql_drop_table("spip_xx_liens");</BOUCLE_si_exemples2>
+	# sql_drop_table('spip_xx');
+	# sql_drop_table('spip_xx_liens');</BOUCLE_si_exemples2>
 <BOUCLE_tables(DATA) {si #OBJETS} {source tableau,#LES_TABLES}>
-	sql_drop_table("#VALEUR");</BOUCLE_tables>
+	sql_drop_table('#VALEUR');</BOUCLE_tables>
 <BOUCLE_objets_autres_nettoyages(CONDITION){si #OBJETS}>
-	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens), 
-	[(#VAL{'sql_delete("spip_documents_liens",'}   |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
-	[(#VAL{'sql_delete("spip_mots_liens",'}        |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
-	[(#VAL{'sql_delete("spip_auteurs_liens",'}     |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens)
+	[(#VAL{"sql_delete('spip_documents_liens',"}   )] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{"sql_delete('spip_mots_liens',"}        )] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{"sql_delete('spip_auteurs_liens',"}     )] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
 	# Nettoyer les versionnages et forums
-	[(#VAL{'sql_delete("spip_versions",'}          |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
-	[(#VAL{'sql_delete("spip_versions_fragments",'}|espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
-	[(#VAL{'sql_delete("spip_forum",'}             |espacer{40})] sql_in("objet", [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{"sql_delete('spip_versions',"}          )] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{"sql_delete('spip_versions_fragments',"})] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
+	[(#VAL{"sql_delete('spip_forum',"}             )] sql_in('objet', [(#LES_TYPES|ecrire_tableau)]));
 </BOUCLE_objets_autres_nettoyages>[
 (#ENV*{paquet/inserer/administrations/desinstallation}|fabrique_tabulations{1})]
 	effacer_meta($nom_meta_base_version);
 }
+
 [
 
 
