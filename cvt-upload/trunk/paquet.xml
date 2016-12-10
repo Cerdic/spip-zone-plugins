@@ -21,7 +21,7 @@
 	<pipeline nom="formulaire_verifier" inclure="cvtupload_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="cvtupload_pipelines.php" />
 
-	<utilise nom="saisies" compatibilite="[1.14.0;]" />
+	<utilise nom="saisies" compatibilite="[2.10.0;]" />
 	<utilise nom="verifier" compatibilite="[0.1.10;]" />
 
 </paquet>
