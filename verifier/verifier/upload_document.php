@@ -30,7 +30,7 @@ function verifier_upload_document_dist($file,$options){
 		}
 	}
 	if ($pas_bon_type){
-		return _T('cvtupload:erreur_type_non_autorise',array('name'=>$name));
+		return _T('verifier:erreur_type_non_autorise',array('name'=>$name));
 	}
 	return '';
 }

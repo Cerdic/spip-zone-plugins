@@ -24,7 +24,7 @@ function verifier_image_upload_dist($valeur, $options) {
 
 	// vérifier le type
 	if ($valeur['type'] && !preg_match('#^image#', $valeur['type'])) {
-		return _T('cvtupload:erreur_type_image', array('name' => $valeur['name']));
+		return _T('verifier:erreur_type_image', array('name' => $valeur['name']));
 	}
 
 	// vérifier le poids
@@ -32,7 +32,7 @@ function verifier_image_upload_dist($valeur, $options) {
 	if ($taille_max) {
 		$taille = ($valeur['size'] ? $valeur['size'] : @filesize($valeur['tmp_name']));
 		if ($taille > $taille_max) {
-			return _T('cvtupload:erreur_taille_image', array(
+			return _T('verifier:erreur_taille_image', array(
 				'name'       => $valeur['name'],
 				'taille_max' => taille_en_octets($taille_max),
 				'taille'     => taille_en_octets($taille)
@@ -45,7 +45,7 @@ function verifier_image_upload_dist($valeur, $options) {
 		$largeur_max = (isset($options['largeur_max']) ? $options['largeur_max'] : (defined('_IMG_MAX_WIDTH') ? _IMG_MAX_WIDTH : 0));
 		$hauteur_max = (isset($options['hauteur_max']) ? $options['hauteur_max'] : (defined('_IMG_MAX_HEIGHT') ? _IMG_MAX_HEIGHT : 0));
 		if ($imagesize[0] > $largeur_max || $imagesize[1] > $hauteur_max) {
-			return _T('cvtupload:erreur_dimension_image', array(
+			return _T('verifier:erreur_dimension_image', array(
 				'name'       => $valeur['name'],
 				'taille_max' => $largeur_max . 'x' . $hauteur_max,
 				'taille'     => $imagesize[0] . 'x' . $imagesize[1]
