@@ -75,7 +75,7 @@ function cvtupload_generer_html($infos_fichiers = null) {
  * 		Le morceau de $_FILES concernant le ou les fichiers
  * @param string $repertoire
  * 		Chemin de destination des fichiers
- * @param string $prefix
+ * @param string $form
  * 		Formulaire d'où ça vient
  * @return array
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
