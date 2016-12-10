@@ -3,6 +3,10 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.3.8 le 11 12 2016
+-------------------
+* Correction d'un souci de fil d'ariane sur les objets avec statut en liaison directe avec un autre objet.
+
 2.3.7 le 10 12 2016
 -------------------
 * Correction d'un souci de calcul du type d'objet pour ajouter le formulaire de liaisons, dans certains cas.
