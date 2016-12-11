@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   Doit être un champ avec un seul upload
  * @param array $options
  *   Options à vérifier :
- *   - taille_max (en Kio)
+ *   - taille_max (en kio)
  *   - largeur_max (en px)
  *   - hauteur_max (en px)
  *
