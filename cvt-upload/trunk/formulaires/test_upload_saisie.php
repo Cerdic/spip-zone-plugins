@@ -29,6 +29,14 @@ function formulaires_test_upload_saisie_charger(){
 				'label'=>'Un fichier, n\'importe quel type MIME accepté par SPIP',
 				'nb_fichiers'=>1
 			)
+		),
+		array(
+			'saisie' => 'fichiers',
+			'options' => array(
+				'nom' => 'fichier_image_web',
+				'label' => 'Un fichier de type image web (jpg, png, gif)',
+				'nb_fichiers' => 1
+			)
 		)
 	);
 	$contexte = array(
@@ -39,7 +47,7 @@ function formulaires_test_upload_saisie_charger(){
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array('pdfs','fichier_tout_mime');
+	return array('pdfs','fichier_tout_mime','fichier_image_web');
 }
 
 function formulaires_test_upload_saisie_verifier(){
@@ -69,6 +77,16 @@ function formulaires_test_upload_saisie_verifier(){
 	if ($erreur = $verifier($_FILES['fichier_tout_mime'], 'fichiers', $options,$erreurs_par_fichier)){
 		$erreurs['fichier_tout_mime'] = $erreur;
 		cvtupload_nettoyer_files_selon_erreurs('fichier_tout_mime',$erreurs_par_fichier);
+	}	
+
+	// Vérifier que le champ saisie fichier_image_web soit une image web
+	$options = array(
+		'mime' => 'image_web'
+	);
+	$erreurs_par_fichier = array();
+	if ($erreur = $verifier($_FILES['fichier_image_web'], 'fichiers', $options,$erreurs_par_fichier)){
+		$erreurs['fichier_image_web'] = $erreur;
+		cvtupload_nettoyer_files_selon_erreurs('fichier_image_web',$erreurs_par_fichier);
 	}	
 	return $erreurs;
 }
