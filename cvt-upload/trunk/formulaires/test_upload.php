@@ -75,4 +75,3 @@ function formulaires_test_upload_traiter(){
 	return $retours;
 }
 
-?>
