@@ -200,6 +200,28 @@ function cvtupload_modifier_files($infos_fichiers) {
 }
 
 /**
+ * Nettoyer $_FILES pour effacer les entrées dont on a vérifié qu'elle ne répondaient pas à certains critères
+ *
+ * @param string $champ
+ *	Le nom du champ concerné dans $_FILES
+ * @param string[]|string $erreurs
+ * 	Si un upload multiple, un tableau des $erreurs avec comme clés les numéros des fichiers à supprimer dans $_FILES[$champ]
+ * 	Si un upload unique, une chaîne, qui si non vide, indique qu'il faut effacer le $_FILE[$champ]
+ * @return void
+**/
+function cvtupload_nettoyer_files_selon_erreurs($champ,$erreurs){
+	if (is_array($erreurs)) { // cas d'upload multiple
+		foreach ($erreurs as $cle=>$erreur) {
+			foreach ($_FILES[$champ] as $propriete=>$valeur) {
+				unset($_FILES[$champ][$propriete][$cle]);	
+			 }
+		}
+	}
+	elseif ($erreurs!='') { // cas d'upload unique avec erreur
+		unset($_FILES[$champ]);
+	}
+}
+/**
  * Nettoyer un répertoire suivant l'age et le nombre de ses fichiers
  * 
  * @param string $repertoire

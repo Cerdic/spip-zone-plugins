@@ -2,7 +2,7 @@
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+include_spip('inc/cvtupload');
 
 function formulaires_test_upload_saisie_charger(){
 	$saisies = array(
@@ -50,11 +50,7 @@ function formulaires_test_upload_saisie_verifier(){
 	$erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier);
 	if ($erreur!=''){
 		$erreurs['pdfs'] = $erreur;
-		foreach ($erreurs_par_fichier as $cle => $valeur){
-			foreach ($_FILES['pdfs'] as $propriete => $valeur_propriete){
-				unset($_FILES['pdfs'][$propriete][$cle]);//effacer le fichier problématique dans $_FILES
-			}
-		}
+		cvtupload_nettoyer_files_selon_erreurs('pdfs',$erreurs_par_fichier);
 	}	
 	return $erreurs;
 }

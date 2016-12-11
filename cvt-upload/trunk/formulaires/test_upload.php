@@ -3,6 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/cvtupload');
 
 function formulaires_test_upload_charger(){
 	$contexte = array(
@@ -42,7 +43,7 @@ function formulaires_test_upload_verifier(){
 		// renvoyer l'erreur dans le formulaire
 		$erreurs['image'] = $erreur;
 		// supprimer le fichier en erreur dans _FILES
-		unset($_FILES['image']);
+		cvtupload_nettoyer_files_selon_erreurs('image',$erreur);
 	}
 
 	// vérifier le champ images multiples
@@ -51,11 +52,7 @@ function formulaires_test_upload_verifier(){
 		// renvoyer l'erreur dans le formulaire
 		$erreurs['plusieurs_images'] = $erreur;
 		// supprimer les fichiers en erreur dans _FILES
-		foreach ($erreurs_fichiers as $id_file => $erreur) {
-			foreach ($_FILES['plusieurs_images'] as $key => $val) {
-				unset($_FILES['plusieurs_images'][$key][$id_file]);
-			}
-		}
+		cvtupload_nettoyer_files_selon_erreurs('plusieurs_images',$erreurs_fichiers);
 	}
 
 	// vérifier le champ pdf
@@ -63,7 +60,7 @@ function formulaires_test_upload_verifier(){
 	$erreurs_fichiers = '';
 	if ($erreur = $verifier($_FILES['pdf'],'fichiers',$options,$erreurs_fichiers)) {
 		$erreurs['pdf'] = $erreur;
-		unset($_FILES['pdf']);
+		cvtupload_nettoyer_files_selon_erreurs('image',$erreur);
 	}
 	return $erreurs;
 }
