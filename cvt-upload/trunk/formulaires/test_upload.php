@@ -8,6 +8,7 @@ function formulaires_test_upload_charger(){
 	$contexte = array(
 		'tromperie' => '',
 		'seul' => '',
+		'pdf'=>'',
 		'plusieurs' => array(),
 		'image' => '',
 		'plusieurs_images' => array(),
@@ -17,7 +18,7 @@ function formulaires_test_upload_charger(){
 }
 
 function formulaires_test_upload_fichiers(){
-	return array('seul', 'plusieurs', 'image', 'plusieurs_images');
+	return array('seul', 'plusieurs', 'image', 'plusieurs_images','pdf');
 }
 
 function formulaires_test_upload_verifier(){
@@ -57,6 +58,13 @@ function formulaires_test_upload_verifier(){
 		}
 	}
 
+	// vérifier le champ pdf
+	$options = array('mime'=>'specifique','mime_specifique'=>array('application/pdf'));
+	$erreurs_fichiers = '';
+	if ($erreur = $verifier($_FILES['pdf'],'fichiers',$options,$erreurs_fichiers)) {
+		$erreurs['pdf'] = $erreur;
+		unset($_FILES['pdf']);
+	}
 	return $erreurs;
 }
 
