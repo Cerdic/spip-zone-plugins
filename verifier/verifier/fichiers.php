@@ -19,7 +19,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   - dimension_max, tableau contenant les dimension max:
  *		- largeur (en px)
  *		- hauteur (en px)
- *		- autoriser_rotation : boolean à mettre à true si on autorise une image qui tiendrait dans ces dimensions si on faisait une rotation de 90°
+ *		- autoriser_rotation : booléen à mettre à true (ou bien string égale à 'on') si on autorise une image qui tiendrait dans ces dimensions si on faisait une rotation de 90°
+ *	 - on peut remplacer ce tableau par des strings directement dans $options:
+ *		- largeur_max
+ *		- hauteur_max
+ *		- autoriser_rotation
  * @param array|string &$erreurs_par_fichier
  *   Si on vérifier un upload multiple, un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
  *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.  
@@ -34,6 +38,32 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 		}
 	}
 	
+	// normalisation de $options
+	if (isset($options['largeur_max']) and !isset($options['dimension_max']['largeur'])) {
+		if (!isset($options['dimension_max'])) {
+			$options['dimension_max'] = array();
+		}
+		$options['dimension_max']['largeur'] = $options['largeur_max'];
+		unset($options['largeur_max']);
+	}
+	if (isset($options['hauteur_max']) and !isset($options['dimension_max']['hauteur'])) {
+		if (!isset($options['dimension_max'])) {
+			$options['dimension_max'] = array();
+		}
+		$options['dimension_max']['hauteur'] = $options['hauteur_max'];
+		unset($options['hauteur_max']);
+	}
+	if (isset($options['dimension_autoriser_rotation']) and !isset($options['dimension_max']['autoriser_rotation'])) {
+		if (!isset($options['dimension_max'])) {
+			$options['dimension_max'] = array();
+		}
+		$options['dimension_max']['autoriser_rotation'] = $options['dimension_autoriser_rotation'];
+		unset($options['dimension_autoriser_rotation']);
+	}
+	if (isset($options['dimension_max']['autoriser_rotation']) and $options['dimension_max']['autoriser_rotation'] == 'on') {
+	 $options['dimension_max']['autoriser_rotation'] = True;
+	}
+	// Vérification proprement dite
 	foreach ($valeur['tmp_name'] as $cle=>$tmp_name){//On parcourt tous les fichiers
 		if ($valeur['error'][$cle]!=0){//On vérifie uniquement les fichiers bien expediés
 			continue;	
