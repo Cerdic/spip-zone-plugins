@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   Doit être un champ avec un ou plusieurs upload
  * @param array $options
  *   Options à vérifier :
- *   - mime au choix 'image','tous_spip','specifique'
+ *   - mime au choix 'image','tout_mime','specifique'
  *   - mime_specifique (si l'option 'mime_specifique' est choisi ci-dessus)
  *   - taille_max (en Kio)
  *   - largeur_max (en px)
@@ -70,6 +70,11 @@ function verifier_fichier_mime($valeur,$cle,$options){
 		if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}	
-	}	
+	} elseif ($options['mime'] == 'tout_mime') {
+		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]));
+		if (sql_count($res) == 0) {
+			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
+		}
+	}
 	return '';
 }
