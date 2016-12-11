@@ -112,16 +112,14 @@ function cvtupload_formulaire_fond($flux) {
 			foreach ($champs_fichiers as $champ) {
 				// Si le visiteur a bien réussi a charger un ou plusieurs fichiers dans ce champ
 				if (isset($fichiers[$champ])) {
-					// Si c'est un champ unique
-					if (!is_array($fichiers[$champ])) {
+					if (!is_array($fichiers[$champ])) {// Si c'est un champ unique
 						$flux['data'] = preg_replace(
 							"#<input[^>]*name=['\"]${champ}[^>]*>#i",
 							$fichiers[$champ],
 							$flux['data']
 						);
 					}
-					// Sinon c'est un multiple
-					else {
+					else { // Sinon c'est un multiple
 						foreach ($fichiers[$champ] as $cle=>$html) {
 							$regexp_par_cle = "#<input[^>]*name=['\"]${champ}(?:\&\#91;|\[)${cle}(?:\&\#93;|\])[^>]*>#i";// cherche les <input name="champ[cle]"> ou <input name="champ#91;cle#93;">
 							$regexp_alternative = "#<input[^>]*name=['\"]${champ}[^>]*>#i";
