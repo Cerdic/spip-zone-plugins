@@ -1,8 +1,0 @@
-
-<BOUCLE_mime(TYPES_DOCUMENTS){par titre}>
-<div class="choix">
-  #SET{id,#MIME_TYPE+++#EXTENSION}
-  <input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#GET{id}|in_array{#ENV{valeur}}|oui)checked="checked"] value="#GET{id}" />
-  <label for="#GET{id}">#TITRE (#MIME_TYPE, .#EXTENSION)</label>
-</div>
-</BOUCLE_mime>
