@@ -184,9 +184,10 @@ function saisie_identifier($saisie, $regenerer = false) {
  *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
  * @param bool $saisies_masquees_nulles Si TRUE, les saisies masquées selon afficher_si ne seront pas verifiées, leur valeur étant forcée a NULL. Cette valeur NULL est transmise à traiter (via set_request).
+ * @param array &$erreurs_fichiers pour les saisies de type fichiers, un tableau qui va stocker champs par champs, puis fichier par fichier, les erreurs de chaque fichier, pour pouvoir ensuite éventuellement supprimer les fichiers erronées de $_FILES
  * @return array Retourne un tableau d'erreurs
  */
-function saisies_verifier($formulaire, $saisies_masquees_nulles = true) {
+function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreurs_fichiers=array()) {
 	include_spip('inc/verifier');
 	$erreurs = array();
 	$verif_fonction = charger_fonction('verifier', 'inc', true);
@@ -245,13 +246,22 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true) {
 
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
 		if ((!isset($erreurs[$champ]) or !$erreurs[$champ]) and is_array($verifier) and $verif_fonction) {
-			$normaliser = null;
+			if ($verifier['type'] == 'fichiers') { // si on fait une vérification de type fichiers, il n'y a pas vraiment de normalisation, mais un retour d'erreur fichiers par fichiers
+				$normaliser = array();
+			} else {
+				$normaliser = null;
+			}
 			// Si le champ n'est pas valide par rapport au test demandé, on ajoute l'erreur
 			$options = isset($verifier['options']) ? $verifier['options'] : array();
 			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $options, $normaliser)) {
 				$erreurs[$champ] = $erreur_eventuelle;
+				
+				if ($verifier['type'] == 'fichiers') { // Pour les vérification/saisies de type fichiers, ajouter les erreurs détaillées par fichiers dans le tableau des erreurs détaillées par fichier
+					$erreurs_fichiers[$champ] = $normaliser; 
+				}
+
 			// S'il n'y a pas d'erreur et que la variable de normalisation a été remplie, on l'injecte dans le POST
-			} elseif (!is_null($normaliser)) {
+			} elseif (!is_null($normaliser) and $verifier['type'] != 'fichiers') {
 				set_request($champ, $normaliser);
 			}
 		}
