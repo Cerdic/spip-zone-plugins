@@ -1,0 +1,5 @@
+#SET{mime,#ARRAY}
+<BOUCLE_mime(SPIP_TYPES_DOCUMENTS){par titre}>
+#SET{mime,#GET{mime}|remplir_tableau_mime{#MIME_TYPE,#TITRE,#EXTENSION}}
+</BOUCLE_mime>
+#INCLURE{fond=saisies/checkbox,env,datas=#GET{mime}}
