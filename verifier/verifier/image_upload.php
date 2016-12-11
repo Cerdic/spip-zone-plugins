@@ -23,7 +23,7 @@ function verifier_image_upload_dist($valeur, $options) {
 	include_spip('inc/filtres');
 
 	// vérifier le type
-	if ($valeur['type'] && !preg_match('#^image#', $valeur['type'])) {
+	if ($valeur['type'] && !in_array($valeur['type'],array('image/gif','image/jpeg','image/png'))) {
 		return _T('verifier:erreur_type_image', array('name' => $valeur['name']));
 	}
 
