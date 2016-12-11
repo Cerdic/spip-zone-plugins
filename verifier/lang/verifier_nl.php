@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Deze postcode is ongeldig.',
-	'erreur_comparaison_egal' => 'De waarde moet gelijk zijn aan het veld "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'De waarde moet gelijk zijn aan en hetzelfde type hebben als het veld "@nom_champ@"',
-	'erreur_comparaison_grand' => 'De waarde moet groter zijn dan het veld "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'De waarde moet gelijk zijn aan of groter zijn dan het veld "@nom_champ@"',
-	'erreur_comparaison_petit' => 'De waarde moet kleiner zijn dan het veld "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'De waarde moet gelijk zijn aan of kleiner zijn dan het veld "@nom_champ@"',
+	'erreur_comparaison_egal' => 'De waarde moet gelijk zijn aan het veld "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'De waarde moet gelijk zijn aan en hetzelfde type hebben als het veld "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand' => 'De waarde moet groter zijn dan het veld "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'De waarde moet gelijk zijn aan of groter zijn dan het veld "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'De waarde moet kleiner zijn dan het veld "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'De waarde moet gelijk zijn aan of kleiner zijn dan het veld "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'De kleurcode is ongeldig.',
 	'erreur_date' => 'De datum is ongeldig.',
 	'erreur_date_format' => 'Het datumformaat is ongeldig.',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_id_document' => 'Deze document-identificatie is niet geldig.',
 	'erreur_id_objet' => 'Deze identificatie is ongeldig.',
 	'erreur_inconnue_generique' => 'Het formaat is ongeldig.',
-	'erreur_isbn' => 'de ISBN code is niet geldig (bv: 978-2-1234-5680-3 of 2-1234-5680-X)',
+	'erreur_isbn' => 'de ISBN code is niet geldig (bv: 978-2-1234-5680-3 of 2-1234-5680-X)', # MODIF
 	'erreur_isbn_13_X' => 'Een ISBN-13 code kan niet eindigen met een X.',
 	'erreur_isbn_G' => 'Het eerste segment moet gelijk zijn aan 978 of 979.',
 	'erreur_isbn_nb_caracteres' => 'de ISBN code moet 10 of 13 tekens bevatten (momenteel @nb@), de streepjes niet meegeteld.',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_isbn_segment' => 'het segment "@segment@" heeft @nb@ teveel teken(s).',
 	'erreur_isbn_segment_lettre' => 'het segment "@segment@" mag geen letters bevatten.',
 	'erreur_numerique' => 'Het nummerformaat is ongeldig.',
-	'erreur_objet' => 'Dit object is niet geldig',
+	'erreur_objet' => 'Dit object is niet geldig', # MODIF
 	'erreur_regex' => 'De regex string is incorrect geformatteerd.',
 	'erreur_siren' => 'Het SIREN nummer is ongeldig.',
 	'erreur_siret' => 'Het SIRET number is ongeldig.',
@@ -51,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'De waarde moet minimaal @min@ ctekens bevatten (momenteel @nb@).',
 	'erreur_telephone' => 'Het telefoonnummer is ongeldig.',
 	'erreur_url' => 'Het URL-adres <em>@url@</em> is ongeldig.',
-	'erreur_url_protocole' => 'Het ingevoerde adres <em>(@url@)</em> moet beginnen met @protocole@',
-	'erreur_url_protocole_exact' => 'Het ingevoerde adres <em>(@url@)</em> begint niet met een geldig protocol (bv. http://)',
+	'erreur_url_protocole' => 'Het ingevoerde adres <em>(@url@)</em> moet beginnen met @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'Het ingevoerde adres <em>(@url@)</em> begint niet met een geldig protocol (bv. http://)', # MODIF
 
 	// N
 	'normaliser_option_date' => 'De datum normaliseren?',

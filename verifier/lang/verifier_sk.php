@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Toto PSČ je neplatné.',
-	'erreur_comparaison_egal' => 'Hodnota sa musí zhodovať s poľom "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'Hodnota musí sa musí zhodovať s poľom "@nom_champ@" a musí byť rovnakého typu',
-	'erreur_comparaison_grand' => 'Hodnota musí byť väčšia ako pole "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'Hodnota musí byť väčšia alebo rovná poľu "@nom_champ@"',
-	'erreur_comparaison_petit' => 'Hodnota musí byť menšia ako pole "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'Hodnota musí byť menšia alebo rovná ako "@nom_champ@"',
+	'erreur_comparaison_egal' => 'Hodnota sa musí zhodovať s poľom "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'Hodnota musí sa musí zhodovať s poľom "@nom_champ@" a musí byť rovnakého typu', # MODIF
+	'erreur_comparaison_grand' => 'Hodnota musí byť väčšia ako pole "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'Hodnota musí byť väčšia alebo rovná poľu "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'Hodnota musí byť menšia ako pole "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'Hodnota musí byť menšia alebo rovná ako "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'Kód farby nie je platný.',
 	'erreur_date' => 'Tento dátum je neplatný.',
 	'erreur_date_format' => 'Formát dátumu je neplatný.',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_heure_format' => 'Formát času, ktorý ste zadali, nie je akceptovaný.',
 	'erreur_id_document' => 'Tento identifikátor dokumentu nie je platný.',
 	'erreur_inconnue_generique' => 'Formát nie je správny.',
-	'erreur_isbn' => 'Číslo ISBN nie je platné (napr. 978-2-1234-5680-3 alebo 2-1234-5680-X)',
+	'erreur_isbn' => 'Číslo ISBN nie je platné (napr. 978-2-1234-5680-3 alebo 2-1234-5680-X)', # MODIF
 	'erreur_isbn_13_X' => 'Číslo ISBN-13 sa nemôže končiť písmenom X.',
 	'erreur_isbn_G' => 'Musí sa začínať číslami 978 alebo 979.',
 	'erreur_isbn_nb_caracteres' => 'Číslo ISBN musí mať 10 alebo 13 znakov okrem spojovníkov (teraz má @nb@).',
@@ -49,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'Údaj nesmie mať menej ako @min@ znakov (teraz má @nb@).',
 	'erreur_telephone' => 'Telefónne číslo je neplatné.',
 	'erreur_url' => 'Internetová adresa <em>@url@</em> je neplatná.',
-	'erreur_url_protocole' => 'Zadaná adresa <em>(@url@)</em> sa musí začínať s @protocole@',
-	'erreur_url_protocole_exact' => 'Zadaná adresa <em>(@url@)</em> sa nezačína s platným protokolom (napr. http://)',
+	'erreur_url_protocole' => 'Zadaná adresa <em>(@url@)</em> sa musí začínať s @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'Zadaná adresa <em>(@url@)</em> sa nezačína s platným protokolom (napr. http://)', # MODIF
 
 	// N
 	'normaliser_option_date' => 'Štandardizovať dátum?',

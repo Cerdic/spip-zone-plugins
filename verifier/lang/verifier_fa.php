@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'اين كد پستي درست نيست.',
-	'erreur_comparaison_egal' => 'اين مقدار بايد با ميدان"@nom_champ@"  مساوي باشد',
-	'erreur_comparaison_egal_type' => 'اين مقدار بايد با نوع مقدار ميدان  "@nom_champ@" مساوي و يكي باشد',
-	'erreur_comparaison_grand' => 'اين مقدار بايد از ميدان"@nom_champ@" بالاتر باشد',
-	'erreur_comparaison_grand_egal' => 'اين مقدار بايد از مقدار ميدانِ "@nom_champ@"بالاتر يا مساوي باشد',
-	'erreur_comparaison_petit' => 'اين مقدار بايد از مقدار ميدان"@nom_champ@"  پائين‌تر باشد',
-	'erreur_comparaison_petit_egal' => 'اين مقدار بايد از مقدار ميدان "@nom_champ@"پائين‌تر يا با آن مساوي باشد',
+	'erreur_comparaison_egal' => 'اين مقدار بايد با ميدان"@nom_champ@"  مساوي باشد', # MODIF
+	'erreur_comparaison_egal_type' => 'اين مقدار بايد با نوع مقدار ميدان  "@nom_champ@" مساوي و يكي باشد', # MODIF
+	'erreur_comparaison_grand' => 'اين مقدار بايد از ميدان"@nom_champ@" بالاتر باشد', # MODIF
+	'erreur_comparaison_grand_egal' => 'اين مقدار بايد از مقدار ميدانِ "@nom_champ@"بالاتر يا مساوي باشد', # MODIF
+	'erreur_comparaison_petit' => 'اين مقدار بايد از مقدار ميدان"@nom_champ@"  پائين‌تر باشد', # MODIF
+	'erreur_comparaison_petit_egal' => 'اين مقدار بايد از مقدار ميدان "@nom_champ@"پائين‌تر يا با آن مساوي باشد', # MODIF
 	'erreur_couleur' => 'كد رنگ معتبر نيست.',
 	'erreur_date' => 'تاريخ معتبر نيست.',
 	'erreur_date_format' => 'فرمت تاريخ قبول نيست.',
@@ -40,8 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'اين مقدار نبايد كم‌تر از @min@ كارآكتر داشته باشد.', # MODIF
 	'erreur_telephone' => 'اين شماره معتبر نيست.',
 	'erreur_url' => 'نشاني <em>@url@</em> معتبر نيست',
-	'erreur_url_protocole' => 'نشاني وارد شده <em>(@url@)</em> doit بايد با @protocole@ آغاز شود. ',
-	'erreur_url_protocole_exact' => 'نشاني وارد شده <em>(@url@)</em> با يك پروتكل معتبر (http:// مانند)شروع نمي‌شود',
+	'erreur_url_protocole' => 'نشاني وارد شده <em>(@url@)</em> doit بايد با @protocole@ آغاز شود. ', # MODIF
+	'erreur_url_protocole_exact' => 'نشاني وارد شده <em>(@url@)</em> با يك پروتكل معتبر (http:// مانند)شروع نمي‌شود', # MODIF
 
 	// N
 	'normaliser_option_date' => 'عادي‌سازي داده‌؟',

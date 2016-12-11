@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Este Cep está incorreto.',
-	'erreur_comparaison_egal' => 'O valor deve ser igual ao campo "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'O valor deve ser igual e do mesmo tipo que o campo "@nom_champ@"',
-	'erreur_comparaison_grand' => 'O valor deve ser superior ao campo "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'O valor deve ser superior ou igual ao campo "@nom_champ@"',
-	'erreur_comparaison_petit' => 'O valor deve ser inferior ao campo "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'O valor deve ser inferior ou igual ao campo "@nom_champ@"',
+	'erreur_comparaison_egal' => 'O valor deve ser igual ao campo "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'O valor deve ser igual e do mesmo tipo que o campo "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand' => 'O valor deve ser superior ao campo "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'O valor deve ser superior ou igual ao campo "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'O valor deve ser inferior ao campo "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'O valor deve ser inferior ou igual ao campo "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'O código de cor não é válido.',
 	'erreur_date' => 'A data não é válida.',
 	'erreur_date_format' => 'O formato da data não é aceitável.',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_id_document' => 'Esta extensão de documento não é válida.',
 	'erreur_id_objet' => 'Este ID não é válido.',
 	'erreur_inconnue_generique' => 'O formato não está correto.',
-	'erreur_isbn' => 'O número ISBN não é válido (ex: 978-2-1234-5680-3 ou 2-1234-5680-X)',
+	'erreur_isbn' => 'O número ISBN não é válido (ex: 978-2-1234-5680-3 ou 2-1234-5680-X)', # MODIF
 	'erreur_isbn_13_X' => 'Um número ISBN-13 não pode terminar em X.',
 	'erreur_isbn_G' => 'O primeiro segmento deve ser igual a 978 ou 979.',
 	'erreur_isbn_nb_caracteres' => 'O número ISBN deve ter 10 ou 13 caractéres, sem contar os traços (atualmente @nb@).',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_isbn_segment' => 'O segmento "@segment@" tem @nb@ número(s) a mais.',
 	'erreur_isbn_segment_lettre' => 'O segmento "@segment@" não pode conter letras.',
 	'erreur_numerique' => 'O formato do número não é válido.',
-	'erreur_objet' => 'Este objeto não é válido',
+	'erreur_objet' => 'Este objeto não é válido', # MODIF
 	'erreur_regex' => 'O formato da expressão não é válido.',
 	'erreur_siren' => 'O número SIREN não é válido.',
 	'erreur_siret' => 'O número SIRET não é válido.',
@@ -51,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'O valor deve ter no mínimo @min@ caracteres (atualmente @nb@).',
 	'erreur_telephone' => 'O número não é válido.',
 	'erreur_url' => 'O endereço <em>@url@</em> não é válido.',
-	'erreur_url_protocole' => 'O endereço informado <em>(@url@)</em> deve começar com @protocole@',
-	'erreur_url_protocole_exact' => 'O endereço informado <em>(@url@)</em> não começa com um protocolo válido (http:// por exemplo)',
+	'erreur_url_protocole' => 'O endereço informado <em>(@url@)</em> deve começar com @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'O endereço informado <em>(@url@)</em> não começa com um protocolo válido (http:// por exemplo)', # MODIF
 
 	// N
 	'normaliser_option_date' => 'Normalizar a data?',

@@ -32,8 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'Der Wert muß mindestens @min@ Zeichen haben.', # MODIF
 	'erreur_telephone' => 'Zahl ungültig',
 	'erreur_url' => 'Die Adresse <em>@url@</em> ist ungültig.',
-	'erreur_url_protocole' => 'Die eingegebene Adresse <em>(@url@)</em> muß mit @protocole@ beginnen.',
-	'erreur_url_protocole_exact' => 'Die eingegebene Adresse <em>(@url@)</em> beginnt nicht mit einem gültigen Protokoll (zum Beispiel http:// ).',
+	'erreur_url_protocole' => 'Die eingegebene Adresse <em>(@url@)</em> muß mit @protocole@ beginnen.', # MODIF
+	'erreur_url_protocole_exact' => 'Die eingegebene Adresse <em>(@url@)</em> beginnt nicht mit einem gültigen Protokoll (zum Beispiel http:// ).', # MODIF
 
 	// O
 	'option_decimal_nb_decimales_label' => 'Dezimalstellen nach dem Komma',

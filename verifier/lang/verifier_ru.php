@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Неправильный индекс',
-	'erreur_comparaison_egal' => 'Значение должно соответствовать полю "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'Значение должно соответствовать и быть такого же типа как поле "@nom_champ@"',
-	'erreur_comparaison_grand' => 'Значение должно быть больше чем поле "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'Значение должно быть больше или соответствовать полю "@nom_champ@"',
-	'erreur_comparaison_petit' => 'Значаение должно быть меньше чем поле "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'Значение должно быть меньшим или равным полю "@nom_champ@"',
+	'erreur_comparaison_egal' => 'Значение должно соответствовать полю "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'Значение должно соответствовать и быть такого же типа как поле "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand' => 'Значение должно быть больше чем поле "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'Значение должно быть больше или соответствовать полю "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'Значаение должно быть меньше чем поле "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'Значение должно быть меньшим или равным полю "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'Ошибка в коде цвета',
 	'erreur_date' => 'Неправильный формат даты.',
 	'erreur_date_format' => 'Неправильный формат даты.',
@@ -40,8 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'Значение должно иметь не меньше чем @min@ знаков.',
 	'erreur_telephone' => 'Неверный номер телефона.',
 	'erreur_url' => 'Неверный URL адрес <em>@url@</em>',
-	'erreur_url_protocole' => 'Адрес <em>(@url@)</em> должен начинаться с @protocole@',
-	'erreur_url_protocole_exact' => 'Адрес <em>(@url@)</em> должен начинаться с протокола  (например http:// )',
+	'erreur_url_protocole' => 'Адрес <em>(@url@)</em> должен начинаться с @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'Адрес <em>(@url@)</em> должен начинаться с протокола  (например http:// )', # MODIF
 
 	// N
 	'normaliser_option_date' => 'Упорядочить дату?',

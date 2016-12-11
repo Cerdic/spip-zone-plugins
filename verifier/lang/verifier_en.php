@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'This postcode is invalid.',
-	'erreur_comparaison_egal' => 'The value must be equal to the field "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'The value must be equal and the same type as the field "@nom_champ@"',
-	'erreur_comparaison_grand' => 'The value must be greater than the field "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'The value must be greater than or equal to the field "@nom_champ@"',
-	'erreur_comparaison_petit' => 'The value must be lower than the field "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'The value must be lower than or equal to the field "@nom_champ@"',
+	'erreur_comparaison_egal' => 'The value must be equal to the field "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'The value must be equal and the same type as the field "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand' => 'The value must be greater than the field "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'The value must be greater than or equal to the field "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'The value must be lower than the field "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'The value must be lower than or equal to the field "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'The color code is invalid.',
 	'erreur_date' => 'The date is invalid.',
 	'erreur_date_format' => 'The date format is invalid.',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_id_document' => 'This document identifier is not valid.',
 	'erreur_id_objet' => 'This identifier is not valid.',
 	'erreur_inconnue_generique' => 'The format is invalid.',
-	'erreur_isbn' => 'the ISBN number is not valid (ex: 978-2-1234-5680-3 or 2-1234-5680-X)',
+	'erreur_isbn' => 'the ISBN number is not valid (ex: 978-2-1234-5680-3 or 2-1234-5680-X)', # MODIF
 	'erreur_isbn_13_X' => 'Un numéro ISBN-13 ne peut pas se terminer par X.', # a 13 digits ISBN number must not end with an X.
 	'erreur_isbn_G' => 'Le premier segment doit être égal à 978 ou 979.', # the first segment must be 978 or 979.
 	'erreur_isbn_nb_caracteres' => 'the ISBN number must have 10 ou 13 caracters, not including the hyphens (curently @nb@).',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_isbn_segment' => 'the segment "@segment@" has @nb@ exceeding caracter(s).',
 	'erreur_isbn_segment_lettre' => 'the segment "@segment@" must not have any letter.',
 	'erreur_numerique' => 'The number format is invalid.',
-	'erreur_objet' => 'This object is not valid',
+	'erreur_objet' => 'This object is not valid', # MODIF
 	'erreur_regex' => 'The regex string is incorrectly formatted.',
 	'erreur_siren' => 'The SIREN number is invalid.',
 	'erreur_siret' => 'The SIRET number is invalid.',
@@ -51,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'The value must have no less than @min@ characters (currently @nb@).',
 	'erreur_telephone' => 'The telephone number is invalid.',
 	'erreur_url' => 'The URL address <em>@url@</em> is invalid.',
-	'erreur_url_protocole' => 'The address entered <em>(@url@)</em> must start with @protocole@',
-	'erreur_url_protocole_exact' => 'The address entered <em>(@url@)</em> does not start with a valid protocol (e.g. http://)',
+	'erreur_url_protocole' => 'The address entered <em>(@url@)</em> must start with @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'The address entered <em>(@url@)</em> does not start with a valid protocol (e.g. http://)', # MODIF
 
 	// N
 	'normaliser_option_date' => 'Normalize the date?',

@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Ce code postal est incorrect.',
-	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@"',
-	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@"',
-	'erreur_comparaison_grand' => 'La valeur doit être supérieure au champ "@nom_champ@"',
-	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"',
-	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"',
-	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"',
+	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand' => 'La valeur doit être supérieure au champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # MODIF
+	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # MODIF
 	'erreur_couleur' => 'Le code couleur n’est pas valide.',
 	'erreur_date' => 'La date n’est pas valide.',
 	'erreur_date_format' => 'Le format de la date n’est pas accepté.',
@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_heure_format' => 'Le format de l’heure n’est pas accepté.',
 	'erreur_id_document' => 'Cet identifiant de document n’est pas valide.',
 	'erreur_inconnue_generique' => 'Le format n’est pas correct.',
-	'erreur_isbn' => 'Le numéro ISBN n’est pas valide (ex : 978-2-1234-5680-3 ou 2-1234-5680-X)',
+	'erreur_isbn' => 'Le numéro ISBN n’est pas valide (ex : 978-2-1234-5680-3 ou 2-1234-5680-X)', # MODIF
 	'erreur_isbn_13_X' => 'Un numéro ISBN-13 ne peut pas se terminer par X.',
 	'erreur_isbn_G' => 'Le premier segment doit être égal à 978 ou 979.',
 	'erreur_isbn_nb_caracteres' => 'Le numéro ISBN doit comprendre 10 ou 13 caractères, sans compter les tirets (actuellement @nb@).',
@@ -49,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_min' => 'La valeur doit comprendre au minimum @min@ caractères (actuellement @nb@).',
 	'erreur_telephone' => 'Le numéro n’est pas valide.',
 	'erreur_url' => 'L’adresse <em>@url@</em> n’est pas valide.',
-	'erreur_url_protocole' => 'L’adresse saisie <em>(@url@)</em> doit commencer par @protocole@',
-	'erreur_url_protocole_exact' => 'L’adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)',
+	'erreur_url_protocole' => 'L’adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # MODIF
+	'erreur_url_protocole_exact' => 'L’adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # MODIF
 
 	// N
 	'normaliser_option_date' => 'Normaliser la date ?',
