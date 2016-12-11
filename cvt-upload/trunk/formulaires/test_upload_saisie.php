@@ -77,7 +77,7 @@ function formulaires_test_upload_saisie_fichiers(){
 		'fichier_image_web',
 		'fichier_leger',
 		'image_web_pas_trop_grande', 
-		'image_web_pas_trop_rotation', 
+		'image_web_pas_trop_grande_rotation',
 	);
 }
 
