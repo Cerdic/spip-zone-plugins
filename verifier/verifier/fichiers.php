@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   Si on vérifier un upload multiple, un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
  *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.  
  * @return string
- */
+**/
 function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 	if (!is_array($valeur['tmp_name'])){//si on reçoit une info de type fichier unique, on bascule comme si on était fichier multiple
 		$old_valeur = $valeur;
@@ -65,7 +65,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
  * @param array $options
  *   Les options tels que passés à verifier_fichiers()
  * @return string
- */
+**/
 function verifier_fichier_mime($valeur,$cle,$options){
 	if ($options['mime'] == 'specifique'){
 		if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
@@ -98,7 +98,7 @@ function verifier_fichier_mime($valeur,$cle,$options){
  * @param array $options
  *   Les options tels que passés à verifier_fichiers()
  * @return string
- */
+**/
 function verifier_fichier_taille($valeur,$cle,$options){
 	$taille = $valeur['size'][$cle];
 	$mime = $valeur['type'][$cle];
