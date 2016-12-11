@@ -18,8 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   - taille_max (en Kio)
  *   - largeur_max (en px)
  *   - hauteur_max (en px)
- * @param array &$erreurs_par_fichier
- *   Un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
+ * @param array|string &$erreurs_par_fichier
+ *   Si on vérifier un upload multiple, un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
+ *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.  
  * @return string
  */
 function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
@@ -36,8 +37,15 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 			continue;	
 		}
 		if ($erreur=verifier_fichier_mime($valeur,$cle,$options)){// On commence par vérifier le type
-			$erreurs_par_fichier[$cle] = $erreur;
+			if (!is_array($erreurs_par_fichier)){
+				$erreurs_par_fichier = $erreur;
+				return $erreur;
+			}
+			else{
+				$erreurs_par_fichier[$cle] = $erreur;
+			}
 		}
+
 	}
 	if (!empty($erreurs_par_fichier)){
 		return implode($erreurs_par_fichier,"<br />"); 
