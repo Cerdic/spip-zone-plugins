@@ -40,15 +40,15 @@ function formulaires_test_upload_saisie_verifier(){
 	if (_request('tromperie'))
 		$erreurs['tromperie'] = 'Il ne fallait rien remplir.';
 	
-	// Vérifier que la saisie PDFs ne contient que des PDF
 	$verifier = charger_fonction('verifier', 'inc', true);
+	
+	// Vérifier que la saisie PDFs ne contient que des PDF
 	$options = array(
 		'mime'=>'specifique',
 		'mime_specifique'=>array('application/pdf')
 	);
 	$erreurs_par_fichier = array();
-	$erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier);
-	if ($erreur!=''){
+	if ($erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier)){
 		$erreurs['pdfs'] = $erreur;
 		cvtupload_nettoyer_files_selon_erreurs('pdfs',$erreurs_par_fichier);
 	}	
