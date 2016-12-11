@@ -75,7 +75,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 					$erreurs_par_fichier = $erreur;
 					return $erreur;
 				} else{
-					$erreurs_par_fichier[$cle] = $erreur;
+					$erreurs_par_fichier[$cle] = "- $erreur";
 				}
 			}
 		}
