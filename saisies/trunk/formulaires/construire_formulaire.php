@@ -155,6 +155,13 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)) {
 		include_spip('inc/verifier');
 		$liste_verifications = verifier_lister_disponibles();
+		// La vérification fichiers ne sert que pour la saisie fichiers, et réciproquement, cette saisies n'utilise que cette vérification
+		if ($saisie['saisie'] == 'fichiers') {
+			$liste_verifications = array('fichiers'=>$liste_verifications['fichiers']);
+		} else {
+			unset($liste_verifications['fichiers']);
+		}
+		
 		$chemin_validation[] = 'saisies';
 		$chemin_validation[] = 1000000; // à la fin
 
