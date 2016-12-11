@@ -16,8 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   - mime au choix 'image_web','tout_mime','specifique'
  *   - mime_specifique (si l'option 'mime_specifique' est choisi ci-dessus)
  *   - taille_max (en Kio)
- *   - largeur_max (en px)
- *   - hauteur_max (en px)
+ *   - dimension_max, tableau contenant les dimension max:
+ *		- largeur (en px)
+ *		- hauteur (en px)
+ *		- autoriser_rotation : boolean à mettre à true si on autorise une image qui tiendrait dans ces dimensions si on faisait une rotation de 90°
  * @param array|string &$erreurs_par_fichier
  *   Si on vérifier un upload multiple, un tableau, passé par référence, qui contient le détail des erreurs fichier de $_FILES['fichier'] par fichier
  *   Si on vérifie un upload unique, une chaîne qui contiendra l'erreur du fichier.  
@@ -36,7 +38,7 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 		if ($valeur['error'][$cle]!=0){//On vérifie uniquement les fichiers bien expediés
 			continue;	
 		}
-		foreach (array('mime','taille') as $verification){ // On va vérifier d'hivers choses, dans un certain ordre, en confiant cela à des fonctions homonymes
+		foreach (array('mime','taille','dimension_max') as $verification){ // On va vérifier d'hivers choses, dans un certain ordre, en confiant cela à des fonctions homonymes
 			$fonction_verification = "verifier_fichier_$verification";
 			if ($erreur = $fonction_verification($valeur,$cle,$options)) {
 				if (!is_array($erreurs_par_fichier)) {
@@ -126,4 +128,59 @@ function verifier_fichier_taille($valeur,$cle,$options){
 		}
 	}
 	return '';
+}
+
+/**
+ * Vérifier la dimension d'une saisie d'envoi de fichiers
+ *
+ * Les dimensions sont vérifiées en fonction du paramètre passé en option, sinon en fonction des constantes:
+ *	- _IMG_MAX_WIDTH
+ *	- _IMG_MAX_HEIGHT
+ *
+ * On suppose que le type mime a été vérifié auparavent
+ * @param array $valeur
+ *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
+ *   Doit être un champ plusieurs uploads
+ * @param int $cle
+ *   La clé du tableau qu'on vérifie
+ * @param array $options
+ *   Les options tels que passés à verifier_fichiers()
+ * @return string
+ **/
+function verifier_fichier_dimension_max($valeur, $cle, $options) {
+	// On commence par récupérer les dimension de l'image
+	include_spip('inc/filtres');
+	$imagesize = @getimagesize($valeur['tmp_name'][$cle]);
+
+	// Puis les infos sur ce qu'on autorise
+	$largeur_max = (isset($options['dimension_max']['largeur']) ? $options['dimension_max']['largeur'] : (defined('_IMG_MAX_WIDTH') ? _IMG_MAX_WIDTH : 0));
+	$hauteur_max = (isset($options['dimension_max']['hauteur']) ? $options['dimension_max']['hauteur'] : (defined('_IMG_MAX_HEIGHT') ? _IMG_MAX_HEIGHT : 0));
+	$autoriser_rotation = (isset($options['dimension_max']['autoriser_rotation'])) ? $options['dimension_max']['autoriser_rotation'] : false;
+	
+	// Et on teste, si on a ce qui est nécessaire pour tester
+	if ($imagesize and ($hauteur_max or $largeur_max)) {
+		if ($autoriser_rotation) { // dans le cas où on autorise une rotation
+			if (
+					($imagesize[0] > $largeur_max or $imagesize[1] > $hauteur_max)
+					and  
+					($imagesize[1] > $largeur_max or $imagesize[0] > $hauteur_max)
+				)	{
+				return _T('verifier:erreur_dimension_image', array(
+					'name'       => $valeur['name'][$cle],
+					'taille_max' => $largeur_max . '&nbsp;px * ' . $hauteur_max . '&nbsp;px',
+					'taille'     => $imagesize[0] . '&nbsp;px * ' . $imagesize[1] . '&nbsp;px'
+					)
+				);
+			}
+		} else { // dans le cas où on autorise pas la rotation
+			if ($imagesize[0] > $largeur_max or $imagesize[1] > $hauteur_max) {
+				return _T('verifier:erreur_dimension_image', array(
+					'name'       => $valeur['name'][$cle],
+					'taille_max' => $largeur_max . '&nbsp;px * ' . $hauteur_max . '&nbsp;px',
+					'taille'     => $imagesize[0] . '&nbsp;px * ' . $imagesize[1] . '&nbsp;px'
+					)
+				);
+			}
+		}
+	}
 }
