@@ -36,16 +36,17 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 		if ($valeur['error'][$cle]!=0){//On vérifie uniquement les fichiers bien expediés
 			continue;	
 		}
-		if ($erreur=verifier_fichier_mime($valeur,$cle,$options)){// On commence par vérifier le type
-			if (!is_array($erreurs_par_fichier)){
-				$erreurs_par_fichier = $erreur;
-				return $erreur;
-			}
-			else{
-				$erreurs_par_fichier[$cle] = $erreur;
+		foreach (array('mime','taille') as $verification){ // On va vérifier d'hivers choses, dans un certain ordre, en confiant cela à des fonctions homonymes
+			$fonction_verification = "verifier_fichier_$verification";
+			if ($erreur = $fonction_verification($valeur,$cle,$options)) {
+				if (!is_array($erreurs_par_fichier)) {
+					$erreurs_par_fichier = $erreur;
+					return $erreur;
+				} else{
+					$erreurs_par_fichier[$cle] = $erreur;
+				}
 			}
 		}
-
 	}
 	if (!empty($erreurs_par_fichier)){
 		return implode($erreurs_par_fichier,"<br />"); 
@@ -78,6 +79,50 @@ function verifier_fichier_mime($valeur,$cle,$options){
 	} elseif ($options['mime'] == 'image_web') {
 		if (!in_array($valeur['type'][$cle],array('image/gif','image/jpeg','image/png'))) {
 			return _T('verifier:erreur_type_image',array('name'=>$valeur['name'][$cle]));
+		}
+	}
+	return '';
+}
+
+
+/**
+ * Vérifier la taille d'une saisie d'envoi de fichiers
+ * La taille est vérifiée en fonction du paramètre passé en option, sinon en fonction d'une constante:
+ *	- _IMG_MAX_SIZE si jpg/png/gif
+ *	- _DOC_MAX_SIZE si pas jpg/png/gif ou si _IMG_MAX_SIZE n'est pas définie
+ * @param array $valeur
+ *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
+ *   Doit être un champ plusieurs uploads
+ * @param int $cle
+ *   La clé du tableau qu'on vérifie
+ * @param array $options
+ *   Les options tels que passés à verifier_fichiers()
+ * @return string
+ */
+function verifier_fichier_taille($valeur,$cle,$options){
+	$taille = $valeur['size'][$cle];
+	$mime = $valeur['type'][$cle];
+
+	// On commence par déterminer la taille max
+	if (isset($options['taille_max'])) {
+		$taille_max = $options['taille_max'];
+	} elseif (in_array($mime, array('image/gif','image/jpeg','image/png')) and defined('_IMG_MAX_SIZE')) {
+		$taille_max = _IMG_MAX_SIZE;
+	} elseif (defined('_DOC_MAX_SIZE')) {
+		$taille_max = _DOC_MAX_SIZE;
+	}
+
+	$taille_max = intval($taille_max); // précaution
+		
+	//Si la taille max est déterminée, on vérifie que le fichier ne dépasse pas cette taille
+	if ($taille_max) {
+		$taille_max = 1024 * $taille_max; // passage de l'expression en kibioctets à une expression en octets 
+		if ($taille > $taille_max) {
+			return _T('verifier:erreur_taille_fichier', array(
+				'name'       => $valeur['name'][$cle],
+				'taille_max' => taille_en_octets($taille_max),
+				'taille'     => taille_en_octets($taille)
+			));
 		}
 	}
 	return '';

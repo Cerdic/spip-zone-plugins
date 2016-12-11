@@ -32,7 +32,7 @@ function verifier_image_upload_dist($valeur, $options) {
 	if ($taille_max) {
 		$taille = ($valeur['size'] ? $valeur['size'] : @filesize($valeur['tmp_name']));
 		if ($taille > $taille_max) {
-			return _T('verifier:erreur_taille_image', array(
+			return _T('verifier:erreur_taille_fichier', array(
 				'name'       => $valeur['name'],
 				'taille_max' => taille_en_octets($taille_max),
 				'taille'     => taille_en_octets($taille)
