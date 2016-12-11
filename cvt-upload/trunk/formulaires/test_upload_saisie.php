@@ -21,6 +21,14 @@ function formulaires_test_upload_saisie_charger(){
 				'label'=>'Plusieurs fichiers PDF dans un même champ',
 				'nb_fichiers'=>2
 			)
+		),
+		array(
+			'saisie'=>'fichiers',
+			'options'=>array(
+				'nom'=>'fichier_tout_mime', 
+				'label'=>'Un fichier, n\'importe quel type MIME accepté par SPIP',
+				'nb_fichiers'=>1
+			)
 		)
 	);
 	$contexte = array(
@@ -31,7 +39,7 @@ function formulaires_test_upload_saisie_charger(){
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array('pdfs');
+	return array('pdfs','fichier_tout_mime');
 }
 
 function formulaires_test_upload_saisie_verifier(){
@@ -51,6 +59,16 @@ function formulaires_test_upload_saisie_verifier(){
 	if ($erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier)){
 		$erreurs['pdfs'] = $erreur;
 		cvtupload_nettoyer_files_selon_erreurs('pdfs',$erreurs_par_fichier);
+	}	
+
+	// Vérifier que le champ saisie fichier_tout_mime soit d'un mime permis par SPIP
+	$options = array(
+		'mime' => 'tout_mime'
+	);
+	$erreurs_par_fichier = array();
+	if ($erreur = $verifier($_FILES['fichier_tout_mime'], 'fichiers', $options,$erreurs_par_fichier)){
+		$erreurs['fichier_tout_mime'] = $erreur;
+		cvtupload_nettoyer_files_selon_erreurs('fichier_tout_mime',$erreurs_par_fichier);
 	}	
 	return $erreurs;
 }
