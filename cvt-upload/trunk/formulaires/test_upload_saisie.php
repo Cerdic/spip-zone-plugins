@@ -50,7 +50,7 @@ function formulaires_test_upload_saisie_charger(){
 			'saisie' => 'fichiers',
 			'options' => array(
 				'nom' => 'image_web_pas_trop_grande',
-				'label' => 'Une image web pas plus grande que 640 px de largeur et 480 px de hauteur',
+				'label' => 'Une image web pas plus grande que 1024 px de largeur et 640 px de hauteur',
 				'nb_fichiers' => 1
 			)
 		),
@@ -58,7 +58,7 @@ function formulaires_test_upload_saisie_charger(){
 			'saisie' => 'fichiers',
 			'options' => array(
 				'nom' => 'image_web_pas_trop_grande_rotation',
-				'label' => 'Une image web pas plus grande que 640 px de largeur et 480 px de hauteur, ou l\'inverse',
+				'label' => 'Une image web pas plus grande que 1024 px de largeur et 640 px de hauteur, ou l\'inverse',
 				'nb_fichiers' => 1
 			)
 		)
