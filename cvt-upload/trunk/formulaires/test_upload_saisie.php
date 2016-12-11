@@ -45,6 +45,22 @@ function formulaires_test_upload_saisie_charger(){
 				'label' => 'Un fichier léger (≤ 10 kio)',
 				'nb_fichiers' => 1
 			)
+		),
+		array(
+			'saisie' => 'fichiers',
+			'options' => array(
+				'nom' => 'image_web_pas_trop_grande',
+				'label' => 'Une image web pas plus grande que 640 px de largeur et 480 px de hauteur',
+				'nb_fichiers' => 1
+			)
+		),
+		array(
+			'saisie' => 'fichiers',
+			'options' => array(
+				'nom' => 'image_web_pas_trop_grande_rotation',
+				'label' => 'Une image web pas plus grande que 640 px de largeur et 480 px de hauteur, ou l\'inverse',
+				'nb_fichiers' => 1
+			)
 		)
 	);
 	$contexte = array(
@@ -55,7 +71,14 @@ function formulaires_test_upload_saisie_charger(){
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array('pdfs','fichier_tout_mime','fichier_image_web','fichier_leger');
+	return array(
+		'pdfs',
+		'fichier_tout_mime',
+		'fichier_image_web',
+		'fichier_leger',
+		'image_web_pas_trop_grande', 
+		'image_web_pas_trop_rotation', 
+	);
 }
 
 function formulaires_test_upload_saisie_verifier(){
@@ -105,6 +128,35 @@ function formulaires_test_upload_saisie_verifier(){
 	if ($erreur = $verifier($_FILES['fichier_leger'], 'fichiers', $options,$erreurs_par_fichier)){
 		$erreurs['fichier_leger'] = $erreur;
 		cvtupload_nettoyer_files_selon_erreurs('fichier_leger',$erreurs_par_fichier);
+	}
+
+	// Vérifier que le champ saisie image_web_pas_trop_grande ne dépasse pas 1024 px de large et 640 de haut 
+	$options = array(
+		'mime' => 'image_web', 
+		'dimension_max' => array(
+			'largeur' => 1024,
+			'hauteur' => 640
+		)
+	);
+	$erreurs_par_fichier = array();
+	if ($erreur = $verifier($_FILES['image_web_pas_trop_grande'], 'fichiers', $options,$erreurs_par_fichier)){
+		$erreurs['image_web_pas_trop_grande'] = $erreur;
+		cvtupload_nettoyer_files_selon_erreurs('image_web_pas_trop_grande',$erreurs_par_fichier);
+	}
+
+	// Vérifier que le champ saisie image_web_pas_trop_grande_rotation ne dépasse pas 1024 px de large et 640 de haut, ou l'inverse
+	$options = array(
+		'mime' => 'image_web', 
+		'dimension_max' => array(
+			'largeur' => 1024,
+			'hauteur' => 640,
+			'autoriser_rotation' => True
+		)
+	);
+	$erreurs_par_fichier = array();
+	if ($erreur = $verifier($_FILES['image_web_pas_trop_grande_rotation'], 'fichiers', $options,$erreurs_par_fichier)){
+		$erreurs['image_web_pas_trop_grande_rotation'] = $erreur;
+		cvtupload_nettoyer_files_selon_erreurs('image_web_pas_trop_grande_rotation',$erreurs_par_fichier);
 	}
 	return $erreurs;
 }
