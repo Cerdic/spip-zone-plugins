@@ -33,7 +33,7 @@ function formulaires_test_upload_verifier(){
 	// _IMG_MAX_SIZE, _IMG_MAX_WIDTH, _IMG_MAX_HEIGHT
 	$verifier = charger_fonction('verifier', 'inc', true);
 	$options = array(
-		'taille_max' => 250, // en Ko
+		'taille_max' => 250, // en kio
 		'largeur_max' => 800, // en px
 		'hauteur_max' => 600, // en px
 	);
