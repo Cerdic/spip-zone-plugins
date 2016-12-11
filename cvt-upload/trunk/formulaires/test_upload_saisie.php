@@ -3,8 +3,8 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cvtupload');
-
-function formulaires_test_upload_saisie_charger(){
+include_spip('inc/saisies');
+function formulaires_test_upload_saisies(){
 	$saisies = array(
 		array(
 			'saisie'=>'input',
@@ -20,6 +20,13 @@ function formulaires_test_upload_saisie_charger(){
 				'nom'=>'pdfs',
 				'label'=>'Plusieurs fichiers PDF dans un même champ',
 				'nb_fichiers'=>2
+			), 
+			'verifier' => array(
+				'type'=>'fichiers',
+				'options'=>array(
+					'mime'=>'specifique',
+					'mime_specifique'=>array('application/pdf')
+				)
 			)
 		),
 		array(
@@ -28,6 +35,10 @@ function formulaires_test_upload_saisie_charger(){
 				'nom'=>'fichier_tout_mime', 
 				'label'=>'Un fichier, n\'importe quel type MIME accepté par SPIP',
 				'nb_fichiers'=>1
+			),
+			'verifier' => array(
+				'type'=>'fichiers',
+				'options' => array('mime' => 'tout_mime')
 			)
 		),
 		array(
@@ -36,6 +47,10 @@ function formulaires_test_upload_saisie_charger(){
 				'nom' => 'fichier_image_web',
 				'label' => 'Un fichier de type image web (jpg, png, gif)',
 				'nb_fichiers' => 1
+			), 
+			'verifier' => array(
+				'type'=>'fichiers',
+				'options' => array('mime' => 'image_web')
 			)
 		),
 		array(
@@ -44,6 +59,10 @@ function formulaires_test_upload_saisie_charger(){
 				'nom' => 'fichier_leger',
 				'label' => 'Un fichier léger (≤ 10 kio)',
 				'nb_fichiers' => 1
+			), 
+			'verifier' => array(
+				'type' => 'fichiers',
+				'options' => array('taille_max' => 10)
 			)
 		),
 		array(
@@ -52,6 +71,16 @@ function formulaires_test_upload_saisie_charger(){
 				'nom' => 'image_web_pas_trop_grande',
 				'label' => 'Une image web pas plus grande que 1024 px de largeur et 640 px de hauteur',
 				'nb_fichiers' => 1
+			),
+			'verifier'=>array(
+				'type'=>'fichiers',
+				'options' => array(
+					'mime' => 'image_web', 
+					'dimension_max' => array(
+						'largeur' => 1024,
+						'hauteur' => 640
+					)
+				)
 			)
 		),
 		array(
@@ -60,11 +89,25 @@ function formulaires_test_upload_saisie_charger(){
 				'nom' => 'image_web_pas_trop_grande_rotation',
 				'label' => 'Une image web pas plus grande que 1024 px de largeur et 640 px de hauteur, ou l\'inverse',
 				'nb_fichiers' => 1
+			),
+			'verifier' => array(
+				'type'=>'fichiers',
+				'options' => array(
+					'mime' => 'image_web', 
+					'dimension_max' => array(
+						'largeur' => 1024,
+						'hauteur' => 640,
+						'autoriser_rotation' => True
+					)
+				)
 			)
 		)
 	);
+	return $saisies;
+}
+function formulaires_test_upload_saisie_charger(){
 	$contexte = array(
-		'mes_saisies' => $saisies
+		'mes_saisies' => formulaires_test_upload_saisies()
 	);
 
 	return $contexte;
@@ -87,77 +130,17 @@ function formulaires_test_upload_saisie_verifier(){
 	if (_request('tromperie'))
 		$erreurs['tromperie'] = 'Il ne fallait rien remplir.';
 
-	$verifier = charger_fonction('verifier', 'inc', true);
-
-	// Vérifier que la saisie PDFs ne contient que des PDF
-	$options = array(
-		'mime'=>'specifique',
-		'mime_specifique'=>array('application/pdf')
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['pdfs'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('pdfs',$erreurs_par_fichier);
-	}	
-
-	// Vérifier que le champ saisie fichier_tout_mime soit d'un mime permis par SPIP
-	$options = array(
-		'mime' => 'tout_mime'
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['fichier_tout_mime'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['fichier_tout_mime'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('fichier_tout_mime',$erreurs_par_fichier);
-	}	
-
-	// Vérifier que le champ saisie fichier_image_web soit une image web
-	$options = array(
-		'mime' => 'image_web'
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['fichier_image_web'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['fichier_image_web'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('fichier_image_web',$erreurs_par_fichier);
-	}	
-
-	// Vérifier que le champ saisie fichier_leger ne dépasse pas 10 kio
-	$options = array(
-		'taille_max' => 10
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['fichier_leger'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['fichier_leger'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('fichier_leger',$erreurs_par_fichier);
+	// Vérifier les autres saisies (de type fichiers)
+	$saisies = formulaires_test_upload_saisies();
+	$erreurs_par_fichier = array(); 
+	$saisies_verifier = saisies_verifier($saisies,true,$erreurs_par_fichier);
+	foreach ($saisies_verifier as $champ => $erreur) { // nettoyer $_FILES des fichiers problématiques
+		cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
 	}
 
-	// Vérifier que le champ saisie image_web_pas_trop_grande ne dépasse pas 1024 px de large et 640 de haut 
-	$options = array(
-		'mime' => 'image_web', 
-		'dimension_max' => array(
-			'largeur' => 1024,
-			'hauteur' => 640
-		)
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['image_web_pas_trop_grande'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['image_web_pas_trop_grande'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('image_web_pas_trop_grande',$erreurs_par_fichier);
-	}
+	// fusionner avec nos précedentes erreurs
+	$erreurs = array_merge($erreurs,$saisies_verifier);
 
-	// Vérifier que le champ saisie image_web_pas_trop_grande_rotation ne dépasse pas 1024 px de large et 640 de haut, ou l'inverse
-	$options = array(
-		'mime' => 'image_web', 
-		'dimension_max' => array(
-			'largeur' => 1024,
-			'hauteur' => 640,
-			'autoriser_rotation' => True
-		)
-	);
-	$erreurs_par_fichier = array();
-	if ($erreur = $verifier($_FILES['image_web_pas_trop_grande_rotation'], 'fichiers', $options,$erreurs_par_fichier)){
-		$erreurs['image_web_pas_trop_grande_rotation'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('image_web_pas_trop_grande_rotation',$erreurs_par_fichier);
-	}
 	return $erreurs;
 }
 
