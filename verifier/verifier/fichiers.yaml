@@ -1,0 +1,53 @@
+
+titre: '<:verifier:type_fichiers:>'
+description: '<:verifier:type_fichiers_descriptions>:'
+options:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'mime'
+      label: '<:verifier:option_fichiers_mime_label:>'
+      datas:
+        tout_mime: '<:verifier:option_fichiers_mime_tout_mime_label:>'
+        image_web: '<:verifier:option_fichiers_mime_image_web_label:>'
+        specifique: '<:verifier:option_fichiers_mime_specifique_label:>'
+      defaut: 'tout_mime'
+  - 
+    saisie: 'input'
+    options:
+      nom: 'taille_max'
+      label: '<:verifier:option_fichiers_taille_max_label:>'
+    verifier:
+      type: 'entier'
+      options:
+        min: 0
+  -  
+    saisie: 'input'
+    options:
+      nom: 'largeur_max'
+      label: '<:verifier:option_fichiers_largeur_max_label:>'
+    verifier:
+      type: 'entier'
+      options:
+        min: 0
+  -  
+    saisie: 'input'
+    options:
+      nom: 'hauteur_max'
+      label: '<:verifier:option_fichiers_hauteur_max_label:>'
+    verifier:
+      type: 'entier'
+      options:
+        min: 0
+  -  
+    saisie: 'case'
+    options:
+      nom: 'dimension_autoriser_rotation'
+      label: '<:verifier:option_fichiers_dimension_autoriser_rotation_label:>'
+      label_case: '<:verifier:option_fichiers_dimension_autoriser_rotation_label_case:>'
+      value: 'on'
+  -
+    saisie: 'type_mime'
+    options:
+      nom: 'mime_specifique'
+      label: '<:verifier:option_fichiers_type_mime_label:>'
