@@ -1,4 +1,3 @@
-[<span class="erreur_message">(#GET{erreurs})</span>]
 <BOUCLE_input(DATA) {enum 1,#ENV{nb_fichiers}}>
 <div class="choix">
   <label for="#ENV{nom}_[(#VALEUR|moins{1})]">[(#ENV{nb_fichiers}|=={1}|?{<:cvtupload:saisie_fichiers_unseul_label:>,<:cvtupload:saisie_fichiers_plusieur_label{nb=#VALEUR}:>})]</label>

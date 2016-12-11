@@ -17,8 +17,8 @@ function formulaires_test_upload_saisie_charger(){
 		array(
 			'saisie'=>'Fichiers',
 			'options'=>array(
-				'nom'=>'plusieurs',
-				'label'=>'Plusieurs fichiers dans un même champ',
+				'nom'=>'pdfs',
+				'label'=>'Plusieurs fichiers PDF dans un même champ',
 				'nb_fichiers'=>2
 			)
 		)
@@ -31,7 +31,7 @@ function formulaires_test_upload_saisie_charger(){
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array('plusieurs');
+	return array('pdfs');
 }
 
 function formulaires_test_upload_saisie_verifier(){
@@ -39,38 +39,23 @@ function formulaires_test_upload_saisie_verifier(){
 	
 	if (_request('tromperie'))
 		$erreurs['tromperie'] = 'Il ne fallait rien remplir.';
-
-	// options pour vérifier les images
-	// si les options ne sont pas renseignées, la vérification se base sur
-	// _IMG_MAX_SIZE, _IMG_MAX_WIDTH, _IMG_MAX_HEIGHT
+	
+	// Vérifier que la saisie PDFs ne contient que des PDF
 	$verifier = charger_fonction('verifier', 'inc', true);
 	$options = array(
-		'taille_max' => 250, // en Ko
-		'largeur_max' => 800, // en px
-		'hauteur_max' => 600, // en px
+		'mime'=>'specifique',
+		'mime_specifique'=>array('application/pdf')
 	);
-
-	// vérifier le champ image unique
-	if ($erreur = $verifier($_FILES['image'], 'image_upload', $options)) {
-		// renvoyer l'erreur dans le formulaire
-		$erreurs['image'] = $erreur;
-		// supprimer le fichier en erreur dans _FILES
-		unset($_FILES['image']);
-	}
-
-	// vérifier le champ images multiples
-	$erreurs_fichiers = array();
-	if ($erreur = $verifier($_FILES['plusieurs_images'], 'image_upload_multiple', $options, $erreurs_fichiers)) {
-		// renvoyer l'erreur dans le formulaire
-		$erreurs['plusieurs_images'] = $erreur;
-		// supprimer les fichiers en erreur dans _FILES
-		foreach ($erreurs_fichiers as $id_file => $erreur) {
-			foreach ($_FILES['plusieurs_images'] as $key => $val) {
-				unset($_FILES['plusieurs_images'][$key][$id_file]);
+	$erreurs_par_fichier = array();
+	$erreur = $verifier($_FILES['pdfs'], 'fichiers', $options,$erreurs_par_fichier);
+	if ($erreur!=''){
+		$erreurs['pdfs'] = $erreur;
+		foreach ($erreurs_par_fichier as $cle => $valeur){
+			foreach ($_FILES['pdfs'] as $propriete => $valeur_propriete){
+				unset($_FILES['pdfs'][$propriete][$cle]);//effacer le fichier problématique dans $_FILES
 			}
 		}
-	}
-
+	}	
 	return $erreurs;
 }
 
