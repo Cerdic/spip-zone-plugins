@@ -7,6 +7,9 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 /**
  * Vérifier un upload d'image unique ou multiple
+ * 
+ * Cette fonction n'est conservée que pour compatibilité ascendant. 
+ * Lui préferer la vérification 'fichiers', qui possède plus d'options, et qui est d'ailleurs appeler ici. 
  *
  * @param array $valeur
  *   Le sous tableau de $_FILES à vérifier
@@ -24,28 +27,22 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  */
 
 function verifier_image_upload_multiple_dist($valeur, $options = array(), &$valeur_normalisee = null) {
-	include_spip('inc/filtres');
+	// Convertir pour les nouveaux réglages de la vérification 'fichier'
+	$nouvelles_options = array('mime'=>'image_web');
+	if (isset($options['taille_max'])) {
+		$nouvelles_options['taille_max'] = $options['taille_max'];
+	}
+	if (isset($options['largeur_max']) or isset($options['hauteur_max'])) {
+		$nouvelles_options['dimension_max'] = array();
+		if (isset($options['largeur_max'])) {
+			$nouvelles_options['dimension_max']['largeur'] = $options['largeur_max']; 
+		}
+		if (isset($options['hauteur_max'])) {
+			$nouvelles_options['dimension_max']['hauteur'] = $options['hauteur_max']; 
+		}
+	}
 	$verifier = charger_fonction('verifier', 'inc', true);
 
-	// cas des champs multiples
-	if (is_array($valeur['tmp_name'])) {
-		$erreurs = array();
-		foreach ($valeur['tmp_name'] as $id_file => $tmp_name) {
-			$fichier = array();
-			foreach ($valeur as $key => $val) {
-				$fichier[$key] = $valeur[$key][$id_file];
-			}
-			if ($erreur = $verifier($fichier, 'image_upload', $options)) {
-				$valeur_normalisee[$id_file] = $erreur;
-				$erreurs[]                   = $erreur;
-			}
-		}
-
-		return join('<br>', $erreurs);
-	}
-	// cas des champs uniques
-	else {
-		return $verifier($valeur, 'image_upload', $options);
-	}
+	return $verifier($valeur, 'fichiers', $nouvelles_options, $valeur_normalisee);
 
 }

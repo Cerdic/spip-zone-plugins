@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 /**
  * Vérifier un upload d'image unique
- *
+ * Cette fonction est depréciée, on utilisera de préférence la vérification 'fichiers', plus souple, et à laquelle la présente fonction renvoie. 
  * @param array $valeur
  *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
  *   Doit être un champ avec un seul upload
@@ -20,38 +20,21 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @return string
  */
 function verifier_image_upload_dist($valeur, $options) {
-	include_spip('inc/filtres');
-
-	// vérifier le type
-	if ($valeur['type'] && !in_array($valeur['type'],array('image/gif','image/jpeg','image/png'))) {
-		return _T('verifier:erreur_type_image', array('name' => $valeur['name']));
+	// Convertir pour les nouveaux réglages de la vérification 'fichier'
+	$nouvelles_options = array('mime'=>'image_web');
+	if (isset($options['taille_max'])) {
+		$nouvelles_options['taille_max'] = $options['taille_max'];
 	}
-
-	// vérifier le poids
-	$taille_max = 1024 * (isset($options['taille_max']) ? $options['taille_max'] : (defined('_IMG_MAX_SIZE') ? _IMG_MAX_SIZE : 0));
-	if ($taille_max) {
-		$taille = ($valeur['size'] ? $valeur['size'] : @filesize($valeur['tmp_name']));
-		if ($taille > $taille_max) {
-			return _T('verifier:erreur_taille_fichier', array(
-				'name'       => $valeur['name'],
-				'taille_max' => taille_en_octets($taille_max),
-				'taille'     => taille_en_octets($taille)
-			));
+	if (isset($options['largeur_max']) or isset($options['hauteur_max'])) {
+		$nouvelles_options['dimension_max'] = array();
+		if (isset($options['largeur_max'])) {
+			$nouvelles_options['dimension_max']['largeur'] = $options['largeur_max']; 
+		}
+		if (isset($options['hauteur_max'])) {
+			$nouvelles_options['dimension_max']['hauteur'] = $options['hauteur_max']; 
 		}
 	}
+	$verifier = charger_fonction('verifier', 'inc', true);
 
-	// vérifier les dimensions
-	if ($imagesize = @getimagesize($valeur['tmp_name']) and (isset($options['largeur_max']) or defined('_IMG_MAX_WIDTH') or isset($options['hauteur_max']) or defined('_IMG_MAX_HEIGHT'))) {
-		$largeur_max = (isset($options['largeur_max']) ? $options['largeur_max'] : (defined('_IMG_MAX_WIDTH') ? _IMG_MAX_WIDTH : 0));
-		$hauteur_max = (isset($options['hauteur_max']) ? $options['hauteur_max'] : (defined('_IMG_MAX_HEIGHT') ? _IMG_MAX_HEIGHT : 0));
-		if ($imagesize[0] > $largeur_max || $imagesize[1] > $hauteur_max) {
-			return _T('verifier:erreur_dimension_image', array(
-				'name'       => $valeur['name'],
-				'taille_max' => $largeur_max . 'x' . $hauteur_max,
-				'taille'     => $imagesize[0] . 'x' . $imagesize[1]
-			));
-		}
-	}
-
-	return '';
+	return $verifier($valeur, 'fichiers', $nouvelles_options, $valeur_normalisee);
 }
