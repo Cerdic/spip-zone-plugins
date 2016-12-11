@@ -202,19 +202,24 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true) {
 		$file = (($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file') or $saisie['saisie'] == 'fichiers');
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
 
-		// Si le nom du champ est un tableau indexé, il faut parser !
-		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
-			$valeur = _request($separe[1]);
-			preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
-			// On va chercher au fond du tableau
-			foreach ($index[1] as $cle) {
-				$valeur = isset($valeur[$cle]) ? $valeur[$cle] : null;
+		// Cas de la saisie 'fichiers':
+		// la valeur est le contenu de $_FILES[$champ];
+		if ($saisie['saisie'] == 'fichiers') {
+			$valeur = $_FILES[$champ];
+		} else { // tout type de saisie, sauf fichiers
+			// Si le nom du champ est un tableau indexé, il faut parser !
+			if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
+				$valeur = _request($separe[1]);
+				preg_match_all('/\[([\w]+)\]/', $separe[2], $index);
+				// On va chercher au fond du tableau
+				foreach ($index[1] as $cle) {
+					$valeur = isset($valeur[$cle]) ? $valeur[$cle] : null;
+				}
+			} else {
+				// Sinon la valeur est juste celle du nom
+				$valeur = _request($champ);
 			}
-		} else {
-			// Sinon la valeur est juste celle du nom
-			$valeur = _request($champ);
 		}
-
 		// Pour la saisie "destinataires" il faut filtrer si jamais on a mis un premier choix vide
 		if ($saisie['saisie'] == 'destinataires') {
 			$valeur = array_filter($valeur);

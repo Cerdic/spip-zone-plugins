@@ -161,7 +161,6 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		} else {
 			unset($liste_verifications['fichiers']);
 		}
-		
 		$chemin_validation[] = 'saisies';
 		$chemin_validation[] = 1000000; // à la fin
 
