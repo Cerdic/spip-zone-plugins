@@ -37,27 +37,35 @@ function formulaires_test_upload_saisie_charger(){
 				'label' => 'Un fichier de type image web (jpg, png, gif)',
 				'nb_fichiers' => 1
 			)
+		),
+		array(
+			'saisie' => 'fichiers',
+			'options' => array(
+				'nom' => 'fichier_leger',
+				'label' => 'Un fichier léger (≤ 10 kio)',
+				'nb_fichiers' => 1
+			)
 		)
 	);
 	$contexte = array(
 		'mes_saisies' => $saisies
 	);
-	
+
 	return $contexte;
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array('pdfs','fichier_tout_mime','fichier_image_web');
+	return array('pdfs','fichier_tout_mime','fichier_image_web','fichier_leger');
 }
 
 function formulaires_test_upload_saisie_verifier(){
 	$erreurs = array();
-	
+
 	if (_request('tromperie'))
 		$erreurs['tromperie'] = 'Il ne fallait rien remplir.';
-	
+
 	$verifier = charger_fonction('verifier', 'inc', true);
-	
+
 	// Vérifier que la saisie PDFs ne contient que des PDF
 	$options = array(
 		'mime'=>'specifique',
@@ -88,6 +96,16 @@ function formulaires_test_upload_saisie_verifier(){
 		$erreurs['fichier_image_web'] = $erreur;
 		cvtupload_nettoyer_files_selon_erreurs('fichier_image_web',$erreurs_par_fichier);
 	}	
+
+	// Vérifier que le champ saisie fichier_leger ne dépasse pas 10 kio
+	$options = array(
+		'taille_max' => 10
+	);
+	$erreurs_par_fichier = array();
+	if ($erreur = $verifier($_FILES['fichier_leger'], 'fichiers', $options,$erreurs_par_fichier)){
+		$erreurs['fichier_leger'] = $erreur;
+		cvtupload_nettoyer_files_selon_erreurs('fichier_leger',$erreurs_par_fichier);
+	}
 	return $erreurs;
 }
 
