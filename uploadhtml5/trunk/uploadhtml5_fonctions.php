@@ -161,15 +161,16 @@ function titre_cadre_logo($objet, $id_objet) {
 	} else {
 		$libelle = _L('Logo');
 	}
+	$aider = function_exists('aider') ? 'aider' : 'aide';
 	switch ($objet) {
 		case 'article':
-	        $libelle .= ' ' . aide('logoart');
+	        $libelle .= ' ' . $aider('logoart');
 	        break;
 		case 'breve':
-	        $libelle .= ' ' . aide('breveslogo');
+	        $libelle .= ' ' . $aider('breveslogo');
 	        break;
 		case 'rubrique':
-	        $libelle .= ' ' . aide('rublogo');
+	        $libelle .= ' ' . $aider('rublogo');
 	        break;
 		default:
 	        break;
