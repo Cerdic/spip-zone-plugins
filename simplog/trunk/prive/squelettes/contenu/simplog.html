@@ -14,12 +14,13 @@
 [(#REM) On vérifie qu'un log a bien été fourni en paramètre de l'url ]
 <BOUCLE_parametre_log(CONDITION) {si #ENV{log}|oui}>
 	[(#REM) On vérifie que le log passé en parametre est bien dans _DIR_LOG ]
-	<BOUCLE_controle_log(DATA){source ls, #EVAL{_DIR_LOG}|concat{*.log*}} {file = #ENV{log}}>
+	<BOUCLE_controle_log(DATA){source glob, #EVAL{_DIR_LOG}|concat{*.log*}}{par valeur}{valeur = #EVAL{_DIR_LOG}|concat{#ENV{log}}}>
 		[(#REM) On construit le chemin complet du fichier de log ]
-		#SET{fichier_log, #EVAL{_DIR_LOG}|concat{#FILE}}
+		#SET{nom_fichier, #VALEUR|substr{#EVAL{_DIR_LOG}|strlen}}
+		#SET{fichier_log, #VALEUR}
 		<B_lecture_log>
 			<INCLURE{fond=prive/squelettes/inclure/inc-caption,
-				log=#FILE,
+				log=#GET{nom_fichier},
 				fichier=#GET{fichier_log},
 				gravite=#ENV{gravite}} />
 			#ANCRE_PAGINATION
@@ -69,7 +70,7 @@
 			</div>
 		</B_lecture_log>
 			<INCLURE{fond=prive/squelettes/inclure/inc-caption,
-				log=#FILE,
+				log=#GET{nom_fichier},
 				fichier=#GET{fichier_log},
 				gravite=#ENV{gravite}} />
 			#BOITE_OUVRIR{'', notice}
