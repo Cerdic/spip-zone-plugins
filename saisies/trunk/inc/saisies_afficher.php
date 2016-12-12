@@ -391,12 +391,18 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 											$(form).find("'.$sel.'").show(400);
 											';
 						if (html5_permis()) {
-						$code .=	'$(form).find("'.$sel.'.obligatoire > input, '.$sel.'.obligatoire > textearea").attr("required",true);';
+						$pour_html_5 = 	$sel.".obligatoire > input,\n"// si le afficher_si porte directement sur le input
+														.$sel." .obligatoire > input,\n"// si le afficher_si porte sur le fieldset
+														.$sel.".obligatoire > textarea,\n"// si le afficher_si porte directement sur le textearea
+														.$sel." .obligatoire > textarea,\n"// si le afficher_si porte sur le fiedset
+														.$sel.".obligatoire >select,\n"//si le afficher_si porte directement sur le select
+														.$sel." .obligatoire > select";//si le afficher_si porte sur le fieldset
+						$code .=	'$(form).find("'.$pour_html_5.'").attr("required",true);';
 						}
 						$code .=	'} '."\n\t";
 						$code .= 'else {';
 						if (html5_permis()) {
-							$code .= '$(form).find("'.$sel.' > input,'.$sel.' > textearea").attr("required",false);';
+							$code .= '$(form).find("'.$pour_html_5.'").attr("required",false);';
 						}					
 						$code .=	'if (chargement==true) {
 												$(form).find("'.$sel.'").hide(400).css("display","none");
