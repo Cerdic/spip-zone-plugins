@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Browser Update pour SPIP</nom>
+	<auteur>Frederic Lohier</auteur>
+	<licence>GNU/GLP</licence>
+	<version>1.0</version>
+	<description>
+	Le plugin "Browser Update pour SPIP" int&egrave;gre le script de https://browser-update.org/ qui notifie les visiteurs du site lorsqu&apos;ils utilisent un navigateur web (Internet Explorer, Firefox, Chrome, Opera ou Safari) obsol&egrave;te.
+	</description>
+	<etat>dev</etat>
+	<prefix>browser_update</prefix>
+	<icon>img/browser_update-128.png</icon>
+	<necessite id="SPIP" version="[2.0;)" />
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inserer_browser_update.php</inclure>
+	</pipeline>
+</plugin>
