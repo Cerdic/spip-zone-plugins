@@ -387,39 +387,45 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 						} else {
 							$sel = ".$class_li";
 						}
-						$code .= "\tif (".$condition.') {
-											$(form).find("'.$sel.'").show(400);
-											';
+						$code .= "\tif (".$condition.") {\n"
+										 .	"\t\t$(form).find(\"$sel\").show(400);\n";
 						if (html5_permis()) {
-						$pour_html_5 = 	$sel.".obligatoire > input,\n"// si le afficher_si porte directement sur le input
-														.$sel." .obligatoire > input,\n"// si le afficher_si porte sur le fieldset
-														.$sel.".obligatoire > textarea,\n"// si le afficher_si porte directement sur le textearea
-														.$sel." .obligatoire > textarea,\n"// si le afficher_si porte sur le fiedset
-														.$sel.".obligatoire >select,\n"//si le afficher_si porte directement sur le select
-														.$sel." .obligatoire > select";//si le afficher_si porte sur le fieldset
-						$code .=	'$(form).find("'.$pour_html_5.'").attr("required",true);';
+						$pour_html_5 = 	"$sel.obligatoire > input, "// si le afficher_si porte directement sur le input
+														."$sel .obligatoire > input, "// si le afficher_si porte sur le fieldset
+														."$sel.obligatoire > textarea, "// si le afficher_si porte directement sur le textearea
+														."$sel .obligatoire > textarea, "// si le afficher_si porte sur le fiedset
+														."$sel.obligatoire > select, "//si le afficher_si porte directement sur le select
+														."$sel .obligatoire > select";//si le afficher_si porte sur le fieldset
+						$code .=	"\t\t$(form).find("
+										.'"'."$pour_html_5\")".
+										".attr(\"required\",true);\n";
 						}
-						$code .=	'} '."\n\t";
-						$code .= 'else {';
+						$code .=	"\t}\n";
+						$code .= "\telse {\n";
 						if (html5_permis()) {
-							$code .= '$(form).find("'.$pour_html_5.'").attr("required",false);';
+						 	$code .= "\t\t$(form).find(\n\t\t\t"
+						 				.'"'."$pour_html_5\")\n"
+						 				."\t\t.attr(".'"required"'.",false);\n";
 						}					
-						$code .=	'if (chargement==true) {
-												$(form).find("'.$sel.'").hide(400).css("display","none");
-												} 
-											else {
-												$(form).find("'.$sel.'").hide(400);
-												};
-										  } '."\n";
+						$code .= "\t\tif (chargement==true) {\n"
+										."\t\t\t$(form).find(\"$sel\").hide(400).css".'("display","none")'.";\n"
+										."\t\t}\n"
+										."\t\telse {\n"
+										."\t\t\t$(form).find(\"$sel\").hide(400);\n"
+										."\t\t};\n"
+										."\t}\n";
 					}
 	}
-	$code .= '};';
-	$code .= '$("#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
-	$code .= '$("#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
-	$code .= 'chargement=false;})';
-	$code .= '})(jQuery);';
-	$code = str_replace("\n",'',$code);//concatener
-	$code = str_replace("\t",'',$code);//concatener
+	$code .= "};\n";
+	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").each(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
+	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").change(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
+	$code .= 'chargement=false;})'."\n";
+	$code .= '})(jQuery);'."\n";
+	define('_SAISIES_AFFICHER_SI_JS_LISIBLE',false);
+	if (!_SAISIES_AFFICHER_SI_JS_LISIBLE){//il suffit de régler cette constante à TRUE pour afficher le js de manière plus sibile
+		$code = str_replace("\n",'',$code);//concatener
+		$code = str_replace("\t",'',$code);//concatener
+	}
 	return $i > 0 ? $code : '';
 }
 
