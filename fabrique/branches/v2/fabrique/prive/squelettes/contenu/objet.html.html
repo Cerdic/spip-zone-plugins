@@ -7,15 +7,17 @@
 
 
 ]\[(\#AUTORISER{voir,#TYPE,\##MID_OBJET}|sinon_interdire_acces)\]
+\[(\#SET{url_voir,\#VAL{#TYPE}|objet_info{url_voir}})\]
+\[(\#SET{url_edit,\#VAL{#TYPE}|objet_info{url_edit}})\]
 \<BOUCLE_#TYPE\(#MOBJET\){#ID_OBJET}[(#OBJET|champ_present{statut}
-	|?{'{statut==.*}'})]{si \#ENV{exec}|=={#TYPE}}>
+	|?{'{statut==.*}'})]{si \#ENV{exec}|=={\#GET{url_voir}}}>
 \[(\#BOITE_OUVRIR{\[
 	\[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
 		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
-			\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+			\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
 		\]
 		\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
-			\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+			\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
 		\]
 	\]
 
@@ -37,10 +39,10 @@
 
 \[(\#AUTORISER{modifier,#TYPE,\##MID_OBJET})
 	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|non)
-		\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
+		\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\<:#TYPE:icone_modifier_#TYPE:>,#TYPE,edit,right ajax preload})\]
 	\]
 	\[(\##MID_OBJET|afficher_qui_edite{#TYPE}|oui)
-		\[(\#URL_ECRIRE{[(#TYPE)]_edit,#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
+		\[(\#URL_ECRIRE{\#GET{url_edit},#ID_OBJET=\##MID_OBJET}|icone_verticale{\##MID_OBJET|afficher_qui_edite{#TYPE},warning-24,'',right edition_deja ajax preload})\]
 	\]
 \]
 <BOUCLE_afficher_liens(CONDITION){si #OBJET|option_presente{afficher_liens}}>
@@ -72,5 +74,5 @@
 	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin,\#extra');/*\\\]\\\]>*/</script>
 \]
 \</BOUCLE_#TYPE>
-\[(\#ENV**{exec}|=={[(#TYPE)]_edit}|?{\#INCLURE{fond=prive/squelettes/contenu/[(#TYPE)]_edit,redirect='',env,retourajax=oui},\#REM|sinon_interdire_acces})\]
+\[(\#ENV**{exec}|=={\#GET{url_edit}}|?{\#INCLURE{fond=prive/squelettes/contenu/\#GET{url_edit},redirect='',env,retourajax=oui},\#REM|sinon_interdire_acces})\]
 \<//B_#TYPE>
