@@ -55,7 +55,9 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 			 		include_spip('inc/distant');
 					$url = str_replace('&amp;','&',$sp[0]);
 					if ($sp[1]){
+						
 						$chemin_fichier_recup = zippeur_chemin_dossier_local().$dossier.'/'.$sp[1];
+						zippeur_creer_arbo($dossier.'/'.$sp[1],'oui');
 						copie_locale($url,'force',$chemin_fichier_recup);
 					}
 					
