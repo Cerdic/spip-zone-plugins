@@ -74,7 +74,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 			 }
 		}
 	}
-	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
+	return zippeur(array($chemin),$date,$cmd,$dossier,zippeur_chemin_dossier_local().$dossier,$delai);
 }
 
 function zippeur($array,$date,$cmd='',$nom='',$plat='oui',$delai='0'){
