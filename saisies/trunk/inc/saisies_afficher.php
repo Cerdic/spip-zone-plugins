@@ -421,7 +421,10 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").change(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= 'chargement=false;})'."\n";
 	$code .= '})(jQuery);'."\n";
-	define('_SAISIES_AFFICHER_SI_JS_LISIBLE',false);
+	
+	if (!defined('_SAISIES_AFFICHER_SI_JS_LISIBLE')) {
+		define('_SAISIES_AFFICHER_SI_JS_LISIBLE',false);
+	}
 	if (!_SAISIES_AFFICHER_SI_JS_LISIBLE){//il suffit de régler cette constante à TRUE pour afficher le js de manière plus lisible (et moins sibyllin)
 		$code = str_replace("\n",'',$code);//concatener
 		$code = str_replace("\t",'',$code);//concatener
