@@ -179,5 +179,3 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 		return true;
 	}
 }
-
-?>
