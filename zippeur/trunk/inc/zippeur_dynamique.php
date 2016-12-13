@@ -12,7 +12,6 @@ function zippeur_creer_arbo($chemin,$fichier='oui'){
 	}
 	foreach ($arbo as $rep){
 		$chemin = $chemin.'/'.$rep;
-	
 		sous_repertoire($chemin);		
 	}
 }

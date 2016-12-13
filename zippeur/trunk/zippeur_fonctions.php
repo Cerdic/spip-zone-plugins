@@ -115,14 +115,10 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 		$zip = new PclZip($chemin);
 		$i = 0;
 		foreach ($array as $fichier){
-			
 			if (test_espace_prive()){
 				$array[$i] = '../'.$fichier;
 			}
 			$i++;
-			
-			
-			
 		}
 		if ($plat=='oui')
 			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_ALL_PATH);
