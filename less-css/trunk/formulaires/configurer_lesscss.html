@@ -9,13 +9,20 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		[(#SAISIE{oui_non,activer_sourcemaps,
-			label=<:lesscss:cfg_activer_sourcemaps:>,
-			explication=<:lesscss:cfg_activer_sourcemaps_explication:>,
-			default=non
-			})]
+		#SET{name,activer_sourcemaps}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<div class="editer editer_activer_sourcemaps saisie_oui_non">
+			<label><:lesscss:cfg_activer_sourcemaps:></label>
+			<p class="explication" id="explication_activer_sourcemaps"><:lesscss:cfg_activer_sourcemaps_explication:></p>
+			<div class="choix">
+				<input type="radio" name="activer_sourcemaps" class="radio" id="champ_activer_sourcemaps_oui"[ (#ENV{activer_sourcemaps}|=={on}|oui)checked='checked'] value="on" aria-describedby="explication_activer_sourcemaps">
+				<label for="champ_activer_sourcemaps_oui"[ (#ENV{activer_sourcemaps}|=={on}|oui) class="on"]>Oui</label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="activer_sourcemaps" class="radio" id="champ_activer_sourcemaps_non"[ (#ENV{activer_sourcemaps}|=={on}|non)checked='checked'] value="" aria-describedby="explication_activer_sourcemaps">
+				<label for="champ_activer_sourcemaps_non"[ (#ENV{activer_sourcemaps}|=={on}|non) class="on"]>Non</label>
+			</div>
+		</div>
 		
-
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
