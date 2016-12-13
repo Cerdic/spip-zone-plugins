@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubriques_exclues' => 'Uit te sluiten subrubrieken, gescheiden door een komma',
 	'entree_id_secteur_exclus' => 'Uit te sluiten hoofdrubrieken, gescheiden door een komma',
 	'entree_infini' => 'Onbeperkt',
+	'entree_lien_direct_articles_uniques' => 'Indien ja en unieke artikelen verborgen zijn, een link maken naar het artikel wanneer in de rubriek slechts één artikel rest? (bevestig met "ja" )',
 	'entree_mapage' => 'Mijn eigen pagina',
 	'entree_masquer_articles_uniques' => 'Een rubriek met slechts een artikel verbergen?',
 	'entree_niveau' => 'Niveau van de subrubrieken',
