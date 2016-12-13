@@ -9,5 +9,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_activer_sourcemaps' => 'Activer les sourcemaps',
 	'cfg_activer_sourcemaps_explication' => "Les sourcemaps permettent de savoir l'origine exacte de la propriété CSS dans les fichiers LESS. A n'utiliser qu'en développement. Pensez à désactiver la compression des CSS pour pouvoir les utiliser !",
 );
-
-?>

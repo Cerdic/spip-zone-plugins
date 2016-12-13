@@ -300,5 +300,3 @@ function lesscss_find_less_or_css_in_path($less_file, $css_file){
 	debug_print_backtrace();
 	die('Erreur fatale, je suis perdu');
 }
-
-?>
