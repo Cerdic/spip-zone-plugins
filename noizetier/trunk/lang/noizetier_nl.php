@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_noisette' => 'Kies het nootje dat je wilt toevoegen:',
 	'compositions_non_installe' => '<b>Plugin Composities:</b> deze plugin is niet op de site geïnstalleerd. Dat is niet vereist, maar wanneer hij is geactiveerd, kun je direct composities aanwijzen.',
+	'configurer_objets_noisettes_explication' => 'Bij dit soort inhoud mogen de nootjes <strong>per inhoud</strong> worden aangepast.',
+	'configurer_objets_noisettes_label' => 'Aanpassing op inhoud toestaan voor:',
+	'configurer_titre' => 'NoiZetier configureren',
 
 	// D
 	'description_bloc_contenu' => 'Voornaamste inhoud van iedere bladzijde.',
@@ -123,8 +126,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ne_pas_definir_d_heritage' => 'Erven niet bepalen',
 	'noisette_numero' => 'nootje nummer:',
 	'noisettes_composition' => 'nootjes specifiek voor compositie <i>@composition@</i>:',
+	'noisettes_configurees_aucune' => 'Geen enkel geconfigureerd nootje',
+	'noisettes_configurees_nb' => '@nb@ geconfigureerde nootjes',
+	'noisettes_configurees_une' => 'Eén geconfigureerd nootje',
 	'noisettes_disponibles' => 'beschikbare nootjes',
 	'noisettes_page' => 'nootjes specifiek voor bladzijde <i>@type@</i>:',
+	'noisettes_pour' => 'Nootjes voor: ',
 	'noisettes_toutes_pages' => 'nootjes voor alle bladzijdes:',
 	'noizetier' => 'Notenboom',
 	'nom_bloc_contenu' => 'Inhoud',
