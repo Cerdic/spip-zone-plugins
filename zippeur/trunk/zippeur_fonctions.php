@@ -51,14 +51,25 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	if (is_array($sanspath)) {
 		foreach ($sanspath as $sp){
 		   defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
-		   if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passer le chemin complet avant de modifier $sp[0]
-				$sp[0] = $base.$sp[0];
-			}
-		   $p = $sp[0];
-		   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
-				$sp[1] = $sp[0];
-		   }
-		   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
+			 if (stripos($sp[0],'http://') === 0 or stripos($sp[0],'https://')) {		   // On peut passer une url
+			 		include_spip('inc/distant');
+					$url = str_replace('&amp;','&',$sp[0]);
+					if ($sp[1]){
+						$chemin_fichier_recup = zippeur_chemin_dossier_local().$dossier.'/'.$sp[1];
+						copie_locale($url,'force',$chemin_fichier_recup);
+					}
+					
+			 }
+			 else {// pas url ? 
+				 if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passé le chemin complet avant de modifier $sp[0]
+					$sp[0] = $base.$sp[0];
+				 }
+			   $p = $sp[0];
+			   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+					$sp[1] = $sp[0];
+			   }
+			   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
+			 }
 		}
 	}
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
