@@ -3,6 +3,11 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.3.9 le 13 12 2016
+-------------------
+* Correction de l'url de retour lors de l'édition (ajax) d'un objet ayant un parent direct
+  et pouvant être traduit. Cela empêchait le bon affichage après le traitement du formulaire.
+
 2.3.8 le 11 12 2016
 -------------------
 * Correction d'un souci de fil d'ariane sur les objets avec statut en liaison directe avec un autre objet.
