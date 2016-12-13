@@ -26,34 +26,40 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	sous_repertoire($chemin);
 	
 	// création des fichiers dynamiques	
-	foreach ($dynamiques as $dyn){
-		if ($dyn[1]==''){ 	// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
-			$dyn[1] = $dyn[0];
+	if (is_array($dynamiques)) {
+		foreach ($dynamiques as $dyn){
+			if ($dyn[1]==''){ 	// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+				$dyn[1] = $dyn[0];
+			}
+			zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);	
 		}
-		zippeur_creer_fichier($dyn[0],$dossier.'/'.$dyn[1],$dyn[2]);	
 	}
 	// Les fichiers statiques
-	foreach ($statiques as $stat){
-		if ($stat[1]==''){		// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
-			$stat[1] = $stat[0]; 
+	if (is_array($statiques)) {
+		foreach ($statiques as $stat){
+			if ($stat[1]==''){		// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+				$stat[1] = $stat[0]; 
+			}
+			
+			if (is_dir(find_in_path($stat[0])))
+			  zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
+			else
+			  zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
 		}
-		
-		if (is_dir(find_in_path($stat[0])))
-		  zippeur_copier_dossier($stat[0],$dossier.'/'.$stat[1]);
-		else
-		  zippeur_copier_fichier($stat[0],$dossier.'/'.$stat[1]);
 	}
 	// Et ceux où la notion de chemin ne s'applique pas
-	foreach ($sanspath as $sp){
-	   defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
-	   if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passer le chemin complet avant de modifier $sp[0]
-			$sp[0] = $base.$sp[0];
+	if (is_array($sanspath)) {
+		foreach ($sanspath as $sp){
+		   defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
+		   if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passer le chemin complet avant de modifier $sp[0]
+				$sp[0] = $base.$sp[0];
+			}
+		   $p = $sp[0];
+		   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
+				$sp[1] = $sp[0];
+		   }
+		   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
 		}
-	   $p = $sp[0];
-	   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
-			$sp[1] = $sp[0];
-	   }
-	   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
 	}
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
 }
