@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function zippeur_chemin_dossier_local(){
 	
-	if (!$chemin) {
+	if (!isset($chemin)) {
 		static $chemin = '';
 		if (defined('_DIR_SITE')) {
 			$chemin = _DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES;
