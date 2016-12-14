@@ -850,7 +850,10 @@ function autoriser_contact_supprimer($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  **/
 function autoriser_contact_infositesmodifier_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('infositesmodifier', 'contact', $id, $qui, $opt) or (
+	return in_array($qui['statut'], array(
+			'0minirezo',
+			'1comite',
+		)) or (
 			$id_auteur = sql_getfetsel('id_auteur', 'spip_contacts', 'id_contact = ' . intval($id))
 			and $id_auteur > 0
 			and $id_auteur == $qui['id_auteur']
