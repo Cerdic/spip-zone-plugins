@@ -16,9 +16,12 @@ include_spip('balise/saisie');
 include_spip('formulaires/selecteur/generique_fonctions');
 
 /**
- * A partir de SPIP 3.1
- * - ul.editer-groupe deviennent des div.editer-groupe
- * - li.editer devient div.editer
+ * Retourne une balise `div` si on est en SPIP >= 3.1, sinon le texte en parametre.
+ *
+ * @example `[(#VAL{ul}|saisie_balise_structure_formulaire)]`
+ * @see balise_DIV_dist() pour une écriture plus courte.
+ * @note Préférer `[(#DIV|sinon{ul})]` dans les squelettes, plus lisible.
+ *
  * @param $tag
  *   ul ou li
  * @return string
@@ -38,11 +41,31 @@ function saisie_balise_structure_formulaire($tag) {
 	}
 	return $tag;
 }
-// variante plus simple a ecrire dans les squelettes
-// [(#DIV|sinon{ul})]
-if (!function_exists('balise_DIV_dist')
+
+if (
+	!function_exists('balise_DIV_dist')
 	and $version = explode('.', $GLOBALS['spip_version_branche'])
-	and ($version[0]>3 or ($version[0]==3 and $version[1] > 0))) {
+	and ($version[0]>3 or ($version[0]==3 and $version[1] > 0))
+) {
+
+	/**
+	 * Compile la balise `DIV` qui retourne simplement le texte `div`
+	 *
+	 * Sert à la compatibilité entre SPIP 3.0 et SPIP 3.1+
+	 *
+	 * Variante d'écriture, plus courte, que le filtre `saisie_balise_structure_formulaire`
+	 *
+	 * À partir de SPIP 3.1
+	 * - ul.editer-groupe deviennent des div.editer-groupe
+	 * - li.editer devient div.editer
+	 *
+	 * @see saisie_balise_structure_formulaire()
+	 * @example
+	 *     `[(#DIV|sinon{ul})]`
+	 *
+	 * @param Pile $p
+	 * @return Pile
+	 */
 	function balise_DIV_dist($p) {
 		$p->code = "'div'";
 		$p->interdire_scripts = false;

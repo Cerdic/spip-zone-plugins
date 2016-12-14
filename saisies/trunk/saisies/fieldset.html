@@ -10,7 +10,7 @@
 ]
 #SET{erreur_ici,#ENV**{erreurs/#ENV{nom}}}
 
-<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]>
+<[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})] class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]>
 	#ENV*{inserer_debut}
 	<fieldset>
 
@@ -24,10 +24,10 @@
 		[<span class='erreur_message'>(#GET{erreur_ici})</span>]
 		[<p class='explication'>(#ENV*{explication})</p>]
 		[(#ENV{saisies}|is_array|oui)
-		<[(#ENV{saisies_base_conteneur,[(#VAL{ul}|saisie_balise_structure_formulaire)]})] class="editer-groupe">
+		<[(#ENV{saisies_base_conteneur,#DIV|sinon{ul}})] class="editer-groupe">
 			#INCLURE{fond=#ENV{fond_generer,"inclure/generer_saisies"}, env, saisies=#ENV{saisies}, from_fieldset='on'}
-		</[(#ENV{saisies_base_conteneur,[(#VAL{ul}|saisie_balise_structure_formulaire)]})]>
+		</[(#ENV{saisies_base_conteneur,#DIV|sinon{ul}})]>
 		]
 	</fieldset>
 	#ENV*{inserer_fin}
-</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
+</[(#ENV{saisies_base_conteneur,#DIV|sinon{li}})]>

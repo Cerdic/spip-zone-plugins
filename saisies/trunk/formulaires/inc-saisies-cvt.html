@@ -8,9 +8,9 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			#GENERER_SAISIES{#ENV{_saisies}}
-		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		</[(#DIV|sinon{ul})]>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
