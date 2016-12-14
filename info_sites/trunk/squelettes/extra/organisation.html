@@ -24,7 +24,7 @@
 		<div class="clearfix"></div>]
 
 		<B_autresobjets>
-				<BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
+				<BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet} {objet !IN contact,projet}>
 					[(#AUTORISER{infositesvoir, #OBJET}|oui)
 					<div class="block">
 					#SET{table,#OBJET|table_objet}

@@ -11,6 +11,11 @@
 				[(#INCLURE{fond=objets/liste/organisations, id_contact=#ID_CONTACT, ajax=wysiwyg})]
 			</div>]
 
+			[(#AUTORISER{infositesvoir, projets}|oui)
+			<div class="block">
+				[(#INCLURE{fond=objets/liste/projets, id_contact=#ID_CONTACT, ajax=wysiwyg})]
+			</div>]
+
 		</div>
 	</BOUCLE_extra>
 </BOUCLE_autorisation>
