@@ -13,14 +13,14 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
-			<ul>
+			<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 			[(#SAISIE{textarea, projets, obligatoire=oui,
 				label=<:info_sites:liste_url_projets_label:>,
 				explication=<:info_sites:liste_url_projets_explication:>,
 				rows=10})]
 
-			</ul>
+			</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		</fieldset>
 		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>

@@ -53,7 +53,7 @@
 				</fieldset>
 				<hr/>
 				<fieldset>
-					<ul>
+					<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 					[(#SAISIE{input, titre, obligatoire=oui,
 						label=<:projets_site:titre_label:>,
@@ -69,11 +69,11 @@
 						label=<:projets_site:webservice_label:>,
 						explication=<:projets_site:webservice_explication:>})]
 
-					</ul>
+					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>
 				<hr/>
 				<fieldset>
-					<ul>
+					<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 						[(#SAISIE{input, logiciel_nom,
 							obligatoire=oui,
@@ -87,14 +87,14 @@
 							size=25,
 							maxlength=25})]
 
-					</ul>
+					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>
 				<hr/>
 			</div>
 			<div class="col-md-6">
 [(#PLUGIN{RSS_COMMITS}|oui)
 				<fieldset>
-					<ul>
+					<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 						[(#SAISIE{input, versioning_path,
 							label=<:commit:champ_versioning_path_label:>})]
@@ -109,11 +109,11 @@
 						[(#SAISIE{input, versioning_rss,
 							label=<:commit:champ_versioning_rss_label:>})]
 
-					</ul>
+					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>
 				<hr/>]
 				<fieldset>
-					<ul>
+					<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 						[(#SAISIE{input, fo_url,
 							obligatoire=oui,
@@ -132,11 +132,11 @@
 							size=25,
 							maxlength=25})]
 
-					</ul>
+					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>
 				<hr/>
 				<fieldset>
-					<ul>
+					<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 
 						[(#SAISIE{input, bo_url,
 							obligatoire=oui,
@@ -155,7 +155,7 @@
 							size=25,
 							maxlength=25})]
 
-					</ul>
+					</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 				</fieldset>
 				<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 			</div>
