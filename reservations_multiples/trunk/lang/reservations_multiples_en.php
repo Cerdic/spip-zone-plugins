@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_ajouter' => 'Add',
 	'label_enlever' => 'Remove',
-	'label_reserver_amie' => 'I would like to register one more person:',
+	'label_reserver_amie' => 'I would like to register one more person:', # MODIF
 
 	// M
 	'message_ok_reservations_pour' => 'Réservé pour : @noms@',

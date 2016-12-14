@@ -13,8 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Parâmetros',
 
 	// E
-	'explication_multiple_inscriptions' => 'Para cada evento é possível indicar o número de reservas',
-	'explication_multiple_personnes' => 'Para cada pessoa adicional é possível/necessário preencher os seus dados pessoais',
+	'explication_multiple_inscriptions' => 'Para cada evento é possível indicar o número de reservas', # MODIF
+	'explication_multiple_personnes' => 'Para cada pessoa adicional é possível/necessário preencher os seus dados pessoais', # MODIF
 	'explication_quantite' => 'Se em branco, a quantidade será 1',
 
 	// L
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enlever' => 'Remover',
 	'label_multiple_inscriptions' => 'Permite indicar o número de inscrições',
 	'label_multiple_personnes' => 'Permite a inscrição de várias pessoas',
-	'label_reserver_amie' => 'Eu gostaria iguamente de inscrever uma outra pessoa:',
+	'label_reserver_amie' => 'Eu gostaria iguamente de inscrever uma outra pessoa:', # MODIF
 
 	// M
 	'message_ok_reservations_pour' => 'Reservardo para: @noms@',
@@ -37,5 +37,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_reservations_multiples' => 'Reservas múltiplas',
-	'type_lien_multiple_personnes' => 'Reserva múltipla, reserva originada: @reference@'
+	'type_lien_multiple_personnes' => 'Reserva múltipla, reserva originada: @reference@' # MODIF
 );
