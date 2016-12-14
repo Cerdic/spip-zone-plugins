@@ -30,7 +30,9 @@ function verifier_code_postal_dist($valeur, $options = array()) {
 	}
 
 	$ok = '';
-	switch ($options['pays']) {
+
+	$pays = isset($options['pays']) ? $options['pays'] : '';
+	switch ($pays) {
 		case 'FR':
 			if (!preg_match(',^((0[1-9])|([1-8][0-9])|(9[0-8]))[0-9]{3}$,', $valeur)) {
 				return $erreur;
