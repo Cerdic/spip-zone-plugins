@@ -27,9 +27,6 @@ function scss_compile($style, $contexte = array()) {
 	$scss->setImportPaths(_chemin());
 	
 	// Si definie on affiche les commentaires des sources et numero de ligne dans le fichier css genere
-	// **Les sourcemaps ne sont supportée completement que dans la version CLI de scssphp**
-	// on utilise donc que LINE_COMMENTS, permettant un debugage plus facile avec une extension comme
-	// https://addons.mozilla.org/fr/firefox/addon/firecompass-for-firebug/
 	if (defined('_SCSS_LINE_COMMENTS') AND '_SCSS_LINE_COMMENTS' == true) {
         $scss->setLineNumberStyle(Compiler::LINE_COMMENTS);
 	}
