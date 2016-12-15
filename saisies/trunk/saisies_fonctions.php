@@ -125,8 +125,10 @@ function saisie_nom2classe($nom) {
  *
  * - toto => toto,
  * - toto/truc => toto[truc],
+ * - toto/truc/ => toto[truc][],
  * - toto[truc] => toto[truc]
  *
+ * @see saisie_name2nom() pour l'inverse.
  * @param string $nom
  * return string
 **/
@@ -138,6 +140,26 @@ function saisie_nom2name($nom) {
 	$premier = array_shift($nom);
 	$nom = implode('][', $nom);
 	return $premier . '[' . $nom . ']';
+}
+
+/**
+ * Passer un `name` en un format de nom compris de saisies
+ *
+ * - toto => toto,
+ * - toto[truc] => toto/truc,
+ * - toto[truc][] => toto/truc/
+ * - toto/truc => toto/truc
+ *
+ * @see saisie_nom2name() pour l'inverse.
+ * @param string $nom
+ * return string
+ **/
+function saisie_name2nom($name) {
+	if (false === strpos($name, '[')) {
+		return $name;
+	}
+	$name = explode('[', str_replace(']', '', $name));
+	return implode('/', $name);
 }
 
 /**
