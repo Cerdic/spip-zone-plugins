@@ -41,6 +41,7 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('inc/cextras');
 	include_spip('base/info_sites_extras');
 	cextras_api_upgrade(info_sites_declarer_champs_extras(), $maj['1.1.0']);
+	$maj['1.2.0'][] = array('info_sites_maj_120');
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -148,5 +149,19 @@ function info_sites_maj_108() {
 	$config_svp = serialize($config_svp);
 	ecrire_config('svp', $config_svp);
 
+}
+
+/**
+ * MAJ 1.2.0 : transferer de spip_organisations_contacts dans spip_organisations_liens. Le plugin C&O v3.0 le fait normalement, mais il peut arriver que la mise à jour ne s'est pas très bien déroulée. Donc, on appelle la fonction conctacts_maj_1_13_0()
+ *
+ */
+function info_sites_maj_120() {
+	include_spip('base/abstract_sql');
+	$count_organisations_contacts = sql_countsel('spip_organisations_contacts');
+	include_spip('contacts/contacts_administrations');
+
+	if ($count_organisations_contacts > 0 and function_exists('conctacts_maj_1_13_0')) {
+		conctacts_maj_1_13_0();
+	}
 }
 
