@@ -151,7 +151,7 @@ function saisie_nom2name($nom) {
  * - toto/truc => toto/truc
  *
  * @see saisie_nom2name() pour l'inverse.
- * @param string $nom
+ * @param string $name
  * return string
  **/
 function saisie_name2nom($name) {
