@@ -1,141 +1,204 @@
-#BOITE_OUVRIR{'','simple commandes navigation'}
+[(#BOITE_OUVRIR{'','simple facettes facettes-commandes'})]
 
-[(#REM) filtrer les modes de reglement ]
-<B_mode_paiement>
-<div class="liste mode_paiements">
-	<h4><:commandes:label_filtre_paiement:></h4>
+[(#REM) Modes de paiement ]
+<B_commandes_modes_paiements>
+<div class="facette facette-modes-paiements">
+	<h3 class="titre-facette"><:commandes:label_filtre_paiement:></h3>
 	<ul class='liste-items'>
-
-		#SET{actif, #ENV{mode}|=={''}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,''}|lien_ou_expose{
-			<:commandes:label_filtre_tous_mode_paiements:>,
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:''\}\})"})]
-		})</li>]
-
-		<BOUCLE_mode_paiement(COMMANDES){tout}{fusion mode}{mode!=""}>
-		#SET{actif, #ENV{mode}|=={#MODE}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,#MODE}|lien_ou_expose{
-			[(#MODE|appliquer_filtre{bank_titre_type_paiement})][(#PLUGIN{bank}|oui) <small>\(#MODE\)</small>],
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:'#MODE'\}\})"})]
-		})</li>]
-		</BOUCLE_mode_paiement>
-
+		[<li class="item">
+			(#SELF
+				|parametre_url{mode,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{mode}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"mode":""\}})
+		</li>]
+		<BOUCLE_commandes_modes_paiements(COMMANDES){tout}{mode != ''}{fusion mode}>
+		[<li class="item">
+			(#SELF|parametre_url{mode,#MODE}
+				|lien_ou_expose{
+					[(#MODE|appliquer_filtre{bank_titre_type_paiement})][(#PLUGIN{bank}|oui) <small>\(#MODE\)</small>],
+					#ENV{mode}|=={#MODE},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"mode":"#MODE"\}})
+		</li>]
+	</BOUCLE_commandes_modes_paiements>
 	</ul>
 </div>
-</B_mode_paiement>
+</B_commandes_modes_paiements>
 
-[(#REM) filtrer les statuts ]
-<div class="liste statuts">
-	<h4><:commandes:label_filtre_etats:></h4>
+
+[(#REM) Échéances ]
+<B_commandes_echeances>
+<div class="facette facette-echeances">
+	<h3 class="titre-facette"><:commandes:label_filtre_echeances_type:></h3>
 	<ul class='liste-items'>
-
-		[(#REM) tous les statuts ]
-		#SET{actif, #ENV{statut}|=={''}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,''}|lien_ou_expose{
-			<:commandes:label_filtre_tous_statuts:>,
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:''\}\})"})]
-		})</li>]
-
-		[(#REM) statuts ]
-		<BOUCLE_statuts(COMMANDES){tout}{fusion statut}{statut!=poubelle}>
-		#SET{actif, #ENV{statut}|=={#STATUT}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,#STATUT}|lien_ou_expose{
-			[(#CHEMIN_IMAGE{#VAL{commande}|objet_info{statut_images}|table_valeur{#STATUT}}|balise_img)&nbsp;][(#STATUT|commandes_lister_statuts)],
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:'#STATUT'\}\})"})]
-		})</li>]
-		</BOUCLE_statuts>
-
+		[<li class="item">
+			(#SELF
+				|parametre_url{echeances_type,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{echeances_type}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"echeances_type":""\}})
+		</li>]
+		<BOUCLE_commandes_echeances(COMMANDES){tout}{fusion echeances_type}{echeances_type != ''}>
+		[<li class="item">
+			(#SELF
+				|parametre_url{echeances_type,#ECHEANCES_TYPE}
+				|lien_ou_expose{
+					[(#VAL{commandes:commande_echeances_type_}|concat{#ECHEANCES_TYPE}|_T)],
+					#ENV{echeances_type}|=={#ECHEANCES_TYPE},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"echeances_type":"#ECHEANCES_TYPE"\}})
+		</li>]
+		</BOUCLE_commandes_echeances>
 	</ul>
 </div>
+</B_commandes_echeances>
 
-[(#REM) filtrer les dates ]
-<div class="liste annees">
-	<h4><:commandes:label_filtre_dates:></h4>
+
+[(#REM) Statuts ]
+<B_commandes_statuts>
+<div class="facette facette-statuts">
+	<h3 class="titre-facette"><:commandes:label_filtre_etats:></h3>
 	<ul class='liste-items'>
+		[<li class="item">
+			(#SELF
+				|parametre_url{statut,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{statut}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"statut":""\}})
+		</li>]
+		<BOUCLE_commandes_statuts(COMMANDES){tout}{fusion statut}{statut != poubelle}>
+		[<li class="item statut-#STATUT">
+			(#SELF
+				|parametre_url{statut,#STATUT}
+				|lien_ou_expose{
+					[(#STATUT|commandes_lister_statuts)],
+					#ENV{statut}|=={#STATUT},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"statut":"#STATUT"\}})
+		</li>]
+		</BOUCLE_commandes_statuts>
+	</ul>
+</div>
+</B_commandes_statuts>
 
-		[(#REM) toutes les dates ]
-		#SET{actif, #ENV{annee}|=={''}|et{#ENV{mois}|=={''}}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,''}|parametre_url{mois,''}|lien_ou_expose{
-			<:commandes:label_filtre_toutes_dates:>,
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'',mois:''\}\})"})]
-		})</li>]
 
-		[(#REM) années/mois ]
-		<B_annees>
-		#ANCRE_PAGINATION
-		<li><table class="simple">
-		<BOUCLE_annees(COMMANDES){tout}{!par date}{fusion YEAR(date)}{pagination 5}>
-		<tr>
-			<td class="annee">
-				#SET{actif, #ENV{annee}|=={#DATE|annee}|?{'oui',''}}
-				[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,''}|lien_ou_expose{
-					[(#DATE|annee)],
-					#GET{actif},
-					ajax,'', '',
-					[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'[(#DATE|annee)]',mois:''\}\})"})]
-				})</li>]
+[(#REM) Dates ]
+<B_commandes_annees>
+<div class="facette facette-dates">
+	<h3 class="titre-facette"><:commandes:label_filtre_dates:></h3>
+	[(#SELF
+		|parametre_url{mois|annee,''}
+		|lien_ou_expose{
+			<:commandes:label_filtre_toutes:>,
+			#ENV{mois}|=={''}|et{#ENV{annee}|=={''}},
+			ajax}
+		|inserer_attribut{data-ajaxreload_args,\{"mois":"","annee":""\}})]
+	<span class='sep'>&bull;</span>
+	<BOUCLE_commandes_annees(COMMANDES){tout}{fusion YEAR(date)}{!par date}{"<span class='sep'>&bull;</span>"}>
+	[(#COMPTEUR_BOUCLE|=={1}|oui)#SET{annee,#ENV{annee,#VAL{#DATE|annee}}}]
+	[(#SELF
+		|parametre_url{annee,#DATE|annee}
+		|lien_ou_expose{
+			[(#DATE|annee)],
+			#ENV{annee}|=={#DATE|annee},
+			ajax}
+		|inserer_attribut{data-ajaxreload_args,\{"annee":"[(#DATE|annee)]"\}})]
+	</BOUCLE_commandes_annees>
+
+	[(#REM) Calendrier ]
+	#SET{mois,#ARRAY}
+	<BOUCLE_set_mois(COMMANDES){tout}{fusion MONTH(date)}{annee}>
+	#SET{mois,#GET{mois}|push{#DATE|mois}}
+	</BOUCLE_set_mois>
+	<table class="spip calendrier">
+		<tbody>
+		<BOUCLE_commandes_mois(DATA){enum 1,12}>
+		[(#COMPTEUR_BOUCLE|modulo{4}|=={1}|oui)<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,'','','',row_even,'','',''})]">]
+			<td[ (#VALEUR|in_array{#GET{mois}}|non)class="inactif"]>
+				[(#SELF
+					|parametre_url{mois,#VALEUR}
+					|lien_ou_expose{
+						[(#VAL{1970-}|concat{#VALEUR,'-1'}|nom_mois{abbr}|ucfirst)],
+						#ENV{mois}|=={#VALEUR}|ou{#VALEUR|in_array{#GET{mois}}|non},
+						ajax}
+					|inserer_attribut{data-ajaxreload_args,\{"mois":"#VALEUR"\}})]
 			</td>
-			<td class="mois">
-				<ul>
-					<BOUCLE_mois(COMMANDES){tout}{annee=#DATE|annee}{!par date}{fusion MONTH(date)}>
-					#SET{actif, #ENV{mois}|=={#DATE|mois}|et{#ENV{annee}|=={#DATE|annee}}|?{'oui',''}}
-					[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{annee,#DATE|annee}|parametre_url{mois,#DATE|mois}|lien_ou_expose{
-						[(#DATE|affdate{nom_mois})],
-						#GET{actif},
-						'ajax', '', '',
-						[(#VAL{onclick="ajaxReload('commandes',\{args:\{annee:'[(#DATE|annee)]',mois:'[(#DATE|mois)]'\}\})"})]
-					})</li>]
-					</BOUCLE_mois>
-				</ul>
-			</td>
-		</tr>
-		</BOUCLE_annees>
-		</table></li>
-		[<li class='pagination simple'>(#PAGINATION{page})</li>]
-		</B_annees>
-
-	</ul>
+		[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
+	</BOUCLE_commandes_mois>
+		</tbody>
+	</table>
 </div>
+</B_commandes_annees>
 
-[(#REM) filtrer les clients ]
-<div class="liste clients">
-	<h4><:commandes:label_filtre_clients:></h4>
+
+[(#REM) Auteurs ]
+<B_commandes_auteurs>
+<div class="facette facette-auteurs">
+	#ANCRE_PAGINATION
+	<h3 class="titre-facette"><:commandes:label_filtre_clients:></h3>
 	<ul class='liste-items'>
-
-		[(#REM) tous les clients ]
-		#SET{actif, #ENV{id_auteur}|=={''}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{id_auteur,''}|lien_ou_expose{
-			<:commandes:label_filtre_tous_clients:>,
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{id_auteur:''\}\})"})]
-		})</li>]
-
-		<B_clients>
-		#ANCRE_PAGINATION
-		<BOUCLE_clients(COMMANDES){tout}{fusion id_auteur}{pagination 20}>
-		#SET{actif, #ENV{id_auteur}|=={#ID_AUTEUR}|?{'oui',''}}
-		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{id_auteur,#ID_AUTEUR}|lien_ou_expose{
-			[(#INFO_NOM{auteur, #ID_AUTEUR})],
-			#GET{actif},
-			'ajax', '', '',
-			[(#VAL{onclick="ajaxReload('commandes',\{args:\{id_auteur:'#ID_AUTEUR'\}\})"})]
-		})</li>]
-		</BOUCLE_clients>
-		[<li class='pagination simple'>(#PAGINATION{page})</li>]
-		</B_clients>
-
+		[<li class="item">
+			(#SELF
+				|parametre_url{id_auteur,''}
+				|lien_ou_expose{
+					<:commandes:label_filtre_tous:>,
+					#ENV{id_auteur}|=={''},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"id_auteur":""\}})
+		</li>]
+		<BOUCLE_commandes_auteurs(COMMANDES auteurs){tout}{fusion id_auteur}{par auteurs.nom}{auteurs.nom == (#ENV{lettre}|?{#VAL{^}|concat{#ENV{lettre}},'.*'})}{pagination 15}>
+		[<li class="item">
+			(#SELF
+				|parametre_url{id_auteur,#ID_AUTEUR}
+				|lien_ou_expose{
+					#NOM,
+					#ENV{id_auteur}|=={#ID_AUTEUR},
+					ajax}
+				|inserer_attribut{data-ajaxreload_args,\{"id_auteur":"#ID_AUTEUR"\}})
+		</li>]
+		</BOUCLE_commandes_auteurs>
 	</ul>
+	[<div class='pagination simple'>(#PAGINATION{page})</div>]
+	<B_alphabet>
+	<div class='pagination alphabet'>
+		[(#SELF
+			|parametre_url{lettre,''}
+			|lien_ou_expose{
+				&Oslash;,
+				#ENV{lettre}|=={''},
+				ajax})]
+		<BOUCLE_alphabet(COMMANDES auteurs){tout}{fusion LOWER(SUBSTR(nom,1,1))}{nom != ''}{par nom}>
+		#SET{lettre,#NOM|mb_substr{0,1}|strtolower}
+		[(#SELF
+			|parametre_url{lettre,#GET{lettre}}
+			|lien_ou_expose{
+				[(#GET{lettre})],
+				#ENV{lettre}|=={#GET{lettre}},
+				ajax})]
+		</BOUCLE_alphabet>
+	</div>
+	</B_alphabet>
 </div>
+</B_commandes_auteurs>
 
 #BOITE_FERMER
+
+<script type="text/javascript">
+;(function($){
+$(function(){
+	$(".facettes-commandes [data-ajaxreload_args]").click(function(event){
+		event.preventDefault();
+		//var cible      = $(this).data("ajaxreload_target");
+		var parametres = $(this).data("ajaxreload_args");
+		ajaxReload('commandes', {args:parametres});
+	});
+});
+})(jQuery);
+</script>
