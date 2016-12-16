@@ -12,6 +12,22 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{titre_singulier,abonnement:info_1_abonnement},#ENV{titre_pluriel,abonnement:info_nb_abonnements}}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
+			<td class="tri" colspan="7">
+				[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}, ajax})]
+				<span class="sep">|</span>
+				[(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}, ajax})]
+				[(#GRAND_TOTAL|>{100}|oui)<span class="sep">|</span> <:medias:label_paginer_par:>
+				[(#SELF|parametre_url{nb,''}|lien_ou_expose{10,#ENV{nb,10}|=={10},ajax})]
+				[<span class="sep">|</span> (#SELF|parametre_url{nb,20}|lien_ou_expose{20,#ENV{nb,10}|=={20},ajax})]
+				[<span class="sep">|</span> (#SELF|parametre_url{nb,50}|lien_ou_expose{50,#ENV{nb,10}|=={50},ajax})]
+				][(#GRAND_TOTAL|>{500}|oui)
+				[<span class="sep">|</span> (#SELF|parametre_url{nb,100}|lien_ou_expose{100,#ENV{nb,10}|=={100},ajax})]
+				][(#GRAND_TOTAL|>{5000}|oui)
+				[<span class="sep">|</span> (#SELF|parametre_url{nb,500}|lien_ou_expose{500,#ENV{nb,10}|=={500},ajax})]
+				]
+			</td>
+		</tr>
+		<tr>
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
 			[(#ENV{masquer_offre}|non)
 			<th class="id_abonnements_offre" scope="col">[(#TRI{id_abonnements_offre,<:abonnement:champ_id_abonnements_offre_label:>,ajax})]</th>
@@ -32,6 +48,9 @@
 		{id_auteur?}
 		{statut?}
 		{recherche?}
+		{annee_debut?}{mois_debut?}
+		{annee_echeance?}{mois_echeance?}
+		{annee_fin?}{mois_fin?}
 		{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,10}}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
