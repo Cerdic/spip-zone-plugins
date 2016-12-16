@@ -90,6 +90,7 @@ function compositions_styliser($flux){
  */
 function compositions_affiche_milieu($flux){
 	$e = trouver_objet_exec($flux['args']['exec']);
+	include_spip('compositions_fonctions');
 	$objets = compositions_objets_actives();
 	if (in_array($e['type'],$objets)
 	  AND $e['edition']===false){
@@ -129,7 +130,7 @@ function compositions_affiche_milieu($flux){
  *		$heritages['objet'] = 'parent';
  * ce qui permet ensuite de faire dans le fichier parent-ma_compo.xml
  * <branche type="objet" composition="une_compo" />
- * 
+ *
  * A partir de compositions 3.3.0 cette declaration est obligatoire.
  * Les objets "standards" de SPIP sont declares ici. (a deplacer dans leurs plugins respectifs ?)
  */
