@@ -119,11 +119,13 @@ function verifier_fichier_mime($valeur,$cle,$options){
 
 /**
  * Vérifier la taille d'une saisie d'envoi de fichiers
+ *
  * La taille est vérifiée en fonction du paramètre passé en option, sinon en fonction d'une constante:
  *	- _IMG_MAX_SIZE si jpg/png/gif
  *	- _DOC_MAX_SIZE si pas jpg/png/gif ou si _IMG_MAX_SIZE n'est pas définie
+ *
  * @param array $valeur
- *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
+ *   Le sous tableau de `$_FILES` à vérifier, `$_FILES['logo']` par exemple
  *   Doit être un champ plusieurs uploads
  * @param int $cle
  *   La clé du tableau qu'on vérifie
@@ -142,10 +144,12 @@ function verifier_fichier_taille($valeur,$cle,$options){
 		$taille_max = _IMG_MAX_SIZE;
 	} elseif (defined('_DOC_MAX_SIZE')) {
 		$taille_max = _DOC_MAX_SIZE;
+	} else {
+		$taille_max = 0; // pas de taille max.
 	}
 
 	$taille_max = intval($taille_max); // précaution
-		
+
 	//Si la taille max est déterminée, on vérifie que le fichier ne dépasse pas cette taille
 	if ($taille_max) {
 		$taille_max = 1024 * $taille_max; // passage de l'expression en kibioctets à une expression en octets 
