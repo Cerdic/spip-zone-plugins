@@ -232,9 +232,7 @@
 $(function(){
 	$(".facettes-commandes [data-ajaxreload_args]").click(function(event){
 		event.preventDefault();
-		var reset = $(this).data("ajaxreload_argsreset");
 		var parametres = $(this).data("ajaxreload_args");
-		console.log(reset);
 		ajaxReload('commandes', {args:parametres});
 	});
 });
