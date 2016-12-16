@@ -90,48 +90,85 @@
 
 
 [(#REM) Dates ]
+#SET{type_date,   #VAL{"/^(mois|annee)/"}|preg_grep{#ENV**|unserialize|array_keys}|reset}
+#SET{type_date,   #GET{type_date}|match{_}|?{#GET{type_date}|substr{#GET{type_date}|strpos{_}},''}}
+#SET{param_date,  #VAL{date}|concat{#GET{type_date}}}
+#SET{param_mois,  #VAL{mois}|concat{#GET{type_date}}}
+#SET{param_annee, #VAL{annee}|concat{#GET{type_date}}}
+#SET{mois_env,    #ENV{#GET{param_mois}}}
+#SET{annee_env,   #ENV{#GET{param_annee}}}
 <B_commandes_annees>
 <div class="facette facette-dates">
 	<h3 class="titre-facette"><:commandes:label_filtre_dates:></h3>
-	[(#SELF
-		|parametre_url{mois|annee,''}
-		|lien_ou_expose{
-			<:commandes:label_filtre_toutes:>,
-			#ENV{mois}|=={''}|et{#ENV{annee}|=={''}},
-			ajax}
-		|inserer_attribut{data-ajaxreload_args,\{"mois":"","annee":""\}})]
-	<span class='sep'>&bull;</span>
-	<BOUCLE_commandes_annees(COMMANDES){tout}{fusion YEAR(date)}{!par date}{"<span class='sep'>&bull;</span>"}>
-	[(#COMPTEUR_BOUCLE|=={1}|oui)#SET{annee,#ENV{annee,#VAL{#DATE|annee}}}]
-	[(#SELF
-		|parametre_url{annee,#DATE|annee}
-		|lien_ou_expose{
-			[(#DATE|annee)],
-			#ENV{annee}|=={#DATE|annee},
-			ajax}
-		|inserer_attribut{data-ajaxreload_args,\{"annee":"[(#DATE|annee)]"\}})]
-	</BOUCLE_commandes_annees>
-
+	[(#REM) Menu des années ]
+	<div class="menu-annees">
+		[(#SELF
+			|parametre_url{mois|mois_paiement|mois_envoi|annee|annee_paiement|annee_envoi,''}
+			|lien_ou_expose{
+				<:commandes:label_filtre_toutes:>,
+				#GET{mois_env}|non|et{#GET{annee_env}|non},
+				ajax}
+			|inserer_attribut{data-ajaxreload_args,'\{"mois":"","mois_paiement":"","mois_envoi":"","annee":"","annee_paiement":"","annee_envoi":""\}'})]
+		<span class='sep'>|</span>
+		<BOUCLE_commandes_annees(COMMANDES){tout}{fusion YEAR(date)}{!par date}{"<span class='sep'>|</span>"}>
+		[(#SELF
+			|parametre_url{#GET{param_annee},#DATE|annee}
+			|lien_ou_expose{
+				[(#DATE|annee)],
+				#GET{annee_env}|=={#DATE|annee},
+				ajax}
+			|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_annee})]":"[(#DATE|annee)]"\}})]
+		</BOUCLE_commandes_annees>
+	</div>
 	[(#REM) Calendrier ]
 	#SET{mois,#ARRAY}
-	<BOUCLE_set_mois(COMMANDES){tout}{fusion MONTH(date)}{annee}>
+	<BOUCLE_set_mois(COMMANDES){tout}{fusion MONTH(date)}{annee?}{annee_paiement?}{annee_envoi?}{si #GET{annee_env}}>
 	#SET{mois,#GET{mois}|push{#DATE|mois}}
 	</BOUCLE_set_mois>
 	<table class="spip calendrier">
+		<caption>
+			[(#REM) Menu des types de dates ]
+			#SET{types_dates,#ARRAY{'',#VAL{commandes:date_commande_label_court}|_T}}
+			<BOUCLE_date_paiement(COMMANDES){tout}{!date_paiement LIKE 0%}{0,1}>#SET{types_dates,#GET{types_dates}|array_merge{#ARRAY{paiement,#VAL{commandes:date_paiement_label_court}|_T}}}</BOUCLE_date_paiement>
+			<BOUCLE_date_envoi(COMMANDES){tout}{!date_envoi LIKE 0%}{0,1}>#SET{types_dates,#GET{types_dates}|array_merge{#ARRAY{envoi,#VAL{commandes:date_envoi_label_court}|_T}}}</BOUCLE_date_envoi>
+			<BOUCLE_types_dates(DATA)
+				{source table, #GET{types_dates}}
+				{"<span class='sep'>|</span>"}
+				{si #GET{mois_env}|ou{#GET{annee_env}}|oui}
+			>
+			#SET{param_mois_menu,#VAL{mois}|concat{#CLE|?{_#CLE,''}}}
+			#SET{param_annee_menu,#VAL{annee}|concat{#CLE|?{_#CLE,''}}}
+			[(#SELF
+				|parametre_url{mois|mois_paiement|mois_envoi|annee|annee_paiement|annee_envoi,''}
+				|parametre_url{#GET{param_mois_menu},#GET{mois_env}}
+				|parametre_url{#GET{param_annee_menu},#GET{annee_env}}
+				|lien_ou_expose{
+					#VALEUR,
+					#ENV{#GET{param_mois_menu}}|ou{#ENV{#GET{param_annee_menu}}}}
+				|wrap{"<small>"})]
+				</BOUCLE_types_dates>
+				<small>Choisir une année</small>
+				<//B_types_dates>
+		</caption>
 		<tbody>
-		<BOUCLE_commandes_mois(DATA){enum 1,12}>
-		[(#COMPTEUR_BOUCLE|modulo{4}|=={1}|oui)<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,'','','',row_even,'','',''})]">]
-			<td[ (#VALEUR|in_array{#GET{mois}}|non)class="inactif"]>
-				[(#SELF
-					|parametre_url{mois,#VALEUR}
-					|lien_ou_expose{
-						[(#VAL{1970-}|concat{#VALEUR,'-1'}|nom_mois{abbr}|ucfirst)],
-						#ENV{mois}|=={#VALEUR}|ou{#VALEUR|in_array{#GET{mois}}|non},
-						ajax}
-					|inserer_attribut{data-ajaxreload_args,\{"mois":"#VALEUR"\}})]
-			</td>
-		[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
-	</BOUCLE_commandes_mois>
+			<BOUCLE_commandes_mois(DATA){enum 1,12}>
+			[(#COMPTEUR_BOUCLE|modulo{4}|=={1}|oui)<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,'','','',row_even,'','',''})]">]
+				#SET{nom_mois,#VAL{1970-}|concat{#VALEUR,'-1'}|nom_mois{abbr}|ucfirst}
+				[(#VALEUR|in_array{#GET{mois}}|oui)
+				<td>
+					[(#SELF
+						|parametre_url{#GET{param_mois},#VALEUR}
+						|lien_ou_expose{
+							#GET{nom_mois},
+							#GET{mois_env}|=={#VALEUR},
+							ajax}
+						|inserer_attribut{data-ajaxreload_args,\{"[(#GET{param_mois})]":"[(#VALEUR)]"\}})]
+				</td>
+				][(#VALEUR|in_array{#GET{mois}}|non)
+				<td class="inactif"><span>#GET{nom_mois}</span></td>
+				]
+			[(#COMPTEUR_BOUCLE|modulo{4}|=={0}|oui)</tr>]
+			</BOUCLE_commandes_mois>
 		</tbody>
 	</table>
 </div>
@@ -195,8 +232,9 @@
 $(function(){
 	$(".facettes-commandes [data-ajaxreload_args]").click(function(event){
 		event.preventDefault();
-		//var cible      = $(this).data("ajaxreload_target");
+		var reset = $(this).data("ajaxreload_argsreset");
 		var parametres = $(this).data("ajaxreload_args");
+		console.log(reset);
 		ajaxReload('commandes', {args:parametres});
 	});
 });

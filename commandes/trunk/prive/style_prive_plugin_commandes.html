@@ -34,18 +34,21 @@
 /* navigation latérale */
 .facettes-commandes .facette            { margin-bottom: 1.5em; }
 .facettes-commandes .titre-facette      { font-size: 1.1em; margin-bottom: 0.25em; padding-bottom: 0.25em; border-bottom: 1px solid #ddd; }
+.facettes-commandes .sep                { color: #aaa; }
 .facettes-commandes .liste-items        { margin: 0; border: 0 none; }
 .facettes-commandes .liste-items .item  { padding: 0; border: 0 none; }
 .facettes-commandes .pagination         { padding: 0; margin: 0.5em 0 0; border-width: 0; }
 .facettes-commandes .pagination+.pagination { border-top-width: 1px; }
 .facettes-commandes .alphabet           { font-size: 0.7em; margin: 0; white-space: normal;}
 .facettes-commandes .alphabet img       { vertical-align: middle;}
+.facettes-commandes .menu-annees        { margin-bottom: 0.5em; }
 .facettes-commandes .calendrier         { margin: 0; }
+.facettes-commandes .calendrier caption { padding: 0.2em; margin: 0; font-weight: normal;}
 .facettes-commandes .calendrier td      { border-color: #efefef; text-align: center; }
 .facettes-commandes .calendrier tr:nth-child(2n) td:not(.inactif) { background-color: transparent; }
 .facettes-commandes .calendrier .inactif { background-color: #efefef; }
 .facettes-commandes .calendrier .inactif:hover { cursor: not-allowed; }
-.facettes-commandes .calendrier .inactif strong { font-weight: normal; opacity: 0.33; }
+.facettes-commandes .calendrier .inactif span { opacity: 0.33; }
 <BOUCLE_icones_statuts(DATA){source table, #REM|commandes_lister_statuts|array_keys}>
 .facettes-commandes .statut-[(#VALEUR)]>*:before {content:""; display: inline-block; width:12px; height:12px; margin-right: 0.2em; background: transparent url('[(#CHEMIN{#VAL{prive/themes/spip/images/puce-commande-}|concat{#VALEUR,'.png'}})]') no-repeat center center;}
 </BOUCLE_icones_statuts>
