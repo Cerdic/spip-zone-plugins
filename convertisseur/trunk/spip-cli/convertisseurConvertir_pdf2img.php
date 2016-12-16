@@ -4,6 +4,8 @@
 
 	Convertir des fichiers PDF format JPG avec imagemagick convert.
 	Installer Image Magick pour que cela fonctionne. (brew install imagemagick sous Mac)
+
+	// Info bonus, si on veut extraire le texte d'un PDF, on peut utiliser la commande pdftotext de poppler (brew install poppler sous Mac)
 	
 	// On l'appelle de plusieurs facons
 	1) mode un PDF (une ou plusieurs pages) spip pdf2img path/to/fichier.pdf
