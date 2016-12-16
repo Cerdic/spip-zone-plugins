@@ -131,6 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_dont_taxe' => 'taxe included',
 	'label_filtre_clients' => 'Clients',
 	'label_filtre_dates' => 'Dates',
+	'label_filtre_echeances_type' => 'Means of payment',
 	'label_filtre_etats' => 'States',
 	'label_filtre_paiement' => 'Payment means',
 	'label_filtre_tous_clients' => 'All clients',
