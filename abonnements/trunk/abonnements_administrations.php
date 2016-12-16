@@ -36,7 +36,7 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_update', 'spip_abonnements_offres', array('prix' => '0'))
 	);
 	
-	//Nettoyage
+	// Nettoyage (d'une table inexistante...)
 	$maj['2.2.3'] = array(
 		array('sql_alter',"TABLE spip_contacts_abonnements DROP prix"),
 	);
@@ -44,6 +44,11 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 	// relancer des abonnements après échéance
 	$maj['2.2.4'] = array(
 		array('sql_alter',"TABLE spip_abonnements_offres_notifications ADD `quand` ENUM('avant','apres') DEFAULT 'avant' NOT NULL AFTER `periode`"),
+	);
+
+	// Nettoyage : le champ `prix` est inutile, il suffit de `prix_ht` et `taxe`
+	$maj['2.2.5'] = array(
+		array('sql_alter',"TABLE spip_abonnements_offres DROP prix"),
 	);
 
 	include_spip('base/upgrade');
