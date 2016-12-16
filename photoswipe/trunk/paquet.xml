@@ -1,7 +1,7 @@
 <paquet
 	prefix="photoswipe"
 	categorie="multimedia"
-	version="0.3.2"
+	version="0.3.4"
 	etat="test"
  	compatibilite="[2.0.0;3.1.*]"
 	logo="photoswipe-128.png"
