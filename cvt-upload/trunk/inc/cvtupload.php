@@ -181,13 +181,15 @@ function cvtupload_modifier_files($infos_fichiers) {
 				$_FILES[$champ]['size'][$fichier_individuel] = $description_fichier_individuel['taille']; 		
 			}
 			// Si on vient d'envoyer un ou plusieur $champ[] vide, on les rajoute dans notre nouveau $FILES
-			foreach ($old_FILES_champ['error'] as $id_fichier_individuel => $error_fichier_individuel){
-				if ($error_fichier_individuel!=0){//Uniquement les erreurs
-					$_FILES[$champ]['name'][$id_fichier_individuel] = $old_FILES_champ['name'][$id_fichier_individuel];
-					$_FILES[$champ]['tmp_name'][$id_fichier_individuel] = $old_FILES_champ['tmp_name'][$id_fichier_individuel];
-					$_FILES[$champ]['type'][$id_fichier_individuel] = $old_FILES_champ['type'][$id_fichier_individuel];
-					$_FILES[$champ]['error'][$id_fichier_individuel] = $old_FILES_champ['error'][$id_fichier_individuel];
-					$_FILES[$champ]['size'][$id_fichier_individuel] = $old_FILES_champ['size'][$id_fichier_individuel];
+			if (isset($old_FILES_champ['error'])) {
+				foreach ($old_FILES_champ['error'] as $id_fichier_individuel => $error_fichier_individuel){
+					if ($error_fichier_individuel!=0){//Uniquement les erreurs
+						$_FILES[$champ]['name'][$id_fichier_individuel] = $old_FILES_champ['name'][$id_fichier_individuel];
+						$_FILES[$champ]['tmp_name'][$id_fichier_individuel] = $old_FILES_champ['tmp_name'][$id_fichier_individuel];
+						$_FILES[$champ]['type'][$id_fichier_individuel] = $old_FILES_champ['type'][$id_fichier_individuel];
+						$_FILES[$champ]['error'][$id_fichier_individuel] = $old_FILES_champ['error'][$id_fichier_individuel];
+						$_FILES[$champ]['size'][$id_fichier_individuel] = $old_FILES_champ['size'][$id_fichier_individuel];
+					}
 				}
 			}
 			// On remet de l'ordre dans champ dans chaque tableau correspondant à une propriété de $_FILES, histoire d'avoir 0,1,2,3 et pas 3,1,0,2
