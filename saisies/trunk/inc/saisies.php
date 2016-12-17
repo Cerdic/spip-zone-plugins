@@ -209,7 +209,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
 			foreach ($_FILES[$champ]['error'] as $err) {
 				if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoir est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
-					$valeur = True;
+					$valeur = $_FILES[$champ];
 					break;
 				}
 			}
