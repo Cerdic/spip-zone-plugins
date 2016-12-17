@@ -4,11 +4,19 @@
 <BOUCLE_art_or (DATA){source tableau,#ENV{evenements}} {id_evenement_source ?} {par date_debut}>
 	#SET{prix,#VALEUR{prix}}
 	[(#REM) Si le plugin prix objets est activé on regarde si il y a un prix attaché à l'évenement]
-	#SET{prix2,#INCLURE{fond=formulaires/inc-reservation_evenements_prix,id_evenement,id_article,prix=#GET{prix}}}
-
-	<BOUCLE_evenement_source(EVENEMENTS){id_evenement=#ID_EVENEMENT_SOURCE}{si #GET{prix2}|non}>
-			#SET{prix2,#INCLURE{fond=formulaires/inc-reservation_evenements_prix,id_evenement,id_article,prix=#GET{prix}}}
-	</BOUCLE_evenement_source>
+	#SET{prix2, #INCLURE{
+		fond=formulaires/inc-reservation_evenements_prix,
+		id_evenement,
+		id_article,
+		prix=#GET{prix}
+	}|sinon{
+			#INCLURE{fond=formulaires/inc-reservation_evenements_prix,
+				id_evenement=#ID_EVENEMENT_SOURCE,
+				id_article,
+				prix=#GET{prix}
+			}
+		}
+	}
 
 		#SET{id_article,#ID_ARTICLE}
 	[(#COMPTEUR_BOUCLE|!={1}|oui)

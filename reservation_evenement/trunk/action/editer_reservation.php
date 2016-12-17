@@ -58,6 +58,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	$s = isset($c['statut']) ? $c['statut'] : $statut;
 
 	$champs = array();
+
 	// cf autorisations dans inc/instituer_objet
 	if ($s != $statut OR ($d AND $d != $date)) {
 		if (autoriser('modifier', 'reservation', $id_reservation))
@@ -97,7 +98,8 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 			'statut_calculer_auto' => $statut_calculer_auto
 		);
 		$sql = sql_select('id_reservations_detail', 'spip_reservations_details', 'id_reservation=' . $id_reservation);
-		// Eviter l'envoi d'une notification pour chaque d��tail
+
+		// Eviter l'envoi d'une notification pour chaque détail
 		set_request('envoi_separe_actif', 'non');
 		while ($data = sql_fetch($sql)) {
 			reservations_detail_instituer($data['id_reservations_detail'], $c);
@@ -110,10 +112,13 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	}
 	//Si on est dans le cas d'une création
 	if (is_array($evenements)) {
+
 		// Pour chaque événement on crée un détail de la réservation
 		foreach ($evenements AS $id_evenement) {
+
 			// Si aucun détail n'est attaché à l'événement, on le crée
-			if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details', 'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
+			if (!$reservations_detail = sql_fetsel('*', 'spip_reservations_details',
+						'id_reservation=' . $id_reservation . ' AND id_evenement=' . $id_evenement)) {
 				$id_reservations_detail = 'new';
 				$set['id_prix_objet'] = $id_prix_objet[$id_evenement];
 			}
@@ -127,6 +132,8 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 
 			// Eviter l'envoi d'une notification pour chaque détail
 			set_request('envoi_separe_actif', 'non');
+
+			// Actualiser le détail de réservation
 			$detail = $action($id_reservations_detail, 'reservations_detail', $set);
 		}
 	}
@@ -150,13 +157,18 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	$valeurs_extras = array();
 
 	if (function_exists('champs_extras_objet')) {
-		//Charger les d��finitions pour la cr��ation des formulaires
+
+		//Charger les définitions pour la création des formulaires
 		$champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
 
 		if (is_array($champs_extras_auteurs)) {
 			foreach ($champs_extras_auteurs as $value) {
-
-				$valeurs_extras[$value['options']['nom']] = _request($value['options']['nom']) ? _request($value['options']['nom']) : (isset($donnees_auteur[$value['options']['nom']]) ? $donnees_auteur[$value['options']['nom']] : '');
+				$valeurs_extras[$value['options']['nom']] = _request($value['options']['nom']) ?
+					_request($value['options']['nom']) :
+					(isset($donnees_auteur[$value['options']['nom']]) ?
+						$donnees_auteur[$value['options']['nom']] :
+						''
+					);
 			}
 		}
 		$champs['donnees_auteur'] = serialize($valeurs_extras);
@@ -174,8 +186,9 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 		'data' => $champs
 	));
 
-	if (!count($champs))
+	if (!count($champs)) {
 		return '';
+	}
 
 	// Envoyer les modifs.
 	objet_editer_heritage('reservation', $id_reservation, '', $statut_ancien, $champs);
@@ -200,9 +213,11 @@ function reservation_instituer($id_reservation, $c, $calcul_rub = true) {
 	// Les traitements spécifiques
 	// Notifications
 	if ((!$statut_ancien OR $statut != $statut_ancien) && (isset($config['activer'])) && (isset($config['quand']) && is_array($config['quand']) && in_array($statut, $config['quand'])) && ($notifications = charger_fonction('notifications', 'inc', true))) {
+
 		//Déterminer la langue pour les notifications
 		$lang = isset($row['lang']) ? $row['lang'] : lire_config('langue_site');
 		lang_select($lang);
+
 		// Determiner l'expediteur
 		$options = array(
 			'statut' => $champs['statut'],
