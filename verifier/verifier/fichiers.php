@@ -65,7 +65,14 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 	}
 	// Vérification proprement dite
 	foreach ($valeur['tmp_name'] as $cle=>$tmp_name){//On parcourt tous les fichiers
-		if ($valeur['error'][$cle]!=0){//On vérifie uniquement les fichiers bien expediés
+		if ($valeur['error'][$cle] != 0) {//On vérifie uniquement les fichiers bien expediés, si mal expedié, on indique une erreur générique
+			$erreur = _T("verifier:erreur_php_file_".$valeur['error'][$cle], array('name'=>$valeur['name'][$cle]));
+			if (!is_array($erreurs_par_fichier)) {
+				$erreurs_par_fichier = $erreur;
+				return $erreur;
+			} else {
+					$erreurs_par_fichier[$cle] = "- $erreur";
+			}
 			continue;	
 		}
 		foreach (array('mime','taille','dimension_max') as $verification){ // On va vérifier d'hivers choses, dans un certain ordre, en confiant cela à des fonctions homonymes
