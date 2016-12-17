@@ -205,10 +205,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 
 		// Cas de la saisie 'fichiers':
 		if ($saisie['saisie'] == 'fichiers') {
-			if (isset($_FILES[$champ]['error'])) {
+			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
+			if (isset($_FILES[$champ]['error']) and !isset($infos_fichiers_precedents[$champ])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
 				foreach ($_FILES[$champ]['error'] as $err) {
-					if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoir est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
+					if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoire est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
 						$valeur = $_FILES[$champ];
 						break;
 						}
