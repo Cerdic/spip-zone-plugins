@@ -8,9 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 /**
  * Vérifier une saisie d'envoi de fichiers
  *
- * @param array $valeur
+ * @param array|bool $valeur
  *   Le sous tableau de $_FILES à vérifier, $_FILES['logo'] par exemple
  *   Doit être un champ avec un ou plusieurs upload
+ *   Si bool égal à true, cela signifie que le fichier avait déjà été vérifié, et qu'il est inutile de refaire la vérification. 
  * @param array $options
  *   Options à vérifier :
  *   - mime au choix 'image_web','tout_mime','specifique'
@@ -31,6 +32,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 **/
 function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 	if (!is_array($valeur['tmp_name'])){//si on reçoit une info de type fichier unique, on bascule comme si on était fichier multiple
+
+		if ($valeur == True) { // Si on n'a rien à vérifier
+			return array();	
+		};
+
 		$old_valeur = $valeur;
 		$valeur = array();
 		foreach ($old_valeur as $propriete=>$val){
