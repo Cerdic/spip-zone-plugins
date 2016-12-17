@@ -19,7 +19,8 @@ function formulaires_test_upload_saisies(){
 			'options'=>array(
 				'nom'=>'pdfs',
 				'label'=>'Plusieurs fichiers PDF dans un même champ',
-				'nb_fichiers'=>2
+				'nb_fichiers'=>2,
+				'obligatoire'=>'oui'
 			), 
 			'verifier' => array(
 				'type'=>'fichiers',
