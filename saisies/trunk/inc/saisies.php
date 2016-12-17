@@ -204,9 +204,15 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
 
 		// Cas de la saisie 'fichiers':
-		// la valeur est le contenu de $_FILES[$champ];
+		// la valeur est calcul en fonction de l'erreur contenu dans $_FILES. Idéalement il faudrait vérifier de mani
 		if ($saisie['saisie'] == 'fichiers') {
-			$valeur = $_FILES[$champ];
+			$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
+			foreach ($_FILES[$champ]['error'] as $err) {
+				if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoir est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
+					$valeur = True;
+					break;
+				}
+			}
 		} else { // tout type de saisie, sauf fichiers
 			// Si le nom du champ est un tableau indexé, il faut parser !
 			if (preg_match('/([\w]+)((\[[\w]+\])+)/', $champ, $separe)) {
@@ -225,12 +231,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		if ($saisie['saisie'] == 'destinataires') {
 			$valeur = array_filter($valeur);
 		}
-
 		// On regarde d'abord si le champ est obligatoire
 		if ($obligatoire
 			and $obligatoire != 'non'
 			and (
-				($file and !$_FILES[$champ]['name'])
+				($file and $valeur==null)
 				or (!$file and (
 					is_null($valeur)
 					or (is_string($valeur) and trim($valeur) == '')
