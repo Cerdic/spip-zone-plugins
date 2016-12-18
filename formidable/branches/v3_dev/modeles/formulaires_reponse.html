@@ -5,7 +5,7 @@
 </BOUCLE_formulaire>
 #SET{valeurs,#ARRAY}
 <BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
-#SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize|formidable_ajouter_action_vue_saisie_fichiers{#NOM,#GET{saisies},#ID_FORMULAIRE,#ID_FORMULAIRES_REPONSE}}
+#SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize|formidable_ajouter_action_recuperer_fichier{#NOM,#GET{saisies},#ID_FORMULAIRE,#ID_FORMULAIRES_REPONSE}}
 </BOUCLE_champs>
 
 #VOIR_SAISIES{#GET{saisies}, #GET{valeurs}}

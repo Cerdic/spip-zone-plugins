@@ -157,7 +157,7 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
  * @param int|string $id_formulaires_reponse
  * return array $saisie_a_modifier
  **/
-function formidable_ajouter_action_vue_saisie_fichiers($saisie_a_modifier, $nom_saisie, $saisies_du_formulaire, $id_formulaire, $id_formulaires_reponse) {
+function formidable_ajouter_action_recuperer_fichier($saisie_a_modifier, $nom_saisie, $saisies_du_formulaire, $id_formulaire, $id_formulaires_reponse) {
 	// précaution
 	include_spip('inc/saisies_lister');
 	$id_formulaire = strval($id_formulaire);
