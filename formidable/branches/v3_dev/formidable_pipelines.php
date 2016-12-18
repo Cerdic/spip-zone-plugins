@@ -223,3 +223,34 @@ function formidable_optimiser_base_disparus($flux) {
 
 	return $flux;
 }
+
+/**
+ * S'assurer que le traitement email ait lieu après le traitement enregistremnt
+ * 
+ * @pipeline formidable_traitements
+ * @param array $flux 
+ * @return array $flux
+ **/
+function formidable_formidable_traitements($flux) {
+	if (isset($flux['data']['email']) and isset($flux['data']['enregistrement'])) {
+		$keys = array_keys($flux['data']); 
+		$position_email = array_search('email', $keys);
+		$position_enregistrement = array_search('enregistrement', $keys);
+
+		if ($position_enregistrement > $position_email) { // si enregistrement après email
+			$nouveau_tab = array();
+			foreach ($keys as $key) { //on reconstruit le tableau, en inversant simplement email et enregistrement 
+				if ($key == 'email') {
+					$nouveau_tab['enregistrement'] = $flux['data']['enregistrement'];
+				} elseif ($key == 'enregistrement') {
+					$nouveau_tab['email'] = $flux['data']['email'];
+				} else {
+					$nouveau_tab[$key] = $flux['data'][$key];
+				}
+			}
+			$flux['data'] = $nouveau_tab;
+		}
+	}
+
+	return $flux;
+}

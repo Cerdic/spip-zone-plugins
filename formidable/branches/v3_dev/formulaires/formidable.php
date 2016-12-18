@@ -296,7 +296,12 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
-
+	$traitements = pipeline ('formidable_traitements', 
+		array(
+			'args'=>array('id_formulaire'=>$id_formulaire), 
+			'data'=>$traitements
+		)
+	);
 	// selon le choix, le formulaire se remet en route à la fin ou non
 	$retours['editable'] = ($formulaire['apres']=='formulaire');
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];

@@ -19,6 +19,7 @@
 	<pipeline nom="formidable_affiche_resume_reponse" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_titres" action="" />
 	<pipeline nom="formidable_exporter_formulaire_reponses_reponse" action="" />
+	<pipeline nom="formidable_traitements" inclure="formidable_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/formidable_tables.php" />
