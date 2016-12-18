@@ -79,10 +79,10 @@ function traiter_email_dist($args, $retours) {
 
 		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
-		$saisies_fichiers = array_keys(saisies_lister_avec_type($saisies,'fichiers'));// On utilise pas formulaires_formidable_fichiers, car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais, il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
+		$saisies_fichiers = saisies_lister_avec_type($saisies,'fichiers');// On utilise pas formulaires_formidable_fichiers, car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais, il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 		foreach ($champs as $champ) {
-			if (in_array($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
-				$valeurs[$champ] = traiter_email_fichiers($champ, $formulaire['id_formulaire'], $retours,$timestamp);
+			if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
+				$valeurs[$champ] = traiter_email_fichiers($saisies_fichiers[$champ], $champ, $formulaire['id_formulaire'], $retours, $timestamp);
 			} else {
 				$valeurs[$champ] = _request($champ);
 			}
@@ -327,23 +327,35 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
  *	- S'il y a eu un enregistement avant, ne déplace pas le fichier
  *	- S'il n'y a pas eu d'enregistrement avant, déplace le fichier dans un dossier nommé en fonction du timestamp du traitement
  *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement '_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL' 
- *
- * @param string $saisie le nom de la saisie
+ * @param array $saisie la description de la saisie
+ * @param string $nom le nom de la saisie
  * @param int|string $id_formulaire le formulaire concerné
  * @param array $retours ce qu'a envoyé le précédent traitement
  * @param int $timestamp un timestamp correspondant au début du processus de création du courriel
  * @return array un tableau décrivant la saisie
  **/
-function traiter_email_fichiers($saisie, $id_formulaire, $retours,$timestamp){
+function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timestamp){
 	//Initialisation
 	$id_formulaire = strval($id_formulaire);//précaution
 	$vue = array();
 
-	if ($id_formulaires_reponse = $retours['id_formulaires_reponse']) { // cas simple: les réponses ont été enregistrées
-		if (isset($retours['fichiers'][$saisie])) { // petite précaution
-			$vue = 	ajouter_action_recuperer_fichier_par_email($retours['fichiers'][$saisie], $saisie, $id_formulaire, $id_formulaires_reponse, $timestamp);
+	if (isset($retours['id_formulaires_reponse']) and $id_formulaires_reponse = $retours['id_formulaires_reponse']) { // cas simple: les réponses ont été enregistrées
+		if (isset($retours['fichiers'][$nom])) { // petite précaution
+			$options = array(
+				'id_formulaire' => $id_formulaire, 
+				'id_formulaires_reponse' => $retours['id_formulaires_reponse']
+			);
+			$vue = ajouter_action_recuperer_fichier_par_email($retours['fichiers'][$nom], $nom, $options);
 		}
+	} else { // si les réponses n'ont pas été enregistrées
+			$vue = formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'timestamp'=>$timestamp));
+			$options = array(
+				'id_formulaire' => $id_formulaire, 
+				'timestamp' => $timestamp	
+			);
+			$vue = ajouter_action_recuperer_fichier_par_email($vue, $nom, $options);
 	}
+
 	return $vue;
 }
 
@@ -355,26 +367,34 @@ function traiter_email_fichiers($saisie, $id_formulaire, $retours,$timestamp){
  * Ajoute également une vignette correspondent à l'extention
  * @param array $saisie_a_modifier
  * @param string $nom_saisie
- * @param int|string $id_formulaire
- * @param int|string $id_formulaires_reponse
- * @param int $timestamp
+ * @param array $options options qui décrit l'endroit où est stocké le fichier
  * return array $saisie_a_modifier
  **/
-function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_saisie, $id_formulaire, $id_formulaires_reponse, $timestamp) {
-	$id_formulaire = strval($id_formulaire);
-	$id_formulaires_reponse = strval($id_formulaires_reponse);
+function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_saisie, $options) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 
 	$pass = secret_du_site();
 	$action = "formidable_recuperer_fichier_par_email"; 
 	$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
 	foreach ($saisie_a_modifier as $i => $valeur){
-		$arg = serialize(array(
-			'formulaire' => $id_formulaire,
-			'reponse' => $id_formulaires_reponse,
-			'fichier' => $valeur['nom'],
-			'saisie' => $nom_saisie
-		));
+		if (isset($options['id_formulaires_reponse'])) {//si reponses enregistrées
+			$arg = serialize(array(
+				'formulaire' => strval($options['id_formulaire']),
+				'reponse' => strval($options['id_formulaires_reponse']),
+				'fichier' => $valeur['nom'],
+				'saisie' => $nom_saisie
+			));
+		} elseif (isset($options['timestamp'])) {//si par timestamp
+			$arg = serialize(array(
+				'formulaire' => strval($options['id_formulaire']),
+				'timestamp' => strval($options['timestamp']), 
+				'fichier' => $valeur['nom'],
+				'saisie' => $nom_saisie
+			));
+		} else { //si ni timestamp, ni réponse enregistré -> on passe notre chemin
+			continue;
+		}
+
 		$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 		$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
 		$saisie_a_modifier[$i]['url'] = $url;

@@ -74,31 +74,51 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer=false) {
  * 
  * @param string $fichier l'adresse temporaire du fichier
  * @param string $nom le nom du fichiera
- * @param int $id_formulaire l'identifiant du formulaire
  * @param string $champ le champ concerné
- * @param int $id_formulaires_reponse l'identifiant de la réponse
+ * formidable_deplacer_fichier_emplacement_definitif
  * @return string $nom_definitif le nom définitif du fichier tel que stocké dans son dossier, vide s'il y a eu un souci lors du déplacement (dans ce cas un courriel sera envoyé au webmestre)
  *
  **/
-function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $id_formulaire, $champ, $id_formulaires_reponse = null){
-	
+function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $champ, $options){
+	if (isset($options['id_formulaire'])) {
+		$id_formulaire = $options['id_formulaire'];
+		$dossier_formulaire =  "formulaire_$id_formulaire";
+	}
+	else {// si c'est pas set, c'est qu'il y a une erreur
+		return '';
+	}
+
+	if (isset($options['id_formulaires_reponse'])) {
+		$dossier_reponse = "reponse_".$options['id_formulaires_reponse'];
+	} elseif (isset($options['timestamp'])){
+		$dossier_reponse = "reponse_".$options['timestamp'];
+	} else { // si ni timestamp, ni id_formulaires_reponse => erreur
+		return '';
+	}
 	// déterminer l'extension
 	$path_info = pathinfo($nom);
 	$basename = $path_info['basename'];
 	$extension = $path_info['extension'];
+	if (!isset($options['timestamp'])) { // si on enregistre la réponse en base
 
-	// d'abord, créer si besoin le dossier pour le formulaire, si on a une erreur, on ne déplace pas le fichier 
-	if (formidable_creer_dossier_formulaire($id_formulaire, true) != '') {
-		return '';
+		// d'abord, créer si besoin le dossier pour le formulaire, si on a une erreur, on ne déplace pas le fichier 
+		if (formidable_creer_dossier_formulaire($id_formulaire, true) != '') {
+			return '';
+		}
+		
+		// puis on créer le dossier pour la réponse
+		$dossier_reponse = sous_repertoire(_DIR_FICHIERS_FORMIDABLE.$dossier_formulaire."/", $dossier_reponse,false,true);
+
+		// puis le dossier pour le champ
+		$dossier_champ = sous_repertoire($dossier_reponse,$champ,false,true);
+		$appendice_nom = 0;
+	} else { // si on enregistre sous forme de timestamp
+		sous_repertoire(_DIR_FICHIERS,'',true,true);
+		sous_repertoire(_DIR_FICHIERS_FORMIDABLE,'',true,true);
+		$dossier = sous_repertoire(_DIR_FICHIERS_FORMIDABLE, 'timestamp', false, true);
+		$dossier = sous_repertoire($dossier, $options['timestamp'],false,true);
+		$dossier_champ = sous_repertoire($dossier,$champ,false,true);
 	}
-	// puis on créer le dossier pour la réponse
-	$dossier_formulaire =  "formulaire_$id_formulaire";
-	$dossier_reponse = "reponse_$id_formulaires_reponse";
-	$dossier_reponse = sous_repertoire(_DIR_FICHIERS_FORMIDABLE.$dossier_formulaire."/", $dossier_reponse,false,true);
-
-	// puis le dossier pour le champ
-	$dossier_champ = sous_repertoire($dossier_reponse,$champ,false,true);
-	$appendice_nom = 0;
 
 	// S'assurer qu'il n'y a pas un fichier du même nom à destination
 	$chemin_final = $dossier_champ.$nom;
@@ -140,4 +160,47 @@ function formidable_retourner_fichier($chemin, $f) {
 			}
 			readfile($chemin);
 			exit;
+}
+/**
+ * Déplacer un fichier temporaire à son emplacement définif. 
+ * Produire un tableau de description des fichiers déplacés.
+ * Le tout à partir de la description d'une saisies 'fichiers'
+ * @param array $saisie la description de la saisie fichiers
+ * @param array $options des options, dépendante du type de traitement, qui permettent d'indiquer où l'on déplace le fichier
+ * return array un tableau de "vue" de la saisie
+**/ 
+function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
+	$nb_fichiers_max = $saisie['options']['nb_fichiers']; // on va parcourir $_FILES en nous limitant aux nombres de fichiers définies par la saisie, pour éviter les éventuelles ajout supplémentaire de fichiers par modif du html
+	$champ = $saisie['options']['nom'];
+	if (!isset($_FILES[$champ])) {//précaution
+		return null;
+	}
+	$description_fichiers = array();
+	$mon_file = $_FILES[$champ];
+	$i = 0;
+	while ($i < $nb_fichiers_max) {
+		if ($mon_file['error'][$i] == 0) { // la saisie fichiers est forcément structurée sous la forme d'un tableau, on peut donc vérifier qu'il n'y a pas d'erreur facilement
+			$description = array(); // tableau pour stocker la description de ce fichier
+
+			// les infos qu'on peut récuperer directement de $files
+			$description['taille'] = $mon_file['size'][$i];
+			$description['mime'] = $mon_file['type'][$i];
+
+			// l'adresse du nouveau fichier, sans le chemin
+			if ($nouveau_nom = formidable_deplacer_fichier_emplacement_definitif(
+				$mon_file['tmp_name'][$i],
+				$mon_file['name'][$i], 	
+				$champ,
+				$options 
+				)
+			) {
+					$description['nom'] = $nouveau_nom;
+					$description['extension'] = pathinfo($nouveau_nom, PATHINFO_EXTENSION); 
+			}
+			$description_fichiers[] = $description;//on ajoute la description au tableau global
+
+		}
+		$i++;
+	}
+	return $description_fichiers;
 }

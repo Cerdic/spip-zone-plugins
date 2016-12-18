@@ -203,38 +203,5 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 **/  
 function traiter_enregistrement_fichiers($saisie, $id_formulaire,  $id_formulaires_reponse){
 	include_spip('inc/formidable_fichiers');
-	$nb_fichiers_max = $saisie['options']['nb_fichiers']; // on va parcourir $_FILES en nous limitant aux nombres de fichiers définies par la saisie, pour éviter les éventuelles ajout supplémentaire de fichiers par modif du html
-	$champ = $saisie['options']['nom'];
-	if (!isset($_FILES[$champ])) {//précaution
-		return null;
-	}
-	$description_fichiers = array();
-	$mon_file = $_FILES[$champ];
-	$i = 0;
-	while ($i < $nb_fichiers_max) {
-		if ($mon_file['error'][$i] == 0) { // la saisie fichiers est forcément structurée sous la forme d'un tableau, on peut donc vérifier qu'il n'y a pas d'erreur facilement
-			$description = array(); // tableau pour stocker la description de ce fichier
-
-			// les infos qu'on peut récuperer directement de $files
-			$description['taille'] = $mon_file['size'][$i];
-			$description['mime'] = $mon_file['type'][$i];
-
-			// l'adresse du nouveau fichier, sans le chemin
-			if ($nouveau_nom = formidable_deplacer_fichier_emplacement_definitif(
-				$mon_file['tmp_name'][$i],
-				$mon_file['name'][$i], 
-				$id_formulaire,
-				$champ,
-				$id_formulaires_reponse
-				)
-			) {
-					$description['nom'] = $nouveau_nom;
-					$description['extension'] = pathinfo($nouveau_nom, PATHINFO_EXTENSION); 
-			}
-			$description_fichiers[] = $description;//On ajoute la description au tableau global
-
-	}
-	$i++;
-	}
-	return $description_fichiers;
+	return formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'id_formulaires_reponse'=>$id_formulaires_reponse));
 }
