@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/formidable');
+include_spip('inc/formidable_fichiers');
 
 function formulaires_editer_formulaire_traitements_charger($id_formulaire) {
 	$contexte = array();
@@ -97,7 +98,13 @@ function formulaires_editer_formulaire_traitements_traiter($id_formulaire) {
 	}
 	$traitements_choisis = array_flip($traitements_choisis);
 	$traitements = array_intersect_key($traitements, $traitements_choisis);
-
+	
+	// Si besoin, on créeun dossier pour stocker les fichiers
+	
+	$erreur_creation_dossier = formidable_creer_dossier_formulaire($id_formulaire);
+	if ($erreur_creation_dossier) {
+		$retours['message_erreur'] = $erreur_creation_dossier;
+	}
 	// Et on l'enregistre tel quel
 	$ok = sql_updateq(
 		'spip_formulaires',

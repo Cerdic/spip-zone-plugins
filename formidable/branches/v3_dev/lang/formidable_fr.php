@@ -40,7 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l’analyse des réponses',
 	'champs' => 'Champs',
 	'changer_statut' => 'Ce formulaire est :',
-
+	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible de créer le dossier @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d\'accès.', 
+	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d\'écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d\'accès.', 
+	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.', 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
