@@ -369,7 +369,34 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	return $retours;
 }
 
+/**
+ * Déclare à cvtupload les champs fichiers du formulaire
+ *
+ * @param int|string $id
+ *     Identifiant numerique ou textuel du formulaire formidable
+ * @param array $valeurs
+ *     Valeurs par défauts passées au contexte du formulaire
+ *     Exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
+ * @param int|bool $id_formulaires_reponse
+ *     Identifiant d'une réponse pour forcer la reedition de cette reponse spécifique
+ *
+ * @return array
+ *     Tableau des champs de type fichier
+**/
+function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaires_reponse = false) {
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id)) {
+		return array();
+	}
 
+	// On cherche les saisies du formulaire
+	if ($saisies = sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))) {
+		$saisies = unserialize($saisies);
+		include_spip('inc/saisies_lister');
+		$saisies_fichiers = array_keys(saisies_lister_avec_type($saisies,'fichiers'));
+		return $saisies_fichiers; 
+	}
+}
 /**
  * Ajoute dans le contexte les elements
  * donnés par une reponse de formulaire indiquée
