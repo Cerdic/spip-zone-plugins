@@ -11,7 +11,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/formidable');
-include_spip('inc/utils');
 include_spip('public/formidable_criteres');
 
 /**
@@ -164,14 +163,16 @@ function formidable_ajouter_action_vue_saisie_fichiers($saisie_a_modifier, $nom_
 	$id_formulaire = strval($id_formulaire);
 	$id_formulaires_reponse = strval($id_formulaires_reponse);
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
-
+	$securiser_action = charger_fonction('securiser_action','inc');
 	if (array_key_exists($nom_saisie, saisies_lister_avec_type($saisies_du_formulaire, 'fichiers'))) { //saisies SPIP
 		foreach ($saisie_a_modifier as $i => $valeur){
-			$param = 'id_formulaire='.$id_formulaire
-				. '&id_formulaires_reponse='.$id_formulaires_reponse
-				. '&fichier='.$valeur['nom'] 
-				. '&saisie='.$nom_saisie;
-			$url = generer_url_action('formidable_recuperer_fichier',$param,true,false);
+			$param = serialize(array(
+				'formulaire' => $id_formulaire,
+				'reponse' => $id_formulaires_reponse,
+				'fichier' => $valeur['nom'],
+				'saisie' => $nom_saisie
+			));
+			$url = $securiser_action('formidable_recuperer_fichier',$param,'',false);
 			$saisie_a_modifier[$i]['url'] = $url;
 			$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
 		}

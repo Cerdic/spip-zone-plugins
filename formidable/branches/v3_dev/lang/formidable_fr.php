@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_unicite_label' => 'Vérifier l’unicité d’un champ',
 	'erreur_autorisation' => 'Vous n’avez pas le droit d’éditer les formulaires du site.',
 	'erreur_base' => 'Une erreur technique est survenue durant l’enregistrement.',
+	'erreur_fichier_introuvable' => 'Le fichier demandé est introuvable.', 
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier votre envoi.',
 	'erreur_identifiant' => 'Cet identifiant est déjà utilisé.',
 	'erreur_identifiant_format' => 'L’identifiant ne peut contenir que des chiffres, lettres et le caractère "_"',

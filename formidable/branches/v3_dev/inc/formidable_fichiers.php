@@ -114,3 +114,27 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $id_f
 	}
 
 }
+
+/** 
+ * Fournit à l'utilisateur·trice un fichier qui se trouve normalement dans un endroit inaccessible, par exemple dans config. 
+ * La fonction ne vérifie ni l'existence effective du fichier, 
+ * ni le droit effectif de l'utilisateur.
+ * Ceci doit être fait dans l'action qui appelle cette fonction
+ * @param string $chemin le chemin du fichier
+ * @param string $f le nom du fichier qui sera envoyé à l'utilisateur·trice.
+ *
+**/
+function formidable_retourner_fichier($chemin, $f) {
+			header('Content-Type: '.mime_content_type($chemin));
+			header("Content-Disposition: attachment; filename=\"$f\";");
+			header("Content-Transfer-Encoding: binary");
+			// fix for IE catching or PHP bug issue (inspiré de plugins-dist/dump/action/telecharger_dump.php
+			header("Pragma: public");
+			header("Expires: 0"); // set expiration time
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			if ($cl = filesize($chemin)) {
+				header("Content-Length: " . $cl);
+			}
+			readfile($chemin);
+			exit;
+}
