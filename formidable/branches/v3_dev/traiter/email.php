@@ -129,6 +129,7 @@ function traiter_email_dist($args, $retours) {
 			$notification,
 			array(
 				'id_formulaire' => $args['id_formulaire'],
+				'id_formulaires_reponse' => $retours['id_formulaires_reponse'],
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'traitements' => $traitements,
 				'saisies' => $saisies,
