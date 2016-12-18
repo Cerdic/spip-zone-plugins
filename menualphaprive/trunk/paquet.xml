@@ -1,0 +1,17 @@
+<paquet
+	prefix="menualphaprive"
+	categorie="navigation"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/menualphaprive-64.png"
+	documentation="https://contrib.spip.net/4849"
+>
+
+	<nom>Menu privé alphabétique</nom>
+
+	<auteur>nicod_</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+</paquet>
