@@ -7,6 +7,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// J'ai la flemme de classer, Salvatore le fera pour moi
+	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.', 
+	'lien_expire' => 'Lien expirant dans @delai@',	
+	'jours_heures_minutes_secondes' => "@j@j @h@h @m@min @s@s", 
+	'heures_minutes_secondes' => "@h@h @m@min @s@s", 
+	'minutes_secondes' => "@m@min @s@s", 
+	'secondes' => "@s@s", 
+	
 	// A
 	'activer_pages_explication' => 'Par défaut, les pages publiques des formulaires ne sont pas autorisées',
 	'activer_pages_label' => 'Autoriser la création de pages publique pour les formulaires',

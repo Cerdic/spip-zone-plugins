@@ -4,14 +4,17 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+include_spip("inc/utils");
+include_spip('inc/formidable_fichiers');
 function traiter_email_dist($args, $retours) {
+	$timestamp = time();
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	$destinataires = array();
+
 
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
@@ -48,7 +51,7 @@ function traiter_email_dist($args, $retours) {
 		$destinataires = array_merge($destinataires, $destinataires_plus);
 		$destinataires = array_unique($destinataires);
 	}
-	
+
 	// On ajoute les destinataires en fonction des choix de saisie dans le formulaire
 	// @selection_1@/choix1 : mail@domain.tld
 	// @selection_1@/choix2 : autre@domain.tld, lapin@domain.tld
@@ -76,8 +79,13 @@ function traiter_email_dist($args, $retours) {
 
 		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
+		$saisies_fichiers = array_keys(saisies_lister_avec_type($saisies,'fichiers'));// On utilise pas formulaires_formidable_fichiers, car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais, il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 		foreach ($champs as $champ) {
-			$valeurs[$champ] = _request($champ);
+			if (in_array($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
+				$valeurs[$champ] = traiter_email_fichiers($champ, $formulaire['id_formulaire'], $retours,$timestamp);
+			} else {
+				$valeurs[$champ] = _request($champ);
+			}
 		}
 
 		// On récupère le nom de l'envoyeur
@@ -264,7 +272,7 @@ function traiter_email_dist($args, $retours) {
  *     {@example : `@selection_2@/choix_1 : toto@domain.tld`}
  * @return array 
  *     Liste des destinataires, s'il y en a.
-**/
+ **/
 function formidable_traiter_email_destinataire_selon_champ($description) {
 	$destinataires = array();
 
@@ -311,4 +319,95 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
 	}
 
 	return $destinataires;
+}
+
+/**
+ * Gère une saisie de type fichiers dans le traitement par email.
+ * C'est à dire:
+ *	- S'il y a eu un enregistement avant, ne déplace pas le fichier
+ *	- S'il n'y a pas eu d'enregistrement avant, déplace le fichier dans un dossier nommé en fonction du timestamp du traitement
+ *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement '_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL' 
+ *
+ * @param string $saisie le nom de la saisie
+ * @param int|string $id_formulaire le formulaire concerné
+ * @param array $retours ce qu'a envoyé le précédent traitement
+ * @param int $timestamp un timestamp correspondant au début du processus de création du courriel
+ * @return array un tableau décrivant la saisie
+ **/
+function traiter_email_fichiers($saisie, $id_formulaire, $retours,$timestamp){
+	//Initialisation
+	$id_formulaire = strval($id_formulaire);//précaution
+	$vue = array();
+
+	if ($id_formulaires_reponse = $retours['id_formulaires_reponse']) { // cas simple: les réponses ont été enregistrées
+		if (isset($retours['fichiers'][$saisie])) { // petite précaution
+			$vue = 	ajouter_action_recuperer_fichier_par_email($retours['fichiers'][$saisie], $saisie, $id_formulaire, $id_formulaires_reponse, $timestamp);
+		}
+	}
+	return $vue;
+}
+
+
+/**
+ * Pour une saisie de type 'fichiers'
+ * insère dans la description du résultat de cette saisie
+ * l'url de l'action pour récuperer la saisie par email
+ * Ajoute également une vignette correspondent à l'extention
+ * @param array $saisie_a_modifier
+ * @param string $nom_saisie
+ * @param int|string $id_formulaire
+ * @param int|string $id_formulaires_reponse
+ * @param int $timestamp
+ * return array $saisie_a_modifier
+ **/
+function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_saisie, $id_formulaire, $id_formulaires_reponse, $timestamp) {
+	$id_formulaire = strval($id_formulaire);
+	$id_formulaires_reponse = strval($id_formulaires_reponse);
+	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
+
+	$pass = secret_du_site();
+	$action = "formidable_recuperer_fichier_par_email"; 
+	$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
+	foreach ($saisie_a_modifier as $i => $valeur){
+		$arg = serialize(array(
+			'formulaire' => $id_formulaire,
+			'reponse' => $id_formulaires_reponse,
+			'fichier' => $valeur['nom'],
+			'saisie' => $nom_saisie
+		));
+		$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
+		$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
+		$saisie_a_modifier[$i]['url'] = $url;
+		$saisie_a_modifier[$i]['nom'] = "<strong>["._T("formidable:lien_expire", array("delai"=>$delai))."]</strong> ".$valeur['nom'];
+		$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
+	}
+	return $saisie_a_modifier;
+}
+/**
+ * Retourne des secondes sous une jolie forme, du type xx jours, yy heures, zz minutes, aa secondes
+ * @param int $seconde
+ * @return str
+**/
+function secondes_en_jour($secondes) {
+	//On ne peut pas utiliser date_create, car en PHP 5.2, et SPIP 3.0 est à partir de PHP 5.1…
+	$jours = floor($secondes/(24*3600));
+	$heures = floor(($secondes-$jours*24*3600)/3600);
+	$minutes = floor(($secondes-$jours*24*3600-$heures*3600)/60);
+	$secondes = $secondes-$jours*24*3600-$heures*3600-$minutes*60;
+	$param = array(
+		'j' => $jours,
+		'h' => $heures, 
+		'm' => $minutes,
+		's' => $secondes
+	);
+	if ($jours > 0) {
+		return _T('formidable:jours_heures_minutes_secondes',$param);
+	} elseif ($heures > 0) {
+		return _T('formidable:heures_minutes_secondes',$param);
+	} elseif ($minutes > 0) {
+		return _T('formidable:minutes_secondes',$param);
+	} else {
+		return _T('formidable:secondes',$param);
+	}
+
 }

@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function traiter_enregistrement_dist($args, $retours) {
 	include_spip('inc/formidable');
 	include_spip('base/abstract_sql');
+	$retours['fichiers'] = array(); // on va stocker des infos sur les fichiers, pour les prochains traitement
 	$options = $args['options'];
 	$formulaire = $args['formulaire'];
 	$id_formulaire = $args['id_formulaire'];
@@ -121,6 +122,7 @@ function traiter_enregistrement_dist($args, $retours) {
 						'nom' => $nom,
 						'valeur' => is_array($valeur) ? serialize($valeur) : $valeur
 					);
+					$retours['fichiers'][$nom] = $valeur; 
 				}
 			}	
 			if (($valeur = _request($nom)) !== null) {// Pour le saisies différentes de fichiers,  on ne prend que les champs qui ont effectivement été envoyés par le formulaire

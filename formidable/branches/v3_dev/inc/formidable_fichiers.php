@@ -14,6 +14,9 @@ if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
 	define ('_DIR_FICHIERS_FORMIDABLE',  _DIR_FICHIERS . 'formidable/');
 
 }
+if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
+	define ('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL',24*3600); // Combien de temps un lien par email dans fichier est valable (en seconde)
+}
 /** 
  * Créer, si le formulaire contient des saisies de type fichiers, un dossier pour stocker les fichiers.
  * Vérifier que ce dossier soit accessible en écriture.
