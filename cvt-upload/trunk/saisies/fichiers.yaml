@@ -98,4 +98,8 @@ options:
 defaut:
   options:
     label: '<:cvtupload:saisie_fichiers_titre:>'
-
+    nb_fichiers: 1
+  verifier:
+    type: 'fichiers'
+    options:
+      mime: 'tout_mime'
