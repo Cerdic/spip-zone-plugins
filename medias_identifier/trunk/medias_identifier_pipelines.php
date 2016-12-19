@@ -27,7 +27,11 @@ function medias_identifier_renseigner_document($flux) {
 	if (in_array($flux['args']['extension'], array('jpg','png','gif'))) {
 		include_spip('inc/documents');
 		$format = false;
-		if (extension_loaded('imagick')) {
+		$commande_test = _IDENTIFY_COMMAND.' -version';
+		exec($commande_test, $retour_complet, $retour);
+		if (intval($retour) == 0) {
+			$format = trim(exec('identify -format %m '.$flux['args']['fichier']));
+		} elseif (extension_loaded('imagick')) {
 			$Imagick = new Imagick($flux['args']['fichier']);
 			$format = $Imagick->getImageFormat();
 		}
@@ -77,7 +81,11 @@ function medias_identifier_renseigner_document_distant($flux) {
 		and preg_match(','._DIR_IMG.',', $a['fichier'])) {
 		include_spip('inc/documents');
 		$format = false;
-		if (extension_loaded('imagick')) {
+		$commande_test = _IDENTIFY_COMMAND.' -version';
+		exec($commande_test, $retour_complet, $retour);
+		if (intval($retour) == 0) {
+			$format = trim(exec('identify -format %m '.$a['fichier']));
+		} elseif (extension_loaded('imagick')) {
 			$Imagick = new Imagick($a['fichier']);
 			$format = $Imagick->getImageFormat();
 		}
@@ -126,12 +134,19 @@ function medias_identifier_image_preparer_filtre($flux) {
 			and !preg_match(','._DIR_VAR.',', $flux['args']['img']))) {
 		if (in_array($flux['data']['format_source'], array('jpg', 'png', 'gif'))) {
 			$format = false;
+			$new_extension = false;
 			$fichier = extraire_attribut($flux['data']['tag'], 'src');
-			if (extension_loaded('imagick')) {
+			if (!defined('_IDENTIFY_COMMAND')) {
+				define('_IDENTIFY_COMMAND', 'identify');
+			}
+			$commande_test = _IDENTIFY_COMMAND.' -version';
+			exec($commande_test, $retour_complet, $retour);
+			if (intval($retour) == 0) {
+				$format = trim(exec('identify -format %m '.$fichier));
+			} elseif (extension_loaded('imagick')) {
 				$Imagick = new Imagick($fichier);
 				$format = $Imagick->getImageFormat();
 			}
-			$new_extension = false;
 			if ($format) {
 				switch ($format) {
 					case 'PNG':

@@ -17,6 +17,10 @@ Ce problème a été soulevé par ce [ticket sur GitHub->https://github.com/seen
 
 ### Versions 0.x.x
 
+#### Version 0.2.0
+
+Fonctionne avec la commande système `identify` par défaut
+
 #### Version 0.1.0
 
 Version fonctionnelle si [php-imagick](http://php.net/manual/fr/book.imagick.php) est installé sur le serveur.
@@ -27,9 +31,8 @@ Version fonctionnelle si [php-imagick](http://php.net/manual/fr/book.imagick.php
 
 ## Todo
 
-* [ ] Faire fonctionner ce plugin si php-imagick n'est pas installé mais convert accessible
+* [x] Faire fonctionner ce plugin si php-imagick n'est pas installé mais convert (`identify` plutôt) accessible
 * [ ] Faire une alerte dans le privé si ni php-imagick, ni convert sont accessibles
 * [ ] Trouver une icône
 * [ ] Internationalisation + paquet.xml
 * [ ] Intégrer dans le core en 3.2.x ?
-
