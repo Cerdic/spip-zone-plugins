@@ -205,29 +205,29 @@ $erreurs = array();
 // On peut donner soit un id soit un identifiant
 if (!$id_formulaire = formidable_id_formulaire($id)) {
 	$erreurs['message_erreur'] = _T('formidable:erreur_base');
-} else {
-	// Sale bête !
-	if (_request('mechantrobot')!='') {
-		$erreurs['hahahaha'] = 'hahahaha';
-		return $erreurs;
-	}
-
-	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
-	$saisies = unserialize($formulaire['saisies']);
-
-	$erreurs_par_fichier = array(); 
-	$erreurs = saisies_verifier($saisies,true,$erreurs_par_fichier);
-
-	// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification	
-	
-	//$infos_plugins = charger_fonction('infos_plugins','plugins');
-	$plugins_actifs = liste_plugin_actifs();
-	if (isset($plugins_actifs['CVTUPLOAD'])) {
-		include_spip('inc/cvtupload');
-		foreach ($erreurs as $champ => $erreur) {
-				cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
-				}
+	} else {
+		// Sale bête !
+		if (_request('mechantrobot')!='') {
+			$erreurs['hahahaha'] = 'hahahaha';
+			return $erreurs;
 		}
+
+		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
+		$saisies = unserialize($formulaire['saisies']);
+
+		$erreurs_par_fichier = array(); 
+		$erreurs = saisies_verifier($saisies,true,$erreurs_par_fichier);
+
+		// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification	
+		
+		//$infos_plugins = charger_fonction('infos_plugins','plugins');
+		$plugins_actifs = liste_plugin_actifs();
+		if (isset($plugins_actifs['CVTUPLOAD'])) {
+			include_spip('inc/cvtupload');
+			foreach ($erreurs as $champ => $erreur) {
+					cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
+					}
+			}
 
 		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
 		if ($formulaire['unicite'] != '') {
