@@ -36,7 +36,7 @@
 			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'adresse', id_coordonnee:'[(#ID_ADRESSE)]'}});return false;" href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]" title="<:coordonnees:modifier_adresse:>">
 			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
 			</a>
-			[(#AUTORISER{associeradresse,#ID_ADRESSE}|oui)
+			[(#AUTORISER{associeradresses,#ID_ADRESSE}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
 					#URL_ACTION_AUTEUR{dissocier_adresse,#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
