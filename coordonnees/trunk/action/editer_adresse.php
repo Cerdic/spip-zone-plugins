@@ -22,8 +22,11 @@ function action_editer_adresse_dist($arg = null) {
 		$id_adresse = insert_adresse();
 	}
 
-	if ($id_adresse) $err = revisions_adresses($id_adresse);
-	return array($id_adresse,$err);
+	$err = '';
+	if ($id_adresse) {
+		$err = revisions_adresses($id_adresse);
+	}
+	return array($id_adresse, $err);
 }
 
 
@@ -71,7 +74,7 @@ function revisions_adresses($id_adresse, $c = false) {
 		);
 	}
 
-	objet_modifier_champs('adresse', $id_adresse, array(
+	$retour = objet_modifier_champs('adresse', $id_adresse, array(
 			'invalideur' => "id='id_adresse/$id_adresse'"
 		),
 		$c);
@@ -80,4 +83,5 @@ function revisions_adresses($id_adresse, $c = false) {
 			'type' => sql_quote(_request('type'))
 		), "id_adresse=".intval($id_adresse)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));
 
+	return $retour;
 }

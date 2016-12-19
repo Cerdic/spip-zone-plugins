@@ -21,7 +21,10 @@ function action_editer_email_dist($arg = null) {
 		$id_email = insert_email();
 	}
 
-	if ($id_email) $err = revisions_emails($id_email);
+	$err = '';
+	if ($id_email) {
+		$err = revisions_emails($id_email);
+	}
 	return array($id_email, $err);
 }
 
@@ -71,7 +74,7 @@ function revisions_emails($id_email, $c = false) {
 		);
 	}
 
-	objet_modifier_champs('email', $id_email, array(
+	$retour = objet_modifier_champs('email', $id_email, array(
 			'invalideur' => "id='id_email/$id_email'"
 		),
 		$c);
@@ -79,4 +82,6 @@ function revisions_emails($id_email, $c = false) {
 	sql_update("spip_emails_liens", array(
 			'type' => sql_quote(_request('type'))
 		), "id_email=".intval($id_email)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));
+
+	return $retour;
 }

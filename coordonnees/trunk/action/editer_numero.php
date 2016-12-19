@@ -21,7 +21,10 @@ function action_editer_numero_dist($arg = null) {
 		$id_numero = insert_numero();
 	}
 
-	if ($id_numero) $err = revisions_numeros($id_numero);
+	$err = '';
+	if ($id_numero) {
+		$err = revisions_numeros($id_numero);
+	}
 	return array($id_numero, $err);
 }
 
@@ -70,7 +73,7 @@ function revisions_numeros($id_numero, $c = false) {
 		);
 	}
 
-	objet_modifier_champs('numero', $id_numero, array(
+	$retour = objet_modifier_champs('numero', $id_numero, array(
 			'invalideur' => "id='id_numero/$id_numero'"
 		),
 		$c);
@@ -78,4 +81,6 @@ function revisions_numeros($id_numero, $c = false) {
 	sql_update("spip_numeros_liens", array(
 			'type' => sql_quote(_request('type'))
 		), "id_numero=".intval($id_numero)." AND id_objet=".intval(_request('id_objet'))." AND objet=".sql_quote(_request('objet')));
+
+	return $retour;
 }
