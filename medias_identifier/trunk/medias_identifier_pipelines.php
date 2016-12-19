@@ -158,7 +158,6 @@ function medias_identifier_image_preparer_filtre($flux) {
 					$flux['data']['creer'] = true;
 					$flux['data']['fichier_dest'] = substr($flux['data']['fichier_dest'], 0, strrpos($flux['data']['fichier_dest'], '.')).
 						'.'.$new_extension;
-					spip_log($flux, 'test.'._LOG_ERREUR);
 				}
 			}
 		}
