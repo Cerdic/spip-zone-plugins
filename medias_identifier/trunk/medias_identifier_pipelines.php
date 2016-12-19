@@ -162,8 +162,6 @@ function medias_identifier_image_preparer_filtre($flux) {
 				}
 			}
 		}
-	} else {
-		spip_log($flux, 'test.'._LOG_ERREUR);
 	}
 	return $flux;
 }
