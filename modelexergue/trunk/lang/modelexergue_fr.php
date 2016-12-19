@@ -12,5 +12,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'modelexergue_texteinserer' => 'Texte à mettre en exergue',
 	// U
-	'modelexergue_inserer' => 'Un exergue',
+	'modelexergue_inserer' => 'un exergue',
 );

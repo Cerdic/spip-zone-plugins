@@ -1,11 +1,11 @@
 <paquet
 	prefix="modelexergue"
 	categorie="edition"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/modelexergue-64.png"
-	documentation=""
+	documentation="https://contrib.spip.net/4850"
 >
 	<!--
 		Paquet généré le 2016-12-18 20:57:54
