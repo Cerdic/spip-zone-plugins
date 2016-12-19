@@ -13,6 +13,8 @@ Si vous utilisez `php-imagick` ou `convert` comme méthode de fabrication automa
 
 Ce problème a été soulevé par ce [ticket sur GitHub->https://github.com/seenthis/seenthis_squelettes/issues/174] concernant le [projet seenthis](http://www.seenthis.net)
 
+Il est possible de définir le chemin de la commande `identify` à utiliser en définissant la constante `_IDENTIFY_COMMAND` dans un fichier d'options (`identify` par défaut).
+
 ## Changelog
 
 ### Versions 0.x.x
