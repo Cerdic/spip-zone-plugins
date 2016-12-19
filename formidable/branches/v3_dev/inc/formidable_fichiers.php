@@ -75,7 +75,6 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer=false) {
  * @param string $fichier l'adresse temporaire du fichier
  * @param string $nom le nom du fichiera
  * @param string $champ le champ concerné
- * formidable_deplacer_fichier_emplacement_definitif
  * @return string $nom_definitif le nom définitif du fichier tel que stocké dans son dossier, vide s'il y a eu un souci lors du déplacement (dans ce cas un courriel sera envoyé au webmestre)
  *
  **/
