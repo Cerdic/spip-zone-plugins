@@ -42,13 +42,15 @@
 .facettes-commandes .alphabet           { font-size: 0.7em; margin: 0; white-space: normal;}
 .facettes-commandes .alphabet img       { vertical-align: middle;}
 .facettes-commandes .menu-annees        { margin-bottom: 0.5em; }
-.facettes-commandes .calendrier         { margin: 0; }
+.facettes-commandes .calendrier         { margin: 0; font-size: 0.9em; }
 .facettes-commandes .calendrier caption { padding: 0.2em; margin: 0; font-weight: normal;}
-.facettes-commandes .calendrier td      { border-color: #efefef; text-align: center; }
+.facettes-commandes .calendrier td      { padding: 0.5em; border-color: #efefef; text-align: center; }
 .facettes-commandes .calendrier tr:nth-child(2n) td:not(.inactif) { background-color: transparent; }
 .facettes-commandes .calendrier .inactif { background-color: #efefef; }
 .facettes-commandes .calendrier .inactif:hover { cursor: not-allowed; }
 .facettes-commandes .calendrier .inactif span { opacity: 0.33; }
+.facettes-commandes .calendrier tfoot td { border: 0 none; font-size: 0.75em; font-style: normal; }
+
 <BOUCLE_icones_statuts(DATA){source table, #REM|commandes_lister_statuts|array_keys}>
 .facettes-commandes .statut-[(#VALEUR)]>*:before {content:""; display: inline-block; width:12px; height:12px; margin-right: 0.2em; background: transparent url('[(#CHEMIN{#VAL{prive/themes/spip/images/puce-commande-}|concat{#VALEUR,'.png'}})]') no-repeat center center;}
 </BOUCLE_icones_statuts>
