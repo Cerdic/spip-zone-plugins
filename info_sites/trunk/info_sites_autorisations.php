@@ -898,6 +898,257 @@ function autoriser_contact_infositesvoir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
+// *****************************
+// Les coordonnées
+// *****************************
+
+
+// --------------
+// Objet Adresses
+
+/**
+ * Autorisation de creer (adresse)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_adresse_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'adresse', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de voir (adresse)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_adresse_voir($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesvoir', 'adresse', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier (adresse)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_adresse_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'adresse', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de supprimer (adresse)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_adresse_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'adresse', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation d'associer (adresse)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associeradresses($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'adresses', $id, $qui, $opt);
+}
+
+// --------------
+// Objet numeros
+
+/**
+ * Autorisation de creer (numéro)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_numero_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'numero', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de voir (numéro)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_numero_voir($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesvoir', 'numero', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier (numéro)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_numero_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'numero', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de supprimer (numéro)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_numero_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'numero', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation d'associer (numéro)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associernumeros($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'numeros', $id, $qui, $opt);
+}
+
+
+// ------------
+// Objet emails
+
+/**
+ * Autorisation de creer (email)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_email_creer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositescreer', 'email', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de voir (email)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_email_voir($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesvoir', 'email', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de modifier (email)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_email_modifier($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesmodifier', 'email', $id, $qui, $opt);
+}
+
+/**
+ * Autorisation de supprimer (email)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_email_supprimer($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositessupprimer', 'email', $id, $qui, $opt);
+}
+
+
+/**
+ * Autorisation d'associer (email)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int $id       Identifiant de l'objet
+ * @param  array $qui    Description de l'auteur demandant l'autorisation
+ * @param  array $opt    Options de cette autorisation
+ *
+ * @return bool          true s'il a le droit, false sinon
+ **/
+function autoriser_associeremails($faire, $type, $id, $qui, $opt) {
+	return autoriser('infositesassocier', 'emails', $id, $qui, $opt);
+}
+
+
+/**
+ * Récupérer les rôles d'un auteur sur un projet et ainsi s'avoir s'il a droit à certaines actions.
+ *
+ * @param array $qui
+ * @param int $id_projet
+ * @param array $role_creation
+ *
+ * @return bool|array
+ */
 function confirmer_roles_auteurs_projets($qui, $id_projet = 0, $role_creation = array()) {
 	include_spip('base/abstract_sql');
 	$roles = array();
