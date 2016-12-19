@@ -121,7 +121,9 @@ function medias_identifier_renseigner_document_distant($flux) {
 
 
 function medias_identifier_image_preparer_filtre($flux) {
-	if (preg_match('/distant/', $flux['args']['img'])) {
+	if (preg_match('/distant/', $flux['args']['img'])
+		or (!preg_match(','._DIR_IMG.',', $flux['args']['img'])
+			and !preg_match(','._DIR_VAR.',', $flux['args']['img']))) {
 		if (in_array($flux['data']['format_source'], array('jpg', 'png', 'gif'))) {
 			$format = false;
 			$fichier = extraire_attribut($flux['data']['tag'], 'src');
@@ -160,6 +162,8 @@ function medias_identifier_image_preparer_filtre($flux) {
 				}
 			}
 		}
+	} else {
+		spip_log($flux, 'test.'._LOG_ERREUR);
 	}
 	return $flux;
 }
