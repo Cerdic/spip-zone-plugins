@@ -1,0 +1,59 @@
+.exergue { 
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+    padding: 2.5em 5.5555%;
+    margin: 0;
+    font-size: 1.3em;
+    line-height: 140%;
+    -moz-hyphens: none;
+    -webkit-hyphens: none;
+    hyphens: none;
+    text-align: center;
+    position: relative;
+    font-style: normal;	
+}
+.exergue p {
+	text-align: inherit;
+}
+.exergue.float-left, .exergue.float-right { 
+	width: 44.4444%;
+}
+
+.exergue:after, .exergue:before {
+    position: absolute;
+    display: block;
+    font-size: 4em;
+    width: 88.8888%;
+    opacity: 0.3;
+    line-height: 0.25em;
+}
+.exergue:before {
+    content: "“";
+	top: .5em;
+	text-align: center;
+}
+
+.exergue:after {
+    content: "”";
+    bottom: 0.20em;
+    text-align: center;
+}
+
+.exergue.float-left:before, .exergue.float-right:before {
+    left: 2.2222%;
+	text-align: left;
+}
+
+.exergue.float-left:after, .exergue.float-right:after {
+    right: 2.2222%;
+    text-align: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
