@@ -73,8 +73,8 @@ function medias_identifier_renseigner_document($flux) {
  */
 function medias_identifier_renseigner_document_distant($flux) {
 	$a = recuperer_infos_distantes($flux['source']);
-	if (isset($a['extension']) and in_array($a['extension'],array('jpg','png','gif'))
-		and preg_match(','._DIR_IMG.',',$a['fichier'])) {
+	if (isset($a['extension']) and in_array($a['extension'], array('jpg','png','gif'))
+		and preg_match(','._DIR_IMG.',', $a['fichier'])) {
 		include_spip('inc/documents');
 		$format = false;
 		if (extension_loaded('imagick')) {
@@ -114,6 +114,51 @@ function medias_identifier_renseigner_document_distant($flux) {
 			$a['distant'] = 'oui';
 			$a['mode'] = 'document';
 			$flux = $a;
+		}
+	}
+	return $flux;
+}
+
+
+function medias_identifier_image_preparer_filtre($flux) {
+	if (preg_match('/distant/', $flux['args']['img'])) {
+		if (in_array($flux['data']['format_source'], array('jpg', 'png', 'gif'))) {
+			$format = false;
+			$fichier = extraire_attribut($flux['data']['tag'], 'src');
+			if (extension_loaded('imagick')) {
+				$Imagick = new Imagick($fichier);
+				$format = $Imagick->getImageFormat();
+			}
+			$new_extension = false;
+			if ($format) {
+				switch ($format) {
+					case 'PNG':
+						$new_extension = 'png';
+						$fonction_imagecreatefrom = '_imagecreatefrompng';
+						$fonction_image = '_image_imagepng';
+						break;
+					case 'JPEG':
+						$new_extension = 'jpg';
+						$fonction_imagecreatefrom = '_imagecreatefromjpeg';
+						$fonction_image = '_image_imagejpg';
+						break;
+					case 'GIF':
+						$new_extension = 'gif';
+						$fonction_imagecreatefrom = '_imagecreatefromgif';
+						$fonction_image = '_image_imagegif';
+						break;
+				}
+				if ($new_extension and $new_extension != $flux['data']['format_source']) {
+					$flux['data']['fonction_imagecreatefrom'] = $fonction_imagecreatefrom;
+					$flux['data']['fonction_image'] = $fonction_image;
+					$flux['data']['format_source'] = $new_extension;
+					$flux['data']['format_dest'] = $new_extension;
+					$flux['data']['creer'] = true;
+					$flux['data']['fichier_dest'] = substr($flux['data']['fichier_dest'], 0, strrpos($flux['data']['fichier_dest'], '.')).
+						'.'.$new_extension;
+					spip_log($flux, 'test.'._LOG_ERREUR);
+				}
+			}
 		}
 	}
 	return $flux;

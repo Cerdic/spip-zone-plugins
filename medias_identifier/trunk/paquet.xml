@@ -17,6 +17,7 @@
 
 	<pipeline nom="renseigner_document" inclure="medias_identifier_pipelines.php" />
 	<pipeline nom="renseigner_document_distant" inclure="medias_identifier_pipelines.php" />
+	<pipeline nom="image_preparer_filtre" inclure="medias_identifier_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[2.7.30;[" />
 </paquet>
