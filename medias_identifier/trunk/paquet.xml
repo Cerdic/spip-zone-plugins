@@ -1,0 +1,22 @@
+<paquet
+	prefix="medias_identifier"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="stable"
+	compatibilite="[3.0.2;3.1.*]"
+>
+
+	<nom>Médias identifier</nom>
+	<!-- Identifier correctement un média et change son extension de fichier si ne correspond pas -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2016</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="renseigner_document" inclure="medias_identifier_pipelines.php" />
+	<pipeline nom="renseigner_document_distant" inclure="medias_identifier_pipelines.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.30;[" />
+</paquet>
