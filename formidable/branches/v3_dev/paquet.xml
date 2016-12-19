@@ -40,7 +40,7 @@
 	<necessite nom="facteur" compatibilite="[3.0.3;[" />
 	
 	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
-	<utilise nom="cvtupload" compatibilite="[1.5.4;[" />
+	<utilise nom="cvtupload" compatibilite="[1.5.5;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>
