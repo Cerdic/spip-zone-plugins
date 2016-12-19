@@ -14,7 +14,7 @@ function sort_menu($menu_complet) {
 			$sous_menu = $menu->sousmenu;
 			$libelles  = array();
 			foreach ($sous_menu as $key => $row) {
-				$libelles[$key] = _T($row->libelle);
+				$libelles[$key] = strtolower(translitteration(_T($row->libelle)));
 			}
 			array_multisort($libelles, SORT_ASC, $sous_menu);
 			$menu->sousmenu = $sous_menu;
