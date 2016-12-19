@@ -133,6 +133,11 @@ function saisies_generer_html($champ, $env = array()) {
 
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
+	
+	// On ajoute aussi les infos de vérification, si cela peut se faire directement en HTML5
+	if (isset($champ['verifier'])) {
+		$contexte = array_merge($contexte, array('verifier'=>$champ['verifier']));
+	}
 
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
 	if (isset($contexte['env']) or (isset($champ['saisies']) and is_array($champ['saisies']))) {
