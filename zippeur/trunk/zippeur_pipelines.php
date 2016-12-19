@@ -18,7 +18,9 @@ function zippeur_declarer_tables_principales($table){
 }
 
 function zippeur_taches_generales_cron($taches){
-    define (_ZIPPEUR_EFFACER_ZIP,2*3600);
+  if (!defined('_ZIPPEUR_EFFACER_ZIP')){
+		define ('_ZIPPEUR_EFFACER_ZIP',2*3600);
+	}
 	$taches['zippeur_effacer_zip'] = _ZIPPEUR_EFFACER_ZIP;	
 	return $taches;
 }
