@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_afficher_si_remplissage_label' => 'Affichage conditionnel lors du remplissage',
 	'option_attention_explication' => 'Un message plus important que l’explication.',
 	'option_attention_label' => 'Avertissement',
+	'option_attribut_title_label' => 'Mettre un attribut title dans le label, contenant la valeur du champ. À utiliser avec modération.', 
 	'option_autocomplete_defaut' => 'Laisser par défaut',
 	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique',
 	'option_autocomplete_label' => 'Pré-remplissage du champ',

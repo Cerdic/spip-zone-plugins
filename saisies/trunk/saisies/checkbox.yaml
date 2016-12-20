@@ -50,6 +50,11 @@ options:
           nom: 'choix_alternatif_label'
           label: '<:saisies:option_choix_alternatif_label_label:>'
           defaut: '<:saisies:option_choix_alternatif_label_defaut:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'attribut_title'
+          label: '<:saisies:option_attribut_title_label:>'
   -
     saisie: 'fieldset'
     options:
