@@ -66,7 +66,7 @@ function traiter_email_dist($args, $retours) {
 	if ($options['champ_courriel']) {
 		$courriel_envoyeur = _request($options['champ_courriel']);
 	}
-	if (!$courriel_envoyeur) {
+	if (!isset($courriel_envoyeur)) {
 		$courriel_envoyeur = '';
 	}
 
@@ -102,7 +102,7 @@ function traiter_email_dist($args, $retours) {
 			}
 			$nom_envoyeur = trim(_L($options['champ_nom'], $a_remplacer));
 		}
-		if (!$nom_envoyeur) {
+		if (!isset($nom_envoyeur) or !$nom_envoyeur) {
 			$nom_envoyeur = $nom_site_spip;
 		}
 
@@ -120,7 +120,7 @@ function traiter_email_dist($args, $retours) {
 			}
 			$sujet = trim(_L($options['champ_sujet'], $a_remplacer));
 		}
-		if (!$sujet) {
+		if (!isset($sujet) or !$sujet) {
 			$sujet = _T('formidable:traiter_email_sujet', array('nom'=>$nom_envoyeur));
 		}
 		$sujet = filtrer_entites($sujet);
