@@ -18,10 +18,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
 **/
 function remplir_tableau_mime($tableau, $mime, $titre, $extension) {
+	$txt = "$titre (.$extension)";
 	if (array_key_exists($mime, $tableau)) {
-		$tableau[$mime] = preg_replace("#\((.*)\)#", '(${1}, .'. $extension.')', $tableau[$mime]); 	
+		$tableau[$mime] .= " / $txt";
 	} else {
-		$tableau[$mime] = "$titre (.$extension)";
+		$tableau[$mime] = $txt;
 	}
 	return $tableau;
 }
