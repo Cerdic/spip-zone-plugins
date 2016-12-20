@@ -225,7 +225,9 @@ $erreurs = array();
 		if (isset($plugins_actifs['CVTUPLOAD'])) {
 			include_spip('inc/cvtupload');
 			foreach ($erreurs as $champ => $erreur) {
-					cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
+					if (isset($erreurs_par_fichier[$champ])) {
+						cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
+						}
 					}
 			}
 
