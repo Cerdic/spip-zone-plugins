@@ -6,7 +6,9 @@
  */
 use Leafo\ScssPhp\Compiler;
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Compiler des styles inline SCSS en CSS
@@ -25,23 +27,22 @@ function scss_compile($style, $contexte = array()) {
 	$scss = new Compiler();
 	// lui transmettre le path qu'il utilise pour les @import
 	$scss->setImportPaths(_chemin());
-	
+
 	// Si definie on affiche les commentaires des sources et numero de ligne dans le fichier css genere
-	if (defined('_SCSS_LINE_COMMENTS') AND '_SCSS_LINE_COMMENTS' == true) {
-        $scss->setLineNumberStyle(Compiler::LINE_COMMENTS);
+	if (defined('_SCSS_LINE_COMMENTS') and '_SCSS_LINE_COMMENTS' == true) {
+		$scss->setLineNumberStyle(Compiler::LINE_COMMENTS);
 	}
-	
+
 	try {
 		$out = $scss->compile($style);
 		return $out;
-	}
-	// en cas d'erreur, on retourne du vide...
-	catch (exception $ex) {
-		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(),'scss'._LOG_ERREUR);
+	} catch (exception $ex) {
+		// en cas d'erreur, on retourne du vide...
+		spip_log('SCSS Compiler fatal error:'.$ex->getMessage(), 'scss'._LOG_ERREUR);
 		erreur_squelette(
-			"SCSS : Echec compilation"
-			. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
-		  . "<br />".$ex->getMessage()
+			'SCSS : Echec compilation'
+			. (isset($contexte['file']) ? ' fichier '.$contexte['file'] : '')
+			. '<br />'.$ex->getMessage()
 		);
 		return '';
 	}
@@ -61,7 +62,7 @@ function scss_compile($style, $contexte = array()) {
  * @param string $source
  * @return string
  */
-function scss_css($source){
+function scss_css($source) {
 	static $chemin = null;
 
 	// Si on n'importe pas, est-ce un fichier ?
@@ -81,41 +82,43 @@ function scss_css($source){
 			$chemin = _chemin();
 			$chemin = md5(serialize($chemin));
 		}
-		
-		$f = basename($source,$r[0]);
-		$f = sous_repertoire (_DIR_VAR, 'cache-scss')
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,",
-				"\\1-cssify-" . substr(md5("$source-scss-$chemin"), 0,7) . "\\2",
-				$f, 1)
+
+		$f = basename($source, $r[0]);
+		$f = sous_repertoire(_DIR_VAR, 'cache-scss')
+		. preg_replace(
+			',(.*?)(_rtl|_ltr)?$,',
+			"\\1-cssify-" . substr(md5("$source-scss-$chemin"), 0, 7) . "\\2",
+			$f,
+			1
+		)
 		. '.css';
 
 		// si la feuille compilee est plus recente que la feuille source
 		// l'utiliser sans rien faire, sauf si recalcul explicite
 		$changed = false;
-		if (@filemtime($f) < @filemtime($source))
+		if (@filemtime($f) < @filemtime($source)) {
 			$changed = true;
-
+		}
 		if (
 			!$changed
 			and (!($mode=_request('var_mode')) or $mode != 'css')
 		) {
 			return $f;
 		}
-
+		$contenu = false;
 		if (!lire_fichier($source, $contenu)) {
 			return $source;
 		}
 
 		// compiler le SCSS si besoin (ne pas generer une erreur si source vide
-		if (!$contenu){
+		if (!$contenu) {
 			$contenu = "/* Source $source : vide */\n";
-		}
-		else {
+		} else {
 			$contenu = scss_compile($contenu, array('file'=>$source));
 		}
-		
+
 		// si erreur de compilation on renvoit un commentaire, et il y a deja eu un log
-		if (!$contenu){
+		if (!$contenu) {
 			$contenu = "/* Compilation $source : vide */\n";
 		}
 
@@ -124,31 +127,28 @@ function scss_css($source){
 
 		// ecrire le fichier destination, en cas d'echec renvoyer la source
 		// on ecrit sur un fichier
-		if (ecrire_fichier($f.".last", $contenu, true)) {
-			if ($changed OR md5_file($f)!=md5_file($f.".last")) {
-				@copy($f.".last",$f);
+		if (ecrire_fichier($f.'.last', $contenu, true)) {
+			if ($changed or md5_file($f) != md5_file($f.'.last')) {
+				@copy($f.'.last', $f);
 				// eviter que PHP ne reserve le vieux timestamp
 				if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-					clearstatcache(true,$f);
-				}
-				else {
+					clearstatcache(true, $f);
+				} else {
 					clearstatcache();
 				}
 			}
-			
+
 			return $done[$source] = $f;
-		}
-		else {
+		} else {
 			return $done[$source] = $source;
 		}
 	}
-	
+
 	$source = scss_compile($source);
-	
+
 	if (!$source) {
-		return "/* Erreur compilation SCSS : cf scss.log */";
-	}
-	else {
+		return '/* Erreur compilation SCSS : cf scss.log */';
+	} else {
 		return $source;
 	}
 }
@@ -180,18 +180,18 @@ function scss_insert_head($flux) {
  */
 function scss_cssify_head($head) {
 	$url_base = url_de_base();
-	$balises = extraire_balises($head,'link');
+	$balises = extraire_balises($head, 'link');
 	$files = array();
-	
+
 	foreach ($balises as $s) {
 		if (
 			extraire_attribut($s, 'rel') === 'stylesheet'
-			and (!($type = extraire_attribut($s, 'type')) OR $type == 'text/css')
+			and (!($type = extraire_attribut($s, 'type')) or $type == 'text/css')
 			and $src = extraire_attribut($s, 'href')
 			// format .scss.css ou .scss avec un eventuel timestamp ?123456
-			and preg_match(",\.(scss\.css|scss)(\?\d+)?$,",$src)
-			and $src = preg_replace(",\?\d+$,","",$src)
-			and $src = preg_replace(",^$url_base,",_DIR_RACINE,$src)
+			and preg_match(',\.(scss\.css|scss)(\?\d+)?$,', $src)
+			and $src = preg_replace(',\?\d+$,', '', $src)
+			and $src = preg_replace(",^$url_base,", _DIR_RACINE, $src)
 			and file_exists($src)
 		) {
 			$files[$s] = $src;
@@ -202,13 +202,13 @@ function scss_cssify_head($head) {
 		return $head;
 	}
 
-	foreach ($files as $s=>$scssfile) {
+	foreach ($files as $s => $scssfile) {
 		$cssfile = scss_css($scssfile);
 		$m = @filemtime($cssfile);
-		$s2 = inserer_attribut($s,"href","$cssfile?$m");
+		$s2 = inserer_attribut($s, 'href', "$cssfile?$m");
 		$head = str_replace($s, $s2, $head);
 	}
-	
+
 	return $head;
 }
 
@@ -217,7 +217,8 @@ function scss_cssify_head($head) {
  * Regles :
  * - cherche un .css ou un .css.html ou un .scss comme feuille de style
  * - si un seul des 3 trouve dans le chemin il est renvoye (et compile au passage si .scss)
- * - si un .css.html et un .css trouves dans le chemin, c'est le .css.html qui est pris (surcharge d'un statique avec une css calculee)
+ * - si un .css.html et un .css trouves dans le chemin, c'est le .css.html qui est pris
+ * (surcharge d'un statique avec une css calculee)
  * - si un .scss et un (.css ou .css.html) on compare la priorite du chemin des deux trouves :
  *   le plus prioritaire des 2 est choisi
  *   si priorite equivalente on choisi le (.css ou .css.html) qui est le moins couteux a produire
@@ -229,7 +230,7 @@ function scss_cssify_head($head) {
  * - un .css.html calcule en .css
  */
 function balise_CSS($p) {
-	$_css = interprete_argument_balise(1,$p);
+	$_css = interprete_argument_balise(1, $p);
 	$p->code = "timestamp(direction_css(scss_select_css($_css)))";
 	$p->interdire_scripts = false;
 	return $p;
@@ -245,19 +246,18 @@ function balise_CSS($p) {
 function scss_select_css($css_file) {
 	if (
 		function_exists('scss_css')
-		and substr($css_file,-4)==".css"
+		and substr($css_file, -4) == '.css'
 	) {
-		$scss_file = substr($css_file,0,-4).".scss";
+		$scss_file = substr($css_file, 0, -4).'.scss';
 		$scss_or_css = scss_find_scss_or_css_in_path($scss_file, $css_file);
-		
-		if (substr($scss_or_css,-5)==".scss") {
+
+		if (substr($scss_or_css, -5) == '.scss') {
 			return scss_css($scss_or_css);
-		}
-		else {
+		} else {
 			return $scss_or_css;
 		}
 	}
-	
+
 	return find_in_path($css_file);
 }
 
@@ -275,15 +275,14 @@ function scss_select_css($css_file) {
 function scss_find_scss_or_css_in_path($scss_file, $css_file) {
 	$l = find_in_path($scss_file);
 	$c = $f = trouver_fond($css_file);
-	
+
 	if (!$c) {
 		$c = find_in_path($css_file);
 	}
 
 	if (!$l) {
-		return ($f ? produire_fond_statique($css_file,array('format'=>'css')) : $c);
-	}
-	elseif (!$c) {
+		return ($f ? produire_fond_statique($css_file, array('format' => 'css')) : $c);
+	} elseif (!$c) {
 		return $l;
 	}
 
@@ -292,18 +291,16 @@ function scss_find_scss_or_css_in_path($scss_file, $css_file) {
 	$path = creer_chemin();
 	foreach ($path as $dir) {
 		// css prioritaire
-		if (strncmp($c,$dir . $css_file,strlen($dir . $css_file))==0) {
-			return ($f ? produire_fond_statique($css_file,array('format'=>'css')) : $c);
+		if (strncmp($c, $dir . $css_file, strlen($dir . $css_file)) == 0) {
+			return ($f ? produire_fond_statique($css_file, array('format'=>'css')) : $c);
 		}
 		if ($l == $dir . $scss_file) {
 			return $l;
 		}
 	}
-	
+
 	// on ne doit jamais arriver la !
-	spip_log('Resolution chemin scss/css impossible',_LOG_CRITIQUE);
+	spip_log('Resolution chemin scss/css impossible', _LOG_CRITIQUE);
 	debug_print_backtrace();
 	die('Erreur fatale, je suis perdu');
 }
-
-?>
