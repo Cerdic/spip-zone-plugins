@@ -55,8 +55,11 @@ function cvtupload_formulaire_verifier($flux) {
 						if (isset($supprimer_fichier[$champ][$cle])) {
 							supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
 							unset($infos_fichiers[$champ][$cle]);
+							if (!count($infos_fichiers[$champ])) {
+								unset($infos_fichiers[$champ]);
+							}
 							// On génère une erreur pour réafficher le form de toute façon
-							$erreurs["rien_$champ_$cle"] = 'rien';
+							$erreurs['rien_' . $champ . '_' . $cle] = 'rien';
 						}
 					}
 				}
