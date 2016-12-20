@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *   Si bool égal à true, cela signifie que le fichier avait déjà été vérifié, et qu'il est inutile de refaire la vérification. 
  * @param array $options
  *   Options à vérifier :
- *   - mime au choix 'image_web','tout_mime','specifique'
+ *   - mime au choix 'pas_de_verification', 'image_web','tout_mime','specifique'
  *   - mime_specifique (si l'option 'mime_specifique' est choisi ci-dessus)
  *   - taille_max (en Kio)
  *   - dimension_max, tableau contenant les dimension max:
@@ -115,12 +115,21 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
  * @return string
 **/
 function verifier_fichier_mime($valeur,$cle,$options){
+	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
+	if ($options['mime'] == 'pas_de_verification') {
+		return '';
+	}
 	if ($options['mime'] == 'specifique'){
 		if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}	
+		//Double sécurité, on vérifier aussi l'extension, pour éviter qu'autoriser une type mime application/octet-stream permette de balancer un .htaccess
+		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
+		if (sql_count($res) == 0) {
+			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
+		}
 	} elseif ($options['mime'] == 'tout_mime') {
-		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]));
+		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
 		if (sql_count($res) == 0) {
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}
