@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chef_projets_label' => 'Chef de projets',
 	'commercial_label' => 'Commercial',
 	'confirmer_cloner_projets_site' => 'Êtes-vous sûr de vouloir cloner ce site ?',
+	'contact_existant' => 'Ce contact existe déjà.',
 	'controle_auteurs_menu' => 'Les utilisateurs',
 	'controle_auteurs_projets_orphelins' => 'Utilisateurs sans projets',
 	'controle_auteurs_projets_orphelins_explication' => 'Les utilisateurs listés ci-dessous n’ont pas encore été rattaché à un projet. Merci d’y remédier le cas échéant.',
@@ -120,6 +121,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_liens_projets_site_title' => 'Associer une fiche existante de site.',
 
 	// F
+	'fieldset_legend_adresse' => 'Adresse',
+	'fieldset_legend_contact' => 'Contact',
+	'fieldset_legend_email' => 'Courriel',
+	'fieldset_legend_numero' => 'Numéro de téléphone',
 	'filtres_label' => 'Filtres',
 
 	// I
