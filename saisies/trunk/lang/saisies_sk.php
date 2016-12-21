@@ -183,7 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Všetci návštevníci (aj ne­za­re­gis­tro­va­ní)',
-	'tout_selectionner' => 'Vybrať všetko',
+	'tout_selectionner' => 'Vybrať všetko', # MODIF
 
 	// V
 	'vue_sans_reponse' => '<i>Bez reakcie</i>',

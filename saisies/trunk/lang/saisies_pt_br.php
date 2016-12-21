@@ -195,7 +195,7 @@ Você pode indicar o início de um subgrupo, no formato "*Título do subgrupo". 
 
 	// T
 	'tous_visiteurs' => 'Todos os visitantes (mesmo os não registrados)',
-	'tout_selectionner' => 'Selecionar tudo',
+	'tout_selectionner' => 'Selecionar tudo', # MODIF
 
 	// V
 	'vue_sans_reponse' => '<i>Sem resposta</i>',
