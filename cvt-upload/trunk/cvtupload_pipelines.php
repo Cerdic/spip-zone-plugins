@@ -14,7 +14,8 @@ function cvtupload_formulaire_charger($flux) {
 		$contexte['cvtupload_fichiers_precedents'] = array();
 		
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
-		if ($html_fichiers = cvtupload_generer_html()) {
+		$_fichiers = _request("_fichiers");
+		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
 			$contexte['_fichiers_precedents_html'] = $html_fichiers;
 		}
 	}
