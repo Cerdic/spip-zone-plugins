@@ -43,39 +43,40 @@ function cvtupload_formulaire_verifier($flux) {
 		$supprimer_fichier = _request('cvtupload_supprimer_fichier');
 		
 		// On parcourt les champs déclarés comme étant des fichiers
-		foreach ($champs_fichiers as $champ){
+		foreach ($champs_fichiers as $champ) {
 			// On commence par ne récupérer que les anciennes informations
 			// Si ce champ de fichier est multiple, on décode chaque champ
-			if (is_array($infos_fichiers_precedents[$champ])) {
-				foreach ($infos_fichiers_precedents[$champ] as $cle=>$fichier) {
-					if ($infos_decodees = decoder_contexte_ajax($fichier, $flux['args']['form'])) {
-						$infos_fichiers[$champ][$cle] = $infos_decodees;
-						$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
-						
-						// Si suppression
-						if (isset($supprimer_fichier[$champ][$cle])) {
-							supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
-							unset($infos_fichiers[$champ][$cle]);
-							if (!count($infos_fichiers[$champ])) {
-								unset($infos_fichiers[$champ]);
+			if (isset($infos_fichiers_precedents[$champ])) {
+				if (is_array($infos_fichiers_precedents[$champ])) {
+					foreach ($infos_fichiers_precedents[$champ] as $cle => $fichier) {
+						if ($infos_decodees = decoder_contexte_ajax($fichier, $flux['args']['form'])) {
+							$infos_fichiers[$champ][$cle] = $infos_decodees;
+							$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
+
+							// Si suppression
+							if (isset($supprimer_fichier[$champ][$cle])) {
+								supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
+								unset($infos_fichiers[$champ][$cle]);
+								if (!count($infos_fichiers[$champ])) {
+									unset($infos_fichiers[$champ]);
+								}
+								// On génère une erreur pour réafficher le form de toute façon
+								$erreurs['rien_' . $champ . '_' . $cle] = 'rien';
 							}
-							// On génère une erreur pour réafficher le form de toute façon
-							$erreurs['rien_' . $champ . '_' . $cle] = 'rien';
 						}
 					}
-				}
-			}
-			// Si le champ est unique, on décode juste le champ
-			elseif ($infos_decodees = decoder_contexte_ajax($infos_fichiers_precedents[$champ], $flux['args']['form'])) {
-				$infos_fichiers[$champ] = $infos_decodees;
-				$infos_fichiers[$champ]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
-				
-				// Si suppression
-				if (isset($supprimer_fichier[$champ])) {
-					supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
-					unset($infos_fichiers[$champ]);
-					// On génère une erreur pour réafficher le form de toute façon
-					$erreurs["rien_$champ"] = 'rien';
+				} // Si le champ est unique, on décode juste le champ
+				elseif ($infos_decodees = decoder_contexte_ajax($infos_fichiers_precedents[$champ], $flux['args']['form'])) {
+					$infos_fichiers[$champ] = $infos_decodees;
+					$infos_fichiers[$champ]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
+
+					// Si suppression
+					if (isset($supprimer_fichier[$champ])) {
+						supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
+						unset($infos_fichiers[$champ]);
+						// On génère une erreur pour réafficher le form de toute façon
+						$erreurs["rien_$champ"] = 'rien';
+					}
 				}
 			}
 			
