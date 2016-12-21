@@ -73,7 +73,6 @@ if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intva
 	// On ajoute un point d'entrée avec les infos de ce formulaire
 	// pour d'eventuels plugins qui en ont l'utilité
 	$contexte['_formidable'] = $formulaire;
-	
 	// Classes CSS 
 	$contexte['_css'] = $formulaire['css'];
 
@@ -171,14 +170,14 @@ if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intva
 	$contexte['editable'] = false;
 	$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
 }
-if (!isset($contexte['_hidden'])) {
-	$contexte['_hidden'] = '';
-}
-$contexte['_hidden'] .= "\n" . '<input type="hidden" name="formidable_afficher_apres' /*.$formulaire['id_formulaire']*/ . '" value="' . $formulaire['apres'] . '"/>'; // marche pas
+	if (!isset($contexte['_hidden'])) {
+		$contexte['_hidden'] = '';
+	}
+	$contexte['_hidden'] .= "\n" . '<input type="hidden" name="formidable_afficher_apres' /*.$formulaire['id_formulaire']*/ . '" value="' . $formulaire['apres'] . '"/>'; // marche pas
 
-$contexte['formidable_afficher_apres'] = $formulaire['apres'];
+	$contexte['formidable_afficher_apres'] = $formulaire['apres'];
 
-return $contexte;
+	return $contexte;
 }
 
 
@@ -445,6 +444,5 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 		$test_array = unserialize($champ['valeur']);
 		$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
 	}
-
 	return $contexte;
 }
