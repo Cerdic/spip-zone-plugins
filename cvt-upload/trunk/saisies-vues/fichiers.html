@@ -2,7 +2,8 @@
 <p class="spip">
 <BOUCLE_resultats(DATA){source tableau, #ENV{valeur}} {"<br class='spip' />"}>
 	[(#VIGNETTE|image_reduire{48})]
-	<a href='[(#URL|attribut_html)]' [ (#HTML5|oui)download="download"]>#NOM [\([(#EXTENSION|strtoupper)] - (#TAILLE|taille_en_octets)\)]</a>
+
+	[<a href='(#URL|attribut_html)' [ (#HTML5|oui)download="download"]>]#NOM [\([(#EXTENSION|strtoupper)] - (#TAILLE|taille_en_octets)\)][(#URL|oui)</a>]
 </BOUCLE_resultats>
 </p>
 </B_resultats>
