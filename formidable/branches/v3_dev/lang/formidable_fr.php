@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// J'ai la flemme de classer, Salvatore le fera pour moi
 	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.', 
+	'pas_analyse_fichiers' => 'Formidable ne propose pas (encore) d\'analyse des fichiers envoyés',
 	'lien_expire' => 'Lien expirant dans @delai@',	
 	'jours_heures_minutes_secondes' => "@j@j @h@h @m@min @s@s", 
 	'heures_minutes_secondes' => "@h@h @m@min @s@s", 
