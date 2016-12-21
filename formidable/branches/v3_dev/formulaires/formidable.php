@@ -18,30 +18,30 @@ include_spip('inc/autoriser');
 include_spip('plugins/installer');
 
 function formidable_id_formulaire($id) {
-// on utilise une static pour etre sur que si l'appel dans verifier() passe, celui dans traiter() passera aussi
-// meme si entre temps on perds la base
-static $id_formulaires = array();
-if (isset($id_formulaires[$id])) {
-	return $id_formulaires[$id];
-}
+	// on utilise une static pour etre sur que si l'appel dans verifier() passe, celui dans traiter() passera aussi
+	// meme si entre temps on perds la base
+	static $id_formulaires = array();
+	if (isset($id_formulaires[$id])) {
+		return $id_formulaires[$id];
+	}
 
-if (is_numeric($id)) {
-	$where = 'id_formulaire = ' . intval($id);
-} elseif (is_string($id)) {
-	$where = 'identifiant = ' . sql_quote($id);
-} else {
-	return 0;
-}
+	if (is_numeric($id)) {
+		$where = 'id_formulaire = ' . intval($id);
+	} elseif (is_string($id)) {
+		$where = 'identifiant = ' . sql_quote($id);
+	} else {
+		return 0;
+	}
 
-$id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires', $where));
+	$id_formulaire = intval(sql_getfetsel('id_formulaire', 'spip_formulaires', $where));
 
-if ($id_formulaire
-	and !test_espace_prive()
-	and !objet_test_si_publie('formulaire', $id_formulaire)) {
-	return $id_formulaires[$id] = 0;
-}
+	if ($id_formulaire
+		and !test_espace_prive()
+		and !objet_test_si_publie('formulaire', $id_formulaire)) {
+		return $id_formulaires[$id] = 0;
+	}
 
-return $id_formulaires[$id] = $id_formulaire;
+	return $id_formulaires[$id] = $id_formulaire;
 }
 
 /**
@@ -61,115 +61,115 @@ return $id_formulaires[$id] = $id_formulaire;
 *     Contexte envoyé au squelette HTML du formulaire.
 **/
 function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires_reponse = false) {
-$contexte = array();
+	$contexte = array();
 
-// On peut donner soit un id soit un identifiant
-if (!$id_formulaire = formidable_id_formulaire($id)) {
-	return;
-}
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id)) {
+		return;
+	}
 
-// On cherche si le formulaire existe
-if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))) {
-	// On ajoute un point d'entrée avec les infos de ce formulaire
-	// pour d'eventuels plugins qui en ont l'utilité
-	$contexte['_formidable'] = $formulaire;
-	// Classes CSS 
-	$contexte['_css'] = $formulaire['css'];
+	// On cherche si le formulaire existe
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))) {
+		// On ajoute un point d'entrée avec les infos de ce formulaire
+		// pour d'eventuels plugins qui en ont l'utilité
+		$contexte['_formidable'] = $formulaire;
+		// Classes CSS 
+		$contexte['_css'] = $formulaire['css'];
 
-	// Est-ce que la personne a le droit de répondre ?
-	if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {
-		$saisies = unserialize($formulaire['saisies']);
-		$traitements = unserialize($formulaire['traitements']);
+		// Est-ce que la personne a le droit de répondre ?
+		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire' => $formulaire))) {
+			$saisies = unserialize($formulaire['saisies']);
+			$traitements = unserialize($formulaire['traitements']);
 
-		// Si on est en train de réafficher les valeurs postées,
-		// ne pas afficher les saisies hidden
-		if ($formulaire['apres'] == 'valeurs'
-			and _request('formidable_afficher_apres') == 'valeurs'
-		) {
-			foreach ($saisies as $k => $saisie) {
-				if (isset($saisie['saisie'])
-					and $saisie['saisie'] == 'hidden'
-				) {
-					unset($saisies[$k]);
-				}
-			}
-		}
-
-		// On déclare les champs avec les valeurs par défaut
-		$contexte = array_merge(saisies_lister_valeurs_defaut($saisies), $contexte);
-		$contexte['mechantrobot'] = '';
-		// On ajoute le formulaire complet
-		$contexte['_saisies'] = $saisies;
-
-		$contexte['id'] = $formulaire['id_formulaire'];
-		$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="' . $contexte['id'] . '"/>';
-
-		// S'il y a des valeurs par défaut dans l'appel, alors on pré-remplit
-		if ($valeurs) {
-			// Si c'est une chaine on essaye de la parser
-			if (is_string($valeurs)) {
-				$liste = explode(',', $valeurs);
-				$liste = array_map('trim', $liste);
-				$valeurs = array();
-				foreach ($liste as $i => $cle_ou_valeur) {
-					if ($i%2 == 0) {
-						$valeurs[$liste[$i]] = $liste[$i+1];
+			// Si on est en train de réafficher les valeurs postées,
+			// ne pas afficher les saisies hidden
+			if ($formulaire['apres'] == 'valeurs'
+				and _request('formidable_afficher_apres') == 'valeurs'
+			) {
+				foreach ($saisies as $k => $saisie) {
+					if (isset($saisie['saisie'])
+						and $saisie['saisie'] == 'hidden'
+					) {
+						unset($saisies[$k]);
 					}
 				}
 			}
 
-			// Si on a un tableau,
-			// alors on écrase avec les valeurs données depuis l'appel
-			if ($valeurs and is_array($valeurs)) {
-				$contexte = array_merge($contexte, $valeurs);
-			}
-		}
+			// On déclare les champs avec les valeurs par défaut
+			$contexte = array_merge(saisies_lister_valeurs_defaut($saisies), $contexte);
+			$contexte['mechantrobot'] = '';
+			// On ajoute le formulaire complet
+			$contexte['_saisies'] = $saisies;
 
-		// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
-		if ($id_formulaires_reponse = intval($id_formulaires_reponse)) {
-			$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-			if ($ok == false) {
-				$contexte['editable'] = false;
-				$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
+			$contexte['id'] = $formulaire['id_formulaire'];
+			$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="' . $contexte['id'] . '"/>';
+
+			// S'il y a des valeurs par défaut dans l'appel, alors on pré-remplit
+			if ($valeurs) {
+				// Si c'est une chaine on essaye de la parser
+				if (is_string($valeurs)) {
+					$liste = explode(',', $valeurs);
+					$liste = array_map('trim', $liste);
+					$valeurs = array();
+					foreach ($liste as $i => $cle_ou_valeur) {
+						if ($i%2 == 0) {
+							$valeurs[$liste[$i]] = $liste[$i+1];
+						}
+					}
+				}
+
+				// Si on a un tableau,
+				// alors on écrase avec les valeurs données depuis l'appel
+				if ($valeurs and is_array($valeurs)) {
+					$contexte = array_merge($contexte, $valeurs);
+				}
+			}
+
+			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
+			if ($id_formulaires_reponse = intval($id_formulaires_reponse)) {
+				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+				if ($ok == false) {
+					$contexte['editable'] = false;
+					$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
+				}
+			} else {
+				// calcul des paramètres d'anonymisation
+				$options = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
+
+				$anonymisation = (isset($options['anonymiser']) && $options['anonymiser']==true)
+					? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
+					: '';
+
+				// Si multiple = non mais que c'est modifiable, alors on va chercher
+				// la dernière réponse si elle existe
+				if ($options
+					and !$options['multiple']
+					and $options['modifiable']
+					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'], $anonymisation)
+				) {
+					$id_formulaires_reponse = array_pop($reponses);
+					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+				}
 			}
 		} else {
-			// calcul des paramètres d'anonymisation
-			$options = isset($traitements['enregistrement']) ? $traitements['enregistrement'] : null;
-
-			$anonymisation = (isset($options['anonymiser']) && $options['anonymiser']==true)
-				? isset($options['anonymiser_variable']) ? $options['anonymiser_variable'] : ''
-				: '';
-
-			// Si multiple = non mais que c'est modifiable, alors on va chercher
-			// la dernière réponse si elle existe
-			if ($options
-				and !$options['multiple']
-				and $options['modifiable']
-				and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'], $anonymisation)
-			) {
-				$id_formulaires_reponse = array_pop($reponses);
-				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
+			$contexte['editable'] = false;
+			// le formulaire a déjà été répondu.
+			// peut être faut il afficher les statistiques des réponses
+			if ($formulaire['apres']=='stats') {
+				// Nous sommes face à un sondage auquel on a déjà répondu !
+				// On remplace complètement l'affichage du formulaire
+				// par un affichage du résultat de sondage !
+				$contexte['_remplacer_formulaire'] = recuperer_fond('modeles/formulaire_analyse', array(
+					'id_formulaire' => $formulaire['id_formulaire'],
+				));
+			} else {
+				$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_deja_repondu');
 			}
 		}
 	} else {
 		$contexte['editable'] = false;
-		// le formulaire a déjà été répondu.
-		// peut être faut il afficher les statistiques des réponses
-		if ($formulaire['apres']=='stats') {
-			// Nous sommes face à un sondage auquel on a déjà répondu !
-			// On remplace complètement l'affichage du formulaire
-			// par un affichage du résultat de sondage !
-			$contexte['_remplacer_formulaire'] = recuperer_fond('modeles/formulaire_analyse', array(
-				'id_formulaire' => $formulaire['id_formulaire'],
-			));
-		} else {
-			$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_deja_repondu');
-		}
+		$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
 	}
-} else {
-	$contexte['editable'] = false;
-	$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
-}
 	if (!isset($contexte['_hidden'])) {
 		$contexte['_hidden'] = '';
 	}
