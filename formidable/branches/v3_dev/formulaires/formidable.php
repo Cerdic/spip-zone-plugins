@@ -377,7 +377,11 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
 		if (isset($retours['fichiers'])){
+			$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 			foreach ($retours['fichiers'] as $fichier=>$description) {
+				foreach ($description as $i => $desc){ // ajouter la vignette, par contre on ajoute pas d'url pour telecharger, puisque la personne vient d'envoyer le fichier, elle l'a sur son ordinateur
+					$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
+				}	
 				set_request($fichier, $description);
 			}
 		}
