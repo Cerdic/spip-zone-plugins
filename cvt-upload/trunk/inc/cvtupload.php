@@ -169,7 +169,11 @@ function cvtupload_modifier_files($infos_fichiers) {
 		}
 		else {//Upload multiple
 			//On surcharge tout la description $_FILES pour ce champ. Dans tous les cas les infos ont été stockées dans $description
-			$old_FILES_champ = $_FILES[$champ];
+			if (isset($_FILES[$champ])) {
+				$old_FILES_champ = $_FILES[$champ];
+			} else {
+				$old_FILES_champ = array();
+			}
 			$_FILES[$champ]['name'] = array();
 			$_FILES[$champ]['tmp_name'] = array();
 			$_FILES[$champ]['type'] = array();
