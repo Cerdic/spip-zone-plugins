@@ -308,6 +308,10 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
 	$retours['id_formulaire'] = $id_formulaire;
 
+	// lorsqu'on affichera à nouveau le html, dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
+	if ($formulaire['apres']=='formulaire'){
+		set_request('_fichiers', null);
+	}
 	// Si on a une redirection valide
 	if (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
 		refuser_traiter_formulaire_ajax();
