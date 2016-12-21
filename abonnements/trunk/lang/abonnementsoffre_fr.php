@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_quand_label' => 'Quand ?',
 	'champ_taxe_label' => 'Tva (%)',
 	'champ_titre_label' => 'Titre',
+	'champ_ajouter_notification_label' => 'Ajouter une notification',
 	'configurer_notifications' => 'Configurer les notifications',
 	'configurer_notifications_quand' => 'Quand ?',
 

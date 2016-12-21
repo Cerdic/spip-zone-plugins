@@ -6,46 +6,57 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abonnements_offre, $retour=''){
 	return array(
 		array(
-			'saisie' => 'selection',
+			'saisie' => 'fieldset',
 			'options' => array(
-				'nom' => 'quand',
-				'label' => _T('abonnementsoffre:champ_quand_label'),
-				'cacher_option_intro' => 'oui',
-				'datas' => array(
-					'apres' => _T('abonnementsoffre:champ_quand_choix_apres'),
-					'avant' => _T('abonnementsoffre:champ_quand_choix_avant'),
-					'pendant' => _T('abonnementsoffre:champ_quand_choix_pendant'),
-				),
-				'defaut' => 'avant',
+				'nom' => 'fieldset_ajouter',
+				'label' => _T('abonnementsoffre:champ_ajouter_notification_label'),
+				'pliable' => 'oui',
+				'plie' => 'oui',
 			),
-		),
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'duree',
-				'label' => _T('abonnementsoffre:champ_duree_label'),
-				'defaut' => '',
-				'afficher_si_remplissage' => '@quand@ !== "pendant"',
-			),
-			'verifier' => array(
-				'type' => 'entier',
-				'options' => array(
-					'min' => 0,
+			'saisies' => array(
+				array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => 'quand',
+						'label' => _T('abonnementsoffre:champ_quand_label'),
+						'cacher_option_intro' => 'oui',
+						'datas' => array(
+							'apres' => _T('abonnementsoffre:champ_quand_choix_apres'),
+							'avant' => _T('abonnementsoffre:champ_quand_choix_avant'),
+							'pendant' => _T('abonnementsoffre:champ_quand_choix_pendant'),
+						),
+						'defaut' => 'avant',
+					),
 				),
-			),
-		),
-		array(
-			'saisie' => 'selection',
-			'options' => array(
-				'nom' => 'periode',
-				'label' => _T('abonnementsoffre:champ_periode_label'),
-				'cacher_option_intro' => 'oui',
-				'datas' => array(
-					'mois' => _T('abonnementsoffre:champ_periode_choix_mois'),
-					'jours' => _T('abonnementsoffre:champ_periode_choix_jours'),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'duree',
+						'label' => _T('abonnementsoffre:champ_duree_label'),
+						'defaut' => '',
+						'afficher_si_remplissage' => '@quand@ !== "pendant"',
+					),
+					'verifier' => array(
+						'type' => 'entier',
+						'options' => array(
+							'min' => 0,
+						),
+					),
 				),
-				'defaut' => 'mois',
-				'afficher_si_remplissage' => '@quand@ !== "pendant"',
+				array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => 'periode',
+						'label' => _T('abonnementsoffre:champ_periode_label'),
+						'cacher_option_intro' => 'oui',
+						'datas' => array(
+							'mois' => _T('abonnementsoffre:champ_periode_choix_mois'),
+							'jours' => _T('abonnementsoffre:champ_periode_choix_jours'),
+						),
+						'defaut' => 'mois',
+						'afficher_si_remplissage' => '@quand@ !== "pendant"',
+					),
+				),
 			),
 		),
 	);
