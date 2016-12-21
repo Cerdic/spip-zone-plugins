@@ -364,7 +364,7 @@ function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timest
  * Pour une saisie de type 'fichiers'
  * insère dans la description du résultat de cette saisie
  * l'url de l'action pour récuperer la saisie par email
- * Ajoute également une vignette correspondent à l'extention
+ * Ajoute également une vignette correspondant à l'extension
  * @param array $saisie_a_modifier
  * @param string $nom_saisie
  * @param array $options options qui décrit l'endroit où est stocké le fichier
