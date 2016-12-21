@@ -375,6 +375,13 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
 
+	if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
+		if (isset($retours['fichiers'])){
+			foreach ($retours['fichiers'] as $fichier=>$description) {
+				set_request($fichier, $description);
+			}
+		}
+	}
 	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
 	if (!$erreur_texte and !count($retours['traitements'])) {
 		$erreur_texte = "Aucun traitement pour le formulaire $id\n";
