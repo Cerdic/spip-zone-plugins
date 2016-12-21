@@ -1,4 +1,4 @@
-<INCLURE{fond=prive/objets/liste/abonnements, env, ajax,
+<INCLURE{fond=prive/objets/liste/abonnements, env, ajax=abonnements_actifs,
 	id_abonnements_offre=#ENV{id_abonnements_offre},
 	masquer_offre=oui,
 	par=date_fin, date_fin_sens=1,
@@ -12,7 +12,7 @@
 ]
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/abonnements, env, ajax,
+<INCLURE{fond=prive/objets/liste/abonnements, env, ajax=abonnements_inactifs,
 	id_abonnements_offre=#ENV{id_abonnements_offre},
 	masquer_offre=oui,
 	par=date_fin,

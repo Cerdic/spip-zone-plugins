@@ -59,7 +59,7 @@ function genie_abonnements_verifier_notifications_dist($time){
 				foreach ($a_notifier as $abonne){
 					$id_job = job_queue_add(	
 						'abonnements_notifier_echeance',
-						"Notifier ${abonne['nom']} ${notification['duree']} ${notification['periode']} ${notification['quand']} l'échéance de son abonnement ${abonne['id_abonnement']}",
+						"Notifier automatiquement ${abonne['nom']} ${notification['duree']} ${notification['periode']} ${notification['quand']} l'échéance de son abonnement ${abonne['id_abonnement']}",
 						array(
 							$abonne['id_abonnement'],
 							$abonne['nom'],

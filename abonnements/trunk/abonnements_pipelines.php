@@ -187,14 +187,23 @@ function abonnements_taches_generales_cron($taches) {
 	return $taches;
 }
 
-/*
- * Ajouter la config des notifications
+/**
+ * Ajouter des choses dans la colonne de gauche
+ * 
+ * Offres d'abonnements : config des notifications + notifications ponctuelles
+ *
+ * @param array $flux
+ * @return array
  */
-
 function abonnements_affiche_gauche($flux) {
-	if ($flux['args']['exec'] == 'abonnements_offre') {
+	if (isset($flux['args']['exec'])
+		and $flux['args']['exec'] == 'abonnements_offre'
+		and isset($flux['args']['id_abonnements_offre'])
+	) {
 		$flux['data'] .= recuperer_fond(
-				'prive/squelettes/navigation/inc-abonnements_notifications', array('id_abonnements_offre' => $flux['args']['id_abonnements_offre'])
+			'prive/squelettes/navigation/inc-abonnements_notifications', array(
+				'id_abonnements_offre' => $flux['args']['id_abonnements_offre']
+			)
 		);
 	}
 

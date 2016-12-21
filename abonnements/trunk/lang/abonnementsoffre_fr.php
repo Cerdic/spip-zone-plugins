@@ -10,6 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_abonnementsoffre' => 'Ajouter cette offre d’abonnement',
 
+	// B
+	'bouton_notifier' => 'Notifier',
+	'bouton_verifier' => 'Vérifier',
+	'bouton_annuler' => 'Annuler',
+
 	// C
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_duree_0' => 'Sans limite',
@@ -36,6 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_notification_doublon' => 'Cette notification est déjà enregistrée',
+	'explication_envoyer_notifications_abonnementsoffre' => 'Envoi immédiat de notifications.',
+	'explication_configurer_notifications_abonnementsoffre' => 'Envoi automatique de notifications.',
 
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
@@ -54,6 +61,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_mois_avant' => '@nb@ mois avant',
 	'info_aucune_notification' => 'Aucune notification',
 
+	// M
+	'message_notifier_verifier_abonnements' => 'Vérifier les utilisateurs ci-contre avant de valider l\'envoi des notifications.',
+	'message_notifier_ok' => 'Les notifications ont bien été envoyées.',
+
 	// N
 	'nb_abonnements' => 'Nb. abo.',
 
@@ -69,5 +80,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_abonnementsoffres' => 'Offres d’abonnement',
 	'titre_abonnementsoffres_rubrique' => 'Offres d’abonnement de la rubrique',
 	'titre_langue_abonnementsoffre' => 'Langue de cette offre d’abonnement',
-	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement'
+	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement',
+	'titre_notifier_abonnementsoffre' => 'Envoyer des notifications',
 );

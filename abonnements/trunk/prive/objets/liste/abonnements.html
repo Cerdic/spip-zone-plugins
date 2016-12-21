@@ -48,9 +48,10 @@
 		{id_auteur?}
 		{statut?}
 		{recherche?}
-		{annee_debut?}{mois_debut?}
-		{annee_echeance?}{mois_echeance?}
-		{annee_fin?}{mois_fin?}
+		{where?}
+		{date_debut?} {annee_debut?} {mois_debut?}
+		{date_echeance?} {annee_echeance?} {mois_echeance?}
+		{date_fin?} {annee_fin?} {mois_fin?}
 		{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,10}}
 	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">

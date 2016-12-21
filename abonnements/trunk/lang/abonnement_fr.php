@@ -12,11 +12,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_date_debut_label' => 'Début de l’abonnement',
+	'champ_dates_debut_label' => 'Débuts des abonnements',
 	'champ_date_echeance_label' => 'Prochaine échéance',
 	'champ_date_fin_allonger_label' => 'Vous pouvez modifier la date de fin',
 	'champ_date_fin_label' => 'Fin de l‘abonnement',
+	'champ_dates_fin_label' => 'Fin des abonnements',
+	'champ_date_du_label' => 'Du',
+	'champ_date_au_label' => 'Au',
 	'champ_id_abonnements_offre_label' => 'Offre d’abonnement',
 	'champ_id_auteur_label' => 'Utilisateur',
+	'champ_notifier_statut_label' => 'Status des abonnements',
 
 	// E
 	'erreur_id_abonnements_offre' => 'Vous devez créer un abonnement pour une offre existante.',
@@ -28,13 +33,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_abonnement' => 'Un abonnement',
 	'info_1_abonnement_actif' => 'Un abonnement actif',
 	'info_1_abonnement_inactif' => 'Un abonnement inactif',
+	'info_1_abonnement_notifier' => 'Un abonnement à notifier',
 	'info_abonnements_auteur' => 'Les abonnements de cet auteur',
 	'info_aucun_abonnement' => 'Aucun abonnement',
 	'info_aucun_abonnement_actif' => 'Aucun abonnement actif',
 	'info_aucun_abonnement_inactif' => 'Aucun abonnement inactif',
+	'info_aucun_abonnement_notifier' => 'Aucun abonnement à notifier',
 	'info_nb_abonnements' => '@nb@ abonnements',
 	'info_nb_abonnements_actifs' => '@nb@ abonnements actifs',
 	'info_nb_abonnements_inactifs' => '@nb@ abonnements inactifs',
+	'info_nb_abonnements_notifier' => '@nb@ abonnements à notifier',
 	'info_numero_abbr' => 'n°',
 	'info_numero_abbr_maj' => 'N°',
 
@@ -66,7 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_actif' => 'actif',
+	'statut_actifs' => 'actifs',
 	'statut_inactif' => 'désactivé',
+	'statut_inactifs' => 'désactivés',
+	'statut_tous' => 'tous',
 
 	// T
 	'texte_ajouter_abonnement' => 'Ajouter un abonnement',
