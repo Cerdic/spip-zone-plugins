@@ -50,7 +50,7 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire) {
 		if ($comparaison['supprimees']) {
 			$erreurs['message_erreur'] = _T('saisies:construire_attention_supprime');
 		}
-	} elseif ($annulation) {
+	} elseif (isset($annulation) and $annulation) {
 		// Si on annule on génère une erreur bidon juste pour réafficher le formulaire
 		$erreurs['pouetpouet'] = true;
 	}

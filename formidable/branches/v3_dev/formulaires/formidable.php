@@ -454,7 +454,7 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 
 	// On remplit le contexte avec
 	foreach ($champs as $champ) {
-		$test_array = unserialize($champ['valeur']);
+		$test_array = filtre_tenter_unserialize_dist($champ['valeur']);
 		$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
 	}
 	return $contexte;
