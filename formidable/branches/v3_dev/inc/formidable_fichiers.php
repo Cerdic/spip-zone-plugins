@@ -73,12 +73,14 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer=false) {
  * Crée si besoin les dossiers de stockage.  
  * 
  * @param string $fichier l'adresse temporaire du fichier
- * @param string $nom le nom du fichiera
+ * @param string $nom le nom du fichier 
+ * @param string $mime le mime du fichier
+ * @param string $extension l'extension du fichier 
  * @param string $champ le champ concerné
  * @return string $nom_definitif le nom définitif du fichier tel que stocké dans son dossier, vide s'il y a eu un souci lors du déplacement (dans ce cas un courriel sera envoyé au webmestre)
  *
  **/
-function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $champ, $options){
+function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime, $extension, $champ, $options){
 	if (isset($options['id_formulaire'])) {
 		$id_formulaire = $options['id_formulaire'];
 		$dossier_formulaire =  "formulaire_$id_formulaire";
@@ -94,10 +96,23 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $cham
 	} else { // si ni timestamp, ni id_formulaires_reponse => erreur
 		return '';
 	}
-	// déterminer l'extension
-	$path_info = pathinfo($nom);
-	$basename = $path_info['basename'];
-	$extension = $path_info['extension'];
+	// déterminer le basename
+	$basename = pathinfo($nom, PATHINFO_BASENAME);
+
+	// sécurité : si la combinaison extension/mime_type est inconnu de SPIP (spip_documents_type), on zip. 
+	// On n'utilise volontairement pas verifier/fichiers.php, dès fois que celui-ci évolue dans le future
+	$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($mime).' and extension='.sql_quote($extension));
+	if (sql_count($res) == 0) {
+		$zipper = True;
+		$nom_dans_zip = $nom;
+		// pas de fichier nom de zip commencant par point
+		while (strpos($basename,'.') === 0){
+			$basename = substr($basename,1);		
+		}
+		$nom = "$basename.zip";
+	} else {
+		$zipper = False;	
+	}
 	if (!isset($options['timestamp'])) { // si on enregistre la réponse en base
 
 		// d'abord, créer si besoin le dossier pour le formulaire, si on a une erreur, on ne déplace pas le fichier 
@@ -118,7 +133,6 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $cham
 		$dossier = sous_repertoire($dossier, $options['timestamp'],false,true);
 		$dossier_champ = sous_repertoire($dossier,$champ,false,true);
 	}
-
 	// S'assurer qu'il n'y a pas un fichier du même nom à destination
 	$chemin_final = $dossier_champ.$nom;
 	$n = 1;
@@ -127,14 +141,37 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $cham
 		$chemin_final = $dossier_champ.$nom;
 		$n++;
 	}
-	// On peut déplacer le fichier
-	if ($fichier = deplacer_fichier_upload($fichier, $chemin_final,true)){
-		return $nom;
-	}
-	else{
-		return '';
+	if (!$zipper) { // si on ne zippe pas, c'est simple
+		if ($fichier = deplacer_fichier_upload($fichier, $chemin_final,true)) {
+			return $nom; 
+		} else {
+			return '';
+		}
+	} else { // si on doit zipper, c'est plus complexe
+		include_spip('inc/pclzip');
+		$zip = new PclZip($chemin_final);
+		if (!$tmp_dir = tempnam($dossier_champ, 'tmp_upload')) {
+			return '';
+		}
+		spip_unlink($tmp_dir);
+		@mkdir($tmp_dir);
+		$old_fichier = $fichier;
+		if (!$fichier = deplacer_fichier_upload($fichier,$tmp_dir."/".$nom_dans_zip,false)) {
+			return '';
+		}
+		$zip_final = $zip -> create($fichier, 
+			PCLZIP_OPT_REMOVE_PATH, $tmp_dir,
+			PCLZIP_OPT_ADD_PATH, '');
+		if (!$zip_final){
+			return '';
+		} else {
+			spip_unlink($old_fichier);
+			effacer_repertoire_temporaire($tmp_dir);
+			return $nom;
+		}
 	}
 
+	return $nom;
 }
 
 /** 
@@ -188,7 +225,9 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 			// l'adresse du nouveau fichier, sans le chemin
 			if ($nouveau_nom = formidable_deplacer_fichier_emplacement_definitif(
 				$mon_file['tmp_name'][$i],
-				$mon_file['name'][$i], 	
+				$mon_file['name'][$i],
+				$mon_file['type'][$i],
+				pathinfo($mon_file['name'][$i], PATHINFO_EXTENSION),	
 				$champ,
 				$options 
 				)
