@@ -360,7 +360,6 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 				}
 			}
 		} while (count($retours['traitements']) < count($traitements) and $maxiter--);
-
 		// si on ne peut pas traiter correctement, alerter le webmestre
 		if (count($retours['traitements']) < count($traitements)) {
 			$erreur_texte = "Impossible de traiter correctement le formulaire $id\n"
@@ -380,11 +379,10 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	if (!$erreur_texte and !count($retours['traitements'])) {
 		$erreur_texte = "Aucun traitement pour le formulaire $id\n";
 	}
-
 	if ($erreur_texte) {
 		$erreur_sujet = "[ERREUR] Traitement Formulaire $id";
 		// dumper la saisie pour ne pas la perdre
-		$erreur_texte .= "\n".var_export($_REQUEST, true);
+		$erreur_texte .= "\n".var_export($_REQUEST, true)."\n".var_export($_FILES, true);
 		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 		$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
 	}
