@@ -15,7 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     Options de notification
  */
 function notifications_abonnement_echeance_dist($quoi, $id, $options) {
-	$sujet = _T('abonnement:notification_echeance_sujet_'.$options['periode'], array('duree'=>$options['duree']));
+	$sujet = _T(
+		"abonnement:notification_echeance_sujet_{$options['periode']}_{$options['quand']}",
+		array(
+			'duree' => $options['duree'],
+		)
+	);
 	// Destinataires
 	$destinataires = pipeline('notifications_destinataires',
 		array(
@@ -36,6 +41,7 @@ function notifications_abonnement_echeance_dist($quoi, $id, $options) {
 			'email'         => $options['email'],
 			'duree'         => $options['duree'],
 			'periode'       => $options['periode'],
+			'quand'         => $options['quand'],
 		)
 	);
 	// Go go go

@@ -6,16 +6,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abonnements_offre, $retour=''){
 	return array(
 		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'quand',
+				'label' => _T('abonnementsoffre:champ_quand_label'),
+				'cacher_option_intro' => 'oui',
+				'datas' => array(
+					'apres' => _T('abonnementsoffre:champ_quand_choix_apres'),
+					'avant' => _T('abonnementsoffre:champ_quand_choix_avant'),
+					'pendant' => _T('abonnementsoffre:champ_quand_choix_pendant'),
+				),
+				'defaut' => 'avant',
+			),
+		),
+		array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'duree',
 				'label' => _T('abonnementsoffre:champ_duree_label'),
 				'defaut' => '',
+				'afficher_si_remplissage' => '@quand@ !== "pendant"',
 			),
 			'verifier' => array(
 				'type' => 'entier',
 				'options' => array(
-					'min' => (_request('periode') == 'jours') ? 0 : 1,
+					'min' => 0,
 				),
 			),
 		),
@@ -30,19 +45,7 @@ function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abo
 					'jours' => _T('abonnementsoffre:champ_periode_choix_jours'),
 				),
 				'defaut' => 'mois',
-			),
-		),
-		array(
-			'saisie' => 'selection',
-			'options' => array(
-				'nom' => 'quand',
-				'label' => _T('abonnementsoffre:champ_quand_label'),
-				'cacher_option_intro' => 'oui',
-				'datas' => array(
-					'apres' => _T('abonnementsoffre:champ_quand_choix_apres'),
-					'avant' => _T('abonnementsoffre:champ_quand_choix_avant'),
-				),
-				'defaut' => 'avant',
+				'afficher_si_remplissage' => '@quand@ !== "pendant"',
 			),
 		),
 	);
@@ -65,8 +68,36 @@ function formulaires_editer_abonnements_offre_notifications_verifier_dist($id_ab
 	$erreurs = array();
 	
 	if (!$supprimer = _request('supprimer')){
-		if (!strlen(_request('duree'))){
+		$duree   = _request('duree');
+		$periode = _request('periode');
+		$quand   = _request('quand');
+		// Normalisons les valeurs pour les notifs le jour même
+		if ($quand == 'pendant'
+			or (
+					$quand != 'pendant'
+					and $duree == 0
+				)
+		){
+			$duree   = 0;
+			$periode = 'jours';
+			$quand   = 'pendant';
+			set_request('duree', $duree);
+			set_request('periode', $periode);
+			set_request('quand', $quand);
+		}
+		// Durée obligatoire
+		// (ne pas utiliser l'option "obligatoire" des saisies car on ne pourrait pas supprimer)
+		if (!strlen($duree)){
 			$erreurs['duree'] = _T('info_obligatoire');
+		}
+		// Vérifier les doublons
+		if (sql_countsel('spip_abonnements_offres_notifications', array(
+			'id_abonnements_offre = ' . intval($id_abonnements_offre),
+			'duree = ' . intval($duree),
+			'periode = ' . sql_quote($periode),
+			'quand = ' . sql_quote($quand),
+		))){
+			$erreurs['message_erreur'] = _T('abonnementsoffre:erreur_notification_doublon');
 		}
 	}
 	

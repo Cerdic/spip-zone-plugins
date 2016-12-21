@@ -51,6 +51,11 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter',"TABLE spip_abonnements_offres DROP prix"),
 	);
 
+	// Ajout d'une valeur possible au champ `quand` 
+	$maj['2.2.6'] = array(
+		array('sql_alter',"TABLE spip_abonnements_offres_notifications CHANGE `quand` `quand` ENUM('avant','apres','pendant') DEFAULT 'avant' NOT NULL")
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

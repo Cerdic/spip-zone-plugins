@@ -18,11 +18,16 @@ function genie_abonnements_verifier_notifications_dist($time){
 		// Pour chaque notification on va chercher les abonnés dont c'est le moment
 		foreach ($notifications as $notification){
 			
-			//avant ou après la date de fin de l'abonnement?
-			if($relance['quand'] == "apres") $operateur = " - "; 
-			else $operateur = " + ";
+			// Avant ou après la date de fin de l'abonnement ?
+			switch ($notification['quand']){
+				case 'apres':
+					$operateur = " - ";
+					break;
+				default:
+					$operateur = " + ";
+			}
 			
-			// De combien doit-on modifier la date
+			// De combien doit-on modifier la date ?
 			switch ($notification['periode']){
 				case 'jours':
 					$ajout = " $operateur ${notification['duree']} days";
@@ -40,7 +45,7 @@ function genie_abonnements_verifier_notifications_dist($time){
 				$echeance = date('Y-m-d', strtotime($jourdhui.$ajout));
 			}
 			
-			// Pour cette notification on cherche donc tous les abonnés ayant cet échéance avec la même offre
+			// Pour cette notification on cherche donc tous les abonnés ayant cette échéance avec la même offre
 			if ($a_notifier = sql_allfetsel(
 				'id_abonnement, nom, email',
 				'spip_abonnements as a left join spip_auteurs as u on a.id_auteur=u.id_auteur',
@@ -54,8 +59,15 @@ function genie_abonnements_verifier_notifications_dist($time){
 				foreach ($a_notifier as $abonne){
 					$id_job = job_queue_add(	
 						'abonnements_notifier_echeance',
-						"Notifier ${abonne['nom']} ${notification['duree']} ${notification['periode']} avant la fin de son abonnement ${abonne['id_abonnement']}",
-						array($abonne['id_abonnement'], $abonne['nom'], $abonne['email'], $notification['duree'], $notification['periode']),
+						"Notifier ${abonne['nom']} ${notification['duree']} ${notification['periode']} ${notification['quand']} l'échéance de son abonnement ${abonne['id_abonnement']}",
+						array(
+							$abonne['id_abonnement'],
+							$abonne['nom'],
+							$abonne['email'],
+							$notification['duree'],
+							$notification['periode'],
+							$notification['quand'],
+						),
 						'inc/abonnements',
 						true
 					);

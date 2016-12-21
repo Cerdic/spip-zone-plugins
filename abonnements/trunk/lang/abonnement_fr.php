@@ -42,13 +42,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => 'Désactivation de l’abonnement @id@',
 
 	// N
-	'notification_echeance_corps' => '<p>Bonjour @nom@,</p>
-		<p>Vous recevez ce courriel car vous êtes abonné au site @nom_site_spip@ avec l’offre "@offre@".</p>
-		<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
-		Nous vous invitons donc à le renouveler avant son expiration.</p>
-		<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
-	'notification_echeance_sujet_jours' => 'Votre abonnement se termine dans @duree@ jour(s) !',
-	'notification_echeance_sujet_mois' => 'Votre abonnement se termine dans @duree@ mois !',
+	'notification_echeance_chapo' => '<p>Bonjour @nom@,</p>',
+	'notification_echeance_corps_avant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
+	Nous vous invitons donc à le renouveler avant son expiration.</p>',
+	'notification_echeance_corps_apres' => '<p>Vous recevez ce courriel car vous étiez abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	<p>Votre abonnement est arrivé à échéance il y a : <strong>@echeance@</strong>.<br/>
+	Nous vous invitons donc à le renouveler.</p>',
+	'notification_echeance_corps_pendant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	<p>Votre abonnement arrive à échéance aujourd\'hui.<br/>
+	Nous vous invitons donc à le renouveler avant son expiration.</p>',
+	'notification_echeance_signature' => '<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
+	'notification_echeance_sujet_jours_avant' => 'Votre abonnement se termine dans @duree@ jour(s) !',
+	'notification_echeance_sujet_jours_pendant' => 'Votre abonnement se termine aujourd\'hui !',
+	'notification_echeance_sujet_jours_apres' => 'Votre abonnement est terminé depuis @duree@ jour(s) !',
+	'notification_echeance_sujet_mois_avant' => 'Votre abonnement se termine dans @duree@ mois !',
+	'notification_echeance_sujet_mois_pendant' => 'Votre abonnement se termine ce mois-ci !',
+	'notification_echeance_sujet_mois_apres' => 'Votre abonnement est terminé depuis @duree@ mois !',
 
 	// R
 	'retirer_lien_abonnement' => 'Retirer cet abonnement',

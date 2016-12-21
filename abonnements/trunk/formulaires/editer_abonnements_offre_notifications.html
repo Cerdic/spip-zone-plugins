@@ -1,4 +1,5 @@
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{notifications-24}|balise_img{'','cadre-icone'})]<:abonnementsoffre:configurer_notifications:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -7,9 +8,9 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+		[(#REM) Liste des notifications enregistrées ]
 		<div class="liste-objets liste-objets-lies abonnements_offres_notifications">
 			<table class="spip liste">
-				<caption><strong class="caption"><:abonnementsoffre:configurer_notifications:></strong></caption>
 				<thead>
 					<tr class="first_row">
 						<th class="duree principale" scope="col'"><:abonnementsoffre:configurer_notifications_quand:></th>
@@ -17,10 +18,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<BOUCLE_notifications(ABONNEMENTS_OFFRES_NOTIFICATIONS){id_abonnements_offre}{!par periode}{!par duree}>
+					[(#REM) Afficher les notifications dans l'ordre : avant, pendant, puis après l'échéance ]
+					<BOUCLE_ordre(DATA){source table, #LISTE{avant,pendant,apres}}>
+					<BOUCLE_notifications(ABONNEMENTS_OFFRES_NOTIFICATIONS)
+						{id_abonnements_offre}
+						{quand=#VALEUR}
+						{par periode}{inverse #VALEUR|=={apres}|?{0,1}}
+						{par duree}{inverse #VALEUR|=={apres}|?{0,1}}>
+					#SET{is_notifications,oui}
 					<tr>
 						<td class="duree principale">
-							[(#QUAND|=={avant}|oui)-][(#QUAND|=={avant}|non)+][(#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}})]
+							[(#QUAND|=={pendant}|?{
+								<:abonnementsoffre:champ_quand_choix_pendant:>,
+								[(#DUREE|singulier_ou_pluriel{abonnementsoffre:info_1_[(#PERIODE)]_[(#QUAND)],abonnementsoffre:info_nb_[(#PERIODE)]_[(#QUAND)]})]
+							})]
 						</td>
 						<td class="supprimer">
 							<button type="submit" class="button link delete" name="supprimer[#ID_ABONNEMENTS_OFFRES_NOTIFICATION]" value="X">
@@ -30,17 +41,19 @@
 						</td>
 					</tr>
 					</BOUCLE_notifications>
+					</BOUCLE_ordre>
+					[(#GET{is_notifications}|non)
 					<tr>
-						<td colspan="2">Aucune notification</td>
+						<td colspan="2"><:abonnementsoffre:info_aucune_notification:></td>
 					</tr>
-					<//B_notifications>
+					]
 				</tbody>
 			</table>
 		</div>
 
-		<ul>
+		<[(#DIV|sinon{ul})] class="editer-groupe">
 			#GENERER_SAISIES{#ENV{_saisies}}
-		</ul>
+		</[(#DIV|sinon{ul})]>
 
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

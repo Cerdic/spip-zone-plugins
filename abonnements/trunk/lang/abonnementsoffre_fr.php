@@ -27,11 +27,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_ttc_label' => 'Prix TTC',
 	'champ_quand_choix_apres' => 'Après',
 	'champ_quand_choix_avant' => 'Avant',
+	'champ_quand_choix_pendant' => 'Le jour même',
 	'champ_quand_label' => 'Quand ?',
 	'champ_taxe_label' => 'Tva (%)',
 	'champ_titre_label' => 'Titre',
 	'configurer_notifications' => 'Configurer les notifications',
 	'configurer_notifications_quand' => 'Quand ?',
+
+	// E
+	'erreur_notification_doublon' => 'Cette notification est déjà enregistrée',
 
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
@@ -40,6 +44,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_abonnementsoffres_auteur' => 'Les offres d’abonnement de cet auteur',
 	'info_aucun_abonnementsoffre' => 'Aucune offre d’abonnement',
 	'info_nb_abonnementsoffres' => '@nb@ offres d’abonnement',
+	'info_1_jours_apres' => '1 jour après',
+	'info_nb_jours_apres' => '@nb@ jours après',
+	'info_1_jours_avant' => '1 jour avant',
+	'info_nb_jours_avant' => '@nb@ jours avant',
+	'info_1_mois_apres' => '1 mois après',
+	'info_nb_mois_apres' => '@nb@ mois après',
+	'info_1_mois_avant' => '1 mois avant',
+	'info_nb_mois_avant' => '@nb@ mois avant',
+	'info_aucune_notification' => 'Aucune notification',
 
 	// N
 	'nb_abonnements' => 'Nb. abo.',

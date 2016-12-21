@@ -249,10 +249,39 @@ function abonnements_desactiver($id_abonnement){
 	autoriser_exception('modifier', 'abonnement', $id_abonnement, false);
 }
 
-/*
- * Envoyer un courriel à l'abonné pour lui rappeler combien de temps il lui reste
+/**
+ * Envoyer un courriel à l'abonné pour lui rappeler une échéance.
+ *
+ * @example
+ * Échéances dans 15 jours, il y a 1 mois, et le jour même :
+ * ````
+ * abonnements_notifier_echeance(1, 'untel', 'x@email.ltd', 15, 'jours', 'avant');
+ * abonnements_notifier_echeance(1, 'untel', 'x@email.ltd', 1, 'mois', 'apres');
+ * abonnements_notifier_echeance(1, 'untel', 'x@email.ltd', 0, 'jours', 'pendant');
+ * ````
+ *
+ * @param int $id_abonnement
+ *     Numéro de l'abonnement
+ * @param string $nom
+ *     Nom de la personne à notifier
+ * @param string $email
+ *     Email de la personne à notifier
+ * @param int $duree
+ *     Durée de l'échéance
+ * @param string $periode
+ *     Période de l'échéance : `jours` | `mois`
+ * @param string $quand
+ *     Indique si on est avant, après, ou le jour même de l'échéance
+ *     - `avant`   : on est avant la fin de l'abonnement (par défaut pour rétro compat)
+ *     - `après`   : on est après la fin de l'abonnement
+ *     - `pendant` : on est le jour même de la fin de l'abonnement
+ * @return void
  */
-function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $periode){
+function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $periode, $quand = 'avant'){
+	// Assurons nous que le "quand" est cohérent
+	if ($duree === 0){
+		$quand = 'pendant';
+	}
 	$quoi    = 'abonnement_echeance';
 	$options = array(
 		'email'   => $email,
@@ -260,6 +289,7 @@ function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $pe
 		'email'   => $email,
 		'duree'   => $duree,
 		'periode' => $periode,
+		'quand'   => $quand,
 	);
 	$notifications = charger_fonction('notifications', 'inc');
 	$notifications($quoi, $id_abonnement, $options);
