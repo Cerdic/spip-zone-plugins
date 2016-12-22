@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnement' => 'Ajouter cet abonnement',
 
 	// C
+	'champ_date_au_label' => 'Au',
 	'champ_date_debut_label' => 'Début de l’abonnement',
-	'champ_dates_debut_label' => 'Débuts des abonnements',
+	'champ_date_du_label' => 'Du',
 	'champ_date_echeance_label' => 'Prochaine échéance',
 	'champ_date_fin_allonger_label' => 'Vous pouvez modifier la date de fin',
 	'champ_date_fin_label' => 'Fin de l‘abonnement',
+	'champ_dates_debut_label' => 'Débuts des abonnements',
 	'champ_dates_fin_label' => 'Fin des abonnements',
-	'champ_date_du_label' => 'Du',
-	'champ_date_au_label' => 'Au',
 	'champ_id_abonnements_offre_label' => 'Offre d’abonnement',
 	'champ_id_auteur_label' => 'Utilisateur',
 	'champ_notifier_statut_label' => 'Status des abonnements',
@@ -51,22 +51,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notification_echeance_chapo' => '<p>Bonjour @nom@,</p>',
-	'notification_echeance_corps_avant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
-	<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
-	Nous vous invitons donc à le renouveler avant son expiration.</p>',
-	'notification_echeance_corps_apres' => '<p>Vous recevez ce courriel car vous étiez abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	'notification_echeance_corps_apres' => '<p>Vous recevez ce courriel car vous étiez abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
 	<p>Votre abonnement est arrivé à échéance il y a : <strong>@echeance@</strong>.<br/>
 	Nous vous invitons donc à le renouveler.</p>',
-	'notification_echeance_corps_pendant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
-	<p>Votre abonnement arrive à échéance aujourd\'hui.<br/>
+	'notification_echeance_corps_avant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
+	Nous vous invitons donc à le renouveler avant son expiration.</p>',
+	'notification_echeance_corps_pendant' => '<p>Vous recevez ce courriel car vous êtes abonné.e au site @nom_site_spip@ avec l’offre « @offre@ ».</p>
+	<p>Votre abonnement arrive à échéance aujourd’hui.<br/>
 	Nous vous invitons donc à le renouveler avant son expiration.</p>',
 	'notification_echeance_signature' => '<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
-	'notification_echeance_sujet_jours_avant' => 'Votre abonnement se termine dans @duree@ jour(s) !',
-	'notification_echeance_sujet_jours_pendant' => 'Votre abonnement se termine aujourd\'hui !',
 	'notification_echeance_sujet_jours_apres' => 'Votre abonnement est terminé depuis @duree@ jour(s) !',
-	'notification_echeance_sujet_mois_avant' => 'Votre abonnement se termine dans @duree@ mois !',
-	'notification_echeance_sujet_mois_pendant' => 'Votre abonnement se termine ce mois-ci !',
+	'notification_echeance_sujet_jours_avant' => 'Votre abonnement se termine dans @duree@ jour(s) !',
+	'notification_echeance_sujet_jours_pendant' => 'Votre abonnement se termine aujourd’hui !',
 	'notification_echeance_sujet_mois_apres' => 'Votre abonnement est terminé depuis @duree@ mois !',
+	'notification_echeance_sujet_mois_avant' => 'Votre abonnement se termine dans @duree@ mois !',
+	'notification_echeance_sujet_mois_pendant' => 'Votre abonnement se termine ce mois-ci !',
 
 	// R
 	'retirer_lien_abonnement' => 'Retirer cet abonnement',
