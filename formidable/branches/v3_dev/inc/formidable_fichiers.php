@@ -136,8 +136,9 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 	// S'assurer qu'il n'y a pas un fichier du même nom à destination
 	$chemin_final = $dossier_champ.$nom;
 	$n = 1;
+	$basename_sans_extension = substr_replace($basename,"",-strlen($extension)-1);//la constante PATHINFO_FILENAME n'est qu'à partir de PHP 5.2, or SPIP 3 peut fonctionne en PHP 5.1
 	while (@file_exists($chemin_final)){
-		$nom = $basename."_$n.".$extension;
+		$nom = $basename_sans_extension."_$n.".$extension;
 		$chemin_final = $dossier_champ.$nom;
 		$n++;
 	}
