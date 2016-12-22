@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+include_spip('inc/formidable_fichiers');
 function traiter_enregistrement_dist($args, $retours) {
 	include_spip('inc/formidable');
 	include_spip('base/abstract_sql');
@@ -96,13 +96,15 @@ function traiter_enregistrement_dist($args, $retours) {
 			// Expiration dans 30 jours
 			spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);
 		}
-	} else {
+	} else { // si c'est une modif de réponse existante
 		// simple mise à jour du champ maj de la table spip_formulaires_reponses
 		sql_updateq(
 			'spip_formulaires_reponses',
 			array('maj' => 'NOW()'),
 			"id_formulaires_reponse = $id_formulaires_reponse"
 		);
+		//effacer les fichiers existant
+		formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse);
 	}
 
 	// Si l'id n'a pas été créé correctement alors erreur
@@ -202,6 +204,5 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
  * return array|null un tableau organisé par fichier, contenant 'nom', 'extension','mime','taille' 
 **/  
 function traiter_enregistrement_fichiers($saisie, $id_formulaire,  $id_formulaires_reponse){
-	include_spip('inc/formidable_fichiers');
 	return formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'id_formulaires_reponse'=>$id_formulaires_reponse));
 }

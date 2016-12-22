@@ -243,3 +243,15 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 	}
 	return $description_fichiers;
 }
+
+/**
+ * efface les fichiers d'une réponse formidable
+ * @param $str $id_formulaire
+ * @param $str $id_formulaires_reponse
+**/
+function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse){
+	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse";
+	if (file_exists($chemin)) {// par sécurité
+		effacer_repertoire_temporaire($chemin);
+	}
+}

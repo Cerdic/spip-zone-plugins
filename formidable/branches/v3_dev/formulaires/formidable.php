@@ -444,6 +444,12 @@ function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaire
  *
  **/
 function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, &$ok) {
+
+	// On prépare des infos si jamais on a des champs fichiers
+	$saisies_fichiers = saisies_lister_avec_type($contexte['_saisies'], 'fichiers');// les saisies de type fichier
+	$fichiers = array();
+	$id_formulaire = $contexte['_formidable']['id_formulaire'];
+	
 	// On va chercher tous les champs
 	$champs = sql_allfetsel(
 		'nom, valeur',
@@ -451,11 +457,35 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 		'id_formulaires_reponse = ' . $id_formulaires_reponse
 	);
 	$ok = count($champs) ? true : false;
+	$securiser_action = charger_fonction('securiser_action','inc');
 
 	// On remplit le contexte avec
 	foreach ($champs as $champ) {
-		$test_array = filtre_tenter_unserialize_dist($champ['valeur']);
-		$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
+		if (array_key_exists($champ['nom'], $saisies_fichiers)) {
+			$valeur= unserialize($champ['valeur']);
+			$nom = $champ['nom'];
+			$fichiers[$nom] = array();
+			$chemin = _DIR_FICHIERS_FORMIDABLE
+				."formulaire_$id_formulaire/reponse_$id_formulaires_reponse/"
+				."$nom/";
+			foreach ($valeur as $f => $fichier) {
+				$fichiers[$nom][$f]= array();
+				$param = serialize(array(
+					'formulaire' => $id_formulaire,
+					'reponse' => $id_formulaires_reponse,
+					'fichier' => $fichier['nom'],
+					'saisie' => $champ['nom']
+				));
+				$fichiers[$nom][$f]['url'] = $securiser_action('formidable_recuperer_fichier',$param,'',false);
+				$fichiers[$nom][$f]['chemin'] = $chemin.$fichier['nom'];
+			}
+		} else {
+			$test_array = filtre_tenter_unserialize_dist($champ['valeur']);
+			$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
+		}
+	}
+	if ($fichiers != array()) {//s'il y a des fichiers dans les réponses 
+		$contexte['cvtupload_precharger_fichiers'] = $fichiers;
 	}
 	return $contexte;
 }
