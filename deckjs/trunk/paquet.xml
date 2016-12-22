@@ -10,12 +10,10 @@
 
 	<nom>deckjs</nom>
 
-
 	<auteur lien='http://gamuza.fr'>Tofulm</auteur>
 
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="deckjs_autorisations.php" />
-
 
 </paquet>
