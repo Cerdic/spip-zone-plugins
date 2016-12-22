@@ -1,7 +1,3 @@
-#SET{claire,#ENV{couleur_claire,edf3fe}}
-#SET{foncee,#ENV{couleur_foncee,3874b0}}
-[(#REM)<style>]
-
 .formulaire_spip .saisie_fichiers .choix .fichier_precedent {
 	display:block; clear:right; position:relative; overflow:auto;
 	margin-bottom: 1em; padding:.5em;
@@ -11,4 +7,8 @@
 }
 .formulaire_spip .saisie_fichiers .choix .fichier_precedent img {
 	float:left; margin-right:.5em;
+}
+
+.formulaire_spip .saisie_fichiers .choix .fichier_precedent .submit {
+	margin-left:.5em;
 }

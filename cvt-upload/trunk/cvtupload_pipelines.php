@@ -158,7 +158,7 @@ function cvtupload_insert_head_css($flux, $prive=false) {
 	if (!$prive) {
 		$css = find_in_path('css/cvtupload.css');
 
-		$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+		$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
 	}
 	return $flux;
 }
