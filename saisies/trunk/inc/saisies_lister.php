@@ -115,9 +115,9 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
  *
  * @param Array  $saisies liste de saisies
  * @param string $type Type de la saisie
- * @param String $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom', 'identifiant')
+ * @param String $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom')
  *
- * @return liste de ces saisies triees par nom ayant une option sql définie
+ * @return liste de ces saisies triees par nom 
  */
 function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 	$saisies_type = array();
