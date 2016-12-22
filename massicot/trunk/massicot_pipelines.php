@@ -96,12 +96,11 @@ function massicot_post_edition($flux) {
 			array('document' => $id_document)
 		);
 
-		$id_massicotages = array_map(
-			function ($el) {
-				return $el['id_massicotage'];
-			},
-			$massicotages
-		);
+		$id_massicotages = array();
+
+		foreach ($massicotages as $cle => $valeur) {
+			$id_massicotages[] = $valeur['id_massicotage'];
+		}
 
 		sql_delete(
 			'spip_massicotages',
@@ -138,12 +137,11 @@ function massicot_formulaire_traiter($flux) {
 			array($objet => $id_objet)
 		);
 
-		$id_massicotages = array_map(
-			function ($el) {
-				return $el['id_massicotage'];
-			},
-			$massicotages
-		);
+		$id_massicotages = array();
+
+		foreach ($massicotages as $cle => $valeur) {
+			$id_massicotages[] = $valeur['id_massicotage'];
+		}
 
 		sql_delete(
 			'spip_massicotages',
