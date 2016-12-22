@@ -35,7 +35,7 @@ function get_liste_administrateurs() {
 	while ($qui = $fetch($s)) {
 		$nom = '<a href="'
 			. generer_url_ecrire(defined('_SPIP30000')?'auteur':'auteur_infos',"id_auteur=$qui[id_auteur]")
-			. '">' . typo($qui['nom']."</a> (id_auteur=$qui[id_auteur])");
+			. '">' . typo($qui['nom'])."</a> (id_auteur=$qui[id_auteur])";
 		if(autoriser('webmestre','','',$qui)) $webmestres[$qui['id_auteur']] = $nom;
 		else if(autoriser('configurer','plugins','',$qui)) $admins[$qui['id_auteur']] = $nom;
 	}
