@@ -12,6 +12,7 @@ return;
 }
 
 include_spip('inc/formidable');
+include_spip('inc/formidable_fichiers');
 include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
