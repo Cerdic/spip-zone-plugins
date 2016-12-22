@@ -44,13 +44,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'job_desactivation' => 'Deactivation of the subscription @id@',
 
 	// N
-	'notification_echeance_corps' => '<p>Bonjour @nom@,</p>
-		<p>You are receiving this email because you are subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
-		<p>Your subscription expires in: <strong>@echeance@</strong>.<br/>
-		We invite you to renew it before it expires.</p>
-		<p>Thank you for your trust, and do not hesitate to contact us for any further information.</p>',
-	'notification_echeance_sujet_jours' => 'Your subscription ends in @duree@ day(s) !',
-	'notification_echeance_sujet_mois' => 'Your subscription ends in @duree@ month(s)!',
+	'notification_echeance_chapo' => '<p>Hello @nom@,</p>',
+	'notification_echeance_corps_apres' => '<p>You are receiving this email because you were subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
+	<p>Your subscription has expired since: <strong>@echeance@</strong>.<br/>
+	 We invite you to renew it.</p>',
+	'notification_echeance_corps_avant' => '<p>You are receiving this email because you are subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
+	<p>Your subscription expires in: <strong>@echeance@</strong>.<br/>
+	 We invite you to renew it before it expires.</p>',
+	'notification_echeance_corps_pendant' => '<p>You are receiving this email because you are subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
+<p>Your subscription is expiring today<br/>
+We invite you to renew it.</p>',
+	'notification_echeance_signature' => '<p>Thank you for your trust, and do not hesitate to contact us for any further information.</p>',
+	'notification_echeance_sujet_jours_apres' => 'Your subscription has expired since @duree@ day(s)!',
+	'notification_echeance_sujet_jours_avant' => 'Your subscription ends in @duree@ day(s)!',
+	'notification_echeance_sujet_jours_pendant' => 'Your subscription is expiring today!',
+	'notification_echeance_sujet_mois_apres' => 'Your subscription has expired since @duree@ month(s)!',
+	'notification_echeance_sujet_mois_avant' => 'Your subscription ends in @duree@ month(s)!',
+	'notification_echeance_sujet_mois_pendant' => 'Your subscription is expiring this month!',
 
 	// R
 	'retirer_lien_abonnement' => 'Remove this subscription',
