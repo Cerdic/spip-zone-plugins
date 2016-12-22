@@ -67,6 +67,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_echeance_sujet_mois_apres' => 'Votre abonnement est terminé depuis @duree@ mois !',
 	'notification_echeance_sujet_mois_avant' => 'Votre abonnement se termine dans @duree@ mois !',
 	'notification_echeance_sujet_mois_pendant' => 'Votre abonnement se termine ce mois-ci !',
+	// chaîne ci-dessous : dépréciée
+	'notification_echeance_corps' => '<p>Bonjour @nom@,</p>
+		<p>Vous recevez ce courriel car vous êtes abonné au site @nom_site_spip@ avec l’offre "@offre@".</p>
+		<p>Votre abonnement arrive à échéance dans : <strong>@echeance@</strong>.<br/>
+		Nous vous invitons donc à le renouveler avant son expiration.</p>
+		<p>Merci de votre confiance, et n’hésitez pas à nous contacter pour toute information complémentaire.</p>',
 
 	// R
 	'retirer_lien_abonnement' => 'Retirer cet abonnement',
