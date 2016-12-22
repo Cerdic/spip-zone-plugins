@@ -153,3 +153,12 @@ function cvtupload_formulaire_fond($flux) {
 	}
 	return $flux;
 }
+
+function cvtupload_insert_head_css($flux, $prive=false) {
+	if (!$prive) {
+		$css = find_in_path('css/cvtupload.css');
+
+		$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
+	}
+	return $flux;
+}
