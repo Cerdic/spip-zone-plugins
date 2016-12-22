@@ -14,9 +14,10 @@ function cvtupload_formulaire_charger($flux) {
 		
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
 		$_fichiers = _request("_fichiers");
+		$forcer = _request("_cvtupload_precharger_fichiers_forcer");
 		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
 			$contexte['_fichiers_precedents_html'] = $html_fichiers;		
-		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and $flux['args']['je_suis_poste']==false){
+		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and ($flux['args']['je_suis_poste']==false or $forcer == true)){
 			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers','inc');
 			$contexte['_fichiers_precedents_html'] = cvtupload_generer_html($precharger_fichiers($flux['data']['cvtupload_precharger_fichiers'],$flux['args']['form']));
 		}
