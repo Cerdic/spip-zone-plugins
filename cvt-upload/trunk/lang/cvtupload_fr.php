@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// E
+	'erreur_fichier_supprime' => 'Vous avez supprimé le fichier « @nom@ ». C\'est pourquoi nous vous proposons à nouveau ce formulaire.', 
 
 	// S
 	'saisie_fichiers_explication' => 'Envoyer un ou plusieurs fichiers en s’assurant de ne pas avoir à les renvoyer en cas de non validation des autres champs du formulaire.',
