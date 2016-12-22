@@ -115,7 +115,7 @@ function critere_date_like_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $c;
 }
 
-// {simplecalperiode date_debut, #ENV{periodedebut}, #ENV{periodefin}}
+// {simplecalperiode #ENV{periodedebut}, #ENV{periodefin}}
 // Format aaaammjj
 function critere_simplecalperiode_dist($idb, &$boucles, $crit) {
     $boucle = &$boucles[$idb];
@@ -127,10 +127,12 @@ function critere_simplecalperiode_dist($idb, &$boucles, $crit) {
     // ---
     
     $log = '';
-        
-    
-    // 'date_debut' - inutile...
-    $p0 = $params ? array_shift($params) : "";
+
+    // Inutile de transmettre un parametre inutile...
+    if (count($params) == 3) {
+        // 'date_debut' - inutile...
+        $p0 = $params ? array_shift($params) : "";
+    }
     
     // aaaammjj
     $px = $params ? array_shift($params) : "";
