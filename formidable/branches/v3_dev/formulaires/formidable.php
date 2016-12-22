@@ -311,6 +311,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	// lorsqu'on affichera à nouveau le html, dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
 	if ($formulaire['apres']=='formulaire'){
 		set_request('_fichiers', null);
+		set_request('_cvtupload_precharger_fichiers_forcer',true);
 	}
 	// Si on a une redirection valide
 	if (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
