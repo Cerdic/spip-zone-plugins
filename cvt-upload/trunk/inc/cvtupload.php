@@ -41,8 +41,7 @@ function cvtupload_chercher_fichiers($form, $args) {
  * 		Retourne un tableau avec pour chaque champ une clé contenant le HTML
  **/
 function cvtupload_generer_html($infos_fichiers = null) {
-	static $html_fichiers = array();
-	
+	static $html_fichiers = array();	
 	// Si on a des infos de fichiers, on va re-générer du HTML
 	if ($infos_fichiers and is_array($infos_fichiers)) {
 		foreach ($infos_fichiers as $champ=>$fichier) {
@@ -76,16 +75,17 @@ function cvtupload_generer_html($infos_fichiers = null) {
  * 		Chemin de destination des fichiers
  * @param string $form
  * 		Formulaire d'où ça vient
+ * @param bool $deplacer
+ *		Mettre a False pour se contenter de copier
  * @return array
  * 		Retourne un tableau d'informations sur le fichier ou un tableau de tableaux si plusieurs fichiers. Ce tableau est compatible avec l'action "ajouter_un_fichier" de SPIP.
  **/
-function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
+function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	$infos = array();
 	
 	// On commence par nettoyer le dossier
 	cvtupload_nettoyer_repertoire($repertoire);
-	
 	if (is_array($fichier['name'])) {
 		foreach ($fichier['name'] as $cle=>$nom) {
 			// On commence par transformer le nom du fichier pour éviter les conflits, on supprime notamment les accents
@@ -101,7 +101,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
 				and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 			) {
 				// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
-				if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, true)) {
+				if (deplacer_fichier_upload($fichier['tmp_name'][$cle], $chemin_aleatoire, $deplacer)) {
 					$infos[$cle]['tmp_name'] = $chemin_aleatoire;
 					$infos[$cle]['name'] = $nom;
 					// On en déduit l'extension et du coup la vignette
@@ -128,7 +128,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form) {
 			and $chemin_aleatoire = tempnam($repertoire, $form.'_')
 		) {
 			// Déplacement du fichier vers le dossier de réception temporaire + récupération d'infos
-			if (deplacer_fichier_upload($fichier['tmp_name'], $chemin_aleatoire, true)) {
+			if (deplacer_fichier_upload($fichier['tmp_name'], $chemin_aleatoire, $deplacer)) {
 				$infos['tmp_name'] = $chemin_aleatoire;
 				$infos['name'] = $nom;
 				// On en déduit l'extension et du coup la vignette

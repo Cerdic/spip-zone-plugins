@@ -9,14 +9,16 @@ function cvtupload_formulaire_charger($flux) {
 	// S'il y a des champs fichiers de déclarés
 	if ($champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])) {
 		$contexte =& $flux['data'];
-		
 		// On déclare le champ qui contiendra les infos en hidden
 		$contexte['cvtupload_fichiers_precedents'] = array();
 		
 		// On met dans le contexte le HTML pour les fichiers précédemment postés
 		$_fichiers = _request("_fichiers");
 		if ($html_fichiers = cvtupload_generer_html() and $_fichiers) {
-			$contexte['_fichiers_precedents_html'] = $html_fichiers;
+			$contexte['_fichiers_precedents_html'] = $html_fichiers;		
+		} elseif (isset($flux['data']['cvtupload_precharger_fichiers']) and $flux['args']['je_suis_poste']==false){
+			$precharger_fichiers = charger_fonction('cvtupload_precharger_fichiers','inc');
+			$contexte['_fichiers_precedents_html'] = cvtupload_generer_html($precharger_fichiers($flux['data']['cvtupload_precharger_fichiers'],$flux['args']['form']));
 		}
 	}
 	
@@ -41,7 +43,6 @@ function cvtupload_formulaire_verifier($flux) {
 		
 		// Les demandes de suppression
 		$supprimer_fichier = _request('cvtupload_supprimer_fichier');
-		
 		// On parcourt les champs déclarés comme étant des fichiers
 		foreach ($champs_fichiers as $champ) {
 			// On commence par ne récupérer que les anciennes informations
@@ -54,7 +55,7 @@ function cvtupload_formulaire_verifier($flux) {
 							$infos_fichiers[$champ][$cle]['infos_encodees'] = encoder_contexte_ajax($infos_decodees, $flux['args']['form']);
 
 							// Si suppression
-							if (isset($supprimer_fichier[$champ][$cle])) {
+							if (isset($supprimer_fichier[$champ][$cle])) {								
 								supprimer_fichier($infos_fichiers[$champ][$cle]['tmp_name']);
 								$name = $infos_fichiers[$champ][$cle]['name'];
 								unset($infos_fichiers[$champ][$cle]);
@@ -108,7 +109,7 @@ function cvtupload_formulaire_verifier($flux) {
 function cvtupload_formulaire_fond($flux) {
 	// Si ça a déjà été posté (après verifier()) et qu'il y a des champs fichiers déclarés
 	if (
-		$flux['args']['je_suis_poste']
+		($flux['args']['je_suis_poste'] or isset($flux['args']['contexte']['cvtupload_precharger_fichiers']))
 		and $champs_fichiers = cvtupload_chercher_fichiers($flux['args']['form'], $flux['args']['args'])
 	) {
 		include_spip('inc/filtres');
