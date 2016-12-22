@@ -24,19 +24,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_periode_nb_jours' => '@nb@ day(s)',
 	'champ_periode_nb_mois' => '@nb@ months',
 	'champ_prix_0' => 'Free',
+	'champ_prix_ht_label' => 'Price excl. tax',
 	'champ_prix_label' => 'Price',
+	'champ_prix_ttc_label' => 'Price incl. tax',
+	'champ_quand_choix_apres' => 'After',
+	'champ_quand_choix_avant' => 'Before',
+	'champ_quand_choix_pendant' => 'The same day',
 	'champ_quand_label' => 'When ?',
+	'champ_taxe_label' => 'VAT (%)',
 	'champ_titre_label' => 'Title',
 	'configurer_notifications' => 'Configure the notifications',
 	'configurer_notifications_quand' => 'When ?',
+
+	// E
+	'erreur_notification_doublon' => 'This notification is already registered',
 
 	// I
 	'icone_creer_abonnementsoffre' => 'Create a subscription offer',
 	'icone_modifier_abonnementsoffre' => 'Modify this subscription offer',
 	'info_1_abonnementsoffre' => 'A subscription offer',
+	'info_1_jours_apres' => '1 day after',
+	'info_1_jours_avant' => '1 day before',
+	'info_1_mois_apres' => '1 month after',
+	'info_1_mois_avant' => '1 month before',
 	'info_abonnementsoffres_auteur' => 'Subscription offers of this author',
 	'info_aucun_abonnementsoffre' => 'No subscription offer',
+	'info_aucune_notification' => 'No notification',
 	'info_nb_abonnementsoffres' => '@nb@ subscription offers',
+	'info_nb_jours_apres' => '@nb@ days after',
+	'info_nb_jours_avant' => '@nb@ days before',
+	'info_nb_mois_apres' => '@nb@ month after',
+	'info_nb_mois_avant' => '@nb@ month before',
 
 	// R
 	'retirer_lien_abonnementsoffre' => 'Remove this subscription offer',
