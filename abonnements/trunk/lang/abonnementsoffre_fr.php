@@ -11,11 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnementsoffre' => 'Ajouter cette offre d’abonnement',
 
 	// B
+	'bouton_annuler' => 'Annuler',
 	'bouton_notifier' => 'Notifier',
 	'bouton_verifier' => 'Vérifier',
-	'bouton_annuler' => 'Annuler',
 
 	// C
+	'champ_ajouter_notification_label' => 'Ajouter une notification',
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_duree_0' => 'Sans limite',
 	'champ_duree_label' => 'Durée',
@@ -36,35 +37,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_quand_label' => 'Quand ?',
 	'champ_taxe_label' => 'Tva (%)',
 	'champ_titre_label' => 'Titre',
-	'champ_ajouter_notification_label' => 'Ajouter une notification',
 	'configurer_notifications' => 'Configurer les notifications',
 	'configurer_notifications_quand' => 'Quand ?',
 
 	// E
 	'erreur_notification_doublon' => 'Cette notification est déjà enregistrée',
-	'explication_envoyer_notifications_abonnementsoffre' => 'Envoi immédiat de notifications.',
 	'explication_configurer_notifications_abonnementsoffre' => 'Envoi automatique de notifications.',
+	'explication_envoyer_notifications_abonnementsoffre' => 'Envoi immédiat de notifications.',
 
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
 	'icone_modifier_abonnementsoffre' => 'Modifier cette offre d’abonnement',
 	'info_1_abonnementsoffre' => 'Une offre d’abonnement',
+	'info_1_jours_apres' => '1 jour après',
+	'info_1_jours_avant' => '1 jour avant',
+	'info_1_mois_apres' => '1 mois après',
+	'info_1_mois_avant' => '1 mois avant',
 	'info_abonnementsoffres_auteur' => 'Les offres d’abonnement de cet auteur',
 	'info_aucun_abonnementsoffre' => 'Aucune offre d’abonnement',
-	'info_nb_abonnementsoffres' => '@nb@ offres d’abonnement',
-	'info_1_jours_apres' => '1 jour après',
-	'info_nb_jours_apres' => '@nb@ jours après',
-	'info_1_jours_avant' => '1 jour avant',
-	'info_nb_jours_avant' => '@nb@ jours avant',
-	'info_1_mois_apres' => '1 mois après',
-	'info_nb_mois_apres' => '@nb@ mois après',
-	'info_1_mois_avant' => '1 mois avant',
-	'info_nb_mois_avant' => '@nb@ mois avant',
 	'info_aucune_notification' => 'Aucune notification',
+	'info_nb_abonnementsoffres' => '@nb@ offres d’abonnement',
+	'info_nb_jours_apres' => '@nb@ jours après',
+	'info_nb_jours_avant' => '@nb@ jours avant',
+	'info_nb_mois_apres' => '@nb@ mois après',
+	'info_nb_mois_avant' => '@nb@ mois avant',
 
 	// M
-	'message_notifier_verifier_abonnements' => 'Vérifier les utilisateurs ci-contre avant de valider l\'envoi des notifications.',
 	'message_notifier_ok' => 'Les notifications ont bien été envoyées.',
+	'message_notifier_verifier_abonnements' => 'Vérifier les utilisateurs ci-contre avant de valider l’envoi des notifications.',
 
 	// N
 	'nb_abonnements' => 'Nb. abo.',
@@ -82,5 +82,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_abonnementsoffres_rubrique' => 'Offres d’abonnement de la rubrique',
 	'titre_langue_abonnementsoffre' => 'Langue de cette offre d’abonnement',
 	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement',
-	'titre_notifier_abonnementsoffre' => 'Envoyer des notifications',
+	'titre_notifier_abonnementsoffre' => 'Envoyer des notifications'
 );
