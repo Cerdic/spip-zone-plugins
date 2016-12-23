@@ -92,7 +92,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 			$nom = preg_replace(',\.\.+,', '.', $nom); // pas de .. dans le nom du doc
 			$nom = preg_replace("/[^.=\w-]+/", "_",
 				translitteration(preg_replace("/<[^>]*>/", '', $nom)));
-			
+			$nom = strtolower($nom);
 			if (
 				// Si le fichier a bien un nom et qu'il n'y a pas d'erreur associé à ce fichier
 				($nom != null)
