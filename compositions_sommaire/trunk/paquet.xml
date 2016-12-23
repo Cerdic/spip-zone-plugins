@@ -13,8 +13,7 @@
 
 	<licence>GNU/GPL</licence>
 
-    <necessite nom="compositions" compatibilite="[3.5.3;[" />
-    
-    <utilise nom="zcore"compatibilite="[2.0.0;[" />
+	<necessite nom="compositions" compatibilite="[3.5.3;[" />
 
+	<utilise nom="zcore" compatibilite="[2.0.0;[" />
 </paquet>
