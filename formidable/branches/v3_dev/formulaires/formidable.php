@@ -379,10 +379,18 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
 		if (isset($retours['fichiers'])){
+			$securiser_action = charger_fonction('securiser_action','inc');
 			$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 			foreach ($retours['fichiers'] as $fichier=>$description) {
-				foreach ($description as $i => $desc){ // ajouter la vignette, par contre on ajoute pas d'url pour telecharger, puisque la personne vient d'envoyer le fichier, elle l'a sur son ordinateur
+				foreach ($description as $i => $desc){ // ajouter la vignette et l'url
 					$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
+					$param = serialize(array(
+						'formulaire' => $id_formulaire,
+						'reponse' => $retours['id_formulaires_reponse'],
+						'fichier' => $desc['nom'],
+						'saisie' => $fichier
+					));
+					$description[$i]['url'] = $securiser_action('formidable_recuperer_fichier',$param,'',false);
 				}	
 				set_request($fichier, $description);
 			}
