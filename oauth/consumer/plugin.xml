@@ -23,9 +23,11 @@ _ Donnons &#224; spip le moyen d'acc&#233;der &#224; des services g&#233;r&#233;
 
     <install>base/coauth_install.php</install>
 
+    <!--
     <options>
         coauth_options.php
     </options>
+    -->
 
     <pipeline>
         <nom>declarer_tables_principales</nom>
