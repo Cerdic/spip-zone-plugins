@@ -70,7 +70,7 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
 	if ($options['moderation'] == 'posteriori'
-		or autoriser('instituer', 'formulaires_reponse', $id_formulaires_reponse, null, array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie'))) {
+		or autoriser('instituer', 'formulairesreponse', $id_formulaires_reponse, null, array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie'))) {
 		$statut='publie';
 	} else {
 		$statut = 'prop';
