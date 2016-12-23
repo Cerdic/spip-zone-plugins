@@ -270,6 +270,14 @@ function formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_for
 		'saisie' => $saisie,
 		'fichier' => $fichier
 	);
+
+	// Pour les utilisateurs non authentifiés, on se base sur le cookier
+	$nom_cookie = formidable_generer_nom_cookie($id_formulaire);
+	if (isset($_COOKIE[$nom_cookie])) {
+		include_spip('inc/securiser_action');
+		$param['cookie'] = sha1($_COOKIE[$nom_cookie].secret_du_site());
+	}
+
 	$param = serialize($param);
 	$securiser_action = charger_fonction('securiser_action','inc');
 	return $securiser_action('formidable_recuperer_fichier',$param,'',      false);

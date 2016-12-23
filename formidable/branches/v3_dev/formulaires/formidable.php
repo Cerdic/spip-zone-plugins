@@ -417,7 +417,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
  *
  * @return array
  *     Tableau des champs de type fichier
-**/
+ **/
 function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaires_reponse = false) {
 	// On peut donner soit un id soit un identifiant
 	if (!$id_formulaire = formidable_id_formulaire($id)) {
@@ -452,7 +452,7 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 	$saisies_fichiers = saisies_lister_avec_type($contexte['_saisies'], 'fichiers');// les saisies de type fichier
 	$fichiers = array();
 	$id_formulaire = $contexte['_formidable']['id_formulaire'];
-	
+
 	// On va chercher tous les champs
 	$champs = sql_allfetsel(
 		'nom, valeur',
