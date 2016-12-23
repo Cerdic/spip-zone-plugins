@@ -20,7 +20,6 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 	<lien>http://contrib.spip.net/article3133</lien>
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
-	<!--
 	<fonctions>rainette_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -31,7 +30,6 @@ Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisatio
 		<action>insert_head_css</action>
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
-	-->
 
 	<bouton id='rainette' parent='configuration'>
 		<icone>prive/themes/spip/images/rainette-16.png</icone>
