@@ -56,6 +56,25 @@ function simplecal_rubrique_encours($flux) {
 	return $flux;
 }
 
+/**
+ * Compter les enfants d'une rubrique
+ *
+ * @pipeline objets_compte_enfants
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+**/
+function simplecal_objet_compte_enfants($flux) {
+	if ($flux['args']['objet']=='rubrique' AND $id_rubrique=intval($flux['args']['id_objet'])) {
+		// juste les publiés ?
+		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+			$flux['data']['evenement'] = sql_countsel('spip_evenements', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+		} else {
+			$flux['data']['evenement'] = sql_countsel('spip_evenements', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+		} 
+	}
+	return $flux;
+}
+
 // Evenements en statut 'publie' et 'redac' de la rubrique
 function simplecal_affiche_enfants($flux) {
 	if ($e = trouver_objet_exec($flux['args']['exec']) AND $e['type'] == 'rubrique' AND $e['edition'] == false) {

@@ -26,6 +26,7 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="rubrique_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_enfants" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="objet_compte_enfants" inclure="simplecal_pipelines.php" />
 	<pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="accueil_informations" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="compter_contributions_auteur" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
