@@ -86,9 +86,8 @@ function formidable_autoriser() {
 **/
 function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
 	$auteurs = lire_config('formidable/analyse/auteur');
-
 	/* administrateur ? */
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (count($qui['restreint']) == 0)) {
+	if (isset($qui['statut']) and $qui['statut'] == '0minirezo' and (count($qui['restreint']) == 0)) {
 		return true;
 	}
 
@@ -122,7 +121,7 @@ function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulaires_menu_dist($faire, $type, $id, $qui, $opt) {
-	if (isset($qui['statut']) and $qui['statut'] <= '1comite') {
+	if (isset($qui['statut']) and ($qui['statut'] == '1comite' or $qui['statut'] == '0minirezo')) {
 		return true;
 	} else {
 		return false;

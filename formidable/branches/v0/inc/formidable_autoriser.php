@@ -8,13 +8,13 @@ function formidable_autoriser(){}
 
 // Seuls les admins peuvent éditer les formulaires
 function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $options){
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
+	if (isset($qui['statut']) and $qui['statut'] == '0minirezo' and !$qui['restreint']) return true;
 	else return false;
 }
 
 // Admins et rédacteurs peuvent voir les formulaires existants
 function autoriser_formulaires_bouton_dist($faire, $type, $id, $qui, $options){
-	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
+	if (isset($qui['statut']) and ($qui['statut'] == '1comite' or $qui['statut'] == '0minirezo')) return true;
 	else return false;
 }
 function autoriser_formulaires21_bouton_dist($faire, $type, $id, $qui, $options){
@@ -63,13 +63,13 @@ function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $options){
 
 // On peut modérer une réponse si on est admin
 function autoriser_formulaires_reponse_instituer_dist($faire, $type, $id, $qui, $options){
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and !$qui['restreint']) return true;
+	if (isset($qui['statut']) and $qui['statut'] == '0minirezo' and !$qui['restreint']) return true;
 	else return false;
 }
 
 // Au moins rédacteur pour voir les résultats
 function autoriser_formulaires_reponse_voir_dist($faire, $type, $id, $qui, $options){
-	if (isset($qui['statut']) and $qui['statut'] <= '1comite') return true;
+	if (isset($qui['statut']) and ($qui['statut'] == '1comite' or $qui['statut'] == '0minirezo')) return true;
 	else return false;
 }
 
