@@ -27,7 +27,7 @@
             mag_maj
         </prefix>
 				<fonctions>
-						inc/mag_maj_fonctions.php
+						mes_fonctions.php
 				</fonctions>				
         <pipeline>    <!-- texte -->
         		<nom>ajouter_boutons</nom>
