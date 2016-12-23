@@ -234,7 +234,6 @@ function autoriser_formulairesreponse_instituer_dist($faire, $type, $id, $qui, $
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_formulairesreponse_voir_dist($faire, $type, $id, $qui, $opt) {
-	var_dump("s");
 	return autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt);
 }
 
