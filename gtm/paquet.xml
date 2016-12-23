@@ -13,6 +13,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<auteur lien="https://www.fidh.org/spip.php?page=auteur&id_auteur=140">Cyril</auteur>
+	<auteur lien="https://www.fidh.org/spip.php?page=auteur&amp;id_auteur=140">Cyril</auteur>
 
 </paquet>
