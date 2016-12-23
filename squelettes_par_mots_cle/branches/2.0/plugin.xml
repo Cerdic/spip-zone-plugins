@@ -52,7 +52,7 @@
 	</pipeline>
 	<pipeline>
 		<nom>styliser</nom>
-		<inclure>public/SquelettesMots_styliser.php</inclure>
+		<inclure>public/config_chercher_squelettes_mots.php</inclure>
 	</pipeline>
 	<onglet id='config_chercher_squelettes_mots' parent='configuration'>
 		<icone>spip_death.png</icone>
