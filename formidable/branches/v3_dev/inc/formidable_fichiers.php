@@ -255,3 +255,22 @@ function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_rep
 		effacer_repertoire_temporaire($chemin);
 	}
 }
+
+/**
+ * Générer une url d'action pour la récupération d'un fichier lié à une réponse
+ * @param int|str $id_formulaire
+ * @param int|str $id_formulaires_reponse
+ * @param str $saisie
+ * @param str $fichier
+ **/
+function formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_formulaires_reponse, $saisie, $fichier) {
+	$param = array(
+		'formulaire' => $id_formulaire,
+		'reponse' => $id_formulaires_reponse,
+		'saisie' => $saisie,
+		'fichier' => $fichier
+	);
+	$param = serialize($param);
+	$securiser_action = charger_fonction('securiser_action','inc');
+	return $securiser_action('formidable_recuperer_fichier',$param,'',      false);
+}
