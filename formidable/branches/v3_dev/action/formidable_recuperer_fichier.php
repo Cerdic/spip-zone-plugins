@@ -26,7 +26,7 @@ function action_formidable_recuperer_fichier() {
 			}
 		}
 	}
-	if (autoriser('voir', 'formulaires_reponse', $arg['formulaire']) or $cookie_ok) {
+	if (autoriser('voir', 'formulairesreponse', $arg['formulaire']) or $cookie_ok) {
 		$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
 			."formulaire_".$arg['formulaire'] 
 			."/reponse_".$arg['reponse']

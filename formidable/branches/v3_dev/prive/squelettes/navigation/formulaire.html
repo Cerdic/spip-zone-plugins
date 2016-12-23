@@ -35,7 +35,7 @@
 
 
 <BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}{statut==.*}/>
-	<BOUCLE_si(CONDITION){si #_resultats:TOTAL_BOUCLE|et{#AUTORISER{voir,formulaires_reponse,#ID_FORMULAIRE}}}>
+	<BOUCLE_si(CONDITION){si #_resultats:TOTAL_BOUCLE|et{#AUTORISER{voir,formulairesreponse,#ID_FORMULAIRE}}}>
 		<div class='navigation_resultats'>
 			[(#URL_ECRIRE{formulaires_reponses}
 				|parametre_url{id_formulaire, #ID_FORMULAIRE}
