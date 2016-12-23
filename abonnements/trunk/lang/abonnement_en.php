@@ -45,6 +45,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notification_echeance_chapo' => '<p>Hello @nom@,</p>',
+	'notification_echeance_corps' => '<p>Bonjour @nom@,</p>
+		<p>You are receiving this email because you are subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
+		<p>Your subscription expires in: <strong>@echeance@</strong>.<br/>
+		We invite you to renew it before it expires.</p>
+		<p>Thank you for your trust, and do not hesitate to contact us for any further information.</p>', # MODIF
 	'notification_echeance_corps_apres' => '<p>You are receiving this email because you were subscribed to the site @nom_site_spip@ with the offer "@offre@".</p>
 	<p>Your subscription has expired since: <strong>@echeance@</strong>.<br/>
 	 We invite you to renew it.</p>',
