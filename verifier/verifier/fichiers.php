@@ -115,21 +115,32 @@ function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
  * @return string
 **/
 function verifier_fichier_mime($valeur,$cle,$options){
-	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
 	if ($options['mime'] == 'pas_de_verification') {
 		return '';
 	}
+	
+	$extension = pathinfo($valeur['name'][$cle],PATHINFO_EXTENSION);
+	
+	$mime_insignifiant = False;
+	if (in_array($valeur['type'][$cle], array('text/plain', '', 'application/octet-stream'))) { // si mime-type insignifiant, on se base uniquement sur l'extension (comme par exemple dans recuperer_infos_distantes())
+		$mime_insignifiant = True;
+	}
 	if ($options['mime'] == 'specifique'){
-		if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
-			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
-		}	
-		//Double sécurité, on vérifier aussi l'extension, pour éviter qu'autoriser une type mime application/octet-stream permette de balancer un .htaccess
-		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
+		if (!$mime_insignifiant) {
+			if (!in_array($valeur['type'][$cle],$options['mime_specifique'])){
+				return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
+			}
+		}
+		$res = sql_select('mime_type','spip_types_documents', sql_in('mime_type',$options['mime_specifique']).' and extension='.sql_quote($extension));
 		if (sql_count($res) == 0) {
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}
 	} elseif ($options['mime'] == 'tout_mime') {
-		$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
+		if (!$mime_insignifiant) {
+			$res = sql_select('mime_type','spip_types_documents','mime_type='.sql_quote($valeur['type'][$cle]).' and extension='.sql_quote($extension));
+		} else {
+			$res = sql_select('mime_type','spip_types_documents','extension='.sql_quote($extension));
+		}
 		if (sql_count($res) == 0) {
 			return _T('verifier:erreur_type_non_autorise',array('name'=>$valeur['name'][$cle]));
 		}
