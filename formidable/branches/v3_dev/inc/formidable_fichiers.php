@@ -167,7 +167,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 			return '';
 		} else {
 			spip_unlink($old_fichier);
-			effacer_repertoire_temporaire($tmp_dir);
+			supprimer_repertoire($tmp_dir);
 			return $nom;
 		}
 	}
@@ -252,7 +252,7 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse){
 	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse";
 	if (file_exists($chemin)) {// par sécurité
-		effacer_repertoire_temporaire($chemin);
+		supprimer_repertoire($chemin);
 	}
 }
 
@@ -274,9 +274,9 @@ function formidable_effacer_fichiers_champ($id_formulaire, $reponses, $champ) {
 			$chemin_champ = $chemin_reponse."/".$champ;
 
 			if (file_exists($chemin_champ)) {
-				effacer_repertoire_temporaire($chemin_champ);
+				supprimer_repertoire($chemin_champ);
 				if (count(array_diff(scandir($chemin_reponse), $rep_vide)) == 0) { // si jamais il ne reste plus aucun fichiers pour cette réponse, on peut effacer le repertoire de celle-ci
-					effacer_repertoire_temporaire($chemin_reponse);
+					supprimer_repertoire($chemin_reponse);
 				}
 			}
 
