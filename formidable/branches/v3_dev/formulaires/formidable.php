@@ -376,19 +376,37 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	} else {
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
+	if (isset($retours['fichiers'])) {// traitement particuliers si fichiers
+		if ($erreurs_fichiers = formidable_produire_messages_erreurs_fichiers($retours['fichiers'])) { // Inspecter les fichiers pour voir s'il y a des erreurs
+			// Avertir l'utilisateur
+			if (isset($retours['message_erreur'])) {
+				$retours['message_erreur'] .= "<br />".$erreurs_fichiers['message_public'];
+			} else {
+				$retours['message_erreur'] = $erreurs_fichiers['message_public'];
+			}
+			// Avertir le webmestre
 
-	if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
-		if (isset($retours['fichiers'])){
+			$erreur_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse $id_formulaires_reponse au formulaire $id";
+			$erreur_texte = "Récupérez le plus rapidement possible les fichiers temporaires suivants\n";
+			$erreur_texte .= $erreurs_fichiers['message_webmestre'];
+			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+			$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
+
+		}
+		if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
 			$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 			foreach ($retours['fichiers'] as $saisie=>$description) {
 				foreach ($description as $i => $desc){ // ajouter la vignette et l'url
-					$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
-					$description[$i]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $retours['id_formulaires_reponse'], $saisie, $desc['nom']);
+					if (!isset($description[$i]['erreur'])) {
+						$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
+						$description[$i]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $retours['id_formulaires_reponse'], $saisie, $desc['nom']);
+					}
 				}	
 				set_request($saisie, $description);
 			}
 		}
 	}
+		
 	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
 	if (!$erreur_texte and !count($retours['traitements'])) {
 		$erreur_texte = "Aucun traitement pour le formulaire $id\n";
@@ -490,3 +508,31 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 	}
 	return $contexte;
 }
+
+/**
+ * Produire un message d'erreur concaténant les messages d'erreurs
+ * par fichier.
+ * Fournir également une forme pour l'envoyer par webmestre
+ * @param array $fichiers le tableau des fichiers qui a été remplie par formidable_deplacer_fichiers_produire_vue_saisie()
+ * @return array ('message_public' => 'message', 'message_webmestre' => 'message'
+**/
+function formidable_produire_messages_erreurs_fichiers($fichiers) {
+	$message_public = '';
+	$message_webmestre = '';
+	foreach ($fichiers as $champ => $description_champ) {
+		foreach ($description_champ as $n => $description) {
+			if (isset($description['erreur'])) {
+				$message_public .= $description['erreur']."\n";
+				$message_webmestre .= "Pour le champ $champ[$n]:\n"
+					. '- Le fichier temporaire : '.$description['tmp_name']."\n"
+					. '- Ayant pour véritable nom : '.$description['nom']." \n"; 
+			}
+		}
+	}
+	if ($message_public !='') {
+		return array('message_public'=>$message_public, 'message_webmestre'=>$message_webmestre);
+	} else {
+		return '';
+	}
+}
+

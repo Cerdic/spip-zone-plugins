@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// J'ai la flemme de classer, Salvatore le fera pour moi
+	'erreur_deplacement_fichier' => 'Le fichier « @nom@ » n\'a pas pu être stocké correctement par le système. Contactez le webmestre.',  
 	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.', 
 	'pas_analyse_fichiers' => 'Formidable ne propose pas (encore) d\'analyse des fichiers envoyés',
 	'lien_expire' => 'Lien expirant dans @delai@',	

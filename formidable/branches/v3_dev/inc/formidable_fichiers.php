@@ -236,6 +236,10 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 			) {
 					$description['nom'] = $nouveau_nom;
 					$description['extension'] = pathinfo($nouveau_nom, PATHINFO_EXTENSION); 
+			} else {
+				$description['erreur'] = _T('formidable:erreur_deplacement_fichier', array('nom'=>$mon_file['name'][$i]));
+				$description['nom'] = $mon_file['name'][$i];
+				$description['tmp_name'] = $mon_file['tmp_name'][$i];
 			}
 			$description_fichiers[] = $description;//on ajoute la description au tableau global
 
