@@ -3,6 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('base/abstract_sql');
 /**
  * Chercher si des champs fichiers ont été déclarés dans le fichier formulaires/xxx.php
  * Sert de condition preliminaire pour les pipelines formulaire_charger, formulaire_verifier et formulaire_fond du plugin
@@ -108,7 +109,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 					$infos[$cle]['extension'] = pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION);
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 					//On récupère le type MIME du fichier aussi
-					$infos[$cle]['mime'] = $fichier['type'][$cle];
+					$infos[$cle]['mime'] = cvt_upload_determiner_mime($fichier['type'][$cle],$infos[$cle]['extension']);
 					$infos[$cle]['taille'] = $fichier['size'][$cle];
 					// On stocke des infos sur le formulaire
 					$infos[$cle]['form'] = $form;
@@ -135,7 +136,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 				$infos['extension'] = pathinfo($fichier['name'], PATHINFO_EXTENSION);;
 				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
 				//On récupère le type MIME du fichier aussi, ainsi que la taille
-				$infos['mime'] = $fichier['type'];
+				$infos['mime'] = cvt_upload_determiner_mime($fichier['type'], $infos['extension']);
 				$infos['taille'] = $fichier['size'];
 				// On stocke des infos sur le formulaire
 				$infos['form'] = $form;
@@ -231,6 +232,25 @@ function cvtupload_nettoyer_files_selon_erreurs($champ,$erreurs){
 	}
 }
 
+/** 
+ * Détermine un MIME lorsque les informations de PHP sont imprécises.
+ * Par exemple PHP considère qu'un fichier .tex est de MIME application/octet-stream
+ * Ce qui n'est absolument pas utilse
+ * @param string $mime_suppose
+ * @param string $extension
+ * return string $mime_trouve
+**/
+function cvt_upload_determiner_mime($mime_suppose, $extension) {
+	if (!in_array($mime_suppose, array('text/plain', '', 'application/octet-stream'))) { // si on a un mime précis, on le renvoie, tout simplement
+		return $mime_suppose;
+	}
+	$mime_spip = sql_getfetsel('mime_type','spip_types_documents','extension='.sql_quote($extension));
+	if ($mime_spip) {
+		return $mime_spip;
+	} else {
+		return $mime_suppose;
+	}
+}
 /**
  * Nettoyer un répertoire suivant l'age et le nombre de ses fichiers
  * 
