@@ -180,7 +180,6 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 			'id_formulaire = '.$id_formulaire
 		);
 		$reponses = array_map('reset', $reponses);
-
 		// Tous les noms de champs à supprimer
 		$noms = array_keys($comparaison['supprimees']);
 
@@ -192,6 +191,12 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 				sql_in('nom', $noms)
 			)
 		);
+		// On efface les vieux fichiers
+		foreach ($noms as $nom) {
+			if ($comparaison['supprimees'][$nom]['saisie'] == 'fichiers') {
+				formidable_effacer_fichiers_champ($id_formulaire, $reponses, $nom);
+			}
+		}
 	}
 }
 

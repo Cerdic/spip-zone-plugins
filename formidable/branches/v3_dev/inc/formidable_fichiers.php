@@ -256,6 +256,33 @@ function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_rep
 	}
 }
 
+/** Efface les fichiers d'un champ pour les réponses d'un formulaire
+ * @param str $id_formulaire
+ * @param array|str $reponses
+ * @param str $champ
+**/
+function formidable_effacer_fichiers_champ($id_formulaire, $reponses, $champ) {
+	if ($champ != '') { // on devrait pas arriver ici avec un $champ vide, mais prenons nos précaution
+	
+		if (!is_array($reponses)) {
+			$reponses = array($reponses);
+		}
+
+		$rep_vide = array(".",'..','.ok'); // si scandire retourne cela où inférieur, alors le dossier est vide 
+		foreach ($reponses as $rep) {
+			$chemin_reponse = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$rep";
+			$chemin_champ = $chemin_reponse."/".$champ;
+
+			if (file_exists($chemin_champ)) {
+				effacer_repertoire_temporaire($chemin_champ);
+				if (count(array_diff(scandir($chemin_reponse), $rep_vide)) == 0) { // si jamais il ne reste plus aucun fichiers pour cette réponse, on peut effacer le repertoire de celle-ci
+					effacer_repertoire_temporaire($chemin_reponse);
+				}
+			}
+
+		}
+	}	
+}
 /**
  * Générer une url d'action pour la récupération d'un fichier lié à une réponse
  * @param int|str $id_formulaire
