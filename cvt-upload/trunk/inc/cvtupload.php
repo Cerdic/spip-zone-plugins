@@ -105,7 +105,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 					$infos[$cle]['tmp_name'] = $chemin_aleatoire;
 					$infos[$cle]['name'] = $nom;
 					// On en déduit l'extension et du coup la vignette
-					$infos[$cle]['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name'][$cle]));
+					$infos[$cle]['extension'] = pathinfo($fichier['name'][$cle], PATHINFO_EXTENSION);
 					$infos[$cle]['vignette'] = $vignette_par_defaut($infos[$cle]['extension'], false, true);
 					//On récupère le type MIME du fichier aussi
 					$infos[$cle]['mime'] = $fichier['type'][$cle];
@@ -132,7 +132,7 @@ function cvtupload_deplacer_fichier($fichier, $repertoire, $form, $deplacer=true
 				$infos['tmp_name'] = $chemin_aleatoire;
 				$infos['name'] = $nom;
 				// On en déduit l'extension et du coup la vignette
-				$infos['extension'] = strtolower(preg_replace('/^.*\.([\w]+)$/i', '$1', $fichier['name']));
+				$infos['extension'] = pathinfo($fichier['name'], PATHINFO_EXTENSION);;
 				$infos['vignette'] = $vignette_par_defaut($infos['extension'], false, true);
 				//On récupère le type MIME du fichier aussi, ainsi que la taille
 				$infos['mime'] = $fichier['type'];
