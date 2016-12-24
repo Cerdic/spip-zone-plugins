@@ -288,7 +288,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
 	include_spip('inc/json');
-	$post = json_encode($_POST);
+	$post = json_encode(array("post"=>$_POST,"files"=>$_FILES));
 	spip_log($post, 'formidable_post'._LOG_INFO_IMPORTANTE);
 
 	// On peut donner soit un id soit un identifiant
