@@ -151,6 +151,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 	} else { // si on doit zipper, c'est plus complexe
 		include_spip('inc/pclzip');
 		$zip = new PclZip($chemin_final);
+		// mettre à jour le fichier dans le dossier cvtupload
 		if (!$tmp_dir = tempnam($dossier_champ, 'tmp_upload')) {
 			return '';
 		}
