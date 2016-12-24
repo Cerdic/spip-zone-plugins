@@ -377,7 +377,6 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
 
-
 	if (isset($retours['fichiers'])) {// traitement particuliers si fichiers
 		if ($erreurs_fichiers = formidable_produire_messages_erreurs_fichiers($retours['fichiers'])) { // Inspecter les fichiers pour voir s'il y a des erreurs
 			// Avertir l'utilisateur
@@ -387,7 +386,11 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 				$retours['message_erreur'] = $erreurs_fichiers['message_public'];
 			}
 			// Avertir le webmestre
-			$erreur_fichiers_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse $id_formulaires_reponse au formulaire $id";
+			if (isset($retours['id_formulaires_reponse'])){
+				$erreur_fichiers_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse ".$retours['id_formulaires_reponse']." au formulaire $id";
+			} else {
+				$erreur_fichiers_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse au formulaire $id";
+			}
 			$erreur_fichiers_texte = "Récupérez le plus rapidement possible les fichiers temporaires suivants\n";
 			$erreur_fichiers_texte .= $erreurs_fichiers['message_webmestre'];
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
