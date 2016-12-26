@@ -37,7 +37,7 @@ function abonnements_creer_ou_renouveler($id_auteur, $id_abonnements_offre, $for
 		$heures_limite = lire_config('abonnements/renouvellement_heures_limite', 48);
 		
 		// Si on trouve un abonnement de cette offre (le dernier en date)
-		// et qu'il n'est pas trop vieux !
+		// et qu'il n'est pas trop vieux, ou sans de date de fin
 		// et qu'on a pas forcé la création…
 		if (
 			!$forcer_creation
@@ -50,10 +50,13 @@ function abonnements_creer_ou_renouveler($id_auteur, $id_abonnements_offre, $for
 					'statut != "poubelle"'
 				),
 				'',
-				'date_fin desc',
+				'maj desc',
 				'0,1'
 			)
-			and $abonnement['date_fin'] >= date('Y-m-d H:i:s', strtotime('- '.$heures_limite.' hours'))
+			and (
+				$abonnement['date_fin'] >= date('Y-m-d H:i:s', strtotime('- '.$heures_limite.' hours'))
+				or $abonnement['date_fin'] == '0000-00-00 00:00:00'
+			)
 			and $id_abonnement = intval($abonnement['id_abonnement'])
 		) {
 			autoriser_exception('modifier', 'abonnement', $id_abonnement, true);
