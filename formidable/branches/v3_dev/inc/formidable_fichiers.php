@@ -45,15 +45,17 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer=false) {
 	sous_repertoire(_DIR_FICHIERS_FORMIDABLE,'',true,true);
 	$dossier = sous_repertoire(_DIR_FICHIERS_FORMIDABLE, $nom_dossier, false, true);
 	if (strpos($dossier, "$nom_dossier/") === False) {
+		spip_log("Impossible d'écrire $nom_dossier", "formidable"._LOG_ERREUR);
 		return _T('formidable:creer_dossier_formulaire_erreur_impossible_creer', 
 			array('dossier'=>_DIR_FICHIERS_FORMIDABLE . $nom_dossier)
 		);
 	}
 
-	// on créer un fichier de test, pour s'assurer 1. Qu'on puisse écrire dans le rep 2. Qu'on ne puisse pas accéder à ce fichier depuis l'exterieur.
+	// on crée un fichier de test, pour s'assurer 1. Qu'on puisse écrire dans le rep 2. Qu'on ne puisse pas accéder à ce fichier depuis l'exterieur.
 	$fichier = $dossier."test.txt"; 
 	$ecriture_ok = ecrire_fichier($fichier, "Ce fichier n'est normalement pas lisible de l'extérieur. Si tel est le cas, il y a un souci de confidentialité.",false);
 	if ($ecriture_ok == False) {
+		spip_log("Impossible d'écrire dans $nom_dossier", "formidable"._LOG_ERREUR);
 		return _T('formidable:creer_dossier_formulaire_erreur_impossible_ecrire', 
 			array('dossier'=>_DIR_FICHIERS_FORMIDABLE . $nom_dossier)
 		);
@@ -62,12 +64,13 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer=false) {
 	include_spip('inc/distant');
 	$url = url_absolue($fichier);
 	if (recuperer_page ($url)) { // si on peut récuperer la page avec un statut http 200, c'est qu'il y a un problème. recuperer_page() est obsolète en 3.1, mais recuperer_url() n'existe pas en 3.0
+		spip_log("$nom_dossier accessible en lecture depuis le web", "formidable"._LOG_CRITIQUE);
 		return _T('formidable:creer_dossier_formulaire_erreur_possible_lire_exterieur', 
 			array('dossier'=>_DIR_FICHIERS_FORMIDABLE . $nom_dossier)
 		);
 	}
-
 	// Et si tout va bien
+	spip_log("Création du dossier $nom_dossier", "formidable");
 	return '';
 }
 
@@ -147,8 +150,10 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 	}
 	if (!$zipper) { // si on ne zippe pas, c'est simple
 		if ($fichier = deplacer_fichier_upload($fichier, $chemin_final,true)) {
+			spip_log("Enregistrement du fichier $chemin_final", "formidable");
 			return $nom; 
 		} else {
+			spip_log("Pb lors de l'enregistrement du fichier $chemin_final", "formidable"._LOG_ERREUR);
 			return '';
 		}
 	} else { // si on doit zipper, c'est plus complexe
@@ -162,16 +167,19 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		@mkdir($tmp_dir);
 		$old_fichier = $fichier;
 		if (!$fichier = deplacer_fichier_upload($fichier,$tmp_dir."/".$nom_dans_zip,false)) {
+			spip_log("Pb lors de l'enregistrement du fichier $tmp_dir/$nom_dans_zip", "formidable"._LOG_ERREUR);
 			return '';
 		}
 		$zip_final = $zip -> create($fichier, 
 			PCLZIP_OPT_REMOVE_PATH, $tmp_dir,
 			PCLZIP_OPT_ADD_PATH, '');
 		if (!$zip_final){
+			spip_log("Pb lors de l'enregistrement du fichier $fichier", "formidable"._LOG_ERREUR);
 			return '';
 		} else {
 			spip_unlink($old_fichier);
 			supprimer_repertoire($tmp_dir);
+			spip_log("Enregistrement du fichier $fichier, automatiquement zippé", "formidable");
 			return $nom;
 		}
 	}
@@ -260,8 +268,10 @@ function formidable_effacer_fichiers_formulaire($id_formulaire){
 	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire";
 	if (file_exists($chemin)) {// par sécurité
 		if (supprimer_repertoire($chemin)){
+			spip_log("Effacement du dossier $chemin", "formidable");
 			return 1;
 		} else {
+			spip_log("Pb lors de l'effacement du dossier $chemin", "formidable"._LOG_ERREUR);
 			return 0;
 		}
 	}
@@ -278,8 +288,10 @@ function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_rep
 	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse";
 	if (file_exists($chemin)) {// par sécurité
 		if (supprimer_repertoire($chemin)){
+			spip_log("Effacement du dossier $chemin", "formidable");
 			return 1;
 		} else {
+			spip_log("Pb lors de l'effacement du dossier $chemin", "formidable"._LOG_ERREUR);
 			return 0;
 		}
 	}
@@ -304,12 +316,19 @@ function formidable_effacer_fichiers_champ($id_formulaire, $reponses, $champ) {
 			$chemin_champ = $chemin_reponse."/".$champ;
 
 			if (file_exists($chemin_champ)) {
-				supprimer_repertoire($chemin_champ);
+				if (supprimer_repertoire($chemin_champ)) {
+					spip_log("Effacement du dossier $chemin_champ", "formidable");
+				} else { 
+					spip_log("Pb lors de l'effacement du dossier $chemin_champ", "formidable"._LOG_ERREUR);
+				}
 				if (count(array_diff(scandir($chemin_reponse), $rep_vide)) == 0) { // si jamais il ne reste plus aucun fichiers pour cette réponse, on peut effacer le repertoire de celle-ci
-					supprimer_repertoire($chemin_reponse);
+					if (supprimer_repertoire($chemin_reponse)) {
+						spip_log("Effacement du dossier $chemin_reponse", "formidable");
+					} else {
+						spip_log("Pb lors de l'effacement du dossier $chemin_reponse", "formidable"._LOG_ERREUR);
+					}
 				}
 			}
-
 		}
 	}	
 }
@@ -333,8 +352,12 @@ function formidable_effacer_fichiers_email() {
 			$chemin_complet = "$chemin/$dossier";
 			var_dump($chemin_complet);
 			if (supprimer_repertoire($chemin_complet)) {
+					spip_log("Effacement du dossier $chemin_complet", "formidable");
 				$dossiers_effaces++;
-			}	
+			}	else {
+						spip_log("Pb lors de l'effacement du dossier $chemin_complet", "formidable"._LOG_ERREUR);
+			
+			}
 		}
 	}
 	return $dossiers_effaces;
