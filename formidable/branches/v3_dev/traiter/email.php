@@ -137,7 +137,7 @@ function traiter_email_dist($args, $retours) {
 			$notification,
 			array(
 				'id_formulaire' => $args['id_formulaire'],
-				'id_formulaires_reponse' => $retours['id_formulaires_reponse'],
+				'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse']:'',
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'traitements' => $traitements,
 				'saisies' => $saisies,
@@ -249,9 +249,17 @@ function traiter_email_dist($args, $retours) {
 		}
 
 		if ($ok) {
-			$retours['message_ok'] .= "\n"._T('formidable:traiter_email_message_ok');
+			if (isset($retours['message_ok'])) {
+				$retours['message_ok'] .= "\n"._T('formidable:traiter_email_message_ok');
+			} else {
+				$retours['message_ok'] = _T('formidable:traiter_email_message_ok');
+			}
 		} else {
-			$retours['message_erreur'] .= "\n"._T('formidable:traiter_email_message_erreur');
+			if (isset ($retours['message_erreur'])) {
+				$retours['message_erreur'] .= "\n"._T('formidable:traiter_email_message_erreur');
+			} else {
+				$retours['message_erreur'] = _T('formidable:traiter_email_message_erreur');
+			}
 		}
 	}
 
