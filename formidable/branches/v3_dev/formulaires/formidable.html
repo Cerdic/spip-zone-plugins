@@ -18,8 +18,6 @@
         [(#REM) declarer les hidden qui declencheront le service du formulaire
         parametre : url d'action ]
         #ACTION_FORMULAIRE{#ENV{action}}
-				<input type='submit' class='submit over offscreen' value='<:bouton_valider:>' />
-
         <[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
             #GENERER_SAISIES{#ENV{_saisies}}
             <[(#VAL{li}|saisie_balise_structure_formulaire)] style="display:none;">
