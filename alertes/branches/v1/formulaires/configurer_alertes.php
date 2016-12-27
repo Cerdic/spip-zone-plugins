@@ -8,23 +8,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) {
 	return;
 }
+include_spip('inc/utils');
 
 function formulaires_configurer_alertes_charger_dist() {
 	//Recuperation de la configuration préalable
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	if (!is_array($a)) {
 		$a = array();
 	}
-	//Chargement de la configuration
+	// Chargement de la configuration
 	$valeurs = array(
-		'activer_alertes' => $a['activer_alertes'] ? $a['activer_alertes'] : 'non',
-		'groupes' => $a['groupes'] ? $a['groupes'] : '',
-		'secteurs' => $a['secteurs'] ? $a['secteurs'] : '',
-		'rubriques' => $a['rubriques'] ? $a['rubriques'] : '',
-		'auteurs' => $a['auteurs'] ? $a['auteurs'] : '',
-		'mode_envoi' => $a['mode_envoi'] ? $a['mode_envoi'] : 'direct',
-		'intervalle_cron' => $a['intervalle_cron'] ? $a['intervalle_cron'] : 60,
-		'nb_mails' => $a['nb_mails'] ? $a['nb_mails'] : 30,
+		'activer_alertes' => (_request('activer_alertes')) ? _request('activer_alertes') : $a['activer_alertes'],
+		'groupes' => (_request('groupes')) ? _request('groupes') : $a['groupes'],
+		'secteurs' => (_request('secteurs')) ? _request('secteurs') : $a['secteurs'],
+		'rubriques' => (_request('rubriques')) ? _request('rubriques') : $a['rubriques'],
+		'auteurs' => (_request('auteurs')) ? _request('auteurs') : $a['auteurs'],
+		'mode_envoi' => (_request('mode_envoi')) ? _request('mode_envoi') : $a['mode_envoi'],
+		'intervalle_cron' => (_request('intervalle_cron')) ? _request('intervalle_cron') : $a['intervalle_cron'],
+		'nb_mails' => (_request('nb_mails')) ? _request('nb_mails') : $a['nb_mails'],
 	);
 
 	return $valeurs;
@@ -59,6 +61,7 @@ function formulaires_configurer_alertes_traiter_dist() {
 		'nb_mails' => _request('nb_mails'),
 	));
 	//Sauvegarde dans les meta
+	include_spip('inc/meta');
 	ecrire_meta('config_alertes', $a);
 	$res = array('message_ok' => _T('alertes:alerts_configuration_message_ok'));
 

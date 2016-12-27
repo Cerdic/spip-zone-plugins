@@ -18,7 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 function formulaires_alerte_charger_dist($objet, $id_objet) {
 	include_spip('base/abstract_sql');
 	//Recuperation de la conf' préalable
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	if (!is_array($a)) {
 		$a = array();
 	}
