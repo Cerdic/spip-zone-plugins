@@ -10,7 +10,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-
+include_spip('inc/formidable_fichiers');
 define(
 	'_RACCOURCI_MODELE_FORMIDABLE',
 	'(<(formulaire\|formidable|formidable|form)' # <modele
@@ -163,12 +163,22 @@ function formidable_optimiser_base_disparus($flux) {
 		'spip_formulaires',
 		'statut='.sql_quote('poubelle')
 	);
+	$res2 = sql_select(
+		'id_formulaire AS id',
+		'spip_formulaires',
+		'statut='.sql_quote('poubelle')
+	);//Copie pour supprimer les fichiers
 
 	// On génère la suppression
 	$flux['data'] += optimiser_sansref('spip_formulaires', 'id_formulaire', $res);
 
+	while ($reponse = sql_fetch($res2)){
+		$flux['data'] += formidable_effacer_fichiers_formulaire($reponse['id']);
+	}
 
-	# les reponses qui sont associees a un formulaire inexistant
+
+
+	// les reponses qui sont associees a un formulaire inexistant
 	$res = sql_select(
 		'R.id_formulaire AS id',
 		'spip_formulaires_reponses AS R LEFT JOIN spip_formulaires AS F ON R.id_formulaire=F.id_formulaire',
@@ -177,16 +187,22 @@ function formidable_optimiser_base_disparus($flux) {
 
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses', 'id_formulaire', $res);
 
-
 	// Les réponses qui sont à la poubelle
 	$res = sql_select(
-		'id_formulaires_reponse AS id',
+		'id_formulaires_reponse AS id, id_formulaire AS form',
 		'spip_formulaires_reponses',
 		sql_in('statut', array('refuse', 'poubelle'))
-	);
-
+	);	
+	$res2 = sql_select(
+		'id_formulaires_reponse AS id, id_formulaire AS form',
+		'spip_formulaires_reponses',
+		sql_in('statut', array('refuse', 'poubelle'))
+	);	//Copie pour la suppression des fichiers des réponses, c'est idiot de pas pouvoir faire une seule requete
 	// On génère la suppression
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses', 'id_formulaires_reponse', $res);
+	while ($reponse = sql_fetch($res2)){
+		$flux['data'] += formidable_effacer_fichiers_reponse($reponse['form'], $reponse['id']);
+	}
 
 
 	// les champs des reponses associes a une reponse inexistante
@@ -220,7 +236,6 @@ function formidable_optimiser_base_disparus($flux) {
 			sql_update('spip_formulaires_reponses', array('ip' => 'MD5(ip)'), $critere_cnil);
 		}
 	}
-
 	return $flux;
 }
 

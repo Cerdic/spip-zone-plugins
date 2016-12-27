@@ -248,17 +248,39 @@ function formidable_deplacer_fichiers_produire_vue_saisie($saisie, $options) {
 	}
 	return $description_fichiers;
 }
+/**
+ * Efface les fichiers d'un formulaire
+ * @param $str $id_formulaire
+ * @return int 1 ou 0 selon que l'on a effacé ou non un répertoire
+**/
+function formidable_effacer_fichiers_formulaire($id_formulaire){
+	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire";
+	if (file_exists($chemin)) {// par sécurité
+		if (supprimer_repertoire($chemin)){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	return 0;
+}
 
 /**
  * efface les fichiers d'une réponse formidable
  * @param $str $id_formulaire
  * @param $str $id_formulaires_reponse
+ * @return int 1 ou 0 selon que l'on a effacé ou non un répertoire
 **/
 function formidable_effacer_fichiers_reponse($id_formulaire, $id_formulaires_reponse){
 	$chemin = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire/reponse_$id_formulaires_reponse";
 	if (file_exists($chemin)) {// par sécurité
-		supprimer_repertoire($chemin);
+		if (supprimer_repertoire($chemin)){
+			return 1;
+		} else {
+			return 0;
+		}
 	}
+	return 0;
 }
 
 /** Efface les fichiers d'un champ pour les réponses d'un formulaire
