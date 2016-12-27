@@ -1,7 +1,7 @@
 <div class="onglets_simple clearfix">
 	<ul>
-		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,carte}|lien_ou_expose{Carte,#ENV{afficher,carte}|=={carte},ajax})</li>]
-		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,liste}|lien_ou_expose{Liste,#ENV{afficher,carte}|=={liste},ajax})</li>]
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,carte}|lien_ou_expose{<:gis:onglet_carte:>,#ENV{afficher,carte}|=={carte},ajax})</li>]
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,liste}|lien_ou_expose{<:gis:onglet_liste:>,#ENV{afficher,carte}|=={liste},ajax})</li>]
 	</ul>
 	[(#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax})]
 </div>

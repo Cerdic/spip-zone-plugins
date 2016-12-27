@@ -135,6 +135,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_gis' => 'Ajouter ce point',
 	'lon' => 'Longitude',
 
+	// O
+	'onglet_carte' => 'Carte',
+	'onglet_liste' => 'Liste',
+
 	// P
 	'placeholder_geocoder' => 'Une adresse, une ville, un pays, un lieu touristique...',
 
