@@ -225,7 +225,7 @@ function formidable_optimiser_base_disparus($flux) {
 }
 
 /**
- * S'assurer que le traitement email ait lieu après le traitement enregistremnt
+ * S'assurer que le traitement email ait lieu après le traitement enregistrement
  * 
  * @pipeline formidable_traitements
  * @param array $flux 
