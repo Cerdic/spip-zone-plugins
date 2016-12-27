@@ -1,7 +1,7 @@
 <paquet
 	prefix="facteur"
 	categorie="communication"
-	version="3.4.5"
+	version="3.4.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/facteur-32.png"
@@ -13,6 +13,7 @@
 	<!-- Il distribue votre courrier -->
 
 	<auteur>Collectif SPIP</auteur>
+	<credit lien="https://github.com/PHPMailer/PHPMailer">PHPMailer</credit>
 
 	<pipeline nom="facteur_pre_envoi" action="" />
 	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
