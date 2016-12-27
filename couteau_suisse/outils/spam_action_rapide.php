@@ -4,17 +4,18 @@
 
 include_spip('inc/actions');
 
-function spam_filtre_de_test($texte) {
+function spam_filtre_de_test($texte, $pourquoi=false) {
 	if (!strlen($texte)) return '';
 	$spam = cs_lire_data_outil('spam');
-	$test = false;
-	return cs_test_spam($spam, $texte, $test)?'ko':'ok';
+	$test = false; 
+	$res = cs_test_spam($spam, $texte, $test, $pourquoi);
+	return $res?($pourquoi?$res:'ko'):'ok';
 }
 
-function spam_filtre_de_test_array($textes) {
+function spam_filtre_de_test_array($textes, $pourquoi=false) {
 	$spam = cs_lire_data_outil('spam');
 	$test = false;
-	foreach($textes as $texte) if(cs_test_spam($spam, $texte, $test)) return 'ko';
+	foreach($textes as $texte) if(cs_test_spam($spam, $texte, $test, $pourquoi)) return 'ko';
 	return 'ok';
 }
 

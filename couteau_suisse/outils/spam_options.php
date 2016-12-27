@@ -48,21 +48,21 @@ if ( count($_POST)
 }
 unset($ip_);
 
-function cs_test_spam(&$spam, &$texte, &$test) {
+function cs_test_spam(&$spam, &$texte, &$test, $pourquoi=false) {
 	foreach($spam[0] as $m) 
 		if($test |= strpos($texte, $m)!==false) 
-			{ spip_log("Strpos. '$m' present dans : $texte", "_cs_spams"); return true; }
+			{ if(!$pourquoi) { spip_log("Strpos. '$m' present dans : $texte", "_cs_spams"); return true; } else return $m; }
 	if($spam[1]) 
 		if($test = preg_match($spam[1], $texte))
-			{ spip_log("Match. $spam[1] positif sur : $texte", "_cs_spams"); return true; }
+			{ if(!$pourquoi) { spip_log("Match. $spam[1] positif sur : $texte", "_cs_spams"); return true; } else return "preg_match #1"; }
 	if($spam[2]) {
 		include_spip('inc/charsets');
 		if($test = preg_match($spam[2], charset2unicode($texte)))
-			{ spip_log("UMatch. $spam[2] positif sur : $texte", "_cs_spams"); return true; }
+			{ if(!$pourquoi) { spip_log("UMatch. $spam[2] positif sur : $texte", "_cs_spams"); return true; } else return "preg_match #2"; }
 	}
 	if($spam[4]) foreach($spam[4] as $m) 
 		if($test = preg_match($m, $texte)) 
-			{ spip_log("Match. $m positif sur : $texte", "_cs_spams"); return true; }
+			{ if(!$pourquoi) { spip_log("Match. $m positif sur : $texte", "_cs_spams"); return true; } else return $m; }
 	return $test;
 }
 
