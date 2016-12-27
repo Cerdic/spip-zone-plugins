@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip("inc/utils");
 include_spip('inc/formidable_fichiers');
 function traiter_email_dist($args, $retours) {
+	if (!isset($retours['fichier'])) {
+		$retours['fichiers'] = array();
+		$ajouter_fichier = True;
+	} else {
+		$ajouter_fichier = False;
+	}
 	$timestamp = time();
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
@@ -83,6 +89,9 @@ function traiter_email_dist($args, $retours) {
 		foreach ($champs as $champ) {
 			if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
 				$valeurs[$champ] = traiter_email_fichiers($saisies_fichiers[$champ], $champ, $formulaire['id_formulaire'], $retours, $timestamp);
+				if ($ajouter_fichier) {
+					$retours['fichiers'][$champ] = $valeurs[$champ];
+				}
 			} else {
 				$valeurs[$champ] = _request($champ);
 			}
@@ -356,7 +365,7 @@ function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timest
 			$vue = ajouter_action_recuperer_fichier_par_email($retours['fichiers'][$nom], $nom, $options);
 		}
 	} else { // si les réponses n'ont pas été enregistrées
-			$vue = formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'timestamp'=>$timestamp));
+		$vue = formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'timestamp'=>$timestamp));
 			$options = array(
 				'id_formulaire' => $id_formulaire, 
 				'timestamp' => $timestamp	

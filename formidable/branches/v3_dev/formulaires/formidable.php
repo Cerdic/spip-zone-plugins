@@ -376,7 +376,6 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	} else {
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
-
 	if (isset($retours['fichiers'])) {// traitement particuliers si fichiers
 		if ($erreurs_fichiers = formidable_produire_messages_erreurs_fichiers($retours['fichiers'])) { // Inspecter les fichiers pour voir s'il y a des erreurs
 			// Avertir l'utilisateur
