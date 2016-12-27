@@ -214,6 +214,8 @@ function formidable_optimiser_base_disparus($flux) {
 
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses_champs', 'id_formulaires_reponse', $res);
 
+	// Les fichiers des réponses enregistrées par email
+	$flux['data'] += formidable_effacer_fichiers_email();
 	//
 	// CNIL -- Informatique et libertes
 	//

@@ -17,6 +17,9 @@ if (!defined('_DIR_FICHIERS_FORMIDABLE')) {
 if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
 	define ('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL',24*3600); // Combien de temps un lien par email dans fichier est valable (en seconde)
 }
+if (!defined('_FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL')) {
+	define ('_FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL', _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL); // Au bout de combien de temps efface-t-on les fichiers enregistrés lorsque le traitement est uniquement email? 
+}
 /** 
  * Créer, si le formulaire contient des saisies de type fichiers, un dossier pour stocker les fichiers.
  * Vérifier que ce dossier soit accessible en écriture.
@@ -310,6 +313,33 @@ function formidable_effacer_fichiers_champ($id_formulaire, $reponses, $champ) {
 		}
 	}	
 }
+
+/** Efface les fichiers des réponses par email
+ * lorsque la constante _FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL est différent de 0 et que le temps est écoulé
+ * @return int nombre de dossiers effacés
+ **/
+function formidable_effacer_fichiers_email() {
+	if (_FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL == 0) {
+		return 0;
+	}
+	$dossiers_effaces = 0;
+	$chemin = _DIR_FICHIERS_FORMIDABLE."timestamp";
+	$timestamp = time();
+	foreach (scandir($chemin) as $dossier){
+		if (strval(intval($dossier))!=$dossier) { // on ne traite que les dossiers qui ont comme nom un entier
+			continue;
+		}
+		if ($timestamp - intval($dossier) >= _FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL) {
+			$chemin_complet = "$chemin/$dossier";
+			var_dump($chemin_complet);
+			if (supprimer_repertoire($chemin_complet)) {
+				$dossiers_effaces++;
+			}	
+		}
+	}
+	return $dossiers_effaces;
+}
+
 /**
  * Générer une url d'action pour la récupération d'un fichier lié à une réponse
  * @param int|str $id_formulaire
