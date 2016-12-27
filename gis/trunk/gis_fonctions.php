@@ -92,7 +92,7 @@ function distance($from, $to, $miles = false) {
  * @return string
  * 		Retourne une chaine composée d'un nombre arrondi et d'une unité de mesure de distance
  **/
-function distance_en_metres($distance, $precision=2, $format_entree='km') {
+function distance_en_metres($distance, $precision = 2, $format_entree = 'km') {
 	if ($distance) {
 		// On passe toujours tout en kilomètres pour uniformiser
 		if ($format_entree == 'm') {
@@ -102,8 +102,7 @@ function distance_en_metres($distance, $precision=2, $format_entree='km') {
 		// Si c'est supérieur à 1, on reste en kilomètres
 		if ($distance > 1) {
 			$unite = 'km';
-		}
-		elseif (($distance = $distance*1000) > 1) {
+		} elseif (($distance = $distance*1000) > 1) {
 			$unite = 'm';
 		}
 
@@ -415,12 +414,12 @@ function gis_modele_url_json_env($env) {
 /**
  * Transforme un paramètre d'entrée en tableau
  * s'il n'en est pas déjà un.
- * 
+ *
  * Permet d'utiliser dans l'appel au modèle de carte gis
  * depuis un texte d'article des paramètres tabulaires,
  * tel que des identifiants de documents de tracés kml,
  * tel que `<carte_gis|kml=10,11,12>`
- * 
+ *
  * @example `#ENV{kml}|gis_param_to_array`
  *
  * @param string|int|array $param
