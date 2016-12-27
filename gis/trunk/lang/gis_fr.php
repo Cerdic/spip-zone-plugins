@@ -135,6 +135,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_ajouter_gis' => 'Ajouter ce point',
 	'lon' => 'Longitude',
 
+	// M
+	'message_limite_atteinte' => 'Vous disposez de plus de points géolocalisés que la limite d\'affichage actuelle.<br /> Si vous souhaitez tous les afficher, suivez <a href="@url@">ce lien</a>.',
+
 	// O
 	'onglet_carte' => 'Carte',
 	'onglet_liste' => 'Liste',
@@ -152,6 +155,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_creer_point' => 'Lier un nouveau point',
 	'titre_bloc_points_lies' => 'Points liés',
 	'titre_bloc_rechercher_point' => 'Rechercher un point',
+	'titre_limite_atteinte' => 'Limite du nombre de points affichés atteinte (@limite@)',
 	'titre_nombre_utilisation' => 'Une utilisation',
 	'titre_nombre_utilisations' => '@nb@ utilisations',
 	'titre_nouveau_point' => 'Nouveau point',
