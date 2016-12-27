@@ -401,7 +401,7 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 				'fichier' => $valeur['nom'],
 				'saisie' => $nom_saisie
 			));
-		} else { //si ni timestamp, ni réponse enregistré -> on passe notre chemin
+		} else { //si ni timestamp, ni réponse enregistrée -> on passe notre chemin
 			continue;
 		}
 
