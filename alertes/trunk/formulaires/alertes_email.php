@@ -13,7 +13,8 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 	$valeurs = array();
 	$id_auteur = intval($id_auteur);
 	//Récuperation de la configuration de base
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	//A-t-on Accès restreint ?
 	$ar = filtre_info_plugin_dist('accesrestreint', 'est_actif');
 	if ($ar == true) {
@@ -76,7 +77,8 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 }
 
 function formulaires_alertes_email_traiter_dist($id_auteur) {
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	$now = date('Y-m-d h:i:s');
 	if (is_array($a)) {
 		//Supprimer les anciennes configuration d'abonnements. Tous d'un coup, brutal mais efficace et comme ça on n'a que des insert à faire.

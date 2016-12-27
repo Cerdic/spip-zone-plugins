@@ -15,17 +15,20 @@ function genie_alertes_dist($time) {
 	include_spip('base/abstract_sql');
 	$now = date('Y-m-d H:i:s');
 	//Récupération de la configuration
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	//Est-ce que Accès restreint est activé ?
-	$plugins = @unserialize($GLOBALS['meta']['plugin']);
+	$plugins = lire_config('plugin');
 	if (is_array($plugins['ACCESRESTREINT'])) {
 		$acces_restreint = true;
 	} else {
 		$acces_restreint = false;
 	}
+	$groupby = array();
+	$orderby = array();
 	$limit = "0, " . intval($a['nb_mails']);
 	$nb_max = sql_countsel("spip_alertes_cron",
-		"date_pour_envoi <= '" . $now . "'"); //Nombres total d'alerte à traité, donc de mail à envoyer.
+		"date_pour_envoi <= '" . $now . "'"); //Nombres total d'alerte à traiter, donc de mail à envoyer.
 	//Si on a plus d'alertes prevues que d'email autorisé à envoyer, il faudra poursuivre la tâche.
 	if ($nb_max > intval($a['nb_mails'])) {
 		$time = -intval($a['nb_mails']); //Si j'ai bien compris, temps en seconde avant de relancer la tâche non-terminée.
@@ -51,10 +54,8 @@ function genie_alertes_dist($time) {
 					//Evidemment, il faut l'email du membre.
 					$email = $aut['email'];
 					//On va quand même vérifier que l'article existe encore/est en etat publié
-					$verif = sql_select('statut', 'spip_articles', 'id_article = ' . intval($id_article));
-					while ($art = sql_fetch($verif)) {
-						$statut = $art['statut'];
-					}
+					include_spip('base/objets');
+					$statut = objet_test_si_publie('article', $id_article);
 					//Si accès restreint : vérifions que l'article n'est pas dans une zone limité pour l'auteur;
 					if ($acces_restreint == true) {
 						$article_accessible = false; //On repasse à false par défaut
@@ -77,7 +78,7 @@ function genie_alertes_dist($time) {
 							}
 						}
 					}
-					if (($email) && ($statut == 'publie') && ($article_accessible == true)) {
+					if (($email) && ($statut == true) && ($article_accessible == true)) {
 						spip_log('On build le mail pour ' . $id_article, 'alertes' . _LOG_ERREUR);
 						//On build le mail à partir de templates
 						$header_email = recuperer_fond("alertes/header-email-alerte",
@@ -116,7 +117,7 @@ function genie_alertes_dist($time) {
 						spip_log('Pas d\'email pour ' . $id_auteur . ' ou' . $id_article . 'non publie ou article inaccessible',
 							'alertes' . _LOG_ERREUR);
 						//Auteur sans email ou article non-publié/inexistant/restreint
-						if ($statut != 'publie') {
+						if ($statut != true) {
 							//Article non publie, l'alerte n'a pas lieu d'être nulle part
 							$del = sql_delete("spip_alertes_cron",
 								"objet = 'article' AND id_objet = " . intval($id_article));

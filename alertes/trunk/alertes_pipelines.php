@@ -13,6 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 
 /*** Appel des CSS ***/
 function alertes_insert_head_css($flux) {
+	include_spip('inc/utils');
+	include_spip('inc/filtres');
 	$css = find_in_path("css/alertes.css");
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='" . direction_css($css) . "' />\n";
 
@@ -22,7 +24,8 @@ function alertes_insert_head_css($flux) {
 /*** Tache CRON pour l'envoie différé des alertes ***/
 function alertes_taches_generales_cron($taches_generales) {
 	//Récuperation de la configuration
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	if (is_array($a) AND intval($a['intervalle_cron']) > 1) {
 		$taches_generales['alertes'] = 60*intval($a['intervalle_cron']); // toutes les X minutes
 	}
@@ -30,15 +33,23 @@ function alertes_taches_generales_cron($taches_generales) {
 	return $taches_generales;
 }
 
-/*** Alertes : envoie d'email lors de la publication d'un article ***/
+/**
+ * Alertes : envoie d'email lors de la publication d'un article
+ * Attention à son utilisation avec le plugin Notifications qui utilise le pipeline notifications_destinataires.
+ *
+ * @param array $flux
+ *
+ * @return array
+ */
 function alertes_notifications_destinataires($flux) {
 	$quoi = $flux['args']['quoi'];
 	$options = $flux['args']['options'];
 	$date_pour_envoi = $options['date'];
 	//Récuperation de la configuration
-	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	include_spip('inc/config');
+	$a = lire_config('config_alertes');
 	//Est-ce que Accès restreint est activé ?
-	$plugins = @unserialize($GLOBALS['meta']['plugin']);
+	$plugins = lire_config('plugin');
 	if (is_array($plugins['ACCESRESTREINT'])) {
 		$acces_restreint = true;
 	} else {
@@ -176,7 +187,7 @@ function alertes_notifications_destinataires($flux) {
 			//Rubriques abonnables
 			if ($a['rubriques']) {
 				$rubriques = sql_select('id_rubrique', 'spip_articles',
-					'id_article = ' . $id_article . '  AND id_rubrique IN(' . $a['rubriques'] . ')');
+					'id_article = ' . $id_article . ' AND id_rubrique IN(' . $a['rubriques'] . ')');
 				while ($rubrique = sql_fetch($rubriques)) {
 					//Qui est abonné à cette rubrique ?
 					$abonnes = sql_select('id_auteur', 'spip_alertes',
@@ -295,17 +306,18 @@ function alertes_notifications_destinataires($flux) {
 			}
 			//Fin auteurs abonnables
 
-			//Maintenant, on gére l'envoi
+			// Maintenant, on gére l'envoi
 			if (is_array($emails) AND sizeof($emails) > 0) {
+				include_spip('inc/utils');
 				//Mode CRON ou direct ? Mode CRON d'office si la configuration autorise les articles publié post-daté.
 				if (($a['mode_envoi'] == 'cron') || ($GLOBALS['meta']['post_dates'] == 'oui')) {
-					//Mode CRON : on enregistre tout ça dans la table d'envois CRON dediée
+					// Mode CRON : on enregistre tout ça dans la table d'envois CRON dediée
 					foreach ($emails as $id_auteur => $email) {
 						$ins_cron = sql_insertq('spip_alertes_cron', array(
 							'id_auteur' => $id_auteur,
 							'id_objet' => $id_article,
 							'objet' => 'article',
-							'date_pour_envoi' => $date_pour_envoi
+							'date_pour_envoi' => $date_pour_envoi,
 						));
 					}
 
@@ -325,7 +337,7 @@ function alertes_notifications_destinataires($flux) {
 							array('id_article' => $id_article, 'id_auteur' => $id_auteur));
 						$sujet = recuperer_fond("alertes/sujet-email-alerte", array(
 							'id_article' => $id_article,
-							'id_auteur' => $id_auteur
+							'id_auteur' => $id_auteur,
 						));  // Sujet du mail aussi en template (dangereux mais pratique si on veut le customiser). Doit renvoyer du texte brut
 						//On n'envoie que si on a un contenu (présumé dans le corps du mail
 						if ($corps_email) {
@@ -334,7 +346,7 @@ function alertes_notifications_destinataires($flux) {
 							$texte = Facteur::html2text($html); //Version  texte
 							$corps = array(
 								'html' => $html,
-								'texte' => $texte
+								'texte' => $texte,
 							);
 							if ($ok = $envoyer_mail($email, $sujet, $corps)) {
 								//Email envoyé. On log.

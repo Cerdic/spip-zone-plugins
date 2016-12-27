@@ -44,6 +44,7 @@ function alertes_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table("spip_alertes");
 	sql_drop_table("spip_alertes_cron");
+	effacer_meta('config_alertes');
 	effacer_meta($nom_meta_base_version);
 }
 
