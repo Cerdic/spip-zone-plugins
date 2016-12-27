@@ -138,6 +138,19 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		$dossier = sous_repertoire(_DIR_FICHIERS_FORMIDABLE, 'timestamp', false, true);
 		$dossier = sous_repertoire($dossier, $options['timestamp'],false,true);
 		$dossier_champ = sous_repertoire($dossier,$champ,false,true);
+		// on crée un fichier de test, pour s'assurer 1. Qu'on puisse écrire dans le rep 2. Qu'on ne puisse pas accéder à ce fichier depuis l'exterieur.
+		$fichier_test = $dossier."test.txt"; 
+		$ecriture_ok = ecrire_fichier($fichier_test, "Ce fichier n'est normalement pas lisible de l'extérieur. Si tel est le cas, il y a un souci de confidentialité.", false);
+		if ($ecriture_ok == False) {
+			spip_log("Impossible d'écrire dans $dossier", "formidable"._LOG_ERREUR);
+			return '';
+		}
+		include_spip('inc/distant');
+		$url = url_absolue($fichier_test);
+		if (recuperer_page ($url)) { // si on peut récuperer la page avec un statut http 200, c'est qu'il y a un problème. recuperer_page() est obsolète en 3.1, mais recuperer_url() n'existe pas en 3.0
+			spip_log("$dossier accessible en lecture depuis le web", "formidable"._LOG_CRITIQUE);
+			return '';
+		}
 	}
 	// S'assurer qu'il n'y a pas un fichier du même nom à destination
 	$chemin_final = $dossier_champ.$nom;
