@@ -4,9 +4,11 @@
  * Distribué sous licence GPL
  *
  */
- 
+
 /*** Installation et desinstallation ***/
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Creation/Upgrade des tables
@@ -14,19 +16,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function alertes_upgrade($nom_meta_base_version,$version_cible){
+function alertes_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('inc/meta');
 	$current_version = "0.0.0";
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		if (version_compare($current_version,'1.0.1','<')){
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
+		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version]) != $version_cible)
+	) {
+		if (version_compare($current_version, '1.0.1', '<')) {
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			include_spip('base/serial');
-			creer_ou_upgrader_table("spip_alertes",$GLOBALS['tables_principales']['spip_alertes'],true);
-			creer_ou_upgrader_table("spip_alertes_cron",$GLOBALS['tables_principales']['spip_alertes_cron'],true);
+			creer_ou_upgrader_table("spip_alertes", $GLOBALS['tables_principales']['spip_alertes'], true);
+			creer_ou_upgrader_table("spip_alertes_cron", $GLOBALS['tables_principales']['spip_alertes_cron'], true);
 
-			ecrire_meta($nom_meta_base_version,$current_version="1.0.1",'non');
+			ecrire_meta($nom_meta_base_version, $current_version = "1.0.1", 'non');
 		}
 	}
 }
@@ -44,4 +47,3 @@ function alertes_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-?>

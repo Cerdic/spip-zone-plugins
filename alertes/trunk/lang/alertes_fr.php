@@ -1,13 +1,15 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'abo_authors' => 'Cochez les auteurs auxquels vous souhaitez vous abonner',
 	'abo_keywords' => 'Cochez les mots-cl&eacute;s auxquels vous souhaitez vous abonner',
 	'abo_sectors' => 'Cochez les secteurs auxquels vous souhaitez vous abonner',
-	'abo_topics' => 'Cochez les rubriques auxquelles vous souhaitez vous abonner',	
+	'abo_topics' => 'Cochez les rubriques auxquelles vous souhaitez vous abonner',
 	'add' => 'Ajouter',
 	'add_to' => 'Ajouter &agrave; mes alertes',
 	'alerts_activation' => 'Activer les alertes par email ?',
@@ -20,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'global_configuration' => 'Configuration des m&eacute;canismes d\'alertes',
 	// I
 	'intervalle_cron' => 'Intervalle de passage du pseudo-CRON SPIP (en minutes)',
-	'id_authors' =>' Identifiants des auteurs abonnables',
+	'id_authors' => ' Identifiants des auteurs abonnables',
 	'id_keyword_groups' => 'Identifiants des groupes de mots-clés abonnables',
 	'id_sectors' => 'Identifiants des secteurs abonnables',
 	'id_topics' => 'Identifiants des rubriques abonnables',
@@ -44,6 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Y
 	'yes' => 'Oui',
 	'your_alertes_message_ok' => 'Vos alertes emails ont &eacute;t&eacute; mises &agrave; jour.',
-	
+
 );
-?>
+

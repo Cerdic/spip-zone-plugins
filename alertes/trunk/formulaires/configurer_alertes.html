@@ -21,7 +21,7 @@
 						<div class="choix">
 							<input type='radio' class="radio" name='activer_alertes' value='oui' id='activer_alertes_oui'[ (#ENV{activer_alertes}|=={oui}|oui)checked="checked"] />
 							<label for='activer_alertes_oui'><:alertes:yes:></label>
-						</div>					
+						</div>
 					</li>
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{mode_envoi}}
 					<li class="editer_mode_envoi obligatoire[ (#GET{erreurs}|oui)erreur]">
@@ -33,7 +33,7 @@
 						<div class="choix">
 							<input type='radio' class="radio" name='mode_envoi' value='cron' id='mode_envoi_cron'[ (#ENV{mode_envoi}|=={cron}|oui)checked="checked"] />
 							<label for='mode_envoi_cron'><:alertes:send_by_cron:></label>
-						</div>					
+						</div>
 					</li>
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{intervalle_cron}}
 					<li class="editer_intervalle_cron obligatoire[ (#GET{erreurs}|oui)erreur]">

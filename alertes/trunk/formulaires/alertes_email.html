@@ -31,8 +31,8 @@
 							<div class="choix">
 								<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
 								<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
-							</div>									
-							</BOUCLE_si_restreint2>									
+							</div>
+							</BOUCLE_si_restreint2>
 					</BOUCLE_si_acces_restreint_sec>
 					[(#REM) Pas d'accès restreint, on propose la rubrique]
 					<div class="choix">
@@ -62,8 +62,8 @@
 							<div class="choix">
 								<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
 								<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
-							</div>								
-							</BOUCLE_si_restreint1>						
+							</div>
+							</BOUCLE_si_restreint1>
 						</BOUCLE_si_acces_restreint_rub>
 						[(#REM) Pas d'accès restreint, on propose la rubrique]
 						<div class="choix">
@@ -99,7 +99,7 @@
 					</ul>
 				</fieldset>
 			</li>
-			</B_mots>			
+			</B_mots>
 			</BOUCLE_groupes_mots>
 		</B_groupes_mots>
 		

@@ -7,12 +7,11 @@
  */
 
 
-function action_supprimer_alerte_dist(){
-	$securiser_action = charger_fonction('securiser_action','inc');
+function action_supprimer_alerte_dist() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_alerte = $securiser_action();
 
 	include_spip('inc/alerte');
-	alertes_supprimer(array('id_alerte'=>$id_alerte));
+	alertes_supprimer(array('id_alerte' => $id_alerte));
 }
 
-?>
