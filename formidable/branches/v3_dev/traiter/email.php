@@ -334,7 +334,7 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
  * C'est à dire:
  *	- S'il y a eu un enregistement avant, ne déplace pas le fichier
  *	- S'il n'y a pas eu d'enregistrement avant, déplace le fichier dans un dossier nommé en fonction du timestamp du traitement
- *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement '_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL' 
+ *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL (sauf si cette constantes est définie à 0)
  * @param array $saisie la description de la saisie
  * @param string $nom le nom de la saisie
  * @param int|string $id_formulaire le formulaire concerné
@@ -383,7 +383,9 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 
 	$pass = secret_du_site();
 	$action = "formidable_recuperer_fichier_par_email"; 
-	$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
+	if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
+		$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
+	}
 	foreach ($saisie_a_modifier as $i => $valeur){
 		if (isset($options['id_formulaires_reponse'])) {//si reponses enregistrées
 			$arg = serialize(array(
@@ -406,7 +408,11 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 		$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
 		$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
 		$saisie_a_modifier[$i]['url'] = $url;
-		$saisie_a_modifier[$i]['nom'] = "<strong>["._T("formidable:lien_expire", array("delai"=>$delai))."]</strong> ".$valeur['nom'];
+		if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
+			$saisie_a_modifier[$i]['nom'] = "<strong>["._T("formidable:lien_expire", array("delai"=>$delai))."]</strong> ".$valeur['nom'];
+		} else {
+			$saisie_a_modifier[$i]['nom'] = $valeur['nom'];
+		}
 		$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
 	}
 	return $saisie_a_modifier;

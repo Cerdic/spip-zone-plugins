@@ -40,7 +40,7 @@ function action_formidable_recuperer_fichier_par_email() {
 		if (@file_exists($chemin_fichier)){
 			$f = $arg['fichier'];
 			$date = filemtime($chemin_fichier);
-			if ($date +  _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL < time()) {// vérifier que le fichier n'est pas trop vieux 
+			if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0 and $date +  _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL < time()) {// vérifier que le fichier n'est pas trop vieux 
 				include_spip('inc/minipres');
 				echo minipres(_T("formidable:erreur_fichier_expire"));
 			} else {
