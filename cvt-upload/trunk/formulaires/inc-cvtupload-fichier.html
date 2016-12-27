@@ -1,6 +1,11 @@
 <span class="fichier_precedent">
 	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
-	[(#ENV{vignette}|image_reduire{48})]
-	[<a href="(#ENV{url}|attribut_html)"[ (#HTML5|oui)download="download"]>]#ENV{name}[(#ENV{url}|oui)</a>]
-	<button type="submit" class="submit" name="cvtupload_supprimer_fichier[(#ENV{crochets})]">Supprimer</button>
+	<div class="description">
+		[(#ENV{vignette}|image_reduire{48})]
+		[<a href="(#ENV{url}|attribut_html)"[ (#HTML5|oui)download="download"]>]#ENV{name}[(#ENV{url}|oui)</a>]
+	</div>
+	<div class="choix">
+		<input type="checkbox" class="checkbox" id="cvtupload_supprimer_fichier[(#ENV{crochets})]" name="cvtupload_supprimer_fichier[(#ENV{crochets})]" />
+		<label for="cvtupload_supprimer_fichier[(#ENV{crochets})]"><:cvtupload:supprimer_fichier:></label>
+	</div>
 </span>

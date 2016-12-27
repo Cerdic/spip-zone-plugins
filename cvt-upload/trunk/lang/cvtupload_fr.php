@@ -16,5 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_fichiers_nb_fichiers_label' => 'Nombre maximum de fichiers à envoyer',
 	'saisie_fichiers_plusieur_label' => 'Fichier n° @nb@',
 	'saisie_fichiers_titre' => 'Un ou plusieurs fichiers',
-	'saisie_fichiers_unseul_label' => 'Fichier unique'
+	'saisie_fichiers_unseul_label' => 'Fichier unique',  
+	'supprimer_fichier' => 'Supprimer ce fichier'
 );
