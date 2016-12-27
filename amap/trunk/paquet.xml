@@ -1,7 +1,7 @@
 <paquet
 	prefix="amap"
 	categorie="divers"
-	version="3.1.4"
+	version="3.1.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/amap-64.png"
@@ -27,7 +27,7 @@
 
 	<necessite nom="agenda" compatibilite="[3.11.2;[" />
 	<necessite nom="cextras" compatibilite="[3.2.3;[" />
-	<necessite nom="facteur" compatibilite="[2.3.0;[" />
+	<necessite nom="facteur" compatibilite="[3.4.6;[" />
 	<necessite nom="saisies" compatibilite="[1.28.1;[" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.4;[" />
 	<necessite nom="verifier" compatibilite="[1.0.1;[" />
