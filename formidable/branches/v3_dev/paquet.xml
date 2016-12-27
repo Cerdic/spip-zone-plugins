@@ -38,7 +38,7 @@
 	<necessite nom="saisies" compatibilite="[2.15.2;[" />
 	<necessite nom="verifier" compatibilite="[1.3.7;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
-	<necessite nom="facteur" compatibilite="[3.0.3;[" />
+	<necessite nom="facteur" compatibilite="[3.4.6;[" />
 
 	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
 	<utilise nom="cvtupload" compatibilite="[1.9.0;[" />
