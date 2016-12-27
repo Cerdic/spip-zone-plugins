@@ -17,6 +17,9 @@
 		<div class="nettoyeur"></div>
 	]
 	
+	[(#REM) Informations sur le client ]
+	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
+	
 	<BOUCLE_test_echeances(CONDITION){si #ECHEANCES}>
 	<h3><:commandes:commande_echeances_paiements_previsions:></h3>
 	<B_echeances_multiples>
@@ -43,9 +46,6 @@
 	[(#PLUGIN{bank}|oui)
 	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
 	]
-
-	[(#REM) Informations sur le client ]
-	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
 
 </div>
 </BOUCLE_afficher_contenu>
