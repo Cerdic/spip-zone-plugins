@@ -17,11 +17,13 @@
 			<:gis:message_limite_atteinte{url=#GET{url}}:>
 		</p>
 		[(#BOITE_FERMER)]
-	]</B_limite>
+	]
+	[(#TOTAL_BOUCLE|>{500}|et{#ENV{limite,500}|>{500}}|?{#SET{cluster,oui},''})]</B_limite>
 	[(#INCLURE{fond=modeles/carte_gis,
 		id_carte_gis=_all,
 		objets=tous_avec_liens_espace_prive,
 		recherche,
+		cluster=#GET{cluster,non},
 		limite}
 	)]
 </BOUCLE_si_carte>
