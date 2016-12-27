@@ -363,7 +363,6 @@ function formidable_effacer_fichiers_email() {
 		}
 		if ($timestamp - intval($dossier) >= _FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL) {
 			$chemin_complet = "$chemin/$dossier";
-			var_dump($chemin_complet);
 			if (supprimer_repertoire($chemin_complet)) {
 					spip_log("Effacement du dossier $chemin_complet", "formidable");
 				$dossiers_effaces++;
