@@ -13,6 +13,12 @@ options:
         image_web: '<:verifier:option_fichiers_mime_image_web_label:>'
         specifique: '<:verifier:option_fichiers_mime_specifique_label:>'
       defaut: 'tout_mime'
+  -
+    saisie: 'type_mime'
+    options:
+      nom: 'mime_specifique'
+      label: '<:verifier:option_fichiers_type_mime_label:>'
+      afficher_si: "@mime@=='specifique'"
   - 
     saisie: 'input'
     options:
@@ -47,8 +53,3 @@ options:
       label: '<:verifier:option_fichiers_dimension_autoriser_rotation_label:>'
       label_case: '<:verifier:option_fichiers_dimension_autoriser_rotation_label_case:>'
       value: 'on'
-  -
-    saisie: 'type_mime'
-    options:
-      nom: 'mime_specifique'
-      label: '<:verifier:option_fichiers_type_mime_label:>'
