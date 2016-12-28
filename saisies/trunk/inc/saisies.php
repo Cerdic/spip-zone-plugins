@@ -205,7 +205,9 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		// Cas de la saisie 'fichiers':
 		if ($saisie['saisie'] == 'fichiers') {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
-			if (isset($_FILES[$champ]['error']) and !isset($infos_fichiers_precedents[$champ])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
+			if (isset($infos_fichiers_precedents[$champ])) { // si on a déjà envoyé des infos avants
+				$valeur = True;
+			} elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
 				foreach ($_FILES[$champ]['error'] as $err) {
 					if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoire est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
@@ -213,13 +215,8 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 						break;
 					}
 				}
-			}
-			else {
-				if (!isset($_FILES[$champ])) { // Cas de l'envoi par ajax. Si on n'envoie pas de fichier, ajax n'envoie pas $_FILES[$champ] (je ne sais pas si c'est un bug de SPIP ou ailleurs) 
-					$valeur = null;
-				} else {
-					$valeur = True;
-				}
+			} elseif (!isset($_FILES[$champ])) {
+				$valeur = null;
 			}
 		} else { // tout type de saisie, sauf fichiers
 			// Si le nom du champ est un tableau indexé, il faut parser !
