@@ -212,8 +212,8 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 					if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoire est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
 						$valeur = $_FILES[$champ];
 						break;
-						}
 					}
+				}
 			}
 			else {
 				$valeur = True; 
