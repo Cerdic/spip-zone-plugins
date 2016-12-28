@@ -20,6 +20,6 @@ function action_ajouter_alerte_dist() {
 	}
 
 	include_spip('inc/alertes');
-	alertes_ajouter($id_alerte);
+	alertes_ajouter($id_objet, $objet, $id_auteur);
 }
 
