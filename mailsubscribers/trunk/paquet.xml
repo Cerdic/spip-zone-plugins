@@ -1,7 +1,7 @@
 <paquet
 	prefix="mailsubscribers"
 	categorie="communication"
-	version="2.4.1"
+	version="2.4.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/mailsubscriber-32.png"
@@ -33,5 +33,5 @@
 	<pipeline nom="mailsubscriber_informations_liees" inclure="mailsubscribers_pipelines.php" action="" />
 
 	<menu nom="mailsubscribers" titre="mailsubscriber:titre_mailsubscribers" parent="menu_activite" icone="images/mailsubscriber-16.png" action="mailsubscribers" />
-	<necessite nom="facteur" compatibilite="[3.4.6;]" />
+	<necessite nom="facteur" compatibilite="[3.4.7;]" />
 </paquet>

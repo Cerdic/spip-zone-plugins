@@ -1,7 +1,7 @@
 <paquet
 	prefix="inscriptionmotdepasse"
 	categorie="auteur"
-	version="1.0.8"
+	version="1.0.9"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="inscriptionmotdepasse.png"
@@ -14,7 +14,7 @@
 	<credit>Aha-Soft pour l'icône</credit>
 	<licence>GPL v3</licence>
 
-	<necessite nom="facteur" compatibilite="[3.4.6;]" />
+	<necessite nom="facteur" compatibilite="[3.4.7;]" />
 	<necessite nom="saisies" compatibilite="[2.6.1;]"/>
 
 	<pipeline nom="formulaire_charger" inclure="inscriptionmotdepasse_pipelines.php" />

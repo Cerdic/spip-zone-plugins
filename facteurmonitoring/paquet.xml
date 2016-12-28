@@ -1,7 +1,7 @@
 <paquet
 	prefix="facteurmonitoring"
 	categorie="maintenance"
-	version="1.1.1"
+	version="1.1.2"
 	etat="dev"
 	compatibilite="[3.0.19;3.1.*]"
 	logo="prive/themes/spip/images/facteurmonitoring-64.png"
@@ -15,5 +15,5 @@
 	<pipeline nom="accueil_informations" inclure="facteurmonitoring_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[2.0.0;]" />
-	<necessite nom="facteur" compatibilite="[3.4.6;]" />
+	<necessite nom="facteur" compatibilite="[3.4.7;]" />
 </paquet>
