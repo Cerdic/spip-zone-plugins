@@ -165,17 +165,26 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		$chemin_validation[] = 1000000; // à la fin
 
 		// On construit la saisie à insérer et les fieldset des options
-		$saisie_liste_verif = array(
-			'saisie' => 'selection',
-			'options' => array(
-				'nom' => "saisie_modifiee_${nom}[verifier][type]",
-				'label' => _T('saisies:construire_verifications_label'),
-				'option_intro' => _T('saisies:construire_verifications_aucune'),
-				'conteneur_class' => 'liste_verifications',
-				'datas' => array()
-			)
-		);
-
+		if ($saisie['saisie'] == 'fichiers') {
+			$saisie_liste_verif = array(
+				'saisie' => 'hidden',
+				'options' => array(
+					'nom' => "saisie_modifiee_${nom}[verifier][type]",
+					'defaut' => 'fichiers'	
+				)
+			);
+		} else {
+			$saisie_liste_verif = array(
+				'saisie' => 'selection',
+				'options' => array(
+					'nom' => "saisie_modifiee_${nom}[verifier][type]",
+					'label' => _T('saisies:construire_verifications_label'),
+					'option_intro' => _T('saisies:construire_verifications_aucune'),
+					'conteneur_class' => 'liste_verifications',
+					'datas' => array()
+				)
+			);
+		}
 		foreach ($liste_verifications as $type_verif => $verif) {
 			$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
 			// Si le type de vérif a des options, on ajoute un fieldset
