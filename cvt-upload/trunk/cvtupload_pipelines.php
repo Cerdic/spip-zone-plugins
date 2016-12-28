@@ -76,7 +76,7 @@ function cvtupload_formulaire_verifier($flux) {
 					// Si suppression
 					if (isset($supprimer_fichier[$champ])) {
 						supprimer_fichier($infos_fichiers[$champ]['tmp_name']);
-						$name = $finos_fichier[$champ]['name'];
+						$name = $infos_fichiers[$champ]['name'];
 						unset($infos_fichiers[$champ]);
 						// On génère une erreur pour réafficher le form de toute façon
 						$erreurs["$champ"] = _T('cvtupload:erreur_fichier_supprime',array("nom"=>$name));
