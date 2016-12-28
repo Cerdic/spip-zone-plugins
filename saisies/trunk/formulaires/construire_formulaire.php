@@ -101,7 +101,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 
 	$saisie = $saisies_actuelles[$nom_ou_id];
 	$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
-	array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
+	array_walk_recursive($formulaire_config, 'construire_formulaire_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
 	$formulaire_config = saisie_identifier(array('saisies'=>$formulaire_config));
 	$formulaire_config = $formulaire_config['saisies'];
 
@@ -198,7 +198,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 					),
 					'saisies' => $verif['options']
 				);
-				array_walk_recursive($groupe, 'formidable_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
+				array_walk_recursive($groupe, 'construire_formulaire_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
 				$verif_options[$type_verif] = $groupe;
 			}
 		}
@@ -398,14 +398,14 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 
 // À utiliser avec un array_walk_recursive()
 // Applique une transformation à la @valeur@ de tous les champs "nom" d'un formulaire, y compris loin dans l'arbo
-function formidable_transformer_nom(&$valeur, $cle, $transformation) {
+function construire_formulaire_transformer_nom(&$valeur, $cle, $transformation) {
 	if ($cle == 'nom' and is_string($valeur)) {
 		$valeur = str_replace('@valeur@', $valeur, $transformation);
 	}
 }
 
 // Préparer une saisie pour la transformer en truc configurable
-function formidable_generer_saisie_configurable($saisie, $env) {
+function construire_formulaire_generer_saisie_configurable($saisie, $env) {
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
 	$identifiant = isset($saisie['identifiant']) ? $saisie['identifiant'] : '';

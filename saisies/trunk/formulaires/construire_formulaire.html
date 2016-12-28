@@ -25,7 +25,7 @@
 			[(#REM)<!-- les choix de saisies -->]
 			<BOUCLE_contenu(DATA){source tableau, #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
+				[(#VALEUR**|construire_formulaire_generer_saisie_configurable{#ENV**|unserialize})]
 			]
 			</BOUCLE_contenu>
 			<[(#DIV|sinon{li})] class="aucun"><em class="attention"><:saisies:construire_aucun_champs:></em></[(#DIV|sinon{li})]>
