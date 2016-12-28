@@ -162,6 +162,10 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$from = array_pop($requete['FROM']);
 
 		if (isset($jointures[$table])) {
+			// nombre max de resultats provenant des jointures
+			if (!defined('_FULLTEXT_MAX_RESULTS_JOINTURES')){
+				define('_FULLTEXT_MAX_RESULTS_JOINTURES', 100);
+			}
 			include_spip('action/editer_liens');
 			$trouver_table = charger_fonction('trouver_table', 'base');
 			$cle_depart = id_table_objet($table);
@@ -202,7 +206,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								FROM ".$desc_depart['table_sql']." as lien$i
 								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$cle_depart=lien$i.$cle_depart
 								WHERE $subscore > 0
-								ORDER BY score DESC LIMIT 100
+								ORDER BY score DESC LIMIT "._FULLTEXT_MAX_RESULTS_JOINTURES."
 								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
 							$score[] = 'IF(SUM(o' . $i . '.score) IS NULL,0,SUM(o' . $i . '.score))';
 							$from .= $join;
@@ -223,7 +227,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								FROM ".$desc_depart['table_sql']." as lien$i
 								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
 								WHERE $subscore > 0
-								ORDER BY score DESC LIMIT 100
+								ORDER BY score DESC LIMIT "._FULLTEXT_MAX_RESULTS_JOINTURES."
 								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
 							$score[] = 'IF(SUM(o' . $i . '.score) IS NULL,0,SUM(o' . $i . '.score))';
 							$from .= $join;
@@ -239,7 +243,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
 								AND lien$i.objet='$table'
 								WHERE $subscore > 0
-								ORDER BY score DESC LIMIT 100
+								ORDER BY score DESC LIMIT "._FULLTEXT_MAX_RESULTS_JOINTURES."
 								) AS o$i ON o$i.id_objet=t.$_id_table";
 							$score[] = 'IF(SUM(o' . $i . '.score) IS NULL,0,SUM(o' . $i . '.score))';
 							$from .= $join;
@@ -254,7 +258,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
 										AND lien$i.objet='$table'
 										WHERE $subscore > 0
-										ORDER BY score DESC LIMIT 100
+										ORDER BY score DESC LIMIT "._FULLTEXT_MAX_RESULTS_JOINTURES."
 								) AS o$i ON o$i.id_objet=t.$_id_table";
 							$score[] = 'IF(SUM(o' . $i . '.score) IS NULL,0,SUM(o' . $i . '.score))';
 							$from .= $join;
