@@ -1,6 +1,5 @@
 #SET{contexte,#EVAL{definir_barre_contexte()}}
-#SET{boutons,#GET{contexte}|definir_barre_boutons{0}}
-#SET{boutons, #GET{boutons}|sort_menu}
+#SET{boutons,#GET{contexte}|definir_barre_boutons{0}|tri_menu_alpha}
 
 <div id='bando_haut' role='navigation'>
 	<div id='bando_liens_rapides'>

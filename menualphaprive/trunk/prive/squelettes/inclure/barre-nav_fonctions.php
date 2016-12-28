@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/bandeau');
 include_spip('action/menu_rubriques');
 
-function sort_menu($menu_complet) {
+function tri_menu_alpha($menu_complet) {
 
 	foreach ($menu_complet as $menu) {
 		if ($menu->sousmenu) {
