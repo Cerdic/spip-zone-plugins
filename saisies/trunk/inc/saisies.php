@@ -202,7 +202,6 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		$champ = $saisie['options']['nom'];
 		$file = (($saisie['saisie'] == 'input' and isset($saisie['options']['type']) and $saisie['options']['type'] == 'file') or $saisie['saisie'] == 'fichiers');
 		$verifier = isset($saisie['verifier']) ? $saisie['verifier'] : false;
-
 		// Cas de la saisie 'fichiers':
 		if ($saisie['saisie'] == 'fichiers') {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
@@ -216,7 +215,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 				}
 			}
 			else {
-				$valeur = True; 
+				if (!isset($_FILES[$champ])) { // Cas de l'envoi par ajax. Si on n'envoie pas de fichier, ajax n'envoie pas $_FILES[$champ] (je ne sais pas si c'est un bug de SPIP ou ailleurs) 
+					$valeur = null;
+				} else {
+					$valeur = True;
+				}
 			}
 		} else { // tout type de saisie, sauf fichiers
 			// Si le nom du champ est un tableau indexé, il faut parser !
