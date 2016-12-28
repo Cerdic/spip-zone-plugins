@@ -199,6 +199,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 					'saisies' => $verif['options']
 				);
 				array_walk_recursive($groupe, 'construire_formulaire_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
+				array_walk_recursive($groupe, 'construire_formulaire_transformer_afficher_si', "saisie_modifiee_${nom}[verifier][$type_verif]");
 				$verif_options[$type_verif] = $groupe;
 			}
 		}
@@ -401,6 +402,13 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 function construire_formulaire_transformer_nom(&$valeur, $cle, $transformation) {
 	if ($cle == 'nom' and is_string($valeur)) {
 		$valeur = str_replace('@valeur@', $valeur, $transformation);
+	}
+}
+// À utiliser avec un array_walk_recursive()
+// Applique une transformation à la valeur de tous les champs "afficher_si" d'un formulaire, y compris loin dans l'arbo
+function construire_formulaire_transformer_afficher_si(&$valeur, $cle, $transformation) {
+	if ($cle == 'afficher_si' and is_string($valeur)) {
+		$valeur = preg_replace("#@(.*)@#", '@'.$transformation.'[${1}]@', $valeur);
 	}
 }
 
