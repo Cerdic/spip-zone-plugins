@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lon' => 'Longitude',
 
 	// M
-	'message_limite_atteinte' => 'Vous disposez de plus de points géolocalisés que la limite d\'affichage actuelle.<br /> Si vous souhaitez tous les afficher, suivez <a href="@url@">ce lien</a>.',
+	'message_limite_atteinte' => 'Vous disposez de plus de points géolocalisés que la limite d’affichage actuelle.<br /> Si vous souhaitez tous les afficher, suivez <a href="@url@">ce lien</a>.',
 
 	// O
 	'onglet_carte' => 'Carte',
