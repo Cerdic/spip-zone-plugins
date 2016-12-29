@@ -13,8 +13,8 @@
 #SET{afficher_echeances,''}
 <BOUCLE_test_echeances(COMMANDES){tout}{echeances_type != ""}{0,1}>#SET{afficher_echeances,oui}</BOUCLE_test_echeances>
 
-<B_liste_commandes>
 <div class='nettoyeur'></div>
+<B_liste_commandes>
 #ANCRE_PAGINATION
 [(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{commande}})</h2>]]
 <div class="liste-objets liste-commandes">
@@ -157,5 +157,5 @@
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_commandes>[
-<div class="liste-elements commandes"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-objets commandes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_commandes>
