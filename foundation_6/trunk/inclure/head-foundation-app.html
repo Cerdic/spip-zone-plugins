@@ -1,11 +1,11 @@
 [(#REM) Inclusion des fichier Javascript si la config le permet ]
 [(#CONFIG{foundation_6/javascript}|oui)
-	[<script src="(#CHEMIN{bower_components/foundation-sites/dist/foundation.js})" type="text/javascript"></script>]
-	<script type="text/javascript">
-		// Charger les scripts foundations
-		$(function () {
-			$.getScript("[(#CHEMIN{bower_components/what-input/what-input.min.js}|timestamp)]");
-			$.getScript("[(#CHEMIN{javascript/app.js}|timestamp)]");
-		});
-	</script>
+[<script src="(#CHEMIN{bower_components/foundation-sites/dist/foundation.js})" type="text/javascript"></script>]
+<script type="text/javascript">
+ // Charger les scripts foundations
+ $(function () {
+	 $.getScript("[(#CHEMIN{bower_components/what-input/what-input.min.js}|timestamp)]");
+	 $.getScript("[(#CHEMIN{javascript/app.js}|timestamp)]");
+  });
+</script>
 ]
