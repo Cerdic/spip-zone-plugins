@@ -36,7 +36,7 @@
 
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 	<necessite nom="saisies" compatibilite="[2.17.0;[" />
-	<necessite nom="verifier" compatibilite="[1.4.0;[" />
+	<necessite nom="verifier" compatibilite="[1.4.1;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
 	<necessite nom="facteur" compatibilite="[3.4.7;[" />
 
