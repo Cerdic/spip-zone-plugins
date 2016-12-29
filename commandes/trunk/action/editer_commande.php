@@ -290,8 +290,10 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	);
 
 	// Envoi des notifications par email
-	spip_log("instituer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
-	commandes_notifier($id_commande);
+	if ($statut != $statut_ancien) {
+		spip_log("instituer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
+		commandes_notifier($id_commande);
+	}
 
 	return ''; // pas d'erreur
 }

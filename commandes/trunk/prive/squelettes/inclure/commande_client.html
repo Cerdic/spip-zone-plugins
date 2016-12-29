@@ -9,8 +9,8 @@
 		id_commande    identifiant de la commande
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{tout}>
-<div class="liste-objets">
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<div class="liste-objets">
 <table class="spip client-commande">
 	<caption><strong class="caption"><:commandes:titre_informations_client:></strong></caption>
 	<tbody>
@@ -48,9 +48,8 @@
 		</tr>
 	</tbody>
 </table>
+</div>
 </BOUCLE_auteur>
-
 <div class="error"><:commandes:info_aucun_client:></div>
 <//B_auteur>
-</div>
 </BOUCLE_commande>
