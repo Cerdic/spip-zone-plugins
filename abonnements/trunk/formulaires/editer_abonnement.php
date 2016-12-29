@@ -161,6 +161,15 @@ function formulaires_editer_abonnement_traiter_dist($id_abonnement='new', $retou
 #		$modifier_echeance = charger_fonction('modifier_echeance_abonnement', 'action/');
 #		$modifier_echeance("$id_abonnement/$duree/$periode");
 #	}
+	// Normaliser les dates vides pour éviter une erreur SQL
+	foreach(array('date_debut', 'date_echeance', 'date_fin') as $champ_date){
+		if ($date = _request($champ_date)
+			and is_array($date)
+			and !count(array_filter(array_values($date)))
+		){
+			set_request($champ_date, '0000-00-00 00:00:00');
+		}
+	}
 	
 	$retours = formulaires_editer_objet_traiter('abonnement',$id_abonnement,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	
