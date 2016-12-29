@@ -7,7 +7,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip("inc/utils");
 include_spip('inc/formidable_fichiers');
 function traiter_email_dist($args, $retours) {
-	if (!isset($retours['fichier'])) {
+	if (!isset($retours['fichiers'])) {
 		$retours['fichiers'] = array();
 		$ajouter_fichier = True;
 	} else {
