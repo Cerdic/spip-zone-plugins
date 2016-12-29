@@ -200,10 +200,10 @@ function commandes_bank_traiter_reglement($flux){
 			$fonction_prix = charger_fonction('prix', 'inc/');
 			$montant_attendu = $fonction_prix('commande', $id_commande);
 		}
-		// Sinon le montant attendu est celui de la prochaine échéance
+		// Sinon le montant attendu est celui de la prochaine échéance (en ignorant la dernière transaction OK que justement on cherche à tester)
 		else {
 			include_spip('inc/commandes_echeances');
-			$montant_attendu = commandes_trouver_prochaine_echeance($id_commande, $echeances);
+			$montant_attendu = commandes_trouver_prochaine_echeance($id_commande, $echeances, true);
 		}
 		spip_log("commande #$id_commande attendu:$montant_attendu regle:$montant_regle", 'commandes');
 

@@ -70,7 +70,7 @@ function commandes_nb_echeances_payees($id_commande) {
  * @return float
  * 		Retourne le montant de la prochaine échéance
  **/
-function commandes_trouver_prochaine_echeance($id_commande, $echeances=null) {
+function commandes_trouver_prochaine_echeance($id_commande, $echeances=null, $ignorer_derniere=false) {
 	static $montants = array();
 	$id_commande = intval($id_commande);
 	
@@ -98,6 +98,10 @@ function commandes_trouver_prochaine_echeance($id_commande, $echeances=null) {
 		else {
 			// On cherche le nombre de paiements valides pour cette commande
 			$nb_paiements = commandes_nb_echeances_payees($id_commande);
+			// Si on cherche à tester la dernière transaction, il faut l'ignorer
+			if ($ignorer_derniere) {
+				$nb_paiements = $nb_paiements - 1;
+			}
 			
 			// On liste les montants
 			$montants_echeances = commandes_lister_montants_echeances($echeances);
