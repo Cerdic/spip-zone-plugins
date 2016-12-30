@@ -374,7 +374,27 @@ function formidable_effacer_fichiers_email() {
 	}
 	return $dossiers_effaces;
 }
-
+/**
+ * Génerer un zip des réponses d'un formulaire 
+ * @param int $id_formulaire  (identifiant numérique)
+ * @param str $chemin_du_zip chemin complet du zip 
+ * @param str $fichier_csv un fichier csv à ajouter, contenant les réponses
+ * @return str|int chemin complet du zip ou 0 si erreur lors de la création
+**/
+function formidable_zipper_reponses_formulaire($id_formulaire, $chemin_du_zip, $fichier_csv) {
+	include_spip('inc/pclzip');
+	$chemin_fichiers = _DIR_FICHIERS_FORMIDABLE."formulaire_$id_formulaire";
+	$zip = new PclZip("$chemin_du_zip");
+	if (!$zip -> create($chemin_fichiers, 
+			PCLZIP_OPT_REMOVE_PATH, $chemin_fichiers)
+	) {
+		return 0;
+	} else {
+		$zip -> delete(PCLZIP_OPT_BY_NAME, "test.txt");
+		$zip -> add($fichier_csv, PCLZIP_OPT_REMOVE_ALL_PATH);
+		return $chemin_du_zip;
+	}
+}
 /**
  * Générer une url d'action pour la récupération d'un fichier lié à une réponse
  * @param int|str $id_formulaire

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'heures_minutes_secondes' => "@h@h @m@min @s@s", 
 	'minutes_secondes' => "@m@min @s@s", 
 	'secondes' => "@s@s", 
-	
+	'id_formulaires_reponse' => 'Identifiant de la réponse', 	
 	// A
 	'activer_pages_explication' => 'Par défaut, les pages publiques des formulaires ne sont pas autorisées',
 	'activer_pages_label' => 'Autoriser la création de pages publique pour les formulaires',
