@@ -25,7 +25,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_resultats(JEUX_RESULTATS spip_jeux spip_auteurs){id_jeu?}{id_auteur?}{pagination #ENV{nb,10}}{tri titre_prive,#GET{defaut_tri}}>
+	<BOUCLE_liste_resultats(JEUX_RESULTATS jeux spip_auteurs){id_jeu?}{id_auteur?}{pagination #ENV{nb,10}}{tri titre_prive,#GET{defaut_tri}}>
 		<tr class='row_odd odd'>
 		    <td>[(#DATE|affdate_heure)]</td>
 			<td><a href="#URL_ECRIRE{jeu,id_jeu=#ID_JEU}">#TITRE_PRIVE</a></td>

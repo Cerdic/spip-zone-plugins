@@ -20,7 +20,10 @@ function jeux_declarer_tables_objets_sql($table){
 		),
 		'key' => array(
 			'PRIMARY KEY' => 'id_jeu',
-			'KEY id_jeu' => 'id_jeu',
+			'KEY id_jeu'  => 'id_jeu',
+		),
+		'join' => array(
+			'id_jeu' => 'id_jeu',
 		),
 		'date' => 'date',
 		'titre' => 'titre_prive AS titre, "" AS lang',
@@ -60,15 +63,20 @@ function jeux_declarer_tables_principales($tables_principales){
 	   'resultat_long'  => 'text NOT NULL',
 	   'total'			=> 'int(12) NOT NULL'
 	);
-	$jeux_resultats_key=array(
+	$jeux_resultats_key = array(
 		'PRIMARY KEY'   => 'id_resultat',
 		'KEY id_jeu'    => 'id_jeu',
 		'KEY id_auteur' => 'id_auteur',
 	);
+	$jeux_resultats_join = array(
+		'id_jeu'    => 'id_jeu',
+		'id_auteur' => 'id_auteur',
+	);
 	
 	$tables_principales['spip_jeux_resultats'] = array(
 		'field' => $jeux_resultats,
-		'key'   => $jeux_resultats_key
+		'key'   => $jeux_resultats_key,
+		'join'  => $jeux_resultats_join,
 	);
 	
 	return $tables_principales;
