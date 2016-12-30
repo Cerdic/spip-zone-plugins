@@ -89,7 +89,7 @@ function inc_exporter_csv_dist($titre, $resource, $delim = ',', $entetes = null,
 	}
 	fclose($fp);
 	if ($envoyer) {
-		ob_start() 
+		ob_start();
 		Header("Content-Type: text/comma-separated-values; charset=$charset");
 		Header("Content-Disposition: attachment; filename=$filename");
 		//non supporte
