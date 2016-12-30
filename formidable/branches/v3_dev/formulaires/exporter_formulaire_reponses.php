@@ -70,7 +70,11 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		foreach ($saisies as $nom => $saisie) {
 			if ($saisie['saisie'] != 'explication') {    // on exporte tous les champs sauf explications
 				$options  = $saisie['options'];
-				$titres[] = sinon($options['label_case'], sinon($options['label'], $nom));
+				$titres[] = sinon(
+					isset($options['label_case']) ? $options['label_case']:'', 
+					sinon(isset($options['label']) ? $options['label']:'', 
+						$nom
+					));
 			}
 		}
 		
@@ -113,9 +117,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 						'spip_formulaires_reponses_champs',
 						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
 					);
-					if (is_array(unserialize($valeur))) {
-						$valeur = unserialize($valeur);
-					}
+					$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+					$valeur = $tenter_unserialize($valeur);
 					$reponse_complete[] = facteur_mail_html2text(
 						recuperer_fond(
 							'saisies-vues/_base',
