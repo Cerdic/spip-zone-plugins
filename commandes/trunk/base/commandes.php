@@ -71,8 +71,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		),
 		'date' => "date",
 		'titre' => "reference AS titre, '' AS lang",
-		'champs_editables' => array('reference', 'id_auteur', 'date_paiement', 'date_envoi', 'mode'),
-		'champs_versionnes' => array('reference', 'id_auteur', 'date', 'date_paiement', 'date_envoi'),
+		'champs_editables' => array('reference', 'id_auteur', 'date_paiement', 'date_envoi', 'mode', 'bank_uid'),
+		'champs_versionnes' => array('reference', 'id_auteur', 'date', 'date_paiement', 'date_envoi', 'bank_uid'),
 		'rechercher_champs' => array('reference' => 8, 'id_commande' => 8),
 		'rechercher_jointures' => array(
 			'auteur' => array('nom' => 1),
