@@ -269,7 +269,7 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	// distribuer la commande si payee
 	if ($statut != $statut_ancien
 	  and $statut=='paye'
-	  and in_array($statut_ancien,array('encours','attente','partiel','erreur'))){
+	  and in_array($statut_ancien,array('encours','attente','partiel','erreur','poubelle'))){
 		commandes_distribuer($id_commande);
 	}
 
