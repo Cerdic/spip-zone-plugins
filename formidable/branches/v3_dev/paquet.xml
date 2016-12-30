@@ -34,7 +34,7 @@
 	<pipeline nom="post_edition" inclure="formidable_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[3.3.7;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.3.8;[" />
 	<necessite nom="saisies" compatibilite="[2.17.0;[" />
 	<necessite nom="verifier" compatibilite="[1.4.1;[" />
 	<necessite nom="yaml" compatibilite="[1.5.2;[" />
