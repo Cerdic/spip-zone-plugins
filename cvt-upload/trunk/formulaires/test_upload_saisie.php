@@ -5,6 +5,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cvtupload');
 include_spip('inc/saisies');
 function formulaires_test_upload_saisies(){
+	static $saisies;
+	if (!$saisies == null) {
+		return $saisies;
+	}
 	$saisies = array(
 		array(
 			'saisie'=>'input',
