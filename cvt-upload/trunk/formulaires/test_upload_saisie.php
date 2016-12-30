@@ -119,14 +119,7 @@ function formulaires_test_upload_saisie_charger(){
 }
 
 function formulaires_test_upload_saisie_fichiers(){
-	return array(
-		'pdfs',
-		'fichier_tout_mime',
-		'fichier_image_web',
-		'fichier_leger',
-		'image_web_pas_trop_grande', 
-		'image_web_pas_trop_grande_rotation',
-	);
+	return array_keys(saisies_lister_avec_type(formulaires_test_upload_saisies(), 'fichiers'));
 }
 
 function formulaires_test_upload_saisie_verifier(){
