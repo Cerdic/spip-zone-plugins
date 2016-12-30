@@ -1,0 +1,24 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+<meta property="og:type" content="article">
+<meta property="og:title" content="[(#TITRE|textebrut)][ - (#SOUSTITRE|textebrut)]">
+<meta name="twitter:title" content="[(#TITRE|textebrut)][ - (#SOUSTITRE|textebrut)]">
+<meta property="article:published_time" content="[(#DATE|date_iso)]" >
+<meta property="article:modified_time" content="[(#DATE_MODIF|date_iso)]"/>
+<meta property="og:site_name" content="[(#NOM_SITE_SPIP|textebrut)]">
+<meta property="og:description" content="[(#INTRODUCTION{200}|textebrut)]">
+<meta name="twitter:description" content="[(#INTRODUCTION{200}|textebrut)]">
+<meta property="og:url" content="[(#URL_ARTICLE|url_absolue)]">
+<meta property="og:locale" content="[(#LANG|replace{'fr','fr_FR'})]">
+[	<meta property="og:image" content="(#LOGO_ARTICLE_NORMAL|image_proportions{458,228,focus}|image_reduire{800}|extraire_attribut{src}|timestamp|url_absolue)">
+	<meta property="og:image:height" content="[(#LOGO_ARTICLE_NORMAL|image_proportions{458,228,focus}|image_reduire{800}|hauteur)]">
+	<meta property="og:image:width" content="[(#LOGO_ARTICLE_NORMAL|image_proportions{458,228,focus}|image_reduire{800}|largeur)]">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="twitter:image" content="[(#LOGO_ARTICLE_NORMAL|image_proportions{458,228,focus}|image_reduire{800}|extraire_attribut{src}|url_absolue)]">]
+<meta name="description" content="[(#INTRODUCTION|textebrut|trim)]">
+<meta name="news_keywords" content="<BOUCLE_mots_key(MOTS){id_article}{", "}{0,10}>[(#TITRE|textebrut)]</BOUCLE_mots_key>">
+[(#LOGO_ARTICLE|oui)<meta name="twitter:card" content="summary_large_image">]
+[(#LOGO_ARTICLE|non) <meta name="twitter:card" content="summary">]
+<BOUCLE_auteur(AUTEURS){id_article}{nom!==^@}>[<meta name="twitter:creator" content="@(#TWITTER|replace{'@',''})">]
+[<meta property="article:author" content="(#NOM|textebrut)">]
+[<meta property="article:author" content="(#FACEBOOK)">]</BOUCLE_auteur>
+</BOUCLE_principale>
