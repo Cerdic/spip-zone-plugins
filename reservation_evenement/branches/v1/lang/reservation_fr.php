@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
 	'inscription' => 'Inscription',
 	'inscrire' => 'S’inscrire',
-	'inscrire_liste_attente' => 'Choissisez un autre cours ou inscrivez vous dans la liste d’attente.',
+	'inscrire_liste_attente' => 'Choissisez un autre événement ou inscrivez vous dans la liste d’attente.',
 
 	// L
 	'label_action_cloture' => 'Clôture automatique :',

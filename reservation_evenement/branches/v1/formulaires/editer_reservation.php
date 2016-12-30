@@ -40,7 +40,7 @@ function formulaires_editer_reservation_identifier_dist($id_reservation = 'new',
 /**
  * Chargement du formulaire d'édition de reservation
  *
- * D��clarer les champs postés et y intégrer les valeurs par défaut
+ * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
  * @uses formulaires_editer_objet_charger()
  *

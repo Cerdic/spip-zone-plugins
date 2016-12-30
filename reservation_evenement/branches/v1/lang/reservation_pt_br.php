@@ -63,7 +63,7 @@ gerará o envio de uma notificação!', # MODIF
 	'info_voir_reservations_poubelle' => 'Ver reservas postas na lixeira',
 	'inscription' => 'Inscrição',
 	'inscrire' => 'Inscrever-se',
-	'inscrire_liste_attente' => 'Escolher outro curso ou se inscrever na lista de espera.',
+	'inscrire_liste_attente' => 'Escolher outro curso ou se inscrever na lista de espera.', # MODIF
 
 	// L
 	'label_action_cloture' => 'Encerramento automático:',
