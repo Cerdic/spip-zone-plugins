@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('inc/formidable');
+include_spip('inc/formidable_fichiers');
 include_spip('inc/config');
 
 function formulaires_exporter_formulaire_reponses_charger($id_formulaire = 0) {
@@ -88,7 +89,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			)
 		);
 		$reponses_completes[] = $titres;
-
+        $saisies_fichiers = array();
+        
 		// On parcourt chaque réponse
 		foreach ($reponses as $reponse) {
 			// Est-ce qu'il y a un auteur avec un nom
@@ -110,20 +112,32 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			if ($statut_reponses != 'publie') {
 				$reponse_complete[] = statut_texte_instituer('formulaires_reponse', $reponse['statut']);
 			}
-			$saisies_fichiers = False;
+			
 			// Ensuite tous les champs
+            $tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 			foreach ($saisies as $nom => $saisie) {
-				if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
-					$saisies_fichiers = True;
-				}	
+                
 				if ($saisie['saisie'] != 'explication') {
 					$valeur = sql_getfetsel(
 						'valeur',
 						'spip_formulaires_reponses_champs',
 						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
 					);
-					$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
-					$valeur = $tenter_unserialize($valeur);
+					
+					// Saisie de type fichier ?
+                    if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
+                        if ($valeur = $tenter_unserialize($valeur)) {
+                            foreach ($valeur as $v) {
+                                // On ajoute à la liste des fichiers des réponses
+                                $chemin = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
+                                $chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
+                                if(file_exists($chemin_fichier)){
+                                    $saisies_fichiers[] = $chemin_fichier;
+                                }
+                            }
+                        }
+                    }
+                    
 					$reponse_complete[] = facteur_mail_html2text(
 						recuperer_fond(
 							'saisies-vues/_base',
@@ -152,24 +166,25 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			// On ajoute la ligne à l'ensemble des réponses
 			$reponses_completes[] = $reponse_complete;
 		}
-		if (!$saisies_fichiers) {// si pas de saisie fichiers, on envoie directement le csv
-			if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
-				$exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
-				exit();
-			}
-		}	else {
-			if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
-				$fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, False);
-				$fichier_zip = sous_repertoire(_DIR_CACHE, 'export').'reponses-formulaire-' . $formulaire['identifiant'].'.zip';
-				include_spip('inc/formidable_fichiers');
-				$fichier_zip = formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv);
-				if (!$fichier_zip) {// si erreur lors du zippage
-					return false;
-				} else {
-					formidable_retourner_fichier($fichier_zip, basename($fichier_zip));	
-				}
-			}
-		}
+
+        if (!count($saisies_fichiers)) {// si pas de saisie fichiers, on envoie directement le csv
+            if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
+                $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
+                exit();
+            }
+        } else {
+            if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
+                $fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, false);
+                $fichier_zip = sous_repertoire(_DIR_CACHE, 'export') . 'reponses-formulaire-' . $formulaire['identifiant'] . '.zip';
+                include_spip('inc/formidable_fichiers');
+                $fichier_zip = formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv, $saisies_fichiers);
+                if (!$fichier_zip) {// si erreur lors du zippage
+                    return false;
+                } else {
+                    formidable_retourner_fichier($fichier_zip, basename($fichier_zip));
+                }
+            }
+        }
 	} else {
 		return false;
 	}
