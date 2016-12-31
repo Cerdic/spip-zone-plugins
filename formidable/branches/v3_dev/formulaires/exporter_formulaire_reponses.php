@@ -23,8 +23,8 @@ function formulaires_exporter_formulaire_reponses_verifier($id_formulaire = 0) {
 }
 
 function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
-	$retours = array();
-	$statut_reponses  = _request('statut_reponses');
+	$retours         = array();
+	$statut_reponses = _request('statut_reponses');
 
 	if (_request('type_export') == 'csv') {
 		$ok = exporter_formulaires_reponses($id_formulaire, ',', $statut_reponses);
@@ -40,7 +40,6 @@ function formulaires_exporter_formulaire_reponses_traiter($id_formulaire = 0) {
 	return $retours;
 }
 
-
 /*
  * Exporter toutes les réponses d'un formulaire (anciennement action/exporter_formulaire_reponses)
  * @param integer $id_formulaire
@@ -51,7 +50,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	if ($id_formulaire > 0
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire)
-		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses', 'id_formulaire = ' . $id_formulaire . ($statut_reponses == 'publie' ? ' and statut = "publie"' : ''))
+		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses',
+			'id_formulaire = ' . $id_formulaire . ($statut_reponses == 'publie' ? ' and statut = "publie"' : ''))
 	) {
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');
@@ -59,11 +59,11 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 		$reponses_completes = array();
 
 		// La première ligne des titres
-		$titres  = array(
-			_T('formidable:id_formulaires_reponse'), 
+		$titres = array(
+			_T('formidable:id_formulaires_reponse'),
 			_T('public:date'),
 			_T('formidable:reponses_auteur'),
-			_T('formidable:reponses_ip')
+			_T('formidable:reponses_ip'),
 		);
 		if ($statut_reponses != 'publie') {
 			$titres[] = _T('formidable:reponse_statut');
@@ -73,24 +73,24 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			if ($saisie['saisie'] != 'explication') {    // on exporte tous les champs sauf explications
 				$options  = $saisie['options'];
 				$titres[] = sinon(
-					isset($options['label_case']) ? $options['label_case']:'', 
-					sinon(isset($options['label']) ? $options['label']:'', 
+					isset($options['label_case']) ? $options['label_case'] : '',
+					sinon(isset($options['label']) ? $options['label'] : '',
 						$nom
 					));
 			}
 		}
-		
+
 		// On passe la ligne des titres de colonnes dans un pipeline
-		$titres = pipeline(
+		$titres               = pipeline(
 			'formidable_exporter_formulaire_reponses_titres',
 			array(
-				'args' => array('id_formulaire'=>$id_formulaire, 'formulaire'=>$formulaire),
+				'args' => array('id_formulaire' => $id_formulaire, 'formulaire' => $formulaire),
 				'data' => $titres,
 			)
 		);
 		$reponses_completes[] = $titres;
-        $saisies_fichiers = array();
-        
+		$saisies_fichiers     = array();
+
 		// On parcourt chaque réponse
 		foreach ($reponses as $reponse) {
 			// Est-ce qu'il y a un auteur avec un nom
@@ -104,40 +104,40 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 
 			// Le début de la réponse avec les infos (date, auteur, etc)
 			$reponse_complete = array(
-				$reponse['id_formulaires_reponse'], 
+				$reponse['id_formulaires_reponse'],
 				$reponse['date'],
 				$nom_auteur,
-				$reponse['ip']
+				$reponse['ip'],
 			);
 			if ($statut_reponses != 'publie') {
 				$reponse_complete[] = statut_texte_instituer('formulaires_reponse', $reponse['statut']);
 			}
-			
+
 			// Ensuite tous les champs
-            $tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+			$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 			foreach ($saisies as $nom => $saisie) {
-                
+
 				if ($saisie['saisie'] != 'explication') {
 					$valeur = sql_getfetsel(
 						'valeur',
 						'spip_formulaires_reponses_champs',
 						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
 					);
-					
+
 					// Saisie de type fichier ?
-                    if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
-                        if ($valeur = $tenter_unserialize($valeur)) {
-                            foreach ($valeur as $v) {
-                                // On ajoute à la liste des fichiers des réponses
-                                $chemin = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
-                                $chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
-                                if(file_exists($chemin_fichier)){
-                                    $saisies_fichiers[] = $chemin_fichier;
-                                }
-                            }
-                        }
-                    }
-                    
+					if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
+						if ($valeur = $tenter_unserialize($valeur)) {
+							foreach ($valeur as $v) {
+								// On ajoute à la liste des fichiers des réponses
+								$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
+								$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
+								if (file_exists($chemin_fichier)) {
+									$saisies_fichiers[] = $chemin_fichier;
+								}
+							}
+						}
+					}
+
 					$reponse_complete[] = facteur_mail_html2text(
 						recuperer_fond(
 							'saisies-vues/_base',
@@ -145,7 +145,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 								array(
 									'valeur_uniquement' => 'oui',
 									'type_saisie'       => $saisie['saisie'],
-									'valeur'            => $valeur
+									'valeur'            => $valeur,
 								),
 								$saisie['options']
 							)
@@ -153,12 +153,16 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 					);
 				}
 			}
-			
+
 			// On passe la ligne de réponse dans un pipeline
 			$reponse_complete = pipeline(
 				'formidable_exporter_formulaire_reponses_reponse',
 				array(
-					'args' => array('id_formulaire'=>$id_formulaire, 'formulaire'=>$formulaire, 'reponse'=>$reponse),
+					'args' => array(
+						'id_formulaire' => $id_formulaire,
+						'formulaire'    => $formulaire,
+						'reponse'       => $reponse,
+					),
 					'data' => $reponse_complete,
 				)
 			);
@@ -167,24 +171,24 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			$reponses_completes[] = $reponse_complete;
 		}
 
-        if (!count($saisies_fichiers)) {// si pas de saisie fichiers, on envoie directement le csv
-            if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
-                $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
-                exit();
-            }
-        } else {
-            if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
-                $fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, false);
-                $fichier_zip = sous_repertoire(_DIR_CACHE, 'export') . 'reponses-formulaire-' . $formulaire['identifiant'] . '.zip';
-                include_spip('inc/formidable_fichiers');
-                $fichier_zip = formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv, $saisies_fichiers);
-                if (!$fichier_zip) {// si erreur lors du zippage
-                    return false;
-                } else {
-                    formidable_retourner_fichier($fichier_zip, basename($fichier_zip));
-                }
-            }
-        }
+		if (!count($saisies_fichiers)) {// si pas de saisie fichiers, on envoie directement le csv
+			if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
+				$exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim);
+				exit();
+			}
+		} else {
+			if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)) {
+				$fichier_csv = $exporter_csv('reponses-formulaire-' . $formulaire['identifiant'], $reponses_completes, $delim, null, false);
+				$fichier_zip = sous_repertoire(_DIR_CACHE, 'export') . 'reponses-formulaire-' . $formulaire['identifiant'] . '.zip';
+				include_spip('inc/formidable_fichiers');
+				$fichier_zip = formidable_zipper_reponses_formulaire($formulaire['id_formulaire'], $fichier_zip, $fichier_csv, $saisies_fichiers);
+				if (!$fichier_zip) {// si erreur lors du zippage
+					return false;
+				} else {
+					formidable_retourner_fichier($fichier_zip, basename($fichier_zip));
+				}
+			}
+		}
 	} else {
 		return false;
 	}
