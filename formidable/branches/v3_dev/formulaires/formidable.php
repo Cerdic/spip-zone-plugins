@@ -176,6 +176,9 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 	}
 	$contexte['_hidden'] .= "\n" . '<input type="hidden" name="formidable_afficher_apres' /*.$formulaire['id_formulaire']*/ . '" value="' . $formulaire['apres'] . '"/>'; // marche pas
 
+	if ($precharger= _request('_formidable_cvtupload_precharger_fichiers')) {
+		$contexte['cvtupload_precharger_fichiers'] = $precharger;
+	}
 	$contexte['formidable_afficher_apres'] = $formulaire['apres'];
 
 	return $contexte;
@@ -309,11 +312,6 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
 	$retours['id_formulaire'] = $id_formulaire;
 
-	// lorsqu'on affichera à nouveau le html, dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
-	if ($formulaire['apres']=='formulaire'){
-		set_request('_fichiers', null);
-		set_request('_cvtupload_precharger_fichiers_forcer',true);
-	}
 	// Si on a une redirection valide
 	if (($formulaire['apres'] == 'redirige') and ($formulaire['url_redirect'] != '')) {
 		refuser_traiter_formulaire_ajax();
@@ -415,6 +413,45 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 				set_request($saisie, $description);
 			}
 		}
+	}
+	// lorsqu'on affichera à nouveau le html, dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
+	if ($formulaire['apres']=='formulaire' and isset($retours['fichiers'])) {
+		$formidable_cvtupload_precharger_fichiers = array();
+		set_request('_fichiers', null);
+		set_request('_cvtupload_precharger_fichiers_forcer',true);
+		foreach ($retours['fichiers'] as $champ => $valeur){
+			$i = -1;
+			foreach ($valeur as $id=>$info){
+				$i++;
+				if (isset ($info['fichier'])) {
+					$nom_fichier = $info['fichier'];
+				} else {
+					$nom_fichier = $info['nom'];
+				}
+				if (isset($retours['id_formulaires_reponse'])) {
+					$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+						."formulaire_".$retours['id_formulaire']
+						."/reponse_".$retours['id_formulaires_reponse']
+						."/".$champ
+						."/".$nom_fichier;
+					$formidable_cvtupload_precharger_fichiers[$champ][$i]['url'] = formidable_generer_url_action_recuperer_fichier($retours['id_formulaire'], $retours['id_formulaires_reponse'], $champ, $nom_fichier);
+					$formidable_cvtupload_precharger_fichiers[$champ][$i]['chemin'] = $chemin_fichier;
+				} elseif (isset($retours['timestamp'])) {
+					$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
+						."timestamp/"
+						.$retours['timestamp']."/"
+						.$champ."/"
+						.$nom_fichier;
+					$formidable_cvtupload_precharger_fichiers[$champ][$i]['chemin'] = $chemin_fichier; 
+					$formidable_cvtupload_precharger_fichiers[$champ][$i]['url'] = formidable_generer_url_action_recuperer_fichier_email(
+						$champ, 
+						$nom_fichier,
+						array('timestamp'=>$retours['timestamp'])
+					);
+				}
+			}
+		}
+		set_request('_formidable_cvtupload_precharger_fichiers', $formidable_cvtupload_precharger_fichiers);
 	}
 	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
 	if (!$erreur_texte and !count($retours['traitements'])) {
