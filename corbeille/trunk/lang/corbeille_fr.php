@@ -44,5 +44,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 site dans la corbeille',
 
 	// V
-	'voir_detail' => 'voir les détails'
+	'voir_detail' => 'Voir les détails'
 );
