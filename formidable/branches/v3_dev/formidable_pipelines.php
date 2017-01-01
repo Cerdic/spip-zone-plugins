@@ -216,28 +216,6 @@ function formidable_optimiser_base_disparus($flux) {
 
 	// Les fichiers des réponses enregistrées par email
 	$flux['data'] += formidable_effacer_fichiers_email();
-	//
-	// CNIL -- Informatique et libertes
-	//
-	// masquer le numero IP des vieilles réponses
-	//
-	## date de reference = 4 mois
-	## definir a 0 pour desactiver
-	## même constante que pour les forums
-	if (!defined('_CNIL_PERIODE')) {
-		define('_CNIL_PERIODE', 3600*24*31*4);
-	}
-
-	if (_CNIL_PERIODE) {
-		$critere_cnil = 'date<"'.date('Y-m-d', time()-_CNIL_PERIODE).'"'
-			. ' AND statut != "spam"'
-			. ' AND (ip LIKE "%.%" OR ip LIKE "%:%")'; # ipv4 ou ipv6
-		$c = sql_countsel('spip_formulaires_reponses', $critere_cnil);
-		if ($c>0) {
-			spip_log("CNIL: masquer IP de $c réponses anciennes à formidable");
-			sql_update('spip_formulaires_reponses', array('ip' => 'MD5(ip)'), $critere_cnil);
-		}
-	}
 	return $flux;
 }
 
@@ -269,5 +247,14 @@ function formidable_formidable_traitements($flux) {
 		}
 	}
 
+	return $flux;
+}
+
+/** Hasher les ip régulièrement
+ *  @param array $flux
+ *  @return array $flux
+**/ 
+function formidable_taches_generales_cron($flux){
+	$flux['formidable_hasher_ip'] = 24*3600;
 	return $flux;
 }
