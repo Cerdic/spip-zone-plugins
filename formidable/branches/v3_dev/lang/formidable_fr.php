@@ -8,6 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// J'ai la flemme de classer, Salvatore le fera pour moi
+	'formulaires_reponses_corbeille_un' => 'Une réponse de formulaire dans la corbeille', 
+	'formulaires_reponses_corbeille_tous' => '@nb@ réponses de formulaire dans la corbeille', 
+	'formulaires_corbeille_un' => 'Un formulaire dans la corbeille', 
+	'formulaires_corbeille_tous' => '@nb@ formulaires dans la corbeille', 
 	'erreur_deplacement_fichier' => 'Le fichier « @nom@ » n\'a pas pu être stocké correctement par le système. Contactez le webmestre.',  
 	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.', 
 	'pas_analyse_fichiers' => 'Formidable ne propose pas (encore) d\'analyse des fichiers envoyés',
@@ -130,8 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_proposees' => 'À modérer',
 	'info_reponse_publiee' => 'Validée',
 	'info_reponse_publiees' => 'Validées',
-	'info_reponse_supprimee' => 'Supprimée',
-	'info_reponse_supprimees' => 'Supprimées',
+	'info_reponse_refusee' => 'Refusée',
+	'info_reponse_refusees' => 'Refusées',
+	'info_reponse_supprimees' => 'À la corbeille',
+	'info_reponse_supprimee' => 'À la corbeille',
 	'info_reponse_toutes' => 'Toutes',
 	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
 	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
@@ -183,7 +189,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Sans réponse',
 
 	// T
-	'texte_statut_poubelle' => 'supprimée',
+	'texte_statut_refusee' => 'refusée',
+	'texte_statut_poubelle' => 'à la poubelle',
 	'texte_statut_propose_evaluation' => 'proposée',
 	'texte_statut_publie' => 'validée',
 	'texte_statut_refuse' => 'archivé',

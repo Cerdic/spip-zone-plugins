@@ -191,7 +191,7 @@ function formidable_optimiser_base_disparus($flux) {
 	$res = sql_select(
 		'id_formulaires_reponse AS id, id_formulaire AS form',
 		'spip_formulaires_reponses',
-		sql_in('statut', array('refuse', 'poubelle'))
+		'statut='.sql_quote('poubelle')
 	);	
 	$res2 = sql_select(
 		'id_formulaires_reponse AS id, id_formulaire AS form',
