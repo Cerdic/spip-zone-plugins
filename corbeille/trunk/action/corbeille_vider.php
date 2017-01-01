@@ -112,7 +112,7 @@ function corbeille_vider($table, $ids=array()) {
 	// supprime les elements definis par la liste des index
 	sql_delete($table_sql,sql_in($id_table,$ids));
 	// suppresion des elements lies
-	if ($table_liee=$params['tableliee']) {
+	if (isset($params['tableliee']) and $table_liee=$params['tableliee']) {
 		$trouver_table = charger_fonction('trouver_table','base');
 		foreach($table_liee as $unetable) {
 			$desc = $trouver_table($unetable);
