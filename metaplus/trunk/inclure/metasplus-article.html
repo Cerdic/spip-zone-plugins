@@ -20,8 +20,9 @@
 [(#SET{logo,''})]
 [(#LOGO_ARTICLE|oui)
 	[(#SET{logo,[(#LOGO_ARTICLE
-	|image_passe_partout{1200,1200}
-	|extraire_attribut{src})]
+		|image_passe_partout{1200,1200}
+		|image_recadre{1200,1200}
+		|extraire_attribut{src})]
 	})]
 ]
 <BOUCLE_illus(DOCUMENTS){id_article}{extension IN jpg,gif,png}
@@ -29,6 +30,7 @@
 						{si #LOGO_ARTICLE|non}>
 [(#SET{logo,[(#FICHIER
 	|image_passe_partout{1200,1200}
+	|image_recadre{1200,1200}
 	|extraire_attribut{src}
 	)]
 })]</BOUCLE_illus>
