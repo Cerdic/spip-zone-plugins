@@ -214,8 +214,6 @@ function formidable_optimiser_base_disparus($flux) {
 
 	$flux['data'] += optimiser_sansref('spip_formulaires_reponses_champs', 'id_formulaires_reponse', $res);
 
-	// Les fichiers des réponses enregistrées par email
-	$flux['data'] += formidable_effacer_fichiers_email();
 	return $flux;
 }
 
@@ -256,5 +254,6 @@ function formidable_formidable_traitements($flux) {
 **/ 
 function formidable_taches_generales_cron($flux){
 	$flux['formidable_hasher_ip'] = 24*3600;
+	$flux['formidable_effacer_fichiers_email'] = 24*3600;
 	return $flux;
 }
