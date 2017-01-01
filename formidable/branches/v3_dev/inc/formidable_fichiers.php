@@ -437,7 +437,6 @@ function formidable_generer_url_action_recuperer_fichier_email ($saisie, $fichie
 		));
 	} elseif (isset($options['timestamp'])) {//si par timestamp
 		$arg = serialize(array(
-			'formulaire' => strval($options['id_formulaire']),
 			'timestamp' => strval($options['timestamp']), 
 			'fichier' => $fichier,
 			'saisie' => $saisie
