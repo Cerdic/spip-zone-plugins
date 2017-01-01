@@ -257,3 +257,20 @@ function formidable_taches_generales_cron($flux){
 	$flux['formidable_effacer_fichiers_email'] = 24*3600;
 	return $flux;
 }
+
+/** Déclarer les formulaires et les réponses 
+ * au plugin corbeille
+ * @param array $flux;
+ * @return array $flux;
+**/
+function formidable_corbeille_table_infos($flux){
+	$flux['formulaires']= array(
+		'statut'=>'poubelle',
+		'table'=>'formulaires'
+	);
+	$flux['formulaires_reponses']= array(
+		'statut'=>'poubelle',
+		'table'=>'formulaires_reponses'
+	);
+	return $flux;
+}

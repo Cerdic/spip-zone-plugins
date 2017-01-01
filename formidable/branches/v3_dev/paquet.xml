@@ -35,6 +35,7 @@
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="formidable_pipelines.php" />
 
+	<pipeline nom="corbeille_table_infos" inclure="formidable_pipelines.php" />
 	<necessite nom="spip_bonux" compatibilite="[3.3.8;[" />
 	<necessite nom="saisies" compatibilite="[2.17.0;[" />
 	<necessite nom="verifier" compatibilite="[1.4.1;[" />
@@ -43,6 +44,7 @@
 
 	<utilise nom="collectionjson" compatibilite="[1.5.0;[" />
 	<utilise nom="cvtupload" compatibilite="[1.9.4;[" />
+	<utilise nom="corbeille" compatibilite="[3.1.0;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
 </paquet>
