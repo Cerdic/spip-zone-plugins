@@ -402,7 +402,14 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 				foreach ($description as $i => $desc){ // ajouter la vignette et l'url
 					if (!isset($description[$i]['erreur'])) {
 						$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
-						$description[$i]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $retours['id_formulaires_reponse'], $saisie, $desc['nom']);
+						if (isset($retours['id_formulaires_reponse'])) {// si réponse enregistrée
+							$description[$i]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $retours['id_formulaires_reponse'], $saisie, $desc['fichier']);
+						} elseif (isset($retours['timestamp'])) { // si réponse simplement envoyée par courriel
+							$description[$i]['url'] = formidable_generer_url_action_recuperer_fichier_email($saisie, 
+								$desc['fichier'], 
+								array('timestamp'=>$retours['timestamp'])
+							);
+						}
 					}
 				}	
 				set_request($saisie, $description);

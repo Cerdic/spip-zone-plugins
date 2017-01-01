@@ -14,6 +14,7 @@ function traiter_email_dist($args, $retours) {
 		$ajouter_fichier = False;
 	}
 	$timestamp = time();
+	$retours['timestamp'] = $timestamp;
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -397,8 +398,10 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 		$url = formidable_generer_url_action_recuperer_fichier_email($nom_saisie, $valeur['nom'], $options);
 		$saisie_a_modifier[$i]['url'] = $url;
 		if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
+			$saisie_a_modifier[$i]['fichier'] = $valeur['nom'];
 			$saisie_a_modifier[$i]['nom'] = "["._T("formidable:lien_expire", array("delai"=>$delai))."] ".$valeur['nom'];
 		} else {
+			$saisie_a_modifier[$i]['fichier'] = $valeur['nom'];
 			$saisie_a_modifier[$i]['nom'] = $valeur['nom'];
 		}
 		if (isset($valeur['extension'])) {
