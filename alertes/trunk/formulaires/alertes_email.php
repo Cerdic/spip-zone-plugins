@@ -44,6 +44,10 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 			}
 			$valeurs['mots'] = $mots ? $mots : '';
 		}
+		$valeurs['editable_groupes'] = false;
+		if (isset($a['groupes']) and $a['groupes'] = to_array($a['groupes']) and count($a['groupes'])) {
+			$valeurs['editable_groupes'] = true;
+		}
 		//Récuperation des abonnements aux rubriques
 		if ($a['rubriques']) {
 			$rubriques = array();
@@ -52,6 +56,10 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 				$rubriques[] = $rub['id_objet'];
 			}
 			$valeurs['rubriques'] = $rubriques ? $rubriques : '';
+		}
+		$valeurs['editable_rubriques'] = false;
+		if (isset($a['rubriques']) and $a['rubriques'] = to_array($a['rubriques']) and count($a['rubriques'])) {
+			$valeurs['editable_rubriques'] = true;
 		}
 		//Récuperation des abonnements aux secteurs
 		if ($a['secteurs']) {
@@ -62,6 +70,10 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 			}
 			$valeurs['secteurs'] = $secteurs ? $secteurs : '';
 		}
+		$valeurs['editable_secteurs'] = false;
+		if (isset($a['secteurs']) and $a['secteurs'] = to_array($a['secteurs']) and count($a['secteurs'])) {
+			$valeurs['editable_secteurs'] = true;
+		}
 		//Récuperation des abonnements aux auteurs
 		if ($a['auteurs']) {
 			$auteurs = array();
@@ -70,6 +82,10 @@ function formulaires_alertes_email_charger_dist($id_auteur) {
 				$auteurs[] = $aut['id_objet'];
 			}
 			$valeurs['auteurs'] = $auteurs ? $auteurs : '';
+		}
+		$valeurs['editable_auteurs'] = false;
+		if (isset($a['auteurs']) and $a['auteurs'] = to_array($a['auteurs']) and count($a['auteurs'])) {
+			$valeurs['editable_auteurs'] = true;
 		}
 	}
 

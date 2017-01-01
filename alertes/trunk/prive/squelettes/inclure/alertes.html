@@ -1,0 +1,56 @@
+#SET{config_objet,#CONFIG{config_alertes/#ENV{objet}|table_objet}|to_array}
+<BOUCLE_autorise(CONDITION){si #CONFIG{config_alertes/activer_alertes}|=={oui}|et{#ENV{id_objet}|in_array{#GET{config_objet}}|oui}}>
+[(#BOITE_OUVRIR{<:alertes:titre_alertes:>})]
+<BOUCLE_compteur_objet (ALERTES) {objet} {id_objet} />
+	<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">[(#TOTAL_BOUCLE|singulier_ou_pluriel{alertes:info_1_alerte_#OBJET,alertes:info_nb_alertes_#OBJET})]</a></div>
+	</div><//B_compteur_objet>
+
+[(#ID_OBJET|alertes_trouver{#OBJET,#SESSION{id_auteur}}|non)
+	[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
+		|balise_img{<:alertes:add_to:>}|inserer_attribut{class,co_middle}
+		|image_reduire{24,24}
+		|concat{' <b>',<:alertes:add_to:>,'</b>'})],
+		[(#URL_ACTION_AUTEUR{ajouter_alerte,#OBJET-#ID_OBJET,#SELF})],
+		icone s24 horizontale alerte-24,<:alertes:confirmer_add_to:>})]
+]
+[(#ID_OBJET|alertes_trouver{#OBJET,#SESSION{id_auteur}}|oui)
+	[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
+		|balise_img{<:alertes:remove_from:>}|inserer_attribut{class,co_middle}
+		|image_reduire{24,24}
+		|concat{' <b>',<:alertes:remove_from:>,'</b>'})],
+		[(#URL_ACTION_AUTEUR{retirer_alerte,#OBJET-#ID_OBJET,#SELF})],
+		icone s24 horizontale alerte-24,<:alertes:confirmer_remove_from:>})]
+]
+[(#REM)
+	Si on est sur un objet rubrique, il faut permettre de s'abonner au secteur.
+]
+<BOUCLE_objet_rubrique (CONDITION) {si #OBJET|=={rubrique}|oui}>
+	<hr class="nettoyeur"/>
+	[(#SET{secteur,[(#ID_OBJET|trouver_secteur)]})]
+	<BOUCLE_compteur_secteur (ALERTES) {objet="secteur"} {id_objet=#GET{secteur}} />
+	<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,secteur}|parametre_url{id_objet,#GET{secteur}})]">[(#TOTAL_BOUCLE|singulier_ou_pluriel{alertes:info_1_alerte_secteur,alertes:info_nb_alertes_secteur})]</a></div>
+	</div><//B_compteur_secteur>
+	[(#GET{secteur}|>{0}|oui)
+		[(#GET{secteur}|alertes_trouver{secteur,#SESSION{id_auteur}}|non)
+			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
+				|balise_img{<:alertes:add_sector_to:>}|inserer_attribut{class,co_middle}
+				|image_reduire{24,24}
+				|concat{' <b>',<:alertes:add_sector_to:>,'</b>'})],
+				[(#URL_ACTION_AUTEUR{ajouter_alerte,secteur-[(#GET{secteur})],#SELF})],
+				icone s24 horizontale alerte-24,<:alertes:confirmer_add_to:>})]
+		]
+		[(#GET{secteur}|alertes_trouver{secteur,#SESSION{id_auteur}}|oui)
+			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
+				|balise_img{<:alertes:remove_sector_from:>}|inserer_attribut{class,co_middle}
+				|image_reduire{24,24}
+				|concat{' <b>',<:alertes:remove_sector_from:>,'</b>'})],
+				[(#URL_ACTION_AUTEUR{retirer_alerte,secteur-[(#GET{secteur})],#SELF})],
+				icone s24 horizontale alerte-24,<:alertes:confirmer_remove_from:>})]
+		]
+	]
+</BOUCLE_objet_rubrique>
+
+#BOITE_FERMER
+</BOUCLE_autorise>

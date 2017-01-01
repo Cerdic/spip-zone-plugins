@@ -365,3 +365,19 @@ function alertes_notifications_destinataires($flux) {
 	return $flux;
 }
 
+function alertes_affiche_droite($flux) {
+	if (in_array($flux['args']['exec'], array('rubrique', 'auteur'))) {
+		$config = lire_config('config_alertes');
+		$contexte = array();
+		$contexte['objet'] = $flux['args']['exec'];
+		$_id_objet = id_table_objet($flux['args']['exec']);
+		$contexte['id_objet'] = $flux['args'][$_id_objet];
+		if (in_array($contexte['id_objet'], to_array($config[table_objet($flux['args']['exec'])]))) {
+			$contexte['editable'] = true;
+		}
+		$flux['data'] = recuperer_fond('prive/squelettes/inclure/alertes', $contexte,
+				array('ajax' => false)) . $flux['data'];
+	}
+
+	return $flux;
+}

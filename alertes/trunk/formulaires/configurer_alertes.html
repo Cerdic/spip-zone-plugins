@@ -1,7 +1,7 @@
 [(#REM)
 	Formulaire de configuration du système d'alertes. Permet de choisir ce qui est "abonnable".
 ]
-<div class="formulaire_spip formulaire_configurer_alertes">
+<div class="formulaire_spip formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	 
@@ -78,7 +78,7 @@
 					</li>
 				</ul>
 			</fieldset>
-			<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
+			<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 		</div>
 	</form>
 </div>
