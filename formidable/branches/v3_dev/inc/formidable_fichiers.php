@@ -389,7 +389,6 @@ function formidable_zipper_reponses_formulaire($id_formulaire, $chemin_du_zip, $
 		spip_log("Impossible de créer le zip pour l'export des réponses du formulaire $id_formulaire", "formidable" . _LOG_ERREUR);
 		return 0;
 	} else {
-		$zip->delete(PCLZIP_OPT_BY_NAME, "test.txt");
 		$zip->add($fichier_csv, PCLZIP_OPT_REMOVE_ALL_PATH);
 		return $chemin_du_zip;
 	}

@@ -127,9 +127,8 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 					// Saisie de type fichier ?
 					if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
 						if ($valeur = $tenter_unserialize($valeur)) {
+							$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
 							foreach ($valeur as $v) {
-								// On ajoute à la liste des fichiers des réponses
-								$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
 								$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
 								if (file_exists($chemin_fichier)) {
 									$saisies_fichiers[] = $chemin_fichier;
