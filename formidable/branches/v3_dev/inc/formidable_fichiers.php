@@ -419,3 +419,36 @@ function formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_for
 	$securiser_action = charger_fonction('securiser_action','inc');
 	return $securiser_action('formidable_recuperer_fichier',$param,'',      false);
 }
+
+/** Générer une url d'action pour récuperer un fichier à partir d'un lien email
+ * @param string $saisie
+ * @param string $fichier
+ * @param array $options décrivant si on récupère par id de réponse ou par timestamp
+ * @return string $url
+ *
+**/
+function formidable_generer_url_action_recuperer_fichier_email ($saisie, $fichier, $options) {
+	if (isset($options['id_formulaires_reponse'])) {//si reponses enregistrées
+		$arg = serialize(array(
+			'formulaire' => strval($options['id_formulaire']),
+			'reponse' => strval($options['id_formulaires_reponse']),
+			'fichier' => $fichier,
+			'saisie' => $saisie
+		));
+	} elseif (isset($options['timestamp'])) {//si par timestamp
+		$arg = serialize(array(
+			'formulaire' => strval($options['id_formulaire']),
+			'timestamp' => strval($options['timestamp']), 
+			'fichier' => $fichier,
+			'saisie' => $saisie
+		));
+	} else { //si ni timestamp, ni réponse enregistrée -> on passe notre chemin
+		continue;
+	}
+	
+	$pass = secret_du_site();
+	$action = "formidable_recuperer_fichier_par_email"; 
+	$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
+	$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
+	return $url;
+}

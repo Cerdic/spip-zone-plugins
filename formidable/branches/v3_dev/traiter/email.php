@@ -390,35 +390,14 @@ function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timest
 function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_saisie, $options) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 
-	$pass = secret_du_site();
-	$action = "formidable_recuperer_fichier_par_email"; 
 	if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
 		$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
 	}
 	foreach ($saisie_a_modifier as $i => $valeur){
-		if (isset($options['id_formulaires_reponse'])) {//si reponses enregistrées
-			$arg = serialize(array(
-				'formulaire' => strval($options['id_formulaire']),
-				'reponse' => strval($options['id_formulaires_reponse']),
-				'fichier' => $valeur['nom'],
-				'saisie' => $nom_saisie
-			));
-		} elseif (isset($options['timestamp'])) {//si par timestamp
-			$arg = serialize(array(
-				'formulaire' => strval($options['id_formulaire']),
-				'timestamp' => strval($options['timestamp']), 
-				'fichier' => $valeur['nom'],
-				'saisie' => $nom_saisie
-			));
-		} else { //si ni timestamp, ni réponse enregistrée -> on passe notre chemin
-			continue;
-		}
-
-		$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
-		$url = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
+		$url = formidable_generer_url_action_recuperer_fichier_email($nom_saisie, $valeur['nom'], $options);
 		$saisie_a_modifier[$i]['url'] = $url;
 		if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
-			$saisie_a_modifier[$i]['nom'] = "<strong>["._T("formidable:lien_expire", array("delai"=>$delai))."]</strong> ".$valeur['nom'];
+			$saisie_a_modifier[$i]['nom'] = "["._T("formidable:lien_expire", array("delai"=>$delai))."] ".$valeur['nom'];
 		} else {
 			$saisie_a_modifier[$i]['nom'] = $valeur['nom'];
 		}
