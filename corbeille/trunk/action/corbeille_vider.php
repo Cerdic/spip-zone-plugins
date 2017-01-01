@@ -6,7 +6,7 @@
  * Licence GPL
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+include_spip('inc/utils');
 /**
  * Parametres de configuration personnalisables/surchargeables de la corbeille :
  * global $corbeille_params;
@@ -108,6 +108,9 @@ function corbeille_vider($table, $ids=array()) {
 	if (!count($ids))
 		return false;
 		
+	if ($pre_suppression=charger_fonction($table."_pre_suppression","corbeille", true)) {
+		$pre_suppression($ids);
+	}
 
 	// supprime les elements definis par la liste des index
 	sql_delete($table_sql,sql_in($id_table,$ids));
