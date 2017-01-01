@@ -51,11 +51,11 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 	$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 
 	// Si pas déjà présent, on cherche les saisies de ce formulaire
-	if (is_null($formulaires_saisies[$id_formulaire])) {
+	if (!isset($formulaires_saisies[$id_formulaire])) {
 		$formulaires_saisies[$id_formulaire] = unserialize(sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.intval($id_formulaire)));
 	}
 	// Si pas déjà présent, on cherche les valeurs de cette réponse
-	if (is_null($reponses_valeurs[$id_formulaires_reponse])) {
+	if (!isset($reponses_valeurs[$id_formulaires_reponse])) {
 		if ($champs = sql_allfetsel('nom,valeur', 'spip_formulaires_reponses_champs', 'id_formulaires_reponse = '.intval($id_formulaires_reponse))) {
 			foreach ($champs as $champ) {
 				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = $tenter_unserialize($champ['valeur']);
