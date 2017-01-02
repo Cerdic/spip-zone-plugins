@@ -37,8 +37,8 @@ if(
 				$r["url"],
 				$r["id_article"],
 				array(
-					'ete' => $result["decalage_ete"],
-					'hiver' => $result["decalage_hiver"]
+					'ete' => $r["decalage_ete"],
+					'hiver' => $r["decalage_hiver"]
 				)
 			);
 			spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
