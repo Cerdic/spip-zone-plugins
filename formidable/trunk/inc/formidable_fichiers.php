@@ -441,10 +441,7 @@ function formidable_generer_url_action_recuperer_fichier_email ($saisie, $fichie
 			'fichier' => $fichier,
 			'saisie' => $saisie
 		));
-	} else { //si ni timestamp, ni réponse enregistrée -> on passe notre chemin
-		continue;
-	}
-	
+	} 	
 	$pass = secret_du_site();
 	$action = "formidable_recuperer_fichier_par_email"; 
 	$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
