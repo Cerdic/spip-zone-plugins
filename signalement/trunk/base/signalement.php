@@ -86,7 +86,7 @@ function signalement_declarer_tables_objets_sql($tables){
 	$tables[]['tables_jointures'][]= 'signalements';
 	
 	// recherche jointe sur les diogenes pour tous les objets
-	$tables[]['rechercher_jointures']['signalement'] = array('texte' => 1,'motif' => 1);
+	// $tables[]['rechercher_jointures']['signalement'] = array('texte' => 1,'motif' => 1);
 	
 	// versionner les jointures pour tous les objets
 	$tables[]['champs_versionnes'][] = 'jointure_signalements';
