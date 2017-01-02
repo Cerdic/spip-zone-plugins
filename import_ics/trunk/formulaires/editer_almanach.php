@@ -79,7 +79,7 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
   if ($erreur_url){
 		$erreurs['url'] = $erreur_url;
 	}
-  if ($erreurs["id_article"]){
+  if (isset($erreurs["id_article"])){
 		$erreurs["le_id_article"]=$erreurs["id_article"];
 		unset($erreurs["id_article"]);
 	}
@@ -97,9 +97,9 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$decalage = array();
 	// Si besoin, on récupère les anciennes versions de certains champs
-	if ($id_almanach!='new'){
+	if ($id_almanach!='new' and $id_almanach!='oui'){
 		$ancien_decalage = array();
-		$anciens_champs = sql_fetsel("decalage_ete,decalage_hiver,id_article,url","spip_almanachs","id_almanach=$id_almanach");
+		$anciens_champs = sql_fetsel("decalage_ete,decalage_hiver,id_article,url","spip_almanachs","id_almanach=".sql_quote($id_almanach));
 		$ancien_decalage['ete'] = $anciens_champs['decalage_ete'];
 		$ancien_decalage['hiver'] = $anciens_champs['decalage_hiver'];
 		$ancien_id_article = $anciens_champs['id_article'];
@@ -117,16 +117,14 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	
 	
 	// Corriger les évènements existants si certaines propriétés de l'almanache sont modifiés
-	if ($id_almanach!='new'){
-		$evenements = trouver_evenements_almanach($id_almanach,'id_evenement,date_debut,date_fin',true);
-		if(is_array($evenements) and count($evenements)>0){
-			corriger_decalage($id_almanach,$decalage,$ancien_decalage,$evenements);
-			corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$evenements);
-		}
-		if ($url!=$ancien_url){// si jamais on a changé l'url => du passé faisons table rase
-			include_spip('action/supprimer_evenements_almanach');
-			action_supprimer_evenements_almanach_post($id_almanach);
-		}
+	$evenements = trouver_evenements_almanach($id_almanach,'id_evenement,date_debut,date_fin',true);
+	if (is_array($evenements) and count($evenements)>0){
+		corriger_decalage($id_almanach,$decalage,$ancien_decalage,$evenements);
+		corriger_article_referent($id_almanach,$id_article,$ancien_id_article,$evenements);
+	}
+	if (isset($ancien_url) and $url!=$ancien_url){// si jamais on a changé l'url => du passé faisons table rase
+		include_spip('action/supprimer_evenements_almanach');
+		action_supprimer_evenements_almanach_post($id_almanach);
 	}
 	# on importe les autres évènement
 	importer_almanach($id_almanach,$url,$id_article,$decalage);
