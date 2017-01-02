@@ -57,8 +57,10 @@ function import_ics_post_edition($flux) {
 		and $id_almanach = $flux['args']['id_objet']
 		and isset($flux['data']['statut'])
 		and $statut = $flux['data']['statut']
+		and $statut_ancien = $flux['args']['statut_ancien']
 		and $statut != $statut_ancien) {
 		$set = array();
+		$where = array();
 		switch ($statut) {
 			case 'poubelle':
 				// on passe aussi tous les evenements associes a la poubelle, sans distinction
