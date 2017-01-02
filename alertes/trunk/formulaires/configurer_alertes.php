@@ -37,12 +37,12 @@ function formulaires_configurer_alertes_verifier_dist() {
 	//Champs obligatoires
 	foreach (array('activer_alertes', 'mode_envoi', 'nb_mails') as $champ) {
 		if (!_request($champ)) {
-			$erreurs[$champ] = _T('alertes:required_field');
+			$erreurs[$champ] = _T('alerte:required_field');
 		}
 	}
 	//Message d'erreur générique
 	if (count($erreurs)) {
-		$erreurs['message_erreur'] = _T('alertes:generic_error');
+		$erreurs['message_erreur'] = _T('alerte:generic_error');
 	}
 
 	return $erreurs;
@@ -63,7 +63,7 @@ function formulaires_configurer_alertes_traiter_dist() {
 	//Sauvegarde dans les meta
 	include_spip('inc/meta');
 	ecrire_meta('config_alertes', $a);
-	$res = array('message_ok' => _T('alertes:alerts_configuration_message_ok'));
+	$res = array('message_ok' => _T('alerte:alerts_configuration_message_ok'));
 
 	return $res;
 }

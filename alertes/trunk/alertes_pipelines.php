@@ -366,16 +366,35 @@ function alertes_notifications_destinataires($flux) {
 }
 
 function alertes_affiche_droite($flux) {
+	include_spip('base/abstract_sql');
+	include_spip('inc/config');
 	if (in_array($flux['args']['exec'], array('rubrique', 'auteur'))) {
 		$config = lire_config('config_alertes');
 		$contexte = array();
 		$contexte['objet'] = $flux['args']['exec'];
 		$_id_objet = id_table_objet($flux['args']['exec']);
 		$contexte['id_objet'] = $flux['args'][$_id_objet];
-		if (in_array($contexte['id_objet'], to_array($config[table_objet($flux['args']['exec'])]))) {
+		if (in_array($contexte['id_objet'], to_array($config[table_objet($flux['args']['exec'])])) and $config['activer_alertes'] === 'oui') {
 			$contexte['editable'] = true;
 		}
 		$flux['data'] = recuperer_fond('prive/squelettes/inclure/alertes', $contexte,
+				array('ajax' => false)) . $flux['data'];
+	}
+	if ($flux['args']['exec'] == 'article') {
+		$config = lire_config('config_alertes');
+		$contexte = array();
+		$contexte['objet'] = $flux['args']['exec'];
+		$_id_objet = id_table_objet($flux['args']['exec']);
+		$contexte['id_objet'] = $flux['args'][$_id_objet];
+		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($contexte['id_objet']));
+		if (is_array($art) and count($art)) {
+			$contexte = array_merge($contexte, $art);
+		}
+		if ((in_array($contexte['id_rubrique'], to_array($config['rubriques'])) or in_array($contexte['id_secteur'], to_array($config['secteurs']))) and $config['activer_alertes'] === 'oui') {
+			$contexte['editable'] = true;
+		}
+
+		$flux['data'] = recuperer_fond('prive/squelettes/inclure/alertes_articles', $contexte,
 				array('ajax' => false)) . $flux['data'];
 	}
 

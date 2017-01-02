@@ -16,7 +16,7 @@
 		<B_alertes_secteurs>
 		<li class="fieldset secteurs">
 			<fieldset>
-				<h3 class="legend"><:alertes:abo_sectors:></h3>
+				<h3 class="legend"><:alerte:abo_sectors:></h3>
 				<ul class="editer-groupe">
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{secteurs}}
 					<li class="editer editer_secteurs[ (#GET{erreurs}|oui)erreur]">
@@ -38,7 +38,7 @@
 		<B_alertes_rubriques>
 		<li class="fieldset rubriques">
 			<fieldset>
-				<h3 class="legend"><:alertes:abo_topics:></h3>
+				<h3 class="legend"><:alerte:abo_topics:></h3>
 				<ul class="editer-groupe">
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{rubriques}}
 					<li class="editer editer_rubriques[ (#GET{erreurs}|oui)erreur]">
@@ -58,7 +58,7 @@
 		[(#REM) Abonnements aux mots-clès, par groupes de mots autorisés]
 		<BOUCLE_editable_groupes (CONDITION) {si #ENV{editable_groupes}}> </BOUCLE_editable_groupes>
 		<B_groupes_mots>
-			<li><h3 class="legend"><:alertes:abo_keywords:></h3></li>
+			<li><h3 class="legend"><:alerte:abo_keywords:></h3></li>
 			<BOUCLE_groupes_mots (GROUPES_MOTS){tout}{id_groupe IN #CONFIG{config_alertes/groupes}|to_array}>
 			<B_mots>
 			<li class="fieldset">
@@ -87,7 +87,7 @@
 		<B_alertes_auteurs>
 		<li class="fieldset auteurs">
 			<fieldset>
-				<h3 class="legend"><:alertes:abo_authors:></h3>
+				<h3 class="legend"><:alerte:abo_authors:></h3>
 				<ul class="editer-groupe">
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{auteurs}}
 					<li class="editer editer_auteurs">

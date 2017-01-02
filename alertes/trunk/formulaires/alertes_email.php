@@ -132,7 +132,7 @@ function formulaires_alertes_email_traiter_dist($id_auteur) {
 				array('id_objet' => intval($auteur), 'objet' => 'auteur', 'id_auteur' => $id_auteur, 'maj' => $now));
 		}
 	}
-	$message = _T('alertes:your_alertes_message_ok');
+	$message = _T('alerte:your_alertes_message_ok');
 	$res = array('message_ok' => $message);
 
 	return $res;

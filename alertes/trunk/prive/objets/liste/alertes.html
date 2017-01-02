@@ -6,16 +6,16 @@
 #ANCRE_PAGINATION
 <div class="liste-objets alertes">
 <table class="spip liste">
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{alertes:info_1_alerte_#OBJET,alertes:info_nb_alertes_#OBJET}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{alerte:info_1_alerte_#OBJET,alerte:info_nb_alertes_#OBJET}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="id" scope="col">[(#TRI{id_alerte,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class="picto" scope="col"></th>
-			<th class="objet principale" scope="col">[(#TRI{objet,<:alertes:champ_objet_label:>,ajax})]</th>
-			<th class="statut" scope="col"><:alertes:en_ligne:></th>
-			<th class="id_auteur secondaire" scope="col">[(#TRI{id_auteur,<:alertes:champ_id_auteur_label:>,ajax})]</th>
-			<th class="maj" scope="col">[(#TRI{maj,<:alertes:maj:>,ajax})]</th>
-			<th class="actions" scope="col"><:alertes:actions_label:></th>
+			<th class="objet principale" scope="col">[(#TRI{objet,<:alerte:champ_objet_label:>,ajax})]</th>
+			<th class="statut" scope="col"><:alerte:en_ligne:></th>
+			<th class="id_auteur secondaire" scope="col">[(#TRI{id_auteur,<:alerte:champ_id_auteur_label:>,ajax})]</th>
+			<th class="maj" scope="col">[(#TRI{maj,<:alerte:maj:>,ajax})]</th>
+			<th class="actions" scope="col"><:alerte:actions_label:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,11 +29,11 @@
 			<td class="maj secondaire">[(#MAJ|date_interface)]</td>
 			<td class="actions">[(#AUTORISER{supprimer,alerte,#ID_ALERTE}|oui)
 				[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-remove-32.png}
-					|balise_img{<:alertes:remove:>}|inserer_attribut{class,co_middle}
+					|balise_img{<:alerte:remove:>}|inserer_attribut{class,co_middle}
 					|image_reduire{24,24}
-					|concat{' <b>',<:alertes:remove:>,'</b>'})],
+					|concat{' <b>',<:alerte:remove:>,'</b>'})],
 					[(#URL_ACTION_AUTEUR{supprimer_alerte,#ID_ALERTE,#SELF})],
-					icone s24 danger horizontale alerte-24,<:alertes:confirmer_remove_from:>})]
+					icone s24 danger horizontale alerte-24,<:alerte:confirmer_remove_from:>})]
 				]</td>
 		</tr>
 	</BOUCLE_liste_alertes>
