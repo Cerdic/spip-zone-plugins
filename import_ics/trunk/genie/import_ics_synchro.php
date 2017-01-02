@@ -22,30 +22,28 @@ include_spip('inc/import_ics');
  */
 function genie_import_ics_synchro_dist($t){
 
-//on recupère toutes les infos sur les almanachs
-if(
-	$resultats = sql_allfetsel('*', 'spip_almanachs')
-	and is_array($resultats)
-)
-	{
-		//pour chacun des almanachs, on va importer les evenements
-	foreach ($resultats as $r) {
-			$id_almanach = $r["id_almanach"];
-			spip_log ("Import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
-			importer_almanach(
-			  $id_almanach,
-				$r["url"],
-				$r["id_article"],
-				array(
-					'ete' => $r["decalage_ete"],
-					'hiver' => $r["decalage_hiver"]
-				)
-			);
-			spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
+	//on recupère toutes les infos sur les almanachs
+	if(
+		$resultats = sql_allfetsel('*', 'spip_almanachs')
+		and is_array($resultats)
+	)
+		{
+			//pour chacun des almanachs, on va importer les evenements
+		foreach ($resultats as $r) {
+				$id_almanach = $r["id_almanach"];
+				spip_log ("Import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
+				importer_almanach(
+					$id_almanach,
+					$r["url"],
+					$r["id_article"],
+					array(
+						'ete' => $r["decalage_ete"],
+						'hiver' => $r["decalage_hiver"]
+					)
+				);
+				spip_log ("Fin de l'import via génie de l'almanach $id_almanach","import_ics"._LOG_INFO);
+			}
+			return 1;
 		}
-		return 1;
-	}
 }
 
-
-?>
