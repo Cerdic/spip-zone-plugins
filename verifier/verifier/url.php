@@ -34,6 +34,7 @@ function verifier_url_dist($valeur, $options = array()) {
 	// Choix du type de protocole à vérifier
 	if (!$options['type_protocole'] or !in_array($options['type_protocole'], array('tous','web','mail','ftp','webcal_souple','webcal_strict','exact'))) {
 		$type_protocole = 'web';
+		$protocole = '';
 	} else {
 		$type_protocole = $options['type_protocole'];
 		$protocole = '' ;
