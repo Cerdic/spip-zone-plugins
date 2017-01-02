@@ -29,7 +29,7 @@ function signalement_declarer_tables_objets_sql($tables){
 		'url_voir'=>'controler_signalement',
 		'url_edit'=>'controler_signalement',
 		'editable'=>'non',
-		'titre' => 'texte',
+		'titre' => 'texte AS titre',
 		'date' => 'maj',
 		'principale' => 'oui',
 		'champs_editables' => array('texte','motif'),
