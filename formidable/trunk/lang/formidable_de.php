@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@ hat ihnen geschrieben.',
 	'traiter_email_sujet_accuse' => 'Danke für ihre Antwort.',
 	'traiter_email_titre' => 'Per Mail senden',
-	'traiter_email_url_enregistrement' => 'Sie könen die Antworten <a href="@url@">auf dieser Seite verwalten</a>.',
+	'traiter_email_url_enregistrement' => 'Sie könen die Antworten <a href="@url@">auf dieser Seite verwalten</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Einträge in das Formular in der Datenbank speichern',
 	'traiter_enregistrement_erreur_base' => 'Beim Speichern in der Datenbank ist ein Fehler aufgetreten',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Sie haben dieses Formular bereits ausgefüllt.',

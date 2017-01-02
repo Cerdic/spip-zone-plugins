@@ -148,7 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@ vám napísal(a).',
 	'traiter_email_sujet_accuse' => 'Ďakujeme vám za odpoveď.',
 	'traiter_email_titre' => 'Poslať e-mailom',
-	'traiter_email_url_enregistrement' => 'Riadiť odpovede môžete <a href="@url@">na tejto stránke.</a>',
+	'traiter_email_url_enregistrement' => 'Riadiť odpovede môžete <a href="@url@">na tejto stránke.</a>', # MODIF
 	'traiter_enregistrement_description' => 'Uloží výsledky z formulára do databázy',
 	'traiter_enregistrement_erreur_base' => 'Počas ukladania do databázy sa vyskytla technická chyba',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Tento formulár ste už vyplnili.',

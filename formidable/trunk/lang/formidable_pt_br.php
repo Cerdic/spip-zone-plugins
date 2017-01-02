@@ -117,8 +117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_proposees' => 'A moderar',
 	'info_reponse_publiee' => 'Validada',
 	'info_reponse_publiees' => 'Validadas',
-	'info_reponse_supprimee' => 'Apagada',
-	'info_reponse_supprimees' => 'Apagadas',
+	'info_reponse_supprimee' => 'Apagada', # MODIF
+	'info_reponse_supprimees' => 'Apagadas', # MODIF
 	'info_reponse_toutes' => 'Todas',
 	'info_utilise_1_formulaire' => 'Formulário utilizado:',
 	'info_utilise_nb_formulaires' => 'Formulários utilizados:',
@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Sem resposta',
 
 	// T
-	'texte_statut_poubelle' => 'excluído',
+	'texte_statut_poubelle' => 'excluído', # MODIF
 	'texte_statut_propose_evaluation' => 'proposto',
 	'texte_statut_publie' => 'validado',
 	'texte_statut_refuse' => 'arquivado',
@@ -215,12 +215,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@  enviou uma mensagem',
 	'traiter_email_sujet_accuse' => 'Obrigado pela sua resposta.',
 	'traiter_email_titre' => 'Enviar por e-mail',
-	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.',
+	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Gravar os resultados do formulário na base de dados',
 	'traiter_enregistrement_erreur_base' => 'Aconteceu um erro técnico durante a gravação na base de dados',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Você já respondeu a este formulário.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'A resposta a ser editada não foi encontrada.',
-	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente',
+	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente', # MODIF
 	'traiter_enregistrement_option_anonymiser_explication' => 'Resultados anônimos (não guardar traços de identificação das pessoas que responderam).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Tornar o formulário anônimo',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Que variável do sistema usar para calcular um valor único para cada autor sem revelar sua identidade.',

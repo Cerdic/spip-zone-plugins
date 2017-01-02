@@ -120,8 +120,8 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'info_reponse_proposees' => 'To moderate',
 	'info_reponse_publiee' => 'Validated',
 	'info_reponse_publiees' => 'Validated',
-	'info_reponse_supprimee' => 'Deleted',
-	'info_reponse_supprimees' => 'Deleted',
+	'info_reponse_supprimee' => 'Deleted', # MODIF
+	'info_reponse_supprimees' => 'Deleted', # MODIF
 	'info_reponse_toutes' => 'All',
 	'info_utilise_1_formulaire' => 'Form used:',
 	'info_utilise_nb_formulaires' => 'Forms used:',
@@ -166,7 +166,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'sans_reponses' => 'Unanswered',
 
 	// T
-	'texte_statut_poubelle' => 'deleted',
+	'texte_statut_poubelle' => 'deleted', # MODIF
 	'texte_statut_propose_evaluation' => 'proposed',
 	'texte_statut_publie' => 'validated',
 	'texte_statut_refuse' => 'archived',
@@ -208,12 +208,12 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_sujet' => '@nom@ has written to you.',
 	'traiter_email_sujet_accuse' => 'Thank you for you reply.',
 	'traiter_email_titre' => 'Send by email',
-	'traiter_email_url_enregistrement' => 'You can manage the answers <a href="@url@">on this page</a>.',
+	'traiter_email_url_enregistrement' => 'You can manage the answers <a href="@url@">on this page</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Saves the form results in the database',
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved',
+	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved', # MODIF
 	'traiter_enregistrement_option_anonymiser_explication' => 'Results anonymous (don’t keep any tracks of user who have answered).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.',

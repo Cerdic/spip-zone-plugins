@@ -89,8 +89,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_reponses' => '@nb@ إجابة',
 	'info_reponse_publiee' => 'مصدّقة',
 	'info_reponse_publiees' => 'مصدّقة',
-	'info_reponse_supprimee' => 'محذوفة',
-	'info_reponse_supprimees' => 'محذوفة',
+	'info_reponse_supprimee' => 'محذوفة', # MODIF
+	'info_reponse_supprimees' => 'محذوفة', # MODIF
 	'info_reponse_toutes' => 'الكل',
 
 	// M
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'بدون إجابة',
 
 	// T
-	'texte_statut_poubelle' => 'محذوفة',
+	'texte_statut_poubelle' => 'محذوفة', # MODIF
 	'texte_statut_propose_evaluation' => 'مقترحة',
 	'texte_statut_publie' => 'مصدّقة',
 	'titre_cadre_raccourcis' => 'إختصارات',

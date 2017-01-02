@@ -103,8 +103,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_proposees' => 'На проверке',
 	'info_reponse_publiee' => 'Опубликованные',
 	'info_reponse_publiees' => 'Опубликованные',
-	'info_reponse_supprimee' => 'Удаленные',
-	'info_reponse_supprimees' => 'Удаленные',
+	'info_reponse_supprimee' => 'Удаленные', # MODIF
+	'info_reponse_supprimees' => 'Удаленные', # MODIF
 	'info_reponse_toutes' => 'Все',
 	'info_utilise_1_formulaire' => 'Форма использует:',
 	'info_utilise_nb_formulaires' => 'Формы используют:',
@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Без ответа',
 
 	// T
-	'texte_statut_poubelle' => 'удалить',
+	'texte_statut_poubelle' => 'удалить', # MODIF
 	'texte_statut_propose_evaluation' => 'на проверку',
 	'texte_statut_publie' => 'опубликовать',
 	'texte_statut_refuse' => 'архивировать',
@@ -186,12 +186,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@ вы написали.',
 	'traiter_email_sujet_accuse' => 'Спасибо за ваш ответ.',
 	'traiter_email_titre' => 'Отправлять данные формы электронной почтой',
-	'traiter_email_url_enregistrement' => 'Вы можете управлять ответами <a href="@url@">на этой странице</a>.',
+	'traiter_email_url_enregistrement' => 'Вы можете управлять ответами <a href="@url@">на этой странице</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Сохранять заполненные формы в базе данных',
 	'traiter_enregistrement_erreur_base' => 'Техническая ошибка при работе с базой данных.',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Вы уже заполнили эту форму',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'Ответ для редактирования не найден.', # RELIRE
-	'traiter_enregistrement_message_ok' => 'Спасибо. Ваш ответ был сохранен',
+	'traiter_enregistrement_message_ok' => 'Спасибо. Ваш ответ был сохранен', # MODIF
 	'traiter_enregistrement_option_anonymiser_explication' => 'Анонимные ответы (не сохранять идентифицирующую пользователя информацию)',
 	'traiter_enregistrement_option_anonymiser_label' => 'Анонимизировать форму',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Переменные, при помощи которых анонимизируется ответ',

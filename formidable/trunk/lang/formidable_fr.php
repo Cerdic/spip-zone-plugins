@@ -7,20 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// J'ai la flemme de classer, Salvatore le fera pour moi
-	'formulaires_reponses_corbeille_un' => 'Une réponse de formulaire dans la corbeille', 
-	'formulaires_reponses_corbeille_tous' => '@nb@ réponses de formulaire dans la corbeille', 
-	'formulaires_corbeille_un' => 'Un formulaire dans la corbeille', 
-	'formulaires_corbeille_tous' => '@nb@ formulaires dans la corbeille', 
-	'erreur_deplacement_fichier' => 'Le fichier « @nom@ » n\'a pas pu être stocké correctement par le système. Contactez le webmestre.',  
-	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.', 
-	'pas_analyse_fichiers' => 'Formidable ne propose pas (encore) d\'analyse des fichiers envoyés',
-	'lien_expire' => 'Lien expirant dans @delai@',	
-	'jours_heures_minutes_secondes' => "@j@j @h@h @m@min @s@s", 
-	'heures_minutes_secondes' => "@h@h @m@min @s@s", 
-	'minutes_secondes' => "@m@min @s@s", 
-	'secondes' => "@s@s", 
-	'id_formulaires_reponse' => 'Identifiant de la réponse', 	
 	// A
 	'activer_pages_explication' => 'Par défaut, les pages publiques des formulaires ne sont pas autorisées',
 	'activer_pages_label' => 'Autoriser la création de pages publique pour les formulaires',
@@ -54,9 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l’analyse des réponses',
 	'champs' => 'Champs',
 	'changer_statut' => 'Ce formulaire est :',
-	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible de créer le dossier @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d\'accès.', 
-	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d\'écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d\'accès.', 
-	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.', 
+	'creer_dossier_formulaire_erreur_impossible_creer' => 'Impossible de créer le dossier @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
+	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Impossible d’écrire dans le  @dossier@,  nécessaire pour stocker les fichiers. Vérifier les droits d’accès.',
+	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'Il est possible de lire à distance le contenu du dossier  @dossier@. Ceci est problématique en terme de confidentialité des données.',
+
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
 	'echanger_formulaire_wcs_importer' => 'W.C.S. (.wcs)',
@@ -92,7 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_unicite_label' => 'Vérifier l’unicité d’un champ',
 	'erreur_autorisation' => 'Vous n’avez pas le droit d’éditer les formulaires du site.',
 	'erreur_base' => 'Une erreur technique est survenue durant l’enregistrement.',
-	'erreur_fichier_introuvable' => 'Le fichier demandé est introuvable.', 
+	'erreur_deplacement_fichier' => 'Le fichier « @nom@ » n’a pas pu être stocké correctement par le système. Contactez le webmestre.',
+	'erreur_fichier_expire' => 'Le lien pour télécharger le fichier est trop ancien.',
+	'erreur_fichier_introuvable' => 'Le fichier demandé est introuvable.',
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier votre envoi.',
 	'erreur_identifiant' => 'Cet identifiant est déjà utilisé.',
 	'erreur_identifiant_format' => 'L’identifiant ne peut contenir que des chiffres, lettres et le caractère "_"',
@@ -108,15 +97,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme, c’est à dire que l’identité de l’utilisateur n’est pas enregistrée.',
 	'formulaires_aucun' => 'Il n’y a pour l’instant aucun formulaire.',
 	'formulaires_aucun_champ' => 'Il n’y a pour l’instant aucun champ de saisie pour ce formulaire.',
+	'formulaires_corbeille_tous' => '@nb@ formulaires dans la corbeille',
+	'formulaires_corbeille_un' => 'Un formulaire dans la corbeille',
 	'formulaires_dupliquer' => 'Dupliquer le formulaire',
 	'formulaires_dupliquer_copie' => '(copie)',
 	'formulaires_introduction' => 'Créez et configurez ici les formulaires de votre site.',
 	'formulaires_nouveau' => 'Créer un nouveau formulaire',
+	'formulaires_reponses_corbeille_tous' => '@nb@ réponses de formulaire dans la corbeille',
+	'formulaires_reponses_corbeille_un' => 'Une réponse de formulaire dans la corbeille',
 	'formulaires_supprimer' => 'Supprimer le formulaire',
 	'formulaires_supprimer_confirmation' => 'Attention, cela supprimera aussi tous les résultats. Êtes-vous sûr de vouloir supprimer ce formulaire ?',
 	'formulaires_tous' => 'Tous les formulaires',
 
+	// H
+	'heures_minutes_secondes' => '@h@h @m@min @s@s',
+
 	// I
+	'id_formulaires_reponse' => 'Identifiant de la réponse',
 	'identification_par_cookie' => 'Par cookie',
 	'identification_par_id_auteur' => 'Par l’identifiant (id_auteur) de la personne authentifiée',
 	'importer_formulaire' => 'Importer un formulaire',
@@ -136,13 +133,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_publiees' => 'Validées',
 	'info_reponse_refusee' => 'Refusée',
 	'info_reponse_refusees' => 'Refusées',
-	'info_reponse_supprimees' => 'À la corbeille',
 	'info_reponse_supprimee' => 'À la corbeille',
+	'info_reponse_supprimees' => 'À la corbeille',
 	'info_reponse_toutes' => 'Toutes',
 	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
 	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
 
+	// J
+	'jours_heures_minutes_secondes' => '@j@j @h@h @m@min @s@s',
+
 	// L
+	'lien_expire' => 'Lien expirant dans @delai@',
 	'liens_ajouter' => 'Ajouter un formulaire',
 	'liens_ajouter_lien' => 'Ajouter ce formulaire',
 	'liens_creer_associer' => 'Créer et associer un formulaire',
@@ -150,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_retirer_tous_liens_formulaires' => 'Retirer tous les formulaires',
 
 	// M
+	'minutes_secondes' => '@m@min @s@s',
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',
 	'modele_nom_formulaire' => 'un formulaire',
 
@@ -157,6 +159,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_afficher_titre_formulaire' => 'Afficher le titre du formulaire ?',
 	'noisette_label_identifiant' => 'Formulaire à afficher :',
 	'noisette_nom_noisette_formulaire' => 'Formulaire',
+
+	// P
+	'pas_analyse_fichiers' => 'Formidable ne propose pas (encore) d’analyse des fichiers envoyés',
 
 	// R
 	'reponse_aucune' => 'Aucune réponse',
@@ -187,13 +192,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sans_reponses' => 'Sans réponse',
+	'secondes' => '@s@s',
 
 	// T
-	'texte_statut_refusee' => 'refusée',
 	'texte_statut_poubelle' => 'à la poubelle',
 	'texte_statut_propose_evaluation' => 'proposée',
 	'texte_statut_publie' => 'validée',
 	'texte_statut_refuse' => 'archivé',
+	'texte_statut_refusee' => 'refusée',
 	'titre_cadre_raccourcis' => 'Raccourcis',
 	'titre_formulaires_archives' => 'Archives',
 	'titre_reponses' => 'Réponses',
@@ -236,8 +242,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@ vous a écrit.',
 	'traiter_email_sujet_accuse' => 'Merci de votre réponse.',
 	'traiter_email_titre' => 'Envoyer par courriel',
+	'traiter_email_url_enregistrement' => 'Vous pouvez gérer l’ensemble des réponses <a href="@url@">sur cette page</a>.',
 	'traiter_email_url_enregistrement_precis' => 'Vous pouvez voir cette réponse <a href="@url@">sur cette page</a>.',
-	'traiter_email_url_enregistrement' => 'Vous pouvez gérer l\'ensemble des réponses <a href="@url@">sur cette page</a>.',
 	'traiter_enregistrement_description' => 'Enregistre les résultats du formulaire dans la base de données',
 	'traiter_enregistrement_erreur_base' => 'Une erreur technique est survenue durant l’enregistrement en base de données',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Vous avez déjà répondu à ce formulaire.',

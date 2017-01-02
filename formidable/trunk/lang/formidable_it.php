@@ -128,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@ ti ha scritto.',
 	'traiter_email_sujet_accuse' => 'Grazie per aver risposto.',
 	'traiter_email_titre' => 'Invia per posta',
-	'traiter_email_url_enregistrement' => 'Puoi gestire le risposte <a href="@url@">su questa pagina</a>.',
+	'traiter_email_url_enregistrement' => 'Puoi gestire le risposte <a href="@url@">su questa pagina</a>.', # MODIF
 	'traiter_enregistrement_description' => 'Salva i risultati del modulo nella base dati',
 	'traiter_enregistrement_erreur_base' => 'Si è verificato un errore tecnico durante il salvataggio in database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Hai già risposto a questo modulo.',
