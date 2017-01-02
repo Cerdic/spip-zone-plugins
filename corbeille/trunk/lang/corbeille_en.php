@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 website in the trash',
 
 	// V
-	'voir_detail' => 'see details'
+	'voir_detail' => 'see details' # MODIF
 );

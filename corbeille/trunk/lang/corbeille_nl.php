@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 site in de prullenmand',
 
 	// V
-	'voir_detail' => 'zie de details'
+	'voir_detail' => 'zie de details' # MODIF
 );

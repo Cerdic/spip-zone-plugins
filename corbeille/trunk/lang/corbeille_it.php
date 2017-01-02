@@ -19,5 +19,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Questa pagina consente di {{eliminare definitivamente}} tutti i documenti che hai inviato nel cestino. Puoi lasciare un documento nel cestino per tutto il tempo che vuoi. La cancellazione non è effettuata automaticamente ma {{quando decidi tu}}.',
 
 	// V
-	'voir_detail' => 'vedi i dettagli'
+	'voir_detail' => 'vedi i dettagli' # MODIF
 );

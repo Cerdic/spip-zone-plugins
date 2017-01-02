@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 sitio en la papelera',
 
 	// V
-	'voir_detail' => 'ver los detalles'
+	'voir_detail' => 'ver los detalles' # MODIF
 );
