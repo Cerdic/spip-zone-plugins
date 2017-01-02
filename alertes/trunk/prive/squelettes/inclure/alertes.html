@@ -1,10 +1,10 @@
 #SET{config_objet,#CONFIG{config_alertes/#ENV{objet}|table_objet}|to_array}
-<BOUCLE_autorise(CONDITION){si #CONFIG{config_alertes/activer_alertes}|=={oui}|et{#ENV{id_objet}|in_array{#GET{config_objet}}|oui}}>
-[(#BOITE_OUVRIR{<:alerte:titre_alerte:>})]
+<BOUCLE_editable (CONDITION){si #ENV{editable}|oui}>
+[(#BOITE_OUVRIR{<:alerte:titre_alertes:>})]
 <BOUCLE_compteur_objet (ALERTES) {objet} {id_objet} />
-	<div class="nb_elements">
-		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">[(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_#OBJET,alerte:info_nb_alertes_#OBJET})]</a></div>
-	</div><//B_compteur_objet>
+	[<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_#OBJET,alerte:info_nb_alertes_#OBJET})</a></div>
+	</div>]<//B_compteur_objet>
 
 [(#ID_OBJET|alertes_trouver{#OBJET,#SESSION{id_auteur}}|non)
 	[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
@@ -25,13 +25,13 @@
 [(#REM)
 	Si on est sur un objet rubrique, il faut permettre de s'abonner au secteur.
 ]
-<BOUCLE_objet_rubrique (CONDITION) {si #OBJET|=={rubrique}|oui}>
+[(#SET{secteur,[(#ID_OBJET|trouver_secteur)]})]
+<BOUCLE_objet_secteur (CONDITION) {si #ENV{editable_secteur}|oui}>
 	<hr class="nettoyeur"/>
-	[(#SET{secteur,[(#ID_OBJET|trouver_secteur)]})]
 	<BOUCLE_compteur_secteur (ALERTES) {objet="secteur"} {id_objet=#GET{secteur}} />
-	<div class="nb_elements">
-		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,secteur}|parametre_url{id_objet,#GET{secteur}})]">[(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_secteur,alerte:info_nb_alertes_secteur})]</a></div>
-	</div><//B_compteur_secteur>
+	[<div class="nb_elements">
+		<div><a href="[(#URL_ECRIRE{alertes}|parametre_url{objet,secteur}|parametre_url{id_objet,#GET{secteur}})]">(#TOTAL_BOUCLE|singulier_ou_pluriel{alerte:info_1_alerte_secteur,alerte:info_nb_alertes_secteur})</a></div>
+	</div>]<//B_compteur_secteur>
 	[(#GET{secteur}|>{0}|oui)
 		[(#GET{secteur}|alertes_trouver{secteur,#SESSION{id_auteur}}|non)
 			[(#BOUTON_ACTION{[(#CHEMIN{images/alerte-add-32.png}
@@ -50,7 +50,7 @@
 				icone s24 horizontale alerte-24,<:alerte:confirmer_remove_from:>})]
 		]
 	]
-</BOUCLE_objet_rubrique>
+</BOUCLE_objet_secteur>
 
 #BOITE_FERMER
-</BOUCLE_autorise>
+</BOUCLE_editable>

@@ -18,6 +18,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  */
 function alertes_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('inc/meta');
+	$maj = array();
+
+	$maj['create'] = array(
+		array('creer_base'),
+	);
 	$current_version = "0.0.0";
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version]) != $version_cible)
@@ -32,6 +37,15 @@ function alertes_upgrade($nom_meta_base_version, $version_cible) {
 			ecrire_meta($nom_meta_base_version, $current_version = "1.0.1", 'non');
 		}
 	}
+	$maj['1.1.0'][] = array(
+		'maj_tables',
+		array(
+			'spip_alertes_articles',
+		),
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**
@@ -44,6 +58,9 @@ function alertes_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table("spip_alertes");
 	sql_drop_table("spip_alertes_cron");
+	sql_drop_table("spip_alertes_articles");
+
+	effacer_meta('alertes');
 	effacer_meta('config_alertes');
 	effacer_meta($nom_meta_base_version);
 }

@@ -52,6 +52,7 @@ function formulaires_configurer_alertes_traiter_dist() {
 	//Récuperation de la nouvelle configuration et serialization
 	$a = serialize(array(
 		'activer_alertes' => _request('activer_alertes'),
+		'activer_alertes_articles' => _request('activer_alertes_articles'),
 		'groupes' => _request('groupes'),
 		'secteurs' => _request('secteurs'),
 		'rubriques' => _request('rubriques'),

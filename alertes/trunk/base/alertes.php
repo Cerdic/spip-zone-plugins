@@ -55,3 +55,31 @@ function alertes_declarer_tables_principales($tables_principales) {
 	return $tables_principales;
 }
 
+/**
+ * Déclarer la table de stockage de la date de maj des articles
+ *
+ * @pipeline declarer_tables_objets_sql
+ *
+ * @param array $tables
+ *     Description des tables
+ *
+ * @return array
+ *     Description complétée des tables
+ */
+function alertes_declarer_tables_auxiliaires($tables) {
+	//-- Table alertes_articles ----------------------------------------
+	$tables['spip_alertes_articles'] = array(
+		// Les champs et leurs particularités (clés etc)
+		'field' => array(
+			'id_article' => "bigint(21) NOT NULL",
+			'date' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			'maj' => "TIMESTAMP",
+		),
+		'key' => array(
+			"PRIMARY KEY" => "id_article",
+		),
+	);
+
+	return $tables;
+}
+

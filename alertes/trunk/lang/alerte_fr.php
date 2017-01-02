@@ -13,14 +13,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_label' => 'Actions',
 	'add' => 'Ajouter',
 	'add_to' => 'Ajouter &agrave; mes alertes',
+	'add_article_to' => 'Ajouter cet article aux alertes',
 	'add_sector_to' => 'Ajouter ce secteur &agrave; mes alertes',
 	'alerts_activation' => 'Activer les alertes par email ?',
+	'alerts_articles_activation' => 'Activer les alertes sur les articles mis à jour ?',
+	'activer_alertes_articles_explication' => 'Vous devez activer le mode d\'envoi par CRON pour bénéficier de cette fonctionnalité.',
 	'alerts_configuration' => 'Configuration des alertes',
 	'alerts_configuration_message_ok' => 'La configuration a &eacute;t&eacute; sauvegard&eacute;e.',
 	// C
 	'champ_id_auteur_label' => 'Identifiant de l\'auteur',
 	'champ_id_objet_label' => 'Identifiant de l\'objet',
 	'champ_objet_label' => 'Objet',
+	'confirmer_add_article_to' => 'Êtes-vous sûr de vouloir ajouter cet élément aux alertes ?',
 	'confirmer_add_to' => 'Êtes-vous sûr de vouloir ajouter cet élément à vos alertes ?',
 	'confirmer_remove_from' => 'Êtes-vous sûr de vouloir retirer cet élément à vos alertes ?',
 	// E

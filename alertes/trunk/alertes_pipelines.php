@@ -28,6 +28,7 @@ function alertes_taches_generales_cron($taches_generales) {
 	$a = lire_config('config_alertes');
 	if (is_array($a) AND intval($a['intervalle_cron']) > 1) {
 		$taches_generales['alertes'] = 60*intval($a['intervalle_cron']); // toutes les X minutes
+		$taches_generales['alertes_maj_art'] = 60*intval($a['intervalle_cron']); // toutes les X minutes
 	}
 
 	return $taches_generales;
@@ -107,7 +108,7 @@ function alertes_notifications_destinataires($flux) {
 									//Pas d'email, on enlève des listes
 									if ($del = sql_delete('spip_alertes', 'id_auteur=' . $v['id_auteur'])) {
 										spip_log('Effacement des auteurs sans emails le ' . date('Y-m-d H:i:s'),
-											'alertes' . _LOG_INFO);
+											'alertes');
 									}
 								}
 							}
@@ -115,7 +116,7 @@ function alertes_notifications_destinataires($flux) {
 							//Retrait de l'auteur introuvable
 							if ($del = sql_delete('spip_alertes', 'id_auteur=' . $abonne['id_auteur'])) {
 								spip_log('Effacer des auteurs sans ID le ' . date('Y-m-d H:i:s'),
-									'alertes' . _LOG_INFO);
+									'alertes');
 							}
 						}
 					}
@@ -168,7 +169,7 @@ function alertes_notifications_destinataires($flux) {
 									//Pas d'email, on enlève des listes
 									if ($del = sql_delete('spip_alertes', 'id_auteur=' . $v['id_auteur'])) {
 										spip_log('Effacer des auteurs sans email le ' . date('Y-m-d H:i:s'),
-											'alertes' . _LOG_INFO);
+											'alertes');
 									}
 								}
 							}
@@ -176,7 +177,7 @@ function alertes_notifications_destinataires($flux) {
 							//Retrait de l'auteur introuvable
 							if ($del = sql_delete('spip_alertes', 'id_auteur=' . $abonne['id_auteur'])) {
 								spip_log('Effacer des auteurs sans ID le ' . date('Y-m-d H:i:s'),
-									'alertes' . _LOG_INFO);
+									'alertes');
 							}
 						}
 					}
@@ -229,7 +230,7 @@ function alertes_notifications_destinataires($flux) {
 									//Pas d'email, on enlève des listes
 									if ($del = sql_delete('spip_alertes', 'id_auteur=' . $v['id_auteur'])) {
 										spip_log('Effacer des auteurs sans email le ' . date('Y-m-d H:i:s'),
-											'alertes' . _LOG_INFO);
+											'alertes');
 									}
 								}
 							}
@@ -237,7 +238,7 @@ function alertes_notifications_destinataires($flux) {
 							//Retrait de l'auteur introuvable
 							if ($del = sql_delete('spip_alertes', 'id_auteur=' . $abonne['id_auteur'])) {
 								spip_log('Effacer des auteurs sans ID le ' . date('Y-m-d H:i:s'),
-									'alertes' . _LOG_INFO);
+									'alertes');
 							}
 						}
 					}
@@ -290,7 +291,7 @@ function alertes_notifications_destinataires($flux) {
 									//Pas d'email, on enlève des listes
 									if ($del = sql_delete('spip_alertes', 'id_auteur=' . $v['id_auteur'])) {
 										spip_log('Effacer des auteurs sans email le ' . date('Y-m-d H:i:s'),
-											'alertes' . _LOG_INFO);
+											'alertes');
 									}
 								}
 							}
@@ -298,7 +299,7 @@ function alertes_notifications_destinataires($flux) {
 							//Retrait de l'auteur introuvable
 							if ($del = sql_delete('spip_alertes', 'id_auteur=' . $abonne['id_auteur'])) {
 								spip_log('Effacer des auteurs sans ID le ' . date('Y-m-d H:i:s'),
-									'alertes' . _LOG_INFO);
+									'alertes');
 							}
 						}
 					}
@@ -350,10 +351,10 @@ function alertes_notifications_destinataires($flux) {
 							);
 							if ($ok = $envoyer_mail($email, $sujet, $corps)) {
 								//Email envoyé. On log.
-								spip_log('Email correctement envoyer a ' . $email, 'alertes' . _LOG_INFO);
+								spip_log('Email correctement envoyer a ' . $email, 'alertes');
 							} else {
 								//Email non envoyé. On log.
-								spip_log('Echec de l\'envoie d\'email a ' . $email, 'alertes' . _LOG_ERREUR);
+								spip_log('Echec de l\'envoie d\'email a ' . $email, 'alertes');
 							}
 						}
 					}
@@ -368,34 +369,62 @@ function alertes_notifications_destinataires($flux) {
 function alertes_affiche_droite($flux) {
 	include_spip('base/abstract_sql');
 	include_spip('inc/config');
+
+	$contexte = array();
+	$contexte['objet'] = $flux['args']['exec'];
+	$_id_objet = id_table_objet($flux['args']['exec']);
+	$contexte['id_objet'] = isset($flux['args'][$_id_objet]) ? $flux['args'][$_id_objet] : 0;
+	$contexte[$_id_objet] = isset($flux['args'][$_id_objet]) ? $flux['args'][$_id_objet] : 0;
+	$contexte['editable'] = false;
+	$contexte['editable_rubrique'] = false;
+	$contexte['editable_secteur'] = false;
+
+	/**
+	 * On est sur une page rubrique ou auteur
+	 */
 	if (in_array($flux['args']['exec'], array('rubrique', 'auteur'))) {
 		$config = lire_config('config_alertes');
-		$contexte = array();
-		$contexte['objet'] = $flux['args']['exec'];
 		$_id_objet = id_table_objet($flux['args']['exec']);
 		$contexte['id_objet'] = $flux['args'][$_id_objet];
+		if ($contexte['objet'] == 'rubrique') {
+			$contexte['id_secteur'] = trouver_secteur($contexte['id_objet']);
+		}
 		if (in_array($contexte['id_objet'], to_array($config[table_objet($flux['args']['exec'])])) and $config['activer_alertes'] === 'oui') {
 			$contexte['editable'] = true;
 		}
+		if (isset($contexte['id_rubrique']) and in_array($contexte['id_rubrique'], to_array($config['rubriques']))) {
+			$contexte['editable_rubrique'] = true;
+		}
+		if (isset($contexte['id_secteur']) and in_array($contexte['id_secteur'], to_array($config['secteurs']))) {
+			$contexte['editable'] = true;
+			$contexte['editable_secteur'] = true;
+		}
 		$flux['data'] = recuperer_fond('prive/squelettes/inclure/alertes', $contexte,
 				array('ajax' => false)) . $flux['data'];
+		$contexte['editable'] = false; /* On fait un petit reset */
 	}
+	/**
+	 * On est sur une page article
+	 */
 	if ($flux['args']['exec'] == 'article') {
 		$config = lire_config('config_alertes');
-		$contexte = array();
-		$contexte['objet'] = $flux['args']['exec'];
-		$_id_objet = id_table_objet($flux['args']['exec']);
-		$contexte['id_objet'] = $flux['args'][$_id_objet];
 		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($contexte['id_objet']));
 		if (is_array($art) and count($art)) {
 			$contexte = array_merge($contexte, $art);
 		}
-		if ((in_array($contexte['id_rubrique'], to_array($config['rubriques'])) or in_array($contexte['id_secteur'], to_array($config['secteurs']))) and $config['activer_alertes'] === 'oui') {
+		if ((in_array($contexte['id_rubrique'], to_array($config['rubriques'])) or in_array($contexte['id_secteur'], to_array($config['secteurs']))) and $config['activer_alertes'] === 'oui' and $config['activer_alertes_articles'] === 'oui') {
 			$contexte['editable'] = true;
+		}
+		if (in_array($contexte['id_rubrique'], to_array($config['rubriques']))) {
+			$contexte['editable_rubrique'] = true;
+		}
+		if (in_array($contexte['id_secteur'], to_array($config['secteurs']))) {
+			$contexte['editable_secteur'] = true;
 		}
 
 		$flux['data'] = recuperer_fond('prive/squelettes/inclure/alertes_articles', $contexte,
 				array('ajax' => false)) . $flux['data'];
+		$contexte['editable'] = false; /* On fait un petit reset */
 	}
 
 	return $flux;

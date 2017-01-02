@@ -14,6 +14,7 @@
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{activer_alertes}}
 					<li class="editer long_label editer_activer_alertes obligatoire[ (#GET{erreurs}|oui)erreur]">
 						<label><:alerte:alerts_activation:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
 						<div class="choix">
 							<input type='radio' class="radio" name='activer_alertes' value='non' id='activer_alertes_non'[(#ENV{activer_alertes,non}|=={non}|oui)checked="checked"] />
 							<label for='activer_alertes_non'><:alerte:no:></label>
@@ -23,9 +24,24 @@
 							<label for='activer_alertes_oui'><:alerte:yes:></label>
 						</div>
 					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{activer_alertes_articles}}
+					<li class="editer long_label editer_activer_alertes_articles obligatoire[ (#GET{erreurs}|oui)erreur][(#ENV{activer_alertes,non}|=={non}|oui)hidden invisible]">
+						<label><:alerte:alerts_articles_activation:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<p class="explication" id="explication_activer_alertes_articles"><:alerte:activer_alertes_articles_explication:></p>
+						<div class="choix">
+							<input type='radio' class="radio" name='activer_alertes_articles' value='non' id='activer_alertes_articles_non'[(#ENV{activer_alertes_articles,non}|=={non}|oui)checked="checked"] />
+							<label for='activer_alertes_articles_non'><:alerte:no:></label>
+						</div>
+						<div class="choix">
+							<input type='radio' class="radio" name='activer_alertes_articles' value='oui' id='activer_alertes_articles_oui'[(#ENV{activer_alertes_articles,non}|=={oui}|oui)checked="checked"] />
+							<label for='activer_alertes_articles_oui'><:alerte:yes:></label>
+						</div>
+					</li>
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{mode_envoi}}
 					<li class="editer long_label editer_mode_envoi obligatoire[ (#GET{erreurs}|oui)erreur]">
 						<label><:alerte:sending_method:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
 						<div class="choix">
 							<input type='radio' class="radio" name='mode_envoi' value='direct' id='mode_envoi_direct'[(#ENV{mode_envoi,direct}|=={direct}|oui)checked="checked"] />
 							<label for='mode_envoi_direct'><:alerte:send_directly:></label> <span><:alerte:except_post_dated:></span>
