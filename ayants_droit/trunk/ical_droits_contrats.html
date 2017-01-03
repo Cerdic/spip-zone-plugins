@@ -12,7 +12,7 @@ X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|concat{ - <:droits_contrat:titre_droits
 X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]_droits_contrats
 <?php
 	if ('#0:STATUT' == '0minirezo') {
-?><BOUCLE_droits_contrats(DROITS_CONTRATS?){par date_fin}{inverse}{tout}{statut!="poubelle"}>
+?><BOUCLE_droits_contrats(DROITS_CONTRATS?){par date_fin}{inverse}>
 BEGIN:VEVENT
 SUMMARY:[(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}|concat{" / ", <:droits_contrat:champ_date_fin_label:>}|filtrer_ical)]
 DESCRIPTION:[(#COMMENTAIRES|filtrer_ical)]
