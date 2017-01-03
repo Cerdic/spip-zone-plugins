@@ -15,7 +15,7 @@ X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]_droits_contrats
 ?><BOUCLE_droits_contrats(DROITS_CONTRATS?){par date_fin}{inverse}>
 BEGIN:VEVENT
 SUMMARY:[(#INFO_TITRE{droits_ayant,#ID_DROITS_AYANT}|concat{" / ", <:droits_contrat:champ_date_fin_label:>}|filtrer_ical)]
-DESCRIPTION:[(#COMMENTAIRES|filtrer_ical)]
+DESCRIPTION:[(#URL_ECRIRE*{droits_contrat_edit, id_droits_contrat=#ID_DROITS_CONTRAT}|paragrapher|concat{#COMMENTAIRES}|filtrer_ical)]
 UID:droits_contrat#ID_DROITS_CONTRAT @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE_FIN|date_ical)]
 DTSTART:[(#DATE_FIN|date_ical{-60})]
