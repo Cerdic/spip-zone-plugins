@@ -218,6 +218,7 @@ function formulaires_fusion_spip_traiter_dist() {
 		$maj_perma_urls($connect);
 
 		// appel d'une fonction de traitements perso (déclarée dans mes_options.php par exemple)
+		// Voir aussi le pipeline post_fusion plus bas
 		if (function_exists('fusion_spip_extra_action')) {
 			fusion_spip_extra_action($connect);
 		}
