@@ -1,11 +1,11 @@
 <paquet
 	prefix="agessa"
 	categorie="divers"
-	version="1.1.0"
-	etat="test"
+	version="1.2.0"
+	etat="stable"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/agessa-64.png"
-	documentation="http://contrib.spip.net/4783"
+	documentation="https://contrib.spip.net/4783"
 	schema="0.1.0"
 >
 	<nom>Agessa</nom>
