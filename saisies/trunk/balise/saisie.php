@@ -103,16 +103,19 @@ class Pile {
 	 * @return Champ
 	**/
 	static function ajouter_argument_balise($element, $p) {
-		if (isset($p->param[0][0])) {
-			$zero = array_shift($p->param[0]);
-			array_unshift($p->param[0], $element);
-			array_unshift($p->param[0], $zero);
-		} else {
-			if (!is_array($p->param[0])) {
+
+		// Toujours un parametre 0 vide s'il n'existe pas.
+		if (!isset($p->param[0][0])) {
+			if (!isset($p->param[0])) {
 				$p->param[0] = array();
 			}
-			array_unshift($p->param[0], $element);
+			$p->param[0][0] = '';
 		}
+
+		$zero = array_shift($p->param[0]);
+		array_unshift($p->param[0], $element);
+		array_unshift($p->param[0], $zero);
+
 		return $p;
 	}
 
