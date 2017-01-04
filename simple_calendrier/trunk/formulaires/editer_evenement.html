@@ -3,7 +3,7 @@
 	Appelé par la balise #FORMULAIRE_EDITER_EVENEMENT dans le fond 'prive/editer/evenement.html'.
 ]
 
-<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_evenement,nouveau}'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_evenement formulaire_editer_evenement-#ENV{id_evenement,nouveau}'>
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -23,14 +23,14 @@
 		</div>
 		
 		[(#REM) 'Date de début' est un champ obligatoire]
-		<div class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+		<div class="editer editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
 			<label for="date_debut"><:simplecal:info_date_debut:> : </label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
 			<input type='text' class='text' style="width:auto;" name='date_debut' id='date_debut' value="#ENV{date_debut}" />
 		</div>
 		
 		[(#REM) 'Date de fin' est un champ optionnel]
-		<div class="editer editer_titre[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+		<div class="editer editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 			<label for="date_fin"><:simplecal:info_date_fin:> : </label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
 			<input type='text' class='text' style="width:auto;" name='date_fin' id='date_fin' value="#ENV{date_fin}" />
@@ -48,14 +48,14 @@
 		<div class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 			<label for="id_parent"><:entree_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
-			<!-- parametre 'breve' pour avoir une liste de secteur (chercher_rubrique pas tres generique...) -->
+			<!-- parametre 'evenement' pour avoir une liste de secteur (chercher_rubrique pas tres generique...) -->
 			<!-- depuis peu, cela ne fonctionne plus car chercher_rubrique dans filtre_ecrire.php teste une autorisation sur l'objet... -->
 			[(#VAL|chercher_rubrique{#ENV{id_evenement},#ENV{id_parent},'evenement',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})]
 		</div>]
 		
 		[(#REM) 'Lieu' est un champ optionnel]
 		[(#CONFIG{simplecal_lieu}|=={oui}|oui)
-		<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+		<div class="editer editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 			<label for="lieu"><:simplecal:info_lieu:> : </label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
 			<input type="text" id="lieu" name="lieu" value="#ENV{lieu}" class="text" size="20" />
@@ -72,7 +72,7 @@
 		
 		[(#REM) 'Reference' est un champ optionnel]
 		[(#CONFIG{simplecal_refobj}|=={oui}|oui)
-		<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{ref}|oui)erreur]">
+		<div class="editer editer_ref[ (#ENV**{erreurs}|table_valeur{ref}|oui)erreur]">
 			<label for="ref"><:simplecal:info_ref:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref})</span>]
 			<div class="explication"><:simplecal:explication_ref:></div>
@@ -81,14 +81,14 @@
 		
 		[(#REM) 'Texte' est un champ optionnel]
 		[(#CONFIG{simplecal_texte}|=={oui}|oui)
-		<div class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+		<div class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="texte">
 				[(#CONFIG{simplecal_refobj}|=={non}|oui)<:simplecal:info_texte:>]
 				[(#CONFIG{simplecal_refobj}|=={oui}|oui)<:simplecal:info_texte_2possibilites:>]
 			</label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			<div class="explication"><:simplecal:explication_texte:></div>
-			<textarea name='texte' id='texte' class='inserer_barre_edition inserer_previsualisation'[ lang='(#LANG)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
+			<textarea name='texte' id='texte'[ lang='(#LANG)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
 		</div>]
 		
 		[(#CONFIG{simplecal_lien}|=={oui}|oui)
@@ -112,7 +112,6 @@
 		]
 		
 		</div>
-		  
 		  
 		[(#REM) ajouter les saisies supplementaires : extra et autre, à cet endroit ]
 		<!--extra-->
