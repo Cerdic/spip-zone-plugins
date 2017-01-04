@@ -359,7 +359,7 @@ function calculer_visites($t) {
 									$table_referers = 'spip_referers_objets';
 									$exp_referers['objet'] = $objet;
 								}
-								sql_update($table_referers, $exp_referers, join(" OR ", $liste));
+								sql_updateq($table_referers, $exp_referers, join(" OR ", $liste));
 								## Ajouter un JOIN sur le statut de l'article ?
 							}
 						}
