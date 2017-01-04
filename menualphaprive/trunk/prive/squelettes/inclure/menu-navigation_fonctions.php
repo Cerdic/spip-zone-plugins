@@ -13,7 +13,7 @@ if(!function_exists('tri_menu_alpha')) {
         foreach ($menu_complet as $menu) {
             if ($menu->sousmenu) {
                 $sous_menu = $menu->sousmenu;
-                $libelles = [];
+                $libelles  = array();
                 foreach ($sous_menu as $key => $row) {
                     $libelles[$key] = strtolower(translitteration(_T($row->libelle)));
                 }
