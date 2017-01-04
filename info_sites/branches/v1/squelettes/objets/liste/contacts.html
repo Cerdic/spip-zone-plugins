@@ -16,14 +16,14 @@
 		</li>
 		<BOUCLE_filtre_annuaires (ANNUAIRES){par titre}>
 		<li>
-			<BOUCLE_comptage_contacts_annuaire(CONTACTS){id_annuaire}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_annuaire>
+			<BOUCLE_comptage_contacts_annuaire (CONTACTS) {id_annuaire}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_annuaire>
 			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,#ID_ANNUAIRE})]">})]
 			#TITRE (#GET{nb_contacts})
 			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{</strong>,</a>})]
 		</li>
 		</BOUCLE_filtre_annuaires>
 		<li>
-			<BOUCLE_comptage_contacts_aucun (ORGANISATIONS){id_annuaire=0}/> #SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_aucun>
+			<BOUCLE_comptage_contacts_aucun (ORGANISATIONS) {id_annuaire=0}/> #SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_aucun>
 			[(#ENV{id_annuaire}|=={0}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,0})]">})]
 			<:contacts:annuaire_aucun:> (#GET{nb_contacts})
 			[(#ENV{id_annuaire}|=={0}|?{</strong>, </a>})]

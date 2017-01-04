@@ -9,6 +9,12 @@
 				</div>
 				</BOUCLE_autresobjets>
 			</B_autresobjets>
+			<B_contacts>
+				<div class="list-group-item">
+					<div class="list-group-item-heading"><strong>[(#VAL{contact}|objet_info{texte_objet}|_T)]</strong></div>
+					<div class="list-group-item-text" dir="#LANG_DIR"><BOUCLE_contacts (CONTACTS) {id_projet} {par nom} {', '}><a href="[(#URL_CONTACT)]">[(#NOM)][, (#PRENOM)]</a></BOUCLE_contacts></div>
+				</div>
+			</B_contacts>
 			[(#ENV{titre_projet,non}|=={oui}|oui)
 			<div class="list-group-item">
 				<div class="list-group-item-heading"><strong>[(#VAL{projet}|objet_info{texte_objet}|_T)]</strong></div>

@@ -1,12 +1,12 @@
 <paquet
 	prefix="info_sites"
 	categorie="outil"
-	version="1.14.1"
+	version="1.16.1"
 	etat="test"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/info_sites-64.png"
 	documentation="http://info-sites.readthedocs.io/"
-	schema="1.1.0"
+	schema="1.2.0"
 >
 	<nom>Info Sites</nom>
 
@@ -22,9 +22,9 @@
 	<necessite nom="jqueryui" compatibilite="[1.8.0;]"/>
 	<necessite nom="medias" compatibilite="[2.7.0;]"/>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]"/>
+	<necessite nom="saisies" compatibilite="[2.2.3;]"/>
 	<necessite nom="Zcore" compatibilite="[2.4.0;]"/>
-	<necessite nom="contacts" compatibilite="[2.10.0;]"/>
+	<necessite nom="contacts" compatibilite="[3.0.0;]"/>
 	<necessite nom="coordonnees" compatibilite="[2.2.4;]"/>
 	<necessite nom="projets" compatibilite="[1.0.9;]"/>
 	<necessite nom="lesscss" compatibilite="[0.7.11;]"/>
@@ -43,12 +43,15 @@
 	<lib nom="html5shiv-3.7.3" lien="https://github.com/aFarkas/html5shiv/archive/3.7.3.zip" />
 	<lib nom="respond-1.4.2" lien="https://github.com/scottjehl/Respond/archive/1.4.2.zip" />
 
+	<pipeline nom="compiler_branches_logiciel" action=''/>
+
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/info_sites.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/info_sites_extras.php" />
 
 	<pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php"/>
 	<pipeline nom="header_prive" inclure="info_sites_pipelines.php"/>
 	<pipeline nom="taches_generales_cron" inclure="info_sites_pipelines.php" />
+	<pipeline nom="compiler_branches_logiciel" inclure="info_sites_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="info_sites_autorisations.php"/>
 

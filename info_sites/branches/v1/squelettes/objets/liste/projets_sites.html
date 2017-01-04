@@ -22,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {type_site ?} {logiciel_nom ?} {logiciel_version ?} {fo_url ?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,titre},#GET{defaut_tri}} {pagination #ENV{nb,10} #ENV{pagination_id,'_liste_projets_sites'}}>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projet?} {type_site ?} {logiciel_nom ?} {logiciel_version ?} {fo_url ?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,titre},#GET{defaut_tri}} {pagination #ENV{nb,10} #ENV{pagination_id,'_liste_projets_sites'}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='titre principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>
 			<td class='type_site'>[(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</td>

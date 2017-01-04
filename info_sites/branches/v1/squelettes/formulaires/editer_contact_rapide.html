@@ -1,0 +1,99 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_contact,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type='hidden' name='id_contact' value='#ENV{id_contact}' />
+			[(#REM) sur la creation, on passe l'id_parent (id_organisation) si donnee ]
+			[(#ENV{id_contact}|=={oui}|oui)
+				[<input type='hidden' name='id_parent' value='(#ENV{id_parent})' />]
+			]
+			<fieldset class="contact_fiche">
+				<legend><:info_sites:fieldset_legend_contact:></legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					<INCLURE{fond=formulaires/inc-editer_contact,env} />
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+			<fieldset class="email_fiche">
+				<legend><:info_sites:fieldset_legend_email:></legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#SAISIE{type_email, type_email,
+						label=<:coordonnees:label_type_email:>,
+						defaut='work'
+					})]
+					[(#SAISIE{input, titre_email,
+						label=<:coordonnees:label_titre:>,
+						placeholder=<:coordonnees:placeholder_titre_email:>
+					})]
+					[(#SAISIE{input, email,
+						label=<:coordonnees:label_email:>,
+						placeholder=<:coordonnees:placeholder_email:>
+					})]
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+			<fieldset class="numero_fiche">
+				<legend><:info_sites:fieldset_legend_numero:></legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#SAISIE{type_numero, type_numero,
+						label=<:coordonnees:label_type_numero:>,
+						defaut='work'
+					})]
+					[(#SAISIE{input, titre_numero,
+						label=<:coordonnees:label_titre:>,
+						placeholder=<:coordonnees:placeholder_titre_numero:>
+					})]
+					[(#SAISIE{input, numero,
+						label=<:coordonnees:label_numero:>
+					})]
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+			<fieldset class="adresse_fiche">
+				<legend><:info_sites:fieldset_legend_adresse:></legend>
+				<[(#DIV|sinon{ul})] class="editer-groupe">
+					[(#SAISIE{type_adresse, type_adresse,
+						label=<:coordonnees:label_type_adresse:>,
+						defaut='work'
+					})]
+					[(#SAISIE{input, titre_adresse,
+						label=<:coordonnees:label_titre:>,
+						placeholder=<:coordonnees:placeholder_titre_adresse:>
+					})]
+					[(#SAISIE{input, voie,
+						label=<:coordonnees:label_voie:>
+					})]
+					[(#SAISIE{input, complement,
+						label=<:coordonnees:label_complement:>
+					})]
+					[(#SAISIE{input, boite_postale,
+						label=<:coordonnees:label_boite_postale:>
+					})]
+					[(#SAISIE{input, code_postal,
+						label=<:coordonnees:label_code_postal:>
+					})]
+					[(#SAISIE{input, region,
+						label=<:coordonnees:label_region:>
+					})]
+					[(#SAISIE{input, ville,
+						label=<:coordonnees:label_ville:>
+					})]
+					[(#SAISIE{pays, pays,
+						label=<:coordonnees:label_pays:>,
+						obligatoire=oui,
+						class=chosen,
+						defaut=FR,
+						code_pays=oui
+					})]
+				</[(#DIV|sinon{ul})]>
+			</fieldset>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+
+		</div></form>
+	]
+</div>
