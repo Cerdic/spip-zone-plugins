@@ -1,7 +1,7 @@
 <paquet
 	prefix="formifusion"
 	categorie="communication"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/formifusion-64.png"
@@ -18,6 +18,6 @@
 	
 	<pipeline nom="affiche_droite" inclure="formifusion_pipelines.php" />
 	
-	<necessite nom="formidable" compatibilite="[2.5.12;[" />
+	<necessite nom="formidable" compatibilite="[2.5.11;3.0.*]" />
 	
 </paquet>
