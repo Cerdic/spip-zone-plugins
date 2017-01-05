@@ -1,0 +1,7 @@
+[/* (#REM) 
+
+  Récupère à distance la dernière version de w3.css, 
+  On peut aussi surcharger ce fichier avec une version précise ou partiellement réduite si besoin 
+
+*/][
+(#VAL{//www.w3schools.com/lib/w3.css}|recuperer_url{#ARRAY{transcoder,true}}|table_valeur{page}|texte_script)]

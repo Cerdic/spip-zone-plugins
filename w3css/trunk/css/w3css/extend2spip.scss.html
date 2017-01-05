@@ -1,0 +1,254 @@
+[(#HTTP_HEADER{Content-type:text/css[; charset=(#CHARSET)]})]
+
+[/* (#REM) Associer des class w3css aux éléments SPIP via des @extend  */]
+%unstyled {
+	list-style-type: none;
+	padding-left: 0;
+}
+%fieldset--alt {
+	padding-top: 2em !important;
+	legend {	
+		display: inline-block;
+		width: auto;position: absolute;
+		top: -16px;left: 0;right: 0;
+		margin: 0;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		text-transform: uppercase;
+		font-variant: small-caps;
+		font-size: 13px;
+		}
+}
+
+.formulaire_spip {
+	@extend .w3-padding-large; 
+	/* @extend .w3-white; */
+	position: relative;		
+}
+fieldset {
+	@extend .w3-padding-large;
+	@extend .w3-section;
+	position: relative;
+	@extend %fieldset--alt;
+}
+fieldset > ul {
+	@extend %unstyled;	
+}
+fieldset:last-of-type{
+	margin-bottom: 0 !important;
+}
+legend {
+	@extend .w3-container;
+	@extend .w3-theme;
+}
+label {
+	@extend .w3-label;
+	@extend .w3-padding-tiny;
+	@extend .w3-theme-l4;
+	display: block;
+}
+.choix > label,
+input[type=checkbox] + label,
+input[type=radio] + label, {
+	background-color: transparent !important;	
+}
+label .obligatoire {
+	@extend .w3-small;
+	float: right;
+}
+
+input[type=checkbox] {
+	@extend .w3-check;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=url],
+textarea {
+	@extend .w3-input;
+	@extend .w3-border;
+	@extend .w3-light-grey;
+	&:focus {
+		@extend .w3-border-grey;
+	}
+}
+input[type=submit],
+button {
+	@extend .w3-btn;
+	@extend .w3-large;
+	@extend .w3-theme;
+}
+select {
+	@extend .w3-select;
+	border-bottom: 1px solid #CONFIG{w3css/theme};
+}
+p.boutons {
+	@extend .w3-theme-l4;
+	@extend .w3-padding-xlarge;
+	@extend .w3-right-align;
+	@extend .w3-border-bottom;
+	@extend .w3-border-grey;
+	margin: 0 0 16px 0;	
+}
+.editer-groupe {
+	@extend .w3-section;
+}
+.editer {
+	@extend .w3-margin-top;
+}
+.editer.erreur {
+	@extend .w3-panel;
+	@extend .w3-pale-red;
+	@extend .w3-leftbar;
+	@extend .w3-border-red;
+	@extend .w3-padding-8;
+	@extend .w3-display-container;
+	padding-top: 2.5em !important;
+}
+.erreur_message {
+	@extend .w3-text-red;
+	@extend .w3-padding;
+	@extend .w3-display-topright;
+}
+.explication {
+	@extend .w3-panel;
+	@extend .w3-padding-large;
+	/* @extend .w3-theme-l5; */
+	@extend .w3-pale-yellow;
+	@extend .w3-leftbar;
+	@extend .w3-border-yellow;
+}
+.notice, .warning {
+	@extend .w3-panel;
+	@extend .w3-orange;
+}
+.reponse_formulaire{
+	@extend .w3-panel;
+}
+.error,.reponse_formulaire_erreur {
+	@extend .w3-red;
+	@extend .w3-large;
+	@extend .w3-padding-xlarge;
+}
+.reponse_formulaire_ok, .succes {
+	@extend .w3-panel;
+	@extend .w3-green;	
+}
+.formulaire_recherche .search,
+.formulaire_recherche label {
+	max-width: 13em;
+	display: inline-block;
+}
+.formulaire_recherche input[type=submit] {
+	@extend .w3-large;
+	position: relative;
+	top: -2px;
+}
+.menu {
+	ul {
+		@extend %unstyled;
+	}
+	h2 {
+		margin-bottom: 0;
+	}
+}
+.aside .menu {
+	h2 {
+		@extend .w3-border-bottom;
+		@extend .w3-border-grey;
+	}
+	ul {
+		@extend ul.w3-ul;
+	}
+	 li:hover {
+		@extend .w3-hover-theme;
+	}
+}
+.nav {
+	ul {
+		@extend .w3-navbar;
+		@extend .w3-border;
+		@extend .w3-light-grey;
+	}
+	.on {
+		@extend .w3-theme-d2;
+	}
+	a {
+		@extend .w3-navitem;
+		&:hover {
+			@extend .w3-theme-d3;
+		}
+	}
+}
+/* 
+ul.spip {
+	@extend ul.w3-ul;
+}
+blockquote {
+	@extend .w3-panel;
+	@extend .w3-leftbar; 
+	@extend .w3-light-grey;
+}
+.comments-items {
+	@extend %unstyled;
+	padding-left: 0;
+	@extend .w3-padding-large;
+}
+.comment-item {
+	@extend .w3-card-2;
+	@extend .w3-margin-bottom;
+}
+.comment-meta {	
+	@extend .w3-container;
+	@extend .w3-padding-16;
+	@extend .w3-theme-l5;
+	margin: 0;
+}
+.comment-item:nth-child(2n) .comment-meta {
+	@extend .w3-theme-l4;
+}
+.comment-content {
+	@extend .w3-container;
+	@extend .w3-padding-16;
+	> p {
+		margin: 0;
+	}
+}
+html,body {
+	@extend .w3-theme-l3;
+}
+.page {
+	@extend .w3-white;
+	padding: 2%;
+	max-width: 1440px;
+	margin: 2em auto;
+}
+.header {
+	min-height: 120px;
+	text-align: center;
+	@extend .w3-display-container;
+}
+#slogan {
+	@extend .w3-display-bottomright;
+}
+
+.header .spip_logo_site > * {
+	text-align:  center;
+	@extend .w3-display-topmiddle;
+	@extend .w3-btn;
+	@extend .w3-white;
+	@extend .w3-padding-xlarge;
+}
+.header .spip_logo_site img {
+	display: block;
+	height: auto;
+}
+.arbo {
+
+}
+.footer .colophon {
+	text-align: center;
+}
+*/
