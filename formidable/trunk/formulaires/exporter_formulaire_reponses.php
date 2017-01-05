@@ -123,16 +123,15 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 						'spip_formulaires_reponses_champs',
 						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
 					);
-
+					$valeur = $tenter_unserialize($valeur);
+					
 					// Saisie de type fichier ?
-					if ($saisie['saisie'] == 'fichiers') {//tester s'il y a des saisies parmi les fichiers
-						if ($valeur = $tenter_unserialize($valeur)) {
-							$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
-							foreach ($valeur as $v) {
-								$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
-								if (file_exists($chemin_fichier)) {
-									$saisies_fichiers[] = $chemin_fichier;
-								}
+					if ($saisie['saisie'] == 'fichiers' && is_array($valeur)) {//tester s'il y a des saisies parmi les fichiers
+						$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
+						foreach ($valeur as $v) {
+							$chemin_fichier = $chemin . '/' . $saisie['options']['nom'] . '/' . $v['nom'];
+							if (file_exists($chemin_fichier)) {
+								$saisies_fichiers[] = $chemin_fichier;
 							}
 						}
 					}
