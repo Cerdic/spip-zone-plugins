@@ -164,14 +164,15 @@ function spipdf_remplaceCaption($matches){
 }
 
 function spipdf_nettoyer_html($html, $params_pdf = array()){
+	
+	// supprimer les spans autour des images
+	$patterns_float = '/<span class=\'spip_document_[0-9]+ spip_documents.*>(.*)<\/span>/iUms';
+	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceSpanCenter', $html);
 
 	// supprimer les spans autour des images et récupérer le placement
 	$patterns_float = '/<span class=\'spip_document_[0-9]+ spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceSpan' : 'spipdf_remplaceSpan_wfloat', $html);
 
-	// supprimer les spans autour des images
-	$patterns_float = '/<span class=\'spip_document_[0-9]+ spip_documents.*>(.*)<\/span>/iUms';
-	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceSpanCenter', $html);
 
 	// supprimer les dl autour des images et récupérer le placement
 	$patterns_float = '/<dl class=\'spip_document_[0-9]+ spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
