@@ -9,8 +9,9 @@
  * @package    SPIP\Dompdf\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Fonction qui va déterminer si c'est un squelette ou du html qui est passé à DOMPDF
