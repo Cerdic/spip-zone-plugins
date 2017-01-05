@@ -121,7 +121,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (is_array($corps) AND isset($corps['exceptions'])){
 		$exceptions = $corps['exceptions'];
 	}
-	
+
 	// mode TEST : forcer l'email
 	if (defined('_TEST_EMAIL_DEST')) {
 		if (!_TEST_EMAIL_DEST){
@@ -159,11 +159,16 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		}
 	}
 	else {
-		spip_log($e="Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
-		if ($exceptions) {
-			throw new Exception($e);
+		if ($bcc) {
+			// On peut envoyer de mail que en bcc
+			$destinataire = '';
+		} else {
+			spip_log($e="Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+			if ($exceptions) {
+				throw new Exception($e);
+			}
+			return false;
 		}
-		return false;
 	}
 
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
@@ -171,7 +176,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (is_array($corps) AND isset($corps['exceptions'])){
 		$facteur->SetExceptions($corps['exceptions']);
 	}
-	
+
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
 	if (empty($from) AND empty($facteur->From)) {
 		$from = $GLOBALS['meta']["email_envoi"];
@@ -213,7 +218,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else
 			$facteur->AddCC($cc);
 	}
-	
+
 	// S'il y a des copies cachées à envoyer
 	if ($bcc){
 		if (is_array($bcc))
@@ -222,7 +227,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else
 			$facteur->AddBCC($bcc);
 	}
-	
+
 	// S'il y a une adresse de reply-to
 	if ($repondre_a){
 		if (is_array($repondre_a))
@@ -231,7 +236,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else
 			$facteur->AddReplyTo($repondre_a);
 	}
-	
+
 	// S'il y a des pièces jointes on les ajoute proprement
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
@@ -261,10 +266,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				$facteur->AddCustomHeader($h);
 		}
 	}
-	
+
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
-	
+
 	// On génère les headers
 	$head = $facteur->CreateHeader();
 
@@ -272,7 +277,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail');
 	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
 	$retour = $facteur->Send();
-	
+
 	if (!$retour){
 		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'mail.'._LOG_ERREUR);
 	}
