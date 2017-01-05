@@ -21,12 +21,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function dompdf_trouver_html($squelette, $contexte=array()) {
 	// Si on a passé un squelette
-	if (find_in_path($squelette.'.html'))
+	if (trouver_fond($squelette)) {
 		// On récupère le html du squelette.
 		return recuperer_fond($squelette, $contexte);
-	else
+	} else {
 		// Sinon, on déduit que c'est du html directement passé à la fonction
 		return $squelette;
+	}
 }
 
 /**
