@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'designation' => 'Désignation',
 	'details_reservation' => 'Détails de la réservation :',
+	'duree_vie_label' => 'Durée de vie :',
+	'duree_vie_explication' => 'Saisir la durée de vie (en heures) d’une commande avec le statut "@statut_defaut@". Si aucune valeur ou valeur 0 - la durée de vie est illimitée.',
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',

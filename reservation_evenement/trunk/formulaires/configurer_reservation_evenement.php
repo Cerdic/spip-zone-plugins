@@ -13,6 +13,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 	include_spip('inc/plugin');
 	$config = lire_config('reservation_evenement', array());
 	$quand = isset($config['quand']) ? $config['quand'] : array();
+
 	//Le statuts du plugin, sauf en cours
 	foreach ($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut => $label) {
 			$statuts[$statut] = _T($label);
@@ -48,6 +49,19 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
 						'cacher_option_intro' => 'on',
 						'label' => _T('reservation:label_statut_defaut'),
 						'defaut' => $config['statut_defaut']
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'duree_vie',
+						'label' => _T('reservation:duree_vie_label'),
+						'explication' => _T('reservation:duree_vie_explication',
+								array(
+									'statut_defaut' => $config['statut_defaut']
+								)
+							),
+						'defaut' => $config['duree_vie'],
 					)
 				),
 				array(
