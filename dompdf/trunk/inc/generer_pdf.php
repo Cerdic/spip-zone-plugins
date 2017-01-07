@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+use Dompdf\Dompdf;
+
 /**
  * Fonction de génération de PDF.
  * Contrairement à exporter_pdf, generer_pdf renvoie le PDF à PHP ce qui permet de l'utiliser à d'autre fin.
@@ -16,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_generer_pdf_dist($squelette, $contexte = array(), $filename = 'sortie.pdf', $paper = 'A4', $orientation = 'portrait') {
 
 	// On inclut la configuration DOMPDF
-	include_spip('lib/dompdf/dompdf_config.inc');
+	include_spip('lib/dompdf/autoload.inc');
 	include_spip('dompdf_fonctions');
 
 	// On charge DOMPDF
@@ -28,6 +30,7 @@ function inc_generer_pdf_dist($squelette, $contexte = array(), $filename = 'sort
 	// On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
 	$dompdf->load_html($html);
 	$dompdf->set_paper($paper, $orientation);
+	$dompdf = spip_dompdf($dompdf);
 	$dompdf->render();
 
 	return $dompdf->output();

@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+use Dompdf\Dompdf;
+
 /**
  * Fonction d'export PDF
  *
@@ -14,8 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sortie.pdf', $paper = 'A4', $orientation = 'portrait') {
 
-	// On inclut la configuration DOMPDF
-	include_spip('lib/dompdf/dompdf_config.inc');
+	// Charger DOMPDF
+	include_spip('lib/dompdf/autoload.inc');
 	include_spip('dompdf_fonctions');
 
 	// On charge DOMPDF
@@ -26,6 +28,7 @@ function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sor
 	// On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
 	$dompdf->load_html($html);
 	$dompdf->set_paper($paper, $orientation);
+	$dompdf = spip_dompdf($dompdf);
 	$dompdf->render();
 
 	$dompdf->stream($filename, array("Attachment" => false));
