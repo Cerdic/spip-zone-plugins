@@ -43,7 +43,7 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_almanachs')),
 	);
 	$maj["1.0.3"] = array(
-		cextras_api_upgrade(import_ics_declarer_champs_extras(), $maj['1.0.3']),
+		array('import_ics_declarer_champs_extras',import_ics_declarer_champs_extras()),
 	);
 	$maj["1.0.4"] = array(
 		array('sql_alter',"TABLE spip_evenements ADD last_modified_distant text NOT NULL"),
