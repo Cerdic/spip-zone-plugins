@@ -223,7 +223,7 @@ function reservation_evenement_afficher_contenu_objet($flux) {
  */
 function reservation_evenement_optimiser_base_disparus($flux){
 	include_spip('inc/config');
-
+spip_log('optimiser', 'teste');
 	// les config
 	$config_reservation = lire_config('reservation_evenement');
 	$heures = isset($config_reservation['duree_vie']) ? $config_reservation['duree_vie'] : 0;
@@ -241,7 +241,7 @@ function reservation_evenement_optimiser_base_disparus($flux){
 		// S'il y a bien des commandes à supprimer
 		if ($reservations) {
 			$reservations = array_map('reset', $reservations);
-			include_spip('inc/reservations_evenements');
+			include_spip('inc/reservation_evenements');
 			reservations_supprimer($reservations);
 			$flux['data'] += count($reservations);
 		}

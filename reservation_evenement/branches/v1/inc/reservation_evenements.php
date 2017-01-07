@@ -160,7 +160,7 @@ function reservations_supprimer($ids_reservations) {
 	}
 
 	// On supprime les réservations.
-	sql_delete(table_objet_sql('reservation'), $ids_reservations);
+	sql_delete(table_objet_sql('reservation'), $in_reservations);
 
 	return true;
 }
