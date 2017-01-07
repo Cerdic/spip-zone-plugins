@@ -54,3 +54,23 @@ function dompdf_cadre($url_action, $titre = null, $titre_export = null) {
 			false).
 		fin_cadre_relief(true);
 }
+
+/**
+ * Option pour DOMPDF et SPIP
+ *
+ * @param obj $dompdf
+ * @access public
+ * @return obj $dompdf
+ */
+function spip_dompdf($dompdf) {
+
+	// Utiliser le dossier de cache de SPIP pour stocker les caches de fonts
+	include_spip('inc/flock');
+	$dompdf_spip_option = array();
+	$dompdf_spip_option['fontCache'] = sous_repertoire(_DIR_CACHE, 'dompdf_fontCache');
+
+	$dompdf->set_option('fontCache', $dompdf_spip_option['fontCache']);
+	$dompdf->set_option('isHtml5ParserEnabled', true);
+
+	return $dompdf;
+}
