@@ -10,7 +10,8 @@ use Dompdf\Dompdf;
  * @param mixed $squelette Le squelette ou le html à transformer en PDF
  * @param mixed $contexte L'éventuel contexte'
  * @param string $filename Le nom du fichier
- * @param string $paper Le format du papier (letter, legal, A4, voir $PAPER_SIZES)
+ * @param string $paper Le format du papier (letter, legal, A4, voir
+ * $PAPER_SIZES)
  * @param string $orientation (portrait ou landscape)
  * @access public
  */

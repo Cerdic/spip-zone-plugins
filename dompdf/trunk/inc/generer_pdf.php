@@ -5,13 +5,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 use Dompdf\Dompdf;
 
 /**
- * Fonction de génération de PDF.
- * Contrairement à exporter_pdf, generer_pdf renvoie le PDF à PHP ce qui permet de l'utiliser à d'autre fin.
+ * Fonction de génération de PDF. Contrairement à exporter_pdf, generer_pdf
+ * renvoie le PDF à PHP ce qui permet de l'utiliser à d'autre fin.
  *
  * @param mixed $squelette Le squelette à transformer en PDF
  * @param mixed $contexte L'éventuel contexte'
  * @param string $filename Le nom du fichier
- * @param string $paper Le format du papier (letter, legal, A4, voir $PAPER_SIZES)
+ * @param string $paper Le format du papier (letter, legal, A4, voir
+ * $PAPER_SIZES)
  * @param string $orientation (portrait ou landscape)
  * @access public
  */
