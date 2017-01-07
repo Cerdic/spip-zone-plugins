@@ -1,9 +1,9 @@
 <paquet
 	prefix="vider_rubrique"
 	categorie="edition"
-	version="0.2.0"
+	version="0.2.1"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/poubelle.png"
 	documentation="http://contrib.spip.net/?article4297"
 >	

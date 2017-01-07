@@ -6,8 +6,9 @@
 
 [(#REM) TODO à partir d'ici, tout est à faire.
 	Faudrait faire la bonne boucle :
-	- celle qui supprime TOUS les documents liés aux articles supprimés
+	- celle qui supprime TOUS les documents liés aux articles supprimé
 	- ET qui ne sont pas liés à d'autres articles de SPIP
+/!\ au cas de figure où un document est liés à plusieurs articles qui sont tous dans la suppression en cours, il faudrait le supprimer aussi
 ]
 [(#REM) SET{arbo_complete,[(#CONFIG{"vider_rubrique/config/arbo_complete"}|sinon{"non"})]})]
 [(#SET{docs,[(#CONFIG{vider_rubrique/config/docs}|sinon{"non"})]})]
