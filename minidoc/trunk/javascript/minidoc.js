@@ -1,7 +1,7 @@
 (function($) {
 	$(document).ready(function(){
 		var minidoc = function() {
-			$('#portfolios h3').each(function () {
+			$('#portfolios h3:not(:has(.minidoc))').each(function () {
 				var titre = $(this);
 				var liste = titre.next('.liste_items.documents');
 
@@ -12,24 +12,24 @@
 					+ "<span class='icone cases' title='Affichage en cases'></span>"
 					+ "</div>"
 				);
-			});
 
-			$('.minidoc > .grand').click(function () {
-				$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
-				var liste = $(this).parents('h3').next('.liste_items.documents');
-				liste.removeClass('documents_cases').removeClass('documents_liste');
-			});
+				titre.find('.minidoc > .grand').click(function () {
+					$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
+					var liste = $(this).parents('h3').next('.liste_items.documents');
+					liste.removeClass('documents_cases').removeClass('documents_liste');
+				});
 
-			$('.minidoc > .liste').click(function () {
-				$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
-				var liste = $(this).parents('h3').next('.liste_items.documents');
-				liste.removeClass('documents_cases').addClass('documents_liste');
-			});
+				titre.find('.minidoc > .liste').click(function () {
+					$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
+					var liste = $(this).parents('h3').next('.liste_items.documents');
+					liste.removeClass('documents_cases').addClass('documents_liste');
+				});
 
-			$('.minidoc > .cases').click(function () {
-				$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
-				var liste = $(this).parents('h3').next('.liste_items.documents');
-				liste.removeClass('documents_liste').addClass('documents_cases');
+				titre.find('.minidoc > .cases').click(function () {
+					$(this).parent().find('.icone').removeClass('on').end().end().addClass('on');
+					var liste = $(this).parents('h3').next('.liste_items.documents');
+					liste.removeClass('documents_liste').addClass('documents_cases');
+				});
 			});
 		}
 		minidoc();
