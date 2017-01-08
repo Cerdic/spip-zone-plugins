@@ -79,7 +79,7 @@ function ordoc_liste_documents() {
 				$.getScript("[(#CHEMIN{javascript/ui/sortable.js}|timestamp)]", function () {
 					$("#illustrations#ENV{id_unique}, #portfolio#ENV{id_unique}, #documents#ENV{id_unique}").each(function () {
 						$(this).sortable({
-							axis: "y",
+							/*axis: "y",*/ /* minidoc a un affichage en case */
 							handle: ".ordoc-deplacer",
 							placeholder: "ui-state-highlight ordoc-document-placeholder",
 							update: function (event, ui) {
