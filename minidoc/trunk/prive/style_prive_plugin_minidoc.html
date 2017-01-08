@@ -1,0 +1,151 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+h3 .minidoc {
+	float:right;
+}
+.minidoc .icone {
+	width:16px;
+	height:16px;
+	margin:0;
+	padding:2px;
+	display:inline-block;
+	background:rgba(255, 255, 255, 0.5) center center no-repeat;
+	border-radius:3px;
+	cursor:pointer;
+}
+.minidoc .icone + .icone {
+	margin-left:5px;
+}
+.minidoc .icone.grand {
+	background-image: url([(#CHEMIN_IMAGE{documents-liste-16.png})]);
+}
+.minidoc .icone.liste {
+	background-image: url([(#CHEMIN_IMAGE{documents-liste-courte-16.png})]);
+}
+.minidoc .icone.cases {
+	background-image: url([(#CHEMIN_IMAGE{documents-cases-16.png})]);
+}
+.minidoc .icone.on {
+	background-color:rgba(255, 255, 255, 0.8);
+}
+.minidoc .icone.on:hover,
+.minidoc .icone:hover {
+	background-color:rgba(255, 255, 255, 1);
+}
+
+
+/* Liste courte de documents */
+.portfolios .documents_liste  {  }
+.portfolios .documents_liste .tout_supprimer { clear:both; margin-top:.5em; display:block; }
+.portfolios .documents_liste .item  {
+	padding: 7px 100px 7px 75px;
+	position:relative;
+}
+.portfolios .documents_liste .item .vignette {
+	width:65px;
+	margin-left: -75px;
+}
+.portfolios .documents_liste .item .vignette img {
+	max-height: 36px;
+	max-width:65px;
+	height:auto;
+	width:auto;
+}
+.portfolios .documents_liste .item .tourner,
+.portfolios .documents_liste .item .infos,
+.portfolios .documents_liste .item .mode,
+.portfolios .documents_liste .item .actions > *
+{
+	display:none;
+}
+.portfolios .documents_liste .item .titrem {
+	margin-bottom:0;
+}
+.portfolios .documents_liste .item .titrem .fichier,
+.portfolios .documents_liste .item .titrem .titre {
+	max-height:1.2em;
+	line-height:1.2em;
+	overflow:hidden;
+	white-space: nowrap;
+	display:block;
+	text-overflow:ellipsis;
+}
+.portfolios .documents_liste .item .titrem .titre {
+	max-height:1.5em;
+	line-height:1.5em;
+}
+.portfolios .documents_liste .item .actions {
+	position:absolute;
+	right:0; top:1.2em;
+}
+.portfolios .documents_liste .item .actions .editbox,
+.portfolios .documents_liste .item .actions .ordoc-deplacer {
+	display:inline-block;
+}
+
+
+/* Grille en cases des documents. */
+.portfolios .documents_cases {
+	display:flex;
+	flex-wrap: wrap;
+}
+
+.portfolios .documents_cases .item .tourner,
+.portfolios .documents_cases .item .infos,
+.portfolios .documents_cases .item .mode,
+.portfolios .documents_cases .item .titrem,
+.portfolios .documents_cases .item .actions > * {
+	display:none;
+}
+.portfolios .documents_cases .item .actions .editbox {
+	display:inline-block;
+	float:right;
+}
+.portfolios .documents_cases .item .actions .ordoc-deplacer {
+	display:inline-block;
+	float:left;
+}
+.portfolios .documents_cases .item .vignette {
+	float: none;
+	margin-left: 0;
+	width:auto;
+	height:auto;
+	flex-grow:1;
+}
+.portfolios .documents_cases .item .vignette img {
+	max-height:110px;
+	max-width:110px;
+	width: auto;
+	height: auto;
+}
+.portfolios .documents_cases .item {
+	padding: 2px;
+	margin: 2px;
+	border:1px solid #eee;
+	border-radius:5px;
+	width:113px;
+	height:130px;
+	display:flex;
+	flex-direction:column;
+
+}
+.portfolios .documents_cases .item .actions {
+	display:block;
+	width:100%;
+}
+.portfolios .documents_cases .tout_supprimer { flex-basis: 100%; }
