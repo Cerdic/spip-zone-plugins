@@ -12,18 +12,24 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 /**
- * Optimiser la base de données en supprimant les liens orphelins
- * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
- *
+ * Optimiser la base de données en supprimant 
+ * les almanachs à la poubelle
+ * et les liens orphelins depuis et vers les almanachs
  * @pipeline optimiser_base_disparus
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function import_ics_optimiser_base_disparus($flux){
-	// supprimer les almanachs anciens à la poubelle
-	sql_delete('spip_almanachs', "statut='poubelle' AND maj < ".$flux['args']['date']);
 
 	include_spip('action/editer_liens');
+
+	$res = sql_select(
+		'id_almanach AS id',
+		'spip_almanachs',
+		'statut='.sql_quote('poubelle')
+	);
+	
+	$flux['data'] += optimiser_sansref('spip_almanachs', 'id_almanach', $res);
 	$flux['data'] += objet_optimiser_liens(array('almanach'=>'*'),'*');
 	$flux['data'] += objet_optimiser_liens(array('mot'=>'*'), array('almanach' => '*'));
 
