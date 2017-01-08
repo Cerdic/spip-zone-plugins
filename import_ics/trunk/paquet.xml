@@ -19,11 +19,11 @@
 	<traduire module="import_ics" reference="fr" />
 	<traduire module="paquet-import_ics" reference="fr" />
 	
-	<necessite nom="agenda" compatibilite="[3.16.0;]" />
-	<necessite nom="icalendar" compatibilite="[0.4.4;]" />
+	<necessite nom="agenda" compatibilite="[3.16.0;[" />
+	<necessite nom="icalendar" compatibilite="[0.4.4;[" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
-	<necessite nom="saisies" compatibilite="[2.7.7;]" />
-	<necessite nom="verifier" compatibilite="[1.1.0;]" />
+	<necessite nom="saisies" compatibilite="[2.7.7;[" />
+	<necessite nom="verifier" compatibilite="[1.1.0;[" />
 
 	<pipeline nom="affiche_milieu" inclure="import_ics_pipelines.php" />
 	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
