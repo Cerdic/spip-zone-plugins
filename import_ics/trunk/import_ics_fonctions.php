@@ -15,8 +15,7 @@ function date_ical_to_sql($date,$decalage=array(),$seulement_date=False){
 	else{
 		$value = $date;
 	}
-	$params = $date["params"];
-	if (is_array($params) and in_array("DATE",$params)){
+	if (isset($date["params"]) and $params = $date["params"] and is_array($params) and in_array("DATE",$params)){
 		$all_day = True;
 		$date_sql = sql_format_date(
 			$value["year"],
