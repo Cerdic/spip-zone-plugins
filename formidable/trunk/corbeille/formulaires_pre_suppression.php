@@ -16,8 +16,8 @@ function corbeille_formulaires_pre_suppression_dist($ids) {
 		while ($champ = sql_fetch($res)) {	
 			$id_formulaires_reponse = $champ['id_formulaires_reponse'];
 			sql_delete('spip_formulaires_reponses_champs', "id_formulaires_reponse=$id_formulaires_reponse");
+			sql_delete('spip_formulaires_reponses', "id_formulaires_reponse=$id_formulaires_reponse");
 		}
-		sql_delete('spip_formulaires_reponses', "id_formulaires_reponse=$id_formulaires_reponse");
 		formidable_effacer_fichiers_formulaire($id_formulaire);
 		spip_log("Effacement des réponses du formulaire $id_formulaire via la corbeille", "formidable");
 	}
