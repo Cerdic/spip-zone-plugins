@@ -87,7 +87,7 @@ function ordoc_liste_documents() {
 								var item = ui.item;
 								var liste = items.sortable('toArray');
 								var ordre = [];
-								console.log(event, ui);
+
 								$.each(liste, function(i, id) {
 									if (id) {
 										ordre.push( id.substring(3) ); // doc123 => 123
