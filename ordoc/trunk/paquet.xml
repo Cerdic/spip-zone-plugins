@@ -1,0 +1,23 @@
+<paquet
+	prefix="ordoc"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.1.0;3.2.*]"
+	logo="prive/themes/spip/images/ordoc-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Ordre des documents</nom>
+	<!-- Permet d’ordonner les documents liés à un objet par glisser / déposer. -->
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="ordoc_administrations.php" />
+	<pipeline nom="document_desc_actions" inclure="ordoc_administrations.php" />
+
+	<necessite nom="medias" compatibilite="[2.14.0;[" />
+</paquet>

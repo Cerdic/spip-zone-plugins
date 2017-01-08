@@ -1,0 +1,8 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_ordoc.php ../plugins/fabrique_auto/.backup/ordoc/paquet.xml ../plugins/fabrique_auto/ordoc/paquet.xml
+12c12
+< 		Paquet généré le 2017-01-07 19:18:13
+---
+> 		Paquet généré le 2017-01-07 19:21:19
+Binary files ../plugins/fabrique_auto/.backup/ordoc/prive/themes/spip/images/ordoc-128.png and ../plugins/fabrique_auto/ordoc/prive/themes/spip/images/ordoc-128.png differ
+Binary files ../plugins/fabrique_auto/.backup/ordoc/prive/themes/spip/images/ordoc-32.png and ../plugins/fabrique_auto/ordoc/prive/themes/spip/images/ordoc-32.png differ
+Binary files ../plugins/fabrique_auto/.backup/ordoc/prive/themes/spip/images/ordoc-64.png and ../plugins/fabrique_auto/ordoc/prive/themes/spip/images/ordoc-64.png differ
