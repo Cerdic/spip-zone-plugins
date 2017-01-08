@@ -63,7 +63,8 @@ function notation_afficher_config_objet($flux){
  */
 function notation_pre_insertion($flux){
 	if ($flux['args']['table']=='spip_articles'){
-		$flux['args']['data']['accepter_note'] = substr($GLOBALS['meta']['notations_public'],0,3);
+		include_spip('inc/config');
+		$flux['args']['data']['accepter_note'] = substr(lire_config('notations_public'),0,3);
 	}
 	return $flux;
 }
