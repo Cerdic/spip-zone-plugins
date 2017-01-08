@@ -124,10 +124,10 @@ function corbeille_vider($table, $ids=array()) {
 			$desc = $trouver_table($unetable);
 			if (isset($desc['field'][$id_table])){
 				sql_delete($unetable,sql_in($id_table,$ids));
-				spip_log("Numeros des entrees". implode($ids,",")." supprimees dans la table $unetable","corbeille");
+				spip_log("Numeros des entrees ". implode($ids,",")." supprimees dans la table $unetable","corbeille");
 			} elseif(isset($desc['field']['id_objet']) AND isset($desc['field']['objet'])){
 				sql_delete($unetable,sql_in('id_objet',$ids)." AND objet=".sql_quote($type));		
-				spip_log("Numeros des entrees". implode($ids,",")." supprimees dans la table $unetable","corbeille");
+				spip_log("Numeros des entrees ". implode($ids,",")." supprimees dans la table $unetable","corbeille");
 			}
 		}
 	}
