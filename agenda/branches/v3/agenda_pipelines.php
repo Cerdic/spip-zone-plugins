@@ -299,3 +299,17 @@ function agenda_accueil_encours($flux){
 	);
 	return $flux;
 }
+
+/** Déclarer les évènements 
+ * au plugin corbeille
+ * @param array $flux;
+ * @return array $flux;
+**/
+function agenda_corbeille_table_infos($flux){
+	$flux['evenements']= array(
+		'statut'=>'poubelle',
+		'table'=>'evenements', 
+		'tableliee'=>array('spip_evenements_participants')
+	);
+	return $flux;
+}
