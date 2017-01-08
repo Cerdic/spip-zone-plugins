@@ -266,7 +266,8 @@ function formidable_taches_generales_cron($flux){
 function formidable_corbeille_table_infos($flux){
 	$flux['formulaires']= array(
 		'statut'=>'poubelle',
-		'table'=>'formulaires'
+		'table'=>'formulaires', 
+		'tableliee'=>array('spip_formulaires_liens')
 	);
 	$flux['formulaires_reponses']= array(
 		'statut'=>'poubelle',
