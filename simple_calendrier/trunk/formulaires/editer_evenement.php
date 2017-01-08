@@ -17,9 +17,17 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
 	// Recupere automatiquement les champs de la table (entre autres...)
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 
-	// Modif pour avoir un affichage formate ('14/08/2011 00:00:00' => '14/08/2011')
-	$valeurs["date_debut"] = date_sql2affichage($valeurs["date_debut"]);
-	$valeurs["date_fin"] = date_sql2affichage($valeurs["date_fin"]);
+	// fixer la date par defaut en cas de creation d'evenement
+	if (!intval($id_evenement)) {
+		$t=time();
+		$valeurs['date_debut'] = date('Y-m-d H:i:00', $t);
+		$valeurs['date_fin'] = date('Y-m-d H:i:00', $t+86400);
+		$valeurs['horaire'] = 'oui';
+	}
+	
+	// dispatcher date et heure
+	list($valeurs['date_debut'], $valeurs['heure_debut']) = explode(' ', date('d/m/Y H:i', strtotime($valeurs['date_debut'])));
+	list($valeurs['date_fin'], $valeurs['heure_fin']) = explode(' ', date('d/m/Y H:i', strtotime($valeurs['date_fin'])));
 	
 	// Champ ref ("0" en base qd pas renseigne)
 	if (!empty($valeurs["id_objet"])) {
@@ -76,16 +84,14 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
 	// Autres verifications
 	// ---------------------
 	
-	// Date de debut saisie correctement ?
-	$date_debut = trim(_request('date_debut'));
-	if ($date_debut && date_saisie2sql($date_debut) == '0000-00-00 00:00:00'){
-		$erreurs['date_debut'] = _T('simplecal:validation_date_format');
+	include_spip('inc/date_gestion');
+
+	$horaire = lire_config('simplecal_horaire') == 'non' ? false : true;
+	if (empty($erreurs['date_debut'])) {
+		$date_debut = verifier_corriger_date_saisie('debut', $horaire, $erreurs);
 	}
-		
-	// Date de fin saisie correctement ?
-	$date_fin = trim(_request('date_fin'));
-	if ($date_fin && date_saisie2sql($date_fin) == '0000-00-00 00:00:00'){
-		$erreurs['date_fin'] = _T('simplecal:validation_date_format');
+	if (empty($erreurs['date_fin'])) {
+		$date_fin = verifier_corriger_date_saisie('fin', $horaire, $erreurs);
 	}
 
 	// Chronologie : Date de fin >= Date de debut (si pas d'autres erreurs sur les dates)
@@ -129,8 +135,15 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
 function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	
 	// On remet les dates au format SQL ('14/08/2011' => '14/08/2011 00:00:00')
-	set_request("date_debut", date_saisie2sql(_request("date_debut")));
-	set_request("date_fin", date_saisie2sql(_request("date_fin")));
+	// set_request("date_debut", date_saisie2sql(_request("date_debut")));
+	// set_request("date_fin", date_saisie2sql(_request("date_fin")));
+
+	include_spip('inc/date_gestion');
+	$erreurs = array();
+	$date_debut = verifier_corriger_date_saisie('debut', true, $erreurs);
+	$date_fin = verifier_corriger_date_saisie('fin', true, $erreurs);
+	set_request('date_debut', date('Y-m-d H:i:s', $date_debut));
+	set_request('date_fin', date('Y-m-d H:i:s', $date_fin));
 	
 	
 	// On reconstitue les champs 'type' et 'id_objet' a partir du champ 'ref'

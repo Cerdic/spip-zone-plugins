@@ -26,14 +26,21 @@
 		<div class="editer editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
 			<label for="date_debut"><:simplecal:info_date_debut:> : </label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
-			<input type='text' class='text' style="width:auto;" name='date_debut' id='date_debut' value="#ENV{date_debut}" />
+			<input type='text' class='text date' name='date_debut' id='date_debut' value="#ENV{date_debut}" />
+			[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+			<span class='afficher_horaire'>
+			<input type='text' class='text heure' name='heure_debut' style="width:4em" id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]" /></span>]
 		</div>
 		
 		[(#REM) 'Date de fin' est un champ optionnel]
 		<div class="editer editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
 			<label for="date_fin"><:simplecal:info_date_fin:> : </label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
-			<input type='text' class='text' style="width:auto;" name='date_fin' id='date_fin' value="#ENV{date_fin}" />
+			<input type='text' class='text date' name='date_fin' id='date_fin' value="#ENV{date_fin}" />
+			[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+			<span class='afficher_horaire'>
+			<input type='text' class='text heure' name='heure_fin' style="width:4em" id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
+			</span>]
 		</div>
 		
 		[(#REM) 'Choix de la rubrique' est un champ facultatif]
@@ -121,8 +128,37 @@
 	
 	</div>
 	</form>
-	
-	#INCLURE{fond=formulaires/inc-editer_evenement_datepicker}
+	#INCLURE{fond=formulaires/dateur/inc-dateur}
+	<!-- #INCLURE{fond=formulaires/inc-editer_evenement_datepicker} -->
 	
 	]
 </div>
+<script type="text/javascript">
+	// Si changement de date_début, on change date_fin uniquement si inférieure à date_début
+	jQuery('#date_debut').on('change', function(){
+		var debut_date     = jQuery('#date_debut').datepicker("getDate");
+		jQuery('#date_fin').datepicker( "option", "minDate", new Date(debut_date));
+	}); 
+	var repetitions_done = false;
+	jQuery(document).bind('datePickerLoaded',function(){
+		if (!repetitions_done){
+			repetitions_done = true;
+			jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){
+				var multidate_picker_options = {altField: '#repetitions'};
+				/**
+				 * Multidatepicker n'aime pas un array vide apparemment
+				 */
+				if(jQuery('#repetitions').html() != ""){
+					multidate_picker_options.addDates = jQuery('#repetitions').html().split(',');
+				}
+				jQuery('#repetitions_picker')
+					.multiDatesPicker(jQuery.extend(
+								date_picker_options(),
+								multidate_picker_options
+					))
+					.addClass('.pickable'); // une seule fois;
+				jQuery('#repetitions').attr("readonly","readonly");
+			});
+		}
+	});
+</script>

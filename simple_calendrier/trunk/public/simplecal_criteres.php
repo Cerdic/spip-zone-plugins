@@ -20,9 +20,17 @@ function critere_a_venir_dist($idb, &$boucles, $crit) {
 	$table = $boucle->id_table;
 	$not = $crit->not;
 	
-	$c = array("'OR'",
+	$horaire_actif = lire_config('simplecal_horaire');
+	if ($horaire_actif == 'oui') {
+		$c = array("'OR'",
+			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-d H:i:s'))"),
+			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-d H:i:s'))"));
+	}
+	else {
+		$c = array("'OR'",
 			array("'>='", "'$table.date_debut'", "sql_quote(date('Y-m-d'))"),
 			array("'>='", "'$table.date_fin'", "sql_quote(date('Y-m-d'))"));
+	}
 	
 	// Inversion de la condition ?
 	$c = ($not ? array("'NOT'", $c) : $c);
