@@ -206,3 +206,18 @@ function import_ics_post_edition_lien($flux){
 	}
 	return $flux;
 }
+
+
+/** Déclarer les almanachs
+ * au plugin corbeille
+ * @param array $flux;
+ * @return array $flux;
+**/
+function import_ics_corbeille_table_infos($flux){
+	$flux['almanachs']= array(
+		'statut'=>'poubelle',
+		'table'=>'almanachs', 
+		'tableliee'=>array('spip_almanachs_liens')
+	);
+	return $flux;
+}

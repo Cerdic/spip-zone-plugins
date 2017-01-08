@@ -25,6 +25,8 @@
 	<necessite nom="saisies" compatibilite="[2.7.7;[" />
 	<necessite nom="verifier" compatibilite="[1.1.0;[" />
 
+	<utilise nom="corbeille" compatibilite="[3.1.1;[" />
+
 	<pipeline nom="affiche_milieu" inclure="import_ics_pipelines.php" />
 	<pipeline nom="autoriser" inclure="import_ics_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/import_ics.php" />
@@ -37,6 +39,7 @@
 	<pipeline nom="evenement_liaisons_colonne_gauche" inclure="import_ics_pipelines.php" /> 
 	<pipeline nom="post_edition_lien" inclure="import_ics_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="import_ics_pipelines.php" />
+	<pipeline nom="corbeille_table_infos" inclure="import_ics_pipelines.php" />
 
 	<menu nom="almanachs" titre="almanach:titre_almanachs" parent="menu_edition" icone="images/almanach-16.png" action="almanachs" />
 	<menu nom="almanach_creer" titre="almanach:icone_creer_almanach" parent="outils_rapides" icone="images/almanach-new-16.png" action="almanach_edit" parametres="new=oui" />

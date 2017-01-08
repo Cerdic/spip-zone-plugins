@@ -1,0 +1,18 @@
+<B_almanachs>
+<div class="liste corbeille-almanachs">
+[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{almanach:almanachs_corbeille_un,almanach:almanachs_corbeille_tous})</h3>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste-items checkables'>
+<BOUCLE_almanachs(ALMANACHS){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='formulaire-#ID_ALMANACH'><:corbeille:selectionner:></label>
+<input type='checkbox' name='elements[]' id="almanach-#ID_ALMANACH" value='#ID_ALMANACH'[ (#ID_ALMANACH|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h4>[##ID_ALMANACH - (#TITRE|sinon{<:info_sans_titre:>})]</h4>
+<small>[(#DATE|affdate)]</small>
+<p class='actions'><a href='#URL_ECRIRE{almanach,id_almanach=#ID_ALMANACH}'><:corbeille:voir_detail:></a></p>
+</li>
+</BOUCLE_almanachs>
+</ul>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_almanachs>
