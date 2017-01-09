@@ -1,11 +1,11 @@
 <paquet
 	prefix="notation"
 	categorie="communication"
-	version="2.2.2"
+	version="2.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/notation-32.png"
-	schema="0.6.3"
+	schema="0.7.0"
 	documentation="http://contrib.spip.net/Notation-d-elements-SPIP"
 >
 

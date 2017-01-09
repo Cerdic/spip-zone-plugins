@@ -117,14 +117,23 @@ function notation_identifier_visiteur($set_cookie = false) {
 		if (!function_exists('lire_config')) {
 			include_spip('inc/config');
 		}
-		$qui['where'] = 'ip='.sql_quote($qui['ip'], '', 'text');
+		$methode_id = lire_config('notation/methode_id','ip');
+		if ($methode_id == 'cookie') {
+			$qui['where'] = 'cookie='.sql_quote($qui['cookie'], '', 'text');
+		}
+		elseif($methode_id == 'hash') {
+			$qui['where'] = 'hash='.sql_quote($qui['hash'], '', 'text');
+		}
+		else {
+			$qui['where'] = 'ip='.sql_quote($qui['ip'], '', 'text');
+		}
 	}
 
 	return $qui;
 }
 
 /**
- * Retrouver la note d'un objet/id_objet
+ * Retrouver la note d'un objet/id_objet 
  * pour un visiteur decrit par $qui (fourni par la fonction notation_identifier_visiteur)
  * @param string $objet
  * @param int $id_objet

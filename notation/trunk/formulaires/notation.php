@@ -98,6 +98,7 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	if ($id_notation = notation_retrouver_note($type, $id_objet, $qui)) {
 		$row = sql_fetsel('id_notation, id_auteur, note', 'spip_notations', 'id_notation=' . intval($id_notation));
 	}
+
 	// verifier ici qu'on avait bien le droit de voter, car on a pu supprimer son cookie pour avoir acces au formulaire
 	// sans pour autant avoir le droit de voter (idenitification par IP ou hash)
 	include_spip('inc/autoriser');
@@ -126,6 +127,8 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 					'note' => $note,
 					'id_auteur' => $qui['id_auteur'],
 					'ip' => $qui['ip'],
+					'hash' => $qui['hash'],
+					'cookie' => $qui['cookie'],
 				);
 				notation_modifier($id_notation,$c);
 			}

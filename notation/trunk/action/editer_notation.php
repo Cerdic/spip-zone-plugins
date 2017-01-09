@@ -24,6 +24,8 @@ function notation_inserer($objet, $id_objet){
 		"id_objet" => $id_objet,
 		"id_auteur" => 0,
 		"ip" => "",
+		"hash" => "",
+		"cookie" => "",
 		"note" => 0,
 	);
 
@@ -64,7 +66,7 @@ function notation_modifier($id_notation, $set=null) {
 	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// white list
-		array('id_auteur','ip','note'),
+		array('id_auteur','ip','hash','cookie','note'),
 		// black list : on ne peut pas changer sur quoi porte une note
 		array("objet","id_objet"),
 		// donnees eventuellement fournies
@@ -259,5 +261,3 @@ function notation_calculer_total($objet, $id_objet){
 function insert_notation($objet, $id_objet){return notation_inserer($objet, $id_objet);}
 function modifier_notation($id_notation,$c=array()) {return notation_modifier($id_notation, $c);}
 function supprimer_notation($id_notation) { return notation_supprimer($id_notation); }
-
-?>

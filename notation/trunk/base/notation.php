@@ -35,9 +35,11 @@ function notation_declarer_tables_principales($tables_principales){
 		"id_notation" => "BIGINT(21) NOT NULL auto_increment",
 		"objet"	=> "varchar(21) DEFAULT '' NOT NULL",
 		"id_objet" => "BIGINT(21) NOT NULL DEFAULT '0'",
-		"id_auteur" => "BIGINT(21) NOT NULL",
-		"ip"	=> "VARCHAR(255) NOT NULL",
-		"note" => "TINYINT(1) NOT NULL",
+		"id_auteur" => "BIGINT(21) NOT NULL DEFAULT '0'",
+		"ip"	=> "VARCHAR(255) NOT NULL DEFAULT ''",
+		"hash"	=> "VARCHAR(255) NOT NULL DEFAULT ''",
+		"cookie"	=> "VARCHAR(255) NOT NULL DEFAULT ''",
+		"note" => "TINYINT(1) NOT NULL DEFAULT '0'",
 		"maj" => "TIMESTAMP"
 	);
 	$spip_notations_key = array(
@@ -118,5 +120,3 @@ function notation_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_notations_objets'][] = 'articles';
 	return $interface;
 }
-
-?>

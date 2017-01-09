@@ -40,9 +40,9 @@
 		</fieldset>
 		<fieldset>
 		<legend><:notation:acces:></legend>
-		<div class="explication"><:notation:info_ip|propre:></div>
+		<p class="explication"><:notation:info_vote_unique_auteur:></p>
 		<ul class="editer-groupe">
-			<li class="editer editer_notation_acces">
+			<li class="editer long_label editer_notation_acces">
 				<label><:notation:info_acces:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
 				<div class="choix">
@@ -66,8 +66,27 @@
 					<label for="notation_acces_all"><:notation:item_all:></label>
 				</div>
 			</li>
+			<li class="editer long_label editer_notation_methode_id[(#ENV{acces}|=={all}|non)none]">
+				<label><:notation:info_methode_id:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{methode_id})</span>]
+				<div class="choix">
+					<input type="radio" name="methode_id" class="radio" value="ip"
+						[ (#ENV{methode_id,ip}|=={ip}|oui)checked="checked"] id="notation_methode_id_ip" />
+					<label for="notation_methode_id_ip"><:notation:item_methode_id_ip:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="methode_id" class="radio" value="hash"
+						[ (#ENV{methode_id,ip}|=={hash}|oui)checked="checked"] id="notation_methode_id_hash" />
+					<label for="notation_methode_id_hash"><:notation:item_methode_id_hash:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="methode_id" class="radio" value="cookie"
+						[ (#ENV{methode_id,ip}|=={cookie}|oui)checked="checked"] id="notation_methode_id_cookie" />
+					<label for="notation_methode_id_cookie"><:notation:item_methode_id_cookie:></label>
+				</div>
+			</li>
 
-			<li class="editer editer_notation_modifier_note">
+			<li class="editer long_label editer_notation_modifier_note">
 				<label for="notation_changer_note"><:notation:info_modifications:></label>
 				<div class="choix">
 				<input type="checkbox" name="change_note" class="checkbox" id="notation_changer_note"[ (#ENV{change_note}|=={oui}|oui)checked="checked"] value="oui" />
@@ -93,3 +112,20 @@
 		</p>
 	</div></form>
 </div>
+
+<script type="application/javascript">
+	function update_editer_notation_methode_id_visible() {
+		var val = jQuery('[name=acces]:checked').attr('value');
+		console.log(val);
+		if (val == 'all') {
+			jQuery('.editer_notation_methode_id:hidden').show('fast');
+		}
+		else {
+			jQuery('.editer_notation_methode_id:visible').hide('fast');
+		}
+	}
+	jQuery(function() {
+		update_editer_notation_methode_id_visible();
+		jQuery('[name=acces]').bind('change',update_editer_notation_methode_id_visible);
+	});
+</script>

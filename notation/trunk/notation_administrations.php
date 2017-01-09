@@ -91,6 +91,12 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_articles')),
 	);
 
+	$maj['0.7.0'] = array(
+		array('sql_alter',"TABLE spip_notations ADD COLUMN hash VARCHAR(255) NOT NULL DEFAULT '' AFTER ip"),
+		array('sql_alter',"TABLE spip_notations ADD COLUMN cookie VARCHAR(255) NOT NULL DEFAULT '' AFTER hash"),
+	);
+
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 
