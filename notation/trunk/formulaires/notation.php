@@ -34,32 +34,18 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 		'_note_max' => notation_get_nb_notes(),
 		'_form_id' => "-$table$id_objet"
 	);
+	
 
-	// l'auteur ou l'ip a-t-il deja vote ?
-	// si le visiteur a une session, on regarde s'il a deja vote
-	// sinon, non (la verification serieuse en cas de vote deja effectue
-	// se faisant dans verifier() )
-	if (is_array($GLOBALS['visiteur_session']) OR session_get('a_vote')) {
-
-		// on recupere l'id de l'auteur connecte, sinon ip
-		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
-			$id_auteur = 0;
-			$ip	= $GLOBALS['ip'];
-		}
-
-		$where = array(
-			"objet=" . sql_quote($type),
-			"id_objet=" . sql_quote($id_objet),
-			);
-		if ($id_auteur)
-			$where[] = "id_auteur=" . intval($id_auteur);
-		else
-			$where[] = "ip=" . sql_quote($ip);
-		$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+	// le visiteur a-t-il deja vote ?
+	$id_notation = 0;
+	$qui = notation_identifier_visiteur();
+	if ($qui['a_vote']) {
+		$id_notation = notation_retrouver_note($type, $id_objet, $qui);
 		if ($id_notation){
 			$valeurs['id_notation'] = $id_notation;
 		}
 	}
+
 	// peut voter ou modifier son vote ?
 	include_spip('inc/autoriser');
 	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$type, 'id_objet'=>$id_objet))) {
@@ -102,69 +88,60 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// indiquer dans sa session que ce visiteur a vote
 	// grace a ce cookie on dira a charger() qu'il faut regarder
 	// de plus pres ce qu'il en est dans la base
-
-	session_set('a_vote', true);
-
-	if (is_array($GLOBALS["visiteur_session"]) && isset($GLOBALS['visiteur_session']['id_auteur'])) {
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
-	} else {
-		$id_auteur = 0;
-	}
-	$ip	= $GLOBALS['ip'];
+	$qui = notation_identifier_visiteur(true);
 
 	// recuperation des champs
 	$note = intval(_request("notation-$table$id_objet"));
-	$id_donnees	= _request('notation_id_donnees'); // ne sert a rien ?
 
-	// Si pas inscrit : recuperer la note de l'objet sur l'IP
-	// Sinon rechercher la note de l'auteur
-	$where = array(
-				"objet=" . sql_quote($type),
-				"id_objet=" . intval($id_objet),
-			);
-	if ($id_auteur != 0) $where[] = "id_auteur=" . intval($id_auteur);
-	else $where[] = "ip=" . sql_quote($ip);
-	$row = sql_fetsel(
-		array("id_notation", "id_auteur", "note"),
-		"spip_notations",
-		$where
+	// Rechercher la note de l'auteur
+	$row = false;
+	if ($id_notation = notation_retrouver_note($type, $id_objet, $qui)) {
+		$row = sql_fetsel('id_notation, id_auteur, note', 'spip_notations', 'id_notation=' . intval($id_notation));
+	}
+	// verifier ici qu'on avait bien le droit de voter, car on a pu supprimer son cookie pour avoir acces au formulaire
+	// sans pour autant avoir le droit de voter (idenitification par IP ou hash)
+	include_spip('inc/autoriser');
+	if (autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$type, 'id_objet'=>$id_objet))) {
+
+		include_spip('action/editer_notation');
+		// Premier vote
+		if (!$row) {
+			// Remplir la table de notation
+			if ($note!=='-1') {
+				// annulation d'un vote -> ne pas creer un id !
+				$id_notation = notation_inserer($type, $id_objet);
+			}
+		} else {
+			$id_notation = $row['id_notation'];
+		}
+
+		if ($id_notation){
+			if ($note=='-1'){ // annulation d'un vote
+				notation_supprimer($id_notation);
+				$id_notation = 0;
+			}
+			else {
+				// Modifier la note
+				$c = array(
+					'note' => $note,
+					'id_auteur' => $qui['id_auteur'],
+					'ip' => $qui['ip'],
+				);
+				notation_modifier($id_notation,$c);
+			}
+
+		}
+	}
+
+	$res = array(
+		'editable' => true,
+		'message_ok' => _T('notation:jainote'),
+		'id_notation' => $id_notation
 	);
 
-	include_spip('action/editer_notation');
-	// Premier vote
-	if (!$row){  // Remplir la table de notation
-		if ($note!=='-1') // annulation d'un vote -> ne pas creer un id !
-			$id_notation = notation_inserer($type,$id_objet);
-	} else {
-		$id_notation = $row['id_notation'];
-	}
-
-	if ($id_notation){
-		if ($note=='-1'){ // annulation d'un vote
-			notation_supprimer($id_notation);
-			$id_notation = 0;
-		}
-		else {
-			// Modifier la note
-			$c = array(
-				"note" => $note,
-				"id_auteur" => $id_auteur,
-				"ip" => $ip
-			);
-			notation_modifier($id_notation,$c);
-		}
-
-	}
-
-	$res = array("editable"=>true,"message_ok"=>_T("notation:jainote"),'id_notation'=>$id_notation);
-
 	// peut il modifier son vote ?
-	include_spip('inc/autoriser');
 	if (!autoriser('modifier', 'notation', $id_notation, null, array('objet'=>$type, 'id_objet'=>$id_objet))) {
 		$res['editable']=false;
 	}
 	return $res;
 }
-
-
-?>

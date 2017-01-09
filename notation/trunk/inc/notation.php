@@ -62,4 +62,89 @@ function notation_ponderee($note, $nb){
 	return $note_ponderee;
 }
 
-?>
+/**
+ * Fonction pour identifier le visiteur qui veut voter/a vote
+ * on gere les methodes d'identification id_auteur/ip/hash/cookie
+ * @param bool $set_cookie
+ *   true pour forcer la pose d'un cookie si pas deja existant (au moment de l'enregistrement du vote)
+ * @return array
+ */
+function notation_identifier_visiteur($set_cookie = false) {
+
+	$qui = array(
+		'id_auteur' => 0,
+		'ip' => '',
+		'hash' => '',
+		'cookie' => '',
+		'a_vote' => false,
+		'where' => '0=1',
+	);
+
+	if (isset($GLOBALS['visiteur_session']['id_auteur'])) {
+		$qui['id_auteur'] = $GLOBALS['visiteur_session']['id_auteur'];
+	}
+	if (isset($GLOBALS['ip']) and $GLOBALS['ip']) {
+		$qui['ip'] = $GLOBALS['ip'];
+	}
+
+	// Identification du client
+	$qui['hash'] = substr(md5(
+		$qui['ip'] . $_SERVER['HTTP_USER_AGENT']
+		. $_SERVER['HTTP_ACCEPT_LANGUAGE']
+		. $_SERVER['HTTP_ACCEPT_ENCODING']
+	), 0,10);
+
+	if (isset($_COOKIE['spip_a_vote']) and $_COOKIE['spip_a_vote']) {
+		$qui['cookie'] = $_COOKIE['spip_a_vote'];
+	}
+	if ($qui['cookie']
+	  // compat anciennes versions
+	  or session_get('a_vote')) {
+		$qui['a_vote'] = true;
+	}
+
+	if (!$qui['cookie'] and $set_cookie) {
+		include_spip('inc/acces');
+		$qui['cookie'] = substr(md5(creer_uniqid()),0,16);
+		include_spip('inc/cookie');
+		spip_setcookie('spip_a_vote', $_COOKIE['spip_a_vote'] = $qui['cookie']);
+	}
+
+	if ($qui['id_auteur']) {
+		$qui['where'] = 'id_auteur=' . intval($qui['id_auteur']);
+	}
+	else {
+		if (!function_exists('lire_config')) {
+			include_spip('inc/config');
+		}
+		$qui['where'] = 'ip='.sql_quote($qui['ip'], '', 'text');
+	}
+
+	return $qui;
+}
+
+/**
+ * Retrouver la note d'un objet/id_objet
+ * pour un visiteur decrit par $qui (fourni par la fonction notation_identifier_visiteur)
+ * @param string $objet
+ * @param int $id_objet
+ * @param array $qui
+ * @return bool|int
+ */
+function notation_retrouver_note($objet, $id_objet, $qui) {
+	
+	if (!$qui or !isset($qui['where'])) {
+		return false;
+	}
+	
+	$where = array(
+		"objet=" . sql_quote($objet),
+		"id_objet=" . sql_quote($id_objet),
+		$qui['where'],
+	);
+
+	$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
+	
+	return intval($id_notation);
+	
+}
