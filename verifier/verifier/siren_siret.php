@@ -56,8 +56,8 @@ function verifier_siren_siret_dist($valeur, $options = array()) {
 				$somme += (2*$valeur[$i])-9;
 			} else {
 				$somme += 2*$valeur[$i];
-				$i+=2;
 			}
+			$i+=2;
 		}
 
 		if ($somme % 10) {
@@ -92,8 +92,8 @@ function verifier_siren_siret_dist($valeur, $options = array()) {
 				$somme += (2*$valeur[$i])-9;
 			} else {
 				$somme += 2*$valeur[$i];
-				$i+=2;
 			}
+			$i+=2;
 		}
 
 		if ($somme % 10) {
