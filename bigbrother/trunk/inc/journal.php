@@ -115,7 +115,7 @@ function inc_journal_dist($phrase, $opt = array()) {
 				);
 				// On met à jour la variable statique
 				$action[$champs['action']][$champs['objet']][$champs['id']] = array(
-					'id_journal' => $$id_journal,
+					'id_journal' => $id_journal,
 					'infos'      => $infos
 				);
 			}
