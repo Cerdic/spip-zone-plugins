@@ -82,8 +82,9 @@ function ordoc_liste_documents() {
 							/*axis: "y",*/ /* minidoc a un affichage en case */
 							handle: "",
 							placeholder: "ui-state-highlight ordoc-document-placeholder",
+							cancel: 'img.croix_centre_image',
 							start: function(event, ui) {
-								ui.item.addClass('ordoc-en-mouvement');	
+								ui.item.addClass('ordoc-en-mouvement');
 							},
 							stop: function(event, ui) {
 								ui.item.removeClass('ordoc-en-mouvement');
