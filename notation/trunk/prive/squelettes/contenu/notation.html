@@ -20,7 +20,11 @@
 	<tbody>
 		<BOUCLE_notes_aut(NOTATIONS){!par note}{id_auteur=#SESSION{id_auteur}}{0,10}>
 		<tr>
-			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
 			<td>#NOTE</td>
 			<BOUCLE_note_obj(NOTATIONS_OBJETS){objet}{id_objet}>
 				<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
@@ -74,7 +78,11 @@
 	<tbody>
 		<BOUCLE_notes_pond(NOTATIONS_OBJETS){0,10}{!par note_ponderee}>
 		<tr>
-			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
 			<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 		</tr>
 		</BOUCLE_notes_pond>
@@ -98,7 +106,11 @@
 	<tbody>
 	<BOUCLE_nombre_votes(NOTATIONS_OBJETS){0,10}{!par nombre_votes}>
 	<tr>
-		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+		<td>
+			<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+				[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+			</a>
+		</td>
 		<td>#NOTE_PONDEREE</td><td>#NOTE</td><td>#NOMBRE_VOTES</td>
 	</tr>
 	</BOUCLE_nombre_votes>
@@ -123,7 +135,11 @@
 	<tbody>
 		<BOUCLE_derniers_votes(NOTATIONS){0,10}{!par maj}>
 		<tr>
-			[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+			<td>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+				</a>
+			</td>
 			<td>[(#MAJ|affdate_court)]</td>
 			<td>#NOTE</td>
 		</tr>

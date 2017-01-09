@@ -13,7 +13,11 @@ exemple :
 <BOUCLE_not(NOTATIONS){!par note}{!par maj}{id_auteur=#ENV{id_auteur,#SESSION{id_auteur}}}{0,#ENV{max,5}}>
   <tr class=ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]>
   <td>#COMPTEUR_BOUCLE</td>
-  	[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+  <td>
+	  <a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+			[(#OBJET|objet_icone{16}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#OBJET|objet_info{texte_objet}|_T) ##ID_OBJET]})]
+		</a>
+  </td>
 	<td>
 	[(#NOTATION_ETOILE{#NOTE})]
 	</td>
