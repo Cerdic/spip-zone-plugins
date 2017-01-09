@@ -8,8 +8,8 @@
 				titre.append(
 					"<div class='minidoc'>"
 					+ "<span class='icone grand on' title='Affichage en grand'></span>"
-					+ "<span class='icone liste' title='Affichage en liste courte'></span>"
 					+ "<span class='icone cases' title='Affichage en cases'></span>"
+					+ "<span class='icone liste' title='Affichage en liste courte'></span>"
 					+ "</div>"
 				);
 
