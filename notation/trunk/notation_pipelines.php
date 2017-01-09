@@ -95,3 +95,44 @@ function notation_indexer_document($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Optimiser la base de donnee en supprimant les liens orphelins
+ *
+ * @param int $n
+ * @return int
+ */
+function notation_optimiser_base_disparus($flux){
+	$n = &$flux['data'];
+	$mydate = $flux['args']['date'];
+
+
+	$objets = sql_allfetsel('DISTINCT objet','spip_notations');
+	$objets = array_map('reset',$objets);
+	foreach($objets as $objet) {
+		$spip_table_objet = table_objet_sql($objet);
+		$id_table_objet = id_table_objet($objet);
+
+		$old = sql_allfetsel("L.id_objet AS id_objet",
+			// la condition de jointure inclue L.objet='xxx' pour ne joindre que les bonnes lignes
+			// du coups toutes les lignes avec un autre objet ont un id_xxx=NULL puisque LEFT JOIN
+			// il faut les eliminier en repetant la condition dans le where L.objet='xxx'
+						"spip_notations_objets AS L
+							LEFT JOIN $spip_table_objet AS O
+								ON (O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($objet).")",
+				"L.objet=".sql_quote($objet)." AND O.$id_table_objet IS NULL");
+
+		if (count($old)) {
+			$old = array_map('reset',$old);
+			spip_log("Suppression des entrees spip_notations objet $objet ids : ".implode(',',$old));
+			sql_delete('spip_notations_objets', 'objet=' . sql_quote($objet) . ' AND ' . sql_in('id_objet',$old));
+			$flux['data'] += count($old);
+			$res = sql_select('id_notation as id', 'spip_notations', 'objet=' . sql_quote($objet) . ' AND ' . sql_in('id_objet',$old));
+			$flux['data'] += optimiser_sansref('spip_notations', 'id_notation', $res);
+		}
+
+	}
+
+	return $flux;
+
+}
