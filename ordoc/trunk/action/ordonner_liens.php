@@ -44,7 +44,7 @@ function action_ordonner_liens_dist() {
 	$success = $errors = array();
 
 	$actuels = sql_allfetsel(
-		array($_id_objet . ' AS id', 'ordre'),
+		array($_id_objet . ' AS id', 'rang_lien'),
 		$table_liens,
 		array(
 			sql_in($_id_objet, $ordre),
@@ -60,7 +60,7 @@ function action_ordonner_liens_dist() {
 	$updates = array();
 
 	foreach ($actuels as $l) {
-		if ($futurs[$l['id']] !== $l['ordre']) {
+		if ($futurs[$l['id']] !== $l['rang_lien']) {
 			$updates[$l['id']] = $futurs[$l['id']];
 		}
 	}
@@ -69,7 +69,7 @@ function action_ordonner_liens_dist() {
 		foreach ($updates as $id => $ordre) {
 			sql_updateq(
 				$table_liens,
-				array('ordre' => $ordre),
+				array('rang_lien' => $ordre),
 				array(
 					$_id_objet . ' = ' . $id,
 					'objet = ' . sql_quote($objet_lie),
