@@ -20,6 +20,9 @@ if (!defined('_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL')) {
 if (!defined('_FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL')) {
 	define ('_FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL', _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL); // Au bout de combien de temps efface-t-on les fichiers enregistrés lorsque le traitement est uniquement email? 
 }
+if (!defined('_FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION')) {
+	define('_FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION', true); // mettre à false si on ne veut pas de lien vers les fichiers dans l'accusé de réception
+}
 /** 
  * Créer, si le formulaire contient des saisies de type fichiers, un dossier pour stocker les fichiers.
  * Vérifier que ce dossier soit accessible en écriture.

@@ -234,6 +234,9 @@ function traiter_email_dist($args, $retours) {
 			}
 
 			// On génère l'accusé de réception
+			if (_FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
+				$valeurs = vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies,$valeurs);
+			}
 			$html_accuse = recuperer_fond(
 				$accuse,
 				array(
@@ -409,6 +412,41 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 		}
 	}
 	return $saisie_a_modifier;
+}
+/**
+ * Supprime dans une vue de saisie 'fichiers'
+ * l'url de récupération par email
+ * et l'information sur le délai d'expiration
+ * @param array $vue 
+ * @return array $vue 
+**/
+function supprimer_action_recuperer_fichier_par_email($vue) {
+	foreach ($vue as $f => &$desc){
+		if (isset($desc['url'])) {
+			unset($desc['url']);
+		}
+		$desc['nom'] = $desc['fichier'];
+	}
+	return $vue;
+}
+
+/**
+ * Dans l'ensemble de vues des saisies
+ * recherche les saisies 'fichiers'
+ * et supprime pour chacune d'entre elle les actions de récupération de fichier
+ * @param array $saisies
+ * @param array $vues
+ * @return array $vues
+**/
+function
+vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vues) {
+	foreach ($saisies as $saisie=>$description){
+		if ($description['saisie'] == 'fichiers') { // si de type fichiers
+			$nom_saisie = $description['options']['nom']; 
+			$vues[$nom_saisie] = supprimer_action_recuperer_fichier_par_email($vues[$nom_saisie]);
+		}
+	}
+	return $vues;
 }
 /**
  * Retourne des secondes sous une jolie forme, du type xx jours, yy heures, zz minutes, aa secondes
