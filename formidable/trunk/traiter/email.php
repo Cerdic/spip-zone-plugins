@@ -386,7 +386,7 @@ function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timest
  * @param array $saisie_a_modifier
  * @param string $nom_saisie
  * @param array $options options qui décrit l'endroit où est stocké le fichier
- * return array $saisie_a_modifier
+ * @return array $saisie_a_modifier
  **/
 function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_saisie, $options) {
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
