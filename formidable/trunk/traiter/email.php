@@ -200,7 +200,7 @@ function traiter_email_dist($args, $retours) {
 				}
 				$sujet_accuse = trim(_L($options['sujet_accuse'], $a_remplacer));
 			}
-			if (!$sujet_accuse) {
+			if (!isset($sujet_accuse) or !$sujet_accuse) {
 				$sujet_accuse = _T('formidable:traiter_email_sujet_accuse');
 			}
 			$sujet_accuse = filtrer_entites($sujet_accuse);
