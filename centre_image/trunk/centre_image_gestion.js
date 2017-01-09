@@ -9,7 +9,18 @@ function centre_image_croix(el, x, y) {
 	el.find("img.croix_centre_image").css("left", x+"px").css("top", y+"px")
 		.draggable({
 			containment: "parent",
+			start: function(event, ui) {
+				var liste_documents = ui.helper.parents('.liste.documents.ui-sortable');
+				if (liste_documents) {
+					liste_documents.sortable('disable');
+				}
+			},
 			stop: function(event, ui) {
+				var liste_documents = ui.helper.parents('.liste.documents.ui-sortable');
+				if (liste_documents) {
+					liste_documents.sortable('enable');
+				}
+
 				var lien = el.attr("href");
 				var url = lien.replace(/^\.\.\//, '')
 
