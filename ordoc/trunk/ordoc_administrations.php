@@ -40,7 +40,7 @@ function ordoc_upgrade($nom_meta_base_version, $version_cible) {
  * @return void
 **/
 function ordoc_vider_tables($nom_meta_base_version) {
-	sql_alter('TABLE spip_documents_liens DROP COLUMN ordre');
+	sql_alter('TABLE spip_documents_liens DROP COLUMN rang_lien');
 	effacer_meta($nom_meta_base_version);
 }
 
