@@ -9,19 +9,7 @@ function centre_image_croix(el, x, y) {
 	el.find("img.croix_centre_image").css("left", x+"px").css("top", y+"px")
 		.draggable({
 			containment: "parent",
-			start: function(event, ui) {
-				var liste_documents = ui.helper.parents('.liste_items.documents.ui-sortable');
-				if (liste_documents.length) {
-					liste_documents.sortable('cancel');
-					liste_documents.sortable('disable');
-				}
-			},
 			stop: function(event, ui) {
-				var liste_documents = ui.helper.parents('.liste_items.documents.ui-sortable');
-				if (liste_documents.length) {
-					liste_documents.sortable('enable');
-				}
-
 				var lien = el.attr("href");
 				var url = lien.replace(/^\.\.\//, '')
 
@@ -33,15 +21,25 @@ function centre_image_croix(el, x, y) {
 				y = Math.max(0, y);
 				y = Math.min(1, y);
 
+				el.data('x', x);
+				el.data('y', y);
+
 				$.ajax("index.php?action=centre_image_forcer&x="+x+"&y="+y+"&url="+url);
 			}
 		});
 }
 
-function centre_image_afficher() {
+function centre_image_calculer_croix(el) {
+	var x = el.data('x');
+	var y = el.data('y');
+	x = x * el.find("img:not(.croix_centre_image)").width();
+	y = y * el.find("img:not(.croix_centre_image)").height();
+	// console.log(url + " / " + x + " / " + y);
+	centre_image_croix(el, x, y);
+}
 
-	$(".portfolios, .formulaire_editer_logo .spip_logo, #documents_joints").find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function(){
-
+jQuery.fn.centre_images = function() {
+	$(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function () {
 		// recuperer l'URL sans les ../
 		var lien = $(this).attr("href");
 		var url = lien.replace(/^\.\.\//, '')
@@ -50,17 +48,28 @@ function centre_image_afficher() {
 			$(this).attr("data-href", url);
 		}
 
-		$.getJSON( "../index.php?page=centre_image_json&url="+url, 
-			{lien: lien}, 
-			function( data ) {
-				var el = $("a[data-href='"+url+"']");
-				var x = data.x * el.find("img:not(.croix_centre_image)").width();
-				var y = data.y * el.find("img:not(.croix_centre_image)").height();
-				// console.log(url + " / " + x + " / " + y);
-				centre_image_croix(el, x, y);
+		$.getJSON("../index.php?page=centre_image_json&url=" + url,
+			{lien: lien},
+			function (data) {
+				var el = $("a[data-href='" + url + "']");
+				el.data('x', data.x);
+				el.data('y', data.y);
+				centre_image_calculer_croix(el);
 			}
 		);
+	});
+}
 
+jQuery.fn.centre_images_rafraichir = function() {
+	$(this).find("a[href$=jpg].hasbox, a[href$=png].hasbox, a[href$=gif].hasbox").each(function () {
+		centre_image_calculer_croix($(this));
+	});
+}
+
+function centre_image_afficher() {
+	$(".portfolios, .formulaire_editer_logo .spip_logo, #documents_joints").centre_images();
+	$(".portfolios .liste_items.documents").on("affichage.documents.change", function(){
+		$(this).centre_images_rafraichir();
 	});
 }
 
