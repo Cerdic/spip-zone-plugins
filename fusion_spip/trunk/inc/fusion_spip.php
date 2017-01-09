@@ -210,74 +210,87 @@ function fusion_spip_inserer_table_principale_dist($nom_table, $shema, $secteur,
 function fusion_spip_inserer_table_auxiliaire_dist($nom_table, $shema, $cles_primaires, $connect) {
 	$time_start = microtime(true);
 
-	// liste des champs à recopier
-	$champs_select = array_keys($shema['field']);
+	$shema_source = sql_showtable($nom_table, false, $connect);
+	if (is_array($shema_source['field'])) {
+		// liste des champs à recopier
+		$champs_select = array_intersect(array_keys($shema['field']), array_keys($shema_source['field']));
 
-	// selectionner tous les objets d'une table à importer
-	$res = sql_select($champs_select, $nom_table, '', '', '', '', '', $connect);
-	$count = sql_count($res, $connect);
-	while ($obj_import = sql_fetch($res, $connect)) {
-		$skip_import_objet = false;
+		// selectionner tous les objets d'une table à importer
+		$res = sql_select($champs_select, $nom_table, '', '', '', '', '', $connect);
+		$count = sql_count($res, $connect);
+		while ($obj_import = sql_fetch($res, $connect)) {
+			$skip_import_objet = false;
 
-		// pour chaque champ de la table, et si ce champ est une clé primaire d'un objet principal,
-		// retrouver l'id_final de l'objet lié
-		foreach ($shema['field'] as $nom_champ => $valeur_champ) {
-			if (in_array($nom_champ, $cles_primaires)) {
-				$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import[$nom_champ]).' and objet='.sql_quote(objet_type($nom_champ))));
+			// pour chaque champ de la table, et si ce champ est une clé primaire d'un objet principal,
+			// retrouver l'id_final de l'objet lié
+			foreach ($shema['field'] as $nom_champ => $valeur_champ) {
+				if (in_array($nom_champ, $cles_primaires)) {
+					$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import[$nom_champ]).' and objet='.sql_quote(objet_type($nom_champ))));
+					// mettre à jour l'id de l'objet lié
+					if ($nouveau_id) {
+						$obj_import[$nom_champ] = $nouveau_id;
+					} else {
+						// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
+						$skip_import_objet = true;
+					}
+				}
+			}
+
+			// si la table utilise une liaison par id_objet / objet
+			// retrouver l'id_final de l'objet lié
+			if ($shema['field']['id_objet'] && $shema['field']['objet']) {
+				$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import['id_objet']).' and objet='.sql_quote($obj_import['objet'])));
 				// mettre à jour l'id de l'objet lié
 				if ($nouveau_id) {
-					$obj_import[$nom_champ] = $nouveau_id;
+					$obj_import['id_objet'] = $nouveau_id;
 				} else {
 					// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
 					$skip_import_objet = true;
 				}
 			}
-		}
 
-		// si la table utilise une liaison par id_objet / objet
-		// retrouver l'id_final de l'objet lié
-		if ($shema['field']['id_objet'] && $shema['field']['objet']) {
-			$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import['id_objet']).' and objet='.sql_quote($obj_import['objet'])));
-			// mettre à jour l'id de l'objet lié
-			if ($nouveau_id) {
-				$obj_import['id_objet'] = $nouveau_id;
-			} else {
-				// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
-				$skip_import_objet = true;
+			// cas particulier pour spip_urls (id_objet / type au lieu de id_objet / objet)
+			if ($nom_table == 'spip_urls' && $shema['field']['id_objet'] && $shema['field']['type']) {
+				$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import['id_objet']).' and objet='.sql_quote($obj_import['type'])));
+				// mettre à jour l'id de l'objet lié
+				if ($nouveau_id) {
+					$obj_import['id_objet'] = $nouveau_id;
+					/**
+					 * Bien changer le parent ici
+					 * Car si deux urls semblables, tout plante, SPIP ira à la première trouvée
+					 */
+					if ($shema['field']['id_parent'] && in_array($obj_import['type'], array('article', 'rubrique'))) {
+						if ($obj_import['type'] == 'article') {
+							$obj_import['id_parent'] = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.intval($nouveau_id));
+						} else {
+							$obj_import['id_parent'] = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($nouveau_id));
+						}
+					}
+				} else {
+					// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
+					$skip_import_objet = true;
+				}
 			}
-		}
 
-		// cas particulier pour spip_urls (id_objet / type au lieu de id_objet / objet)
-		if ($nom_table == 'spip_urls' && $shema['field']['id_objet'] && $shema['field']['type']) {
-			$nouveau_id = intval(sql_getfetsel('id_final', 'spip_fusion_spip', 'site_origine = '.sql_quote($connect).' and id_origine = '.sql_quote($obj_import['id_objet']).' and objet='.sql_quote($obj_import['type'])));
-			// mettre à jour l'id de l'objet lié
-			if ($nouveau_id) {
-				$obj_import['id_objet'] = $nouveau_id;
-			} else {
-				// on n'a pas retrouvé l'objet initial ? l'enregistrement n'est plus cohérent, on le zappe
-				$skip_import_objet = true;
-			}
-		}
-
-		if (!$skip_import_objet) {
-			if ($nom_table == 'spip_visites') {
-				// cas particulier pour la table spip_visites
-				// il y a peut être déjà des visites pour cette date
-				$res_visites = sql_fetsel('*', 'spip_visites', 'date='.sql_quote($obj_import['date']));
-				if ($res_visites['date']) {
-					sql_updateq('spip_visites', array('visites' => $res_visites['visites'] + $obj_import['visites']), 'date='.sql_quote($obj_import['date']));
+			if (!$skip_import_objet) {
+				if ($nom_table == 'spip_visites') {
+					// cas particulier pour la table spip_visites
+					// il y a peut être déjà des visites pour cette date
+					$res_visites = sql_fetsel('*', 'spip_visites', 'date='.sql_quote($obj_import['date']));
+					if ($res_visites['date']) {
+						sql_updateq('spip_visites', array('visites' => $res_visites['visites'] + $obj_import['visites']), 'date='.sql_quote($obj_import['date']));
+					} else {
+						sql_insertq($nom_table, $obj_import);
+					}
 				} else {
 					sql_insertq($nom_table, $obj_import);
 				}
-			} else {
-				sql_insertq($nom_table, $obj_import);
 			}
 		}
+		$time_end = microtime(true);
+		$time = $time_end - $time_start;
+		fusion_spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 	}
-
-	$time_end = microtime(true);
-	$time = $time_end - $time_start;
-	fusion_spip_log('Table auxiliaire '.$nom_table.' traitée ('.$count.') : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 }
 
 /**
@@ -459,6 +472,12 @@ function fusion_spip_vignettes_documents_dist($connect) {
 /**
  * Importer un par un les documents de la source
  *
+ * Cette fonction est utilisée après l'import des tables spip_documents et spip_documents_liens,
+ * on dispose donc de leurs informations
+ *
+ * Les modifications des liens internes [ ... -> ... ] dont réalisés après via fusion_spip_maj_liens_internes_dist
+ * Les modifications des modèles sont également réalisés après via fusion_spip_maj_liens_internes_dist
+ *
  * @param string $img_dir répertoire IMG source
  * @param string $connect base source
  */
@@ -486,14 +505,54 @@ function fusion_spip_import_documents_dist($img_dir, $connect) {
 		// créer répertoire si besoin
 		$path_parts = pathinfo($source_doc);
 		$ext = $path_parts['extension'];
+		$copy = true;
+		$nouveau_fichier = false;
 		if ($ext) {
 			creer_repertoire_documents($ext);
-			// @todo: il existe surement mieux que copy() ?
-			// @todo: traiter les fichiers déja existant (les renommer)
-			if (file_exists($source_doc) && copy($source_doc, $dest_doc)) {
+			/**
+			 * Que faire si un fichier de même nom existe des deux cotés
+			 */
+			if (file_exists($source_doc) && file_exists($dest_doc)) {
+				if (sha1_file($source_doc) == sha1_file($dest_doc)) {
+					/**
+					 * Cas 1 : Le document est strictement identique (comparaison via sha1_file, http://php.net/manual/fr/function.sha1-file.php)
+					 *
+					 * On remplace en base les occurence du document dans spip_documents_liens
+					 * On supprime le document inséré depuis la base distante
+					 * On ne copie pas le fichier
+					 *
+					 * TODO : conserver les données de la base distante (titre, descriptif, credits) :
+					 * - si absence dans la première
+					 * - si la langue du site source et celle du site destination sont différentes (du coup générer des multis)
+					 */
+					$id_document_source = sql_getfetsel('id_document', 'spip_documents', 'fichier = '.sql_quote($obj_import['fichier']).' AND id_document != '.intval($obj_import['id_final']));
+					fusion_spip_log('Attention : le document source.('.$source_doc.') et le document de destination ('.$dest_doc.') sont identiques, il est préférable de remplacer en base de données, on utilise le document source : '.$id_document_source, 'fusion_spip_documents_'.$connect);
+					sql_updateq('spip_documents_liens', array('id_document' => $id_document_source), 'id_document='.intval($obj_import['id_final']));
+					sql_delete('spip_documents', 'id_document='.intval($obj_import['id_final']));
+					$copy = false;
+				} else {
+					/**
+					 * Cas 2 : Le document porte le même nom mais est différent
+					 *
+					 * On change le nom du fichier de destination que l'on copiera avec un nouveau nom du type nom_de_l_ancien_import_base.ext
+					 * La mise à jour du nom de fichier ne se fera que si la copie physique a été possible, par la suite dans le code
+					 *
+					 */
+					$nouveau_fichier = str_replace('.'.$ext, '_import_'.$connect.'.'.$ext, $obj_import['fichier']);
+					fusion_spip_log('Attention, le document '.$source_doc.' existe déjà ('.$dest_doc.'), il est préférable de le renommer, on le renomme en "'.$nouveau_fichier.'"', 'fusion_spip_documents_'.$connect);
+					$dest_doc = _DIR_IMG.$nouveau_fichier;
+				}
+			}
+			if ($copy && file_exists($source_doc) && copy($source_doc, $dest_doc)) {
 				fusion_spip_log('Document copié : '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
+				/**
+				 * Si on renomme le fichier pour éviter un doublon, il faut mettre à jour le nom de fichier en BDD
+				 */
+				if ($nouveau_fichier) {
+					sql_updateq('spip_documents', array('fichier' => $nouveau_fichier), 'id_document='.intval($obj_import['id_final']));
+				}
 				$documents_importes++;
-			} else {
+			} elseif ($copy) {
 				fusion_spip_log(_DIR_IMG.$ext.'/'.basename($source_doc), 'fusion_spip_documents_'.$connect);
 				if (file_exists(_DIR_IMG.$ext.'/'.basename($source_doc))) {
 					fusion_spip_log('Document échec : le document existe déjà '.$source_doc.' > '.$dest_doc, 'fusion_spip_documents_'.$connect);
@@ -548,7 +607,8 @@ function fusion_spip_import_documents_dist($img_dir, $connect) {
 }
 
 
-/** Mise à jour des liens internes [...->...]
+/**
+ * Mise à jour des liens internes [...->...]
  *
  * @param array $principales tables principales
  * @param string $connect base source
@@ -651,16 +711,12 @@ function fusion_spip_maj_modeles_dist($principales, $connect) {
 	$determiner_champs_texte = charger_fonction('determiner_champs_texte', 'fusion_spip');
 	$objets_sources = $determiner_champs_texte($principales);
 
-	if (function_exists('medias_declarer_tables_objets_sql')) {
-		// obtenir la liste des modeles dans la table spip_documents
-		$spip_documents = medias_declarer_tables_objets_sql($principales);
+	if (function_exists('objet_info')) {
+		$modeles = objet_info('document', 'modeles');
 	}
-	if ($spip_documents['modeles']) {
-		$modeles = $spip_documents['modeles'];
-	} else {
+	if (!$modeles) {
 		$modeles = array('document', 'doc', 'img', 'emb', 'image', 'video', 'text', 'audio', 'application');
 	}
-
 
 	// pour tous les objets importés pouvant contenir des modèles
 	foreach ($objets_sources as $objet => $champs) {
