@@ -59,6 +59,16 @@ function courtjus_calculer_rubrique($id_rubrique) {
 		}
 	}
 
+	// Secteur exclu ?
+	$secteur_exclusion = lire_config('courtjus/secteur_exclusion');
+	if (!empty($secteur_exclusion)) {
+		// On récupère le secteur de la rubrique
+		$id_secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+		if (in_array($id_secteur, $secteur_exclusion)) {
+			return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
+		}
+	}
+
 	$par_rubrique = lire_config('courtjus/squelette_par_rubrique');
 	// Si on n'intervient pas sur les squelettes par rubrique
 	if (empty($par_rubrique)) {

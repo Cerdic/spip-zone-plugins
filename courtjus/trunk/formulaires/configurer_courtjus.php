@@ -61,6 +61,14 @@ function formulaires_configurer_courtjus_saisies_dist() {
 				'label' => _T('courtjus:label_mot_exclusion'),
 				'multiple' => 'oui'
 			)
+		),
+		array(
+			'saisie' => 'secteur',
+			'options' => array(
+				'nom' => 'secteur_exclusion',
+				'label' => _T('courtjus:label_secteur_exclusion'),
+				'multiple' => 'oui'
+			)
 		)
 	);
 
