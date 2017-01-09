@@ -10,14 +10,15 @@ function centre_image_croix(el, x, y) {
 		.draggable({
 			containment: "parent",
 			start: function(event, ui) {
-				var liste_documents = ui.helper.parents('.liste.documents.ui-sortable');
-				if (liste_documents) {
+				var liste_documents = ui.helper.parents('.liste_items.documents.ui-sortable');
+				if (liste_documents.length) {
+					liste_documents.sortable('cancel');
 					liste_documents.sortable('disable');
 				}
 			},
 			stop: function(event, ui) {
-				var liste_documents = ui.helper.parents('.liste.documents.ui-sortable');
-				if (liste_documents) {
+				var liste_documents = ui.helper.parents('.liste_items.documents.ui-sortable');
+				if (liste_documents.length) {
 					liste_documents.sortable('enable');
 				}
 
