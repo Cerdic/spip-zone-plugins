@@ -14,7 +14,7 @@
 <h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
 <div class="liste_items documents" id="illustrations#ENV{id_unique}">
 [<p class="pagination">(#PAGINATION)</p>]
-<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par ordre, num titre,date,id_document}{pagination 50}{statut?}>
+<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
@@ -28,7 +28,7 @@
 <h3><:medias:info_portfolio:></h3>
 <div class="liste_items documents" id="portfolio#ENV{id_unique}">
 [<p class="pagination">(#PAGINATION)</p>]
-<BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par ordre, num titre,date,id_document}{pagination 50}{statut?}>
+<BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_portfolio>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
@@ -42,7 +42,7 @@
 <h3><:medias:info_documents:></h3>
 <div class="liste_items documents" id="documents#ENV{id_unique}">
 [<p class="pagination">(#PAGINATION)</p>]
-<BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par ordre, num titre,date,id_document}{pagination 50}{statut?}>
+<BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_documents>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]

@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function ordoc_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	$maj['create'] = array(array('maj_tables', array('spip_documents_liens')));
-	#$maj['1.0.0'] = array(array('sql_alter', 'TABLE spip_documents_liens ADD ordre int(3) DEFAULT \'0\' NOT NULL'));
+	$maj['1.1.0'] = array(array('sql_alter', 'TABLE spip_documents_liens CHANGE ordre rang_lien int(4) DEFAULT \'0\' NOT NULL'));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -52,7 +52,7 @@ function ordoc_vider_tables($nom_meta_base_version) {
  * @return array
  */
 function ordoc_declarer_tables_auxiliaires($tables) {
-	$tables['spip_documents_liens']['field']['ordre'] = "int(3) DEFAULT '0' NOT NULL";
+	$tables['spip_documents_liens']['field']['rang_lien'] = "int(4) DEFAULT '0' NOT NULL";
 	return $tables;
 }
 
