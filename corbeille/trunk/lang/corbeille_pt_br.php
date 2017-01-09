@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Excluir a seleção',
 	'effacer_tout' => 'Excluir tudo',
-	'element_supprime' => '@ids@ foi removido da lixeira',
-	'elements_supprimes' => '@ids@ foram removidos da lixeira',
+	'element_supprime' => '@ids@ foi removido da lixeira', # MODIF
+	'elements_supprimes' => '@ids@ foram removidos da lixeira', # MODIF
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ mensagens de fóruns privados na lixeira',

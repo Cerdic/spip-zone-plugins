@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Borrar',
 	'effacer_tout' => 'Borrar todo',
-	'element_supprime' => '@ids@ se ha eliminado de la papelera',
-	'elements_supprimes' => '@ids@ se han eliminado de la papelera',
+	'element_supprime' => '@ids@ se ha eliminado de la papelera', # MODIF
+	'elements_supprimes' => '@ids@ se han eliminado de la papelera', # MODIF
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ mensajes de foros privados en la papelera',

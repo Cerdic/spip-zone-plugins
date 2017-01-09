@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Wis de selectie',
 	'effacer_tout' => 'Alles wissen',
-	'element_supprime' => '@ids@ is verwijderd uit de prullenmand',
-	'elements_supprimes' => '@ids@ zijn verwijderd uit de prullenmand',
+	'element_supprime' => '@ids@ is verwijderd uit de prullenmand', # MODIF
+	'elements_supprimes' => '@ids@ zijn verwijderd uit de prullenmand', # MODIF
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ privé forumberichten in de prullenmand',

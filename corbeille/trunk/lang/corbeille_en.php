@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Erase',
 	'effacer_tout' => 'Erase all',
-	'element_supprime' => '@ids@ was removed from the trash',
-	'elements_supprimes' => '@ids@ were removed from the trash',
+	'element_supprime' => '@ids@ was removed from the trash', # MODIF
+	'elements_supprimes' => '@ids@ were removed from the trash', # MODIF
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ private forum messages in the trash',

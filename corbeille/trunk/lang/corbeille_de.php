@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Auswahl löschen',
 	'effacer_tout' => 'Alles löschen',
-	'element_supprime' => '@ids@ wurde aus dem Papierkorb gelöscht',
-	'elements_supprimes' => '@ids@ wurden aus dem Papierkorb gelöscht',
+	'element_supprime' => '@ids@ wurde aus dem Papierkorb gelöscht', # MODIF
+	'elements_supprimes' => '@ids@ wurden aus dem Papierkorb gelöscht', # MODIF
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ Forumsbeiträge im Papierkorb',
