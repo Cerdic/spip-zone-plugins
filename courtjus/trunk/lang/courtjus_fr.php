@@ -21,5 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_rubrique_enfant' => 'Chercher dans les rubriques enfants ?',
 	'explication_chercher_rubrique_enfant' => 'Permettre de chercher dans les sous-rubriques pour trouver un objet ?',
 	'label_recent' => 'Article récent',
-	'explication_recent' => "Rediriger sur l'article le plus récent ?"
+	'explication_recent' => "Rediriger sur l'article le plus récent ?",
+	'label_mot_exclusion' => 'Ne pas rediriger si un de ces mots-clés est présent'
 );
