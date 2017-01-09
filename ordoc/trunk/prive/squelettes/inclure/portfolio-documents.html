@@ -80,8 +80,14 @@ function ordoc_liste_documents() {
 					$("#illustrations#ENV{id_unique}, #portfolio#ENV{id_unique}, #documents#ENV{id_unique}").each(function () {
 						$(this).sortable({
 							/*axis: "y",*/ /* minidoc a un affichage en case */
-							handle: ".ordoc-deplacer",
+							handle: "",
 							placeholder: "ui-state-highlight ordoc-document-placeholder",
+							start: function(event, ui) {
+								$('body').css('cursor', 'move');	
+							},
+							stop: function(event, ui) {
+								$('body').css('cursor', 'default');	
+							},
 							update: function (event, ui) {
 								var items = $(this);
 								var item = ui.item;
