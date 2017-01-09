@@ -82,11 +82,11 @@ function ordoc_liste_documents() {
 							/*axis: "y",*/ /* minidoc a un affichage en case */
 							handle: "",
 							placeholder: "ui-state-highlight ordoc-document-placeholder",
-							start: function() {
-								$(this).addClass('ordoc-en-mouvement');	
+							start: function(event, ui) {
+								ui.item.addClass('ordoc-en-mouvement');	
 							},
-							stop: function() {
-								$(this).removeClass('ordoc-en-mouvement');
+							stop: function(event, ui) {
+								ui.item.removeClass('ordoc-en-mouvement');
 							},
 							update: function (event, ui) {
 								var items = $(this);
