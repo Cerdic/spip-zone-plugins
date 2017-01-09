@@ -35,7 +35,7 @@ $gradient: linear-gradient(
 }
 
 .chosen-container .chosen-results {
-  color: $medium-gray;
+  color: $black;
   li {
     &.disabled-result {
       color: $light-gray;
@@ -69,7 +69,7 @@ $gradient: linear-gradient(
       background-color: $white;
       background-image: $gradient;
       box-shadow: 0 0 2px $white inset, 0 1px 0 rgba($black,.05);
-      color: $dark-gray;
+      color: $black;
     }
     &.search-choice-disabled {
       border: 1px solid $medium-gray;
@@ -78,11 +78,11 @@ $gradient: linear-gradient(
       color: $medium-gray;
     }
     &.search-choice-focus {
-      background: $light-gray;
+      background: $medium-gray;
     }
   }
   .chosen-drop .result-selected {
-    color: $light-gray;
+    color: $medium-gray;
   }
 }
 
