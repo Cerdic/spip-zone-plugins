@@ -14,11 +14,11 @@
 					"<div class='minidoc'>"
 					+ "<span class='icone grand on' title='Affichage en grand'></span>"
 					+ "<span class='icone cases' title='Affichage en cases'></span>"
-					+ "<span class='icone liste' title='Affichage en liste courte'></span>"
+					+ "<span class='icone liste' title='Affichage en liste compacte'></span>"
 					+ "</div>"
 				);
 
-				var changer_affichage_doccuments = function(me, bouton, classe) {
+				var changer_affichage_documents = function(me, bouton, classe) {
 					$(me).parent().find('.icone').removeClass('on').end().end().addClass('on');
 					var liste = $(me).parents('h3').next('.liste_items.documents');
 					liste.removeClass('documents_cases').removeClass('documents_liste');
@@ -28,19 +28,26 @@
 					if (identifiant) {
 						$.cookie('affichage-' + identifiant, bouton);
 					}
+
+					liste.trigger('affichage.documents.change', {
+						'liste': liste,
+						'icone': me,
+						'bouton': bouton,
+						'classe': classe
+					});
+
 				};
 
 				titre.find('.minidoc > .grand').click(function () {
-					changer_affichage_doccuments(this, 'grand', null);
+					changer_affichage_documents(this, 'grand', null);
 				});
 
 				titre.find('.minidoc > .cases').click(function () {
-					console.log('clic');
-					changer_affichage_doccuments(this, 'cases', 'documents_cases');
+					changer_affichage_documents(this, 'cases', 'documents_cases');
 				});
 
 				titre.find('.minidoc > .liste').click(function () {
-					changer_affichage_doccuments(this, 'liste', 'documents_liste');
+					changer_affichage_documents(this, 'liste', 'documents_liste');
 				});
 
 				if (identifiant) {
