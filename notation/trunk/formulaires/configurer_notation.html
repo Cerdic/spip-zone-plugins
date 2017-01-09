@@ -6,7 +6,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			<legend><:notation:ponderation:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				<li class="editer pleine_largeur editer_notation_ponderation">
 					<label for="notation_ponderation"><:notation:valeur_ponderation:></label>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ponderation})</span>]
@@ -41,7 +41,7 @@
 		<fieldset>
 		<legend><:notation:acces:></legend>
 		<div class="explication"><:notation:info_ip|propre:></div>
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_notation_acces">
 				<label><:notation:info_acces:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
@@ -79,7 +79,7 @@
 
 		<fieldset>
 		<legend><:notation:nb_etoiles:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				<li class="editer editer_notation_etoile">
 					<label for="notation_etoiles"><:notation:valeur_nb_etoiles:></label>
 					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{acces})</span>]
