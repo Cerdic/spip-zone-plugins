@@ -15,11 +15,16 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
 .ordoc-document-placeholder { height:130px; }
 .documents_liste .ordoc-document-placeholder { height:40px; }
 .documents_cases .ordoc-document-placeholder { height:130px; width:113px; padding: 2px; margin: 2px;}
 
-.ordoc-deplacer { margin-right:0.5em; float: right; cursor:move; }
+.ordoc-deplacer { margin-#GET{right}:0.5em; float: #GET{left}; cursor:move; }
 
 .ordoc-en-mouvement { cursor:move; }
 
