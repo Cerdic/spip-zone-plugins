@@ -15,8 +15,13 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
 h3 .minidoc {
-	float:right;
+	float:#GET{right};
 }
 .minidoc .icone {
 	width:16px;
@@ -29,7 +34,7 @@ h3 .minidoc {
 	cursor:pointer;
 }
 .minidoc .icone + .icone {
-	margin-left:5px;
+	margin-#GET{left}:5px;
 }
 .minidoc .icone.grand {
 	background-image: url([(#CHEMIN_IMAGE{documents-liste-16.png})]);
@@ -51,14 +56,20 @@ h3 .minidoc {
 
 /* Liste courte de documents */
 .portfolios .documents_liste  {  }
-.portfolios .documents_liste .tout_supprimer { clear:both; margin-top:.5em; display:block; }
+.portfolios .documents_liste .tout_supprimer {
+	clear:both;
+	margin-top:.5em;
+	display:block;
+}
 .portfolios .documents_liste .item  {
-	padding: 7px 100px 7px 75px;
+	padding: 7px;
+	padding-#GET{right}: 100px;
+	padding-#GET{left}: 75px;
 	position:relative;
 }
 .portfolios .documents_liste .item .vignette {
 	width:65px;
-	margin-left: -75px;
+	margin-#GET{left}: -75px;
 }
 .portfolios .documents_liste .item .vignette img {
 	max-height: 36px;
@@ -69,8 +80,7 @@ h3 .minidoc {
 .portfolios .documents_liste .item .tourner,
 .portfolios .documents_liste .item .infos,
 .portfolios .documents_liste .item .mode,
-.portfolios .documents_liste .item .actions > *
-{
+.portfolios .documents_liste .item .actions > * {
 	display:none;
 }
 .portfolios .documents_liste .item .titrem {
@@ -91,7 +101,8 @@ h3 .minidoc {
 }
 .portfolios .documents_liste .item .actions {
 	position:absolute;
-	right:0; top:1.2em;
+	#GET{right}:0;
+	top:1.2em;
 }
 .portfolios .documents_liste .item .actions .editbox,
 .portfolios .documents_liste .item .actions .ordoc-deplacer {
@@ -124,15 +135,15 @@ h3 .minidoc {
 }
 .portfolios .documents_cases .item .actions .editbox {
 	display:inline-block;
-	float:right;
+	float:#GET{right};
 }
 .portfolios .documents_cases .item .actions .ordoc-deplacer {
 	display:inline-block;
-	float:left;
+	float:#GET{left};
 }
 .portfolios .documents_cases .item .vignette {
 	float: none;
-	margin-left: 0;
+	margin-#GET{left}: 0;
 	width:auto;
 	height:auto;
 	flex-grow:1;
