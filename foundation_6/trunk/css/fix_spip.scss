@@ -1,6 +1,5 @@
-html, body {
-	height: 100%; /* Fix un bug des reveal modale dans SPIP */
-}
+@charset "UTF-8";
+
 // Afficher correctement les datepickers
 input.hasDatepicker {
 	display: inline;
@@ -14,7 +13,7 @@ input.hasDatepicker {
 	}
 }
 
-// Cosmétique sur la page de login
+// Cosmetique sur la page de login
 .page_login #minipres {
 	margin: 5% auto;
 	width: 30rem;
