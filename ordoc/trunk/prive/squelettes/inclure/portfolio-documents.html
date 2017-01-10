@@ -78,6 +78,17 @@ function ordoc_liste_documents() {
 			$.getScript("[(#CHEMIN{javascript/ui/mouse.js}|timestamp)]", function () {
 				$.getScript("[(#CHEMIN{javascript/ui/sortable.js}|timestamp)]", function () {
 					$("#illustrations#ENV{id_unique}, #portfolio#ENV{id_unique}, #documents#ENV{id_unique}").each(function () {
+						// détruire / recréer le sortable à chaque appel ajax
+						if ($(this).has('.ui-sortable').length) {
+							$(this).sortable('destroy');
+						}
+						// pas de tri possible s'il n'y a qu'un seul élément.
+						if ($(this).find('> .item').length < 2) {
+							$(this).find('.ordoc-deplacer').hide();
+							return true; // continue
+						} else {
+							$(this).find('.ordoc-deplacer').show();
+						}
 						$(this).sortable({
 							/*axis: "y",*/ /* minidoc a un affichage en case */
 							handle: "",
@@ -142,6 +153,10 @@ function ordoc_liste_documents() {
 		});
 	});
 }
-if (window.jQuery) jQuery(function(){onAjaxLoad(check_reload_page); ordoc_liste_documents(); });
+if (window.jQuery) jQuery(function(){
+	onAjaxLoad(check_reload_page);
+	ordoc_liste_documents();
+	onAjaxLoad(ordoc_liste_documents);
+});
 /*]]>*/</script>
 </div>
