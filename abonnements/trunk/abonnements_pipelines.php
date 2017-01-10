@@ -79,7 +79,7 @@ function abonnements_post_edition($flux) {
 			// On lie cet abonnement avec la commande qui l'a généré
 			include_spip('action/editer_liens');
 			objet_associer(
-					array('commande' => $id_commande), array('abonnement' => $id_abonnement)
+				array('commande' => $id_commande), array('abonnement' => $id_abonnement)
 			);
 		}
 
@@ -108,14 +108,26 @@ function abonnements_post_edition($flux) {
 					and $jourdhui <= $abonnement['date_echeance']
 			) {
 				$modifs['statut'] = 'actif';
+				spip_log("Post-édition : passage de l’abonnement $id_abonnement en actif", 'abonnements.'._LOG_INFO);
+				spip_log($abonnement, 'abonnements.'._LOG_INFO);
 			}
 			// Si aujourd'hui est en dehors des dates début et FIN, on désactive
 			// on ne teste pas date_echeance car ce sera à un génie de désactiver si trop dépassée
 			elseif (
 					$abonnement['statut'] == 'actif'
-					and ( $jourdhui < $abonnement['date_debut'] or $jourdhui >= $abonnement['date_fin'])
+					and (
+						// Avant la date de début
+						$jourdhui < $abonnement['date_debut']
+						// Ou après la date de fin MAIS seulement si elle existe !
+						or (
+							$abonnement['date_fin'] != '0000-00-00 00:00:00'
+							and $jourdhui >= $abonnement['date_fin']
+						)
+					)
 			) {
 				$modifs['statut'] = 'inactif';
+				spip_log("Post-édition : passage de l’abonnement $id_abonnement en inactif", 'abonnements.'._LOG_INFO);
+				spip_log($abonnement, 'abonnements.'._LOG_INFO);
 			}
 		}
 
