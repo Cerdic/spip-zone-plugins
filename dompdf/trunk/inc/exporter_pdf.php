@@ -26,11 +26,15 @@ function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sor
 
 	$html = dompdf_trouver_html($squelette, $contexte);
 
-	// On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
+	// On lance DOMPDF pour créer le PDF et le renvoyer au navigateur.
 	$dompdf->load_html($html);
 	$dompdf->set_paper($paper, $orientation);
+	// Autoriser les images absolues «distantes» (http://mon_site.tld/IMG/jpg/truc.jpg)
+	// (Dompdf considère distantes les urls même si c'est le même domaine !)
+	$dompdf->set_option('enable_remote', true);
 	$dompdf = spip_dompdf($dompdf);
 	$dompdf->render();
 
 	$dompdf->stream($filename, array("Attachment" => false));
 }
+
