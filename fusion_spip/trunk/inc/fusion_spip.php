@@ -528,6 +528,7 @@ function fusion_spip_import_documents_dist($img_dir, $connect) {
 					$id_document_source = sql_getfetsel('id_document', 'spip_documents', 'fichier = '.sql_quote($obj_import['fichier']).' AND id_document != '.intval($obj_import['id_final']));
 					fusion_spip_log('Attention : le document source.('.$source_doc.') et le document de destination ('.$dest_doc.') sont identiques, il est préférable de remplacer en base de données, on utilise le document source : '.$id_document_source, 'fusion_spip_documents_'.$connect);
 					sql_updateq('spip_documents_liens', array('id_document' => $id_document_source), 'id_document='.intval($obj_import['id_final']));
+					sql_updateq('spip_fusion_spip', array('id_final' => $id_document_source), 'id_final='.intval($obj_import['id_final']).' AND objet="document" and site_origine='.sql_quote($connect));
 					sql_delete('spip_documents', 'id_document='.intval($obj_import['id_final']));
 					$copy = false;
 				} else {
