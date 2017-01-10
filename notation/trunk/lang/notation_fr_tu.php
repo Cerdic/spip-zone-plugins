@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fonctionnement_note' => 'Fonctionnement de la notation',
 	'info_ip' => 'Pour être le plus facile possible d’utilisation, la note est fixée sur l’adresse IP du votant, ce qui évite deux votes successifs dans la base, avec quelques inconvénients... en particulier si tu gères des votes d’auteurs.<br />
                 Dans ce cas, on fixe la note sur l’identifiant de l’utilisateur (quand celui-ci est enregistré, bien sûr).<br />
-                Si tu veux garantir l’unicité de la note, limite le vote aux <b>seules</b> personnes enregistrées (ci-dessus).',
+                Si tu veux garantir l’unicité de la note, limite le vote aux <b>seules</b> personnes enregistrées (ci-dessus).', # MODIF
 	'info_modifications' => 'Modifications des notes',
 	'info_ponderation' => 'Le facteur de pondération permet d’accorder plus de valeur aux articles ayant reçu suffisamment de votes. <br /> Entre ci-dessous le nombre de votes au delà duquel tu penses que la note est fiable.',
 	'ip' => 'IP',

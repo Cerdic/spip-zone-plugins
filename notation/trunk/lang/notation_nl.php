@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fonctionnement_note' => 'Geven van scores',
 	'info_ip' => 'Om scores zo eenvoudig mogelijk te controleren, worden ze geregistreerd op het IP-adres van de stemmer. Dit voorkomt meerdere stemmen per gebruiker.<br />
                 Auteurs stemmen met hun ID.<br />
-                Voor een enkele stem per gebruiker, beperk je stemming tot een <b>enkele</b> geregistreerde persoon (hierboven).',
+                Voor een enkele stem per gebruiker, beperk je stemming tot een <b>enkele</b> geregistreerde persoon (hierboven).', # MODIF
 	'info_modifications' => 'Scores aanpassen',
 	'info_ponderation' => 'De weegfactor geeft meer waarde aan items die voldoende stemmen hebben.<br />Geef het minimum aantal stemmen om de score betrouwbaar te laten zijn.',
 	'ip' => 'IP',

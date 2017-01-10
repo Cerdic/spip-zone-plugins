@@ -51,7 +51,7 @@ Esta configuración debe ser fijada una vez para toda la creación de las notas.
 	'info_fonctionnement_note' => 'Funcionamiento de la anotación',
 	'info_ip' => 'Para un uso más fácil, la nota se adjunta a la dirección de IP del votante, lo que evita dos votos sucesivos en la base de datos, con algunos inconvenientes... en particlar si administra votos de autores.<br />
 En este caso, se fija la nota en el identificador del usuario (cuando se registra, por supuesto).<br />
-Si desea garantizar la unicidad de la nota, limite el voto a las <b>seules</b> personas registradas (arriba).',
+Si desea garantizar la unicidad de la nota, limite el voto a las <b>seules</b> personas registradas (arriba).', # MODIF
 	'info_modifications' => 'Modificaciones de las notas',
 	'info_ponderation' => 'El factor de ponderación permite acordar más valor a los artículos que hayan recibido suficientes votos. <br /> Escriba a continuación el número de votos más allá de aquél que crea que será confiable. ',
 	'ip' => 'IP',

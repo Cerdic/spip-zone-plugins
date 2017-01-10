@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fonctionnement_note' => 'Ako hodnotenie funguje',
 	'info_ip' => 'Na čo najľahšie používanie sa hodnotenie priraďuje IP adrese hodnotiteľa, čo s určitými nevýhodami bráni následným duplicitným hodnoteniam. Najmä ak riadite hlasovanie autorov.<br />
                 V tomto prípade sa hodnotenie priraďuje k prihlasovaciemu údaju používateľa (samozrejme, keď sa zaregistroval).<br />
-                Ak chcete zaistiť jedinečnosť hodnotenia, vyhraďte hodnotenie <b>iba</b> pre zaregistrovaných používateľov (vyššie).',
+                Ak chcete zaistiť jedinečnosť hodnotenia, vyhraďte hodnotenie <b>iba</b> pre zaregistrovaných používateľov (vyššie).', # MODIF
 	'info_modifications' => 'Zmeny známok',
 	'info_ponderation' => 'Váha umožňuje prirátať hodnotu článkom, ktoré dostali dosť hlasov. <br /> Zadajte počet hlasov, nad ktorý je podľa vás hodnotenie spoľahlivé.',
 	'ip' => 'IP',
