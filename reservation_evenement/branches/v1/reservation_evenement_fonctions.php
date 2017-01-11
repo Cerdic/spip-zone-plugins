@@ -134,3 +134,8 @@ function prix_formater_devise($montant, $devise) {
 
 	return $montant;
 }
+function re_statut_titre($objet, $statut) {
+	include_spip('inc/puce_statut');
+	return statut_texte_instituer($objet , $statut);
+}
+

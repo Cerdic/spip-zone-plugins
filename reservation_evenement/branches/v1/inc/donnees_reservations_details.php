@@ -56,12 +56,13 @@ function inc_donnees_reservations_details_dist($id_reservations_detail, $set) {
 				if (test_plugin_actif('declinaisons')) {
 					$id_prix = isset($set['id_prix_objet']) ? $set['id_prix_objet'] : $reservations_details['id_prix_objet'];
 					$p = sql_fetsel('prix_ht,id_prix_objet,id_declinaison,code_devise', 'spip_prix_objets', 'id_prix_objet=' . $id_prix);
-
 					if ($p['id_declinaison'] > 0)
 						$set['descriptif'] .= ' - ' . supprimer_numero(sql_getfetsel('titre', 'spip_declinaisons', 'id_declinaison=' . $p['id_declinaison']));
 				}
 				// Sinon on cherche d'abord le prix attaché
-				$p = prix_attache($id_evenement, $evenement['id_article'], $evenement['id_evenement_source']);
+				else {
+					$p = prix_attache($id_evenement, $evenement['id_article'], $evenement['id_evenement_source']);
+				}
 
 				if (isset($p)) {
 					$prix_ht = $quantite * $fonction_prix_ht('prix_objet', $p['id_prix_objet']);
