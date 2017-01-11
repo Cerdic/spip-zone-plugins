@@ -2,8 +2,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('_BOUTON_MODE_IMAGE', true);
-
 function filtre_medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu,$media=null){
 	$raccourci = '';
 	$doc = 'doc';
@@ -28,5 +26,3 @@ function filtre_medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$l
 	}
 	return "<div class='raccourcis'>".$raccourci."</div>";
 }
-
-?>
