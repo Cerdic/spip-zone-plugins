@@ -2,19 +2,19 @@
 [(#CONFIG{foundation_6/javascript}|oui)
 
 [(#CHEMIN{bower_components/foundation-sites/dist/js/foundation.js}|?{
-
 	[<script src="(#CHEMIN{bower_components/foundation-sites/dist/js/foundation.js})" type="text/javascript"></script>],
 	[<script src="(#CHEMIN{bower_components/foundation-sites/dist/foundation.js})" type="text/javascript"></script>]
  })]
 
 <script type="text/javascript">
- // Charger les scripts foundations
+ // Charger les scripts Foundation
  $(function () {
 	 [(#CHEMIN{bower_components/what-input/what-input.min.js}|?{
 		 $.getScript("[(#CHEMIN{bower_components/what-input/what-input.min.js}|timestamp)]"),
 		 $.getScript("[(#CHEMIN{bower_components/what-input/dist/what-input.min.js}|timestamp)]")
 	 })]
-	 $.getScript("[(#CHEMIN{javascript/app.js}|timestamp)]");
+	 $.getScript("[(#CHEMIN{js/app.js}|timestamp)]");
+	 $.getScript("[(#CHEMIN{javascript/spip.foundation.js}|timestamp)]");
   });
 </script>
 ]
