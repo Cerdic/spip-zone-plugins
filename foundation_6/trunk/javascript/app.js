@@ -1,2 +1,0 @@
-// lancer foundation
-$(document).foundation();
