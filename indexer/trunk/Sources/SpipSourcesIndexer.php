@@ -205,7 +205,7 @@ class SpipSourcesIndexer {
         $stats['sources'][$skey]['time']['documents'] += $t;
 
         if ($nb) {
-            echo "<p><strong>Temps pour indexer $nb documents (ids $part[start] à $part[end])</strong>\n";
+            echo "<p><strong>Temps pour indexer $nb $skey (ids $part[start] à $part[end])</strong>\n";
             echo "<br />Documents: " . $this->getNiceTime($t) . "\n";
 
             spip_timer('indexing');
