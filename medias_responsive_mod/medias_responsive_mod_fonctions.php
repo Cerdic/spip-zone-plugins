@@ -2,7 +2,7 @@
 
 
 
-if (!function_exists(centre_image_x)) {
+if (!function_exists('centre_image_x')) {
 	function centre_image_x($img) { return 0.5; }
 	function centre_image_y($img) { return 0.5; }
 }
