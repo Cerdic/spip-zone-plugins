@@ -1,0 +1,23 @@
+<BOUCLE_document (DOCUMENTS) {id_document=#ENV{id}} {mode?} {tout}>
+[(#SET{a,span})]
+[(#LARGEUR|>{800}|oui)[(#SET{a,a})]]
+[(#HAUTEUR|>{800}|oui)[(#SET{a,a})]]
+
+<ul class="portfolio_ligne">
+	<li data-width="#LARGEUR" data-height="#HAUTEUR" style="width:[(#LARGEUR|div{#HAUTEUR}|mult{300})px]">
+		<figure class="spip_documents spip_documents_ligne">
+			<[(#GET{a})] href="#FICHIER" [(#FICHIER|background_responsive{160/300/600/900/1440/1920,0})][ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR" ></#GET{a}>
+			[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
+			<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
+				[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|PtoBR)</strong></div>]
+				[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+				[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+			</figcaption>
+			]
+		
+		</figure>
+	</li>
+</ul>
+</BOUCLE_document>
+
+#FILTRE{mini_html}

@@ -1,0 +1,86 @@
+<BOUCLE_document (DOCUMENTS) {id_document} {mode?} {tout}>
+[(#REM)
+
+	Modele pour <img>
+
+]
+[(#SET{
+	image,
+		#ENV{mode_force,#MODE}|match{'image|vignette'}
+		|sinon{#ENV{embed}}
+		|oui
+})]
+[(#ENV{kenburns}|oui)
+	#SET{kenburns,2}
+	[(#ENV{kenburns}|=={kenburns}|non)
+		#SET{kenburns,#ENV{kenburns}}
+	]
+]
+[(#ENV{class}|=={kenburns}|oui)#SET{kenburns,2}]
+
+[(#ENV{class}|=={flip}|oui)#SET{flip,flip}]
+[(#ENV{flip}|oui)#SET{flip,flip}]
+
+[(#ENV{shape}|oui)
+	[(#SET{polygon,[(#FICHIER|image_detourer_polygon)]})]
+]
+
+[(#SET{a,span})]
+[(#LARGEUR|>={800}|oui)[(#SET{a,a})]]
+[(#HAUTEUR|>={800}|oui)[(#SET{a,a})]]
+
+
+<figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align}|sinon{center})][ spip_documents_(#GET{flip})][ spip_documents_(#ENV{shape})][(#ENV{rond}|oui)rond][(#ENV{large}|oui)large][(#ENV{kenburns}|oui)kenburns][ (#ENV{class})] spip_lien_ok'
+ style="[max-width:(#ENV{largeur}|sinon{#FICHIER|largeur})px;][-webkit-shape-outside: content-box (#GET{polygon});][shape-outside: content-box (#GET{polygon});]"[ data-w="(#ENV{largeur}|sinon{#FICHIER|largeur})"][ data-zoom-responsive="(#GET{kenburns})"]>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
+[(#ENV{lien}|non)
+<[(#GET{a})] href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] class="fond mediabox" type="#MIME_TYPE" data-photo-w="#LARGEUR" data-photo-h="#HAUTEUR" >
+]
+	[(#ENV{largeur}|non)
+		[(#FICHIER|image_responsive{160/320/640/1200/1920})]
+	]
+	[(#ENV{largeur}|oui)
+		[(#GET{kenburns}|oui)
+			[(#FICHIER|image_responsive{[(#ENV{largeur}|mult{#GET{kenburns}})]})]
+		]
+		[(#GET{kenburns}|non)
+			[(#FICHIER|image_responsive{#ENV{largeur}})]
+		]
+	]
+
+[(#ENV{lien}|?{</a>,</#GET{a}>})]
+[(#GET{kenburns}|oui)
+<style><!--
+	.spip_document_#ID_DOCUMENT.kenburns picture img {
+		-webkit-transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+		transform-origin: [(#FICHIER|centre_image_x|mult{100})]% [(#FICHIER|centre_image_y|mult{100})]%;
+	}
+	
+		.spip_document_#ID_DOCUMENT.kenburns_actif picture img {
+			-webkit-transform: scale([(#GET{kenburns})]);
+			-webkit-animation-name: kenburns#ID_DOCUMENT;
+			transform: scale([(#GET{kenburns})]);
+			animation-name: kenburns#ID_DOCUMENT;	
+		}
+		@-webkit-keyframes kenburns#ID_DOCUMENT {
+			from {-webkit-transform: scale(1);}
+			to {-webkit-transform: scale([(#GET{kenburns})]);}
+		}
+		@keyframes kenburns#ID_DOCUMENT {
+			from {transform: scale(1);}
+			to {transform: scale([(#GET{kenburns})]);}
+		}
+--></style>
+]
+
+
+	[(#TITRE|sinon{#DESCRIPTIF}|sinon{#CREDITS}|oui)
+	<figcaption class='spip_doc_intitules[ spip_doc_intitules_(#EVAL{_SPIP_DOC_INTITULES_ALIGN})]'>
+		[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
+		[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+		[<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+	</figcaption>
+	]
+</figure>
+</BOUCLE_document>
+#FILTRE{mini_html}
