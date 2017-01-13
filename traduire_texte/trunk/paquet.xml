@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.0.0;3.1.*]"
 	logo=""
-	documentation=""
+	documentation="https://contrib.spip.net/Traduire-texte"
 	schema="0.0.1"
 >
 	<nom>Traduire Texte</nom>
