@@ -1,0 +1,19 @@
+<paquet
+	prefix="traduiretexte"
+	categorie="outil"
+	version="0.0.3"
+	etat="dev"
+	compatibilite="[2.0.0;3.1.*]"
+	logo=""
+	documentation=""
+	schema="0.0.1"
+>
+	<nom>Traduire Texte</nom>
+
+	<auteur>ARNO*</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="traduiretexte_administrations.php" />
+
+</paquet>
