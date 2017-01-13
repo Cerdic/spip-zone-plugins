@@ -312,7 +312,7 @@ function albums_insert_head_css($flux) {
 		$cfg = (defined('_ALBUMS_INSERT_HEAD_CSS') ? _ALBUMS_INSERT_HEAD_CSS : lire_config('albums/insert_head_css', 1));
 		if ($cfg) {
 			// feuille de style minimale de base
-			$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" />';
+			$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/albums.css')).'" type="text/css" />';
 		}
 	}
 

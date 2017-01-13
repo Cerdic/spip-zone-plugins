@@ -12,6 +12,12 @@
 .portfolio-albums               { clear: both; }
 .portfolio-albums .album ul li  { float: none; margin: 0 }
 
+/* Alignement */
+.album.right                         { float: right; }
+.album.left                          { float: left; }
+.album.center                        { margin-left: auto; margin-right: auto; text-align:center; }
+.album.center li{float:inherit;display:inline-block;}
+
 /* -----------------------
    Compatibilité Bootstrap
    -----------------------*/
