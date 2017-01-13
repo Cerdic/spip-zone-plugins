@@ -161,6 +161,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		} else {
 			unset($liste_verifications['fichiers']);
 		}
+		uasort ($liste_verifications,'verifier_trier_par_titre');
 		$chemin_validation[] = 'saisies';
 		$chemin_validation[] = 1000000; // à la fin
 
