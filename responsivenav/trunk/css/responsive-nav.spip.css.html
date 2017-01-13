@@ -1,10 +1,10 @@
 a.nav-toggle {text-align:center;font-size:1.2em;}
-#nav {border-top:0;}
-#nav ul li {text-align:center;}
+[(#CONFIG{responsivenav/selector,#nav})] {border-top:0;}
+[(#CONFIG{responsivenav/selector,#nav})] ul li {text-align:center;}
 
-/* Si ZDist V1 avec le plugin Menus */
 [(#PLUGIN{Z}|oui) 
-	#nav .menu-conteneur ul.menu-liste li.menu-entree {box-sizing:border-box;margin:0;padding:0.5em;display:inline-block;}
+	/* Si ZDist V1 avec le plugin Menus */
+	[(#CONFIG{responsivenav/selector,#nav})] .menu-conteneur ul.menu-liste li.menu-entree {box-sizing:border-box;margin:0;padding:0.5em;display:inline-block;}
 ]
 
 @media screen and (min-width: #CONFIG{responsivenav/breakpoint,40em}) {
@@ -14,8 +14,8 @@ a.nav-toggle {text-align:center;font-size:1.2em;}
 
 @media screen and (max-width: #CONFIG{responsivenav/breakpoint,40em}) {
 	a.nav-toggle {display:block;}
-	#nav ul li a {float:none;}  /* Pour SPIP 3.0 dist */
-	#nav ul.menu-items {float:none;overflow:hidden;}  /* Pour ZDist V2 */
+	[(#CONFIG{responsivenav/selector,#nav})] ul li a {float:none;}  /* Pour SPIP 3.0 dist */
+	[(#CONFIG{responsivenav/selector,#nav})] ul.menu-items {float:none;overflow:hidden;}  /* Pour ZDist V2 */
 }
 
 [(#CONFIG{responsivenav/menuburger}|oui) 
