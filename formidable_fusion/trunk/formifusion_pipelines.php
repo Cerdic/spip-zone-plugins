@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function formifusion_affiche_droite($flux){
 	if ($flux['args']['exec']=='formulaire_edit'
+		&& isset($flux['args']['confgurer'])
 		&& $flux['args']['configurer']=='champs'
 		){
 		$id_formulaire = $flux['args']['id_formulaire'];
