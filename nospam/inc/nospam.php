@@ -120,6 +120,7 @@ function analyser_spams($texte) {
 		'caracteres_utiles' => 0, // nombre de caracteres sans les liens
 		'nombre_liens' => 0, // nombre de liens
 		'caracteres_texte_lien_min' => 0, // nombre de caracteres du plus petit titre de lien
+		'contenu_cache' => false, // du contenu est caché en CSS ?
 	);
 
 	if (!$texte) return $infos;
