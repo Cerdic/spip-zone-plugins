@@ -38,7 +38,7 @@
 	]
 	[(#ENV{editable}|non)
 		[(#ENV{formidable_afficher_apres}|=={valeurs}|oui)
-			#VOIR_SAISIES{#ENV*{_saisies},#ENV}
+			#VOIR_SAISIES{#ENV*{_saisies},#ENV**|unserialize}
 			
 		]
 		[(#ENV{formidable_afficher_apres}|=={rien}|oui)
