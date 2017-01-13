@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"choix_couleur_defaut_choix1"=>"Couleur 1",
 	"choix_couleur_defaut_choix2"=>"Couleur 2",
 	"choix_couleur_defaut_choix3"=>"Couleur 3",
-	"choix_couleur_titre"=>"Un choix de couleurs",
+	"choix_couleur_titre"=>"Choix parmis des couleurs",
 	"choix_couleur_explication"=>"Permet de choisir une couleurs parmis plusieurs.",
 	
 	
