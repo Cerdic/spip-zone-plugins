@@ -4,6 +4,7 @@
 	version="0.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
+	documentation="https://contrib.spip.net/4451"
 >
 
 	<nom>Réponses commentées avec Formidable</nom>
