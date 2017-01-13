@@ -31,11 +31,13 @@ function verifier_decimal_dist($valeur, $options = array()) {
 		$erreur = '';
 
 		if (isset($options['min'])) {
-			$ok = ($ok and ($valeur >= $options['min']));
+			$min = floatval(str_replace(",", '.', $options['min']));
+			$ok = ($ok and ($valeur >= $min));
 		}
 
 		if (isset($options['max'])) {
-			$ok = ($ok and ($valeur <= $options['max']));
+			$max = floatval(str_replace(",", '.', $options['max']));
+			$ok = ($ok and ($valeur <= $max));
 		}
 
 		if (!$ok) {
