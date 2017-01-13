@@ -20,7 +20,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function verifier_decimal_dist($valeur, $options = array()) {
 	$erreur = _T('verifier:erreur_decimal');
-
+	if (isset($options['separateur']) and $options['separateur']!='') {
+		$valeur = str_replace($options['separateur'], '.', $valeur);
+	}
 	// Pas de tableau ni d'objet
 	if (is_numeric($valeur) and $valeur == floatval($valeur)) {
 		// Si c'est une chaine on convertit en flottant
