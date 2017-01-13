@@ -86,6 +86,26 @@ function verifier_lister_disponibles($repertoire = 'verifier') {
 	return $verifications[$repertoire];
 }
 
+/**
+ * Fonction de callback pour uasort()
+ * Afin de trier selon le titre
+ * @param array $array1 premier élèment
+ * @param array $array2 second élèment
+ * @return int 1,0,-1
+ **/
+function verifier_trier_par_titre($array1,$array2) {
+	if (isset($array1['titre']) and isset($array2['titre'])) {
+		if ($array1['titre'] == $array2['titre']) {
+			return 0;
+		} elseif ($array1['titre'] > $array2['titre']) {
+			return 1;
+		} else {
+			return -1;
+		}
+	} else {
+		return 0;
+	}
+}
 
 /**
  * Charger les informations contenues dans le yaml d'une vérification
