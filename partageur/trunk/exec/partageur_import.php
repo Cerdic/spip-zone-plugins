@@ -114,43 +114,44 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 						// Est que l'article n'a pas été déjà importé ?
 						$articles_importes = sql_select("id_article,titre","spip_articles","s2s_url=".sql_quote($current_link));
 						if ($articles_importes and sql_count($articles_importes)>0) {
-						   // article deja connu et present ds la base
-						   $log_html .= "[<span style='color:#999'>"._T('partageur:imported_already')."</span>]\n";
-						   while ($r = sql_fetch($articles_importes)) {
-							   $log_html .= "<a href='".generer_url_ecrire('article', "id_article=".$r['id_article'],'&')."'>".$r['titre']."</a><br />";
-						   }
-						   spip_log("partageur: deja importe: ".$current_link);
+							// article deja connu et present ds la base
+							$log_html .= "[<span style='color:#999'>"._T('partageur:imported_already')."</span>]\n";
+							while ($r = sql_fetch($articles_importes)) {
+								$log_html .= "<a href='".generer_url_ecrire('article', "id_article=".$r['id_article'],'&')."'>".$r['titre']."</a><br />";
+							}
+							spip_log("partageur: deja importe: ".$current_link);
 
 						} else {
-						   // nouvel article à importer
-						   $log_html .= "[<span style='color:#090'>"._T('partageur:imported_new')."</span>] <a href='$current_link'>$current_titre</a>\n";
+							// nouvel article à importer
+							$log_html .= "[<span style='color:#090'>"._T('partageur:imported_new')."</span>] <a href='$current_link'>$current_titre</a>\n";
 
-						   // securite verifie sur rubrique destination existe
-						   $target=$id_rubrique;
-						   $is_rubrique_destination_valide = partageur_verifier_id_rubrique($id_rubrique);
-						   if (!$is_rubrique_destination_valide) {  // pas de destination
-							  $log_html .= _T('partageur:erreur_rubrique_invalide');
-						   } else {
-							  // tout est bon, on insert les donnnees !
+							// securite verifie sur rubrique destination existe
+							$target=$id_rubrique;
+							$is_rubrique_destination_valide = partageur_verifier_id_rubrique($id_rubrique);
+							if (!$is_rubrique_destination_valide) {  // pas de destination
+								$log_html .= _T('partageur:erreur_rubrique_invalide');
+							} else {
+								// tout est bon, on insert les donnnees !
 
-							  // etape 1 -  traitement des documents
-							  $_documents = $article['documents'];
-							  $documents_current_article = array();
-							  if ($_documents!="") {
-								$_documents = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_documents );
-								$_documents = unserialize($_documents);
-								foreach($_documents as $_document) {
-									$id_distant = $_document['id'];
-									$source = $_document['url'];
-									$titre = stripslashes($_document['titre']);
-									$desc =  stripslashes($_document['desc']);
-									$fonction_renseigner='renseigner_source_distante';
-									if (!function_exists($fonction_renseigner))
-										$fonction_renseigner='recuperer_infos_distantes';
+								// etape 1 -  traitement des documents
+								$_documents = $article['documents'];
+								$documents_current_article = array();
 
-									if ($a = $fonction_renseigner($source)) {
+								if ($_documents!="") {
+									$_documents = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_documents );
+									$_documents = unserialize($_documents);
 
+									foreach($_documents as $_document) {
+										$id_distant = $_document['id'];
+										$source = $_document['url'];
+										$titre = stripslashes($_document['titre']);
+										$desc =  stripslashes($_document['desc']);
+										$fonction_renseigner='renseigner_source_distante';
+										if (!function_exists($fonction_renseigner)) {
+											$fonction_renseigner='recuperer_infos_distantes';
+										}
 
+										if ($a = $fonction_renseigner($source)) {
 											unset($a['mime_type']);
 											unset($a['type_image']);
 											unset($a['body']);
@@ -162,14 +163,13 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 											$a['titre'] = $titre;     // infos partageur, recuperer via le flux
 											$a['descriptif'] = $desc;
 											$documents_current_article[$id_distant] = sql_insertq("spip_documents", $a);
-
 										}
+									}
 								}
-							  }
 
 
-							  // etape 2 -  traitement de l'article
-							  $_surtitre = $article['surtitre'];
+								// etape 2 -  traitement de l'article
+								$_surtitre = $article['surtitre'];
 								$_titre = $article['titre'];
 								$_soustitre = $article['soustitre'];
 								$_descriptif = partageur_convert_extra($article['descriptif'],$documents_current_article,$version_flux);
@@ -180,7 +180,7 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 								$_lang = $article['lang'];
 								$_logo = $article['logo'];
 								$_id_rubrique = $target;
-							  $_id_secteur = partageur_get_id_secteur($target);
+								$_id_secteur = partageur_get_id_secteur($target);
 								$_statut = $import_statut;
 								$_id_auteur = $article['auteur'];
 								$_link = $article['link'];
@@ -188,119 +188,123 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 
 
 								// ....dans la table articles
-								$id_nouvel_article = sql_insertq("spip_articles",array(
-													  'lang' => $_lang,
-													  'surtitre' => $_surtitre,
-													  'titre' => $_titre,
-													  'soustitre' => $_soustitre,
-													  'id_rubrique' => $_id_rubrique,
-													  'id_secteur' => $_id_secteur,
-													  'descriptif' => $_descriptif,
-													  'chapo' => $_chapo,
-													  'texte' => $_texte,
-													  'ps' => $_ps,
-													  'statut' => $_statut,
-													  'accepter_forum' => 'non',
-													  'date' => $_date,
-													  's2s_url' => $_link,
-													  's2s_url_trad' => $_trad,
-													  ));
-									$log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spiptospip:imported_view')."</a>";
+								$id_nouvel_article = sql_insertq(
+									"spip_articles", 
+									array(
+										'lang' => $_lang,
+										'surtitre' => $_surtitre,
+										'titre' => $_titre,
+										'soustitre' => $_soustitre,
+										'id_rubrique' => $_id_rubrique,
+										'id_secteur' => $_id_secteur,
+										'descriptif' => $_descriptif,
+										'chapo' => $_chapo,
+										'texte' => $_texte,
+										'ps' => $_ps,
+										'statut' => $_statut,
+										'accepter_forum' => 'non',
+										'date' => $_date,
+										's2s_url' => $_link,
+										's2s_url_trad' => $_trad,
+									)
+								);
+								$log_html  .= "<a href='?exec=articles&amp;id_article=$id_nouvel_article' style='padding:5px;border-bottom:3px solid;background:#eee;display:block;'>"._T('spiptospip:imported_view')."</a>";
 
-							  // gestion lien traduction
-							 if  ($_trad) {
-								  if ($_trad == $_link) { // il s'agit de l'article origine de traduc
-									  sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");   // maj article orig trad
-									  sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "s2s_url_trad=".sql_quote($_link)); // maj article trad (si deja importe ds une session precedente)
-								  } else { // il s'agit d'un article traduit, on cherche si on a l'article origine de trad en local
-									  if ($row = sql_fetsel("id_article","spip_articles","s2s_url=".sql_quote($_trad))) {
-										  $id_article_trad = (int) $row['id_article'];
-										  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article"); // maj article trad
-										  sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_article_trad");   // maj article orig trad (si deja importe ds une session precedente)
-									  }
-								  }
-							  }
+								// gestion lien traduction
+								if ($_trad) {
+									if ($_trad == $_link) { // il s'agit de l'article origine de traduc
+										sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "id_article=$id_nouvel_article");   // maj article orig trad
+										sql_updateq('spip_articles', array("id_trad"=>$id_nouvel_article), "s2s_url_trad=".sql_quote($_link)); // maj article trad (si deja importe ds une session precedente)
+									} else { // il s'agit d'un article traduit, on cherche si on a l'article origine de trad en local
+										if ($row = sql_fetsel("id_article","spip_articles","s2s_url=".sql_quote($_trad))) {
+											$id_article_trad = (int) $row['id_article'];
+											sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_nouvel_article"); // maj article trad
+											sql_updateq('spip_articles', array("id_trad"=>$id_article_trad), "id_article=$id_article_trad");   // maj article orig trad (si deja importe ds une session precedente)
+										}
+									}
+								}
 
-							  // ... dans la table auteurs
-							  if ($_id_auteur) {
+								// ... dans la table auteurs
+								if ($_id_auteur) {
 										$auteurs = explode(", ",$_id_auteur);
 										foreach($auteurs as $auteur) {
 											$id_auteur = partageur_get_id_auteur($auteur);
-											if ($id_auteur)
-										@sql_insertq("spip_auteurs_liens",array('id_auteur'=>$id_auteur,'objet'=>'article','vu'=>'non','id_objet'=>$id_nouvel_article));
-								  }
-							  }
+											if ($id_auteur) {
+												@sql_insertq("spip_auteurs_liens",array('id_auteur'=>$id_auteur,'objet'=>'article','vu'=>'non','id_objet'=>$id_nouvel_article));
+											}
+									}
+								}
 
-							  // ....dans la table documents_article
-							  foreach($documents_current_article as $document_current_article) {
-								  @sql_insertq('spip_documents_liens',array(
-											  'id_document'=>$document_current_article, 'id_objet'=>$id_nouvel_article,
-											  'objet' => 'article'));
-							  }
+								// ....dans la table documents_article
+								foreach($documents_current_article as $document_current_article) {
+									@sql_insertq('spip_documents_liens',array(
+												'id_document'=>$document_current_article, 'id_objet'=>$id_nouvel_article,
+												'objet' => 'article'));
+								}
 
-							  // ... si logo, tente de l'importer
-							  if ($_logo) {
+								// ... si logo, tente de l'importer
+								if ($_logo) {
 									$logo_local = copie_locale($_logo);
 									if ($logo_local) {
 										$logo_local_dest = "IMG/arton$id_nouvel_article.".substr($logo_local,-3);
 										@rename( _DIR_RACINE.$logo_local, _DIR_RACINE.$logo_local_dest);
 									}
-							  }
-
-							  // etape 3 - traitement des mots de l'article
-							  $_mots = $article['mots'];
-							  if ($_mots!="" && $import_mot_article) {
-								$_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots );
-								$_mots = unserialize($_mots);
-								foreach($_mots as $_mot) {
-									$groupe = stripslashes($_mot['groupe']);
-									$titre  = stripslashes($_mot['titre']);
-									partageur_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe,"article");
 								}
-							  }
 
-
-							  // etape 4 - traitement des evenements
-							  $_evenements = $article['evenements'];
-							  if ($_evenements!="") {
-								$_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
-								$_evenements = unserialize(base64_decode($_evenements));
-								foreach($_evenements as $_evenement) {
-									$datedeb = $_evenement['datedeb'];
-									$datefin = $_evenement['datefin'];
-									$lieu = stripslashes($_evenement['lieu']);
-									$adresse = partageur_convert_extra(stripslashes($_evenement['adresse']),$documents_current_article,$version_flux);
-									$horaire = $_evenement['horaire'];
-									$titre = stripslashes($_evenement['titre']);
-									$desc = partageur_convert_extra(stripslashes($_evenement['desc']),$documents_current_article,$version_flux);
-									$motevts = $_evenement['motevts'];
-
-									$id_nouvel_evt = sql_insertq('spip_evenements',array(
-															'id_article'=> $id_nouvel_article,
-															'date_debut'=> $datedeb,
-															'date_fin'=> $datefin,
-															'titre'=>$titre,
-															'descriptif'=>$desc,
-															'lieu'=>$lieu,
-															'adresse'=>$adresse,
-															'horaire'=>$horaire,
-												'statut'=>$import_statut));
-									$log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display:block;'>"._T('partageur:event_ok')." : $datedeb  $lieu</div>";
-
-									// mot cle ?
-									if ($motevts!="" && $import_mot_evt) {
-									  foreach($motevts as $motevt) {
-										$groupe = stripslashes($motevt['groupe']);
-										$titre  = stripslashes($motevt['titre']);
-										partageur_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");
-									  }
+								// etape 3 - traitement des mots de l'article
+								$_mots = $article['mots'];
+								if ($_mots!="" && $import_mot_article) {
+									$_mots = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_mots );
+									$_mots = unserialize($_mots);
+									foreach($_mots as $_mot) {
+										$groupe = stripslashes($_mot['groupe']);
+										$titre  = stripslashes($_mot['titre']);
+										partageur_insert_mode_article($id_nouvel_article, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe,"article");
 									}
-									// #mot cle
 								}
-							  } // # etape 4: evenements
 
 
-						   }  // # insert article
+								// etape 4 - traitement des evenements
+								$_evenements = $article['evenements'];
+								if ($_evenements!="") {
+									$_evenements = preg_replace('!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $_evenements );
+									$_evenements = unserialize(base64_decode($_evenements));
+									foreach($_evenements as $_evenement) {
+										$datedeb = $_evenement['datedeb'];
+										$datefin = $_evenement['datefin'];
+										$lieu = stripslashes($_evenement['lieu']);
+										$adresse = partageur_convert_extra(stripslashes($_evenement['adresse']),$documents_current_article,$version_flux);
+										$horaire = $_evenement['horaire'];
+										$titre = stripslashes($_evenement['titre']);
+										$desc = partageur_convert_extra(stripslashes($_evenement['desc']),$documents_current_article,$version_flux);
+										$motevts = $_evenement['motevts'];
+
+										$id_nouvel_evt = sql_insertq('spip_evenements',array(
+																'id_article'=> $id_nouvel_article,
+																'date_debut'=> $datedeb,
+																'date_fin'=> $datefin,
+																'titre'=>$titre,
+																'descriptif'=>$desc,
+																'lieu'=>$lieu,
+																'adresse'=>$adresse,
+																'horaire'=>$horaire,
+													'statut'=>$import_statut));
+										$log_html .= "<div style='padding:2px 5px;border-bottom:1px solid #5DA7C5;background:#eee;display:block;'>"._T('partageur:event_ok')." : $datedeb  $lieu</div>";
+
+										// mot cle ?
+										if ($motevts!="" && $import_mot_evt) {
+											foreach($motevts as $motevt) {
+												$groupe = stripslashes($motevt['groupe']);
+												$titre  = stripslashes($motevt['titre']);
+												partageur_insert_mode_article($id_nouvel_evt, $titre, $groupe, $import_mot_groupe_creer, $id_import_mot_groupe, "evenement");
+											}
+										}
+										// #mot cle
+									}
+								} // # etape 4: evenements
+
+
+							} // # insert article
 
 
 						}
@@ -338,9 +342,10 @@ function partageur_syndiquer($id_partageur,$id_article,$id_rubrique=0,$cle="") {
 // a terme peut etre utile pour recuperer le numero de version
 function is_partageur_backend($str) {
 	// Chercher un numero de version
-	if (preg_match('/(spip2spip)[[:space:]](([^>]*[[:space:]])*)version[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9\.]+)[\'"]/', $str, $regs))
-		 return true;
-		 return false;
+	if (preg_match('/(spip2spip)[[:space:]](([^>]*[[:space:]])*)version[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9\.]+)[\'"]/', $str, $regs)) {
+		return true;
+	}
+	return false;
 }
 
 //
@@ -353,49 +358,48 @@ function analyser_backend_partageur($rss){
 	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','evenements', 'lang','logo','keyword','mots','licence','documents');
 
 	$syndic_regexp = array(
-				'item'           => ',<item[>[:space:]],i',
-				'itemfin'        => '</item>',
+		'item'           => ',<item[>[:space:]],i',
+		'itemfin'        => '</item>',
 
-				'surtitre'       => ',<surtitre[^>]*>(.*?)</surtitre[^>]*>,ims',
-				'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
-				'soustitre'      => ',<soustitre[^>]*>(.*?)</soustitre[^>]*>,ims',
-				'descriptif'     => ',<descriptif[^>]*>(.*?)</descriptif[^>]*>,ims',
-				'chapo'          => ',<chapo[^>]*>(.*?)</chapo[^>]*>,ims',
-				'texte'          => ',<texte[^>]*>(.*?)</texte[^>]*>,ims',
-				'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
-				'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
-				'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
-				'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
-				'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
+		'surtitre'       => ',<surtitre[^>]*>(.*?)</surtitre[^>]*>,ims',
+		'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+		'soustitre'      => ',<soustitre[^>]*>(.*?)</soustitre[^>]*>,ims',
+		'descriptif'     => ',<descriptif[^>]*>(.*?)</descriptif[^>]*>,ims',
+		'chapo'          => ',<chapo[^>]*>(.*?)</chapo[^>]*>,ims',
+		'texte'          => ',<texte[^>]*>(.*?)</texte[^>]*>,ims',
+		'ps'             => ',<ps[^>]*>(.*?)</ps[^>]*>,ims',
+		'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
+		'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
+		'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
+		'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
 		'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
 		'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
 		'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
 		'mots'           => ',<mots[^>]*>(.*?)</mots[^>]*>,ims',
 		'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
 		'documents'      => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
-
 	);
 
 	// documents
 	$xml_doc_tags = array('id','url','titre','desc');
 	$document_regexp = array(
-  			'document'       => ',<document[>[:space:]],i',
-				'documentfin'    => '</document>',
+		'document'       => ',<document[>[:space:]],i',
+		'documentfin'    => '</document>',
 
-				'id'             => ',<id[^>]*>(.*?)</id[^>]*>,ims',
+		'id'             => ',<id[^>]*>(.*?)</id[^>]*>,ims',
 		'url'            => ',<url[^>]*>(.*?)</url[^>]*>,ims',
-				'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
-				'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
+		'titre'          => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+		'desc'           => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
 	);
 
 	// mots
 	$xml_mot_tags = array('groupe','titre');
 	$mot_regexp = array(
-  			'mot'       => ',<mot[>[:space:]],i',
-				'motfin'    => '</mot>',
+		'mot'       => ',<mot[>[:space:]],i',
+		'motfin'    => '</mot>',
 
-				'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
-				'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+		'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
+		'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
 	);
 
 	// evenements
@@ -403,25 +407,25 @@ function analyser_backend_partageur($rss){
 	// on ne gere pas pour l'instant idevent/idsource qui permet de conserver la liaison des repetitions
 
 	$evenement_regexp = array(
-  			'evenement'        => ',<evenement[>[:space:]],i',
-				'evenementfin'     => '</evenement>',
+		'evenement'        => ',<evenement[>[:space:]],i',
+		'evenementfin'     => '</evenement>',
 		'datedeb'          => ',<datedeb[^>]*>(.*?)</datedeb[^>]*>,ims',
-				'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
-				'titre'            => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
-				'desc'             => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
-				'lieu'             => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
-				'adresse'          => ',<adresse[^>]*>(.*?)</adresse[^>]*>,ims',
-				'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
+		'datefin'          => ',<datefin[^>]*>(.*?)</datefin[^>]*>,ims',
+		'titre'            => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+		'desc'             => ',<desc[^>]*>(.*?)</desc[^>]*>,ims',
+		'lieu'             => ',<lieu[^>]*>(.*?)</lieu[^>]*>,ims',
+		'adresse'          => ',<adresse[^>]*>(.*?)</adresse[^>]*>,ims',
+		'horaire'          => ',<horaire[^>]*>(.*?)</horaire[^>]*>,ims',
 		'motevts'          => ',<motevts[^>]*>(.*?)</motevts[^>]*>,ims',
 	);
 
-  $xml_motevt_tags = array('groupe','titre');
+	$xml_motevt_tags = array('groupe','titre');
 	$motevt_regexp = array(
-  			'motevt'       => ',<motevt[>[:space:]],i',
-				'motevtfin'    => '</motevt>',
+		'motevt'       => ',<motevt[>[:space:]],i',
+		'motevtfin'    => '</motevt>',
 
-				'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
-				'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
+		'groupe'    => ',<groupe[^>]*>(.*?)</groupe[^>]*>,ims',
+		'titre'     => ',<titre[^>]*>(.*?)</titre[^>]*>,ims',
 	);
 
 	// fichier backend correct ?
@@ -437,7 +441,7 @@ function analyser_backend_partageur($rss){
 		}
 	}
 
-  // supprimer les commentaires
+	// supprimer les commentaires
 	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 
 	// multi (pas echappe)
@@ -451,9 +455,9 @@ function analyser_backend_partageur($rss){
 	$version_flux = 0;
 	if (preg_match_all(',<spip2spip version="(.*?)">,Uims',$rss,$r, PREG_SET_ORDER))
 	foreach ($r as $regs) {
-	   $version_flux  = (float) $regs[1];
-  }
-  spip_log("partageur - version flux: $version_flux");
+		$version_flux  = (float) $regs[1];
+	}
+	spip_log("partageur - version flux: $version_flux");
 
 	// analyse de chaque item
 	$items = array();
@@ -487,36 +491,43 @@ function analyser_backend_partageur($rss){
 
 		// Recuperer les autres tags du xml
 		foreach ($xml_tags as $xml_tag) {
-		  if (preg_match($syndic_regexp[$xml_tag],$item,$match)) $data[$xml_tag] = $match[1];
-  															  else $data[$xml_tag] = "";
+		  if (preg_match($syndic_regexp[$xml_tag],$item,$match)) {
+			  $data[$xml_tag] = $match[1];
+		} else {
+			$data[$xml_tag] = "";
+		}
 	}
 
 	// On parse le noeud documents
 	if ($data['documents'] != "") {
-		  $documents = array();
-		  if (preg_match_all($document_regexp['document'],$data['documents'],$r2, PREG_SET_ORDER))
-		  	foreach ($r2 as $regs) {
-		  		$debut_item = strpos($data['documents'],$regs[0]);
-		  		$fin_item = strpos($data['documents'],
-		  		$document_regexp['documentfin'])+strlen($document_regexp['documentfin']);
-		  		$documents[] = substr($data['documents'],$debut_item,$fin_item-$debut_item);
-		  		$debut_texte = substr($data['documents'], "0", $debut_item);
-		  		$fin_texte = substr($data['documents'], $fin_item, strlen($data['documents']));
-		  		$data['documents'] = $debut_texte.$fin_texte;
-		  }
+		$documents = array();
+		if (preg_match_all($document_regexp['document'],$data['documents'],$r2, PREG_SET_ORDER)) {
+			foreach ($r2 as $regs) {
+				$debut_item = strpos($data['documents'],$regs[0]);
+				$fin_item = strpos($data['documents'],
+				$document_regexp['documentfin'])+strlen($document_regexp['documentfin']);
+				$documents[] = substr($data['documents'],$debut_item,$fin_item-$debut_item);
+				$debut_texte = substr($data['documents'], "0", $debut_item);
+				$fin_texte = substr($data['documents'], $fin_item, strlen($data['documents']));
+				$data['documents'] = $debut_texte.$fin_texte;
+			}
+		}
 
-		  $portfolio = array();
-		  if (count($documents)) {
-			  foreach ($documents as $document) {
-				 $data_node = array();
-				 foreach ($xml_doc_tags as $xml_doc_tag) {
-					if (preg_match($document_regexp[$xml_doc_tag],$document,$match)) $data_node[$xml_doc_tag] = $match[1];
-  																					  else $data_node[$xml_doc_tag] = "";
-  					   }
-				$portfolio[] = $data_node;
-			  }
-			  $data['documents'] =  serialize($portfolio);
+		$portfolio = array();
+		if (count($documents)) {
+			foreach ($documents as $document) {
+				$data_node = array();
+				foreach ($xml_doc_tags as $xml_doc_tag) {
+					if (preg_match($document_regexp[$xml_doc_tag],$document,$match)) {
+						$data_node[$xml_doc_tag] = $match[1];
+					} else {
+						$data_node[$xml_doc_tag] = "";
+					}
+				 }
+			$portfolio[] = $data_node;
 		  }
+		  $data['documents'] =  serialize($portfolio);
+		}
 	} # noeud documents
 
 
