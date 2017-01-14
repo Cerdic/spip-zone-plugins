@@ -29,33 +29,37 @@ function formulaires_editer_partageur_charger_dist($id_partageur='new', $retour=
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_partageur_verifier_dist($id_partageur='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-  
-  $erreurs = formulaires_editer_objet_verifier('partageur',$id_partageur,array('titre'));
-  
-  // verification supplementaires
-  if (!_request('titre')) 
-                         $erreurs['titre'] = _T('partageur:erreur_obligatoire');
-  
-  if ((!_request('url_site')) OR (_request('url_site')=="http://")) {
-                         $erreurs['url_site'] = _T('partageur:erreur_obligatoire');
-  } else {
-      // "ping" si flux distant disponible
-      include_spip('inc/distant');     
-      $url = _request('url_site')."/spip.php?page=backend-partageur&id_article=1";
-      $fonction_recuperer='recuperer_url';
-      if (!function_exists('recuperer_url'))
-          $fonction_recuperer = 'recuperer_page';
-       $ping = $fonction_recuperer($url);
-    	if (!$ping) {    		
-    		 $erreurs['url_site'] = _T('partageur:erreur_flux_inconnu')."<br /><a href='$url'>$url</a>";
-    	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'id_partageur!='.intval($id_partageur).' AND statut="publie" AND url_site='.sql_quote(_request('url_site'))))   
-    	   $erreurs['url_site'] = _T('partageur:erreur_flux_doublon');
- 
 
-  }	
+	$erreurs = formulaires_editer_objet_verifier('partageur',$id_partageur,array('titre'));
 
-  
-  return $erreurs;
+	// verification supplementaires
+	if (!_request('titre')) {
+		$erreurs['titre'] = _T('partageur:erreur_obligatoire');
+	}
+
+	if ((!_request('url_site')) OR (_request('url_site')=="http://")) {
+		$erreurs['url_site'] = _T('partageur:erreur_obligatoire');
+	} else {
+		// "ping" si flux distant disponible
+		include_spip('inc/distant');     
+		$url = _request('url_site') . "/spip.php?page=backend-partageur&id_article=1";
+
+		if (function_exists('recuperer_url')) {
+			$fonction_recuperer = 'recuperer_url';
+		} else {
+			// ancien SPIP
+			$fonction_recuperer = 'recuperer_page';
+		}
+		
+		$ping = $fonction_recuperer($url);
+		if (!$ping) {
+			$erreurs['url_site'] = _T('partageur:erreur_flux_inconnu') . "<br /><a href='$url'>$url</a>";
+		} elseif ($row_site = sql_fetsel("url_site","spip_partageurs",'id_partageur!='.intval($id_partageur).' AND statut="publie" AND url_site='.sql_quote(_request('url_site')))) {  
+			$erreurs['url_site'] = _T('partageur:erreur_flux_doublon');
+		}
+	}
+
+	return $erreurs;
 }
 
 /**
