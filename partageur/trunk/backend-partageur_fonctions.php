@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 */
 
 function partageur_respecte_ln($texte) {
-  $texte = preg_replace("/\n/$u", "__LN__", $texte);  // version pour flux v1.5
+	$texte = preg_replace("/\n/$u", "__LN__", $texte);  // version pour flux v1.5
 	return $texte;
 }
 

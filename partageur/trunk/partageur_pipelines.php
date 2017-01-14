@@ -16,10 +16,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return string Contenu du head complété
  */
 function partageur_insert_head_prive_css($flux){
-		$cssprive = find_in_path('css/partageur_prive.css');
-		$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$cssprive' />\n";		
-    
-    return $flux;
+	$cssprive = find_in_path('css/partageur_prive.css');
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$cssprive' />\n";		
+
+	return $flux;
 }
 
  
@@ -30,19 +30,25 @@ function partageur_insert_head_prive_css($flux){
  * @return array
 **/
 function partageur_affiche_enfants($flux) {
-	if ($e = trouver_objet_exec($flux['args']['exec'])
-	  AND $e['type'] == 'rubrique'
-	  AND $e['edition'] == false) {
-		    $id_rubrique = $flux['args']['id_rubrique'];
+	if (
+		$e = trouver_objet_exec($flux['args']['exec'])
+		AND $e['type'] == 'rubrique'
+		AND $e['edition'] == false) 
+		AND autoriser('voir', 'partageur')
+	{
+		$id_rubrique = $flux['args']['id_rubrique'];
 
-    if (autoriser('voir', 'partageur')) {           
-       $bouton_sites .= icone_verticale(_T('partageur:ajout_via_partageur'), generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"), "partageur-24.png", "new", 'right')
-					. "<br class='nettoyeur' />";   
-      
-       $flux['data'] .= $bouton_sites;    
-		}
+		$bouton_sites .= 
+			icone_verticale(
+				_T('partageur:ajout_via_partageur'), 
+				generer_url_ecrire('partageur_add', "id_rubrique=$id_rubrique"), 
+				"partageur-24.png", 
+				"new", 
+				'right'
+			)
+			. "<br class='nettoyeur' />";   
 
-    
+		$flux['data'] .= $bouton_sites;
 	}
 	return $flux;
 }
