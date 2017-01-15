@@ -77,13 +77,21 @@ function noizetier_recuperer_fond($flux) {
 				}
 			}
 			// Il faut ajouter les blocs vides en mode voir=noisettes
-			elseif (isset($flux['args']['contexte']['voir']) && $flux['args']['contexte']['voir'] == 'noisettes' && autoriser('configurer', 'noizetier')) {
+			elseif (
+				isset($flux['args']['contexte']['voir'])
+				and $flux['args']['contexte']['voir'] == 'noisettes'
+				and autoriser('configurer', 'noizetier')
+			) {
 				$contexte = $flux['data']['contexte'];
 				$bloc = substr($fond, 0, strpos($fond, '/'));
 				$contexte['bloc'] = $bloc;
 				
 				// Si ya au moins une noisette pour cet objet peu importe le bloc
-				if (sql_fetsel('id_noisette', 'spip_noisettes', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))) {
+				if (
+					isset($flux['args']['contexte']['type-page'])
+					and $objet = $flux['args']['contexte']['type-page']
+					and sql_fetsel('id_noisette', 'spip_noisettes', array('objet = '.sql_quote($objet),'id_objet = '.$id_objet))
+				) {
 					$contexte['objet'] = $objet;
 					$contexte['id_objet'] = $id_objet;
 				}
