@@ -7,8 +7,9 @@
 <ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 <BOUCLE_composition_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#ENV{page,#OBJET}}}{par cle}{si #GET{composition}}>
 	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
-		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
-		[(#VALEUR|table_valeur{nom})]
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
 		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
 	</li>
 </BOUCLE_composition_noisettes>
@@ -21,8 +22,9 @@
 <ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 <BOUCLE_type_noisettes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{#GET{type}}}{par cle}>
 	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
-		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
-		[(#VALEUR|table_valeur{nom})]
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
 		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
 	</li>
 </BOUCLE_type_noisettes>
@@ -34,8 +36,9 @@
 <ul class="editer-groupe liste-items liste-noisettes liste-noisettes-disponibles">
 <BOUCLE_noisettes_communes(DATA){source tableau, #NOIZETIER_LISTE_NOISETTES{''}}{par cle}>
 	<li class="editer item noisette" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{noisette-24.png}|noizetier_chemin_icone));"]>
-		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' />]
-		[(#VALEUR|table_valeur{nom})]
+		[(#SET{id,#VAL{noizetier_}|uniqid})]
+		[(#ENV{form}|oui)<input type='radio' name='noisette' value='#CLE' id="#GET{id}" />]
+		<label for="#GET{id}">[(#VALEUR|table_valeur{nom})]</label>
 		[(#ENV{ordre}|oui)<input type='hidden' name='ordre\[\]' value='ajouter-#CLE' />]
 	</li>
 </BOUCLE_noisettes_communes>
