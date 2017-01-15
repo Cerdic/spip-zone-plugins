@@ -41,7 +41,8 @@ function noizetier_recuperer_fond($flux) {
 			// Sinon on cherche pour le type de page ou la composition
 			if (
 				(
-					$objet = $flux['args']['contexte']['type-page']
+					isset($flux['args']['contexte']['type-page'])
+					and $objet = $flux['args']['contexte']['type-page']
 					and $cle_objet = id_table_objet($objet)
 					and $id_objet = intval($flux['args']['contexte'][$cle_objet])
 					and $par_objet = in_array($flux['args']['fond'], noizetier_lister_blocs_avec_noisettes_objet($objet, $id_objet))
