@@ -121,7 +121,7 @@ function simplecal_classement($param_annee, $param_mois, $param_mode, $param_idr
 							$tmp .= "&".$param_rub;
 						}
 						$href_m = generer_url_ecrire("evenements",$tmp);
-						$filtre .= '<a href="'.$href_m.'"'.$classe.'>'.$nom_mois[intval($mois)].'</a>';
+						$filtre .= '<a href="'.$href_m.'">'.$nom_mois[intval($mois)].'</a>';
 					}
 					$filtre .= '<small> ['.$nb_m.']</small>';
 					$filtre .= '</li>';
