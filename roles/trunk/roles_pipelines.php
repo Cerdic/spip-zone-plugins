@@ -51,7 +51,7 @@ function roles_insert_head_css($flux) {
 
 	$config = lire_config('chosen', array());
 	if (isset($config['active']) and $config['active']=='oui') {
-		$css = find_in_path('css/bootstrap-button-dropdown.css');
+		$css = sinon(find_in_path('css/bootstrap-button-dropdown_public.css'), find_in_path('css/bootstrap-button-dropdown.css'));
 		$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
 	}
 	return $flux;
