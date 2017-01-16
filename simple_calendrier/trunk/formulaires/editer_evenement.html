@@ -22,25 +22,40 @@
 			<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
 		</div>
 		
-		[(#REM) 'Date de début' est un champ obligatoire]
-		<div class="editer editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
-			<label for="date_debut"><:simplecal:info_date_debut:> : </label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
-			<input type='text' class='text date' name='date_debut' id='date_debut' value="#ENV{date_debut}" />
-			[(#CONFIG{simplecal_horaire}|=={oui}|oui)
-			<span class='afficher_horaire'>
-			<input type='text' class='text heure' name='heure_debut' style="width:4em" id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]" /></span>]
-		</div>
-		
-		[(#REM) 'Date de fin' est un champ optionnel]
-		<div class="editer editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
-			<label for="date_fin"><:simplecal:info_date_fin:> : </label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
-			<input type='text' class='text date' name='date_fin' id='date_fin' value="#ENV{date_fin}" />
-			[(#CONFIG{simplecal_horaire}|=={oui}|oui)
-			<span class='afficher_horaire'>
-			<input type='text' class='text heure' name='heure_fin' style="width:4em" id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
-			</span>]
+		<div class='editer fieldset'>
+			<fieldset>
+				<legend><:simplecal:evenement_date:></legend>
+				
+				[(#CONFIG{'simplecal_horaire'}|=={oui}|oui)
+				<div class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+					<label for="horaire"><:simplecal:evenement_horaire:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
+					]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
+						onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
+				</div>]
+
+				[(#REM) 'Date de début' est un champ obligatoire]
+				<div class="editer editer_date_debut obligatoire[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+					
+					<label for="date_debut"><:simplecal:info_date_debut:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+					<input type='text' class='text date' name='date_debut' id='date_debut' value="#ENV{date_debut}" />
+					[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+					<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
+					<input type='text' class='text heure' name='heure_debut' style="width:4em" id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]" /></span>]
+				</div>
+				
+				[(#REM) 'Date de fin' est un champ optionnel]
+				<div class="editer editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+					<label for="date_fin"><:simplecal:info_date_fin:> : </label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>]
+					<input type='text' class='text date' name='date_fin' id='date_fin' value="#ENV{date_fin}" />
+					[(#CONFIG{simplecal_horaire}|=={oui}|oui)
+					<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
+					<input type='text' class='text heure' name='heure_fin' style="width:4em" id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
+					</span>]
+				</div>
+			</fieldset>
 		</div>
 		
 		[(#REM) 'Choix de la rubrique' est un champ facultatif]

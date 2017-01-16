@@ -14,6 +14,8 @@
 .formulaire_configurer_evenements ul li { padding-left:2em; }
 .formulaire_configurer_evenements label.actif { font-weight:bold; }
 
+.formulaire_spip .editer.editer_horaire label { margin-left:0; }
+
 
 .simplecal-nbinrub { margin-bottom:0.5em; padding:0 0.5em 0.5em; border-bottom:1px dotted #000000; }
 
