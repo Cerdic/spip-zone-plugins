@@ -17,7 +17,7 @@
 <ul>
 <BOUCLE_evta(EVENEMENTS) {du_mois} {par date_debut}>
 	<li>
-		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
 	</li>
 </BOUCLE_evta>
 </ul>
@@ -33,7 +33,7 @@
 <ul>
 <BOUCLE_evtb(EVENEMENTS) {du_mois}{a_venir} {par date_debut}>
 	<li>
-		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
 	</li>
 </BOUCLE_evtb>
 </ul>
@@ -49,7 +49,7 @@
 <ul>
 <BOUCLE_evtc(EVENEMENTS) {du_mois}{!a_venir} {par date_debut}>
 	<li>
-		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
 	</li>
 </BOUCLE_evtc>
 </ul>
@@ -65,7 +65,7 @@
 <ul>
 <BOUCLE_evtd(EVENEMENTS) {a_venir} {par date_debut} {0,10}>
 	<li>
-		[(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+		[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
 		#LOGO
 	</li>
 </BOUCLE_evtd>

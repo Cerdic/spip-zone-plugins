@@ -9,47 +9,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function simplecal_affdates($date_debut, $date_fin){
-	// securisation des parametres
-	$dates_vide = array('', '0000-00-00 00:00:00');
-	if (!in_array($date_debut, $dates_vide)){
-		$date_debut = strtotime($date_debut);
-		$d = date("Y-m-d", $date_debut);
-	} else {
-		$date_debut = '';
-		$d = '';
-	}
-	if (!in_array($date_fin, $dates_vide)){
-		$date_fin = strtotime($date_fin);
-		$f = date("Y-m-d", $date_fin);
-	} else {
-		$date_fin = $date_debut;
-		$f = $d;
-	}
-	// ---
-		
-	$s = "";
-	
-	// meme jour : vendredi 12 novembre
-	if ($d == $f) { 
-		$s = nom_jour($d, $abbr)." ".affdate_jourcourt($d);
-	}
-	// meme annee et mois, jours differents : du 3 au 12 novembre
-	else if ((date("Y-m",$date_debut)) == date("Y-m",$date_fin)) { 
-		$s = _T("simplecal:date_du_au", array('date_debut'=>jour($d), 'date_fin'=>affdate_jourcourt($f)));
-	}
-	// meme annee, mois et jours differents : du 30 novembre au 10 decembre
-	else if ((date("Y",$date_debut)) == date("Y",$date_fin)) { 
-		$s = _T("simplecal:date_du_au", array('date_debut'=>affdate_jourcourt($d), 'date_fin'=>affdate_jourcourt($f)));
-	}
-	// tout different : du 25 decembre 2009 au 2 janvier 2010
-	else { 
-		$s = _T("simplecal:date_du_au", array('date_debut'=>affdate($d), 'date_fin'=>affdate($f)));
-	}
-	
-	return $s;	
-}
-
 function simplecal_afftexteref($type, $id_objet){
 	$texte = "";
 	if ($type && $id_objet){

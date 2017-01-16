@@ -2,7 +2,8 @@
 	<div class="champ contenu_notes">
 		<div class="label"><:simplecal:date_de_debut:> :</div>
 		<div dir="#LANG_DIR">
-			[(#CONFIG{simplecal_horaire}|=={oui}|oui)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})]]
+			[(#CONFIG{simplecal_horaire}|=={oui}|et{#HORAIRE|=={oui}}|oui)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})]]
+			[(#CONFIG{simplecal_horaire}|=={oui}|et{#HORAIRE|=={non}}|oui)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})]]
 			[(#CONFIG{simplecal_horaire}|=={oui}|non)[(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,non})]]
 		</div>
 	</div>
