@@ -19,7 +19,7 @@ Note : css automatique dans /prive/themes/spip/lists.css.html
 	<tbody>
 
 	<!-- id_auteur + id_mot pose pb ensemble ... -->
-	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{par date_debut}{inverse}{pagination 10}>
+	<BOUCLE_liste_evt(EVENEMENTS){id_evenement?}{id_auteur?}{id_secteur?}{id_rubrique?}{id_mot?}{statut?}{where?}{par date_debut, date}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{'evenement',#ID_EVENEMENT,#ID_RUBRIQUE})]</td>
 			<td class="titre principale">
