@@ -1,0 +1,23 @@
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{evenement-24.png}|balise_img{'',cadre-icone})]<:simplecal:info_evenements_lies:>,simple})]
+<B_evt>
+<ul class="simplecal-portlet">
+	<BOUCLE_evt(EVENEMENTS){type}{id_objet}{statut==.*}>
+	<li>
+		<a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}" title="#TITRE">
+			[(#DATE_DEBUT|simplecal_affiche_dates{#DATE_FIN})]
+		</a>
+	</li>
+	</BOUCLE_evt>
+</ul>
+</B_evt>
+<:simplecal:info_aucun_evenement:>
+<//B_evt>
+
+#BOITE_PIED
+
+[<a href="(#URL_ECRIRE{evenement_edit,new=oui&type=#TYPE&id_objet=#ID_OBJET})">
+	<:simplecal:raccourcis_associer_evenement:>
+</a>]
+
+#BOITE_FERMER
+

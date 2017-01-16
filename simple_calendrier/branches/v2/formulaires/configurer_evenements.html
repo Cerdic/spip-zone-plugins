@@ -1,0 +1,170 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{evenement-24.png}" class="cadre-icone" /><:simplecal:titre_evenements:></h3>  
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset><legend><:simplecal:config_blocautorisation:></legend>
+			<p><:simplecal:config_autorisation_explication:></p>
+			<ul>
+				<li>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_autorisation_redac})</span>]
+					
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_autorisation_redac" value='non'[ (#ENV{simplecal_autorisation_redac}|=={non}|oui)checked="checked"] id="simplecal_autorisation_redac_non" />
+						<label for="simplecal_autorisation_redac_non"[(#ENV{simplecal_autorisation_redac}|=={non}|oui) class="actif"]><:simplecal:config_autorisation_redac_non:></label>
+					</div>
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_autorisation_redac" value='oui'[ (#ENV{simplecal_autorisation_redac}|=={oui}|oui)checked="checked"] id="simplecal_autorisation_redac_oui" />
+						<label for="simplecal_autorisation_redac_oui"[(#ENV{simplecal_autorisation_redac}|=={oui}|oui) class="actif"]><:simplecal:config_autorisation_redac_oui:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		
+		
+		<fieldset><legend><:simplecal:config_blocrubrique:></legend>
+			<p><:simplecal:config_rubrique_explication:></p>
+			<ul>
+				<li>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_rubrique})</span>]
+					
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_rubrique" value='partout'[ (#ENV{simplecal_rubrique}|=={partout}|oui)checked="checked"] id="simplecal_rubrique_partout" />
+						<label for="simplecal_rubrique_partout"[ (#ENV{simplecal_rubrique}|=={partout}|oui)class="actif"]><:simplecal:config_rubrique_partout:></label>
+					</div>
+					[(#REM) A revoir plus tard. cf. https://core.spip.net/issues/2236
+					<!--
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_rubrique" value='secteur'[ (#ENV{simplecal_rubrique}|=={secteur}|oui)checked="checked"] id="simplecal_rubrique_secteur" />
+						<label for="simplecal_rubrique_secteur"[ (#ENV{simplecal_rubrique}|=={secteur}|oui)class="actif"]><:simplecal:config_rubrique_secteur:></label>
+					</div>
+					-->]
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_rubrique" value='non'[ (#ENV{simplecal_rubrique}|=={non}|oui)checked="checked"] id="simplecal_rubrique_non" />
+						<label for="simplecal_rubrique_non"[ (#ENV{simplecal_rubrique}|=={non}|oui)class="actif"]><:simplecal:config_rubrique_non:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		
+		<fieldset><legend><:simplecal:config_champs:></legend>
+			<p><:simplecal:config_champs_explication:></p>
+			<ul>
+				#SET{name,simplecal_horaire}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:simplecal:info_horaire:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				#SET{name,simplecal_descriptif}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:info_descriptif:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				#SET{name,simplecal_texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:info_texte:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				#SET{name,simplecal_lieu}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:simplecal:info_lieu:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+				#SET{name,simplecal_lien}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:info_lien_hypertexte:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:item_oui:></label>
+						&nbsp;&nbsp;
+						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		
+		
+		<fieldset><legend><:simplecal:config_blocreference:></legend>
+			<p><:simplecal:config_refobj_explication:></p>
+			<ul>
+				<li>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_refobj})</span>]
+					
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_refobj" value='oui'[ (#ENV{simplecal_refobj}|=={oui}|oui)checked="checked"] id="simplecal_refobj_oui" />
+						<label for="simplecal_refobj_oui"[ (#ENV{simplecal_refobj}|=={oui}|oui)class="actif"]><:simplecal:config_refobj_oui:></label>
+					</div>
+					<div class='choix'>
+						<input class='radio' type="radio" name="simplecal_refobj" value='non'[ (#ENV{simplecal_refobj}|=={non}|oui)checked="checked"] id="simplecal_refobj_non" />
+						<label for="simplecal_refobj_non"[ (#ENV{simplecal_refobj}|=={non}|oui)class="actif"]><:simplecal:config_refobj_non:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		   
+		
+		<fieldset><legend><:simplecal:config_blocthemes:></legend>
+			<p><:simplecal:config_themes_explication:></p>
+			<ul>
+				<li>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themepublic})</span>]
+					
+					<table>
+					<tr>
+						<th>
+							<:simplecal:config_themepublic:> :
+						</th>
+						<td valign="top">
+							[(#VAL{simplecal_themepublic}|simplecal_liste_themes{#ENV{simplecal_themepublic}})]
+						</td>
+					</tr>
+					</table>
+				</li>
+			</ul>
+		</fieldset>
+		   
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<span class='image_loading'>&nbsp;</span>
+			<input type="submit" class="submit" name="ok" value="<:bouton_enregistrer:>" />
+		</p>
+	</div>
+	</form>
+	]
+</div>
