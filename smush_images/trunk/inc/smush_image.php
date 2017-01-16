@@ -158,11 +158,13 @@ function image_smush($im) {
 		} elseif ($format == 'JPEG') {
 			/**
 			 * On est sur un JPEG
+			 * On utilise _IMG_QUALITE comme qualité de compression, sinon la valeur de
 			 */
 			if (lire_config('jpegoptim_casse', 'oui') != 'oui') {
 				$compression = '';
-				if (intval(lire_config('smush/jpeg_qualite')) > 0) {
-					$compression = ' -m'.intval(lire_config('smush/jpeg_qualite'));
+				$compression_image = lire_config('smush/jpeg_qualite', defined('_IMG_QUALITE') ? _IMG_QUALITE : false);
+				if ($compression_image && intval($compression_image) > 0 && intval($compression_image) < 100) {
+					$compression = ' -m'.intval($compression_image);
 				}
 				exec("jpegoptim$compression --strip-all $im");
 			}
@@ -185,12 +187,16 @@ function image_smush($im) {
 		 * Si la taille du résultat est supérieure à l'original,
 		 * on retourne l'original en supprimant le fichier temporaire créé
 		 */
-		if (!file_exists($dest) || (filesize($dest) > filesize(isset($im_original) ? $im_original : $im))) {
+		$image_compare = isset($im_original) ? $im_original : $im;
+		if (!file_exists($dest) || (filesize($dest) > filesize($image_compare))) {
 			spip_unlink($dest);
-			$dest = $im;
+			spip_log('Image de même taille - On retourne un vieux cache '.$image['fichier_dest'], 'images');
+			@copy($image_compare, $dest);
 		}
 	} else {
-		return $im;
+		spip_log('On retourne un vieux cache '.$image['fichier_dest'], 'images');
+		@copy($image['fichier'], $image['fichier_dest']);
+		return _image_ecrire_tag($image, array('src' => $image['fichier_dest']));
 	}
 	return _image_ecrire_tag($image, array('src' => $dest));
 }
