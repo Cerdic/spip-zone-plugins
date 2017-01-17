@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Mots de passe expirables
  *
  * @plugin     Mots de passe expirables
- * @copyright  2016
+ * @copyright  2017
  * @author     erational
  * @licence    GNU/GPL
  * @package    SPIP\Motpasseexpirable\Installation

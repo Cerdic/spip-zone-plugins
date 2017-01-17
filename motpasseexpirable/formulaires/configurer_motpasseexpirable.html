@@ -10,21 +10,19 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-        #SET{erreurs,#ENV**{erreurs}|table_valeur{delai}}
+				#SET{erreurs,#ENV**{erreurs}|table_valeur{delai}}
 				<li class="editer editer_delai[ (#GET{erreurs}|oui)erreur]">
-					<label for="editer_delai"><:motpasseexpirable:cfg_delai:></label>
-          [<span class='erreur_message'>(#GET{erreurs})</span>]
-          <input type="text" name="delai" class="text" value="#ENV*{delai,30}" id="delai" />
-				</li>	
-        
-        
-        <!-- TODO 
-               ajouter d'autres options: 
-               - exclure webmestres ? 
-               - exclure compte sans email ? 
-               
-               .... -->	
-    </ul>
+				<label for="editer_delai"><:motpasseexpirable:cfg_delai:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<input type="text" name="delai" class="text" value="#ENV*{delai,30}" id="delai" />
+				</li>
+
+				[(#SAISIE{statuts_auteurs,statuts,
+					label=<:motpasseexpirable:cfg_status:>,
+					explication=<:motpasseexpirable:cfg_status_explication:>,
+					defaut=#LISTE{0minirezo,1comite},
+					multiple=oui})]
+		</ul>
 
 		<input type="hidden" name="_meta_casier" value="motpasseexpirable" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

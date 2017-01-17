@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_delai' => 'Durée d\'expiration des mots de passe (Nombre de jours)',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	'cfg_status' => 'Qui ?',
+	'cfg_status_explication' => 'Quelles sont les personnes dont-on doit ré-initialiser les mots de passe ?',
 
 	// T
 	'titre_page_configurer_motpasseexpirable' => 'Configuration de l\'expiration des mots de passe',

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Mots de passe expirables
- * (c) 2016 erational
+ *
  * Licence GNU/GPL
  */
 
