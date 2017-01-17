@@ -40,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages_analyse' => 'Parâmetros de análise das respostas',
 	'champs' => 'Campos',
 	'changer_statut' => 'Este formulário está:',
+	'creer_dossier_formulaire_erreur_impossible_creer' => 'Não foi possível criar a pasta @dossier@,  necessária para armazenar os arquivos. Verifique os direitos de acesso.',
+	'creer_dossier_formulaire_erreur_impossible_ecrire' => 'Não foi possível escrever na pasta  @dossier@, necessária para armazenar os arquivos. Verifique os direitos de acesso.',
+	'creer_dossier_formulaire_erreur_possible_lire_exterieur' => 'É possível acessar remotamente o conteúdo da pasta @dossier@. Isto é um problema, em termos de confidencialidade dos dados.',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -76,6 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_unicite_label' => 'Verificar a unicidade do campo',
 	'erreur_autorisation' => 'Você não tem permissão para editar os formulários do site.',
 	'erreur_base' => 'Aconteceu um erro técnico durante a gravação.',
+	'erreur_deplacement_fichier' => 'O arquivo « @nom@ » não pode ser armazenado corretamente pelo sistema. Contate o webmaster.',
+	'erreur_fichier_expire' => 'O link para a transferência do arquivo é muito antigo.',
+	'erreur_fichier_introuvable' => 'O arquivo solicitado não foi encontrado.',
 	'erreur_generique' => 'Há erro(s) no preenchimento do(s) campo(s) indicado(s) abaixo.',
 	'erreur_identifiant' => 'Esse identificador já está em uso.',
 	'erreur_identifiant_format' => 'O identificador só pode conter números, letras e o caracter "_"',
@@ -91,15 +97,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_anonyme_explication' => 'Este formulário é anônimo, ou seja, a identificação de usuário não será gravada.',
 	'formulaires_aucun' => 'Ainda não há nenhum formulário.',
 	'formulaires_aucun_champ' => 'Ainda não há nenhum campo de entrada para esse formulário.',
+	'formulaires_corbeille_tous' => '@nb@ formulários na lixeira',
+	'formulaires_corbeille_un' => 'Um formulário na lixeira',
 	'formulaires_dupliquer' => 'Duplicar formulário',
 	'formulaires_dupliquer_copie' => '(cópia)',
 	'formulaires_introduction' => 'Crie e configure aqui os formulários do site.',
 	'formulaires_nouveau' => 'Criar um novo formulário',
+	'formulaires_reponses_corbeille_tous' => '@nb@ respostas de formulário na lixeira',
+	'formulaires_reponses_corbeille_un' => 'Uma resposta de formulário na lixeira',
 	'formulaires_supprimer' => 'Apagar formulário',
 	'formulaires_supprimer_confirmation' => 'Atenção, isto apagará também todos os resultados. Você quer realmente excluir este formulário?',
 	'formulaires_tous' => 'Todos os formulários',
 
+	// H
+	'heures_minutes_secondes' => '@h@h @m@min @s@s',
+
 	// I
+	'id_formulaires_reponse' => 'Identificador da resposta',
 	'identification_par_cookie' => 'Por cookie',
 	'identification_par_id_auteur' => 'Por identificação (id_auteur) de usuário autenticado',
 	'importer_formulaire' => 'Importar um formulário',
@@ -117,13 +131,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_proposees' => 'A moderar',
 	'info_reponse_publiee' => 'Validada',
 	'info_reponse_publiees' => 'Validadas',
-	'info_reponse_supprimee' => 'Apagada', # MODIF
-	'info_reponse_supprimees' => 'Apagadas', # MODIF
+	'info_reponse_refusee' => 'Recusada',
+	'info_reponse_refusees' => 'Recusadas',
+	'info_reponse_supprimee' => 'Na lixeira',
+	'info_reponse_supprimees' => 'Na lixeira',
 	'info_reponse_toutes' => 'Todas',
 	'info_utilise_1_formulaire' => 'Formulário utilizado:',
 	'info_utilise_nb_formulaires' => 'Formulários utilizados:',
 
+	// J
+	'jours_heures_minutes_secondes' => '@j@d @h@h @m@min @s@s',
+
 	// L
+	'lien_expire' => 'Link vencendo em @delai@',
 	'liens_ajouter' => 'Incluir um formulário',
 	'liens_ajouter_lien' => 'Incluir este formulário',
 	'liens_creer_associer' => 'Criar e vincular um formulário',
@@ -131,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_retirer_tous_liens_formulaires' => 'Aposentar todos os formulários',
 
 	// M
+	'minutes_secondes' => '@m@min @s@s',
 	'modele_label_formulaire_formidable' => 'Qual formulário?',
 	'modele_nom_formulaire' => 'um formulário',
 
@@ -138,6 +159,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_label_afficher_titre_formulaire' => 'Exibir título do formulário?',
 	'noisette_label_identifiant' => 'Formulário a exibir:',
 	'noisette_nom_noisette_formulaire' => 'Formulário',
+
+	// P
+	'pas_analyse_fichiers' => 'Formidable não propõe (ainda) a análise dos arquivos enviados',
 
 	// R
 	'reponse_aucune' => 'Nenhuma resposta',
@@ -168,12 +192,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'sans_reponses' => 'Sem resposta',
+	'secondes' => '@s@s',
 
 	// T
-	'texte_statut_poubelle' => 'excluído', # MODIF
+	'texte_statut_poubelle' => 'na lixeira',
 	'texte_statut_propose_evaluation' => 'proposto',
 	'texte_statut_publie' => 'validado',
 	'texte_statut_refuse' => 'arquivado',
+	'texte_statut_refusee' => 'recusado',
 	'titre_cadre_raccourcis' => 'Atalhos',
 	'titre_formulaires_archives' => 'Arquivos',
 	'titre_reponses' => 'Respostas',
@@ -215,12 +241,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_sujet' => '@nom@  enviou uma mensagem',
 	'traiter_email_sujet_accuse' => 'Obrigado pela sua resposta.',
 	'traiter_email_titre' => 'Enviar por e-mail',
-	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.', # MODIF
+	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.',
+	'traiter_email_url_enregistrement_precis' => 'Você pode visualizar estar resposta <a href="@url@">nesta página</a>.',
 	'traiter_enregistrement_description' => 'Gravar os resultados do formulário na base de dados',
 	'traiter_enregistrement_erreur_base' => 'Aconteceu um erro técnico durante a gravação na base de dados',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Você já respondeu a este formulário.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'A resposta a ser editada não foi encontrada.',
-	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente', # MODIF
+	'traiter_enregistrement_message_ok' => 'Obrigado. Suas respostas foram registradas corretamente',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Resultados anônimos (não guardar traços de identificação das pessoas que responderam).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Tornar o formulário anônimo',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'Que variável do sistema usar para calcular um valor único para cada autor sem revelar sua identidade.',
