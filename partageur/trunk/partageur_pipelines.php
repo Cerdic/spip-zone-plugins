@@ -33,8 +33,8 @@ function partageur_affiche_enfants($flux) {
 	if (
 		$e = trouver_objet_exec($flux['args']['exec'])
 		AND $e['type'] == 'rubrique'
-		AND $e['edition'] == false) 
-		AND autoriser('voir', 'partageur')
+		AND $e['edition'] == false
+		AND autoriser('voir', 'partageur'))
 	{
 		$id_rubrique = $flux['args']['id_rubrique'];
 
