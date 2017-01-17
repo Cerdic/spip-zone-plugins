@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrer_dabord_une_fois' => 'It’s possible ! <br /><br />But first, please save this page one time...',
 	'entree_evenement_publie' => 'Status of the event :', # MODIF
 	'evenement' => 'Event',
+	'evenement_date' => 'Date',
 	'explication_ref' => 'Reference to an article or news (ex : article23 ; breve45)',
 	'explication_texte' => 'Text for event description.',
 	'explication_titre' => 'Event Label',
