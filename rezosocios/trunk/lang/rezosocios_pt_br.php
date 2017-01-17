@@ -48,5 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ajouter_un_rezosocio' => 'Incluir um link de rede social',
 	'titre_objets_lies_rezosocio' => 'Objetos vinculados a esta rede social',
 	'titre_page_rezosocios_page' => 'Os links  de redes sociais',
-	'titre_tweetsde' => 'Tweets de @@name@'
+	'titre_tweetsde' => 'Tweets de @@name@',
+
+	// Y
+	'youtube_channel' => 'Youtube (canal)',
+	'youtube_user' => 'Youtube (conta de usuário)'
 );
