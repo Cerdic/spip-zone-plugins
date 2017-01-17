@@ -16,6 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_autre_parent' => 'Igualmente na seção',
 	'label_autres_parents' => 'Igualmente nas seções',
 	'label_parents' => 'Nas seções',
+	'label_profondeur_chemin' => 'Profundidade dos caminhos poli-hierárquicos na área restrita',
+	'label_profondeur_chemin_0' => 'Todo o caminho',
+	'label_profondeur_chemin_1' => 'Apenas a seção superior indireta',
+	'label_profondeur_chemin_2' => '2 seções',
+	'label_profondeur_chemin_3' => '3 seções',
 
 	// P
 	'parent_obligatoire' => 'Você deve indicar pelo menos uma seção',
