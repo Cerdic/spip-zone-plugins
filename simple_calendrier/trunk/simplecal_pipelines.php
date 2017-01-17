@@ -12,8 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/simplecal_utils');
 
-
-
 // Pipeline. Entete des pages de l'espace prive
 function simplecal_header_prive($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
@@ -211,44 +209,6 @@ function simplecal_compter_contributions_auteur($flux){
 }
 
 
-// Definir le squelette evenement.html pour les urls de type spip.php?evenement123
-// http://programmer.spip.org/declarer_url_objets
-/*function simplecal_declarer_url_objets($array){
-	$array[] = 'evenement';
-	return $array;
-}*/
-
-
-// cf. urls/propres.php
-function simplecal_propres_creer_chaine_url($flux){
-	/*
-	$flux = Array ( 
-		[data] => evenement2 
-		[objet] => Array ( 
-			[url] => evenement2 
-			[date] => 2010-07-25 22:53:04 
-			[date_debut] => 2010-05-09 00:00:00 
-			[date_fin] => 2010-05-10 00:00:00 
-			[lieu] => 
-			{titre] =>
-			[lang] => 
-			[type] => evenement 
-			[id_objet] => 2 ) 
-	) 
-	*/
-	
-	$type = $flux['objet']['type'];
-	if ($type == 'evenement'){
-		$date_debut = $flux['objet']['date_debut'];
-		$titre = substr($date_debut, 8, 2)."-".substr($date_debut, 5, 2)."-".substr($date_debut, 0, 4);
-		$titre = "evenement-du-".$titre;
-	}
-	
-	$flux['objet']['data'] = $titre;
-	return $flux;
-}
-
-
 function simplecal_optimiser_base_disparus($flux){
 	$n = &$flux['data'];
 	$mydate = $flux['args']['date'];
@@ -306,17 +266,6 @@ function simplecal_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-// pipeline : permettre la recherche dans les evenements
-function simplecal_rechercher_liste_des_champs($tables){
-	// Prendre en compte certains champs
-	$tables['evenements']['titre'] = 3;
-	$tables['evenements']['lieu'] = 3;
-	$tables['evenements']['descriptif'] = 3;
-	$tables['evenements']['texte'] = 3;
-
-	return $tables;
-}
-
 // pipeline : compatibilité plugin corbeille.
 function simplecal_corbeille_table_infos($param){
     $param["evenements"] = array(
@@ -337,8 +286,5 @@ function simplecal_jqueryui_plugins($scripts){
    
 	return $scripts;
 } 
-
-
-
 
 ?>
