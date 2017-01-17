@@ -196,7 +196,7 @@ function peupler_base_pays() {
         array('id_pays'=>'182','code'=>'PT','code_num'=>620,'code_alpha3'=>'PRT','nom'=>'<multi>[fr]Portugal[en]Portugal[de]Portugal[es]Portugal[it]Portogallo[nl]Portugal[pt]Portugal</multi>'),
         array('id_pays'=>'183','code'=>'QA','code_num'=>634,'code_alpha3'=>'QAT','nom'=>'<multi>[fr]Qatar[en]Qatar[de]Katar[es]Qatar[it]Qatar[nl]Qatar[pt]Qatar</multi>'),
         array('id_pays'=>'184','code'=>'DO','code_num'=>214,'code_alpha3'=>'DOM','nom'=>'<multi>[fr]République dominicaine[en]Dominican Republic[de]Dominikanische Republik[es]República Dominicana[it]Repubblica Dominicana[nl]Dominicaanse Republiek[pt]República Dominicana</multi>'),
-        array('id_pays'=>'185','code'=>'CZ','code_num'=>203,'code_alpha3'=>'CZ','nom'=>'<multi>[fr]République tchèque[en]Czech Republic[de]Tschechische Republik[es]República Checa[it]Repubblica Ceca[nl]Tsjechië[pt]República Checa</multi>'),
+        array('id_pays'=>'185','code'=>'CZ','code_num'=>203,'code_alpha3'=>'CZE','nom'=>'<multi>[fr]République tchèque[en]Czech Republic[de]Tschechische Republik[es]República Checa[it]Repubblica Ceca[nl]Tsjechië[pt]República Checa</multi>'),
         array('id_pays'=>'186','code'=>'RE','code_num'=>638,'code_alpha3'=>'REU','nom'=>'<multi>[fr]Réunion[en]Reunion[de]Réunion[es]Reunión[it]Reunion[nl]Réunion[pt]Reunion</multi>'),
         array('id_pays'=>'187','code'=>'RO','code_num'=>642,'code_alpha3'=>'ROU','nom'=>'<multi>[fr]Roumanie[en]Romania[de]Rumänien[es]Rumania[it]Romania[nl]Roemenië[pt]Roménia</multi>'),
         array('id_pays'=>'188','code'=>'GB','code_num'=>826,'code_alpha3'=>'GBR','nom'=>'<multi>[fr]Royaume-Uni[en]United Kingdom[de]Gro§britannien[es]Reino Unido[it]Regno Unito[nl]Verenigd Koninkrijk[pt]Reino Unido</multi>'),

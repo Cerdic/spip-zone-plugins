@@ -43,6 +43,10 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_pays_liens')),
 	);
 
+	$maj['1.4.1'] = array(
+		array('sql_update', 'spip_pays', array('code_alpha3' => 'CZE'), array('id_pays=185')),
+	);
+
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
