@@ -853,7 +853,7 @@ function pmb_ids_notices_recherches($demande, &$nbTotal, $debut=0, $nombre=5, $p
 			// l'inconvenient ici, c'est que PMB retourne tous les champs
 			// et pas uniquement l'identifiant, ce qui est inutile et charge la connexion
 			// et le travail de PMB, mais il n'y a pas de moyen a cette heure ci pour ne demmander que les ids.
-			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArraySorted($searchId,$debut,$nombre,"utf-8",false,false,$sort);
+			$r=$ws->pmbesOPACAnonymous_fetchSearchRecordsArraySorted($searchId,$debut,$nombre,"utf-8",$sort);
 			if (is_array($r)) {
 				foreach ($r as $n) {
 					$ids[] = $n->id;
