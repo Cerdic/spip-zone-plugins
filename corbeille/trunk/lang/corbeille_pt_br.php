@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'effacer' => 'Excluir a seleção',
 	'effacer_tout' => 'Excluir tudo',
-	'element_supprime' => '@ids@ foi removido da lixeira', # MODIF
-	'elements_supprimes' => '@ids@ foram removidos da lixeira', # MODIF
+	'element_supprime' => '@objet@ @ids@ foi removido da lixeira',
+	'elements_supprimes' => '@objet@ @ids@ foram removidos da lixeira',
 
 	// F
 	'forums_prives_corbeille_tous' => '@nb@ mensagens de fóruns privados na lixeira',
@@ -46,5 +46,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_corbeille_un' => '1 site na lixeira',
 
 	// V
-	'voir_detail' => 'ver os detalhes' # MODIF
+	'voir_detail' => 'Ver os detalhes'
 );
