@@ -130,21 +130,22 @@ function simplecal_affiche_milieu($flux) {
 // Nombre d'evenements de l'auteur / de la rubrique
 function simplecal_boite_infos($flux){
 	$type = $flux['args']['type'];
-	$id = intval($flux['args']['id']);
+
+	if (in_array($type, array('auteur', 'rubrique'))) {
+		$id = intval($flux['args']['id']);
 	
-	if ($type == 'auteur'){
-		$n_evt = sql_countsel("spip_auteurs_liens", "id_auteur=".$id." and objet='evenement'");
-	} 
-	if ($type == 'rubrique'){
-		$n_evt = sql_countsel("spip_evenements", "statut='publie' and id_rubrique=".$id);
-	}
-	
-	if (in_array($type, array("auteur", "rubrique"))){
+		if ($type == 'auteur') {
+			$n_evt = sql_countsel('spip_auteurs_liens', "id_auteur=$id AND objet='evenement'");
+		} 
+		if ($type == 'rubrique') {
+			$n_evt = sql_countsel('spip_evenements', "statut='publie' AND id_rubrique=$id");
+		}
+		
 		if (($pos = strpos($flux['data'],'<!--nb_elements-->'))!==FALSE) {
 			if ($n_evt > 0){
 				$aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_nb_evenements').'</div>';
+				$flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
 			}
-			$flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
 		}
 	}
 	
