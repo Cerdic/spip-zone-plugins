@@ -16,8 +16,23 @@ function responsive($matches) {
 	// On inclu les filtres, au cas ou
 	include_spip('inc/filtres');
 
+	$class = '';
+
+	// Récupérer la largeur et la hauteur définie dans l'iFrame
+	$height = extraire_attribut($matches[0], 'height');
+	$width = extraire_attribut($matches[0], 'width');
+
+	if ($height and $width) {
+		$ratio = intval($width)/intval($height);
+		$ratio_4_3 = 4/3;
+
+		if ($ratio > $ratio_4_3) {
+			$class = ' widescreen';
+		}
+	}
+
 	// On revoie la bonne structure html d'iframe.
-	return wrap($matches[0], '<div class="responsive-embed widescreen flex-video'.$vimeo.'">');
+	return wrap($matches[0], '<div class="responsive-embed flex-video'.$class.'">');
 }
 
 /**
