@@ -49,11 +49,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                     <strong style="color:red">/!\\ Let op</strong>: verander deze waarde niet achteraf, want bestaande scores worden niet aangepast...<br />
                     Wanneer deze parameter is ingesteld, moet hij niet meer worden veranderd.',
 	'info_fonctionnement_note' => 'Geven van scores',
-	'info_ip' => 'Om scores zo eenvoudig mogelijk te controleren, worden ze geregistreerd op het IP-adres van de stemmer. Dit voorkomt meerdere stemmen per gebruiker.<br />
-                Auteurs stemmen met hun ID.<br />
-                Voor een enkele stem per gebruiker, beperk je stemming tot een <b>enkele</b> geregistreerde persoon (hierboven).', # MODIF
+	'info_ip' => 'Om scores zo eenvoudig mogelijk te controleren, worden ze geregistreerd op het IP-adres van de stemmer. Dit voorkomt meerdere stemmen per gebruiker, met enkele onvolkomenheden.. in het bijzonder wanneer je de stemmen van auteurs beheert.<br />
+                In dat geval (en wanneer de auteur is aangemeld) wordt de score op de identificatie van de auteur geregistreerd.',
+	'info_methode_id' => 'Verificatie van unieke stemmers',
 	'info_modifications' => 'Scores aanpassen',
 	'info_ponderation' => 'De weegfactor geeft meer waarde aan items die voldoende stemmen hebben.<br />Geef het minimum aantal stemmen om de score betrouwbaar te laten zijn.',
+	'info_vote_unique_auteur' => 'Wil je één score per gebruiker, beperk het stemmen dan op <b>enkele</b> geregistreerde personen.',
 	'ip' => 'IP',
 	'item_adm' => 'voor beheerders ',
 	'item_all' => 'voor iedereen ',
@@ -61,6 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_id' => 'enkele stem per gebruiker ',
 	'item_ide' => 'voor geregistreerde personen ',
 	'item_ip' => 'een stem per IP-adres',
+	'item_methode_id_cookie' => 'Per cookie',
+	'item_methode_id_hash' => 'Per vingerafdruk van de browser',
+	'item_methode_id_ip' => 'Per IP-adres',
 
 	// J
 	'jaidonnemonavis' => 'Ik heb mijn oordeel gegeven!',
