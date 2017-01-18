@@ -99,7 +99,7 @@ function Crayons_insert_head($head) {
  * @return string
  *     Contenu de la page à envoyer au navigateur
 **/
-function &Crayons_affichage_final(&$page) {
+function Crayons_affichage_final($page) {
 
 	// ne pas se fatiguer si le visiteur n'a aucun droit
 	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist())) {
