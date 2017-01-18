@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_afficher_si_remplissage_label' => 'Tonen indien ingevuld',
 	'option_attention_explication' => 'Een boodschap die belangrijker is dan de uitleg.',
 	'option_attention_label' => 'Waarschuwing',
+	'option_attribut_title_label' => 'Zet een title attribuut op het label, dat de waarde van het veld bevat. Gebruiken met voorbehoud.',
 	'option_autocomplete_defaut' => 'Neem de standaardwaarde',
 	'option_autocomplete_explication' => 'Bij het laden kan de webbrowser de velden met historische informatie vullen',
 	'option_autocomplete_label' => 'Vul de velden vooraf in',
@@ -193,7 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'tous_visiteurs' => 'Alle bezoekers (ook niet-geregistreerde)',
-	'tout_selectionner' => 'Alles kiezen', # MODIF
+	'tout_selectionner' => 'Alles/niets selecteren',
 
 	// V
 	'vue_sans_reponse' => '<i>Zonder antwoord</i>',
