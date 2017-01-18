@@ -6,8 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Fonction de callback utiliser par le filtre |iframe_responsive
- * A chaque iFrame, on encadre de div.flex-video.
- * Si vimeo est détecté, on ajoute la class vimeo
+ * A chaque iFrame, on encadre de div.responsive-embed.
+ *
+ * On détecte aussi le ratio de l'iFrame (via les attributs html) pour ajouter
+ * automatiquement la class widescreen
  *
  * @param  string $matches iframe
  * @return string          iframe encadrée

@@ -15,8 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/foundation');
 
 /**
- * Rendre les iframes responsive via un filtre et
- * la classe flex-video de Foundation.
+ * Rendre les iframes responsives via un filtre et
+ * la classe responsive-embed de Foundation.
  *
  * @param string $texte HTML dans lequel chercher des iframes
  * @access public
@@ -24,7 +24,7 @@ include_spip('inc/foundation');
  */
 function filtre_iframe_responsive($texte) {
 	include_spip('inc/foundation');
-	// On détecte tout les iFrames et on les rends responsives.
+	// On détecte toute les iFrames et on les rends responsives.
 	return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
 }
 
