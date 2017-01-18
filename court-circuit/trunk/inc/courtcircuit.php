@@ -27,10 +27,16 @@ function courtcircuit_url_redirection($id_rubrique) {
 		if ($flux['data'] != $squelette_rubrique)
 			return '';
 	}
-	// Tester ensuite si la rubrique a une composition (si on ne court-circuite pas les compositions)
-	if ((!isset($config['composition_rubrique']) || $config['composition_rubrique']=='oui') && defined('_DIR_PLUGIN_COMPOSITIONS')) {
-		if (strlen(compositions_determiner('rubrique', $id_rubrique)))
-			return '';
+	// Tester ensuite si la rubrique a une composition (si on ne court-circuite pas les compositions ou si la composition est dans la liste de celles à exclure)
+	if (defined('_DIR_PLUGIN_COMPOSITIONS') and $composition = compositions_determiner('rubrique', $id_rubrique)) {
+		if ((!isset($config['composition_rubrique']) || $config['composition_rubrique']=='oui')) {
+			if (strlen($composition))
+				return '';
+		} elseif ($config['composition_rubrique']=='non') {
+			if (strlen($composition) and defined('_COURTCIRCUIT_EXCLURE_COMPOSITIONS') and in_array($composition,_COURTCIRCUIT_EXCLURE_COMPOSITIONS)) {
+				return '';
+			}
+		}
 	}
 	// Déterminer le fond à utiliser
 		$polyhierarchie = ""; 
