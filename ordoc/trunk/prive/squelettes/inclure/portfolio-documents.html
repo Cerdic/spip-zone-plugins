@@ -13,11 +13,11 @@
 <B_illustrations>
 <h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
 <div class="liste_items documents" id="illustrations#ENV{id_unique}">
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 <BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
-[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
@@ -27,11 +27,11 @@
 <B_portfolio>
 <h3><:medias:info_portfolio:></h3>
 <div class="liste_items documents" id="portfolio#ENV{id_unique}">
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 <BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_portfolio>
-[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
@@ -41,11 +41,11 @@
 <B_documents>
 <h3><:medias:info_documents:></h3>
 <div class="liste_items documents" id="documents#ENV{id_unique}">
-[<p class="pagination">(#PAGINATION)</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 <BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par rang_lien, num titre,date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_documents>
-[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-D/document,#SELF|ancre_url{documents}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
