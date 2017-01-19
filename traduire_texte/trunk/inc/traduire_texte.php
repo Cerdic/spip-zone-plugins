@@ -53,34 +53,6 @@ function translate_requestCurl_bing($apikey, $text, $srcLang, $destLang) {
 }	
 
 
-function traduire_texte( $text, $destLang = 'fr', $srcLang = 'en' ) {
-	if (strlen(trim($text)) == 0) return '';
-
-	//$text = rawurlencode( $text );
-	$destLang = urlencode( $destLang );
-	$srcLang = urlencode( $srcLang );
-
-	if (defined('_BING_APIKEY')) {
-		//echo "BING";
-		$trans = translate_requestCurl_bing(_BING_APIKEY, $text, $srcLang, $destLang);
-	}
-	
-	else if (defined('_GOOGLETRANSLATE_APIKEY')) {
-		$trans = translate_requestCurl("key="._GOOGLETRANSLATE_APIKEY."&source=$srcLang&target=$destLang&q=".rawurlencode($text));
-	}
-	
-	else if (defined('_TRANSLATESHELL_CMD')) {
-		$trans = translate_shell($text, $destLang);
-	}
-
-	$ltr = lang_dir($destLang, 'ltr','rtl');
-	
-	if (strlen($trans))
-		return "<div dir='$ltr' lang='$destLang'>$trans</div>";
-	else
-		return false;
-}
-
 function translate_shell($text, $destLang = 'fr') {
 	if (strlen(trim($text)) == 0) return '';
 	$prep = str_replace("\n", " ", html2unicode($text));
@@ -138,7 +110,41 @@ function translate_line($text, $destLang) {
 	return $trad;
 }
 
+/*
+ *  traduire sans utiliser le cache ni mettre en cache le resultat
+ */
+function traduire_texte( $text, $destLang = 'fr', $srcLang = 'en' ) {
+	if (strlen(trim($text)) == 0) return '';
 
+	//$text = rawurlencode( $text );
+	$destLang = urlencode( $destLang );
+	$srcLang = urlencode( $srcLang );
+
+	if (defined('_BING_APIKEY')) {
+		//echo "BING";
+		$trans = translate_requestCurl_bing(_BING_APIKEY, $text, $srcLang, $destLang);
+	}
+	
+	else if (defined('_GOOGLETRANSLATE_APIKEY')) {
+		$trans = translate_requestCurl("key="._GOOGLETRANSLATE_APIKEY."&source=$srcLang&target=$destLang&q=".rawurlencode($text));
+	}
+	
+	else if (defined('_TRANSLATESHELL_CMD')) {
+		$trans = translate_shell($text, $destLang);
+	}
+
+	$ltr = lang_dir($destLang, 'ltr','rtl');
+	
+	if (strlen($trans))
+		return "<div dir='$ltr' lang='$destLang'>$trans</div>";
+	else
+		return false;
+}
+
+
+/*
+ *  traduire avec un cache
+ */
 function traduire($text, $destLang = 'fr', $srcLang = 'en') {
 	if (strlen(trim($text)) == 0) return '';
 	if (defined("_BING_APIKEY")) {
@@ -175,4 +181,5 @@ function traduire($text, $destLang = 'fr', $srcLang = 'en') {
 	
 
 }
+
 ?>
