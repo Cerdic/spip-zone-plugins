@@ -39,6 +39,13 @@ options:
           type: 'entier'
           options:
             min: 1
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'label_fichiers_individuels'
+          defaut: 'on'
+          valeur_non: 'non'
+          label: '<:cvtupload:saisie_fichiers_label_fichiers_individuels_label:>'
   -
     saisie: 'fieldset'
     options:
