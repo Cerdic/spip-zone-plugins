@@ -33,6 +33,7 @@ function translate_requestCurl_bing($apikey, $text, $srcLang, $destLang) {
 	// Bon sang, si tu n'utilises pas .NET, ce truc est documenté par les corbeaux
 	// attaquer le machin en SOAP (la méthode HTTP ne convient que pour des textes très courts (GET, pas POST)
 
+	if (strlen(trim($text)) == 0) return '';
 	$client = new SoapClient("http://api.microsofttranslator.com/V2/Soap.svc");
 
 	$params = array(
@@ -53,6 +54,7 @@ function translate_requestCurl_bing($apikey, $text, $srcLang, $destLang) {
 
 
 function traduire_texte( $text, $destLang = 'fr', $srcLang = 'en' ) {
+	if (strlen(trim($text)) == 0) return '';
 
 	//$text = rawurlencode( $text );
 	$destLang = urlencode( $destLang );
@@ -80,6 +82,7 @@ function traduire_texte( $text, $destLang = 'fr', $srcLang = 'en' ) {
 }
 
 function translate_shell($text, $destLang = 'fr') {
+	if (strlen(trim($text)) == 0) return '';
 	$prep = str_replace("\n", " ", html2unicode($text));
 	$prep = preg_split(",<p\b[^>]*>,i", $prep);
 	$trans = array();
@@ -119,8 +122,8 @@ function translate_shell($text, $destLang = 'fr') {
 	return join("\n", $trans);
 }
 
-function translate_line($l, $destLang) {
-	if (strlen(trim($l)) == 0) return '';
+function translate_line($text, $destLang) {
+	if (strlen(trim($text)) == 0) return '';
 	$descriptorspec = array(
 		0 => array("pipe", "r"),
 		1 => array("pipe", "w")
@@ -128,7 +131,7 @@ function translate_line($l, $destLang) {
 	$cmd = _TRANSLATESHELL_CMD.' -b '.':'.escapeshellarg($destLang);
 	$cmdr = proc_open($cmd, $descriptorspec, $pipes);
 	if (is_resource($cmdr)) {
-		fwrite($pipes[0], $l) && fclose($pipes[0]);
+		fwrite($pipes[0], $text) && fclose($pipes[0]);
 		$trad = stream_get_contents($pipes[1]);
 		fclose($pipes[1]);
 	}
@@ -137,13 +140,12 @@ function translate_line($l, $destLang) {
 
 
 function traduire($text, $destLang = 'fr', $srcLang = 'en') {
+	if (strlen(trim($text)) == 0) return '';
 	if (defined("_BING_APIKEY")) {
 		$text = mb_substr($text, 0, 10000, "UTF-8");
 	} else if (defined("_GOOGLETRANSLATE_APIKEY")) {
 		$text = mb_substr($text, 0, 4500, "UTF-8");
 	}
-	
-	
 	
 	$hash = md5($text);
 	
@@ -167,7 +169,8 @@ function traduire($text, $destLang = 'fr', $srcLang = 'en') {
 			);
 			return $trad;
 		}
-	
+		else
+			spip_log('['.$destLang."] ECHEC $text", 'translate');
 	}
 	
 
