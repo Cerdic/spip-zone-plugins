@@ -113,8 +113,8 @@ function zone_modifier($id_zone, $set = null) {
 
 	// Si la zone est publiee, invalider les caches et demander sa reindexation
 	$invalideur = $indexation = '';
-	$t = sql_getfetsel('statut', 'spip_zones', "id_zone=$id_zone");
-	if ($t == 'publie') {
+	$t = sql_getfetsel('publique', 'spip_zones', "id_zone=$id_zone");
+	if ($t == 'oui') {
 		$invalideur = "id='zone/$id_zone'";
 		$indexation = true;
 	}
@@ -132,7 +132,6 @@ function zone_modifier($id_zone, $set = null) {
 	)) {
 		return $err;
 	}
-
 
 	zone_lier($id_zone, 'rubrique', _request('rubriques'), 'set');
 	return $err;
