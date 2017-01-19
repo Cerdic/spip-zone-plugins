@@ -39,5 +39,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant_da' => 'Montant brut HT des droits d\'auteur',
 
 	// P
-	'pdf_cree' => 'Votre pdf a été générée avec succès<br /><a href="@pdf_path@">Télécharger le pdf @pdf_nom@</a>',
+	'pdf_cree' => 'Votre pdf a été générée avec succès<br /><a href="@pdf_path@" type="" target="_blank">Télécharger le pdf @pdf_nom@</a>',
 );

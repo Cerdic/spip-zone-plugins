@@ -81,7 +81,7 @@ function formulaires_agessa_traiter_dist() {
 	$pdf = new FPDFI_CellFit('P', 'mm', 'A4');
 	$pdf->AddPage();
 	$pdf->SetMargins(0,0);
-	$pdf->setSourceFile(find_in_path('pdf/Bordereau_declaratif_2016_nb.pdf'));
+	$pdf->setSourceFile(find_in_path('pdf/Bordereau_declaratif_2017_nb.pdf'));
 	$tplIdx = $pdf->importPage(1);
 	$pdf->useTemplate($tplIdx, 0, 0, 0, 0, true);
 
