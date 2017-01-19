@@ -9,7 +9,7 @@
         <div class='liste'>
             <ul class='liste-items'>
         <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>[(#TOTAL_BOUCLE|>{1}|oui)
-                <li class='item'><a href="[(#SELF|parametre_url{[(#_facettes:CLE)],#CLE})]">#CLE ([(#VALEUR)])</a></li>
+                <li class='item'><a href="[(#SELF|parametre_url{[(#_facettes:CLE)],#CLE})]">[(#CLE|extraire_multi)] ([(#VALEUR)])</a></li>
         ]</BOUCLE_liste_facettes>
             </ul>
         </div>
