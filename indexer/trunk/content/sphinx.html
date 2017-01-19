@@ -46,7 +46,7 @@
 
 	[<p>(#SPHINX_MESSAGE)</p>]
 
-	[<div><tt>(#SPHINX_QUERY)</tt></div>]
+	[<div><tt>(#SPHINX_QUERY|htmlspecialchars)</tt></div>]
 
 	<small>
 	[(#SPHINX_META|table_valeur{total}|=={1000}|?{'+ de '}) ][(#SPHINX_META|table_valeur{total}) ]résultats
@@ -98,7 +98,7 @@
 
 </B_recherche_sphinx>
 	<h2>Pas de résultat pour :</h2>
-	<div><tt>#SPHINX_QUERY</tt></div>
+	[<div><tt>(#SPHINX_QUERY|htmlspecialchars)</tt></div>]
 	[<p>(#SPHINX_MESSAGE)</p>]
 
 	[(#INCLURE{fond=liste/sphinx_metas,meta=#SPHINX_META,env})]
