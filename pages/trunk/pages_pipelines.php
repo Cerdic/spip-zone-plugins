@@ -16,7 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // Change l'entête du formulaire des articles pour montrer que c'est une page
 function pages_affiche_milieu_ajouter_page($flux) {
-
 	if ($flux['args']['exec'] == 'article_edit') {
 		include_spip('base/abstract_sql');
 		if (
@@ -106,7 +105,6 @@ function pages_affiche_milieu_identifiant($flux) {
 
 // Vérifier que la page n'est pas vide
 function pages_formulaire_charger($flux) {
-
 	// Si on est dans l'édition d'un article
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article') {
 		// Si on est dans un article de modele page
@@ -348,11 +346,19 @@ function pages_pre_boucle($boucle) {
 				$boucle_articles = false;
 				$critere_page = true;
 				break;
-			} elseif (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'page') { // {page=x}
-				if (($_critere->op == '=')
+			}
+			// Aucun filtre du tout quand on cherche des traductions
+			elseif ($_critere->op == 'traduction' or $_critere->op == 'origine_traduction') {
+				$boucle_articles = false;
+				break;
+			}
+			elseif (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'page') { // {page=x}
+				if (
+					($_critere->op == '=')
 					and ($_critere->param[1][0]->texte == '')
 					and empty($_critere->param[1][1])
-					or $_critere->not) {
+					or $_critere->not
+				) {
 					// On veut exclure explicitement les pages
 					break;
 				} else {
@@ -361,13 +367,15 @@ function pages_pre_boucle($boucle) {
 					$critere_page = true;
 					break;
 				}
-			} elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
+			}
+			elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
 				or (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
 				// On pointe sur un article précis, il est donc inutile de rajouter un test sur la rubrique
 				// Pour le critère {id_article?} on considère que pour sélectionner des pages uniques
 				// ou des articles éditoriaux on doit préciser le critère {id_rubrique}
 				$boucle_articles = false;
-			} elseif (((isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique=-1}
+			}
+			elseif (((isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique=-1}
 					and ($_critere->op == '=')
 					and ($_critere->param[1][0]->texte == '-1'))
 					or ((isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique<0}
@@ -376,7 +384,8 @@ function pages_pre_boucle($boucle) {
 				// On cherche explicitement des pages uniques
 				$boucle_articles = false;
 				break;
-			} else if (($_critere->op == 'id_rubrique')) {
+			}
+			elseif (($_critere->op == 'id_rubrique')) {
 				// On connait pas à ce stade la valeur de id_rubrique qui est passé dans le env.
 				// Aussi, on créer une condition where qui se compile différemment suivant la valeur de l'id_rubrique.
 				// En fait, il suffit de tester si l'id_rubrique est null. Dans ce cas il faut bien rajouter id_rubrique>0
