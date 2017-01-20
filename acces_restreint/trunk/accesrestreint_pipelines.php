@@ -144,7 +144,7 @@ function accesrestreint_post_edition($flux) {
 		}
 		
 		// Si on a coché la case, on ajoute cette zone là
-		if ($flux['data']['autoriser_si_connexion'] == 'oui') {
+		if (isset($flux['data']['autoriser_si_connexion']) == 'oui') {
 			array_push($zones_si_connexion, $id_zone);
 		}
 		// Sinon on la retire
