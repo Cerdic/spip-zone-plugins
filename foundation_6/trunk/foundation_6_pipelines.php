@@ -21,9 +21,10 @@ function foundation_6_insert_head($flux) {
 	// Si on est en mode app, on revoie le bon squelette
 	if (_FOUNDATION_SASS) {
 		$flux .= recuperer_fond('inclure/head-foundation-app');
-		} else {
-			$flux .= recuperer_fond('inclure/head-foundation');
-		}
+	} else {
+		$flux .= recuperer_fond('inclure/head-foundation');
+	}
+
 	return $flux;
 }
 
@@ -38,5 +39,6 @@ function foundation_6_insert_head_css($flux) {
 	} else {
 		$flux .= recuperer_fond('inclure/css/head-foundation');
 	}
+
 	return $flux;
 }
