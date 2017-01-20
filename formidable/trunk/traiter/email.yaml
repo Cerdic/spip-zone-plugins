@@ -63,13 +63,11 @@ options:
     saisie: 'case'
     options:
       nom: 'activer_ip'
-      label: '<:formidable:traiter_email_option_activer_ip_label:>'
       label_case: '<:formidable:traiter_email_option_activer_ip_label_case:>'
   -
     saisie: 'case'
     options:
       nom: 'activer_accuse'
-      label: '<:formidable:traiter_email_option_activer_accuse_label:>'
       label_case: '<:formidable:traiter_email_option_activer_accuse_label_case:>'
   -
     saisie: 'input'
