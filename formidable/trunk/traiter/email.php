@@ -152,6 +152,7 @@ function traiter_email_dist($args, $retours) {
 				'traitements' => $traitements,
 				'saisies' => $saisies,
 				'valeurs' => $valeurs,
+				'masquer_liens' => $options['masquer_liens'],
 				'ip' => $options['activer_ip']?$GLOBALS['ip']:''
 			)
 		);
