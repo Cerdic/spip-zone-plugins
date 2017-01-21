@@ -26,17 +26,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'designation' => 'Designação',
 	'details_reservation' => 'Detalhes da reserva:',
+	'duree_vie_explication' => 'Informe a duração (em horas) de um comando com o status "@statut_defaut@". Se nenhum valor ou o valor 0 forem informados - a duração é iliimitada.',
+	'duree_vie_label' => 'Duração:',
 
 	// E
 	'erreur_email_utilise' => 'Esse email já está cadastrado. Favor conectar-se, ou inserir outro endereço de email',
-	'erreur_pas_evenement' => 'Não há nenhum evento com inscrição aberta, no momento.', # MODIF
+	'erreur_pas_evenement' => 'Não há nenhum evento com inscrição aberta, no momento.',
 	'evenement_cloture' => 'Evento encerrado',
 	'explication_client' => 'Escolha um cliente entre os autores ou informe os dados do cliente, abaixo',
 	'explication_email_reutilisable' => 'Permitir reutilizar um e-mail de um autor Spip no momento de uma reserva sem registro',
 	'explication_enregistrement_inscrit' => 'Registrar como autor Spip',
 	'explication_envoi_separe' => 'A troca de status de um Detalhe da Reserva para 
 <div><b>"@statuts@"</b></div> 
-gerará o envio de uma notificação!', # MODIF
+gerará o envio de uma notificação!',
 	'explication_envoi_separe_detail' => 'A troca do status para <div><strong>"@statuts@"</strong></div> gerará o envio de uma notificação!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Conecte-se</a> se você já tem cadastro no site',
 	'explication_nombre_evenements' => 'O número mínimo de reservas para que a promoção seja disponibilizada.',
@@ -63,7 +65,7 @@ gerará o envio de uma notificação!', # MODIF
 	'info_voir_reservations_poubelle' => 'Ver reservas postas na lixeira',
 	'inscription' => 'Inscrição',
 	'inscrire' => 'Inscrever-se',
-	'inscrire_liste_attente' => 'Escolher outro curso ou se inscrever na lista de espera.', # MODIF
+	'inscrire_liste_attente' => 'Escolha outro curso ou se inscreva na lista de espera.',
 
 	// L
 	'label_action_cloture' => 'Encerramento automático:',
