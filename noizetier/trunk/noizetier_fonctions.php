@@ -220,71 +220,76 @@ function noizetier_lister_pages($page_specifique = '') {
 
 		// Choisir le bon répertoire des pages
 		if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
-			$rep = _NOIZETIER_REPERTOIRE_PAGES;
+			$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
 		}
-		else {
-			$rep = $GLOBALS['z_blocs'][0] . '/';
-		}
-		
-		// Lister les fonds disponibles dans le repertoire contenu
-		$liste = find_all_in_path($rep, $match);
-		if (count($liste)) {
-			foreach ($liste as $squelette => $chemin) {
-				$page = preg_replace(',[.]html$,i', '', $squelette);
-				$dossier = str_replace($squelette, '', $chemin);
-				// Les elements situes dans prive/contenu sont ecartes
-				if (substr($dossier, -14) != 'prive/contenu/') {
-					if (count($infos_page = noizetier_charger_infos_page($dossier, $page)) > 0) {
-						$liste_pages[$page] = $infos_page;
-					}
-				}
-			}
+		elseif (isset($GLOBALS['z_blocs'][0])) {
+			$repertoire_pages = $GLOBALS['z_blocs'][0] . '/';
+		} else {
+			$repertoire_pages = '';
 		}
 
-		// Dans le cas de Zpip, il faut supprimer la page 'page.html' et la page 'z_apl.html'
-		if (defined('_DIR_PLUGIN_Z') or defined('_DIR_PLUGIN_ZCORE')) {
-			unset($liste_pages['page']);
-			unset($liste_pages['z_apl']);
-		}
-
-		// supprimer de la liste les pages necissant un plugin qui n'est pas actif
-		foreach ($liste_pages as $page => $infos_page) {
-			if (isset($infos_page['necessite'])) {
-				foreach ($infos_page['necessite'] as $plugin) {
-					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
-						unset($liste_pages[$page]);
-					}
-				}
-			}
-		}
-
-		$liste_pages = pipeline('noizetier_lister_pages', $liste_pages);
-		
-		// On ajoute les compositions du noizetier
-		if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
-			$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
-			// On doit transformer le tableau de [type][compo] en [type-compo]
-			$liste_compos = array();
-			if (is_array($noizetier_compositions)) {
-				foreach ($noizetier_compositions as $type => $compos_type) {
-					foreach ($compos_type as $compo => $infos_compo) {
-						$infos_compo['nom'] = typo($infos_compo['nom']);
-						$infos_compo['description'] = propre($infos_compo['description']);
-						if ($infos_compo['icon'] == '') {
-							$infos_compo['icon'] = (isset($liste_pages[$type]) && isset($liste_pages[$type]['icon']) && $liste_pages[$type]['icon'] != '') ? $liste_pages[$type]['icon'] : 'composition-24.png';
+		if ($repertoire_pages) {
+			// Lister les fonds disponibles dans le repertoire contenu
+			$liste = find_all_in_path($repertoire_pages, $match);
+			if (count($liste)) {
+				foreach ($liste as $squelette => $chemin) {
+					$page = preg_replace(',[.]html$,i', '', $squelette);
+					$dossier = str_replace($squelette, '', $chemin);
+					// Les elements situes dans prive/contenu sont ecartes
+					if (substr($dossier, -14) != 'prive/contenu/') {
+						if (count($infos_page = noizetier_charger_infos_page($dossier, $page)) > 0) {
+							$liste_pages[$page] = $infos_page;
 						}
-						if (isset($liste_pages[$type])) {
-							$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
-						} else {
-							$infos_compo['blocs'] = noizetier_blocs_defaut();
-						}
-						$liste_compos[$type.'-'.$compo] = $infos_compo;
 					}
 				}
 			}
-			$liste_pages = $liste_pages + $liste_compos;
+
+			// Dans le cas de Zpip, il faut supprimer la page 'page.html' et la page 'z_apl.html'
+			if (defined('_DIR_PLUGIN_Z') or defined('_DIR_PLUGIN_ZCORE')) {
+				unset($liste_pages['page']);
+				unset($liste_pages['z_apl']);
+			}
+
+			// supprimer de la liste les pages necissant un plugin qui n'est pas actif
+			foreach ($liste_pages as $page => $infos_page) {
+				if (isset($infos_page['necessite'])) {
+					foreach ($infos_page['necessite'] as $plugin) {
+						if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
+							unset($liste_pages[$page]);
+						}
+					}
+				}
+			}
+
+			$liste_pages = pipeline('noizetier_lister_pages', $liste_pages);
+
+			// On ajoute les compositions du noizetier
+			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
+				$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+				// On doit transformer le tableau de [type][compo] en [type-compo]
+				$liste_compos = array();
+				if (is_array($noizetier_compositions)) {
+					foreach ($noizetier_compositions as $type => $compos_type) {
+						foreach ($compos_type as $compo => $infos_compo) {
+							$infos_compo['nom'] = typo($infos_compo['nom']);
+							$infos_compo['description'] = propre($infos_compo['description']);
+							if ($infos_compo['icon'] == '') {
+								$infos_compo['icon'] = (isset($liste_pages[$type]) && isset($liste_pages[$type]['icon']) && $liste_pages[$type]['icon'] != '') ? $liste_pages[$type]['icon'] : 'composition-24.png';
+							}
+							if (isset($liste_pages[$type])) {
+								$infos_compo['blocs'] = $liste_pages[$type]['blocs'];
+							} else {
+								$infos_compo['blocs'] = noizetier_blocs_defaut();
+							}
+							$liste_compos[$type.'-'.$compo] = $infos_compo;
+						}
+					}
+				}
+				$liste_pages = $liste_pages + $liste_compos;
+			}
 		}
 	}
+
 	if ($page_specifique) {
 		return $liste_pages[$page_specifique];
 	} else {
@@ -307,18 +312,17 @@ function noizetier_charger_infos_page($dossier, $page, $info = '') {
 	
 	// Choisir le bon répertoire des pages
 	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
-		$rep = _NOIZETIER_REPERTOIRE_PAGES;
+		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
 	}
-	elseif (defined('_DIR_PLUGIN_ZCORE')) {
-		$rep = 'content/';
+	elseif (isset($GLOBALS['z_blocs'][0])) {
+		$repertoire_pages = $GLOBALS['z_blocs'][0] . '/';
+	} else {
+		$repertoire_pages = '';
 	}
-	else {
-		$rep = 'contenu/';
-	}
-	
+
 	// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
 	// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
-	$fichier = find_in_path("$rep$page.xml");
+	$fichier = find_in_path("$repertoire_pages$page.xml");
 
 	include_spip('inc/xml');
 	include_spip('inc/texte');
