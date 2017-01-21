@@ -290,7 +290,7 @@ function noizetier_lister_pages($page_specifique = '') {
 		}
 	}
 
-	if ($page_specifique) {
+	if ($page_specifique and isset($liste_pages[$page_specifique])) {
 		return $liste_pages[$page_specifique];
 	} else {
 		return $liste_pages;
