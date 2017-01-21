@@ -202,6 +202,28 @@ function noizetier_charger_contexte_noisette($noisette) {
 }
 
 /**
+ * Déterminer le répertoire dans lequel le NoiZetier peut lister les pages pouvant supporter
+ * l'insertion de noisettes.
+ *
+ * @return string
+ * 		Le répertoire des pages sous la forme dossier/.
+ */
+function noizetier_obtenir_dossier_pages() {
+	$repertoire_pages = '';
+
+	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
+		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
+	}
+	elseif (isset($GLOBALS['z_blocs'])) {
+		$premier_bloc = reset($GLOBALS['z_blocs']);
+		$repertoire_pages = "$premier_bloc/";
+	}
+
+	return $repertoire_pages;
+}
+
+
+/**
  * Lister les pages pouvant recevoir des noisettes
  * Par defaut, cette liste est basee sur le contenu du repertoire contenu/
  * Le tableau de resultats peut-etre modifie via le pipeline noizetier_lister_pages.
@@ -216,24 +238,16 @@ function noizetier_lister_pages($page_specifique = '') {
 
 	if (is_null($liste_pages)) {
 		$liste_pages = array();
-		$match = '.+[.]html$';
 
 		// Choisir le bon répertoire des pages
-		if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
-			$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
-		}
-		elseif (isset($GLOBALS['z_blocs'][0])) {
-			$repertoire_pages = $GLOBALS['z_blocs'][0] . '/';
-		} else {
-			$repertoire_pages = '';
-		}
+		$repertoire_pages = noizetier_obtenir_dossier_pages();
 
 		if ($repertoire_pages) {
-			// Lister les fonds disponibles dans le repertoire contenu
-			$liste = find_all_in_path($repertoire_pages, $match);
+			// Lister les fonds disponibles dans le repertoire des pages et ce pour tous les plugins activés
+			$liste = find_all_in_path($repertoire_pages, '.+[.]html$');
 			if (count($liste)) {
 				foreach ($liste as $squelette => $chemin) {
-					$page = preg_replace(',[.]html$,i', '', $squelette);
+					$page = basename($squelette, '.html');
 					$dossier = str_replace($squelette, '', $chemin);
 					// Les elements situes dans prive/contenu sont ecartes
 					if (substr($dossier, -14) != 'prive/contenu/') {
@@ -263,7 +277,7 @@ function noizetier_lister_pages($page_specifique = '') {
 
 			$liste_pages = pipeline('noizetier_lister_pages', $liste_pages);
 
-			// On ajoute les compositions du noizetier
+			// On ajoute les compositions du noizetier qui ne sont définies que dans une meta propre au NoiZetier.
 			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
 				$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
 				// On doit transformer le tableau de [type][compo] en [type-compo]
@@ -311,14 +325,7 @@ function noizetier_charger_infos_page($dossier, $page, $info = '') {
 	$page = preg_replace(',[.]html$,i', '', $page);
 	
 	// Choisir le bon répertoire des pages
-	if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
-		$repertoire_pages = _NOIZETIER_REPERTOIRE_PAGES;
-	}
-	elseif (isset($GLOBALS['z_blocs'][0])) {
-		$repertoire_pages = $GLOBALS['z_blocs'][0] . '/';
-	} else {
-		$repertoire_pages = '';
-	}
+	$repertoire_pages = noizetier_obtenir_dossier_pages();
 
 	// On autorise le fait que le fichier xml ne soit pas dans le meme plugin que le fichier .html
 	// Au cas ou le fichier .html soit surcharge sans que le fichier .xml ne le soit
