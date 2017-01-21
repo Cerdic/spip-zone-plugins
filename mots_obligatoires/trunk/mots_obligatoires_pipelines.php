@@ -14,7 +14,6 @@ function mots_obligatoires_formulaire_verifier($flux){
 		
 		$info_plugin = chercher_filtre('info_plugin');
 		$motus = $info_plugin('motus','est_actif');
-
 		// Récupérer les groupes de mot clefs 
 		// 1. Liés à cet objet 
 		// 2. Marqués comme important
@@ -23,6 +22,7 @@ function mots_obligatoires_formulaire_verifier($flux){
 			array("obligatoire=".sql_quote('oui'),
 			"tables_liees LIKE ".sql_quote("$objet%")
 		));
+		$groupes_erreurs = array();
 		while ($groupe = sql_fetch($groupes)){
 			$id_groupe = $groupe['id_groupe'];
 			if ($motus){// motus?
