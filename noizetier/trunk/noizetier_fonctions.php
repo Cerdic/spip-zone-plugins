@@ -222,11 +222,8 @@ function noizetier_lister_pages($page_specifique = '') {
 		if (defined('_NOIZETIER_REPERTOIRE_PAGES')) {
 			$rep = _NOIZETIER_REPERTOIRE_PAGES;
 		}
-		elseif (defined('_DIR_PLUGIN_ZCORE')) {
-			$rep = 'content/';
-		}
 		else {
-			$rep = 'contenu/';
+			$rep = $GLOBALS['z_blocs'][0] . '/';
 		}
 		
 		// Lister les fonds disponibles dans le repertoire contenu
