@@ -178,13 +178,11 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traitements_avertissement_creation' => 'Changes to the form fields have been successfully saved. You can now define which treatments will be performed when using the form.',
 	'traitements_avertissement_modification' => 'Changes to the form fields have been successfully saved. <strong>Some treatments may need to be reconfigured accordingly.</ strong>',
 	'traitements_champ_aucun' => 'None',
-	'traiter_email_description' => 'Post the form results by email to a list of recipients.',
+	'traiter_email_description' => 'Post the form results by email to a list of recipients.', # MODIF
 	'traiter_email_horodatage' => 'Form "@formulaire@" sent on @date@ at @heure@.',
 	'traiter_email_message_erreur' => 'An error occurred when sending the email.',
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
-	'traiter_email_option_activer_accuse_label' => 'Acknowledgement of receipt',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
-	'traiter_email_option_activer_ip_label' => 'IP address',
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Specify the email used to send the acknowledgment. Otherwise, the recipient will be the sender.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
 	'traiter_email_option_destinataires_champ_form_explication' => 'If one of the fields is an email address and you want to send the form to this address, select the field.',
@@ -209,7 +207,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'traiter_email_sujet_accuse' => 'Thank you for you reply.',
 	'traiter_email_titre' => 'Send by email',
 	'traiter_email_url_enregistrement' => 'You can manage the answers <a href="@url@">on this page</a>.', # MODIF
-	'traiter_enregistrement_description' => 'Saves the form results in the database',
+	'traiter_enregistrement_description' => 'Saves the form results in the database', # MODIF
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',

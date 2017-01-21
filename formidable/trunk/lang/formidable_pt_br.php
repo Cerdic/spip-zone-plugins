@@ -208,13 +208,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traitements_avertissement_creation' => 'As alterações nos campos do formulário foram gravadas com sucesso. Defina agora quais tratamentos serão efetuados na submissão do formulário.',
 	'traitements_avertissement_modification' => 'As alterações nos campos do formulário foram gravadas com sucesso. <strong>Alguns tratamentos podem ter que ser reconfigurados consequentemente.</strong>',
 	'traitements_champ_aucun' => 'Nenhum',
-	'traiter_email_description' => 'Postar o resultado do formulário por e-mail a uma lista de destinatários.',
+	'traiter_email_description' => 'Postar o resultado do formulário por e-mail a uma lista de destinatários.', # MODIF
 	'traiter_email_horodatage' => 'Formulário "@formulaire@" postado em @date@ às @heure@.',
 	'traiter_email_message_erreur' => 'Aconteceu um erro ao enviar o e-mail.',
 	'traiter_email_message_ok' => 'Sua mensagem foi enviada corretamente por e-mail.',
-	'traiter_email_option_activer_accuse_label' => 'Acusar recebimento',
 	'traiter_email_option_activer_accuse_label_case' => 'Enviar também um e-mail para o remetente com uma mensagem de confirmação.',
-	'traiter_email_option_activer_ip_label' => 'Endereço IP',
 	'traiter_email_option_activer_ip_label_case' => 'Enviar o endereço IP do remetente aos destinatários.',
 	'traiter_email_option_courriel_envoyeur_accuse_explication' => 'Indique o e-mail utilizado para enviar o aviso de recebimento. Por padrão, o destinatário será o remetente.',
 	'traiter_email_option_courriel_envoyeur_accuse_label' => 'E-mail de aviso de recebimento',
@@ -243,7 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_titre' => 'Enviar por e-mail',
 	'traiter_email_url_enregistrement' => 'Você pode gerenciar as respostas <a href="@url@">nesta página</a>.',
 	'traiter_email_url_enregistrement_precis' => 'Você pode visualizar estar resposta <a href="@url@">nesta página</a>.',
-	'traiter_enregistrement_description' => 'Gravar os resultados do formulário na base de dados',
+	'traiter_enregistrement_description' => 'Gravar os resultados do formulário na base de dados', # MODIF
 	'traiter_enregistrement_erreur_base' => 'Aconteceu um erro técnico durante a gravação na base de dados',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Você já respondeu a este formulário.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'A resposta a ser editada não foi encontrada.',
