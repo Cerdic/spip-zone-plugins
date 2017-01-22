@@ -1,7 +1,7 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.23.3"
+	version="1.23.4"
 	etat="test"
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
@@ -47,6 +47,6 @@
 		<pipeline nom="optimiser_base_disparus" inclure="reservation_evenement_pipelines.php" />
 
 
-	<menu nom="reservations" titre="reservation:titre_reservations" parent="menu_edition" icone="images/reservation-16.png" action="reservations" />
+	<menu nom="reservations" titre="reservation:titre_reservations" parent="menu_activite" icone="images/reservation-16.png" action="reservations" />
 	<menu nom="reservation_creer" titre="reservation:icone_creer_reservation" parent="outils_rapides" icone="images/reservation-new-16.png" action="reservation_edit" parametres="new=oui" />
 </paquet>
