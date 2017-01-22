@@ -73,7 +73,7 @@ function indexerdoc_indexer_document($flux) {
  * @return Retourne le flux d'origine mais possiblement modifié
  */
 function indexerdoc_post_edition_lien($flux){
-	if ($flux['args']['objet_source']){ // si on modifie la liaison d'un document
+	if ($flux['args']['objet_source']=="document"){ // si on modifie la liaison d'un document
 		$objet = $flux['args']['objet'];
 		$id_objet = $flux['args']['objet'];
 		indexer_redindex_objet($objet,$id_objet);
