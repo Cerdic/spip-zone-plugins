@@ -18,7 +18,7 @@ function prix_objets_affiche_milieu($flux) {
 					'id_objet' => $id_article,
 					'objet' => 'article' 
 				);
-				$contenu .= recuperer_fond('prive/objets/editer/prix', $contexte, array (
+				$contenu = recuperer_fond('prive/objets/editer/prix', $contexte, array (
 					'ajax' => true 
 				));
 				if ($p = strpos($flux['data'], "<!--affiche_milieu-->"))
@@ -31,7 +31,7 @@ function prix_objets_affiche_milieu($flux) {
 				'id_objet' => $id,
 				'objet' => $type 
 			);
-			$contenu .= recuperer_fond('prive/objets/editer/prix', $contexte, array (
+			$contenu = recuperer_fond('prive/objets/editer/prix', $contexte, array (
 				'ajax' => true 
 			));
 			if ($p = strpos($flux['data'], "<!--affiche_milieu-->"))

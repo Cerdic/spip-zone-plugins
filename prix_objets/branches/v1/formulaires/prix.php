@@ -45,7 +45,7 @@ function formulaires_prix_charger_dist($id_objet,$objet='article'){
 		'taxe'   =>'', 
 		);
 
-	$valeurs['_hidden'].='<input type="hidden" name="objet" value="'.$objet.'">';  
+	$valeurs['_hidden'] ='<input type="hidden" name="objet" value="'.$objet.'">';  
 	$valeurs['_hidden'].='<input type="hidden" name="id_objet" value="'.$id_objet.'">';  
 	// Si le plugin  declinaisons est activé     
 	if(test_plugin_actif('declinaisons')){
