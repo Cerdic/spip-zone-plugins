@@ -27,5 +27,5 @@
 	<!--chargement asynchrone de certaines inclusions -->
 	<utilise nom="inclureajaxload" compatibilite="[1.1.0;]" />
 	<!-- utilisation de fenetres modales pour ajouter des mots cles ou donner des avis DANS PMB -->
-	<utilise nom="mediabox" compatibilite="[0.8.0;]" />
+	<utilise nom="mediabox" compatibilite="[0.8.1;]" />
 </paquet>
