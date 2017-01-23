@@ -1,6 +1,6 @@
-<traduction module="simplecal" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/simple_calendrier/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=en" total="167" traduits="141" relire="0" modifs="5" nouveaux="21" pourcent="84.43">
+<traduction module="simplecal" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/simple_calendrier/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/simplecal?lang_cible=en" total="167" traduits="141" relire="0" modifs="5" nouveaux="21" pourcent="84.43">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/simplecal?lang_cible=fr" total="167" traduits="167" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/simplecal?lang_cible=fr" total="167" traduits="167" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
