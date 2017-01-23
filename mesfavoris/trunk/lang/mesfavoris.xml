@@ -1,33 +1,33 @@
-<traduction module="mesfavoris" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ar" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+<traduction module="mesfavoris" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mesfavoris/trunk/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ar" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=de" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=de" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=en" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=en" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Martin McCaffery" lien="https://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=es" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=es" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=fa" total="16" traduits="14" relire="0" modifs="0" nouveaux="2" pourcent="87.50">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=fa" total="16" traduits="14" relire="0" modifs="0" nouveaux="2" pourcent="87.50">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=fr" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=fr" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=it" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=it" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=nl" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=nl" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="pt" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=pt" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
+	<langue code="pt" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=pt" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ru" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
+	<langue code="ru" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=ru" total="16" traduits="13" relire="0" modifs="0" nouveaux="3" pourcent="81.25">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/mesfavoris?lang_cible=sk" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/mesfavoris?lang_cible=sk" total="16" traduits="16" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
