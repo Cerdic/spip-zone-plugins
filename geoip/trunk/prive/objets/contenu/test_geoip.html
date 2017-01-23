@@ -2,6 +2,44 @@
 
 [(#SET{ip, [(#REM|recuperer_ip_local)]})]
 
-<p><:geoip:ip_code_pays{ip=#GET{ip}}:> <strong>[(#GET{ip}|geoIP_exist)]</strong></p>
+[<p><:geoip:ip_code_pays{ip=#GET{ip}}:> <strong>(#GET{ip}|geoIP_exist|table_valeur{1})</strong></p>]
+
+[<p><:geoip:ip_ville{ip=#GET{ip}}:> <strong>(#GET{ip}|geoIP_exist|table_valeur{5})</strong></p>]
+
+[<p><:geoip:ip_code_postal{ip=#GET{ip}}:> <strong>(#GET{ip}|geoIP_exist|table_valeur{6})</strong></p>]
+
+[<p><:geoip:ip_latitude_longitude{ip=#GET{ip}}:> <strong>[(#GET{ip}|geoIP_exist|table_valeur{7})] (#GET{ip}|geoIP_exist|table_valeur{8})</strong></p>]
+
+#BOITE_OUVRIR{'Aide mémoire - données','info'}
+	<h2>Dans les squelettes de SPIP</h2>
+	<h3>Récupérer la latitude d'après une adresse IP</h3>
+	<div class="spip_code">
+		[(&#35;GET{ip}|geoIP_exist|table_valeur{7})]
+	</div>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'Aide mémoire - PHP','info'}
+	<h2>Dans les fichiers PHP</h2>
+	<h3>Récupérer le code pays d'après une adresse IP</h3>
+	<div class="spip_code">
+		geoip_informations($ip);
+	</div>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'Aide mémoire - GeoIP version2','info'}
+	<h2>Liste du tableau de résultat</h2>
+	<ul>
+		<li><:geoip:aide_codeiso:></li>
+		<li><:geoip:aide_codepays:></li>
+		<li><:geoip:aide_codeisopays:></li>
+		<li><:geoip:aide_region:></li>
+		<li><:geoip:aide_isoregion:></li>
+		<li><:geoip:aide_ville:></li>
+		<li><:geoip:aide_codepostal:></li>
+		<li><:geoip:aide_latitude:></li>
+		<li><:geoip:aide_longitude:></li>
+		<li><:geoip:aide_timezone:></li>
+	</ul>
+#BOITE_FERMER
 
 <i><:geoip:avertissement:></i>

@@ -37,5 +37,5 @@ function geoIP_exist($ip) {
 
 	$resultat = geoip_informations($ip);
 
-	return $resultat[1];
+	return $resultat;
 }

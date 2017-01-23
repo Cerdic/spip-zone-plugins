@@ -11,6 +11,10 @@ Database version 2 : http://geolite.maxmind.com/download/geoip/database/GeoLite2
 
 ## Changelog
 
+### Version 2.0.3
+
+- Mise à jour de la librairie Maxmind et un peu de documentation
+
 ### Version 2.0.2
 
 - Petite coquille de doc et pétouille de code

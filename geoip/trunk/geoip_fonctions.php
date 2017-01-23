@@ -14,9 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
- * Trouver le code pays par rapport à une IP
+ * Récupérer les informations de géolocalisation d'une IP
  *
- * @staticvar string $gi
  * @param string $ip
  * @return string
  */
@@ -54,17 +53,18 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 
 		$resultat_iso = $record->country->isoCode; // 'US'
 		$resultat_pays = $record->country->name; // 'United States'
-		$resultat_country_iso_nom = $record->country->names['zh-CN']; // '美国'
-
-		$resultat_region = $record->mostSpecificSubdivision->name . "\n"; // 'Minnesota'
+		$resultat_country_iso_nom = $record->country->names[strtolower($record->country->isoCode)]; // '美国'
+		
+		$resultat_region = $record->mostSpecificSubdivision->name; // 'Minnesota'
 		$resultat_iso_region = $record->mostSpecificSubdivision->isoCode; // 'MN'
 
 		$resultat_ville = $record->city->name; // 'Minneapolis'
 
-		$resultat_codepostal =$record->postal->code; // '55455'
+		$resultat_codepostal = $record->postal->code; // '55455'
 
 		$resultat_lat = $record->location->latitude; // 44.9733
 		$resultat_lon = $record->location->longitude; // -93.2323
+		$resultat_tz = $record->location->timeZone; // Europe/Paris
 
 		$resultat = array(
 			$resultat_iso,
@@ -75,7 +75,8 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 			$resultat_ville,
 			$resultat_codepostal,
 			$resultat_lat,
-			$resultat_lon);
+			$resultat_lon,
+			$resultat_tz);
 	}
 	
 	return $resultat;
