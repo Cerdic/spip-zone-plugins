@@ -1,11 +1,11 @@
-<traduction module="persona" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/persona/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/persona?lang_cible=de" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+<traduction module="persona" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/persona/trunk/lang/" reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/persona?lang_cible=de" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/persona?lang_cible=en" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
-		<traducteur nom="raphael" lien="http://trad.spip.net/auteur/raphael-7042" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/persona?lang_cible=en" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
+		<traducteur nom="raphael" lien="https://trad.spip.net/auteur/raphael-7042" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/persona?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/persona?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
