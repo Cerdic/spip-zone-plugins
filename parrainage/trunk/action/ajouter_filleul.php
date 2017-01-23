@@ -23,7 +23,7 @@ function action_ajouter_filleul_dist($arg=null) {
 	$id_filleul = 0;
 	
 	// Ensuite on fait quelque chose seulement si on a bien id_parrain et au moins l'email
-	if ($id_parrain > 0 AND $email = _request('email')){
+	if ($id_parrain > 0 AND $email = email_valide(_request('email'))){
 		$id_filleul = ajouter_filleul($id_parrain, $email,_request('nom'));
 	}
 
