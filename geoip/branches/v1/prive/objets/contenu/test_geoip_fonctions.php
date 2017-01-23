@@ -23,6 +23,7 @@ include_spip('geoip_fonctions');
 function recuperer_ip_local() {
 
 	$ip = $GLOBALS['ip'];
+
 	return $ip;
 
 }

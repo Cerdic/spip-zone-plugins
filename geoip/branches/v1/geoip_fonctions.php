@@ -40,8 +40,8 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 			$gi = geoip_open(find_in_path('lib/GeoIP.dat'), GEOIP_STANDARD);
 		}
 
-
 	}
+	$resultat = $fonction($gi, $ip);
 
 	return $resultat;
 
