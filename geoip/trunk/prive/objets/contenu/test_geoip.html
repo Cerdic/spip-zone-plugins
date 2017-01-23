@@ -2,8 +2,6 @@
 
 [(#SET{ip, [(#REM|recuperer_ip_local)]})]
 
-<h2><:geoip:titre_geoip:></h2>
-
 <p><:geoip:ip_code_pays{ip=#GET{ip}}:> : <strong>[(#GET{ip}|geoIP_exist)]</strong></p>
 
 <i><:geoip:avertissement:></i>
