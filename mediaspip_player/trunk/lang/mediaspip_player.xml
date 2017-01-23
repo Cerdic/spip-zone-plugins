@@ -1,14 +1,14 @@
-<traduction module="mediaspip_player" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mediaspip_player/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=en" total="58" traduits="54" relire="0" modifs="0" nouveaux="4" pourcent="93.10">
-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+<traduction module="mediaspip_player" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/mediaspip_player/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=en" total="58" traduits="54" relire="0" modifs="0" nouveaux="4" pourcent="93.10">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=es" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=es" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="eu" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=eu" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Ixab" lien="http://trad.spip.net/auteur/ixab" />
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=eu" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ixab" lien="https://trad.spip.net/auteur/ixab" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=fr" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/mediaspip_player?lang_cible=fr" total="58" traduits="58" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
