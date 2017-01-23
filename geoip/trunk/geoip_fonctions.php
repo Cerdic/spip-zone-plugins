@@ -77,5 +77,6 @@ function geoip_informations($ip, $fonction = 'geoip_country_code_by_addr') {
 			$resultat_lat,
 			$resultat_lon);
 	}
+	
 	return $resultat;
 }

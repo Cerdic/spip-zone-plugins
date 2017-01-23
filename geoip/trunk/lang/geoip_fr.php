@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// A
-	'avertissement' => '* Si vous avez installé la librairie depuis le module apache sur votre serveur, nous vous invitons à vérifier la version installé sur celui-ci.',
+	'avertissement' => '* Si vous avez installé la librairie depuis le module apache sur votre serveur, nous vous invitons à vérifier la version installée sur celui-ci.',
 	// I
 	'ip_code_pays' => 'L\'ip @ip@ a le code pays :',
 
 	// L
-	'libapache_installe' => 'La librairie Apache est installé, vous n\'avez rien à faire.',
+	'libapache_installe' => 'La librairie Apache est installée, vous n\'avez rien à faire.',
 
 	// T
-	'titre_geoip' => 'Test de GeoIP',
+	'titre_geoip' => 'Test de GeoIP'
 
 );
