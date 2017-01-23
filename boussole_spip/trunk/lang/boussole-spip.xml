@@ -1,30 +1,30 @@
-<traduction module="boussole-spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
-		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
-		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
-		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+<traduction module="boussole-spip" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
+		<traducteur nom="jack31" lien="https://trad.spip.net/auteur/jack31" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="eo" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="88" traduits="53" relire="0" modifs="3" nouveaux="32" pourcent="60.23">
-		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
-		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+	<langue code="eo" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="88" traduits="53" relire="0" modifs="3" nouveaux="32" pourcent="60.23">
+		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="Matthieu Marcillaud" lien="https://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=es" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
-		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
-		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=es" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
+		<traducteur nom="dani" lien="https://trad.spip.net/auteur/dani" />
+		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=fr" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=oc_ni_mis" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
-		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=oc_ni_mis" total="88" traduits="88" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk" total="88" traduits="84" relire="0" modifs="1" nouveaux="3" pourcent="95.45">
-		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/boussole-spip?lang_cible=sk" total="88" traduits="84" relire="0" modifs="1" nouveaux="3" pourcent="95.45">
+		<traducteur nom="Eric Lupinacci" lien="https://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
 </traduction>
