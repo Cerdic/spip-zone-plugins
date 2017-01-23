@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias_dereferencer"
 	categorie="statistique"
-	version="1.2.6"
+	version="1.2.7"
 	etat="test"
 	compatibilite="[3.0.9;3.1.*]"
 	logo="prive/themes/spip/images/medias_dereferencer-64.png"
