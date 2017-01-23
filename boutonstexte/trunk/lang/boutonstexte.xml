@@ -1,31 +1,31 @@
-<traduction module="boutonstexte" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boutonstexte/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=ar" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+<traduction module="boutonstexte" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boutonstexte/trunk/lang/" reference="fr">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=ar" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=de" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=de" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=en" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=en" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=es" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=es" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fa" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fa" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fr" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=fr" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=it" total="15" traduits="5" relire="0" modifs="0" nouveaux="10" pourcent="33.33">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	<langue code="it" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=it" total="15" traduits="5" relire="0" modifs="0" nouveaux="10" pourcent="33.33">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=nl" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=nl" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 	</langue>
-	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=oc_ni_mis" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	<langue code="oc_ni_mis" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=oc_ni_mis" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="https://trad.spip.net/auteur/sylvain" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/boutonstexte?lang_cible=sk" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/boutonstexte?lang_cible=sk" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
