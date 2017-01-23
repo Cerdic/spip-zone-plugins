@@ -13,6 +13,8 @@ function exec_indexer_bidules() {
 
 	foreach(indexer_lister_blocs_indexation(10000000) as $alias => $ids) {
 		foreach ($ids as $id) {
+		
+			echo "<h1>$alias</h1>";
 
 			if (is_array($stats[$source])) {
 				$u = $stats[$source][$alias];
@@ -22,9 +24,13 @@ function exec_indexer_bidules() {
 			$total = sql_fetsel('COUNT(*) AS c', 'spip_'.table_objet($alias));
 
 			if (is_array($total) AND $count = intval($total['c'])) {
-				echo "<p>Nombre total d'$alias dans la base: ".$count."; indexés: ".($u[0]+$u[1])." ; ".(0.1*floor($u[1]/($u[0]+$u[1])*1000))."% à jour.</p>";
+				echo "<p>Nombre total d'$alias dans la base: ".$count."; indexés: ".($u[0]+$u[1]);
+				if ($u[0]+$u[1] > 0) echo " ; ".(0.1*floor($u[1]/($u[0]+$u[1])*1000))."% à jour";
+				echo ".</p>";
 			} else {
-				echo "<p>Nombre d'$alias indexés dans sphinx: ".($u[0]+$u[1])." dont ".(0.1*floor($u[1]/($u[0]+$u[1])*1000))."% à jour.</p>";
+				echo "<p>Nombre d'$alias indexés dans sphinx: ".($u[0]+$u[1]);
+				if ($u[0]+$u[1] > 0) echo " ; ".(0.1*floor($u[1]/($u[0]+$u[1])*1000))."% à jour";
+				echo ".</p>";
 			}
 		}
 	}
