@@ -4,8 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function formulaires_proprietaire_infos_idem_charger_dist($who)
-{
+function formulaires_proprietaire_infos_idem_charger_dist($who) {
 	$conf = spip_proprio_recuperer_config();
 	$valeurs = array(
 		'who' => $who,
@@ -15,15 +14,13 @@ function formulaires_proprietaire_infos_idem_charger_dist($who)
 	return $valeurs;
 }
 
-function formulaires_proprietaire_infos_idem_verifier_dist($who)
-{
+function formulaires_proprietaire_infos_idem_verifier_dist($who) {
 	$erreurs = array();
 
 	return $erreurs;
 }
 
-function formulaires_proprietaire_infos_idem_traiter_dist($who)
-{
+function formulaires_proprietaire_infos_idem_traiter_dist($who) {
 	$datas = array(
 		$who.'_idem' => ($oui = _request('idem') and $oui != 'non') ? $oui : '',
 	);

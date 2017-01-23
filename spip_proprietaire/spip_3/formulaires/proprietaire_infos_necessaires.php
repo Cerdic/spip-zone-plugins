@@ -4,9 +4,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function formulaires_proprietaire_infos_necessaires_charger_dist($who = 'proprietaire')
-{
+function formulaires_proprietaire_infos_necessaires_charger_dist($who = 'proprietaire') {
 	$conf = spip_proprio_recuperer_config();
+
 	$valeurs = array(
 		'who' => $who,
 		'nom' => (isset($conf[$who.'_nom']) ? $conf[$who.'_nom'] : $GLOBALS['meta']['nom_site']),
@@ -22,10 +22,10 @@ function formulaires_proprietaire_infos_necessaires_charger_dist($who = 'proprie
 	return $valeurs;
 }
 
-function formulaires_proprietaire_infos_necessaires_verifier_dist($who = 'proprietaire')
-{
+function formulaires_proprietaire_infos_necessaires_verifier_dist($who = 'proprietaire') {
 	$erreurs = array();
 	include_spip('inc/filtres');
+
 	if (!$nom = _request('nom')) {
 		$erreurs['nom'] = _T('info_obligatoire');
 	}
@@ -51,8 +51,7 @@ function formulaires_proprietaire_infos_necessaires_verifier_dist($who = 'propri
 	return $erreurs;
 }
 
-function formulaires_proprietaire_infos_necessaires_traiter_dist($who = 'proprietaire')
-{
+function formulaires_proprietaire_infos_necessaires_traiter_dist($who = 'proprietaire') {
 	$datas = array(
 		$who.'_nom' => _request('nom'),
 		$who.'_libelle' => _request('libelle'),

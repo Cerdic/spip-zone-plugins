@@ -4,15 +4,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function balise_PROPRIETAIRE($p)
-{
+function balise_PROPRIETAIRE($p) {
 	spip_proprio_charger_toutes_les_langues();
 
 	return calculer_balise_dynamique($p, 'PROPRIETAIRE', array());
 }
 
-function balise_PROPRIETAIRE_dyn($wich = '', $who = '', $separator = '<br />')
-{
+function balise_PROPRIETAIRE_dyn($wich = '', $who = '', $separator = '<br />') {
 	include_spip('inc/presentation');
 	$conf = spip_proprio_recuperer_config();
 	static $spip_proprio_no_config = false;

@@ -3,11 +3,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
+
 include_spip('inc/spip_proprio_insee');
 
-function formulaires_proprietaire_infos_legales_charger_dist($who = 'proprietaire', $mode = false)
-{
+function formulaires_proprietaire_infos_legales_charger_dist($who = 'proprietaire', $mode = false) {
 	$conf = spip_proprio_recuperer_config();
+
 	$valeurs = array(
 		'who' => $who,
 		'legal_forme' => isset($conf[$who.'_legal_forme']) ? $conf[$who.'_legal_forme'] : '',
@@ -24,6 +25,7 @@ function formulaires_proprietaire_infos_legales_charger_dist($who = 'proprietair
 		'capital_social' => isset($conf[$who.'_capital_social']) ? $conf[$who.'_capital_social'] : '',
 		'proposer_enregistrement' => 'libre',
 	);
+
 	// Cas particulier si numero FR
 	if (($mode && $mode == 'auto_fr') || (isset($conf[$who.'_enregistrement_siren']) and $conf[$who.'_enregistrement_siren'] != '')) {
 		$valeurs['proposer_enregistrement'] = 'auto_fr';
@@ -32,9 +34,9 @@ function formulaires_proprietaire_infos_legales_charger_dist($who = 'proprietair
 	return $valeurs;
 }
 
-function formulaires_proprietaire_infos_legales_verifier_dist($who = 'proprietaire')
-{
+function formulaires_proprietaire_infos_legales_verifier_dist($who = 'proprietaire') {
 	$erreurs = array();
+
 	if ($siren = _request('enregistrement_siren')) {
 		if (!siren_valide($siren)) {
 			$erreurs['enregistrement_siren'] = _T('spipproprio:num_invalide');
@@ -52,8 +54,7 @@ function formulaires_proprietaire_infos_legales_verifier_dist($who = 'proprietai
 	return $erreurs;
 }
 
-function formulaires_proprietaire_infos_legales_traiter_dist($who = 'proprietaire')
-{
+function formulaires_proprietaire_infos_legales_traiter_dist($who = 'proprietaire') {
 	$messages = array();
 
 	// Recuperation des valeurs
@@ -80,9 +81,9 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who = 'proprietair
 			$datas[$who.'_enregistrement_siret'],
 			$datas[$who.'_enregistrement_tvaintra']
 		) = completer_insee(
-			$datas[$who.'_enregistrement_siren'],
-			$datas[$who.'_enregistrement_siret'],
-			$datas[$who.'_enregistrement_tva_nonapplicable']
+						$datas[$who.'_enregistrement_siren'],
+						$datas[$who.'_enregistrement_siret'],
+						$datas[$who.'_enregistrement_tva_nonapplicable']
 		);
 		$datas[$who.'_enregistrement_numero'] = '';
 		$redirect = generer_url_ecrire('spip_proprio', 'page='.$who);

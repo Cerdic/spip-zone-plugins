@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // FONCTIONS
 // ---------------------------------------
 
-function make_google_map_proprietaire($conf, $who = 'proprietaire')
-{
+function make_google_map_proprietaire($conf, $who = 'proprietaire') {
 	$str = $google_str = '';
 	if (isset($conf[$who.'_adresse_rue']) and strlen($conf[$who.'_adresse_rue'])) {
 		$str .= str_replace(array(',', ';', '.', ':', '/'), '', strip_tags($conf[$who.'_adresse_rue']));
@@ -39,8 +38,7 @@ function make_google_map_proprietaire($conf, $who = 'proprietaire')
 // CONFIG
 // ---------------------------------------
 
-function spip_proprio_enregistrer_config($args)
-{
+function spip_proprio_enregistrer_config($args) {
 	if (!is_array($args)) {
 		return;
 	}
@@ -54,8 +52,7 @@ function spip_proprio_enregistrer_config($args)
 	return true;
 }
 
-function spip_proprio_recuperer_config($str = '')
-{
+function spip_proprio_recuperer_config($str = '') {
 	if (!isset($GLOBALS['meta'][_META_SPIP_PROPRIO])) {
 		return;
 	}
@@ -74,8 +71,7 @@ function spip_proprio_recuperer_config($str = '')
 /**
  * Choix par defaut des options de presentation pour les formulaires.
  */
-function spip_proprio_form_config()
-{
+function spip_proprio_form_config() {
 	global $spip_ecran, $spip_lang, $spip_display;
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == 'large') ? 8 : 5;
@@ -94,8 +90,7 @@ function spip_proprio_form_config()
 /**
  * Fonction de gestion des textes proprietaire.
  */
-function spip_proprio_proprietaire_texte($str = '', $args = array(), $langdef = 'fr')
-{
+function spip_proprio_proprietaire_texte($str = '', $args = array(), $langdef = 'fr') {
 	$souvenir = $GLOBALS['spip_lang'];
 	$GLOBALS['spip_lang'] = $langdef;
 
@@ -123,8 +118,7 @@ function spip_proprio_proprietaire_texte($str = '', $args = array(), $langdef = 
  * Creation de tous les fichiers de langue 'proprietaire_XX'
  * pour toutes les langues utilisees en partie publique.
  */
-function spip_proprio_charger_toutes_les_langues()
-{
+function spip_proprio_charger_toutes_les_langues() {
 	// on force le chargement de proprietaire_XX si present
 	// pour toutes les langues utilisees en partie publique
 	$langues_du_site = array('fr');
@@ -141,8 +135,7 @@ function spip_proprio_charger_toutes_les_langues()
 	return;
 }
 
-function textes_proprietaire($array = false, $lang = null)
-{
+function textes_proprietaire($array = false, $lang = null) {
 	if (is_null($lang)) {
 		$lang = $GLOBALS['spip_lang'];
 	}
@@ -164,8 +157,7 @@ function textes_proprietaire($array = false, $lang = null)
 	return false;
 }
 
-function charger_textes_proprietaire($bloc = true)
-{
+function charger_textes_proprietaire($bloc = true) {
 	include_spip('inc/presentation');
 	include_spip('inc/texte');
 	$div = '';
@@ -195,8 +187,7 @@ function charger_textes_proprietaire($bloc = true)
 	return $div;
 }
 
-function traiter_textes_proprietaire($raccourci, $lang = 'fr')
-{
+function traiter_textes_proprietaire($raccourci, $lang = 'fr') {
 	include_spip('inc/texte');
 	$valeur = _request('value');
 	$array_langue = textes_proprietaire(true);
@@ -213,8 +204,7 @@ function traiter_textes_proprietaire($raccourci, $lang = 'fr')
 	return false;
 }
 
-function creer_fichier_textes_proprietaire($array_langue, $lang = 'fr')
-{
+function creer_fichier_textes_proprietaire($array_langue, $lang = 'fr') {
 	$file = 'proprietaire_'.$lang;
 	$globale = 'i18n_proprietaire_'.$lang;
 	if (!file_exists(find_in_path('lang/'.$file))) {
@@ -222,16 +212,13 @@ function creer_fichier_textes_proprietaire($array_langue, $lang = 'fr')
 		$contenu = var_export($array_langue, true);
 		$contenu_final = '<'."?php\n\$GLOBALS['$globale'] = $contenu;\n?".'>';
 		$dir = _DIR_PLUGIN_SPIP_PROPRIO;
-		$a = ecrire_fichier(
-			($dir[strlen($dir) - 1] == '/' ? substr($dir, 0, -1) : $dir).'/lang/'.$file.'.php', $contenu_final
-		);
+		$a = ecrire_fichier(($dir[strlen($dir) - 1] == '/' ? substr($dir, 0, -1) : $dir) . '/lang/' . $file . '.php', $contenu_final);
 
 		return $a;
 	}
 }
 
-function transformer_raccourci($str)
-{
+function transformer_raccourci($str) {
 	include_spip('spip_proprio_fonctions');
 
 	return spip_proprio_formater_nom_fichier($str);
@@ -252,8 +239,7 @@ $spip_proprio_usual_delimiters = array(' ', '-', '_', '/', '.','#','\\','@');
  *
  * @return boolean/string Le délimiteur trouvé (en plus grand nombre), FALSE sinon
  */
-function spip_proprio_usual_delimiters($str)
-{
+function spip_proprio_usual_delimiters($str) {
 	global $spip_proprio_usual_delimiters;
 	$delim = false;
 	foreach ($spip_proprio_usual_delimiters as $delimiter) {
@@ -270,8 +256,7 @@ function spip_proprio_usual_delimiters($str)
  *
  * @todo decouper le nom du fichier pour enlever l'extension avant traitement, puis la remettre avant retour
  */
-function spip_proprio_formater_nom_fichier($string, $spacer = '_')
-{
+function spip_proprio_formater_nom_fichier($string, $spacer = '_') {
 	$search = array('@[éèêëÊË]@i','@[àâäÂÄ]@i','@[îïÎÏ]@i','@[ûùüÛÜ]@i','@[ôöÔÖ]@i','@[ç]@i','@[^a-zA-Z0-9]@');
 	$replace = array('e','a','i','u','o','c',' ');
 	$string = preg_replace($search, $replace, $string);
@@ -284,8 +269,7 @@ function spip_proprio_formater_nom_fichier($string, $spacer = '_')
 	return $string;
 }
 
-function spip_proprio_recuperer_extension($str)
-{
+function spip_proprio_recuperer_extension($str) {
 	return substr(strrchr($str, '.'), 1);
 }
 
@@ -293,8 +277,7 @@ function spip_proprio_recuperer_extension($str)
  * Revue pour autoriser les numéros avec la mention "appel surtaxé"
  * Basiquement, on ne re-formate que les chiffres, et on laisse '(+33)' le cas échéant.
  */
-function spip_proprio_formater_telephone($str)
-{
+function spip_proprio_formater_telephone($str) {
 
 //echo "entrée dans la fct avec '$str'<br />";
 
@@ -321,8 +304,7 @@ function spip_proprio_formater_telephone($str)
  *
  * @param bool $strip_spaces Doit-on retirer les espaces (non pour la fonction 'spip_proprio_formater_telephone' | oui par defaut)
  */
-function spip_proprio_isoler_telephone($str, $strip_spaces = true)
-{
+function spip_proprio_isoler_telephone($str, $strip_spaces = true) {
 	$str = str_replace(array('(33)', '(+33)', '+33'), ' ', $str);
 	// isoler les chiffres en laissant les espaces internes
 	$str = trim($str, ' ');
@@ -359,8 +341,7 @@ exit;
  * Fonction mettant une apostrophe si nécessaire
  * Cette fonction ne traite pas les cas particuliers (nombreux ...) ni les 'h' muet.
  */
-function apostrophe($str = '', $article = '', $exception = false)
-{
+function apostrophe($str = '', $article = '', $exception = false) {
 	// On retourne direct si non FR
 	if ($GLOBALS['spip_ang'] != 'fr') {
 		return $article.' '.$str;
@@ -379,8 +360,7 @@ function apostrophe($str = '', $article = '', $exception = false)
 	return $article.' '.$str;
 }
 
-function modifier_guillemets($str)
-{
+function modifier_guillemets($str) {
 	return str_replace("'", '"', $str);
 }
 
@@ -389,8 +369,7 @@ function modifier_guillemets($str)
 // ----------------------
 
 // Avec l'aide inestimable de Paris-Bayrouth (http://www.paris-beyrouth.org/)
-function spip_proprio_image_alpha($img, $alpha = '', $src = false)
-{
+function spip_proprio_image_alpha($img, $alpha = '', $src = false) {
 	if (!$alpha or !strlen($alpha) or $alpha == '0') {
 		return $img;
 	}

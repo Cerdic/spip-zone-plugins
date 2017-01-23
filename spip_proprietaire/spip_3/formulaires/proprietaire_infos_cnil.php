@@ -4,8 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function formulaires_proprietaire_infos_cnil_charger_dist()
-{
+function formulaires_proprietaire_infos_cnil_charger_dist() {
 	$valeurs = array(
 		'date_cnil' => '',
 		'numero_cnil' => '',
@@ -18,15 +17,13 @@ function formulaires_proprietaire_infos_cnil_charger_dist()
 	return $valeurs;
 }
 
-function formulaires_proprietaire_infos_cnil_verifier_dist()
-{
+function formulaires_proprietaire_infos_cnil_verifier_dist() {
 	$erreurs = array();
 
 	return $erreurs;
 }
 
-function formulaires_proprietaire_infos_cnil_traiter_dist()
-{
+function formulaires_proprietaire_infos_cnil_traiter_dist() {
 	$datas = array(
 		'date_cnil' => _request('date_cnil'),
 		'numero_cnil' => _request('numero_cnil'),

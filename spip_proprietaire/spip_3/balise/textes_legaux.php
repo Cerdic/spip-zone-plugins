@@ -4,15 +4,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-function balise_TEXTES_LEGAUX($p)
-{
+function balise_TEXTES_LEGAUX($p) {
 	spip_proprio_charger_toutes_les_langues();
 
 	return calculer_balise_dynamique($p, 'TEXTES_LEGAUX', array());
 }
 
-function balise_TEXTES_LEGAUX_dyn($chaine = '', $who = '', $separator = '<br />')
-{
+function balise_TEXTES_LEGAUX_dyn($chaine = '', $who = '', $separator = '<br />') {
 	include_spip('inc/presentation');
 	include_spip('spip_proprio_fonctions');
 	$conf = spip_proprio_recuperer_config();

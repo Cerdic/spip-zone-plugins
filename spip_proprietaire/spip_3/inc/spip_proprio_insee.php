@@ -17,8 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param numeric $_num          Le numéro SIREN à compléter (8 ou 9 chiffres)
  * @param bool    $remplacer_cle Doit-on renvoyer un SIREN valide (en remplaçant la clé le cas échéant) ?
  */
-function calculer_siren($_num = null, $remplacer_cle = false)
-{
+function calculer_siren($_num = null, $remplacer_cle = false) {
 	if (is_null($_num)) {
 		return 0;
 	}
@@ -41,8 +40,7 @@ function calculer_siren($_num = null, $remplacer_cle = false)
  *
  * @param numeric $num Le numéro à vérifier (8 ou 9 chiffres)
  */
-function siren_valide($num = null)
-{
+function siren_valide($num = null) {
 	if (is_null($num)) {
 		return 0;
 	}
@@ -62,8 +60,7 @@ function siren_valide($num = null)
  * @param numeric $_num_siret    Le numéro SIRET (1 à 5 chiffres)
  * @param bool    $remplacer_cle Doit-on renvoyer un SIREN valide (en remplaçant la clé le cas échéant) ?
  */
-function calculer_siret($_num_siren = null, $_num_siret = null, $remplacer_cle = false)
-{
+function calculer_siret($_num_siren = null, $_num_siret = null, $remplacer_cle = false) {
 	if (is_null($_num_siren) || is_null($_num_siret)) {
 		return 0;
 	}
@@ -90,8 +87,7 @@ function calculer_siret($_num_siren = null, $_num_siret = null, $remplacer_cle =
  * @param numeric $num_siren Le numéro SIREN (8 ou 9 chiffres) | Si unique argument, considéré comme SIRET complet
  * @param numeric $num_siret Le numéro SIRET (1 à 5 chiffres)
  */
-function siret_valide($num_siren = null, $num_siret = null)
-{
+function siret_valide($num_siren = null, $num_siret = null) {
 	if (is_null($num_siren)) {
 		return false;
 	}
@@ -122,8 +118,7 @@ function siret_valide($num_siren = null, $num_siret = null)
  *
  * @return string L'identifiant de TVA qui préfixe le numéro SIREN
  */
-function calculer_tva_intracom($_num_siren = null)
-{
+function calculer_tva_intracom($_num_siren = null) {
 	if (is_null($_num_siren)) {
 		return 0;
 	}
@@ -139,8 +134,7 @@ function calculer_tva_intracom($_num_siren = null)
  *
  * @param numeric $num_siren Le numéro TVA
  */
-function tva_intracom_valide($_num_tva = null)
-{
+function tva_intracom_valide($_num_tva = null) {
 	if (is_null($_num_tva)) {
 		return 0;
 	}
@@ -161,8 +155,7 @@ function tva_intracom_valide($_num_tva = null)
  *
  * @return numeric La clé calculée
  */
-function cle_de_luhn($_num = null)
-{
+function cle_de_luhn($_num = null) {
 	if (is_null($_num)) {
 		return 0;
 	}
@@ -194,8 +187,7 @@ function cle_de_luhn($_num = null)
  *
  * @return bool OK si le dernier chiffre est bien la clé de Luhn de la suite précédente
  */
-function luhn_valide($num = null)
-{
+function luhn_valide($num = null) {
 	if (is_null($num)) {
 		return 0;
 	}
@@ -261,8 +253,7 @@ exit;
  *
  * @return array( SIREN , SIRET , TVA )
  */
-function completer_insee($num_siren = null, $num_siret = null, $notva = false, $forcer_siret = false)
-{
+function completer_insee($num_siren = null, $num_siret = null, $notva = false, $forcer_siret = false) {
 	if (is_null($num_siren)) {
 		return false;
 	}

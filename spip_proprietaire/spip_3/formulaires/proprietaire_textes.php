@@ -5,16 +5,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 include_spip('inc/texte');
 
-function formulaires_proprietaire_textes_charger_dist($raccourci = '', $config_fonc = 'spip_proprio_form_config')
-{
+function formulaires_proprietaire_textes_charger_dist($raccourci = '', $config_fonc = 'spip_proprio_form_config') {
 	$valeurs = array();
 	spip_proprio_proprietaire_texte();
 	$tableau = textes_proprietaire(true);
+
 	foreach ($tableau as $nom => $val) {
 		if ($nom == $raccourci) {
 			$valeurs = array('raccourci' => $raccourci, 'value' => $val);
 		}
 	}
+
 	if ($config_fonc) {
 		$valeurs['config'] = $config = $config_fonc();
 	}
@@ -22,9 +23,9 @@ function formulaires_proprietaire_textes_charger_dist($raccourci = '', $config_f
 	return $valeurs;
 }
 
-function formulaires_proprietaire_textes_verifier_dist()
-{
+function formulaires_proprietaire_textes_verifier_dist() {
 	$erreurs = array();
+
 	if (!$raccourci = _request('raccourci')) {
 		$erreurs['raccourci'] = _T('info_obligatoire');
 	}
@@ -35,8 +36,7 @@ function formulaires_proprietaire_textes_verifier_dist()
 	return $erreurs;
 }
 
-function formulaires_proprietaire_textes_traiter_dist($raccourci = '')
-{
+function formulaires_proprietaire_textes_traiter_dist($raccourci = '') {
 	$message = array();
 	include_spip('spip_proprio_fonctions');
 	$raccourci_nouveau = spip_proprio_formater_nom_fichier(_request('raccourci'));

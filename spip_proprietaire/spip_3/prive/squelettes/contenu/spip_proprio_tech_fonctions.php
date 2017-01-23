@@ -5,8 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 //ini_set('display_errors', 1);error_reporting(E_ALL);
 
-function spip_proprio_exporter()
-{
+function spip_proprio_exporter() {
 	$ok_export = _request('do_proprio_export');
 	if (empty($ok_export) || $ok_export != 'oui') {
 		return false;
@@ -47,8 +46,7 @@ function spip_proprio_exporter()
 	return _T('spipproprio:erreur_export');
 }
 
-function spip_proprio_importer()
-{
+function spip_proprio_importer() {
 	$ok_import = _request('do_proprio_import');
 	if (empty($ok_import) || $ok_import != 'oui') {
 		return false;
@@ -91,8 +89,7 @@ function spip_proprio_importer()
 	}
 }
 
-function liste_proprio_dump()
-{
+function liste_proprio_dump() {
 	$str = '';
 	$liste_dump = preg_files(_DIR_DUMP, '\.php\.gz?$', 50, false);
 	if ($liste_dump && count($liste_dump)) {
