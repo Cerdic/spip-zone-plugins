@@ -1,15 +1,15 @@
-<traduction module="produits" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/produits?lang_cible=en" total="41" traduits="39" relire="1" modifs="1" nouveaux="0" pourcent="95.12">
-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
-		<traducteur nom="cerdic" lien="http://trad.spip.net/auteur/cerdic" />
-		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
+<traduction module="produits" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/produits/trunk/lang/" reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/produits?lang_cible=en" total="41" traduits="39" relire="1" modifs="1" nouveaux="0" pourcent="95.12">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="cerdic" lien="https://trad.spip.net/auteur/cerdic" />
+		<traducteur nom="RastaPopoulos" lien="https://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/produits?lang_cible=fa" total="41" traduits="20" relire="0" modifs="1" nouveaux="20" pourcent="48.78">
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	<langue code="fa" url="https://trad.spip.net/tradlang_module/produits?lang_cible=fa" total="41" traduits="20" relire="0" modifs="1" nouveaux="20" pourcent="48.78">
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/produits?lang_cible=fr" total="41" traduits="41" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/produits?lang_cible=fr" total="41" traduits="41" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/produits?lang_cible=sk" total="41" traduits="31" relire="0" modifs="2" nouveaux="8" pourcent="75.61">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/produits?lang_cible=sk" total="41" traduits="31" relire="0" modifs="2" nouveaux="8" pourcent="75.61">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
