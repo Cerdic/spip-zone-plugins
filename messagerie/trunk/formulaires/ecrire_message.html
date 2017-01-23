@@ -41,10 +41,6 @@ parametre : url d'action ]
  class='erreur_message'>(#GET{erreur})</span>]<div class="editer editer_descriptif"><textarea name='#GET{name}' id='#GET{name}' rows='8' class='inserer_barre_edition inserer_previsualisation'>#ENV*{#GET{name}}</textarea></div>
 </li>
 
-[(#REM) Piege a robots spammeurs ]
-<li class='antispam' style='display:none;'><label for="nobotnobot-#ID"><:antispam_champ_vide:></label>
-<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" />
-</li>
 </ul></fieldset>
 
 <p class='boutons'><input type="submit" name='valider' class="submit" value="[(#ENV{form}|concat{':label_envoyer'}|_T)]" /></p>

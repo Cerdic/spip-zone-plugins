@@ -10,6 +10,9 @@
 $GLOBALS['spip_pipeline']['messagerie_destiner'] = '';
 $GLOBALS['spip_pipeline']['messagerie_signer_message'] = '';
 
+// évite le spam
+$GLOBALS['formulaires_no_spam'][] = 'ecrire_message';
+
 /**
  * Verifier l'autorisation de choisir le destinataire d'un message
  *
