@@ -1,7 +1,7 @@
-<traduction module="pmb" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip-pmb/trunk/lang/" reference="fr">
-	<langue code="eu" url="http://trad.spip.net/tradlang_module/pmb?lang_cible=eu" total="126" traduits="126" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Ixab" lien="http://trad.spip.net/auteur/ixab" />
+<traduction module="pmb" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip-pmb/trunk/lang/" reference="fr">
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/pmb?lang_cible=eu" total="126" traduits="126" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ixab" lien="https://trad.spip.net/auteur/ixab" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/pmb?lang_cible=fr" total="126" traduits="126" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/pmb?lang_cible=fr" total="126" traduits="126" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
