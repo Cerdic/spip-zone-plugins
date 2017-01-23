@@ -1,32 +1,32 @@
-<traduction module="licence" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="52" traduits="21" relire="0" modifs="11" nouveaux="20" pourcent="40.38">
+<traduction module="licence" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
+	<langue code="ca" url="https://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="52" traduits="21" relire="0" modifs="11" nouveaux="20" pourcent="40.38">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	<langue code="de" url="https://trad.spip.net/tradlang_module/licence?lang_cible=de" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
+		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
-		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
-		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
-		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/licence?lang_cible=en" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
+		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Davood Hossein" lien="https://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Mark" lien="https://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/licence?lang_cible=es" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
-		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	<langue code="es" url="https://trad.spip.net/tradlang_module/licence?lang_cible=es" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
+		<traducteur nom="Raquel S. Bujaldón" lien="https://trad.spip.net/auteur/raquel-s-bujaldon" />
+		<traducteur nom="severo" lien="https://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="eu" url="http://trad.spip.net/tradlang_module/licence?lang_cible=eu" total="52" traduits="46" relire="0" modifs="1" nouveaux="5" pourcent="88.46">
-		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
+	<langue code="eu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=eu" total="52" traduits="46" relire="0" modifs="1" nouveaux="5" pourcent="88.46">
+		<traducteur nom="otalazt" lien="https://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr" total="52" traduits="52" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
-		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
-		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/licence?lang_cible=fr_tu" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
+		<traducteur nom="beatnick" lien="https://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/licence?lang_cible=it" total="52" traduits="21" relire="0" modifs="11" nouveaux="20" pourcent="40.38">
+	<langue code="it" url="https://trad.spip.net/tradlang_module/licence?lang_cible=it" total="52" traduits="21" relire="0" modifs="11" nouveaux="20" pourcent="40.38">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/licence?lang_cible=sk" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	<langue code="sk" url="https://trad.spip.net/tradlang_module/licence?lang_cible=sk" total="52" traduits="49" relire="0" modifs="0" nouveaux="3" pourcent="94.23">
+		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
