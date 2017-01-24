@@ -48,30 +48,6 @@ $gis_layers = array (
 		'nom' => 'Bing Aerial',
 		'layer' => 'L.BingLayer("'.$config['api_key_bing'].'")'
 	),
-	'thunderforest_opencyclemap' => array(
-		'nom' => 'Thunderforest OpenCycleMap',
-		'layer' => 'L.tileLayer.provider("Thunderforest.OpenCycleMap")'
-	),
-	'thunderforest_transport' => array(
-		'nom' => 'Thunderforest Transport',
-		'layer' => 'L.tileLayer.provider("Thunderforest.Transport")'
-	),
-	'thunderforest_landscape' => array(
-		'nom' => 'Thunderforest Landscape',
-		'layer' => 'L.tileLayer.provider("Thunderforest.Landscape")'
-	),
-	'thunderforest_outdoors' => array(
-		'nom' => 'Thunderforest Outdoors',
-		'layer' => 'L.tileLayer.provider("Thunderforest.Outdoors")'
-	),
-	'thunderforest_spinalmap' => array(
-		'nom' => 'Thunderforest SpinalMap',
-		'layer' => 'L.tileLayer.provider("Thunderforest.SpinalMap")'
-	),
-	'thunderforest_pioneer' => array(
-		'nom' => 'Thunderforest Pioneer',
-		'layer' => 'L.tileLayer.provider("Thunderforest.Pioneer")'
-	),
 	'opentopomap' => array(
 		'nom' => 'OpenTopoMap',
 		'layer' => 'L.tileLayer.provider("OpenTopoMap")'
