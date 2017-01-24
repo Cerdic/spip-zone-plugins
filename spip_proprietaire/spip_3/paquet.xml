@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_proprio"
 	categorie="communication"
-	version="1.70.1"
+	version="1.70.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
@@ -21,6 +21,8 @@
 	<traduire module="texteslegaux" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="insert_head" inclure="spip_proprio_pipelines.php" />
+
+	<utilise nom="mailcrypt" compatibilite="[2.4.4;]" />
 
 	<menu nom="spip_proprio" titre="spipproprio:spip_proprio" parent="menu_configuration" position="-1" icone="images/idisk-dir-14.png" />
 

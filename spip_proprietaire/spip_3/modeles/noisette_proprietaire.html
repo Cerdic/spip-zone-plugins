@@ -1,4 +1,7 @@
 [(#SET{proprietaire,#CONFIG{spip_proprietaire}})]
+
+[(#SET{proprietaire_email, [<a href='mailto:[(#GET{proprietaire}|table_valeur{proprietaire_mail})]' title="<:spipproprio:coordonnees_mailto_ttl:>" class="spip_mail email">(#GET*{proprietaire}|table_valeur{proprietaire_mail})</a>[(#ENV*{separator})]]})]
+
 <div>
 	<b class="vcard">
 	[(#ENV{logo}|=={oui}|oui)[(#LOGO_SITE_SPIP||image_reduire{200,100})]]
@@ -6,7 +9,7 @@
 	<a href='#URL_SITE_SPIP' class="url">#URL_SITE_SPIP</a>[(#ENV*{separator})]
 	[<span class="tel"><abbr class="type" title="voice"><:spipproprio:coordonnees_tel:></abbr>&nbsp;<span class="value">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telephone}|spip_proprio_formater_telephone)</span>[(#ENV*{separator})]</span>]
 	[<span class="tel"><abbr class="type" title="fax"><:spipproprio:coordonnees_fax:></abbr>&nbsp;<span class="value">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_telecopie})</span>[(#ENV*{separator})]</span>]
-	[<a href='mailto:[(#GET*{proprietaire}|table_valeur{proprietaire_mail})]' title="<:spipproprio:coordonnees_mailto_ttl:>" class="spip_mail email">(#GET*{proprietaire}|table_valeur{proprietaire_mail})</a>[(#ENV*{separator})]]
+	[(#GET{proprietaire_email}|propre)]
 	<span class="adr">
 	[<span class="street-address">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_rue})</span>[(#ENV*{separator})]]
 	[<span class="postal-code">(#GET*{proprietaire}|table_valeur{proprietaire_adresse_code_postal})</span>]
