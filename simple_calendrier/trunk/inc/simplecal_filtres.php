@@ -9,6 +9,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// fonction depreciée
+function simplecal_affdates($date_debut, $date_fin, $horaire='non'){
+	return affdate_debut_fin($date_debut, $date_fin, $horaire);	
+}
+
 function simplecal_afftexteref($type, $id_objet){
 	$texte = "";
 	if ($type && $id_objet){

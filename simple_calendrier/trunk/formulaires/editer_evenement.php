@@ -85,7 +85,13 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
 	
 	// Autres verifications
 	// ---------------------
-
+	
+	// La date de fin est obligatoire et à minima égale à celle de début (Jamais de 0000-00-00 en base).
+	// Si l'utilisateur la laisse vide, on la renseigne pour lui.
+	// => Permet d'éviter les crash à la validation et l'affichage de 01/01/1970...
+	if (!_request('date_fin')) {
+		set_request('date_fin', _request('date_debut'));
+	}
 
 	//Recuperer les champs date_xx et heure_xx, verifier leur coherence et les reformater afin de tester plus bas la chronologie
 	include_spip('inc/date_gestion');

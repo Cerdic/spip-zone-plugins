@@ -89,6 +89,9 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_alter',"TABLE spip_evenements ADD `horaire` VARCHAR(3) NOT NULL DEFAULT 'oui' AFTER date_fin"),
 		array('simplecal_meta_1_5')
 	);
+	$maj['2.1.4'] = array(
+		array('sql_update', 'spip_evenements', array('date_fin' => 'date_debut'), "date_fin = '0000-00-00 00:00:00'"),
+	);
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
