@@ -28,7 +28,8 @@ function clil_upgrade($nom_meta_base_version, $version_cible) {
 							array('remplir_table_clil_themes', array()),
 							array('sql_alter',"TABLE `spip_articles` ADD `code_clil` int(11) NOT NULL DEFAULT '0' AFTER `url_site`" ),
 							);
-
+	$maj['1.0.1'] = array(array('sql_alter',"TABLE `spip_livres` ADD `code_clil` int(11) NOT NULL DEFAULT '0' AFTER `hauteur`" ));
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
