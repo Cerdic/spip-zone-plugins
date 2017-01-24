@@ -39,7 +39,7 @@ function critere_a_venir_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Critere {a_venir} 
+ * Critere {du_mois} 
  *
  * @param unknown_type $idb
  * @param unknown_type $boucles
