@@ -33,7 +33,7 @@ function courtcircuit_url_redirection($id_rubrique) {
 			if (strlen($composition))
 				return '';
 		} elseif ($config['composition_rubrique']=='non') {
-			if (strlen($composition) and defined('_COURTCIRCUIT_EXCLURE_COMPOSITIONS') and in_array($composition,_COURTCIRCUIT_EXCLURE_COMPOSITIONS)) {
+			if (strlen($composition) and isset($config['compositions_exclure']) and strlen($config['compositions_exclure']) and in_array($composition,explode(',', $config['compositions_exclure']))) {
 				return '';
 			}
 		}

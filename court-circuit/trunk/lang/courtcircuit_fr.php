@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit' => 'Court-circuit',
 
 	// E
+	'explication_compositions_exclure' => 'Liste des compositions à ignorer lors du traitement des redirections (séparées par une virgule).',
 	'explication_liens_rubriques' => 'Modifier l’URL des rubriques redirigées directement dans les squelettes ?',
 	'explication_regles' => 'Les différentes règles ci-dessous sont testées dans cet ordre. Si aucune règle ne définit une redirection, alors la rubrique sera affichée normalement.',
 	'explication_restreindre_langue' => 'Si cette option est activée, seuls les articles de la langue active seront pris en compte pour le calcul de la redirection. Cette option n’est utile que si vos rubriques contiennent des articles de différentes langues. Ne pas utiliser si votre site est organisé en secteurs de langue ou si vous utilisez des champs multi.',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_article_accueil' => 'Article d’accueil de la rubrique',
+	'label_compositions_exclure' => 'Compositions à exclure',
 	'label_composition_rubrique' => 'Rubrique avec composition',
 	'label_exceptions' => 'Exceptions',
 	'label_liens' => 'URL des rubriques',

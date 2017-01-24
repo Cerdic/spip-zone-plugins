@@ -24,13 +24,26 @@
 			<li class="editer editer_composition_rubrique[ (#ENV**{erreurs}|table_valeur{composition_rubrique}|oui)erreur]">
 				<label><:courtcircuit:label_composition_rubrique:></label>
 				<div class="choix">
-					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_oui" value="oui" [(#ENV{composition_rubrique,oui}|=={oui}|oui) checked="checked"] />
+					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_oui" value="oui" [(#ENV{composition_rubrique,oui}|=={oui}|oui) checked="checked"]
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('.editer_composition_rubrique').next('.editer').hide('fast');"
+					/>
 					<label for='composition_rubrique_oui'><:courtcircuit:item_jamais_rediriger:></label>
 				</div>
 				<div class="choix">
-					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_non" value="non" [(#ENV{composition_rubrique,oui}|=={non}|oui) checked="checked"] />
+					<input type="radio" name="composition_rubrique" class="radio" id="composition_rubrique_non" value="non" [(#ENV{composition_rubrique,oui}|=={non}|oui) checked="checked"]
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('.editer_composition_rubrique').next('.editer').show('fast');"
+					/>
 					<label for='composition_rubrique_non'><:courtcircuit:item_appliquer_redirections:></label>
 				</div>
+			</li>
+			#SET{name,compositions_exclure}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{composition_rubrique,oui}|=={oui}|oui)style="display:none;"]>
+				<label for="#GET{name}"><:courtcircuit:label_compositions_exclure:></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<p class="explication"><:courtcircuit:explication_compositions_exclure:></p>
+				<input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
 			</li>]
 		</ul>
 		
