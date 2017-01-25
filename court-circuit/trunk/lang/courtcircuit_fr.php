@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_article_accueil' => 'Article d’accueil de la rubrique',
-	'label_compositions_exclure' => 'Compositions à exclure',
 	'label_composition_rubrique' => 'Rubrique avec composition',
+	'label_compositions_exclure' => 'Compositions à exclure',
 	'label_exceptions' => 'Exceptions',
 	'label_liens' => 'URL des rubriques',
 	'label_liens_rubriques' => 'Agir sur la balise #URL_RUBRIQUE ?',
