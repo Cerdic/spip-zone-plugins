@@ -1,7 +1,6 @@
 #BOITE_OUVRIR{'',simple}
-
 	[(#ENV{editer_selection}|=={oui}|oui)
-		<h3 class="titrem"><a href="[(#ENV{id_selection}|generer_url_entite{selection})]">#INFO_TITRE{selection,#ENV{id_selection}}</a></h3>
+		<h3 class="titrem"><a href="[(#ENV{id_selection}|generer_url_entite{selection})]"><:info_numero_abbreviation:>[(#ENV{id_selection})][(#ENV{vu}|=={oui}|oui)[(#CHEMIN_IMAGE{vu-16-10.png}|balise_img)]] - [(#INFO_TITRE{selection,#ENV{id_selection}}|sinon{<:ecrire:info_sans_titre:>})]</a></h3>
 	]
 	<div class="liste-items" id="editer_selections_contenus-#ID_SELECTION">
 		<BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}{par rang}>

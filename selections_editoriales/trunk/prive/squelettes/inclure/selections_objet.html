@@ -4,8 +4,8 @@
 
 <B_selections>
 <h2 class="titrem"><:selection:titre_selections:></h2>
-<BOUCLE_selections(SELECTIONS){objet}{id_objet}{par num titre,titre}>
-<INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus, id_selection, editer_selection=oui, env, ajax=selection#ID_SELECTION}>
+<BOUCLE_selections(SELECTIONS spip_selections_liens){objet}{id_objet}{par num titre,titre}>
+<INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus, id_selection, editer_selection=oui, vu=#VU, env, ajax=selection#ID_SELECTION}>
 </BOUCLE_selections>
 </B_selections>
 
