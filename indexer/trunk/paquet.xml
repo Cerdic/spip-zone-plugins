@@ -1,7 +1,7 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="2.10.1"
+	version="2.11.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
@@ -12,6 +12,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur>Rastapopoulos</auteur>
 	<auteur>Fil</auteur>
+	<auteur>Maieul Rouquette</auteur>
 
 	<licence>GNU/GPL</licence>
 
