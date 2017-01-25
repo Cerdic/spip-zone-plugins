@@ -20,7 +20,10 @@ function inserer_modeles_lister_formulaires_modeles() {
 		if (count($liste)) {
 			include_spip('inc/yaml');
 			foreach ($liste as $formulaire => $chemin) {
-				$liste_formulaires_modeles[$formulaire] = yaml_charger_inclusions(yaml_decode_file($chemin));
+				$yaml_data = yaml_charger_inclusions(yaml_decode_file($chemin));
+				if (is_array($yaml_data)) {
+					$liste_formulaires_modeles[$formulaire] = yaml_charger_inclusions(yaml_decode_file($chemin));
+				}
 			}
 		}
 	}
