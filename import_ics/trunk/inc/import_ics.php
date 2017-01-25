@@ -168,6 +168,7 @@ function evenement_ical_to_sql($objet_evenement,$decalage){
 			// Est-ce que l'evt dure toute la journée?
 			if ($end_all_day and $start_all_day){
 				$horaire = "non";
+				$date_fin = "DATE_SUB('$date_fin', INTERVAL 1 DAY)";// Si un évènement dure toute la journée du premie août, le flux ICAL indique pour DTEND le 2 août (cf http://www.faqs.org/rfcs/rfc2445.html). Par contre le plugin agenda lui dit simplement "evenement du 1er aout au 1er aout, sans horaire". D'où le fait qu'on décale $date_fin par rapport aux flux originel. 
 			}
 			else{
 				$horaire = "oui";
