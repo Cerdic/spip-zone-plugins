@@ -42,13 +42,14 @@ function simplecal_declarer_tables_objets_sql($tables){
 		"titre"             => "varchar(255) NOT NULL",
 		"date_debut"        => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 		"date_fin"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+		"horaire"           => "varchar(3) NOT NULL DEFAULT 'oui'",
 		"lieu"              => "varchar(255) NOT NULL",
 		"descriptif"        => "text NOT NULL",
 		"texte"             => "text NOT NULL",
 		"lien_titre"        => "varchar(255) NOT NULL",
 		"lien_url"          => "varchar(255) NOT NULL",
 		"date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // creation ou publication (selon statut) 
-		"statut"            => "varchar(8) NOT NULL",
+		"statut"            => "varchar(20)  DEFAULT '0' NOT NULL",
 		"lang"              => "varchar(10) NOT NULL DEFAULT ''",
 		"langue_choisie"    => "varchar(3) NULL DEFAULT 'non'", 
 		"maj"               => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
@@ -57,6 +58,7 @@ function simplecal_declarer_tables_objets_sql($tables){
 	// champs qui possedent les cles
 	$key = array(
 		"PRIMARY KEY"     => "id_evenement",
+		"KEY statut"      => "statut", 
 		"KEY id_secteur"  => "id_secteur",
 		"KEY id_rubrique" => "id_rubrique",
 		"KEY id_trad"     => "id_trad",
@@ -104,7 +106,7 @@ function simplecal_declarer_tables_objets_sql($tables){
 		'join' => $join,
 		'titre' => 'titre, lang',
 		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
-		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
+		'champs_editables' => array('titre', 'date_debut', 'date_fin', 'horaire', 'lieu', 'descriptif', 'texte', 'lien_titre', 'lien_url', 'type', 'id_objet'),
 		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin', 'lien_titre', 'lien_url', 'jointure_auteurs'),
 		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
 		'rechercher_jointures' => array('document' => array('titre' => 2, 'descriptif' => 1)),

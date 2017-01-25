@@ -84,6 +84,14 @@ function simplecal_upgrade($nom_meta_base_version,$version_cible){
 	$maj['2.1.2'] = array(
 		array('simplecal_check_2_1_2'),
 	);
+	$maj['2.1.3'] = array(
+		array('sql_alter',"TABLE spip_evenements CHANGE `statut` `statut` VARCHAR(20) NOT NULL DEFAULT '0'"),
+		array('sql_alter',"TABLE spip_evenements ADD `horaire` VARCHAR(3) NOT NULL DEFAULT 'oui' AFTER date_fin"),
+		array('simplecal_meta_1_5')
+	);
+	$maj['2.1.4'] = array(
+		array('sql_update', 'spip_evenements', array('date_fin' => 'date_debut'), "date_fin = '0000-00-00 00:00:00'"),
+	);
 	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -98,6 +106,10 @@ function simplecal_meta_1_4(){
 	ecrire_meta('simplecal_texte', 'oui');
 	ecrire_meta('simplecal_lieu', 'oui');
 	ecrire_meta('simplecal_lien', 'non');
+}
+
+function simplecal_meta_1_5(){
+	ecrire_meta('simplecal_horaire', 'non');
 }
 
 function simplecal_meta_2_0_0(){

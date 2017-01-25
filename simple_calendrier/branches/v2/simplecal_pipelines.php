@@ -12,8 +12,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/simplecal_utils');
 
-
-
 // Pipeline. Entete des pages de l'espace prive
 function simplecal_header_prive($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
@@ -132,21 +130,22 @@ function simplecal_affiche_milieu($flux) {
 // Nombre d'evenements de l'auteur / de la rubrique
 function simplecal_boite_infos($flux){
 	$type = $flux['args']['type'];
-	$id = intval($flux['args']['id']);
+
+	if (in_array($type, array('auteur', 'rubrique'))) {
+		$id = intval($flux['args']['id']);
 	
-	if ($type == 'auteur'){
-		$n_evt = sql_countsel("spip_auteurs_liens", "id_auteur=".$id." and objet='evenement'");
-	} 
-	if ($type == 'rubrique'){
-		$n_evt = sql_countsel("spip_evenements", "statut='publie' and id_rubrique=".$id);
-	}
-	
-	if (in_array($type, array("auteur", "rubrique"))){
+		if ($type == 'auteur') {
+			$n_evt = sql_countsel('spip_auteurs_liens', "id_auteur=$id AND objet='evenement'");
+		} 
+		if ($type == 'rubrique') {
+			$n_evt = sql_countsel('spip_evenements', "statut='publie' AND id_rubrique=$id");
+		}
+		
 		if (($pos = strpos($flux['data'],'<!--nb_elements-->'))!==FALSE) {
 			if ($n_evt > 0){
 				$aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_nb_evenements').'</div>';
+				$flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
 			}
-			$flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
 		}
 	}
 	
@@ -156,6 +155,7 @@ function simplecal_boite_infos($flux){
 
 function simplecal_configurer_liste_metas($metas) {
 	$metas['simplecal_autorisation_redac'] = 'non'; // [oui, non]
+	$metas['simplecal_horaire'] = 'non'; // [non, secteur, partout]
 	$metas['simplecal_rubrique'] = 'non'; // [non, secteur, partout]
 	$metas['simplecal_refobj'] = 'non';   // [oui, non]
 	$metas['simplecal_descriptif'] = 'oui';   // [oui, non]
@@ -206,44 +206,6 @@ function simplecal_compter_contributions_auteur($flux){
 		$contributions = singulier_ou_pluriel($cpt,'simplecal:info_1_evenement','simplecal:info_nb_evenements');
 		$flux['data'][] = $contributions;
 	}
-	return $flux;
-}
-
-
-// Definir le squelette evenement.html pour les urls de type spip.php?evenement123
-// http://programmer.spip.org/declarer_url_objets
-/*function simplecal_declarer_url_objets($array){
-	$array[] = 'evenement';
-	return $array;
-}*/
-
-
-// cf. urls/propres.php
-function simplecal_propres_creer_chaine_url($flux){
-	/*
-	$flux = Array ( 
-		[data] => evenement2 
-		[objet] => Array ( 
-			[url] => evenement2 
-			[date] => 2010-07-25 22:53:04 
-			[date_debut] => 2010-05-09 00:00:00 
-			[date_fin] => 2010-05-10 00:00:00 
-			[lieu] => 
-			{titre] =>
-			[lang] => 
-			[type] => evenement 
-			[id_objet] => 2 ) 
-	) 
-	*/
-	
-	$type = $flux['objet']['type'];
-	if ($type == 'evenement'){
-		$date_debut = $flux['objet']['date_debut'];
-		$titre = substr($date_debut, 8, 2)."-".substr($date_debut, 5, 2)."-".substr($date_debut, 0, 4);
-		$titre = "evenement-du-".$titre;
-	}
-	
-	$flux['objet']['data'] = $titre;
 	return $flux;
 }
 
@@ -305,17 +267,6 @@ function simplecal_optimiser_base_disparus($flux){
 	return $flux;
 }
 
-// pipeline : permettre la recherche dans les evenements
-function simplecal_rechercher_liste_des_champs($tables){
-	// Prendre en compte certains champs
-	$tables['evenements']['titre'] = 3;
-	$tables['evenements']['lieu'] = 3;
-	$tables['evenements']['descriptif'] = 3;
-	$tables['evenements']['texte'] = 3;
-
-	return $tables;
-}
-
 // pipeline : compatibilité plugin corbeille.
 function simplecal_corbeille_table_infos($param){
     $param["evenements"] = array(
@@ -336,8 +287,5 @@ function simplecal_jqueryui_plugins($scripts){
    
 	return $scripts;
 } 
-
-
-
 
 ?>

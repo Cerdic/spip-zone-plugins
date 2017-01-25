@@ -12,16 +12,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/simplecal_utils');
+include_spip('inc/config');
 
-function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_evenement_identifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return serialize(array(intval($id_evenement),$lier_trad));
+}
+
+function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// Recupere automatiquement les champs de la table (entre autres...)
 	$valeurs = formulaires_editer_objet_charger('evenement',$id_evenement,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 
 	// fixer la date par defaut en cas de creation d'evenement
-	if (!intval($id_evenement)) {
+	if (!is_numeric($id_evenement)) {
 		$t=time();
-		$valeurs['date_debut'] = date('Y-m-d H:i:00', $t);
-		$valeurs['date_fin'] = date('Y-m-d H:i:00', $t+86400);
+		$valeurs['date_debut'] = date('Y-m-d 00:00:00', $t);
+		$valeurs['date_fin'] = date('Y-m-d 00:00:00', $t);
 		$valeurs['horaire'] = 'oui';
 	}
 	
@@ -41,7 +50,7 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
 	}
 	
 	// Appel en creation via portlet
-	if (_request("new")=='oui'){
+	if (_request('new')=='oui'){
 		$type = trim(_request("type"));
 		$id_objet = trim(_request("id_objet"));
 		if ($type and $id_objet){
@@ -49,33 +58,26 @@ function formulaires_editer_evenement_charger_dist($id_evenement='new', $id_rubr
 			$valeurs["ref"] = $type.$id_objet;
 		}
 	}
-	
 	return $valeurs;
 }
 
-/**
- * Identifier le formulaire en faisant abstraction des parametres qui
- * ne representent pas l'objet edite
- */
-function formulaires_editer_evenement_identifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	return serialize(array(intval($id_evenement),$lier_trad));
-}
+
 
 
 // Choix par defaut des options de presentation
-function evenements_edit_config($row)
-{
-	global $spip_ecran, $spip_lang, $spip_display;
+// function evenements_edit_config($row)
+// {
+// 	global $spip_ecran, $spip_lang, $spip_display;
 
-	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
-	$config['langue'] = $spip_lang;
+// 	$config = $GLOBALS['meta'];
+// 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+// 	$config['langue'] = $spip_lang;
 
-	$config['restreint'] = ($row['statut'] == 'publie');
-	return $config;
-}
+// 	$config['restreint'] = ($row['statut'] == 'publie');
+// 	return $config;
+// }
 
-function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// Verifications automatiques
 	// ---------------------------
 	$champs_obligatoires = array('titre', 'date_debut');
@@ -84,32 +86,37 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
 	// Autres verifications
 	// ---------------------
 	
-	include_spip('inc/date_gestion');
+	// La date de fin est obligatoire et à minima égale à celle de début (Jamais de 0000-00-00 en base).
+	// Si l'utilisateur la laisse vide, on la renseigne pour lui.
+	// => Permet d'éviter les crash à la validation et l'affichage de 01/01/1970...
+	if (!_request('date_fin')) {
+		set_request('date_fin', _request('date_debut'));
+	}
 
-	$horaire = lire_config('simplecal_horaire') == 'non' ? false : true;
+	//Recuperer les champs date_xx et heure_xx, verifier leur coherence et les reformater afin de tester plus bas la chronologie
+	include_spip('inc/date_gestion');
+	$config_horaire = lire_config('simplecal_horaire');
+	if ($config_horaire == 'non') {
+		$get_horaire = false;
+	}
+	else {
+		$get_horaire = _request('horaire') == 'non' ? false : true;
+	}
+
 	if (empty($erreurs['date_debut'])) {
-		$date_debut = verifier_corriger_date_saisie('debut', $horaire, $erreurs);
+		$date_debut = verifier_corriger_date_saisie('debut', $get_horaire, $erreurs);
 	}
 	if (empty($erreurs['date_fin'])) {
-		$date_fin = verifier_corriger_date_saisie('fin', $horaire, $erreurs);
+		$date_fin = verifier_corriger_date_saisie('fin', $get_horaire, $erreurs);
 	}
 
 	// Chronologie : Date de fin >= Date de debut (si pas d'autres erreurs sur les dates)
-	if (!$erreurs['date_debut'] && !$erreurs['date_fin']){
-		if ($date_debut && $date_fin){
-			$date_debut_sql = date_saisie2sql($date_debut);
-			$date_fin_sql = date_saisie2sql($date_fin);
-			
-			if ($date_debut_sql != '0000-00-00 00:00:00' && $date_fin_sql != '0000-00-00 00:00:00'){
-				if ($date_fin_sql < $date_debut_sql){
-					$erreurs['date_fin'] = _T('simplecal:validation_date_chronologie');
-				}
-			}
-		}
+	if ($date_debut and $date_fin and $date_fin < $date_debut) {
+		$erreurs['date_fin'] = _T('simplecal:validation_date_chronologie');
 	}
 	
-	$config = $config_fonc($row);
-	if ($config['simplecal_refobj'] == 'oui'){
+	$refobj = lire_meta('simplecal_refobj');
+	if ($refobj == 'oui'){
 		// Ref saisie correctement ?
 		$ref = trim(_request('ref'));
 		if ($ref){
@@ -129,26 +136,30 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_rub
 		}
 	}
 	
+	set_request('horaire', _request('horaire') == 'non' ? 'non' : 'oui');
 	return $erreurs;
 }
 
-function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	
-	// On remet les dates au format SQL ('14/08/2011' => '14/08/2011 00:00:00')
-	// set_request("date_debut", date_saisie2sql(_request("date_debut")));
-	// set_request("date_fin", date_saisie2sql(_request("date_fin")));
+function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	set_request('horaire', _request('horaire') == 'non' ? 'non' : 'oui');
 
+	$config_horaire = lire_config('simplecal_horaire');
+	if ($config_horaire == 'non') {
+		$get_horaire = false;
+	}
+	else {
+		$get_horaire = _request('horaire') == 'non' ? false : true;
+	}
 	include_spip('inc/date_gestion');
-	$erreurs = array();
-	$date_debut = verifier_corriger_date_saisie('debut', true, $erreurs);
-	$date_fin = verifier_corriger_date_saisie('fin', true, $erreurs);
+	$date_debut = verifier_corriger_date_saisie('debut', $get_horaire, $erreurs);
+	$date_fin = verifier_corriger_date_saisie('fin', $get_horaire, $erreurs);
 	set_request('date_debut', date('Y-m-d H:i:s', $date_debut));
 	set_request('date_fin', date('Y-m-d H:i:s', $date_fin));
 	
 	
 	// On reconstitue les champs 'type' et 'id_objet' a partir du champ 'ref'
-	$config = $config_fonc($row);
-	if ($config['simplecal_refobj'] == 'oui'){
+	$refobj = lire_meta('simplecal_refobj');
+	if ($refobj == 'oui'){
 		$ref = trim(_request('ref'));
 		if ($ref){
 			
@@ -163,7 +174,6 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubr
 		// Option desactive => on ne fait rien !
 		// => Option desactivable sans risque de perdre les infos enregistrees lorsqu'elle etait active.
 	}
-	
 	
 	return formulaires_editer_objet_traiter('evenement',$id_evenement,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
