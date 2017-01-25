@@ -1,8 +1,6 @@
 <ul id=messages>
 <h1>Test SPHINX</h1>
 
-[(#FORMULAIRE_RECHERCHE{#SELF})]
-
 #SET{tri,''}
 #SET{sens_tri,''}
 
@@ -21,7 +19,9 @@
 	</div>
 </aside>
 
+[(#FORMULAIRE_RECHERCHE{#SELF})]
 
+[(#REM)  Rappels des éléments de la requête  ]
 <B_filtres>
 <h4>Filtres:</h4>
 <BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année,stars,Aucune etoile,objet,Aucun objet}}>[
@@ -93,7 +93,7 @@
 
 	[<div class="pagination">(#PAGINATION)</div>]
 
-	[(#INCLURE{fond=liste/sphinx_facettes,facets=#SPHINX_FACETS,env})]
+	[(#INCLURE{fond=aside/sphinx,facets=#SPHINX_FACETS,env})]
 	[(#INCLURE{fond=liste/sphinx_metas,meta=#SPHINX_META,env})]
 
 </B_recherche_sphinx>
