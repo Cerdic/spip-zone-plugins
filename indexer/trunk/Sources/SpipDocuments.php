@@ -180,6 +180,9 @@ class SpipDocuments implements SourceInterface {
 			// S'il y a un champ de date de rédaction et qu'il est utilisé, on prend en priorité à celle de publication
 			if (isset($contenu['date_redac']) and substr($contenu['date_redac'],0,4) != '0000') {
 				$doc['date'] = $contenu['date_redac'];
+				$doc['properties']['date_redac'] = $contenu['date_redac'];
+				$doc['properties']['annee_redac'] = substr($contenu['date_redac'],0,4);
+				$doc['properties']['date'] = $contenu['date'];
 			}
 			// Sinon on utilise la date de publication déclarée par l'API
 			elseif ($champ_date = objet_info($this->objet, 'date')) {
@@ -208,7 +211,34 @@ class SpipDocuments implements SourceInterface {
 			if (isset($contenu['lang'])) {
 				$doc['properties']['lang'] = $contenu['lang'];
 			}
-			
+			// S'il y a des liens de traduction
+			if (isset($contenu['id_trad'])
+			and intval($contenu['id_trad']) > 0) {
+				$trads = sql_allfetsel(
+					'*',
+					$this->table_objet, // la table de l'objet défini
+					array(
+						'id_trad = ' . $contenu['id_trad'],
+						$this->cle_objet . '!= ' . $id,
+					), // Where
+					'', // Gr By
+					'', // Or By
+					'' // Limit
+				);
+				if (count($trads) > 0) {
+					$doc['properties']['trad'] = array();
+					$doc['properties']['tradlangs'] = array();
+					foreach($trads as $trad) {
+						$doc['properties']['trad'][] = array(
+							'title' => $trad[$champ_titre],
+							'uri' => generer_url_entite_absolue($trad[$this->cle_objet], $this->objet),
+							'lang' => $trad['lang'],
+						);
+						$doc['properties']['tradlangs'][] = $trad['lang'];
+					}
+				}
+			}
+
 			// S'il y a un statut
 			if (isset($contenu['statut'])) {
 				$doc['properties']['statut'] = $contenu['statut'];

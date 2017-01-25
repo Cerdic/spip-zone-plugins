@@ -10,6 +10,15 @@
     texte_vide=Aucun auteur
 })]
 
+<B_groupes_mots>
+<h3>Groupes de mots</h3>
+<BOUCLE_groupes_mots(GROUPES_MOTS)>[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    critere=properties.tagsbygroups.#ID_GROUPE,
+    cle=tag,
+    titre=#TITRE,
+    texte_vide=Aucun mot
+})]</BOUCLE_groupes_mots>
+
 
 [(#INCLURE{fond=inclure/liste_sphinx_facette, env,
     critere=properties.tags,
@@ -17,6 +26,7 @@
     titre=Liste des tags,
     texte_vide=Aucun tag
 })]
+
 
 [(#INCLURE{fond=inclure/liste_sphinx_facette, env,
     critere=YEAR(date),

@@ -24,8 +24,22 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 	)) {
 		$infos['properties']['mots']['ids_hierarchie'] = array();
 		$infos['properties']['mots']['titres_hierarchie'] = array();
-		
+		$infos['properties']['tagsbygroups'] = array();
+
 		foreach ($mots as $mot) {
+			$id_groupe = $mot['id_groupe'];
+			// old school: recupere le titre du groupe de mots…
+			$type = trim(supprimer_numero($mot['type']));
+			// ajouter le mot à la propriété tagsbygroups.ID_GROUPE
+			// et tagsbytype.NOMDUGROUPE
+			// créer le tableau de groupe le cas échéant
+			if (!array_key_exists($id_groupe,$infos['properties']['tagsbygroups'])){
+				$infos['properties']['tagsbygroups'][$id_groupe] = array();
+				$infos['properties']['tagsbytype'][$type] = array();
+			}
+			$infos['properties']['tagsbygroups'][$id_groupe][] = trim(supprimer_numero($mot['titre'])); 
+			$infos['properties']['tagsbytype'][$type][] = trim(supprimer_numero($mot['titre'])); 
+
 			$id_mot = intval($mot['id_mot']);
 			$infos['properties']['mots']['titres'][$id_mot] = trim(supprimer_numero($mot['titre']));
 			$infos['properties']['mots']['ids'][] = $id_mot;
@@ -42,11 +56,11 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 				$select[] = 'id_parent';
 			}
 			
-			while ($f = sql_fetsel(
+			while ($id_parent && ($f = sql_fetsel(
 				$select,
 				'spip_groupes_mots',
 				'id_groupe = '.$id_parent
-			)){
+			))) {
 				$titre_actuel = trim(supprimer_numero($f['titre']));
 				
 				// On ajoute ce parent suivant au début du tableau
@@ -74,7 +88,7 @@ function indexer_jointure_mots_dist($objet, $id_objet, $infos) {
 		$infos['properties']['tags'] = array_values($infos['properties']['mots']['titres']);
 		
 		// On ajoute le nom des mots en fulltext à la fin
-		$infos['content'] .= "\n\n".join(' / ', $infos['properties']['mots']['titres']);
+		$infos['content'] .= "\n\n".join(' / ', array_map('extraire_multi', $infos['properties']['mots']['titres']));
 	}
 	return $infos;
 }
