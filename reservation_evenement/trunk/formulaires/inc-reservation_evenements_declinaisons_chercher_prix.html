@@ -6,12 +6,21 @@
 		prix=#PRIX,
 		id_objet_prix=#ENV{id_objet_prix}} />
 </BOUCLE_prix>
-	<BOUCLE_prix_art (PRIX_OBJETS){id_objet=#ID_ARTICLE}{objet=article}>
+	<BOUCLE_prix_evenement_source(PRIX_OBJETS){id_objet=#ID_EVENEMENT_SOURCE}{objet=evenement}>
 		<INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons_prix,
-			id_evenement=#ENV{id_evenement_original,#ENV{id_evenement}},
+			id_evenement=#ID_EVENEMENT_SOURCE,
 			id_declinaison,
 			id_prix_objet,
 			prix=#PRIX,
 			id_objet_prix=#ENV{id_objet_prix}} />
-	</BOUCLE_prix_art>
+	</BOUCLE_prix_evenement_source>
+		<BOUCLE_prix_art (PRIX_OBJETS){id_objet=#ID_ARTICLE}{objet=article}>
+			<INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons_prix,
+				id_evenement=#ENV{id_evenement_original,#ENV{id_evenement}},
+				id_declinaison,
+				id_prix_objet,
+				prix=#PRIX,
+				id_objet_prix=#ENV{id_objet_prix}} />
+		</BOUCLE_prix_art>
+		<//B_prix_evenement_source>
 <//B_prix>

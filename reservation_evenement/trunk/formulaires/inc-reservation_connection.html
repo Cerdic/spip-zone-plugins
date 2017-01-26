@@ -1,6 +1,7 @@
+#SET{id_auteur,#SESSION{id_auteur}}
 <ul class="identifiants">
 	<li>
-	[(#ENV{id_auteur}|>{0}|non)
+	[(#GET{id_auteur}|>{0}|non)
 		<div class="login">
 			#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
 			[(#SET{titre_login,<:lien_connecter:>})]
@@ -8,7 +9,7 @@
 		</div>
 	]
 
-	<BOUCLE_connecte(CONDITION){si #ENV{id_auteur}|>{0}}>
+	<BOUCLE_connecte(CONDITION){si #GET{id_auteur}|>{0}}>
 		<ul class="donnes_personnels">
 			<li class="nom">
 				<span class="label"><:reservation:label_nom:></span> <span>#NOM</span>
@@ -28,20 +29,20 @@
 			datas=#ARRAY{1,<:reservation:ok:>}
 			})]
 	</BOUCLE_connecte>
-	
+
 	<ul class="fieldset donnees_auteur">
 		[(#SAISIE{input,#ENV{name_nom,nom},label=<:reservation:label_nom:>,obligatoire=oui})]
-	
+
 		[(#SAISIE{input,#ENV{name_email,email},label=<:reservation:label_email:>,obligatoire=oui})]
-	
+
 		[(#REM)Géneration des champs extras auteurs]
-	
+
 		#GENERER_SAISIES{#ENV{champs_extras_auteurs}}
 	</ul>
 
 
 	<!--extra_connection1-->
-[(#ENV{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
+[(#GET{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
 	<ul class="fieldset">
 		[(#ENV{enregistrement_inscrit_obligatoire}|!={on}|?{
 			[(#SAISIE{checkbox,enregistrer,
@@ -84,7 +85,7 @@
 		if (!$('input[name="enregistrer[]"]').is(':checked')) {
 			$('.block_mp').hide();
 		}
-		
+
 		$('input[name="enregistrer[]"]').click(function() {
 			$('.block_mp').slideToggle('slow', function() {
 			});
@@ -93,7 +94,7 @@
 	</script>
 </BOUCLE_condition>
 
-<BOUCLE_condition2(CONDITION){si #ENV{id_auteur}|>{0}|oui}>
+<BOUCLE_condition2(CONDITION){si #GET{id_auteur}|>{0}|oui}>
 	<script type="text/javascript">
 		/*<![CDATA[*/
 			if (!$('input[name="modifier_donnees_auteur[]"]').is(':checked')) {
@@ -102,13 +103,11 @@
 			else {
 				$('.donnes_personnels').hide();
 			}
-			
+
 			$('input[name="modifier_donnees_auteur[]"]').click(function() {
-				$('.donnees_auteur').slideToggle('slow', function() {
-				});
-				$('.donnes_personnels').slideToggle('slow', function() {
-				});
+				$('.donnees_auteur').slideToggle('slow', function() {});
+				$('.donnes_personnels').slideToggle('slow', function() {});
 			});
-			/*]]>*/
-			</script>
+		/*]]>*/
+	</script>
 </BOUCLE_condition2>

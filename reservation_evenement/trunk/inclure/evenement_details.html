@@ -3,7 +3,7 @@
 	#SET{prix,#PRIX}
 </BOUCLE_prix>
 [(#REM) ou à l'article]
-<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}> 
+<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
 		#SET{prix,#PRIX}
 	</BOUCLE_prix_article>
 		[(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix

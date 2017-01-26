@@ -15,7 +15,9 @@
 	#SET{titre,#TITRE}
 	[(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons_chercher_prix,
 		id_evenement,
-		id_article,env}|sinon{
+		id_article,
+		id_evenement_source,
+		env}|sinon{
 		#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons_chercher_prix,
 			id_evenement=#ID_EVENEMENT_SOURCE,
 			id_evenement_original=#ID_EVENEMENT,

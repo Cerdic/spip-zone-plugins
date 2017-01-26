@@ -1,14 +1,14 @@
-<traduction module="reservations_detail" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=de" total="20" traduits="19" relire="0" modifs="0" nouveaux="1" pourcent="95.00">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+<traduction module="reservations_detail" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/reservations_detail?lang_cible=de" total="20" traduits="19" relire="0" modifs="0" nouveaux="1" pourcent="95.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=en" total="20" traduits="19" relire="0" modifs="0" nouveaux="1" pourcent="95.00">
-		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
+	<langue code="en" url="https://trad.spip.net/tradlang_module/reservations_detail?lang_cible=en" total="20" traduits="19" relire="0" modifs="0" nouveaux="1" pourcent="95.00">
+		<traducteur nom="Rainer Müller" lien="https://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=fr" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/reservations_detail?lang_cible=fr" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/reservations_detail?lang_cible=pt_br" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
-		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/reservations_detail?lang_cible=pt_br" total="20" traduits="20" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />
+		<traducteur nom="telopa" lien="https://trad.spip.net/auteur/telopa" />
 	</langue>
 </traduction>

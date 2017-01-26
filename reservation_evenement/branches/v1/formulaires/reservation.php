@@ -95,19 +95,24 @@ function formulaires_reservation_charger_dist($id = array(), $id_article = '', $
 
 		// Si filtré par événement/s
 		if ($id) {
-			if (is_array($id))
+			if (is_array($id)){
 				$id = implode(',', $id);
-			$sql = sql_select('id_evenement_source,id_evenement', 'spip_evenements', 'id_evenement IN (' . $id . ')');
-
-			$id = array();
-
-			while ($row = sql_fetch($sql)) {
-				if ($row['id_evenement_source'] == 0)
-					$id[] = $row['id_evenement'];
-				else
-					$id[] = $row['id_evenement_source'];
 			}
-			$where[] = 'id_evenement IN (' . implode(',', $id) . ')';
+			if ($id_evenement_source) {
+				$sql = sql_select('id_evenement_source,id_evenement',
+						'spip_evenements',
+						'id_evenement IN (' . $id . ')');
+
+				$id = array();
+				while ($row = sql_fetch($sql)) {
+					if ($row['id_evenement_source'] == 0)
+						$id[] = $row['id_evenement'];
+						else
+							$id[] = $row['id_evenement_source'];
+				}
+				$id = implode(',', $id);
+			}
+			$where[] = 'id_evenement IN (' . $id . ')';
 		}
 
 		// Si filtré par article/s

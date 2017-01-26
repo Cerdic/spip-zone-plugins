@@ -1,16 +1,20 @@
 <BOUCLE_prix(PRIX_OBJETS?){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
 	#SET{prix,#PRIX}
 </BOUCLE_prix>
-	[(#REM) ou à l'article]
-	<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
+	<BOUCLE_prix_ev_source(PRIX_OBJETS?){id_objet=#ID_EVENEMENT_SOURCE}{objet=evenement}{0,1}>
 		#SET{prix,#PRIX}
-		</BOUCLE_prix_article>
-		[(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]
-		<BOUCLE_art(ARTICLES){id_article=#VALEUR{id_article}}{si #GET{prix}|=={0}|ou{#GET{prix}|=={0.00}}|oui}>
+	</BOUCLE_prix_ev_source>
+		[(#REM) ou à l'article]
+		<BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
 			#SET{prix,#PRIX}
-		</BOUCLE_art>
-			[(#REM) sinon on prend le prix du champs prix de l'événement] #SET{prix2,#ENV{prix}}
-		<//B_art>
-	<//B_prix_article>
+			</BOUCLE_prix_article>
+			[(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]
+			<BOUCLE_art(ARTICLES){id_article=#VALEUR{id_article}}{si #GET{prix}|=={0}|ou{#GET{prix}|=={0.00}}|oui}>
+				#SET{prix,#PRIX}
+			</BOUCLE_art>
+				[(#REM) sinon on prend le prix du champs prix de l'événement] #SET{prix2,#ENV{prix}}
+			<//B_art>
+		<//B_prix_article>
+	<//B_prix_ev_source>
 <//B_prix>
 #GET{prix}
