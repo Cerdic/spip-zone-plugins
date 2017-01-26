@@ -60,7 +60,7 @@ function formulaires_test_upload_verifier(){
 	$erreurs_fichiers = '';
 	if ($erreur = $verifier($_FILES['pdf'],'fichiers',$options,$erreurs_fichiers)) {
 		$erreurs['pdf'] = $erreur;
-		cvtupload_nettoyer_files_selon_erreurs('image',$erreur);
+		cvtupload_nettoyer_files_selon_erreurs('pdf',$erreur);
 	}
 	return $erreurs;
 }
