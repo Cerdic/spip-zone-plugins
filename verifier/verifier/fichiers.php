@@ -33,7 +33,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 function verifier_fichiers_dist($valeur, $options, &$erreurs_par_fichier) {
 	if (!is_array($valeur['tmp_name'])){//si on reçoit une info de type fichier unique, on bascule comme si on était fichier multiple
 
-		if ($valeur == True) { // Si on n'a rien à vérifier
+		if ($valeur === True) { // Si on n'a rien à vérifier
 			return array();	
 		};
 
