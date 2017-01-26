@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=en
+// extrait automatiquement de https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_ajouter' => 'Add',
 	'label_enlever' => 'Remove',
-	'label_reserver_amie' => 'I would like to register one more person:',
+	'label_reserver_amie' => 'I would like to register one more person:', # MODIF
 
 	// M
 	'message_ok_reservations_pour' => 'Réservé pour : @noms@',

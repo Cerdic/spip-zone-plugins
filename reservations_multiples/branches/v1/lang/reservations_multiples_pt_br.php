@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=pt_br
+// extrait automatiquement de https://trad.spip.net/tradlang_module/reservations_multiples?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enlever' => 'Remover',
 	'label_multiple_inscriptions' => 'Permite indicar o número de inscrições',
 	'label_multiple_personnes' => 'Permite a inscrição de várias pessoas',
-	'label_reserver_amie' => 'Eu gostaria iguamente de inscrever uma outra pessoa:',
+	'label_reserver_amie' => 'Eu gostaria de também inscrever uma outra pessoa:',
 
 	// M
 	'message_ok_reservations_pour' => 'Reservardo para: @noms@',
@@ -37,5 +37,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_reservations_multiples' => 'Reservas múltiplas',
-	'type_lien_multiple_personnes' => 'Reserva múltipla, reserva originada: @reference@'
+	'type_lien_multiple_personnes' => 'Reserva múltipla, reserva de origem: @reference@'
 );
