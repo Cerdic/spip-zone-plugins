@@ -223,7 +223,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_option_destinataires_plus_explication' => 'Une liste d’adresses séparées par des virgules.',
 	'traiter_email_option_destinataires_plus_label' => 'Destinataires supplémentaires',
 	'traiter_email_option_destinataires_selon_champ_explication' => 'Permet d’indiquer un ou plusieurs destinataires en fonction de la valeur d’un champ. 
-		Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests : 1 par ligne.',
+		Indiquer le champ, sa valeur, et le ou les courriels concernés (séparés par une virgule) suivant ce format, tel que : "@selection_1@/choix1 : mail@example.tld". Vous pouvez indiquer plusieurs tests, en revenant à ligne entre chaque test.',
 	'traiter_email_option_destinataires_selon_champ_label' => 'Destinataires en fonction d’un champ',
 	'traiter_email_option_envoyeur_courriel_explication' => 'Choisissez le champ qui contiendra le courriel de l’envoyeur.',
 	'traiter_email_option_envoyeur_courriel_label' => 'Courriel de l’envoyeur',
