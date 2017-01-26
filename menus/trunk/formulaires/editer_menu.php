@@ -54,7 +54,7 @@ function formulaires_editer_menu_charger($id_menu, $nouveau) {
 			$contexte['css'] = '';
 			$contexte['import'] = '';
 
-			$valeurs = formulaires_editer_objet_charger('menu', $id_menu, 0, 0, '', '', '', '');
+			$valeurs = formulaires_editer_objet_charger('menu', $id_menu, 0, 0, '', '', array(), '');
 
 			$contexte = array_merge($contexte, $valeurs);
 
@@ -106,7 +106,7 @@ function formulaires_editer_menu_verifier($id_menu, $nouveau) {
 }
 
 function formulaires_editer_menu_traiter($id_menu, $nouveau) {
-	$res = formulaires_editer_objet_traiter('menu', $id_menu, 0, 0, '', '', '', '');
+	$res = formulaires_editer_objet_traiter('menu', $id_menu, 0, 0, '', '', array(), '');
 
 	// Si ça va pas on errorise
 	if (!$res['id_menu']) {

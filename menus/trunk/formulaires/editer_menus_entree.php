@@ -16,7 +16,7 @@ function formulaires_editer_menus_entree_charger($id_menu, $id_menus_entree = 'n
 	 */
 	$id_menus_entree = intval(_request('modifier_entree')) ? _request('modifier_entree') : $id_menus_entree;
 
-	$valeurs = formulaires_editer_objet_charger('menus_entree', $id_menus_entree, 0, 0, '', '', '', '');
+	$valeurs = formulaires_editer_objet_charger('menus_entree', $id_menus_entree, 0, 0, '', '', array(), '');
 
 	$valeurs['id_menu'] = $id_menu;
 
@@ -131,7 +131,7 @@ function formulaires_editer_menus_entree_traiter($id_menu, $id_menus_entree = 'n
 	if (($id_menu = intval(_request('id_menu_nouvelle_entree'))
 			or $id_menus_entree = intval(_request('id_menus_entree')))
 		and _request('enregistrer')) {
-		$res = formulaires_editer_objet_traiter('menus_entree', $id_menus_entree, 0, 0, '', '', '', '');
+		$res = formulaires_editer_objet_traiter('menus_entree', $id_menus_entree, 0, 0, '', '', array(), '');
 		set_request('id_menu_nouvelle_entree', '');
 		set_request('id_menus_entree', '');
 		if (!$res['id_menus_entree']) {
