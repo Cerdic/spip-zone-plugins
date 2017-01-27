@@ -15,6 +15,8 @@ function indexer_jointure_gis_dist($objet, $id_objet, $infos) {
 		foreach ($gis as $point) {
 			// Si c'est bien un point et pas un polygone
 			if ($point['lat'] and $point['lon']) {
+				$point['lat'] = floatval($point['lat']);
+				$point['lon'] = floatval($point['lon']);
 				// On enregistre tout le point entier, tant qu'à faire (ville, adresse, etc)
 				$infos['properties']['gis'][] = $point;
 			}
