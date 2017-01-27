@@ -118,7 +118,7 @@ function gisgeom_formulaire_verifier($flux) {
  * @return mixed
  */
 function gisgeom_pre_insertion($flux) {
-	if (!_request('geojson') and isset($_FILES['import']) and $_FILES['import']['error'] != 4) {
+	if ($flux['args']['table'] == 'spip_gis' and !_request('geojson') and isset($_FILES['import']) and $_FILES['import']['error'] != 4) {
 		include_spip('action/ajouter_documents');
 		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
 		$fichier = $_FILES['import']['tmp_name'];
