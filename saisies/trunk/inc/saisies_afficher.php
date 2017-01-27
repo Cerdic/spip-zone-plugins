@@ -488,12 +488,21 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
 			}
 			// On transforme en une condition valide
+			$condition_originale = $condition;
 			if (is_null($env)) {
 				$condition = preg_replace('#@(.+)@#U', '_request(\'$1\')', $condition);
 			} else {
 				$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
 			}
-			eval('$ok = '.$condition.';');
+
+			// On vérifie que l'on a pas @toto@="valeur" qui fait planter l'eval(),
+			// on annule cette condition dans ce cas pour éviter une erreur du type :
+			// PHP Fatal error:  Can't use function return value in write context
+			$type_condition = preg_replace('#@(.+)@#U', '', $condition_originale);
+			$type_condition = preg_replace('#"(.+)"#U', '', $test);
+			if (trim($type_condition) != '=') {
+				eval('$ok = '.$condition.';');
+			}
 			if (!$ok) {
 				unset($saisies[$cle]);
 				if (is_null($env)) {
@@ -501,7 +510,8 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 				}
 			}
 		}
-		if (isset($saisies[$cle]['saisies'])) { // S'il s'agit d'un fieldset ou equivalent, verifier les sous-saisies
+		if (isset($saisies[$cle]['saisies'])) {
+			// S'il s'agit d'un fieldset ou equivalent, verifier les sous-saisies
 			$saisies[$cle]['saisies'] = saisies_verifier_afficher_si($saisies[$cle]['saisies'], $env);
 		}
 	}
