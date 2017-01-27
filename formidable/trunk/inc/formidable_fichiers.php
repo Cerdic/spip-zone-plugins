@@ -420,17 +420,22 @@ function formidable_effacer_fichiers_email() {
 	$dossiers_effaces = 0;
 	$chemin = _DIR_FICHIERS_FORMIDABLE.'timestamp';
 	$timestamp = time();
-	foreach (scandir($chemin) as $dossier) {
-		if (strval(intval($dossier))!=$dossier) { // on ne traite que les dossiers qui ont comme nom un entier
-			continue;
-		}
-		if ($timestamp - intval($dossier) >= _FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL) {
-			$chemin_complet = "$chemin/$dossier";
-			if (supprimer_repertoire($chemin_complet)) {
-				spip_log("Effacement du dossier $chemin_complet", 'formidable');
-				$dossiers_effaces++;
-			} else {
-				spip_log("Pb lors de l'effacement du dossier $chemin_complet", 'formidable'._LOG_ERREUR);
+	if (is_dir($chemin)) {
+		$dossiers = scandir($chemin);
+		if (is_array($dossiers)) {
+			foreach ($dossiers as $dossier) {
+				if (strval(intval($dossier)) != $dossier) { // on ne traite que les dossiers qui ont comme nom un entier
+					continue;
+				}
+				if ($timestamp - intval($dossier) >= _FORMIDABLE_EFFACEMENT_FICHIERS_EMAIL) {
+					$chemin_complet = "$chemin/$dossier";
+					if (supprimer_repertoire($chemin_complet)) {
+						spip_log("Effacement du dossier $chemin_complet", 'formidable');
+						$dossiers_effaces++;
+					} else {
+						spip_log("Pb lors de l'effacement du dossier $chemin_complet", 'formidable'._LOG_ERREUR);
+					}
+				}
 			}
 		}
 	}
