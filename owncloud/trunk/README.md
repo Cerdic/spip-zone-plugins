@@ -66,3 +66,4 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 ## TODO
 
 - Lors de la suppression d'un document dans SPIP on peut vérifier si il y a un md5 dans la base spip_ownclouds et le supprimer
+- Configuration - Répertoire distant - Mieux gérer le premier slash pour éviter que l'admin cherche 

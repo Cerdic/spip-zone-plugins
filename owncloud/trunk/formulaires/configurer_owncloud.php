@@ -90,7 +90,7 @@ function formulaires_configurer_owncloud_charger_dist() {
 		'login' => $config['login'],
 		'password' => $config['password'],
 		'url_remote' => $config['url_remote'],
-		'directory_remote' => $config['directory_remote'],
+		'directory_remote' => ltrim($config['directory_remote'], '/'),
 		'activer_synchro' => $config['activer_synchro'],
 		'activer_effacement_distant' => $config['activer_effacement_distant']
 	);
