@@ -9,7 +9,9 @@
  * @package    SPIP\Geoculture_core\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 // pour initiale et afficher_initiale
