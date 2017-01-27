@@ -49,5 +49,4 @@ function balise_VOIR_SAISIE_dist($p) {
 	} else {
 		return balise_INCLURE_dist($p);
 	}
-
 }

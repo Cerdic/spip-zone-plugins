@@ -32,8 +32,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @see balise_SAISIE_dist() Pour un exemple d'utilisation
 **/
 class Pile {
-
-
 	/**
 	 * Récupère un argument de balise
 	 *

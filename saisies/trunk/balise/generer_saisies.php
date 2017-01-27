@@ -52,5 +52,4 @@ function balise_GENERER_SAISIES_dist($p) {
 	} else {
 		return balise_INCLURE_dist($p);
 	}
-
 }

@@ -53,5 +53,4 @@ function balise_VOIR_SAISIES_dist($p) {
 	} else {
 		return balise_INCLURE_dist($p);
 	}
-
 }
