@@ -59,6 +59,10 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer = false) {
 		);
 	}
 
+	// Créer un htaccess ici
+	include_spip('inc/acces');
+	verifier_htaccess($dossier);
+
 	// on crée un fichier de test, pour s'assurer
 	// 1. Qu'on puisse écrire dans le rep
 	// 2. Qu'on ne puisse pas accéder à ce fichier depuis l'exterieur.
@@ -167,6 +171,11 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		$dossier = sous_repertoire(_DIR_FICHIERS_FORMIDABLE, 'timestamp', false, true);
 		$dossier = sous_repertoire($dossier, $options['timestamp'], false, true);
 		$dossier_champ = sous_repertoire($dossier, $champ, false, true);
+
+		// Générer un fichier htaccess ici
+		include_spip('inc/acces');
+		verifier_htaccess($dossier);
+
 		// on crée un fichier de test, pour s'assurer
 		// 1. Qu'on puisse écrire dans le rep
 		// 2. Qu'on ne puisse pas accéder à ce fichier depuis l'exterieur.
