@@ -1,7 +1,8 @@
 <paquet
 	prefix="menualphaprive"
 	categorie="navigation"
-	version="1.0.3"
+	version="1.1.0"
+	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/menualphaprive-64.png"
@@ -13,5 +14,7 @@
 	<auteur>nicod_</auteur>
 
 	<licence>GNU/GPL</licence>
-	
+
+	<onglet nom="menus_favoris" titre="menualphaprive:onglet_menus_favoris" parent="infos_perso"  icone="images/menus_favoris-24.png" />
+
 </paquet>

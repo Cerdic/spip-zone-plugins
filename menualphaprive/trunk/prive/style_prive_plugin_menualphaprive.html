@@ -14,6 +14,9 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+
 #bando_haut ul.deroulant li ul.menu-2col {
 	max-width: initial;
 	-moz-column-count: 2;
@@ -23,4 +26,11 @@
 	-webkit-perspective:1;
 	column-count: 2;
 	column-gap: 1.5em;
+}
+
+#bando_haut ul.deroulant li.non_favori {
+	background-color: #[(#GET{claire}|couleur_eclaircir{.9})];
+}
+#bando_haut ul.deroulant li.favori + li.non_favori {
+	border-top:1px solid #aaa;
 }
