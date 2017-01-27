@@ -78,7 +78,7 @@ function formidable_creer_dossier_formulaire($id_formulaire, $forcer = false) {
 
 	include_spip('inc/distant');
 	$url = url_absolue($fichier);
-	if ($data = recuperer_page($url) && $data != NULL) {
+	if ($data = recuperer_page($url) && $data != null) {
 		// si on peut récuperer la page avec un statut http 200,
 		// c'est qu'il y a un problème. recuperer_page() est obsolète en 3.1, mais recuperer_url() n'existe pas en 3.0
 		spip_log("$nom_dossier accessible en lecture depuis le web", 'formidable'._LOG_CRITIQUE);
@@ -182,7 +182,7 @@ function formidable_deplacer_fichier_emplacement_definitif($fichier, $nom, $mime
 		}
 		include_spip('inc/distant');
 		$url = url_absolue($fichier_test);
-		if ($data = recuperer_page($url) && $data != NULL) {
+		if ($data = recuperer_page($url) && $data != null) {
 			// si on peut récuperer la page avec un statut http 200,
 			// c'est qu'il y a un problème.
 			// recuperer_page() est obsolète en 3.1, mais recuperer_url() n'existe pas en 3.0

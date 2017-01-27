@@ -52,11 +52,17 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 
 	// Si pas déjà présent, on cherche les saisies de ce formulaire
 	if (!isset($formulaires_saisies[$id_formulaire])) {
-		$formulaires_saisies[$id_formulaire] = unserialize(sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.intval($id_formulaire)));
+		$formulaires_saisies[$id_formulaire] = unserialize(
+			sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = '.intval($id_formulaire))
+		);
 	}
 	// Si pas déjà présent, on cherche les valeurs de cette réponse
 	if (!isset($reponses_valeurs[$id_formulaires_reponse])) {
-		if ($champs = sql_allfetsel('nom,valeur', 'spip_formulaires_reponses_champs', 'id_formulaires_reponse = '.intval($id_formulaires_reponse))) {
+		if ($champs = sql_allfetsel(
+			'nom,valeur',
+			'spip_formulaires_reponses_champs',
+			'id_formulaires_reponse = '.intval($id_formulaires_reponse)
+		)) {
 			foreach ($champs as $champ) {
 				$reponses_valeurs[$id_formulaires_reponse][$champ['nom']] = $tenter_unserialize($champ['valeur']);
 			}
@@ -99,10 +105,18 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire = null, 
 	static $modeles_vars = array();
 
 	if (is_null($id_formulaire)) {
-		$id_formulaire = sql_getfetsel('id_formulaire', 'spip_formulaires_reponses', 'id_formulaires_reponse='.intval($id_formulaires_reponse));
+		$id_formulaire = sql_getfetsel(
+			'id_formulaire',
+			'spip_formulaires_reponses',
+			'id_formulaires_reponse='.intval($id_formulaires_reponse)
+		);
 	}
 	if (is_null($modele_resume) and !isset($modeles_resume[$id_formulaire])) {
-		$modeles_resume[$id_formulaire] = sql_getfetsel('resume_reponse', 'spip_formulaires', 'id_formulaire='.intval($id_formulaire));
+		$modeles_resume[$id_formulaire] = sql_getfetsel(
+			'resume_reponse',
+			'spip_formulaires',
+			'id_formulaire='.intval($id_formulaire)
+		);
 	}
 	if (is_null($modele_resume)) {
 		$modele_resume = $modeles_resume[$id_formulaire];
@@ -166,8 +180,13 @@ function formidable_ajouter_action_recuperer_fichier($saisie_a_modifier, $nom_sa
 	$vignette_par_defaut = charger_fonction('vignette', 'inc/');
 	if (array_key_exists($nom_saisie, saisies_lister_avec_type($saisies_du_formulaire, 'fichiers'))) { //saisies SPIP
 		if (isset($saisie_a_modifier) and is_array($saisie_a_modifier)) {
-			foreach ($saisie_a_modifier as $i => $valeur){
-				$url = formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_formulaires_reponse, $nom_saisie, $valeur['nom']);
+			foreach ($saisie_a_modifier as $i => $valeur) {
+				$url = formidable_generer_url_action_recuperer_fichier(
+					$id_formulaire,
+					$id_formulaires_reponse,
+					$nom_saisie,
+					$valeur['nom']
+				);
 				$saisie_a_modifier[$i]['url'] = $url;
 				$saisie_a_modifier[$i]['vignette'] = $vignette_par_defaut($valeur['extension'],false);
 			}
