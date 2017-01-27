@@ -327,7 +327,11 @@ function formidable_importer_forms_donnees() {
 				$id_formulaires_reponse = sql_insertq('spip_formulaires_reponses', $reponse);
 				#var_dump($id_formulaires_reponse);
 				if ($id_formulaires_reponse) {
-					$donnees = sql_allfetsel("$id_formulaires_reponse as id_formulaires_reponse,champ as nom,valeur", 'spip_forms_donnees_champs', 'id_donnee='.intval($row['id_donnee']));
+					$donnees = sql_allfetsel(
+						"$id_formulaires_reponse as id_formulaires_reponse,champ as nom,valeur",
+						'spip_forms_donnees_champs',
+						'id_donnee='.intval($row['id_donnee'])
+					);
 					$data = array();
 					foreach ($donnees as $donnee) {
 						$data[$donnee['nom']][] = $donnee;
@@ -358,5 +362,4 @@ function formidable_importer_forms_donnees() {
 			}
 		} while ($rows = sql_allfetsel('*', 'spip_forms_donnees', sql_in('id_form', array_keys($trans)).' AND id_formulaires_reponse=0', '', 'id_donnee', '0,100'));
 	}
-
 }

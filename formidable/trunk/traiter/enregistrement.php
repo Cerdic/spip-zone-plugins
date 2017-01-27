@@ -16,7 +16,8 @@ function traiter_enregistrement_dist($args, $retours) {
 	$saisies = saisies_lister_par_nom($saisies);
 
 	// La personne a-t-elle un compte ?
-	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
+	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ?
+		$GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
 
 	// traitement de l'anonymisation
 	if ($options['anonymiser'] == 'on') {
@@ -70,7 +71,13 @@ function traiter_enregistrement_dist($args, $retours) {
 
 	// Si la moderation est a posteriori ou que la personne est un boss, on publie direct
 	if ($options['moderation'] == 'posteriori'
-		or autoriser('instituer', 'formulairesreponse', $id_formulaires_reponse, null, array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie'))) {
+		or autoriser(
+			'instituer',
+			'formulairesreponse',
+			$id_formulaires_reponse,
+			null,
+			array('id_formulaire' => $id_formulaire, 'nouveau_statut' => 'publie')
+		)) {
 		$statut='publie';
 	} else {
 		$statut = 'prop';
@@ -116,7 +123,7 @@ function traiter_enregistrement_dist($args, $retours) {
 		$insertions = array();
 		foreach ($saisies as $nom => $saisie) {
 			if ($saisie['saisie'] == 'fichiers') { // traiter à part le cas des saisies fichiers
-				$valeur = traiter_enregistrement_fichiers($saisie, $id_formulaire,  $id_formulaires_reponse);
+				$valeur = traiter_enregistrement_fichiers($saisie, $id_formulaire, $id_formulaires_reponse);
 				if (($valeur !== null)) {
 					$champs[] = $nom;
 					$insertions[] = array(
@@ -124,10 +131,12 @@ function traiter_enregistrement_dist($args, $retours) {
 						'nom' => $nom,
 						'valeur' => is_array($valeur) ? serialize($valeur) : $valeur
 					);
-					$retours['fichiers'][$nom] = $valeur; 
+					$retours['fichiers'][$nom] = $valeur;
 				}
-			}	
-			if (($valeur = _request($nom)) !== null) {// Pour le saisies différentes de fichiers,  on ne prend que les champs qui ont effectivement été envoyés par le formulaire
+			}
+			if (($valeur = _request($nom)) !== null) {
+				// Pour le saisies différentes de fichiers,
+				// on ne prend que les champs qui ont effectivement été envoyés par le formulaire
 				$champs[] = $nom;
 				$insertions[] = array(
 					'id_formulaires_reponse' => $id_formulaires_reponse,
@@ -201,13 +210,14 @@ function traiter_enregistrement_update_dist($id_formulaire, $traitement, $saisie
 }
 
 /**
- * Pour une saisie 'fichiers' particulière, 
- * déplace chaque fichier envoyé dans le dossier config/fichiers/formidable/formulaire_$id_formulaire/reponse_$id_formulaires_reponse. 
+ * Pour une saisie 'fichiers' particulière,
+ * déplace chaque fichier envoyé dans le dossier
+ * config/fichiers/formidable/formulaire_$id_formulaire/reponse_$id_formulaires_reponse.
  * @param array $saisie la description de la saisie
  * @param int $id_formulaire le formulaire
  * @param int $id_formulaires_reponse
- * return array|null un tableau organisé par fichier, contenant 'nom', 'extension','mime','taille' 
-**/  
-function traiter_enregistrement_fichiers($saisie, $id_formulaire,  $id_formulaires_reponse){
-	return formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'id_formulaires_reponse'=>$id_formulaires_reponse));
+ * return array|null un tableau organisé par fichier, contenant 'nom', 'extension','mime','taille'
+**/
+function traiter_enregistrement_fichiers($saisie, $id_formulaire, $id_formulaires_reponse) {
+	return formidable_deplacer_fichiers_produire_vue_saisie($saisie, array('id_formulaire' => $id_formulaire, 'id_formulaires_reponse' => $id_formulaires_reponse));
 }

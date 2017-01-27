@@ -4,14 +4,15 @@
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
-include_spip("inc/utils");
+include_spip('inc/utils');
 include_spip('inc/formidable_fichiers');
+
 function traiter_email_dist($args, $retours) {
 	if (!isset($retours['fichiers'])) {
 		$retours['fichiers'] = array();
-		$ajouter_fichier = True;
+		$ajouter_fichier = true;
 	} else {
-		$ajouter_fichier = False;
+		$ajouter_fichier = false;
 	}
 	$timestamp = time();
 	$retours['timestamp'] = $timestamp;
@@ -21,7 +22,6 @@ function traiter_email_dist($args, $retours) {
 	$traitements = unserialize($formulaire['traitements']);
 	$champs = saisies_lister_champs($saisies);
 	$destinataires = array();
-
 
 	// On récupère les destinataires
 	if ($options['champ_destinataires']) {
@@ -86,7 +86,10 @@ function traiter_email_dist($args, $retours) {
 
 		// On parcourt les champs pour générer le tableau des valeurs
 		$valeurs = array();
-		$saisies_fichiers = saisies_lister_avec_type($saisies,'fichiers');// On utilise pas formulaires_formidable_fichiers, car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais, il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
+		$saisies_fichiers = saisies_lister_avec_type($saisies, 'fichiers');
+		// On utilise pas formulaires_formidable_fichiers,
+		// car celui-ci retourne les saisies fichiers du formulaire dans la base… or, on sait-jamais,
+		// il peut y avoir eu une modification entre le moment où l'utilisateur a vu le formulaire et maintenant
 		foreach ($champs as $champ) {
 			if (array_key_exists($champ, $saisies_fichiers)) {// si on a affaire à une saisie de type fichiers, on traite à part
 				$valeurs[$champ] = traiter_email_fichiers($saisies_fichiers[$champ], $champ, $formulaire['id_formulaire'], $retours, $timestamp);
@@ -147,7 +150,7 @@ function traiter_email_dist($args, $retours) {
 			$notification,
 			array(
 				'id_formulaire' => $args['id_formulaire'],
-				'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse']:'',
+				'id_formulaires_reponse' => isset($retours['id_formulaires_reponse']) ? $retours['id_formulaires_reponse'] : '',
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'traitements' => $traitements,
 				'saisies' => $saisies,
@@ -173,7 +176,7 @@ function traiter_email_dist($args, $retours) {
 		$courriel_from = '';
 		if ($courriel_envoyeur && $options['activer_vrai_envoyeur']) {
 			$courriel_from = $courriel_envoyeur;
-		} else if ($courriel_envoyeur) {
+		} elseif ($courriel_envoyeur) {
 			$corps['repondre_a'] = $courriel_envoyeur;
 		}
 
@@ -206,7 +209,8 @@ function traiter_email_dist($args, $retours) {
 			}
 			$sujet_accuse = filtrer_entites($sujet_accuse);
 
-			// Si un nom d'expéditeur est précisé pour l'AR, on l'utilise, sinon on utilise le nomde l'envoyeur du courriel principal
+			// Si un nom d'expéditeur est précisé pour l'AR, on l'utilise,
+			// sinon on utilise le nomde l'envoyeur du courriel principal
 			$nom_envoyeur_accuse = trim($options['nom_envoyeur_accuse']);
 			if (!$nom_envoyeur_accuse) {
 				$nom_envoyeur_accuse = $nom_envoyeur;
@@ -236,7 +240,7 @@ function traiter_email_dist($args, $retours) {
 
 			// On génère l'accusé de réception
 			if (_FORMIDABLE_LIENS_FICHIERS_ACCUSE_RECEPTION == false) {
-				$valeurs = vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies,$valeurs);
+				$valeurs = vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $valeurs);
 			}
 			$html_accuse = recuperer_fond(
 				$accuse,
@@ -269,7 +273,7 @@ function traiter_email_dist($args, $retours) {
 				$retours['message_ok'] = _T('formidable:traiter_email_message_ok');
 			}
 		} else {
-			if (isset ($retours['message_erreur'])) {
+			if (isset($retours['message_erreur'])) {
 				$retours['message_erreur'] .= "\n"._T('formidable:traiter_email_message_erreur');
 			} else {
 				$retours['message_erreur'] = _T('formidable:traiter_email_message_erreur');
@@ -286,13 +290,13 @@ function traiter_email_dist($args, $retours) {
 /**
  * Retourne la liste des destinataires sélectionnés en fonction
  * de l'option 'destinataires_selon_champ' du traitement email.
- * 
+ *
  * @param string $description
  *     Description saisie dans l'option du traitement du formulaire,
  *     qui respecte le schéma prévu, c'est à dire : 1 description par ligne,
  *     tel que `@champ@/valeur : mail@domain.tld, mail@domain.tld, ...`
  *     {@example : `@selection_2@/choix_1 : toto@domain.tld`}
- * @return array 
+ * @return array
  *     Liste des destinataires, s'il y en a.
  **/
 function formidable_traiter_email_destinataire_selon_champ($description) {
@@ -347,8 +351,10 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
  * Gère une saisie de type fichiers dans le traitement par email.
  * C'est à dire:
  *	- S'il y a eu un enregistement avant, ne déplace pas le fichier
- *	- S'il n'y a pas eu d'enregistrement avant, déplace le fichier dans un dossier nommé en fonction du timestamp du traitement
- *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement _FORMIDABLE_EXPIRATION_FICHIERS_EMAIL (sauf si cette constantes est définie à 0)
+ *	- S'il n'y a pas eu d'enregistrement avant, déplace le fichier
+ *		dans un dossier nommé en fonction du timestamp du traitement
+ *	- Renvoie un tableau décrivant les fichiers, avec une url d'action sécurisée valable seulement
+ *		_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL (sauf si cette constantes est définie à 0)
  * @param array $saisie la description de la saisie
  * @param string $nom le nom de la saisie
  * @param int|string $id_formulaire le formulaire concerné
@@ -356,7 +362,7 @@ function formidable_traiter_email_destinataire_selon_champ($description) {
  * @param int $timestamp un timestamp correspondant au début du processus de création du courriel
  * @return array un tableau décrivant la saisie
  **/
-function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timestamp){
+function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timestamp) {
 	//Initialisation
 	$id_formulaire = strval($id_formulaire);//précaution
 	$vue = array();
@@ -364,16 +370,16 @@ function traiter_email_fichiers($saisie, $nom, $id_formulaire, $retours, $timest
 	if (isset($retours['id_formulaires_reponse']) and $id_formulaires_reponse = $retours['id_formulaires_reponse']) { // cas simple: les réponses ont été enregistrées
 		if (isset($retours['fichiers'][$nom])) { // petite précaution
 			$options = array(
-				'id_formulaire' => $id_formulaire, 
+				'id_formulaire' => $id_formulaire,
 				'id_formulaires_reponse' => $retours['id_formulaires_reponse']
 			);
 			$vue = ajouter_action_recuperer_fichier_par_email($retours['fichiers'][$nom], $nom, $options);
 		}
 	} else { // si les réponses n'ont pas été enregistrées
-		$vue = formidable_deplacer_fichiers_produire_vue_saisie($saisie,array('id_formulaire'=>$id_formulaire,'timestamp'=>$timestamp));
+		$vue = formidable_deplacer_fichiers_produire_vue_saisie($saisie, array('id_formulaire' => $id_formulaire, 'timestamp' => $timestamp));
 			$options = array(
-				'id_formulaire' => $id_formulaire, 
-				'timestamp' => $timestamp	
+				'id_formulaire' => $id_formulaire,
+				'timestamp' => $timestamp
 			);
 			$vue = ajouter_action_recuperer_fichier_par_email($vue, $nom, $options);
 	}
@@ -398,12 +404,12 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
 	if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
 		$delai = secondes_en_jour(_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL);
 	}
-	foreach ($saisie_a_modifier as $i => $valeur){
+	foreach ($saisie_a_modifier as $i => $valeur) {
 		$url = formidable_generer_url_action_recuperer_fichier_email($nom_saisie, $valeur['nom'], $options);
 		$saisie_a_modifier[$i]['url'] = $url;
 		if (_FORMIDABLE_EXPIRATION_FICHIERS_EMAIL > 0) {
 			$saisie_a_modifier[$i]['fichier'] = $valeur['nom'];
-			$saisie_a_modifier[$i]['nom'] = "["._T("formidable:lien_expire", array("delai"=>$delai))."] ".$valeur['nom'];
+			$saisie_a_modifier[$i]['nom'] = '['._T('formidable:lien_expire', array('delai' => $delai)).'] '.$valeur['nom'];
 		} else {
 			$saisie_a_modifier[$i]['fichier'] = $valeur['nom'];
 			$saisie_a_modifier[$i]['nom'] = $valeur['nom'];
@@ -418,11 +424,11 @@ function ajouter_action_recuperer_fichier_par_email($saisie_a_modifier, $nom_sai
  * Supprime dans une vue de saisie 'fichiers'
  * l'url de récupération par email
  * et l'information sur le délai d'expiration
- * @param array $vue 
- * @return array $vue 
+ * @param array $vue
+ * @return array $vue
 **/
 function supprimer_action_recuperer_fichier_par_email($vue) {
-	foreach ($vue as $f => &$desc){
+	foreach ($vue as $f => &$desc) {
 		if (isset($desc['url'])) {
 			unset($desc['url']);
 		}
@@ -439,11 +445,10 @@ function supprimer_action_recuperer_fichier_par_email($vue) {
  * @param array $vues
  * @return array $vues
 **/
-function
-vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vues) {
-	foreach ($saisies as $saisie=>$description){
+function vues_saisies_supprimer_action_recuperer_fichier_par_email($saisies, $vues) {
+	foreach ($saisies as $saisie => $description) {
 		if ($description['saisie'] == 'fichiers') { // si de type fichiers
-			$nom_saisie = $description['options']['nom']; 
+			$nom_saisie = $description['options']['nom'];
 			$vues[$nom_saisie] = supprimer_action_recuperer_fichier_par_email($vues[$nom_saisie]);
 		}
 	}
@@ -462,18 +467,17 @@ function secondes_en_jour($secondes) {
 	$secondes = $secondes-$jours*24*3600-$heures*3600-$minutes*60;
 	$param = array(
 		'j' => $jours,
-		'h' => $heures, 
+		'h' => $heures,
 		'm' => $minutes,
 		's' => $secondes
 	);
 	if ($jours > 0) {
-		return _T('formidable:jours_heures_minutes_secondes',$param);
+		return _T('formidable:jours_heures_minutes_secondes', $param);
 	} elseif ($heures > 0) {
-		return _T('formidable:heures_minutes_secondes',$param);
+		return _T('formidable:heures_minutes_secondes', $param);
 	} elseif ($minutes > 0) {
-		return _T('formidable:minutes_secondes',$param);
+		return _T('formidable:minutes_secondes', $param);
 	} else {
-		return _T('formidable:secondes',$param);
+		return _T('formidable:secondes', $param);
 	}
-
 }
