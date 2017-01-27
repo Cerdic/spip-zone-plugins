@@ -74,7 +74,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		// On ajoute un point d'entrée avec les infos de ce formulaire
 		// pour d'eventuels plugins qui en ont l'utilité
 		$contexte['_formidable'] = $formulaire;
-		// Classes CSS 
+		// Classes CSS
 		$contexte['_css'] = $formulaire['css'];
 
 		// Est-ce que la personne a le droit de répondre ?
@@ -131,7 +131,9 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
 				if ($ok == false) {
 					$contexte['editable'] = false;
-					$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
+					$contexte['message_erreur'] = _T(
+						'formidable:traiter_enregistrement_erreur_edition_reponse_inexistante'
+					);
 				}
 			} else {
 				// calcul des paramètres d'anonymisation
@@ -146,8 +148,11 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				if ($options
 					and !$options['multiple']
 					and $options['modifiable']
-					and $reponses = formidable_verifier_reponse_formulaire($formulaire['id_formulaire'], $options['identification'], $anonymisation)
-				) {
+					and $reponses = formidable_verifier_reponse_formulaire(
+						$formulaire['id_formulaire'],
+						$options['identification'],
+						$anonymisation
+					)) {
 					$id_formulaires_reponse = array_pop($reponses);
 					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
 				}
@@ -208,7 +213,7 @@ $erreurs = array();
 	// On peut donner soit un id soit un identifiant
 	if (!$id_formulaire = formidable_id_formulaire($id)) {
 		$erreurs['message_erreur'] = _T('formidable:erreur_base');
-		} else {
+	} else {
 		// Sale bête !
 		if (_request('mechantrobot')!='') {
 			$erreurs['hahahaha'] = 'hahahaha';
@@ -218,21 +223,21 @@ $erreurs = array();
 		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
 		$saisies = unserialize($formulaire['saisies']);
 
-		$erreurs_par_fichier = array(); 
-		$erreurs = saisies_verifier($saisies,true,$erreurs_par_fichier);
+		$erreurs_par_fichier = array();
+		$erreurs = saisies_verifier($saisies, true, $erreurs_par_fichier);
 
-		// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification	
-		
+		// On supprime de $_FILES les fichiers envoyés qui ne passent pas le test de vérification
+
 		//$infos_plugins = charger_fonction('infos_plugins','plugins');
 		$plugins_actifs = liste_plugin_actifs();
 		if (isset($plugins_actifs['CVTUPLOAD'])) {
 			include_spip('inc/cvtupload');
 			foreach ($erreurs as $champ => $erreur) {
-					if (isset($erreurs_par_fichier[$champ])) {
-						cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
-						}
-					}
+				if (isset($erreurs_par_fichier[$champ])) {
+					cvtupload_nettoyer_files_selon_erreurs($champ, $erreurs_par_fichier[$champ]);
+				}
 			}
+		}
 
 		// Si on a pas déjà une erreur sur le champ unicite, on lance une verification
 		if ($formulaire['unicite'] != '') {
@@ -250,7 +255,8 @@ $erreurs = array();
 						AND R.statut = "publie"'
 				);
 				if (is_array($reponses) && count($reponses) > 0) {
-					$erreurs[$formulaire['unicite']] = $formulaire['message_erreur_unicite'] ? _T($formulaire['message_erreur_unicite']) : _T('formidable:erreur_unicite');
+					$erreurs[$formulaire['unicite']] = $formulaire['message_erreur_unicite'] ?
+						_T($formulaire['message_erreur_unicite']) : _T('formidable:erreur_unicite');
 				}
 			}
 		}
@@ -291,7 +297,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
 	include_spip('inc/json');
-	$post = json_encode(array("post"=>$_POST,"files"=>$_FILES));
+	$post = json_encode(array('post' => $_POST, 'files' => $_FILES));
 	spip_log($post, 'formidable_post'._LOG_INFO_IMPORTANTE);
 
 	// On peut donner soit un id soit un identifiant
@@ -301,9 +307,10 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
-	$traitements = pipeline ('formidable_traitements', 
+	$traitements = pipeline(
+		'formidable_traitements',
 		array(
-			'args'=>array('id_formulaire'=>$id_formulaire), 
+			'args'=>array('id_formulaire'=>$id_formulaire),
 			'data'=>$traitements
 		)
 	);
@@ -375,16 +382,17 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
 	if (isset($retours['fichiers'])) {// traitement particuliers si fichiers
-		if ($erreurs_fichiers = formidable_produire_messages_erreurs_fichiers($retours['fichiers'])) { // Inspecter les fichiers pour voir s'il y a des erreurs
+		if ($erreurs_fichiers = formidable_produire_messages_erreurs_fichiers($retours['fichiers'])) {
+			// Inspecter les fichiers pour voir s'il y a des erreurs
 			// Avertir l'utilisateur
 			if (isset($retours['message_erreur'])) {
-				$retours['message_erreur'] .= "<br />".$erreurs_fichiers['message_public'];
+				$retours['message_erreur'] .= '<br />'.$erreurs_fichiers['message_public'];
 			} else {
 				$retours['message_erreur'] = $erreurs_fichiers['message_public'];
 			}
 			// Avertir le webmestre
-			if (isset($retours['id_formulaires_reponse'])){
-				$erreur_fichiers_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse ".$retours['id_formulaires_reponse']." au formulaire $id";
+			if (isset($retours['id_formulaires_reponse'])) {
+				$erreur_fichiers_sujet = '[ERREUR] Impossible de sauvegarder les fichiers de la réponse '.$retours['id_formulaires_reponse']." au formulaire $id";
 			} else {
 				$erreur_fichiers_sujet = "[ERREUR] Impossible de sauvegarder les fichiers de la réponse au formulaire $id";
 			}
@@ -392,59 +400,62 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 			$erreur_fichiers_texte .= $erreurs_fichiers['message_webmestre'];
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 			$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_fichiers_sujet, $erreur_fichiers_texte);
-
 		}
-		if ($formulaire['apres'] == 'valeurs') { // Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers 
+		if ($formulaire['apres'] == 'valeurs') {
+			// Si on affiche après les valeurs des réponses, modifier _request pour les saisies de types fichiers
 			$vignette_par_defaut = charger_fonction('vignette', 'inc/');
-			foreach ($retours['fichiers'] as $saisie=>$description) {
-				foreach ($description as $i => $desc){ // ajouter la vignette et l'url
+			foreach ($retours['fichiers'] as $saisie => $description) {
+				foreach ($description as $i => $desc) {
+					// ajouter la vignette et l'url
 					if (!isset($description[$i]['erreur'])) {
 						$description[$i]['vignette'] = $vignette_par_defaut($desc['extension'],false);
 						if (isset($retours['id_formulaires_reponse'])) {// si réponse enregistrée
 							$description[$i]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $retours['id_formulaires_reponse'], $saisie, $desc['fichier']);
 						} elseif (isset($retours['timestamp'])) { // si réponse simplement envoyée par courriel
-							$description[$i]['url'] = formidable_generer_url_action_recuperer_fichier_email($saisie, 
-								$desc['fichier'], 
+							$description[$i]['url'] = formidable_generer_url_action_recuperer_fichier_email(
+								$saisie,
+								$desc['fichier'],
 								array('timestamp'=>$retours['timestamp'])
 							);
 						}
 					}
-				}	
+				}
 				set_request($saisie, $description);
 			}
 		}
 	}
-	// lorsqu'on affichera à nouveau le html, dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
+	// lorsqu'on affichera à nouveau le html,
+	// dire à cvt-upload de ne pas générer le html pour les résultats des saisies fichiers
 	if ($formulaire['apres']=='formulaire' and isset($retours['fichiers'])) {
 		$formidable_cvtupload_precharger_fichiers = array();
 		set_request('_fichiers', null);
-		set_request('_cvtupload_precharger_fichiers_forcer',true);
-		foreach ($retours['fichiers'] as $champ => $valeur){
+		set_request('_cvtupload_precharger_fichiers_forcer', true);
+		foreach ($retours['fichiers'] as $champ => $valeur) {
 			$i = -1;
-			foreach ($valeur as $id=>$info){
+			foreach ($valeur as $id => $info) {
 				$i++;
-				if (isset ($info['fichier'])) {
+				if (isset($info['fichier'])) {
 					$nom_fichier = $info['fichier'];
 				} else {
 					$nom_fichier = $info['nom'];
 				}
 				if (isset($retours['id_formulaires_reponse'])) {
 					$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
-						."formulaire_".$retours['id_formulaire']
-						."/reponse_".$retours['id_formulaires_reponse']
-						."/".$champ
-						."/".$nom_fichier;
+						.'formulaire_'.$retours['id_formulaire']
+						.'/reponse_'.$retours['id_formulaires_reponse']
+						.'/'.$champ
+						.'/'.$nom_fichier;
 					$formidable_cvtupload_precharger_fichiers[$champ][$i]['url'] = formidable_generer_url_action_recuperer_fichier($retours['id_formulaire'], $retours['id_formulaires_reponse'], $champ, $nom_fichier);
 					$formidable_cvtupload_precharger_fichiers[$champ][$i]['chemin'] = $chemin_fichier;
 				} elseif (isset($retours['timestamp'])) {
 					$chemin_fichier = _DIR_FICHIERS_FORMIDABLE
-						."timestamp/"
-						.$retours['timestamp']."/"
-						.$champ."/"
+						.'timestamp/'
+						.$retours['timestamp'].'/'
+						.$champ.'/'
 						.$nom_fichier;
-					$formidable_cvtupload_precharger_fichiers[$champ][$i]['chemin'] = $chemin_fichier; 
+					$formidable_cvtupload_precharger_fichiers[$champ][$i]['chemin'] = $chemin_fichier;
 					$formidable_cvtupload_precharger_fichiers[$champ][$i]['url'] = formidable_generer_url_action_recuperer_fichier_email(
-						$champ, 
+						$champ,
 						$nom_fichier,
 						array('timestamp'=>$retours['timestamp'])
 					);
@@ -492,8 +503,8 @@ function formulaires_formidable_fichiers($id, $valeurs = array(), $id_formulaire
 	if ($saisies = sql_getfetsel('saisies', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))) {
 		$saisies = unserialize($saisies);
 		include_spip('inc/saisies_lister');
-		$saisies_fichiers = array_keys(saisies_lister_avec_type($saisies,'fichiers'));
-		return $saisies_fichiers; 
+		$saisies_fichiers = array_keys(saisies_lister_avec_type($saisies, 'fichiers'));
+		return $saisies_fichiers;
 	}
 }
 /**
@@ -541,7 +552,7 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 					'fichier' => $fichier['nom'],
 					'saisie' => $champ['nom']
 				));
-				$fichiers[$nom][$f]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_formulaires_reponse, $champ['nom'], $fichier['nom']); 
+				$fichiers[$nom][$f]['url'] =  formidable_generer_url_action_recuperer_fichier($id_formulaire, $id_formulaires_reponse, $champ['nom'], $fichier['nom']);
 				$fichiers[$nom][$f]['chemin'] = $chemin.$fichier['nom'];
 			}
 		} else {
@@ -549,7 +560,7 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 			$contexte[$champ['nom']] = is_array($test_array) ? $test_array : $champ['valeur'];
 		}
 	}
-	if ($fichiers != array()) {//s'il y a des fichiers dans les réponses 
+	if ($fichiers != array()) {//s'il y a des fichiers dans les réponses
 		$contexte['cvtupload_precharger_fichiers'] = $fichiers;
 	}
 	return $contexte;
@@ -559,7 +570,8 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
  * Produire un message d'erreur concaténant les messages d'erreurs
  * par fichier.
  * Fournir également une forme pour l'envoyer par webmestre
- * @param array $fichiers le tableau des fichiers qui a été remplie par formidable_deplacer_fichiers_produire_vue_saisie()
+ * @param array $fichiers
+ * 		le tableau des fichiers qui a été remplie par formidable_deplacer_fichiers_produire_vue_saisie()
  * @return array ('message_public' => 'message', 'message_webmestre' => 'message'
 **/
 function formidable_produire_messages_erreurs_fichiers($fichiers) {
@@ -571,7 +583,7 @@ function formidable_produire_messages_erreurs_fichiers($fichiers) {
 				$message_public .= $description['erreur']."\n";
 				$message_webmestre .= "Pour le champ $champ[$n]:\n"
 					. '- Le fichier temporaire : '.$description['tmp_name']."\n"
-					. '- Ayant pour véritable nom : '.$description['nom']." \n"; 
+					. '- Ayant pour véritable nom : '.$description['nom']." \n";
 			}
 		}
 	}
@@ -581,4 +593,3 @@ function formidable_produire_messages_erreurs_fichiers($fichiers) {
 		return '';
 	}
 }
-

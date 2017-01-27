@@ -50,9 +50,11 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	if ($id_formulaire > 0
 		and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire)
-		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses',
-			'id_formulaire = ' . $id_formulaire . ($statut_reponses == 'publie' ? ' and statut = "publie"' : ''))
-	) {
+		and $reponses = sql_allfetsel(
+			'*',
+			'spip_formulaires_reponses',
+			'id_formulaire = ' . intval($id_formulaire) . ($statut_reponses == 'publie' ? ' and statut = "publie"' : '')
+		)) {
 		include_spip('inc/saisies');
 		include_spip('facteur_fonctions');
 		include_spip('inc/filtres');
@@ -74,9 +76,11 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 				$options  = $saisie['options'];
 				$titres[] = sinon(
 					isset($options['label_case']) ? $options['label_case'] : '',
-					sinon(isset($options['label']) ? $options['label'] : '',
+					sinon(
+						isset($options['label']) ? $options['label'] : '',
 						$nom
-					));
+					)
+				);
 			}
 		}
 
@@ -116,7 +120,6 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 			// Ensuite tous les champs
 			$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
 			foreach ($saisies as $nom => $saisie) {
-
 				if ($saisie['saisie'] != 'explication') {
 					$valeur = sql_getfetsel(
 						'valeur',
@@ -124,7 +127,7 @@ function exporter_formulaires_reponses($id_formulaire, $delim = ',', $statut_rep
 						'id_formulaires_reponse = ' . intval($reponse['id_formulaires_reponse']) . ' and nom = ' . sql_quote($nom)
 					);
 					$valeur = $tenter_unserialize($valeur);
-					
+
 					// Saisie de type fichier ?
 					if ($saisie['saisie'] == 'fichiers' && is_array($valeur)) {//tester s'il y a des saisies parmi les fichiers
 						$chemin         = _DIR_FICHIERS_FORMIDABLE . 'formulaire_' . $id_formulaire . '/reponse_' . $reponse['id_formulaires_reponse'];
