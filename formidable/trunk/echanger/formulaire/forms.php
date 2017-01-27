@@ -214,9 +214,7 @@ function forms_configure_traitement_formulaire($form, &$formulaire) {
 		'modifiable' => ($form['modifiable'] == 'oui') ? 'on' : '',
 		'multiple' => ($form['multiple'] == 'non') ? '' : 'on'
 	);
-
 }
-
 
 /**
  * On a genere un fieldset pour chaque separateur de f&t
