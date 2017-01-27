@@ -187,7 +187,7 @@ function saisie_identifier($saisie, $regenerer = false) {
  * @param array &$erreurs_fichiers pour les saisies de type fichiers, un tableau qui va stocker champs par champs, puis fichier par fichier, les erreurs de chaque fichier, pour pouvoir ensuite éventuellement supprimer les fichiers erronées de $_FILES
  * @return array Retourne un tableau d'erreurs
  */
-function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreurs_fichiers=array()) {
+function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreurs_fichiers = array()) {
 	include_spip('inc/verifier');
 	$erreurs = array();
 	$verif_fonction = charger_fonction('verifier', 'inc', true);
@@ -206,11 +206,15 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 		if ($saisie['saisie'] == 'fichiers') {
 			$infos_fichiers_precedents = _request('cvtupload_fichiers_precedents');
 			if (isset($infos_fichiers_precedents[$champ])) { // si on a déjà envoyé des infos avants
-				$valeur = True;
+				$valeur = true;
 			} elseif (isset($_FILES[$champ]['error'])) {//si jamais on a déja envoyé quelque chose dans le précédent envoi = ok
 				$valeur = null; //On considère que par défaut on a envoyé aucun fichiers
 				foreach ($_FILES[$champ]['error'] as $err) {
-					if ($err != 4) { //Si un seul fichier a été envoyé, même avec une erreur, on considère que le critère obligatoire est rempli. Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs. Voir http://php.net/manual/fr/features.file-upload.errors.php
+					if ($err != 4) {
+						//Si un seul fichier a été envoyé, même avec une erreur,
+						// on considère que le critère obligatoire est rempli.
+						// Il faudrait que verifier/fichiers.php vérifier les autres types d'erreurs.
+						// Voir http://php.net/manual/fr/features.file-upload.errors.php
 						$valeur = $_FILES[$champ];
 						break;
 					}
@@ -265,9 +269,9 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 			$options = isset($verifier['options']) ? $verifier['options'] : array();
 			if ($erreur_eventuelle = $verif_fonction($valeur, $verifier['type'], $options, $normaliser)) {
 				$erreurs[$champ] = $erreur_eventuelle;
-				
+
 				if ($verifier['type'] == 'fichiers') { // Pour les vérification/saisies de type fichiers, ajouter les erreurs détaillées par fichiers dans le tableau des erreurs détaillées par fichier
-					$erreurs_fichiers[$champ] = $normaliser; 
+					$erreurs_fichiers[$champ] = $normaliser;
 				}
 
 			// S'il n'y a pas d'erreur et que la variable de normalisation a été remplie, on l'injecte dans le POST
@@ -279,14 +283,14 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles = true, &$erreur
 	// Last but not least, on passe nos résultats à un pipeline
 	$erreurs = pipeline(
 		'saisies_verifier',
-			array(
-				'args'=>array(
-					'formulaire' => $formulaire,
-					'saisies' => $saisies
-				),
-				'data' => $erreurs
-			)
-		);
+		array(
+			'args'=>array(
+				'formulaire' => $formulaire,
+				'saisies' => $saisies
+			),
+			'data' => $erreurs
+		)
+	);
 	return $erreurs;
 }
 

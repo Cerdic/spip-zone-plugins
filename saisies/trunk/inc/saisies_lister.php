@@ -55,7 +55,9 @@ function saisies_lister_par_nom($contenu, $avec_conteneur = true) {
 	if (is_array($contenu)) {
 		foreach ($contenu as $ligne) {
 			if (is_array($ligne)) {
-				if (array_key_exists('saisie', $ligne) and (!isset($ligne['saisies']) or !is_array($ligne['saisies']) or $avec_conteneur) and isset($ligne['options'])) {
+				if (array_key_exists('saisie', $ligne)
+					and (!isset($ligne['saisies']) or !is_array($ligne['saisies']) or $avec_conteneur)
+					and isset($ligne['options'])) {
 					$saisies[$ligne['options']['nom']] = $ligne;
 				}
 				if (isset($ligne['saisies']) and is_array($ligne['saisies'])) {
@@ -117,7 +119,7 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
  * @param string $type Type de la saisie
  * @param String $tri     tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom')
  *
- * @return liste de ces saisies triees par nom 
+ * @return liste de ces saisies triees par nom
  */
 function saisies_lister_avec_type($saisies, $type, $tri = 'nom') {
 	$saisies_type = array();
@@ -214,7 +216,8 @@ function saisies_lister_valeurs_defaut($contenu) {
 		// Si le nom du champ est un tableau indexé, il faut parser !
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $nom, $separe)) {
 			$nom = $separe[1];
-			// Dans ce cas on ne récupère que le nom, la valeur par défaut du tableau devra être renseigné autre part
+			// Dans ce cas on ne récupère que le nom,
+			// la valeur par défaut du tableau devra être renseigné autre part
 			$defauts[$nom] = array();
 		} else {
 			$defauts[$nom] = isset($saisie['options']['defaut']) ? $saisie['options']['defaut'] : '';
