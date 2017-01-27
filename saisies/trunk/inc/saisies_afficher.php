@@ -133,7 +133,7 @@ function saisies_generer_html($champ, $env = array()) {
 
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
-	
+
 	// On ajoute aussi les infos de vérification, si cela peut se faire directement en HTML5
 	if (isset($champ['verifier'])) {
 		$contexte = array_merge($contexte, array('verifier'=>$champ['verifier']));
@@ -148,11 +148,13 @@ function saisies_generer_html($champ, $env = array()) {
 		// par les modification sur l'environnement servant à generer la saisie mère
 		$contexte['_env'] = $env;
 
-		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
+		// À partir du moment où on passe tout l'environnement,
+		// il faut enlever certains éléments qui ne doivent absolument provenir que des options
 		unset($env['inserer_debut']);
 		unset($env['inserer_fin']);
 		$saisies_disponibles = saisies_lister_disponibles();
-		if (isset($saisies_disponibles[$contexte['type_saisie']]) and is_array($saisies_disponibles[$contexte['type_saisie']]['options'])) {
+		if (isset($saisies_disponibles[$contexte['type_saisie']])
+			and is_array($saisies_disponibles[$contexte['type_saisie']]['options'])) {
 			$options_a_supprimer = saisies_lister_champs($saisies_disponibles[$contexte['type_saisie']]['options']);
 			foreach ($options_a_supprimer as $option_a_supprimer) {
 				unset($env[$option_a_supprimer]);
@@ -322,117 +324,119 @@ function saisies_generer_js_afficher_si($saisies, $id_form) {
 	$code .= "\tverifier_saisies_".$id_form." = function(form){\n";
 	foreach ($saisies as $saisie) {
 		// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
-					// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
-					// lorsque le name est un tableau
-					if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
-						++$i;
-						// retrouver la classe css probable
-						switch ($saisie['saisie']) {
-							case 'fieldset':
-								$class_li = 'fieldset_'.$saisie['options']['nom'];
-								break;
-							case 'explication':
-								$class_li = 'explication_'.$saisie['options']['nom'];
-								break;
-							default:
-								// Les [] dans le nom de la saisie sont transformés en _ dans le
-								// nom de la classe, il faut faire pareil
-								$class_li = 'editer_' . rtrim(
-									preg_replace('/[][]\[?/', '_', $saisie['options']['nom']),
-									'_'
-								);
+		// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
+		// lorsque le name est un tableau
+		if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
+			++$i;
+			// retrouver la classe css probable
+			switch ($saisie['saisie']) {
+				case 'fieldset':
+					$class_li = 'fieldset_'.$saisie['options']['nom'];
+					break;
+				case 'explication':
+					$class_li = 'explication_'.$saisie['options']['nom'];
+					break;
+				default:
+					// Les [] dans le nom de la saisie sont transformés en _ dans le
+					// nom de la classe, il faut faire pareil
+					$class_li = 'editer_' . rtrim(
+						preg_replace('/[][]\[?/', '_', $saisie['options']['nom']),
+						'_'
+					);
+			}
+			$afficher_si = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
+			$afficher_si_remplissage = isset($saisie['options']['afficher_si_remplissage']) ?
+				$saisie['options']['afficher_si_remplissage'] : '';
+			$condition = implode("\n", array_filter(array($afficher_si, $afficher_si_remplissage)));
+			// retrouver l'identifiant
+			$identifiant = '';
+			if (isset($saisie['identifiant']) and $saisie['identifiant']) {
+				$identifiant = $saisie['identifiant'];
+			}
+			// On gère le cas @plugin:non_plugin@
+			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
+			foreach ($matches[1] as $plug) {
+				if (defined('_DIR_PLUGIN_'.strtoupper($plug))) {
+					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
+				} else {
+					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
+				}
+			}
+			// On gère le cas @config:plugin:meta@ suivi d'un test
+			preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
+			foreach ($matches[1] as $plugin) {
+				$config = lire_config($plugin);
+				$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
+			}
+			// On transforme en une condition valide
+			preg_match_all('#@(.+)@#U', $condition, $matches);
+			foreach ($matches[1] as $nom) {
+				switch ($saisies[$nom]['saisie']) {
+					case 'radio':
+					case 'oui_non':
+					case 'true_false':
+						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
+						break;
+					case 'case':
+						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
+						break;
+					case 'checkbox':
+						preg_match_all('#@(.+)@\s*==\s*"(.*)"$#U', $condition, $matches2);
+						foreach ($matches2[2] as $value) {
+							$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").val() : "")', $condition);
 						}
-						$afficher_si = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
-						$afficher_si_remplissage = isset($saisie['options']['afficher_si_remplissage']) ? $saisie['options']['afficher_si_remplissage'] : '';
-						$condition = implode("\n", array_filter(array($afficher_si, $afficher_si_remplissage)));
-						// retrouver l'identifiant
-						$identifiant = '';
-						if (isset($saisie['identifiant']) and $saisie['identifiant']) {
-							$identifiant = $saisie['identifiant'];
-						}
-						// On gère le cas @plugin:non_plugin@
-						preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
-						foreach ($matches[1] as $plug) {
-							if (defined('_DIR_PLUGIN_'.strtoupper($plug))) {
-								$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
-							} else {
-								$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
-							}
-						}
-						// On gère le cas @config:plugin:meta@ suivi d'un test
-						preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
-						foreach ($matches[1] as $plugin) {
-							$config = lire_config($plugin);
-							$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
-						}
-						// On transforme en une condition valide
-						preg_match_all('#@(.+)@#U', $condition, $matches);
-						foreach ($matches[1] as $nom) {
-							switch ($saisies[$nom]['saisie']) {
-								case 'radio':
-								case 'oui_non':
-								case 'true_false':
-									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
-									break;
-								case 'case':
-									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
-									break;
-								case 'checkbox':
-									preg_match_all('#@(.+)@\s*==\s*"(.*)"$#U', $condition, $matches2);
-									foreach ($matches2[2] as $value) {
-										$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").val() : "")', $condition);
-									}
-									break;
-								default:
-									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']").val()', $condition);
-							}
-						}
-						if ($identifiant) {
-							$sel = "[data-id='$identifiant']";
-						} else {
-							$sel = ".$class_li";
-						}
-						$code .= "\tif (".$condition.") {\n"
-										 .	"\t\t$(form).find(\"$sel\").show(400);\n";
-						if (html5_permis()) {
-						$pour_html_5 = 	"$sel.obligatoire > input, "// si le afficher_si porte directement sur le input
-														."$sel .obligatoire > input, "// si le afficher_si porte sur le fieldset
-														."$sel.obligatoire > textarea, "// si le afficher_si porte directement sur le textearea
-														."$sel .obligatoire > textarea, "// si le afficher_si porte sur le fiedset
-														."$sel.obligatoire > select, "//si le afficher_si porte directement sur le select
-														."$sel .obligatoire > select";//si le afficher_si porte sur le fieldset
-						$code .=	"\t\t$(form).find("
-										.'"'."$pour_html_5\")".
-										".attr(\"required\",true);\n";
-						}
-						$code .=	"\t}\n";
-						$code .= "\telse {\n";
-						if (html5_permis()) {
-						 	$code .= "\t\t$(form).find(\n\t\t\t"
-						 				.'"'."$pour_html_5\")\n"
-						 				."\t\t.attr(".'"required"'.",false);\n";
-						}					
-						$code .= "\t\tif (chargement==true) {\n"
-										."\t\t\t$(form).find(\"$sel\").hide(400).css".'("display","none")'.";\n"
-										."\t\t}\n"
-										."\t\telse {\n"
-										."\t\t\t$(form).find(\"$sel\").hide(400);\n"
-										."\t\t};\n"
-										."\t}\n";
-					}
+						break;
+					default:
+						$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']").val()', $condition);
+				}
+			}
+			if ($identifiant) {
+				$sel = "[data-id='$identifiant']";
+			} else {
+				$sel = ".$class_li";
+			}
+			$code .= "\tif (".$condition.") {\n"
+							 .	"\t\t$(form).find(\"$sel\").show(400);\n";
+			if (html5_permis()) {
+			$pour_html_5 = 	"$sel.obligatoire > input, "// si le afficher_si porte directement sur le input
+							."$sel .obligatoire > input, "// si le afficher_si porte sur le fieldset
+							."$sel.obligatoire > textarea, "// si le afficher_si porte directement sur le textearea
+							."$sel .obligatoire > textarea, "// si le afficher_si porte sur le fiedset
+							."$sel.obligatoire > select, "//si le afficher_si porte directement sur le select
+							."$sel .obligatoire > select";//si le afficher_si porte sur le fieldset
+			$code .=	"\t\t$(form).find("
+							.'"'."$pour_html_5\")".
+							".attr(\"required\",true);\n";
+			}
+			$code .=	"\t}\n";
+			$code .= "\telse {\n";
+			if (html5_permis()) {
+			 	$code .= "\t\t$(form).find(\n\t\t\t"
+			 				.'"'."$pour_html_5\")\n"
+			 				."\t\t.attr(".'"required"'.",false);\n";
+			}
+			$code .= "\t\tif (chargement==true) {\n"
+					."\t\t\t$(form).find(\"$sel\").hide(400).css".'("display","none")'.";\n"
+					."\t\t}\n"
+					."\t\telse {\n"
+					."\t\t\t$(form).find(\"$sel\").hide(400);\n"
+					."\t\t};\n"
+					."\t}\n";
+		}
 	}
 	$code .= "};\n";
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").each(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= "\t".'$("#afficher_si_'.$id_form.'").parents("form").change(function(){'."\n\t\t".'verifier_saisies_'.$id_form.'(this);});'."\n";
 	$code .= "\tchargement=false;})\n";
 	$code .= '})(jQuery);'."\n";
-	
+
 	if (!defined('_SAISIES_AFFICHER_SI_JS_LISIBLE')) {
-		define('_SAISIES_AFFICHER_SI_JS_LISIBLE',false);
+		define('_SAISIES_AFFICHER_SI_JS_LISIBLE', false);
 	}
-	if (!_SAISIES_AFFICHER_SI_JS_LISIBLE){//il suffit de régler cette constante à TRUE pour afficher le js de manière plus lisible (et moins sibyllin)
-		$code = str_replace("\n",'',$code);//concatener
-		$code = str_replace("\t",'',$code);//concatener
+	if (!_SAISIES_AFFICHER_SI_JS_LISIBLE) {
+		// il suffit de régler cette constante à TRUE pour afficher le js de manière plus lisible (et moins sibyllin)
+		$code = str_replace("\n", '', $code); //concatener
+		$code = str_replace("\t", '', $code); //concatener
 	}
 	return $i > 0 ? $code : '';
 }
@@ -462,11 +466,11 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
 			$condition = '';
-			if (isset($saisie['options']['afficher_si_remplissage'])){
-				 $condition .= $saisie['options']['afficher_si_remplissage'];
+			if (isset($saisie['options']['afficher_si_remplissage'])) {
+				$condition .= $saisie['options']['afficher_si_remplissage'];
 			}
-			if (isset($saisie['options']['afficher_si'])){
-				 $condition .= $saisie['options']['afficher_si'];
+			if (isset($saisie['options']['afficher_si'])) {
+				$condition .= $saisie['options']['afficher_si'];
 			}
 			// On gère le cas @plugin:non_plugin@
 			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
