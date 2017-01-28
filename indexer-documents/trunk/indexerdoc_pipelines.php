@@ -1,7 +1,9 @@
 <?php
 include_spip('inc/config');
 include_spip('action/editer_liens');
-define ('_INDEXERDOC_OBJETS_LIES',0);// A mettre sur 1 dans mes_options.php si on veut que le contenu du document soit également indexé dans l'objet lié
+if (!defined('_INDEXERDOC_OBJETS_LIES')){
+	define ('_INDEXERDOC_OBJETS_LIES',0);// A mettre sur 1 dans mes_options.php si on veut que le contenu du document soit également indexé dans l'objet lié
+}
 /**
  * Modifier la source pour l'objet "document"
  *
