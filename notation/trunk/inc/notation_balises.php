@@ -32,7 +32,7 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 		$disabled = $clicable ? '' : " disabled='disabled'";
 		if (include_spip("inc/config")
 		AND lire_config('notation/change_note')){
-			$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$checked$disabled />\n";
+			$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$disabled />\n";
 		}
 		for ($i=1; $i<=$max_note; $i++){
 			$checked = ($i==$nb) ? " checked='checked'" : "";
