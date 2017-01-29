@@ -5,6 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 /**
+ * Fonction d'appel pour le pipeline
+ * @pipeline autoriser */
+function suploadhtml5_autoriser() {
+}
+
+/**
  * Autorisation de supprimer un document temporaire uploader avec la saisie upload
  *
  * @param  string $faire Action demandée
