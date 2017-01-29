@@ -19,7 +19,13 @@ function embed_url($url) {
 
 	// Gérer les elements de dropbox (remplacer www par dl)
 	$url = preg_replace("/^(https\:\/\/)(www)(\.dropbox\.com\/.*\/.*\/.*?)(\?dl=[01])?$/", '\1dl\3', $url);
-
+	
+	// Gérer les elements de commons.wikimedia
+	if (preg_match("/^https?\:\/\/commons\.wikimedia\.org\/wiki\/File\:(.*)/i", $url, $regs)) {
+		$md5 = md5($regs[1]);
+		$url = 'https://upload.wikimedia.org/wikipedia/commons/' . $md5[0] . '/' . $md5[0] . $md5[1] . '/' . urlencode($regs[1]);
+	}
+	
 	// Si l'embed a deja été sauvegardé
 	if (file_exists(_DIR_CACHE."$host/$dossier/$fichier")) {
 		$html = implode("", file(_DIR_CACHE."$host/$dossier/$fichier"));
