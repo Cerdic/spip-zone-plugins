@@ -481,7 +481,7 @@ function fusion_spip_vignettes_documents_dist($connect) {
  * @param string $img_dir répertoire IMG source
  * @param string $connect base source
  */
-function fusion_spip_import_documents_dist($img_dir, $connect) {
+function fusion_spip_import_documents_dist($img_dir, $connect, $options = array()) {
 	fusion_spip_log('Traitement du répertoire IMG : '.$img_dir, 'fusion_spip_documents_'.$connect);
 	include_spip('inc/documents');
 	$time_start = microtime(true);
@@ -529,7 +529,41 @@ function fusion_spip_import_documents_dist($img_dir, $connect) {
 					fusion_spip_log('Attention : le document source.('.$source_doc.') et le document de destination ('.$dest_doc.') sont identiques, il est préférable de remplacer en base de données, on utilise le document source : '.$id_document_source, 'fusion_spip_documents_'.$connect);
 					if (intval($id_document_source) > 0) {
 						sql_updateq('spip_documents_liens', array('id_document' => $id_document_source), 'id_document='.intval($obj_import['id_final']));
+						$datas_document = sql_fetsel('titre, descriptif, credits', 'spip_documents', 'id_document='.intval($obj_import['id_final']));
 						sql_updateq('spip_fusion_spip', array('id_final' => $id_document_source), 'id_final='.intval($obj_import['id_final']).' AND objet="document" and site_origine='.sql_quote($connect));
+						if ($options['traduire_documents_doublons'] == 'on' && isset($options['langue_base'])) {
+							if ($datas_document) {
+								$nouveau_contenu = array();
+								$datas_original = sql_fetsel('titre, descriptif, credits', 'spip_documents', 'id_document='.intval($id_document_source));
+								foreach ($datas_document as $cle => $data) {
+									$multi_final = false;
+									if ((strlen($datas_original[$cle]) > 0) && (strlen($data) > 0) && preg_match_all(_EXTRAIRE_MULTI, $datas_original[$cle], $regs, PREG_SET_ORDER)) {
+										$trads = extraire_trads($regs[0][1]);
+										if (!isset($trads[$options['langue_base']])) {
+											$multi_debut = '<multi>';
+											$multi_fin = '</multi>';
+											$multi_complet = '';
+											foreach ($trads as $cle => $multi) {
+												$multi_complet .= '['.$cle.']'.$multi;
+											}
+											$multi_complet .= '['.$options['langue_base'].']'.$data;
+											$multi_final = $multi_debut.$multi_complet.$multi_fin;
+										}
+									} elseif (strlen($data) > 0){
+										/**
+										 * Cas 2, construire le multi
+										 */
+										$multi_final = '<multi>['.$options['langue_origine'].']'.$datas_original[$cle].'['.$options['langue_base'].']'.$data.'</multi>';
+									}
+									if (isset($multi_final) && $multi_final && $multi_final != $data) {
+										$nouveau_contenu[$cle] = $multi_final;
+									}
+								}
+								if (count($nouveau_contenu) > 0) {
+									sql_updateq('spip_documents', $nouveau_contenu, 'id_document = '.intval($id_document_source));
+								}
+							}
+						}
 						sql_delete('spip_documents', 'id_document='.intval($obj_import['id_final']));
 						$copy = false;
 					}

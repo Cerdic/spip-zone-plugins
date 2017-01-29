@@ -50,6 +50,8 @@ function formulaires_fusion_spip_verifier_dist() {
 	} else {
 		$traite_stats = (_request('stats') != 'on' ? true : false);
 		$traite_referers = (_request('referers') != 'on' ? true : false);
+		$bases = bases_referencees(_FILE_CONNECT_TMP);
+		$connect = $bases[$base-1];
 		/**
 		 * S'assurer de pouvoir créer des sous répertoires et des fichiers dans IMG/
 		 */
@@ -63,11 +65,18 @@ function formulaires_fusion_spip_verifier_dist() {
 			} else {
 				$erreurs['img_dir'] = _T('fusion_spip:erreur_img_accessible');
 			}
+
+			if (!isset($erreurs['img_dir']) && !_request('traduire_documents_doublons') && sql_showtable('spip_meta', false, $connect)) {
+				include_spip('inc/config');
+				$langue_base = sql_getfetsel('valeur', 'spip_meta', 'nom="langue_site"', '', '', '', '', $connect);
+				$langue_site = lire_config('langue_site');
+				if ($langue_base != $langue_site) {
+					$erreurs['warning_traduction_document'] = _T('fusion_spip:erreur_traduction_document');
+				}
+			}
 			supprimer_fichier(_DIR_IMG.'test_fusion.txt');
 			supprimer_repertoire(_DIR_IMG.'test_fusion');
 		}
-		$bases = bases_referencees(_FILE_CONNECT_TMP);
-		$connect = $bases[$base-1];
 
 		$lister_tables_principales = charger_fonction('lister_tables_principales', 'fusion_spip');
 		$principales = $lister_tables_principales($connect, false);
@@ -90,7 +99,7 @@ function formulaires_fusion_spip_verifier_dist() {
 			}
 		}
 		// vérifier la conformité du shéma de la base source
-		if (empty($erreurs) && _request('confirme_warning') != 'on') {
+		if ((empty($erreurs) or (count($erreurs) == 1 && isset($erreurs['warning_traduction_document']))) && _request('confirme_warning') != 'on') {
 			$comparer_shemas = charger_fonction('comparer_shemas', 'fusion_spip');
 			$erreurs_shema = $comparer_shemas($connect, $principales, $auxiliaires);
 			if (count($erreurs_shema)) {
@@ -202,7 +211,14 @@ function formulaires_fusion_spip_traiter_dist() {
 		// importer un par un les documents et logos de la source
 		if ($img_dir) {
 			$import_documents = charger_fonction('import_documents', 'fusion_spip');
-			$import_documents($img_dir, $connect);
+			$options = array();
+			if (_request('traduire_documents_doublons') == 'on') {
+				$options['traduire_documents_doublons'] = 'on';
+				$options['langue_base'] = sql_getfetsel('valeur', 'spip_meta', 'nom="langue_site"', '', '', '', '', $connect);
+				include_spip('inc/config');
+				$options['langue_origine'] = lire_config('langue_site');
+			}
+			$import_documents($img_dir, $connect, $options);
 		}
 
 		// mise à jour des liens internes [...->...]

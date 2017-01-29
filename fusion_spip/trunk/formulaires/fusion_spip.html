@@ -33,6 +33,14 @@
 				<p class="explication"><:fusion_spip:img_dir_desc:></p>
 				<input type="text" name="img_dir" class="text" id="img_dir" value="#ENV{img_dir}" />
 			</li>
+			#SET{warning_traduction_document,#ENV**{erreurs}|table_valeur{warning_traduction_document}}
+			[<li class="editer editer_confirme_warning [ (#GET{warning_traduction_document}|oui)erreur]">
+				<span class='erreur_message'>(#GET{warning_traduction_document})</span>
+				<div class="choix">
+					<input type="checkbox" name="traduire_documents_doublons" id="traduire_documents_doublons" />
+					<label for="traduire_documents_doublons"><:fusion_spip:confirme_traduire_documents_doublons:></label>
+				</div>
+			</li>]
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{secteur}}
 			<li class="editer editer_secteur [ (#GET{erreurs}|oui)erreur]">
 				<label for="secteur"><:fusion_spip:secteur:></label>

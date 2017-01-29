@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Supprimer la fusion',
 
 	// C
+	'confirme_traduire_documents_doublons' => 'Traduire les documents en doublons en utilisant les champs multis',
 	'confirme_warning' => 'Confirmer la fusion des bases ?',
 
 	// D
@@ -23,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_img_accessible' => 'Votre répertoire IMG n’est pas accessible. Il est impossible soit d’y écrire un fichier à la racine, soit d’y créer un sous-répertoire.',
+	'erreur_traduction_document' => 'Vos bases sont dans des langues différentes, en cochant la case suivante, vous pouvez traduire le contenu des documents en doublon en utilisant les champs multis.',
 	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
 		<br/>- hôte est en version @vhote@
 		<br/>- source est en version @vsource@',
