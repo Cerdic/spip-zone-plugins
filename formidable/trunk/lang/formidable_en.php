@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_descriptif' => 'Description',
 	'editer_descriptif_explication' => 'An explanation of the form for the private area.',
 	'editer_identifiant' => 'Login',
-	'editer_identifiant_explication' => 'Give a single textual identifier that allows you to call the form more easily.',
+	'editer_identifiant_explication' => 'Give a single textual identifier that allows you to call the form more easily.', # MODIF
 	'editer_menu_auteurs' => 'Configure authors',
 	'editer_menu_champs' => 'Configure the fields',
 	'editer_menu_formulaire' => 'Configure the form',
@@ -81,7 +81,7 @@ This string is used to display a summary of each reply in the lists. Fields such
 	'erreur_base' => 'An error occurred as the data was being saved.',
 	'erreur_generique' => 'There are errors in the fields below. Please check.',
 	'erreur_identifiant' => 'This login is already used.',
-	'erreur_identifiant_format' => 'The ID can only contain numbers, letters and "_" character',
+	'erreur_identifiant_format' => 'The ID can only contain numbers, letters and "_" character', # MODIF
 	'erreur_importer_forms' => 'Error while importing the Forms&Tables form',
 	'erreur_importer_wcs' => 'Error while importing the W.C.S form',
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
