@@ -729,7 +729,7 @@ $AutoEmbed_stubs = array(
   array(
     'title' => 'Jamendo',
     'website' => 'http://www.jamendo.com',
-    'url-match' => 'http://(?:www\.|widgets\.)?jamendo\.com/(?:[a-z0-9]*?)/album/(?:\?album_id=)?([0-9]{1,10})',
+    'url-match' => 'http://(?:www\.|widgets\.)?jamendo\.com/album/(?:\?album_id=)?([0-9]{1,10})',
     'embed-src' => 'http://widgets.jamendo.com/en/album/?album_id=$2&playertype=2008',
     'embed-width' => '200',
     'embed-height' => '300',
@@ -737,7 +737,7 @@ $AutoEmbed_stubs = array(
   array(
     'title' => 'Jamendo',
     'website' => 'http://www.jamendo.com',
-    'url-match' => 'http://(?:www\.|widgets\.)?jamendo\.com/(?:[a-z0-9]*?)/track/(?:\?album_id=)?([0-9]{1,10})',
+    'url-match' => 'http://(?:www\.|widgets\.)?jamendo\.com/track/(?:\?album_id=)?([0-9]{1,10})',
     'embed-src' => 'http://widgets.jamendo.com/fr/track/?playertype=2008&track_id=$2',
     'embed-width' => '200',
     'embed-height' => '300',
