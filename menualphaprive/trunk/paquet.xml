@@ -1,7 +1,7 @@
 <paquet
 	prefix="menualphaprive"
 	categorie="navigation"
-	version="1.1.1"
+	version="1.1.2"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
@@ -13,6 +13,7 @@
 
 	<auteur>nicod_</auteur>
 	<auteur>marcimat</auteur>
+	<credit>Icône par Mist. GraphX</credit>
 
 	<licence>GNU/GPL</licence>
 
