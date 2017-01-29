@@ -39,6 +39,7 @@ function noizetier_recuperer_fond($flux) {
 			
 			// On cherche en priorité une correspondance d'objet précis !
 			// Sinon on cherche pour le type de page ou la composition
+			$par_objet = false;
 			if (
 				(
 					isset($flux['args']['contexte']['type-page'])

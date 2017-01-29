@@ -110,12 +110,14 @@ function noizetier_obtenir_infos_noisettes_direct() {
 		}
 	}
 
-	// supprimer de la liste les noisettes necissant un plugin qui n'est pas actif
+	// supprimer de la liste les noisettes necessitant un plugin qui n'est pas actif.
+	// On s'arrête au premier inactif.
 	foreach ($liste_noisettes as $noisette => $infos_noisette) {
-		if (isset($infos_noisette['necessite'])) {
+		if (!empty($infos_noisette['necessite'])) {
 			foreach ($infos_noisette['necessite'] as $plugin) {
 				if (!defined('_DIR_PLUGIN_'.strtoupper($plugin))) {
 					unset($liste_noisettes[$noisette]);
+					break;
 				}
 			}
 		}
@@ -153,6 +155,15 @@ function noizetier_charger_infos_noisette_yaml($noisette, $info = '') {
 
 		if (!isset($infos_noisette['parametres'])) {
 			$infos_noisette['parametres'] = array();
+		}
+
+		// necessite de plugins : toujours renvoyer un array
+		if (!isset($infos_noisette['necessite'])) {
+			$infos_noisette['necessite'] = array();
+		}
+
+		if (is_string($infos_noisette['necessite'])) {
+			$infos_noisette['necessite'] = array($infos_noisette['necessite']);
 		}
 
 		// contexte
@@ -348,18 +359,20 @@ function noizetier_charger_infos_page($dossier, $page, $info = '') {
 		$infos_page['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 		$infos_page['description'] = isset($xml['description']) ? _T_ou_typo(spip_xml_aplatit($xml['description'])) : '';
 		$infos_page['icon'] = isset($xml['icon']) ? reset($xml['icon']) : 'page-24.png';
-			// Decomposition des blocs
-			if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)) {
-				$infos_page['blocs'] = array();
-				foreach (array_keys($blocs) as $bloc) {
-					list($balise, $attributs) = spip_xml_decompose_tag($bloc);
-					$infos_page['blocs'][$attributs['id']] = array(
-						'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
-						'icon' => isset($attributs['icon']) ? $attributs['icon'] : '',
-						'description' => _T($attributs['description']),
-					);
-				}
+
+		// Decomposition des blocs
+		if (spip_xml_match_nodes(',^bloc,', $xml, $blocs)) {
+			$infos_page['blocs'] = array();
+			foreach (array_keys($blocs) as $bloc) {
+				list($balise, $attributs) = spip_xml_decompose_tag($bloc);
+				$infos_page['blocs'][$attributs['id']] = array(
+					'nom' => $attributs['nom'] ? _T($attributs['nom']) : $attributs['id'],
+					'icon' => isset($attributs['icon']) ? $attributs['icon'] : '',
+					'description' => _T($attributs['description']),
+				);
 			}
+		}
+
 		if (spip_xml_match_nodes(',^necessite,', $xml, $necessites)) {
 			$infos_page['necessite'] = array();
 			foreach (array_keys($necessites) as $necessite) {
@@ -367,24 +380,23 @@ function noizetier_charger_infos_page($dossier, $page, $info = '') {
 				$infos_page['necessite'][] = $attributs['id'];
 			}
 		}
-	}
+	} elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : true) {
 		// S'il n'y a pas de fichier XML de configuration
-		elseif (defined('_NOIZETIER_LISTER_PAGES_SANS_XML') ? _NOIZETIER_LISTER_PAGES_SANS_XML : true) {
-			$infos_page['nom'] = $page;
-			$infos_page['icon'] = 'img/ic_page.png';
-		}
+		$infos_page['nom'] = $page;
+		$infos_page['icon'] = 'img/ic_page.png';
+	}
 
-		// Si les blocs n'ont pas ete definis, on applique les blocs par defaut
-		if (count($infos_page) > 0 and !isset($infos_page['blocs'])) {
-			$infos_page['blocs'] = noizetier_blocs_defaut();
-		}
+	// Si les blocs n'ont pas ete definis, on applique les blocs par defaut
+	if (count($infos_page) > 0 and !isset($infos_page['blocs'])) {
+		$infos_page['blocs'] = noizetier_blocs_defaut();
+	}
 
-		// On renvoie les infos
-		if (!$info) {
-			return $infos_page;
-		} else {
-			return isset($infos_page[$info]) ? $infos_page[$info] : '';
-		}
+	// On renvoie les infos
+	if (!$info) {
+		return $infos_page;
+	} else {
+		return isset($infos_page[$info]) ? $infos_page[$info] : '';
+	}
 }
 
 /**
