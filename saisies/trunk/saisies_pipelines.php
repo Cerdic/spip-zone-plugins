@@ -170,7 +170,10 @@ function saisies_formulaire_verifier($flux) {
 		if ($erreurs and !isset($erreurs['message_erreur'])) {
 			$erreurs['message_erreur'] = _T('saisies:erreur_generique');
 		}
-		$flux['data'] = array_merge($erreurs, $flux['data']);
+
+		if ($flux['data']) {
+			$flux['data'] = array_merge($erreurs, $flux['data']);
+		}
 	}
 
 	return $flux;
