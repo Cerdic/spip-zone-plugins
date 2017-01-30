@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @param array $flux
  * @return array
  */
-function intranet_boite_infos(&$flux) {
+function intranet_boite_infos($flux) {
 	$objet = $flux['args']['type'];
 	include_spip('inc/filtres');
 	if (lire_config('intranet/intranet_ouverts', '') == 'on'
