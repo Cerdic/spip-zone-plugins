@@ -19,7 +19,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function lesscss_compile($style, $contexte = array()){
 	static $import_dirs = null;
-	require_once 'less.php/Less.php';
+
+	spip_timer('lesscss_compile');
+	if (!class_exists('Less_Parser')){
+		require_once 'less.php/Less.php';
+	}
+	if (!function_exists('lire_config')) {
+		include_spip('inc/config');
+	}
 
 	if (is_null($import_dirs)){
 		$path = _chemin();
@@ -30,7 +37,6 @@ function lesscss_compile($style, $contexte = array()){
 	}
 
 	$parser = new Less_Parser();
-	include_spip('inc/config');
 	$parser->setOption('sourceMap', lire_config('lesscss/activer_sourcemaps', false) == "on" ? true : false);
 	$parser->setImportDirs($import_dirs);
 	$parser->relativeUrls = true;
@@ -52,6 +58,7 @@ function lesscss_compile($style, $contexte = array()){
 			$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
 		}
 
+		spip_log('lesscss_compile '.(isset($contexte['file'])?$contexte['file']:substr($style,0,100)).' :: '.spip_timer('lesscss_compile'), 'less');
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
