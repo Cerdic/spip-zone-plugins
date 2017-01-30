@@ -19,6 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function lesscss_compile($style, $contexte = array()){
 	static $import_dirs = null;
+	static $parser_options = null;
 
 	spip_timer('lesscss_compile');
 	if (!class_exists('Less_Parser')){
@@ -35,9 +36,14 @@ function lesscss_compile($style, $contexte = array()){
 			$import_dirs[$p] = protocole_implicite(url_absolue($p?$p:"./"));
 		}
 	}
+	if (is_null($parser_options)) {
+		$parser_options = array(
+			'sourceMap' => lire_config('lesscss/activer_sourcemaps', false) == "on" ? true : false,
+			//'cache_dir' => sous_repertoire(_DIR_CACHE,'less'),
+		);
+	}
 
-	$parser = new Less_Parser();
-	$parser->setOption('sourceMap', lire_config('lesscss/activer_sourcemaps', false) == "on" ? true : false);
+	$parser = new Less_Parser($parser_options);
 	$parser->setImportDirs($import_dirs);
 	$parser->relativeUrls = true;
 
