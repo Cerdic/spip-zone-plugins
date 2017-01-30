@@ -499,7 +499,6 @@ function saisies_verifier_afficher_si($saisies, $env = null) {
 			// on annule cette condition dans ce cas pour éviter une erreur du type :
 			// PHP Fatal error:  Can't use function return value in write context
 			$type_condition = preg_replace('#@(.+)@#U', '', $condition_originale);
-			$type_condition = preg_replace('#"(.+)"#U', '', $test);
 			if (trim($type_condition) != '=') {
 				eval('$ok = '.$condition.';');
 			}
