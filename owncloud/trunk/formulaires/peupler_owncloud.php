@@ -49,8 +49,6 @@ function formulaires_peupler_owncloud_traiter_dist($id_owncloud = 'new', $objet 
 	$recuperer_media = charger_fonction('recuperer_media', 'action');
 	$action = $recuperer_media();
 
-	spip_log($action, 'test.' . _LOG_ERREUR);
-
 	if ($action != 'oui') {
 		$res = array(
 			'editable' => true,
