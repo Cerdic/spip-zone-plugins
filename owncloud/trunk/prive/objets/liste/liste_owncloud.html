@@ -71,6 +71,12 @@
 </table>
 [<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
 </div>
+
+[(#BOITE_OUVRIR{'','info'})]
+	<p class="note"><:owncloud:message_importer_tout_media:></p>
+	[(#BOUTON_ACTION{<:owncloud:importer_tout_image:>, [(#URL_ACTION_AUTEUR{importer_tout_media, #SELF})], ajax})]
+#BOITE_FERMER
+
 </B_liste_owncloud>
 <div class="liste-objets owncloud documents caption-wrap">
 	<p class="caption"><:owncloud:pas_de_media:></p>

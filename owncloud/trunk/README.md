@@ -16,6 +16,13 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
+### Version 1.0.8 (31/01/2017)
+
+- Ajout d'un formulaire de configuration avec traitement des données plus logique
+- Ajout de l'importation de tous les médias en un clique
+- Mise à jour de la librairie SabreDav
+- Traitement des erreurs de connexion
+
 ### Version 1.0.7 (12/10/2016)
 
 - Ajout de la fonction curl pour accélérer la récupération des fichiers distants et accessoirement passer https
@@ -66,4 +73,4 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 ## TODO
 
 - Lors de la suppression d'un document dans SPIP on peut vérifier si il y a un md5 dans la base spip_ownclouds et le supprimer
-- Configuration - Répertoire distant - Mieux gérer le premier slash pour éviter que l'admin cherche 
+- Chiffrer le mot de passe de owncloud dans la table spip_meta (dangereux)

@@ -20,5 +20,5 @@ function action_importer_media_dist() {
 
 	$ajouts = importer_media_owncloud($arg);
 
-	return $ajouts;
+	return false;
 }

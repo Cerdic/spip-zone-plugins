@@ -18,7 +18,7 @@ function action_securise_media_dist() {
 	$arg = $securiser_action();
 
 	$securise = securise_identifiants($arg, true);
-	spip_log($securise, 'test.' . _LOG_ERREUR);
+
 	if (_request('type')) {
 		header('Content-Type: ' . _request('type'));
 		$f = basename($securise);
@@ -27,8 +27,7 @@ function action_securise_media_dist() {
 	} else {
 		include_spip('inc/filtres_images_mini');
 		$balise_img = charger_filtre('balise_img');
-		$texte = image_reduire($balise_img($securise), 800 , 800);
-		spip_log($texte, 'test.' . _LOG_ERREUR);
+		$texte = image_reduire($balise_img($securise), 800, 800);
 		echo $texte;
 	}
 }

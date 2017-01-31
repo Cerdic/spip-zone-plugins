@@ -46,12 +46,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'importer_image' => 'Importe un fichier',
+	'importer_tout_image' => 'Importe tous les fichiers',
 
 	// M
 	'md5' => 'md5',
 	'message_activation_synchro' => 'La synchronisation est activé.',
 	'message_confirmation_purger_owncloud' => 'Tout les identifiants MD5 sont supprimés de la base', # MODIF
 	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
+	'message_confirmation_recuperation_erreur_owncloud' => 'La récupération s’est mal déroulée',
+	'message_importer_tout_media' => 'Importe tous les médias dans les documents SPIP',
 
 	// O
 	'owncloud' => 'Owncloud',

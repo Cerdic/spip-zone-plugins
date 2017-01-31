@@ -49,11 +49,17 @@ function formulaires_peupler_owncloud_traiter_dist($id_owncloud = 'new', $objet 
 	$recuperer_media = charger_fonction('recuperer_media', 'action');
 	$action = $recuperer_media();
 
-	$res = array(
+	spip_log($action, 'test.' . _LOG_ERREUR);
+
+	if ($action != 'oui') {
+		$res = array(
 			'editable' => true,
 			'message_ok' => _T('owncloud:message_confirmation_recuperation_owncloud')
-	);
+		);
+		$res['message_ok'] .= "<script type='text/javascript'>if (window.jQuery) $('.liste-objets.owncloud').ajaxReload();</script>";
+	} else {
+		$res['message_erreur'] = _T('owncloud:message_confirmation_recuperation_erreur_owncloud');
+	}
 
-	$res['message_ok'] .= "<script type='text/javascript'>if (window.jQuery) $('.liste-objets.owncloud').ajaxReload();</script>";
 	return $res;
 }

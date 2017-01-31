@@ -15,23 +15,31 @@ include_spip('inc/distant');
  */
 function action_recuperer_media_dist() {
 
+	include_spip('inc/config');
+	$config = lire_config('owncloud');
+
 	$url = construire_url();
 
 	include_spip('lib/SabreDAV/vendor/autoload');
 
 	$settings = array(
-		'baseUri' => $url['url']
+		'baseUri' => $url['url'],
+		'userName' => $config['login'],
+		'password' => $config['password']
 	);
 
 	try {
 		$client = new Sabre\DAV\Client($settings);
 		$liste = $client->propfind($settings['baseUri'], array('{DAV:}displayname', '{DAV:}getcontentlength', '{DAV:}getlastmodified'), 1);
 	} catch (Exception $e) {
-		$code = $e->getHttpStatus();
+		$code = $e->getMessage();
+		if ($code) {
+			$erreur = 'oui';
+		}
+		return $erreur;
 	}
 
-	if ($code != 404) {
-
+	if (!in_array($code, array('401', '404', '405', '501')) || !$code) {
 		$fichiers=array();
 		foreach ($liste as $cle => $valeur) {
 			$document = $url['url_courte'].$cle;
@@ -65,14 +73,12 @@ function action_recuperer_media_dist() {
 			}
 		}
 
-	} else {
-		$fichiers = array(array('nom' => $code));
-	}
-		
-	$json = json_encode($fichiers, true);
-	include_spip('inc/flock');
-	ecrire_fichier(_DIR_TMP . 'owncloud.json', $json);
+		$json = json_encode($fichiers, true);
+		include_spip('inc/flock');
+		ecrire_fichier(_DIR_TMP . 'owncloud.json', $json);
 
-	return $fichiers;
+		return $fichiers;
+
+	}
 
 }

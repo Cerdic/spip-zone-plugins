@@ -22,14 +22,19 @@ function test_connexion_dav() {
 
 	$settings = array(
 		'baseUri' => $url['url'],
-		'login' => $config['login'],
+		'userName' => $config['login'],
 		'password' => $config['password']
 	);
 
 	if ($settings['baseUri']) {
-		$client = new Sabre\DAV\Client($settings);
-		$liste = $client->request('post', $settings['baseUri']);
-		if ($liste['statusCode'] == '401') {
+		try {
+			$client = new Sabre\DAV\Client($settings);
+			$liste = $client->request('GET', $settings['baseUri']);
+		} catch (Exception $e) {
+			$code = $e->getMessage();
+		}
+
+		if (in_array($liste['statusCode'], array('401', '404', '405', '501')) || $code) {
 			$message_auth = 'non';
 		} else {
 			$message_auth = 'oui';
@@ -37,6 +42,6 @@ function test_connexion_dav() {
 	} else {
 			$message_auth = 'non';
 	}
-	
-	return $message_auth;
+
+	return $message = array('message_auth' => $message_auth, 'code' => $code);
 }

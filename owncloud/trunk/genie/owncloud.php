@@ -31,15 +31,20 @@ function genie_owncloud_dist() {
 
 	$settings = array(
 		'baseUri' => $url['url'],
-		'login' => $config['login'],
+		'userName' => $config['login'],
 		'password' => $config['password']
 	);
 
 	if ($settings['baseUri']) {
-		$client = new Sabre\DAV\Client($settings);
-		$liste = $client->request('post', $settings['baseUri']);
-		if ($liste['statusCode'] == '401') {
-			spip_log('Erreur de connexion a webdav.', 'owncloud.' . _LOG_ERREUR);
+		try {
+			$client = new Sabre\DAV\Client($settings);
+			$liste = $client->request('POST', $settings['baseUri']);
+		} catch (Exception $e) {
+			$code = $e->getMessage();
+		}
+
+		if (in_array($code, array('401', '404', '405', '501')) || $code) {
+			spip_log('Erreur de connexion a webdav: ' . $code, 'owncloud.' . _LOG_ERREUR);
 			return false;
 		} else {
 			$recuperer_media = charger_fonction('recuperer_media', 'action');

@@ -76,11 +76,12 @@ END:VCALENDAR',
         $this->server->httpResponse = $this->response;
 
         $this->aclPlugin = new DAVACL\Plugin();
+        $this->aclPlugin->allowUnauthenticatedAccess = false;
         $this->server->addPlugin($this->aclPlugin);
 
         $authBackend = new DAV\Auth\Backend\Mock();
         $authBackend->setPrincipal('principals/user1');
-        $this->authPlugin = new DAV\Auth\Plugin($authBackend, 'SabreDAV');
+        $this->authPlugin = new DAV\Auth\Plugin($authBackend);
         // Forcing authentication to work.
         $this->authPlugin->beforeMethod($this->request, $this->response);
         $this->server->addPlugin($this->authPlugin);

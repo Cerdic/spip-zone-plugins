@@ -25,15 +25,11 @@ function construire_url() {
 	$config = lire_config('owncloud');
 
 	if ($config['url_remote']) {
-		// Supprime le slash de fin sur l'url owncloud
-		$url_remote = (strrpos($config['url_remote'], '/')) ? rtrim($config['url_remote'], '/') : $config['url_remote'];
-		$url_protocle = parse_url($url_remote, PHP_URL_SCHEME);
-		$url_courte = preg_replace('(' . $url_protocle . '?://)', $url_protocle . '://'.$config['login'].':'.$config['password'].'@', $url_remote);
+		$url_remote = $config['url_remote'];
+		$url_protocle = parse_url($config['url_remote'], PHP_URL_SCHEME);
+		$url_courte = preg_replace('(' . $url_protocle . '?://)', $url_protocle . '://' . $config['login'] . ':' . $config['password'] . '@', $url_remote);
 		$url_webdav = $url_courte . '/remote.php/webdav/';
-		// Supprimer les slashs dans le repertoire owncloud au début et à la fin de la chaine pour gérer les sous répertoires.
-		$directory_remote = ltrim($config['directory_remote'], '/');
-		$directory_remote = rtrim($config['directory_remote'], '/');
-		$url = $url_webdav.$directory_remote;
+		$url = $url_webdav.$config['directory_remote'];
 	} else {
 		return false;
 	}
@@ -145,13 +141,12 @@ function securise_identifiants($document, $reverse = false) {
 /**
  * Importer les médias dans SPIP
  * 
- * @param string $arg l'URL cible
+ * @param string $url l'URL cible
  * @return string
  */
 function importer_media_owncloud($url) {
 	$url_propre = securise_identifiants($url, true);
 	$parts = parse_url($url_propre);
-
 	parse_str($parts['query'], $query);
 	$md5 = $parts['query'];
 	$url = preg_replace('/' . $md5 . '/', '', $url_propre);
@@ -191,18 +186,25 @@ function supprimer_fichier_distant() {
 	include_spip('lib/SabreDAV/vendor/autoload');
 
 	$settings = array(
-		'baseUri' => $url['url']
+		'baseUri' => $url['url'],
+		'userName' => $config['login'],
+		'password' => $config['password']
 	);
 
-	// TODO: delete webdav
-	$client = new Sabre\DAV\Client($settings);
+	try {
+		// TODO: delete webdav
+		$client = new Sabre\DAV\Client($settings);
 
-	include_spip('inc/flock');
-	$lire_fichier = lire_fichier(_DIR_TMP . 'owncloud.json', $contenu);
-	$lire_json = json_decode($contenu, true);
-	foreach ($lire_json as $cle => $valeur) {
-		$url_propre = securise_identifiants($valeur['document'], true);
-		$liste = $client->request('DELETE', $url_propre);
+		include_spip('inc/flock');
+		$lire_fichier = lire_fichier(_DIR_TMP . 'owncloud.json', $contenu);
+		$lire_json = json_decode($contenu, true);
+		foreach ($lire_json as $cle => $valeur) {
+			$url_propre = securise_identifiants($valeur['document'], true);
+			$liste = $client->request('DELETE', $url_propre);
+		}
+	} catch (Exception $e) {
+		$code = $e->getMessage();
+		return false;
 	}
 
 	return false;
