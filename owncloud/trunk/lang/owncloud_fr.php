@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirmation_purger_owncloud' => 'Les identifiants uniques ont bien été supprimés de la base',
 	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
 	'message_confirmation_recuperation_erreur_owncloud' => 'La récupération s’est mal déroulée',
+	'message_confirmation_importer_tout_media' => 'L\'importation s’est bien déroulée',
 	'message_importer_tout_media' => 'Importer tous les médias dans les documents SPIP',
 
 	// O

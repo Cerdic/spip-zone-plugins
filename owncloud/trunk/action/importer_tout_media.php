@@ -15,11 +15,6 @@ include_spip('owncloud_fonctions');
  */
 function action_importer_tout_media_dist() {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
-	$url = construire_url();
-
 	include_spip('inc/flock');
 	$lire_fichier = lire_fichier(_DIR_TMP . 'owncloud.json', $contenu);
 	$lire_json = json_decode($contenu, true);
@@ -28,5 +23,7 @@ function action_importer_tout_media_dist() {
 		$ajouts = importer_media_owncloud($url_propre . '?' . $valeur['md5']);
 	}
 
-	return false;
+	$res['message_ok'] = _T('owncloud:message_confirmation_importer_tout_media');
+	// spip_log($res, 'test.' . _LOG_ERREUR);
+	//ajax_retour($res);
 }

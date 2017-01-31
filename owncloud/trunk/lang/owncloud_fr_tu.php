@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_confirmation_purger_owncloud' => 'Tout les identifiants MD5 sont supprimés de la base', # MODIF
 	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
 	'message_confirmation_recuperation_erreur_owncloud' => 'La récupération s’est mal déroulée',
+	'message_confirmation_importer_tout_media' => 'L\'importation s’est bien déroulée',
 	'message_importer_tout_media' => 'Importe tous les médias dans les documents SPIP',
 
 	// O
