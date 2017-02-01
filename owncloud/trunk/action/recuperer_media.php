@@ -55,7 +55,8 @@ function action_recuperer_media_dist() {
 			if (preg_match('/(image|application|text)/', $body['mime_type']) && isset($valeur['{DAV:}getcontentlength'])) {
 				$document = securise_identifiants($document);
 
-				array_push($fichiers,
+				array_push(
+								$fichiers,
 								array(
 									'nom' => $cle,
 									'document' => $document,
@@ -71,6 +72,7 @@ function action_recuperer_media_dist() {
 									'getlastmodified' => $valeur['{DAV:}getlastmodified'])
 				);
 			}
+
 		}
 
 		$json = json_encode($fichiers, true);

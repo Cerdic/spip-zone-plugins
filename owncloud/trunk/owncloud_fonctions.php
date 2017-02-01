@@ -47,7 +47,7 @@ function construire_url() {
  * @param boolean $add_agent Ajout d'un user agent
  * @return string cURL resultat
  */
-function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agent = true, $status = false, $post = false, $params = '') {
+function curl_get($href, $header = false, $body = true, $timeout = 30, $add_agent = true, $status = false, $post = false, $params = '') {
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_HEADER, $header);
@@ -81,6 +81,7 @@ function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agen
 	curl_close($ch);
 
 	return $result;
+
 }
 
 /**
@@ -91,7 +92,7 @@ function curl_get($href, $header = false, $body = true, $timeout = 10, $add_agen
  */
 function recuperer_infos_distantes_curl($document) {
 		
-		$body = curl_get($document, false, true, 10, false, '');
+		$body = curl_get($document, false, true, 30, false, '');
 		
 		$pathinfo = pathinfo($document);
 		$fichier = $pathinfo['basename'];
@@ -167,6 +168,7 @@ function importer_media_owncloud($url) {
 			}
 			$stock_import = sql_insertq('spip_ownclouds', array('titre' => $name, 'md5' => $md5, 'date_modif' => date('Y-m-d H:i:s')));
 		}
+
 	} else {
 		spip_log('Doc inséré ou inexistant', 'owncloud.' . _LOG_ERREUR);
 	}
