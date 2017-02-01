@@ -1,7 +1,7 @@
 <paquet
 	prefix="owncloud"
 	categorie="multimedia"
-	version="1.0.8"
+	version="1.0.9"
 	etat="dev"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/owncloud-64.png"

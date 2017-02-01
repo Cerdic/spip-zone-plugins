@@ -143,9 +143,9 @@ function formulaires_configurer_owncloud_traiter_dist() {
 	$directory_remote = ltrim(_request('directory_remote'), '/');
 	$directory_remote = rtrim($directory_remote, '/');
 
-	$activer_synchro = (_request('activer_synchro')=='oui')?'oui':'non';
+	$activer_synchro = (_request('activer_synchro')=='on')?'on':'off';
 
-	$activer_effacement_distant = (_request('activer_effacement_distant')=='oui')?'oui':'non';
+	$activer_effacement_distant = (_request('activer_effacement_distant')=='on')?'on':'off';
 
 	$meta_configuration = array(
 		'login' => $login,

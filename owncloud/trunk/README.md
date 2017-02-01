@@ -16,6 +16,11 @@ Nous attirons votre attention sur le fait qu'en activant l'effacement des docume
 
 ## Version 1.x.x
 
+### Version 1.0.9 (01/02/2017)
+
+- Correction bug formulaire de configuration
+- Pétouille de #r102585
+
 ### Version 1.0.8 (31/01/2017)
 
 - Ajout d'un formulaire de configuration avec traitement des données plus logique
