@@ -29,17 +29,33 @@ include_spip('inc/charsets');
 /**
  * Importer le charset d'une ligne
  *
- * @param unknown_type $texte
+ * Importe un texte de CSV dans un charset et le passe dans le charset du site (utf8 probablement)
+ * Les CSV peuvent sous ms@@@ avoir le charset 'iso-8859-1', mais pasfois aussi 'windows-1252' :/
+ *
+ * @param mixed $texte
+ * @param bool|string $definir_charset_source
+ *     false : ne fait rien
+ *     string : utilisera pour les prochains imports le charset indiqué
+ *     true : remet le charset d'import par défaut de la fonction
  * @return array
  */
-function importer_csv_importcharset($texte) {
+function importer_csv_importcharset($texte, $definir_charset_source = false) {
 	// le plus frequent, en particulier avec les trucs de ms@@@
-	$charset_source = 'iso-8859-1';
+	static $charset_source = 'iso-8859-1';
+	if ($definir_charset_source) {
+		if ($definir_charset_source === true) {
+			$charset_source = 'iso-8859-1';
+		} else {
+			$charset_source = $definir_charset_source;
+		}
+	}
 	// mais open-office sait faire mieux, donc mefiance !
 	if (is_utf8($texte)) {
-		$charset_source = 'utf-8';
+		$charset = 'utf-8';
+	} else {
+		$charset = $charset_source;
 	}
-	return importer_charset($texte, $charset_source);
+	return importer_charset($texte, $charset);
 }
 
 /**
@@ -66,12 +82,17 @@ function importer_csv_nettoie_key($key) {
  * @param string $delim
  * @param string $enclos
  * @param int $len
+ * @param string $charset_source
+ *     Permet de définir un charset source du CSV, si différent de utf-8 ou iso-8859-1
  * @return array
  */
-function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"', $len = 10000) {
+function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"', $len = 10000, $charset_source = '') {
 	$return = false;
 	if (@file_exists($file)
 		and $handle = fopen($file, 'r')) {
+		if ($charset_source) {
+			importer_csv_importcharset('', $charset_source);
+		}
 		if ($head) {
 			$header = fgetcsv($handle, $len, $delim, $enclos);
 			if ($header) {
@@ -107,6 +128,9 @@ function inc_importer_csv_dist($file, $head = false, $delim = ',', $enclos = '"'
 			} else {
 				$return[]=$data;
 			}
+		}
+		if ($charset_source) {
+			importer_csv_importcharset('', true);
 		}
 	}
 	return $return;
