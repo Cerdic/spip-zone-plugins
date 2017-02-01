@@ -52,11 +52,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'md5' => 'md5',
 	'message_activation_synchro' => 'La synchronisation est activé.',
+	'message_confirmation_importer_tout_media' => 'L’importation s’est bien déroulée',
+	'message_confirmation_importer_tout_media_erreur' => 'L’importation s’est mal déroulée',
 	'message_confirmation_purger_owncloud' => 'Les identifiants uniques ont bien été supprimés de la base',
-	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
 	'message_confirmation_recuperation_erreur_owncloud' => 'La récupération s’est mal déroulée',
-	'message_confirmation_importer_tout_media' => 'L\'importation s’est bien déroulée',
-	'message_confirmation_importer_tout_media_erreur' => 'L\'importation s’est mal déroulée',
+	'message_confirmation_recuperation_owncloud' => 'La récupération s’est bien déroulée',
 	'message_importer_tout_media' => 'Importer tous les médias dans la médiathèque',
 
 	// O
