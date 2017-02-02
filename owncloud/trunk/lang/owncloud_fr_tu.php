@@ -55,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'owncloud' => 'Owncloud',
-	'owncloud_importer_explication' => '<strong>Attention</strong>: L\'importation sur beaucoup de document peut prendre beaucoup de temps.',
 	'owncloud_peupler_explication' => 'En cliquant sur ce bouton, tu va récupérer les fichiers présent sur ton Owncloud.',
 	'owncloud_peupler_item' => 'Récupération des documents',
 	'owncloud_purger_avertissement' => '<p><strong>Attention :</strong> Tu as activé l’effacement des fichiers distants, il est probable que tes fichiers ne soient plus présents sur ton Owncloud, en cliquant sur ce bouton tu peux perdre tes documents.</p>',
