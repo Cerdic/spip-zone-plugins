@@ -25,4 +25,7 @@ input.hasDatepicker {
   .page_login #minipres input[type="submit"] {
     border-radius: inherit; }
 
+.spip_documents {
+  max-width: 100%; }
+
 /*# sourceMappingURL=fix_spip.css.map */
