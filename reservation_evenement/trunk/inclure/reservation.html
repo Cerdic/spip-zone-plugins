@@ -45,9 +45,9 @@
 			<tbody>
 				<BOUCLE_details(POUR){tableau #GET{reservation}|table_valeur{details}}>
 				<tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
-					<td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
+					<td class="description">[(#VALEUR{descriptif})]</td>
 					[(#GET{total}|floatval|>{0.00}|oui)
-					<td class="montant">[(#VALEUR|table_valeur{prix}|appliquer_filtre{prix_formater,[(#VALEUR|table_valeur{prix})]})]</td>
+					<td class="montant">[(#VALEUR{prix}|appliquer_filtre{prix_formater,[(#VALEUR{prix})]})]</td>
 					]
 					<td class="statut">
 						[(#VAL{reservation}|re_statut_titre{#VALEUR{statut}})]

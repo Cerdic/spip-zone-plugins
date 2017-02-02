@@ -129,30 +129,20 @@ function etablir_prix($id, $objet, $datas, $set, $quantite) {
  * @return array Les données du prix.
  */
 function prix_attache($id_evenement, $id_article, $id_evenement_source) {
-
-	// Etablir le prixde l'événement sinon de l'article.
+	// Etablir le prix de l'événement sinon de l'article.
 	if (!$p = sql_fetsel(
 			'prix_ht,id_prix_objet,code_devise',
 			'spip_prix_objets',
 			'objet="evenement" AND id_objet=' . $id_evenement)) {
-		$p = sql_fetsel(
-				'prix_ht,id_prix_objet,code_devise',
-				'spip_prix_objets',
-				'objet="article" AND id_objet=' . $id_article);
-	}
-
-	// Si pas de prix, prendre l'événement source.
-	if (!$p and $id_evenement_source != 0) {
-		$evenement_source = sql_fetsel(
-				'id_evenement, id_article, id_evenement_source',
-				'spip_evenements',
-				'id_evenement=' . $id_evenement_source);
-		if ($evenement_source) {
-			$p = prix_attache(
-					$evenement_source['id_evenement'],
-					$evenement_source['id_article'],
-					$evenement_source['id_evenement_source']);
-		}
+			if ($id_evenement_source != 0 and !$p = sql_fetsel(
+			'prix_ht,id_prix_objet,code_devise',
+			'spip_prix_objets',
+			'objet="evenement" AND id_objet=' . $id_evenement_source)) {
+				$p = sql_fetsel(
+						'prix_ht,id_prix_objet,code_devise',
+						'spip_prix_objets',
+						'objet="article" AND id_objet=' . $id_article);
+			}
 	}
 	return $p;
 }

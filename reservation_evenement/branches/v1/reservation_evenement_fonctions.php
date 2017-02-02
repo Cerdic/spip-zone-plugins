@@ -134,8 +134,19 @@ function prix_formater_devise($montant, $devise) {
 
 	return $montant;
 }
+
+/*
+ * Permet d'appeler la fonction statut_texte_instituer por établir le nom ou traductions d'un statut
+ *
+ * @param string $objet Objet dont on cherche le nom
+ * @param string $statut Nom de machine du statut
+ * @return string Nom du statut.
+ */
 function re_statut_titre($objet, $statut) {
 	include_spip('inc/puce_statut');
-	return statut_texte_instituer($objet , $statut);
+	if(!$texte = statut_texte_instituer($objet , trim($statut))) {
+		$texte = $statut;
+	}
+	return $texte;
 }
 
