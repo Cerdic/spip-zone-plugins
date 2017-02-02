@@ -25,7 +25,7 @@ include_spip('inc/foundation');
 function filtre_responsive_embed_dist($texte) {
 	include_spip('inc/foundation');
 	// On détecte toute les iFrames et on les rends responsives.
-	return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
+	return preg_replace_callback('%<iframe(.+)></iframe>%s', 'responsive', $texte);
 }
 
 /**
