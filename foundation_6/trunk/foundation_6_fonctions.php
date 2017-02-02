@@ -28,6 +28,21 @@ function filtre_responsive_embed_dist($texte) {
 	return preg_replace_callback('%<iframe(.+)></iframe>%s', 'responsive', $texte);
 }
 
+
+/**
+ * Assurer la rétro-compatibilité avec l'ancien nom de ce filtre
+ *
+ * @deprecated Utiliser filtre_responsive_embed_dist()
+ * @see filtre_responsive_embed_dist()
+ *
+ * @param mixed $texte
+ * @access public
+ * @return mixed
+ */
+function filtre_iframe_responsive($texte) {
+	$responsive_embed = charger_filtre('responsive_embed');
+	return $responsive_embed($texte);
+}
 /**
  * Cette balise va permettre de rendre le squelette compatible
  * avec toutes les versions de Foundation.
