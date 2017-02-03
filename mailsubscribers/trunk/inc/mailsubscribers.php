@@ -108,7 +108,10 @@ function mailsubscribers_normaliser_nom_liste($liste = '', $category = "newslett
 }
 
 function mailsubscribers_obfusquer_email($email) {
-	return md5($email) . "@example.org";
+    if (defined('_MAILSUBSCRIBERS_GARDER_EMAILENCLAIR') )
+        return $email;
+    else
+	    return md5($email) . "@example.org";
 }
 
 function mailsubscribers_test_email_obfusque($email) {
