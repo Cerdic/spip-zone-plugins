@@ -2,6 +2,8 @@
 
 namespace Spip\Indexer\Sources;
 
+defined('_INDEXER_PARTS_NUMBER') || define('_INDEXER_PARTS_NUMBER', 1000);
+
 use \Indexer\Indexer;
 use \Indexer\Sources\Sources;
 
@@ -163,7 +165,7 @@ class SpipSourcesIndexer {
 
         // on découpe les documents de cette sources en parts d'un certain nombre
         // afin d'éviter un timeout et une surcharge mémoire
-        $parts = new \ArrayIterator($source->getParts(1000));
+        $parts = new \ArrayIterator($source->getParts(_INDEXER_PARTS_NUMBER));
 
         // on se replace à la dernière part renseignée (cas d'une indexation non terminée)
         if (isset($stats['last']['part'][$skey]) && $stats['last']['part'][$skey] > 0) {
