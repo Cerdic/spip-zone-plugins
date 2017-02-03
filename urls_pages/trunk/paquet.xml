@@ -1,9 +1,9 @@
 <paquet
 	prefix="urls_pages"
 	categorie="statistique"
-	version="1.0.7"
+	version="1.0.8"
 	schema="1.0.0"
-	etat="experimental"
+	etat="test"
 	compatibilite="[3.1.0;3.2.*]"
 	logo="prive/themes/spip/images/urls_pages.png"
 	documentation="http://contrib.spip.net/4345"

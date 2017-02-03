@@ -15,7 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	Ainsi, {{spip.php?page=truc}} pourra devenir l\'URL de votre choix : {{url-personnalisee-pour-la-page-truc}}.
 
-	Rendez-vous dans dans le menu [{{Publication &rarr; Gestion des URLs &rarr; URLs des pages->?exec=controler_urls_pages]}}.'
+	Il faut que la « gestion avancée des URLs » soit activée, via le menu {{Configuration → Configurer les URLs}}.
+	Rendez-vous ensuite dans le menu [{{Publication &rarr; Gestion des URLs &rarr; URLs des pages->?exec=controler_urls_pages]}}.'
 
 );
 
