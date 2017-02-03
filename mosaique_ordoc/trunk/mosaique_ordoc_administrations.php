@@ -26,6 +26,21 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function mosaique_ordoc_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
+	$maj['create'] = array(
+		array('mosaique_ordoc_migration'),
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+}
+
+/**
+ * Fonction qui migre les données du plugin Migration de Mosaïque vers Ordoc.
+ *
+ * @return void
+**/
+
+function mosaique_ordoc_migration() {
 	// etape 1 : on récupère tous les articles avec des mosaiques
 	$mosaiques = array();
 	if ($resultats = sql_allfetsel('id_article, mosaique', 'spip_articles', 'mosaique != ""')) {
@@ -48,9 +63,6 @@ function mosaique_ordoc_upgrade($nom_meta_base_version, $version_cible) {
 			$i++;
 		}
 	}
-
-	include_spip('base/upgrade');
-	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
