@@ -15,7 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_id' => 'Id',
-	'info_rang' => 'N°.',
+	'info_rang' => 'N<sup>o</sup>.',
+	'info_rang_abbr' => 'N<sup>o</sup>',
+	
+	// L
+	'lien_trier_rang' => 'Trier par rang',
 
 	// T
 	'titre_page_configurer_rang' => 'Rang',

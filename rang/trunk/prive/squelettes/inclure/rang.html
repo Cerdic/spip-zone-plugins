@@ -1,104 +1,45 @@
 <script type="text/javascript">
-(function($){
 
-	var active;
-
+if (window.jQuery) {
 	function rang(){
-
-		$.getScript("../plugins-dist/jquery_ui/prive/javascript/ui/core.js", function(){
-		$.getScript("../plugins-dist/jquery_ui/prive/javascript/ui/widget.js", function(){
-		$.getScript("../plugins-dist/jquery_ui/prive/javascript/ui/mouse.js", function(){
-		$.getScript("../plugins-dist/jquery_ui/prive/javascript/ui/sortable.js", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/core.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/widget.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/mouse.js}", function(){
+		$.getScript("#CHEMIN{prive/javascript/ui/sortable.js}", function(){
 
 			//(".spip.liste").parent().parent().addClass('johnson');
 			// gestion déplacement / réordonnement
 			$(".spip.liste tbody" ).sortable({
+				placeholder: ".ui-state-highlight",
+				cursor: "move",
+				containment: "parent",
+				tolerance: "pointer",
+				update: function( event, ui ) {
+					var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
+					var $me = $(this);
+					var liste = $me.sortable("toArray");
 
-			placeholder: ".ui-state-highlight",
-			cursor: "move",
-			containment: "parent",
-			tolerance: "pointer",
-			update: function( event, ui ) {
-				var url = "[(#VAL{trier_items}|generer_url_action{#ENV{objet}, 1})]";
-				var tab = $(this).sortable("toArray");
-				active = this;
+					var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
+					if (isNaN(page) === false) {
+						page = (page < 0) ? 0 : page;
+					} else {
+						page = 0;
+					}
 
-				var page = parseInt(window.location.search.split('&debut_liste_#ENV{suffixe_pagination}=')[1]);
+					$.post(url, {objet: "#ENV{objet}", id_rubrique: "#ENV{id_rubrique}", debut_liste: page, trier: liste})
+						.done(function(data){
+							$me.ajaxReload();
+						});
+				}
+			});
 
-				if (isNaN(page) === false) page < 0 ? page = 0 : page = page;
-				else page = 0;
-
-				$.post(url, {objet: "#ENV{objet}", id_rubrique: "#ENV{id_rubrique}", debut_liste: page, trier: tab})
-					.done(function(data){
-						// ici bidouille pour les nouveau rang
-						// idéalement, il faudrait utiliser la fonction ajaxReload(), mais ça ne marche pas
-						var td_princip = getChildByClass(active, "titre principale");
-
-						for (var i = 0; i < td_princip.length; i++) {
-							var a = getChildByTag(td_princip[i], 'a');
-							var title = a.innerHTML;
-							var txt = title.split(". ")[1];
-							a.innerHTML = page+i+1 +". "+txt;
-						};
-				});
-			}
-		});
-		
-		$( ".spip.liste tbody" ).disableSelection();
+			$( ".spip.liste tbody" ).disableSelection();
 		})})})})
 	}
 
 	/* ---------------- ECOUTEURS -------------- */
 	// Lancement du script au chargement de la page
-	$(document).ready(function(){
-		rang();
-	});
-	$(document).ajaxComplete(function(event, jqxhr, options){
-		var textevent = jqxhr.responseText;
-		if (textevent.match('pagination')) {
-			rang();
-		}
-	});
-
-
-
-})(jQuery);
-
-function getChildByTag(el, tag){
-	tag = tag.toUpperCase();
-	var childs = el.childNodes, c = [];
-	for (var i = 0; i < childs.length; i++) {
-		if (childs[i].nodeType === 1){
-			if (childs[i].tagName === tag) c.push(childs[i])
-		};
-	}; 
-	if (c.length === 0){
-		for (var i = 0; i < childs.length; i++) {
-			if (childs[i].nodeType === 1){
-				var subC = getChildByTag(childs[i], tag);
-				if (subC) c.push(subC);
-			};
-		};
-	};
-	c.length > 1 ? c = c : c = c[0]; return c;
-};
-
-function getChildByClass(el, classN){
-	var childs = el.childNodes, c = [];
-	for (var i = 0; i < childs.length; i++) {
-		if (childs[i].nodeType === 1){
-			if (childs[i].className.indexOf(classN) > -1) c.push(childs[i])
-		};
-	}; 
-	if (c.length === 0){
-		for (var i = 0; i < childs.length; i++) {
-			if (childs[i].nodeType === 1){
-				var subC = getChildByClass(childs[i], classN);
-				if (subC) c.push(subC);
-			};
-		};
-	};
-	c.length > 1 ? c = c : c = c[0]; return c;
-};
+	jQuery(function($){ rang(); });
+}
 
 </script>
