@@ -40,9 +40,6 @@ function roles_documents_document_desc_actions($flux) {
 		and $objet
 		and $id_objet
 	) {
-		// description des roles
-		include_spip('inc/roles');
-		$roles = roles_presents('document', $objet);
 		// bloc à recharger
 		$ajaxreload = !empty($flux['args']['ajaxreload']) ? $flux['args']['ajaxreload'] : '#documents';
 		// mini-formulaire
