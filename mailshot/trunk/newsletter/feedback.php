@@ -43,7 +43,8 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 
 	$set = array();
 	$desabonner = false;
-	// $row['statut'] in todo, sent, fail, [read, [clic]],[spam]
+
+    // $row['statut'] in todo, sent, fail, [read, [clic]],[spam]
 	// ok on a tout ce qu'il faut, avisons
 	switch($quoi){
 		case 'read':
@@ -57,14 +58,14 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 		case 'spam':
 			if (in_array($row['statut'],array('todo','sent','fail','read'))) {
 				$set['statut'] = 'spam';
-				$desabonner = true;
+				$desabonner = _MAILSHOT_DESABONNER_FAILED;
 			}
 			break;
 		case 'reject':
 		case 'hard_bounce':
 			if (in_array($row['statut'],array('todo','sent','fail'))){
 				$set['statut'] = 'fail';
-				$desabonner = true;
+				$desabonner = _MAILSHOT_DESABONNER_FAILED;
 			}
 			break;
 		case 'soft_bounce':

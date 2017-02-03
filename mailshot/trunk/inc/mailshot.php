@@ -222,25 +222,30 @@ function mailshot_envoyer_lot($nb_max=5,$offset=0){
 	return 0; // plus rien a envoyer sur ce lot
 }
 
+
 /**
  * Verifier un email en fail et si plus de N fails consecutifs le desabonner (email foireux)
  * @param $email
  */
-function mailshot_verifier_email_fail($email){
-	$nb_check = 3;
-	$historique = sql_allfetsel('date, statut, try','spip_mailshots_destinataires','statut!='.sql_quote('todo').' AND email='.sql_quote($email),'','date DESC',"0,$nb_check");
-	$nb_failed = 0;
-	foreach($historique as $h){
-		if ($h['statut']=='fail' AND $h['try']>1){
-			$nb_failed++;
-		}
-	}
-	if ($nb_failed==$nb_check){
-		$unsubscribe = charger_fonction("unsubscribe","newsletter");
-		$unsubscribe($email,array('notify'=>false));
-	}
-}
+function mailshot_verifier_email_fail($email)
+{
+    if (_MAILSHOT_DESABONNER_FAILED != false) {
+        if (!defined('_MAILSHOT_MAX_FAIL'))
+            define('_MAILSHOT_MAX_FAIL', 3);
 
+        $historique = sql_allfetsel('date, statut, try', 'spip_mailshots_destinataires', 'statut!=' . sql_quote('todo') . ' AND email=' . sql_quote($email), '', 'date DESC', "0,$nb_check");
+        $nb_failed = 0;
+        foreach ($historique as $h) {
+            if ($h['statut'] == 'fail' AND $h['try'] > 1) {
+                $nb_failed++;
+            }
+        }
+        if ($nb_failed >= _MAILSHOT_MAX_FAIL) {
+            $unsubscribe = charger_fonction("unsubscribe", "newsletter");
+            $unsubscribe($email, array('notify' => false));
+        }
+    }
+}
 /**
  * Initialiser les destinataires d'un envoi
  * = noter tous les emails a qui envoyer, au debut
