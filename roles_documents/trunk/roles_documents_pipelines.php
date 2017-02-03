@@ -67,7 +67,7 @@ function roles_documents_document_desc_actions($flux) {
 
 
 /**
- * Synchroniser le champ "vu" lors de la création d'un nouveau lien de document portant un rôle.
+ * Synchroniser les champs "vu" et "rang_lien" lors de la création d'un nouveau lien de document portant un rôle.
  *
  * @pipeline post_edition_liens
  *
@@ -86,19 +86,32 @@ function roles_documents_post_edition_lien($flux) {
 		and $id_document = intval($flux['args']['id_objet_source'])
 		and $objet = $flux['args']['objet']
 		and $id_objet = intval($flux['args']['id_objet'])
-		and $vu = sql_getfetsel(
-			'vu',
-			'spip_documents_liens',
-			'id_document=' .$id_document .' AND objet='.sql_quote($objet) .'
-				AND id_objet='.$id_objet .' AND '.$colonne_role.'='.sql_quote('document')
-		)
 	) {
-		include_spip('action/editer_liens');
-		objet_qualifier_liens(
-			array('document'=>$id_document),
-			array($objet=>$id_objet),
-			array($colonne_role => $role, 'vu' => $vu)
+		// le champ 'rang_lien' n'est présent qu'à partir de SPIP 3.2 (ou avec le plugin ordoc)
+		$champs_synchronises = array('vu', 'rang_lien');
+
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table('spip_documents_liens');
+		$champs_presents = array_flip(array_intersect_key(array_flip($champs_synchronises), $desc['field']));
+
+		$qualifier = sql_fetsel(
+			$champs_presents,
+			'spip_documents_liens',
+			array(
+				'id_document=' . $id_document,
+				'objet=' . sql_quote($objet),
+				'id_objet=' . $id_objet,
+				$colonne_role . '=' . sql_quote('document')
+			)
 		);
+		if ($qualifier) {
+			include_spip('action/editer_liens');
+			objet_qualifier_liens(
+				array('document' => $id_document),
+				array($objet => $id_objet),
+				array($colonne_role => $role) + $qualifier
+			);
+		}
 	}
 
 	return $flux;
