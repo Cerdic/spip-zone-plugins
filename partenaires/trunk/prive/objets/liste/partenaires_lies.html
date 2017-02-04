@@ -31,7 +31,7 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
 
 		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='nom' scope='col'>[(#TRI{multi nom,<:partenaire:label_nom:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
@@ -40,12 +40,12 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_partenaires(PARTENAIRES){id_partenaire IN #GET{selection}}{statut?}
 		{tri #ENV{par,nom},#GET{defaut_tri}}{pagination #ENV{nb,10} parl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PARTENAIRE|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='statut'>[(#STATUT|puce_statut{partenaire})]</td> 
+			<td class='statut'>[(#STATUT|puce_statut{partenaire})]</td>
 			<td class='nom'>[(#LOGO_PARTENAIRE|image_reduire{20,20})]<a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]">#NOM</a></td>
 
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[partenaire-#ID_PARTENAIRE-#OBJET-#ID_OBJET\]" value="X"><:partenaire:retirer_lien_partenaire:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button class="button link delete" type="submit" name="supprimer_lien\[partenaire-#ID_PARTENAIRE-#OBJET-#ID_OBJET\]" value="X"><:partenaire:retirer_lien_partenaire:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>

@@ -36,9 +36,9 @@ a mis a jour la valeur avec la page reelle]
 			}
 		})]</B_lettre>
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
-	
+
 		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='nom' scope='col'>[(#TRI{multi nom,<:partenaire:label_nom:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
@@ -47,10 +47,10 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_partenaires(PARTENAIRES){!id_partenaire IN #GET{exclus}}{where?}{recherche?}{statut?}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} para}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='statut'>[(#STATUT|puce_statut{partenaire})]</td> 
+			<td class='statut'>[(#STATUT|puce_statut{partenaire})]</td>
 			<td class='nom'>[(#LOGO_PARTENAIRE|image_reduire{20,20})]<a href="[(#ID_PARTENAIRE|generer_url_entite{partenaire})]">#NOM</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[partenaire-#ID_PARTENAIRE-#OBJET-#ID_OBJET\]" value="+"><:partenaire:ajouter_lien_partenaire:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button class="button link add" type="submit" name="ajouter_lien\[partenaire-#ID_PARTENAIRE-#OBJET-#ID_OBJET\]" value="+"><:partenaire:ajouter_lien_partenaire:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_partenaires>
