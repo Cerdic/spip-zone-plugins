@@ -48,14 +48,19 @@ function noizetier_lister_noisettes($type = 'tout') {
 /**
  * Renvoie les info d'une seule noisette.
  *
- * @param text $noisette renvoyer spécifiquement une noisette données
+ * @param string $noisette renvoyer spécifiquement une noisette données
  *
  * @return array
  */
 function noizetier_info_noisette($noisette) {
 	$noisettes = noizetier_obtenir_infos_noisettes();
+	if (isset($noisettes[$noisette])) {
+		$noisette = $noisettes[$noisette];
+	} else {
+		$noisette = array('nom' => _T('noizetier:formulaire_erreur_noisette_introuvable', array('noisette' => $noisette)));
+	}
 
-	return $noisettes[$noisette];
+	return $noisette;
 }
 
 /**
@@ -290,10 +295,13 @@ function noizetier_lister_pages($page_specifique = '') {
 
 			// On ajoute les compositions du noizetier qui ne sont définies que dans une meta propre au NoiZetier.
 			if (defined('_DIR_PLUGIN_COMPOSITIONS')) {
-				$noizetier_compositions = unserialize($GLOBALS['meta']['noizetier_compositions']);
+
+				$noizetier_compositions = isset($GLOBALS['meta']['noizetier_compositions'])
+					? unserialize($GLOBALS['meta']['noizetier_compositions'])
+					: array();
 				// On doit transformer le tableau de [type][compo] en [type-compo]
 				$liste_compos = array();
-				if (is_array($noizetier_compositions)) {
+				if (is_array($noizetier_compositions) and $noizetier_compositions) {
 					foreach ($noizetier_compositions as $type => $compos_type) {
 						foreach ($compos_type as $compo => $infos_compo) {
 							$infos_compo['nom'] = typo($infos_compo['nom']);
