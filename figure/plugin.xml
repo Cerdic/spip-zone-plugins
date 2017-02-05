@@ -3,7 +3,7 @@
 <prefix>figure</prefix>
 <icon>figure.png</icon>
 
-<version>0.0.1</version>
+<version>0.0.2</version>
 <etat>dev</etat>
 <categorie>multimedia</categorie>
 
@@ -11,5 +11,6 @@
 <description>Modèles d'insertion des documents en HTML5, avec figure et figcaption.</description>
 <auteur>[tetue->http://spip.tetue.net]</auteur>
 
+<utilise id="mediatheque" version="[;]" />
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>
