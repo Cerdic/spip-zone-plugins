@@ -26,13 +26,13 @@
 ]
 <figure class='spip_document_#ID_DOCUMENT spip_documents_legende[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 	<span class='vignette'>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|attribut_html)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' alt='' width='#GET{width}' height='#GET{height}'>[(#GET{url}|?{</a>})]</span>
-	<ficaption>
+	<figcaption>
 		[<strong class='#EDIT{titre} titre'>(#TITRE|sinon{#FICHIER})</strong>]
 		<span class='type'>#TYPE_DOCUMENT</span>
 		<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[
 		(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})
 		] - ][(#TAILLE|taille_en_octets|attribut_html)]</span>
 		[<small>(#CREDITS)</small>
-	]</ficaption>
+	]</figcaption>
 </figure>
 </BOUCLE_doc>
