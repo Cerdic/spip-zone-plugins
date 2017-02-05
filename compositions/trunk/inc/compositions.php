@@ -43,7 +43,7 @@ function compositions_charger_infos($nom,$info=""){
 		include_spip('inc/xml');
 		$composition = array();
 		if ($xml = spip_xml_load($nom,false)){
-			if (count($xml['composition'])){
+			if (isset($xml['composition']) and count($xml['composition'])){
 				$xml = reset($xml['composition']);
 				$composition['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$composition['description'] = isset($xml['description'])?_T_ou_typo(spip_xml_aplatit($xml['description'])):'';
