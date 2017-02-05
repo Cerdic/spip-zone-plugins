@@ -103,7 +103,7 @@ function clil_declarer_champs_extras($champs = array()) {
 	$liste_rub = clil_affichage_dans_rubriques();
 
 	// étape 3 : on peut maintenant déclarer le champ extra
-	$champs['spip_articles']['code_clil'] = array(
+	$champs['spip_livres']['code_clil'] = array(
 		'saisie' => 'selection', //Type du champ (voir plugin Saisies)
 		'options' => array(
 			'nom' => 'code_clil', 
