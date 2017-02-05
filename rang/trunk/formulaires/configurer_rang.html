@@ -12,7 +12,7 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{name,rang_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		[(#SET{exclus, #VAL{non}|rang_objets_gere_rubrique })]
+		[(#SET{exclus, #VAL{all}|rang_objets_gere_rubrique })]
 
 		#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=#GET{exclus}}
 

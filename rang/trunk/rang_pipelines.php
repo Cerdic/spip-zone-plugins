@@ -4,7 +4,7 @@
  *
  * @plugin     Rang
  * @copyright  2016
- * @author     Pierre Miquel
+ * @author     Peetdu
  * @licence    GNU/GPL
  * @package    SPIP\Rang\Pipelines
  */
@@ -30,21 +30,40 @@ function rang_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
+/**
+ * Inserer le JS qui gére le tri par Drag&Drop dans la page ?exec=xxxxx
+ *
+ * @param array $flux
+ * @return array
+ */
 function rang_recuperer_fond($flux){
 
 	$exec 		= _request('exec');
 
-	// Gestion du contexte i.e. page ?exec=xxxx 
-	// dans le futur, on doit pouvoir ajouter d'autres contextes 
-	// -> mots-clefs, documents, 
-	// -> listes hors rubrique pour les objets sans rubrique
-	// -> contextes spécifiques à certains plugins (ex : pages uniques, Albums, etc.)
-	$contextes	= array(0=> 'rubrique'); 
-
-	$sources	= rang_get_sources();
 	
+	// Gestion du contexte i.e. page ?exec=xxxx 
+	// Par défaut, on peut toujours trier dans une rubrique.
+	$contextes	= array(0 => 'rubrique'); 
+
+	// Ajouter automatiquement un contexte
+	// pour les objets sans rubrique, on ajoute le contexte ?exec=objet
+	$objets_selectionnes = lire_config('rang_objets');
+	$liste = lister_tables_objets_sql();
+	foreach ($liste as $key => $value) {
+		if ($value['editable'] == 'oui' AND !isset($value['field']['id_rubrique'])) {
+			$objet = table_objet($key);
+			if (strpos($objets_selectionnes,$objet)) {
+				$contextes[] = $objet;
+			}
+		}
+	}
+
+	// dans le futur, on doit pouvoir ajouter d'autres contextes 
+	// -> mots-clefs, 
+	// -> contextes spécifiques à certains plugins (ex : pages uniques, Albums, etc.)
 
 	// faire archi gaffe à prendre le bon flux....pfiou compliqué :)
+	$sources	= rang_get_sources();
 	if ( in_array($exec, $contextes) AND 
 		 in_array($flux['data']['source'], $sources) AND 
 		 strpos($flux['data']['texte'], 'pagination_liste')) {

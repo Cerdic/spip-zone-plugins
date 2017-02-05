@@ -1,7 +1,7 @@
 <paquet
 	prefix="rang"
 	categorie="navigation"
-	version="0.5.0"
+	version="0.5.1"
 	etat="experimental"
 	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/rang-64.png"
@@ -11,7 +11,7 @@
 	<nom>Rang</nom>
 	<!-- Permet de réordonner les tables de SPIP par drag'n'drop -->
 
-	<auteur>Pierre Miquel</auteur>
+	<auteur>Peetdu</auteur>
 
 	<licence>GNU/GPL</licence>
 

@@ -4,7 +4,7 @@
  *
  * @plugin     Rang
  * @copyright  2016
- * @author     Pierre Miquel
+ * @author     Peetdu
  * @licence    GNU/GPL
  * @package    SPIP\Rang\Fonctions
  */
@@ -34,7 +34,6 @@ function action_trier_items_dist() {
 	$objet		= _request('objet');
 	$id_rubrique = _request('id_rubrique');
 
-	// spip_log($page.$objet, 'rang.'._LOG_DEBUG);
 
 	$table = table_objet_sql($objet);
 	$id_objet = id_table_objet($objet);
@@ -43,7 +42,13 @@ function action_trier_items_dist() {
 	foreach ($tab as $key => $value) {
 		$rang	= $page + $key + 1; //le classement commence à 1, pas à 0
 		$id		= intval(substr($value, 3));
-		sql_updateq($table, array('rang' => $rang), "$id_objet=$id AND id_rubrique=$id_rubrique");
+		if ($id_rubrique == 'rien') {
+			$where = "$id_objet=$id";
+		}
+		else {
+			$where = "$id_objet=$id AND id_rubrique=$id_rubrique";
+		}
+		sql_updateq($table, array('rang' => $rang), $where);
 	}
 	$msg = 'ok';
 

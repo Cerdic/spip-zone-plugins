@@ -5,7 +5,7 @@
  *
  * @plugin     Rang
  * @copyright  2016
- * @author     Pierre Miquel
+ * @author     Peetdu
  * @licence    GNU/GPL
  * @package    SPIP\Rang\Installation
  */
@@ -62,20 +62,20 @@ function formulaires_configurer_rang_traiter_dist() {
 				// remplir #1 : si aucun numero_titre n'est trouvé, on met la valeur de l'id_prefixe dans rang
 				if (!rang_tester_presence_numero($table)) {
 					$id = id_table_objet($table);
-					$quelles_rubriques = sql_allfetsel('id_rubrique', $table, '', 'id_rubrique');
-					// echo 'lalaal<br>lala<br>';
-					// echo bel_env($quelles_rubriques);
+					$desc = lister_tables_objets_sql($table);
+					if (isset($desc['field']['id_rubrique'])) {
+						$quelles_rubriques = sql_allfetsel('id_rubrique', $table, '', 'id_rubrique');
 					
-					
-					foreach ($quelles_rubriques as $key => $value) {
-						$id_rub =  $value['id_rubrique'];
-						$quelles_items = sql_allfetsel($id, $table, 'id_rubrique='.$id_rub);
-					
-						$i = 1;
-						foreach ($quelles_items as $key => $value) {
-							$id_prefixe = $value[$id];
-							sql_update($table, array( 'rang' => $i ), "$id = $id_prefixe");
-							$i++;
+						foreach ($quelles_rubriques as $key => $value) {
+							$id_rub =  $value['id_rubrique'];
+							$quelles_items = sql_allfetsel($id, $table, 'id_rubrique='.$id_rub);
+						
+							$i = 1;
+							foreach ($quelles_items as $key => $value) {
+								$id_prefixe = $value[$id];
+								sql_update($table, array( 'rang' => $i ), "$id = $id_prefixe");
+								$i++;
+							}
 						}
 					}
 				}
