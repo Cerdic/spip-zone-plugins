@@ -1,0 +1,11 @@
+TODO
+
+- pourquoi faut-il vider le cache à l’installation du plugin (utiliser Invalideur, mais comment ça marche ?) ;
+- au moment du choix d'un objet dans la config du plugin,  affecter automatiquement un rang
+- corrolaire : si un objet à des "num titre", traiter.
+- gérer les rubriques;
+- gérer les mots-clés;
+- gérer les objets éditoriaux historiques de SPIP : brèves + sites ;
+- que se passe t-il si on déplace un article d’une rubrique à une autre via Plan ?
+- Gestion du plugin Pages uniques ;
+- API (?) pour les plugins (Albums, Menus, Bank, etc.) ;
