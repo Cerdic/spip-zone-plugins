@@ -1,9 +1,6 @@
 <BOUCLE_doc (DOCUMENTS) {id_document} {tout}>
 [(#REM)
 
-	Modele pour <doc> en dl/dt/dd
-	cf. http://pompage.net/pompe/listesdefinitions/
-
 	La largeur de la legende est egale a la largeur de l'image
 	avec un minimum de 120px, et un maximum de 350px.
 
@@ -27,12 +24,14 @@
 #SET{height,#GET{fichier}|hauteur}
 #SET{fichier,#GET{fichier}|extraire_attribut{src}}
 ]
-<dl class='spip_document_#ID_DOCUMENT spip_documents_legende[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-[<dt class='#EDIT{titre} titre'>(#TITRE|sinon{#FICHIER})</dt>]
-<dd class='vignette'>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='' />[(#GET{url}|?{</a>})]</dd>
-<dd class='type'>#TYPE_DOCUMENT</dd>
-<dd class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[
-(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})
-] - ][(#TAILLE|taille_en_octets|texte_backend)]</dd>
-</dl>
+<figure class='spip_document_#ID_DOCUMENT spip_documents_legende[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<span class='vignette'>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt=''>[(#GET{url}|?{</a>})]</span>
+	<ficaption>
+		[<strong class='#EDIT{titre} titre'>(#TITRE|sinon{#FICHIER})</strong>]
+		<span class='type'>#TYPE_DOCUMENT</span>
+		<span class='taille'>[(#LARGEUR|ou{#HAUTEUR}|oui)[
+		(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})
+		] - ][(#TAILLE|taille_en_octets|texte_backend)]</span>
+	</ficaption>
+</figure>
 </BOUCLE_doc>

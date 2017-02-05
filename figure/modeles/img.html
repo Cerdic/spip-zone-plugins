@@ -36,9 +36,9 @@
 	(#REM) image complete ?
 
 ][(#GET{image})
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+<span class='spip_document_#ID_DOCUMENT spip_documents[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
  style='float:(#ENV{align}|match{left|right});']>
-[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]</span>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"]>[(#ENV{lien}|?{</a>})]</span>
 ][
 
 	(#REM) sinon logo document + lien + alt + title etc
@@ -47,7 +47,7 @@
 	[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+<span class='spip_document_#ID_DOCUMENT spip_documents[ (#ENV{align})][ (#ENV{class})] spip_lien_ok'[
  style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[
- (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]><img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}|attribut_html)]' /></a></span>
+ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]><img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='[(#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}|attribut_html)]'></a></span>
 ]</BOUCLE_document>

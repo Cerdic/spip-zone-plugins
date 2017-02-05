@@ -1,6 +1,9 @@
 <BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}
-	>[<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'
+	>[<figure class='spip_document_#ID_DOCUMENT spip_documents[ (#ENV{align})]'
 ><pre>(#FICHIER|contenu_document{#ENV{charset,auto}}|echapper_tags)</pre>
-[<div class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
-</div>
+	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'>[
+		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
+		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+	]</figcaption>
+</figure>
 ]</BOUCLE_tous>
