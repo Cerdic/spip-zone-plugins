@@ -27,6 +27,7 @@ equivalent a un <docXX> pour une image en mode image
 	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>[
 		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
 		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+		][<small>(#CREDITS)</small>
 	]</figcaption>
 </figure>
 ][
@@ -47,6 +48,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 	<figcaption class='#EDIT{descriptif} spip_doc_descriptif'>[
 		<strong class='#EDIT{titre} spip_doc_titre'>(#TITRE)</strong>]
 		[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]
+		][<small>(#CREDITS)</small>
 	]</figcaption>
 </figure>]
 </BOUCLE_tous>
