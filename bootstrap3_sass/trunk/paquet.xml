@@ -1,0 +1,31 @@
+<paquet
+	prefix="bootstrap3_sass"
+	categorie="outil"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.2;3.1.*]"
+	logo="img/bootstrap-32.png"
+	documentation="http://spipr.nursit.com/bootstrap"
+>
+
+	<nom>Bootstrap 3 - SASS</nom>
+
+	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
+	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
+	<credit lien='http://getbootstrap.com'>twbs/bootstrap v3.3.5</credit>
+	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
+	<credit>nicod_ : portage en SASS</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affichage_final" inclure="bootstrap3_sass_fonctions.php" />
+
+	<necessite nom="scssphp" compatibilite="[1.3.3;]" />
+	<necessite nom="jquery" compatibilite="[1.9.1;]" />
+	<procure nom="bootstrap" version="3.3.7" />
+
+	<chemin path="bootstrap" type="public" />
+	<chemin path="bootstrap2spip" type="public" />
+	<chemin path="" />
+
+</paquet>

@@ -1,0 +1,53 @@
+@import "css/variables.scss";
+
+$paddingLarge : $padding-large-vertical $padding-large-horizontal;
+$paddingSmall: $padding-small-vertical $padding-small-horizontal;
+$paddingMini: $padding-xs-vertical $padding-xs-horizontal;
+
+$gridColumnWidth: $container-md / $grid-columns - $grid-gutter-width;
+$gridColumnWidth768: $container-sm / $grid-columns - $grid-gutter-width;
+$gridColumnWidth1200: $container-lg / $grid-columns - $grid-gutter-width;
+
+// Compatibilite mini BS2/BS3
+@mixin border-radius($border-radius) {
+	border-radius: $border-radius;
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+	@return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+// Sprite icons path
+// -------------------------
+$iconSpritePath:          "../img/glyphicons-halflings.png";
+$iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
+
+
+// Extension de BS3
+$screen-xxs-max: ($screen-xs-min - 1);
+
+
+// Typo SPIP
+$emFontSize : 1em * (strip-unit($font-size-base / 16));
+$emLineHeight : 1em * ($line-height-base);
+$emVertMargin : $emLineHeight;
+
+$indentStep : ($container-md / $grid-columns) / 2;
+$indentStep1200 : ($container-lg / $grid-columns) / 2;
+$indentStep768 : ($container-sm / $grid-columns) / 2;
+
+$font-size-large-em : 1em * strip-unit($font-size-large / $font-size-base);
+$font-size-small-em : 1em * strip-unit($font-size-small / $font-size-base);
+$font-size-h1-em: 1em * strip-unit($font-size-h1 / $font-size-base);
+$font-size-h2-em: 1em * strip-unit($font-size-h2 / $font-size-base);
+$font-size-h3-em: 1em * strip-unit($font-size-h3 / $font-size-base);
+$font-size-h4-em: 1em * strip-unit($font-size-h4 / $font-size-base);
+$font-size-h5-em: 1em * strip-unit($font-size-h5 / $font-size-base);
+$font-size-h6-em: 1em * strip-unit($font-size-h6 / $font-size-base);

@@ -1,0 +1,9 @@
+@import "bootstrap/css/alerts.scss";
+
+.info { @extend .alert; @extend .alert-info; }
+
+.success { @extend .alert; @extend .alert-success; }
+
+.warning { @extend .alert; @extend .alert-warning; }
+
+.error { @extend .alert; @extend .alert-danger }

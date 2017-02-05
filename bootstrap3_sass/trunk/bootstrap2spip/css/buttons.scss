@@ -1,0 +1,9 @@
+@import "bootstrap/css/buttons.scss";
+
+/* boutons admin forum */
+.boutons.modererforum .submit {@extend .btn-xs}
+.boutons.modererforum .poubelle .submit {@extend .btn-danger;}
+.boutons.modererforum .spam .submit {@extend .btn-warning;}
+
+/* boutons d'admin */
+body .spip-admin-bloc, body .spip-admin-float {z-index: $zindex-navbar-fixed + 1;}

@@ -1,0 +1,12 @@
+@import "bootstrap/css/tables.scss";
+@import "bootstrap2spip/css/spip.variables.scss";
+
+/* Tableaux SPIP */
+table.spip {@extend .table}
+table.spip {@extend .table-striped}
+table.spip {@extend .table-hover}
+
+table.spip caption {}
+table.spip tr.row_first th {}
+table.spip tr.row_odd td { }
+table.spip tr.row_even td,table.spip tr.row_even th {}

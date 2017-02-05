@@ -1,0 +1,28 @@
+#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{sep,#ENV{separateur,' | '}}
+<ul class="pager">
+	[
+
+	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
+
+	][<li
+	class="prev previous[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+	|ancre_url{#ENV{ancre}}
+	|lien_ou_expose{#VAL{'&larr; '}|concat{#ENV{label_precedent,<:public:page_precedente:>}},#ENV{page_courante}|<={1}|?{span},'lien_pagination','',nofollow}
+	|inserer_attribut{rel,prev}
+	)</li>][
+
+	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
+
+	][<li
+	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">(#ENV{url_suivant,#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
+	|ancre_url{#ENV{ancre}}
+	|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>}|concat{' &rarr;'},#ENV{page_courante}|>={#ENV{nombre_pages}}|?{span},'lien_pagination','',nofollow}
+	|inserer_attribut{rel,next}
+	)</li>]
+</ul>

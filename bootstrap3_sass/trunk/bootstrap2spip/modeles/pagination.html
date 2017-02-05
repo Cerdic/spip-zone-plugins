@@ -1,0 +1,27 @@
+#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},5}}
+#SET{premiere, #GET{bornes}|reset}
+#SET{derniere, #GET{bornes}|end}
+#SET{pages,#GET{premiere}|range{#GET{derniere}}}
+#SET{sep,#ENV{separateur,'-'}}
+<B_pages>
+	[<span class="pagination-label"><span class="label">(#ENV{label})</span></span>]
+	<ul>[<li><a
+	href='[(#ENV{url}|parametre_url{#ENV{debut},''}|ancre_url{#ENV{ancre}})]'
+	class='lien_pagination'
+	rel='nofollow'
+	title='1'>(#GET{premiere}|>{1}|?{'<i class="icon-fast-backward"></i>'})</a></li><li
+	class="tbc disabled"><span>...</span></li>]<BOUCLE_pages(POUR){tableau #GET{pages}}>[
+		(#SET{item, #VALEUR|moins{1}|mult{#ENV{pas}} })
+		][<li[(#VALEUR|=={#ENV{page_courante}}|oui)class="active"]>(#ENV{url}
+		|parametre_url{#ENV{debut},#GET{item}}
+		|ancre_url{#ENV{ancre}}
+		|lien_ou_expose{#GET{item},#VALEUR|=={#ENV{page_courante}}|?{span},lien_pagination,'',nofollow})</li>]</BOUCLE_pages>[<li
+
+	class="tbc disabled"><span>...</span></li><li><a
+	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
+	class='lien_pagination'
+	title='#ENV{nombre_pages}'
+	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{'<i class="icon-fast-forward"></i>'})</a></li>]
+	</ul>
+</B_pages>
