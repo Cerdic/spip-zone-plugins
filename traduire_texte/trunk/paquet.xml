@@ -1,7 +1,7 @@
 <paquet
 	prefix="traduiretexte"
 	categorie="outil"
-	version="0.0.3"
+	version="0.0.4"
 	etat="dev"
 	compatibilite="[2.0.0;3.2.*]"
 	logo=""
