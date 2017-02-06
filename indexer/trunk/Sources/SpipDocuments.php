@@ -313,6 +313,29 @@ class SpipDocuments implements SourceInterface {
 				}
 			}
 			
+			// Travail specifique sur les auteurs :
+			if ($this->objet === "auteur") {
+				// Indiquer son nom en title
+				$doc['title'] = $contenu['nom'];
+
+				// - retirer les parametres de securite
+				foreach(array('low_sec', 'pass', 'htpass', 'alea_actuel', 'alea_futur', 'cookie_oubli') as $key) {
+					unset($contenu[$key]);
+				}
+
+				// - compter ses articles publies
+				$all = sql_allfetsel("L2.statut, COUNT(*) AS cnt",
+					"spip_auteurs_liens AS L1 INNER JOIN spip_articles AS L2 ON L1.objet='article' AND L1.id_objet = L2.id_article",
+					$b = "L1.id_auteur="._q($id),
+					"L2.statut"
+				);
+				$articles = array();
+				foreach($all as $d) {
+					$articles[$d['statut']] = intval($d['cnt']);
+				}
+				$doc['properties']['articles'] = $articles;
+			}
+			
 			// Transformation UTF-8
 			if (!function_exists('html2unicode')) {
 				include_spip('inc/charsets');
@@ -338,7 +361,7 @@ class SpipDocuments implements SourceInterface {
 		
 		// On crée le Document avec les infos
 		$doc = new Document($doc);
-		
+
 		// On le passe dans un pipeline pour pouvoir le modifier
 		$doc = pipeline(
 			'indexer_document',
