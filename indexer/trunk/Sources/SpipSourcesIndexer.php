@@ -2,7 +2,7 @@
 
 namespace Spip\Indexer\Sources;
 
-defined('_INDEXER_PARTS_NUMBER') || define('_INDEXER_PARTS_NUMBER', 1000);
+defined('_INDEXER_PARTS_NUMBER') || define('_INDEXER_PARTS_NUMBER', 1000);
 
 use \Indexer\Indexer;
 use \Indexer\Sources\Sources;
