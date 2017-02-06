@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_a' => 'Ajouter à une collection',
+	'ajouter_autre' => 'Ajouter à une autre collection',
 	'ajouter_a_long' => 'Ajouter ce contenu à une collection de favoris',
 	'ajouter_lien_favoris_collection' => 'Ajouter cette collection de favoris',
 	
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// R
 	'ranger_id_favoris_collection_label' => 'Ajouter à une collection existante',
+	'retirer_id_favoris_collection_label' => 'Retirer de cette collection',
 	'ranger_titre_label' => 'Ajouter dans une nouvelle collection',
 	'retirer_lien_favoris_collection' => 'Retirer cette collection de favoris',
 	'retirer_tous_liens_favoris_collections' => 'Retirer toutes les collections de favoris',
