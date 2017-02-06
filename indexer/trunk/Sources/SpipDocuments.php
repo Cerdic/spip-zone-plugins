@@ -90,7 +90,7 @@ class SpipDocuments implements SourceInterface {
 		include_spip('base/objets');
 		include_spip('indexer_fonctions');
 		
-		$doc = array('properties' => array());		
+		$doc = array('properties' => array());
 		
 		// On cherche les éléments dont on va avoir besoin
 		$id = intval($contenu[$this->cle_objet]);
@@ -207,9 +207,10 @@ class SpipDocuments implements SourceInterface {
 				$doc['properties']['maj'] = '0000-00-00 00:00:00';
 			}
 			
-			// S'il y a une langue
+			// S'il y a une langue, la noter et gérer les bons blocs multi
 			if (isset($contenu['lang'])) {
 				$doc['properties']['lang'] = $contenu['lang'];
+				lang_select($doc['properties']['lang']);
 			}
 			// S'il y a des liens de traduction
 			if (isset($contenu['id_trad'])
@@ -371,6 +372,11 @@ class SpipDocuments implements SourceInterface {
 				'data' => $doc,
 			)
 		);
+		
+		// dépiler la langue
+		if (isset($contenu['lang'])) {
+			lang_select();
+		}
 		
 		return $doc;
 	}
