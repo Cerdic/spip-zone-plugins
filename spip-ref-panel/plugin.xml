@@ -11,7 +11,7 @@
 			[fr]Ce (meta) plugin g&eacute;n&egrave;re les dépendances &agrave; plusieurs plugins utiles pour le r&eacute;f&eacute;rencement de sites web et offre un jeu de squelettes 'page' ( <code>spip.php?page=panel-articles ; spip.php?page=panel-rubriques ; spip.php?page=panel-mots</code> ) permettant la modifications de masse sur les informations les plus courament manipul&eacute;es par les r&eacute;f&eacute;renceurs (Titles, metas, urls, Titrailles, ...)
 		</multi>
 	</description>
-	<lien>http://nutzme5.loiseau2nuit.net/spip-ref-panel-plugin-seo</lien>
+	<lien></lien>
 	<prefix>srp</prefix>
 	<!-- options>srp_options.php</options -->
 	<categorie>outils</categorie>
