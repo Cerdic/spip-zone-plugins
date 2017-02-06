@@ -45,7 +45,8 @@ $listBorderColor : $list-group-border;
   .entry-content {margin-bottom: $emVertMargin / 2;}
 }
 
-.liste-items .item-header {.liste-items .item;
+.liste-items .item-header {
+  @extend .liste-items .item;
   border: 0;
   display: block;
   font-weight: bold;
@@ -90,7 +91,7 @@ $listBorderColor : $list-group-border;
 }
 .thumb {
   .entry-title {padding-top: 120px + $line-height-computed;display: block}
-  .spip_logos {display: block;float: left;margin:0;margin-top: -1*(120px + $line-height-computed);.box-sizing(border-box);height:120px;width: 100% !important;padding: 0;text-align: center;overflow: hidden}
+  .spip_logos {display: block;float: left;margin:0;margin-top: -1*(120px + $line-height-computed);@include box-sizing(border-box);height:120px;width: 100% !important;padding: 0;text-align: center;overflow: hidden}
   .spip_logos img {height: 100%!important;width: 100%}
   .entry-content {max-height: 5 * $emLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
 }
