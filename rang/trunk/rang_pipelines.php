@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function rang_declarer_tables_objets_sql($tables){
 	include_spip('inc/config');
 
-	$rang_objets = substr(lire_config('rang_objets'), 0,-1);
+	$rang_objets = rtrim(lire_config('rang_objets'), ',');
 	$liste_objets = explode(',', $rang_objets);
 
 	foreach ($liste_objets as  $table) {
@@ -107,6 +107,12 @@ function rang_recuperer_fond($flux){
 
 function rang_get_sources() {
 	include_spip('inc/config');
+	// mettre en cache le tableau calculé
+	static $sources;
+	if(is_array($sources)){
+		return $sources;
+	}
+	
 	$sources = array();
 	$objets_selectionnes = lire_config('rang_objets');
 	$objets=explode(',',$objets_selectionnes);
