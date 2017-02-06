@@ -135,7 +135,7 @@ class SpipDocuments implements SourceInterface {
 			}
 
 			if ($champ_titre and isset($contenu[$champ_titre])) {
-				$doc['title'] = supprimer_numero($contenu['titre']);
+				$doc['title'] = supprimer_numero($contenu[$champ_titre]);
 			}
 			else {
 				$doc['title'] = '';
@@ -315,9 +315,6 @@ class SpipDocuments implements SourceInterface {
 			
 			// Travail specifique sur les auteurs :
 			if ($this->objet === "auteur") {
-				// Indiquer son nom en title
-				$doc['title'] = $contenu['nom'];
-
 				// - retirer les parametres de securite
 				foreach(array('low_sec', 'pass', 'htpass', 'alea_actuel', 'alea_futur', 'cookie_oubli') as $key) {
 					unset($contenu[$key]);
