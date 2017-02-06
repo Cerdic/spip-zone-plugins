@@ -37,8 +37,8 @@
 			<p class="pagination">
 			#SET{prev,#VAL{Y-m-01}|date{#GET{start}|moins{172800}}}
 			#SET{next,#VAL{Y-m-01}|date{#GET{end}}}
-			<a href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{prev}|affdate{Y-m-d}})]">[(#GET{prev}|affdate_mois_annee)]</a>
-			| <a href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{next}|affdate{Y-m-d}})]">[(#GET{next}|affdate_mois_annee)]</a>
+			<a rel="nofollow" href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{prev}|affdate{Y-m-d}})]">[(#GET{prev}|affdate_mois_annee)]</a>
+			| <a rel="nofollow" href="[(#ENV{self}|parametre_url{#ENV{var_date},#GET{next}|affdate{Y-m-d}})]">[(#GET{next}|affdate_mois_annee)]</a>
 			</p>
 		</div>
 	</div>
