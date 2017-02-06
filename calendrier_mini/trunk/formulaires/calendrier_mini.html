@@ -49,7 +49,10 @@ Chargement du javascript du mini-calendrier
 
 ]<script type='text/javascript'>/*<![CDATA[*/
 if (window.jQuery){jQuery(function(){
+	#SET{ui,#CHEMIN{javascript/ui/jquery-ui.min.js}}[(#REM) SPIP 3.2+]
+	[(#GET{ui}|oui)jQuery.getScript('#GET{ui}', function(){]
 		jQuery.getScript('[(#PRODUIRE{fond=javascript/calendrier_mini.js,lang=#ENV{lang}}|compacte)]',function(){minical.init('.minicalendar .calendar-container');});
+	[(#GET{ui}|oui)});]
 });}/*]]>*/</script>[
 (#REM) --------------------------------------------------------------------------------------------------
 
