@@ -3,13 +3,13 @@
 <prefix>figure</prefix>
 <icon>figure.png</icon>
 
-<version>0.2.2</version>
+<version>0.2.3</version>
 <etat>dev</etat>
 <categorie>multimedia</categorie>
 
-<slogan>Modèles HTML5</slogan>
+<slogan>Figures HTML5</slogan>
 <description>Modèles d'insertion des documents en HTML5, avec figure et figcaption.</description>
-<auteur>[tetue->http://spip.tetue.net]</auteur>
+<auteur>[tetue->http://spip.tetue.net] 2015-2017</auteur>
 
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 <utilise id="mediatheque" version="[;]" />
