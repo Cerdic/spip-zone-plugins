@@ -11,7 +11,7 @@ function targetLinks() {
 		.addClass('external')
 		.each(function(){
 			if(jQuery(this).text()){
-				title =  jQuery(this).text() + " " + js_nouvelle_fenetre;
+				title =  jQuery(this).text().trim().replace(/\r/,'').replace(/\t/,'').replace(/\n/g,'') + " " + js_nouvelle_fenetre;
 			}else{
 				title = " " + js_nouvelle_fenetre;
 			}
@@ -40,12 +40,12 @@ function targetDocs() {
 					var my_ext = extensions[i].replace('.','');
 					jQuery(this).addClass(my_ext);
 					if(jQuery(this).text()){
-						title =  jQuery(this).text() + " " + js_nouvelle_fenetre;
+						title =  jQuery(this).text().trim().replace(/\r/,'').replace(/\t/,'').replace(/\n/g,'') + " " + js_nouvelle_fenetre;
 					}else{
 						title = " " + js_nouvelle_fenetre;
 					}
 					if((jQuery(this).attr("title"))&&(jQuery(this).attr("title").match(reg) == false)){ 
-						title = jQuery(this).attr("title") + " " + js_nouvelle_fenetre;
+						title = jQuery(this).text().trim().replace(/\r/,'').replace(/\t/,'').replace(/\n/g,'') + " " + js_nouvelle_fenetre;
 					}	
 					jQuery(this).attr("title",title);
 			});	

@@ -10,7 +10,7 @@
 	<lien>http://contrib.spip.net/?article3706</lien>
 	<auteur>[Tetue->http://spip.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 	<licence>GPL 2011-2016</licence>
-	<version>2.3.14</version>
+	<version>2.3.15</version>
 	<etat>stable</etat>
 	<prefix>links</prefix>
 	<fonctions>links_fonctions.php</fonctions>
