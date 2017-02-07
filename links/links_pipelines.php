@@ -2,13 +2,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function links_configuration() {
-	$links = isset($GLOBALS['meta']['links']) ? unserialize($GLOBALS['meta']['links']) : array(
+	$links = (isset($GLOBALS['meta']['links']) ? unserialize($GLOBALS['meta']['links']) : array(
 		'style' => 'off',
 		'external' => 'off',
 		'download' => 'off',
 		'window' => 'off',
 		'doc_list' => ".pdf,.ppt,.xls,.doc",
-	);
+	));
 	return $links;
 }
 
