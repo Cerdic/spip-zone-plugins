@@ -32,6 +32,15 @@
 
 ## Changelog
 
+### Version 2.x.x (Passage à smarttag.js)
+
+#### Version 2.0.0
+
+* Pouvoir configurer la valeur `logssl` pour chaque cas de figure
+* Utiliser dans les chaînes de langue le nom des nouvelles options
+* Enlever les variables de configuration qui ne semblent plus utilisées par le `smarttag.js`
+* Ne plus utiliser les vieux `xtcore.js` et `xtclick.js` dépréciés au profit de `smarttag.js`
+
 ### Version 1.x.x 
 
 #### Version 1.8.2
