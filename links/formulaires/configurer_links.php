@@ -18,7 +18,7 @@ function formulaires_configurer_links_verifier_dist(){
 	$erreurs = array();
 	//Cas ou l'on veut des liens ouvrants sans rien choisir
 	if((_request('window') == 'on')&&(!_request('external'))&&(!_request('download'))){
-		$erreurs['window_new'] = _T('links:erreur_choisir_liens_ouvrants');
+		$erreurs['window'] = _T('links:erreur_choisir_liens_ouvrants');
 	}
 	//Cas ou l'on veut des liens ouvrants sur les documents sans avoir specifier d'extension
 	if((_request('download'))&&(!_request('doc_list'))){
