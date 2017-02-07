@@ -5,7 +5,6 @@
 
 ]
 
-[(#INCLURE{javascript/xtcore.js}|replace{'\.mondomaine\.tld',[(#CONFIG{xiti/xtdmc_xiti})]})]
-[(#INCLURE{javascript/xtclick.js})]
+[(#INCLURE{javascript/smarttag.js}|replace{xiti_id_site,[(#CONFIG{xiti/xtsite_xiti})]})]
 [(#CONFIG{auto_compress_js}|=={oui}|oui)
 #FILTRE{compacte}]
