@@ -14,6 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
+function xiti_autoriser(){
+}
+
 function autoriser_xitiniveau_creer_dist($faire, $quoi, $id, $qui, $opts) {
 	if (!function_exists('lire_config')) {
 		inclure_spip('inc/config');
