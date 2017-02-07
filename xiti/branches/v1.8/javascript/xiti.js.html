@@ -1,0 +1,11 @@
+[(#REM)
+
+	Concaténation de xtclick.js et xtcore.js
+	Remplacement de .mondomaine.tld par le xtsd configuré
+
+]
+
+[(#INCLURE{javascript/xtcore.js}|replace{'\.mondomaine\.tld',[(#CONFIG{xiti/xtdmc_xiti})]})]
+[(#INCLURE{javascript/xtclick.js})]
+[(#CONFIG{auto_compress_js}|=={oui}|oui)
+#FILTRE{compacte}]

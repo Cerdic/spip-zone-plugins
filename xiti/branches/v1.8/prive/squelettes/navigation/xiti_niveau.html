@@ -1,0 +1,8 @@
+<BOUCLE_nav(XITI_NIVEAUX){id_xiti_niveau}{tout}{si #ENV{exec}|=={xiti_niveau}}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{type,xiti_niveau,id,#ENV{id_xiti_niveau}}}}
+#BOITE_FERMER
+
+#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,xiti_niveau,id,#XITI_NIVEAU},data,''}}
+</BOUCLE_nav>
+<//B_nav>
