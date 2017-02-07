@@ -19,3 +19,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @pipeline autoriser */
 function jcrop_autoriser() {
 }
+
+function autoriser_logo_recadrer($faire, $type, $id, $qui, $opt) {
+	if ($opt == "article") {
+		return autoriser('modifier','article',$id);
+	}
+	if ($opt == "rubrique") {
+		return autoriser('modifier','rubrique',$id);
+	}
+	return false;
+}

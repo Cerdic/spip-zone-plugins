@@ -5,15 +5,22 @@ function formulaires_recadrer_image_charger_dist($objet="document", $id_objet, $
 	$valeurs = array();
 	if ($objet == "document") {
 		$valeurs['id_document'] = intval($id_objet);
-	}
-	if ($objet == "article") {
+		if (autoriser('modifier','document',intval($id_objet))) {
+			return $valeurs;
+		}
+	} elseif ($objet == "article") {
 		$valeurs['id_article'] = intval($id_objet);
-	}
-	if ($objet == "rubrique") {
+		if (autoriser('modifier','article',intval($id_objet))) {
+			return $valeurs;
+		}
+	} elseif ($objet == "rubrique") {
 		$valeurs['id_rubrique'] = intval($id_objet);
+		if (autoriser('modifier','rubrique',intval($id_objet))) {
+			return $valeurs;
+		}
 	}
 
-	return $valeurs;
+	return false;
 }
 
 function formulaires_recadrer_image_verifier_dist($objet="document", $id_objet, $redirect=''){

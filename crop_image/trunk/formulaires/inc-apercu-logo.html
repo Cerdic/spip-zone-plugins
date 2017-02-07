@@ -4,10 +4,12 @@
 	#SET{hauteur,#ENV{logo}|hauteur}
 	[<div class="titre">(#ENV{titre,''})</div>]
 	<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
-	[(#ENV{editable}|oui)
+	[(#AUTORISER{recadrer,logo,#ENV{id_objet},'',#ENV{objet}})
 		<a class="editbox" target="_blank" role="button" tabindex="0" href="[(#URL_ECRIRE{recadrer_image, objet=#ENV{objet}&id_objet=#ENV{id_objet}}|parametre_url{redirect,#SELF})]">
 			<strong><:jcrop:recadrer:></strong>&nbsp;&nbsp;
 		</a>
+	 ]
+	[(#ENV{editable}|oui)
 		<input type='submit' class='submit supprimer' id="supprimer_#ENV{quoi,logo_on}_#ENV{objet}_#ENV{id_objet}" name="supprimer_#ENV{quoi,logo_on}" value='<:lien_supprimer|ucfirst|attribut_html:>' />
 	]
 </div>
