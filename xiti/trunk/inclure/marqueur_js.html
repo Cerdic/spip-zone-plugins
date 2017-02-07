@@ -2,7 +2,8 @@
 
 	Plugins Xiti
 
-]<div id="xiti-tag">
+]<div id="xiti-tag">[(#SET{smarttime,[(#CHEMIN{javascript/smarttag.js}|filemtime)]})]
+	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js,smart=#GET{smarttime}}|url_absolue)"></script>]
 	<script type="text/javascript">
 		[(#REM)
 
@@ -15,29 +16,20 @@
 		}
 
 		if(cookie) {
-			xtnv = #ENV{xtnv,document};
-			xtsd = '[http://(#ENV{xtsd})]';
-			xtsite = '[(#ENV{xtsite})]';[
-			xtn2 = '(#ENV{xtn2})';]
-			xtpage = '[(#ENV{xtpage})]';[
-			xtdi = '(#ENV{xtdi})';]
-			xt_multc = '[(#ENV{xt_multc})]';
-			xt_an = '[(#ENV{xt_an})]';
-			xt_ac = '[(#ENV{xt_ac})]';[
-			xtdmc = '(#ENV{xtdmc})';][
-			xtprm = '(#ENV{xtprm})';][
-			xtergo = '(#ENV{xtergo})';]
-			if (window.xtparam!=null){
-				window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;
-			} else {
-				window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;
-			};
+			window.ATTag = new ATInternet.Tracker.Tag({[
+				site: (#ENV{xtsite}),][
+				log: '(#ENV{xtsd})']
+			});
+			ATTag.page.set({
+				name:'[(#ENV{page})]'<B_chapitres>,<BOUCLE_chapitres(DATA){source table, #ENV{chapitres,#ARRAY}}{','}>
+				chapitre[(#COMPTEUR_BOUCLE)]:'#VALEUR'</BOUCLE_chapitres>[,
+				level2:(#ENV{niveau2})
+			]});
+
+			ATTag.dispatch();
 		}
 	</script>
-	[<script type="text/javascript" src="(#PRODUIRE{fond=javascript/xiti.js}|url_absolue)"></script>]
 </div>
 <noscript>
-	<div id='xiti-tag-noscript'>
-		<img width='1' height='1' src='http://[(#ENV{xtsd})].xiti.com/hit.xiti?s=[(#ENV{xtsite})]&amp;s2=[(#ENV{xtn2})]&amp;p=[(#ENV{xtpage})]&amp;di=&amp;' alt='XiTi' />
-	</div>
+	
 </noscript>
