@@ -40,29 +40,29 @@
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="[(#URL_SITE_SPIP|xiti_xtdmc)]" />
 									</div>
 								</li>
-								#SET{name,xtnv_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtnv_xiti:></label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtnv_explication_xiti:></p>
-									<div class="choix">
-										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="document" />
-									</div>
-								</li>
 								#SET{name,xtsd_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})] obligatoire[ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsd_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_log:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsd_explication_xiti:> <strong><:info_obligatoire_02:></strong></p>
+									]<p class="explication"><:xiti:item_log_explication:> <strong><:info_obligatoire_02:></strong></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="logp4" />
 									</div>
 								</li>
+								#SET{name,logssl}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer editer_[(#GET{name})] obligatoire[ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}"><:xiti:item_logssl:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<p class="explication"><:xiti:item_logssl_explication:></p>
+									<div class="choix">
+										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="logs4" />
+									</div>
+								</li>
 								#SET{name,xtsite_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})] obligatoire[ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsite_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_site:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsite_explication_xiti:> <strong><:info_obligatoire_02:></strong></p>
+									]<p class="explication"><:xiti:item_site_explication:> <strong><:info_obligatoire_02:></strong></p>
 									<div class="choix">
 										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="00000000" />
 									</div>
@@ -86,27 +86,18 @@
 								</li>
 								#SET{name,xtn2_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtn2_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_level2:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtn2_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_level2_explication:></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
 									</div>
 								</li>
 								#SET{name,xtn2_accueil_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtn2_xiti_accueil:></label>[
+									<label for="#GET{name}"><:xiti:item_level2_accueil:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtn2_explication_xiti_accueil:></p>
-									<div class="choix">
-										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
-									</div>
-								</li>
-								#SET{name,xtdi_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtdi_xiti:></label>[
-									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtdi_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_level2_explication_accueil:></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="0" />
 									</div>
@@ -189,27 +180,36 @@
 							<ul>
 								#SET{name,xtsd_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsd_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_log:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsd_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_log_explication:></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{xtsd_xiti,logp4}" />
 									</div>
 								</li>
+								#SET{name,logssl_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}"><:xiti:item_logssl:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<p class="explication"><:xiti:item_logssl_explication:></p>
+									<div class="choix">
+										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{logssl,logs4}" />
+									</div>
+								</li>
 								#SET{name,xtsite_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsite_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_site:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsite_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_site_explication:></p>
 									<div class="choix">
 										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{xtsite_xiti,00000000}" />
 									</div>
 								</li>
 								#SET{name,xtn2_home_xiti_#ID_RUBRIQUE}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_xtn2_home_secteur editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]"[(#ENV{secteur_xiti_home}|=={on}|non)style="display:none;"]>
-									<label for="#GET{name}"><:xiti:item_xtn2_home_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_level2_home:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtn2_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_level2_explication:></p>
 									<div class="choix">
 										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" />
 									</div>
@@ -246,18 +246,27 @@
 							<ul>
 								#SET{name,xtsd_xiti_#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsd_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_log:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsd_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_log_explication:></p>
 									<div class="choix">
 										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{xtsd_xiti,logp4}" />
 									</div>
 								</li>
+								#SET{name,logssl_#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}"><:xiti:item_logssl:></label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<p class="explication"><:xiti:item_logssl_explication:></p>
+									<div class="choix">
+										<input type="text" name="#GET{name}" class="text" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{logssl,logs4}" />
+									</div>
+								</li>
 								#SET{name,xtsite_xiti_#VALEUR}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
-									<label for="#GET{name}"><:xiti:item_xtsite_xiti:></label>[
+									<label for="#GET{name}"><:xiti:item_site:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<p class="explication"><:xiti:item_xtsite_explication_xiti:></p>
+									]<p class="explication"><:xiti:item_site_explication:></p>
 									<div class="choix">
 										<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV{#GET{name}}" placeholder="#ENV{xtsite_xiti,00000000}" />
 									</div>
