@@ -1,21 +1,21 @@
 <plugin>
 	<nom>Spip Ref Panel</nom>
-	<slogan><multi>[fr]Bo&icirc;te &agrave; outils du R&eacute;f&eacute;renceur pour SPIP[en]SEO toolkit for SPIP</multi></slogan>
+	<slogan><multi>[fr]Boîte à outils du Référenceur pour SPIP[en]SEO toolkit for SPIP</multi></slogan>
 	<auteur>Loiseau2nuit</auteur>
 	<icon>img/srp-128.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1-dev</version>
+	<version>0.1.0</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
-			[fr]Ce (meta) plugin g&eacute;n&egrave;re les d�pendances &agrave; plusieurs plugins utiles pour le r&eacute;f&eacute;rencement de sites web et offre un jeu de squelettes 'page' ( <code>spip.php?page=panel-articles ; spip.php?page=panel-rubriques ; spip.php?page=panel-mots</code> ) permettant la modifications de masse sur les informations les plus courament manipul&eacute;es par les r&eacute;f&eacute;renceurs (Titles, metas, urls, Titrailles, ...)
+			[fr]Ce (meta) plugin génère les dépendances à plusieurs plugins utiles pour le référencement de sites web et offre un jeu de squelettes 'page' ( <code>spip.php?page=panel-articles ; spip.php?page=panel-rubriques ; spip.php?page=panel-mots</code> ) permettant la modifications de masse sur les informations les plus courament manipulées par les référenceurs (Titles, metas, urls, Titrailles, ...)
 		</multi>
 	</description>
 	<lien></lien>
 	<prefix>srp</prefix>
 	<!-- options>srp_options.php</options -->
-	<categorie>outils</categorie>
-	<necessite id="SPIP" version="[3.0-dev;[" />
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[3.0.0;3.1.99]" />
 	<necessite id="metas" version="[1.4.0;]" />
 	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
 	<!-- todo: utilise PIWIK ou GAnalytics -->
