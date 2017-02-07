@@ -31,19 +31,26 @@
 		</div>
 	</div>
 	]
-	[(#GET{prix}|>{0}|oui)
-		<div class>
-			<:prix_objets:prix:> : #GET{prix}
-		</div>
-	]
-	[(#PLACES|>{0}|oui)
-		<INCLURE
-			{fond=inclure/places_disponibles,
-				id_evenement=#ID_OBJET,
-				places,
-				statut=#VAL|statuts_complet}/>
-	]
-	<a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]">
-		<i class="icon-hand-right"></i><:reservation:inscrire:>
-	</a>
+
+		[(#GET{prix}|>{0}|oui)
+			<div class>
+				<:prix_objets:prix:> : #GET{prix}
+			</div>
+		]
+		[(#PLACES|>{0}|oui)
+			<INCLURE
+				{fond=inclure/places_disponibles,
+					id_evenement=#ID_OBJET,
+					places,
+					statut=#VAL|statuts_complet}/>
+		]
+	[(#DATE_FIN|>{#DATE}|?{
+		<a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]">
+			<i class="icon-hand-right"></i><:reservation:inscrire:>
+		</a>,
+		<p><strong><:reservation:evenement_ferme_inscription:></strong></p>
+		<a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription})]">
+			<i class="icon-hand-right"></i><:reservation:inscrire:>
+		</a>
+		})]
 </aside>]

@@ -1,6 +1,10 @@
 <div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,#ENV{id_evenement}}">
-	[(#ENV{evenements}|count|?{#SET{evenement,1},#SET{evenement,0}})]
-	[(#GET{evenement}|?{
+	[(#PLUGIN{declinaisons}|?{
+		#SET{champs, #INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons,env}}
+		,
+		#SET{champs, #INCLURE{fond=formulaires/inc-reservation_evenements,env}}
+	})]
+	[(#GET{champs}|?{
 		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 		[(#ENV{editable})
@@ -14,11 +18,7 @@
 							<:agenda:label_vous_inscrire:>
 						</legend>
 						<ul class="evenements">
-							[(#PLUGIN{declinaisons}|?{
-								[(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons,env})]
-								,
-								[(#INCLURE{fond=formulaires/inc-reservation_evenements,env})]
-							})]
+							#GET{champs}
 						</ul>
 					</fieldset>
 					<fieldset>
@@ -36,6 +36,6 @@
 				</div>
 			</form>
 		]
-		,<:reservation:erreur_pas_evenement:>}
-	)]
+		,<:reservation:erreur_pas_evenement:>
+		})]
 </div>

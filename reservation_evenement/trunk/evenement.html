@@ -1,7 +1,1 @@
-<BOUCLE_evenement(EVENEMENTS){id_evenement}>
-<BOUCLE_cond(CONDITION){si #PLUGIN{Zcore}}>
-        <INCLURE{fond=structure,id_evenement,id_article,env,type=evenement,type-page=evenement}/>
-</BOUCLE_cond>
-    <INCLURE{fond=page_evenement,id_article,id_evenement,env}/>
-<//B_cond>
-</BOUCLE_evenement>
+<BOUCLE_evenement(EVENEMENTS){id_evenement}><BOUCLE_cond(CONDITION){si #PLUGIN{Zcore}}><INCLURE{fond=structure,id_evenement,id_article,env,type=evenement,type-page=evenement}/></BOUCLE_cond><INCLURE{fond=page_evenement,id_article,id_evenement,env}/><//B_cond></BOUCLE_evenement>
