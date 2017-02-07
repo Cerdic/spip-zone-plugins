@@ -1,7 +1,7 @@
 <paquet
 	prefix="mesfavoris_collections"
 	categorie="divers"
-	version="1.0.4"
+	version="1.0.5"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="mesfavoris_collections.png"
@@ -22,4 +22,5 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/mesfavoris_collections.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/mesfavoris_collections.php" />
 	<pipeline nom="formulaire_fond" inclure="mesfavoris_collections_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="mesfavoris_collections_pipelines.php" />
 </paquet>

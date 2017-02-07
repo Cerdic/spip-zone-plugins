@@ -6,25 +6,20 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Supprimer une collection de favoris
  *
- * Optionnellement, on peut demander de conserver les favoris orphelins
- * (qui ne se trouvent plus dans aucune collection après cette action).
+ * Optionnellement, si la constante _MESFAVORIS_COLLECTIONS_CONSERVER_ORPHELINS est définie,
+ * on conserve les favoris orphelins (ceux qui ne se trouveront plus dans aucune collection).
  *
  * @example
  * #URL_ACTION_AUTEUR{supprimer_favoris_collection, #ID_FAVORIS_COLLECTION, #SELF}
- * Idem, mais en conservant les orphelins :
- * #URL_ACTION_AUTEUR{supprimer_favoris_collection, #ID_FAVORIS_COLLECTION-orphelins, #SELF}
  *
- * @param string|null $arg
- *     paramètres séparés par des tirets : param1-param2-paramN
- *     id_favoris_collection : identifiant de la collection à supprimer
- *     orphelins             : pour indiquer de conserver les favoris orphelins
+ * @param int|string|null $id_favoris_collection
+ *     Identifiant de la collection à supprimer
  */
-function action_supprimer_favoris_collection_dist($arg=null) {
-	if (is_null($arg)) {
+function action_supprimer_favoris_collection_dist($id_favoris_collection=null) {
+	if (is_null($id_favoris_collection)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
+		$id_favoris_collection = $securiser_action();
 	}
-	list($id_favoris_collection, $garder_orphelins) = explode('-', $arg);
 	
 	include_spip('inc/mesfavoris');
 	include_spip('inc/autoriser');
@@ -38,7 +33,9 @@ function action_supprimer_favoris_collection_dist($arg=null) {
 		// Si besoin, avant de procéder, on sort de la collection les favoris
 		// qui se retrouveront orphelins, ainsi ils ne seront pas effacés.
 		// [FIXME] on devrait pouvoir trouver les (futurs) orphelins en une seule requête.
-		if ($garder_orphelins) {
+		if (defined('_MESFAVORIS_COLLECTIONS_CONSERVER_ORPHELINS')
+			and _MESFAVORIS_COLLECTIONS_CONSERVER_ORPHELINS === true
+		) {
 			if ($favoris = sql_allfetsel('*', 'spip_favoris', array('id_favoris_collection' => $id_favoris_collection))){
 				foreach ($favoris as $favori){
 					if (!sql_countsel(
