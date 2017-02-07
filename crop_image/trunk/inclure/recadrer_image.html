@@ -1,0 +1,4 @@
+<h1><:jcrop:recadrer:> &laquo;[(#ENV{objet}|=={document}|?{#INFO_TITRE{document, #ENV{id_objet}}|sinon{Document #ENV{id_objet}}, Logo #INFO_TITRE{#ENV{objet}, #ENV{id_objet}}|sinon{#ENV{objet} #ENV{id_objet}}})]&raquo;</h1>
+<div>
+	#FORMULAIRE_RECADRER_IMAGE{#ENV{objet},#ENV{id_objet},#ENV{redirect}}
+</div>

@@ -1,0 +1,53 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form name="formulaire_#FORM" action="#ENV{action}" method="post"  onsubmit="return checkCoords();"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" id="x" name="x" />
+		<input type="hidden" id="y" name="y" />
+		<input type="hidden" id="w" name="w" />
+		<input type="hidden" id="h" name="h" />
+
+	<BOUCLE_image(DOCUMENTS){id_document}>
+		<input type="hidden" name="fichier" value="#URL_DOCUMENT">
+		<img class="a_crop" src="[(#CHEMIN{#URL_DOCUMENT})]" alt="image_crop">
+	</BOUCLE_image>
+
+	<BOUCLE_article(ARTICLES){id_article}{statut IN prop,prepa,publie,refuse,poubelle}>
+		<input type="hidden" name="fichier" value="[(#LOGO_ARTICLE|fichier)]">
+		[(#LOGO_ARTICLE|inserer_attribut{class,a_crop})]
+	</BOUCLE_article>
+
+	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
+		<input type="hidden" name="fichier" value="[(#LOGO_RUBRIQUE|fichier)]">
+		[(#LOGO_RUBRIQUE|inserer_attribut{class,a_crop})]
+	</BOUCLE_rubrique>
+
+	<p class="boutons"><input type="submit" class="submit" value="<:jcrop:recadrer_submit:>" /></p>
+	</div></form>
+</div>
+<link rel="stylesheet" href="[(#CHEMIN{css/jcroc.min.css})]" />
+<script src="[(#CHEMIN{js/jcrop.min.js})]" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	jQuery(document).ready(function(){
+		jQuery('img.a_crop').Jcrop({
+			//aspectRatio: 1,
+			onSelect: updateCoords
+		});
+	})
+
+	function updateCoords(c) {
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	};
+
+	function checkCoords() {
+		if (parseInt($('#w').val())) return true;
+		alert('<:jcrop:selectionner_region_obligatoire:>');
+		return false;
+	};
+</script>
