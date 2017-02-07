@@ -117,6 +117,14 @@ class SphinxQL {
 			$liste['meta']   = array('error' => 'meta illisible');
 		}
 
+		// normaliser les dates dans les docs, au format MySQL
+		foreach($liste['docs'] as $i => $doc) {
+			if ($doc['date']) {
+				$doc['date'] = normaliser_date($doc['date']);
+				$liste['docs'][$i]['date'] = $doc['date'];
+			}
+		}
+
 		return array('query' => $liste);
 	}
 
