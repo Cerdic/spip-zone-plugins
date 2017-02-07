@@ -1,7 +1,7 @@
 <paquet
 	prefix="mesfavoris_collections"
 	categorie="divers"
-	version="1.0.3"
+	version="1.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="mesfavoris_collections.png"
