@@ -1,4 +1,4 @@
-<BOUCLE_document(DOCUMENTS) {id_document}{media=image}{tout}{distant=non}>
+<BOUCLE_document(DOCUMENTS) {id_document}{media=image}{tout}{distant=non}{extension in jpg,png}>
 	[(#AUTORISER{modifier,document,#ID_DOCUMENT})
 		<a class="editbox" target="_blank" role="button" tabindex="0" href="[(#URL_ECRIRE{recadrer_image, objet=document&id_objet=#ID_DOCUMENT}|parametre_url{redirect,#SELF\#doc#ID_DOCUMENT})]">
 		  <strong><:jcrop:recadrer:></strong>&nbsp;&nbsp;
