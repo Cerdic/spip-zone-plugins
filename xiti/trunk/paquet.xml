@@ -3,7 +3,7 @@
 	categorie="statistique"
 	version="1.8.3"
 	schema="1.5.0"
-	etat="stable"
+	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/xiti-32.png"
 	documentation="http://contrib.spip.net/XiTi-pour-SPIP-2"
