@@ -43,7 +43,7 @@ a mis a jour la valeur avec la page reelle]
 
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[partenaires_type-#ID_TYPE-#OBJET-#ID_OBJET\]" value="X"><:partenaires_type:retirer_lien_partenaires_type:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button class="button link delete" type="submit" name="supprimer_lien\[partenaires_type-#ID_TYPE-#OBJET-#ID_OBJET\]" value="X"><:partenaires_type:retirer_lien_partenaires_type:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
