@@ -1,7 +1,7 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="1.2.6"
+	version="1.2.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="http.png"
@@ -15,5 +15,6 @@
 	<licence>GPL v3</licence>
 
 	<pipeline nom="autoriser" inclure="http_autorisations.php" />
+	<pipeline nom="http_pre_requete" action="" />
 	<pipeline nom="http_final" action="" />
 </paquet>

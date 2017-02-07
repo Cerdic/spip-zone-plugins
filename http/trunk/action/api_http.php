@@ -21,6 +21,17 @@ function action_api_http_dist(){
 	// On crée déjà la réponse, mais totalement vide, qui sera modifiée et remplie au fil du temps
 	$reponse = new Response();
 	
+	// On passe dans un pipeline avant toute vraie requête à SPIP
+	$reponse = pipeline(
+		'http_pre_requete',
+		array(
+			'args' => array(
+				'requete' => $requete,
+			),
+			'data' => $reponse,
+		)
+	);
+	
 	// Il faut au moins le format dans l'argument sinon rien
 	if (!$arg = $requete->query->get('arg')){
 		$reponse->setStatusCode('404');
