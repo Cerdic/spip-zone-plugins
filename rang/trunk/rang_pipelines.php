@@ -47,6 +47,7 @@ function rang_recuperer_fond($flux){
 
 	// Ajouter automatiquement un contexte
 	// pour les objets sans rubrique, on ajoute le contexte ?exec=objet
+	//include_spip('inc/config');
 	$objets_selectionnes = lire_config('rang_objets');
 	$liste = lister_tables_objets_sql();
 	foreach ($liste as $key => $value) {
