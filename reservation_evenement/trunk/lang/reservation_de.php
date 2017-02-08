@@ -96,8 +96,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_reservations' => 'Anmeldungen',
 
 	// R
-	'reaservation_montant' => 'Betrag',
-	'reaservation_nouvelle' => 'Neue Anmeldung',
 	'recapitulatif' => 'Zusammenfassung der Anmeldung:',
 	'remerciement' => 'Wir bedanken uns für Ihre Anmeldung<br/>Mit freundlichen Grüssen',
 	'reservation_client' => 'Reservant',

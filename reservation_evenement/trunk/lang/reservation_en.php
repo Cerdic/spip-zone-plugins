@@ -109,8 +109,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'places_disponibles' => 'Available spots:',
 
 	// R
-	'reaservation_montant' => 'Amount',
-	'reaservation_nouvelle' => 'New booking',
 	'recapitulatif' => 'Booking summary:',
 	'remerciement' => 'Thank you for registering <br/> Regards',
 	'reservation_client' => 'Client',
