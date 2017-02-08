@@ -33,7 +33,7 @@ if (_request('purger')) {
 	$ret = $indexer->purgeDocuments();
 	if (!$ret) {
 		echo "\n<p class='error'>";
-		echo "Erreur lors de la requete de purge. Veuillez vérifier les logs de spip (tmp/log/indexer.log)\n";
+		echo "Erreur lors de la requête de purge. Veuillez vérifier les logs de spip (tmp/log/indexer.log)\n";
 		echo "</p>\n";
 	} else {
 		echo "\n<p class='success'>";

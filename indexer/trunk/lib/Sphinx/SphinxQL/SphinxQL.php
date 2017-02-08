@@ -122,9 +122,9 @@ class SphinxQL {
 		foreach($liste['docs'] as $i => $doc) {
 			if ($doc['date']) {
 				$doc['date'] = intval($doc['date']);
-var_dump($doc['date']);
+				// var_dump($doc['date']);
 				$doc['date'] = normaliser_date(date('Y-m-d H:i:s', $doc['date'] - (($doc['date'] > 2992477296) ? 4294967296 : 0)));
-var_dump($doc['date']);
+				// var_dump($doc['date']);
 				$liste['docs'][$i]['date'] = $doc['date'];
 			}
 		}
