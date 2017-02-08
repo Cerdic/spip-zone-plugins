@@ -103,7 +103,7 @@ class Query{
 
 		// WHERE et MATCH
 		$where = $this->where;
-		if ($this->match) $where[] = 'MATCH('. $this->quote($this->match).')';
+		if ($this->match) $where[] = 'MATCH('. $this->quote($this->match, 'string').')';
 		if ($where)    $query[] = 'WHERE ('   . implode(') AND (', $where) . ')';
 
 		if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);

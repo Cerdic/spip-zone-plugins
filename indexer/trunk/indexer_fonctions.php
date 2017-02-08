@@ -137,7 +137,7 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
     $sq = new \Sphinx\SphinxQL\Query();
     $sq
         ->select('*')
-        ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'html_strip_mode=strip') AS snippet")
+        ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : ''), 'string') . ", 'html_strip_mode=strip') AS snippet")
         ->from($index)
         ->facet("properties.authors ORDER BY COUNT(*) DESC")
         ->facet("properties.tags ORDER BY COUNT(*) DESC")

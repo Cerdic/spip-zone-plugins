@@ -195,7 +195,7 @@ class IterateurSPHINX implements Iterator {
 	 */
 	public function keyword2word($keyword, $q) {
 		$u = $this->sphinxQL->allfetsel(
-		"SELECT SNIPPET("._q($q).","._q($keyword).") AS m "
+		"SELECT SNIPPET("._q($q).",". ($this->quote($keyword, 'string')).") AS m "
 		. "FROM ". join(',', $this->index) ." LIMIT 1"
 		);
 		if (!$mot = supprimer_tags(extraire_balise($u['query']['docs'][0]['m'], 'b')))
@@ -343,8 +343,8 @@ class IterateurSPHINX implements Iterator {
 	}
 
 
-	public function quote($m) {
-		return $this->queryApi->quote($m);
+	public function quote($m, $type=null) {
+		return $this->queryApi->quote($m, $type);
 	}
 
 
@@ -550,7 +550,7 @@ class IterateurSPHINX implements Iterator {
 		if (!$desc['phrase'] OR !$desc['champ']) {
 			return false;
 		}
-		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit]','html_strip_mode=strip') AS $desc[as]");
+		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase'], 'string') . ", 'limit=$desc[limit]','html_strip_mode=strip') AS $desc[as]");
 		return true;
 	}
 
