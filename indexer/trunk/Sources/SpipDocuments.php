@@ -345,11 +345,8 @@ class SpipDocuments implements SourceInterface {
 			// Supprimer les balises HTML
 			// (on n'utilise pas textebrut car il semble qu'il y a une fuite
 			// de mémoire problématique quand on traite des centaines de textes)
-			echo "article $id (" . strlen($doc['content']). ") ";
 			$doc['content'] = supprimer_tags($doc['content']);
-			echo ".";
 			$doc['summary'] = supprimer_tags($doc['summary']);
-			echo ".\n";
 
 			// Supprimer les raccourcis typo SPIP
 			include_spip('inc/lien');
