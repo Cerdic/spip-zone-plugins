@@ -342,9 +342,17 @@ class SpipDocuments implements SourceInterface {
 			$doc['content'] = unicode_to_utf_8(html2unicode($doc['content']));
 			$doc['summary'] = unicode_to_utf_8(html2unicode($doc['summary']));
 
-			if (!function_exists('nettoyer_raccourcis_typo')) {
-				include_spip('inc/lien');
-			}
+			// Supprimer les balises HTML
+			// (on n'utilise pas textebrut car il semble qu'il y a une fuite
+			// de mémoire problématique quand on traite des centaines de textes)
+			echo "article $id (" . strlen($doc['content']). ") ";
+			$doc['content'] = supprimer_tags($doc['content']);
+			echo ".";
+			$doc['summary'] = supprimer_tags($doc['summary']);
+			echo ".\n";
+
+			// Supprimer les raccourcis typo SPIP
+			include_spip('inc/lien');
 			if (strpos($doc['content'],'[') !== false
 			  or strpos($doc['content'],'{') !== false
 			  or strpos($doc['content'],'|') !== false) {
