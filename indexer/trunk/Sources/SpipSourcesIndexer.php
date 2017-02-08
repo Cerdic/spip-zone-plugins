@@ -96,6 +96,21 @@ class SpipSourcesIndexer {
 
 
     /**
+     * Purge toutes les sources de ce site
+     */
+    public function purgeData() {
+        $sources = $this->sources->getIterator();
+        while ($sources->valid()) {
+            $skey    = $sources->key();
+            $source  = $sources->current();
+echo  "$skey, $source\n";
+            $sources->next();
+
+        }
+    }
+
+
+    /**
      * Indexe toutes les sources en prenant en compte le timeout
      */
     public function indexAll() {

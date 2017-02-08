@@ -22,6 +22,10 @@ class Indexer {
 	function replaceDocuments($documents) {
 		return $this->storage->replaceDocuments($documents);
 	}
+
+	function purgeDocuments($source = null) {
+		return $this->storage->purgeDocuments($source);
+	}
 }
 
 

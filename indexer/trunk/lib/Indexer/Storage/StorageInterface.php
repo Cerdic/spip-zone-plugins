@@ -14,4 +14,9 @@ interface StorageInterface {
 	 * @param Document[] $documents
 	 */
 	public function replaceDocuments($documents);
+
+	/**
+	 * @param none
+	 */
+	public function purgeDocuments($source);
 }

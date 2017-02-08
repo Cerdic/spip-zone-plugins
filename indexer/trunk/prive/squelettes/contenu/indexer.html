@@ -2,11 +2,12 @@
 
 <?php
 
+
+// Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
+include_spip('inc/indexer');
+$indexer = indexer_indexer();
+
 if (_request('run') || _request('continue')) {
-    include_spip('inc/indexer');
-    
-    // Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
-    $indexer = indexer_indexer();
 	
 	// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
     $sources = indexer_sources();
@@ -24,4 +25,20 @@ if (_request('run') || _request('continue')) {
     } else {
         echo "\n<pre class='success'>"; print_r($res); echo "</pre>";
     }
+
 }
+
+
+if (_request('purger')) {
+	$ret = $indexer->purgeDocuments();
+	if (!$ret) {
+		echo "\n<p class='error'>";
+		echo "Erreur lors de la requete de purge. Veuillez vérifier les logs de spip (tmp/log/indexer.log)\n";
+		echo "</p>\n";
+	} else {
+		echo "\n<p class='success'>";
+		echo "L’index a été purgé.\n";
+		echo "</p>\n";
+	}
+}
+
