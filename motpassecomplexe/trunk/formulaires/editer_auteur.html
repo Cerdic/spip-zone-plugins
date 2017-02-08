@@ -8,7 +8,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_auteur' value='#ENV{id_auteur}' />
 		[<input type='hidden' name='redirect' value='(#ENV**{redirect})' />]
-		<ul>
+		<ul class="editer-groupe">
 			<li class="editer editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
@@ -48,7 +48,7 @@
 			[(#REM)
 				Site Web : nom et url
 			]
-			<li class='editer_liens_sites fieldset'>
+			<li class='editer editer_liens_sites fieldset'>
 				<fieldset>
 					<legend><:info_site_web:></legend>
 					<ul>
@@ -68,7 +68,7 @@
 			[(#REM)
 				Identifiants (nom, mot de passe)
 			]
-			<li class='editer_identification fieldset'>
+			<li class='editer editer_identification fieldset'>
 				<fieldset>
 					[<legend>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_identifiants_connexion:>,<:entree_identifiants_connexion_2:>})</legend>]
 					[(#REM) Avertissement en cas de modifs de ses propres donnees ]
