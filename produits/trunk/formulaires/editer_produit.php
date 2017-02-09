@@ -56,6 +56,9 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 				_T('produits:produit_champ_prix_ttc_label') :
 				_T('produits:produit_champ_prix_ht_label'),
 				'obligatoire' => 'oui'
+			),
+			'verifier' => array(
+				'type' => 'decimal'
 			)
 		),
 		array(
@@ -68,6 +71,9 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 					array('taxe' => $taxe_defaut.'&nbsp;&#37;')
 				),
 				'inserer_fin' => '<span>&nbsp;&#37;</span>'
+			),
+			'verifier' => array(
+				'type' => 'decimal'
 			)
 		),
 		array(
@@ -229,22 +235,6 @@ function formulaires_editer_produit_charger($id_produit = 'new', $id_rubrique = 
 function formulaires_editer_produit_verifier($id_produit = 'new', $id_rubrique = 0, $retour = '') {
 	$erreurs = array();
 	$config = lire_config('produits');
-
-	$erreurs = formulaires_editer_objet_verifier('produit', $id_produit);
-
-	$verifier = charger_fonction('verifier', 'inc');
-	$champ_prix = 'prix_ht';
-	if (isset($config['editer_ttc']) and $config['editer_ttc']) {
-		$champ_prix = 'prix_ttc';
-	}
-
-	if ($err=$verifier(_request($champ_prix), 'decimal')) {
-		$erreurs[$champ_prix] = $err;
-	}
-
-	if ($err=$verifier(_request('taxe'), 'decimal', array('min' => 0,'max' => 100))) {
-		$erreurs['taxe'] = $err;
-	}
 
 	// Vérifier que la rubrique choisie se trouve dans les secteurs autorisés
 	if (isset($config['limiter_ajout']) and $config['limiter_ajout']) {
