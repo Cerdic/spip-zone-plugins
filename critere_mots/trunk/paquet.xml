@@ -1,8 +1,8 @@
 <paquet
 	prefix="critere_mots"
 	categorie="navigation"
-	version="4.0.1"
-	etat="test"
+	version="4.0.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
 	documentation="http://contrib.spip.net/Critere-mots"
@@ -15,7 +15,7 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
 	<auteur>RealET (Formulaires)</auteur>
 
-	<copyright>2009</copyright>
+	<copyright>20016</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 </paquet>
