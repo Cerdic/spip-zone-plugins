@@ -27,7 +27,7 @@
 		<tr id="id_#ID_ARTICLE" class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			[(#ENV{id_rubrique}|oui)<td class="picto">[(#CHEMIN_IMAGE{draggable-16.png}|balise_img)]</td>]
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			[(#ENV{id_rubrique}|oui)<td class="rang" scope="col">#RANG.</td>]
+			[(#ENV{id_rubrique}|oui)<td class="rang" scope="col">[(#RANG).]</td>]
 			<td class='titre principale'[(#LOGO_ARTICLE_NORMAL|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
 						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span
