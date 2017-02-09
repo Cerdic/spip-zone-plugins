@@ -44,7 +44,8 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 			'options' => array(
 				'nom' => 'parent',
 				'label' => _T('produits:produit_champ_rubrique_label'),
-				'multiple' => '0'
+				'multiple' => '0',
+				'obligatoire' => 'oui'
 			)
 		),
 		array(
