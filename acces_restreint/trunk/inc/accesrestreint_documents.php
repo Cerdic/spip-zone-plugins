@@ -21,11 +21,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return bool
  */
 function accesrestreint_gerer_htaccess($active = true) {
+	include_spip('inc/acces');
 	if (!$active) {
 		spip_unlink(_DIR_IMG . _ACCESS_FILE_NAME);
 		effacer_meta('creer_htaccess');
 		// effacer les xx/.htaccess crees eventuellement par le core
-		include_spip('inc/acces');
 		gerer_htaccess();
 		return false;
 	} else {
@@ -47,21 +47,26 @@ rewrite;
 		}
 
 		ecrire_fichier(_DIR_IMG . _ACCESS_FILE_NAME, $rewrite);
-		// verifier sur l'url de test
+
+		// pour tester il faut enlever les fichiers deny des sous-repertoires
+		effacer_meta('creer_htaccess');
+		gerer_htaccess();
+
+		// puis verifier sur l'url de test
 		include_spip('inc/distant');
-		$url_test = url_absolue(_DIR_IMG . 'test/.test?0/1');
+		$url_test = url_absolue(_DIR_IMG . 'test_acces/.restreint?0/1');
 		$test = recuperer_page($url_test);
 
+		//spip_log("Resultat test IMG/.htaccess : $url_test renvoie :$test:",'htaccess'._LOG_DEBUG);
 		// si l'url de test renvoie bien "OK" alors rewrite rule fonctionne et on peut baser la protection de document sur ce shema
 		if ($test == 'OK') {
-			effacer_meta('creer_htaccess'); // securite, et permet de generer des urls permanentes
+			// on est bon, rien a faire
 		} else {
 			// sinon on se rabat sur un deny et on generera des urls moches
 			spip_unlink(_DIR_IMG . _ACCESS_FILE_NAME);
 			ecrire_meta('creer_htaccess', 'oui');
 		}
 		// dans tous les cas on passe par gerer_htaccess pour enlever ou mettre les .htaccess dans les sous rep
-		include_spip('inc/acces');
 		gerer_htaccess();
 
 		return true;

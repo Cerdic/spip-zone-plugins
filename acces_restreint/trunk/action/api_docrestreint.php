@@ -365,7 +365,7 @@ class Accesrestreint_document {
 	public function est_un_test() {
 		return  $this->id_document == 0
 			and $this->cle_action == 1
-			and $this->_fichier == 'test/.test';
+			and $this->_fichier == 'test_acces/.restreint';
 	}
 
 	/**
