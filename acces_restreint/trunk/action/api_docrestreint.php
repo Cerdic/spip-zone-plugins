@@ -431,7 +431,7 @@ class Accesrestreint_document {
 	public function est_autorise() {
 		$doc = $this->get_spip_document();
 		if (!$doc) {
-			spip_log('acces interdit, document hors de spip_documents');
+			spip_log('acces interdit, document hors de spip_documents','accesrestreint');
 			return false;
 		}
 
@@ -440,7 +440,7 @@ class Accesrestreint_document {
 		if ($this->cle_action && !defined('ACCES_RESTREINT_FORCE_AUTORISE')) {
 			include_spip('inc/securiser_action');
 			if (!verifier_cle_action($doc['id_document'].','.$this->_fichier, $this->cle_action)) {
-				spip_log("acces interdit $this->cle_action erronee");
+				spip_log("acces interdit $this->cle_action erronee pour #".$doc['id_document'].' : '.$this->_fichier,'accesrestreint');
 				return false;
 			}
 			return true;
@@ -452,7 +452,7 @@ class Accesrestreint_document {
 		}
 
 		if (!autoriser('voir', 'document', $doc['id_document'])) {
-			spip_log('acces interdit, pas autorise a voir le document ' . $doc['id_document']);
+			spip_log('acces interdit, pas autorise a voir le document #'.$doc['id_document'].' : '.$this->_fichier,'accesrestreint');
 			return false;
 		}
 
@@ -473,7 +473,7 @@ class Accesrestreint_document {
 			include_spip('inc/documents');
 			$where = 'documents.fichier = '.sql_quote(set_spip_doc($this->get_chemin_complet_fichier()))
 				. ($this->id_document ? ' AND documents.id_document='.intval($this->id_document): '');
-			spip_log($where, 'dbg');
+			spip_log($where, 'accesrestreint' . _LOG_DEBUG);
 
 			$doc = sql_fetsel(
 				'documents.*, types.mime_type, types.inclus',
@@ -481,7 +481,7 @@ class Accesrestreint_document {
 				$where
 			);
 
-			spip_log($doc, 'dbg');
+			spip_log($doc, 'accesrestreint' . _LOG_DEBUG);
 			if (!$doc) {
 				$doc = array();
 			}
@@ -499,7 +499,7 @@ class Accesrestreint_document {
 		if (is_null($fichier)) {
 			include_spip('inc/documents');
 			$fichier = get_spip_doc($this->_fichier);
-			spip_log($fichier, 'dbg');
+			spip_log($fichier, 'accesrestreint' . _LOG_DEBUG);
 		}
 		return $fichier;
 	}

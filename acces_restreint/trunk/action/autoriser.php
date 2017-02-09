@@ -31,7 +31,7 @@ function action_autoriser_dist() {
 		or !($row = sql_fetsel('fichier', 'spip_documents', 'id_document='.intval($arg)))
 		or !($file = $row['fichier'])
 		or !(file_exists($file))) {
-		spip_log('Acces refuse (restreint) au document ' . $arg . ': ' . $file);
+		spip_log('Acces refuse (restreint) au document ' . $arg . ': ' . $file, 'accesrestreint');
 		redirige_par_entete('./?page=404');
 	} else {
 		if (!function_exists('mime_content_type')) {

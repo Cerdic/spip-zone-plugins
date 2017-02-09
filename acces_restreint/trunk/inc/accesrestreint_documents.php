@@ -57,7 +57,7 @@ rewrite;
 		$url_test = url_absolue(_DIR_IMG . 'test_acces/.restreint?0/1');
 		$test = recuperer_page($url_test);
 
-		//spip_log("Resultat test IMG/.htaccess : $url_test renvoie :$test:",'htaccess'._LOG_DEBUG);
+		spip_log("Resultat test IMG/.htaccess : $url_test renvoie :$test:",'accesrestreint'._LOG_DEBUG);
 		// si l'url de test renvoie bien "OK" alors rewrite rule fonctionne et on peut baser la protection de document sur ce shema
 		if ($test == 'OK') {
 			// on est bon, rien a faire
