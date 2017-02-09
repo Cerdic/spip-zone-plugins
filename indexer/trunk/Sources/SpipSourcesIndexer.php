@@ -115,6 +115,7 @@ echo  "$skey, $source\n";
      */
     public function indexAll() {
         $this->initTimeout();
+        ecrire_meta('indexer_derniere_reindexation', time());
 
         $stats = $this->loadIndexesStatsClean();
         // pas de reset, car ca met le brin en cas de processus concourants
