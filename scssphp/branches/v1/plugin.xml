@@ -5,7 +5,7 @@
 	<auteur>Leafo, http://leafo.net</auteur>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<licence>GPL 3</licence>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<etat>stable</etat>
 	<icon>scsscss.png</icon>
 	<description>Intégration de l’implémentation php de SCSS [->http://leafo.github.io/scssphp/]</description>
@@ -14,6 +14,10 @@
 	<fonctions>scsscss_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_admin</nom>
+		<inclure>scssphp_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>
