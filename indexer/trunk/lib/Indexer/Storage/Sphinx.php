@@ -81,12 +81,24 @@ class Sphinx implements StorageInterface {
 	}
 
 	public function reformatDocument(Document $document) {
+		// Indexation specifique des champs de date sous forme de nombres
+		// dans properties.ymd -- https://contrib.spip.net/Indexer-date-32bits
+		$dateu = strtotime($document->date);
+		if ($dateu) {
+			$document->properties['ymd'] = array(
+				'year' => intval(date('Y', $dateu)),
+				'yearmonth' => intval(date('Ym', $dateu)),
+				'yearmonthday' => intval(date('Ymd', $dateu)),
+				'u' => $dateu
+			);
+		}
+
 		return array(
 			"id"              => $document->id,
 			"title"           => $document->title,
 			"summary"         => $document->summary,
 			"content"         => $document->content,
-			"date"            => strtotime($document->date),
+			"date"            => $dateu,
 			"date_indexation" => intval($document->date_indexation),
 			"uri"             => $document->uri,
 			"properties"      => json_encode($document->properties),
