@@ -15,6 +15,131 @@ include_spip('inc/config');
 include_spip('inc/actions');
 include_spip('inc/editer');
 
+function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubrique = 0, $retour = '') {
+	include_spip('inc/config');
+	$editer_ttc = lire_config('produits/editer_ttc');
+	$taxe_defaut = 100 * lire_config('produits/taxe', 0);
+
+	$saisies = array(
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'titre',
+				'label' => _T('produits:produit_champ_titre_label'),
+				'obligatoire' => 'oui',
+				'placeholder' => _T('info_sans_titre')
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'reference',
+				'label' => _T('produits:produit_champ_reference_label'),
+			)
+		),
+		array(
+			'saisie' => 'selecteur_rubrique',
+			'options' => array(
+				'nom' => 'parent',
+				'label' => _T('produits:produit_champ_rubrique_label'),
+				'multiple' => '0'
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => ($editer_ttc) ? 'prix_ttc' : 'prix_ht',
+				'label' => ($editer_ttc) ?
+				_T('produits:produit_champ_prix_ttc_label') :
+				_T('produits:produit_champ_prix_ht_label'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'taxe',
+				'label' => _T('produits:produit_champ_taxe_label'),
+				'explication' => _T(
+					'produits:produit_champ_taxe_explication',
+					array('taxe' => $taxe_defaut.'&nbsp;&#37;')
+				),
+				'inserer_fin' => '<span>&nbsp;&#37;</span>'
+			)
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'descriptif',
+				'label' => _T('produits:produit_champ_descriptif_label'),
+				'rows' => 5
+			)
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'texte',
+				'label' => _T('produits:produit_champ_texte_label'),
+				'rows' => 7
+			)
+		),
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'conditionnement',
+				'label' => _T('produits:legend_dimensions')
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'case',
+					'options' => array(
+						'nom' => 'immateriel',
+						'label_case' => _T('produits:produit_champ_immateriel_label'),
+						'li_class' => 'pleine_largeur'
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'poids',
+						'label' => _T('produits:produit_champ_poids_label'),
+						'li_class' => 'unit size1of4',
+						'afficher_si' => '@immateriel@==""'
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'largeur',
+						'label' => _T('produits:produit_champ_largeur_label'),
+						'li_class' => 'unit size1of4',
+						'afficher_si' => '@immateriel@==""'
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'longueur',
+						'label' => _T('produits:produit_champ_longueur_label'),
+						'li_class' => 'unit size1of4',
+						'afficher_si' => '@immateriel@==""'
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'hauteur',
+						'label' => _T('produits:produit_champ_hauteur_label'),
+						'li_class' => 'unit size1of4',
+						'afficher_si' => '@immateriel@==""'
+					)
+				)
+			)
+		)
+	);
+
+	return $saisies;
+}
 
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
