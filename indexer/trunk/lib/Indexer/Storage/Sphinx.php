@@ -103,7 +103,7 @@ class Sphinx implements StorageInterface {
 		include_spip('inc/config');
 		$source = lire_config('indexer/source', lire_config('adresse_site'));
 
-		$q = "DELETE FROM aa$this->indexName";
+		$q = "DELETE FROM $this->indexName";
 		if ($source) $q .= " WHERE properties.source="._q($source);
 		if (!$this->sphinxql->query($q)) {
 			spip_log($this->sphinxql->errors(), 'indexer');
