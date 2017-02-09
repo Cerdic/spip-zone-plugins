@@ -1,5 +1,30 @@
 <h1 class="grostitre">Test de l'indexer</h1>
 
+<BOUCLE_test(SPHINX) {select COUNT(*)} />
+[<div class="[(#TOTAL_BOUCLE|?{success,error})]">Connexion à la base SPHINX: (#TOTAL_BOUCLE|?{OK,échec})</div>]
+<//B_test>
+
+<B_compte>
+<h3>Objets indexés</h3>
+<ul>
+<BOUCLE_compte(SPHINX)
+{select properties.objet AS objet, COUNT(*) AS compte}
+{groupby properties.objet}
+{!par compte}>
+<li>[(#OBJET|sinon{n/a})]: #COMPTE</li>
+</BOUCLE_compte>
+</ul>
+</B_compte>
+[<div class="error">Base SPHINX vide.</div>]
+<//B_compte>
+
+[(#SET{last,#CONFIG{indexer_derniere_reindexation}})]
+[
+<p class='info'>Dernière réindexation complète lancée le :
+(#GET{last}|?{[(#VAL{Y-m-d H:i:s}|date{#GET{last}})]})</p>]
+
+
+
 <?php
 
 
