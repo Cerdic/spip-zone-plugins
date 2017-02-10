@@ -62,12 +62,8 @@ class MCacheBackend_apc extends MCacheBackend {
 	function size() {
 		if (!class_exists('APCIterator'))
 			return false;
-		$a = 0;
-		$time = $GLOBALS['meta']['cache_mark'];
-		foreach (new APCIterator('user') as $f)
-			if ($f['mtime'] > $time)
-				$a += $f['mem_size'];
-		return $a;
+		$a = new APCIterator('user');
+		return $a->getTotalSize ();
 	}
 
 }
