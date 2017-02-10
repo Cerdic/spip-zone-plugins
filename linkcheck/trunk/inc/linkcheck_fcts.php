@@ -173,7 +173,7 @@ function linkcheck_tester_lien_externe($url) {
 						    'Accept-Encoding: gzip, deflate'
 			)
 		);
-	define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
+	if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.16 (KHTML, like Gecko) Chrome/24.0.1304.0 Safari/537.16');
 
 	stream_context_set_default(
 		$contexte
