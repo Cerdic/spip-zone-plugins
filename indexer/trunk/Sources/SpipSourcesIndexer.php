@@ -227,9 +227,14 @@ echo  "$skey, $source\n";
             echo "<br />Documents: " . $this->getNiceTime($t) . "\n";
 
             spip_timer('indexing');
-            $this->indexer->replaceDocuments($documents);
+            $ret = $this->indexer->replaceDocuments($documents);
             $t = spip_timer('indexing', true);
-
+            
+            if (!$ret) {
+            	echo "<h4>Erreur à l’enregistrement des documents.</h4>\n";
+            	exit;
+            }
+            
             $stats['last']['time']['indexing'] += $t;
             $stats['sources'][$skey]['time']['indexing'] += $t;
             echo "<br />Enregistrement dans l'index: " . $this->getNiceTime($t) . "\n";
