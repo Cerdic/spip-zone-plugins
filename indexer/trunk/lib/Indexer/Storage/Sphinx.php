@@ -89,7 +89,8 @@ class Sphinx implements StorageInterface {
 				'year' => intval(date('Y', $dateu)),
 				'yearmonth' => intval(date('Ym', $dateu)),
 				'yearmonthday' => intval(date('Ymd', $dateu)),
-				'u' => $dateu
+				'u' => $dateu,
+				'datetime' => $document->date
 			);
 		}
 
