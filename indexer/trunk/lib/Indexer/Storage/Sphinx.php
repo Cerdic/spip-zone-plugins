@@ -85,6 +85,8 @@ class Sphinx implements StorageInterface {
 		// dans properties.ymd -- https://contrib.spip.net/Indexer-date-32bits
 		$dateu = strtotime($document->date);
 		if ($dateu) {
+			// recalculer dateu pour les dates floues: 2000-00-00 => 2000-01-01
+			$dateu = strtotime(str_replace("-00", "-01", $document->date));
 			$document->properties['ymd'] = array(
 				'year' => intval(date('Y', $dateu)),
 				'yearmonth' => intval(date('Ym', $dateu)),
