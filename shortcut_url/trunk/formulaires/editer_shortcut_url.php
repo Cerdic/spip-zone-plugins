@@ -56,8 +56,7 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new',
 			// On supprime ?var_mode=recalcul et autres var_mode (cf traiter aussi)
 			$url = parametre_url($url, 'var_mode', '');
 			// Check si l'URL existe deja
-			if (($id_shortcut_url == 'oui')
-				and ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'url=' . sql_quote($url)))) {
+			if ($id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'url=' . sql_quote($url) . ' AND id_shortcut_url != '.intval($id_shortcut_url))) {
 				set_request('id_shortcut_url_existe', $id_shortcut_url_existe);
 				$erreurs['url'] = _T('shortcut_url:erreur_url_exist');
 			}
@@ -65,7 +64,7 @@ function formulaires_editer_shortcut_url_verifier_dist($id_shortcut_url = 'new',
 	}
 	// On vérifie que l'URL raccourcie n'existe pas
 	if (_request('titre')) {
-		$id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre')));
+		$id_shortcut_url_existe = sql_getfetsel('id_shortcut_url', 'spip_shortcut_urls', 'titre=' . sql_quote(_request('titre').' AND id_shortcut_url != '.intval($id_shortcut_url)));
 		if ($id_shortcut_url_existe) {
 			set_request('id_shortcut_url_existe', $id_shortcut_url_existe);
 			$erreurs['titre'] = _T('shortcut_url:erreur_url_raccourcis_exist');
@@ -87,7 +86,6 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', 
 	$editer_objet = charger_fonction('editer_objet', 'action');
 	$editer_objet($id_shortcut_url, 'shortcut_url', $set);
 
-	// $res = array('redirect' => self(), 'id_shortcut_url' => $id_shortcut_url);
 	$res = array(
 			'editable' => true,
 			'message_ok' => _T('shortcut_url:message_confirmation_shortcut_url')
@@ -97,6 +95,6 @@ function formulaires_editer_shortcut_url_traiter_dist($id_shortcut_url = 'new', 
 		set_request('url', false);
 		set_request('titre', false);
 	}
-	$res['message_ok'] .= "<script type='text/javascript'>if (window.jQuery) $('.liste-objets.shortcut_url').ajaxReload();</script>";
+	$res['message_ok'] .= "<script type='text/javascript'>if (window.jQuery) $('.liste-objets.shortcut_url, #navigation .box, #shortcut_supplement').ajaxReload();</script>";
 	return $res;
 }
