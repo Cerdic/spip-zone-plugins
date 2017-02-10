@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_ARTICLE_PDF',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_ARTICLE_PDF')) define('_DIR_PLUGIN_ARTICLE_PDF',(_DIR_PLUGINS.end($p)));
 
 function pdf_first_clean_prepropre($texte){
 	// Cette fonction est appelé avant propre.
