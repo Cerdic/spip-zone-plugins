@@ -103,7 +103,8 @@ function formulaires_editer_produit_saisies_dist($id_produit = 'new', $id_rubriq
 					'options' => array(
 						'nom' => 'immateriel',
 						'label_case' => _T('produits:produit_champ_immateriel_label'),
-						'li_class' => 'pleine_largeur'
+						'li_class' => 'pleine_largeur',
+						'valeur_oui' => '1'
 					)
 				),
 				array(
