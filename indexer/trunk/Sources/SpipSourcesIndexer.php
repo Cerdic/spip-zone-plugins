@@ -231,8 +231,8 @@ echo  "$skey, $source\n";
             $t = spip_timer('indexing', true);
             
             if (!$ret) {
-            	echo "<h4>Erreur à l’enregistrement des documents.</h4>\n";
-            	exit;
+                fwrite(STDERR, "<h4>Erreur à l’enregistrement des documents.</h4>\n");
+                exit(1);
             }
             
             $stats['last']['time']['indexing'] += $t;
