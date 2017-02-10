@@ -117,17 +117,6 @@ class SphinxQL {
 			$liste['meta']   = array('error' => 'meta illisible');
 		}
 
-		// normaliser les dates dans les docs, au format MySQL
-		// en tenant compte du décalage dû au schéma 32 bits (urg!)
-		// cf. https://contrib.spip.net/Indexer-date-32bits
-		foreach($liste['docs'] as $i => $doc) {
-			if ($doc['date']) {
-				$doc['date'] = intval($doc['date']);
-				$doc['date'] = normaliser_date(date('Y-m-d H:i:s', $doc['date'] - (($doc['date'] > pow(2,31)) ? 4294967296 : 0)));
-				$liste['docs'][$i]['date'] = $doc['date'];
-			}
-		}
-
 		return array('query' => $liste);
 	}
 
