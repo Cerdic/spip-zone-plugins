@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	titre,1, 
+	titre,1,
 	id_type,1,
 	points,-1
 }})]<B_liste_partenaires_types>
@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_partenaires_types(PARTENAIRES_TYPES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_partenaires_types(PARTENAIRES_TYPES spip_mots_liens) {id_mot}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#LOGO_PARTENAIRES_TYPE|image_reduire{20,26})]</td>
 			<td class='titre principale'><a href="[(#ID_TYPE|generer_url_entite{partenaires_type})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TYPE">[(#RANG). ]#TITRE</a></td>
