@@ -22,14 +22,9 @@ function action_api_http_dist(){
 	$reponse = new Response();
 	
 	// On passe dans un pipeline avant toute vraie requête à SPIP
-	$reponse = pipeline(
+	list($requete, $reponse) = pipeline(
 		'http_pre_requete',
-		array(
-			'args' => array(
-				'requete' => $requete,
-			),
-			'data' => $reponse,
-		)
+		array($requete, $reponse)
 	);
 	
 	// Il faut au moins le format dans l'argument sinon rien

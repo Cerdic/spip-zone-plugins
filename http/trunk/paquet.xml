@@ -1,7 +1,7 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="1.2.7"
+	version="1.2.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="http.png"
