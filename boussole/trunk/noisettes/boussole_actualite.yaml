@@ -1,6 +1,6 @@
-nom: '<:boussole:nom_noisette_boussole_actualite:>'
+nom: '<:boussole:titre_noisette_boussole_actualite:>'
 description: '<:boussole:description_noisette_boussole_actualite:>'
-icon: 'boussole_icone-24.png'
+icon: 'boussole.png'
 contexte: 'aucun'
 parametres:
   -
@@ -12,12 +12,18 @@ parametres:
   -
     saisie: 'radio'
     options:
-      nom: 'titre_actualite'
-      label: '<:boussole:label_titre_actualite:>'
-      defaut: 'non'
+      nom: 'titre_boussole'
+      label: '<:boussole:label_titre_boussole:>'
+      defaut: 'oui'
       datas:
         oui: '<:item_oui:>'
         non: '<:item_non:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_actualite'
+      label: '<:boussole:label_titre_actualite:>'
+      defaut: '<:boussole:defaut_titre_actualite:>'
   -
     saisie: 'radio'
     options:

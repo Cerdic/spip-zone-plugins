@@ -14,7 +14,7 @@
 	</div>]
 	#SET{descr, #AKA_BOUSSOLE|boussole_traduire{descriptif_boussole}}
 	[<div class="champ contenu_texte[ (#GET{descr}|strlen|?{'',vide})]">
-		<div class="label"><:label_descriptif:></div>
+		<div class="label"><:boussole:label_descriptif></div>
 		<div dir="#LANG_DIR" class="texte">(#GET{descr})</div>
 	</div>]
 	#SET{demo, #GET{infos}|table_valeur{demo}}

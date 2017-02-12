@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'colonne_version' => 'Version',
 
 	// D
+	'defaut_titre_actualite' => 'Actualités des sites',
 	'description_noisette_boussole' => 'Affichage standard d’une boussole. Vous pouvez choisir le modèle d’affichage (liens textuels, logos...) ainsi que sa configuration précise',
 	'description_noisette_boussole_actualite' => 'Affichage des articles syndiqués des sites d’une boussole selon le modèle d’affichage <code>boussole_liste_actualite</code>.',
 	'description_noisette_boussole_contenu_z' => 'Affichage de toutes les informations d’une boussole comme contenu principal d’une page Z et selon le modèle d’affichage <code>boussole_contenu_z</code>.',
@@ -102,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taille_logo' => 'Taille max du logo (en pixels)',
 	'label_taille_logo_boussole' => 'Taille max du logo de la boussole (en pixels)',
 	'label_taille_titre' => 'Taille max du titre d’une boussole',
-	'label_titre_actualite' => 'Afficher le titre du bloc d’actualité ?',
+	'label_titre_actualite' => 'Saisir le titre du bloc des actualités',
 	'label_titre_boussole' => 'Afficher le titre de la boussole ?',
 	'label_titre_groupe' => 'Afficher le titre du groupe ?',
 	'label_titre_site' => 'Afficher le titre des sites ?',
@@ -117,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_0_site_importe' => 'Aucun site n’a été importé à partir de la boussole @boussole@.',
 	'message_nok_alias_boussole_manquant' => 'L’alias de la boussole n’a pas été fournie au serveur « @serveur@ ».',
 	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n’est encore hébergée sur le serveur « @serveur@ ».',
+	'message_nok_aucune_boussole_a_ajouter' => 'Aucune boussole n\'est disponible sur les serveurs configurés.',
 	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond à l’alias « @alias@ ».',
 	'message_nok_boussole_non_hebergee' => 'La boussole « @alias@ » n’est pas hébergée sur le serveur « @serveur@ ».',
 	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole « @alias@ » n’est pas disponible sur le serveur « @serveur@ ».',
@@ -147,7 +149,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_nom_slogan_site' => 'Nom et slogan du site',
 	'option_slogan_site' => 'Slogan du site',
 
+	// P
+	'page_titre_boussole' => 'Page Boussole',
+
 	// T
+	'titre_noisette_boussole' => 'Affichage standard d’une boussole',
+	'titre_noisette_boussole_actualite' => 'Articles syndiqués d’une boussole',
+	'titre_noisette_boussole_contenu_z' => 'Affichage complet d’une boussole',
+	'titre_noisette_boussole_fil_ariane' => 'Fil d’ariane d’une boussole.',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D’ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',

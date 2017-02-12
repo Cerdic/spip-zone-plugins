@@ -35,7 +35,7 @@ function formulaires_ajouter_boussole_charger_dist() {
 
 
 /**
- * Vérification des saisies : aucune nécessaire, le formulaire ne proposnt que des boutons
+ * Vérification des saisies : aucune nécessaire, le formulaire ne propose que des boutons
  * radio dont un est toujours actif.
  *
  * @return array

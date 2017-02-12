@@ -1,7 +1,8 @@
-nom: '<:boussole:nom_noisette_boussole_contenu_z:>'
+nom: '<:boussole:titre_noisette_boussole_contenu_z:>'
 description: '<:boussole:description_noisette_boussole_contenu_z:>'
-icon: 'boussole_icone-24.png'
+icon: 'boussole.png'
 contexte: 'boussole'
+ajax: 'non'
 parametres:
   -
     saisie: 'radio'
