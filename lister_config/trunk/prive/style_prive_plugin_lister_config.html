@@ -30,12 +30,12 @@ Valeurs par defaut :
 */
 
 .liste-plugins .liste-items .item .page_link {
-    position: absolute;
-    right: 48px;
-    top: 4px;
+	position: absolute;
+	right: 48px;
+	top: 4px;
 }
 [(#SET{menus, [(#PIPELINE{listermenu,#ARRAY{args,#ARRAY,data,#ARRAY}})]})]
 <BOUCLE_menu_lister (DATA) {source table, #GET{menus}} {par cle}>
 .navigation_avec_icones .bando2_#CLE {
-    background-image: url('[(#CHEMIN{[(#VALEUR{icone})]})]');
+	background-image: url('[(#CHEMIN{[(#VALEUR{icone})]})]');
 }</BOUCLE_menu_lister>
