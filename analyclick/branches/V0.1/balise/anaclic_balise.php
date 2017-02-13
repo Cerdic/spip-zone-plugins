@@ -43,4 +43,43 @@ function balise_COMPTEUR_TELECHARGEMENT_dist($p)
 	return $p;
 }
 
-?>
+/**
+ * Compile la balise `#URL_DOCUMENT` qui génère l'URL d'un document
+ *
+ * Retourne l'URL d'un document ou si l'option activée, l'URL de l'action de comptage du téléchargement
+ *
+ * @balise
+ * @uses generer_generer_url()
+ * @link http://www.spip.net/3963
+ * @example
+ *     ```
+ *     #URL_DOCUMENT
+ *     #URL_DOCUMENT{3}
+ *     ```
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
+function balise_URL_DOCUMENT_dist($p) {
+	// Si on est dans le site est que l'option est activée
+	// on redirige vers la balise de comptage
+	if (!test_espace_prive() and defined('_ANALYCLICK_TOUJOURS_COMPTER') and _ANALYCLICK_TOUJOURS_COMPTER) {
+		$id = interprete_argument_balise(1, $p);
+		if (!$id) {
+			$id = champ_sql('id_document', $p);
+		}
+		$code = "urlencode_1738(generer_url_action('telecharger', 'arg='.$id, true))";
+	}
+	else {
+		$code = generer_generer_url('document', $p);
+	}
+
+	$p->code = $code;
+	if (!$p->etoile) {
+		$p->code = "vider_url($code)";
+	}
+	$p->interdire_scripts = false;
+
+	return $p;
+}
