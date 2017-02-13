@@ -5,17 +5,20 @@
 <p><:lister_config:description_lister_config_plugins:></p>
 <div class="nettoyeur"></div>
 
-[(#SET{actif, #ARRAY})]
+[(#SET{config, #ARRAY})]
 <BOUCLE_actif (PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
-[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{config, #GET{config}|push{#PREFIXE}})] ]
 </BOUCLE_actif>
 
 <B_config>
-<BOUCLE_config (PLUGINS paquets) {tout} {par multi plugins.nom} {actif=='oui'} {prefixe IN #GET{actif}} {fusion plugins.prefixe}>
+<BOUCLE_config (PLUGINS paquets) {tout} {par multi plugins.nom} {actif=='oui'} {prefixe IN #GET{config}} {fusion plugins.prefixe}>
 <div class="[(#PREFIXE|strtolower)]" id="plugin_[(#PREFIXE|strtolower)]">
 <hr class="spip" />
-    [(#INCLURE{fond=prive/squelettes/contenu/configurer_[(#PREFIXE|strtolower)], env})]
-    <div class="nettoyeur"></div>
+	[(#CHEMIN{prive/exec/configurer_[(#PREFIXE|strtolower)].html}|?{
+		[(#INCLURE{fond=prive/exec/configurer_[(#PREFIXE|strtolower)], env})],
+		[(#INCLURE{fond=prive/squelettes/contenu/configurer_[(#PREFIXE|strtolower)], env})]
+	})]
+	<div class="nettoyeur"></div>
 </div>
 </BOUCLE_config>
 </B_config>

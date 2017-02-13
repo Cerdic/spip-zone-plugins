@@ -1,5 +1,9 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
 /**
  * Fonction listant les webmestres
  * Inspirée du plugin autorité.

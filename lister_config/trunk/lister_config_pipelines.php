@@ -10,7 +10,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function lister_config_listermenu($flux) {
-	$flux['data']['lister_config'] = array('titre' => _T('lister_config:titre_lister_config'), 'icone' => 'prive/themes/spip/images/lister_config-16.png',);
+	$flux['data']['lister_config'] = array(
+		'titre' => _T('lister_config:titre_lister_config'),
+		'icone' => 'prive/themes/spip/images/lister_config-16.png',
+	);
 
 	return $flux;
 }
