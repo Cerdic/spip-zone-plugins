@@ -94,11 +94,11 @@ function gravatar_img($email, $logo_auteur='') {
 		if (!$g = gravatar($email,$default)) // chercher le gravatar etendu pour cet email
 			$img = '';
 		else
-			$img = gravatar_balise_img($g, "", "spip_logos photo avatar");
+			$img = gravatar_balise_img($g, "", "spip_logo spip_logos photo avatar");
 	}
 	else {
 		// changer la class du logo auteur
-		$img = inserer_attribut($img, 'class', 'spip_logos photo avatar');
+		$img = inserer_attribut($img, 'class', 'spip_logo spip_logos photo avatar');
 	}
 
 	// si pas de config, retourner ce qu'on a
@@ -109,7 +109,7 @@ function gravatar_img($email, $logo_auteur='') {
 	if (!$img
 		AND $image_default
 		AND $img = find_in_path($image_default))
-		$img = gravatar_balise_img($img, "", "spip_logos photo avatar");
+		$img = gravatar_balise_img($img, "", "spip_logo spip_logos photo avatar");
 
 	if (!$img)
 		return '';
