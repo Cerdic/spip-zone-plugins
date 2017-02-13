@@ -38,10 +38,10 @@
 		<nom>autoriser</nom>
 		<inclure>inc/anaclic_autorisations.php</inclure>
 	</pipeline>
-  <pipeline>
-    <nom>document_desc_actions</nom>
-    <inclure>anaclic_pipelines.php</inclure>
-  </pipeline>
+	<pipeline>
+		<nom>document_desc_actions</nom>
+		<inclure>anaclic_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<categorie>statistique</categorie>
 	<!-- onglet SPIP v3 -->
