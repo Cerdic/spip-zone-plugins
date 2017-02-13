@@ -23,7 +23,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="id">#ID_ALERTE</td>
 			<td class="picto">[(#CHEMIN_IMAGE{alerte-16.png}|balise_img)]</td>
-			<td class="objet principale">[(#OBJET|objet_info{texte_objet}|_T) :] <a href="[(#URL_ECRIRE{#GET{_objet}}|parametre_url{[(#GET{_objet}|id_table_objet)],#ID_OBJET})]">[(#INFO_TITRE{#GET{_objet},#ID_OBJET})]</a></td>
+			<td class="objet principale">[(#OBJET|=={secteur}|?{<:alerte:secteur:>,[(#OBJET|objet_info{texte_objet}|_T)]}) :] <a href="[(#URL_ECRIRE{#GET{_objet}}|parametre_url{[(#GET{_objet}|id_table_objet)],#ID_OBJET})]">[(#INFO_TITRE{#GET{_objet},#ID_OBJET})]</a></td>
 			<td class="statut">[(#GET{_objet}|objet_test_si_publie{#ID_OBJET}|?{#GET{img_ok},#GET{img_ko}})]</td>
 			<td class="id_auteur secondaire"><a href="[(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})]">[(#ID_AUTEUR). ][(#INFO_NOM{auteur,#ID_AUTEUR})]</a></td>
 			<td class="maj secondaire">[(#MAJ|date_interface)]</td>

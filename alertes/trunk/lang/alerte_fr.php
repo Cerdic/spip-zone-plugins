@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_sector_from' => 'Retirer ce secteur de mes alertes',
 	'required_field' => 'Cette information est obligatoire !',
 	// S
+	'secteur' => 'Secteur',
 	'sending_method' => 'Mode d\'envoi',
 	'send_directly' => 'Envoyer directement',
 	'send_by_cron' => 'Envoyer via le CRON',
