@@ -15,19 +15,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 //
 function hal_pub_spip_sort($array,$tri="asort") {
   if (is_array($array)) {
-    if ($tri=="asort")
+	if ($tri=="asort")
 				asort($array);
-    if ($tri=="rsort")
+	if ($tri=="rsort")
 				rsort($array);
-    if ($tri=="krsort")
+	if ($tri=="krsort")
 				krsort($array);
-    if ($tri=="ksort")
+	if ($tri=="ksort")
 				ksort($array);
 
 	foreach($array as $k => $v) {
-      $array_order[$k] = $v;
-    }
-    return $array_order;
+	  $array_order[$k] = $v;
+	}
+	return $array_order;
 
   }
   return $array;
@@ -39,16 +39,16 @@ function hal_pub_spip_sort($array,$tri="asort") {
 //
 function hal_pub_traite_tableau($array) {
 	$array_output = array();
-  	if (is_array($array)) {
+	  if (is_array($array)) {
 			$i = 1;
 			$last_key = "";
-   			foreach($array as $k => $v) {
-                   if (is_string($v)) {
+			   foreach($array as $k => $v) {
+				   if (is_string($v)) {
 							 if (_T("hal_pub:type_pub_".$v,'',array('force' => false)))
-                             		$array_output["item".$v]  .= _T("hal_pub:type_pub_".$v);  // traduction du type  fourni par le ficher de langue de SPIP
+									 $array_output["item".$v]  = _T("hal_pub:type_pub_".$v);  // traduction du type  fourni par le ficher de langue de SPIP
 							   else
-                                    $array_output["item".$v] = "$v";
-	                         $last_key = "item".$v;
+									$array_output["item".$v] = "$v";
+							 $last_key = "item".$v;
 				   } else if (is_int($v)) {
 							 if ($v>0) {
 								$array_output[$last_key] .=  " <span>($v)</span>";
@@ -75,14 +75,13 @@ function hal_supprime_prefixe($array,$prefixe="item") {
 		foreach($array as $k => $v) {
 			$array_output[substr($k,$prefixe_length)] = $v;
 		}
-   	}
-   	return $array_output;
+	   }
+	   return $array_output;
 }
 
-// supprimer les valeurs invalides d'un array d'annee (année < 1900)
+// supprimer les valeurs invalides d'un array d'annee (annÃ©e < 1900)
 function hal_nettoie_annee_invalide($array) {
    $array_output = array();
-   $prefixe_length = strlen($prefixe);
    foreach($array as $k => $v) {
 		if ($k>1900)
 				$array_output[$k] = $v;
@@ -94,9 +93,9 @@ function hal_nettoie_annee_invalide($array) {
 // ajout les champs HAL
 // https://api.archives-ouvertes.fr/docs/search/schema/fields/#fields
 //
-// à maintenir le plus léger possible :
+// Ã  maintenir le plus lÃ©ger possible :
 // ne lister que les champs dont on a besoin pour la perf.
-// attention: on utilise label_xml qui est très lourd mais qui le seul à fournir la ref. bibliographique simplement et à part
+// attention: on utilise label_xml qui est trÃ¨s lourd mais qui le seul Ã  fournir la ref. bibliographique simplement et Ã  part
 function hal_fields($str) {
 	return $str."&fl=title_s,authFullName_s,docid,label_xml,arxivId_s,halId_s,doiId_s,uri_s,docType_s,submittedDateY_i";
 }
@@ -104,9 +103,9 @@ function hal_fields($str) {
 // extrait d'un champs XML label_xml la valeur de publication brute
 function hal_extraire_pub($xml) {
 	$pattern = '/<idno type="halRef">(.*?)<\/idno>/';
-    preg_match($pattern, $xml, $matches);
+	preg_match($pattern, $xml, $matches);
 	if (isset($matches[1])) {
-         $match = $matches[1];
+		 $match = $matches[1];
 		 return  str_replace("&amp;", "&", $match);
 	}
 	return;
