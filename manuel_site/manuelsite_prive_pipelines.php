@@ -91,7 +91,8 @@ function manuelsite_affiche_gauche($flux){
 
 	if(($flux["args"]["exec"] == $exec_article_edit || $flux["args"]["exec"] == $exec_article) && $flux["args"]["id_article"] != ''){
 		$conf_manuelsite = lire_config('manuelsite');
-		if($conf_manuelsite["id_article"] && ($conf_manuelsite["id_article"] == $flux["args"]["id_article"])) {
+		if($conf_manuelsite && isset($conf_manuelsite['id_article'])
+		  && $conf_manuelsite["id_article"] && ($conf_manuelsite["id_article"] == $flux["args"]["id_article"])) {
 			// Spip 2
 			if(spip_version_compare($GLOBALS['spip_version_branche'],"2.1.99","<")) {
 				$bouton = bouton_block_depliable(_T('manuelsite:titre_faq'), false, "manuelsite_col");
