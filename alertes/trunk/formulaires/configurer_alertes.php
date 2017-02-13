@@ -20,6 +20,7 @@ function formulaires_configurer_alertes_charger_dist() {
 	// Chargement de la configuration
 	$valeurs = array(
 		'activer_alertes' => (_request('activer_alertes')) ? _request('activer_alertes') : $a['activer_alertes'],
+		'activer_alertes_articles' => (_request('activer_alertes_articles')) ? _request('activer_alertes_articles') : $a['activer_alertes_articles'],
 		'groupes' => (_request('groupes')) ? _request('groupes') : $a['groupes'],
 		'secteurs' => (_request('secteurs')) ? _request('secteurs') : $a['secteurs'],
 		'rubriques' => (_request('rubriques')) ? _request('rubriques') : $a['rubriques'],

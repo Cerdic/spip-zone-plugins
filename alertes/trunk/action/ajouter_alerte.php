@@ -6,7 +6,11 @@
  * Ajout d'une Alerte. Fonction reprise du plugin Mes favoris de Olivier Sallou, Cedric Morin.
  */
 
-function action_ajouter_alerte_dist() {
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
+
+function action_ajouter_alerte_dist($arg = null) {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -22,4 +26,3 @@ function action_ajouter_alerte_dist() {
 	include_spip('inc/alertes');
 	alertes_ajouter($id_objet, $objet, $id_auteur);
 }
-

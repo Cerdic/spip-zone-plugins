@@ -389,7 +389,9 @@ function alertes_affiche_droite($flux) {
 		if ($contexte['objet'] == 'rubrique') {
 			$contexte['id_secteur'] = trouver_secteur($contexte['id_objet']);
 		}
-		if (in_array($contexte['id_objet'], to_array($config[table_objet($flux['args']['exec'])])) and $config['activer_alertes'] === 'oui') {
+		if (in_array($contexte['id_objet'],
+				to_array($config[table_objet($flux['args']['exec'])])) and $config['activer_alertes'] === 'oui'
+		) {
 			$contexte['editable'] = true;
 		}
 		if (isset($contexte['id_rubrique']) and in_array($contexte['id_rubrique'], to_array($config['rubriques']))) {
@@ -408,11 +410,14 @@ function alertes_affiche_droite($flux) {
 	 */
 	if ($flux['args']['exec'] == 'article') {
 		$config = lire_config('config_alertes');
-		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($contexte['id_objet']));
+		$art = sql_fetsel(array('id_rubrique', 'id_secteur'), 'spip_articles',
+			'id_article=' . sql_quote($contexte['id_objet']));
 		if (is_array($art) and count($art)) {
 			$contexte = array_merge($contexte, $art);
 		}
-		if ((in_array($contexte['id_rubrique'], to_array($config['rubriques'])) or in_array($contexte['id_secteur'], to_array($config['secteurs']))) and $config['activer_alertes'] === 'oui' and $config['activer_alertes_articles'] === 'oui') {
+		if ((in_array($contexte['id_rubrique'], to_array($config['rubriques'])) or in_array($contexte['id_secteur'],
+					to_array($config['secteurs']))) and $config['activer_alertes'] === 'oui' and $config['activer_alertes_articles'] === 'oui'
+		) {
 			$contexte['editable'] = true;
 		}
 		if (in_array($contexte['id_rubrique'], to_array($config['rubriques']))) {

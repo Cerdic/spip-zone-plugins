@@ -13,11 +13,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-if (!defined("_ECRIRE_INC_VERSION")) {
-	return;
-}
-
-
 function action_ajouter_alerte_article_dist($arg = null) {
 	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -30,7 +25,8 @@ function action_ajouter_alerte_article_dist($arg = null) {
 		list($id_article, $id_rubrique, $id_secteur) = $arg;
 		include_spip('base/abstract_sql');
 		if ($id_rubrique) {
-			$rubriques_abo = sql_allfetsel('id_auteur', 'spip_alertes', "objet='rubrique' AND id_objet=" . $id_rubrique);
+			$rubriques_abo = sql_allfetsel('id_auteur', 'spip_alertes',
+				"objet='rubrique' AND id_objet=" . $id_rubrique);
 			if (is_array($rubriques_abo) and count($rubriques_abo) > 0) {
 				foreach ($rubriques_abo as $auteur) {
 					sql_insertq('spip_alertes_cron', array(
