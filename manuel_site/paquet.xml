@@ -7,7 +7,7 @@
 	logo="prive/themes/spip/images/manuelsite-32.png"
 	schema="0.2"
 	documentation="http://contrib.spip.net/Manuel-de-redaction-du-site"
->	
+>
 
 	<nom>Manuel de r&#233;daction du site</nom>
 	<!-- Un manuel spécifique à votre site pour vos rédacteurs -->
