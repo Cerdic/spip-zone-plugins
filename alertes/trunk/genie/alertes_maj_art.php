@@ -39,7 +39,7 @@ function genie_alertes_maj_art_dist($time) {
 						'id_article=' . $article['id_article']);
 					// On a bien des articles, alors on analyse tout ça.
 					if (is_array($art_modif) and count($art_modif)) {
-						if (date_format($art_modif['date'], 'Ymd') < date_format($article['date_modif'], 'Ymd')) {
+						if (date_format($art_modif['date'], 'YmdHi') < date_format($article['date_modif'], 'YmdHi')) {
 							// On met à jour les données dans spip_alertes_articles car l'article a été modifié
 							sql_updateq('spip_alertes_articles',
 								array('id_article' => $article['id_article'], 'date' => $article['date_modif']),
