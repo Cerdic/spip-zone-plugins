@@ -1,7 +1,7 @@
 <paquet
 	prefix="alertes"
 	categorie="communication"
-	version="2.0.1"
+	version="2.0.2"
 	schema="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"

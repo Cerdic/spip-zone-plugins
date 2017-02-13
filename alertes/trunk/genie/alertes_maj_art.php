@@ -16,14 +16,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function genie_alertes_maj_art_dist($time) {
 	$message = array();
 
-	$message[] = 'Lancement du cron ' . __FUNCTION__;
+	$message[] = "\n----------\nLancement du cron " . __FUNCTION__;
 	include_spip('base/abstract_sql');
 	include_spip('inc/config');
 	$config = lire_config('config_alertes');
-	$message[] = "activer_alertes :\n" . print_r($config['activer_alertes'], true);
-	$message[] = "activer_alertes_articles :\n" . print_r($config['activer_alertes_articles'], true);
-	$message[] = "rubriques :\n" . print_r($config['rubriques'], true);
-	$message[] = "secteurs :\n" . print_r($config['secteurs'], true);
+	$message[] = "activer_alertes : " . print_r($config['activer_alertes'], true);
+	$message[] = "activer_alertes_articles : " . print_r($config['activer_alertes_articles'], true);
+	$message[] = "rubriques : " . print_r($config['rubriques'], true);
+	$message[] = "secteurs : " . print_r($config['secteurs'], true);
 	if ($config['activer_alertes'] === 'oui' and $config['activer_alertes_articles'] === 'oui') {
 		/**
 		 * On s'occupe des rubriques abonnées
@@ -39,10 +39,10 @@ function genie_alertes_maj_art_dist($time) {
 						'id_article=' . $article['id_article']);
 					// On a bien des articles, alors on analyse tout ça.
 					if (is_array($art_modif) and count($art_modif)) {
-						if (date_format($art_modif['date'], 'YmdHi') < date_format($article['date_modif'], 'YmdHi')) {
+						if (date_format(date_create($art_modif['date']), 'YmdHi') < date_format(date_create($article['date_modif']), 'YmdHi')) {
 							// On met à jour les données dans spip_alertes_articles car l'article a été modifié
 							sql_updateq('spip_alertes_articles',
-								array('id_article' => $article['id_article'], 'date' => $article['date_modif']),
+								array('id_article' => $article['id_article'], 'date' => date_format(date_create($article['date_modif']), 'Y-m-d H:i:s')),
 								"id_article=" . $article['id_article']);
 							// On insert l'article dans les alertes des abonnés
 							foreach ($alertes_rubriques as $auteur) {
@@ -96,10 +96,10 @@ function genie_alertes_maj_art_dist($time) {
 						'id_article=' . $article['id_article']);
 					// On a bien des articles, alors on analyse tout ça.
 					if (is_array($art_modif) and count($art_modif)) {
-						if (date_format($art_modif['date'], 'Ymd') < date_format($article['date_modif'], 'Ymd')) {
+						if (date_format(date_create($art_modif['date']), 'YmdHi') < date_format(date_create($article['date_modif']), 'YmdHi')) {
 							// On met à jour les données dans spip_alertes_articles car l'article a été modifié
 							sql_updateq('spip_alertes_articles',
-								array('id_article' => $article['id_article'], 'date' => $article['date_modif']),
+								array('id_article' => $article['id_article'], 'date' => date_format(date_create($article['date_modif']), 'Y-m-d H:i:s')),
 								"id_article=" . $article['id_article']);
 							// On insert l'article dans les alertes des abonnés
 							foreach ($alertes_secteurs as $auteur) {
@@ -139,6 +139,7 @@ function genie_alertes_maj_art_dist($time) {
 				}
 			}
 		}
+		$message[] = "----------\n";
 		spip_log(implode("\n", $message), 'alertes');
 	}
 
