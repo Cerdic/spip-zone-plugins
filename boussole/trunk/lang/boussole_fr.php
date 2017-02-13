@@ -117,8 +117,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_nok_0_site_importe' => 'Aucun site n’a été importé à partir de la boussole @boussole@.',
 	'message_nok_alias_boussole_manquant' => 'L’alias de la boussole n’a pas été fournie au serveur « @serveur@ ».',
+	'message_nok_aucune_boussole_a_ajouter' => 'Aucune boussole n’est disponible sur les serveurs configurés.',
 	'message_nok_aucune_boussole_hebergee' => 'Aucune boussole n’est encore hébergée sur le serveur « @serveur@ ».',
-	'message_nok_aucune_boussole_a_ajouter' => 'Aucune boussole n\'est disponible sur les serveurs configurés.',
 	'message_nok_boussole_inconnue' => 'Aucune boussole ne correspond à l’alias « @alias@ ».',
 	'message_nok_boussole_non_hebergee' => 'La boussole « @alias@ » n’est pas hébergée sur le serveur « @serveur@ ».',
 	'message_nok_cache_boussole_indisponible' => 'Le fichier cache de la boussole « @alias@ » n’est pas disponible sur le serveur « @serveur@ ».',
@@ -153,10 +153,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_titre_boussole' => 'Page Boussole',
 
 	// T
-	'titre_noisette_boussole' => 'Affichage standard d’une boussole',
-	'titre_noisette_boussole_actualite' => 'Articles syndiqués d’une boussole',
-	'titre_noisette_boussole_contenu_z' => 'Affichage complet d’une boussole',
-	'titre_noisette_boussole_fil_ariane' => 'Fil d’ariane d’une boussole.',
 	'titre_boite_autres_boussoles' => 'Autres boussoles',
 	'titre_boite_infos_boussole' => 'BOUSSOLE D’ALIAS',
 	'titre_boite_logo_boussole' => 'LOGO DE LA BOUSSOLE',
@@ -168,6 +164,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_boussoles' => 'Liste des boussoles disponibles à l’affichage',
 	'titre_liste_caches' => 'Liste des caches des boussoles hébergées',
 	'titre_liste_serveurs' => 'Liste des serveurs accessibles depuis le site',
+	'titre_noisette_boussole' => 'Affichage standard d’une boussole',
+	'titre_noisette_boussole_actualite' => 'Articles syndiqués d’une boussole',
+	'titre_noisette_boussole_contenu_z' => 'Affichage complet d’une boussole',
+	'titre_noisette_boussole_fil_ariane' => 'Fil d’ariane d’une boussole.',
 	'titre_page_boussole' => 'Gestion des boussoles',
 	'titre_page_configurer' => 'Configuration du plugin Boussole',
 	'titre_page_importer_boussole' => 'Importation d’une boussole'
