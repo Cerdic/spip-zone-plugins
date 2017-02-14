@@ -48,7 +48,7 @@ $(document).ready(function (){
 			 }
 		 });
 
-		 $('table.spip.liste').each(function (event){
+		 $('table.spip').each(function (event){
 			 $(this).addClass('table table-striped table-bordered');
 		 });
 

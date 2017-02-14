@@ -353,6 +353,15 @@ table {
 	&.caption-wrap {
 		margin-bottom: 3.5em;
 	}
+	&.liste-objets-lies {
+		table {
+			tr {
+				> .statut {
+					width: 2%;
+				}
+			}
+		}
+	}
 	&.projets {
 		.table {
 			tr {
@@ -361,6 +370,9 @@ table {
 					&.nom {
 						width: 28%;
 					}
+				}
+				> .statut {
+					width: 10%;
 				}
 			}
 		}
