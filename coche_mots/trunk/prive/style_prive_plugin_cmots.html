@@ -25,7 +25,7 @@ body.coche_mots #navigation {display: none;}
 
 .cadre-cmots-popin {width:800px; padding-right:25px;}
 
-div.formulaire_cmots li {
+div.formulaire_cmots .cmots_colonnes {
 	padding-left: 10px; 
 	-moz-column-count:3;
 	-webkit-column-count:3;
@@ -35,4 +35,23 @@ div.formulaire_cmots li {
 	-webkit-column-gap:20px;
 	-o-column-gap:20px;
 	column-gap:20px;
+}
+
+div.formulaire_cmots .choix label {
+	display: inline-block;
+	vertical-align: top;
+	width: 85%;
+}
+
+div.formulaire_cmots .choix_parent {
+	/*margin: 0.5em 0;*/
+}
+div.formulaire_cmots .choix_enfant {
+	/*padding-left: 2em;*/
+}
+div.formulaire_cmots .motsar {
+	padding-left: 0;
+}
+div.formulaire_cmots .motsar li {
+	padding: 0 0 0 2em;
 }
