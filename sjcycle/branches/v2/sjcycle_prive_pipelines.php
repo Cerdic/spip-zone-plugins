@@ -4,10 +4,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function sjcycle_affiche_gauche($flux) {
-	include_spip('inc/documents');
-	include_spip('inc/meta');
-
-	if ($flux['args']['exec'] == 'article_edit') {
+	if ($flux['args']['exec'] == 'article_edit'
+		and isset($flux['args']['id_article'])
+		and (intval($flux['args']['id_article']) > 0)) {
+		include_spip('inc/documents');
+		include_spip('inc/config');
 		$conf_jcycle = lire_config('sjcycle');
 		if ($conf_jcycle['afficher_aide']) {
 			$document='';
