@@ -82,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lever_soleil' => 'lever du soleil',
 	'lieu' => 'lieu',
 	'longitude' => 'longitude',
-
 	'label_theme' => 'Thème d\'icônes',
 	'label_theme_wunderground_a' => 'Default',
 	'label_theme_wunderground_b' => 'Smiley',
@@ -163,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_consultation' => 'Consultez la météo de @ville@',
 	'meteo_de' => 'Météo de @ville@',
 	'meteo_na' => 'N/D',
-	'meteo_previsions' => 'prévisions météorologiques du @date@',
+	'meteo_previsions' => 'prévisions météorologiques',
 	'meteo_previsions_aujourdhui' => 'prévisions météorologiques pour aujourd\'hui',
 	'meteo_previsions_n_jours' => 'prévisions météorologiques à @nbj@ jours',
 
@@ -217,6 +216,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_113' => 'Ensoleillé',
 
 	// N
+	'noisette_description_conditions' => 'Affichage des conditions météorologiques pour un service donné',
+	'noisette_description_previsions_24h' => 'Affichage des prévisions météorologiques 24h pour un service donné',
+	'noisette_explication_lieu' => 'Suivant le service, le lieu peut être exprimé comme une ville suivie par le code ISO d\'un pays, comme des coordonnées géographiques, comme une adresse IP ou comme un identifiant weather.com&reg;.
+	Consultez la documentation pour connaitre la compatibilité avec le service choisi.',
+	'noisette_explication_jour' => 'Le jour courant correspond à la valeur 0 et ainsi de suite. Consultez la documentation pour connaitre le nombre de jours de prévisions fournis pour chaque service.',
+	'noisette_titre_conditions' => 'Conditions météorologiques',
+	'noisette_titre_previsions_24h' => 'Prévisions météorologiques 24h',
+	'noisette_label_jour_1' => 'Premier jour des prévisions',
+	'noisette_label_nb_jours' => 'Nombre de jours affichés',
+	'noisette_label_lieu' => 'Lieu',
+	'noisette_label_service' => 'Service météorologique utilisé',
+	'noisette_label_titre_conditions' => 'Afficher un titre pour les conditions ?',
+	'noisette_label_titre_previsions' => 'Afficher un titre pour les prévisions ?',
+	'noisette_label_modele' => 'Modèle d\'affichage à utiliser',
 	'nuit' => 'nuit',
 
 	// P

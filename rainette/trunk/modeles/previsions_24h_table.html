@@ -1,4 +1,4 @@
-[(#REM)<!-- 
+[(#REM)<!--
 	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les previsions 24h d'une ville sous forme
 	tabulaire.
 	Il est appelee par le modèle rainette_previsions.
@@ -37,21 +37,31 @@
 ]
 #SET{nb_colonnes, 0}
 <B_previsions_table_24h>
-<table class="spip rainette_previsions_table_24h">
+<table class="table rainette_previsions_table_24h">
 	<thead>
 		<tr>
 		<BOUCLE_head(DATA) {source table, #GET{entete}}>
 			#SET{nb_colonnes, #GET{nb_colonnes}|plus{#VALEUR}}
-			<th[ colspan="(#VALEUR)"]>[(#VAL{rainette:}|concat{#CLE}|_T|ucfirst)]</th>
+			<th scope="col"[ colspan="(#VALEUR)"]>[(#VAL{rainette:}|concat{#CLE}|_T|ucfirst)]</th>
 		</BOUCLE_head>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<td[ colspan="(#GET{nb_colonnes})"] class="credits">
+				<INCLURE{fond=modeles/inc-credits,
+					texte=info,
+					classe_div=prev24h,
+					env}/>
+			</td>
+		</tr>
+	</tfoot>
 	<tbody>
 <BOUCLE_previsions_table_24h(DATA) {source table, #ENV{donnees}}{par cle}{#ENV{premier_jour}, #ENV{nombre_jours}}>
 		#SET{index_heure, 0}
 		[(#ENV{extras/service}|=={weather}|et{#CLE|=={0}}|et{#VALEUR{heure/#GET{index_heure}/icone}|=={''}}|oui) #SET{index_heure, 1}]
 		#SET{periode, #VALEUR{heure/#GET{index_heure}/periode}}
-		<tr>
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{odd, even})"]>
 			<td class="jour">
 				[(#VALEUR{date}|nom_jour|ucfirst)]
 				[<br />(#VALEUR{date}|affdate_jourcourt)]
@@ -95,15 +105,5 @@
 		</tr>
 </BOUCLE_previsions_table_24h>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td[ colspan="(#GET{nb_colonnes})"]>
-				#INCLURE{fond=modeles/inc-credits,
-					texte=info,
-					classe_div=prev24h,
-					env}
-			</td>
-		</tr>
-	</tfoot>
 </table>
 </B_previsions_table_24h>

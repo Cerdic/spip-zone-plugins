@@ -1,0 +1,14 @@
+[(#REM) Affichage des conditions météorologiques d'un lieu donné
+	- il est possible de choisir le service de son choix.
+]
+[(#ENV{titre, non}|=={oui}|oui)
+<h2 class="h2">
+	[(#RAINETTE_INFOS{#ENV{lieu}, ville, #ENV{service}})[,
+	(#RAINETTE_INFOS{#ENV{lieu}, pays, #ENV{service}})] - ]
+	<:rainette:meteo_conditions|ucfirst:>
+</h2>]
+[(#MODELE{rainette_conditions,
+	lieu=#ENV{lieu},
+	sous_modele=conditions_tempsreel,
+	service=#ENV{service}})]
+<br class="clear" />

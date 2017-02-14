@@ -27,14 +27,14 @@
 		</small>
 	</p>
 </div>
-<br class="nettoyeur"/>
+<br class="clear"/>
 
 <h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
 [(#MODELE{rainette_conditions,
 	lieu=#ENV{ville, FRXX0076},
 	sous_modele=conditions_tempsreel,
 	service=#ENV{service, weather}})]
-<br class="nettoyeur"/>
+<br class="clear"/>
 
 <h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=#GET{max_previsions}}|ucfirst:></h2>
 [(#MODELE{rainette_previsions,
@@ -42,3 +42,4 @@
 	premier_jour=1,
 	sous_modele=previsions_24h,
 	service=#ENV{service, weather}})]
+<br class="clear"/>

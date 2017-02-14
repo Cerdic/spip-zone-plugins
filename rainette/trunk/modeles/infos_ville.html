@@ -14,8 +14,7 @@
 		<li><:rainette:longitude|ucfirst:>&nbsp;:[&nbsp;(#ENV{donnees}|table_valeur{longitude, '', #EVAL{true}}|rainette_afficher_unite{angle, 2, #ENV{extras/service}})</li>]
 		[<li><:rainette:region|ucfirst:>&nbsp;:&nbsp;(#ENV{donnees/region})</li>]
 	</ul>
-
-	#INCLURE{fond=modeles/inc-credits,
+	<INCLURE{fond=modeles/inc-credits,
 		classe_div=infos,
-		env}
+		env} />
 </div>

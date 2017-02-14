@@ -337,6 +337,36 @@ function rainette_lister_services($mode = 'tableau') {
 
 
 /**
+ * @param string	$mode
+ * @param int		$periodicite
+ *
+ * @return array
+ */
+function rainette_lister_modeles($mode = 'conditions', $periodicite = 24) {
+
+	$modeles = array();
+
+	// On lit les modèles suivant le mode choisi dans l'ensemble du site.
+	// Ceux-ci sont toujours de la forme:
+	// -- conditions_<complement>,
+	// -- previsions_<periodicite>h_<complement>,
+	// -- infos_<complement>.
+	if (($mode == 'conditions') or ($mode == 'infos')) {
+		$pattern = "${mode}.*\\.html$";
+	} else {
+		$pattern = "${mode}_${periodicite}h.*\\.html$";
+	}
+	if ($fichiers = find_all_in_path("modeles/", $pattern)) {
+		foreach ($fichiers as $_fichier) {
+			$modeles[] = strtolower(basename($_fichier, '.html'));
+		}
+	}
+
+	return $modeles;
+}
+
+
+/**
  * @param string $lieu
  * @param string $mode
  * @param string $modele
@@ -347,7 +377,7 @@ function rainette_lister_services($mode = 'tableau') {
  */
 function rainette_coasser($lieu, $mode = 'conditions', $modele = 'conditions_tempsreel', $service = 'weather', $options = array()) {
 
-	// Initialisation du retour
+	// Initialisation du tableau des données météorologiques
 	$tableau = array();
 
 	// Détermination de la périodicité en fonction du mode et du modèle demandés
