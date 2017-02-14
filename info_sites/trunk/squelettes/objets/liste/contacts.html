@@ -60,7 +60,7 @@
 				<td class="fonction">[(#FONCTION|sinon{-})]</td>
 				<td class="numeros"><B_tel><BOUCLE_tel (NUMEROS) {id_contact}>
 					<address class="small">
-						[<strong>(#TYPE|coordonnees_lister_types_numeros) :</strong> ][(#NUMERO|sinon{-})]
+						[<strong>(#TYPE|coordonnees_lister_types_numeros) :</strong> ][<span class="text-nowrap">(#NUMERO|sinon{-})</span>]
 					</address>
 				</BOUCLE_tel></B_tel></td>
 				<td class="email"><B_email><BOUCLE_email (EMAILS) {id_contact}>
