@@ -427,7 +427,6 @@ function colonne_table($type, $col) {
 		switch ($sta) {
 			case 0:
 				$ret['type'] = ($mot = strtolower($mot));
-				continue;
 			case 1:
 				if ($mot[strlen($mot) - 1] == ')') {
 					$pos = strpos($mot, '(');
@@ -447,7 +446,6 @@ function colonne_table($type, $col) {
 					$sta = 1;
 					continue;
 				}
-				continue;
 			case 2:
 				switch (strtolower($mot)) {
 					case 'not':
@@ -465,7 +463,6 @@ function colonne_table($type, $col) {
 			case 4:
 				$df1 = strpos('"\'', $mot[0]) !== false? $mot[0] : '';
 				$sta = 5;
-				continue;
 			case 5:
 				$ret['def'] .= $sep . $mot;
 				if (!$df1) {
