@@ -161,8 +161,7 @@ function noizetier_formulaire_fond($flux) {
 		$noizetier_compositions_xml = array_keys(noizetier_lister_pages());
 
 		// On vérifie que cette composition existe
-		if (
-			is_array($noizetier_compositions_meta[$objet][$composition])
+		if ((isset($noizetier_compositions_meta[$objet][$composition]) and is_array($noizetier_compositions_meta[$objet][$composition]))
 			or in_array($type_page, $noizetier_compositions_xml)
 		) {
 			$balise_img = charger_filtre('balise_img');
