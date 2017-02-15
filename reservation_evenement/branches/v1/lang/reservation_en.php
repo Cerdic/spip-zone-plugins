@@ -17,6 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Hello',
 
 	// C
+	'choix_precis' => 'Specific choices',
+	'complet' => 'full',
 	'cron_label' => 'Automatical closure of an event',
 
 	// D
@@ -27,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
 	'erreur_pas_evenement' => 'There is currently no event open for booking', # MODIF
 	'evenement_cloture' => 'Closed Event',
+	'evenement_ferme_inscription' => 'Registration closed</br> Click on "registration" to view the current offer.',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
     <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.', # MODIF
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
@@ -38,12 +41,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_reservation' => 'Modify this booking',
 	'info_1_client' => 'One client',
 	'info_1_reservation' => 'One booking',
+	'info_aucun_client' => 'No client',
 	'info_aucun_reservation' => 'No booking',
+	'info_nb_clients' => '@nb@ clients',
 	'info_nb_reservations' => '@nb@ bookings',
 	'info_reservations_auteur' => 'This authors bookings',
 	'info_voir_reservations_poubelle' => 'View the Bookings in the dustbin',
 	'inscription' => 'Subscription',
 	'inscrire' => 'Subscribe',
+	'inscrire_liste_attente' => 'Chose another event or register to be added to the waiting list.',
 
 	// L
 	'label_action_cloture' => 'Automatical closure:',
@@ -54,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'I want to register on this site:',
 	'label_id_auteur' => 'Id auteur:',
+	'label_inscription' => 'registration:',
 	'label_lang' => 'Language:',
 	'label_maj' => 'Update:',
 	'label_modifier_identifiants_personnels' => 'Modify your personal identifiers:',
@@ -109,8 +116,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'places_disponibles' => 'Available spots:',
 
 	// R
-	'reaservation_montant' => 'Amount',
-	'reaservation_nouvelle' => 'New booking',
 	'recapitulatif' => 'Booking summary:',
 	'remerciement' => 'Thank you for registering <br/> Regards',
 	'reservation_client' => 'Client',
@@ -123,8 +128,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
 	'sujet_une_reservation_accepte' => 'Confirmation of a booking on @nom@',
+	'sujet_une_reservation_accepte_part' => 'Booking partially confirmed on @nom@',
 	'sujet_une_reservation_cloture' => 'Event closed on @nom@',
 	'sujet_votre_reservation_accepte' => '@nom@: confirmation of your booking',
+	'sujet_votre_reservation_accepte_part' => '@nom@: partial confirmation of your reservation',
 	'sujet_votre_reservation_cloture' => '@nom@: event closure',
 
 	// T
@@ -134,16 +141,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_accepte' => 'accepted',
 	'texte_statut_attente' => 'in waiting list',
 	'texte_statut_attente_paiement' => 'waiting for payment',
-	'texte_statut_cloture' => 'C
-closed',
+	'texte_statut_cloture' => 'closed',
 	'texte_statut_encours' => 'ongoing',
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
 	'texte_voir' => 'view',
 	'titre_client' => 'Client',
+	'titre_clients' => 'Clients',
 	'titre_envoi_separe' => '"Seperate Sending" modus activated',
 	'titre_reservation' => 'Booking',
 	'titre_reservations' => 'Bookings',
+	'total' => 'Total',
 
 	// U
 	'une_reservation_de' => 'A booking from: ',

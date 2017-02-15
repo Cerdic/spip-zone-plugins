@@ -151,8 +151,6 @@ gerará o envio de uma notificação!',
 	'places_disponibles' => 'Lugares disponíveis:',
 
 	// R
-	'reaservation_montant' => 'Montante',
-	'reaservation_nouvelle' => 'Nova reserva',
 	'recapitulatif' => 'Resumo da reserva:',
 	'remerciement' => 'Agradecemos sua inscrição<br/>Atenciosamente',
 	'reservation_client' => 'Cliente',
