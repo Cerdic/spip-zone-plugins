@@ -20,8 +20,8 @@
 [(#SET{logo,''})]
 [(#LOGO_ARTICLE|oui)
 	[(#SET{logo,[(#LOGO_ARTICLE
-		|image_passe_partout{1200,1200}
-		|image_recadre{1200,1200}
+		|image_reduire{2400,1260}
+		|image_recadre{1.91:1,'-','center'}
 		|extraire_attribut{src})]
 	})]
 ]
@@ -29,8 +29,8 @@
 						{largeur>=200}{hauteur>=200}{!par date}{0,1}
 						{si #LOGO_ARTICLE|non}>
 [(#SET{logo,[(#FICHIER
-	|image_passe_partout{1200,1200}
-	|image_recadre{1200,1200}
+	|image_reduire{2400,1260}
+	|image_recadre{1.91:1,'-','center'}
 	|extraire_attribut{src}
 	)]
 })]</BOUCLE_illus>
