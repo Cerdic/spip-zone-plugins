@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_mailsubscribers(MAILSUBSCRIBERS){id_mot?}{id_auteur?}{where?}{id_mailsubscribinglist?}{id_segment?}{filtre_statut_subscription?}{recherche?}{tri #ENV{par,num email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
+	<BOUCLE_mailsubscribers(MAILSUBSCRIBERS){id_mailsubscriber?}{id_mot?}{id_auteur?}{where?}{id_mailsubscribinglist?}{id_segment?}{filtre_statut_subscription?}{recherche?}{tri #ENV{par,num email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{mailsubscriber-16.png}|balise_img)]</td>
 			<td class='statut'>[(#ENV{id_mailsubscribinglist}|?{#STATUT_SUBSCRIPTION|puce_statut{mailsubscriber},#STATUT|puce_statut{mailsubscriber,#ID_MAILSUBSCRIBER}})]</td>
