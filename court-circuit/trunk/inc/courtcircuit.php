@@ -39,14 +39,16 @@ function courtcircuit_url_redirection($id_rubrique) {
 		}
 	}
 	// Déterminer le fond à utiliser
-		$polyhierarchie = ""; 
-		include_spip('inc/filtres'); /* Tester la présence de polyhiérarchie, dans ce cas, il faut renvoyer vers le bon article */
-		if(filtrer('info_plugin', 'polyhier', 'est_actif')){ $polyhierarchie = "_poly"; }
-		
-		if (isset($config['restreindre_langue']) && $config['restreindre_langue']=='oui')
-			$fond = 'courtcircuit_selection_article_lang'.$polyhierarchie;
-		else
-			$fond = 'courtcircuit_selection_article'.$polyhierarchie;
+	$polyhierarchie = ""; 
+	include_spip('inc/filtres'); /* Tester la présence de polyhiérarchie, dans ce cas, il faut renvoyer vers le bon article */
+	if (filtrer('info_plugin', 'polyhier', 'est_actif')) {
+		$polyhierarchie = "_poly";
+	}
+	if (isset($config['restreindre_langue']) and $config['restreindre_langue']=='oui') {
+		$fond = 'courtcircuit_selection_article_lang'.$polyhierarchie;
+	} else {
+		$fond = 'courtcircuit_selection_article'.$polyhierarchie;
+	}
 
 	// On teste si on doit rediriger
 	$redirect_article = recuperer_fond(
