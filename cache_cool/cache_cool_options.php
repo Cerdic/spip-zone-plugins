@@ -7,14 +7,17 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// si deja un buffer avec une sortie on ne peut plus se lancer pour forcer le flush
-if ($cache_cool_oblevel=ob_get_level()
-	AND $cache_cool_oblength=ob_get_length()){
-	spip_log("previous ob : $cache_cool_oblevel / previous length: $cache_cool_oblength",'cachecool'._LOG_DEBUG);
-}
-else {
-	spip_log("starting ob",'cachecool'._LOG_DEBUG);
-	ob_start("cache_cool_flush");
+// ne pas faire ca en CLI, ca bloque toutes les sorties
+if (isset($_SERVER['HTTP_HOST']) and $_SERVER['HTTP_HOST']) {
+	// si deja un buffer avec une sortie on ne peut plus se lancer pour forcer le flush
+	if ($cache_cool_oblevel=ob_get_level()
+		AND $cache_cool_oblength=ob_get_length()){
+		spip_log("previous ob : $cache_cool_oblevel / previous length: $cache_cool_oblength",'cachecool'._LOG_DEBUG);
+	}
+	else {
+		spip_log("starting ob",'cachecool'._LOG_DEBUG);
+		ob_start("cache_cool_flush");
+	}
 }
 
 /**
